@@ -1,6 +1,6 @@
 package shared
 
 type GetWorkflowRunsResponse struct {
-	NextToken *string       `json:"NextToken"`
-	Runs      []WorkflowRun `json:"Runs"`
+	NextToken *string       `json:"NextToken,omitempty"`
+	Runs      []WorkflowRun `json:"Runs,omitempty"`
 }

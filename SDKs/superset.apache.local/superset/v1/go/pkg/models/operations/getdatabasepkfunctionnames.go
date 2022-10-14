@@ -18,15 +18,15 @@ type GetDatabasePkFunctionNamesRequest struct {
 }
 
 type GetDatabasePkFunctionNames401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkFunctionNames404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkFunctionNames500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkFunctionNamesResponse struct {

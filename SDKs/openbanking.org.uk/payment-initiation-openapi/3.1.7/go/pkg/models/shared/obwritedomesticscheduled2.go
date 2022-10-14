@@ -8,14 +8,14 @@ type ObWriteDomesticScheduled2DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticScheduled2DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticScheduled2DataInitiationInstructedAmount struct {
@@ -24,21 +24,21 @@ type ObWriteDomesticScheduled2DataInitiationInstructedAmount struct {
 }
 
 type ObWriteDomesticScheduled2DataInitiationRemittanceInformation struct {
-	Reference    *string `json:"Reference"`
-	Unstructured *string `json:"Unstructured"`
+	Reference    *string `json:"Reference,omitempty"`
+	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
 type ObWriteDomesticScheduled2DataInitiation struct {
 	CreditorAccount            ObWriteDomesticScheduled2DataInitiationCreditorAccount        `json:"CreditorAccount"`
-	CreditorPostalAddress      *ObPostalAddress6                                             `json:"CreditorPostalAddress"`
-	DebtorAccount              *ObWriteDomesticScheduled2DataInitiationDebtorAccount         `json:"DebtorAccount"`
-	EndToEndIdentification     *string                                                       `json:"EndToEndIdentification"`
+	CreditorPostalAddress      *ObPostalAddress6                                             `json:"CreditorPostalAddress,omitempty"`
+	DebtorAccount              *ObWriteDomesticScheduled2DataInitiationDebtorAccount         `json:"DebtorAccount,omitempty"`
+	EndToEndIdentification     *string                                                       `json:"EndToEndIdentification,omitempty"`
 	InstructedAmount           ObWriteDomesticScheduled2DataInitiationInstructedAmount       `json:"InstructedAmount"`
 	InstructionIdentification  string                                                        `json:"InstructionIdentification"`
-	LocalInstrument            *string                                                       `json:"LocalInstrument"`
-	RemittanceInformation      *ObWriteDomesticScheduled2DataInitiationRemittanceInformation `json:"RemittanceInformation"`
+	LocalInstrument            *string                                                       `json:"LocalInstrument,omitempty"`
+	RemittanceInformation      *ObWriteDomesticScheduled2DataInitiationRemittanceInformation `json:"RemittanceInformation,omitempty"`
 	RequestedExecutionDateTime time.Time                                                     `json:"RequestedExecutionDateTime"`
-	SupplementaryData          map[string]interface{}                                        `json:"SupplementaryData"`
+	SupplementaryData          map[string]interface{}                                        `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteDomesticScheduled2Data struct {

@@ -1,8 +1,8 @@
 package shared
 
 type Location struct {
-	ChildContexts     []LocationContext `json:"childContexts"`
-	Context           *LocationContext  `json:"context"`
-	ParentContext     *LocationContext  `json:"parentContext"`
-	StateOfTheParties []PartySeatCount  `json:"stateOfTheParties"`
+	ChildContexts     []LocationContext `json:"childContexts,omitempty"`
+	Context           *LocationContext  `json:"context,omitempty"`
+	ParentContext     *LocationContext  `json:"parentContext,omitempty"`
+	StateOfTheParties []PartySeatCount  `json:"stateOfTheParties,omitempty"`
 }

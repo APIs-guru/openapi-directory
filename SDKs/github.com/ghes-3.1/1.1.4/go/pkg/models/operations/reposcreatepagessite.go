@@ -18,7 +18,7 @@ const (
 
 type ReposCreatePagesSiteRequestBodySource struct {
 	Branch string                                         `json:"branch"`
-	Path   *ReposCreatePagesSiteRequestBodySourcePathEnum `json:"path"`
+	Path   *ReposCreatePagesSiteRequestBodySourcePathEnum `json:"path,omitempty"`
 }
 
 type ReposCreatePagesSiteRequestBody struct {

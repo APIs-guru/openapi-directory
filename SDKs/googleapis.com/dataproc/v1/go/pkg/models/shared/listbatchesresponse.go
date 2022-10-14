@@ -1,6 +1,6 @@
 package shared
 
 type ListBatchesResponse struct {
-	Batches       []Batch `json:"batches"`
-	NextPageToken *string `json:"nextPageToken"`
+	Batches       []Batch `json:"batches,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type IdentitytoolkitRelyingpartySetProjectConfigResponse struct {
-	ProjectID *string `json:"projectId"`
+	ProjectID *string `json:"projectId,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type PeeredVpc struct {
-	NetworkVpc *string `json:"networkVpc"`
+	NetworkVpc *string `json:"networkVpc,omitempty"`
 }

@@ -13,7 +13,7 @@ const (
 
 type GetTokenRevocationIDRequestBody struct {
 	Token         string                                            `json:"token"`
-	TokenTypeHint *GetTokenRevocationIDRequestBodyTokenTypeHintEnum `json:"token_type_hint"`
+	TokenTypeHint *GetTokenRevocationIDRequestBodyTokenTypeHintEnum `json:"token_type_hint,omitempty"`
 }
 
 type GetTokenRevocationIDSecurity struct {

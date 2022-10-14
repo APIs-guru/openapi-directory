@@ -8,7 +8,7 @@ const (
 )
 
 type BusinessCallsInsights struct {
-	AggregateMetrics *AggregateMetrics                    `json:"aggregateMetrics"`
-	MetricType       *BusinessCallsInsightsMetricTypeEnum `json:"metricType"`
-	Name             *string                              `json:"name"`
+	AggregateMetrics *AggregateMetrics                    `json:"aggregateMetrics,omitempty"`
+	MetricType       *BusinessCallsInsightsMetricTypeEnum `json:"metricType,omitempty"`
+	Name             *string                              `json:"name,omitempty"`
 }

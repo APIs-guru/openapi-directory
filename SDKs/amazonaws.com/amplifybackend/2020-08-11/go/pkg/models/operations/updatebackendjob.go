@@ -21,8 +21,8 @@ type UpdateBackendJobHeaders struct {
 }
 
 type UpdateBackendJobRequestBody struct {
-	Operation *string `json:"operation"`
-	Status    *string `json:"status"`
+	Operation *string `json:"operation,omitempty"`
+	Status    *string `json:"status,omitempty"`
 }
 
 type UpdateBackendJobRequest struct {

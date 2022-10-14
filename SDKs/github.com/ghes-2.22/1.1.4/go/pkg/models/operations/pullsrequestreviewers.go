@@ -11,8 +11,8 @@ type PullsRequestReviewersPathParams struct {
 }
 
 type PullsRequestReviewersRequestBody struct {
-	Reviewers     []string `json:"reviewers"`
-	TeamReviewers []string `json:"team_reviewers"`
+	Reviewers     []string `json:"reviewers,omitempty"`
+	TeamReviewers []string `json:"team_reviewers,omitempty"`
 }
 
 type PullsRequestReviewersRequest struct {

@@ -11,6 +11,6 @@ const (
 )
 
 type PolicyCompliance struct {
-	Status *PolicyComplianceStatusEnum `json:"status"`
-	Topics []PolicyTopicEntry          `json:"topics"`
+	Status *PolicyComplianceStatusEnum `json:"status,omitempty"`
+	Topics []PolicyTopicEntry          `json:"topics,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ListIdentityProvidersRequest struct {
-	MaxResults *int64  `json:"MaxResults"`
-	NextToken  *string `json:"NextToken"`
+	MaxResults *int64  `json:"MaxResults,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
 	UserPoolID string  `json:"UserPoolId"`
 }

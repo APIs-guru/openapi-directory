@@ -13,8 +13,8 @@ const (
 )
 
 type GoogleAudience struct {
-	DisplayName        *string                               `json:"displayName"`
-	GoogleAudienceID   *string                               `json:"googleAudienceId"`
-	GoogleAudienceType *GoogleAudienceGoogleAudienceTypeEnum `json:"googleAudienceType"`
-	Name               *string                               `json:"name"`
+	DisplayName        *string                               `json:"displayName,omitempty"`
+	GoogleAudienceID   *string                               `json:"googleAudienceId,omitempty"`
+	GoogleAudienceType *GoogleAudienceGoogleAudienceTypeEnum `json:"googleAudienceType,omitempty"`
+	Name               *string                               `json:"name,omitempty"`
 }

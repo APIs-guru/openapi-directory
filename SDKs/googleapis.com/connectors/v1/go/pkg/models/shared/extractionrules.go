@@ -1,5 +1,5 @@
 package shared
 
 type ExtractionRules struct {
-	ExtractionRule []ExtractionRule `json:"extractionRule"`
+	ExtractionRule []ExtractionRule `json:"extractionRule,omitempty"`
 }

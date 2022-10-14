@@ -1,11 +1,11 @@
 package shared
 
 type Privilege struct {
-	ChildPrivileges []Privilege `json:"childPrivileges"`
-	Etag            *string     `json:"etag"`
-	IsOuScopable    *bool       `json:"isOuScopable"`
-	Kind            *string     `json:"kind"`
-	PrivilegeName   *string     `json:"privilegeName"`
-	ServiceID       *string     `json:"serviceId"`
-	ServiceName     *string     `json:"serviceName"`
+	ChildPrivileges []Privilege `json:"childPrivileges,omitempty"`
+	Etag            *string     `json:"etag,omitempty"`
+	IsOuScopable    *bool       `json:"isOuScopable,omitempty"`
+	Kind            *string     `json:"kind,omitempty"`
+	PrivilegeName   *string     `json:"privilegeName,omitempty"`
+	ServiceID       *string     `json:"serviceId,omitempty"`
+	ServiceName     *string     `json:"serviceName,omitempty"`
 }

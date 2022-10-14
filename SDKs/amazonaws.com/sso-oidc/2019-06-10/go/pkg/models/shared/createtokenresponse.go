@@ -1,9 +1,9 @@
 package shared
 
 type CreateTokenResponse struct {
-	AccessToken  *string `json:"accessToken"`
-	ExpiresIn    *int64  `json:"expiresIn"`
-	IDToken      *string `json:"idToken"`
-	RefreshToken *string `json:"refreshToken"`
-	TokenType    *string `json:"tokenType"`
+	AccessToken  *string `json:"accessToken,omitempty"`
+	ExpiresIn    *int64  `json:"expiresIn,omitempty"`
+	IDToken      *string `json:"idToken,omitempty"`
+	RefreshToken *string `json:"refreshToken,omitempty"`
+	TokenType    *string `json:"tokenType,omitempty"`
 }

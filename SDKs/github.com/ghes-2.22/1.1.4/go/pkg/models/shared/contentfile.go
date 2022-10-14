@@ -17,8 +17,8 @@ type ContentFile struct {
 	Path            string           `json:"path"`
 	Sha             string           `json:"sha"`
 	Size            int64            `json:"size"`
-	SubmoduleGitURL *string          `json:"submodule_git_url"`
-	Target          *string          `json:"target"`
+	SubmoduleGitURL *string          `json:"submodule_git_url,omitempty"`
+	Target          *string          `json:"target,omitempty"`
 	Type            string           `json:"type"`
 	URL             string           `json:"url"`
 }

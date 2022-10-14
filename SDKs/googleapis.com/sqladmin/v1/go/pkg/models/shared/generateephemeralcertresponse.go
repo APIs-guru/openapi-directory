@@ -1,5 +1,5 @@
 package shared
 
 type GenerateEphemeralCertResponse struct {
-	EphemeralCert *SslCert `json:"ephemeralCert"`
+	EphemeralCert *SslCert `json:"ephemeralCert,omitempty"`
 }

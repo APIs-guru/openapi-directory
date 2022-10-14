@@ -9,10 +9,10 @@ type SerpRequest struct {
 }
 
 type Serp200ApplicationJSON struct {
-	Position        *int64  `json:"position"`
-	Query           *string `json:"query"`
-	SearchedResults *int64  `json:"searched_results"`
-	Website         *string `json:"website"`
+	Position        *int64  `json:"position,omitempty"`
+	Query           *string `json:"query,omitempty"`
+	SearchedResults *int64  `json:"searched_results,omitempty"`
+	Website         *string `json:"website,omitempty"`
 }
 
 type SerpResponse struct {

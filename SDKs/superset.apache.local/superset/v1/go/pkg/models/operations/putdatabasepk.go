@@ -19,32 +19,32 @@ type PutDatabasePkRequest struct {
 }
 
 type PutDatabasePk200ApplicationJSON struct {
-	ID     *float64                   `json:"id"`
-	Result *shared.DatabaseRestAPIPut `json:"result"`
+	ID     *float64                   `json:"id,omitempty"`
+	Result *shared.DatabaseRestAPIPut `json:"result,omitempty"`
 }
 
 type PutDatabasePk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatabasePk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatabasePk403ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatabasePk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatabasePk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatabasePk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatabasePkResponse struct {

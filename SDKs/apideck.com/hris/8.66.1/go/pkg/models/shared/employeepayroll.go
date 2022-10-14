@@ -1,6 +1,6 @@
 package shared
 
 type EmployeePayroll struct {
-	Employee *Employee `json:"employee"`
-	Payroll  *Payroll  `json:"payroll"`
+	Employee *Employee `json:"employee,omitempty"`
+	Payroll  *Payroll  `json:"payroll,omitempty"`
 }

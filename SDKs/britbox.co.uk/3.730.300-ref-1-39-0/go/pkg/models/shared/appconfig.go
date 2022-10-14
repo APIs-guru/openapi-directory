@@ -1,13 +1,13 @@
 package shared
 
 type AppConfig struct {
-	Classification map[string]Classification `json:"classification"`
-	Display        *AppConfigDisplay         `json:"display"`
-	General        *AppConfigGeneral         `json:"general"`
-	I18n           *AppConfigI18n            `json:"i18n"`
-	Linear         *AppConfigLinear          `json:"linear"`
-	Navigation     *Navigation               `json:"navigation"`
-	Playback       *AppConfigPlayback        `json:"playback"`
-	Sitemap        []PageSummary             `json:"sitemap"`
-	Subscription   *AppConfigSubscription    `json:"subscription"`
+	Classification map[string]Classification `json:"classification,omitempty"`
+	Display        *AppConfigDisplay         `json:"display,omitempty"`
+	General        *AppConfigGeneral         `json:"general,omitempty"`
+	I18n           *AppConfigI18n            `json:"i18n,omitempty"`
+	Linear         *AppConfigLinear          `json:"linear,omitempty"`
+	Navigation     *Navigation               `json:"navigation,omitempty"`
+	Playback       *AppConfigPlayback        `json:"playback,omitempty"`
+	Sitemap        []PageSummary             `json:"sitemap,omitempty"`
+	Subscription   *AppConfigSubscription    `json:"subscription,omitempty"`
 }

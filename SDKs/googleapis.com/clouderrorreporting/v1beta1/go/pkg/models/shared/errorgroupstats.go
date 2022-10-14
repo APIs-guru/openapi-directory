@@ -1,13 +1,13 @@
 package shared
 
 type ErrorGroupStats struct {
-	AffectedServices    []ServiceContext `json:"affectedServices"`
-	AffectedUsersCount  *string          `json:"affectedUsersCount"`
-	Count               *string          `json:"count"`
-	FirstSeenTime       *string          `json:"firstSeenTime"`
-	Group               *ErrorGroup      `json:"group"`
-	LastSeenTime        *string          `json:"lastSeenTime"`
-	NumAffectedServices *int32           `json:"numAffectedServices"`
-	Representative      *ErrorEvent      `json:"representative"`
-	TimedCounts         []TimedCount     `json:"timedCounts"`
+	AffectedServices    []ServiceContext `json:"affectedServices,omitempty"`
+	AffectedUsersCount  *string          `json:"affectedUsersCount,omitempty"`
+	Count               *string          `json:"count,omitempty"`
+	FirstSeenTime       *string          `json:"firstSeenTime,omitempty"`
+	Group               *ErrorGroup      `json:"group,omitempty"`
+	LastSeenTime        *string          `json:"lastSeenTime,omitempty"`
+	NumAffectedServices *int32           `json:"numAffectedServices,omitempty"`
+	Representative      *ErrorEvent      `json:"representative,omitempty"`
+	TimedCounts         []TimedCount     `json:"timedCounts,omitempty"`
 }

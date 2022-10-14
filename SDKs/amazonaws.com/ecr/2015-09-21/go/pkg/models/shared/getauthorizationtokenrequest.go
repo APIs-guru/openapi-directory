@@ -1,5 +1,5 @@
 package shared
 
 type GetAuthorizationTokenRequest struct {
-	RegistryIds []string `json:"registryIds"`
+	RegistryIds []string `json:"registryIds,omitempty"`
 }

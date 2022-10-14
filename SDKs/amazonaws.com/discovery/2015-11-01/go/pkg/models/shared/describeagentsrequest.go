@@ -1,8 +1,8 @@
 package shared
 
 type DescribeAgentsRequest struct {
-	AgentIds   []string `json:"agentIds"`
-	Filters    []Filter `json:"filters"`
-	MaxResults *int64   `json:"maxResults"`
-	NextToken  *string  `json:"nextToken"`
+	AgentIds   []string `json:"agentIds,omitempty"`
+	Filters    []Filter `json:"filters,omitempty"`
+	MaxResults *int64   `json:"maxResults,omitempty"`
+	NextToken  *string  `json:"nextToken,omitempty"`
 }

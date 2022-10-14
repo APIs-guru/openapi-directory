@@ -1,8 +1,8 @@
 package shared
 
 type TruckDimensions struct {
-	Height *float64           `json:"Height"`
-	Length *float64           `json:"Length"`
-	Unit   *DimensionUnitEnum `json:"Unit"`
-	Width  *float64           `json:"Width"`
+	Height *float64           `json:"Height,omitempty"`
+	Length *float64           `json:"Length,omitempty"`
+	Unit   *DimensionUnitEnum `json:"Unit,omitempty"`
+	Width  *float64           `json:"Width,omitempty"`
 }

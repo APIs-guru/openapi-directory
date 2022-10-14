@@ -9,12 +9,12 @@ const (
 )
 
 type FirebaseProject struct {
-	Annotations   map[string]string         `json:"annotations"`
-	DisplayName   *string                   `json:"displayName"`
-	Etag          *string                   `json:"etag"`
-	Name          *string                   `json:"name"`
-	ProjectID     *string                   `json:"projectId"`
-	ProjectNumber *string                   `json:"projectNumber"`
-	Resources     *DefaultResources         `json:"resources"`
-	State         *FirebaseProjectStateEnum `json:"state"`
+	Annotations   map[string]string         `json:"annotations,omitempty"`
+	DisplayName   *string                   `json:"displayName,omitempty"`
+	Etag          *string                   `json:"etag,omitempty"`
+	Name          *string                   `json:"name,omitempty"`
+	ProjectID     *string                   `json:"projectId,omitempty"`
+	ProjectNumber *string                   `json:"projectNumber,omitempty"`
+	Resources     *DefaultResources         `json:"resources,omitempty"`
+	State         *FirebaseProjectStateEnum `json:"state,omitempty"`
 }

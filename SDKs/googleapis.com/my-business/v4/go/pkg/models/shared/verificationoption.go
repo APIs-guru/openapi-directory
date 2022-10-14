@@ -12,8 +12,8 @@ const (
 )
 
 type VerificationOption struct {
-	AddressData        *AddressVerificationData                  `json:"addressData"`
-	EmailData          *EmailVerificationData                    `json:"emailData"`
-	PhoneData          *PhoneVerificationData                    `json:"phoneData"`
-	VerificationMethod *VerificationOptionVerificationMethodEnum `json:"verificationMethod"`
+	AddressData        *AddressVerificationData                  `json:"addressData,omitempty"`
+	EmailData          *EmailVerificationData                    `json:"emailData,omitempty"`
+	PhoneData          *PhoneVerificationData                    `json:"phoneData,omitempty"`
+	VerificationMethod *VerificationOptionVerificationMethodEnum `json:"verificationMethod,omitempty"`
 }

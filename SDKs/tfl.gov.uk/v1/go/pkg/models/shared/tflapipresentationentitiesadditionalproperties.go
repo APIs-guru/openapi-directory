@@ -5,9 +5,9 @@ import (
 )
 
 type TflAPIPresentationEntitiesAdditionalProperties struct {
-	Category        *string    `json:"category"`
-	Key             *string    `json:"key"`
-	Modified        *time.Time `json:"modified"`
-	SourceSystemKey *string    `json:"sourceSystemKey"`
-	Value           *string    `json:"value"`
+	Category        *string    `json:"category,omitempty"`
+	Key             *string    `json:"key,omitempty"`
+	Modified        *time.Time `json:"modified,omitempty"`
+	SourceSystemKey *string    `json:"sourceSystemKey,omitempty"`
+	Value           *string    `json:"value,omitempty"`
 }

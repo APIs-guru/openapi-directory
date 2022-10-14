@@ -19,7 +19,7 @@ type GetWorkspaceRequest struct {
 }
 
 type GetWorkspace200ApplicationJSON struct {
-	Data *shared.WorkspaceResponse `json:"data"`
+	Data *shared.WorkspaceResponse `json:"data,omitempty"`
 }
 
 type GetWorkspaceResponse struct {

@@ -24,30 +24,30 @@ const (
 )
 
 type CreateMetricSetRequestBodyMetricSource struct {
-	AppFlowConfig        *shared.AppFlowConfig        `json:"AppFlowConfig"`
-	CloudWatchConfig     *shared.CloudWatchConfig     `json:"CloudWatchConfig"`
-	RdsSourceConfig      *shared.RdsSourceConfig      `json:"RDSSourceConfig"`
-	RedshiftSourceConfig *shared.RedshiftSourceConfig `json:"RedshiftSourceConfig"`
-	S3SourceConfig       *shared.S3SourceConfig       `json:"S3SourceConfig"`
+	AppFlowConfig        *shared.AppFlowConfig        `json:"AppFlowConfig,omitempty"`
+	CloudWatchConfig     *shared.CloudWatchConfig     `json:"CloudWatchConfig,omitempty"`
+	RdsSourceConfig      *shared.RdsSourceConfig      `json:"RDSSourceConfig,omitempty"`
+	RedshiftSourceConfig *shared.RedshiftSourceConfig `json:"RedshiftSourceConfig,omitempty"`
+	S3SourceConfig       *shared.S3SourceConfig       `json:"S3SourceConfig,omitempty"`
 }
 
 type CreateMetricSetRequestBodyTimestampColumn struct {
-	ColumnFormat *string `json:"ColumnFormat"`
-	ColumnName   *string `json:"ColumnName"`
+	ColumnFormat *string `json:"ColumnFormat,omitempty"`
+	ColumnName   *string `json:"ColumnName,omitempty"`
 }
 
 type CreateMetricSetRequestBody struct {
 	AnomalyDetectorArn   string                                            `json:"AnomalyDetectorArn"`
-	DimensionList        []string                                          `json:"DimensionList"`
+	DimensionList        []string                                          `json:"DimensionList,omitempty"`
 	MetricList           []shared.Metric                                   `json:"MetricList"`
-	MetricSetDescription *string                                           `json:"MetricSetDescription"`
-	MetricSetFrequency   *CreateMetricSetRequestBodyMetricSetFrequencyEnum `json:"MetricSetFrequency"`
+	MetricSetDescription *string                                           `json:"MetricSetDescription,omitempty"`
+	MetricSetFrequency   *CreateMetricSetRequestBodyMetricSetFrequencyEnum `json:"MetricSetFrequency,omitempty"`
 	MetricSetName        string                                            `json:"MetricSetName"`
 	MetricSource         CreateMetricSetRequestBodyMetricSource            `json:"MetricSource"`
-	Offset               *int64                                            `json:"Offset"`
-	Tags                 map[string]string                                 `json:"Tags"`
-	TimestampColumn      *CreateMetricSetRequestBodyTimestampColumn        `json:"TimestampColumn"`
-	Timezone             *string                                           `json:"Timezone"`
+	Offset               *int64                                            `json:"Offset,omitempty"`
+	Tags                 map[string]string                                 `json:"Tags,omitempty"`
+	TimestampColumn      *CreateMetricSetRequestBodyTimestampColumn        `json:"TimestampColumn,omitempty"`
+	Timezone             *string                                           `json:"Timezone,omitempty"`
 }
 
 type CreateMetricSetRequest struct {

@@ -21,9 +21,9 @@ const (
 )
 
 type LoadBalancerInfo struct {
-	BackendType      *LoadBalancerInfoBackendTypeEnum      `json:"backendType"`
-	BackendURI       *string                               `json:"backendUri"`
-	Backends         []LoadBalancerBackend                 `json:"backends"`
-	HealthCheckURI   *string                               `json:"healthCheckUri"`
-	LoadBalancerType *LoadBalancerInfoLoadBalancerTypeEnum `json:"loadBalancerType"`
+	BackendType      *LoadBalancerInfoBackendTypeEnum      `json:"backendType,omitempty"`
+	BackendURI       *string                               `json:"backendUri,omitempty"`
+	Backends         []LoadBalancerBackend                 `json:"backends,omitempty"`
+	HealthCheckURI   *string                               `json:"healthCheckUri,omitempty"`
+	LoadBalancerType *LoadBalancerInfoLoadBalancerTypeEnum `json:"loadBalancerType,omitempty"`
 }

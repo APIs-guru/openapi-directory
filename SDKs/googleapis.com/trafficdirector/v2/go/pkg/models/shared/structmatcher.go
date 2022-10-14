@@ -1,6 +1,6 @@
 package shared
 
 type StructMatcher struct {
-	Path  []PathSegment `json:"path"`
-	Value *ValueMatcher `json:"value"`
+	Path  []PathSegment `json:"path,omitempty"`
+	Value *ValueMatcher `json:"value,omitempty"`
 }

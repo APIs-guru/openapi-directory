@@ -11,6 +11,6 @@ const (
 )
 
 type LiveStreamStatus struct {
-	HealthStatus *LiveStreamHealthStatus           `json:"healthStatus"`
-	StreamStatus *LiveStreamStatusStreamStatusEnum `json:"streamStatus"`
+	HealthStatus *LiveStreamHealthStatus           `json:"healthStatus,omitempty"`
+	StreamStatus *LiveStreamStatusStreamStatusEnum `json:"streamStatus,omitempty"`
 }

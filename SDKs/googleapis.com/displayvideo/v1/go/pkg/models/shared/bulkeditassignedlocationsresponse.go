@@ -1,5 +1,5 @@
 package shared
 
 type BulkEditAssignedLocationsResponse struct {
-	AssignedLocations []AssignedLocation `json:"assignedLocations"`
+	AssignedLocations []AssignedLocation `json:"assignedLocations,omitempty"`
 }

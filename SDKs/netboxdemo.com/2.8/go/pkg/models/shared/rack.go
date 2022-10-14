@@ -88,29 +88,29 @@ type RackWidthWidth struct {
 }
 
 type Rack struct {
-	AssetTag       *string                 `json:"asset_tag"`
-	Comments       *string                 `json:"comments"`
-	Created        *time.Time              `json:"created"`
-	CustomFields   map[string]interface{}  `json:"custom_fields"`
-	DescUnits      *bool                   `json:"desc_units"`
-	DeviceCount    *int64                  `json:"device_count"`
-	DisplayName    *string                 `json:"display_name"`
-	FacilityID     *string                 `json:"facility_id"`
-	Group          *NestedRackGroup        `json:"group"`
-	ID             *int64                  `json:"id"`
-	LastUpdated    *time.Time              `json:"last_updated"`
+	AssetTag       *string                 `json:"asset_tag,omitempty"`
+	Comments       *string                 `json:"comments,omitempty"`
+	Created        *time.Time              `json:"created,omitempty"`
+	CustomFields   map[string]interface{}  `json:"custom_fields,omitempty"`
+	DescUnits      *bool                   `json:"desc_units,omitempty"`
+	DeviceCount    *int64                  `json:"device_count,omitempty"`
+	DisplayName    *string                 `json:"display_name,omitempty"`
+	FacilityID     *string                 `json:"facility_id,omitempty"`
+	Group          *NestedRackGroup        `json:"group,omitempty"`
+	ID             *int64                  `json:"id,omitempty"`
+	LastUpdated    *time.Time              `json:"last_updated,omitempty"`
 	Name           string                  `json:"name"`
-	OuterDepth     *int64                  `json:"outer_depth"`
-	OuterUnit      *RackOuterUnitOuterUnit `json:"outer_unit"`
-	OuterWidth     *int64                  `json:"outer_width"`
-	PowerfeedCount *int64                  `json:"powerfeed_count"`
-	Role           *NestedRackRole         `json:"role"`
-	Serial         *string                 `json:"serial"`
+	OuterDepth     *int64                  `json:"outer_depth,omitempty"`
+	OuterUnit      *RackOuterUnitOuterUnit `json:"outer_unit,omitempty"`
+	OuterWidth     *int64                  `json:"outer_width,omitempty"`
+	PowerfeedCount *int64                  `json:"powerfeed_count,omitempty"`
+	Role           *NestedRackRole         `json:"role,omitempty"`
+	Serial         *string                 `json:"serial,omitempty"`
 	Site           NestedSite              `json:"site"`
-	Status         *RackStatusStatus       `json:"status"`
-	Tags           []string                `json:"tags"`
-	Tenant         *NestedTenant           `json:"tenant"`
-	Type           *RackTypeType           `json:"type"`
-	UHeight        *int64                  `json:"u_height"`
-	Width          *RackWidthWidth         `json:"width"`
+	Status         *RackStatusStatus       `json:"status,omitempty"`
+	Tags           []string                `json:"tags,omitempty"`
+	Tenant         *NestedTenant           `json:"tenant,omitempty"`
+	Type           *RackTypeType           `json:"type,omitempty"`
+	UHeight        *int64                  `json:"u_height,omitempty"`
+	Width          *RackWidthWidth         `json:"width,omitempty"`
 }

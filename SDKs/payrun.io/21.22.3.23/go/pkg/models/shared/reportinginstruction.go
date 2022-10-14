@@ -5,13 +5,13 @@ import (
 )
 
 type ReportingInstructionReportingInstructionReportingInstruction struct {
-	EndDate   *time.Time `json:"EndDate"`
-	StartDate *time.Time `json:"StartDate"`
-	TaxMonth  *int32     `json:"TaxMonth"`
-	TaxYear   *int32     `json:"TaxYear"`
-	Value     *float64   `json:"Value"`
+	EndDate   *time.Time `json:"EndDate,omitempty"`
+	StartDate *time.Time `json:"StartDate,omitempty"`
+	TaxMonth  *int32     `json:"TaxMonth,omitempty"`
+	TaxYear   *int32     `json:"TaxYear,omitempty"`
+	Value     *float64   `json:"Value,omitempty"`
 }
 
 type ReportingInstruction struct {
-	ReportingInstruction *ReportingInstructionReportingInstructionReportingInstruction `json:"ReportingInstruction"`
+	ReportingInstruction *ReportingInstructionReportingInstructionReportingInstruction `json:"ReportingInstruction,omitempty"`
 }

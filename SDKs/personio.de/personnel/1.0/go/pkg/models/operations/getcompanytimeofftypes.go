@@ -14,8 +14,8 @@ type GetCompanyTimeOffTypesRequest struct {
 }
 
 type GetCompanyTimeOffTypes200ApplicationJSON struct {
-	Data    []shared.TimeOffTypeResource `json:"data"`
-	Success *bool                        `json:"success"`
+	Data    []shared.TimeOffTypeResource `json:"data,omitempty"`
+	Success *bool                        `json:"success,omitempty"`
 }
 
 type GetCompanyTimeOffTypesResponse struct {

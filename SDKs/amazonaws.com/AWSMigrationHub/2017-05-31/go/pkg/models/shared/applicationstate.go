@@ -5,7 +5,7 @@ import (
 )
 
 type ApplicationState struct {
-	ApplicationID     *string                `json:"ApplicationId"`
-	ApplicationStatus *ApplicationStatusEnum `json:"ApplicationStatus"`
-	LastUpdatedTime   *time.Time             `json:"LastUpdatedTime"`
+	ApplicationID     *string                `json:"ApplicationId,omitempty"`
+	ApplicationStatus *ApplicationStatusEnum `json:"ApplicationStatus,omitempty"`
+	LastUpdatedTime   *time.Time             `json:"LastUpdatedTime,omitempty"`
 }

@@ -14,7 +14,7 @@ const (
 type CreateCertificatesRequestBody1 struct {
 	DNSNames []string                                `json:"dns_names"`
 	Name     string                                  `json:"name"`
-	Type     *CreateCertificatesRequestBody1TypeEnum `json:"type"`
+	Type     *CreateCertificatesRequestBody1TypeEnum `json:"type,omitempty"`
 }
 
 type CreateCertificatesRequestBody2TypeEnum string
@@ -25,11 +25,11 @@ const (
 )
 
 type CreateCertificatesRequestBody2 struct {
-	CertificateChain *string                                 `json:"certificate_chain"`
+	CertificateChain *string                                 `json:"certificate_chain,omitempty"`
 	LeafCertificate  string                                  `json:"leaf_certificate"`
 	Name             string                                  `json:"name"`
 	PrivateKey       string                                  `json:"private_key"`
-	Type             *CreateCertificatesRequestBody2TypeEnum `json:"type"`
+	Type             *CreateCertificatesRequestBody2TypeEnum `json:"type,omitempty"`
 }
 
 type CreateCertificatesRequest struct {
@@ -37,13 +37,13 @@ type CreateCertificatesRequest struct {
 }
 
 type CreateCertificates201ApplicationJSON struct {
-	Certificate *shared.Onev21certificatesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesCertificatesItems `json:"certificate"`
+	Certificate *shared.Onev21certificatesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesCertificatesItems `json:"certificate,omitempty"`
 }
 
 type CreateCertificates401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateCertificatesResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type ListPipelineExecutionsInput struct {
-	MaxResults   *int64  `json:"maxResults"`
-	NextToken    *string `json:"nextToken"`
+	MaxResults   *int64  `json:"maxResults,omitempty"`
+	NextToken    *string `json:"nextToken,omitempty"`
 	PipelineName string  `json:"pipelineName"`
 }

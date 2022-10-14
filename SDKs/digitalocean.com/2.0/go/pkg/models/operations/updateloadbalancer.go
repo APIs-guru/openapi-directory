@@ -35,12 +35,12 @@ const (
 )
 
 type UpdateLoadBalancerRequestBody1ForwardingRules struct {
-	CertificateID  *string                                                         `json:"certificate_id"`
+	CertificateID  *string                                                         `json:"certificate_id,omitempty"`
 	EntryPort      int64                                                           `json:"entry_port"`
 	EntryProtocol  UpdateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum  `json:"entry_protocol"`
 	TargetPort     int64                                                           `json:"target_port"`
 	TargetProtocol UpdateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum `json:"target_protocol"`
-	TLSPassthrough *bool                                                           `json:"tls_passthrough"`
+	TLSPassthrough *bool                                                           `json:"tls_passthrough,omitempty"`
 }
 
 type UpdateLoadBalancerRequestBody1HealthCheckProtocolEnum string
@@ -52,13 +52,13 @@ const (
 )
 
 type UpdateLoadBalancerRequestBody1HealthCheck struct {
-	CheckIntervalSeconds   *int64                                                 `json:"check_interval_seconds"`
-	HealthyThreshold       *int64                                                 `json:"healthy_threshold"`
-	Path                   *string                                                `json:"path"`
-	Port                   *int64                                                 `json:"port"`
-	Protocol               *UpdateLoadBalancerRequestBody1HealthCheckProtocolEnum `json:"protocol"`
-	ResponseTimeoutSeconds *int64                                                 `json:"response_timeout_seconds"`
-	UnhealthyThreshold     *int64                                                 `json:"unhealthy_threshold"`
+	CheckIntervalSeconds   *int64                                                 `json:"check_interval_seconds,omitempty"`
+	HealthyThreshold       *int64                                                 `json:"healthy_threshold,omitempty"`
+	Path                   *string                                                `json:"path,omitempty"`
+	Port                   *int64                                                 `json:"port,omitempty"`
+	Protocol               *UpdateLoadBalancerRequestBody1HealthCheckProtocolEnum `json:"protocol,omitempty"`
+	ResponseTimeoutSeconds *int64                                                 `json:"response_timeout_seconds,omitempty"`
+	UnhealthyThreshold     *int64                                                 `json:"unhealthy_threshold,omitempty"`
 }
 
 type UpdateLoadBalancerRequestBody1SizeEnum string
@@ -85,28 +85,28 @@ const (
 )
 
 type UpdateLoadBalancerRequestBody1StickySessions struct {
-	CookieName       *string                                               `json:"cookie_name"`
-	CookieTTLSeconds *int64                                                `json:"cookie_ttl_seconds"`
-	Type             *UpdateLoadBalancerRequestBody1StickySessionsTypeEnum `json:"type"`
+	CookieName       *string                                               `json:"cookie_name,omitempty"`
+	CookieTTLSeconds *int64                                                `json:"cookie_ttl_seconds,omitempty"`
+	Type             *UpdateLoadBalancerRequestBody1StickySessionsTypeEnum `json:"type,omitempty"`
 }
 
 type UpdateLoadBalancerRequestBody1 struct {
-	Algorithm              *UpdateLoadBalancerRequestBody1AlgorithmEnum                                                                                            `json:"algorithm"`
-	CreatedAt              *time.Time                                                                                                                              `json:"created_at"`
+	Algorithm              *UpdateLoadBalancerRequestBody1AlgorithmEnum                                                                                            `json:"algorithm,omitempty"`
+	CreatedAt              *time.Time                                                                                                                              `json:"created_at,omitempty"`
 	DropletIds             []int64                                                                                                                                 `json:"droplet_ids"`
-	EnableBackendKeepalive *bool                                                                                                                                   `json:"enable_backend_keepalive"`
-	EnableProxyProtocol    *bool                                                                                                                                   `json:"enable_proxy_protocol"`
+	EnableBackendKeepalive *bool                                                                                                                                   `json:"enable_backend_keepalive,omitempty"`
+	EnableProxyProtocol    *bool                                                                                                                                   `json:"enable_proxy_protocol,omitempty"`
 	ForwardingRules        []UpdateLoadBalancerRequestBody1ForwardingRules                                                                                         `json:"forwarding_rules"`
-	HealthCheck            *UpdateLoadBalancerRequestBody1HealthCheck                                                                                              `json:"health_check"`
-	ID                     *string                                                                                                                                 `json:"id"`
-	IP                     *string                                                                                                                                 `json:"ip"`
-	Name                   *string                                                                                                                                 `json:"name"`
-	RedirectHTTPToHTTPS    *bool                                                                                                                                   `json:"redirect_http_to_https"`
+	HealthCheck            *UpdateLoadBalancerRequestBody1HealthCheck                                                                                              `json:"health_check,omitempty"`
+	ID                     *string                                                                                                                                 `json:"id,omitempty"`
+	IP                     *string                                                                                                                                 `json:"ip,omitempty"`
+	Name                   *string                                                                                                                                 `json:"name,omitempty"`
+	RedirectHTTPToHTTPS    *bool                                                                                                                                   `json:"redirect_http_to_https,omitempty"`
 	Region                 shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
-	Size                   *UpdateLoadBalancerRequestBody1SizeEnum                                                                                                 `json:"size"`
-	Status                 *UpdateLoadBalancerRequestBody1StatusEnum                                                                                               `json:"status"`
-	StickySessions         *UpdateLoadBalancerRequestBody1StickySessions                                                                                           `json:"sticky_sessions"`
-	VpcUUID                *string                                                                                                                                 `json:"vpc_uuid"`
+	Size                   *UpdateLoadBalancerRequestBody1SizeEnum                                                                                                 `json:"size,omitempty"`
+	Status                 *UpdateLoadBalancerRequestBody1StatusEnum                                                                                               `json:"status,omitempty"`
+	StickySessions         *UpdateLoadBalancerRequestBody1StickySessions                                                                                           `json:"sticky_sessions,omitempty"`
+	VpcUUID                *string                                                                                                                                 `json:"vpc_uuid,omitempty"`
 }
 
 type UpdateLoadBalancerRequestBody2AlgorithmEnum string
@@ -135,12 +135,12 @@ const (
 )
 
 type UpdateLoadBalancerRequestBody2ForwardingRules struct {
-	CertificateID  *string                                                         `json:"certificate_id"`
+	CertificateID  *string                                                         `json:"certificate_id,omitempty"`
 	EntryPort      int64                                                           `json:"entry_port"`
 	EntryProtocol  UpdateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum  `json:"entry_protocol"`
 	TargetPort     int64                                                           `json:"target_port"`
 	TargetProtocol UpdateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum `json:"target_protocol"`
-	TLSPassthrough *bool                                                           `json:"tls_passthrough"`
+	TLSPassthrough *bool                                                           `json:"tls_passthrough,omitempty"`
 }
 
 type UpdateLoadBalancerRequestBody2HealthCheckProtocolEnum string
@@ -152,13 +152,13 @@ const (
 )
 
 type UpdateLoadBalancerRequestBody2HealthCheck struct {
-	CheckIntervalSeconds   *int64                                                 `json:"check_interval_seconds"`
-	HealthyThreshold       *int64                                                 `json:"healthy_threshold"`
-	Path                   *string                                                `json:"path"`
-	Port                   *int64                                                 `json:"port"`
-	Protocol               *UpdateLoadBalancerRequestBody2HealthCheckProtocolEnum `json:"protocol"`
-	ResponseTimeoutSeconds *int64                                                 `json:"response_timeout_seconds"`
-	UnhealthyThreshold     *int64                                                 `json:"unhealthy_threshold"`
+	CheckIntervalSeconds   *int64                                                 `json:"check_interval_seconds,omitempty"`
+	HealthyThreshold       *int64                                                 `json:"healthy_threshold,omitempty"`
+	Path                   *string                                                `json:"path,omitempty"`
+	Port                   *int64                                                 `json:"port,omitempty"`
+	Protocol               *UpdateLoadBalancerRequestBody2HealthCheckProtocolEnum `json:"protocol,omitempty"`
+	ResponseTimeoutSeconds *int64                                                 `json:"response_timeout_seconds,omitempty"`
+	UnhealthyThreshold     *int64                                                 `json:"unhealthy_threshold,omitempty"`
 }
 
 type UpdateLoadBalancerRequestBody2SizeEnum string
@@ -185,28 +185,28 @@ const (
 )
 
 type UpdateLoadBalancerRequestBody2StickySessions struct {
-	CookieName       *string                                               `json:"cookie_name"`
-	CookieTTLSeconds *int64                                                `json:"cookie_ttl_seconds"`
-	Type             *UpdateLoadBalancerRequestBody2StickySessionsTypeEnum `json:"type"`
+	CookieName       *string                                               `json:"cookie_name,omitempty"`
+	CookieTTLSeconds *int64                                                `json:"cookie_ttl_seconds,omitempty"`
+	Type             *UpdateLoadBalancerRequestBody2StickySessionsTypeEnum `json:"type,omitempty"`
 }
 
 type UpdateLoadBalancerRequestBody2 struct {
-	Algorithm              *UpdateLoadBalancerRequestBody2AlgorithmEnum                                                                                            `json:"algorithm"`
-	CreatedAt              *time.Time                                                                                                                              `json:"created_at"`
-	EnableBackendKeepalive *bool                                                                                                                                   `json:"enable_backend_keepalive"`
-	EnableProxyProtocol    *bool                                                                                                                                   `json:"enable_proxy_protocol"`
+	Algorithm              *UpdateLoadBalancerRequestBody2AlgorithmEnum                                                                                            `json:"algorithm,omitempty"`
+	CreatedAt              *time.Time                                                                                                                              `json:"created_at,omitempty"`
+	EnableBackendKeepalive *bool                                                                                                                                   `json:"enable_backend_keepalive,omitempty"`
+	EnableProxyProtocol    *bool                                                                                                                                   `json:"enable_proxy_protocol,omitempty"`
 	ForwardingRules        []UpdateLoadBalancerRequestBody2ForwardingRules                                                                                         `json:"forwarding_rules"`
-	HealthCheck            *UpdateLoadBalancerRequestBody2HealthCheck                                                                                              `json:"health_check"`
-	ID                     *string                                                                                                                                 `json:"id"`
-	IP                     *string                                                                                                                                 `json:"ip"`
-	Name                   *string                                                                                                                                 `json:"name"`
-	RedirectHTTPToHTTPS    *bool                                                                                                                                   `json:"redirect_http_to_https"`
+	HealthCheck            *UpdateLoadBalancerRequestBody2HealthCheck                                                                                              `json:"health_check,omitempty"`
+	ID                     *string                                                                                                                                 `json:"id,omitempty"`
+	IP                     *string                                                                                                                                 `json:"ip,omitempty"`
+	Name                   *string                                                                                                                                 `json:"name,omitempty"`
+	RedirectHTTPToHTTPS    *bool                                                                                                                                   `json:"redirect_http_to_https,omitempty"`
 	Region                 shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
-	Size                   *UpdateLoadBalancerRequestBody2SizeEnum                                                                                                 `json:"size"`
-	Status                 *UpdateLoadBalancerRequestBody2StatusEnum                                                                                               `json:"status"`
-	StickySessions         *UpdateLoadBalancerRequestBody2StickySessions                                                                                           `json:"sticky_sessions"`
+	Size                   *UpdateLoadBalancerRequestBody2SizeEnum                                                                                                 `json:"size,omitempty"`
+	Status                 *UpdateLoadBalancerRequestBody2StatusEnum                                                                                               `json:"status,omitempty"`
+	StickySessions         *UpdateLoadBalancerRequestBody2StickySessions                                                                                           `json:"sticky_sessions,omitempty"`
 	Tag                    string                                                                                                                                  `json:"tag"`
-	VpcUUID                *string                                                                                                                                 `json:"vpc_uuid"`
+	VpcUUID                *string                                                                                                                                 `json:"vpc_uuid,omitempty"`
 }
 
 type UpdateLoadBalancerRequest struct {
@@ -217,7 +217,7 @@ type UpdateLoadBalancerRequest struct {
 type UpdateLoadBalancer401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateLoadBalancerResponse struct {

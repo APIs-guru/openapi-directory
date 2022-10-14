@@ -12,6 +12,6 @@ const (
 )
 
 type DetectedBreak struct {
-	IsPrefix *bool                  `json:"isPrefix"`
-	Type     *DetectedBreakTypeEnum `json:"type"`
+	IsPrefix *bool                  `json:"isPrefix,omitempty"`
+	Type     *DetectedBreakTypeEnum `json:"type,omitempty"`
 }

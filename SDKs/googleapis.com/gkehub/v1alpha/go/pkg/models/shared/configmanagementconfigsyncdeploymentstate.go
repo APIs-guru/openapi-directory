@@ -64,11 +64,11 @@ const (
 )
 
 type ConfigManagementConfigSyncDeploymentState struct {
-	AdmissionWebhook  *ConfigManagementConfigSyncDeploymentStateAdmissionWebhookEnum  `json:"admissionWebhook"`
-	GitSync           *ConfigManagementConfigSyncDeploymentStateGitSyncEnum           `json:"gitSync"`
-	Importer          *ConfigManagementConfigSyncDeploymentStateImporterEnum          `json:"importer"`
-	Monitor           *ConfigManagementConfigSyncDeploymentStateMonitorEnum           `json:"monitor"`
-	ReconcilerManager *ConfigManagementConfigSyncDeploymentStateReconcilerManagerEnum `json:"reconcilerManager"`
-	RootReconciler    *ConfigManagementConfigSyncDeploymentStateRootReconcilerEnum    `json:"rootReconciler"`
-	Syncer            *ConfigManagementConfigSyncDeploymentStateSyncerEnum            `json:"syncer"`
+	AdmissionWebhook  *ConfigManagementConfigSyncDeploymentStateAdmissionWebhookEnum  `json:"admissionWebhook,omitempty"`
+	GitSync           *ConfigManagementConfigSyncDeploymentStateGitSyncEnum           `json:"gitSync,omitempty"`
+	Importer          *ConfigManagementConfigSyncDeploymentStateImporterEnum          `json:"importer,omitempty"`
+	Monitor           *ConfigManagementConfigSyncDeploymentStateMonitorEnum           `json:"monitor,omitempty"`
+	ReconcilerManager *ConfigManagementConfigSyncDeploymentStateReconcilerManagerEnum `json:"reconcilerManager,omitempty"`
+	RootReconciler    *ConfigManagementConfigSyncDeploymentStateRootReconcilerEnum    `json:"rootReconciler,omitempty"`
+	Syncer            *ConfigManagementConfigSyncDeploymentStateSyncerEnum            `json:"syncer,omitempty"`
 }

@@ -11,12 +11,12 @@ const (
 )
 
 type VideoFileDetailsVideoStream struct {
-	AspectRatio  *float64                                 `json:"aspectRatio"`
-	BitrateBps   *string                                  `json:"bitrateBps"`
-	Codec        *string                                  `json:"codec"`
-	FrameRateFps *float64                                 `json:"frameRateFps"`
-	HeightPixels *int64                                   `json:"heightPixels"`
-	Rotation     *VideoFileDetailsVideoStreamRotationEnum `json:"rotation"`
-	Vendor       *string                                  `json:"vendor"`
-	WidthPixels  *int64                                   `json:"widthPixels"`
+	AspectRatio  *float64                                 `json:"aspectRatio,omitempty"`
+	BitrateBps   *string                                  `json:"bitrateBps,omitempty"`
+	Codec        *string                                  `json:"codec,omitempty"`
+	FrameRateFps *float64                                 `json:"frameRateFps,omitempty"`
+	HeightPixels *int64                                   `json:"heightPixels,omitempty"`
+	Rotation     *VideoFileDetailsVideoStreamRotationEnum `json:"rotation,omitempty"`
+	Vendor       *string                                  `json:"vendor,omitempty"`
+	WidthPixels  *int64                                   `json:"widthPixels,omitempty"`
 }

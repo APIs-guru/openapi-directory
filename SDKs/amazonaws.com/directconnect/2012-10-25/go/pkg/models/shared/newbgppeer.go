@@ -1,9 +1,9 @@
 package shared
 
 type NewBgpPeer struct {
-	AddressFamily   *AddressFamilyEnum `json:"addressFamily"`
-	AmazonAddress   *string            `json:"amazonAddress"`
-	Asn             *int64             `json:"asn"`
-	AuthKey         *string            `json:"authKey"`
-	CustomerAddress *string            `json:"customerAddress"`
+	AddressFamily   *AddressFamilyEnum `json:"addressFamily,omitempty"`
+	AmazonAddress   *string            `json:"amazonAddress,omitempty"`
+	Asn             *int64             `json:"asn,omitempty"`
+	AuthKey         *string            `json:"authKey,omitempty"`
+	CustomerAddress *string            `json:"customerAddress,omitempty"`
 }

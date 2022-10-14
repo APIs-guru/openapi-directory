@@ -19,18 +19,18 @@ const (
 )
 
 type GoogleCloudDatacatalogV1beta1Entry struct {
-	BigqueryDateShardedSpec *GoogleCloudDatacatalogV1beta1BigQueryDateShardedSpec   `json:"bigqueryDateShardedSpec"`
-	BigqueryTableSpec       *GoogleCloudDatacatalogV1beta1BigQueryTableSpec         `json:"bigqueryTableSpec"`
-	Description             *string                                                 `json:"description"`
-	DisplayName             *string                                                 `json:"displayName"`
-	GcsFilesetSpec          *GoogleCloudDatacatalogV1beta1GcsFilesetSpec            `json:"gcsFilesetSpec"`
-	IntegratedSystem        *GoogleCloudDatacatalogV1beta1EntryIntegratedSystemEnum `json:"integratedSystem"`
-	LinkedResource          *string                                                 `json:"linkedResource"`
-	Name                    *string                                                 `json:"name"`
-	Schema                  *GoogleCloudDatacatalogV1beta1Schema                    `json:"schema"`
-	SourceSystemTimestamps  *GoogleCloudDatacatalogV1beta1SystemTimestamps          `json:"sourceSystemTimestamps"`
-	Type                    *GoogleCloudDatacatalogV1beta1EntryTypeEnum             `json:"type"`
-	UsageSignal             *GoogleCloudDatacatalogV1beta1UsageSignal               `json:"usageSignal"`
-	UserSpecifiedSystem     *string                                                 `json:"userSpecifiedSystem"`
-	UserSpecifiedType       *string                                                 `json:"userSpecifiedType"`
+	BigqueryDateShardedSpec *GoogleCloudDatacatalogV1beta1BigQueryDateShardedSpec   `json:"bigqueryDateShardedSpec,omitempty"`
+	BigqueryTableSpec       *GoogleCloudDatacatalogV1beta1BigQueryTableSpec         `json:"bigqueryTableSpec,omitempty"`
+	Description             *string                                                 `json:"description,omitempty"`
+	DisplayName             *string                                                 `json:"displayName,omitempty"`
+	GcsFilesetSpec          *GoogleCloudDatacatalogV1beta1GcsFilesetSpec            `json:"gcsFilesetSpec,omitempty"`
+	IntegratedSystem        *GoogleCloudDatacatalogV1beta1EntryIntegratedSystemEnum `json:"integratedSystem,omitempty"`
+	LinkedResource          *string                                                 `json:"linkedResource,omitempty"`
+	Name                    *string                                                 `json:"name,omitempty"`
+	Schema                  *GoogleCloudDatacatalogV1beta1Schema                    `json:"schema,omitempty"`
+	SourceSystemTimestamps  *GoogleCloudDatacatalogV1beta1SystemTimestamps          `json:"sourceSystemTimestamps,omitempty"`
+	Type                    *GoogleCloudDatacatalogV1beta1EntryTypeEnum             `json:"type,omitempty"`
+	UsageSignal             *GoogleCloudDatacatalogV1beta1UsageSignal               `json:"usageSignal,omitempty"`
+	UserSpecifiedSystem     *string                                                 `json:"userSpecifiedSystem,omitempty"`
+	UserSpecifiedType       *string                                                 `json:"userSpecifiedType,omitempty"`
 }

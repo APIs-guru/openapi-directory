@@ -1,6 +1,6 @@
 package shared
 
 type DescribeLogGroupsResponse struct {
-	LogGroups []LogGroup `json:"logGroups"`
-	NextToken *string    `json:"nextToken"`
+	LogGroups []LogGroup `json:"logGroups,omitempty"`
+	NextToken *string    `json:"nextToken,omitempty"`
 }

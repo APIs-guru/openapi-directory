@@ -14,17 +14,17 @@ type ListAlertPoliciesRequest struct {
 }
 
 type ListAlertPolicies200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAlertPolicies200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAlertPolicies200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAlertPolicies200ApplicationJSONMeta struct {
@@ -88,7 +88,7 @@ type ListAlertPolicies200ApplicationJSONPolicies struct {
 }
 
 type ListAlertPolicies200ApplicationJSON struct {
-	Links    *ListAlertPolicies200ApplicationJSONLinks     `json:"links"`
+	Links    *ListAlertPolicies200ApplicationJSONLinks     `json:"links,omitempty"`
 	Meta     ListAlertPolicies200ApplicationJSONMeta       `json:"meta"`
 	Policies []ListAlertPolicies200ApplicationJSONPolicies `json:"policies"`
 }
@@ -96,7 +96,7 @@ type ListAlertPolicies200ApplicationJSON struct {
 type ListAlertPolicies401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAlertPoliciesResponse struct {

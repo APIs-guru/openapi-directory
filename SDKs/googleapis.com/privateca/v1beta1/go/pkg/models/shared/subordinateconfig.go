@@ -1,6 +1,6 @@
 package shared
 
 type SubordinateConfig struct {
-	CertificateAuthority *string                 `json:"certificateAuthority"`
-	PemIssuerChain       *SubordinateConfigChain `json:"pemIssuerChain"`
+	CertificateAuthority *string                 `json:"certificateAuthority,omitempty"`
+	PemIssuerChain       *SubordinateConfigChain `json:"pemIssuerChain,omitempty"`
 }

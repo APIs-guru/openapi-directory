@@ -1,6 +1,6 @@
 package shared
 
 type ServerGroupValidationConfiguration struct {
-	ServerGroupID                  *string                         `json:"serverGroupId"`
-	ServerValidationConfigurations []ServerValidationConfiguration `json:"serverValidationConfigurations"`
+	ServerGroupID                  *string                         `json:"serverGroupId,omitempty"`
+	ServerValidationConfigurations []ServerValidationConfiguration `json:"serverValidationConfigurations,omitempty"`
 }

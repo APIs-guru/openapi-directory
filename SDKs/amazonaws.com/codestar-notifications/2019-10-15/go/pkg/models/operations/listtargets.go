@@ -20,9 +20,9 @@ type ListTargetsHeaders struct {
 }
 
 type ListTargetsRequestBody struct {
-	Filters    []shared.ListTargetsFilter `json:"Filters"`
-	MaxResults *int64                     `json:"MaxResults"`
-	NextToken  *string                    `json:"NextToken"`
+	Filters    []shared.ListTargetsFilter `json:"Filters,omitempty"`
+	MaxResults *int64                     `json:"MaxResults,omitempty"`
+	NextToken  *string                    `json:"NextToken,omitempty"`
 }
 
 type ListTargetsRequest struct {

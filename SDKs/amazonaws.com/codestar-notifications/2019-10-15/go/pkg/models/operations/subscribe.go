@@ -15,13 +15,13 @@ type SubscribeHeaders struct {
 }
 
 type SubscribeRequestBodyTarget struct {
-	TargetAddress *string `json:"TargetAddress"`
-	TargetType    *string `json:"TargetType"`
+	TargetAddress *string `json:"TargetAddress,omitempty"`
+	TargetType    *string `json:"TargetType,omitempty"`
 }
 
 type SubscribeRequestBody struct {
 	Arn                string                     `json:"Arn"`
-	ClientRequestToken *string                    `json:"ClientRequestToken"`
+	ClientRequestToken *string                    `json:"ClientRequestToken,omitempty"`
 	Target             SubscribeRequestBodyTarget `json:"Target"`
 }
 

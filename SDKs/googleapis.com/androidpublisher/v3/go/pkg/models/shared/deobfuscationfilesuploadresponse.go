@@ -1,5 +1,5 @@
 package shared
 
 type DeobfuscationFilesUploadResponse struct {
-	DeobfuscationFile *DeobfuscationFile `json:"deobfuscationFile"`
+	DeobfuscationFile *DeobfuscationFile `json:"deobfuscationFile,omitempty"`
 }

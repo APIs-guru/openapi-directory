@@ -1,5 +1,5 @@
 package shared
 
 type GetExperimentResponse struct {
-	Experiment *Experiment `json:"experiment"`
+	Experiment *Experiment `json:"experiment,omitempty"`
 }

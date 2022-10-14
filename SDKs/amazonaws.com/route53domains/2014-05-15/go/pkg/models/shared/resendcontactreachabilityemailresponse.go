@@ -1,7 +1,7 @@
 package shared
 
 type ResendContactReachabilityEmailResponse struct {
-	DomainName        *string `json:"domainName"`
-	EmailAddress      *string `json:"emailAddress"`
-	IsAlreadyVerified *bool   `json:"isAlreadyVerified"`
+	DomainName        *string `json:"domainName,omitempty"`
+	EmailAddress      *string `json:"emailAddress,omitempty"`
+	IsAlreadyVerified *bool   `json:"isAlreadyVerified,omitempty"`
 }

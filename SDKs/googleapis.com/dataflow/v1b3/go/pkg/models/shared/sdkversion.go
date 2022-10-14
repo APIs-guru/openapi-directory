@@ -11,7 +11,7 @@ const (
 )
 
 type SdkVersion struct {
-	SdkSupportStatus   *SdkVersionSdkSupportStatusEnum `json:"sdkSupportStatus"`
-	Version            *string                         `json:"version"`
-	VersionDisplayName *string                         `json:"versionDisplayName"`
+	SdkSupportStatus   *SdkVersionSdkSupportStatusEnum `json:"sdkSupportStatus,omitempty"`
+	Version            *string                         `json:"version,omitempty"`
+	VersionDisplayName *string                         `json:"versionDisplayName,omitempty"`
 }

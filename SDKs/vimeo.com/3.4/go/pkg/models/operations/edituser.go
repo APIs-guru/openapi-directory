@@ -37,25 +37,25 @@ const (
 )
 
 type EditUserRequestBodyVideosPrivacy struct {
-	Add      *bool                                         `json:"add"`
-	Comments *EditUserRequestBodyVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                         `json:"download"`
-	Embed    *EditUserRequestBodyVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *EditUserRequestBodyVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                         `json:"add,omitempty"`
+	Comments *EditUserRequestBodyVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                         `json:"download,omitempty"`
+	Embed    *EditUserRequestBodyVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *EditUserRequestBodyVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type EditUserRequestBodyVideos struct {
-	Privacy *EditUserRequestBodyVideosPrivacy `json:"privacy"`
+	Privacy *EditUserRequestBodyVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type EditUserRequestBody struct {
-	Bio           *string                    `json:"bio"`
-	ContentFilter []string                   `json:"content_filter"`
-	Link          *string                    `json:"link"`
-	Location      *string                    `json:"location"`
-	Name          *string                    `json:"name"`
-	Password      *string                    `json:"password"`
-	Videos        *EditUserRequestBodyVideos `json:"videos"`
+	Bio           *string                    `json:"bio,omitempty"`
+	ContentFilter []string                   `json:"content_filter,omitempty"`
+	Link          *string                    `json:"link,omitempty"`
+	Location      *string                    `json:"location,omitempty"`
+	Name          *string                    `json:"name,omitempty"`
+	Password      *string                    `json:"password,omitempty"`
+	Videos        *EditUserRequestBodyVideos `json:"videos,omitempty"`
 }
 
 type EditUserRequest struct {

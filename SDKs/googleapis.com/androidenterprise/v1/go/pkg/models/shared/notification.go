@@ -16,15 +16,15 @@ const (
 )
 
 type Notification struct {
-	AppRestrictionsSchemaChangeEvent *AppRestrictionsSchemaChangeEvent `json:"appRestrictionsSchemaChangeEvent"`
-	AppUpdateEvent                   *AppUpdateEvent                   `json:"appUpdateEvent"`
-	DeviceReportUpdateEvent          *DeviceReportUpdateEvent          `json:"deviceReportUpdateEvent"`
-	EnterpriseID                     *string                           `json:"enterpriseId"`
-	InstallFailureEvent              *InstallFailureEvent              `json:"installFailureEvent"`
-	NewDeviceEvent                   *NewDeviceEvent                   `json:"newDeviceEvent"`
-	NewPermissionsEvent              *NewPermissionsEvent              `json:"newPermissionsEvent"`
-	NotificationType                 *NotificationNotificationTypeEnum `json:"notificationType"`
-	ProductApprovalEvent             *ProductApprovalEvent             `json:"productApprovalEvent"`
-	ProductAvailabilityChangeEvent   *ProductAvailabilityChangeEvent   `json:"productAvailabilityChangeEvent"`
-	TimestampMillis                  *string                           `json:"timestampMillis"`
+	AppRestrictionsSchemaChangeEvent *AppRestrictionsSchemaChangeEvent `json:"appRestrictionsSchemaChangeEvent,omitempty"`
+	AppUpdateEvent                   *AppUpdateEvent                   `json:"appUpdateEvent,omitempty"`
+	DeviceReportUpdateEvent          *DeviceReportUpdateEvent          `json:"deviceReportUpdateEvent,omitempty"`
+	EnterpriseID                     *string                           `json:"enterpriseId,omitempty"`
+	InstallFailureEvent              *InstallFailureEvent              `json:"installFailureEvent,omitempty"`
+	NewDeviceEvent                   *NewDeviceEvent                   `json:"newDeviceEvent,omitempty"`
+	NewPermissionsEvent              *NewPermissionsEvent              `json:"newPermissionsEvent,omitempty"`
+	NotificationType                 *NotificationNotificationTypeEnum `json:"notificationType,omitempty"`
+	ProductApprovalEvent             *ProductApprovalEvent             `json:"productApprovalEvent,omitempty"`
+	ProductAvailabilityChangeEvent   *ProductAvailabilityChangeEvent   `json:"productAvailabilityChangeEvent,omitempty"`
+	TimestampMillis                  *string                           `json:"timestampMillis,omitempty"`
 }

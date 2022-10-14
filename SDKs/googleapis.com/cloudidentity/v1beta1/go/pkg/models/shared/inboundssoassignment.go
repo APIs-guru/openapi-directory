@@ -10,12 +10,12 @@ const (
 )
 
 type InboundSsoAssignment struct {
-	Customer       *string                          `json:"customer"`
-	Name           *string                          `json:"name"`
-	Rank           *int32                           `json:"rank"`
-	SamlSsoInfo    *SamlSsoInfo                     `json:"samlSsoInfo"`
-	SignInBehavior *SignInBehavior                  `json:"signInBehavior"`
-	SsoMode        *InboundSsoAssignmentSsoModeEnum `json:"ssoMode"`
-	TargetGroup    *string                          `json:"targetGroup"`
-	TargetOrgUnit  *string                          `json:"targetOrgUnit"`
+	Customer       *string                          `json:"customer,omitempty"`
+	Name           *string                          `json:"name,omitempty"`
+	Rank           *int32                           `json:"rank,omitempty"`
+	SamlSsoInfo    *SamlSsoInfo                     `json:"samlSsoInfo,omitempty"`
+	SignInBehavior *SignInBehavior                  `json:"signInBehavior,omitempty"`
+	SsoMode        *InboundSsoAssignmentSsoModeEnum `json:"ssoMode,omitempty"`
+	TargetGroup    *string                          `json:"targetGroup,omitempty"`
+	TargetOrgUnit  *string                          `json:"targetOrgUnit,omitempty"`
 }

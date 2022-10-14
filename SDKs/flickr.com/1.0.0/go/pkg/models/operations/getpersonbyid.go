@@ -14,8 +14,8 @@ type GetPersonByIDRequest struct {
 }
 
 type GetPersonByID200ApplicationJSON struct {
-	Person *shared.Person `json:"person"`
-	Stat   *string        `json:"stat"`
+	Person *shared.Person `json:"person,omitempty"`
+	Stat   *string        `json:"stat,omitempty"`
 }
 
 type GetPersonByIDResponse struct {

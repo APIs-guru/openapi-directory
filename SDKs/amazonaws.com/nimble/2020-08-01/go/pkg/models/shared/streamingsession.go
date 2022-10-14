@@ -5,19 +5,19 @@ import (
 )
 
 type StreamingSession struct {
-	Arn              *string                         `json:"arn"`
-	CreatedAt        *time.Time                      `json:"createdAt"`
-	CreatedBy        *string                         `json:"createdBy"`
-	Ec2InstanceType  *string                         `json:"ec2InstanceType"`
-	LaunchProfileID  *string                         `json:"launchProfileId"`
-	OwnedBy          *string                         `json:"ownedBy"`
-	SessionID        *string                         `json:"sessionId"`
-	State            *StreamingSessionStateEnum      `json:"state"`
-	StatusCode       *StreamingSessionStatusCodeEnum `json:"statusCode"`
-	StatusMessage    *string                         `json:"statusMessage"`
-	StreamingImageID *string                         `json:"streamingImageId"`
-	Tags             map[string]string               `json:"tags"`
-	TerminateAt      *time.Time                      `json:"terminateAt"`
-	UpdatedAt        *time.Time                      `json:"updatedAt"`
-	UpdatedBy        *string                         `json:"updatedBy"`
+	Arn              *string                         `json:"arn,omitempty"`
+	CreatedAt        *time.Time                      `json:"createdAt,omitempty"`
+	CreatedBy        *string                         `json:"createdBy,omitempty"`
+	Ec2InstanceType  *string                         `json:"ec2InstanceType,omitempty"`
+	LaunchProfileID  *string                         `json:"launchProfileId,omitempty"`
+	OwnedBy          *string                         `json:"ownedBy,omitempty"`
+	SessionID        *string                         `json:"sessionId,omitempty"`
+	State            *StreamingSessionStateEnum      `json:"state,omitempty"`
+	StatusCode       *StreamingSessionStatusCodeEnum `json:"statusCode,omitempty"`
+	StatusMessage    *string                         `json:"statusMessage,omitempty"`
+	StreamingImageID *string                         `json:"streamingImageId,omitempty"`
+	Tags             map[string]string               `json:"tags,omitempty"`
+	TerminateAt      *time.Time                      `json:"terminateAt,omitempty"`
+	UpdatedAt        *time.Time                      `json:"updatedAt,omitempty"`
+	UpdatedBy        *string                         `json:"updatedBy,omitempty"`
 }

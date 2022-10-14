@@ -5,8 +5,8 @@ import (
 )
 
 type ServerEvent struct {
-	CreatedAt  *time.Time `json:"CreatedAt"`
-	LogURL     *string    `json:"LogUrl"`
-	Message    *string    `json:"Message"`
-	ServerName *string    `json:"ServerName"`
+	CreatedAt  *time.Time `json:"CreatedAt,omitempty"`
+	LogURL     *string    `json:"LogUrl,omitempty"`
+	Message    *string    `json:"Message,omitempty"`
+	ServerName *string    `json:"ServerName,omitempty"`
 }

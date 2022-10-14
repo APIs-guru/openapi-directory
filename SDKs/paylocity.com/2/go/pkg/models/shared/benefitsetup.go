@@ -1,10 +1,10 @@
 package shared
 
 type BenefitSetup struct {
-	BenefitClass                   *string  `json:"benefitClass"`
-	BenefitClassEffectiveDate      *string  `json:"benefitClassEffectiveDate"`
-	BenefitSalary                  *float64 `json:"benefitSalary"`
-	BenefitSalaryEffectiveDate     *string  `json:"benefitSalaryEffectiveDate"`
-	DoNotApplyAdministrativePeriod *bool    `json:"doNotApplyAdministrativePeriod"`
-	IsMeasureAcaEligibility        *bool    `json:"isMeasureAcaEligibility"`
+	BenefitClass                   *string  `json:"benefitClass,omitempty"`
+	BenefitClassEffectiveDate      *string  `json:"benefitClassEffectiveDate,omitempty"`
+	BenefitSalary                  *float64 `json:"benefitSalary,omitempty"`
+	BenefitSalaryEffectiveDate     *string  `json:"benefitSalaryEffectiveDate,omitempty"`
+	DoNotApplyAdministrativePeriod *bool    `json:"doNotApplyAdministrativePeriod,omitempty"`
+	IsMeasureAcaEligibility        *bool    `json:"isMeasureAcaEligibility,omitempty"`
 }

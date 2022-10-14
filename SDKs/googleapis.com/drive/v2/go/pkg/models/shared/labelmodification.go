@@ -1,8 +1,8 @@
 package shared
 
 type LabelModification struct {
-	FieldModifications []LabelFieldModification `json:"fieldModifications"`
-	Kind               *string                  `json:"kind"`
-	LabelID            *string                  `json:"labelId"`
-	RemoveLabel        *bool                    `json:"removeLabel"`
+	FieldModifications []LabelFieldModification `json:"fieldModifications,omitempty"`
+	Kind               *string                  `json:"kind,omitempty"`
+	LabelID            *string                  `json:"labelId,omitempty"`
+	RemoveLabel        *bool                    `json:"removeLabel,omitempty"`
 }

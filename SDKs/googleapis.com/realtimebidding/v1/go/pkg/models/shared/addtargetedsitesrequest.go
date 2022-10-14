@@ -9,6 +9,6 @@ const (
 )
 
 type AddTargetedSitesRequest struct {
-	Sites         []string                                  `json:"sites"`
-	TargetingMode *AddTargetedSitesRequestTargetingModeEnum `json:"targetingMode"`
+	Sites         []string                                  `json:"sites,omitempty"`
+	TargetingMode *AddTargetedSitesRequestTargetingModeEnum `json:"targetingMode,omitempty"`
 }

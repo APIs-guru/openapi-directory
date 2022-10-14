@@ -73,21 +73,21 @@ const (
 )
 
 type Policies struct {
-	AllInclusiveAvailable          *bool                                       `json:"allInclusiveAvailable"`
-	AllInclusiveAvailableException *PoliciesAllInclusiveAvailableExceptionEnum `json:"allInclusiveAvailableException"`
-	AllInclusiveOnly               *bool                                       `json:"allInclusiveOnly"`
-	AllInclusiveOnlyException      *PoliciesAllInclusiveOnlyExceptionEnum      `json:"allInclusiveOnlyException"`
-	CheckinTime                    *TimeOfDay                                  `json:"checkinTime"`
-	CheckinTimeException           *PoliciesCheckinTimeExceptionEnum           `json:"checkinTimeException"`
-	CheckoutTime                   *TimeOfDay                                  `json:"checkoutTime"`
-	CheckoutTimeException          *PoliciesCheckoutTimeExceptionEnum          `json:"checkoutTimeException"`
-	KidsStayFree                   *bool                                       `json:"kidsStayFree"`
-	KidsStayFreeException          *PoliciesKidsStayFreeExceptionEnum          `json:"kidsStayFreeException"`
-	MaxChildAge                    *int32                                      `json:"maxChildAge"`
-	MaxChildAgeException           *PoliciesMaxChildAgeExceptionEnum           `json:"maxChildAgeException"`
-	MaxKidsStayFreeCount           *int32                                      `json:"maxKidsStayFreeCount"`
-	MaxKidsStayFreeCountException  *PoliciesMaxKidsStayFreeCountExceptionEnum  `json:"maxKidsStayFreeCountException"`
-	PaymentOptions                 *PaymentOptions                             `json:"paymentOptions"`
-	SmokeFreeProperty              *bool                                       `json:"smokeFreeProperty"`
-	SmokeFreePropertyException     *PoliciesSmokeFreePropertyExceptionEnum     `json:"smokeFreePropertyException"`
+	AllInclusiveAvailable          *bool                                       `json:"allInclusiveAvailable,omitempty"`
+	AllInclusiveAvailableException *PoliciesAllInclusiveAvailableExceptionEnum `json:"allInclusiveAvailableException,omitempty"`
+	AllInclusiveOnly               *bool                                       `json:"allInclusiveOnly,omitempty"`
+	AllInclusiveOnlyException      *PoliciesAllInclusiveOnlyExceptionEnum      `json:"allInclusiveOnlyException,omitempty"`
+	CheckinTime                    *TimeOfDay                                  `json:"checkinTime,omitempty"`
+	CheckinTimeException           *PoliciesCheckinTimeExceptionEnum           `json:"checkinTimeException,omitempty"`
+	CheckoutTime                   *TimeOfDay                                  `json:"checkoutTime,omitempty"`
+	CheckoutTimeException          *PoliciesCheckoutTimeExceptionEnum          `json:"checkoutTimeException,omitempty"`
+	KidsStayFree                   *bool                                       `json:"kidsStayFree,omitempty"`
+	KidsStayFreeException          *PoliciesKidsStayFreeExceptionEnum          `json:"kidsStayFreeException,omitempty"`
+	MaxChildAge                    *int32                                      `json:"maxChildAge,omitempty"`
+	MaxChildAgeException           *PoliciesMaxChildAgeExceptionEnum           `json:"maxChildAgeException,omitempty"`
+	MaxKidsStayFreeCount           *int32                                      `json:"maxKidsStayFreeCount,omitempty"`
+	MaxKidsStayFreeCountException  *PoliciesMaxKidsStayFreeCountExceptionEnum  `json:"maxKidsStayFreeCountException,omitempty"`
+	PaymentOptions                 *PaymentOptions                             `json:"paymentOptions,omitempty"`
+	SmokeFreeProperty              *bool                                       `json:"smokeFreeProperty,omitempty"`
+	SmokeFreePropertyException     *PoliciesSmokeFreePropertyExceptionEnum     `json:"smokeFreePropertyException,omitempty"`
 }

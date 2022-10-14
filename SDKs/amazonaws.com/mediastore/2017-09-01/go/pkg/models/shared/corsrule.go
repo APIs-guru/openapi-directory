@@ -2,8 +2,8 @@ package shared
 
 type CorsRule struct {
 	AllowedHeaders []string         `json:"AllowedHeaders"`
-	AllowedMethods []MethodNameEnum `json:"AllowedMethods"`
+	AllowedMethods []MethodNameEnum `json:"AllowedMethods,omitempty"`
 	AllowedOrigins []string         `json:"AllowedOrigins"`
-	ExposeHeaders  []string         `json:"ExposeHeaders"`
-	MaxAgeSeconds  *int64           `json:"MaxAgeSeconds"`
+	ExposeHeaders  []string         `json:"ExposeHeaders,omitempty"`
+	MaxAgeSeconds  *int64           `json:"MaxAgeSeconds,omitempty"`
 }

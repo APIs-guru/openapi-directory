@@ -1,6 +1,6 @@
 package shared
 
 type ListTagsForResourceOutput struct {
-	NextToken *string           `json:"nextToken"`
-	Tags      map[string]string `json:"tags"`
+	NextToken *string           `json:"nextToken,omitempty"`
+	Tags      map[string]string `json:"tags,omitempty"`
 }

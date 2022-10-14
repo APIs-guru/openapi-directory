@@ -28,21 +28,21 @@ const (
 )
 
 type CertificateAuthority struct {
-	AccessUrls                *AccessUrls                    `json:"accessUrls"`
-	CaCertificateDescriptions []CertificateDescription       `json:"caCertificateDescriptions"`
-	Config                    *CertificateConfig             `json:"config"`
-	CreateTime                *string                        `json:"createTime"`
-	DeleteTime                *string                        `json:"deleteTime"`
-	ExpireTime                *string                        `json:"expireTime"`
-	GcsBucket                 *string                        `json:"gcsBucket"`
-	KeySpec                   *KeyVersionSpec                `json:"keySpec"`
-	Labels                    map[string]string              `json:"labels"`
-	Lifetime                  *string                        `json:"lifetime"`
-	Name                      *string                        `json:"name"`
-	PemCaCertificates         []string                       `json:"pemCaCertificates"`
-	State                     *CertificateAuthorityStateEnum `json:"state"`
-	SubordinateConfig         *SubordinateConfig             `json:"subordinateConfig"`
-	Tier                      *CertificateAuthorityTierEnum  `json:"tier"`
-	Type                      *CertificateAuthorityTypeEnum  `json:"type"`
-	UpdateTime                *string                        `json:"updateTime"`
+	AccessUrls                *AccessUrls                    `json:"accessUrls,omitempty"`
+	CaCertificateDescriptions []CertificateDescription       `json:"caCertificateDescriptions,omitempty"`
+	Config                    *CertificateConfig             `json:"config,omitempty"`
+	CreateTime                *string                        `json:"createTime,omitempty"`
+	DeleteTime                *string                        `json:"deleteTime,omitempty"`
+	ExpireTime                *string                        `json:"expireTime,omitempty"`
+	GcsBucket                 *string                        `json:"gcsBucket,omitempty"`
+	KeySpec                   *KeyVersionSpec                `json:"keySpec,omitempty"`
+	Labels                    map[string]string              `json:"labels,omitempty"`
+	Lifetime                  *string                        `json:"lifetime,omitempty"`
+	Name                      *string                        `json:"name,omitempty"`
+	PemCaCertificates         []string                       `json:"pemCaCertificates,omitempty"`
+	State                     *CertificateAuthorityStateEnum `json:"state,omitempty"`
+	SubordinateConfig         *SubordinateConfig             `json:"subordinateConfig,omitempty"`
+	Tier                      *CertificateAuthorityTierEnum  `json:"tier,omitempty"`
+	Type                      *CertificateAuthorityTypeEnum  `json:"type,omitempty"`
+	UpdateTime                *string                        `json:"updateTime,omitempty"`
 }

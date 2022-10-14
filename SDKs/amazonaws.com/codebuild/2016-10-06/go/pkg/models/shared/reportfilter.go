@@ -1,5 +1,5 @@
 package shared
 
 type ReportFilter struct {
-	Status *ReportStatusTypeEnum `json:"status"`
+	Status *ReportStatusTypeEnum `json:"status,omitempty"`
 }

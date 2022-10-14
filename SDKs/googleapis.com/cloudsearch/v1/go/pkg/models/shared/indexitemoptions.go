@@ -1,5 +1,5 @@
 package shared
 
 type IndexItemOptions struct {
-	AllowUnknownGsuitePrincipals *bool `json:"allowUnknownGsuitePrincipals"`
+	AllowUnknownGsuitePrincipals *bool `json:"allowUnknownGsuitePrincipals,omitempty"`
 }

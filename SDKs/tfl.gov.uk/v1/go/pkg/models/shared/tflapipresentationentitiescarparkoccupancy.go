@@ -1,8 +1,8 @@
 package shared
 
 type TflAPIPresentationEntitiesCarParkOccupancy struct {
-	Bays              []TflAPIPresentationEntitiesBay `json:"bays"`
-	CarParkDetailsURL *string                         `json:"carParkDetailsUrl"`
-	ID                *string                         `json:"id"`
-	Name              *string                         `json:"name"`
+	Bays              []TflAPIPresentationEntitiesBay `json:"bays,omitempty"`
+	CarParkDetailsURL *string                         `json:"carParkDetailsUrl,omitempty"`
+	ID                *string                         `json:"id,omitempty"`
+	Name              *string                         `json:"name,omitempty"`
 }

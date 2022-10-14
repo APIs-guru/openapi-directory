@@ -1,8 +1,8 @@
 package shared
 
 type GetFunctionResponse struct {
-	Code          *FunctionCodeLocation  `json:"Code"`
-	Concurrency   *Concurrency           `json:"Concurrency"`
-	Configuration *FunctionConfiguration `json:"Configuration"`
-	Tags          map[string]string      `json:"Tags"`
+	Code          *FunctionCodeLocation  `json:"Code,omitempty"`
+	Concurrency   *Concurrency           `json:"Concurrency,omitempty"`
+	Configuration *FunctionConfiguration `json:"Configuration,omitempty"`
+	Tags          map[string]string      `json:"Tags,omitempty"`
 }

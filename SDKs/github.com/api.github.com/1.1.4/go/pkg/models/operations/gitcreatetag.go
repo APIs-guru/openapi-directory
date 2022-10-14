@@ -10,9 +10,9 @@ type GitCreateTagPathParams struct {
 }
 
 type GitCreateTagRequestBodyTagger struct {
-	Date  *string `json:"date"`
-	Email *string `json:"email"`
-	Name  *string `json:"name"`
+	Date  *string `json:"date,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type GitCreateTagRequestBodyTypeEnum string
@@ -27,7 +27,7 @@ type GitCreateTagRequestBody struct {
 	Message string                          `json:"message"`
 	Object  string                          `json:"object"`
 	Tag     string                          `json:"tag"`
-	Tagger  *GitCreateTagRequestBodyTagger  `json:"tagger"`
+	Tagger  *GitCreateTagRequestBodyTagger  `json:"tagger,omitempty"`
 	Type    GitCreateTagRequestBodyTypeEnum `json:"type"`
 }
 

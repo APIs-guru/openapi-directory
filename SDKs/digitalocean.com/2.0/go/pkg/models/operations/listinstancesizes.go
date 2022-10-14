@@ -13,27 +13,27 @@ const (
 )
 
 type ListInstanceSizes200ApplicationJSONInstanceSizes struct {
-	CPUType         *ListInstanceSizes200ApplicationJSONInstanceSizesCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum `json:"cpu_type"`
-	Cpus            *string                                                                                                      `json:"cpus"`
-	MemoryBytes     *string                                                                                                      `json:"memory_bytes"`
-	Name            *string                                                                                                      `json:"name"`
-	Slug            *string                                                                                                      `json:"slug"`
-	TierDowngradeTo *string                                                                                                      `json:"tier_downgrade_to"`
-	TierSlug        *string                                                                                                      `json:"tier_slug"`
-	TierUpgradeTo   *string                                                                                                      `json:"tier_upgrade_to"`
-	UsdPerMonth     *string                                                                                                      `json:"usd_per_month"`
-	UsdPerSecond    *string                                                                                                      `json:"usd_per_second"`
+	CPUType         *ListInstanceSizes200ApplicationJSONInstanceSizesCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum `json:"cpu_type,omitempty"`
+	Cpus            *string                                                                                                      `json:"cpus,omitempty"`
+	MemoryBytes     *string                                                                                                      `json:"memory_bytes,omitempty"`
+	Name            *string                                                                                                      `json:"name,omitempty"`
+	Slug            *string                                                                                                      `json:"slug,omitempty"`
+	TierDowngradeTo *string                                                                                                      `json:"tier_downgrade_to,omitempty"`
+	TierSlug        *string                                                                                                      `json:"tier_slug,omitempty"`
+	TierUpgradeTo   *string                                                                                                      `json:"tier_upgrade_to,omitempty"`
+	UsdPerMonth     *string                                                                                                      `json:"usd_per_month,omitempty"`
+	UsdPerSecond    *string                                                                                                      `json:"usd_per_second,omitempty"`
 }
 
 type ListInstanceSizes200ApplicationJSON struct {
-	DiscountPercent *float32                                           `json:"discount_percent"`
-	InstanceSizes   []ListInstanceSizes200ApplicationJSONInstanceSizes `json:"instance_sizes"`
+	DiscountPercent *float32                                           `json:"discount_percent,omitempty"`
+	InstanceSizes   []ListInstanceSizes200ApplicationJSONInstanceSizes `json:"instance_sizes,omitempty"`
 }
 
 type ListInstanceSizes401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListInstanceSizesResponse struct {

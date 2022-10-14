@@ -1,10 +1,10 @@
 package shared
 
 type AccountUser struct {
-	Admin            *bool   `json:"admin"`
-	EmailAddress     *string `json:"emailAddress"`
-	OrderManager     *bool   `json:"orderManager"`
-	PaymentsAnalyst  *bool   `json:"paymentsAnalyst"`
-	PaymentsManager  *bool   `json:"paymentsManager"`
-	ReportingManager *bool   `json:"reportingManager"`
+	Admin            *bool   `json:"admin,omitempty"`
+	EmailAddress     *string `json:"emailAddress,omitempty"`
+	OrderManager     *bool   `json:"orderManager,omitempty"`
+	PaymentsAnalyst  *bool   `json:"paymentsAnalyst,omitempty"`
+	PaymentsManager  *bool   `json:"paymentsManager,omitempty"`
+	ReportingManager *bool   `json:"reportingManager,omitempty"`
 }

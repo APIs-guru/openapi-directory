@@ -15,13 +15,13 @@ type CreateImportJobHeaders struct {
 }
 
 type CreateImportJobRequestBodyImportDataSource struct {
-	DataFormat *shared.DataFormatEnum `json:"DataFormat"`
-	S3URL      *string                `json:"S3Url"`
+	DataFormat *shared.DataFormatEnum `json:"DataFormat,omitempty"`
+	S3URL      *string                `json:"S3Url,omitempty"`
 }
 
 type CreateImportJobRequestBodyImportDestination struct {
-	ContactListDestination     *shared.ContactListDestination     `json:"ContactListDestination"`
-	SuppressionListDestination *shared.SuppressionListDestination `json:"SuppressionListDestination"`
+	ContactListDestination     *shared.ContactListDestination     `json:"ContactListDestination,omitempty"`
+	SuppressionListDestination *shared.SuppressionListDestination `json:"SuppressionListDestination,omitempty"`
 }
 
 type CreateImportJobRequestBody struct {

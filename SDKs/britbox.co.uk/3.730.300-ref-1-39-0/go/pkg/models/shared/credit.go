@@ -21,7 +21,7 @@ const (
 )
 
 type Credit struct {
-	Character *string        `json:"character"`
+	Character *string        `json:"character,omitempty"`
 	Name      string         `json:"name"`
 	Path      string         `json:"path"`
 	Role      CreditRoleEnum `json:"role"`

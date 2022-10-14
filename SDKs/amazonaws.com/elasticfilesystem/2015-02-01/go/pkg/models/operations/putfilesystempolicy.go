@@ -19,7 +19,7 @@ type PutFileSystemPolicyHeaders struct {
 }
 
 type PutFileSystemPolicyRequestBody struct {
-	BypassPolicyLockoutSafetyCheck *bool  `json:"BypassPolicyLockoutSafetyCheck"`
+	BypassPolicyLockoutSafetyCheck *bool  `json:"BypassPolicyLockoutSafetyCheck,omitempty"`
 	Policy                         string `json:"Policy"`
 }
 

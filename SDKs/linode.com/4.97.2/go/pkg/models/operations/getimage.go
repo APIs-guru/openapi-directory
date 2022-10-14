@@ -13,7 +13,7 @@ type GetImageRequest struct {
 }
 
 type GetImageDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetImageResponse struct {

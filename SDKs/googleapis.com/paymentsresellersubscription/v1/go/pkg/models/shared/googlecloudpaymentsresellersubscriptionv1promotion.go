@@ -9,13 +9,13 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1Promotion struct {
-	ApplicableProducts         []string                                                                      `json:"applicableProducts"`
-	EndTime                    *string                                                                       `json:"endTime"`
-	FreeTrialDuration          *GoogleCloudPaymentsResellerSubscriptionV1Duration                            `json:"freeTrialDuration"`
-	IntroductoryPricingDetails *GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails `json:"introductoryPricingDetails"`
-	Name                       *string                                                                       `json:"name"`
-	PromotionType              *GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnum          `json:"promotionType"`
-	RegionCodes                []string                                                                      `json:"regionCodes"`
-	StartTime                  *string                                                                       `json:"startTime"`
-	Titles                     []GoogleTypeLocalizedText                                                     `json:"titles"`
+	ApplicableProducts         []string                                                                      `json:"applicableProducts,omitempty"`
+	EndTime                    *string                                                                       `json:"endTime,omitempty"`
+	FreeTrialDuration          *GoogleCloudPaymentsResellerSubscriptionV1Duration                            `json:"freeTrialDuration,omitempty"`
+	IntroductoryPricingDetails *GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails `json:"introductoryPricingDetails,omitempty"`
+	Name                       *string                                                                       `json:"name,omitempty"`
+	PromotionType              *GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnum          `json:"promotionType,omitempty"`
+	RegionCodes                []string                                                                      `json:"regionCodes,omitempty"`
+	StartTime                  *string                                                                       `json:"startTime,omitempty"`
+	Titles                     []GoogleTypeLocalizedText                                                     `json:"titles,omitempty"`
 }

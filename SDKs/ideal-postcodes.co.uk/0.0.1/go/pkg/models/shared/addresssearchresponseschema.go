@@ -1,7 +1,7 @@
 package shared
 
 type AddressSearchResponseSchema struct {
-	Code    *int32               `json:"code"`
-	Message *string              `json:"message"`
-	Result  *AddressSearchResult `json:"result"`
+	Code    *int32               `json:"code,omitempty"`
+	Message *string              `json:"message,omitempty"`
+	Result  *AddressSearchResult `json:"result,omitempty"`
 }

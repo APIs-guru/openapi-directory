@@ -12,14 +12,14 @@ const (
 )
 
 type Campaign struct {
-	AdvertiserID    *string                   `json:"advertiserId"`
-	CampaignBudgets []CampaignBudget          `json:"campaignBudgets"`
-	CampaignFlight  *CampaignFlight           `json:"campaignFlight"`
-	CampaignGoal    *CampaignGoal             `json:"campaignGoal"`
-	CampaignID      *string                   `json:"campaignId"`
-	DisplayName     *string                   `json:"displayName"`
-	EntityStatus    *CampaignEntityStatusEnum `json:"entityStatus"`
-	FrequencyCap    *FrequencyCap             `json:"frequencyCap"`
-	Name            *string                   `json:"name"`
-	UpdateTime      *string                   `json:"updateTime"`
+	AdvertiserID    *string                   `json:"advertiserId,omitempty"`
+	CampaignBudgets []CampaignBudget          `json:"campaignBudgets,omitempty"`
+	CampaignFlight  *CampaignFlight           `json:"campaignFlight,omitempty"`
+	CampaignGoal    *CampaignGoal             `json:"campaignGoal,omitempty"`
+	CampaignID      *string                   `json:"campaignId,omitempty"`
+	DisplayName     *string                   `json:"displayName,omitempty"`
+	EntityStatus    *CampaignEntityStatusEnum `json:"entityStatus,omitempty"`
+	FrequencyCap    *FrequencyCap             `json:"frequencyCap,omitempty"`
+	Name            *string                   `json:"name,omitempty"`
+	UpdateTime      *string                   `json:"updateTime,omitempty"`
 }

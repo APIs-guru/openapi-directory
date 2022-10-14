@@ -1,6 +1,6 @@
 package shared
 
 type BrowsersListResponse struct {
-	Browsers []Browser `json:"browsers"`
-	Kind     *string   `json:"kind"`
+	Browsers []Browser `json:"browsers,omitempty"`
+	Kind     *string   `json:"kind,omitempty"`
 }

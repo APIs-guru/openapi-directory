@@ -1,6 +1,6 @@
 package shared
 
 type APIVersion struct {
-	APIVersion     *string `json:"apiVersion"`
-	ServiceVersion *string `json:"serviceVersion"`
+	APIVersion     *string `json:"apiVersion,omitempty"`
+	ServiceVersion *string `json:"serviceVersion,omitempty"`
 }

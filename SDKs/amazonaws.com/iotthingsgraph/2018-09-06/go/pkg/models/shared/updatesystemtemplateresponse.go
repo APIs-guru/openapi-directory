@@ -1,5 +1,5 @@
 package shared
 
 type UpdateSystemTemplateResponse struct {
-	Summary *SystemTemplateSummary `json:"summary"`
+	Summary *SystemTemplateSummary `json:"summary,omitempty"`
 }

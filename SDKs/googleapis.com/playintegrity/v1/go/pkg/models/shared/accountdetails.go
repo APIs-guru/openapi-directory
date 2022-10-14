@@ -10,7 +10,7 @@ const (
 )
 
 type AccountDetails struct {
-	AccountActivity     *AccountActivity                       `json:"accountActivity"`
-	AccountRiskVerdict  *AccountRiskVerdict                    `json:"accountRiskVerdict"`
-	AppLicensingVerdict *AccountDetailsAppLicensingVerdictEnum `json:"appLicensingVerdict"`
+	AccountActivity     *AccountActivity                       `json:"accountActivity,omitempty"`
+	AccountRiskVerdict  *AccountRiskVerdict                    `json:"accountRiskVerdict,omitempty"`
+	AppLicensingVerdict *AccountDetailsAppLicensingVerdictEnum `json:"appLicensingVerdict,omitempty"`
 }

@@ -19,30 +19,30 @@ type UpdateAlarmModelHeaders struct {
 }
 
 type UpdateAlarmModelRequestBodyAlarmCapabilities struct {
-	AcknowledgeFlow             *shared.AcknowledgeFlow             `json:"acknowledgeFlow"`
-	InitializationConfiguration *shared.InitializationConfiguration `json:"initializationConfiguration"`
+	AcknowledgeFlow             *shared.AcknowledgeFlow             `json:"acknowledgeFlow,omitempty"`
+	InitializationConfiguration *shared.InitializationConfiguration `json:"initializationConfiguration,omitempty"`
 }
 
 type UpdateAlarmModelRequestBodyAlarmEventActions struct {
-	AlarmActions []shared.AlarmAction `json:"alarmActions"`
+	AlarmActions []shared.AlarmAction `json:"alarmActions,omitempty"`
 }
 
 type UpdateAlarmModelRequestBodyAlarmNotification struct {
-	NotificationActions []shared.NotificationAction `json:"notificationActions"`
+	NotificationActions []shared.NotificationAction `json:"notificationActions,omitempty"`
 }
 
 type UpdateAlarmModelRequestBodyAlarmRule struct {
-	SimpleRule *shared.SimpleRule `json:"simpleRule"`
+	SimpleRule *shared.SimpleRule `json:"simpleRule,omitempty"`
 }
 
 type UpdateAlarmModelRequestBody struct {
-	AlarmCapabilities     *UpdateAlarmModelRequestBodyAlarmCapabilities `json:"alarmCapabilities"`
-	AlarmEventActions     *UpdateAlarmModelRequestBodyAlarmEventActions `json:"alarmEventActions"`
-	AlarmModelDescription *string                                       `json:"alarmModelDescription"`
-	AlarmNotification     *UpdateAlarmModelRequestBodyAlarmNotification `json:"alarmNotification"`
+	AlarmCapabilities     *UpdateAlarmModelRequestBodyAlarmCapabilities `json:"alarmCapabilities,omitempty"`
+	AlarmEventActions     *UpdateAlarmModelRequestBodyAlarmEventActions `json:"alarmEventActions,omitempty"`
+	AlarmModelDescription *string                                       `json:"alarmModelDescription,omitempty"`
+	AlarmNotification     *UpdateAlarmModelRequestBodyAlarmNotification `json:"alarmNotification,omitempty"`
 	AlarmRule             UpdateAlarmModelRequestBodyAlarmRule          `json:"alarmRule"`
 	RoleArn               string                                        `json:"roleArn"`
-	Severity              *int64                                        `json:"severity"`
+	Severity              *int64                                        `json:"severity,omitempty"`
 }
 
 type UpdateAlarmModelRequest struct {

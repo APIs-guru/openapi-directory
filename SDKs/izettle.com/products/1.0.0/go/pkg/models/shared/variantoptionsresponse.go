@@ -1,5 +1,5 @@
 package shared
 
 type VariantOptionsResponse struct {
-	Options []Option `json:"options"`
+	Options []Option `json:"options,omitempty"`
 }

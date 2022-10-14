@@ -19,11 +19,11 @@ const (
 )
 
 type MigrationsStartImportRequestBody struct {
-	TfvcProject *string                                  `json:"tfvc_project"`
-	Vcs         *MigrationsStartImportRequestBodyVcsEnum `json:"vcs"`
-	VcsPassword *string                                  `json:"vcs_password"`
+	TfvcProject *string                                  `json:"tfvc_project,omitempty"`
+	Vcs         *MigrationsStartImportRequestBodyVcsEnum `json:"vcs,omitempty"`
+	VcsPassword *string                                  `json:"vcs_password,omitempty"`
 	VcsURL      string                                   `json:"vcs_url"`
-	VcsUsername *string                                  `json:"vcs_username"`
+	VcsUsername *string                                  `json:"vcs_username,omitempty"`
 }
 
 type MigrationsStartImportRequest struct {

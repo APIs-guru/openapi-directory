@@ -12,10 +12,10 @@ const (
 )
 
 type AuthConfig struct {
-	AdditionalVariables     []ConfigVariable         `json:"additionalVariables"`
-	AuthType                *AuthConfigAuthTypeEnum  `json:"authType"`
-	Oauth2ClientCredentials *Oauth2ClientCredentials `json:"oauth2ClientCredentials"`
-	Oauth2JwtBearer         *Oauth2JwtBearer         `json:"oauth2JwtBearer"`
-	SSHPublicKey            *SSHPublicKey            `json:"sshPublicKey"`
-	UserPassword            *UserPassword            `json:"userPassword"`
+	AdditionalVariables     []ConfigVariable         `json:"additionalVariables,omitempty"`
+	AuthType                *AuthConfigAuthTypeEnum  `json:"authType,omitempty"`
+	Oauth2ClientCredentials *Oauth2ClientCredentials `json:"oauth2ClientCredentials,omitempty"`
+	Oauth2JwtBearer         *Oauth2JwtBearer         `json:"oauth2JwtBearer,omitempty"`
+	SSHPublicKey            *SSHPublicKey            `json:"sshPublicKey,omitempty"`
+	UserPassword            *UserPassword            `json:"userPassword,omitempty"`
 }

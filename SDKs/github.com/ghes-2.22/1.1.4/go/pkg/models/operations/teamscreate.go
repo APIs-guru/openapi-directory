@@ -24,13 +24,13 @@ const (
 )
 
 type TeamsCreateRequestBody struct {
-	Description  *string                               `json:"description"`
-	Maintainers  []string                              `json:"maintainers"`
+	Description  *string                               `json:"description,omitempty"`
+	Maintainers  []string                              `json:"maintainers,omitempty"`
 	Name         string                                `json:"name"`
-	ParentTeamID *int64                                `json:"parent_team_id"`
-	Permission   *TeamsCreateRequestBodyPermissionEnum `json:"permission"`
-	Privacy      *TeamsCreateRequestBodyPrivacyEnum    `json:"privacy"`
-	RepoNames    []string                              `json:"repo_names"`
+	ParentTeamID *int64                                `json:"parent_team_id,omitempty"`
+	Permission   *TeamsCreateRequestBodyPermissionEnum `json:"permission,omitempty"`
+	Privacy      *TeamsCreateRequestBodyPrivacyEnum    `json:"privacy,omitempty"`
+	RepoNames    []string                              `json:"repo_names,omitempty"`
 }
 
 type TeamsCreateRequest struct {

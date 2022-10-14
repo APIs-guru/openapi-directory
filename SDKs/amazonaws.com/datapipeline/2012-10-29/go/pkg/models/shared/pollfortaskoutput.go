@@ -1,5 +1,5 @@
 package shared
 
 type PollForTaskOutput struct {
-	TaskObject *TaskObject `json:"taskObject"`
+	TaskObject *TaskObject `json:"taskObject,omitempty"`
 }

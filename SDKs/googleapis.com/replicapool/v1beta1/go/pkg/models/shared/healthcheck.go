@@ -1,13 +1,13 @@
 package shared
 
 type HealthCheck struct {
-	CheckIntervalSec   *int32  `json:"checkIntervalSec"`
-	Description        *string `json:"description"`
-	HealthyThreshold   *int32  `json:"healthyThreshold"`
-	Host               *string `json:"host"`
-	Name               *string `json:"name"`
-	Path               *string `json:"path"`
-	Port               *int32  `json:"port"`
-	TimeoutSec         *int32  `json:"timeoutSec"`
-	UnhealthyThreshold *int32  `json:"unhealthyThreshold"`
+	CheckIntervalSec   *int32  `json:"checkIntervalSec,omitempty"`
+	Description        *string `json:"description,omitempty"`
+	HealthyThreshold   *int32  `json:"healthyThreshold,omitempty"`
+	Host               *string `json:"host,omitempty"`
+	Name               *string `json:"name,omitempty"`
+	Path               *string `json:"path,omitempty"`
+	Port               *int32  `json:"port,omitempty"`
+	TimeoutSec         *int32  `json:"timeoutSec,omitempty"`
+	UnhealthyThreshold *int32  `json:"unhealthyThreshold,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type TaskResult struct {
-	EndTimeUtc       *time.Time                `json:"EndTimeUtc"`
-	ErrorMessage     *string                   `json:"ErrorMessage"`
-	ID               *string                   `json:"Id"`
-	Key              *string                   `json:"Key"`
-	LongErrorMessage *string                   `json:"LongErrorMessage"`
-	Name             *string                   `json:"Name"`
-	StartTimeUtc     *time.Time                `json:"StartTimeUtc"`
-	Status           *TaskCompletionStatusEnum `json:"Status"`
+	EndTimeUtc       *time.Time                `json:"EndTimeUtc,omitempty"`
+	ErrorMessage     *string                   `json:"ErrorMessage,omitempty"`
+	ID               *string                   `json:"Id,omitempty"`
+	Key              *string                   `json:"Key,omitempty"`
+	LongErrorMessage *string                   `json:"LongErrorMessage,omitempty"`
+	Name             *string                   `json:"Name,omitempty"`
+	StartTimeUtc     *time.Time                `json:"StartTimeUtc,omitempty"`
+	Status           *TaskCompletionStatusEnum `json:"Status,omitempty"`
 }

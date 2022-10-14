@@ -1,5 +1,5 @@
 package shared
 
 type RegisterCertificateResult struct {
-	CertificateID *string `json:"CertificateId"`
+	CertificateID *string `json:"CertificateId,omitempty"`
 }

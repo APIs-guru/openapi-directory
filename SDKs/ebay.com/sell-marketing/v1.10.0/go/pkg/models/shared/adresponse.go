@@ -1,9 +1,9 @@
 package shared
 
 type AdResponse struct {
-	AdID       *string `json:"adId"`
-	Errors     []Error `json:"errors"`
-	Href       *string `json:"href"`
-	ListingID  *string `json:"listingId"`
-	StatusCode *int32  `json:"statusCode"`
+	AdID       *string `json:"adId,omitempty"`
+	Errors     []Error `json:"errors,omitempty"`
+	Href       *string `json:"href,omitempty"`
+	ListingID  *string `json:"listingId,omitempty"`
+	StatusCode *int32  `json:"statusCode,omitempty"`
 }

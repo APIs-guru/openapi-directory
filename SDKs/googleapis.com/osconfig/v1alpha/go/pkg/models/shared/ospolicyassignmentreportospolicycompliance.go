@@ -9,8 +9,8 @@ const (
 )
 
 type OsPolicyAssignmentReportOsPolicyCompliance struct {
-	ComplianceState             *OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnum         `json:"complianceState"`
-	ComplianceStateReason       *string                                                                `json:"complianceStateReason"`
-	OsPolicyID                  *string                                                                `json:"osPolicyId"`
-	OsPolicyResourceCompliances []OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceCompliance `json:"osPolicyResourceCompliances"`
+	ComplianceState             *OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnum         `json:"complianceState,omitempty"`
+	ComplianceStateReason       *string                                                                `json:"complianceStateReason,omitempty"`
+	OsPolicyID                  *string                                                                `json:"osPolicyId,omitempty"`
+	OsPolicyResourceCompliances []OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceCompliance `json:"osPolicyResourceCompliances,omitempty"`
 }

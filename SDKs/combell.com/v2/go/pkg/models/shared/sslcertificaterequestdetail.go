@@ -1,12 +1,12 @@
 package shared
 
 type SslCertificateRequestDetail struct {
-	CertificateType *SslCertificateTypeEnum            `json:"certificate_type"`
-	CommonName      *string                            `json:"common_name"`
-	ID              *int32                             `json:"id"`
-	OrderCode       *string                            `json:"order_code"`
-	SubjectAltNames []SslSubjectAltName                `json:"subject_alt_names"`
-	ValidationLevel *SslCertificateValidationLevelEnum `json:"validation_level"`
-	Validations     []SslCertificateRequestValidation  `json:"validations"`
-	Vendor          *SslCertificateVendorEnum          `json:"vendor"`
+	CertificateType *SslCertificateTypeEnum            `json:"certificate_type,omitempty"`
+	CommonName      *string                            `json:"common_name,omitempty"`
+	ID              *int32                             `json:"id,omitempty"`
+	OrderCode       *string                            `json:"order_code,omitempty"`
+	SubjectAltNames []SslSubjectAltName                `json:"subject_alt_names,omitempty"`
+	ValidationLevel *SslCertificateValidationLevelEnum `json:"validation_level,omitempty"`
+	Validations     []SslCertificateRequestValidation  `json:"validations,omitempty"`
+	Vendor          *SslCertificateVendorEnum          `json:"vendor,omitempty"`
 }

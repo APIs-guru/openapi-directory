@@ -1,6 +1,6 @@
 package shared
 
 type DmsTransferSettings struct {
-	BucketName           *string `json:"BucketName"`
-	ServiceAccessRoleArn *string `json:"ServiceAccessRoleArn"`
+	BucketName           *string `json:"BucketName,omitempty"`
+	ServiceAccessRoleArn *string `json:"ServiceAccessRoleArn,omitempty"`
 }

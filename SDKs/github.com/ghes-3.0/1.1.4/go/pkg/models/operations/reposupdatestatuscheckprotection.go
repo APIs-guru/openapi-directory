@@ -11,8 +11,8 @@ type ReposUpdateStatusCheckProtectionPathParams struct {
 }
 
 type ReposUpdateStatusCheckProtectionRequestBody struct {
-	Contexts []string `json:"contexts"`
-	Strict   *bool    `json:"strict"`
+	Contexts []string `json:"contexts,omitempty"`
+	Strict   *bool    `json:"strict,omitempty"`
 }
 
 type ReposUpdateStatusCheckProtectionRequest struct {

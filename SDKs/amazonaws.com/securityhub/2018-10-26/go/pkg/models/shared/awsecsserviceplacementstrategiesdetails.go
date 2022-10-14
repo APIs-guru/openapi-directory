@@ -1,6 +1,6 @@
 package shared
 
 type AwsEcsServicePlacementStrategiesDetails struct {
-	Field *string `json:"Field"`
-	Type  *string `json:"Type"`
+	Field *string `json:"Field,omitempty"`
+	Type  *string `json:"Type,omitempty"`
 }

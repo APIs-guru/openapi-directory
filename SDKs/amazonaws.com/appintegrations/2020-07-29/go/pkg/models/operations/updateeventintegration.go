@@ -15,7 +15,7 @@ type UpdateEventIntegrationHeaders struct {
 }
 
 type UpdateEventIntegrationRequestBody struct {
-	Description *string `json:"Description"`
+	Description *string `json:"Description,omitempty"`
 }
 
 type UpdateEventIntegrationRequest struct {

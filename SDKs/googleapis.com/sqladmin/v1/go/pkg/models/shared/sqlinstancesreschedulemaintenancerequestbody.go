@@ -1,5 +1,5 @@
 package shared
 
 type SQLInstancesRescheduleMaintenanceRequestBody struct {
-	Reschedule *Reschedule `json:"reschedule"`
+	Reschedule *Reschedule `json:"reschedule,omitempty"`
 }

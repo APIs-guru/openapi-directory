@@ -5,10 +5,10 @@ import (
 )
 
 type AppDetails struct {
-	AppName         *string        `json:"AppName"`
-	AppType         *AppTypeEnum   `json:"AppType"`
-	CreationTime    *time.Time     `json:"CreationTime"`
-	DomainID        *string        `json:"DomainId"`
-	Status          *AppStatusEnum `json:"Status"`
-	UserProfileName *string        `json:"UserProfileName"`
+	AppName         *string        `json:"AppName,omitempty"`
+	AppType         *AppTypeEnum   `json:"AppType,omitempty"`
+	CreationTime    *time.Time     `json:"CreationTime,omitempty"`
+	DomainID        *string        `json:"DomainId,omitempty"`
+	Status          *AppStatusEnum `json:"Status,omitempty"`
+	UserProfileName *string        `json:"UserProfileName,omitempty"`
 }

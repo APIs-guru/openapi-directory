@@ -28,11 +28,11 @@ const (
 )
 
 type ListDropletFirewalls200ApplicationJSONFirewallsInboundRulesSources struct {
-	Addresses        []string `json:"addresses"`
-	DropletIds       []int64  `json:"droplet_ids"`
-	KubernetesIds    []string `json:"kubernetes_ids"`
-	LoadBalancerUids []string `json:"load_balancer_uids"`
-	Tags             []string `json:"tags"`
+	Addresses        []string `json:"addresses,omitempty"`
+	DropletIds       []int64  `json:"droplet_ids,omitempty"`
+	KubernetesIds    []string `json:"kubernetes_ids,omitempty"`
+	LoadBalancerUids []string `json:"load_balancer_uids,omitempty"`
+	Tags             []string `json:"tags,omitempty"`
 }
 
 type ListDropletFirewalls200ApplicationJSONFirewallsInboundRules struct {
@@ -56,9 +56,9 @@ type ListDropletFirewalls200ApplicationJSONFirewallsOutboundRules struct {
 }
 
 type ListDropletFirewalls200ApplicationJSONFirewallsPendingChanges struct {
-	DropletID *int64  `json:"droplet_id"`
-	Removing  *bool   `json:"removing"`
-	Status    *string `json:"status"`
+	DropletID *int64  `json:"droplet_id,omitempty"`
+	Removing  *bool   `json:"removing,omitempty"`
+	Status    *string `json:"status,omitempty"`
 }
 
 type ListDropletFirewalls200ApplicationJSONFirewallsStatusEnum string
@@ -70,29 +70,29 @@ const (
 )
 
 type ListDropletFirewalls200ApplicationJSONFirewalls struct {
-	CreatedAt      *time.Time                                                      `json:"created_at"`
-	DropletIds     []int64                                                         `json:"droplet_ids"`
-	ID             *string                                                         `json:"id"`
-	InboundRules   []ListDropletFirewalls200ApplicationJSONFirewallsInboundRules   `json:"inbound_rules"`
-	Name           *string                                                         `json:"name"`
-	OutboundRules  []ListDropletFirewalls200ApplicationJSONFirewallsOutboundRules  `json:"outbound_rules"`
-	PendingChanges []ListDropletFirewalls200ApplicationJSONFirewallsPendingChanges `json:"pending_changes"`
-	Status         *ListDropletFirewalls200ApplicationJSONFirewallsStatusEnum      `json:"status"`
-	Tags           []string                                                        `json:"tags"`
+	CreatedAt      *time.Time                                                      `json:"created_at,omitempty"`
+	DropletIds     []int64                                                         `json:"droplet_ids,omitempty"`
+	ID             *string                                                         `json:"id,omitempty"`
+	InboundRules   []ListDropletFirewalls200ApplicationJSONFirewallsInboundRules   `json:"inbound_rules,omitempty"`
+	Name           *string                                                         `json:"name,omitempty"`
+	OutboundRules  []ListDropletFirewalls200ApplicationJSONFirewallsOutboundRules  `json:"outbound_rules,omitempty"`
+	PendingChanges []ListDropletFirewalls200ApplicationJSONFirewallsPendingChanges `json:"pending_changes,omitempty"`
+	Status         *ListDropletFirewalls200ApplicationJSONFirewallsStatusEnum      `json:"status,omitempty"`
+	Tags           []string                                                        `json:"tags,omitempty"`
 }
 
 type ListDropletFirewalls200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListDropletFirewalls200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListDropletFirewalls200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListDropletFirewalls200ApplicationJSONMeta struct {
@@ -100,15 +100,15 @@ type ListDropletFirewalls200ApplicationJSONMeta struct {
 }
 
 type ListDropletFirewalls200ApplicationJSON struct {
-	Firewalls []ListDropletFirewalls200ApplicationJSONFirewalls `json:"firewalls"`
-	Links     *ListDropletFirewalls200ApplicationJSONLinks      `json:"links"`
+	Firewalls []ListDropletFirewalls200ApplicationJSONFirewalls `json:"firewalls,omitempty"`
+	Links     *ListDropletFirewalls200ApplicationJSONLinks      `json:"links,omitempty"`
 	Meta      ListDropletFirewalls200ApplicationJSONMeta        `json:"meta"`
 }
 
 type ListDropletFirewalls401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListDropletFirewallsResponse struct {

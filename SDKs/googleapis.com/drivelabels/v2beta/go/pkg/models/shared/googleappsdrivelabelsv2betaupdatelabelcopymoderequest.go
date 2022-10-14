@@ -17,8 +17,8 @@ const (
 )
 
 type GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequest struct {
-	CopyMode       *GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequestCopyModeEnum `json:"copyMode"`
-	LanguageCode   *string                                                            `json:"languageCode"`
-	UseAdminAccess *bool                                                              `json:"useAdminAccess"`
-	View           *GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequestViewEnum     `json:"view"`
+	CopyMode       *GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequestCopyModeEnum `json:"copyMode,omitempty"`
+	LanguageCode   *string                                                            `json:"languageCode,omitempty"`
+	UseAdminAccess *bool                                                              `json:"useAdminAccess,omitempty"`
+	View           *GoogleAppsDriveLabelsV2betaUpdateLabelCopyModeRequestViewEnum     `json:"view,omitempty"`
 }

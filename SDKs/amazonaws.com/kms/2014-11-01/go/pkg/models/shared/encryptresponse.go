@@ -1,7 +1,7 @@
 package shared
 
 type EncryptResponse struct {
-	CiphertextBlob      *string                      `json:"CiphertextBlob"`
-	EncryptionAlgorithm *EncryptionAlgorithmSpecEnum `json:"EncryptionAlgorithm"`
-	KeyID               *string                      `json:"KeyId"`
+	CiphertextBlob      *string                      `json:"CiphertextBlob,omitempty"`
+	EncryptionAlgorithm *EncryptionAlgorithmSpecEnum `json:"EncryptionAlgorithm,omitempty"`
+	KeyID               *string                      `json:"KeyId,omitempty"`
 }

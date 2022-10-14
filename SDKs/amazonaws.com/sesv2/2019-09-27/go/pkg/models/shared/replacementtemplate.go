@@ -1,5 +1,5 @@
 package shared
 
 type ReplacementTemplate struct {
-	ReplacementTemplateData *string `json:"ReplacementTemplateData"`
+	ReplacementTemplateData *string `json:"ReplacementTemplateData,omitempty"`
 }

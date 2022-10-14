@@ -6,8 +6,8 @@ import (
 
 type SubscriptionApprovalNotificationNotification struct {
 	Status                SubscriptionStatusEnum `json:"status"`
-	Subscription          *HiuSubscription       `json:"subscription"`
-	SubscriptionRequestID *string                `json:"subscriptionRequestId"`
+	Subscription          *HiuSubscription       `json:"subscription,omitempty"`
+	SubscriptionRequestID *string                `json:"subscriptionRequestId,omitempty"`
 }
 
 type SubscriptionApprovalNotification struct {

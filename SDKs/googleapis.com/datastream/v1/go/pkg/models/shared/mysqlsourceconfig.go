@@ -1,7 +1,7 @@
 package shared
 
 type MysqlSourceConfig struct {
-	ExcludeObjects        *MysqlRdbms `json:"excludeObjects"`
-	IncludeObjects        *MysqlRdbms `json:"includeObjects"`
-	MaxConcurrentCdcTasks *int32      `json:"maxConcurrentCdcTasks"`
+	ExcludeObjects        *MysqlRdbms `json:"excludeObjects,omitempty"`
+	IncludeObjects        *MysqlRdbms `json:"includeObjects,omitempty"`
+	MaxConcurrentCdcTasks *int32      `json:"maxConcurrentCdcTasks,omitempty"`
 }

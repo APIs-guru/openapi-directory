@@ -1,6 +1,6 @@
 package shared
 
 type AttributeValueMetadata struct {
-	DisplayName *string      `json:"displayName"`
-	Value       *interface{} `json:"value"`
+	DisplayName *string      `json:"displayName,omitempty"`
+	Value       *interface{} `json:"value,omitempty"`
 }

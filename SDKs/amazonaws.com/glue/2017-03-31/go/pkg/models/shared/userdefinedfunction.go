@@ -5,12 +5,12 @@ import (
 )
 
 type UserDefinedFunction struct {
-	CatalogID    *string            `json:"CatalogId"`
-	ClassName    *string            `json:"ClassName"`
-	CreateTime   *time.Time         `json:"CreateTime"`
-	DatabaseName *string            `json:"DatabaseName"`
-	FunctionName *string            `json:"FunctionName"`
-	OwnerName    *string            `json:"OwnerName"`
-	OwnerType    *PrincipalTypeEnum `json:"OwnerType"`
-	ResourceUris []ResourceURI      `json:"ResourceUris"`
+	CatalogID    *string            `json:"CatalogId,omitempty"`
+	ClassName    *string            `json:"ClassName,omitempty"`
+	CreateTime   *time.Time         `json:"CreateTime,omitempty"`
+	DatabaseName *string            `json:"DatabaseName,omitempty"`
+	FunctionName *string            `json:"FunctionName,omitempty"`
+	OwnerName    *string            `json:"OwnerName,omitempty"`
+	OwnerType    *PrincipalTypeEnum `json:"OwnerType,omitempty"`
+	ResourceUris []ResourceURI      `json:"ResourceUris,omitempty"`
 }

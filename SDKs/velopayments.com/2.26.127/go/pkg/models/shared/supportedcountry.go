@@ -1,6 +1,6 @@
 package shared
 
 type SupportedCountry struct {
-	Currencies     []string `json:"currencies"`
-	IsoCountryCode *string  `json:"isoCountryCode"`
+	Currencies     []string `json:"currencies,omitempty"`
+	IsoCountryCode *string  `json:"isoCountryCode,omitempty"`
 }

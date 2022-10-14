@@ -1,15 +1,15 @@
 package shared
 
 type LinksSigningBasket struct {
-	ScaOAuth                                            *HrefType `json:"scaOAuth"`
-	ScaRedirect                                         *HrefType `json:"scaRedirect"`
-	ScaStatus                                           *HrefType `json:"scaStatus"`
-	Self                                                *HrefType `json:"self"`
-	StartAuthorisation                                  *HrefType `json:"startAuthorisation"`
-	StartAuthorisationWithAuthenticationMethodSelection *HrefType `json:"startAuthorisationWithAuthenticationMethodSelection"`
-	StartAuthorisationWithEncryptedPsuAuthentication    *HrefType `json:"startAuthorisationWithEncryptedPsuAuthentication"`
-	StartAuthorisationWithPsuAuthentication             *HrefType `json:"startAuthorisationWithPsuAuthentication"`
-	StartAuthorisationWithPsuIdentification             *HrefType `json:"startAuthorisationWithPsuIdentification"`
-	StartAuthorisationWithTransactionAuthorisation      *HrefType `json:"startAuthorisationWithTransactionAuthorisation"`
-	Status                                              *HrefType `json:"status"`
+	ScaOAuth                                            *HrefType `json:"scaOAuth,omitempty"`
+	ScaRedirect                                         *HrefType `json:"scaRedirect,omitempty"`
+	ScaStatus                                           *HrefType `json:"scaStatus,omitempty"`
+	Self                                                *HrefType `json:"self,omitempty"`
+	StartAuthorisation                                  *HrefType `json:"startAuthorisation,omitempty"`
+	StartAuthorisationWithAuthenticationMethodSelection *HrefType `json:"startAuthorisationWithAuthenticationMethodSelection,omitempty"`
+	StartAuthorisationWithEncryptedPsuAuthentication    *HrefType `json:"startAuthorisationWithEncryptedPsuAuthentication,omitempty"`
+	StartAuthorisationWithPsuAuthentication             *HrefType `json:"startAuthorisationWithPsuAuthentication,omitempty"`
+	StartAuthorisationWithPsuIdentification             *HrefType `json:"startAuthorisationWithPsuIdentification,omitempty"`
+	StartAuthorisationWithTransactionAuthorisation      *HrefType `json:"startAuthorisationWithTransactionAuthorisation,omitempty"`
+	Status                                              *HrefType `json:"status,omitempty"`
 }

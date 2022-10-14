@@ -5,10 +5,10 @@ import (
 )
 
 type PersonalAccessToken struct {
-	Created *time.Time `json:"created"`
-	Expiry  *time.Time `json:"expiry"`
-	ID      *int64     `json:"id"`
-	Label   *string    `json:"label"`
-	Scopes  *string    `json:"scopes"`
-	Token   *string    `json:"token"`
+	Created *time.Time `json:"created,omitempty"`
+	Expiry  *time.Time `json:"expiry,omitempty"`
+	ID      *int64     `json:"id,omitempty"`
+	Label   *string    `json:"label,omitempty"`
+	Scopes  *string    `json:"scopes,omitempty"`
+	Token   *string    `json:"token,omitempty"`
 }

@@ -1,15 +1,15 @@
 package shared
 
 type PolicyBindings struct {
-	Condition *Expr    `json:"condition"`
-	Members   []string `json:"members"`
-	Role      *string  `json:"role"`
+	Condition *Expr    `json:"condition,omitempty"`
+	Members   []string `json:"members,omitempty"`
+	Role      *string  `json:"role,omitempty"`
 }
 
 type Policy struct {
-	Bindings   []PolicyBindings `json:"bindings"`
-	Etag       *string          `json:"etag"`
-	Kind       *string          `json:"kind"`
-	ResourceID *string          `json:"resourceId"`
-	Version    *int32           `json:"version"`
+	Bindings   []PolicyBindings `json:"bindings,omitempty"`
+	Etag       *string          `json:"etag,omitempty"`
+	Kind       *string          `json:"kind,omitempty"`
+	ResourceID *string          `json:"resourceId,omitempty"`
+	Version    *int32           `json:"version,omitempty"`
 }

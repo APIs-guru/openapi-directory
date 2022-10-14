@@ -5,11 +5,11 @@ import (
 )
 
 type ShareFileResponseData struct {
-	Expires *time.Time `json:"expires"`
-	Link    *string    `json:"link"`
+	Expires *time.Time `json:"expires,omitempty"`
+	Link    *string    `json:"link,omitempty"`
 }
 
 type ShareFileResponse struct {
-	Data    *ShareFileResponseData `json:"data"`
-	Success *bool                  `json:"success"`
+	Data    *ShareFileResponseData `json:"data,omitempty"`
+	Success *bool                  `json:"success,omitempty"`
 }

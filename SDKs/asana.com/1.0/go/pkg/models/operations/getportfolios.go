@@ -18,7 +18,7 @@ type GetPortfoliosRequest struct {
 }
 
 type GetPortfolios200ApplicationJSON struct {
-	Data []shared.PortfolioCompact `json:"data"`
+	Data []shared.PortfolioCompact `json:"data,omitempty"`
 }
 
 type GetPortfoliosResponse struct {

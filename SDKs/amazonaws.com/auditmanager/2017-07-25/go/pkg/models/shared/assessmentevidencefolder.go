@@ -5,22 +5,22 @@ import (
 )
 
 type AssessmentEvidenceFolder struct {
-	AssessmentID                             *string    `json:"assessmentId"`
-	AssessmentReportSelectionCount           *int64     `json:"assessmentReportSelectionCount"`
-	Author                                   *string    `json:"author"`
-	ControlID                                *string    `json:"controlId"`
-	ControlName                              *string    `json:"controlName"`
-	ControlSetID                             *string    `json:"controlSetId"`
-	DataSource                               *string    `json:"dataSource"`
-	Date                                     *time.Time `json:"date"`
-	EvidenceAwsServiceSourceCount            *int64     `json:"evidenceAwsServiceSourceCount"`
-	EvidenceByTypeComplianceCheckCount       *int64     `json:"evidenceByTypeComplianceCheckCount"`
-	EvidenceByTypeComplianceCheckIssuesCount *int64     `json:"evidenceByTypeComplianceCheckIssuesCount"`
-	EvidenceByTypeConfigurationDataCount     *int64     `json:"evidenceByTypeConfigurationDataCount"`
-	EvidenceByTypeManualCount                *int64     `json:"evidenceByTypeManualCount"`
-	EvidenceByTypeUserActivityCount          *int64     `json:"evidenceByTypeUserActivityCount"`
-	EvidenceResourcesIncludedCount           *int64     `json:"evidenceResourcesIncludedCount"`
-	ID                                       *string    `json:"id"`
-	Name                                     *string    `json:"name"`
-	TotalEvidence                            *int64     `json:"totalEvidence"`
+	AssessmentID                             *string    `json:"assessmentId,omitempty"`
+	AssessmentReportSelectionCount           *int64     `json:"assessmentReportSelectionCount,omitempty"`
+	Author                                   *string    `json:"author,omitempty"`
+	ControlID                                *string    `json:"controlId,omitempty"`
+	ControlName                              *string    `json:"controlName,omitempty"`
+	ControlSetID                             *string    `json:"controlSetId,omitempty"`
+	DataSource                               *string    `json:"dataSource,omitempty"`
+	Date                                     *time.Time `json:"date,omitempty"`
+	EvidenceAwsServiceSourceCount            *int64     `json:"evidenceAwsServiceSourceCount,omitempty"`
+	EvidenceByTypeComplianceCheckCount       *int64     `json:"evidenceByTypeComplianceCheckCount,omitempty"`
+	EvidenceByTypeComplianceCheckIssuesCount *int64     `json:"evidenceByTypeComplianceCheckIssuesCount,omitempty"`
+	EvidenceByTypeConfigurationDataCount     *int64     `json:"evidenceByTypeConfigurationDataCount,omitempty"`
+	EvidenceByTypeManualCount                *int64     `json:"evidenceByTypeManualCount,omitempty"`
+	EvidenceByTypeUserActivityCount          *int64     `json:"evidenceByTypeUserActivityCount,omitempty"`
+	EvidenceResourcesIncludedCount           *int64     `json:"evidenceResourcesIncludedCount,omitempty"`
+	ID                                       *string    `json:"id,omitempty"`
+	Name                                     *string    `json:"name,omitempty"`
+	TotalEvidence                            *int64     `json:"totalEvidence,omitempty"`
 }

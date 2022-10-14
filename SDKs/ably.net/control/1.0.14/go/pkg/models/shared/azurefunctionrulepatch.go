@@ -27,23 +27,23 @@ const (
 )
 
 type AzureFunctionRulePatchTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AzureFunctionRulePatchTarget struct {
-	AzureAppID        *string                                 `json:"azureAppId"`
-	AzureFunctionName *string                                 `json:"azureFunctionName"`
-	Enveloped         *bool                                   `json:"enveloped"`
-	Format            *AzureFunctionRulePatchTargetFormatEnum `json:"format"`
-	Headers           []AzureFunctionRulePatchTargetHeaders   `json:"headers"`
-	SigningKeyID      *string                                 `json:"signingKeyId"`
+	AzureAppID        *string                                 `json:"azureAppId,omitempty"`
+	AzureFunctionName *string                                 `json:"azureFunctionName,omitempty"`
+	Enveloped         *bool                                   `json:"enveloped,omitempty"`
+	Format            *AzureFunctionRulePatchTargetFormatEnum `json:"format,omitempty"`
+	Headers           []AzureFunctionRulePatchTargetHeaders   `json:"headers,omitempty"`
+	SigningKeyID      *string                                 `json:"signingKeyId,omitempty"`
 }
 
 type AzureFunctionRulePatch struct {
-	RequestMode *AzureFunctionRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *AzureFunctionRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                            `json:"source"`
-	Status      *AzureFunctionRulePatchStatusEnum      `json:"status"`
-	Target      *AzureFunctionRulePatchTarget          `json:"target"`
+	RequestMode *AzureFunctionRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *AzureFunctionRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                            `json:"source,omitempty"`
+	Status      *AzureFunctionRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *AzureFunctionRulePatchTarget          `json:"target,omitempty"`
 }

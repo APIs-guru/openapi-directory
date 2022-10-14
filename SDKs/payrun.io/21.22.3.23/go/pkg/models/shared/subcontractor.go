@@ -5,19 +5,19 @@ import (
 )
 
 type SubContractorSubContractorAddressAddress struct {
-	Address1 *string `json:"Address1"`
-	Address2 *string `json:"Address2"`
-	Address3 *string `json:"Address3"`
-	Address4 *string `json:"Address4"`
-	Country  *string `json:"Country"`
-	Postcode *string `json:"Postcode"`
+	Address1 *string `json:"Address1,omitempty"`
+	Address2 *string `json:"Address2,omitempty"`
+	Address3 *string `json:"Address3,omitempty"`
+	Address4 *string `json:"Address4,omitempty"`
+	Country  *string `json:"Country,omitempty"`
+	Postcode *string `json:"Postcode,omitempty"`
 }
 
 type SubContractorSubContractorBankAccountBankAccount struct {
-	AccountName   *string `json:"AccountName"`
-	AccountNumber *string `json:"AccountNumber"`
-	Reference     *string `json:"Reference"`
-	SortCode      *string `json:"SortCode"`
+	AccountName   *string `json:"AccountName,omitempty"`
+	AccountNumber *string `json:"AccountNumber,omitempty"`
+	Reference     *string `json:"Reference,omitempty"`
+	SortCode      *string `json:"SortCode,omitempty"`
 }
 
 type SubContractorSubContractorBusinessTypeBusinessTypeEnum string
@@ -71,38 +71,38 @@ const (
 )
 
 type SubContractorSubContractorSubContractor struct {
-	Address                       *SubContractorSubContractorAddressAddress                   `json:"Address"`
-	BankAccount                   *SubContractorSubContractorBankAccountBankAccount           `json:"BankAccount"`
-	BusinessType                  *SubContractorSubContractorBusinessTypeBusinessTypeEnum     `json:"BusinessType"`
-	CompanyName                   *string                                                     `json:"CompanyName"`
-	CompanyRegistrationNumber     *string                                                     `json:"CompanyRegistrationNumber"`
-	Deactivated                   *bool                                                       `json:"Deactivated"`
-	EffectiveDate                 *time.Time                                                  `json:"EffectiveDate"`
-	FirstName                     *string                                                     `json:"FirstName"`
-	Initials                      *string                                                     `json:"Initials"`
-	LastName                      *string                                                     `json:"LastName"`
-	MetaData                      map[string]interface{}                                      `json:"MetaData"`
-	MiddleName                    *string                                                     `json:"MiddleName"`
-	NiNumber                      *string                                                     `json:"NiNumber"`
-	PartnershipName               *string                                                     `json:"PartnershipName"`
-	PartnershipUniqueTaxReference *string                                                     `json:"PartnershipUniqueTaxReference"`
-	PayFrequency                  *SubContractorSubContractorPayFrequencyPayFrequencyEnum     `json:"PayFrequency"`
-	PaymentMethod                 *SubContractorSubContractorPaymentMethodPaymentMethodEnum   `json:"PaymentMethod"`
-	Region                        *SubContractorSubContractorRegionRegionEnum                 `json:"Region"`
-	Revision                      *int32                                                      `json:"Revision"`
-	TaxationStatus                *SubContractorSubContractorTaxationStatusTaxationStatusEnum `json:"TaxationStatus"`
-	Telephone                     *string                                                     `json:"Telephone"`
-	Territory                     *SubContractorSubContractorTerritoryTerritoryEnum           `json:"Territory"`
-	Title                         *string                                                     `json:"Title"`
-	TradingName                   *string                                                     `json:"TradingName"`
-	UniqueTaxReference            *string                                                     `json:"UniqueTaxReference"`
-	VatRegistered                 *bool                                                       `json:"VatRegistered"`
-	VatRegistrationNumber         *string                                                     `json:"VatRegistrationNumber"`
-	VerificationDate              *time.Time                                                  `json:"VerificationDate"`
-	VerificationNumber            *string                                                     `json:"VerificationNumber"`
-	WorksNumber                   *string                                                     `json:"WorksNumber"`
+	Address                       *SubContractorSubContractorAddressAddress                   `json:"Address,omitempty"`
+	BankAccount                   *SubContractorSubContractorBankAccountBankAccount           `json:"BankAccount,omitempty"`
+	BusinessType                  *SubContractorSubContractorBusinessTypeBusinessTypeEnum     `json:"BusinessType,omitempty"`
+	CompanyName                   *string                                                     `json:"CompanyName,omitempty"`
+	CompanyRegistrationNumber     *string                                                     `json:"CompanyRegistrationNumber,omitempty"`
+	Deactivated                   *bool                                                       `json:"Deactivated,omitempty"`
+	EffectiveDate                 *time.Time                                                  `json:"EffectiveDate,omitempty"`
+	FirstName                     *string                                                     `json:"FirstName,omitempty"`
+	Initials                      *string                                                     `json:"Initials,omitempty"`
+	LastName                      *string                                                     `json:"LastName,omitempty"`
+	MetaData                      map[string]interface{}                                      `json:"MetaData,omitempty"`
+	MiddleName                    *string                                                     `json:"MiddleName,omitempty"`
+	NiNumber                      *string                                                     `json:"NiNumber,omitempty"`
+	PartnershipName               *string                                                     `json:"PartnershipName,omitempty"`
+	PartnershipUniqueTaxReference *string                                                     `json:"PartnershipUniqueTaxReference,omitempty"`
+	PayFrequency                  *SubContractorSubContractorPayFrequencyPayFrequencyEnum     `json:"PayFrequency,omitempty"`
+	PaymentMethod                 *SubContractorSubContractorPaymentMethodPaymentMethodEnum   `json:"PaymentMethod,omitempty"`
+	Region                        *SubContractorSubContractorRegionRegionEnum                 `json:"Region,omitempty"`
+	Revision                      *int32                                                      `json:"Revision,omitempty"`
+	TaxationStatus                *SubContractorSubContractorTaxationStatusTaxationStatusEnum `json:"TaxationStatus,omitempty"`
+	Telephone                     *string                                                     `json:"Telephone,omitempty"`
+	Territory                     *SubContractorSubContractorTerritoryTerritoryEnum           `json:"Territory,omitempty"`
+	Title                         *string                                                     `json:"Title,omitempty"`
+	TradingName                   *string                                                     `json:"TradingName,omitempty"`
+	UniqueTaxReference            *string                                                     `json:"UniqueTaxReference,omitempty"`
+	VatRegistered                 *bool                                                       `json:"VatRegistered,omitempty"`
+	VatRegistrationNumber         *string                                                     `json:"VatRegistrationNumber,omitempty"`
+	VerificationDate              *time.Time                                                  `json:"VerificationDate,omitempty"`
+	VerificationNumber            *string                                                     `json:"VerificationNumber,omitempty"`
+	WorksNumber                   *string                                                     `json:"WorksNumber,omitempty"`
 }
 
 type SubContractor struct {
-	SubContractor *SubContractorSubContractorSubContractor `json:"SubContractor"`
+	SubContractor *SubContractorSubContractorSubContractor `json:"SubContractor,omitempty"`
 }

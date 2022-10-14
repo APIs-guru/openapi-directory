@@ -9,6 +9,6 @@ const (
 )
 
 type DimensionCompatibility struct {
-	Compatibility     *DimensionCompatibilityCompatibilityEnum `json:"compatibility"`
-	DimensionMetadata *DimensionMetadata                       `json:"dimensionMetadata"`
+	Compatibility     *DimensionCompatibilityCompatibilityEnum `json:"compatibility,omitempty"`
+	DimensionMetadata *DimensionMetadata                       `json:"dimensionMetadata,omitempty"`
 }

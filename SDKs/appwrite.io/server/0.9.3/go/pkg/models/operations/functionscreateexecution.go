@@ -9,7 +9,7 @@ type FunctionsCreateExecutionPathParams struct {
 }
 
 type FunctionsCreateExecutionRequestBody struct {
-	Data *string `json:"data"`
+	Data *string `json:"data,omitempty"`
 }
 
 type FunctionsCreateExecutionSecurity struct {

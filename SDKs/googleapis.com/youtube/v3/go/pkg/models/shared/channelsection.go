@@ -1,11 +1,11 @@
 package shared
 
 type ChannelSection struct {
-	ContentDetails *ChannelSectionContentDetails         `json:"contentDetails"`
-	Etag           *string                               `json:"etag"`
-	ID             *string                               `json:"id"`
-	Kind           *string                               `json:"kind"`
-	Localizations  map[string]ChannelSectionLocalization `json:"localizations"`
-	Snippet        *ChannelSectionSnippet                `json:"snippet"`
-	Targeting      *ChannelSectionTargeting              `json:"targeting"`
+	ContentDetails *ChannelSectionContentDetails         `json:"contentDetails,omitempty"`
+	Etag           *string                               `json:"etag,omitempty"`
+	ID             *string                               `json:"id,omitempty"`
+	Kind           *string                               `json:"kind,omitempty"`
+	Localizations  map[string]ChannelSectionLocalization `json:"localizations,omitempty"`
+	Snippet        *ChannelSectionSnippet                `json:"snippet,omitempty"`
+	Targeting      *ChannelSectionTargeting              `json:"targeting,omitempty"`
 }

@@ -15,7 +15,7 @@ type PutAccountSuppressionAttributesHeaders struct {
 }
 
 type PutAccountSuppressionAttributesRequestBody struct {
-	SuppressedReasons []shared.SuppressionListReasonEnum `json:"SuppressedReasons"`
+	SuppressedReasons []shared.SuppressionListReasonEnum `json:"SuppressedReasons,omitempty"`
 }
 
 type PutAccountSuppressionAttributesRequest struct {

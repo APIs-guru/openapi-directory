@@ -20,10 +20,10 @@ const (
 )
 
 type CommuteFilter struct {
-	AllowImpreciseAddresses *bool                           `json:"allowImpreciseAddresses"`
-	CommuteMethod           *CommuteFilterCommuteMethodEnum `json:"commuteMethod"`
-	DepartureTime           *TimeOfDay                      `json:"departureTime"`
-	RoadTraffic             *CommuteFilterRoadTrafficEnum   `json:"roadTraffic"`
-	StartCoordinates        *LatLng                         `json:"startCoordinates"`
-	TravelDuration          *string                         `json:"travelDuration"`
+	AllowImpreciseAddresses *bool                           `json:"allowImpreciseAddresses,omitempty"`
+	CommuteMethod           *CommuteFilterCommuteMethodEnum `json:"commuteMethod,omitempty"`
+	DepartureTime           *TimeOfDay                      `json:"departureTime,omitempty"`
+	RoadTraffic             *CommuteFilterRoadTrafficEnum   `json:"roadTraffic,omitempty"`
+	StartCoordinates        *LatLng                         `json:"startCoordinates,omitempty"`
+	TravelDuration          *string                         `json:"travelDuration,omitempty"`
 }

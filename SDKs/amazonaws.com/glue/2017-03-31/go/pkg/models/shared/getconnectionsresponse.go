@@ -1,6 +1,6 @@
 package shared
 
 type GetConnectionsResponse struct {
-	ConnectionList []Connection `json:"ConnectionList"`
-	NextToken      *string      `json:"NextToken"`
+	ConnectionList []Connection `json:"ConnectionList,omitempty"`
+	NextToken      *string      `json:"NextToken,omitempty"`
 }

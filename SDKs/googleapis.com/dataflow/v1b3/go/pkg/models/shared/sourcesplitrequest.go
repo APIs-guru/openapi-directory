@@ -1,6 +1,6 @@
 package shared
 
 type SourceSplitRequest struct {
-	Options *SourceSplitOptions `json:"options"`
-	Source  *Source             `json:"source"`
+	Options *SourceSplitOptions `json:"options,omitempty"`
+	Source  *Source             `json:"source,omitempty"`
 }

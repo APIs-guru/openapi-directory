@@ -1,7 +1,7 @@
 package shared
 
 type PartialFindResultReleaseEventSeriesForAPIContract struct {
-	Items      []ReleaseEventSeriesForAPIContract `json:"items"`
-	Term       *string                            `json:"term"`
-	TotalCount *int32                             `json:"totalCount"`
+	Items      []ReleaseEventSeriesForAPIContract `json:"items,omitempty"`
+	Term       *string                            `json:"term,omitempty"`
+	TotalCount *int32                             `json:"totalCount,omitempty"`
 }

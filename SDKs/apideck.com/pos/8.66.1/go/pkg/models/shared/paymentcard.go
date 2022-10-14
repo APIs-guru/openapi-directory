@@ -37,20 +37,20 @@ const (
 )
 
 type PaymentCard struct {
-	BillingAddress *Address                    `json:"billing_address"`
-	Bin            *string                     `json:"bin"`
-	CardBrand      *PaymentCardCardBrandEnum   `json:"card_brand"`
-	CardType       *PaymentCardCardTypeEnum    `json:"card_type"`
-	CardholderName *string                     `json:"cardholder_name"`
-	CustomerID     *string                     `json:"customer_id"`
-	Enabled        *bool                       `json:"enabled"`
-	ExpMonth       *int64                      `json:"exp_month"`
-	ExpYear        *int64                      `json:"exp_year"`
-	Fingerprint    *string                     `json:"fingerprint"`
-	ID             *string                     `json:"id"`
-	Last4          *string                     `json:"last_4"`
-	MerchantID     *string                     `json:"merchant_id"`
-	PrepaidType    *PaymentCardPrepaidTypeEnum `json:"prepaid_type"`
-	ReferenceID    *string                     `json:"reference_id"`
-	Version        *string                     `json:"version"`
+	BillingAddress *Address                    `json:"billing_address,omitempty"`
+	Bin            *string                     `json:"bin,omitempty"`
+	CardBrand      *PaymentCardCardBrandEnum   `json:"card_brand,omitempty"`
+	CardType       *PaymentCardCardTypeEnum    `json:"card_type,omitempty"`
+	CardholderName *string                     `json:"cardholder_name,omitempty"`
+	CustomerID     *string                     `json:"customer_id,omitempty"`
+	Enabled        *bool                       `json:"enabled,omitempty"`
+	ExpMonth       *int64                      `json:"exp_month,omitempty"`
+	ExpYear        *int64                      `json:"exp_year,omitempty"`
+	Fingerprint    *string                     `json:"fingerprint,omitempty"`
+	ID             *string                     `json:"id,omitempty"`
+	Last4          *string                     `json:"last_4,omitempty"`
+	MerchantID     *string                     `json:"merchant_id,omitempty"`
+	PrepaidType    *PaymentCardPrepaidTypeEnum `json:"prepaid_type,omitempty"`
+	ReferenceID    *string                     `json:"reference_id,omitempty"`
+	Version        *string                     `json:"version,omitempty"`
 }

@@ -36,8 +36,8 @@ type GamesListRequest struct {
 
 type GamesList200ApplicationJSON struct {
 	Count    int64         `json:"count"`
-	Next     *string       `json:"next"`
-	Previous *string       `json:"previous"`
+	Next     *string       `json:"next,omitempty"`
+	Previous *string       `json:"previous,omitempty"`
 	Results  []shared.Game `json:"results"`
 }
 

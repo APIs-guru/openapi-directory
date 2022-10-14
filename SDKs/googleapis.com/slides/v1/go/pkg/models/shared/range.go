@@ -10,7 +10,7 @@ const (
 )
 
 type Range struct {
-	EndIndex   *int32         `json:"endIndex"`
-	StartIndex *int32         `json:"startIndex"`
-	Type       *RangeTypeEnum `json:"type"`
+	EndIndex   *int32         `json:"endIndex,omitempty"`
+	StartIndex *int32         `json:"startIndex,omitempty"`
+	Type       *RangeTypeEnum `json:"type,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type ChannelStatistics struct {
-	CommentCount          *string `json:"commentCount"`
-	HiddenSubscriberCount *bool   `json:"hiddenSubscriberCount"`
-	SubscriberCount       *string `json:"subscriberCount"`
-	VideoCount            *string `json:"videoCount"`
-	ViewCount             *string `json:"viewCount"`
+	CommentCount          *string `json:"commentCount,omitempty"`
+	HiddenSubscriberCount *bool   `json:"hiddenSubscriberCount,omitempty"`
+	SubscriberCount       *string `json:"subscriberCount,omitempty"`
+	VideoCount            *string `json:"videoCount,omitempty"`
+	ViewCount             *string `json:"viewCount,omitempty"`
 }

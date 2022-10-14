@@ -16,7 +16,7 @@ type DescribeRobotApplicationHeaders struct {
 
 type DescribeRobotApplicationRequestBody struct {
 	Application        string  `json:"application"`
-	ApplicationVersion *string `json:"applicationVersion"`
+	ApplicationVersion *string `json:"applicationVersion,omitempty"`
 }
 
 type DescribeRobotApplicationRequest struct {

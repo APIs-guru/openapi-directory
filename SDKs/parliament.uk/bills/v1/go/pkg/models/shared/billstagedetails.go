@@ -5,16 +5,16 @@ import (
 )
 
 type BillStageDetails struct {
-	Abbreviation             *string            `json:"abbreviation"`
-	Committee                *Committee         `json:"committee"`
-	Description              *string            `json:"description"`
-	House                    *HouseEnum         `json:"house"`
-	ID                       *int32             `json:"id"`
-	LastUpdate               *time.Time         `json:"lastUpdate"`
-	NextStageBillStageID     *int32             `json:"nextStageBillStageId"`
-	PreviousStageBillStageID *int32             `json:"previousStageBillStageId"`
-	SessionID                *int32             `json:"sessionId"`
-	SortOrder                *int32             `json:"sortOrder"`
-	StageID                  *int32             `json:"stageId"`
-	StageSittings            []BillStageSitting `json:"stageSittings"`
+	Abbreviation             *string            `json:"abbreviation,omitempty"`
+	Committee                *Committee         `json:"committee,omitempty"`
+	Description              *string            `json:"description,omitempty"`
+	House                    *HouseEnum         `json:"house,omitempty"`
+	ID                       *int32             `json:"id,omitempty"`
+	LastUpdate               *time.Time         `json:"lastUpdate,omitempty"`
+	NextStageBillStageID     *int32             `json:"nextStageBillStageId,omitempty"`
+	PreviousStageBillStageID *int32             `json:"previousStageBillStageId,omitempty"`
+	SessionID                *int32             `json:"sessionId,omitempty"`
+	SortOrder                *int32             `json:"sortOrder,omitempty"`
+	StageID                  *int32             `json:"stageId,omitempty"`
+	StageSittings            []BillStageSitting `json:"stageSittings,omitempty"`
 }

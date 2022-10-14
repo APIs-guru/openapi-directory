@@ -32,21 +32,21 @@ const (
 )
 
 type BackupRun struct {
-	BackupKind                  *BackupRunBackupKindEnum     `json:"backupKind"`
-	Description                 *string                      `json:"description"`
-	DiskEncryptionConfiguration *DiskEncryptionConfiguration `json:"diskEncryptionConfiguration"`
-	DiskEncryptionStatus        *DiskEncryptionStatus        `json:"diskEncryptionStatus"`
-	EndTime                     *string                      `json:"endTime"`
-	EnqueuedTime                *string                      `json:"enqueuedTime"`
-	Error                       *OperationError              `json:"error"`
-	ID                          *string                      `json:"id"`
-	Instance                    *string                      `json:"instance"`
-	Kind                        *string                      `json:"kind"`
-	Location                    *string                      `json:"location"`
-	SelfLink                    *string                      `json:"selfLink"`
-	StartTime                   *string                      `json:"startTime"`
-	Status                      *BackupRunStatusEnum         `json:"status"`
-	TimeZone                    *string                      `json:"timeZone"`
-	Type                        *BackupRunTypeEnum           `json:"type"`
-	WindowStartTime             *string                      `json:"windowStartTime"`
+	BackupKind                  *BackupRunBackupKindEnum     `json:"backupKind,omitempty"`
+	Description                 *string                      `json:"description,omitempty"`
+	DiskEncryptionConfiguration *DiskEncryptionConfiguration `json:"diskEncryptionConfiguration,omitempty"`
+	DiskEncryptionStatus        *DiskEncryptionStatus        `json:"diskEncryptionStatus,omitempty"`
+	EndTime                     *string                      `json:"endTime,omitempty"`
+	EnqueuedTime                *string                      `json:"enqueuedTime,omitempty"`
+	Error                       *OperationError              `json:"error,omitempty"`
+	ID                          *string                      `json:"id,omitempty"`
+	Instance                    *string                      `json:"instance,omitempty"`
+	Kind                        *string                      `json:"kind,omitempty"`
+	Location                    *string                      `json:"location,omitempty"`
+	SelfLink                    *string                      `json:"selfLink,omitempty"`
+	StartTime                   *string                      `json:"startTime,omitempty"`
+	Status                      *BackupRunStatusEnum         `json:"status,omitempty"`
+	TimeZone                    *string                      `json:"timeZone,omitempty"`
+	Type                        *BackupRunTypeEnum           `json:"type,omitempty"`
+	WindowStartTime             *string                      `json:"windowStartTime,omitempty"`
 }

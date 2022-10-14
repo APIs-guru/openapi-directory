@@ -28,7 +28,7 @@ type AddLinodeIPRequest struct {
 }
 
 type AddLinodeIPDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type AddLinodeIPResponse struct {

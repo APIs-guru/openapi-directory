@@ -5,17 +5,17 @@ type UpdateEnvironmentPathParams struct {
 }
 
 type UpdateEnvironmentRequestBodyEnvironmentValues struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type UpdateEnvironmentRequestBodyEnvironment struct {
-	Name   *string                                         `json:"name"`
-	Values []UpdateEnvironmentRequestBodyEnvironmentValues `json:"values"`
+	Name   *string                                         `json:"name,omitempty"`
+	Values []UpdateEnvironmentRequestBodyEnvironmentValues `json:"values,omitempty"`
 }
 
 type UpdateEnvironmentRequestBody struct {
-	Environment *UpdateEnvironmentRequestBodyEnvironment `json:"environment"`
+	Environment *UpdateEnvironmentRequestBodyEnvironment `json:"environment,omitempty"`
 }
 
 type UpdateEnvironmentRequest struct {
@@ -24,22 +24,22 @@ type UpdateEnvironmentRequest struct {
 }
 
 type UpdateEnvironment200ApplicationJSONEnvironment struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type UpdateEnvironment200ApplicationJSON struct {
-	Environment *UpdateEnvironment200ApplicationJSONEnvironment `json:"environment"`
+	Environment *UpdateEnvironment200ApplicationJSONEnvironment `json:"environment,omitempty"`
 }
 
 type UpdateEnvironment400ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type UpdateEnvironment400ApplicationJSON struct {
-	Error *UpdateEnvironment400ApplicationJSONError `json:"error"`
+	Error *UpdateEnvironment400ApplicationJSONError `json:"error,omitempty"`
 }
 
 type UpdateEnvironmentResponse struct {

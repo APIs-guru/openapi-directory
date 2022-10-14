@@ -19,7 +19,7 @@ type GetSamplingRulesHeaders struct {
 }
 
 type GetSamplingRulesRequestBody struct {
-	NextToken *string `json:"NextToken"`
+	NextToken *string `json:"NextToken,omitempty"`
 }
 
 type GetSamplingRulesRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeScalingPlanResourcesResponse struct {
-	NextToken            *string               `json:"NextToken"`
-	ScalingPlanResources []ScalingPlanResource `json:"ScalingPlanResources"`
+	NextToken            *string               `json:"NextToken,omitempty"`
+	ScalingPlanResources []ScalingPlanResource `json:"ScalingPlanResources,omitempty"`
 }

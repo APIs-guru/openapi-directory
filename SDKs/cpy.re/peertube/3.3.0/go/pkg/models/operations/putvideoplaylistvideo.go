@@ -10,8 +10,8 @@ type PutVideoPlaylistVideoPathParams struct {
 }
 
 type PutVideoPlaylistVideoRequestBody struct {
-	StartTimestamp *int64 `json:"startTimestamp"`
-	StopTimestamp  *int64 `json:"stopTimestamp"`
+	StartTimestamp *int64 `json:"startTimestamp,omitempty"`
+	StopTimestamp  *int64 `json:"stopTimestamp,omitempty"`
 }
 
 type PutVideoPlaylistVideoSecurity struct {

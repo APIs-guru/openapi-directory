@@ -1,10 +1,10 @@
 package shared
 
 type User struct {
-	DisplayName  *string `json:"displayName"`
-	EmailAddress *string `json:"emailAddress"`
-	Kind         *string `json:"kind"`
-	Me           *bool   `json:"me"`
-	PermissionID *string `json:"permissionId"`
-	PhotoLink    *string `json:"photoLink"`
+	DisplayName  *string `json:"displayName,omitempty"`
+	EmailAddress *string `json:"emailAddress,omitempty"`
+	Kind         *string `json:"kind,omitempty"`
+	Me           *bool   `json:"me,omitempty"`
+	PermissionID *string `json:"permissionId,omitempty"`
+	PhotoLink    *string `json:"photoLink,omitempty"`
 }

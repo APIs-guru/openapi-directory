@@ -5,7 +5,7 @@ import (
 )
 
 type SamplingStatisticsDocument struct {
-	BorrowCount  *int64    `json:"BorrowCount"`
+	BorrowCount  *int64    `json:"BorrowCount,omitempty"`
 	ClientID     string    `json:"ClientID"`
 	RequestCount int64     `json:"RequestCount"`
 	RuleName     string    `json:"RuleName"`

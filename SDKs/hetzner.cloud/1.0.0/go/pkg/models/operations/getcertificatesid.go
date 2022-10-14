@@ -9,8 +9,8 @@ type GetCertificatesIDRequest struct {
 }
 
 type GetCertificatesID200ApplicationJSONCertificateStatusError struct {
-	Code    *string `json:"code"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum string
@@ -31,9 +31,9 @@ const (
 )
 
 type GetCertificatesID200ApplicationJSONCertificateStatus struct {
-	Error    *GetCertificatesID200ApplicationJSONCertificateStatusError        `json:"error"`
-	Issuance *GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum `json:"issuance"`
-	Renewal  *GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum  `json:"renewal"`
+	Error    *GetCertificatesID200ApplicationJSONCertificateStatusError        `json:"error,omitempty"`
+	Issuance *GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
+	Renewal  *GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum  `json:"renewal,omitempty"`
 }
 
 type GetCertificatesID200ApplicationJSONCertificateTypeEnum string
@@ -58,8 +58,8 @@ type GetCertificatesID200ApplicationJSONCertificateCertificate struct {
 	Name           string                                                  `json:"name"`
 	NotValidAfter  string                                                  `json:"not_valid_after"`
 	NotValidBefore string                                                  `json:"not_valid_before"`
-	Status         *GetCertificatesID200ApplicationJSONCertificateStatus   `json:"status"`
-	Type           *GetCertificatesID200ApplicationJSONCertificateTypeEnum `json:"type"`
+	Status         *GetCertificatesID200ApplicationJSONCertificateStatus   `json:"status,omitempty"`
+	Type           *GetCertificatesID200ApplicationJSONCertificateTypeEnum `json:"type,omitempty"`
 	UsedBy         []GetCertificatesID200ApplicationJSONCertificateUsedBy  `json:"used_by"`
 }
 

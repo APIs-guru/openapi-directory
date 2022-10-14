@@ -16,8 +16,8 @@ const (
 )
 
 type NooclRequestBody struct {
-	CertificateParameters *NooclRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *NooclRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                NooclRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Noocl400ApplicationJSON struct {
-	Error            *Noocl400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Noocl400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Noocl400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Noocl400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Noocl401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Noocl401ApplicationJSON struct {
-	Error            *Noocl401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Noocl401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Noocl401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Noocl401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Noocl404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Noocl404ApplicationJSON struct {
-	Error            *Noocl404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Noocl404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Noocl404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Noocl404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Noocl500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Noocl500ApplicationJSON struct {
-	Error            *Noocl500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Noocl500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Noocl500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Noocl500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Noocl502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Noocl502ApplicationJSON struct {
-	Error            *Noocl502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Noocl502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Noocl502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Noocl502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Noocl503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Noocl503ApplicationJSON struct {
-	Error            *Noocl503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Noocl503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Noocl503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Noocl503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Noocl504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Noocl504ApplicationJSON struct {
-	Error            *Noocl504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Noocl504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Noocl504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Noocl504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type NooclResponse struct {

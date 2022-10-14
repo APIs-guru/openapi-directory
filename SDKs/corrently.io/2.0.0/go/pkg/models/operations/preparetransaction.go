@@ -11,11 +11,11 @@ const (
 )
 
 type PrepareTransactionRequestBody struct {
-	Account   *string                                     `json:"account"`
-	Signature *string                                     `json:"signature"`
-	To        *string                                     `json:"to"`
-	Value     *int64                                      `json:"value"`
-	Variation *PrepareTransactionRequestBodyVariationEnum `json:"variation"`
+	Account   *string                                     `json:"account,omitempty"`
+	Signature *string                                     `json:"signature,omitempty"`
+	To        *string                                     `json:"to,omitempty"`
+	Value     *int64                                      `json:"value,omitempty"`
+	Variation *PrepareTransactionRequestBodyVariationEnum `json:"variation,omitempty"`
 }
 
 type PrepareTransactionRequest struct {

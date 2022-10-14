@@ -1,6 +1,6 @@
 package shared
 
 type DescribeDirectConnectGatewayAssociationsResult struct {
-	DirectConnectGatewayAssociations []DirectConnectGatewayAssociation `json:"directConnectGatewayAssociations"`
-	NextToken                        *string                           `json:"nextToken"`
+	DirectConnectGatewayAssociations []DirectConnectGatewayAssociation `json:"directConnectGatewayAssociations,omitempty"`
+	NextToken                        *string                           `json:"nextToken,omitempty"`
 }

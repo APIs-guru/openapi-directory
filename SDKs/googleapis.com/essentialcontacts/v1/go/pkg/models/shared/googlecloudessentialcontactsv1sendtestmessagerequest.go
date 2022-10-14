@@ -15,6 +15,6 @@ const (
 )
 
 type GoogleCloudEssentialcontactsV1SendTestMessageRequest struct {
-	Contacts             []string                                                                      `json:"contacts"`
-	NotificationCategory *GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum `json:"notificationCategory"`
+	Contacts             []string                                                                      `json:"contacts,omitempty"`
+	NotificationCategory *GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum `json:"notificationCategory,omitempty"`
 }

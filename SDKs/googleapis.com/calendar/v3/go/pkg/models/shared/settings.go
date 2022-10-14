@@ -1,9 +1,9 @@
 package shared
 
 type Settings struct {
-	Etag          *string   `json:"etag"`
-	Items         []Setting `json:"items"`
-	Kind          *string   `json:"kind"`
-	NextPageToken *string   `json:"nextPageToken"`
-	NextSyncToken *string   `json:"nextSyncToken"`
+	Etag          *string   `json:"etag,omitempty"`
+	Items         []Setting `json:"items,omitempty"`
+	Kind          *string   `json:"kind,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	NextSyncToken *string   `json:"nextSyncToken,omitempty"`
 }

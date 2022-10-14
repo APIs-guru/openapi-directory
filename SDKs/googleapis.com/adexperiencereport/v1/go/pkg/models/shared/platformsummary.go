@@ -29,11 +29,11 @@ const (
 )
 
 type PlatformSummary struct {
-	BetterAdsStatus *PlatformSummaryBetterAdsStatusEnum `json:"betterAdsStatus"`
-	EnforcementTime *string                             `json:"enforcementTime"`
-	FilterStatus    *PlatformSummaryFilterStatusEnum    `json:"filterStatus"`
-	LastChangeTime  *string                             `json:"lastChangeTime"`
-	Region          []PlatformSummaryRegionEnum         `json:"region"`
-	ReportURL       *string                             `json:"reportUrl"`
-	UnderReview     *bool                               `json:"underReview"`
+	BetterAdsStatus *PlatformSummaryBetterAdsStatusEnum `json:"betterAdsStatus,omitempty"`
+	EnforcementTime *string                             `json:"enforcementTime,omitempty"`
+	FilterStatus    *PlatformSummaryFilterStatusEnum    `json:"filterStatus,omitempty"`
+	LastChangeTime  *string                             `json:"lastChangeTime,omitempty"`
+	Region          []PlatformSummaryRegionEnum         `json:"region,omitempty"`
+	ReportURL       *string                             `json:"reportUrl,omitempty"`
+	UnderReview     *bool                               `json:"underReview,omitempty"`
 }

@@ -10,7 +10,7 @@ var PostImagesUploadServers = []string{
 }
 
 type PostImagesUploadRequestBody struct {
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	Label       string  `json:"label"`
 	Region      string  `json:"region"`
 }
@@ -35,12 +35,12 @@ type PostImagesUploadRequest struct {
 }
 
 type PostImagesUpload200ApplicationJSON struct {
-	Image    *shared.ImagePrivate `json:"image"`
-	UploadTo *string              `json:"upload_to"`
+	Image    *shared.ImagePrivate `json:"image,omitempty"`
+	UploadTo *string              `json:"upload_to,omitempty"`
 }
 
 type PostImagesUploadDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type PostImagesUploadResponse struct {

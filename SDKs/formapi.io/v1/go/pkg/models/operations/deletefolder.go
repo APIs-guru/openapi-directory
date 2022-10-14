@@ -18,10 +18,10 @@ type DeleteFolderRequest struct {
 }
 
 type DeleteFolder200ApplicationJSONFolder struct {
-	ID             *string `json:"id"`
-	Name           *string `json:"name"`
-	ParentFolderID *string `json:"parent_folder_id"`
-	Path           *string `json:"path"`
+	ID             *string `json:"id,omitempty"`
+	Name           *string `json:"name,omitempty"`
+	ParentFolderID *string `json:"parent_folder_id,omitempty"`
+	Path           *string `json:"path,omitempty"`
 }
 
 type DeleteFolderResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type ScanData struct {
-	Data      *VisualizationData `json:"data"`
-	EndTime   *string            `json:"endTime"`
-	StartTime *string            `json:"startTime"`
+	Data      *VisualizationData `json:"data,omitempty"`
+	EndTime   *string            `json:"endTime,omitempty"`
+	StartTime *string            `json:"startTime,omitempty"`
 }

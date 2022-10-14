@@ -10,5 +10,5 @@ const (
 )
 
 type ReleaseChannel struct {
-	Channel *ReleaseChannelChannelEnum `json:"channel"`
+	Channel *ReleaseChannelChannelEnum `json:"channel,omitempty"`
 }

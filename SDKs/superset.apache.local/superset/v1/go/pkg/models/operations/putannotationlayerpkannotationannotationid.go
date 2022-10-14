@@ -20,24 +20,24 @@ type PutAnnotationLayerPkAnnotationAnnotationIDRequest struct {
 }
 
 type PutAnnotationLayerPkAnnotationAnnotationID200ApplicationJSON struct {
-	ID     *float64                     `json:"id"`
-	Result *shared.AnnotationRestAPIPut `json:"result"`
+	ID     *float64                     `json:"id,omitempty"`
+	Result *shared.AnnotationRestAPIPut `json:"result,omitempty"`
 }
 
 type PutAnnotationLayerPkAnnotationAnnotationID400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutAnnotationLayerPkAnnotationAnnotationID401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutAnnotationLayerPkAnnotationAnnotationID404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutAnnotationLayerPkAnnotationAnnotationID500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutAnnotationLayerPkAnnotationAnnotationIDResponse struct {

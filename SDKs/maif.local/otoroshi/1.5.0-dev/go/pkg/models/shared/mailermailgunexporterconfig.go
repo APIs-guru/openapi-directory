@@ -7,9 +7,9 @@ const (
 )
 
 type MailerMailgunExporterConfig struct {
-	APIKey *string                             `json:"apiKey"`
-	Domain *string                             `json:"domain"`
-	Eu     *bool                               `json:"eu"`
-	To     []string                            `json:"to"`
+	APIKey *string                             `json:"apiKey,omitempty"`
+	Domain *string                             `json:"domain,omitempty"`
+	Eu     *bool                               `json:"eu,omitempty"`
+	To     []string                            `json:"to,omitempty"`
 	Type   MailerMailgunExporterConfigTypeEnum `json:"type"`
 }

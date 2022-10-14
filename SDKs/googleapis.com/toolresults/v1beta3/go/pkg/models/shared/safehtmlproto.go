@@ -1,5 +1,5 @@
 package shared
 
 type SafeHTMLProto struct {
-	PrivateDoNotAccessOrElseSafeHTMLWrappedValue *string `json:"privateDoNotAccessOrElseSafeHtmlWrappedValue"`
+	PrivateDoNotAccessOrElseSafeHTMLWrappedValue *string `json:"privateDoNotAccessOrElseSafeHtmlWrappedValue,omitempty"`
 }

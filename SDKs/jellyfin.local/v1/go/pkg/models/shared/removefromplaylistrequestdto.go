@@ -1,5 +1,5 @@
 package shared
 
 type RemoveFromPlaylistRequestDto struct {
-	PlaylistItemIds []string `json:"PlaylistItemIds"`
+	PlaylistItemIds []string `json:"PlaylistItemIds,omitempty"`
 }

@@ -9,31 +9,31 @@ type ListPadsUsingPostRequest struct {
 }
 
 type ListPadsUsingPost200ApplicationJSONData struct {
-	PadIDs []string `json:"padIDs"`
+	PadIDs []string `json:"padIDs,omitempty"`
 }
 
 type ListPadsUsingPost200ApplicationJSON struct {
-	Code    *int64                                   `json:"code"`
-	Data    *ListPadsUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                  `json:"message"`
+	Code    *int64                                   `json:"code,omitempty"`
+	Data    *ListPadsUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                  `json:"message,omitempty"`
 }
 
 type ListPadsUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListPadsUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListPadsUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListPadsUsingPostResponse struct {

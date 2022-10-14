@@ -13,13 +13,13 @@ type CreateAppRequest struct {
 }
 
 type CreateApp200ApplicationJSON struct {
-	App *shared.Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItems `json:"app"`
+	App *shared.Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItems `json:"app,omitempty"`
 }
 
 type CreateApp401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateAppResponse struct {

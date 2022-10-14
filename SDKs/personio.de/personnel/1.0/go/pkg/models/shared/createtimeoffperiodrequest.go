@@ -5,7 +5,7 @@ import (
 )
 
 type CreateTimeOffPeriodRequest struct {
-	Comment       *string   `json:"comment"`
+	Comment       *string   `json:"comment,omitempty"`
 	EmployeeID    int64     `json:"employee_id"`
 	EndDate       time.Time `json:"end_date"`
 	HalfDayEnd    bool      `json:"half_day_end"`

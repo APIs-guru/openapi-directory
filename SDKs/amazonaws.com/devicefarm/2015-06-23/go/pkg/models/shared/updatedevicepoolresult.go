@@ -1,5 +1,5 @@
 package shared
 
 type UpdateDevicePoolResult struct {
-	DevicePool *DevicePool `json:"devicePool"`
+	DevicePool *DevicePool `json:"devicePool,omitempty"`
 }

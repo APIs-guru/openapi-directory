@@ -1,8 +1,8 @@
 package shared
 
 type UpdateTableCellStyleRequest struct {
-	Fields             *string         `json:"fields"`
-	TableCellStyle     *TableCellStyle `json:"tableCellStyle"`
-	TableRange         *TableRange     `json:"tableRange"`
-	TableStartLocation *Location       `json:"tableStartLocation"`
+	Fields             *string         `json:"fields,omitempty"`
+	TableCellStyle     *TableCellStyle `json:"tableCellStyle,omitempty"`
+	TableRange         *TableRange     `json:"tableRange,omitempty"`
+	TableStartLocation *Location       `json:"tableStartLocation,omitempty"`
 }

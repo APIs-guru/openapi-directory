@@ -1,6 +1,6 @@
 package shared
 
 type SequenceNumberRange struct {
-	EndingSequenceNumber   *string `json:"EndingSequenceNumber"`
-	StartingSequenceNumber *string `json:"StartingSequenceNumber"`
+	EndingSequenceNumber   *string `json:"EndingSequenceNumber,omitempty"`
+	StartingSequenceNumber *string `json:"StartingSequenceNumber,omitempty"`
 }

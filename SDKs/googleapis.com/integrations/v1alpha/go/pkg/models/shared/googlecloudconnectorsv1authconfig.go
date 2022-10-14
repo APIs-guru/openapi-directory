@@ -12,10 +12,10 @@ const (
 )
 
 type GoogleCloudConnectorsV1AuthConfig struct {
-	AdditionalVariables     []GoogleCloudConnectorsV1ConfigVariable                   `json:"additionalVariables"`
-	AuthType                *GoogleCloudConnectorsV1AuthConfigAuthTypeEnum            `json:"authType"`
-	Oauth2ClientCredentials *GoogleCloudConnectorsV1AuthConfigOauth2ClientCredentials `json:"oauth2ClientCredentials"`
-	Oauth2JwtBearer         *GoogleCloudConnectorsV1AuthConfigOauth2JwtBearer         `json:"oauth2JwtBearer"`
-	SSHPublicKey            *GoogleCloudConnectorsV1AuthConfigSSHPublicKey            `json:"sshPublicKey"`
-	UserPassword            *GoogleCloudConnectorsV1AuthConfigUserPassword            `json:"userPassword"`
+	AdditionalVariables     []GoogleCloudConnectorsV1ConfigVariable                   `json:"additionalVariables,omitempty"`
+	AuthType                *GoogleCloudConnectorsV1AuthConfigAuthTypeEnum            `json:"authType,omitempty"`
+	Oauth2ClientCredentials *GoogleCloudConnectorsV1AuthConfigOauth2ClientCredentials `json:"oauth2ClientCredentials,omitempty"`
+	Oauth2JwtBearer         *GoogleCloudConnectorsV1AuthConfigOauth2JwtBearer         `json:"oauth2JwtBearer,omitempty"`
+	SSHPublicKey            *GoogleCloudConnectorsV1AuthConfigSSHPublicKey            `json:"sshPublicKey,omitempty"`
+	UserPassword            *GoogleCloudConnectorsV1AuthConfigUserPassword            `json:"userPassword,omitempty"`
 }

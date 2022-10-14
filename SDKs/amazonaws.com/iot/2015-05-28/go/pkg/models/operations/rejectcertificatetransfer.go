@@ -15,7 +15,7 @@ type RejectCertificateTransferHeaders struct {
 }
 
 type RejectCertificateTransferRequestBody struct {
-	RejectReason *string `json:"rejectReason"`
+	RejectReason *string `json:"rejectReason,omitempty"`
 }
 
 type RejectCertificateTransferRequest struct {

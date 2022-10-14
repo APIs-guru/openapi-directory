@@ -1,10 +1,10 @@
 package shared
 
 type ObjectConditions struct {
-	ExcludePrefixes                     []string `json:"excludePrefixes"`
-	IncludePrefixes                     []string `json:"includePrefixes"`
-	LastModifiedBefore                  *string  `json:"lastModifiedBefore"`
-	LastModifiedSince                   *string  `json:"lastModifiedSince"`
-	MaxTimeElapsedSinceLastModification *string  `json:"maxTimeElapsedSinceLastModification"`
-	MinTimeElapsedSinceLastModification *string  `json:"minTimeElapsedSinceLastModification"`
+	ExcludePrefixes                     []string `json:"excludePrefixes,omitempty"`
+	IncludePrefixes                     []string `json:"includePrefixes,omitempty"`
+	LastModifiedBefore                  *string  `json:"lastModifiedBefore,omitempty"`
+	LastModifiedSince                   *string  `json:"lastModifiedSince,omitempty"`
+	MaxTimeElapsedSinceLastModification *string  `json:"maxTimeElapsedSinceLastModification,omitempty"`
+	MinTimeElapsedSinceLastModification *string  `json:"minTimeElapsedSinceLastModification,omitempty"`
 }

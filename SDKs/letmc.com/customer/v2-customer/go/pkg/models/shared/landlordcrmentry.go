@@ -1,8 +1,8 @@
 package shared
 
 type LandlordCrmEntry struct {
-	BranchID        *string `json:"BranchID"`
-	GlobalReference *string `json:"GlobalReference"`
-	Name            *string `json:"Name"`
-	Oid             *string `json:"OID"`
+	BranchID        *string `json:"BranchID,omitempty"`
+	GlobalReference *string `json:"GlobalReference,omitempty"`
+	Name            *string `json:"Name,omitempty"`
+	Oid             *string `json:"OID,omitempty"`
 }

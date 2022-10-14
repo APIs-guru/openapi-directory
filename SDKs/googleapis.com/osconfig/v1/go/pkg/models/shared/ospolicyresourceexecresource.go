@@ -1,6 +1,6 @@
 package shared
 
 type OsPolicyResourceExecResource struct {
-	Enforce  *OsPolicyResourceExecResourceExec `json:"enforce"`
-	Validate *OsPolicyResourceExecResourceExec `json:"validate"`
+	Enforce  *OsPolicyResourceExecResourceExec `json:"enforce,omitempty"`
+	Validate *OsPolicyResourceExecResourceExec `json:"validate,omitempty"`
 }

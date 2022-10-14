@@ -1,6 +1,6 @@
 package shared
 
 type Oidc struct {
-	AllowedAudiences []string `json:"allowedAudiences"`
-	IssuerURI        *string  `json:"issuerUri"`
+	AllowedAudiences []string `json:"allowedAudiences,omitempty"`
+	IssuerURI        *string  `json:"issuerUri,omitempty"`
 }

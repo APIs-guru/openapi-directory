@@ -1,15 +1,15 @@
 package shared
 
 type EmbeddedObject struct {
-	Description               *string                 `json:"description"`
-	EmbeddedDrawingProperties map[string]interface{}  `json:"embeddedDrawingProperties"`
-	EmbeddedObjectBorder      *EmbeddedObjectBorder   `json:"embeddedObjectBorder"`
-	ImageProperties           *ImageProperties        `json:"imageProperties"`
-	LinkedContentReference    *LinkedContentReference `json:"linkedContentReference"`
-	MarginBottom              *Dimension              `json:"marginBottom"`
-	MarginLeft                *Dimension              `json:"marginLeft"`
-	MarginRight               *Dimension              `json:"marginRight"`
-	MarginTop                 *Dimension              `json:"marginTop"`
-	Size                      *Size                   `json:"size"`
-	Title                     *string                 `json:"title"`
+	Description               *string                 `json:"description,omitempty"`
+	EmbeddedDrawingProperties map[string]interface{}  `json:"embeddedDrawingProperties,omitempty"`
+	EmbeddedObjectBorder      *EmbeddedObjectBorder   `json:"embeddedObjectBorder,omitempty"`
+	ImageProperties           *ImageProperties        `json:"imageProperties,omitempty"`
+	LinkedContentReference    *LinkedContentReference `json:"linkedContentReference,omitempty"`
+	MarginBottom              *Dimension              `json:"marginBottom,omitempty"`
+	MarginLeft                *Dimension              `json:"marginLeft,omitempty"`
+	MarginRight               *Dimension              `json:"marginRight,omitempty"`
+	MarginTop                 *Dimension              `json:"marginTop,omitempty"`
+	Size                      *Size                   `json:"size,omitempty"`
+	Title                     *string                 `json:"title,omitempty"`
 }

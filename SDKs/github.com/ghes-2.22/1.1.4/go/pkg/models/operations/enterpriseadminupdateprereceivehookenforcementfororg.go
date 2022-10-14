@@ -10,8 +10,8 @@ type EnterpriseAdminUpdatePreReceiveHookEnforcementForOrgPathParams struct {
 }
 
 type EnterpriseAdminUpdatePreReceiveHookEnforcementForOrgRequestBody struct {
-	AllowDownstreamConfiguration *bool   `json:"allow_downstream_configuration"`
-	Enforcement                  *string `json:"enforcement"`
+	AllowDownstreamConfiguration *bool   `json:"allow_downstream_configuration,omitempty"`
+	Enforcement                  *string `json:"enforcement,omitempty"`
 }
 
 type EnterpriseAdminUpdatePreReceiveHookEnforcementForOrgRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type DeleteDeveloperMetadataResponse struct {
-	DeletedDeveloperMetadata []DeveloperMetadata `json:"deletedDeveloperMetadata"`
+	DeletedDeveloperMetadata []DeveloperMetadata `json:"deletedDeveloperMetadata,omitempty"`
 }

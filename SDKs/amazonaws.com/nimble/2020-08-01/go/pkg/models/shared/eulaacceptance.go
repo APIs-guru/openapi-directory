@@ -5,9 +5,9 @@ import (
 )
 
 type EulaAcceptance struct {
-	AcceptedAt       *time.Time `json:"acceptedAt"`
-	AcceptedBy       *string    `json:"acceptedBy"`
-	AccepteeID       *string    `json:"accepteeId"`
-	EulaAcceptanceID *string    `json:"eulaAcceptanceId"`
-	EulaID           *string    `json:"eulaId"`
+	AcceptedAt       *time.Time `json:"acceptedAt,omitempty"`
+	AcceptedBy       *string    `json:"acceptedBy,omitempty"`
+	AccepteeID       *string    `json:"accepteeId,omitempty"`
+	EulaAcceptanceID *string    `json:"eulaAcceptanceId,omitempty"`
+	EulaID           *string    `json:"eulaId,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type BuildSystemSharedDtoActivity struct {
-	ActivityID *int32                             `json:"ActivityID"`
-	Deleted    *bool                              `json:"Deleted"`
-	Name       *string                            `json:"Name"`
-	Parameters []BuildSystemSharedDtoParameter    `json:"Parameters"`
-	Steps      []BuildSystemSharedDtoActivityStep `json:"Steps"`
+	ActivityID *int32                             `json:"ActivityID,omitempty"`
+	Deleted    *bool                              `json:"Deleted,omitempty"`
+	Name       *string                            `json:"Name,omitempty"`
+	Parameters []BuildSystemSharedDtoParameter    `json:"Parameters,omitempty"`
+	Steps      []BuildSystemSharedDtoActivityStep `json:"Steps,omitempty"`
 }

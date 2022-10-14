@@ -1,8 +1,8 @@
 package shared
 
 type FacetOptions struct {
-	NumFacetBuckets *int32  `json:"numFacetBuckets"`
-	ObjectType      *string `json:"objectType"`
-	OperatorName    *string `json:"operatorName"`
-	SourceName      *string `json:"sourceName"`
+	NumFacetBuckets *int32  `json:"numFacetBuckets,omitempty"`
+	ObjectType      *string `json:"objectType,omitempty"`
+	OperatorName    *string `json:"operatorName,omitempty"`
+	SourceName      *string `json:"sourceName,omitempty"`
 }

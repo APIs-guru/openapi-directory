@@ -1,6 +1,6 @@
 package shared
 
 type SuggestedBullet struct {
-	Bullet                *Bullet                `json:"bullet"`
-	BulletSuggestionState *BulletSuggestionState `json:"bulletSuggestionState"`
+	Bullet                *Bullet                `json:"bullet,omitempty"`
+	BulletSuggestionState *BulletSuggestionState `json:"bulletSuggestionState,omitempty"`
 }

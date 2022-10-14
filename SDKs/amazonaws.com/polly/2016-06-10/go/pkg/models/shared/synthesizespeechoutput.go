@@ -1,5 +1,5 @@
 package shared
 
 type SynthesizeSpeechOutput struct {
-	AudioStream *string `json:"AudioStream"`
+	AudioStream *string `json:"AudioStream,omitempty"`
 }

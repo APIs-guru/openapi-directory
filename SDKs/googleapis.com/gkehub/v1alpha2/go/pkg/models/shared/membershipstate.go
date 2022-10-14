@@ -12,5 +12,5 @@ const (
 )
 
 type MembershipState struct {
-	Code *MembershipStateCodeEnum `json:"code"`
+	Code *MembershipStateCodeEnum `json:"code,omitempty"`
 }

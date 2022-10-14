@@ -9,8 +9,8 @@ type CreateVideoThumbnailPathParams struct {
 }
 
 type CreateVideoThumbnailRequestBody struct {
-	Active *bool    `json:"active"`
-	Time   *float64 `json:"time"`
+	Active *bool    `json:"active,omitempty"`
+	Time   *float64 `json:"time,omitempty"`
 }
 
 type CreateVideoThumbnailSecurity struct {

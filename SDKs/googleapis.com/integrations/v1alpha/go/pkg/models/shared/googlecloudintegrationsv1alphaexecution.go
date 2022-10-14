@@ -10,16 +10,16 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaExecution struct {
-	CreateTime            *string                                                     `json:"createTime"`
-	DirectSubExecutions   []GoogleCloudIntegrationsV1alphaExecution                   `json:"directSubExecutions"`
-	EventExecutionDetails *EnterpriseCrmEventbusProtoEventExecutionDetails            `json:"eventExecutionDetails"`
-	ExecutionDetails      *GoogleCloudIntegrationsV1alphaExecutionDetails             `json:"executionDetails"`
-	ExecutionMethod       *GoogleCloudIntegrationsV1alphaExecutionExecutionMethodEnum `json:"executionMethod"`
-	Name                  *string                                                     `json:"name"`
-	RequestParameters     map[string]GoogleCloudIntegrationsV1alphaValueType          `json:"requestParameters"`
-	RequestParams         []EnterpriseCrmFrontendsEventbusProtoParameterEntry         `json:"requestParams"`
-	ResponseParameters    map[string]GoogleCloudIntegrationsV1alphaValueType          `json:"responseParameters"`
-	ResponseParams        []EnterpriseCrmFrontendsEventbusProtoParameterEntry         `json:"responseParams"`
-	TriggerID             *string                                                     `json:"triggerId"`
-	UpdateTime            *string                                                     `json:"updateTime"`
+	CreateTime            *string                                                     `json:"createTime,omitempty"`
+	DirectSubExecutions   []GoogleCloudIntegrationsV1alphaExecution                   `json:"directSubExecutions,omitempty"`
+	EventExecutionDetails *EnterpriseCrmEventbusProtoEventExecutionDetails            `json:"eventExecutionDetails,omitempty"`
+	ExecutionDetails      *GoogleCloudIntegrationsV1alphaExecutionDetails             `json:"executionDetails,omitempty"`
+	ExecutionMethod       *GoogleCloudIntegrationsV1alphaExecutionExecutionMethodEnum `json:"executionMethod,omitempty"`
+	Name                  *string                                                     `json:"name,omitempty"`
+	RequestParameters     map[string]GoogleCloudIntegrationsV1alphaValueType          `json:"requestParameters,omitempty"`
+	RequestParams         []EnterpriseCrmFrontendsEventbusProtoParameterEntry         `json:"requestParams,omitempty"`
+	ResponseParameters    map[string]GoogleCloudIntegrationsV1alphaValueType          `json:"responseParameters,omitempty"`
+	ResponseParams        []EnterpriseCrmFrontendsEventbusProtoParameterEntry         `json:"responseParams,omitempty"`
+	TriggerID             *string                                                     `json:"triggerId,omitempty"`
+	UpdateTime            *string                                                     `json:"updateTime,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type ResourceRecordSet struct {
-	Kind             *string             `json:"kind"`
-	Name             *string             `json:"name"`
-	RoutingPolicy    *RrSetRoutingPolicy `json:"routingPolicy"`
-	Rrdatas          []string            `json:"rrdatas"`
-	SignatureRrdatas []string            `json:"signatureRrdatas"`
-	TTL              *int32              `json:"ttl"`
-	Type             *string             `json:"type"`
+	Kind             *string             `json:"kind,omitempty"`
+	Name             *string             `json:"name,omitempty"`
+	RoutingPolicy    *RrSetRoutingPolicy `json:"routingPolicy,omitempty"`
+	Rrdatas          []string            `json:"rrdatas,omitempty"`
+	SignatureRrdatas []string            `json:"signatureRrdatas,omitempty"`
+	TTL              *int32              `json:"ttl,omitempty"`
+	Type             *string             `json:"type,omitempty"`
 }

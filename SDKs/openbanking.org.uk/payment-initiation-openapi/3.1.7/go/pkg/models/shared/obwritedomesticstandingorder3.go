@@ -8,14 +8,14 @@ type ObWriteDomesticStandingOrder3DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticStandingOrder3DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount struct {
@@ -35,17 +35,17 @@ type ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount struct {
 
 type ObWriteDomesticStandingOrder3DataInitiation struct {
 	CreditorAccount          ObWriteDomesticStandingOrder3DataInitiationCreditorAccount         `json:"CreditorAccount"`
-	DebtorAccount            *ObWriteDomesticStandingOrder3DataInitiationDebtorAccount          `json:"DebtorAccount"`
-	FinalPaymentAmount       *ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount     `json:"FinalPaymentAmount"`
-	FinalPaymentDateTime     *time.Time                                                         `json:"FinalPaymentDateTime"`
+	DebtorAccount            *ObWriteDomesticStandingOrder3DataInitiationDebtorAccount          `json:"DebtorAccount,omitempty"`
+	FinalPaymentAmount       *ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount     `json:"FinalPaymentAmount,omitempty"`
+	FinalPaymentDateTime     *time.Time                                                         `json:"FinalPaymentDateTime,omitempty"`
 	FirstPaymentAmount       ObWriteDomesticStandingOrder3DataInitiationFirstPaymentAmount      `json:"FirstPaymentAmount"`
 	FirstPaymentDateTime     time.Time                                                          `json:"FirstPaymentDateTime"`
 	Frequency                string                                                             `json:"Frequency"`
-	NumberOfPayments         *string                                                            `json:"NumberOfPayments"`
-	RecurringPaymentAmount   *ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount `json:"RecurringPaymentAmount"`
-	RecurringPaymentDateTime *time.Time                                                         `json:"RecurringPaymentDateTime"`
-	Reference                *string                                                            `json:"Reference"`
-	SupplementaryData        map[string]interface{}                                             `json:"SupplementaryData"`
+	NumberOfPayments         *string                                                            `json:"NumberOfPayments,omitempty"`
+	RecurringPaymentAmount   *ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount `json:"RecurringPaymentAmount,omitempty"`
+	RecurringPaymentDateTime *time.Time                                                         `json:"RecurringPaymentDateTime,omitempty"`
+	Reference                *string                                                            `json:"Reference,omitempty"`
+	SupplementaryData        map[string]interface{}                                             `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteDomesticStandingOrder3Data struct {

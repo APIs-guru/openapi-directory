@@ -1,5 +1,5 @@
 package shared
 
 type FilterList struct {
-	InfoTypes []string `json:"infoTypes"`
+	InfoTypes []string `json:"infoTypes,omitempty"`
 }

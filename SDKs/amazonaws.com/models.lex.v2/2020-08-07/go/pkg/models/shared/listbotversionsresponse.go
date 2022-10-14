@@ -1,7 +1,7 @@
 package shared
 
 type ListBotVersionsResponse struct {
-	BotID               *string             `json:"botId"`
-	BotVersionSummaries []BotVersionSummary `json:"botVersionSummaries"`
-	NextToken           *string             `json:"nextToken"`
+	BotID               *string             `json:"botId,omitempty"`
+	BotVersionSummaries []BotVersionSummary `json:"botVersionSummaries,omitempty"`
+	NextToken           *string             `json:"nextToken,omitempty"`
 }

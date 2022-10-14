@@ -5,8 +5,8 @@ import (
 )
 
 type Milestone struct {
-	MilestoneName   *string    `json:"MilestoneName"`
-	MilestoneNumber *int64     `json:"MilestoneNumber"`
-	RecordedAt      *time.Time `json:"RecordedAt"`
-	Workload        *Workload  `json:"Workload"`
+	MilestoneName   *string    `json:"MilestoneName,omitempty"`
+	MilestoneNumber *int64     `json:"MilestoneNumber,omitempty"`
+	RecordedAt      *time.Time `json:"RecordedAt,omitempty"`
+	Workload        *Workload  `json:"Workload,omitempty"`
 }

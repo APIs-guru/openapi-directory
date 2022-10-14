@@ -5,8 +5,8 @@ import (
 )
 
 type ImportJobSummary struct {
-	CreatedTimestamp  *time.Time         `json:"CreatedTimestamp"`
-	ImportDestination *ImportDestination `json:"ImportDestination"`
-	JobID             *string            `json:"JobId"`
-	JobStatus         *JobStatusEnum     `json:"JobStatus"`
+	CreatedTimestamp  *time.Time         `json:"CreatedTimestamp,omitempty"`
+	ImportDestination *ImportDestination `json:"ImportDestination,omitempty"`
+	JobID             *string            `json:"JobId,omitempty"`
+	JobStatus         *JobStatusEnum     `json:"JobStatus,omitempty"`
 }

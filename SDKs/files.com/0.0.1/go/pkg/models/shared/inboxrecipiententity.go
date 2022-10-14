@@ -5,9 +5,9 @@ import (
 )
 
 type InboxRecipientEntity struct {
-	Company   *string    `json:"company"`
-	Name      *string    `json:"name"`
-	Note      *string    `json:"note"`
-	Recipient *string    `json:"recipient"`
-	SentAt    *time.Time `json:"sent_at"`
+	Company   *string    `json:"company,omitempty"`
+	Name      *string    `json:"name,omitempty"`
+	Note      *string    `json:"note,omitempty"`
+	Recipient *string    `json:"recipient,omitempty"`
+	SentAt    *time.Time `json:"sent_at,omitempty"`
 }

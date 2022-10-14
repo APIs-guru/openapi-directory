@@ -1,6 +1,6 @@
 package shared
 
 type SecurityProfileTargetMapping struct {
-	SecurityProfileIdentifier *SecurityProfileIdentifier `json:"securityProfileIdentifier"`
-	Target                    *SecurityProfileTarget     `json:"target"`
+	SecurityProfileIdentifier *SecurityProfileIdentifier `json:"securityProfileIdentifier,omitempty"`
+	Target                    *SecurityProfileTarget     `json:"target,omitempty"`
 }

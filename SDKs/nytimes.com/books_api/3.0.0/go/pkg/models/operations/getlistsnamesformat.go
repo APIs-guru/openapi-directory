@@ -30,19 +30,19 @@ type GetListsNamesFormatRequest struct {
 }
 
 type GetListsNamesFormat200ApplicationJSONResults struct {
-	DisplayName         *string `json:"display_name"`
-	ListName            *string `json:"list_name"`
-	ListNameEncoded     *string `json:"list_name_encoded"`
-	NewestPublishedDate *string `json:"newest_published_date"`
-	OldestPublishedDate *string `json:"oldest_published_date"`
-	Updated             *string `json:"updated"`
+	DisplayName         *string `json:"display_name,omitempty"`
+	ListName            *string `json:"list_name,omitempty"`
+	ListNameEncoded     *string `json:"list_name_encoded,omitempty"`
+	NewestPublishedDate *string `json:"newest_published_date,omitempty"`
+	OldestPublishedDate *string `json:"oldest_published_date,omitempty"`
+	Updated             *string `json:"updated,omitempty"`
 }
 
 type GetListsNamesFormat200ApplicationJSON struct {
-	Copyright  *string                                        `json:"copyright"`
-	NumResults *int64                                         `json:"num_results"`
-	Results    []GetListsNamesFormat200ApplicationJSONResults `json:"results"`
-	Status     *string                                        `json:"status"`
+	Copyright  *string                                        `json:"copyright,omitempty"`
+	NumResults *int64                                         `json:"num_results,omitempty"`
+	Results    []GetListsNamesFormat200ApplicationJSONResults `json:"results,omitempty"`
+	Status     *string                                        `json:"status,omitempty"`
 }
 
 type GetListsNamesFormatResponse struct {

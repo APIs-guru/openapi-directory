@@ -11,7 +11,7 @@ type ReposMergePathParams struct {
 
 type ReposMergeRequestBody struct {
 	Base          string  `json:"base"`
-	CommitMessage *string `json:"commit_message"`
+	CommitMessage *string `json:"commit_message,omitempty"`
 	Head          string  `json:"head"`
 }
 

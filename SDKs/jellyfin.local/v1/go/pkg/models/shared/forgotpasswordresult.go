@@ -5,7 +5,7 @@ import (
 )
 
 type ForgotPasswordResult struct {
-	Action            *ForgotPasswordActionEnum `json:"Action"`
-	PinExpirationDate *time.Time                `json:"PinExpirationDate"`
-	PinFile           *string                   `json:"PinFile"`
+	Action            *ForgotPasswordActionEnum `json:"Action,omitempty"`
+	PinExpirationDate *time.Time                `json:"PinExpirationDate,omitempty"`
+	PinFile           *string                   `json:"PinFile,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type BatchListObjectChildrenResponse struct {
-	Children  map[string]string `json:"Children"`
-	NextToken *string           `json:"NextToken"`
+	Children  map[string]string `json:"Children,omitempty"`
+	NextToken *string           `json:"NextToken,omitempty"`
 }

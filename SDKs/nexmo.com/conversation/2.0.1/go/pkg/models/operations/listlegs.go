@@ -5,15 +5,15 @@ import (
 )
 
 type ListLegs200ApplicationJSONEmbeddedLegs struct {
-	Embedded         map[string]interface{}  `json:"_embedded"`
-	Links            map[string]interface{}  `json:"_links"`
-	ConversationUUID *string                 `json:"conversation_uuid"`
-	From             map[string]interface{}  `json:"from"`
-	StartEnd         *string                 `json:"start_end"`
-	StartTime        *string                 `json:"start_time"`
-	State            *shared.LegStateEnum    `json:"state"`
-	To               map[string]interface{}  `json:"to"`
-	Type             *shared.ChannelTypeEnum `json:"type"`
+	Embedded         map[string]interface{}  `json:"_embedded,omitempty"`
+	Links            map[string]interface{}  `json:"_links,omitempty"`
+	ConversationUUID *string                 `json:"conversation_uuid,omitempty"`
+	From             map[string]interface{}  `json:"from,omitempty"`
+	StartEnd         *string                 `json:"start_end,omitempty"`
+	StartTime        *string                 `json:"start_time,omitempty"`
+	State            *shared.LegStateEnum    `json:"state,omitempty"`
+	To               map[string]interface{}  `json:"to,omitempty"`
+	Type             *shared.ChannelTypeEnum `json:"type,omitempty"`
 	UUID             string                  `json:"uuid"`
 }
 
@@ -22,7 +22,7 @@ type ListLegs200ApplicationJSONEmbedded struct {
 }
 
 type ListLegs200ApplicationJSONLinksSelf struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type ListLegs200ApplicationJSONLinks struct {

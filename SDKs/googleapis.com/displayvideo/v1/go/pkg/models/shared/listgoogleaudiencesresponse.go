@@ -1,6 +1,6 @@
 package shared
 
 type ListGoogleAudiencesResponse struct {
-	GoogleAudiences []GoogleAudience `json:"googleAudiences"`
-	NextPageToken   *string          `json:"nextPageToken"`
+	GoogleAudiences []GoogleAudience `json:"googleAudiences,omitempty"`
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
 }

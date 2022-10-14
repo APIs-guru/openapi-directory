@@ -10,9 +10,9 @@ const (
 )
 
 type AppVersion struct {
-	IsProduction  *bool                `json:"isProduction"`
-	Track         *AppVersionTrackEnum `json:"track"`
-	TrackID       []string             `json:"trackId"`
-	VersionCode   *int32               `json:"versionCode"`
-	VersionString *string              `json:"versionString"`
+	IsProduction  *bool                `json:"isProduction,omitempty"`
+	Track         *AppVersionTrackEnum `json:"track,omitempty"`
+	TrackID       []string             `json:"trackId,omitempty"`
+	VersionCode   *int32               `json:"versionCode,omitempty"`
+	VersionString *string              `json:"versionString,omitempty"`
 }

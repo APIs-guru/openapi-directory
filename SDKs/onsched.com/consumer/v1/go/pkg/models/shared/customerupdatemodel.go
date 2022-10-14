@@ -1,15 +1,15 @@
 package shared
 
 type CustomerUpdateModel struct {
-	Address          *AddressUpdateModel     `json:"address"`
-	Contact          *ContactUpdateModel     `json:"contact"`
-	CustomFields     *CustomFieldUpdateModel `json:"customFields"`
-	Email            *string                 `json:"email"`
-	Firstname        *string                 `json:"firstname"`
-	Lastname         *string                 `json:"lastname"`
-	LocationID       *string                 `json:"locationId"`
-	Name             *string                 `json:"name"`
-	NotificationType *string                 `json:"notificationType"`
-	StripeCustomerID *string                 `json:"stripeCustomerId"`
-	Type             *int32                  `json:"type"`
+	Address          *AddressUpdateModel     `json:"address,omitempty"`
+	Contact          *ContactUpdateModel     `json:"contact,omitempty"`
+	CustomFields     *CustomFieldUpdateModel `json:"customFields,omitempty"`
+	Email            *string                 `json:"email,omitempty"`
+	Firstname        *string                 `json:"firstname,omitempty"`
+	Lastname         *string                 `json:"lastname,omitempty"`
+	LocationID       *string                 `json:"locationId,omitempty"`
+	Name             *string                 `json:"name,omitempty"`
+	NotificationType *string                 `json:"notificationType,omitempty"`
+	StripeCustomerID *string                 `json:"stripeCustomerId,omitempty"`
+	Type             *int32                  `json:"type,omitempty"`
 }

@@ -1,69 +1,69 @@
 package shared
 
 type GaDataColumnHeaders struct {
-	ColumnType *string `json:"columnType"`
-	DataType   *string `json:"dataType"`
-	Name       *string `json:"name"`
+	ColumnType *string `json:"columnType,omitempty"`
+	DataType   *string `json:"dataType,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }
 
 type GaDataDataTableCols struct {
-	ID    *string `json:"id"`
-	Label *string `json:"label"`
-	Type  *string `json:"type"`
+	ID    *string `json:"id,omitempty"`
+	Label *string `json:"label,omitempty"`
+	Type  *string `json:"type,omitempty"`
 }
 
 type GaDataDataTableRowsC struct {
-	V *string `json:"v"`
+	V *string `json:"v,omitempty"`
 }
 
 type GaDataDataTableRows struct {
-	C []GaDataDataTableRowsC `json:"c"`
+	C []GaDataDataTableRowsC `json:"c,omitempty"`
 }
 
 type GaDataDataTable struct {
-	Cols []GaDataDataTableCols `json:"cols"`
-	Rows []GaDataDataTableRows `json:"rows"`
+	Cols []GaDataDataTableCols `json:"cols,omitempty"`
+	Rows []GaDataDataTableRows `json:"rows,omitempty"`
 }
 
 type GaDataProfileInfo struct {
-	AccountID             *string `json:"accountId"`
-	InternalWebPropertyID *string `json:"internalWebPropertyId"`
-	ProfileID             *string `json:"profileId"`
-	ProfileName           *string `json:"profileName"`
-	TableID               *string `json:"tableId"`
-	WebPropertyID         *string `json:"webPropertyId"`
+	AccountID             *string `json:"accountId,omitempty"`
+	InternalWebPropertyID *string `json:"internalWebPropertyId,omitempty"`
+	ProfileID             *string `json:"profileId,omitempty"`
+	ProfileName           *string `json:"profileName,omitempty"`
+	TableID               *string `json:"tableId,omitempty"`
+	WebPropertyID         *string `json:"webPropertyId,omitempty"`
 }
 
 type GaDataQuery struct {
-	Dimensions    *string  `json:"dimensions"`
-	EndDate       *string  `json:"end-date"`
-	Filters       *string  `json:"filters"`
-	Ids           *string  `json:"ids"`
-	MaxResults    *int32   `json:"max-results"`
-	Metrics       []string `json:"metrics"`
-	SamplingLevel *string  `json:"samplingLevel"`
-	Segment       *string  `json:"segment"`
-	Sort          []string `json:"sort"`
-	StartDate     *string  `json:"start-date"`
-	StartIndex    *int32   `json:"start-index"`
+	Dimensions    *string  `json:"dimensions,omitempty"`
+	EndDate       *string  `json:"end-date,omitempty"`
+	Filters       *string  `json:"filters,omitempty"`
+	Ids           *string  `json:"ids,omitempty"`
+	MaxResults    *int32   `json:"max-results,omitempty"`
+	Metrics       []string `json:"metrics,omitempty"`
+	SamplingLevel *string  `json:"samplingLevel,omitempty"`
+	Segment       *string  `json:"segment,omitempty"`
+	Sort          []string `json:"sort,omitempty"`
+	StartDate     *string  `json:"start-date,omitempty"`
+	StartIndex    *int32   `json:"start-index,omitempty"`
 }
 
 type GaData struct {
-	ColumnHeaders       []GaDataColumnHeaders `json:"columnHeaders"`
-	ContainsSampledData *bool                 `json:"containsSampledData"`
-	DataLastRefreshed   *string               `json:"dataLastRefreshed"`
-	DataTable           *GaDataDataTable      `json:"dataTable"`
-	ID                  *string               `json:"id"`
-	ItemsPerPage        *int32                `json:"itemsPerPage"`
-	Kind                *string               `json:"kind"`
-	NextLink            *string               `json:"nextLink"`
-	PreviousLink        *string               `json:"previousLink"`
-	ProfileInfo         *GaDataProfileInfo    `json:"profileInfo"`
-	Query               *GaDataQuery          `json:"query"`
-	Rows                [][]string            `json:"rows"`
-	SampleSize          *string               `json:"sampleSize"`
-	SampleSpace         *string               `json:"sampleSpace"`
-	SelfLink            *string               `json:"selfLink"`
-	TotalResults        *int32                `json:"totalResults"`
-	TotalsForAllResults map[string]string     `json:"totalsForAllResults"`
+	ColumnHeaders       []GaDataColumnHeaders `json:"columnHeaders,omitempty"`
+	ContainsSampledData *bool                 `json:"containsSampledData,omitempty"`
+	DataLastRefreshed   *string               `json:"dataLastRefreshed,omitempty"`
+	DataTable           *GaDataDataTable      `json:"dataTable,omitempty"`
+	ID                  *string               `json:"id,omitempty"`
+	ItemsPerPage        *int32                `json:"itemsPerPage,omitempty"`
+	Kind                *string               `json:"kind,omitempty"`
+	NextLink            *string               `json:"nextLink,omitempty"`
+	PreviousLink        *string               `json:"previousLink,omitempty"`
+	ProfileInfo         *GaDataProfileInfo    `json:"profileInfo,omitempty"`
+	Query               *GaDataQuery          `json:"query,omitempty"`
+	Rows                [][]string            `json:"rows,omitempty"`
+	SampleSize          *string               `json:"sampleSize,omitempty"`
+	SampleSpace         *string               `json:"sampleSpace,omitempty"`
+	SelfLink            *string               `json:"selfLink,omitempty"`
+	TotalResults        *int32                `json:"totalResults,omitempty"`
+	TotalsForAllResults map[string]string     `json:"totalsForAllResults,omitempty"`
 }

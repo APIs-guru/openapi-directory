@@ -19,12 +19,12 @@ type UpdateInputHeaders struct {
 }
 
 type UpdateInputRequestBodyInputDefinition struct {
-	Attributes []shared.Attribute `json:"attributes"`
+	Attributes []shared.Attribute `json:"attributes,omitempty"`
 }
 
 type UpdateInputRequestBody struct {
 	InputDefinition  UpdateInputRequestBodyInputDefinition `json:"inputDefinition"`
-	InputDescription *string                               `json:"inputDescription"`
+	InputDescription *string                               `json:"inputDescription,omitempty"`
 }
 
 type UpdateInputRequest struct {

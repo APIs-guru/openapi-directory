@@ -1,7 +1,7 @@
 package shared
 
 type BucketLevelPermissions struct {
-	AccessControlList *AccessControlList `json:"accessControlList"`
-	BlockPublicAccess *BlockPublicAccess `json:"blockPublicAccess"`
-	BucketPolicy      *BucketPolicy      `json:"bucketPolicy"`
+	AccessControlList *AccessControlList `json:"accessControlList,omitempty"`
+	BlockPublicAccess *BlockPublicAccess `json:"blockPublicAccess,omitempty"`
+	BucketPolicy      *BucketPolicy      `json:"bucketPolicy,omitempty"`
 }

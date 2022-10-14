@@ -11,16 +11,16 @@ const (
 )
 
 type GoogleCloudRecommenderV1Recommendation struct {
-	AdditionalImpact   []GoogleCloudRecommenderV1Impact                         `json:"additionalImpact"`
-	AssociatedInsights []GoogleCloudRecommenderV1RecommendationInsightReference `json:"associatedInsights"`
-	Content            *GoogleCloudRecommenderV1RecommendationContent           `json:"content"`
-	Description        *string                                                  `json:"description"`
-	Etag               *string                                                  `json:"etag"`
-	LastRefreshTime    *string                                                  `json:"lastRefreshTime"`
-	Name               *string                                                  `json:"name"`
-	PrimaryImpact      *GoogleCloudRecommenderV1Impact                          `json:"primaryImpact"`
-	Priority           *GoogleCloudRecommenderV1RecommendationPriorityEnum      `json:"priority"`
-	RecommenderSubtype *string                                                  `json:"recommenderSubtype"`
-	StateInfo          *GoogleCloudRecommenderV1RecommendationStateInfo         `json:"stateInfo"`
-	XorGroupID         *string                                                  `json:"xorGroupId"`
+	AdditionalImpact   []GoogleCloudRecommenderV1Impact                         `json:"additionalImpact,omitempty"`
+	AssociatedInsights []GoogleCloudRecommenderV1RecommendationInsightReference `json:"associatedInsights,omitempty"`
+	Content            *GoogleCloudRecommenderV1RecommendationContent           `json:"content,omitempty"`
+	Description        *string                                                  `json:"description,omitempty"`
+	Etag               *string                                                  `json:"etag,omitempty"`
+	LastRefreshTime    *string                                                  `json:"lastRefreshTime,omitempty"`
+	Name               *string                                                  `json:"name,omitempty"`
+	PrimaryImpact      *GoogleCloudRecommenderV1Impact                          `json:"primaryImpact,omitempty"`
+	Priority           *GoogleCloudRecommenderV1RecommendationPriorityEnum      `json:"priority,omitempty"`
+	RecommenderSubtype *string                                                  `json:"recommenderSubtype,omitempty"`
+	StateInfo          *GoogleCloudRecommenderV1RecommendationStateInfo         `json:"stateInfo,omitempty"`
+	XorGroupID         *string                                                  `json:"xorGroupId,omitempty"`
 }

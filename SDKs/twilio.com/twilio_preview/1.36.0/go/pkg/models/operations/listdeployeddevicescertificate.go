@@ -29,18 +29,18 @@ type ListDeployedDevicesCertificateRequest struct {
 }
 
 type ListDeployedDevicesCertificate200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListDeployedDevicesCertificate200ApplicationJSONListDeployedDevicesCertificateResponse struct {
-	Certificates []shared.PreviewDeployedDevicesFleetCertificate       `json:"certificates"`
-	Meta         *ListDeployedDevicesCertificate200ApplicationJSONMeta `json:"meta"`
+	Certificates []shared.PreviewDeployedDevicesFleetCertificate       `json:"certificates,omitempty"`
+	Meta         *ListDeployedDevicesCertificate200ApplicationJSONMeta `json:"meta,omitempty"`
 }
 
 type ListDeployedDevicesCertificateResponse struct {

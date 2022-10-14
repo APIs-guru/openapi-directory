@@ -1,5 +1,5 @@
 package shared
 
 type ManagedZoneReverseLookupConfig struct {
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind,omitempty"`
 }

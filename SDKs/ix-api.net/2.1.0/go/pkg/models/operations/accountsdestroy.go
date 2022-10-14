@@ -20,10 +20,10 @@ const (
 )
 
 type AccountsDestroy401ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     AccountsDestroy401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -34,10 +34,10 @@ const (
 )
 
 type AccountsDestroy403ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     AccountsDestroy403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -48,10 +48,10 @@ const (
 )
 
 type AccountsDestroy404ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     AccountsDestroy404ApplicationJSONTypeEnum `json:"type"`
 }
 

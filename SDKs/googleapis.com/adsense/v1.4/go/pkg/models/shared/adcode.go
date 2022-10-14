@@ -1,8 +1,8 @@
 package shared
 
 type AdCode struct {
-	AdCode  *string `json:"adCode"`
-	AmpBody *string `json:"ampBody"`
-	AmpHead *string `json:"ampHead"`
-	Kind    *string `json:"kind"`
+	AdCode  *string `json:"adCode,omitempty"`
+	AmpBody *string `json:"ampBody,omitempty"`
+	AmpHead *string `json:"ampHead,omitempty"`
+	Kind    *string `json:"kind,omitempty"`
 }

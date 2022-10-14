@@ -21,13 +21,13 @@ const (
 )
 
 type Discovered struct {
-	AnalysisCompleted   *AnalysisCompleted                `json:"analysisCompleted"`
-	AnalysisError       []Status                          `json:"analysisError"`
-	AnalysisStatus      *DiscoveredAnalysisStatusEnum     `json:"analysisStatus"`
-	AnalysisStatusError *Status                           `json:"analysisStatusError"`
-	ArchiveTime         *string                           `json:"archiveTime"`
-	ContinuousAnalysis  *DiscoveredContinuousAnalysisEnum `json:"continuousAnalysis"`
-	Cpe                 *string                           `json:"cpe"`
-	LastScanTime        *string                           `json:"lastScanTime"`
-	Operation           *Operation                        `json:"operation"`
+	AnalysisCompleted   *AnalysisCompleted                `json:"analysisCompleted,omitempty"`
+	AnalysisError       []Status                          `json:"analysisError,omitempty"`
+	AnalysisStatus      *DiscoveredAnalysisStatusEnum     `json:"analysisStatus,omitempty"`
+	AnalysisStatusError *Status                           `json:"analysisStatusError,omitempty"`
+	ArchiveTime         *string                           `json:"archiveTime,omitempty"`
+	ContinuousAnalysis  *DiscoveredContinuousAnalysisEnum `json:"continuousAnalysis,omitempty"`
+	Cpe                 *string                           `json:"cpe,omitempty"`
+	LastScanTime        *string                           `json:"lastScanTime,omitempty"`
+	Operation           *Operation                        `json:"operation,omitempty"`
 }

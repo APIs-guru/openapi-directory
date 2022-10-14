@@ -16,11 +16,11 @@ const (
 )
 
 type ServingConfig struct {
-	AppAssociation        *ServingConfigAppAssociationEnum        `json:"appAssociation"`
-	CleanUrls             *bool                                   `json:"cleanUrls"`
-	Headers               []Header                                `json:"headers"`
-	I18n                  *I18nConfig                             `json:"i18n"`
-	Redirects             []Redirect                              `json:"redirects"`
-	Rewrites              []Rewrite                               `json:"rewrites"`
-	TrailingSlashBehavior *ServingConfigTrailingSlashBehaviorEnum `json:"trailingSlashBehavior"`
+	AppAssociation        *ServingConfigAppAssociationEnum        `json:"appAssociation,omitempty"`
+	CleanUrls             *bool                                   `json:"cleanUrls,omitempty"`
+	Headers               []Header                                `json:"headers,omitempty"`
+	I18n                  *I18nConfig                             `json:"i18n,omitempty"`
+	Redirects             []Redirect                              `json:"redirects,omitempty"`
+	Rewrites              []Rewrite                               `json:"rewrites,omitempty"`
+	TrailingSlashBehavior *ServingConfigTrailingSlashBehaviorEnum `json:"trailingSlashBehavior,omitempty"`
 }

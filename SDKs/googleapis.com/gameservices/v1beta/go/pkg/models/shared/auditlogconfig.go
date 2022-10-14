@@ -10,7 +10,7 @@ const (
 )
 
 type AuditLogConfig struct {
-	ExemptedMembers       []string                   `json:"exemptedMembers"`
-	IgnoreChildExemptions *bool                      `json:"ignoreChildExemptions"`
-	LogType               *AuditLogConfigLogTypeEnum `json:"logType"`
+	ExemptedMembers       []string                   `json:"exemptedMembers,omitempty"`
+	IgnoreChildExemptions *bool                      `json:"ignoreChildExemptions,omitempty"`
+	LogType               *AuditLogConfigLogTypeEnum `json:"logType,omitempty"`
 }

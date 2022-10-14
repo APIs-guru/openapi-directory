@@ -1,6 +1,6 @@
 package shared
 
 type AspectRecommendations struct {
-	LocalizedAspectName *string  `json:"localizedAspectName"`
-	SuggestedValues     []string `json:"suggestedValues"`
+	LocalizedAspectName *string  `json:"localizedAspectName,omitempty"`
+	SuggestedValues     []string `json:"suggestedValues,omitempty"`
 }

@@ -14,7 +14,7 @@ type EndpointSaveTracksUserHeaders struct {
 }
 
 type EndpointSaveTracksUserRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type EndpointSaveTracksUserSecurity struct {

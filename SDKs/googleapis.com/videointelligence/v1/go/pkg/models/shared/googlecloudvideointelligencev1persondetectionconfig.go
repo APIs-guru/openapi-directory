@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudVideointelligenceV1PersonDetectionConfig struct {
-	IncludeAttributes    *bool `json:"includeAttributes"`
-	IncludeBoundingBoxes *bool `json:"includeBoundingBoxes"`
-	IncludePoseLandmarks *bool `json:"includePoseLandmarks"`
+	IncludeAttributes    *bool `json:"includeAttributes,omitempty"`
+	IncludeBoundingBoxes *bool `json:"includeBoundingBoxes,omitempty"`
+	IncludePoseLandmarks *bool `json:"includePoseLandmarks,omitempty"`
 }

@@ -5,10 +5,10 @@ import (
 )
 
 type ModelSummary struct {
-	CreatedAt   *time.Time       `json:"CreatedAt"`
-	DatasetArn  *string          `json:"DatasetArn"`
-	DatasetName *string          `json:"DatasetName"`
-	ModelArn    *string          `json:"ModelArn"`
-	ModelName   *string          `json:"ModelName"`
-	Status      *ModelStatusEnum `json:"Status"`
+	CreatedAt   *time.Time       `json:"CreatedAt,omitempty"`
+	DatasetArn  *string          `json:"DatasetArn,omitempty"`
+	DatasetName *string          `json:"DatasetName,omitempty"`
+	ModelArn    *string          `json:"ModelArn,omitempty"`
+	ModelName   *string          `json:"ModelName,omitempty"`
+	Status      *ModelStatusEnum `json:"Status,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GlobalRequestResult struct {
-	FailedRequests  []string `json:"failedRequests"`
-	SuccessRequests []string `json:"successRequests"`
+	FailedRequests  []string `json:"failedRequests,omitempty"`
+	SuccessRequests []string `json:"successRequests,omitempty"`
 }

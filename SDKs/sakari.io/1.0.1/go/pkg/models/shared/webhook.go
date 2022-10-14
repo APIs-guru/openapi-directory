@@ -13,6 +13,6 @@ const (
 )
 
 type Webhook struct {
-	EventTypes []WebhookEventTypesEnum `json:"eventTypes"`
-	URL        *string                 `json:"url"`
+	EventTypes []WebhookEventTypesEnum `json:"eventTypes,omitempty"`
+	URL        *string                 `json:"url,omitempty"`
 }

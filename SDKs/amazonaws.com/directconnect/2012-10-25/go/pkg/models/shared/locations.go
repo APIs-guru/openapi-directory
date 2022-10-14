@@ -1,5 +1,5 @@
 package shared
 
 type Locations struct {
-	Locations []Location `json:"locations"`
+	Locations []Location `json:"locations,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type BusinessChainAssignedTargetingOptionDetails struct {
-	DisplayName           *string                                                             `json:"displayName"`
-	ProximityRadiusAmount *float64                                                            `json:"proximityRadiusAmount"`
-	ProximityRadiusUnit   *BusinessChainAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit"`
-	TargetingOptionID     *string                                                             `json:"targetingOptionId"`
+	DisplayName           *string                                                             `json:"displayName,omitempty"`
+	ProximityRadiusAmount *float64                                                            `json:"proximityRadiusAmount,omitempty"`
+	ProximityRadiusUnit   *BusinessChainAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit,omitempty"`
+	TargetingOptionID     *string                                                             `json:"targetingOptionId,omitempty"`
 }

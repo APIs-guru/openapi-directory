@@ -19,13 +19,13 @@ type UpdateDomainNameHeaders struct {
 }
 
 type UpdateDomainNameRequestBodyMutualTLSAuthentication struct {
-	TruststoreURI     *string `json:"TruststoreUri"`
-	TruststoreVersion *string `json:"TruststoreVersion"`
+	TruststoreURI     *string `json:"TruststoreUri,omitempty"`
+	TruststoreVersion *string `json:"TruststoreVersion,omitempty"`
 }
 
 type UpdateDomainNameRequestBody struct {
-	DomainNameConfigurations []shared.DomainNameConfiguration                    `json:"domainNameConfigurations"`
-	MutualTLSAuthentication  *UpdateDomainNameRequestBodyMutualTLSAuthentication `json:"mutualTlsAuthentication"`
+	DomainNameConfigurations []shared.DomainNameConfiguration                    `json:"domainNameConfigurations,omitempty"`
+	MutualTLSAuthentication  *UpdateDomainNameRequestBodyMutualTLSAuthentication `json:"mutualTlsAuthentication,omitempty"`
 }
 
 type UpdateDomainNameRequest struct {

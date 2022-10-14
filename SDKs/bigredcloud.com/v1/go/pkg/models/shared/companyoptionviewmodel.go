@@ -1,18 +1,18 @@
 package shared
 
 type CompanyOptionViewModel struct {
-	AllowEntryOfGrossPriceInInvoicing *bool    `json:"allowEntryOfGrossPriceInInvoicing"`
-	CreditInputForReverseChargeVat    *bool    `json:"creditInputForReverseChargeVAT"`
-	CreditNoteJournalAgeingName       *string  `json:"creditNoteJournalAgeingName"`
-	CreditNoteJournalAgeingValue      *int32   `json:"creditNoteJournalAgeingValue"`
-	DiscrepancyAllowed                *float64 `json:"discrepancyAllowed"`
-	EnableVocrReporting               *bool    `json:"enableVOCRReporting"`
-	MarginVatScheme                   *bool    `json:"marginVatScheme"`
-	PrintOsItemsOnly                  *bool    `json:"printOSItemsOnly"`
-	PurchasesVatAnalysisType          *int64   `json:"purchasesVatAnalysisType"`
-	SalesVatAnalysisType              *int64   `json:"salesVatAnalysisType"`
-	UseAllocations                    *bool    `json:"useAllocations"`
-	UseNominal                        *bool    `json:"useNominal"`
-	UseNominalCode                    *bool    `json:"useNominalCode"`
-	VocrSettingValue                  *bool    `json:"vocrSettingValue"`
+	AllowEntryOfGrossPriceInInvoicing *bool    `json:"allowEntryOfGrossPriceInInvoicing,omitempty"`
+	CreditInputForReverseChargeVat    *bool    `json:"creditInputForReverseChargeVAT,omitempty"`
+	CreditNoteJournalAgeingName       *string  `json:"creditNoteJournalAgeingName,omitempty"`
+	CreditNoteJournalAgeingValue      *int32   `json:"creditNoteJournalAgeingValue,omitempty"`
+	DiscrepancyAllowed                *float64 `json:"discrepancyAllowed,omitempty"`
+	EnableVocrReporting               *bool    `json:"enableVOCRReporting,omitempty"`
+	MarginVatScheme                   *bool    `json:"marginVatScheme,omitempty"`
+	PrintOsItemsOnly                  *bool    `json:"printOSItemsOnly,omitempty"`
+	PurchasesVatAnalysisType          *int64   `json:"purchasesVatAnalysisType,omitempty"`
+	SalesVatAnalysisType              *int64   `json:"salesVatAnalysisType,omitempty"`
+	UseAllocations                    *bool    `json:"useAllocations,omitempty"`
+	UseNominal                        *bool    `json:"useNominal,omitempty"`
+	UseNominalCode                    *bool    `json:"useNominalCode,omitempty"`
+	VocrSettingValue                  *bool    `json:"vocrSettingValue,omitempty"`
 }

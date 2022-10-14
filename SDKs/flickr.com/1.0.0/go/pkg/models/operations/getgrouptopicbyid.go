@@ -15,8 +15,8 @@ type GetGroupTopicByIDRequest struct {
 }
 
 type GetGroupTopicByID200ApplicationJSON struct {
-	Stat  *string       `json:"stat"`
-	Topic *shared.Topic `json:"topic"`
+	Stat  *string       `json:"stat,omitempty"`
+	Topic *shared.Topic `json:"topic,omitempty"`
 }
 
 type GetGroupTopicByIDResponse struct {

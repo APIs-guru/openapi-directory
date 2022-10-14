@@ -1,6 +1,6 @@
 package shared
 
 type ListTaskDefinitionsResponse struct {
-	NextToken          *string  `json:"nextToken"`
-	TaskDefinitionArns []string `json:"taskDefinitionArns"`
+	NextToken          *string  `json:"nextToken,omitempty"`
+	TaskDefinitionArns []string `json:"taskDefinitionArns,omitempty"`
 }

@@ -32,9 +32,9 @@ const (
 )
 
 type LookupType struct {
-	Created     *time.Time          `json:"created"`
-	Description *string             `json:"description"`
-	ID          *int64              `json:"id"`
-	LastUpdate  *time.Time          `json:"lastUpdate"`
-	Type        *LookupTypeTypeEnum `json:"type"`
+	Created     *time.Time          `json:"created,omitempty"`
+	Description *string             `json:"description,omitempty"`
+	ID          *int64              `json:"id,omitempty"`
+	LastUpdate  *time.Time          `json:"lastUpdate,omitempty"`
+	Type        *LookupTypeTypeEnum `json:"type,omitempty"`
 }

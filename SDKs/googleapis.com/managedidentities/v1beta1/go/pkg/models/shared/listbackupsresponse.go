@@ -1,7 +1,7 @@
 package shared
 
 type ListBackupsResponse struct {
-	Backups       []Backup `json:"backups"`
-	NextPageToken *string  `json:"nextPageToken"`
-	Unreachable   []string `json:"unreachable"`
+	Backups       []Backup `json:"backups,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Unreachable   []string `json:"unreachable,omitempty"`
 }

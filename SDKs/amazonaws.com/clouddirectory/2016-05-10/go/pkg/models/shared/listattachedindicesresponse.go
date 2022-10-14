@@ -1,6 +1,6 @@
 package shared
 
 type ListAttachedIndicesResponse struct {
-	IndexAttachments []IndexAttachment `json:"IndexAttachments"`
-	NextToken        *string           `json:"NextToken"`
+	IndexAttachments []IndexAttachment `json:"IndexAttachments,omitempty"`
+	NextToken        *string           `json:"NextToken,omitempty"`
 }

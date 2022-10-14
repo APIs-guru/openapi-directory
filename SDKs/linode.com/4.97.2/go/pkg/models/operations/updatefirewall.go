@@ -13,9 +13,9 @@ type UpdateFirewallPathParams struct {
 }
 
 type UpdateFirewallRequestBody struct {
-	Label  *string            `json:"label"`
-	Status *shared.StatusEnum `json:"status"`
-	Tags   []string           `json:"tags"`
+	Label  *string            `json:"label,omitempty"`
+	Status *shared.StatusEnum `json:"status,omitempty"`
+	Tags   []string           `json:"tags,omitempty"`
 }
 
 type UpdateFirewallSecurityOption1 struct {
@@ -39,7 +39,7 @@ type UpdateFirewallRequest struct {
 }
 
 type UpdateFirewallDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateFirewallResponse struct {

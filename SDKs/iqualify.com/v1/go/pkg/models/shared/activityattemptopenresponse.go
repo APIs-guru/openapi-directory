@@ -1,11 +1,11 @@
 package shared
 
 type ActivityAttemptOpenResponse struct {
-	ActivityID    *string                              `json:"activityId"`
-	ActivityType  *string                              `json:"activityType"`
-	Feedback      *ActivityAttemptOpenResponseFeedback `json:"feedback"`
-	LearnerEmail  *string                              `json:"learnerEmail"`
-	OfferingID    *string                              `json:"offeringId"`
-	ResponseText  *string                              `json:"responseText"`
-	UploadedFiles *ActivityAttemptOpenResponseFiles    `json:"uploadedFiles"`
+	ActivityID    *string                              `json:"activityId,omitempty"`
+	ActivityType  *string                              `json:"activityType,omitempty"`
+	Feedback      *ActivityAttemptOpenResponseFeedback `json:"feedback,omitempty"`
+	LearnerEmail  *string                              `json:"learnerEmail,omitempty"`
+	OfferingID    *string                              `json:"offeringId,omitempty"`
+	ResponseText  *string                              `json:"responseText,omitempty"`
+	UploadedFiles *ActivityAttemptOpenResponseFiles    `json:"uploadedFiles,omitempty"`
 }

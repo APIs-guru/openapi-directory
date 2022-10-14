@@ -1,8 +1,8 @@
 package shared
 
 type PullRequestSourceReferenceUpdatedEventMetadata struct {
-	AfterCommitID  *string `json:"afterCommitId"`
-	BeforeCommitID *string `json:"beforeCommitId"`
-	MergeBase      *string `json:"mergeBase"`
-	RepositoryName *string `json:"repositoryName"`
+	AfterCommitID  *string `json:"afterCommitId,omitempty"`
+	BeforeCommitID *string `json:"beforeCommitId,omitempty"`
+	MergeBase      *string `json:"mergeBase,omitempty"`
+	RepositoryName *string `json:"repositoryName,omitempty"`
 }

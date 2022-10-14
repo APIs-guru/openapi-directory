@@ -14,7 +14,7 @@ type UpdateTemplateRequest struct {
 }
 
 type UpdateTemplate200ApplicationJSON struct {
-	Response *shared.TemplateDefinition `json:"response"`
+	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
 
 type UpdateTemplate401ApplicationJSONErrorEnum string
@@ -33,8 +33,8 @@ const (
 )
 
 type UpdateTemplate401ApplicationJSON struct {
-	Error  *UpdateTemplate401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *UpdateTemplate401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type UpdateTemplate403ApplicationJSONErrorEnum string
@@ -44,8 +44,8 @@ const (
 )
 
 type UpdateTemplate403ApplicationJSON struct {
-	Error  *UpdateTemplate403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *UpdateTemplate403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type UpdateTemplate404ApplicationJSONErrorEnum string
@@ -57,8 +57,8 @@ const (
 )
 
 type UpdateTemplate404ApplicationJSON struct {
-	Error  *UpdateTemplate404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *UpdateTemplate404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type UpdateTemplate422ApplicationJSONErrorEnum string
@@ -71,13 +71,13 @@ const (
 )
 
 type UpdateTemplate422ApplicationJSON struct {
-	Error  *UpdateTemplate422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *UpdateTemplate422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type UpdateTemplate500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type UpdateTemplateResponse struct {

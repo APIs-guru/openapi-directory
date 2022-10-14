@@ -1,6 +1,6 @@
 package shared
 
 type CounterStructuredNameAndMetadata struct {
-	Metadata *CounterMetadata       `json:"metadata"`
-	Name     *CounterStructuredName `json:"name"`
+	Metadata *CounterMetadata       `json:"metadata,omitempty"`
+	Name     *CounterStructuredName `json:"name,omitempty"`
 }

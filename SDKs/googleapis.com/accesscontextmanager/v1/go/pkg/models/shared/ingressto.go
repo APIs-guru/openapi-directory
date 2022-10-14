@@ -1,6 +1,6 @@
 package shared
 
 type IngressTo struct {
-	Operations []APIOperation `json:"operations"`
-	Resources  []string       `json:"resources"`
+	Operations []APIOperation `json:"operations,omitempty"`
+	Resources  []string       `json:"resources,omitempty"`
 }

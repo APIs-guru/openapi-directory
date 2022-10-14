@@ -1,7 +1,7 @@
 package shared
 
 type ShippingFulfillmentPagedCollection struct {
-	Fulfillments []ShippingFulfillment `json:"fulfillments"`
-	Total        *int32                `json:"total"`
-	Warnings     []Error               `json:"warnings"`
+	Fulfillments []ShippingFulfillment `json:"fulfillments,omitempty"`
+	Total        *int32                `json:"total,omitempty"`
+	Warnings     []Error               `json:"warnings,omitempty"`
 }

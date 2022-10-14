@@ -14,8 +14,8 @@ type GetPhotoByIDRequest struct {
 }
 
 type GetPhotoByID200ApplicationJSON struct {
-	Photo *shared.Photo `json:"photo"`
-	Stat  *string       `json:"stat"`
+	Photo *shared.Photo `json:"photo,omitempty"`
+	Stat  *string       `json:"stat,omitempty"`
 }
 
 type GetPhotoByIDResponse struct {

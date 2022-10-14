@@ -1,5 +1,5 @@
 package shared
 
 type RealtimeTimeRange struct {
-	StartTimestamp *string `json:"startTimestamp"`
+	StartTimestamp *string `json:"startTimestamp,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type Envelope struct {
-	Payload     *string             `json:"payload"`
-	PayloadType *string             `json:"payloadType"`
-	Signatures  []EnvelopeSignature `json:"signatures"`
+	Payload     *string             `json:"payload,omitempty"`
+	PayloadType *string             `json:"payloadType,omitempty"`
+	Signatures  []EnvelopeSignature `json:"signatures,omitempty"`
 }

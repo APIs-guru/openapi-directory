@@ -1,9 +1,9 @@
 package shared
 
 type X509Parameters struct {
-	AdditionalExtensions []X509Extension `json:"additionalExtensions"`
-	AiaOcspServers       []string        `json:"aiaOcspServers"`
-	CaOptions            *CaOptions      `json:"caOptions"`
-	KeyUsage             *KeyUsage       `json:"keyUsage"`
-	PolicyIds            []ObjectID      `json:"policyIds"`
+	AdditionalExtensions []X509Extension `json:"additionalExtensions,omitempty"`
+	AiaOcspServers       []string        `json:"aiaOcspServers,omitempty"`
+	CaOptions            *CaOptions      `json:"caOptions,omitempty"`
+	KeyUsage             *KeyUsage       `json:"keyUsage,omitempty"`
+	PolicyIds            []ObjectID      `json:"policyIds,omitempty"`
 }

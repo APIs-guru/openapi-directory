@@ -16,23 +16,23 @@ const (
 )
 
 type MonitorV1AlertInstance struct {
-	AccountSid       *string                                  `json:"account_sid"`
-	AlertText        *string                                  `json:"alert_text"`
-	APIVersion       *string                                  `json:"api_version"`
-	DateCreated      *time.Time                               `json:"date_created"`
-	DateGenerated    *time.Time                               `json:"date_generated"`
-	DateUpdated      *time.Time                               `json:"date_updated"`
-	ErrorCode        *string                                  `json:"error_code"`
-	LogLevel         *string                                  `json:"log_level"`
-	MoreInfo         *string                                  `json:"more_info"`
-	RequestHeaders   *string                                  `json:"request_headers"`
-	RequestMethod    *MonitorV1AlertInstanceRequestMethodEnum `json:"request_method"`
-	RequestURL       *string                                  `json:"request_url"`
-	RequestVariables *string                                  `json:"request_variables"`
-	ResourceSid      *string                                  `json:"resource_sid"`
-	ResponseBody     *string                                  `json:"response_body"`
-	ResponseHeaders  *string                                  `json:"response_headers"`
-	ServiceSid       *string                                  `json:"service_sid"`
-	Sid              *string                                  `json:"sid"`
-	URL              *string                                  `json:"url"`
+	AccountSid       *string                                  `json:"account_sid,omitempty"`
+	AlertText        *string                                  `json:"alert_text,omitempty"`
+	APIVersion       *string                                  `json:"api_version,omitempty"`
+	DateCreated      *time.Time                               `json:"date_created,omitempty"`
+	DateGenerated    *time.Time                               `json:"date_generated,omitempty"`
+	DateUpdated      *time.Time                               `json:"date_updated,omitempty"`
+	ErrorCode        *string                                  `json:"error_code,omitempty"`
+	LogLevel         *string                                  `json:"log_level,omitempty"`
+	MoreInfo         *string                                  `json:"more_info,omitempty"`
+	RequestHeaders   *string                                  `json:"request_headers,omitempty"`
+	RequestMethod    *MonitorV1AlertInstanceRequestMethodEnum `json:"request_method,omitempty"`
+	RequestURL       *string                                  `json:"request_url,omitempty"`
+	RequestVariables *string                                  `json:"request_variables,omitempty"`
+	ResourceSid      *string                                  `json:"resource_sid,omitempty"`
+	ResponseBody     *string                                  `json:"response_body,omitempty"`
+	ResponseHeaders  *string                                  `json:"response_headers,omitempty"`
+	ServiceSid       *string                                  `json:"service_sid,omitempty"`
+	Sid              *string                                  `json:"sid,omitempty"`
+	URL              *string                                  `json:"url,omitempty"`
 }

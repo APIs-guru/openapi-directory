@@ -10,5 +10,5 @@ const (
 )
 
 type LongviewPlan struct {
-	LongviewSubscription *LongviewPlanLongviewSubscriptionEnum `json:"longview_subscription"`
+	LongviewSubscription *LongviewPlanLongviewSubscriptionEnum `json:"longview_subscription,omitempty"`
 }

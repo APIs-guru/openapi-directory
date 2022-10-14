@@ -16,7 +16,7 @@ const (
 )
 
 type Notifications struct {
-	Name              *string                              `json:"name"`
-	NotificationTypes []NotificationsNotificationTypesEnum `json:"notificationTypes"`
-	TopicName         *string                              `json:"topicName"`
+	Name              *string                              `json:"name,omitempty"`
+	NotificationTypes []NotificationsNotificationTypesEnum `json:"notificationTypes,omitempty"`
+	TopicName         *string                              `json:"topicName,omitempty"`
 }

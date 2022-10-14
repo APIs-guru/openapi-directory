@@ -19,7 +19,7 @@ type ListNotificationChannelsHeaders struct {
 }
 
 type ListNotificationChannelsRequestBody struct {
-	NextToken *string `json:"NextToken"`
+	NextToken *string `json:"NextToken,omitempty"`
 }
 
 type ListNotificationChannelsRequest struct {

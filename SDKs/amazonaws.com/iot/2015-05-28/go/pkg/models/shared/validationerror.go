@@ -1,5 +1,5 @@
 package shared
 
 type ValidationError struct {
-	ErrorMessage *string `json:"errorMessage"`
+	ErrorMessage *string `json:"errorMessage,omitempty"`
 }

@@ -1,15 +1,15 @@
 package shared
 
 type TeamMember struct {
-	AssignedLocations *TeamMemberAssignedLocations `json:"assigned_locations"`
-	CreatedAt         *string                      `json:"created_at"`
-	EmailAddress      *string                      `json:"email_address"`
-	FamilyName        *string                      `json:"family_name"`
-	GivenName         *string                      `json:"given_name"`
-	ID                *string                      `json:"id"`
-	IsOwner           *bool                        `json:"is_owner"`
-	PhoneNumber       *string                      `json:"phone_number"`
-	ReferenceID       *string                      `json:"reference_id"`
-	Status            *string                      `json:"status"`
-	UpdatedAt         *string                      `json:"updated_at"`
+	AssignedLocations *TeamMemberAssignedLocations `json:"assigned_locations,omitempty"`
+	CreatedAt         *string                      `json:"created_at,omitempty"`
+	EmailAddress      *string                      `json:"email_address,omitempty"`
+	FamilyName        *string                      `json:"family_name,omitempty"`
+	GivenName         *string                      `json:"given_name,omitempty"`
+	ID                *string                      `json:"id,omitempty"`
+	IsOwner           *bool                        `json:"is_owner,omitempty"`
+	PhoneNumber       *string                      `json:"phone_number,omitempty"`
+	ReferenceID       *string                      `json:"reference_id,omitempty"`
+	Status            *string                      `json:"status,omitempty"`
+	UpdatedAt         *string                      `json:"updated_at,omitempty"`
 }

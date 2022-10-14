@@ -13,7 +13,7 @@ const (
 )
 
 type GetStatus200ApplicationJSONData struct {
-	Global *GetStatus200ApplicationJSONDataGlobalEnum `json:"global"`
+	Global *GetStatus200ApplicationJSONDataGlobalEnum `json:"global,omitempty"`
 }
 
 type GetStatus200ApplicationJSONResultEnum string

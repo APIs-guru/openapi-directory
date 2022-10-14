@@ -1,6 +1,6 @@
 package shared
 
 type CreateFindingsFilterResponse struct {
-	Arn *string `json:"arn"`
-	ID  *string `json:"id"`
+	Arn *string `json:"arn,omitempty"`
+	ID  *string `json:"id,omitempty"`
 }

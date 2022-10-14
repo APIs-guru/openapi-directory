@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequest struct {
-	UserEventRejoinScope *GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope"`
+	UserEventRejoinScope *GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope,omitempty"`
 }

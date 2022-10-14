@@ -1,8 +1,8 @@
 package shared
 
 type AccountRef struct {
-	Href *string `json:"href"`
-	ID   *string `json:"id"`
-	Kind *string `json:"kind"`
-	Name *string `json:"name"`
+	Href *string `json:"href,omitempty"`
+	ID   *string `json:"id,omitempty"`
+	Kind *string `json:"kind,omitempty"`
+	Name *string `json:"name,omitempty"`
 }

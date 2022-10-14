@@ -10,12 +10,12 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaDataStream struct {
-	AndroidAppStreamData *GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamData `json:"androidAppStreamData"`
-	CreateTime           *string                                                    `json:"createTime"`
-	DisplayName          *string                                                    `json:"displayName"`
-	IosAppStreamData     *GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData     `json:"iosAppStreamData"`
-	Name                 *string                                                    `json:"name"`
-	Type                 *GoogleAnalyticsAdminV1alphaDataStreamTypeEnum             `json:"type"`
-	UpdateTime           *string                                                    `json:"updateTime"`
-	WebStreamData        *GoogleAnalyticsAdminV1alphaDataStreamWebStreamData        `json:"webStreamData"`
+	AndroidAppStreamData *GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamData `json:"androidAppStreamData,omitempty"`
+	CreateTime           *string                                                    `json:"createTime,omitempty"`
+	DisplayName          *string                                                    `json:"displayName,omitempty"`
+	IosAppStreamData     *GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData     `json:"iosAppStreamData,omitempty"`
+	Name                 *string                                                    `json:"name,omitempty"`
+	Type                 *GoogleAnalyticsAdminV1alphaDataStreamTypeEnum             `json:"type,omitempty"`
+	UpdateTime           *string                                                    `json:"updateTime,omitempty"`
+	WebStreamData        *GoogleAnalyticsAdminV1alphaDataStreamWebStreamData        `json:"webStreamData,omitempty"`
 }

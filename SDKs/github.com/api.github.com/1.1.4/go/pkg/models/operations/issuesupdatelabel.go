@@ -11,9 +11,9 @@ type IssuesUpdateLabelPathParams struct {
 }
 
 type IssuesUpdateLabelRequestBody struct {
-	Color       *string `json:"color"`
-	Description *string `json:"description"`
-	NewName     *string `json:"new_name"`
+	Color       *string `json:"color,omitempty"`
+	Description *string `json:"description,omitempty"`
+	NewName     *string `json:"new_name,omitempty"`
 }
 
 type IssuesUpdateLabelRequest struct {

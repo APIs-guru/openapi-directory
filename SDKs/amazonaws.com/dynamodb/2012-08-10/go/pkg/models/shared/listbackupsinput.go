@@ -5,10 +5,10 @@ import (
 )
 
 type ListBackupsInput struct {
-	BackupType              *BackupTypeFilterEnum `json:"BackupType"`
-	ExclusiveStartBackupArn *string               `json:"ExclusiveStartBackupArn"`
-	Limit                   *int64                `json:"Limit"`
-	TableName               *string               `json:"TableName"`
-	TimeRangeLowerBound     *time.Time            `json:"TimeRangeLowerBound"`
-	TimeRangeUpperBound     *time.Time            `json:"TimeRangeUpperBound"`
+	BackupType              *BackupTypeFilterEnum `json:"BackupType,omitempty"`
+	ExclusiveStartBackupArn *string               `json:"ExclusiveStartBackupArn,omitempty"`
+	Limit                   *int64                `json:"Limit,omitempty"`
+	TableName               *string               `json:"TableName,omitempty"`
+	TimeRangeLowerBound     *time.Time            `json:"TimeRangeLowerBound,omitempty"`
+	TimeRangeUpperBound     *time.Time            `json:"TimeRangeUpperBound,omitempty"`
 }

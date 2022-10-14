@@ -14,7 +14,7 @@ type EndpointFollowPlaylistHeaders struct {
 }
 
 type EndpointFollowPlaylistRequestBody struct {
-	Public *bool `json:"public"`
+	Public *bool `json:"public,omitempty"`
 }
 
 type EndpointFollowPlaylistSecurity struct {

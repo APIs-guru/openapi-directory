@@ -1,6 +1,6 @@
 package shared
 
 type SearchTablesByLfTagsResponse struct {
-	NextToken *string       `json:"NextToken"`
-	TableList []TaggedTable `json:"TableList"`
+	NextToken *string       `json:"NextToken,omitempty"`
+	TableList []TaggedTable `json:"TableList,omitempty"`
 }

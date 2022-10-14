@@ -1,10 +1,10 @@
 package shared
 
 type CheckInRequest struct {
-	DeadlineExpired map[string]interface{} `json:"deadlineExpired"`
-	Event           map[string]interface{} `json:"event"`
-	Events          []TimestampedEvent     `json:"events"`
-	Result          *Status                `json:"result"`
-	SosReport       *string                `json:"sosReport"`
-	WorkerStatus    *WorkerStatus          `json:"workerStatus"`
+	DeadlineExpired map[string]interface{} `json:"deadlineExpired,omitempty"`
+	Event           map[string]interface{} `json:"event,omitempty"`
+	Events          []TimestampedEvent     `json:"events,omitempty"`
+	Result          *Status                `json:"result,omitempty"`
+	SosReport       *string                `json:"sosReport,omitempty"`
+	WorkerStatus    *WorkerStatus          `json:"workerStatus,omitempty"`
 }

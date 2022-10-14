@@ -10,12 +10,12 @@ const (
 )
 
 type PolicyControllerHubConfig struct {
-	AuditIntervalSeconds    *string                                   `json:"auditIntervalSeconds"`
-	ExemptableNamespaces    []string                                  `json:"exemptableNamespaces"`
-	InstallSpec             *PolicyControllerHubConfigInstallSpecEnum `json:"installSpec"`
-	LogDeniesEnabled        *bool                                     `json:"logDeniesEnabled"`
-	Monitoring              *PolicyControllerMonitoringConfig         `json:"monitoring"`
-	MutationEnabled         *bool                                     `json:"mutationEnabled"`
-	ReferentialRulesEnabled *bool                                     `json:"referentialRulesEnabled"`
-	TemplateLibraryConfig   *PolicyControllerTemplateLibraryConfig    `json:"templateLibraryConfig"`
+	AuditIntervalSeconds    *string                                   `json:"auditIntervalSeconds,omitempty"`
+	ExemptableNamespaces    []string                                  `json:"exemptableNamespaces,omitempty"`
+	InstallSpec             *PolicyControllerHubConfigInstallSpecEnum `json:"installSpec,omitempty"`
+	LogDeniesEnabled        *bool                                     `json:"logDeniesEnabled,omitempty"`
+	Monitoring              *PolicyControllerMonitoringConfig         `json:"monitoring,omitempty"`
+	MutationEnabled         *bool                                     `json:"mutationEnabled,omitempty"`
+	ReferentialRulesEnabled *bool                                     `json:"referentialRulesEnabled,omitempty"`
+	TemplateLibraryConfig   *PolicyControllerTemplateLibraryConfig    `json:"templateLibraryConfig,omitempty"`
 }

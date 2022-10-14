@@ -1,7 +1,7 @@
 package shared
 
 type CohortSpec struct {
-	CohortReportSettings *CohortReportSettings `json:"cohortReportSettings"`
-	Cohorts              []Cohort              `json:"cohorts"`
-	CohortsRange         *CohortsRange         `json:"cohortsRange"`
+	CohortReportSettings *CohortReportSettings `json:"cohortReportSettings,omitempty"`
+	Cohorts              []Cohort              `json:"cohorts,omitempty"`
+	CohortsRange         *CohortsRange         `json:"cohortsRange,omitempty"`
 }

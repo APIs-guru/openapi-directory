@@ -1,8 +1,8 @@
 package shared
 
 type AbuseReport struct {
-	AbuseTypes      []AbuseType     `json:"abuseTypes"`
-	Description     *string         `json:"description"`
-	RelatedEntities []RelatedEntity `json:"relatedEntities"`
-	Subject         *Entity         `json:"subject"`
+	AbuseTypes      []AbuseType     `json:"abuseTypes,omitempty"`
+	Description     *string         `json:"description,omitempty"`
+	RelatedEntities []RelatedEntity `json:"relatedEntities,omitempty"`
+	Subject         *Entity         `json:"subject,omitempty"`
 }

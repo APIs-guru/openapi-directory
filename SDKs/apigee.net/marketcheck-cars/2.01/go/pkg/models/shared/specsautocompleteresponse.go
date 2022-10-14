@@ -1,5 +1,5 @@
 package shared
 
 type SpecsAutoCompleteResponse struct {
-	Terms []string `json:"terms"`
+	Terms []string `json:"terms,omitempty"`
 }

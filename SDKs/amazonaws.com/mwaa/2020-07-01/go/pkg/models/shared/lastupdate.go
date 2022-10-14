@@ -5,7 +5,7 @@ import (
 )
 
 type LastUpdate struct {
-	CreatedAt *time.Time        `json:"CreatedAt"`
-	Error     *UpdateError      `json:"Error"`
-	Status    *UpdateStatusEnum `json:"Status"`
+	CreatedAt *time.Time        `json:"CreatedAt,omitempty"`
+	Error     *UpdateError      `json:"Error,omitempty"`
+	Status    *UpdateStatusEnum `json:"Status,omitempty"`
 }

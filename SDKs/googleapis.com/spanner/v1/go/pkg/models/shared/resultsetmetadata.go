@@ -1,7 +1,7 @@
 package shared
 
 type ResultSetMetadata struct {
-	RowType              *StructType  `json:"rowType"`
-	Transaction          *Transaction `json:"transaction"`
-	UndeclaredParameters *StructType  `json:"undeclaredParameters"`
+	RowType              *StructType  `json:"rowType,omitempty"`
+	Transaction          *Transaction `json:"transaction,omitempty"`
+	UndeclaredParameters *StructType  `json:"undeclaredParameters,omitempty"`
 }

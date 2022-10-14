@@ -1,6 +1,6 @@
 package shared
 
 type ActivityAndIdentity struct {
-	Activity *interface{} `json:"activity"`
-	Identity *Identity    `json:"identity"`
+	Activity *interface{} `json:"activity,omitempty"`
+	Identity *Identity    `json:"identity,omitempty"`
 }

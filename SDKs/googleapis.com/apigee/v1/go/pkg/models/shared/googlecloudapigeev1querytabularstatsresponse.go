@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudApigeeV1QueryTabularStatsResponse struct {
-	Columns       []string        `json:"columns"`
-	NextPageToken *string         `json:"nextPageToken"`
-	Values        [][]interface{} `json:"values"`
+	Columns       []string        `json:"columns,omitempty"`
+	NextPageToken *string         `json:"nextPageToken,omitempty"`
+	Values        [][]interface{} `json:"values,omitempty"`
 }

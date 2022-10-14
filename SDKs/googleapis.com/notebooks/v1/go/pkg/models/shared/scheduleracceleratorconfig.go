@@ -15,6 +15,6 @@ const (
 )
 
 type SchedulerAcceleratorConfig struct {
-	CoreCount *string                             `json:"coreCount"`
-	Type      *SchedulerAcceleratorConfigTypeEnum `json:"type"`
+	CoreCount *string                             `json:"coreCount,omitempty"`
+	Type      *SchedulerAcceleratorConfigTypeEnum `json:"type,omitempty"`
 }

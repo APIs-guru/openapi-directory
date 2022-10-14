@@ -5,31 +5,31 @@ import (
 )
 
 type CreateNewVolumeRequestBody1 struct {
-	CreatedAt       *string                                                                                                                                 `json:"created_at"`
-	Description     *string                                                                                                                                 `json:"description"`
-	DropletIds      []int64                                                                                                                                 `json:"droplet_ids"`
-	FilesystemLabel map[string]interface{}                                                                                                                  `json:"filesystem_label"`
+	CreatedAt       *string                                                                                                                                 `json:"created_at,omitempty"`
+	Description     *string                                                                                                                                 `json:"description,omitempty"`
+	DropletIds      []int64                                                                                                                                 `json:"droplet_ids,omitempty"`
+	FilesystemLabel map[string]interface{}                                                                                                                  `json:"filesystem_label,omitempty"`
 	FilesystemType  string                                                                                                                                  `json:"filesystem_type"`
-	ID              *string                                                                                                                                 `json:"id"`
+	ID              *string                                                                                                                                 `json:"id,omitempty"`
 	Name            string                                                                                                                                  `json:"name"`
 	Region          shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
 	SizeGigabytes   int64                                                                                                                                   `json:"size_gigabytes"`
-	SnapshotID      *string                                                                                                                                 `json:"snapshot_id"`
-	Tags            []string                                                                                                                                `json:"tags"`
+	SnapshotID      *string                                                                                                                                 `json:"snapshot_id,omitempty"`
+	Tags            []string                                                                                                                                `json:"tags,omitempty"`
 }
 
 type CreateNewVolumeRequestBody2 struct {
-	CreatedAt       *string                                                                                                                                 `json:"created_at"`
-	Description     *string                                                                                                                                 `json:"description"`
-	DropletIds      []int64                                                                                                                                 `json:"droplet_ids"`
-	FilesystemLabel map[string]interface{}                                                                                                                  `json:"filesystem_label"`
+	CreatedAt       *string                                                                                                                                 `json:"created_at,omitempty"`
+	Description     *string                                                                                                                                 `json:"description,omitempty"`
+	DropletIds      []int64                                                                                                                                 `json:"droplet_ids,omitempty"`
+	FilesystemLabel map[string]interface{}                                                                                                                  `json:"filesystem_label,omitempty"`
 	FilesystemType  string                                                                                                                                  `json:"filesystem_type"`
-	ID              *string                                                                                                                                 `json:"id"`
+	ID              *string                                                                                                                                 `json:"id,omitempty"`
 	Name            string                                                                                                                                  `json:"name"`
 	Region          shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
 	SizeGigabytes   int64                                                                                                                                   `json:"size_gigabytes"`
-	SnapshotID      *string                                                                                                                                 `json:"snapshot_id"`
-	Tags            []string                                                                                                                                `json:"tags"`
+	SnapshotID      *string                                                                                                                                 `json:"snapshot_id,omitempty"`
+	Tags            []string                                                                                                                                `json:"tags,omitempty"`
 }
 
 type CreateNewVolumeRequest struct {
@@ -39,7 +39,7 @@ type CreateNewVolumeRequest struct {
 type CreateNewVolume401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateNewVolumeResponse struct {

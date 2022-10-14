@@ -1,9 +1,9 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaConversionEvent struct {
-	CreateTime *string `json:"createTime"`
-	Custom     *bool   `json:"custom"`
-	Deletable  *bool   `json:"deletable"`
-	EventName  *string `json:"eventName"`
-	Name       *string `json:"name"`
+	CreateTime *string `json:"createTime,omitempty"`
+	Custom     *bool   `json:"custom,omitempty"`
+	Deletable  *bool   `json:"deletable,omitempty"`
+	EventName  *string `json:"eventName,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }

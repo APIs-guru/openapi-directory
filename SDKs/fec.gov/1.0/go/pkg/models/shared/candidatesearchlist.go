@@ -1,5 +1,5 @@
 package shared
 
 type CandidateSearchList struct {
-	Results []CandidateSearch `json:"results"`
+	Results []CandidateSearch `json:"results,omitempty"`
 }

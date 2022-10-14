@@ -1,6 +1,6 @@
 package shared
 
 type ListDocumentsResult struct {
-	DocumentIdentifiers []DocumentIdentifier `json:"DocumentIdentifiers"`
-	NextToken           *string              `json:"NextToken"`
+	DocumentIdentifiers []DocumentIdentifier `json:"DocumentIdentifiers,omitempty"`
+	NextToken           *string              `json:"NextToken,omitempty"`
 }

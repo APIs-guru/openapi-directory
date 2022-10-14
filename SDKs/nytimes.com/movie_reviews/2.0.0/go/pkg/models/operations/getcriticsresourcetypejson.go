@@ -13,10 +13,10 @@ type GetCriticsResourceTypeJSONRequest struct {
 }
 
 type GetCriticsResourceTypeJSON200ApplicationJSON struct {
-	Copyright  *string         `json:"copyright"`
-	NumResults *int64          `json:"num_results"`
-	Results    []shared.Critic `json:"results"`
-	Status     *string         `json:"status"`
+	Copyright  *string         `json:"copyright,omitempty"`
+	NumResults *int64          `json:"num_results,omitempty"`
+	Results    []shared.Critic `json:"results,omitempty"`
+	Status     *string         `json:"status,omitempty"`
 }
 
 type GetCriticsResourceTypeJSONResponse struct {

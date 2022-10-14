@@ -19,15 +19,15 @@ const (
 )
 
 type UtilizationReport struct {
-	CreateTime   *string                         `json:"createTime"`
-	DisplayName  *string                         `json:"displayName"`
-	Error        *Status                         `json:"error"`
-	FrameEndTime *string                         `json:"frameEndTime"`
-	Name         *string                         `json:"name"`
-	State        *UtilizationReportStateEnum     `json:"state"`
-	StateTime    *string                         `json:"stateTime"`
-	TimeFrame    *UtilizationReportTimeFrameEnum `json:"timeFrame"`
-	VMCount      *int32                          `json:"vmCount"`
-	Vms          []VMUtilizationInfo             `json:"vms"`
-	VmsCount     *int32                          `json:"vmsCount"`
+	CreateTime   *string                         `json:"createTime,omitempty"`
+	DisplayName  *string                         `json:"displayName,omitempty"`
+	Error        *Status                         `json:"error,omitempty"`
+	FrameEndTime *string                         `json:"frameEndTime,omitempty"`
+	Name         *string                         `json:"name,omitempty"`
+	State        *UtilizationReportStateEnum     `json:"state,omitempty"`
+	StateTime    *string                         `json:"stateTime,omitempty"`
+	TimeFrame    *UtilizationReportTimeFrameEnum `json:"timeFrame,omitempty"`
+	VMCount      *int32                          `json:"vmCount,omitempty"`
+	Vms          []VMUtilizationInfo             `json:"vms,omitempty"`
+	VmsCount     *int32                          `json:"vmsCount,omitempty"`
 }

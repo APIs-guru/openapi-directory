@@ -9,6 +9,6 @@ const (
 )
 
 type ProtectConfig struct {
-	WorkloadConfig            *WorkloadConfig                             `json:"workloadConfig"`
-	WorkloadVulnerabilityMode *ProtectConfigWorkloadVulnerabilityModeEnum `json:"workloadVulnerabilityMode"`
+	WorkloadConfig            *WorkloadConfig                             `json:"workloadConfig,omitempty"`
+	WorkloadVulnerabilityMode *ProtectConfigWorkloadVulnerabilityModeEnum `json:"workloadVulnerabilityMode,omitempty"`
 }

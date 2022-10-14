@@ -1,11 +1,11 @@
 package shared
 
 type ContactInfo struct {
-	ContactEmail               *string `json:"contactEmail"`
-	DataProtectionOfficerEmail *string `json:"dataProtectionOfficerEmail"`
-	DataProtectionOfficerName  *string `json:"dataProtectionOfficerName"`
-	DataProtectionOfficerPhone *string `json:"dataProtectionOfficerPhone"`
-	EuRepresentativeEmail      *string `json:"euRepresentativeEmail"`
-	EuRepresentativeName       *string `json:"euRepresentativeName"`
-	EuRepresentativePhone      *string `json:"euRepresentativePhone"`
+	ContactEmail               *string `json:"contactEmail,omitempty"`
+	DataProtectionOfficerEmail *string `json:"dataProtectionOfficerEmail,omitempty"`
+	DataProtectionOfficerName  *string `json:"dataProtectionOfficerName,omitempty"`
+	DataProtectionOfficerPhone *string `json:"dataProtectionOfficerPhone,omitempty"`
+	EuRepresentativeEmail      *string `json:"euRepresentativeEmail,omitempty"`
+	EuRepresentativeName       *string `json:"euRepresentativeName,omitempty"`
+	EuRepresentativePhone      *string `json:"euRepresentativePhone,omitempty"`
 }

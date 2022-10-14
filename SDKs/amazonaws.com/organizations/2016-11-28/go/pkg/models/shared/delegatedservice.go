@@ -5,6 +5,6 @@ import (
 )
 
 type DelegatedService struct {
-	DelegationEnabledDate *time.Time `json:"DelegationEnabledDate"`
-	ServicePrincipal      *string    `json:"ServicePrincipal"`
+	DelegationEnabledDate *time.Time `json:"DelegationEnabledDate,omitempty"`
+	ServicePrincipal      *string    `json:"ServicePrincipal,omitempty"`
 }

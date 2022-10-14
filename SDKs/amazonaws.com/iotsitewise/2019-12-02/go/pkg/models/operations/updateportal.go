@@ -19,22 +19,22 @@ type UpdatePortalHeaders struct {
 }
 
 type UpdatePortalRequestBodyAlarms struct {
-	AlarmRoleArn          *string `json:"alarmRoleArn"`
-	NotificationLambdaArn *string `json:"notificationLambdaArn"`
+	AlarmRoleArn          *string `json:"alarmRoleArn,omitempty"`
+	NotificationLambdaArn *string `json:"notificationLambdaArn,omitempty"`
 }
 
 type UpdatePortalRequestBodyPortalLogoImage struct {
-	File *shared.ImageFile `json:"file"`
-	ID   *string           `json:"id"`
+	File *shared.ImageFile `json:"file,omitempty"`
+	ID   *string           `json:"id,omitempty"`
 }
 
 type UpdatePortalRequestBody struct {
-	Alarms                  *UpdatePortalRequestBodyAlarms          `json:"alarms"`
-	ClientToken             *string                                 `json:"clientToken"`
-	NotificationSenderEmail *string                                 `json:"notificationSenderEmail"`
+	Alarms                  *UpdatePortalRequestBodyAlarms          `json:"alarms,omitempty"`
+	ClientToken             *string                                 `json:"clientToken,omitempty"`
+	NotificationSenderEmail *string                                 `json:"notificationSenderEmail,omitempty"`
 	PortalContactEmail      string                                  `json:"portalContactEmail"`
-	PortalDescription       *string                                 `json:"portalDescription"`
-	PortalLogoImage         *UpdatePortalRequestBodyPortalLogoImage `json:"portalLogoImage"`
+	PortalDescription       *string                                 `json:"portalDescription,omitempty"`
+	PortalLogoImage         *UpdatePortalRequestBodyPortalLogoImage `json:"portalLogoImage,omitempty"`
 	PortalName              string                                  `json:"portalName"`
 	RoleArn                 string                                  `json:"roleArn"`
 }

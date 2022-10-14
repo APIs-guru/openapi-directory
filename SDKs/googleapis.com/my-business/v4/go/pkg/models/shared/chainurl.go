@@ -1,5 +1,5 @@
 package shared
 
 type ChainURL struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }

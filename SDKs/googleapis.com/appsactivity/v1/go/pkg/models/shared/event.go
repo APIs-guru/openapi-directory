@@ -33,13 +33,13 @@ const (
 )
 
 type Event struct {
-	AdditionalEventTypes []EventAdditionalEventTypesEnum `json:"additionalEventTypes"`
-	EventTimeMillis      *string                         `json:"eventTimeMillis"`
-	FromUserDeletion     *bool                           `json:"fromUserDeletion"`
-	Move                 *Move                           `json:"move"`
-	PermissionChanges    []PermissionChange              `json:"permissionChanges"`
-	PrimaryEventType     *EventPrimaryEventTypeEnum      `json:"primaryEventType"`
-	Rename               *Rename                         `json:"rename"`
-	Target               *Target                         `json:"target"`
-	User                 *User                           `json:"user"`
+	AdditionalEventTypes []EventAdditionalEventTypesEnum `json:"additionalEventTypes,omitempty"`
+	EventTimeMillis      *string                         `json:"eventTimeMillis,omitempty"`
+	FromUserDeletion     *bool                           `json:"fromUserDeletion,omitempty"`
+	Move                 *Move                           `json:"move,omitempty"`
+	PermissionChanges    []PermissionChange              `json:"permissionChanges,omitempty"`
+	PrimaryEventType     *EventPrimaryEventTypeEnum      `json:"primaryEventType,omitempty"`
+	Rename               *Rename                         `json:"rename,omitempty"`
+	Target               *Target                         `json:"target,omitempty"`
+	User                 *User                           `json:"user,omitempty"`
 }

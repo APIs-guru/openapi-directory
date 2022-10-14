@@ -22,14 +22,14 @@ const (
 )
 
 type CreateCallRequestAnswerURL struct {
-	AnswerMethod     *CreateCallRequestAnswerURLAnswerMethodEnum     `json:"answer_method"`
+	AnswerMethod     *CreateCallRequestAnswerURLAnswerMethodEnum     `json:"answer_method,omitempty"`
 	AnswerURL        []string                                        `json:"answer_url"`
-	EventMethod      *CreateCallRequestAnswerURLEventMethodEnum      `json:"event_method"`
-	EventURL         []string                                        `json:"event_url"`
-	From             *EndpointPhoneFrom                              `json:"from"`
-	LengthTimer      *int64                                          `json:"length_timer"`
-	MachineDetection *CreateCallRequestAnswerURLMachineDetectionEnum `json:"machine_detection"`
-	RandomFromNumber *bool                                           `json:"random_from_number"`
-	RingingTimer     *int64                                          `json:"ringing_timer"`
+	EventMethod      *CreateCallRequestAnswerURLEventMethodEnum      `json:"event_method,omitempty"`
+	EventURL         []string                                        `json:"event_url,omitempty"`
+	From             *EndpointPhoneFrom                              `json:"from,omitempty"`
+	LengthTimer      *int64                                          `json:"length_timer,omitempty"`
+	MachineDetection *CreateCallRequestAnswerURLMachineDetectionEnum `json:"machine_detection,omitempty"`
+	RandomFromNumber *bool                                           `json:"random_from_number,omitempty"`
+	RingingTimer     *int64                                          `json:"ringing_timer,omitempty"`
 	To               []interface{}                                   `json:"to"`
 }

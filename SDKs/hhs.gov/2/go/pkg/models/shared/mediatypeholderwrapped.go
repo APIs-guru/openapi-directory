@@ -1,7 +1,7 @@
 package shared
 
 type MediaTypeHolderWrapped struct {
-	Callback *string           `json:"callback"`
-	Meta     *Meta             `json:"meta"`
-	Results  []MediaTypeHolder `json:"results"`
+	Callback *string           `json:"callback,omitempty"`
+	Meta     *Meta             `json:"meta,omitempty"`
+	Results  []MediaTypeHolder `json:"results,omitempty"`
 }

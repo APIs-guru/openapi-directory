@@ -1,5 +1,5 @@
 package shared
 
 type DetectionsListResponse struct {
-	Detections [][]DetectionsResource `json:"detections"`
+	Detections [][]DetectionsResource `json:"detections,omitempty"`
 }

@@ -1,12 +1,12 @@
 package shared
 
 type TreemapChartColorScale struct {
-	MaxValueColor      *Color      `json:"maxValueColor"`
-	MaxValueColorStyle *ColorStyle `json:"maxValueColorStyle"`
-	MidValueColor      *Color      `json:"midValueColor"`
-	MidValueColorStyle *ColorStyle `json:"midValueColorStyle"`
-	MinValueColor      *Color      `json:"minValueColor"`
-	MinValueColorStyle *ColorStyle `json:"minValueColorStyle"`
-	NoDataColor        *Color      `json:"noDataColor"`
-	NoDataColorStyle   *ColorStyle `json:"noDataColorStyle"`
+	MaxValueColor      *Color      `json:"maxValueColor,omitempty"`
+	MaxValueColorStyle *ColorStyle `json:"maxValueColorStyle,omitempty"`
+	MidValueColor      *Color      `json:"midValueColor,omitempty"`
+	MidValueColorStyle *ColorStyle `json:"midValueColorStyle,omitempty"`
+	MinValueColor      *Color      `json:"minValueColor,omitempty"`
+	MinValueColorStyle *ColorStyle `json:"minValueColorStyle,omitempty"`
+	NoDataColor        *Color      `json:"noDataColor,omitempty"`
+	NoDataColorStyle   *ColorStyle `json:"noDataColorStyle,omitempty"`
 }

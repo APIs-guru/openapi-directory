@@ -1,12 +1,12 @@
 package shared
 
 type Building struct {
-	Address      *BuildingAddress     `json:"address"`
-	BuildingID   *string              `json:"buildingId"`
-	BuildingName *string              `json:"buildingName"`
-	Coordinates  *BuildingCoordinates `json:"coordinates"`
-	Description  *string              `json:"description"`
-	Etags        *string              `json:"etags"`
-	FloorNames   []string             `json:"floorNames"`
-	Kind         *string              `json:"kind"`
+	Address      *BuildingAddress     `json:"address,omitempty"`
+	BuildingID   *string              `json:"buildingId,omitempty"`
+	BuildingName *string              `json:"buildingName,omitempty"`
+	Coordinates  *BuildingCoordinates `json:"coordinates,omitempty"`
+	Description  *string              `json:"description,omitempty"`
+	Etags        *string              `json:"etags,omitempty"`
+	FloorNames   []string             `json:"floorNames,omitempty"`
+	Kind         *string              `json:"kind,omitempty"`
 }

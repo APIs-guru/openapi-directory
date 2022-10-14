@@ -10,7 +10,7 @@ type EndpointTransferAUsersPlaybackHeaders struct {
 
 type EndpointTransferAUsersPlaybackRequestBody struct {
 	DeviceIds []string `json:"device_ids"`
-	Play      *bool    `json:"play"`
+	Play      *bool    `json:"play,omitempty"`
 }
 
 type EndpointTransferAUsersPlaybackSecurity struct {

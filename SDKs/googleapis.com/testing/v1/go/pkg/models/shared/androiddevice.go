@@ -1,8 +1,8 @@
 package shared
 
 type AndroidDevice struct {
-	AndroidModelID   *string `json:"androidModelId"`
-	AndroidVersionID *string `json:"androidVersionId"`
-	Locale           *string `json:"locale"`
-	Orientation      *string `json:"orientation"`
+	AndroidModelID   *string `json:"androidModelId,omitempty"`
+	AndroidVersionID *string `json:"androidVersionId,omitempty"`
+	Locale           *string `json:"locale,omitempty"`
+	Orientation      *string `json:"orientation,omitempty"`
 }

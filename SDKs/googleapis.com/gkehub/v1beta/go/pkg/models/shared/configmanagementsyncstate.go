@@ -14,11 +14,11 @@ const (
 )
 
 type ConfigManagementSyncState struct {
-	Code         *ConfigManagementSyncStateCodeEnum `json:"code"`
-	Errors       []ConfigManagementSyncError        `json:"errors"`
-	ImportToken  *string                            `json:"importToken"`
-	LastSync     *string                            `json:"lastSync"`
-	LastSyncTime *string                            `json:"lastSyncTime"`
-	SourceToken  *string                            `json:"sourceToken"`
-	SyncToken    *string                            `json:"syncToken"`
+	Code         *ConfigManagementSyncStateCodeEnum `json:"code,omitempty"`
+	Errors       []ConfigManagementSyncError        `json:"errors,omitempty"`
+	ImportToken  *string                            `json:"importToken,omitempty"`
+	LastSync     *string                            `json:"lastSync,omitempty"`
+	LastSyncTime *string                            `json:"lastSyncTime,omitempty"`
+	SourceToken  *string                            `json:"sourceToken,omitempty"`
+	SyncToken    *string                            `json:"syncToken,omitempty"`
 }

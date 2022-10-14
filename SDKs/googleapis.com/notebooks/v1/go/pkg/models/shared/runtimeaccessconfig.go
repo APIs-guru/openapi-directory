@@ -9,7 +9,7 @@ const (
 )
 
 type RuntimeAccessConfig struct {
-	AccessType   *RuntimeAccessConfigAccessTypeEnum `json:"accessType"`
-	ProxyURI     *string                            `json:"proxyUri"`
-	RuntimeOwner *string                            `json:"runtimeOwner"`
+	AccessType   *RuntimeAccessConfigAccessTypeEnum `json:"accessType,omitempty"`
+	ProxyURI     *string                            `json:"proxyUri,omitempty"`
+	RuntimeOwner *string                            `json:"runtimeOwner,omitempty"`
 }

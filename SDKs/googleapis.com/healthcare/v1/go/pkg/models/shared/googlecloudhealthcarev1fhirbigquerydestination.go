@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleCloudHealthcareV1FhirBigQueryDestination struct {
-	DatasetURI       *string                                                             `json:"datasetUri"`
-	Force            *bool                                                               `json:"force"`
-	SchemaConfig     *SchemaConfig                                                       `json:"schemaConfig"`
-	WriteDisposition *GoogleCloudHealthcareV1FhirBigQueryDestinationWriteDispositionEnum `json:"writeDisposition"`
+	DatasetURI       *string                                                             `json:"datasetUri,omitempty"`
+	Force            *bool                                                               `json:"force,omitempty"`
+	SchemaConfig     *SchemaConfig                                                       `json:"schemaConfig,omitempty"`
+	WriteDisposition *GoogleCloudHealthcareV1FhirBigQueryDestinationWriteDispositionEnum `json:"writeDisposition,omitempty"`
 }

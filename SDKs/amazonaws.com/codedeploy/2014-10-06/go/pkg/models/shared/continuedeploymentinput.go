@@ -1,6 +1,6 @@
 package shared
 
 type ContinueDeploymentInput struct {
-	DeploymentID       *string                 `json:"deploymentId"`
-	DeploymentWaitType *DeploymentWaitTypeEnum `json:"deploymentWaitType"`
+	DeploymentID       *string                 `json:"deploymentId,omitempty"`
+	DeploymentWaitType *DeploymentWaitTypeEnum `json:"deploymentWaitType,omitempty"`
 }

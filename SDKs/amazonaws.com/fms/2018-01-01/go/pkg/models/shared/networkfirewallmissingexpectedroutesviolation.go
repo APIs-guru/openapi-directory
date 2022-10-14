@@ -1,7 +1,7 @@
 package shared
 
 type NetworkFirewallMissingExpectedRoutesViolation struct {
-	ExpectedRoutes  []ExpectedRoute `json:"ExpectedRoutes"`
-	ViolationTarget *string         `json:"ViolationTarget"`
-	VpcID           *string         `json:"VpcId"`
+	ExpectedRoutes  []ExpectedRoute `json:"ExpectedRoutes,omitempty"`
+	ViolationTarget *string         `json:"ViolationTarget,omitempty"`
+	VpcID           *string         `json:"VpcId,omitempty"`
 }

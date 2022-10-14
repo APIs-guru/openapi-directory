@@ -1,7 +1,7 @@
 package shared
 
 type OrderParametersServiceOffering struct {
-	ProviderControlParameters map[string]interface{} `json:"provider_control_parameters"`
-	ServiceParameters         map[string]interface{} `json:"service_parameters"`
-	ServicePlanID             *string                `json:"service_plan_id"`
+	ProviderControlParameters map[string]interface{} `json:"provider_control_parameters,omitempty"`
+	ServiceParameters         map[string]interface{} `json:"service_parameters,omitempty"`
+	ServicePlanID             *string                `json:"service_plan_id,omitempty"`
 }

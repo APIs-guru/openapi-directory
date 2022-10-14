@@ -5,6 +5,6 @@ import (
 )
 
 type PreparedStatementSummary struct {
-	LastModifiedTime *time.Time `json:"LastModifiedTime"`
-	StatementName    *string    `json:"StatementName"`
+	LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
+	StatementName    *string    `json:"StatementName,omitempty"`
 }

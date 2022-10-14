@@ -1,7 +1,7 @@
 package shared
 
 type ListImagesResponse struct {
-	ImageVersionList []ImageVersion `json:"imageVersionList"`
-	NextToken        *string        `json:"nextToken"`
-	RequestID        *string        `json:"requestId"`
+	ImageVersionList []ImageVersion `json:"imageVersionList,omitempty"`
+	NextToken        *string        `json:"nextToken,omitempty"`
+	RequestID        *string        `json:"requestId,omitempty"`
 }

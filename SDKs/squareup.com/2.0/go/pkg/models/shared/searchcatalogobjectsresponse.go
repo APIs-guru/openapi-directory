@@ -1,9 +1,9 @@
 package shared
 
 type SearchCatalogObjectsResponse struct {
-	Cursor         *string         `json:"cursor"`
-	Errors         []Error         `json:"errors"`
-	LatestTime     *string         `json:"latest_time"`
-	Objects        []CatalogObject `json:"objects"`
-	RelatedObjects []CatalogObject `json:"related_objects"`
+	Cursor         *string         `json:"cursor,omitempty"`
+	Errors         []Error         `json:"errors,omitempty"`
+	LatestTime     *string         `json:"latest_time,omitempty"`
+	Objects        []CatalogObject `json:"objects,omitempty"`
+	RelatedObjects []CatalogObject `json:"related_objects,omitempty"`
 }

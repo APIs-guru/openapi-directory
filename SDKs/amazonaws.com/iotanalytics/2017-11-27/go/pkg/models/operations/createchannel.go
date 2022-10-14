@@ -15,20 +15,20 @@ type CreateChannelHeaders struct {
 }
 
 type CreateChannelRequestBodyChannelStorage struct {
-	CustomerManagedS3 *shared.CustomerManagedChannelS3Storage `json:"customerManagedS3"`
-	ServiceManagedS3  map[string]interface{}                  `json:"serviceManagedS3"`
+	CustomerManagedS3 *shared.CustomerManagedChannelS3Storage `json:"customerManagedS3,omitempty"`
+	ServiceManagedS3  map[string]interface{}                  `json:"serviceManagedS3,omitempty"`
 }
 
 type CreateChannelRequestBodyRetentionPeriod struct {
-	NumberOfDays *int64 `json:"numberOfDays"`
-	Unlimited    *bool  `json:"unlimited"`
+	NumberOfDays *int64 `json:"numberOfDays,omitempty"`
+	Unlimited    *bool  `json:"unlimited,omitempty"`
 }
 
 type CreateChannelRequestBody struct {
 	ChannelName     string                                   `json:"channelName"`
-	ChannelStorage  *CreateChannelRequestBodyChannelStorage  `json:"channelStorage"`
-	RetentionPeriod *CreateChannelRequestBodyRetentionPeriod `json:"retentionPeriod"`
-	Tags            []shared.Tag                             `json:"tags"`
+	ChannelStorage  *CreateChannelRequestBodyChannelStorage  `json:"channelStorage,omitempty"`
+	RetentionPeriod *CreateChannelRequestBodyRetentionPeriod `json:"retentionPeriod,omitempty"`
+	Tags            []shared.Tag                             `json:"tags,omitempty"`
 }
 
 type CreateChannelRequest struct {

@@ -1,9 +1,9 @@
 package shared
 
 type CompanySettingDto struct {
-	EnableVocrReporting *bool   `json:"enableVOCRReporting"`
-	ID                  *int64  `json:"id"`
-	UseAllocations      *bool   `json:"useAllocations"`
-	Value               *string `json:"value"`
-	VocrSettingValue    *bool   `json:"vocrSettingValue"`
+	EnableVocrReporting *bool   `json:"enableVOCRReporting,omitempty"`
+	ID                  *int64  `json:"id,omitempty"`
+	UseAllocations      *bool   `json:"useAllocations,omitempty"`
+	Value               *string `json:"value,omitempty"`
+	VocrSettingValue    *bool   `json:"vocrSettingValue,omitempty"`
 }

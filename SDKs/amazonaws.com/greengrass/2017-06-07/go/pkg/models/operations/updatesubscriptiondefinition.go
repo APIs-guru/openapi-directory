@@ -15,7 +15,7 @@ type UpdateSubscriptionDefinitionHeaders struct {
 }
 
 type UpdateSubscriptionDefinitionRequestBody struct {
-	Name *string `json:"Name"`
+	Name *string `json:"Name,omitempty"`
 }
 
 type UpdateSubscriptionDefinitionRequest struct {

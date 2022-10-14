@@ -23,40 +23,40 @@ type GetChartPkRequest struct {
 }
 
 type GetChartPk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetChartPk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetChartPk200ApplicationJSON struct {
-	DescriptionColumns *GetChartPk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                         `json:"id"`
-	LabelColumns       *GetChartPk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.ChartRestAPIGet                         `json:"result"`
-	ShowColumns        []string                                        `json:"show_columns"`
-	ShowTitle          *string                                         `json:"show_title"`
+	DescriptionColumns *GetChartPk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                         `json:"id,omitempty"`
+	LabelColumns       *GetChartPk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.ChartRestAPIGet                         `json:"result,omitempty"`
+	ShowColumns        []string                                        `json:"show_columns,omitempty"`
+	ShowTitle          *string                                         `json:"show_title,omitempty"`
 }
 
 type GetChartPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkResponse struct {

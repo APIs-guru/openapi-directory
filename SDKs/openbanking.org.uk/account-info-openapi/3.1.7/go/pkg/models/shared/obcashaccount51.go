@@ -2,7 +2,7 @@ package shared
 
 type ObCashAccount51 struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }

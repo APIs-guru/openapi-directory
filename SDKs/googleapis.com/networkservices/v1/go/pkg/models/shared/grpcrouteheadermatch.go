@@ -9,7 +9,7 @@ const (
 )
 
 type GrpcRouteHeaderMatch struct {
-	Key   *string                       `json:"key"`
-	Type  *GrpcRouteHeaderMatchTypeEnum `json:"type"`
-	Value *string                       `json:"value"`
+	Key   *string                       `json:"key,omitempty"`
+	Type  *GrpcRouteHeaderMatchTypeEnum `json:"type,omitempty"`
+	Value *string                       `json:"value,omitempty"`
 }

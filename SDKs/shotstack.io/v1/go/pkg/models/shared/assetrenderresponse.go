@@ -1,5 +1,5 @@
 package shared
 
 type AssetRenderResponse struct {
-	Data []AssetResponseData `json:"data"`
+	Data []AssetResponseData `json:"data,omitempty"`
 }

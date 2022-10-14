@@ -11,7 +11,7 @@ const (
 )
 
 type ConsumerInfo struct {
-	ConsumerNumber *string               `json:"consumerNumber"`
-	ProjectNumber  *string               `json:"projectNumber"`
-	Type           *ConsumerInfoTypeEnum `json:"type"`
+	ConsumerNumber *string               `json:"consumerNumber,omitempty"`
+	ProjectNumber  *string               `json:"projectNumber,omitempty"`
+	Type           *ConsumerInfoTypeEnum `json:"type,omitempty"`
 }

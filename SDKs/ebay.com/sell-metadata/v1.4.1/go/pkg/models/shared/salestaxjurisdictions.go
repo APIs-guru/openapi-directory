@@ -1,5 +1,5 @@
 package shared
 
 type SalesTaxJurisdictions struct {
-	SalesTaxJurisdictions []SalesTaxJurisdiction `json:"salesTaxJurisdictions"`
+	SalesTaxJurisdictions []SalesTaxJurisdiction `json:"salesTaxJurisdictions,omitempty"`
 }

@@ -50,23 +50,23 @@ const (
 )
 
 type Entitlement struct {
-	ActivationDate     *time.Time                  `json:"activationDate"`
-	Classification     *ClassificationSummary      `json:"classification"`
-	CreationDate       *time.Time                  `json:"creationDate"`
+	ActivationDate     *time.Time                  `json:"activationDate,omitempty"`
+	Classification     *ClassificationSummary      `json:"classification,omitempty"`
+	CreationDate       *time.Time                  `json:"creationDate,omitempty"`
 	DeliveryType       EntitlementDeliveryTypeEnum `json:"deliveryType"`
-	ExclusionRules     []ExclusionRule             `json:"exclusionRules"`
-	ExpirationDate     *time.Time                  `json:"expirationDate"`
-	ItemID             *string                     `json:"itemId"`
-	ItemType           *EntitlementItemTypeEnum    `json:"itemType"`
-	MaxDownloads       *int32                      `json:"maxDownloads"`
-	MaxPlays           *int32                      `json:"maxPlays"`
-	MediaDuration      *int32                      `json:"mediaDuration"`
+	ExclusionRules     []ExclusionRule             `json:"exclusionRules,omitempty"`
+	ExpirationDate     *time.Time                  `json:"expirationDate,omitempty"`
+	ItemID             *string                     `json:"itemId,omitempty"`
+	ItemType           *EntitlementItemTypeEnum    `json:"itemType,omitempty"`
+	MaxDownloads       *int32                      `json:"maxDownloads,omitempty"`
+	MaxPlays           *int32                      `json:"maxPlays,omitempty"`
+	MediaDuration      *int32                      `json:"mediaDuration,omitempty"`
 	Ownership          EntitlementOwnershipEnum    `json:"ownership"`
-	PlanID             *string                     `json:"planId"`
-	PlayCount          *int32                      `json:"playCount"`
-	PlayPeriod         *int32                      `json:"playPeriod"`
-	RemainingDownloads *int32                      `json:"remainingDownloads"`
-	RentalPeriod       *int32                      `json:"rentalPeriod"`
+	PlanID             *string                     `json:"planId,omitempty"`
+	PlayCount          *int32                      `json:"playCount,omitempty"`
+	PlayPeriod         *int32                      `json:"playPeriod,omitempty"`
+	RemainingDownloads *int32                      `json:"remainingDownloads,omitempty"`
+	RentalPeriod       *int32                      `json:"rentalPeriod,omitempty"`
 	Resolution         EntitlementResolutionEnum   `json:"resolution"`
 	Scopes             []string                    `json:"scopes"`
 }

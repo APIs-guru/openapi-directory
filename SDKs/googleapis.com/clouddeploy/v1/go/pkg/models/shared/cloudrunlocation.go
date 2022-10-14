@@ -1,5 +1,5 @@
 package shared
 
 type CloudRunLocation struct {
-	Location *string `json:"location"`
+	Location *string `json:"location,omitempty"`
 }

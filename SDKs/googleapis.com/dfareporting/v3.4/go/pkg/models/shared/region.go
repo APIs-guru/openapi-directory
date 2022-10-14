@@ -1,10 +1,10 @@
 package shared
 
 type Region struct {
-	CountryCode   *string `json:"countryCode"`
-	CountryDartID *string `json:"countryDartId"`
-	DartID        *string `json:"dartId"`
-	Kind          *string `json:"kind"`
-	Name          *string `json:"name"`
-	RegionCode    *string `json:"regionCode"`
+	CountryCode   *string `json:"countryCode,omitempty"`
+	CountryDartID *string `json:"countryDartId,omitempty"`
+	DartID        *string `json:"dartId,omitempty"`
+	Kind          *string `json:"kind,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	RegionCode    *string `json:"regionCode,omitempty"`
 }

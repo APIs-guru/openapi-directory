@@ -21,7 +21,7 @@ type GetTagsForWorkspaceRequest struct {
 }
 
 type GetTagsForWorkspace200ApplicationJSON struct {
-	Data []shared.TagCompact `json:"data"`
+	Data []shared.TagCompact `json:"data,omitempty"`
 }
 
 type GetTagsForWorkspaceResponse struct {

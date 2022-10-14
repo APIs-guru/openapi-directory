@@ -1,8 +1,8 @@
 package shared
 
 type ResourceFilters struct {
-	AccountID    *string `json:"AccountId"`
-	Region       *string `json:"Region"`
-	ResourceID   *string `json:"ResourceId"`
-	ResourceName *string `json:"ResourceName"`
+	AccountID    *string `json:"AccountId,omitempty"`
+	Region       *string `json:"Region,omitempty"`
+	ResourceID   *string `json:"ResourceId,omitempty"`
+	ResourceName *string `json:"ResourceName,omitempty"`
 }

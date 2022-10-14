@@ -24,10 +24,10 @@ const (
 )
 
 type ClickwrapEntity struct {
-	Body           *string                            `json:"body"`
-	ID             *int32                             `json:"id"`
-	Name           *string                            `json:"name"`
-	UseWithBundles *ClickwrapEntityUseWithBundlesEnum `json:"use_with_bundles"`
-	UseWithInboxes *ClickwrapEntityUseWithInboxesEnum `json:"use_with_inboxes"`
-	UseWithUsers   *ClickwrapEntityUseWithUsersEnum   `json:"use_with_users"`
+	Body           *string                            `json:"body,omitempty"`
+	ID             *int32                             `json:"id,omitempty"`
+	Name           *string                            `json:"name,omitempty"`
+	UseWithBundles *ClickwrapEntityUseWithBundlesEnum `json:"use_with_bundles,omitempty"`
+	UseWithInboxes *ClickwrapEntityUseWithInboxesEnum `json:"use_with_inboxes,omitempty"`
+	UseWithUsers   *ClickwrapEntityUseWithUsersEnum   `json:"use_with_users,omitempty"`
 }

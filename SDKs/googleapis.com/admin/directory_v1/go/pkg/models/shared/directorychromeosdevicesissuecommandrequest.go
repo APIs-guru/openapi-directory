@@ -12,6 +12,6 @@ const (
 )
 
 type DirectoryChromeosdevicesIssueCommandRequest struct {
-	CommandType *DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnum `json:"commandType"`
-	Payload     *string                                                     `json:"payload"`
+	CommandType *DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnum `json:"commandType,omitempty"`
+	Payload     *string                                                     `json:"payload,omitempty"`
 }

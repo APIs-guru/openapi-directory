@@ -12,7 +12,7 @@ type DisconnectParticipantHeaders struct {
 }
 
 type DisconnectParticipantRequestBody struct {
-	ClientToken *string `json:"ClientToken"`
+	ClientToken *string `json:"ClientToken,omitempty"`
 }
 
 type DisconnectParticipantRequest struct {

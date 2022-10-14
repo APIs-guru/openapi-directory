@@ -9,8 +9,8 @@ const (
 )
 
 type ImageConfiguration struct {
-	ImageType  *ImageConfigurationImageTypeEnum `json:"imageType"`
-	Kind       *string                          `json:"kind"`
-	ResourceID *string                          `json:"resourceId"`
-	URL        *string                          `json:"url"`
+	ImageType  *ImageConfigurationImageTypeEnum `json:"imageType,omitempty"`
+	Kind       *string                          `json:"kind,omitempty"`
+	ResourceID *string                          `json:"resourceId,omitempty"`
+	URL        *string                          `json:"url,omitempty"`
 }

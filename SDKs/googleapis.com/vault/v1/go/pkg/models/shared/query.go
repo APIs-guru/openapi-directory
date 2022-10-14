@@ -47,22 +47,22 @@ const (
 )
 
 type Query struct {
-	AccountInfo         *AccountInfo           `json:"accountInfo"`
-	Corpus              *QueryCorpusEnum       `json:"corpus"`
-	DataScope           *QueryDataScopeEnum    `json:"dataScope"`
-	DriveOptions        *DriveOptions          `json:"driveOptions"`
-	EndTime             *string                `json:"endTime"`
-	HangoutsChatInfo    *HangoutsChatInfo      `json:"hangoutsChatInfo"`
-	HangoutsChatOptions *HangoutsChatOptions   `json:"hangoutsChatOptions"`
-	MailOptions         *MailOptions           `json:"mailOptions"`
-	Method              *QueryMethodEnum       `json:"method"`
-	OrgUnitInfo         *OrgUnitInfo           `json:"orgUnitInfo"`
-	SearchMethod        *QuerySearchMethodEnum `json:"searchMethod"`
-	SharedDriveInfo     *SharedDriveInfo       `json:"sharedDriveInfo"`
-	SitesURLInfo        *SitesURLInfo          `json:"sitesUrlInfo"`
-	StartTime           *string                `json:"startTime"`
-	TeamDriveInfo       *TeamDriveInfo         `json:"teamDriveInfo"`
-	Terms               *string                `json:"terms"`
-	TimeZone            *string                `json:"timeZone"`
-	VoiceOptions        *VoiceOptions          `json:"voiceOptions"`
+	AccountInfo         *AccountInfo           `json:"accountInfo,omitempty"`
+	Corpus              *QueryCorpusEnum       `json:"corpus,omitempty"`
+	DataScope           *QueryDataScopeEnum    `json:"dataScope,omitempty"`
+	DriveOptions        *DriveOptions          `json:"driveOptions,omitempty"`
+	EndTime             *string                `json:"endTime,omitempty"`
+	HangoutsChatInfo    *HangoutsChatInfo      `json:"hangoutsChatInfo,omitempty"`
+	HangoutsChatOptions *HangoutsChatOptions   `json:"hangoutsChatOptions,omitempty"`
+	MailOptions         *MailOptions           `json:"mailOptions,omitempty"`
+	Method              *QueryMethodEnum       `json:"method,omitempty"`
+	OrgUnitInfo         *OrgUnitInfo           `json:"orgUnitInfo,omitempty"`
+	SearchMethod        *QuerySearchMethodEnum `json:"searchMethod,omitempty"`
+	SharedDriveInfo     *SharedDriveInfo       `json:"sharedDriveInfo,omitempty"`
+	SitesURLInfo        *SitesURLInfo          `json:"sitesUrlInfo,omitempty"`
+	StartTime           *string                `json:"startTime,omitempty"`
+	TeamDriveInfo       *TeamDriveInfo         `json:"teamDriveInfo,omitempty"`
+	Terms               *string                `json:"terms,omitempty"`
+	TimeZone            *string                `json:"timeZone,omitempty"`
+	VoiceOptions        *VoiceOptions          `json:"voiceOptions,omitempty"`
 }

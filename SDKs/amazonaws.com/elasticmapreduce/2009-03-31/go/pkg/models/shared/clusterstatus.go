@@ -1,7 +1,7 @@
 package shared
 
 type ClusterStatus struct {
-	State             *ClusterStateEnum         `json:"State"`
-	StateChangeReason *ClusterStateChangeReason `json:"StateChangeReason"`
-	Timeline          *ClusterTimeline          `json:"Timeline"`
+	State             *ClusterStateEnum         `json:"State,omitempty"`
+	StateChangeReason *ClusterStateChangeReason `json:"StateChangeReason,omitempty"`
+	Timeline          *ClusterTimeline          `json:"Timeline,omitempty"`
 }

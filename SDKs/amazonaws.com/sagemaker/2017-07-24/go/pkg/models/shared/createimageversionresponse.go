@@ -1,5 +1,5 @@
 package shared
 
 type CreateImageVersionResponse struct {
-	ImageVersionArn *string `json:"ImageVersionArn"`
+	ImageVersionArn *string `json:"ImageVersionArn,omitempty"`
 }

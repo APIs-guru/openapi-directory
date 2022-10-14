@@ -1,10 +1,10 @@
 package shared
 
 type GetContentModerationResponse struct {
-	JobStatus              *VideoJobStatusEnum          `json:"JobStatus"`
-	ModerationLabels       []ContentModerationDetection `json:"ModerationLabels"`
-	ModerationModelVersion *string                      `json:"ModerationModelVersion"`
-	NextToken              *string                      `json:"NextToken"`
-	StatusMessage          *string                      `json:"StatusMessage"`
-	VideoMetadata          *VideoMetadata               `json:"VideoMetadata"`
+	JobStatus              *VideoJobStatusEnum          `json:"JobStatus,omitempty"`
+	ModerationLabels       []ContentModerationDetection `json:"ModerationLabels,omitempty"`
+	ModerationModelVersion *string                      `json:"ModerationModelVersion,omitempty"`
+	NextToken              *string                      `json:"NextToken,omitempty"`
+	StatusMessage          *string                      `json:"StatusMessage,omitempty"`
+	VideoMetadata          *VideoMetadata               `json:"VideoMetadata,omitempty"`
 }

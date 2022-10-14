@@ -20,15 +20,15 @@ type ListBotsHeaders struct {
 }
 
 type ListBotsRequestBodySortBy struct {
-	Attribute *shared.BotSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum        `json:"order"`
+	Attribute *shared.BotSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum        `json:"order,omitempty"`
 }
 
 type ListBotsRequestBody struct {
-	Filters    []shared.BotFilter         `json:"filters"`
-	MaxResults *int64                     `json:"maxResults"`
-	NextToken  *string                    `json:"nextToken"`
-	SortBy     *ListBotsRequestBodySortBy `json:"sortBy"`
+	Filters    []shared.BotFilter         `json:"filters,omitempty"`
+	MaxResults *int64                     `json:"maxResults,omitempty"`
+	NextToken  *string                    `json:"nextToken,omitempty"`
+	SortBy     *ListBotsRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListBotsRequest struct {

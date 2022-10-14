@@ -13,11 +13,11 @@ const (
 )
 
 type Rollout struct {
-	CreateTime             *string                 `json:"createTime"`
-	CreatedBy              *string                 `json:"createdBy"`
-	DeleteServiceStrategy  map[string]interface{}  `json:"deleteServiceStrategy"`
-	RolloutID              *string                 `json:"rolloutId"`
-	ServiceName            *string                 `json:"serviceName"`
-	Status                 *RolloutStatusEnum      `json:"status"`
-	TrafficPercentStrategy *TrafficPercentStrategy `json:"trafficPercentStrategy"`
+	CreateTime             *string                 `json:"createTime,omitempty"`
+	CreatedBy              *string                 `json:"createdBy,omitempty"`
+	DeleteServiceStrategy  map[string]interface{}  `json:"deleteServiceStrategy,omitempty"`
+	RolloutID              *string                 `json:"rolloutId,omitempty"`
+	ServiceName            *string                 `json:"serviceName,omitempty"`
+	Status                 *RolloutStatusEnum      `json:"status,omitempty"`
+	TrafficPercentStrategy *TrafficPercentStrategy `json:"trafficPercentStrategy,omitempty"`
 }

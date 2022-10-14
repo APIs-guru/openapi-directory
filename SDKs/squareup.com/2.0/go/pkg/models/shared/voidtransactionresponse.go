@@ -1,5 +1,5 @@
 package shared
 
 type VoidTransactionResponse struct {
-	Errors []Error `json:"errors"`
+	Errors []Error `json:"errors,omitempty"`
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type Annotation struct {
-	Length       *int32                `json:"length"`
-	SlashCommand *SlashCommandMetadata `json:"slashCommand"`
-	StartIndex   *int32                `json:"startIndex"`
-	Type         *AnnotationTypeEnum   `json:"type"`
-	UserMention  *UserMentionMetadata  `json:"userMention"`
+	Length       *int32                `json:"length,omitempty"`
+	SlashCommand *SlashCommandMetadata `json:"slashCommand,omitempty"`
+	StartIndex   *int32                `json:"startIndex,omitempty"`
+	Type         *AnnotationTypeEnum   `json:"type,omitempty"`
+	UserMention  *UserMentionMetadata  `json:"userMention,omitempty"`
 }

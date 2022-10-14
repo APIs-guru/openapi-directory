@@ -15,8 +15,8 @@ const (
 )
 
 type CoprgRequestBody struct {
-	CertificateParameters *CoprgRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *CoprgRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                CoprgRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Coprg400ApplicationJSON struct {
-	Error            *Coprg400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Coprg400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Coprg400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Coprg400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Coprg401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Coprg401ApplicationJSON struct {
-	Error            *Coprg401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Coprg401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Coprg401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Coprg401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Coprg404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Coprg404ApplicationJSON struct {
-	Error            *Coprg404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Coprg404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Coprg404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Coprg404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Coprg500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Coprg500ApplicationJSON struct {
-	Error            *Coprg500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Coprg500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Coprg500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Coprg500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Coprg502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Coprg502ApplicationJSON struct {
-	Error            *Coprg502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Coprg502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Coprg502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Coprg502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Coprg503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Coprg503ApplicationJSON struct {
-	Error            *Coprg503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Coprg503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Coprg503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Coprg503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Coprg504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Coprg504ApplicationJSON struct {
-	Error            *Coprg504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Coprg504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Coprg504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Coprg504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type CoprgResponse struct {

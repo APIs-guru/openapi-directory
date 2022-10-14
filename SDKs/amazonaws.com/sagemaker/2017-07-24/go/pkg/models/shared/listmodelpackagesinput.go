@@ -5,14 +5,14 @@ import (
 )
 
 type ListModelPackagesInput struct {
-	CreationTimeAfter     *time.Time               `json:"CreationTimeAfter"`
-	CreationTimeBefore    *time.Time               `json:"CreationTimeBefore"`
-	MaxResults            *int64                   `json:"MaxResults"`
-	ModelApprovalStatus   *ModelApprovalStatusEnum `json:"ModelApprovalStatus"`
-	ModelPackageGroupName *string                  `json:"ModelPackageGroupName"`
-	ModelPackageType      *ModelPackageTypeEnum    `json:"ModelPackageType"`
-	NameContains          *string                  `json:"NameContains"`
-	NextToken             *string                  `json:"NextToken"`
-	SortBy                *ModelPackageSortByEnum  `json:"SortBy"`
-	SortOrder             *SortOrderEnum           `json:"SortOrder"`
+	CreationTimeAfter     *time.Time               `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore    *time.Time               `json:"CreationTimeBefore,omitempty"`
+	MaxResults            *int64                   `json:"MaxResults,omitempty"`
+	ModelApprovalStatus   *ModelApprovalStatusEnum `json:"ModelApprovalStatus,omitempty"`
+	ModelPackageGroupName *string                  `json:"ModelPackageGroupName,omitempty"`
+	ModelPackageType      *ModelPackageTypeEnum    `json:"ModelPackageType,omitempty"`
+	NameContains          *string                  `json:"NameContains,omitempty"`
+	NextToken             *string                  `json:"NextToken,omitempty"`
+	SortBy                *ModelPackageSortByEnum  `json:"SortBy,omitempty"`
+	SortOrder             *SortOrderEnum           `json:"SortOrder,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ServiceBlockInputModel struct {
-	EndDate    *time.Time        `json:"endDate"`
-	EndTime    *int32            `json:"endTime"`
-	LocationID *string           `json:"locationId"`
-	Reason     *string           `json:"reason"`
-	Repeat     *RepeatInputModel `json:"repeat"`
-	Repeats    *bool             `json:"repeats"`
-	StartDate  *time.Time        `json:"startDate"`
-	StartTime  *int32            `json:"startTime"`
+	EndDate    *time.Time        `json:"endDate,omitempty"`
+	EndTime    *int32            `json:"endTime,omitempty"`
+	LocationID *string           `json:"locationId,omitempty"`
+	Reason     *string           `json:"reason,omitempty"`
+	Repeat     *RepeatInputModel `json:"repeat,omitempty"`
+	Repeats    *bool             `json:"repeats,omitempty"`
+	StartDate  *time.Time        `json:"startDate,omitempty"`
+	StartTime  *int32            `json:"startTime,omitempty"`
 }

@@ -21,13 +21,13 @@ type GetPlaylistsRequest struct {
 }
 
 type GetPlaylists200ApplicationJSONLinks struct {
-	Self *shared.Link `json:"self"`
+	Self *shared.Link `json:"self,omitempty"`
 }
 
 type GetPlaylists200ApplicationJSON struct {
-	Links *GetPlaylists200ApplicationJSONLinks `json:"_links"`
-	Meta  *shared.Pagination                   `json:"_meta"`
-	Items []shared.Playlist                    `json:"items"`
+	Links *GetPlaylists200ApplicationJSONLinks `json:"_links,omitempty"`
+	Meta  *shared.Pagination                   `json:"_meta,omitempty"`
+	Items []shared.Playlist                    `json:"items,omitempty"`
 }
 
 type GetPlaylistsResponse struct {

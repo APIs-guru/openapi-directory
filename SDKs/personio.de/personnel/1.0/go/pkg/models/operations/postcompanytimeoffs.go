@@ -9,7 +9,7 @@ type PostCompanyTimeOffsRequest struct {
 }
 
 type PostCompanyTimeOffs201ApplicationJSON struct {
-	Data *shared.CreateTimeOffPeriodResponse `json:"data"`
+	Data *shared.CreateTimeOffPeriodResponse `json:"data,omitempty"`
 }
 
 type PostCompanyTimeOffsResponse struct {

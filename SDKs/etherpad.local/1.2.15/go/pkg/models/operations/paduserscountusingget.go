@@ -9,31 +9,31 @@ type PadUsersCountUsingGetRequest struct {
 }
 
 type PadUsersCountUsingGet200ApplicationJSONData struct {
-	PadUsersCount *int64 `json:"padUsersCount"`
+	PadUsersCount *int64 `json:"padUsersCount,omitempty"`
 }
 
 type PadUsersCountUsingGet200ApplicationJSON struct {
-	Code    *int64                                       `json:"code"`
-	Data    *PadUsersCountUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                      `json:"message"`
+	Code    *int64                                       `json:"code,omitempty"`
+	Data    *PadUsersCountUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                      `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingGetResponse struct {

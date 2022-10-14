@@ -1,6 +1,6 @@
 package shared
 
 type SearchOrdersFulfillmentFilter struct {
-	FulfillmentStates []string `json:"fulfillment_states"`
-	FulfillmentTypes  []string `json:"fulfillment_types"`
+	FulfillmentStates []string `json:"fulfillment_states,omitempty"`
+	FulfillmentTypes  []string `json:"fulfillment_types,omitempty"`
 }

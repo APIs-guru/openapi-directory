@@ -14,7 +14,7 @@ type CreateSubtaskForTaskQueryParams struct {
 }
 
 type CreateSubtaskForTaskRequestBody struct {
-	Data *shared.TaskRequest `json:"data"`
+	Data *shared.TaskRequest `json:"data,omitempty"`
 }
 
 type CreateSubtaskForTaskRequest struct {
@@ -24,7 +24,7 @@ type CreateSubtaskForTaskRequest struct {
 }
 
 type CreateSubtaskForTask201ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data"`
+	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type CreateSubtaskForTaskResponse struct {

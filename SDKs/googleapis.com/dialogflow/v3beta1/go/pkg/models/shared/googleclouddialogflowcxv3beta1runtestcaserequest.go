@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDialogflowCxV3beta1RunTestCaseRequest struct {
-	Environment *string `json:"environment"`
+	Environment *string `json:"environment,omitempty"`
 }

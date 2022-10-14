@@ -1,6 +1,6 @@
 package shared
 
 type GetMembersResponse struct {
-	Members             []Member `json:"Members"`
-	UnprocessedAccounts []Result `json:"UnprocessedAccounts"`
+	Members             []Member `json:"Members,omitempty"`
+	UnprocessedAccounts []Result `json:"UnprocessedAccounts,omitempty"`
 }

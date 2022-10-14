@@ -10,6 +10,6 @@ const (
 )
 
 type PermissionGrant struct {
-	Permission *string                    `json:"permission"`
-	Policy     *PermissionGrantPolicyEnum `json:"policy"`
+	Permission *string                    `json:"permission,omitempty"`
+	Policy     *PermissionGrantPolicyEnum `json:"policy,omitempty"`
 }

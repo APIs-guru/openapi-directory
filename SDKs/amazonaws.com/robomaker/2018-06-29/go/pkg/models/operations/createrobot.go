@@ -26,7 +26,7 @@ type CreateRobotRequestBody struct {
 	Architecture      CreateRobotRequestBodyArchitectureEnum `json:"architecture"`
 	GreengrassGroupID string                                 `json:"greengrassGroupId"`
 	Name              string                                 `json:"name"`
-	Tags              map[string]string                      `json:"tags"`
+	Tags              map[string]string                      `json:"tags,omitempty"`
 }
 
 type CreateRobotRequest struct {

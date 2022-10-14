@@ -1,12 +1,12 @@
 package shared
 
 type TagValue struct {
-	CreateTime     *string `json:"createTime"`
-	Description    *string `json:"description"`
-	Etag           *string `json:"etag"`
-	Name           *string `json:"name"`
-	NamespacedName *string `json:"namespacedName"`
-	Parent         *string `json:"parent"`
-	ShortName      *string `json:"shortName"`
-	UpdateTime     *string `json:"updateTime"`
+	CreateTime     *string `json:"createTime,omitempty"`
+	Description    *string `json:"description,omitempty"`
+	Etag           *string `json:"etag,omitempty"`
+	Name           *string `json:"name,omitempty"`
+	NamespacedName *string `json:"namespacedName,omitempty"`
+	Parent         *string `json:"parent,omitempty"`
+	ShortName      *string `json:"shortName,omitempty"`
+	UpdateTime     *string `json:"updateTime,omitempty"`
 }

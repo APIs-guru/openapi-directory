@@ -1,8 +1,8 @@
 package shared
 
 type RelativeTimeRange struct {
-	EndPercentage   *int64 `json:"EndPercentage"`
-	First           *int64 `json:"First"`
-	Last            *int64 `json:"Last"`
-	StartPercentage *int64 `json:"StartPercentage"`
+	EndPercentage   *int64 `json:"EndPercentage,omitempty"`
+	First           *int64 `json:"First,omitempty"`
+	Last            *int64 `json:"Last,omitempty"`
+	StartPercentage *int64 `json:"StartPercentage,omitempty"`
 }

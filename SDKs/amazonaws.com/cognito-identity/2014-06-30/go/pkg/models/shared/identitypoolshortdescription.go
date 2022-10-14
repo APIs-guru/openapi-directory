@@ -1,6 +1,6 @@
 package shared
 
 type IdentityPoolShortDescription struct {
-	IdentityPoolID   *string `json:"IdentityPoolId"`
-	IdentityPoolName *string `json:"IdentityPoolName"`
+	IdentityPoolID   *string `json:"IdentityPoolId,omitempty"`
+	IdentityPoolName *string `json:"IdentityPoolName,omitempty"`
 }

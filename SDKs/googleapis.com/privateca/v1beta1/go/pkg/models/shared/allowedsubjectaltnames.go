@@ -1,10 +1,10 @@
 package shared
 
 type AllowedSubjectAltNames struct {
-	AllowCustomSans           *bool    `json:"allowCustomSans"`
-	AllowGlobbingDNSWildcards *bool    `json:"allowGlobbingDnsWildcards"`
-	AllowedDNSNames           []string `json:"allowedDnsNames"`
-	AllowedEmailAddresses     []string `json:"allowedEmailAddresses"`
-	AllowedIps                []string `json:"allowedIps"`
-	AllowedUris               []string `json:"allowedUris"`
+	AllowCustomSans           *bool    `json:"allowCustomSans,omitempty"`
+	AllowGlobbingDNSWildcards *bool    `json:"allowGlobbingDnsWildcards,omitempty"`
+	AllowedDNSNames           []string `json:"allowedDnsNames,omitempty"`
+	AllowedEmailAddresses     []string `json:"allowedEmailAddresses,omitempty"`
+	AllowedIps                []string `json:"allowedIps,omitempty"`
+	AllowedUris               []string `json:"allowedUris,omitempty"`
 }

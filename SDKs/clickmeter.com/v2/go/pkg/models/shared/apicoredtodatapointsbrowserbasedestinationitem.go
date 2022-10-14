@@ -1,7 +1,7 @@
 package shared
 
 type APICoreDtoDatapointsBrowserBaseDestinationItem struct {
-	EmailDestinationURL   *string `json:"emailDestinationUrl"`
-	MobileDestinationURL  *string `json:"mobileDestinationUrl"`
-	SpidersDestinationURL *string `json:"spidersDestinationUrl"`
+	EmailDestinationURL   *string `json:"emailDestinationUrl,omitempty"`
+	MobileDestinationURL  *string `json:"mobileDestinationUrl,omitempty"`
+	SpidersDestinationURL *string `json:"spidersDestinationUrl,omitempty"`
 }

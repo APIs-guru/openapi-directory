@@ -5,10 +5,10 @@ import (
 )
 
 type DeploymentConfigInfo struct {
-	ComputePlatform      *ComputePlatformEnum  `json:"computePlatform"`
-	CreateTime           *time.Time            `json:"createTime"`
-	DeploymentConfigID   *string               `json:"deploymentConfigId"`
-	DeploymentConfigName *string               `json:"deploymentConfigName"`
-	MinimumHealthyHosts  *MinimumHealthyHosts  `json:"minimumHealthyHosts"`
-	TrafficRoutingConfig *TrafficRoutingConfig `json:"trafficRoutingConfig"`
+	ComputePlatform      *ComputePlatformEnum  `json:"computePlatform,omitempty"`
+	CreateTime           *time.Time            `json:"createTime,omitempty"`
+	DeploymentConfigID   *string               `json:"deploymentConfigId,omitempty"`
+	DeploymentConfigName *string               `json:"deploymentConfigName,omitempty"`
+	MinimumHealthyHosts  *MinimumHealthyHosts  `json:"minimumHealthyHosts,omitempty"`
+	TrafficRoutingConfig *TrafficRoutingConfig `json:"trafficRoutingConfig,omitempty"`
 }

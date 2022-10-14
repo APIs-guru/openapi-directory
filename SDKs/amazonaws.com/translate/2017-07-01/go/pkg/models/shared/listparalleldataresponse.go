@@ -1,6 +1,6 @@
 package shared
 
 type ListParallelDataResponse struct {
-	NextToken                  *string                  `json:"NextToken"`
-	ParallelDataPropertiesList []ParallelDataProperties `json:"ParallelDataPropertiesList"`
+	NextToken                  *string                  `json:"NextToken,omitempty"`
+	ParallelDataPropertiesList []ParallelDataProperties `json:"ParallelDataPropertiesList,omitempty"`
 }

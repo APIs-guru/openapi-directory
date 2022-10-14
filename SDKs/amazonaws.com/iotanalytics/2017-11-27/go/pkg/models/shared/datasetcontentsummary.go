@@ -5,9 +5,9 @@ import (
 )
 
 type DatasetContentSummary struct {
-	CompletionTime *time.Time            `json:"completionTime"`
-	CreationTime   *time.Time            `json:"creationTime"`
-	ScheduleTime   *time.Time            `json:"scheduleTime"`
-	Status         *DatasetContentStatus `json:"status"`
-	Version        *string               `json:"version"`
+	CompletionTime *time.Time            `json:"completionTime,omitempty"`
+	CreationTime   *time.Time            `json:"creationTime,omitempty"`
+	ScheduleTime   *time.Time            `json:"scheduleTime,omitempty"`
+	Status         *DatasetContentStatus `json:"status,omitempty"`
+	Version        *string               `json:"version,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type StatisticalThreshold struct {
-	Statistic *string `json:"statistic"`
+	Statistic *string `json:"statistic,omitempty"`
 }

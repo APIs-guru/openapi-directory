@@ -1,15 +1,15 @@
 package shared
 
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig struct {
-	Accelerator          *GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig `json:"accelerator"`
-	DiskSizeGb           *string                                                          `json:"diskSizeGb"`
-	DiskType             *string                                                          `json:"diskType"`
-	Labels               map[string]string                                                `json:"labels"`
-	MachineType          *string                                                          `json:"machineType"`
-	MaxConcurrentActions *string                                                          `json:"maxConcurrentActions"`
-	MinCPUPlatform       *string                                                          `json:"minCpuPlatform"`
-	NetworkAccess        *string                                                          `json:"networkAccess"`
-	Reserved             *bool                                                            `json:"reserved"`
-	SoleTenantNodeType   *string                                                          `json:"soleTenantNodeType"`
-	VMImage              *string                                                          `json:"vmImage"`
+	Accelerator          *GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig `json:"accelerator,omitempty"`
+	DiskSizeGb           *string                                                          `json:"diskSizeGb,omitempty"`
+	DiskType             *string                                                          `json:"diskType,omitempty"`
+	Labels               map[string]string                                                `json:"labels,omitempty"`
+	MachineType          *string                                                          `json:"machineType,omitempty"`
+	MaxConcurrentActions *string                                                          `json:"maxConcurrentActions,omitempty"`
+	MinCPUPlatform       *string                                                          `json:"minCpuPlatform,omitempty"`
+	NetworkAccess        *string                                                          `json:"networkAccess,omitempty"`
+	Reserved             *bool                                                            `json:"reserved,omitempty"`
+	SoleTenantNodeType   *string                                                          `json:"soleTenantNodeType,omitempty"`
+	VMImage              *string                                                          `json:"vmImage,omitempty"`
 }

@@ -20,10 +20,10 @@ type UpdateSegmentHeaders struct {
 }
 
 type UpdateSegmentRequestBodyWriteSegmentRequest struct {
-	Dimensions    *shared.SegmentDimensions `json:"Dimensions"`
-	Name          *string                   `json:"Name"`
-	SegmentGroups *shared.SegmentGroupList  `json:"SegmentGroups"`
-	Tags          map[string]string         `json:"tags"`
+	Dimensions    *shared.SegmentDimensions `json:"Dimensions,omitempty"`
+	Name          *string                   `json:"Name,omitempty"`
+	SegmentGroups *shared.SegmentGroupList  `json:"SegmentGroups,omitempty"`
+	Tags          map[string]string         `json:"tags,omitempty"`
 }
 
 type UpdateSegmentRequestBody struct {

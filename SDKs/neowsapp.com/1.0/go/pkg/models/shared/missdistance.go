@@ -1,8 +1,8 @@
 package shared
 
 type MissDistance struct {
-	Astronomical *string `json:"astronomical"`
-	Kilometers   *string `json:"kilometers"`
-	Lunar        *string `json:"lunar"`
-	Miles        *string `json:"miles"`
+	Astronomical *string `json:"astronomical,omitempty"`
+	Kilometers   *string `json:"kilometers,omitempty"`
+	Lunar        *string `json:"lunar,omitempty"`
+	Miles        *string `json:"miles,omitempty"`
 }

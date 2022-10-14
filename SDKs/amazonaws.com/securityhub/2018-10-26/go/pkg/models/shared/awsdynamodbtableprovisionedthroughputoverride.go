@@ -1,5 +1,5 @@
 package shared
 
 type AwsDynamoDbTableProvisionedThroughputOverride struct {
-	ReadCapacityUnits *int64 `json:"ReadCapacityUnits"`
+	ReadCapacityUnits *int64 `json:"ReadCapacityUnits,omitempty"`
 }

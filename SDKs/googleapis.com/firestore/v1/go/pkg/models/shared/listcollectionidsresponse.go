@@ -1,6 +1,6 @@
 package shared
 
 type ListCollectionIdsResponse struct {
-	CollectionIds []string `json:"collectionIds"`
-	NextPageToken *string  `json:"nextPageToken"`
+	CollectionIds []string `json:"collectionIds,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

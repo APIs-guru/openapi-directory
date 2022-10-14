@@ -9,8 +9,8 @@ type ProjectsUpdateCardPathParams struct {
 }
 
 type ProjectsUpdateCardRequestBody struct {
-	Archived *bool   `json:"archived"`
-	Note     *string `json:"note"`
+	Archived *bool   `json:"archived,omitempty"`
+	Note     *string `json:"note,omitempty"`
 }
 
 type ProjectsUpdateCardRequest struct {

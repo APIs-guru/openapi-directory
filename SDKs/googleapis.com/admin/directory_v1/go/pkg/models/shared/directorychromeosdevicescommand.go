@@ -24,11 +24,11 @@ const (
 )
 
 type DirectoryChromeosdevicesCommand struct {
-	CommandExpireTime *string                                   `json:"commandExpireTime"`
-	CommandID         *string                                   `json:"commandId"`
-	CommandResult     *DirectoryChromeosdevicesCommandResult    `json:"commandResult"`
-	IssueTime         *string                                   `json:"issueTime"`
-	Payload           *string                                   `json:"payload"`
-	State             *DirectoryChromeosdevicesCommandStateEnum `json:"state"`
-	Type              *DirectoryChromeosdevicesCommandTypeEnum  `json:"type"`
+	CommandExpireTime *string                                   `json:"commandExpireTime,omitempty"`
+	CommandID         *string                                   `json:"commandId,omitempty"`
+	CommandResult     *DirectoryChromeosdevicesCommandResult    `json:"commandResult,omitempty"`
+	IssueTime         *string                                   `json:"issueTime,omitempty"`
+	Payload           *string                                   `json:"payload,omitempty"`
+	State             *DirectoryChromeosdevicesCommandStateEnum `json:"state,omitempty"`
+	Type              *DirectoryChromeosdevicesCommandTypeEnum  `json:"type,omitempty"`
 }

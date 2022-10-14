@@ -5,11 +5,11 @@ import (
 )
 
 type DelegationMetadata struct {
-	AssessmentID   *string               `json:"assessmentId"`
-	AssessmentName *string               `json:"assessmentName"`
-	ControlSetName *string               `json:"controlSetName"`
-	CreationTime   *time.Time            `json:"creationTime"`
-	ID             *string               `json:"id"`
-	RoleArn        *string               `json:"roleArn"`
-	Status         *DelegationStatusEnum `json:"status"`
+	AssessmentID   *string               `json:"assessmentId,omitempty"`
+	AssessmentName *string               `json:"assessmentName,omitempty"`
+	ControlSetName *string               `json:"controlSetName,omitempty"`
+	CreationTime   *time.Time            `json:"creationTime,omitempty"`
+	ID             *string               `json:"id,omitempty"`
+	RoleArn        *string               `json:"roleArn,omitempty"`
+	Status         *DelegationStatusEnum `json:"status,omitempty"`
 }

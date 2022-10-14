@@ -11,12 +11,12 @@ const (
 )
 
 type GoogleCloudRecommendationengineV1beta1ProductDetail struct {
-	AvailableQuantity *int32                                                             `json:"availableQuantity"`
-	CurrencyCode      *string                                                            `json:"currencyCode"`
-	DisplayPrice      *float32                                                           `json:"displayPrice"`
-	ID                *string                                                            `json:"id"`
-	ItemAttributes    *GoogleCloudRecommendationengineV1beta1FeatureMap                  `json:"itemAttributes"`
-	OriginalPrice     *float32                                                           `json:"originalPrice"`
-	Quantity          *int32                                                             `json:"quantity"`
-	StockState        *GoogleCloudRecommendationengineV1beta1ProductDetailStockStateEnum `json:"stockState"`
+	AvailableQuantity *int32                                                             `json:"availableQuantity,omitempty"`
+	CurrencyCode      *string                                                            `json:"currencyCode,omitempty"`
+	DisplayPrice      *float32                                                           `json:"displayPrice,omitempty"`
+	ID                *string                                                            `json:"id,omitempty"`
+	ItemAttributes    *GoogleCloudRecommendationengineV1beta1FeatureMap                  `json:"itemAttributes,omitempty"`
+	OriginalPrice     *float32                                                           `json:"originalPrice,omitempty"`
+	Quantity          *int32                                                             `json:"quantity,omitempty"`
+	StockState        *GoogleCloudRecommendationengineV1beta1ProductDetailStockStateEnum `json:"stockState,omitempty"`
 }

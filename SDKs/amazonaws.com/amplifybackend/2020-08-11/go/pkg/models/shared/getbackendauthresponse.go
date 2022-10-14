@@ -1,9 +1,9 @@
 package shared
 
 type GetBackendAuthResponse struct {
-	AppID                  *string                          `json:"AppId"`
-	BackendEnvironmentName *string                          `json:"BackendEnvironmentName"`
-	Error                  *string                          `json:"Error"`
-	ResourceConfig         *CreateBackendAuthResourceConfig `json:"ResourceConfig"`
-	ResourceName           *string                          `json:"ResourceName"`
+	AppID                  *string                          `json:"AppId,omitempty"`
+	BackendEnvironmentName *string                          `json:"BackendEnvironmentName,omitempty"`
+	Error                  *string                          `json:"Error,omitempty"`
+	ResourceConfig         *CreateBackendAuthResourceConfig `json:"ResourceConfig,omitempty"`
+	ResourceName           *string                          `json:"ResourceName,omitempty"`
 }

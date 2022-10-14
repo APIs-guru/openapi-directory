@@ -1,15 +1,15 @@
 package shared
 
 type EnterpriseCrmEventbusProtoParameterValueType struct {
-	BooleanArray          *EnterpriseCrmEventbusProtoBooleanParameterArray     `json:"booleanArray"`
-	BooleanValue          *bool                                                `json:"booleanValue"`
-	DoubleArray           *EnterpriseCrmEventbusProtoDoubleParameterArray      `json:"doubleArray"`
-	DoubleValue           *float64                                             `json:"doubleValue"`
-	IntArray              *EnterpriseCrmEventbusProtoIntParameterArray         `json:"intArray"`
-	IntValue              *string                                              `json:"intValue"`
-	ProtoArray            *EnterpriseCrmEventbusProtoProtoParameterArray       `json:"protoArray"`
-	ProtoValue            map[string]interface{}                               `json:"protoValue"`
-	SerializedObjectValue *EnterpriseCrmEventbusProtoSerializedObjectParameter `json:"serializedObjectValue"`
-	StringArray           *EnterpriseCrmEventbusProtoStringParameterArray      `json:"stringArray"`
-	StringValue           *string                                              `json:"stringValue"`
+	BooleanArray          *EnterpriseCrmEventbusProtoBooleanParameterArray     `json:"booleanArray,omitempty"`
+	BooleanValue          *bool                                                `json:"booleanValue,omitempty"`
+	DoubleArray           *EnterpriseCrmEventbusProtoDoubleParameterArray      `json:"doubleArray,omitempty"`
+	DoubleValue           *float64                                             `json:"doubleValue,omitempty"`
+	IntArray              *EnterpriseCrmEventbusProtoIntParameterArray         `json:"intArray,omitempty"`
+	IntValue              *string                                              `json:"intValue,omitempty"`
+	ProtoArray            *EnterpriseCrmEventbusProtoProtoParameterArray       `json:"protoArray,omitempty"`
+	ProtoValue            map[string]interface{}                               `json:"protoValue,omitempty"`
+	SerializedObjectValue *EnterpriseCrmEventbusProtoSerializedObjectParameter `json:"serializedObjectValue,omitempty"`
+	StringArray           *EnterpriseCrmEventbusProtoStringParameterArray      `json:"stringArray,omitempty"`
+	StringValue           *string                                              `json:"stringValue,omitempty"`
 }

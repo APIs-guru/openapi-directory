@@ -11,17 +11,17 @@ const (
 )
 
 type OsPolicyAssignment struct {
-	Baseline           *bool                               `json:"baseline"`
-	Deleted            *bool                               `json:"deleted"`
-	Description        *string                             `json:"description"`
-	Etag               *string                             `json:"etag"`
-	InstanceFilter     *OsPolicyAssignmentInstanceFilter   `json:"instanceFilter"`
-	Name               *string                             `json:"name"`
-	OsPolicies         []OsPolicy                          `json:"osPolicies"`
-	Reconciling        *bool                               `json:"reconciling"`
-	RevisionCreateTime *string                             `json:"revisionCreateTime"`
-	RevisionID         *string                             `json:"revisionId"`
-	Rollout            *OsPolicyAssignmentRollout          `json:"rollout"`
-	RolloutState       *OsPolicyAssignmentRolloutStateEnum `json:"rolloutState"`
-	UID                *string                             `json:"uid"`
+	Baseline           *bool                               `json:"baseline,omitempty"`
+	Deleted            *bool                               `json:"deleted,omitempty"`
+	Description        *string                             `json:"description,omitempty"`
+	Etag               *string                             `json:"etag,omitempty"`
+	InstanceFilter     *OsPolicyAssignmentInstanceFilter   `json:"instanceFilter,omitempty"`
+	Name               *string                             `json:"name,omitempty"`
+	OsPolicies         []OsPolicy                          `json:"osPolicies,omitempty"`
+	Reconciling        *bool                               `json:"reconciling,omitempty"`
+	RevisionCreateTime *string                             `json:"revisionCreateTime,omitempty"`
+	RevisionID         *string                             `json:"revisionId,omitempty"`
+	Rollout            *OsPolicyAssignmentRollout          `json:"rollout,omitempty"`
+	RolloutState       *OsPolicyAssignmentRolloutStateEnum `json:"rolloutState,omitempty"`
+	UID                *string                             `json:"uid,omitempty"`
 }

@@ -23,18 +23,18 @@ const (
 
 type CreateManagedServiceRequestBody struct {
 	Address           string                                         `json:"address"`
-	Body              *string                                        `json:"body"`
-	ConsultationGroup *string                                        `json:"consultation_group"`
-	Created           *time.Time                                     `json:"created"`
-	Credentials       []int64                                        `json:"credentials"`
-	ID                *int64                                         `json:"id"`
+	Body              *string                                        `json:"body,omitempty"`
+	ConsultationGroup *string                                        `json:"consultation_group,omitempty"`
+	Created           *time.Time                                     `json:"created,omitempty"`
+	Credentials       []int64                                        `json:"credentials,omitempty"`
+	ID                *int64                                         `json:"id,omitempty"`
 	Label             string                                         `json:"label"`
-	Notes             *string                                        `json:"notes"`
-	Region            *string                                        `json:"region"`
+	Notes             *string                                        `json:"notes,omitempty"`
+	Region            *string                                        `json:"region,omitempty"`
 	ServiceType       CreateManagedServiceRequestBodyServiceTypeEnum `json:"service_type"`
-	Status            *CreateManagedServiceRequestBodyStatusEnum     `json:"status"`
+	Status            *CreateManagedServiceRequestBodyStatusEnum     `json:"status,omitempty"`
 	Timeout           int64                                          `json:"timeout"`
-	Updated           *time.Time                                     `json:"updated"`
+	Updated           *time.Time                                     `json:"updated,omitempty"`
 }
 
 type CreateManagedServiceSecurityOption1 struct {
@@ -56,7 +56,7 @@ type CreateManagedServiceRequest struct {
 }
 
 type CreateManagedServiceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateManagedServiceResponse struct {

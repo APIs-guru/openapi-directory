@@ -1,8 +1,8 @@
 package shared
 
 type DeidentifyConfig struct {
-	Dicom *DicomConfig `json:"dicom"`
-	Fhir  *FhirConfig  `json:"fhir"`
-	Image *ImageConfig `json:"image"`
-	Text  *TextConfig  `json:"text"`
+	Dicom *DicomConfig `json:"dicom,omitempty"`
+	Fhir  *FhirConfig  `json:"fhir,omitempty"`
+	Image *ImageConfig `json:"image,omitempty"`
+	Text  *TextConfig  `json:"text,omitempty"`
 }

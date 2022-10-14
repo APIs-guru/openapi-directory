@@ -9,10 +9,10 @@ const (
 )
 
 type CodereviewLanguages struct {
-	Alerts        []CodereviewAlerts             `json:"alerts"`
-	Fixed         *int32                         `json:"fixed"`
-	Language      *string                        `json:"language"`
-	New           *int32                         `json:"new"`
-	Status        *CodereviewLanguagesStatusEnum `json:"status"`
-	StatusMessage *string                        `json:"status-message"`
+	Alerts        []CodereviewAlerts             `json:"alerts,omitempty"`
+	Fixed         *int32                         `json:"fixed,omitempty"`
+	Language      *string                        `json:"language,omitempty"`
+	New           *int32                         `json:"new,omitempty"`
+	Status        *CodereviewLanguagesStatusEnum `json:"status,omitempty"`
+	StatusMessage *string                        `json:"status-message,omitempty"`
 }

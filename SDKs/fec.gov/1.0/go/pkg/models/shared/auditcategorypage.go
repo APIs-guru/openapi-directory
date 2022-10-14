@@ -1,6 +1,6 @@
 package shared
 
 type AuditCategoryPage struct {
-	Pagination *OffsetInfo     `json:"pagination"`
-	Results    []AuditCategory `json:"results"`
+	Pagination *OffsetInfo     `json:"pagination,omitempty"`
+	Results    []AuditCategory `json:"results,omitempty"`
 }

@@ -50,17 +50,17 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaProperty struct {
-	Account          *string                                                  `json:"account"`
-	CreateTime       *string                                                  `json:"createTime"`
-	CurrencyCode     *string                                                  `json:"currencyCode"`
-	DeleteTime       *string                                                  `json:"deleteTime"`
-	DisplayName      *string                                                  `json:"displayName"`
-	ExpireTime       *string                                                  `json:"expireTime"`
-	IndustryCategory *GoogleAnalyticsAdminV1alphaPropertyIndustryCategoryEnum `json:"industryCategory"`
-	Name             *string                                                  `json:"name"`
-	Parent           *string                                                  `json:"parent"`
-	PropertyType     *GoogleAnalyticsAdminV1alphaPropertyPropertyTypeEnum     `json:"propertyType"`
-	ServiceLevel     *GoogleAnalyticsAdminV1alphaPropertyServiceLevelEnum     `json:"serviceLevel"`
-	TimeZone         *string                                                  `json:"timeZone"`
-	UpdateTime       *string                                                  `json:"updateTime"`
+	Account          *string                                                  `json:"account,omitempty"`
+	CreateTime       *string                                                  `json:"createTime,omitempty"`
+	CurrencyCode     *string                                                  `json:"currencyCode,omitempty"`
+	DeleteTime       *string                                                  `json:"deleteTime,omitempty"`
+	DisplayName      *string                                                  `json:"displayName,omitempty"`
+	ExpireTime       *string                                                  `json:"expireTime,omitempty"`
+	IndustryCategory *GoogleAnalyticsAdminV1alphaPropertyIndustryCategoryEnum `json:"industryCategory,omitempty"`
+	Name             *string                                                  `json:"name,omitempty"`
+	Parent           *string                                                  `json:"parent,omitempty"`
+	PropertyType     *GoogleAnalyticsAdminV1alphaPropertyPropertyTypeEnum     `json:"propertyType,omitempty"`
+	ServiceLevel     *GoogleAnalyticsAdminV1alphaPropertyServiceLevelEnum     `json:"serviceLevel,omitempty"`
+	TimeZone         *string                                                  `json:"timeZone,omitempty"`
+	UpdateTime       *string                                                  `json:"updateTime,omitempty"`
 }

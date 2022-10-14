@@ -18,8 +18,8 @@ const (
 )
 
 type DNSKeySpec struct {
-	Algorithm *DNSKeySpecAlgorithmEnum `json:"algorithm"`
-	KeyLength *int64                   `json:"keyLength"`
-	KeyType   *DNSKeySpecKeyTypeEnum   `json:"keyType"`
-	Kind      *string                  `json:"kind"`
+	Algorithm *DNSKeySpecAlgorithmEnum `json:"algorithm,omitempty"`
+	KeyLength *int64                   `json:"keyLength,omitempty"`
+	KeyType   *DNSKeySpecKeyTypeEnum   `json:"keyType,omitempty"`
+	Kind      *string                  `json:"kind,omitempty"`
 }

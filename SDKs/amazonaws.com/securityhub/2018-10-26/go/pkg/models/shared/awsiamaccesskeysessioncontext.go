@@ -1,6 +1,6 @@
 package shared
 
 type AwsIamAccessKeySessionContext struct {
-	Attributes    *AwsIamAccessKeySessionContextAttributes    `json:"Attributes"`
-	SessionIssuer *AwsIamAccessKeySessionContextSessionIssuer `json:"SessionIssuer"`
+	Attributes    *AwsIamAccessKeySessionContextAttributes    `json:"Attributes,omitempty"`
+	SessionIssuer *AwsIamAccessKeySessionContextSessionIssuer `json:"SessionIssuer,omitempty"`
 }

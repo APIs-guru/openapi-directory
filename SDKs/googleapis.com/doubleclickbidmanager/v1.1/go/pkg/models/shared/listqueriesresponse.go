@@ -1,7 +1,7 @@
 package shared
 
 type ListQueriesResponse struct {
-	Kind          *string `json:"kind"`
-	NextPageToken *string `json:"nextPageToken"`
-	Queries       []Query `json:"queries"`
+	Kind          *string `json:"kind,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Queries       []Query `json:"queries,omitempty"`
 }

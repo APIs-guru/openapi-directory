@@ -1,6 +1,6 @@
 package shared
 
 type GetActiveNamesResult struct {
-	ActiveNames   []string `json:"activeNames"`
-	NextPageToken *string  `json:"nextPageToken"`
+	ActiveNames   []string `json:"activeNames,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

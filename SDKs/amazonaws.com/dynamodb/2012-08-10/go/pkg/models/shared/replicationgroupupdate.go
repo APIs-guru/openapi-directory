@@ -1,7 +1,7 @@
 package shared
 
 type ReplicationGroupUpdate struct {
-	Create *CreateReplicationGroupMemberAction `json:"Create"`
-	Delete *DeleteReplicationGroupMemberAction `json:"Delete"`
-	Update *UpdateReplicationGroupMemberAction `json:"Update"`
+	Create *CreateReplicationGroupMemberAction `json:"Create,omitempty"`
+	Delete *DeleteReplicationGroupMemberAction `json:"Delete,omitempty"`
+	Update *UpdateReplicationGroupMemberAction `json:"Update,omitempty"`
 }

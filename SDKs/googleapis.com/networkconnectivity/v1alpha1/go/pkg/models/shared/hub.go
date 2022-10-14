@@ -11,12 +11,12 @@ const (
 )
 
 type Hub struct {
-	CreateTime  *string           `json:"createTime"`
-	Description *string           `json:"description"`
-	Labels      map[string]string `json:"labels"`
-	Name        *string           `json:"name"`
-	Spokes      []string          `json:"spokes"`
-	State       *HubStateEnum     `json:"state"`
-	UniqueID    *string           `json:"uniqueId"`
-	UpdateTime  *string           `json:"updateTime"`
+	CreateTime  *string           `json:"createTime,omitempty"`
+	Description *string           `json:"description,omitempty"`
+	Labels      map[string]string `json:"labels,omitempty"`
+	Name        *string           `json:"name,omitempty"`
+	Spokes      []string          `json:"spokes,omitempty"`
+	State       *HubStateEnum     `json:"state,omitempty"`
+	UniqueID    *string           `json:"uniqueId,omitempty"`
+	UpdateTime  *string           `json:"updateTime,omitempty"`
 }

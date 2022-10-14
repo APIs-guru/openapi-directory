@@ -14,8 +14,8 @@ type ReposGetAllEnvironmentsRequest struct {
 }
 
 type ReposGetAllEnvironments200ApplicationJSON struct {
-	Environments []shared.Environment `json:"environments"`
-	TotalCount   *int64               `json:"total_count"`
+	Environments []shared.Environment `json:"environments,omitempty"`
+	TotalCount   *int64               `json:"total_count,omitempty"`
 }
 
 type ReposGetAllEnvironmentsResponse struct {

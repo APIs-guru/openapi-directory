@@ -5,8 +5,8 @@ import (
 )
 
 type Breadcrumb struct {
-	Action   *string    `json:"action"`
-	DateTime *time.Time `json:"dateTime"`
-	Message  *string    `json:"message"`
-	Severity *string    `json:"severity"`
+	Action   *string    `json:"action,omitempty"`
+	DateTime *time.Time `json:"dateTime,omitempty"`
+	Message  *string    `json:"message,omitempty"`
+	Severity *string    `json:"severity,omitempty"`
 }

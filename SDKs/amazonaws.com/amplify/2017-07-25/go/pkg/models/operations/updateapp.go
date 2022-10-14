@@ -19,16 +19,16 @@ type UpdateAppHeaders struct {
 }
 
 type UpdateAppRequestBodyAutoBranchCreationConfig struct {
-	BasicAuthCredentials       *string           `json:"basicAuthCredentials"`
-	BuildSpec                  *string           `json:"buildSpec"`
-	EnableAutoBuild            *bool             `json:"enableAutoBuild"`
-	EnableBasicAuth            *bool             `json:"enableBasicAuth"`
-	EnablePerformanceMode      *bool             `json:"enablePerformanceMode"`
-	EnablePullRequestPreview   *bool             `json:"enablePullRequestPreview"`
-	EnvironmentVariables       map[string]string `json:"environmentVariables"`
-	Framework                  *string           `json:"framework"`
-	PullRequestEnvironmentName *string           `json:"pullRequestEnvironmentName"`
-	Stage                      *shared.StageEnum `json:"stage"`
+	BasicAuthCredentials       *string           `json:"basicAuthCredentials,omitempty"`
+	BuildSpec                  *string           `json:"buildSpec,omitempty"`
+	EnableAutoBuild            *bool             `json:"enableAutoBuild,omitempty"`
+	EnableBasicAuth            *bool             `json:"enableBasicAuth,omitempty"`
+	EnablePerformanceMode      *bool             `json:"enablePerformanceMode,omitempty"`
+	EnablePullRequestPreview   *bool             `json:"enablePullRequestPreview,omitempty"`
+	EnvironmentVariables       map[string]string `json:"environmentVariables,omitempty"`
+	Framework                  *string           `json:"framework,omitempty"`
+	PullRequestEnvironmentName *string           `json:"pullRequestEnvironmentName,omitempty"`
+	Stage                      *shared.StageEnum `json:"stage,omitempty"`
 }
 
 type UpdateAppRequestBodyPlatformEnum string
@@ -38,24 +38,24 @@ const (
 )
 
 type UpdateAppRequestBody struct {
-	AccessToken                *string                                       `json:"accessToken"`
-	AutoBranchCreationConfig   *UpdateAppRequestBodyAutoBranchCreationConfig `json:"autoBranchCreationConfig"`
-	AutoBranchCreationPatterns []string                                      `json:"autoBranchCreationPatterns"`
-	BasicAuthCredentials       *string                                       `json:"basicAuthCredentials"`
-	BuildSpec                  *string                                       `json:"buildSpec"`
-	CustomHeaders              *string                                       `json:"customHeaders"`
-	CustomRules                []shared.CustomRule                           `json:"customRules"`
-	Description                *string                                       `json:"description"`
-	EnableAutoBranchCreation   *bool                                         `json:"enableAutoBranchCreation"`
-	EnableBasicAuth            *bool                                         `json:"enableBasicAuth"`
-	EnableBranchAutoBuild      *bool                                         `json:"enableBranchAutoBuild"`
-	EnableBranchAutoDeletion   *bool                                         `json:"enableBranchAutoDeletion"`
-	EnvironmentVariables       map[string]string                             `json:"environmentVariables"`
-	IamServiceRoleArn          *string                                       `json:"iamServiceRoleArn"`
-	Name                       *string                                       `json:"name"`
-	OauthToken                 *string                                       `json:"oauthToken"`
-	Platform                   *UpdateAppRequestBodyPlatformEnum             `json:"platform"`
-	Repository                 *string                                       `json:"repository"`
+	AccessToken                *string                                       `json:"accessToken,omitempty"`
+	AutoBranchCreationConfig   *UpdateAppRequestBodyAutoBranchCreationConfig `json:"autoBranchCreationConfig,omitempty"`
+	AutoBranchCreationPatterns []string                                      `json:"autoBranchCreationPatterns,omitempty"`
+	BasicAuthCredentials       *string                                       `json:"basicAuthCredentials,omitempty"`
+	BuildSpec                  *string                                       `json:"buildSpec,omitempty"`
+	CustomHeaders              *string                                       `json:"customHeaders,omitempty"`
+	CustomRules                []shared.CustomRule                           `json:"customRules,omitempty"`
+	Description                *string                                       `json:"description,omitempty"`
+	EnableAutoBranchCreation   *bool                                         `json:"enableAutoBranchCreation,omitempty"`
+	EnableBasicAuth            *bool                                         `json:"enableBasicAuth,omitempty"`
+	EnableBranchAutoBuild      *bool                                         `json:"enableBranchAutoBuild,omitempty"`
+	EnableBranchAutoDeletion   *bool                                         `json:"enableBranchAutoDeletion,omitempty"`
+	EnvironmentVariables       map[string]string                             `json:"environmentVariables,omitempty"`
+	IamServiceRoleArn          *string                                       `json:"iamServiceRoleArn,omitempty"`
+	Name                       *string                                       `json:"name,omitempty"`
+	OauthToken                 *string                                       `json:"oauthToken,omitempty"`
+	Platform                   *UpdateAppRequestBodyPlatformEnum             `json:"platform,omitempty"`
+	Repository                 *string                                       `json:"repository,omitempty"`
 }
 
 type UpdateAppRequest struct {

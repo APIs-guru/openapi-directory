@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1GcsSource struct {
-	AudioURI      *string `json:"audioUri"`
-	TranscriptURI *string `json:"transcriptUri"`
+	AudioURI      *string `json:"audioUri,omitempty"`
+	TranscriptURI *string `json:"transcriptUri,omitempty"`
 }

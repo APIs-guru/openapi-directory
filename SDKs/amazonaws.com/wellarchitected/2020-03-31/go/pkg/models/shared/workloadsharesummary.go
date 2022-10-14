@@ -1,8 +1,8 @@
 package shared
 
 type WorkloadShareSummary struct {
-	PermissionType *PermissionTypeEnum `json:"PermissionType"`
-	ShareID        *string             `json:"ShareId"`
-	SharedWith     *string             `json:"SharedWith"`
-	Status         *ShareStatusEnum    `json:"Status"`
+	PermissionType *PermissionTypeEnum `json:"PermissionType,omitempty"`
+	ShareID        *string             `json:"ShareId,omitempty"`
+	SharedWith     *string             `json:"SharedWith,omitempty"`
+	Status         *ShareStatusEnum    `json:"Status,omitempty"`
 }

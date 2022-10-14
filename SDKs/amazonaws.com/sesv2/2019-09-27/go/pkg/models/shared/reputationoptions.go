@@ -5,6 +5,6 @@ import (
 )
 
 type ReputationOptions struct {
-	LastFreshStart           *time.Time `json:"LastFreshStart"`
-	ReputationMetricsEnabled *bool      `json:"ReputationMetricsEnabled"`
+	LastFreshStart           *time.Time `json:"LastFreshStart,omitempty"`
+	ReputationMetricsEnabled *bool      `json:"ReputationMetricsEnabled,omitempty"`
 }

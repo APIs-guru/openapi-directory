@@ -14,8 +14,8 @@ type RandomGifRequest struct {
 }
 
 type RandomGif200ApplicationJSON struct {
-	Data *shared.Gif  `json:"data"`
-	Meta *shared.Meta `json:"meta"`
+	Data *shared.Gif  `json:"data,omitempty"`
+	Meta *shared.Meta `json:"meta,omitempty"`
 }
 
 type RandomGifResponse struct {

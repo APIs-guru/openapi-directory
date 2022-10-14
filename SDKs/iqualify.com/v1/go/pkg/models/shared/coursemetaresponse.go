@@ -5,10 +5,10 @@ import (
 )
 
 type CourseMetaResponse struct {
-	CoverImageURL *string      `json:"coverImageUrl"`
-	CreatedAt     *time.Time   `json:"createdAt"`
-	ID            *string      `json:"id"`
-	Metadata      *interface{} `json:"metadata"`
-	Name          *string      `json:"name"`
-	TasksEnabled  *bool        `json:"tasksEnabled"`
+	CoverImageURL *string      `json:"coverImageUrl,omitempty"`
+	CreatedAt     *time.Time   `json:"createdAt,omitempty"`
+	ID            *string      `json:"id,omitempty"`
+	Metadata      *interface{} `json:"metadata,omitempty"`
+	Name          *string      `json:"name,omitempty"`
+	TasksEnabled  *bool        `json:"tasksEnabled,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type EntityMention struct {
-	Sentiment *Sentiment             `json:"sentiment"`
-	Text      *TextSpan              `json:"text"`
-	Type      *EntityMentionTypeEnum `json:"type"`
+	Sentiment *Sentiment             `json:"sentiment,omitempty"`
+	Text      *TextSpan              `json:"text,omitempty"`
+	Type      *EntityMentionTypeEnum `json:"type,omitempty"`
 }

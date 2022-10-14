@@ -31,7 +31,7 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest struct {
-	Annotation      *GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestAnnotationEnum `json:"annotation"`
-	HashedAccountID *string                                                                  `json:"hashedAccountId"`
-	Reasons         []GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestReasonsEnum   `json:"reasons"`
+	Annotation      *GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestAnnotationEnum `json:"annotation,omitempty"`
+	HashedAccountID *string                                                                  `json:"hashedAccountId,omitempty"`
+	Reasons         []GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestReasonsEnum   `json:"reasons,omitempty"`
 }

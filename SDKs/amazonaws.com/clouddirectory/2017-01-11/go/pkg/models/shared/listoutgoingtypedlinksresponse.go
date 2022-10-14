@@ -1,6 +1,6 @@
 package shared
 
 type ListOutgoingTypedLinksResponse struct {
-	NextToken           *string              `json:"NextToken"`
-	TypedLinkSpecifiers []TypedLinkSpecifier `json:"TypedLinkSpecifiers"`
+	NextToken           *string              `json:"NextToken,omitempty"`
+	TypedLinkSpecifiers []TypedLinkSpecifier `json:"TypedLinkSpecifiers,omitempty"`
 }

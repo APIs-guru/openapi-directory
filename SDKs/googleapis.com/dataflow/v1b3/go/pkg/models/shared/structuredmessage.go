@@ -1,7 +1,7 @@
 package shared
 
 type StructuredMessage struct {
-	MessageKey  *string     `json:"messageKey"`
-	MessageText *string     `json:"messageText"`
-	Parameters  []Parameter `json:"parameters"`
+	MessageKey  *string     `json:"messageKey,omitempty"`
+	MessageText *string     `json:"messageText,omitempty"`
+	Parameters  []Parameter `json:"parameters,omitempty"`
 }

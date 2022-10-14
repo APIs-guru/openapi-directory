@@ -16,5 +16,5 @@ const (
 )
 
 type ViewabilityAssignedTargetingOptionDetails struct {
-	Viewability *ViewabilityAssignedTargetingOptionDetailsViewabilityEnum `json:"viewability"`
+	Viewability *ViewabilityAssignedTargetingOptionDetailsViewabilityEnum `json:"viewability,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ReportLocalPostInsightsRequest struct {
-	BasicRequest   *BasicMetricsRequest `json:"basicRequest"`
-	LocalPostNames []string             `json:"localPostNames"`
+	BasicRequest   *BasicMetricsRequest `json:"basicRequest,omitempty"`
+	LocalPostNames []string             `json:"localPostNames,omitempty"`
 }

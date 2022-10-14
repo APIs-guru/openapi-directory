@@ -13,9 +13,9 @@ const (
 )
 
 type DiscoverableParticipant struct {
-	DocumentTypes []DiscoverableParticipantDocumentTypesEnum `json:"documentTypes"`
+	DocumentTypes []DiscoverableParticipantDocumentTypesEnum `json:"documentTypes,omitempty"`
 	Identifier    string                                     `json:"identifier"`
-	MetaScheme    *string                                    `json:"metaScheme"`
-	Network       *string                                    `json:"network"`
+	MetaScheme    *string                                    `json:"metaScheme,omitempty"`
+	Network       *string                                    `json:"network,omitempty"`
 	Scheme        string                                     `json:"scheme"`
 }

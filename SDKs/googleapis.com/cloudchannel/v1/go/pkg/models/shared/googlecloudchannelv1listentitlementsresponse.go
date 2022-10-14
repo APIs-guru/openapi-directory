@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudChannelV1ListEntitlementsResponse struct {
-	Entitlements  []GoogleCloudChannelV1Entitlement `json:"entitlements"`
-	NextPageToken *string                           `json:"nextPageToken"`
+	Entitlements  []GoogleCloudChannelV1Entitlement `json:"entitlements,omitempty"`
+	NextPageToken *string                           `json:"nextPageToken,omitempty"`
 }

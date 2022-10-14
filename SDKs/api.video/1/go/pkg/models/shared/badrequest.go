@@ -1,9 +1,9 @@
 package shared
 
 type BadRequest struct {
-	Name     *string      `json:"name"`
-	Problems []BadRequest `json:"problems"`
-	Status   *int64       `json:"status"`
-	Title    *string      `json:"title"`
-	Type     *string      `json:"type"`
+	Name     *string      `json:"name,omitempty"`
+	Problems []BadRequest `json:"problems,omitempty"`
+	Status   *int64       `json:"status,omitempty"`
+	Title    *string      `json:"title,omitempty"`
+	Type     *string      `json:"type,omitempty"`
 }

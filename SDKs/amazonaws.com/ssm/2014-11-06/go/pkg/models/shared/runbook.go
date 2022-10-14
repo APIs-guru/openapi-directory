@@ -2,11 +2,11 @@ package shared
 
 type Runbook struct {
 	DocumentName        string              `json:"DocumentName"`
-	DocumentVersion     *string             `json:"DocumentVersion"`
-	MaxConcurrency      *string             `json:"MaxConcurrency"`
-	MaxErrors           *string             `json:"MaxErrors"`
-	Parameters          map[string][]string `json:"Parameters"`
-	TargetLocations     []TargetLocation    `json:"TargetLocations"`
-	TargetParameterName *string             `json:"TargetParameterName"`
-	Targets             []Target            `json:"Targets"`
+	DocumentVersion     *string             `json:"DocumentVersion,omitempty"`
+	MaxConcurrency      *string             `json:"MaxConcurrency,omitempty"`
+	MaxErrors           *string             `json:"MaxErrors,omitempty"`
+	Parameters          map[string][]string `json:"Parameters,omitempty"`
+	TargetLocations     []TargetLocation    `json:"TargetLocations,omitempty"`
+	TargetParameterName *string             `json:"TargetParameterName,omitempty"`
+	Targets             []Target            `json:"Targets,omitempty"`
 }

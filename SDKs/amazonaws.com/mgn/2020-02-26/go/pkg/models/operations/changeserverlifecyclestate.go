@@ -15,7 +15,7 @@ type ChangeServerLifeCycleStateHeaders struct {
 }
 
 type ChangeServerLifeCycleStateRequestBodyLifeCycle struct {
-	State *shared.ChangeServerLifeCycleStateSourceServerLifecycleStateEnum `json:"state"`
+	State *shared.ChangeServerLifeCycleStateSourceServerLifecycleStateEnum `json:"state,omitempty"`
 }
 
 type ChangeServerLifeCycleStateRequestBody struct {

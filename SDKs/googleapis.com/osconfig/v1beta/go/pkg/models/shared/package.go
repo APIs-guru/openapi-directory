@@ -21,7 +21,7 @@ const (
 )
 
 type Package struct {
-	DesiredState *PackageDesiredStateEnum `json:"desiredState"`
-	Manager      *PackageManagerEnum      `json:"manager"`
-	Name         *string                  `json:"name"`
+	DesiredState *PackageDesiredStateEnum `json:"desiredState,omitempty"`
+	Manager      *PackageManagerEnum      `json:"manager,omitempty"`
+	Name         *string                  `json:"name,omitempty"`
 }

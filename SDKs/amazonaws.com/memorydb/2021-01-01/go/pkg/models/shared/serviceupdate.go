@@ -5,12 +5,12 @@ import (
 )
 
 type ServiceUpdate struct {
-	AutoUpdateStartDate *time.Time               `json:"AutoUpdateStartDate"`
-	ClusterName         *string                  `json:"ClusterName"`
-	Description         *string                  `json:"Description"`
-	NodesUpdated        *string                  `json:"NodesUpdated"`
-	ReleaseDate         *time.Time               `json:"ReleaseDate"`
-	ServiceUpdateName   *string                  `json:"ServiceUpdateName"`
-	Status              *ServiceUpdateStatusEnum `json:"Status"`
-	Type                *ServiceUpdateTypeEnum   `json:"Type"`
+	AutoUpdateStartDate *time.Time               `json:"AutoUpdateStartDate,omitempty"`
+	ClusterName         *string                  `json:"ClusterName,omitempty"`
+	Description         *string                  `json:"Description,omitempty"`
+	NodesUpdated        *string                  `json:"NodesUpdated,omitempty"`
+	ReleaseDate         *time.Time               `json:"ReleaseDate,omitempty"`
+	ServiceUpdateName   *string                  `json:"ServiceUpdateName,omitempty"`
+	Status              *ServiceUpdateStatusEnum `json:"Status,omitempty"`
+	Type                *ServiceUpdateTypeEnum   `json:"Type,omitempty"`
 }

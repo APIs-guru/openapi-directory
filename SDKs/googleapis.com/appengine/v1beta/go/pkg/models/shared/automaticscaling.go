@@ -1,18 +1,18 @@
 package shared
 
 type AutomaticScaling struct {
-	CoolDownPeriod            *string                    `json:"coolDownPeriod"`
-	CPUUtilization            *CPUUtilization            `json:"cpuUtilization"`
-	CustomMetrics             []CustomMetric             `json:"customMetrics"`
-	DiskUtilization           *DiskUtilization           `json:"diskUtilization"`
-	MaxConcurrentRequests     *int32                     `json:"maxConcurrentRequests"`
-	MaxIdleInstances          *int32                     `json:"maxIdleInstances"`
-	MaxPendingLatency         *string                    `json:"maxPendingLatency"`
-	MaxTotalInstances         *int32                     `json:"maxTotalInstances"`
-	MinIdleInstances          *int32                     `json:"minIdleInstances"`
-	MinPendingLatency         *string                    `json:"minPendingLatency"`
-	MinTotalInstances         *int32                     `json:"minTotalInstances"`
-	NetworkUtilization        *NetworkUtilization        `json:"networkUtilization"`
-	RequestUtilization        *RequestUtilization        `json:"requestUtilization"`
-	StandardSchedulerSettings *StandardSchedulerSettings `json:"standardSchedulerSettings"`
+	CoolDownPeriod            *string                    `json:"coolDownPeriod,omitempty"`
+	CPUUtilization            *CPUUtilization            `json:"cpuUtilization,omitempty"`
+	CustomMetrics             []CustomMetric             `json:"customMetrics,omitempty"`
+	DiskUtilization           *DiskUtilization           `json:"diskUtilization,omitempty"`
+	MaxConcurrentRequests     *int32                     `json:"maxConcurrentRequests,omitempty"`
+	MaxIdleInstances          *int32                     `json:"maxIdleInstances,omitempty"`
+	MaxPendingLatency         *string                    `json:"maxPendingLatency,omitempty"`
+	MaxTotalInstances         *int32                     `json:"maxTotalInstances,omitempty"`
+	MinIdleInstances          *int32                     `json:"minIdleInstances,omitempty"`
+	MinPendingLatency         *string                    `json:"minPendingLatency,omitempty"`
+	MinTotalInstances         *int32                     `json:"minTotalInstances,omitempty"`
+	NetworkUtilization        *NetworkUtilization        `json:"networkUtilization,omitempty"`
+	RequestUtilization        *RequestUtilization        `json:"requestUtilization,omitempty"`
+	StandardSchedulerSettings *StandardSchedulerSettings `json:"standardSchedulerSettings,omitempty"`
 }

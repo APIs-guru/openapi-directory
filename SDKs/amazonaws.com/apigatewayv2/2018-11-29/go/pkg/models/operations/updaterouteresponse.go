@@ -21,10 +21,10 @@ type UpdateRouteResponseHeaders struct {
 }
 
 type UpdateRouteResponseRequestBody struct {
-	ModelSelectionExpression *string                                `json:"modelSelectionExpression"`
-	ResponseModels           map[string]string                      `json:"responseModels"`
-	ResponseParameters       map[string]shared.ParameterConstraints `json:"responseParameters"`
-	RouteResponseKey         *string                                `json:"routeResponseKey"`
+	ModelSelectionExpression *string                                `json:"modelSelectionExpression,omitempty"`
+	ResponseModels           map[string]string                      `json:"responseModels,omitempty"`
+	ResponseParameters       map[string]shared.ParameterConstraints `json:"responseParameters,omitempty"`
+	RouteResponseKey         *string                                `json:"routeResponseKey,omitempty"`
 }
 
 type UpdateRouteResponseRequest struct {

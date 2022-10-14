@@ -19,15 +19,15 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1PhraseMatcher struct {
-	ActivationUpdateTime  *string                                                       `json:"activationUpdateTime"`
-	Active                *bool                                                         `json:"active"`
-	DisplayName           *string                                                       `json:"displayName"`
-	Name                  *string                                                       `json:"name"`
-	PhraseMatchRuleGroups []GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup      `json:"phraseMatchRuleGroups"`
-	RevisionCreateTime    *string                                                       `json:"revisionCreateTime"`
-	RevisionID            *string                                                       `json:"revisionId"`
-	RoleMatch             *GoogleCloudContactcenterinsightsV1PhraseMatcherRoleMatchEnum `json:"roleMatch"`
-	Type                  *GoogleCloudContactcenterinsightsV1PhraseMatcherTypeEnum      `json:"type"`
-	UpdateTime            *string                                                       `json:"updateTime"`
-	VersionTag            *string                                                       `json:"versionTag"`
+	ActivationUpdateTime  *string                                                       `json:"activationUpdateTime,omitempty"`
+	Active                *bool                                                         `json:"active,omitempty"`
+	DisplayName           *string                                                       `json:"displayName,omitempty"`
+	Name                  *string                                                       `json:"name,omitempty"`
+	PhraseMatchRuleGroups []GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup      `json:"phraseMatchRuleGroups,omitempty"`
+	RevisionCreateTime    *string                                                       `json:"revisionCreateTime,omitempty"`
+	RevisionID            *string                                                       `json:"revisionId,omitempty"`
+	RoleMatch             *GoogleCloudContactcenterinsightsV1PhraseMatcherRoleMatchEnum `json:"roleMatch,omitempty"`
+	Type                  *GoogleCloudContactcenterinsightsV1PhraseMatcherTypeEnum      `json:"type,omitempty"`
+	UpdateTime            *string                                                       `json:"updateTime,omitempty"`
+	VersionTag            *string                                                       `json:"versionTag,omitempty"`
 }

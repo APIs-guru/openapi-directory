@@ -10,7 +10,7 @@ type ReposCreateForkPathParams struct {
 }
 
 type ReposCreateForkRequestBody struct {
-	Organization *string `json:"organization"`
+	Organization *string `json:"organization,omitempty"`
 }
 
 type ReposCreateForkRequest struct {

@@ -1,8 +1,8 @@
 package shared
 
 type GooglePrivacyDlpV2TimespanConfig struct {
-	EnableAutoPopulationOfTimespanConfig *bool                      `json:"enableAutoPopulationOfTimespanConfig"`
-	EndTime                              *string                    `json:"endTime"`
-	StartTime                            *string                    `json:"startTime"`
-	TimestampField                       *GooglePrivacyDlpV2FieldID `json:"timestampField"`
+	EnableAutoPopulationOfTimespanConfig *bool                      `json:"enableAutoPopulationOfTimespanConfig,omitempty"`
+	EndTime                              *string                    `json:"endTime,omitempty"`
+	StartTime                            *string                    `json:"startTime,omitempty"`
+	TimestampField                       *GooglePrivacyDlpV2FieldID `json:"timestampField,omitempty"`
 }

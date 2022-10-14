@@ -25,8 +25,8 @@ const (
 )
 
 type NodeBalancerConfigNodesStatus struct {
-	Down *int64 `json:"down"`
-	Up   *int64 `json:"up"`
+	Down *int64 `json:"down,omitempty"`
+	Up   *int64 `json:"up,omitempty"`
 }
 
 type NodeBalancerConfigProtocolEnum string
@@ -54,24 +54,24 @@ const (
 )
 
 type NodeBalancerConfig struct {
-	Algorithm      *NodeBalancerConfigAlgorithmEnum     `json:"algorithm"`
-	Check          *NodeBalancerConfigCheckEnum         `json:"check"`
-	CheckAttempts  *int64                               `json:"check_attempts"`
-	CheckBody      *string                              `json:"check_body"`
-	CheckInterval  *int64                               `json:"check_interval"`
-	CheckPassive   *bool                                `json:"check_passive"`
-	CheckPath      *string                              `json:"check_path"`
-	CheckTimeout   *int64                               `json:"check_timeout"`
-	CipherSuite    *NodeBalancerConfigCipherSuiteEnum   `json:"cipher_suite"`
-	ID             *int64                               `json:"id"`
-	NodebalancerID *int64                               `json:"nodebalancer_id"`
-	NodesStatus    *NodeBalancerConfigNodesStatus       `json:"nodes_status"`
-	Port           *int64                               `json:"port"`
-	Protocol       *NodeBalancerConfigProtocolEnum      `json:"protocol"`
-	ProxyProtocol  *NodeBalancerConfigProxyProtocolEnum `json:"proxy_protocol"`
-	SslCert        *string                              `json:"ssl_cert"`
-	SslCommonname  *string                              `json:"ssl_commonname"`
-	SslFingerprint *string                              `json:"ssl_fingerprint"`
-	SslKey         *string                              `json:"ssl_key"`
-	Stickiness     *NodeBalancerConfigStickinessEnum    `json:"stickiness"`
+	Algorithm      *NodeBalancerConfigAlgorithmEnum     `json:"algorithm,omitempty"`
+	Check          *NodeBalancerConfigCheckEnum         `json:"check,omitempty"`
+	CheckAttempts  *int64                               `json:"check_attempts,omitempty"`
+	CheckBody      *string                              `json:"check_body,omitempty"`
+	CheckInterval  *int64                               `json:"check_interval,omitempty"`
+	CheckPassive   *bool                                `json:"check_passive,omitempty"`
+	CheckPath      *string                              `json:"check_path,omitempty"`
+	CheckTimeout   *int64                               `json:"check_timeout,omitempty"`
+	CipherSuite    *NodeBalancerConfigCipherSuiteEnum   `json:"cipher_suite,omitempty"`
+	ID             *int64                               `json:"id,omitempty"`
+	NodebalancerID *int64                               `json:"nodebalancer_id,omitempty"`
+	NodesStatus    *NodeBalancerConfigNodesStatus       `json:"nodes_status,omitempty"`
+	Port           *int64                               `json:"port,omitempty"`
+	Protocol       *NodeBalancerConfigProtocolEnum      `json:"protocol,omitempty"`
+	ProxyProtocol  *NodeBalancerConfigProxyProtocolEnum `json:"proxy_protocol,omitempty"`
+	SslCert        *string                              `json:"ssl_cert,omitempty"`
+	SslCommonname  *string                              `json:"ssl_commonname,omitempty"`
+	SslFingerprint *string                              `json:"ssl_fingerprint,omitempty"`
+	SslKey         *string                              `json:"ssl_key,omitempty"`
+	Stickiness     *NodeBalancerConfigStickinessEnum    `json:"stickiness,omitempty"`
 }

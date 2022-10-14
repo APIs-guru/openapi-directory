@@ -11,12 +11,12 @@ type PullsCreatePathParams struct {
 
 type PullsCreateRequestBody struct {
 	Base                string  `json:"base"`
-	Body                *string `json:"body"`
-	Draft               *bool   `json:"draft"`
+	Body                *string `json:"body,omitempty"`
+	Draft               *bool   `json:"draft,omitempty"`
 	Head                string  `json:"head"`
-	Issue               *int64  `json:"issue"`
-	MaintainerCanModify *bool   `json:"maintainer_can_modify"`
-	Title               *string `json:"title"`
+	Issue               *int64  `json:"issue,omitempty"`
+	MaintainerCanModify *bool   `json:"maintainer_can_modify,omitempty"`
+	Title               *string `json:"title,omitempty"`
 }
 
 type PullsCreateRequest struct {

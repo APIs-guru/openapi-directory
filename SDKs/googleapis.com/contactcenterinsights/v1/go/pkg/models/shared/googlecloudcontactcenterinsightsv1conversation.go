@@ -9,23 +9,23 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1Conversation struct {
-	AgentID            *string                                                       `json:"agentId"`
-	CallMetadata       *GoogleCloudContactcenterinsightsV1ConversationCallMetadata   `json:"callMetadata"`
-	CreateTime         *string                                                       `json:"createTime"`
-	DataSource         *GoogleCloudContactcenterinsightsV1ConversationDataSource     `json:"dataSource"`
-	DialogflowIntents  map[string]GoogleCloudContactcenterinsightsV1DialogflowIntent `json:"dialogflowIntents"`
-	Duration           *string                                                       `json:"duration"`
-	ExpireTime         *string                                                       `json:"expireTime"`
-	Labels             map[string]string                                             `json:"labels"`
-	LanguageCode       *string                                                       `json:"languageCode"`
-	LatestAnalysis     *GoogleCloudContactcenterinsightsV1Analysis                   `json:"latestAnalysis"`
-	Medium             *GoogleCloudContactcenterinsightsV1ConversationMediumEnum     `json:"medium"`
-	Name               *string                                                       `json:"name"`
-	ObfuscatedUserID   *string                                                       `json:"obfuscatedUserId"`
-	RuntimeAnnotations []GoogleCloudContactcenterinsightsV1RuntimeAnnotation         `json:"runtimeAnnotations"`
-	StartTime          *string                                                       `json:"startTime"`
-	Transcript         *GoogleCloudContactcenterinsightsV1ConversationTranscript     `json:"transcript"`
-	TTL                *string                                                       `json:"ttl"`
-	TurnCount          *int32                                                        `json:"turnCount"`
-	UpdateTime         *string                                                       `json:"updateTime"`
+	AgentID            *string                                                       `json:"agentId,omitempty"`
+	CallMetadata       *GoogleCloudContactcenterinsightsV1ConversationCallMetadata   `json:"callMetadata,omitempty"`
+	CreateTime         *string                                                       `json:"createTime,omitempty"`
+	DataSource         *GoogleCloudContactcenterinsightsV1ConversationDataSource     `json:"dataSource,omitempty"`
+	DialogflowIntents  map[string]GoogleCloudContactcenterinsightsV1DialogflowIntent `json:"dialogflowIntents,omitempty"`
+	Duration           *string                                                       `json:"duration,omitempty"`
+	ExpireTime         *string                                                       `json:"expireTime,omitempty"`
+	Labels             map[string]string                                             `json:"labels,omitempty"`
+	LanguageCode       *string                                                       `json:"languageCode,omitempty"`
+	LatestAnalysis     *GoogleCloudContactcenterinsightsV1Analysis                   `json:"latestAnalysis,omitempty"`
+	Medium             *GoogleCloudContactcenterinsightsV1ConversationMediumEnum     `json:"medium,omitempty"`
+	Name               *string                                                       `json:"name,omitempty"`
+	ObfuscatedUserID   *string                                                       `json:"obfuscatedUserId,omitempty"`
+	RuntimeAnnotations []GoogleCloudContactcenterinsightsV1RuntimeAnnotation         `json:"runtimeAnnotations,omitempty"`
+	StartTime          *string                                                       `json:"startTime,omitempty"`
+	Transcript         *GoogleCloudContactcenterinsightsV1ConversationTranscript     `json:"transcript,omitempty"`
+	TTL                *string                                                       `json:"ttl,omitempty"`
+	TurnCount          *int32                                                        `json:"turnCount,omitempty"`
+	UpdateTime         *string                                                       `json:"updateTime,omitempty"`
 }

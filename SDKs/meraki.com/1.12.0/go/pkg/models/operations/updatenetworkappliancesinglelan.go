@@ -5,8 +5,8 @@ type UpdateNetworkApplianceSingleLanPathParams struct {
 }
 
 type UpdateNetworkApplianceSingleLanRequestBody struct {
-	ApplianceIP *string `json:"applianceIp"`
-	Subnet      *string `json:"subnet"`
+	ApplianceIP *string `json:"applianceIp,omitempty"`
+	Subnet      *string `json:"subnet,omitempty"`
 }
 
 type UpdateNetworkApplianceSingleLanRequest struct {

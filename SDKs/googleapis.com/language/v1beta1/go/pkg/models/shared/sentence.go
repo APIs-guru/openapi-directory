@@ -1,6 +1,6 @@
 package shared
 
 type Sentence struct {
-	Sentiment *Sentiment `json:"sentiment"`
-	Text      *TextSpan  `json:"text"`
+	Sentiment *Sentiment `json:"sentiment,omitempty"`
+	Text      *TextSpan  `json:"text,omitempty"`
 }

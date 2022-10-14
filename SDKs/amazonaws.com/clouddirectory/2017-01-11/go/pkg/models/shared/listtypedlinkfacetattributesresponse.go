@@ -1,6 +1,6 @@
 package shared
 
 type ListTypedLinkFacetAttributesResponse struct {
-	Attributes []TypedLinkAttributeDefinition `json:"Attributes"`
-	NextToken  *string                        `json:"NextToken"`
+	Attributes []TypedLinkAttributeDefinition `json:"Attributes,omitempty"`
+	NextToken  *string                        `json:"NextToken,omitempty"`
 }

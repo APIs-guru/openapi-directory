@@ -47,10 +47,10 @@ const (
 )
 
 type DescribeConnectorProfilesRequestBody struct {
-	ConnectorProfileNames []string                                               `json:"connectorProfileNames"`
-	ConnectorType         *DescribeConnectorProfilesRequestBodyConnectorTypeEnum `json:"connectorType"`
-	MaxResults            *int64                                                 `json:"maxResults"`
-	NextToken             *string                                                `json:"nextToken"`
+	ConnectorProfileNames []string                                               `json:"connectorProfileNames,omitempty"`
+	ConnectorType         *DescribeConnectorProfilesRequestBodyConnectorTypeEnum `json:"connectorType,omitempty"`
+	MaxResults            *int64                                                 `json:"maxResults,omitempty"`
+	NextToken             *string                                                `json:"nextToken,omitempty"`
 }
 
 type DescribeConnectorProfilesRequest struct {

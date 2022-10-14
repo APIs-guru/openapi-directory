@@ -9,9 +9,9 @@ const (
 )
 
 type OrderContact struct {
-	ContactInfo            *string                      `json:"contactInfo"`
-	ContactName            *string                      `json:"contactName"`
-	ContactTitle           *string                      `json:"contactTitle"`
-	ContactType            *OrderContactContactTypeEnum `json:"contactType"`
-	SignatureUserProfileID *string                      `json:"signatureUserProfileId"`
+	ContactInfo            *string                      `json:"contactInfo,omitempty"`
+	ContactName            *string                      `json:"contactName,omitempty"`
+	ContactTitle           *string                      `json:"contactTitle,omitempty"`
+	ContactType            *OrderContactContactTypeEnum `json:"contactType,omitempty"`
+	SignatureUserProfileID *string                      `json:"signatureUserProfileId,omitempty"`
 }

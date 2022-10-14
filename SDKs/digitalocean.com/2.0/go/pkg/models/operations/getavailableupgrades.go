@@ -13,18 +13,18 @@ type GetAvailableUpgradesRequest struct {
 }
 
 type GetAvailableUpgrades200ApplicationJSONAvailableUpgradeVersions struct {
-	KubernetesVersion *string `json:"kubernetes_version"`
-	Slug              *string `json:"slug"`
+	KubernetesVersion *string `json:"kubernetes_version,omitempty"`
+	Slug              *string `json:"slug,omitempty"`
 }
 
 type GetAvailableUpgrades200ApplicationJSON struct {
-	AvailableUpgradeVersions []GetAvailableUpgrades200ApplicationJSONAvailableUpgradeVersions `json:"available_upgrade_versions"`
+	AvailableUpgradeVersions []GetAvailableUpgrades200ApplicationJSONAvailableUpgradeVersions `json:"available_upgrade_versions,omitempty"`
 }
 
 type GetAvailableUpgrades401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetAvailableUpgradesResponse struct {

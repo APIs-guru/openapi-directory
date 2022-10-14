@@ -1,8 +1,8 @@
 package shared
 
 type DomainStats struct {
-	MeteringProfileCount *int64 `json:"MeteringProfileCount"`
-	ObjectCount          *int64 `json:"ObjectCount"`
-	ProfileCount         *int64 `json:"ProfileCount"`
-	TotalSize            *int64 `json:"TotalSize"`
+	MeteringProfileCount *int64 `json:"MeteringProfileCount,omitempty"`
+	ObjectCount          *int64 `json:"ObjectCount,omitempty"`
+	ProfileCount         *int64 `json:"ProfileCount,omitempty"`
+	TotalSize            *int64 `json:"TotalSize,omitempty"`
 }

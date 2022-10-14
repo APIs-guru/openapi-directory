@@ -17,8 +17,8 @@ const (
 )
 
 type EpfscRequestBody struct {
-	CertificateParameters *EpfscRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *EpfscRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                EpfscRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Epfsc400ApplicationJSON struct {
-	Error            *Epfsc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Epfsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Epfsc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Epfsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Epfsc401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Epfsc401ApplicationJSON struct {
-	Error            *Epfsc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Epfsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Epfsc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Epfsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Epfsc404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Epfsc404ApplicationJSON struct {
-	Error            *Epfsc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Epfsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Epfsc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Epfsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Epfsc500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Epfsc500ApplicationJSON struct {
-	Error            *Epfsc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Epfsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Epfsc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Epfsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Epfsc502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Epfsc502ApplicationJSON struct {
-	Error            *Epfsc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Epfsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Epfsc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Epfsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Epfsc503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Epfsc503ApplicationJSON struct {
-	Error            *Epfsc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Epfsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Epfsc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Epfsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Epfsc504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Epfsc504ApplicationJSON struct {
-	Error            *Epfsc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Epfsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Epfsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Epfsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type EpfscResponse struct {

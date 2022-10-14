@@ -1,7 +1,7 @@
 package shared
 
 type GoogleFirebaseAppcheckV1betaAppCheckToken struct {
-	AttestationToken *string `json:"attestationToken"`
-	Token            *string `json:"token"`
-	TTL              *string `json:"ttl"`
+	AttestationToken *string `json:"attestationToken,omitempty"`
+	Token            *string `json:"token,omitempty"`
+	TTL              *string `json:"ttl,omitempty"`
 }

@@ -17,9 +17,9 @@ const (
 
 type EnterpriseAdminCreateSelfHostedRunnerGroupForEnterpriseRequestBody struct {
 	Name                    string                                                                            `json:"name"`
-	Runners                 []int64                                                                           `json:"runners"`
-	SelectedOrganizationIds []int64                                                                           `json:"selected_organization_ids"`
-	Visibility              *EnterpriseAdminCreateSelfHostedRunnerGroupForEnterpriseRequestBodyVisibilityEnum `json:"visibility"`
+	Runners                 []int64                                                                           `json:"runners,omitempty"`
+	SelectedOrganizationIds []int64                                                                           `json:"selected_organization_ids,omitempty"`
+	Visibility              *EnterpriseAdminCreateSelfHostedRunnerGroupForEnterpriseRequestBodyVisibilityEnum `json:"visibility,omitempty"`
 }
 
 type EnterpriseAdminCreateSelfHostedRunnerGroupForEnterpriseRequest struct {

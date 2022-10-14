@@ -19,13 +19,13 @@ type ListGarbageCollectionsRequest struct {
 }
 
 type ListGarbageCollections200ApplicationJSON struct {
-	GarbageCollections []shared.Onev21registry1Percent7BregistryNamePercent7D1garbageCollectionPostResponses201ContentApplication1jsonSchemaPropertiesGarbageCollection `json:"garbage_collections"`
+	GarbageCollections []shared.Onev21registry1Percent7BregistryNamePercent7D1garbageCollectionPostResponses201ContentApplication1jsonSchemaPropertiesGarbageCollection `json:"garbage_collections,omitempty"`
 }
 
 type ListGarbageCollections401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListGarbageCollectionsResponse struct {

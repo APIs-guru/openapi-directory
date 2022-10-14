@@ -5,8 +5,8 @@ import (
 )
 
 type ClusterListEntry struct {
-	ClusterID    *string           `json:"ClusterId"`
-	ClusterState *ClusterStateEnum `json:"ClusterState"`
-	CreationDate *time.Time        `json:"CreationDate"`
-	Description  *string           `json:"Description"`
+	ClusterID    *string           `json:"ClusterId,omitempty"`
+	ClusterState *ClusterStateEnum `json:"ClusterState,omitempty"`
+	CreationDate *time.Time        `json:"CreationDate,omitempty"`
+	Description  *string           `json:"Description,omitempty"`
 }

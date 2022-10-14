@@ -15,11 +15,11 @@ const (
 
 type FileActionResponse struct {
 	CompletedAt time.Time                    `json:"completedAt"`
-	Errors      []StandardError              `json:"errors"`
-	Links       map[string]string            `json:"links"`
-	NumErrors   *int32                       `json:"numErrors"`
-	RequestedAt *time.Time                   `json:"requestedAt"`
-	Result      *File                        `json:"result"`
+	Errors      []StandardError              `json:"errors,omitempty"`
+	Links       map[string]string            `json:"links,omitempty"`
+	NumErrors   *int32                       `json:"numErrors,omitempty"`
+	RequestedAt *time.Time                   `json:"requestedAt,omitempty"`
+	Result      *File                        `json:"result,omitempty"`
 	StartedAt   time.Time                    `json:"startedAt"`
 	Status      FileActionResponseStatusEnum `json:"status"`
 	TaskID      string                       `json:"taskId"`

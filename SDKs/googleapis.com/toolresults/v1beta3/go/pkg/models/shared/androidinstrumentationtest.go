@@ -1,8 +1,8 @@
 package shared
 
 type AndroidInstrumentationTest struct {
-	TestPackageID   *string  `json:"testPackageId"`
-	TestRunnerClass *string  `json:"testRunnerClass"`
-	TestTargets     []string `json:"testTargets"`
-	UseOrchestrator *bool    `json:"useOrchestrator"`
+	TestPackageID   *string  `json:"testPackageId,omitempty"`
+	TestRunnerClass *string  `json:"testRunnerClass,omitempty"`
+	TestTargets     []string `json:"testTargets,omitempty"`
+	UseOrchestrator *bool    `json:"useOrchestrator,omitempty"`
 }

@@ -10,15 +10,15 @@ const (
 )
 
 type ErrorModelErrorModelErrorsErrors struct {
-	Error []string `json:"Error"`
+	Error []string `json:"Error,omitempty"`
 }
 
 type ErrorModelErrorModelErrorModel struct {
-	Description   *string                                             `json:"Description"`
-	ErrorCategory *ErrorModelErrorModelErrorCategoryErrorCategoryEnum `json:"ErrorCategory"`
-	Errors        *ErrorModelErrorModelErrorsErrors                   `json:"Errors"`
+	Description   *string                                             `json:"Description,omitempty"`
+	ErrorCategory *ErrorModelErrorModelErrorCategoryErrorCategoryEnum `json:"ErrorCategory,omitempty"`
+	Errors        *ErrorModelErrorModelErrorsErrors                   `json:"Errors,omitempty"`
 }
 
 type ErrorModel struct {
-	ErrorModel *ErrorModelErrorModelErrorModel `json:"ErrorModel"`
+	ErrorModel *ErrorModelErrorModelErrorModel `json:"ErrorModel,omitempty"`
 }

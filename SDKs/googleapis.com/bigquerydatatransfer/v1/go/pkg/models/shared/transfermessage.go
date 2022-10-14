@@ -10,7 +10,7 @@ const (
 )
 
 type TransferMessage struct {
-	MessageText *string                      `json:"messageText"`
-	MessageTime *string                      `json:"messageTime"`
-	Severity    *TransferMessageSeverityEnum `json:"severity"`
+	MessageText *string                      `json:"messageText,omitempty"`
+	MessageTime *string                      `json:"messageTime,omitempty"`
+	Severity    *TransferMessageSeverityEnum `json:"severity,omitempty"`
 }

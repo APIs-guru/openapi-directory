@@ -1,6 +1,6 @@
 package shared
 
 type JobExecutionSummaryForThing struct {
-	JobExecutionSummary *JobExecutionSummary `json:"jobExecutionSummary"`
-	JobID               *string              `json:"jobId"`
+	JobExecutionSummary *JobExecutionSummary `json:"jobExecutionSummary,omitempty"`
+	JobID               *string              `json:"jobId,omitempty"`
 }

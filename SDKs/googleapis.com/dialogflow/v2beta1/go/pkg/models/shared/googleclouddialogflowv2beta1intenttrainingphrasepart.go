@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart struct {
-	Alias       *string `json:"alias"`
-	EntityType  *string `json:"entityType"`
-	Text        *string `json:"text"`
-	UserDefined *bool   `json:"userDefined"`
+	Alias       *string `json:"alias,omitempty"`
+	EntityType  *string `json:"entityType,omitempty"`
+	Text        *string `json:"text,omitempty"`
+	UserDefined *bool   `json:"userDefined,omitempty"`
 }

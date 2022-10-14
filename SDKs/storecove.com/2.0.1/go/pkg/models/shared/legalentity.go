@@ -8,16 +8,16 @@ const (
 )
 
 type LegalEntity struct {
-	Advertisements    []LegalEntityAdvertisementsDocumentTypeEnum `json:"advertisements"`
-	City              *string                                     `json:"city"`
-	Country           *CountryEnum                                `json:"country"`
-	County            *string                                     `json:"county"`
-	ID                *int64                                      `json:"id"`
-	Line1             *string                                     `json:"line1"`
-	Line2             *string                                     `json:"line2"`
-	PartyName         *string                                     `json:"party_name"`
-	PeppolIdentifiers []interface{}                               `json:"peppol_identifiers"`
-	Public            *bool                                       `json:"public"`
-	TenantID          *string                                     `json:"tenant_id"`
-	Zip               *string                                     `json:"zip"`
+	Advertisements    []LegalEntityAdvertisementsDocumentTypeEnum `json:"advertisements,omitempty"`
+	City              *string                                     `json:"city,omitempty"`
+	Country           *CountryEnum                                `json:"country,omitempty"`
+	County            *string                                     `json:"county,omitempty"`
+	ID                *int64                                      `json:"id,omitempty"`
+	Line1             *string                                     `json:"line1,omitempty"`
+	Line2             *string                                     `json:"line2,omitempty"`
+	PartyName         *string                                     `json:"party_name,omitempty"`
+	PeppolIdentifiers []interface{}                               `json:"peppol_identifiers,omitempty"`
+	Public            *bool                                       `json:"public,omitempty"`
+	TenantID          *string                                     `json:"tenant_id,omitempty"`
+	Zip               *string                                     `json:"zip,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleDevtoolsContaineranalysisV1alpha1AliasContext struct {
-	Kind *GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum `json:"kind"`
-	Name *string                                                      `json:"name"`
+	Kind *GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum `json:"kind,omitempty"`
+	Name *string                                                      `json:"name,omitempty"`
 }

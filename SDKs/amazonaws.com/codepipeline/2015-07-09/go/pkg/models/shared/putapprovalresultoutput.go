@@ -5,5 +5,5 @@ import (
 )
 
 type PutApprovalResultOutput struct {
-	ApprovedAt *time.Time `json:"approvedAt"`
+	ApprovedAt *time.Time `json:"approvedAt,omitempty"`
 }

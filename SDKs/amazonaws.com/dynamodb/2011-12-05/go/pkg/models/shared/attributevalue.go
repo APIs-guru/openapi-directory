@@ -1,10 +1,10 @@
 package shared
 
 type AttributeValue struct {
-	B  *string  `json:"B"`
-	Bs []string `json:"BS"`
-	N  *string  `json:"N"`
-	Ns []string `json:"NS"`
-	S  *string  `json:"S"`
-	Ss []string `json:"SS"`
+	B  *string  `json:"B,omitempty"`
+	Bs []string `json:"BS,omitempty"`
+	N  *string  `json:"N,omitempty"`
+	Ns []string `json:"NS,omitempty"`
+	S  *string  `json:"S,omitempty"`
+	Ss []string `json:"SS,omitempty"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type DescribeImportResponse struct {
-	CreationDateTime      *time.Time                   `json:"creationDateTime"`
-	FailureReasons        []string                     `json:"failureReasons"`
-	ImportID              *string                      `json:"importId"`
-	ImportStatus          *ImportStatusEnum            `json:"importStatus"`
-	ImportedResourceID    *string                      `json:"importedResourceId"`
-	ImportedResourceName  *string                      `json:"importedResourceName"`
-	LastUpdatedDateTime   *time.Time                   `json:"lastUpdatedDateTime"`
-	MergeStrategy         *MergeStrategyEnum           `json:"mergeStrategy"`
-	ResourceSpecification *ImportResourceSpecification `json:"resourceSpecification"`
+	CreationDateTime      *time.Time                   `json:"creationDateTime,omitempty"`
+	FailureReasons        []string                     `json:"failureReasons,omitempty"`
+	ImportID              *string                      `json:"importId,omitempty"`
+	ImportStatus          *ImportStatusEnum            `json:"importStatus,omitempty"`
+	ImportedResourceID    *string                      `json:"importedResourceId,omitempty"`
+	ImportedResourceName  *string                      `json:"importedResourceName,omitempty"`
+	LastUpdatedDateTime   *time.Time                   `json:"lastUpdatedDateTime,omitempty"`
+	MergeStrategy         *MergeStrategyEnum           `json:"mergeStrategy,omitempty"`
+	ResourceSpecification *ImportResourceSpecification `json:"resourceSpecification,omitempty"`
 }

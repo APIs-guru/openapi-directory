@@ -1,9 +1,9 @@
 package shared
 
 type MavenArtifact struct {
-	ArtifactID *string `json:"artifactId"`
-	GroupID    *string `json:"groupId"`
-	Path       *string `json:"path"`
-	Repository *string `json:"repository"`
-	Version    *string `json:"version"`
+	ArtifactID *string `json:"artifactId,omitempty"`
+	GroupID    *string `json:"groupId,omitempty"`
+	Path       *string `json:"path,omitempty"`
+	Repository *string `json:"repository,omitempty"`
+	Version    *string `json:"version,omitempty"`
 }

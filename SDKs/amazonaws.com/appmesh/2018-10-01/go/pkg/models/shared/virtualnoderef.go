@@ -1,7 +1,7 @@
 package shared
 
 type VirtualNodeRef struct {
-	Arn             *string `json:"arn"`
-	MeshName        *string `json:"meshName"`
-	VirtualNodeName *string `json:"virtualNodeName"`
+	Arn             *string `json:"arn,omitempty"`
+	MeshName        *string `json:"meshName,omitempty"`
+	VirtualNodeName *string `json:"virtualNodeName,omitempty"`
 }

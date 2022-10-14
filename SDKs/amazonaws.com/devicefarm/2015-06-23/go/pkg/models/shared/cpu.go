@@ -1,7 +1,7 @@
 package shared
 
 type CPU struct {
-	Architecture *string  `json:"architecture"`
-	Clock        *float64 `json:"clock"`
-	Frequency    *string  `json:"frequency"`
+	Architecture *string  `json:"architecture,omitempty"`
+	Clock        *float64 `json:"clock,omitempty"`
+	Frequency    *string  `json:"frequency,omitempty"`
 }

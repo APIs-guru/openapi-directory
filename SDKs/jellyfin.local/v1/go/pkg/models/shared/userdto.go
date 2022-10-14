@@ -5,18 +5,18 @@ import (
 )
 
 type UserDto struct {
-	Configuration             *UserConfiguration `json:"Configuration"`
-	EnableAutoLogin           *bool              `json:"EnableAutoLogin"`
-	HasConfiguredEasyPassword *bool              `json:"HasConfiguredEasyPassword"`
-	HasConfiguredPassword     *bool              `json:"HasConfiguredPassword"`
-	HasPassword               *bool              `json:"HasPassword"`
-	ID                        *string            `json:"Id"`
-	LastActivityDate          *time.Time         `json:"LastActivityDate"`
-	LastLoginDate             *time.Time         `json:"LastLoginDate"`
-	Name                      *string            `json:"Name"`
-	Policy                    *UserPolicy        `json:"Policy"`
-	PrimaryImageAspectRatio   *float64           `json:"PrimaryImageAspectRatio"`
-	PrimaryImageTag           *string            `json:"PrimaryImageTag"`
-	ServerID                  *string            `json:"ServerId"`
-	ServerName                *string            `json:"ServerName"`
+	Configuration             *UserConfiguration `json:"Configuration,omitempty"`
+	EnableAutoLogin           *bool              `json:"EnableAutoLogin,omitempty"`
+	HasConfiguredEasyPassword *bool              `json:"HasConfiguredEasyPassword,omitempty"`
+	HasConfiguredPassword     *bool              `json:"HasConfiguredPassword,omitempty"`
+	HasPassword               *bool              `json:"HasPassword,omitempty"`
+	ID                        *string            `json:"Id,omitempty"`
+	LastActivityDate          *time.Time         `json:"LastActivityDate,omitempty"`
+	LastLoginDate             *time.Time         `json:"LastLoginDate,omitempty"`
+	Name                      *string            `json:"Name,omitempty"`
+	Policy                    *UserPolicy        `json:"Policy,omitempty"`
+	PrimaryImageAspectRatio   *float64           `json:"PrimaryImageAspectRatio,omitempty"`
+	PrimaryImageTag           *string            `json:"PrimaryImageTag,omitempty"`
+	ServerID                  *string            `json:"ServerId,omitempty"`
+	ServerName                *string            `json:"ServerName,omitempty"`
 }

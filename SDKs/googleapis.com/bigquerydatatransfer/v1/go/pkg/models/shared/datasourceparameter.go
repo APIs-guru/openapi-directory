@@ -13,20 +13,20 @@ const (
 )
 
 type DataSourceParameter struct {
-	AllowedValues         []string                     `json:"allowedValues"`
-	Deprecated            *bool                        `json:"deprecated"`
-	Description           *string                      `json:"description"`
-	DisplayName           *string                      `json:"displayName"`
-	Fields                []DataSourceParameter        `json:"fields"`
-	Immutable             *bool                        `json:"immutable"`
-	MaxValue              *float64                     `json:"maxValue"`
-	MinValue              *float64                     `json:"minValue"`
-	ParamID               *string                      `json:"paramId"`
-	Recurse               *bool                        `json:"recurse"`
-	Repeated              *bool                        `json:"repeated"`
-	Required              *bool                        `json:"required"`
-	Type                  *DataSourceParameterTypeEnum `json:"type"`
-	ValidationDescription *string                      `json:"validationDescription"`
-	ValidationHelpURL     *string                      `json:"validationHelpUrl"`
-	ValidationRegex       *string                      `json:"validationRegex"`
+	AllowedValues         []string                     `json:"allowedValues,omitempty"`
+	Deprecated            *bool                        `json:"deprecated,omitempty"`
+	Description           *string                      `json:"description,omitempty"`
+	DisplayName           *string                      `json:"displayName,omitempty"`
+	Fields                []DataSourceParameter        `json:"fields,omitempty"`
+	Immutable             *bool                        `json:"immutable,omitempty"`
+	MaxValue              *float64                     `json:"maxValue,omitempty"`
+	MinValue              *float64                     `json:"minValue,omitempty"`
+	ParamID               *string                      `json:"paramId,omitempty"`
+	Recurse               *bool                        `json:"recurse,omitempty"`
+	Repeated              *bool                        `json:"repeated,omitempty"`
+	Required              *bool                        `json:"required,omitempty"`
+	Type                  *DataSourceParameterTypeEnum `json:"type,omitempty"`
+	ValidationDescription *string                      `json:"validationDescription,omitempty"`
+	ValidationHelpURL     *string                      `json:"validationHelpUrl,omitempty"`
+	ValidationRegex       *string                      `json:"validationRegex,omitempty"`
 }

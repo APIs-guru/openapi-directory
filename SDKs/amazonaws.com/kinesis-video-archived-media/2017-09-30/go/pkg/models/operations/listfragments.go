@@ -20,16 +20,16 @@ type ListFragmentsHeaders struct {
 }
 
 type ListFragmentsRequestBodyFragmentSelector struct {
-	FragmentSelectorType *shared.FragmentSelectorTypeEnum `json:"FragmentSelectorType"`
-	TimestampRange       *shared.TimestampRange           `json:"TimestampRange"`
+	FragmentSelectorType *shared.FragmentSelectorTypeEnum `json:"FragmentSelectorType,omitempty"`
+	TimestampRange       *shared.TimestampRange           `json:"TimestampRange,omitempty"`
 }
 
 type ListFragmentsRequestBody struct {
-	FragmentSelector *ListFragmentsRequestBodyFragmentSelector `json:"FragmentSelector"`
-	MaxResults       *int64                                    `json:"MaxResults"`
-	NextToken        *string                                   `json:"NextToken"`
-	StreamArn        *string                                   `json:"StreamARN"`
-	StreamName       *string                                   `json:"StreamName"`
+	FragmentSelector *ListFragmentsRequestBodyFragmentSelector `json:"FragmentSelector,omitempty"`
+	MaxResults       *int64                                    `json:"MaxResults,omitempty"`
+	NextToken        *string                                   `json:"NextToken,omitempty"`
+	StreamArn        *string                                   `json:"StreamARN,omitempty"`
+	StreamName       *string                                   `json:"StreamName,omitempty"`
 }
 
 type ListFragmentsRequest struct {

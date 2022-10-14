@@ -9,9 +9,9 @@ type PutProductsReviewsIDPathParams struct {
 }
 
 type PutProductsReviewsIDRequestBody struct {
-	Body   *string `json:"body"`
-	Rating *int64  `json:"rating"`
-	Title  *string `json:"title"`
+	Body   *string `json:"body,omitempty"`
+	Rating *int64  `json:"rating,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }
 
 type PutProductsReviewsIDSecurity struct {

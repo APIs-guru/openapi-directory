@@ -1,9 +1,9 @@
 package shared
 
 type NegativeKeywordList struct {
-	AdvertiserID          *string `json:"advertiserId"`
-	DisplayName           *string `json:"displayName"`
-	Name                  *string `json:"name"`
-	NegativeKeywordListID *string `json:"negativeKeywordListId"`
-	TargetedLineItemCount *string `json:"targetedLineItemCount"`
+	AdvertiserID          *string `json:"advertiserId,omitempty"`
+	DisplayName           *string `json:"displayName,omitempty"`
+	Name                  *string `json:"name,omitempty"`
+	NegativeKeywordListID *string `json:"negativeKeywordListId,omitempty"`
+	TargetedLineItemCount *string `json:"targetedLineItemCount,omitempty"`
 }

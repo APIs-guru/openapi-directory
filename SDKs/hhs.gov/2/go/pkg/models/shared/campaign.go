@@ -5,11 +5,11 @@ import (
 )
 
 type Campaign struct {
-	ContactEmail *string    `json:"contactEmail"`
-	Description  *string    `json:"description"`
-	EndDate      *time.Time `json:"endDate"`
-	ID           *int64     `json:"id"`
-	Name         *string    `json:"name"`
-	Source       *Source    `json:"source"`
-	StartDate    *time.Time `json:"startDate"`
+	ContactEmail *string    `json:"contactEmail,omitempty"`
+	Description  *string    `json:"description,omitempty"`
+	EndDate      *time.Time `json:"endDate,omitempty"`
+	ID           *int64     `json:"id,omitempty"`
+	Name         *string    `json:"name,omitempty"`
+	Source       *Source    `json:"source,omitempty"`
+	StartDate    *time.Time `json:"startDate,omitempty"`
 }

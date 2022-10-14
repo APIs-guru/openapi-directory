@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDialogflowV2IntentMessageSuggestions struct {
-	Suggestions []GoogleCloudDialogflowV2IntentMessageSuggestion `json:"suggestions"`
+	Suggestions []GoogleCloudDialogflowV2IntentMessageSuggestion `json:"suggestions,omitempty"`
 }

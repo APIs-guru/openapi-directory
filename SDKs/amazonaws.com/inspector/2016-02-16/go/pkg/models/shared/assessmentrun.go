@@ -7,7 +7,7 @@ import (
 type AssessmentRun struct {
 	Arn                       string                      `json:"arn"`
 	AssessmentTemplateArn     string                      `json:"assessmentTemplateArn"`
-	CompletedAt               *time.Time                  `json:"completedAt"`
+	CompletedAt               *time.Time                  `json:"completedAt,omitempty"`
 	CreatedAt                 time.Time                   `json:"createdAt"`
 	DataCollected             bool                        `json:"dataCollected"`
 	DurationInSeconds         int64                       `json:"durationInSeconds"`
@@ -15,7 +15,7 @@ type AssessmentRun struct {
 	Name                      string                      `json:"name"`
 	Notifications             []AssessmentRunNotification `json:"notifications"`
 	RulesPackageArns          []string                    `json:"rulesPackageArns"`
-	StartedAt                 *time.Time                  `json:"startedAt"`
+	StartedAt                 *time.Time                  `json:"startedAt,omitempty"`
 	State                     AssessmentRunStateEnum      `json:"state"`
 	StateChangedAt            time.Time                   `json:"stateChangedAt"`
 	StateChanges              []AssessmentRunStateChange  `json:"stateChanges"`

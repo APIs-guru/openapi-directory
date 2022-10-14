@@ -10,10 +10,10 @@ const (
 )
 
 type Release struct {
-	Message     *string          `json:"message"`
-	Name        *string          `json:"name"`
-	ReleaseTime *string          `json:"releaseTime"`
-	ReleaseUser *ActingUser      `json:"releaseUser"`
-	Type        *ReleaseTypeEnum `json:"type"`
-	Version     *Version         `json:"version"`
+	Message     *string          `json:"message,omitempty"`
+	Name        *string          `json:"name,omitempty"`
+	ReleaseTime *string          `json:"releaseTime,omitempty"`
+	ReleaseUser *ActingUser      `json:"releaseUser,omitempty"`
+	Type        *ReleaseTypeEnum `json:"type,omitempty"`
+	Version     *Version         `json:"version,omitempty"`
 }

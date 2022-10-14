@@ -9,13 +9,13 @@ const (
 )
 
 type IosApp struct {
-	APIKeyID    *string          `json:"apiKeyId"`
-	AppID       *string          `json:"appId"`
-	AppStoreID  *string          `json:"appStoreId"`
-	BundleID    *string          `json:"bundleId"`
-	DisplayName *string          `json:"displayName"`
-	Name        *string          `json:"name"`
-	ProjectID   *string          `json:"projectId"`
-	State       *IosAppStateEnum `json:"state"`
-	TeamID      *string          `json:"teamId"`
+	APIKeyID    *string          `json:"apiKeyId,omitempty"`
+	AppID       *string          `json:"appId,omitempty"`
+	AppStoreID  *string          `json:"appStoreId,omitempty"`
+	BundleID    *string          `json:"bundleId,omitempty"`
+	DisplayName *string          `json:"displayName,omitempty"`
+	Name        *string          `json:"name,omitempty"`
+	ProjectID   *string          `json:"projectId,omitempty"`
+	State       *IosAppStateEnum `json:"state,omitempty"`
+	TeamID      *string          `json:"teamId,omitempty"`
 }

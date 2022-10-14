@@ -1,5 +1,5 @@
 package shared
 
 type RenewOfferingResult struct {
-	OfferingTransaction *OfferingTransaction `json:"offeringTransaction"`
+	OfferingTransaction *OfferingTransaction `json:"offeringTransaction,omitempty"`
 }

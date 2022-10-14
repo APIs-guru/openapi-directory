@@ -9,11 +9,11 @@ const (
 )
 
 type PlanNode struct {
-	ChildLinks          []ChildLink            `json:"childLinks"`
-	DisplayName         *string                `json:"displayName"`
-	ExecutionStats      map[string]interface{} `json:"executionStats"`
-	Index               *int32                 `json:"index"`
-	Kind                *PlanNodeKindEnum      `json:"kind"`
-	Metadata            map[string]interface{} `json:"metadata"`
-	ShortRepresentation *ShortRepresentation   `json:"shortRepresentation"`
+	ChildLinks          []ChildLink            `json:"childLinks,omitempty"`
+	DisplayName         *string                `json:"displayName,omitempty"`
+	ExecutionStats      map[string]interface{} `json:"executionStats,omitempty"`
+	Index               *int32                 `json:"index,omitempty"`
+	Kind                *PlanNodeKindEnum      `json:"kind,omitempty"`
+	Metadata            map[string]interface{} `json:"metadata,omitempty"`
+	ShortRepresentation *ShortRepresentation   `json:"shortRepresentation,omitempty"`
 }

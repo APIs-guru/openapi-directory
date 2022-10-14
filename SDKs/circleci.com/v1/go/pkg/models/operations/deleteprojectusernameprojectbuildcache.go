@@ -10,7 +10,7 @@ type DeleteProjectUsernameProjectBuildCacheRequest struct {
 }
 
 type DeleteProjectUsernameProjectBuildCache200ApplicationJSON struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }
 
 type DeleteProjectUsernameProjectBuildCacheResponse struct {

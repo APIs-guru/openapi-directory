@@ -9,7 +9,7 @@ type EnterpriseAdminUpdateLdapMappingForTeamPathParams struct {
 }
 
 type EnterpriseAdminUpdateLdapMappingForTeamRequestBody struct {
-	LdapDn *string `json:"ldap_dn"`
+	LdapDn *string `json:"ldap_dn,omitempty"`
 }
 
 type EnterpriseAdminUpdateLdapMappingForTeamRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListDocumentVersionsResult struct {
-	DocumentVersions []DocumentVersionInfo `json:"DocumentVersions"`
-	NextToken        *string               `json:"NextToken"`
+	DocumentVersions []DocumentVersionInfo `json:"DocumentVersions,omitempty"`
+	NextToken        *string               `json:"NextToken,omitempty"`
 }

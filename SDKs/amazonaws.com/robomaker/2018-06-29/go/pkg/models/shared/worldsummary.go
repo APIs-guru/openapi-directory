@@ -5,8 +5,8 @@ import (
 )
 
 type WorldSummary struct {
-	Arn           *string    `json:"arn"`
-	CreatedAt     *time.Time `json:"createdAt"`
-	GenerationJob *string    `json:"generationJob"`
-	Template      *string    `json:"template"`
+	Arn           *string    `json:"arn,omitempty"`
+	CreatedAt     *time.Time `json:"createdAt,omitempty"`
+	GenerationJob *string    `json:"generationJob,omitempty"`
+	Template      *string    `json:"template,omitempty"`
 }

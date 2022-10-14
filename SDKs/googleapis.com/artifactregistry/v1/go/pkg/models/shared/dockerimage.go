@@ -1,12 +1,12 @@
 package shared
 
 type DockerImage struct {
-	BuildTime      *string  `json:"buildTime"`
-	ImageSizeBytes *string  `json:"imageSizeBytes"`
-	MediaType      *string  `json:"mediaType"`
-	Name           *string  `json:"name"`
-	Tags           []string `json:"tags"`
-	UpdateTime     *string  `json:"updateTime"`
-	UploadTime     *string  `json:"uploadTime"`
-	URI            *string  `json:"uri"`
+	BuildTime      *string  `json:"buildTime,omitempty"`
+	ImageSizeBytes *string  `json:"imageSizeBytes,omitempty"`
+	MediaType      *string  `json:"mediaType,omitempty"`
+	Name           *string  `json:"name,omitempty"`
+	Tags           []string `json:"tags,omitempty"`
+	UpdateTime     *string  `json:"updateTime,omitempty"`
+	UploadTime     *string  `json:"uploadTime,omitempty"`
+	URI            *string  `json:"uri,omitempty"`
 }

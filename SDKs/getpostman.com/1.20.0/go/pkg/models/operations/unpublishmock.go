@@ -9,11 +9,11 @@ type UnpublishMockRequest struct {
 }
 
 type UnpublishMock200ApplicationJSONMock struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UnpublishMock200ApplicationJSON struct {
-	Mock *UnpublishMock200ApplicationJSONMock `json:"mock"`
+	Mock *UnpublishMock200ApplicationJSONMock `json:"mock,omitempty"`
 }
 
 type UnpublishMockResponse struct {

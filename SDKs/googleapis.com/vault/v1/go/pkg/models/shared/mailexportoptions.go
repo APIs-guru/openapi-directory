@@ -9,7 +9,7 @@ const (
 )
 
 type MailExportOptions struct {
-	ExportFormat                *MailExportOptionsExportFormatEnum `json:"exportFormat"`
-	ShowConfidentialModeContent *bool                              `json:"showConfidentialModeContent"`
-	UseNewExport                *bool                              `json:"useNewExport"`
+	ExportFormat                *MailExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
+	ShowConfidentialModeContent *bool                              `json:"showConfidentialModeContent,omitempty"`
+	UseNewExport                *bool                              `json:"useNewExport,omitempty"`
 }

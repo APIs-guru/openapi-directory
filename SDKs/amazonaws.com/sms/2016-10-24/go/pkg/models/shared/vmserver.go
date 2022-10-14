@@ -1,9 +1,9 @@
 package shared
 
 type VMServer struct {
-	VMManagerName   *string            `json:"vmManagerName"`
-	VMManagerType   *VMManagerTypeEnum `json:"vmManagerType"`
-	VMName          *string            `json:"vmName"`
-	VMPath          *string            `json:"vmPath"`
-	VMServerAddress *VMServerAddress   `json:"vmServerAddress"`
+	VMManagerName   *string            `json:"vmManagerName,omitempty"`
+	VMManagerType   *VMManagerTypeEnum `json:"vmManagerType,omitempty"`
+	VMName          *string            `json:"vmName,omitempty"`
+	VMPath          *string            `json:"vmPath,omitempty"`
+	VMServerAddress *VMServerAddress   `json:"vmServerAddress,omitempty"`
 }

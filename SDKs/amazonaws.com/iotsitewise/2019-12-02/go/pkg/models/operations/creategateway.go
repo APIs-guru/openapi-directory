@@ -15,14 +15,14 @@ type CreateGatewayHeaders struct {
 }
 
 type CreateGatewayRequestBodyGatewayPlatform struct {
-	Greengrass   *shared.Greengrass   `json:"greengrass"`
-	GreengrassV2 *shared.GreengrassV2 `json:"greengrassV2"`
+	Greengrass   *shared.Greengrass   `json:"greengrass,omitempty"`
+	GreengrassV2 *shared.GreengrassV2 `json:"greengrassV2,omitempty"`
 }
 
 type CreateGatewayRequestBody struct {
 	GatewayName     string                                  `json:"gatewayName"`
 	GatewayPlatform CreateGatewayRequestBodyGatewayPlatform `json:"gatewayPlatform"`
-	Tags            map[string]string                       `json:"tags"`
+	Tags            map[string]string                       `json:"tags,omitempty"`
 }
 
 type CreateGatewayRequest struct {

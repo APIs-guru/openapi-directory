@@ -1,5 +1,5 @@
 package shared
 
 type WeeklySchedule struct {
-	DayOfWeek *DayOfWeekEnum `json:"dayOfWeek"`
+	DayOfWeek *DayOfWeekEnum `json:"dayOfWeek,omitempty"`
 }

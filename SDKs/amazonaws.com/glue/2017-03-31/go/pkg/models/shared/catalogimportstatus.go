@@ -5,7 +5,7 @@ import (
 )
 
 type CatalogImportStatus struct {
-	ImportCompleted *bool      `json:"ImportCompleted"`
-	ImportTime      *time.Time `json:"ImportTime"`
-	ImportedBy      *string    `json:"ImportedBy"`
+	ImportCompleted *bool      `json:"ImportCompleted,omitempty"`
+	ImportTime      *time.Time `json:"ImportTime,omitempty"`
+	ImportedBy      *string    `json:"ImportedBy,omitempty"`
 }

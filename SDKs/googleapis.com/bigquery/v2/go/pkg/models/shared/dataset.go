@@ -1,41 +1,41 @@
 package shared
 
 type DatasetAccess struct {
-	Dataset      *DatasetAccessEntry `json:"dataset"`
-	Domain       *string             `json:"domain"`
-	GroupByEmail *string             `json:"groupByEmail"`
-	IamMember    *string             `json:"iamMember"`
-	Role         *string             `json:"role"`
-	Routine      *RoutineReference   `json:"routine"`
-	SpecialGroup *string             `json:"specialGroup"`
-	UserByEmail  *string             `json:"userByEmail"`
-	View         *TableReference     `json:"view"`
+	Dataset      *DatasetAccessEntry `json:"dataset,omitempty"`
+	Domain       *string             `json:"domain,omitempty"`
+	GroupByEmail *string             `json:"groupByEmail,omitempty"`
+	IamMember    *string             `json:"iamMember,omitempty"`
+	Role         *string             `json:"role,omitempty"`
+	Routine      *RoutineReference   `json:"routine,omitempty"`
+	SpecialGroup *string             `json:"specialGroup,omitempty"`
+	UserByEmail  *string             `json:"userByEmail,omitempty"`
+	View         *TableReference     `json:"view,omitempty"`
 }
 
 type DatasetTags struct {
-	TagKey   *string `json:"tagKey"`
-	TagValue *string `json:"tagValue"`
+	TagKey   *string `json:"tagKey,omitempty"`
+	TagValue *string `json:"tagValue,omitempty"`
 }
 
 type Dataset struct {
-	Access                         []DatasetAccess          `json:"access"`
-	CreationTime                   *string                  `json:"creationTime"`
-	DatasetReference               *DatasetReference        `json:"datasetReference"`
-	DefaultCollation               *string                  `json:"defaultCollation"`
-	DefaultEncryptionConfiguration *EncryptionConfiguration `json:"defaultEncryptionConfiguration"`
-	DefaultPartitionExpirationMs   *string                  `json:"defaultPartitionExpirationMs"`
-	DefaultTableExpirationMs       *string                  `json:"defaultTableExpirationMs"`
-	Description                    *string                  `json:"description"`
-	Etag                           *string                  `json:"etag"`
-	FriendlyName                   *string                  `json:"friendlyName"`
-	ID                             *string                  `json:"id"`
-	IsCaseInsensitive              *bool                    `json:"isCaseInsensitive"`
-	Kind                           *string                  `json:"kind"`
-	Labels                         map[string]string        `json:"labels"`
-	LastModifiedTime               *string                  `json:"lastModifiedTime"`
-	Location                       *string                  `json:"location"`
-	MaxTimeTravelHours             *string                  `json:"maxTimeTravelHours"`
-	SatisfiesPzs                   *bool                    `json:"satisfiesPzs"`
-	SelfLink                       *string                  `json:"selfLink"`
-	Tags                           []DatasetTags            `json:"tags"`
+	Access                         []DatasetAccess          `json:"access,omitempty"`
+	CreationTime                   *string                  `json:"creationTime,omitempty"`
+	DatasetReference               *DatasetReference        `json:"datasetReference,omitempty"`
+	DefaultCollation               *string                  `json:"defaultCollation,omitempty"`
+	DefaultEncryptionConfiguration *EncryptionConfiguration `json:"defaultEncryptionConfiguration,omitempty"`
+	DefaultPartitionExpirationMs   *string                  `json:"defaultPartitionExpirationMs,omitempty"`
+	DefaultTableExpirationMs       *string                  `json:"defaultTableExpirationMs,omitempty"`
+	Description                    *string                  `json:"description,omitempty"`
+	Etag                           *string                  `json:"etag,omitempty"`
+	FriendlyName                   *string                  `json:"friendlyName,omitempty"`
+	ID                             *string                  `json:"id,omitempty"`
+	IsCaseInsensitive              *bool                    `json:"isCaseInsensitive,omitempty"`
+	Kind                           *string                  `json:"kind,omitempty"`
+	Labels                         map[string]string        `json:"labels,omitempty"`
+	LastModifiedTime               *string                  `json:"lastModifiedTime,omitempty"`
+	Location                       *string                  `json:"location,omitempty"`
+	MaxTimeTravelHours             *string                  `json:"maxTimeTravelHours,omitempty"`
+	SatisfiesPzs                   *bool                    `json:"satisfiesPzs,omitempty"`
+	SelfLink                       *string                  `json:"selfLink,omitempty"`
+	Tags                           []DatasetTags            `json:"tags,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ExecuteSQLQueryRequest struct {
-	Query *Query `json:"query"`
+	Query *Query `json:"query,omitempty"`
 }

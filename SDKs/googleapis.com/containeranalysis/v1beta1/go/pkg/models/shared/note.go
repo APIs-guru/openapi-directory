@@ -19,25 +19,25 @@ const (
 )
 
 type Note struct {
-	AttestationAuthority *Authority        `json:"attestationAuthority"`
-	BaseImage            *Basis            `json:"baseImage"`
-	Build                *Build            `json:"build"`
-	CreateTime           *string           `json:"createTime"`
-	Deployable           *Deployable       `json:"deployable"`
-	Discovery            *Discovery        `json:"discovery"`
-	ExpirationTime       *string           `json:"expirationTime"`
-	Intoto               *InToto           `json:"intoto"`
-	Kind                 *NoteKindEnum     `json:"kind"`
-	LongDescription      *string           `json:"longDescription"`
-	Name                 *string           `json:"name"`
-	Package              *Package          `json:"package"`
-	RelatedNoteNames     []string          `json:"relatedNoteNames"`
-	RelatedURL           []RelatedURL      `json:"relatedUrl"`
-	Sbom                 *DocumentNote     `json:"sbom"`
-	ShortDescription     *string           `json:"shortDescription"`
-	SpdxFile             *FileNote         `json:"spdxFile"`
-	SpdxPackage          *PackageInfoNote  `json:"spdxPackage"`
-	SpdxRelationship     *RelationshipNote `json:"spdxRelationship"`
-	UpdateTime           *string           `json:"updateTime"`
-	Vulnerability        *Vulnerability    `json:"vulnerability"`
+	AttestationAuthority *Authority        `json:"attestationAuthority,omitempty"`
+	BaseImage            *Basis            `json:"baseImage,omitempty"`
+	Build                *Build            `json:"build,omitempty"`
+	CreateTime           *string           `json:"createTime,omitempty"`
+	Deployable           *Deployable       `json:"deployable,omitempty"`
+	Discovery            *Discovery        `json:"discovery,omitempty"`
+	ExpirationTime       *string           `json:"expirationTime,omitempty"`
+	Intoto               *InToto           `json:"intoto,omitempty"`
+	Kind                 *NoteKindEnum     `json:"kind,omitempty"`
+	LongDescription      *string           `json:"longDescription,omitempty"`
+	Name                 *string           `json:"name,omitempty"`
+	Package              *Package          `json:"package,omitempty"`
+	RelatedNoteNames     []string          `json:"relatedNoteNames,omitempty"`
+	RelatedURL           []RelatedURL      `json:"relatedUrl,omitempty"`
+	Sbom                 *DocumentNote     `json:"sbom,omitempty"`
+	ShortDescription     *string           `json:"shortDescription,omitempty"`
+	SpdxFile             *FileNote         `json:"spdxFile,omitempty"`
+	SpdxPackage          *PackageInfoNote  `json:"spdxPackage,omitempty"`
+	SpdxRelationship     *RelationshipNote `json:"spdxRelationship,omitempty"`
+	UpdateTime           *string           `json:"updateTime,omitempty"`
+	Vulnerability        *Vulnerability    `json:"vulnerability,omitempty"`
 }

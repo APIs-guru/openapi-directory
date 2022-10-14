@@ -5,7 +5,7 @@ import (
 )
 
 type PlayHistoryObject struct {
-	Context  *ContextObject         `json:"context"`
-	PlayedAt *time.Time             `json:"played_at"`
-	Track    *SimplifiedTrackObject `json:"track"`
+	Context  *ContextObject         `json:"context,omitempty"`
+	PlayedAt *time.Time             `json:"played_at,omitempty"`
+	Track    *SimplifiedTrackObject `json:"track,omitempty"`
 }

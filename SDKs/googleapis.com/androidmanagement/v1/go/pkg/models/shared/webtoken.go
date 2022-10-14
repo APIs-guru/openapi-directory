@@ -20,9 +20,9 @@ const (
 )
 
 type WebToken struct {
-	EnabledFeatures []WebTokenEnabledFeaturesEnum `json:"enabledFeatures"`
-	Name            *string                       `json:"name"`
-	ParentFrameURL  *string                       `json:"parentFrameUrl"`
-	Permissions     []WebTokenPermissionsEnum     `json:"permissions"`
-	Value           *string                       `json:"value"`
+	EnabledFeatures []WebTokenEnabledFeaturesEnum `json:"enabledFeatures,omitempty"`
+	Name            *string                       `json:"name,omitempty"`
+	ParentFrameURL  *string                       `json:"parentFrameUrl,omitempty"`
+	Permissions     []WebTokenPermissionsEnum     `json:"permissions,omitempty"`
+	Value           *string                       `json:"value,omitempty"`
 }

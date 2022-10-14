@@ -1,6 +1,6 @@
 package shared
 
 type ListStudioSessionMappingsOutput struct {
-	Marker          *string                 `json:"Marker"`
-	SessionMappings []SessionMappingSummary `json:"SessionMappings"`
+	Marker          *string                 `json:"Marker,omitempty"`
+	SessionMappings []SessionMappingSummary `json:"SessionMappings,omitempty"`
 }

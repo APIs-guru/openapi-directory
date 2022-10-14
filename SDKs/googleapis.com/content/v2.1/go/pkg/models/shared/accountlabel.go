@@ -9,9 +9,9 @@ const (
 )
 
 type AccountLabel struct {
-	AccountID   *string                    `json:"accountId"`
-	Description *string                    `json:"description"`
-	LabelID     *string                    `json:"labelId"`
-	LabelType   *AccountLabelLabelTypeEnum `json:"labelType"`
-	Name        *string                    `json:"name"`
+	AccountID   *string                    `json:"accountId,omitempty"`
+	Description *string                    `json:"description,omitempty"`
+	LabelID     *string                    `json:"labelId,omitempty"`
+	LabelType   *AccountLabelLabelTypeEnum `json:"labelType,omitempty"`
+	Name        *string                    `json:"name,omitempty"`
 }

@@ -11,8 +11,8 @@ const (
 )
 
 type ErrorGroup struct {
-	GroupID          *string                         `json:"groupId"`
-	Name             *string                         `json:"name"`
-	ResolutionStatus *ErrorGroupResolutionStatusEnum `json:"resolutionStatus"`
-	TrackingIssues   []TrackingIssue                 `json:"trackingIssues"`
+	GroupID          *string                         `json:"groupId,omitempty"`
+	Name             *string                         `json:"name,omitempty"`
+	ResolutionStatus *ErrorGroupResolutionStatusEnum `json:"resolutionStatus,omitempty"`
+	TrackingIssues   []TrackingIssue                 `json:"trackingIssues,omitempty"`
 }

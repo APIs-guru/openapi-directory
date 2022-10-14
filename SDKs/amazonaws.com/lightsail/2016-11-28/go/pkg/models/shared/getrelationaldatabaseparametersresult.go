@@ -1,6 +1,6 @@
 package shared
 
 type GetRelationalDatabaseParametersResult struct {
-	NextPageToken *string                       `json:"nextPageToken"`
-	Parameters    []RelationalDatabaseParameter `json:"parameters"`
+	NextPageToken *string                       `json:"nextPageToken,omitempty"`
+	Parameters    []RelationalDatabaseParameter `json:"parameters,omitempty"`
 }

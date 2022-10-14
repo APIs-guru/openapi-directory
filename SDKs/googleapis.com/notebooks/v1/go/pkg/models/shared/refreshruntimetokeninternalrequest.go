@@ -1,5 +1,5 @@
 package shared
 
 type RefreshRuntimeTokenInternalRequest struct {
-	VMID *string `json:"vmId"`
+	VMID *string `json:"vmId,omitempty"`
 }

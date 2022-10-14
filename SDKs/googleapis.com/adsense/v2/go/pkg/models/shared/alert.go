@@ -10,8 +10,8 @@ const (
 )
 
 type Alert struct {
-	Message  *string            `json:"message"`
-	Name     *string            `json:"name"`
-	Severity *AlertSeverityEnum `json:"severity"`
-	Type     *string            `json:"type"`
+	Message  *string            `json:"message,omitempty"`
+	Name     *string            `json:"name,omitempty"`
+	Severity *AlertSeverityEnum `json:"severity,omitempty"`
+	Type     *string            `json:"type,omitempty"`
 }

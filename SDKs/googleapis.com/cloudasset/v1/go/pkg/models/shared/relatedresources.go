@@ -1,5 +1,5 @@
 package shared
 
 type RelatedResources struct {
-	RelatedResources []RelatedResource `json:"relatedResources"`
+	RelatedResources []RelatedResource `json:"relatedResources,omitempty"`
 }

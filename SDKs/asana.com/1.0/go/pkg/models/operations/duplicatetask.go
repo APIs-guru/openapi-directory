@@ -14,7 +14,7 @@ type DuplicateTaskQueryParams struct {
 }
 
 type DuplicateTaskRequestBody struct {
-	Data *shared.TaskDuplicateRequest `json:"data"`
+	Data *shared.TaskDuplicateRequest `json:"data,omitempty"`
 }
 
 type DuplicateTaskRequest struct {
@@ -24,7 +24,7 @@ type DuplicateTaskRequest struct {
 }
 
 type DuplicateTask201ApplicationJSON struct {
-	Data *shared.JobResponse `json:"data"`
+	Data *shared.JobResponse `json:"data,omitempty"`
 }
 
 type DuplicateTaskResponse struct {

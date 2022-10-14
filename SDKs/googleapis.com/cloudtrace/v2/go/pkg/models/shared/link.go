@@ -9,8 +9,8 @@ const (
 )
 
 type Link struct {
-	Attributes *Attributes   `json:"attributes"`
-	SpanID     *string       `json:"spanId"`
-	TraceID    *string       `json:"traceId"`
-	Type       *LinkTypeEnum `json:"type"`
+	Attributes *Attributes   `json:"attributes,omitempty"`
+	SpanID     *string       `json:"spanId,omitempty"`
+	TraceID    *string       `json:"traceId,omitempty"`
+	Type       *LinkTypeEnum `json:"type,omitempty"`
 }

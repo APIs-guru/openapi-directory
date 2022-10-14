@@ -1,6 +1,6 @@
 package shared
 
 type InventoryResultEntity struct {
-	Data map[string]InventoryResultItem `json:"Data"`
-	ID   *string                        `json:"Id"`
+	Data map[string]InventoryResultItem `json:"Data,omitempty"`
+	ID   *string                        `json:"Id,omitempty"`
 }

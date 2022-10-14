@@ -1,6 +1,6 @@
 package shared
 
 type MultiRegionKey struct {
-	Arn    *string `json:"Arn"`
-	Region *string `json:"Region"`
+	Arn    *string `json:"Arn,omitempty"`
+	Region *string `json:"Region,omitempty"`
 }

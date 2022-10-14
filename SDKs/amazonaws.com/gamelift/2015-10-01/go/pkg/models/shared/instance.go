@@ -5,14 +5,14 @@ import (
 )
 
 type Instance struct {
-	CreationTime    *time.Time           `json:"CreationTime"`
-	DNSName         *string              `json:"DnsName"`
-	FleetArn        *string              `json:"FleetArn"`
-	FleetID         *string              `json:"FleetId"`
-	InstanceID      *string              `json:"InstanceId"`
-	IPAddress       *string              `json:"IpAddress"`
-	Location        *string              `json:"Location"`
-	OperatingSystem *OperatingSystemEnum `json:"OperatingSystem"`
-	Status          *InstanceStatusEnum  `json:"Status"`
-	Type            *Ec2InstanceTypeEnum `json:"Type"`
+	CreationTime    *time.Time           `json:"CreationTime,omitempty"`
+	DNSName         *string              `json:"DnsName,omitempty"`
+	FleetArn        *string              `json:"FleetArn,omitempty"`
+	FleetID         *string              `json:"FleetId,omitempty"`
+	InstanceID      *string              `json:"InstanceId,omitempty"`
+	IPAddress       *string              `json:"IpAddress,omitempty"`
+	Location        *string              `json:"Location,omitempty"`
+	OperatingSystem *OperatingSystemEnum `json:"OperatingSystem,omitempty"`
+	Status          *InstanceStatusEnum  `json:"Status,omitempty"`
+	Type            *Ec2InstanceTypeEnum `json:"Type,omitempty"`
 }

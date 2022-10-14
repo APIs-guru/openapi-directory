@@ -1,5 +1,5 @@
 package shared
 
 type RowLayout struct {
-	Rows []Row `json:"rows"`
+	Rows []Row `json:"rows,omitempty"`
 }

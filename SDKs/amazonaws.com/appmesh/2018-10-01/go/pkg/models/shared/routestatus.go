@@ -1,5 +1,5 @@
 package shared
 
 type RouteStatus struct {
-	Status *RouteStatusCodeEnum `json:"status"`
+	Status *RouteStatusCodeEnum `json:"status,omitempty"`
 }

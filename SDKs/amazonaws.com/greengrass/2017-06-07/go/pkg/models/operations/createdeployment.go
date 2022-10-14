@@ -29,9 +29,9 @@ const (
 )
 
 type CreateDeploymentRequestBody struct {
-	DeploymentID   *string                                       `json:"DeploymentId"`
+	DeploymentID   *string                                       `json:"DeploymentId,omitempty"`
 	DeploymentType CreateDeploymentRequestBodyDeploymentTypeEnum `json:"DeploymentType"`
-	GroupVersionID *string                                       `json:"GroupVersionId"`
+	GroupVersionID *string                                       `json:"GroupVersionId,omitempty"`
 }
 
 type CreateDeploymentRequest struct {

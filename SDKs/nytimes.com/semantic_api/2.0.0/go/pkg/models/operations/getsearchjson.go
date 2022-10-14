@@ -30,10 +30,10 @@ type GetSearchJSONRequest struct {
 }
 
 type GetSearchJSON200ApplicationJSON struct {
-	Copyright  *string                  `json:"copyright"`
-	NumResults *int64                   `json:"num_results"`
-	Results    []shared.ConceptRelation `json:"results"`
-	Status     *string                  `json:"status"`
+	Copyright  *string                  `json:"copyright,omitempty"`
+	NumResults *int64                   `json:"num_results,omitempty"`
+	Results    []shared.ConceptRelation `json:"results,omitempty"`
+	Status     *string                  `json:"status,omitempty"`
 }
 
 type GetSearchJSONResponse struct {

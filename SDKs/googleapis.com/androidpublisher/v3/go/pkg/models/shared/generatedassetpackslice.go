@@ -1,8 +1,8 @@
 package shared
 
 type GeneratedAssetPackSlice struct {
-	DownloadID *string `json:"downloadId"`
-	ModuleName *string `json:"moduleName"`
-	SliceID    *string `json:"sliceId"`
-	Version    *string `json:"version"`
+	DownloadID *string `json:"downloadId,omitempty"`
+	ModuleName *string `json:"moduleName,omitempty"`
+	SliceID    *string `json:"sliceId,omitempty"`
+	Version    *string `json:"version,omitempty"`
 }

@@ -19,13 +19,13 @@ type CreateVirtualNodeHeaders struct {
 }
 
 type CreateVirtualNodeRequestBodySpec struct {
-	Backends         []string                 `json:"backends"`
-	Listeners        []shared.Listener        `json:"listeners"`
-	ServiceDiscovery *shared.ServiceDiscovery `json:"serviceDiscovery"`
+	Backends         []string                 `json:"backends,omitempty"`
+	Listeners        []shared.Listener        `json:"listeners,omitempty"`
+	ServiceDiscovery *shared.ServiceDiscovery `json:"serviceDiscovery,omitempty"`
 }
 
 type CreateVirtualNodeRequestBody struct {
-	ClientToken     *string                          `json:"clientToken"`
+	ClientToken     *string                          `json:"clientToken,omitempty"`
 	Spec            CreateVirtualNodeRequestBodySpec `json:"spec"`
 	VirtualNodeName string                           `json:"virtualNodeName"`
 }

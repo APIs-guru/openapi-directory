@@ -1,6 +1,6 @@
 package shared
 
 type GetCredentialsForIdentityResponse struct {
-	Credentials *Credentials `json:"Credentials"`
-	IdentityID  *string      `json:"IdentityId"`
+	Credentials *Credentials `json:"Credentials,omitempty"`
+	IdentityID  *string      `json:"IdentityId,omitempty"`
 }

@@ -43,19 +43,19 @@ const (
 )
 
 type GoogleCloudRetailV2alphaModel struct {
-	CreateTime             *string                                               `json:"createTime"`
-	DataState              *GoogleCloudRetailV2alphaModelDataStateEnum           `json:"dataState"`
-	DisplayName            *string                                               `json:"displayName"`
-	FilteringOption        *GoogleCloudRetailV2alphaModelFilteringOptionEnum     `json:"filteringOption"`
-	LastTuneTime           *string                                               `json:"lastTuneTime"`
-	Name                   *string                                               `json:"name"`
-	OptimizationObjective  *string                                               `json:"optimizationObjective"`
-	PageOptimizationConfig *GoogleCloudRetailV2alphaModelPageOptimizationConfig  `json:"pageOptimizationConfig"`
-	PeriodicTuningState    *GoogleCloudRetailV2alphaModelPeriodicTuningStateEnum `json:"periodicTuningState"`
-	ServingConfigLists     []GoogleCloudRetailV2alphaModelServingConfigList      `json:"servingConfigLists"`
-	ServingState           *GoogleCloudRetailV2alphaModelServingStateEnum        `json:"servingState"`
-	TrainingState          *GoogleCloudRetailV2alphaModelTrainingStateEnum       `json:"trainingState"`
-	TuningOperation        *string                                               `json:"tuningOperation"`
-	Type                   *string                                               `json:"type"`
-	UpdateTime             *string                                               `json:"updateTime"`
+	CreateTime             *string                                               `json:"createTime,omitempty"`
+	DataState              *GoogleCloudRetailV2alphaModelDataStateEnum           `json:"dataState,omitempty"`
+	DisplayName            *string                                               `json:"displayName,omitempty"`
+	FilteringOption        *GoogleCloudRetailV2alphaModelFilteringOptionEnum     `json:"filteringOption,omitempty"`
+	LastTuneTime           *string                                               `json:"lastTuneTime,omitempty"`
+	Name                   *string                                               `json:"name,omitempty"`
+	OptimizationObjective  *string                                               `json:"optimizationObjective,omitempty"`
+	PageOptimizationConfig *GoogleCloudRetailV2alphaModelPageOptimizationConfig  `json:"pageOptimizationConfig,omitempty"`
+	PeriodicTuningState    *GoogleCloudRetailV2alphaModelPeriodicTuningStateEnum `json:"periodicTuningState,omitempty"`
+	ServingConfigLists     []GoogleCloudRetailV2alphaModelServingConfigList      `json:"servingConfigLists,omitempty"`
+	ServingState           *GoogleCloudRetailV2alphaModelServingStateEnum        `json:"servingState,omitempty"`
+	TrainingState          *GoogleCloudRetailV2alphaModelTrainingStateEnum       `json:"trainingState,omitempty"`
+	TuningOperation        *string                                               `json:"tuningOperation,omitempty"`
+	Type                   *string                                               `json:"type,omitempty"`
+	UpdateTime             *string                                               `json:"updateTime,omitempty"`
 }

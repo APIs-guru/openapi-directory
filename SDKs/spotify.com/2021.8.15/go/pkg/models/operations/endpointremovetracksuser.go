@@ -14,7 +14,7 @@ type EndpointRemoveTracksUserHeaders struct {
 }
 
 type EndpointRemoveTracksUserRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type EndpointRemoveTracksUserSecurity struct {

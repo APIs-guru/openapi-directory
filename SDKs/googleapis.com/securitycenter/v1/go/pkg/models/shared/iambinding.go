@@ -9,7 +9,7 @@ const (
 )
 
 type IamBinding struct {
-	Action *IamBindingActionEnum `json:"action"`
-	Member *string               `json:"member"`
-	Role   *string               `json:"role"`
+	Action *IamBindingActionEnum `json:"action,omitempty"`
+	Member *string               `json:"member,omitempty"`
+	Role   *string               `json:"role,omitempty"`
 }

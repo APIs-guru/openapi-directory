@@ -1,7 +1,7 @@
 package shared
 
 type Reviewer struct {
-	DisplayName     *string `json:"displayName"`
-	IsAnonymous     *bool   `json:"isAnonymous"`
-	ProfilePhotoURL *string `json:"profilePhotoUrl"`
+	DisplayName     *string `json:"displayName,omitempty"`
+	IsAnonymous     *bool   `json:"isAnonymous,omitempty"`
+	ProfilePhotoURL *string `json:"profilePhotoUrl,omitempty"`
 }

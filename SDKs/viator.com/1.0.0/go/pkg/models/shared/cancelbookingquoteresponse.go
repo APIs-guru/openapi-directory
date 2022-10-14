@@ -9,7 +9,7 @@ const (
 )
 
 type CancelBookingQuoteResponse struct {
-	BookingID     *string                               `json:"bookingId"`
-	RefundDetails *RefundDetails                        `json:"refundDetails"`
-	Status        *CancelBookingQuoteResponseStatusEnum `json:"status"`
+	BookingID     *string                               `json:"bookingId,omitempty"`
+	RefundDetails *RefundDetails                        `json:"refundDetails,omitempty"`
+	Status        *CancelBookingQuoteResponseStatusEnum `json:"status,omitempty"`
 }

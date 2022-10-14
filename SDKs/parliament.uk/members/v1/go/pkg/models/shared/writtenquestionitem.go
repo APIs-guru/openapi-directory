@@ -1,6 +1,6 @@
 package shared
 
 type WrittenQuestionItem struct {
-	Links []Link           `json:"links"`
-	Value *WrittenQuestion `json:"value"`
+	Links []Link           `json:"links,omitempty"`
+	Value *WrittenQuestion `json:"value,omitempty"`
 }

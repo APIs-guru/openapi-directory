@@ -5,9 +5,9 @@ import (
 )
 
 type EventTrackerSummary struct {
-	CreationDateTime    *time.Time `json:"creationDateTime"`
-	EventTrackerArn     *string    `json:"eventTrackerArn"`
-	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime"`
-	Name                *string    `json:"name"`
-	Status              *string    `json:"status"`
+	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
+	EventTrackerArn     *string    `json:"eventTrackerArn,omitempty"`
+	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	Name                *string    `json:"name,omitempty"`
+	Status              *string    `json:"status,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type DynamoDbTarget struct {
-	Path     *string  `json:"Path"`
-	ScanAll  *bool    `json:"scanAll"`
-	ScanRate *float64 `json:"scanRate"`
+	Path     *string  `json:"Path,omitempty"`
+	ScanAll  *bool    `json:"scanAll,omitempty"`
+	ScanRate *float64 `json:"scanRate,omitempty"`
 }

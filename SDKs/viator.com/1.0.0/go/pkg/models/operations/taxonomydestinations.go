@@ -13,35 +13,35 @@ type TaxonomyDestinationsRequest struct {
 }
 
 type TaxonomyDestinations200ApplicationJSONData struct {
-	DefaultCurrencyCode *string                     `json:"defaultCurrencyCode"`
-	DestinationID       *int64                      `json:"destinationId"`
-	DestinationName     *string                     `json:"destinationName"`
-	DestinationType     *shared.DestinationTypeEnum `json:"destinationType"`
-	DestinationURLName  *string                     `json:"destinationUrlName"`
-	IataCode            *string                     `json:"iataCode"`
-	Latitude            *float64                    `json:"latitude"`
-	Longitude           *float64                    `json:"longitude"`
-	LookupID            *string                     `json:"lookupId"`
-	ParentID            *int64                      `json:"parentId"`
-	Selectable          *bool                       `json:"selectable"`
-	SortOrder           *int64                      `json:"sortOrder"`
-	TimeZone            *string                     `json:"timeZone"`
+	DefaultCurrencyCode *string                     `json:"defaultCurrencyCode,omitempty"`
+	DestinationID       *int64                      `json:"destinationId,omitempty"`
+	DestinationName     *string                     `json:"destinationName,omitempty"`
+	DestinationType     *shared.DestinationTypeEnum `json:"destinationType,omitempty"`
+	DestinationURLName  *string                     `json:"destinationUrlName,omitempty"`
+	IataCode            *string                     `json:"iataCode,omitempty"`
+	Latitude            *float64                    `json:"latitude,omitempty"`
+	Longitude           *float64                    `json:"longitude,omitempty"`
+	LookupID            *string                     `json:"lookupId,omitempty"`
+	ParentID            *int64                      `json:"parentId,omitempty"`
+	Selectable          *bool                       `json:"selectable,omitempty"`
+	SortOrder           *int64                      `json:"sortOrder,omitempty"`
+	TimeZone            *string                     `json:"timeZone,omitempty"`
 }
 
 type TaxonomyDestinations200ApplicationJSON struct {
-	Data             []TaxonomyDestinations200ApplicationJSONData `json:"data"`
-	DateStamp        *string                                      `json:"dateStamp"`
-	ErrorCodes       []string                                     `json:"errorCodes"`
-	ErrorMessage     []interface{}                                `json:"errorMessage"`
-	ErrorMessageText *string                                      `json:"errorMessageText"`
-	ErrorName        *string                                      `json:"errorName"`
-	ErrorReference   *string                                      `json:"errorReference"`
-	ErrorType        *string                                      `json:"errorType"`
-	ExtraInfo        map[string]interface{}                       `json:"extraInfo"`
-	ExtraObject      map[string]interface{}                       `json:"extraObject"`
-	Success          *bool                                        `json:"success"`
-	TotalCount       *int64                                       `json:"totalCount"`
-	Vmid             *string                                      `json:"vmid"`
+	Data             []TaxonomyDestinations200ApplicationJSONData `json:"data,omitempty"`
+	DateStamp        *string                                      `json:"dateStamp,omitempty"`
+	ErrorCodes       []string                                     `json:"errorCodes,omitempty"`
+	ErrorMessage     []interface{}                                `json:"errorMessage,omitempty"`
+	ErrorMessageText *string                                      `json:"errorMessageText,omitempty"`
+	ErrorName        *string                                      `json:"errorName,omitempty"`
+	ErrorReference   *string                                      `json:"errorReference,omitempty"`
+	ErrorType        *string                                      `json:"errorType,omitempty"`
+	ExtraInfo        map[string]interface{}                       `json:"extraInfo,omitempty"`
+	ExtraObject      map[string]interface{}                       `json:"extraObject,omitempty"`
+	Success          *bool                                        `json:"success,omitempty"`
+	TotalCount       *int64                                       `json:"totalCount,omitempty"`
+	Vmid             *string                                      `json:"vmid,omitempty"`
 }
 
 type TaxonomyDestinationsResponse struct {

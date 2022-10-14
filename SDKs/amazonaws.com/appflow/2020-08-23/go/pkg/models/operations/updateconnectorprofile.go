@@ -22,8 +22,8 @@ const (
 )
 
 type UpdateConnectorProfileRequestBodyConnectorProfileConfig struct {
-	ConnectorProfileCredentials *shared.ConnectorProfileCredentials `json:"connectorProfileCredentials"`
-	ConnectorProfileProperties  *shared.ConnectorProfileProperties  `json:"connectorProfileProperties"`
+	ConnectorProfileCredentials *shared.ConnectorProfileCredentials `json:"connectorProfileCredentials,omitempty"`
+	ConnectorProfileProperties  *shared.ConnectorProfileProperties  `json:"connectorProfileProperties,omitempty"`
 }
 
 type UpdateConnectorProfileRequestBody struct {

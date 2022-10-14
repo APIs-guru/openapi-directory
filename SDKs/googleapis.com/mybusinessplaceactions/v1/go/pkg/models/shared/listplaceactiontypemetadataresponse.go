@@ -1,6 +1,6 @@
 package shared
 
 type ListPlaceActionTypeMetadataResponse struct {
-	NextPageToken           *string                   `json:"nextPageToken"`
-	PlaceActionTypeMetadata []PlaceActionTypeMetadata `json:"placeActionTypeMetadata"`
+	NextPageToken           *string                   `json:"nextPageToken,omitempty"`
+	PlaceActionTypeMetadata []PlaceActionTypeMetadata `json:"placeActionTypeMetadata,omitempty"`
 }

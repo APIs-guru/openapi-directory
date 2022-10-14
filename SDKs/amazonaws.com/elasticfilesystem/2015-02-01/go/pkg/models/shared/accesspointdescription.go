@@ -1,14 +1,14 @@
 package shared
 
 type AccessPointDescription struct {
-	AccessPointArn *string             `json:"AccessPointArn"`
-	AccessPointID  *string             `json:"AccessPointId"`
-	ClientToken    *string             `json:"ClientToken"`
-	FileSystemID   *string             `json:"FileSystemId"`
-	LifeCycleState *LifeCycleStateEnum `json:"LifeCycleState"`
-	Name           *string             `json:"Name"`
-	OwnerID        *string             `json:"OwnerId"`
-	PosixUser      *PosixUser          `json:"PosixUser"`
-	RootDirectory  *RootDirectory      `json:"RootDirectory"`
-	Tags           []Tag               `json:"Tags"`
+	AccessPointArn *string             `json:"AccessPointArn,omitempty"`
+	AccessPointID  *string             `json:"AccessPointId,omitempty"`
+	ClientToken    *string             `json:"ClientToken,omitempty"`
+	FileSystemID   *string             `json:"FileSystemId,omitempty"`
+	LifeCycleState *LifeCycleStateEnum `json:"LifeCycleState,omitempty"`
+	Name           *string             `json:"Name,omitempty"`
+	OwnerID        *string             `json:"OwnerId,omitempty"`
+	PosixUser      *PosixUser          `json:"PosixUser,omitempty"`
+	RootDirectory  *RootDirectory      `json:"RootDirectory,omitempty"`
+	Tags           []Tag               `json:"Tags,omitempty"`
 }

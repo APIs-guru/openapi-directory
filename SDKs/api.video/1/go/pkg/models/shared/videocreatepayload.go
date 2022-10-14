@@ -5,14 +5,14 @@ import (
 )
 
 type VideoCreatePayload struct {
-	Description *string    `json:"description"`
-	Metadata    []Metadata `json:"metadata"`
-	Mp4Support  *bool      `json:"mp4Support"`
-	Panoramic   *bool      `json:"panoramic"`
-	PlayerID    *string    `json:"playerId"`
-	Public      *bool      `json:"public"`
-	PublishedAt *time.Time `json:"publishedAt"`
-	Source      *string    `json:"source"`
-	Tags        []string   `json:"tags"`
+	Description *string    `json:"description,omitempty"`
+	Metadata    []Metadata `json:"metadata,omitempty"`
+	Mp4Support  *bool      `json:"mp4Support,omitempty"`
+	Panoramic   *bool      `json:"panoramic,omitempty"`
+	PlayerID    *string    `json:"playerId,omitempty"`
+	Public      *bool      `json:"public,omitempty"`
+	PublishedAt *time.Time `json:"publishedAt,omitempty"`
+	Source      *string    `json:"source,omitempty"`
+	Tags        []string   `json:"tags,omitempty"`
 	Title       string     `json:"title"`
 }

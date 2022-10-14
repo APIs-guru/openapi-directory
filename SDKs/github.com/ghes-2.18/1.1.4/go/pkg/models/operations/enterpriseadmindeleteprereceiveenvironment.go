@@ -9,14 +9,14 @@ type EnterpriseAdminDeletePreReceiveEnvironmentRequest struct {
 }
 
 type EnterpriseAdminDeletePreReceiveEnvironment422ApplicationJSONErrors struct {
-	Code     *string `json:"code"`
-	Message  *string `json:"message"`
-	Resource *string `json:"resource"`
+	Code     *string `json:"code,omitempty"`
+	Message  *string `json:"message,omitempty"`
+	Resource *string `json:"resource,omitempty"`
 }
 
 type EnterpriseAdminDeletePreReceiveEnvironment422ApplicationJSON struct {
-	Errors  []EnterpriseAdminDeletePreReceiveEnvironment422ApplicationJSONErrors `json:"errors"`
-	Message *string                                                              `json:"message"`
+	Errors  []EnterpriseAdminDeletePreReceiveEnvironment422ApplicationJSONErrors `json:"errors,omitempty"`
+	Message *string                                                              `json:"message,omitempty"`
 }
 
 type EnterpriseAdminDeletePreReceiveEnvironmentResponse struct {

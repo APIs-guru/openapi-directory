@@ -11,11 +11,11 @@ const (
 )
 
 type Error struct {
-	ErrorCode           *string                `json:"errorCode"`
-	ErrorData           *ErrorData             `json:"errorData"`
-	ErrorMessage        *string                `json:"errorMessage"`
-	LocalisationDetails *LocalisationDetails   `json:"localisationDetails"`
-	Location            *string                `json:"location"`
-	LocationType        *ErrorLocationTypeEnum `json:"locationType"`
-	ReasonCode          *string                `json:"reasonCode"`
+	ErrorCode           *string                `json:"errorCode,omitempty"`
+	ErrorData           *ErrorData             `json:"errorData,omitempty"`
+	ErrorMessage        *string                `json:"errorMessage,omitempty"`
+	LocalisationDetails *LocalisationDetails   `json:"localisationDetails,omitempty"`
+	Location            *string                `json:"location,omitempty"`
+	LocationType        *ErrorLocationTypeEnum `json:"locationType,omitempty"`
+	ReasonCode          *string                `json:"reasonCode,omitempty"`
 }

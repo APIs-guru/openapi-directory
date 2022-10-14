@@ -23,15 +23,15 @@ type ProjectsCreateCardRequest struct {
 }
 
 type ProjectsCreateCard503ApplicationJSONErrors struct {
-	Code    *string `json:"code"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type ProjectsCreateCard503ApplicationJSON struct {
-	Code             *string                                      `json:"code"`
-	DocumentationURL *string                                      `json:"documentation_url"`
-	Errors           []ProjectsCreateCard503ApplicationJSONErrors `json:"errors"`
-	Message          *string                                      `json:"message"`
+	Code             *string                                      `json:"code,omitempty"`
+	DocumentationURL *string                                      `json:"documentation_url,omitempty"`
+	Errors           []ProjectsCreateCard503ApplicationJSONErrors `json:"errors,omitempty"`
+	Message          *string                                      `json:"message,omitempty"`
 }
 
 type ProjectsCreateCardResponse struct {

@@ -1,11 +1,11 @@
 package shared
 
 type DeviceDescription struct {
-	Arn           *string           `json:"Arn"`
-	Attributes    map[string]string `json:"Attributes"`
-	DeviceID      *string           `json:"DeviceId"`
-	Enabled       *bool             `json:"Enabled"`
-	RemainingLife *float64          `json:"RemainingLife"`
-	Tags          map[string]string `json:"Tags"`
-	Type          *string           `json:"Type"`
+	Arn           *string           `json:"Arn,omitempty"`
+	Attributes    map[string]string `json:"Attributes,omitempty"`
+	DeviceID      *string           `json:"DeviceId,omitempty"`
+	Enabled       *bool             `json:"Enabled,omitempty"`
+	RemainingLife *float64          `json:"RemainingLife,omitempty"`
+	Tags          map[string]string `json:"Tags,omitempty"`
+	Type          *string           `json:"Type,omitempty"`
 }

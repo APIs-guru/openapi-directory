@@ -5,7 +5,7 @@ type BindNetworkPathParams struct {
 }
 
 type BindNetworkRequestBody struct {
-	AutoBind         *bool  `json:"autoBind"`
+	AutoBind         *bool  `json:"autoBind,omitempty"`
 	ConfigTemplateID string `json:"configTemplateId"`
 }
 

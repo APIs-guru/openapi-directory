@@ -11,31 +11,31 @@ type CreateSessionUsingPostRequest struct {
 }
 
 type CreateSessionUsingPost200ApplicationJSONData struct {
-	SessionID *string `json:"sessionID"`
+	SessionID *string `json:"sessionID,omitempty"`
 }
 
 type CreateSessionUsingPost200ApplicationJSON struct {
-	Code    *int64                                        `json:"code"`
-	Data    *CreateSessionUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                       `json:"message"`
+	Code    *int64                                        `json:"code,omitempty"`
+	Data    *CreateSessionUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                       `json:"message,omitempty"`
 }
 
 type CreateSessionUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateSessionUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateSessionUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateSessionUsingPostResponse struct {

@@ -25,9 +25,9 @@ const (
 )
 
 type Export struct {
-	DownloadURI           *string             `json:"downloadUri"`
-	Flavor                *ExportFlavorEnum   `json:"flavor"`
-	NewerVersionAvailable *bool               `json:"newerVersionAvailable"`
-	Platform              *ExportPlatformEnum `json:"platform"`
-	Status                *ExportStatusEnum   `json:"status"`
+	DownloadURI           *string             `json:"downloadUri,omitempty"`
+	Flavor                *ExportFlavorEnum   `json:"flavor,omitempty"`
+	NewerVersionAvailable *bool               `json:"newerVersionAvailable,omitempty"`
+	Platform              *ExportPlatformEnum `json:"platform,omitempty"`
+	Status                *ExportStatusEnum   `json:"status,omitempty"`
 }

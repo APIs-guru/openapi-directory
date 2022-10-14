@@ -1,5 +1,5 @@
 package shared
 
 type TableBorderRow struct {
-	TableBorderCells []TableBorderCell `json:"tableBorderCells"`
+	TableBorderCells []TableBorderCell `json:"tableBorderCells,omitempty"`
 }

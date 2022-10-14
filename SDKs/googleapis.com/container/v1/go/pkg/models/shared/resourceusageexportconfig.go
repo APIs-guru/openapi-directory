@@ -1,7 +1,7 @@
 package shared
 
 type ResourceUsageExportConfig struct {
-	BigqueryDestination         *BigQueryDestination       `json:"bigqueryDestination"`
-	ConsumptionMeteringConfig   *ConsumptionMeteringConfig `json:"consumptionMeteringConfig"`
-	EnableNetworkEgressMetering *bool                      `json:"enableNetworkEgressMetering"`
+	BigqueryDestination         *BigQueryDestination       `json:"bigqueryDestination,omitempty"`
+	ConsumptionMeteringConfig   *ConsumptionMeteringConfig `json:"consumptionMeteringConfig,omitempty"`
+	EnableNetworkEgressMetering *bool                      `json:"enableNetworkEgressMetering,omitempty"`
 }

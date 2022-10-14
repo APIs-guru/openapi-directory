@@ -19,9 +19,9 @@ type UpdateAssessmentFrameworkHeaders struct {
 }
 
 type UpdateAssessmentFrameworkRequestBody struct {
-	ComplianceType *string                                      `json:"complianceType"`
+	ComplianceType *string                                      `json:"complianceType,omitempty"`
 	ControlSets    []shared.UpdateAssessmentFrameworkControlSet `json:"controlSets"`
-	Description    *string                                      `json:"description"`
+	Description    *string                                      `json:"description,omitempty"`
 	Name           string                                       `json:"name"`
 }
 

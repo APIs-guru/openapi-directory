@@ -1,9 +1,9 @@
 package shared
 
 type EvidenceRequest struct {
-	EvidenceID    *string          `json:"evidenceId"`
-	EvidenceType  *string          `json:"evidenceType"`
-	LineItems     []OrderLineItems `json:"lineItems"`
-	RequestDate   *string          `json:"requestDate"`
-	RespondByDate *string          `json:"respondByDate"`
+	EvidenceID    *string          `json:"evidenceId,omitempty"`
+	EvidenceType  *string          `json:"evidenceType,omitempty"`
+	LineItems     []OrderLineItems `json:"lineItems,omitempty"`
+	RequestDate   *string          `json:"requestDate,omitempty"`
+	RespondByDate *string          `json:"respondByDate,omitempty"`
 }

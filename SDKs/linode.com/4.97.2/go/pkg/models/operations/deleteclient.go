@@ -27,7 +27,7 @@ type DeleteClientRequest struct {
 }
 
 type DeleteClientDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteClientResponse struct {

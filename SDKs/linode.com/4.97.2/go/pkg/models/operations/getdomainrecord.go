@@ -28,7 +28,7 @@ type GetDomainRecordRequest struct {
 }
 
 type GetDomainRecordDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetDomainRecordResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type ComponentTransform struct {
-	Name              *string `json:"name"`
-	OriginalTransform *string `json:"originalTransform"`
-	UserName          *string `json:"userName"`
+	Name              *string `json:"name,omitempty"`
+	OriginalTransform *string `json:"originalTransform,omitempty"`
+	UserName          *string `json:"userName,omitempty"`
 }

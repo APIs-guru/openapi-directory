@@ -11,8 +11,8 @@ const (
 )
 
 type VerifyChallengeResponseResult struct {
-	DevicePermanentID           *string                                         `json:"devicePermanentId"`
-	DeviceSignal                *string                                         `json:"deviceSignal"`
-	KeyTrustLevel               *VerifyChallengeResponseResultKeyTrustLevelEnum `json:"keyTrustLevel"`
-	SignedPublicKeyAndChallenge *string                                         `json:"signedPublicKeyAndChallenge"`
+	DevicePermanentID           *string                                         `json:"devicePermanentId,omitempty"`
+	DeviceSignal                *string                                         `json:"deviceSignal,omitempty"`
+	KeyTrustLevel               *VerifyChallengeResponseResultKeyTrustLevelEnum `json:"keyTrustLevel,omitempty"`
+	SignedPublicKeyAndChallenge *string                                         `json:"signedPublicKeyAndChallenge,omitempty"`
 }

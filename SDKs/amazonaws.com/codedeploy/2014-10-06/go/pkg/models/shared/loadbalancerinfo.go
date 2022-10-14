@@ -1,7 +1,7 @@
 package shared
 
 type LoadBalancerInfo struct {
-	ElbInfoList             []ElbInfo             `json:"elbInfoList"`
-	TargetGroupInfoList     []TargetGroupInfo     `json:"targetGroupInfoList"`
-	TargetGroupPairInfoList []TargetGroupPairInfo `json:"targetGroupPairInfoList"`
+	ElbInfoList             []ElbInfo             `json:"elbInfoList,omitempty"`
+	TargetGroupInfoList     []TargetGroupInfo     `json:"targetGroupInfoList,omitempty"`
+	TargetGroupPairInfoList []TargetGroupPairInfo `json:"targetGroupPairInfoList,omitempty"`
 }

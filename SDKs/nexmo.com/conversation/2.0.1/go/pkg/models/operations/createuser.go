@@ -1,9 +1,9 @@
 package operations
 
 type CreateUserRequestBody struct {
-	DisplayName *string `json:"display_name"`
-	ImageURL    *string `json:"image_url"`
-	Name        *string `json:"name"`
+	DisplayName *string `json:"display_name,omitempty"`
+	ImageURL    *string `json:"image_url,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 type CreateUserRequest struct {
@@ -11,8 +11,8 @@ type CreateUserRequest struct {
 }
 
 type CreateUser200ApplicationJSON struct {
-	Href *string `json:"href"`
-	ID   *string `json:"id"`
+	Href *string `json:"href,omitempty"`
+	ID   *string `json:"id,omitempty"`
 }
 
 type CreateUserResponse struct {

@@ -13,7 +13,7 @@ const (
 )
 
 type TableBorderProperties struct {
-	DashStyle       *TableBorderPropertiesDashStyleEnum `json:"dashStyle"`
-	TableBorderFill *TableBorderFill                    `json:"tableBorderFill"`
-	Weight          *Dimension                          `json:"weight"`
+	DashStyle       *TableBorderPropertiesDashStyleEnum `json:"dashStyle,omitempty"`
+	TableBorderFill *TableBorderFill                    `json:"tableBorderFill,omitempty"`
+	Weight          *Dimension                          `json:"weight,omitempty"`
 }

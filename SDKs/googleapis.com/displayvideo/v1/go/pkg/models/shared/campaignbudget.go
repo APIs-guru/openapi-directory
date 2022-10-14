@@ -17,13 +17,13 @@ const (
 )
 
 type CampaignBudget struct {
-	BudgetAmountMicros   *string                                 `json:"budgetAmountMicros"`
-	BudgetID             *string                                 `json:"budgetId"`
-	BudgetUnit           *CampaignBudgetBudgetUnitEnum           `json:"budgetUnit"`
-	DateRange            *DateRange                              `json:"dateRange"`
-	DisplayName          *string                                 `json:"displayName"`
-	ExternalBudgetID     *string                                 `json:"externalBudgetId"`
-	ExternalBudgetSource *CampaignBudgetExternalBudgetSourceEnum `json:"externalBudgetSource"`
-	InvoiceGroupingID    *string                                 `json:"invoiceGroupingId"`
-	PrismaConfig         *PrismaConfig                           `json:"prismaConfig"`
+	BudgetAmountMicros   *string                                 `json:"budgetAmountMicros,omitempty"`
+	BudgetID             *string                                 `json:"budgetId,omitempty"`
+	BudgetUnit           *CampaignBudgetBudgetUnitEnum           `json:"budgetUnit,omitempty"`
+	DateRange            *DateRange                              `json:"dateRange,omitempty"`
+	DisplayName          *string                                 `json:"displayName,omitempty"`
+	ExternalBudgetID     *string                                 `json:"externalBudgetId,omitempty"`
+	ExternalBudgetSource *CampaignBudgetExternalBudgetSourceEnum `json:"externalBudgetSource,omitempty"`
+	InvoiceGroupingID    *string                                 `json:"invoiceGroupingId,omitempty"`
+	PrismaConfig         *PrismaConfig                           `json:"prismaConfig,omitempty"`
 }

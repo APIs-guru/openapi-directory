@@ -9,7 +9,7 @@ type ProjectsMoveCardPathParams struct {
 }
 
 type ProjectsMoveCardRequestBody struct {
-	ColumnID *int64 `json:"column_id"`
+	ColumnID *int64 `json:"column_id,omitempty"`
 	Position string `json:"position"`
 }
 
@@ -19,28 +19,28 @@ type ProjectsMoveCardRequest struct {
 }
 
 type ProjectsMoveCard403ApplicationJSONErrors struct {
-	Code     *string `json:"code"`
-	Field    *string `json:"field"`
-	Message  *string `json:"message"`
-	Resource *string `json:"resource"`
+	Code     *string `json:"code,omitempty"`
+	Field    *string `json:"field,omitempty"`
+	Message  *string `json:"message,omitempty"`
+	Resource *string `json:"resource,omitempty"`
 }
 
 type ProjectsMoveCard403ApplicationJSON struct {
-	DocumentationURL *string                                    `json:"documentation_url"`
-	Errors           []ProjectsMoveCard403ApplicationJSONErrors `json:"errors"`
-	Message          *string                                    `json:"message"`
+	DocumentationURL *string                                    `json:"documentation_url,omitempty"`
+	Errors           []ProjectsMoveCard403ApplicationJSONErrors `json:"errors,omitempty"`
+	Message          *string                                    `json:"message,omitempty"`
 }
 
 type ProjectsMoveCard503ApplicationJSONErrors struct {
-	Code    *string `json:"code"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type ProjectsMoveCard503ApplicationJSON struct {
-	Code             *string                                    `json:"code"`
-	DocumentationURL *string                                    `json:"documentation_url"`
-	Errors           []ProjectsMoveCard503ApplicationJSONErrors `json:"errors"`
-	Message          *string                                    `json:"message"`
+	Code             *string                                    `json:"code,omitempty"`
+	DocumentationURL *string                                    `json:"documentation_url,omitempty"`
+	Errors           []ProjectsMoveCard503ApplicationJSONErrors `json:"errors,omitempty"`
+	Message          *string                                    `json:"message,omitempty"`
 }
 
 type ProjectsMoveCardResponse struct {

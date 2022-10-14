@@ -1,7 +1,7 @@
 package shared
 
 type LandlordProfitLossModel struct {
-	DirectCosts     *LandlordProfitLossSectionModel `json:"DirectCosts"`
-	GrossProfitLoss *LandlordProfitLossSectionModel `json:"GrossProfitLoss"`
-	Income          *LandlordProfitLossSectionModel `json:"Income"`
+	DirectCosts     *LandlordProfitLossSectionModel `json:"DirectCosts,omitempty"`
+	GrossProfitLoss *LandlordProfitLossSectionModel `json:"GrossProfitLoss,omitempty"`
+	Income          *LandlordProfitLossSectionModel `json:"Income,omitempty"`
 }

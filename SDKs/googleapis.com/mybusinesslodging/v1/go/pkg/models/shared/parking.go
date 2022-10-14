@@ -64,18 +64,18 @@ const (
 )
 
 type Parking struct {
-	ElectricCarChargingStations          *bool                                            `json:"electricCarChargingStations"`
-	ElectricCarChargingStationsException *ParkingElectricCarChargingStationsExceptionEnum `json:"electricCarChargingStationsException"`
-	FreeParking                          *bool                                            `json:"freeParking"`
-	FreeParkingException                 *ParkingFreeParkingExceptionEnum                 `json:"freeParkingException"`
-	FreeSelfParking                      *bool                                            `json:"freeSelfParking"`
-	FreeSelfParkingException             *ParkingFreeSelfParkingExceptionEnum             `json:"freeSelfParkingException"`
-	FreeValetParking                     *bool                                            `json:"freeValetParking"`
-	FreeValetParkingException            *ParkingFreeValetParkingExceptionEnum            `json:"freeValetParkingException"`
-	ParkingAvailable                     *bool                                            `json:"parkingAvailable"`
-	ParkingAvailableException            *ParkingParkingAvailableExceptionEnum            `json:"parkingAvailableException"`
-	SelfParkingAvailable                 *bool                                            `json:"selfParkingAvailable"`
-	SelfParkingAvailableException        *ParkingSelfParkingAvailableExceptionEnum        `json:"selfParkingAvailableException"`
-	ValetParkingAvailable                *bool                                            `json:"valetParkingAvailable"`
-	ValetParkingAvailableException       *ParkingValetParkingAvailableExceptionEnum       `json:"valetParkingAvailableException"`
+	ElectricCarChargingStations          *bool                                            `json:"electricCarChargingStations,omitempty"`
+	ElectricCarChargingStationsException *ParkingElectricCarChargingStationsExceptionEnum `json:"electricCarChargingStationsException,omitempty"`
+	FreeParking                          *bool                                            `json:"freeParking,omitempty"`
+	FreeParkingException                 *ParkingFreeParkingExceptionEnum                 `json:"freeParkingException,omitempty"`
+	FreeSelfParking                      *bool                                            `json:"freeSelfParking,omitempty"`
+	FreeSelfParkingException             *ParkingFreeSelfParkingExceptionEnum             `json:"freeSelfParkingException,omitempty"`
+	FreeValetParking                     *bool                                            `json:"freeValetParking,omitempty"`
+	FreeValetParkingException            *ParkingFreeValetParkingExceptionEnum            `json:"freeValetParkingException,omitempty"`
+	ParkingAvailable                     *bool                                            `json:"parkingAvailable,omitempty"`
+	ParkingAvailableException            *ParkingParkingAvailableExceptionEnum            `json:"parkingAvailableException,omitempty"`
+	SelfParkingAvailable                 *bool                                            `json:"selfParkingAvailable,omitempty"`
+	SelfParkingAvailableException        *ParkingSelfParkingAvailableExceptionEnum        `json:"selfParkingAvailableException,omitempty"`
+	ValetParkingAvailable                *bool                                            `json:"valetParkingAvailable,omitempty"`
+	ValetParkingAvailableException       *ParkingValetParkingAvailableExceptionEnum       `json:"valetParkingAvailableException,omitempty"`
 }

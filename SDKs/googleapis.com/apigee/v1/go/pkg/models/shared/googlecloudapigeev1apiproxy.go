@@ -9,11 +9,11 @@ const (
 )
 
 type GoogleCloudApigeeV1APIProxy struct {
-	APIProxyType     *GoogleCloudApigeeV1APIProxyAPIProxyTypeEnum `json:"apiProxyType"`
-	Labels           map[string]string                            `json:"labels"`
-	LatestRevisionID *string                                      `json:"latestRevisionId"`
-	MetaData         *GoogleCloudApigeeV1EntityMetadata           `json:"metaData"`
-	Name             *string                                      `json:"name"`
-	ReadOnly         *bool                                        `json:"readOnly"`
-	Revision         []string                                     `json:"revision"`
+	APIProxyType     *GoogleCloudApigeeV1APIProxyAPIProxyTypeEnum `json:"apiProxyType,omitempty"`
+	Labels           map[string]string                            `json:"labels,omitempty"`
+	LatestRevisionID *string                                      `json:"latestRevisionId,omitempty"`
+	MetaData         *GoogleCloudApigeeV1EntityMetadata           `json:"metaData,omitempty"`
+	Name             *string                                      `json:"name,omitempty"`
+	ReadOnly         *bool                                        `json:"readOnly,omitempty"`
+	Revision         []string                                     `json:"revision,omitempty"`
 }

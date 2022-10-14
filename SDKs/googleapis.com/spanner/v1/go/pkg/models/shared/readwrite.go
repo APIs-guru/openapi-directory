@@ -9,5 +9,5 @@ const (
 )
 
 type ReadWrite struct {
-	ReadLockMode *ReadWriteReadLockModeEnum `json:"readLockMode"`
+	ReadLockMode *ReadWriteReadLockModeEnum `json:"readLockMode,omitempty"`
 }

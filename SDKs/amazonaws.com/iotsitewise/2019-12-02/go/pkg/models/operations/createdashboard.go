@@ -15,12 +15,12 @@ type CreateDashboardHeaders struct {
 }
 
 type CreateDashboardRequestBody struct {
-	ClientToken          *string           `json:"clientToken"`
+	ClientToken          *string           `json:"clientToken,omitempty"`
 	DashboardDefinition  string            `json:"dashboardDefinition"`
-	DashboardDescription *string           `json:"dashboardDescription"`
+	DashboardDescription *string           `json:"dashboardDescription,omitempty"`
 	DashboardName        string            `json:"dashboardName"`
 	ProjectID            string            `json:"projectId"`
-	Tags                 map[string]string `json:"tags"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }
 
 type CreateDashboardRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type Program struct {
-	AuthenticityVerification *PostSaleAuthenticationProgram `json:"authenticityVerification"`
-	FulfillmentProgram       *EbayFulfillmentProgram        `json:"fulfillmentProgram"`
+	AuthenticityVerification *PostSaleAuthenticationProgram `json:"authenticityVerification,omitempty"`
+	FulfillmentProgram       *EbayFulfillmentProgram        `json:"fulfillmentProgram,omitempty"`
 }

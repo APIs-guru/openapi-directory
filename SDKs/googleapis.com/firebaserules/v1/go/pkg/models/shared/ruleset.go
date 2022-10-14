@@ -1,8 +1,8 @@
 package shared
 
 type Ruleset struct {
-	CreateTime *string   `json:"createTime"`
-	Metadata   *Metadata `json:"metadata"`
-	Name       *string   `json:"name"`
-	Source     *Source   `json:"source"`
+	CreateTime *string   `json:"createTime,omitempty"`
+	Metadata   *Metadata `json:"metadata,omitempty"`
+	Name       *string   `json:"name,omitempty"`
+	Source     *Source   `json:"source,omitempty"`
 }

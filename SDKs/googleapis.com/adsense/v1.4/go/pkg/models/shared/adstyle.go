@@ -1,21 +1,21 @@
 package shared
 
 type AdStyleColors struct {
-	Background *string `json:"background"`
-	Border     *string `json:"border"`
-	Text       *string `json:"text"`
-	Title      *string `json:"title"`
-	URL        *string `json:"url"`
+	Background *string `json:"background,omitempty"`
+	Border     *string `json:"border,omitempty"`
+	Text       *string `json:"text,omitempty"`
+	Title      *string `json:"title,omitempty"`
+	URL        *string `json:"url,omitempty"`
 }
 
 type AdStyleFont struct {
-	Family *string `json:"family"`
-	Size   *string `json:"size"`
+	Family *string `json:"family,omitempty"`
+	Size   *string `json:"size,omitempty"`
 }
 
 type AdStyle struct {
-	Colors  *AdStyleColors `json:"colors"`
-	Corners *string        `json:"corners"`
-	Font    *AdStyleFont   `json:"font"`
-	Kind    *string        `json:"kind"`
+	Colors  *AdStyleColors `json:"colors,omitempty"`
+	Corners *string        `json:"corners,omitempty"`
+	Font    *AdStyleFont   `json:"font,omitempty"`
+	Kind    *string        `json:"kind,omitempty"`
 }

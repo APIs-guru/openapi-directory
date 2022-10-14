@@ -20,7 +20,7 @@ const (
 
 type WritableConsoleServerPortTemplate struct {
 	DeviceType int64                                          `json:"device_type"`
-	ID         *int64                                         `json:"id"`
+	ID         *int64                                         `json:"id,omitempty"`
 	Name       string                                         `json:"name"`
-	Type       *WritableConsoleServerPortTemplateTypeTypeEnum `json:"type"`
+	Type       *WritableConsoleServerPortTemplateTypeTypeEnum `json:"type,omitempty"`
 }

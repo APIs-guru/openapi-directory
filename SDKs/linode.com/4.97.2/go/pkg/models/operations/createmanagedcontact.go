@@ -23,7 +23,7 @@ type CreateManagedContactRequest struct {
 }
 
 type CreateManagedContactDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateManagedContactResponse struct {

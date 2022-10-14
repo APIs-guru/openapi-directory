@@ -11,8 +11,8 @@ const (
 )
 
 type Link struct {
-	PageObjectID *string               `json:"pageObjectId"`
-	RelativeLink *LinkRelativeLinkEnum `json:"relativeLink"`
-	SlideIndex   *int32                `json:"slideIndex"`
-	URL          *string               `json:"url"`
+	PageObjectID *string               `json:"pageObjectId,omitempty"`
+	RelativeLink *LinkRelativeLinkEnum `json:"relativeLink,omitempty"`
+	SlideIndex   *int32                `json:"slideIndex,omitempty"`
+	URL          *string               `json:"url,omitempty"`
 }

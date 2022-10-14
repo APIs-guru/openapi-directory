@@ -14,7 +14,7 @@ const (
 )
 
 type DayPart struct {
-	DayOfWeek *DayPartDayOfWeekEnum `json:"dayOfWeek"`
-	EndTime   *TimeOfDay            `json:"endTime"`
-	StartTime *TimeOfDay            `json:"startTime"`
+	DayOfWeek *DayPartDayOfWeekEnum `json:"dayOfWeek,omitempty"`
+	EndTime   *TimeOfDay            `json:"endTime,omitempty"`
+	StartTime *TimeOfDay            `json:"startTime,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type TestWindowSummary struct {
-	Message         *string    `json:"Message"`
-	Status          *string    `json:"Status"`
-	TestWindowEnd   *time.Time `json:"TestWindowEnd"`
-	TestWindowStart *time.Time `json:"TestWindowStart"`
+	Message         *string    `json:"Message,omitempty"`
+	Status          *string    `json:"Status,omitempty"`
+	TestWindowEnd   *time.Time `json:"TestWindowEnd,omitempty"`
+	TestWindowStart *time.Time `json:"TestWindowStart,omitempty"`
 }

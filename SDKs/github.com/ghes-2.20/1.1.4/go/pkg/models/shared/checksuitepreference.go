@@ -6,7 +6,7 @@ type CheckSuitePreferencePreferencesAutoTriggerChecks struct {
 }
 
 type CheckSuitePreferencePreferences struct {
-	AutoTriggerChecks []CheckSuitePreferencePreferencesAutoTriggerChecks `json:"auto_trigger_checks"`
+	AutoTriggerChecks []CheckSuitePreferencePreferencesAutoTriggerChecks `json:"auto_trigger_checks,omitempty"`
 }
 
 type CheckSuitePreference struct {

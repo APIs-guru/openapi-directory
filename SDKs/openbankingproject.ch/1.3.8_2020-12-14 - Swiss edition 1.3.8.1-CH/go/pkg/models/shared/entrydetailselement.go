@@ -1,23 +1,23 @@
 package shared
 
 type EntryDetailsElement struct {
-	CheckID                                *string                           `json:"checkId"`
-	CreditorAccount                        *AccountReference16Ch             `json:"creditorAccount"`
-	CreditorAgent                          *string                           `json:"creditorAgent"`
-	CreditorID                             *string                           `json:"creditorId"`
-	CreditorName                           *string                           `json:"creditorName"`
-	CurrencyExchange                       []ReportExchangeRate              `json:"currencyExchange"`
-	DebtorAccount                          *AccountReference16Ch             `json:"debtorAccount"`
-	DebtorAgent                            *string                           `json:"debtorAgent"`
-	DebtorName                             *string                           `json:"debtorName"`
-	EndToEndID                             *string                           `json:"endToEndId"`
-	MandateID                              *string                           `json:"mandateId"`
-	PurposeCode                            *PurposeCodeEnum                  `json:"purposeCode"`
-	RemittanceInformationStructured        *RemittanceInformationStructured  `json:"remittanceInformationStructured"`
-	RemittanceInformationStructuredArray   []RemittanceInformationStructured `json:"remittanceInformationStructuredArray"`
-	RemittanceInformationUnstructured      *string                           `json:"remittanceInformationUnstructured"`
-	RemittanceInformationUnstructuredArray []string                          `json:"remittanceInformationUnstructuredArray"`
+	CheckID                                *string                           `json:"checkId,omitempty"`
+	CreditorAccount                        *AccountReference16Ch             `json:"creditorAccount,omitempty"`
+	CreditorAgent                          *string                           `json:"creditorAgent,omitempty"`
+	CreditorID                             *string                           `json:"creditorId,omitempty"`
+	CreditorName                           *string                           `json:"creditorName,omitempty"`
+	CurrencyExchange                       []ReportExchangeRate              `json:"currencyExchange,omitempty"`
+	DebtorAccount                          *AccountReference16Ch             `json:"debtorAccount,omitempty"`
+	DebtorAgent                            *string                           `json:"debtorAgent,omitempty"`
+	DebtorName                             *string                           `json:"debtorName,omitempty"`
+	EndToEndID                             *string                           `json:"endToEndId,omitempty"`
+	MandateID                              *string                           `json:"mandateId,omitempty"`
+	PurposeCode                            *PurposeCodeEnum                  `json:"purposeCode,omitempty"`
+	RemittanceInformationStructured        *RemittanceInformationStructured  `json:"remittanceInformationStructured,omitempty"`
+	RemittanceInformationStructuredArray   []RemittanceInformationStructured `json:"remittanceInformationStructuredArray,omitempty"`
+	RemittanceInformationUnstructured      *string                           `json:"remittanceInformationUnstructured,omitempty"`
+	RemittanceInformationUnstructuredArray []string                          `json:"remittanceInformationUnstructuredArray,omitempty"`
 	TransactionAmount                      Amount                            `json:"transactionAmount"`
-	UltimateCreditor                       *string                           `json:"ultimateCreditor"`
-	UltimateDebtor                         *string                           `json:"ultimateDebtor"`
+	UltimateCreditor                       *string                           `json:"ultimateCreditor,omitempty"`
+	UltimateDebtor                         *string                           `json:"ultimateDebtor,omitempty"`
 }

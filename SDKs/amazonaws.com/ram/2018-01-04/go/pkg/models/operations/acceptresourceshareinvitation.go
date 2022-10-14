@@ -15,7 +15,7 @@ type AcceptResourceShareInvitationHeaders struct {
 }
 
 type AcceptResourceShareInvitationRequestBody struct {
-	ClientToken                *string `json:"clientToken"`
+	ClientToken                *string `json:"clientToken,omitempty"`
 	ResourceShareInvitationArn string  `json:"resourceShareInvitationArn"`
 }
 

@@ -21,7 +21,7 @@ const (
 )
 
 type ReposUpdateInvitationRequestBody struct {
-	Permissions *ReposUpdateInvitationRequestBodyPermissionsEnum `json:"permissions"`
+	Permissions *ReposUpdateInvitationRequestBodyPermissionsEnum `json:"permissions,omitempty"`
 }
 
 type ReposUpdateInvitationRequest struct {

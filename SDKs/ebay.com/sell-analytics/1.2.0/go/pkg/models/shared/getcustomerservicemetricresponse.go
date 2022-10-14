@@ -1,7 +1,7 @@
 package shared
 
 type GetCustomerServiceMetricResponse struct {
-	DimensionMetrics []DimensionMetric `json:"dimensionMetrics"`
-	EvaluationCycle  *EvaluationCycle  `json:"evaluationCycle"`
-	MarketplaceID    *string           `json:"marketplaceId"`
+	DimensionMetrics []DimensionMetric `json:"dimensionMetrics,omitempty"`
+	EvaluationCycle  *EvaluationCycle  `json:"evaluationCycle,omitempty"`
+	MarketplaceID    *string           `json:"marketplaceId,omitempty"`
 }

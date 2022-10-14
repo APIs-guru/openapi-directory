@@ -1,8 +1,8 @@
 package shared
 
 type StopPipelineExecutionInput struct {
-	Abandon             *bool   `json:"abandon"`
+	Abandon             *bool   `json:"abandon,omitempty"`
 	PipelineExecutionID string  `json:"pipelineExecutionId"`
 	PipelineName        string  `json:"pipelineName"`
-	Reason              *string `json:"reason"`
+	Reason              *string `json:"reason,omitempty"`
 }

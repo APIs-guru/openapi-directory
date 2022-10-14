@@ -46,14 +46,14 @@ const (
 )
 
 type PaymentOptions struct {
-	Cash                *bool                                  `json:"cash"`
-	CashException       *PaymentOptionsCashExceptionEnum       `json:"cashException"`
-	Cheque              *bool                                  `json:"cheque"`
-	ChequeException     *PaymentOptionsChequeExceptionEnum     `json:"chequeException"`
-	CreditCard          *bool                                  `json:"creditCard"`
-	CreditCardException *PaymentOptionsCreditCardExceptionEnum `json:"creditCardException"`
-	DebitCard           *bool                                  `json:"debitCard"`
-	DebitCardException  *PaymentOptionsDebitCardExceptionEnum  `json:"debitCardException"`
-	MobileNfc           *bool                                  `json:"mobileNfc"`
-	MobileNfcException  *PaymentOptionsMobileNfcExceptionEnum  `json:"mobileNfcException"`
+	Cash                *bool                                  `json:"cash,omitempty"`
+	CashException       *PaymentOptionsCashExceptionEnum       `json:"cashException,omitempty"`
+	Cheque              *bool                                  `json:"cheque,omitempty"`
+	ChequeException     *PaymentOptionsChequeExceptionEnum     `json:"chequeException,omitempty"`
+	CreditCard          *bool                                  `json:"creditCard,omitempty"`
+	CreditCardException *PaymentOptionsCreditCardExceptionEnum `json:"creditCardException,omitempty"`
+	DebitCard           *bool                                  `json:"debitCard,omitempty"`
+	DebitCardException  *PaymentOptionsDebitCardExceptionEnum  `json:"debitCardException,omitempty"`
+	MobileNfc           *bool                                  `json:"mobileNfc,omitempty"`
+	MobileNfcException  *PaymentOptionsMobileNfcExceptionEnum  `json:"mobileNfcException,omitempty"`
 }

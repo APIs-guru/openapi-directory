@@ -12,10 +12,10 @@ const (
 )
 
 type Membership struct {
-	CreateTime         *string             `json:"createTime"`
-	Name               *string             `json:"name"`
-	PreferredMemberKey *EntityKey          `json:"preferredMemberKey"`
-	Roles              []MembershipRole    `json:"roles"`
-	Type               *MembershipTypeEnum `json:"type"`
-	UpdateTime         *string             `json:"updateTime"`
+	CreateTime         *string             `json:"createTime,omitempty"`
+	Name               *string             `json:"name,omitempty"`
+	PreferredMemberKey *EntityKey          `json:"preferredMemberKey,omitempty"`
+	Roles              []MembershipRole    `json:"roles,omitempty"`
+	Type               *MembershipTypeEnum `json:"type,omitempty"`
+	UpdateTime         *string             `json:"updateTime,omitempty"`
 }

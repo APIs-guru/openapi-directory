@@ -1,6 +1,6 @@
 package shared
 
 type CreateAssociationBatchResult struct {
-	Failed     []FailedCreateAssociation `json:"Failed"`
-	Successful []AssociationDescription  `json:"Successful"`
+	Failed     []FailedCreateAssociation `json:"Failed,omitempty"`
+	Successful []AssociationDescription  `json:"Successful,omitempty"`
 }

@@ -32,18 +32,18 @@ type ListUsageRecordRequest struct {
 }
 
 type ListUsageRecord200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListUsageRecord200ApplicationJSONListUsageRecordResponse struct {
-	Meta         *ListUsageRecord200ApplicationJSONMeta `json:"meta"`
-	UsageRecords []shared.WirelessV1SimUsageRecord      `json:"usage_records"`
+	Meta         *ListUsageRecord200ApplicationJSONMeta `json:"meta,omitempty"`
+	UsageRecords []shared.WirelessV1SimUsageRecord      `json:"usage_records,omitempty"`
 }
 
 type ListUsageRecordResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type GetAPICacheResponse struct {
-	APICache *APICache `json:"apiCache"`
+	APICache *APICache `json:"apiCache,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type SoftwareRecipeStepRunScript struct {
-	AllowedExitCodes []int32                                     `json:"allowedExitCodes"`
-	Interpreter      *SoftwareRecipeStepRunScriptInterpreterEnum `json:"interpreter"`
-	Script           *string                                     `json:"script"`
+	AllowedExitCodes []int32                                     `json:"allowedExitCodes,omitempty"`
+	Interpreter      *SoftwareRecipeStepRunScriptInterpreterEnum `json:"interpreter,omitempty"`
+	Script           *string                                     `json:"script,omitempty"`
 }

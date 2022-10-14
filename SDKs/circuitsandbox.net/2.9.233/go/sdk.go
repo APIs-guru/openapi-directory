@@ -3847,6 +3847,49 @@ func (s *SDK) PinTopic(ctx context.Context, request operations.PinTopicRequest) 
 	return res, nil
 }
 
+func (s *SDK) PostWebhookAsSlackMessage(ctx context.Context, request operations.PostWebhookAsSlackMessageRequest) (*operations.PostWebhookAsSlackMessageResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/webhooks/incoming/{webhookId}", request.PathParams)
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+	if bodyReader == nil {
+		return nil, fmt.Errorf("request body is required")
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := s.defaultClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.PostWebhookAsSlackMessageResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode == 400:
+	case httpRes.StatusCode == 401:
+	case httpRes.StatusCode == 500:
+	case httpRes.StatusCode == 503:
+	}
+
+	return res, nil
+}
+
 func (s *SDK) RemoveLabel(ctx context.Context, request operations.RemoveLabelRequest) (*operations.RemoveLabelResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/labels/{labelId}", request.PathParams)

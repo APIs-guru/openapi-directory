@@ -52,6 +52,6 @@ const (
 )
 
 type CreateAssignedTargetingOptionsRequest struct {
-	AssignedTargetingOptions []AssignedTargetingOption                               `json:"assignedTargetingOptions"`
-	TargetingType            *CreateAssignedTargetingOptionsRequestTargetingTypeEnum `json:"targetingType"`
+	AssignedTargetingOptions []AssignedTargetingOption                               `json:"assignedTargetingOptions,omitempty"`
+	TargetingType            *CreateAssignedTargetingOptionsRequestTargetingTypeEnum `json:"targetingType,omitempty"`
 }

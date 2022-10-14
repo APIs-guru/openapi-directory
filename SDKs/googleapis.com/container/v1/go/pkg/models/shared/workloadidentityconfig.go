@@ -1,5 +1,5 @@
 package shared
 
 type WorkloadIdentityConfig struct {
-	WorkloadPool *string `json:"workloadPool"`
+	WorkloadPool *string `json:"workloadPool,omitempty"`
 }

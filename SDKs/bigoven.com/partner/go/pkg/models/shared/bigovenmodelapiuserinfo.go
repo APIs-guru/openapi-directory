@@ -5,17 +5,17 @@ import (
 )
 
 type BigOvenModelAPIUserInfo struct {
-	FirstName         *string    `json:"FirstName"`
-	ImageUrl48        *string    `json:"ImageUrl48"`
-	IsKitchenHelper   *bool      `json:"IsKitchenHelper"`
-	IsPremium         *bool      `json:"IsPremium"`
-	IsUsingRecurly    *bool      `json:"IsUsingRecurly"`
-	LastName          *string    `json:"LastName"`
-	MemberSince       *time.Time `json:"MemberSince"`
-	PhotoURL          *string    `json:"PhotoUrl"`
-	PhotoUrl48        *string    `json:"PhotoUrl48"`
-	PremiumExpiryDate *time.Time `json:"PremiumExpiryDate"`
-	UserID            *int32     `json:"UserID"`
-	UserName          *string    `json:"UserName"`
-	WebURL            *string    `json:"WebUrl"`
+	FirstName         *string    `json:"FirstName,omitempty"`
+	ImageUrl48        *string    `json:"ImageUrl48,omitempty"`
+	IsKitchenHelper   *bool      `json:"IsKitchenHelper,omitempty"`
+	IsPremium         *bool      `json:"IsPremium,omitempty"`
+	IsUsingRecurly    *bool      `json:"IsUsingRecurly,omitempty"`
+	LastName          *string    `json:"LastName,omitempty"`
+	MemberSince       *time.Time `json:"MemberSince,omitempty"`
+	PhotoURL          *string    `json:"PhotoUrl,omitempty"`
+	PhotoUrl48        *string    `json:"PhotoUrl48,omitempty"`
+	PremiumExpiryDate *time.Time `json:"PremiumExpiryDate,omitempty"`
+	UserID            *int32     `json:"UserID,omitempty"`
+	UserName          *string    `json:"UserName,omitempty"`
+	WebURL            *string    `json:"WebUrl,omitempty"`
 }

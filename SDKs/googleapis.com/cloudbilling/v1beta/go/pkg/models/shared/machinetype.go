@@ -1,6 +1,6 @@
 package shared
 
 type MachineType struct {
-	CustomMachineType     *CustomMachineType     `json:"customMachineType"`
-	PredefinedMachineType *PredefinedMachineType `json:"predefinedMachineType"`
+	CustomMachineType     *CustomMachineType     `json:"customMachineType,omitempty"`
+	PredefinedMachineType *PredefinedMachineType `json:"predefinedMachineType,omitempty"`
 }

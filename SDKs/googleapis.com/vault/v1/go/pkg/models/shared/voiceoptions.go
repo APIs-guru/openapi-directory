@@ -10,5 +10,5 @@ const (
 )
 
 type VoiceOptions struct {
-	CoveredData []VoiceOptionsCoveredDataEnum `json:"coveredData"`
+	CoveredData []VoiceOptionsCoveredDataEnum `json:"coveredData,omitempty"`
 }

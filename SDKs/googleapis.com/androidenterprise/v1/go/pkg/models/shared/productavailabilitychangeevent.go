@@ -10,6 +10,6 @@ const (
 )
 
 type ProductAvailabilityChangeEvent struct {
-	AvailabilityStatus *ProductAvailabilityChangeEventAvailabilityStatusEnum `json:"availabilityStatus"`
-	ProductID          *string                                               `json:"productId"`
+	AvailabilityStatus *ProductAvailabilityChangeEventAvailabilityStatusEnum `json:"availabilityStatus,omitempty"`
+	ProductID          *string                                               `json:"productId,omitempty"`
 }

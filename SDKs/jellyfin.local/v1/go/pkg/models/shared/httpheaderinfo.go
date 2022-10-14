@@ -1,7 +1,7 @@
 package shared
 
 type HTTPHeaderInfo struct {
-	Match *HeaderMatchTypeEnum `json:"Match"`
-	Name  *string              `json:"Name"`
-	Value *string              `json:"Value"`
+	Match *HeaderMatchTypeEnum `json:"Match,omitempty"`
+	Name  *string              `json:"Name,omitempty"`
+	Value *string              `json:"Value,omitempty"`
 }

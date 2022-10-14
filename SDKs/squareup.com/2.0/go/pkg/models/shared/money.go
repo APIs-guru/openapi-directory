@@ -1,6 +1,6 @@
 package shared
 
 type Money struct {
-	Amount   *int64  `json:"amount"`
-	Currency *string `json:"currency"`
+	Amount   *int64  `json:"amount,omitempty"`
+	Currency *string `json:"currency,omitempty"`
 }

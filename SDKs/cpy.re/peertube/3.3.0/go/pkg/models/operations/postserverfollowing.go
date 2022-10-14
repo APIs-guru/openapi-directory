@@ -5,8 +5,8 @@ import (
 )
 
 type PostServerFollowingRequestBody struct {
-	Handles []string `json:"handles"`
-	Hosts   []string `json:"hosts"`
+	Handles []string `json:"handles,omitempty"`
+	Hosts   []string `json:"hosts,omitempty"`
 }
 
 type PostServerFollowingSecurity struct {

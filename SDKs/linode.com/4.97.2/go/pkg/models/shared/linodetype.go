@@ -1,16 +1,16 @@
 package shared
 
 type LinodeTypeAddonsBackupsPrice struct {
-	Hourly  *int64 `json:"hourly"`
-	Monthly *int64 `json:"monthly"`
+	Hourly  *int64 `json:"hourly,omitempty"`
+	Monthly *int64 `json:"monthly,omitempty"`
 }
 
 type LinodeTypeAddonsBackups struct {
-	Price *LinodeTypeAddonsBackupsPrice `json:"price"`
+	Price *LinodeTypeAddonsBackupsPrice `json:"price,omitempty"`
 }
 
 type LinodeTypeAddons struct {
-	Backups *LinodeTypeAddonsBackups `json:"backups"`
+	Backups *LinodeTypeAddonsBackups `json:"backups,omitempty"`
 }
 
 type LinodeTypeClassEnum string
@@ -24,21 +24,21 @@ const (
 )
 
 type LinodeTypePrice struct {
-	Hourly  *int64 `json:"hourly"`
-	Monthly *int64 `json:"monthly"`
+	Hourly  *int64 `json:"hourly,omitempty"`
+	Monthly *int64 `json:"monthly,omitempty"`
 }
 
 type LinodeType struct {
-	Addons     *LinodeTypeAddons    `json:"addons"`
-	Class      *LinodeTypeClassEnum `json:"class"`
-	Disk       *int64               `json:"disk"`
-	Gpus       *int64               `json:"gpus"`
-	ID         *string              `json:"id"`
-	Label      *string              `json:"label"`
-	Memory     *int64               `json:"memory"`
-	NetworkOut *int64               `json:"network_out"`
-	Price      *LinodeTypePrice     `json:"price"`
-	Successor  *string              `json:"successor"`
-	Transfer   *int64               `json:"transfer"`
-	Vcpus      *int64               `json:"vcpus"`
+	Addons     *LinodeTypeAddons    `json:"addons,omitempty"`
+	Class      *LinodeTypeClassEnum `json:"class,omitempty"`
+	Disk       *int64               `json:"disk,omitempty"`
+	Gpus       *int64               `json:"gpus,omitempty"`
+	ID         *string              `json:"id,omitempty"`
+	Label      *string              `json:"label,omitempty"`
+	Memory     *int64               `json:"memory,omitempty"`
+	NetworkOut *int64               `json:"network_out,omitempty"`
+	Price      *LinodeTypePrice     `json:"price,omitempty"`
+	Successor  *string              `json:"successor,omitempty"`
+	Transfer   *int64               `json:"transfer,omitempty"`
+	Vcpus      *int64               `json:"vcpus,omitempty"`
 }

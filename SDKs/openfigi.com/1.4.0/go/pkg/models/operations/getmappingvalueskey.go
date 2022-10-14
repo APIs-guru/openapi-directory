@@ -21,7 +21,7 @@ type GetMappingValuesKeyRequest struct {
 }
 
 type GetMappingValuesKey200ApplicationJSON struct {
-	Values []string `json:"values"`
+	Values []string `json:"values,omitempty"`
 }
 
 type GetMappingValuesKeyResponse struct {

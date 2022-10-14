@@ -1,5 +1,5 @@
 package shared
 
 type GetAppliedSchemaVersionResponse struct {
-	AppliedSchemaArn *string `json:"AppliedSchemaArn"`
+	AppliedSchemaArn *string `json:"AppliedSchemaArn,omitempty"`
 }

@@ -20,13 +20,13 @@ const (
 )
 
 type SasPortalDeviceGrant struct {
-	ChannelType                     *SasPortalDeviceGrantChannelTypeEnum `json:"channelType"`
-	ExpireTime                      *string                              `json:"expireTime"`
-	FrequencyRange                  *SasPortalFrequencyRange             `json:"frequencyRange"`
-	GrantID                         *string                              `json:"grantId"`
-	LastHeartbeatTransmitExpireTime *string                              `json:"lastHeartbeatTransmitExpireTime"`
-	MaxEirp                         *float64                             `json:"maxEirp"`
-	MoveList                        []SasPortalDpaMoveList               `json:"moveList"`
-	State                           *SasPortalDeviceGrantStateEnum       `json:"state"`
-	SuspensionReason                []string                             `json:"suspensionReason"`
+	ChannelType                     *SasPortalDeviceGrantChannelTypeEnum `json:"channelType,omitempty"`
+	ExpireTime                      *string                              `json:"expireTime,omitempty"`
+	FrequencyRange                  *SasPortalFrequencyRange             `json:"frequencyRange,omitempty"`
+	GrantID                         *string                              `json:"grantId,omitempty"`
+	LastHeartbeatTransmitExpireTime *string                              `json:"lastHeartbeatTransmitExpireTime,omitempty"`
+	MaxEirp                         *float64                             `json:"maxEirp,omitempty"`
+	MoveList                        []SasPortalDpaMoveList               `json:"moveList,omitempty"`
+	State                           *SasPortalDeviceGrantStateEnum       `json:"state,omitempty"`
+	SuspensionReason                []string                             `json:"suspensionReason,omitempty"`
 }

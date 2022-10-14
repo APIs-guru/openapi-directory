@@ -1,7 +1,7 @@
 package shared
 
 type Resources struct {
-	Regions        []string        `json:"regions"`
-	VirtualMachine *VirtualMachine `json:"virtualMachine"`
-	Zones          []string        `json:"zones"`
+	Regions        []string        `json:"regions,omitempty"`
+	VirtualMachine *VirtualMachine `json:"virtualMachine,omitempty"`
+	Zones          []string        `json:"zones,omitempty"`
 }

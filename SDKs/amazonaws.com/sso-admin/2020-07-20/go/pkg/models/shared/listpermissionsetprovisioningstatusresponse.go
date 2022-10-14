@@ -1,6 +1,6 @@
 package shared
 
 type ListPermissionSetProvisioningStatusResponse struct {
-	NextToken                        *string                                   `json:"NextToken"`
-	PermissionSetsProvisioningStatus []PermissionSetProvisioningStatusMetadata `json:"PermissionSetsProvisioningStatus"`
+	NextToken                        *string                                   `json:"NextToken,omitempty"`
+	PermissionSetsProvisioningStatus []PermissionSetProvisioningStatusMetadata `json:"PermissionSetsProvisioningStatus,omitempty"`
 }

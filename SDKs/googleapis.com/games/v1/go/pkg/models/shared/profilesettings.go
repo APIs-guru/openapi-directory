@@ -10,7 +10,7 @@ const (
 )
 
 type ProfileSettings struct {
-	FriendsListVisibility *ProfileSettingsFriendsListVisibilityEnum `json:"friendsListVisibility"`
-	Kind                  *string                                   `json:"kind"`
-	ProfileVisible        *bool                                     `json:"profileVisible"`
+	FriendsListVisibility *ProfileSettingsFriendsListVisibilityEnum `json:"friendsListVisibility,omitempty"`
+	Kind                  *string                                   `json:"kind,omitempty"`
+	ProfileVisible        *bool                                     `json:"profileVisible,omitempty"`
 }

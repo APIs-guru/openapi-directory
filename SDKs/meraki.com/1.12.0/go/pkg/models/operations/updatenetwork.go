@@ -5,11 +5,11 @@ type UpdateNetworkPathParams struct {
 }
 
 type UpdateNetworkRequestBody struct {
-	EnrollmentString *string  `json:"enrollmentString"`
-	Name             *string  `json:"name"`
-	Notes            *string  `json:"notes"`
-	Tags             []string `json:"tags"`
-	TimeZone         *string  `json:"timeZone"`
+	EnrollmentString *string  `json:"enrollmentString,omitempty"`
+	Name             *string  `json:"name,omitempty"`
+	Notes            *string  `json:"notes,omitempty"`
+	Tags             []string `json:"tags,omitempty"`
+	TimeZone         *string  `json:"timeZone,omitempty"`
 }
 
 type UpdateNetworkRequest struct {

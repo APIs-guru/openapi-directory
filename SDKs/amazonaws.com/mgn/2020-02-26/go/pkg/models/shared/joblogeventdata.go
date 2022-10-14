@@ -1,8 +1,8 @@
 package shared
 
 type JobLogEventData struct {
-	ConversionServerID *string `json:"conversionServerID"`
-	RawError           *string `json:"rawError"`
-	SourceServerID     *string `json:"sourceServerID"`
-	TargetInstanceID   *string `json:"targetInstanceID"`
+	ConversionServerID *string `json:"conversionServerID,omitempty"`
+	RawError           *string `json:"rawError,omitempty"`
+	SourceServerID     *string `json:"sourceServerID,omitempty"`
+	TargetInstanceID   *string `json:"targetInstanceID,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ManagedDataIdentifierSummary struct {
-	Category *SensitiveDataItemCategoryEnum `json:"category"`
-	ID       *string                        `json:"id"`
+	Category *SensitiveDataItemCategoryEnum `json:"category,omitempty"`
+	ID       *string                        `json:"id,omitempty"`
 }

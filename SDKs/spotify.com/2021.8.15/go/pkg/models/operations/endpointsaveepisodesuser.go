@@ -14,7 +14,7 @@ type EndpointSaveEpisodesUserHeaders struct {
 }
 
 type EndpointSaveEpisodesUserRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type EndpointSaveEpisodesUserSecurity struct {

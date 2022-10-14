@@ -9,10 +9,10 @@ const (
 )
 
 type Space struct {
-	DisplayName     *string        `json:"displayName"`
-	Name            *string        `json:"name"`
-	SingleUserBotDm *bool          `json:"singleUserBotDm"`
-	SpaceDetails    *SpaceDetails  `json:"spaceDetails"`
-	Threaded        *bool          `json:"threaded"`
-	Type            *SpaceTypeEnum `json:"type"`
+	DisplayName     *string        `json:"displayName,omitempty"`
+	Name            *string        `json:"name,omitempty"`
+	SingleUserBotDm *bool          `json:"singleUserBotDm,omitempty"`
+	SpaceDetails    *SpaceDetails  `json:"spaceDetails,omitempty"`
+	Threaded        *bool          `json:"threaded,omitempty"`
+	Type            *SpaceTypeEnum `json:"type,omitempty"`
 }

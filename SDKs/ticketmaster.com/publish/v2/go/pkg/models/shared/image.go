@@ -9,11 +9,11 @@ const (
 )
 
 type Image struct {
-	Attribution *string         `json:"attribution"`
-	Domains     []string        `json:"domains"`
-	Fallback    *bool           `json:"fallback"`
-	Height      *int32          `json:"height"`
-	Ratio       *ImageRatioEnum `json:"ratio"`
-	URL         *string         `json:"url"`
-	Width       *int32          `json:"width"`
+	Attribution *string         `json:"attribution,omitempty"`
+	Domains     []string        `json:"domains,omitempty"`
+	Fallback    *bool           `json:"fallback,omitempty"`
+	Height      *int32          `json:"height,omitempty"`
+	Ratio       *ImageRatioEnum `json:"ratio,omitempty"`
+	URL         *string         `json:"url,omitempty"`
+	Width       *int32          `json:"width,omitempty"`
 }

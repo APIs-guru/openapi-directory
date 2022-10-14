@@ -44,20 +44,20 @@ const (
 
 type Offer struct {
 	Availability     OfferAvailabilityEnum  `json:"availability"`
-	CustomFields     map[string]interface{} `json:"customFields"`
+	CustomFields     map[string]interface{} `json:"customFields,omitempty"`
 	DeliveryType     OfferDeliveryTypeEnum  `json:"deliveryType"`
-	EndDate          *time.Time             `json:"endDate"`
-	ExclusionRules   []ExclusionRule        `json:"exclusionRules"`
-	ID               *string                `json:"id"`
-	MaxDownloads     *int32                 `json:"maxDownloads"`
-	MaxPlays         *int32                 `json:"maxPlays"`
-	Name             *string                `json:"name"`
+	EndDate          *time.Time             `json:"endDate,omitempty"`
+	ExclusionRules   []ExclusionRule        `json:"exclusionRules,omitempty"`
+	ID               *string                `json:"id,omitempty"`
+	MaxDownloads     *int32                 `json:"maxDownloads,omitempty"`
+	MaxPlays         *int32                 `json:"maxPlays,omitempty"`
+	Name             *string                `json:"name,omitempty"`
 	Ownership        OfferOwnershipEnum     `json:"ownership"`
-	PlayPeriod       *int32                 `json:"playPeriod"`
+	PlayPeriod       *int32                 `json:"playPeriod,omitempty"`
 	Price            float32                `json:"price"`
-	RentalPeriod     *int32                 `json:"rentalPeriod"`
+	RentalPeriod     *int32                 `json:"rentalPeriod,omitempty"`
 	Resolution       OfferResolutionEnum    `json:"resolution"`
 	Scopes           []string               `json:"scopes"`
-	StartDate        *time.Time             `json:"startDate"`
-	SubscriptionCode *string                `json:"subscriptionCode"`
+	StartDate        *time.Time             `json:"startDate,omitempty"`
+	SubscriptionCode *string                `json:"subscriptionCode,omitempty"`
 }

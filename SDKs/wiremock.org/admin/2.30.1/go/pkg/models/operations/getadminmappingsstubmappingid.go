@@ -14,16 +14,16 @@ type GetAdminMappingsStubMappingID200ApplicationJSONRequestBasicAuthCredentials 
 }
 
 type GetAdminMappingsStubMappingID200ApplicationJSONRequest struct {
-	BasicAuthCredentials *GetAdminMappingsStubMappingID200ApplicationJSONRequestBasicAuthCredentials `json:"basicAuthCredentials"`
-	BodyPatterns         []map[string]interface{}                                                    `json:"bodyPatterns"`
-	Cookies              map[string]interface{}                                                      `json:"cookies"`
-	Headers              map[string]interface{}                                                      `json:"headers"`
-	Method               *string                                                                     `json:"method"`
-	QueryParameters      map[string]interface{}                                                      `json:"queryParameters"`
-	URL                  *string                                                                     `json:"url"`
-	URLPath              *string                                                                     `json:"urlPath"`
-	URLPathPattern       *string                                                                     `json:"urlPathPattern"`
-	URLPattern           *string                                                                     `json:"urlPattern"`
+	BasicAuthCredentials *GetAdminMappingsStubMappingID200ApplicationJSONRequestBasicAuthCredentials `json:"basicAuthCredentials,omitempty"`
+	BodyPatterns         []map[string]interface{}                                                    `json:"bodyPatterns,omitempty"`
+	Cookies              map[string]interface{}                                                      `json:"cookies,omitempty"`
+	Headers              map[string]interface{}                                                      `json:"headers,omitempty"`
+	Method               *string                                                                     `json:"method,omitempty"`
+	QueryParameters      map[string]interface{}                                                      `json:"queryParameters,omitempty"`
+	URL                  *string                                                                     `json:"url,omitempty"`
+	URLPath              *string                                                                     `json:"urlPath,omitempty"`
+	URLPathPattern       *string                                                                     `json:"urlPathPattern,omitempty"`
+	URLPattern           *string                                                                     `json:"urlPattern,omitempty"`
 }
 
 type GetAdminMappingsStubMappingID200ApplicationJSONResponseFaultEnum string
@@ -36,35 +36,35 @@ const (
 )
 
 type GetAdminMappingsStubMappingID200ApplicationJSONResponse struct {
-	AdditionalProxyRequestHeaders map[string]interface{}                                            `json:"additionalProxyRequestHeaders"`
-	Base64Body                    *string                                                           `json:"base64Body"`
-	Body                          *string                                                           `json:"body"`
-	BodyFileName                  *string                                                           `json:"bodyFileName"`
-	Fault                         *GetAdminMappingsStubMappingID200ApplicationJSONResponseFaultEnum `json:"fault"`
-	FixedDelayMilliseconds        *int64                                                            `json:"fixedDelayMilliseconds"`
-	FromConfiguredStub            *bool                                                             `json:"fromConfiguredStub"`
-	Headers                       map[string]interface{}                                            `json:"headers"`
-	JSONBody                      map[string]interface{}                                            `json:"jsonBody"`
-	ProxyBaseURL                  *string                                                           `json:"proxyBaseUrl"`
-	Status                        *int64                                                            `json:"status"`
-	StatusMessage                 *string                                                           `json:"statusMessage"`
-	TransformerParameters         map[string]interface{}                                            `json:"transformerParameters"`
-	Transformers                  []string                                                          `json:"transformers"`
+	AdditionalProxyRequestHeaders map[string]interface{}                                            `json:"additionalProxyRequestHeaders,omitempty"`
+	Base64Body                    *string                                                           `json:"base64Body,omitempty"`
+	Body                          *string                                                           `json:"body,omitempty"`
+	BodyFileName                  *string                                                           `json:"bodyFileName,omitempty"`
+	Fault                         *GetAdminMappingsStubMappingID200ApplicationJSONResponseFaultEnum `json:"fault,omitempty"`
+	FixedDelayMilliseconds        *int64                                                            `json:"fixedDelayMilliseconds,omitempty"`
+	FromConfiguredStub            *bool                                                             `json:"fromConfiguredStub,omitempty"`
+	Headers                       map[string]interface{}                                            `json:"headers,omitempty"`
+	JSONBody                      map[string]interface{}                                            `json:"jsonBody,omitempty"`
+	ProxyBaseURL                  *string                                                           `json:"proxyBaseUrl,omitempty"`
+	Status                        *int64                                                            `json:"status,omitempty"`
+	StatusMessage                 *string                                                           `json:"statusMessage,omitempty"`
+	TransformerParameters         map[string]interface{}                                            `json:"transformerParameters,omitempty"`
+	Transformers                  []string                                                          `json:"transformers,omitempty"`
 }
 
 type GetAdminMappingsStubMappingID200ApplicationJSON struct {
-	ID                    *string                                                  `json:"id"`
-	Metadata              map[string]interface{}                                   `json:"metadata"`
-	Name                  *string                                                  `json:"name"`
-	NewScenarioState      *string                                                  `json:"newScenarioState"`
-	Persistent            *bool                                                    `json:"persistent"`
-	PostServeActions      map[string]interface{}                                   `json:"postServeActions"`
-	Priority              *int64                                                   `json:"priority"`
-	Request               *GetAdminMappingsStubMappingID200ApplicationJSONRequest  `json:"request"`
-	RequiredScenarioState *string                                                  `json:"requiredScenarioState"`
-	Response              *GetAdminMappingsStubMappingID200ApplicationJSONResponse `json:"response"`
-	ScenarioName          *string                                                  `json:"scenarioName"`
-	UUID                  *string                                                  `json:"uuid"`
+	ID                    *string                                                  `json:"id,omitempty"`
+	Metadata              map[string]interface{}                                   `json:"metadata,omitempty"`
+	Name                  *string                                                  `json:"name,omitempty"`
+	NewScenarioState      *string                                                  `json:"newScenarioState,omitempty"`
+	Persistent            *bool                                                    `json:"persistent,omitempty"`
+	PostServeActions      map[string]interface{}                                   `json:"postServeActions,omitempty"`
+	Priority              *int64                                                   `json:"priority,omitempty"`
+	Request               *GetAdminMappingsStubMappingID200ApplicationJSONRequest  `json:"request,omitempty"`
+	RequiredScenarioState *string                                                  `json:"requiredScenarioState,omitempty"`
+	Response              *GetAdminMappingsStubMappingID200ApplicationJSONResponse `json:"response,omitempty"`
+	ScenarioName          *string                                                  `json:"scenarioName,omitempty"`
+	UUID                  *string                                                  `json:"uuid,omitempty"`
 }
 
 type GetAdminMappingsStubMappingIDResponse struct {

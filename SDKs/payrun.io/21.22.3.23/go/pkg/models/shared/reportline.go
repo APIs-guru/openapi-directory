@@ -5,13 +5,13 @@ import (
 )
 
 type ReportLineReportLineReportLine struct {
-	Description *string    `json:"Description"`
-	Generated   *time.Time `json:"Generated"`
-	TaxMonth    *int32     `json:"TaxMonth"`
-	TaxYear     *int32     `json:"TaxYear"`
-	Value       *float64   `json:"Value"`
+	Description *string    `json:"Description,omitempty"`
+	Generated   *time.Time `json:"Generated,omitempty"`
+	TaxMonth    *int32     `json:"TaxMonth,omitempty"`
+	TaxYear     *int32     `json:"TaxYear,omitempty"`
+	Value       *float64   `json:"Value,omitempty"`
 }
 
 type ReportLine struct {
-	ReportLine *ReportLineReportLineReportLine `json:"ReportLine"`
+	ReportLine *ReportLineReportLineReportLine `json:"ReportLine,omitempty"`
 }

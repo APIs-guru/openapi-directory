@@ -1,6 +1,6 @@
 package shared
 
 type NotificationConfiguration struct {
-	TopicArn    *string `json:"TopicArn"`
-	TopicStatus *string `json:"TopicStatus"`
+	TopicArn    *string `json:"TopicArn,omitempty"`
+	TopicStatus *string `json:"TopicStatus,omitempty"`
 }

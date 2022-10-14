@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleCloudRecommenderV1ReliabilityProjection struct {
-	Details map[string]interface{}                                   `json:"details"`
-	Risks   []GoogleCloudRecommenderV1ReliabilityProjectionRisksEnum `json:"risks"`
+	Details map[string]interface{}                                   `json:"details,omitempty"`
+	Risks   []GoogleCloudRecommenderV1ReliabilityProjectionRisksEnum `json:"risks,omitempty"`
 }

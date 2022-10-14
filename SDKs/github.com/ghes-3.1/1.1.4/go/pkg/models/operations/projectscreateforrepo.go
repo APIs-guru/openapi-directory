@@ -10,7 +10,7 @@ type ProjectsCreateForRepoPathParams struct {
 }
 
 type ProjectsCreateForRepoRequestBody struct {
-	Body *string `json:"body"`
+	Body *string `json:"body,omitempty"`
 	Name string  `json:"name"`
 }
 

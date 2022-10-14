@@ -24,14 +24,14 @@ type ListBuiltInSlotTypesHeaders struct {
 }
 
 type ListBuiltInSlotTypesRequestBodySortBy struct {
-	Attribute *shared.BuiltInSlotTypeSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum                    `json:"order"`
+	Attribute *shared.BuiltInSlotTypeSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum                    `json:"order,omitempty"`
 }
 
 type ListBuiltInSlotTypesRequestBody struct {
-	MaxResults *int64                                 `json:"maxResults"`
-	NextToken  *string                                `json:"nextToken"`
-	SortBy     *ListBuiltInSlotTypesRequestBodySortBy `json:"sortBy"`
+	MaxResults *int64                                 `json:"maxResults,omitempty"`
+	NextToken  *string                                `json:"nextToken,omitempty"`
+	SortBy     *ListBuiltInSlotTypesRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListBuiltInSlotTypesRequest struct {

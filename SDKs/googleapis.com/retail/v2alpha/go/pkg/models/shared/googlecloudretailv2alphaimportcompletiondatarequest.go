@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudRetailV2alphaImportCompletionDataRequest struct {
-	InputConfig             *GoogleCloudRetailV2alphaCompletionDataInputConfig `json:"inputConfig"`
-	NotificationPubsubTopic *string                                            `json:"notificationPubsubTopic"`
+	InputConfig             *GoogleCloudRetailV2alphaCompletionDataInputConfig `json:"inputConfig,omitempty"`
+	NotificationPubsubTopic *string                                            `json:"notificationPubsubTopic,omitempty"`
 }

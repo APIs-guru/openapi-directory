@@ -7,9 +7,9 @@ type UpdateNetworkWirelessSsidIdentityPskPathParams struct {
 }
 
 type UpdateNetworkWirelessSsidIdentityPskRequestBody struct {
-	GroupPolicyID *string `json:"groupPolicyId"`
-	Name          *string `json:"name"`
-	Passphrase    *string `json:"passphrase"`
+	GroupPolicyID *string `json:"groupPolicyId,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	Passphrase    *string `json:"passphrase,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidIdentityPskRequest struct {

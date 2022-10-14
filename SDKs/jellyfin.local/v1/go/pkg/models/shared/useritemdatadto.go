@@ -5,15 +5,15 @@ import (
 )
 
 type UserItemDataDto struct {
-	IsFavorite            *bool      `json:"IsFavorite"`
-	ItemID                *string    `json:"ItemId"`
-	Key                   *string    `json:"Key"`
-	LastPlayedDate        *time.Time `json:"LastPlayedDate"`
-	Likes                 *bool      `json:"Likes"`
-	PlayCount             *int32     `json:"PlayCount"`
-	PlaybackPositionTicks *int64     `json:"PlaybackPositionTicks"`
-	Played                *bool      `json:"Played"`
-	PlayedPercentage      *float64   `json:"PlayedPercentage"`
-	Rating                *float64   `json:"Rating"`
-	UnplayedItemCount     *int32     `json:"UnplayedItemCount"`
+	IsFavorite            *bool      `json:"IsFavorite,omitempty"`
+	ItemID                *string    `json:"ItemId,omitempty"`
+	Key                   *string    `json:"Key,omitempty"`
+	LastPlayedDate        *time.Time `json:"LastPlayedDate,omitempty"`
+	Likes                 *bool      `json:"Likes,omitempty"`
+	PlayCount             *int32     `json:"PlayCount,omitempty"`
+	PlaybackPositionTicks *int64     `json:"PlaybackPositionTicks,omitempty"`
+	Played                *bool      `json:"Played,omitempty"`
+	PlayedPercentage      *float64   `json:"PlayedPercentage,omitempty"`
+	Rating                *float64   `json:"Rating,omitempty"`
+	UnplayedItemCount     *int32     `json:"UnplayedItemCount,omitempty"`
 }

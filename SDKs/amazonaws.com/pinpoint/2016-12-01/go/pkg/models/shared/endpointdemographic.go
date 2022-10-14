@@ -1,12 +1,12 @@
 package shared
 
 type EndpointDemographic struct {
-	AppVersion      *string `json:"AppVersion"`
-	Locale          *string `json:"Locale"`
-	Make            *string `json:"Make"`
-	Model           *string `json:"Model"`
-	ModelVersion    *string `json:"ModelVersion"`
-	Platform        *string `json:"Platform"`
-	PlatformVersion *string `json:"PlatformVersion"`
-	Timezone        *string `json:"Timezone"`
+	AppVersion      *string `json:"AppVersion,omitempty"`
+	Locale          *string `json:"Locale,omitempty"`
+	Make            *string `json:"Make,omitempty"`
+	Model           *string `json:"Model,omitempty"`
+	ModelVersion    *string `json:"ModelVersion,omitempty"`
+	Platform        *string `json:"Platform,omitempty"`
+	PlatformVersion *string `json:"PlatformVersion,omitempty"`
+	Timezone        *string `json:"Timezone,omitempty"`
 }

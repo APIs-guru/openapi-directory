@@ -1,9 +1,9 @@
 package shared
 
 type S3Location struct {
-	Bucket     *string         `json:"bucket"`
-	BundleType *BundleTypeEnum `json:"bundleType"`
-	ETag       *string         `json:"eTag"`
-	Key        *string         `json:"key"`
-	Version    *string         `json:"version"`
+	Bucket     *string         `json:"bucket,omitempty"`
+	BundleType *BundleTypeEnum `json:"bundleType,omitempty"`
+	ETag       *string         `json:"eTag,omitempty"`
+	Key        *string         `json:"key,omitempty"`
+	Version    *string         `json:"version,omitempty"`
 }

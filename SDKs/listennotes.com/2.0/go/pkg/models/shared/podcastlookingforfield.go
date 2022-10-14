@@ -1,8 +1,8 @@
 package shared
 
 type PodcastLookingForField struct {
-	Cohosts        *bool `json:"cohosts"`
-	CrossPromotion *bool `json:"cross_promotion"`
-	Guests         *bool `json:"guests"`
-	Sponsors       *bool `json:"sponsors"`
+	Cohosts        *bool `json:"cohosts,omitempty"`
+	CrossPromotion *bool `json:"cross_promotion,omitempty"`
+	Guests         *bool `json:"guests,omitempty"`
+	Sponsors       *bool `json:"sponsors,omitempty"`
 }

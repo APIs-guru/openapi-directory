@@ -1,11 +1,11 @@
 package shared
 
 type SaleRepsDto struct {
-	Code      *string `json:"code"`
-	CompanyID *int64  `json:"companyId"`
-	Email     *string `json:"email"`
-	ID        *int64  `json:"id"`
-	Name      *string `json:"name"`
-	Phone     *string `json:"phone"`
-	TimeStamp *string `json:"timeStamp"`
+	Code      *string `json:"code,omitempty"`
+	CompanyID *int64  `json:"companyId,omitempty"`
+	Email     *string `json:"email,omitempty"`
+	ID        *int64  `json:"id,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Phone     *string `json:"phone,omitempty"`
+	TimeStamp *string `json:"timeStamp,omitempty"`
 }

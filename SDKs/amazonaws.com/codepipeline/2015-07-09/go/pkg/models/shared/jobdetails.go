@@ -1,7 +1,7 @@
 package shared
 
 type JobDetails struct {
-	AccountID *string  `json:"accountId"`
-	Data      *JobData `json:"data"`
-	ID        *string  `json:"id"`
+	AccountID *string  `json:"accountId,omitempty"`
+	Data      *JobData `json:"data,omitempty"`
+	ID        *string  `json:"id,omitempty"`
 }

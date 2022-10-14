@@ -1,6 +1,6 @@
 package shared
 
 type Secret struct {
-	CipherText *string `json:"cipherText"`
-	KeyName    *string `json:"keyName"`
+	CipherText *string `json:"cipherText,omitempty"`
+	KeyName    *string `json:"keyName,omitempty"`
 }

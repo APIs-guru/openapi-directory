@@ -5,25 +5,25 @@ import (
 )
 
 type PostCallsRequestBodyOptionsPlayAudio struct {
-	AnnouncementID *string `json:"announcement_id"`
+	AnnouncementID *string `json:"announcement_id,omitempty"`
 }
 
 type PostCallsRequestBodyOptions struct {
-	ALegCallerID *string                                `json:"a_leg_caller_id"`
-	ALegOnly     *int64                                 `json:"a_leg_only"`
-	CancelKey    *int64                                 `json:"cancel_key"`
-	ConnectKey   *int64                                 `json:"connect_key"`
-	PlayAudio    []PostCallsRequestBodyOptionsPlayAudio `json:"play_audio"`
+	ALegCallerID *string                                `json:"a_leg_caller_id,omitempty"`
+	ALegOnly     *int64                                 `json:"a_leg_only,omitempty"`
+	CancelKey    *int64                                 `json:"cancel_key,omitempty"`
+	ConnectKey   *int64                                 `json:"connect_key,omitempty"`
+	PlayAudio    []PostCallsRequestBodyOptionsPlayAudio `json:"play_audio,omitempty"`
 }
 
 type PostCallsRequestBody struct {
-	AnnouncementAt       *string                      `json:"announcement_at"`
-	AnnouncementID       *string                      `json:"announcement_id"`
+	AnnouncementAt       *string                      `json:"announcement_at,omitempty"`
+	AnnouncementID       *string                      `json:"announcement_id,omitempty"`
 	CallerID             string                       `json:"caller_id"`
 	From                 string                       `json:"from"`
-	HangupAnnouncementID *string                      `json:"hangup_announcement_id"`
-	HangupAt             *string                      `json:"hangup_at"`
-	Options              *PostCallsRequestBodyOptions `json:"options"`
+	HangupAnnouncementID *string                      `json:"hangup_announcement_id,omitempty"`
+	HangupAt             *string                      `json:"hangup_at,omitempty"`
+	Options              *PostCallsRequestBodyOptions `json:"options,omitempty"`
 	To                   string                       `json:"to"`
 }
 
@@ -32,8 +32,8 @@ type PostCallsRequest struct {
 }
 
 type PostCalls202ApplicationJSON struct {
-	Call     *string `json:"Call"`
-	Location *string `json:"Location"`
+	Call     *string `json:"Call,omitempty"`
+	Location *string `json:"Location,omitempty"`
 }
 
 type PostCallsResponse struct {

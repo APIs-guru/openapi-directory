@@ -10,13 +10,13 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaOAuth2ResourceOwnerCredentials struct {
-	AccessToken   *GoogleCloudIntegrationsV1alphaAccessToken                                   `json:"accessToken"`
-	ClientID      *string                                                                      `json:"clientId"`
-	ClientSecret  *string                                                                      `json:"clientSecret"`
-	Password      *string                                                                      `json:"password"`
-	RequestType   *GoogleCloudIntegrationsV1alphaOAuth2ResourceOwnerCredentialsRequestTypeEnum `json:"requestType"`
-	Scope         *string                                                                      `json:"scope"`
-	TokenEndpoint *string                                                                      `json:"tokenEndpoint"`
-	TokenParams   *GoogleCloudIntegrationsV1alphaParameterMap                                  `json:"tokenParams"`
-	Username      *string                                                                      `json:"username"`
+	AccessToken   *GoogleCloudIntegrationsV1alphaAccessToken                                   `json:"accessToken,omitempty"`
+	ClientID      *string                                                                      `json:"clientId,omitempty"`
+	ClientSecret  *string                                                                      `json:"clientSecret,omitempty"`
+	Password      *string                                                                      `json:"password,omitempty"`
+	RequestType   *GoogleCloudIntegrationsV1alphaOAuth2ResourceOwnerCredentialsRequestTypeEnum `json:"requestType,omitempty"`
+	Scope         *string                                                                      `json:"scope,omitempty"`
+	TokenEndpoint *string                                                                      `json:"tokenEndpoint,omitempty"`
+	TokenParams   *GoogleCloudIntegrationsV1alphaParameterMap                                  `json:"tokenParams,omitempty"`
+	Username      *string                                                                      `json:"username,omitempty"`
 }

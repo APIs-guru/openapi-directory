@@ -10,12 +10,12 @@ type ReposCreateReleasePathParams struct {
 }
 
 type ReposCreateReleaseRequestBody struct {
-	Body            *string `json:"body"`
-	Draft           *bool   `json:"draft"`
-	Name            *string `json:"name"`
-	Prerelease      *bool   `json:"prerelease"`
+	Body            *string `json:"body,omitempty"`
+	Draft           *bool   `json:"draft,omitempty"`
+	Name            *string `json:"name,omitempty"`
+	Prerelease      *bool   `json:"prerelease,omitempty"`
 	TagName         string  `json:"tag_name"`
-	TargetCommitish *string `json:"target_commitish"`
+	TargetCommitish *string `json:"target_commitish,omitempty"`
 }
 
 type ReposCreateReleaseRequest struct {

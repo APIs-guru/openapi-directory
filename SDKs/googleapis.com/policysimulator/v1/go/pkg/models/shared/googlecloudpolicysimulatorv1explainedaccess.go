@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleCloudPolicysimulatorV1ExplainedAccess struct {
-	AccessState *GoogleCloudPolicysimulatorV1ExplainedAccessAccessStateEnum `json:"accessState"`
-	Errors      []GoogleRPCStatus                                           `json:"errors"`
-	Policies    []GoogleCloudPolicysimulatorV1ExplainedPolicy               `json:"policies"`
+	AccessState *GoogleCloudPolicysimulatorV1ExplainedAccessAccessStateEnum `json:"accessState,omitempty"`
+	Errors      []GoogleRPCStatus                                           `json:"errors,omitempty"`
+	Policies    []GoogleCloudPolicysimulatorV1ExplainedPolicy               `json:"policies,omitempty"`
 }

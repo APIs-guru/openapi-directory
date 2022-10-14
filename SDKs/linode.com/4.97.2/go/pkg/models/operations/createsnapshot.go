@@ -32,7 +32,7 @@ type CreateSnapshotRequest struct {
 }
 
 type CreateSnapshotDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateSnapshotResponse struct {

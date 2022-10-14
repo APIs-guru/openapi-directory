@@ -1,5 +1,5 @@
 package shared
 
 type GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest struct {
-	Customer *string `json:"customer"`
+	Customer *string `json:"customer,omitempty"`
 }

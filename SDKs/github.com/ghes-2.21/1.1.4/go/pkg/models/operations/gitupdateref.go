@@ -11,7 +11,7 @@ type GitUpdateRefPathParams struct {
 }
 
 type GitUpdateRefRequestBody struct {
-	Force *bool  `json:"force"`
+	Force *bool  `json:"force,omitempty"`
 	Sha   string `json:"sha"`
 }
 

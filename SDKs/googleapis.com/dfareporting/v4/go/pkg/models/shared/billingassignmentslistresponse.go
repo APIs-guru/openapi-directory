@@ -1,6 +1,6 @@
 package shared
 
 type BillingAssignmentsListResponse struct {
-	BillingAssignments []BillingAssignment `json:"billingAssignments"`
-	Kind               *string             `json:"kind"`
+	BillingAssignments []BillingAssignment `json:"billingAssignments,omitempty"`
+	Kind               *string             `json:"kind,omitempty"`
 }

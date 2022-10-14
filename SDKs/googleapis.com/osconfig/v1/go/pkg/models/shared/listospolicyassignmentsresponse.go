@@ -1,6 +1,6 @@
 package shared
 
 type ListOsPolicyAssignmentsResponse struct {
-	NextPageToken       *string              `json:"nextPageToken"`
-	OsPolicyAssignments []OsPolicyAssignment `json:"osPolicyAssignments"`
+	NextPageToken       *string              `json:"nextPageToken,omitempty"`
+	OsPolicyAssignments []OsPolicyAssignment `json:"osPolicyAssignments,omitempty"`
 }

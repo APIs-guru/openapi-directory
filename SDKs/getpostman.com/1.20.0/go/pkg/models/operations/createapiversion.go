@@ -5,24 +5,24 @@ type CreateAPIVersionPathParams struct {
 }
 
 type CreateAPIVersionRequestBodyVersionSourceRelations struct {
-	Documentation *bool `json:"documentation"`
-	Mock          *bool `json:"mock"`
-	Monitor       *bool `json:"monitor"`
+	Documentation *bool `json:"documentation,omitempty"`
+	Mock          *bool `json:"mock,omitempty"`
+	Monitor       *bool `json:"monitor,omitempty"`
 }
 
 type CreateAPIVersionRequestBodyVersionSource struct {
-	ID        *string                                            `json:"id"`
-	Relations *CreateAPIVersionRequestBodyVersionSourceRelations `json:"relations"`
-	Schema    *bool                                              `json:"schema"`
+	ID        *string                                            `json:"id,omitempty"`
+	Relations *CreateAPIVersionRequestBodyVersionSourceRelations `json:"relations,omitempty"`
+	Schema    *bool                                              `json:"schema,omitempty"`
 }
 
 type CreateAPIVersionRequestBodyVersion struct {
-	Name   *string                                   `json:"name"`
-	Source *CreateAPIVersionRequestBodyVersionSource `json:"source"`
+	Name   *string                                   `json:"name,omitempty"`
+	Source *CreateAPIVersionRequestBodyVersionSource `json:"source,omitempty"`
 }
 
 type CreateAPIVersionRequestBody struct {
-	Version *CreateAPIVersionRequestBodyVersion `json:"version"`
+	Version *CreateAPIVersionRequestBodyVersion `json:"version,omitempty"`
 }
 
 type CreateAPIVersionRequest struct {
@@ -31,13 +31,13 @@ type CreateAPIVersionRequest struct {
 }
 
 type CreateAPIVersion200ApplicationJSONVersion struct {
-	API  *string `json:"api"`
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
+	API  *string `json:"api,omitempty"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type CreateAPIVersion200ApplicationJSON struct {
-	Version *CreateAPIVersion200ApplicationJSONVersion `json:"version"`
+	Version *CreateAPIVersion200ApplicationJSONVersion `json:"version,omitempty"`
 }
 
 type CreateAPIVersionResponse struct {

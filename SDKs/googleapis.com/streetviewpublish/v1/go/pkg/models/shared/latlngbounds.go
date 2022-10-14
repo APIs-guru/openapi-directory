@@ -1,6 +1,6 @@
 package shared
 
 type LatLngBounds struct {
-	Northeast *LatLng `json:"northeast"`
-	Southwest *LatLng `json:"southwest"`
+	Northeast *LatLng `json:"northeast,omitempty"`
+	Southwest *LatLng `json:"southwest,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type EmbeddedObjectBorderSuggestionState struct {
-	ColorSuggested         *bool `json:"colorSuggested"`
-	DashStyleSuggested     *bool `json:"dashStyleSuggested"`
-	PropertyStateSuggested *bool `json:"propertyStateSuggested"`
-	WidthSuggested         *bool `json:"widthSuggested"`
+	ColorSuggested         *bool `json:"colorSuggested,omitempty"`
+	DashStyleSuggested     *bool `json:"dashStyleSuggested,omitempty"`
+	PropertyStateSuggested *bool `json:"propertyStateSuggested,omitempty"`
+	WidthSuggested         *bool `json:"widthSuggested,omitempty"`
 }

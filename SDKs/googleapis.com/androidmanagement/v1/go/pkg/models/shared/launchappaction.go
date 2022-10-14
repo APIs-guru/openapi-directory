@@ -1,5 +1,5 @@
 package shared
 
 type LaunchAppAction struct {
-	PackageName *string `json:"packageName"`
+	PackageName *string `json:"packageName,omitempty"`
 }

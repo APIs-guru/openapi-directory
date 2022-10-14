@@ -1,6 +1,6 @@
 package shared
 
 type GameSessionDetail struct {
-	GameSession      *GameSession          `json:"GameSession"`
-	ProtectionPolicy *ProtectionPolicyEnum `json:"ProtectionPolicy"`
+	GameSession      *GameSession          `json:"GameSession,omitempty"`
+	ProtectionPolicy *ProtectionPolicyEnum `json:"ProtectionPolicy,omitempty"`
 }

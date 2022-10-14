@@ -1,5 +1,5 @@
 package shared
 
 type DescribeFargateProfileResponse struct {
-	FargateProfile *FargateProfile `json:"fargateProfile"`
+	FargateProfile *FargateProfile `json:"fargateProfile,omitempty"`
 }

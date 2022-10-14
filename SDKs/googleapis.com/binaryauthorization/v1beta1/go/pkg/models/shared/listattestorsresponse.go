@@ -1,6 +1,6 @@
 package shared
 
 type ListAttestorsResponse struct {
-	Attestors     []Attestor `json:"attestors"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Attestors     []Attestor `json:"attestors,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
 }

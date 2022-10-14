@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleCloudApigeeV1NatAddress struct {
-	IPAddress *string                                 `json:"ipAddress"`
-	Name      *string                                 `json:"name"`
-	State     *GoogleCloudApigeeV1NatAddressStateEnum `json:"state"`
+	IPAddress *string                                 `json:"ipAddress,omitempty"`
+	Name      *string                                 `json:"name,omitempty"`
+	State     *GoogleCloudApigeeV1NatAddressStateEnum `json:"state,omitempty"`
 }

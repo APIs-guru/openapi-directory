@@ -1,5 +1,5 @@
 package shared
 
 type DeleteRuleGroupResponse struct {
-	ChangeToken *string `json:"ChangeToken"`
+	ChangeToken *string `json:"ChangeToken,omitempty"`
 }

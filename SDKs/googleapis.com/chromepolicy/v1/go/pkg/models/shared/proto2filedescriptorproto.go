@@ -1,9 +1,9 @@
 package shared
 
 type Proto2FileDescriptorProto struct {
-	EnumType    []Proto2EnumDescriptorProto `json:"enumType"`
-	MessageType []Proto2DescriptorProto     `json:"messageType"`
-	Name        *string                     `json:"name"`
-	Package     *string                     `json:"package"`
-	Syntax      *string                     `json:"syntax"`
+	EnumType    []Proto2EnumDescriptorProto `json:"enumType,omitempty"`
+	MessageType []Proto2DescriptorProto     `json:"messageType,omitempty"`
+	Name        *string                     `json:"name,omitempty"`
+	Package     *string                     `json:"package,omitempty"`
+	Syntax      *string                     `json:"syntax,omitempty"`
 }

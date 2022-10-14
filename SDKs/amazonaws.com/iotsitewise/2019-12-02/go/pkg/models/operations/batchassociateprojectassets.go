@@ -20,7 +20,7 @@ type BatchAssociateProjectAssetsHeaders struct {
 
 type BatchAssociateProjectAssetsRequestBody struct {
 	AssetIds    []string `json:"assetIds"`
-	ClientToken *string  `json:"clientToken"`
+	ClientToken *string  `json:"clientToken,omitempty"`
 }
 
 type BatchAssociateProjectAssetsRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type EntityMentionRelationship struct {
-	Confidence *float64 `json:"confidence"`
-	ObjectID   *string  `json:"objectId"`
-	SubjectID  *string  `json:"subjectId"`
+	Confidence *float64 `json:"confidence,omitempty"`
+	ObjectID   *string  `json:"objectId,omitempty"`
+	SubjectID  *string  `json:"subjectId,omitempty"`
 }

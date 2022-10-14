@@ -15,31 +15,31 @@ type CreateClusterHeaders struct {
 }
 
 type CreateClusterRequestBodyKubernetesNetworkConfig struct {
-	ServiceIpv4Cidr *string `json:"serviceIpv4Cidr"`
+	ServiceIpv4Cidr *string `json:"serviceIpv4Cidr,omitempty"`
 }
 
 type CreateClusterRequestBodyLogging struct {
-	ClusterLogging []shared.LogSetup `json:"clusterLogging"`
+	ClusterLogging []shared.LogSetup `json:"clusterLogging,omitempty"`
 }
 
 type CreateClusterRequestBodyResourcesVpcConfig struct {
-	EndpointPrivateAccess *bool    `json:"endpointPrivateAccess"`
-	EndpointPublicAccess  *bool    `json:"endpointPublicAccess"`
-	PublicAccessCidrs     []string `json:"publicAccessCidrs"`
-	SecurityGroupIds      []string `json:"securityGroupIds"`
-	SubnetIds             []string `json:"subnetIds"`
+	EndpointPrivateAccess *bool    `json:"endpointPrivateAccess,omitempty"`
+	EndpointPublicAccess  *bool    `json:"endpointPublicAccess,omitempty"`
+	PublicAccessCidrs     []string `json:"publicAccessCidrs,omitempty"`
+	SecurityGroupIds      []string `json:"securityGroupIds,omitempty"`
+	SubnetIds             []string `json:"subnetIds,omitempty"`
 }
 
 type CreateClusterRequestBody struct {
-	ClientRequestToken      *string                                          `json:"clientRequestToken"`
-	EncryptionConfig        []shared.EncryptionConfig                        `json:"encryptionConfig"`
-	KubernetesNetworkConfig *CreateClusterRequestBodyKubernetesNetworkConfig `json:"kubernetesNetworkConfig"`
-	Logging                 *CreateClusterRequestBodyLogging                 `json:"logging"`
+	ClientRequestToken      *string                                          `json:"clientRequestToken,omitempty"`
+	EncryptionConfig        []shared.EncryptionConfig                        `json:"encryptionConfig,omitempty"`
+	KubernetesNetworkConfig *CreateClusterRequestBodyKubernetesNetworkConfig `json:"kubernetesNetworkConfig,omitempty"`
+	Logging                 *CreateClusterRequestBodyLogging                 `json:"logging,omitempty"`
 	Name                    string                                           `json:"name"`
 	ResourcesVpcConfig      CreateClusterRequestBodyResourcesVpcConfig       `json:"resourcesVpcConfig"`
 	RoleArn                 string                                           `json:"roleArn"`
-	Tags                    map[string]string                                `json:"tags"`
-	Version                 *string                                          `json:"version"`
+	Tags                    map[string]string                                `json:"tags,omitempty"`
+	Version                 *string                                          `json:"version,omitempty"`
 }
 
 type CreateClusterRequest struct {

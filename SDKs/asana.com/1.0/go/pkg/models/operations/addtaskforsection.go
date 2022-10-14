@@ -14,7 +14,7 @@ type AddTaskForSectionQueryParams struct {
 }
 
 type AddTaskForSectionRequestBody struct {
-	Data *shared.SectionTaskInsertRequest `json:"data"`
+	Data *shared.SectionTaskInsertRequest `json:"data,omitempty"`
 }
 
 type AddTaskForSectionRequest struct {
@@ -24,7 +24,7 @@ type AddTaskForSectionRequest struct {
 }
 
 type AddTaskForSection200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddTaskForSectionResponse struct {

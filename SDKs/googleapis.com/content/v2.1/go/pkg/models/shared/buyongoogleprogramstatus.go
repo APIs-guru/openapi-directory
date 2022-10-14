@@ -33,13 +33,13 @@ const (
 )
 
 type BuyOnGoogleProgramStatus struct {
-	BusinessModel                          []BuyOnGoogleProgramStatusBusinessModelEnum     `json:"businessModel"`
-	CustomerServicePendingEmail            *string                                         `json:"customerServicePendingEmail"`
-	CustomerServicePendingPhoneNumber      *string                                         `json:"customerServicePendingPhoneNumber"`
-	CustomerServicePendingPhoneRegionCode  *string                                         `json:"customerServicePendingPhoneRegionCode"`
-	CustomerServiceVerifiedEmail           *string                                         `json:"customerServiceVerifiedEmail"`
-	CustomerServiceVerifiedPhoneNumber     *string                                         `json:"customerServiceVerifiedPhoneNumber"`
-	CustomerServiceVerifiedPhoneRegionCode *string                                         `json:"customerServiceVerifiedPhoneRegionCode"`
-	OnlineSalesChannel                     *BuyOnGoogleProgramStatusOnlineSalesChannelEnum `json:"onlineSalesChannel"`
-	ParticipationStage                     *BuyOnGoogleProgramStatusParticipationStageEnum `json:"participationStage"`
+	BusinessModel                          []BuyOnGoogleProgramStatusBusinessModelEnum     `json:"businessModel,omitempty"`
+	CustomerServicePendingEmail            *string                                         `json:"customerServicePendingEmail,omitempty"`
+	CustomerServicePendingPhoneNumber      *string                                         `json:"customerServicePendingPhoneNumber,omitempty"`
+	CustomerServicePendingPhoneRegionCode  *string                                         `json:"customerServicePendingPhoneRegionCode,omitempty"`
+	CustomerServiceVerifiedEmail           *string                                         `json:"customerServiceVerifiedEmail,omitempty"`
+	CustomerServiceVerifiedPhoneNumber     *string                                         `json:"customerServiceVerifiedPhoneNumber,omitempty"`
+	CustomerServiceVerifiedPhoneRegionCode *string                                         `json:"customerServiceVerifiedPhoneRegionCode,omitempty"`
+	OnlineSalesChannel                     *BuyOnGoogleProgramStatusOnlineSalesChannelEnum `json:"onlineSalesChannel,omitempty"`
+	ParticipationStage                     *BuyOnGoogleProgramStatusParticipationStageEnum `json:"participationStage,omitempty"`
 }

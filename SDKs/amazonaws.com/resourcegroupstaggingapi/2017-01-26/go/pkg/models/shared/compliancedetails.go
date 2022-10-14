@@ -1,7 +1,7 @@
 package shared
 
 type ComplianceDetails struct {
-	ComplianceStatus           *bool    `json:"ComplianceStatus"`
-	KeysWithNoncompliantValues []string `json:"KeysWithNoncompliantValues"`
-	NoncompliantKeys           []string `json:"NoncompliantKeys"`
+	ComplianceStatus           *bool    `json:"ComplianceStatus,omitempty"`
+	KeysWithNoncompliantValues []string `json:"KeysWithNoncompliantValues,omitempty"`
+	NoncompliantKeys           []string `json:"NoncompliantKeys,omitempty"`
 }

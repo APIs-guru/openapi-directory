@@ -20,20 +20,20 @@ type UpdateJourneyHeaders struct {
 }
 
 type UpdateJourneyRequestBodyWriteJourneyRequest struct {
-	Activities             map[string]shared.Activity `json:"Activities"`
-	CreationDate           *string                    `json:"CreationDate"`
-	LastModifiedDate       *string                    `json:"LastModifiedDate"`
-	Limits                 *shared.JourneyLimits      `json:"Limits"`
-	LocalTime              *bool                      `json:"LocalTime"`
-	Name                   *string                    `json:"Name"`
-	QuietTime              *shared.QuietTime          `json:"QuietTime"`
-	RefreshFrequency       *string                    `json:"RefreshFrequency"`
-	RefreshOnSegmentUpdate *bool                      `json:"RefreshOnSegmentUpdate"`
-	Schedule               *shared.JourneySchedule    `json:"Schedule"`
-	StartActivity          *string                    `json:"StartActivity"`
-	StartCondition         *shared.StartCondition     `json:"StartCondition"`
-	State                  *shared.StateEnum          `json:"State"`
-	WaitForQuietTime       *bool                      `json:"WaitForQuietTime"`
+	Activities             map[string]shared.Activity `json:"Activities,omitempty"`
+	CreationDate           *string                    `json:"CreationDate,omitempty"`
+	LastModifiedDate       *string                    `json:"LastModifiedDate,omitempty"`
+	Limits                 *shared.JourneyLimits      `json:"Limits,omitempty"`
+	LocalTime              *bool                      `json:"LocalTime,omitempty"`
+	Name                   *string                    `json:"Name,omitempty"`
+	QuietTime              *shared.QuietTime          `json:"QuietTime,omitempty"`
+	RefreshFrequency       *string                    `json:"RefreshFrequency,omitempty"`
+	RefreshOnSegmentUpdate *bool                      `json:"RefreshOnSegmentUpdate,omitempty"`
+	Schedule               *shared.JourneySchedule    `json:"Schedule,omitempty"`
+	StartActivity          *string                    `json:"StartActivity,omitempty"`
+	StartCondition         *shared.StartCondition     `json:"StartCondition,omitempty"`
+	State                  *shared.StateEnum          `json:"State,omitempty"`
+	WaitForQuietTime       *bool                      `json:"WaitForQuietTime,omitempty"`
 }
 
 type UpdateJourneyRequestBody struct {

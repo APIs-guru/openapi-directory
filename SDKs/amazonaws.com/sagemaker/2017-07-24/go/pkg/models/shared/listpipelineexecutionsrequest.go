@@ -5,11 +5,11 @@ import (
 )
 
 type ListPipelineExecutionsRequest struct {
-	CreatedAfter  *time.Time                    `json:"CreatedAfter"`
-	CreatedBefore *time.Time                    `json:"CreatedBefore"`
-	MaxResults    *int64                        `json:"MaxResults"`
-	NextToken     *string                       `json:"NextToken"`
+	CreatedAfter  *time.Time                    `json:"CreatedAfter,omitempty"`
+	CreatedBefore *time.Time                    `json:"CreatedBefore,omitempty"`
+	MaxResults    *int64                        `json:"MaxResults,omitempty"`
+	NextToken     *string                       `json:"NextToken,omitempty"`
 	PipelineName  string                        `json:"PipelineName"`
-	SortBy        *SortPipelineExecutionsByEnum `json:"SortBy"`
-	SortOrder     *SortOrderEnum                `json:"SortOrder"`
+	SortBy        *SortPipelineExecutionsByEnum `json:"SortBy,omitempty"`
+	SortOrder     *SortOrderEnum                `json:"SortOrder,omitempty"`
 }

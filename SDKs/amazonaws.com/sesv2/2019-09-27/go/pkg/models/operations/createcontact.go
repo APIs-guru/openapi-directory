@@ -19,10 +19,10 @@ type CreateContactHeaders struct {
 }
 
 type CreateContactRequestBody struct {
-	AttributesData   *string                  `json:"AttributesData"`
+	AttributesData   *string                  `json:"AttributesData,omitempty"`
 	EmailAddress     string                   `json:"EmailAddress"`
-	TopicPreferences []shared.TopicPreference `json:"TopicPreferences"`
-	UnsubscribeAll   *bool                    `json:"UnsubscribeAll"`
+	TopicPreferences []shared.TopicPreference `json:"TopicPreferences,omitempty"`
+	UnsubscribeAll   *bool                    `json:"UnsubscribeAll,omitempty"`
 }
 
 type CreateContactRequest struct {

@@ -1,8 +1,8 @@
 package shared
 
 type CloudStorageFile struct {
-	BucketName *string `json:"bucketName"`
-	Md5Hash    *string `json:"md5Hash"`
-	ObjectName *string `json:"objectName"`
-	Size       *string `json:"size"`
+	BucketName *string `json:"bucketName,omitempty"`
+	Md5Hash    *string `json:"md5Hash,omitempty"`
+	ObjectName *string `json:"objectName,omitempty"`
+	Size       *string `json:"size,omitempty"`
 }

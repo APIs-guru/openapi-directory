@@ -1,15 +1,15 @@
 package shared
 
 type Node struct {
-	BuildVersion          *string                `json:"buildVersion"`
-	ClientFeatures        []string               `json:"clientFeatures"`
-	Cluster               *string                `json:"cluster"`
-	Extensions            []Extension            `json:"extensions"`
-	ID                    *string                `json:"id"`
-	ListeningAddresses    []Address              `json:"listeningAddresses"`
-	Locality              *Locality              `json:"locality"`
-	Metadata              map[string]interface{} `json:"metadata"`
-	UserAgentBuildVersion *BuildVersion          `json:"userAgentBuildVersion"`
-	UserAgentName         *string                `json:"userAgentName"`
-	UserAgentVersion      *string                `json:"userAgentVersion"`
+	BuildVersion          *string                `json:"buildVersion,omitempty"`
+	ClientFeatures        []string               `json:"clientFeatures,omitempty"`
+	Cluster               *string                `json:"cluster,omitempty"`
+	Extensions            []Extension            `json:"extensions,omitempty"`
+	ID                    *string                `json:"id,omitempty"`
+	ListeningAddresses    []Address              `json:"listeningAddresses,omitempty"`
+	Locality              *Locality              `json:"locality,omitempty"`
+	Metadata              map[string]interface{} `json:"metadata,omitempty"`
+	UserAgentBuildVersion *BuildVersion          `json:"userAgentBuildVersion,omitempty"`
+	UserAgentName         *string                `json:"userAgentName,omitempty"`
+	UserAgentVersion      *string                `json:"userAgentVersion,omitempty"`
 }

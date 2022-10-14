@@ -12,9 +12,9 @@ const (
 )
 
 type FileUpdateInput struct {
-	Access            *FileUpdateInputAccessEnum `json:"access"`
-	IsUsableInContent *bool                      `json:"isUsableInContent"`
-	Name              *string                    `json:"name"`
-	ParentFolderID    *string                    `json:"parentFolderId"`
-	ParentFolderPath  *string                    `json:"parentFolderPath"`
+	Access            *FileUpdateInputAccessEnum `json:"access,omitempty"`
+	IsUsableInContent *bool                      `json:"isUsableInContent,omitempty"`
+	Name              *string                    `json:"name,omitempty"`
+	ParentFolderID    *string                    `json:"parentFolderId,omitempty"`
+	ParentFolderPath  *string                    `json:"parentFolderPath,omitempty"`
 }

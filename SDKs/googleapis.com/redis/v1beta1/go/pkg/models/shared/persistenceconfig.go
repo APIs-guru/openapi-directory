@@ -19,8 +19,8 @@ const (
 )
 
 type PersistenceConfig struct {
-	PersistenceMode      *PersistenceConfigPersistenceModeEnum   `json:"persistenceMode"`
-	RdbNextSnapshotTime  *string                                 `json:"rdbNextSnapshotTime"`
-	RdbSnapshotPeriod    *PersistenceConfigRdbSnapshotPeriodEnum `json:"rdbSnapshotPeriod"`
-	RdbSnapshotStartTime *string                                 `json:"rdbSnapshotStartTime"`
+	PersistenceMode      *PersistenceConfigPersistenceModeEnum   `json:"persistenceMode,omitempty"`
+	RdbNextSnapshotTime  *string                                 `json:"rdbNextSnapshotTime,omitempty"`
+	RdbSnapshotPeriod    *PersistenceConfigRdbSnapshotPeriodEnum `json:"rdbSnapshotPeriod,omitempty"`
+	RdbSnapshotStartTime *string                                 `json:"rdbSnapshotStartTime,omitempty"`
 }

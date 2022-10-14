@@ -13,26 +13,26 @@ type ImagesRequest struct {
 }
 
 type Images200ApplicationJSONImageResultsImage struct {
-	Alt *string `json:"alt"`
-	Src *string `json:"src"`
+	Alt *string `json:"alt,omitempty"`
+	Src *string `json:"src,omitempty"`
 }
 
 type Images200ApplicationJSONImageResultsLink struct {
-	Domain *string `json:"domain"`
-	Href   *string `json:"href"`
-	Title  *string `json:"title"`
+	Domain *string `json:"domain,omitempty"`
+	Href   *string `json:"href,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }
 
 type Images200ApplicationJSONImageResults struct {
-	Image *Images200ApplicationJSONImageResultsImage `json:"image"`
-	Link  *Images200ApplicationJSONImageResultsLink  `json:"link"`
+	Image *Images200ApplicationJSONImageResultsImage `json:"image,omitempty"`
+	Link  *Images200ApplicationJSONImageResultsLink  `json:"link,omitempty"`
 }
 
 type Images200ApplicationJSON struct {
-	Answers      []string                               `json:"answers"`
-	ImageResults []Images200ApplicationJSONImageResults `json:"image_results"`
-	Results      []map[string]interface{}               `json:"results"`
-	Total        *int64                                 `json:"total"`
+	Answers      []string                               `json:"answers,omitempty"`
+	ImageResults []Images200ApplicationJSONImageResults `json:"image_results,omitempty"`
+	Results      []map[string]interface{}               `json:"results,omitempty"`
+	Total        *int64                                 `json:"total,omitempty"`
 }
 
 type ImagesResponse struct {

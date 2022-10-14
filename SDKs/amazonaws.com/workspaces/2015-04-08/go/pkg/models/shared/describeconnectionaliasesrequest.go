@@ -1,8 +1,8 @@
 package shared
 
 type DescribeConnectionAliasesRequest struct {
-	AliasIds   []string `json:"AliasIds"`
-	Limit      *int64   `json:"Limit"`
-	NextToken  *string  `json:"NextToken"`
-	ResourceID *string  `json:"ResourceId"`
+	AliasIds   []string `json:"AliasIds,omitempty"`
+	Limit      *int64   `json:"Limit,omitempty"`
+	NextToken  *string  `json:"NextToken,omitempty"`
+	ResourceID *string  `json:"ResourceId,omitempty"`
 }

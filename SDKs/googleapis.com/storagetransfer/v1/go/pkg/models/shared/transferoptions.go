@@ -10,9 +10,9 @@ const (
 )
 
 type TransferOptions struct {
-	DeleteObjectsFromSourceAfterTransfer  *bool                             `json:"deleteObjectsFromSourceAfterTransfer"`
-	DeleteObjectsUniqueInSink             *bool                             `json:"deleteObjectsUniqueInSink"`
-	MetadataOptions                       *MetadataOptions                  `json:"metadataOptions"`
-	OverwriteObjectsAlreadyExistingInSink *bool                             `json:"overwriteObjectsAlreadyExistingInSink"`
-	OverwriteWhen                         *TransferOptionsOverwriteWhenEnum `json:"overwriteWhen"`
+	DeleteObjectsFromSourceAfterTransfer  *bool                             `json:"deleteObjectsFromSourceAfterTransfer,omitempty"`
+	DeleteObjectsUniqueInSink             *bool                             `json:"deleteObjectsUniqueInSink,omitempty"`
+	MetadataOptions                       *MetadataOptions                  `json:"metadataOptions,omitempty"`
+	OverwriteObjectsAlreadyExistingInSink *bool                             `json:"overwriteObjectsAlreadyExistingInSink,omitempty"`
+	OverwriteWhen                         *TransferOptionsOverwriteWhenEnum `json:"overwriteWhen,omitempty"`
 }

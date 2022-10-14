@@ -1,9 +1,9 @@
 package shared
 
 type ListAnswersOutput struct {
-	AnswerSummaries []AnswerSummary `json:"AnswerSummaries"`
-	LensAlias       *string         `json:"LensAlias"`
-	MilestoneNumber *int64          `json:"MilestoneNumber"`
-	NextToken       *string         `json:"NextToken"`
-	WorkloadID      *string         `json:"WorkloadId"`
+	AnswerSummaries []AnswerSummary `json:"AnswerSummaries,omitempty"`
+	LensAlias       *string         `json:"LensAlias,omitempty"`
+	MilestoneNumber *int64          `json:"MilestoneNumber,omitempty"`
+	NextToken       *string         `json:"NextToken,omitempty"`
+	WorkloadID      *string         `json:"WorkloadId,omitempty"`
 }

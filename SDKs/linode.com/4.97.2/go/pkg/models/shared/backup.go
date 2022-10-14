@@ -5,9 +5,9 @@ import (
 )
 
 type BackupDisks struct {
-	Filesystem *FilesystemEnum `json:"filesystem"`
-	Label      *string         `json:"label"`
-	Size       *int64          `json:"size"`
+	Filesystem *FilesystemEnum `json:"filesystem,omitempty"`
+	Label      *string         `json:"label,omitempty"`
+	Size       *int64          `json:"size,omitempty"`
 }
 
 type BackupStatusEnum string
@@ -30,13 +30,13 @@ const (
 )
 
 type Backup struct {
-	Configs  []string          `json:"configs"`
-	Created  *time.Time        `json:"created"`
-	Disks    []BackupDisks     `json:"disks"`
-	Finished *time.Time        `json:"finished"`
-	ID       *int64            `json:"id"`
-	Label    *string           `json:"label"`
-	Status   *BackupStatusEnum `json:"status"`
-	Type     *BackupTypeEnum   `json:"type"`
-	Updated  *time.Time        `json:"updated"`
+	Configs  []string          `json:"configs,omitempty"`
+	Created  *time.Time        `json:"created,omitempty"`
+	Disks    []BackupDisks     `json:"disks,omitempty"`
+	Finished *time.Time        `json:"finished,omitempty"`
+	ID       *int64            `json:"id,omitempty"`
+	Label    *string           `json:"label,omitempty"`
+	Status   *BackupStatusEnum `json:"status,omitempty"`
+	Type     *BackupTypeEnum   `json:"type,omitempty"`
+	Updated  *time.Time        `json:"updated,omitempty"`
 }

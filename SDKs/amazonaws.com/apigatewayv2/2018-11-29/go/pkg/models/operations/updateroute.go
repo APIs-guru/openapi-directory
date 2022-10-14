@@ -29,17 +29,17 @@ const (
 )
 
 type UpdateRouteRequestBody struct {
-	APIKeyRequired                   *bool                                        `json:"apiKeyRequired"`
-	AuthorizationScopes              []string                                     `json:"authorizationScopes"`
-	AuthorizationType                *UpdateRouteRequestBodyAuthorizationTypeEnum `json:"authorizationType"`
-	AuthorizerID                     *string                                      `json:"authorizerId"`
-	ModelSelectionExpression         *string                                      `json:"modelSelectionExpression"`
-	OperationName                    *string                                      `json:"operationName"`
-	RequestModels                    map[string]string                            `json:"requestModels"`
-	RequestParameters                map[string]shared.ParameterConstraints       `json:"requestParameters"`
-	RouteKey                         *string                                      `json:"routeKey"`
-	RouteResponseSelectionExpression *string                                      `json:"routeResponseSelectionExpression"`
-	Target                           *string                                      `json:"target"`
+	APIKeyRequired                   *bool                                        `json:"apiKeyRequired,omitempty"`
+	AuthorizationScopes              []string                                     `json:"authorizationScopes,omitempty"`
+	AuthorizationType                *UpdateRouteRequestBodyAuthorizationTypeEnum `json:"authorizationType,omitempty"`
+	AuthorizerID                     *string                                      `json:"authorizerId,omitempty"`
+	ModelSelectionExpression         *string                                      `json:"modelSelectionExpression,omitempty"`
+	OperationName                    *string                                      `json:"operationName,omitempty"`
+	RequestModels                    map[string]string                            `json:"requestModels,omitempty"`
+	RequestParameters                map[string]shared.ParameterConstraints       `json:"requestParameters,omitempty"`
+	RouteKey                         *string                                      `json:"routeKey,omitempty"`
+	RouteResponseSelectionExpression *string                                      `json:"routeResponseSelectionExpression,omitempty"`
+	Target                           *string                                      `json:"target,omitempty"`
 }
 
 type UpdateRouteRequest struct {

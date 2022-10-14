@@ -10,7 +10,7 @@ const (
 )
 
 type ReplicaInfo struct {
-	DefaultLeaderLocation *bool                `json:"defaultLeaderLocation"`
-	Location              *string              `json:"location"`
-	Type                  *ReplicaInfoTypeEnum `json:"type"`
+	DefaultLeaderLocation *bool                `json:"defaultLeaderLocation,omitempty"`
+	Location              *string              `json:"location,omitempty"`
+	Type                  *ReplicaInfoTypeEnum `json:"type,omitempty"`
 }

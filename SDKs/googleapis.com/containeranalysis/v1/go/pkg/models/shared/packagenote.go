@@ -9,15 +9,15 @@ const (
 )
 
 type PackageNote struct {
-	Architecture *PackageNoteArchitectureEnum `json:"architecture"`
-	CpeURI       *string                      `json:"cpeUri"`
-	Description  *string                      `json:"description"`
-	Digest       []Digest                     `json:"digest"`
-	Distribution []Distribution               `json:"distribution"`
-	License      *License                     `json:"license"`
-	Maintainer   *string                      `json:"maintainer"`
-	Name         *string                      `json:"name"`
-	PackageType  *string                      `json:"packageType"`
-	URL          *string                      `json:"url"`
-	Version      *Version                     `json:"version"`
+	Architecture *PackageNoteArchitectureEnum `json:"architecture,omitempty"`
+	CpeURI       *string                      `json:"cpeUri,omitempty"`
+	Description  *string                      `json:"description,omitempty"`
+	Digest       []Digest                     `json:"digest,omitempty"`
+	Distribution []Distribution               `json:"distribution,omitempty"`
+	License      *License                     `json:"license,omitempty"`
+	Maintainer   *string                      `json:"maintainer,omitempty"`
+	Name         *string                      `json:"name,omitempty"`
+	PackageType  *string                      `json:"packageType,omitempty"`
+	URL          *string                      `json:"url,omitempty"`
+	Version      *Version                     `json:"version,omitempty"`
 }

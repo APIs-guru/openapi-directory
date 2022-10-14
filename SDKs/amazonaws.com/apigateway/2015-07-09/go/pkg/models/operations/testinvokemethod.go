@@ -21,12 +21,12 @@ type TestInvokeMethodHeaders struct {
 }
 
 type TestInvokeMethodRequestBody struct {
-	Body                *string             `json:"body"`
-	ClientCertificateID *string             `json:"clientCertificateId"`
-	Headers             map[string]string   `json:"headers"`
-	MultiValueHeaders   map[string][]string `json:"multiValueHeaders"`
-	PathWithQueryString *string             `json:"pathWithQueryString"`
-	StageVariables      map[string]string   `json:"stageVariables"`
+	Body                *string             `json:"body,omitempty"`
+	ClientCertificateID *string             `json:"clientCertificateId,omitempty"`
+	Headers             map[string]string   `json:"headers,omitempty"`
+	MultiValueHeaders   map[string][]string `json:"multiValueHeaders,omitempty"`
+	PathWithQueryString *string             `json:"pathWithQueryString,omitempty"`
+	StageVariables      map[string]string   `json:"stageVariables,omitempty"`
 }
 
 type TestInvokeMethodRequest struct {

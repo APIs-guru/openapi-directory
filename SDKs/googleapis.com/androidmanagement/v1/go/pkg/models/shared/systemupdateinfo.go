@@ -11,6 +11,6 @@ const (
 )
 
 type SystemUpdateInfo struct {
-	UpdateReceivedTime *string                           `json:"updateReceivedTime"`
-	UpdateStatus       *SystemUpdateInfoUpdateStatusEnum `json:"updateStatus"`
+	UpdateReceivedTime *string                           `json:"updateReceivedTime,omitempty"`
+	UpdateStatus       *SystemUpdateInfoUpdateStatusEnum `json:"updateStatus,omitempty"`
 }

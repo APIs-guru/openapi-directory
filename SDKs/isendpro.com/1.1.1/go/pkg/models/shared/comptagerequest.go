@@ -115,15 +115,15 @@ const (
 
 type ComptageRequest struct {
 	Comptage  ComptageRequestComptageEnum `json:"comptage"`
-	DateEnvoi *string                     `json:"date_envoi"`
-	Emetteur  *string                     `json:"emetteur"`
-	GmtZone   *ComptageRequestGmtZoneEnum `json:"gmt_zone"`
+	DateEnvoi *string                     `json:"date_envoi,omitempty"`
+	Emetteur  *string                     `json:"emetteur,omitempty"`
+	GmtZone   *ComptageRequestGmtZoneEnum `json:"gmt_zone,omitempty"`
 	Keyid     string                      `json:"keyid"`
-	Nostop    *string                     `json:"nostop"`
+	Nostop    *string                     `json:"nostop,omitempty"`
 	Num       string                      `json:"num"`
-	NumAzur   *ComptageRequestNumAzurEnum `json:"numAzur"`
+	NumAzur   *ComptageRequestNumAzurEnum `json:"numAzur,omitempty"`
 	Sms       string                      `json:"sms"`
-	Smslong   *ComptageRequestSmslongEnum `json:"smslong"`
-	Tracker   *string                     `json:"tracker"`
-	Ucs2      *string                     `json:"ucs2"`
+	Smslong   *ComptageRequestSmslongEnum `json:"smslong,omitempty"`
+	Tracker   *string                     `json:"tracker,omitempty"`
+	Ucs2      *string                     `json:"ucs2,omitempty"`
 }

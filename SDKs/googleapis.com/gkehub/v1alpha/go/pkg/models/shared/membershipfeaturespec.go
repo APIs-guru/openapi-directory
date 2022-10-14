@@ -1,12 +1,12 @@
 package shared
 
 type MembershipFeatureSpec struct {
-	Anthosobservability *AnthosObservabilityMembershipSpec `json:"anthosobservability"`
-	Anthosvm            *AnthosVMMembershipSpec            `json:"anthosvm"`
-	Cloudbuild          *CloudBuildMembershipSpec          `json:"cloudbuild"`
-	Configmanagement    *ConfigManagementMembershipSpec    `json:"configmanagement"`
-	Identityservice     *IdentityServiceMembershipSpec     `json:"identityservice"`
-	Mesh                *ServiceMeshMembershipSpec         `json:"mesh"`
-	Policycontroller    *PolicyControllerMembershipSpec    `json:"policycontroller"`
-	Workloadcertificate *MembershipSpec                    `json:"workloadcertificate"`
+	Anthosobservability *AnthosObservabilityMembershipSpec `json:"anthosobservability,omitempty"`
+	Anthosvm            *AnthosVMMembershipSpec            `json:"anthosvm,omitempty"`
+	Cloudbuild          *CloudBuildMembershipSpec          `json:"cloudbuild,omitempty"`
+	Configmanagement    *ConfigManagementMembershipSpec    `json:"configmanagement,omitempty"`
+	Identityservice     *IdentityServiceMembershipSpec     `json:"identityservice,omitempty"`
+	Mesh                *ServiceMeshMembershipSpec         `json:"mesh,omitempty"`
+	Policycontroller    *PolicyControllerMembershipSpec    `json:"policycontroller,omitempty"`
+	Workloadcertificate *MembershipSpec                    `json:"workloadcertificate,omitempty"`
 }

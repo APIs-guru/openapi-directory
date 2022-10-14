@@ -1,6 +1,6 @@
 package shared
 
 type DescribeSharedDirectoriesResult struct {
-	NextToken         *string           `json:"NextToken"`
-	SharedDirectories []SharedDirectory `json:"SharedDirectories"`
+	NextToken         *string           `json:"NextToken,omitempty"`
+	SharedDirectories []SharedDirectory `json:"SharedDirectories,omitempty"`
 }

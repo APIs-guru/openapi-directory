@@ -1,14 +1,14 @@
 package shared
 
 type OrderTrackingSignal struct {
-	CustomerShippingFee     *PriceAmount                                 `json:"customerShippingFee"`
-	DeliveryPostalCode      *string                                      `json:"deliveryPostalCode"`
-	DeliveryRegionCode      *string                                      `json:"deliveryRegionCode"`
-	LineItems               []OrderTrackingSignalLineItemDetails         `json:"lineItems"`
-	MerchantID              *string                                      `json:"merchantId"`
-	OrderCreatedTime        *DateTime                                    `json:"orderCreatedTime"`
-	OrderID                 *string                                      `json:"orderId"`
-	OrderTrackingSignalID   *string                                      `json:"orderTrackingSignalId"`
-	ShipmentLineItemMapping []OrderTrackingSignalShipmentLineItemMapping `json:"shipmentLineItemMapping"`
-	ShippingInfo            []OrderTrackingSignalShippingInfo            `json:"shippingInfo"`
+	CustomerShippingFee     *PriceAmount                                 `json:"customerShippingFee,omitempty"`
+	DeliveryPostalCode      *string                                      `json:"deliveryPostalCode,omitempty"`
+	DeliveryRegionCode      *string                                      `json:"deliveryRegionCode,omitempty"`
+	LineItems               []OrderTrackingSignalLineItemDetails         `json:"lineItems,omitempty"`
+	MerchantID              *string                                      `json:"merchantId,omitempty"`
+	OrderCreatedTime        *DateTime                                    `json:"orderCreatedTime,omitempty"`
+	OrderID                 *string                                      `json:"orderId,omitempty"`
+	OrderTrackingSignalID   *string                                      `json:"orderTrackingSignalId,omitempty"`
+	ShipmentLineItemMapping []OrderTrackingSignalShipmentLineItemMapping `json:"shipmentLineItemMapping,omitempty"`
+	ShippingInfo            []OrderTrackingSignalShippingInfo            `json:"shippingInfo,omitempty"`
 }

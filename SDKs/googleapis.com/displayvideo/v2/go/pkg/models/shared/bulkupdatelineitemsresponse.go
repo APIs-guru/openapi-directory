@@ -1,8 +1,8 @@
 package shared
 
 type BulkUpdateLineItemsResponse struct {
-	Errors             []Status `json:"errors"`
-	FailedLineItemIds  []string `json:"failedLineItemIds"`
-	SkippedLineItemIds []string `json:"skippedLineItemIds"`
-	UpdatedLineItemIds []string `json:"updatedLineItemIds"`
+	Errors             []Status `json:"errors,omitempty"`
+	FailedLineItemIds  []string `json:"failedLineItemIds,omitempty"`
+	SkippedLineItemIds []string `json:"skippedLineItemIds,omitempty"`
+	UpdatedLineItemIds []string `json:"updatedLineItemIds,omitempty"`
 }

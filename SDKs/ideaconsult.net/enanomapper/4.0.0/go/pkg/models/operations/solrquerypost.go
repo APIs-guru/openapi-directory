@@ -16,13 +16,13 @@ type SolrqueryPostQueryParams struct {
 }
 
 type SolrqueryPostRequestBodyParams struct {
-	Fl   []string `json:"fl"`
-	Rows *int64   `json:"rows"`
+	Fl   []string `json:"fl,omitempty"`
+	Rows *int64   `json:"rows,omitempty"`
 }
 
 type SolrqueryPostRequestBody struct {
-	Facet  map[string]interface{}          `json:"facet"`
-	Params *SolrqueryPostRequestBodyParams `json:"params"`
+	Facet  map[string]interface{}          `json:"facet,omitempty"`
+	Params *SolrqueryPostRequestBodyParams `json:"params,omitempty"`
 }
 
 type SolrqueryPostRequest struct {

@@ -9,12 +9,12 @@ const (
 )
 
 type BaselineValueFormat struct {
-	ComparisonType     *BaselineValueFormatComparisonTypeEnum `json:"comparisonType"`
-	Description        *string                                `json:"description"`
-	NegativeColor      *Color                                 `json:"negativeColor"`
-	NegativeColorStyle *ColorStyle                            `json:"negativeColorStyle"`
-	Position           *TextPosition                          `json:"position"`
-	PositiveColor      *Color                                 `json:"positiveColor"`
-	PositiveColorStyle *ColorStyle                            `json:"positiveColorStyle"`
-	TextFormat         *TextFormat                            `json:"textFormat"`
+	ComparisonType     *BaselineValueFormatComparisonTypeEnum `json:"comparisonType,omitempty"`
+	Description        *string                                `json:"description,omitempty"`
+	NegativeColor      *Color                                 `json:"negativeColor,omitempty"`
+	NegativeColorStyle *ColorStyle                            `json:"negativeColorStyle,omitempty"`
+	Position           *TextPosition                          `json:"position,omitempty"`
+	PositiveColor      *Color                                 `json:"positiveColor,omitempty"`
+	PositiveColorStyle *ColorStyle                            `json:"positiveColorStyle,omitempty"`
+	TextFormat         *TextFormat                            `json:"textFormat,omitempty"`
 }

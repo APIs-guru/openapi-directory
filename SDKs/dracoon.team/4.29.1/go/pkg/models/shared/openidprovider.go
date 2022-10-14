@@ -6,5 +6,5 @@ type OpenIDProvider struct {
 	Issuer            string  `json:"issuer"`
 	MappingClaim      string  `json:"mappingClaim"`
 	Name              string  `json:"name"`
-	UserManagementURL *string `json:"userManagementUrl"`
+	UserManagementURL *string `json:"userManagementUrl,omitempty"`
 }

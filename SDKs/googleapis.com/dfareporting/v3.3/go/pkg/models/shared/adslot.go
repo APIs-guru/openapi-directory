@@ -19,12 +19,12 @@ const (
 )
 
 type AdSlot struct {
-	Comment           *string                      `json:"comment"`
-	Compatibility     *AdSlotCompatibilityEnum     `json:"compatibility"`
-	Height            *string                      `json:"height"`
-	LinkedPlacementID *string                      `json:"linkedPlacementId"`
-	Name              *string                      `json:"name"`
-	PaymentSourceType *AdSlotPaymentSourceTypeEnum `json:"paymentSourceType"`
-	Primary           *bool                        `json:"primary"`
-	Width             *string                      `json:"width"`
+	Comment           *string                      `json:"comment,omitempty"`
+	Compatibility     *AdSlotCompatibilityEnum     `json:"compatibility,omitempty"`
+	Height            *string                      `json:"height,omitempty"`
+	LinkedPlacementID *string                      `json:"linkedPlacementId,omitempty"`
+	Name              *string                      `json:"name,omitempty"`
+	PaymentSourceType *AdSlotPaymentSourceTypeEnum `json:"paymentSourceType,omitempty"`
+	Primary           *bool                        `json:"primary,omitempty"`
+	Width             *string                      `json:"width,omitempty"`
 }

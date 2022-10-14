@@ -1,5 +1,5 @@
 package shared
 
 type BatchGetOnPremisesInstancesOutput struct {
-	InstanceInfos []InstanceInfo `json:"instanceInfos"`
+	InstanceInfos []InstanceInfo `json:"instanceInfos,omitempty"`
 }

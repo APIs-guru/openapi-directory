@@ -1,6 +1,6 @@
 package shared
 
 type ListCommandInvocationsResult struct {
-	CommandInvocations []CommandInvocation `json:"CommandInvocations"`
-	NextToken          *string             `json:"NextToken"`
+	CommandInvocations []CommandInvocation `json:"CommandInvocations,omitempty"`
+	NextToken          *string             `json:"NextToken,omitempty"`
 }

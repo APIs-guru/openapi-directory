@@ -1,7 +1,7 @@
 package shared
 
 type Stage struct {
-	Profiles []string  `json:"profiles"`
-	Strategy *Strategy `json:"strategy"`
-	TargetID *string   `json:"targetId"`
+	Profiles []string  `json:"profiles,omitempty"`
+	Strategy *Strategy `json:"strategy,omitempty"`
+	TargetID *string   `json:"targetId,omitempty"`
 }

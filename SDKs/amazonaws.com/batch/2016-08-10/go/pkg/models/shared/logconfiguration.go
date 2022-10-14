@@ -2,6 +2,6 @@ package shared
 
 type LogConfiguration struct {
 	LogDriver     LogDriverEnum     `json:"logDriver"`
-	Options       map[string]string `json:"options"`
-	SecretOptions []Secret          `json:"secretOptions"`
+	Options       map[string]string `json:"options,omitempty"`
+	SecretOptions []Secret          `json:"secretOptions,omitempty"`
 }

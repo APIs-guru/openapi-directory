@@ -9,12 +9,12 @@ const (
 )
 
 type PostgreSQLConnectionProfile struct {
-	CloudSQLID          *string                                             `json:"cloudSqlId"`
-	Host                *string                                             `json:"host"`
-	NetworkArchitecture *PostgreSQLConnectionProfileNetworkArchitectureEnum `json:"networkArchitecture"`
-	Password            *string                                             `json:"password"`
-	PasswordSet         *bool                                               `json:"passwordSet"`
-	Port                *int32                                              `json:"port"`
-	Ssl                 *SslConfig                                          `json:"ssl"`
-	Username            *string                                             `json:"username"`
+	CloudSQLID          *string                                             `json:"cloudSqlId,omitempty"`
+	Host                *string                                             `json:"host,omitempty"`
+	NetworkArchitecture *PostgreSQLConnectionProfileNetworkArchitectureEnum `json:"networkArchitecture,omitempty"`
+	Password            *string                                             `json:"password,omitempty"`
+	PasswordSet         *bool                                               `json:"passwordSet,omitempty"`
+	Port                *int32                                              `json:"port,omitempty"`
+	Ssl                 *SslConfig                                          `json:"ssl,omitempty"`
+	Username            *string                                             `json:"username,omitempty"`
 }

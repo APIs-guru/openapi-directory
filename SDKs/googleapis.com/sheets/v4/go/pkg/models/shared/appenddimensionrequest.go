@@ -9,7 +9,7 @@ const (
 )
 
 type AppendDimensionRequest struct {
-	Dimension *AppendDimensionRequestDimensionEnum `json:"dimension"`
-	Length    *int32                               `json:"length"`
-	SheetID   *int32                               `json:"sheetId"`
+	Dimension *AppendDimensionRequestDimensionEnum `json:"dimension,omitempty"`
+	Length    *int32                               `json:"length,omitempty"`
+	SheetID   *int32                               `json:"sheetId,omitempty"`
 }

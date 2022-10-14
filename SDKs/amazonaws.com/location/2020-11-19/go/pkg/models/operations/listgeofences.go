@@ -23,7 +23,7 @@ type ListGeofencesHeaders struct {
 }
 
 type ListGeofencesRequestBody struct {
-	NextToken *string `json:"NextToken"`
+	NextToken *string `json:"NextToken,omitempty"`
 }
 
 type ListGeofencesRequest struct {

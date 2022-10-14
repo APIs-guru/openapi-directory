@@ -1,11 +1,11 @@
 package shared
 
 type DirectConnectGatewayAttachment struct {
-	AttachmentState              *DirectConnectGatewayAttachmentStateEnum `json:"attachmentState"`
-	AttachmentType               *DirectConnectGatewayAttachmentTypeEnum  `json:"attachmentType"`
-	DirectConnectGatewayID       *string                                  `json:"directConnectGatewayId"`
-	StateChangeError             *string                                  `json:"stateChangeError"`
-	VirtualInterfaceID           *string                                  `json:"virtualInterfaceId"`
-	VirtualInterfaceOwnerAccount *string                                  `json:"virtualInterfaceOwnerAccount"`
-	VirtualInterfaceRegion       *string                                  `json:"virtualInterfaceRegion"`
+	AttachmentState              *DirectConnectGatewayAttachmentStateEnum `json:"attachmentState,omitempty"`
+	AttachmentType               *DirectConnectGatewayAttachmentTypeEnum  `json:"attachmentType,omitempty"`
+	DirectConnectGatewayID       *string                                  `json:"directConnectGatewayId,omitempty"`
+	StateChangeError             *string                                  `json:"stateChangeError,omitempty"`
+	VirtualInterfaceID           *string                                  `json:"virtualInterfaceId,omitempty"`
+	VirtualInterfaceOwnerAccount *string                                  `json:"virtualInterfaceOwnerAccount,omitempty"`
+	VirtualInterfaceRegion       *string                                  `json:"virtualInterfaceRegion,omitempty"`
 }

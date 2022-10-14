@@ -1,7 +1,7 @@
 package shared
 
 type RunAggregationQueryResponse struct {
-	ReadTime    *string            `json:"readTime"`
-	Result      *AggregationResult `json:"result"`
-	Transaction *string            `json:"transaction"`
+	ReadTime    *string            `json:"readTime,omitempty"`
+	Result      *AggregationResult `json:"result,omitempty"`
+	Transaction *string            `json:"transaction,omitempty"`
 }

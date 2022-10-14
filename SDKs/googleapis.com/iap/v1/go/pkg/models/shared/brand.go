@@ -1,8 +1,8 @@
 package shared
 
 type Brand struct {
-	ApplicationTitle *string `json:"applicationTitle"`
-	Name             *string `json:"name"`
-	OrgInternalOnly  *bool   `json:"orgInternalOnly"`
-	SupportEmail     *string `json:"supportEmail"`
+	ApplicationTitle *string `json:"applicationTitle,omitempty"`
+	Name             *string `json:"name,omitempty"`
+	OrgInternalOnly  *bool   `json:"orgInternalOnly,omitempty"`
+	SupportEmail     *string `json:"supportEmail,omitempty"`
 }

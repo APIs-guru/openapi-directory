@@ -21,9 +21,9 @@ const (
 )
 
 type SetV2LoggingOptionsRequestBody struct {
-	DefaultLogLevel *SetV2LoggingOptionsRequestBodyDefaultLogLevelEnum `json:"defaultLogLevel"`
-	DisableAllLogs  *bool                                              `json:"disableAllLogs"`
-	RoleArn         *string                                            `json:"roleArn"`
+	DefaultLogLevel *SetV2LoggingOptionsRequestBodyDefaultLogLevelEnum `json:"defaultLogLevel,omitempty"`
+	DisableAllLogs  *bool                                              `json:"disableAllLogs,omitempty"`
+	RoleArn         *string                                            `json:"roleArn,omitempty"`
 }
 
 type SetV2LoggingOptionsRequest struct {

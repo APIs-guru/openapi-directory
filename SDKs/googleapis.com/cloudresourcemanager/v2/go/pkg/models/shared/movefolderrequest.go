@@ -1,5 +1,5 @@
 package shared
 
 type MoveFolderRequest struct {
-	DestinationParent *string `json:"destinationParent"`
+	DestinationParent *string `json:"destinationParent,omitempty"`
 }

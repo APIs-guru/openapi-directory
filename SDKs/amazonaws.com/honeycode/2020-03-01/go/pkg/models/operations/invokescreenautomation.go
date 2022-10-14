@@ -22,9 +22,9 @@ type InvokeScreenAutomationHeaders struct {
 }
 
 type InvokeScreenAutomationRequestBody struct {
-	ClientRequestToken *string                         `json:"clientRequestToken"`
-	RowID              *string                         `json:"rowId"`
-	Variables          map[string]shared.VariableValue `json:"variables"`
+	ClientRequestToken *string                         `json:"clientRequestToken,omitempty"`
+	RowID              *string                         `json:"rowId,omitempty"`
+	Variables          map[string]shared.VariableValue `json:"variables,omitempty"`
 }
 
 type InvokeScreenAutomationRequest struct {

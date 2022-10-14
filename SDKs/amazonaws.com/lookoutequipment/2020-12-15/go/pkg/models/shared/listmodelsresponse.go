@@ -1,6 +1,6 @@
 package shared
 
 type ListModelsResponse struct {
-	ModelSummaries []ModelSummary `json:"ModelSummaries"`
-	NextToken      *string        `json:"NextToken"`
+	ModelSummaries []ModelSummary `json:"ModelSummaries,omitempty"`
+	NextToken      *string        `json:"NextToken,omitempty"`
 }

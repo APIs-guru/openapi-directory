@@ -5,19 +5,19 @@ type UpdateNetworkApplianceVpnBgpPathParams struct {
 }
 
 type UpdateNetworkApplianceVpnBgpRequestBodyNeighbors struct {
-	AllowTransit   *bool  `json:"allowTransit"`
+	AllowTransit   *bool  `json:"allowTransit,omitempty"`
 	EbgpHoldTimer  int64  `json:"ebgpHoldTimer"`
 	EbgpMultihop   int64  `json:"ebgpMultihop"`
 	IP             string `json:"ip"`
-	ReceiveLimit   *int64 `json:"receiveLimit"`
+	ReceiveLimit   *int64 `json:"receiveLimit,omitempty"`
 	RemoteAsNumber int64  `json:"remoteAsNumber"`
 }
 
 type UpdateNetworkApplianceVpnBgpRequestBody struct {
-	AsNumber      *int64                                             `json:"asNumber"`
+	AsNumber      *int64                                             `json:"asNumber,omitempty"`
 	Enabled       bool                                               `json:"enabled"`
-	IbgpHoldTimer *int64                                             `json:"ibgpHoldTimer"`
-	Neighbors     []UpdateNetworkApplianceVpnBgpRequestBodyNeighbors `json:"neighbors"`
+	IbgpHoldTimer *int64                                             `json:"ibgpHoldTimer,omitempty"`
+	Neighbors     []UpdateNetworkApplianceVpnBgpRequestBodyNeighbors `json:"neighbors,omitempty"`
 }
 
 type UpdateNetworkApplianceVpnBgpRequest struct {

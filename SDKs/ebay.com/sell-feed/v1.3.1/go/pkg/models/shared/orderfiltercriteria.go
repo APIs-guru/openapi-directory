@@ -1,7 +1,7 @@
 package shared
 
 type OrderFilterCriteria struct {
-	CreationDateRange *DateRange `json:"creationDateRange"`
-	ModifiedDateRange *DateRange `json:"modifiedDateRange"`
-	OrderStatus       *string    `json:"orderStatus"`
+	CreationDateRange *DateRange `json:"creationDateRange,omitempty"`
+	ModifiedDateRange *DateRange `json:"modifiedDateRange,omitempty"`
+	OrderStatus       *string    `json:"orderStatus,omitempty"`
 }

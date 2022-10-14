@@ -20,8 +20,8 @@ type GetTraceSummariesHeaders struct {
 }
 
 type GetTraceSummariesRequestBodySamplingStrategy struct {
-	Name  *shared.SamplingStrategyNameEnum `json:"Name"`
-	Value *float64                         `json:"Value"`
+	Name  *shared.SamplingStrategyNameEnum `json:"Name,omitempty"`
+	Value *float64                         `json:"Value,omitempty"`
 }
 
 type GetTraceSummariesRequestBodyTimeRangeTypeEnum string
@@ -33,12 +33,12 @@ const (
 
 type GetTraceSummariesRequestBody struct {
 	EndTime          time.Time                                      `json:"EndTime"`
-	FilterExpression *string                                        `json:"FilterExpression"`
-	NextToken        *string                                        `json:"NextToken"`
-	Sampling         *bool                                          `json:"Sampling"`
-	SamplingStrategy *GetTraceSummariesRequestBodySamplingStrategy  `json:"SamplingStrategy"`
+	FilterExpression *string                                        `json:"FilterExpression,omitempty"`
+	NextToken        *string                                        `json:"NextToken,omitempty"`
+	Sampling         *bool                                          `json:"Sampling,omitempty"`
+	SamplingStrategy *GetTraceSummariesRequestBodySamplingStrategy  `json:"SamplingStrategy,omitempty"`
 	StartTime        time.Time                                      `json:"StartTime"`
-	TimeRangeType    *GetTraceSummariesRequestBodyTimeRangeTypeEnum `json:"TimeRangeType"`
+	TimeRangeType    *GetTraceSummariesRequestBodyTimeRangeTypeEnum `json:"TimeRangeType,omitempty"`
 }
 
 type GetTraceSummariesRequest struct {

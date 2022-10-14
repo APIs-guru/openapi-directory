@@ -26,9 +26,9 @@ type GetVehiclesRequest struct {
 }
 
 type GetVehicles200ApplicationJSON struct {
-	Message *string       `json:"message"`
-	Ok      *bool         `json:"ok"`
-	Result  []interface{} `json:"result"`
+	Message *string       `json:"message,omitempty"`
+	Ok      *bool         `json:"ok,omitempty"`
+	Result  []interface{} `json:"result,omitempty"`
 }
 
 type GetVehiclesResponse struct {

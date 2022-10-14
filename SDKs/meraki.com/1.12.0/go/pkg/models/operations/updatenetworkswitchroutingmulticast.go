@@ -5,21 +5,21 @@ type UpdateNetworkSwitchRoutingMulticastPathParams struct {
 }
 
 type UpdateNetworkSwitchRoutingMulticastRequestBodyDefaultSettings struct {
-	FloodUnknownMulticastTrafficEnabled *bool `json:"floodUnknownMulticastTrafficEnabled"`
-	IgmpSnoopingEnabled                 *bool `json:"igmpSnoopingEnabled"`
+	FloodUnknownMulticastTrafficEnabled *bool `json:"floodUnknownMulticastTrafficEnabled,omitempty"`
+	IgmpSnoopingEnabled                 *bool `json:"igmpSnoopingEnabled,omitempty"`
 }
 
 type UpdateNetworkSwitchRoutingMulticastRequestBodyOverrides struct {
 	FloodUnknownMulticastTrafficEnabled bool     `json:"floodUnknownMulticastTrafficEnabled"`
 	IgmpSnoopingEnabled                 bool     `json:"igmpSnoopingEnabled"`
-	Stacks                              []string `json:"stacks"`
-	SwitchProfiles                      []string `json:"switchProfiles"`
-	Switches                            []string `json:"switches"`
+	Stacks                              []string `json:"stacks,omitempty"`
+	SwitchProfiles                      []string `json:"switchProfiles,omitempty"`
+	Switches                            []string `json:"switches,omitempty"`
 }
 
 type UpdateNetworkSwitchRoutingMulticastRequestBody struct {
-	DefaultSettings *UpdateNetworkSwitchRoutingMulticastRequestBodyDefaultSettings `json:"defaultSettings"`
-	Overrides       []UpdateNetworkSwitchRoutingMulticastRequestBodyOverrides      `json:"overrides"`
+	DefaultSettings *UpdateNetworkSwitchRoutingMulticastRequestBodyDefaultSettings `json:"defaultSettings,omitempty"`
+	Overrides       []UpdateNetworkSwitchRoutingMulticastRequestBodyOverrides      `json:"overrides,omitempty"`
 }
 
 type UpdateNetworkSwitchRoutingMulticastRequest struct {

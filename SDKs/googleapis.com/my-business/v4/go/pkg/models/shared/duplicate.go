@@ -10,7 +10,7 @@ const (
 )
 
 type Duplicate struct {
-	Access       *DuplicateAccessEnum `json:"access"`
-	LocationName *string              `json:"locationName"`
-	PlaceID      *string              `json:"placeId"`
+	Access       *DuplicateAccessEnum `json:"access,omitempty"`
+	LocationName *string              `json:"locationName,omitempty"`
+	PlaceID      *string              `json:"placeId,omitempty"`
 }

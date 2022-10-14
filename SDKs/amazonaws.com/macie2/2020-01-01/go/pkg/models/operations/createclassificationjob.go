@@ -31,30 +31,30 @@ const (
 )
 
 type CreateClassificationJobRequestBodyS3JobDefinition struct {
-	BucketCriteria    *shared.S3BucketCriteriaForJob    `json:"bucketCriteria"`
-	BucketDefinitions []shared.S3BucketDefinitionForJob `json:"bucketDefinitions"`
-	Scoping           *shared.Scoping                   `json:"scoping"`
+	BucketCriteria    *shared.S3BucketCriteriaForJob    `json:"bucketCriteria,omitempty"`
+	BucketDefinitions []shared.S3BucketDefinitionForJob `json:"bucketDefinitions,omitempty"`
+	Scoping           *shared.Scoping                   `json:"scoping,omitempty"`
 }
 
 type CreateClassificationJobRequestBodyScheduleFrequency struct {
-	DailySchedule   map[string]interface{}  `json:"dailySchedule"`
-	MonthlySchedule *shared.MonthlySchedule `json:"monthlySchedule"`
-	WeeklySchedule  *shared.WeeklySchedule  `json:"weeklySchedule"`
+	DailySchedule   map[string]interface{}  `json:"dailySchedule,omitempty"`
+	MonthlySchedule *shared.MonthlySchedule `json:"monthlySchedule,omitempty"`
+	WeeklySchedule  *shared.WeeklySchedule  `json:"weeklySchedule,omitempty"`
 }
 
 type CreateClassificationJobRequestBody struct {
 	ClientToken                   string                                                               `json:"clientToken"`
-	CustomDataIdentifierIds       []string                                                             `json:"customDataIdentifierIds"`
-	Description                   *string                                                              `json:"description"`
-	InitialRun                    *bool                                                                `json:"initialRun"`
+	CustomDataIdentifierIds       []string                                                             `json:"customDataIdentifierIds,omitempty"`
+	Description                   *string                                                              `json:"description,omitempty"`
+	InitialRun                    *bool                                                                `json:"initialRun,omitempty"`
 	JobType                       CreateClassificationJobRequestBodyJobTypeEnum                        `json:"jobType"`
-	ManagedDataIdentifierIds      []string                                                             `json:"managedDataIdentifierIds"`
-	ManagedDataIdentifierSelector *CreateClassificationJobRequestBodyManagedDataIdentifierSelectorEnum `json:"managedDataIdentifierSelector"`
+	ManagedDataIdentifierIds      []string                                                             `json:"managedDataIdentifierIds,omitempty"`
+	ManagedDataIdentifierSelector *CreateClassificationJobRequestBodyManagedDataIdentifierSelectorEnum `json:"managedDataIdentifierSelector,omitempty"`
 	Name                          string                                                               `json:"name"`
 	S3JobDefinition               CreateClassificationJobRequestBodyS3JobDefinition                    `json:"s3JobDefinition"`
-	SamplingPercentage            *int64                                                               `json:"samplingPercentage"`
-	ScheduleFrequency             *CreateClassificationJobRequestBodyScheduleFrequency                 `json:"scheduleFrequency"`
-	Tags                          map[string]string                                                    `json:"tags"`
+	SamplingPercentage            *int64                                                               `json:"samplingPercentage,omitempty"`
+	ScheduleFrequency             *CreateClassificationJobRequestBodyScheduleFrequency                 `json:"scheduleFrequency,omitempty"`
+	Tags                          map[string]string                                                    `json:"tags,omitempty"`
 }
 
 type CreateClassificationJobRequest struct {

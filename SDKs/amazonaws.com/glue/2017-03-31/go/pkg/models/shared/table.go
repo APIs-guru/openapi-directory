@@ -5,23 +5,23 @@ import (
 )
 
 type Table struct {
-	CatalogID                     *string            `json:"CatalogId"`
-	CreateTime                    *time.Time         `json:"CreateTime"`
-	CreatedBy                     *string            `json:"CreatedBy"`
-	DatabaseName                  *string            `json:"DatabaseName"`
-	Description                   *string            `json:"Description"`
-	IsRegisteredWithLakeFormation *bool              `json:"IsRegisteredWithLakeFormation"`
-	LastAccessTime                *time.Time         `json:"LastAccessTime"`
-	LastAnalyzedTime              *time.Time         `json:"LastAnalyzedTime"`
+	CatalogID                     *string            `json:"CatalogId,omitempty"`
+	CreateTime                    *time.Time         `json:"CreateTime,omitempty"`
+	CreatedBy                     *string            `json:"CreatedBy,omitempty"`
+	DatabaseName                  *string            `json:"DatabaseName,omitempty"`
+	Description                   *string            `json:"Description,omitempty"`
+	IsRegisteredWithLakeFormation *bool              `json:"IsRegisteredWithLakeFormation,omitempty"`
+	LastAccessTime                *time.Time         `json:"LastAccessTime,omitempty"`
+	LastAnalyzedTime              *time.Time         `json:"LastAnalyzedTime,omitempty"`
 	Name                          string             `json:"Name"`
-	Owner                         *string            `json:"Owner"`
-	Parameters                    map[string]string  `json:"Parameters"`
-	PartitionKeys                 []Column           `json:"PartitionKeys"`
-	Retention                     *int64             `json:"Retention"`
-	StorageDescriptor             *StorageDescriptor `json:"StorageDescriptor"`
-	TableType                     *string            `json:"TableType"`
-	TargetTable                   *TableIdentifier   `json:"TargetTable"`
-	UpdateTime                    *time.Time         `json:"UpdateTime"`
-	ViewExpandedText              *string            `json:"ViewExpandedText"`
-	ViewOriginalText              *string            `json:"ViewOriginalText"`
+	Owner                         *string            `json:"Owner,omitempty"`
+	Parameters                    map[string]string  `json:"Parameters,omitempty"`
+	PartitionKeys                 []Column           `json:"PartitionKeys,omitempty"`
+	Retention                     *int64             `json:"Retention,omitempty"`
+	StorageDescriptor             *StorageDescriptor `json:"StorageDescriptor,omitempty"`
+	TableType                     *string            `json:"TableType,omitempty"`
+	TargetTable                   *TableIdentifier   `json:"TargetTable,omitempty"`
+	UpdateTime                    *time.Time         `json:"UpdateTime,omitempty"`
+	ViewExpandedText              *string            `json:"ViewExpandedText,omitempty"`
+	ViewOriginalText              *string            `json:"ViewOriginalText,omitempty"`
 }

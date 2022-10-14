@@ -21,19 +21,19 @@ const (
 )
 
 type UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRules struct {
-	Comment       *string                                                                    `json:"comment"`
+	Comment       *string                                                                    `json:"comment,omitempty"`
 	DestCidr      string                                                                     `json:"destCidr"`
-	DestPort      *string                                                                    `json:"destPort"`
+	DestPort      *string                                                                    `json:"destPort,omitempty"`
 	Policy        UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRulesPolicyEnum   `json:"policy"`
 	Protocol      UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRulesProtocolEnum `json:"protocol"`
 	SrcCidr       string                                                                     `json:"srcCidr"`
-	SrcPort       *string                                                                    `json:"srcPort"`
-	SyslogEnabled *bool                                                                      `json:"syslogEnabled"`
+	SrcPort       *string                                                                    `json:"srcPort,omitempty"`
+	SyslogEnabled *bool                                                                      `json:"syslogEnabled,omitempty"`
 }
 
 type UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBody struct {
-	Rules             []UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRules `json:"rules"`
-	SyslogDefaultRule *bool                                                            `json:"syslogDefaultRule"`
+	Rules             []UpdateOrganizationApplianceVpnVpnFirewallRulesRequestBodyRules `json:"rules,omitempty"`
+	SyslogDefaultRule *bool                                                            `json:"syslogDefaultRule,omitempty"`
 }
 
 type UpdateOrganizationApplianceVpnVpnFirewallRulesRequest struct {

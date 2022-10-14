@@ -1,14 +1,14 @@
 package shared
 
 type CreateQualificationTypeRequest struct {
-	AnswerKey               *string                     `json:"AnswerKey"`
-	AutoGranted             *bool                       `json:"AutoGranted"`
-	AutoGrantedValue        *int64                      `json:"AutoGrantedValue"`
+	AnswerKey               *string                     `json:"AnswerKey,omitempty"`
+	AutoGranted             *bool                       `json:"AutoGranted,omitempty"`
+	AutoGrantedValue        *int64                      `json:"AutoGrantedValue,omitempty"`
 	Description             string                      `json:"Description"`
-	Keywords                *string                     `json:"Keywords"`
+	Keywords                *string                     `json:"Keywords,omitempty"`
 	Name                    string                      `json:"Name"`
 	QualificationTypeStatus QualificationTypeStatusEnum `json:"QualificationTypeStatus"`
-	RetryDelayInSeconds     *int64                      `json:"RetryDelayInSeconds"`
-	Test                    *string                     `json:"Test"`
-	TestDurationInSeconds   *int64                      `json:"TestDurationInSeconds"`
+	RetryDelayInSeconds     *int64                      `json:"RetryDelayInSeconds,omitempty"`
+	Test                    *string                     `json:"Test,omitempty"`
+	TestDurationInSeconds   *int64                      `json:"TestDurationInSeconds,omitempty"`
 }

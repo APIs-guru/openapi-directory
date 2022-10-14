@@ -2,7 +2,7 @@ package shared
 
 type DescribeFleetLocationAttributesInput struct {
 	FleetID   string   `json:"FleetId"`
-	Limit     *int64   `json:"Limit"`
-	Locations []string `json:"Locations"`
-	NextToken *string  `json:"NextToken"`
+	Limit     *int64   `json:"Limit,omitempty"`
+	Locations []string `json:"Locations,omitempty"`
+	NextToken *string  `json:"NextToken,omitempty"`
 }

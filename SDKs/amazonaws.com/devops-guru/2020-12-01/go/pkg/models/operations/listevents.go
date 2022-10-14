@@ -20,18 +20,18 @@ type ListEventsHeaders struct {
 }
 
 type ListEventsRequestBodyFilters struct {
-	DataSource         *shared.EventDataSourceEnum `json:"DataSource"`
-	EventClass         *shared.EventClassEnum      `json:"EventClass"`
-	EventSource        *string                     `json:"EventSource"`
-	EventTimeRange     *shared.EventTimeRange      `json:"EventTimeRange"`
-	InsightID          *string                     `json:"InsightId"`
-	ResourceCollection *shared.ResourceCollection  `json:"ResourceCollection"`
+	DataSource         *shared.EventDataSourceEnum `json:"DataSource,omitempty"`
+	EventClass         *shared.EventClassEnum      `json:"EventClass,omitempty"`
+	EventSource        *string                     `json:"EventSource,omitempty"`
+	EventTimeRange     *shared.EventTimeRange      `json:"EventTimeRange,omitempty"`
+	InsightID          *string                     `json:"InsightId,omitempty"`
+	ResourceCollection *shared.ResourceCollection  `json:"ResourceCollection,omitempty"`
 }
 
 type ListEventsRequestBody struct {
 	Filters    ListEventsRequestBodyFilters `json:"Filters"`
-	MaxResults *int64                       `json:"MaxResults"`
-	NextToken  *string                      `json:"NextToken"`
+	MaxResults *int64                       `json:"MaxResults,omitempty"`
+	NextToken  *string                      `json:"NextToken,omitempty"`
 }
 
 type ListEventsRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type TieringPolicy struct {
-	CoolingPeriod *int64                 `json:"CoolingPeriod"`
-	Name          *TieringPolicyNameEnum `json:"Name"`
+	CoolingPeriod *int64                 `json:"CoolingPeriod,omitempty"`
+	Name          *TieringPolicyNameEnum `json:"Name,omitempty"`
 }

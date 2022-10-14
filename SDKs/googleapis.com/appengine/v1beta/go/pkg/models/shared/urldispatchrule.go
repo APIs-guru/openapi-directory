@@ -1,7 +1,7 @@
 package shared
 
 type URLDispatchRule struct {
-	Domain  *string `json:"domain"`
-	Path    *string `json:"path"`
-	Service *string `json:"service"`
+	Domain  *string `json:"domain,omitempty"`
+	Path    *string `json:"path,omitempty"`
+	Service *string `json:"service,omitempty"`
 }

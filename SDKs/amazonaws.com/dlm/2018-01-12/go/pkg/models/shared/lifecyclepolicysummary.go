@@ -1,9 +1,9 @@
 package shared
 
 type LifecyclePolicySummary struct {
-	Description *string                        `json:"Description"`
-	PolicyID    *string                        `json:"PolicyId"`
-	PolicyType  *PolicyTypeValuesEnum          `json:"PolicyType"`
-	State       *GettablePolicyStateValuesEnum `json:"State"`
-	Tags        map[string]string              `json:"Tags"`
+	Description *string                        `json:"Description,omitempty"`
+	PolicyID    *string                        `json:"PolicyId,omitempty"`
+	PolicyType  *PolicyTypeValuesEnum          `json:"PolicyType,omitempty"`
+	State       *GettablePolicyStateValuesEnum `json:"State,omitempty"`
+	Tags        map[string]string              `json:"Tags,omitempty"`
 }

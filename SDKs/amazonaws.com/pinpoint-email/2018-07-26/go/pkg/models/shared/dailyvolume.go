@@ -5,7 +5,7 @@ import (
 )
 
 type DailyVolume struct {
-	DomainIspPlacements []DomainIspPlacement `json:"DomainIspPlacements"`
-	StartDate           *time.Time           `json:"StartDate"`
-	VolumeStatistics    *VolumeStatistics    `json:"VolumeStatistics"`
+	DomainIspPlacements []DomainIspPlacement `json:"DomainIspPlacements,omitempty"`
+	StartDate           *time.Time           `json:"StartDate,omitempty"`
+	VolumeStatistics    *VolumeStatistics    `json:"VolumeStatistics,omitempty"`
 }

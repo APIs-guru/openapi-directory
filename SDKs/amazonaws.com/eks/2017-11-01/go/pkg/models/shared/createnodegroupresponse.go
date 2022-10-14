@@ -1,5 +1,5 @@
 package shared
 
 type CreateNodegroupResponse struct {
-	Nodegroup *Nodegroup `json:"nodegroup"`
+	Nodegroup *Nodegroup `json:"nodegroup,omitempty"`
 }

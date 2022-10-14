@@ -1,5 +1,5 @@
 package shared
 
 type Secret struct {
-	SecretVersion *string `json:"secretVersion"`
+	SecretVersion *string `json:"secretVersion,omitempty"`
 }

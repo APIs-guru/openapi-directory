@@ -13,7 +13,7 @@ const (
 )
 
 type ConnectionStatus struct {
-	Description *string                    `json:"description"`
-	State       *ConnectionStatusStateEnum `json:"state"`
-	Status      *string                    `json:"status"`
+	Description *string                    `json:"description,omitempty"`
+	State       *ConnectionStatusStateEnum `json:"state,omitempty"`
+	Status      *string                    `json:"status,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ResourceDefinitionVersion struct {
-	Resources []Resource `json:"Resources"`
+	Resources []Resource `json:"Resources,omitempty"`
 }

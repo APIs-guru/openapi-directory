@@ -1,6 +1,6 @@
 package shared
 
 type DescribeReplicationConfigurationTemplatesResponse struct {
-	Items     []ReplicationConfigurationTemplate `json:"items"`
-	NextToken *string                            `json:"nextToken"`
+	Items     []ReplicationConfigurationTemplate `json:"items,omitempty"`
+	NextToken *string                            `json:"nextToken,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ExistingDisk struct {
-	Attachment *DiskAttachment `json:"attachment"`
-	Source     *string         `json:"source"`
+	Attachment *DiskAttachment `json:"attachment,omitempty"`
+	Source     *string         `json:"source,omitempty"`
 }

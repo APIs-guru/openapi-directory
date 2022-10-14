@@ -2483,24 +2483,24 @@ const (
 )
 
 type InvoiceLine struct {
-	AccountingCost                           *string                                          `json:"accountingCost"`
-	AdditionalItemProperties                 []AdditionalItemProperty                         `json:"additionalItemProperties"`
-	AllowanceCharge                          *float64                                         `json:"allowanceCharge"`
+	AccountingCost                           *string                                          `json:"accountingCost,omitempty"`
+	AdditionalItemProperties                 []AdditionalItemProperty                         `json:"additionalItemProperties,omitempty"`
+	AllowanceCharge                          *float64                                         `json:"allowanceCharge,omitempty"`
 	AmountExcludingVat                       float64                                          `json:"amountExcludingVat"`
-	BuyersItemIdentification                 *string                                          `json:"buyersItemIdentification"`
-	Delivery                                 *Delivery                                        `json:"delivery"`
-	Description                              *string                                          `json:"description"`
-	InvoicePeriod                            *string                                          `json:"invoicePeriod"`
-	ItemPrice                                *float64                                         `json:"itemPrice"`
-	LineID                                   *string                                          `json:"lineId"`
-	Name                                     *string                                          `json:"name"`
-	OrderLineReferenceLineID                 *string                                          `json:"orderLineReferenceLineId"`
-	Quantity                                 *float64                                         `json:"quantity"`
-	QuantityUnitCode                         *InvoiceLineQuantityUnitCodeQuantityUnitCodeEnum `json:"quantityUnitCode"`
-	SellersItemIdentification                *string                                          `json:"sellersItemIdentification"`
-	StandardItemIdentification               *string                                          `json:"standardItemIdentification"`
-	StandardItemIdentificationSchemeAgencyID *string                                          `json:"standardItemIdentificationSchemeAgencyId"`
-	StandardItemIdentificationSchemeID       *string                                          `json:"standardItemIdentificationSchemeId"`
-	Tax                                      *Tax                                             `json:"tax"`
-	TaxesDutiesFees                          []Tax                                            `json:"taxes_duties_fees"`
+	BuyersItemIdentification                 *string                                          `json:"buyersItemIdentification,omitempty"`
+	Delivery                                 *Delivery                                        `json:"delivery,omitempty"`
+	Description                              *string                                          `json:"description,omitempty"`
+	InvoicePeriod                            *string                                          `json:"invoicePeriod,omitempty"`
+	ItemPrice                                *float64                                         `json:"itemPrice,omitempty"`
+	LineID                                   *string                                          `json:"lineId,omitempty"`
+	Name                                     *string                                          `json:"name,omitempty"`
+	OrderLineReferenceLineID                 *string                                          `json:"orderLineReferenceLineId,omitempty"`
+	Quantity                                 *float64                                         `json:"quantity,omitempty"`
+	QuantityUnitCode                         *InvoiceLineQuantityUnitCodeQuantityUnitCodeEnum `json:"quantityUnitCode,omitempty"`
+	SellersItemIdentification                *string                                          `json:"sellersItemIdentification,omitempty"`
+	StandardItemIdentification               *string                                          `json:"standardItemIdentification,omitempty"`
+	StandardItemIdentificationSchemeAgencyID *string                                          `json:"standardItemIdentificationSchemeAgencyId,omitempty"`
+	StandardItemIdentificationSchemeID       *string                                          `json:"standardItemIdentificationSchemeId,omitempty"`
+	Tax                                      *Tax                                             `json:"tax,omitempty"`
+	TaxesDutiesFees                          []Tax                                            `json:"taxes_duties_fees,omitempty"`
 }

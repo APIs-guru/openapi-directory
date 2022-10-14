@@ -1,13 +1,13 @@
 package shared
 
 type GoogleCloudApigeeV1Export struct {
-	Created       *string `json:"created"`
-	DatastoreName *string `json:"datastoreName"`
-	Description   *string `json:"description"`
-	Error         *string `json:"error"`
-	ExecutionTime *string `json:"executionTime"`
-	Name          *string `json:"name"`
-	Self          *string `json:"self"`
-	State         *string `json:"state"`
-	Updated       *string `json:"updated"`
+	Created       *string `json:"created,omitempty"`
+	DatastoreName *string `json:"datastoreName,omitempty"`
+	Description   *string `json:"description,omitempty"`
+	Error         *string `json:"error,omitempty"`
+	ExecutionTime *string `json:"executionTime,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	Self          *string `json:"self,omitempty"`
+	State         *string `json:"state,omitempty"`
+	Updated       *string `json:"updated,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type FieldMetadata struct {
-	Action *FieldMetadataActionEnum `json:"action"`
-	Paths  []string                 `json:"paths"`
+	Action *FieldMetadataActionEnum `json:"action,omitempty"`
+	Paths  []string                 `json:"paths,omitempty"`
 }

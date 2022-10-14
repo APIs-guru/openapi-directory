@@ -1,6 +1,6 @@
 package shared
 
 type ListBitbucketServerConfigsResponse struct {
-	BitbucketServerConfigs []BitbucketServerConfig `json:"bitbucketServerConfigs"`
-	NextPageToken          *string                 `json:"nextPageToken"`
+	BitbucketServerConfigs []BitbucketServerConfig `json:"bitbucketServerConfigs,omitempty"`
+	NextPageToken          *string                 `json:"nextPageToken,omitempty"`
 }

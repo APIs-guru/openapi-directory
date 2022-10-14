@@ -5,9 +5,9 @@ import (
 )
 
 type ReplicationTaskIndividualAssessment struct {
-	IndividualAssessmentName                     *string    `json:"IndividualAssessmentName"`
-	ReplicationTaskAssessmentRunArn              *string    `json:"ReplicationTaskAssessmentRunArn"`
-	ReplicationTaskIndividualAssessmentArn       *string    `json:"ReplicationTaskIndividualAssessmentArn"`
-	ReplicationTaskIndividualAssessmentStartDate *time.Time `json:"ReplicationTaskIndividualAssessmentStartDate"`
-	Status                                       *string    `json:"Status"`
+	IndividualAssessmentName                     *string    `json:"IndividualAssessmentName,omitempty"`
+	ReplicationTaskAssessmentRunArn              *string    `json:"ReplicationTaskAssessmentRunArn,omitempty"`
+	ReplicationTaskIndividualAssessmentArn       *string    `json:"ReplicationTaskIndividualAssessmentArn,omitempty"`
+	ReplicationTaskIndividualAssessmentStartDate *time.Time `json:"ReplicationTaskIndividualAssessmentStartDate,omitempty"`
+	Status                                       *string    `json:"Status,omitempty"`
 }

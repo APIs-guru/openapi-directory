@@ -1,7 +1,7 @@
 package shared
 
 type ListVendorsResponse struct {
-	NextPageToken *string   `json:"nextPageToken"`
-	TotalSize     *int32    `json:"totalSize"`
-	Vendors       []Company `json:"vendors"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	TotalSize     *int32    `json:"totalSize,omitempty"`
+	Vendors       []Company `json:"vendors,omitempty"`
 }

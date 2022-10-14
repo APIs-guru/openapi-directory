@@ -8,5 +8,5 @@ const (
 )
 
 type OmidTargetingOptionDetails struct {
-	Omid *OmidTargetingOptionDetailsOmidEnum `json:"omid"`
+	Omid *OmidTargetingOptionDetailsOmidEnum `json:"omid,omitempty"`
 }

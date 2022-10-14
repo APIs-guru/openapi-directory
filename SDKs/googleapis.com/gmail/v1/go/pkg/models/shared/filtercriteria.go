@@ -9,13 +9,13 @@ const (
 )
 
 type FilterCriteria struct {
-	ExcludeChats   *bool                             `json:"excludeChats"`
-	From           *string                           `json:"from"`
-	HasAttachment  *bool                             `json:"hasAttachment"`
-	NegatedQuery   *string                           `json:"negatedQuery"`
-	Query          *string                           `json:"query"`
-	Size           *int32                            `json:"size"`
-	SizeComparison *FilterCriteriaSizeComparisonEnum `json:"sizeComparison"`
-	Subject        *string                           `json:"subject"`
-	To             *string                           `json:"to"`
+	ExcludeChats   *bool                             `json:"excludeChats,omitempty"`
+	From           *string                           `json:"from,omitempty"`
+	HasAttachment  *bool                             `json:"hasAttachment,omitempty"`
+	NegatedQuery   *string                           `json:"negatedQuery,omitempty"`
+	Query          *string                           `json:"query,omitempty"`
+	Size           *int32                            `json:"size,omitempty"`
+	SizeComparison *FilterCriteriaSizeComparisonEnum `json:"sizeComparison,omitempty"`
+	Subject        *string                           `json:"subject,omitempty"`
+	To             *string                           `json:"to,omitempty"`
 }

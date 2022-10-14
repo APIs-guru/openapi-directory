@@ -1,16 +1,16 @@
 package shared
 
 type LighthouseAuditResultV5 struct {
-	Description      *string                `json:"description"`
-	Details          map[string]interface{} `json:"details"`
-	DisplayValue     *string                `json:"displayValue"`
-	ErrorMessage     *string                `json:"errorMessage"`
-	Explanation      *string                `json:"explanation"`
-	ID               *string                `json:"id"`
-	NumericUnit      *string                `json:"numericUnit"`
-	NumericValue     *float64               `json:"numericValue"`
-	Score            *interface{}           `json:"score"`
-	ScoreDisplayMode *string                `json:"scoreDisplayMode"`
-	Title            *string                `json:"title"`
-	Warnings         *interface{}           `json:"warnings"`
+	Description      *string                `json:"description,omitempty"`
+	Details          map[string]interface{} `json:"details,omitempty"`
+	DisplayValue     *string                `json:"displayValue,omitempty"`
+	ErrorMessage     *string                `json:"errorMessage,omitempty"`
+	Explanation      *string                `json:"explanation,omitempty"`
+	ID               *string                `json:"id,omitempty"`
+	NumericUnit      *string                `json:"numericUnit,omitempty"`
+	NumericValue     *float64               `json:"numericValue,omitempty"`
+	Score            *interface{}           `json:"score,omitempty"`
+	ScoreDisplayMode *string                `json:"scoreDisplayMode,omitempty"`
+	Title            *string                `json:"title,omitempty"`
+	Warnings         *interface{}           `json:"warnings,omitempty"`
 }

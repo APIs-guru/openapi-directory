@@ -1,5 +1,5 @@
 package shared
 
 type EndOfSegmentLocation struct {
-	SegmentID *string `json:"segmentId"`
+	SegmentID *string `json:"segmentId,omitempty"`
 }

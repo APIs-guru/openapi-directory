@@ -1,5 +1,5 @@
 package shared
 
 type Tag struct {
-	Label *string `json:"label"`
+	Label *string `json:"label,omitempty"`
 }

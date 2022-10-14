@@ -1,6 +1,6 @@
 package shared
 
 type ReturnpolicyListResponse struct {
-	Kind      *string        `json:"kind"`
-	Resources []ReturnPolicy `json:"resources"`
+	Kind      *string        `json:"kind,omitempty"`
+	Resources []ReturnPolicy `json:"resources,omitempty"`
 }

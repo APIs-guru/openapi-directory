@@ -6,10 +6,10 @@ type UpdateNetworkApplianceWarmSparePathParams struct {
 
 type UpdateNetworkApplianceWarmSpareRequestBody struct {
 	Enabled     bool    `json:"enabled"`
-	SpareSerial *string `json:"spareSerial"`
-	UplinkMode  *string `json:"uplinkMode"`
-	VirtualIp1  *string `json:"virtualIp1"`
-	VirtualIp2  *string `json:"virtualIp2"`
+	SpareSerial *string `json:"spareSerial,omitempty"`
+	UplinkMode  *string `json:"uplinkMode,omitempty"`
+	VirtualIp1  *string `json:"virtualIp1,omitempty"`
+	VirtualIp2  *string `json:"virtualIp2,omitempty"`
 }
 
 type UpdateNetworkApplianceWarmSpareRequest struct {

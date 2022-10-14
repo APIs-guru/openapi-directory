@@ -8,8 +8,8 @@ const (
 )
 
 type QueryGrantableRolesRequest struct {
-	FullResourceName *string                             `json:"fullResourceName"`
-	PageSize         *int32                              `json:"pageSize"`
-	PageToken        *string                             `json:"pageToken"`
-	View             *QueryGrantableRolesRequestViewEnum `json:"view"`
+	FullResourceName *string                             `json:"fullResourceName,omitempty"`
+	PageSize         *int32                              `json:"pageSize,omitempty"`
+	PageToken        *string                             `json:"pageToken,omitempty"`
+	View             *QueryGrantableRolesRequestViewEnum `json:"view,omitempty"`
 }

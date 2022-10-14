@@ -1,8 +1,8 @@
 package shared
 
 type ThumbnailDetails struct {
-	High     *Thumbnail `json:"high"`
-	Maxres   *Thumbnail `json:"maxres"`
-	Medium   *Thumbnail `json:"medium"`
-	Standard *Thumbnail `json:"standard"`
+	High     *Thumbnail `json:"high,omitempty"`
+	Maxres   *Thumbnail `json:"maxres,omitempty"`
+	Medium   *Thumbnail `json:"medium,omitempty"`
+	Standard *Thumbnail `json:"standard,omitempty"`
 }

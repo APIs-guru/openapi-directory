@@ -1,6 +1,6 @@
 package shared
 
 type ExtendedSourceContext struct {
-	Context *SourceContext    `json:"context"`
-	Labels  map[string]string `json:"labels"`
+	Context *SourceContext    `json:"context,omitempty"`
+	Labels  map[string]string `json:"labels,omitempty"`
 }

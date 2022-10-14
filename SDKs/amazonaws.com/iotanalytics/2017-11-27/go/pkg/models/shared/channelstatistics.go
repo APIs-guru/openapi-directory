@@ -1,5 +1,5 @@
 package shared
 
 type ChannelStatistics struct {
-	Size *EstimatedResourceSize `json:"size"`
+	Size *EstimatedResourceSize `json:"size,omitempty"`
 }

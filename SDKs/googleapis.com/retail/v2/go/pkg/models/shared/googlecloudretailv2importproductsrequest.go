@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleCloudRetailV2ImportProductsRequest struct {
-	ErrorsConfig            *GoogleCloudRetailV2ImportErrorsConfig                          `json:"errorsConfig"`
-	InputConfig             *GoogleCloudRetailV2ProductInputConfig                          `json:"inputConfig"`
-	NotificationPubsubTopic *string                                                         `json:"notificationPubsubTopic"`
-	ReconciliationMode      *GoogleCloudRetailV2ImportProductsRequestReconciliationModeEnum `json:"reconciliationMode"`
-	RequestID               *string                                                         `json:"requestId"`
-	UpdateMask              *string                                                         `json:"updateMask"`
+	ErrorsConfig            *GoogleCloudRetailV2ImportErrorsConfig                          `json:"errorsConfig,omitempty"`
+	InputConfig             *GoogleCloudRetailV2ProductInputConfig                          `json:"inputConfig,omitempty"`
+	NotificationPubsubTopic *string                                                         `json:"notificationPubsubTopic,omitempty"`
+	ReconciliationMode      *GoogleCloudRetailV2ImportProductsRequestReconciliationModeEnum `json:"reconciliationMode,omitempty"`
+	RequestID               *string                                                         `json:"requestId,omitempty"`
+	UpdateMask              *string                                                         `json:"updateMask,omitempty"`
 }

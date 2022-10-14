@@ -1,8 +1,8 @@
 package shared
 
 type StartExecutionInput struct {
-	Input           *string `json:"input"`
-	Name            *string `json:"name"`
+	Input           *string `json:"input,omitempty"`
+	Name            *string `json:"name,omitempty"`
 	StateMachineArn string  `json:"stateMachineArn"`
-	TraceHeader     *string `json:"traceHeader"`
+	TraceHeader     *string `json:"traceHeader,omitempty"`
 }

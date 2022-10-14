@@ -19,12 +19,12 @@ const (
 
 type AuthorizationInstallationScopedInstallation struct {
 	Account                SimpleUser                                       `json:"account"`
-	HasMultipleSingleFiles *bool                                            `json:"has_multiple_single_files"`
+	HasMultipleSingleFiles *bool                                            `json:"has_multiple_single_files,omitempty"`
 	Permissions            AppPermissions                                   `json:"permissions"`
 	RepositoriesURL        string                                           `json:"repositories_url"`
 	RepositorySelection    AuthorizationInstallationRepositorySelectionEnum `json:"repository_selection"`
 	SingleFileName         string                                           `json:"single_file_name"`
-	SingleFilePaths        []string                                         `json:"single_file_paths"`
+	SingleFilePaths        []string                                         `json:"single_file_paths,omitempty"`
 }
 
 type AuthorizationUserSimpleUser struct {
@@ -42,7 +42,7 @@ type AuthorizationUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -55,7 +55,7 @@ type Authorization struct {
 	Fingerprint    string                                       `json:"fingerprint"`
 	HashedToken    string                                       `json:"hashed_token"`
 	ID             int64                                        `json:"id"`
-	Installation   *AuthorizationInstallationScopedInstallation `json:"installation"`
+	Installation   *AuthorizationInstallationScopedInstallation `json:"installation,omitempty"`
 	Note           string                                       `json:"note"`
 	NoteURL        string                                       `json:"note_url"`
 	Scopes         []string                                     `json:"scopes"`
@@ -63,5 +63,5 @@ type Authorization struct {
 	TokenLastEight string                                       `json:"token_last_eight"`
 	UpdatedAt      time.Time                                    `json:"updated_at"`
 	URL            string                                       `json:"url"`
-	User           *AuthorizationUserSimpleUser                 `json:"user"`
+	User           *AuthorizationUserSimpleUser                 `json:"user,omitempty"`
 }

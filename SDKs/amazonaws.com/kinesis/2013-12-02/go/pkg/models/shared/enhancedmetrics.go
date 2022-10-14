@@ -1,5 +1,5 @@
 package shared
 
 type EnhancedMetrics struct {
-	ShardLevelMetrics []MetricsNameEnum `json:"ShardLevelMetrics"`
+	ShardLevelMetrics []MetricsNameEnum `json:"ShardLevelMetrics,omitempty"`
 }

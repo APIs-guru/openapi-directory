@@ -20,7 +20,7 @@ const (
 )
 
 type PickTimeSeriesFilter struct {
-	Direction     *PickTimeSeriesFilterDirectionEnum     `json:"direction"`
-	NumTimeSeries *int32                                 `json:"numTimeSeries"`
-	RankingMethod *PickTimeSeriesFilterRankingMethodEnum `json:"rankingMethod"`
+	Direction     *PickTimeSeriesFilterDirectionEnum     `json:"direction,omitempty"`
+	NumTimeSeries *int32                                 `json:"numTimeSeries,omitempty"`
+	RankingMethod *PickTimeSeriesFilterRankingMethodEnum `json:"rankingMethod,omitempty"`
 }

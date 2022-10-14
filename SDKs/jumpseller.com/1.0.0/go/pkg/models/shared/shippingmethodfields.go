@@ -14,13 +14,13 @@ const (
 )
 
 type ShippingMethodFields struct {
-	CallbackURL      *string                       `json:"callback_url"`
-	City             *string                       `json:"city"`
-	FetchServicesURL *string                       `json:"fetch_services_url"`
-	ID               *int32                        `json:"id"`
-	Name             *string                       `json:"name"`
-	Postal           *string                       `json:"postal"`
-	Services         []ShippingService             `json:"services"`
-	State            *string                       `json:"state"`
-	Type             *ShippingMethodFieldsTypeEnum `json:"type"`
+	CallbackURL      *string                       `json:"callback_url,omitempty"`
+	City             *string                       `json:"city,omitempty"`
+	FetchServicesURL *string                       `json:"fetch_services_url,omitempty"`
+	ID               *int32                        `json:"id,omitempty"`
+	Name             *string                       `json:"name,omitempty"`
+	Postal           *string                       `json:"postal,omitempty"`
+	Services         []ShippingService             `json:"services,omitempty"`
+	State            *string                       `json:"state,omitempty"`
+	Type             *ShippingMethodFieldsTypeEnum `json:"type,omitempty"`
 }

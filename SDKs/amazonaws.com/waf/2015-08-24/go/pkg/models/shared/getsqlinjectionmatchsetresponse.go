@@ -1,5 +1,5 @@
 package shared
 
 type GetSQLInjectionMatchSetResponse struct {
-	SQLInjectionMatchSet *SQLInjectionMatchSet `json:"SqlInjectionMatchSet"`
+	SQLInjectionMatchSet *SQLInjectionMatchSet `json:"SqlInjectionMatchSet,omitempty"`
 }

@@ -5,7 +5,7 @@ type EnterpriseAdminUnsuspendUserPathParams struct {
 }
 
 type EnterpriseAdminUnsuspendUserRequestBody struct {
-	Reason *string `json:"reason"`
+	Reason *string `json:"reason,omitempty"`
 }
 
 type EnterpriseAdminUnsuspendUserRequest struct {

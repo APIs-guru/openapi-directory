@@ -1,6 +1,6 @@
 package shared
 
 type ListShareInvitationsOutput struct {
-	NextToken                *string                  `json:"NextToken"`
-	ShareInvitationSummaries []ShareInvitationSummary `json:"ShareInvitationSummaries"`
+	NextToken                *string                  `json:"NextToken,omitempty"`
+	ShareInvitationSummaries []ShareInvitationSummary `json:"ShareInvitationSummaries,omitempty"`
 }

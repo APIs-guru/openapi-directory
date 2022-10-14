@@ -1,8 +1,8 @@
 package shared
 
 type DefaultData struct {
-	Names    []string               `json:"names"`
-	Ndarry   []interface{}          `json:"ndarry"`
-	Tensor   *Tensor                `json:"tensor"`
-	Tftensor *TensorflowTensorProto `json:"tftensor"`
+	Names    []string               `json:"names,omitempty"`
+	Ndarry   []interface{}          `json:"ndarry,omitempty"`
+	Tensor   *Tensor                `json:"tensor,omitempty"`
+	Tftensor *TensorflowTensorProto `json:"tftensor,omitempty"`
 }

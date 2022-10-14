@@ -14,7 +14,7 @@ type AddSubgoalQueryParams struct {
 }
 
 type AddSubgoalRequestBody struct {
-	Data *shared.GoalAddSubgoalRequest `json:"data"`
+	Data *shared.GoalAddSubgoalRequest `json:"data,omitempty"`
 }
 
 type AddSubgoalRequest struct {
@@ -24,7 +24,7 @@ type AddSubgoalRequest struct {
 }
 
 type AddSubgoal200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddSubgoalResponse struct {

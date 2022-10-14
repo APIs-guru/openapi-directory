@@ -1,6 +1,6 @@
 package shared
 
 type DescribeRuntimeVersionsResponse struct {
-	NextToken       *string          `json:"NextToken"`
-	RuntimeVersions []RuntimeVersion `json:"RuntimeVersions"`
+	NextToken       *string          `json:"NextToken,omitempty"`
+	RuntimeVersions []RuntimeVersion `json:"RuntimeVersions,omitempty"`
 }

@@ -24,23 +24,23 @@ type GetDashboardPkThumbnailDigestRequest struct {
 }
 
 type GetDashboardPkThumbnailDigest202ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardPkThumbnailDigest401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardPkThumbnailDigest404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardPkThumbnailDigest422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardPkThumbnailDigest500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardPkThumbnailDigestResponse struct {

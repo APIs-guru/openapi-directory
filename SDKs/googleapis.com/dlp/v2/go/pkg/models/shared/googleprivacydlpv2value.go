@@ -14,12 +14,12 @@ const (
 )
 
 type GooglePrivacyDlpV2Value struct {
-	BooleanValue   *bool                                      `json:"booleanValue"`
-	DateValue      *GoogleTypeDate                            `json:"dateValue"`
-	DayOfWeekValue *GooglePrivacyDlpV2ValueDayOfWeekValueEnum `json:"dayOfWeekValue"`
-	FloatValue     *float64                                   `json:"floatValue"`
-	IntegerValue   *string                                    `json:"integerValue"`
-	StringValue    *string                                    `json:"stringValue"`
-	TimeValue      *GoogleTypeTimeOfDay                       `json:"timeValue"`
-	TimestampValue *string                                    `json:"timestampValue"`
+	BooleanValue   *bool                                      `json:"booleanValue,omitempty"`
+	DateValue      *GoogleTypeDate                            `json:"dateValue,omitempty"`
+	DayOfWeekValue *GooglePrivacyDlpV2ValueDayOfWeekValueEnum `json:"dayOfWeekValue,omitempty"`
+	FloatValue     *float64                                   `json:"floatValue,omitempty"`
+	IntegerValue   *string                                    `json:"integerValue,omitempty"`
+	StringValue    *string                                    `json:"stringValue,omitempty"`
+	TimeValue      *GoogleTypeTimeOfDay                       `json:"timeValue,omitempty"`
+	TimestampValue *string                                    `json:"timestampValue,omitempty"`
 }

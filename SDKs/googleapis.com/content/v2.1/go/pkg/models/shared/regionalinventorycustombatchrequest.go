@@ -1,5 +1,5 @@
 package shared
 
 type RegionalinventoryCustomBatchRequest struct {
-	Entries []RegionalinventoryCustomBatchRequestEntry `json:"entries"`
+	Entries []RegionalinventoryCustomBatchRequestEntry `json:"entries,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetBehaviorModelTrainingSummariesResponse struct {
-	NextToken *string                        `json:"nextToken"`
-	Summaries []BehaviorModelTrainingSummary `json:"summaries"`
+	NextToken *string                        `json:"nextToken,omitempty"`
+	Summaries []BehaviorModelTrainingSummary `json:"summaries,omitempty"`
 }

@@ -2,5 +2,5 @@ package shared
 
 type WorkflowExecutionCanceledEventAttributes struct {
 	DecisionTaskCompletedEventID int64   `json:"decisionTaskCompletedEventId"`
-	Details                      *string `json:"details"`
+	Details                      *string `json:"details,omitempty"`
 }

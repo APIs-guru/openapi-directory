@@ -8,6 +8,6 @@ const (
 )
 
 type GpuSharingConfig struct {
-	GpuSharingStrategy     *GpuSharingConfigGpuSharingStrategyEnum `json:"gpuSharingStrategy"`
-	MaxSharedClientsPerGpu *string                                 `json:"maxSharedClientsPerGpu"`
+	GpuSharingStrategy     *GpuSharingConfigGpuSharingStrategyEnum `json:"gpuSharingStrategy,omitempty"`
+	MaxSharedClientsPerGpu *string                                 `json:"maxSharedClientsPerGpu,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type CommentFeed struct {
-	Etag          *string    `json:"etag"`
-	ID            *string    `json:"id"`
-	Items         []Comment  `json:"items"`
-	Kind          *string    `json:"kind"`
-	NextLink      *string    `json:"nextLink"`
-	NextPageToken *string    `json:"nextPageToken"`
-	Title         *string    `json:"title"`
-	Updated       *time.Time `json:"updated"`
+	Etag          *string    `json:"etag,omitempty"`
+	ID            *string    `json:"id,omitempty"`
+	Items         []Comment  `json:"items,omitempty"`
+	Kind          *string    `json:"kind,omitempty"`
+	NextLink      *string    `json:"nextLink,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	Title         *string    `json:"title,omitempty"`
+	Updated       *time.Time `json:"updated,omitempty"`
 }

@@ -20,12 +20,12 @@ type TestInvokeAuthorizerHeaders struct {
 }
 
 type TestInvokeAuthorizerRequestBody struct {
-	AdditionalContext   map[string]string   `json:"additionalContext"`
-	Body                *string             `json:"body"`
-	Headers             map[string]string   `json:"headers"`
-	MultiValueHeaders   map[string][]string `json:"multiValueHeaders"`
-	PathWithQueryString *string             `json:"pathWithQueryString"`
-	StageVariables      map[string]string   `json:"stageVariables"`
+	AdditionalContext   map[string]string   `json:"additionalContext,omitempty"`
+	Body                *string             `json:"body,omitempty"`
+	Headers             map[string]string   `json:"headers,omitempty"`
+	MultiValueHeaders   map[string][]string `json:"multiValueHeaders,omitempty"`
+	PathWithQueryString *string             `json:"pathWithQueryString,omitempty"`
+	StageVariables      map[string]string   `json:"stageVariables,omitempty"`
 }
 
 type TestInvokeAuthorizerRequest struct {

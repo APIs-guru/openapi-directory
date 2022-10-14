@@ -1,6 +1,6 @@
 package shared
 
 type AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails struct {
-	Namespace *string `json:"Namespace"`
-	Value     *string `json:"Value"`
+	Namespace *string `json:"Namespace,omitempty"`
+	Value     *string `json:"Value,omitempty"`
 }

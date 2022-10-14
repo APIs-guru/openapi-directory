@@ -11,7 +11,7 @@ const (
 )
 
 type ItemStatus struct {
-	Code             *ItemStatusCodeEnum `json:"code"`
-	ProcessingErrors []ProcessingError   `json:"processingErrors"`
-	RepositoryErrors []RepositoryError   `json:"repositoryErrors"`
+	Code             *ItemStatusCodeEnum `json:"code,omitempty"`
+	ProcessingErrors []ProcessingError   `json:"processingErrors,omitempty"`
+	RepositoryErrors []RepositoryError   `json:"repositoryErrors,omitempty"`
 }

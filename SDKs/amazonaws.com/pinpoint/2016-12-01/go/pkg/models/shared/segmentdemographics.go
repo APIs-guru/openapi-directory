@@ -1,10 +1,10 @@
 package shared
 
 type SegmentDemographics struct {
-	AppVersion *SetDimension `json:"AppVersion"`
-	Channel    *SetDimension `json:"Channel"`
-	DeviceType *SetDimension `json:"DeviceType"`
-	Make       *SetDimension `json:"Make"`
-	Model      *SetDimension `json:"Model"`
-	Platform   *SetDimension `json:"Platform"`
+	AppVersion *SetDimension `json:"AppVersion,omitempty"`
+	Channel    *SetDimension `json:"Channel,omitempty"`
+	DeviceType *SetDimension `json:"DeviceType,omitempty"`
+	Make       *SetDimension `json:"Make,omitempty"`
+	Model      *SetDimension `json:"Model,omitempty"`
+	Platform   *SetDimension `json:"Platform,omitempty"`
 }

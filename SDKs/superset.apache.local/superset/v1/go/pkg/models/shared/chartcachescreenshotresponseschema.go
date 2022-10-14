@@ -1,7 +1,7 @@
 package shared
 
 type ChartCacheScreenshotResponseSchema struct {
-	CacheKey *string `json:"cache_key"`
-	ChartURL *string `json:"chart_url"`
-	ImageURL *string `json:"image_url"`
+	CacheKey *string `json:"cache_key,omitempty"`
+	ChartURL *string `json:"chart_url,omitempty"`
+	ImageURL *string `json:"image_url,omitempty"`
 }

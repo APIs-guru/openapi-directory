@@ -7,7 +7,7 @@ import (
 type ProjectParameterDetails struct {
 	Average      float64   `json:"average"`
 	Count        int64     `json:"count"`
-	DisplayName  *string   `json:"displayName"`
+	DisplayName  *string   `json:"displayName,omitempty"`
 	FirstUpdated time.Time `json:"firstUpdated"`
 	LastUpdated  time.Time `json:"lastUpdated"`
 	LastValue    float64   `json:"lastValue"`

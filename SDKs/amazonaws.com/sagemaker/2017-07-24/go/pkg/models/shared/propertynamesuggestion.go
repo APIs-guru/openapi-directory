@@ -1,5 +1,5 @@
 package shared
 
 type PropertyNameSuggestion struct {
-	PropertyName *string `json:"PropertyName"`
+	PropertyName *string `json:"PropertyName,omitempty"`
 }

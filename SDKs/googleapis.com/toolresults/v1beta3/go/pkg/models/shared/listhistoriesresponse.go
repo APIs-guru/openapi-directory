@@ -1,6 +1,6 @@
 package shared
 
 type ListHistoriesResponse struct {
-	Histories     []History `json:"histories"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Histories     []History `json:"histories,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
 }

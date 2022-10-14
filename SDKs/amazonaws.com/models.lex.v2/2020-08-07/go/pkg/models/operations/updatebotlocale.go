@@ -21,13 +21,13 @@ type UpdateBotLocaleHeaders struct {
 }
 
 type UpdateBotLocaleRequestBodyVoiceSettings struct {
-	VoiceID *string `json:"voiceId"`
+	VoiceID *string `json:"voiceId,omitempty"`
 }
 
 type UpdateBotLocaleRequestBody struct {
-	Description                  *string                                  `json:"description"`
+	Description                  *string                                  `json:"description,omitempty"`
 	NluIntentConfidenceThreshold float64                                  `json:"nluIntentConfidenceThreshold"`
-	VoiceSettings                *UpdateBotLocaleRequestBodyVoiceSettings `json:"voiceSettings"`
+	VoiceSettings                *UpdateBotLocaleRequestBodyVoiceSettings `json:"voiceSettings,omitempty"`
 }
 
 type UpdateBotLocaleRequest struct {

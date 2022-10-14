@@ -89,7 +89,7 @@ type GetNetworksIDActions200ApplicationJSONMeta struct {
 
 type GetNetworksIDActions200ApplicationJSONActionsResponse struct {
 	Actions []GetNetworksIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetNetworksIDActions200ApplicationJSONMeta           `json:"meta"`
+	Meta    *GetNetworksIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type GetNetworksIDActionsResponse struct {

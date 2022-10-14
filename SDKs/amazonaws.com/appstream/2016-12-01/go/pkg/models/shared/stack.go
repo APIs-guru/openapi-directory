@@ -5,17 +5,17 @@ import (
 )
 
 type Stack struct {
-	AccessEndpoints     []AccessEndpoint             `json:"AccessEndpoints"`
-	ApplicationSettings *ApplicationSettingsResponse `json:"ApplicationSettings"`
-	Arn                 *string                      `json:"Arn"`
-	CreatedTime         *time.Time                   `json:"CreatedTime"`
-	Description         *string                      `json:"Description"`
-	DisplayName         *string                      `json:"DisplayName"`
-	EmbedHostDomains    []string                     `json:"EmbedHostDomains"`
-	FeedbackURL         *string                      `json:"FeedbackURL"`
+	AccessEndpoints     []AccessEndpoint             `json:"AccessEndpoints,omitempty"`
+	ApplicationSettings *ApplicationSettingsResponse `json:"ApplicationSettings,omitempty"`
+	Arn                 *string                      `json:"Arn,omitempty"`
+	CreatedTime         *time.Time                   `json:"CreatedTime,omitempty"`
+	Description         *string                      `json:"Description,omitempty"`
+	DisplayName         *string                      `json:"DisplayName,omitempty"`
+	EmbedHostDomains    []string                     `json:"EmbedHostDomains,omitempty"`
+	FeedbackURL         *string                      `json:"FeedbackURL,omitempty"`
 	Name                string                       `json:"Name"`
-	RedirectURL         *string                      `json:"RedirectURL"`
-	StackErrors         []StackError                 `json:"StackErrors"`
-	StorageConnectors   []StorageConnector           `json:"StorageConnectors"`
-	UserSettings        []UserSetting                `json:"UserSettings"`
+	RedirectURL         *string                      `json:"RedirectURL,omitempty"`
+	StackErrors         []StackError                 `json:"StackErrors,omitempty"`
+	StorageConnectors   []StorageConnector           `json:"StorageConnectors,omitempty"`
+	UserSettings        []UserSetting                `json:"UserSettings,omitempty"`
 }

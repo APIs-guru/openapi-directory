@@ -26,7 +26,7 @@ const (
 )
 
 type PatientWaitTime struct {
-	Established *float64                   `json:"established"`
-	New         *float64                   `json:"new"`
+	Established *float64                   `json:"established,omitempty"`
+	New         *float64                   `json:"new,omitempty"`
 	Service     PatientWaitTimeServiceEnum `json:"service"`
 }

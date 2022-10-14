@@ -5,7 +5,7 @@ import (
 )
 
 type LandlordAccountingInvoiceModel struct {
-	Date                 *time.Time `json:"Date"`
-	InvoiceID            *string    `json:"InvoiceID"`
-	IsMaintenanceInvoice *bool      `json:"IsMaintenanceInvoice"`
+	Date                 *time.Time `json:"Date,omitempty"`
+	InvoiceID            *string    `json:"InvoiceID,omitempty"`
+	IsMaintenanceInvoice *bool      `json:"IsMaintenanceInvoice,omitempty"`
 }

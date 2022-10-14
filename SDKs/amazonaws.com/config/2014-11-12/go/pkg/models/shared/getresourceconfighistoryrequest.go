@@ -5,11 +5,11 @@ import (
 )
 
 type GetResourceConfigHistoryRequest struct {
-	ChronologicalOrder *ChronologicalOrderEnum `json:"chronologicalOrder"`
-	EarlierTime        *time.Time              `json:"earlierTime"`
-	LaterTime          *time.Time              `json:"laterTime"`
-	Limit              *int64                  `json:"limit"`
-	NextToken          *string                 `json:"nextToken"`
+	ChronologicalOrder *ChronologicalOrderEnum `json:"chronologicalOrder,omitempty"`
+	EarlierTime        *time.Time              `json:"earlierTime,omitempty"`
+	LaterTime          *time.Time              `json:"laterTime,omitempty"`
+	Limit              *int64                  `json:"limit,omitempty"`
+	NextToken          *string                 `json:"nextToken,omitempty"`
 	ResourceID         string                  `json:"resourceId"`
 	ResourceType       ResourceTypeEnum        `json:"resourceType"`
 }

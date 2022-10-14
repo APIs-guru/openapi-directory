@@ -10,7 +10,7 @@ type CreateBatchRequestQueryParams struct {
 }
 
 type CreateBatchRequestRequestBody struct {
-	Data *shared.BatchRequest `json:"data"`
+	Data *shared.BatchRequest `json:"data,omitempty"`
 }
 
 type CreateBatchRequestRequest struct {
@@ -19,7 +19,7 @@ type CreateBatchRequestRequest struct {
 }
 
 type CreateBatchRequest200ApplicationJSON struct {
-	Data []shared.BatchResponse `json:"data"`
+	Data []shared.BatchResponse `json:"data,omitempty"`
 }
 
 type CreateBatchRequestResponse struct {

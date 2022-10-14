@@ -9,14 +9,14 @@ const (
 )
 
 type PivotGroup struct {
-	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference"`
-	GroupLimit                *PivotGroupLimit           `json:"groupLimit"`
-	GroupRule                 *PivotGroupRule            `json:"groupRule"`
-	Label                     *string                    `json:"label"`
-	RepeatHeadings            *bool                      `json:"repeatHeadings"`
-	ShowTotals                *bool                      `json:"showTotals"`
-	SortOrder                 *PivotGroupSortOrderEnum   `json:"sortOrder"`
-	SourceColumnOffset        *int32                     `json:"sourceColumnOffset"`
-	ValueBucket               *PivotGroupSortValueBucket `json:"valueBucket"`
-	ValueMetadata             []PivotGroupValueMetadata  `json:"valueMetadata"`
+	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference,omitempty"`
+	GroupLimit                *PivotGroupLimit           `json:"groupLimit,omitempty"`
+	GroupRule                 *PivotGroupRule            `json:"groupRule,omitempty"`
+	Label                     *string                    `json:"label,omitempty"`
+	RepeatHeadings            *bool                      `json:"repeatHeadings,omitempty"`
+	ShowTotals                *bool                      `json:"showTotals,omitempty"`
+	SortOrder                 *PivotGroupSortOrderEnum   `json:"sortOrder,omitempty"`
+	SourceColumnOffset        *int32                     `json:"sourceColumnOffset,omitempty"`
+	ValueBucket               *PivotGroupSortValueBucket `json:"valueBucket,omitempty"`
+	ValueMetadata             []PivotGroupValueMetadata  `json:"valueMetadata,omitempty"`
 }

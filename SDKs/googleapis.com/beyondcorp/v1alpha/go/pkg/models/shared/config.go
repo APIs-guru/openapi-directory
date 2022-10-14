@@ -8,6 +8,6 @@ const (
 )
 
 type Config struct {
-	DestinationRoutes []DestinationRoute           `json:"destinationRoutes"`
-	TransportProtocol *ConfigTransportProtocolEnum `json:"transportProtocol"`
+	DestinationRoutes []DestinationRoute           `json:"destinationRoutes,omitempty"`
+	TransportProtocol *ConfigTransportProtocolEnum `json:"transportProtocol,omitempty"`
 }

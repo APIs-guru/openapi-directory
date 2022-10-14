@@ -41,10 +41,10 @@ const (
 )
 
 type LiveBroadcastStatus struct {
-	LifeCycleStatus         *LiveBroadcastStatusLifeCycleStatusEnum       `json:"lifeCycleStatus"`
-	LiveBroadcastPriority   *LiveBroadcastStatusLiveBroadcastPriorityEnum `json:"liveBroadcastPriority"`
-	MadeForKids             *bool                                         `json:"madeForKids"`
-	PrivacyStatus           *LiveBroadcastStatusPrivacyStatusEnum         `json:"privacyStatus"`
-	RecordingStatus         *LiveBroadcastStatusRecordingStatusEnum       `json:"recordingStatus"`
-	SelfDeclaredMadeForKids *bool                                         `json:"selfDeclaredMadeForKids"`
+	LifeCycleStatus         *LiveBroadcastStatusLifeCycleStatusEnum       `json:"lifeCycleStatus,omitempty"`
+	LiveBroadcastPriority   *LiveBroadcastStatusLiveBroadcastPriorityEnum `json:"liveBroadcastPriority,omitempty"`
+	MadeForKids             *bool                                         `json:"madeForKids,omitempty"`
+	PrivacyStatus           *LiveBroadcastStatusPrivacyStatusEnum         `json:"privacyStatus,omitempty"`
+	RecordingStatus         *LiveBroadcastStatusRecordingStatusEnum       `json:"recordingStatus,omitempty"`
+	SelfDeclaredMadeForKids *bool                                         `json:"selfDeclaredMadeForKids,omitempty"`
 }

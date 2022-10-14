@@ -1,5 +1,5 @@
 package shared
 
 type BatchDeleteRowsRequest struct {
-	Names []string `json:"names"`
+	Names []string `json:"names,omitempty"`
 }

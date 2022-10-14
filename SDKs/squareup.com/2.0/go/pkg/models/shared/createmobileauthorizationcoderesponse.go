@@ -1,7 +1,7 @@
 package shared
 
 type CreateMobileAuthorizationCodeResponse struct {
-	AuthorizationCode *string `json:"authorization_code"`
-	Error             *Error  `json:"error"`
-	ExpiresAt         *string `json:"expires_at"`
+	AuthorizationCode *string `json:"authorization_code,omitempty"`
+	Error             *Error  `json:"error,omitempty"`
+	ExpiresAt         *string `json:"expires_at,omitempty"`
 }

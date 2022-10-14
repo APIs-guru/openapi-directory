@@ -19,6 +19,6 @@ const (
 )
 
 type ConfigManagementHierarchyControllerDeploymentState struct {
-	Extension *ConfigManagementHierarchyControllerDeploymentStateExtensionEnum `json:"extension"`
-	Hnc       *ConfigManagementHierarchyControllerDeploymentStateHncEnum       `json:"hnc"`
+	Extension *ConfigManagementHierarchyControllerDeploymentStateExtensionEnum `json:"extension,omitempty"`
+	Hnc       *ConfigManagementHierarchyControllerDeploymentStateHncEnum       `json:"hnc,omitempty"`
 }

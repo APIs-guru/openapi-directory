@@ -1,7 +1,7 @@
 package shared
 
 type GSuitePrincipal struct {
-	GsuiteDomain     *bool   `json:"gsuiteDomain"`
-	GsuiteGroupEmail *string `json:"gsuiteGroupEmail"`
-	GsuiteUserEmail  *string `json:"gsuiteUserEmail"`
+	GsuiteDomain     *bool   `json:"gsuiteDomain,omitempty"`
+	GsuiteGroupEmail *string `json:"gsuiteGroupEmail,omitempty"`
+	GsuiteUserEmail  *string `json:"gsuiteUserEmail,omitempty"`
 }

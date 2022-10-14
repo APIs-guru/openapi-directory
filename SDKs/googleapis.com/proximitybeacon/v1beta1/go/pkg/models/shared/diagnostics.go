@@ -10,7 +10,7 @@ const (
 )
 
 type Diagnostics struct {
-	Alerts                  []DiagnosticsAlertsEnum `json:"alerts"`
-	BeaconName              *string                 `json:"beaconName"`
-	EstimatedLowBatteryDate *Date                   `json:"estimatedLowBatteryDate"`
+	Alerts                  []DiagnosticsAlertsEnum `json:"alerts,omitempty"`
+	BeaconName              *string                 `json:"beaconName,omitempty"`
+	EstimatedLowBatteryDate *Date                   `json:"estimatedLowBatteryDate,omitempty"`
 }

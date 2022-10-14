@@ -1,6 +1,6 @@
 package shared
 
 type Error struct {
-	Domain *string `json:"domain"`
-	Reason *string `json:"reason"`
+	Domain *string `json:"domain,omitempty"`
+	Reason *string `json:"reason,omitempty"`
 }

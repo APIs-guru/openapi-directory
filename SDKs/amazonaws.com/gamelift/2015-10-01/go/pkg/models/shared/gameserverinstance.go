@@ -1,8 +1,8 @@
 package shared
 
 type GameServerInstance struct {
-	GameServerGroupArn  *string                       `json:"GameServerGroupArn"`
-	GameServerGroupName *string                       `json:"GameServerGroupName"`
-	InstanceID          *string                       `json:"InstanceId"`
-	InstanceStatus      *GameServerInstanceStatusEnum `json:"InstanceStatus"`
+	GameServerGroupArn  *string                       `json:"GameServerGroupArn,omitempty"`
+	GameServerGroupName *string                       `json:"GameServerGroupName,omitempty"`
+	InstanceID          *string                       `json:"InstanceId,omitempty"`
+	InstanceStatus      *GameServerInstanceStatusEnum `json:"InstanceStatus,omitempty"`
 }

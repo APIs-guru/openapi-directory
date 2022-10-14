@@ -1,23 +1,23 @@
 package shared
 
 type Team struct {
-	Address          *string                `json:"address"`
-	City             *string                `json:"city"`
-	Country          *string                `json:"country"`
-	GmapsPlaceID     *string                `json:"gmaps_place_id"`
-	GmapsURL         *string                `json:"gmaps_url"`
-	HomeChampionship map[string]interface{} `json:"home_championship"`
+	Address          *string                `json:"address,omitempty"`
+	City             *string                `json:"city,omitempty"`
+	Country          *string                `json:"country,omitempty"`
+	GmapsPlaceID     *string                `json:"gmaps_place_id,omitempty"`
+	GmapsURL         *string                `json:"gmaps_url,omitempty"`
+	HomeChampionship map[string]interface{} `json:"home_championship,omitempty"`
 	Key              string                 `json:"key"`
-	Lat              *float64               `json:"lat"`
-	Lng              *float64               `json:"lng"`
-	LocationName     *string                `json:"location_name"`
-	Motto            *string                `json:"motto"`
+	Lat              *float64               `json:"lat,omitempty"`
+	Lng              *float64               `json:"lng,omitempty"`
+	LocationName     *string                `json:"location_name,omitempty"`
+	Motto            *string                `json:"motto,omitempty"`
 	Name             string                 `json:"name"`
-	Nickname         *string                `json:"nickname"`
-	PostalCode       *string                `json:"postal_code"`
-	RookieYear       *int64                 `json:"rookie_year"`
-	SchoolName       *string                `json:"school_name"`
-	StateProv        *string                `json:"state_prov"`
+	Nickname         *string                `json:"nickname,omitempty"`
+	PostalCode       *string                `json:"postal_code,omitempty"`
+	RookieYear       *int64                 `json:"rookie_year,omitempty"`
+	SchoolName       *string                `json:"school_name,omitempty"`
+	StateProv        *string                `json:"state_prov,omitempty"`
 	TeamNumber       int64                  `json:"team_number"`
-	Website          *string                `json:"website"`
+	Website          *string                `json:"website,omitempty"`
 }

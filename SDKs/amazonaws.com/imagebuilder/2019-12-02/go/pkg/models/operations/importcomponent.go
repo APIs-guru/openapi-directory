@@ -35,18 +35,18 @@ const (
 )
 
 type ImportComponentRequestBody struct {
-	ChangeDescription *string                                `json:"changeDescription"`
+	ChangeDescription *string                                `json:"changeDescription,omitempty"`
 	ClientToken       string                                 `json:"clientToken"`
-	Data              *string                                `json:"data"`
-	Description       *string                                `json:"description"`
+	Data              *string                                `json:"data,omitempty"`
+	Description       *string                                `json:"description,omitempty"`
 	Format            ImportComponentRequestBodyFormatEnum   `json:"format"`
-	KmsKeyID          *string                                `json:"kmsKeyId"`
+	KmsKeyID          *string                                `json:"kmsKeyId,omitempty"`
 	Name              string                                 `json:"name"`
 	Platform          ImportComponentRequestBodyPlatformEnum `json:"platform"`
 	SemanticVersion   string                                 `json:"semanticVersion"`
-	Tags              map[string]string                      `json:"tags"`
+	Tags              map[string]string                      `json:"tags,omitempty"`
 	Type              ImportComponentRequestBodyTypeEnum     `json:"type"`
-	URI               *string                                `json:"uri"`
+	URI               *string                                `json:"uri,omitempty"`
 }
 
 type ImportComponentRequest struct {

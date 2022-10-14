@@ -15,9 +15,9 @@ type BeginTransactionHeaders struct {
 }
 
 type BeginTransactionRequestBody struct {
-	Database    *string `json:"database"`
+	Database    *string `json:"database,omitempty"`
 	ResourceArn string  `json:"resourceArn"`
-	Schema      *string `json:"schema"`
+	Schema      *string `json:"schema,omitempty"`
 	SecretArn   string  `json:"secretArn"`
 }
 

@@ -9,8 +9,8 @@ type PostUsersIDCategoriesPathParams struct {
 }
 
 type PostUsersIDCategoriesRequestBody struct {
-	Colour   *string `json:"colour"`
-	ParentID *int64  `json:"parent_id"`
+	Colour   *string `json:"colour,omitempty"`
+	ParentID *int64  `json:"parent_id,omitempty"`
 	Title    string  `json:"title"`
 }
 

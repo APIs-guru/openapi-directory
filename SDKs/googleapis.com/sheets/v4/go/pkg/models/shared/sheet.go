@@ -1,17 +1,17 @@
 package shared
 
 type Sheet struct {
-	BandedRanges       []BandedRange           `json:"bandedRanges"`
-	BasicFilter        *BasicFilter            `json:"basicFilter"`
-	Charts             []EmbeddedChart         `json:"charts"`
-	ColumnGroups       []DimensionGroup        `json:"columnGroups"`
-	ConditionalFormats []ConditionalFormatRule `json:"conditionalFormats"`
-	Data               []GridData              `json:"data"`
-	DeveloperMetadata  []DeveloperMetadata     `json:"developerMetadata"`
-	FilterViews        []FilterView            `json:"filterViews"`
-	Merges             []GridRange             `json:"merges"`
-	Properties         *SheetProperties        `json:"properties"`
-	ProtectedRanges    []ProtectedRange        `json:"protectedRanges"`
-	RowGroups          []DimensionGroup        `json:"rowGroups"`
-	Slicers            []Slicer                `json:"slicers"`
+	BandedRanges       []BandedRange           `json:"bandedRanges,omitempty"`
+	BasicFilter        *BasicFilter            `json:"basicFilter,omitempty"`
+	Charts             []EmbeddedChart         `json:"charts,omitempty"`
+	ColumnGroups       []DimensionGroup        `json:"columnGroups,omitempty"`
+	ConditionalFormats []ConditionalFormatRule `json:"conditionalFormats,omitempty"`
+	Data               []GridData              `json:"data,omitempty"`
+	DeveloperMetadata  []DeveloperMetadata     `json:"developerMetadata,omitempty"`
+	FilterViews        []FilterView            `json:"filterViews,omitempty"`
+	Merges             []GridRange             `json:"merges,omitempty"`
+	Properties         *SheetProperties        `json:"properties,omitempty"`
+	ProtectedRanges    []ProtectedRange        `json:"protectedRanges,omitempty"`
+	RowGroups          []DimensionGroup        `json:"rowGroups,omitempty"`
+	Slicers            []Slicer                `json:"slicers,omitempty"`
 }

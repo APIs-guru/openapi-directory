@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudRecommenderV1beta1ValueMatcher struct {
-	MatchesPattern *string `json:"matchesPattern"`
+	MatchesPattern *string `json:"matchesPattern,omitempty"`
 }

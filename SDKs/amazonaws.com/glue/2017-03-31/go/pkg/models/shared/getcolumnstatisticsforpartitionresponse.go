@@ -1,6 +1,6 @@
 package shared
 
 type GetColumnStatisticsForPartitionResponse struct {
-	ColumnStatisticsList []ColumnStatistics `json:"ColumnStatisticsList"`
-	Errors               []ColumnError      `json:"Errors"`
+	ColumnStatisticsList []ColumnStatistics `json:"ColumnStatisticsList,omitempty"`
+	Errors               []ColumnError      `json:"Errors,omitempty"`
 }

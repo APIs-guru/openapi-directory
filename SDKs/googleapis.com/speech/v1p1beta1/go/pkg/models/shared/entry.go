@@ -1,7 +1,7 @@
 package shared
 
 type Entry struct {
-	CaseSensitive *bool   `json:"caseSensitive"`
-	Replace       *string `json:"replace"`
-	Search        *string `json:"search"`
+	CaseSensitive *bool   `json:"caseSensitive,omitempty"`
+	Replace       *string `json:"replace,omitempty"`
+	Search        *string `json:"search,omitempty"`
 }

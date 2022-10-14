@@ -1,10 +1,10 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink struct {
-	AdsPersonalizationEnabled  *bool   `json:"adsPersonalizationEnabled"`
-	AdvertiserDisplayName      *string `json:"advertiserDisplayName"`
-	AdvertiserID               *string `json:"advertiserId"`
-	CampaignDataSharingEnabled *bool   `json:"campaignDataSharingEnabled"`
-	CostDataSharingEnabled     *bool   `json:"costDataSharingEnabled"`
-	Name                       *string `json:"name"`
+	AdsPersonalizationEnabled  *bool   `json:"adsPersonalizationEnabled,omitempty"`
+	AdvertiserDisplayName      *string `json:"advertiserDisplayName,omitempty"`
+	AdvertiserID               *string `json:"advertiserId,omitempty"`
+	CampaignDataSharingEnabled *bool   `json:"campaignDataSharingEnabled,omitempty"`
+	CostDataSharingEnabled     *bool   `json:"costDataSharingEnabled,omitempty"`
+	Name                       *string `json:"name,omitempty"`
 }

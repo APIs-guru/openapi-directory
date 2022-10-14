@@ -1,7 +1,7 @@
 package shared
 
 type LineItemProperties struct {
-	BuyerProtection   *bool `json:"buyerProtection"`
-	FromBestOffer     *bool `json:"fromBestOffer"`
-	SoldViaAdCampaign *bool `json:"soldViaAdCampaign"`
+	BuyerProtection   *bool `json:"buyerProtection,omitempty"`
+	FromBestOffer     *bool `json:"fromBestOffer,omitempty"`
+	SoldViaAdCampaign *bool `json:"soldViaAdCampaign,omitempty"`
 }

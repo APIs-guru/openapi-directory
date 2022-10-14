@@ -5,14 +5,14 @@ import (
 )
 
 type DatasetExportJob struct {
-	CreationDateTime    *time.Time              `json:"creationDateTime"`
-	DatasetArn          *string                 `json:"datasetArn"`
-	DatasetExportJobArn *string                 `json:"datasetExportJobArn"`
-	FailureReason       *string                 `json:"failureReason"`
-	IngestionMode       *IngestionModeEnum      `json:"ingestionMode"`
-	JobName             *string                 `json:"jobName"`
-	JobOutput           *DatasetExportJobOutput `json:"jobOutput"`
-	LastUpdatedDateTime *time.Time              `json:"lastUpdatedDateTime"`
-	RoleArn             *string                 `json:"roleArn"`
-	Status              *string                 `json:"status"`
+	CreationDateTime    *time.Time              `json:"creationDateTime,omitempty"`
+	DatasetArn          *string                 `json:"datasetArn,omitempty"`
+	DatasetExportJobArn *string                 `json:"datasetExportJobArn,omitempty"`
+	FailureReason       *string                 `json:"failureReason,omitempty"`
+	IngestionMode       *IngestionModeEnum      `json:"ingestionMode,omitempty"`
+	JobName             *string                 `json:"jobName,omitempty"`
+	JobOutput           *DatasetExportJobOutput `json:"jobOutput,omitempty"`
+	LastUpdatedDateTime *time.Time              `json:"lastUpdatedDateTime,omitempty"`
+	RoleArn             *string                 `json:"roleArn,omitempty"`
+	Status              *string                 `json:"status,omitempty"`
 }

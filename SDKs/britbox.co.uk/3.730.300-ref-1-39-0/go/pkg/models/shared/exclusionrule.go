@@ -22,10 +22,10 @@ const (
 )
 
 type ExclusionRule struct {
-	Description          *string                                `json:"description"`
-	Device               *string                                `json:"device"`
-	ExcludeAirplay       *bool                                  `json:"excludeAirplay"`
-	ExcludeChromecast    *bool                                  `json:"excludeChromecast"`
-	ExcludeDelivery      *ExclusionRuleExcludeDeliveryEnum      `json:"excludeDelivery"`
-	ExcludeMinResolution *ExclusionRuleExcludeMinResolutionEnum `json:"excludeMinResolution"`
+	Description          *string                                `json:"description,omitempty"`
+	Device               *string                                `json:"device,omitempty"`
+	ExcludeAirplay       *bool                                  `json:"excludeAirplay,omitempty"`
+	ExcludeChromecast    *bool                                  `json:"excludeChromecast,omitempty"`
+	ExcludeDelivery      *ExclusionRuleExcludeDeliveryEnum      `json:"excludeDelivery,omitempty"`
+	ExcludeMinResolution *ExclusionRuleExcludeMinResolutionEnum `json:"excludeMinResolution,omitempty"`
 }

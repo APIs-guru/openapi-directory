@@ -10,6 +10,6 @@ const (
 )
 
 type OperatingStatus struct {
-	AdditionalInfo *string                 `json:"additional_info"`
+	AdditionalInfo *string                 `json:"additional_info,omitempty"`
 	Code           OperatingStatusCodeEnum `json:"code"`
 }

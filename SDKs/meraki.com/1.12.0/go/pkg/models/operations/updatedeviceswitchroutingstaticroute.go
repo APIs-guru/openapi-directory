@@ -6,11 +6,11 @@ type UpdateDeviceSwitchRoutingStaticRoutePathParams struct {
 }
 
 type UpdateDeviceSwitchRoutingStaticRouteRequestBody struct {
-	AdvertiseViaOspfEnabled     *bool   `json:"advertiseViaOspfEnabled"`
-	Name                        *string `json:"name"`
-	NextHopIP                   *string `json:"nextHopIp"`
-	PreferOverOspfRoutesEnabled *bool   `json:"preferOverOspfRoutesEnabled"`
-	Subnet                      *string `json:"subnet"`
+	AdvertiseViaOspfEnabled     *bool   `json:"advertiseViaOspfEnabled,omitempty"`
+	Name                        *string `json:"name,omitempty"`
+	NextHopIP                   *string `json:"nextHopIp,omitempty"`
+	PreferOverOspfRoutesEnabled *bool   `json:"preferOverOspfRoutesEnabled,omitempty"`
+	Subnet                      *string `json:"subnet,omitempty"`
 }
 
 type UpdateDeviceSwitchRoutingStaticRouteRequest struct {

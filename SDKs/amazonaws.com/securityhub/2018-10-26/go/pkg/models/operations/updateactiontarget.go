@@ -15,8 +15,8 @@ type UpdateActionTargetHeaders struct {
 }
 
 type UpdateActionTargetRequestBody struct {
-	Description *string `json:"Description"`
-	Name        *string `json:"Name"`
+	Description *string `json:"Description,omitempty"`
+	Name        *string `json:"Name,omitempty"`
 }
 
 type UpdateActionTargetRequest struct {

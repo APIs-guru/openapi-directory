@@ -9,9 +9,9 @@ const (
 )
 
 type User struct {
-	DisplayName *string       `json:"displayName"`
-	DomainID    *string       `json:"domainId"`
-	IsAnonymous *bool         `json:"isAnonymous"`
-	Name        *string       `json:"name"`
-	Type        *UserTypeEnum `json:"type"`
+	DisplayName *string       `json:"displayName,omitempty"`
+	DomainID    *string       `json:"domainId,omitempty"`
+	IsAnonymous *bool         `json:"isAnonymous,omitempty"`
+	Name        *string       `json:"name,omitempty"`
+	Type        *UserTypeEnum `json:"type,omitempty"`
 }

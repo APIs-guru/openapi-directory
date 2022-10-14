@@ -32,29 +32,29 @@ const (
 )
 
 type GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData struct {
-	AuthPhoneNumberHash  *string                                                     `json:"auth_phone_number_hash"`
-	AuthProvider         *string                                                     `json:"auth_provider"`
-	AuthSecondFactorType *GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum `json:"auth_second_factor_type"`
-	AuthSessionIDHash    *string                                                     `json:"auth_session_id_hash"`
-	AuthSessionStartedAt *string                                                     `json:"auth_session_started_at"`
+	AuthPhoneNumberHash  *string                                                     `json:"auth_phone_number_hash,omitempty"`
+	AuthProvider         *string                                                     `json:"auth_provider,omitempty"`
+	AuthSecondFactorType *GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum `json:"auth_second_factor_type,omitempty"`
+	AuthSessionIDHash    *string                                                     `json:"auth_session_id_hash,omitempty"`
+	AuthSessionStartedAt *string                                                     `json:"auth_session_started_at,omitempty"`
 	AuthType             GeneratePdfRequestBodyDataRequestsAuthTypeEnum              `json:"auth_type"`
-	AuthUserIDHash       *string                                                     `json:"auth_user_id_hash"`
-	AuthUsernameHash     *string                                                     `json:"auth_username_hash"`
+	AuthUserIDHash       *string                                                     `json:"auth_user_id_hash,omitempty"`
+	AuthUsernameHash     *string                                                     `json:"auth_username_hash,omitempty"`
 	Email                string                                                      `json:"email"`
-	Fields               []string                                                    `json:"fields"`
-	Metadata             map[string]interface{}                                      `json:"metadata"`
-	Name                 *string                                                     `json:"name"`
-	Order                *int64                                                      `json:"order"`
+	Fields               []string                                                    `json:"fields,omitempty"`
+	Metadata             map[string]interface{}                                      `json:"metadata,omitempty"`
+	Name                 *string                                                     `json:"name,omitempty"`
+	Order                *int64                                                      `json:"order,omitempty"`
 }
 
 type GeneratePdfRequestBodySubmissionData struct {
-	CSS            *string                                                             `json:"css"`
+	CSS            *string                                                             `json:"css,omitempty"`
 	Data           map[string]interface{}                                              `json:"data"`
-	DataRequests   []GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData `json:"data_requests"`
-	FieldOverrides map[string]interface{}                                              `json:"field_overrides"`
-	HTML           *string                                                             `json:"html"`
-	Metadata       map[string]interface{}                                              `json:"metadata"`
-	Test           *bool                                                               `json:"test"`
+	DataRequests   []GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData `json:"data_requests,omitempty"`
+	FieldOverrides map[string]interface{}                                              `json:"field_overrides,omitempty"`
+	HTML           *string                                                             `json:"html,omitempty"`
+	Metadata       map[string]interface{}                                              `json:"metadata,omitempty"`
+	Test           *bool                                                               `json:"test,omitempty"`
 }
 
 type GeneratePdfSecurity struct {
@@ -75,7 +75,7 @@ const (
 )
 
 type GeneratePdf201ApplicationJSONCreateSubmissionResponse struct {
-	Errors     []string                                `json:"errors"`
+	Errors     []string                                `json:"errors,omitempty"`
 	Status     GeneratePdf201ApplicationJSONStatusEnum `json:"status"`
 	Submission shared.Submission                       `json:"submission"`
 }

@@ -15,8 +15,8 @@ type UpdateIncidentRecordHeaders struct {
 }
 
 type UpdateIncidentRecordRequestBodyChatChannel struct {
-	ChatbotSns []string               `json:"chatbotSns"`
-	Empty      map[string]interface{} `json:"empty"`
+	ChatbotSns []string               `json:"chatbotSns,omitempty"`
+	Empty      map[string]interface{} `json:"empty,omitempty"`
 }
 
 type UpdateIncidentRecordRequestBodyStatusEnum string
@@ -28,13 +28,13 @@ const (
 
 type UpdateIncidentRecordRequestBody struct {
 	Arn                 string                                      `json:"arn"`
-	ChatChannel         *UpdateIncidentRecordRequestBodyChatChannel `json:"chatChannel"`
-	ClientToken         *string                                     `json:"clientToken"`
-	Impact              *int64                                      `json:"impact"`
-	NotificationTargets []shared.NotificationTargetItem             `json:"notificationTargets"`
-	Status              *UpdateIncidentRecordRequestBodyStatusEnum  `json:"status"`
-	Summary             *string                                     `json:"summary"`
-	Title               *string                                     `json:"title"`
+	ChatChannel         *UpdateIncidentRecordRequestBodyChatChannel `json:"chatChannel,omitempty"`
+	ClientToken         *string                                     `json:"clientToken,omitempty"`
+	Impact              *int64                                      `json:"impact,omitempty"`
+	NotificationTargets []shared.NotificationTargetItem             `json:"notificationTargets,omitempty"`
+	Status              *UpdateIncidentRecordRequestBodyStatusEnum  `json:"status,omitempty"`
+	Summary             *string                                     `json:"summary,omitempty"`
+	Title               *string                                     `json:"title,omitempty"`
 }
 
 type UpdateIncidentRecordRequest struct {

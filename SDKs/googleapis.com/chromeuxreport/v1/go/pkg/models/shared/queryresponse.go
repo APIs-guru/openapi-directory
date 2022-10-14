@@ -1,6 +1,6 @@
 package shared
 
 type QueryResponse struct {
-	Record                  *Record           `json:"record"`
-	URLNormalizationDetails *URLNormalization `json:"urlNormalizationDetails"`
+	Record                  *Record           `json:"record,omitempty"`
+	URLNormalizationDetails *URLNormalization `json:"urlNormalizationDetails,omitempty"`
 }

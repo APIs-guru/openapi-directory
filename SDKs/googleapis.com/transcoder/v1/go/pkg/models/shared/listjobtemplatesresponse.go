@@ -1,7 +1,7 @@
 package shared
 
 type ListJobTemplatesResponse struct {
-	JobTemplates  []JobTemplate `json:"jobTemplates"`
-	NextPageToken *string       `json:"nextPageToken"`
-	Unreachable   []string      `json:"unreachable"`
+	JobTemplates  []JobTemplate `json:"jobTemplates,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	Unreachable   []string      `json:"unreachable,omitempty"`
 }

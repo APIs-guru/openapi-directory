@@ -1,25 +1,25 @@
 package operations
 
 type TrackJourneyEventRequestBodyIdentificationAccount struct {
-	AccountID *string `json:"accountId"`
-	Domain    *string `json:"domain"`
+	AccountID *string `json:"accountId,omitempty"`
+	Domain    *string `json:"domain,omitempty"`
 }
 
 type TrackJourneyEventRequestBodyIdentificationUser struct {
-	Email  *string `json:"email"`
-	UserID *string `json:"userId"`
+	Email  *string `json:"email,omitempty"`
+	UserID *string `json:"userId,omitempty"`
 }
 
 type TrackJourneyEventRequestBodyIdentification struct {
-	Account *TrackJourneyEventRequestBodyIdentificationAccount `json:"account"`
-	User    *TrackJourneyEventRequestBodyIdentificationUser    `json:"user"`
+	Account *TrackJourneyEventRequestBodyIdentificationAccount `json:"account,omitempty"`
+	User    *TrackJourneyEventRequestBodyIdentificationUser    `json:"user,omitempty"`
 }
 
 type TrackJourneyEventRequestBody struct {
 	Identification TrackJourneyEventRequestBodyIdentification `json:"identification"`
-	Metadata       map[string]interface{}                     `json:"metadata"`
+	Metadata       map[string]interface{}                     `json:"metadata,omitempty"`
 	Name           string                                     `json:"name"`
-	TriggeredAt    *string                                    `json:"triggeredAt"`
+	TriggeredAt    *string                                    `json:"triggeredAt,omitempty"`
 }
 
 type TrackJourneyEventRequest struct {
@@ -37,14 +37,14 @@ type TrackJourneyEvent201ApplicationJSON struct {
 }
 
 type TrackJourneyEvent400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header"`
-	Path   map[string]string `json:"path"`
-	Query  map[string]string `json:"query"`
+	Header map[string]string `json:"header,omitempty"`
+	Path   map[string]string `json:"path,omitempty"`
+	Query  map[string]string `json:"query,omitempty"`
 }
 
 type TrackJourneyEvent400ApplicationJSONErrors struct {
-	Fields     map[string]string                                    `json:"fields"`
-	Parameters *TrackJourneyEvent400ApplicationJSONErrorsParameters `json:"parameters"`
+	Fields     map[string]string                                    `json:"fields,omitempty"`
+	Parameters *TrackJourneyEvent400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
 }
 
 type TrackJourneyEvent400ApplicationJSONMeta struct {

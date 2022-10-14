@@ -18,35 +18,35 @@ type GetAnnotationLayerInfoRequest struct {
 }
 
 type GetAnnotationLayerInfo200ApplicationJSONFiltersColumnName struct {
-	Name     *string `json:"name"`
-	Operator *string `json:"operator"`
+	Name     *string `json:"name,omitempty"`
+	Operator *string `json:"operator,omitempty"`
 }
 
 type GetAnnotationLayerInfo200ApplicationJSONFilters struct {
-	ColumnName []GetAnnotationLayerInfo200ApplicationJSONFiltersColumnName `json:"column_name"`
+	ColumnName []GetAnnotationLayerInfo200ApplicationJSONFiltersColumnName `json:"column_name,omitempty"`
 }
 
 type GetAnnotationLayerInfo200ApplicationJSON struct {
-	AddColumns  map[string]interface{}                           `json:"add_columns"`
-	EditColumns map[string]interface{}                           `json:"edit_columns"`
-	Filters     *GetAnnotationLayerInfo200ApplicationJSONFilters `json:"filters"`
-	Permissions []string                                         `json:"permissions"`
+	AddColumns  map[string]interface{}                           `json:"add_columns,omitempty"`
+	EditColumns map[string]interface{}                           `json:"edit_columns,omitempty"`
+	Filters     *GetAnnotationLayerInfo200ApplicationJSONFilters `json:"filters,omitempty"`
+	Permissions []string                                         `json:"permissions,omitempty"`
 }
 
 type GetAnnotationLayerInfo400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerInfo401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerInfo422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerInfo500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerInfoResponse struct {

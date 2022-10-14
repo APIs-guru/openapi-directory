@@ -1,6 +1,6 @@
 package shared
 
 type DeviceID struct {
-	BuildBrand  *string `json:"buildBrand"`
-	BuildDevice *string `json:"buildDevice"`
+	BuildBrand  *string `json:"buildBrand,omitempty"`
+	BuildDevice *string `json:"buildDevice,omitempty"`
 }

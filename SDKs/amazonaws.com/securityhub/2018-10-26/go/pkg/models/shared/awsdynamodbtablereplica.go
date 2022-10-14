@@ -1,10 +1,10 @@
 package shared
 
 type AwsDynamoDbTableReplica struct {
-	GlobalSecondaryIndexes        []AwsDynamoDbTableReplicaGlobalSecondaryIndex  `json:"GlobalSecondaryIndexes"`
-	KmsMasterKeyID                *string                                        `json:"KmsMasterKeyId"`
-	ProvisionedThroughputOverride *AwsDynamoDbTableProvisionedThroughputOverride `json:"ProvisionedThroughputOverride"`
-	RegionName                    *string                                        `json:"RegionName"`
-	ReplicaStatus                 *string                                        `json:"ReplicaStatus"`
-	ReplicaStatusDescription      *string                                        `json:"ReplicaStatusDescription"`
+	GlobalSecondaryIndexes        []AwsDynamoDbTableReplicaGlobalSecondaryIndex  `json:"GlobalSecondaryIndexes,omitempty"`
+	KmsMasterKeyID                *string                                        `json:"KmsMasterKeyId,omitempty"`
+	ProvisionedThroughputOverride *AwsDynamoDbTableProvisionedThroughputOverride `json:"ProvisionedThroughputOverride,omitempty"`
+	RegionName                    *string                                        `json:"RegionName,omitempty"`
+	ReplicaStatus                 *string                                        `json:"ReplicaStatus,omitempty"`
+	ReplicaStatusDescription      *string                                        `json:"ReplicaStatusDescription,omitempty"`
 }

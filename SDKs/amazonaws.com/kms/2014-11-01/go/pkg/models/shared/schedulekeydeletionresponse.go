@@ -5,8 +5,8 @@ import (
 )
 
 type ScheduleKeyDeletionResponse struct {
-	DeletionDate        *time.Time    `json:"DeletionDate"`
-	KeyID               *string       `json:"KeyId"`
-	KeyState            *KeyStateEnum `json:"KeyState"`
-	PendingWindowInDays *int64        `json:"PendingWindowInDays"`
+	DeletionDate        *time.Time    `json:"DeletionDate,omitempty"`
+	KeyID               *string       `json:"KeyId,omitempty"`
+	KeyState            *KeyStateEnum `json:"KeyState,omitempty"`
+	PendingWindowInDays *int64        `json:"PendingWindowInDays,omitempty"`
 }

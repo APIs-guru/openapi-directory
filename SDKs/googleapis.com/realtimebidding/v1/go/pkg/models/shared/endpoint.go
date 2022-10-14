@@ -25,9 +25,9 @@ const (
 )
 
 type Endpoint struct {
-	BidProtocol     *EndpointBidProtocolEnum     `json:"bidProtocol"`
-	MaximumQPS      *string                      `json:"maximumQps"`
-	Name            *string                      `json:"name"`
-	TradingLocation *EndpointTradingLocationEnum `json:"tradingLocation"`
-	URL             *string                      `json:"url"`
+	BidProtocol     *EndpointBidProtocolEnum     `json:"bidProtocol,omitempty"`
+	MaximumQPS      *string                      `json:"maximumQps,omitempty"`
+	Name            *string                      `json:"name,omitempty"`
+	TradingLocation *EndpointTradingLocationEnum `json:"tradingLocation,omitempty"`
+	URL             *string                      `json:"url,omitempty"`
 }

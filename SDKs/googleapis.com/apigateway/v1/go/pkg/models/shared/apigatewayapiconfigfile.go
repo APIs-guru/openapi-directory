@@ -1,6 +1,6 @@
 package shared
 
 type ApigatewayAPIConfigFile struct {
-	Contents *string `json:"contents"`
-	Path     *string `json:"path"`
+	Contents *string `json:"contents,omitempty"`
+	Path     *string `json:"path,omitempty"`
 }

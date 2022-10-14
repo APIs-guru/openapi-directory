@@ -1,12 +1,12 @@
 package shared
 
 type TranslateDocumentRequest struct {
-	CustomizedAttribution *string                      `json:"customizedAttribution"`
-	DocumentInputConfig   *DocumentInputConfig         `json:"documentInputConfig"`
-	DocumentOutputConfig  *DocumentOutputConfig        `json:"documentOutputConfig"`
-	GlossaryConfig        *TranslateTextGlossaryConfig `json:"glossaryConfig"`
-	Labels                map[string]string            `json:"labels"`
-	Model                 *string                      `json:"model"`
-	SourceLanguageCode    *string                      `json:"sourceLanguageCode"`
-	TargetLanguageCode    *string                      `json:"targetLanguageCode"`
+	CustomizedAttribution *string                      `json:"customizedAttribution,omitempty"`
+	DocumentInputConfig   *DocumentInputConfig         `json:"documentInputConfig,omitempty"`
+	DocumentOutputConfig  *DocumentOutputConfig        `json:"documentOutputConfig,omitempty"`
+	GlossaryConfig        *TranslateTextGlossaryConfig `json:"glossaryConfig,omitempty"`
+	Labels                map[string]string            `json:"labels,omitempty"`
+	Model                 *string                      `json:"model,omitempty"`
+	SourceLanguageCode    *string                      `json:"sourceLanguageCode,omitempty"`
+	TargetLanguageCode    *string                      `json:"targetLanguageCode,omitempty"`
 }

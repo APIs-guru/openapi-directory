@@ -11,9 +11,9 @@ type AcceptInvitationHeaders struct {
 }
 
 type AcceptInvitationRequestBody struct {
-	AdministratorAccountID *string `json:"administratorAccountId"`
+	AdministratorAccountID *string `json:"administratorAccountId,omitempty"`
 	InvitationID           string  `json:"invitationId"`
-	MasterAccount          *string `json:"masterAccount"`
+	MasterAccount          *string `json:"masterAccount,omitempty"`
 }
 
 type AcceptInvitationRequest struct {

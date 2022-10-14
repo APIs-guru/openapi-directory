@@ -1,8 +1,8 @@
 package shared
 
 type AwsSnsTopicDetails struct {
-	KmsMasterKeyID *string                   `json:"KmsMasterKeyId"`
-	Owner          *string                   `json:"Owner"`
-	Subscription   []AwsSnsTopicSubscription `json:"Subscription"`
-	TopicName      *string                   `json:"TopicName"`
+	KmsMasterKeyID *string                   `json:"KmsMasterKeyId,omitempty"`
+	Owner          *string                   `json:"Owner,omitempty"`
+	Subscription   []AwsSnsTopicSubscription `json:"Subscription,omitempty"`
+	TopicName      *string                   `json:"TopicName,omitempty"`
 }

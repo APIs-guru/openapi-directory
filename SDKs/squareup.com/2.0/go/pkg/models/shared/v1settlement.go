@@ -1,10 +1,10 @@
 package shared
 
 type V1Settlement struct {
-	BankAccountID *string             `json:"bank_account_id"`
-	Entries       []V1SettlementEntry `json:"entries"`
-	ID            *string             `json:"id"`
-	InitiatedAt   *string             `json:"initiated_at"`
-	Status        *string             `json:"status"`
-	TotalMoney    *V1Money            `json:"total_money"`
+	BankAccountID *string             `json:"bank_account_id,omitempty"`
+	Entries       []V1SettlementEntry `json:"entries,omitempty"`
+	ID            *string             `json:"id,omitempty"`
+	InitiatedAt   *string             `json:"initiated_at,omitempty"`
+	Status        *string             `json:"status,omitempty"`
+	TotalMoney    *V1Money            `json:"total_money,omitempty"`
 }

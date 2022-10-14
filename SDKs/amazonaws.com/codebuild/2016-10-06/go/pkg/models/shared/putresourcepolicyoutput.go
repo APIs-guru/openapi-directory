@@ -1,5 +1,5 @@
 package shared
 
 type PutResourcePolicyOutput struct {
-	ResourceArn *string `json:"resourceArn"`
+	ResourceArn *string `json:"resourceArn,omitempty"`
 }

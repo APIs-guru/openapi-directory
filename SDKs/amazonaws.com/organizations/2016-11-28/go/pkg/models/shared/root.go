@@ -1,8 +1,8 @@
 package shared
 
 type Root struct {
-	Arn         *string             `json:"Arn"`
-	ID          *string             `json:"Id"`
-	Name        *string             `json:"Name"`
-	PolicyTypes []PolicyTypeSummary `json:"PolicyTypes"`
+	Arn         *string             `json:"Arn,omitempty"`
+	ID          *string             `json:"Id,omitempty"`
+	Name        *string             `json:"Name,omitempty"`
+	PolicyTypes []PolicyTypeSummary `json:"PolicyTypes,omitempty"`
 }

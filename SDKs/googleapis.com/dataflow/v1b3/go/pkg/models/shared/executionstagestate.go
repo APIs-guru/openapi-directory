@@ -19,7 +19,7 @@ const (
 )
 
 type ExecutionStageState struct {
-	CurrentStateTime    *string                                     `json:"currentStateTime"`
-	ExecutionStageName  *string                                     `json:"executionStageName"`
-	ExecutionStageState *ExecutionStageStateExecutionStageStateEnum `json:"executionStageState"`
+	CurrentStateTime    *string                                     `json:"currentStateTime,omitempty"`
+	ExecutionStageName  *string                                     `json:"executionStageName,omitempty"`
+	ExecutionStageState *ExecutionStageStateExecutionStageStateEnum `json:"executionStageState,omitempty"`
 }

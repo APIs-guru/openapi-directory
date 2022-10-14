@@ -21,7 +21,7 @@ type UpdateMethodHeaders struct {
 }
 
 type UpdateMethodRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateMethodRequest struct {

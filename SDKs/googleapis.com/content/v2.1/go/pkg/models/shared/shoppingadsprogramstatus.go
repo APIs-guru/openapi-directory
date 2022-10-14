@@ -10,6 +10,6 @@ const (
 )
 
 type ShoppingAdsProgramStatus struct {
-	GlobalState    *ShoppingAdsProgramStatusGlobalStateEnum `json:"globalState"`
-	RegionStatuses []ShoppingAdsProgramStatusRegionStatus   `json:"regionStatuses"`
+	GlobalState    *ShoppingAdsProgramStatusGlobalStateEnum `json:"globalState,omitempty"`
+	RegionStatuses []ShoppingAdsProgramStatusRegionStatus   `json:"regionStatuses,omitempty"`
 }

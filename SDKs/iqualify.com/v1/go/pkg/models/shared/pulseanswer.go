@@ -1,7 +1,7 @@
 package shared
 
 type PulseAnswer struct {
-	MultiChoiceAnswer []PulseMcqOption     `json:"multiChoiceAnswer"`
-	SpatialAnswer     []PulseSpatialOption `json:"spatialAnswer"`
-	TextAnswer        *string              `json:"textAnswer"`
+	MultiChoiceAnswer []PulseMcqOption     `json:"multiChoiceAnswer,omitempty"`
+	SpatialAnswer     []PulseSpatialOption `json:"spatialAnswer,omitempty"`
+	TextAnswer        *string              `json:"textAnswer,omitempty"`
 }

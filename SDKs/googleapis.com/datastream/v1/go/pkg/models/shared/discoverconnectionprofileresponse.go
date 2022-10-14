@@ -1,7 +1,7 @@
 package shared
 
 type DiscoverConnectionProfileResponse struct {
-	MysqlRdbms      *MysqlRdbms      `json:"mysqlRdbms"`
-	OracleRdbms     *OracleRdbms     `json:"oracleRdbms"`
-	PostgresqlRdbms *PostgresqlRdbms `json:"postgresqlRdbms"`
+	MysqlRdbms      *MysqlRdbms      `json:"mysqlRdbms,omitempty"`
+	OracleRdbms     *OracleRdbms     `json:"oracleRdbms,omitempty"`
+	PostgresqlRdbms *PostgresqlRdbms `json:"postgresqlRdbms,omitempty"`
 }

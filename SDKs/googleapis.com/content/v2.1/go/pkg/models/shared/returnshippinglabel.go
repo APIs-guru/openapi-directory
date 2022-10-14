@@ -1,7 +1,7 @@
 package shared
 
 type ReturnShippingLabel struct {
-	Carrier    *string `json:"carrier"`
-	LabelURI   *string `json:"labelUri"`
-	TrackingID *string `json:"trackingId"`
+	Carrier    *string `json:"carrier,omitempty"`
+	LabelURI   *string `json:"labelUri,omitempty"`
+	TrackingID *string `json:"trackingId,omitempty"`
 }

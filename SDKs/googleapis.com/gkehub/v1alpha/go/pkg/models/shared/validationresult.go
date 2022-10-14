@@ -9,7 +9,7 @@ const (
 )
 
 type ValidationResult struct {
-	Result    *string                        `json:"result"`
-	Success   *bool                          `json:"success"`
-	Validator *ValidationResultValidatorEnum `json:"validator"`
+	Result    *string                        `json:"result,omitempty"`
+	Success   *bool                          `json:"success,omitempty"`
+	Validator *ValidationResultValidatorEnum `json:"validator,omitempty"`
 }

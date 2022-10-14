@@ -26,9 +26,9 @@ type GetDomains200ApplicationJSONDomains struct {
 	Name                string                                             `json:"name"`
 	Nameservers         []string                                           `json:"nameservers"`
 	NsVerifiedAt        int64                                              `json:"nsVerifiedAt"`
-	OrderedAt           *int64                                             `json:"orderedAt"`
+	OrderedAt           *int64                                             `json:"orderedAt,omitempty"`
 	ServiceType         GetDomains200ApplicationJSONDomainsServiceTypeEnum `json:"serviceType"`
-	TransferredAt       *int64                                             `json:"transferredAt"`
+	TransferredAt       *int64                                             `json:"transferredAt,omitempty"`
 	TxtVerifiedAt       int64                                              `json:"txtVerifiedAt"`
 	VerificationRecord  string                                             `json:"verificationRecord"`
 	Verified            bool                                               `json:"verified"`

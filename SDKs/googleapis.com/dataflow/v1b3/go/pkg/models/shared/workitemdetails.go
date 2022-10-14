@@ -12,12 +12,12 @@ const (
 )
 
 type WorkItemDetails struct {
-	AttemptID     *string                   `json:"attemptId"`
-	EndTime       *string                   `json:"endTime"`
-	Metrics       []MetricUpdate            `json:"metrics"`
-	Progress      *ProgressTimeseries       `json:"progress"`
-	StartTime     *string                   `json:"startTime"`
-	State         *WorkItemDetailsStateEnum `json:"state"`
-	StragglerInfo *StragglerInfo            `json:"stragglerInfo"`
-	TaskID        *string                   `json:"taskId"`
+	AttemptID     *string                   `json:"attemptId,omitempty"`
+	EndTime       *string                   `json:"endTime,omitempty"`
+	Metrics       []MetricUpdate            `json:"metrics,omitempty"`
+	Progress      *ProgressTimeseries       `json:"progress,omitempty"`
+	StartTime     *string                   `json:"startTime,omitempty"`
+	State         *WorkItemDetailsStateEnum `json:"state,omitempty"`
+	StragglerInfo *StragglerInfo            `json:"stragglerInfo,omitempty"`
+	TaskID        *string                   `json:"taskId,omitempty"`
 }

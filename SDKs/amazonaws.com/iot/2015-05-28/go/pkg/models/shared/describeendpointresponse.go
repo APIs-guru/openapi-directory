@@ -1,5 +1,5 @@
 package shared
 
 type DescribeEndpointResponse struct {
-	EndpointAddress *string `json:"endpointAddress"`
+	EndpointAddress *string `json:"endpointAddress,omitempty"`
 }

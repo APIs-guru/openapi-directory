@@ -33,18 +33,18 @@ type ListBindingRequest struct {
 }
 
 type ListBinding200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListBinding200ApplicationJSONListBindingResponse struct {
-	Bindings []shared.NotifyV1ServiceBinding    `json:"bindings"`
-	Meta     *ListBinding200ApplicationJSONMeta `json:"meta"`
+	Bindings []shared.NotifyV1ServiceBinding    `json:"bindings,omitempty"`
+	Meta     *ListBinding200ApplicationJSONMeta `json:"meta,omitempty"`
 }
 
 type ListBindingResponse struct {

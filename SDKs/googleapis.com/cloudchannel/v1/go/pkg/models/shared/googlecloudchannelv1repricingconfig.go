@@ -9,9 +9,9 @@ const (
 )
 
 type GoogleCloudChannelV1RepricingConfig struct {
-	Adjustment                *GoogleCloudChannelV1RepricingAdjustment                   `json:"adjustment"`
-	ChannelPartnerGranularity map[string]interface{}                                     `json:"channelPartnerGranularity"`
-	EffectiveInvoiceMonth     *GoogleTypeDate                                            `json:"effectiveInvoiceMonth"`
-	EntitlementGranularity    *GoogleCloudChannelV1RepricingConfigEntitlementGranularity `json:"entitlementGranularity"`
-	RebillingBasis            *GoogleCloudChannelV1RepricingConfigRebillingBasisEnum     `json:"rebillingBasis"`
+	Adjustment                *GoogleCloudChannelV1RepricingAdjustment                   `json:"adjustment,omitempty"`
+	ChannelPartnerGranularity map[string]interface{}                                     `json:"channelPartnerGranularity,omitempty"`
+	EffectiveInvoiceMonth     *GoogleTypeDate                                            `json:"effectiveInvoiceMonth,omitempty"`
+	EntitlementGranularity    *GoogleCloudChannelV1RepricingConfigEntitlementGranularity `json:"entitlementGranularity,omitempty"`
+	RebillingBasis            *GoogleCloudChannelV1RepricingConfigRebillingBasisEnum     `json:"rebillingBasis,omitempty"`
 }

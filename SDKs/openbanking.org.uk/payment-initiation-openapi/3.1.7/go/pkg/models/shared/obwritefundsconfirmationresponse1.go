@@ -10,12 +10,12 @@ type ObWriteFundsConfirmationResponse1DataFundsAvailableResult struct {
 }
 
 type ObWriteFundsConfirmationResponse1Data struct {
-	FundsAvailableResult *ObWriteFundsConfirmationResponse1DataFundsAvailableResult `json:"FundsAvailableResult"`
-	SupplementaryData    map[string]interface{}                                     `json:"SupplementaryData"`
+	FundsAvailableResult *ObWriteFundsConfirmationResponse1DataFundsAvailableResult `json:"FundsAvailableResult,omitempty"`
+	SupplementaryData    map[string]interface{}                                     `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteFundsConfirmationResponse1 struct {
 	Data  ObWriteFundsConfirmationResponse1Data `json:"Data"`
-	Links *Links                                `json:"Links"`
-	Meta  *Meta                                 `json:"Meta"`
+	Links *Links                                `json:"Links,omitempty"`
+	Meta  *Meta                                 `json:"Meta,omitempty"`
 }

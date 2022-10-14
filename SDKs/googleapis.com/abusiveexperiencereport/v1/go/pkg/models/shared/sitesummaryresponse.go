@@ -19,11 +19,11 @@ const (
 )
 
 type SiteSummaryResponse struct {
-	AbusiveStatus   *SiteSummaryResponseAbusiveStatusEnum `json:"abusiveStatus"`
-	EnforcementTime *string                               `json:"enforcementTime"`
-	FilterStatus    *SiteSummaryResponseFilterStatusEnum  `json:"filterStatus"`
-	LastChangeTime  *string                               `json:"lastChangeTime"`
-	ReportURL       *string                               `json:"reportUrl"`
-	ReviewedSite    *string                               `json:"reviewedSite"`
-	UnderReview     *bool                                 `json:"underReview"`
+	AbusiveStatus   *SiteSummaryResponseAbusiveStatusEnum `json:"abusiveStatus,omitempty"`
+	EnforcementTime *string                               `json:"enforcementTime,omitempty"`
+	FilterStatus    *SiteSummaryResponseFilterStatusEnum  `json:"filterStatus,omitempty"`
+	LastChangeTime  *string                               `json:"lastChangeTime,omitempty"`
+	ReportURL       *string                               `json:"reportUrl,omitempty"`
+	ReviewedSite    *string                               `json:"reviewedSite,omitempty"`
+	UnderReview     *bool                                 `json:"underReview,omitempty"`
 }

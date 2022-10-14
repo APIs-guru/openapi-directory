@@ -1,18 +1,18 @@
 package shared
 
 type MicrosoftSQLServerSettings struct {
-	BcpPacketSize               *int64               `json:"BcpPacketSize"`
-	ControlTablesFileGroup      *string              `json:"ControlTablesFileGroup"`
-	DatabaseName                *string              `json:"DatabaseName"`
-	Password                    *string              `json:"Password"`
-	Port                        *int64               `json:"Port"`
-	QuerySingleAlwaysOnNode     *bool                `json:"QuerySingleAlwaysOnNode"`
-	ReadBackupOnly              *bool                `json:"ReadBackupOnly"`
-	SafeguardPolicy             *SafeguardPolicyEnum `json:"SafeguardPolicy"`
-	SecretsManagerAccessRoleArn *string              `json:"SecretsManagerAccessRoleArn"`
-	SecretsManagerSecretID      *string              `json:"SecretsManagerSecretId"`
-	ServerName                  *string              `json:"ServerName"`
-	UseBcpFullLoad              *bool                `json:"UseBcpFullLoad"`
-	UseThirdPartyBackupDevice   *bool                `json:"UseThirdPartyBackupDevice"`
-	Username                    *string              `json:"Username"`
+	BcpPacketSize               *int64               `json:"BcpPacketSize,omitempty"`
+	ControlTablesFileGroup      *string              `json:"ControlTablesFileGroup,omitempty"`
+	DatabaseName                *string              `json:"DatabaseName,omitempty"`
+	Password                    *string              `json:"Password,omitempty"`
+	Port                        *int64               `json:"Port,omitempty"`
+	QuerySingleAlwaysOnNode     *bool                `json:"QuerySingleAlwaysOnNode,omitempty"`
+	ReadBackupOnly              *bool                `json:"ReadBackupOnly,omitempty"`
+	SafeguardPolicy             *SafeguardPolicyEnum `json:"SafeguardPolicy,omitempty"`
+	SecretsManagerAccessRoleArn *string              `json:"SecretsManagerAccessRoleArn,omitempty"`
+	SecretsManagerSecretID      *string              `json:"SecretsManagerSecretId,omitempty"`
+	ServerName                  *string              `json:"ServerName,omitempty"`
+	UseBcpFullLoad              *bool                `json:"UseBcpFullLoad,omitempty"`
+	UseThirdPartyBackupDevice   *bool                `json:"UseThirdPartyBackupDevice,omitempty"`
+	Username                    *string              `json:"Username,omitempty"`
 }

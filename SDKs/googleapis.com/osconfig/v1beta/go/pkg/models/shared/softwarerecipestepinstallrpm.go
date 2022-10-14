@@ -1,5 +1,5 @@
 package shared
 
 type SoftwareRecipeStepInstallRpm struct {
-	ArtifactID *string `json:"artifactId"`
+	ArtifactID *string `json:"artifactId,omitempty"`
 }

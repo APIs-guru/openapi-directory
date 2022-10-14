@@ -1,8 +1,8 @@
 package shared
 
 type Material struct {
-	DriveFile    *SharedDriveFile `json:"driveFile"`
-	Form         *Form            `json:"form"`
-	Link         *Link            `json:"link"`
-	YoutubeVideo *YouTubeVideo    `json:"youtubeVideo"`
+	DriveFile    *SharedDriveFile `json:"driveFile,omitempty"`
+	Form         *Form            `json:"form,omitempty"`
+	Link         *Link            `json:"link,omitempty"`
+	YoutubeVideo *YouTubeVideo    `json:"youtubeVideo,omitempty"`
 }

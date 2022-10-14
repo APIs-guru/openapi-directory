@@ -9,7 +9,7 @@ type PutOfferingsOfferingIDMetadataTopicPathParams struct {
 }
 
 type PutOfferingsOfferingIDMetadataTopicRequestBody struct {
-	Topic *string `json:"topic"`
+	Topic *string `json:"topic,omitempty"`
 }
 
 type PutOfferingsOfferingIDMetadataTopicRequest struct {

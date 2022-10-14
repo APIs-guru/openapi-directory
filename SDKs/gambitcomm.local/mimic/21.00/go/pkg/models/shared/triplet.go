@@ -1,7 +1,7 @@
 package shared
 
 type Triplet struct {
-	Device   *string `json:"device"`
-	Mib      *string `json:"mib"`
-	Scenario *int32  `json:"scenario"`
+	Device   *string `json:"device,omitempty"`
+	Mib      *string `json:"mib,omitempty"`
+	Scenario *int32  `json:"scenario,omitempty"`
 }

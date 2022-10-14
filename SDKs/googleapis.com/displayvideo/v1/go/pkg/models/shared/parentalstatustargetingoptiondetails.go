@@ -10,5 +10,5 @@ const (
 )
 
 type ParentalStatusTargetingOptionDetails struct {
-	ParentalStatus *ParentalStatusTargetingOptionDetailsParentalStatusEnum `json:"parentalStatus"`
+	ParentalStatus *ParentalStatusTargetingOptionDetailsParentalStatusEnum `json:"parentalStatus,omitempty"`
 }

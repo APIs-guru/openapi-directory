@@ -1,6 +1,6 @@
 package shared
 
 type AwsEcsTaskDefinitionInferenceAcceleratorsDetails struct {
-	DeviceName *string `json:"DeviceName"`
-	DeviceType *string `json:"DeviceType"`
+	DeviceName *string `json:"DeviceName,omitempty"`
+	DeviceType *string `json:"DeviceType,omitempty"`
 }

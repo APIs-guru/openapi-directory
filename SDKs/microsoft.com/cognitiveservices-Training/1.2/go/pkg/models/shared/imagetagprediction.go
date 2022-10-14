@@ -1,7 +1,7 @@
 package shared
 
 type ImageTagPrediction struct {
-	Probability *float32 `json:"Probability"`
-	Tag         *string  `json:"Tag"`
-	TagID       *string  `json:"TagId"`
+	Probability *float32 `json:"Probability,omitempty"`
+	Tag         *string  `json:"Tag,omitempty"`
+	TagID       *string  `json:"TagId,omitempty"`
 }

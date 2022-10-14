@@ -1,7 +1,7 @@
 package shared
 
 type ItemDraftResponse struct {
-	ItemDraftID       *string `json:"itemDraftId"`
-	SellFlowNativeURI *string `json:"sellFlowNativeUri"`
-	SellFlowURL       *string `json:"sellFlowUrl"`
+	ItemDraftID       *string `json:"itemDraftId,omitempty"`
+	SellFlowNativeURI *string `json:"sellFlowNativeUri,omitempty"`
+	SellFlowURL       *string `json:"sellFlowUrl,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type WebhookAuthConfiguration struct {
-	AllowedIPRange *string `json:"AllowedIPRange"`
-	SecretToken    *string `json:"SecretToken"`
+	AllowedIPRange *string `json:"AllowedIPRange,omitempty"`
+	SecretToken    *string `json:"SecretToken,omitempty"`
 }

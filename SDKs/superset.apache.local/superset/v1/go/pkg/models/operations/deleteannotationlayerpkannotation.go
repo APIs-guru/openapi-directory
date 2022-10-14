@@ -23,23 +23,23 @@ type DeleteAnnotationLayerPkAnnotationRequest struct {
 }
 
 type DeleteAnnotationLayerPkAnnotation200ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotation401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotation404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotation422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotation500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotationResponse struct {

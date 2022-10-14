@@ -1,7 +1,7 @@
 package shared
 
 type UpdateMetadataArguments struct {
-	DeviceID         *string           `json:"deviceId"`
-	DeviceIdentifier *DeviceIdentifier `json:"deviceIdentifier"`
-	DeviceMetadata   *DeviceMetadata   `json:"deviceMetadata"`
+	DeviceID         *string           `json:"deviceId,omitempty"`
+	DeviceIdentifier *DeviceIdentifier `json:"deviceIdentifier,omitempty"`
+	DeviceMetadata   *DeviceMetadata   `json:"deviceMetadata,omitempty"`
 }

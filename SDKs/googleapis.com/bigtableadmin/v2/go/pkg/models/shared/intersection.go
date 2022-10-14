@@ -1,5 +1,5 @@
 package shared
 
 type Intersection struct {
-	Rules []GcRule `json:"rules"`
+	Rules []GcRule `json:"rules,omitempty"`
 }

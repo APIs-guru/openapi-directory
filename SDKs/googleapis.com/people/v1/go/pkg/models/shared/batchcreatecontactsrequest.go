@@ -10,7 +10,7 @@ const (
 )
 
 type BatchCreateContactsRequest struct {
-	Contacts []ContactToCreate                       `json:"contacts"`
-	ReadMask *string                                 `json:"readMask"`
-	Sources  []BatchCreateContactsRequestSourcesEnum `json:"sources"`
+	Contacts []ContactToCreate                       `json:"contacts,omitempty"`
+	ReadMask *string                                 `json:"readMask,omitempty"`
+	Sources  []BatchCreateContactsRequestSourcesEnum `json:"sources,omitempty"`
 }

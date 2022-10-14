@@ -1,6 +1,6 @@
 package shared
 
 type SearchResourcesResponse struct {
-	MatchingResources []MatchingResource `json:"matchingResources"`
-	NextToken         *string            `json:"nextToken"`
+	MatchingResources []MatchingResource `json:"matchingResources,omitempty"`
+	NextToken         *string            `json:"nextToken,omitempty"`
 }

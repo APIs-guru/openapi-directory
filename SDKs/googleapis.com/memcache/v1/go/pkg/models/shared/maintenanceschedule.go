@@ -1,7 +1,7 @@
 package shared
 
 type MaintenanceSchedule struct {
-	EndTime              *string `json:"endTime"`
-	ScheduleDeadlineTime *string `json:"scheduleDeadlineTime"`
-	StartTime            *string `json:"startTime"`
+	EndTime              *string `json:"endTime,omitempty"`
+	ScheduleDeadlineTime *string `json:"scheduleDeadlineTime,omitempty"`
+	StartTime            *string `json:"startTime,omitempty"`
 }

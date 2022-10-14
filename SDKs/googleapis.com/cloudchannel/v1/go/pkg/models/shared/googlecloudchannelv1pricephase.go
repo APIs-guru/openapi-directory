@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleCloudChannelV1PricePhase struct {
-	FirstPeriod *int32                                        `json:"firstPeriod"`
-	LastPeriod  *int32                                        `json:"lastPeriod"`
-	PeriodType  *GoogleCloudChannelV1PricePhasePeriodTypeEnum `json:"periodType"`
-	Price       *GoogleCloudChannelV1Price                    `json:"price"`
-	PriceTiers  []GoogleCloudChannelV1PriceTier               `json:"priceTiers"`
+	FirstPeriod *int32                                        `json:"firstPeriod,omitempty"`
+	LastPeriod  *int32                                        `json:"lastPeriod,omitempty"`
+	PeriodType  *GoogleCloudChannelV1PricePhasePeriodTypeEnum `json:"periodType,omitempty"`
+	Price       *GoogleCloudChannelV1Price                    `json:"price,omitempty"`
+	PriceTiers  []GoogleCloudChannelV1PriceTier               `json:"priceTiers,omitempty"`
 }

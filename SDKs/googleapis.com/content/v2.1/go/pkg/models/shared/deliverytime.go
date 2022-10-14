@@ -1,14 +1,14 @@
 package shared
 
 type DeliveryTime struct {
-	CutoffTime                  *CutoffTime                  `json:"cutoffTime"`
-	HandlingBusinessDayConfig   *BusinessDayConfig           `json:"handlingBusinessDayConfig"`
-	HolidayCutoffs              []HolidayCutoff              `json:"holidayCutoffs"`
-	MaxHandlingTimeInDays       *int64                       `json:"maxHandlingTimeInDays"`
-	MaxTransitTimeInDays        *int64                       `json:"maxTransitTimeInDays"`
-	MinHandlingTimeInDays       *int64                       `json:"minHandlingTimeInDays"`
-	MinTransitTimeInDays        *int64                       `json:"minTransitTimeInDays"`
-	TransitBusinessDayConfig    *BusinessDayConfig           `json:"transitBusinessDayConfig"`
-	TransitTimeTable            *TransitTable                `json:"transitTimeTable"`
-	WarehouseBasedDeliveryTimes []WarehouseBasedDeliveryTime `json:"warehouseBasedDeliveryTimes"`
+	CutoffTime                  *CutoffTime                  `json:"cutoffTime,omitempty"`
+	HandlingBusinessDayConfig   *BusinessDayConfig           `json:"handlingBusinessDayConfig,omitempty"`
+	HolidayCutoffs              []HolidayCutoff              `json:"holidayCutoffs,omitempty"`
+	MaxHandlingTimeInDays       *int64                       `json:"maxHandlingTimeInDays,omitempty"`
+	MaxTransitTimeInDays        *int64                       `json:"maxTransitTimeInDays,omitempty"`
+	MinHandlingTimeInDays       *int64                       `json:"minHandlingTimeInDays,omitempty"`
+	MinTransitTimeInDays        *int64                       `json:"minTransitTimeInDays,omitempty"`
+	TransitBusinessDayConfig    *BusinessDayConfig           `json:"transitBusinessDayConfig,omitempty"`
+	TransitTimeTable            *TransitTable                `json:"transitTimeTable,omitempty"`
+	WarehouseBasedDeliveryTimes []WarehouseBasedDeliveryTime `json:"warehouseBasedDeliveryTimes,omitempty"`
 }

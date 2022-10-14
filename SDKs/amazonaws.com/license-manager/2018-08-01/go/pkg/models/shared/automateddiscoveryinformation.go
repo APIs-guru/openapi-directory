@@ -5,5 +5,5 @@ import (
 )
 
 type AutomatedDiscoveryInformation struct {
-	LastRunTime *time.Time `json:"LastRunTime"`
+	LastRunTime *time.Time `json:"LastRunTime,omitempty"`
 }

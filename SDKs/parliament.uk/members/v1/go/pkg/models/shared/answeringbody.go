@@ -1,9 +1,9 @@
 package shared
 
 type AnsweringBody struct {
-	Department *GovernmentDepartment `json:"department"`
-	ID         *int32                `json:"id"`
-	Name       *string               `json:"name"`
-	ShortName  *string               `json:"shortName"`
-	Target     *string               `json:"target"`
+	Department *GovernmentDepartment `json:"department,omitempty"`
+	ID         *int32                `json:"id,omitempty"`
+	Name       *string               `json:"name,omitempty"`
+	ShortName  *string               `json:"shortName,omitempty"`
+	Target     *string               `json:"target,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type CreateAliasResponseModel struct {
-	AliasName  *string `json:"aliasName"`
-	DomainName *string `json:"domainName"`
-	ShortURL   *string `json:"shortUrl"`
+	AliasName  *string `json:"aliasName,omitempty"`
+	DomainName *string `json:"domainName,omitempty"`
+	ShortURL   *string `json:"shortUrl,omitempty"`
 }

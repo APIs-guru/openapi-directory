@@ -1,7 +1,7 @@
 package shared
 
 type OrderLineItemReturnInfo struct {
-	DaysToReturn *int32  `json:"daysToReturn"`
-	IsReturnable *bool   `json:"isReturnable"`
-	PolicyURL    *string `json:"policyUrl"`
+	DaysToReturn *int32  `json:"daysToReturn,omitempty"`
+	IsReturnable *bool   `json:"isReturnable,omitempty"`
+	PolicyURL    *string `json:"policyUrl,omitempty"`
 }

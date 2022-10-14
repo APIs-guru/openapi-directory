@@ -16,7 +16,7 @@ type StartTestHeaders struct {
 
 type StartTestRequestBody struct {
 	SourceServerIDs []string          `json:"sourceServerIDs"`
-	Tags            map[string]string `json:"tags"`
+	Tags            map[string]string `json:"tags,omitempty"`
 }
 
 type StartTestRequest struct {

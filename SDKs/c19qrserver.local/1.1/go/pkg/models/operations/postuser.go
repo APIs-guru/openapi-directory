@@ -5,10 +5,10 @@ import (
 )
 
 type PostUserRequestBodySample struct {
-	Admin    *bool   `json:"admin"`
-	Email    *string `json:"email"`
-	Name     *string `json:"name"`
-	ReadOnly *bool   `json:"read_only"`
+	Admin    *bool   `json:"admin,omitempty"`
+	Email    *string `json:"email,omitempty"`
+	Name     *string `json:"name,omitempty"`
+	ReadOnly *bool   `json:"read_only,omitempty"`
 }
 
 type PostUserRequest struct {

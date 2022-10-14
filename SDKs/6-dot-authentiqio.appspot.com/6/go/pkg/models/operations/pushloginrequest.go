@@ -10,7 +10,7 @@ type PushLoginRequestRequest struct {
 }
 
 type PushLoginRequest200ApplicationJSON struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }
 
 type PushLoginRequestResponse struct {

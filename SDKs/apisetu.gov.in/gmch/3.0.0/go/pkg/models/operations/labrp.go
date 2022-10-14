@@ -17,8 +17,8 @@ const (
 )
 
 type LabrpRequestBody struct {
-	CertificateParameters *LabrpRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *LabrpRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                LabrpRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Labrp400ApplicationJSON struct {
-	Error            *Labrp400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Labrp400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Labrp400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Labrp400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Labrp401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Labrp401ApplicationJSON struct {
-	Error            *Labrp401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Labrp401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Labrp401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Labrp401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Labrp404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Labrp404ApplicationJSON struct {
-	Error            *Labrp404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Labrp404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Labrp404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Labrp404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Labrp500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Labrp500ApplicationJSON struct {
-	Error            *Labrp500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Labrp500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Labrp500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Labrp500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Labrp502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Labrp502ApplicationJSON struct {
-	Error            *Labrp502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Labrp502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Labrp502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Labrp502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Labrp503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Labrp503ApplicationJSON struct {
-	Error            *Labrp503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Labrp503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Labrp503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Labrp503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Labrp504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Labrp504ApplicationJSON struct {
-	Error            *Labrp504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Labrp504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Labrp504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Labrp504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type LabrpResponse struct {

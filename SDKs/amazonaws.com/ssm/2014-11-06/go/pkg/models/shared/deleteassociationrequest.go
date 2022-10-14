@@ -1,7 +1,7 @@
 package shared
 
 type DeleteAssociationRequest struct {
-	AssociationID *string `json:"AssociationId"`
-	InstanceID    *string `json:"InstanceId"`
-	Name          *string `json:"Name"`
+	AssociationID *string `json:"AssociationId,omitempty"`
+	InstanceID    *string `json:"InstanceId,omitempty"`
+	Name          *string `json:"Name,omitempty"`
 }

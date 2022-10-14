@@ -9,6 +9,6 @@ const (
 )
 
 type CreateTaskRequest struct {
-	ResponseView *CreateTaskRequestResponseViewEnum `json:"responseView"`
-	Task         *Task                              `json:"task"`
+	ResponseView *CreateTaskRequestResponseViewEnum `json:"responseView,omitempty"`
+	Task         *Task                              `json:"task,omitempty"`
 }

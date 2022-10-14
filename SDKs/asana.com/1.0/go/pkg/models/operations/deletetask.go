@@ -19,7 +19,7 @@ type DeleteTaskRequest struct {
 }
 
 type DeleteTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteTaskResponse struct {

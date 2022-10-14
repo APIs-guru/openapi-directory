@@ -19,15 +19,15 @@ const (
 )
 
 type GoogleCloudBeyondcorpAppconnectionsV1AppConnection struct {
-	ApplicationEndpoint *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionApplicationEndpoint `json:"applicationEndpoint"`
-	Connectors          []string                                                               `json:"connectors"`
-	CreateTime          *string                                                                `json:"createTime"`
-	DisplayName         *string                                                                `json:"displayName"`
-	Gateway             *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGateway             `json:"gateway"`
-	Labels              map[string]string                                                      `json:"labels"`
-	Name                *string                                                                `json:"name"`
-	State               *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionStateEnum           `json:"state"`
-	Type                *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionTypeEnum            `json:"type"`
-	UID                 *string                                                                `json:"uid"`
-	UpdateTime          *string                                                                `json:"updateTime"`
+	ApplicationEndpoint *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionApplicationEndpoint `json:"applicationEndpoint,omitempty"`
+	Connectors          []string                                                               `json:"connectors,omitempty"`
+	CreateTime          *string                                                                `json:"createTime,omitempty"`
+	DisplayName         *string                                                                `json:"displayName,omitempty"`
+	Gateway             *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGateway             `json:"gateway,omitempty"`
+	Labels              map[string]string                                                      `json:"labels,omitempty"`
+	Name                *string                                                                `json:"name,omitempty"`
+	State               *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionStateEnum           `json:"state,omitempty"`
+	Type                *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionTypeEnum            `json:"type,omitempty"`
+	UID                 *string                                                                `json:"uid,omitempty"`
+	UpdateTime          *string                                                                `json:"updateTime,omitempty"`
 }

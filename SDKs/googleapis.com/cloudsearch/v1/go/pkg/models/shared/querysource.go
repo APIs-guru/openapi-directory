@@ -1,8 +1,8 @@
 package shared
 
 type QuerySource struct {
-	DisplayName *string         `json:"displayName"`
-	Operators   []QueryOperator `json:"operators"`
-	ShortName   *string         `json:"shortName"`
-	Source      *Source         `json:"source"`
+	DisplayName *string         `json:"displayName,omitempty"`
+	Operators   []QueryOperator `json:"operators,omitempty"`
+	ShortName   *string         `json:"shortName,omitempty"`
+	Source      *Source         `json:"source,omitempty"`
 }

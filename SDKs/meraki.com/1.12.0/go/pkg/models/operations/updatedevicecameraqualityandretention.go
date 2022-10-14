@@ -22,13 +22,13 @@ const (
 )
 
 type UpdateDeviceCameraQualityAndRetentionRequestBody struct {
-	AudioRecordingEnabled          *bool                                                           `json:"audioRecordingEnabled"`
-	MotionBasedRetentionEnabled    *bool                                                           `json:"motionBasedRetentionEnabled"`
-	MotionDetectorVersion          *int64                                                          `json:"motionDetectorVersion"`
-	ProfileID                      *string                                                         `json:"profileId"`
-	Quality                        *UpdateDeviceCameraQualityAndRetentionRequestBodyQualityEnum    `json:"quality"`
-	Resolution                     *UpdateDeviceCameraQualityAndRetentionRequestBodyResolutionEnum `json:"resolution"`
-	RestrictedBandwidthModeEnabled *bool                                                           `json:"restrictedBandwidthModeEnabled"`
+	AudioRecordingEnabled          *bool                                                           `json:"audioRecordingEnabled,omitempty"`
+	MotionBasedRetentionEnabled    *bool                                                           `json:"motionBasedRetentionEnabled,omitempty"`
+	MotionDetectorVersion          *int64                                                          `json:"motionDetectorVersion,omitempty"`
+	ProfileID                      *string                                                         `json:"profileId,omitempty"`
+	Quality                        *UpdateDeviceCameraQualityAndRetentionRequestBodyQualityEnum    `json:"quality,omitempty"`
+	Resolution                     *UpdateDeviceCameraQualityAndRetentionRequestBodyResolutionEnum `json:"resolution,omitempty"`
+	RestrictedBandwidthModeEnabled *bool                                                           `json:"restrictedBandwidthModeEnabled,omitempty"`
 }
 
 type UpdateDeviceCameraQualityAndRetentionRequest struct {

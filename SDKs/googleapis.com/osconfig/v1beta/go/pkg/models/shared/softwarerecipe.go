@@ -10,10 +10,10 @@ const (
 )
 
 type SoftwareRecipe struct {
-	Artifacts    []SoftwareRecipeArtifact        `json:"artifacts"`
-	DesiredState *SoftwareRecipeDesiredStateEnum `json:"desiredState"`
-	InstallSteps []SoftwareRecipeStep            `json:"installSteps"`
-	Name         *string                         `json:"name"`
-	UpdateSteps  []SoftwareRecipeStep            `json:"updateSteps"`
-	Version      *string                         `json:"version"`
+	Artifacts    []SoftwareRecipeArtifact        `json:"artifacts,omitempty"`
+	DesiredState *SoftwareRecipeDesiredStateEnum `json:"desiredState,omitempty"`
+	InstallSteps []SoftwareRecipeStep            `json:"installSteps,omitempty"`
+	Name         *string                         `json:"name,omitempty"`
+	UpdateSteps  []SoftwareRecipeStep            `json:"updateSteps,omitempty"`
+	Version      *string                         `json:"version,omitempty"`
 }

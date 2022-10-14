@@ -1,7 +1,7 @@
 package shared
 
 type GetLensReviewOutput struct {
-	LensReview      *LensReview `json:"LensReview"`
-	MilestoneNumber *int64      `json:"MilestoneNumber"`
-	WorkloadID      *string     `json:"WorkloadId"`
+	LensReview      *LensReview `json:"LensReview,omitempty"`
+	MilestoneNumber *int64      `json:"MilestoneNumber,omitempty"`
+	WorkloadID      *string     `json:"WorkloadId,omitempty"`
 }

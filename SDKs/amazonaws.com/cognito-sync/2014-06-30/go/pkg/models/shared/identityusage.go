@@ -5,9 +5,9 @@ import (
 )
 
 type IdentityUsage struct {
-	DataStorage      *int64     `json:"DataStorage"`
-	DatasetCount     *int64     `json:"DatasetCount"`
-	IdentityID       *string    `json:"IdentityId"`
-	IdentityPoolID   *string    `json:"IdentityPoolId"`
-	LastModifiedDate *time.Time `json:"LastModifiedDate"`
+	DataStorage      *int64     `json:"DataStorage,omitempty"`
+	DatasetCount     *int64     `json:"DatasetCount,omitempty"`
+	IdentityID       *string    `json:"IdentityId,omitempty"`
+	IdentityPoolID   *string    `json:"IdentityPoolId,omitempty"`
+	LastModifiedDate *time.Time `json:"LastModifiedDate,omitempty"`
 }

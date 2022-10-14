@@ -7,7 +7,7 @@ type UpdateNetworkSwitchDscpToCosMappingsPathParams struct {
 type UpdateNetworkSwitchDscpToCosMappingsRequestBodyMappings struct {
 	Cos   int64   `json:"cos"`
 	Dscp  int64   `json:"dscp"`
-	Title *string `json:"title"`
+	Title *string `json:"title,omitempty"`
 }
 
 type UpdateNetworkSwitchDscpToCosMappingsRequestBody struct {

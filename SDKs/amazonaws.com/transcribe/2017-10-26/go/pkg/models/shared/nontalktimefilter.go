@@ -1,8 +1,8 @@
 package shared
 
 type NonTalkTimeFilter struct {
-	AbsoluteTimeRange *AbsoluteTimeRange `json:"AbsoluteTimeRange"`
-	Negate            *bool              `json:"Negate"`
-	RelativeTimeRange *RelativeTimeRange `json:"RelativeTimeRange"`
-	Threshold         *int64             `json:"Threshold"`
+	AbsoluteTimeRange *AbsoluteTimeRange `json:"AbsoluteTimeRange,omitempty"`
+	Negate            *bool              `json:"Negate,omitempty"`
+	RelativeTimeRange *RelativeTimeRange `json:"RelativeTimeRange,omitempty"`
+	Threshold         *int64             `json:"Threshold,omitempty"`
 }

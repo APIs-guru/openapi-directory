@@ -1,5 +1,5 @@
 package shared
 
 type InputSerialization struct {
-	Csv *CsvInput `json:"csv"`
+	Csv *CsvInput `json:"csv,omitempty"`
 }

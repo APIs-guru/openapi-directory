@@ -1,7 +1,7 @@
 package shared
 
 type RgbColor struct {
-	Blue  *float32 `json:"blue"`
-	Green *float32 `json:"green"`
-	Red   *float32 `json:"red"`
+	Blue  *float32 `json:"blue,omitempty"`
+	Green *float32 `json:"green,omitempty"`
+	Red   *float32 `json:"red,omitempty"`
 }

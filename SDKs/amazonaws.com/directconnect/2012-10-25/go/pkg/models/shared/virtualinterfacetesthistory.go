@@ -5,12 +5,12 @@ import (
 )
 
 type VirtualInterfaceTestHistory struct {
-	BgpPeers              []string   `json:"bgpPeers"`
-	EndTime               *time.Time `json:"endTime"`
-	OwnerAccount          *string    `json:"ownerAccount"`
-	StartTime             *time.Time `json:"startTime"`
-	Status                *string    `json:"status"`
-	TestDurationInMinutes *int64     `json:"testDurationInMinutes"`
-	TestID                *string    `json:"testId"`
-	VirtualInterfaceID    *string    `json:"virtualInterfaceId"`
+	BgpPeers              []string   `json:"bgpPeers,omitempty"`
+	EndTime               *time.Time `json:"endTime,omitempty"`
+	OwnerAccount          *string    `json:"ownerAccount,omitempty"`
+	StartTime             *time.Time `json:"startTime,omitempty"`
+	Status                *string    `json:"status,omitempty"`
+	TestDurationInMinutes *int64     `json:"testDurationInMinutes,omitempty"`
+	TestID                *string    `json:"testId,omitempty"`
+	VirtualInterfaceID    *string    `json:"virtualInterfaceId,omitempty"`
 }

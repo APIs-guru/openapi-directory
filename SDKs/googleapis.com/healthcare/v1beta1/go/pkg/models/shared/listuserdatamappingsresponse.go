@@ -1,6 +1,6 @@
 package shared
 
 type ListUserDataMappingsResponse struct {
-	NextPageToken    *string           `json:"nextPageToken"`
-	UserDataMappings []UserDataMapping `json:"userDataMappings"`
+	NextPageToken    *string           `json:"nextPageToken,omitempty"`
+	UserDataMappings []UserDataMapping `json:"userDataMappings,omitempty"`
 }

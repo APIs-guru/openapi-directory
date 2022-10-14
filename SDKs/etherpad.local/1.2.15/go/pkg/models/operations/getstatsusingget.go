@@ -1,27 +1,27 @@
 package operations
 
 type GetStatsUsingGet200ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetStatsUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetStatsUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetStatsUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetStatsUsingGetResponse struct {

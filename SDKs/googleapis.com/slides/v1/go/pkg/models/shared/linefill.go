@@ -1,5 +1,5 @@
 package shared
 
 type LineFill struct {
-	SolidFill *SolidFill `json:"solidFill"`
+	SolidFill *SolidFill `json:"solidFill,omitempty"`
 }

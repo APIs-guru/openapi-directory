@@ -1,6 +1,6 @@
 package shared
 
 type WeightedQuantileLoss struct {
-	LossValue *float64 `json:"LossValue"`
-	Quantile  *float64 `json:"Quantile"`
+	LossValue *float64 `json:"LossValue,omitempty"`
+	Quantile  *float64 `json:"Quantile,omitempty"`
 }

@@ -25,22 +25,22 @@ const (
 )
 
 type SectionStyle struct {
-	ColumnProperties         []SectionColumnProperties             `json:"columnProperties"`
-	ColumnSeparatorStyle     *SectionStyleColumnSeparatorStyleEnum `json:"columnSeparatorStyle"`
-	ContentDirection         *SectionStyleContentDirectionEnum     `json:"contentDirection"`
-	DefaultFooterID          *string                               `json:"defaultFooterId"`
-	DefaultHeaderID          *string                               `json:"defaultHeaderId"`
-	EvenPageFooterID         *string                               `json:"evenPageFooterId"`
-	EvenPageHeaderID         *string                               `json:"evenPageHeaderId"`
-	FirstPageFooterID        *string                               `json:"firstPageFooterId"`
-	FirstPageHeaderID        *string                               `json:"firstPageHeaderId"`
-	MarginBottom             *Dimension                            `json:"marginBottom"`
-	MarginFooter             *Dimension                            `json:"marginFooter"`
-	MarginHeader             *Dimension                            `json:"marginHeader"`
-	MarginLeft               *Dimension                            `json:"marginLeft"`
-	MarginRight              *Dimension                            `json:"marginRight"`
-	MarginTop                *Dimension                            `json:"marginTop"`
-	PageNumberStart          *int32                                `json:"pageNumberStart"`
-	SectionType              *SectionStyleSectionTypeEnum          `json:"sectionType"`
-	UseFirstPageHeaderFooter *bool                                 `json:"useFirstPageHeaderFooter"`
+	ColumnProperties         []SectionColumnProperties             `json:"columnProperties,omitempty"`
+	ColumnSeparatorStyle     *SectionStyleColumnSeparatorStyleEnum `json:"columnSeparatorStyle,omitempty"`
+	ContentDirection         *SectionStyleContentDirectionEnum     `json:"contentDirection,omitempty"`
+	DefaultFooterID          *string                               `json:"defaultFooterId,omitempty"`
+	DefaultHeaderID          *string                               `json:"defaultHeaderId,omitempty"`
+	EvenPageFooterID         *string                               `json:"evenPageFooterId,omitempty"`
+	EvenPageHeaderID         *string                               `json:"evenPageHeaderId,omitempty"`
+	FirstPageFooterID        *string                               `json:"firstPageFooterId,omitempty"`
+	FirstPageHeaderID        *string                               `json:"firstPageHeaderId,omitempty"`
+	MarginBottom             *Dimension                            `json:"marginBottom,omitempty"`
+	MarginFooter             *Dimension                            `json:"marginFooter,omitempty"`
+	MarginHeader             *Dimension                            `json:"marginHeader,omitempty"`
+	MarginLeft               *Dimension                            `json:"marginLeft,omitempty"`
+	MarginRight              *Dimension                            `json:"marginRight,omitempty"`
+	MarginTop                *Dimension                            `json:"marginTop,omitempty"`
+	PageNumberStart          *int32                                `json:"pageNumberStart,omitempty"`
+	SectionType              *SectionStyleSectionTypeEnum          `json:"sectionType,omitempty"`
+	UseFirstPageHeaderFooter *bool                                 `json:"useFirstPageHeaderFooter,omitempty"`
 }

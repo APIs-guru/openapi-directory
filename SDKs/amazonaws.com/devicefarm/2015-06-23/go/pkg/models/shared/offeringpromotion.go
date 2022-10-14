@@ -1,6 +1,6 @@
 package shared
 
 type OfferingPromotion struct {
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
 }

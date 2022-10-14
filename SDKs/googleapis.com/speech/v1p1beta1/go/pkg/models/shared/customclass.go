@@ -1,7 +1,7 @@
 package shared
 
 type CustomClass struct {
-	CustomClassID *string     `json:"customClassId"`
-	Items         []ClassItem `json:"items"`
-	Name          *string     `json:"name"`
+	CustomClassID *string     `json:"customClassId,omitempty"`
+	Items         []ClassItem `json:"items,omitempty"`
+	Name          *string     `json:"name,omitempty"`
 }

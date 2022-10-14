@@ -1,8 +1,8 @@
 package shared
 
 type AwsElasticBeanstalkEnvironmentOptionSetting struct {
-	Namespace    *string `json:"Namespace"`
-	OptionName   *string `json:"OptionName"`
-	ResourceName *string `json:"ResourceName"`
-	Value        *string `json:"Value"`
+	Namespace    *string `json:"Namespace,omitempty"`
+	OptionName   *string `json:"OptionName,omitempty"`
+	ResourceName *string `json:"ResourceName,omitempty"`
+	Value        *string `json:"Value,omitempty"`
 }

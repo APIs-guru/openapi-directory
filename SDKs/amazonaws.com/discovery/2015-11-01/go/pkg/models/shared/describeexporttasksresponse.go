@@ -1,6 +1,6 @@
 package shared
 
 type DescribeExportTasksResponse struct {
-	ExportsInfo []ExportInfo `json:"exportsInfo"`
-	NextToken   *string      `json:"nextToken"`
+	ExportsInfo []ExportInfo `json:"exportsInfo,omitempty"`
+	NextToken   *string      `json:"nextToken,omitempty"`
 }

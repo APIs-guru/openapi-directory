@@ -5,16 +5,16 @@ import (
 )
 
 type ReplicationTaskAssessmentRun struct {
-	AssessmentProgress                       *ReplicationTaskAssessmentRunProgress `json:"AssessmentProgress"`
-	AssessmentRunName                        *string                               `json:"AssessmentRunName"`
-	LastFailureMessage                       *string                               `json:"LastFailureMessage"`
-	ReplicationTaskArn                       *string                               `json:"ReplicationTaskArn"`
-	ReplicationTaskAssessmentRunArn          *string                               `json:"ReplicationTaskAssessmentRunArn"`
-	ReplicationTaskAssessmentRunCreationDate *time.Time                            `json:"ReplicationTaskAssessmentRunCreationDate"`
-	ResultEncryptionMode                     *string                               `json:"ResultEncryptionMode"`
-	ResultKmsKeyArn                          *string                               `json:"ResultKmsKeyArn"`
-	ResultLocationBucket                     *string                               `json:"ResultLocationBucket"`
-	ResultLocationFolder                     *string                               `json:"ResultLocationFolder"`
-	ServiceAccessRoleArn                     *string                               `json:"ServiceAccessRoleArn"`
-	Status                                   *string                               `json:"Status"`
+	AssessmentProgress                       *ReplicationTaskAssessmentRunProgress `json:"AssessmentProgress,omitempty"`
+	AssessmentRunName                        *string                               `json:"AssessmentRunName,omitempty"`
+	LastFailureMessage                       *string                               `json:"LastFailureMessage,omitempty"`
+	ReplicationTaskArn                       *string                               `json:"ReplicationTaskArn,omitempty"`
+	ReplicationTaskAssessmentRunArn          *string                               `json:"ReplicationTaskAssessmentRunArn,omitempty"`
+	ReplicationTaskAssessmentRunCreationDate *time.Time                            `json:"ReplicationTaskAssessmentRunCreationDate,omitempty"`
+	ResultEncryptionMode                     *string                               `json:"ResultEncryptionMode,omitempty"`
+	ResultKmsKeyArn                          *string                               `json:"ResultKmsKeyArn,omitempty"`
+	ResultLocationBucket                     *string                               `json:"ResultLocationBucket,omitempty"`
+	ResultLocationFolder                     *string                               `json:"ResultLocationFolder,omitempty"`
+	ServiceAccessRoleArn                     *string                               `json:"ServiceAccessRoleArn,omitempty"`
+	Status                                   *string                               `json:"Status,omitempty"`
 }

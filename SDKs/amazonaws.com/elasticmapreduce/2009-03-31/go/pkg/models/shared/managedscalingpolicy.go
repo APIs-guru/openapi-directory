@@ -1,5 +1,5 @@
 package shared
 
 type ManagedScalingPolicy struct {
-	ComputeLimits *ComputeLimits `json:"ComputeLimits"`
+	ComputeLimits *ComputeLimits `json:"ComputeLimits,omitempty"`
 }

@@ -8,27 +8,27 @@ const (
 )
 
 type PayorV2 struct {
-	Address                           *PayorAddressV2      `json:"address"`
-	AllowsLanguageChoice              *bool                `json:"allowsLanguageChoice"`
-	CollectiveAlias                   *string              `json:"collectiveAlias"`
-	DbaName                           *string              `json:"dbaName"`
-	IncludesReports                   *bool                `json:"includesReports"`
-	KycState                          *KycStateEnum        `json:"kycState"`
-	Language                          *PayorV2LanguageEnum `json:"language"`
-	ManualLockout                     *bool                `json:"manualLockout"`
-	MaxMasterPayorAdmins              *int64               `json:"maxMasterPayorAdmins"`
-	PayeeGracePeriodDays              *int64               `json:"payeeGracePeriodDays"`
-	PayeeGracePeriodProcessingEnabled *bool                `json:"payeeGracePeriodProcessingEnabled"`
-	PaymentRails                      *PaymentRailsEnum    `json:"paymentRails"`
+	Address                           *PayorAddressV2      `json:"address,omitempty"`
+	AllowsLanguageChoice              *bool                `json:"allowsLanguageChoice,omitempty"`
+	CollectiveAlias                   *string              `json:"collectiveAlias,omitempty"`
+	DbaName                           *string              `json:"dbaName,omitempty"`
+	IncludesReports                   *bool                `json:"includesReports,omitempty"`
+	KycState                          *KycStateEnum        `json:"kycState,omitempty"`
+	Language                          *PayorV2LanguageEnum `json:"language,omitempty"`
+	ManualLockout                     *bool                `json:"manualLockout,omitempty"`
+	MaxMasterPayorAdmins              *int64               `json:"maxMasterPayorAdmins,omitempty"`
+	PayeeGracePeriodDays              *int64               `json:"payeeGracePeriodDays,omitempty"`
+	PayeeGracePeriodProcessingEnabled *bool                `json:"payeeGracePeriodProcessingEnabled,omitempty"`
+	PaymentRails                      *PaymentRailsEnum    `json:"paymentRails,omitempty"`
 	PayorID                           string               `json:"payorId"`
 	PayorName                         string               `json:"payorName"`
-	PayorXid                          *string              `json:"payorXid"`
-	PrimaryContactEmail               *string              `json:"primaryContactEmail"`
-	PrimaryContactName                *string              `json:"primaryContactName"`
-	PrimaryContactPhone               *string              `json:"primaryContactPhone"`
-	ReminderEmailsOptOut              *bool                `json:"reminderEmailsOptOut"`
-	RemoteSystemIds                   []string             `json:"remoteSystemIds"`
-	SupportContact                    *string              `json:"supportContact"`
-	TransmissionTypes                 *TransmissionTypes2  `json:"transmissionTypes"`
-	WuCustomerID                      *string              `json:"wuCustomerId"`
+	PayorXid                          *string              `json:"payorXid,omitempty"`
+	PrimaryContactEmail               *string              `json:"primaryContactEmail,omitempty"`
+	PrimaryContactName                *string              `json:"primaryContactName,omitempty"`
+	PrimaryContactPhone               *string              `json:"primaryContactPhone,omitempty"`
+	ReminderEmailsOptOut              *bool                `json:"reminderEmailsOptOut,omitempty"`
+	RemoteSystemIds                   []string             `json:"remoteSystemIds,omitempty"`
+	SupportContact                    *string              `json:"supportContact,omitempty"`
+	TransmissionTypes                 *TransmissionTypes2  `json:"transmissionTypes,omitempty"`
+	WuCustomerID                      *string              `json:"wuCustomerId,omitempty"`
 }

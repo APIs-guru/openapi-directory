@@ -27,7 +27,7 @@ type GetManagedLinodeSettingRequest struct {
 }
 
 type GetManagedLinodeSettingDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetManagedLinodeSettingResponse struct {

@@ -14,7 +14,7 @@ type CreateGoalMetricQueryParams struct {
 }
 
 type CreateGoalMetricRequestBody struct {
-	Data *shared.GoalMetricRequest `json:"data"`
+	Data *shared.GoalMetricRequest `json:"data,omitempty"`
 }
 
 type CreateGoalMetricRequest struct {
@@ -24,7 +24,7 @@ type CreateGoalMetricRequest struct {
 }
 
 type CreateGoalMetric200ApplicationJSON struct {
-	Data *shared.GoalResponse `json:"data"`
+	Data *shared.GoalResponse `json:"data,omitempty"`
 }
 
 type CreateGoalMetricResponse struct {

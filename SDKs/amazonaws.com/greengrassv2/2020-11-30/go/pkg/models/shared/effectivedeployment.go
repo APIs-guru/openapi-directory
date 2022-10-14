@@ -9,10 +9,10 @@ type EffectiveDeployment struct {
 	CreationTimestamp         time.Time                              `json:"creationTimestamp"`
 	DeploymentID              string                                 `json:"deploymentId"`
 	DeploymentName            string                                 `json:"deploymentName"`
-	Description               *string                                `json:"description"`
-	IotJobArn                 *string                                `json:"iotJobArn"`
-	IotJobID                  *string                                `json:"iotJobId"`
+	Description               *string                                `json:"description,omitempty"`
+	IotJobArn                 *string                                `json:"iotJobArn,omitempty"`
+	IotJobID                  *string                                `json:"iotJobId,omitempty"`
 	ModifiedTimestamp         time.Time                              `json:"modifiedTimestamp"`
-	Reason                    *string                                `json:"reason"`
+	Reason                    *string                                `json:"reason,omitempty"`
 	TargetArn                 string                                 `json:"targetArn"`
 }

@@ -5,22 +5,22 @@ import (
 )
 
 type AssessmentResponse struct {
-	Content         *string         `json:"content"`
-	Documents       []Document      `json:"documents"`
-	DueDate         *time.Time      `json:"dueDate"`
-	DurationMinutes *int32          `json:"durationMinutes"`
-	Filename        *string         `json:"filename"`
-	Hidden          *bool           `json:"hidden"`
-	ID              *string         `json:"id"`
-	MarkNumber      *string         `json:"markNumber"`
-	MarkType        *string         `json:"markType"`
-	MaxAttempts     *int32          `json:"maxAttempts"`
-	OpenDate        *time.Time      `json:"openDate"`
-	Pid             *string         `json:"pid"`
-	Points          *string         `json:"points"`
-	Themes          []ThemeResponse `json:"themes"`
-	Title           *string         `json:"title"`
-	TotalQuestions  *int32          `json:"totalQuestions"`
-	TotalThemes     *int32          `json:"totalThemes"`
-	Type            *string         `json:"type"`
+	Content         *string         `json:"content,omitempty"`
+	Documents       []Document      `json:"documents,omitempty"`
+	DueDate         *time.Time      `json:"dueDate,omitempty"`
+	DurationMinutes *int32          `json:"durationMinutes,omitempty"`
+	Filename        *string         `json:"filename,omitempty"`
+	Hidden          *bool           `json:"hidden,omitempty"`
+	ID              *string         `json:"id,omitempty"`
+	MarkNumber      *string         `json:"markNumber,omitempty"`
+	MarkType        *string         `json:"markType,omitempty"`
+	MaxAttempts     *int32          `json:"maxAttempts,omitempty"`
+	OpenDate        *time.Time      `json:"openDate,omitempty"`
+	Pid             *string         `json:"pid,omitempty"`
+	Points          *string         `json:"points,omitempty"`
+	Themes          []ThemeResponse `json:"themes,omitempty"`
+	Title           *string         `json:"title,omitempty"`
+	TotalQuestions  *int32          `json:"totalQuestions,omitempty"`
+	TotalThemes     *int32          `json:"totalThemes,omitempty"`
+	Type            *string         `json:"type,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetDistributionLatestCacheResetRequest struct {
-	DistributionName *string `json:"distributionName"`
+	DistributionName *string `json:"distributionName,omitempty"`
 }

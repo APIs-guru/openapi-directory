@@ -7,8 +7,8 @@ type InterfaceTemplateFormFactorFormFactor struct {
 
 type InterfaceTemplate struct {
 	DeviceType NestedDeviceType                       `json:"device_type"`
-	FormFactor *InterfaceTemplateFormFactorFormFactor `json:"form_factor"`
-	ID         *int64                                 `json:"id"`
-	MgmtOnly   *bool                                  `json:"mgmt_only"`
+	FormFactor *InterfaceTemplateFormFactorFormFactor `json:"form_factor,omitempty"`
+	ID         *int64                                 `json:"id,omitempty"`
+	MgmtOnly   *bool                                  `json:"mgmt_only,omitempty"`
 	Name       string                                 `json:"name"`
 }

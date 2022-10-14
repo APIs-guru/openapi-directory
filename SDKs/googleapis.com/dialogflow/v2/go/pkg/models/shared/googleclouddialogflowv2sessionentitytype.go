@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudDialogflowV2SessionEntityType struct {
-	Entities           []GoogleCloudDialogflowV2EntityTypeEntity                       `json:"entities"`
-	EntityOverrideMode *GoogleCloudDialogflowV2SessionEntityTypeEntityOverrideModeEnum `json:"entityOverrideMode"`
-	Name               *string                                                         `json:"name"`
+	Entities           []GoogleCloudDialogflowV2EntityTypeEntity                       `json:"entities,omitempty"`
+	EntityOverrideMode *GoogleCloudDialogflowV2SessionEntityTypeEntityOverrideModeEnum `json:"entityOverrideMode,omitempty"`
+	Name               *string                                                         `json:"name,omitempty"`
 }

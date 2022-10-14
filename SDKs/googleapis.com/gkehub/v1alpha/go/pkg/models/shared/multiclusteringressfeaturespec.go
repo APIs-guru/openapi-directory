@@ -9,6 +9,6 @@ const (
 )
 
 type MultiClusterIngressFeatureSpec struct {
-	Billing          *MultiClusterIngressFeatureSpecBillingEnum `json:"billing"`
-	ConfigMembership *string                                    `json:"configMembership"`
+	Billing          *MultiClusterIngressFeatureSpecBillingEnum `json:"billing,omitempty"`
+	ConfigMembership *string                                    `json:"configMembership,omitempty"`
 }

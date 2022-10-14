@@ -1,5 +1,5 @@
 package shared
 
 type TransitiveMembershipRole struct {
-	Role *string `json:"role"`
+	Role *string `json:"role,omitempty"`
 }

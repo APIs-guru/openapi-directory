@@ -5,12 +5,12 @@ import (
 )
 
 type ServerlessV1ServiceAsset struct {
-	AccountSid   *string                `json:"account_sid"`
-	DateCreated  *time.Time             `json:"date_created"`
-	DateUpdated  *time.Time             `json:"date_updated"`
-	FriendlyName *string                `json:"friendly_name"`
-	Links        map[string]interface{} `json:"links"`
-	ServiceSid   *string                `json:"service_sid"`
-	Sid          *string                `json:"sid"`
-	URL          *string                `json:"url"`
+	AccountSid   *string                `json:"account_sid,omitempty"`
+	DateCreated  *time.Time             `json:"date_created,omitempty"`
+	DateUpdated  *time.Time             `json:"date_updated,omitempty"`
+	FriendlyName *string                `json:"friendly_name,omitempty"`
+	Links        map[string]interface{} `json:"links,omitempty"`
+	ServiceSid   *string                `json:"service_sid,omitempty"`
+	Sid          *string                `json:"sid,omitempty"`
+	URL          *string                `json:"url,omitempty"`
 }

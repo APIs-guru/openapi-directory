@@ -1,7 +1,7 @@
 package shared
 
 type NetworkInterface struct {
-	NetworkInterfaceID *string `json:"networkInterfaceId"`
-	PrivateIPAddress   *string `json:"privateIpAddress"`
-	PublicIPAddress    *string `json:"publicIpAddress"`
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty"`
+	PrivateIPAddress   *string `json:"privateIpAddress,omitempty"`
+	PublicIPAddress    *string `json:"publicIpAddress,omitempty"`
 }

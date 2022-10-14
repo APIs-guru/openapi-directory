@@ -1,10 +1,10 @@
 package shared
 
 type InstanceSpec struct {
-	ActiveDeadlineSeconds         *string     `json:"activeDeadlineSeconds"`
-	Containers                    []Container `json:"containers"`
-	RestartPolicy                 *string     `json:"restartPolicy"`
-	ServiceAccountName            *string     `json:"serviceAccountName"`
-	TerminationGracePeriodSeconds *string     `json:"terminationGracePeriodSeconds"`
-	Volumes                       []Volume    `json:"volumes"`
+	ActiveDeadlineSeconds         *string     `json:"activeDeadlineSeconds,omitempty"`
+	Containers                    []Container `json:"containers,omitempty"`
+	RestartPolicy                 *string     `json:"restartPolicy,omitempty"`
+	ServiceAccountName            *string     `json:"serviceAccountName,omitempty"`
+	TerminationGracePeriodSeconds *string     `json:"terminationGracePeriodSeconds,omitempty"`
+	Volumes                       []Volume    `json:"volumes,omitempty"`
 }

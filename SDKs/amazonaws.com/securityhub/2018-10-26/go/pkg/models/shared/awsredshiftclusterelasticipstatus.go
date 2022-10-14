@@ -1,6 +1,6 @@
 package shared
 
 type AwsRedshiftClusterElasticIPStatus struct {
-	ElasticIP *string `json:"ElasticIp"`
-	Status    *string `json:"Status"`
+	ElasticIP *string `json:"ElasticIp,omitempty"`
+	Status    *string `json:"Status,omitempty"`
 }

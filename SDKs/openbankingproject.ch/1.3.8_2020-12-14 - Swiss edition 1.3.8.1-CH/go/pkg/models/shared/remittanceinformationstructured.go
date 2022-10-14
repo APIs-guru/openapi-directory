@@ -9,9 +9,9 @@ const (
 )
 
 type RemittanceInformationStructured struct {
-	ScoRorQrRorIpi                  *RemittanceInformationStructuredScoRorQrRorIpiEnum `json:"SCORorQRRorIPI"`
-	AdditionalRemittanceInformation *string                                            `json:"additionalRemittanceInformation"`
+	ScoRorQrRorIpi                  *RemittanceInformationStructuredScoRorQrRorIpiEnum `json:"SCORorQRRorIPI,omitempty"`
+	AdditionalRemittanceInformation *string                                            `json:"additionalRemittanceInformation,omitempty"`
 	Reference                       string                                             `json:"reference"`
-	ReferenceIssuer                 *string                                            `json:"referenceIssuer"`
-	ReferenceType                   *string                                            `json:"referenceType"`
+	ReferenceIssuer                 *string                                            `json:"referenceIssuer,omitempty"`
+	ReferenceType                   *string                                            `json:"referenceType,omitempty"`
 }

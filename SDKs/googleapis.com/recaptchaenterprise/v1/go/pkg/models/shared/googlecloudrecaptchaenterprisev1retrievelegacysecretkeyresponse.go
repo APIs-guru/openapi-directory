@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudRecaptchaenterpriseV1RetrieveLegacySecretKeyResponse struct {
-	LegacySecretKey *string `json:"legacySecretKey"`
+	LegacySecretKey *string `json:"legacySecretKey,omitempty"`
 }

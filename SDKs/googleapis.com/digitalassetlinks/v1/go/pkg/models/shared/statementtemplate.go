@@ -1,7 +1,7 @@
 package shared
 
 type StatementTemplate struct {
-	Relation *string `json:"relation"`
-	Source   *Asset  `json:"source"`
-	Target   *Asset  `json:"target"`
+	Relation *string `json:"relation,omitempty"`
+	Source   *Asset  `json:"source,omitempty"`
+	Target   *Asset  `json:"target,omitempty"`
 }

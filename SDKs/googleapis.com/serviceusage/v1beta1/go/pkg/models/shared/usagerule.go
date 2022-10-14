@@ -1,7 +1,7 @@
 package shared
 
 type UsageRule struct {
-	AllowUnregisteredCalls *bool   `json:"allowUnregisteredCalls"`
-	Selector               *string `json:"selector"`
-	SkipServiceControl     *bool   `json:"skipServiceControl"`
+	AllowUnregisteredCalls *bool   `json:"allowUnregisteredCalls,omitempty"`
+	Selector               *string `json:"selector,omitempty"`
+	SkipServiceControl     *bool   `json:"skipServiceControl,omitempty"`
 }

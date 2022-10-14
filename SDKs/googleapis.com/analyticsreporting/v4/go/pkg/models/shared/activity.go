@@ -12,19 +12,19 @@ const (
 )
 
 type Activity struct {
-	ActivityTime    *string                   `json:"activityTime"`
-	ActivityType    *ActivityActivityTypeEnum `json:"activityType"`
-	Appview         *ScreenviewData           `json:"appview"`
-	Campaign        *string                   `json:"campaign"`
-	ChannelGrouping *string                   `json:"channelGrouping"`
-	CustomDimension []CustomDimension         `json:"customDimension"`
-	Ecommerce       *EcommerceData            `json:"ecommerce"`
-	Event           *EventData                `json:"event"`
-	Goals           *GoalSetData              `json:"goals"`
-	Hostname        *string                   `json:"hostname"`
-	Keyword         *string                   `json:"keyword"`
-	LandingPagePath *string                   `json:"landingPagePath"`
-	Medium          *string                   `json:"medium"`
-	Pageview        *PageviewData             `json:"pageview"`
-	Source          *string                   `json:"source"`
+	ActivityTime    *string                   `json:"activityTime,omitempty"`
+	ActivityType    *ActivityActivityTypeEnum `json:"activityType,omitempty"`
+	Appview         *ScreenviewData           `json:"appview,omitempty"`
+	Campaign        *string                   `json:"campaign,omitempty"`
+	ChannelGrouping *string                   `json:"channelGrouping,omitempty"`
+	CustomDimension []CustomDimension         `json:"customDimension,omitempty"`
+	Ecommerce       *EcommerceData            `json:"ecommerce,omitempty"`
+	Event           *EventData                `json:"event,omitempty"`
+	Goals           *GoalSetData              `json:"goals,omitempty"`
+	Hostname        *string                   `json:"hostname,omitempty"`
+	Keyword         *string                   `json:"keyword,omitempty"`
+	LandingPagePath *string                   `json:"landingPagePath,omitempty"`
+	Medium          *string                   `json:"medium,omitempty"`
+	Pageview        *PageviewData             `json:"pageview,omitempty"`
+	Source          *string                   `json:"source,omitempty"`
 }

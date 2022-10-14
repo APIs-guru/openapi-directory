@@ -9,8 +9,8 @@ const (
 )
 
 type AccountReturnCarrier struct {
-	CarrierAccountID     *string                              `json:"carrierAccountId"`
-	CarrierAccountName   *string                              `json:"carrierAccountName"`
-	CarrierAccountNumber *string                              `json:"carrierAccountNumber"`
-	CarrierCode          *AccountReturnCarrierCarrierCodeEnum `json:"carrierCode"`
+	CarrierAccountID     *string                              `json:"carrierAccountId,omitempty"`
+	CarrierAccountName   *string                              `json:"carrierAccountName,omitempty"`
+	CarrierAccountNumber *string                              `json:"carrierAccountNumber,omitempty"`
+	CarrierCode          *AccountReturnCarrierCarrierCodeEnum `json:"carrierCode,omitempty"`
 }

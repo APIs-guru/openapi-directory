@@ -1,9 +1,9 @@
 package shared
 
 type AccounttaxCustomBatchRequestEntry struct {
-	AccountID  *string     `json:"accountId"`
-	AccountTax *AccountTax `json:"accountTax"`
-	BatchID    *int64      `json:"batchId"`
-	MerchantID *string     `json:"merchantId"`
-	Method     *string     `json:"method"`
+	AccountID  *string     `json:"accountId,omitempty"`
+	AccountTax *AccountTax `json:"accountTax,omitempty"`
+	BatchID    *int64      `json:"batchId,omitempty"`
+	MerchantID *string     `json:"merchantId,omitempty"`
+	Method     *string     `json:"method,omitempty"`
 }

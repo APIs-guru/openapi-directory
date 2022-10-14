@@ -1,7 +1,7 @@
 package shared
 
 type CreateInferenceSchedulerResponse struct {
-	InferenceSchedulerArn  *string                       `json:"InferenceSchedulerArn"`
-	InferenceSchedulerName *string                       `json:"InferenceSchedulerName"`
-	Status                 *InferenceSchedulerStatusEnum `json:"Status"`
+	InferenceSchedulerArn  *string                       `json:"InferenceSchedulerArn,omitempty"`
+	InferenceSchedulerName *string                       `json:"InferenceSchedulerName,omitempty"`
+	Status                 *InferenceSchedulerStatusEnum `json:"Status,omitempty"`
 }

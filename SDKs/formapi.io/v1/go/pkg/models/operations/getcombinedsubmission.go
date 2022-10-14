@@ -51,13 +51,13 @@ const (
 )
 
 type GetCombinedSubmission200ApplicationJSONCombinedSubmission struct {
-	Actions       []shared.CombinedSubmissionAction                `json:"actions"`
-	DownloadURL   *string                                          `json:"download_url"`
+	Actions       []shared.CombinedSubmissionAction                `json:"actions,omitempty"`
+	DownloadURL   *string                                          `json:"download_url,omitempty"`
 	Expired       bool                                             `json:"expired"`
-	ExpiresAt     *string                                          `json:"expires_at"`
+	ExpiresAt     *string                                          `json:"expires_at,omitempty"`
 	ID            string                                           `json:"id"`
-	Metadata      map[string]interface{}                           `json:"metadata"`
-	PdfHash       *string                                          `json:"pdf_hash"`
+	Metadata      map[string]interface{}                           `json:"metadata,omitempty"`
+	PdfHash       *string                                          `json:"pdf_hash,omitempty"`
 	SourcePdfs    []interface{}                                    `json:"source_pdfs"`
 	State         GetCombinedSubmission200ApplicationJSONStateEnum `json:"state"`
 	SubmissionIds []string                                         `json:"submission_ids"`

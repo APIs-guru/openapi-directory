@@ -12,7 +12,7 @@ type CreateOrganizationExportQueryParams struct {
 }
 
 type CreateOrganizationExportRequestBody struct {
-	Data *shared.OrganizationExportRequest `json:"data"`
+	Data *shared.OrganizationExportRequest `json:"data,omitempty"`
 }
 
 type CreateOrganizationExportRequest struct {
@@ -21,7 +21,7 @@ type CreateOrganizationExportRequest struct {
 }
 
 type CreateOrganizationExport201ApplicationJSON struct {
-	Data *shared.OrganizationExportResponse `json:"data"`
+	Data *shared.OrganizationExportResponse `json:"data,omitempty"`
 }
 
 type CreateOrganizationExportResponse struct {

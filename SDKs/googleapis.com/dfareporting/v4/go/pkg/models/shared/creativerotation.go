@@ -17,8 +17,8 @@ const (
 )
 
 type CreativeRotation struct {
-	CreativeAssignments                 []CreativeAssignment                           `json:"creativeAssignments"`
-	CreativeOptimizationConfigurationID *string                                        `json:"creativeOptimizationConfigurationId"`
-	Type                                *CreativeRotationTypeEnum                      `json:"type"`
-	WeightCalculationStrategy           *CreativeRotationWeightCalculationStrategyEnum `json:"weightCalculationStrategy"`
+	CreativeAssignments                 []CreativeAssignment                           `json:"creativeAssignments,omitempty"`
+	CreativeOptimizationConfigurationID *string                                        `json:"creativeOptimizationConfigurationId,omitempty"`
+	Type                                *CreativeRotationTypeEnum                      `json:"type,omitempty"`
+	WeightCalculationStrategy           *CreativeRotationWeightCalculationStrategyEnum `json:"weightCalculationStrategy,omitempty"`
 }

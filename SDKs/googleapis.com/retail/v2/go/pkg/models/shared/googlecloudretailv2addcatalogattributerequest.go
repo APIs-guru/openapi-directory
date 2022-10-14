@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudRetailV2AddCatalogAttributeRequest struct {
-	CatalogAttribute *GoogleCloudRetailV2CatalogAttribute `json:"catalogAttribute"`
+	CatalogAttribute *GoogleCloudRetailV2CatalogAttribute `json:"catalogAttribute,omitempty"`
 }

@@ -28,23 +28,23 @@ const (
 )
 
 type PortfolioResponseWorkspace struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type PortfolioResponse struct {
-	Color               *PortfolioResponseColorEnum  `json:"color"`
-	CreatedAt           *time.Time                   `json:"created_at"`
-	CreatedBy           *UserCompact                 `json:"created_by"`
-	CustomFieldSettings []CustomFieldSettingResponse `json:"custom_field_settings"`
-	DueOn               *time.Time                   `json:"due_on"`
-	Gid                 *string                      `json:"gid"`
-	Members             []UserCompact                `json:"members"`
-	Name                *string                      `json:"name"`
-	Owner               *UserCompact                 `json:"owner"`
-	PermalinkURL        *string                      `json:"permalink_url"`
-	ResourceType        *string                      `json:"resource_type"`
-	StartOn             *time.Time                   `json:"start_on"`
-	Workspace           *PortfolioResponseWorkspace  `json:"workspace"`
+	Color               *PortfolioResponseColorEnum  `json:"color,omitempty"`
+	CreatedAt           *time.Time                   `json:"created_at,omitempty"`
+	CreatedBy           *UserCompact                 `json:"created_by,omitempty"`
+	CustomFieldSettings []CustomFieldSettingResponse `json:"custom_field_settings,omitempty"`
+	DueOn               *time.Time                   `json:"due_on,omitempty"`
+	Gid                 *string                      `json:"gid,omitempty"`
+	Members             []UserCompact                `json:"members,omitempty"`
+	Name                *string                      `json:"name,omitempty"`
+	Owner               *UserCompact                 `json:"owner,omitempty"`
+	PermalinkURL        *string                      `json:"permalink_url,omitempty"`
+	ResourceType        *string                      `json:"resource_type,omitempty"`
+	StartOn             *time.Time                   `json:"start_on,omitempty"`
+	Workspace           *PortfolioResponseWorkspace  `json:"workspace,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetInlinePolicyForPermissionSetResponse struct {
-	InlinePolicy *string `json:"InlinePolicy"`
+	InlinePolicy *string `json:"InlinePolicy,omitempty"`
 }

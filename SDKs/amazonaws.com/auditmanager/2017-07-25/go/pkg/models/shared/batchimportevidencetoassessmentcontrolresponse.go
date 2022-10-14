@@ -1,5 +1,5 @@
 package shared
 
 type BatchImportEvidenceToAssessmentControlResponse struct {
-	Errors []BatchImportEvidenceToAssessmentControlError `json:"errors"`
+	Errors []BatchImportEvidenceToAssessmentControlError `json:"errors,omitempty"`
 }

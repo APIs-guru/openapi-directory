@@ -1,12 +1,12 @@
 package shared
 
 type UserRole struct {
-	AccountID        *string              `json:"accountId"`
-	DefaultUserRole  *bool                `json:"defaultUserRole"`
-	ID               *string              `json:"id"`
-	Kind             *string              `json:"kind"`
-	Name             *string              `json:"name"`
-	ParentUserRoleID *string              `json:"parentUserRoleId"`
-	Permissions      []UserRolePermission `json:"permissions"`
-	SubaccountID     *string              `json:"subaccountId"`
+	AccountID        *string              `json:"accountId,omitempty"`
+	DefaultUserRole  *bool                `json:"defaultUserRole,omitempty"`
+	ID               *string              `json:"id,omitempty"`
+	Kind             *string              `json:"kind,omitempty"`
+	Name             *string              `json:"name,omitempty"`
+	ParentUserRoleID *string              `json:"parentUserRoleId,omitempty"`
+	Permissions      []UserRolePermission `json:"permissions,omitempty"`
+	SubaccountID     *string              `json:"subaccountId,omitempty"`
 }

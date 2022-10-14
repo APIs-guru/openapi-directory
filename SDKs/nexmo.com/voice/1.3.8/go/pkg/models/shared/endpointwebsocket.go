@@ -8,12 +8,12 @@ const (
 )
 
 type EndpointWebsocketHeaders struct {
-	CustomerID *string `json:"customer_id"`
+	CustomerID *string `json:"customer_id,omitempty"`
 }
 
 type EndpointWebsocket struct {
 	ContentType EndpointWebsocketContentTypeEnum `json:"content-type"`
-	Headers     *EndpointWebsocketHeaders        `json:"headers"`
+	Headers     *EndpointWebsocketHeaders        `json:"headers,omitempty"`
 	Type        string                           `json:"type"`
-	URI         *string                          `json:"uri"`
+	URI         *string                          `json:"uri,omitempty"`
 }

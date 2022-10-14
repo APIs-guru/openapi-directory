@@ -13,22 +13,22 @@ const (
 )
 
 type TaxRate struct {
-	Code                 *string                         `json:"code"`
-	Components           []interface{}                   `json:"components"`
-	CreatedAt            *time.Time                      `json:"created_at"`
-	CreatedBy            *string                         `json:"created_by"`
-	Description          *string                         `json:"description"`
-	EffectiveTaxRate     *float64                        `json:"effective_tax_rate"`
-	ID                   *string                         `json:"id"`
-	Name                 *string                         `json:"name"`
-	OriginalTaxRateID    *string                         `json:"original_tax_rate_id"`
-	ReportTaxType        *string                         `json:"report_tax_type"`
-	RowVersion           *string                         `json:"row_version"`
-	Status               *TaxRateStatusTaxRateStatusEnum `json:"status"`
-	TaxPayableAccountID  *string                         `json:"tax_payable_account_id"`
-	TaxRemittedAccountID *string                         `json:"tax_remitted_account_id"`
-	TotalTaxRate         *float64                        `json:"total_tax_rate"`
-	Type                 *string                         `json:"type"`
-	UpdatedAt            *time.Time                      `json:"updated_at"`
-	UpdatedBy            *string                         `json:"updated_by"`
+	Code                 *string                         `json:"code,omitempty"`
+	Components           []interface{}                   `json:"components,omitempty"`
+	CreatedAt            *time.Time                      `json:"created_at,omitempty"`
+	CreatedBy            *string                         `json:"created_by,omitempty"`
+	Description          *string                         `json:"description,omitempty"`
+	EffectiveTaxRate     *float64                        `json:"effective_tax_rate,omitempty"`
+	ID                   *string                         `json:"id,omitempty"`
+	Name                 *string                         `json:"name,omitempty"`
+	OriginalTaxRateID    *string                         `json:"original_tax_rate_id,omitempty"`
+	ReportTaxType        *string                         `json:"report_tax_type,omitempty"`
+	RowVersion           *string                         `json:"row_version,omitempty"`
+	Status               *TaxRateStatusTaxRateStatusEnum `json:"status,omitempty"`
+	TaxPayableAccountID  *string                         `json:"tax_payable_account_id,omitempty"`
+	TaxRemittedAccountID *string                         `json:"tax_remitted_account_id,omitempty"`
+	TotalTaxRate         *float64                        `json:"total_tax_rate,omitempty"`
+	Type                 *string                         `json:"type,omitempty"`
+	UpdatedAt            *time.Time                      `json:"updated_at,omitempty"`
+	UpdatedBy            *string                         `json:"updated_by,omitempty"`
 }

@@ -19,10 +19,10 @@ const (
 )
 
 type MacsDestroy400ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     MacsDestroy400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -34,10 +34,10 @@ const (
 )
 
 type MacsDestroy401ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     MacsDestroy401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -48,10 +48,10 @@ const (
 )
 
 type MacsDestroy403ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     MacsDestroy403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -62,10 +62,10 @@ const (
 )
 
 type MacsDestroy404ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     MacsDestroy404ApplicationJSONTypeEnum `json:"type"`
 }
 

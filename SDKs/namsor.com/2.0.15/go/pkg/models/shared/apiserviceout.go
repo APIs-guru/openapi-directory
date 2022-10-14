@@ -1,7 +1,7 @@
 package shared
 
 type APIServiceOut struct {
-	CostInUnits  *int32  `json:"costInUnits"`
-	ServiceGroup *string `json:"serviceGroup"`
-	ServiceName  *string `json:"serviceName"`
+	CostInUnits  *int32  `json:"costInUnits,omitempty"`
+	ServiceGroup *string `json:"serviceGroup,omitempty"`
+	ServiceName  *string `json:"serviceName,omitempty"`
 }

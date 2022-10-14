@@ -11,10 +11,10 @@ const (
 )
 
 type VideoMetadata struct {
-	Duration    *string                       `json:"duration"`
-	IsValidVast *bool                         `json:"isValidVast"`
-	IsVpaid     *bool                         `json:"isVpaid"`
-	MediaFiles  []MediaFile                   `json:"mediaFiles"`
-	SkipOffset  *string                       `json:"skipOffset"`
-	VastVersion *VideoMetadataVastVersionEnum `json:"vastVersion"`
+	Duration    *string                       `json:"duration,omitempty"`
+	IsValidVast *bool                         `json:"isValidVast,omitempty"`
+	IsVpaid     *bool                         `json:"isVpaid,omitempty"`
+	MediaFiles  []MediaFile                   `json:"mediaFiles,omitempty"`
+	SkipOffset  *string                       `json:"skipOffset,omitempty"`
+	VastVersion *VideoMetadataVastVersionEnum `json:"vastVersion,omitempty"`
 }

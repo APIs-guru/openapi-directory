@@ -12,7 +12,7 @@ const (
 )
 
 type Phase struct {
-	DeploymentJobs *DeploymentJobs `json:"deploymentJobs"`
-	ID             *string         `json:"id"`
-	State          *PhaseStateEnum `json:"state"`
+	DeploymentJobs *DeploymentJobs `json:"deploymentJobs,omitempty"`
+	ID             *string         `json:"id,omitempty"`
+	State          *PhaseStateEnum `json:"state,omitempty"`
 }

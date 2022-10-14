@@ -8,6 +8,6 @@ const (
 )
 
 type ControlResponse struct {
-	Command *ControlResponseCommandEnum `json:"command"`
-	Status  *string                     `json:"status"`
+	Command *ControlResponseCommandEnum `json:"command,omitempty"`
+	Status  *string                     `json:"status,omitempty"`
 }

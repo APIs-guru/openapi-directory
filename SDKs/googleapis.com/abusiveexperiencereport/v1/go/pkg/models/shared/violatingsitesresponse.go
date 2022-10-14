@@ -1,5 +1,5 @@
 package shared
 
 type ViolatingSitesResponse struct {
-	ViolatingSites []SiteSummaryResponse `json:"violatingSites"`
+	ViolatingSites []SiteSummaryResponse `json:"violatingSites,omitempty"`
 }

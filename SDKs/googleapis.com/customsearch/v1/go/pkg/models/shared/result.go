@@ -1,35 +1,35 @@
 package shared
 
 type ResultImage struct {
-	ByteSize        *int32  `json:"byteSize"`
-	ContextLink     *string `json:"contextLink"`
-	Height          *int32  `json:"height"`
-	ThumbnailHeight *int32  `json:"thumbnailHeight"`
-	ThumbnailLink   *string `json:"thumbnailLink"`
-	ThumbnailWidth  *int32  `json:"thumbnailWidth"`
-	Width           *int32  `json:"width"`
+	ByteSize        *int32  `json:"byteSize,omitempty"`
+	ContextLink     *string `json:"contextLink,omitempty"`
+	Height          *int32  `json:"height,omitempty"`
+	ThumbnailHeight *int32  `json:"thumbnailHeight,omitempty"`
+	ThumbnailLink   *string `json:"thumbnailLink,omitempty"`
+	ThumbnailWidth  *int32  `json:"thumbnailWidth,omitempty"`
+	Width           *int32  `json:"width,omitempty"`
 }
 
 type ResultLabels struct {
-	DisplayName *string `json:"displayName"`
-	LabelWithOp *string `json:"label_with_op"`
-	Name        *string `json:"name"`
+	DisplayName *string `json:"displayName,omitempty"`
+	LabelWithOp *string `json:"label_with_op,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 type Result struct {
-	CacheID          *string                `json:"cacheId"`
-	DisplayLink      *string                `json:"displayLink"`
-	FileFormat       *string                `json:"fileFormat"`
-	FormattedURL     *string                `json:"formattedUrl"`
-	HTMLFormattedURL *string                `json:"htmlFormattedUrl"`
-	HTMLSnippet      *string                `json:"htmlSnippet"`
-	HTMLTitle        *string                `json:"htmlTitle"`
-	Image            *ResultImage           `json:"image"`
-	Kind             *string                `json:"kind"`
-	Labels           []ResultLabels         `json:"labels"`
-	Link             *string                `json:"link"`
-	Mime             *string                `json:"mime"`
-	Pagemap          map[string]interface{} `json:"pagemap"`
-	Snippet          *string                `json:"snippet"`
-	Title            *string                `json:"title"`
+	CacheID          *string                `json:"cacheId,omitempty"`
+	DisplayLink      *string                `json:"displayLink,omitempty"`
+	FileFormat       *string                `json:"fileFormat,omitempty"`
+	FormattedURL     *string                `json:"formattedUrl,omitempty"`
+	HTMLFormattedURL *string                `json:"htmlFormattedUrl,omitempty"`
+	HTMLSnippet      *string                `json:"htmlSnippet,omitempty"`
+	HTMLTitle        *string                `json:"htmlTitle,omitempty"`
+	Image            *ResultImage           `json:"image,omitempty"`
+	Kind             *string                `json:"kind,omitempty"`
+	Labels           []ResultLabels         `json:"labels,omitempty"`
+	Link             *string                `json:"link,omitempty"`
+	Mime             *string                `json:"mime,omitempty"`
+	Pagemap          map[string]interface{} `json:"pagemap,omitempty"`
+	Snippet          *string                `json:"snippet,omitempty"`
+	Title            *string                `json:"title,omitempty"`
 }

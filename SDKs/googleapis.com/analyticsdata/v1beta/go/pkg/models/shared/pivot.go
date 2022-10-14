@@ -11,9 +11,9 @@ const (
 )
 
 type Pivot struct {
-	FieldNames         []string                      `json:"fieldNames"`
-	Limit              *string                       `json:"limit"`
-	MetricAggregations []PivotMetricAggregationsEnum `json:"metricAggregations"`
-	Offset             *string                       `json:"offset"`
-	OrderBys           []OrderBy                     `json:"orderBys"`
+	FieldNames         []string                      `json:"fieldNames,omitempty"`
+	Limit              *string                       `json:"limit,omitempty"`
+	MetricAggregations []PivotMetricAggregationsEnum `json:"metricAggregations,omitempty"`
+	Offset             *string                       `json:"offset,omitempty"`
+	OrderBys           []OrderBy                     `json:"orderBys,omitempty"`
 }

@@ -17,7 +17,7 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCard struct {
-	CardContent             *GoogleCloudDialogflowV2beta1IntentMessageRbmCardContent                               `json:"cardContent"`
-	CardOrientation         *GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCardCardOrientationEnum         `json:"cardOrientation"`
-	ThumbnailImageAlignment *GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCardThumbnailImageAlignmentEnum `json:"thumbnailImageAlignment"`
+	CardContent             *GoogleCloudDialogflowV2beta1IntentMessageRbmCardContent                               `json:"cardContent,omitempty"`
+	CardOrientation         *GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCardCardOrientationEnum         `json:"cardOrientation,omitempty"`
+	ThumbnailImageAlignment *GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCardThumbnailImageAlignmentEnum `json:"thumbnailImageAlignment,omitempty"`
 }

@@ -10,7 +10,7 @@ const (
 )
 
 type BidResponseWithoutBidsStatusRow struct {
-	ImpressionCount *MetricValue                               `json:"impressionCount"`
-	RowDimensions   *RowDimensions                             `json:"rowDimensions"`
-	Status          *BidResponseWithoutBidsStatusRowStatusEnum `json:"status"`
+	ImpressionCount *MetricValue                               `json:"impressionCount,omitempty"`
+	RowDimensions   *RowDimensions                             `json:"rowDimensions,omitempty"`
+	Status          *BidResponseWithoutBidsStatusRowStatusEnum `json:"status,omitempty"`
 }

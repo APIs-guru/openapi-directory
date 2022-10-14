@@ -29,7 +29,7 @@ const (
 type PutTIDStatusJSONRequestBody struct {
 	Enabled PutTIDStatusJSONRequestBodyEnabledEnum `json:"enabled"`
 	Status  PutTIDStatusJSONRequestBodyStatusEnum  `json:"status"`
-	Until   *string                                `json:"until"`
+	Until   *string                                `json:"until,omitempty"`
 }
 
 type PutTIDStatusJSONRequest struct {
@@ -39,8 +39,8 @@ type PutTIDStatusJSONRequest struct {
 }
 
 type PutTIDStatusJSON200ApplicationJSON struct {
-	Success           *string `json:"success"`
-	TopicStatusUpdate *string `json:"topic_status_update"`
+	Success           *string `json:"success,omitempty"`
+	TopicStatusUpdate *string `json:"topic_status_update,omitempty"`
 }
 
 type PutTIDStatusJSONResponse struct {

@@ -1,8 +1,8 @@
 package shared
 
 type DeploymentUpdate struct {
-	Credential  *Credential                  `json:"credential"`
-	Description *string                      `json:"description"`
-	Labels      []DeploymentUpdateLabelEntry `json:"labels"`
-	Manifest    *string                      `json:"manifest"`
+	Credential  *Credential                  `json:"credential,omitempty"`
+	Description *string                      `json:"description,omitempty"`
+	Labels      []DeploymentUpdateLabelEntry `json:"labels,omitempty"`
+	Manifest    *string                      `json:"manifest,omitempty"`
 }

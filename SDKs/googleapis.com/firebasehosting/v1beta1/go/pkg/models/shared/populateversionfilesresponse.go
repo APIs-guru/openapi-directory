@@ -1,6 +1,6 @@
 package shared
 
 type PopulateVersionFilesResponse struct {
-	UploadRequiredHashes []string `json:"uploadRequiredHashes"`
-	UploadURL            *string  `json:"uploadUrl"`
+	UploadRequiredHashes []string `json:"uploadRequiredHashes,omitempty"`
+	UploadURL            *string  `json:"uploadUrl,omitempty"`
 }

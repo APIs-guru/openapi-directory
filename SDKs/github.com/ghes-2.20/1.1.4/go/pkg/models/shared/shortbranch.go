@@ -9,6 +9,6 @@ type ShortBranch struct {
 	Commit        ShortBranchCommit `json:"commit"`
 	Name          string            `json:"name"`
 	Protected     bool              `json:"protected"`
-	Protection    *BranchProtection `json:"protection"`
-	ProtectionURL *string           `json:"protection_url"`
+	Protection    *BranchProtection `json:"protection,omitempty"`
+	ProtectionURL *string           `json:"protection_url,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type TLSRouteRouteMatch struct {
-	Alpn    []string `json:"alpn"`
-	SniHost []string `json:"sniHost"`
+	Alpn    []string `json:"alpn,omitempty"`
+	SniHost []string `json:"sniHost,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type SearchDeveloperMetadataRequest struct {
-	DataFilters []DataFilter `json:"dataFilters"`
+	DataFilters []DataFilter `json:"dataFilters,omitempty"`
 }

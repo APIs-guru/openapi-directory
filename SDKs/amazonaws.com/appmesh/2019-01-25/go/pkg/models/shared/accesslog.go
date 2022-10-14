@@ -1,5 +1,5 @@
 package shared
 
 type AccessLog struct {
-	File *FileAccessLog `json:"file"`
+	File *FileAccessLog `json:"file,omitempty"`
 }

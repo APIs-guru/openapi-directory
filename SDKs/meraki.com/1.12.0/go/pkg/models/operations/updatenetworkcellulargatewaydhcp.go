@@ -5,9 +5,9 @@ type UpdateNetworkCellularGatewayDhcpPathParams struct {
 }
 
 type UpdateNetworkCellularGatewayDhcpRequestBody struct {
-	DhcpLeaseTime        *string  `json:"dhcpLeaseTime"`
-	DNSCustomNameservers []string `json:"dnsCustomNameservers"`
-	DNSNameservers       *string  `json:"dnsNameservers"`
+	DhcpLeaseTime        *string  `json:"dhcpLeaseTime,omitempty"`
+	DNSCustomNameservers []string `json:"dnsCustomNameservers,omitempty"`
+	DNSNameservers       *string  `json:"dnsNameservers,omitempty"`
 }
 
 type UpdateNetworkCellularGatewayDhcpRequest struct {

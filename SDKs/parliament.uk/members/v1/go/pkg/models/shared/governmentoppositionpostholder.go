@@ -5,9 +5,9 @@ import (
 )
 
 type GovernmentOppositionPostHolder struct {
-	EndDate            *time.Time  `json:"endDate"`
-	IsPaid             *bool       `json:"isPaid"`
-	LayingMinisterName *string     `json:"layingMinisterName"`
-	Member             *MemberItem `json:"member"`
-	StartDate          *time.Time  `json:"startDate"`
+	EndDate            *time.Time  `json:"endDate,omitempty"`
+	IsPaid             *bool       `json:"isPaid,omitempty"`
+	LayingMinisterName *string     `json:"layingMinisterName,omitempty"`
+	Member             *MemberItem `json:"member,omitempty"`
+	StartDate          *time.Time  `json:"startDate,omitempty"`
 }

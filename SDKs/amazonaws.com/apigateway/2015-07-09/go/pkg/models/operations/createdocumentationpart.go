@@ -19,11 +19,11 @@ type CreateDocumentationPartHeaders struct {
 }
 
 type CreateDocumentationPartRequestBodyLocation struct {
-	Method     *string                           `json:"method"`
-	Name       *string                           `json:"name"`
-	Path       *string                           `json:"path"`
-	StatusCode *string                           `json:"statusCode"`
-	Type       *shared.DocumentationPartTypeEnum `json:"type"`
+	Method     *string                           `json:"method,omitempty"`
+	Name       *string                           `json:"name,omitempty"`
+	Path       *string                           `json:"path,omitempty"`
+	StatusCode *string                           `json:"statusCode,omitempty"`
+	Type       *shared.DocumentationPartTypeEnum `json:"type,omitempty"`
 }
 
 type CreateDocumentationPartRequestBody struct {

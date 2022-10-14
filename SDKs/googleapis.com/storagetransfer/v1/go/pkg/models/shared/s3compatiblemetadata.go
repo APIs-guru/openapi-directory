@@ -33,8 +33,8 @@ const (
 )
 
 type S3CompatibleMetadata struct {
-	AuthMethod   *S3CompatibleMetadataAuthMethodEnum   `json:"authMethod"`
-	ListAPI      *S3CompatibleMetadataListAPIEnum      `json:"listApi"`
-	Protocol     *S3CompatibleMetadataProtocolEnum     `json:"protocol"`
-	RequestModel *S3CompatibleMetadataRequestModelEnum `json:"requestModel"`
+	AuthMethod   *S3CompatibleMetadataAuthMethodEnum   `json:"authMethod,omitempty"`
+	ListAPI      *S3CompatibleMetadataListAPIEnum      `json:"listApi,omitempty"`
+	Protocol     *S3CompatibleMetadataProtocolEnum     `json:"protocol,omitempty"`
+	RequestModel *S3CompatibleMetadataRequestModelEnum `json:"requestModel,omitempty"`
 }

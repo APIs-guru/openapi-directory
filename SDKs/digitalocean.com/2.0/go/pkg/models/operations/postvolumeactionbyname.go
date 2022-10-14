@@ -19,8 +19,8 @@ const (
 
 type PostVolumeActionByNameRequestBody1 struct {
 	DropletID int64                                                                                                                                    `json:"droplet_id"`
-	Region    *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
-	Tags      []string                                                                                                                                 `json:"tags"`
+	Region    *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region,omitempty"`
+	Tags      []string                                                                                                                                 `json:"tags,omitempty"`
 	Type      PostVolumeActionByNameRequestBody1TypeEnum                                                                                               `json:"type"`
 }
 
@@ -34,7 +34,7 @@ const (
 
 type PostVolumeActionByNameRequestBody2 struct {
 	DropletID int64                                                                                                                                    `json:"droplet_id"`
-	Region    *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
+	Region    *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region,omitempty"`
 	Type      PostVolumeActionByNameRequestBody2TypeEnum                                                                                               `json:"type"`
 }
 
@@ -46,7 +46,7 @@ type PostVolumeActionByNameRequest struct {
 type PostVolumeActionByName401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type PostVolumeActionByNameResponse struct {

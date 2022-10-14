@@ -1,11 +1,11 @@
 package shared
 
 type SearchResults struct {
-	Items  *ItemList `json:"items"`
-	Movies *ItemList `json:"movies"`
-	Other  *ItemList `json:"other"`
-	People []Person  `json:"people"`
+	Items  *ItemList `json:"items,omitempty"`
+	Movies *ItemList `json:"movies,omitempty"`
+	Other  *ItemList `json:"other,omitempty"`
+	People []Person  `json:"people,omitempty"`
 	Term   string    `json:"term"`
 	Total  int32     `json:"total"`
-	Tv     *ItemList `json:"tv"`
+	Tv     *ItemList `json:"tv,omitempty"`
 }

@@ -16,11 +16,11 @@ const (
 )
 
 type Item struct {
-	AvailablePackage *SoftwarePackage    `json:"availablePackage"`
-	CreateTime       *string             `json:"createTime"`
-	ID               *string             `json:"id"`
-	InstalledPackage *SoftwarePackage    `json:"installedPackage"`
-	OriginType       *ItemOriginTypeEnum `json:"originType"`
-	Type             *ItemTypeEnum       `json:"type"`
-	UpdateTime       *string             `json:"updateTime"`
+	AvailablePackage *SoftwarePackage    `json:"availablePackage,omitempty"`
+	CreateTime       *string             `json:"createTime,omitempty"`
+	ID               *string             `json:"id,omitempty"`
+	InstalledPackage *SoftwarePackage    `json:"installedPackage,omitempty"`
+	OriginType       *ItemOriginTypeEnum `json:"originType,omitempty"`
+	Type             *ItemTypeEnum       `json:"type,omitempty"`
+	UpdateTime       *string             `json:"updateTime,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type LogSubscription struct {
-	DirectoryID                 *string    `json:"DirectoryId"`
-	LogGroupName                *string    `json:"LogGroupName"`
-	SubscriptionCreatedDateTime *time.Time `json:"SubscriptionCreatedDateTime"`
+	DirectoryID                 *string    `json:"DirectoryId,omitempty"`
+	LogGroupName                *string    `json:"LogGroupName,omitempty"`
+	SubscriptionCreatedDateTime *time.Time `json:"SubscriptionCreatedDateTime,omitempty"`
 }

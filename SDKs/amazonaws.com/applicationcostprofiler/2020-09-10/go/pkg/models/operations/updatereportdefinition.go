@@ -19,8 +19,8 @@ type UpdateReportDefinitionHeaders struct {
 }
 
 type UpdateReportDefinitionRequestBodyDestinationS3Location struct {
-	Bucket *string `json:"bucket"`
-	Prefix *string `json:"prefix"`
+	Bucket *string `json:"bucket,omitempty"`
+	Prefix *string `json:"prefix,omitempty"`
 }
 
 type UpdateReportDefinitionRequestBodyFormatEnum string

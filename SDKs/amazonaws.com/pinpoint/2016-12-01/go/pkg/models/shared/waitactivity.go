@@ -1,6 +1,6 @@
 package shared
 
 type WaitActivity struct {
-	NextActivity *string   `json:"NextActivity"`
-	WaitTime     *WaitTime `json:"WaitTime"`
+	NextActivity *string   `json:"NextActivity,omitempty"`
+	WaitTime     *WaitTime `json:"WaitTime,omitempty"`
 }

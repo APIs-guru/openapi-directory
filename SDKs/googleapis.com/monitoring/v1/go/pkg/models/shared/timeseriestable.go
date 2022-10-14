@@ -9,6 +9,6 @@ const (
 )
 
 type TimeSeriesTable struct {
-	DataSets            []TableDataSet                          `json:"dataSets"`
-	MetricVisualization *TimeSeriesTableMetricVisualizationEnum `json:"metricVisualization"`
+	DataSets            []TableDataSet                          `json:"dataSets,omitempty"`
+	MetricVisualization *TimeSeriesTableMetricVisualizationEnum `json:"metricVisualization,omitempty"`
 }

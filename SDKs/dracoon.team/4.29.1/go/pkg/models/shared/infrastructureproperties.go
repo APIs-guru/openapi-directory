@@ -1,10 +1,10 @@
 package shared
 
 type InfrastructureProperties struct {
-	IsDracoonCloud           *bool   `json:"isDracoonCloud"`
-	MediaServerConfigEnabled *bool   `json:"mediaServerConfigEnabled"`
-	S3DefaultRegion          *string `json:"s3DefaultRegion"`
-	S3EnforceDirectUpload    *bool   `json:"s3EnforceDirectUpload"`
-	SmsConfigEnabled         *bool   `json:"smsConfigEnabled"`
-	TenantUUID               *string `json:"tenantUuid"`
+	IsDracoonCloud           *bool   `json:"isDracoonCloud,omitempty"`
+	MediaServerConfigEnabled *bool   `json:"mediaServerConfigEnabled,omitempty"`
+	S3DefaultRegion          *string `json:"s3DefaultRegion,omitempty"`
+	S3EnforceDirectUpload    *bool   `json:"s3EnforceDirectUpload,omitempty"`
+	SmsConfigEnabled         *bool   `json:"smsConfigEnabled,omitempty"`
+	TenantUUID               *string `json:"tenantUuid,omitempty"`
 }

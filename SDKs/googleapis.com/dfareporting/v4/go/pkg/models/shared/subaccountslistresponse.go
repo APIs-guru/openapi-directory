@@ -1,7 +1,7 @@
 package shared
 
 type SubaccountsListResponse struct {
-	Kind          *string      `json:"kind"`
-	NextPageToken *string      `json:"nextPageToken"`
-	Subaccounts   []Subaccount `json:"subaccounts"`
+	Kind          *string      `json:"kind,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
+	Subaccounts   []Subaccount `json:"subaccounts,omitempty"`
 }

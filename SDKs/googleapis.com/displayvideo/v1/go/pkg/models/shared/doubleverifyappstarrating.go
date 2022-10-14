@@ -14,6 +14,6 @@ const (
 )
 
 type DoubleVerifyAppStarRating struct {
-	AvoidInsufficientStarRating *bool                                           `json:"avoidInsufficientStarRating"`
-	AvoidedStarRating           *DoubleVerifyAppStarRatingAvoidedStarRatingEnum `json:"avoidedStarRating"`
+	AvoidInsufficientStarRating *bool                                           `json:"avoidInsufficientStarRating,omitempty"`
+	AvoidedStarRating           *DoubleVerifyAppStarRatingAvoidedStarRatingEnum `json:"avoidedStarRating,omitempty"`
 }

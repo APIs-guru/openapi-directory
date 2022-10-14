@@ -13,8 +13,8 @@ const (
 )
 
 type CreateChannelRequestBody struct {
-	Description *string                             `json:"description"`
-	Link        *string                             `json:"link"`
+	Description *string                             `json:"description,omitempty"`
+	Link        *string                             `json:"link,omitempty"`
 	Name        string                              `json:"name"`
 	Privacy     CreateChannelRequestBodyPrivacyEnum `json:"privacy"`
 }

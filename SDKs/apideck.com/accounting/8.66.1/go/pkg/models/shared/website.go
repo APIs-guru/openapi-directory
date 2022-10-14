@@ -11,7 +11,7 @@ const (
 )
 
 type Website struct {
-	ID   *string          `json:"id"`
-	Type *WebsiteTypeEnum `json:"type"`
+	ID   *string          `json:"id,omitempty"`
+	Type *WebsiteTypeEnum `json:"type,omitempty"`
 	URL  string           `json:"url"`
 }

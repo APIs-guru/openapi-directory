@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudApigeeV1ListAPIProxiesResponse struct {
-	Proxies []GoogleCloudApigeeV1APIProxy `json:"proxies"`
+	Proxies []GoogleCloudApigeeV1APIProxy `json:"proxies,omitempty"`
 }

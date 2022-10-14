@@ -11,8 +11,8 @@ type DatabaseUpdateDocumentPathParams struct {
 
 type DatabaseUpdateDocumentRequestBody struct {
 	Data  map[string]interface{} `json:"data"`
-	Read  []string               `json:"read"`
-	Write []string               `json:"write"`
+	Read  []string               `json:"read,omitempty"`
+	Write []string               `json:"write,omitempty"`
 }
 
 type DatabaseUpdateDocumentSecurity struct {

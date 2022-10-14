@@ -1,18 +1,18 @@
 package shared
 
 type GoogleCloudApigeeV1SharedFlowRevision struct {
-	ConfigurationVersion       *GoogleCloudApigeeV1ConfigVersion `json:"configurationVersion"`
-	ContextInfo                *string                           `json:"contextInfo"`
-	CreatedAt                  *string                           `json:"createdAt"`
-	Description                *string                           `json:"description"`
-	DisplayName                *string                           `json:"displayName"`
-	EntityMetaDataAsProperties map[string]string                 `json:"entityMetaDataAsProperties"`
-	LastModifiedAt             *string                           `json:"lastModifiedAt"`
-	Name                       *string                           `json:"name"`
-	Policies                   []string                          `json:"policies"`
-	ResourceFiles              *GoogleCloudApigeeV1ResourceFiles `json:"resourceFiles"`
-	Resources                  []string                          `json:"resources"`
-	Revision                   *string                           `json:"revision"`
-	SharedFlows                []string                          `json:"sharedFlows"`
-	Type                       *string                           `json:"type"`
+	ConfigurationVersion       *GoogleCloudApigeeV1ConfigVersion `json:"configurationVersion,omitempty"`
+	ContextInfo                *string                           `json:"contextInfo,omitempty"`
+	CreatedAt                  *string                           `json:"createdAt,omitempty"`
+	Description                *string                           `json:"description,omitempty"`
+	DisplayName                *string                           `json:"displayName,omitempty"`
+	EntityMetaDataAsProperties map[string]string                 `json:"entityMetaDataAsProperties,omitempty"`
+	LastModifiedAt             *string                           `json:"lastModifiedAt,omitempty"`
+	Name                       *string                           `json:"name,omitempty"`
+	Policies                   []string                          `json:"policies,omitempty"`
+	ResourceFiles              *GoogleCloudApigeeV1ResourceFiles `json:"resourceFiles,omitempty"`
+	Resources                  []string                          `json:"resources,omitempty"`
+	Revision                   *string                           `json:"revision,omitempty"`
+	SharedFlows                []string                          `json:"sharedFlows,omitempty"`
+	Type                       *string                           `json:"type,omitempty"`
 }

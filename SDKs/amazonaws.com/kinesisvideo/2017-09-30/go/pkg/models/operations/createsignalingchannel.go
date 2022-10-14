@@ -21,14 +21,14 @@ const (
 )
 
 type CreateSignalingChannelRequestBodySingleMasterConfiguration struct {
-	MessageTTLSeconds *int64 `json:"MessageTtlSeconds"`
+	MessageTTLSeconds *int64 `json:"MessageTtlSeconds,omitempty"`
 }
 
 type CreateSignalingChannelRequestBody struct {
 	ChannelName               string                                                      `json:"ChannelName"`
-	ChannelType               *CreateSignalingChannelRequestBodyChannelTypeEnum           `json:"ChannelType"`
-	SingleMasterConfiguration *CreateSignalingChannelRequestBodySingleMasterConfiguration `json:"SingleMasterConfiguration"`
-	Tags                      []shared.Tag                                                `json:"Tags"`
+	ChannelType               *CreateSignalingChannelRequestBodyChannelTypeEnum           `json:"ChannelType,omitempty"`
+	SingleMasterConfiguration *CreateSignalingChannelRequestBodySingleMasterConfiguration `json:"SingleMasterConfiguration,omitempty"`
+	Tags                      []shared.Tag                                                `json:"Tags,omitempty"`
 }
 
 type CreateSignalingChannelRequest struct {

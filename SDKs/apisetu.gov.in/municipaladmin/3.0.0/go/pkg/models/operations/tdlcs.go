@@ -15,8 +15,8 @@ const (
 )
 
 type TdlcsRequestBody struct {
-	CertificateParameters *TdlcsRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *TdlcsRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                TdlcsRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Tdlcs400ApplicationJSON struct {
-	Error            *Tdlcs400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tdlcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tdlcs400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tdlcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tdlcs401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Tdlcs401ApplicationJSON struct {
-	Error            *Tdlcs401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tdlcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tdlcs401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tdlcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tdlcs404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Tdlcs404ApplicationJSON struct {
-	Error            *Tdlcs404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tdlcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tdlcs404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tdlcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tdlcs500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Tdlcs500ApplicationJSON struct {
-	Error            *Tdlcs500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tdlcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tdlcs500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tdlcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tdlcs502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Tdlcs502ApplicationJSON struct {
-	Error            *Tdlcs502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tdlcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tdlcs502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tdlcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tdlcs503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Tdlcs503ApplicationJSON struct {
-	Error            *Tdlcs503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tdlcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tdlcs503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tdlcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tdlcs504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Tdlcs504ApplicationJSON struct {
-	Error            *Tdlcs504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tdlcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tdlcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tdlcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type TdlcsResponse struct {

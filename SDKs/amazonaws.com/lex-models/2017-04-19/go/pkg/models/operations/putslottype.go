@@ -26,13 +26,13 @@ const (
 )
 
 type PutSlotTypeRequestBody struct {
-	Checksum                *string                                           `json:"checksum"`
-	CreateVersion           *bool                                             `json:"createVersion"`
-	Description             *string                                           `json:"description"`
-	EnumerationValues       []shared.EnumerationValue                         `json:"enumerationValues"`
-	ParentSlotTypeSignature *string                                           `json:"parentSlotTypeSignature"`
-	SlotTypeConfigurations  []shared.SlotTypeConfiguration                    `json:"slotTypeConfigurations"`
-	ValueSelectionStrategy  *PutSlotTypeRequestBodyValueSelectionStrategyEnum `json:"valueSelectionStrategy"`
+	Checksum                *string                                           `json:"checksum,omitempty"`
+	CreateVersion           *bool                                             `json:"createVersion,omitempty"`
+	Description             *string                                           `json:"description,omitempty"`
+	EnumerationValues       []shared.EnumerationValue                         `json:"enumerationValues,omitempty"`
+	ParentSlotTypeSignature *string                                           `json:"parentSlotTypeSignature,omitempty"`
+	SlotTypeConfigurations  []shared.SlotTypeConfiguration                    `json:"slotTypeConfigurations,omitempty"`
+	ValueSelectionStrategy  *PutSlotTypeRequestBodyValueSelectionStrategyEnum `json:"valueSelectionStrategy,omitempty"`
 }
 
 type PutSlotTypeRequest struct {

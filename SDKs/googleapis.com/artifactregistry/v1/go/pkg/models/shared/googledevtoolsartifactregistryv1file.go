@@ -1,10 +1,10 @@
 package shared
 
 type GoogleDevtoolsArtifactregistryV1File struct {
-	CreateTime *string `json:"createTime"`
-	Hashes     []Hash  `json:"hashes"`
-	Name       *string `json:"name"`
-	Owner      *string `json:"owner"`
-	SizeBytes  *string `json:"sizeBytes"`
-	UpdateTime *string `json:"updateTime"`
+	CreateTime *string `json:"createTime,omitempty"`
+	Hashes     []Hash  `json:"hashes,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	Owner      *string `json:"owner,omitempty"`
+	SizeBytes  *string `json:"sizeBytes,omitempty"`
+	UpdateTime *string `json:"updateTime,omitempty"`
 }

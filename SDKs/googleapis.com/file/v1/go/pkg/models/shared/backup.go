@@ -23,16 +23,16 @@ const (
 )
 
 type Backup struct {
-	CapacityGb         *string                       `json:"capacityGb"`
-	CreateTime         *string                       `json:"createTime"`
-	Description        *string                       `json:"description"`
-	DownloadBytes      *string                       `json:"downloadBytes"`
-	Labels             map[string]string             `json:"labels"`
-	Name               *string                       `json:"name"`
-	SatisfiesPzs       *bool                         `json:"satisfiesPzs"`
-	SourceFileShare    *string                       `json:"sourceFileShare"`
-	SourceInstance     *string                       `json:"sourceInstance"`
-	SourceInstanceTier *BackupSourceInstanceTierEnum `json:"sourceInstanceTier"`
-	State              *BackupStateEnum              `json:"state"`
-	StorageBytes       *string                       `json:"storageBytes"`
+	CapacityGb         *string                       `json:"capacityGb,omitempty"`
+	CreateTime         *string                       `json:"createTime,omitempty"`
+	Description        *string                       `json:"description,omitempty"`
+	DownloadBytes      *string                       `json:"downloadBytes,omitempty"`
+	Labels             map[string]string             `json:"labels,omitempty"`
+	Name               *string                       `json:"name,omitempty"`
+	SatisfiesPzs       *bool                         `json:"satisfiesPzs,omitempty"`
+	SourceFileShare    *string                       `json:"sourceFileShare,omitempty"`
+	SourceInstance     *string                       `json:"sourceInstance,omitempty"`
+	SourceInstanceTier *BackupSourceInstanceTierEnum `json:"sourceInstanceTier,omitempty"`
+	State              *BackupStateEnum              `json:"state,omitempty"`
+	StorageBytes       *string                       `json:"storageBytes,omitempty"`
 }

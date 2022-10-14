@@ -13,10 +13,10 @@ const (
 )
 
 type ClientGateway struct {
-	ClientConnectorService *string                 `json:"clientConnectorService"`
-	CreateTime             *string                 `json:"createTime"`
-	ID                     *string                 `json:"id"`
-	Name                   *string                 `json:"name"`
-	State                  *ClientGatewayStateEnum `json:"state"`
-	UpdateTime             *string                 `json:"updateTime"`
+	ClientConnectorService *string                 `json:"clientConnectorService,omitempty"`
+	CreateTime             *string                 `json:"createTime,omitempty"`
+	ID                     *string                 `json:"id,omitempty"`
+	Name                   *string                 `json:"name,omitempty"`
+	State                  *ClientGatewayStateEnum `json:"state,omitempty"`
+	UpdateTime             *string                 `json:"updateTime,omitempty"`
 }

@@ -5,16 +5,16 @@ import (
 )
 
 type WirelessV1Command struct {
-	AccountSid               *string                     `json:"account_sid"`
-	Command                  *string                     `json:"command"`
-	CommandMode              *CommandEnumCommandModeEnum `json:"command_mode"`
-	DateCreated              *time.Time                  `json:"date_created"`
-	DateUpdated              *time.Time                  `json:"date_updated"`
-	DeliveryReceiptRequested *bool                       `json:"delivery_receipt_requested"`
-	Direction                *CommandEnumDirectionEnum   `json:"direction"`
-	Sid                      *string                     `json:"sid"`
-	SimSid                   *string                     `json:"sim_sid"`
-	Status                   *CommandEnumStatusEnum      `json:"status"`
-	Transport                *CommandEnumTransportEnum   `json:"transport"`
-	URL                      *string                     `json:"url"`
+	AccountSid               *string                     `json:"account_sid,omitempty"`
+	Command                  *string                     `json:"command,omitempty"`
+	CommandMode              *CommandEnumCommandModeEnum `json:"command_mode,omitempty"`
+	DateCreated              *time.Time                  `json:"date_created,omitempty"`
+	DateUpdated              *time.Time                  `json:"date_updated,omitempty"`
+	DeliveryReceiptRequested *bool                       `json:"delivery_receipt_requested,omitempty"`
+	Direction                *CommandEnumDirectionEnum   `json:"direction,omitempty"`
+	Sid                      *string                     `json:"sid,omitempty"`
+	SimSid                   *string                     `json:"sim_sid,omitempty"`
+	Status                   *CommandEnumStatusEnum      `json:"status,omitempty"`
+	Transport                *CommandEnumTransportEnum   `json:"transport,omitempty"`
+	URL                      *string                     `json:"url,omitempty"`
 }

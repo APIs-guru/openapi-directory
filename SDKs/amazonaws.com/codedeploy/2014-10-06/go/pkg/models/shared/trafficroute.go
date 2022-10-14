@@ -1,5 +1,5 @@
 package shared
 
 type TrafficRoute struct {
-	ListenerArns []string `json:"listenerArns"`
+	ListenerArns []string `json:"listenerArns,omitempty"`
 }

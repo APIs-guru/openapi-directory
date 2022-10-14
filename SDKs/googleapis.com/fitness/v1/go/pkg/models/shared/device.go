@@ -14,9 +14,9 @@ const (
 )
 
 type Device struct {
-	Manufacturer *string         `json:"manufacturer"`
-	Model        *string         `json:"model"`
-	Type         *DeviceTypeEnum `json:"type"`
-	UID          *string         `json:"uid"`
-	Version      *string         `json:"version"`
+	Manufacturer *string         `json:"manufacturer,omitempty"`
+	Model        *string         `json:"model,omitempty"`
+	Type         *DeviceTypeEnum `json:"type,omitempty"`
+	UID          *string         `json:"uid,omitempty"`
+	Version      *string         `json:"version,omitempty"`
 }

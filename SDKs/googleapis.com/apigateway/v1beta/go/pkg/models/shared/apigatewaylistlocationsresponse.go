@@ -1,6 +1,6 @@
 package shared
 
 type ApigatewayListLocationsResponse struct {
-	Locations     []ApigatewayLocation `json:"locations"`
-	NextPageToken *string              `json:"nextPageToken"`
+	Locations     []ApigatewayLocation `json:"locations,omitempty"`
+	NextPageToken *string              `json:"nextPageToken,omitempty"`
 }

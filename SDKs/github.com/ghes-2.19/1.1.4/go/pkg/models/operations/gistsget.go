@@ -13,15 +13,15 @@ type GistsGetRequest struct {
 }
 
 type GistsGet403ApplicationJSONBlock struct {
-	CreatedAt *string `json:"created_at"`
-	HTMLURL   *string `json:"html_url"`
-	Reason    *string `json:"reason"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	HTMLURL   *string `json:"html_url,omitempty"`
+	Reason    *string `json:"reason,omitempty"`
 }
 
 type GistsGet403ApplicationJSON struct {
-	Block            *GistsGet403ApplicationJSONBlock `json:"block"`
-	DocumentationURL *string                          `json:"documentation_url"`
-	Message          *string                          `json:"message"`
+	Block            *GistsGet403ApplicationJSONBlock `json:"block,omitempty"`
+	DocumentationURL *string                          `json:"documentation_url,omitempty"`
+	Message          *string                          `json:"message,omitempty"`
 }
 
 type GistsGetResponse struct {

@@ -18,8 +18,8 @@ const (
 )
 
 type TargetRender struct {
-	FailureCause   *TargetRenderFailureCauseEnum   `json:"failureCause"`
-	FailureMessage *string                         `json:"failureMessage"`
-	RenderingBuild *string                         `json:"renderingBuild"`
-	RenderingState *TargetRenderRenderingStateEnum `json:"renderingState"`
+	FailureCause   *TargetRenderFailureCauseEnum   `json:"failureCause,omitempty"`
+	FailureMessage *string                         `json:"failureMessage,omitempty"`
+	RenderingBuild *string                         `json:"renderingBuild,omitempty"`
+	RenderingState *TargetRenderRenderingStateEnum `json:"renderingState,omitempty"`
 }

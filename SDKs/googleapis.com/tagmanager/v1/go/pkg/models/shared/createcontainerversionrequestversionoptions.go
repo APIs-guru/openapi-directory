@@ -1,7 +1,7 @@
 package shared
 
 type CreateContainerVersionRequestVersionOptions struct {
-	Name         *string `json:"name"`
-	Notes        *string `json:"notes"`
-	QuickPreview *bool   `json:"quickPreview"`
+	Name         *string `json:"name,omitempty"`
+	Notes        *string `json:"notes,omitempty"`
+	QuickPreview *bool   `json:"quickPreview,omitempty"`
 }

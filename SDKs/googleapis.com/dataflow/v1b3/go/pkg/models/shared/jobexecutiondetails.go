@@ -1,6 +1,6 @@
 package shared
 
 type JobExecutionDetails struct {
-	NextPageToken *string        `json:"nextPageToken"`
-	Stages        []StageSummary `json:"stages"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
+	Stages        []StageSummary `json:"stages,omitempty"`
 }

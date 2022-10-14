@@ -1,8 +1,8 @@
 package shared
 
 type Language struct {
-	ID           *string `json:"id"`
-	Kind         *string `json:"kind"`
-	LanguageCode *string `json:"languageCode"`
-	Name         *string `json:"name"`
+	ID           *string `json:"id,omitempty"`
+	Kind         *string `json:"kind,omitempty"`
+	LanguageCode *string `json:"languageCode,omitempty"`
+	Name         *string `json:"name,omitempty"`
 }

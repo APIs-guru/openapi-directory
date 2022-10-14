@@ -9,5 +9,5 @@ const (
 )
 
 type ComplyWithGuidelines struct {
-	RecommendationReason *ComplyWithGuidelinesRecommendationReasonEnum `json:"recommendationReason"`
+	RecommendationReason *ComplyWithGuidelinesRecommendationReasonEnum `json:"recommendationReason,omitempty"`
 }

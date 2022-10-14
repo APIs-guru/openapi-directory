@@ -1,13 +1,13 @@
 package shared
 
 type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
-	ChildPolicy                  *ChildPolicyEnum `json:"childPolicy"`
-	ExecutionStartToCloseTimeout *string          `json:"executionStartToCloseTimeout"`
-	Input                        *string          `json:"input"`
-	LambdaRole                   *string          `json:"lambdaRole"`
-	TagList                      []string         `json:"tagList"`
-	TaskList                     *TaskList        `json:"taskList"`
-	TaskPriority                 *string          `json:"taskPriority"`
-	TaskStartToCloseTimeout      *string          `json:"taskStartToCloseTimeout"`
-	WorkflowTypeVersion          *string          `json:"workflowTypeVersion"`
+	ChildPolicy                  *ChildPolicyEnum `json:"childPolicy,omitempty"`
+	ExecutionStartToCloseTimeout *string          `json:"executionStartToCloseTimeout,omitempty"`
+	Input                        *string          `json:"input,omitempty"`
+	LambdaRole                   *string          `json:"lambdaRole,omitempty"`
+	TagList                      []string         `json:"tagList,omitempty"`
+	TaskList                     *TaskList        `json:"taskList,omitempty"`
+	TaskPriority                 *string          `json:"taskPriority,omitempty"`
+	TaskStartToCloseTimeout      *string          `json:"taskStartToCloseTimeout,omitempty"`
+	WorkflowTypeVersion          *string          `json:"workflowTypeVersion,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ResultCounts struct {
-	SourceResultCounts []SourceResultCount `json:"sourceResultCounts"`
+	SourceResultCounts []SourceResultCount `json:"sourceResultCounts,omitempty"`
 }

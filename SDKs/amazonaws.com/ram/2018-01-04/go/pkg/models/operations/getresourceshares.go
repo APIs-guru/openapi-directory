@@ -37,14 +37,14 @@ const (
 )
 
 type GetResourceSharesRequestBody struct {
-	MaxResults          *int64                                               `json:"maxResults"`
-	Name                *string                                              `json:"name"`
-	NextToken           *string                                              `json:"nextToken"`
-	PermissionArn       *string                                              `json:"permissionArn"`
+	MaxResults          *int64                                               `json:"maxResults,omitempty"`
+	Name                *string                                              `json:"name,omitempty"`
+	NextToken           *string                                              `json:"nextToken,omitempty"`
+	PermissionArn       *string                                              `json:"permissionArn,omitempty"`
 	ResourceOwner       GetResourceSharesRequestBodyResourceOwnerEnum        `json:"resourceOwner"`
-	ResourceShareArns   []string                                             `json:"resourceShareArns"`
-	ResourceShareStatus *GetResourceSharesRequestBodyResourceShareStatusEnum `json:"resourceShareStatus"`
-	TagFilters          []shared.TagFilter                                   `json:"tagFilters"`
+	ResourceShareArns   []string                                             `json:"resourceShareArns,omitempty"`
+	ResourceShareStatus *GetResourceSharesRequestBodyResourceShareStatusEnum `json:"resourceShareStatus,omitempty"`
+	TagFilters          []shared.TagFilter                                   `json:"tagFilters,omitempty"`
 }
 
 type GetResourceSharesRequest struct {

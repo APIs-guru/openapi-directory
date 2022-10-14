@@ -1,7 +1,7 @@
 package shared
 
 type ListResourcesRequest struct {
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
 	ProjectID  string  `json:"projectId"`
 }

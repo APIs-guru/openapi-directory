@@ -5,24 +5,24 @@ import (
 )
 
 type PaymentQueryDto struct {
-	AcCode             *string         `json:"acCode"`
-	AcEntries          []AcEntryDto    `json:"acEntries"`
-	BankAccountCode    *string         `json:"bankAccountCode"`
-	BankAccountID      *int64          `json:"bankAccountId"`
-	BookTranTypeID     *int64          `json:"bookTranTypeId"`
-	CustomFields       []AcudfValueDto `json:"customFields"`
-	DetailCollection   []string        `json:"detailCollection"`
-	Discount           *float64        `json:"discount"`
-	EntryDate          *time.Time      `json:"entryDate"`
-	ID                 *int64          `json:"id"`
-	Note               *string         `json:"note"`
-	PlaidTransactionID *string         `json:"plaidTransactionId"`
-	ProcDate           *time.Time      `json:"procDate"`
-	Reference          *string         `json:"reference"`
-	SupplierID         *int64          `json:"supplierId"`
-	Timestamp          *string         `json:"timestamp"`
-	Total              *float64        `json:"total"`
-	TransferBankCode   *string         `json:"transferBankCode"`
-	TransferBankID     *int64          `json:"transferBankId"`
-	Unallocated        *float64        `json:"unallocated"`
+	AcCode             *string         `json:"acCode,omitempty"`
+	AcEntries          []AcEntryDto    `json:"acEntries,omitempty"`
+	BankAccountCode    *string         `json:"bankAccountCode,omitempty"`
+	BankAccountID      *int64          `json:"bankAccountId,omitempty"`
+	BookTranTypeID     *int64          `json:"bookTranTypeId,omitempty"`
+	CustomFields       []AcudfValueDto `json:"customFields,omitempty"`
+	DetailCollection   []string        `json:"detailCollection,omitempty"`
+	Discount           *float64        `json:"discount,omitempty"`
+	EntryDate          *time.Time      `json:"entryDate,omitempty"`
+	ID                 *int64          `json:"id,omitempty"`
+	Note               *string         `json:"note,omitempty"`
+	PlaidTransactionID *string         `json:"plaidTransactionId,omitempty"`
+	ProcDate           *time.Time      `json:"procDate,omitempty"`
+	Reference          *string         `json:"reference,omitempty"`
+	SupplierID         *int64          `json:"supplierId,omitempty"`
+	Timestamp          *string         `json:"timestamp,omitempty"`
+	Total              *float64        `json:"total,omitempty"`
+	TransferBankCode   *string         `json:"transferBankCode,omitempty"`
+	TransferBankID     *int64          `json:"transferBankId,omitempty"`
+	Unallocated        *float64        `json:"unallocated,omitempty"`
 }

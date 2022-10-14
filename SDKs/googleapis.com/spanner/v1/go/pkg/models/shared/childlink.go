@@ -1,7 +1,7 @@
 package shared
 
 type ChildLink struct {
-	ChildIndex *int32  `json:"childIndex"`
-	Type       *string `json:"type"`
-	Variable   *string `json:"variable"`
+	ChildIndex *int32  `json:"childIndex,omitempty"`
+	Type       *string `json:"type,omitempty"`
+	Variable   *string `json:"variable,omitempty"`
 }

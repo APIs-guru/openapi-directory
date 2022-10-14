@@ -17,14 +17,14 @@ const (
 )
 
 type EnterpriseCrmEventbusStatsDimensions struct {
-	ClientID          *string                                                 `json:"clientId"`
-	EnumFilterType    *EnterpriseCrmEventbusStatsDimensionsEnumFilterTypeEnum `json:"enumFilterType"`
-	ErrorEnumString   *string                                                 `json:"errorEnumString"`
-	RetryAttempt      *EnterpriseCrmEventbusStatsDimensionsRetryAttemptEnum   `json:"retryAttempt"`
-	TaskName          *string                                                 `json:"taskName"`
-	TaskNumber        *string                                                 `json:"taskNumber"`
-	TriggerID         *string                                                 `json:"triggerId"`
-	WarningEnumString *string                                                 `json:"warningEnumString"`
-	WorkflowID        *string                                                 `json:"workflowId"`
-	WorkflowName      *string                                                 `json:"workflowName"`
+	ClientID          *string                                                 `json:"clientId,omitempty"`
+	EnumFilterType    *EnterpriseCrmEventbusStatsDimensionsEnumFilterTypeEnum `json:"enumFilterType,omitempty"`
+	ErrorEnumString   *string                                                 `json:"errorEnumString,omitempty"`
+	RetryAttempt      *EnterpriseCrmEventbusStatsDimensionsRetryAttemptEnum   `json:"retryAttempt,omitempty"`
+	TaskName          *string                                                 `json:"taskName,omitempty"`
+	TaskNumber        *string                                                 `json:"taskNumber,omitempty"`
+	TriggerID         *string                                                 `json:"triggerId,omitempty"`
+	WarningEnumString *string                                                 `json:"warningEnumString,omitempty"`
+	WorkflowID        *string                                                 `json:"workflowId,omitempty"`
+	WorkflowName      *string                                                 `json:"workflowName,omitempty"`
 }

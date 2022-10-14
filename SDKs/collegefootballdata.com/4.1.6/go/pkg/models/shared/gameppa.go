@@ -1,30 +1,30 @@
 package shared
 
 type GamePpaDefense struct {
-	FirstDown  *float64 `json:"firstDown"`
-	Overall    *float64 `json:"overall"`
-	Passing    *float64 `json:"passing"`
-	Rushing    *float64 `json:"rushing"`
-	SecondDown *float64 `json:"secondDown"`
-	ThirdDown  *float64 `json:"thirdDown"`
+	FirstDown  *float64 `json:"firstDown,omitempty"`
+	Overall    *float64 `json:"overall,omitempty"`
+	Passing    *float64 `json:"passing,omitempty"`
+	Rushing    *float64 `json:"rushing,omitempty"`
+	SecondDown *float64 `json:"secondDown,omitempty"`
+	ThirdDown  *float64 `json:"thirdDown,omitempty"`
 }
 
 type GamePpaOffense struct {
-	FirstDown  *float64 `json:"firstDown"`
-	Overall    *float64 `json:"overall"`
-	Passing    *float64 `json:"passing"`
-	Rushing    *float64 `json:"rushing"`
-	SecondDown *float64 `json:"secondDown"`
-	ThirdDown  *float64 `json:"thirdDown"`
+	FirstDown  *float64 `json:"firstDown,omitempty"`
+	Overall    *float64 `json:"overall,omitempty"`
+	Passing    *float64 `json:"passing,omitempty"`
+	Rushing    *float64 `json:"rushing,omitempty"`
+	SecondDown *float64 `json:"secondDown,omitempty"`
+	ThirdDown  *float64 `json:"thirdDown,omitempty"`
 }
 
 type GamePpa struct {
-	Conference *string         `json:"conference"`
-	Defense    *GamePpaDefense `json:"defense"`
-	ID         *int64          `json:"id"`
-	Offense    *GamePpaOffense `json:"offense"`
-	Opponnent  *string         `json:"opponnent"`
-	Season     *int64          `json:"season"`
-	Team       *string         `json:"team"`
-	Week       *int64          `json:"week"`
+	Conference *string         `json:"conference,omitempty"`
+	Defense    *GamePpaDefense `json:"defense,omitempty"`
+	ID         *int64          `json:"id,omitempty"`
+	Offense    *GamePpaOffense `json:"offense,omitempty"`
+	Opponnent  *string         `json:"opponnent,omitempty"`
+	Season     *int64          `json:"season,omitempty"`
+	Team       *string         `json:"team,omitempty"`
+	Week       *int64          `json:"week,omitempty"`
 }

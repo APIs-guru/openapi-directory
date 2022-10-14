@@ -15,25 +15,25 @@ type CreateFunctionHeaders struct {
 }
 
 type CreateFunctionRequestBodyCode struct {
-	ImageURI        *string `json:"ImageUri"`
-	S3Bucket        *string `json:"S3Bucket"`
-	S3Key           *string `json:"S3Key"`
-	S3ObjectVersion *string `json:"S3ObjectVersion"`
-	ZipFile         *string `json:"ZipFile"`
+	ImageURI        *string `json:"ImageUri,omitempty"`
+	S3Bucket        *string `json:"S3Bucket,omitempty"`
+	S3Key           *string `json:"S3Key,omitempty"`
+	S3ObjectVersion *string `json:"S3ObjectVersion,omitempty"`
+	ZipFile         *string `json:"ZipFile,omitempty"`
 }
 
 type CreateFunctionRequestBodyDeadLetterConfig struct {
-	TargetArn *string `json:"TargetArn"`
+	TargetArn *string `json:"TargetArn,omitempty"`
 }
 
 type CreateFunctionRequestBodyEnvironment struct {
-	Variables map[string]string `json:"Variables"`
+	Variables map[string]string `json:"Variables,omitempty"`
 }
 
 type CreateFunctionRequestBodyImageConfig struct {
-	Command          []string `json:"Command"`
-	EntryPoint       []string `json:"EntryPoint"`
-	WorkingDirectory *string  `json:"WorkingDirectory"`
+	Command          []string `json:"Command,omitempty"`
+	EntryPoint       []string `json:"EntryPoint,omitempty"`
+	WorkingDirectory *string  `json:"WorkingDirectory,omitempty"`
 }
 
 type CreateFunctionRequestBodyPackageTypeEnum string
@@ -74,35 +74,35 @@ const (
 )
 
 type CreateFunctionRequestBodyTracingConfig struct {
-	Mode *shared.TracingModeEnum `json:"Mode"`
+	Mode *shared.TracingModeEnum `json:"Mode,omitempty"`
 }
 
 type CreateFunctionRequestBodyVpcConfig struct {
-	SecurityGroupIds []string `json:"SecurityGroupIds"`
-	SubnetIds        []string `json:"SubnetIds"`
+	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
+	SubnetIds        []string `json:"SubnetIds,omitempty"`
 }
 
 type CreateFunctionRequestBody struct {
 	Code                 CreateFunctionRequestBodyCode              `json:"Code"`
-	CodeSigningConfigArn *string                                    `json:"CodeSigningConfigArn"`
-	DeadLetterConfig     *CreateFunctionRequestBodyDeadLetterConfig `json:"DeadLetterConfig"`
-	Description          *string                                    `json:"Description"`
-	Environment          *CreateFunctionRequestBodyEnvironment      `json:"Environment"`
-	FileSystemConfigs    []shared.FileSystemConfig                  `json:"FileSystemConfigs"`
+	CodeSigningConfigArn *string                                    `json:"CodeSigningConfigArn,omitempty"`
+	DeadLetterConfig     *CreateFunctionRequestBodyDeadLetterConfig `json:"DeadLetterConfig,omitempty"`
+	Description          *string                                    `json:"Description,omitempty"`
+	Environment          *CreateFunctionRequestBodyEnvironment      `json:"Environment,omitempty"`
+	FileSystemConfigs    []shared.FileSystemConfig                  `json:"FileSystemConfigs,omitempty"`
 	FunctionName         string                                     `json:"FunctionName"`
-	Handler              *string                                    `json:"Handler"`
-	ImageConfig          *CreateFunctionRequestBodyImageConfig      `json:"ImageConfig"`
-	KmsKeyArn            *string                                    `json:"KMSKeyArn"`
-	Layers               []string                                   `json:"Layers"`
-	MemorySize           *int64                                     `json:"MemorySize"`
-	PackageType          *CreateFunctionRequestBodyPackageTypeEnum  `json:"PackageType"`
-	Publish              *bool                                      `json:"Publish"`
+	Handler              *string                                    `json:"Handler,omitempty"`
+	ImageConfig          *CreateFunctionRequestBodyImageConfig      `json:"ImageConfig,omitempty"`
+	KmsKeyArn            *string                                    `json:"KMSKeyArn,omitempty"`
+	Layers               []string                                   `json:"Layers,omitempty"`
+	MemorySize           *int64                                     `json:"MemorySize,omitempty"`
+	PackageType          *CreateFunctionRequestBodyPackageTypeEnum  `json:"PackageType,omitempty"`
+	Publish              *bool                                      `json:"Publish,omitempty"`
 	Role                 string                                     `json:"Role"`
-	Runtime              *CreateFunctionRequestBodyRuntimeEnum      `json:"Runtime"`
-	Tags                 map[string]string                          `json:"Tags"`
-	Timeout              *int64                                     `json:"Timeout"`
-	TracingConfig        *CreateFunctionRequestBodyTracingConfig    `json:"TracingConfig"`
-	VpcConfig            *CreateFunctionRequestBodyVpcConfig        `json:"VpcConfig"`
+	Runtime              *CreateFunctionRequestBodyRuntimeEnum      `json:"Runtime,omitempty"`
+	Tags                 map[string]string                          `json:"Tags,omitempty"`
+	Timeout              *int64                                     `json:"Timeout,omitempty"`
+	TracingConfig        *CreateFunctionRequestBodyTracingConfig    `json:"TracingConfig,omitempty"`
+	VpcConfig            *CreateFunctionRequestBodyVpcConfig        `json:"VpcConfig,omitempty"`
 }
 
 type CreateFunctionRequest struct {

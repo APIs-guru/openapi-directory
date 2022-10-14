@@ -5,22 +5,22 @@ import (
 )
 
 type ConversationsV1ServiceServiceUserServiceUserConversation struct {
-	AccountSid           *string                                           `json:"account_sid"`
-	Attributes           *string                                           `json:"attributes"`
-	ChatServiceSid       *string                                           `json:"chat_service_sid"`
-	ConversationSid      *string                                           `json:"conversation_sid"`
-	ConversationState    *ServiceUserConversationEnumStateEnum             `json:"conversation_state"`
-	CreatedBy            *string                                           `json:"created_by"`
-	DateCreated          *time.Time                                        `json:"date_created"`
-	DateUpdated          *time.Time                                        `json:"date_updated"`
-	FriendlyName         *string                                           `json:"friendly_name"`
-	LastReadMessageIndex *int64                                            `json:"last_read_message_index"`
-	Links                map[string]interface{}                            `json:"links"`
-	NotificationLevel    *ServiceUserConversationEnumNotificationLevelEnum `json:"notification_level"`
-	ParticipantSid       *string                                           `json:"participant_sid"`
-	Timers               *interface{}                                      `json:"timers"`
-	UniqueName           *string                                           `json:"unique_name"`
-	UnreadMessagesCount  *int64                                            `json:"unread_messages_count"`
-	URL                  *string                                           `json:"url"`
-	UserSid              *string                                           `json:"user_sid"`
+	AccountSid           *string                                           `json:"account_sid,omitempty"`
+	Attributes           *string                                           `json:"attributes,omitempty"`
+	ChatServiceSid       *string                                           `json:"chat_service_sid,omitempty"`
+	ConversationSid      *string                                           `json:"conversation_sid,omitempty"`
+	ConversationState    *ServiceUserConversationEnumStateEnum             `json:"conversation_state,omitempty"`
+	CreatedBy            *string                                           `json:"created_by,omitempty"`
+	DateCreated          *time.Time                                        `json:"date_created,omitempty"`
+	DateUpdated          *time.Time                                        `json:"date_updated,omitempty"`
+	FriendlyName         *string                                           `json:"friendly_name,omitempty"`
+	LastReadMessageIndex *int64                                            `json:"last_read_message_index,omitempty"`
+	Links                map[string]interface{}                            `json:"links,omitempty"`
+	NotificationLevel    *ServiceUserConversationEnumNotificationLevelEnum `json:"notification_level,omitempty"`
+	ParticipantSid       *string                                           `json:"participant_sid,omitempty"`
+	Timers               *interface{}                                      `json:"timers,omitempty"`
+	UniqueName           *string                                           `json:"unique_name,omitempty"`
+	UnreadMessagesCount  *int64                                            `json:"unread_messages_count,omitempty"`
+	URL                  *string                                           `json:"url,omitempty"`
+	UserSid              *string                                           `json:"user_sid,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type AnalyzeCommentRequest struct {
-	ClientToken         *string                        `json:"clientToken"`
-	Comment             *TextEntry                     `json:"comment"`
-	CommunityID         *string                        `json:"communityId"`
-	Context             *Context                       `json:"context"`
-	DoNotStore          *bool                          `json:"doNotStore"`
-	Languages           []string                       `json:"languages"`
-	RequestedAttributes map[string]AttributeParameters `json:"requestedAttributes"`
-	SessionID           *string                        `json:"sessionId"`
-	SpanAnnotations     *bool                          `json:"spanAnnotations"`
+	ClientToken         *string                        `json:"clientToken,omitempty"`
+	Comment             *TextEntry                     `json:"comment,omitempty"`
+	CommunityID         *string                        `json:"communityId,omitempty"`
+	Context             *Context                       `json:"context,omitempty"`
+	DoNotStore          *bool                          `json:"doNotStore,omitempty"`
+	Languages           []string                       `json:"languages,omitempty"`
+	RequestedAttributes map[string]AttributeParameters `json:"requestedAttributes,omitempty"`
+	SessionID           *string                        `json:"sessionId,omitempty"`
+	SpanAnnotations     *bool                          `json:"spanAnnotations,omitempty"`
 }

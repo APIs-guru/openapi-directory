@@ -31,13 +31,13 @@ const (
 )
 
 type Payment struct {
-	Amount      *float64         `json:"Amount"`
-	ID          *int32           `json:"Id"`
-	Invoice     *Invoice         `json:"Invoice"`
-	InvoiceID   *int32           `json:"InvoiceId"`
-	IsAutomatic *bool            `json:"IsAutomatic"`
-	Note        *string          `json:"Note"`
-	PaidOn      *time.Time       `json:"PaidOn"`
-	ReferenceID *string          `json:"ReferenceId"`
-	Type        *PaymentTypeEnum `json:"Type"`
+	Amount      *float64         `json:"Amount,omitempty"`
+	ID          *int32           `json:"Id,omitempty"`
+	Invoice     *Invoice         `json:"Invoice,omitempty"`
+	InvoiceID   *int32           `json:"InvoiceId,omitempty"`
+	IsAutomatic *bool            `json:"IsAutomatic,omitempty"`
+	Note        *string          `json:"Note,omitempty"`
+	PaidOn      *time.Time       `json:"PaidOn,omitempty"`
+	ReferenceID *string          `json:"ReferenceId,omitempty"`
+	Type        *PaymentTypeEnum `json:"Type,omitempty"`
 }

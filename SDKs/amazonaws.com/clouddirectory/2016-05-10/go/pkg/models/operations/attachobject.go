@@ -16,11 +16,11 @@ type AttachObjectHeaders struct {
 }
 
 type AttachObjectRequestBodyChildReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachObjectRequestBodyParentReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachObjectRequestBody struct {

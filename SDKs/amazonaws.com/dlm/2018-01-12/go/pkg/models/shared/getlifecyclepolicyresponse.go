@@ -1,5 +1,5 @@
 package shared
 
 type GetLifecyclePolicyResponse struct {
-	Policy *LifecyclePolicy `json:"Policy"`
+	Policy *LifecyclePolicy `json:"Policy,omitempty"`
 }

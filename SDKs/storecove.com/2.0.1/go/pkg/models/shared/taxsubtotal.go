@@ -31,9 +31,9 @@ const (
 )
 
 type TaxSubtotal struct {
-	Category      *TaxSubtotalCategoryTaxCategoryEnum `json:"category"`
-	Country       *CountryEnum                        `json:"country"`
-	Percentage    *float64                            `json:"percentage"`
-	TaxAmount     *float64                            `json:"taxAmount"`
+	Category      *TaxSubtotalCategoryTaxCategoryEnum `json:"category,omitempty"`
+	Country       *CountryEnum                        `json:"country,omitempty"`
+	Percentage    *float64                            `json:"percentage,omitempty"`
+	TaxAmount     *float64                            `json:"taxAmount,omitempty"`
 	TaxableAmount float64                             `json:"taxableAmount"`
 }

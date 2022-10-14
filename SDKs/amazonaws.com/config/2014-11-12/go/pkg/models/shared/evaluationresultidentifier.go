@@ -5,6 +5,6 @@ import (
 )
 
 type EvaluationResultIdentifier struct {
-	EvaluationResultQualifier *EvaluationResultQualifier `json:"EvaluationResultQualifier"`
-	OrderingTimestamp         *time.Time                 `json:"OrderingTimestamp"`
+	EvaluationResultQualifier *EvaluationResultQualifier `json:"EvaluationResultQualifier,omitempty"`
+	OrderingTimestamp         *time.Time                 `json:"OrderingTimestamp,omitempty"`
 }

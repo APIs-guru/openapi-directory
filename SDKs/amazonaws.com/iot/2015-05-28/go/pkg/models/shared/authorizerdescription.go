@@ -5,13 +5,13 @@ import (
 )
 
 type AuthorizerDescription struct {
-	AuthorizerArn          *string               `json:"authorizerArn"`
-	AuthorizerFunctionArn  *string               `json:"authorizerFunctionArn"`
-	AuthorizerName         *string               `json:"authorizerName"`
-	CreationDate           *time.Time            `json:"creationDate"`
-	LastModifiedDate       *time.Time            `json:"lastModifiedDate"`
-	SigningDisabled        *bool                 `json:"signingDisabled"`
-	Status                 *AuthorizerStatusEnum `json:"status"`
-	TokenKeyName           *string               `json:"tokenKeyName"`
-	TokenSigningPublicKeys map[string]string     `json:"tokenSigningPublicKeys"`
+	AuthorizerArn          *string               `json:"authorizerArn,omitempty"`
+	AuthorizerFunctionArn  *string               `json:"authorizerFunctionArn,omitempty"`
+	AuthorizerName         *string               `json:"authorizerName,omitempty"`
+	CreationDate           *time.Time            `json:"creationDate,omitempty"`
+	LastModifiedDate       *time.Time            `json:"lastModifiedDate,omitempty"`
+	SigningDisabled        *bool                 `json:"signingDisabled,omitempty"`
+	Status                 *AuthorizerStatusEnum `json:"status,omitempty"`
+	TokenKeyName           *string               `json:"tokenKeyName,omitempty"`
+	TokenSigningPublicKeys map[string]string     `json:"tokenSigningPublicKeys,omitempty"`
 }

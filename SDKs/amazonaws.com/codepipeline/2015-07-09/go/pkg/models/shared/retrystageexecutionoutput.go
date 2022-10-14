@@ -1,5 +1,5 @@
 package shared
 
 type RetryStageExecutionOutput struct {
-	PipelineExecutionID *string `json:"pipelineExecutionId"`
+	PipelineExecutionID *string `json:"pipelineExecutionId,omitempty"`
 }

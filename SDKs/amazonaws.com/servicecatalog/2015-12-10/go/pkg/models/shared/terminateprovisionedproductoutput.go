@@ -1,5 +1,5 @@
 package shared
 
 type TerminateProvisionedProductOutput struct {
-	RecordDetail *RecordDetail `json:"RecordDetail"`
+	RecordDetail *RecordDetail `json:"RecordDetail,omitempty"`
 }

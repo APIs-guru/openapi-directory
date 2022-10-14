@@ -12,7 +12,7 @@ const (
 )
 
 type ConfigFile struct {
-	FileContents *string                 `json:"fileContents"`
-	FilePath     *string                 `json:"filePath"`
-	FileType     *ConfigFileFileTypeEnum `json:"fileType"`
+	FileContents *string                 `json:"fileContents,omitempty"`
+	FilePath     *string                 `json:"filePath,omitempty"`
+	FileType     *ConfigFileFileTypeEnum `json:"fileType,omitempty"`
 }

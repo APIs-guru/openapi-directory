@@ -1,7 +1,7 @@
 package shared
 
 type NetworkInfo struct {
-	DisplayName    *string `json:"displayName"`
-	MatchedIPRange *string `json:"matchedIpRange"`
-	URI            *string `json:"uri"`
+	DisplayName    *string `json:"displayName,omitempty"`
+	MatchedIPRange *string `json:"matchedIpRange,omitempty"`
+	URI            *string `json:"uri,omitempty"`
 }

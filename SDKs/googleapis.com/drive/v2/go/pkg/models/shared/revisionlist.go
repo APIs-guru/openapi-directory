@@ -1,9 +1,9 @@
 package shared
 
 type RevisionList struct {
-	Etag          *string    `json:"etag"`
-	Items         []Revision `json:"items"`
-	Kind          *string    `json:"kind"`
-	NextPageToken *string    `json:"nextPageToken"`
-	SelfLink      *string    `json:"selfLink"`
+	Etag          *string    `json:"etag,omitempty"`
+	Items         []Revision `json:"items,omitempty"`
+	Kind          *string    `json:"kind,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	SelfLink      *string    `json:"selfLink,omitempty"`
 }

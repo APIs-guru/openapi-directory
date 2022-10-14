@@ -19,37 +19,37 @@ const (
 )
 
 type ObWriteInternationalScheduledResponse6DataExchangeRateInformation struct {
-	ContractIdentification *string                                                                       `json:"ContractIdentification"`
+	ContractIdentification *string                                                                       `json:"ContractIdentification,omitempty"`
 	ExchangeRate           float64                                                                       `json:"ExchangeRate"`
-	ExpirationDateTime     *time.Time                                                                    `json:"ExpirationDateTime"`
+	ExpirationDateTime     *time.Time                                                                    `json:"ExpirationDateTime,omitempty"`
 	RateType               ObWriteInternationalScheduledResponse6DataExchangeRateInformationRateTypeEnum `json:"RateType"`
 	UnitCurrency           string                                                                        `json:"UnitCurrency"`
 }
 
 type ObWriteInternationalScheduledResponse6DataInitiationCreditor struct {
-	Name          *string           `json:"Name"`
-	PostalAddress *ObPostalAddress6 `json:"PostalAddress"`
+	Name          *string           `json:"Name,omitempty"`
+	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataInitiationCreditorAgent struct {
-	Identification *string           `json:"Identification"`
-	Name           *string           `json:"Name"`
-	PostalAddress  *ObPostalAddress6 `json:"PostalAddress"`
-	SchemeName     *string           `json:"SchemeName"`
+	Identification *string           `json:"Identification,omitempty"`
+	Name           *string           `json:"Name,omitempty"`
+	PostalAddress  *ObPostalAddress6 `json:"PostalAddress,omitempty"`
+	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataInitiationExchangeRateInformationRateTypeEnum string
@@ -61,8 +61,8 @@ const (
 )
 
 type ObWriteInternationalScheduledResponse6DataInitiationExchangeRateInformation struct {
-	ContractIdentification *string                                                                                 `json:"ContractIdentification"`
-	ExchangeRate           *float64                                                                                `json:"ExchangeRate"`
+	ContractIdentification *string                                                                                 `json:"ContractIdentification,omitempty"`
+	ExchangeRate           *float64                                                                                `json:"ExchangeRate,omitempty"`
 	RateType               ObWriteInternationalScheduledResponse6DataInitiationExchangeRateInformationRateTypeEnum `json:"RateType"`
 	UnitCurrency           string                                                                                  `json:"UnitCurrency"`
 }
@@ -80,29 +80,29 @@ const (
 )
 
 type ObWriteInternationalScheduledResponse6DataInitiationRemittanceInformation struct {
-	Reference    *string `json:"Reference"`
-	Unstructured *string `json:"Unstructured"`
+	Reference    *string `json:"Reference,omitempty"`
+	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataInitiation struct {
-	ChargeBearer               *ObChargeBearerType1CodeEnum                                                 `json:"ChargeBearer"`
-	Creditor                   *ObWriteInternationalScheduledResponse6DataInitiationCreditor                `json:"Creditor"`
+	ChargeBearer               *ObChargeBearerType1CodeEnum                                                 `json:"ChargeBearer,omitempty"`
+	Creditor                   *ObWriteInternationalScheduledResponse6DataInitiationCreditor                `json:"Creditor,omitempty"`
 	CreditorAccount            ObWriteInternationalScheduledResponse6DataInitiationCreditorAccount          `json:"CreditorAccount"`
-	CreditorAgent              *ObWriteInternationalScheduledResponse6DataInitiationCreditorAgent           `json:"CreditorAgent"`
+	CreditorAgent              *ObWriteInternationalScheduledResponse6DataInitiationCreditorAgent           `json:"CreditorAgent,omitempty"`
 	CurrencyOfTransfer         string                                                                       `json:"CurrencyOfTransfer"`
-	DebtorAccount              *ObWriteInternationalScheduledResponse6DataInitiationDebtorAccount           `json:"DebtorAccount"`
-	DestinationCountryCode     *string                                                                      `json:"DestinationCountryCode"`
-	EndToEndIdentification     *string                                                                      `json:"EndToEndIdentification"`
-	ExchangeRateInformation    *ObWriteInternationalScheduledResponse6DataInitiationExchangeRateInformation `json:"ExchangeRateInformation"`
-	ExtendedPurpose            *string                                                                      `json:"ExtendedPurpose"`
+	DebtorAccount              *ObWriteInternationalScheduledResponse6DataInitiationDebtorAccount           `json:"DebtorAccount,omitempty"`
+	DestinationCountryCode     *string                                                                      `json:"DestinationCountryCode,omitempty"`
+	EndToEndIdentification     *string                                                                      `json:"EndToEndIdentification,omitempty"`
+	ExchangeRateInformation    *ObWriteInternationalScheduledResponse6DataInitiationExchangeRateInformation `json:"ExchangeRateInformation,omitempty"`
+	ExtendedPurpose            *string                                                                      `json:"ExtendedPurpose,omitempty"`
 	InstructedAmount           ObWriteInternationalScheduledResponse6DataInitiationInstructedAmount         `json:"InstructedAmount"`
 	InstructionIdentification  string                                                                       `json:"InstructionIdentification"`
-	InstructionPriority        *ObWriteInternationalScheduledResponse6DataInitiationInstructionPriorityEnum `json:"InstructionPriority"`
-	LocalInstrument            *string                                                                      `json:"LocalInstrument"`
-	Purpose                    *string                                                                      `json:"Purpose"`
-	RemittanceInformation      *ObWriteInternationalScheduledResponse6DataInitiationRemittanceInformation   `json:"RemittanceInformation"`
+	InstructionPriority        *ObWriteInternationalScheduledResponse6DataInitiationInstructionPriorityEnum `json:"InstructionPriority,omitempty"`
+	LocalInstrument            *string                                                                      `json:"LocalInstrument,omitempty"`
+	Purpose                    *string                                                                      `json:"Purpose,omitempty"`
+	RemittanceInformation      *ObWriteInternationalScheduledResponse6DataInitiationRemittanceInformation   `json:"RemittanceInformation,omitempty"`
 	RequestedExecutionDateTime time.Time                                                                    `json:"RequestedExecutionDateTime"`
-	SupplementaryData          map[string]interface{}                                                       `json:"SupplementaryData"`
+	SupplementaryData          map[string]interface{}                                                       `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataMultiAuthorisationStatusEnum string
@@ -114,10 +114,10 @@ const (
 )
 
 type ObWriteInternationalScheduledResponse6DataMultiAuthorisation struct {
-	ExpirationDateTime *time.Time                                                             `json:"ExpirationDateTime"`
-	LastUpdateDateTime *time.Time                                                             `json:"LastUpdateDateTime"`
-	NumberReceived     *int64                                                                 `json:"NumberReceived"`
-	NumberRequired     *int64                                                                 `json:"NumberRequired"`
+	ExpirationDateTime *time.Time                                                             `json:"ExpirationDateTime,omitempty"`
+	LastUpdateDateTime *time.Time                                                             `json:"LastUpdateDateTime,omitempty"`
+	NumberReceived     *int64                                                                 `json:"NumberReceived,omitempty"`
+	NumberRequired     *int64                                                                 `json:"NumberRequired,omitempty"`
 	Status             ObWriteInternationalScheduledResponse6DataMultiAuthorisationStatusEnum `json:"Status"`
 }
 
@@ -125,25 +125,25 @@ type ObWriteInternationalScheduledResponse6DataRefundAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataRefundAgent struct {
-	Identification *string           `json:"Identification"`
-	Name           *string           `json:"Name"`
-	PostalAddress  *ObPostalAddress6 `json:"PostalAddress"`
-	SchemeName     *string           `json:"SchemeName"`
+	Identification *string           `json:"Identification,omitempty"`
+	Name           *string           `json:"Name,omitempty"`
+	PostalAddress  *ObPostalAddress6 `json:"PostalAddress,omitempty"`
+	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataRefundCreditor struct {
-	Name          *string           `json:"Name"`
-	PostalAddress *ObPostalAddress6 `json:"PostalAddress"`
+	Name          *string           `json:"Name,omitempty"`
+	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataRefund struct {
 	Account  ObWriteInternationalScheduledResponse6DataRefundAccount   `json:"Account"`
-	Agent    *ObWriteInternationalScheduledResponse6DataRefundAgent    `json:"Agent"`
-	Creditor *ObWriteInternationalScheduledResponse6DataRefundCreditor `json:"Creditor"`
+	Agent    *ObWriteInternationalScheduledResponse6DataRefundAgent    `json:"Agent,omitempty"`
+	Creditor *ObWriteInternationalScheduledResponse6DataRefundCreditor `json:"Creditor,omitempty"`
 }
 
 type ObWriteInternationalScheduledResponse6DataStatusEnum string
@@ -156,23 +156,23 @@ const (
 )
 
 type ObWriteInternationalScheduledResponse6Data struct {
-	Charges                         []ObWriteInternationalScheduledResponse6DataCharges                `json:"Charges"`
+	Charges                         []ObWriteInternationalScheduledResponse6DataCharges                `json:"Charges,omitempty"`
 	ConsentID                       string                                                             `json:"ConsentId"`
 	CreationDateTime                time.Time                                                          `json:"CreationDateTime"`
-	Debtor                          *ObCashAccountDebtor4                                              `json:"Debtor"`
-	ExchangeRateInformation         *ObWriteInternationalScheduledResponse6DataExchangeRateInformation `json:"ExchangeRateInformation"`
-	ExpectedExecutionDateTime       *time.Time                                                         `json:"ExpectedExecutionDateTime"`
-	ExpectedSettlementDateTime      *time.Time                                                         `json:"ExpectedSettlementDateTime"`
+	Debtor                          *ObCashAccountDebtor4                                              `json:"Debtor,omitempty"`
+	ExchangeRateInformation         *ObWriteInternationalScheduledResponse6DataExchangeRateInformation `json:"ExchangeRateInformation,omitempty"`
+	ExpectedExecutionDateTime       *time.Time                                                         `json:"ExpectedExecutionDateTime,omitempty"`
+	ExpectedSettlementDateTime      *time.Time                                                         `json:"ExpectedSettlementDateTime,omitempty"`
 	Initiation                      ObWriteInternationalScheduledResponse6DataInitiation               `json:"Initiation"`
 	InternationalScheduledPaymentID string                                                             `json:"InternationalScheduledPaymentId"`
-	MultiAuthorisation              *ObWriteInternationalScheduledResponse6DataMultiAuthorisation      `json:"MultiAuthorisation"`
-	Refund                          *ObWriteInternationalScheduledResponse6DataRefund                  `json:"Refund"`
+	MultiAuthorisation              *ObWriteInternationalScheduledResponse6DataMultiAuthorisation      `json:"MultiAuthorisation,omitempty"`
+	Refund                          *ObWriteInternationalScheduledResponse6DataRefund                  `json:"Refund,omitempty"`
 	Status                          ObWriteInternationalScheduledResponse6DataStatusEnum               `json:"Status"`
 	StatusUpdateDateTime            time.Time                                                          `json:"StatusUpdateDateTime"`
 }
 
 type ObWriteInternationalScheduledResponse6 struct {
 	Data  ObWriteInternationalScheduledResponse6Data `json:"Data"`
-	Links *Links                                     `json:"Links"`
-	Meta  *Meta                                      `json:"Meta"`
+	Links *Links                                     `json:"Links,omitempty"`
+	Meta  *Meta                                      `json:"Meta,omitempty"`
 }

@@ -51,12 +51,12 @@ const (
 )
 
 type Field struct {
-	AdditionalDetails map[string]interface{} `json:"additionalDetails"`
-	DataType          *FieldDataTypeEnum     `json:"dataType"`
-	DefaultValue      *interface{}           `json:"defaultValue"`
-	Description       *string                `json:"description"`
-	Field             *string                `json:"field"`
-	Key               *bool                  `json:"key"`
-	Nullable          *bool                  `json:"nullable"`
-	Readonly          *bool                  `json:"readonly"`
+	AdditionalDetails map[string]interface{} `json:"additionalDetails,omitempty"`
+	DataType          *FieldDataTypeEnum     `json:"dataType,omitempty"`
+	DefaultValue      *interface{}           `json:"defaultValue,omitempty"`
+	Description       *string                `json:"description,omitempty"`
+	Field             *string                `json:"field,omitempty"`
+	Key               *bool                  `json:"key,omitempty"`
+	Nullable          *bool                  `json:"nullable,omitempty"`
+	Readonly          *bool                  `json:"readonly,omitempty"`
 }

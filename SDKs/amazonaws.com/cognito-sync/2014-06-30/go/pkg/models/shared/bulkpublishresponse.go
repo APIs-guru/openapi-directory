@@ -1,5 +1,5 @@
 package shared
 
 type BulkPublishResponse struct {
-	IdentityPoolID *string `json:"IdentityPoolId"`
+	IdentityPoolID *string `json:"IdentityPoolId,omitempty"`
 }

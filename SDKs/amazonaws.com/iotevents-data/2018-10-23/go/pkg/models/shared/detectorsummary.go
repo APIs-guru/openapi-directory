@@ -5,10 +5,10 @@ import (
 )
 
 type DetectorSummary struct {
-	CreationTime         *time.Time            `json:"creationTime"`
-	DetectorModelName    *string               `json:"detectorModelName"`
-	DetectorModelVersion *string               `json:"detectorModelVersion"`
-	KeyValue             *string               `json:"keyValue"`
-	LastUpdateTime       *time.Time            `json:"lastUpdateTime"`
-	State                *DetectorStateSummary `json:"state"`
+	CreationTime         *time.Time            `json:"creationTime,omitempty"`
+	DetectorModelName    *string               `json:"detectorModelName,omitempty"`
+	DetectorModelVersion *string               `json:"detectorModelVersion,omitempty"`
+	KeyValue             *string               `json:"keyValue,omitempty"`
+	LastUpdateTime       *time.Time            `json:"lastUpdateTime,omitempty"`
+	State                *DetectorStateSummary `json:"state,omitempty"`
 }

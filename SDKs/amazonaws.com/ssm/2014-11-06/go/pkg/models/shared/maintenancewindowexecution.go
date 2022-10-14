@@ -5,10 +5,10 @@ import (
 )
 
 type MaintenanceWindowExecution struct {
-	EndTime           *time.Time                            `json:"EndTime"`
-	StartTime         *time.Time                            `json:"StartTime"`
-	Status            *MaintenanceWindowExecutionStatusEnum `json:"Status"`
-	StatusDetails     *string                               `json:"StatusDetails"`
-	WindowExecutionID *string                               `json:"WindowExecutionId"`
-	WindowID          *string                               `json:"WindowId"`
+	EndTime           *time.Time                            `json:"EndTime,omitempty"`
+	StartTime         *time.Time                            `json:"StartTime,omitempty"`
+	Status            *MaintenanceWindowExecutionStatusEnum `json:"Status,omitempty"`
+	StatusDetails     *string                               `json:"StatusDetails,omitempty"`
+	WindowExecutionID *string                               `json:"WindowExecutionId,omitempty"`
+	WindowID          *string                               `json:"WindowId,omitempty"`
 }

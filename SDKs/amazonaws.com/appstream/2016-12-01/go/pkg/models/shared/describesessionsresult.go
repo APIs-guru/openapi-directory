@@ -1,6 +1,6 @@
 package shared
 
 type DescribeSessionsResult struct {
-	NextToken *string   `json:"NextToken"`
-	Sessions  []Session `json:"Sessions"`
+	NextToken *string   `json:"NextToken,omitempty"`
+	Sessions  []Session `json:"Sessions,omitempty"`
 }

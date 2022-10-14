@@ -15,14 +15,14 @@ type CreateMeshHeaders struct {
 }
 
 type CreateMeshRequestBodySpec struct {
-	EgressFilter *shared.EgressFilter `json:"egressFilter"`
+	EgressFilter *shared.EgressFilter `json:"egressFilter,omitempty"`
 }
 
 type CreateMeshRequestBody struct {
-	ClientToken *string                    `json:"clientToken"`
+	ClientToken *string                    `json:"clientToken,omitempty"`
 	MeshName    string                     `json:"meshName"`
-	Spec        *CreateMeshRequestBodySpec `json:"spec"`
-	Tags        []shared.TagRef            `json:"tags"`
+	Spec        *CreateMeshRequestBodySpec `json:"spec,omitempty"`
+	Tags        []shared.TagRef            `json:"tags,omitempty"`
 }
 
 type CreateMeshRequest struct {

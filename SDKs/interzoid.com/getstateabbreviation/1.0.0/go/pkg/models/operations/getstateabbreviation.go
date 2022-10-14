@@ -10,10 +10,10 @@ type GetstateabbreviationRequest struct {
 }
 
 type Getstateabbreviation200ApplicationJSON struct {
-	Abbreviation *string `json:"Abbreviation"`
-	Code         *string `json:"Code"`
-	Credits      *string `json:"Credits"`
-	State        *string `json:"State"`
+	Abbreviation *string `json:"Abbreviation,omitempty"`
+	Code         *string `json:"Code,omitempty"`
+	Credits      *string `json:"Credits,omitempty"`
+	State        *string `json:"State,omitempty"`
 }
 
 type GetstateabbreviationResponse struct {

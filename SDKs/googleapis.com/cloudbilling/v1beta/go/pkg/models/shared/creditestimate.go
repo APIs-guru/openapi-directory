@@ -1,7 +1,7 @@
 package shared
 
 type CreditEstimate struct {
-	CreditAmount      *Money  `json:"creditAmount"`
-	CreditDescription *string `json:"creditDescription"`
-	CreditType        *string `json:"creditType"`
+	CreditAmount      *Money  `json:"creditAmount,omitempty"`
+	CreditDescription *string `json:"creditDescription,omitempty"`
+	CreditType        *string `json:"creditType,omitempty"`
 }

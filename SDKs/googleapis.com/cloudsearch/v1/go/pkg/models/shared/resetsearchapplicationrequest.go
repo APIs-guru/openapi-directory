@@ -1,5 +1,5 @@
 package shared
 
 type ResetSearchApplicationRequest struct {
-	DebugOptions *DebugOptions `json:"debugOptions"`
+	DebugOptions *DebugOptions `json:"debugOptions,omitempty"`
 }

@@ -14,7 +14,7 @@ const (
 )
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesMaintenancePolicy struct {
-	Day       *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesMaintenancePolicyDayEnum `json:"day"`
-	Duration  *string                                                                                                                                         `json:"duration"`
-	StartTime *string                                                                                                                                         `json:"start_time"`
+	Day       *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesMaintenancePolicyDayEnum `json:"day,omitempty"`
+	Duration  *string                                                                                                                                         `json:"duration,omitempty"`
+	StartTime *string                                                                                                                                         `json:"start_time,omitempty"`
 }

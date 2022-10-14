@@ -1,16 +1,16 @@
 package shared
 
 type PersonalNameGeoOut struct {
-	CountriesTop             []string `json:"countriesTop"`
-	Country                  *string  `json:"country"`
-	CountryAlt               *string  `json:"countryAlt"`
-	ID                       *string  `json:"id"`
-	Name                     *string  `json:"name"`
-	ProbabilityAltCalibrated *float64 `json:"probabilityAltCalibrated"`
-	ProbabilityCalibrated    *float64 `json:"probabilityCalibrated"`
-	Region                   *string  `json:"region"`
-	Score                    *float64 `json:"score"`
-	Script                   *string  `json:"script"`
-	SubRegion                *string  `json:"subRegion"`
-	TopRegion                *string  `json:"topRegion"`
+	CountriesTop             []string `json:"countriesTop,omitempty"`
+	Country                  *string  `json:"country,omitempty"`
+	CountryAlt               *string  `json:"countryAlt,omitempty"`
+	ID                       *string  `json:"id,omitempty"`
+	Name                     *string  `json:"name,omitempty"`
+	ProbabilityAltCalibrated *float64 `json:"probabilityAltCalibrated,omitempty"`
+	ProbabilityCalibrated    *float64 `json:"probabilityCalibrated,omitempty"`
+	Region                   *string  `json:"region,omitempty"`
+	Score                    *float64 `json:"score,omitempty"`
+	Script                   *string  `json:"script,omitempty"`
+	SubRegion                *string  `json:"subRegion,omitempty"`
+	TopRegion                *string  `json:"topRegion,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ReplaceSitesResponse struct {
-	Sites []Site `json:"sites"`
+	Sites []Site `json:"sites,omitempty"`
 }

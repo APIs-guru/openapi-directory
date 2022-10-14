@@ -1,5 +1,5 @@
 package shared
 
 type GooglePrivacyDlpV2DeltaPresenceEstimationResult struct {
-	DeltaPresenceEstimationHistogram []GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket `json:"deltaPresenceEstimationHistogram"`
+	DeltaPresenceEstimationHistogram []GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket `json:"deltaPresenceEstimationHistogram,omitempty"`
 }

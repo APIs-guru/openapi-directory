@@ -1,7 +1,7 @@
 package shared
 
 type StartDocumentClassificationJobResponse struct {
-	JobArn    *string        `json:"JobArn"`
-	JobID     *string        `json:"JobId"`
-	JobStatus *JobStatusEnum `json:"JobStatus"`
+	JobArn    *string        `json:"JobArn,omitempty"`
+	JobID     *string        `json:"JobId,omitempty"`
+	JobStatus *JobStatusEnum `json:"JobStatus,omitempty"`
 }

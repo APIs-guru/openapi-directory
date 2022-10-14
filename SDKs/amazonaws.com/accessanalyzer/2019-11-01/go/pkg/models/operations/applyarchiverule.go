@@ -12,7 +12,7 @@ type ApplyArchiveRuleHeaders struct {
 
 type ApplyArchiveRuleRequestBody struct {
 	AnalyzerArn string  `json:"analyzerArn"`
-	ClientToken *string `json:"clientToken"`
+	ClientToken *string `json:"clientToken,omitempty"`
 	RuleName    string  `json:"ruleName"`
 }
 

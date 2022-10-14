@@ -9,6 +9,6 @@ const (
 )
 
 type EstimationChangeStatusAPIModel struct {
-	ID     *int32                                    `json:"Id" form:"name=Id"`
-	Status *EstimationChangeStatusAPIModelStatusEnum `json:"Status" form:"name=Status"`
+	ID     *int32                                    `json:"Id,omitempty" form:"name=Id"`
+	Status *EstimationChangeStatusAPIModelStatusEnum `json:"Status,omitempty" form:"name=Status"`
 }

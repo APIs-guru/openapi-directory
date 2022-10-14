@@ -1,5 +1,5 @@
 package shared
 
 type CompleteVerificationResponse struct {
-	Verification *Verification `json:"verification"`
+	Verification *Verification `json:"verification,omitempty"`
 }

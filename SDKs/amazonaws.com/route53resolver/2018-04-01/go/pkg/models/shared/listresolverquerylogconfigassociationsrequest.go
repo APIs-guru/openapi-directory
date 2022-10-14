@@ -1,9 +1,9 @@
 package shared
 
 type ListResolverQueryLogConfigAssociationsRequest struct {
-	Filters    []Filter       `json:"Filters"`
-	MaxResults *int64         `json:"MaxResults"`
-	NextToken  *string        `json:"NextToken"`
-	SortBy     *string        `json:"SortBy"`
-	SortOrder  *SortOrderEnum `json:"SortOrder"`
+	Filters    []Filter       `json:"Filters,omitempty"`
+	MaxResults *int64         `json:"MaxResults,omitempty"`
+	NextToken  *string        `json:"NextToken,omitempty"`
+	SortBy     *string        `json:"SortBy,omitempty"`
+	SortOrder  *SortOrderEnum `json:"SortOrder,omitempty"`
 }

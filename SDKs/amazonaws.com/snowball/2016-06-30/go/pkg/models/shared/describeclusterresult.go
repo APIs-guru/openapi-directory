@@ -1,5 +1,5 @@
 package shared
 
 type DescribeClusterResult struct {
-	ClusterMetadata *ClusterMetadata `json:"ClusterMetadata"`
+	ClusterMetadata *ClusterMetadata `json:"ClusterMetadata,omitempty"`
 }

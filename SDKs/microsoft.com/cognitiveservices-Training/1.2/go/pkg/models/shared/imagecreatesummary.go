@@ -1,6 +1,6 @@
 package shared
 
 type ImageCreateSummary struct {
-	Images            []ImageCreateResult `json:"Images"`
-	IsBatchSuccessful *bool               `json:"IsBatchSuccessful"`
+	Images            []ImageCreateResult `json:"Images,omitempty"`
+	IsBatchSuccessful *bool               `json:"IsBatchSuccessful,omitempty"`
 }

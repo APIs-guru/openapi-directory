@@ -9,7 +9,7 @@ type PutCoursesContentIDMetadataCategoryPathParams struct {
 }
 
 type PutCoursesContentIDMetadataCategoryRequestBody struct {
-	Category *string `json:"category"`
+	Category *string `json:"category,omitempty"`
 }
 
 type PutCoursesContentIDMetadataCategoryRequest struct {

@@ -10,6 +10,6 @@ type JourneyDateRangeKpiResponse struct {
 	JourneyID     string        `json:"JourneyId"`
 	KpiName       string        `json:"KpiName"`
 	KpiResult     BaseKpiResult `json:"KpiResult"`
-	NextToken     *string       `json:"NextToken"`
+	NextToken     *string       `json:"NextToken,omitempty"`
 	StartTime     time.Time     `json:"StartTime"`
 }

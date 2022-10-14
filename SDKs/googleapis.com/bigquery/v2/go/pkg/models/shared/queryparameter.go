@@ -1,7 +1,7 @@
 package shared
 
 type QueryParameter struct {
-	Name           *string              `json:"name"`
-	ParameterType  *QueryParameterType  `json:"parameterType"`
-	ParameterValue *QueryParameterValue `json:"parameterValue"`
+	Name           *string              `json:"name,omitempty"`
+	ParameterType  *QueryParameterType  `json:"parameterType,omitempty"`
+	ParameterValue *QueryParameterValue `json:"parameterValue,omitempty"`
 }

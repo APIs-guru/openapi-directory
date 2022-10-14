@@ -15,9 +15,9 @@ type DisassociateResourceShareHeaders struct {
 }
 
 type DisassociateResourceShareRequestBody struct {
-	ClientToken      *string  `json:"clientToken"`
-	Principals       []string `json:"principals"`
-	ResourceArns     []string `json:"resourceArns"`
+	ClientToken      *string  `json:"clientToken,omitempty"`
+	Principals       []string `json:"principals,omitempty"`
+	ResourceArns     []string `json:"resourceArns,omitempty"`
 	ResourceShareArn string   `json:"resourceShareArn"`
 }
 

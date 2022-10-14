@@ -20,12 +20,12 @@ const (
 )
 
 type Summary struct {
-	DateOfBirth    *time.Time                 `json:"date_of_birth"`
-	DeathDate      *time.Time                 `json:"death_date"`
-	DriversLicense *string                    `json:"drivers_license"`
-	Gender         *SummaryGenderEnum         `json:"gender"`
-	IdentityStatus *SummaryIdentityStatusEnum `json:"identity_status"`
+	DateOfBirth    *time.Time                 `json:"date_of_birth,omitempty"`
+	DeathDate      *time.Time                 `json:"death_date,omitempty"`
+	DriversLicense *string                    `json:"drivers_license,omitempty"`
+	Gender         *SummaryGenderEnum         `json:"gender,omitempty"`
+	IdentityStatus *SummaryIdentityStatusEnum `json:"identity_status,omitempty"`
 	NamesFound     []NameFound                `json:"names_found"`
-	Nss            *string                    `json:"nss"`
-	Rfc            *string                    `json:"rfc"`
+	Nss            *string                    `json:"nss,omitempty"`
+	Rfc            *string                    `json:"rfc,omitempty"`
 }

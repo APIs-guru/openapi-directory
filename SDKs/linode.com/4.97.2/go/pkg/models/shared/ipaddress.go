@@ -10,13 +10,13 @@ const (
 )
 
 type IPAddress struct {
-	Address    *string            `json:"address"`
-	Gateway    *string            `json:"gateway"`
-	LinodeID   *int64             `json:"linode_id"`
-	Prefix     *int64             `json:"prefix"`
-	Public     *bool              `json:"public"`
-	Rdns       *string            `json:"rdns"`
-	Region     *string            `json:"region"`
-	SubnetMask *string            `json:"subnet_mask"`
-	Type       *IPAddressTypeEnum `json:"type"`
+	Address    *string            `json:"address,omitempty"`
+	Gateway    *string            `json:"gateway,omitempty"`
+	LinodeID   *int64             `json:"linode_id,omitempty"`
+	Prefix     *int64             `json:"prefix,omitempty"`
+	Public     *bool              `json:"public,omitempty"`
+	Rdns       *string            `json:"rdns,omitempty"`
+	Region     *string            `json:"region,omitempty"`
+	SubnetMask *string            `json:"subnet_mask,omitempty"`
+	Type       *IPAddressTypeEnum `json:"type,omitempty"`
 }

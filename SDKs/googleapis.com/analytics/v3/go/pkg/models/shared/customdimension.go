@@ -5,21 +5,21 @@ import (
 )
 
 type CustomDimensionParentLink struct {
-	Href *string `json:"href"`
-	Type *string `json:"type"`
+	Href *string `json:"href,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type CustomDimension struct {
-	AccountID     *string                    `json:"accountId"`
-	Active        *bool                      `json:"active"`
-	Created       *time.Time                 `json:"created"`
-	ID            *string                    `json:"id"`
-	Index         *int32                     `json:"index"`
-	Kind          *string                    `json:"kind"`
-	Name          *string                    `json:"name"`
-	ParentLink    *CustomDimensionParentLink `json:"parentLink"`
-	Scope         *string                    `json:"scope"`
-	SelfLink      *string                    `json:"selfLink"`
-	Updated       *time.Time                 `json:"updated"`
-	WebPropertyID *string                    `json:"webPropertyId"`
+	AccountID     *string                    `json:"accountId,omitempty"`
+	Active        *bool                      `json:"active,omitempty"`
+	Created       *time.Time                 `json:"created,omitempty"`
+	ID            *string                    `json:"id,omitempty"`
+	Index         *int32                     `json:"index,omitempty"`
+	Kind          *string                    `json:"kind,omitempty"`
+	Name          *string                    `json:"name,omitempty"`
+	ParentLink    *CustomDimensionParentLink `json:"parentLink,omitempty"`
+	Scope         *string                    `json:"scope,omitempty"`
+	SelfLink      *string                    `json:"selfLink,omitempty"`
+	Updated       *time.Time                 `json:"updated,omitempty"`
+	WebPropertyID *string                    `json:"webPropertyId,omitempty"`
 }

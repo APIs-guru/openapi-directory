@@ -10,7 +10,7 @@ type EditVideoThumbnailPathParams struct {
 }
 
 type EditVideoThumbnailRequestBody struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type EditVideoThumbnailSecurity struct {

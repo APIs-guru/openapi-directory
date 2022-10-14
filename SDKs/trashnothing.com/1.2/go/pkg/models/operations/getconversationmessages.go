@@ -21,10 +21,10 @@ type GetConversationMessagesRequest struct {
 }
 
 type GetConversationMessages200ApplicationJSON struct {
-	Conversation *shared.Conversation `json:"conversation"`
-	Messages     []shared.Message     `json:"messages"`
-	Page         *int64               `json:"page"`
-	PerPage      *int64               `json:"per_page"`
+	Conversation *shared.Conversation `json:"conversation,omitempty"`
+	Messages     []shared.Message     `json:"messages,omitempty"`
+	Page         *int64               `json:"page,omitempty"`
+	PerPage      *int64               `json:"per_page,omitempty"`
 }
 
 type GetConversationMessagesResponse struct {

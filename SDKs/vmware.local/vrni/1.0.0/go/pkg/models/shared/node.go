@@ -8,10 +8,10 @@ const (
 )
 
 type Node struct {
-	EntityType *NodeTypeEnum     `json:"entity_type"`
-	ID         *string           `json:"id"`
-	IPAddress  *string           `json:"ip_address"`
-	Name       *string           `json:"name"`
-	NodeID     *string           `json:"node_id"`
-	NodeType   *NodeNodeTypeEnum `json:"node_type"`
+	EntityType *NodeTypeEnum     `json:"entity_type,omitempty"`
+	ID         *string           `json:"id,omitempty"`
+	IPAddress  *string           `json:"ip_address,omitempty"`
+	Name       *string           `json:"name,omitempty"`
+	NodeID     *string           `json:"node_id,omitempty"`
+	NodeType   *NodeNodeTypeEnum `json:"node_type,omitempty"`
 }

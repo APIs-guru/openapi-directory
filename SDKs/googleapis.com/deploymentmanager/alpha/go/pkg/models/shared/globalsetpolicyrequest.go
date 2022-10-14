@@ -1,7 +1,7 @@
 package shared
 
 type GlobalSetPolicyRequest struct {
-	Bindings []Binding `json:"bindings"`
-	Etag     *string   `json:"etag"`
-	Policy   *Policy   `json:"policy"`
+	Bindings []Binding `json:"bindings,omitempty"`
+	Etag     *string   `json:"etag,omitempty"`
+	Policy   *Policy   `json:"policy,omitempty"`
 }

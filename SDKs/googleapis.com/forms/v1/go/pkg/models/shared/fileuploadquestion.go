@@ -16,8 +16,8 @@ const (
 )
 
 type FileUploadQuestion struct {
-	FolderID    *string                       `json:"folderId"`
-	MaxFileSize *string                       `json:"maxFileSize"`
-	MaxFiles    *int32                        `json:"maxFiles"`
-	Types       []FileUploadQuestionTypesEnum `json:"types"`
+	FolderID    *string                       `json:"folderId,omitempty"`
+	MaxFileSize *string                       `json:"maxFileSize,omitempty"`
+	MaxFiles    *int32                        `json:"maxFiles,omitempty"`
+	Types       []FileUploadQuestionTypesEnum `json:"types,omitempty"`
 }

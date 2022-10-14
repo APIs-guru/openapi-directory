@@ -1,13 +1,13 @@
 package shared
 
 type GitHubEnterpriseConfig struct {
-	AppID         *string                  `json:"appId"`
-	CreateTime    *string                  `json:"createTime"`
-	DisplayName   *string                  `json:"displayName"`
-	HostURL       *string                  `json:"hostUrl"`
-	Name          *string                  `json:"name"`
-	PeeredNetwork *string                  `json:"peeredNetwork"`
-	Secrets       *GitHubEnterpriseSecrets `json:"secrets"`
-	SslCa         *string                  `json:"sslCa"`
-	WebhookKey    *string                  `json:"webhookKey"`
+	AppID         *string                  `json:"appId,omitempty"`
+	CreateTime    *string                  `json:"createTime,omitempty"`
+	DisplayName   *string                  `json:"displayName,omitempty"`
+	HostURL       *string                  `json:"hostUrl,omitempty"`
+	Name          *string                  `json:"name,omitempty"`
+	PeeredNetwork *string                  `json:"peeredNetwork,omitempty"`
+	Secrets       *GitHubEnterpriseSecrets `json:"secrets,omitempty"`
+	SslCa         *string                  `json:"sslCa,omitempty"`
+	WebhookKey    *string                  `json:"webhookKey,omitempty"`
 }

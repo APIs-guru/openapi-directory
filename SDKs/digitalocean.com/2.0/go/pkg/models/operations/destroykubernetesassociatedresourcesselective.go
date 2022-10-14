@@ -9,9 +9,9 @@ type DestroyKubernetesAssociatedResourcesSelectivePathParams struct {
 }
 
 type DestroyKubernetesAssociatedResourcesSelectiveRequestBody struct {
-	LoadBalancers   []string `json:"load_balancers"`
-	VolumeSnapshots []string `json:"volume_snapshots"`
-	Volumes         []string `json:"volumes"`
+	LoadBalancers   []string `json:"load_balancers,omitempty"`
+	VolumeSnapshots []string `json:"volume_snapshots,omitempty"`
+	Volumes         []string `json:"volumes,omitempty"`
 }
 
 type DestroyKubernetesAssociatedResourcesSelectiveRequest struct {
@@ -22,7 +22,7 @@ type DestroyKubernetesAssociatedResourcesSelectiveRequest struct {
 type DestroyKubernetesAssociatedResourcesSelective401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type DestroyKubernetesAssociatedResourcesSelectiveResponse struct {

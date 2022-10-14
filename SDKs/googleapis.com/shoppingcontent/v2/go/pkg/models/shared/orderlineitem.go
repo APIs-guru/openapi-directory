@@ -1,20 +1,20 @@
 package shared
 
 type OrderLineItem struct {
-	Annotations            []OrderMerchantProvidedAnnotation `json:"annotations"`
-	Cancellations          []OrderCancellation               `json:"cancellations"`
-	ID                     *string                           `json:"id"`
-	Price                  *Price                            `json:"price"`
-	Product                *OrderLineItemProduct             `json:"product"`
-	QuantityCanceled       *int64                            `json:"quantityCanceled"`
-	QuantityDelivered      *int64                            `json:"quantityDelivered"`
-	QuantityOrdered        *int64                            `json:"quantityOrdered"`
-	QuantityPending        *int64                            `json:"quantityPending"`
-	QuantityReadyForPickup *int64                            `json:"quantityReadyForPickup"`
-	QuantityReturned       *int64                            `json:"quantityReturned"`
-	QuantityShipped        *int64                            `json:"quantityShipped"`
-	ReturnInfo             *OrderLineItemReturnInfo          `json:"returnInfo"`
-	Returns                []OrderReturn                     `json:"returns"`
-	ShippingDetails        *OrderLineItemShippingDetails     `json:"shippingDetails"`
-	Tax                    *Price                            `json:"tax"`
+	Annotations            []OrderMerchantProvidedAnnotation `json:"annotations,omitempty"`
+	Cancellations          []OrderCancellation               `json:"cancellations,omitempty"`
+	ID                     *string                           `json:"id,omitempty"`
+	Price                  *Price                            `json:"price,omitempty"`
+	Product                *OrderLineItemProduct             `json:"product,omitempty"`
+	QuantityCanceled       *int64                            `json:"quantityCanceled,omitempty"`
+	QuantityDelivered      *int64                            `json:"quantityDelivered,omitempty"`
+	QuantityOrdered        *int64                            `json:"quantityOrdered,omitempty"`
+	QuantityPending        *int64                            `json:"quantityPending,omitempty"`
+	QuantityReadyForPickup *int64                            `json:"quantityReadyForPickup,omitempty"`
+	QuantityReturned       *int64                            `json:"quantityReturned,omitempty"`
+	QuantityShipped        *int64                            `json:"quantityShipped,omitempty"`
+	ReturnInfo             *OrderLineItemReturnInfo          `json:"returnInfo,omitempty"`
+	Returns                []OrderReturn                     `json:"returns,omitempty"`
+	ShippingDetails        *OrderLineItemShippingDetails     `json:"shippingDetails,omitempty"`
+	Tax                    *Price                            `json:"tax,omitempty"`
 }

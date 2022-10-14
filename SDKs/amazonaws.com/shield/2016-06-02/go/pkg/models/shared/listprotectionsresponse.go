@@ -1,6 +1,6 @@
 package shared
 
 type ListProtectionsResponse struct {
-	NextToken   *string      `json:"NextToken"`
-	Protections []Protection `json:"Protections"`
+	NextToken   *string      `json:"NextToken,omitempty"`
+	Protections []Protection `json:"Protections,omitempty"`
 }

@@ -9,11 +9,11 @@ type AvailableProductsHeaders struct {
 }
 
 type AvailableProductsRequestBody struct {
-	CurrencyCode *string  `json:"currencyCode"`
-	EndDate      *string  `json:"endDate"`
-	NumAdults    *int64   `json:"numAdults"`
-	ProductCodes []string `json:"productCodes"`
-	StartDate    *string  `json:"startDate"`
+	CurrencyCode *string  `json:"currencyCode,omitempty"`
+	EndDate      *string  `json:"endDate,omitempty"`
+	NumAdults    *int64   `json:"numAdults,omitempty"`
+	ProductCodes []string `json:"productCodes,omitempty"`
+	StartDate    *string  `json:"startDate,omitempty"`
 }
 
 type AvailableProductsRequest struct {
@@ -22,98 +22,98 @@ type AvailableProductsRequest struct {
 }
 
 type AvailableProducts200ApplicationJSONDataPasTourGradesAvailDatesPriceQuote struct {
-	GeneralRetailPrice *string `json:"generalRetailPrice"`
-	MerchantNetPrice   *string `json:"merchantNetPrice"`
-	RetailPrice        *string `json:"retailPrice"`
+	GeneralRetailPrice *string `json:"generalRetailPrice,omitempty"`
+	MerchantNetPrice   *string `json:"merchantNetPrice,omitempty"`
+	RetailPrice        *string `json:"retailPrice,omitempty"`
 }
 
 type AvailableProducts200ApplicationJSONDataPasTourGradesAvailDates struct {
-	DateList   *string                                                                   `json:"dateList"`
-	PriceFrom  *string                                                                   `json:"priceFrom"`
-	PriceQuote *AvailableProducts200ApplicationJSONDataPasTourGradesAvailDatesPriceQuote `json:"priceQuote"`
+	DateList   *string                                                                   `json:"dateList,omitempty"`
+	PriceFrom  *string                                                                   `json:"priceFrom,omitempty"`
+	PriceQuote *AvailableProducts200ApplicationJSONDataPasTourGradesAvailDatesPriceQuote `json:"priceQuote,omitempty"`
 }
 
 type AvailableProducts200ApplicationJSONDataPasTourGrades struct {
-	AvailDates       []AvailableProducts200ApplicationJSONDataPasTourGradesAvailDates `json:"availDates"`
-	BookingEngine    *string                                                          `json:"bookingEngine"`
-	Description      *string                                                          `json:"description"`
-	LanguageServices map[string][]interface{}                                         `json:"languageServices"`
-	Sapi             *bool                                                            `json:"sapi"`
-	Title            *string                                                          `json:"title"`
-	TourGradeCode    *string                                                          `json:"tourGradeCode"`
+	AvailDates       []AvailableProducts200ApplicationJSONDataPasTourGradesAvailDates `json:"availDates,omitempty"`
+	BookingEngine    *string                                                          `json:"bookingEngine,omitempty"`
+	Description      *string                                                          `json:"description,omitempty"`
+	LanguageServices map[string][]interface{}                                         `json:"languageServices,omitempty"`
+	Sapi             *bool                                                            `json:"sapi,omitempty"`
+	Title            *string                                                          `json:"title,omitempty"`
+	TourGradeCode    *string                                                          `json:"tourGradeCode,omitempty"`
 }
 
 type AvailableProducts200ApplicationJSONDataPas struct {
-	IncompleteQuote  *bool                                                           `json:"incompleteQuote"`
-	ProductCode      *string                                                         `json:"productCode"`
-	RemovedChildAges []string                                                        `json:"removedChildAges"`
-	TourGrades       map[string]AvailableProducts200ApplicationJSONDataPasTourGrades `json:"tourGrades"`
-	TravellerMix     *string                                                         `json:"travellerMix"`
+	IncompleteQuote  *bool                                                           `json:"incompleteQuote,omitempty"`
+	ProductCode      *string                                                         `json:"productCode,omitempty"`
+	RemovedChildAges []string                                                        `json:"removedChildAges,omitempty"`
+	TourGrades       map[string]AvailableProducts200ApplicationJSONDataPasTourGrades `json:"tourGrades,omitempty"`
+	TravellerMix     *string                                                         `json:"travellerMix,omitempty"`
 }
 
 type AvailableProducts200ApplicationJSONData struct {
-	Admission                     *string                                     `json:"admission"`
-	Available                     *bool                                       `json:"available"`
-	BookingEngineID               *shared.BookingEngineIDEnum                 `json:"bookingEngineId"`
-	CatIds                        []int64                                     `json:"catIds"`
-	Code                          *string                                     `json:"code"`
-	CurrencyCode                  *string                                     `json:"currencyCode"`
-	Duration                      *string                                     `json:"duration"`
-	Essential                     *string                                     `json:"essential"`
-	MerchantCancellable           *bool                                       `json:"merchantCancellable"`
-	MerchantNetPriceFrom          *float64                                    `json:"merchantNetPriceFrom"`
-	MerchantNetPriceFromFormatted *string                                     `json:"merchantNetPriceFromFormatted"`
-	OnRequestPeriod               *int64                                      `json:"onRequestPeriod"`
-	OnSale                        *bool                                       `json:"onSale"`
-	PanoramaCount                 *int64                                      `json:"panoramaCount"`
-	Pas                           *AvailableProducts200ApplicationJSONDataPas `json:"pas"`
-	PhotoCount                    *int64                                      `json:"photoCount"`
-	Price                         *float64                                    `json:"price"`
-	PriceFormatted                *string                                     `json:"priceFormatted"`
-	PrimaryDestinationID          *int64                                      `json:"primaryDestinationId"`
-	PrimaryDestinationName        *string                                     `json:"primaryDestinationName"`
-	PrimaryDestinationURLName     *string                                     `json:"primaryDestinationUrlName"`
-	PrimaryGroupID                *string                                     `json:"primaryGroupId"`
-	ProductURLName                *string                                     `json:"productUrlName"`
-	Rating                        *float64                                    `json:"rating"`
-	ReviewCount                   *int64                                      `json:"reviewCount"`
-	Rrp                           *int64                                      `json:"rrp"`
-	RrpFormatted                  *string                                     `json:"rrpFormatted"`
-	SavingAmount                  *string                                     `json:"savingAmount"`
-	SavingAmountFormated          *string                                     `json:"savingAmountFormated"`
-	ShortDescription              *string                                     `json:"shortDescription"`
-	ShortTitle                    *string                                     `json:"shortTitle"`
-	SortOrder                     *int64                                      `json:"sortOrder"`
-	SpecialOfferAvailable         *bool                                       `json:"specialOfferAvailable"`
-	SpecialReservation            *bool                                       `json:"specialReservation"`
-	SpecialReservationDetails     *string                                     `json:"specialReservationDetails"`
-	SslSupported                  *bool                                       `json:"sslSupported"`
-	SubCatIds                     []int64                                     `json:"subCatIds"`
-	SupplierCode                  *string                                     `json:"supplierCode"`
-	SupplierName                  *string                                     `json:"supplierName"`
-	ThumbnailHiResURL             *string                                     `json:"thumbnailHiResURL"`
-	ThumbnailURL                  *string                                     `json:"thumbnailURL"`
-	Title                         *string                                     `json:"title"`
-	TranslationLevel              *int64                                      `json:"translationLevel"`
-	UniqueShortDescription        *string                                     `json:"uniqueShortDescription"`
-	VideoCount                    *int64                                      `json:"videoCount"`
-	WebURL                        *string                                     `json:"webURL"`
+	Admission                     *string                                     `json:"admission,omitempty"`
+	Available                     *bool                                       `json:"available,omitempty"`
+	BookingEngineID               *shared.BookingEngineIDEnum                 `json:"bookingEngineId,omitempty"`
+	CatIds                        []int64                                     `json:"catIds,omitempty"`
+	Code                          *string                                     `json:"code,omitempty"`
+	CurrencyCode                  *string                                     `json:"currencyCode,omitempty"`
+	Duration                      *string                                     `json:"duration,omitempty"`
+	Essential                     *string                                     `json:"essential,omitempty"`
+	MerchantCancellable           *bool                                       `json:"merchantCancellable,omitempty"`
+	MerchantNetPriceFrom          *float64                                    `json:"merchantNetPriceFrom,omitempty"`
+	MerchantNetPriceFromFormatted *string                                     `json:"merchantNetPriceFromFormatted,omitempty"`
+	OnRequestPeriod               *int64                                      `json:"onRequestPeriod,omitempty"`
+	OnSale                        *bool                                       `json:"onSale,omitempty"`
+	PanoramaCount                 *int64                                      `json:"panoramaCount,omitempty"`
+	Pas                           *AvailableProducts200ApplicationJSONDataPas `json:"pas,omitempty"`
+	PhotoCount                    *int64                                      `json:"photoCount,omitempty"`
+	Price                         *float64                                    `json:"price,omitempty"`
+	PriceFormatted                *string                                     `json:"priceFormatted,omitempty"`
+	PrimaryDestinationID          *int64                                      `json:"primaryDestinationId,omitempty"`
+	PrimaryDestinationName        *string                                     `json:"primaryDestinationName,omitempty"`
+	PrimaryDestinationURLName     *string                                     `json:"primaryDestinationUrlName,omitempty"`
+	PrimaryGroupID                *string                                     `json:"primaryGroupId,omitempty"`
+	ProductURLName                *string                                     `json:"productUrlName,omitempty"`
+	Rating                        *float64                                    `json:"rating,omitempty"`
+	ReviewCount                   *int64                                      `json:"reviewCount,omitempty"`
+	Rrp                           *int64                                      `json:"rrp,omitempty"`
+	RrpFormatted                  *string                                     `json:"rrpFormatted,omitempty"`
+	SavingAmount                  *string                                     `json:"savingAmount,omitempty"`
+	SavingAmountFormated          *string                                     `json:"savingAmountFormated,omitempty"`
+	ShortDescription              *string                                     `json:"shortDescription,omitempty"`
+	ShortTitle                    *string                                     `json:"shortTitle,omitempty"`
+	SortOrder                     *int64                                      `json:"sortOrder,omitempty"`
+	SpecialOfferAvailable         *bool                                       `json:"specialOfferAvailable,omitempty"`
+	SpecialReservation            *bool                                       `json:"specialReservation,omitempty"`
+	SpecialReservationDetails     *string                                     `json:"specialReservationDetails,omitempty"`
+	SslSupported                  *bool                                       `json:"sslSupported,omitempty"`
+	SubCatIds                     []int64                                     `json:"subCatIds,omitempty"`
+	SupplierCode                  *string                                     `json:"supplierCode,omitempty"`
+	SupplierName                  *string                                     `json:"supplierName,omitempty"`
+	ThumbnailHiResURL             *string                                     `json:"thumbnailHiResURL,omitempty"`
+	ThumbnailURL                  *string                                     `json:"thumbnailURL,omitempty"`
+	Title                         *string                                     `json:"title,omitempty"`
+	TranslationLevel              *int64                                      `json:"translationLevel,omitempty"`
+	UniqueShortDescription        *string                                     `json:"uniqueShortDescription,omitempty"`
+	VideoCount                    *int64                                      `json:"videoCount,omitempty"`
+	WebURL                        *string                                     `json:"webURL,omitempty"`
 }
 
 type AvailableProducts200ApplicationJSON struct {
-	Data             []AvailableProducts200ApplicationJSONData `json:"data"`
-	DateStamp        *string                                   `json:"dateStamp"`
-	ErrorCodes       []string                                  `json:"errorCodes"`
-	ErrorMessage     []interface{}                             `json:"errorMessage"`
-	ErrorMessageText *string                                   `json:"errorMessageText"`
-	ErrorName        *string                                   `json:"errorName"`
-	ErrorReference   *string                                   `json:"errorReference"`
-	ErrorType        *string                                   `json:"errorType"`
-	ExtraInfo        map[string]interface{}                    `json:"extraInfo"`
-	ExtraObject      map[string]interface{}                    `json:"extraObject"`
-	Success          *bool                                     `json:"success"`
-	TotalCount       *int64                                    `json:"totalCount"`
-	Vmid             *string                                   `json:"vmid"`
+	Data             []AvailableProducts200ApplicationJSONData `json:"data,omitempty"`
+	DateStamp        *string                                   `json:"dateStamp,omitempty"`
+	ErrorCodes       []string                                  `json:"errorCodes,omitempty"`
+	ErrorMessage     []interface{}                             `json:"errorMessage,omitempty"`
+	ErrorMessageText *string                                   `json:"errorMessageText,omitempty"`
+	ErrorName        *string                                   `json:"errorName,omitempty"`
+	ErrorReference   *string                                   `json:"errorReference,omitempty"`
+	ErrorType        *string                                   `json:"errorType,omitempty"`
+	ExtraInfo        map[string]interface{}                    `json:"extraInfo,omitempty"`
+	ExtraObject      map[string]interface{}                    `json:"extraObject,omitempty"`
+	Success          *bool                                     `json:"success,omitempty"`
+	TotalCount       *int64                                    `json:"totalCount,omitempty"`
+	Vmid             *string                                   `json:"vmid,omitempty"`
 }
 
 type AvailableProductsResponse struct {

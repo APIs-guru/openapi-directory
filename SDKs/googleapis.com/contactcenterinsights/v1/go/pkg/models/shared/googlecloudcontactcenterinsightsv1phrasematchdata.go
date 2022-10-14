@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1PhraseMatchData struct {
-	DisplayName   *string `json:"displayName"`
-	PhraseMatcher *string `json:"phraseMatcher"`
+	DisplayName   *string `json:"displayName,omitempty"`
+	PhraseMatcher *string `json:"phraseMatcher,omitempty"`
 }

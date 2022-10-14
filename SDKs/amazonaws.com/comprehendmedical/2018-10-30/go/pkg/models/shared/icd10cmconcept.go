@@ -1,7 +1,7 @@
 package shared
 
 type Icd10CmConcept struct {
-	Code        *string  `json:"Code"`
-	Description *string  `json:"Description"`
-	Score       *float32 `json:"Score"`
+	Code        *string  `json:"Code,omitempty"`
+	Description *string  `json:"Description,omitempty"`
+	Score       *float32 `json:"Score,omitempty"`
 }

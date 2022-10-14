@@ -1,10 +1,10 @@
 package shared
 
 type CheckResponse struct {
-	CheckErrors      []CheckError `json:"checkErrors"`
-	CheckInfo        *CheckInfo   `json:"checkInfo"`
-	OperationID      *string      `json:"operationId"`
-	QuotaInfo        *QuotaInfo   `json:"quotaInfo"`
-	ServiceConfigID  *string      `json:"serviceConfigId"`
-	ServiceRolloutID *string      `json:"serviceRolloutId"`
+	CheckErrors      []CheckError `json:"checkErrors,omitempty"`
+	CheckInfo        *CheckInfo   `json:"checkInfo,omitempty"`
+	OperationID      *string      `json:"operationId,omitempty"`
+	QuotaInfo        *QuotaInfo   `json:"quotaInfo,omitempty"`
+	ServiceConfigID  *string      `json:"serviceConfigId,omitempty"`
+	ServiceRolloutID *string      `json:"serviceRolloutId,omitempty"`
 }

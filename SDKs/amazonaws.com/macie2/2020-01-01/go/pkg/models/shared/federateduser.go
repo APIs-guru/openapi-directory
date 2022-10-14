@@ -1,9 +1,9 @@
 package shared
 
 type FederatedUser struct {
-	AccessKeyID    *string         `json:"accessKeyId"`
-	AccountID      *string         `json:"accountId"`
-	Arn            *string         `json:"arn"`
-	PrincipalID    *string         `json:"principalId"`
-	SessionContext *SessionContext `json:"sessionContext"`
+	AccessKeyID    *string         `json:"accessKeyId,omitempty"`
+	AccountID      *string         `json:"accountId,omitempty"`
+	Arn            *string         `json:"arn,omitempty"`
+	PrincipalID    *string         `json:"principalId,omitempty"`
+	SessionContext *SessionContext `json:"sessionContext,omitempty"`
 }

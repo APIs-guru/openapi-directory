@@ -1,11 +1,11 @@
 package shared
 
 type CreateSchemaInput struct {
-	Compatibility    *CompatibilityEnum `json:"Compatibility"`
+	Compatibility    *CompatibilityEnum `json:"Compatibility,omitempty"`
 	DataFormat       DataFormatEnum     `json:"DataFormat"`
-	Description      *string            `json:"Description"`
-	RegistryID       *RegistryID        `json:"RegistryId"`
-	SchemaDefinition *string            `json:"SchemaDefinition"`
+	Description      *string            `json:"Description,omitempty"`
+	RegistryID       *RegistryID        `json:"RegistryId,omitempty"`
+	SchemaDefinition *string            `json:"SchemaDefinition,omitempty"`
 	SchemaName       string             `json:"SchemaName"`
-	Tags             map[string]string  `json:"Tags"`
+	Tags             map[string]string  `json:"Tags,omitempty"`
 }

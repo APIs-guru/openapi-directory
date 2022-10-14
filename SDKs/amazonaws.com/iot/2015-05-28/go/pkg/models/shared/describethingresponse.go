@@ -1,12 +1,12 @@
 package shared
 
 type DescribeThingResponse struct {
-	Attributes       map[string]string `json:"attributes"`
-	BillingGroupName *string           `json:"billingGroupName"`
-	DefaultClientID  *string           `json:"defaultClientId"`
-	ThingArn         *string           `json:"thingArn"`
-	ThingID          *string           `json:"thingId"`
-	ThingName        *string           `json:"thingName"`
-	ThingTypeName    *string           `json:"thingTypeName"`
-	Version          *int64            `json:"version"`
+	Attributes       map[string]string `json:"attributes,omitempty"`
+	BillingGroupName *string           `json:"billingGroupName,omitempty"`
+	DefaultClientID  *string           `json:"defaultClientId,omitempty"`
+	ThingArn         *string           `json:"thingArn,omitempty"`
+	ThingID          *string           `json:"thingId,omitempty"`
+	ThingName        *string           `json:"thingName,omitempty"`
+	ThingTypeName    *string           `json:"thingTypeName,omitempty"`
+	Version          *int64            `json:"version,omitempty"`
 }

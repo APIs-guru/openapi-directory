@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudMlV1MetricSpec struct {
-	Name   *GoogleCloudMlV1MetricSpecNameEnum `json:"name"`
-	Target *int32                             `json:"target"`
+	Name   *GoogleCloudMlV1MetricSpecNameEnum `json:"name,omitempty"`
+	Target *int32                             `json:"target,omitempty"`
 }

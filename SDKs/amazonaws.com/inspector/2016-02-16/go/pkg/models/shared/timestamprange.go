@@ -5,6 +5,6 @@ import (
 )
 
 type TimestampRange struct {
-	BeginDate *time.Time `json:"beginDate"`
-	EndDate   *time.Time `json:"endDate"`
+	BeginDate *time.Time `json:"beginDate,omitempty"`
+	EndDate   *time.Time `json:"endDate,omitempty"`
 }

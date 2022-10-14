@@ -47,52 +47,52 @@ type GetListsFormatRequest struct {
 }
 
 type GetListsFormat200ApplicationJSONResultsBookDetails struct {
-	AgeGroup        *string `json:"age_group"`
-	Author          *string `json:"author"`
-	Contributor     *string `json:"contributor"`
-	ContributorNote *string `json:"contributor_note"`
-	Description     *string `json:"description"`
-	Price           *int64  `json:"price"`
-	PrimaryIsbn10   *string `json:"primary_isbn10"`
-	PrimaryIsbn13   *string `json:"primary_isbn13"`
-	Publisher       *string `json:"publisher"`
-	Title           *string `json:"title"`
+	AgeGroup        *string `json:"age_group,omitempty"`
+	Author          *string `json:"author,omitempty"`
+	Contributor     *string `json:"contributor,omitempty"`
+	ContributorNote *string `json:"contributor_note,omitempty"`
+	Description     *string `json:"description,omitempty"`
+	Price           *int64  `json:"price,omitempty"`
+	PrimaryIsbn10   *string `json:"primary_isbn10,omitempty"`
+	PrimaryIsbn13   *string `json:"primary_isbn13,omitempty"`
+	Publisher       *string `json:"publisher,omitempty"`
+	Title           *string `json:"title,omitempty"`
 }
 
 type GetListsFormat200ApplicationJSONResultsIsbns struct {
-	Isbn10 *string `json:"isbn10"`
-	Isbn13 *string `json:"isbn13"`
+	Isbn10 *string `json:"isbn10,omitempty"`
+	Isbn13 *string `json:"isbn13,omitempty"`
 }
 
 type GetListsFormat200ApplicationJSONResultsReviews struct {
-	ArticleChapterLink *string `json:"article_chapter_link"`
-	BookReviewLink     *string `json:"book_review_link"`
-	FirstChapterLink   *string `json:"first_chapter_link"`
-	SundayReviewLink   *string `json:"sunday_review_link"`
+	ArticleChapterLink *string `json:"article_chapter_link,omitempty"`
+	BookReviewLink     *string `json:"book_review_link,omitempty"`
+	FirstChapterLink   *string `json:"first_chapter_link,omitempty"`
+	SundayReviewLink   *string `json:"sunday_review_link,omitempty"`
 }
 
 type GetListsFormat200ApplicationJSONResults struct {
-	AmazonProductURL *string                                              `json:"amazon_product_url"`
-	Asterisk         *int64                                               `json:"asterisk"`
-	BestsellersDate  *string                                              `json:"bestsellers_date"`
-	BookDetails      []GetListsFormat200ApplicationJSONResultsBookDetails `json:"book_details"`
-	Dagger           *int64                                               `json:"dagger"`
-	DisplayName      *string                                              `json:"display_name"`
-	Isbns            []GetListsFormat200ApplicationJSONResultsIsbns       `json:"isbns"`
-	ListName         *string                                              `json:"list_name"`
-	PublishedDate    *string                                              `json:"published_date"`
-	Rank             *int64                                               `json:"rank"`
-	RankLastWeek     *int64                                               `json:"rank_last_week"`
-	Reviews          []GetListsFormat200ApplicationJSONResultsReviews     `json:"reviews"`
-	WeeksOnList      *int64                                               `json:"weeks_on_list"`
+	AmazonProductURL *string                                              `json:"amazon_product_url,omitempty"`
+	Asterisk         *int64                                               `json:"asterisk,omitempty"`
+	BestsellersDate  *string                                              `json:"bestsellers_date,omitempty"`
+	BookDetails      []GetListsFormat200ApplicationJSONResultsBookDetails `json:"book_details,omitempty"`
+	Dagger           *int64                                               `json:"dagger,omitempty"`
+	DisplayName      *string                                              `json:"display_name,omitempty"`
+	Isbns            []GetListsFormat200ApplicationJSONResultsIsbns       `json:"isbns,omitempty"`
+	ListName         *string                                              `json:"list_name,omitempty"`
+	PublishedDate    *string                                              `json:"published_date,omitempty"`
+	Rank             *int64                                               `json:"rank,omitempty"`
+	RankLastWeek     *int64                                               `json:"rank_last_week,omitempty"`
+	Reviews          []GetListsFormat200ApplicationJSONResultsReviews     `json:"reviews,omitempty"`
+	WeeksOnList      *int64                                               `json:"weeks_on_list,omitempty"`
 }
 
 type GetListsFormat200ApplicationJSON struct {
-	Copyright    *string                                   `json:"copyright"`
-	LastModified *string                                   `json:"last_modified"`
-	NumResults   *int64                                    `json:"num_results"`
-	Results      []GetListsFormat200ApplicationJSONResults `json:"results"`
-	Status       *string                                   `json:"status"`
+	Copyright    *string                                   `json:"copyright,omitempty"`
+	LastModified *string                                   `json:"last_modified,omitempty"`
+	NumResults   *int64                                    `json:"num_results,omitempty"`
+	Results      []GetListsFormat200ApplicationJSONResults `json:"results,omitempty"`
+	Status       *string                                   `json:"status,omitempty"`
 }
 
 type GetListsFormatResponse struct {

@@ -1,15 +1,15 @@
 package shared
 
 type Method struct {
-	APIKeyRequired      *bool                     `json:"apiKeyRequired"`
-	AuthorizationScopes []string                  `json:"authorizationScopes"`
-	AuthorizationType   *string                   `json:"authorizationType"`
-	AuthorizerID        *string                   `json:"authorizerId"`
-	HTTPMethod          *string                   `json:"httpMethod"`
-	MethodIntegration   *Integration              `json:"methodIntegration"`
-	MethodResponses     map[string]MethodResponse `json:"methodResponses"`
-	OperationName       *string                   `json:"operationName"`
-	RequestModels       map[string]string         `json:"requestModels"`
-	RequestParameters   map[string]bool           `json:"requestParameters"`
-	RequestValidatorID  *string                   `json:"requestValidatorId"`
+	APIKeyRequired      *bool                     `json:"apiKeyRequired,omitempty"`
+	AuthorizationScopes []string                  `json:"authorizationScopes,omitempty"`
+	AuthorizationType   *string                   `json:"authorizationType,omitempty"`
+	AuthorizerID        *string                   `json:"authorizerId,omitempty"`
+	HTTPMethod          *string                   `json:"httpMethod,omitempty"`
+	MethodIntegration   *Integration              `json:"methodIntegration,omitempty"`
+	MethodResponses     map[string]MethodResponse `json:"methodResponses,omitempty"`
+	OperationName       *string                   `json:"operationName,omitempty"`
+	RequestModels       map[string]string         `json:"requestModels,omitempty"`
+	RequestParameters   map[string]bool           `json:"requestParameters,omitempty"`
+	RequestValidatorID  *string                   `json:"requestValidatorId,omitempty"`
 }

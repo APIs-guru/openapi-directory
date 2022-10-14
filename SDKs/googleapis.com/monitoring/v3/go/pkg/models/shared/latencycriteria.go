@@ -1,5 +1,5 @@
 package shared
 
 type LatencyCriteria struct {
-	Threshold *string `json:"threshold"`
+	Threshold *string `json:"threshold,omitempty"`
 }

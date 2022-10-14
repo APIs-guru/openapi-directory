@@ -18,13 +18,13 @@ const (
 )
 
 type NetworkConfig struct {
-	DatapathProvider          *NetworkConfigDatapathProviderEnum        `json:"datapathProvider"`
-	DefaultSnatStatus         *DefaultSnatStatus                        `json:"defaultSnatStatus"`
-	DNSConfig                 *DNSConfig                                `json:"dnsConfig"`
-	EnableIntraNodeVisibility *bool                                     `json:"enableIntraNodeVisibility"`
-	EnableL4ilbSubsetting     *bool                                     `json:"enableL4ilbSubsetting"`
-	Network                   *string                                   `json:"network"`
-	PrivateIpv6GoogleAccess   *NetworkConfigPrivateIpv6GoogleAccessEnum `json:"privateIpv6GoogleAccess"`
-	ServiceExternalIpsConfig  *ServiceExternalIPsConfig                 `json:"serviceExternalIpsConfig"`
-	Subnetwork                *string                                   `json:"subnetwork"`
+	DatapathProvider          *NetworkConfigDatapathProviderEnum        `json:"datapathProvider,omitempty"`
+	DefaultSnatStatus         *DefaultSnatStatus                        `json:"defaultSnatStatus,omitempty"`
+	DNSConfig                 *DNSConfig                                `json:"dnsConfig,omitempty"`
+	EnableIntraNodeVisibility *bool                                     `json:"enableIntraNodeVisibility,omitempty"`
+	EnableL4ilbSubsetting     *bool                                     `json:"enableL4ilbSubsetting,omitempty"`
+	Network                   *string                                   `json:"network,omitempty"`
+	PrivateIpv6GoogleAccess   *NetworkConfigPrivateIpv6GoogleAccessEnum `json:"privateIpv6GoogleAccess,omitempty"`
+	ServiceExternalIpsConfig  *ServiceExternalIPsConfig                 `json:"serviceExternalIpsConfig,omitempty"`
+	Subnetwork                *string                                   `json:"subnetwork,omitempty"`
 }

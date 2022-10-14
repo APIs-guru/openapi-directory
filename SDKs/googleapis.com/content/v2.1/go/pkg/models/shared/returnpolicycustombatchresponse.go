@@ -1,6 +1,6 @@
 package shared
 
 type ReturnpolicyCustomBatchResponse struct {
-	Entries []ReturnpolicyCustomBatchResponseEntry `json:"entries"`
-	Kind    *string                                `json:"kind"`
+	Entries []ReturnpolicyCustomBatchResponseEntry `json:"entries,omitempty"`
+	Kind    *string                                `json:"kind,omitempty"`
 }

@@ -15,9 +15,9 @@ type CreateRoutingControlHeaders struct {
 }
 
 type CreateRoutingControlRequestBody struct {
-	ClientToken        *string `json:"ClientToken"`
+	ClientToken        *string `json:"ClientToken,omitempty"`
 	ClusterArn         string  `json:"ClusterArn"`
-	ControlPanelArn    *string `json:"ControlPanelArn"`
+	ControlPanelArn    *string `json:"ControlPanelArn,omitempty"`
 	RoutingControlName string  `json:"RoutingControlName"`
 }
 

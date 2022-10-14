@@ -1,7 +1,7 @@
 package shared
 
 type TransferRequest struct {
-	FromOfferingID *string `json:"fromOfferingId"`
-	SendInvite     *bool   `json:"sendInvite"`
-	ToOfferingID   *string `json:"toOfferingId"`
+	FromOfferingID *string `json:"fromOfferingId,omitempty"`
+	SendInvite     *bool   `json:"sendInvite,omitempty"`
+	ToOfferingID   *string `json:"toOfferingId,omitempty"`
 }

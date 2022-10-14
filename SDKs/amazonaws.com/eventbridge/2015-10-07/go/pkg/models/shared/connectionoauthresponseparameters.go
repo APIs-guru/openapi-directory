@@ -1,8 +1,8 @@
 package shared
 
 type ConnectionOAuthResponseParameters struct {
-	AuthorizationEndpoint *string                                  `json:"AuthorizationEndpoint"`
-	ClientParameters      *ConnectionOAuthClientResponseParameters `json:"ClientParameters"`
-	HTTPMethod            *ConnectionOAuthHTTPMethodEnum           `json:"HttpMethod"`
-	OAuthHTTPParameters   *ConnectionHTTPParameters                `json:"OAuthHttpParameters"`
+	AuthorizationEndpoint *string                                  `json:"AuthorizationEndpoint,omitempty"`
+	ClientParameters      *ConnectionOAuthClientResponseParameters `json:"ClientParameters,omitempty"`
+	HTTPMethod            *ConnectionOAuthHTTPMethodEnum           `json:"HttpMethod,omitempty"`
+	OAuthHTTPParameters   *ConnectionHTTPParameters                `json:"OAuthHttpParameters,omitempty"`
 }

@@ -19,7 +19,7 @@ type UploadMultipartPartHeaders struct {
 }
 
 type UploadMultipartPartRequestBody struct {
-	Body *string `json:"body"`
+	Body *string `json:"body,omitempty"`
 }
 
 type UploadMultipartPartRequest struct {

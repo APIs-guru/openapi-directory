@@ -54,33 +54,33 @@ const (
 )
 
 type GetDirectDebitMandates200ApplicationJSONMandatesMandate struct {
-	Alias                        *string                                                                                                  `json:"alias"`
-	Currency                     *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency"`
-	DateCancelled                *time.Time                                                                                               `json:"dateCancelled"`
-	DateCompleted                *time.Time                                                                                               `json:"dateCompleted"`
-	DateCreated                  *time.Time                                                                                               `json:"dateCreated"`
-	FireRejectionReason          *GetDirectDebitMandates200ApplicationJSONMandatesFireRejectionReasonEnum                                 `json:"fireRejectionReason"`
-	LastUpdated                  *time.Time                                                                                               `json:"lastUpdated"`
-	LatestDirectDebitAmount      *int64                                                                                                   `json:"latestDirectDebitAmount"`
-	LatestDirectDebitDate        *time.Time                                                                                               `json:"latestDirectDebitDate"`
-	MandateReference             *string                                                                                                  `json:"mandateReference"`
-	MandateUUID                  *string                                                                                                  `json:"mandateUuid"`
-	NumberOfDirectDebitCollected *int64                                                                                                   `json:"numberOfDirectDebitCollected"`
-	OriginatorAlias              *string                                                                                                  `json:"originatorAlias"`
-	OriginatorLogoURLLarge       *string                                                                                                  `json:"originatorLogoUrlLarge"`
-	OriginatorLogoURLSmall       *string                                                                                                  `json:"originatorLogoUrlSmall"`
-	OriginatorName               *string                                                                                                  `json:"originatorName"`
-	OriginatorReference          *string                                                                                                  `json:"originatorReference"`
-	SchemeCancelReason           *string                                                                                                  `json:"schemeCancelReason"`
-	SchemeCancelReasonCode       *string                                                                                                  `json:"schemeCancelReasonCode"`
-	Status                       *GetDirectDebitMandates200ApplicationJSONMandatesStatusEnum                                              `json:"status"`
-	TargetIcan                   *int64                                                                                                   `json:"targetIcan"`
-	ValueOfDirectDebitCollected  *int64                                                                                                   `json:"valueOfDirectDebitCollected"`
+	Alias                        *string                                                                                                  `json:"alias,omitempty"`
+	Currency                     *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
+	DateCancelled                *time.Time                                                                                               `json:"dateCancelled,omitempty"`
+	DateCompleted                *time.Time                                                                                               `json:"dateCompleted,omitempty"`
+	DateCreated                  *time.Time                                                                                               `json:"dateCreated,omitempty"`
+	FireRejectionReason          *GetDirectDebitMandates200ApplicationJSONMandatesFireRejectionReasonEnum                                 `json:"fireRejectionReason,omitempty"`
+	LastUpdated                  *time.Time                                                                                               `json:"lastUpdated,omitempty"`
+	LatestDirectDebitAmount      *int64                                                                                                   `json:"latestDirectDebitAmount,omitempty"`
+	LatestDirectDebitDate        *time.Time                                                                                               `json:"latestDirectDebitDate,omitempty"`
+	MandateReference             *string                                                                                                  `json:"mandateReference,omitempty"`
+	MandateUUID                  *string                                                                                                  `json:"mandateUuid,omitempty"`
+	NumberOfDirectDebitCollected *int64                                                                                                   `json:"numberOfDirectDebitCollected,omitempty"`
+	OriginatorAlias              *string                                                                                                  `json:"originatorAlias,omitempty"`
+	OriginatorLogoURLLarge       *string                                                                                                  `json:"originatorLogoUrlLarge,omitempty"`
+	OriginatorLogoURLSmall       *string                                                                                                  `json:"originatorLogoUrlSmall,omitempty"`
+	OriginatorName               *string                                                                                                  `json:"originatorName,omitempty"`
+	OriginatorReference          *string                                                                                                  `json:"originatorReference,omitempty"`
+	SchemeCancelReason           *string                                                                                                  `json:"schemeCancelReason,omitempty"`
+	SchemeCancelReasonCode       *string                                                                                                  `json:"schemeCancelReasonCode,omitempty"`
+	Status                       *GetDirectDebitMandates200ApplicationJSONMandatesStatusEnum                                              `json:"status,omitempty"`
+	TargetIcan                   *int64                                                                                                   `json:"targetIcan,omitempty"`
+	ValueOfDirectDebitCollected  *int64                                                                                                   `json:"valueOfDirectDebitCollected,omitempty"`
 }
 
 type GetDirectDebitMandates200ApplicationJSONMandates struct {
-	Mandates []GetDirectDebitMandates200ApplicationJSONMandatesMandate `json:"mandates"`
-	Total    *int64                                                    `json:"total"`
+	Mandates []GetDirectDebitMandates200ApplicationJSONMandatesMandate `json:"mandates,omitempty"`
+	Total    *int64                                                    `json:"total,omitempty"`
 }
 
 type GetDirectDebitMandatesResponse struct {

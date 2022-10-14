@@ -1,6 +1,6 @@
 package shared
 
 type PiiOutputDataConfig struct {
-	KmsKeyID *string `json:"KmsKeyId"`
+	KmsKeyID *string `json:"KmsKeyId,omitempty"`
 	S3URI    string  `json:"S3Uri"`
 }

@@ -14,7 +14,7 @@ const (
 )
 
 type WorkerLifecycleEvent struct {
-	ContainerStartTime *string                        `json:"containerStartTime"`
-	Event              *WorkerLifecycleEventEventEnum `json:"event"`
-	Metadata           map[string]string              `json:"metadata"`
+	ContainerStartTime *string                        `json:"containerStartTime,omitempty"`
+	Event              *WorkerLifecycleEventEventEnum `json:"event,omitempty"`
+	Metadata           map[string]string              `json:"metadata,omitempty"`
 }

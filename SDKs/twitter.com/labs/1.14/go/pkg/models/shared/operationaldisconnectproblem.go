@@ -16,7 +16,7 @@ const (
 
 type OperationalDisconnectProblem struct {
 	Detail         string                                          `json:"detail"`
-	DisconnectType *OperationalDisconnectProblemDisconnectTypeEnum `json:"disconnect_type"`
+	DisconnectType *OperationalDisconnectProblemDisconnectTypeEnum `json:"disconnect_type,omitempty"`
 	Title          string                                          `json:"title"`
 	Type           string                                          `json:"type"`
 }

@@ -5,6 +5,6 @@ import (
 )
 
 type InstanceSummary struct {
-	Instance      *Instance  `json:"instance"`
-	LastUpdatedAt *time.Time `json:"lastUpdatedAt"`
+	Instance      *Instance  `json:"instance,omitempty"`
+	LastUpdatedAt *time.Time `json:"lastUpdatedAt,omitempty"`
 }

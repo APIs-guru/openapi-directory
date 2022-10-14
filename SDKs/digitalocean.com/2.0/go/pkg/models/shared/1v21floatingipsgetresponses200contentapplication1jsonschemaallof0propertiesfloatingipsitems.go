@@ -9,8 +9,8 @@ type Onev21floatingIpsGetResponses200ContentApplication1jsonSchemaAllOf0Properti
 }
 
 type Onev21floatingIpsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesFloatingIpsItems struct {
-	Droplet *interface{}                                                                                         `json:"droplet"`
-	IP      *string                                                                                              `json:"ip"`
-	Locked  *bool                                                                                                `json:"locked"`
-	Region  *Onev21floatingIpsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesFloatingIpsItemsRegion `json:"region"`
+	Droplet *interface{}                                                                                         `json:"droplet,omitempty"`
+	IP      *string                                                                                              `json:"ip,omitempty"`
+	Locked  *bool                                                                                                `json:"locked,omitempty"`
+	Region  *Onev21floatingIpsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesFloatingIpsItemsRegion `json:"region,omitempty"`
 }

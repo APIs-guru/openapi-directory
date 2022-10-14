@@ -1,8 +1,8 @@
 package shared
 
 type CustomRule struct {
-	Condition *string `json:"condition"`
+	Condition *string `json:"condition,omitempty"`
 	Source    string  `json:"source"`
-	Status    *string `json:"status"`
+	Status    *string `json:"status,omitempty"`
 	Target    string  `json:"target"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type AwsCodeBuildProjectVpcConfig struct {
-	SecurityGroupIds []string `json:"SecurityGroupIds"`
-	Subnets          []string `json:"Subnets"`
-	VpcID            *string  `json:"VpcId"`
+	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
+	Subnets          []string `json:"Subnets,omitempty"`
+	VpcID            *string  `json:"VpcId,omitempty"`
 }

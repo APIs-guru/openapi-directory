@@ -23,6 +23,6 @@ const (
 )
 
 type OpaqueColor struct {
-	RgbColor   *RgbColor                  `json:"rgbColor"`
-	ThemeColor *OpaqueColorThemeColorEnum `json:"themeColor"`
+	RgbColor   *RgbColor                  `json:"rgbColor,omitempty"`
+	ThemeColor *OpaqueColorThemeColorEnum `json:"themeColor,omitempty"`
 }

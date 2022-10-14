@@ -1,7 +1,7 @@
 package shared
 
 type NewEntityRequest struct {
-	Address *string `json:"address"`
-	Email   *string `json:"email"`
-	Name    *string `json:"name"`
+	Address *string `json:"address,omitempty"`
+	Email   *string `json:"email,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }

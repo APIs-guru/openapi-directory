@@ -5,11 +5,11 @@ import (
 )
 
 type BatchInferenceJobSummary struct {
-	BatchInferenceJobArn *string    `json:"batchInferenceJobArn"`
-	CreationDateTime     *time.Time `json:"creationDateTime"`
-	FailureReason        *string    `json:"failureReason"`
-	JobName              *string    `json:"jobName"`
-	LastUpdatedDateTime  *time.Time `json:"lastUpdatedDateTime"`
-	SolutionVersionArn   *string    `json:"solutionVersionArn"`
-	Status               *string    `json:"status"`
+	BatchInferenceJobArn *string    `json:"batchInferenceJobArn,omitempty"`
+	CreationDateTime     *time.Time `json:"creationDateTime,omitempty"`
+	FailureReason        *string    `json:"failureReason,omitempty"`
+	JobName              *string    `json:"jobName,omitempty"`
+	LastUpdatedDateTime  *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	SolutionVersionArn   *string    `json:"solutionVersionArn,omitempty"`
+	Status               *string    `json:"status,omitempty"`
 }

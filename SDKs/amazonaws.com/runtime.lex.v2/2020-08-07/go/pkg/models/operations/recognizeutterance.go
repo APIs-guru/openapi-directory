@@ -26,7 +26,7 @@ type RecognizeUtteranceHeaders struct {
 }
 
 type RecognizeUtteranceRequestBody struct {
-	InputStream *string `json:"inputStream"`
+	InputStream *string `json:"inputStream,omitempty"`
 }
 
 type RecognizeUtteranceRequest struct {

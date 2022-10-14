@@ -1,11 +1,11 @@
 package shared
 
 type ServiceOptionsInputModel struct {
-	ConsumerPadding  *bool  `json:"consumerPadding"`
-	DefaultService   *bool  `json:"defaultService"`
-	DurationInterval *int32 `json:"durationInterval"`
-	DurationMax      *int32 `json:"durationMax"`
-	DurationMin      *int32 `json:"durationMin"`
-	DurationSelect   *bool  `json:"durationSelect"`
-	Padding          *int32 `json:"padding"`
+	ConsumerPadding  *bool  `json:"consumerPadding,omitempty"`
+	DefaultService   *bool  `json:"defaultService,omitempty"`
+	DurationInterval *int32 `json:"durationInterval,omitempty"`
+	DurationMax      *int32 `json:"durationMax,omitempty"`
+	DurationMin      *int32 `json:"durationMin,omitempty"`
+	DurationSelect   *bool  `json:"durationSelect,omitempty"`
+	Padding          *int32 `json:"padding,omitempty"`
 }

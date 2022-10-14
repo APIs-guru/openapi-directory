@@ -1,12 +1,12 @@
 package shared
 
 type UserPhoto struct {
-	Etag         *string `json:"etag"`
-	Height       *int32  `json:"height"`
-	ID           *string `json:"id"`
-	Kind         *string `json:"kind"`
-	MimeType     *string `json:"mimeType"`
-	PhotoData    *string `json:"photoData"`
-	PrimaryEmail *string `json:"primaryEmail"`
-	Width        *int32  `json:"width"`
+	Etag         *string `json:"etag,omitempty"`
+	Height       *int32  `json:"height,omitempty"`
+	ID           *string `json:"id,omitempty"`
+	Kind         *string `json:"kind,omitempty"`
+	MimeType     *string `json:"mimeType,omitempty"`
+	PhotoData    *string `json:"photoData,omitempty"`
+	PrimaryEmail *string `json:"primaryEmail,omitempty"`
+	Width        *int32  `json:"width,omitempty"`
 }

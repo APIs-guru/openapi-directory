@@ -1,6 +1,6 @@
 package shared
 
 type Action struct {
-	LambdaConfiguration *LambdaConfiguration `json:"LambdaConfiguration"`
-	SnsConfiguration    *SnsConfiguration    `json:"SNSConfiguration"`
+	LambdaConfiguration *LambdaConfiguration `json:"LambdaConfiguration,omitempty"`
+	SnsConfiguration    *SnsConfiguration    `json:"SNSConfiguration,omitempty"`
 }

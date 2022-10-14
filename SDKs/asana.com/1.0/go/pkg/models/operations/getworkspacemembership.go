@@ -19,7 +19,7 @@ type GetWorkspaceMembershipRequest struct {
 }
 
 type GetWorkspaceMembership200ApplicationJSON struct {
-	Data *shared.WorkspaceMembershipResponse `json:"data"`
+	Data *shared.WorkspaceMembershipResponse `json:"data,omitempty"`
 }
 
 type GetWorkspaceMembershipResponse struct {

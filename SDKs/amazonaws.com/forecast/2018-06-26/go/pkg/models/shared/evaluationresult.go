@@ -1,6 +1,6 @@
 package shared
 
 type EvaluationResult struct {
-	AlgorithmArn *string         `json:"AlgorithmArn"`
-	TestWindows  []WindowSummary `json:"TestWindows"`
+	AlgorithmArn *string         `json:"AlgorithmArn,omitempty"`
+	TestWindows  []WindowSummary `json:"TestWindows,omitempty"`
 }

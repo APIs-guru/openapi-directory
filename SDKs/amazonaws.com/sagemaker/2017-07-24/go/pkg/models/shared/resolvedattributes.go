@@ -1,7 +1,7 @@
 package shared
 
 type ResolvedAttributes struct {
-	AutoMlJobObjective *AutoMlJobObjective          `json:"AutoMLJobObjective"`
-	CompletionCriteria *AutoMlJobCompletionCriteria `json:"CompletionCriteria"`
-	ProblemType        *ProblemTypeEnum             `json:"ProblemType"`
+	AutoMlJobObjective *AutoMlJobObjective          `json:"AutoMLJobObjective,omitempty"`
+	CompletionCriteria *AutoMlJobCompletionCriteria `json:"CompletionCriteria,omitempty"`
+	ProblemType        *ProblemTypeEnum             `json:"ProblemType,omitempty"`
 }

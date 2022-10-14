@@ -8,7 +8,7 @@ const (
 )
 
 type LkeNodeStatus struct {
-	ID         *string                  `json:"id"`
-	InstanceID *string                  `json:"instance_id"`
-	Status     *LkeNodeStatusStatusEnum `json:"status"`
+	ID         *string                  `json:"id,omitempty"`
+	InstanceID *string                  `json:"instance_id,omitempty"`
+	Status     *LkeNodeStatusStatusEnum `json:"status,omitempty"`
 }

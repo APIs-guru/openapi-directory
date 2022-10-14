@@ -2,20 +2,20 @@ package shared
 
 type DescribedServer struct {
 	Arn                     string                    `json:"Arn"`
-	Certificate             *string                   `json:"Certificate"`
-	Domain                  *DomainEnum               `json:"Domain"`
-	EndpointDetails         *EndpointDetails          `json:"EndpointDetails"`
-	EndpointType            *EndpointTypeEnum         `json:"EndpointType"`
-	HostKeyFingerprint      *string                   `json:"HostKeyFingerprint"`
-	IdentityProviderDetails *IdentityProviderDetails  `json:"IdentityProviderDetails"`
-	IdentityProviderType    *IdentityProviderTypeEnum `json:"IdentityProviderType"`
-	LoggingRole             *string                   `json:"LoggingRole"`
-	ProtocolDetails         *ProtocolDetails          `json:"ProtocolDetails"`
-	Protocols               []ProtocolEnum            `json:"Protocols"`
-	SecurityPolicyName      *string                   `json:"SecurityPolicyName"`
-	ServerID                *string                   `json:"ServerId"`
-	State                   *StateEnum                `json:"State"`
-	Tags                    []Tag                     `json:"Tags"`
-	UserCount               *int64                    `json:"UserCount"`
-	WorkflowDetails         *WorkflowDetails          `json:"WorkflowDetails"`
+	Certificate             *string                   `json:"Certificate,omitempty"`
+	Domain                  *DomainEnum               `json:"Domain,omitempty"`
+	EndpointDetails         *EndpointDetails          `json:"EndpointDetails,omitempty"`
+	EndpointType            *EndpointTypeEnum         `json:"EndpointType,omitempty"`
+	HostKeyFingerprint      *string                   `json:"HostKeyFingerprint,omitempty"`
+	IdentityProviderDetails *IdentityProviderDetails  `json:"IdentityProviderDetails,omitempty"`
+	IdentityProviderType    *IdentityProviderTypeEnum `json:"IdentityProviderType,omitempty"`
+	LoggingRole             *string                   `json:"LoggingRole,omitempty"`
+	ProtocolDetails         *ProtocolDetails          `json:"ProtocolDetails,omitempty"`
+	Protocols               []ProtocolEnum            `json:"Protocols,omitempty"`
+	SecurityPolicyName      *string                   `json:"SecurityPolicyName,omitempty"`
+	ServerID                *string                   `json:"ServerId,omitempty"`
+	State                   *StateEnum                `json:"State,omitempty"`
+	Tags                    []Tag                     `json:"Tags,omitempty"`
+	UserCount               *int64                    `json:"UserCount,omitempty"`
+	WorkflowDetails         *WorkflowDetails          `json:"WorkflowDetails,omitempty"`
 }

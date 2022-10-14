@@ -51,15 +51,15 @@ type PostConversationsConversationIDOfferRequestBodyShippingPrice struct {
 }
 
 type PostConversationsConversationIDOfferRequestBody struct {
-	CountryCode      *string                                                       `json:"country_code"`
-	LayawayTermsSlug *string                                                       `json:"layaway_terms_slug"`
-	Message          *string                                                       `json:"message"`
-	OfferItems       []PostConversationsConversationIDOfferRequestBodyOfferItems   `json:"offer_items"`
-	Price            *PostConversationsConversationIDOfferRequestBodyPrice         `json:"price"`
-	Quantity         *string                                                       `json:"quantity"`
-	RecipientID      *string                                                       `json:"recipient_id"`
-	RegionCode       *string                                                       `json:"region_code"`
-	ShippingPrice    *PostConversationsConversationIDOfferRequestBodyShippingPrice `json:"shipping_price"`
+	CountryCode      *string                                                       `json:"country_code,omitempty"`
+	LayawayTermsSlug *string                                                       `json:"layaway_terms_slug,omitempty"`
+	Message          *string                                                       `json:"message,omitempty"`
+	OfferItems       []PostConversationsConversationIDOfferRequestBodyOfferItems   `json:"offer_items,omitempty"`
+	Price            *PostConversationsConversationIDOfferRequestBodyPrice         `json:"price,omitempty"`
+	Quantity         *string                                                       `json:"quantity,omitempty"`
+	RecipientID      *string                                                       `json:"recipient_id,omitempty"`
+	RegionCode       *string                                                       `json:"region_code,omitempty"`
+	ShippingPrice    *PostConversationsConversationIDOfferRequestBodyShippingPrice `json:"shipping_price,omitempty"`
 }
 
 type PostConversationsConversationIDOfferSecurity struct {

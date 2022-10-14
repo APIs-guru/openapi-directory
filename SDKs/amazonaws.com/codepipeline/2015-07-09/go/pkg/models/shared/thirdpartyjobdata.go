@@ -1,12 +1,12 @@
 package shared
 
 type ThirdPartyJobData struct {
-	ActionConfiguration *ActionConfiguration   `json:"actionConfiguration"`
-	ActionTypeID        *ActionTypeID          `json:"actionTypeId"`
-	ArtifactCredentials *AwsSessionCredentials `json:"artifactCredentials"`
-	ContinuationToken   *string                `json:"continuationToken"`
-	EncryptionKey       *EncryptionKey         `json:"encryptionKey"`
-	InputArtifacts      []Artifact             `json:"inputArtifacts"`
-	OutputArtifacts     []Artifact             `json:"outputArtifacts"`
-	PipelineContext     *PipelineContext       `json:"pipelineContext"`
+	ActionConfiguration *ActionConfiguration   `json:"actionConfiguration,omitempty"`
+	ActionTypeID        *ActionTypeID          `json:"actionTypeId,omitempty"`
+	ArtifactCredentials *AwsSessionCredentials `json:"artifactCredentials,omitempty"`
+	ContinuationToken   *string                `json:"continuationToken,omitempty"`
+	EncryptionKey       *EncryptionKey         `json:"encryptionKey,omitempty"`
+	InputArtifacts      []Artifact             `json:"inputArtifacts,omitempty"`
+	OutputArtifacts     []Artifact             `json:"outputArtifacts,omitempty"`
+	PipelineContext     *PipelineContext       `json:"pipelineContext,omitempty"`
 }

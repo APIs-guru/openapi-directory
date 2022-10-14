@@ -9,7 +9,7 @@ const (
 )
 
 type BusinessCallsSettings struct {
-	CallsState  *BusinessCallsSettingsCallsStateEnum `json:"callsState"`
-	ConsentTime *string                              `json:"consentTime"`
-	Name        *string                              `json:"name"`
+	CallsState  *BusinessCallsSettingsCallsStateEnum `json:"callsState,omitempty"`
+	ConsentTime *string                              `json:"consentTime,omitempty"`
+	Name        *string                              `json:"name,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GoogleLongrunningListOperationsResponse struct {
-	NextPageToken *string                      `json:"nextPageToken"`
-	Operations    []GoogleLongrunningOperation `json:"operations"`
+	NextPageToken *string                      `json:"nextPageToken,omitempty"`
+	Operations    []GoogleLongrunningOperation `json:"operations,omitempty"`
 }

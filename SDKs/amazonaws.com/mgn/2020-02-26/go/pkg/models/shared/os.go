@@ -1,5 +1,5 @@
 package shared
 
 type Os struct {
-	FullString *string `json:"fullString"`
+	FullString *string `json:"fullString,omitempty"`
 }

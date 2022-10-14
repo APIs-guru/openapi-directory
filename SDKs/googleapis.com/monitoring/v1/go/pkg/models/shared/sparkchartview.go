@@ -9,6 +9,6 @@ const (
 )
 
 type SparkChartView struct {
-	MinAlignmentPeriod *string                           `json:"minAlignmentPeriod"`
-	SparkChartType     *SparkChartViewSparkChartTypeEnum `json:"sparkChartType"`
+	MinAlignmentPeriod *string                           `json:"minAlignmentPeriod,omitempty"`
+	SparkChartType     *SparkChartViewSparkChartTypeEnum `json:"sparkChartType,omitempty"`
 }

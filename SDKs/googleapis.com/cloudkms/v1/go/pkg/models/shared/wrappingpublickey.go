@@ -1,5 +1,5 @@
 package shared
 
 type WrappingPublicKey struct {
-	Pem *string `json:"pem"`
+	Pem *string `json:"pem,omitempty"`
 }

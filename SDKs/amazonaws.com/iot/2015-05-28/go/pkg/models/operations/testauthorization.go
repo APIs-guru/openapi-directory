@@ -20,10 +20,10 @@ type TestAuthorizationHeaders struct {
 
 type TestAuthorizationRequestBody struct {
 	AuthInfos             []shared.AuthInfo `json:"authInfos"`
-	CognitoIdentityPoolID *string           `json:"cognitoIdentityPoolId"`
-	PolicyNamesToAdd      []string          `json:"policyNamesToAdd"`
-	PolicyNamesToSkip     []string          `json:"policyNamesToSkip"`
-	Principal             *string           `json:"principal"`
+	CognitoIdentityPoolID *string           `json:"cognitoIdentityPoolId,omitempty"`
+	PolicyNamesToAdd      []string          `json:"policyNamesToAdd,omitempty"`
+	PolicyNamesToSkip     []string          `json:"policyNamesToSkip,omitempty"`
+	Principal             *string           `json:"principal,omitempty"`
 }
 
 type TestAuthorizationRequest struct {

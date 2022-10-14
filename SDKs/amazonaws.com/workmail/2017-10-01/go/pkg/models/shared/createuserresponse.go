@@ -1,5 +1,5 @@
 package shared
 
 type CreateUserResponse struct {
-	UserID *string `json:"UserId"`
+	UserID *string `json:"UserId,omitempty"`
 }

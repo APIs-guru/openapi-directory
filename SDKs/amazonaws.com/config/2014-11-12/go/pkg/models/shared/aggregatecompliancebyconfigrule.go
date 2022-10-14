@@ -1,8 +1,8 @@
 package shared
 
 type AggregateComplianceByConfigRule struct {
-	AccountID      *string     `json:"AccountId"`
-	AwsRegion      *string     `json:"AwsRegion"`
-	Compliance     *Compliance `json:"Compliance"`
-	ConfigRuleName *string     `json:"ConfigRuleName"`
+	AccountID      *string     `json:"AccountId,omitempty"`
+	AwsRegion      *string     `json:"AwsRegion,omitempty"`
+	Compliance     *Compliance `json:"Compliance,omitempty"`
+	ConfigRuleName *string     `json:"ConfigRuleName,omitempty"`
 }

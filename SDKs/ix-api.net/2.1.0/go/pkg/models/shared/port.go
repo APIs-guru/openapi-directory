@@ -18,19 +18,19 @@ const (
 
 type Port struct {
 	BillingAccount   string        `json:"billing_account"`
-	Connection       *string       `json:"connection"`
+	Connection       *string       `json:"connection,omitempty"`
 	ConsumingAccount string        `json:"consuming_account"`
-	ContractRef      *string       `json:"contract_ref"`
+	ContractRef      *string       `json:"contract_ref,omitempty"`
 	Device           string        `json:"device"`
-	ExternalRef      *string       `json:"external_ref"`
+	ExternalRef      *string       `json:"external_ref,omitempty"`
 	ID               string        `json:"id"`
 	ManagingAccount  string        `json:"managing_account"`
 	MediaType        string        `json:"media_type"`
-	Name             *string       `json:"name"`
+	Name             *string       `json:"name,omitempty"`
 	Pop              string        `json:"pop"`
-	PurchaseOrder    *string       `json:"purchase_order"`
+	PurchaseOrder    *string       `json:"purchase_order,omitempty"`
 	RoleAssignments  []string      `json:"role_assignments"`
-	Speed            *int64        `json:"speed"`
+	Speed            *int64        `json:"speed,omitempty"`
 	State            PortStateEnum `json:"state"`
-	Status           []Status      `json:"status"`
+	Status           []Status      `json:"status,omitempty"`
 }

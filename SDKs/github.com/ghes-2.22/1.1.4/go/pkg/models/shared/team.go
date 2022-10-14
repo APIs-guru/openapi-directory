@@ -4,12 +4,12 @@ type TeamParentTeamSimple struct {
 	Description     string  `json:"description"`
 	HTMLURL         string  `json:"html_url"`
 	ID              int64   `json:"id"`
-	LdapDn          *string `json:"ldap_dn"`
+	LdapDn          *string `json:"ldap_dn,omitempty"`
 	MembersURL      string  `json:"members_url"`
 	Name            string  `json:"name"`
 	NodeID          string  `json:"node_id"`
 	Permission      string  `json:"permission"`
-	Privacy         *string `json:"privacy"`
+	Privacy         *string `json:"privacy,omitempty"`
 	RepositoriesURL string  `json:"repositories_url"`
 	Slug            string  `json:"slug"`
 	URL             string  `json:"url"`
@@ -22,9 +22,9 @@ type Team struct {
 	MembersURL      string                `json:"members_url"`
 	Name            string                `json:"name"`
 	NodeID          string                `json:"node_id"`
-	Parent          *TeamParentTeamSimple `json:"parent"`
+	Parent          *TeamParentTeamSimple `json:"parent,omitempty"`
 	Permission      string                `json:"permission"`
-	Privacy         *string               `json:"privacy"`
+	Privacy         *string               `json:"privacy,omitempty"`
 	RepositoriesURL string                `json:"repositories_url"`
 	Slug            string                `json:"slug"`
 	URL             string                `json:"url"`

@@ -1,12 +1,12 @@
 package shared
 
 type NestingLevelSuggestionState struct {
-	BulletAlignmentSuggested *bool                     `json:"bulletAlignmentSuggested"`
-	GlyphFormatSuggested     *bool                     `json:"glyphFormatSuggested"`
-	GlyphSymbolSuggested     *bool                     `json:"glyphSymbolSuggested"`
-	GlyphTypeSuggested       *bool                     `json:"glyphTypeSuggested"`
-	IndentFirstLineSuggested *bool                     `json:"indentFirstLineSuggested"`
-	IndentStartSuggested     *bool                     `json:"indentStartSuggested"`
-	StartNumberSuggested     *bool                     `json:"startNumberSuggested"`
-	TextStyleSuggestionState *TextStyleSuggestionState `json:"textStyleSuggestionState"`
+	BulletAlignmentSuggested *bool                     `json:"bulletAlignmentSuggested,omitempty"`
+	GlyphFormatSuggested     *bool                     `json:"glyphFormatSuggested,omitempty"`
+	GlyphSymbolSuggested     *bool                     `json:"glyphSymbolSuggested,omitempty"`
+	GlyphTypeSuggested       *bool                     `json:"glyphTypeSuggested,omitempty"`
+	IndentFirstLineSuggested *bool                     `json:"indentFirstLineSuggested,omitempty"`
+	IndentStartSuggested     *bool                     `json:"indentStartSuggested,omitempty"`
+	StartNumberSuggested     *bool                     `json:"startNumberSuggested,omitempty"`
+	TextStyleSuggestionState *TextStyleSuggestionState `json:"textStyleSuggestionState,omitempty"`
 }

@@ -5,7 +5,7 @@ type PostServersIDActionsCreateImagePathParams struct {
 }
 
 type PostServersIDActionsCreateImageRequestBodyLabels struct {
-	Labelkey *string `json:"labelkey"`
+	Labelkey *string `json:"labelkey,omitempty"`
 }
 
 type PostServersIDActionsCreateImageRequestBodyTypeEnum string
@@ -16,9 +16,9 @@ const (
 )
 
 type PostServersIDActionsCreateImageRequestBodyCreateImageRequest struct {
-	Description *string                                             `json:"description"`
-	Labels      *PostServersIDActionsCreateImageRequestBodyLabels   `json:"labels"`
-	Type        *PostServersIDActionsCreateImageRequestBodyTypeEnum `json:"type"`
+	Description *string                                             `json:"description,omitempty"`
+	Labels      *PostServersIDActionsCreateImageRequestBodyLabels   `json:"labels,omitempty"`
+	Type        *PostServersIDActionsCreateImageRequestBodyTypeEnum `json:"type,omitempty"`
 }
 
 type PostServersIDActionsCreateImageRequest struct {
@@ -94,7 +94,7 @@ const (
 
 type PostServersIDActionsCreateImage201ApplicationJSONImage struct {
 	BoundTo     int64                                                              `json:"bound_to"`
-	BuildID     *string                                                            `json:"build_id"`
+	BuildID     *string                                                            `json:"build_id,omitempty"`
 	Created     string                                                             `json:"created"`
 	CreatedFrom PostServersIDActionsCreateImage201ApplicationJSONImageCreatedFrom  `json:"created_from"`
 	Deleted     string                                                             `json:"deleted"`
@@ -108,14 +108,14 @@ type PostServersIDActionsCreateImage201ApplicationJSONImage struct {
 	OsFlavor    PostServersIDActionsCreateImage201ApplicationJSONImageOsFlavorEnum `json:"os_flavor"`
 	OsVersion   string                                                             `json:"os_version"`
 	Protection  PostServersIDActionsCreateImage201ApplicationJSONImageProtection   `json:"protection"`
-	RapidDeploy *bool                                                              `json:"rapid_deploy"`
+	RapidDeploy *bool                                                              `json:"rapid_deploy,omitempty"`
 	Status      PostServersIDActionsCreateImage201ApplicationJSONImageStatusEnum   `json:"status"`
 	Type        PostServersIDActionsCreateImage201ApplicationJSONImageTypeEnum     `json:"type"`
 }
 
 type PostServersIDActionsCreateImage201ApplicationJSON struct {
-	Action *PostServersIDActionsCreateImage201ApplicationJSONActionAction `json:"action"`
-	Image  *PostServersIDActionsCreateImage201ApplicationJSONImage        `json:"image"`
+	Action *PostServersIDActionsCreateImage201ApplicationJSONActionAction `json:"action,omitempty"`
+	Image  *PostServersIDActionsCreateImage201ApplicationJSONImage        `json:"image,omitempty"`
 }
 
 type PostServersIDActionsCreateImageResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type WriteControl struct {
-	RequiredRevisionID *string `json:"requiredRevisionId"`
+	RequiredRevisionID *string `json:"requiredRevisionId,omitempty"`
 }

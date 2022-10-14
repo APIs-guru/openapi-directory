@@ -1,5 +1,5 @@
 package shared
 
 type QueryPlan struct {
-	PlanNodes []PlanNode `json:"planNodes"`
+	PlanNodes []PlanNode `json:"planNodes,omitempty"`
 }

@@ -5,23 +5,23 @@ import (
 )
 
 type TrialComponent struct {
-	CreatedBy          *UserContext                            `json:"CreatedBy"`
-	CreationTime       *time.Time                              `json:"CreationTime"`
-	DisplayName        *string                                 `json:"DisplayName"`
-	EndTime            *time.Time                              `json:"EndTime"`
-	InputArtifacts     map[string]TrialComponentArtifact       `json:"InputArtifacts"`
-	LastModifiedBy     *UserContext                            `json:"LastModifiedBy"`
-	LastModifiedTime   *time.Time                              `json:"LastModifiedTime"`
-	MetadataProperties *MetadataProperties                     `json:"MetadataProperties"`
-	Metrics            []TrialComponentMetricSummary           `json:"Metrics"`
-	OutputArtifacts    map[string]TrialComponentArtifact       `json:"OutputArtifacts"`
-	Parameters         map[string]TrialComponentParameterValue `json:"Parameters"`
-	Parents            []Parent                                `json:"Parents"`
-	Source             *TrialComponentSource                   `json:"Source"`
-	SourceDetail       *TrialComponentSourceDetail             `json:"SourceDetail"`
-	StartTime          *time.Time                              `json:"StartTime"`
-	Status             *TrialComponentStatus                   `json:"Status"`
-	Tags               []Tag                                   `json:"Tags"`
-	TrialComponentArn  *string                                 `json:"TrialComponentArn"`
-	TrialComponentName *string                                 `json:"TrialComponentName"`
+	CreatedBy          *UserContext                            `json:"CreatedBy,omitempty"`
+	CreationTime       *time.Time                              `json:"CreationTime,omitempty"`
+	DisplayName        *string                                 `json:"DisplayName,omitempty"`
+	EndTime            *time.Time                              `json:"EndTime,omitempty"`
+	InputArtifacts     map[string]TrialComponentArtifact       `json:"InputArtifacts,omitempty"`
+	LastModifiedBy     *UserContext                            `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime   *time.Time                              `json:"LastModifiedTime,omitempty"`
+	MetadataProperties *MetadataProperties                     `json:"MetadataProperties,omitempty"`
+	Metrics            []TrialComponentMetricSummary           `json:"Metrics,omitempty"`
+	OutputArtifacts    map[string]TrialComponentArtifact       `json:"OutputArtifacts,omitempty"`
+	Parameters         map[string]TrialComponentParameterValue `json:"Parameters,omitempty"`
+	Parents            []Parent                                `json:"Parents,omitempty"`
+	Source             *TrialComponentSource                   `json:"Source,omitempty"`
+	SourceDetail       *TrialComponentSourceDetail             `json:"SourceDetail,omitempty"`
+	StartTime          *time.Time                              `json:"StartTime,omitempty"`
+	Status             *TrialComponentStatus                   `json:"Status,omitempty"`
+	Tags               []Tag                                   `json:"Tags,omitempty"`
+	TrialComponentArn  *string                                 `json:"TrialComponentArn,omitempty"`
+	TrialComponentName *string                                 `json:"TrialComponentName,omitempty"`
 }

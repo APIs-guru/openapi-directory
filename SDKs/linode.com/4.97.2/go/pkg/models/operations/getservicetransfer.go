@@ -27,7 +27,7 @@ type GetServiceTransferRequest struct {
 }
 
 type GetServiceTransferDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetServiceTransferResponse struct {

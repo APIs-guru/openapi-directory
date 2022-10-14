@@ -1,11 +1,11 @@
 package shared
 
 type FilterView struct {
-	Criteria     map[string]FilterCriteria `json:"criteria"`
-	FilterSpecs  []FilterSpec              `json:"filterSpecs"`
-	FilterViewID *int32                    `json:"filterViewId"`
-	NamedRangeID *string                   `json:"namedRangeId"`
-	Range        *GridRange                `json:"range"`
-	SortSpecs    []SortSpec                `json:"sortSpecs"`
-	Title        *string                   `json:"title"`
+	Criteria     map[string]FilterCriteria `json:"criteria,omitempty"`
+	FilterSpecs  []FilterSpec              `json:"filterSpecs,omitempty"`
+	FilterViewID *int32                    `json:"filterViewId,omitempty"`
+	NamedRangeID *string                   `json:"namedRangeId,omitempty"`
+	Range        *GridRange                `json:"range,omitempty"`
+	SortSpecs    []SortSpec                `json:"sortSpecs,omitempty"`
+	Title        *string                   `json:"title,omitempty"`
 }

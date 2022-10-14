@@ -5,7 +5,7 @@ import (
 )
 
 type ConformancePackEvaluationResult struct {
-	Annotation                 *string                           `json:"Annotation"`
+	Annotation                 *string                           `json:"Annotation,omitempty"`
 	ComplianceType             ConformancePackComplianceTypeEnum `json:"ComplianceType"`
 	ConfigRuleInvokedTime      time.Time                         `json:"ConfigRuleInvokedTime"`
 	EvaluationResultIdentifier EvaluationResultIdentifier        `json:"EvaluationResultIdentifier"`

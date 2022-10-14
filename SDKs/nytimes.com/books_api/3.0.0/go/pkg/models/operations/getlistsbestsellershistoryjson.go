@@ -24,50 +24,50 @@ type GetListsBestSellersHistoryJSONRequest struct {
 }
 
 type GetListsBestSellersHistoryJSON200ApplicationJSONResultsIsbns struct {
-	Isbn10 *string `json:"isbn10"`
-	Isbn13 *string `json:"isbn13"`
+	Isbn10 *string `json:"isbn10,omitempty"`
+	Isbn13 *string `json:"isbn13,omitempty"`
 }
 
 type GetListsBestSellersHistoryJSON200ApplicationJSONResultsRanksHistory struct {
-	Asterisk        *int64       `json:"asterisk"`
-	BestsellersDate *string      `json:"bestsellers_date"`
-	Dagger          *int64       `json:"dagger"`
-	DisplayName     *string      `json:"display_name"`
-	ListName        *string      `json:"list_name"`
-	PrimaryIsbn10   *string      `json:"primary_isbn10"`
-	PrimaryIsbn13   *string      `json:"primary_isbn13"`
-	PublishedDate   *string      `json:"published_date"`
-	Rank            *int64       `json:"rank"`
-	RanksLastWeek   *interface{} `json:"ranks_last_week"`
-	WeeksOnList     *int64       `json:"weeks_on_list"`
+	Asterisk        *int64       `json:"asterisk,omitempty"`
+	BestsellersDate *string      `json:"bestsellers_date,omitempty"`
+	Dagger          *int64       `json:"dagger,omitempty"`
+	DisplayName     *string      `json:"display_name,omitempty"`
+	ListName        *string      `json:"list_name,omitempty"`
+	PrimaryIsbn10   *string      `json:"primary_isbn10,omitempty"`
+	PrimaryIsbn13   *string      `json:"primary_isbn13,omitempty"`
+	PublishedDate   *string      `json:"published_date,omitempty"`
+	Rank            *int64       `json:"rank,omitempty"`
+	RanksLastWeek   *interface{} `json:"ranks_last_week,omitempty"`
+	WeeksOnList     *int64       `json:"weeks_on_list,omitempty"`
 }
 
 type GetListsBestSellersHistoryJSON200ApplicationJSONResultsReviews struct {
-	ArticleChapterLink *string `json:"article_chapter_link"`
-	BookReviewLink     *string `json:"book_review_link"`
-	FirstChapterLink   *string `json:"first_chapter_link"`
-	SundayReviewLink   *string `json:"sunday_review_link"`
+	ArticleChapterLink *string `json:"article_chapter_link,omitempty"`
+	BookReviewLink     *string `json:"book_review_link,omitempty"`
+	FirstChapterLink   *string `json:"first_chapter_link,omitempty"`
+	SundayReviewLink   *string `json:"sunday_review_link,omitempty"`
 }
 
 type GetListsBestSellersHistoryJSON200ApplicationJSONResults struct {
-	AgeGroup        *string                                                               `json:"age_group"`
-	Author          *string                                                               `json:"author"`
-	Contributor     *string                                                               `json:"contributor"`
-	ContributorNote *string                                                               `json:"contributor_note"`
-	Description     *string                                                               `json:"description"`
-	Isbns           []GetListsBestSellersHistoryJSON200ApplicationJSONResultsIsbns        `json:"isbns"`
-	Price           *int64                                                                `json:"price"`
-	Publisher       *string                                                               `json:"publisher"`
-	RanksHistory    []GetListsBestSellersHistoryJSON200ApplicationJSONResultsRanksHistory `json:"ranks_history"`
-	Reviews         []GetListsBestSellersHistoryJSON200ApplicationJSONResultsReviews      `json:"reviews"`
-	Title           *string                                                               `json:"title"`
+	AgeGroup        *string                                                               `json:"age_group,omitempty"`
+	Author          *string                                                               `json:"author,omitempty"`
+	Contributor     *string                                                               `json:"contributor,omitempty"`
+	ContributorNote *string                                                               `json:"contributor_note,omitempty"`
+	Description     *string                                                               `json:"description,omitempty"`
+	Isbns           []GetListsBestSellersHistoryJSON200ApplicationJSONResultsIsbns        `json:"isbns,omitempty"`
+	Price           *int64                                                                `json:"price,omitempty"`
+	Publisher       *string                                                               `json:"publisher,omitempty"`
+	RanksHistory    []GetListsBestSellersHistoryJSON200ApplicationJSONResultsRanksHistory `json:"ranks_history,omitempty"`
+	Reviews         []GetListsBestSellersHistoryJSON200ApplicationJSONResultsReviews      `json:"reviews,omitempty"`
+	Title           *string                                                               `json:"title,omitempty"`
 }
 
 type GetListsBestSellersHistoryJSON200ApplicationJSON struct {
-	Copyright  *string                                                   `json:"copyright"`
-	NumResults *int64                                                    `json:"num_results"`
-	Results    []GetListsBestSellersHistoryJSON200ApplicationJSONResults `json:"results"`
-	Status     *string                                                   `json:"status"`
+	Copyright  *string                                                   `json:"copyright,omitempty"`
+	NumResults *int64                                                    `json:"num_results,omitempty"`
+	Results    []GetListsBestSellersHistoryJSON200ApplicationJSONResults `json:"results,omitempty"`
+	Status     *string                                                   `json:"status,omitempty"`
 }
 
 type GetListsBestSellersHistoryJSONResponse struct {

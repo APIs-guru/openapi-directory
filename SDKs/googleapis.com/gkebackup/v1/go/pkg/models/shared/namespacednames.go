@@ -1,5 +1,5 @@
 package shared
 
 type NamespacedNames struct {
-	NamespacedNames []NamespacedName `json:"namespacedNames"`
+	NamespacedNames []NamespacedName `json:"namespacedNames,omitempty"`
 }

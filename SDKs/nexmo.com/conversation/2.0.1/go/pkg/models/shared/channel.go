@@ -12,7 +12,7 @@ type ChannelFrom2 struct {
 
 type ChannelFrom3 struct {
 	Type string  `json:"type"`
-	URI  *string `json:"uri"`
+	URI  *string `json:"uri,omitempty"`
 }
 
 type ChannelFrom4ContentTypeEnum string
@@ -23,14 +23,14 @@ const (
 )
 
 type ChannelFrom4Headers struct {
-	CustomerID *string `json:"customer_id"`
+	CustomerID *string `json:"customer_id,omitempty"`
 }
 
 type ChannelFrom4 struct {
 	ContentType ChannelFrom4ContentTypeEnum `json:"content-type"`
-	Headers     *ChannelFrom4Headers        `json:"headers"`
+	Headers     *ChannelFrom4Headers        `json:"headers,omitempty"`
 	Type        string                      `json:"type"`
-	URI         *string                     `json:"uri"`
+	URI         *string                     `json:"uri,omitempty"`
 }
 
 type ChannelFrom5 struct {
@@ -39,15 +39,15 @@ type ChannelFrom5 struct {
 }
 
 type ChannelTo2 struct {
-	DtmfAnswer *string `json:"dtmfAnswer"`
+	DtmfAnswer *string `json:"dtmfAnswer,omitempty"`
 	Number     string  `json:"number"`
 	Type       string  `json:"type"`
 }
 
 type Channel struct {
-	From   *interface{}     `json:"from"`
-	LegID  *string          `json:"leg_id"`
-	LegIds []interface{}    `json:"leg_ids"`
-	To     *interface{}     `json:"to"`
-	Type   *ChannelTypeEnum `json:"type"`
+	From   *interface{}     `json:"from,omitempty"`
+	LegID  *string          `json:"leg_id,omitempty"`
+	LegIds []interface{}    `json:"leg_ids,omitempty"`
+	To     *interface{}     `json:"to,omitempty"`
+	Type   *ChannelTypeEnum `json:"type,omitempty"`
 }

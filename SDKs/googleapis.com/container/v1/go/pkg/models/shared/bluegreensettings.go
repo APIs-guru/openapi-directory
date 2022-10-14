@@ -1,6 +1,6 @@
 package shared
 
 type BlueGreenSettings struct {
-	NodePoolSoakDuration  *string                `json:"nodePoolSoakDuration"`
-	StandardRolloutPolicy *StandardRolloutPolicy `json:"standardRolloutPolicy"`
+	NodePoolSoakDuration  *string                `json:"nodePoolSoakDuration,omitempty"`
+	StandardRolloutPolicy *StandardRolloutPolicy `json:"standardRolloutPolicy,omitempty"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type UpdateBotResponse struct {
-	BotID                   *string        `json:"botId"`
-	BotName                 *string        `json:"botName"`
-	BotStatus               *BotStatusEnum `json:"botStatus"`
-	CreationDateTime        *time.Time     `json:"creationDateTime"`
-	DataPrivacy             *DataPrivacy   `json:"dataPrivacy"`
-	Description             *string        `json:"description"`
-	IdleSessionTTLInSeconds *int64         `json:"idleSessionTTLInSeconds"`
-	LastUpdatedDateTime     *time.Time     `json:"lastUpdatedDateTime"`
-	RoleArn                 *string        `json:"roleArn"`
+	BotID                   *string        `json:"botId,omitempty"`
+	BotName                 *string        `json:"botName,omitempty"`
+	BotStatus               *BotStatusEnum `json:"botStatus,omitempty"`
+	CreationDateTime        *time.Time     `json:"creationDateTime,omitempty"`
+	DataPrivacy             *DataPrivacy   `json:"dataPrivacy,omitempty"`
+	Description             *string        `json:"description,omitempty"`
+	IdleSessionTTLInSeconds *int64         `json:"idleSessionTTLInSeconds,omitempty"`
+	LastUpdatedDateTime     *time.Time     `json:"lastUpdatedDateTime,omitempty"`
+	RoleArn                 *string        `json:"roleArn,omitempty"`
 }

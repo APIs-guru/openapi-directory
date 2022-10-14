@@ -16,8 +16,8 @@ const (
 )
 
 type ProfileTokenRequest struct {
-	CookieType *ProfileTokenRequestCookieTypeEnum `json:"cookieType"`
-	Pin        *string                            `json:"pin"`
+	CookieType *ProfileTokenRequestCookieTypeEnum `json:"cookieType,omitempty"`
+	Pin        *string                            `json:"pin,omitempty"`
 	ProfileID  string                             `json:"profileId"`
 	Scopes     []ProfileTokenRequestScopesEnum    `json:"scopes"`
 }

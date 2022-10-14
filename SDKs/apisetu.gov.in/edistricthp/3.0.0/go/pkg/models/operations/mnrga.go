@@ -15,8 +15,8 @@ const (
 )
 
 type MnrgaRequestBody struct {
-	CertificateParameters *MnrgaRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *MnrgaRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                MnrgaRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Mnrga400ApplicationJSON struct {
-	Error            *Mnrga400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mnrga400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mnrga400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mnrga400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mnrga401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Mnrga401ApplicationJSON struct {
-	Error            *Mnrga401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mnrga401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mnrga401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mnrga401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mnrga404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Mnrga404ApplicationJSON struct {
-	Error            *Mnrga404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mnrga404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mnrga404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mnrga404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mnrga500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Mnrga500ApplicationJSON struct {
-	Error            *Mnrga500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mnrga500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mnrga500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mnrga500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mnrga502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Mnrga502ApplicationJSON struct {
-	Error            *Mnrga502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mnrga502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mnrga502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mnrga502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mnrga503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Mnrga503ApplicationJSON struct {
-	Error            *Mnrga503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mnrga503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mnrga503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mnrga503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mnrga504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Mnrga504ApplicationJSON struct {
-	Error            *Mnrga504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mnrga504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mnrga504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mnrga504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type MnrgaResponse struct {

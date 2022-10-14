@@ -1,5 +1,5 @@
 package shared
 
 type DetectKeyPhrasesResponse struct {
-	KeyPhrases []KeyPhrase `json:"KeyPhrases"`
+	KeyPhrases []KeyPhrase `json:"KeyPhrases,omitempty"`
 }

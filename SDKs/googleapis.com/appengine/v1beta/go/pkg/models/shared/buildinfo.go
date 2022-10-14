@@ -1,5 +1,5 @@
 package shared
 
 type BuildInfo struct {
-	CloudBuildID *string `json:"cloudBuildId"`
+	CloudBuildID *string `json:"cloudBuildId,omitempty"`
 }

@@ -12,7 +12,7 @@ type EnableOrganizationAdminAccountHeaders struct {
 
 type EnableOrganizationAdminAccountRequestBody struct {
 	AdminAccountID string  `json:"adminAccountId"`
-	ClientToken    *string `json:"clientToken"`
+	ClientToken    *string `json:"clientToken,omitempty"`
 }
 
 type EnableOrganizationAdminAccountRequest struct {

@@ -36,11 +36,11 @@ type GetAPIV1ProvincesProvinceIDRequest struct {
 }
 
 type GetAPIV1ProvincesProvinceID200ApplicationJSON struct {
-	Province *shared.Province `json:"province"`
+	Province *shared.Province `json:"province,omitempty"`
 }
 
 type GetAPIV1ProvincesProvinceID404ApplicationJSON struct {
-	Error *shared.Error `json:"error"`
+	Error *shared.Error `json:"error,omitempty"`
 }
 
 type GetAPIV1ProvincesProvinceIDResponse struct {

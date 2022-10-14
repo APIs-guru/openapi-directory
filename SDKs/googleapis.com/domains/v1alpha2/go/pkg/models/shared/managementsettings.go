@@ -17,6 +17,6 @@ const (
 )
 
 type ManagementSettings struct {
-	RenewalMethod     *ManagementSettingsRenewalMethodEnum     `json:"renewalMethod"`
-	TransferLockState *ManagementSettingsTransferLockStateEnum `json:"transferLockState"`
+	RenewalMethod     *ManagementSettingsRenewalMethodEnum     `json:"renewalMethod,omitempty"`
+	TransferLockState *ManagementSettingsTransferLockStateEnum `json:"transferLockState,omitempty"`
 }

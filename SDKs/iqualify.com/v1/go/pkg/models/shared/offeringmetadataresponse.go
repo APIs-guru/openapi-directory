@@ -5,23 +5,23 @@ import (
 )
 
 type OfferingMetadataResponse struct {
-	ContentID         *string           `json:"contentId"`
-	CoverImageURL     *string           `json:"coverImageUrl"`
-	Currency          *string           `json:"currency"`
-	Description       *string           `json:"description"`
-	EarlyCloseOffDate *time.Time        `json:"earlyCloseOffDate"`
-	End               *time.Time        `json:"end"`
-	EnrollmentLimit   *float64          `json:"enrollmentLimit"`
-	HasEarlyCloseOff  *bool             `json:"hasEarlyCloseOff"`
-	ID                *string           `json:"id"`
-	Identifier        *string           `json:"identifier"`
-	IsReadonly        *bool             `json:"isReadonly"`
-	Metadata          *OfferingMetadata `json:"metadata"`
-	Name              *string           `json:"name"`
-	Overview          *string           `json:"overview"`
-	Price             *float64          `json:"price"`
-	Start             *time.Time        `json:"start"`
-	TasksEnabled      *bool             `json:"tasksEnabled"`
-	TrailerVideoURL   *string           `json:"trailerVideoUrl"`
-	UseRelativeDates  *bool             `json:"useRelativeDates"`
+	ContentID         *string           `json:"contentId,omitempty"`
+	CoverImageURL     *string           `json:"coverImageUrl,omitempty"`
+	Currency          *string           `json:"currency,omitempty"`
+	Description       *string           `json:"description,omitempty"`
+	EarlyCloseOffDate *time.Time        `json:"earlyCloseOffDate,omitempty"`
+	End               *time.Time        `json:"end,omitempty"`
+	EnrollmentLimit   *float64          `json:"enrollmentLimit,omitempty"`
+	HasEarlyCloseOff  *bool             `json:"hasEarlyCloseOff,omitempty"`
+	ID                *string           `json:"id,omitempty"`
+	Identifier        *string           `json:"identifier,omitempty"`
+	IsReadonly        *bool             `json:"isReadonly,omitempty"`
+	Metadata          *OfferingMetadata `json:"metadata,omitempty"`
+	Name              *string           `json:"name,omitempty"`
+	Overview          *string           `json:"overview,omitempty"`
+	Price             *float64          `json:"price,omitempty"`
+	Start             *time.Time        `json:"start,omitempty"`
+	TasksEnabled      *bool             `json:"tasksEnabled,omitempty"`
+	TrailerVideoURL   *string           `json:"trailerVideoUrl,omitempty"`
+	UseRelativeDates  *bool             `json:"useRelativeDates,omitempty"`
 }

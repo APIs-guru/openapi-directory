@@ -1,5 +1,5 @@
 package shared
 
 type PrivateConnectivity struct {
-	PrivateConnectionName *string `json:"privateConnectionName"`
+	PrivateConnectionName *string `json:"privateConnectionName,omitempty"`
 }

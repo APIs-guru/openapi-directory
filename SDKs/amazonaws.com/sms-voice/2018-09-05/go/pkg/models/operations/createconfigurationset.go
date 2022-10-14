@@ -11,7 +11,7 @@ type CreateConfigurationSetHeaders struct {
 }
 
 type CreateConfigurationSetRequestBody struct {
-	ConfigurationSetName *string `json:"ConfigurationSetName"`
+	ConfigurationSetName *string `json:"ConfigurationSetName,omitempty"`
 }
 
 type CreateConfigurationSetRequest struct {

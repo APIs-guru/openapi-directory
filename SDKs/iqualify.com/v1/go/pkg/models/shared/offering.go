@@ -5,33 +5,33 @@ import (
 )
 
 type OfferingBadge struct {
-	BadgeExpiry      *BadgeExpiry `json:"badgeExpiry"`
-	Description      *string      `json:"description"`
-	RequiresApproval *bool        `json:"requiresApproval"`
-	Title            *string      `json:"title"`
+	BadgeExpiry      *BadgeExpiry `json:"badgeExpiry,omitempty"`
+	Description      *string      `json:"description,omitempty"`
+	RequiresApproval *bool        `json:"requiresApproval,omitempty"`
+	Title            *string      `json:"title,omitempty"`
 }
 
 type OfferingMetadata1 struct {
-	Category *string  `json:"category"`
-	Level    *string  `json:"level"`
-	Tags     []string `json:"tags"`
-	Topic    *string  `json:"topic"`
+	Category *string  `json:"category,omitempty"`
+	Level    *string  `json:"level,omitempty"`
+	Tags     []string `json:"tags,omitempty"`
+	Topic    *string  `json:"topic,omitempty"`
 }
 
 type Offering struct {
-	Badge             *OfferingBadge     `json:"badge"`
-	ContentID         *string            `json:"contentId"`
-	Description       *string            `json:"description"`
-	EarlyCloseOffDate *time.Time         `json:"earlyCloseOffDate"`
-	End               *time.Time         `json:"end"`
-	HasEarlyCloseOff  *bool              `json:"hasEarlyCloseOff"`
-	Identifier        *string            `json:"identifier"`
-	IsReadonly        *bool              `json:"isReadonly"`
-	Metadata          *OfferingMetadata1 `json:"metadata"`
-	Name              *string            `json:"name"`
-	Overview          *string            `json:"overview"`
-	RootContentID     *string            `json:"rootContentId"`
-	Start             *time.Time         `json:"start"`
-	TrailerVideoURL   *string            `json:"trailerVideoUrl"`
-	UseRelativeDates  *bool              `json:"useRelativeDates"`
+	Badge             *OfferingBadge     `json:"badge,omitempty"`
+	ContentID         *string            `json:"contentId,omitempty"`
+	Description       *string            `json:"description,omitempty"`
+	EarlyCloseOffDate *time.Time         `json:"earlyCloseOffDate,omitempty"`
+	End               *time.Time         `json:"end,omitempty"`
+	HasEarlyCloseOff  *bool              `json:"hasEarlyCloseOff,omitempty"`
+	Identifier        *string            `json:"identifier,omitempty"`
+	IsReadonly        *bool              `json:"isReadonly,omitempty"`
+	Metadata          *OfferingMetadata1 `json:"metadata,omitempty"`
+	Name              *string            `json:"name,omitempty"`
+	Overview          *string            `json:"overview,omitempty"`
+	RootContentID     *string            `json:"rootContentId,omitempty"`
+	Start             *time.Time         `json:"start,omitempty"`
+	TrailerVideoURL   *string            `json:"trailerVideoUrl,omitempty"`
+	UseRelativeDates  *bool              `json:"useRelativeDates,omitempty"`
 }

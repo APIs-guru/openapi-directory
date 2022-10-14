@@ -30,10 +30,10 @@ type ImportFromURLInput struct {
 	Access                      ImportFromURLInputAccessEnum                      `json:"access"`
 	DuplicateValidationScope    ImportFromURLInputDuplicateValidationScopeEnum    `json:"duplicateValidationScope"`
 	DuplicateValidationStrategy ImportFromURLInputDuplicateValidationStrategyEnum `json:"duplicateValidationStrategy"`
-	FolderID                    *string                                           `json:"folderId"`
-	FolderPath                  *string                                           `json:"folderPath"`
-	Name                        *string                                           `json:"name"`
+	FolderID                    *string                                           `json:"folderId,omitempty"`
+	FolderPath                  *string                                           `json:"folderPath,omitempty"`
+	Name                        *string                                           `json:"name,omitempty"`
 	Overwrite                   bool                                              `json:"overwrite"`
-	TTL                         *string                                           `json:"ttl"`
+	TTL                         *string                                           `json:"ttl,omitempty"`
 	URL                         string                                            `json:"url"`
 }

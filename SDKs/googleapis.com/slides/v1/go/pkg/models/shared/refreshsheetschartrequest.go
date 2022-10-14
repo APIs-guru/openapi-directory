@@ -1,5 +1,5 @@
 package shared
 
 type RefreshSheetsChartRequest struct {
-	ObjectID *string `json:"objectId"`
+	ObjectID *string `json:"objectId,omitempty"`
 }

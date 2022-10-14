@@ -5,7 +5,7 @@ import (
 )
 
 type CreateComponentVersionResponse struct {
-	Arn               *string              `json:"arn"`
+	Arn               *string              `json:"arn,omitempty"`
 	ComponentName     string               `json:"componentName"`
 	ComponentVersion  string               `json:"componentVersion"`
 	CreationTimestamp time.Time            `json:"creationTimestamp"`

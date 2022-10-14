@@ -7,7 +7,7 @@ import (
 type EnterpriseAdminCreateOrgRequestBody struct {
 	Admin       string  `json:"admin"`
 	Login       string  `json:"login"`
-	ProfileName *string `json:"profile_name"`
+	ProfileName *string `json:"profile_name,omitempty"`
 }
 
 type EnterpriseAdminCreateOrgRequest struct {

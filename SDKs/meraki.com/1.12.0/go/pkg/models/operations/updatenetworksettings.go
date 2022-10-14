@@ -5,13 +5,13 @@ type UpdateNetworkSettingsPathParams struct {
 }
 
 type UpdateNetworkSettingsRequestBodySecureConnect struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type UpdateNetworkSettingsRequestBody struct {
-	LocalStatusPageEnabled  *bool                                          `json:"localStatusPageEnabled"`
-	RemoteStatusPageEnabled *bool                                          `json:"remoteStatusPageEnabled"`
-	SecureConnect           *UpdateNetworkSettingsRequestBodySecureConnect `json:"secureConnect"`
+	LocalStatusPageEnabled  *bool                                          `json:"localStatusPageEnabled,omitempty"`
+	RemoteStatusPageEnabled *bool                                          `json:"remoteStatusPageEnabled,omitempty"`
+	SecureConnect           *UpdateNetworkSettingsRequestBodySecureConnect `json:"secureConnect,omitempty"`
 }
 
 type UpdateNetworkSettingsRequest struct {

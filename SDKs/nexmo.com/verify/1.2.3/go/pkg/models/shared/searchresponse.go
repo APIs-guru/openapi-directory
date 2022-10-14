@@ -8,10 +8,10 @@ const (
 )
 
 type SearchResponseChecks struct {
-	Code         *string                         `json:"code"`
-	DateReceived *string                         `json:"date_received"`
-	IPAddress    *string                         `json:"ip_address"`
-	Status       *SearchResponseChecksStatusEnum `json:"status"`
+	Code         *string                         `json:"code,omitempty"`
+	DateReceived *string                         `json:"date_received,omitempty"`
+	IPAddress    *string                         `json:"ip_address,omitempty"`
+	Status       *SearchResponseChecksStatusEnum `json:"status,omitempty"`
 }
 
 type SearchResponseEventsTypeEnum string
@@ -22,8 +22,8 @@ const (
 )
 
 type SearchResponseEvents struct {
-	ID   *string                       `json:"id"`
-	Type *SearchResponseEventsTypeEnum `json:"type"`
+	ID   *string                       `json:"id,omitempty"`
+	Type *SearchResponseEventsTypeEnum `json:"type,omitempty"`
 }
 
 type SearchResponseStatusEnum string
@@ -37,18 +37,18 @@ const (
 )
 
 type SearchResponse struct {
-	AccountID                  *string                   `json:"account_id"`
-	Checks                     []SearchResponseChecks    `json:"checks"`
-	Currency                   *string                   `json:"currency"`
-	DateFinalized              *string                   `json:"date_finalized"`
-	DateSubmitted              *string                   `json:"date_submitted"`
-	EstimatedPriceMessagesSent *string                   `json:"estimated_price_messages_sent"`
-	Events                     []SearchResponseEvents    `json:"events"`
-	FirstEventDate             *string                   `json:"first_event_date"`
-	LastEventDate              *string                   `json:"last_event_date"`
-	Number                     *string                   `json:"number"`
-	Price                      *string                   `json:"price"`
-	RequestID                  *string                   `json:"request_id"`
-	SenderID                   *string                   `json:"sender_id"`
-	Status                     *SearchResponseStatusEnum `json:"status"`
+	AccountID                  *string                   `json:"account_id,omitempty"`
+	Checks                     []SearchResponseChecks    `json:"checks,omitempty"`
+	Currency                   *string                   `json:"currency,omitempty"`
+	DateFinalized              *string                   `json:"date_finalized,omitempty"`
+	DateSubmitted              *string                   `json:"date_submitted,omitempty"`
+	EstimatedPriceMessagesSent *string                   `json:"estimated_price_messages_sent,omitempty"`
+	Events                     []SearchResponseEvents    `json:"events,omitempty"`
+	FirstEventDate             *string                   `json:"first_event_date,omitempty"`
+	LastEventDate              *string                   `json:"last_event_date,omitempty"`
+	Number                     *string                   `json:"number,omitempty"`
+	Price                      *string                   `json:"price,omitempty"`
+	RequestID                  *string                   `json:"request_id,omitempty"`
+	SenderID                   *string                   `json:"sender_id,omitempty"`
+	Status                     *SearchResponseStatusEnum `json:"status,omitempty"`
 }

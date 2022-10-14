@@ -1,9 +1,9 @@
 package shared
 
 type AbsenceEntitlementValueAttributes struct {
-	Entitlement *float64 `json:"entitlement"`
-	ID          *int64   `json:"id"`
-	Name        *string  `json:"name"`
+	Entitlement *float64 `json:"entitlement,omitempty"`
+	ID          *int64   `json:"id,omitempty"`
+	Name        *string  `json:"name,omitempty"`
 }
 
 type AbsenceEntitlementValueTypeEnum string
@@ -13,8 +13,8 @@ const (
 )
 
 type AbsenceEntitlementValue struct {
-	Attributes *AbsenceEntitlementValueAttributes `json:"attributes"`
-	Type       *AbsenceEntitlementValueTypeEnum   `json:"type"`
+	Attributes *AbsenceEntitlementValueAttributes `json:"attributes,omitempty"`
+	Type       *AbsenceEntitlementValueTypeEnum   `json:"type,omitempty"`
 }
 
 type AbsenceEntitlement struct {

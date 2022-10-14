@@ -13,33 +13,33 @@ const (
 
 type ObWriteInternationalConsent5DataAuthorisation struct {
 	AuthorisationType  ObWriteInternationalConsent5DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
-	CompletionDateTime *time.Time                                                         `json:"CompletionDateTime"`
+	CompletionDateTime *time.Time                                                         `json:"CompletionDateTime,omitempty"`
 }
 
 type ObWriteInternationalConsent5DataInitiationCreditor struct {
-	Name          *string           `json:"Name"`
-	PostalAddress *ObPostalAddress6 `json:"PostalAddress"`
+	Name          *string           `json:"Name,omitempty"`
+	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
 type ObWriteInternationalConsent5DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalConsent5DataInitiationCreditorAgent struct {
-	Identification *string           `json:"Identification"`
-	Name           *string           `json:"Name"`
-	PostalAddress  *ObPostalAddress6 `json:"PostalAddress"`
-	SchemeName     *string           `json:"SchemeName"`
+	Identification *string           `json:"Identification,omitempty"`
+	Name           *string           `json:"Name,omitempty"`
+	PostalAddress  *ObPostalAddress6 `json:"PostalAddress,omitempty"`
+	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
 type ObWriteInternationalConsent5DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalConsent5DataInitiationExchangeRateInformationRateTypeEnum string
@@ -51,8 +51,8 @@ const (
 )
 
 type ObWriteInternationalConsent5DataInitiationExchangeRateInformation struct {
-	ContractIdentification *string                                                                       `json:"ContractIdentification"`
-	ExchangeRate           *float64                                                                      `json:"ExchangeRate"`
+	ContractIdentification *string                                                                       `json:"ContractIdentification,omitempty"`
+	ExchangeRate           *float64                                                                      `json:"ExchangeRate,omitempty"`
 	RateType               ObWriteInternationalConsent5DataInitiationExchangeRateInformationRateTypeEnum `json:"RateType"`
 	UnitCurrency           string                                                                        `json:"UnitCurrency"`
 }
@@ -70,28 +70,28 @@ const (
 )
 
 type ObWriteInternationalConsent5DataInitiationRemittanceInformation struct {
-	Reference    *string `json:"Reference"`
-	Unstructured *string `json:"Unstructured"`
+	Reference    *string `json:"Reference,omitempty"`
+	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
 type ObWriteInternationalConsent5DataInitiation struct {
-	ChargeBearer              *ObChargeBearerType1CodeEnum                                       `json:"ChargeBearer"`
-	Creditor                  *ObWriteInternationalConsent5DataInitiationCreditor                `json:"Creditor"`
+	ChargeBearer              *ObChargeBearerType1CodeEnum                                       `json:"ChargeBearer,omitempty"`
+	Creditor                  *ObWriteInternationalConsent5DataInitiationCreditor                `json:"Creditor,omitempty"`
 	CreditorAccount           ObWriteInternationalConsent5DataInitiationCreditorAccount          `json:"CreditorAccount"`
-	CreditorAgent             *ObWriteInternationalConsent5DataInitiationCreditorAgent           `json:"CreditorAgent"`
+	CreditorAgent             *ObWriteInternationalConsent5DataInitiationCreditorAgent           `json:"CreditorAgent,omitempty"`
 	CurrencyOfTransfer        string                                                             `json:"CurrencyOfTransfer"`
-	DebtorAccount             *ObWriteInternationalConsent5DataInitiationDebtorAccount           `json:"DebtorAccount"`
-	DestinationCountryCode    *string                                                            `json:"DestinationCountryCode"`
+	DebtorAccount             *ObWriteInternationalConsent5DataInitiationDebtorAccount           `json:"DebtorAccount,omitempty"`
+	DestinationCountryCode    *string                                                            `json:"DestinationCountryCode,omitempty"`
 	EndToEndIdentification    string                                                             `json:"EndToEndIdentification"`
-	ExchangeRateInformation   *ObWriteInternationalConsent5DataInitiationExchangeRateInformation `json:"ExchangeRateInformation"`
-	ExtendedPurpose           *string                                                            `json:"ExtendedPurpose"`
+	ExchangeRateInformation   *ObWriteInternationalConsent5DataInitiationExchangeRateInformation `json:"ExchangeRateInformation,omitempty"`
+	ExtendedPurpose           *string                                                            `json:"ExtendedPurpose,omitempty"`
 	InstructedAmount          ObWriteInternationalConsent5DataInitiationInstructedAmount         `json:"InstructedAmount"`
 	InstructionIdentification string                                                             `json:"InstructionIdentification"`
-	InstructionPriority       *ObWriteInternationalConsent5DataInitiationInstructionPriorityEnum `json:"InstructionPriority"`
-	LocalInstrument           *string                                                            `json:"LocalInstrument"`
-	Purpose                   *string                                                            `json:"Purpose"`
-	RemittanceInformation     *ObWriteInternationalConsent5DataInitiationRemittanceInformation   `json:"RemittanceInformation"`
-	SupplementaryData         map[string]interface{}                                             `json:"SupplementaryData"`
+	InstructionPriority       *ObWriteInternationalConsent5DataInitiationInstructionPriorityEnum `json:"InstructionPriority,omitempty"`
+	LocalInstrument           *string                                                            `json:"LocalInstrument,omitempty"`
+	Purpose                   *string                                                            `json:"Purpose,omitempty"`
+	RemittanceInformation     *ObWriteInternationalConsent5DataInitiationRemittanceInformation   `json:"RemittanceInformation,omitempty"`
+	SupplementaryData         map[string]interface{}                                             `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteInternationalConsent5DataReadRefundAccountEnum string
@@ -102,10 +102,10 @@ const (
 )
 
 type ObWriteInternationalConsent5Data struct {
-	Authorisation     *ObWriteInternationalConsent5DataAuthorisation         `json:"Authorisation"`
+	Authorisation     *ObWriteInternationalConsent5DataAuthorisation         `json:"Authorisation,omitempty"`
 	Initiation        ObWriteInternationalConsent5DataInitiation             `json:"Initiation"`
-	ReadRefundAccount *ObWriteInternationalConsent5DataReadRefundAccountEnum `json:"ReadRefundAccount"`
-	ScaSupportData    *ObscaSupportData1                                     `json:"SCASupportData"`
+	ReadRefundAccount *ObWriteInternationalConsent5DataReadRefundAccountEnum `json:"ReadRefundAccount,omitempty"`
+	ScaSupportData    *ObscaSupportData1                                     `json:"SCASupportData,omitempty"`
 }
 
 type ObWriteInternationalConsent5 struct {

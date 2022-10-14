@@ -1,6 +1,6 @@
 package shared
 
 type MonitoringDestination struct {
-	Metrics           []string `json:"metrics"`
-	MonitoredResource *string  `json:"monitoredResource"`
+	Metrics           []string `json:"metrics,omitempty"`
+	MonitoredResource *string  `json:"monitoredResource,omitempty"`
 }

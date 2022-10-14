@@ -15,7 +15,7 @@ type CreateReplicationSetHeaders struct {
 }
 
 type CreateReplicationSetRequestBody struct {
-	ClientToken *string                               `json:"clientToken"`
+	ClientToken *string                               `json:"clientToken,omitempty"`
 	Regions     map[string]shared.RegionMapInputValue `json:"regions"`
 }
 

@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard struct {
-	ImageDisplayOptions *GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardImageDisplayOptionsEnum `json:"imageDisplayOptions"`
-	Items               []GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItem `json:"items"`
+	ImageDisplayOptions *GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardImageDisplayOptionsEnum `json:"imageDisplayOptions,omitempty"`
+	Items               []GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItem `json:"items,omitempty"`
 }

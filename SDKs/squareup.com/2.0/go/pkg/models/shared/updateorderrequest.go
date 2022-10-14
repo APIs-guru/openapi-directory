@@ -1,7 +1,7 @@
 package shared
 
 type UpdateOrderRequest struct {
-	FieldsToClear  []string `json:"fields_to_clear"`
-	IdempotencyKey *string  `json:"idempotency_key"`
-	Order          *Order   `json:"order"`
+	FieldsToClear  []string `json:"fields_to_clear,omitempty"`
+	IdempotencyKey *string  `json:"idempotency_key,omitempty"`
+	Order          *Order   `json:"order,omitempty"`
 }

@@ -5,7 +5,7 @@ type CombineOrganizationNetworksPathParams struct {
 }
 
 type CombineOrganizationNetworksRequestBody struct {
-	EnrollmentString *string  `json:"enrollmentString"`
+	EnrollmentString *string  `json:"enrollmentString,omitempty"`
 	Name             string   `json:"name"`
 	NetworkIds       []string `json:"networkIds"`
 }

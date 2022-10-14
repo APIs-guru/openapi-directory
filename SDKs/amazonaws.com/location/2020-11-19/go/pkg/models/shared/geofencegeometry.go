@@ -1,5 +1,5 @@
 package shared
 
 type GeofenceGeometry struct {
-	Polygon [][][]float64 `json:"Polygon"`
+	Polygon [][][]float64 `json:"Polygon,omitempty"`
 }

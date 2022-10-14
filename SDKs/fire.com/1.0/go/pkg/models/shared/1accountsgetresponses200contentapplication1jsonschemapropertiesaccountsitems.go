@@ -8,8 +8,8 @@ const (
 )
 
 type OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCurrency struct {
-	Code        *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCodeEnum `json:"code"`
-	Description *string                                                                                         `json:"description"`
+	Code        *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCodeEnum `json:"code,omitempty"`
+	Description *string                                                                                         `json:"description,omitempty"`
 }
 
 type OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsStatusEnum string
@@ -20,16 +20,16 @@ const (
 )
 
 type OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItems struct {
-	Balance             *int64                                                                                          `json:"balance"`
-	Cbic                *string                                                                                         `json:"cbic"`
-	Ccan                *string                                                                                         `json:"ccan"`
-	Ciban               *string                                                                                         `json:"ciban"`
-	Cnsc                *string                                                                                         `json:"cnsc"`
-	Colour              *string                                                                                         `json:"colour"`
-	Currency            *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCurrency `json:"currency"`
-	DefaultAccount      *bool                                                                                           `json:"defaultAccount"`
-	DirectDebitsAllowed *bool                                                                                           `json:"directDebitsAllowed"`
-	Ican                *int64                                                                                          `json:"ican"`
-	Name                *string                                                                                         `json:"name"`
-	Status              *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsStatusEnum       `json:"status"`
+	Balance             *int64                                                                                          `json:"balance,omitempty"`
+	Cbic                *string                                                                                         `json:"cbic,omitempty"`
+	Ccan                *string                                                                                         `json:"ccan,omitempty"`
+	Ciban               *string                                                                                         `json:"ciban,omitempty"`
+	Cnsc                *string                                                                                         `json:"cnsc,omitempty"`
+	Colour              *string                                                                                         `json:"colour,omitempty"`
+	Currency            *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCurrency `json:"currency,omitempty"`
+	DefaultAccount      *bool                                                                                           `json:"defaultAccount,omitempty"`
+	DirectDebitsAllowed *bool                                                                                           `json:"directDebitsAllowed,omitempty"`
+	Ican                *int64                                                                                          `json:"ican,omitempty"`
+	Name                *string                                                                                         `json:"name,omitempty"`
+	Status              *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsStatusEnum       `json:"status,omitempty"`
 }

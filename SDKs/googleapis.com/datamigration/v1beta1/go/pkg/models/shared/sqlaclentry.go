@@ -1,8 +1,8 @@
 package shared
 
 type SQLACLEntry struct {
-	ExpireTime *string `json:"expireTime"`
-	Label      *string `json:"label"`
-	TTL        *string `json:"ttl"`
-	Value      *string `json:"value"`
+	ExpireTime *string `json:"expireTime,omitempty"`
+	Label      *string `json:"label,omitempty"`
+	TTL        *string `json:"ttl,omitempty"`
+	Value      *string `json:"value,omitempty"`
 }

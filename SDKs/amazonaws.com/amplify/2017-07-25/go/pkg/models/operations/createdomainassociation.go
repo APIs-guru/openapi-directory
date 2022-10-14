@@ -19,10 +19,10 @@ type CreateDomainAssociationHeaders struct {
 }
 
 type CreateDomainAssociationRequestBody struct {
-	AutoSubDomainCreationPatterns []string                  `json:"autoSubDomainCreationPatterns"`
-	AutoSubDomainIamRole          *string                   `json:"autoSubDomainIAMRole"`
+	AutoSubDomainCreationPatterns []string                  `json:"autoSubDomainCreationPatterns,omitempty"`
+	AutoSubDomainIamRole          *string                   `json:"autoSubDomainIAMRole,omitempty"`
 	DomainName                    string                    `json:"domainName"`
-	EnableAutoSubDomain           *bool                     `json:"enableAutoSubDomain"`
+	EnableAutoSubDomain           *bool                     `json:"enableAutoSubDomain,omitempty"`
 	SubDomainSettings             []shared.SubDomainSetting `json:"subDomainSettings"`
 }
 

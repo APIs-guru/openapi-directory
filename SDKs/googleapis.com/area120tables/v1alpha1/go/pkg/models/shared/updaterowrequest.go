@@ -8,7 +8,7 @@ const (
 )
 
 type UpdateRowRequest struct {
-	Row        *Row                      `json:"row"`
-	UpdateMask *string                   `json:"updateMask"`
-	View       *UpdateRowRequestViewEnum `json:"view"`
+	Row        *Row                      `json:"row,omitempty"`
+	UpdateMask *string                   `json:"updateMask,omitempty"`
+	View       *UpdateRowRequestViewEnum `json:"view,omitempty"`
 }

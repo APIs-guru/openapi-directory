@@ -20,6 +20,6 @@ type ObFundsConfirmationResponse1Data struct {
 
 type ObFundsConfirmationResponse1 struct {
 	Data  ObFundsConfirmationResponse1Data `json:"Data"`
-	Links *Links                           `json:"Links"`
-	Meta  *Meta                            `json:"Meta"`
+	Links *Links                           `json:"Links,omitempty"`
+	Meta  *Meta                            `json:"Meta,omitempty"`
 }

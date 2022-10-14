@@ -1,7 +1,7 @@
 package shared
 
 type DeleteColumnStatisticsForPartitionRequest struct {
-	CatalogID       *string  `json:"CatalogId"`
+	CatalogID       *string  `json:"CatalogId,omitempty"`
 	ColumnName      string   `json:"ColumnName"`
 	DatabaseName    string   `json:"DatabaseName"`
 	PartitionValues []string `json:"PartitionValues"`

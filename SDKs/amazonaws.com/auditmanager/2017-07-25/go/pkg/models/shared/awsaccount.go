@@ -1,7 +1,7 @@
 package shared
 
 type AwsAccount struct {
-	EmailAddress *string `json:"emailAddress"`
-	ID           *string `json:"id"`
-	Name         *string `json:"name"`
+	EmailAddress *string `json:"emailAddress,omitempty"`
+	ID           *string `json:"id,omitempty"`
+	Name         *string `json:"name,omitempty"`
 }

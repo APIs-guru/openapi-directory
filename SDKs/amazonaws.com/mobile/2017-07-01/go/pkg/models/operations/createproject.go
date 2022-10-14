@@ -21,7 +21,7 @@ type CreateProjectHeaders struct {
 }
 
 type CreateProjectRequestBody struct {
-	Contents *string `json:"contents"`
+	Contents *string `json:"contents,omitempty"`
 }
 
 type CreateProjectRequest struct {

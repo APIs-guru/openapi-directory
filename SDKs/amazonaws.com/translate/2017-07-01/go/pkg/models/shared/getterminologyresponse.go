@@ -1,6 +1,6 @@
 package shared
 
 type GetTerminologyResponse struct {
-	TerminologyDataLocation *TerminologyDataLocation `json:"TerminologyDataLocation"`
-	TerminologyProperties   *TerminologyProperties   `json:"TerminologyProperties"`
+	TerminologyDataLocation *TerminologyDataLocation `json:"TerminologyDataLocation,omitempty"`
+	TerminologyProperties   *TerminologyProperties   `json:"TerminologyProperties,omitempty"`
 }

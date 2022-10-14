@@ -5,8 +5,8 @@ import (
 )
 
 type DatasetGroupSummary struct {
-	CreationTime         *time.Time `json:"CreationTime"`
-	DatasetGroupArn      *string    `json:"DatasetGroupArn"`
-	DatasetGroupName     *string    `json:"DatasetGroupName"`
-	LastModificationTime *time.Time `json:"LastModificationTime"`
+	CreationTime         *time.Time `json:"CreationTime,omitempty"`
+	DatasetGroupArn      *string    `json:"DatasetGroupArn,omitempty"`
+	DatasetGroupName     *string    `json:"DatasetGroupName,omitempty"`
+	LastModificationTime *time.Time `json:"LastModificationTime,omitempty"`
 }

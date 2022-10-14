@@ -1,6 +1,6 @@
 package shared
 
 type ReturnPolicyResponse struct {
-	ReturnPolicies []ReturnPolicy `json:"returnPolicies"`
-	Warnings       []Error        `json:"warnings"`
+	ReturnPolicies []ReturnPolicy `json:"returnPolicies,omitempty"`
+	Warnings       []Error        `json:"warnings,omitempty"`
 }

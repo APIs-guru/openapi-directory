@@ -19,9 +19,9 @@ const (
 )
 
 type GoogleCloudPolicytroubleshooterV1betaExplainedPolicy struct {
-	Access              *GoogleCloudPolicytroubleshooterV1betaExplainedPolicyAccessEnum    `json:"access"`
-	BindingExplanations []GoogleCloudPolicytroubleshooterV1betaBindingExplanation          `json:"bindingExplanations"`
-	FullResourceName    *string                                                            `json:"fullResourceName"`
-	Policy              *GoogleIamV1Policy                                                 `json:"policy"`
-	Relevance           *GoogleCloudPolicytroubleshooterV1betaExplainedPolicyRelevanceEnum `json:"relevance"`
+	Access              *GoogleCloudPolicytroubleshooterV1betaExplainedPolicyAccessEnum    `json:"access,omitempty"`
+	BindingExplanations []GoogleCloudPolicytroubleshooterV1betaBindingExplanation          `json:"bindingExplanations,omitempty"`
+	FullResourceName    *string                                                            `json:"fullResourceName,omitempty"`
+	Policy              *GoogleIamV1Policy                                                 `json:"policy,omitempty"`
+	Relevance           *GoogleCloudPolicytroubleshooterV1betaExplainedPolicyRelevanceEnum `json:"relevance,omitempty"`
 }

@@ -13,7 +13,7 @@ type AddCustomFieldSettingForProjectQueryParams struct {
 }
 
 type AddCustomFieldSettingForProjectRequestBody struct {
-	Data *shared.AddCustomFieldSettingRequest `json:"data"`
+	Data *shared.AddCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
 type AddCustomFieldSettingForProjectRequest struct {
@@ -23,7 +23,7 @@ type AddCustomFieldSettingForProjectRequest struct {
 }
 
 type AddCustomFieldSettingForProject200ApplicationJSON struct {
-	Data *shared.CustomFieldSettingResponse `json:"data"`
+	Data *shared.CustomFieldSettingResponse `json:"data,omitempty"`
 }
 
 type AddCustomFieldSettingForProjectResponse struct {

@@ -11,7 +11,7 @@ type UpdateAuditStreamConfigurationHeaders struct {
 }
 
 type UpdateAuditStreamConfigurationRequestBody struct {
-	AuditStreamArn *string `json:"AuditStreamArn"`
+	AuditStreamArn *string `json:"AuditStreamArn,omitempty"`
 	FleetArn       string  `json:"FleetArn"`
 }
 

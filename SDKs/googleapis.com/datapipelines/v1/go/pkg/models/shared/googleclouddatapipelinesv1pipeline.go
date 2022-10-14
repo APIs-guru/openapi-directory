@@ -20,15 +20,15 @@ const (
 )
 
 type GoogleCloudDatapipelinesV1Pipeline struct {
-	CreateTime                   *string                                      `json:"createTime"`
-	DisplayName                  *string                                      `json:"displayName"`
-	JobCount                     *int32                                       `json:"jobCount"`
-	LastUpdateTime               *string                                      `json:"lastUpdateTime"`
-	Name                         *string                                      `json:"name"`
-	PipelineSources              map[string]string                            `json:"pipelineSources"`
-	ScheduleInfo                 *GoogleCloudDatapipelinesV1ScheduleSpec      `json:"scheduleInfo"`
-	SchedulerServiceAccountEmail *string                                      `json:"schedulerServiceAccountEmail"`
-	State                        *GoogleCloudDatapipelinesV1PipelineStateEnum `json:"state"`
-	Type                         *GoogleCloudDatapipelinesV1PipelineTypeEnum  `json:"type"`
-	Workload                     *GoogleCloudDatapipelinesV1Workload          `json:"workload"`
+	CreateTime                   *string                                      `json:"createTime,omitempty"`
+	DisplayName                  *string                                      `json:"displayName,omitempty"`
+	JobCount                     *int32                                       `json:"jobCount,omitempty"`
+	LastUpdateTime               *string                                      `json:"lastUpdateTime,omitempty"`
+	Name                         *string                                      `json:"name,omitempty"`
+	PipelineSources              map[string]string                            `json:"pipelineSources,omitempty"`
+	ScheduleInfo                 *GoogleCloudDatapipelinesV1ScheduleSpec      `json:"scheduleInfo,omitempty"`
+	SchedulerServiceAccountEmail *string                                      `json:"schedulerServiceAccountEmail,omitempty"`
+	State                        *GoogleCloudDatapipelinesV1PipelineStateEnum `json:"state,omitempty"`
+	Type                         *GoogleCloudDatapipelinesV1PipelineTypeEnum  `json:"type,omitempty"`
+	Workload                     *GoogleCloudDatapipelinesV1Workload          `json:"workload,omitempty"`
 }

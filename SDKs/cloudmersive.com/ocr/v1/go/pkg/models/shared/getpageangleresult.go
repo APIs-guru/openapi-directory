@@ -1,6 +1,6 @@
 package shared
 
 type GetPageAngleResult struct {
-	Angle      *float64 `json:"Angle"`
-	Successful *bool    `json:"Successful"`
+	Angle      *float64 `json:"Angle,omitempty"`
+	Successful *bool    `json:"Successful,omitempty"`
 }

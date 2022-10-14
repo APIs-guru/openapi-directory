@@ -1,8 +1,8 @@
 package shared
 
 type RegionResolvers struct {
-	Ipv4 *string `json:"ipv4"`
-	Ipv6 *string `json:"ipv6"`
+	Ipv4 *string `json:"ipv4,omitempty"`
+	Ipv6 *string `json:"ipv6,omitempty"`
 }
 
 type RegionStatusEnum string
@@ -13,9 +13,9 @@ const (
 )
 
 type Region struct {
-	Capabilities []string          `json:"capabilities"`
-	Country      *string           `json:"country"`
-	ID           *string           `json:"id"`
-	Resolvers    *RegionResolvers  `json:"resolvers"`
-	Status       *RegionStatusEnum `json:"status"`
+	Capabilities []string          `json:"capabilities,omitempty"`
+	Country      *string           `json:"country,omitempty"`
+	ID           *string           `json:"id,omitempty"`
+	Resolvers    *RegionResolvers  `json:"resolvers,omitempty"`
+	Status       *RegionStatusEnum `json:"status,omitempty"`
 }

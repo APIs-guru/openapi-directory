@@ -1,7 +1,7 @@
 package shared
 
 type PageMetadata struct {
-	Description *string  `json:"description"`
-	Keywords    []string `json:"keywords"`
-	Segments    []string `json:"segments"`
+	Description *string  `json:"description,omitempty"`
+	Keywords    []string `json:"keywords,omitempty"`
+	Segments    []string `json:"segments,omitempty"`
 }

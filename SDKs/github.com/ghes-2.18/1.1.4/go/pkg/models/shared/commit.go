@@ -15,7 +15,7 @@ type CommitAuthorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -23,15 +23,15 @@ type CommitAuthorSimpleUser struct {
 }
 
 type CommitCommitAuthorGitUser struct {
-	Date  *string `json:"date"`
-	Email *string `json:"email"`
-	Name  *string `json:"name"`
+	Date  *string `json:"date,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type CommitCommitCommitterGitUser struct {
-	Date  *string `json:"date"`
-	Email *string `json:"email"`
-	Name  *string `json:"name"`
+	Date  *string `json:"date,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type CommitCommitTree struct {
@@ -46,7 +46,7 @@ type CommitCommit struct {
 	Message      string                       `json:"message"`
 	Tree         CommitCommitTree             `json:"tree"`
 	URL          string                       `json:"url"`
-	Verification *Verification                `json:"verification"`
+	Verification *Verification                `json:"verification,omitempty"`
 }
 
 type CommitCommitterSimpleUser struct {
@@ -64,7 +64,7 @@ type CommitCommitterSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -72,29 +72,29 @@ type CommitCommitterSimpleUser struct {
 }
 
 type CommitFiles struct {
-	Additions        *int64  `json:"additions"`
-	BlobURL          *string `json:"blob_url"`
-	Changes          *int64  `json:"changes"`
-	ContentsURL      *string `json:"contents_url"`
-	Deletions        *int64  `json:"deletions"`
-	Filename         *string `json:"filename"`
-	Patch            *string `json:"patch"`
-	PreviousFilename *string `json:"previous_filename"`
-	RawURL           *string `json:"raw_url"`
-	Sha              *string `json:"sha"`
-	Status           *string `json:"status"`
+	Additions        *int64  `json:"additions,omitempty"`
+	BlobURL          *string `json:"blob_url,omitempty"`
+	Changes          *int64  `json:"changes,omitempty"`
+	ContentsURL      *string `json:"contents_url,omitempty"`
+	Deletions        *int64  `json:"deletions,omitempty"`
+	Filename         *string `json:"filename,omitempty"`
+	Patch            *string `json:"patch,omitempty"`
+	PreviousFilename *string `json:"previous_filename,omitempty"`
+	RawURL           *string `json:"raw_url,omitempty"`
+	Sha              *string `json:"sha,omitempty"`
+	Status           *string `json:"status,omitempty"`
 }
 
 type CommitParents struct {
-	HTMLURL *string `json:"html_url"`
+	HTMLURL *string `json:"html_url,omitempty"`
 	Sha     string  `json:"sha"`
 	URL     string  `json:"url"`
 }
 
 type CommitStats struct {
-	Additions *int64 `json:"additions"`
-	Deletions *int64 `json:"deletions"`
-	Total     *int64 `json:"total"`
+	Additions *int64 `json:"additions,omitempty"`
+	Deletions *int64 `json:"deletions,omitempty"`
+	Total     *int64 `json:"total,omitempty"`
 }
 
 type Commit struct {
@@ -102,11 +102,11 @@ type Commit struct {
 	CommentsURL string                    `json:"comments_url"`
 	Commit      CommitCommit              `json:"commit"`
 	Committer   CommitCommitterSimpleUser `json:"committer"`
-	Files       []CommitFiles             `json:"files"`
+	Files       []CommitFiles             `json:"files,omitempty"`
 	HTMLURL     string                    `json:"html_url"`
 	NodeID      string                    `json:"node_id"`
 	Parents     []CommitParents           `json:"parents"`
 	Sha         string                    `json:"sha"`
-	Stats       *CommitStats              `json:"stats"`
+	Stats       *CommitStats              `json:"stats,omitempty"`
 	URL         string                    `json:"url"`
 }

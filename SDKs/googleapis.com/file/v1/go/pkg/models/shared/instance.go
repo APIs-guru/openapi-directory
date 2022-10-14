@@ -33,17 +33,17 @@ const (
 )
 
 type Instance struct {
-	CreateTime        *string                         `json:"createTime"`
-	Description       *string                         `json:"description"`
-	Etag              *string                         `json:"etag"`
-	FileShares        []FileShareConfig               `json:"fileShares"`
-	KmsKeyName        *string                         `json:"kmsKeyName"`
-	Labels            map[string]string               `json:"labels"`
-	Name              *string                         `json:"name"`
-	Networks          []NetworkConfig                 `json:"networks"`
-	SatisfiesPzs      *bool                           `json:"satisfiesPzs"`
-	State             *InstanceStateEnum              `json:"state"`
-	StatusMessage     *string                         `json:"statusMessage"`
-	SuspensionReasons []InstanceSuspensionReasonsEnum `json:"suspensionReasons"`
-	Tier              *InstanceTierEnum               `json:"tier"`
+	CreateTime        *string                         `json:"createTime,omitempty"`
+	Description       *string                         `json:"description,omitempty"`
+	Etag              *string                         `json:"etag,omitempty"`
+	FileShares        []FileShareConfig               `json:"fileShares,omitempty"`
+	KmsKeyName        *string                         `json:"kmsKeyName,omitempty"`
+	Labels            map[string]string               `json:"labels,omitempty"`
+	Name              *string                         `json:"name,omitempty"`
+	Networks          []NetworkConfig                 `json:"networks,omitempty"`
+	SatisfiesPzs      *bool                           `json:"satisfiesPzs,omitempty"`
+	State             *InstanceStateEnum              `json:"state,omitempty"`
+	StatusMessage     *string                         `json:"statusMessage,omitempty"`
+	SuspensionReasons []InstanceSuspensionReasonsEnum `json:"suspensionReasons,omitempty"`
+	Tier              *InstanceTierEnum               `json:"tier,omitempty"`
 }

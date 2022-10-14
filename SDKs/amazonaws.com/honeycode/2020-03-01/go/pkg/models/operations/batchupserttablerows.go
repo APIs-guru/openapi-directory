@@ -20,7 +20,7 @@ type BatchUpsertTableRowsHeaders struct {
 }
 
 type BatchUpsertTableRowsRequestBody struct {
-	ClientRequestToken *string                `json:"clientRequestToken"`
+	ClientRequestToken *string                `json:"clientRequestToken,omitempty"`
 	RowsToUpsert       []shared.UpsertRowData `json:"rowsToUpsert"`
 }
 

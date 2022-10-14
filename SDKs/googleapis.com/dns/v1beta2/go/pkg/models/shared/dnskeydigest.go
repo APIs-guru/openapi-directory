@@ -9,6 +9,6 @@ const (
 )
 
 type DNSKeyDigest struct {
-	Digest *string               `json:"digest"`
-	Type   *DNSKeyDigestTypeEnum `json:"type"`
+	Digest *string               `json:"digest,omitempty"`
+	Type   *DNSKeyDigestTypeEnum `json:"type,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeRxNormInferenceJobResponse struct {
-	ComprehendMedicalAsyncJobProperties *ComprehendMedicalAsyncJobProperties `json:"ComprehendMedicalAsyncJobProperties"`
+	ComprehendMedicalAsyncJobProperties *ComprehendMedicalAsyncJobProperties `json:"ComprehendMedicalAsyncJobProperties,omitempty"`
 }

@@ -14,11 +14,11 @@ const (
 )
 
 type SearchResultSnippet struct {
-	ChannelID            *string                                      `json:"channelId"`
-	ChannelTitle         *string                                      `json:"channelTitle"`
-	Description          *string                                      `json:"description"`
-	LiveBroadcastContent *SearchResultSnippetLiveBroadcastContentEnum `json:"liveBroadcastContent"`
-	PublishedAt          *time.Time                                   `json:"publishedAt"`
-	Thumbnails           *ThumbnailDetails                            `json:"thumbnails"`
-	Title                *string                                      `json:"title"`
+	ChannelID            *string                                      `json:"channelId,omitempty"`
+	ChannelTitle         *string                                      `json:"channelTitle,omitempty"`
+	Description          *string                                      `json:"description,omitempty"`
+	LiveBroadcastContent *SearchResultSnippetLiveBroadcastContentEnum `json:"liveBroadcastContent,omitempty"`
+	PublishedAt          *time.Time                                   `json:"publishedAt,omitempty"`
+	Thumbnails           *ThumbnailDetails                            `json:"thumbnails,omitempty"`
+	Title                *string                                      `json:"title,omitempty"`
 }

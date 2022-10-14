@@ -5,19 +5,19 @@ type UpdatePagePropertiesPathParams struct {
 }
 
 type UpdatePagePropertiesRequestBodyPropertiesStatusSelect struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdatePagePropertiesRequestBodyPropertiesStatus struct {
-	Select *UpdatePagePropertiesRequestBodyPropertiesStatusSelect `json:"select"`
+	Select *UpdatePagePropertiesRequestBodyPropertiesStatusSelect `json:"select,omitempty"`
 }
 
 type UpdatePagePropertiesRequestBodyProperties struct {
-	Status *UpdatePagePropertiesRequestBodyPropertiesStatus `json:"Status"`
+	Status *UpdatePagePropertiesRequestBodyPropertiesStatus `json:"Status,omitempty"`
 }
 
 type UpdatePagePropertiesRequestBody struct {
-	Properties *UpdatePagePropertiesRequestBodyProperties `json:"properties"`
+	Properties *UpdatePagePropertiesRequestBodyProperties `json:"properties,omitempty"`
 }
 
 type UpdatePagePropertiesRequest struct {
@@ -26,170 +26,170 @@ type UpdatePagePropertiesRequest struct {
 }
 
 type UpdatePageProperties200ApplicationJSONParent struct {
-	DatabaseID *string `json:"database_id"`
-	Type       *string `json:"type"`
+	DatabaseID *string `json:"database_id,omitempty"`
+	Type       *string `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesAuthorMultiSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesAuthor struct {
-	ID          *string                                                             `json:"id"`
-	MultiSelect []UpdatePageProperties200ApplicationJSONPropertiesAuthorMultiSelect `json:"multi_select"`
-	Type        *string                                                             `json:"type"`
+	ID          *string                                                             `json:"id,omitempty"`
+	MultiSelect []UpdatePageProperties200ApplicationJSONPropertiesAuthorMultiSelect `json:"multi_select,omitempty"`
+	Type        *string                                                             `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesLink struct {
-	ID   *string `json:"id"`
-	Type *string `json:"type"`
-	URL  *string `json:"url"`
+	ID   *string `json:"id,omitempty"`
+	Type *string `json:"type,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesNameTitleAnnotations struct {
-	Bold          *bool   `json:"bold"`
-	Code          *bool   `json:"code"`
-	Color         *string `json:"color"`
-	Italic        *bool   `json:"italic"`
-	Strikethrough *bool   `json:"strikethrough"`
-	Underline     *bool   `json:"underline"`
+	Bold          *bool   `json:"bold,omitempty"`
+	Code          *bool   `json:"code,omitempty"`
+	Color         *string `json:"color,omitempty"`
+	Italic        *bool   `json:"italic,omitempty"`
+	Strikethrough *bool   `json:"strikethrough,omitempty"`
+	Underline     *bool   `json:"underline,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesNameTitleText struct {
-	Content *string      `json:"content"`
-	Link    *interface{} `json:"link"`
+	Content *string      `json:"content,omitempty"`
+	Link    *interface{} `json:"link,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesNameTitle struct {
-	Annotations *UpdatePageProperties200ApplicationJSONPropertiesNameTitleAnnotations `json:"annotations"`
-	Href        *interface{}                                                          `json:"href"`
-	PlainText   *string                                                               `json:"plain_text"`
-	Text        *UpdatePageProperties200ApplicationJSONPropertiesNameTitleText        `json:"text"`
-	Type        *string                                                               `json:"type"`
+	Annotations *UpdatePageProperties200ApplicationJSONPropertiesNameTitleAnnotations `json:"annotations,omitempty"`
+	Href        *interface{}                                                          `json:"href,omitempty"`
+	PlainText   *string                                                               `json:"plain_text,omitempty"`
+	Text        *UpdatePageProperties200ApplicationJSONPropertiesNameTitleText        `json:"text,omitempty"`
+	Type        *string                                                               `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesName struct {
-	ID    *string                                                     `json:"id"`
-	Title []UpdatePageProperties200ApplicationJSONPropertiesNameTitle `json:"title"`
-	Type  *string                                                     `json:"type"`
+	ID    *string                                                     `json:"id,omitempty"`
+	Title []UpdatePageProperties200ApplicationJSONPropertiesNameTitle `json:"title,omitempty"`
+	Type  *string                                                     `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesPublisherSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesPublisher struct {
-	ID     *string                                                          `json:"id"`
-	Select *UpdatePageProperties200ApplicationJSONPropertiesPublisherSelect `json:"select"`
-	Type   *string                                                          `json:"type"`
+	ID     *string                                                          `json:"id,omitempty"`
+	Select *UpdatePageProperties200ApplicationJSONPropertiesPublisherSelect `json:"select,omitempty"`
+	Type   *string                                                          `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesPublishingReleaseDateDate struct {
-	End   *interface{} `json:"end"`
-	Start *string      `json:"start"`
+	End   *interface{} `json:"end,omitempty"`
+	Start *string      `json:"start,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesPublishingReleaseDate struct {
-	Date *UpdatePageProperties200ApplicationJSONPropertiesPublishingReleaseDateDate `json:"date"`
-	ID   *string                                                                    `json:"id"`
-	Type *string                                                                    `json:"type"`
+	Date *UpdatePageProperties200ApplicationJSONPropertiesPublishingReleaseDateDate `json:"date,omitempty"`
+	ID   *string                                                                    `json:"id,omitempty"`
+	Type *string                                                                    `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesRead struct {
-	Checkbox *bool   `json:"checkbox"`
-	ID       *string `json:"id"`
-	Type     *string `json:"type"`
+	Checkbox *bool   `json:"checkbox,omitempty"`
+	ID       *string `json:"id,omitempty"`
+	Type     *string `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesScore5Select struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesScore5 struct {
-	ID     *string                                                       `json:"id"`
-	Select *UpdatePageProperties200ApplicationJSONPropertiesScore5Select `json:"select"`
-	Type   *string                                                       `json:"type"`
+	ID     *string                                                       `json:"id,omitempty"`
+	Select *UpdatePageProperties200ApplicationJSONPropertiesScore5Select `json:"select,omitempty"`
+	Type   *string                                                       `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesStatusSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesStatus struct {
-	ID     *string                                                       `json:"id"`
-	Select *UpdatePageProperties200ApplicationJSONPropertiesStatusSelect `json:"select"`
-	Type   *string                                                       `json:"type"`
+	ID     *string                                                       `json:"id,omitempty"`
+	Select *UpdatePageProperties200ApplicationJSONPropertiesStatusSelect `json:"select,omitempty"`
+	Type   *string                                                       `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesSummaryRichTextAnnotations struct {
-	Bold          *bool   `json:"bold"`
-	Code          *bool   `json:"code"`
-	Color         *string `json:"color"`
-	Italic        *bool   `json:"italic"`
-	Strikethrough *bool   `json:"strikethrough"`
-	Underline     *bool   `json:"underline"`
+	Bold          *bool   `json:"bold,omitempty"`
+	Code          *bool   `json:"code,omitempty"`
+	Color         *string `json:"color,omitempty"`
+	Italic        *bool   `json:"italic,omitempty"`
+	Strikethrough *bool   `json:"strikethrough,omitempty"`
+	Underline     *bool   `json:"underline,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesSummaryRichTextText struct {
-	Content *string      `json:"content"`
-	Link    *interface{} `json:"link"`
+	Content *string      `json:"content,omitempty"`
+	Link    *interface{} `json:"link,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesSummaryRichText struct {
-	Annotations *UpdatePageProperties200ApplicationJSONPropertiesSummaryRichTextAnnotations `json:"annotations"`
-	Href        *interface{}                                                                `json:"href"`
-	PlainText   *string                                                                     `json:"plain_text"`
-	Text        *UpdatePageProperties200ApplicationJSONPropertiesSummaryRichTextText        `json:"text"`
-	Type        *string                                                                     `json:"type"`
+	Annotations *UpdatePageProperties200ApplicationJSONPropertiesSummaryRichTextAnnotations `json:"annotations,omitempty"`
+	Href        *interface{}                                                                `json:"href,omitempty"`
+	PlainText   *string                                                                     `json:"plain_text,omitempty"`
+	Text        *UpdatePageProperties200ApplicationJSONPropertiesSummaryRichTextText        `json:"text,omitempty"`
+	Type        *string                                                                     `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesSummary struct {
-	ID       *string                                                           `json:"id"`
-	RichText []UpdatePageProperties200ApplicationJSONPropertiesSummaryRichText `json:"rich_text"`
-	Type     *string                                                           `json:"type"`
+	ID       *string                                                           `json:"id,omitempty"`
+	RichText []UpdatePageProperties200ApplicationJSONPropertiesSummaryRichText `json:"rich_text,omitempty"`
+	Type     *string                                                           `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesTypeSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONPropertiesType struct {
-	ID     *string                                                     `json:"id"`
-	Select *UpdatePageProperties200ApplicationJSONPropertiesTypeSelect `json:"select"`
-	Type   *string                                                     `json:"type"`
+	ID     *string                                                     `json:"id,omitempty"`
+	Select *UpdatePageProperties200ApplicationJSONPropertiesTypeSelect `json:"select,omitempty"`
+	Type   *string                                                     `json:"type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSONProperties struct {
-	Author                *UpdatePageProperties200ApplicationJSONPropertiesAuthor                `json:"Author"`
-	Link                  *UpdatePageProperties200ApplicationJSONPropertiesLink                  `json:"Link"`
-	Name                  *UpdatePageProperties200ApplicationJSONPropertiesName                  `json:"Name"`
-	Publisher             *UpdatePageProperties200ApplicationJSONPropertiesPublisher             `json:"Publisher"`
-	PublishingReleaseDate *UpdatePageProperties200ApplicationJSONPropertiesPublishingReleaseDate `json:"Publishing/Release Date"`
-	Read                  *UpdatePageProperties200ApplicationJSONPropertiesRead                  `json:"Read"`
-	Score5                *UpdatePageProperties200ApplicationJSONPropertiesScore5                `json:"Score /5"`
-	Status                *UpdatePageProperties200ApplicationJSONPropertiesStatus                `json:"Status"`
-	Summary               *UpdatePageProperties200ApplicationJSONPropertiesSummary               `json:"Summary"`
-	Type                  *UpdatePageProperties200ApplicationJSONPropertiesType                  `json:"Type"`
+	Author                *UpdatePageProperties200ApplicationJSONPropertiesAuthor                `json:"Author,omitempty"`
+	Link                  *UpdatePageProperties200ApplicationJSONPropertiesLink                  `json:"Link,omitempty"`
+	Name                  *UpdatePageProperties200ApplicationJSONPropertiesName                  `json:"Name,omitempty"`
+	Publisher             *UpdatePageProperties200ApplicationJSONPropertiesPublisher             `json:"Publisher,omitempty"`
+	PublishingReleaseDate *UpdatePageProperties200ApplicationJSONPropertiesPublishingReleaseDate `json:"Publishing/Release Date,omitempty"`
+	Read                  *UpdatePageProperties200ApplicationJSONPropertiesRead                  `json:"Read,omitempty"`
+	Score5                *UpdatePageProperties200ApplicationJSONPropertiesScore5                `json:"Score /5,omitempty"`
+	Status                *UpdatePageProperties200ApplicationJSONPropertiesStatus                `json:"Status,omitempty"`
+	Summary               *UpdatePageProperties200ApplicationJSONPropertiesSummary               `json:"Summary,omitempty"`
+	Type                  *UpdatePageProperties200ApplicationJSONPropertiesType                  `json:"Type,omitempty"`
 }
 
 type UpdatePageProperties200ApplicationJSON struct {
-	Archived       *bool                                             `json:"archived"`
-	CreatedTime    *string                                           `json:"created_time"`
-	ID             *string                                           `json:"id"`
-	LastEditedTime *string                                           `json:"last_edited_time"`
-	Object         *string                                           `json:"object"`
-	Parent         *UpdatePageProperties200ApplicationJSONParent     `json:"parent"`
-	Properties     *UpdatePageProperties200ApplicationJSONProperties `json:"properties"`
+	Archived       *bool                                             `json:"archived,omitempty"`
+	CreatedTime    *string                                           `json:"created_time,omitempty"`
+	ID             *string                                           `json:"id,omitempty"`
+	LastEditedTime *string                                           `json:"last_edited_time,omitempty"`
+	Object         *string                                           `json:"object,omitempty"`
+	Parent         *UpdatePageProperties200ApplicationJSONParent     `json:"parent,omitempty"`
+	Properties     *UpdatePageProperties200ApplicationJSONProperties `json:"properties,omitempty"`
 }
 
 type UpdatePagePropertiesResponse struct {

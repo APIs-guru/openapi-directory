@@ -12,5 +12,5 @@ const (
 )
 
 type ScanRunWarningTrace struct {
-	Code *ScanRunWarningTraceCodeEnum `json:"code"`
+	Code *ScanRunWarningTraceCodeEnum `json:"code,omitempty"`
 }

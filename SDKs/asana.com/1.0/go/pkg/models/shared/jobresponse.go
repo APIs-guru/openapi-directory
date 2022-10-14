@@ -10,10 +10,10 @@ const (
 )
 
 type JobResponse struct {
-	Gid             *string                `json:"gid"`
-	NewProject      *ProjectCompact        `json:"new_project"`
-	NewTask         *TaskCompact           `json:"new_task"`
-	ResourceSubtype *string                `json:"resource_subtype"`
-	ResourceType    *string                `json:"resource_type"`
-	Status          *JobResponseStatusEnum `json:"status"`
+	Gid             *string                `json:"gid,omitempty"`
+	NewProject      *ProjectCompact        `json:"new_project,omitempty"`
+	NewTask         *TaskCompact           `json:"new_task,omitempty"`
+	ResourceSubtype *string                `json:"resource_subtype,omitempty"`
+	ResourceType    *string                `json:"resource_type,omitempty"`
+	Status          *JobResponseStatusEnum `json:"status,omitempty"`
 }

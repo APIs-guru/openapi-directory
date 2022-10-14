@@ -1,8 +1,8 @@
 package shared
 
 type SecurityKey struct {
-	PrivateKey         *string             `json:"privateKey"`
-	PublicKey          *string             `json:"publicKey"`
-	UniversalTwoFactor *UniversalTwoFactor `json:"universalTwoFactor"`
-	WebAuthn           *WebAuthn           `json:"webAuthn"`
+	PrivateKey         *string             `json:"privateKey,omitempty"`
+	PublicKey          *string             `json:"publicKey,omitempty"`
+	UniversalTwoFactor *UniversalTwoFactor `json:"universalTwoFactor,omitempty"`
+	WebAuthn           *WebAuthn           `json:"webAuthn,omitempty"`
 }

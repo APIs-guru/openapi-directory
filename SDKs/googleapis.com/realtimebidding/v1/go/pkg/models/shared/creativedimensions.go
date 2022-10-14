@@ -1,6 +1,6 @@
 package shared
 
 type CreativeDimensions struct {
-	Height *string `json:"height"`
-	Width  *string `json:"width"`
+	Height *string `json:"height,omitempty"`
+	Width  *string `json:"width,omitempty"`
 }

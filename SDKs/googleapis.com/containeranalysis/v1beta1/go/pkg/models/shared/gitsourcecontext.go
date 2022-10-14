@@ -1,6 +1,6 @@
 package shared
 
 type GitSourceContext struct {
-	RevisionID *string `json:"revisionId"`
-	URL        *string `json:"url"`
+	RevisionID *string `json:"revisionId,omitempty"`
+	URL        *string `json:"url,omitempty"`
 }

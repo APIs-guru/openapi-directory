@@ -1,7 +1,7 @@
 package shared
 
 type PrismaCpeCode struct {
-	PrismaClientCode   *string `json:"prismaClientCode"`
-	PrismaEstimateCode *string `json:"prismaEstimateCode"`
-	PrismaProductCode  *string `json:"prismaProductCode"`
+	PrismaClientCode   *string `json:"prismaClientCode,omitempty"`
+	PrismaEstimateCode *string `json:"prismaEstimateCode,omitempty"`
+	PrismaProductCode  *string `json:"prismaProductCode,omitempty"`
 }

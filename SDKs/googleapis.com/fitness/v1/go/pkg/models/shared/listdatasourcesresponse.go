@@ -1,5 +1,5 @@
 package shared
 
 type ListDataSourcesResponse struct {
-	DataSource []DataSource `json:"dataSource"`
+	DataSource []DataSource `json:"dataSource,omitempty"`
 }

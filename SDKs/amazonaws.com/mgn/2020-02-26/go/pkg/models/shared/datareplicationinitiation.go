@@ -1,7 +1,7 @@
 package shared
 
 type DataReplicationInitiation struct {
-	NextAttemptDateTime *string                         `json:"nextAttemptDateTime"`
-	StartDateTime       *string                         `json:"startDateTime"`
-	Steps               []DataReplicationInitiationStep `json:"steps"`
+	NextAttemptDateTime *string                         `json:"nextAttemptDateTime,omitempty"`
+	StartDateTime       *string                         `json:"startDateTime,omitempty"`
+	Steps               []DataReplicationInitiationStep `json:"steps,omitempty"`
 }

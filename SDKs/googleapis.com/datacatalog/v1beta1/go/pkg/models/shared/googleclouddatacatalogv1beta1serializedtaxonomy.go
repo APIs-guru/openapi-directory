@@ -8,8 +8,8 @@ const (
 )
 
 type GoogleCloudDatacatalogV1beta1SerializedTaxonomy struct {
-	ActivatedPolicyTypes []GoogleCloudDatacatalogV1beta1SerializedTaxonomyActivatedPolicyTypesEnum `json:"activatedPolicyTypes"`
-	Description          *string                                                                   `json:"description"`
-	DisplayName          *string                                                                   `json:"displayName"`
-	PolicyTags           []GoogleCloudDatacatalogV1beta1SerializedPolicyTag                        `json:"policyTags"`
+	ActivatedPolicyTypes []GoogleCloudDatacatalogV1beta1SerializedTaxonomyActivatedPolicyTypesEnum `json:"activatedPolicyTypes,omitempty"`
+	Description          *string                                                                   `json:"description,omitempty"`
+	DisplayName          *string                                                                   `json:"displayName,omitempty"`
+	PolicyTags           []GoogleCloudDatacatalogV1beta1SerializedPolicyTag                        `json:"policyTags,omitempty"`
 }

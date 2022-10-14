@@ -1,8 +1,8 @@
 package shared
 
 type Profile struct {
-	EmailAddress  *string `json:"emailAddress"`
-	HistoryID     *string `json:"historyId"`
-	MessagesTotal *int32  `json:"messagesTotal"`
-	ThreadsTotal  *int32  `json:"threadsTotal"`
+	EmailAddress  *string `json:"emailAddress,omitempty"`
+	HistoryID     *string `json:"historyId,omitempty"`
+	MessagesTotal *int32  `json:"messagesTotal,omitempty"`
+	ThreadsTotal  *int32  `json:"threadsTotal,omitempty"`
 }

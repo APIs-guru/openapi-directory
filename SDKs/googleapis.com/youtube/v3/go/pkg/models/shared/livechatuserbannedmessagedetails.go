@@ -8,7 +8,7 @@ const (
 )
 
 type LiveChatUserBannedMessageDetails struct {
-	BanDurationSeconds *string                                      `json:"banDurationSeconds"`
-	BanType            *LiveChatUserBannedMessageDetailsBanTypeEnum `json:"banType"`
-	BannedUserDetails  *ChannelProfileDetails                       `json:"bannedUserDetails"`
+	BanDurationSeconds *string                                      `json:"banDurationSeconds,omitempty"`
+	BanType            *LiveChatUserBannedMessageDetailsBanTypeEnum `json:"banType,omitempty"`
+	BannedUserDetails  *ChannelProfileDetails                       `json:"bannedUserDetails,omitempty"`
 }

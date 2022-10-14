@@ -10,9 +10,9 @@ type ValidateForVoiceRequest struct {
 }
 
 type ValidateForVoice200ApplicationJSON struct {
-	Code    *string `json:"code"`
-	Error   *string `json:"error"`
-	Success *bool   `json:"success"`
+	Code    *string `json:"code,omitempty"`
+	Error   *string `json:"error,omitempty"`
+	Success *bool   `json:"success,omitempty"`
 }
 
 type ValidateForVoiceResponse struct {

@@ -1,12 +1,12 @@
 package shared
 
 type FieldValue struct {
-	Date          *Date          `json:"date"`
-	Integer       *Integer       `json:"integer"`
-	Selection     *Selection     `json:"selection"`
-	SelectionList *SelectionList `json:"selectionList"`
-	Text          *Text          `json:"text"`
-	TextList      *TextList      `json:"textList"`
-	User          *SingleUser    `json:"user"`
-	UserList      *UserList      `json:"userList"`
+	Date          *Date          `json:"date,omitempty"`
+	Integer       *Integer       `json:"integer,omitempty"`
+	Selection     *Selection     `json:"selection,omitempty"`
+	SelectionList *SelectionList `json:"selectionList,omitempty"`
+	Text          *Text          `json:"text,omitempty"`
+	TextList      *TextList      `json:"textList,omitempty"`
+	User          *SingleUser    `json:"user,omitempty"`
+	UserList      *UserList      `json:"userList,omitempty"`
 }

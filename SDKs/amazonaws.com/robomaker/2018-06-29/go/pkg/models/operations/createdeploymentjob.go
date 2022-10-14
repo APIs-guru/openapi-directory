@@ -15,18 +15,18 @@ type CreateDeploymentJobHeaders struct {
 }
 
 type CreateDeploymentJobRequestBodyDeploymentConfig struct {
-	ConcurrentDeploymentPercentage  *int64           `json:"concurrentDeploymentPercentage"`
-	DownloadConditionFile           *shared.S3Object `json:"downloadConditionFile"`
-	FailureThresholdPercentage      *int64           `json:"failureThresholdPercentage"`
-	RobotDeploymentTimeoutInSeconds *int64           `json:"robotDeploymentTimeoutInSeconds"`
+	ConcurrentDeploymentPercentage  *int64           `json:"concurrentDeploymentPercentage,omitempty"`
+	DownloadConditionFile           *shared.S3Object `json:"downloadConditionFile,omitempty"`
+	FailureThresholdPercentage      *int64           `json:"failureThresholdPercentage,omitempty"`
+	RobotDeploymentTimeoutInSeconds *int64           `json:"robotDeploymentTimeoutInSeconds,omitempty"`
 }
 
 type CreateDeploymentJobRequestBody struct {
 	ClientRequestToken           string                                          `json:"clientRequestToken"`
 	DeploymentApplicationConfigs []shared.DeploymentApplicationConfig            `json:"deploymentApplicationConfigs"`
-	DeploymentConfig             *CreateDeploymentJobRequestBodyDeploymentConfig `json:"deploymentConfig"`
+	DeploymentConfig             *CreateDeploymentJobRequestBodyDeploymentConfig `json:"deploymentConfig,omitempty"`
 	Fleet                        string                                          `json:"fleet"`
-	Tags                         map[string]string                               `json:"tags"`
+	Tags                         map[string]string                               `json:"tags,omitempty"`
 }
 
 type CreateDeploymentJobRequest struct {

@@ -9,10 +9,10 @@ const (
 )
 
 type PoiAssignedTargetingOptionDetails struct {
-	DisplayName           *string                                                   `json:"displayName"`
-	Latitude              *float64                                                  `json:"latitude"`
-	Longitude             *float64                                                  `json:"longitude"`
-	ProximityRadiusAmount *float64                                                  `json:"proximityRadiusAmount"`
-	ProximityRadiusUnit   *PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit"`
-	TargetingOptionID     *string                                                   `json:"targetingOptionId"`
+	DisplayName           *string                                                   `json:"displayName,omitempty"`
+	Latitude              *float64                                                  `json:"latitude,omitempty"`
+	Longitude             *float64                                                  `json:"longitude,omitempty"`
+	ProximityRadiusAmount *float64                                                  `json:"proximityRadiusAmount,omitempty"`
+	ProximityRadiusUnit   *PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit,omitempty"`
+	TargetingOptionID     *string                                                   `json:"targetingOptionId,omitempty"`
 }

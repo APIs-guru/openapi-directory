@@ -20,7 +20,7 @@ type UpdateTemplateActiveVersionHeaders struct {
 }
 
 type UpdateTemplateActiveVersionRequestBodyTemplateActiveVersionRequest struct {
-	Version *string `json:"Version"`
+	Version *string `json:"Version,omitempty"`
 }
 
 type UpdateTemplateActiveVersionRequestBody struct {

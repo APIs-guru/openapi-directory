@@ -11,9 +11,9 @@ const (
 )
 
 type GoogleSearchIdeahubV1alphaIdeaActivity struct {
-	Ideas  []string                                        `json:"ideas"`
-	Name   *string                                         `json:"name"`
-	Topics []string                                        `json:"topics"`
-	Type   *GoogleSearchIdeahubV1alphaIdeaActivityTypeEnum `json:"type"`
-	URI    *string                                         `json:"uri"`
+	Ideas  []string                                        `json:"ideas,omitempty"`
+	Name   *string                                         `json:"name,omitempty"`
+	Topics []string                                        `json:"topics,omitempty"`
+	Type   *GoogleSearchIdeahubV1alphaIdeaActivityTypeEnum `json:"type,omitempty"`
+	URI    *string                                         `json:"uri,omitempty"`
 }

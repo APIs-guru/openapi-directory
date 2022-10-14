@@ -5,10 +5,10 @@ import (
 )
 
 type DatasetSummary struct {
-	Actions        []DatasetActionSummary `json:"actions"`
-	CreationTime   *time.Time             `json:"creationTime"`
-	DatasetName    *string                `json:"datasetName"`
-	LastUpdateTime *time.Time             `json:"lastUpdateTime"`
-	Status         *DatasetStatusEnum     `json:"status"`
-	Triggers       []DatasetTrigger       `json:"triggers"`
+	Actions        []DatasetActionSummary `json:"actions,omitempty"`
+	CreationTime   *time.Time             `json:"creationTime,omitempty"`
+	DatasetName    *string                `json:"datasetName,omitempty"`
+	LastUpdateTime *time.Time             `json:"lastUpdateTime,omitempty"`
+	Status         *DatasetStatusEnum     `json:"status,omitempty"`
+	Triggers       []DatasetTrigger       `json:"triggers,omitempty"`
 }

@@ -12,21 +12,21 @@ const (
 )
 
 type APIV2010AccountCallCallNotificationInstance struct {
-	AccountSid       *string                                                       `json:"account_sid"`
-	APIVersion       *string                                                       `json:"api_version"`
-	CallSid          *string                                                       `json:"call_sid"`
-	DateCreated      *string                                                       `json:"date_created"`
-	DateUpdated      *string                                                       `json:"date_updated"`
-	ErrorCode        *string                                                       `json:"error_code"`
-	Log              *string                                                       `json:"log"`
-	MessageDate      *string                                                       `json:"message_date"`
-	MessageText      *string                                                       `json:"message_text"`
-	MoreInfo         *string                                                       `json:"more_info"`
-	RequestMethod    *APIV2010AccountCallCallNotificationInstanceRequestMethodEnum `json:"request_method"`
-	RequestURL       *string                                                       `json:"request_url"`
-	RequestVariables *string                                                       `json:"request_variables"`
-	ResponseBody     *string                                                       `json:"response_body"`
-	ResponseHeaders  *string                                                       `json:"response_headers"`
-	Sid              *string                                                       `json:"sid"`
-	URI              *string                                                       `json:"uri"`
+	AccountSid       *string                                                       `json:"account_sid,omitempty"`
+	APIVersion       *string                                                       `json:"api_version,omitempty"`
+	CallSid          *string                                                       `json:"call_sid,omitempty"`
+	DateCreated      *string                                                       `json:"date_created,omitempty"`
+	DateUpdated      *string                                                       `json:"date_updated,omitempty"`
+	ErrorCode        *string                                                       `json:"error_code,omitempty"`
+	Log              *string                                                       `json:"log,omitempty"`
+	MessageDate      *string                                                       `json:"message_date,omitempty"`
+	MessageText      *string                                                       `json:"message_text,omitempty"`
+	MoreInfo         *string                                                       `json:"more_info,omitempty"`
+	RequestMethod    *APIV2010AccountCallCallNotificationInstanceRequestMethodEnum `json:"request_method,omitempty"`
+	RequestURL       *string                                                       `json:"request_url,omitempty"`
+	RequestVariables *string                                                       `json:"request_variables,omitempty"`
+	ResponseBody     *string                                                       `json:"response_body,omitempty"`
+	ResponseHeaders  *string                                                       `json:"response_headers,omitempty"`
+	Sid              *string                                                       `json:"sid,omitempty"`
+	URI              *string                                                       `json:"uri,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ExportSnapshotRecordSourceInfo struct {
-	Arn                  *string                             `json:"arn"`
-	CreatedAt            *time.Time                          `json:"createdAt"`
-	DiskSnapshotInfo     *DiskSnapshotInfo                   `json:"diskSnapshotInfo"`
-	FromResourceArn      *string                             `json:"fromResourceArn"`
-	FromResourceName     *string                             `json:"fromResourceName"`
-	InstanceSnapshotInfo *InstanceSnapshotInfo               `json:"instanceSnapshotInfo"`
-	Name                 *string                             `json:"name"`
-	ResourceType         *ExportSnapshotRecordSourceTypeEnum `json:"resourceType"`
+	Arn                  *string                             `json:"arn,omitempty"`
+	CreatedAt            *time.Time                          `json:"createdAt,omitempty"`
+	DiskSnapshotInfo     *DiskSnapshotInfo                   `json:"diskSnapshotInfo,omitempty"`
+	FromResourceArn      *string                             `json:"fromResourceArn,omitempty"`
+	FromResourceName     *string                             `json:"fromResourceName,omitempty"`
+	InstanceSnapshotInfo *InstanceSnapshotInfo               `json:"instanceSnapshotInfo,omitempty"`
+	Name                 *string                             `json:"name,omitempty"`
+	ResourceType         *ExportSnapshotRecordSourceTypeEnum `json:"resourceType,omitempty"`
 }

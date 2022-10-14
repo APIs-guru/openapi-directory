@@ -1,6 +1,6 @@
 package shared
 
 type GetSystemTemplateRevisionsResponse struct {
-	NextToken *string                 `json:"nextToken"`
-	Summaries []SystemTemplateSummary `json:"summaries"`
+	NextToken *string                 `json:"nextToken,omitempty"`
+	Summaries []SystemTemplateSummary `json:"summaries,omitempty"`
 }

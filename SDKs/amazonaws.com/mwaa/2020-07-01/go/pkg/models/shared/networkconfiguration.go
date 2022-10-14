@@ -1,6 +1,6 @@
 package shared
 
 type NetworkConfiguration struct {
-	SecurityGroupIds []string `json:"SecurityGroupIds"`
-	SubnetIds        []string `json:"SubnetIds"`
+	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
+	SubnetIds        []string `json:"SubnetIds,omitempty"`
 }

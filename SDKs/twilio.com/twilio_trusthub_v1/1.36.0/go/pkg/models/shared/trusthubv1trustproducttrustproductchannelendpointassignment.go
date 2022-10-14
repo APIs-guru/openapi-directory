@@ -5,11 +5,11 @@ import (
 )
 
 type TrusthubV1TrustProductTrustProductChannelEndpointAssignment struct {
-	AccountSid          *string    `json:"account_sid"`
-	ChannelEndpointSid  *string    `json:"channel_endpoint_sid"`
-	ChannelEndpointType *string    `json:"channel_endpoint_type"`
-	DateCreated         *time.Time `json:"date_created"`
-	Sid                 *string    `json:"sid"`
-	TrustProductSid     *string    `json:"trust_product_sid"`
-	URL                 *string    `json:"url"`
+	AccountSid          *string    `json:"account_sid,omitempty"`
+	ChannelEndpointSid  *string    `json:"channel_endpoint_sid,omitempty"`
+	ChannelEndpointType *string    `json:"channel_endpoint_type,omitempty"`
+	DateCreated         *time.Time `json:"date_created,omitempty"`
+	Sid                 *string    `json:"sid,omitempty"`
+	TrustProductSid     *string    `json:"trust_product_sid,omitempty"`
+	URL                 *string    `json:"url,omitempty"`
 }

@@ -11,19 +11,19 @@ type ReposDeleteFilePathParams struct {
 }
 
 type ReposDeleteFileRequestBodyAuthor struct {
-	Email *string `json:"email"`
-	Name  *string `json:"name"`
+	Email *string `json:"email,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type ReposDeleteFileRequestBodyCommitter struct {
-	Email *string `json:"email"`
-	Name  *string `json:"name"`
+	Email *string `json:"email,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type ReposDeleteFileRequestBody struct {
-	Author    *ReposDeleteFileRequestBodyAuthor    `json:"author"`
-	Branch    *string                              `json:"branch"`
-	Committer *ReposDeleteFileRequestBodyCommitter `json:"committer"`
+	Author    *ReposDeleteFileRequestBodyAuthor    `json:"author,omitempty"`
+	Branch    *string                              `json:"branch,omitempty"`
+	Committer *ReposDeleteFileRequestBodyCommitter `json:"committer,omitempty"`
 	Message   string                               `json:"message"`
 	Sha       string                               `json:"sha"`
 }
@@ -34,9 +34,9 @@ type ReposDeleteFileRequest struct {
 }
 
 type ReposDeleteFile503ApplicationJSON struct {
-	Code             *string `json:"code"`
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	Code             *string `json:"code,omitempty"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type ReposDeleteFileResponse struct {

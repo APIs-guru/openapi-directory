@@ -1,11 +1,11 @@
 package shared
 
 type DialogAction struct {
-	FulfillmentState *FulfillmentStateEnum  `json:"fulfillmentState"`
-	IntentName       *string                `json:"intentName"`
-	Message          *string                `json:"message"`
-	MessageFormat    *MessageFormatTypeEnum `json:"messageFormat"`
-	SlotToElicit     *string                `json:"slotToElicit"`
-	Slots            map[string]string      `json:"slots"`
+	FulfillmentState *FulfillmentStateEnum  `json:"fulfillmentState,omitempty"`
+	IntentName       *string                `json:"intentName,omitempty"`
+	Message          *string                `json:"message,omitempty"`
+	MessageFormat    *MessageFormatTypeEnum `json:"messageFormat,omitempty"`
+	SlotToElicit     *string                `json:"slotToElicit,omitempty"`
+	Slots            map[string]string      `json:"slots,omitempty"`
 	Type             DialogActionTypeEnum   `json:"type"`
 }

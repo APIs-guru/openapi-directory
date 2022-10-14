@@ -1,15 +1,15 @@
 package shared
 
 type ListingExtraAttributes struct {
-	DealerAddedF []string `json:"dealer_added_f"`
-	ElectronicsF []string `json:"electronics_f"`
-	ExteriorF    []string `json:"exterior_f"`
-	Features     []string `json:"features"`
-	ID           *string  `json:"id"`
-	InteriorF    []string `json:"interior_f"`
-	Options      []string `json:"options"`
-	SafetyF      []string `json:"safety_f"`
-	SellerCmts   *string  `json:"seller_cmts"`
-	StandardF    []string `json:"standard_f"`
-	TechnicalF   []string `json:"technical_f"`
+	DealerAddedF []string `json:"dealer_added_f,omitempty"`
+	ElectronicsF []string `json:"electronics_f,omitempty"`
+	ExteriorF    []string `json:"exterior_f,omitempty"`
+	Features     []string `json:"features,omitempty"`
+	ID           *string  `json:"id,omitempty"`
+	InteriorF    []string `json:"interior_f,omitempty"`
+	Options      []string `json:"options,omitempty"`
+	SafetyF      []string `json:"safety_f,omitempty"`
+	SellerCmts   *string  `json:"seller_cmts,omitempty"`
+	StandardF    []string `json:"standard_f,omitempty"`
+	TechnicalF   []string `json:"technical_f,omitempty"`
 }

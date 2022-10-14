@@ -19,7 +19,7 @@ type CreateAssessmentReportHeaders struct {
 }
 
 type CreateAssessmentReportRequestBody struct {
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	Name        string  `json:"name"`
 }
 

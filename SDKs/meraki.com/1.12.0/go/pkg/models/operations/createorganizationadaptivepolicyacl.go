@@ -29,14 +29,14 @@ const (
 )
 
 type CreateOrganizationAdaptivePolicyACLRequestBodyRules struct {
-	DstPort  *string                                                         `json:"dstPort"`
+	DstPort  *string                                                         `json:"dstPort,omitempty"`
 	Policy   CreateOrganizationAdaptivePolicyACLRequestBodyRulesPolicyEnum   `json:"policy"`
 	Protocol CreateOrganizationAdaptivePolicyACLRequestBodyRulesProtocolEnum `json:"protocol"`
-	SrcPort  *string                                                         `json:"srcPort"`
+	SrcPort  *string                                                         `json:"srcPort,omitempty"`
 }
 
 type CreateOrganizationAdaptivePolicyACLRequestBody struct {
-	Description *string                                                     `json:"description"`
+	Description *string                                                     `json:"description,omitempty"`
 	IPVersion   CreateOrganizationAdaptivePolicyACLRequestBodyIPVersionEnum `json:"ipVersion"`
 	Name        string                                                      `json:"name"`
 	Rules       []CreateOrganizationAdaptivePolicyACLRequestBodyRules       `json:"rules"`

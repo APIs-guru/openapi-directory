@@ -1,5 +1,5 @@
 package shared
 
 type OAuthSettings struct {
-	LoginHint *string `json:"loginHint"`
+	LoginHint *string `json:"loginHint,omitempty"`
 }

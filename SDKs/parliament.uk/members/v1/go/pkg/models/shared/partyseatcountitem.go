@@ -1,6 +1,6 @@
 package shared
 
 type PartySeatCountItem struct {
-	Links []Link          `json:"links"`
-	Value *PartySeatCount `json:"value"`
+	Links []Link          `json:"links,omitempty"`
+	Value *PartySeatCount `json:"value,omitempty"`
 }

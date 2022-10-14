@@ -1,6 +1,6 @@
 package shared
 
 type ResolveCustomerResult struct {
-	CustomerIdentifier *string `json:"CustomerIdentifier"`
-	ProductCode        *string `json:"ProductCode"`
+	CustomerIdentifier *string `json:"CustomerIdentifier,omitempty"`
+	ProductCode        *string `json:"ProductCode,omitempty"`
 }

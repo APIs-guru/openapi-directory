@@ -1,7 +1,7 @@
 package shared
 
 type AwsCredentials struct {
-	AccessKeyID     *string `json:"AccessKeyId"`
-	SecretAccessKey *string `json:"SecretAccessKey"`
-	SessionToken    *string `json:"SessionToken"`
+	AccessKeyID     *string `json:"AccessKeyId,omitempty"`
+	SecretAccessKey *string `json:"SecretAccessKey,omitempty"`
+	SessionToken    *string `json:"SessionToken,omitempty"`
 }

@@ -8,6 +8,6 @@ const (
 )
 
 type ProjectSettings struct {
-	ClassificationType *ProjectSettingsClassificationTypeEnum `json:"classificationType" form:"name=classificationType"`
-	DomainID           *string                                `json:"domainId" form:"name=domainId"`
+	ClassificationType *ProjectSettingsClassificationTypeEnum `json:"classificationType,omitempty" form:"name=classificationType"`
+	DomainID           *string                                `json:"domainId,omitempty" form:"name=domainId"`
 }

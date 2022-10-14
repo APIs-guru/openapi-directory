@@ -9,5 +9,5 @@ const (
 )
 
 type PartitionSpec struct {
-	PartitionKey *PartitionSpecPartitionKeyEnum `json:"partitionKey"`
+	PartitionKey *PartitionSpecPartitionKeyEnum `json:"partitionKey,omitempty"`
 }

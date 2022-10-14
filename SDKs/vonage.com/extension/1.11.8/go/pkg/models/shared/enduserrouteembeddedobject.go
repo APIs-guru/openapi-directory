@@ -1,5 +1,5 @@
 package shared
 
 type EndUserRouteEmbeddedObject struct {
-	Data *EndUserRoute `json:"data"`
+	Data *EndUserRoute `json:"data,omitempty"`
 }

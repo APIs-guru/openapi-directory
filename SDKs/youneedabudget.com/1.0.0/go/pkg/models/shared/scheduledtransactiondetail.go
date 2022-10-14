@@ -37,17 +37,17 @@ type ScheduledTransactionDetail struct {
 	AccountID         string                                   `json:"account_id"`
 	AccountName       string                                   `json:"account_name"`
 	Amount            int64                                    `json:"amount"`
-	CategoryID        *string                                  `json:"category_id"`
-	CategoryName      *string                                  `json:"category_name"`
+	CategoryID        *string                                  `json:"category_id,omitempty"`
+	CategoryName      *string                                  `json:"category_name,omitempty"`
 	DateFirst         time.Time                                `json:"date_first"`
 	DateNext          time.Time                                `json:"date_next"`
 	Deleted           bool                                     `json:"deleted"`
-	FlagColor         *ScheduledTransactionDetailFlagColorEnum `json:"flag_color"`
+	FlagColor         *ScheduledTransactionDetailFlagColorEnum `json:"flag_color,omitempty"`
 	Frequency         ScheduledTransactionDetailFrequencyEnum  `json:"frequency"`
 	ID                string                                   `json:"id"`
-	Memo              *string                                  `json:"memo"`
-	PayeeID           *string                                  `json:"payee_id"`
-	PayeeName         *string                                  `json:"payee_name"`
+	Memo              *string                                  `json:"memo,omitempty"`
+	PayeeID           *string                                  `json:"payee_id,omitempty"`
+	PayeeName         *string                                  `json:"payee_name,omitempty"`
 	Subtransactions   []ScheduledSubTransaction                `json:"subtransactions"`
-	TransferAccountID *string                                  `json:"transfer_account_id"`
+	TransferAccountID *string                                  `json:"transfer_account_id,omitempty"`
 }

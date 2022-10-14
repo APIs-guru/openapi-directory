@@ -16,16 +16,16 @@ const (
 )
 
 type MediaV1MediaProcessor struct {
-	AccountSid           *string                                        `json:"account_sid"`
-	DateCreated          *time.Time                                     `json:"date_created"`
-	DateUpdated          *time.Time                                     `json:"date_updated"`
-	EndedReason          *string                                        `json:"ended_reason"`
-	Extension            *string                                        `json:"extension"`
-	ExtensionContext     *string                                        `json:"extension_context"`
-	MaxDuration          *int64                                         `json:"max_duration"`
-	Sid                  *string                                        `json:"sid"`
-	Status               *MediaProcessorEnumStatusEnum                  `json:"status"`
-	StatusCallback       *string                                        `json:"status_callback"`
-	StatusCallbackMethod *MediaV1MediaProcessorStatusCallbackMethodEnum `json:"status_callback_method"`
-	URL                  *string                                        `json:"url"`
+	AccountSid           *string                                        `json:"account_sid,omitempty"`
+	DateCreated          *time.Time                                     `json:"date_created,omitempty"`
+	DateUpdated          *time.Time                                     `json:"date_updated,omitempty"`
+	EndedReason          *string                                        `json:"ended_reason,omitempty"`
+	Extension            *string                                        `json:"extension,omitempty"`
+	ExtensionContext     *string                                        `json:"extension_context,omitempty"`
+	MaxDuration          *int64                                         `json:"max_duration,omitempty"`
+	Sid                  *string                                        `json:"sid,omitempty"`
+	Status               *MediaProcessorEnumStatusEnum                  `json:"status,omitempty"`
+	StatusCallback       *string                                        `json:"status_callback,omitempty"`
+	StatusCallbackMethod *MediaV1MediaProcessorStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	URL                  *string                                        `json:"url,omitempty"`
 }

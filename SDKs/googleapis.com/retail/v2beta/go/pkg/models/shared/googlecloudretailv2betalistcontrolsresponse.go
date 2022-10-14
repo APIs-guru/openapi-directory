@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudRetailV2betaListControlsResponse struct {
-	Controls      []GoogleCloudRetailV2betaControl `json:"controls"`
-	NextPageToken *string                          `json:"nextPageToken"`
+	Controls      []GoogleCloudRetailV2betaControl `json:"controls,omitempty"`
+	NextPageToken *string                          `json:"nextPageToken,omitempty"`
 }

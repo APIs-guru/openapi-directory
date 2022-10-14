@@ -16,8 +16,8 @@ const (
 )
 
 type MiipcRequestBody struct {
-	CertificateParameters *MiipcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *MiipcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                MiipcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Miipc400ApplicationJSON struct {
-	Error            *Miipc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Miipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Miipc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Miipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Miipc401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Miipc401ApplicationJSON struct {
-	Error            *Miipc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Miipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Miipc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Miipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Miipc404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Miipc404ApplicationJSON struct {
-	Error            *Miipc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Miipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Miipc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Miipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Miipc500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Miipc500ApplicationJSON struct {
-	Error            *Miipc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Miipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Miipc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Miipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Miipc502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Miipc502ApplicationJSON struct {
-	Error            *Miipc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Miipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Miipc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Miipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Miipc503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Miipc503ApplicationJSON struct {
-	Error            *Miipc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Miipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Miipc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Miipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Miipc504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Miipc504ApplicationJSON struct {
-	Error            *Miipc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Miipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Miipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Miipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type MiipcResponse struct {

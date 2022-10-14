@@ -1,70 +1,70 @@
 package shared
 
 type SearchResponseObjectAlbums struct {
-	Href     *string                 `json:"href"`
-	Items    []SimplifiedAlbumObject `json:"items"`
-	Limit    *int32                  `json:"limit"`
-	Next     *string                 `json:"next"`
-	Offset   *int32                  `json:"offset"`
-	Previous *string                 `json:"previous"`
-	Total    *int32                  `json:"total"`
+	Href     *string                 `json:"href,omitempty"`
+	Items    []SimplifiedAlbumObject `json:"items,omitempty"`
+	Limit    *int32                  `json:"limit,omitempty"`
+	Next     *string                 `json:"next,omitempty"`
+	Offset   *int32                  `json:"offset,omitempty"`
+	Previous *string                 `json:"previous,omitempty"`
+	Total    *int32                  `json:"total,omitempty"`
 }
 
 type SearchResponseObjectArtists struct {
-	Href     *string        `json:"href"`
-	Items    []ArtistObject `json:"items"`
-	Limit    *int32         `json:"limit"`
-	Next     *string        `json:"next"`
-	Offset   *int32         `json:"offset"`
-	Previous *string        `json:"previous"`
-	Total    *int32         `json:"total"`
+	Href     *string        `json:"href,omitempty"`
+	Items    []ArtistObject `json:"items,omitempty"`
+	Limit    *int32         `json:"limit,omitempty"`
+	Next     *string        `json:"next,omitempty"`
+	Offset   *int32         `json:"offset,omitempty"`
+	Previous *string        `json:"previous,omitempty"`
+	Total    *int32         `json:"total,omitempty"`
 }
 
 type SearchResponseObjectEpisodes struct {
-	Href     *string                   `json:"href"`
-	Items    []SimplifiedEpisodeObject `json:"items"`
-	Limit    *int32                    `json:"limit"`
-	Next     *string                   `json:"next"`
-	Offset   *int32                    `json:"offset"`
-	Previous *string                   `json:"previous"`
-	Total    *int32                    `json:"total"`
+	Href     *string                   `json:"href,omitempty"`
+	Items    []SimplifiedEpisodeObject `json:"items,omitempty"`
+	Limit    *int32                    `json:"limit,omitempty"`
+	Next     *string                   `json:"next,omitempty"`
+	Offset   *int32                    `json:"offset,omitempty"`
+	Previous *string                   `json:"previous,omitempty"`
+	Total    *int32                    `json:"total,omitempty"`
 }
 
 type SearchResponseObjectPlaylists struct {
-	Href     *string                    `json:"href"`
-	Items    []SimplifiedPlaylistObject `json:"items"`
-	Limit    *int32                     `json:"limit"`
-	Next     *string                    `json:"next"`
-	Offset   *int32                     `json:"offset"`
-	Previous *string                    `json:"previous"`
-	Total    *int32                     `json:"total"`
+	Href     *string                    `json:"href,omitempty"`
+	Items    []SimplifiedPlaylistObject `json:"items,omitempty"`
+	Limit    *int32                     `json:"limit,omitempty"`
+	Next     *string                    `json:"next,omitempty"`
+	Offset   *int32                     `json:"offset,omitempty"`
+	Previous *string                    `json:"previous,omitempty"`
+	Total    *int32                     `json:"total,omitempty"`
 }
 
 type SearchResponseObjectShows struct {
-	Href     *string                `json:"href"`
-	Items    []SimplifiedShowObject `json:"items"`
-	Limit    *int32                 `json:"limit"`
-	Next     *string                `json:"next"`
-	Offset   *int32                 `json:"offset"`
-	Previous *string                `json:"previous"`
-	Total    *int32                 `json:"total"`
+	Href     *string                `json:"href,omitempty"`
+	Items    []SimplifiedShowObject `json:"items,omitempty"`
+	Limit    *int32                 `json:"limit,omitempty"`
+	Next     *string                `json:"next,omitempty"`
+	Offset   *int32                 `json:"offset,omitempty"`
+	Previous *string                `json:"previous,omitempty"`
+	Total    *int32                 `json:"total,omitempty"`
 }
 
 type SearchResponseObjectTracks struct {
-	Href     *string       `json:"href"`
-	Items    []TrackObject `json:"items"`
-	Limit    *int32        `json:"limit"`
-	Next     *string       `json:"next"`
-	Offset   *int32        `json:"offset"`
-	Previous *string       `json:"previous"`
-	Total    *int32        `json:"total"`
+	Href     *string       `json:"href,omitempty"`
+	Items    []TrackObject `json:"items,omitempty"`
+	Limit    *int32        `json:"limit,omitempty"`
+	Next     *string       `json:"next,omitempty"`
+	Offset   *int32        `json:"offset,omitempty"`
+	Previous *string       `json:"previous,omitempty"`
+	Total    *int32        `json:"total,omitempty"`
 }
 
 type SearchResponseObject struct {
-	Albums    *SearchResponseObjectAlbums    `json:"albums"`
-	Artists   *SearchResponseObjectArtists   `json:"artists"`
-	Episodes  *SearchResponseObjectEpisodes  `json:"episodes"`
-	Playlists *SearchResponseObjectPlaylists `json:"playlists"`
-	Shows     *SearchResponseObjectShows     `json:"shows"`
-	Tracks    *SearchResponseObjectTracks    `json:"tracks"`
+	Albums    *SearchResponseObjectAlbums    `json:"albums,omitempty"`
+	Artists   *SearchResponseObjectArtists   `json:"artists,omitempty"`
+	Episodes  *SearchResponseObjectEpisodes  `json:"episodes,omitempty"`
+	Playlists *SearchResponseObjectPlaylists `json:"playlists,omitempty"`
+	Shows     *SearchResponseObjectShows     `json:"shows,omitempty"`
+	Tracks    *SearchResponseObjectTracks    `json:"tracks,omitempty"`
 }

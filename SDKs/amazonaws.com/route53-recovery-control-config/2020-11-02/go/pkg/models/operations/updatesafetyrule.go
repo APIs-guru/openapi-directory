@@ -15,20 +15,20 @@ type UpdateSafetyRuleHeaders struct {
 }
 
 type UpdateSafetyRuleRequestBodyAssertionRuleUpdate struct {
-	Name          *string `json:"Name"`
-	SafetyRuleArn *string `json:"SafetyRuleArn"`
-	WaitPeriodMs  *int64  `json:"WaitPeriodMs"`
+	Name          *string `json:"Name,omitempty"`
+	SafetyRuleArn *string `json:"SafetyRuleArn,omitempty"`
+	WaitPeriodMs  *int64  `json:"WaitPeriodMs,omitempty"`
 }
 
 type UpdateSafetyRuleRequestBodyGatingRuleUpdate struct {
-	Name          *string `json:"Name"`
-	SafetyRuleArn *string `json:"SafetyRuleArn"`
-	WaitPeriodMs  *int64  `json:"WaitPeriodMs"`
+	Name          *string `json:"Name,omitempty"`
+	SafetyRuleArn *string `json:"SafetyRuleArn,omitempty"`
+	WaitPeriodMs  *int64  `json:"WaitPeriodMs,omitempty"`
 }
 
 type UpdateSafetyRuleRequestBody struct {
-	AssertionRuleUpdate *UpdateSafetyRuleRequestBodyAssertionRuleUpdate `json:"AssertionRuleUpdate"`
-	GatingRuleUpdate    *UpdateSafetyRuleRequestBodyGatingRuleUpdate    `json:"GatingRuleUpdate"`
+	AssertionRuleUpdate *UpdateSafetyRuleRequestBodyAssertionRuleUpdate `json:"AssertionRuleUpdate,omitempty"`
+	GatingRuleUpdate    *UpdateSafetyRuleRequestBodyGatingRuleUpdate    `json:"GatingRuleUpdate,omitempty"`
 }
 
 type UpdateSafetyRuleRequest struct {

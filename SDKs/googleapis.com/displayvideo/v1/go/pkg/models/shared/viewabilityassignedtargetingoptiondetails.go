@@ -16,6 +16,6 @@ const (
 )
 
 type ViewabilityAssignedTargetingOptionDetails struct {
-	TargetingOptionID *string                                                   `json:"targetingOptionId"`
-	Viewability       *ViewabilityAssignedTargetingOptionDetailsViewabilityEnum `json:"viewability"`
+	TargetingOptionID *string                                                   `json:"targetingOptionId,omitempty"`
+	Viewability       *ViewabilityAssignedTargetingOptionDetailsViewabilityEnum `json:"viewability,omitempty"`
 }

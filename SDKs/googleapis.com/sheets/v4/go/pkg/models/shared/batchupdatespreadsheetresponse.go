@@ -1,7 +1,7 @@
 package shared
 
 type BatchUpdateSpreadsheetResponse struct {
-	Replies            []Response   `json:"replies"`
-	SpreadsheetID      *string      `json:"spreadsheetId"`
-	UpdatedSpreadsheet *Spreadsheet `json:"updatedSpreadsheet"`
+	Replies            []Response   `json:"replies,omitempty"`
+	SpreadsheetID      *string      `json:"spreadsheetId,omitempty"`
+	UpdatedSpreadsheet *Spreadsheet `json:"updatedSpreadsheet,omitempty"`
 }

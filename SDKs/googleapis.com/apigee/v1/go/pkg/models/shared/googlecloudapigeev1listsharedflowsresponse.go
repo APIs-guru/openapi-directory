@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudApigeeV1ListSharedFlowsResponse struct {
-	SharedFlows []GoogleCloudApigeeV1SharedFlow `json:"sharedFlows"`
+	SharedFlows []GoogleCloudApigeeV1SharedFlow `json:"sharedFlows,omitempty"`
 }

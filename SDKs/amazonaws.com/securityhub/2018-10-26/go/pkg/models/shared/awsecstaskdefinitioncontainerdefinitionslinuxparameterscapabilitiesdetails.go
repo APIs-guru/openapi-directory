@@ -1,6 +1,6 @@
 package shared
 
 type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails struct {
-	Add  []string `json:"Add"`
-	Drop []string `json:"Drop"`
+	Add  []string `json:"Add,omitempty"`
+	Drop []string `json:"Drop,omitempty"`
 }

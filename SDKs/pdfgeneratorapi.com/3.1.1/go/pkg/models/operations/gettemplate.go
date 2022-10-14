@@ -13,7 +13,7 @@ type GetTemplateRequest struct {
 }
 
 type GetTemplate200ApplicationJSON struct {
-	Response *shared.TemplateDefinition `json:"response"`
+	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
 
 type GetTemplate401ApplicationJSONErrorEnum string
@@ -32,8 +32,8 @@ const (
 )
 
 type GetTemplate401ApplicationJSON struct {
-	Error  *GetTemplate401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                  `json:"status"`
+	Error  *GetTemplate401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                  `json:"status,omitempty"`
 }
 
 type GetTemplate403ApplicationJSONErrorEnum string
@@ -43,8 +43,8 @@ const (
 )
 
 type GetTemplate403ApplicationJSON struct {
-	Error  *GetTemplate403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                  `json:"status"`
+	Error  *GetTemplate403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                  `json:"status,omitempty"`
 }
 
 type GetTemplate404ApplicationJSONErrorEnum string
@@ -56,8 +56,8 @@ const (
 )
 
 type GetTemplate404ApplicationJSON struct {
-	Error  *GetTemplate404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                  `json:"status"`
+	Error  *GetTemplate404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                  `json:"status,omitempty"`
 }
 
 type GetTemplate422ApplicationJSONErrorEnum string
@@ -70,13 +70,13 @@ const (
 )
 
 type GetTemplate422ApplicationJSON struct {
-	Error  *GetTemplate422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                  `json:"status"`
+	Error  *GetTemplate422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                  `json:"status,omitempty"`
 }
 
 type GetTemplate500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type GetTemplateResponse struct {

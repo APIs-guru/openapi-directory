@@ -22,8 +22,8 @@ const (
 )
 
 type ValueDescriptor struct {
-	Key        *string                        `json:"key"`
-	MetricKind *ValueDescriptorMetricKindEnum `json:"metricKind"`
-	Unit       *string                        `json:"unit"`
-	ValueType  *ValueDescriptorValueTypeEnum  `json:"valueType"`
+	Key        *string                        `json:"key,omitempty"`
+	MetricKind *ValueDescriptorMetricKindEnum `json:"metricKind,omitempty"`
+	Unit       *string                        `json:"unit,omitempty"`
+	ValueType  *ValueDescriptorValueTypeEnum  `json:"valueType,omitempty"`
 }

@@ -16,13 +16,13 @@ type CreateResourceDefinitionHeaders struct {
 }
 
 type CreateResourceDefinitionRequestBodyInitialVersion struct {
-	Resources []shared.Resource `json:"Resources"`
+	Resources []shared.Resource `json:"Resources,omitempty"`
 }
 
 type CreateResourceDefinitionRequestBody struct {
-	InitialVersion *CreateResourceDefinitionRequestBodyInitialVersion `json:"InitialVersion"`
-	Name           *string                                            `json:"Name"`
-	Tags           map[string]string                                  `json:"tags"`
+	InitialVersion *CreateResourceDefinitionRequestBodyInitialVersion `json:"InitialVersion,omitempty"`
+	Name           *string                                            `json:"Name,omitempty"`
+	Tags           map[string]string                                  `json:"tags,omitempty"`
 }
 
 type CreateResourceDefinitionRequest struct {

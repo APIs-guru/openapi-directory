@@ -9,8 +9,8 @@ type ConformancePackStatusDetail struct {
 	ConformancePackID           string                   `json:"ConformancePackId"`
 	ConformancePackName         string                   `json:"ConformancePackName"`
 	ConformancePackState        ConformancePackStateEnum `json:"ConformancePackState"`
-	ConformancePackStatusReason *string                  `json:"ConformancePackStatusReason"`
-	LastUpdateCompletedTime     *time.Time               `json:"LastUpdateCompletedTime"`
+	ConformancePackStatusReason *string                  `json:"ConformancePackStatusReason,omitempty"`
+	LastUpdateCompletedTime     *time.Time               `json:"LastUpdateCompletedTime,omitempty"`
 	LastUpdateRequestedTime     time.Time                `json:"LastUpdateRequestedTime"`
 	StackArn                    string                   `json:"StackArn"`
 }

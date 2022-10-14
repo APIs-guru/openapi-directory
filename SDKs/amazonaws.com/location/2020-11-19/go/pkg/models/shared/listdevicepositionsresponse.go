@@ -2,5 +2,5 @@ package shared
 
 type ListDevicePositionsResponse struct {
 	Entries   []ListDevicePositionsResponseEntry `json:"Entries"`
-	NextToken *string                            `json:"NextToken"`
+	NextToken *string                            `json:"NextToken,omitempty"`
 }

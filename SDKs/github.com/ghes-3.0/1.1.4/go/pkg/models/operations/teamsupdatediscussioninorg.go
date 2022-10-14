@@ -11,8 +11,8 @@ type TeamsUpdateDiscussionInOrgPathParams struct {
 }
 
 type TeamsUpdateDiscussionInOrgRequestBody struct {
-	Body  *string `json:"body"`
-	Title *string `json:"title"`
+	Body  *string `json:"body,omitempty"`
+	Title *string `json:"title,omitempty"`
 }
 
 type TeamsUpdateDiscussionInOrgRequest struct {

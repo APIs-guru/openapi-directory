@@ -1,6 +1,6 @@
 package shared
 
 type ControllersSystemsAdvisoriesRequest struct {
-	Advisories []string `json:"advisories"`
-	Systems    []string `json:"systems"`
+	Advisories []string `json:"advisories,omitempty"`
+	Systems    []string `json:"systems,omitempty"`
 }

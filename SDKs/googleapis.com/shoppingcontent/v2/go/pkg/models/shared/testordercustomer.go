@@ -1,8 +1,8 @@
 package shared
 
 type TestOrderCustomer struct {
-	Email                       *string                               `json:"email"`
-	ExplicitMarketingPreference *bool                                 `json:"explicitMarketingPreference"`
-	FullName                    *string                               `json:"fullName"`
-	MarketingRightsInfo         *TestOrderCustomerMarketingRightsInfo `json:"marketingRightsInfo"`
+	Email                       *string                               `json:"email,omitempty"`
+	ExplicitMarketingPreference *bool                                 `json:"explicitMarketingPreference,omitempty"`
+	FullName                    *string                               `json:"fullName,omitempty"`
+	MarketingRightsInfo         *TestOrderCustomerMarketingRightsInfo `json:"marketingRightsInfo,omitempty"`
 }

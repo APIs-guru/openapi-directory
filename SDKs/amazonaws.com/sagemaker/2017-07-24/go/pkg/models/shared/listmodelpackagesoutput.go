@@ -2,5 +2,5 @@ package shared
 
 type ListModelPackagesOutput struct {
 	ModelPackageSummaryList []ModelPackageSummary `json:"ModelPackageSummaryList"`
-	NextToken               *string               `json:"NextToken"`
+	NextToken               *string               `json:"NextToken,omitempty"`
 }

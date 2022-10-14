@@ -1,6 +1,6 @@
 package shared
 
 type QueryTarget struct {
-	Parent          *string          `json:"parent"`
-	StructuredQuery *StructuredQuery `json:"structuredQuery"`
+	Parent          *string          `json:"parent,omitempty"`
+	StructuredQuery *StructuredQuery `json:"structuredQuery,omitempty"`
 }

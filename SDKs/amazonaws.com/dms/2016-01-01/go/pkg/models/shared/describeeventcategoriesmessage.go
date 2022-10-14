@@ -1,6 +1,6 @@
 package shared
 
 type DescribeEventCategoriesMessage struct {
-	Filters    []Filter `json:"Filters"`
-	SourceType *string  `json:"SourceType"`
+	Filters    []Filter `json:"Filters,omitempty"`
+	SourceType *string  `json:"SourceType,omitempty"`
 }

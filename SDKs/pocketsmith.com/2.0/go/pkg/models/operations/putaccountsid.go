@@ -9,8 +9,8 @@ type PutAccountsIDPathParams struct {
 }
 
 type PutAccountsIDRequestBody struct {
-	CurrencyCode *string `json:"currency_code"`
-	Title        *string `json:"title"`
+	CurrencyCode *string `json:"currency_code,omitempty"`
+	Title        *string `json:"title,omitempty"`
 }
 
 type PutAccountsIDRequest struct {

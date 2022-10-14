@@ -1,5 +1,5 @@
 package shared
 
 type GroupLicenseUsersListResponse struct {
-	User []User `json:"user"`
+	User []User `json:"user,omitempty"`
 }

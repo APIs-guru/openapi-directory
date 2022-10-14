@@ -1,7 +1,7 @@
 package shared
 
 type LiveStreamSessionDevice struct {
-	Model  *string `json:"model"`
-	Type   *string `json:"type"`
-	Vendor *string `json:"vendor"`
+	Model  *string `json:"model,omitempty"`
+	Type   *string `json:"type,omitempty"`
+	Vendor *string `json:"vendor,omitempty"`
 }

@@ -5,17 +5,17 @@ import (
 )
 
 type DescribeInferenceSchedulerResponse struct {
-	CreatedAt                *time.Time                    `json:"CreatedAt"`
-	DataDelayOffsetInMinutes *int64                        `json:"DataDelayOffsetInMinutes"`
-	DataInputConfiguration   *InferenceInputConfiguration  `json:"DataInputConfiguration"`
-	DataOutputConfiguration  *InferenceOutputConfiguration `json:"DataOutputConfiguration"`
-	DataUploadFrequency      *DataUploadFrequencyEnum      `json:"DataUploadFrequency"`
-	InferenceSchedulerArn    *string                       `json:"InferenceSchedulerArn"`
-	InferenceSchedulerName   *string                       `json:"InferenceSchedulerName"`
-	ModelArn                 *string                       `json:"ModelArn"`
-	ModelName                *string                       `json:"ModelName"`
-	RoleArn                  *string                       `json:"RoleArn"`
-	ServerSideKmsKeyID       *string                       `json:"ServerSideKmsKeyId"`
-	Status                   *InferenceSchedulerStatusEnum `json:"Status"`
-	UpdatedAt                *time.Time                    `json:"UpdatedAt"`
+	CreatedAt                *time.Time                    `json:"CreatedAt,omitempty"`
+	DataDelayOffsetInMinutes *int64                        `json:"DataDelayOffsetInMinutes,omitempty"`
+	DataInputConfiguration   *InferenceInputConfiguration  `json:"DataInputConfiguration,omitempty"`
+	DataOutputConfiguration  *InferenceOutputConfiguration `json:"DataOutputConfiguration,omitempty"`
+	DataUploadFrequency      *DataUploadFrequencyEnum      `json:"DataUploadFrequency,omitempty"`
+	InferenceSchedulerArn    *string                       `json:"InferenceSchedulerArn,omitempty"`
+	InferenceSchedulerName   *string                       `json:"InferenceSchedulerName,omitempty"`
+	ModelArn                 *string                       `json:"ModelArn,omitempty"`
+	ModelName                *string                       `json:"ModelName,omitempty"`
+	RoleArn                  *string                       `json:"RoleArn,omitempty"`
+	ServerSideKmsKeyID       *string                       `json:"ServerSideKmsKeyId,omitempty"`
+	Status                   *InferenceSchedulerStatusEnum `json:"Status,omitempty"`
+	UpdatedAt                *time.Time                    `json:"UpdatedAt,omitempty"`
 }

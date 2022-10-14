@@ -13,7 +13,7 @@ type EndpointSaveShowsUserHeaders struct {
 }
 
 type EndpointSaveShowsUserRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type EndpointSaveShowsUserSecurity struct {

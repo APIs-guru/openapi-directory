@@ -33,9 +33,9 @@ const (
 
 type ListAnalyzedResourcesRequestBody struct {
 	AnalyzerArn  string                                            `json:"analyzerArn"`
-	MaxResults   *int64                                            `json:"maxResults"`
-	NextToken    *string                                           `json:"nextToken"`
-	ResourceType *ListAnalyzedResourcesRequestBodyResourceTypeEnum `json:"resourceType"`
+	MaxResults   *int64                                            `json:"maxResults,omitempty"`
+	NextToken    *string                                           `json:"nextToken,omitempty"`
+	ResourceType *ListAnalyzedResourcesRequestBodyResourceTypeEnum `json:"resourceType,omitempty"`
 }
 
 type ListAnalyzedResourcesRequest struct {

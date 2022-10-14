@@ -1,6 +1,6 @@
 package shared
 
 type ListAuthorizedCertificatesResponse struct {
-	Certificates  []AuthorizedCertificate `json:"certificates"`
-	NextPageToken *string                 `json:"nextPageToken"`
+	Certificates  []AuthorizedCertificate `json:"certificates,omitempty"`
+	NextPageToken *string                 `json:"nextPageToken,omitempty"`
 }

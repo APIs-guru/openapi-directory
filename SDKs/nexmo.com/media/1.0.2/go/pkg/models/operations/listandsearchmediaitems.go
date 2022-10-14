@@ -24,33 +24,33 @@ type ListAndSearchMediaItemsRequest struct {
 }
 
 type ListAndSearchMediaItems200ApplicationJSONEmbedded struct {
-	Media []shared.Media `json:"media"`
+	Media []shared.Media `json:"media,omitempty"`
 }
 
 type ListAndSearchMediaItems200ApplicationJSONLinksFirst struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type ListAndSearchMediaItems200ApplicationJSONLinksLast struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type ListAndSearchMediaItems200ApplicationJSONLinksSelf struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type ListAndSearchMediaItems200ApplicationJSONLinks struct {
-	First *ListAndSearchMediaItems200ApplicationJSONLinksFirst `json:"first"`
-	Last  *ListAndSearchMediaItems200ApplicationJSONLinksLast  `json:"last"`
-	Self  *ListAndSearchMediaItems200ApplicationJSONLinksSelf  `json:"self"`
+	First *ListAndSearchMediaItems200ApplicationJSONLinksFirst `json:"first,omitempty"`
+	Last  *ListAndSearchMediaItems200ApplicationJSONLinksLast  `json:"last,omitempty"`
+	Self  *ListAndSearchMediaItems200ApplicationJSONLinksSelf  `json:"self,omitempty"`
 }
 
 type ListAndSearchMediaItems200ApplicationJSON struct {
-	Embedded  *ListAndSearchMediaItems200ApplicationJSONEmbedded `json:"_embedded"`
-	Links     *ListAndSearchMediaItems200ApplicationJSONLinks    `json:"_links"`
-	Count     *int64                                             `json:"count"`
-	PageIndex *int64                                             `json:"page_index"`
-	PageSize  *int64                                             `json:"page_size"`
+	Embedded  *ListAndSearchMediaItems200ApplicationJSONEmbedded `json:"_embedded,omitempty"`
+	Links     *ListAndSearchMediaItems200ApplicationJSONLinks    `json:"_links,omitempty"`
+	Count     *int64                                             `json:"count,omitempty"`
+	PageIndex *int64                                             `json:"page_index,omitempty"`
+	PageSize  *int64                                             `json:"page_size,omitempty"`
 }
 
 type ListAndSearchMediaItemsResponse struct {

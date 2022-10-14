@@ -27,7 +27,7 @@ const (
 type CreateDimensionRequestBody struct {
 	ClientRequestToken string                             `json:"clientRequestToken"`
 	StringValues       []string                           `json:"stringValues"`
-	Tags               []shared.Tag                       `json:"tags"`
+	Tags               []shared.Tag                       `json:"tags,omitempty"`
 	Type               CreateDimensionRequestBodyTypeEnum `json:"type"`
 }
 

@@ -1,6 +1,6 @@
 package shared
 
 type ResourceImageInputModel struct {
-	ImageFileData *string `json:"imageFileData"`
-	ImageFileName *string `json:"imageFileName"`
+	ImageFileData *string `json:"imageFileData,omitempty"`
+	ImageFileName *string `json:"imageFileName,omitempty"`
 }

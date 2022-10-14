@@ -1,8 +1,8 @@
 package shared
 
 type NewAttendancePeriodResponseData struct {
-	ID      []int64 `json:"id"`
-	Message *string `json:"message"`
+	ID      []int64 `json:"id,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type NewAttendancePeriodResponse struct {

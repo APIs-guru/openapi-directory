@@ -1,6 +1,6 @@
 package shared
 
 type PublishBatchRequest struct {
-	Messages []PubsubMessage `json:"messages"`
-	Topic    *string         `json:"topic"`
+	Messages []PubsubMessage `json:"messages,omitempty"`
+	Topic    *string         `json:"topic,omitempty"`
 }

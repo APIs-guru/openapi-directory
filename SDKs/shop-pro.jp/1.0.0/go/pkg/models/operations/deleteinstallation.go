@@ -13,16 +13,16 @@ type DeleteInstallationRequest struct {
 }
 
 type DeleteInstallation200ApplicationJSONUsageCharge struct {
-	APIToken  *string `json:"api_token"`
-	ClosingOn *int64  `json:"closing_on"`
+	APIToken  *string `json:"api_token,omitempty"`
+	ClosingOn *int64  `json:"closing_on,omitempty"`
 }
 
 type DeleteInstallation200ApplicationJSON struct {
-	AccountID                    *string                                          `json:"account_id"`
-	ApplicationChargeSourceID    *string                                          `json:"application_charge_source_id"`
-	RecurringApplicationChargeID *string                                          `json:"recurring_application_charge_id"`
-	UninstalledAt                *int64                                           `json:"uninstalled_at"`
-	UsageCharge                  *DeleteInstallation200ApplicationJSONUsageCharge `json:"usage_charge"`
+	AccountID                    *string                                          `json:"account_id,omitempty"`
+	ApplicationChargeSourceID    *string                                          `json:"application_charge_source_id,omitempty"`
+	RecurringApplicationChargeID *string                                          `json:"recurring_application_charge_id,omitempty"`
+	UninstalledAt                *int64                                           `json:"uninstalled_at,omitempty"`
+	UsageCharge                  *DeleteInstallation200ApplicationJSONUsageCharge `json:"usage_charge,omitempty"`
 }
 
 type DeleteInstallationResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type DeleteMaintenanceWindowResult struct {
-	WindowID *string `json:"WindowId"`
+	WindowID *string `json:"WindowId,omitempty"`
 }

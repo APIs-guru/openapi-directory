@@ -18,8 +18,8 @@ const (
 )
 
 type PmjayRequestBody struct {
-	CertificateParameters *PmjayRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *PmjayRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                PmjayRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Pmjay400ApplicationJSON struct {
-	Error            *Pmjay400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pmjay400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pmjay400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pmjay400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pmjay401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Pmjay401ApplicationJSON struct {
-	Error            *Pmjay401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pmjay401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pmjay401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pmjay401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pmjay404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Pmjay404ApplicationJSON struct {
-	Error            *Pmjay404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pmjay404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pmjay404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pmjay404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pmjay500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Pmjay500ApplicationJSON struct {
-	Error            *Pmjay500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pmjay500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pmjay500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pmjay500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pmjay502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Pmjay502ApplicationJSON struct {
-	Error            *Pmjay502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pmjay502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pmjay502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pmjay502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pmjay503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Pmjay503ApplicationJSON struct {
-	Error            *Pmjay503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pmjay503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pmjay503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pmjay503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pmjay504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Pmjay504ApplicationJSON struct {
-	Error            *Pmjay504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pmjay504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pmjay504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pmjay504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type PmjayResponse struct {

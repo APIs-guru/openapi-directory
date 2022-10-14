@@ -1,6 +1,6 @@
 package shared
 
 type ImageEntity struct {
-	Name *string `json:"name"`
-	URI  *string `json:"uri"`
+	Name *string `json:"name,omitempty"`
+	URI  *string `json:"uri,omitempty"`
 }

@@ -2,5 +2,5 @@ package shared
 
 type ResetJobBookmarkRequest struct {
 	JobName string  `json:"JobName"`
-	RunID   *string `json:"RunId"`
+	RunID   *string `json:"RunId,omitempty"`
 }

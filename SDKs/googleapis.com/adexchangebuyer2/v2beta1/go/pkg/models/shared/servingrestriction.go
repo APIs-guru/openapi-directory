@@ -9,8 +9,8 @@ const (
 )
 
 type ServingRestriction struct {
-	Contexts           []ServingContext              `json:"contexts"`
-	Disapproval        *Disapproval                  `json:"disapproval"`
-	DisapprovalReasons []Disapproval                 `json:"disapprovalReasons"`
-	Status             *ServingRestrictionStatusEnum `json:"status"`
+	Contexts           []ServingContext              `json:"contexts,omitempty"`
+	Disapproval        *Disapproval                  `json:"disapproval,omitempty"`
+	DisapprovalReasons []Disapproval                 `json:"disapprovalReasons,omitempty"`
+	Status             *ServingRestrictionStatusEnum `json:"status,omitempty"`
 }

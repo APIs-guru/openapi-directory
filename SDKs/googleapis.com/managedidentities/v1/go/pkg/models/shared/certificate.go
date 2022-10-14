@@ -1,9 +1,9 @@
 package shared
 
 type Certificate struct {
-	ExpireTime             *string      `json:"expireTime"`
-	IssuingCertificate     *Certificate `json:"issuingCertificate"`
-	Subject                *string      `json:"subject"`
-	SubjectAlternativeName []string     `json:"subjectAlternativeName"`
-	Thumbprint             *string      `json:"thumbprint"`
+	ExpireTime             *string      `json:"expireTime,omitempty"`
+	IssuingCertificate     *Certificate `json:"issuingCertificate,omitempty"`
+	Subject                *string      `json:"subject,omitempty"`
+	SubjectAlternativeName []string     `json:"subjectAlternativeName,omitempty"`
+	Thumbprint             *string      `json:"thumbprint,omitempty"`
 }

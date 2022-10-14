@@ -1,7 +1,7 @@
 package shared
 
 type CreateThingResponse struct {
-	ThingArn  *string `json:"thingArn"`
-	ThingID   *string `json:"thingId"`
-	ThingName *string `json:"thingName"`
+	ThingArn  *string `json:"thingArn,omitempty"`
+	ThingID   *string `json:"thingId,omitempty"`
+	ThingName *string `json:"thingName,omitempty"`
 }

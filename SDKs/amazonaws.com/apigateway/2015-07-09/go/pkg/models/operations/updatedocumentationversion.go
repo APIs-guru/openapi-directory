@@ -20,7 +20,7 @@ type UpdateDocumentationVersionHeaders struct {
 }
 
 type UpdateDocumentationVersionRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateDocumentationVersionRequest struct {

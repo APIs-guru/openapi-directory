@@ -1,6 +1,6 @@
 package shared
 
 type RenderingEngine struct {
-	Name    *RenderingEngineTypeEnum `json:"name"`
-	Version *string                  `json:"version"`
+	Name    *RenderingEngineTypeEnum `json:"name,omitempty"`
+	Version *string                  `json:"version,omitempty"`
 }

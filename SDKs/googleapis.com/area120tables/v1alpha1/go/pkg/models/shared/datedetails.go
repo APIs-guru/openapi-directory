@@ -1,5 +1,5 @@
 package shared
 
 type DateDetails struct {
-	HasTime *bool `json:"hasTime"`
+	HasTime *bool `json:"hasTime,omitempty"`
 }

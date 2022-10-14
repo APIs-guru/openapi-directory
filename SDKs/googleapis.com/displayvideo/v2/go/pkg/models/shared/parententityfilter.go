@@ -25,7 +25,7 @@ const (
 )
 
 type ParentEntityFilter struct {
-	FileType   []ParentEntityFilterFileTypeEnum  `json:"fileType"`
-	FilterIds  []string                          `json:"filterIds"`
-	FilterType *ParentEntityFilterFilterTypeEnum `json:"filterType"`
+	FileType   []ParentEntityFilterFileTypeEnum  `json:"fileType,omitempty"`
+	FilterIds  []string                          `json:"filterIds,omitempty"`
+	FilterType *ParentEntityFilterFilterTypeEnum `json:"filterType,omitempty"`
 }

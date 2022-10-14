@@ -20,10 +20,10 @@ const (
 )
 
 type DevicesRead401ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     DevicesRead401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -34,10 +34,10 @@ const (
 )
 
 type DevicesRead403ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     DevicesRead403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -48,10 +48,10 @@ const (
 )
 
 type DevicesRead404ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     DevicesRead404ApplicationJSONTypeEnum `json:"type"`
 }
 

@@ -1,6 +1,6 @@
 package shared
 
 type DiscoverPollEndpointResponse struct {
-	Endpoint          *string `json:"endpoint"`
-	TelemetryEndpoint *string `json:"telemetryEndpoint"`
+	Endpoint          *string `json:"endpoint,omitempty"`
+	TelemetryEndpoint *string `json:"telemetryEndpoint,omitempty"`
 }

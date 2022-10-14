@@ -1,9 +1,9 @@
 package shared
 
 type UpdateOntapVolumeConfiguration struct {
-	JunctionPath             *string            `json:"JunctionPath"`
-	SecurityStyle            *SecurityStyleEnum `json:"SecurityStyle"`
-	SizeInMegabytes          *int64             `json:"SizeInMegabytes"`
-	StorageEfficiencyEnabled *bool              `json:"StorageEfficiencyEnabled"`
-	TieringPolicy            *TieringPolicy     `json:"TieringPolicy"`
+	JunctionPath             *string            `json:"JunctionPath,omitempty"`
+	SecurityStyle            *SecurityStyleEnum `json:"SecurityStyle,omitempty"`
+	SizeInMegabytes          *int64             `json:"SizeInMegabytes,omitempty"`
+	StorageEfficiencyEnabled *bool              `json:"StorageEfficiencyEnabled,omitempty"`
+	TieringPolicy            *TieringPolicy     `json:"TieringPolicy,omitempty"`
 }

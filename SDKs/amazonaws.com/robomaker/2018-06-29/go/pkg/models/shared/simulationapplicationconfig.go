@@ -2,11 +2,11 @@ package shared
 
 type SimulationApplicationConfig struct {
 	Application                    string                `json:"application"`
-	ApplicationVersion             *string               `json:"applicationVersion"`
+	ApplicationVersion             *string               `json:"applicationVersion,omitempty"`
 	LaunchConfig                   LaunchConfig          `json:"launchConfig"`
-	Tools                          []Tool                `json:"tools"`
-	UploadConfigurations           []UploadConfiguration `json:"uploadConfigurations"`
-	UseDefaultTools                *bool                 `json:"useDefaultTools"`
-	UseDefaultUploadConfigurations *bool                 `json:"useDefaultUploadConfigurations"`
-	WorldConfigs                   []WorldConfig         `json:"worldConfigs"`
+	Tools                          []Tool                `json:"tools,omitempty"`
+	UploadConfigurations           []UploadConfiguration `json:"uploadConfigurations,omitempty"`
+	UseDefaultTools                *bool                 `json:"useDefaultTools,omitempty"`
+	UseDefaultUploadConfigurations *bool                 `json:"useDefaultUploadConfigurations,omitempty"`
+	WorldConfigs                   []WorldConfig         `json:"worldConfigs,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type EntitySummary struct {
-	EntityArn        *string `json:"EntityArn"`
-	EntityID         *string `json:"EntityId"`
-	EntityType       *string `json:"EntityType"`
-	LastModifiedDate *string `json:"LastModifiedDate"`
-	Name             *string `json:"Name"`
-	Visibility       *string `json:"Visibility"`
+	EntityArn        *string `json:"EntityArn,omitempty"`
+	EntityID         *string `json:"EntityId,omitempty"`
+	EntityType       *string `json:"EntityType,omitempty"`
+	LastModifiedDate *string `json:"LastModifiedDate,omitempty"`
+	Name             *string `json:"Name,omitempty"`
+	Visibility       *string `json:"Visibility,omitempty"`
 }

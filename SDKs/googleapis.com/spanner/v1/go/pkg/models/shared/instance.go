@@ -17,16 +17,16 @@ const (
 )
 
 type Instance struct {
-	Config               *string                   `json:"config"`
-	CreateTime           *string                   `json:"createTime"`
-	DisplayName          *string                   `json:"displayName"`
-	EndpointUris         []string                  `json:"endpointUris"`
-	FreeInstanceMetadata *FreeInstanceMetadata     `json:"freeInstanceMetadata"`
-	InstanceType         *InstanceInstanceTypeEnum `json:"instanceType"`
-	Labels               map[string]string         `json:"labels"`
-	Name                 *string                   `json:"name"`
-	NodeCount            *int32                    `json:"nodeCount"`
-	ProcessingUnits      *int32                    `json:"processingUnits"`
-	State                *InstanceStateEnum        `json:"state"`
-	UpdateTime           *string                   `json:"updateTime"`
+	Config               *string                   `json:"config,omitempty"`
+	CreateTime           *string                   `json:"createTime,omitempty"`
+	DisplayName          *string                   `json:"displayName,omitempty"`
+	EndpointUris         []string                  `json:"endpointUris,omitempty"`
+	FreeInstanceMetadata *FreeInstanceMetadata     `json:"freeInstanceMetadata,omitempty"`
+	InstanceType         *InstanceInstanceTypeEnum `json:"instanceType,omitempty"`
+	Labels               map[string]string         `json:"labels,omitempty"`
+	Name                 *string                   `json:"name,omitempty"`
+	NodeCount            *int32                    `json:"nodeCount,omitempty"`
+	ProcessingUnits      *int32                    `json:"processingUnits,omitempty"`
+	State                *InstanceStateEnum        `json:"state,omitempty"`
+	UpdateTime           *string                   `json:"updateTime,omitempty"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type EventFilter struct {
-	ContinuationToken *PagedResultsPublicContinuationToken `json:"continuationToken"`
-	EventStatusCode   *int32                               `json:"eventStatusCode"`
-	MaxCreationDate   *time.Time                           `json:"maxCreationDate"`
-	MinCreationDate   *time.Time                           `json:"minCreationDate"`
-	ModifiedSince     *time.Time                           `json:"modifiedSince"`
-	TeamID            *string                              `json:"teamId"`
-	TextToSearch      *string                              `json:"textToSearch"`
+	ContinuationToken *PagedResultsPublicContinuationToken `json:"continuationToken,omitempty"`
+	EventStatusCode   *int32                               `json:"eventStatusCode,omitempty"`
+	MaxCreationDate   *time.Time                           `json:"maxCreationDate,omitempty"`
+	MinCreationDate   *time.Time                           `json:"minCreationDate,omitempty"`
+	ModifiedSince     *time.Time                           `json:"modifiedSince,omitempty"`
+	TeamID            *string                              `json:"teamId,omitempty"`
+	TextToSearch      *string                              `json:"textToSearch,omitempty"`
 }

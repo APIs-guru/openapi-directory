@@ -18,20 +18,20 @@ const (
 )
 
 type GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport struct {
-	AccountID             *string                                                                 `json:"accountId"`
-	AggregatorInfo        *GoogleAdsHomeservicesLocalservicesV1AggregatorInfo                     `json:"aggregatorInfo"`
-	BookingLead           *GoogleAdsHomeservicesLocalservicesV1BookingLead                        `json:"bookingLead"`
-	BusinessName          *string                                                                 `json:"businessName"`
-	ChargeStatus          *GoogleAdsHomeservicesLocalservicesV1DetailedLeadReportChargeStatusEnum `json:"chargeStatus"`
-	CurrencyCode          *string                                                                 `json:"currencyCode"`
-	DisputeStatus         *string                                                                 `json:"disputeStatus"`
-	Geo                   *string                                                                 `json:"geo"`
-	LeadCategory          *string                                                                 `json:"leadCategory"`
-	LeadCreationTimestamp *string                                                                 `json:"leadCreationTimestamp"`
-	LeadID                *string                                                                 `json:"leadId"`
-	LeadPrice             *float64                                                                `json:"leadPrice"`
-	LeadType              *GoogleAdsHomeservicesLocalservicesV1DetailedLeadReportLeadTypeEnum     `json:"leadType"`
-	MessageLead           *GoogleAdsHomeservicesLocalservicesV1MessageLead                        `json:"messageLead"`
-	PhoneLead             *GoogleAdsHomeservicesLocalservicesV1PhoneLead                          `json:"phoneLead"`
-	Timezone              *GoogleTypeTimeZone                                                     `json:"timezone"`
+	AccountID             *string                                                                 `json:"accountId,omitempty"`
+	AggregatorInfo        *GoogleAdsHomeservicesLocalservicesV1AggregatorInfo                     `json:"aggregatorInfo,omitempty"`
+	BookingLead           *GoogleAdsHomeservicesLocalservicesV1BookingLead                        `json:"bookingLead,omitempty"`
+	BusinessName          *string                                                                 `json:"businessName,omitempty"`
+	ChargeStatus          *GoogleAdsHomeservicesLocalservicesV1DetailedLeadReportChargeStatusEnum `json:"chargeStatus,omitempty"`
+	CurrencyCode          *string                                                                 `json:"currencyCode,omitempty"`
+	DisputeStatus         *string                                                                 `json:"disputeStatus,omitempty"`
+	Geo                   *string                                                                 `json:"geo,omitempty"`
+	LeadCategory          *string                                                                 `json:"leadCategory,omitempty"`
+	LeadCreationTimestamp *string                                                                 `json:"leadCreationTimestamp,omitempty"`
+	LeadID                *string                                                                 `json:"leadId,omitempty"`
+	LeadPrice             *float64                                                                `json:"leadPrice,omitempty"`
+	LeadType              *GoogleAdsHomeservicesLocalservicesV1DetailedLeadReportLeadTypeEnum     `json:"leadType,omitempty"`
+	MessageLead           *GoogleAdsHomeservicesLocalservicesV1MessageLead                        `json:"messageLead,omitempty"`
+	PhoneLead             *GoogleAdsHomeservicesLocalservicesV1PhoneLead                          `json:"phoneLead,omitempty"`
+	Timezone              *GoogleTypeTimeZone                                                     `json:"timezone,omitempty"`
 }

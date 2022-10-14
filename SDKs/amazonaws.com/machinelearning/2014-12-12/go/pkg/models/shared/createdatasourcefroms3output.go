@@ -1,5 +1,5 @@
 package shared
 
 type CreateDataSourceFromS3Output struct {
-	DataSourceID *string `json:"DataSourceId"`
+	DataSourceID *string `json:"DataSourceId,omitempty"`
 }

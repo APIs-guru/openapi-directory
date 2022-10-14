@@ -15,12 +15,12 @@ type RegisterClusterHeaders struct {
 }
 
 type RegisterClusterRequestBodyConnectorConfig struct {
-	Provider *shared.ConnectorConfigProviderEnum `json:"provider"`
-	RoleArn  *string                             `json:"roleArn"`
+	Provider *shared.ConnectorConfigProviderEnum `json:"provider,omitempty"`
+	RoleArn  *string                             `json:"roleArn,omitempty"`
 }
 
 type RegisterClusterRequestBody struct {
-	ClientRequestToken *string                                   `json:"clientRequestToken"`
+	ClientRequestToken *string                                   `json:"clientRequestToken,omitempty"`
 	ConnectorConfig    RegisterClusterRequestBodyConnectorConfig `json:"connectorConfig"`
 	Name               string                                    `json:"name"`
 }

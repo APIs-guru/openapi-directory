@@ -5,10 +5,10 @@ type CheckinNetworkSmDevicesPathParams struct {
 }
 
 type CheckinNetworkSmDevicesRequestBody struct {
-	Ids      []string `json:"ids"`
-	Scope    []string `json:"scope"`
-	Serials  []string `json:"serials"`
-	WifiMacs []string `json:"wifiMacs"`
+	Ids      []string `json:"ids,omitempty"`
+	Scope    []string `json:"scope,omitempty"`
+	Serials  []string `json:"serials,omitempty"`
+	WifiMacs []string `json:"wifiMacs,omitempty"`
 }
 
 type CheckinNetworkSmDevicesRequest struct {

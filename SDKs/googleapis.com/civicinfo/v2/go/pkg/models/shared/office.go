@@ -32,10 +32,10 @@ const (
 )
 
 type Office struct {
-	DivisionID      *string            `json:"divisionId"`
-	Levels          []OfficeLevelsEnum `json:"levels"`
-	Name            *string            `json:"name"`
-	OfficialIndices []int64            `json:"officialIndices"`
-	Roles           []OfficeRolesEnum  `json:"roles"`
-	Sources         []Source           `json:"sources"`
+	DivisionID      *string            `json:"divisionId,omitempty"`
+	Levels          []OfficeLevelsEnum `json:"levels,omitempty"`
+	Name            *string            `json:"name,omitempty"`
+	OfficialIndices []int64            `json:"officialIndices,omitempty"`
+	Roles           []OfficeRolesEnum  `json:"roles,omitempty"`
+	Sources         []Source           `json:"sources,omitempty"`
 }

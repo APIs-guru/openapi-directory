@@ -1,5 +1,5 @@
 package shared
 
 type ResellernotifyResource struct {
-	TopicName *string `json:"topicName"`
+	TopicName *string `json:"topicName,omitempty"`
 }

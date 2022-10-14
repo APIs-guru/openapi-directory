@@ -1,6 +1,6 @@
 package shared
 
 type ProductDeliveryTimeAreaDeliveryTime struct {
-	DeliveryArea *DeliveryArea                                    `json:"deliveryArea"`
-	DeliveryTime *ProductDeliveryTimeAreaDeliveryTimeDeliveryTime `json:"deliveryTime"`
+	DeliveryArea *DeliveryArea                                    `json:"deliveryArea,omitempty"`
+	DeliveryTime *ProductDeliveryTimeAreaDeliveryTimeDeliveryTime `json:"deliveryTime,omitempty"`
 }

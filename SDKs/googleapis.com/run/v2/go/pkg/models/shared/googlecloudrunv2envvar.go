@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudRunV2EnvVar struct {
-	Name        *string                       `json:"name"`
-	Value       *string                       `json:"value"`
-	ValueSource *GoogleCloudRunV2EnvVarSource `json:"valueSource"`
+	Name        *string                       `json:"name,omitempty"`
+	Value       *string                       `json:"value,omitempty"`
+	ValueSource *GoogleCloudRunV2EnvVarSource `json:"valueSource,omitempty"`
 }

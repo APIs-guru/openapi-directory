@@ -38,7 +38,7 @@ type DeleteServersID200ApplicationJSONActionAction struct {
 }
 
 type DeleteServersID200ApplicationJSON struct {
-	Action *DeleteServersID200ApplicationJSONActionAction `json:"action"`
+	Action *DeleteServersID200ApplicationJSONActionAction `json:"action,omitempty"`
 }
 
 type DeleteServersIDResponse struct {

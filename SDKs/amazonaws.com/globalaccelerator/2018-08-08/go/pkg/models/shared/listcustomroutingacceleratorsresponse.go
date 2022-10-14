@@ -1,6 +1,6 @@
 package shared
 
 type ListCustomRoutingAcceleratorsResponse struct {
-	Accelerators []CustomRoutingAccelerator `json:"Accelerators"`
-	NextToken    *string                    `json:"NextToken"`
+	Accelerators []CustomRoutingAccelerator `json:"Accelerators,omitempty"`
+	NextToken    *string                    `json:"NextToken,omitempty"`
 }

@@ -10,14 +10,14 @@ type GetContractTestRelationsRequest struct {
 }
 
 type GetContractTestRelations200ApplicationJSONContracttest struct {
-	CollectionID *string `json:"collectionId"`
-	ID           *string `json:"id"`
-	Name         *string `json:"name"`
-	UpdatedAt    *string `json:"updatedAt"`
+	CollectionID *string `json:"collectionId,omitempty"`
+	ID           *string `json:"id,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	UpdatedAt    *string `json:"updatedAt,omitempty"`
 }
 
 type GetContractTestRelations200ApplicationJSON struct {
-	Contracttest []GetContractTestRelations200ApplicationJSONContracttest `json:"contracttest"`
+	Contracttest []GetContractTestRelations200ApplicationJSONContracttest `json:"contracttest,omitempty"`
 }
 
 type GetContractTestRelationsResponse struct {

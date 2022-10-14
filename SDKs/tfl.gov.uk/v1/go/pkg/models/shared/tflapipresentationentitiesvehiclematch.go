@@ -10,10 +10,10 @@ const (
 )
 
 type TflAPIPresentationEntitiesVehicleMatch struct {
-	Colour     *string                                               `json:"colour"`
-	Compliance *TflAPIPresentationEntitiesVehicleMatchComplianceEnum `json:"compliance"`
-	Make       *string                                               `json:"make"`
-	Model      *string                                               `json:"model"`
-	Type       *string                                               `json:"type"`
-	Vrm        *string                                               `json:"vrm"`
+	Colour     *string                                               `json:"colour,omitempty"`
+	Compliance *TflAPIPresentationEntitiesVehicleMatchComplianceEnum `json:"compliance,omitempty"`
+	Make       *string                                               `json:"make,omitempty"`
+	Model      *string                                               `json:"model,omitempty"`
+	Type       *string                                               `json:"type,omitempty"`
+	Vrm        *string                                               `json:"vrm,omitempty"`
 }

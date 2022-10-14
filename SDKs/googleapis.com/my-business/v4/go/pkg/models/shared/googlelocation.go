@@ -1,7 +1,7 @@
 package shared
 
 type GoogleLocation struct {
-	Location              *Location `json:"location"`
-	Name                  *string   `json:"name"`
-	RequestAdminRightsURL *string   `json:"requestAdminRightsUrl"`
+	Location              *Location `json:"location,omitempty"`
+	Name                  *string   `json:"name,omitempty"`
+	RequestAdminRightsURL *string   `json:"requestAdminRightsUrl,omitempty"`
 }

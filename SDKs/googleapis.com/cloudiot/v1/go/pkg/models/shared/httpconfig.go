@@ -9,5 +9,5 @@ const (
 )
 
 type HTTPConfig struct {
-	HTTPEnabledState *HTTPConfigHTTPEnabledStateEnum `json:"httpEnabledState"`
+	HTTPEnabledState *HTTPConfigHTTPEnabledStateEnum `json:"httpEnabledState,omitempty"`
 }

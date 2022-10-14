@@ -29,18 +29,18 @@ type ListObjectAttributesHeaders struct {
 }
 
 type ListObjectAttributesRequestBodyFacetFilter struct {
-	FacetName *string `json:"FacetName"`
-	SchemaArn *string `json:"SchemaArn"`
+	FacetName *string `json:"FacetName,omitempty"`
+	SchemaArn *string `json:"SchemaArn,omitempty"`
 }
 
 type ListObjectAttributesRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type ListObjectAttributesRequestBody struct {
-	FacetFilter     *ListObjectAttributesRequestBodyFacetFilter    `json:"FacetFilter"`
-	MaxResults      *int64                                         `json:"MaxResults"`
-	NextToken       *string                                        `json:"NextToken"`
+	FacetFilter     *ListObjectAttributesRequestBodyFacetFilter    `json:"FacetFilter,omitempty"`
+	MaxResults      *int64                                         `json:"MaxResults,omitempty"`
+	NextToken       *string                                        `json:"NextToken,omitempty"`
 	ObjectReference ListObjectAttributesRequestBodyObjectReference `json:"ObjectReference"`
 }
 

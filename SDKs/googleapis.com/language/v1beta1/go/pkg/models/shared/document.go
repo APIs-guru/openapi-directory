@@ -9,8 +9,8 @@ const (
 )
 
 type Document struct {
-	Content       *string           `json:"content"`
-	GcsContentURI *string           `json:"gcsContentUri"`
-	Language      *string           `json:"language"`
-	Type          *DocumentTypeEnum `json:"type"`
+	Content       *string           `json:"content,omitempty"`
+	GcsContentURI *string           `json:"gcsContentUri,omitempty"`
+	Language      *string           `json:"language,omitempty"`
+	Type          *DocumentTypeEnum `json:"type,omitempty"`
 }

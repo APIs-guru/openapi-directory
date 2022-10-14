@@ -21,10 +21,10 @@ type PostTextHeaders struct {
 }
 
 type PostTextRequestBody struct {
-	ActiveContexts    []shared.ActiveContext `json:"activeContexts"`
+	ActiveContexts    []shared.ActiveContext `json:"activeContexts,omitempty"`
 	InputText         string                 `json:"inputText"`
-	RequestAttributes map[string]string      `json:"requestAttributes"`
-	SessionAttributes map[string]string      `json:"sessionAttributes"`
+	RequestAttributes map[string]string      `json:"requestAttributes,omitempty"`
+	SessionAttributes map[string]string      `json:"sessionAttributes,omitempty"`
 }
 
 type PostTextRequest struct {

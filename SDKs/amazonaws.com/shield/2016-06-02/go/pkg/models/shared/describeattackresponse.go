@@ -1,5 +1,5 @@
 package shared
 
 type DescribeAttackResponse struct {
-	Attack *AttackDetail `json:"Attack"`
+	Attack *AttackDetail `json:"Attack,omitempty"`
 }

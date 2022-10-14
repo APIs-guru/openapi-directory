@@ -7,10 +7,10 @@ import (
 type Segment struct {
 	BookingClass     string     `json:"bookingClass"`
 	Carrier          string     `json:"carrier"`
-	Departure        *time.Time `json:"departure"`
+	Departure        *time.Time `json:"departure,omitempty"`
 	Destination      string     `json:"destination"`
-	Distance         *float64   `json:"distance"`
-	FlightNumber     *int32     `json:"flightNumber"`
-	OperatingCarrier *string    `json:"operatingCarrier"`
+	Distance         *float64   `json:"distance,omitempty"`
+	FlightNumber     *int32     `json:"flightNumber,omitempty"`
+	OperatingCarrier *string    `json:"operatingCarrier,omitempty"`
 	Origin           string     `json:"origin"`
 }

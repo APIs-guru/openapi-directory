@@ -1,5 +1,5 @@
 package shared
 
 type ListFindingTypeStatsResponse struct {
-	FindingTypeStats []FindingTypeStats `json:"findingTypeStats"`
+	FindingTypeStats []FindingTypeStats `json:"findingTypeStats,omitempty"`
 }

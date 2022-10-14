@@ -12,12 +12,12 @@ type PullsCreateReviewPathParams struct {
 
 type PullsCreateReviewRequestBodyComments struct {
 	Body      string  `json:"body"`
-	Line      *int64  `json:"line"`
+	Line      *int64  `json:"line,omitempty"`
 	Path      string  `json:"path"`
-	Position  *int64  `json:"position"`
-	Side      *string `json:"side"`
-	StartLine *int64  `json:"start_line"`
-	StartSide *string `json:"start_side"`
+	Position  *int64  `json:"position,omitempty"`
+	Side      *string `json:"side,omitempty"`
+	StartLine *int64  `json:"start_line,omitempty"`
+	StartSide *string `json:"start_side,omitempty"`
 }
 
 type PullsCreateReviewRequestBodyEventEnum string
@@ -29,10 +29,10 @@ const (
 )
 
 type PullsCreateReviewRequestBody struct {
-	Body     *string                                `json:"body"`
-	Comments []PullsCreateReviewRequestBodyComments `json:"comments"`
-	CommitID *string                                `json:"commit_id"`
-	Event    *PullsCreateReviewRequestBodyEventEnum `json:"event"`
+	Body     *string                                `json:"body,omitempty"`
+	Comments []PullsCreateReviewRequestBodyComments `json:"comments,omitempty"`
+	CommitID *string                                `json:"commit_id,omitempty"`
+	Event    *PullsCreateReviewRequestBodyEventEnum `json:"event,omitempty"`
 }
 
 type PullsCreateReviewRequest struct {

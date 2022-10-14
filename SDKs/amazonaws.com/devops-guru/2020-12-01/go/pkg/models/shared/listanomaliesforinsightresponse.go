@@ -1,7 +1,7 @@
 package shared
 
 type ListAnomaliesForInsightResponse struct {
-	NextToken          *string                   `json:"NextToken"`
-	ProactiveAnomalies []ProactiveAnomalySummary `json:"ProactiveAnomalies"`
-	ReactiveAnomalies  []ReactiveAnomalySummary  `json:"ReactiveAnomalies"`
+	NextToken          *string                   `json:"NextToken,omitempty"`
+	ProactiveAnomalies []ProactiveAnomalySummary `json:"ProactiveAnomalies,omitempty"`
+	ReactiveAnomalies  []ReactiveAnomalySummary  `json:"ReactiveAnomalies,omitempty"`
 }

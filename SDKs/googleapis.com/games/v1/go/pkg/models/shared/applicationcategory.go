@@ -1,7 +1,7 @@
 package shared
 
 type ApplicationCategory struct {
-	Kind      *string `json:"kind"`
-	Primary   *string `json:"primary"`
-	Secondary *string `json:"secondary"`
+	Kind      *string `json:"kind,omitempty"`
+	Primary   *string `json:"primary,omitempty"`
+	Secondary *string `json:"secondary,omitempty"`
 }

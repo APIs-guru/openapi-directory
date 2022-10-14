@@ -20,14 +20,14 @@ type PutProfileObjectTypeHeaders struct {
 }
 
 type PutProfileObjectTypeRequestBody struct {
-	AllowProfileCreation *bool                             `json:"AllowProfileCreation"`
+	AllowProfileCreation *bool                             `json:"AllowProfileCreation,omitempty"`
 	Description          string                            `json:"Description"`
-	EncryptionKey        *string                           `json:"EncryptionKey"`
-	ExpirationDays       *int64                            `json:"ExpirationDays"`
-	Fields               map[string]shared.ObjectTypeField `json:"Fields"`
-	Keys                 map[string][]shared.ObjectTypeKey `json:"Keys"`
-	Tags                 map[string]string                 `json:"Tags"`
-	TemplateID           *string                           `json:"TemplateId"`
+	EncryptionKey        *string                           `json:"EncryptionKey,omitempty"`
+	ExpirationDays       *int64                            `json:"ExpirationDays,omitempty"`
+	Fields               map[string]shared.ObjectTypeField `json:"Fields,omitempty"`
+	Keys                 map[string][]shared.ObjectTypeKey `json:"Keys,omitempty"`
+	Tags                 map[string]string                 `json:"Tags,omitempty"`
+	TemplateID           *string                           `json:"TemplateId,omitempty"`
 }
 
 type PutProfileObjectTypeRequest struct {

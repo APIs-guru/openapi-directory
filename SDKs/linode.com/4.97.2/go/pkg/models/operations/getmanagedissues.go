@@ -28,14 +28,14 @@ type GetManagedIssuesRequest struct {
 }
 
 type GetManagedIssues200ApplicationJSON struct {
-	Data    []shared.ManagedIssue `json:"data"`
-	Page    *int64                `json:"page"`
-	Pages   *int64                `json:"pages"`
-	Results *int64                `json:"results"`
+	Data    []shared.ManagedIssue `json:"data,omitempty"`
+	Page    *int64                `json:"page,omitempty"`
+	Pages   *int64                `json:"pages,omitempty"`
+	Results *int64                `json:"results,omitempty"`
 }
 
 type GetManagedIssuesDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetManagedIssuesResponse struct {

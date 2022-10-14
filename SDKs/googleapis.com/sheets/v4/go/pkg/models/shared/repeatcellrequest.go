@@ -1,7 +1,7 @@
 package shared
 
 type RepeatCellRequest struct {
-	Cell   *CellData  `json:"cell"`
-	Fields *string    `json:"fields"`
-	Range  *GridRange `json:"range"`
+	Cell   *CellData  `json:"cell,omitempty"`
+	Fields *string    `json:"fields,omitempty"`
+	Range  *GridRange `json:"range,omitempty"`
 }

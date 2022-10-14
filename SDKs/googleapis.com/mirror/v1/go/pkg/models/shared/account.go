@@ -1,8 +1,8 @@
 package shared
 
 type Account struct {
-	AuthTokens []AuthToken `json:"authTokens"`
-	Features   []string    `json:"features"`
-	Password   *string     `json:"password"`
-	UserData   []UserData  `json:"userData"`
+	AuthTokens []AuthToken `json:"authTokens,omitempty"`
+	Features   []string    `json:"features,omitempty"`
+	Password   *string     `json:"password,omitempty"`
+	UserData   []UserData  `json:"userData,omitempty"`
 }

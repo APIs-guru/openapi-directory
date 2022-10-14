@@ -5,12 +5,12 @@ import (
 )
 
 type FlexV1Channel struct {
-	AccountSid  *string    `json:"account_sid"`
-	DateCreated *time.Time `json:"date_created"`
-	DateUpdated *time.Time `json:"date_updated"`
-	FlexFlowSid *string    `json:"flex_flow_sid"`
-	Sid         *string    `json:"sid"`
-	TaskSid     *string    `json:"task_sid"`
-	URL         *string    `json:"url"`
-	UserSid     *string    `json:"user_sid"`
+	AccountSid  *string    `json:"account_sid,omitempty"`
+	DateCreated *time.Time `json:"date_created,omitempty"`
+	DateUpdated *time.Time `json:"date_updated,omitempty"`
+	FlexFlowSid *string    `json:"flex_flow_sid,omitempty"`
+	Sid         *string    `json:"sid,omitempty"`
+	TaskSid     *string    `json:"task_sid,omitempty"`
+	URL         *string    `json:"url,omitempty"`
+	UserSid     *string    `json:"user_sid,omitempty"`
 }

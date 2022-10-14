@@ -5,6 +5,6 @@ import (
 )
 
 type TimePeriod struct {
-	End   *time.Time `json:"end"`
-	Start *time.Time `json:"start"`
+	End   *time.Time `json:"end,omitempty"`
+	Start *time.Time `json:"start,omitempty"`
 }

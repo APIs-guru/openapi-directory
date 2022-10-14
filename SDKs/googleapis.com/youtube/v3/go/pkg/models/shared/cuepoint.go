@@ -8,10 +8,10 @@ const (
 )
 
 type Cuepoint struct {
-	CueType               *CuepointCueTypeEnum `json:"cueType"`
-	DurationSecs          *int64               `json:"durationSecs"`
-	Etag                  *string              `json:"etag"`
-	ID                    *string              `json:"id"`
-	InsertionOffsetTimeMs *string              `json:"insertionOffsetTimeMs"`
-	WalltimeMs            *string              `json:"walltimeMs"`
+	CueType               *CuepointCueTypeEnum `json:"cueType,omitempty"`
+	DurationSecs          *int64               `json:"durationSecs,omitempty"`
+	Etag                  *string              `json:"etag,omitempty"`
+	ID                    *string              `json:"id,omitempty"`
+	InsertionOffsetTimeMs *string              `json:"insertionOffsetTimeMs,omitempty"`
+	WalltimeMs            *string              `json:"walltimeMs,omitempty"`
 }

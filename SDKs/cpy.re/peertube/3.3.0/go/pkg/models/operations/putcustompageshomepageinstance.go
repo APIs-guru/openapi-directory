@@ -5,7 +5,7 @@ import (
 )
 
 type PutCustomPagesHomepageInstanceRequestBody struct {
-	Content *string `json:"content"`
+	Content *string `json:"content,omitempty"`
 }
 
 type PutCustomPagesHomepageInstanceSecurity struct {

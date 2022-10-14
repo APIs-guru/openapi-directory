@@ -1,8 +1,8 @@
 package shared
 
 type ServiceMetadata struct {
-	Category    *string `json:"category"`
-	Description *string `json:"description"`
-	DisplayName *string `json:"displayName"`
-	Name        *string `json:"name"`
+	Category    *string `json:"category,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }

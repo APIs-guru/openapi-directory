@@ -1,11 +1,11 @@
 package shared
 
 type ReportingMetadataEntry struct {
-	CompatibleDimensions []string `json:"compatibleDimensions"`
-	CompatibleMetrics    []string `json:"compatibleMetrics"`
-	ID                   *string  `json:"id"`
-	Kind                 *string  `json:"kind"`
-	RequiredDimensions   []string `json:"requiredDimensions"`
-	RequiredMetrics      []string `json:"requiredMetrics"`
-	SupportedProducts    []string `json:"supportedProducts"`
+	CompatibleDimensions []string `json:"compatibleDimensions,omitempty"`
+	CompatibleMetrics    []string `json:"compatibleMetrics,omitempty"`
+	ID                   *string  `json:"id,omitempty"`
+	Kind                 *string  `json:"kind,omitempty"`
+	RequiredDimensions   []string `json:"requiredDimensions,omitempty"`
+	RequiredMetrics      []string `json:"requiredMetrics,omitempty"`
+	SupportedProducts    []string `json:"supportedProducts,omitempty"`
 }

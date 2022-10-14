@@ -5,14 +5,14 @@ import (
 )
 
 type CreateSlotTypeVersionResponse struct {
-	Checksum                *string                         `json:"checksum"`
-	CreatedDate             *time.Time                      `json:"createdDate"`
-	Description             *string                         `json:"description"`
-	EnumerationValues       []EnumerationValue              `json:"enumerationValues"`
-	LastUpdatedDate         *time.Time                      `json:"lastUpdatedDate"`
-	Name                    *string                         `json:"name"`
-	ParentSlotTypeSignature *string                         `json:"parentSlotTypeSignature"`
-	SlotTypeConfigurations  []SlotTypeConfiguration         `json:"slotTypeConfigurations"`
-	ValueSelectionStrategy  *SlotValueSelectionStrategyEnum `json:"valueSelectionStrategy"`
-	Version                 *string                         `json:"version"`
+	Checksum                *string                         `json:"checksum,omitempty"`
+	CreatedDate             *time.Time                      `json:"createdDate,omitempty"`
+	Description             *string                         `json:"description,omitempty"`
+	EnumerationValues       []EnumerationValue              `json:"enumerationValues,omitempty"`
+	LastUpdatedDate         *time.Time                      `json:"lastUpdatedDate,omitempty"`
+	Name                    *string                         `json:"name,omitempty"`
+	ParentSlotTypeSignature *string                         `json:"parentSlotTypeSignature,omitempty"`
+	SlotTypeConfigurations  []SlotTypeConfiguration         `json:"slotTypeConfigurations,omitempty"`
+	ValueSelectionStrategy  *SlotValueSelectionStrategyEnum `json:"valueSelectionStrategy,omitempty"`
+	Version                 *string                         `json:"version,omitempty"`
 }

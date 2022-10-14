@@ -13,7 +13,7 @@ const (
 )
 
 type Nickname struct {
-	Metadata *FieldMetadata    `json:"metadata"`
-	Type     *NicknameTypeEnum `json:"type"`
-	Value    *string           `json:"value"`
+	Metadata *FieldMetadata    `json:"metadata,omitempty"`
+	Type     *NicknameTypeEnum `json:"type,omitempty"`
+	Value    *string           `json:"value,omitempty"`
 }

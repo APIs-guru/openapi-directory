@@ -5,12 +5,12 @@ type ModifyNetworkSmDevicesTagsPathParams struct {
 }
 
 type ModifyNetworkSmDevicesTagsRequestBody struct {
-	Ids          []string `json:"ids"`
-	Scope        []string `json:"scope"`
-	Serials      []string `json:"serials"`
+	Ids          []string `json:"ids,omitempty"`
+	Scope        []string `json:"scope,omitempty"`
+	Serials      []string `json:"serials,omitempty"`
 	Tags         []string `json:"tags"`
 	UpdateAction string   `json:"updateAction"`
-	WifiMacs     []string `json:"wifiMacs"`
+	WifiMacs     []string `json:"wifiMacs,omitempty"`
 }
 
 type ModifyNetworkSmDevicesTagsRequest struct {

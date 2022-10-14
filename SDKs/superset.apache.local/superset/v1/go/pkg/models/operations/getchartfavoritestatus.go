@@ -18,19 +18,19 @@ type GetChartFavoriteStatusRequest struct {
 }
 
 type GetChartFavoriteStatus400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartFavoriteStatus401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartFavoriteStatus404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartFavoriteStatus500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartFavoriteStatusResponse struct {

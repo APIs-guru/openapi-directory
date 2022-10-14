@@ -1,7 +1,7 @@
 package shared
 
 type CloudRunMetadata struct {
-	Revision    *string  `json:"revision"`
-	Service     *string  `json:"service"`
-	ServiceUrls []string `json:"serviceUrls"`
+	Revision    *string  `json:"revision,omitempty"`
+	Service     *string  `json:"service,omitempty"`
+	ServiceUrls []string `json:"serviceUrls,omitempty"`
 }

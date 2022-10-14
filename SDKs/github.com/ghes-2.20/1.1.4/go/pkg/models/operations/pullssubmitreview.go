@@ -20,7 +20,7 @@ const (
 )
 
 type PullsSubmitReviewRequestBody struct {
-	Body  *string                               `json:"body"`
+	Body  *string                               `json:"body,omitempty"`
 	Event PullsSubmitReviewRequestBodyEventEnum `json:"event"`
 }
 

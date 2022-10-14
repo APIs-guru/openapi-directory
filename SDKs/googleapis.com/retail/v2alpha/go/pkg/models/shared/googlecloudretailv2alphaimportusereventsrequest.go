@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudRetailV2alphaImportUserEventsRequest struct {
-	ErrorsConfig *GoogleCloudRetailV2alphaImportErrorsConfig   `json:"errorsConfig"`
-	InputConfig  *GoogleCloudRetailV2alphaUserEventInputConfig `json:"inputConfig"`
+	ErrorsConfig *GoogleCloudRetailV2alphaImportErrorsConfig   `json:"errorsConfig,omitempty"`
+	InputConfig  *GoogleCloudRetailV2alphaUserEventInputConfig `json:"inputConfig,omitempty"`
 }

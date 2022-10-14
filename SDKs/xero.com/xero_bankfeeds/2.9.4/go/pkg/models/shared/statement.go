@@ -5,14 +5,14 @@ import (
 )
 
 type Statement struct {
-	EndBalance         *EndBalance     `json:"endBalance"`
-	EndDate            *time.Time      `json:"endDate"`
-	Errors             []Error         `json:"errors"`
-	FeedConnectionID   *string         `json:"feedConnectionId"`
-	ID                 *string         `json:"id"`
-	StartBalance       *StartBalance   `json:"startBalance"`
-	StartDate          *time.Time      `json:"startDate"`
-	StatementLineCount *int64          `json:"statementLineCount"`
-	StatementLines     []StatementLine `json:"statementLines"`
-	Status             *interface{}    `json:"status"`
+	EndBalance         *EndBalance     `json:"endBalance,omitempty"`
+	EndDate            *time.Time      `json:"endDate,omitempty"`
+	Errors             []Error         `json:"errors,omitempty"`
+	FeedConnectionID   *string         `json:"feedConnectionId,omitempty"`
+	ID                 *string         `json:"id,omitempty"`
+	StartBalance       *StartBalance   `json:"startBalance,omitempty"`
+	StartDate          *time.Time      `json:"startDate,omitempty"`
+	StatementLineCount *int64          `json:"statementLineCount,omitempty"`
+	StatementLines     []StatementLine `json:"statementLines,omitempty"`
+	Status             *interface{}    `json:"status,omitempty"`
 }

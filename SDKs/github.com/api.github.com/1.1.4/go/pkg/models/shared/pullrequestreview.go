@@ -32,7 +32,7 @@ type PullRequestReviewUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -43,14 +43,14 @@ type PullRequestReview struct {
 	Links             PullRequestReviewLinks          `json:"_links"`
 	AuthorAssociation AuthorAssociationEnum           `json:"author_association"`
 	Body              string                          `json:"body"`
-	BodyHTML          *string                         `json:"body_html"`
-	BodyText          *string                         `json:"body_text"`
+	BodyHTML          *string                         `json:"body_html,omitempty"`
+	BodyText          *string                         `json:"body_text,omitempty"`
 	CommitID          string                          `json:"commit_id"`
 	HTMLURL           string                          `json:"html_url"`
 	ID                int64                           `json:"id"`
 	NodeID            string                          `json:"node_id"`
 	PullRequestURL    string                          `json:"pull_request_url"`
 	State             string                          `json:"state"`
-	SubmittedAt       *time.Time                      `json:"submitted_at"`
+	SubmittedAt       *time.Time                      `json:"submitted_at,omitempty"`
 	User              PullRequestReviewUserSimpleUser `json:"user"`
 }

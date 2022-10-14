@@ -1,11 +1,11 @@
 package shared
 
 type UserIdentity struct {
-	AssumedRole   *AssumedRole          `json:"assumedRole"`
-	AwsAccount    *AwsAccount           `json:"awsAccount"`
-	AwsService    *AwsService           `json:"awsService"`
-	FederatedUser *FederatedUser        `json:"federatedUser"`
-	IamUser       *IamUser              `json:"iamUser"`
-	Root          *UserIdentityRoot     `json:"root"`
-	Type          *UserIdentityTypeEnum `json:"type"`
+	AssumedRole   *AssumedRole          `json:"assumedRole,omitempty"`
+	AwsAccount    *AwsAccount           `json:"awsAccount,omitempty"`
+	AwsService    *AwsService           `json:"awsService,omitempty"`
+	FederatedUser *FederatedUser        `json:"federatedUser,omitempty"`
+	IamUser       *IamUser              `json:"iamUser,omitempty"`
+	Root          *UserIdentityRoot     `json:"root,omitempty"`
+	Type          *UserIdentityTypeEnum `json:"type,omitempty"`
 }

@@ -5,14 +5,14 @@ import (
 )
 
 type CreateSlotTypeResponse struct {
-	BotID                   *string                    `json:"botId"`
-	BotVersion              *string                    `json:"botVersion"`
-	CreationDateTime        *time.Time                 `json:"creationDateTime"`
-	Description             *string                    `json:"description"`
-	LocaleID                *string                    `json:"localeId"`
-	ParentSlotTypeSignature *string                    `json:"parentSlotTypeSignature"`
-	SlotTypeID              *string                    `json:"slotTypeId"`
-	SlotTypeName            *string                    `json:"slotTypeName"`
-	SlotTypeValues          []SlotTypeValue            `json:"slotTypeValues"`
-	ValueSelectionSetting   *SlotValueSelectionSetting `json:"valueSelectionSetting"`
+	BotID                   *string                    `json:"botId,omitempty"`
+	BotVersion              *string                    `json:"botVersion,omitempty"`
+	CreationDateTime        *time.Time                 `json:"creationDateTime,omitempty"`
+	Description             *string                    `json:"description,omitempty"`
+	LocaleID                *string                    `json:"localeId,omitempty"`
+	ParentSlotTypeSignature *string                    `json:"parentSlotTypeSignature,omitempty"`
+	SlotTypeID              *string                    `json:"slotTypeId,omitempty"`
+	SlotTypeName            *string                    `json:"slotTypeName,omitempty"`
+	SlotTypeValues          []SlotTypeValue            `json:"slotTypeValues,omitempty"`
+	ValueSelectionSetting   *SlotValueSelectionSetting `json:"valueSelectionSetting,omitempty"`
 }

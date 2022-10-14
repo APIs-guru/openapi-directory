@@ -1,8 +1,8 @@
 package shared
 
 type PerProjectQuota struct {
-	Images     *Quota  `json:"Images"`
-	Iterations *Quota  `json:"Iterations"`
-	ProjectID  *string `json:"ProjectId"`
-	Tags       *Quota  `json:"Tags"`
+	Images     *Quota  `json:"Images,omitempty"`
+	Iterations *Quota  `json:"Iterations,omitempty"`
+	ProjectID  *string `json:"ProjectId,omitempty"`
+	Tags       *Quota  `json:"Tags,omitempty"`
 }

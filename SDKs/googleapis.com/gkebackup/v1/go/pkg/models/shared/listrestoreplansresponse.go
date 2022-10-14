@@ -1,7 +1,7 @@
 package shared
 
 type ListRestorePlansResponse struct {
-	NextPageToken *string       `json:"nextPageToken"`
-	RestorePlans  []RestorePlan `json:"restorePlans"`
-	Unreachable   []string      `json:"unreachable"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	RestorePlans  []RestorePlan `json:"restorePlans,omitempty"`
+	Unreachable   []string      `json:"unreachable,omitempty"`
 }

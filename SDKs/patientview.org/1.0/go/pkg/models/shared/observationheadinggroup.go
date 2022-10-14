@@ -5,9 +5,9 @@ import (
 )
 
 type ObservationHeadingGroup struct {
-	Created    *time.Time `json:"created"`
-	Group      *Group     `json:"group"`
-	ID         *int64     `json:"id"`
-	Panel      *int64     `json:"panel"`
-	PanelOrder *int64     `json:"panelOrder"`
+	Created    *time.Time `json:"created,omitempty"`
+	Group      *Group     `json:"group,omitempty"`
+	ID         *int64     `json:"id,omitempty"`
+	Panel      *int64     `json:"panel,omitempty"`
+	PanelOrder *int64     `json:"panelOrder,omitempty"`
 }

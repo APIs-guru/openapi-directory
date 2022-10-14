@@ -1,6 +1,6 @@
 package shared
 
 type Did struct {
-	CustomTag   *string `json:"custom_tag"`
-	PhoneNumber *string `json:"phone_number"`
+	CustomTag   *string `json:"custom_tag,omitempty"`
+	PhoneNumber *string `json:"phone_number,omitempty"`
 }

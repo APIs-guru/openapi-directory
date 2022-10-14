@@ -1,7 +1,7 @@
 package shared
 
 type GoogleAppsDriveLabelsV2betaLabelAppliedCapabilities struct {
-	CanApply  *bool `json:"canApply"`
-	CanRead   *bool `json:"canRead"`
-	CanRemove *bool `json:"canRemove"`
+	CanApply  *bool `json:"canApply,omitempty"`
+	CanRead   *bool `json:"canRead,omitempty"`
+	CanRemove *bool `json:"canRemove,omitempty"`
 }

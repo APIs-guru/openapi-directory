@@ -17,25 +17,25 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1IntentMessage struct {
-	BasicCard                 *GoogleCloudDialogflowV2beta1IntentMessageBasicCard                 `json:"basicCard"`
-	BrowseCarouselCard        *GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard        `json:"browseCarouselCard"`
-	Card                      *GoogleCloudDialogflowV2beta1IntentMessageCard                      `json:"card"`
-	CarouselSelect            *GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect            `json:"carouselSelect"`
-	Image                     *GoogleCloudDialogflowV2beta1IntentMessageImage                     `json:"image"`
-	LinkOutSuggestion         *GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion         `json:"linkOutSuggestion"`
-	ListSelect                *GoogleCloudDialogflowV2beta1IntentMessageListSelect                `json:"listSelect"`
-	MediaContent              *GoogleCloudDialogflowV2beta1IntentMessageMediaContent              `json:"mediaContent"`
-	Payload                   map[string]interface{}                                              `json:"payload"`
-	Platform                  *GoogleCloudDialogflowV2beta1IntentMessagePlatformEnum              `json:"platform"`
-	QuickReplies              *GoogleCloudDialogflowV2beta1IntentMessageQuickReplies              `json:"quickReplies"`
-	RbmCarouselRichCard       *GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCard           `json:"rbmCarouselRichCard"`
-	RbmStandaloneRichCard     *GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCard         `json:"rbmStandaloneRichCard"`
-	RbmText                   *GoogleCloudDialogflowV2beta1IntentMessageRbmText                   `json:"rbmText"`
-	SimpleResponses           *GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses           `json:"simpleResponses"`
-	Suggestions               *GoogleCloudDialogflowV2beta1IntentMessageSuggestions               `json:"suggestions"`
-	TableCard                 *GoogleCloudDialogflowV2beta1IntentMessageTableCard                 `json:"tableCard"`
-	TelephonyPlayAudio        *GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio        `json:"telephonyPlayAudio"`
-	TelephonySynthesizeSpeech *GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech `json:"telephonySynthesizeSpeech"`
-	TelephonyTransferCall     *GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall     `json:"telephonyTransferCall"`
-	Text                      *GoogleCloudDialogflowV2beta1IntentMessageText                      `json:"text"`
+	BasicCard                 *GoogleCloudDialogflowV2beta1IntentMessageBasicCard                 `json:"basicCard,omitempty"`
+	BrowseCarouselCard        *GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard        `json:"browseCarouselCard,omitempty"`
+	Card                      *GoogleCloudDialogflowV2beta1IntentMessageCard                      `json:"card,omitempty"`
+	CarouselSelect            *GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect            `json:"carouselSelect,omitempty"`
+	Image                     *GoogleCloudDialogflowV2beta1IntentMessageImage                     `json:"image,omitempty"`
+	LinkOutSuggestion         *GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion         `json:"linkOutSuggestion,omitempty"`
+	ListSelect                *GoogleCloudDialogflowV2beta1IntentMessageListSelect                `json:"listSelect,omitempty"`
+	MediaContent              *GoogleCloudDialogflowV2beta1IntentMessageMediaContent              `json:"mediaContent,omitempty"`
+	Payload                   map[string]interface{}                                              `json:"payload,omitempty"`
+	Platform                  *GoogleCloudDialogflowV2beta1IntentMessagePlatformEnum              `json:"platform,omitempty"`
+	QuickReplies              *GoogleCloudDialogflowV2beta1IntentMessageQuickReplies              `json:"quickReplies,omitempty"`
+	RbmCarouselRichCard       *GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCard           `json:"rbmCarouselRichCard,omitempty"`
+	RbmStandaloneRichCard     *GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCard         `json:"rbmStandaloneRichCard,omitempty"`
+	RbmText                   *GoogleCloudDialogflowV2beta1IntentMessageRbmText                   `json:"rbmText,omitempty"`
+	SimpleResponses           *GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses           `json:"simpleResponses,omitempty"`
+	Suggestions               *GoogleCloudDialogflowV2beta1IntentMessageSuggestions               `json:"suggestions,omitempty"`
+	TableCard                 *GoogleCloudDialogflowV2beta1IntentMessageTableCard                 `json:"tableCard,omitempty"`
+	TelephonyPlayAudio        *GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio        `json:"telephonyPlayAudio,omitempty"`
+	TelephonySynthesizeSpeech *GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech `json:"telephonySynthesizeSpeech,omitempty"`
+	TelephonyTransferCall     *GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall     `json:"telephonyTransferCall,omitempty"`
+	Text                      *GoogleCloudDialogflowV2beta1IntentMessageText                      `json:"text,omitempty"`
 }

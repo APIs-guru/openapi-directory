@@ -1,5 +1,5 @@
 package shared
 
 type StartDataCollectionByAgentIdsResponse struct {
-	AgentsConfigurationStatus []AgentConfigurationStatus `json:"agentsConfigurationStatus"`
+	AgentsConfigurationStatus []AgentConfigurationStatus `json:"agentsConfigurationStatus,omitempty"`
 }

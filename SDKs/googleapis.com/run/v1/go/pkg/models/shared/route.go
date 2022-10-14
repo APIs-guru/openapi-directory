@@ -1,9 +1,9 @@
 package shared
 
 type Route struct {
-	APIVersion *string      `json:"apiVersion"`
-	Kind       *string      `json:"kind"`
-	Metadata   *ObjectMeta  `json:"metadata"`
-	Spec       *RouteSpec   `json:"spec"`
-	Status     *RouteStatus `json:"status"`
+	APIVersion *string      `json:"apiVersion,omitempty"`
+	Kind       *string      `json:"kind,omitempty"`
+	Metadata   *ObjectMeta  `json:"metadata,omitempty"`
+	Spec       *RouteSpec   `json:"spec,omitempty"`
+	Status     *RouteStatus `json:"status,omitempty"`
 }

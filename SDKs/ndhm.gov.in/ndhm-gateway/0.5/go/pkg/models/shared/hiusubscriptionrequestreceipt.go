@@ -9,9 +9,9 @@ type HiuSubscriptionRequestReceiptSubscriptionRequest struct {
 }
 
 type HiuSubscriptionRequestReceipt struct {
-	Error               *Error                                            `json:"error"`
+	Error               *Error                                            `json:"error,omitempty"`
 	RequestID           string                                            `json:"requestId"`
 	Resp                RequestReference                                  `json:"resp"`
-	SubscriptionRequest *HiuSubscriptionRequestReceiptSubscriptionRequest `json:"subscriptionRequest"`
+	SubscriptionRequest *HiuSubscriptionRequestReceiptSubscriptionRequest `json:"subscriptionRequest,omitempty"`
 	Timestamp           time.Time                                         `json:"timestamp"`
 }

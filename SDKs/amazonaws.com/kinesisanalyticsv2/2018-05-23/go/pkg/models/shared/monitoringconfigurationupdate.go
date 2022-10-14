@@ -1,7 +1,7 @@
 package shared
 
 type MonitoringConfigurationUpdate struct {
-	ConfigurationTypeUpdate *ConfigurationTypeEnum `json:"ConfigurationTypeUpdate"`
-	LogLevelUpdate          *LogLevelEnum          `json:"LogLevelUpdate"`
-	MetricsLevelUpdate      *MetricsLevelEnum      `json:"MetricsLevelUpdate"`
+	ConfigurationTypeUpdate *ConfigurationTypeEnum `json:"ConfigurationTypeUpdate,omitempty"`
+	LogLevelUpdate          *LogLevelEnum          `json:"LogLevelUpdate,omitempty"`
+	MetricsLevelUpdate      *MetricsLevelEnum      `json:"MetricsLevelUpdate,omitempty"`
 }

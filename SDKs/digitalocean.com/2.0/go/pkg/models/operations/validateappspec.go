@@ -5,7 +5,7 @@ import (
 )
 
 type ValidateAppSpecRequestBody struct {
-	AppID *string                                                                                                                                   `json:"app_id"`
+	AppID *string                                                                                                                                   `json:"app_id,omitempty"`
 	Spec  shared.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpec `json:"spec"`
 }
 
@@ -14,19 +14,19 @@ type ValidateAppSpecRequest struct {
 }
 
 type ValidateAppSpec200ApplicationJSON struct {
-	AppCost              *int32                                                                                                                                     `json:"app_cost"`
-	AppIsStatic          *bool                                                                                                                                      `json:"app_is_static"`
-	AppNameAvailable     *bool                                                                                                                                      `json:"app_name_available"`
-	AppNameSuggestion    *string                                                                                                                                    `json:"app_name_suggestion"`
-	AppTierDowngradeCost *int32                                                                                                                                     `json:"app_tier_downgrade_cost"`
-	ExistingStaticApps   *string                                                                                                                                    `json:"existing_static_apps"`
-	Spec                 *shared.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpec `json:"spec"`
+	AppCost              *int32                                                                                                                                     `json:"app_cost,omitempty"`
+	AppIsStatic          *bool                                                                                                                                      `json:"app_is_static,omitempty"`
+	AppNameAvailable     *bool                                                                                                                                      `json:"app_name_available,omitempty"`
+	AppNameSuggestion    *string                                                                                                                                    `json:"app_name_suggestion,omitempty"`
+	AppTierDowngradeCost *int32                                                                                                                                     `json:"app_tier_downgrade_cost,omitempty"`
+	ExistingStaticApps   *string                                                                                                                                    `json:"existing_static_apps,omitempty"`
+	Spec                 *shared.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpec `json:"spec,omitempty"`
 }
 
 type ValidateAppSpec401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ValidateAppSpecResponse struct {

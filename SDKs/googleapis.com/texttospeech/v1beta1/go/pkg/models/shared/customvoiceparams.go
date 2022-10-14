@@ -9,6 +9,6 @@ const (
 )
 
 type CustomVoiceParams struct {
-	Model         *string                             `json:"model"`
-	ReportedUsage *CustomVoiceParamsReportedUsageEnum `json:"reportedUsage"`
+	Model         *string                             `json:"model,omitempty"`
+	ReportedUsage *CustomVoiceParamsReportedUsageEnum `json:"reportedUsage,omitempty"`
 }

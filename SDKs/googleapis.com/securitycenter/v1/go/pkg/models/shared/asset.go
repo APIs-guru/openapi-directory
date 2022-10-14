@@ -1,12 +1,12 @@
 package shared
 
 type Asset struct {
-	CanonicalName            *string                   `json:"canonicalName"`
-	CreateTime               *string                   `json:"createTime"`
-	IamPolicy                *IamPolicy                `json:"iamPolicy"`
-	Name                     *string                   `json:"name"`
-	ResourceProperties       map[string]interface{}    `json:"resourceProperties"`
-	SecurityCenterProperties *SecurityCenterProperties `json:"securityCenterProperties"`
-	SecurityMarks            *SecurityMarks            `json:"securityMarks"`
-	UpdateTime               *string                   `json:"updateTime"`
+	CanonicalName            *string                   `json:"canonicalName,omitempty"`
+	CreateTime               *string                   `json:"createTime,omitempty"`
+	IamPolicy                *IamPolicy                `json:"iamPolicy,omitempty"`
+	Name                     *string                   `json:"name,omitempty"`
+	ResourceProperties       map[string]interface{}    `json:"resourceProperties,omitempty"`
+	SecurityCenterProperties *SecurityCenterProperties `json:"securityCenterProperties,omitempty"`
+	SecurityMarks            *SecurityMarks            `json:"securityMarks,omitempty"`
+	UpdateTime               *string                   `json:"updateTime,omitempty"`
 }

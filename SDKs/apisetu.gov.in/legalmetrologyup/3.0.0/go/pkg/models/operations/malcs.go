@@ -16,8 +16,8 @@ const (
 )
 
 type MalcsRequestBody struct {
-	CertificateParameters *MalcsRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *MalcsRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                MalcsRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Malcs400ApplicationJSON struct {
-	Error            *Malcs400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Malcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Malcs400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Malcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Malcs401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Malcs401ApplicationJSON struct {
-	Error            *Malcs401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Malcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Malcs401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Malcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Malcs404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Malcs404ApplicationJSON struct {
-	Error            *Malcs404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Malcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Malcs404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Malcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Malcs500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Malcs500ApplicationJSON struct {
-	Error            *Malcs500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Malcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Malcs500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Malcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Malcs502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Malcs502ApplicationJSON struct {
-	Error            *Malcs502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Malcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Malcs502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Malcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Malcs503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Malcs503ApplicationJSON struct {
-	Error            *Malcs503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Malcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Malcs503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Malcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Malcs504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Malcs504ApplicationJSON struct {
-	Error            *Malcs504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Malcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Malcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Malcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type MalcsResponse struct {

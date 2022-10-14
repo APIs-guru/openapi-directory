@@ -1,17 +1,17 @@
 package shared
 
 type UpdateCrawlerRequest struct {
-	Classifiers                  []string              `json:"Classifiers"`
-	Configuration                *string               `json:"Configuration"`
-	CrawlerSecurityConfiguration *string               `json:"CrawlerSecurityConfiguration"`
-	DatabaseName                 *string               `json:"DatabaseName"`
-	Description                  *string               `json:"Description"`
-	LineageConfiguration         *LineageConfiguration `json:"LineageConfiguration"`
+	Classifiers                  []string              `json:"Classifiers,omitempty"`
+	Configuration                *string               `json:"Configuration,omitempty"`
+	CrawlerSecurityConfiguration *string               `json:"CrawlerSecurityConfiguration,omitempty"`
+	DatabaseName                 *string               `json:"DatabaseName,omitempty"`
+	Description                  *string               `json:"Description,omitempty"`
+	LineageConfiguration         *LineageConfiguration `json:"LineageConfiguration,omitempty"`
 	Name                         string                `json:"Name"`
-	RecrawlPolicy                *RecrawlPolicy        `json:"RecrawlPolicy"`
-	Role                         *string               `json:"Role"`
-	Schedule                     *string               `json:"Schedule"`
-	SchemaChangePolicy           *SchemaChangePolicy   `json:"SchemaChangePolicy"`
-	TablePrefix                  *string               `json:"TablePrefix"`
-	Targets                      *CrawlerTargets       `json:"Targets"`
+	RecrawlPolicy                *RecrawlPolicy        `json:"RecrawlPolicy,omitempty"`
+	Role                         *string               `json:"Role,omitempty"`
+	Schedule                     *string               `json:"Schedule,omitempty"`
+	SchemaChangePolicy           *SchemaChangePolicy   `json:"SchemaChangePolicy,omitempty"`
+	TablePrefix                  *string               `json:"TablePrefix,omitempty"`
+	Targets                      *CrawlerTargets       `json:"Targets,omitempty"`
 }

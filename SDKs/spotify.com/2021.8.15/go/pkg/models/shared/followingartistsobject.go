@@ -1,14 +1,14 @@
 package shared
 
 type FollowingArtistsObjectArtists struct {
-	Cursors *CursorObject  `json:"cursors"`
-	Href    *string        `json:"href"`
-	Items   []ArtistObject `json:"items"`
-	Limit   *int32         `json:"limit"`
-	Next    *string        `json:"next"`
-	Total   *int32         `json:"total"`
+	Cursors *CursorObject  `json:"cursors,omitempty"`
+	Href    *string        `json:"href,omitempty"`
+	Items   []ArtistObject `json:"items,omitempty"`
+	Limit   *int32         `json:"limit,omitempty"`
+	Next    *string        `json:"next,omitempty"`
+	Total   *int32         `json:"total,omitempty"`
 }
 
 type FollowingArtistsObject struct {
-	Artists *FollowingArtistsObjectArtists `json:"artists"`
+	Artists *FollowingArtistsObjectArtists `json:"artists,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListPartnerEventSourceAccountsResponse struct {
-	NextToken                  *string                     `json:"NextToken"`
-	PartnerEventSourceAccounts []PartnerEventSourceAccount `json:"PartnerEventSourceAccounts"`
+	NextToken                  *string                     `json:"NextToken,omitempty"`
+	PartnerEventSourceAccounts []PartnerEventSourceAccount `json:"PartnerEventSourceAccounts,omitempty"`
 }

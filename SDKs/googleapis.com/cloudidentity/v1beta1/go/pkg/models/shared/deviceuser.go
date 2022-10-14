@@ -29,14 +29,14 @@ const (
 )
 
 type DeviceUser struct {
-	CompromisedState *DeviceUserCompromisedStateEnum `json:"compromisedState"`
-	CreateTime       *string                         `json:"createTime"`
-	FirstSyncTime    *string                         `json:"firstSyncTime"`
-	LanguageCode     *string                         `json:"languageCode"`
-	LastSyncTime     *string                         `json:"lastSyncTime"`
-	ManagementState  *DeviceUserManagementStateEnum  `json:"managementState"`
-	Name             *string                         `json:"name"`
-	PasswordState    *DeviceUserPasswordStateEnum    `json:"passwordState"`
-	UserAgent        *string                         `json:"userAgent"`
-	UserEmail        *string                         `json:"userEmail"`
+	CompromisedState *DeviceUserCompromisedStateEnum `json:"compromisedState,omitempty"`
+	CreateTime       *string                         `json:"createTime,omitempty"`
+	FirstSyncTime    *string                         `json:"firstSyncTime,omitempty"`
+	LanguageCode     *string                         `json:"languageCode,omitempty"`
+	LastSyncTime     *string                         `json:"lastSyncTime,omitempty"`
+	ManagementState  *DeviceUserManagementStateEnum  `json:"managementState,omitempty"`
+	Name             *string                         `json:"name,omitempty"`
+	PasswordState    *DeviceUserPasswordStateEnum    `json:"passwordState,omitempty"`
+	UserAgent        *string                         `json:"userAgent,omitempty"`
+	UserEmail        *string                         `json:"userEmail,omitempty"`
 }

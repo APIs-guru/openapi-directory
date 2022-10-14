@@ -5,11 +5,11 @@ import (
 )
 
 type Alarm struct {
-	AlarmModelName    *string     `json:"alarmModelName"`
-	AlarmModelVersion *string     `json:"alarmModelVersion"`
-	AlarmState        *AlarmState `json:"alarmState"`
-	CreationTime      *time.Time  `json:"creationTime"`
-	KeyValue          *string     `json:"keyValue"`
-	LastUpdateTime    *time.Time  `json:"lastUpdateTime"`
-	Severity          *int64      `json:"severity"`
+	AlarmModelName    *string     `json:"alarmModelName,omitempty"`
+	AlarmModelVersion *string     `json:"alarmModelVersion,omitempty"`
+	AlarmState        *AlarmState `json:"alarmState,omitempty"`
+	CreationTime      *time.Time  `json:"creationTime,omitempty"`
+	KeyValue          *string     `json:"keyValue,omitempty"`
+	LastUpdateTime    *time.Time  `json:"lastUpdateTime,omitempty"`
+	Severity          *int64      `json:"severity,omitempty"`
 }

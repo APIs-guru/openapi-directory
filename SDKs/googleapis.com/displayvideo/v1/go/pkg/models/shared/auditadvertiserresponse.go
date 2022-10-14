@@ -1,12 +1,12 @@
 package shared
 
 type AuditAdvertiserResponse struct {
-	AdGroupCriteriaCount            *string `json:"adGroupCriteriaCount"`
-	CampaignCriteriaCount           *string `json:"campaignCriteriaCount"`
-	ChannelsCount                   *string `json:"channelsCount"`
-	NegativeKeywordListsCount       *string `json:"negativeKeywordListsCount"`
-	NegativelyTargetedChannelsCount *string `json:"negativelyTargetedChannelsCount"`
-	UsedCampaignsCount              *string `json:"usedCampaignsCount"`
-	UsedInsertionOrdersCount        *string `json:"usedInsertionOrdersCount"`
-	UsedLineItemsCount              *string `json:"usedLineItemsCount"`
+	AdGroupCriteriaCount            *string `json:"adGroupCriteriaCount,omitempty"`
+	CampaignCriteriaCount           *string `json:"campaignCriteriaCount,omitempty"`
+	ChannelsCount                   *string `json:"channelsCount,omitempty"`
+	NegativeKeywordListsCount       *string `json:"negativeKeywordListsCount,omitempty"`
+	NegativelyTargetedChannelsCount *string `json:"negativelyTargetedChannelsCount,omitempty"`
+	UsedCampaignsCount              *string `json:"usedCampaignsCount,omitempty"`
+	UsedInsertionOrdersCount        *string `json:"usedInsertionOrdersCount,omitempty"`
+	UsedLineItemsCount              *string `json:"usedLineItemsCount,omitempty"`
 }

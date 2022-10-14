@@ -38,7 +38,7 @@ const (
 
 type ItemUrls struct {
 	Href    string `json:"href"`
-	Primary *bool  `json:"primary"`
+	Primary *bool  `json:"primary,omitempty"`
 }
 
 type ItemVault struct {
@@ -47,15 +47,15 @@ type ItemVault struct {
 
 type Item struct {
 	Category     ItemCategoryEnum `json:"category"`
-	CreatedAt    *time.Time       `json:"createdAt"`
-	Favorite     *bool            `json:"favorite"`
-	ID           *string          `json:"id"`
-	LastEditedBy *string          `json:"lastEditedBy"`
-	State        *ItemStateEnum   `json:"state"`
-	Tags         []string         `json:"tags"`
-	Title        *string          `json:"title"`
-	UpdatedAt    *time.Time       `json:"updatedAt"`
-	Urls         []ItemUrls       `json:"urls"`
+	CreatedAt    *time.Time       `json:"createdAt,omitempty"`
+	Favorite     *bool            `json:"favorite,omitempty"`
+	ID           *string          `json:"id,omitempty"`
+	LastEditedBy *string          `json:"lastEditedBy,omitempty"`
+	State        *ItemStateEnum   `json:"state,omitempty"`
+	Tags         []string         `json:"tags,omitempty"`
+	Title        *string          `json:"title,omitempty"`
+	UpdatedAt    *time.Time       `json:"updatedAt,omitempty"`
+	Urls         []ItemUrls       `json:"urls,omitempty"`
 	Vault        ItemVault        `json:"vault"`
-	Version      *int64           `json:"version"`
+	Version      *int64           `json:"version,omitempty"`
 }

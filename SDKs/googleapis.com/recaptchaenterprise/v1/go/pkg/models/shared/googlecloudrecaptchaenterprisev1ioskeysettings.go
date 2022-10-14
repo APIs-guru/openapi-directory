@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudRecaptchaenterpriseV1IosKeySettings struct {
-	AllowAllBundleIds *bool    `json:"allowAllBundleIds"`
-	AllowedBundleIds  []string `json:"allowedBundleIds"`
+	AllowAllBundleIds *bool    `json:"allowAllBundleIds,omitempty"`
+	AllowedBundleIds  []string `json:"allowedBundleIds,omitempty"`
 }

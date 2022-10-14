@@ -1,5 +1,5 @@
 package shared
 
 type DetectCustomLabelsResponse struct {
-	CustomLabels []CustomLabel `json:"CustomLabels"`
+	CustomLabels []CustomLabel `json:"CustomLabels,omitempty"`
 }

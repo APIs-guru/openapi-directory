@@ -15,6 +15,6 @@ const (
 )
 
 type KeyVersionSpec struct {
-	Algorithm          *KeyVersionSpecAlgorithmEnum `json:"algorithm"`
-	CloudKmsKeyVersion *string                      `json:"cloudKmsKeyVersion"`
+	Algorithm          *KeyVersionSpecAlgorithmEnum `json:"algorithm,omitempty"`
+	CloudKmsKeyVersion *string                      `json:"cloudKmsKeyVersion,omitempty"`
 }

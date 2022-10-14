@@ -15,14 +15,14 @@ type GetRestMethodEqualFlickrGroupsPoolsGetContextRequest struct {
 }
 
 type GetRestMethodEqualFlickrGroupsPoolsGetContext200ApplicationJSONCount struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GetRestMethodEqualFlickrGroupsPoolsGetContext200ApplicationJSON struct {
-	Count     *GetRestMethodEqualFlickrGroupsPoolsGetContext200ApplicationJSONCount `json:"count"`
-	Nextphoto *shared.ContextPhoto                                                  `json:"nextphoto"`
-	Prevphoto *shared.ContextPhoto                                                  `json:"prevphoto"`
-	Stat      *string                                                               `json:"stat"`
+	Count     *GetRestMethodEqualFlickrGroupsPoolsGetContext200ApplicationJSONCount `json:"count,omitempty"`
+	Nextphoto *shared.ContextPhoto                                                  `json:"nextphoto,omitempty"`
+	Prevphoto *shared.ContextPhoto                                                  `json:"prevphoto,omitempty"`
+	Stat      *string                                                               `json:"stat,omitempty"`
 }
 
 type GetRestMethodEqualFlickrGroupsPoolsGetContextResponse struct {

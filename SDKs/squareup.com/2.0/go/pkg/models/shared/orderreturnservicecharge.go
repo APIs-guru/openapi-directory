@@ -1,17 +1,17 @@
 package shared
 
 type OrderReturnServiceCharge struct {
-	AmountMoney            *Money                    `json:"amount_money"`
-	AppliedMoney           *Money                    `json:"applied_money"`
-	AppliedTaxes           []OrderLineItemAppliedTax `json:"applied_taxes"`
-	CalculationPhase       *string                   `json:"calculation_phase"`
-	CatalogObjectID        *string                   `json:"catalog_object_id"`
-	CatalogVersion         *int64                    `json:"catalog_version"`
-	Name                   *string                   `json:"name"`
-	Percentage             *string                   `json:"percentage"`
-	SourceServiceChargeUID *string                   `json:"source_service_charge_uid"`
-	Taxable                *bool                     `json:"taxable"`
-	TotalMoney             *Money                    `json:"total_money"`
-	TotalTaxMoney          *Money                    `json:"total_tax_money"`
-	UID                    *string                   `json:"uid"`
+	AmountMoney            *Money                    `json:"amount_money,omitempty"`
+	AppliedMoney           *Money                    `json:"applied_money,omitempty"`
+	AppliedTaxes           []OrderLineItemAppliedTax `json:"applied_taxes,omitempty"`
+	CalculationPhase       *string                   `json:"calculation_phase,omitempty"`
+	CatalogObjectID        *string                   `json:"catalog_object_id,omitempty"`
+	CatalogVersion         *int64                    `json:"catalog_version,omitempty"`
+	Name                   *string                   `json:"name,omitempty"`
+	Percentage             *string                   `json:"percentage,omitempty"`
+	SourceServiceChargeUID *string                   `json:"source_service_charge_uid,omitempty"`
+	Taxable                *bool                     `json:"taxable,omitempty"`
+	TotalMoney             *Money                    `json:"total_money,omitempty"`
+	TotalTaxMoney          *Money                    `json:"total_tax_money,omitempty"`
+	UID                    *string                   `json:"uid,omitempty"`
 }

@@ -17,12 +17,12 @@ const (
 )
 
 type GetBng2latlongEastingNorthing200ApplicationJSON struct {
-	Easting   *int64                                                     `json:"easting"`
-	Error     *string                                                    `json:"error"`
-	Latitude  *float64                                                   `json:"latitude"`
-	Longitude *float64                                                   `json:"longitude"`
-	Northing  *int64                                                     `json:"northing"`
-	Status    *GetBng2latlongEastingNorthing200ApplicationJSONStatusEnum `json:"status"`
+	Easting   *int64                                                     `json:"easting,omitempty"`
+	Error     *string                                                    `json:"error,omitempty"`
+	Latitude  *float64                                                   `json:"latitude,omitempty"`
+	Longitude *float64                                                   `json:"longitude,omitempty"`
+	Northing  *int64                                                     `json:"northing,omitempty"`
+	Status    *GetBng2latlongEastingNorthing200ApplicationJSONStatusEnum `json:"status,omitempty"`
 }
 
 type GetBng2latlongEastingNorthingResponse struct {

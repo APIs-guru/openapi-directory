@@ -1,7 +1,7 @@
 package shared
 
 type PlusAclentryResource struct {
-	DisplayName *string `json:"displayName"`
-	ID          *string `json:"id"`
-	Type        *string `json:"type"`
+	DisplayName *string `json:"displayName,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }

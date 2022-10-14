@@ -1,13 +1,13 @@
 package shared
 
 type GoogleCloudRecommendationengineV1beta1CatalogItem struct {
-	CategoryHierarchies []GoogleCloudRecommendationengineV1beta1CatalogItemCategoryHierarchy `json:"categoryHierarchies"`
-	Description         *string                                                              `json:"description"`
-	ID                  *string                                                              `json:"id"`
-	ItemAttributes      *GoogleCloudRecommendationengineV1beta1FeatureMap                    `json:"itemAttributes"`
-	ItemGroupID         *string                                                              `json:"itemGroupId"`
-	LanguageCode        *string                                                              `json:"languageCode"`
-	ProductMetadata     *GoogleCloudRecommendationengineV1beta1ProductCatalogItem            `json:"productMetadata"`
-	Tags                []string                                                             `json:"tags"`
-	Title               *string                                                              `json:"title"`
+	CategoryHierarchies []GoogleCloudRecommendationengineV1beta1CatalogItemCategoryHierarchy `json:"categoryHierarchies,omitempty"`
+	Description         *string                                                              `json:"description,omitempty"`
+	ID                  *string                                                              `json:"id,omitempty"`
+	ItemAttributes      *GoogleCloudRecommendationengineV1beta1FeatureMap                    `json:"itemAttributes,omitempty"`
+	ItemGroupID         *string                                                              `json:"itemGroupId,omitempty"`
+	LanguageCode        *string                                                              `json:"languageCode,omitempty"`
+	ProductMetadata     *GoogleCloudRecommendationengineV1beta1ProductCatalogItem            `json:"productMetadata,omitempty"`
+	Tags                []string                                                             `json:"tags,omitempty"`
+	Title               *string                                                              `json:"title,omitempty"`
 }

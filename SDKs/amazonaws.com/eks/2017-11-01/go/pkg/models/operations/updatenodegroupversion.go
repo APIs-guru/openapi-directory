@@ -20,17 +20,17 @@ type UpdateNodegroupVersionHeaders struct {
 }
 
 type UpdateNodegroupVersionRequestBodyLaunchTemplate struct {
-	ID      *string `json:"id"`
-	Name    *string `json:"name"`
-	Version *string `json:"version"`
+	ID      *string `json:"id,omitempty"`
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 type UpdateNodegroupVersionRequestBody struct {
-	ClientRequestToken *string                                          `json:"clientRequestToken"`
-	Force              *bool                                            `json:"force"`
-	LaunchTemplate     *UpdateNodegroupVersionRequestBodyLaunchTemplate `json:"launchTemplate"`
-	ReleaseVersion     *string                                          `json:"releaseVersion"`
-	Version            *string                                          `json:"version"`
+	ClientRequestToken *string                                          `json:"clientRequestToken,omitempty"`
+	Force              *bool                                            `json:"force,omitempty"`
+	LaunchTemplate     *UpdateNodegroupVersionRequestBodyLaunchTemplate `json:"launchTemplate,omitempty"`
+	ReleaseVersion     *string                                          `json:"releaseVersion,omitempty"`
+	Version            *string                                          `json:"version,omitempty"`
 }
 
 type UpdateNodegroupVersionRequest struct {

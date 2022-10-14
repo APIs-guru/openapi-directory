@@ -5,18 +5,18 @@ import (
 )
 
 type TextTranslationJobProperties struct {
-	DataAccessRoleArn   *string           `json:"DataAccessRoleArn"`
-	EndTime             *time.Time        `json:"EndTime"`
-	InputDataConfig     *InputDataConfig  `json:"InputDataConfig"`
-	JobDetails          *JobDetails       `json:"JobDetails"`
-	JobID               *string           `json:"JobId"`
-	JobName             *string           `json:"JobName"`
-	JobStatus           *JobStatusEnum    `json:"JobStatus"`
-	Message             *string           `json:"Message"`
-	OutputDataConfig    *OutputDataConfig `json:"OutputDataConfig"`
-	ParallelDataNames   []string          `json:"ParallelDataNames"`
-	SourceLanguageCode  *string           `json:"SourceLanguageCode"`
-	SubmittedTime       *time.Time        `json:"SubmittedTime"`
-	TargetLanguageCodes []string          `json:"TargetLanguageCodes"`
-	TerminologyNames    []string          `json:"TerminologyNames"`
+	DataAccessRoleArn   *string           `json:"DataAccessRoleArn,omitempty"`
+	EndTime             *time.Time        `json:"EndTime,omitempty"`
+	InputDataConfig     *InputDataConfig  `json:"InputDataConfig,omitempty"`
+	JobDetails          *JobDetails       `json:"JobDetails,omitempty"`
+	JobID               *string           `json:"JobId,omitempty"`
+	JobName             *string           `json:"JobName,omitempty"`
+	JobStatus           *JobStatusEnum    `json:"JobStatus,omitempty"`
+	Message             *string           `json:"Message,omitempty"`
+	OutputDataConfig    *OutputDataConfig `json:"OutputDataConfig,omitempty"`
+	ParallelDataNames   []string          `json:"ParallelDataNames,omitempty"`
+	SourceLanguageCode  *string           `json:"SourceLanguageCode,omitempty"`
+	SubmittedTime       *time.Time        `json:"SubmittedTime,omitempty"`
+	TargetLanguageCodes []string          `json:"TargetLanguageCodes,omitempty"`
+	TerminologyNames    []string          `json:"TerminologyNames,omitempty"`
 }

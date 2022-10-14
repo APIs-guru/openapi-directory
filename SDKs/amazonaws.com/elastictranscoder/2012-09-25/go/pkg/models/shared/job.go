@@ -1,16 +1,16 @@
 package shared
 
 type Job struct {
-	Arn             *string           `json:"Arn"`
-	ID              *string           `json:"Id"`
-	Input           *JobInput         `json:"Input"`
-	Inputs          []JobInput        `json:"Inputs"`
-	Output          *JobOutput        `json:"Output"`
-	OutputKeyPrefix *string           `json:"OutputKeyPrefix"`
-	Outputs         []JobOutput       `json:"Outputs"`
-	PipelineID      *string           `json:"PipelineId"`
-	Playlists       []Playlist        `json:"Playlists"`
-	Status          *string           `json:"Status"`
-	Timing          *Timing           `json:"Timing"`
-	UserMetadata    map[string]string `json:"UserMetadata"`
+	Arn             *string           `json:"Arn,omitempty"`
+	ID              *string           `json:"Id,omitempty"`
+	Input           *JobInput         `json:"Input,omitempty"`
+	Inputs          []JobInput        `json:"Inputs,omitempty"`
+	Output          *JobOutput        `json:"Output,omitempty"`
+	OutputKeyPrefix *string           `json:"OutputKeyPrefix,omitempty"`
+	Outputs         []JobOutput       `json:"Outputs,omitempty"`
+	PipelineID      *string           `json:"PipelineId,omitempty"`
+	Playlists       []Playlist        `json:"Playlists,omitempty"`
+	Status          *string           `json:"Status,omitempty"`
+	Timing          *Timing           `json:"Timing,omitempty"`
+	UserMetadata    map[string]string `json:"UserMetadata,omitempty"`
 }

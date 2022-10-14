@@ -1,8 +1,8 @@
 package shared
 
 type LinkedLedgerAccount struct {
-	Code        *string `json:"code"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
-	NominalCode *string `json:"nominal_code"`
+	Code        *string `json:"code,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	NominalCode *string `json:"nominal_code,omitempty"`
 }

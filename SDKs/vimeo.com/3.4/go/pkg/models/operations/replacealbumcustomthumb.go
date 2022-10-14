@@ -11,7 +11,7 @@ type ReplaceAlbumCustomThumbPathParams struct {
 }
 
 type ReplaceAlbumCustomThumbRequestBody struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type ReplaceAlbumCustomThumbSecurity struct {

@@ -1,7 +1,7 @@
 package shared
 
 type DestinationConfig struct {
-	BigqueryDestinationConfig    *BigQueryDestinationConfig `json:"bigqueryDestinationConfig"`
-	DestinationConnectionProfile *string                    `json:"destinationConnectionProfile"`
-	GcsDestinationConfig         *GcsDestinationConfig      `json:"gcsDestinationConfig"`
+	BigqueryDestinationConfig    *BigQueryDestinationConfig `json:"bigqueryDestinationConfig,omitempty"`
+	DestinationConnectionProfile *string                    `json:"destinationConnectionProfile,omitempty"`
+	GcsDestinationConfig         *GcsDestinationConfig      `json:"gcsDestinationConfig,omitempty"`
 }

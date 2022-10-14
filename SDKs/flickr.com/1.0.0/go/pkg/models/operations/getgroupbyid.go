@@ -16,8 +16,8 @@ type GetGroupByIDRequest struct {
 }
 
 type GetGroupByID200ApplicationJSON struct {
-	Group *shared.Group `json:"group"`
-	Stat  *string       `json:"stat"`
+	Group *shared.Group `json:"group,omitempty"`
+	Stat  *string       `json:"stat,omitempty"`
 }
 
 type GetGroupByIDResponse struct {

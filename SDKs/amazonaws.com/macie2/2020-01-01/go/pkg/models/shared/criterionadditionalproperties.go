@@ -1,11 +1,11 @@
 package shared
 
 type CriterionAdditionalProperties struct {
-	Eq           []string `json:"eq"`
-	EqExactMatch []string `json:"eqExactMatch"`
-	Gt           *int64   `json:"gt"`
-	Gte          *int64   `json:"gte"`
-	Lt           *int64   `json:"lt"`
-	Lte          *int64   `json:"lte"`
-	Neq          []string `json:"neq"`
+	Eq           []string `json:"eq,omitempty"`
+	EqExactMatch []string `json:"eqExactMatch,omitempty"`
+	Gt           *int64   `json:"gt,omitempty"`
+	Gte          *int64   `json:"gte,omitempty"`
+	Lt           *int64   `json:"lt,omitempty"`
+	Lte          *int64   `json:"lte,omitempty"`
+	Neq          []string `json:"neq,omitempty"`
 }

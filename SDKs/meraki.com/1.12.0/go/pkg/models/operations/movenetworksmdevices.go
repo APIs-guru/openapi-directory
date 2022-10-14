@@ -5,11 +5,11 @@ type MoveNetworkSmDevicesPathParams struct {
 }
 
 type MoveNetworkSmDevicesRequestBody struct {
-	Ids        []string `json:"ids"`
+	Ids        []string `json:"ids,omitempty"`
 	NewNetwork string   `json:"newNetwork"`
-	Scope      []string `json:"scope"`
-	Serials    []string `json:"serials"`
-	WifiMacs   []string `json:"wifiMacs"`
+	Scope      []string `json:"scope,omitempty"`
+	Serials    []string `json:"serials,omitempty"`
+	WifiMacs   []string `json:"wifiMacs,omitempty"`
 }
 
 type MoveNetworkSmDevicesRequest struct {

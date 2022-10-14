@@ -1,10 +1,10 @@
 package shared
 
 type CreateShipmentFromQuoteRequest struct {
-	AdditionalOptions  []AdditionalOption `json:"additionalOptions"`
-	LabelCustomMessage *string            `json:"labelCustomMessage"`
-	LabelSize          *string            `json:"labelSize"`
-	RateID             *string            `json:"rateId"`
-	ReturnTo           *Contact           `json:"returnTo"`
-	ShippingQuoteID    *string            `json:"shippingQuoteId"`
+	AdditionalOptions  []AdditionalOption `json:"additionalOptions,omitempty"`
+	LabelCustomMessage *string            `json:"labelCustomMessage,omitempty"`
+	LabelSize          *string            `json:"labelSize,omitempty"`
+	RateID             *string            `json:"rateId,omitempty"`
+	ReturnTo           *Contact           `json:"returnTo,omitempty"`
+	ShippingQuoteID    *string            `json:"shippingQuoteId,omitempty"`
 }

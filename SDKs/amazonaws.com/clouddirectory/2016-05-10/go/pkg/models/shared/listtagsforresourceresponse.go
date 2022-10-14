@@ -1,6 +1,6 @@
 package shared
 
 type ListTagsForResourceResponse struct {
-	NextToken *string `json:"NextToken"`
-	Tags      []Tag   `json:"Tags"`
+	NextToken *string `json:"NextToken,omitempty"`
+	Tags      []Tag   `json:"Tags,omitempty"`
 }

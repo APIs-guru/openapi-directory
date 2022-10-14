@@ -19,7 +19,7 @@ const (
 )
 
 type SoftwareConfig struct {
-	ImageVersion       *string                                `json:"imageVersion"`
-	OptionalComponents []SoftwareConfigOptionalComponentsEnum `json:"optionalComponents"`
-	Properties         map[string]string                      `json:"properties"`
+	ImageVersion       *string                                `json:"imageVersion,omitempty"`
+	OptionalComponents []SoftwareConfigOptionalComponentsEnum `json:"optionalComponents,omitempty"`
+	Properties         map[string]string                      `json:"properties,omitempty"`
 }

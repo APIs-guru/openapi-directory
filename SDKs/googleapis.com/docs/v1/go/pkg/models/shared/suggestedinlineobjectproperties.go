@@ -1,6 +1,6 @@
 package shared
 
 type SuggestedInlineObjectProperties struct {
-	InlineObjectProperties                *InlineObjectProperties                `json:"inlineObjectProperties"`
-	InlineObjectPropertiesSuggestionState *InlineObjectPropertiesSuggestionState `json:"inlineObjectPropertiesSuggestionState"`
+	InlineObjectProperties                *InlineObjectProperties                `json:"inlineObjectProperties,omitempty"`
+	InlineObjectPropertiesSuggestionState *InlineObjectPropertiesSuggestionState `json:"inlineObjectPropertiesSuggestionState,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type DescribeSecurityConfigurationOutput struct {
-	CreationDateTime      *time.Time `json:"CreationDateTime"`
-	Name                  *string    `json:"Name"`
-	SecurityConfiguration *string    `json:"SecurityConfiguration"`
+	CreationDateTime      *time.Time `json:"CreationDateTime,omitempty"`
+	Name                  *string    `json:"Name,omitempty"`
+	SecurityConfiguration *string    `json:"SecurityConfiguration,omitempty"`
 }

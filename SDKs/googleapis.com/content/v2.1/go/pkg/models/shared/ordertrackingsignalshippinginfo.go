@@ -9,15 +9,15 @@ const (
 )
 
 type OrderTrackingSignalShippingInfo struct {
-	ActualDeliveryTime          *DateTime                                          `json:"actualDeliveryTime"`
-	CarrierName                 *string                                            `json:"carrierName"`
-	CarrierServiceName          *string                                            `json:"carrierServiceName"`
-	EarliestDeliveryPromiseTime *DateTime                                          `json:"earliestDeliveryPromiseTime"`
-	LatestDeliveryPromiseTime   *DateTime                                          `json:"latestDeliveryPromiseTime"`
-	OriginPostalCode            *string                                            `json:"originPostalCode"`
-	OriginRegionCode            *string                                            `json:"originRegionCode"`
-	ShipmentID                  *string                                            `json:"shipmentId"`
-	ShippedTime                 *DateTime                                          `json:"shippedTime"`
-	ShippingStatus              *OrderTrackingSignalShippingInfoShippingStatusEnum `json:"shippingStatus"`
-	TrackingID                  *string                                            `json:"trackingId"`
+	ActualDeliveryTime          *DateTime                                          `json:"actualDeliveryTime,omitempty"`
+	CarrierName                 *string                                            `json:"carrierName,omitempty"`
+	CarrierServiceName          *string                                            `json:"carrierServiceName,omitempty"`
+	EarliestDeliveryPromiseTime *DateTime                                          `json:"earliestDeliveryPromiseTime,omitempty"`
+	LatestDeliveryPromiseTime   *DateTime                                          `json:"latestDeliveryPromiseTime,omitempty"`
+	OriginPostalCode            *string                                            `json:"originPostalCode,omitempty"`
+	OriginRegionCode            *string                                            `json:"originRegionCode,omitempty"`
+	ShipmentID                  *string                                            `json:"shipmentId,omitempty"`
+	ShippedTime                 *DateTime                                          `json:"shippedTime,omitempty"`
+	ShippingStatus              *OrderTrackingSignalShippingInfoShippingStatusEnum `json:"shippingStatus,omitempty"`
+	TrackingID                  *string                                            `json:"trackingId,omitempty"`
 }

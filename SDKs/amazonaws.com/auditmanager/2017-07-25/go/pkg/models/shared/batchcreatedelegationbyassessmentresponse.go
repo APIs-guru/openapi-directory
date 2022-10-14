@@ -1,6 +1,6 @@
 package shared
 
 type BatchCreateDelegationByAssessmentResponse struct {
-	Delegations []Delegation                             `json:"delegations"`
-	Errors      []BatchCreateDelegationByAssessmentError `json:"errors"`
+	Delegations []Delegation                             `json:"delegations,omitempty"`
+	Errors      []BatchCreateDelegationByAssessmentError `json:"errors,omitempty"`
 }

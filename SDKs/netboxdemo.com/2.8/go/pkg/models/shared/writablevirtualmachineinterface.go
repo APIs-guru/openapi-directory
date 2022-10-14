@@ -86,16 +86,16 @@ const (
 )
 
 type WritableVirtualMachineInterface struct {
-	Description    *string                                      `json:"description"`
-	Enabled        *bool                                        `json:"enabled"`
-	ID             *int64                                       `json:"id"`
-	MacAddress     *string                                      `json:"mac_address"`
-	Mode           *WritableVirtualMachineInterfaceModeModeEnum `json:"mode"`
-	Mtu            *int64                                       `json:"mtu"`
+	Description    *string                                      `json:"description,omitempty"`
+	Enabled        *bool                                        `json:"enabled,omitempty"`
+	ID             *int64                                       `json:"id,omitempty"`
+	MacAddress     *string                                      `json:"mac_address,omitempty"`
+	Mode           *WritableVirtualMachineInterfaceModeModeEnum `json:"mode,omitempty"`
+	Mtu            *int64                                       `json:"mtu,omitempty"`
 	Name           string                                       `json:"name"`
-	TaggedVlans    []int64                                      `json:"tagged_vlans"`
-	Tags           []string                                     `json:"tags"`
+	TaggedVlans    []int64                                      `json:"tagged_vlans,omitempty"`
+	Tags           []string                                     `json:"tags,omitempty"`
 	Type           WritableVirtualMachineInterfaceTypeTypeEnum  `json:"type"`
-	UntaggedVlan   *int64                                       `json:"untagged_vlan"`
-	VirtualMachine *int64                                       `json:"virtual_machine"`
+	UntaggedVlan   *int64                                       `json:"untagged_vlan,omitempty"`
+	VirtualMachine *int64                                       `json:"virtual_machine,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type Regional struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }

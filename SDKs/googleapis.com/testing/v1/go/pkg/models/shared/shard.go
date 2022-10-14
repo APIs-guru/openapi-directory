@@ -1,7 +1,7 @@
 package shared
 
 type Shard struct {
-	NumShards           *int32               `json:"numShards"`
-	ShardIndex          *int32               `json:"shardIndex"`
-	TestTargetsForShard *TestTargetsForShard `json:"testTargetsForShard"`
+	NumShards           *int32               `json:"numShards,omitempty"`
+	ShardIndex          *int32               `json:"shardIndex,omitempty"`
+	TestTargetsForShard *TestTargetsForShard `json:"testTargetsForShard,omitempty"`
 }

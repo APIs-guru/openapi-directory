@@ -1,5 +1,5 @@
 package shared
 
 type GetPermissionPolicyResponse struct {
-	Policy *string `json:"Policy"`
+	Policy *string `json:"Policy,omitempty"`
 }

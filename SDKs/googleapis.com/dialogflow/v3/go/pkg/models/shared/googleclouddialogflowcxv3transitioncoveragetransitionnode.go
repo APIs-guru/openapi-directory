@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowCxV3TransitionCoverageTransitionNode struct {
-	Flow *GoogleCloudDialogflowCxV3Flow `json:"flow"`
-	Page *GoogleCloudDialogflowCxV3Page `json:"page"`
+	Flow *GoogleCloudDialogflowCxV3Flow `json:"flow,omitempty"`
+	Page *GoogleCloudDialogflowCxV3Page `json:"page,omitempty"`
 }

@@ -15,14 +15,14 @@ type CreateLifecyclePolicyHeaders struct {
 }
 
 type CreateLifecyclePolicyRequestBodyPolicyDetails struct {
-	Actions           []shared.Action                     `json:"Actions"`
-	EventSource       *shared.EventSource                 `json:"EventSource"`
-	Parameters        *shared.Parameters                  `json:"Parameters"`
-	PolicyType        *shared.PolicyTypeValuesEnum        `json:"PolicyType"`
-	ResourceLocations []shared.ResourceLocationValuesEnum `json:"ResourceLocations"`
-	ResourceTypes     []shared.ResourceTypeValuesEnum     `json:"ResourceTypes"`
-	Schedules         []shared.Schedule                   `json:"Schedules"`
-	TargetTags        []shared.Tag                        `json:"TargetTags"`
+	Actions           []shared.Action                     `json:"Actions,omitempty"`
+	EventSource       *shared.EventSource                 `json:"EventSource,omitempty"`
+	Parameters        *shared.Parameters                  `json:"Parameters,omitempty"`
+	PolicyType        *shared.PolicyTypeValuesEnum        `json:"PolicyType,omitempty"`
+	ResourceLocations []shared.ResourceLocationValuesEnum `json:"ResourceLocations,omitempty"`
+	ResourceTypes     []shared.ResourceTypeValuesEnum     `json:"ResourceTypes,omitempty"`
+	Schedules         []shared.Schedule                   `json:"Schedules,omitempty"`
+	TargetTags        []shared.Tag                        `json:"TargetTags,omitempty"`
 }
 
 type CreateLifecyclePolicyRequestBodyStateEnum string
@@ -37,7 +37,7 @@ type CreateLifecyclePolicyRequestBody struct {
 	ExecutionRoleArn string                                        `json:"ExecutionRoleArn"`
 	PolicyDetails    CreateLifecyclePolicyRequestBodyPolicyDetails `json:"PolicyDetails"`
 	State            CreateLifecyclePolicyRequestBodyStateEnum     `json:"State"`
-	Tags             map[string]string                             `json:"Tags"`
+	Tags             map[string]string                             `json:"Tags,omitempty"`
 }
 
 type CreateLifecyclePolicyRequest struct {

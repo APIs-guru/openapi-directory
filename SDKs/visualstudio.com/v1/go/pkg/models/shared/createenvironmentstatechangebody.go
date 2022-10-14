@@ -5,7 +5,7 @@ import (
 )
 
 type CreateEnvironmentStateChangeBody struct {
-	NewValue *int32     `json:"newValue"`
-	OldValue *int32     `json:"oldValue"`
-	Time     *time.Time `json:"time"`
+	NewValue *int32     `json:"newValue,omitempty"`
+	OldValue *int32     `json:"oldValue,omitempty"`
+	Time     *time.Time `json:"time,omitempty"`
 }

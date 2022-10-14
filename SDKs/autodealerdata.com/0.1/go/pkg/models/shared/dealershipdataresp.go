@@ -1,11 +1,11 @@
 package shared
 
 type DealershipDataResp struct {
-	BrandName      *string          `json:"brandName"`
-	CacheTimeLimit *int64           `json:"cacheTimeLimit"`
-	Condition      *string          `json:"condition"`
+	BrandName      *string          `json:"brandName,omitempty"`
+	CacheTimeLimit *int64           `json:"cacheTimeLimit,omitempty"`
+	Condition      *string          `json:"condition,omitempty"`
 	Data           []DealershipData `json:"data"`
-	ModelName      *string          `json:"modelName"`
-	Msg            *string          `json:"msg"`
-	RegionName     *string          `json:"regionName"`
+	ModelName      *string          `json:"modelName,omitempty"`
+	Msg            *string          `json:"msg,omitempty"`
+	RegionName     *string          `json:"regionName,omitempty"`
 }

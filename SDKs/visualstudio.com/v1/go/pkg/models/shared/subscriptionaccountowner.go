@@ -1,6 +1,6 @@
 package shared
 
 type SubscriptionAccountOwner struct {
-	Email *string `json:"email"`
-	Puid  *string `json:"puid"`
+	Email *string `json:"email,omitempty"`
+	Puid  *string `json:"puid,omitempty"`
 }

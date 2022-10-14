@@ -20,15 +20,15 @@ type DescribeJobsHeaders struct {
 }
 
 type DescribeJobsRequestBodyFilters struct {
-	FromDate *string  `json:"fromDate"`
-	JobIDs   []string `json:"jobIDs"`
-	ToDate   *string  `json:"toDate"`
+	FromDate *string  `json:"fromDate,omitempty"`
+	JobIDs   []string `json:"jobIDs,omitempty"`
+	ToDate   *string  `json:"toDate,omitempty"`
 }
 
 type DescribeJobsRequestBody struct {
 	Filters    DescribeJobsRequestBodyFilters `json:"filters"`
-	MaxResults *int64                         `json:"maxResults"`
-	NextToken  *string                        `json:"nextToken"`
+	MaxResults *int64                         `json:"maxResults,omitempty"`
+	NextToken  *string                        `json:"nextToken,omitempty"`
 }
 
 type DescribeJobsRequest struct {

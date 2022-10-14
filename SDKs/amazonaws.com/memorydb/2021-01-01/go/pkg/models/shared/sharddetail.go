@@ -5,8 +5,8 @@ import (
 )
 
 type ShardDetail struct {
-	Configuration        *ShardConfiguration `json:"Configuration"`
-	Name                 *string             `json:"Name"`
-	Size                 *string             `json:"Size"`
-	SnapshotCreationTime *time.Time          `json:"SnapshotCreationTime"`
+	Configuration        *ShardConfiguration `json:"Configuration,omitempty"`
+	Name                 *string             `json:"Name,omitempty"`
+	Size                 *string             `json:"Size,omitempty"`
+	SnapshotCreationTime *time.Time          `json:"SnapshotCreationTime,omitempty"`
 }

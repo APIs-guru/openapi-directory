@@ -1,12 +1,12 @@
 package shared
 
 type APIUsageAggregatedOut struct {
-	ColHeaders       []string  `json:"colHeaders"`
-	Data             [][]int32 `json:"data"`
-	HistoryTruncated *bool     `json:"historyTruncated"`
-	PeriodEnd        *int64    `json:"periodEnd"`
-	PeriodStart      *int64    `json:"periodStart"`
-	RowHeaders       []string  `json:"rowHeaders"`
-	TimeUnit         *string   `json:"timeUnit"`
-	TotalUsage       *int64    `json:"totalUsage"`
+	ColHeaders       []string  `json:"colHeaders,omitempty"`
+	Data             [][]int32 `json:"data,omitempty"`
+	HistoryTruncated *bool     `json:"historyTruncated,omitempty"`
+	PeriodEnd        *int64    `json:"periodEnd,omitempty"`
+	PeriodStart      *int64    `json:"periodStart,omitempty"`
+	RowHeaders       []string  `json:"rowHeaders,omitempty"`
+	TimeUnit         *string   `json:"timeUnit,omitempty"`
+	TotalUsage       *int64    `json:"totalUsage,omitempty"`
 }

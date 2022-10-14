@@ -1,9 +1,9 @@
 package shared
 
 type DescribeProductAsAdminOutput struct {
-	Budgets                       []BudgetDetail                `json:"Budgets"`
-	ProductViewDetail             *ProductViewDetail            `json:"ProductViewDetail"`
-	ProvisioningArtifactSummaries []ProvisioningArtifactSummary `json:"ProvisioningArtifactSummaries"`
-	TagOptions                    []TagOptionDetail             `json:"TagOptions"`
-	Tags                          []Tag                         `json:"Tags"`
+	Budgets                       []BudgetDetail                `json:"Budgets,omitempty"`
+	ProductViewDetail             *ProductViewDetail            `json:"ProductViewDetail,omitempty"`
+	ProvisioningArtifactSummaries []ProvisioningArtifactSummary `json:"ProvisioningArtifactSummaries,omitempty"`
+	TagOptions                    []TagOptionDetail             `json:"TagOptions,omitempty"`
+	Tags                          []Tag                         `json:"Tags,omitempty"`
 }

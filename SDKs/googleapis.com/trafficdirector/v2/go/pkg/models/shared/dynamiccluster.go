@@ -1,7 +1,7 @@
 package shared
 
 type DynamicCluster struct {
-	Cluster     map[string]interface{} `json:"cluster"`
-	LastUpdated *string                `json:"lastUpdated"`
-	VersionInfo *string                `json:"versionInfo"`
+	Cluster     map[string]interface{} `json:"cluster,omitempty"`
+	LastUpdated *string                `json:"lastUpdated,omitempty"`
+	VersionInfo *string                `json:"versionInfo,omitempty"`
 }

@@ -26,32 +26,32 @@ type SiteStatusStatus struct {
 }
 
 type Site struct {
-	Asn                 *int64                 `json:"asn"`
-	CircuitCount        *int64                 `json:"circuit_count"`
-	Comments            *string                `json:"comments"`
-	ContactEmail        *string                `json:"contact_email"`
-	ContactName         *string                `json:"contact_name"`
-	ContactPhone        *string                `json:"contact_phone"`
-	Created             *time.Time             `json:"created"`
-	CustomFields        map[string]interface{} `json:"custom_fields"`
-	Description         *string                `json:"description"`
-	DeviceCount         *int64                 `json:"device_count"`
-	Facility            *string                `json:"facility"`
-	ID                  *int64                 `json:"id"`
-	LastUpdated         *time.Time             `json:"last_updated"`
-	Latitude            *string                `json:"latitude"`
-	Longitude           *string                `json:"longitude"`
+	Asn                 *int64                 `json:"asn,omitempty"`
+	CircuitCount        *int64                 `json:"circuit_count,omitempty"`
+	Comments            *string                `json:"comments,omitempty"`
+	ContactEmail        *string                `json:"contact_email,omitempty"`
+	ContactName         *string                `json:"contact_name,omitempty"`
+	ContactPhone        *string                `json:"contact_phone,omitempty"`
+	Created             *time.Time             `json:"created,omitempty"`
+	CustomFields        map[string]interface{} `json:"custom_fields,omitempty"`
+	Description         *string                `json:"description,omitempty"`
+	DeviceCount         *int64                 `json:"device_count,omitempty"`
+	Facility            *string                `json:"facility,omitempty"`
+	ID                  *int64                 `json:"id,omitempty"`
+	LastUpdated         *time.Time             `json:"last_updated,omitempty"`
+	Latitude            *string                `json:"latitude,omitempty"`
+	Longitude           *string                `json:"longitude,omitempty"`
 	Name                string                 `json:"name"`
-	PhysicalAddress     *string                `json:"physical_address"`
-	PrefixCount         *int64                 `json:"prefix_count"`
-	RackCount           *int64                 `json:"rack_count"`
-	Region              *NestedRegion          `json:"region"`
-	ShippingAddress     *string                `json:"shipping_address"`
+	PhysicalAddress     *string                `json:"physical_address,omitempty"`
+	PrefixCount         *int64                 `json:"prefix_count,omitempty"`
+	RackCount           *int64                 `json:"rack_count,omitempty"`
+	Region              *NestedRegion          `json:"region,omitempty"`
+	ShippingAddress     *string                `json:"shipping_address,omitempty"`
 	Slug                string                 `json:"slug"`
-	Status              *SiteStatusStatus      `json:"status"`
-	Tags                []string               `json:"tags"`
-	Tenant              *NestedTenant          `json:"tenant"`
-	TimeZone            *string                `json:"time_zone"`
-	VirtualmachineCount *int64                 `json:"virtualmachine_count"`
-	VlanCount           *int64                 `json:"vlan_count"`
+	Status              *SiteStatusStatus      `json:"status,omitempty"`
+	Tags                []string               `json:"tags,omitempty"`
+	Tenant              *NestedTenant          `json:"tenant,omitempty"`
+	TimeZone            *string                `json:"time_zone,omitempty"`
+	VirtualmachineCount *int64                 `json:"virtualmachine_count,omitempty"`
+	VlanCount           *int64                 `json:"vlan_count,omitempty"`
 }

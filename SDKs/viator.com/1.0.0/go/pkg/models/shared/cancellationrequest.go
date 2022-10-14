@@ -1,5 +1,5 @@
 package shared
 
 type CancellationRequest struct {
-	ReasonCode *string `json:"reasonCode"`
+	ReasonCode *string `json:"reasonCode,omitempty"`
 }

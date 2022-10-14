@@ -1,11 +1,11 @@
 package shared
 
 type ResponseDefaultResourceResource struct {
-	ID  *string `json:"id"`
-	URL *string `json:"url"`
+	ID  *string `json:"id,omitempty"`
+	URL *string `json:"url,omitempty"`
 }
 
 type ResponseDefaultResource struct {
-	Resource *ResponseDefaultResourceResource `json:"resource"`
-	Status   *int64                           `json:"status"`
+	Resource *ResponseDefaultResourceResource `json:"resource,omitempty"`
+	Status   *int64                           `json:"status,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ConditionalForwarder struct {
-	DNSIPAddrs       []string              `json:"DnsIpAddrs"`
-	RemoteDomainName *string               `json:"RemoteDomainName"`
-	ReplicationScope *ReplicationScopeEnum `json:"ReplicationScope"`
+	DNSIPAddrs       []string              `json:"DnsIpAddrs,omitempty"`
+	RemoteDomainName *string               `json:"RemoteDomainName,omitempty"`
+	ReplicationScope *ReplicationScopeEnum `json:"ReplicationScope,omitempty"`
 }

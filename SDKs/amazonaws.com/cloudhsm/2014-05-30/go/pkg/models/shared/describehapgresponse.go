@@ -1,13 +1,13 @@
 package shared
 
 type DescribeHapgResponse struct {
-	HapgArn                 *string                  `json:"HapgArn"`
-	HapgSerial              *string                  `json:"HapgSerial"`
-	HsmsLastActionFailed    []string                 `json:"HsmsLastActionFailed"`
-	HsmsPendingDeletion     []string                 `json:"HsmsPendingDeletion"`
-	HsmsPendingRegistration []string                 `json:"HsmsPendingRegistration"`
-	Label                   *string                  `json:"Label"`
-	LastModifiedTimestamp   *string                  `json:"LastModifiedTimestamp"`
-	PartitionSerialList     []string                 `json:"PartitionSerialList"`
-	State                   *CloudHsmObjectStateEnum `json:"State"`
+	HapgArn                 *string                  `json:"HapgArn,omitempty"`
+	HapgSerial              *string                  `json:"HapgSerial,omitempty"`
+	HsmsLastActionFailed    []string                 `json:"HsmsLastActionFailed,omitempty"`
+	HsmsPendingDeletion     []string                 `json:"HsmsPendingDeletion,omitempty"`
+	HsmsPendingRegistration []string                 `json:"HsmsPendingRegistration,omitempty"`
+	Label                   *string                  `json:"Label,omitempty"`
+	LastModifiedTimestamp   *string                  `json:"LastModifiedTimestamp,omitempty"`
+	PartitionSerialList     []string                 `json:"PartitionSerialList,omitempty"`
+	State                   *CloudHsmObjectStateEnum `json:"State,omitempty"`
 }

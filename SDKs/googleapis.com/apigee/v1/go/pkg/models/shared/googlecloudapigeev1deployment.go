@@ -10,14 +10,14 @@ const (
 )
 
 type GoogleCloudApigeeV1Deployment struct {
-	APIProxy        *string                                                    `json:"apiProxy"`
-	DeployStartTime *string                                                    `json:"deployStartTime"`
-	Environment     *string                                                    `json:"environment"`
-	Errors          []GoogleRPCStatus                                          `json:"errors"`
-	Instances       []GoogleCloudApigeeV1InstanceDeploymentStatus              `json:"instances"`
-	Pods            []GoogleCloudApigeeV1PodStatus                             `json:"pods"`
-	Revision        *string                                                    `json:"revision"`
-	RouteConflicts  []GoogleCloudApigeeV1DeploymentChangeReportRoutingConflict `json:"routeConflicts"`
-	ServiceAccount  *string                                                    `json:"serviceAccount"`
-	State           *GoogleCloudApigeeV1DeploymentStateEnum                    `json:"state"`
+	APIProxy        *string                                                    `json:"apiProxy,omitempty"`
+	DeployStartTime *string                                                    `json:"deployStartTime,omitempty"`
+	Environment     *string                                                    `json:"environment,omitempty"`
+	Errors          []GoogleRPCStatus                                          `json:"errors,omitempty"`
+	Instances       []GoogleCloudApigeeV1InstanceDeploymentStatus              `json:"instances,omitempty"`
+	Pods            []GoogleCloudApigeeV1PodStatus                             `json:"pods,omitempty"`
+	Revision        *string                                                    `json:"revision,omitempty"`
+	RouteConflicts  []GoogleCloudApigeeV1DeploymentChangeReportRoutingConflict `json:"routeConflicts,omitempty"`
+	ServiceAccount  *string                                                    `json:"serviceAccount,omitempty"`
+	State           *GoogleCloudApigeeV1DeploymentStateEnum                    `json:"state,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type MutationRecord struct {
-	MutateTime *string `json:"mutateTime"`
-	MutatedBy  *string `json:"mutatedBy"`
+	MutateTime *string `json:"mutateTime,omitempty"`
+	MutatedBy  *string `json:"mutatedBy,omitempty"`
 }

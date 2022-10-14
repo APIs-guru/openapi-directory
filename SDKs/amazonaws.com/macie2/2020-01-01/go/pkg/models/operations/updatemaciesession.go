@@ -26,8 +26,8 @@ const (
 )
 
 type UpdateMacieSessionRequestBody struct {
-	FindingPublishingFrequency *UpdateMacieSessionRequestBodyFindingPublishingFrequencyEnum `json:"findingPublishingFrequency"`
-	Status                     *UpdateMacieSessionRequestBodyStatusEnum                     `json:"status"`
+	FindingPublishingFrequency *UpdateMacieSessionRequestBodyFindingPublishingFrequencyEnum `json:"findingPublishingFrequency,omitempty"`
+	Status                     *UpdateMacieSessionRequestBodyStatusEnum                     `json:"status,omitempty"`
 }
 
 type UpdateMacieSessionRequest struct {

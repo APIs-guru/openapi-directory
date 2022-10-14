@@ -27,16 +27,16 @@ const (
 )
 
 type GoogleCloudDialogflowV2Agent struct {
-	APIVersion              *GoogleCloudDialogflowV2AgentAPIVersionEnum `json:"apiVersion"`
-	AvatarURI               *string                                     `json:"avatarUri"`
-	ClassificationThreshold *float32                                    `json:"classificationThreshold"`
-	DefaultLanguageCode     *string                                     `json:"defaultLanguageCode"`
-	Description             *string                                     `json:"description"`
-	DisplayName             *string                                     `json:"displayName"`
-	EnableLogging           *bool                                       `json:"enableLogging"`
-	MatchMode               *GoogleCloudDialogflowV2AgentMatchModeEnum  `json:"matchMode"`
-	Parent                  *string                                     `json:"parent"`
-	SupportedLanguageCodes  []string                                    `json:"supportedLanguageCodes"`
-	Tier                    *GoogleCloudDialogflowV2AgentTierEnum       `json:"tier"`
-	TimeZone                *string                                     `json:"timeZone"`
+	APIVersion              *GoogleCloudDialogflowV2AgentAPIVersionEnum `json:"apiVersion,omitempty"`
+	AvatarURI               *string                                     `json:"avatarUri,omitempty"`
+	ClassificationThreshold *float32                                    `json:"classificationThreshold,omitempty"`
+	DefaultLanguageCode     *string                                     `json:"defaultLanguageCode,omitempty"`
+	Description             *string                                     `json:"description,omitempty"`
+	DisplayName             *string                                     `json:"displayName,omitempty"`
+	EnableLogging           *bool                                       `json:"enableLogging,omitempty"`
+	MatchMode               *GoogleCloudDialogflowV2AgentMatchModeEnum  `json:"matchMode,omitempty"`
+	Parent                  *string                                     `json:"parent,omitempty"`
+	SupportedLanguageCodes  []string                                    `json:"supportedLanguageCodes,omitempty"`
+	Tier                    *GoogleCloudDialogflowV2AgentTierEnum       `json:"tier,omitempty"`
+	TimeZone                *string                                     `json:"timeZone,omitempty"`
 }

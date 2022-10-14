@@ -1,5 +1,5 @@
 package shared
 
 type AccountsUpdateLabelsRequest struct {
-	LabelIds []string `json:"labelIds"`
+	LabelIds []string `json:"labelIds,omitempty"`
 }

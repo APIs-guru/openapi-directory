@@ -1,16 +1,16 @@
 package shared
 
 type RemediationConfiguration struct {
-	Arn                      *string                              `json:"Arn"`
-	Automatic                *bool                                `json:"Automatic"`
+	Arn                      *string                              `json:"Arn,omitempty"`
+	Automatic                *bool                                `json:"Automatic,omitempty"`
 	ConfigRuleName           string                               `json:"ConfigRuleName"`
-	CreatedByService         *string                              `json:"CreatedByService"`
-	ExecutionControls        *ExecutionControls                   `json:"ExecutionControls"`
-	MaximumAutomaticAttempts *int64                               `json:"MaximumAutomaticAttempts"`
-	Parameters               map[string]RemediationParameterValue `json:"Parameters"`
-	ResourceType             *string                              `json:"ResourceType"`
-	RetryAttemptSeconds      *int64                               `json:"RetryAttemptSeconds"`
+	CreatedByService         *string                              `json:"CreatedByService,omitempty"`
+	ExecutionControls        *ExecutionControls                   `json:"ExecutionControls,omitempty"`
+	MaximumAutomaticAttempts *int64                               `json:"MaximumAutomaticAttempts,omitempty"`
+	Parameters               map[string]RemediationParameterValue `json:"Parameters,omitempty"`
+	ResourceType             *string                              `json:"ResourceType,omitempty"`
+	RetryAttemptSeconds      *int64                               `json:"RetryAttemptSeconds,omitempty"`
 	TargetID                 string                               `json:"TargetId"`
 	TargetType               RemediationTargetTypeEnum            `json:"TargetType"`
-	TargetVersion            *string                              `json:"TargetVersion"`
+	TargetVersion            *string                              `json:"TargetVersion,omitempty"`
 }

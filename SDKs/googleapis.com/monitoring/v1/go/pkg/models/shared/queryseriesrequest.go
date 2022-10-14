@@ -1,6 +1,6 @@
 package shared
 
 type QuerySeriesRequest struct {
-	End   *string `json:"end"`
-	Start *string `json:"start"`
+	End   *string `json:"end,omitempty"`
+	Start *string `json:"start,omitempty"`
 }

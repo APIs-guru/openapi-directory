@@ -1,6 +1,6 @@
 package shared
 
 type DescribeContinuousExportsResponse struct {
-	Descriptions []ContinuousExportDescription `json:"descriptions"`
-	NextToken    *string                       `json:"nextToken"`
+	Descriptions []ContinuousExportDescription `json:"descriptions,omitempty"`
+	NextToken    *string                       `json:"nextToken,omitempty"`
 }

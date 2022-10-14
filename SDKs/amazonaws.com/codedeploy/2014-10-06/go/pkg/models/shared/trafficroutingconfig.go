@@ -1,7 +1,7 @@
 package shared
 
 type TrafficRoutingConfig struct {
-	TimeBasedCanary *TimeBasedCanary        `json:"timeBasedCanary"`
-	TimeBasedLinear *TimeBasedLinear        `json:"timeBasedLinear"`
-	Type            *TrafficRoutingTypeEnum `json:"type"`
+	TimeBasedCanary *TimeBasedCanary        `json:"timeBasedCanary,omitempty"`
+	TimeBasedLinear *TimeBasedLinear        `json:"timeBasedLinear,omitempty"`
+	Type            *TrafficRoutingTypeEnum `json:"type,omitempty"`
 }

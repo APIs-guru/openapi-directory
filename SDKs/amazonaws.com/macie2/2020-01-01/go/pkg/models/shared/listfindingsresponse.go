@@ -1,6 +1,6 @@
 package shared
 
 type ListFindingsResponse struct {
-	FindingIds []string `json:"findingIds"`
-	NextToken  *string  `json:"nextToken"`
+	FindingIds []string `json:"findingIds,omitempty"`
+	NextToken  *string  `json:"nextToken,omitempty"`
 }

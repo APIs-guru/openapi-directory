@@ -1,8 +1,8 @@
 package shared
 
 type SasPortalDeployment struct {
-	DisplayName *string  `json:"displayName"`
-	Frns        []string `json:"frns"`
-	Name        *string  `json:"name"`
-	SasUserIds  []string `json:"sasUserIds"`
+	DisplayName *string  `json:"displayName,omitempty"`
+	Frns        []string `json:"frns,omitempty"`
+	Name        *string  `json:"name,omitempty"`
+	SasUserIds  []string `json:"sasUserIds,omitempty"`
 }

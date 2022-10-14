@@ -9,8 +9,8 @@ const (
 )
 
 type SQLInstancesVerifyExternalSyncSettingsRequest struct {
-	MysqlSyncConfig       *MySQLSyncConfig                                           `json:"mysqlSyncConfig"`
-	SyncMode              *SQLInstancesVerifyExternalSyncSettingsRequestSyncModeEnum `json:"syncMode"`
-	VerifyConnectionOnly  *bool                                                      `json:"verifyConnectionOnly"`
-	VerifyReplicationOnly *bool                                                      `json:"verifyReplicationOnly"`
+	MysqlSyncConfig       *MySQLSyncConfig                                           `json:"mysqlSyncConfig,omitempty"`
+	SyncMode              *SQLInstancesVerifyExternalSyncSettingsRequestSyncModeEnum `json:"syncMode,omitempty"`
+	VerifyConnectionOnly  *bool                                                      `json:"verifyConnectionOnly,omitempty"`
+	VerifyReplicationOnly *bool                                                      `json:"verifyReplicationOnly,omitempty"`
 }

@@ -5,6 +5,6 @@ import (
 )
 
 type ContactList struct {
-	ContactListName      *string    `json:"ContactListName"`
-	LastUpdatedTimestamp *time.Time `json:"LastUpdatedTimestamp"`
+	ContactListName      *string    `json:"ContactListName,omitempty"`
+	LastUpdatedTimestamp *time.Time `json:"LastUpdatedTimestamp,omitempty"`
 }

@@ -19,10 +19,10 @@ const (
 )
 
 type PullsMergeRequestBody struct {
-	CommitMessage *string                               `json:"commit_message"`
-	CommitTitle   *string                               `json:"commit_title"`
-	MergeMethod   *PullsMergeRequestBodyMergeMethodEnum `json:"merge_method"`
-	Sha           *string                               `json:"sha"`
+	CommitMessage *string                               `json:"commit_message,omitempty"`
+	CommitTitle   *string                               `json:"commit_title,omitempty"`
+	MergeMethod   *PullsMergeRequestBodyMergeMethodEnum `json:"merge_method,omitempty"`
+	Sha           *string                               `json:"sha,omitempty"`
 }
 
 type PullsMergeRequest struct {
@@ -31,13 +31,13 @@ type PullsMergeRequest struct {
 }
 
 type PullsMerge405ApplicationJSON struct {
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type PullsMerge409ApplicationJSON struct {
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type PullsMergeResponse struct {

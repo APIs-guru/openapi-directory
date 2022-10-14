@@ -12,6 +12,6 @@ const (
 )
 
 type ClusterState struct {
-	EncryptionInfo   []EncryptionInfo                  `json:"encryptionInfo"`
-	ReplicationState *ClusterStateReplicationStateEnum `json:"replicationState"`
+	EncryptionInfo   []EncryptionInfo                  `json:"encryptionInfo,omitempty"`
+	ReplicationState *ClusterStateReplicationStateEnum `json:"replicationState,omitempty"`
 }

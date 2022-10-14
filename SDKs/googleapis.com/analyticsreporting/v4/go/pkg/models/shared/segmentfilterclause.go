@@ -1,7 +1,7 @@
 package shared
 
 type SegmentFilterClause struct {
-	DimensionFilter *SegmentDimensionFilter `json:"dimensionFilter"`
-	MetricFilter    *SegmentMetricFilter    `json:"metricFilter"`
-	Not             *bool                   `json:"not"`
+	DimensionFilter *SegmentDimensionFilter `json:"dimensionFilter,omitempty"`
+	MetricFilter    *SegmentMetricFilter    `json:"metricFilter,omitempty"`
+	Not             *bool                   `json:"not,omitempty"`
 }

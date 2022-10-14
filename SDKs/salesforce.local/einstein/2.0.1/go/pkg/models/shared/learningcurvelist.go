@@ -1,6 +1,6 @@
 package shared
 
 type LearningCurveList struct {
-	Data   []LearningCurve `json:"data"`
-	Object *string         `json:"object"`
+	Data   []LearningCurve `json:"data,omitempty"`
+	Object *string         `json:"object,omitempty"`
 }

@@ -26,9 +26,9 @@ const (
 )
 
 type TagData struct {
-	AdID          *string            `json:"adId"`
-	ClickTag      *string            `json:"clickTag"`
-	CreativeID    *string            `json:"creativeId"`
-	Format        *TagDataFormatEnum `json:"format"`
-	ImpressionTag *string            `json:"impressionTag"`
+	AdID          *string            `json:"adId,omitempty"`
+	ClickTag      *string            `json:"clickTag,omitempty"`
+	CreativeID    *string            `json:"creativeId,omitempty"`
+	Format        *TagDataFormatEnum `json:"format,omitempty"`
+	ImpressionTag *string            `json:"impressionTag,omitempty"`
 }

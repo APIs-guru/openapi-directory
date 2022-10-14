@@ -1,6 +1,6 @@
 package shared
 
 type ManualRuleGroup struct {
-	GroupName *ExtendedValue  `json:"groupName"`
-	Items     []ExtendedValue `json:"items"`
+	GroupName *ExtendedValue  `json:"groupName,omitempty"`
+	Items     []ExtendedValue `json:"items,omitempty"`
 }

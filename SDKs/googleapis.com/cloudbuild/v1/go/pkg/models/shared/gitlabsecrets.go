@@ -1,8 +1,8 @@
 package shared
 
 type GitLabSecrets struct {
-	APIAccessTokenVersion  *string `json:"apiAccessTokenVersion"`
-	APIKeyVersion          *string `json:"apiKeyVersion"`
-	ReadAccessTokenVersion *string `json:"readAccessTokenVersion"`
-	WebhookSecretVersion   *string `json:"webhookSecretVersion"`
+	APIAccessTokenVersion  *string `json:"apiAccessTokenVersion,omitempty"`
+	APIKeyVersion          *string `json:"apiKeyVersion,omitempty"`
+	ReadAccessTokenVersion *string `json:"readAccessTokenVersion,omitempty"`
+	WebhookSecretVersion   *string `json:"webhookSecretVersion,omitempty"`
 }

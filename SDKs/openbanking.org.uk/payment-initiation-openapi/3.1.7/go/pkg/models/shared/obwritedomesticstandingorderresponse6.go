@@ -14,14 +14,14 @@ type ObWriteDomesticStandingOrderResponse6DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderResponse6DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderResponse6DataInitiationFinalPaymentAmount struct {
@@ -41,17 +41,17 @@ type ObWriteDomesticStandingOrderResponse6DataInitiationRecurringPaymentAmount s
 
 type ObWriteDomesticStandingOrderResponse6DataInitiation struct {
 	CreditorAccount          ObWriteDomesticStandingOrderResponse6DataInitiationCreditorAccount         `json:"CreditorAccount"`
-	DebtorAccount            *ObWriteDomesticStandingOrderResponse6DataInitiationDebtorAccount          `json:"DebtorAccount"`
-	FinalPaymentAmount       *ObWriteDomesticStandingOrderResponse6DataInitiationFinalPaymentAmount     `json:"FinalPaymentAmount"`
-	FinalPaymentDateTime     *time.Time                                                                 `json:"FinalPaymentDateTime"`
+	DebtorAccount            *ObWriteDomesticStandingOrderResponse6DataInitiationDebtorAccount          `json:"DebtorAccount,omitempty"`
+	FinalPaymentAmount       *ObWriteDomesticStandingOrderResponse6DataInitiationFinalPaymentAmount     `json:"FinalPaymentAmount,omitempty"`
+	FinalPaymentDateTime     *time.Time                                                                 `json:"FinalPaymentDateTime,omitempty"`
 	FirstPaymentAmount       ObWriteDomesticStandingOrderResponse6DataInitiationFirstPaymentAmount      `json:"FirstPaymentAmount"`
 	FirstPaymentDateTime     time.Time                                                                  `json:"FirstPaymentDateTime"`
 	Frequency                string                                                                     `json:"Frequency"`
-	NumberOfPayments         *string                                                                    `json:"NumberOfPayments"`
-	RecurringPaymentAmount   *ObWriteDomesticStandingOrderResponse6DataInitiationRecurringPaymentAmount `json:"RecurringPaymentAmount"`
-	RecurringPaymentDateTime *time.Time                                                                 `json:"RecurringPaymentDateTime"`
-	Reference                *string                                                                    `json:"Reference"`
-	SupplementaryData        map[string]interface{}                                                     `json:"SupplementaryData"`
+	NumberOfPayments         *string                                                                    `json:"NumberOfPayments,omitempty"`
+	RecurringPaymentAmount   *ObWriteDomesticStandingOrderResponse6DataInitiationRecurringPaymentAmount `json:"RecurringPaymentAmount,omitempty"`
+	RecurringPaymentDateTime *time.Time                                                                 `json:"RecurringPaymentDateTime,omitempty"`
+	Reference                *string                                                                    `json:"Reference,omitempty"`
+	SupplementaryData        map[string]interface{}                                                     `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderResponse6DataMultiAuthorisationStatusEnum string
@@ -63,10 +63,10 @@ const (
 )
 
 type ObWriteDomesticStandingOrderResponse6DataMultiAuthorisation struct {
-	ExpirationDateTime *time.Time                                                            `json:"ExpirationDateTime"`
-	LastUpdateDateTime *time.Time                                                            `json:"LastUpdateDateTime"`
-	NumberReceived     *int64                                                                `json:"NumberReceived"`
-	NumberRequired     *int64                                                                `json:"NumberRequired"`
+	ExpirationDateTime *time.Time                                                            `json:"ExpirationDateTime,omitempty"`
+	LastUpdateDateTime *time.Time                                                            `json:"LastUpdateDateTime,omitempty"`
+	NumberReceived     *int64                                                                `json:"NumberReceived,omitempty"`
+	NumberRequired     *int64                                                                `json:"NumberRequired,omitempty"`
 	Status             ObWriteDomesticStandingOrderResponse6DataMultiAuthorisationStatusEnum `json:"Status"`
 }
 
@@ -74,7 +74,7 @@ type ObWriteDomesticStandingOrderResponse6DataRefundAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderResponse6DataRefund struct {
@@ -91,20 +91,20 @@ const (
 )
 
 type ObWriteDomesticStandingOrderResponse6Data struct {
-	Charges                 []ObWriteDomesticStandingOrderResponse6DataCharges           `json:"Charges"`
+	Charges                 []ObWriteDomesticStandingOrderResponse6DataCharges           `json:"Charges,omitempty"`
 	ConsentID               string                                                       `json:"ConsentId"`
 	CreationDateTime        time.Time                                                    `json:"CreationDateTime"`
-	Debtor                  *ObCashAccountDebtor4                                        `json:"Debtor"`
+	Debtor                  *ObCashAccountDebtor4                                        `json:"Debtor,omitempty"`
 	DomesticStandingOrderID string                                                       `json:"DomesticStandingOrderId"`
 	Initiation              ObWriteDomesticStandingOrderResponse6DataInitiation          `json:"Initiation"`
-	MultiAuthorisation      *ObWriteDomesticStandingOrderResponse6DataMultiAuthorisation `json:"MultiAuthorisation"`
-	Refund                  *ObWriteDomesticStandingOrderResponse6DataRefund             `json:"Refund"`
+	MultiAuthorisation      *ObWriteDomesticStandingOrderResponse6DataMultiAuthorisation `json:"MultiAuthorisation,omitempty"`
+	Refund                  *ObWriteDomesticStandingOrderResponse6DataRefund             `json:"Refund,omitempty"`
 	Status                  ObWriteDomesticStandingOrderResponse6DataStatusEnum          `json:"Status"`
 	StatusUpdateDateTime    time.Time                                                    `json:"StatusUpdateDateTime"`
 }
 
 type ObWriteDomesticStandingOrderResponse6 struct {
 	Data  ObWriteDomesticStandingOrderResponse6Data `json:"Data"`
-	Links *Links                                    `json:"Links"`
-	Meta  *Meta                                     `json:"Meta"`
+	Links *Links                                    `json:"Links,omitempty"`
+	Meta  *Meta                                     `json:"Meta,omitempty"`
 }

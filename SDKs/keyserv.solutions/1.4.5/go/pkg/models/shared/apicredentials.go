@@ -1,6 +1,6 @@
 package shared
 
 type APICredentials struct {
-	Key    *string `json:"key"`
-	Serial *string `json:"serial"`
+	Key    *string `json:"key,omitempty"`
+	Serial *string `json:"serial,omitempty"`
 }

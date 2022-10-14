@@ -5,38 +5,38 @@ type CreateNetworkFloorPlanPathParams struct {
 }
 
 type CreateNetworkFloorPlanRequestBodyBottomLeftCorner struct {
-	Lat *float32 `json:"lat"`
-	Lng *float32 `json:"lng"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lng *float32 `json:"lng,omitempty"`
 }
 
 type CreateNetworkFloorPlanRequestBodyBottomRightCorner struct {
-	Lat *float32 `json:"lat"`
-	Lng *float32 `json:"lng"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lng *float32 `json:"lng,omitempty"`
 }
 
 type CreateNetworkFloorPlanRequestBodyCenter struct {
-	Lat *float32 `json:"lat"`
-	Lng *float32 `json:"lng"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lng *float32 `json:"lng,omitempty"`
 }
 
 type CreateNetworkFloorPlanRequestBodyTopLeftCorner struct {
-	Lat *float32 `json:"lat"`
-	Lng *float32 `json:"lng"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lng *float32 `json:"lng,omitempty"`
 }
 
 type CreateNetworkFloorPlanRequestBodyTopRightCorner struct {
-	Lat *float32 `json:"lat"`
-	Lng *float32 `json:"lng"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lng *float32 `json:"lng,omitempty"`
 }
 
 type CreateNetworkFloorPlanRequestBody struct {
-	BottomLeftCorner  *CreateNetworkFloorPlanRequestBodyBottomLeftCorner  `json:"bottomLeftCorner"`
-	BottomRightCorner *CreateNetworkFloorPlanRequestBodyBottomRightCorner `json:"bottomRightCorner"`
-	Center            *CreateNetworkFloorPlanRequestBodyCenter            `json:"center"`
+	BottomLeftCorner  *CreateNetworkFloorPlanRequestBodyBottomLeftCorner  `json:"bottomLeftCorner,omitempty"`
+	BottomRightCorner *CreateNetworkFloorPlanRequestBodyBottomRightCorner `json:"bottomRightCorner,omitempty"`
+	Center            *CreateNetworkFloorPlanRequestBodyCenter            `json:"center,omitempty"`
 	ImageContents     string                                              `json:"imageContents"`
 	Name              string                                              `json:"name"`
-	TopLeftCorner     *CreateNetworkFloorPlanRequestBodyTopLeftCorner     `json:"topLeftCorner"`
-	TopRightCorner    *CreateNetworkFloorPlanRequestBodyTopRightCorner    `json:"topRightCorner"`
+	TopLeftCorner     *CreateNetworkFloorPlanRequestBodyTopLeftCorner     `json:"topLeftCorner,omitempty"`
+	TopRightCorner    *CreateNetworkFloorPlanRequestBodyTopRightCorner    `json:"topRightCorner,omitempty"`
 }
 
 type CreateNetworkFloorPlanRequest struct {

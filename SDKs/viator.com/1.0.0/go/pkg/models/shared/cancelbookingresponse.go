@@ -15,7 +15,7 @@ const (
 )
 
 type CancelBookingResponse struct {
-	BookingID *string                          `json:"bookingId"`
-	Reason    *CancelBookingResponseReasonEnum `json:"reason"`
-	Status    *CancelBookingResponseStatusEnum `json:"status"`
+	BookingID *string                          `json:"bookingId,omitempty"`
+	Reason    *CancelBookingResponseReasonEnum `json:"reason,omitempty"`
+	Status    *CancelBookingResponseStatusEnum `json:"status,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AddSubsiteRequest struct {
-	DomainName *string `json:"domain_name"`
-	Path       *string `json:"path"`
+	DomainName *string `json:"domain_name,omitempty"`
+	Path       *string `json:"path,omitempty"`
 }

@@ -10,14 +10,14 @@ const (
 )
 
 type PlayerLeaderboardScore struct {
-	FriendsRank    *LeaderboardScoreRank               `json:"friendsRank"`
-	Kind           *string                             `json:"kind"`
-	LeaderboardID  *string                             `json:"leaderboard_id"`
-	PublicRank     *LeaderboardScoreRank               `json:"publicRank"`
-	ScoreString    *string                             `json:"scoreString"`
-	ScoreTag       *string                             `json:"scoreTag"`
-	ScoreValue     *string                             `json:"scoreValue"`
-	SocialRank     *LeaderboardScoreRank               `json:"socialRank"`
-	TimeSpan       *PlayerLeaderboardScoreTimeSpanEnum `json:"timeSpan"`
-	WriteTimestamp *string                             `json:"writeTimestamp"`
+	FriendsRank    *LeaderboardScoreRank               `json:"friendsRank,omitempty"`
+	Kind           *string                             `json:"kind,omitempty"`
+	LeaderboardID  *string                             `json:"leaderboard_id,omitempty"`
+	PublicRank     *LeaderboardScoreRank               `json:"publicRank,omitempty"`
+	ScoreString    *string                             `json:"scoreString,omitempty"`
+	ScoreTag       *string                             `json:"scoreTag,omitempty"`
+	ScoreValue     *string                             `json:"scoreValue,omitempty"`
+	SocialRank     *LeaderboardScoreRank               `json:"socialRank,omitempty"`
+	TimeSpan       *PlayerLeaderboardScoreTimeSpanEnum `json:"timeSpan,omitempty"`
+	WriteTimestamp *string                             `json:"writeTimestamp,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ComplianceSummaryInfo struct {
-	ComplianceType *string `json:"complianceType"`
-	ListingCount   *int32  `json:"listingCount"`
-	MarketplaceID  *string `json:"marketplaceId"`
+	ComplianceType *string `json:"complianceType,omitempty"`
+	ListingCount   *int32  `json:"listingCount,omitempty"`
+	MarketplaceID  *string `json:"marketplaceId,omitempty"`
 }

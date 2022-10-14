@@ -1,6 +1,6 @@
 package shared
 
 type Role struct {
-	RoleArn  *string       `json:"roleArn"`
-	RoleType *RoleTypeEnum `json:"roleType"`
+	RoleArn  *string       `json:"roleArn,omitempty"`
+	RoleType *RoleTypeEnum `json:"roleType,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type Introspection struct {
-	Features []string   `json:"Features"`
-	IssuedAt *time.Time `json:"IssuedAt"`
-	UUID     *string    `json:"UUID"`
+	Features []string   `json:"Features,omitempty"`
+	IssuedAt *time.Time `json:"IssuedAt,omitempty"`
+	UUID     *string    `json:"UUID,omitempty"`
 }

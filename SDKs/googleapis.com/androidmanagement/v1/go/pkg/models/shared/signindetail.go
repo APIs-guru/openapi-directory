@@ -9,8 +9,8 @@ const (
 )
 
 type SigninDetail struct {
-	AllowPersonalUsage    *SigninDetailAllowPersonalUsageEnum `json:"allowPersonalUsage"`
-	QrCode                *string                             `json:"qrCode"`
-	SigninEnrollmentToken *string                             `json:"signinEnrollmentToken"`
-	SigninURL             *string                             `json:"signinUrl"`
+	AllowPersonalUsage    *SigninDetailAllowPersonalUsageEnum `json:"allowPersonalUsage,omitempty"`
+	QrCode                *string                             `json:"qrCode,omitempty"`
+	SigninEnrollmentToken *string                             `json:"signinEnrollmentToken,omitempty"`
+	SigninURL             *string                             `json:"signinUrl,omitempty"`
 }

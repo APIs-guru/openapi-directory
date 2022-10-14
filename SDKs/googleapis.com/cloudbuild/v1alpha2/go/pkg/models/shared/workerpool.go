@@ -11,12 +11,12 @@ const (
 )
 
 type WorkerPool struct {
-	CreateTime    *string              `json:"createTime"`
-	DeleteTime    *string              `json:"deleteTime"`
-	Name          *string              `json:"name"`
-	NetworkConfig *NetworkConfig       `json:"networkConfig"`
-	Region        *string              `json:"region"`
-	State         *WorkerPoolStateEnum `json:"state"`
-	UpdateTime    *string              `json:"updateTime"`
-	WorkerConfig  *WorkerConfig        `json:"workerConfig"`
+	CreateTime    *string              `json:"createTime,omitempty"`
+	DeleteTime    *string              `json:"deleteTime,omitempty"`
+	Name          *string              `json:"name,omitempty"`
+	NetworkConfig *NetworkConfig       `json:"networkConfig,omitempty"`
+	Region        *string              `json:"region,omitempty"`
+	State         *WorkerPoolStateEnum `json:"state,omitempty"`
+	UpdateTime    *string              `json:"updateTime,omitempty"`
+	WorkerConfig  *WorkerConfig        `json:"workerConfig,omitempty"`
 }

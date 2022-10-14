@@ -5,24 +5,24 @@ import (
 )
 
 type ListAllDomains200ApplicationJSONDomains struct {
-	IPAddress *string `json:"ip_address"`
-	Name      *string `json:"name"`
-	TTL       *int64  `json:"ttl"`
-	ZoneFile  *string `json:"zone_file"`
+	IPAddress *string `json:"ip_address,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	TTL       *int64  `json:"ttl,omitempty"`
+	ZoneFile  *string `json:"zone_file,omitempty"`
 }
 
 type ListAllDomains200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllDomains200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllDomains200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllDomains200ApplicationJSONMeta struct {
@@ -31,14 +31,14 @@ type ListAllDomains200ApplicationJSONMeta struct {
 
 type ListAllDomains200ApplicationJSON struct {
 	Domains []ListAllDomains200ApplicationJSONDomains `json:"domains"`
-	Links   *ListAllDomains200ApplicationJSONLinks    `json:"links"`
+	Links   *ListAllDomains200ApplicationJSONLinks    `json:"links,omitempty"`
 	Meta    ListAllDomains200ApplicationJSONMeta      `json:"meta"`
 }
 
 type ListAllDomains401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllDomainsResponse struct {

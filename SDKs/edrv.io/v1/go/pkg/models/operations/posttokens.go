@@ -14,7 +14,7 @@ type PostTokensRequestBody struct {
 	Channel    PostTokensRequestBodyChannelEnum `json:"channel"`
 	Driver     string                           `json:"driver"`
 	PhysicalID string                           `json:"physicalId"`
-	Type       *string                          `json:"type"`
+	Type       *string                          `json:"type,omitempty"`
 }
 
 type PostTokensRequest struct {
@@ -22,9 +22,9 @@ type PostTokensRequest struct {
 }
 
 type PostTokens201ApplicationJSON struct {
-	Message *string       `json:"message"`
-	Ok      *bool         `json:"ok"`
-	Result  []interface{} `json:"result"`
+	Message *string       `json:"message,omitempty"`
+	Ok      *bool         `json:"ok,omitempty"`
+	Result  []interface{} `json:"result,omitempty"`
 }
 
 type PostTokensResponse struct {

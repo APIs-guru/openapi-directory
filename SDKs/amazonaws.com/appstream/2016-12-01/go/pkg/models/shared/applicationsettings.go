@@ -2,5 +2,5 @@ package shared
 
 type ApplicationSettings struct {
 	Enabled       bool    `json:"Enabled"`
-	SettingsGroup *string `json:"SettingsGroup"`
+	SettingsGroup *string `json:"SettingsGroup,omitempty"`
 }

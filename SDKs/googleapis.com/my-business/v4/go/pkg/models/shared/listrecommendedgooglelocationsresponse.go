@@ -1,7 +1,7 @@
 package shared
 
 type ListRecommendedGoogleLocationsResponse struct {
-	GoogleLocations []GoogleLocation `json:"googleLocations"`
-	NextPageToken   *string          `json:"nextPageToken"`
-	TotalSize       *int32           `json:"totalSize"`
+	GoogleLocations []GoogleLocation `json:"googleLocations,omitempty"`
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
+	TotalSize       *int32           `json:"totalSize,omitempty"`
 }

@@ -9,22 +9,22 @@ const (
 )
 
 type Invoice struct {
-	CampaignSummaries    []CampaignSummary       `json:"campaign_summaries"`
-	CorrectedInvoiceID   *string                 `json:"correctedInvoiceId"`
-	CurrencyCode         *string                 `json:"currencyCode"`
-	DueDate              *string                 `json:"dueDate"`
-	ID                   *string                 `json:"id"`
-	InvoiceType          *InvoiceInvoiceTypeEnum `json:"invoiceType"`
-	IssueDate            *string                 `json:"issueDate"`
-	Kind                 *string                 `json:"kind"`
-	PaymentsAccountID    *string                 `json:"paymentsAccountId"`
-	PaymentsProfileID    *string                 `json:"paymentsProfileId"`
-	PdfURL               *string                 `json:"pdfUrl"`
-	PurchaseOrderNumber  *string                 `json:"purchaseOrderNumber"`
-	ReplacedInvoiceIds   []string                `json:"replacedInvoiceIds"`
-	ServiceEndDate       *string                 `json:"serviceEndDate"`
-	ServiceStartDate     *string                 `json:"serviceStartDate"`
-	SubtotalAmountMicros *string                 `json:"subtotalAmountMicros"`
-	TotalAmountMicros    *string                 `json:"totalAmountMicros"`
-	TotalTaxAmountMicros *string                 `json:"totalTaxAmountMicros"`
+	CampaignSummaries    []CampaignSummary       `json:"campaign_summaries,omitempty"`
+	CorrectedInvoiceID   *string                 `json:"correctedInvoiceId,omitempty"`
+	CurrencyCode         *string                 `json:"currencyCode,omitempty"`
+	DueDate              *string                 `json:"dueDate,omitempty"`
+	ID                   *string                 `json:"id,omitempty"`
+	InvoiceType          *InvoiceInvoiceTypeEnum `json:"invoiceType,omitempty"`
+	IssueDate            *string                 `json:"issueDate,omitempty"`
+	Kind                 *string                 `json:"kind,omitempty"`
+	PaymentsAccountID    *string                 `json:"paymentsAccountId,omitempty"`
+	PaymentsProfileID    *string                 `json:"paymentsProfileId,omitempty"`
+	PdfURL               *string                 `json:"pdfUrl,omitempty"`
+	PurchaseOrderNumber  *string                 `json:"purchaseOrderNumber,omitempty"`
+	ReplacedInvoiceIds   []string                `json:"replacedInvoiceIds,omitempty"`
+	ServiceEndDate       *string                 `json:"serviceEndDate,omitempty"`
+	ServiceStartDate     *string                 `json:"serviceStartDate,omitempty"`
+	SubtotalAmountMicros *string                 `json:"subtotalAmountMicros,omitempty"`
+	TotalAmountMicros    *string                 `json:"totalAmountMicros,omitempty"`
+	TotalTaxAmountMicros *string                 `json:"totalTaxAmountMicros,omitempty"`
 }

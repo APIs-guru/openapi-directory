@@ -10,10 +10,10 @@ type OrgsUpdateWebhookConfigForOrgPathParams struct {
 }
 
 type OrgsUpdateWebhookConfigForOrgRequestBody struct {
-	ContentType *string      `json:"content_type"`
-	InsecureSsl *interface{} `json:"insecure_ssl"`
-	Secret      *string      `json:"secret"`
-	URL         *string      `json:"url"`
+	ContentType *string      `json:"content_type,omitempty"`
+	InsecureSsl *interface{} `json:"insecure_ssl,omitempty"`
+	Secret      *string      `json:"secret,omitempty"`
+	URL         *string      `json:"url,omitempty"`
 }
 
 type OrgsUpdateWebhookConfigForOrgRequest struct {

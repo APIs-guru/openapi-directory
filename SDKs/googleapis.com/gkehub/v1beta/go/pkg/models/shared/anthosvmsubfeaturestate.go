@@ -10,8 +10,8 @@ const (
 )
 
 type AnthosVMSubFeatureState struct {
-	Description       *string                                       `json:"description"`
-	InstallationState *AnthosVMSubFeatureStateInstallationStateEnum `json:"installationState"`
-	MigrateState      map[string]interface{}                        `json:"migrateState"`
-	ServiceMeshState  map[string]interface{}                        `json:"serviceMeshState"`
+	Description       *string                                       `json:"description,omitempty"`
+	InstallationState *AnthosVMSubFeatureStateInstallationStateEnum `json:"installationState,omitempty"`
+	MigrateState      map[string]interface{}                        `json:"migrateState,omitempty"`
+	ServiceMeshState  map[string]interface{}                        `json:"serviceMeshState,omitempty"`
 }

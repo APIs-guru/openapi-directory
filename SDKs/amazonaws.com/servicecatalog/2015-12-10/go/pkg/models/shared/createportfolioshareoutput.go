@@ -1,5 +1,5 @@
 package shared
 
 type CreatePortfolioShareOutput struct {
-	PortfolioShareToken *string `json:"PortfolioShareToken"`
+	PortfolioShareToken *string `json:"PortfolioShareToken,omitempty"`
 }

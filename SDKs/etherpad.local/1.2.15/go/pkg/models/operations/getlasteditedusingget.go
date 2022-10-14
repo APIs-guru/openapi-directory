@@ -9,31 +9,31 @@ type GetLastEditedUsingGetRequest struct {
 }
 
 type GetLastEditedUsingGet200ApplicationJSONData struct {
-	LastEdited *int64 `json:"lastEdited"`
+	LastEdited *int64 `json:"lastEdited,omitempty"`
 }
 
 type GetLastEditedUsingGet200ApplicationJSON struct {
-	Code    *int64                                       `json:"code"`
-	Data    *GetLastEditedUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                      `json:"message"`
+	Code    *int64                                       `json:"code,omitempty"`
+	Data    *GetLastEditedUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                      `json:"message,omitempty"`
 }
 
 type GetLastEditedUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetLastEditedUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetLastEditedUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetLastEditedUsingGetResponse struct {

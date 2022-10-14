@@ -1,8 +1,8 @@
 package shared
 
 type AsyncAnnotateFileRequest struct {
-	Features     []Feature     `json:"features"`
-	ImageContext *ImageContext `json:"imageContext"`
-	InputConfig  *InputConfig  `json:"inputConfig"`
-	OutputConfig *OutputConfig `json:"outputConfig"`
+	Features     []Feature     `json:"features,omitempty"`
+	ImageContext *ImageContext `json:"imageContext,omitempty"`
+	InputConfig  *InputConfig  `json:"inputConfig,omitempty"`
+	OutputConfig *OutputConfig `json:"outputConfig,omitempty"`
 }

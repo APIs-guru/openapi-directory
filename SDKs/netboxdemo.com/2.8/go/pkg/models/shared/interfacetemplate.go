@@ -161,8 +161,8 @@ type InterfaceTemplateTypeType struct {
 
 type InterfaceTemplate struct {
 	DeviceType NestedDeviceType          `json:"device_type"`
-	ID         *int64                    `json:"id"`
-	MgmtOnly   *bool                     `json:"mgmt_only"`
+	ID         *int64                    `json:"id,omitempty"`
+	MgmtOnly   *bool                     `json:"mgmt_only,omitempty"`
 	Name       string                    `json:"name"`
 	Type       InterfaceTemplateTypeType `json:"type"`
 }

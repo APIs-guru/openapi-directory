@@ -1,6 +1,6 @@
 package shared
 
 type Authentication struct {
-	Providers []AuthProvider       `json:"providers"`
-	Rules     []AuthenticationRule `json:"rules"`
+	Providers []AuthProvider       `json:"providers,omitempty"`
+	Rules     []AuthenticationRule `json:"rules,omitempty"`
 }

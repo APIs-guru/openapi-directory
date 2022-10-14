@@ -23,7 +23,7 @@ const (
 )
 
 type StandardSQLDataType struct {
-	ArrayElementType *StandardSQLDataType             `json:"arrayElementType"`
-	StructType       *StandardSQLStructType           `json:"structType"`
-	TypeKind         *StandardSQLDataTypeTypeKindEnum `json:"typeKind"`
+	ArrayElementType *StandardSQLDataType             `json:"arrayElementType,omitempty"`
+	StructType       *StandardSQLStructType           `json:"structType,omitempty"`
+	TypeKind         *StandardSQLDataTypeTypeKindEnum `json:"typeKind,omitempty"`
 }

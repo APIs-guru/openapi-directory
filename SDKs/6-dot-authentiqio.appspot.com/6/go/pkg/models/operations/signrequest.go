@@ -10,8 +10,8 @@ type SignRequestRequest struct {
 }
 
 type SignRequest201ApplicationJSON struct {
-	Job    *string `json:"job"`
-	Status *string `json:"status"`
+	Job    *string `json:"job,omitempty"`
+	Status *string `json:"status,omitempty"`
 }
 
 type SignRequestResponse struct {

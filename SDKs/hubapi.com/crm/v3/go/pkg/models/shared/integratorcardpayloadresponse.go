@@ -8,10 +8,10 @@ const (
 )
 
 type IntegratorCardPayloadResponse struct {
-	AllItemsLinkURL *string                                           `json:"allItemsLinkUrl"`
-	CardLabel       *string                                           `json:"cardLabel"`
-	ResponseVersion *IntegratorCardPayloadResponseResponseVersionEnum `json:"responseVersion"`
-	Sections        []IntegratorObjectResult                          `json:"sections"`
-	TopLevelActions *TopLevelActions                                  `json:"topLevelActions"`
+	AllItemsLinkURL *string                                           `json:"allItemsLinkUrl,omitempty"`
+	CardLabel       *string                                           `json:"cardLabel,omitempty"`
+	ResponseVersion *IntegratorCardPayloadResponseResponseVersionEnum `json:"responseVersion,omitempty"`
+	Sections        []IntegratorObjectResult                          `json:"sections,omitempty"`
+	TopLevelActions *TopLevelActions                                  `json:"topLevelActions,omitempty"`
 	TotalCount      int32                                             `json:"totalCount"`
 }

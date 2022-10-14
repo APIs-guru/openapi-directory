@@ -1,12 +1,12 @@
 package shared
 
 type OrdersInStoreRefundLineItemRequest struct {
-	LineItemID  *string `json:"lineItemId"`
-	OperationID *string `json:"operationId"`
-	PriceAmount *Price  `json:"priceAmount"`
-	ProductID   *string `json:"productId"`
-	Quantity    *int64  `json:"quantity"`
-	Reason      *string `json:"reason"`
-	ReasonText  *string `json:"reasonText"`
-	TaxAmount   *Price  `json:"taxAmount"`
+	LineItemID  *string `json:"lineItemId,omitempty"`
+	OperationID *string `json:"operationId,omitempty"`
+	PriceAmount *Price  `json:"priceAmount,omitempty"`
+	ProductID   *string `json:"productId,omitempty"`
+	Quantity    *int64  `json:"quantity,omitempty"`
+	Reason      *string `json:"reason,omitempty"`
+	ReasonText  *string `json:"reasonText,omitempty"`
+	TaxAmount   *Price  `json:"taxAmount,omitempty"`
 }

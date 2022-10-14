@@ -6,8 +6,8 @@ import (
 
 type AuditSuppression struct {
 	CheckName            string             `json:"checkName"`
-	Description          *string            `json:"description"`
-	ExpirationDate       *time.Time         `json:"expirationDate"`
+	Description          *string            `json:"description,omitempty"`
+	ExpirationDate       *time.Time         `json:"expirationDate,omitempty"`
 	ResourceIdentifier   ResourceIdentifier `json:"resourceIdentifier"`
-	SuppressIndefinitely *bool              `json:"suppressIndefinitely"`
+	SuppressIndefinitely *bool              `json:"suppressIndefinitely,omitempty"`
 }

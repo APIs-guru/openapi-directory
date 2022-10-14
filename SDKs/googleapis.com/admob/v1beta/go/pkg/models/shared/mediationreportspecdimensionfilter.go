@@ -22,6 +22,6 @@ const (
 )
 
 type MediationReportSpecDimensionFilter struct {
-	Dimension  *MediationReportSpecDimensionFilterDimensionEnum `json:"dimension"`
-	MatchesAny *StringList                                      `json:"matchesAny"`
+	Dimension  *MediationReportSpecDimensionFilterDimensionEnum `json:"dimension,omitempty"`
+	MatchesAny *StringList                                      `json:"matchesAny,omitempty"`
 }

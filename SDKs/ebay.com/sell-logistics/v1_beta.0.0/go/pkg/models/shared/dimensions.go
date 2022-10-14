@@ -1,8 +1,8 @@
 package shared
 
 type Dimensions struct {
-	Height *string `json:"height"`
-	Length *string `json:"length"`
-	Unit   *string `json:"unit"`
-	Width  *string `json:"width"`
+	Height *string `json:"height,omitempty"`
+	Length *string `json:"length,omitempty"`
+	Unit   *string `json:"unit,omitempty"`
+	Width  *string `json:"width,omitempty"`
 }

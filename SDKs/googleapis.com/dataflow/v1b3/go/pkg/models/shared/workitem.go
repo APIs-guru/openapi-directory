@@ -1,19 +1,19 @@
 package shared
 
 type WorkItem struct {
-	Configuration            *string                   `json:"configuration"`
-	ID                       *string                   `json:"id"`
-	InitialReportIndex       *string                   `json:"initialReportIndex"`
-	JobID                    *string                   `json:"jobId"`
-	LeaseExpireTime          *string                   `json:"leaseExpireTime"`
-	MapTask                  *MapTask                  `json:"mapTask"`
-	Packages                 []Package                 `json:"packages"`
-	ProjectID                *string                   `json:"projectId"`
-	ReportStatusInterval     *string                   `json:"reportStatusInterval"`
-	SeqMapTask               *SeqMapTask               `json:"seqMapTask"`
-	ShellTask                *ShellTask                `json:"shellTask"`
-	SourceOperationTask      *SourceOperationRequest   `json:"sourceOperationTask"`
-	StreamingComputationTask *StreamingComputationTask `json:"streamingComputationTask"`
-	StreamingConfigTask      *StreamingConfigTask      `json:"streamingConfigTask"`
-	StreamingSetupTask       *StreamingSetupTask       `json:"streamingSetupTask"`
+	Configuration            *string                   `json:"configuration,omitempty"`
+	ID                       *string                   `json:"id,omitempty"`
+	InitialReportIndex       *string                   `json:"initialReportIndex,omitempty"`
+	JobID                    *string                   `json:"jobId,omitempty"`
+	LeaseExpireTime          *string                   `json:"leaseExpireTime,omitempty"`
+	MapTask                  *MapTask                  `json:"mapTask,omitempty"`
+	Packages                 []Package                 `json:"packages,omitempty"`
+	ProjectID                *string                   `json:"projectId,omitempty"`
+	ReportStatusInterval     *string                   `json:"reportStatusInterval,omitempty"`
+	SeqMapTask               *SeqMapTask               `json:"seqMapTask,omitempty"`
+	ShellTask                *ShellTask                `json:"shellTask,omitempty"`
+	SourceOperationTask      *SourceOperationRequest   `json:"sourceOperationTask,omitempty"`
+	StreamingComputationTask *StreamingComputationTask `json:"streamingComputationTask,omitempty"`
+	StreamingConfigTask      *StreamingConfigTask      `json:"streamingConfigTask,omitempty"`
+	StreamingSetupTask       *StreamingSetupTask       `json:"streamingSetupTask,omitempty"`
 }

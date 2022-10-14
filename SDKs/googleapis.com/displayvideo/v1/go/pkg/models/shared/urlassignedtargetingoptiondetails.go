@@ -1,6 +1,6 @@
 package shared
 
 type URLAssignedTargetingOptionDetails struct {
-	Negative *bool   `json:"negative"`
-	URL      *string `json:"url"`
+	Negative *bool   `json:"negative,omitempty"`
+	URL      *string `json:"url,omitempty"`
 }

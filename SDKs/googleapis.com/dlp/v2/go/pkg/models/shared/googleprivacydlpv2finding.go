@@ -12,17 +12,17 @@ const (
 )
 
 type GooglePrivacyDlpV2Finding struct {
-	CreateTime    *string                                  `json:"createTime"`
-	FindingID     *string                                  `json:"findingId"`
-	InfoType      *GooglePrivacyDlpV2InfoType              `json:"infoType"`
-	JobCreateTime *string                                  `json:"jobCreateTime"`
-	JobName       *string                                  `json:"jobName"`
-	Labels        map[string]string                        `json:"labels"`
-	Likelihood    *GooglePrivacyDlpV2FindingLikelihoodEnum `json:"likelihood"`
-	Location      *GooglePrivacyDlpV2Location              `json:"location"`
-	Name          *string                                  `json:"name"`
-	Quote         *string                                  `json:"quote"`
-	QuoteInfo     *GooglePrivacyDlpV2QuoteInfo             `json:"quoteInfo"`
-	ResourceName  *string                                  `json:"resourceName"`
-	TriggerName   *string                                  `json:"triggerName"`
+	CreateTime    *string                                  `json:"createTime,omitempty"`
+	FindingID     *string                                  `json:"findingId,omitempty"`
+	InfoType      *GooglePrivacyDlpV2InfoType              `json:"infoType,omitempty"`
+	JobCreateTime *string                                  `json:"jobCreateTime,omitempty"`
+	JobName       *string                                  `json:"jobName,omitempty"`
+	Labels        map[string]string                        `json:"labels,omitempty"`
+	Likelihood    *GooglePrivacyDlpV2FindingLikelihoodEnum `json:"likelihood,omitempty"`
+	Location      *GooglePrivacyDlpV2Location              `json:"location,omitempty"`
+	Name          *string                                  `json:"name,omitempty"`
+	Quote         *string                                  `json:"quote,omitempty"`
+	QuoteInfo     *GooglePrivacyDlpV2QuoteInfo             `json:"quoteInfo,omitempty"`
+	ResourceName  *string                                  `json:"resourceName,omitempty"`
+	TriggerName   *string                                  `json:"triggerName,omitempty"`
 }

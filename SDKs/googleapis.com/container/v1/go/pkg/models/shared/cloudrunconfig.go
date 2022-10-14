@@ -9,6 +9,6 @@ const (
 )
 
 type CloudRunConfig struct {
-	Disabled         *bool                               `json:"disabled"`
-	LoadBalancerType *CloudRunConfigLoadBalancerTypeEnum `json:"loadBalancerType"`
+	Disabled         *bool                               `json:"disabled,omitempty"`
+	LoadBalancerType *CloudRunConfigLoadBalancerTypeEnum `json:"loadBalancerType,omitempty"`
 }

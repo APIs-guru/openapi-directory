@@ -20,10 +20,10 @@ type UpdateModelHeaders struct {
 }
 
 type UpdateModelRequestBody struct {
-	ContentType *string `json:"contentType"`
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
-	Schema      *string `json:"schema"`
+	ContentType *string `json:"contentType,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Schema      *string `json:"schema,omitempty"`
 }
 
 type UpdateModelRequest struct {

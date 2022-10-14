@@ -1,20 +1,20 @@
 package shared
 
 type VMUtilizationMetrics struct {
-	CPUAverage                   *int32  `json:"cpuAverage"`
-	CPUAveragePercent            *int32  `json:"cpuAveragePercent"`
-	CPUMax                       *int32  `json:"cpuMax"`
-	CPUMaxPercent                *int32  `json:"cpuMaxPercent"`
-	DiskIoRateAverage            *string `json:"diskIoRateAverage"`
-	DiskIoRateAverageKbps        *string `json:"diskIoRateAverageKbps"`
-	DiskIoRateMax                *string `json:"diskIoRateMax"`
-	DiskIoRateMaxKbps            *string `json:"diskIoRateMaxKbps"`
-	MemoryAverage                *int32  `json:"memoryAverage"`
-	MemoryAveragePercent         *int32  `json:"memoryAveragePercent"`
-	MemoryMax                    *int32  `json:"memoryMax"`
-	MemoryMaxPercent             *int32  `json:"memoryMaxPercent"`
-	NetworkThroughputAverage     *string `json:"networkThroughputAverage"`
-	NetworkThroughputAverageKbps *string `json:"networkThroughputAverageKbps"`
-	NetworkThroughputMax         *string `json:"networkThroughputMax"`
-	NetworkThroughputMaxKbps     *string `json:"networkThroughputMaxKbps"`
+	CPUAverage                   *int32  `json:"cpuAverage,omitempty"`
+	CPUAveragePercent            *int32  `json:"cpuAveragePercent,omitempty"`
+	CPUMax                       *int32  `json:"cpuMax,omitempty"`
+	CPUMaxPercent                *int32  `json:"cpuMaxPercent,omitempty"`
+	DiskIoRateAverage            *string `json:"diskIoRateAverage,omitempty"`
+	DiskIoRateAverageKbps        *string `json:"diskIoRateAverageKbps,omitempty"`
+	DiskIoRateMax                *string `json:"diskIoRateMax,omitempty"`
+	DiskIoRateMaxKbps            *string `json:"diskIoRateMaxKbps,omitempty"`
+	MemoryAverage                *int32  `json:"memoryAverage,omitempty"`
+	MemoryAveragePercent         *int32  `json:"memoryAveragePercent,omitempty"`
+	MemoryMax                    *int32  `json:"memoryMax,omitempty"`
+	MemoryMaxPercent             *int32  `json:"memoryMaxPercent,omitempty"`
+	NetworkThroughputAverage     *string `json:"networkThroughputAverage,omitempty"`
+	NetworkThroughputAverageKbps *string `json:"networkThroughputAverageKbps,omitempty"`
+	NetworkThroughputMax         *string `json:"networkThroughputMax,omitempty"`
+	NetworkThroughputMaxKbps     *string `json:"networkThroughputMaxKbps,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type QueryTimeSeriesResponse struct {
-	NextPageToken        *string               `json:"nextPageToken"`
-	PartialErrors        []Status              `json:"partialErrors"`
-	TimeSeriesData       []TimeSeriesData      `json:"timeSeriesData"`
-	TimeSeriesDescriptor *TimeSeriesDescriptor `json:"timeSeriesDescriptor"`
+	NextPageToken        *string               `json:"nextPageToken,omitempty"`
+	PartialErrors        []Status              `json:"partialErrors,omitempty"`
+	TimeSeriesData       []TimeSeriesData      `json:"timeSeriesData,omitempty"`
+	TimeSeriesDescriptor *TimeSeriesDescriptor `json:"timeSeriesDescriptor,omitempty"`
 }

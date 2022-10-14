@@ -24,8 +24,8 @@ const (
 )
 
 type BatchGetValuesByDataFilterRequest struct {
-	DataFilters          []DataFilter                                               `json:"dataFilters"`
-	DateTimeRenderOption *BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum `json:"dateTimeRenderOption"`
-	MajorDimension       *BatchGetValuesByDataFilterRequestMajorDimensionEnum       `json:"majorDimension"`
-	ValueRenderOption    *BatchGetValuesByDataFilterRequestValueRenderOptionEnum    `json:"valueRenderOption"`
+	DataFilters          []DataFilter                                               `json:"dataFilters,omitempty"`
+	DateTimeRenderOption *BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum `json:"dateTimeRenderOption,omitempty"`
+	MajorDimension       *BatchGetValuesByDataFilterRequestMajorDimensionEnum       `json:"majorDimension,omitempty"`
+	ValueRenderOption    *BatchGetValuesByDataFilterRequestValueRenderOptionEnum    `json:"valueRenderOption,omitempty"`
 }

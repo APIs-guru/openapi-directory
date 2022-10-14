@@ -15,7 +15,7 @@ type PutConfigurationSetTrackingOptionsHeaders struct {
 }
 
 type PutConfigurationSetTrackingOptionsRequestBody struct {
-	CustomRedirectDomain *string `json:"CustomRedirectDomain"`
+	CustomRedirectDomain *string `json:"CustomRedirectDomain,omitempty"`
 }
 
 type PutConfigurationSetTrackingOptionsRequest struct {

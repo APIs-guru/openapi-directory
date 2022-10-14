@@ -8,6 +8,6 @@ const (
 )
 
 type AgentKey struct {
-	Status *AgentKeyStatusEnum `json:"status"`
+	Status *AgentKeyStatusEnum `json:"status,omitempty"`
 	Value  string              `json:"value"`
 }

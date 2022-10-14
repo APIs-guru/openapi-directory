@@ -1,9 +1,9 @@
 package shared
 
 type Location struct {
-	Address           *PostalAddress `json:"address"`
-	Name              *string        `json:"name"`
-	PrimaryCategoryID *string        `json:"primaryCategoryId"`
-	PrimaryPhone      *string        `json:"primaryPhone"`
-	WebsiteURI        *string        `json:"websiteUri"`
+	Address           *PostalAddress `json:"address,omitempty"`
+	Name              *string        `json:"name,omitempty"`
+	PrimaryCategoryID *string        `json:"primaryCategoryId,omitempty"`
+	PrimaryPhone      *string        `json:"primaryPhone,omitempty"`
+	WebsiteURI        *string        `json:"websiteUri,omitempty"`
 }

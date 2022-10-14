@@ -1,7 +1,7 @@
 package shared
 
 type EffectiveGuestPolicy struct {
-	PackageRepositories []EffectiveGuestPolicySourcedPackageRepository `json:"packageRepositories"`
-	Packages            []EffectiveGuestPolicySourcedPackage           `json:"packages"`
-	SoftwareRecipes     []EffectiveGuestPolicySourcedSoftwareRecipe    `json:"softwareRecipes"`
+	PackageRepositories []EffectiveGuestPolicySourcedPackageRepository `json:"packageRepositories,omitempty"`
+	Packages            []EffectiveGuestPolicySourcedPackage           `json:"packages,omitempty"`
+	SoftwareRecipes     []EffectiveGuestPolicySourcedSoftwareRecipe    `json:"softwareRecipes,omitempty"`
 }

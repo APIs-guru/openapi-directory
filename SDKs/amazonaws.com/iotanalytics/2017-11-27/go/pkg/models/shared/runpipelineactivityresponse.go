@@ -1,6 +1,6 @@
 package shared
 
 type RunPipelineActivityResponse struct {
-	LogResult *string  `json:"logResult"`
-	Payloads  []string `json:"payloads"`
+	LogResult *string  `json:"logResult,omitempty"`
+	Payloads  []string `json:"payloads,omitempty"`
 }

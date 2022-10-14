@@ -29,13 +29,13 @@ const (
 )
 
 type FundingAudit struct {
-	Amount             *float64                     `json:"amount"`
-	Currency           *string                      `json:"currency"`
-	DateTime           *time.Time                   `json:"dateTime"`
-	Events             []FundingEvent               `json:"events"`
-	FundingAccountName *string                      `json:"fundingAccountName"`
-	FundingType        *FundingAuditFundingTypeEnum `json:"fundingType"`
-	SourceAccountName  *string                      `json:"sourceAccountName"`
-	Status             *FundingAuditStatusEnum      `json:"status"`
-	TopupType          *FundingAuditTopupTypeEnum   `json:"topupType"`
+	Amount             *float64                     `json:"amount,omitempty"`
+	Currency           *string                      `json:"currency,omitempty"`
+	DateTime           *time.Time                   `json:"dateTime,omitempty"`
+	Events             []FundingEvent               `json:"events,omitempty"`
+	FundingAccountName *string                      `json:"fundingAccountName,omitempty"`
+	FundingType        *FundingAuditFundingTypeEnum `json:"fundingType,omitempty"`
+	SourceAccountName  *string                      `json:"sourceAccountName,omitempty"`
+	Status             *FundingAuditStatusEnum      `json:"status,omitempty"`
+	TopupType          *FundingAuditTopupTypeEnum   `json:"topupType,omitempty"`
 }

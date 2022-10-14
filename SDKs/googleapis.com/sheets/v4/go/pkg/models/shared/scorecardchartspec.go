@@ -21,12 +21,12 @@ const (
 )
 
 type ScorecardChartSpec struct {
-	AggregateType       *ScorecardChartSpecAggregateTypeEnum      `json:"aggregateType"`
-	BaselineValueData   *ChartData                                `json:"baselineValueData"`
-	BaselineValueFormat *BaselineValueFormat                      `json:"baselineValueFormat"`
-	CustomFormatOptions *ChartCustomNumberFormatOptions           `json:"customFormatOptions"`
-	KeyValueData        *ChartData                                `json:"keyValueData"`
-	KeyValueFormat      *KeyValueFormat                           `json:"keyValueFormat"`
-	NumberFormatSource  *ScorecardChartSpecNumberFormatSourceEnum `json:"numberFormatSource"`
-	ScaleFactor         *float64                                  `json:"scaleFactor"`
+	AggregateType       *ScorecardChartSpecAggregateTypeEnum      `json:"aggregateType,omitempty"`
+	BaselineValueData   *ChartData                                `json:"baselineValueData,omitempty"`
+	BaselineValueFormat *BaselineValueFormat                      `json:"baselineValueFormat,omitempty"`
+	CustomFormatOptions *ChartCustomNumberFormatOptions           `json:"customFormatOptions,omitempty"`
+	KeyValueData        *ChartData                                `json:"keyValueData,omitempty"`
+	KeyValueFormat      *KeyValueFormat                           `json:"keyValueFormat,omitempty"`
+	NumberFormatSource  *ScorecardChartSpecNumberFormatSourceEnum `json:"numberFormatSource,omitempty"`
+	ScaleFactor         *float64                                  `json:"scaleFactor,omitempty"`
 }

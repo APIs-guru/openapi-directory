@@ -1,6 +1,6 @@
 package shared
 
 type ResultFrame struct {
-	Records           []Record           `json:"records"`
-	ResultSetMetadata *ResultSetMetadata `json:"resultSetMetadata"`
+	Records           []Record           `json:"records,omitempty"`
+	ResultSetMetadata *ResultSetMetadata `json:"resultSetMetadata,omitempty"`
 }

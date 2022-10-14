@@ -10,9 +10,9 @@ const (
 )
 
 type Option struct {
-	GoToAction    *OptionGoToActionEnum `json:"goToAction"`
-	GoToSectionID *string               `json:"goToSectionId"`
-	Image         *Image                `json:"image"`
-	IsOther       *bool                 `json:"isOther"`
-	Value         *string               `json:"value"`
+	GoToAction    *OptionGoToActionEnum `json:"goToAction,omitempty"`
+	GoToSectionID *string               `json:"goToSectionId,omitempty"`
+	Image         *Image                `json:"image,omitempty"`
+	IsOther       *bool                 `json:"isOther,omitempty"`
+	Value         *string               `json:"value,omitempty"`
 }

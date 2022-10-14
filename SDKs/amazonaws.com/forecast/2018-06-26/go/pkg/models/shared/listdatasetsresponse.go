@@ -1,6 +1,6 @@
 package shared
 
 type ListDatasetsResponse struct {
-	Datasets  []DatasetSummary `json:"Datasets"`
-	NextToken *string          `json:"NextToken"`
+	Datasets  []DatasetSummary `json:"Datasets,omitempty"`
+	NextToken *string          `json:"NextToken,omitempty"`
 }

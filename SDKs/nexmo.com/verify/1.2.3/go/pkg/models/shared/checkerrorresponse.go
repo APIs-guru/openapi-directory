@@ -15,7 +15,7 @@ const (
 )
 
 type CheckErrorResponse struct {
-	ErrorText *string                       `json:"error_text"`
-	RequestID *string                       `json:"request_id"`
-	Status    *CheckErrorResponseStatusEnum `json:"status"`
+	ErrorText *string                       `json:"error_text,omitempty"`
+	RequestID *string                       `json:"request_id,omitempty"`
+	Status    *CheckErrorResponseStatusEnum `json:"status,omitempty"`
 }

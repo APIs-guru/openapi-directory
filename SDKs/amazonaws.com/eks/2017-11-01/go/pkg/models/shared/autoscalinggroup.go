@@ -1,5 +1,5 @@
 package shared
 
 type AutoScalingGroup struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }

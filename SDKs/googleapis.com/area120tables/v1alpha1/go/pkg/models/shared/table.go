@@ -1,11 +1,11 @@
 package shared
 
 type Table struct {
-	Columns     []ColumnDescription `json:"columns"`
-	CreateTime  *string             `json:"createTime"`
-	DisplayName *string             `json:"displayName"`
-	Name        *string             `json:"name"`
-	SavedViews  []SavedView         `json:"savedViews"`
-	TimeZone    *string             `json:"timeZone"`
-	UpdateTime  *string             `json:"updateTime"`
+	Columns     []ColumnDescription `json:"columns,omitempty"`
+	CreateTime  *string             `json:"createTime,omitempty"`
+	DisplayName *string             `json:"displayName,omitempty"`
+	Name        *string             `json:"name,omitempty"`
+	SavedViews  []SavedView         `json:"savedViews,omitempty"`
+	TimeZone    *string             `json:"timeZone,omitempty"`
+	UpdateTime  *string             `json:"updateTime,omitempty"`
 }

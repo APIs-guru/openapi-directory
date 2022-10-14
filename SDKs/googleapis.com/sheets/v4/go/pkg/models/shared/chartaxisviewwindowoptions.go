@@ -10,7 +10,7 @@ const (
 )
 
 type ChartAxisViewWindowOptions struct {
-	ViewWindowMax  *float64                                      `json:"viewWindowMax"`
-	ViewWindowMin  *float64                                      `json:"viewWindowMin"`
-	ViewWindowMode *ChartAxisViewWindowOptionsViewWindowModeEnum `json:"viewWindowMode"`
+	ViewWindowMax  *float64                                      `json:"viewWindowMax,omitempty"`
+	ViewWindowMin  *float64                                      `json:"viewWindowMin,omitempty"`
+	ViewWindowMode *ChartAxisViewWindowOptionsViewWindowModeEnum `json:"viewWindowMode,omitempty"`
 }

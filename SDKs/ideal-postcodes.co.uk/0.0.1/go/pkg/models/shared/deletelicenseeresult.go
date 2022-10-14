@@ -1,5 +1,5 @@
 package shared
 
 type DeleteLicenseeResult struct {
-	Deleted *float64 `json:"deleted"`
+	Deleted *float64 `json:"deleted,omitempty"`
 }

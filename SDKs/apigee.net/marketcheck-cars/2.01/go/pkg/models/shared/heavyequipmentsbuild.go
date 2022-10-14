@@ -1,16 +1,16 @@
 package shared
 
 type HeavyEquipmentsBuild struct {
-	BodyType     *string `json:"body_type"`
-	Category     *string `json:"category"`
-	Condition    *string `json:"condition"`
-	Drivetrain   *string `json:"drivetrain"`
-	Engine       *string `json:"engine"`
-	FuelType     *string `json:"fuel_type"`
-	Make         *string `json:"make"`
-	Model        *string `json:"model"`
-	SubCategory  *string `json:"sub_category"`
-	Transmission *string `json:"transmission"`
-	Trim         *string `json:"trim"`
-	Year         *int64  `json:"year"`
+	BodyType     *string `json:"body_type,omitempty"`
+	Category     *string `json:"category,omitempty"`
+	Condition    *string `json:"condition,omitempty"`
+	Drivetrain   *string `json:"drivetrain,omitempty"`
+	Engine       *string `json:"engine,omitempty"`
+	FuelType     *string `json:"fuel_type,omitempty"`
+	Make         *string `json:"make,omitempty"`
+	Model        *string `json:"model,omitempty"`
+	SubCategory  *string `json:"sub_category,omitempty"`
+	Transmission *string `json:"transmission,omitempty"`
+	Trim         *string `json:"trim,omitempty"`
+	Year         *int64  `json:"year,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type PutImageScanningConfigurationResponse struct {
-	ImageScanningConfiguration *ImageScanningConfiguration `json:"imageScanningConfiguration"`
-	RegistryID                 *string                     `json:"registryId"`
-	RepositoryName             *string                     `json:"repositoryName"`
+	ImageScanningConfiguration *ImageScanningConfiguration `json:"imageScanningConfiguration,omitempty"`
+	RegistryID                 *string                     `json:"registryId,omitempty"`
+	RepositoryName             *string                     `json:"repositoryName,omitempty"`
 }

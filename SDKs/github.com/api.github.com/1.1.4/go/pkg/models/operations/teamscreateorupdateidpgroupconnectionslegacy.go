@@ -9,17 +9,17 @@ type TeamsCreateOrUpdateIdpGroupConnectionsLegacyPathParams struct {
 }
 
 type TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBodyGroups struct {
-	Description      *string `json:"description"`
+	Description      *string `json:"description,omitempty"`
 	GroupDescription string  `json:"group_description"`
 	GroupID          string  `json:"group_id"`
 	GroupName        string  `json:"group_name"`
-	ID               *string `json:"id"`
-	Name             *string `json:"name"`
+	ID               *string `json:"id,omitempty"`
+	Name             *string `json:"name,omitempty"`
 }
 
 type TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBody struct {
 	Groups   []TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBodyGroups `json:"groups"`
-	SyncedAt *string                                                         `json:"synced_at"`
+	SyncedAt *string                                                         `json:"synced_at,omitempty"`
 }
 
 type TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequest struct {

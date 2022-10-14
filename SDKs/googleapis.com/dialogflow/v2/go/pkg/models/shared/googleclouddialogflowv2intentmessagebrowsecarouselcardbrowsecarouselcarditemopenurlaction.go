@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLAction struct {
-	URL         *string                                                                                                   `json:"url"`
-	URLTypeHint *GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnum `json:"urlTypeHint"`
+	URL         *string                                                                                                   `json:"url,omitempty"`
+	URLTypeHint *GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnum `json:"urlTypeHint,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ManagedZoneOperationsListResponse struct {
-	Header        *ResponseHeader `json:"header"`
-	Kind          *string         `json:"kind"`
-	NextPageToken *string         `json:"nextPageToken"`
-	Operations    []Operation     `json:"operations"`
+	Header        *ResponseHeader `json:"header,omitempty"`
+	Kind          *string         `json:"kind,omitempty"`
+	NextPageToken *string         `json:"nextPageToken,omitempty"`
+	Operations    []Operation     `json:"operations,omitempty"`
 }

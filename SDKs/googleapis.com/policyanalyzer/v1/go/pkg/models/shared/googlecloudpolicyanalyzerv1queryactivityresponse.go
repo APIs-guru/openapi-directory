@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudPolicyanalyzerV1QueryActivityResponse struct {
-	Activities    []GoogleCloudPolicyanalyzerV1Activity `json:"activities"`
-	NextPageToken *string                               `json:"nextPageToken"`
+	Activities    []GoogleCloudPolicyanalyzerV1Activity `json:"activities,omitempty"`
+	NextPageToken *string                               `json:"nextPageToken,omitempty"`
 }

@@ -1,14 +1,14 @@
 package shared
 
 type SearchResultTextMatchesMatches struct {
-	Indices []int64 `json:"indices"`
-	Text    *string `json:"text"`
+	Indices []int64 `json:"indices,omitempty"`
+	Text    *string `json:"text,omitempty"`
 }
 
 type SearchResultTextMatches struct {
-	Fragment   *string                          `json:"fragment"`
-	Matches    []SearchResultTextMatchesMatches `json:"matches"`
-	ObjectType *string                          `json:"object_type"`
-	ObjectURL  *string                          `json:"object_url"`
-	Property   *string                          `json:"property"`
+	Fragment   *string                          `json:"fragment,omitempty"`
+	Matches    []SearchResultTextMatchesMatches `json:"matches,omitempty"`
+	ObjectType *string                          `json:"object_type,omitempty"`
+	ObjectURL  *string                          `json:"object_url,omitempty"`
+	Property   *string                          `json:"property,omitempty"`
 }

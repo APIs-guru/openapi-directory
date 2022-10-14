@@ -1,7 +1,7 @@
 package shared
 
 type ListActionsResponse struct {
-	Actions                []Action `json:"actions"`
-	NextPageToken          *string  `json:"nextPageToken"`
-	UnsupportedActionNames []string `json:"unsupportedActionNames"`
+	Actions                []Action `json:"actions,omitempty"`
+	NextPageToken          *string  `json:"nextPageToken,omitempty"`
+	UnsupportedActionNames []string `json:"unsupportedActionNames,omitempty"`
 }

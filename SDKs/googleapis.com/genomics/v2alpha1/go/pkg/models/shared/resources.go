@@ -1,8 +1,8 @@
 package shared
 
 type Resources struct {
-	ProjectID      *string         `json:"projectId"`
-	Regions        []string        `json:"regions"`
-	VirtualMachine *VirtualMachine `json:"virtualMachine"`
-	Zones          []string        `json:"zones"`
+	ProjectID      *string         `json:"projectId,omitempty"`
+	Regions        []string        `json:"regions,omitempty"`
+	VirtualMachine *VirtualMachine `json:"virtualMachine,omitempty"`
+	Zones          []string        `json:"zones,omitempty"`
 }

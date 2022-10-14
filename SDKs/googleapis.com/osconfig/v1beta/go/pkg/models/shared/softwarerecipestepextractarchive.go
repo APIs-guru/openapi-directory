@@ -13,7 +13,7 @@ const (
 )
 
 type SoftwareRecipeStepExtractArchive struct {
-	ArtifactID  *string                                   `json:"artifactId"`
-	Destination *string                                   `json:"destination"`
-	Type        *SoftwareRecipeStepExtractArchiveTypeEnum `json:"type"`
+	ArtifactID  *string                                   `json:"artifactId,omitempty"`
+	Destination *string                                   `json:"destination,omitempty"`
+	Type        *SoftwareRecipeStepExtractArchiveTypeEnum `json:"type,omitempty"`
 }

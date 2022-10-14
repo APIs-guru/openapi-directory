@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaCustomDimension struct {
-	Description                *string                                              `json:"description"`
-	DisallowAdsPersonalization *bool                                                `json:"disallowAdsPersonalization"`
-	DisplayName                *string                                              `json:"displayName"`
-	Name                       *string                                              `json:"name"`
-	ParameterName              *string                                              `json:"parameterName"`
-	Scope                      *GoogleAnalyticsAdminV1alphaCustomDimensionScopeEnum `json:"scope"`
+	Description                *string                                              `json:"description,omitempty"`
+	DisallowAdsPersonalization *bool                                                `json:"disallowAdsPersonalization,omitempty"`
+	DisplayName                *string                                              `json:"displayName,omitempty"`
+	Name                       *string                                              `json:"name,omitempty"`
+	ParameterName              *string                                              `json:"parameterName,omitempty"`
+	Scope                      *GoogleAnalyticsAdminV1alphaCustomDimensionScopeEnum `json:"scope,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type AppliedLicense struct {
-	OsLicense *string                 `json:"osLicense"`
-	Type      *AppliedLicenseTypeEnum `json:"type"`
+	OsLicense *string                 `json:"osLicense,omitempty"`
+	Type      *AppliedLicenseTypeEnum `json:"type,omitempty"`
 }

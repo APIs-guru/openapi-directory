@@ -21,14 +21,14 @@ const (
 )
 
 type ConfigVariableTemplate struct {
-	AuthorizationCodeLink *AuthorizationCodeLink               `json:"authorizationCodeLink"`
-	Description           *string                              `json:"description"`
-	DisplayName           *string                              `json:"displayName"`
-	EnumOptions           []EnumOption                         `json:"enumOptions"`
-	Key                   *string                              `json:"key"`
-	Required              *bool                                `json:"required"`
-	RoleGrant             *RoleGrant                           `json:"roleGrant"`
-	State                 *ConfigVariableTemplateStateEnum     `json:"state"`
-	ValidationRegex       *string                              `json:"validationRegex"`
-	ValueType             *ConfigVariableTemplateValueTypeEnum `json:"valueType"`
+	AuthorizationCodeLink *AuthorizationCodeLink               `json:"authorizationCodeLink,omitempty"`
+	Description           *string                              `json:"description,omitempty"`
+	DisplayName           *string                              `json:"displayName,omitempty"`
+	EnumOptions           []EnumOption                         `json:"enumOptions,omitempty"`
+	Key                   *string                              `json:"key,omitempty"`
+	Required              *bool                                `json:"required,omitempty"`
+	RoleGrant             *RoleGrant                           `json:"roleGrant,omitempty"`
+	State                 *ConfigVariableTemplateStateEnum     `json:"state,omitempty"`
+	ValidationRegex       *string                              `json:"validationRegex,omitempty"`
+	ValueType             *ConfigVariableTemplateValueTypeEnum `json:"valueType,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type AddProtectedRangeRequest struct {
-	ProtectedRange *ProtectedRange `json:"protectedRange"`
+	ProtectedRange *ProtectedRange `json:"protectedRange,omitempty"`
 }

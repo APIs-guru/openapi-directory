@@ -15,14 +15,14 @@ type CreateInputHeaders struct {
 }
 
 type CreateInputRequestBodyInputDefinition struct {
-	Attributes []shared.Attribute `json:"attributes"`
+	Attributes []shared.Attribute `json:"attributes,omitempty"`
 }
 
 type CreateInputRequestBody struct {
 	InputDefinition  CreateInputRequestBodyInputDefinition `json:"inputDefinition"`
-	InputDescription *string                               `json:"inputDescription"`
+	InputDescription *string                               `json:"inputDescription,omitempty"`
 	InputName        string                                `json:"inputName"`
-	Tags             []shared.Tag                          `json:"tags"`
+	Tags             []shared.Tag                          `json:"tags,omitempty"`
 }
 
 type CreateInputRequest struct {

@@ -12,12 +12,12 @@ type UpdateNetworkApplianceStaticRouteRequestBodyReservedIPRanges struct {
 }
 
 type UpdateNetworkApplianceStaticRouteRequestBody struct {
-	Enabled            *bool                                                          `json:"enabled"`
-	FixedIPAssignments map[string]interface{}                                         `json:"fixedIpAssignments"`
-	GatewayIP          *string                                                        `json:"gatewayIp"`
-	Name               *string                                                        `json:"name"`
-	ReservedIPRanges   []UpdateNetworkApplianceStaticRouteRequestBodyReservedIPRanges `json:"reservedIpRanges"`
-	Subnet             *string                                                        `json:"subnet"`
+	Enabled            *bool                                                          `json:"enabled,omitempty"`
+	FixedIPAssignments map[string]interface{}                                         `json:"fixedIpAssignments,omitempty"`
+	GatewayIP          *string                                                        `json:"gatewayIp,omitempty"`
+	Name               *string                                                        `json:"name,omitempty"`
+	ReservedIPRanges   []UpdateNetworkApplianceStaticRouteRequestBodyReservedIPRanges `json:"reservedIpRanges,omitempty"`
+	Subnet             *string                                                        `json:"subnet,omitempty"`
 }
 
 type UpdateNetworkApplianceStaticRouteRequest struct {

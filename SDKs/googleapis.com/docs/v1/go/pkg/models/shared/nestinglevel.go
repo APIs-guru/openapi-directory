@@ -23,12 +23,12 @@ const (
 )
 
 type NestingLevel struct {
-	BulletAlignment *NestingLevelBulletAlignmentEnum `json:"bulletAlignment"`
-	GlyphFormat     *string                          `json:"glyphFormat"`
-	GlyphSymbol     *string                          `json:"glyphSymbol"`
-	GlyphType       *NestingLevelGlyphTypeEnum       `json:"glyphType"`
-	IndentFirstLine *Dimension                       `json:"indentFirstLine"`
-	IndentStart     *Dimension                       `json:"indentStart"`
-	StartNumber     *int32                           `json:"startNumber"`
-	TextStyle       *TextStyle                       `json:"textStyle"`
+	BulletAlignment *NestingLevelBulletAlignmentEnum `json:"bulletAlignment,omitempty"`
+	GlyphFormat     *string                          `json:"glyphFormat,omitempty"`
+	GlyphSymbol     *string                          `json:"glyphSymbol,omitempty"`
+	GlyphType       *NestingLevelGlyphTypeEnum       `json:"glyphType,omitempty"`
+	IndentFirstLine *Dimension                       `json:"indentFirstLine,omitempty"`
+	IndentStart     *Dimension                       `json:"indentStart,omitempty"`
+	StartNumber     *int32                           `json:"startNumber,omitempty"`
+	TextStyle       *TextStyle                       `json:"textStyle,omitempty"`
 }

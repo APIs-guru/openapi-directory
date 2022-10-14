@@ -60,12 +60,12 @@ const (
 )
 
 type ArtistForSongContract struct {
-	Artist         *ArtistContract                          `json:"artist"`
-	Categories     *ArtistForSongContractCategoriesEnum     `json:"categories"`
-	EffectiveRoles *ArtistForSongContractEffectiveRolesEnum `json:"effectiveRoles"`
-	ID             *int32                                   `json:"id"`
-	IsCustomName   *bool                                    `json:"isCustomName"`
-	IsSupport      *bool                                    `json:"isSupport"`
-	Name           *string                                  `json:"name"`
-	Roles          *ArtistForSongContractRolesEnum          `json:"roles"`
+	Artist         *ArtistContract                          `json:"artist,omitempty"`
+	Categories     *ArtistForSongContractCategoriesEnum     `json:"categories,omitempty"`
+	EffectiveRoles *ArtistForSongContractEffectiveRolesEnum `json:"effectiveRoles,omitempty"`
+	ID             *int32                                   `json:"id,omitempty"`
+	IsCustomName   *bool                                    `json:"isCustomName,omitempty"`
+	IsSupport      *bool                                    `json:"isSupport,omitempty"`
+	Name           *string                                  `json:"name,omitempty"`
+	Roles          *ArtistForSongContractRolesEnum          `json:"roles,omitempty"`
 }

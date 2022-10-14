@@ -8,7 +8,7 @@ const (
 
 type Attachment struct {
 	Document     string                         `json:"document"`
-	Filename     *string                        `json:"filename"`
+	Filename     *string                        `json:"filename,omitempty"`
 	MimeType     AttachmentMimeTypeMimeTypeEnum `json:"mimeType"`
-	PrimaryImage *bool                          `json:"primaryImage"`
+	PrimaryImage *bool                          `json:"primaryImage,omitempty"`
 }

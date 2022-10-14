@@ -22,8 +22,8 @@ const (
 )
 
 type DeliverySchedule struct {
-	FrequencyCap    *FrequencyCap                 `json:"frequencyCap"`
-	HardCutoff      *bool                         `json:"hardCutoff"`
-	ImpressionRatio *string                       `json:"impressionRatio"`
-	Priority        *DeliverySchedulePriorityEnum `json:"priority"`
+	FrequencyCap    *FrequencyCap                 `json:"frequencyCap,omitempty"`
+	HardCutoff      *bool                         `json:"hardCutoff,omitempty"`
+	ImpressionRatio *string                       `json:"impressionRatio,omitempty"`
+	Priority        *DeliverySchedulePriorityEnum `json:"priority,omitempty"`
 }

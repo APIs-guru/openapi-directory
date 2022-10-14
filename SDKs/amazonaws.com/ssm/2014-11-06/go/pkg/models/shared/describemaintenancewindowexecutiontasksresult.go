@@ -1,6 +1,6 @@
 package shared
 
 type DescribeMaintenanceWindowExecutionTasksResult struct {
-	NextToken                     *string                                  `json:"NextToken"`
-	WindowExecutionTaskIdentities []MaintenanceWindowExecutionTaskIdentity `json:"WindowExecutionTaskIdentities"`
+	NextToken                     *string                                  `json:"NextToken,omitempty"`
+	WindowExecutionTaskIdentities []MaintenanceWindowExecutionTaskIdentity `json:"WindowExecutionTaskIdentities,omitempty"`
 }

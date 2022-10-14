@@ -1,5 +1,5 @@
 package shared
 
 type Context struct {
-	Rules []ContextRule `json:"rules"`
+	Rules []ContextRule `json:"rules,omitempty"`
 }

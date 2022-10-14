@@ -1,7 +1,7 @@
 package shared
 
 type UsageTotal struct {
-	Currency      *CurrencyEnum  `json:"currency"`
-	EstimatedCost *string        `json:"estimatedCost"`
-	Type          *UsageTypeEnum `json:"type"`
+	Currency      *CurrencyEnum  `json:"currency,omitempty"`
+	EstimatedCost *string        `json:"estimatedCost,omitempty"`
+	Type          *UsageTypeEnum `json:"type,omitempty"`
 }

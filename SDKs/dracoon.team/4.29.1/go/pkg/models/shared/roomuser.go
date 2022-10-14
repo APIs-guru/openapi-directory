@@ -6,7 +6,7 @@ type RoomUser struct {
 	ID                 int64               `json:"id"`
 	IsGranted          bool                `json:"isGranted"`
 	Login              string              `json:"login"`
-	Permissions        *NodePermissions    `json:"permissions"`
-	PublicKeyContainer *PublicKeyContainer `json:"publicKeyContainer"`
+	Permissions        *NodePermissions    `json:"permissions,omitempty"`
+	PublicKeyContainer *PublicKeyContainer `json:"publicKeyContainer,omitempty"`
 	UserInfo           UserInfo            `json:"userInfo"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type Permission struct {
-	Description  *string `json:"description"`
-	Name         *string `json:"name"`
-	PermissionID *string `json:"permissionId"`
+	Description  *string `json:"description,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	PermissionID *string `json:"permissionId,omitempty"`
 }

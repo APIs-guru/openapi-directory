@@ -5,10 +5,10 @@ type WipeNetworkSmDevicesPathParams struct {
 }
 
 type WipeNetworkSmDevicesRequestBody struct {
-	ID      *string `json:"id"`
-	Pin     *int64  `json:"pin"`
-	Serial  *string `json:"serial"`
-	WifiMac *string `json:"wifiMac"`
+	ID      *string `json:"id,omitempty"`
+	Pin     *int64  `json:"pin,omitempty"`
+	Serial  *string `json:"serial,omitempty"`
+	WifiMac *string `json:"wifiMac,omitempty"`
 }
 
 type WipeNetworkSmDevicesRequest struct {

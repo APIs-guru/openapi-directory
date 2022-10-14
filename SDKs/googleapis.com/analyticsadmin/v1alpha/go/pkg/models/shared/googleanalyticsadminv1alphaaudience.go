@@ -9,12 +9,12 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudience struct {
-	AdsPersonalizationEnabled *bool                                                         `json:"adsPersonalizationEnabled"`
-	Description               *string                                                       `json:"description"`
-	DisplayName               *string                                                       `json:"displayName"`
-	EventTrigger              *GoogleAnalyticsAdminV1alphaAudienceEventTrigger              `json:"eventTrigger"`
-	ExclusionDurationMode     *GoogleAnalyticsAdminV1alphaAudienceExclusionDurationModeEnum `json:"exclusionDurationMode"`
-	FilterClauses             []GoogleAnalyticsAdminV1alphaAudienceFilterClause             `json:"filterClauses"`
-	MembershipDurationDays    *int32                                                        `json:"membershipDurationDays"`
-	Name                      *string                                                       `json:"name"`
+	AdsPersonalizationEnabled *bool                                                         `json:"adsPersonalizationEnabled,omitempty"`
+	Description               *string                                                       `json:"description,omitempty"`
+	DisplayName               *string                                                       `json:"displayName,omitempty"`
+	EventTrigger              *GoogleAnalyticsAdminV1alphaAudienceEventTrigger              `json:"eventTrigger,omitempty"`
+	ExclusionDurationMode     *GoogleAnalyticsAdminV1alphaAudienceExclusionDurationModeEnum `json:"exclusionDurationMode,omitempty"`
+	FilterClauses             []GoogleAnalyticsAdminV1alphaAudienceFilterClause             `json:"filterClauses,omitempty"`
+	MembershipDurationDays    *int32                                                        `json:"membershipDurationDays,omitempty"`
+	Name                      *string                                                       `json:"name,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type GetRouteResponseResponse struct {
-	ModelSelectionExpression *string                         `json:"ModelSelectionExpression"`
-	ResponseModels           map[string]string               `json:"ResponseModels"`
-	ResponseParameters       map[string]ParameterConstraints `json:"ResponseParameters"`
-	RouteResponseID          *string                         `json:"RouteResponseId"`
-	RouteResponseKey         *string                         `json:"RouteResponseKey"`
+	ModelSelectionExpression *string                         `json:"ModelSelectionExpression,omitempty"`
+	ResponseModels           map[string]string               `json:"ResponseModels,omitempty"`
+	ResponseParameters       map[string]ParameterConstraints `json:"ResponseParameters,omitempty"`
+	RouteResponseID          *string                         `json:"RouteResponseId,omitempty"`
+	RouteResponseKey         *string                         `json:"RouteResponseKey,omitempty"`
 }

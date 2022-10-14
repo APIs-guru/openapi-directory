@@ -19,8 +19,8 @@ const (
 )
 
 type Assignment struct {
-	Assignee *string                `json:"assignee"`
-	JobType  *AssignmentJobTypeEnum `json:"jobType"`
-	Name     *string                `json:"name"`
-	State    *AssignmentStateEnum   `json:"state"`
+	Assignee *string                `json:"assignee,omitempty"`
+	JobType  *AssignmentJobTypeEnum `json:"jobType,omitempty"`
+	Name     *string                `json:"name,omitempty"`
+	State    *AssignmentStateEnum   `json:"state,omitempty"`
 }

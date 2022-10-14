@@ -1,6 +1,6 @@
 package shared
 
 type Settings struct {
-	MfaTypes   []MfaTypesElementEnum `json:"MfaTypes"`
-	SmsMessage *string               `json:"SmsMessage"`
+	MfaTypes   []MfaTypesElementEnum `json:"MfaTypes,omitempty"`
+	SmsMessage *string               `json:"SmsMessage,omitempty"`
 }

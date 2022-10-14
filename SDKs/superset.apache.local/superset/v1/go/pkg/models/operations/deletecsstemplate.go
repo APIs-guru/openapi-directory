@@ -18,23 +18,23 @@ type DeleteCSSTemplateRequest struct {
 }
 
 type DeleteCSSTemplate200ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteCSSTemplate401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteCSSTemplate404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteCSSTemplate422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteCSSTemplate500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteCSSTemplateResponse struct {

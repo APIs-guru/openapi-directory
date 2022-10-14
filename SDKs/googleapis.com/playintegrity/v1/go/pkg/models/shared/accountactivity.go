@@ -12,5 +12,5 @@ const (
 )
 
 type AccountActivity struct {
-	ActivityLevel *AccountActivityActivityLevelEnum `json:"activityLevel"`
+	ActivityLevel *AccountActivityActivityLevelEnum `json:"activityLevel,omitempty"`
 }

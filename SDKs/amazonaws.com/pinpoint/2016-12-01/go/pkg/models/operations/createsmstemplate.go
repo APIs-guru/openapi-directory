@@ -19,11 +19,11 @@ type CreateSmsTemplateHeaders struct {
 }
 
 type CreateSmsTemplateRequestBodySmsTemplateRequest struct {
-	Body                 *string           `json:"Body"`
-	DefaultSubstitutions *string           `json:"DefaultSubstitutions"`
-	RecommenderID        *string           `json:"RecommenderId"`
-	TemplateDescription  *string           `json:"TemplateDescription"`
-	Tags                 map[string]string `json:"tags"`
+	Body                 *string           `json:"Body,omitempty"`
+	DefaultSubstitutions *string           `json:"DefaultSubstitutions,omitempty"`
+	RecommenderID        *string           `json:"RecommenderId,omitempty"`
+	TemplateDescription  *string           `json:"TemplateDescription,omitempty"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }
 
 type CreateSmsTemplateRequestBody struct {

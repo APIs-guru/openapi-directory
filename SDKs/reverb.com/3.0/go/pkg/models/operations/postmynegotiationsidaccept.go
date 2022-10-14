@@ -9,7 +9,7 @@ type PostMyNegotiationsIDAcceptPathParams struct {
 }
 
 type PostMyNegotiationsIDAcceptRequestBody struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostMyNegotiationsIDAcceptSecurity struct {

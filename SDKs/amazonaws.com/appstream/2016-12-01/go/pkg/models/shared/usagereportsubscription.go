@@ -5,8 +5,8 @@ import (
 )
 
 type UsageReportSubscription struct {
-	LastGeneratedReportDate *time.Time                           `json:"LastGeneratedReportDate"`
-	S3BucketName            *string                              `json:"S3BucketName"`
-	Schedule                *UsageReportScheduleEnum             `json:"Schedule"`
-	SubscriptionErrors      []LastReportGenerationExecutionError `json:"SubscriptionErrors"`
+	LastGeneratedReportDate *time.Time                           `json:"LastGeneratedReportDate,omitempty"`
+	S3BucketName            *string                              `json:"S3BucketName,omitempty"`
+	Schedule                *UsageReportScheduleEnum             `json:"Schedule,omitempty"`
+	SubscriptionErrors      []LastReportGenerationExecutionError `json:"SubscriptionErrors,omitempty"`
 }

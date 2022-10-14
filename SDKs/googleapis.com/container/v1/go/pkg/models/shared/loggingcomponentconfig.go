@@ -9,5 +9,5 @@ const (
 )
 
 type LoggingComponentConfig struct {
-	EnableComponents []LoggingComponentConfigEnableComponentsEnum `json:"enableComponents"`
+	EnableComponents []LoggingComponentConfigEnableComponentsEnum `json:"enableComponents,omitempty"`
 }

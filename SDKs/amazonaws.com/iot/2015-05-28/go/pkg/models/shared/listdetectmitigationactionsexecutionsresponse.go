@@ -1,6 +1,6 @@
 package shared
 
 type ListDetectMitigationActionsExecutionsResponse struct {
-	ActionsExecutions []DetectMitigationActionExecution `json:"actionsExecutions"`
-	NextToken         *string                           `json:"nextToken"`
+	ActionsExecutions []DetectMitigationActionExecution `json:"actionsExecutions,omitempty"`
+	NextToken         *string                           `json:"nextToken,omitempty"`
 }

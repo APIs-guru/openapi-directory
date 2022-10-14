@@ -1,6 +1,6 @@
 package shared
 
 type GetPartitionIndexesResponse struct {
-	NextToken                    *string                    `json:"NextToken"`
-	PartitionIndexDescriptorList []PartitionIndexDescriptor `json:"PartitionIndexDescriptorList"`
+	NextToken                    *string                    `json:"NextToken,omitempty"`
+	PartitionIndexDescriptorList []PartitionIndexDescriptor `json:"PartitionIndexDescriptorList,omitempty"`
 }

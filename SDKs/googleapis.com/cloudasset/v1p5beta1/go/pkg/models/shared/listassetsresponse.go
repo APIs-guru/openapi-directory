@@ -1,7 +1,7 @@
 package shared
 
 type ListAssetsResponse struct {
-	Assets        []Asset `json:"assets"`
-	NextPageToken *string `json:"nextPageToken"`
-	ReadTime      *string `json:"readTime"`
+	Assets        []Asset `json:"assets,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	ReadTime      *string `json:"readTime,omitempty"`
 }

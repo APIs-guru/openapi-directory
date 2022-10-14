@@ -12,7 +12,7 @@ const (
 )
 
 type HeartbeatResponse struct {
-	Error     *Error                       `json:"error"`
-	Status    *HeartbeatResponseStatusEnum `json:"status"`
-	Timestamp *time.Time                   `json:"timestamp"`
+	Error     *Error                       `json:"error,omitempty"`
+	Status    *HeartbeatResponseStatusEnum `json:"status,omitempty"`
+	Timestamp *time.Time                   `json:"timestamp,omitempty"`
 }

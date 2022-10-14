@@ -1,16 +1,16 @@
 package shared
 
 type ChannelFeatures struct {
-	AutoRefreshLevels          *int32                        `json:"AutoRefreshLevels"`
-	CanFilter                  *bool                         `json:"CanFilter"`
-	CanSearch                  *bool                         `json:"CanSearch"`
-	ContentTypes               []ChannelMediaContentTypeEnum `json:"ContentTypes"`
-	DefaultSortFields          []ChannelItemSortFieldEnum    `json:"DefaultSortFields"`
-	ID                         *string                       `json:"Id"`
-	MaxPageSize                *int32                        `json:"MaxPageSize"`
-	MediaTypes                 []ChannelMediaTypeEnum        `json:"MediaTypes"`
-	Name                       *string                       `json:"Name"`
-	SupportsContentDownloading *bool                         `json:"SupportsContentDownloading"`
-	SupportsLatestMedia        *bool                         `json:"SupportsLatestMedia"`
-	SupportsSortOrderToggle    *bool                         `json:"SupportsSortOrderToggle"`
+	AutoRefreshLevels          *int32                        `json:"AutoRefreshLevels,omitempty"`
+	CanFilter                  *bool                         `json:"CanFilter,omitempty"`
+	CanSearch                  *bool                         `json:"CanSearch,omitempty"`
+	ContentTypes               []ChannelMediaContentTypeEnum `json:"ContentTypes,omitempty"`
+	DefaultSortFields          []ChannelItemSortFieldEnum    `json:"DefaultSortFields,omitempty"`
+	ID                         *string                       `json:"Id,omitempty"`
+	MaxPageSize                *int32                        `json:"MaxPageSize,omitempty"`
+	MediaTypes                 []ChannelMediaTypeEnum        `json:"MediaTypes,omitempty"`
+	Name                       *string                       `json:"Name,omitempty"`
+	SupportsContentDownloading *bool                         `json:"SupportsContentDownloading,omitempty"`
+	SupportsLatestMedia        *bool                         `json:"SupportsLatestMedia,omitempty"`
+	SupportsSortOrderToggle    *bool                         `json:"SupportsSortOrderToggle,omitempty"`
 }

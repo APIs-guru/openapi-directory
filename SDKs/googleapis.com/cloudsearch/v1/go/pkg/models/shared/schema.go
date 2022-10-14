@@ -1,6 +1,6 @@
 package shared
 
 type Schema struct {
-	ObjectDefinitions []ObjectDefinition `json:"objectDefinitions"`
-	OperationIds      []string           `json:"operationIds"`
+	ObjectDefinitions []ObjectDefinition `json:"objectDefinitions,omitempty"`
+	OperationIds      []string           `json:"operationIds,omitempty"`
 }

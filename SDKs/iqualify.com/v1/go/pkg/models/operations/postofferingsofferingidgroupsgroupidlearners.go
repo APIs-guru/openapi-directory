@@ -10,7 +10,7 @@ type PostOfferingsOfferingIDGroupsGroupIDLearnersPathParams struct {
 }
 
 type PostOfferingsOfferingIDGroupsGroupIDLearnersRequestBody struct {
-	Email *string `json:"email"`
+	Email *string `json:"email,omitempty"`
 }
 
 type PostOfferingsOfferingIDGroupsGroupIDLearnersRequest struct {

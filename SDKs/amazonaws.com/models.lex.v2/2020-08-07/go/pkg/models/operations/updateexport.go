@@ -19,7 +19,7 @@ type UpdateExportHeaders struct {
 }
 
 type UpdateExportRequestBody struct {
-	FilePassword *string `json:"filePassword"`
+	FilePassword *string `json:"filePassword,omitempty"`
 }
 
 type UpdateExportRequest struct {

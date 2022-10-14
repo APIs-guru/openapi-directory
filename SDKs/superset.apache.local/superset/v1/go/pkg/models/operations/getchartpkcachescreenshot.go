@@ -23,19 +23,19 @@ type GetChartPkCacheScreenshotRequest struct {
 }
 
 type GetChartPkCacheScreenshot400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkCacheScreenshot401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkCacheScreenshot404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkCacheScreenshot500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkCacheScreenshotResponse struct {

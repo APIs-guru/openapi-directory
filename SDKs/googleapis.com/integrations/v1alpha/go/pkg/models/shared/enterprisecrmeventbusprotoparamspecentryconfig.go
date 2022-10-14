@@ -19,13 +19,13 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoParamSpecEntryConfig struct {
-	DescriptivePhrase   *string                                                                `json:"descriptivePhrase"`
-	HelpText            *string                                                                `json:"helpText"`
-	HideDefaultValue    *bool                                                                  `json:"hideDefaultValue"`
-	InputDisplayOption  *EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum  `json:"inputDisplayOption"`
-	IsHidden            *bool                                                                  `json:"isHidden"`
-	Label               *string                                                                `json:"label"`
-	ParameterNameOption *EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum `json:"parameterNameOption"`
-	SubSectionLabel     *string                                                                `json:"subSectionLabel"`
-	UIPlaceholderText   *string                                                                `json:"uiPlaceholderText"`
+	DescriptivePhrase   *string                                                                `json:"descriptivePhrase,omitempty"`
+	HelpText            *string                                                                `json:"helpText,omitempty"`
+	HideDefaultValue    *bool                                                                  `json:"hideDefaultValue,omitempty"`
+	InputDisplayOption  *EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum  `json:"inputDisplayOption,omitempty"`
+	IsHidden            *bool                                                                  `json:"isHidden,omitempty"`
+	Label               *string                                                                `json:"label,omitempty"`
+	ParameterNameOption *EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum `json:"parameterNameOption,omitempty"`
+	SubSectionLabel     *string                                                                `json:"subSectionLabel,omitempty"`
+	UIPlaceholderText   *string                                                                `json:"uiPlaceholderText,omitempty"`
 }

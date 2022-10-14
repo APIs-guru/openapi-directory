@@ -39,18 +39,18 @@ const (
 )
 
 type SearchJobsRequest struct {
-	CustomRankingInfo    *CustomRankingInfo                         `json:"customRankingInfo"`
-	DisableKeywordMatch  *bool                                      `json:"disableKeywordMatch"`
-	DiversificationLevel *SearchJobsRequestDiversificationLevelEnum `json:"diversificationLevel"`
-	EnableBroadening     *bool                                      `json:"enableBroadening"`
-	HistogramQueries     []HistogramQuery                           `json:"histogramQueries"`
-	JobQuery             *JobQuery                                  `json:"jobQuery"`
-	JobView              *SearchJobsRequestJobViewEnum              `json:"jobView"`
-	KeywordMatchMode     *SearchJobsRequestKeywordMatchModeEnum     `json:"keywordMatchMode"`
-	MaxPageSize          *int32                                     `json:"maxPageSize"`
-	Offset               *int32                                     `json:"offset"`
-	OrderBy              *string                                    `json:"orderBy"`
-	PageToken            *string                                    `json:"pageToken"`
-	RequestMetadata      *RequestMetadata                           `json:"requestMetadata"`
-	SearchMode           *SearchJobsRequestSearchModeEnum           `json:"searchMode"`
+	CustomRankingInfo    *CustomRankingInfo                         `json:"customRankingInfo,omitempty"`
+	DisableKeywordMatch  *bool                                      `json:"disableKeywordMatch,omitempty"`
+	DiversificationLevel *SearchJobsRequestDiversificationLevelEnum `json:"diversificationLevel,omitempty"`
+	EnableBroadening     *bool                                      `json:"enableBroadening,omitempty"`
+	HistogramQueries     []HistogramQuery                           `json:"histogramQueries,omitempty"`
+	JobQuery             *JobQuery                                  `json:"jobQuery,omitempty"`
+	JobView              *SearchJobsRequestJobViewEnum              `json:"jobView,omitempty"`
+	KeywordMatchMode     *SearchJobsRequestKeywordMatchModeEnum     `json:"keywordMatchMode,omitempty"`
+	MaxPageSize          *int32                                     `json:"maxPageSize,omitempty"`
+	Offset               *int32                                     `json:"offset,omitempty"`
+	OrderBy              *string                                    `json:"orderBy,omitempty"`
+	PageToken            *string                                    `json:"pageToken,omitempty"`
+	RequestMetadata      *RequestMetadata                           `json:"requestMetadata,omitempty"`
+	SearchMode           *SearchJobsRequestSearchModeEnum           `json:"searchMode,omitempty"`
 }

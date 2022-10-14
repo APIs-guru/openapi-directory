@@ -1,11 +1,11 @@
 package shared
 
 type Domains struct {
-	CreationTime  *string       `json:"creationTime"`
-	DomainAliases []DomainAlias `json:"domainAliases"`
-	DomainName    *string       `json:"domainName"`
-	Etag          *string       `json:"etag"`
-	IsPrimary     *bool         `json:"isPrimary"`
-	Kind          *string       `json:"kind"`
-	Verified      *bool         `json:"verified"`
+	CreationTime  *string       `json:"creationTime,omitempty"`
+	DomainAliases []DomainAlias `json:"domainAliases,omitempty"`
+	DomainName    *string       `json:"domainName,omitempty"`
+	Etag          *string       `json:"etag,omitempty"`
+	IsPrimary     *bool         `json:"isPrimary,omitempty"`
+	Kind          *string       `json:"kind,omitempty"`
+	Verified      *bool         `json:"verified,omitempty"`
 }

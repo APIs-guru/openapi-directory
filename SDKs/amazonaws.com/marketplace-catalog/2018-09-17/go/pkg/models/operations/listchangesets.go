@@ -20,16 +20,16 @@ type ListChangeSetsHeaders struct {
 }
 
 type ListChangeSetsRequestBodySort struct {
-	SortBy    *string               `json:"SortBy"`
-	SortOrder *shared.SortOrderEnum `json:"SortOrder"`
+	SortBy    *string               `json:"SortBy,omitempty"`
+	SortOrder *shared.SortOrderEnum `json:"SortOrder,omitempty"`
 }
 
 type ListChangeSetsRequestBody struct {
 	Catalog    string                         `json:"Catalog"`
-	FilterList []shared.Filter                `json:"FilterList"`
-	MaxResults *int64                         `json:"MaxResults"`
-	NextToken  *string                        `json:"NextToken"`
-	Sort       *ListChangeSetsRequestBodySort `json:"Sort"`
+	FilterList []shared.Filter                `json:"FilterList,omitempty"`
+	MaxResults *int64                         `json:"MaxResults,omitempty"`
+	NextToken  *string                        `json:"NextToken,omitempty"`
+	Sort       *ListChangeSetsRequestBodySort `json:"Sort,omitempty"`
 }
 
 type ListChangeSetsRequest struct {

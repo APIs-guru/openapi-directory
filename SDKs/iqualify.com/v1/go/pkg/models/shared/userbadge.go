@@ -5,17 +5,17 @@ import (
 )
 
 type UserBadgeBadgeExpiry struct {
-	ExpirationDate *time.Time `json:"expirationDate"`
-	Expires        *bool      `json:"expires"`
+	ExpirationDate *time.Time `json:"expirationDate,omitempty"`
+	Expires        *bool      `json:"expires,omitempty"`
 }
 
 type UserBadge struct {
-	AwardedAt   *time.Time            `json:"awardedAt"`
-	BadgeExpiry *UserBadgeBadgeExpiry `json:"badgeExpiry"`
-	BadgeURL    *string               `json:"badgeUrl"`
-	Criterias   *Criteria             `json:"criterias"`
-	Description *string               `json:"description"`
-	OfferingID  *string               `json:"offeringId"`
-	OpenBadge   *OpenBadgeClass       `json:"openBadge"`
-	Title       *string               `json:"title"`
+	AwardedAt   *time.Time            `json:"awardedAt,omitempty"`
+	BadgeExpiry *UserBadgeBadgeExpiry `json:"badgeExpiry,omitempty"`
+	BadgeURL    *string               `json:"badgeUrl,omitempty"`
+	Criterias   *Criteria             `json:"criterias,omitempty"`
+	Description *string               `json:"description,omitempty"`
+	OfferingID  *string               `json:"offeringId,omitempty"`
+	OpenBadge   *OpenBadgeClass       `json:"openBadge,omitempty"`
+	Title       *string               `json:"title,omitempty"`
 }

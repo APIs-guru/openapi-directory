@@ -1,6 +1,6 @@
 package shared
 
 type ListAccountAssignmentDeletionStatusResponse struct {
-	AccountAssignmentsDeletionStatus []AccountAssignmentOperationStatusMetadata `json:"AccountAssignmentsDeletionStatus"`
-	NextToken                        *string                                    `json:"NextToken"`
+	AccountAssignmentsDeletionStatus []AccountAssignmentOperationStatusMetadata `json:"AccountAssignmentsDeletionStatus,omitempty"`
+	NextToken                        *string                                    `json:"NextToken,omitempty"`
 }

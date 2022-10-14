@@ -18,16 +18,16 @@ const (
 )
 
 type OAuthClient struct {
-	AccessTokenValidity  *int32                      `json:"accessTokenValidity"`
-	ApprovalValidity     *int32                      `json:"approvalValidity"`
+	AccessTokenValidity  *int32                      `json:"accessTokenValidity,omitempty"`
+	ApprovalValidity     *int32                      `json:"approvalValidity,omitempty"`
 	ClientID             string                      `json:"clientId"`
-	ClientName           *string                     `json:"clientName"`
-	ClientSecret         *string                     `json:"clientSecret"`
-	ClientType           *OAuthClientClientTypeEnum  `json:"clientType"`
+	ClientName           *string                     `json:"clientName,omitempty"`
+	ClientSecret         *string                     `json:"clientSecret,omitempty"`
+	ClientType           *OAuthClientClientTypeEnum  `json:"clientType,omitempty"`
 	GrantTypes           []OAuthClientGrantTypesEnum `json:"grantTypes"`
-	IsEnabled            *bool                       `json:"isEnabled"`
-	IsExternal           *bool                       `json:"isExternal"`
-	IsStandard           *bool                       `json:"isStandard"`
-	RedirectUris         []string                    `json:"redirectUris"`
-	RefreshTokenValidity *int32                      `json:"refreshTokenValidity"`
+	IsEnabled            *bool                       `json:"isEnabled,omitempty"`
+	IsExternal           *bool                       `json:"isExternal,omitempty"`
+	IsStandard           *bool                       `json:"isStandard,omitempty"`
+	RedirectUris         []string                    `json:"redirectUris,omitempty"`
+	RefreshTokenValidity *int32                      `json:"refreshTokenValidity,omitempty"`
 }

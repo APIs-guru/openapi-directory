@@ -1,18 +1,18 @@
 package shared
 
 type CreateSchemaResponse struct {
-	Compatibility       *CompatibilityEnum       `json:"Compatibility"`
-	DataFormat          *DataFormatEnum          `json:"DataFormat"`
-	Description         *string                  `json:"Description"`
-	LatestSchemaVersion *int64                   `json:"LatestSchemaVersion"`
-	NextSchemaVersion   *int64                   `json:"NextSchemaVersion"`
-	RegistryArn         *string                  `json:"RegistryArn"`
-	RegistryName        *string                  `json:"RegistryName"`
-	SchemaArn           *string                  `json:"SchemaArn"`
-	SchemaCheckpoint    *int64                   `json:"SchemaCheckpoint"`
-	SchemaName          *string                  `json:"SchemaName"`
-	SchemaStatus        *SchemaStatusEnum        `json:"SchemaStatus"`
-	SchemaVersionID     *string                  `json:"SchemaVersionId"`
-	SchemaVersionStatus *SchemaVersionStatusEnum `json:"SchemaVersionStatus"`
-	Tags                map[string]string        `json:"Tags"`
+	Compatibility       *CompatibilityEnum       `json:"Compatibility,omitempty"`
+	DataFormat          *DataFormatEnum          `json:"DataFormat,omitempty"`
+	Description         *string                  `json:"Description,omitempty"`
+	LatestSchemaVersion *int64                   `json:"LatestSchemaVersion,omitempty"`
+	NextSchemaVersion   *int64                   `json:"NextSchemaVersion,omitempty"`
+	RegistryArn         *string                  `json:"RegistryArn,omitempty"`
+	RegistryName        *string                  `json:"RegistryName,omitempty"`
+	SchemaArn           *string                  `json:"SchemaArn,omitempty"`
+	SchemaCheckpoint    *int64                   `json:"SchemaCheckpoint,omitempty"`
+	SchemaName          *string                  `json:"SchemaName,omitempty"`
+	SchemaStatus        *SchemaStatusEnum        `json:"SchemaStatus,omitempty"`
+	SchemaVersionID     *string                  `json:"SchemaVersionId,omitempty"`
+	SchemaVersionStatus *SchemaVersionStatusEnum `json:"SchemaVersionStatus,omitempty"`
+	Tags                map[string]string        `json:"Tags,omitempty"`
 }

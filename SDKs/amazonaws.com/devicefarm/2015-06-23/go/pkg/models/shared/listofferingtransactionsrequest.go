@@ -1,5 +1,5 @@
 package shared
 
 type ListOfferingTransactionsRequest struct {
-	NextToken *string `json:"nextToken"`
+	NextToken *string `json:"nextToken,omitempty"`
 }

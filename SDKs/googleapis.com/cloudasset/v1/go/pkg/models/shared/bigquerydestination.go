@@ -1,9 +1,9 @@
 package shared
 
 type BigQueryDestination struct {
-	Dataset                    *string        `json:"dataset"`
-	Force                      *bool          `json:"force"`
-	PartitionSpec              *PartitionSpec `json:"partitionSpec"`
-	SeparateTablesPerAssetType *bool          `json:"separateTablesPerAssetType"`
-	Table                      *string        `json:"table"`
+	Dataset                    *string        `json:"dataset,omitempty"`
+	Force                      *bool          `json:"force,omitempty"`
+	PartitionSpec              *PartitionSpec `json:"partitionSpec,omitempty"`
+	SeparateTablesPerAssetType *bool          `json:"separateTablesPerAssetType,omitempty"`
+	Table                      *string        `json:"table,omitempty"`
 }

@@ -19,7 +19,7 @@ type GetPortfolioMembershipRequest struct {
 }
 
 type GetPortfolioMembership200ApplicationJSON struct {
-	Data *shared.PortfolioMembershipResponse `json:"data"`
+	Data *shared.PortfolioMembershipResponse `json:"data,omitempty"`
 }
 
 type GetPortfolioMembershipResponse struct {

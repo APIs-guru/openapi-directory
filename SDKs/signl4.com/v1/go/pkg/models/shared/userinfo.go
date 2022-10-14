@@ -5,16 +5,16 @@ import (
 )
 
 type UserInfo struct {
-	ColorIndex            *int32               `json:"colorIndex"`
-	ContactAddresses      []ContactAddressInfo `json:"contactAddresses"`
-	DutyInfo              *UserDutyInfo        `json:"dutyInfo"`
-	ID                    *string              `json:"id"`
-	IsDeactivated         *bool                `json:"isDeactivated"`
-	IsInvite              *bool                `json:"isInvite"`
-	Mail                  *string              `json:"mail"`
-	Name                  *string              `json:"name"`
-	RoleID                *string              `json:"roleId"`
-	SubscriptionID        *string              `json:"subscriptionId"`
-	TimeZone              *string              `json:"timeZone"`
-	UserImageLastModified *time.Time           `json:"userImageLastModified"`
+	ColorIndex            *int32               `json:"colorIndex,omitempty"`
+	ContactAddresses      []ContactAddressInfo `json:"contactAddresses,omitempty"`
+	DutyInfo              *UserDutyInfo        `json:"dutyInfo,omitempty"`
+	ID                    *string              `json:"id,omitempty"`
+	IsDeactivated         *bool                `json:"isDeactivated,omitempty"`
+	IsInvite              *bool                `json:"isInvite,omitempty"`
+	Mail                  *string              `json:"mail,omitempty"`
+	Name                  *string              `json:"name,omitempty"`
+	RoleID                *string              `json:"roleId,omitempty"`
+	SubscriptionID        *string              `json:"subscriptionId,omitempty"`
+	TimeZone              *string              `json:"timeZone,omitempty"`
+	UserImageLastModified *time.Time           `json:"userImageLastModified,omitempty"`
 }

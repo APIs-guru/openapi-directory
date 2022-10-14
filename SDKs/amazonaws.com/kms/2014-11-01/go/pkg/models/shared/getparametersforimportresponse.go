@@ -5,8 +5,8 @@ import (
 )
 
 type GetParametersForImportResponse struct {
-	ImportToken       *string    `json:"ImportToken"`
-	KeyID             *string    `json:"KeyId"`
-	ParametersValidTo *time.Time `json:"ParametersValidTo"`
-	PublicKey         *string    `json:"PublicKey"`
+	ImportToken       *string    `json:"ImportToken,omitempty"`
+	KeyID             *string    `json:"KeyId,omitempty"`
+	ParametersValidTo *time.Time `json:"ParametersValidTo,omitempty"`
+	PublicKey         *string    `json:"PublicKey,omitempty"`
 }

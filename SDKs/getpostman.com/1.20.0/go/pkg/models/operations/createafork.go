@@ -9,7 +9,7 @@ type CreateAForkQueryParams struct {
 }
 
 type CreateAForkRequestBody struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type CreateAForkRequest struct {

@@ -9,6 +9,6 @@ const (
 )
 
 type ResourceGroup struct {
-	GroupID      *string                        `json:"groupId"`
-	ResourceType *ResourceGroupResourceTypeEnum `json:"resourceType"`
+	GroupID      *string                        `json:"groupId,omitempty"`
+	ResourceType *ResourceGroupResourceTypeEnum `json:"resourceType,omitempty"`
 }

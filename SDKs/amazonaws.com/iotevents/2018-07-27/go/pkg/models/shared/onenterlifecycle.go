@@ -1,5 +1,5 @@
 package shared
 
 type OnEnterLifecycle struct {
-	Events []Event `json:"events"`
+	Events []Event `json:"events,omitempty"`
 }

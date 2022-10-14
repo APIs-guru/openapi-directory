@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDialogflowV2IntentMessageCarouselSelect struct {
-	Items []GoogleCloudDialogflowV2IntentMessageCarouselSelectItem `json:"items"`
+	Items []GoogleCloudDialogflowV2IntentMessageCarouselSelectItem `json:"items,omitempty"`
 }

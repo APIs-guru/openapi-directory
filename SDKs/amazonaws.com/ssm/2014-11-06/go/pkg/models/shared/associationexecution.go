@@ -5,12 +5,12 @@ import (
 )
 
 type AssociationExecution struct {
-	AssociationID         *string    `json:"AssociationId"`
-	AssociationVersion    *string    `json:"AssociationVersion"`
-	CreatedTime           *time.Time `json:"CreatedTime"`
-	DetailedStatus        *string    `json:"DetailedStatus"`
-	ExecutionID           *string    `json:"ExecutionId"`
-	LastExecutionDate     *time.Time `json:"LastExecutionDate"`
-	ResourceCountByStatus *string    `json:"ResourceCountByStatus"`
-	Status                *string    `json:"Status"`
+	AssociationID         *string    `json:"AssociationId,omitempty"`
+	AssociationVersion    *string    `json:"AssociationVersion,omitempty"`
+	CreatedTime           *time.Time `json:"CreatedTime,omitempty"`
+	DetailedStatus        *string    `json:"DetailedStatus,omitempty"`
+	ExecutionID           *string    `json:"ExecutionId,omitempty"`
+	LastExecutionDate     *time.Time `json:"LastExecutionDate,omitempty"`
+	ResourceCountByStatus *string    `json:"ResourceCountByStatus,omitempty"`
+	Status                *string    `json:"Status,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type LoyaltyEventAccumulatePoints struct {
-	LoyaltyProgramID *string `json:"loyalty_program_id"`
-	OrderID          *string `json:"order_id"`
-	Points           *int64  `json:"points"`
+	LoyaltyProgramID *string `json:"loyalty_program_id,omitempty"`
+	OrderID          *string `json:"order_id,omitempty"`
+	Points           *int64  `json:"points,omitempty"`
 }

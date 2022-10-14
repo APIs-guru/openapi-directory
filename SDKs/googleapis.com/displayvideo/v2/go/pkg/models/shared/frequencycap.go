@@ -13,9 +13,9 @@ const (
 )
 
 type FrequencyCap struct {
-	MaxImpressions *int32                    `json:"maxImpressions"`
-	MaxViews       *int32                    `json:"maxViews"`
-	TimeUnit       *FrequencyCapTimeUnitEnum `json:"timeUnit"`
-	TimeUnitCount  *int32                    `json:"timeUnitCount"`
-	Unlimited      *bool                     `json:"unlimited"`
+	MaxImpressions *int32                    `json:"maxImpressions,omitempty"`
+	MaxViews       *int32                    `json:"maxViews,omitempty"`
+	TimeUnit       *FrequencyCapTimeUnitEnum `json:"timeUnit,omitempty"`
+	TimeUnitCount  *int32                    `json:"timeUnitCount,omitempty"`
+	Unlimited      *bool                     `json:"unlimited,omitempty"`
 }

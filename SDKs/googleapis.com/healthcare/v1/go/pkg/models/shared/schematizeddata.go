@@ -1,6 +1,6 @@
 package shared
 
 type SchematizedData struct {
-	Data  *string `json:"data"`
-	Error *string `json:"error"`
+	Data  *string `json:"data,omitempty"`
+	Error *string `json:"error,omitempty"`
 }

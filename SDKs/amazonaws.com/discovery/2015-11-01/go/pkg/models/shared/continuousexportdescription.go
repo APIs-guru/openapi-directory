@@ -5,12 +5,12 @@ import (
 )
 
 type ContinuousExportDescription struct {
-	DataSource          *DataSourceEnum             `json:"dataSource"`
-	ExportID            *string                     `json:"exportId"`
-	S3Bucket            *string                     `json:"s3Bucket"`
-	SchemaStorageConfig map[string]string           `json:"schemaStorageConfig"`
-	StartTime           *time.Time                  `json:"startTime"`
-	Status              *ContinuousExportStatusEnum `json:"status"`
-	StatusDetail        *string                     `json:"statusDetail"`
-	StopTime            *time.Time                  `json:"stopTime"`
+	DataSource          *DataSourceEnum             `json:"dataSource,omitempty"`
+	ExportID            *string                     `json:"exportId,omitempty"`
+	S3Bucket            *string                     `json:"s3Bucket,omitempty"`
+	SchemaStorageConfig map[string]string           `json:"schemaStorageConfig,omitempty"`
+	StartTime           *time.Time                  `json:"startTime,omitempty"`
+	Status              *ContinuousExportStatusEnum `json:"status,omitempty"`
+	StatusDetail        *string                     `json:"statusDetail,omitempty"`
+	StopTime            *time.Time                  `json:"stopTime,omitempty"`
 }

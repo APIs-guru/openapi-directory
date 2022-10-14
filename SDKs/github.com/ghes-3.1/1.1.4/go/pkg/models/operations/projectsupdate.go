@@ -18,11 +18,11 @@ const (
 )
 
 type ProjectsUpdateRequestBody struct {
-	Body                   *string                                              `json:"body"`
-	Name                   *string                                              `json:"name"`
-	OrganizationPermission *ProjectsUpdateRequestBodyOrganizationPermissionEnum `json:"organization_permission"`
-	Private                *bool                                                `json:"private"`
-	State                  *string                                              `json:"state"`
+	Body                   *string                                              `json:"body,omitempty"`
+	Name                   *string                                              `json:"name,omitempty"`
+	OrganizationPermission *ProjectsUpdateRequestBodyOrganizationPermissionEnum `json:"organization_permission,omitempty"`
+	Private                *bool                                                `json:"private,omitempty"`
+	State                  *string                                              `json:"state,omitempty"`
 }
 
 type ProjectsUpdateRequest struct {
@@ -31,9 +31,9 @@ type ProjectsUpdateRequest struct {
 }
 
 type ProjectsUpdate403ApplicationJSON struct {
-	DocumentationURL *string  `json:"documentation_url"`
-	Errors           []string `json:"errors"`
-	Message          *string  `json:"message"`
+	DocumentationURL *string  `json:"documentation_url,omitempty"`
+	Errors           []string `json:"errors,omitempty"`
+	Message          *string  `json:"message,omitempty"`
 }
 
 type ProjectsUpdateResponse struct {

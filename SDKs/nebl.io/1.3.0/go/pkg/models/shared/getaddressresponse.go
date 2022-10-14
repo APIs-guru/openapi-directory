@@ -1,16 +1,16 @@
 package shared
 
 type GetAddressResponse struct {
-	AddrStr                  *string  `json:"addrStr"`
-	Balance                  *float64 `json:"balance"`
-	BalanceSat               *float64 `json:"balanceSat"`
-	TotalReceived            *float64 `json:"totalReceived"`
-	TotalReceivedSat         *float64 `json:"totalReceivedSat"`
-	TotalSent                *float64 `json:"totalSent"`
-	TotalSentSat             *float64 `json:"totalSentSat"`
-	Transactions             []string `json:"transactions"`
-	TxAppearances            *float64 `json:"txAppearances"`
-	UnconfirmedBalance       *float64 `json:"unconfirmedBalance"`
-	UnconfirmedBalanceSat    *float64 `json:"unconfirmedBalanceSat"`
-	UnconfirmedTxAppearances *float64 `json:"unconfirmedTxAppearances"`
+	AddrStr                  *string  `json:"addrStr,omitempty"`
+	Balance                  *float64 `json:"balance,omitempty"`
+	BalanceSat               *float64 `json:"balanceSat,omitempty"`
+	TotalReceived            *float64 `json:"totalReceived,omitempty"`
+	TotalReceivedSat         *float64 `json:"totalReceivedSat,omitempty"`
+	TotalSent                *float64 `json:"totalSent,omitempty"`
+	TotalSentSat             *float64 `json:"totalSentSat,omitempty"`
+	Transactions             []string `json:"transactions,omitempty"`
+	TxAppearances            *float64 `json:"txAppearances,omitempty"`
+	UnconfirmedBalance       *float64 `json:"unconfirmedBalance,omitempty"`
+	UnconfirmedBalanceSat    *float64 `json:"unconfirmedBalanceSat,omitempty"`
+	UnconfirmedTxAppearances *float64 `json:"unconfirmedTxAppearances,omitempty"`
 }

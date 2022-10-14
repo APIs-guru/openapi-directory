@@ -14,5 +14,5 @@ const (
 )
 
 type WeeklySchedule struct {
-	DayOfWeek *WeeklyScheduleDayOfWeekEnum `json:"dayOfWeek"`
+	DayOfWeek *WeeklyScheduleDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 }

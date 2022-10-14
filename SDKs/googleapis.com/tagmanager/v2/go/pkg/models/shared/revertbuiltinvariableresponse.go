@@ -1,5 +1,5 @@
 package shared
 
 type RevertBuiltInVariableResponse struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }

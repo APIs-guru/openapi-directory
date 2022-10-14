@@ -9,9 +9,9 @@ type GetAccountsAccountPositionsRequest struct {
 }
 
 type GetAccountsAccountPositions200ApplicationJSON struct {
-	AverageCost *float64 `json:"AverageCost"`
-	ContractID  *float64 `json:"ContractId"`
-	Position    *float64 `json:"Position"`
+	AverageCost *float64 `json:"AverageCost,omitempty"`
+	ContractID  *float64 `json:"ContractId,omitempty"`
+	Position    *float64 `json:"Position,omitempty"`
 }
 
 type GetAccountsAccountPositionsResponse struct {

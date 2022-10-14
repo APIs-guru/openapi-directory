@@ -1,8 +1,8 @@
 package shared
 
 type Destination struct {
-	ConfigDetails             *ConfigDetails            `json:"configDetails"`
-	ConfigID                  *string                   `json:"configId"`
-	ConfigType                *ConfigCapabilityTypeEnum `json:"configType"`
-	DataflowDestinationRegion *string                   `json:"dataflowDestinationRegion"`
+	ConfigDetails             *ConfigDetails            `json:"configDetails,omitempty"`
+	ConfigID                  *string                   `json:"configId,omitempty"`
+	ConfigType                *ConfigCapabilityTypeEnum `json:"configType,omitempty"`
+	DataflowDestinationRegion *string                   `json:"dataflowDestinationRegion,omitempty"`
 }

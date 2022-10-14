@@ -1,9 +1,9 @@
 package shared
 
 type MemberHistory struct {
-	HouseMembershipHistory []HouseMembership `json:"houseMembershipHistory"`
-	ID                     *int32            `json:"id"`
-	NameHistory            []MemberName      `json:"nameHistory"`
-	PartyHistory           []MemberParty     `json:"partyHistory"`
-	ThumbnailURL           *string           `json:"thumbnailUrl"`
+	HouseMembershipHistory []HouseMembership `json:"houseMembershipHistory,omitempty"`
+	ID                     *int32            `json:"id,omitempty"`
+	NameHistory            []MemberName      `json:"nameHistory,omitempty"`
+	PartyHistory           []MemberParty     `json:"partyHistory,omitempty"`
+	ThumbnailURL           *string           `json:"thumbnailUrl,omitempty"`
 }

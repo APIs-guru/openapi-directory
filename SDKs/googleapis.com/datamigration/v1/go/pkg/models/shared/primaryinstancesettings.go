@@ -1,9 +1,9 @@
 package shared
 
 type PrimaryInstanceSettings struct {
-	DatabaseFlags map[string]string `json:"databaseFlags"`
-	ID            *string           `json:"id"`
-	Labels        map[string]string `json:"labels"`
-	MachineConfig *MachineConfig    `json:"machineConfig"`
-	PrivateIP     *string           `json:"privateIp"`
+	DatabaseFlags map[string]string `json:"databaseFlags,omitempty"`
+	ID            *string           `json:"id,omitempty"`
+	Labels        map[string]string `json:"labels,omitempty"`
+	MachineConfig *MachineConfig    `json:"machineConfig,omitempty"`
+	PrivateIP     *string           `json:"privateIp,omitempty"`
 }

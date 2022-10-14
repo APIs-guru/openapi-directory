@@ -5,8 +5,8 @@ import (
 )
 
 type FlowExecutionMessage struct {
-	EventType *FlowExecutionEventTypeEnum `json:"eventType"`
-	MessageID *string                     `json:"messageId"`
-	Payload   *string                     `json:"payload"`
-	Timestamp *time.Time                  `json:"timestamp"`
+	EventType *FlowExecutionEventTypeEnum `json:"eventType,omitempty"`
+	MessageID *string                     `json:"messageId,omitempty"`
+	Payload   *string                     `json:"payload,omitempty"`
+	Timestamp *time.Time                  `json:"timestamp,omitempty"`
 }

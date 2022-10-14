@@ -1,5 +1,5 @@
 package shared
 
 type DescribeTopicsDetectionJobResponse struct {
-	TopicsDetectionJobProperties *TopicsDetectionJobProperties `json:"TopicsDetectionJobProperties"`
+	TopicsDetectionJobProperties *TopicsDetectionJobProperties `json:"TopicsDetectionJobProperties,omitempty"`
 }

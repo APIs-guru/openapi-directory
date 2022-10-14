@@ -11,11 +11,11 @@ const (
 )
 
 type AttributeMetadata struct {
-	Deprecated       *bool                           `json:"deprecated"`
-	DisplayName      *string                         `json:"displayName"`
-	GroupDisplayName *string                         `json:"groupDisplayName"`
-	Parent           *string                         `json:"parent"`
-	Repeatable       *bool                           `json:"repeatable"`
-	ValueMetadata    []AttributeValueMetadata        `json:"valueMetadata"`
-	ValueType        *AttributeMetadataValueTypeEnum `json:"valueType"`
+	Deprecated       *bool                           `json:"deprecated,omitempty"`
+	DisplayName      *string                         `json:"displayName,omitempty"`
+	GroupDisplayName *string                         `json:"groupDisplayName,omitempty"`
+	Parent           *string                         `json:"parent,omitempty"`
+	Repeatable       *bool                           `json:"repeatable,omitempty"`
+	ValueMetadata    []AttributeValueMetadata        `json:"valueMetadata,omitempty"`
+	ValueType        *AttributeMetadataValueTypeEnum `json:"valueType,omitempty"`
 }

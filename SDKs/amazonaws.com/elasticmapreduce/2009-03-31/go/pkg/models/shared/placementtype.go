@@ -1,6 +1,6 @@
 package shared
 
 type PlacementType struct {
-	AvailabilityZone  *string  `json:"AvailabilityZone"`
-	AvailabilityZones []string `json:"AvailabilityZones"`
+	AvailabilityZone  *string  `json:"AvailabilityZone,omitempty"`
+	AvailabilityZones []string `json:"AvailabilityZones,omitempty"`
 }

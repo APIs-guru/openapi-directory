@@ -1,6 +1,6 @@
 package shared
 
 type ListPipelineExecutionsResponse struct {
-	NextToken                  *string                    `json:"NextToken"`
-	PipelineExecutionSummaries []PipelineExecutionSummary `json:"PipelineExecutionSummaries"`
+	NextToken                  *string                    `json:"NextToken,omitempty"`
+	PipelineExecutionSummaries []PipelineExecutionSummary `json:"PipelineExecutionSummaries,omitempty"`
 }

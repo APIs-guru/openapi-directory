@@ -26,22 +26,22 @@ const (
 )
 
 type ComputeEngineTargetDefaults struct {
-	AdditionalLicenses []string                                    `json:"additionalLicenses"`
-	AppliedLicense     *AppliedLicense                             `json:"appliedLicense"`
-	BootOption         *ComputeEngineTargetDefaultsBootOptionEnum  `json:"bootOption"`
-	ComputeScheduling  *ComputeScheduling                          `json:"computeScheduling"`
-	DiskType           *ComputeEngineTargetDefaultsDiskTypeEnum    `json:"diskType"`
-	Hostname           *string                                     `json:"hostname"`
-	Labels             map[string]string                           `json:"labels"`
-	LicenseType        *ComputeEngineTargetDefaultsLicenseTypeEnum `json:"licenseType"`
-	MachineType        *string                                     `json:"machineType"`
-	MachineTypeSeries  *string                                     `json:"machineTypeSeries"`
-	Metadata           map[string]string                           `json:"metadata"`
-	NetworkInterfaces  []NetworkInterface                          `json:"networkInterfaces"`
-	NetworkTags        []string                                    `json:"networkTags"`
-	SecureBoot         *bool                                       `json:"secureBoot"`
-	ServiceAccount     *string                                     `json:"serviceAccount"`
-	TargetProject      *string                                     `json:"targetProject"`
-	VMName             *string                                     `json:"vmName"`
-	Zone               *string                                     `json:"zone"`
+	AdditionalLicenses []string                                    `json:"additionalLicenses,omitempty"`
+	AppliedLicense     *AppliedLicense                             `json:"appliedLicense,omitempty"`
+	BootOption         *ComputeEngineTargetDefaultsBootOptionEnum  `json:"bootOption,omitempty"`
+	ComputeScheduling  *ComputeScheduling                          `json:"computeScheduling,omitempty"`
+	DiskType           *ComputeEngineTargetDefaultsDiskTypeEnum    `json:"diskType,omitempty"`
+	Hostname           *string                                     `json:"hostname,omitempty"`
+	Labels             map[string]string                           `json:"labels,omitempty"`
+	LicenseType        *ComputeEngineTargetDefaultsLicenseTypeEnum `json:"licenseType,omitempty"`
+	MachineType        *string                                     `json:"machineType,omitempty"`
+	MachineTypeSeries  *string                                     `json:"machineTypeSeries,omitempty"`
+	Metadata           map[string]string                           `json:"metadata,omitempty"`
+	NetworkInterfaces  []NetworkInterface                          `json:"networkInterfaces,omitempty"`
+	NetworkTags        []string                                    `json:"networkTags,omitempty"`
+	SecureBoot         *bool                                       `json:"secureBoot,omitempty"`
+	ServiceAccount     *string                                     `json:"serviceAccount,omitempty"`
+	TargetProject      *string                                     `json:"targetProject,omitempty"`
+	VMName             *string                                     `json:"vmName,omitempty"`
+	Zone               *string                                     `json:"zone,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type EnvironmentLanguage struct {
-	Images   []EnvironmentImage `json:"images"`
-	Language *LanguageTypeEnum  `json:"language"`
+	Images   []EnvironmentImage `json:"images,omitempty"`
+	Language *LanguageTypeEnum  `json:"language,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type BucketBySession struct {
-	MinDurationMillis *string `json:"minDurationMillis"`
+	MinDurationMillis *string `json:"minDurationMillis,omitempty"`
 }

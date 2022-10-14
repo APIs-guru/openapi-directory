@@ -11,7 +11,7 @@ type ReposMergePathParams struct {
 
 type ReposMergeRequestBody struct {
 	Base          string  `json:"base"`
-	CommitMessage *string `json:"commit_message"`
+	CommitMessage *string `json:"commit_message,omitempty"`
 	Head          string  `json:"head"`
 }
 
@@ -21,13 +21,13 @@ type ReposMergeRequest struct {
 }
 
 type ReposMerge404ApplicationJSON struct {
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type ReposMerge409ApplicationJSON struct {
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type ReposMergeResponse struct {

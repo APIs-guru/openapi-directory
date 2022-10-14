@@ -1,5 +1,5 @@
 package shared
 
 type UpdateAvailabilityRequest struct {
-	Availabilities []Availability `json:"availabilities"`
+	Availabilities []Availability `json:"availabilities,omitempty"`
 }

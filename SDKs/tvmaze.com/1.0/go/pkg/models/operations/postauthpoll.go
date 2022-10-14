@@ -1,7 +1,7 @@
 package operations
 
 type PostAuthPollRequestBody struct {
-	Token *string `json:"token"`
+	Token *string `json:"token,omitempty"`
 }
 
 type PostAuthPollRequest struct {
@@ -9,8 +9,8 @@ type PostAuthPollRequest struct {
 }
 
 type PostAuthPoll200ApplicationJSON struct {
-	Apikey   *string `json:"apikey"`
-	Username *string `json:"username"`
+	Apikey   *string `json:"apikey,omitempty"`
+	Username *string `json:"username,omitempty"`
 }
 
 type PostAuthPollResponse struct {

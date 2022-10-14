@@ -1,6 +1,6 @@
 package shared
 
 type WakeOnLanInfo struct {
-	MacAddress *string `json:"MacAddress"`
-	Port       *int32  `json:"Port"`
+	MacAddress *string `json:"MacAddress,omitempty"`
+	Port       *int32  `json:"Port,omitempty"`
 }

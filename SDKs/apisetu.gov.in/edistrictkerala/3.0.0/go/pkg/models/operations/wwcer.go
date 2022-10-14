@@ -17,8 +17,8 @@ const (
 )
 
 type WwcerRequestBody struct {
-	CertificateParameters *WwcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *WwcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                WwcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Wwcer400ApplicationJSON struct {
-	Error            *Wwcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Wwcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Wwcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Wwcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Wwcer401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Wwcer401ApplicationJSON struct {
-	Error            *Wwcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Wwcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Wwcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Wwcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Wwcer404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Wwcer404ApplicationJSON struct {
-	Error            *Wwcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Wwcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Wwcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Wwcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Wwcer500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Wwcer500ApplicationJSON struct {
-	Error            *Wwcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Wwcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Wwcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Wwcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Wwcer502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Wwcer502ApplicationJSON struct {
-	Error            *Wwcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Wwcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Wwcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Wwcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Wwcer503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Wwcer503ApplicationJSON struct {
-	Error            *Wwcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Wwcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Wwcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Wwcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Wwcer504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Wwcer504ApplicationJSON struct {
-	Error            *Wwcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Wwcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Wwcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Wwcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type WwcerResponse struct {

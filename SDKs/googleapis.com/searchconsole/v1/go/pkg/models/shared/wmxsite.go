@@ -11,6 +11,6 @@ const (
 )
 
 type WmxSite struct {
-	PermissionLevel *WmxSitePermissionLevelEnum `json:"permissionLevel"`
-	SiteURL         *string                     `json:"siteUrl"`
+	PermissionLevel *WmxSitePermissionLevelEnum `json:"permissionLevel,omitempty"`
+	SiteURL         *string                     `json:"siteUrl,omitempty"`
 }

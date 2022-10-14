@@ -1,14 +1,14 @@
 package shared
 
 type OntapFileSystemConfiguration struct {
-	AutomaticBackupRetentionDays  *int64                   `json:"AutomaticBackupRetentionDays"`
-	DailyAutomaticBackupStartTime *string                  `json:"DailyAutomaticBackupStartTime"`
-	DeploymentType                *OntapDeploymentTypeEnum `json:"DeploymentType"`
-	DiskIopsConfiguration         *DiskIopsConfiguration   `json:"DiskIopsConfiguration"`
-	EndpointIPAddressRange        *string                  `json:"EndpointIpAddressRange"`
-	Endpoints                     *FileSystemEndpoints     `json:"Endpoints"`
-	PreferredSubnetID             *string                  `json:"PreferredSubnetId"`
-	RouteTableIds                 []string                 `json:"RouteTableIds"`
-	ThroughputCapacity            *int64                   `json:"ThroughputCapacity"`
-	WeeklyMaintenanceStartTime    *string                  `json:"WeeklyMaintenanceStartTime"`
+	AutomaticBackupRetentionDays  *int64                   `json:"AutomaticBackupRetentionDays,omitempty"`
+	DailyAutomaticBackupStartTime *string                  `json:"DailyAutomaticBackupStartTime,omitempty"`
+	DeploymentType                *OntapDeploymentTypeEnum `json:"DeploymentType,omitempty"`
+	DiskIopsConfiguration         *DiskIopsConfiguration   `json:"DiskIopsConfiguration,omitempty"`
+	EndpointIPAddressRange        *string                  `json:"EndpointIpAddressRange,omitempty"`
+	Endpoints                     *FileSystemEndpoints     `json:"Endpoints,omitempty"`
+	PreferredSubnetID             *string                  `json:"PreferredSubnetId,omitempty"`
+	RouteTableIds                 []string                 `json:"RouteTableIds,omitempty"`
+	ThroughputCapacity            *int64                   `json:"ThroughputCapacity,omitempty"`
+	WeeklyMaintenanceStartTime    *string                  `json:"WeeklyMaintenanceStartTime,omitempty"`
 }

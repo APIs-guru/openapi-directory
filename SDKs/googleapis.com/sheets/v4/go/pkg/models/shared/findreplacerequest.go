@@ -1,13 +1,13 @@
 package shared
 
 type FindReplaceRequest struct {
-	AllSheets       *bool      `json:"allSheets"`
-	Find            *string    `json:"find"`
-	IncludeFormulas *bool      `json:"includeFormulas"`
-	MatchCase       *bool      `json:"matchCase"`
-	MatchEntireCell *bool      `json:"matchEntireCell"`
-	Range           *GridRange `json:"range"`
-	Replacement     *string    `json:"replacement"`
-	SearchByRegex   *bool      `json:"searchByRegex"`
-	SheetID         *int32     `json:"sheetId"`
+	AllSheets       *bool      `json:"allSheets,omitempty"`
+	Find            *string    `json:"find,omitempty"`
+	IncludeFormulas *bool      `json:"includeFormulas,omitempty"`
+	MatchCase       *bool      `json:"matchCase,omitempty"`
+	MatchEntireCell *bool      `json:"matchEntireCell,omitempty"`
+	Range           *GridRange `json:"range,omitempty"`
+	Replacement     *string    `json:"replacement,omitempty"`
+	SearchByRegex   *bool      `json:"searchByRegex,omitempty"`
+	SheetID         *int32     `json:"sheetId,omitempty"`
 }

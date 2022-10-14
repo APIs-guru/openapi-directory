@@ -24,6 +24,6 @@ const (
 )
 
 type MediaFile struct {
-	Bitrate  *string                `json:"bitrate"`
-	MimeType *MediaFileMimeTypeEnum `json:"mimeType"`
+	Bitrate  *string                `json:"bitrate,omitempty"`
+	MimeType *MediaFileMimeTypeEnum `json:"mimeType,omitempty"`
 }

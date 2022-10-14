@@ -1,6 +1,6 @@
 package shared
 
 type PredictRequest struct {
-	Params  map[string]string `json:"params"`
-	Payload *ExamplePayload   `json:"payload"`
+	Params  map[string]string `json:"params,omitempty"`
+	Payload *ExamplePayload   `json:"payload,omitempty"`
 }

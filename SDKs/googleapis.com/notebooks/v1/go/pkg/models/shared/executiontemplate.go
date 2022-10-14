@@ -21,19 +21,19 @@ const (
 )
 
 type ExecutionTemplate struct {
-	AcceleratorConfig    *SchedulerAcceleratorConfig     `json:"acceleratorConfig"`
-	ContainerImageURI    *string                         `json:"containerImageUri"`
-	DataprocParameters   *DataprocParameters             `json:"dataprocParameters"`
-	InputNotebookFile    *string                         `json:"inputNotebookFile"`
-	JobType              *ExecutionTemplateJobTypeEnum   `json:"jobType"`
-	KernelSpec           *string                         `json:"kernelSpec"`
-	Labels               map[string]string               `json:"labels"`
-	MasterType           *string                         `json:"masterType"`
-	OutputNotebookFolder *string                         `json:"outputNotebookFolder"`
-	Parameters           *string                         `json:"parameters"`
-	ParamsYamlFile       *string                         `json:"paramsYamlFile"`
-	ScaleTier            *ExecutionTemplateScaleTierEnum `json:"scaleTier"`
-	ServiceAccount       *string                         `json:"serviceAccount"`
-	Tensorboard          *string                         `json:"tensorboard"`
-	VertexAiParameters   *VertexAiParameters             `json:"vertexAiParameters"`
+	AcceleratorConfig    *SchedulerAcceleratorConfig     `json:"acceleratorConfig,omitempty"`
+	ContainerImageURI    *string                         `json:"containerImageUri,omitempty"`
+	DataprocParameters   *DataprocParameters             `json:"dataprocParameters,omitempty"`
+	InputNotebookFile    *string                         `json:"inputNotebookFile,omitempty"`
+	JobType              *ExecutionTemplateJobTypeEnum   `json:"jobType,omitempty"`
+	KernelSpec           *string                         `json:"kernelSpec,omitempty"`
+	Labels               map[string]string               `json:"labels,omitempty"`
+	MasterType           *string                         `json:"masterType,omitempty"`
+	OutputNotebookFolder *string                         `json:"outputNotebookFolder,omitempty"`
+	Parameters           *string                         `json:"parameters,omitempty"`
+	ParamsYamlFile       *string                         `json:"paramsYamlFile,omitempty"`
+	ScaleTier            *ExecutionTemplateScaleTierEnum `json:"scaleTier,omitempty"`
+	ServiceAccount       *string                         `json:"serviceAccount,omitempty"`
+	Tensorboard          *string                         `json:"tensorboard,omitempty"`
+	VertexAiParameters   *VertexAiParameters             `json:"vertexAiParameters,omitempty"`
 }

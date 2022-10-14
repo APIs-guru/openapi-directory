@@ -19,19 +19,19 @@ type GetChartPkScreenshotDigestRequest struct {
 }
 
 type GetChartPkScreenshotDigest400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkScreenshotDigest401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkScreenshotDigest404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkScreenshotDigest500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartPkScreenshotDigestResponse struct {

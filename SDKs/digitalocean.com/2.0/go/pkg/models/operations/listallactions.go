@@ -31,29 +31,29 @@ const (
 )
 
 type ListAllActions200ApplicationJSONActions struct {
-	CompletedAt  *time.Time                                         `json:"completed_at"`
-	ID           *int64                                             `json:"id"`
-	Region       *ListAllActions200ApplicationJSONActionsRegion     `json:"region"`
-	RegionSlug   map[string]interface{}                             `json:"region_slug"`
-	ResourceID   *int64                                             `json:"resource_id"`
-	ResourceType *string                                            `json:"resource_type"`
-	StartedAt    *time.Time                                         `json:"started_at"`
-	Status       *ListAllActions200ApplicationJSONActionsStatusEnum `json:"status"`
-	Type         *string                                            `json:"type"`
+	CompletedAt  *time.Time                                         `json:"completed_at,omitempty"`
+	ID           *int64                                             `json:"id,omitempty"`
+	Region       *ListAllActions200ApplicationJSONActionsRegion     `json:"region,omitempty"`
+	RegionSlug   map[string]interface{}                             `json:"region_slug,omitempty"`
+	ResourceID   *int64                                             `json:"resource_id,omitempty"`
+	ResourceType *string                                            `json:"resource_type,omitempty"`
+	StartedAt    *time.Time                                         `json:"started_at,omitempty"`
+	Status       *ListAllActions200ApplicationJSONActionsStatusEnum `json:"status,omitempty"`
+	Type         *string                                            `json:"type,omitempty"`
 }
 
 type ListAllActions200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllActions200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllActions200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllActions200ApplicationJSONMeta struct {
@@ -61,15 +61,15 @@ type ListAllActions200ApplicationJSONMeta struct {
 }
 
 type ListAllActions200ApplicationJSON struct {
-	Actions []ListAllActions200ApplicationJSONActions `json:"actions"`
-	Links   *ListAllActions200ApplicationJSONLinks    `json:"links"`
+	Actions []ListAllActions200ApplicationJSONActions `json:"actions,omitempty"`
+	Links   *ListAllActions200ApplicationJSONLinks    `json:"links,omitempty"`
 	Meta    ListAllActions200ApplicationJSONMeta      `json:"meta"`
 }
 
 type ListAllActions401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllActionsResponse struct {

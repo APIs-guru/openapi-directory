@@ -1,9 +1,9 @@
 package shared
 
 type TeamInfo struct {
-	ID             *string  `json:"id"`
-	MemberIds      []string `json:"memberIds"`
-	Name           *string  `json:"name"`
-	SubscriptionID *string  `json:"subscriptionId"`
-	Timezone       *string  `json:"timezone"`
+	ID             *string  `json:"id,omitempty"`
+	MemberIds      []string `json:"memberIds,omitempty"`
+	Name           *string  `json:"name,omitempty"`
+	SubscriptionID *string  `json:"subscriptionId,omitempty"`
+	Timezone       *string  `json:"timezone,omitempty"`
 }

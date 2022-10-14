@@ -9,7 +9,7 @@ const (
 )
 
 type CommitRequest struct {
-	Mode        *CommitRequestModeEnum `json:"mode"`
-	Mutations   []Mutation             `json:"mutations"`
-	Transaction *string                `json:"transaction"`
+	Mode        *CommitRequestModeEnum `json:"mode,omitempty"`
+	Mutations   []Mutation             `json:"mutations,omitempty"`
+	Transaction *string                `json:"transaction,omitempty"`
 }

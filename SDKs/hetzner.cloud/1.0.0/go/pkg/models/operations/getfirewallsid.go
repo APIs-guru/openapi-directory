@@ -19,8 +19,8 @@ const (
 )
 
 type GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources struct {
-	Server *GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer   `json:"server"`
-	Type   *GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum `json:"type"`
+	Server *GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer   `json:"server,omitempty"`
+	Type   *GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum `json:"type,omitempty"`
 }
 
 type GetFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector struct {
@@ -39,9 +39,9 @@ const (
 )
 
 type GetFirewallsID200ApplicationJSONFirewallAppliedTo struct {
-	AppliedToResources []GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources `json:"applied_to_resources"`
-	LabelSelector      *GetFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector       `json:"label_selector"`
-	Server             *GetFirewallsID200ApplicationJSONFirewallAppliedToServer              `json:"server"`
+	AppliedToResources []GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources `json:"applied_to_resources,omitempty"`
+	LabelSelector      *GetFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector       `json:"label_selector,omitempty"`
+	Server             *GetFirewallsID200ApplicationJSONFirewallAppliedToServer              `json:"server,omitempty"`
 	Type               GetFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum             `json:"type"`
 }
 
@@ -63,19 +63,19 @@ const (
 )
 
 type GetFirewallsID200ApplicationJSONFirewallRulesRule struct {
-	Description    *string                                                    `json:"description"`
-	DestinationIps []string                                                   `json:"destination_ips"`
+	Description    *string                                                    `json:"description,omitempty"`
+	DestinationIps []string                                                   `json:"destination_ips,omitempty"`
 	Direction      GetFirewallsID200ApplicationJSONFirewallRulesDirectionEnum `json:"direction"`
-	Port           *string                                                    `json:"port"`
+	Port           *string                                                    `json:"port,omitempty"`
 	Protocol       GetFirewallsID200ApplicationJSONFirewallRulesProtocolEnum  `json:"protocol"`
-	SourceIps      []string                                                   `json:"source_ips"`
+	SourceIps      []string                                                   `json:"source_ips,omitempty"`
 }
 
 type GetFirewallsID200ApplicationJSONFirewallFirewall struct {
 	AppliedTo []GetFirewallsID200ApplicationJSONFirewallAppliedTo `json:"applied_to"`
 	Created   string                                              `json:"created"`
 	ID        int64                                               `json:"id"`
-	Labels    map[string]string                                   `json:"labels"`
+	Labels    map[string]string                                   `json:"labels,omitempty"`
 	Name      string                                              `json:"name"`
 	Rules     []GetFirewallsID200ApplicationJSONFirewallRulesRule `json:"rules"`
 }

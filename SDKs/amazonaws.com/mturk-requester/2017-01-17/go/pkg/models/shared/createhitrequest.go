@@ -2,19 +2,19 @@ package shared
 
 type CreateHitRequest struct {
 	AssignmentDurationInSeconds int64                      `json:"AssignmentDurationInSeconds"`
-	AssignmentReviewPolicy      *ReviewPolicy              `json:"AssignmentReviewPolicy"`
-	AutoApprovalDelayInSeconds  *int64                     `json:"AutoApprovalDelayInSeconds"`
+	AssignmentReviewPolicy      *ReviewPolicy              `json:"AssignmentReviewPolicy,omitempty"`
+	AutoApprovalDelayInSeconds  *int64                     `json:"AutoApprovalDelayInSeconds,omitempty"`
 	Description                 string                     `json:"Description"`
-	HitLayoutID                 *string                    `json:"HITLayoutId"`
-	HitLayoutParameters         []HitLayoutParameter       `json:"HITLayoutParameters"`
-	HitReviewPolicy             *ReviewPolicy              `json:"HITReviewPolicy"`
-	Keywords                    *string                    `json:"Keywords"`
+	HitLayoutID                 *string                    `json:"HITLayoutId,omitempty"`
+	HitLayoutParameters         []HitLayoutParameter       `json:"HITLayoutParameters,omitempty"`
+	HitReviewPolicy             *ReviewPolicy              `json:"HITReviewPolicy,omitempty"`
+	Keywords                    *string                    `json:"Keywords,omitempty"`
 	LifetimeInSeconds           int64                      `json:"LifetimeInSeconds"`
-	MaxAssignments              *int64                     `json:"MaxAssignments"`
-	QualificationRequirements   []QualificationRequirement `json:"QualificationRequirements"`
-	Question                    *string                    `json:"Question"`
-	RequesterAnnotation         *string                    `json:"RequesterAnnotation"`
+	MaxAssignments              *int64                     `json:"MaxAssignments,omitempty"`
+	QualificationRequirements   []QualificationRequirement `json:"QualificationRequirements,omitempty"`
+	Question                    *string                    `json:"Question,omitempty"`
+	RequesterAnnotation         *string                    `json:"RequesterAnnotation,omitempty"`
 	Reward                      string                     `json:"Reward"`
 	Title                       string                     `json:"Title"`
-	UniqueRequestToken          *string                    `json:"UniqueRequestToken"`
+	UniqueRequestToken          *string                    `json:"UniqueRequestToken,omitempty"`
 }

@@ -5,14 +5,14 @@ import (
 )
 
 type UsersUpdateAuthenticatedRequestBody struct {
-	Bio             *string `json:"bio"`
-	Blog            *string `json:"blog"`
-	Company         *string `json:"company"`
-	Email           *string `json:"email"`
-	Hireable        *bool   `json:"hireable"`
-	Location        *string `json:"location"`
-	Name            *string `json:"name"`
-	TwitterUsername *string `json:"twitter_username"`
+	Bio             *string `json:"bio,omitempty"`
+	Blog            *string `json:"blog,omitempty"`
+	Company         *string `json:"company,omitempty"`
+	Email           *string `json:"email,omitempty"`
+	Hireable        *bool   `json:"hireable,omitempty"`
+	Location        *string `json:"location,omitempty"`
+	Name            *string `json:"name,omitempty"`
+	TwitterUsername *string `json:"twitter_username,omitempty"`
 }
 
 type UsersUpdateAuthenticatedRequest struct {

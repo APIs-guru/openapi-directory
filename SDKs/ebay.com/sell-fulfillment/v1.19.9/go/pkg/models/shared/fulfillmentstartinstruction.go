@@ -1,11 +1,11 @@
 package shared
 
 type FulfillmentStartInstruction struct {
-	EbaySupportedFulfillment    *bool         `json:"ebaySupportedFulfillment"`
-	FinalDestinationAddress     *Address      `json:"finalDestinationAddress"`
-	FulfillmentInstructionsType *string       `json:"fulfillmentInstructionsType"`
-	MaxEstimatedDeliveryDate    *string       `json:"maxEstimatedDeliveryDate"`
-	MinEstimatedDeliveryDate    *string       `json:"minEstimatedDeliveryDate"`
-	PickupStep                  *PickupStep   `json:"pickupStep"`
-	ShippingStep                *ShippingStep `json:"shippingStep"`
+	EbaySupportedFulfillment    *bool         `json:"ebaySupportedFulfillment,omitempty"`
+	FinalDestinationAddress     *Address      `json:"finalDestinationAddress,omitempty"`
+	FulfillmentInstructionsType *string       `json:"fulfillmentInstructionsType,omitempty"`
+	MaxEstimatedDeliveryDate    *string       `json:"maxEstimatedDeliveryDate,omitempty"`
+	MinEstimatedDeliveryDate    *string       `json:"minEstimatedDeliveryDate,omitempty"`
+	PickupStep                  *PickupStep   `json:"pickupStep,omitempty"`
+	ShippingStep                *ShippingStep `json:"shippingStep,omitempty"`
 }

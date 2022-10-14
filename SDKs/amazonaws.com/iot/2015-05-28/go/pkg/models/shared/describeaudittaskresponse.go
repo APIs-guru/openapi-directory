@@ -5,10 +5,10 @@ import (
 )
 
 type DescribeAuditTaskResponse struct {
-	AuditDetails       map[string]AuditCheckDetails `json:"auditDetails"`
-	ScheduledAuditName *string                      `json:"scheduledAuditName"`
-	TaskStartTime      *time.Time                   `json:"taskStartTime"`
-	TaskStatistics     *TaskStatistics              `json:"taskStatistics"`
-	TaskStatus         *AuditTaskStatusEnum         `json:"taskStatus"`
-	TaskType           *AuditTaskTypeEnum           `json:"taskType"`
+	AuditDetails       map[string]AuditCheckDetails `json:"auditDetails,omitempty"`
+	ScheduledAuditName *string                      `json:"scheduledAuditName,omitempty"`
+	TaskStartTime      *time.Time                   `json:"taskStartTime,omitempty"`
+	TaskStatistics     *TaskStatistics              `json:"taskStatistics,omitempty"`
+	TaskStatus         *AuditTaskStatusEnum         `json:"taskStatus,omitempty"`
+	TaskType           *AuditTaskTypeEnum           `json:"taskType,omitempty"`
 }

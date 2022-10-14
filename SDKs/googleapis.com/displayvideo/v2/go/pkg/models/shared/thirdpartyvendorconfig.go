@@ -17,6 +17,6 @@ const (
 )
 
 type ThirdPartyVendorConfig struct {
-	PlacementID *string                           `json:"placementId"`
-	Vendor      *ThirdPartyVendorConfigVendorEnum `json:"vendor"`
+	PlacementID *string                           `json:"placementId,omitempty"`
+	Vendor      *ThirdPartyVendorConfigVendorEnum `json:"vendor,omitempty"`
 }

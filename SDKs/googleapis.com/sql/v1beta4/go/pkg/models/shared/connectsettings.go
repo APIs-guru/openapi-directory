@@ -41,10 +41,10 @@ const (
 )
 
 type ConnectSettings struct {
-	BackendType     *ConnectSettingsBackendTypeEnum     `json:"backendType"`
-	DatabaseVersion *ConnectSettingsDatabaseVersionEnum `json:"databaseVersion"`
-	IPAddresses     []IPMapping                         `json:"ipAddresses"`
-	Kind            *string                             `json:"kind"`
-	Region          *string                             `json:"region"`
-	ServerCaCert    *SslCert                            `json:"serverCaCert"`
+	BackendType     *ConnectSettingsBackendTypeEnum     `json:"backendType,omitempty"`
+	DatabaseVersion *ConnectSettingsDatabaseVersionEnum `json:"databaseVersion,omitempty"`
+	IPAddresses     []IPMapping                         `json:"ipAddresses,omitempty"`
+	Kind            *string                             `json:"kind,omitempty"`
+	Region          *string                             `json:"region,omitempty"`
+	ServerCaCert    *SslCert                            `json:"serverCaCert,omitempty"`
 }

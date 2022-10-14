@@ -23,18 +23,18 @@ const (
 )
 
 type GoogleChromeManagementV1NetworkStatusReport struct {
-	ConnectionState            *GoogleChromeManagementV1NetworkStatusReportConnectionStateEnum `json:"connectionState"`
-	ConnectionType             *GoogleChromeManagementV1NetworkStatusReportConnectionTypeEnum  `json:"connectionType"`
-	EncryptionOn               *bool                                                           `json:"encryptionOn"`
-	GatewayIPAddress           *string                                                         `json:"gatewayIpAddress"`
-	GUID                       *string                                                         `json:"guid"`
-	LanIPAddress               *string                                                         `json:"lanIpAddress"`
-	ReceivingBitRateMbps       *string                                                         `json:"receivingBitRateMbps"`
-	ReportTime                 *string                                                         `json:"reportTime"`
-	SampleFrequency            *string                                                         `json:"sampleFrequency"`
-	SignalStrengthDbm          *int32                                                          `json:"signalStrengthDbm"`
-	TransmissionBitRateMbps    *string                                                         `json:"transmissionBitRateMbps"`
-	TransmissionPowerDbm       *int32                                                          `json:"transmissionPowerDbm"`
-	WifiLinkQuality            *string                                                         `json:"wifiLinkQuality"`
-	WifiPowerManagementEnabled *bool                                                           `json:"wifiPowerManagementEnabled"`
+	ConnectionState            *GoogleChromeManagementV1NetworkStatusReportConnectionStateEnum `json:"connectionState,omitempty"`
+	ConnectionType             *GoogleChromeManagementV1NetworkStatusReportConnectionTypeEnum  `json:"connectionType,omitempty"`
+	EncryptionOn               *bool                                                           `json:"encryptionOn,omitempty"`
+	GatewayIPAddress           *string                                                         `json:"gatewayIpAddress,omitempty"`
+	GUID                       *string                                                         `json:"guid,omitempty"`
+	LanIPAddress               *string                                                         `json:"lanIpAddress,omitempty"`
+	ReceivingBitRateMbps       *string                                                         `json:"receivingBitRateMbps,omitempty"`
+	ReportTime                 *string                                                         `json:"reportTime,omitempty"`
+	SampleFrequency            *string                                                         `json:"sampleFrequency,omitempty"`
+	SignalStrengthDbm          *int32                                                          `json:"signalStrengthDbm,omitempty"`
+	TransmissionBitRateMbps    *string                                                         `json:"transmissionBitRateMbps,omitempty"`
+	TransmissionPowerDbm       *int32                                                          `json:"transmissionPowerDbm,omitempty"`
+	WifiLinkQuality            *string                                                         `json:"wifiLinkQuality,omitempty"`
+	WifiPowerManagementEnabled *bool                                                           `json:"wifiPowerManagementEnabled,omitempty"`
 }

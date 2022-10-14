@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleCloudOrgpolicyV2Constraint struct {
-	BooleanConstraint map[string]interface{}                                 `json:"booleanConstraint"`
-	ConstraintDefault *GoogleCloudOrgpolicyV2ConstraintConstraintDefaultEnum `json:"constraintDefault"`
-	Description       *string                                                `json:"description"`
-	DisplayName       *string                                                `json:"displayName"`
-	ListConstraint    *GoogleCloudOrgpolicyV2ConstraintListConstraint        `json:"listConstraint"`
-	Name              *string                                                `json:"name"`
+	BooleanConstraint map[string]interface{}                                 `json:"booleanConstraint,omitempty"`
+	ConstraintDefault *GoogleCloudOrgpolicyV2ConstraintConstraintDefaultEnum `json:"constraintDefault,omitempty"`
+	Description       *string                                                `json:"description,omitempty"`
+	DisplayName       *string                                                `json:"displayName,omitempty"`
+	ListConstraint    *GoogleCloudOrgpolicyV2ConstraintListConstraint        `json:"listConstraint,omitempty"`
+	Name              *string                                                `json:"name,omitempty"`
 }

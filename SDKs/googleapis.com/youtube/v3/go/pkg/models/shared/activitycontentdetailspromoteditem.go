@@ -8,14 +8,14 @@ const (
 )
 
 type ActivityContentDetailsPromotedItem struct {
-	AdTag               *string                                        `json:"adTag"`
-	ClickTrackingURL    *string                                        `json:"clickTrackingUrl"`
-	CreativeViewURL     *string                                        `json:"creativeViewUrl"`
-	CtaType             *ActivityContentDetailsPromotedItemCtaTypeEnum `json:"ctaType"`
-	CustomCtaButtonText *string                                        `json:"customCtaButtonText"`
-	DescriptionText     *string                                        `json:"descriptionText"`
-	DestinationURL      *string                                        `json:"destinationUrl"`
-	ForecastingURL      []string                                       `json:"forecastingUrl"`
-	ImpressionURL       []string                                       `json:"impressionUrl"`
-	VideoID             *string                                        `json:"videoId"`
+	AdTag               *string                                        `json:"adTag,omitempty"`
+	ClickTrackingURL    *string                                        `json:"clickTrackingUrl,omitempty"`
+	CreativeViewURL     *string                                        `json:"creativeViewUrl,omitempty"`
+	CtaType             *ActivityContentDetailsPromotedItemCtaTypeEnum `json:"ctaType,omitempty"`
+	CustomCtaButtonText *string                                        `json:"customCtaButtonText,omitempty"`
+	DescriptionText     *string                                        `json:"descriptionText,omitempty"`
+	DestinationURL      *string                                        `json:"destinationUrl,omitempty"`
+	ForecastingURL      []string                                       `json:"forecastingUrl,omitempty"`
+	ImpressionURL       []string                                       `json:"impressionUrl,omitempty"`
+	VideoID             *string                                        `json:"videoId,omitempty"`
 }

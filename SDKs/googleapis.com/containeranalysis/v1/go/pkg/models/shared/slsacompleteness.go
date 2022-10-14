@@ -1,7 +1,7 @@
 package shared
 
 type SlsaCompleteness struct {
-	Arguments   *bool `json:"arguments"`
-	Environment *bool `json:"environment"`
-	Materials   *bool `json:"materials"`
+	Arguments   *bool `json:"arguments,omitempty"`
+	Environment *bool `json:"environment,omitempty"`
+	Materials   *bool `json:"materials,omitempty"`
 }

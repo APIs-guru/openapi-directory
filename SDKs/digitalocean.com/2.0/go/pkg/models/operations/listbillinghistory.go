@@ -21,26 +21,26 @@ const (
 )
 
 type ListBillingHistory200ApplicationJSONBillingHistory struct {
-	Amount      *string                                                     `json:"amount"`
-	Date        *time.Time                                                  `json:"date"`
-	Description *string                                                     `json:"description"`
-	InvoiceID   *string                                                     `json:"invoice_id"`
-	InvoiceUUID *string                                                     `json:"invoice_uuid"`
-	Type        *ListBillingHistory200ApplicationJSONBillingHistoryTypeEnum `json:"type"`
+	Amount      *string                                                     `json:"amount,omitempty"`
+	Date        *time.Time                                                  `json:"date,omitempty"`
+	Description *string                                                     `json:"description,omitempty"`
+	InvoiceID   *string                                                     `json:"invoice_id,omitempty"`
+	InvoiceUUID *string                                                     `json:"invoice_uuid,omitempty"`
+	Type        *ListBillingHistory200ApplicationJSONBillingHistoryTypeEnum `json:"type,omitempty"`
 }
 
 type ListBillingHistory200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListBillingHistory200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListBillingHistory200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListBillingHistory200ApplicationJSONMeta struct {
@@ -49,14 +49,14 @@ type ListBillingHistory200ApplicationJSONMeta struct {
 
 type ListBillingHistory200ApplicationJSON struct {
 	BillingHistory []ListBillingHistory200ApplicationJSONBillingHistory `json:"billing_history"`
-	Links          *ListBillingHistory200ApplicationJSONLinks           `json:"links"`
+	Links          *ListBillingHistory200ApplicationJSONLinks           `json:"links,omitempty"`
 	Meta           ListBillingHistory200ApplicationJSONMeta             `json:"meta"`
 }
 
 type ListBillingHistory401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListBillingHistoryResponse struct {

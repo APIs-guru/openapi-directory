@@ -5,9 +5,9 @@ type SetchargingscheduleRequest struct {
 }
 
 type Setchargingschedule201ApplicationJSON struct {
-	Command map[string]interface{} `json:"command"`
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
+	Command map[string]interface{} `json:"command,omitempty"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
 }
 
 type SetchargingscheduleResponse struct {

@@ -12,6 +12,6 @@ const (
 )
 
 type CisBenchmark struct {
-	ProfileLevel *int32                    `json:"profileLevel"`
-	Severity     *CisBenchmarkSeverityEnum `json:"severity"`
+	ProfileLevel *int32                    `json:"profileLevel,omitempty"`
+	Severity     *CisBenchmarkSeverityEnum `json:"severity,omitempty"`
 }

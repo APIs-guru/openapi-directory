@@ -21,9 +21,9 @@ const (
 )
 
 type Runtime struct {
-	DisplayName *string                 `json:"displayName"`
-	Environment *RuntimeEnvironmentEnum `json:"environment"`
-	Name        *string                 `json:"name"`
-	Stage       *RuntimeStageEnum       `json:"stage"`
-	Warnings    []string                `json:"warnings"`
+	DisplayName *string                 `json:"displayName,omitempty"`
+	Environment *RuntimeEnvironmentEnum `json:"environment,omitempty"`
+	Name        *string                 `json:"name,omitempty"`
+	Stage       *RuntimeStageEnum       `json:"stage,omitempty"`
+	Warnings    []string                `json:"warnings,omitempty"`
 }

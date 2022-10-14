@@ -1,6 +1,6 @@
 package shared
 
 type ListSearchApplicationsResponse struct {
-	NextPageToken      *string             `json:"nextPageToken"`
-	SearchApplications []SearchApplication `json:"searchApplications"`
+	NextPageToken      *string             `json:"nextPageToken,omitempty"`
+	SearchApplications []SearchApplication `json:"searchApplications,omitempty"`
 }

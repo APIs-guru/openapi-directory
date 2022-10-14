@@ -1,10 +1,10 @@
 package shared
 
 type SearchTargetingOptionsRequest struct {
-	AdvertiserID             *string                   `json:"advertiserId"`
-	BusinessChainSearchTerms *BusinessChainSearchTerms `json:"businessChainSearchTerms"`
-	GeoRegionSearchTerms     *GeoRegionSearchTerms     `json:"geoRegionSearchTerms"`
-	PageSize                 *int32                    `json:"pageSize"`
-	PageToken                *string                   `json:"pageToken"`
-	PoiSearchTerms           *PoiSearchTerms           `json:"poiSearchTerms"`
+	AdvertiserID             *string                   `json:"advertiserId,omitempty"`
+	BusinessChainSearchTerms *BusinessChainSearchTerms `json:"businessChainSearchTerms,omitempty"`
+	GeoRegionSearchTerms     *GeoRegionSearchTerms     `json:"geoRegionSearchTerms,omitempty"`
+	PageSize                 *int32                    `json:"pageSize,omitempty"`
+	PageToken                *string                   `json:"pageToken,omitempty"`
+	PoiSearchTerms           *PoiSearchTerms           `json:"poiSearchTerms,omitempty"`
 }

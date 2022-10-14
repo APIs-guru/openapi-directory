@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudChannelV1TransferableOffer struct {
-	Offer *GoogleCloudChannelV1Offer `json:"offer"`
+	Offer *GoogleCloudChannelV1Offer `json:"offer,omitempty"`
 }

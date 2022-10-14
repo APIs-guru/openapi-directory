@@ -11,11 +11,11 @@ const (
 )
 
 type PushItem struct {
-	ContentHash        *string           `json:"contentHash"`
-	MetadataHash       *string           `json:"metadataHash"`
-	Payload            *string           `json:"payload"`
-	Queue              *string           `json:"queue"`
-	RepositoryError    *RepositoryError  `json:"repositoryError"`
-	StructuredDataHash *string           `json:"structuredDataHash"`
-	Type               *PushItemTypeEnum `json:"type"`
+	ContentHash        *string           `json:"contentHash,omitempty"`
+	MetadataHash       *string           `json:"metadataHash,omitempty"`
+	Payload            *string           `json:"payload,omitempty"`
+	Queue              *string           `json:"queue,omitempty"`
+	RepositoryError    *RepositoryError  `json:"repositoryError,omitempty"`
+	StructuredDataHash *string           `json:"structuredDataHash,omitempty"`
+	Type               *PushItemTypeEnum `json:"type,omitempty"`
 }

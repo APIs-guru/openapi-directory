@@ -1,5 +1,5 @@
 package shared
 
 type BatchCreatePartitionResponse struct {
-	Errors []PartitionError `json:"Errors"`
+	Errors []PartitionError `json:"Errors,omitempty"`
 }

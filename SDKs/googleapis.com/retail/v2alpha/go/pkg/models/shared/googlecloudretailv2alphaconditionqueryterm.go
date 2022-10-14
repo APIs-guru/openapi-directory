@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudRetailV2alphaConditionQueryTerm struct {
-	FullMatch *bool   `json:"fullMatch"`
-	Value     *string `json:"value"`
+	FullMatch *bool   `json:"fullMatch,omitempty"`
+	Value     *string `json:"value,omitempty"`
 }

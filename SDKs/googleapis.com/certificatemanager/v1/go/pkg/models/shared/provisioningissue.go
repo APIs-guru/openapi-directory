@@ -9,6 +9,6 @@ const (
 )
 
 type ProvisioningIssue struct {
-	Details *string                      `json:"details"`
-	Reason  *ProvisioningIssueReasonEnum `json:"reason"`
+	Details *string                      `json:"details,omitempty"`
+	Reason  *ProvisioningIssueReasonEnum `json:"reason,omitempty"`
 }

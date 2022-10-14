@@ -1,9 +1,9 @@
 package shared
 
 type MemInfo struct {
-	CurrentLimitBytes *string `json:"currentLimitBytes"`
-	CurrentOoms       *string `json:"currentOoms"`
-	CurrentRssBytes   *string `json:"currentRssBytes"`
-	Timestamp         *string `json:"timestamp"`
-	TotalGbMs         *string `json:"totalGbMs"`
+	CurrentLimitBytes *string `json:"currentLimitBytes,omitempty"`
+	CurrentOoms       *string `json:"currentOoms,omitempty"`
+	CurrentRssBytes   *string `json:"currentRssBytes,omitempty"`
+	Timestamp         *string `json:"timestamp,omitempty"`
+	TotalGbMs         *string `json:"totalGbMs,omitempty"`
 }

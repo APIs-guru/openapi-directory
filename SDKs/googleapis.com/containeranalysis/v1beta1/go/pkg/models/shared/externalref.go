@@ -11,8 +11,8 @@ const (
 )
 
 type ExternalRef struct {
-	Category *ExternalRefCategoryEnum `json:"category"`
-	Comment  *string                  `json:"comment"`
-	Locator  *string                  `json:"locator"`
-	Type     *string                  `json:"type"`
+	Category *ExternalRefCategoryEnum `json:"category,omitempty"`
+	Comment  *string                  `json:"comment,omitempty"`
+	Locator  *string                  `json:"locator,omitempty"`
+	Type     *string                  `json:"type,omitempty"`
 }

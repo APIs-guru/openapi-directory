@@ -1,5 +1,5 @@
 package shared
 
 type GetInstanceResponse struct {
-	Instance *Instance `json:"Instance"`
+	Instance *Instance `json:"Instance,omitempty"`
 }

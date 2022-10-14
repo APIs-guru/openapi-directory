@@ -27,8 +27,8 @@ const (
 )
 
 type UpdateNetworkTrafficAnalysisRequestBody struct {
-	CustomPieChartItems []UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItems `json:"customPieChartItems"`
-	Mode                *UpdateNetworkTrafficAnalysisRequestBodyModeEnum             `json:"mode"`
+	CustomPieChartItems []UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItems `json:"customPieChartItems,omitempty"`
+	Mode                *UpdateNetworkTrafficAnalysisRequestBodyModeEnum             `json:"mode,omitempty"`
 }
 
 type UpdateNetworkTrafficAnalysisRequest struct {

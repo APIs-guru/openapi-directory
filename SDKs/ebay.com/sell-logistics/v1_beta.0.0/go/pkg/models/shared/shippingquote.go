@@ -1,13 +1,13 @@
 package shared
 
 type ShippingQuote struct {
-	CreationDate         *string               `json:"creationDate"`
-	ExpirationDate       *string               `json:"expirationDate"`
-	Orders               []Order               `json:"orders"`
-	PackageSpecification *PackageSpecification `json:"packageSpecification"`
-	Rates                []Rate                `json:"rates"`
-	ShipFrom             *Contact              `json:"shipFrom"`
-	ShipTo               *Contact              `json:"shipTo"`
-	ShippingQuoteID      *string               `json:"shippingQuoteId"`
-	Warnings             []Error               `json:"warnings"`
+	CreationDate         *string               `json:"creationDate,omitempty"`
+	ExpirationDate       *string               `json:"expirationDate,omitempty"`
+	Orders               []Order               `json:"orders,omitempty"`
+	PackageSpecification *PackageSpecification `json:"packageSpecification,omitempty"`
+	Rates                []Rate                `json:"rates,omitempty"`
+	ShipFrom             *Contact              `json:"shipFrom,omitempty"`
+	ShipTo               *Contact              `json:"shipTo,omitempty"`
+	ShippingQuoteID      *string               `json:"shippingQuoteId,omitempty"`
+	Warnings             []Error               `json:"warnings,omitempty"`
 }

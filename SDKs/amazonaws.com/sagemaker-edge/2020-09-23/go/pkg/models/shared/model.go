@@ -5,9 +5,9 @@ import (
 )
 
 type Model struct {
-	LatestInference  *time.Time   `json:"LatestInference"`
-	LatestSampleTime *time.Time   `json:"LatestSampleTime"`
-	ModelMetrics     []EdgeMetric `json:"ModelMetrics"`
-	ModelName        *string      `json:"ModelName"`
-	ModelVersion     *string      `json:"ModelVersion"`
+	LatestInference  *time.Time   `json:"LatestInference,omitempty"`
+	LatestSampleTime *time.Time   `json:"LatestSampleTime,omitempty"`
+	ModelMetrics     []EdgeMetric `json:"ModelMetrics,omitempty"`
+	ModelName        *string      `json:"ModelName,omitempty"`
+	ModelVersion     *string      `json:"ModelVersion,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type UpdatePasswordInfo struct {
-	CurrentPassword *string `json:"currentPassword"`
-	NewPassword     *string `json:"newPassword"`
+	CurrentPassword *string `json:"currentPassword,omitempty"`
+	NewPassword     *string `json:"newPassword,omitempty"`
 }

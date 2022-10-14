@@ -1,7 +1,7 @@
 package shared
 
 type ListHiTsForQualificationTypeResponse struct {
-	HiTs       []Hit   `json:"HITs"`
-	NextToken  *string `json:"NextToken"`
-	NumResults *int64  `json:"NumResults"`
+	HiTs       []Hit   `json:"HITs,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
+	NumResults *int64  `json:"NumResults,omitempty"`
 }

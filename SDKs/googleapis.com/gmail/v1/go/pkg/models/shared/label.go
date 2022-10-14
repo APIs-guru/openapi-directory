@@ -23,14 +23,14 @@ const (
 )
 
 type Label struct {
-	Color                 *LabelColor                     `json:"color"`
-	ID                    *string                         `json:"id"`
-	LabelListVisibility   *LabelLabelListVisibilityEnum   `json:"labelListVisibility"`
-	MessageListVisibility *LabelMessageListVisibilityEnum `json:"messageListVisibility"`
-	MessagesTotal         *int32                          `json:"messagesTotal"`
-	MessagesUnread        *int32                          `json:"messagesUnread"`
-	Name                  *string                         `json:"name"`
-	ThreadsTotal          *int32                          `json:"threadsTotal"`
-	ThreadsUnread         *int32                          `json:"threadsUnread"`
-	Type                  *LabelTypeEnum                  `json:"type"`
+	Color                 *LabelColor                     `json:"color,omitempty"`
+	ID                    *string                         `json:"id,omitempty"`
+	LabelListVisibility   *LabelLabelListVisibilityEnum   `json:"labelListVisibility,omitempty"`
+	MessageListVisibility *LabelMessageListVisibilityEnum `json:"messageListVisibility,omitempty"`
+	MessagesTotal         *int32                          `json:"messagesTotal,omitempty"`
+	MessagesUnread        *int32                          `json:"messagesUnread,omitempty"`
+	Name                  *string                         `json:"name,omitempty"`
+	ThreadsTotal          *int32                          `json:"threadsTotal,omitempty"`
+	ThreadsUnread         *int32                          `json:"threadsUnread,omitempty"`
+	Type                  *LabelTypeEnum                  `json:"type,omitempty"`
 }

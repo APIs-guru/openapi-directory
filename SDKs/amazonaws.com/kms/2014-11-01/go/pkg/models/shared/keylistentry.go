@@ -1,6 +1,6 @@
 package shared
 
 type KeyListEntry struct {
-	KeyArn *string `json:"KeyArn"`
-	KeyID  *string `json:"KeyId"`
+	KeyArn *string `json:"KeyArn,omitempty"`
+	KeyID  *string `json:"KeyId,omitempty"`
 }

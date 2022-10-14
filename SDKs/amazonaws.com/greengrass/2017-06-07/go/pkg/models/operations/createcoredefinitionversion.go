@@ -20,7 +20,7 @@ type CreateCoreDefinitionVersionHeaders struct {
 }
 
 type CreateCoreDefinitionVersionRequestBody struct {
-	Cores []shared.Core `json:"Cores"`
+	Cores []shared.Core `json:"Cores,omitempty"`
 }
 
 type CreateCoreDefinitionVersionRequest struct {

@@ -1,8 +1,8 @@
 package shared
 
 type GcRule struct {
-	Intersection   *Intersection `json:"intersection"`
-	MaxAge         *string       `json:"maxAge"`
-	MaxNumVersions *int32        `json:"maxNumVersions"`
-	Union          *Union        `json:"union"`
+	Intersection   *Intersection `json:"intersection,omitempty"`
+	MaxAge         *string       `json:"maxAge,omitempty"`
+	MaxNumVersions *int32        `json:"maxNumVersions,omitempty"`
+	Union          *Union        `json:"union,omitempty"`
 }

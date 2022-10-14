@@ -15,8 +15,8 @@ type GetGroupHeaders struct {
 }
 
 type GetGroupRequestBody struct {
-	GroupArn  *string `json:"GroupARN"`
-	GroupName *string `json:"GroupName"`
+	GroupArn  *string `json:"GroupARN,omitempty"`
+	GroupName *string `json:"GroupName,omitempty"`
 }
 
 type GetGroupRequest struct {

@@ -18,7 +18,7 @@ type CreateUsageChargeRequestBodyUsageCharge struct {
 }
 
 type CreateUsageChargeRequestBody struct {
-	UsageCharge *CreateUsageChargeRequestBodyUsageCharge `json:"usage_charge"`
+	UsageCharge *CreateUsageChargeRequestBodyUsageCharge `json:"usage_charge,omitempty"`
 }
 
 type CreateUsageChargeSecurity struct {
@@ -33,15 +33,15 @@ type CreateUsageChargeRequest struct {
 }
 
 type CreateUsageCharge201ApplicationJSONUsageCharge struct {
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
-	MakeDate    *int64  `json:"make_date"`
-	Point       *int64  `json:"point"`
-	UpdateDate  *int64  `json:"update_date"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	MakeDate    *int64  `json:"make_date,omitempty"`
+	Point       *int64  `json:"point,omitempty"`
+	UpdateDate  *int64  `json:"update_date,omitempty"`
 }
 
 type CreateUsageCharge201ApplicationJSON struct {
-	UsageCharge *CreateUsageCharge201ApplicationJSONUsageCharge `json:"usage_charge"`
+	UsageCharge *CreateUsageCharge201ApplicationJSONUsageCharge `json:"usage_charge,omitempty"`
 }
 
 type CreateUsageChargeResponse struct {

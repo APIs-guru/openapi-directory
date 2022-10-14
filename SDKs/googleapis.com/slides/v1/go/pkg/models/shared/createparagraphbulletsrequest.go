@@ -21,8 +21,8 @@ const (
 )
 
 type CreateParagraphBulletsRequest struct {
-	BulletPreset *CreateParagraphBulletsRequestBulletPresetEnum `json:"bulletPreset"`
-	CellLocation *TableCellLocation                             `json:"cellLocation"`
-	ObjectID     *string                                        `json:"objectId"`
-	TextRange    *Range                                         `json:"textRange"`
+	BulletPreset *CreateParagraphBulletsRequestBulletPresetEnum `json:"bulletPreset,omitempty"`
+	CellLocation *TableCellLocation                             `json:"cellLocation,omitempty"`
+	ObjectID     *string                                        `json:"objectId,omitempty"`
+	TextRange    *Range                                         `json:"textRange,omitempty"`
 }

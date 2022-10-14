@@ -1,11 +1,11 @@
 package shared
 
 type PoolResult struct {
-	DomainUserCredentials *DomainUserCredentials    `json:"domainUserCredentials"`
-	HotPoolSettings       *HotPoolSettings          `json:"hotPoolSettings"`
+	DomainUserCredentials *DomainUserCredentials    `json:"domainUserCredentials,omitempty"`
+	HotPoolSettings       *HotPoolSettings          `json:"hotPoolSettings,omitempty"`
 	PoolGroupName         string                    `json:"poolGroupName"`
-	ProvisioningStatus    *ProvisioningStatusResult `json:"provisioningStatus"`
-	Tags                  map[string]string         `json:"tags"`
-	UserGroupName         *string                   `json:"userGroupName"`
+	ProvisioningStatus    *ProvisioningStatusResult `json:"provisioningStatus,omitempty"`
+	Tags                  map[string]string         `json:"tags,omitempty"`
+	UserGroupName         *string                   `json:"userGroupName,omitempty"`
 	VMSpecs               VMSpecs                   `json:"vmSpecs"`
 }

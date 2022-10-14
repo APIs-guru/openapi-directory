@@ -1,6 +1,6 @@
 package shared
 
 type TCPRouteRouteRule struct {
-	Action  *TCPRouteRouteAction `json:"action"`
-	Matches []TCPRouteRouteMatch `json:"matches"`
+	Action  *TCPRouteRouteAction `json:"action,omitempty"`
+	Matches []TCPRouteRouteMatch `json:"matches,omitempty"`
 }

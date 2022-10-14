@@ -20,7 +20,7 @@ type RemoveAttributesHeaders struct {
 }
 
 type RemoveAttributesRequestBodyUpdateAttributesRequest struct {
-	Blacklist []string `json:"Blacklist"`
+	Blacklist []string `json:"Blacklist,omitempty"`
 }
 
 type RemoveAttributesRequestBody struct {

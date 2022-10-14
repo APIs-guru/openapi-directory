@@ -16,13 +16,13 @@ type CreateConnectorDefinitionHeaders struct {
 }
 
 type CreateConnectorDefinitionRequestBodyInitialVersion struct {
-	Connectors []shared.Connector `json:"Connectors"`
+	Connectors []shared.Connector `json:"Connectors,omitempty"`
 }
 
 type CreateConnectorDefinitionRequestBody struct {
-	InitialVersion *CreateConnectorDefinitionRequestBodyInitialVersion `json:"InitialVersion"`
-	Name           *string                                             `json:"Name"`
-	Tags           map[string]string                                   `json:"tags"`
+	InitialVersion *CreateConnectorDefinitionRequestBodyInitialVersion `json:"InitialVersion,omitempty"`
+	Name           *string                                             `json:"Name,omitempty"`
+	Tags           map[string]string                                   `json:"tags,omitempty"`
 }
 
 type CreateConnectorDefinitionRequest struct {

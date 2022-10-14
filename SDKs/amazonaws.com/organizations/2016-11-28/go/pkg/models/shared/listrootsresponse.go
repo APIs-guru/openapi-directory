@@ -1,6 +1,6 @@
 package shared
 
 type ListRootsResponse struct {
-	NextToken *string `json:"NextToken"`
-	Roots     []Root  `json:"Roots"`
+	NextToken *string `json:"NextToken,omitempty"`
+	Roots     []Root  `json:"Roots,omitempty"`
 }

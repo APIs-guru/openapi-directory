@@ -9,6 +9,6 @@ const (
 )
 
 type PrepaidBasePlanType struct {
-	BillingPeriodDuration *string                               `json:"billingPeriodDuration"`
-	TimeExtension         *PrepaidBasePlanTypeTimeExtensionEnum `json:"timeExtension"`
+	BillingPeriodDuration *string                               `json:"billingPeriodDuration,omitempty"`
+	TimeExtension         *PrepaidBasePlanTypeTimeExtensionEnum `json:"timeExtension,omitempty"`
 }

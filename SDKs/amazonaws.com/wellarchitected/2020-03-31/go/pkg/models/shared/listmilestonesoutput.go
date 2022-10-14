@@ -1,7 +1,7 @@
 package shared
 
 type ListMilestonesOutput struct {
-	MilestoneSummaries []MilestoneSummary `json:"MilestoneSummaries"`
-	NextToken          *string            `json:"NextToken"`
-	WorkloadID         *string            `json:"WorkloadId"`
+	MilestoneSummaries []MilestoneSummary `json:"MilestoneSummaries,omitempty"`
+	NextToken          *string            `json:"NextToken,omitempty"`
+	WorkloadID         *string            `json:"WorkloadId,omitempty"`
 }

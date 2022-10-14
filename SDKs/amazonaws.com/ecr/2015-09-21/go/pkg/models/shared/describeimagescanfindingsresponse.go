@@ -1,10 +1,10 @@
 package shared
 
 type DescribeImageScanFindingsResponse struct {
-	ImageID           *ImageIdentifier   `json:"imageId"`
-	ImageScanFindings *ImageScanFindings `json:"imageScanFindings"`
-	ImageScanStatus   *ImageScanStatus   `json:"imageScanStatus"`
-	NextToken         *string            `json:"nextToken"`
-	RegistryID        *string            `json:"registryId"`
-	RepositoryName    *string            `json:"repositoryName"`
+	ImageID           *ImageIdentifier   `json:"imageId,omitempty"`
+	ImageScanFindings *ImageScanFindings `json:"imageScanFindings,omitempty"`
+	ImageScanStatus   *ImageScanStatus   `json:"imageScanStatus,omitempty"`
+	NextToken         *string            `json:"nextToken,omitempty"`
+	RegistryID        *string            `json:"registryId,omitempty"`
+	RepositoryName    *string            `json:"repositoryName,omitempty"`
 }

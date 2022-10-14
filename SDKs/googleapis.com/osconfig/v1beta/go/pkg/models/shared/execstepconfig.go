@@ -10,8 +10,8 @@ const (
 )
 
 type ExecStepConfig struct {
-	AllowedSuccessCodes []int32                        `json:"allowedSuccessCodes"`
-	GcsObject           *GcsObject                     `json:"gcsObject"`
-	Interpreter         *ExecStepConfigInterpreterEnum `json:"interpreter"`
-	LocalPath           *string                        `json:"localPath"`
+	AllowedSuccessCodes []int32                        `json:"allowedSuccessCodes,omitempty"`
+	GcsObject           *GcsObject                     `json:"gcsObject,omitempty"`
+	Interpreter         *ExecStepConfigInterpreterEnum `json:"interpreter,omitempty"`
+	LocalPath           *string                        `json:"localPath,omitempty"`
 }

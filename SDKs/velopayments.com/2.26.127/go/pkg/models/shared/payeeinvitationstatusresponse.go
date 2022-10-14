@@ -13,7 +13,7 @@ const (
 )
 
 type PayeeInvitationStatusResponse struct {
-	GracePeriodEndDate *time.Time                                        `json:"gracePeriodEndDate"`
+	GracePeriodEndDate *time.Time                                        `json:"gracePeriodEndDate,omitempty"`
 	InvitationStatus   PayeeInvitationStatusResponseInvitationStatusEnum `json:"invitationStatus"`
 	PayeeID            string                                            `json:"payeeId"`
 }

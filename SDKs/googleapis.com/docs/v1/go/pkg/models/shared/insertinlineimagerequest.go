@@ -1,8 +1,8 @@
 package shared
 
 type InsertInlineImageRequest struct {
-	EndOfSegmentLocation *EndOfSegmentLocation `json:"endOfSegmentLocation"`
-	Location             *Location             `json:"location"`
-	ObjectSize           *Size                 `json:"objectSize"`
-	URI                  *string               `json:"uri"`
+	EndOfSegmentLocation *EndOfSegmentLocation `json:"endOfSegmentLocation,omitempty"`
+	Location             *Location             `json:"location,omitempty"`
+	ObjectSize           *Size                 `json:"objectSize,omitempty"`
+	URI                  *string               `json:"uri,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CreateRoleRequest struct {
-	Role   *Role   `json:"role"`
-	RoleID *string `json:"roleId"`
+	Role   *Role   `json:"role,omitempty"`
+	RoleID *string `json:"roleId,omitempty"`
 }

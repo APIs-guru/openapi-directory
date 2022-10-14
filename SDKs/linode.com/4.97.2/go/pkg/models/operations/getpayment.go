@@ -27,7 +27,7 @@ type GetPaymentRequest struct {
 }
 
 type GetPaymentDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetPaymentResponse struct {

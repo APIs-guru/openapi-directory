@@ -1,5 +1,5 @@
 package shared
 
 type DeleteDirectoryResult struct {
-	DirectoryID *string `json:"DirectoryId"`
+	DirectoryID *string `json:"DirectoryId,omitempty"`
 }

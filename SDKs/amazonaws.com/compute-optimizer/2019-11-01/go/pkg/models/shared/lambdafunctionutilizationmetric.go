@@ -1,7 +1,7 @@
 package shared
 
 type LambdaFunctionUtilizationMetric struct {
-	Name      *LambdaFunctionMetricNameEnum      `json:"name"`
-	Statistic *LambdaFunctionMetricStatisticEnum `json:"statistic"`
-	Value     *float64                           `json:"value"`
+	Name      *LambdaFunctionMetricNameEnum      `json:"name,omitempty"`
+	Statistic *LambdaFunctionMetricStatisticEnum `json:"statistic,omitempty"`
+	Value     *float64                           `json:"value,omitempty"`
 }

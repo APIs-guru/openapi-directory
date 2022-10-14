@@ -1,5 +1,5 @@
 package shared
 
 type SearchChainsResponse struct {
-	Chains []Chain `json:"chains"`
+	Chains []Chain `json:"chains,omitempty"`
 }

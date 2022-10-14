@@ -10,9 +10,9 @@ const (
 )
 
 type ConfigChange struct {
-	Advices    []Advice                    `json:"advices"`
-	ChangeType *ConfigChangeChangeTypeEnum `json:"changeType"`
-	Element    *string                     `json:"element"`
-	NewValue   *string                     `json:"newValue"`
-	OldValue   *string                     `json:"oldValue"`
+	Advices    []Advice                    `json:"advices,omitempty"`
+	ChangeType *ConfigChangeChangeTypeEnum `json:"changeType,omitempty"`
+	Element    *string                     `json:"element,omitempty"`
+	NewValue   *string                     `json:"newValue,omitempty"`
+	OldValue   *string                     `json:"oldValue,omitempty"`
 }

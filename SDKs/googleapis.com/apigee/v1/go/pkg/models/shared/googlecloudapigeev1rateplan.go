@@ -43,23 +43,23 @@ const (
 )
 
 type GoogleCloudApigeeV1RatePlan struct {
-	Apiproduct              *string                                                `json:"apiproduct"`
-	BillingPeriod           *GoogleCloudApigeeV1RatePlanBillingPeriodEnum          `json:"billingPeriod"`
-	ConsumptionPricingRates []GoogleCloudApigeeV1RateRange                         `json:"consumptionPricingRates"`
-	ConsumptionPricingType  *GoogleCloudApigeeV1RatePlanConsumptionPricingTypeEnum `json:"consumptionPricingType"`
-	CreatedAt               *string                                                `json:"createdAt"`
-	CurrencyCode            *string                                                `json:"currencyCode"`
-	Description             *string                                                `json:"description"`
-	DisplayName             *string                                                `json:"displayName"`
-	EndTime                 *string                                                `json:"endTime"`
-	FixedFeeFrequency       *int32                                                 `json:"fixedFeeFrequency"`
-	FixedRecurringFee       *GoogleTypeMoney                                       `json:"fixedRecurringFee"`
-	LastModifiedAt          *string                                                `json:"lastModifiedAt"`
-	Name                    *string                                                `json:"name"`
-	PaymentFundingModel     *GoogleCloudApigeeV1RatePlanPaymentFundingModelEnum    `json:"paymentFundingModel"`
-	RevenueShareRates       []GoogleCloudApigeeV1RevenueShareRange                 `json:"revenueShareRates"`
-	RevenueShareType        *GoogleCloudApigeeV1RatePlanRevenueShareTypeEnum       `json:"revenueShareType"`
-	SetupFee                *GoogleTypeMoney                                       `json:"setupFee"`
-	StartTime               *string                                                `json:"startTime"`
-	State                   *GoogleCloudApigeeV1RatePlanStateEnum                  `json:"state"`
+	Apiproduct              *string                                                `json:"apiproduct,omitempty"`
+	BillingPeriod           *GoogleCloudApigeeV1RatePlanBillingPeriodEnum          `json:"billingPeriod,omitempty"`
+	ConsumptionPricingRates []GoogleCloudApigeeV1RateRange                         `json:"consumptionPricingRates,omitempty"`
+	ConsumptionPricingType  *GoogleCloudApigeeV1RatePlanConsumptionPricingTypeEnum `json:"consumptionPricingType,omitempty"`
+	CreatedAt               *string                                                `json:"createdAt,omitempty"`
+	CurrencyCode            *string                                                `json:"currencyCode,omitempty"`
+	Description             *string                                                `json:"description,omitempty"`
+	DisplayName             *string                                                `json:"displayName,omitempty"`
+	EndTime                 *string                                                `json:"endTime,omitempty"`
+	FixedFeeFrequency       *int32                                                 `json:"fixedFeeFrequency,omitempty"`
+	FixedRecurringFee       *GoogleTypeMoney                                       `json:"fixedRecurringFee,omitempty"`
+	LastModifiedAt          *string                                                `json:"lastModifiedAt,omitempty"`
+	Name                    *string                                                `json:"name,omitempty"`
+	PaymentFundingModel     *GoogleCloudApigeeV1RatePlanPaymentFundingModelEnum    `json:"paymentFundingModel,omitempty"`
+	RevenueShareRates       []GoogleCloudApigeeV1RevenueShareRange                 `json:"revenueShareRates,omitempty"`
+	RevenueShareType        *GoogleCloudApigeeV1RatePlanRevenueShareTypeEnum       `json:"revenueShareType,omitempty"`
+	SetupFee                *GoogleTypeMoney                                       `json:"setupFee,omitempty"`
+	StartTime               *string                                                `json:"startTime,omitempty"`
+	State                   *GoogleCloudApigeeV1RatePlanStateEnum                  `json:"state,omitempty"`
 }

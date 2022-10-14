@@ -22,7 +22,7 @@ type GetProjectsForWorkspaceRequest struct {
 }
 
 type GetProjectsForWorkspace200ApplicationJSON struct {
-	Data []shared.ProjectCompact `json:"data"`
+	Data []shared.ProjectCompact `json:"data,omitempty"`
 }
 
 type GetProjectsForWorkspaceResponse struct {

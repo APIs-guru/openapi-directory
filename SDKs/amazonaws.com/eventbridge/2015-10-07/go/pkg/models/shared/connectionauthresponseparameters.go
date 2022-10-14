@@ -1,8 +1,8 @@
 package shared
 
 type ConnectionAuthResponseParameters struct {
-	APIKeyAuthParameters     *ConnectionAPIKeyAuthResponseParameters `json:"ApiKeyAuthParameters"`
-	BasicAuthParameters      *ConnectionBasicAuthResponseParameters  `json:"BasicAuthParameters"`
-	InvocationHTTPParameters *ConnectionHTTPParameters               `json:"InvocationHttpParameters"`
-	OAuthParameters          *ConnectionOAuthResponseParameters      `json:"OAuthParameters"`
+	APIKeyAuthParameters     *ConnectionAPIKeyAuthResponseParameters `json:"ApiKeyAuthParameters,omitempty"`
+	BasicAuthParameters      *ConnectionBasicAuthResponseParameters  `json:"BasicAuthParameters,omitempty"`
+	InvocationHTTPParameters *ConnectionHTTPParameters               `json:"InvocationHttpParameters,omitempty"`
+	OAuthParameters          *ConnectionOAuthResponseParameters      `json:"OAuthParameters,omitempty"`
 }

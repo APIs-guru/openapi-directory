@@ -12,11 +12,11 @@ const (
 )
 
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool struct {
-	Autoscale    *GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale           `json:"autoscale"`
-	Channel      *string                                                            `json:"channel"`
-	HostOs       *string                                                            `json:"hostOs"`
-	Name         *string                                                            `json:"name"`
-	State        *GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolStateEnum `json:"state"`
-	WorkerConfig *GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig        `json:"workerConfig"`
-	WorkerCount  *string                                                            `json:"workerCount"`
+	Autoscale    *GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale           `json:"autoscale,omitempty"`
+	Channel      *string                                                            `json:"channel,omitempty"`
+	HostOs       *string                                                            `json:"hostOs,omitempty"`
+	Name         *string                                                            `json:"name,omitempty"`
+	State        *GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolStateEnum `json:"state,omitempty"`
+	WorkerConfig *GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig        `json:"workerConfig,omitempty"`
+	WorkerCount  *string                                                            `json:"workerCount,omitempty"`
 }

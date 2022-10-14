@@ -18,12 +18,12 @@ const (
 )
 
 type GetIosPostInstallAttributionRequest struct {
-	AppInstallationTime    *string                                                 `json:"appInstallationTime"`
-	BundleID               *string                                                 `json:"bundleId"`
-	Device                 *DeviceInfo                                             `json:"device"`
-	IosVersion             *string                                                 `json:"iosVersion"`
-	RetrievalMethod        *GetIosPostInstallAttributionRequestRetrievalMethodEnum `json:"retrievalMethod"`
-	SdkVersion             *string                                                 `json:"sdkVersion"`
-	UniqueMatchLinkToCheck *string                                                 `json:"uniqueMatchLinkToCheck"`
-	VisualStyle            *GetIosPostInstallAttributionRequestVisualStyleEnum     `json:"visualStyle"`
+	AppInstallationTime    *string                                                 `json:"appInstallationTime,omitempty"`
+	BundleID               *string                                                 `json:"bundleId,omitempty"`
+	Device                 *DeviceInfo                                             `json:"device,omitempty"`
+	IosVersion             *string                                                 `json:"iosVersion,omitempty"`
+	RetrievalMethod        *GetIosPostInstallAttributionRequestRetrievalMethodEnum `json:"retrievalMethod,omitempty"`
+	SdkVersion             *string                                                 `json:"sdkVersion,omitempty"`
+	UniqueMatchLinkToCheck *string                                                 `json:"uniqueMatchLinkToCheck,omitempty"`
+	VisualStyle            *GetIosPostInstallAttributionRequestVisualStyleEnum     `json:"visualStyle,omitempty"`
 }

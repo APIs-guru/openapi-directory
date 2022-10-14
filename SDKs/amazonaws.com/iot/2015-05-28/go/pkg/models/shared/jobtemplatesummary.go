@@ -5,8 +5,8 @@ import (
 )
 
 type JobTemplateSummary struct {
-	CreatedAt      *time.Time `json:"createdAt"`
-	Description    *string    `json:"description"`
-	JobTemplateArn *string    `json:"jobTemplateArn"`
-	JobTemplateID  *string    `json:"jobTemplateId"`
+	CreatedAt      *time.Time `json:"createdAt,omitempty"`
+	Description    *string    `json:"description,omitempty"`
+	JobTemplateArn *string    `json:"jobTemplateArn,omitempty"`
+	JobTemplateID  *string    `json:"jobTemplateId,omitempty"`
 }

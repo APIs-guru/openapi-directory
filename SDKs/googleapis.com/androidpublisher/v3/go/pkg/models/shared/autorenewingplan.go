@@ -1,5 +1,5 @@
 package shared
 
 type AutoRenewingPlan struct {
-	AutoRenewEnabled *bool `json:"autoRenewEnabled"`
+	AutoRenewEnabled *bool `json:"autoRenewEnabled,omitempty"`
 }

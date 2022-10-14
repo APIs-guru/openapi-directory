@@ -16,9 +16,9 @@ type CreateTypedLinkFacetHeaders struct {
 }
 
 type CreateTypedLinkFacetRequestBodyFacet struct {
-	Attributes             []shared.TypedLinkAttributeDefinition `json:"Attributes"`
-	IdentityAttributeOrder []string                              `json:"IdentityAttributeOrder"`
-	Name                   *string                               `json:"Name"`
+	Attributes             []shared.TypedLinkAttributeDefinition `json:"Attributes,omitempty"`
+	IdentityAttributeOrder []string                              `json:"IdentityAttributeOrder,omitempty"`
+	Name                   *string                               `json:"Name,omitempty"`
 }
 
 type CreateTypedLinkFacetRequestBody struct {

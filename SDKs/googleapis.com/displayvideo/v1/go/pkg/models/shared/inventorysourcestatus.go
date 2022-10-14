@@ -31,9 +31,9 @@ const (
 )
 
 type InventorySourceStatus struct {
-	ConfigStatus      *InventorySourceStatusConfigStatusEnum `json:"configStatus"`
-	EntityPauseReason *string                                `json:"entityPauseReason"`
-	EntityStatus      *InventorySourceStatusEntityStatusEnum `json:"entityStatus"`
-	SellerPauseReason *string                                `json:"sellerPauseReason"`
-	SellerStatus      *InventorySourceStatusSellerStatusEnum `json:"sellerStatus"`
+	ConfigStatus      *InventorySourceStatusConfigStatusEnum `json:"configStatus,omitempty"`
+	EntityPauseReason *string                                `json:"entityPauseReason,omitempty"`
+	EntityStatus      *InventorySourceStatusEntityStatusEnum `json:"entityStatus,omitempty"`
+	SellerPauseReason *string                                `json:"sellerPauseReason,omitempty"`
+	SellerStatus      *InventorySourceStatusSellerStatusEnum `json:"sellerStatus,omitempty"`
 }

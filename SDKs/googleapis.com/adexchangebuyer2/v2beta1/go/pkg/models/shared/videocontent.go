@@ -1,6 +1,6 @@
 package shared
 
 type VideoContent struct {
-	VideoURL     *string `json:"videoUrl"`
-	VideoVastXML *string `json:"videoVastXml"`
+	VideoURL     *string `json:"videoUrl,omitempty"`
+	VideoVastXML *string `json:"videoVastXml,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type FindingsReportSummary struct {
-	ID                    *string    `json:"id"`
-	ProfileEndTime        *time.Time `json:"profileEndTime"`
-	ProfileStartTime      *time.Time `json:"profileStartTime"`
-	ProfilingGroupName    *string    `json:"profilingGroupName"`
-	TotalNumberOfFindings *int64     `json:"totalNumberOfFindings"`
+	ID                    *string    `json:"id,omitempty"`
+	ProfileEndTime        *time.Time `json:"profileEndTime,omitempty"`
+	ProfileStartTime      *time.Time `json:"profileStartTime,omitempty"`
+	ProfilingGroupName    *string    `json:"profilingGroupName,omitempty"`
+	TotalNumberOfFindings *int64     `json:"totalNumberOfFindings,omitempty"`
 }

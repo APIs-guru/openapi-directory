@@ -19,7 +19,7 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaTaskExecutionDetails struct {
-	TaskAttemptStats   []GoogleCloudIntegrationsV1alphaAttemptStats                              `json:"taskAttemptStats"`
-	TaskExecutionState *GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState"`
-	TaskNumber         *string                                                                   `json:"taskNumber"`
+	TaskAttemptStats   []GoogleCloudIntegrationsV1alphaAttemptStats                              `json:"taskAttemptStats,omitempty"`
+	TaskExecutionState *GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState,omitempty"`
+	TaskNumber         *string                                                                   `json:"taskNumber,omitempty"`
 }

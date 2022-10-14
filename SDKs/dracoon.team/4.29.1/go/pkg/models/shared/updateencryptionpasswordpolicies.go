@@ -1,8 +1,8 @@
 package shared
 
 type UpdateEncryptionPasswordPolicies struct {
-	CharacterRules         *CharacterRules `json:"characterRules"`
-	MinLength              *int32          `json:"minLength"`
-	RejectKeyboardPatterns *bool           `json:"rejectKeyboardPatterns"`
-	RejectUserInfo         *bool           `json:"rejectUserInfo"`
+	CharacterRules         *CharacterRules `json:"characterRules,omitempty"`
+	MinLength              *int32          `json:"minLength,omitempty"`
+	RejectKeyboardPatterns *bool           `json:"rejectKeyboardPatterns,omitempty"`
+	RejectUserInfo         *bool           `json:"rejectUserInfo,omitempty"`
 }

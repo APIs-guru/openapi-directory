@@ -20,27 +20,27 @@ const (
 )
 
 type AmqpRuleResponseTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AmqpRuleResponseTarget struct {
-	Enveloped *bool                           `json:"enveloped"`
-	Format    *string                         `json:"format"`
-	Headers   []AmqpRuleResponseTargetHeaders `json:"headers"`
+	Enveloped *bool                           `json:"enveloped,omitempty"`
+	Format    *string                         `json:"format,omitempty"`
+	Headers   []AmqpRuleResponseTargetHeaders `json:"headers,omitempty"`
 	QueueID   string                          `json:"queueId"`
 }
 
 type AmqpRuleResponse struct {
-	Links       map[string]interface{}          `json:"_links"`
-	AppID       *string                         `json:"appId"`
-	Created     *float64                        `json:"created"`
-	ID          *string                         `json:"id"`
-	Modified    *float64                        `json:"modified"`
+	Links       map[string]interface{}          `json:"_links,omitempty"`
+	AppID       *string                         `json:"appId,omitempty"`
+	Created     *float64                        `json:"created,omitempty"`
+	ID          *string                         `json:"id,omitempty"`
+	Modified    *float64                        `json:"modified,omitempty"`
 	RequestMode AmqpRuleResponseRequestModeEnum `json:"requestMode"`
 	RuleType    AmqpRuleResponseRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                      `json:"source"`
-	Status      *AmqpRuleResponseStatusEnum     `json:"status"`
+	Status      *AmqpRuleResponseStatusEnum     `json:"status,omitempty"`
 	Target      AmqpRuleResponseTarget          `json:"target"`
-	Version     *string                         `json:"version"`
+	Version     *string                         `json:"version,omitempty"`
 }

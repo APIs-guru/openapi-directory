@@ -5,18 +5,18 @@ import (
 )
 
 type BaseConfigurationItem struct {
-	AccountID                    *string                      `json:"accountId"`
-	Arn                          *string                      `json:"arn"`
-	AvailabilityZone             *string                      `json:"availabilityZone"`
-	AwsRegion                    *string                      `json:"awsRegion"`
-	Configuration                *string                      `json:"configuration"`
-	ConfigurationItemCaptureTime *time.Time                   `json:"configurationItemCaptureTime"`
-	ConfigurationItemStatus      *ConfigurationItemStatusEnum `json:"configurationItemStatus"`
-	ConfigurationStateID         *string                      `json:"configurationStateId"`
-	ResourceCreationTime         *time.Time                   `json:"resourceCreationTime"`
-	ResourceID                   *string                      `json:"resourceId"`
-	ResourceName                 *string                      `json:"resourceName"`
-	ResourceType                 *ResourceTypeEnum            `json:"resourceType"`
-	SupplementaryConfiguration   map[string]string            `json:"supplementaryConfiguration"`
-	Version                      *string                      `json:"version"`
+	AccountID                    *string                      `json:"accountId,omitempty"`
+	Arn                          *string                      `json:"arn,omitempty"`
+	AvailabilityZone             *string                      `json:"availabilityZone,omitempty"`
+	AwsRegion                    *string                      `json:"awsRegion,omitempty"`
+	Configuration                *string                      `json:"configuration,omitempty"`
+	ConfigurationItemCaptureTime *time.Time                   `json:"configurationItemCaptureTime,omitempty"`
+	ConfigurationItemStatus      *ConfigurationItemStatusEnum `json:"configurationItemStatus,omitempty"`
+	ConfigurationStateID         *string                      `json:"configurationStateId,omitempty"`
+	ResourceCreationTime         *time.Time                   `json:"resourceCreationTime,omitempty"`
+	ResourceID                   *string                      `json:"resourceId,omitempty"`
+	ResourceName                 *string                      `json:"resourceName,omitempty"`
+	ResourceType                 *ResourceTypeEnum            `json:"resourceType,omitempty"`
+	SupplementaryConfiguration   map[string]string            `json:"supplementaryConfiguration,omitempty"`
+	Version                      *string                      `json:"version,omitempty"`
 }

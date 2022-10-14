@@ -16,10 +16,10 @@ const (
 )
 
 type MemberJoiningRulesList400ApplicationJSON struct {
-	Detail   *string                                          `json:"detail"`
-	Instance *string                                          `json:"instance"`
-	Status   *interface{}                                     `json:"status"`
-	Title    *interface{}                                     `json:"title"`
+	Detail   *string                                          `json:"detail,omitempty"`
+	Instance *string                                          `json:"instance,omitempty"`
+	Status   *interface{}                                     `json:"status,omitempty"`
+	Title    *interface{}                                     `json:"title,omitempty"`
 	Type     MemberJoiningRulesList400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -31,10 +31,10 @@ const (
 )
 
 type MemberJoiningRulesList401ApplicationJSON struct {
-	Detail   *string                                          `json:"detail"`
-	Instance *string                                          `json:"instance"`
-	Status   *interface{}                                     `json:"status"`
-	Title    *interface{}                                     `json:"title"`
+	Detail   *string                                          `json:"detail,omitempty"`
+	Instance *string                                          `json:"instance,omitempty"`
+	Status   *interface{}                                     `json:"status,omitempty"`
+	Title    *interface{}                                     `json:"title,omitempty"`
 	Type     MemberJoiningRulesList401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -45,10 +45,10 @@ const (
 )
 
 type MemberJoiningRulesList403ApplicationJSON struct {
-	Detail   *string                                          `json:"detail"`
-	Instance *string                                          `json:"instance"`
-	Status   *interface{}                                     `json:"status"`
-	Title    *interface{}                                     `json:"title"`
+	Detail   *string                                          `json:"detail,omitempty"`
+	Instance *string                                          `json:"instance,omitempty"`
+	Status   *interface{}                                     `json:"status,omitempty"`
+	Title    *interface{}                                     `json:"title,omitempty"`
 	Type     MemberJoiningRulesList403ApplicationJSONTypeEnum `json:"type"`
 }
 

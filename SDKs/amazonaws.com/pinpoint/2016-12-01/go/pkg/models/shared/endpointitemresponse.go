@@ -1,6 +1,6 @@
 package shared
 
 type EndpointItemResponse struct {
-	Message    *string `json:"Message"`
-	StatusCode *int64  `json:"StatusCode"`
+	Message    *string `json:"Message,omitempty"`
+	StatusCode *int64  `json:"StatusCode,omitempty"`
 }

@@ -8,7 +8,7 @@ const (
 )
 
 type Install struct {
-	InstallState *InstallInstallStateEnum `json:"installState"`
-	ProductID    *string                  `json:"productId"`
-	VersionCode  *int32                   `json:"versionCode"`
+	InstallState *InstallInstallStateEnum `json:"installState,omitempty"`
+	ProductID    *string                  `json:"productId,omitempty"`
+	VersionCode  *int32                   `json:"versionCode,omitempty"`
 }

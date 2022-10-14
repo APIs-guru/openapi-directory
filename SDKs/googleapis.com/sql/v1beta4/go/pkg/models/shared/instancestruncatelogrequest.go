@@ -1,5 +1,5 @@
 package shared
 
 type InstancesTruncateLogRequest struct {
-	TruncateLogContext *TruncateLogContext `json:"truncateLogContext"`
+	TruncateLogContext *TruncateLogContext `json:"truncateLogContext,omitempty"`
 }

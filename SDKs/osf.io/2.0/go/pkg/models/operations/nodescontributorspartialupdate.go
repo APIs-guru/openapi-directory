@@ -14,14 +14,14 @@ const (
 )
 
 type NodesContributorsPartialUpdateRequestBodyAttributesAttributes struct {
-	Bibliographic           *bool                                                              `json:"bibliographic"`
-	Index                   *int64                                                             `json:"index"`
-	Permission              *NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnum `json:"permission"`
-	UnregisteredContributor *string                                                            `json:"unregistered_contributor"`
+	Bibliographic           *bool                                                              `json:"bibliographic,omitempty"`
+	Index                   *int64                                                             `json:"index,omitempty"`
+	Permission              *NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnum `json:"permission,omitempty"`
+	UnregisteredContributor *string                                                            `json:"unregistered_contributor,omitempty"`
 }
 
 type NodesContributorsPartialUpdateRequestBodyLinksLinks struct {
-	Self *string `json:"self"`
+	Self *string `json:"self,omitempty"`
 }
 
 type NodesContributorsPartialUpdateRequestBodyRelationshipsRelationships struct {
@@ -30,9 +30,9 @@ type NodesContributorsPartialUpdateRequestBodyRelationshipsRelationships struct 
 }
 
 type NodesContributorsPartialUpdateRequestBodyContributor struct {
-	Attributes    *NodesContributorsPartialUpdateRequestBodyAttributesAttributes      `json:"attributes"`
-	ID            *string                                                             `json:"id"`
-	Links         *NodesContributorsPartialUpdateRequestBodyLinksLinks                `json:"links"`
+	Attributes    *NodesContributorsPartialUpdateRequestBodyAttributesAttributes      `json:"attributes,omitempty"`
+	ID            *string                                                             `json:"id,omitempty"`
+	Links         *NodesContributorsPartialUpdateRequestBodyLinksLinks                `json:"links,omitempty"`
 	Relationships NodesContributorsPartialUpdateRequestBodyRelationshipsRelationships `json:"relationships"`
 	Type          string                                                              `json:"type"`
 }

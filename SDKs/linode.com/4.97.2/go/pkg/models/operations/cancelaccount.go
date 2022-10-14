@@ -23,19 +23,19 @@ type CancelAccountRequest struct {
 }
 
 type CancelAccount200ApplicationJSON struct {
-	SurveyLink *string `json:"survey_link"`
+	SurveyLink *string `json:"survey_link,omitempty"`
 }
 
 type CancelAccount409ApplicationJSONErrors struct {
-	Reason *string `json:"reason"`
+	Reason *string `json:"reason,omitempty"`
 }
 
 type CancelAccount409ApplicationJSON struct {
-	Errors []CancelAccount409ApplicationJSONErrors `json:"errors"`
+	Errors []CancelAccount409ApplicationJSONErrors `json:"errors,omitempty"`
 }
 
 type CancelAccountDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CancelAccountResponse struct {

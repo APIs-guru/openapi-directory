@@ -32,19 +32,19 @@ const (
 )
 
 type CreateDomainRecordRequestBody struct {
-	Created  *time.Time                            `json:"created"`
-	ID       *int64                                `json:"id"`
-	Name     *string                               `json:"name"`
-	Port     *int64                                `json:"port"`
-	Priority *int64                                `json:"priority"`
-	Protocol *string                               `json:"protocol"`
-	Service  *string                               `json:"service"`
-	Tag      *CreateDomainRecordRequestBodyTagEnum `json:"tag"`
-	Target   *string                               `json:"target"`
-	TTLSec   *int64                                `json:"ttl_sec"`
+	Created  *time.Time                            `json:"created,omitempty"`
+	ID       *int64                                `json:"id,omitempty"`
+	Name     *string                               `json:"name,omitempty"`
+	Port     *int64                                `json:"port,omitempty"`
+	Priority *int64                                `json:"priority,omitempty"`
+	Protocol *string                               `json:"protocol,omitempty"`
+	Service  *string                               `json:"service,omitempty"`
+	Tag      *CreateDomainRecordRequestBodyTagEnum `json:"tag,omitempty"`
+	Target   *string                               `json:"target,omitempty"`
+	TTLSec   *int64                                `json:"ttl_sec,omitempty"`
 	Type     CreateDomainRecordRequestBodyTypeEnum `json:"type"`
-	Updated  *time.Time                            `json:"updated"`
-	Weight   *int64                                `json:"weight"`
+	Updated  *time.Time                            `json:"updated,omitempty"`
+	Weight   *int64                                `json:"weight,omitempty"`
 }
 
 type CreateDomainRecordSecurityOption1 struct {
@@ -67,7 +67,7 @@ type CreateDomainRecordRequest struct {
 }
 
 type CreateDomainRecordDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateDomainRecordResponse struct {

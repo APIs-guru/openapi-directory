@@ -1,5 +1,5 @@
 package shared
 
 type UnmergeTableCellsRequest struct {
-	TableRange *TableRange `json:"tableRange"`
+	TableRange *TableRange `json:"tableRange,omitempty"`
 }

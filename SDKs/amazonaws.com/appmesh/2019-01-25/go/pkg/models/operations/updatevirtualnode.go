@@ -24,15 +24,15 @@ type UpdateVirtualNodeHeaders struct {
 }
 
 type UpdateVirtualNodeRequestBodySpec struct {
-	BackendDefaults  *shared.BackendDefaults  `json:"backendDefaults"`
-	Backends         []shared.Backend         `json:"backends"`
-	Listeners        []shared.Listener        `json:"listeners"`
-	Logging          *shared.Logging          `json:"logging"`
-	ServiceDiscovery *shared.ServiceDiscovery `json:"serviceDiscovery"`
+	BackendDefaults  *shared.BackendDefaults  `json:"backendDefaults,omitempty"`
+	Backends         []shared.Backend         `json:"backends,omitempty"`
+	Listeners        []shared.Listener        `json:"listeners,omitempty"`
+	Logging          *shared.Logging          `json:"logging,omitempty"`
+	ServiceDiscovery *shared.ServiceDiscovery `json:"serviceDiscovery,omitempty"`
 }
 
 type UpdateVirtualNodeRequestBody struct {
-	ClientToken *string                          `json:"clientToken"`
+	ClientToken *string                          `json:"clientToken,omitempty"`
 	Spec        UpdateVirtualNodeRequestBodySpec `json:"spec"`
 }
 

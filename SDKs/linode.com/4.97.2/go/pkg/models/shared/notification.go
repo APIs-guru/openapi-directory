@@ -5,10 +5,10 @@ import (
 )
 
 type NotificationEntity struct {
-	ID    *int64  `json:"id"`
-	Label *string `json:"label"`
-	Type  *string `json:"type"`
-	URL   *string `json:"url"`
+	ID    *int64  `json:"id,omitempty"`
+	Label *string `json:"label,omitempty"`
+	Type  *string `json:"type,omitempty"`
+	URL   *string `json:"url,omitempty"`
 }
 
 type NotificationSeverityEnum string
@@ -36,12 +36,12 @@ const (
 )
 
 type Notification struct {
-	Body     *string                   `json:"body"`
-	Entity   *NotificationEntity       `json:"entity"`
-	Label    *string                   `json:"label"`
-	Message  *string                   `json:"message"`
-	Severity *NotificationSeverityEnum `json:"severity"`
-	Type     *NotificationTypeEnum     `json:"type"`
-	Until    *time.Time                `json:"until"`
-	When     *time.Time                `json:"when"`
+	Body     *string                   `json:"body,omitempty"`
+	Entity   *NotificationEntity       `json:"entity,omitempty"`
+	Label    *string                   `json:"label,omitempty"`
+	Message  *string                   `json:"message,omitempty"`
+	Severity *NotificationSeverityEnum `json:"severity,omitempty"`
+	Type     *NotificationTypeEnum     `json:"type,omitempty"`
+	Until    *time.Time                `json:"until,omitempty"`
+	When     *time.Time                `json:"when,omitempty"`
 }

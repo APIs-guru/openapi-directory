@@ -8,6 +8,7 @@ import (
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
 	"openapi/pkg/models/shared"
+	"strings"
 )
 
 var Servers = []string{
@@ -172,6 +173,61 @@ func (s *SDK) GetOauthV1RefreshTokensTokenGetRefreshToken(ctx context.Context, r
 			}
 
 			res.RefreshTokenInfoResponse = out
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `*/*`):
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Body = data
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) PostOauthV1TokenCreateToken(ctx context.Context, request operations.PostOauthV1TokenCreateTokenRequest) (*operations.PostOauthV1TokenCreateTokenResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/oauth/v1/token"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := s.defaultClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.PostOauthV1TokenCreateTokenResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.TokenResponseIf
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.TokenResponseIf = out
 		}
 	default:
 		switch {

@@ -1,7 +1,7 @@
 package shared
 
 type ThirdPartyJobDetails struct {
-	Data  *ThirdPartyJobData `json:"data"`
-	ID    *string            `json:"id"`
-	Nonce *string            `json:"nonce"`
+	Data  *ThirdPartyJobData `json:"data,omitempty"`
+	ID    *string            `json:"id,omitempty"`
+	Nonce *string            `json:"nonce,omitempty"`
 }

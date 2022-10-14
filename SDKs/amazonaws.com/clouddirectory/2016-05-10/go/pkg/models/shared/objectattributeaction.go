@@ -1,6 +1,6 @@
 package shared
 
 type ObjectAttributeAction struct {
-	ObjectAttributeActionType  *UpdateActionTypeEnum `json:"ObjectAttributeActionType"`
-	ObjectAttributeUpdateValue *TypedAttributeValue  `json:"ObjectAttributeUpdateValue"`
+	ObjectAttributeActionType  *UpdateActionTypeEnum `json:"ObjectAttributeActionType,omitempty"`
+	ObjectAttributeUpdateValue *TypedAttributeValue  `json:"ObjectAttributeUpdateValue,omitempty"`
 }

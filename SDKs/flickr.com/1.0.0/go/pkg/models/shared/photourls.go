@@ -1,8 +1,8 @@
 package shared
 
 type PhotoUrLs struct {
-	H *string `json:"h"`
-	L *string `json:"l"`
-	S *string `json:"s"`
-	T *string `json:"t"`
+	H *string `json:"h,omitempty"`
+	L *string `json:"l,omitempty"`
+	S *string `json:"s,omitempty"`
+	T *string `json:"t,omitempty"`
 }

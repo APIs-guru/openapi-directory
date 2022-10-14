@@ -12,11 +12,11 @@ const (
 )
 
 type ApigatewayAPI struct {
-	CreateTime     *string                 `json:"createTime"`
-	DisplayName    *string                 `json:"displayName"`
-	Labels         map[string]string       `json:"labels"`
-	ManagedService *string                 `json:"managedService"`
-	Name           *string                 `json:"name"`
-	State          *ApigatewayAPIStateEnum `json:"state"`
-	UpdateTime     *string                 `json:"updateTime"`
+	CreateTime     *string                 `json:"createTime,omitempty"`
+	DisplayName    *string                 `json:"displayName,omitempty"`
+	Labels         map[string]string       `json:"labels,omitempty"`
+	ManagedService *string                 `json:"managedService,omitempty"`
+	Name           *string                 `json:"name,omitempty"`
+	State          *ApigatewayAPIStateEnum `json:"state,omitempty"`
+	UpdateTime     *string                 `json:"updateTime,omitempty"`
 }

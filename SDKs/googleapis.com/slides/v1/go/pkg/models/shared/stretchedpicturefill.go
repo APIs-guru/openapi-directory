@@ -1,6 +1,6 @@
 package shared
 
 type StretchedPictureFill struct {
-	ContentURL *string `json:"contentUrl"`
-	Size       *Size   `json:"size"`
+	ContentURL *string `json:"contentUrl,omitempty"`
+	Size       *Size   `json:"size,omitempty"`
 }

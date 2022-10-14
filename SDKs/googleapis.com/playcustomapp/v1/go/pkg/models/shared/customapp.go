@@ -1,8 +1,8 @@
 package shared
 
 type CustomApp struct {
-	LanguageCode  *string        `json:"languageCode"`
-	Organizations []Organization `json:"organizations"`
-	PackageName   *string        `json:"packageName"`
-	Title         *string        `json:"title"`
+	LanguageCode  *string        `json:"languageCode,omitempty"`
+	Organizations []Organization `json:"organizations,omitempty"`
+	PackageName   *string        `json:"packageName,omitempty"`
+	Title         *string        `json:"title,omitempty"`
 }

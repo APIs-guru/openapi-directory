@@ -6,16 +6,16 @@ type PostAdminRequestsFindRequestBodyBasicAuthCredentials struct {
 }
 
 type PostAdminRequestsFindRequestBody struct {
-	BasicAuthCredentials *PostAdminRequestsFindRequestBodyBasicAuthCredentials `json:"basicAuthCredentials"`
-	BodyPatterns         []map[string]interface{}                              `json:"bodyPatterns"`
-	Cookies              map[string]interface{}                                `json:"cookies"`
-	Headers              map[string]interface{}                                `json:"headers"`
-	Method               *string                                               `json:"method"`
-	QueryParameters      map[string]interface{}                                `json:"queryParameters"`
-	URL                  *string                                               `json:"url"`
-	URLPath              *string                                               `json:"urlPath"`
-	URLPathPattern       *string                                               `json:"urlPathPattern"`
-	URLPattern           *string                                               `json:"urlPattern"`
+	BasicAuthCredentials *PostAdminRequestsFindRequestBodyBasicAuthCredentials `json:"basicAuthCredentials,omitempty"`
+	BodyPatterns         []map[string]interface{}                              `json:"bodyPatterns,omitempty"`
+	Cookies              map[string]interface{}                                `json:"cookies,omitempty"`
+	Headers              map[string]interface{}                                `json:"headers,omitempty"`
+	Method               *string                                               `json:"method,omitempty"`
+	QueryParameters      map[string]interface{}                                `json:"queryParameters,omitempty"`
+	URL                  *string                                               `json:"url,omitempty"`
+	URLPath              *string                                               `json:"urlPath,omitempty"`
+	URLPathPattern       *string                                               `json:"urlPathPattern,omitempty"`
+	URLPattern           *string                                               `json:"urlPattern,omitempty"`
 }
 
 type PostAdminRequestsFindRequest struct {

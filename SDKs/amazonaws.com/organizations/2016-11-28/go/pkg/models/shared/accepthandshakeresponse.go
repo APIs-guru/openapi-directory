@@ -1,5 +1,5 @@
 package shared
 
 type AcceptHandshakeResponse struct {
-	Handshake *Handshake `json:"Handshake"`
+	Handshake *Handshake `json:"Handshake,omitempty"`
 }

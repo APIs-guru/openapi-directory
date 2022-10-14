@@ -11,7 +11,7 @@ type ReplaceAlbumLogoPathParams struct {
 }
 
 type ReplaceAlbumLogoRequestBody struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type ReplaceAlbumLogoSecurity struct {

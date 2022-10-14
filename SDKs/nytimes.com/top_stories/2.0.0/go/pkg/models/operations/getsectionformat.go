@@ -57,7 +57,7 @@ type GetSectionFormatRequest struct {
 }
 
 type GetSectionFormat200ApplicationJSON struct {
-	Results []shared.Article `json:"results"`
+	Results []shared.Article `json:"results,omitempty"`
 }
 
 type GetSectionFormatResponse struct {

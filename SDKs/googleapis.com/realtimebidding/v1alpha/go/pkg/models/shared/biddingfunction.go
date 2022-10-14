@@ -17,8 +17,8 @@ const (
 )
 
 type BiddingFunction struct {
-	BiddingFunction *string                   `json:"biddingFunction"`
-	Name            *string                   `json:"name"`
-	State           *BiddingFunctionStateEnum `json:"state"`
-	Type            *BiddingFunctionTypeEnum  `json:"type"`
+	BiddingFunction *string                   `json:"biddingFunction,omitempty"`
+	Name            *string                   `json:"name,omitempty"`
+	State           *BiddingFunctionStateEnum `json:"state,omitempty"`
+	Type            *BiddingFunctionTypeEnum  `json:"type,omitempty"`
 }

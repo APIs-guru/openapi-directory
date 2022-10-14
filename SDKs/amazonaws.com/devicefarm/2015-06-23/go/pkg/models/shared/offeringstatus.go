@@ -5,8 +5,8 @@ import (
 )
 
 type OfferingStatus struct {
-	EffectiveOn *time.Time                   `json:"effectiveOn"`
-	Offering    *Offering                    `json:"offering"`
-	Quantity    *int64                       `json:"quantity"`
-	Type        *OfferingTransactionTypeEnum `json:"type"`
+	EffectiveOn *time.Time                   `json:"effectiveOn,omitempty"`
+	Offering    *Offering                    `json:"offering,omitempty"`
+	Quantity    *int64                       `json:"quantity,omitempty"`
+	Type        *OfferingTransactionTypeEnum `json:"type,omitempty"`
 }

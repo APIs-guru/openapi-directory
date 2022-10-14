@@ -1,5 +1,5 @@
 package shared
 
 type EnablePolicyTypeResponse struct {
-	Root *Root `json:"Root"`
+	Root *Root `json:"Root,omitempty"`
 }

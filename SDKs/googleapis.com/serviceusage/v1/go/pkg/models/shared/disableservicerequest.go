@@ -9,6 +9,6 @@ const (
 )
 
 type DisableServiceRequest struct {
-	CheckIfServiceHasUsage   *DisableServiceRequestCheckIfServiceHasUsageEnum `json:"checkIfServiceHasUsage"`
-	DisableDependentServices *bool                                            `json:"disableDependentServices"`
+	CheckIfServiceHasUsage   *DisableServiceRequestCheckIfServiceHasUsageEnum `json:"checkIfServiceHasUsage,omitempty"`
+	DisableDependentServices *bool                                            `json:"disableDependentServices,omitempty"`
 }

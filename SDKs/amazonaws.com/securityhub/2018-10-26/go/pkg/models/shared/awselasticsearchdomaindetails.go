@@ -1,17 +1,17 @@
 package shared
 
 type AwsElasticsearchDomainDetails struct {
-	AccessPolicies              *string                                                  `json:"AccessPolicies"`
-	DomainEndpointOptions       *AwsElasticsearchDomainDomainEndpointOptions             `json:"DomainEndpointOptions"`
-	DomainID                    *string                                                  `json:"DomainId"`
-	DomainName                  *string                                                  `json:"DomainName"`
-	ElasticsearchClusterConfig  *AwsElasticsearchDomainElasticsearchClusterConfigDetails `json:"ElasticsearchClusterConfig"`
-	ElasticsearchVersion        *string                                                  `json:"ElasticsearchVersion"`
-	EncryptionAtRestOptions     *AwsElasticsearchDomainEncryptionAtRestOptions           `json:"EncryptionAtRestOptions"`
-	Endpoint                    *string                                                  `json:"Endpoint"`
-	Endpoints                   map[string]string                                        `json:"Endpoints"`
-	LogPublishingOptions        *AwsElasticsearchDomainLogPublishingOptions              `json:"LogPublishingOptions"`
-	NodeToNodeEncryptionOptions *AwsElasticsearchDomainNodeToNodeEncryptionOptions       `json:"NodeToNodeEncryptionOptions"`
-	ServiceSoftwareOptions      *AwsElasticsearchDomainServiceSoftwareOptions            `json:"ServiceSoftwareOptions"`
-	VpcOptions                  *AwsElasticsearchDomainVpcOptions                        `json:"VPCOptions"`
+	AccessPolicies              *string                                                  `json:"AccessPolicies,omitempty"`
+	DomainEndpointOptions       *AwsElasticsearchDomainDomainEndpointOptions             `json:"DomainEndpointOptions,omitempty"`
+	DomainID                    *string                                                  `json:"DomainId,omitempty"`
+	DomainName                  *string                                                  `json:"DomainName,omitempty"`
+	ElasticsearchClusterConfig  *AwsElasticsearchDomainElasticsearchClusterConfigDetails `json:"ElasticsearchClusterConfig,omitempty"`
+	ElasticsearchVersion        *string                                                  `json:"ElasticsearchVersion,omitempty"`
+	EncryptionAtRestOptions     *AwsElasticsearchDomainEncryptionAtRestOptions           `json:"EncryptionAtRestOptions,omitempty"`
+	Endpoint                    *string                                                  `json:"Endpoint,omitempty"`
+	Endpoints                   map[string]string                                        `json:"Endpoints,omitempty"`
+	LogPublishingOptions        *AwsElasticsearchDomainLogPublishingOptions              `json:"LogPublishingOptions,omitempty"`
+	NodeToNodeEncryptionOptions *AwsElasticsearchDomainNodeToNodeEncryptionOptions       `json:"NodeToNodeEncryptionOptions,omitempty"`
+	ServiceSoftwareOptions      *AwsElasticsearchDomainServiceSoftwareOptions            `json:"ServiceSoftwareOptions,omitempty"`
+	VpcOptions                  *AwsElasticsearchDomainVpcOptions                        `json:"VPCOptions,omitempty"`
 }

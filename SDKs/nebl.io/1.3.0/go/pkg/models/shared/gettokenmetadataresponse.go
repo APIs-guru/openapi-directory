@@ -1,48 +1,48 @@
 package shared
 
 type GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type GetTokenMetadataResponseMetadataOfIssuanceDataUserData struct {
-	Meta []GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta `json:"meta"`
+	Meta []GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta `json:"meta,omitempty"`
 }
 
 type GetTokenMetadataResponseMetadataOfIssuanceData struct {
-	Description *string                                                 `json:"description"`
-	Issuer      *string                                                 `json:"issuer"`
-	TokenName   *string                                                 `json:"tokenName"`
-	UserData    *GetTokenMetadataResponseMetadataOfIssuanceDataUserData `json:"userData"`
+	Description *string                                                 `json:"description,omitempty"`
+	Issuer      *string                                                 `json:"issuer,omitempty"`
+	TokenName   *string                                                 `json:"tokenName,omitempty"`
+	UserData    *GetTokenMetadataResponseMetadataOfIssuanceDataUserData `json:"userData,omitempty"`
 }
 
 type GetTokenMetadataResponseMetadataOfIssuance struct {
-	Data *GetTokenMetadataResponseMetadataOfIssuanceData `json:"data"`
+	Data *GetTokenMetadataResponseMetadataOfIssuanceData `json:"data,omitempty"`
 }
 
 type GetTokenMetadataResponseMetadataOfUtxoUserData struct {
-	Meta []map[string]interface{} `json:"meta"`
+	Meta []map[string]interface{} `json:"meta,omitempty"`
 }
 
 type GetTokenMetadataResponseMetadataOfUtxo struct {
-	UserData *GetTokenMetadataResponseMetadataOfUtxoUserData `json:"userData"`
+	UserData *GetTokenMetadataResponseMetadataOfUtxoUserData `json:"userData,omitempty"`
 }
 
 type GetTokenMetadataResponse struct {
-	AggregationPolicy     *string                                     `json:"aggregationPolicy"`
-	Divisibility          *float64                                    `json:"divisibility"`
-	FirstBlock            *float64                                    `json:"firstBlock"`
-	InitialIssuanceAmount *float64                                    `json:"initialIssuanceAmount"`
-	IssuanceTxid          *string                                     `json:"issuanceTxid"`
-	IssueAddress          *string                                     `json:"issueAddress"`
-	LockStatus            *bool                                       `json:"lockStatus"`
-	MetadataOfIssuance    *GetTokenMetadataResponseMetadataOfIssuance `json:"metadataOfIssuance"`
-	MetadataOfUtxo        *GetTokenMetadataResponseMetadataOfUtxo     `json:"metadataOfUtxo"`
-	NumOfBurns            *float64                                    `json:"numOfBurns"`
-	NumOfHolders          *float64                                    `json:"numOfHolders"`
-	NumOfIssuance         *float64                                    `json:"numOfIssuance"`
-	NumOfTransfers        *float64                                    `json:"numOfTransfers"`
-	SomeUtxo              *string                                     `json:"someUtxo"`
-	TokenID               *string                                     `json:"tokenId"`
-	TotalSupply           *float64                                    `json:"totalSupply"`
+	AggregationPolicy     *string                                     `json:"aggregationPolicy,omitempty"`
+	Divisibility          *float64                                    `json:"divisibility,omitempty"`
+	FirstBlock            *float64                                    `json:"firstBlock,omitempty"`
+	InitialIssuanceAmount *float64                                    `json:"initialIssuanceAmount,omitempty"`
+	IssuanceTxid          *string                                     `json:"issuanceTxid,omitempty"`
+	IssueAddress          *string                                     `json:"issueAddress,omitempty"`
+	LockStatus            *bool                                       `json:"lockStatus,omitempty"`
+	MetadataOfIssuance    *GetTokenMetadataResponseMetadataOfIssuance `json:"metadataOfIssuance,omitempty"`
+	MetadataOfUtxo        *GetTokenMetadataResponseMetadataOfUtxo     `json:"metadataOfUtxo,omitempty"`
+	NumOfBurns            *float64                                    `json:"numOfBurns,omitempty"`
+	NumOfHolders          *float64                                    `json:"numOfHolders,omitempty"`
+	NumOfIssuance         *float64                                    `json:"numOfIssuance,omitempty"`
+	NumOfTransfers        *float64                                    `json:"numOfTransfers,omitempty"`
+	SomeUtxo              *string                                     `json:"someUtxo,omitempty"`
+	TokenID               *string                                     `json:"tokenId,omitempty"`
+	TotalSupply           *float64                                    `json:"totalSupply,omitempty"`
 }

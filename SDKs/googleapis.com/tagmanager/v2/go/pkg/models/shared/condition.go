@@ -18,6 +18,6 @@ const (
 )
 
 type Condition struct {
-	Parameter []Parameter        `json:"parameter"`
-	Type      *ConditionTypeEnum `json:"type"`
+	Parameter []Parameter        `json:"parameter,omitempty"`
+	Type      *ConditionTypeEnum `json:"type,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type MaintenanceWindow struct {
-	Day         *int32                            `json:"day"`
-	Hour        *int32                            `json:"hour"`
-	Kind        *string                           `json:"kind"`
-	UpdateTrack *MaintenanceWindowUpdateTrackEnum `json:"updateTrack"`
+	Day         *int32                            `json:"day,omitempty"`
+	Hour        *int32                            `json:"hour,omitempty"`
+	Kind        *string                           `json:"kind,omitempty"`
+	UpdateTrack *MaintenanceWindowUpdateTrackEnum `json:"updateTrack,omitempty"`
 }

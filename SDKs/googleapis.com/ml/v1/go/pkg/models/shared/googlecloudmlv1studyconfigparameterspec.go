@@ -20,15 +20,15 @@ const (
 )
 
 type GoogleCloudMlV1StudyConfigParameterSpec struct {
-	CategoricalValueSpec    *GoogleCloudMlV1StudyConfigParameterSpecCategoricalValueSpec               `json:"categoricalValueSpec"`
-	ChildParameterSpecs     []GoogleCloudMlV1StudyConfigParameterSpec                                  `json:"childParameterSpecs"`
-	DiscreteValueSpec       *GoogleCloudMlV1StudyConfigParameterSpecDiscreteValueSpec                  `json:"discreteValueSpec"`
-	DoubleValueSpec         *GoogleCloudMlV1StudyConfigParameterSpecDoubleValueSpec                    `json:"doubleValueSpec"`
-	IntegerValueSpec        *GoogleCloudMlV1StudyConfigParameterSpecIntegerValueSpec                   `json:"integerValueSpec"`
-	Parameter               *string                                                                    `json:"parameter"`
-	ParentCategoricalValues *GoogleCloudMlV1StudyConfigParameterSpecMatchingParentCategoricalValueSpec `json:"parentCategoricalValues"`
-	ParentDiscreteValues    *GoogleCloudMlV1StudyConfigParameterSpecMatchingParentDiscreteValueSpec    `json:"parentDiscreteValues"`
-	ParentIntValues         *GoogleCloudMlV1StudyConfigParameterSpecMatchingParentIntValueSpec         `json:"parentIntValues"`
-	ScaleType               *GoogleCloudMlV1StudyConfigParameterSpecScaleTypeEnum                      `json:"scaleType"`
-	Type                    *GoogleCloudMlV1StudyConfigParameterSpecTypeEnum                           `json:"type"`
+	CategoricalValueSpec    *GoogleCloudMlV1StudyConfigParameterSpecCategoricalValueSpec               `json:"categoricalValueSpec,omitempty"`
+	ChildParameterSpecs     []GoogleCloudMlV1StudyConfigParameterSpec                                  `json:"childParameterSpecs,omitempty"`
+	DiscreteValueSpec       *GoogleCloudMlV1StudyConfigParameterSpecDiscreteValueSpec                  `json:"discreteValueSpec,omitempty"`
+	DoubleValueSpec         *GoogleCloudMlV1StudyConfigParameterSpecDoubleValueSpec                    `json:"doubleValueSpec,omitempty"`
+	IntegerValueSpec        *GoogleCloudMlV1StudyConfigParameterSpecIntegerValueSpec                   `json:"integerValueSpec,omitempty"`
+	Parameter               *string                                                                    `json:"parameter,omitempty"`
+	ParentCategoricalValues *GoogleCloudMlV1StudyConfigParameterSpecMatchingParentCategoricalValueSpec `json:"parentCategoricalValues,omitempty"`
+	ParentDiscreteValues    *GoogleCloudMlV1StudyConfigParameterSpecMatchingParentDiscreteValueSpec    `json:"parentDiscreteValues,omitempty"`
+	ParentIntValues         *GoogleCloudMlV1StudyConfigParameterSpecMatchingParentIntValueSpec         `json:"parentIntValues,omitempty"`
+	ScaleType               *GoogleCloudMlV1StudyConfigParameterSpecScaleTypeEnum                      `json:"scaleType,omitempty"`
+	Type                    *GoogleCloudMlV1StudyConfigParameterSpecTypeEnum                           `json:"type,omitempty"`
 }

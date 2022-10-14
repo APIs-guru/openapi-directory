@@ -9,6 +9,6 @@ const (
 )
 
 type TagConsentSetting struct {
-	ConsentStatus *TagConsentSettingConsentStatusEnum `json:"consentStatus"`
-	ConsentType   *Parameter                          `json:"consentType"`
+	ConsentStatus *TagConsentSettingConsentStatusEnum `json:"consentStatus,omitempty"`
+	ConsentType   *Parameter                          `json:"consentType,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type EventPeriodRange struct {
-	Kind              *string `json:"kind"`
-	PeriodEndMillis   *string `json:"periodEndMillis"`
-	PeriodStartMillis *string `json:"periodStartMillis"`
+	Kind              *string `json:"kind,omitempty"`
+	PeriodEndMillis   *string `json:"periodEndMillis,omitempty"`
+	PeriodStartMillis *string `json:"periodStartMillis,omitempty"`
 }

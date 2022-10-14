@@ -1,10 +1,10 @@
 package shared
 
 type UpdateSecretRequest struct {
-	ClientRequestToken *string `json:"ClientRequestToken"`
-	Description        *string `json:"Description"`
-	KmsKeyID           *string `json:"KmsKeyId"`
-	SecretBinary       *string `json:"SecretBinary"`
+	ClientRequestToken *string `json:"ClientRequestToken,omitempty"`
+	Description        *string `json:"Description,omitempty"`
+	KmsKeyID           *string `json:"KmsKeyId,omitempty"`
+	SecretBinary       *string `json:"SecretBinary,omitempty"`
 	SecretID           string  `json:"SecretId"`
-	SecretString       *string `json:"SecretString"`
+	SecretString       *string `json:"SecretString,omitempty"`
 }

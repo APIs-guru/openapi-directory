@@ -54,18 +54,18 @@ const (
 )
 
 type CryptoKeyVersion struct {
-	Algorithm                      *CryptoKeyVersionAlgorithmEnum       `json:"algorithm"`
-	Attestation                    *KeyOperationAttestation             `json:"attestation"`
-	CreateTime                     *string                              `json:"createTime"`
-	DestroyEventTime               *string                              `json:"destroyEventTime"`
-	DestroyTime                    *string                              `json:"destroyTime"`
-	ExternalProtectionLevelOptions *ExternalProtectionLevelOptions      `json:"externalProtectionLevelOptions"`
-	GenerateTime                   *string                              `json:"generateTime"`
-	ImportFailureReason            *string                              `json:"importFailureReason"`
-	ImportJob                      *string                              `json:"importJob"`
-	ImportTime                     *string                              `json:"importTime"`
-	Name                           *string                              `json:"name"`
-	ProtectionLevel                *CryptoKeyVersionProtectionLevelEnum `json:"protectionLevel"`
-	ReimportEligible               *bool                                `json:"reimportEligible"`
-	State                          *CryptoKeyVersionStateEnum           `json:"state"`
+	Algorithm                      *CryptoKeyVersionAlgorithmEnum       `json:"algorithm,omitempty"`
+	Attestation                    *KeyOperationAttestation             `json:"attestation,omitempty"`
+	CreateTime                     *string                              `json:"createTime,omitempty"`
+	DestroyEventTime               *string                              `json:"destroyEventTime,omitempty"`
+	DestroyTime                    *string                              `json:"destroyTime,omitempty"`
+	ExternalProtectionLevelOptions *ExternalProtectionLevelOptions      `json:"externalProtectionLevelOptions,omitempty"`
+	GenerateTime                   *string                              `json:"generateTime,omitempty"`
+	ImportFailureReason            *string                              `json:"importFailureReason,omitempty"`
+	ImportJob                      *string                              `json:"importJob,omitempty"`
+	ImportTime                     *string                              `json:"importTime,omitempty"`
+	Name                           *string                              `json:"name,omitempty"`
+	ProtectionLevel                *CryptoKeyVersionProtectionLevelEnum `json:"protectionLevel,omitempty"`
+	ReimportEligible               *bool                                `json:"reimportEligible,omitempty"`
+	State                          *CryptoKeyVersionStateEnum           `json:"state,omitempty"`
 }

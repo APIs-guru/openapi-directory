@@ -9,9 +9,9 @@ const (
 )
 
 type SlashCommandMetadata struct {
-	Bot            *User                         `json:"bot"`
-	CommandID      *string                       `json:"commandId"`
-	CommandName    *string                       `json:"commandName"`
-	TriggersDialog *bool                         `json:"triggersDialog"`
-	Type           *SlashCommandMetadataTypeEnum `json:"type"`
+	Bot            *User                         `json:"bot,omitempty"`
+	CommandID      *string                       `json:"commandId,omitempty"`
+	CommandName    *string                       `json:"commandName,omitempty"`
+	TriggersDialog *bool                         `json:"triggersDialog,omitempty"`
+	Type           *SlashCommandMetadataTypeEnum `json:"type,omitempty"`
 }

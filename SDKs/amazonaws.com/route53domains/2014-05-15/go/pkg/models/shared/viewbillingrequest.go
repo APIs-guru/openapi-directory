@@ -5,8 +5,8 @@ import (
 )
 
 type ViewBillingRequest struct {
-	End      *time.Time `json:"End"`
-	Marker   *string    `json:"Marker"`
-	MaxItems *int64     `json:"MaxItems"`
-	Start    *time.Time `json:"Start"`
+	End      *time.Time `json:"End,omitempty"`
+	Marker   *string    `json:"Marker,omitempty"`
+	MaxItems *int64     `json:"MaxItems,omitempty"`
+	Start    *time.Time `json:"Start,omitempty"`
 }

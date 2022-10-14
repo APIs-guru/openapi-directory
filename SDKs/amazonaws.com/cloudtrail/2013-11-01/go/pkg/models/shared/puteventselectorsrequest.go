@@ -1,7 +1,7 @@
 package shared
 
 type PutEventSelectorsRequest struct {
-	AdvancedEventSelectors []AdvancedEventSelector `json:"AdvancedEventSelectors"`
-	EventSelectors         []EventSelector         `json:"EventSelectors"`
+	AdvancedEventSelectors []AdvancedEventSelector `json:"AdvancedEventSelectors,omitempty"`
+	EventSelectors         []EventSelector         `json:"EventSelectors,omitempty"`
 	TrailName              string                  `json:"TrailName"`
 }

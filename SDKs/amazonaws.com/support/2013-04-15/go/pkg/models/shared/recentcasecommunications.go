@@ -1,6 +1,6 @@
 package shared
 
 type RecentCaseCommunications struct {
-	Communications []Communication `json:"communications"`
-	NextToken      *string         `json:"nextToken"`
+	Communications []Communication `json:"communications,omitempty"`
+	NextToken      *string         `json:"nextToken,omitempty"`
 }

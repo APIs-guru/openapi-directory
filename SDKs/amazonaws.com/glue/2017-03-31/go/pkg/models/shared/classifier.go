@@ -1,8 +1,8 @@
 package shared
 
 type Classifier struct {
-	CsvClassifier  *CsvClassifier  `json:"CsvClassifier"`
-	GrokClassifier *GrokClassifier `json:"GrokClassifier"`
-	JSONClassifier *JSONClassifier `json:"JsonClassifier"`
-	XMLClassifier  *XMLClassifier  `json:"XMLClassifier"`
+	CsvClassifier  *CsvClassifier  `json:"CsvClassifier,omitempty"`
+	GrokClassifier *GrokClassifier `json:"GrokClassifier,omitempty"`
+	JSONClassifier *JSONClassifier `json:"JsonClassifier,omitempty"`
+	XMLClassifier  *XMLClassifier  `json:"XMLClassifier,omitempty"`
 }

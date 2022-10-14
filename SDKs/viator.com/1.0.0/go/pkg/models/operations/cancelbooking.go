@@ -36,10 +36,10 @@ const (
 )
 
 type CancelBooking400ApplicationJSON struct {
-	Code       *CancelBooking400ApplicationJSONCodeEnum    `json:"code"`
-	Message    *CancelBooking400ApplicationJSONMessageEnum `json:"message"`
-	Timestamp  *string                                     `json:"timestamp"`
-	TrackingID *string                                     `json:"trackingId"`
+	Code       *CancelBooking400ApplicationJSONCodeEnum    `json:"code,omitempty"`
+	Message    *CancelBooking400ApplicationJSONMessageEnum `json:"message,omitempty"`
+	Timestamp  *string                                     `json:"timestamp,omitempty"`
+	TrackingID *string                                     `json:"trackingId,omitempty"`
 }
 
 type CancelBooking404ApplicationJSONCodeEnum string
@@ -55,10 +55,10 @@ const (
 )
 
 type CancelBooking404ApplicationJSON struct {
-	Code       *CancelBooking404ApplicationJSONCodeEnum    `json:"code"`
-	Message    *CancelBooking404ApplicationJSONMessageEnum `json:"message"`
-	Timestamp  *string                                     `json:"timestamp"`
-	TrackingID *string                                     `json:"trackingId"`
+	Code       *CancelBooking404ApplicationJSONCodeEnum    `json:"code,omitempty"`
+	Message    *CancelBooking404ApplicationJSONMessageEnum `json:"message,omitempty"`
+	Timestamp  *string                                     `json:"timestamp,omitempty"`
+	TrackingID *string                                     `json:"trackingId,omitempty"`
 }
 
 type CancelBookingResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ConfigManagementHierarchyControllerState struct {
-	State   *ConfigManagementHierarchyControllerDeploymentState `json:"state"`
-	Version *ConfigManagementHierarchyControllerVersion         `json:"version"`
+	State   *ConfigManagementHierarchyControllerDeploymentState `json:"state,omitempty"`
+	Version *ConfigManagementHierarchyControllerVersion         `json:"version,omitempty"`
 }

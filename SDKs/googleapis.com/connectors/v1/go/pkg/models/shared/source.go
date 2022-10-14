@@ -8,6 +8,6 @@ const (
 )
 
 type Source struct {
-	FieldID    *string               `json:"fieldId"`
-	SourceType *SourceSourceTypeEnum `json:"sourceType"`
+	FieldID    *string               `json:"fieldId,omitempty"`
+	SourceType *SourceSourceTypeEnum `json:"sourceType,omitempty"`
 }

@@ -21,25 +21,25 @@ type ListAuditFindingsHeaders struct {
 }
 
 type ListAuditFindingsRequestBodyResourceIdentifier struct {
-	Account                 *string                         `json:"account"`
-	CaCertificateID         *string                         `json:"caCertificateId"`
-	ClientID                *string                         `json:"clientId"`
-	CognitoIdentityPoolID   *string                         `json:"cognitoIdentityPoolId"`
-	DeviceCertificateID     *string                         `json:"deviceCertificateId"`
-	IamRoleArn              *string                         `json:"iamRoleArn"`
-	PolicyVersionIdentifier *shared.PolicyVersionIdentifier `json:"policyVersionIdentifier"`
-	RoleAliasArn            *string                         `json:"roleAliasArn"`
+	Account                 *string                         `json:"account,omitempty"`
+	CaCertificateID         *string                         `json:"caCertificateId,omitempty"`
+	ClientID                *string                         `json:"clientId,omitempty"`
+	CognitoIdentityPoolID   *string                         `json:"cognitoIdentityPoolId,omitempty"`
+	DeviceCertificateID     *string                         `json:"deviceCertificateId,omitempty"`
+	IamRoleArn              *string                         `json:"iamRoleArn,omitempty"`
+	PolicyVersionIdentifier *shared.PolicyVersionIdentifier `json:"policyVersionIdentifier,omitempty"`
+	RoleAliasArn            *string                         `json:"roleAliasArn,omitempty"`
 }
 
 type ListAuditFindingsRequestBody struct {
-	CheckName              *string                                         `json:"checkName"`
-	EndTime                *time.Time                                      `json:"endTime"`
-	ListSuppressedFindings *bool                                           `json:"listSuppressedFindings"`
-	MaxResults             *int64                                          `json:"maxResults"`
-	NextToken              *string                                         `json:"nextToken"`
-	ResourceIdentifier     *ListAuditFindingsRequestBodyResourceIdentifier `json:"resourceIdentifier"`
-	StartTime              *time.Time                                      `json:"startTime"`
-	TaskID                 *string                                         `json:"taskId"`
+	CheckName              *string                                         `json:"checkName,omitempty"`
+	EndTime                *time.Time                                      `json:"endTime,omitempty"`
+	ListSuppressedFindings *bool                                           `json:"listSuppressedFindings,omitempty"`
+	MaxResults             *int64                                          `json:"maxResults,omitempty"`
+	NextToken              *string                                         `json:"nextToken,omitempty"`
+	ResourceIdentifier     *ListAuditFindingsRequestBodyResourceIdentifier `json:"resourceIdentifier,omitempty"`
+	StartTime              *time.Time                                      `json:"startTime,omitempty"`
+	TaskID                 *string                                         `json:"taskId,omitempty"`
 }
 
 type ListAuditFindingsRequest struct {

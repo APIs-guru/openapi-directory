@@ -1,6 +1,6 @@
 package shared
 
 type RetryBuildBatchInput struct {
-	ID        *string                  `json:"id"`
-	RetryType *RetryBuildBatchTypeEnum `json:"retryType"`
+	ID        *string                  `json:"id,omitempty"`
+	RetryType *RetryBuildBatchTypeEnum `json:"retryType,omitempty"`
 }

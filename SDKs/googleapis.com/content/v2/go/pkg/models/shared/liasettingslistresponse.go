@@ -1,7 +1,7 @@
 package shared
 
 type LiasettingsListResponse struct {
-	Kind          *string       `json:"kind"`
-	NextPageToken *string       `json:"nextPageToken"`
-	Resources     []LiaSettings `json:"resources"`
+	Kind          *string       `json:"kind,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	Resources     []LiaSettings `json:"resources,omitempty"`
 }

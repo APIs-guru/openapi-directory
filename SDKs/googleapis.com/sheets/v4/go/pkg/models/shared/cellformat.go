@@ -45,16 +45,16 @@ const (
 )
 
 type CellFormat struct {
-	BackgroundColor      *Color                              `json:"backgroundColor"`
-	BackgroundColorStyle *ColorStyle                         `json:"backgroundColorStyle"`
-	Borders              *Borders                            `json:"borders"`
-	HorizontalAlignment  *CellFormatHorizontalAlignmentEnum  `json:"horizontalAlignment"`
-	HyperlinkDisplayType *CellFormatHyperlinkDisplayTypeEnum `json:"hyperlinkDisplayType"`
-	NumberFormat         *NumberFormat                       `json:"numberFormat"`
-	Padding              *Padding                            `json:"padding"`
-	TextDirection        *CellFormatTextDirectionEnum        `json:"textDirection"`
-	TextFormat           *TextFormat                         `json:"textFormat"`
-	TextRotation         *TextRotation                       `json:"textRotation"`
-	VerticalAlignment    *CellFormatVerticalAlignmentEnum    `json:"verticalAlignment"`
-	WrapStrategy         *CellFormatWrapStrategyEnum         `json:"wrapStrategy"`
+	BackgroundColor      *Color                              `json:"backgroundColor,omitempty"`
+	BackgroundColorStyle *ColorStyle                         `json:"backgroundColorStyle,omitempty"`
+	Borders              *Borders                            `json:"borders,omitempty"`
+	HorizontalAlignment  *CellFormatHorizontalAlignmentEnum  `json:"horizontalAlignment,omitempty"`
+	HyperlinkDisplayType *CellFormatHyperlinkDisplayTypeEnum `json:"hyperlinkDisplayType,omitempty"`
+	NumberFormat         *NumberFormat                       `json:"numberFormat,omitempty"`
+	Padding              *Padding                            `json:"padding,omitempty"`
+	TextDirection        *CellFormatTextDirectionEnum        `json:"textDirection,omitempty"`
+	TextFormat           *TextFormat                         `json:"textFormat,omitempty"`
+	TextRotation         *TextRotation                       `json:"textRotation,omitempty"`
+	VerticalAlignment    *CellFormatVerticalAlignmentEnum    `json:"verticalAlignment,omitempty"`
+	WrapStrategy         *CellFormatWrapStrategyEnum         `json:"wrapStrategy,omitempty"`
 }

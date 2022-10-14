@@ -1,5 +1,5 @@
 package shared
 
 type MultiModelConfig struct {
-	ModelCacheSetting *ModelCacheSettingEnum `json:"ModelCacheSetting"`
+	ModelCacheSetting *ModelCacheSettingEnum `json:"ModelCacheSetting,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CreateBgpPeerRequest struct {
-	NewBgpPeer         *NewBgpPeer `json:"newBGPPeer"`
-	VirtualInterfaceID *string     `json:"virtualInterfaceId"`
+	NewBgpPeer         *NewBgpPeer `json:"newBGPPeer,omitempty"`
+	VirtualInterfaceID *string     `json:"virtualInterfaceId,omitempty"`
 }

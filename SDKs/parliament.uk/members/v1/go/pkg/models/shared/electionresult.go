@@ -5,16 +5,16 @@ import (
 )
 
 type ElectionResult struct {
-	Candidates        []ElectionCandidate `json:"candidates"`
-	ConstituencyName  *string             `json:"constituencyName"`
-	ElectionDate      *time.Time          `json:"electionDate"`
-	ElectionID        *int32              `json:"electionId"`
-	ElectionTitle     *string             `json:"electionTitle"`
-	Electorate        *int32              `json:"electorate"`
-	IsGeneralElection *bool               `json:"isGeneralElection"`
-	IsNotional        *bool               `json:"isNotional"`
-	Majority          *int32              `json:"majority"`
-	Result            *string             `json:"result"`
-	Turnout           *int32              `json:"turnout"`
-	WinningParty      *Party              `json:"winningParty"`
+	Candidates        []ElectionCandidate `json:"candidates,omitempty"`
+	ConstituencyName  *string             `json:"constituencyName,omitempty"`
+	ElectionDate      *time.Time          `json:"electionDate,omitempty"`
+	ElectionID        *int32              `json:"electionId,omitempty"`
+	ElectionTitle     *string             `json:"electionTitle,omitempty"`
+	Electorate        *int32              `json:"electorate,omitempty"`
+	IsGeneralElection *bool               `json:"isGeneralElection,omitempty"`
+	IsNotional        *bool               `json:"isNotional,omitempty"`
+	Majority          *int32              `json:"majority,omitempty"`
+	Result            *string             `json:"result,omitempty"`
+	Turnout           *int32              `json:"turnout,omitempty"`
+	WinningParty      *Party              `json:"winningParty,omitempty"`
 }

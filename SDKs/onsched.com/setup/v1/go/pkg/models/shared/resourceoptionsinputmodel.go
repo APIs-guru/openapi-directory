@@ -5,16 +5,16 @@ import (
 )
 
 type ResourceOptionsInputModel struct {
-	BioLink              *string    `json:"bioLink"`
-	BookingNotification  *int32     `json:"bookingNotification"`
-	CalendarAvailability *int32     `json:"calendarAvailability"`
-	DisplayColor         *string    `json:"displayColor"`
-	EffectiveDate        *time.Time `json:"effectiveDate"`
-	Gender               *string    `json:"gender"`
-	GoogleCalendarID     *string    `json:"googleCalendarId"`
-	Hourly               *float64   `json:"hourly"`
-	IgnoreBusinessHours  *bool      `json:"ignoreBusinessHours"`
-	NotificationType     *int32     `json:"notificationType"`
-	OutlookCalendarID    *string    `json:"outlookCalendarId"`
-	SortKey              *int32     `json:"sortKey"`
+	BioLink              *string    `json:"bioLink,omitempty"`
+	BookingNotification  *int32     `json:"bookingNotification,omitempty"`
+	CalendarAvailability *int32     `json:"calendarAvailability,omitempty"`
+	DisplayColor         *string    `json:"displayColor,omitempty"`
+	EffectiveDate        *time.Time `json:"effectiveDate,omitempty"`
+	Gender               *string    `json:"gender,omitempty"`
+	GoogleCalendarID     *string    `json:"googleCalendarId,omitempty"`
+	Hourly               *float64   `json:"hourly,omitempty"`
+	IgnoreBusinessHours  *bool      `json:"ignoreBusinessHours,omitempty"`
+	NotificationType     *int32     `json:"notificationType,omitempty"`
+	OutlookCalendarID    *string    `json:"outlookCalendarId,omitempty"`
+	SortKey              *int32     `json:"sortKey,omitempty"`
 }

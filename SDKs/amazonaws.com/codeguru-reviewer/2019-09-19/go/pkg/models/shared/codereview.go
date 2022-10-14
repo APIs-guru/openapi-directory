@@ -5,19 +5,19 @@ import (
 )
 
 type CodeReview struct {
-	AnalysisTypes        []AnalysisTypeEnum `json:"AnalysisTypes"`
-	AssociationArn       *string            `json:"AssociationArn"`
-	CodeReviewArn        *string            `json:"CodeReviewArn"`
-	CreatedTimeStamp     *time.Time         `json:"CreatedTimeStamp"`
-	LastUpdatedTimeStamp *time.Time         `json:"LastUpdatedTimeStamp"`
-	Metrics              *Metrics           `json:"Metrics"`
-	Name                 *string            `json:"Name"`
-	Owner                *string            `json:"Owner"`
-	ProviderType         *ProviderTypeEnum  `json:"ProviderType"`
-	PullRequestID        *string            `json:"PullRequestId"`
-	RepositoryName       *string            `json:"RepositoryName"`
-	SourceCodeType       *SourceCodeType    `json:"SourceCodeType"`
-	State                *JobStateEnum      `json:"State"`
-	StateReason          *string            `json:"StateReason"`
-	Type                 *TypeEnum          `json:"Type"`
+	AnalysisTypes        []AnalysisTypeEnum `json:"AnalysisTypes,omitempty"`
+	AssociationArn       *string            `json:"AssociationArn,omitempty"`
+	CodeReviewArn        *string            `json:"CodeReviewArn,omitempty"`
+	CreatedTimeStamp     *time.Time         `json:"CreatedTimeStamp,omitempty"`
+	LastUpdatedTimeStamp *time.Time         `json:"LastUpdatedTimeStamp,omitempty"`
+	Metrics              *Metrics           `json:"Metrics,omitempty"`
+	Name                 *string            `json:"Name,omitempty"`
+	Owner                *string            `json:"Owner,omitempty"`
+	ProviderType         *ProviderTypeEnum  `json:"ProviderType,omitempty"`
+	PullRequestID        *string            `json:"PullRequestId,omitempty"`
+	RepositoryName       *string            `json:"RepositoryName,omitempty"`
+	SourceCodeType       *SourceCodeType    `json:"SourceCodeType,omitempty"`
+	State                *JobStateEnum      `json:"State,omitempty"`
+	StateReason          *string            `json:"StateReason,omitempty"`
+	Type                 *TypeEnum          `json:"Type,omitempty"`
 }

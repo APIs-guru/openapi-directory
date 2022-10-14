@@ -8,7 +8,7 @@ const (
 )
 
 type GroupMembershipCriteria struct {
-	IPAddressMembershipCriteria *IPAddressMembershipCriteria               `json:"ip_address_membership_criteria"`
-	MembershipType              *GroupMembershipCriteriaMembershipTypeEnum `json:"membership_type"`
-	SearchMembershipCriteria    *SearchMembershipCriteria                  `json:"search_membership_criteria"`
+	IPAddressMembershipCriteria *IPAddressMembershipCriteria               `json:"ip_address_membership_criteria,omitempty"`
+	MembershipType              *GroupMembershipCriteriaMembershipTypeEnum `json:"membership_type,omitempty"`
+	SearchMembershipCriteria    *SearchMembershipCriteria                  `json:"search_membership_criteria,omitempty"`
 }

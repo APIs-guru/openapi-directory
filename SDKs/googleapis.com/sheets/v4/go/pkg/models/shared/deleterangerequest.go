@@ -9,6 +9,6 @@ const (
 )
 
 type DeleteRangeRequest struct {
-	Range          *GridRange                            `json:"range"`
-	ShiftDimension *DeleteRangeRequestShiftDimensionEnum `json:"shiftDimension"`
+	Range          *GridRange                            `json:"range,omitempty"`
+	ShiftDimension *DeleteRangeRequestShiftDimensionEnum `json:"shiftDimension,omitempty"`
 }

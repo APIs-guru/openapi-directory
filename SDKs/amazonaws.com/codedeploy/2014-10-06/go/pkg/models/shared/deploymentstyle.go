@@ -1,6 +1,6 @@
 package shared
 
 type DeploymentStyle struct {
-	DeploymentOption *DeploymentOptionEnum `json:"deploymentOption"`
-	DeploymentType   *DeploymentTypeEnum   `json:"deploymentType"`
+	DeploymentOption *DeploymentOptionEnum `json:"deploymentOption,omitempty"`
+	DeploymentType   *DeploymentTypeEnum   `json:"deploymentType,omitempty"`
 }

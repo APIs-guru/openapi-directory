@@ -9,7 +9,7 @@ const (
 )
 
 type SourceAndDestination struct {
-	Dimension  *SourceAndDestinationDimensionEnum `json:"dimension"`
-	FillLength *int32                             `json:"fillLength"`
-	Source     *GridRange                         `json:"source"`
+	Dimension  *SourceAndDestinationDimensionEnum `json:"dimension,omitempty"`
+	FillLength *int32                             `json:"fillLength,omitempty"`
+	Source     *GridRange                         `json:"source,omitempty"`
 }

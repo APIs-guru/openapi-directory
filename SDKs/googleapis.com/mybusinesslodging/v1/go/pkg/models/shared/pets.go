@@ -37,12 +37,12 @@ const (
 )
 
 type Pets struct {
-	CatsAllowed              *bool                             `json:"catsAllowed"`
-	CatsAllowedException     *PetsCatsAllowedExceptionEnum     `json:"catsAllowedException"`
-	DogsAllowed              *bool                             `json:"dogsAllowed"`
-	DogsAllowedException     *PetsDogsAllowedExceptionEnum     `json:"dogsAllowedException"`
-	PetsAllowed              *bool                             `json:"petsAllowed"`
-	PetsAllowedException     *PetsPetsAllowedExceptionEnum     `json:"petsAllowedException"`
-	PetsAllowedFree          *bool                             `json:"petsAllowedFree"`
-	PetsAllowedFreeException *PetsPetsAllowedFreeExceptionEnum `json:"petsAllowedFreeException"`
+	CatsAllowed              *bool                             `json:"catsAllowed,omitempty"`
+	CatsAllowedException     *PetsCatsAllowedExceptionEnum     `json:"catsAllowedException,omitempty"`
+	DogsAllowed              *bool                             `json:"dogsAllowed,omitempty"`
+	DogsAllowedException     *PetsDogsAllowedExceptionEnum     `json:"dogsAllowedException,omitempty"`
+	PetsAllowed              *bool                             `json:"petsAllowed,omitempty"`
+	PetsAllowedException     *PetsPetsAllowedExceptionEnum     `json:"petsAllowedException,omitempty"`
+	PetsAllowedFree          *bool                             `json:"petsAllowedFree,omitempty"`
+	PetsAllowedFreeException *PetsPetsAllowedFreeExceptionEnum `json:"petsAllowedFreeException,omitempty"`
 }

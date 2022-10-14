@@ -2,5 +2,5 @@ package shared
 
 type ValidateResourcePolicyRequest struct {
 	ResourcePolicy string  `json:"ResourcePolicy"`
-	SecretID       *string `json:"SecretId"`
+	SecretID       *string `json:"SecretId,omitempty"`
 }

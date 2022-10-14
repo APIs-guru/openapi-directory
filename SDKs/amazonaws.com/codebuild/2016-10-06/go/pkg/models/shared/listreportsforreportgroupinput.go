@@ -1,9 +1,9 @@
 package shared
 
 type ListReportsForReportGroupInput struct {
-	Filter         *ReportFilter      `json:"filter"`
-	MaxResults     *int64             `json:"maxResults"`
-	NextToken      *string            `json:"nextToken"`
+	Filter         *ReportFilter      `json:"filter,omitempty"`
+	MaxResults     *int64             `json:"maxResults,omitempty"`
+	NextToken      *string            `json:"nextToken,omitempty"`
 	ReportGroupArn string             `json:"reportGroupArn"`
-	SortOrder      *SortOrderTypeEnum `json:"sortOrder"`
+	SortOrder      *SortOrderTypeEnum `json:"sortOrder,omitempty"`
 }

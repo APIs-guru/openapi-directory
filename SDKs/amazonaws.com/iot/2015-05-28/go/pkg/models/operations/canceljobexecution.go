@@ -20,8 +20,8 @@ type CancelJobExecutionHeaders struct {
 }
 
 type CancelJobExecutionRequestBody struct {
-	ExpectedVersion *int64            `json:"expectedVersion"`
-	StatusDetails   map[string]string `json:"statusDetails"`
+	ExpectedVersion *int64            `json:"expectedVersion,omitempty"`
+	StatusDetails   map[string]string `json:"statusDetails,omitempty"`
 }
 
 type CancelJobExecutionRequest struct {

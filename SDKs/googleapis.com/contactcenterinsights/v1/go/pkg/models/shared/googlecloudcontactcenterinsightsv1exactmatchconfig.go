@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1ExactMatchConfig struct {
-	CaseSensitive *bool `json:"caseSensitive"`
+	CaseSensitive *bool `json:"caseSensitive,omitempty"`
 }

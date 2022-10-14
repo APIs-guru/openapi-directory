@@ -21,11 +21,11 @@ type Account struct {
 	ClearedBalance      int64           `json:"cleared_balance"`
 	Closed              bool            `json:"closed"`
 	Deleted             bool            `json:"deleted"`
-	DirectImportInError *bool           `json:"direct_import_in_error"`
-	DirectImportLinked  *bool           `json:"direct_import_linked"`
+	DirectImportInError *bool           `json:"direct_import_in_error,omitempty"`
+	DirectImportLinked  *bool           `json:"direct_import_linked,omitempty"`
 	ID                  string          `json:"id"`
 	Name                string          `json:"name"`
-	Note                *string         `json:"note"`
+	Note                *string         `json:"note,omitempty"`
 	OnBudget            bool            `json:"on_budget"`
 	TransferPayeeID     string          `json:"transfer_payee_id"`
 	Type                AccountTypeEnum `json:"type"`

@@ -1,5 +1,5 @@
 package shared
 
 type TargetingValueDemogGenderCriteria struct {
-	DemogGenderCriteriaIds []string `json:"demogGenderCriteriaIds"`
+	DemogGenderCriteriaIds []string `json:"demogGenderCriteriaIds,omitempty"`
 }

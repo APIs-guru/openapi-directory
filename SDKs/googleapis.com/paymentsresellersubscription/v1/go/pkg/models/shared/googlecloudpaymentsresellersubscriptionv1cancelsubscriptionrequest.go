@@ -15,6 +15,6 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest struct {
-	CancelImmediately  *bool                                                                                     `json:"cancelImmediately"`
-	CancellationReason *GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum `json:"cancellationReason"`
+	CancelImmediately  *bool                                                                                     `json:"cancelImmediately,omitempty"`
+	CancellationReason *GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum `json:"cancellationReason,omitempty"`
 }

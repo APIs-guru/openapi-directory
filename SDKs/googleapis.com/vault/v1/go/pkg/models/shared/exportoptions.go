@@ -10,10 +10,10 @@ const (
 )
 
 type ExportOptions struct {
-	DriveOptions        *DriveExportOptions        `json:"driveOptions"`
-	GroupsOptions       *GroupsExportOptions       `json:"groupsOptions"`
-	HangoutsChatOptions *HangoutsChatExportOptions `json:"hangoutsChatOptions"`
-	MailOptions         *MailExportOptions         `json:"mailOptions"`
-	Region              *ExportOptionsRegionEnum   `json:"region"`
-	VoiceOptions        *VoiceExportOptions        `json:"voiceOptions"`
+	DriveOptions        *DriveExportOptions        `json:"driveOptions,omitempty"`
+	GroupsOptions       *GroupsExportOptions       `json:"groupsOptions,omitempty"`
+	HangoutsChatOptions *HangoutsChatExportOptions `json:"hangoutsChatOptions,omitempty"`
+	MailOptions         *MailExportOptions         `json:"mailOptions,omitempty"`
+	Region              *ExportOptionsRegionEnum   `json:"region,omitempty"`
+	VoiceOptions        *VoiceExportOptions        `json:"voiceOptions,omitempty"`
 }

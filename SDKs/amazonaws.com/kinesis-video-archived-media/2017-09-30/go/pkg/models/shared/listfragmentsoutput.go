@@ -1,6 +1,6 @@
 package shared
 
 type ListFragmentsOutput struct {
-	Fragments []Fragment `json:"Fragments"`
-	NextToken *string    `json:"NextToken"`
+	Fragments []Fragment `json:"Fragments,omitempty"`
+	NextToken *string    `json:"NextToken,omitempty"`
 }

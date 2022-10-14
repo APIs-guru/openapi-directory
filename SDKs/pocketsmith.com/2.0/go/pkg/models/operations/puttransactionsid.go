@@ -13,14 +13,14 @@ type PutTransactionsIDQueryParams struct {
 }
 
 type PutTransactionsIDRequestBody struct {
-	Amount       *float64 `json:"amount"`
-	CategoryID   *int64   `json:"category_id"`
-	ChequeNumber *string  `json:"cheque_number"`
-	Date         *string  `json:"date"`
-	IsTransfer   *bool    `json:"is_transfer"`
-	Memo         *string  `json:"memo"`
-	Note         *string  `json:"note"`
-	Payee        *string  `json:"payee"`
+	Amount       *float64 `json:"amount,omitempty"`
+	CategoryID   *int64   `json:"category_id,omitempty"`
+	ChequeNumber *string  `json:"cheque_number,omitempty"`
+	Date         *string  `json:"date,omitempty"`
+	IsTransfer   *bool    `json:"is_transfer,omitempty"`
+	Memo         *string  `json:"memo,omitempty"`
+	Note         *string  `json:"note,omitempty"`
+	Payee        *string  `json:"payee,omitempty"`
 }
 
 type PutTransactionsIDRequest struct {

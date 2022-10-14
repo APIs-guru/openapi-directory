@@ -5,9 +5,9 @@ type UpdateDeviceCameraWirelessProfilesPathParams struct {
 }
 
 type UpdateDeviceCameraWirelessProfilesRequestBodyIds struct {
-	Backup    *string `json:"backup"`
-	Primary   *string `json:"primary"`
-	Secondary *string `json:"secondary"`
+	Backup    *string `json:"backup,omitempty"`
+	Primary   *string `json:"primary,omitempty"`
+	Secondary *string `json:"secondary,omitempty"`
 }
 
 type UpdateDeviceCameraWirelessProfilesRequestBody struct {

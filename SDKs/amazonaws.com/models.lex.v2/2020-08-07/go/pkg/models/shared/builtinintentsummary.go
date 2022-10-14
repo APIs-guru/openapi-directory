@@ -1,6 +1,6 @@
 package shared
 
 type BuiltInIntentSummary struct {
-	Description     *string `json:"description"`
-	IntentSignature *string `json:"intentSignature"`
+	Description     *string `json:"description,omitempty"`
+	IntentSignature *string `json:"intentSignature,omitempty"`
 }

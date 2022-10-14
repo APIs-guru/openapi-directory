@@ -1,6 +1,6 @@
 package shared
 
 type RecipientAccountReference struct {
-	ReferenceID   *string `json:"referenceId"`
-	ReferenceType *string `json:"referenceType"`
+	ReferenceID   *string `json:"referenceId,omitempty"`
+	ReferenceType *string `json:"referenceType,omitempty"`
 }

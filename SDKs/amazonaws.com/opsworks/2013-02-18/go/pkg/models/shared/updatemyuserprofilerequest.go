@@ -1,5 +1,5 @@
 package shared
 
 type UpdateMyUserProfileRequest struct {
-	SSHPublicKey *string `json:"SshPublicKey"`
+	SSHPublicKey *string `json:"SshPublicKey,omitempty"`
 }

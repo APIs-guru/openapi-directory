@@ -12,14 +12,14 @@ const (
 )
 
 type DealerDbModelsLicense struct {
-	Active                *bool                                           `json:"Active"`
-	CreatedDate           *time.Time                                      `json:"CreatedDate"`
-	DeactivatedDate       *time.Time                                      `json:"DeactivatedDate"`
-	LicenseActivationType *DealerDbModelsLicenseLicenseActivationTypeEnum `json:"LicenseActivationType"`
-	LicenseID             *string                                         `json:"LicenseID"`
-	LicenseVersion        *string                                         `json:"LicenseVersion"`
-	RefreshDate           *time.Time                                      `json:"RefreshDate"`
-	SystemInfo            *string                                         `json:"SystemInfo"`
-	UpdatedLicenseVersion *string                                         `json:"UpdatedLicenseVersion"`
-	VoucherCode           *string                                         `json:"VoucherCode"`
+	Active                *bool                                           `json:"Active,omitempty"`
+	CreatedDate           *time.Time                                      `json:"CreatedDate,omitempty"`
+	DeactivatedDate       *time.Time                                      `json:"DeactivatedDate,omitempty"`
+	LicenseActivationType *DealerDbModelsLicenseLicenseActivationTypeEnum `json:"LicenseActivationType,omitempty"`
+	LicenseID             *string                                         `json:"LicenseID,omitempty"`
+	LicenseVersion        *string                                         `json:"LicenseVersion,omitempty"`
+	RefreshDate           *time.Time                                      `json:"RefreshDate,omitempty"`
+	SystemInfo            *string                                         `json:"SystemInfo,omitempty"`
+	UpdatedLicenseVersion *string                                         `json:"UpdatedLicenseVersion,omitempty"`
+	VoucherCode           *string                                         `json:"VoucherCode,omitempty"`
 }

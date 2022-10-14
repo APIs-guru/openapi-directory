@@ -15,12 +15,12 @@ type CreateAPIHeaders struct {
 }
 
 type CreateAPIRequestBodyCorsConfiguration struct {
-	AllowCredentials *bool    `json:"AllowCredentials"`
-	AllowHeaders     []string `json:"AllowHeaders"`
-	AllowMethods     []string `json:"AllowMethods"`
-	AllowOrigins     []string `json:"AllowOrigins"`
-	ExposeHeaders    []string `json:"ExposeHeaders"`
-	MaxAge           *int64   `json:"MaxAge"`
+	AllowCredentials *bool    `json:"AllowCredentials,omitempty"`
+	AllowHeaders     []string `json:"AllowHeaders,omitempty"`
+	AllowMethods     []string `json:"AllowMethods,omitempty"`
+	AllowOrigins     []string `json:"AllowOrigins,omitempty"`
+	ExposeHeaders    []string `json:"ExposeHeaders,omitempty"`
+	MaxAge           *int64   `json:"MaxAge,omitempty"`
 }
 
 type CreateAPIRequestBodyProtocolTypeEnum string
@@ -31,19 +31,19 @@ const (
 )
 
 type CreateAPIRequestBody struct {
-	APIKeySelectionExpression *string                                `json:"apiKeySelectionExpression"`
-	CorsConfiguration         *CreateAPIRequestBodyCorsConfiguration `json:"corsConfiguration"`
-	CredentialsArn            *string                                `json:"credentialsArn"`
-	Description               *string                                `json:"description"`
-	DisableExecuteAPIEndpoint *bool                                  `json:"disableExecuteApiEndpoint"`
-	DisableSchemaValidation   *bool                                  `json:"disableSchemaValidation"`
+	APIKeySelectionExpression *string                                `json:"apiKeySelectionExpression,omitempty"`
+	CorsConfiguration         *CreateAPIRequestBodyCorsConfiguration `json:"corsConfiguration,omitempty"`
+	CredentialsArn            *string                                `json:"credentialsArn,omitempty"`
+	Description               *string                                `json:"description,omitempty"`
+	DisableExecuteAPIEndpoint *bool                                  `json:"disableExecuteApiEndpoint,omitempty"`
+	DisableSchemaValidation   *bool                                  `json:"disableSchemaValidation,omitempty"`
 	Name                      string                                 `json:"name"`
 	ProtocolType              CreateAPIRequestBodyProtocolTypeEnum   `json:"protocolType"`
-	RouteKey                  *string                                `json:"routeKey"`
-	RouteSelectionExpression  *string                                `json:"routeSelectionExpression"`
-	Tags                      map[string]string                      `json:"tags"`
-	Target                    *string                                `json:"target"`
-	Version                   *string                                `json:"version"`
+	RouteKey                  *string                                `json:"routeKey,omitempty"`
+	RouteSelectionExpression  *string                                `json:"routeSelectionExpression,omitempty"`
+	Tags                      map[string]string                      `json:"tags,omitempty"`
+	Target                    *string                                `json:"target,omitempty"`
+	Version                   *string                                `json:"version,omitempty"`
 }
 
 type CreateAPIRequest struct {

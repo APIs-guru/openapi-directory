@@ -1,5 +1,5 @@
 package shared
 
 type HTTPGatewayRoutePathRewrite struct {
-	Exact *string `json:"exact"`
+	Exact *string `json:"exact,omitempty"`
 }

@@ -12,6 +12,6 @@ const (
 )
 
 type ValidatorConfigJSON struct {
-	Op        *ValidatorConfigJSONOpEnum `json:"op"`
-	Threshold *int32                     `json:"threshold"`
+	Op        *ValidatorConfigJSONOpEnum `json:"op,omitempty"`
+	Threshold *int32                     `json:"threshold,omitempty"`
 }

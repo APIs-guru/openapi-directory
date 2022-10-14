@@ -14,17 +14,17 @@ const (
 )
 
 type Domain struct {
-	Admin              *string           `json:"admin"`
-	AuditLogsEnabled   *bool             `json:"auditLogsEnabled"`
-	AuthorizedNetworks []string          `json:"authorizedNetworks"`
-	CreateTime         *string           `json:"createTime"`
-	Fqdn               *string           `json:"fqdn"`
-	Labels             map[string]string `json:"labels"`
-	Locations          []string          `json:"locations"`
-	Name               *string           `json:"name"`
-	ReservedIPRange    *string           `json:"reservedIpRange"`
-	State              *DomainStateEnum  `json:"state"`
-	StatusMessage      *string           `json:"statusMessage"`
-	Trusts             []Trust           `json:"trusts"`
-	UpdateTime         *string           `json:"updateTime"`
+	Admin              *string           `json:"admin,omitempty"`
+	AuditLogsEnabled   *bool             `json:"auditLogsEnabled,omitempty"`
+	AuthorizedNetworks []string          `json:"authorizedNetworks,omitempty"`
+	CreateTime         *string           `json:"createTime,omitempty"`
+	Fqdn               *string           `json:"fqdn,omitempty"`
+	Labels             map[string]string `json:"labels,omitempty"`
+	Locations          []string          `json:"locations,omitempty"`
+	Name               *string           `json:"name,omitempty"`
+	ReservedIPRange    *string           `json:"reservedIpRange,omitempty"`
+	State              *DomainStateEnum  `json:"state,omitempty"`
+	StatusMessage      *string           `json:"statusMessage,omitempty"`
+	Trusts             []Trust           `json:"trusts,omitempty"`
+	UpdateTime         *string           `json:"updateTime,omitempty"`
 }

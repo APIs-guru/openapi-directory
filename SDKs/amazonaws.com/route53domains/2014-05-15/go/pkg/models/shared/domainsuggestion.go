@@ -1,6 +1,6 @@
 package shared
 
 type DomainSuggestion struct {
-	Availability *string `json:"Availability"`
-	DomainName   *string `json:"DomainName"`
+	Availability *string `json:"Availability,omitempty"`
+	DomainName   *string `json:"DomainName,omitempty"`
 }

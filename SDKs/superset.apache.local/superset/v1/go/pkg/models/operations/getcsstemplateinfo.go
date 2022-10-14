@@ -18,35 +18,35 @@ type GetCSSTemplateInfoRequest struct {
 }
 
 type GetCSSTemplateInfo200ApplicationJSONFiltersColumnName struct {
-	Name     *string `json:"name"`
-	Operator *string `json:"operator"`
+	Name     *string `json:"name,omitempty"`
+	Operator *string `json:"operator,omitempty"`
 }
 
 type GetCSSTemplateInfo200ApplicationJSONFilters struct {
-	ColumnName []GetCSSTemplateInfo200ApplicationJSONFiltersColumnName `json:"column_name"`
+	ColumnName []GetCSSTemplateInfo200ApplicationJSONFiltersColumnName `json:"column_name,omitempty"`
 }
 
 type GetCSSTemplateInfo200ApplicationJSON struct {
-	AddColumns  map[string]interface{}                       `json:"add_columns"`
-	EditColumns map[string]interface{}                       `json:"edit_columns"`
-	Filters     *GetCSSTemplateInfo200ApplicationJSONFilters `json:"filters"`
-	Permissions []string                                     `json:"permissions"`
+	AddColumns  map[string]interface{}                       `json:"add_columns,omitempty"`
+	EditColumns map[string]interface{}                       `json:"edit_columns,omitempty"`
+	Filters     *GetCSSTemplateInfo200ApplicationJSONFilters `json:"filters,omitempty"`
+	Permissions []string                                     `json:"permissions,omitempty"`
 }
 
 type GetCSSTemplateInfo400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateInfo401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateInfo422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateInfo500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateInfoResponse struct {

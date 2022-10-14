@@ -11,10 +11,10 @@ const (
 )
 
 type AsymmetricSignResponse struct {
-	Name                 *string                                    `json:"name"`
-	ProtectionLevel      *AsymmetricSignResponseProtectionLevelEnum `json:"protectionLevel"`
-	Signature            *string                                    `json:"signature"`
-	SignatureCrc32c      *string                                    `json:"signatureCrc32c"`
-	VerifiedDataCrc32c   *bool                                      `json:"verifiedDataCrc32c"`
-	VerifiedDigestCrc32c *bool                                      `json:"verifiedDigestCrc32c"`
+	Name                 *string                                    `json:"name,omitempty"`
+	ProtectionLevel      *AsymmetricSignResponseProtectionLevelEnum `json:"protectionLevel,omitempty"`
+	Signature            *string                                    `json:"signature,omitempty"`
+	SignatureCrc32c      *string                                    `json:"signatureCrc32c,omitempty"`
+	VerifiedDataCrc32c   *bool                                      `json:"verifiedDataCrc32c,omitempty"`
+	VerifiedDigestCrc32c *bool                                      `json:"verifiedDigestCrc32c,omitempty"`
 }

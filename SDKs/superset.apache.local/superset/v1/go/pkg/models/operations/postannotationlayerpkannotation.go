@@ -19,24 +19,24 @@ type PostAnnotationLayerPkAnnotationRequest struct {
 }
 
 type PostAnnotationLayerPkAnnotation201ApplicationJSON struct {
-	ID     *float64                      `json:"id"`
-	Result *shared.AnnotationRestAPIPost `json:"result"`
+	ID     *float64                      `json:"id,omitempty"`
+	Result *shared.AnnotationRestAPIPost `json:"result,omitempty"`
 }
 
 type PostAnnotationLayerPkAnnotation400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayerPkAnnotation401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayerPkAnnotation404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayerPkAnnotation500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayerPkAnnotationResponse struct {

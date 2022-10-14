@@ -11,9 +11,9 @@ const (
 )
 
 type MigrationsStartForAuthenticatedUserRequestBody struct {
-	Exclude            []MigrationsStartForAuthenticatedUserRequestBodyExcludeEnum `json:"exclude"`
-	ExcludeAttachments *bool                                                       `json:"exclude_attachments"`
-	LockRepositories   *bool                                                       `json:"lock_repositories"`
+	Exclude            []MigrationsStartForAuthenticatedUserRequestBodyExcludeEnum `json:"exclude,omitempty"`
+	ExcludeAttachments *bool                                                       `json:"exclude_attachments,omitempty"`
+	LockRepositories   *bool                                                       `json:"lock_repositories,omitempty"`
 	Repositories       []string                                                    `json:"repositories"`
 }
 

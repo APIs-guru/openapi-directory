@@ -1,9 +1,9 @@
 package shared
 
 type GoogleAppsDriveLabelsV2betaSelectionLimits struct {
-	ListLimits           *GoogleAppsDriveLabelsV2betaListLimits `json:"listLimits"`
-	MaxChoices           *int32                                 `json:"maxChoices"`
-	MaxDeletedChoices    *int32                                 `json:"maxDeletedChoices"`
-	MaxDisplayNameLength *int32                                 `json:"maxDisplayNameLength"`
-	MaxIDLength          *int32                                 `json:"maxIdLength"`
+	ListLimits           *GoogleAppsDriveLabelsV2betaListLimits `json:"listLimits,omitempty"`
+	MaxChoices           *int32                                 `json:"maxChoices,omitempty"`
+	MaxDeletedChoices    *int32                                 `json:"maxDeletedChoices,omitempty"`
+	MaxDisplayNameLength *int32                                 `json:"maxDisplayNameLength,omitempty"`
+	MaxIDLength          *int32                                 `json:"maxIdLength,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type CreateClusterRequest struct {
-	CapacityProviders               []string                       `json:"capacityProviders"`
-	ClusterName                     *string                        `json:"clusterName"`
-	Configuration                   *ClusterConfiguration          `json:"configuration"`
-	DefaultCapacityProviderStrategy []CapacityProviderStrategyItem `json:"defaultCapacityProviderStrategy"`
-	Settings                        []ClusterSetting               `json:"settings"`
-	Tags                            []Tag                          `json:"tags"`
+	CapacityProviders               []string                       `json:"capacityProviders,omitempty"`
+	ClusterName                     *string                        `json:"clusterName,omitempty"`
+	Configuration                   *ClusterConfiguration          `json:"configuration,omitempty"`
+	DefaultCapacityProviderStrategy []CapacityProviderStrategyItem `json:"defaultCapacityProviderStrategy,omitempty"`
+	Settings                        []ClusterSetting               `json:"settings,omitempty"`
+	Tags                            []Tag                          `json:"tags,omitempty"`
 }

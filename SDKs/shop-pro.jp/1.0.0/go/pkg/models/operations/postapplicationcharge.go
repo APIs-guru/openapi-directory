@@ -5,11 +5,11 @@ import (
 )
 
 type PostApplicationChargeRequestBodyApplicationCharge struct {
-	ApplicationChargeSourceID *string `json:"application_charge_source_id"`
+	ApplicationChargeSourceID *string `json:"application_charge_source_id,omitempty"`
 }
 
 type PostApplicationChargeRequestBody struct {
-	ApplicationCharge *PostApplicationChargeRequestBodyApplicationCharge `json:"application_charge"`
+	ApplicationCharge *PostApplicationChargeRequestBodyApplicationCharge `json:"application_charge,omitempty"`
 }
 
 type PostApplicationChargeSecurity struct {
@@ -22,14 +22,14 @@ type PostApplicationChargeRequest struct {
 }
 
 type PostApplicationCharge201ApplicationJSONApplicationCharge struct {
-	ID         *string `json:"id"`
-	MakeDate   *int64  `json:"make_date"`
-	Point      *int64  `json:"point"`
-	UpdateDate *int64  `json:"update_date"`
+	ID         *string `json:"id,omitempty"`
+	MakeDate   *int64  `json:"make_date,omitempty"`
+	Point      *int64  `json:"point,omitempty"`
+	UpdateDate *int64  `json:"update_date,omitempty"`
 }
 
 type PostApplicationCharge201ApplicationJSON struct {
-	ApplicationCharge *PostApplicationCharge201ApplicationJSONApplicationCharge `json:"application_charge"`
+	ApplicationCharge *PostApplicationCharge201ApplicationJSONApplicationCharge `json:"application_charge,omitempty"`
 }
 
 type PostApplicationChargeResponse struct {

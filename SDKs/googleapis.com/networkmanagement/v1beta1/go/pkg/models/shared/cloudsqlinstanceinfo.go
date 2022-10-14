@@ -1,10 +1,10 @@
 package shared
 
 type CloudSQLInstanceInfo struct {
-	DisplayName *string `json:"displayName"`
-	ExternalIP  *string `json:"externalIp"`
-	InternalIP  *string `json:"internalIp"`
-	NetworkURI  *string `json:"networkUri"`
-	Region      *string `json:"region"`
-	URI         *string `json:"uri"`
+	DisplayName *string `json:"displayName,omitempty"`
+	ExternalIP  *string `json:"externalIp,omitempty"`
+	InternalIP  *string `json:"internalIp,omitempty"`
+	NetworkURI  *string `json:"networkUri,omitempty"`
+	Region      *string `json:"region,omitempty"`
+	URI         *string `json:"uri,omitempty"`
 }

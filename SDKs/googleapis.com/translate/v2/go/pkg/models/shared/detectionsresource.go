@@ -1,7 +1,7 @@
 package shared
 
 type DetectionsResource struct {
-	Confidence *float32 `json:"confidence"`
-	IsReliable *bool    `json:"isReliable"`
-	Language   *string  `json:"language"`
+	Confidence *float32 `json:"confidence,omitempty"`
+	IsReliable *bool    `json:"isReliable,omitempty"`
+	Language   *string  `json:"language,omitempty"`
 }

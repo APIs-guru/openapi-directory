@@ -1,6 +1,6 @@
 package shared
 
 type Geometry struct {
-	BoundingBox *BoundingBox `json:"BoundingBox"`
-	Polygon     []Point      `json:"Polygon"`
+	BoundingBox *BoundingBox `json:"BoundingBox,omitempty"`
+	Polygon     []Point      `json:"Polygon,omitempty"`
 }

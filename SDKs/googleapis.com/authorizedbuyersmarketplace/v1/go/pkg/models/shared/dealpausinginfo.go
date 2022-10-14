@@ -9,7 +9,7 @@ const (
 )
 
 type DealPausingInfo struct {
-	PauseReason      *string                       `json:"pauseReason"`
-	PauseRole        *DealPausingInfoPauseRoleEnum `json:"pauseRole"`
-	PausingConsented *bool                         `json:"pausingConsented"`
+	PauseReason      *string                       `json:"pauseReason,omitempty"`
+	PauseRole        *DealPausingInfoPauseRoleEnum `json:"pauseRole,omitempty"`
+	PausingConsented *bool                         `json:"pausingConsented,omitempty"`
 }

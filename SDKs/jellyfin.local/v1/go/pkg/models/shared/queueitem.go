@@ -1,6 +1,6 @@
 package shared
 
 type QueueItem struct {
-	ID             *string `json:"Id"`
-	PlaylistItemID *string `json:"PlaylistItemId"`
+	ID             *string `json:"Id,omitempty"`
+	PlaylistItemID *string `json:"PlaylistItemId,omitempty"`
 }

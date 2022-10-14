@@ -26,14 +26,14 @@ const (
 )
 
 type SmartMeDeviceConfigurationContainer struct {
-	DeviceEncryptionKey *string                                                `json:"DeviceEncryptionKey"`
-	DevicePinCode       *string                                                `json:"DevicePinCode"`
-	DNSUpdateState      *SmartMeDeviceConfigurationContainerDNSUpdateStateEnum `json:"DnsUpdateState"`
-	EnableModbusTCP     *bool                                                  `json:"EnableModbusTcp"`
-	ID                  *string                                                `json:"Id"`
-	InputConfiguration  []InputConfigurationContainer                          `json:"InputConfiguration"`
-	OutputConfiguration []OutputConfigurationContainer                         `json:"OutputConfiguration"`
-	ShowReactiveEnergy  *bool                                                  `json:"ShowReactiveEnergy"`
-	SwitchConfiguration []SwitchConfigurationContainer                         `json:"SwitchConfiguration"`
-	UploadInterval      *SmartMeDeviceConfigurationContainerUploadIntervalEnum `json:"UploadInterval"`
+	DeviceEncryptionKey *string                                                `json:"DeviceEncryptionKey,omitempty"`
+	DevicePinCode       *string                                                `json:"DevicePinCode,omitempty"`
+	DNSUpdateState      *SmartMeDeviceConfigurationContainerDNSUpdateStateEnum `json:"DnsUpdateState,omitempty"`
+	EnableModbusTCP     *bool                                                  `json:"EnableModbusTcp,omitempty"`
+	ID                  *string                                                `json:"Id,omitempty"`
+	InputConfiguration  []InputConfigurationContainer                          `json:"InputConfiguration,omitempty"`
+	OutputConfiguration []OutputConfigurationContainer                         `json:"OutputConfiguration,omitempty"`
+	ShowReactiveEnergy  *bool                                                  `json:"ShowReactiveEnergy,omitempty"`
+	SwitchConfiguration []SwitchConfigurationContainer                         `json:"SwitchConfiguration,omitempty"`
+	UploadInterval      *SmartMeDeviceConfigurationContainerUploadIntervalEnum `json:"UploadInterval,omitempty"`
 }

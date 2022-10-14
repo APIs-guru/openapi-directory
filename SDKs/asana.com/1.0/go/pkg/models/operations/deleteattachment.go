@@ -19,7 +19,7 @@ type DeleteAttachmentRequest struct {
 }
 
 type DeleteAttachment200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteAttachmentResponse struct {

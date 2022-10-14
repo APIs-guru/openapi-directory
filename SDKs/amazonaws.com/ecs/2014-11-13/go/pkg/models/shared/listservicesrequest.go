@@ -1,9 +1,9 @@
 package shared
 
 type ListServicesRequest struct {
-	Cluster            *string                 `json:"cluster"`
-	LaunchType         *LaunchTypeEnum         `json:"launchType"`
-	MaxResults         *int64                  `json:"maxResults"`
-	NextToken          *string                 `json:"nextToken"`
-	SchedulingStrategy *SchedulingStrategyEnum `json:"schedulingStrategy"`
+	Cluster            *string                 `json:"cluster,omitempty"`
+	LaunchType         *LaunchTypeEnum         `json:"launchType,omitempty"`
+	MaxResults         *int64                  `json:"maxResults,omitempty"`
+	NextToken          *string                 `json:"nextToken,omitempty"`
+	SchedulingStrategy *SchedulingStrategyEnum `json:"schedulingStrategy,omitempty"`
 }

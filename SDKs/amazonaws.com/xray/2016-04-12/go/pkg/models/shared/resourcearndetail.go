@@ -1,5 +1,5 @@
 package shared
 
 type ResourceArnDetail struct {
-	Arn *string `json:"ARN"`
+	Arn *string `json:"ARN,omitempty"`
 }

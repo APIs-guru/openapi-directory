@@ -18,6 +18,6 @@ const (
 )
 
 type AcceleratorConfig struct {
-	CoreCount *string                    `json:"coreCount"`
-	Type      *AcceleratorConfigTypeEnum `json:"type"`
+	CoreCount *string                    `json:"coreCount,omitempty"`
+	Type      *AcceleratorConfigTypeEnum `json:"type,omitempty"`
 }

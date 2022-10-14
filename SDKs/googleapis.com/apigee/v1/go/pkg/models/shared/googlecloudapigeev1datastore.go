@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudApigeeV1Datastore struct {
-	CreateTime      *string                             `json:"createTime"`
-	DatastoreConfig *GoogleCloudApigeeV1DatastoreConfig `json:"datastoreConfig"`
-	DisplayName     *string                             `json:"displayName"`
-	LastUpdateTime  *string                             `json:"lastUpdateTime"`
-	Org             *string                             `json:"org"`
-	Self            *string                             `json:"self"`
-	TargetType      *string                             `json:"targetType"`
+	CreateTime      *string                             `json:"createTime,omitempty"`
+	DatastoreConfig *GoogleCloudApigeeV1DatastoreConfig `json:"datastoreConfig,omitempty"`
+	DisplayName     *string                             `json:"displayName,omitempty"`
+	LastUpdateTime  *string                             `json:"lastUpdateTime,omitempty"`
+	Org             *string                             `json:"org,omitempty"`
+	Self            *string                             `json:"self,omitempty"`
+	TargetType      *string                             `json:"targetType,omitempty"`
 }

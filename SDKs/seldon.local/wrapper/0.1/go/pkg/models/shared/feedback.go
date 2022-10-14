@@ -1,8 +1,8 @@
 package shared
 
 type Feedback struct {
-	Request  *SeldonMessage `json:"request"`
-	Response *SeldonMessage `json:"response"`
-	Reward   *float32       `json:"reward"`
-	Truth    *SeldonMessage `json:"truth"`
+	Request  *SeldonMessage `json:"request,omitempty"`
+	Response *SeldonMessage `json:"response,omitempty"`
+	Reward   *float32       `json:"reward,omitempty"`
+	Truth    *SeldonMessage `json:"truth,omitempty"`
 }

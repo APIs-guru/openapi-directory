@@ -1,9 +1,9 @@
 package shared
 
 type SetLocationsRequest struct {
-	ClusterID *string  `json:"clusterId"`
-	Locations []string `json:"locations"`
-	Name      *string  `json:"name"`
-	ProjectID *string  `json:"projectId"`
-	Zone      *string  `json:"zone"`
+	ClusterID *string  `json:"clusterId,omitempty"`
+	Locations []string `json:"locations,omitempty"`
+	Name      *string  `json:"name,omitempty"`
+	ProjectID *string  `json:"projectId,omitempty"`
+	Zone      *string  `json:"zone,omitempty"`
 }

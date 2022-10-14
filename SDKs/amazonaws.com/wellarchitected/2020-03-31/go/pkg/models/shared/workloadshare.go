@@ -1,11 +1,11 @@
 package shared
 
 type WorkloadShare struct {
-	PermissionType *PermissionTypeEnum `json:"PermissionType"`
-	ShareID        *string             `json:"ShareId"`
-	SharedBy       *string             `json:"SharedBy"`
-	SharedWith     *string             `json:"SharedWith"`
-	Status         *ShareStatusEnum    `json:"Status"`
-	WorkloadID     *string             `json:"WorkloadId"`
-	WorkloadName   *string             `json:"WorkloadName"`
+	PermissionType *PermissionTypeEnum `json:"PermissionType,omitempty"`
+	ShareID        *string             `json:"ShareId,omitempty"`
+	SharedBy       *string             `json:"SharedBy,omitempty"`
+	SharedWith     *string             `json:"SharedWith,omitempty"`
+	Status         *ShareStatusEnum    `json:"Status,omitempty"`
+	WorkloadID     *string             `json:"WorkloadId,omitempty"`
+	WorkloadName   *string             `json:"WorkloadName,omitempty"`
 }

@@ -9,25 +9,25 @@ type PostAccountsAccountOrdersPathParams struct {
 }
 
 type PostAccountsAccountOrdersRequestBody struct {
-	AuxPrice              *float64 `json:"Aux Price"`
-	ContractID            *float64 `json:"ContractId"`
-	Currency              *string  `json:"Currency"`
-	CustomerOrderID       *string  `json:"CustomerOrderId"`
-	GermanHftAlgo         *bool    `json:"GermanHftAlgo"`
-	InstrumentType        *string  `json:"InstrumentType"`
-	ListingExchange       *string  `json:"ListingExchange"`
-	Mifid2Algo            *string  `json:"Mifid2Algo"`
-	Mifid2DecisionMaker   *string  `json:"Mifid2DecisionMaker"`
-	Mifid2ExecutionAlgo   *string  `json:"Mifid2ExecutionAlgo"`
-	Mifid2ExecutionTrader *string  `json:"Mifid2ExecutionTrader"`
-	OrderType             *float64 `json:"Order Type"`
-	OrderRestrictions     *float64 `json:"OrderRestrictions"`
-	OutsideRth            *float64 `json:"Outside RTH"`
-	Price                 *float64 `json:"Price"`
-	Quantity              *float64 `json:"Quantity"`
-	Side                  *float64 `json:"Side"`
-	Ticker                *string  `json:"Ticker"`
-	TimeInForce           *float64 `json:"Time in Force"`
+	AuxPrice              *float64 `json:"Aux Price,omitempty"`
+	ContractID            *float64 `json:"ContractId,omitempty"`
+	Currency              *string  `json:"Currency,omitempty"`
+	CustomerOrderID       *string  `json:"CustomerOrderId,omitempty"`
+	GermanHftAlgo         *bool    `json:"GermanHftAlgo,omitempty"`
+	InstrumentType        *string  `json:"InstrumentType,omitempty"`
+	ListingExchange       *string  `json:"ListingExchange,omitempty"`
+	Mifid2Algo            *string  `json:"Mifid2Algo,omitempty"`
+	Mifid2DecisionMaker   *string  `json:"Mifid2DecisionMaker,omitempty"`
+	Mifid2ExecutionAlgo   *string  `json:"Mifid2ExecutionAlgo,omitempty"`
+	Mifid2ExecutionTrader *string  `json:"Mifid2ExecutionTrader,omitempty"`
+	OrderType             *float64 `json:"Order Type,omitempty"`
+	OrderRestrictions     *float64 `json:"OrderRestrictions,omitempty"`
+	OutsideRth            *float64 `json:"Outside RTH,omitempty"`
+	Price                 *float64 `json:"Price,omitempty"`
+	Quantity              *float64 `json:"Quantity,omitempty"`
+	Side                  *float64 `json:"Side,omitempty"`
+	Ticker                *string  `json:"Ticker,omitempty"`
+	TimeInForce           *float64 `json:"Time in Force,omitempty"`
 }
 
 type PostAccountsAccountOrdersRequest struct {

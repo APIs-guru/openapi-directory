@@ -1,8 +1,8 @@
 package shared
 
 type LogDescriptor struct {
-	Description *string           `json:"description"`
-	DisplayName *string           `json:"displayName"`
-	Labels      []LabelDescriptor `json:"labels"`
-	Name        *string           `json:"name"`
+	Description *string           `json:"description,omitempty"`
+	DisplayName *string           `json:"displayName,omitempty"`
+	Labels      []LabelDescriptor `json:"labels,omitempty"`
+	Name        *string           `json:"name,omitempty"`
 }

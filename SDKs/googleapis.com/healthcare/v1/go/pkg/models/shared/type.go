@@ -10,7 +10,7 @@ const (
 )
 
 type Type struct {
-	Fields    []Field            `json:"fields"`
-	Name      *string            `json:"name"`
-	Primitive *TypePrimitiveEnum `json:"primitive"`
+	Fields    []Field            `json:"fields,omitempty"`
+	Name      *string            `json:"name,omitempty"`
+	Primitive *TypePrimitiveEnum `json:"primitive,omitempty"`
 }

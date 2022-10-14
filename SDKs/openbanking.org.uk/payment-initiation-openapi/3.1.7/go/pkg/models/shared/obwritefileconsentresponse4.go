@@ -13,7 +13,7 @@ const (
 
 type ObWriteFileConsentResponse4DataAuthorisation struct {
 	AuthorisationType  ObWriteFileConsentResponse4DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
-	CompletionDateTime *time.Time                                                        `json:"CompletionDateTime"`
+	CompletionDateTime *time.Time                                                        `json:"CompletionDateTime,omitempty"`
 }
 
 type ObWriteFileConsentResponse4DataCharges struct {
@@ -24,27 +24,27 @@ type ObWriteFileConsentResponse4DataCharges struct {
 
 type ObWriteFileConsentResponse4DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteFileConsentResponse4DataInitiationRemittanceInformation struct {
-	Reference    *string `json:"Reference"`
-	Unstructured *string `json:"Unstructured"`
+	Reference    *string `json:"Reference,omitempty"`
+	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
 type ObWriteFileConsentResponse4DataInitiation struct {
-	ControlSum                 *float64                                                        `json:"ControlSum"`
-	DebtorAccount              *ObWriteFileConsentResponse4DataInitiationDebtorAccount         `json:"DebtorAccount"`
+	ControlSum                 *float64                                                        `json:"ControlSum,omitempty"`
+	DebtorAccount              *ObWriteFileConsentResponse4DataInitiationDebtorAccount         `json:"DebtorAccount,omitempty"`
 	FileHash                   string                                                          `json:"FileHash"`
-	FileReference              *string                                                         `json:"FileReference"`
+	FileReference              *string                                                         `json:"FileReference,omitempty"`
 	FileType                   string                                                          `json:"FileType"`
-	LocalInstrument            *string                                                         `json:"LocalInstrument"`
-	NumberOfTransactions       *string                                                         `json:"NumberOfTransactions"`
-	RemittanceInformation      *ObWriteFileConsentResponse4DataInitiationRemittanceInformation `json:"RemittanceInformation"`
-	RequestedExecutionDateTime *time.Time                                                      `json:"RequestedExecutionDateTime"`
-	SupplementaryData          map[string]interface{}                                          `json:"SupplementaryData"`
+	LocalInstrument            *string                                                         `json:"LocalInstrument,omitempty"`
+	NumberOfTransactions       *string                                                         `json:"NumberOfTransactions,omitempty"`
+	RemittanceInformation      *ObWriteFileConsentResponse4DataInitiationRemittanceInformation `json:"RemittanceInformation,omitempty"`
+	RequestedExecutionDateTime *time.Time                                                      `json:"RequestedExecutionDateTime,omitempty"`
+	SupplementaryData          map[string]interface{}                                          `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteFileConsentResponse4DataStatusEnum string
@@ -58,20 +58,20 @@ const (
 )
 
 type ObWriteFileConsentResponse4Data struct {
-	Authorisation        *ObWriteFileConsentResponse4DataAuthorisation `json:"Authorisation"`
-	Charges              []ObWriteFileConsentResponse4DataCharges      `json:"Charges"`
+	Authorisation        *ObWriteFileConsentResponse4DataAuthorisation `json:"Authorisation,omitempty"`
+	Charges              []ObWriteFileConsentResponse4DataCharges      `json:"Charges,omitempty"`
 	ConsentID            string                                        `json:"ConsentId"`
 	CreationDateTime     time.Time                                     `json:"CreationDateTime"`
-	CutOffDateTime       *time.Time                                    `json:"CutOffDateTime"`
-	Debtor               *ObCashAccountDebtor4                         `json:"Debtor"`
+	CutOffDateTime       *time.Time                                    `json:"CutOffDateTime,omitempty"`
+	Debtor               *ObCashAccountDebtor4                         `json:"Debtor,omitempty"`
 	Initiation           ObWriteFileConsentResponse4DataInitiation     `json:"Initiation"`
-	ScaSupportData       *ObscaSupportData1                            `json:"SCASupportData"`
+	ScaSupportData       *ObscaSupportData1                            `json:"SCASupportData,omitempty"`
 	Status               ObWriteFileConsentResponse4DataStatusEnum     `json:"Status"`
 	StatusUpdateDateTime time.Time                                     `json:"StatusUpdateDateTime"`
 }
 
 type ObWriteFileConsentResponse4 struct {
 	Data  ObWriteFileConsentResponse4Data `json:"Data"`
-	Links *Links                          `json:"Links"`
-	Meta  *Meta                           `json:"Meta"`
+	Links *Links                          `json:"Links,omitempty"`
+	Meta  *Meta                           `json:"Meta,omitempty"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsEngineEnum string
@@ -25,19 +25,19 @@ const (
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsMaintenanceWindow struct {
 	Day         string   `json:"day"`
-	Description []string `json:"description"`
+	Description []string `json:"description,omitempty"`
 	Hour        string   `json:"hour"`
-	Pending     *bool    `json:"pending"`
+	Pending     *bool    `json:"pending,omitempty"`
 }
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPrivateConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsStatusEnum string
@@ -69,27 +69,27 @@ const (
 )
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsUsers struct {
-	MysqlSettings *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsUsersMysqlSettings `json:"mysql_settings"`
+	MysqlSettings *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsUsersMysqlSettings `json:"mysql_settings,omitempty"`
 	Name          string                                                                                                 `json:"name"`
-	Password      *string                                                                                                `json:"password"`
-	Role          *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsUsersRoleEnum      `json:"role"`
+	Password      *string                                                                                                `json:"password,omitempty"`
+	Role          *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsUsersRoleEnum      `json:"role,omitempty"`
 }
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItems struct {
-	Connection         *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsConnection        `json:"connection"`
-	CreatedAt          *time.Time                                                                                            `json:"created_at"`
-	DbNames            []string                                                                                              `json:"db_names"`
+	Connection         *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsConnection        `json:"connection,omitempty"`
+	CreatedAt          *time.Time                                                                                            `json:"created_at,omitempty"`
+	DbNames            []string                                                                                              `json:"db_names,omitempty"`
 	Engine             Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsEngineEnum         `json:"engine"`
-	ID                 *string                                                                                               `json:"id"`
-	MaintenanceWindow  *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsMaintenanceWindow `json:"maintenance_window"`
+	ID                 *string                                                                                               `json:"id,omitempty"`
+	MaintenanceWindow  *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsMaintenanceWindow `json:"maintenance_window,omitempty"`
 	Name               string                                                                                                `json:"name"`
 	NumNodes           int64                                                                                                 `json:"num_nodes"`
-	PrivateConnection  *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPrivateConnection `json:"private_connection"`
-	PrivateNetworkUUID *string                                                                                               `json:"private_network_uuid"`
+	PrivateConnection  *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPrivateConnection `json:"private_connection,omitempty"`
+	PrivateNetworkUUID *string                                                                                               `json:"private_network_uuid,omitempty"`
 	Region             string                                                                                                `json:"region"`
 	Size               string                                                                                                `json:"size"`
-	Status             *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsStatusEnum        `json:"status"`
-	Tags               []string                                                                                              `json:"tags"`
-	Users              []Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsUsers            `json:"users"`
-	Version            *string                                                                                               `json:"version"`
+	Status             *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsStatusEnum        `json:"status,omitempty"`
+	Tags               []string                                                                                              `json:"tags,omitempty"`
+	Users              []Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsUsers            `json:"users,omitempty"`
+	Version            *string                                                                                               `json:"version,omitempty"`
 }

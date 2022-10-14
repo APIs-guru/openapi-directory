@@ -1,9 +1,9 @@
 package shared
 
 type AccountStatusProducts struct {
-	Channel         *string                       `json:"channel"`
-	Country         *string                       `json:"country"`
-	Destination     *string                       `json:"destination"`
-	ItemLevelIssues []AccountStatusItemLevelIssue `json:"itemLevelIssues"`
-	Statistics      *AccountStatusStatistics      `json:"statistics"`
+	Channel         *string                       `json:"channel,omitempty"`
+	Country         *string                       `json:"country,omitempty"`
+	Destination     *string                       `json:"destination,omitempty"`
+	ItemLevelIssues []AccountStatusItemLevelIssue `json:"itemLevelIssues,omitempty"`
+	Statistics      *AccountStatusStatistics      `json:"statistics,omitempty"`
 }

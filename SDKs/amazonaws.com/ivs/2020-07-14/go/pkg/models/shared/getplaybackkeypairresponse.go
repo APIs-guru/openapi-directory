@@ -1,5 +1,5 @@
 package shared
 
 type GetPlaybackKeyPairResponse struct {
-	KeyPair *PlaybackKeyPair `json:"keyPair"`
+	KeyPair *PlaybackKeyPair `json:"keyPair,omitempty"`
 }

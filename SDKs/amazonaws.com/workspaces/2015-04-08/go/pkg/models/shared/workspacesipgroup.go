@@ -1,8 +1,8 @@
 package shared
 
 type WorkspacesIPGroup struct {
-	GroupDesc *string      `json:"groupDesc"`
-	GroupID   *string      `json:"groupId"`
-	GroupName *string      `json:"groupName"`
-	UserRules []IPRuleItem `json:"userRules"`
+	GroupDesc *string      `json:"groupDesc,omitempty"`
+	GroupID   *string      `json:"groupId,omitempty"`
+	GroupName *string      `json:"groupName,omitempty"`
+	UserRules []IPRuleItem `json:"userRules,omitempty"`
 }

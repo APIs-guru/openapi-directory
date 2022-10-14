@@ -1,10 +1,10 @@
 package shared
 
 type ProcessDetails struct {
-	LaunchedAt   *string `json:"LaunchedAt"`
-	Name         *string `json:"Name"`
-	ParentPid    *int64  `json:"ParentPid"`
-	Path         *string `json:"Path"`
-	Pid          *int64  `json:"Pid"`
-	TerminatedAt *string `json:"TerminatedAt"`
+	LaunchedAt   *string `json:"LaunchedAt,omitempty"`
+	Name         *string `json:"Name,omitempty"`
+	ParentPid    *int64  `json:"ParentPid,omitempty"`
+	Path         *string `json:"Path,omitempty"`
+	Pid          *int64  `json:"Pid,omitempty"`
+	TerminatedAt *string `json:"TerminatedAt,omitempty"`
 }

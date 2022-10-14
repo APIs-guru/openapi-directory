@@ -1,9 +1,9 @@
 package shared
 
 type GrpcRouteMetadataMatchMethod struct {
-	Exact  *string     `json:"exact"`
-	Prefix *string     `json:"prefix"`
-	Range  *MatchRange `json:"range"`
-	Regex  *string     `json:"regex"`
-	Suffix *string     `json:"suffix"`
+	Exact  *string     `json:"exact,omitempty"`
+	Prefix *string     `json:"prefix,omitempty"`
+	Range  *MatchRange `json:"range,omitempty"`
+	Regex  *string     `json:"regex,omitempty"`
+	Suffix *string     `json:"suffix,omitempty"`
 }

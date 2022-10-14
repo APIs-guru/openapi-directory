@@ -9,13 +9,13 @@ type GistsUpdatePathParams struct {
 }
 
 type GistsUpdateRequestBodyFiles struct {
-	Content  *string `json:"content"`
-	Filename *string `json:"filename"`
+	Content  *string `json:"content,omitempty"`
+	Filename *string `json:"filename,omitempty"`
 }
 
 type GistsUpdateRequestBody struct {
-	Description *string                                `json:"description"`
-	Files       map[string]GistsUpdateRequestBodyFiles `json:"files"`
+	Description *string                                `json:"description,omitempty"`
+	Files       map[string]GistsUpdateRequestBodyFiles `json:"files,omitempty"`
 }
 
 type GistsUpdateRequest struct {

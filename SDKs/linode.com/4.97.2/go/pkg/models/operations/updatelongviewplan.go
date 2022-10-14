@@ -23,7 +23,7 @@ type UpdateLongviewPlanRequest struct {
 }
 
 type UpdateLongviewPlanDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateLongviewPlanResponse struct {

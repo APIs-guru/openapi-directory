@@ -1,5 +1,5 @@
 package shared
 
 type EventFilter struct {
-	DimensionFilter *PathQueryOptionsFilter `json:"dimensionFilter"`
+	DimensionFilter *PathQueryOptionsFilter `json:"dimensionFilter,omitempty"`
 }

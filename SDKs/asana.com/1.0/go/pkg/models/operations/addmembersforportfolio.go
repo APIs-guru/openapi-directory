@@ -14,7 +14,7 @@ type AddMembersForPortfolioQueryParams struct {
 }
 
 type AddMembersForPortfolioRequestBody struct {
-	Data *shared.AddMembersRequest `json:"data"`
+	Data *shared.AddMembersRequest `json:"data,omitempty"`
 }
 
 type AddMembersForPortfolioRequest struct {
@@ -24,7 +24,7 @@ type AddMembersForPortfolioRequest struct {
 }
 
 type AddMembersForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddMembersForPortfolioResponse struct {

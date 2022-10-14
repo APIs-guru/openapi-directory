@@ -1,6 +1,6 @@
 package shared
 
 type MatchedDeveloperMetadata struct {
-	DataFilters       []DataFilter       `json:"dataFilters"`
-	DeveloperMetadata *DeveloperMetadata `json:"developerMetadata"`
+	DataFilters       []DataFilter       `json:"dataFilters,omitempty"`
+	DeveloperMetadata *DeveloperMetadata `json:"developerMetadata,omitempty"`
 }

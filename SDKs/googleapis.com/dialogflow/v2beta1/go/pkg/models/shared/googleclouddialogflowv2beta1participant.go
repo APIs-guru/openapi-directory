@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1Participant struct {
-	DocumentsMetadataFilters map[string]string                                `json:"documentsMetadataFilters"`
-	Name                     *string                                          `json:"name"`
-	ObfuscatedExternalUserID *string                                          `json:"obfuscatedExternalUserId"`
-	Role                     *GoogleCloudDialogflowV2beta1ParticipantRoleEnum `json:"role"`
+	DocumentsMetadataFilters map[string]string                                `json:"documentsMetadataFilters,omitempty"`
+	Name                     *string                                          `json:"name,omitempty"`
+	ObfuscatedExternalUserID *string                                          `json:"obfuscatedExternalUserId,omitempty"`
+	Role                     *GoogleCloudDialogflowV2beta1ParticipantRoleEnum `json:"role,omitempty"`
 }

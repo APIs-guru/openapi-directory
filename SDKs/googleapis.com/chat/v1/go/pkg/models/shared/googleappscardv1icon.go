@@ -8,8 +8,8 @@ const (
 )
 
 type GoogleAppsCardV1Icon struct {
-	AltText   *string                            `json:"altText"`
-	IconURL   *string                            `json:"iconUrl"`
-	ImageType *GoogleAppsCardV1IconImageTypeEnum `json:"imageType"`
-	KnownIcon *string                            `json:"knownIcon"`
+	AltText   *string                            `json:"altText,omitempty"`
+	IconURL   *string                            `json:"iconUrl,omitempty"`
+	ImageType *GoogleAppsCardV1IconImageTypeEnum `json:"imageType,omitempty"`
+	KnownIcon *string                            `json:"knownIcon,omitempty"`
 }

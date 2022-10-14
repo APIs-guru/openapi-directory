@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudDialogflowV2ArticleSuggestionModelMetadata struct {
-	TrainingModelType *GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTypeEnum `json:"trainingModelType"`
+	TrainingModelType *GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTypeEnum `json:"trainingModelType,omitempty"`
 }

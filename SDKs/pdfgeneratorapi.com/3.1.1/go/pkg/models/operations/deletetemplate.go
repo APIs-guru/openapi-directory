@@ -9,11 +9,11 @@ type DeleteTemplateRequest struct {
 }
 
 type DeleteTemplate200ApplicationJSONResponse struct {
-	Success *bool `json:"success"`
+	Success *bool `json:"success,omitempty"`
 }
 
 type DeleteTemplate200ApplicationJSON struct {
-	Response *DeleteTemplate200ApplicationJSONResponse `json:"response"`
+	Response *DeleteTemplate200ApplicationJSONResponse `json:"response,omitempty"`
 }
 
 type DeleteTemplate401ApplicationJSONErrorEnum string
@@ -32,8 +32,8 @@ const (
 )
 
 type DeleteTemplate401ApplicationJSON struct {
-	Error  *DeleteTemplate401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *DeleteTemplate401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type DeleteTemplate403ApplicationJSONErrorEnum string
@@ -43,8 +43,8 @@ const (
 )
 
 type DeleteTemplate403ApplicationJSON struct {
-	Error  *DeleteTemplate403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *DeleteTemplate403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type DeleteTemplate404ApplicationJSONErrorEnum string
@@ -56,8 +56,8 @@ const (
 )
 
 type DeleteTemplate404ApplicationJSON struct {
-	Error  *DeleteTemplate404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *DeleteTemplate404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type DeleteTemplate422ApplicationJSONErrorEnum string
@@ -70,13 +70,13 @@ const (
 )
 
 type DeleteTemplate422ApplicationJSON struct {
-	Error  *DeleteTemplate422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *DeleteTemplate422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type DeleteTemplate500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type DeleteTemplateResponse struct {

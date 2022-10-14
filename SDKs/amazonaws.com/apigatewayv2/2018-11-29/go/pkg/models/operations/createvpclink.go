@@ -16,9 +16,9 @@ type CreateVpcLinkHeaders struct {
 
 type CreateVpcLinkRequestBody struct {
 	Name             string            `json:"name"`
-	SecurityGroupIds []string          `json:"securityGroupIds"`
+	SecurityGroupIds []string          `json:"securityGroupIds,omitempty"`
 	SubnetIds        []string          `json:"subnetIds"`
-	Tags             map[string]string `json:"tags"`
+	Tags             map[string]string `json:"tags,omitempty"`
 }
 
 type CreateVpcLinkRequest struct {

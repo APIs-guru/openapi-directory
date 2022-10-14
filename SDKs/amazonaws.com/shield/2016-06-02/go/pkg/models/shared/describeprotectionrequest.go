@@ -1,6 +1,6 @@
 package shared
 
 type DescribeProtectionRequest struct {
-	ProtectionID *string `json:"ProtectionId"`
-	ResourceArn  *string `json:"ResourceArn"`
+	ProtectionID *string `json:"ProtectionId,omitempty"`
+	ResourceArn  *string `json:"ResourceArn,omitempty"`
 }

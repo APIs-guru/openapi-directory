@@ -1,10 +1,10 @@
 package shared
 
 type Version struct {
-	CreateTime  *string                `json:"createTime"`
-	Description *string                `json:"description"`
-	Metadata    map[string]interface{} `json:"metadata"`
-	Name        *string                `json:"name"`
-	RelatedTags []Tag                  `json:"relatedTags"`
-	UpdateTime  *string                `json:"updateTime"`
+	CreateTime  *string                `json:"createTime,omitempty"`
+	Description *string                `json:"description,omitempty"`
+	Metadata    map[string]interface{} `json:"metadata,omitempty"`
+	Name        *string                `json:"name,omitempty"`
+	RelatedTags []Tag                  `json:"relatedTags,omitempty"`
+	UpdateTime  *string                `json:"updateTime,omitempty"`
 }

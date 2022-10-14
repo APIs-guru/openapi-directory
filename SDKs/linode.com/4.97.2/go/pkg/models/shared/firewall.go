@@ -19,10 +19,10 @@ const (
 )
 
 type FirewallRules struct {
-	Inbound        []FirewallRuleConfig             `json:"inbound"`
-	InboundPolicy  *FirewallRulesInboundPolicyEnum  `json:"inbound_policy"`
-	Outbound       []FirewallRuleConfig             `json:"outbound"`
-	OutboundPolicy *FirewallRulesOutboundPolicyEnum `json:"outbound_policy"`
+	Inbound        []FirewallRuleConfig             `json:"inbound,omitempty"`
+	InboundPolicy  *FirewallRulesInboundPolicyEnum  `json:"inbound_policy,omitempty"`
+	Outbound       []FirewallRuleConfig             `json:"outbound,omitempty"`
+	OutboundPolicy *FirewallRulesOutboundPolicyEnum `json:"outbound_policy,omitempty"`
 }
 
 type FirewallStatusEnum string
@@ -34,11 +34,11 @@ const (
 )
 
 type Firewall struct {
-	Created *time.Time          `json:"created"`
-	ID      *int64              `json:"id"`
-	Label   *string             `json:"label"`
-	Rules   *FirewallRules      `json:"rules"`
-	Status  *FirewallStatusEnum `json:"status"`
-	Tags    []string            `json:"tags"`
-	Updated *time.Time          `json:"updated"`
+	Created *time.Time          `json:"created,omitempty"`
+	ID      *int64              `json:"id,omitempty"`
+	Label   *string             `json:"label,omitempty"`
+	Rules   *FirewallRules      `json:"rules,omitempty"`
+	Status  *FirewallStatusEnum `json:"status,omitempty"`
+	Tags    []string            `json:"tags,omitempty"`
+	Updated *time.Time          `json:"updated,omitempty"`
 }

@@ -19,9 +19,9 @@ type PublishVersionHeaders struct {
 }
 
 type PublishVersionRequestBody struct {
-	CodeSha256  *string `json:"CodeSha256"`
-	Description *string `json:"Description"`
-	RevisionID  *string `json:"RevisionId"`
+	CodeSha256  *string `json:"CodeSha256,omitempty"`
+	Description *string `json:"Description,omitempty"`
+	RevisionID  *string `json:"RevisionId,omitempty"`
 }
 
 type PublishVersionRequest struct {

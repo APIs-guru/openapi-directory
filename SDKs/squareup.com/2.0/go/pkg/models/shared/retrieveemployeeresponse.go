@@ -1,6 +1,6 @@
 package shared
 
 type RetrieveEmployeeResponse struct {
-	Employee *Employee `json:"employee"`
-	Errors   []Error   `json:"errors"`
+	Employee *Employee `json:"employee,omitempty"`
+	Errors   []Error   `json:"errors,omitempty"`
 }

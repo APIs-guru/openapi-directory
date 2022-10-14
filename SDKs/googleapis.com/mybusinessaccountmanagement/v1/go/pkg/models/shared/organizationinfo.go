@@ -1,7 +1,7 @@
 package shared
 
 type OrganizationInfo struct {
-	Address          *PostalAddress `json:"address"`
-	PhoneNumber      *string        `json:"phoneNumber"`
-	RegisteredDomain *string        `json:"registeredDomain"`
+	Address          *PostalAddress `json:"address,omitempty"`
+	PhoneNumber      *string        `json:"phoneNumber,omitempty"`
+	RegisteredDomain *string        `json:"registeredDomain,omitempty"`
 }

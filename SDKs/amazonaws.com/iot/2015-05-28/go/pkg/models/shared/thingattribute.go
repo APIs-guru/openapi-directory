@@ -1,9 +1,9 @@
 package shared
 
 type ThingAttribute struct {
-	Attributes    map[string]string `json:"attributes"`
-	ThingArn      *string           `json:"thingArn"`
-	ThingName     *string           `json:"thingName"`
-	ThingTypeName *string           `json:"thingTypeName"`
-	Version       *int64            `json:"version"`
+	Attributes    map[string]string `json:"attributes,omitempty"`
+	ThingArn      *string           `json:"thingArn,omitempty"`
+	ThingName     *string           `json:"thingName,omitempty"`
+	ThingTypeName *string           `json:"thingTypeName,omitempty"`
+	Version       *int64            `json:"version,omitempty"`
 }

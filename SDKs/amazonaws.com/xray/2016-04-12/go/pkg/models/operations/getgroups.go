@@ -19,7 +19,7 @@ type GetGroupsHeaders struct {
 }
 
 type GetGroupsRequestBody struct {
-	NextToken *string `json:"NextToken"`
+	NextToken *string `json:"NextToken,omitempty"`
 }
 
 type GetGroupsRequest struct {

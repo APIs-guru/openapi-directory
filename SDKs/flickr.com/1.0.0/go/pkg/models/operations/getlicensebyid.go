@@ -9,18 +9,18 @@ type GetLicenseByIDRequest struct {
 }
 
 type GetLicenseByID200ApplicationJSONLicensesLicense struct {
-	ID   *int64  `json:"id"`
-	Name *string `json:"name"`
-	URL  *string `json:"url"`
+	ID   *int64  `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type GetLicenseByID200ApplicationJSONLicenses struct {
-	License []GetLicenseByID200ApplicationJSONLicensesLicense `json:"license"`
+	License []GetLicenseByID200ApplicationJSONLicensesLicense `json:"license,omitempty"`
 }
 
 type GetLicenseByID200ApplicationJSON struct {
-	Licenses *GetLicenseByID200ApplicationJSONLicenses `json:"licenses"`
-	Stat     *string                                   `json:"stat"`
+	Licenses *GetLicenseByID200ApplicationJSONLicenses `json:"licenses,omitempty"`
+	Stat     *string                                   `json:"stat,omitempty"`
 }
 
 type GetLicenseByIDResponse struct {

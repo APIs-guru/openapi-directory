@@ -1,5 +1,5 @@
 package shared
 
 type RuntimeMetrics struct {
-	SystemMetrics map[string]string `json:"systemMetrics"`
+	SystemMetrics map[string]string `json:"systemMetrics,omitempty"`
 }

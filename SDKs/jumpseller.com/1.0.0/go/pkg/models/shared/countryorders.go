@@ -1,8 +1,8 @@
 package shared
 
 type CountryOrders struct {
-	Code    *string        `json:"code"`
-	Count   *int64         `json:"count"`
-	Country *string        `json:"country"`
-	Orders  []RegionOrders `json:"orders"`
+	Code    *string        `json:"code,omitempty"`
+	Count   *int64         `json:"count,omitempty"`
+	Country *string        `json:"country,omitempty"`
+	Orders  []RegionOrders `json:"orders,omitempty"`
 }

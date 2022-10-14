@@ -1,6 +1,6 @@
 package shared
 
 type Category struct {
-	Code *string `json:"code"`
-	Name *string `json:"name"`
+	Code *string `json:"code,omitempty"`
+	Name *string `json:"name,omitempty"`
 }

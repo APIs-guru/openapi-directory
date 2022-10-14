@@ -5,12 +5,12 @@ import (
 )
 
 type VolumeRecommendation struct {
-	AccountID                   *string                      `json:"accountId"`
-	CurrentConfiguration        *VolumeConfiguration         `json:"currentConfiguration"`
-	Finding                     *EbsFindingEnum              `json:"finding"`
-	LastRefreshTimestamp        *time.Time                   `json:"lastRefreshTimestamp"`
-	LookBackPeriodInDays        *float64                     `json:"lookBackPeriodInDays"`
-	UtilizationMetrics          []EbsUtilizationMetric       `json:"utilizationMetrics"`
-	VolumeArn                   *string                      `json:"volumeArn"`
-	VolumeRecommendationOptions []VolumeRecommendationOption `json:"volumeRecommendationOptions"`
+	AccountID                   *string                      `json:"accountId,omitempty"`
+	CurrentConfiguration        *VolumeConfiguration         `json:"currentConfiguration,omitempty"`
+	Finding                     *EbsFindingEnum              `json:"finding,omitempty"`
+	LastRefreshTimestamp        *time.Time                   `json:"lastRefreshTimestamp,omitempty"`
+	LookBackPeriodInDays        *float64                     `json:"lookBackPeriodInDays,omitempty"`
+	UtilizationMetrics          []EbsUtilizationMetric       `json:"utilizationMetrics,omitempty"`
+	VolumeArn                   *string                      `json:"volumeArn,omitempty"`
+	VolumeRecommendationOptions []VolumeRecommendationOption `json:"volumeRecommendationOptions,omitempty"`
 }

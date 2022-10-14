@@ -1,5 +1,5 @@
 package shared
 
 type RegisterInstanceRequest struct {
-	InstanceID *string `json:"instanceId"`
+	InstanceID *string `json:"instanceId,omitempty"`
 }

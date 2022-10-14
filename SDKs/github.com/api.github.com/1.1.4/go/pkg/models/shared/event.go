@@ -5,19 +5,19 @@ import (
 )
 
 type EventPayloadPages struct {
-	Action   *string `json:"action"`
-	HTMLURL  *string `json:"html_url"`
-	PageName *string `json:"page_name"`
-	Sha      *string `json:"sha"`
-	Summary  *string `json:"summary"`
-	Title    *string `json:"title"`
+	Action   *string `json:"action,omitempty"`
+	HTMLURL  *string `json:"html_url,omitempty"`
+	PageName *string `json:"page_name,omitempty"`
+	Sha      *string `json:"sha,omitempty"`
+	Summary  *string `json:"summary,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }
 
 type EventPayload struct {
 	Action  string              `json:"action"`
-	Comment *IssueComment       `json:"comment"`
-	Issue   *IssueSimple        `json:"issue"`
-	Pages   []EventPayloadPages `json:"pages"`
+	Comment *IssueComment       `json:"comment,omitempty"`
+	Issue   *IssueSimple        `json:"issue,omitempty"`
+	Pages   []EventPayloadPages `json:"pages,omitempty"`
 }
 
 type EventRepo struct {
@@ -30,7 +30,7 @@ type Event struct {
 	Actor     Actor        `json:"actor"`
 	CreatedAt time.Time    `json:"created_at"`
 	ID        string       `json:"id"`
-	Org       *Actor       `json:"org"`
+	Org       *Actor       `json:"org,omitempty"`
 	Payload   EventPayload `json:"payload"`
 	Public    bool         `json:"public"`
 	Repo      EventRepo    `json:"repo"`

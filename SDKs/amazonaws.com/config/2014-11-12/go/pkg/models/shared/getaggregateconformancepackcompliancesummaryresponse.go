@@ -1,7 +1,7 @@
 package shared
 
 type GetAggregateConformancePackComplianceSummaryResponse struct {
-	AggregateConformancePackComplianceSummaries []AggregateConformancePackComplianceSummary `json:"AggregateConformancePackComplianceSummaries"`
-	GroupByKey                                  *string                                     `json:"GroupByKey"`
-	NextToken                                   *string                                     `json:"NextToken"`
+	AggregateConformancePackComplianceSummaries []AggregateConformancePackComplianceSummary `json:"AggregateConformancePackComplianceSummaries,omitempty"`
+	GroupByKey                                  *string                                     `json:"GroupByKey,omitempty"`
+	NextToken                                   *string                                     `json:"NextToken,omitempty"`
 }

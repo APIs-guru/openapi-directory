@@ -1,5 +1,5 @@
 package shared
 
 type IamPolicyAnalysisOutputConfig struct {
-	GcsDestination *GcsDestination `json:"gcsDestination"`
+	GcsDestination *GcsDestination `json:"gcsDestination,omitempty"`
 }

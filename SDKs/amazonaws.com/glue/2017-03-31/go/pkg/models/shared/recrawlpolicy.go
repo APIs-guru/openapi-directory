@@ -1,5 +1,5 @@
 package shared
 
 type RecrawlPolicy struct {
-	RecrawlBehavior *RecrawlBehaviorEnum `json:"RecrawlBehavior"`
+	RecrawlBehavior *RecrawlBehaviorEnum `json:"RecrawlBehavior,omitempty"`
 }

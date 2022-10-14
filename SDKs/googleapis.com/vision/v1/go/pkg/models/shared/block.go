@@ -12,9 +12,9 @@ const (
 )
 
 type Block struct {
-	BlockType   *BlockBlockTypeEnum `json:"blockType"`
-	BoundingBox *BoundingPoly       `json:"boundingBox"`
-	Confidence  *float32            `json:"confidence"`
-	Paragraphs  []Paragraph         `json:"paragraphs"`
-	Property    *TextProperty       `json:"property"`
+	BlockType   *BlockBlockTypeEnum `json:"blockType,omitempty"`
+	BoundingBox *BoundingPoly       `json:"boundingBox,omitempty"`
+	Confidence  *float32            `json:"confidence,omitempty"`
+	Paragraphs  []Paragraph         `json:"paragraphs,omitempty"`
+	Property    *TextProperty       `json:"property,omitempty"`
 }

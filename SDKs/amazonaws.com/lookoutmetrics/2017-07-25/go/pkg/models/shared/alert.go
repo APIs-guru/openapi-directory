@@ -5,14 +5,14 @@ import (
 )
 
 type Alert struct {
-	Action                    *Action          `json:"Action"`
-	AlertArn                  *string          `json:"AlertArn"`
-	AlertDescription          *string          `json:"AlertDescription"`
-	AlertName                 *string          `json:"AlertName"`
-	AlertSensitivityThreshold *int64           `json:"AlertSensitivityThreshold"`
-	AlertStatus               *AlertStatusEnum `json:"AlertStatus"`
-	AlertType                 *AlertTypeEnum   `json:"AlertType"`
-	AnomalyDetectorArn        *string          `json:"AnomalyDetectorArn"`
-	CreationTime              *time.Time       `json:"CreationTime"`
-	LastModificationTime      *time.Time       `json:"LastModificationTime"`
+	Action                    *Action          `json:"Action,omitempty"`
+	AlertArn                  *string          `json:"AlertArn,omitempty"`
+	AlertDescription          *string          `json:"AlertDescription,omitempty"`
+	AlertName                 *string          `json:"AlertName,omitempty"`
+	AlertSensitivityThreshold *int64           `json:"AlertSensitivityThreshold,omitempty"`
+	AlertStatus               *AlertStatusEnum `json:"AlertStatus,omitempty"`
+	AlertType                 *AlertTypeEnum   `json:"AlertType,omitempty"`
+	AnomalyDetectorArn        *string          `json:"AnomalyDetectorArn,omitempty"`
+	CreationTime              *time.Time       `json:"CreationTime,omitempty"`
+	LastModificationTime      *time.Time       `json:"LastModificationTime,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListAssociationsResult struct {
-	Associations []Association `json:"Associations"`
-	NextToken    *string       `json:"NextToken"`
+	Associations []Association `json:"Associations,omitempty"`
+	NextToken    *string       `json:"NextToken,omitempty"`
 }

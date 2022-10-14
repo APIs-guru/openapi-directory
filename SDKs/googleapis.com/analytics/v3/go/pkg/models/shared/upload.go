@@ -5,11 +5,11 @@ import (
 )
 
 type Upload struct {
-	AccountID          *string    `json:"accountId"`
-	CustomDataSourceID *string    `json:"customDataSourceId"`
-	Errors             []string   `json:"errors"`
-	ID                 *string    `json:"id"`
-	Kind               *string    `json:"kind"`
-	Status             *string    `json:"status"`
-	UploadTime         *time.Time `json:"uploadTime"`
+	AccountID          *string    `json:"accountId,omitempty"`
+	CustomDataSourceID *string    `json:"customDataSourceId,omitempty"`
+	Errors             []string   `json:"errors,omitempty"`
+	ID                 *string    `json:"id,omitempty"`
+	Kind               *string    `json:"kind,omitempty"`
+	Status             *string    `json:"status,omitempty"`
+	UploadTime         *time.Time `json:"uploadTime,omitempty"`
 }

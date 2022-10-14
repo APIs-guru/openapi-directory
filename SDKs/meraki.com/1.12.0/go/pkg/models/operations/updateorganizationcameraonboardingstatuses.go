@@ -5,8 +5,8 @@ type UpdateOrganizationCameraOnboardingStatusesPathParams struct {
 }
 
 type UpdateOrganizationCameraOnboardingStatusesRequestBody struct {
-	Serial                  *string `json:"serial"`
-	WirelessCredentialsSent *bool   `json:"wirelessCredentialsSent"`
+	Serial                  *string `json:"serial,omitempty"`
+	WirelessCredentialsSent *bool   `json:"wirelessCredentialsSent,omitempty"`
 }
 
 type UpdateOrganizationCameraOnboardingStatusesRequest struct {

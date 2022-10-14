@@ -1,6 +1,6 @@
 package shared
 
 type ListNamespacesResponse struct {
-	Namespaces    []Namespace `json:"namespaces"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Namespaces    []Namespace `json:"namespaces,omitempty"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
 }

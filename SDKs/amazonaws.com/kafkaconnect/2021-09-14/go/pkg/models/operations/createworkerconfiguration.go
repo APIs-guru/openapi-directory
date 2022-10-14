@@ -15,7 +15,7 @@ type CreateWorkerConfigurationHeaders struct {
 }
 
 type CreateWorkerConfigurationRequestBody struct {
-	Description           *string `json:"description"`
+	Description           *string `json:"description,omitempty"`
 	Name                  string  `json:"name"`
 	PropertiesFileContent string  `json:"propertiesFileContent"`
 }

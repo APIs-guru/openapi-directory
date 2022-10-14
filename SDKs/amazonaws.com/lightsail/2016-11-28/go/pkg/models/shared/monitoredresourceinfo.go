@@ -1,7 +1,7 @@
 package shared
 
 type MonitoredResourceInfo struct {
-	Arn          *string           `json:"arn"`
-	Name         *string           `json:"name"`
-	ResourceType *ResourceTypeEnum `json:"resourceType"`
+	Arn          *string           `json:"arn,omitempty"`
+	Name         *string           `json:"name,omitempty"`
+	ResourceType *ResourceTypeEnum `json:"resourceType,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type EnumOptionRequest struct {
-	Color        *string `json:"color"`
-	Enabled      *bool   `json:"enabled"`
-	Gid          *string `json:"gid"`
-	InsertAfter  *string `json:"insert_after"`
-	InsertBefore *string `json:"insert_before"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Color        *string `json:"color,omitempty"`
+	Enabled      *bool   `json:"enabled,omitempty"`
+	Gid          *string `json:"gid,omitempty"`
+	InsertAfter  *string `json:"insert_after,omitempty"`
+	InsertBefore *string `json:"insert_before,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }

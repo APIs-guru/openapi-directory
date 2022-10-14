@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudDialogflowV2ConversationDataset struct {
-	ConversationCount *string                                  `json:"conversationCount"`
-	ConversationInfo  *GoogleCloudDialogflowV2ConversationInfo `json:"conversationInfo"`
-	CreateTime        *string                                  `json:"createTime"`
-	Description       *string                                  `json:"description"`
-	DisplayName       *string                                  `json:"displayName"`
-	InputConfig       *GoogleCloudDialogflowV2InputConfig      `json:"inputConfig"`
-	Name              *string                                  `json:"name"`
+	ConversationCount *string                                  `json:"conversationCount,omitempty"`
+	ConversationInfo  *GoogleCloudDialogflowV2ConversationInfo `json:"conversationInfo,omitempty"`
+	CreateTime        *string                                  `json:"createTime,omitempty"`
+	Description       *string                                  `json:"description,omitempty"`
+	DisplayName       *string                                  `json:"displayName,omitempty"`
+	InputConfig       *GoogleCloudDialogflowV2InputConfig      `json:"inputConfig,omitempty"`
+	Name              *string                                  `json:"name,omitempty"`
 }

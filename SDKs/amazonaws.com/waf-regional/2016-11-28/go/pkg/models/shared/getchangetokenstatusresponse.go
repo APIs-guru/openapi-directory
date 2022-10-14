@@ -1,5 +1,5 @@
 package shared
 
 type GetChangeTokenStatusResponse struct {
-	ChangeTokenStatus *ChangeTokenStatusEnum `json:"ChangeTokenStatus"`
+	ChangeTokenStatus *ChangeTokenStatusEnum `json:"ChangeTokenStatus,omitempty"`
 }

@@ -8,7 +8,7 @@ const (
 )
 
 type Shipping struct {
-	ShippingPricingModel *ShippingShippingPricingModelEnum `json:"shippingPricingModel"`
-	Weight               *Weight                           `json:"weight"`
-	WeightInGrams        *int64                            `json:"weightInGrams"`
+	ShippingPricingModel *ShippingShippingPricingModelEnum `json:"shippingPricingModel,omitempty"`
+	Weight               *Weight                           `json:"weight,omitempty"`
+	WeightInGrams        *int64                            `json:"weightInGrams,omitempty"`
 }

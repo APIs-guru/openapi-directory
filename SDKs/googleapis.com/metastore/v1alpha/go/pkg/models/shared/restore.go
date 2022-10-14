@@ -19,10 +19,10 @@ const (
 )
 
 type Restore struct {
-	Backup    *string           `json:"backup"`
-	Details   *string           `json:"details"`
-	EndTime   *string           `json:"endTime"`
-	StartTime *string           `json:"startTime"`
-	State     *RestoreStateEnum `json:"state"`
-	Type      *RestoreTypeEnum  `json:"type"`
+	Backup    *string           `json:"backup,omitempty"`
+	Details   *string           `json:"details,omitempty"`
+	EndTime   *string           `json:"endTime,omitempty"`
+	StartTime *string           `json:"startTime,omitempty"`
+	State     *RestoreStateEnum `json:"state,omitempty"`
+	Type      *RestoreTypeEnum  `json:"type,omitempty"`
 }

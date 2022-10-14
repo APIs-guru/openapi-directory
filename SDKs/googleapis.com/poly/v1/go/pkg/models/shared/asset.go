@@ -18,18 +18,18 @@ const (
 )
 
 type Asset struct {
-	AuthorName         *string              `json:"authorName"`
-	CreateTime         *string              `json:"createTime"`
-	Description        *string              `json:"description"`
-	DisplayName        *string              `json:"displayName"`
-	Formats            []Format             `json:"formats"`
-	IsCurated          *bool                `json:"isCurated"`
-	License            *AssetLicenseEnum    `json:"license"`
-	Metadata           *string              `json:"metadata"`
-	Name               *string              `json:"name"`
-	PresentationParams *PresentationParams  `json:"presentationParams"`
-	RemixInfo          *RemixInfo           `json:"remixInfo"`
-	Thumbnail          *File                `json:"thumbnail"`
-	UpdateTime         *string              `json:"updateTime"`
-	Visibility         *AssetVisibilityEnum `json:"visibility"`
+	AuthorName         *string              `json:"authorName,omitempty"`
+	CreateTime         *string              `json:"createTime,omitempty"`
+	Description        *string              `json:"description,omitempty"`
+	DisplayName        *string              `json:"displayName,omitempty"`
+	Formats            []Format             `json:"formats,omitempty"`
+	IsCurated          *bool                `json:"isCurated,omitempty"`
+	License            *AssetLicenseEnum    `json:"license,omitempty"`
+	Metadata           *string              `json:"metadata,omitempty"`
+	Name               *string              `json:"name,omitempty"`
+	PresentationParams *PresentationParams  `json:"presentationParams,omitempty"`
+	RemixInfo          *RemixInfo           `json:"remixInfo,omitempty"`
+	Thumbnail          *File                `json:"thumbnail,omitempty"`
+	UpdateTime         *string              `json:"updateTime,omitempty"`
+	Visibility         *AssetVisibilityEnum `json:"visibility,omitempty"`
 }

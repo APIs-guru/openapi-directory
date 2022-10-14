@@ -1,6 +1,6 @@
 package shared
 
 type ContainerServiceStateDetail struct {
-	Code    *ContainerServiceStateDetailCodeEnum `json:"code"`
-	Message *string                              `json:"message"`
+	Code    *ContainerServiceStateDetailCodeEnum `json:"code,omitempty"`
+	Message *string                              `json:"message,omitempty"`
 }

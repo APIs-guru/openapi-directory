@@ -1,6 +1,6 @@
 package shared
 
 type ListHsmsResponse struct {
-	HsmList   []string `json:"HsmList"`
-	NextToken *string  `json:"NextToken"`
+	HsmList   []string `json:"HsmList,omitempty"`
+	NextToken *string  `json:"NextToken,omitempty"`
 }

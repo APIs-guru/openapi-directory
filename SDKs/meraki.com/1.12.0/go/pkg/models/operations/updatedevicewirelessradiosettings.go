@@ -5,20 +5,20 @@ type UpdateDeviceWirelessRadioSettingsPathParams struct {
 }
 
 type UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings struct {
-	Channel      *int64 `json:"channel"`
-	ChannelWidth *int64 `json:"channelWidth"`
-	TargetPower  *int64 `json:"targetPower"`
+	Channel      *int64 `json:"channel,omitempty"`
+	ChannelWidth *int64 `json:"channelWidth,omitempty"`
+	TargetPower  *int64 `json:"targetPower,omitempty"`
 }
 
 type UpdateDeviceWirelessRadioSettingsRequestBodyTwoFourGhzSettings struct {
-	Channel     *int64 `json:"channel"`
-	TargetPower *int64 `json:"targetPower"`
+	Channel     *int64 `json:"channel,omitempty"`
+	TargetPower *int64 `json:"targetPower,omitempty"`
 }
 
 type UpdateDeviceWirelessRadioSettingsRequestBody struct {
-	FiveGhzSettings    *UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings    `json:"fiveGhzSettings"`
-	RfProfileID        *int64                                                          `json:"rfProfileId"`
-	TwoFourGhzSettings *UpdateDeviceWirelessRadioSettingsRequestBodyTwoFourGhzSettings `json:"twoFourGhzSettings"`
+	FiveGhzSettings    *UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings    `json:"fiveGhzSettings,omitempty"`
+	RfProfileID        *int64                                                          `json:"rfProfileId,omitempty"`
+	TwoFourGhzSettings *UpdateDeviceWirelessRadioSettingsRequestBodyTwoFourGhzSettings `json:"twoFourGhzSettings,omitempty"`
 }
 
 type UpdateDeviceWirelessRadioSettingsRequest struct {

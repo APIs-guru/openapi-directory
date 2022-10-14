@@ -1,17 +1,17 @@
 package shared
 
 type Site struct {
-	AccountID                     *string            `json:"accountId"`
-	Approved                      *bool              `json:"approved"`
-	DirectorySiteID               *string            `json:"directorySiteId"`
-	DirectorySiteIDDimensionValue *DimensionValue    `json:"directorySiteIdDimensionValue"`
-	ID                            *string            `json:"id"`
-	IDDimensionValue              *DimensionValue    `json:"idDimensionValue"`
-	KeyName                       *string            `json:"keyName"`
-	Kind                          *string            `json:"kind"`
-	Name                          *string            `json:"name"`
-	SiteContacts                  []SiteContact      `json:"siteContacts"`
-	SiteSettings                  *SiteSettings      `json:"siteSettings"`
-	SubaccountID                  *string            `json:"subaccountId"`
-	VideoSettings                 *SiteVideoSettings `json:"videoSettings"`
+	AccountID                     *string            `json:"accountId,omitempty"`
+	Approved                      *bool              `json:"approved,omitempty"`
+	DirectorySiteID               *string            `json:"directorySiteId,omitempty"`
+	DirectorySiteIDDimensionValue *DimensionValue    `json:"directorySiteIdDimensionValue,omitempty"`
+	ID                            *string            `json:"id,omitempty"`
+	IDDimensionValue              *DimensionValue    `json:"idDimensionValue,omitempty"`
+	KeyName                       *string            `json:"keyName,omitempty"`
+	Kind                          *string            `json:"kind,omitempty"`
+	Name                          *string            `json:"name,omitempty"`
+	SiteContacts                  []SiteContact      `json:"siteContacts,omitempty"`
+	SiteSettings                  *SiteSettings      `json:"siteSettings,omitempty"`
+	SubaccountID                  *string            `json:"subaccountId,omitempty"`
+	VideoSettings                 *SiteVideoSettings `json:"videoSettings,omitempty"`
 }

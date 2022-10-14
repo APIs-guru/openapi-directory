@@ -5,10 +5,10 @@ import (
 )
 
 type DeliverabilityTestReport struct {
-	CreateDate               *time.Time                    `json:"CreateDate"`
-	DeliverabilityTestStatus *DeliverabilityTestStatusEnum `json:"DeliverabilityTestStatus"`
-	FromEmailAddress         *string                       `json:"FromEmailAddress"`
-	ReportID                 *string                       `json:"ReportId"`
-	ReportName               *string                       `json:"ReportName"`
-	Subject                  *string                       `json:"Subject"`
+	CreateDate               *time.Time                    `json:"CreateDate,omitempty"`
+	DeliverabilityTestStatus *DeliverabilityTestStatusEnum `json:"DeliverabilityTestStatus,omitempty"`
+	FromEmailAddress         *string                       `json:"FromEmailAddress,omitempty"`
+	ReportID                 *string                       `json:"ReportId,omitempty"`
+	ReportName               *string                       `json:"ReportName,omitempty"`
+	Subject                  *string                       `json:"Subject,omitempty"`
 }

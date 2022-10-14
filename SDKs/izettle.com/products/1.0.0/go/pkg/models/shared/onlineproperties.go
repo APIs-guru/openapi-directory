@@ -8,10 +8,10 @@ const (
 )
 
 type OnlineProperties struct {
-	Description  *string                    `json:"description"`
-	Presentation *Presentation              `json:"presentation"`
-	Seo          *SearchEngineOptimization  `json:"seo"`
-	Shipping     *Shipping                  `json:"shipping"`
+	Description  *string                    `json:"description,omitempty"`
+	Presentation *Presentation              `json:"presentation,omitempty"`
+	Seo          *SearchEngineOptimization  `json:"seo,omitempty"`
+	Shipping     *Shipping                  `json:"shipping,omitempty"`
 	Status       OnlinePropertiesStatusEnum `json:"status"`
-	Title        *string                    `json:"title"`
+	Title        *string                    `json:"title,omitempty"`
 }

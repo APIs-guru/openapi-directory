@@ -1,6 +1,6 @@
 package shared
 
 type ListTypesResponse struct {
-	NextToken *string `json:"nextToken"`
-	Types     []Type  `json:"types"`
+	NextToken *string `json:"nextToken,omitempty"`
+	Types     []Type  `json:"types,omitempty"`
 }

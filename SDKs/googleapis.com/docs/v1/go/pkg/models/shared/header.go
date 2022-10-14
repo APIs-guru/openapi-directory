@@ -1,6 +1,6 @@
 package shared
 
 type Header struct {
-	Content  []StructuralElement `json:"content"`
-	HeaderID *string             `json:"headerId"`
+	Content  []StructuralElement `json:"content,omitempty"`
+	HeaderID *string             `json:"headerId,omitempty"`
 }

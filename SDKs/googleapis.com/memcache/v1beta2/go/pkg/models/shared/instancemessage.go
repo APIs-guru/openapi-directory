@@ -8,6 +8,6 @@ const (
 )
 
 type InstanceMessage struct {
-	Code    *InstanceMessageCodeEnum `json:"code"`
-	Message *string                  `json:"message"`
+	Code    *InstanceMessageCodeEnum `json:"code,omitempty"`
+	Message *string                  `json:"message,omitempty"`
 }

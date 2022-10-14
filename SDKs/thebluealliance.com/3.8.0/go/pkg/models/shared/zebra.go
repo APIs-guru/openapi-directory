@@ -1,8 +1,8 @@
 package shared
 
 type ZebraAlliances struct {
-	Blue []ZebraTeam `json:"blue"`
-	Red  []ZebraTeam `json:"red"`
+	Blue []ZebraTeam `json:"blue,omitempty"`
+	Red  []ZebraTeam `json:"red,omitempty"`
 }
 
 type Zebra struct {

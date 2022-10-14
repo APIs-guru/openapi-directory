@@ -1,7 +1,7 @@
 package shared
 
 type MetadataInfo struct {
-	CreatedTime            *string                      `json:"CreatedTime"`
-	MetadataValue          *string                      `json:"MetadataValue"`
-	OtherMetadataValueList []OtherMetadataValueListItem `json:"OtherMetadataValueList"`
+	CreatedTime            *string                      `json:"CreatedTime,omitempty"`
+	MetadataValue          *string                      `json:"MetadataValue,omitempty"`
+	OtherMetadataValueList []OtherMetadataValueListItem `json:"OtherMetadataValueList,omitempty"`
 }

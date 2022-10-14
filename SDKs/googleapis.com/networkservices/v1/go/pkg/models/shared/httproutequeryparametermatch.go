@@ -1,8 +1,8 @@
 package shared
 
 type HTTPRouteQueryParameterMatch struct {
-	ExactMatch     *string `json:"exactMatch"`
-	PresentMatch   *bool   `json:"presentMatch"`
-	QueryParameter *string `json:"queryParameter"`
-	RegexMatch     *string `json:"regexMatch"`
+	ExactMatch     *string `json:"exactMatch,omitempty"`
+	PresentMatch   *bool   `json:"presentMatch,omitempty"`
+	QueryParameter *string `json:"queryParameter,omitempty"`
+	RegexMatch     *string `json:"regexMatch,omitempty"`
 }

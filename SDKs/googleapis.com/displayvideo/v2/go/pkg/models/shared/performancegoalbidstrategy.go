@@ -14,8 +14,8 @@ const (
 )
 
 type PerformanceGoalBidStrategy struct {
-	CustomBiddingAlgorithmID     *string                                            `json:"customBiddingAlgorithmId"`
-	MaxAverageCpmBidAmountMicros *string                                            `json:"maxAverageCpmBidAmountMicros"`
-	PerformanceGoalAmountMicros  *string                                            `json:"performanceGoalAmountMicros"`
-	PerformanceGoalType          *PerformanceGoalBidStrategyPerformanceGoalTypeEnum `json:"performanceGoalType"`
+	CustomBiddingAlgorithmID     *string                                            `json:"customBiddingAlgorithmId,omitempty"`
+	MaxAverageCpmBidAmountMicros *string                                            `json:"maxAverageCpmBidAmountMicros,omitempty"`
+	PerformanceGoalAmountMicros  *string                                            `json:"performanceGoalAmountMicros,omitempty"`
+	PerformanceGoalType          *PerformanceGoalBidStrategyPerformanceGoalTypeEnum `json:"performanceGoalType,omitempty"`
 }

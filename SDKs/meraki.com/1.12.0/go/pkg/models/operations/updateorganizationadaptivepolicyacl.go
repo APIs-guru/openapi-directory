@@ -30,17 +30,17 @@ const (
 )
 
 type UpdateOrganizationAdaptivePolicyACLRequestBodyRules struct {
-	DstPort  *string                                                         `json:"dstPort"`
+	DstPort  *string                                                         `json:"dstPort,omitempty"`
 	Policy   UpdateOrganizationAdaptivePolicyACLRequestBodyRulesPolicyEnum   `json:"policy"`
 	Protocol UpdateOrganizationAdaptivePolicyACLRequestBodyRulesProtocolEnum `json:"protocol"`
-	SrcPort  *string                                                         `json:"srcPort"`
+	SrcPort  *string                                                         `json:"srcPort,omitempty"`
 }
 
 type UpdateOrganizationAdaptivePolicyACLRequestBody struct {
-	Description *string                                                      `json:"description"`
-	IPVersion   *UpdateOrganizationAdaptivePolicyACLRequestBodyIPVersionEnum `json:"ipVersion"`
-	Name        *string                                                      `json:"name"`
-	Rules       []UpdateOrganizationAdaptivePolicyACLRequestBodyRules        `json:"rules"`
+	Description *string                                                      `json:"description,omitempty"`
+	IPVersion   *UpdateOrganizationAdaptivePolicyACLRequestBodyIPVersionEnum `json:"ipVersion,omitempty"`
+	Name        *string                                                      `json:"name,omitempty"`
+	Rules       []UpdateOrganizationAdaptivePolicyACLRequestBodyRules        `json:"rules,omitempty"`
 }
 
 type UpdateOrganizationAdaptivePolicyACLRequest struct {

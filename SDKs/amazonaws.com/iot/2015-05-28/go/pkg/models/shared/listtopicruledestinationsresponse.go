@@ -1,6 +1,6 @@
 package shared
 
 type ListTopicRuleDestinationsResponse struct {
-	DestinationSummaries []TopicRuleDestinationSummary `json:"destinationSummaries"`
-	NextToken            *string                       `json:"nextToken"`
+	DestinationSummaries []TopicRuleDestinationSummary `json:"destinationSummaries,omitempty"`
+	NextToken            *string                       `json:"nextToken,omitempty"`
 }

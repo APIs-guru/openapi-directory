@@ -1,6 +1,6 @@
 package shared
 
 type RowDimensions struct {
-	PublisherIdentifier *string       `json:"publisherIdentifier"`
-	TimeInterval        *TimeInterval `json:"timeInterval"`
+	PublisherIdentifier *string       `json:"publisherIdentifier,omitempty"`
+	TimeInterval        *TimeInterval `json:"timeInterval,omitempty"`
 }

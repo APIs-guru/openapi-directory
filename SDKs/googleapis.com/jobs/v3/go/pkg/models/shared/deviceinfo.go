@@ -13,6 +13,6 @@ const (
 )
 
 type DeviceInfo struct {
-	DeviceType *DeviceInfoDeviceTypeEnum `json:"deviceType"`
-	ID         *string                   `json:"id"`
+	DeviceType *DeviceInfoDeviceTypeEnum `json:"deviceType,omitempty"`
+	ID         *string                   `json:"id,omitempty"`
 }

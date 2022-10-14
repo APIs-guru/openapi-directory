@@ -12,7 +12,7 @@ type PutReturnsRequestBodyItems struct {
 
 type PutReturnsRequestBodyRmaRequestV2 struct {
 	Items           []PutReturnsRequestBodyItems                                                    `json:"items"`
-	MerchantOrderID *string                                                                         `json:"merchantOrderId"`
+	MerchantOrderID *string                                                                         `json:"merchantOrderId,omitempty"`
 	Recipient       shared.OneordersPostRequestBodyContentApplication1jsonSchemaPropertiesRecipient `json:"recipient"`
 	RmaNumber       string                                                                          `json:"rmaNumber"`
 }
@@ -32,32 +32,32 @@ type PutReturns201ApplicationJSONItems struct {
 }
 
 type PutReturns201ApplicationJSONRecipientIsoIsoCountryV2 struct {
-	ID   *int64  `json:"id"`
-	Iso2 *string `json:"iso2"`
-	Name *string `json:"name"`
+	ID   *int64  `json:"id,omitempty"`
+	Iso2 *string `json:"iso2,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type PutReturns201ApplicationJSONRecipientConsigneeV2 struct {
 	Address1        string                                                                                               `json:"address1"`
-	Address2        *string                                                                                              `json:"address2"`
+	Address2        *string                                                                                              `json:"address2,omitempty"`
 	AddressLocality string                                                                                               `json:"addressLocality"`
 	AddressRegion   string                                                                                               `json:"addressRegion"`
-	CompanyName     *string                                                                                              `json:"companyName"`
+	CompanyName     *string                                                                                              `json:"companyName,omitempty"`
 	Country         string                                                                                               `json:"country"`
-	Email           *string                                                                                              `json:"email"`
+	Email           *string                                                                                              `json:"email,omitempty"`
 	FirstName       string                                                                                               `json:"firstName"`
 	ID              int64                                                                                                `json:"id"`
-	Iso             *PutReturns201ApplicationJSONRecipientIsoIsoCountryV2                                                `json:"iso"`
+	Iso             *PutReturns201ApplicationJSONRecipientIsoIsoCountryV2                                                `json:"iso,omitempty"`
 	LastName        string                                                                                               `json:"lastName"`
-	Phone           *string                                                                                              `json:"phone"`
+	Phone           *string                                                                                              `json:"phone,omitempty"`
 	PostalCode      string                                                                                               `json:"postalCode"`
-	UpdatedAt       *time.Time                                                                                           `json:"updatedAt"`
-	UpdatedBy       *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"updatedBy"`
+	UpdatedAt       *time.Time                                                                                           `json:"updatedAt,omitempty"`
+	UpdatedBy       *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"updatedBy,omitempty"`
 }
 
 type PutReturns201ApplicationJSONRmaResponseV2 struct {
 	Items           []PutReturns201ApplicationJSONItems              `json:"items"`
-	MerchantOrderID *string                                          `json:"merchantOrderId"`
+	MerchantOrderID *string                                          `json:"merchantOrderId,omitempty"`
 	Recipient       PutReturns201ApplicationJSONRecipientConsigneeV2 `json:"recipient"`
 	RmaNumber       string                                           `json:"rmaNumber"`
 }

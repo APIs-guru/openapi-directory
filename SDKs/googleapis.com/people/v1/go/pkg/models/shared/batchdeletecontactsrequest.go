@@ -1,5 +1,5 @@
 package shared
 
 type BatchDeleteContactsRequest struct {
-	ResourceNames []string `json:"resourceNames"`
+	ResourceNames []string `json:"resourceNames,omitempty"`
 }

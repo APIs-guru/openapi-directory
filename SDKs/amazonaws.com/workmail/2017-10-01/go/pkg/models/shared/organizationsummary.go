@@ -1,9 +1,9 @@
 package shared
 
 type OrganizationSummary struct {
-	Alias             *string `json:"Alias"`
-	DefaultMailDomain *string `json:"DefaultMailDomain"`
-	ErrorMessage      *string `json:"ErrorMessage"`
-	OrganizationID    *string `json:"OrganizationId"`
-	State             *string `json:"State"`
+	Alias             *string `json:"Alias,omitempty"`
+	DefaultMailDomain *string `json:"DefaultMailDomain,omitempty"`
+	ErrorMessage      *string `json:"ErrorMessage,omitempty"`
+	OrganizationID    *string `json:"OrganizationId,omitempty"`
+	State             *string `json:"State,omitempty"`
 }

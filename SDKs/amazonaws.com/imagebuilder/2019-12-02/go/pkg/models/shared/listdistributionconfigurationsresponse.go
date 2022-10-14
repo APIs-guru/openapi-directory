@@ -1,7 +1,7 @@
 package shared
 
 type ListDistributionConfigurationsResponse struct {
-	DistributionConfigurationSummaryList []DistributionConfigurationSummary `json:"distributionConfigurationSummaryList"`
-	NextToken                            *string                            `json:"nextToken"`
-	RequestID                            *string                            `json:"requestId"`
+	DistributionConfigurationSummaryList []DistributionConfigurationSummary `json:"distributionConfigurationSummaryList,omitempty"`
+	NextToken                            *string                            `json:"nextToken,omitempty"`
+	RequestID                            *string                            `json:"requestId,omitempty"`
 }

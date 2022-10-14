@@ -1,7 +1,7 @@
 package shared
 
 type ScheduleOptions struct {
-	DisableAutoScheduling *bool   `json:"disableAutoScheduling"`
-	EndTime               *string `json:"endTime"`
-	StartTime             *string `json:"startTime"`
+	DisableAutoScheduling *bool   `json:"disableAutoScheduling,omitempty"`
+	EndTime               *string `json:"endTime,omitempty"`
+	StartTime             *string `json:"startTime,omitempty"`
 }

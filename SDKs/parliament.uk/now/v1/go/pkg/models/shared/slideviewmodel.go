@@ -31,12 +31,12 @@ const (
 )
 
 type SlideViewModel struct {
-	CarouselDisplaySeconds *int32                         `json:"carouselDisplaySeconds"`
-	CarouselOrder          *int32                         `json:"carouselOrder"`
-	ID                     *int32                         `json:"id"`
-	Lines                  []LineViewModel                `json:"lines"`
-	SlideTime              *time.Time                     `json:"slideTime"`
-	SoundToPlay            *SlideViewModelSoundToPlayEnum `json:"soundToPlay"`
-	SpeakerTime            *time.Time                     `json:"speakerTime"`
-	Type                   *SlideViewModelTypeEnum        `json:"type"`
+	CarouselDisplaySeconds *int32                         `json:"carouselDisplaySeconds,omitempty"`
+	CarouselOrder          *int32                         `json:"carouselOrder,omitempty"`
+	ID                     *int32                         `json:"id,omitempty"`
+	Lines                  []LineViewModel                `json:"lines,omitempty"`
+	SlideTime              *time.Time                     `json:"slideTime,omitempty"`
+	SoundToPlay            *SlideViewModelSoundToPlayEnum `json:"soundToPlay,omitempty"`
+	SpeakerTime            *time.Time                     `json:"speakerTime,omitempty"`
+	Type                   *SlideViewModelTypeEnum        `json:"type,omitempty"`
 }

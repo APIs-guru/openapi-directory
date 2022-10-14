@@ -10,7 +10,7 @@ type CreateTagQueryParams struct {
 }
 
 type CreateTagRequestBody struct {
-	Data *shared.TagRequest `json:"data"`
+	Data *shared.TagRequest `json:"data,omitempty"`
 }
 
 type CreateTagRequest struct {
@@ -19,7 +19,7 @@ type CreateTagRequest struct {
 }
 
 type CreateTag201ApplicationJSON struct {
-	Data *shared.TagResponse `json:"data"`
+	Data *shared.TagResponse `json:"data,omitempty"`
 }
 
 type CreateTagResponse struct {

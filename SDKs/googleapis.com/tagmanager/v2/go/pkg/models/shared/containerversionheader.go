@@ -1,18 +1,18 @@
 package shared
 
 type ContainerVersionHeader struct {
-	AccountID          *string `json:"accountId"`
-	ContainerID        *string `json:"containerId"`
-	ContainerVersionID *string `json:"containerVersionId"`
-	Deleted            *bool   `json:"deleted"`
-	Name               *string `json:"name"`
-	NumClients         *string `json:"numClients"`
-	NumCustomTemplates *string `json:"numCustomTemplates"`
-	NumMacros          *string `json:"numMacros"`
-	NumRules           *string `json:"numRules"`
-	NumTags            *string `json:"numTags"`
-	NumTriggers        *string `json:"numTriggers"`
-	NumVariables       *string `json:"numVariables"`
-	NumZones           *string `json:"numZones"`
-	Path               *string `json:"path"`
+	AccountID          *string `json:"accountId,omitempty"`
+	ContainerID        *string `json:"containerId,omitempty"`
+	ContainerVersionID *string `json:"containerVersionId,omitempty"`
+	Deleted            *bool   `json:"deleted,omitempty"`
+	Name               *string `json:"name,omitempty"`
+	NumClients         *string `json:"numClients,omitempty"`
+	NumCustomTemplates *string `json:"numCustomTemplates,omitempty"`
+	NumMacros          *string `json:"numMacros,omitempty"`
+	NumRules           *string `json:"numRules,omitempty"`
+	NumTags            *string `json:"numTags,omitempty"`
+	NumTriggers        *string `json:"numTriggers,omitempty"`
+	NumVariables       *string `json:"numVariables,omitempty"`
+	NumZones           *string `json:"numZones,omitempty"`
+	Path               *string `json:"path,omitempty"`
 }

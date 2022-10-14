@@ -1,12 +1,12 @@
 package shared
 
 type InstanceInfo struct {
-	DisplayName    *string  `json:"displayName"`
-	ExternalIP     *string  `json:"externalIp"`
-	Interface      *string  `json:"interface"`
-	InternalIP     *string  `json:"internalIp"`
-	NetworkTags    []string `json:"networkTags"`
-	NetworkURI     *string  `json:"networkUri"`
-	ServiceAccount *string  `json:"serviceAccount"`
-	URI            *string  `json:"uri"`
+	DisplayName    *string  `json:"displayName,omitempty"`
+	ExternalIP     *string  `json:"externalIp,omitempty"`
+	Interface      *string  `json:"interface,omitempty"`
+	InternalIP     *string  `json:"internalIp,omitempty"`
+	NetworkTags    []string `json:"networkTags,omitempty"`
+	NetworkURI     *string  `json:"networkUri,omitempty"`
+	ServiceAccount *string  `json:"serviceAccount,omitempty"`
+	URI            *string  `json:"uri,omitempty"`
 }

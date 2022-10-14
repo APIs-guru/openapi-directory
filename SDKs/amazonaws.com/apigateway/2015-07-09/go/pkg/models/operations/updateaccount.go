@@ -15,7 +15,7 @@ type UpdateAccountHeaders struct {
 }
 
 type UpdateAccountRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateAccountRequest struct {

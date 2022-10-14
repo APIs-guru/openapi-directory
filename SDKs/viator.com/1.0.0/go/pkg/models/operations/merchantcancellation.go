@@ -5,16 +5,16 @@ type MerchantCancellationHeaders struct {
 }
 
 type MerchantCancellationRequestBodyCancelItems struct {
-	CancelCode         *string `json:"cancelCode"`
-	CancelDescription  *string `json:"cancelDescription"`
-	DistributorItemRef *string `json:"distributorItemRef"`
-	ItemID             *int64  `json:"itemId"`
+	CancelCode         *string `json:"cancelCode,omitempty"`
+	CancelDescription  *string `json:"cancelDescription,omitempty"`
+	DistributorItemRef *string `json:"distributorItemRef,omitempty"`
+	ItemID             *int64  `json:"itemId,omitempty"`
 }
 
 type MerchantCancellationRequestBody struct {
-	CancelItems    []MerchantCancellationRequestBodyCancelItems `json:"cancelItems"`
-	DistributorRef *string                                      `json:"distributorRef"`
-	ItineraryID    *int64                                       `json:"itineraryId"`
+	CancelItems    []MerchantCancellationRequestBodyCancelItems `json:"cancelItems,omitempty"`
+	DistributorRef *string                                      `json:"distributorRef,omitempty"`
+	ItineraryID    *int64                                       `json:"itineraryId,omitempty"`
 }
 
 type MerchantCancellationRequest struct {
@@ -23,55 +23,55 @@ type MerchantCancellationRequest struct {
 }
 
 type MerchantCancellation200ApplicationJSONDataCancelItems struct {
-	CancellationResponseDescription *string `json:"cancellationResponseDescription"`
-	CancellationResponseStatusCode  *string `json:"cancellationResponseStatusCode"`
-	DistributorItemRef              *string `json:"distributorItemRef"`
-	ItemID                          *string `json:"itemId"`
+	CancellationResponseDescription *string `json:"cancellationResponseDescription,omitempty"`
+	CancellationResponseStatusCode  *string `json:"cancellationResponseStatusCode,omitempty"`
+	DistributorItemRef              *string `json:"distributorItemRef,omitempty"`
+	ItemID                          *string `json:"itemId,omitempty"`
 }
 
 type MerchantCancellation200ApplicationJSONData struct {
-	CancelItems    []MerchantCancellation200ApplicationJSONDataCancelItems `json:"cancelItems"`
-	DistributorRef *string                                                 `json:"distributorRef"`
-	ItineraryID    *int64                                                  `json:"itineraryId"`
+	CancelItems    []MerchantCancellation200ApplicationJSONDataCancelItems `json:"cancelItems,omitempty"`
+	DistributorRef *string                                                 `json:"distributorRef,omitempty"`
+	ItineraryID    *int64                                                  `json:"itineraryId,omitempty"`
 }
 
 type MerchantCancellation200ApplicationJSON struct {
-	Data             *MerchantCancellation200ApplicationJSONData `json:"data"`
-	DateStamp        *string                                     `json:"dateStamp"`
-	ErrorCodes       []string                                    `json:"errorCodes"`
-	ErrorMessage     []interface{}                               `json:"errorMessage"`
-	ErrorMessageText *string                                     `json:"errorMessageText"`
-	ErrorName        *string                                     `json:"errorName"`
-	ErrorReference   *string                                     `json:"errorReference"`
-	ErrorType        *string                                     `json:"errorType"`
-	ExtraInfo        map[string]interface{}                      `json:"extraInfo"`
-	ExtraObject      map[string]interface{}                      `json:"extraObject"`
-	Success          *bool                                       `json:"success"`
-	TotalCount       *int64                                      `json:"totalCount"`
-	Vmid             *string                                     `json:"vmid"`
+	Data             *MerchantCancellation200ApplicationJSONData `json:"data,omitempty"`
+	DateStamp        *string                                     `json:"dateStamp,omitempty"`
+	ErrorCodes       []string                                    `json:"errorCodes,omitempty"`
+	ErrorMessage     []interface{}                               `json:"errorMessage,omitempty"`
+	ErrorMessageText *string                                     `json:"errorMessageText,omitempty"`
+	ErrorName        *string                                     `json:"errorName,omitempty"`
+	ErrorReference   *string                                     `json:"errorReference,omitempty"`
+	ErrorType        *string                                     `json:"errorType,omitempty"`
+	ExtraInfo        map[string]interface{}                      `json:"extraInfo,omitempty"`
+	ExtraObject      map[string]interface{}                      `json:"extraObject,omitempty"`
+	Success          *bool                                       `json:"success,omitempty"`
+	TotalCount       *int64                                      `json:"totalCount,omitempty"`
+	Vmid             *string                                     `json:"vmid,omitempty"`
 }
 
 type MerchantCancellation400ApplicationJSONData struct {
-	CancellationResponseDescription *string `json:"cancellationResponseDescription"`
-	CancellationResponseStatusCode  *string `json:"cancellationResponseStatusCode"`
-	DistributorItemRef              *string `json:"distributorItemRef"`
-	ItemID                          *string `json:"itemId"`
+	CancellationResponseDescription *string `json:"cancellationResponseDescription,omitempty"`
+	CancellationResponseStatusCode  *string `json:"cancellationResponseStatusCode,omitempty"`
+	DistributorItemRef              *string `json:"distributorItemRef,omitempty"`
+	ItemID                          *string `json:"itemId,omitempty"`
 }
 
 type MerchantCancellation400ApplicationJSON struct {
-	Data             *MerchantCancellation400ApplicationJSONData `json:"data"`
-	DateStamp        *string                                     `json:"dateStamp"`
-	ErrorCodes       []string                                    `json:"errorCodes"`
-	ErrorMessage     []interface{}                               `json:"errorMessage"`
-	ErrorMessageText *string                                     `json:"errorMessageText"`
-	ErrorName        *string                                     `json:"errorName"`
-	ErrorReference   *string                                     `json:"errorReference"`
-	ErrorType        *string                                     `json:"errorType"`
-	ExtraInfo        map[string]interface{}                      `json:"extraInfo"`
-	ExtraObject      map[string]interface{}                      `json:"extraObject"`
-	Success          *bool                                       `json:"success"`
-	TotalCount       *int64                                      `json:"totalCount"`
-	Vmid             *string                                     `json:"vmid"`
+	Data             *MerchantCancellation400ApplicationJSONData `json:"data,omitempty"`
+	DateStamp        *string                                     `json:"dateStamp,omitempty"`
+	ErrorCodes       []string                                    `json:"errorCodes,omitempty"`
+	ErrorMessage     []interface{}                               `json:"errorMessage,omitempty"`
+	ErrorMessageText *string                                     `json:"errorMessageText,omitempty"`
+	ErrorName        *string                                     `json:"errorName,omitempty"`
+	ErrorReference   *string                                     `json:"errorReference,omitempty"`
+	ErrorType        *string                                     `json:"errorType,omitempty"`
+	ExtraInfo        map[string]interface{}                      `json:"extraInfo,omitempty"`
+	ExtraObject      map[string]interface{}                      `json:"extraObject,omitempty"`
+	Success          *bool                                       `json:"success,omitempty"`
+	TotalCount       *int64                                      `json:"totalCount,omitempty"`
+	Vmid             *string                                     `json:"vmid,omitempty"`
 }
 
 type MerchantCancellationResponse struct {

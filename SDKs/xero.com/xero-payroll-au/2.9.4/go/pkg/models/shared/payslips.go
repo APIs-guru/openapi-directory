@@ -1,5 +1,5 @@
 package shared
 
 type Payslips struct {
-	Payslips []Payslip `json:"Payslips"`
+	Payslips []Payslip `json:"Payslips,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type UserMentionMetadata struct {
-	Type *UserMentionMetadataTypeEnum `json:"type"`
-	User *User                        `json:"user"`
+	Type *UserMentionMetadataTypeEnum `json:"type,omitempty"`
+	User *User                        `json:"user,omitempty"`
 }

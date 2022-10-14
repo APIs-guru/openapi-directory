@@ -1,7 +1,7 @@
 package shared
 
 type BatchAlarmActionErrorEntry struct {
-	ErrorCode    *ErrorCodeEnum `json:"errorCode"`
-	ErrorMessage *string        `json:"errorMessage"`
-	RequestID    *string        `json:"requestId"`
+	ErrorCode    *ErrorCodeEnum `json:"errorCode,omitempty"`
+	ErrorMessage *string        `json:"errorMessage,omitempty"`
+	RequestID    *string        `json:"requestId,omitempty"`
 }

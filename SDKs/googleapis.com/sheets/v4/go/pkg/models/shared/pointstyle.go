@@ -15,6 +15,6 @@ const (
 )
 
 type PointStyle struct {
-	Shape *PointStyleShapeEnum `json:"shape"`
-	Size  *float64             `json:"size"`
+	Shape *PointStyleShapeEnum `json:"shape,omitempty"`
+	Size  *float64             `json:"size,omitempty"`
 }

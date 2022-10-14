@@ -1,5 +1,5 @@
 package shared
 
 type GetFindingStatisticsResponse struct {
-	CountsByGroup []GroupCount `json:"countsByGroup"`
+	CountsByGroup []GroupCount `json:"countsByGroup,omitempty"`
 }

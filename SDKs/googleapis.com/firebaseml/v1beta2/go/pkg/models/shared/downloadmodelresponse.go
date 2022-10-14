@@ -8,8 +8,8 @@ const (
 )
 
 type DownloadModelResponse struct {
-	DownloadURI *string                               `json:"downloadUri"`
-	ExpireTime  *string                               `json:"expireTime"`
-	ModelFormat *DownloadModelResponseModelFormatEnum `json:"modelFormat"`
-	SizeBytes   *string                               `json:"sizeBytes"`
+	DownloadURI *string                               `json:"downloadUri,omitempty"`
+	ExpireTime  *string                               `json:"expireTime,omitempty"`
+	ModelFormat *DownloadModelResponseModelFormatEnum `json:"modelFormat,omitempty"`
+	SizeBytes   *string                               `json:"sizeBytes,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ResellernotifyGetwatchdetailsResponse struct {
-	ServiceAccountEmailAddresses []string `json:"serviceAccountEmailAddresses"`
-	TopicName                    *string  `json:"topicName"`
+	ServiceAccountEmailAddresses []string `json:"serviceAccountEmailAddresses,omitempty"`
+	TopicName                    *string  `json:"topicName,omitempty"`
 }

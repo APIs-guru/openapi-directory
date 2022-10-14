@@ -1,5 +1,5 @@
 package shared
 
 type AccessTokenAuthorization struct {
-	Permissions []Permission `json:"permissions"`
+	Permissions []Permission `json:"permissions,omitempty"`
 }

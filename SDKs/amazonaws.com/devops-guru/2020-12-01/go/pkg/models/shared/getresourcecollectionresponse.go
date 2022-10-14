@@ -1,6 +1,6 @@
 package shared
 
 type GetResourceCollectionResponse struct {
-	NextToken          *string                   `json:"NextToken"`
-	ResourceCollection *ResourceCollectionFilter `json:"ResourceCollection"`
+	NextToken          *string                   `json:"NextToken,omitempty"`
+	ResourceCollection *ResourceCollectionFilter `json:"ResourceCollection,omitempty"`
 }

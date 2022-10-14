@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowV2EnvironmentHistoryEntry struct {
-	AgentVersion *string `json:"agentVersion"`
-	CreateTime   *string `json:"createTime"`
-	Description  *string `json:"description"`
+	AgentVersion *string `json:"agentVersion,omitempty"`
+	CreateTime   *string `json:"createTime,omitempty"`
+	Description  *string `json:"description,omitempty"`
 }

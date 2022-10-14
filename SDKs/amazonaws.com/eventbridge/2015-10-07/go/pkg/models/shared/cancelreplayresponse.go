@@ -1,7 +1,7 @@
 package shared
 
 type CancelReplayResponse struct {
-	ReplayArn   *string          `json:"ReplayArn"`
-	State       *ReplayStateEnum `json:"State"`
-	StateReason *string          `json:"StateReason"`
+	ReplayArn   *string          `json:"ReplayArn,omitempty"`
+	State       *ReplayStateEnum `json:"State,omitempty"`
+	StateReason *string          `json:"StateReason,omitempty"`
 }

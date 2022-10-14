@@ -10,6 +10,6 @@ const (
 )
 
 type PublisherReviewStatus struct {
-	PublisherName *string                          `json:"publisherName"`
-	Status        *PublisherReviewStatusStatusEnum `json:"status"`
+	PublisherName *string                          `json:"publisherName,omitempty"`
+	Status        *PublisherReviewStatusStatusEnum `json:"status,omitempty"`
 }

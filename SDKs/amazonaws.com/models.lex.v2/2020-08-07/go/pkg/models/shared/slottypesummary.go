@@ -5,9 +5,9 @@ import (
 )
 
 type SlotTypeSummary struct {
-	Description             *string    `json:"description"`
-	LastUpdatedDateTime     *time.Time `json:"lastUpdatedDateTime"`
-	ParentSlotTypeSignature *string    `json:"parentSlotTypeSignature"`
-	SlotTypeID              *string    `json:"slotTypeId"`
-	SlotTypeName            *string    `json:"slotTypeName"`
+	Description             *string    `json:"description,omitempty"`
+	LastUpdatedDateTime     *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	ParentSlotTypeSignature *string    `json:"parentSlotTypeSignature,omitempty"`
+	SlotTypeID              *string    `json:"slotTypeId,omitempty"`
+	SlotTypeName            *string    `json:"slotTypeName,omitempty"`
 }

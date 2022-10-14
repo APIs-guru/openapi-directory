@@ -1,5 +1,5 @@
 package shared
 
 type SmbMountOptions struct {
-	Version *SmbVersionEnum `json:"Version"`
+	Version *SmbVersionEnum `json:"Version,omitempty"`
 }

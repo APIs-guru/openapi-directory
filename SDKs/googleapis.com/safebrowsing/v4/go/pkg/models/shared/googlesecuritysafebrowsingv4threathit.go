@@ -39,10 +39,10 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4ThreatHit struct {
-	ClientInfo   *GoogleSecuritySafebrowsingV4ClientInfo                `json:"clientInfo"`
-	Entry        *GoogleSecuritySafebrowsingV4ThreatEntry               `json:"entry"`
-	PlatformType *GoogleSecuritySafebrowsingV4ThreatHitPlatformTypeEnum `json:"platformType"`
-	Resources    []GoogleSecuritySafebrowsingV4ThreatHitThreatSource    `json:"resources"`
-	ThreatType   *GoogleSecuritySafebrowsingV4ThreatHitThreatTypeEnum   `json:"threatType"`
-	UserInfo     *GoogleSecuritySafebrowsingV4ThreatHitUserInfo         `json:"userInfo"`
+	ClientInfo   *GoogleSecuritySafebrowsingV4ClientInfo                `json:"clientInfo,omitempty"`
+	Entry        *GoogleSecuritySafebrowsingV4ThreatEntry               `json:"entry,omitempty"`
+	PlatformType *GoogleSecuritySafebrowsingV4ThreatHitPlatformTypeEnum `json:"platformType,omitempty"`
+	Resources    []GoogleSecuritySafebrowsingV4ThreatHitThreatSource    `json:"resources,omitempty"`
+	ThreatType   *GoogleSecuritySafebrowsingV4ThreatHitThreatTypeEnum   `json:"threatType,omitempty"`
+	UserInfo     *GoogleSecuritySafebrowsingV4ThreatHitUserInfo         `json:"userInfo,omitempty"`
 }

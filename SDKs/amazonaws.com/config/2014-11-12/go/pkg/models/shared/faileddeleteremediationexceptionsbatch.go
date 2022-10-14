@@ -1,6 +1,6 @@
 package shared
 
 type FailedDeleteRemediationExceptionsBatch struct {
-	FailedItems    []RemediationExceptionResourceKey `json:"FailedItems"`
-	FailureMessage *string                           `json:"FailureMessage"`
+	FailedItems    []RemediationExceptionResourceKey `json:"FailedItems,omitempty"`
+	FailureMessage *string                           `json:"FailureMessage,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListDeploymentTargetsOutput struct {
-	NextToken *string  `json:"nextToken"`
-	TargetIds []string `json:"targetIds"`
+	NextToken *string  `json:"nextToken,omitempty"`
+	TargetIds []string `json:"targetIds,omitempty"`
 }

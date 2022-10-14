@@ -1,14 +1,14 @@
 package shared
 
 type CostMatrixDataInfo struct {
-	Copyrights []string `json:"copyrights"`
-	Took       *float64 `json:"took"`
+	Copyrights []string `json:"copyrights,omitempty"`
+	Took       *float64 `json:"took,omitempty"`
 }
 
 type CostMatrixData struct {
-	Distances [][]float64         `json:"distances"`
-	Info      *CostMatrixDataInfo `json:"info"`
-	Times     [][]int64           `json:"times"`
+	Distances [][]float64         `json:"distances,omitempty"`
+	Info      *CostMatrixDataInfo `json:"info,omitempty"`
+	Times     [][]int64           `json:"times,omitempty"`
 }
 
 type CostMatrixTypeEnum string
@@ -19,8 +19,8 @@ const (
 )
 
 type CostMatrix struct {
-	Data        *CostMatrixData     `json:"data"`
-	LocationIds []string            `json:"location_ids"`
-	Profile     *string             `json:"profile"`
-	Type        *CostMatrixTypeEnum `json:"type"`
+	Data        *CostMatrixData     `json:"data,omitempty"`
+	LocationIds []string            `json:"location_ids,omitempty"`
+	Profile     *string             `json:"profile,omitempty"`
+	Type        *CostMatrixTypeEnum `json:"type,omitempty"`
 }

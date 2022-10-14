@@ -11,9 +11,9 @@ type MigrationsMapCommitAuthorPathParams struct {
 }
 
 type MigrationsMapCommitAuthorRequestBody struct {
-	Email    *string `json:"email"`
-	Name     *string `json:"name"`
-	RemoteID *string `json:"remote_id"`
+	Email    *string `json:"email,omitempty"`
+	Name     *string `json:"name,omitempty"`
+	RemoteID *string `json:"remote_id,omitempty"`
 }
 
 type MigrationsMapCommitAuthorRequest struct {

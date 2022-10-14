@@ -1,6 +1,6 @@
 package shared
 
 type VulnerableHeaders struct {
-	Headers        []Header `json:"headers"`
-	MissingHeaders []Header `json:"missingHeaders"`
+	Headers        []Header `json:"headers,omitempty"`
+	MissingHeaders []Header `json:"missingHeaders,omitempty"`
 }

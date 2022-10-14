@@ -21,8 +21,8 @@ type ListRelatedItemsHeaders struct {
 
 type ListRelatedItemsRequestBody struct {
 	IncidentRecordArn string  `json:"incidentRecordArn"`
-	MaxResults        *int64  `json:"maxResults"`
-	NextToken         *string `json:"nextToken"`
+	MaxResults        *int64  `json:"maxResults,omitempty"`
+	NextToken         *string `json:"nextToken,omitempty"`
 }
 
 type ListRelatedItemsRequest struct {

@@ -1,10 +1,10 @@
 package shared
 
 type SchemaConfiguration struct {
-	CatalogID    *string `json:"CatalogId"`
-	DatabaseName *string `json:"DatabaseName"`
-	Region       *string `json:"Region"`
-	RoleArn      *string `json:"RoleARN"`
-	TableName    *string `json:"TableName"`
-	VersionID    *string `json:"VersionId"`
+	CatalogID    *string `json:"CatalogId,omitempty"`
+	DatabaseName *string `json:"DatabaseName,omitempty"`
+	Region       *string `json:"Region,omitempty"`
+	RoleArn      *string `json:"RoleARN,omitempty"`
+	TableName    *string `json:"TableName,omitempty"`
+	VersionID    *string `json:"VersionId,omitempty"`
 }

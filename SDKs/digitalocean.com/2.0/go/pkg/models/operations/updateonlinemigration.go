@@ -9,8 +9,8 @@ type UpdateOnlineMigrationPathParams struct {
 }
 
 type UpdateOnlineMigrationRequestBody struct {
-	DisableSsl *bool                                                                                                                 `json:"disable_ssl"`
-	Source     *shared.Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPropertiesConnectionAllOf0 `json:"source"`
+	DisableSsl *bool                                                                                                                 `json:"disable_ssl,omitempty"`
+	Source     *shared.Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPropertiesConnectionAllOf0 `json:"source,omitempty"`
 }
 
 type UpdateOnlineMigrationRequest struct {
@@ -19,15 +19,15 @@ type UpdateOnlineMigrationRequest struct {
 }
 
 type UpdateOnlineMigration200ApplicationJSON struct {
-	CreatedAt *string `json:"created_at"`
-	ID        *string `json:"id"`
-	Status    *string `json:"status"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Status    *string `json:"status,omitempty"`
 }
 
 type UpdateOnlineMigration401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateOnlineMigrationResponse struct {

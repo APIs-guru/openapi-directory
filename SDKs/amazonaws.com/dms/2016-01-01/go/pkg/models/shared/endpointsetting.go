@@ -1,13 +1,13 @@
 package shared
 
 type EndpointSetting struct {
-	Applicability *string                       `json:"Applicability"`
-	DefaultValue  *string                       `json:"DefaultValue"`
-	EnumValues    []string                      `json:"EnumValues"`
-	IntValueMax   *int64                        `json:"IntValueMax"`
-	IntValueMin   *int64                        `json:"IntValueMin"`
-	Name          *string                       `json:"Name"`
-	Sensitive     *bool                         `json:"Sensitive"`
-	Type          *EndpointSettingTypeValueEnum `json:"Type"`
-	Units         *string                       `json:"Units"`
+	Applicability *string                       `json:"Applicability,omitempty"`
+	DefaultValue  *string                       `json:"DefaultValue,omitempty"`
+	EnumValues    []string                      `json:"EnumValues,omitempty"`
+	IntValueMax   *int64                        `json:"IntValueMax,omitempty"`
+	IntValueMin   *int64                        `json:"IntValueMin,omitempty"`
+	Name          *string                       `json:"Name,omitempty"`
+	Sensitive     *bool                         `json:"Sensitive,omitempty"`
+	Type          *EndpointSettingTypeValueEnum `json:"Type,omitempty"`
+	Units         *string                       `json:"Units,omitempty"`
 }

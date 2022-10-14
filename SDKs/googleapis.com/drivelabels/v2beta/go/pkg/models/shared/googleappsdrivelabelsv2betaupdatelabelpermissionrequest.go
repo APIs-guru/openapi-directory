@@ -1,7 +1,7 @@
 package shared
 
 type GoogleAppsDriveLabelsV2betaUpdateLabelPermissionRequest struct {
-	LabelPermission *GoogleAppsDriveLabelsV2betaLabelPermission `json:"labelPermission"`
-	Parent          *string                                     `json:"parent"`
-	UseAdminAccess  *bool                                       `json:"useAdminAccess"`
+	LabelPermission *GoogleAppsDriveLabelsV2betaLabelPermission `json:"labelPermission,omitempty"`
+	Parent          *string                                     `json:"parent,omitempty"`
+	UseAdminAccess  *bool                                       `json:"useAdminAccess,omitempty"`
 }

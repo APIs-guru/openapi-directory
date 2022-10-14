@@ -23,25 +23,25 @@ const (
 )
 
 type Vehicle struct {
-	ArtEndDate                   *time.Time            `json:"artEndDate"`
-	Co2Emissions                 *int32                `json:"co2Emissions"`
-	Colour                       *string               `json:"colour"`
-	DateOfLastV5CIssued          *time.Time            `json:"dateOfLastV5CIssued"`
-	EngineCapacity               *int32                `json:"engineCapacity"`
-	EuroStatus                   *string               `json:"euroStatus"`
-	FuelType                     *string               `json:"fuelType"`
-	Make                         *string               `json:"make"`
-	MarkedForExport              *bool                 `json:"markedForExport"`
-	MonthOfFirstDvlaRegistration *time.Time            `json:"monthOfFirstDvlaRegistration"`
-	MonthOfFirstRegistration     *time.Time            `json:"monthOfFirstRegistration"`
-	MotExpiryDate                *time.Time            `json:"motExpiryDate"`
-	MotStatus                    *VehicleMotStatusEnum `json:"motStatus"`
-	RealDrivingEmissions         *string               `json:"realDrivingEmissions"`
+	ArtEndDate                   *time.Time            `json:"artEndDate,omitempty"`
+	Co2Emissions                 *int32                `json:"co2Emissions,omitempty"`
+	Colour                       *string               `json:"colour,omitempty"`
+	DateOfLastV5CIssued          *time.Time            `json:"dateOfLastV5CIssued,omitempty"`
+	EngineCapacity               *int32                `json:"engineCapacity,omitempty"`
+	EuroStatus                   *string               `json:"euroStatus,omitempty"`
+	FuelType                     *string               `json:"fuelType,omitempty"`
+	Make                         *string               `json:"make,omitempty"`
+	MarkedForExport              *bool                 `json:"markedForExport,omitempty"`
+	MonthOfFirstDvlaRegistration *time.Time            `json:"monthOfFirstDvlaRegistration,omitempty"`
+	MonthOfFirstRegistration     *time.Time            `json:"monthOfFirstRegistration,omitempty"`
+	MotExpiryDate                *time.Time            `json:"motExpiryDate,omitempty"`
+	MotStatus                    *VehicleMotStatusEnum `json:"motStatus,omitempty"`
+	RealDrivingEmissions         *string               `json:"realDrivingEmissions,omitempty"`
 	RegistrationNumber           string                `json:"registrationNumber"`
-	RevenueWeight                *int32                `json:"revenueWeight"`
-	TaxDueDate                   *time.Time            `json:"taxDueDate"`
-	TaxStatus                    *VehicleTaxStatusEnum `json:"taxStatus"`
-	TypeApproval                 *string               `json:"typeApproval"`
-	Wheelplan                    *string               `json:"wheelplan"`
-	YearOfManufacture            *int32                `json:"yearOfManufacture"`
+	RevenueWeight                *int32                `json:"revenueWeight,omitempty"`
+	TaxDueDate                   *time.Time            `json:"taxDueDate,omitempty"`
+	TaxStatus                    *VehicleTaxStatusEnum `json:"taxStatus,omitempty"`
+	TypeApproval                 *string               `json:"typeApproval,omitempty"`
+	Wheelplan                    *string               `json:"wheelplan,omitempty"`
+	YearOfManufacture            *int32                `json:"yearOfManufacture,omitempty"`
 }

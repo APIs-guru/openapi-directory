@@ -1,6 +1,6 @@
 package shared
 
 type PutAppReplicationConfigurationRequest struct {
-	AppID                                *string                               `json:"appId"`
-	ServerGroupReplicationConfigurations []ServerGroupReplicationConfiguration `json:"serverGroupReplicationConfigurations"`
+	AppID                                *string                               `json:"appId,omitempty"`
+	ServerGroupReplicationConfigurations []ServerGroupReplicationConfiguration `json:"serverGroupReplicationConfigurations,omitempty"`
 }

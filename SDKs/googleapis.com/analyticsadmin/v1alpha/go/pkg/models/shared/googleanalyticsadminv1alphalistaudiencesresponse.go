@@ -1,6 +1,6 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaListAudiencesResponse struct {
-	Audiences     []GoogleAnalyticsAdminV1alphaAudience `json:"audiences"`
-	NextPageToken *string                               `json:"nextPageToken"`
+	Audiences     []GoogleAnalyticsAdminV1alphaAudience `json:"audiences,omitempty"`
+	NextPageToken *string                               `json:"nextPageToken,omitempty"`
 }

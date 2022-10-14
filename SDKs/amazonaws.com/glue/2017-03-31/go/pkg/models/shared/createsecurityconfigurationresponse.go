@@ -5,6 +5,6 @@ import (
 )
 
 type CreateSecurityConfigurationResponse struct {
-	CreatedTimestamp *time.Time `json:"CreatedTimestamp"`
-	Name             *string    `json:"Name"`
+	CreatedTimestamp *time.Time `json:"CreatedTimestamp,omitempty"`
+	Name             *string    `json:"Name,omitempty"`
 }

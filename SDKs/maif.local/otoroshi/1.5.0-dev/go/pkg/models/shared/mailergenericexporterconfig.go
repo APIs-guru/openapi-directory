@@ -7,8 +7,8 @@ const (
 )
 
 type MailerGenericExporterConfig struct {
-	Headers map[string]string                   `json:"headers"`
-	To      []string                            `json:"to"`
+	Headers map[string]string                   `json:"headers,omitempty"`
+	To      []string                            `json:"to,omitempty"`
 	Type    MailerGenericExporterConfigTypeEnum `json:"type"`
-	URL     *string                             `json:"url"`
+	URL     *string                             `json:"url,omitempty"`
 }

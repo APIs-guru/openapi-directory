@@ -1,20 +1,20 @@
 package shared
 
 type ClusterConfig struct {
-	AutoscalingConfig     *AutoscalingConfig         `json:"autoscalingConfig"`
-	ConfigBucket          *string                    `json:"configBucket"`
-	DataprocMetricConfig  *DataprocMetricConfig      `json:"dataprocMetricConfig"`
-	EncryptionConfig      *EncryptionConfig          `json:"encryptionConfig"`
-	EndpointConfig        *EndpointConfig            `json:"endpointConfig"`
-	GceClusterConfig      *GceClusterConfig          `json:"gceClusterConfig"`
-	GkeClusterConfig      *GkeClusterConfig          `json:"gkeClusterConfig"`
-	InitializationActions []NodeInitializationAction `json:"initializationActions"`
-	LifecycleConfig       *LifecycleConfig           `json:"lifecycleConfig"`
-	MasterConfig          *InstanceGroupConfig       `json:"masterConfig"`
-	MetastoreConfig       *MetastoreConfig           `json:"metastoreConfig"`
-	SecondaryWorkerConfig *InstanceGroupConfig       `json:"secondaryWorkerConfig"`
-	SecurityConfig        *SecurityConfig            `json:"securityConfig"`
-	SoftwareConfig        *SoftwareConfig            `json:"softwareConfig"`
-	TempBucket            *string                    `json:"tempBucket"`
-	WorkerConfig          *InstanceGroupConfig       `json:"workerConfig"`
+	AutoscalingConfig     *AutoscalingConfig         `json:"autoscalingConfig,omitempty"`
+	ConfigBucket          *string                    `json:"configBucket,omitempty"`
+	DataprocMetricConfig  *DataprocMetricConfig      `json:"dataprocMetricConfig,omitempty"`
+	EncryptionConfig      *EncryptionConfig          `json:"encryptionConfig,omitempty"`
+	EndpointConfig        *EndpointConfig            `json:"endpointConfig,omitempty"`
+	GceClusterConfig      *GceClusterConfig          `json:"gceClusterConfig,omitempty"`
+	GkeClusterConfig      *GkeClusterConfig          `json:"gkeClusterConfig,omitempty"`
+	InitializationActions []NodeInitializationAction `json:"initializationActions,omitempty"`
+	LifecycleConfig       *LifecycleConfig           `json:"lifecycleConfig,omitempty"`
+	MasterConfig          *InstanceGroupConfig       `json:"masterConfig,omitempty"`
+	MetastoreConfig       *MetastoreConfig           `json:"metastoreConfig,omitempty"`
+	SecondaryWorkerConfig *InstanceGroupConfig       `json:"secondaryWorkerConfig,omitempty"`
+	SecurityConfig        *SecurityConfig            `json:"securityConfig,omitempty"`
+	SoftwareConfig        *SoftwareConfig            `json:"softwareConfig,omitempty"`
+	TempBucket            *string                    `json:"tempBucket,omitempty"`
+	WorkerConfig          *InstanceGroupConfig       `json:"workerConfig,omitempty"`
 }

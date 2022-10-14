@@ -9,11 +9,11 @@ const (
 )
 
 type WritablePlatform struct {
-	ID           *int64                                        `json:"id"`
-	Manufacturer *int64                                        `json:"manufacturer"`
+	ID           *int64                                        `json:"id,omitempty"`
+	Manufacturer *int64                                        `json:"manufacturer,omitempty"`
 	Name         string                                        `json:"name"`
-	NapalmArgs   *string                                       `json:"napalm_args"`
-	NapalmDriver *string                                       `json:"napalm_driver"`
-	RPCClient    *WritablePlatformRPCClientLegacyRPCClientEnum `json:"rpc_client"`
+	NapalmArgs   *string                                       `json:"napalm_args,omitempty"`
+	NapalmDriver *string                                       `json:"napalm_driver,omitempty"`
+	RPCClient    *WritablePlatformRPCClientLegacyRPCClientEnum `json:"rpc_client,omitempty"`
 	Slug         string                                        `json:"slug"`
 }

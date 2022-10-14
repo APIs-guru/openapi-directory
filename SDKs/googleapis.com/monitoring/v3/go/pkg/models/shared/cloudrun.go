@@ -1,6 +1,6 @@
 package shared
 
 type CloudRun struct {
-	Location    *string `json:"location"`
-	ServiceName *string `json:"serviceName"`
+	Location    *string `json:"location,omitempty"`
+	ServiceName *string `json:"serviceName,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CreatePipelineResponse struct {
-	PipelineArn  *string `json:"pipelineArn"`
-	PipelineName *string `json:"pipelineName"`
+	PipelineArn  *string `json:"pipelineArn,omitempty"`
+	PipelineName *string `json:"pipelineName,omitempty"`
 }

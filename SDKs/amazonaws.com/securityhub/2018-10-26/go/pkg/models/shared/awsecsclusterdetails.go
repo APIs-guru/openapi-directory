@@ -1,8 +1,8 @@
 package shared
 
 type AwsEcsClusterDetails struct {
-	CapacityProviders               []string                                              `json:"CapacityProviders"`
-	ClusterSettings                 []AwsEcsClusterClusterSettingsDetails                 `json:"ClusterSettings"`
-	Configuration                   *AwsEcsClusterConfigurationDetails                    `json:"Configuration"`
-	DefaultCapacityProviderStrategy []AwsEcsClusterDefaultCapacityProviderStrategyDetails `json:"DefaultCapacityProviderStrategy"`
+	CapacityProviders               []string                                              `json:"CapacityProviders,omitempty"`
+	ClusterSettings                 []AwsEcsClusterClusterSettingsDetails                 `json:"ClusterSettings,omitempty"`
+	Configuration                   *AwsEcsClusterConfigurationDetails                    `json:"Configuration,omitempty"`
+	DefaultCapacityProviderStrategy []AwsEcsClusterDefaultCapacityProviderStrategyDetails `json:"DefaultCapacityProviderStrategy,omitempty"`
 }

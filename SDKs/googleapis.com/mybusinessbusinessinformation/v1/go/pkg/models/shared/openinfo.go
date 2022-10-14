@@ -10,7 +10,7 @@ const (
 )
 
 type OpenInfo struct {
-	CanReopen   *bool               `json:"canReopen"`
-	OpeningDate *Date               `json:"openingDate"`
-	Status      *OpenInfoStatusEnum `json:"status"`
+	CanReopen   *bool               `json:"canReopen,omitempty"`
+	OpeningDate *Date               `json:"openingDate,omitempty"`
+	Status      *OpenInfoStatusEnum `json:"status,omitempty"`
 }

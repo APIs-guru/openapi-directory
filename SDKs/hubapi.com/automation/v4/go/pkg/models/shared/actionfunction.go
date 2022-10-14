@@ -11,5 +11,5 @@ const (
 type ActionFunction struct {
 	FunctionSource string                         `json:"functionSource"`
 	FunctionType   ActionFunctionFunctionTypeEnum `json:"functionType"`
-	ID             *string                        `json:"id"`
+	ID             *string                        `json:"id,omitempty"`
 }

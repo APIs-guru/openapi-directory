@@ -10,13 +10,13 @@ const (
 )
 
 type Channel struct {
-	ActivationToken *string           `json:"activationToken"`
-	CreateTime      *string           `json:"createTime"`
-	CryptoKeyName   *string           `json:"cryptoKeyName"`
-	Name            *string           `json:"name"`
-	Provider        *string           `json:"provider"`
-	PubsubTopic     *string           `json:"pubsubTopic"`
-	State           *ChannelStateEnum `json:"state"`
-	UID             *string           `json:"uid"`
-	UpdateTime      *string           `json:"updateTime"`
+	ActivationToken *string           `json:"activationToken,omitempty"`
+	CreateTime      *string           `json:"createTime,omitempty"`
+	CryptoKeyName   *string           `json:"cryptoKeyName,omitempty"`
+	Name            *string           `json:"name,omitempty"`
+	Provider        *string           `json:"provider,omitempty"`
+	PubsubTopic     *string           `json:"pubsubTopic,omitempty"`
+	State           *ChannelStateEnum `json:"state,omitempty"`
+	UID             *string           `json:"uid,omitempty"`
+	UpdateTime      *string           `json:"updateTime,omitempty"`
 }

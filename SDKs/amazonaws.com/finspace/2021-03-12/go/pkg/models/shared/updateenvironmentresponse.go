@@ -1,5 +1,5 @@
 package shared
 
 type UpdateEnvironmentResponse struct {
-	Environment *Environment `json:"environment"`
+	Environment *Environment `json:"environment,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type PosPaymentCardDetails struct {
-	Card *PaymentCard `json:"card"`
+	Card *PaymentCard `json:"card,omitempty"`
 }
 
 type PosPaymentCashCashDetails struct {
-	Amount           *interface{} `json:"amount"`
-	ChargeBackAmount *interface{} `json:"charge_back_amount"`
+	Amount           *interface{} `json:"amount,omitempty"`
+	ChargeBackAmount *interface{} `json:"charge_back_amount,omitempty"`
 }
 
 type PosPaymentExternalDetailsTypeEnum string
@@ -32,8 +32,8 @@ const (
 
 type PosPaymentExternalDetails struct {
 	Source          string                            `json:"source"`
-	SourceFeeAmount *float64                          `json:"source_fee_amount"`
-	SourceID        *string                           `json:"source_id"`
+	SourceFeeAmount *float64                          `json:"source_fee_amount,omitempty"`
+	SourceID        *string                           `json:"source_id,omitempty"`
 	Type            PosPaymentExternalDetailsTypeEnum `json:"type"`
 }
 
@@ -71,41 +71,41 @@ const (
 )
 
 type PosPaymentWalletWalletDetails struct {
-	Status *PosPaymentWalletStatusEnum `json:"status"`
+	Status *PosPaymentWalletStatusEnum `json:"status,omitempty"`
 }
 
 type PosPayment struct {
 	Amount               float64                        `json:"amount"`
-	AppFee               *float64                       `json:"app_fee"`
-	Approved             *float64                       `json:"approved"`
-	BankAccount          *PosBankAccount                `json:"bank_account"`
-	CardDetails          *PosPaymentCardDetails         `json:"card_details"`
-	Cash                 *PosPaymentCashCashDetails     `json:"cash"`
-	ChangeBackCashAmount *float64                       `json:"change_back_cash_amount"`
-	CreatedAt            *time.Time                     `json:"created_at"`
-	CreatedBy            *string                        `json:"created_by"`
+	AppFee               *float64                       `json:"app_fee,omitempty"`
+	Approved             *float64                       `json:"approved,omitempty"`
+	BankAccount          *PosBankAccount                `json:"bank_account,omitempty"`
+	CardDetails          *PosPaymentCardDetails         `json:"card_details,omitempty"`
+	Cash                 *PosPaymentCashCashDetails     `json:"cash,omitempty"`
+	ChangeBackCashAmount *float64                       `json:"change_back_cash_amount,omitempty"`
+	CreatedAt            *time.Time                     `json:"created_at,omitempty"`
+	CreatedBy            *string                        `json:"created_by,omitempty"`
 	Currency             CurrencyEnum                   `json:"currency"`
 	CustomerID           string                         `json:"customer_id"`
-	DeviceID             *string                        `json:"device_id"`
-	EmployeeID           *string                        `json:"employee_id"`
-	ExternalDetails      *PosPaymentExternalDetails     `json:"external_details"`
-	ExternalPaymentID    *string                        `json:"external_payment_id"`
-	ID                   *string                        `json:"id"`
-	IdempotencyKey       *string                        `json:"idempotency_key"`
-	LocationID           *string                        `json:"location_id"`
-	MerchantID           *string                        `json:"merchant_id"`
+	DeviceID             *string                        `json:"device_id,omitempty"`
+	EmployeeID           *string                        `json:"employee_id,omitempty"`
+	ExternalDetails      *PosPaymentExternalDetails     `json:"external_details,omitempty"`
+	ExternalPaymentID    *string                        `json:"external_payment_id,omitempty"`
+	ID                   *string                        `json:"id,omitempty"`
+	IdempotencyKey       *string                        `json:"idempotency_key,omitempty"`
+	LocationID           *string                        `json:"location_id,omitempty"`
+	MerchantID           *string                        `json:"merchant_id,omitempty"`
 	OrderID              string                         `json:"order_id"`
-	ProcessingFees       []interface{}                  `json:"processing_fees"`
-	Refunded             *float64                       `json:"refunded"`
-	ServiceCharges       []ServiceCharge                `json:"service_charges"`
-	Source               *PosPaymentSourceEnum          `json:"source"`
+	ProcessingFees       []interface{}                  `json:"processing_fees,omitempty"`
+	Refunded             *float64                       `json:"refunded,omitempty"`
+	ServiceCharges       []ServiceCharge                `json:"service_charges,omitempty"`
+	Source               *PosPaymentSourceEnum          `json:"source,omitempty"`
 	SourceID             string                         `json:"source_id"`
-	Status               *PosPaymentStatusStatusEnum    `json:"status"`
-	Tax                  *float64                       `json:"tax"`
+	Status               *PosPaymentStatusStatusEnum    `json:"status,omitempty"`
+	Tax                  *float64                       `json:"tax,omitempty"`
 	TenderID             string                         `json:"tender_id"`
-	Tip                  *float64                       `json:"tip"`
-	Total                *float64                       `json:"total"`
-	UpdatedAt            *time.Time                     `json:"updated_at"`
-	UpdatedBy            *string                        `json:"updated_by"`
-	Wallet               *PosPaymentWalletWalletDetails `json:"wallet"`
+	Tip                  *float64                       `json:"tip,omitempty"`
+	Total                *float64                       `json:"total,omitempty"`
+	UpdatedAt            *time.Time                     `json:"updated_at,omitempty"`
+	UpdatedBy            *string                        `json:"updated_by,omitempty"`
+	Wallet               *PosPaymentWalletWalletDetails `json:"wallet,omitempty"`
 }

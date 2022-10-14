@@ -10,7 +10,7 @@ const (
 )
 
 type AttributePropagationSettings struct {
-	Enable            *bool                                               `json:"enable"`
-	Expression        *string                                             `json:"expression"`
-	OutputCredentials []AttributePropagationSettingsOutputCredentialsEnum `json:"outputCredentials"`
+	Enable            *bool                                               `json:"enable,omitempty"`
+	Expression        *string                                             `json:"expression,omitempty"`
+	OutputCredentials []AttributePropagationSettingsOutputCredentialsEnum `json:"outputCredentials,omitempty"`
 }

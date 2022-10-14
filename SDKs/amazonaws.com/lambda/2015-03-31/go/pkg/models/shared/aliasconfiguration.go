@@ -1,10 +1,10 @@
 package shared
 
 type AliasConfiguration struct {
-	AliasArn        *string                    `json:"AliasArn"`
-	Description     *string                    `json:"Description"`
-	FunctionVersion *string                    `json:"FunctionVersion"`
-	Name            *string                    `json:"Name"`
-	RevisionID      *string                    `json:"RevisionId"`
-	RoutingConfig   *AliasRoutingConfiguration `json:"RoutingConfig"`
+	AliasArn        *string                    `json:"AliasArn,omitempty"`
+	Description     *string                    `json:"Description,omitempty"`
+	FunctionVersion *string                    `json:"FunctionVersion,omitempty"`
+	Name            *string                    `json:"Name,omitempty"`
+	RevisionID      *string                    `json:"RevisionId,omitempty"`
+	RoutingConfig   *AliasRoutingConfiguration `json:"RoutingConfig,omitempty"`
 }

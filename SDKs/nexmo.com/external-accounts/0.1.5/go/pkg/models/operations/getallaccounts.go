@@ -37,38 +37,38 @@ type GetAllAccountsRequest struct {
 }
 
 type GetAllAccounts200ApplicationJSONLinksFirst struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type GetAllAccounts200ApplicationJSONLinksLast struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type GetAllAccounts200ApplicationJSONLinksNext struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type GetAllAccounts200ApplicationJSONLinksPrev struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type GetAllAccounts200ApplicationJSONLinksSelf struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type GetAllAccounts200ApplicationJSONLinks struct {
-	First *GetAllAccounts200ApplicationJSONLinksFirst `json:"first"`
-	Last  *GetAllAccounts200ApplicationJSONLinksLast  `json:"last"`
-	Next  *GetAllAccounts200ApplicationJSONLinksNext  `json:"next"`
-	Prev  *GetAllAccounts200ApplicationJSONLinksPrev  `json:"prev"`
-	Self  *GetAllAccounts200ApplicationJSONLinksSelf  `json:"self"`
+	First *GetAllAccounts200ApplicationJSONLinksFirst `json:"first,omitempty"`
+	Last  *GetAllAccounts200ApplicationJSONLinksLast  `json:"last,omitempty"`
+	Next  *GetAllAccounts200ApplicationJSONLinksNext  `json:"next,omitempty"`
+	Prev  *GetAllAccounts200ApplicationJSONLinksPrev  `json:"prev,omitempty"`
+	Self  *GetAllAccounts200ApplicationJSONLinksSelf  `json:"self,omitempty"`
 }
 
 type GetAllAccounts200ApplicationJSON struct {
-	Embedded   []shared.GetAllAccountResponse         `json:"_embedded"`
-	Links      *GetAllAccounts200ApplicationJSONLinks `json:"_links"`
-	PageNumber *int64                                 `json:"page_number"`
-	PageSize   *int64                                 `json:"page_size"`
+	Embedded   []shared.GetAllAccountResponse         `json:"_embedded,omitempty"`
+	Links      *GetAllAccounts200ApplicationJSONLinks `json:"_links,omitempty"`
+	PageNumber *int64                                 `json:"page_number,omitempty"`
+	PageSize   *int64                                 `json:"page_size,omitempty"`
 }
 
 type GetAllAccountsResponse struct {

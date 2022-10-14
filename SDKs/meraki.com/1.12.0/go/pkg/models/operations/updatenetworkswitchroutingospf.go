@@ -19,17 +19,17 @@ type UpdateNetworkSwitchRoutingOspfRequestBodyAreas struct {
 }
 
 type UpdateNetworkSwitchRoutingOspfRequestBodyMd5AuthenticationKey struct {
-	ID         *int64  `json:"id"`
-	Passphrase *string `json:"passphrase"`
+	ID         *int64  `json:"id,omitempty"`
+	Passphrase *string `json:"passphrase,omitempty"`
 }
 
 type UpdateNetworkSwitchRoutingOspfRequestBody struct {
-	Areas                    []UpdateNetworkSwitchRoutingOspfRequestBodyAreas               `json:"areas"`
-	DeadTimerInSeconds       *int64                                                         `json:"deadTimerInSeconds"`
-	Enabled                  *bool                                                          `json:"enabled"`
-	HelloTimerInSeconds      *int64                                                         `json:"helloTimerInSeconds"`
-	Md5AuthenticationEnabled *bool                                                          `json:"md5AuthenticationEnabled"`
-	Md5AuthenticationKey     *UpdateNetworkSwitchRoutingOspfRequestBodyMd5AuthenticationKey `json:"md5AuthenticationKey"`
+	Areas                    []UpdateNetworkSwitchRoutingOspfRequestBodyAreas               `json:"areas,omitempty"`
+	DeadTimerInSeconds       *int64                                                         `json:"deadTimerInSeconds,omitempty"`
+	Enabled                  *bool                                                          `json:"enabled,omitempty"`
+	HelloTimerInSeconds      *int64                                                         `json:"helloTimerInSeconds,omitempty"`
+	Md5AuthenticationEnabled *bool                                                          `json:"md5AuthenticationEnabled,omitempty"`
+	Md5AuthenticationKey     *UpdateNetworkSwitchRoutingOspfRequestBodyMd5AuthenticationKey `json:"md5AuthenticationKey,omitempty"`
 }
 
 type UpdateNetworkSwitchRoutingOspfRequest struct {

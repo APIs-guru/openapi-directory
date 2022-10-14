@@ -1,8 +1,8 @@
 package shared
 
 type CreateContainerVersionResponse struct {
-	CompilerError    *bool             `json:"compilerError"`
-	ContainerVersion *ContainerVersion `json:"containerVersion"`
-	NewWorkspacePath *string           `json:"newWorkspacePath"`
-	SyncStatus       *SyncStatus       `json:"syncStatus"`
+	CompilerError    *bool             `json:"compilerError,omitempty"`
+	ContainerVersion *ContainerVersion `json:"containerVersion,omitempty"`
+	NewWorkspacePath *string           `json:"newWorkspacePath,omitempty"`
+	SyncStatus       *SyncStatus       `json:"syncStatus,omitempty"`
 }

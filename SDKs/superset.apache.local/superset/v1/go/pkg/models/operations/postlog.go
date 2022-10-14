@@ -14,24 +14,24 @@ type PostLogRequest struct {
 }
 
 type PostLog201ApplicationJSON struct {
-	ID     *string                `json:"id"`
-	Result *shared.LogRestAPIPost `json:"result"`
+	ID     *string                `json:"id,omitempty"`
+	Result *shared.LogRestAPIPost `json:"result,omitempty"`
 }
 
 type PostLog400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostLog401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostLog422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostLog500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostLogResponse struct {

@@ -1,12 +1,12 @@
 package shared
 
 type SiteVerificationWebResourceResourceSite struct {
-	Identifier *string `json:"identifier"`
-	Type       *string `json:"type"`
+	Identifier *string `json:"identifier,omitempty"`
+	Type       *string `json:"type,omitempty"`
 }
 
 type SiteVerificationWebResourceResource struct {
-	ID     *string                                  `json:"id"`
-	Owners []string                                 `json:"owners"`
-	Site   *SiteVerificationWebResourceResourceSite `json:"site"`
+	ID     *string                                  `json:"id,omitempty"`
+	Owners []string                                 `json:"owners,omitempty"`
+	Site   *SiteVerificationWebResourceResourceSite `json:"site,omitempty"`
 }

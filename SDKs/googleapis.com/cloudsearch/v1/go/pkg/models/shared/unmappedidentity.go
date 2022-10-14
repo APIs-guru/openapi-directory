@@ -12,6 +12,6 @@ const (
 )
 
 type UnmappedIdentity struct {
-	ExternalIdentity     *Principal                                `json:"externalIdentity"`
-	ResolutionStatusCode *UnmappedIdentityResolutionStatusCodeEnum `json:"resolutionStatusCode"`
+	ExternalIdentity     *Principal                                `json:"externalIdentity,omitempty"`
+	ResolutionStatusCode *UnmappedIdentityResolutionStatusCodeEnum `json:"resolutionStatusCode,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type Key struct {
-	ID          *string `json:"id"`
-	IsReadOnly  *bool   `json:"is_read_only"`
-	Label       *string `json:"label"`
-	Secret      *string `json:"secret"`
-	TimeCreated *string `json:"time_created"`
-	TimeUpdated *string `json:"time_updated"`
-	URL         *string `json:"url"`
+	ID          *string `json:"id,omitempty"`
+	IsReadOnly  *bool   `json:"is_read_only,omitempty"`
+	Label       *string `json:"label,omitempty"`
+	Secret      *string `json:"secret,omitempty"`
+	TimeCreated *string `json:"time_created,omitempty"`
+	TimeUpdated *string `json:"time_updated,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }

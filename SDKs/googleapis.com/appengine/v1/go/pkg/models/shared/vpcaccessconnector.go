@@ -9,6 +9,6 @@ const (
 )
 
 type VpcAccessConnector struct {
-	EgressSetting *VpcAccessConnectorEgressSettingEnum `json:"egressSetting"`
-	Name          *string                              `json:"name"`
+	EgressSetting *VpcAccessConnectorEgressSettingEnum `json:"egressSetting,omitempty"`
+	Name          *string                              `json:"name,omitempty"`
 }

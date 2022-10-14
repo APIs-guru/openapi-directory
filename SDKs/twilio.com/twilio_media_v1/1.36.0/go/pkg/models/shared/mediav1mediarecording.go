@@ -16,19 +16,19 @@ const (
 )
 
 type MediaV1MediaRecording struct {
-	AccountSid           *string                                        `json:"account_sid"`
-	DateCreated          *time.Time                                     `json:"date_created"`
-	DateUpdated          *time.Time                                     `json:"date_updated"`
-	Duration             *int64                                         `json:"duration"`
-	Format               *MediaRecordingEnumFormatEnum                  `json:"format"`
-	Links                map[string]interface{}                         `json:"links"`
-	MediaSize            *int64                                         `json:"media_size"`
-	ProcessorSid         *string                                        `json:"processor_sid"`
-	Resolution           *string                                        `json:"resolution"`
-	Sid                  *string                                        `json:"sid"`
-	SourceSid            *string                                        `json:"source_sid"`
-	Status               *MediaRecordingEnumStatusEnum                  `json:"status"`
-	StatusCallback       *string                                        `json:"status_callback"`
-	StatusCallbackMethod *MediaV1MediaRecordingStatusCallbackMethodEnum `json:"status_callback_method"`
-	URL                  *string                                        `json:"url"`
+	AccountSid           *string                                        `json:"account_sid,omitempty"`
+	DateCreated          *time.Time                                     `json:"date_created,omitempty"`
+	DateUpdated          *time.Time                                     `json:"date_updated,omitempty"`
+	Duration             *int64                                         `json:"duration,omitempty"`
+	Format               *MediaRecordingEnumFormatEnum                  `json:"format,omitempty"`
+	Links                map[string]interface{}                         `json:"links,omitempty"`
+	MediaSize            *int64                                         `json:"media_size,omitempty"`
+	ProcessorSid         *string                                        `json:"processor_sid,omitempty"`
+	Resolution           *string                                        `json:"resolution,omitempty"`
+	Sid                  *string                                        `json:"sid,omitempty"`
+	SourceSid            *string                                        `json:"source_sid,omitempty"`
+	Status               *MediaRecordingEnumStatusEnum                  `json:"status,omitempty"`
+	StatusCallback       *string                                        `json:"status_callback,omitempty"`
+	StatusCallbackMethod *MediaV1MediaRecordingStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	URL                  *string                                        `json:"url,omitempty"`
 }

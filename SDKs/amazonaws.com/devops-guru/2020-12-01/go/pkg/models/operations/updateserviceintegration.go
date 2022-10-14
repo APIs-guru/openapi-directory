@@ -15,7 +15,7 @@ type UpdateServiceIntegrationHeaders struct {
 }
 
 type UpdateServiceIntegrationRequestBodyServiceIntegration struct {
-	OpsCenter *shared.OpsCenterIntegrationConfig `json:"OpsCenter"`
+	OpsCenter *shared.OpsCenterIntegrationConfig `json:"OpsCenter,omitempty"`
 }
 
 type UpdateServiceIntegrationRequestBody struct {

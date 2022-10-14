@@ -5,10 +5,10 @@ import (
 )
 
 type UpdateCustomMetricResponse struct {
-	CreationDate     *time.Time            `json:"creationDate"`
-	DisplayName      *string               `json:"displayName"`
-	LastModifiedDate *time.Time            `json:"lastModifiedDate"`
-	MetricArn        *string               `json:"metricArn"`
-	MetricName       *string               `json:"metricName"`
-	MetricType       *CustomMetricTypeEnum `json:"metricType"`
+	CreationDate     *time.Time            `json:"creationDate,omitempty"`
+	DisplayName      *string               `json:"displayName,omitempty"`
+	LastModifiedDate *time.Time            `json:"lastModifiedDate,omitempty"`
+	MetricArn        *string               `json:"metricArn,omitempty"`
+	MetricName       *string               `json:"metricName,omitempty"`
+	MetricType       *CustomMetricTypeEnum `json:"metricType,omitempty"`
 }

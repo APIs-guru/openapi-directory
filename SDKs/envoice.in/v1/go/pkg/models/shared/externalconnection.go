@@ -5,13 +5,13 @@ import (
 )
 
 type ExternalConnection struct {
-	AccessToken       *string    `json:"AccessToken"`
-	AccessTokenSecret *string    `json:"AccessTokenSecret"`
-	Data              *string    `json:"Data"`
-	ExpiresOn         *time.Time `json:"ExpiresOn"`
-	ExternalUserID    *string    `json:"ExternalUserId"`
-	ExternalUsername  *string    `json:"ExternalUsername"`
-	ID                *int32     `json:"Id"`
-	Provider          *string    `json:"Provider"`
-	UserID            *int32     `json:"UserId"`
+	AccessToken       *string    `json:"AccessToken,omitempty"`
+	AccessTokenSecret *string    `json:"AccessTokenSecret,omitempty"`
+	Data              *string    `json:"Data,omitempty"`
+	ExpiresOn         *time.Time `json:"ExpiresOn,omitempty"`
+	ExternalUserID    *string    `json:"ExternalUserId,omitempty"`
+	ExternalUsername  *string    `json:"ExternalUsername,omitempty"`
+	ID                *int32     `json:"Id,omitempty"`
+	Provider          *string    `json:"Provider,omitempty"`
+	UserID            *int32     `json:"UserId,omitempty"`
 }

@@ -19,13 +19,13 @@ type UpdateProjectHeaders struct {
 }
 
 type UpdateProjectRequestBodyPlacementTemplate struct {
-	DefaultAttributes map[string]string                `json:"defaultAttributes"`
-	DeviceTemplates   map[string]shared.DeviceTemplate `json:"deviceTemplates"`
+	DefaultAttributes map[string]string                `json:"defaultAttributes,omitempty"`
+	DeviceTemplates   map[string]shared.DeviceTemplate `json:"deviceTemplates,omitempty"`
 }
 
 type UpdateProjectRequestBody struct {
-	Description       *string                                    `json:"description"`
-	PlacementTemplate *UpdateProjectRequestBodyPlacementTemplate `json:"placementTemplate"`
+	Description       *string                                    `json:"description,omitempty"`
+	PlacementTemplate *UpdateProjectRequestBodyPlacementTemplate `json:"placementTemplate,omitempty"`
 }
 
 type UpdateProjectRequest struct {

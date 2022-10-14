@@ -43,10 +43,10 @@ type UpdateOrganizationAdminRequestBodyTags struct {
 }
 
 type UpdateOrganizationAdminRequestBody struct {
-	Name      *string                                          `json:"name"`
-	Networks  []UpdateOrganizationAdminRequestBodyNetworks     `json:"networks"`
-	OrgAccess *UpdateOrganizationAdminRequestBodyOrgAccessEnum `json:"orgAccess"`
-	Tags      []UpdateOrganizationAdminRequestBodyTags         `json:"tags"`
+	Name      *string                                          `json:"name,omitempty"`
+	Networks  []UpdateOrganizationAdminRequestBodyNetworks     `json:"networks,omitempty"`
+	OrgAccess *UpdateOrganizationAdminRequestBodyOrgAccessEnum `json:"orgAccess,omitempty"`
+	Tags      []UpdateOrganizationAdminRequestBodyTags         `json:"tags,omitempty"`
 }
 
 type UpdateOrganizationAdminRequest struct {

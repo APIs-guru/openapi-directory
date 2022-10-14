@@ -22,8 +22,8 @@ const (
 )
 
 type UpdateStandardsControlRequestBody struct {
-	ControlStatus  *UpdateStandardsControlRequestBodyControlStatusEnum `json:"ControlStatus"`
-	DisabledReason *string                                             `json:"DisabledReason"`
+	ControlStatus  *UpdateStandardsControlRequestBodyControlStatusEnum `json:"ControlStatus,omitempty"`
+	DisabledReason *string                                             `json:"DisabledReason,omitempty"`
 }
 
 type UpdateStandardsControlRequest struct {

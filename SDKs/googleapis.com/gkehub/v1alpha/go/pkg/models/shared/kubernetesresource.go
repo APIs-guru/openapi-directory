@@ -1,8 +1,8 @@
 package shared
 
 type KubernetesResource struct {
-	ConnectResources     []ResourceManifest `json:"connectResources"`
-	MembershipCrManifest *string            `json:"membershipCrManifest"`
-	MembershipResources  []ResourceManifest `json:"membershipResources"`
-	ResourceOptions      *ResourceOptions   `json:"resourceOptions"`
+	ConnectResources     []ResourceManifest `json:"connectResources,omitempty"`
+	MembershipCrManifest *string            `json:"membershipCrManifest,omitempty"`
+	MembershipResources  []ResourceManifest `json:"membershipResources,omitempty"`
+	ResourceOptions      *ResourceOptions   `json:"resourceOptions,omitempty"`
 }

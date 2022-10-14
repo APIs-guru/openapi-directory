@@ -1,5 +1,5 @@
 package shared
 
 type CreateProjectResult struct {
-	Details *ProjectDetails `json:"details"`
+	Details *ProjectDetails `json:"details,omitempty"`
 }

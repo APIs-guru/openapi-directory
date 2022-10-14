@@ -1,7 +1,7 @@
 package shared
 
 type ListMetadataImportsResponse struct {
-	MetadataImports []MetadataImport `json:"metadataImports"`
-	NextPageToken   *string          `json:"nextPageToken"`
-	Unreachable     []string         `json:"unreachable"`
+	MetadataImports []MetadataImport `json:"metadataImports,omitempty"`
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
+	Unreachable     []string         `json:"unreachable,omitempty"`
 }

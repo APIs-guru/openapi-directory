@@ -1,13 +1,13 @@
 package shared
 
 type Query struct {
-	DistinctOn  []PropertyReference `json:"distinctOn"`
-	EndCursor   *string             `json:"endCursor"`
-	Filter      *Filter             `json:"filter"`
-	Kind        []KindExpression    `json:"kind"`
-	Limit       *int32              `json:"limit"`
-	Offset      *int32              `json:"offset"`
-	Order       []PropertyOrder     `json:"order"`
-	Projection  []Projection        `json:"projection"`
-	StartCursor *string             `json:"startCursor"`
+	DistinctOn  []PropertyReference `json:"distinctOn,omitempty"`
+	EndCursor   *string             `json:"endCursor,omitempty"`
+	Filter      *Filter             `json:"filter,omitempty"`
+	Kind        []KindExpression    `json:"kind,omitempty"`
+	Limit       *int32              `json:"limit,omitempty"`
+	Offset      *int32              `json:"offset,omitempty"`
+	Order       []PropertyOrder     `json:"order,omitempty"`
+	Projection  []Projection        `json:"projection,omitempty"`
+	StartCursor *string             `json:"startCursor,omitempty"`
 }

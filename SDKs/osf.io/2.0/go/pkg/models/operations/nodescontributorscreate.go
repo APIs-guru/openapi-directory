@@ -13,14 +13,14 @@ const (
 )
 
 type NodesContributorsCreateRequestBodyAttributesAttributes struct {
-	Bibliographic           *bool                                                       `json:"bibliographic"`
-	Index                   *int64                                                      `json:"index"`
-	Permission              *NodesContributorsCreateRequestBodyAttributesPermissionEnum `json:"permission"`
-	UnregisteredContributor *string                                                     `json:"unregistered_contributor"`
+	Bibliographic           *bool                                                       `json:"bibliographic,omitempty"`
+	Index                   *int64                                                      `json:"index,omitempty"`
+	Permission              *NodesContributorsCreateRequestBodyAttributesPermissionEnum `json:"permission,omitempty"`
+	UnregisteredContributor *string                                                     `json:"unregistered_contributor,omitempty"`
 }
 
 type NodesContributorsCreateRequestBodyLinksLinks struct {
-	Self *string `json:"self"`
+	Self *string `json:"self,omitempty"`
 }
 
 type NodesContributorsCreateRequestBodyRelationshipsRelationships struct {
@@ -29,9 +29,9 @@ type NodesContributorsCreateRequestBodyRelationshipsRelationships struct {
 }
 
 type NodesContributorsCreateRequestBodyContributor struct {
-	Attributes    *NodesContributorsCreateRequestBodyAttributesAttributes      `json:"attributes"`
-	ID            *string                                                      `json:"id"`
-	Links         *NodesContributorsCreateRequestBodyLinksLinks                `json:"links"`
+	Attributes    *NodesContributorsCreateRequestBodyAttributesAttributes      `json:"attributes,omitempty"`
+	ID            *string                                                      `json:"id,omitempty"`
+	Links         *NodesContributorsCreateRequestBodyLinksLinks                `json:"links,omitempty"`
 	Relationships NodesContributorsCreateRequestBodyRelationshipsRelationships `json:"relationships"`
 	Type          string                                                       `json:"type"`
 }

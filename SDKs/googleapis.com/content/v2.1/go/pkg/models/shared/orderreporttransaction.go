@@ -1,13 +1,13 @@
 package shared
 
 type OrderReportTransaction struct {
-	DisbursementAmount       *Price         `json:"disbursementAmount"`
-	DisbursementCreationDate *string        `json:"disbursementCreationDate"`
-	DisbursementDate         *string        `json:"disbursementDate"`
-	DisbursementID           *string        `json:"disbursementId"`
-	MerchantID               *string        `json:"merchantId"`
-	MerchantOrderID          *string        `json:"merchantOrderId"`
-	OrderID                  *string        `json:"orderId"`
-	ProductAmount            *ProductAmount `json:"productAmount"`
-	TransactionDate          *string        `json:"transactionDate"`
+	DisbursementAmount       *Price         `json:"disbursementAmount,omitempty"`
+	DisbursementCreationDate *string        `json:"disbursementCreationDate,omitempty"`
+	DisbursementDate         *string        `json:"disbursementDate,omitempty"`
+	DisbursementID           *string        `json:"disbursementId,omitempty"`
+	MerchantID               *string        `json:"merchantId,omitempty"`
+	MerchantOrderID          *string        `json:"merchantOrderId,omitempty"`
+	OrderID                  *string        `json:"orderId,omitempty"`
+	ProductAmount            *ProductAmount `json:"productAmount,omitempty"`
+	TransactionDate          *string        `json:"transactionDate,omitempty"`
 }

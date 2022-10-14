@@ -9,7 +9,7 @@ const (
 )
 
 type EventRecordFailure struct {
-	EventID      *string                             `json:"eventId"`
-	FailureCause *EventRecordFailureFailureCauseEnum `json:"failureCause"`
-	Kind         *string                             `json:"kind"`
+	EventID      *string                             `json:"eventId,omitempty"`
+	FailureCause *EventRecordFailureFailureCauseEnum `json:"failureCause,omitempty"`
+	Kind         *string                             `json:"kind,omitempty"`
 }

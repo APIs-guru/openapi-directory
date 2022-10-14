@@ -28,15 +28,15 @@ type ListQueueRequest struct {
 }
 
 type ListQueue200ApplicationJSONListQueueResponse struct {
-	End             *int64                        `json:"end"`
-	FirstPageURI    *string                       `json:"first_page_uri"`
-	NextPageURI     *string                       `json:"next_page_uri"`
-	Page            *int64                        `json:"page"`
-	PageSize        *int64                        `json:"page_size"`
-	PreviousPageURI *string                       `json:"previous_page_uri"`
-	Queues          []shared.APIV2010AccountQueue `json:"queues"`
-	Start           *int64                        `json:"start"`
-	URI             *string                       `json:"uri"`
+	End             *int64                        `json:"end,omitempty"`
+	FirstPageURI    *string                       `json:"first_page_uri,omitempty"`
+	NextPageURI     *string                       `json:"next_page_uri,omitempty"`
+	Page            *int64                        `json:"page,omitempty"`
+	PageSize        *int64                        `json:"page_size,omitempty"`
+	PreviousPageURI *string                       `json:"previous_page_uri,omitempty"`
+	Queues          []shared.APIV2010AccountQueue `json:"queues,omitempty"`
+	Start           *int64                        `json:"start,omitempty"`
+	URI             *string                       `json:"uri,omitempty"`
 }
 
 type ListQueueResponse struct {

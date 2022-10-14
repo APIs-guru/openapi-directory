@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudRetailV2alphaBigQuerySource struct {
-	DataSchema    *string         `json:"dataSchema"`
-	DatasetID     *string         `json:"datasetId"`
-	GcsStagingDir *string         `json:"gcsStagingDir"`
-	PartitionDate *GoogleTypeDate `json:"partitionDate"`
-	ProjectID     *string         `json:"projectId"`
-	TableID       *string         `json:"tableId"`
+	DataSchema    *string         `json:"dataSchema,omitempty"`
+	DatasetID     *string         `json:"datasetId,omitempty"`
+	GcsStagingDir *string         `json:"gcsStagingDir,omitempty"`
+	PartitionDate *GoogleTypeDate `json:"partitionDate,omitempty"`
+	ProjectID     *string         `json:"projectId,omitempty"`
+	TableID       *string         `json:"tableId,omitempty"`
 }

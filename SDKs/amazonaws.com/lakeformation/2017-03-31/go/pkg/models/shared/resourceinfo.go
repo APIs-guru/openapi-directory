@@ -5,7 +5,7 @@ import (
 )
 
 type ResourceInfo struct {
-	LastModified *time.Time `json:"LastModified"`
-	ResourceArn  *string    `json:"ResourceArn"`
-	RoleArn      *string    `json:"RoleArn"`
+	LastModified *time.Time `json:"LastModified,omitempty"`
+	ResourceArn  *string    `json:"ResourceArn,omitempty"`
+	RoleArn      *string    `json:"RoleArn,omitempty"`
 }

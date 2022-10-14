@@ -11,7 +11,7 @@ const (
 )
 
 type GkeNodePoolTarget struct {
-	NodePool       *string                      `json:"nodePool"`
-	NodePoolConfig *GkeNodePoolConfig           `json:"nodePoolConfig"`
-	Roles          []GkeNodePoolTargetRolesEnum `json:"roles"`
+	NodePool       *string                      `json:"nodePool,omitempty"`
+	NodePoolConfig *GkeNodePoolConfig           `json:"nodePoolConfig,omitempty"`
+	Roles          []GkeNodePoolTargetRolesEnum `json:"roles,omitempty"`
 }

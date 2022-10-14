@@ -16,12 +16,12 @@ type SetVaultNotificationsHeaders struct {
 }
 
 type SetVaultNotificationsRequestBodyVaultNotificationConfig struct {
-	Events   []string `json:"Events"`
-	SnsTopic *string  `json:"SNSTopic"`
+	Events   []string `json:"Events,omitempty"`
+	SnsTopic *string  `json:"SNSTopic,omitempty"`
 }
 
 type SetVaultNotificationsRequestBody struct {
-	VaultNotificationConfig *SetVaultNotificationsRequestBodyVaultNotificationConfig `json:"vaultNotificationConfig"`
+	VaultNotificationConfig *SetVaultNotificationsRequestBodyVaultNotificationConfig `json:"vaultNotificationConfig,omitempty"`
 }
 
 type SetVaultNotificationsRequest struct {

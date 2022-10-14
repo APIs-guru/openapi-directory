@@ -1,7 +1,7 @@
 package shared
 
 type Notification struct {
-	JobStatesToNotify []JobStateEnum `json:"JobStatesToNotify"`
-	NotifyAll         *bool          `json:"NotifyAll"`
-	SnsTopicArn       *string        `json:"SnsTopicARN"`
+	JobStatesToNotify []JobStateEnum `json:"JobStatesToNotify,omitempty"`
+	NotifyAll         *bool          `json:"NotifyAll,omitempty"`
+	SnsTopicArn       *string        `json:"SnsTopicARN,omitempty"`
 }

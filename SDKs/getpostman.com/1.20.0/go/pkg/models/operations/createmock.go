@@ -1,12 +1,12 @@
 package operations
 
 type CreateMockRequestBodyMock struct {
-	Collection  *string `json:"collection"`
-	Environment *string `json:"environment"`
+	Collection  *string `json:"collection,omitempty"`
+	Environment *string `json:"environment,omitempty"`
 }
 
 type CreateMockRequestBody struct {
-	Mock *CreateMockRequestBodyMock `json:"mock"`
+	Mock *CreateMockRequestBodyMock `json:"mock,omitempty"`
 }
 
 type CreateMockRequest struct {
@@ -14,16 +14,16 @@ type CreateMockRequest struct {
 }
 
 type CreateMock200ApplicationJSONMock struct {
-	Collection  *string `json:"collection"`
-	Environment *string `json:"environment"`
-	ID          *string `json:"id"`
-	MockURL     *string `json:"mockUrl"`
-	Owner       *string `json:"owner"`
-	UID         *string `json:"uid"`
+	Collection  *string `json:"collection,omitempty"`
+	Environment *string `json:"environment,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	MockURL     *string `json:"mockUrl,omitempty"`
+	Owner       *string `json:"owner,omitempty"`
+	UID         *string `json:"uid,omitempty"`
 }
 
 type CreateMock200ApplicationJSON struct {
-	Mock *CreateMock200ApplicationJSONMock `json:"mock"`
+	Mock *CreateMock200ApplicationJSONMock `json:"mock,omitempty"`
 }
 
 type CreateMockResponse struct {

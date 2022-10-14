@@ -1,10 +1,10 @@
 package shared
 
 type GetCustomVerificationEmailTemplateResponse struct {
-	FailureRedirectionURL *string `json:"FailureRedirectionURL"`
-	FromEmailAddress      *string `json:"FromEmailAddress"`
-	SuccessRedirectionURL *string `json:"SuccessRedirectionURL"`
-	TemplateContent       *string `json:"TemplateContent"`
-	TemplateName          *string `json:"TemplateName"`
-	TemplateSubject       *string `json:"TemplateSubject"`
+	FailureRedirectionURL *string `json:"FailureRedirectionURL,omitempty"`
+	FromEmailAddress      *string `json:"FromEmailAddress,omitempty"`
+	SuccessRedirectionURL *string `json:"SuccessRedirectionURL,omitempty"`
+	TemplateContent       *string `json:"TemplateContent,omitempty"`
+	TemplateName          *string `json:"TemplateName,omitempty"`
+	TemplateSubject       *string `json:"TemplateSubject,omitempty"`
 }

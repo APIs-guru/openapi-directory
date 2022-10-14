@@ -18,13 +18,13 @@ const (
 )
 
 type GoogleCloudApigeeV1CanaryEvaluation struct {
-	Control      *string                                          `json:"control"`
-	CreateTime   *string                                          `json:"createTime"`
-	EndTime      *string                                          `json:"endTime"`
-	MetricLabels *GoogleCloudApigeeV1CanaryEvaluationMetricLabels `json:"metricLabels"`
-	Name         *string                                          `json:"name"`
-	StartTime    *string                                          `json:"startTime"`
-	State        *GoogleCloudApigeeV1CanaryEvaluationStateEnum    `json:"state"`
-	Treatment    *string                                          `json:"treatment"`
-	Verdict      *GoogleCloudApigeeV1CanaryEvaluationVerdictEnum  `json:"verdict"`
+	Control      *string                                          `json:"control,omitempty"`
+	CreateTime   *string                                          `json:"createTime,omitempty"`
+	EndTime      *string                                          `json:"endTime,omitempty"`
+	MetricLabels *GoogleCloudApigeeV1CanaryEvaluationMetricLabels `json:"metricLabels,omitempty"`
+	Name         *string                                          `json:"name,omitempty"`
+	StartTime    *string                                          `json:"startTime,omitempty"`
+	State        *GoogleCloudApigeeV1CanaryEvaluationStateEnum    `json:"state,omitempty"`
+	Treatment    *string                                          `json:"treatment,omitempty"`
+	Verdict      *GoogleCloudApigeeV1CanaryEvaluationVerdictEnum  `json:"verdict,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GoalSetData struct {
-	Goals []GoalData `json:"goals"`
+	Goals []GoalData `json:"goals,omitempty"`
 }

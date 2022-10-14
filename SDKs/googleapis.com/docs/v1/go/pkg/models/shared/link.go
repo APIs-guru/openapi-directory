@@ -1,7 +1,7 @@
 package shared
 
 type Link struct {
-	BookmarkID *string `json:"bookmarkId"`
-	HeadingID  *string `json:"headingId"`
-	URL        *string `json:"url"`
+	BookmarkID *string `json:"bookmarkId,omitempty"`
+	HeadingID  *string `json:"headingId,omitempty"`
+	URL        *string `json:"url,omitempty"`
 }

@@ -7,7 +7,7 @@ type UpdateNetworkClientPolicyPathParams struct {
 
 type UpdateNetworkClientPolicyRequestBody struct {
 	DevicePolicy  string  `json:"devicePolicy"`
-	GroupPolicyID *string `json:"groupPolicyId"`
+	GroupPolicyID *string `json:"groupPolicyId,omitempty"`
 }
 
 type UpdateNetworkClientPolicyRequest struct {

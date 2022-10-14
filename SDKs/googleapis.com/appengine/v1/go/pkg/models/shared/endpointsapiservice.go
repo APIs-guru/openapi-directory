@@ -9,8 +9,8 @@ const (
 )
 
 type EndpointsAPIService struct {
-	ConfigID             *string                                 `json:"configId"`
-	DisableTraceSampling *bool                                   `json:"disableTraceSampling"`
-	Name                 *string                                 `json:"name"`
-	RolloutStrategy      *EndpointsAPIServiceRolloutStrategyEnum `json:"rolloutStrategy"`
+	ConfigID             *string                                 `json:"configId,omitempty"`
+	DisableTraceSampling *bool                                   `json:"disableTraceSampling,omitempty"`
+	Name                 *string                                 `json:"name,omitempty"`
+	RolloutStrategy      *EndpointsAPIServiceRolloutStrategyEnum `json:"rolloutStrategy,omitempty"`
 }

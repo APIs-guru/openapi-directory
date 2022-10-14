@@ -1,9 +1,9 @@
 package shared
 
 type ListProvisionedProductPlansInput struct {
-	AcceptLanguage     *string            `json:"AcceptLanguage"`
-	AccessLevelFilter  *AccessLevelFilter `json:"AccessLevelFilter"`
-	PageSize           *int64             `json:"PageSize"`
-	PageToken          *string            `json:"PageToken"`
-	ProvisionProductID *string            `json:"ProvisionProductId"`
+	AcceptLanguage     *string            `json:"AcceptLanguage,omitempty"`
+	AccessLevelFilter  *AccessLevelFilter `json:"AccessLevelFilter,omitempty"`
+	PageSize           *int64             `json:"PageSize,omitempty"`
+	PageToken          *string            `json:"PageToken,omitempty"`
+	ProvisionProductID *string            `json:"ProvisionProductId,omitempty"`
 }

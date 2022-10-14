@@ -1,6 +1,6 @@
 package shared
 
 type DeleteStorageVirtualMachineRequest struct {
-	ClientRequestToken      *string `json:"ClientRequestToken"`
+	ClientRequestToken      *string `json:"ClientRequestToken,omitempty"`
 	StorageVirtualMachineID string  `json:"StorageVirtualMachineId"`
 }

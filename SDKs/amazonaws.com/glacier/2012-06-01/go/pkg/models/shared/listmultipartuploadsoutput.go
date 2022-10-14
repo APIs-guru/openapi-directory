@@ -1,6 +1,6 @@
 package shared
 
 type ListMultipartUploadsOutput struct {
-	Marker      *string             `json:"Marker"`
-	UploadsList []UploadListElement `json:"UploadsList"`
+	Marker      *string             `json:"Marker,omitempty"`
+	UploadsList []UploadListElement `json:"UploadsList,omitempty"`
 }

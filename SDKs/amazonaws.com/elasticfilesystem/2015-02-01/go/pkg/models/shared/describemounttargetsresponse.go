@@ -1,7 +1,7 @@
 package shared
 
 type DescribeMountTargetsResponse struct {
-	Marker       *string                  `json:"Marker"`
-	MountTargets []MountTargetDescription `json:"MountTargets"`
-	NextMarker   *string                  `json:"NextMarker"`
+	Marker       *string                  `json:"Marker,omitempty"`
+	MountTargets []MountTargetDescription `json:"MountTargets,omitempty"`
+	NextMarker   *string                  `json:"NextMarker,omitempty"`
 }

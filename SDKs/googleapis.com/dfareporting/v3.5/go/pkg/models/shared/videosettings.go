@@ -9,12 +9,12 @@ const (
 )
 
 type VideoSettings struct {
-	CompanionSettings *CompanionSetting             `json:"companionSettings"`
-	DurationSeconds   *int32                        `json:"durationSeconds"`
-	Kind              *string                       `json:"kind"`
-	ObaEnabled        *bool                         `json:"obaEnabled"`
-	ObaSettings       *ObaIcon                      `json:"obaSettings"`
-	Orientation       *VideoSettingsOrientationEnum `json:"orientation"`
-	SkippableSettings *SkippableSetting             `json:"skippableSettings"`
-	TranscodeSettings *TranscodeSetting             `json:"transcodeSettings"`
+	CompanionSettings *CompanionSetting             `json:"companionSettings,omitempty"`
+	DurationSeconds   *int32                        `json:"durationSeconds,omitempty"`
+	Kind              *string                       `json:"kind,omitempty"`
+	ObaEnabled        *bool                         `json:"obaEnabled,omitempty"`
+	ObaSettings       *ObaIcon                      `json:"obaSettings,omitempty"`
+	Orientation       *VideoSettingsOrientationEnum `json:"orientation,omitempty"`
+	SkippableSettings *SkippableSetting             `json:"skippableSettings,omitempty"`
+	TranscodeSettings *TranscodeSetting             `json:"transcodeSettings,omitempty"`
 }

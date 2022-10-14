@@ -7,8 +7,8 @@ import (
 type Balance struct {
 	BalanceAmount            Amount          `json:"balanceAmount"`
 	BalanceType              BalanceTypeEnum `json:"balanceType"`
-	CreditLimitIncluded      *bool           `json:"creditLimitIncluded"`
-	LastChangeDateTime       *time.Time      `json:"lastChangeDateTime"`
-	LastCommittedTransaction *string         `json:"lastCommittedTransaction"`
-	ReferenceDate            *time.Time      `json:"referenceDate"`
+	CreditLimitIncluded      *bool           `json:"creditLimitIncluded,omitempty"`
+	LastChangeDateTime       *time.Time      `json:"lastChangeDateTime,omitempty"`
+	LastCommittedTransaction *string         `json:"lastCommittedTransaction,omitempty"`
+	ReferenceDate            *time.Time      `json:"referenceDate,omitempty"`
 }

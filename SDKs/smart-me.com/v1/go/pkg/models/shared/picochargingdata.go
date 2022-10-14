@@ -16,9 +16,9 @@ const (
 )
 
 type PicoChargingData struct {
-	ActiveChargingEnergy *float64                   `json:"ActiveChargingEnergy"`
-	ActiveChargingPower  *float64                   `json:"ActiveChargingPower"`
-	Duration             *int32                     `json:"Duration"`
-	State                *PicoChargingDataStateEnum `json:"State"`
-	ValueDate            *time.Time                 `json:"ValueDate"`
+	ActiveChargingEnergy *float64                   `json:"ActiveChargingEnergy,omitempty"`
+	ActiveChargingPower  *float64                   `json:"ActiveChargingPower,omitempty"`
+	Duration             *int32                     `json:"Duration,omitempty"`
+	State                *PicoChargingDataStateEnum `json:"State,omitempty"`
+	ValueDate            *time.Time                 `json:"ValueDate,omitempty"`
 }

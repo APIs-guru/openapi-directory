@@ -1,5 +1,5 @@
 package shared
 
 type WithdrawByoipCidrResponse struct {
-	ByoipCidr *ByoipCidr `json:"ByoipCidr"`
+	ByoipCidr *ByoipCidr `json:"ByoipCidr,omitempty"`
 }

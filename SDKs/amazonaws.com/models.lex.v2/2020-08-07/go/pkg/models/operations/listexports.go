@@ -20,17 +20,17 @@ type ListExportsHeaders struct {
 }
 
 type ListExportsRequestBodySortBy struct {
-	Attribute *shared.ExportSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum           `json:"order"`
+	Attribute *shared.ExportSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum           `json:"order,omitempty"`
 }
 
 type ListExportsRequestBody struct {
-	BotID      *string                       `json:"botId"`
-	BotVersion *string                       `json:"botVersion"`
-	Filters    []shared.ExportFilter         `json:"filters"`
-	MaxResults *int64                        `json:"maxResults"`
-	NextToken  *string                       `json:"nextToken"`
-	SortBy     *ListExportsRequestBodySortBy `json:"sortBy"`
+	BotID      *string                       `json:"botId,omitempty"`
+	BotVersion *string                       `json:"botVersion,omitempty"`
+	Filters    []shared.ExportFilter         `json:"filters,omitempty"`
+	MaxResults *int64                        `json:"maxResults,omitempty"`
+	NextToken  *string                       `json:"nextToken,omitempty"`
+	SortBy     *ListExportsRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListExportsRequest struct {

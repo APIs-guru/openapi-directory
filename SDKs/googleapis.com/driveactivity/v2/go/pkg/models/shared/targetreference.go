@@ -1,7 +1,7 @@
 package shared
 
 type TargetReference struct {
-	Drive     *DriveReference     `json:"drive"`
-	DriveItem *DriveItemReference `json:"driveItem"`
-	TeamDrive *TeamDriveReference `json:"teamDrive"`
+	Drive     *DriveReference     `json:"drive,omitempty"`
+	DriveItem *DriveItemReference `json:"driveItem,omitempty"`
+	TeamDrive *TeamDriveReference `json:"teamDrive,omitempty"`
 }

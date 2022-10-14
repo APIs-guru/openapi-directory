@@ -17,8 +17,8 @@ const (
 )
 
 type SsmgrRequestBody struct {
-	CertificateParameters *SsmgrRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *SsmgrRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                SsmgrRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Ssmgr400ApplicationJSON struct {
-	Error            *Ssmgr400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ssmgr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ssmgr400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ssmgr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ssmgr401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Ssmgr401ApplicationJSON struct {
-	Error            *Ssmgr401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ssmgr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ssmgr401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ssmgr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ssmgr404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Ssmgr404ApplicationJSON struct {
-	Error            *Ssmgr404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ssmgr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ssmgr404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ssmgr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ssmgr500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Ssmgr500ApplicationJSON struct {
-	Error            *Ssmgr500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ssmgr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ssmgr500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ssmgr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ssmgr502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Ssmgr502ApplicationJSON struct {
-	Error            *Ssmgr502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ssmgr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ssmgr502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ssmgr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ssmgr503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Ssmgr503ApplicationJSON struct {
-	Error            *Ssmgr503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ssmgr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ssmgr503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ssmgr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ssmgr504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Ssmgr504ApplicationJSON struct {
-	Error            *Ssmgr504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ssmgr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ssmgr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ssmgr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SsmgrResponse struct {

@@ -9,6 +9,6 @@ const (
 )
 
 type Text struct {
-	Content *string         `json:"content"`
-	Format  *TextFormatEnum `json:"format"`
+	Content *string         `json:"content,omitempty"`
+	Format  *TextFormatEnum `json:"format,omitempty"`
 }

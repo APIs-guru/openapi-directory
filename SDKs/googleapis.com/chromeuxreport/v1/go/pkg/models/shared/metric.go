@@ -1,6 +1,6 @@
 package shared
 
 type Metric struct {
-	Histogram   []Bin        `json:"histogram"`
-	Percentiles *Percentiles `json:"percentiles"`
+	Histogram   []Bin        `json:"histogram,omitempty"`
+	Percentiles *Percentiles `json:"percentiles,omitempty"`
 }

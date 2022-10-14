@@ -28,7 +28,7 @@ type UpdateSSHKeyRequest struct {
 }
 
 type UpdateSSHKeyDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateSSHKeyResponse struct {

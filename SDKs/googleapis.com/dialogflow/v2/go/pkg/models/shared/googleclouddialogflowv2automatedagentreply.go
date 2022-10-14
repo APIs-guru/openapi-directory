@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudDialogflowV2AutomatedAgentReply struct {
-	AllowCancellation       *bool                                                                  `json:"allowCancellation"`
-	AutomatedAgentReplyType *GoogleCloudDialogflowV2AutomatedAgentReplyAutomatedAgentReplyTypeEnum `json:"automatedAgentReplyType"`
-	DetectIntentResponse    *GoogleCloudDialogflowV2DetectIntentResponse                           `json:"detectIntentResponse"`
+	AllowCancellation       *bool                                                                  `json:"allowCancellation,omitempty"`
+	AutomatedAgentReplyType *GoogleCloudDialogflowV2AutomatedAgentReplyAutomatedAgentReplyTypeEnum `json:"automatedAgentReplyType,omitempty"`
+	DetectIntentResponse    *GoogleCloudDialogflowV2DetectIntentResponse                           `json:"detectIntentResponse,omitempty"`
 }

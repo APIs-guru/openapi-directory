@@ -1,7 +1,7 @@
 package shared
 
 type PageResultQuoteDto struct {
-	Count        *int64     `json:"Count"`
-	Items        []QuoteDto `json:"Items"`
-	NextPageLink *string    `json:"NextPageLink"`
+	Count        *int64     `json:"Count,omitempty"`
+	Items        []QuoteDto `json:"Items,omitempty"`
+	NextPageLink *string    `json:"NextPageLink,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AwsEcsTaskDefinitionPlacementConstraintsDetails struct {
-	Expression *string `json:"Expression"`
-	Type       *string `json:"Type"`
+	Expression *string `json:"Expression,omitempty"`
+	Type       *string `json:"Type,omitempty"`
 }

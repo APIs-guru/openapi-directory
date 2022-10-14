@@ -1,6 +1,6 @@
 package shared
 
 type LanguagesResource struct {
-	Language *string `json:"language"`
-	Name     *string `json:"name"`
+	Language *string `json:"language,omitempty"`
+	Name     *string `json:"name,omitempty"`
 }

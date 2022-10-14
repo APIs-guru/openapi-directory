@@ -29,12 +29,12 @@ const (
 )
 
 type Account struct {
-	AccountName      *string                     `json:"accountName"`
-	AccountNumber    *string                     `json:"accountNumber"`
-	Name             *string                     `json:"name"`
-	OrganizationInfo *OrganizationInfo           `json:"organizationInfo"`
-	PermissionLevel  *AccountPermissionLevelEnum `json:"permissionLevel"`
-	Role             *AccountRoleEnum            `json:"role"`
-	State            *AccountState               `json:"state"`
-	Type             *AccountTypeEnum            `json:"type"`
+	AccountName      *string                     `json:"accountName,omitempty"`
+	AccountNumber    *string                     `json:"accountNumber,omitempty"`
+	Name             *string                     `json:"name,omitempty"`
+	OrganizationInfo *OrganizationInfo           `json:"organizationInfo,omitempty"`
+	PermissionLevel  *AccountPermissionLevelEnum `json:"permissionLevel,omitempty"`
+	Role             *AccountRoleEnum            `json:"role,omitempty"`
+	State            *AccountState               `json:"state,omitempty"`
+	Type             *AccountTypeEnum            `json:"type,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListInputRoutingsResponse struct {
-	NextToken       *string          `json:"nextToken"`
-	RoutedResources []RoutedResource `json:"routedResources"`
+	NextToken       *string          `json:"nextToken,omitempty"`
+	RoutedResources []RoutedResource `json:"routedResources,omitempty"`
 }

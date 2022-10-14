@@ -1,5 +1,5 @@
 package shared
 
 type HorizontalPodAutoscaling struct {
-	Disabled *bool `json:"disabled"`
+	Disabled *bool `json:"disabled,omitempty"`
 }

@@ -1,18 +1,18 @@
 package shared
 
 type GoogleCloudApigeeV1Developer struct {
-	AccessType       *string                        `json:"accessType"`
-	AppFamily        *string                        `json:"appFamily"`
-	Apps             []string                       `json:"apps"`
-	Attributes       []GoogleCloudApigeeV1Attribute `json:"attributes"`
-	Companies        []string                       `json:"companies"`
-	CreatedAt        *string                        `json:"createdAt"`
-	DeveloperID      *string                        `json:"developerId"`
-	Email            *string                        `json:"email"`
-	FirstName        *string                        `json:"firstName"`
-	LastModifiedAt   *string                        `json:"lastModifiedAt"`
-	LastName         *string                        `json:"lastName"`
-	OrganizationName *string                        `json:"organizationName"`
-	Status           *string                        `json:"status"`
-	UserName         *string                        `json:"userName"`
+	AccessType       *string                        `json:"accessType,omitempty"`
+	AppFamily        *string                        `json:"appFamily,omitempty"`
+	Apps             []string                       `json:"apps,omitempty"`
+	Attributes       []GoogleCloudApigeeV1Attribute `json:"attributes,omitempty"`
+	Companies        []string                       `json:"companies,omitempty"`
+	CreatedAt        *string                        `json:"createdAt,omitempty"`
+	DeveloperID      *string                        `json:"developerId,omitempty"`
+	Email            *string                        `json:"email,omitempty"`
+	FirstName        *string                        `json:"firstName,omitempty"`
+	LastModifiedAt   *string                        `json:"lastModifiedAt,omitempty"`
+	LastName         *string                        `json:"lastName,omitempty"`
+	OrganizationName *string                        `json:"organizationName,omitempty"`
+	Status           *string                        `json:"status,omitempty"`
+	UserName         *string                        `json:"userName,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribePiiEntitiesDetectionJobResponse struct {
-	PiiEntitiesDetectionJobProperties *PiiEntitiesDetectionJobProperties `json:"PiiEntitiesDetectionJobProperties"`
+	PiiEntitiesDetectionJobProperties *PiiEntitiesDetectionJobProperties `json:"PiiEntitiesDetectionJobProperties,omitempty"`
 }

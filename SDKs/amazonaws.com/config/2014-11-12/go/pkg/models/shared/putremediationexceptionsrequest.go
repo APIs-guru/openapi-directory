@@ -6,7 +6,7 @@ import (
 
 type PutRemediationExceptionsRequest struct {
 	ConfigRuleName string                            `json:"ConfigRuleName"`
-	ExpirationTime *time.Time                        `json:"ExpirationTime"`
-	Message        *string                           `json:"Message"`
+	ExpirationTime *time.Time                        `json:"ExpirationTime,omitempty"`
+	Message        *string                           `json:"Message,omitempty"`
 	ResourceKeys   []RemediationExceptionResourceKey `json:"ResourceKeys"`
 }

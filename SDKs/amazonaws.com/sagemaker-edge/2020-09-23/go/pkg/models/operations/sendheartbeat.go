@@ -15,11 +15,11 @@ type SendHeartbeatHeaders struct {
 }
 
 type SendHeartbeatRequestBody struct {
-	AgentMetrics    []shared.EdgeMetric `json:"AgentMetrics"`
+	AgentMetrics    []shared.EdgeMetric `json:"AgentMetrics,omitempty"`
 	AgentVersion    string              `json:"AgentVersion"`
 	DeviceFleetName string              `json:"DeviceFleetName"`
 	DeviceName      string              `json:"DeviceName"`
-	Models          []shared.Model      `json:"Models"`
+	Models          []shared.Model      `json:"Models,omitempty"`
 }
 
 type SendHeartbeatRequest struct {

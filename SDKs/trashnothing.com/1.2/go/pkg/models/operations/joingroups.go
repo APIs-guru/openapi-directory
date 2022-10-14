@@ -13,8 +13,8 @@ type JoinGroupsRequest struct {
 }
 
 type JoinGroups200ApplicationJSON struct {
-	Groups         []shared.Group `json:"groups"`
-	OverGroupLimit *bool          `json:"over_group_limit"`
+	Groups         []shared.Group `json:"groups,omitempty"`
+	OverGroupLimit *bool          `json:"over_group_limit,omitempty"`
 }
 
 type JoinGroupsResponse struct {

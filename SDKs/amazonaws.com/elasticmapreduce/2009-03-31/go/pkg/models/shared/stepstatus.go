@@ -1,8 +1,8 @@
 package shared
 
 type StepStatus struct {
-	FailureDetails    *FailureDetails        `json:"FailureDetails"`
-	State             *StepStateEnum         `json:"State"`
-	StateChangeReason *StepStateChangeReason `json:"StateChangeReason"`
-	Timeline          *StepTimeline          `json:"Timeline"`
+	FailureDetails    *FailureDetails        `json:"FailureDetails,omitempty"`
+	State             *StepStateEnum         `json:"State,omitempty"`
+	StateChangeReason *StepStateChangeReason `json:"StateChangeReason,omitempty"`
+	Timeline          *StepTimeline          `json:"Timeline,omitempty"`
 }

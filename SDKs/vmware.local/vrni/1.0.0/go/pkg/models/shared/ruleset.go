@@ -9,7 +9,7 @@ const (
 )
 
 type RuleSet struct {
-	Firewall    *Reference              `json:"firewall"`
-	RuleSetType *RuleSetRuleSetTypeEnum `json:"rule_set_type"`
-	Rules       []Reference             `json:"rules"`
+	Firewall    *Reference              `json:"firewall,omitempty"`
+	RuleSetType *RuleSetRuleSetTypeEnum `json:"rule_set_type,omitempty"`
+	Rules       []Reference             `json:"rules,omitempty"`
 }

@@ -18,7 +18,7 @@ const (
 )
 
 type ProjectsAddCollaboratorRequestBody struct {
-	Permission *ProjectsAddCollaboratorRequestBodyPermissionEnum `json:"permission"`
+	Permission *ProjectsAddCollaboratorRequestBodyPermissionEnum `json:"permission,omitempty"`
 }
 
 type ProjectsAddCollaboratorRequest struct {

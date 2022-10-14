@@ -5,115 +5,115 @@ import (
 )
 
 type CreativeAdTechnologyProviders struct {
-	DetectedProviderIds     []string `json:"detectedProviderIds"`
-	HasUnidentifiedProvider *bool    `json:"hasUnidentifiedProvider"`
+	DetectedProviderIds     []string `json:"detectedProviderIds,omitempty"`
+	HasUnidentifiedProvider *bool    `json:"hasUnidentifiedProvider,omitempty"`
 }
 
 type CreativeCorrectionsContexts struct {
-	AuctionType   []string `json:"auctionType"`
-	ContextType   *string  `json:"contextType"`
-	GeoCriteriaID []int32  `json:"geoCriteriaId"`
-	Platform      []string `json:"platform"`
+	AuctionType   []string `json:"auctionType,omitempty"`
+	ContextType   *string  `json:"contextType,omitempty"`
+	GeoCriteriaID []int32  `json:"geoCriteriaId,omitempty"`
+	Platform      []string `json:"platform,omitempty"`
 }
 
 type CreativeCorrections struct {
-	Contexts []CreativeCorrectionsContexts `json:"contexts"`
-	Details  []string                      `json:"details"`
-	Reason   *string                       `json:"reason"`
+	Contexts []CreativeCorrectionsContexts `json:"contexts,omitempty"`
+	Details  []string                      `json:"details,omitempty"`
+	Reason   *string                       `json:"reason,omitempty"`
 }
 
 type CreativeFilteringReasonsReasons struct {
-	FilteringCount  *string `json:"filteringCount"`
-	FilteringStatus *int32  `json:"filteringStatus"`
+	FilteringCount  *string `json:"filteringCount,omitempty"`
+	FilteringStatus *int32  `json:"filteringStatus,omitempty"`
 }
 
 type CreativeFilteringReasons struct {
-	Date    *string                           `json:"date"`
-	Reasons []CreativeFilteringReasonsReasons `json:"reasons"`
+	Date    *string                           `json:"date,omitempty"`
+	Reasons []CreativeFilteringReasonsReasons `json:"reasons,omitempty"`
 }
 
 type CreativeNativeAdAppIcon struct {
-	Height *int32  `json:"height"`
-	URL    *string `json:"url"`
-	Width  *int32  `json:"width"`
+	Height *int32  `json:"height,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int32  `json:"width,omitempty"`
 }
 
 type CreativeNativeAdImage struct {
-	Height *int32  `json:"height"`
-	URL    *string `json:"url"`
-	Width  *int32  `json:"width"`
+	Height *int32  `json:"height,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int32  `json:"width,omitempty"`
 }
 
 type CreativeNativeAdLogo struct {
-	Height *int32  `json:"height"`
-	URL    *string `json:"url"`
-	Width  *int32  `json:"width"`
+	Height *int32  `json:"height,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int32  `json:"width,omitempty"`
 }
 
 type CreativeNativeAd struct {
-	Advertiser            *string                  `json:"advertiser"`
-	AppIcon               *CreativeNativeAdAppIcon `json:"appIcon"`
-	Body                  *string                  `json:"body"`
-	CallToAction          *string                  `json:"callToAction"`
-	ClickLinkURL          *string                  `json:"clickLinkUrl"`
-	ClickTrackingURL      *string                  `json:"clickTrackingUrl"`
-	Headline              *string                  `json:"headline"`
-	Image                 *CreativeNativeAdImage   `json:"image"`
-	ImpressionTrackingURL []string                 `json:"impressionTrackingUrl"`
-	Logo                  *CreativeNativeAdLogo    `json:"logo"`
-	Price                 *string                  `json:"price"`
-	StarRating            *float64                 `json:"starRating"`
-	VideoURL              *string                  `json:"videoURL"`
+	Advertiser            *string                  `json:"advertiser,omitempty"`
+	AppIcon               *CreativeNativeAdAppIcon `json:"appIcon,omitempty"`
+	Body                  *string                  `json:"body,omitempty"`
+	CallToAction          *string                  `json:"callToAction,omitempty"`
+	ClickLinkURL          *string                  `json:"clickLinkUrl,omitempty"`
+	ClickTrackingURL      *string                  `json:"clickTrackingUrl,omitempty"`
+	Headline              *string                  `json:"headline,omitempty"`
+	Image                 *CreativeNativeAdImage   `json:"image,omitempty"`
+	ImpressionTrackingURL []string                 `json:"impressionTrackingUrl,omitempty"`
+	Logo                  *CreativeNativeAdLogo    `json:"logo,omitempty"`
+	Price                 *string                  `json:"price,omitempty"`
+	StarRating            *float64                 `json:"starRating,omitempty"`
+	VideoURL              *string                  `json:"videoURL,omitempty"`
 }
 
 type CreativeServingRestrictionsContexts struct {
-	AuctionType   []string `json:"auctionType"`
-	ContextType   *string  `json:"contextType"`
-	GeoCriteriaID []int32  `json:"geoCriteriaId"`
-	Platform      []string `json:"platform"`
+	AuctionType   []string `json:"auctionType,omitempty"`
+	ContextType   *string  `json:"contextType,omitempty"`
+	GeoCriteriaID []int32  `json:"geoCriteriaId,omitempty"`
+	Platform      []string `json:"platform,omitempty"`
 }
 
 type CreativeServingRestrictionsDisapprovalReasons struct {
-	Details []string `json:"details"`
-	Reason  *string  `json:"reason"`
+	Details []string `json:"details,omitempty"`
+	Reason  *string  `json:"reason,omitempty"`
 }
 
 type CreativeServingRestrictions struct {
-	Contexts           []CreativeServingRestrictionsContexts           `json:"contexts"`
-	DisapprovalReasons []CreativeServingRestrictionsDisapprovalReasons `json:"disapprovalReasons"`
-	Reason             *string                                         `json:"reason"`
+	Contexts           []CreativeServingRestrictionsContexts           `json:"contexts,omitempty"`
+	DisapprovalReasons []CreativeServingRestrictionsDisapprovalReasons `json:"disapprovalReasons,omitempty"`
+	Reason             *string                                         `json:"reason,omitempty"`
 }
 
 type Creative struct {
-	HTMLSnippet                *string                        `json:"HTMLSnippet"`
-	AccountID                  *int32                         `json:"accountId"`
-	AdChoicesDestinationURL    *string                        `json:"adChoicesDestinationUrl"`
-	AdTechnologyProviders      *CreativeAdTechnologyProviders `json:"adTechnologyProviders"`
-	AdvertiserID               []string                       `json:"advertiserId"`
-	AdvertiserName             *string                        `json:"advertiserName"`
-	AgencyID                   *string                        `json:"agencyId"`
-	APIUploadTimestamp         *time.Time                     `json:"apiUploadTimestamp"`
-	Attribute                  []int32                        `json:"attribute"`
-	BuyerCreativeID            *string                        `json:"buyerCreativeId"`
-	ClickThroughURL            []string                       `json:"clickThroughUrl"`
-	Corrections                []CreativeCorrections          `json:"corrections"`
-	CreativeStatusIdentityType *string                        `json:"creativeStatusIdentityType"`
-	DealsStatus                *string                        `json:"dealsStatus"`
-	DetectedDomains            []string                       `json:"detectedDomains"`
-	FilteringReasons           *CreativeFilteringReasons      `json:"filteringReasons"`
-	Height                     *int32                         `json:"height"`
-	ImpressionTrackingURL      []string                       `json:"impressionTrackingUrl"`
-	Kind                       *string                        `json:"kind"`
-	Languages                  []string                       `json:"languages"`
-	NativeAd                   *CreativeNativeAd              `json:"nativeAd"`
-	OpenAuctionStatus          *string                        `json:"openAuctionStatus"`
-	ProductCategories          []int32                        `json:"productCategories"`
-	RestrictedCategories       []int32                        `json:"restrictedCategories"`
-	SensitiveCategories        []int32                        `json:"sensitiveCategories"`
-	ServingRestrictions        []CreativeServingRestrictions  `json:"servingRestrictions"`
-	VendorType                 []int32                        `json:"vendorType"`
-	Version                    *int32                         `json:"version"`
-	VideoURL                   *string                        `json:"videoURL"`
-	VideoVastXML               *string                        `json:"videoVastXML"`
-	Width                      *int32                         `json:"width"`
+	HTMLSnippet                *string                        `json:"HTMLSnippet,omitempty"`
+	AccountID                  *int32                         `json:"accountId,omitempty"`
+	AdChoicesDestinationURL    *string                        `json:"adChoicesDestinationUrl,omitempty"`
+	AdTechnologyProviders      *CreativeAdTechnologyProviders `json:"adTechnologyProviders,omitempty"`
+	AdvertiserID               []string                       `json:"advertiserId,omitempty"`
+	AdvertiserName             *string                        `json:"advertiserName,omitempty"`
+	AgencyID                   *string                        `json:"agencyId,omitempty"`
+	APIUploadTimestamp         *time.Time                     `json:"apiUploadTimestamp,omitempty"`
+	Attribute                  []int32                        `json:"attribute,omitempty"`
+	BuyerCreativeID            *string                        `json:"buyerCreativeId,omitempty"`
+	ClickThroughURL            []string                       `json:"clickThroughUrl,omitempty"`
+	Corrections                []CreativeCorrections          `json:"corrections,omitempty"`
+	CreativeStatusIdentityType *string                        `json:"creativeStatusIdentityType,omitempty"`
+	DealsStatus                *string                        `json:"dealsStatus,omitempty"`
+	DetectedDomains            []string                       `json:"detectedDomains,omitempty"`
+	FilteringReasons           *CreativeFilteringReasons      `json:"filteringReasons,omitempty"`
+	Height                     *int32                         `json:"height,omitempty"`
+	ImpressionTrackingURL      []string                       `json:"impressionTrackingUrl,omitempty"`
+	Kind                       *string                        `json:"kind,omitempty"`
+	Languages                  []string                       `json:"languages,omitempty"`
+	NativeAd                   *CreativeNativeAd              `json:"nativeAd,omitempty"`
+	OpenAuctionStatus          *string                        `json:"openAuctionStatus,omitempty"`
+	ProductCategories          []int32                        `json:"productCategories,omitempty"`
+	RestrictedCategories       []int32                        `json:"restrictedCategories,omitempty"`
+	SensitiveCategories        []int32                        `json:"sensitiveCategories,omitempty"`
+	ServingRestrictions        []CreativeServingRestrictions  `json:"servingRestrictions,omitempty"`
+	VendorType                 []int32                        `json:"vendorType,omitempty"`
+	Version                    *int32                         `json:"version,omitempty"`
+	VideoURL                   *string                        `json:"videoURL,omitempty"`
+	VideoVastXML               *string                        `json:"videoVastXML,omitempty"`
+	Width                      *int32                         `json:"width,omitempty"`
 }

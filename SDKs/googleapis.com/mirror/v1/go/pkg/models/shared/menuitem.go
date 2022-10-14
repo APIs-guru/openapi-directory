@@ -1,10 +1,10 @@
 package shared
 
 type MenuItem struct {
-	Action             *string     `json:"action"`
-	ContextualCommand  *string     `json:"contextual_command"`
-	ID                 *string     `json:"id"`
-	Payload            *string     `json:"payload"`
-	RemoveWhenSelected *bool       `json:"removeWhenSelected"`
-	Values             []MenuValue `json:"values"`
+	Action             *string     `json:"action,omitempty"`
+	ContextualCommand  *string     `json:"contextual_command,omitempty"`
+	ID                 *string     `json:"id,omitempty"`
+	Payload            *string     `json:"payload,omitempty"`
+	RemoveWhenSelected *bool       `json:"removeWhenSelected,omitempty"`
+	Values             []MenuValue `json:"values,omitempty"`
 }

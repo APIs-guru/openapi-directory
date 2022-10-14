@@ -8,9 +8,9 @@ const (
 )
 
 type InputConfigurationContainer struct {
-	Name    *string                              `json:"Name"`
-	Number  *int32                               `json:"Number"`
-	OffText *string                              `json:"OffText"`
-	OnText  *string                              `json:"OnText"`
-	Type    *InputConfigurationContainerTypeEnum `json:"Type"`
+	Name    *string                              `json:"Name,omitempty"`
+	Number  *int32                               `json:"Number,omitempty"`
+	OffText *string                              `json:"OffText,omitempty"`
+	OnText  *string                              `json:"OnText,omitempty"`
+	Type    *InputConfigurationContainerTypeEnum `json:"Type,omitempty"`
 }

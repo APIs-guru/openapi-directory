@@ -22,6 +22,6 @@ const (
 )
 
 type JobEvent struct {
-	Jobs []string          `json:"jobs"`
-	Type *JobEventTypeEnum `json:"type"`
+	Jobs []string          `json:"jobs,omitempty"`
+	Type *JobEventTypeEnum `json:"type,omitempty"`
 }

@@ -40,13 +40,13 @@ type SearchGroupsRequest struct {
 }
 
 type SearchGroups200ApplicationJSON struct {
-	EndIndex   *int64         `json:"end_index"`
-	Groups     []shared.Group `json:"groups"`
-	NumGroups  *int64         `json:"num_groups"`
-	NumPages   *int64         `json:"num_pages"`
-	Page       *int64         `json:"page"`
-	PerPage    *int64         `json:"per_page"`
-	StartIndex *int64         `json:"start_index"`
+	EndIndex   *int64         `json:"end_index,omitempty"`
+	Groups     []shared.Group `json:"groups,omitempty"`
+	NumGroups  *int64         `json:"num_groups,omitempty"`
+	NumPages   *int64         `json:"num_pages,omitempty"`
+	Page       *int64         `json:"page,omitempty"`
+	PerPage    *int64         `json:"per_page,omitempty"`
+	StartIndex *int64         `json:"start_index,omitempty"`
 }
 
 type SearchGroupsResponse struct {

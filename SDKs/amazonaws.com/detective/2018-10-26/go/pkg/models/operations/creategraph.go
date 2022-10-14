@@ -15,7 +15,7 @@ type CreateGraphHeaders struct {
 }
 
 type CreateGraphRequestBody struct {
-	Tags map[string]string `json:"Tags"`
+	Tags map[string]string `json:"Tags,omitempty"`
 }
 
 type CreateGraphRequest struct {

@@ -1,16 +1,16 @@
 package shared
 
 type Trigger struct {
-	Channel        *string                   `json:"channel"`
-	Conditions     map[string]StateCondition `json:"conditions"`
-	CreateTime     *string                   `json:"createTime"`
-	Destination    *Destination              `json:"destination"`
-	Etag           *string                   `json:"etag"`
-	EventFilters   []EventFilter             `json:"eventFilters"`
-	Labels         map[string]string         `json:"labels"`
-	Name           *string                   `json:"name"`
-	ServiceAccount *string                   `json:"serviceAccount"`
-	Transport      *Transport                `json:"transport"`
-	UID            *string                   `json:"uid"`
-	UpdateTime     *string                   `json:"updateTime"`
+	Channel        *string                   `json:"channel,omitempty"`
+	Conditions     map[string]StateCondition `json:"conditions,omitempty"`
+	CreateTime     *string                   `json:"createTime,omitempty"`
+	Destination    *Destination              `json:"destination,omitempty"`
+	Etag           *string                   `json:"etag,omitempty"`
+	EventFilters   []EventFilter             `json:"eventFilters,omitempty"`
+	Labels         map[string]string         `json:"labels,omitempty"`
+	Name           *string                   `json:"name,omitempty"`
+	ServiceAccount *string                   `json:"serviceAccount,omitempty"`
+	Transport      *Transport                `json:"transport,omitempty"`
+	UID            *string                   `json:"uid,omitempty"`
+	UpdateTime     *string                   `json:"updateTime,omitempty"`
 }

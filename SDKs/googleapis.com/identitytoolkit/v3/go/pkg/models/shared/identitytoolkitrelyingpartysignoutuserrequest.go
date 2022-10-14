@@ -1,6 +1,6 @@
 package shared
 
 type IdentitytoolkitRelyingpartySignOutUserRequest struct {
-	InstanceID *string `json:"instanceId"`
-	LocalID    *string `json:"localId"`
+	InstanceID *string `json:"instanceId,omitempty"`
+	LocalID    *string `json:"localId,omitempty"`
 }

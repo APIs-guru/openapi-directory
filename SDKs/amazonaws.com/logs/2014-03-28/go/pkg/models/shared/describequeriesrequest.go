@@ -1,8 +1,8 @@
 package shared
 
 type DescribeQueriesRequest struct {
-	LogGroupName *string          `json:"logGroupName"`
-	MaxResults   *int64           `json:"maxResults"`
-	NextToken    *string          `json:"nextToken"`
-	Status       *QueryStatusEnum `json:"status"`
+	LogGroupName *string          `json:"logGroupName,omitempty"`
+	MaxResults   *int64           `json:"maxResults,omitempty"`
+	NextToken    *string          `json:"nextToken,omitempty"`
+	Status       *QueryStatusEnum `json:"status,omitempty"`
 }

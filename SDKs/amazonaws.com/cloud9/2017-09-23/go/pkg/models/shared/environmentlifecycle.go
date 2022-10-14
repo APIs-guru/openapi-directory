@@ -1,7 +1,7 @@
 package shared
 
 type EnvironmentLifecycle struct {
-	FailureResource *string                         `json:"failureResource"`
-	Reason          *string                         `json:"reason"`
-	Status          *EnvironmentLifecycleStatusEnum `json:"status"`
+	FailureResource *string                         `json:"failureResource,omitempty"`
+	Reason          *string                         `json:"reason,omitempty"`
+	Status          *EnvironmentLifecycleStatusEnum `json:"status,omitempty"`
 }

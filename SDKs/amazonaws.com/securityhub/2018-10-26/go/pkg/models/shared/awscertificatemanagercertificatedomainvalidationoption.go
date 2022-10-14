@@ -1,10 +1,10 @@
 package shared
 
 type AwsCertificateManagerCertificateDomainValidationOption struct {
-	DomainName       *string                                         `json:"DomainName"`
-	ResourceRecord   *AwsCertificateManagerCertificateResourceRecord `json:"ResourceRecord"`
-	ValidationDomain *string                                         `json:"ValidationDomain"`
-	ValidationEmails []string                                        `json:"ValidationEmails"`
-	ValidationMethod *string                                         `json:"ValidationMethod"`
-	ValidationStatus *string                                         `json:"ValidationStatus"`
+	DomainName       *string                                         `json:"DomainName,omitempty"`
+	ResourceRecord   *AwsCertificateManagerCertificateResourceRecord `json:"ResourceRecord,omitempty"`
+	ValidationDomain *string                                         `json:"ValidationDomain,omitempty"`
+	ValidationEmails []string                                        `json:"ValidationEmails,omitempty"`
+	ValidationMethod *string                                         `json:"ValidationMethod,omitempty"`
+	ValidationStatus *string                                         `json:"ValidationStatus,omitempty"`
 }

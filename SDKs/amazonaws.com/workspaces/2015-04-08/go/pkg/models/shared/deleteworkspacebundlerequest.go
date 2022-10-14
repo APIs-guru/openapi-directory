@@ -1,5 +1,5 @@
 package shared
 
 type DeleteWorkspaceBundleRequest struct {
-	BundleID *string `json:"BundleId"`
+	BundleID *string `json:"BundleId,omitempty"`
 }

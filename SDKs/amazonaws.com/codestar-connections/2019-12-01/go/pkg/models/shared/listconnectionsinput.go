@@ -1,8 +1,8 @@
 package shared
 
 type ListConnectionsInput struct {
-	HostArnFilter      *string           `json:"HostArnFilter"`
-	MaxResults         *int64            `json:"MaxResults"`
-	NextToken          *string           `json:"NextToken"`
-	ProviderTypeFilter *ProviderTypeEnum `json:"ProviderTypeFilter"`
+	HostArnFilter      *string           `json:"HostArnFilter,omitempty"`
+	MaxResults         *int64            `json:"MaxResults,omitempty"`
+	NextToken          *string           `json:"NextToken,omitempty"`
+	ProviderTypeFilter *ProviderTypeEnum `json:"ProviderTypeFilter,omitempty"`
 }

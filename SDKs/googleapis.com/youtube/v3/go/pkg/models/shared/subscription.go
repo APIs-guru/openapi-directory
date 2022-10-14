@@ -1,10 +1,10 @@
 package shared
 
 type Subscription struct {
-	ContentDetails    *SubscriptionContentDetails    `json:"contentDetails"`
-	Etag              *string                        `json:"etag"`
-	ID                *string                        `json:"id"`
-	Kind              *string                        `json:"kind"`
-	Snippet           *SubscriptionSnippet           `json:"snippet"`
-	SubscriberSnippet *SubscriptionSubscriberSnippet `json:"subscriberSnippet"`
+	ContentDetails    *SubscriptionContentDetails    `json:"contentDetails,omitempty"`
+	Etag              *string                        `json:"etag,omitempty"`
+	ID                *string                        `json:"id,omitempty"`
+	Kind              *string                        `json:"kind,omitempty"`
+	Snippet           *SubscriptionSnippet           `json:"snippet,omitempty"`
+	SubscriberSnippet *SubscriptionSubscriberSnippet `json:"subscriberSnippet,omitempty"`
 }

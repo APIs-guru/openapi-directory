@@ -1,7 +1,7 @@
 package shared
 
 type Schemas struct {
-	Etag    *string  `json:"etag"`
-	Kind    *string  `json:"kind"`
-	Schemas []Schema `json:"schemas"`
+	Etag    *string  `json:"etag,omitempty"`
+	Kind    *string  `json:"kind,omitempty"`
+	Schemas []Schema `json:"schemas,omitempty"`
 }

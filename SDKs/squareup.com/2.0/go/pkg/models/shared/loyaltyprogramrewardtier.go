@@ -6,5 +6,5 @@ type LoyaltyProgramRewardTier struct {
 	ID                   string                         `json:"id"`
 	Name                 string                         `json:"name"`
 	Points               int64                          `json:"points"`
-	PricingRuleReference *CatalogObjectReference        `json:"pricing_rule_reference"`
+	PricingRuleReference *CatalogObjectReference        `json:"pricing_rule_reference,omitempty"`
 }

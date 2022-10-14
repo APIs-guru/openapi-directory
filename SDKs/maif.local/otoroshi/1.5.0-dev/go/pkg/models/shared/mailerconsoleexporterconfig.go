@@ -7,5 +7,5 @@ const (
 )
 
 type MailerConsoleExporterConfig struct {
-	Type *MailerConsoleExporterConfigTypeEnum `json:"type"`
+	Type *MailerConsoleExporterConfigTypeEnum `json:"type,omitempty"`
 }

@@ -20,9 +20,9 @@ const (
 )
 
 type PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromFirewallRemoveFromResources struct {
-	LabelSelector *PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromLabelSelector `json:"label_selector"`
-	Server        *PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromServer        `json:"server"`
-	Type          *PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromTypeEnum      `json:"type"`
+	LabelSelector *PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromLabelSelector `json:"label_selector,omitempty"`
+	Server        *PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromServer        `json:"server,omitempty"`
+	Type          *PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromTypeEnum      `json:"type,omitempty"`
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesRequestBodyRemoveFromResourcesRequest struct {
@@ -78,7 +78,7 @@ type PostFirewallsIDActionsRemoveFromResources201ApplicationJSONMeta struct {
 
 type PostFirewallsIDActionsRemoveFromResources201ApplicationJSONActionsResponse struct {
 	Actions []PostFirewallsIDActionsRemoveFromResources201ApplicationJSONActionsAction `json:"actions"`
-	Meta    *PostFirewallsIDActionsRemoveFromResources201ApplicationJSONMeta           `json:"meta"`
+	Meta    *PostFirewallsIDActionsRemoveFromResources201ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesResponse struct {

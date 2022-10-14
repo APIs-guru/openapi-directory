@@ -1,10 +1,10 @@
 package shared
 
 type UpdateDownloadSharesBulkRequest struct {
-	Expiration          *ObjectExpiration `json:"expiration"`
-	MaxDownloads        *int32            `json:"maxDownloads"`
+	Expiration          *ObjectExpiration `json:"expiration,omitempty"`
+	MaxDownloads        *int32            `json:"maxDownloads,omitempty"`
 	ObjectIds           []int64           `json:"objectIds"`
-	ResetMaxDownloads   *bool             `json:"resetMaxDownloads"`
-	ShowCreatorName     *bool             `json:"showCreatorName"`
-	ShowCreatorUsername *bool             `json:"showCreatorUsername"`
+	ResetMaxDownloads   *bool             `json:"resetMaxDownloads,omitempty"`
+	ShowCreatorName     *bool             `json:"showCreatorName,omitempty"`
+	ShowCreatorUsername *bool             `json:"showCreatorUsername,omitempty"`
 }

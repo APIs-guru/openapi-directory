@@ -26,7 +26,7 @@ type AddTagsToVaultHeaders struct {
 }
 
 type AddTagsToVaultRequestBody struct {
-	Tags map[string]string `json:"Tags"`
+	Tags map[string]string `json:"Tags,omitempty"`
 }
 
 type AddTagsToVaultRequest struct {

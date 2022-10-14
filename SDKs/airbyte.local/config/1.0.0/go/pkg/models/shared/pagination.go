@@ -1,6 +1,6 @@
 package shared
 
 type Pagination struct {
-	PageSize  *int64 `json:"pageSize"`
-	RowOffset *int64 `json:"rowOffset"`
+	PageSize  *int64 `json:"pageSize,omitempty"`
+	RowOffset *int64 `json:"rowOffset,omitempty"`
 }

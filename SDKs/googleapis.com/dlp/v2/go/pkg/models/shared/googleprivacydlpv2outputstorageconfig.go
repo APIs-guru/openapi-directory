@@ -12,6 +12,6 @@ const (
 )
 
 type GooglePrivacyDlpV2OutputStorageConfig struct {
-	OutputSchema *GooglePrivacyDlpV2OutputStorageConfigOutputSchemaEnum `json:"outputSchema"`
-	Table        *GooglePrivacyDlpV2BigQueryTable                       `json:"table"`
+	OutputSchema *GooglePrivacyDlpV2OutputStorageConfigOutputSchemaEnum `json:"outputSchema,omitempty"`
+	Table        *GooglePrivacyDlpV2BigQueryTable                       `json:"table,omitempty"`
 }

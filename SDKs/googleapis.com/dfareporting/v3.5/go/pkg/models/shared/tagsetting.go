@@ -9,8 +9,8 @@ const (
 )
 
 type TagSetting struct {
-	AdditionalKeyValues     *string                      `json:"additionalKeyValues"`
-	IncludeClickThroughUrls *bool                        `json:"includeClickThroughUrls"`
-	IncludeClickTracking    *bool                        `json:"includeClickTracking"`
-	KeywordOption           *TagSettingKeywordOptionEnum `json:"keywordOption"`
+	AdditionalKeyValues     *string                      `json:"additionalKeyValues,omitempty"`
+	IncludeClickThroughUrls *bool                        `json:"includeClickThroughUrls,omitempty"`
+	IncludeClickTracking    *bool                        `json:"includeClickTracking,omitempty"`
+	KeywordOption           *TagSettingKeywordOptionEnum `json:"keywordOption,omitempty"`
 }

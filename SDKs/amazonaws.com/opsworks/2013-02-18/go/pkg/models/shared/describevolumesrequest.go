@@ -1,8 +1,8 @@
 package shared
 
 type DescribeVolumesRequest struct {
-	InstanceID  *string  `json:"InstanceId"`
-	RaidArrayID *string  `json:"RaidArrayId"`
-	StackID     *string  `json:"StackId"`
-	VolumeIds   []string `json:"VolumeIds"`
+	InstanceID  *string  `json:"InstanceId,omitempty"`
+	RaidArrayID *string  `json:"RaidArrayId,omitempty"`
+	StackID     *string  `json:"StackId,omitempty"`
+	VolumeIds   []string `json:"VolumeIds,omitempty"`
 }

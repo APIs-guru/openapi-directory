@@ -5,9 +5,9 @@ import (
 )
 
 type SamplingStatisticSummary struct {
-	BorrowCount  *int64     `json:"BorrowCount"`
-	RequestCount *int64     `json:"RequestCount"`
-	RuleName     *string    `json:"RuleName"`
-	SampledCount *int64     `json:"SampledCount"`
-	Timestamp    *time.Time `json:"Timestamp"`
+	BorrowCount  *int64     `json:"BorrowCount,omitempty"`
+	RequestCount *int64     `json:"RequestCount,omitempty"`
+	RuleName     *string    `json:"RuleName,omitempty"`
+	SampledCount *int64     `json:"SampledCount,omitempty"`
+	Timestamp    *time.Time `json:"Timestamp,omitempty"`
 }

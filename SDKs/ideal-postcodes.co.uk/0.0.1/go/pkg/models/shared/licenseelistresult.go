@@ -1,6 +1,6 @@
 package shared
 
 type LicenseeListResult struct {
-	HasMore   *bool      `json:"hasMore"`
-	Licensees []Licensee `json:"licensees"`
+	HasMore   *bool      `json:"hasMore,omitempty"`
+	Licensees []Licensee `json:"licensees,omitempty"`
 }

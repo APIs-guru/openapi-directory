@@ -21,11 +21,11 @@ type ExportTemplateTemplateLanguageTemplateLanguage struct {
 
 type ExportTemplate struct {
 	ContentType      string                                          `json:"content_type"`
-	Description      *string                                         `json:"description"`
-	FileExtension    *string                                         `json:"file_extension"`
-	ID               *int64                                          `json:"id"`
-	MimeType         *string                                         `json:"mime_type"`
+	Description      *string                                         `json:"description,omitempty"`
+	FileExtension    *string                                         `json:"file_extension,omitempty"`
+	ID               *int64                                          `json:"id,omitempty"`
+	MimeType         *string                                         `json:"mime_type,omitempty"`
 	Name             string                                          `json:"name"`
 	TemplateCode     string                                          `json:"template_code"`
-	TemplateLanguage *ExportTemplateTemplateLanguageTemplateLanguage `json:"template_language"`
+	TemplateLanguage *ExportTemplateTemplateLanguageTemplateLanguage `json:"template_language,omitempty"`
 }

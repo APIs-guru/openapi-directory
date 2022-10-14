@@ -5,10 +5,10 @@ import (
 )
 
 type FreeBusyRequest struct {
-	CalendarExpansionMax *int32                `json:"calendarExpansionMax"`
-	GroupExpansionMax    *int32                `json:"groupExpansionMax"`
-	Items                []FreeBusyRequestItem `json:"items"`
-	TimeMax              *time.Time            `json:"timeMax"`
-	TimeMin              *time.Time            `json:"timeMin"`
-	TimeZone             *string               `json:"timeZone"`
+	CalendarExpansionMax *int32                `json:"calendarExpansionMax,omitempty"`
+	GroupExpansionMax    *int32                `json:"groupExpansionMax,omitempty"`
+	Items                []FreeBusyRequestItem `json:"items,omitempty"`
+	TimeMax              *time.Time            `json:"timeMax,omitempty"`
+	TimeMin              *time.Time            `json:"timeMin,omitempty"`
+	TimeZone             *string               `json:"timeZone,omitempty"`
 }

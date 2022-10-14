@@ -4,5 +4,5 @@ type CreateForecastExportJobRequest struct {
 	Destination           DataDestination `json:"Destination"`
 	ForecastArn           string          `json:"ForecastArn"`
 	ForecastExportJobName string          `json:"ForecastExportJobName"`
-	Tags                  []Tag           `json:"Tags"`
+	Tags                  []Tag           `json:"Tags,omitempty"`
 }

@@ -5,14 +5,14 @@ import (
 )
 
 type Algorithm struct {
-	AlgorithmArn                *string                      `json:"algorithmArn"`
-	AlgorithmImage              *AlgorithmImage              `json:"algorithmImage"`
-	CreationDateTime            *time.Time                   `json:"creationDateTime"`
-	DefaultHyperParameterRanges *DefaultHyperParameterRanges `json:"defaultHyperParameterRanges"`
-	DefaultHyperParameters      map[string]string            `json:"defaultHyperParameters"`
-	DefaultResourceConfig       map[string]string            `json:"defaultResourceConfig"`
-	LastUpdatedDateTime         *time.Time                   `json:"lastUpdatedDateTime"`
-	Name                        *string                      `json:"name"`
-	RoleArn                     *string                      `json:"roleArn"`
-	TrainingInputMode           *string                      `json:"trainingInputMode"`
+	AlgorithmArn                *string                      `json:"algorithmArn,omitempty"`
+	AlgorithmImage              *AlgorithmImage              `json:"algorithmImage,omitempty"`
+	CreationDateTime            *time.Time                   `json:"creationDateTime,omitempty"`
+	DefaultHyperParameterRanges *DefaultHyperParameterRanges `json:"defaultHyperParameterRanges,omitempty"`
+	DefaultHyperParameters      map[string]string            `json:"defaultHyperParameters,omitempty"`
+	DefaultResourceConfig       map[string]string            `json:"defaultResourceConfig,omitempty"`
+	LastUpdatedDateTime         *time.Time                   `json:"lastUpdatedDateTime,omitempty"`
+	Name                        *string                      `json:"name,omitempty"`
+	RoleArn                     *string                      `json:"roleArn,omitempty"`
+	TrainingInputMode           *string                      `json:"trainingInputMode,omitempty"`
 }

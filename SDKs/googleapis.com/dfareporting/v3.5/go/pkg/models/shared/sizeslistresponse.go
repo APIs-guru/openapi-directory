@@ -1,6 +1,6 @@
 package shared
 
 type SizesListResponse struct {
-	Kind  *string `json:"kind"`
-	Sizes []Size  `json:"sizes"`
+	Kind  *string `json:"kind,omitempty"`
+	Sizes []Size  `json:"sizes,omitempty"`
 }

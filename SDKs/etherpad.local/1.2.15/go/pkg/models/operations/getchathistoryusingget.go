@@ -11,38 +11,38 @@ type GetChatHistoryUsingGetRequest struct {
 }
 
 type GetChatHistoryUsingGet200ApplicationJSONDataMessages struct {
-	Text     *string `json:"text"`
-	Time     *int64  `json:"time"`
-	UserID   *string `json:"userId"`
-	UserName *string `json:"userName"`
+	Text     *string `json:"text,omitempty"`
+	Time     *int64  `json:"time,omitempty"`
+	UserID   *string `json:"userId,omitempty"`
+	UserName *string `json:"userName,omitempty"`
 }
 
 type GetChatHistoryUsingGet200ApplicationJSONData struct {
-	Messages []GetChatHistoryUsingGet200ApplicationJSONDataMessages `json:"messages"`
+	Messages []GetChatHistoryUsingGet200ApplicationJSONDataMessages `json:"messages,omitempty"`
 }
 
 type GetChatHistoryUsingGet200ApplicationJSON struct {
-	Code    *int64                                        `json:"code"`
-	Data    *GetChatHistoryUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                       `json:"message"`
+	Code    *int64                                        `json:"code,omitempty"`
+	Data    *GetChatHistoryUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                       `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingGetResponse struct {

@@ -1,16 +1,16 @@
 package shared
 
 type IdentityProviderRepresentation struct {
-	AddReadTokenRoleOnCreate  *bool                  `json:"addReadTokenRoleOnCreate"`
-	Alias                     *string                `json:"alias"`
-	Config                    map[string]interface{} `json:"config"`
-	DisplayName               *string                `json:"displayName"`
-	Enabled                   *bool                  `json:"enabled"`
-	FirstBrokerLoginFlowAlias *string                `json:"firstBrokerLoginFlowAlias"`
-	InternalID                *string                `json:"internalId"`
-	LinkOnly                  *bool                  `json:"linkOnly"`
-	PostBrokerLoginFlowAlias  *string                `json:"postBrokerLoginFlowAlias"`
-	ProviderID                *string                `json:"providerId"`
-	StoreToken                *bool                  `json:"storeToken"`
-	TrustEmail                *bool                  `json:"trustEmail"`
+	AddReadTokenRoleOnCreate  *bool                  `json:"addReadTokenRoleOnCreate,omitempty"`
+	Alias                     *string                `json:"alias,omitempty"`
+	Config                    map[string]interface{} `json:"config,omitempty"`
+	DisplayName               *string                `json:"displayName,omitempty"`
+	Enabled                   *bool                  `json:"enabled,omitempty"`
+	FirstBrokerLoginFlowAlias *string                `json:"firstBrokerLoginFlowAlias,omitempty"`
+	InternalID                *string                `json:"internalId,omitempty"`
+	LinkOnly                  *bool                  `json:"linkOnly,omitempty"`
+	PostBrokerLoginFlowAlias  *string                `json:"postBrokerLoginFlowAlias,omitempty"`
+	ProviderID                *string                `json:"providerId,omitempty"`
+	StoreToken                *bool                  `json:"storeToken,omitempty"`
+	TrustEmail                *bool                  `json:"trustEmail,omitempty"`
 }

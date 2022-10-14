@@ -18,15 +18,15 @@ type GetDatabaseExportRequest struct {
 }
 
 type GetDatabaseExport401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabaseExport404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabaseExport500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabaseExportResponse struct {

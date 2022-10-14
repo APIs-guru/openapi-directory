@@ -23,19 +23,19 @@ type GetDatasetDistinctColumnNameRequest struct {
 }
 
 type GetDatasetDistinctColumnName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetDistinctColumnName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetDistinctColumnName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetDistinctColumnName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetDistinctColumnNameResponse struct {

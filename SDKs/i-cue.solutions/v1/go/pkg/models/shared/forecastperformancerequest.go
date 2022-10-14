@@ -23,10 +23,10 @@ const (
 )
 
 type ForecastPerformanceRequest struct {
-	CostOfError     *float64                             `json:"costOfError"`
-	Data            []ForecastPerformanceDataRequest     `json:"data"`
+	CostOfError     *float64                             `json:"costOfError,omitempty"`
+	Data            []ForecastPerformanceDataRequest     `json:"data,omitempty"`
 	Method          ForecastPerformanceRequestMethodEnum `json:"method"`
-	Params          *PlanningLevelInfoRequest            `json:"params"`
+	Params          *PlanningLevelInfoRequest            `json:"params,omitempty"`
 	PlanningLevelID string                               `json:"planningLevelId"`
 	RewindTimeFrame int32                                `json:"rewindTimeFrame"`
 	StartDate       string                               `json:"startDate"`

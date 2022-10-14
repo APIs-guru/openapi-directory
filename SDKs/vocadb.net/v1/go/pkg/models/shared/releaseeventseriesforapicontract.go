@@ -23,16 +23,16 @@ const (
 )
 
 type ReleaseEventSeriesForAPIContract struct {
-	AdditionalNames *string                                       `json:"additionalNames"`
-	Category        *ReleaseEventSeriesForAPIContractCategoryEnum `json:"category"`
-	Description     *string                                       `json:"description"`
-	Events          []ReleaseEventForAPIContract                  `json:"events"`
-	ID              *int32                                        `json:"id"`
-	MainPicture     *EntryThumbForAPIContract                     `json:"mainPicture"`
-	Name            *string                                       `json:"name"`
-	Names           []LocalizedStringContract                     `json:"names"`
-	Status          *ReleaseEventSeriesForAPIContractStatusEnum   `json:"status"`
-	URLSlug         *string                                       `json:"urlSlug"`
-	Version         *int32                                        `json:"version"`
-	WebLinks        []WebLinkForAPIContract                       `json:"webLinks"`
+	AdditionalNames *string                                       `json:"additionalNames,omitempty"`
+	Category        *ReleaseEventSeriesForAPIContractCategoryEnum `json:"category,omitempty"`
+	Description     *string                                       `json:"description,omitempty"`
+	Events          []ReleaseEventForAPIContract                  `json:"events,omitempty"`
+	ID              *int32                                        `json:"id,omitempty"`
+	MainPicture     *EntryThumbForAPIContract                     `json:"mainPicture,omitempty"`
+	Name            *string                                       `json:"name,omitempty"`
+	Names           []LocalizedStringContract                     `json:"names,omitempty"`
+	Status          *ReleaseEventSeriesForAPIContractStatusEnum   `json:"status,omitempty"`
+	URLSlug         *string                                       `json:"urlSlug,omitempty"`
+	Version         *int32                                        `json:"version,omitempty"`
+	WebLinks        []WebLinkForAPIContract                       `json:"webLinks,omitempty"`
 }

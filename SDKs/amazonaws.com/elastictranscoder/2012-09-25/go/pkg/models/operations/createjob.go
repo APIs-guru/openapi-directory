@@ -15,41 +15,41 @@ type CreateJobHeaders struct {
 }
 
 type CreateJobRequestBodyInput struct {
-	AspectRatio        *string                    `json:"AspectRatio"`
-	Container          *string                    `json:"Container"`
-	DetectedProperties *shared.DetectedProperties `json:"DetectedProperties"`
-	Encryption         *shared.Encryption         `json:"Encryption"`
-	FrameRate          *string                    `json:"FrameRate"`
-	InputCaptions      *shared.InputCaptions      `json:"InputCaptions"`
-	Interlaced         *string                    `json:"Interlaced"`
-	Key                *string                    `json:"Key"`
-	Resolution         *string                    `json:"Resolution"`
-	TimeSpan           *shared.TimeSpan           `json:"TimeSpan"`
+	AspectRatio        *string                    `json:"AspectRatio,omitempty"`
+	Container          *string                    `json:"Container,omitempty"`
+	DetectedProperties *shared.DetectedProperties `json:"DetectedProperties,omitempty"`
+	Encryption         *shared.Encryption         `json:"Encryption,omitempty"`
+	FrameRate          *string                    `json:"FrameRate,omitempty"`
+	InputCaptions      *shared.InputCaptions      `json:"InputCaptions,omitempty"`
+	Interlaced         *string                    `json:"Interlaced,omitempty"`
+	Key                *string                    `json:"Key,omitempty"`
+	Resolution         *string                    `json:"Resolution,omitempty"`
+	TimeSpan           *shared.TimeSpan           `json:"TimeSpan,omitempty"`
 }
 
 type CreateJobRequestBodyOutput struct {
-	AlbumArt            *shared.JobAlbumArt   `json:"AlbumArt"`
-	Captions            *shared.Captions      `json:"Captions"`
-	Composition         []shared.Clip         `json:"Composition"`
-	Encryption          *shared.Encryption    `json:"Encryption"`
-	Key                 *string               `json:"Key"`
-	PresetID            *string               `json:"PresetId"`
-	Rotate              *string               `json:"Rotate"`
-	SegmentDuration     *string               `json:"SegmentDuration"`
-	ThumbnailEncryption *shared.Encryption    `json:"ThumbnailEncryption"`
-	ThumbnailPattern    *string               `json:"ThumbnailPattern"`
-	Watermarks          []shared.JobWatermark `json:"Watermarks"`
+	AlbumArt            *shared.JobAlbumArt   `json:"AlbumArt,omitempty"`
+	Captions            *shared.Captions      `json:"Captions,omitempty"`
+	Composition         []shared.Clip         `json:"Composition,omitempty"`
+	Encryption          *shared.Encryption    `json:"Encryption,omitempty"`
+	Key                 *string               `json:"Key,omitempty"`
+	PresetID            *string               `json:"PresetId,omitempty"`
+	Rotate              *string               `json:"Rotate,omitempty"`
+	SegmentDuration     *string               `json:"SegmentDuration,omitempty"`
+	ThumbnailEncryption *shared.Encryption    `json:"ThumbnailEncryption,omitempty"`
+	ThumbnailPattern    *string               `json:"ThumbnailPattern,omitempty"`
+	Watermarks          []shared.JobWatermark `json:"Watermarks,omitempty"`
 }
 
 type CreateJobRequestBody struct {
-	Input           *CreateJobRequestBodyInput  `json:"Input"`
-	Inputs          []shared.JobInput           `json:"Inputs"`
-	Output          *CreateJobRequestBodyOutput `json:"Output"`
-	OutputKeyPrefix *string                     `json:"OutputKeyPrefix"`
-	Outputs         []shared.CreateJobOutput    `json:"Outputs"`
+	Input           *CreateJobRequestBodyInput  `json:"Input,omitempty"`
+	Inputs          []shared.JobInput           `json:"Inputs,omitempty"`
+	Output          *CreateJobRequestBodyOutput `json:"Output,omitempty"`
+	OutputKeyPrefix *string                     `json:"OutputKeyPrefix,omitempty"`
+	Outputs         []shared.CreateJobOutput    `json:"Outputs,omitempty"`
 	PipelineID      string                      `json:"PipelineId"`
-	Playlists       []shared.CreateJobPlaylist  `json:"Playlists"`
-	UserMetadata    map[string]string           `json:"UserMetadata"`
+	Playlists       []shared.CreateJobPlaylist  `json:"Playlists,omitempty"`
+	UserMetadata    map[string]string           `json:"UserMetadata,omitempty"`
 }
 
 type CreateJobRequest struct {

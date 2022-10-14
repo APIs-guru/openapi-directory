@@ -5,7 +5,7 @@ import (
 )
 
 type ProjectedMetric struct {
-	Name       *MetricNameEnum `json:"name"`
-	Timestamps []time.Time     `json:"timestamps"`
-	Values     []float64       `json:"values"`
+	Name       *MetricNameEnum `json:"name,omitempty"`
+	Timestamps []time.Time     `json:"timestamps,omitempty"`
+	Values     []float64       `json:"values,omitempty"`
 }

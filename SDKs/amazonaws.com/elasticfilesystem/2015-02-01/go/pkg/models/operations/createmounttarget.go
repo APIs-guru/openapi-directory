@@ -16,8 +16,8 @@ type CreateMountTargetHeaders struct {
 
 type CreateMountTargetRequestBody struct {
 	FileSystemID   string   `json:"FileSystemId"`
-	IPAddress      *string  `json:"IpAddress"`
-	SecurityGroups []string `json:"SecurityGroups"`
+	IPAddress      *string  `json:"IpAddress,omitempty"`
+	SecurityGroups []string `json:"SecurityGroups,omitempty"`
 	SubnetID       string   `json:"SubnetId"`
 }
 

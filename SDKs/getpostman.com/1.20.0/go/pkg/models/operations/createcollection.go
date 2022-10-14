@@ -1,46 +1,46 @@
 package operations
 
 type CreateCollectionRequestBodyCollectionInfo struct {
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
-	Schema      *string `json:"schema"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Schema      *string `json:"schema,omitempty"`
 }
 
 type CreateCollectionRequestBodyCollectionItemItemRequestBody struct {
-	Mode *string `json:"mode"`
-	Raw  *string `json:"raw"`
+	Mode *string `json:"mode,omitempty"`
+	Raw  *string `json:"raw,omitempty"`
 }
 
 type CreateCollectionRequestBodyCollectionItemItemRequestHeader struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type CreateCollectionRequestBodyCollectionItemItemRequest struct {
-	Body        *CreateCollectionRequestBodyCollectionItemItemRequestBody    `json:"body"`
-	Description *string                                                      `json:"description"`
-	Header      []CreateCollectionRequestBodyCollectionItemItemRequestHeader `json:"header"`
-	Method      *string                                                      `json:"method"`
-	URL         *string                                                      `json:"url"`
+	Body        *CreateCollectionRequestBodyCollectionItemItemRequestBody    `json:"body,omitempty"`
+	Description *string                                                      `json:"description,omitempty"`
+	Header      []CreateCollectionRequestBodyCollectionItemItemRequestHeader `json:"header,omitempty"`
+	Method      *string                                                      `json:"method,omitempty"`
+	URL         *string                                                      `json:"url,omitempty"`
 }
 
 type CreateCollectionRequestBodyCollectionItemItem struct {
-	Name    *string                                               `json:"name"`
-	Request *CreateCollectionRequestBodyCollectionItemItemRequest `json:"request"`
+	Name    *string                                               `json:"name,omitempty"`
+	Request *CreateCollectionRequestBodyCollectionItemItemRequest `json:"request,omitempty"`
 }
 
 type CreateCollectionRequestBodyCollectionItem struct {
-	Item []CreateCollectionRequestBodyCollectionItemItem `json:"item"`
-	Name *string                                         `json:"name"`
+	Item []CreateCollectionRequestBodyCollectionItemItem `json:"item,omitempty"`
+	Name *string                                         `json:"name,omitempty"`
 }
 
 type CreateCollectionRequestBodyCollection struct {
-	Info *CreateCollectionRequestBodyCollectionInfo  `json:"info"`
-	Item []CreateCollectionRequestBodyCollectionItem `json:"item"`
+	Info *CreateCollectionRequestBodyCollectionInfo  `json:"info,omitempty"`
+	Item []CreateCollectionRequestBodyCollectionItem `json:"item,omitempty"`
 }
 
 type CreateCollectionRequestBody struct {
-	Collection *CreateCollectionRequestBodyCollection `json:"collection"`
+	Collection *CreateCollectionRequestBodyCollection `json:"collection,omitempty"`
 }
 
 type CreateCollectionRequest struct {
@@ -48,22 +48,22 @@ type CreateCollectionRequest struct {
 }
 
 type CreateCollection200ApplicationJSONCollection struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type CreateCollection200ApplicationJSON struct {
-	Collection *CreateCollection200ApplicationJSONCollection `json:"collection"`
+	Collection *CreateCollection200ApplicationJSONCollection `json:"collection,omitempty"`
 }
 
 type CreateCollection400ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type CreateCollection400ApplicationJSON struct {
-	Error *CreateCollection400ApplicationJSONError `json:"error"`
+	Error *CreateCollection400ApplicationJSONError `json:"error,omitempty"`
 }
 
 type CreateCollectionResponse struct {

@@ -20,10 +20,10 @@ const (
 )
 
 type AccountsUpdate400ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     AccountsUpdate400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -35,10 +35,10 @@ const (
 )
 
 type AccountsUpdate401ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     AccountsUpdate401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -49,10 +49,10 @@ const (
 )
 
 type AccountsUpdate403ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     AccountsUpdate403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -63,10 +63,10 @@ const (
 )
 
 type AccountsUpdate404ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     AccountsUpdate404ApplicationJSONTypeEnum `json:"type"`
 }
 

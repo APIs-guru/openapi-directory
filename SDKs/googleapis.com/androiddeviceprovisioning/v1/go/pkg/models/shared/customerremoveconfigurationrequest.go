@@ -1,5 +1,5 @@
 package shared
 
 type CustomerRemoveConfigurationRequest struct {
-	Device *DeviceReference `json:"device"`
+	Device *DeviceReference `json:"device,omitempty"`
 }

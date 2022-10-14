@@ -1,7 +1,7 @@
 package shared
 
 type GetUsageStatisticsResponse struct {
-	NextToken *string        `json:"nextToken"`
-	Records   []UsageRecord  `json:"records"`
-	TimeRange *TimeRangeEnum `json:"timeRange"`
+	NextToken *string        `json:"nextToken,omitempty"`
+	Records   []UsageRecord  `json:"records,omitempty"`
+	TimeRange *TimeRangeEnum `json:"timeRange,omitempty"`
 }

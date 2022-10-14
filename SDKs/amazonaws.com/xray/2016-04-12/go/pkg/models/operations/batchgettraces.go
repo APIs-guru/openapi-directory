@@ -19,7 +19,7 @@ type BatchGetTracesHeaders struct {
 }
 
 type BatchGetTracesRequestBody struct {
-	NextToken *string  `json:"NextToken"`
+	NextToken *string  `json:"NextToken,omitempty"`
 	TraceIds  []string `json:"TraceIds"`
 }
 

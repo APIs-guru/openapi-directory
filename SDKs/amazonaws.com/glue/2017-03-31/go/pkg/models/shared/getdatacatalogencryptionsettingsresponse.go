@@ -1,5 +1,5 @@
 package shared
 
 type GetDataCatalogEncryptionSettingsResponse struct {
-	DataCatalogEncryptionSettings *DataCatalogEncryptionSettings `json:"DataCatalogEncryptionSettings"`
+	DataCatalogEncryptionSettings *DataCatalogEncryptionSettings `json:"DataCatalogEncryptionSettings,omitempty"`
 }

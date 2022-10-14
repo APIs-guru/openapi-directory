@@ -19,7 +19,7 @@ type GetProjectMembershipRequest struct {
 }
 
 type GetProjectMembership200ApplicationJSON struct {
-	Data *shared.ProjectMembershipResponse `json:"data"`
+	Data *shared.ProjectMembershipResponse `json:"data,omitempty"`
 }
 
 type GetProjectMembershipResponse struct {

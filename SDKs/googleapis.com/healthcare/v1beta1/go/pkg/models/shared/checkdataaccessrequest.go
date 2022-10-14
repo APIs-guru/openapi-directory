@@ -9,8 +9,8 @@ const (
 )
 
 type CheckDataAccessRequest struct {
-	ConsentList       *ConsentList                            `json:"consentList"`
-	DataID            *string                                 `json:"dataId"`
-	RequestAttributes map[string]string                       `json:"requestAttributes"`
-	ResponseView      *CheckDataAccessRequestResponseViewEnum `json:"responseView"`
+	ConsentList       *ConsentList                            `json:"consentList,omitempty"`
+	DataID            *string                                 `json:"dataId,omitempty"`
+	RequestAttributes map[string]string                       `json:"requestAttributes,omitempty"`
+	ResponseView      *CheckDataAccessRequestResponseViewEnum `json:"responseView,omitempty"`
 }

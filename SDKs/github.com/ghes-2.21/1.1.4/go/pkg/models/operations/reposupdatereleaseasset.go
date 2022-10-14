@@ -11,9 +11,9 @@ type ReposUpdateReleaseAssetPathParams struct {
 }
 
 type ReposUpdateReleaseAssetRequestBody struct {
-	Label *string `json:"label"`
-	Name  *string `json:"name"`
-	State *string `json:"state"`
+	Label *string `json:"label,omitempty"`
+	Name  *string `json:"name,omitempty"`
+	State *string `json:"state,omitempty"`
 }
 
 type ReposUpdateReleaseAssetRequest struct {

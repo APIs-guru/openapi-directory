@@ -33,19 +33,19 @@ const (
 )
 
 type Operation struct {
-	ClusterConditions  []StatusCondition           `json:"clusterConditions"`
-	Detail             *string                     `json:"detail"`
-	EndTime            *string                     `json:"endTime"`
-	Error              *Status                     `json:"error"`
-	Location           *string                     `json:"location"`
-	Name               *string                     `json:"name"`
-	NodepoolConditions []StatusCondition           `json:"nodepoolConditions"`
-	OperationType      *OperationOperationTypeEnum `json:"operationType"`
-	Progress           *OperationProgress          `json:"progress"`
-	SelfLink           *string                     `json:"selfLink"`
-	StartTime          *string                     `json:"startTime"`
-	Status             *OperationStatusEnum        `json:"status"`
-	StatusMessage      *string                     `json:"statusMessage"`
-	TargetLink         *string                     `json:"targetLink"`
-	Zone               *string                     `json:"zone"`
+	ClusterConditions  []StatusCondition           `json:"clusterConditions,omitempty"`
+	Detail             *string                     `json:"detail,omitempty"`
+	EndTime            *string                     `json:"endTime,omitempty"`
+	Error              *Status                     `json:"error,omitempty"`
+	Location           *string                     `json:"location,omitempty"`
+	Name               *string                     `json:"name,omitempty"`
+	NodepoolConditions []StatusCondition           `json:"nodepoolConditions,omitempty"`
+	OperationType      *OperationOperationTypeEnum `json:"operationType,omitempty"`
+	Progress           *OperationProgress          `json:"progress,omitempty"`
+	SelfLink           *string                     `json:"selfLink,omitempty"`
+	StartTime          *string                     `json:"startTime,omitempty"`
+	Status             *OperationStatusEnum        `json:"status,omitempty"`
+	StatusMessage      *string                     `json:"statusMessage,omitempty"`
+	TargetLink         *string                     `json:"targetLink,omitempty"`
+	Zone               *string                     `json:"zone,omitempty"`
 }

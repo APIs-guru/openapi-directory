@@ -15,33 +15,33 @@ type CreatePipelineHeaders struct {
 }
 
 type CreatePipelineRequestBodyContentConfig struct {
-	Bucket       *string             `json:"Bucket"`
-	Permissions  []shared.Permission `json:"Permissions"`
-	StorageClass *string             `json:"StorageClass"`
+	Bucket       *string             `json:"Bucket,omitempty"`
+	Permissions  []shared.Permission `json:"Permissions,omitempty"`
+	StorageClass *string             `json:"StorageClass,omitempty"`
 }
 
 type CreatePipelineRequestBodyNotifications struct {
-	Completed   *string `json:"Completed"`
-	Error       *string `json:"Error"`
-	Progressing *string `json:"Progressing"`
-	Warning     *string `json:"Warning"`
+	Completed   *string `json:"Completed,omitempty"`
+	Error       *string `json:"Error,omitempty"`
+	Progressing *string `json:"Progressing,omitempty"`
+	Warning     *string `json:"Warning,omitempty"`
 }
 
 type CreatePipelineRequestBodyThumbnailConfig struct {
-	Bucket       *string             `json:"Bucket"`
-	Permissions  []shared.Permission `json:"Permissions"`
-	StorageClass *string             `json:"StorageClass"`
+	Bucket       *string             `json:"Bucket,omitempty"`
+	Permissions  []shared.Permission `json:"Permissions,omitempty"`
+	StorageClass *string             `json:"StorageClass,omitempty"`
 }
 
 type CreatePipelineRequestBody struct {
-	AwsKmsKeyArn    *string                                   `json:"AwsKmsKeyArn"`
-	ContentConfig   *CreatePipelineRequestBodyContentConfig   `json:"ContentConfig"`
+	AwsKmsKeyArn    *string                                   `json:"AwsKmsKeyArn,omitempty"`
+	ContentConfig   *CreatePipelineRequestBodyContentConfig   `json:"ContentConfig,omitempty"`
 	InputBucket     string                                    `json:"InputBucket"`
 	Name            string                                    `json:"Name"`
-	Notifications   *CreatePipelineRequestBodyNotifications   `json:"Notifications"`
-	OutputBucket    *string                                   `json:"OutputBucket"`
+	Notifications   *CreatePipelineRequestBodyNotifications   `json:"Notifications,omitempty"`
+	OutputBucket    *string                                   `json:"OutputBucket,omitempty"`
 	Role            string                                    `json:"Role"`
-	ThumbnailConfig *CreatePipelineRequestBodyThumbnailConfig `json:"ThumbnailConfig"`
+	ThumbnailConfig *CreatePipelineRequestBodyThumbnailConfig `json:"ThumbnailConfig,omitempty"`
 }
 
 type CreatePipelineRequest struct {

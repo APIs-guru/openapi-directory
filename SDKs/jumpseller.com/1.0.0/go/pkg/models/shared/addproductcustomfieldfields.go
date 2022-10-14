@@ -1,6 +1,6 @@
 package shared
 
 type AddProductCustomFieldFields struct {
-	ID    *int32  `json:"id"`
-	Value *string `json:"value"`
+	ID    *int32  `json:"id,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type Application struct {
-	DisplayName      *string           `json:"DisplayName"`
-	Enabled          *bool             `json:"Enabled"`
-	IconURL          *string           `json:"IconURL"`
-	LaunchParameters *string           `json:"LaunchParameters"`
-	LaunchPath       *string           `json:"LaunchPath"`
-	Metadata         map[string]string `json:"Metadata"`
-	Name             *string           `json:"Name"`
+	DisplayName      *string           `json:"DisplayName,omitempty"`
+	Enabled          *bool             `json:"Enabled,omitempty"`
+	IconURL          *string           `json:"IconURL,omitempty"`
+	LaunchParameters *string           `json:"LaunchParameters,omitempty"`
+	LaunchPath       *string           `json:"LaunchPath,omitempty"`
+	Metadata         map[string]string `json:"Metadata,omitempty"`
+	Name             *string           `json:"Name,omitempty"`
 }

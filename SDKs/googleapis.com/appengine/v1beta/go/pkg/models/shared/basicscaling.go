@@ -1,6 +1,6 @@
 package shared
 
 type BasicScaling struct {
-	IdleTimeout  *string `json:"idleTimeout"`
-	MaxInstances *int32  `json:"maxInstances"`
+	IdleTimeout  *string `json:"idleTimeout,omitempty"`
+	MaxInstances *int32  `json:"maxInstances,omitempty"`
 }

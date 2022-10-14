@@ -1,5 +1,5 @@
 package shared
 
 type TextList struct {
-	Values []Text `json:"values"`
+	Values []Text `json:"values,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type Birthday struct {
-	Date     *Date          `json:"date"`
-	Metadata *FieldMetadata `json:"metadata"`
-	Text     *string        `json:"text"`
+	Date     *Date          `json:"date,omitempty"`
+	Metadata *FieldMetadata `json:"metadata,omitempty"`
+	Text     *string        `json:"text,omitempty"`
 }

@@ -9,12 +9,12 @@ type GetFleetFleetnameRequest struct {
 }
 
 type GetFleetFleetname200ApplicationJSON struct {
-	AtID      *string       `json:"@id"`
-	Logo      *string       `json:"logo"`
-	LogoEmail *string       `json:"logo_email"`
-	Members   []interface{} `json:"members"`
-	Name      *string       `json:"name"`
-	Profile   *string       `json:"profile"`
+	AtID      *string       `json:"@id,omitempty"`
+	Logo      *string       `json:"logo,omitempty"`
+	LogoEmail *string       `json:"logo_email,omitempty"`
+	Members   []interface{} `json:"members,omitempty"`
+	Name      *string       `json:"name,omitempty"`
+	Profile   *string       `json:"profile,omitempty"`
 	Sub       string        `json:"sub"`
 }
 

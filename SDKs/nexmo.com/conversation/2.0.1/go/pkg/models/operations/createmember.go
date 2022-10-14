@@ -9,12 +9,12 @@ type CreateMemberPathParams struct {
 }
 
 type CreateMemberRequestBody struct {
-	Action           *shared.MemberActionEnum `json:"action"`
+	Action           *shared.MemberActionEnum `json:"action,omitempty"`
 	Channel          shared.Channel           `json:"channel"`
-	KnockingID       *string                  `json:"knocking_id"`
-	Media            map[string]interface{}   `json:"media"`
-	MemberID         *string                  `json:"member_id"`
-	MemberIDInviting *string                  `json:"member_id_inviting"`
+	KnockingID       *string                  `json:"knocking_id,omitempty"`
+	Media            map[string]interface{}   `json:"media,omitempty"`
+	MemberID         *string                  `json:"member_id,omitempty"`
+	MemberIDInviting *string                  `json:"member_id_inviting,omitempty"`
 	UserID           string                   `json:"user_id"`
 }
 
@@ -24,13 +24,13 @@ type CreateMemberRequest struct {
 }
 
 type CreateMember201ApplicationJSON struct {
-	Channel   *shared.Channel            `json:"channel"`
-	Href      *string                    `json:"href"`
-	ID        *string                    `json:"id"`
-	Initiator *shared.Initiator          `json:"initiator"`
-	State     *shared.MemberStateEnum    `json:"state"`
-	Timestamp *shared.TimestampResMember `json:"timestamp"`
-	UserID    *string                    `json:"user_id"`
+	Channel   *shared.Channel            `json:"channel,omitempty"`
+	Href      *string                    `json:"href,omitempty"`
+	ID        *string                    `json:"id,omitempty"`
+	Initiator *shared.Initiator          `json:"initiator,omitempty"`
+	State     *shared.MemberStateEnum    `json:"state,omitempty"`
+	Timestamp *shared.TimestampResMember `json:"timestamp,omitempty"`
+	UserID    *string                    `json:"user_id,omitempty"`
 }
 
 type CreateMemberResponse struct {

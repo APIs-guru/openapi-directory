@@ -1,9 +1,9 @@
 package shared
 
 type Action struct {
-	Actor     *Actor        `json:"actor"`
-	Detail    *ActionDetail `json:"detail"`
-	Target    *Target       `json:"target"`
-	TimeRange *TimeRange    `json:"timeRange"`
-	Timestamp *string       `json:"timestamp"`
+	Actor     *Actor        `json:"actor,omitempty"`
+	Detail    *ActionDetail `json:"detail,omitempty"`
+	Target    *Target       `json:"target,omitempty"`
+	TimeRange *TimeRange    `json:"timeRange,omitempty"`
+	Timestamp *string       `json:"timestamp,omitempty"`
 }

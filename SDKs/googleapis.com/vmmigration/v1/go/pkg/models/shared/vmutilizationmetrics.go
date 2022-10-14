@@ -1,12 +1,12 @@
 package shared
 
 type VMUtilizationMetrics struct {
-	CPUAveragePercent            *int32  `json:"cpuAveragePercent"`
-	CPUMaxPercent                *int32  `json:"cpuMaxPercent"`
-	DiskIoRateAverageKbps        *string `json:"diskIoRateAverageKbps"`
-	DiskIoRateMaxKbps            *string `json:"diskIoRateMaxKbps"`
-	MemoryAveragePercent         *int32  `json:"memoryAveragePercent"`
-	MemoryMaxPercent             *int32  `json:"memoryMaxPercent"`
-	NetworkThroughputAverageKbps *string `json:"networkThroughputAverageKbps"`
-	NetworkThroughputMaxKbps     *string `json:"networkThroughputMaxKbps"`
+	CPUAveragePercent            *int32  `json:"cpuAveragePercent,omitempty"`
+	CPUMaxPercent                *int32  `json:"cpuMaxPercent,omitempty"`
+	DiskIoRateAverageKbps        *string `json:"diskIoRateAverageKbps,omitempty"`
+	DiskIoRateMaxKbps            *string `json:"diskIoRateMaxKbps,omitempty"`
+	MemoryAveragePercent         *int32  `json:"memoryAveragePercent,omitempty"`
+	MemoryMaxPercent             *int32  `json:"memoryMaxPercent,omitempty"`
+	NetworkThroughputAverageKbps *string `json:"networkThroughputAverageKbps,omitempty"`
+	NetworkThroughputMaxKbps     *string `json:"networkThroughputMaxKbps,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type SasPortalSignDeviceRequest struct {
-	Device *SasPortalDevice `json:"device"`
+	Device *SasPortalDevice `json:"device,omitempty"`
 }

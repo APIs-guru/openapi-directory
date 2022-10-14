@@ -1,6 +1,6 @@
 package shared
 
 type SearchTenancyUnitsResponse struct {
-	NextPageToken *string       `json:"nextPageToken"`
-	TenancyUnits  []TenancyUnit `json:"tenancyUnits"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	TenancyUnits  []TenancyUnit `json:"tenancyUnits,omitempty"`
 }

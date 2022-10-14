@@ -32,13 +32,13 @@ const (
 )
 
 type Command struct {
-	ClearAppsDataParams *ClearAppsDataParams            `json:"clearAppsDataParams"`
-	ClearAppsDataStatus *ClearAppsDataStatus            `json:"clearAppsDataStatus"`
-	CreateTime          *string                         `json:"createTime"`
-	Duration            *string                         `json:"duration"`
-	ErrorCode           *CommandErrorCodeEnum           `json:"errorCode"`
-	NewPassword         *string                         `json:"newPassword"`
-	ResetPasswordFlags  []CommandResetPasswordFlagsEnum `json:"resetPasswordFlags"`
-	Type                *CommandTypeEnum                `json:"type"`
-	UserName            *string                         `json:"userName"`
+	ClearAppsDataParams *ClearAppsDataParams            `json:"clearAppsDataParams,omitempty"`
+	ClearAppsDataStatus *ClearAppsDataStatus            `json:"clearAppsDataStatus,omitempty"`
+	CreateTime          *string                         `json:"createTime,omitempty"`
+	Duration            *string                         `json:"duration,omitempty"`
+	ErrorCode           *CommandErrorCodeEnum           `json:"errorCode,omitempty"`
+	NewPassword         *string                         `json:"newPassword,omitempty"`
+	ResetPasswordFlags  []CommandResetPasswordFlagsEnum `json:"resetPasswordFlags,omitempty"`
+	Type                *CommandTypeEnum                `json:"type,omitempty"`
+	UserName            *string                         `json:"userName,omitempty"`
 }

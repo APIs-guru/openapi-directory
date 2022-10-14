@@ -1,6 +1,6 @@
 package shared
 
 type ListRepositoriesForApprovalRuleTemplateOutput struct {
-	NextToken       *string  `json:"nextToken"`
-	RepositoryNames []string `json:"repositoryNames"`
+	NextToken       *string  `json:"nextToken,omitempty"`
+	RepositoryNames []string `json:"repositoryNames,omitempty"`
 }

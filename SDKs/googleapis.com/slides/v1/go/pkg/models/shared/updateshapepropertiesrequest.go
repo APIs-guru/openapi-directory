@@ -1,7 +1,7 @@
 package shared
 
 type UpdateShapePropertiesRequest struct {
-	Fields          *string          `json:"fields"`
-	ObjectID        *string          `json:"objectId"`
-	ShapeProperties *ShapeProperties `json:"shapeProperties"`
+	Fields          *string          `json:"fields,omitempty"`
+	ObjectID        *string          `json:"objectId,omitempty"`
+	ShapeProperties *ShapeProperties `json:"shapeProperties,omitempty"`
 }

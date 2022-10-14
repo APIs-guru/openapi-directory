@@ -1,13 +1,13 @@
 package shared
 
 type EventSubscription struct {
-	CustSubscriptionID       *string  `json:"CustSubscriptionId"`
-	CustomerAwsID            *string  `json:"CustomerAwsId"`
-	Enabled                  *bool    `json:"Enabled"`
-	EventCategoriesList      []string `json:"EventCategoriesList"`
-	SnsTopicArn              *string  `json:"SnsTopicArn"`
-	SourceIdsList            []string `json:"SourceIdsList"`
-	SourceType               *string  `json:"SourceType"`
-	Status                   *string  `json:"Status"`
-	SubscriptionCreationTime *string  `json:"SubscriptionCreationTime"`
+	CustSubscriptionID       *string  `json:"CustSubscriptionId,omitempty"`
+	CustomerAwsID            *string  `json:"CustomerAwsId,omitempty"`
+	Enabled                  *bool    `json:"Enabled,omitempty"`
+	EventCategoriesList      []string `json:"EventCategoriesList,omitempty"`
+	SnsTopicArn              *string  `json:"SnsTopicArn,omitempty"`
+	SourceIdsList            []string `json:"SourceIdsList,omitempty"`
+	SourceType               *string  `json:"SourceType,omitempty"`
+	Status                   *string  `json:"Status,omitempty"`
+	SubscriptionCreationTime *string  `json:"SubscriptionCreationTime,omitempty"`
 }

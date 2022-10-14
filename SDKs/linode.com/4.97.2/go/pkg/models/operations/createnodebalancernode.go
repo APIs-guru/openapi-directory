@@ -28,13 +28,13 @@ const (
 
 type CreateNodeBalancerNodeRequestBody struct {
 	Address        string                                       `json:"address"`
-	ConfigID       *int64                                       `json:"config_id"`
-	ID             *int64                                       `json:"id"`
+	ConfigID       *int64                                       `json:"config_id,omitempty"`
+	ID             *int64                                       `json:"id,omitempty"`
 	Label          string                                       `json:"label"`
-	Mode           *CreateNodeBalancerNodeRequestBodyModeEnum   `json:"mode"`
-	NodebalancerID *int64                                       `json:"nodebalancer_id"`
-	Status         *CreateNodeBalancerNodeRequestBodyStatusEnum `json:"status"`
-	Weight         *int64                                       `json:"weight"`
+	Mode           *CreateNodeBalancerNodeRequestBodyModeEnum   `json:"mode,omitempty"`
+	NodebalancerID *int64                                       `json:"nodebalancer_id,omitempty"`
+	Status         *CreateNodeBalancerNodeRequestBodyStatusEnum `json:"status,omitempty"`
+	Weight         *int64                                       `json:"weight,omitempty"`
 }
 
 type CreateNodeBalancerNodeSecurityOption1 struct {
@@ -57,7 +57,7 @@ type CreateNodeBalancerNodeRequest struct {
 }
 
 type CreateNodeBalancerNodeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateNodeBalancerNodeResponse struct {

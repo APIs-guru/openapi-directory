@@ -1,8 +1,8 @@
 package shared
 
 type Image struct {
-	AltText    *string          `json:"altText"`
-	ContentURI *string          `json:"contentUri"`
-	Properties *MediaProperties `json:"properties"`
-	SourceURI  *string          `json:"sourceUri"`
+	AltText    *string          `json:"altText,omitempty"`
+	ContentURI *string          `json:"contentUri,omitempty"`
+	Properties *MediaProperties `json:"properties,omitempty"`
+	SourceURI  *string          `json:"sourceUri,omitempty"`
 }

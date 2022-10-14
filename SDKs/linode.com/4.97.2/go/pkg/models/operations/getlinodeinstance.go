@@ -27,7 +27,7 @@ type GetLinodeInstanceRequest struct {
 }
 
 type GetLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeInstanceResponse struct {

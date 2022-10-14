@@ -9,11 +9,11 @@ const (
 )
 
 type PartnerStoreCreate struct {
-	Aff              *string                         `json:"aff"`
-	Email            *string                         `json:"email"`
-	Locale           *string                         `json:"locale"`
-	Password         *string                         `json:"password"`
-	PlanName         *PartnerStoreCreatePlanNameEnum `json:"plan_name"`
-	RejectDuplicates *bool                           `json:"reject_duplicates"`
-	StoreName        *string                         `json:"store_name"`
+	Aff              *string                         `json:"aff,omitempty"`
+	Email            *string                         `json:"email,omitempty"`
+	Locale           *string                         `json:"locale,omitempty"`
+	Password         *string                         `json:"password,omitempty"`
+	PlanName         *PartnerStoreCreatePlanNameEnum `json:"plan_name,omitempty"`
+	RejectDuplicates *bool                           `json:"reject_duplicates,omitempty"`
+	StoreName        *string                         `json:"store_name,omitempty"`
 }

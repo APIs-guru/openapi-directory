@@ -1,5 +1,5 @@
 package shared
 
 type UpdateDirectoryConfigResult struct {
-	DirectoryConfig *DirectoryConfig `json:"DirectoryConfig"`
+	DirectoryConfig *DirectoryConfig `json:"DirectoryConfig,omitempty"`
 }

@@ -26,13 +26,13 @@ const (
 )
 
 type GetUsers200ApplicationJSONMobileApplicationDetailsMobileApplication struct {
-	Os                  *GetUsers200ApplicationJSONMobileApplicationDetailsOsEnum         `json:"OS"`
-	BusinessUserID      *int64                                                            `json:"businessUserId"`
-	ClientID            *string                                                           `json:"clientID"`
-	DeviceName          *GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnum `json:"deviceName"`
-	DeviceOsVersion     *string                                                           `json:"deviceOSVersion"`
-	MobileApplicationID *int64                                                            `json:"mobileApplicationId"`
-	Status              *GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum     `json:"status"`
+	Os                  *GetUsers200ApplicationJSONMobileApplicationDetailsOsEnum         `json:"OS,omitempty"`
+	BusinessUserID      *int64                                                            `json:"businessUserId,omitempty"`
+	ClientID            *string                                                           `json:"clientID,omitempty"`
+	DeviceName          *GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnum `json:"deviceName,omitempty"`
+	DeviceOsVersion     *string                                                           `json:"deviceOSVersion,omitempty"`
+	MobileApplicationID *int64                                                            `json:"mobileApplicationId,omitempty"`
+	Status              *GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum     `json:"status,omitempty"`
 }
 
 type GetUsers200ApplicationJSONRoleEnum string
@@ -55,16 +55,16 @@ const (
 )
 
 type GetUsers200ApplicationJSONUser struct {
-	EmailAddress             *string                                                              `json:"emailAddress"`
-	FirstName                *string                                                              `json:"firstName"`
-	ID                       *int64                                                               `json:"id"`
-	LastName                 *string                                                              `json:"lastName"`
-	Lastlogin                *string                                                              `json:"lastlogin"`
-	MobileApplicationDetails *GetUsers200ApplicationJSONMobileApplicationDetailsMobileApplication `json:"mobileApplicationDetails"`
-	MobileNumber             *string                                                              `json:"mobileNumber"`
-	Role                     *GetUsers200ApplicationJSONRoleEnum                                  `json:"role"`
-	Status                   *GetUsers200ApplicationJSONStatusEnum                                `json:"status"`
-	UserCvl                  *string                                                              `json:"userCvl"`
+	EmailAddress             *string                                                              `json:"emailAddress,omitempty"`
+	FirstName                *string                                                              `json:"firstName,omitempty"`
+	ID                       *int64                                                               `json:"id,omitempty"`
+	LastName                 *string                                                              `json:"lastName,omitempty"`
+	Lastlogin                *string                                                              `json:"lastlogin,omitempty"`
+	MobileApplicationDetails *GetUsers200ApplicationJSONMobileApplicationDetailsMobileApplication `json:"mobileApplicationDetails,omitempty"`
+	MobileNumber             *string                                                              `json:"mobileNumber,omitempty"`
+	Role                     *GetUsers200ApplicationJSONRoleEnum                                  `json:"role,omitempty"`
+	Status                   *GetUsers200ApplicationJSONStatusEnum                                `json:"status,omitempty"`
+	UserCvl                  *string                                                              `json:"userCvl,omitempty"`
 }
 
 type GetUsersResponse struct {

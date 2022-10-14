@@ -1,8 +1,8 @@
 package shared
 
 type Amount struct {
-	ConvertedFromCurrency *string `json:"convertedFromCurrency"`
-	ConvertedFromValue    *string `json:"convertedFromValue"`
-	Currency              *string `json:"currency"`
-	Value                 *string `json:"value"`
+	ConvertedFromCurrency *string `json:"convertedFromCurrency,omitempty"`
+	ConvertedFromValue    *string `json:"convertedFromValue,omitempty"`
+	Currency              *string `json:"currency,omitempty"`
+	Value                 *string `json:"value,omitempty"`
 }

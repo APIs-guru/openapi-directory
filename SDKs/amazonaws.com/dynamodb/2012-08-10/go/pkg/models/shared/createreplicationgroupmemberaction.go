@@ -1,8 +1,8 @@
 package shared
 
 type CreateReplicationGroupMemberAction struct {
-	GlobalSecondaryIndexes        []ReplicaGlobalSecondaryIndex  `json:"GlobalSecondaryIndexes"`
-	KmsMasterKeyID                *string                        `json:"KMSMasterKeyId"`
-	ProvisionedThroughputOverride *ProvisionedThroughputOverride `json:"ProvisionedThroughputOverride"`
+	GlobalSecondaryIndexes        []ReplicaGlobalSecondaryIndex  `json:"GlobalSecondaryIndexes,omitempty"`
+	KmsMasterKeyID                *string                        `json:"KMSMasterKeyId,omitempty"`
+	ProvisionedThroughputOverride *ProvisionedThroughputOverride `json:"ProvisionedThroughputOverride,omitempty"`
 	RegionName                    string                         `json:"RegionName"`
 }

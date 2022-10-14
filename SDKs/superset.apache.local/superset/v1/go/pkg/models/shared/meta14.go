@@ -2,6 +2,6 @@ package shared
 
 type Meta14 struct {
 	FirstName string `json:"first_name"`
-	ID        *int32 `json:"id"`
+	ID        *int32 `json:"id,omitempty"`
 	LastName  string `json:"last_name"`
 }

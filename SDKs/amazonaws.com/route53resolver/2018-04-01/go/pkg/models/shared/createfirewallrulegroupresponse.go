@@ -1,5 +1,5 @@
 package shared
 
 type CreateFirewallRuleGroupResponse struct {
-	FirewallRuleGroup *FirewallRuleGroup `json:"FirewallRuleGroup"`
+	FirewallRuleGroup *FirewallRuleGroup `json:"FirewallRuleGroup,omitempty"`
 }

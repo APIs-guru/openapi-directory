@@ -1,6 +1,6 @@
 package shared
 
 type ListAPIKeysResponse struct {
-	APIKeys   []APIKey `json:"apiKeys"`
-	NextToken *string  `json:"nextToken"`
+	APIKeys   []APIKey `json:"apiKeys,omitempty"`
+	NextToken *string  `json:"nextToken,omitempty"`
 }

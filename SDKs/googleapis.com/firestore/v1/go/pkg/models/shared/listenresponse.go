@@ -1,9 +1,9 @@
 package shared
 
 type ListenResponse struct {
-	DocumentChange *DocumentChange  `json:"documentChange"`
-	DocumentDelete *DocumentDelete  `json:"documentDelete"`
-	DocumentRemove *DocumentRemove  `json:"documentRemove"`
-	Filter         *ExistenceFilter `json:"filter"`
-	TargetChange   *TargetChange    `json:"targetChange"`
+	DocumentChange *DocumentChange  `json:"documentChange,omitempty"`
+	DocumentDelete *DocumentDelete  `json:"documentDelete,omitempty"`
+	DocumentRemove *DocumentRemove  `json:"documentRemove,omitempty"`
+	Filter         *ExistenceFilter `json:"filter,omitempty"`
+	TargetChange   *TargetChange    `json:"targetChange,omitempty"`
 }

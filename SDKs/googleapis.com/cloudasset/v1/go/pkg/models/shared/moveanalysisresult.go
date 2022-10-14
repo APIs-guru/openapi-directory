@@ -1,6 +1,6 @@
 package shared
 
 type MoveAnalysisResult struct {
-	Blockers []MoveImpact `json:"blockers"`
-	Warnings []MoveImpact `json:"warnings"`
+	Blockers []MoveImpact `json:"blockers,omitempty"`
+	Warnings []MoveImpact `json:"warnings,omitempty"`
 }

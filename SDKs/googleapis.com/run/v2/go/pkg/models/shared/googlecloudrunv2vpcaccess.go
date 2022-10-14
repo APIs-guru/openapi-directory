@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudRunV2VpcAccess struct {
-	Connector *string                              `json:"connector"`
-	Egress    *GoogleCloudRunV2VpcAccessEgressEnum `json:"egress"`
+	Connector *string                              `json:"connector,omitempty"`
+	Egress    *GoogleCloudRunV2VpcAccessEgressEnum `json:"egress,omitempty"`
 }

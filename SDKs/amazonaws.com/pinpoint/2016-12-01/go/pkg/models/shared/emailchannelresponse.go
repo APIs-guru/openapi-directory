@@ -1,19 +1,19 @@
 package shared
 
 type EmailChannelResponse struct {
-	ApplicationID     *string `json:"ApplicationId"`
-	ConfigurationSet  *string `json:"ConfigurationSet"`
-	CreationDate      *string `json:"CreationDate"`
-	Enabled           *bool   `json:"Enabled"`
-	FromAddress       *string `json:"FromAddress"`
-	HasCredential     *bool   `json:"HasCredential"`
-	ID                *string `json:"Id"`
-	Identity          *string `json:"Identity"`
-	IsArchived        *bool   `json:"IsArchived"`
-	LastModifiedBy    *string `json:"LastModifiedBy"`
-	LastModifiedDate  *string `json:"LastModifiedDate"`
-	MessagesPerSecond *int64  `json:"MessagesPerSecond"`
+	ApplicationID     *string `json:"ApplicationId,omitempty"`
+	ConfigurationSet  *string `json:"ConfigurationSet,omitempty"`
+	CreationDate      *string `json:"CreationDate,omitempty"`
+	Enabled           *bool   `json:"Enabled,omitempty"`
+	FromAddress       *string `json:"FromAddress,omitempty"`
+	HasCredential     *bool   `json:"HasCredential,omitempty"`
+	ID                *string `json:"Id,omitempty"`
+	Identity          *string `json:"Identity,omitempty"`
+	IsArchived        *bool   `json:"IsArchived,omitempty"`
+	LastModifiedBy    *string `json:"LastModifiedBy,omitempty"`
+	LastModifiedDate  *string `json:"LastModifiedDate,omitempty"`
+	MessagesPerSecond *int64  `json:"MessagesPerSecond,omitempty"`
 	Platform          string  `json:"Platform"`
-	RoleArn           *string `json:"RoleArn"`
-	Version           *int64  `json:"Version"`
+	RoleArn           *string `json:"RoleArn,omitempty"`
+	Version           *int64  `json:"Version,omitempty"`
 }

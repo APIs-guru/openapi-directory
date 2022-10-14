@@ -19,7 +19,7 @@ type RemoveAllBackendsHeaders struct {
 }
 
 type RemoveAllBackendsRequestBody struct {
-	CleanAmplifyApp *bool `json:"cleanAmplifyApp"`
+	CleanAmplifyApp *bool `json:"cleanAmplifyApp,omitempty"`
 }
 
 type RemoveAllBackendsRequest struct {

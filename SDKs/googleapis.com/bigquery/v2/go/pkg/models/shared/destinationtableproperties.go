@@ -5,8 +5,8 @@ import (
 )
 
 type DestinationTableProperties struct {
-	Description    *string           `json:"description"`
-	ExpirationTime *time.Time        `json:"expirationTime"`
-	FriendlyName   *string           `json:"friendlyName"`
-	Labels         map[string]string `json:"labels"`
+	Description    *string           `json:"description,omitempty"`
+	ExpirationTime *time.Time        `json:"expirationTime,omitempty"`
+	FriendlyName   *string           `json:"friendlyName,omitempty"`
+	Labels         map[string]string `json:"labels,omitempty"`
 }

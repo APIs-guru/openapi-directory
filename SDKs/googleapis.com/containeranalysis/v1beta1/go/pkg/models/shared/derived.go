@@ -1,8 +1,8 @@
 package shared
 
 type Derived struct {
-	BaseResourceURL *string      `json:"baseResourceUrl"`
-	Distance        *int32       `json:"distance"`
-	Fingerprint     *Fingerprint `json:"fingerprint"`
-	LayerInfo       []Layer      `json:"layerInfo"`
+	BaseResourceURL *string      `json:"baseResourceUrl,omitempty"`
+	Distance        *int32       `json:"distance,omitempty"`
+	Fingerprint     *Fingerprint `json:"fingerprint,omitempty"`
+	LayerInfo       []Layer      `json:"layerInfo,omitempty"`
 }

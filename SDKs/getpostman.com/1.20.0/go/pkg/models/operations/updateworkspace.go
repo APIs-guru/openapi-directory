@@ -5,36 +5,36 @@ type UpdateWorkspacePathParams struct {
 }
 
 type UpdateWorkspaceRequestBodyWorkspaceCollections struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type UpdateWorkspaceRequestBodyWorkspaceEnvironments struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type UpdateWorkspaceRequestBodyWorkspaceMocks struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateWorkspaceRequestBodyWorkspaceMonitors struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateWorkspaceRequestBodyWorkspace struct {
-	Collections  []UpdateWorkspaceRequestBodyWorkspaceCollections  `json:"collections"`
-	Description  *string                                           `json:"description"`
-	Environments []UpdateWorkspaceRequestBodyWorkspaceEnvironments `json:"environments"`
-	Mocks        []UpdateWorkspaceRequestBodyWorkspaceMocks        `json:"mocks"`
-	Monitors     []UpdateWorkspaceRequestBodyWorkspaceMonitors     `json:"monitors"`
-	Name         *string                                           `json:"name"`
+	Collections  []UpdateWorkspaceRequestBodyWorkspaceCollections  `json:"collections,omitempty"`
+	Description  *string                                           `json:"description,omitempty"`
+	Environments []UpdateWorkspaceRequestBodyWorkspaceEnvironments `json:"environments,omitempty"`
+	Mocks        []UpdateWorkspaceRequestBodyWorkspaceMocks        `json:"mocks,omitempty"`
+	Monitors     []UpdateWorkspaceRequestBodyWorkspaceMonitors     `json:"monitors,omitempty"`
+	Name         *string                                           `json:"name,omitempty"`
 }
 
 type UpdateWorkspaceRequestBody struct {
-	Workspace *UpdateWorkspaceRequestBodyWorkspace `json:"workspace"`
+	Workspace *UpdateWorkspaceRequestBodyWorkspace `json:"workspace,omitempty"`
 }
 
 type UpdateWorkspaceRequest struct {
@@ -43,30 +43,30 @@ type UpdateWorkspaceRequest struct {
 }
 
 type UpdateWorkspace200ApplicationJSONWorkspace struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdateWorkspace200ApplicationJSON struct {
-	Workspace *UpdateWorkspace200ApplicationJSONWorkspace `json:"workspace"`
+	Workspace *UpdateWorkspace200ApplicationJSONWorkspace `json:"workspace,omitempty"`
 }
 
 type UpdateWorkspace403ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type UpdateWorkspace403ApplicationJSON struct {
-	Error *UpdateWorkspace403ApplicationJSONError `json:"error"`
+	Error *UpdateWorkspace403ApplicationJSONError `json:"error,omitempty"`
 }
 
 type UpdateWorkspace404ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type UpdateWorkspace404ApplicationJSON struct {
-	Error *UpdateWorkspace404ApplicationJSONError `json:"error"`
+	Error *UpdateWorkspace404ApplicationJSONError `json:"error,omitempty"`
 }
 
 type UpdateWorkspaceResponse struct {

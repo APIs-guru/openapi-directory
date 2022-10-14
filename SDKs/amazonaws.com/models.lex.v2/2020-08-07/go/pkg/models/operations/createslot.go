@@ -22,25 +22,25 @@ type CreateSlotHeaders struct {
 }
 
 type CreateSlotRequestBodyMultipleValuesSetting struct {
-	AllowMultipleValues *bool `json:"allowMultipleValues"`
+	AllowMultipleValues *bool `json:"allowMultipleValues,omitempty"`
 }
 
 type CreateSlotRequestBodyObfuscationSetting struct {
-	ObfuscationSettingType *shared.ObfuscationSettingTypeEnum `json:"obfuscationSettingType"`
+	ObfuscationSettingType *shared.ObfuscationSettingTypeEnum `json:"obfuscationSettingType,omitempty"`
 }
 
 type CreateSlotRequestBodyValueElicitationSetting struct {
-	DefaultValueSpecification    *shared.SlotDefaultValueSpecification `json:"defaultValueSpecification"`
-	PromptSpecification          *shared.PromptSpecification           `json:"promptSpecification"`
-	SampleUtterances             []shared.SampleUtterance              `json:"sampleUtterances"`
-	SlotConstraint               *shared.SlotConstraintEnum            `json:"slotConstraint"`
-	WaitAndContinueSpecification *shared.WaitAndContinueSpecification  `json:"waitAndContinueSpecification"`
+	DefaultValueSpecification    *shared.SlotDefaultValueSpecification `json:"defaultValueSpecification,omitempty"`
+	PromptSpecification          *shared.PromptSpecification           `json:"promptSpecification,omitempty"`
+	SampleUtterances             []shared.SampleUtterance              `json:"sampleUtterances,omitempty"`
+	SlotConstraint               *shared.SlotConstraintEnum            `json:"slotConstraint,omitempty"`
+	WaitAndContinueSpecification *shared.WaitAndContinueSpecification  `json:"waitAndContinueSpecification,omitempty"`
 }
 
 type CreateSlotRequestBody struct {
-	Description             *string                                      `json:"description"`
-	MultipleValuesSetting   *CreateSlotRequestBodyMultipleValuesSetting  `json:"multipleValuesSetting"`
-	ObfuscationSetting      *CreateSlotRequestBodyObfuscationSetting     `json:"obfuscationSetting"`
+	Description             *string                                      `json:"description,omitempty"`
+	MultipleValuesSetting   *CreateSlotRequestBodyMultipleValuesSetting  `json:"multipleValuesSetting,omitempty"`
+	ObfuscationSetting      *CreateSlotRequestBodyObfuscationSetting     `json:"obfuscationSetting,omitempty"`
 	SlotName                string                                       `json:"slotName"`
 	SlotTypeID              string                                       `json:"slotTypeId"`
 	ValueElicitationSetting CreateSlotRequestBodyValueElicitationSetting `json:"valueElicitationSetting"`

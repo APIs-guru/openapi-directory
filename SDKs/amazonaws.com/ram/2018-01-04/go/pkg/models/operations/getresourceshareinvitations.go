@@ -20,10 +20,10 @@ type GetResourceShareInvitationsHeaders struct {
 }
 
 type GetResourceShareInvitationsRequestBody struct {
-	MaxResults                  *int64   `json:"maxResults"`
-	NextToken                   *string  `json:"nextToken"`
-	ResourceShareArns           []string `json:"resourceShareArns"`
-	ResourceShareInvitationArns []string `json:"resourceShareInvitationArns"`
+	MaxResults                  *int64   `json:"maxResults,omitempty"`
+	NextToken                   *string  `json:"nextToken,omitempty"`
+	ResourceShareArns           []string `json:"resourceShareArns,omitempty"`
+	ResourceShareInvitationArns []string `json:"resourceShareInvitationArns,omitempty"`
 }
 
 type GetResourceShareInvitationsRequest struct {

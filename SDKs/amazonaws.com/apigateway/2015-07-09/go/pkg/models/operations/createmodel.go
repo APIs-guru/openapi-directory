@@ -20,9 +20,9 @@ type CreateModelHeaders struct {
 
 type CreateModelRequestBody struct {
 	ContentType string  `json:"contentType"`
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	Name        string  `json:"name"`
-	Schema      *string `json:"schema"`
+	Schema      *string `json:"schema,omitempty"`
 }
 
 type CreateModelRequest struct {

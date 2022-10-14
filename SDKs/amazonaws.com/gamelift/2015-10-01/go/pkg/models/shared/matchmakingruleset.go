@@ -5,8 +5,8 @@ import (
 )
 
 type MatchmakingRuleSet struct {
-	CreationTime *time.Time `json:"CreationTime"`
-	RuleSetArn   *string    `json:"RuleSetArn"`
+	CreationTime *time.Time `json:"CreationTime,omitempty"`
+	RuleSetArn   *string    `json:"RuleSetArn,omitempty"`
 	RuleSetBody  string     `json:"RuleSetBody"`
-	RuleSetName  *string    `json:"RuleSetName"`
+	RuleSetName  *string    `json:"RuleSetName,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type StandardUnitDescription struct {
-	Abbreviation *string          `json:"abbreviation"`
-	Name         *string          `json:"name"`
-	Unit         *MeasurementUnit `json:"unit"`
+	Abbreviation *string          `json:"abbreviation,omitempty"`
+	Name         *string          `json:"name,omitempty"`
+	Unit         *MeasurementUnit `json:"unit,omitempty"`
 }

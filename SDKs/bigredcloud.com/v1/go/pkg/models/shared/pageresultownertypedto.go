@@ -1,7 +1,7 @@
 package shared
 
 type PageResultOwnerTypeDto struct {
-	Count        *int64         `json:"Count"`
-	Items        []OwnerTypeDto `json:"Items"`
-	NextPageLink *string        `json:"NextPageLink"`
+	Count        *int64         `json:"Count,omitempty"`
+	Items        []OwnerTypeDto `json:"Items,omitempty"`
+	NextPageLink *string        `json:"NextPageLink,omitempty"`
 }

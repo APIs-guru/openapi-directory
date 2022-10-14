@@ -41,8 +41,8 @@ const (
 )
 
 type DatabaseInstanceFailoverReplica struct {
-	Available *bool   `json:"available"`
-	Name      *string `json:"name"`
+	Available *bool   `json:"available,omitempty"`
+	Name      *string `json:"name,omitempty"`
 }
 
 type DatabaseInstanceInstanceTypeEnum string
@@ -78,40 +78,40 @@ const (
 )
 
 type DatabaseInstance struct {
-	AvailableMaintenanceVersions []string                               `json:"availableMaintenanceVersions"`
-	BackendType                  *DatabaseInstanceBackendTypeEnum       `json:"backendType"`
-	ConnectionName               *string                                `json:"connectionName"`
-	CreateTime                   *string                                `json:"createTime"`
-	CurrentDiskSize              *string                                `json:"currentDiskSize"`
-	DatabaseInstalledVersion     *string                                `json:"databaseInstalledVersion"`
-	DatabaseVersion              *DatabaseInstanceDatabaseVersionEnum   `json:"databaseVersion"`
-	DiskEncryptionConfiguration  *DiskEncryptionConfiguration           `json:"diskEncryptionConfiguration"`
-	DiskEncryptionStatus         *DiskEncryptionStatus                  `json:"diskEncryptionStatus"`
-	Etag                         *string                                `json:"etag"`
-	FailoverReplica              *DatabaseInstanceFailoverReplica       `json:"failoverReplica"`
-	GceZone                      *string                                `json:"gceZone"`
-	InstanceType                 *DatabaseInstanceInstanceTypeEnum      `json:"instanceType"`
-	IPAddresses                  []IPMapping                            `json:"ipAddresses"`
-	Ipv6Address                  *string                                `json:"ipv6Address"`
-	Kind                         *string                                `json:"kind"`
-	MaintenanceVersion           *string                                `json:"maintenanceVersion"`
-	MasterInstanceName           *string                                `json:"masterInstanceName"`
-	MaxDiskSize                  *string                                `json:"maxDiskSize"`
-	Name                         *string                                `json:"name"`
-	OnPremisesConfiguration      *OnPremisesConfiguration               `json:"onPremisesConfiguration"`
-	OutOfDiskReport              *SQLOutOfDiskReport                    `json:"outOfDiskReport"`
-	Project                      *string                                `json:"project"`
-	Region                       *string                                `json:"region"`
-	ReplicaConfiguration         *ReplicaConfiguration                  `json:"replicaConfiguration"`
-	ReplicaNames                 []string                               `json:"replicaNames"`
-	RootPassword                 *string                                `json:"rootPassword"`
-	SatisfiesPzs                 *bool                                  `json:"satisfiesPzs"`
-	ScheduledMaintenance         *SQLScheduledMaintenance               `json:"scheduledMaintenance"`
-	SecondaryGceZone             *string                                `json:"secondaryGceZone"`
-	SelfLink                     *string                                `json:"selfLink"`
-	ServerCaCert                 *SslCert                               `json:"serverCaCert"`
-	ServiceAccountEmailAddress   *string                                `json:"serviceAccountEmailAddress"`
-	Settings                     *Settings                              `json:"settings"`
-	State                        *DatabaseInstanceStateEnum             `json:"state"`
-	SuspensionReason             []DatabaseInstanceSuspensionReasonEnum `json:"suspensionReason"`
+	AvailableMaintenanceVersions []string                               `json:"availableMaintenanceVersions,omitempty"`
+	BackendType                  *DatabaseInstanceBackendTypeEnum       `json:"backendType,omitempty"`
+	ConnectionName               *string                                `json:"connectionName,omitempty"`
+	CreateTime                   *string                                `json:"createTime,omitempty"`
+	CurrentDiskSize              *string                                `json:"currentDiskSize,omitempty"`
+	DatabaseInstalledVersion     *string                                `json:"databaseInstalledVersion,omitempty"`
+	DatabaseVersion              *DatabaseInstanceDatabaseVersionEnum   `json:"databaseVersion,omitempty"`
+	DiskEncryptionConfiguration  *DiskEncryptionConfiguration           `json:"diskEncryptionConfiguration,omitempty"`
+	DiskEncryptionStatus         *DiskEncryptionStatus                  `json:"diskEncryptionStatus,omitempty"`
+	Etag                         *string                                `json:"etag,omitempty"`
+	FailoverReplica              *DatabaseInstanceFailoverReplica       `json:"failoverReplica,omitempty"`
+	GceZone                      *string                                `json:"gceZone,omitempty"`
+	InstanceType                 *DatabaseInstanceInstanceTypeEnum      `json:"instanceType,omitempty"`
+	IPAddresses                  []IPMapping                            `json:"ipAddresses,omitempty"`
+	Ipv6Address                  *string                                `json:"ipv6Address,omitempty"`
+	Kind                         *string                                `json:"kind,omitempty"`
+	MaintenanceVersion           *string                                `json:"maintenanceVersion,omitempty"`
+	MasterInstanceName           *string                                `json:"masterInstanceName,omitempty"`
+	MaxDiskSize                  *string                                `json:"maxDiskSize,omitempty"`
+	Name                         *string                                `json:"name,omitempty"`
+	OnPremisesConfiguration      *OnPremisesConfiguration               `json:"onPremisesConfiguration,omitempty"`
+	OutOfDiskReport              *SQLOutOfDiskReport                    `json:"outOfDiskReport,omitempty"`
+	Project                      *string                                `json:"project,omitempty"`
+	Region                       *string                                `json:"region,omitempty"`
+	ReplicaConfiguration         *ReplicaConfiguration                  `json:"replicaConfiguration,omitempty"`
+	ReplicaNames                 []string                               `json:"replicaNames,omitempty"`
+	RootPassword                 *string                                `json:"rootPassword,omitempty"`
+	SatisfiesPzs                 *bool                                  `json:"satisfiesPzs,omitempty"`
+	ScheduledMaintenance         *SQLScheduledMaintenance               `json:"scheduledMaintenance,omitempty"`
+	SecondaryGceZone             *string                                `json:"secondaryGceZone,omitempty"`
+	SelfLink                     *string                                `json:"selfLink,omitempty"`
+	ServerCaCert                 *SslCert                               `json:"serverCaCert,omitempty"`
+	ServiceAccountEmailAddress   *string                                `json:"serviceAccountEmailAddress,omitempty"`
+	Settings                     *Settings                              `json:"settings,omitempty"`
+	State                        *DatabaseInstanceStateEnum             `json:"state,omitempty"`
+	SuspensionReason             []DatabaseInstanceSuspensionReasonEnum `json:"suspensionReason,omitempty"`
 }

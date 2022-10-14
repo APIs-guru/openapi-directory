@@ -5,9 +5,9 @@ import (
 )
 
 type ResourceMetadata struct {
-	Arn           *string    `json:"arn"`
-	CreatedAt     *time.Time `json:"createdAt"`
-	LastUpdatedAt *time.Time `json:"lastUpdatedAt"`
-	UID           *string    `json:"uid"`
-	Version       *int64     `json:"version"`
+	Arn           *string    `json:"arn,omitempty"`
+	CreatedAt     *time.Time `json:"createdAt,omitempty"`
+	LastUpdatedAt *time.Time `json:"lastUpdatedAt,omitempty"`
+	UID           *string    `json:"uid,omitempty"`
+	Version       *int64     `json:"version,omitempty"`
 }

@@ -38,7 +38,7 @@ type GetSubmissionBatch200ApplicationJSONSubmissionBatch struct {
 	PendingCount         int64                                         `json:"pending_count"`
 	ProcessedAt          string                                        `json:"processed_at"`
 	State                GetSubmissionBatch200ApplicationJSONStateEnum `json:"state"`
-	Submissions          []shared.Submission                           `json:"submissions"`
+	Submissions          []shared.Submission                           `json:"submissions,omitempty"`
 	TotalCount           int64                                         `json:"total_count"`
 }
 

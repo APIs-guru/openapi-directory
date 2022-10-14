@@ -1,6 +1,6 @@
 package shared
 
 type DeviceEvent struct {
-	Device   *Device `json:"Device"`
-	StdEvent *string `json:"StdEvent"`
+	Device   *Device `json:"Device,omitempty"`
+	StdEvent *string `json:"StdEvent,omitempty"`
 }

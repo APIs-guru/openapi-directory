@@ -1,7 +1,7 @@
 package shared
 
 type TableOfContents struct {
-	Content               []StructuralElement `json:"content"`
-	SuggestedDeletionIds  []string            `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds []string            `json:"suggestedInsertionIds"`
+	Content               []StructuralElement `json:"content,omitempty"`
+	SuggestedDeletionIds  []string            `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds []string            `json:"suggestedInsertionIds,omitempty"`
 }

@@ -9,5 +9,5 @@ const (
 )
 
 type Accelerator struct {
-	AcceleratorType *AcceleratorAcceleratorTypeEnum `json:"acceleratorType"`
+	AcceleratorType *AcceleratorAcceleratorTypeEnum `json:"acceleratorType,omitempty"`
 }

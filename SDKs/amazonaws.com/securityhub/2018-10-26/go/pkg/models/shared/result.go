@@ -1,6 +1,6 @@
 package shared
 
 type Result struct {
-	AccountID        *string `json:"AccountId"`
-	ProcessingResult *string `json:"ProcessingResult"`
+	AccountID        *string `json:"AccountId,omitempty"`
+	ProcessingResult *string `json:"ProcessingResult,omitempty"`
 }

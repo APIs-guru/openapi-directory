@@ -1,7 +1,7 @@
 package shared
 
 type CertificateChains struct {
-	CaviumCerts          []string `json:"caviumCerts"`
-	GoogleCardCerts      []string `json:"googleCardCerts"`
-	GooglePartitionCerts []string `json:"googlePartitionCerts"`
+	CaviumCerts          []string `json:"caviumCerts,omitempty"`
+	GoogleCardCerts      []string `json:"googleCardCerts,omitempty"`
+	GooglePartitionCerts []string `json:"googlePartitionCerts,omitempty"`
 }

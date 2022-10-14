@@ -1,6 +1,6 @@
 package shared
 
 type ClusterSetting struct {
-	Name  *ClusterSettingNameEnum `json:"name"`
-	Value *string                 `json:"value"`
+	Name  *ClusterSettingNameEnum `json:"name,omitempty"`
+	Value *string                 `json:"value,omitempty"`
 }

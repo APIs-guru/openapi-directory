@@ -9,6 +9,6 @@ const (
 )
 
 type MetricCompatibility struct {
-	Compatibility  *MetricCompatibilityCompatibilityEnum `json:"compatibility"`
-	MetricMetadata *MetricMetadata                       `json:"metricMetadata"`
+	Compatibility  *MetricCompatibilityCompatibilityEnum `json:"compatibility,omitempty"`
+	MetricMetadata *MetricMetadata                       `json:"metricMetadata,omitempty"`
 }

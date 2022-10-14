@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDataplexV1ListEnvironmentsResponse struct {
-	Environments  []GoogleCloudDataplexV1Environment `json:"environments"`
-	NextPageToken *string                            `json:"nextPageToken"`
+	Environments  []GoogleCloudDataplexV1Environment `json:"environments,omitempty"`
+	NextPageToken *string                            `json:"nextPageToken,omitempty"`
 }

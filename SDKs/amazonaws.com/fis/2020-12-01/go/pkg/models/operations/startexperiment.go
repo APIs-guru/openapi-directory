@@ -17,7 +17,7 @@ type StartExperimentHeaders struct {
 type StartExperimentRequestBody struct {
 	ClientToken          string            `json:"clientToken"`
 	ExperimentTemplateID string            `json:"experimentTemplateId"`
-	Tags                 map[string]string `json:"tags"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }
 
 type StartExperimentRequest struct {

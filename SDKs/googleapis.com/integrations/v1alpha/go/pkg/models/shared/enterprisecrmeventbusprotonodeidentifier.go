@@ -9,6 +9,6 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoNodeIdentifier struct {
-	ElementIdentifier *string                                                  `json:"elementIdentifier"`
-	ElementType       *EnterpriseCrmEventbusProtoNodeIdentifierElementTypeEnum `json:"elementType"`
+	ElementIdentifier *string                                                  `json:"elementIdentifier,omitempty"`
+	ElementType       *EnterpriseCrmEventbusProtoNodeIdentifierElementTypeEnum `json:"elementType,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ExportSnapshotRecord struct {
-	Arn             *string                         `json:"arn"`
-	CreatedAt       *time.Time                      `json:"createdAt"`
-	DestinationInfo *DestinationInfo                `json:"destinationInfo"`
-	Location        *ResourceLocation               `json:"location"`
-	Name            *string                         `json:"name"`
-	ResourceType    *ResourceTypeEnum               `json:"resourceType"`
-	SourceInfo      *ExportSnapshotRecordSourceInfo `json:"sourceInfo"`
-	State           *RecordStateEnum                `json:"state"`
+	Arn             *string                         `json:"arn,omitempty"`
+	CreatedAt       *time.Time                      `json:"createdAt,omitempty"`
+	DestinationInfo *DestinationInfo                `json:"destinationInfo,omitempty"`
+	Location        *ResourceLocation               `json:"location,omitempty"`
+	Name            *string                         `json:"name,omitempty"`
+	ResourceType    *ResourceTypeEnum               `json:"resourceType,omitempty"`
+	SourceInfo      *ExportSnapshotRecordSourceInfo `json:"sourceInfo,omitempty"`
+	State           *RecordStateEnum                `json:"state,omitempty"`
 }

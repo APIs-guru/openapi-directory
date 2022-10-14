@@ -18,7 +18,7 @@ const (
 )
 
 type AdmissionRule struct {
-	EnforcementMode       *AdmissionRuleEnforcementModeEnum `json:"enforcementMode"`
-	EvaluationMode        *AdmissionRuleEvaluationModeEnum  `json:"evaluationMode"`
-	RequireAttestationsBy []string                          `json:"requireAttestationsBy"`
+	EnforcementMode       *AdmissionRuleEnforcementModeEnum `json:"enforcementMode,omitempty"`
+	EvaluationMode        *AdmissionRuleEvaluationModeEnum  `json:"evaluationMode,omitempty"`
+	RequireAttestationsBy []string                          `json:"requireAttestationsBy,omitempty"`
 }

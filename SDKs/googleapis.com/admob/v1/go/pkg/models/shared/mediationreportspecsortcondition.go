@@ -44,7 +44,7 @@ const (
 )
 
 type MediationReportSpecSortCondition struct {
-	Dimension *MediationReportSpecSortConditionDimensionEnum `json:"dimension"`
-	Metric    *MediationReportSpecSortConditionMetricEnum    `json:"metric"`
-	Order     *MediationReportSpecSortConditionOrderEnum     `json:"order"`
+	Dimension *MediationReportSpecSortConditionDimensionEnum `json:"dimension,omitempty"`
+	Metric    *MediationReportSpecSortConditionMetricEnum    `json:"metric,omitempty"`
+	Order     *MediationReportSpecSortConditionOrderEnum     `json:"order,omitempty"`
 }

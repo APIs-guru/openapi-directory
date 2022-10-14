@@ -9,6 +9,6 @@ const (
 )
 
 type StringTargetingDimension struct {
-	TargetingMode *StringTargetingDimensionTargetingModeEnum `json:"targetingMode"`
-	Values        []string                                   `json:"values"`
+	TargetingMode *StringTargetingDimensionTargetingModeEnum `json:"targetingMode,omitempty"`
+	Values        []string                                   `json:"values,omitempty"`
 }

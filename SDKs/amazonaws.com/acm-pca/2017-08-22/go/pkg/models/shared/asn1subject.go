@@ -1,18 +1,18 @@
 package shared
 
 type Asn1Subject struct {
-	CommonName                 *string `json:"CommonName"`
-	Country                    *string `json:"Country"`
-	DistinguishedNameQualifier *string `json:"DistinguishedNameQualifier"`
-	GenerationQualifier        *string `json:"GenerationQualifier"`
-	GivenName                  *string `json:"GivenName"`
-	Initials                   *string `json:"Initials"`
-	Locality                   *string `json:"Locality"`
-	Organization               *string `json:"Organization"`
-	OrganizationalUnit         *string `json:"OrganizationalUnit"`
-	Pseudonym                  *string `json:"Pseudonym"`
-	SerialNumber               *string `json:"SerialNumber"`
-	State                      *string `json:"State"`
-	Surname                    *string `json:"Surname"`
-	Title                      *string `json:"Title"`
+	CommonName                 *string `json:"CommonName,omitempty"`
+	Country                    *string `json:"Country,omitempty"`
+	DistinguishedNameQualifier *string `json:"DistinguishedNameQualifier,omitempty"`
+	GenerationQualifier        *string `json:"GenerationQualifier,omitempty"`
+	GivenName                  *string `json:"GivenName,omitempty"`
+	Initials                   *string `json:"Initials,omitempty"`
+	Locality                   *string `json:"Locality,omitempty"`
+	Organization               *string `json:"Organization,omitempty"`
+	OrganizationalUnit         *string `json:"OrganizationalUnit,omitempty"`
+	Pseudonym                  *string `json:"Pseudonym,omitempty"`
+	SerialNumber               *string `json:"SerialNumber,omitempty"`
+	State                      *string `json:"State,omitempty"`
+	Surname                    *string `json:"Surname,omitempty"`
+	Title                      *string `json:"Title,omitempty"`
 }

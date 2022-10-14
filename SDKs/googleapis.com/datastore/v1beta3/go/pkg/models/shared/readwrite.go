@@ -1,5 +1,5 @@
 package shared
 
 type ReadWrite struct {
-	PreviousTransaction *string `json:"previousTransaction"`
+	PreviousTransaction *string `json:"previousTransaction,omitempty"`
 }

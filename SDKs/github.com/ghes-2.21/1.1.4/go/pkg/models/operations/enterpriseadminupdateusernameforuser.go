@@ -14,8 +14,8 @@ type EnterpriseAdminUpdateUsernameForUserRequest struct {
 }
 
 type EnterpriseAdminUpdateUsernameForUser202ApplicationJSON struct {
-	Message *string `json:"message"`
-	URL     *string `json:"url"`
+	Message *string `json:"message,omitempty"`
+	URL     *string `json:"url,omitempty"`
 }
 
 type EnterpriseAdminUpdateUsernameForUserResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type DeviceFile struct {
-	ObbFile     *ObbFile     `json:"obbFile"`
-	RegularFile *RegularFile `json:"regularFile"`
+	ObbFile     *ObbFile     `json:"obbFile,omitempty"`
+	RegularFile *RegularFile `json:"regularFile,omitempty"`
 }

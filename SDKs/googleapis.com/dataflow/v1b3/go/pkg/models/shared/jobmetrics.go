@@ -1,6 +1,6 @@
 package shared
 
 type JobMetrics struct {
-	MetricTime *string        `json:"metricTime"`
-	Metrics    []MetricUpdate `json:"metrics"`
+	MetricTime *string        `json:"metricTime,omitempty"`
+	Metrics    []MetricUpdate `json:"metrics,omitempty"`
 }

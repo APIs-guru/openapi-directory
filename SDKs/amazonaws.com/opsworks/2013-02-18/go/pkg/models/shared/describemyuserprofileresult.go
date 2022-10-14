@@ -1,5 +1,5 @@
 package shared
 
 type DescribeMyUserProfileResult struct {
-	UserProfile *SelfUserProfile `json:"UserProfile"`
+	UserProfile *SelfUserProfile `json:"UserProfile,omitempty"`
 }

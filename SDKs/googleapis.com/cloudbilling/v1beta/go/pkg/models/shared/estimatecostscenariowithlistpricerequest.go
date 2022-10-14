@@ -1,5 +1,5 @@
 package shared
 
 type EstimateCostScenarioWithListPriceRequest struct {
-	CostScenario *CostScenario `json:"costScenario"`
+	CostScenario *CostScenario `json:"costScenario,omitempty"`
 }

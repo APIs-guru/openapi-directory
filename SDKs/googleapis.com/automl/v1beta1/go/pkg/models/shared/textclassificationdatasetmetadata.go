@@ -9,5 +9,5 @@ const (
 )
 
 type TextClassificationDatasetMetadata struct {
-	ClassificationType *TextClassificationDatasetMetadataClassificationTypeEnum `json:"classificationType"`
+	ClassificationType *TextClassificationDatasetMetadataClassificationTypeEnum `json:"classificationType,omitempty"`
 }

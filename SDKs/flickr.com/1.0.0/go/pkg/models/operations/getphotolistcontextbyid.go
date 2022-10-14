@@ -15,14 +15,14 @@ type GetPhotolistContextByIDRequest struct {
 }
 
 type GetPhotolistContextByID200ApplicationJSONCount struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GetPhotolistContextByID200ApplicationJSON struct {
-	Count     *GetPhotolistContextByID200ApplicationJSONCount `json:"count"`
-	Nextphoto *shared.ContextPhoto                            `json:"nextphoto"`
-	Prevphoto *shared.ContextPhoto                            `json:"prevphoto"`
-	Stat      *string                                         `json:"stat"`
+	Count     *GetPhotolistContextByID200ApplicationJSONCount `json:"count,omitempty"`
+	Nextphoto *shared.ContextPhoto                            `json:"nextphoto,omitempty"`
+	Prevphoto *shared.ContextPhoto                            `json:"prevphoto,omitempty"`
+	Stat      *string                                         `json:"stat,omitempty"`
 }
 
 type GetPhotolistContextByIDResponse struct {

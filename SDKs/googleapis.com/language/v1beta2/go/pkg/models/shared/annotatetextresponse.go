@@ -1,10 +1,10 @@
 package shared
 
 type AnnotateTextResponse struct {
-	Categories        []ClassificationCategory `json:"categories"`
-	DocumentSentiment *Sentiment               `json:"documentSentiment"`
-	Entities          []Entity                 `json:"entities"`
-	Language          *string                  `json:"language"`
-	Sentences         []Sentence               `json:"sentences"`
-	Tokens            []Token                  `json:"tokens"`
+	Categories        []ClassificationCategory `json:"categories,omitempty"`
+	DocumentSentiment *Sentiment               `json:"documentSentiment,omitempty"`
+	Entities          []Entity                 `json:"entities,omitempty"`
+	Language          *string                  `json:"language,omitempty"`
+	Sentences         []Sentence               `json:"sentences,omitempty"`
+	Tokens            []Token                  `json:"tokens,omitempty"`
 }

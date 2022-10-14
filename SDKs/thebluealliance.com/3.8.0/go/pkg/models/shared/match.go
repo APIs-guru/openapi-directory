@@ -1,8 +1,8 @@
 package shared
 
 type MatchAlliances struct {
-	Blue *MatchAlliance `json:"blue"`
-	Red  *MatchAlliance `json:"red"`
+	Blue *MatchAlliance `json:"blue,omitempty"`
+	Red  *MatchAlliance `json:"red,omitempty"`
 }
 
 type MatchCompLevelEnum string
@@ -16,8 +16,8 @@ const (
 )
 
 type MatchVideos struct {
-	Key  *string `json:"key"`
-	Type *string `json:"type"`
+	Key  *string `json:"key,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type MatchWinningAllianceEnum string
@@ -29,17 +29,17 @@ const (
 )
 
 type Match struct {
-	ActualTime      *int64                    `json:"actual_time"`
-	Alliances       *MatchAlliances           `json:"alliances"`
+	ActualTime      *int64                    `json:"actual_time,omitempty"`
+	Alliances       *MatchAlliances           `json:"alliances,omitempty"`
 	CompLevel       MatchCompLevelEnum        `json:"comp_level"`
 	EventKey        string                    `json:"event_key"`
 	Key             string                    `json:"key"`
 	MatchNumber     int64                     `json:"match_number"`
-	PostResultTime  *int64                    `json:"post_result_time"`
-	PredictedTime   *int64                    `json:"predicted_time"`
-	ScoreBreakdown  map[string]interface{}    `json:"score_breakdown"`
+	PostResultTime  *int64                    `json:"post_result_time,omitempty"`
+	PredictedTime   *int64                    `json:"predicted_time,omitempty"`
+	ScoreBreakdown  map[string]interface{}    `json:"score_breakdown,omitempty"`
 	SetNumber       int64                     `json:"set_number"`
-	Time            *int64                    `json:"time"`
-	Videos          []MatchVideos             `json:"videos"`
-	WinningAlliance *MatchWinningAllianceEnum `json:"winning_alliance"`
+	Time            *int64                    `json:"time,omitempty"`
+	Videos          []MatchVideos             `json:"videos,omitempty"`
+	WinningAlliance *MatchWinningAllianceEnum `json:"winning_alliance,omitempty"`
 }

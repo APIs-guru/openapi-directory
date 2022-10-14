@@ -6,7 +6,7 @@ type CreateNetworkWebhooksHTTPServerPathParams struct {
 
 type CreateNetworkWebhooksHTTPServerRequestBody struct {
 	Name         string  `json:"name"`
-	SharedSecret *string `json:"sharedSecret"`
+	SharedSecret *string `json:"sharedSecret,omitempty"`
 	URL          string  `json:"url"`
 }
 

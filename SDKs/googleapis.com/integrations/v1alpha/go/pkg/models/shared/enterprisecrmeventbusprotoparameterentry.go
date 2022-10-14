@@ -1,6 +1,6 @@
 package shared
 
 type EnterpriseCrmEventbusProtoParameterEntry struct {
-	Key   *string                                       `json:"key"`
-	Value *EnterpriseCrmEventbusProtoParameterValueType `json:"value"`
+	Key   *string                                       `json:"key,omitempty"`
+	Value *EnterpriseCrmEventbusProtoParameterValueType `json:"value,omitempty"`
 }

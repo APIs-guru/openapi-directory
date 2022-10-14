@@ -18,14 +18,14 @@ type GetUsersMeVideoPlaylistsVideosExistRequest struct {
 }
 
 type GetUsersMeVideoPlaylistsVideosExist200ApplicationJSONVideoID struct {
-	PlaylistElementID *int64 `json:"playlistElementId"`
-	PlaylistID        *int64 `json:"playlistId"`
-	StartTimestamp    *int64 `json:"startTimestamp"`
-	StopTimestamp     *int64 `json:"stopTimestamp"`
+	PlaylistElementID *int64 `json:"playlistElementId,omitempty"`
+	PlaylistID        *int64 `json:"playlistId,omitempty"`
+	StartTimestamp    *int64 `json:"startTimestamp,omitempty"`
+	StopTimestamp     *int64 `json:"stopTimestamp,omitempty"`
 }
 
 type GetUsersMeVideoPlaylistsVideosExist200ApplicationJSON struct {
-	VideoID []GetUsersMeVideoPlaylistsVideosExist200ApplicationJSONVideoID `json:"videoId"`
+	VideoID []GetUsersMeVideoPlaylistsVideosExist200ApplicationJSONVideoID `json:"videoId,omitempty"`
 }
 
 type GetUsersMeVideoPlaylistsVideosExistResponse struct {

@@ -19,20 +19,20 @@ const (
 )
 
 type Network struct {
-	Cidr               *string                     `json:"cidr"`
-	GatewayIP          *string                     `json:"gatewayIp"`
-	ID                 *string                     `json:"id"`
-	IPAddress          *string                     `json:"ipAddress"`
-	JumboFramesEnabled *bool                       `json:"jumboFramesEnabled"`
-	Labels             map[string]string           `json:"labels"`
-	MacAddress         []string                    `json:"macAddress"`
-	MountPoints        []NetworkMountPoint         `json:"mountPoints"`
-	Name               *string                     `json:"name"`
-	Pod                *string                     `json:"pod"`
-	Reservations       []NetworkAddressReservation `json:"reservations"`
-	ServicesCidr       *string                     `json:"servicesCidr"`
-	State              *NetworkStateEnum           `json:"state"`
-	Type               *NetworkTypeEnum            `json:"type"`
-	VlanID             *string                     `json:"vlanId"`
-	Vrf                *Vrf                        `json:"vrf"`
+	Cidr               *string                     `json:"cidr,omitempty"`
+	GatewayIP          *string                     `json:"gatewayIp,omitempty"`
+	ID                 *string                     `json:"id,omitempty"`
+	IPAddress          *string                     `json:"ipAddress,omitempty"`
+	JumboFramesEnabled *bool                       `json:"jumboFramesEnabled,omitempty"`
+	Labels             map[string]string           `json:"labels,omitempty"`
+	MacAddress         []string                    `json:"macAddress,omitempty"`
+	MountPoints        []NetworkMountPoint         `json:"mountPoints,omitempty"`
+	Name               *string                     `json:"name,omitempty"`
+	Pod                *string                     `json:"pod,omitempty"`
+	Reservations       []NetworkAddressReservation `json:"reservations,omitempty"`
+	ServicesCidr       *string                     `json:"servicesCidr,omitempty"`
+	State              *NetworkStateEnum           `json:"state,omitempty"`
+	Type               *NetworkTypeEnum            `json:"type,omitempty"`
+	VlanID             *string                     `json:"vlanId,omitempty"`
+	Vrf                *Vrf                        `json:"vrf,omitempty"`
 }

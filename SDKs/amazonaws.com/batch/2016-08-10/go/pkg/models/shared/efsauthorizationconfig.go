@@ -1,6 +1,6 @@
 package shared
 
 type EfsAuthorizationConfig struct {
-	AccessPointID *string                        `json:"accessPointId"`
-	Iam           *EfsAuthorizationConfigIamEnum `json:"iam"`
+	AccessPointID *string                        `json:"accessPointId,omitempty"`
+	Iam           *EfsAuthorizationConfigIamEnum `json:"iam,omitempty"`
 }

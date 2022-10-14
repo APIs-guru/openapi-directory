@@ -1,14 +1,14 @@
 package shared
 
 type AutoBranchCreationConfig struct {
-	BasicAuthCredentials       *string           `json:"basicAuthCredentials"`
-	BuildSpec                  *string           `json:"buildSpec"`
-	EnableAutoBuild            *bool             `json:"enableAutoBuild"`
-	EnableBasicAuth            *bool             `json:"enableBasicAuth"`
-	EnablePerformanceMode      *bool             `json:"enablePerformanceMode"`
-	EnablePullRequestPreview   *bool             `json:"enablePullRequestPreview"`
-	EnvironmentVariables       map[string]string `json:"environmentVariables"`
-	Framework                  *string           `json:"framework"`
-	PullRequestEnvironmentName *string           `json:"pullRequestEnvironmentName"`
-	Stage                      *StageEnum        `json:"stage"`
+	BasicAuthCredentials       *string           `json:"basicAuthCredentials,omitempty"`
+	BuildSpec                  *string           `json:"buildSpec,omitempty"`
+	EnableAutoBuild            *bool             `json:"enableAutoBuild,omitempty"`
+	EnableBasicAuth            *bool             `json:"enableBasicAuth,omitempty"`
+	EnablePerformanceMode      *bool             `json:"enablePerformanceMode,omitempty"`
+	EnablePullRequestPreview   *bool             `json:"enablePullRequestPreview,omitempty"`
+	EnvironmentVariables       map[string]string `json:"environmentVariables,omitempty"`
+	Framework                  *string           `json:"framework,omitempty"`
+	PullRequestEnvironmentName *string           `json:"pullRequestEnvironmentName,omitempty"`
+	Stage                      *StageEnum        `json:"stage,omitempty"`
 }

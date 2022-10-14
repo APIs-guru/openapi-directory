@@ -14,7 +14,7 @@ type GetAlbumByIDRequest struct {
 }
 
 type GetAlbumByID200ApplicationJSON struct {
-	Photoset []shared.Photo `json:"photoset"`
+	Photoset []shared.Photo `json:"photoset,omitempty"`
 }
 
 type GetAlbumByIDResponse struct {

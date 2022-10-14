@@ -1,7 +1,7 @@
 package shared
 
 type PermissionList struct {
-	Kind          *string      `json:"kind"`
-	NextPageToken *string      `json:"nextPageToken"`
-	Permissions   []Permission `json:"permissions"`
+	Kind          *string      `json:"kind,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
+	Permissions   []Permission `json:"permissions,omitempty"`
 }

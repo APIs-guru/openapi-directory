@@ -32,8 +32,8 @@ const (
 )
 
 type EnterpriseCrmLoggingGwsSanitizeOptions struct {
-	IsAlreadySanitized *bool                                                   `json:"isAlreadySanitized"`
-	LogType            []EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum     `json:"logType"`
-	Privacy            *EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum      `json:"privacy"`
-	SanitizeType       *EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum `json:"sanitizeType"`
+	IsAlreadySanitized *bool                                                   `json:"isAlreadySanitized,omitempty"`
+	LogType            []EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum     `json:"logType,omitempty"`
+	Privacy            *EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum      `json:"privacy,omitempty"`
+	SanitizeType       *EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum `json:"sanitizeType,omitempty"`
 }

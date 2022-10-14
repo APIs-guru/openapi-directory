@@ -1,6 +1,6 @@
 package shared
 
 type CompareFacesMatch struct {
-	Face       *ComparedFace `json:"Face"`
-	Similarity *float32      `json:"Similarity"`
+	Face       *ComparedFace `json:"Face,omitempty"`
+	Similarity *float32      `json:"Similarity,omitempty"`
 }

@@ -12,8 +12,8 @@ const (
 )
 
 type GoogleCloudChannelV1RenewalSettings struct {
-	EnableRenewal   *bool                                               `json:"enableRenewal"`
-	PaymentCycle    *GoogleCloudChannelV1Period                         `json:"paymentCycle"`
-	PaymentPlan     *GoogleCloudChannelV1RenewalSettingsPaymentPlanEnum `json:"paymentPlan"`
-	ResizeUnitCount *bool                                               `json:"resizeUnitCount"`
+	EnableRenewal   *bool                                               `json:"enableRenewal,omitempty"`
+	PaymentCycle    *GoogleCloudChannelV1Period                         `json:"paymentCycle,omitempty"`
+	PaymentPlan     *GoogleCloudChannelV1RenewalSettingsPaymentPlanEnum `json:"paymentPlan,omitempty"`
+	ResizeUnitCount *bool                                               `json:"resizeUnitCount,omitempty"`
 }

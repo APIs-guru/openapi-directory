@@ -15,9 +15,9 @@ type PutTelemetryRecordsHeaders struct {
 }
 
 type PutTelemetryRecordsRequestBody struct {
-	Ec2InstanceID    *string                  `json:"EC2InstanceId"`
-	Hostname         *string                  `json:"Hostname"`
-	ResourceArn      *string                  `json:"ResourceARN"`
+	Ec2InstanceID    *string                  `json:"EC2InstanceId,omitempty"`
+	Hostname         *string                  `json:"Hostname,omitempty"`
+	ResourceArn      *string                  `json:"ResourceARN,omitempty"`
 	TelemetryRecords []shared.TelemetryRecord `json:"TelemetryRecords"`
 }
 

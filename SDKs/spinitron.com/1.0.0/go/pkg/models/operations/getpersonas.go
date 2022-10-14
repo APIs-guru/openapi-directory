@@ -17,13 +17,13 @@ type GetPersonasRequest struct {
 }
 
 type GetPersonas200ApplicationJSONLinks struct {
-	Self *shared.Link `json:"self"`
+	Self *shared.Link `json:"self,omitempty"`
 }
 
 type GetPersonas200ApplicationJSON struct {
-	Links *GetPersonas200ApplicationJSONLinks `json:"_links"`
-	Meta  *shared.Pagination                  `json:"_meta"`
-	Items []shared.Persona                    `json:"items"`
+	Links *GetPersonas200ApplicationJSONLinks `json:"_links,omitempty"`
+	Meta  *shared.Pagination                  `json:"_meta,omitempty"`
+	Items []shared.Persona                    `json:"items,omitempty"`
 }
 
 type GetPersonasResponse struct {

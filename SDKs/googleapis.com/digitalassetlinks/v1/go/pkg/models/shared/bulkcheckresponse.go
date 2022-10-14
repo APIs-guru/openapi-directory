@@ -17,6 +17,6 @@ const (
 )
 
 type BulkCheckResponse struct {
-	BulkErrorCode *BulkCheckResponseBulkErrorCodeEnum `json:"bulkErrorCode"`
-	CheckResults  []CheckResponse                     `json:"checkResults"`
+	BulkErrorCode *BulkCheckResponseBulkErrorCodeEnum `json:"bulkErrorCode,omitempty"`
+	CheckResults  []CheckResponse                     `json:"checkResults,omitempty"`
 }

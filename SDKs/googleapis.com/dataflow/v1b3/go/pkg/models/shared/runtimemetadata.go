@@ -1,6 +1,6 @@
 package shared
 
 type RuntimeMetadata struct {
-	Parameters []ParameterMetadata `json:"parameters"`
-	SdkInfo    *SdkInfo            `json:"sdkInfo"`
+	Parameters []ParameterMetadata `json:"parameters,omitempty"`
+	SdkInfo    *SdkInfo            `json:"sdkInfo,omitempty"`
 }

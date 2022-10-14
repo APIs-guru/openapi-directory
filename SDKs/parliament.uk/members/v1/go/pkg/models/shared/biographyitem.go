@@ -5,11 +5,11 @@ import (
 )
 
 type BiographyItem struct {
-	AdditionalInfo     *string    `json:"additionalInfo"`
-	AdditionalInfoLink *string    `json:"additionalInfoLink"`
-	EndDate            *time.Time `json:"endDate"`
-	House              *int32     `json:"house"`
-	ID                 *int32     `json:"id"`
-	Name               *string    `json:"name"`
-	StartDate          *time.Time `json:"startDate"`
+	AdditionalInfo     *string    `json:"additionalInfo,omitempty"`
+	AdditionalInfoLink *string    `json:"additionalInfoLink,omitempty"`
+	EndDate            *time.Time `json:"endDate,omitempty"`
+	House              *int32     `json:"house,omitempty"`
+	ID                 *int32     `json:"id,omitempty"`
+	Name               *string    `json:"name,omitempty"`
+	StartDate          *time.Time `json:"startDate,omitempty"`
 }

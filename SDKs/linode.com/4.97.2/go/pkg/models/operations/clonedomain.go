@@ -32,7 +32,7 @@ type CloneDomainRequest struct {
 }
 
 type CloneDomainDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CloneDomainResponse struct {

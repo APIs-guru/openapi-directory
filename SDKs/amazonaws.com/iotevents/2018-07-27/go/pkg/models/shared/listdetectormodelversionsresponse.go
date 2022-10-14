@@ -1,6 +1,6 @@
 package shared
 
 type ListDetectorModelVersionsResponse struct {
-	DetectorModelVersionSummaries []DetectorModelVersionSummary `json:"detectorModelVersionSummaries"`
-	NextToken                     *string                       `json:"nextToken"`
+	DetectorModelVersionSummaries []DetectorModelVersionSummary `json:"detectorModelVersionSummaries,omitempty"`
+	NextToken                     *string                       `json:"nextToken,omitempty"`
 }

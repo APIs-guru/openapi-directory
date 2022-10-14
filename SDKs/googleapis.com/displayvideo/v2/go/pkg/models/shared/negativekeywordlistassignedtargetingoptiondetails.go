@@ -1,5 +1,5 @@
 package shared
 
 type NegativeKeywordListAssignedTargetingOptionDetails struct {
-	NegativeKeywordListID *string `json:"negativeKeywordListId"`
+	NegativeKeywordListID *string `json:"negativeKeywordListId,omitempty"`
 }

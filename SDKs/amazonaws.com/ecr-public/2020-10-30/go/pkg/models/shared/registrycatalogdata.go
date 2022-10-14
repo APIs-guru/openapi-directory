@@ -1,5 +1,5 @@
 package shared
 
 type RegistryCatalogData struct {
-	DisplayName *string `json:"displayName"`
+	DisplayName *string `json:"displayName,omitempty"`
 }

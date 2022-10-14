@@ -1,6 +1,6 @@
 package shared
 
 type TweetMetricsResponse struct {
-	Data   []TweetMetrics `json:"data"`
-	Errors []interface{}  `json:"errors"`
+	Data   []TweetMetrics `json:"data,omitempty"`
+	Errors []interface{}  `json:"errors,omitempty"`
 }

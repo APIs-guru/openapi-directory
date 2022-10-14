@@ -1,6 +1,6 @@
 package shared
 
 type SignJwtResponse struct {
-	KeyID     *string `json:"keyId"`
-	SignedJwt *string `json:"signedJwt"`
+	KeyID     *string `json:"keyId,omitempty"`
+	SignedJwt *string `json:"signedJwt,omitempty"`
 }

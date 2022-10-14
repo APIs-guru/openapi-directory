@@ -133,6 +133,6 @@ const (
 )
 
 type Transition struct {
-	In  *TransitionInEnum  `json:"in"`
-	Out *TransitionOutEnum `json:"out"`
+	In  *TransitionInEnum  `json:"in,omitempty"`
+	Out *TransitionOutEnum `json:"out,omitempty"`
 }

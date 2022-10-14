@@ -12,6 +12,6 @@ const (
 )
 
 type CreativeAssetID struct {
-	Name *string                  `json:"name"`
-	Type *CreativeAssetIDTypeEnum `json:"type"`
+	Name *string                  `json:"name,omitempty"`
+	Type *CreativeAssetIDTypeEnum `json:"type,omitempty"`
 }

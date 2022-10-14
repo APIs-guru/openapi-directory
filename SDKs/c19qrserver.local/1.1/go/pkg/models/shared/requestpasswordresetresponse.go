@@ -1,6 +1,6 @@
 package shared
 
 type RequestPasswordResetResponse struct {
-	Email *string `json:"email"`
-	GUID  *string `json:"guid"`
+	Email *string `json:"email,omitempty"`
+	GUID  *string `json:"guid,omitempty"`
 }

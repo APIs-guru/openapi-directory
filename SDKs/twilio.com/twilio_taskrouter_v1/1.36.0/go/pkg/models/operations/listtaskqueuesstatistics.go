@@ -35,18 +35,18 @@ type ListTaskQueuesStatisticsRequest struct {
 }
 
 type ListTaskQueuesStatistics200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListTaskQueuesStatistics200ApplicationJSONListTaskQueuesStatisticsResponse struct {
-	Meta                 *ListTaskQueuesStatistics200ApplicationJSONMeta             `json:"meta"`
-	TaskQueuesStatistics []shared.TaskrouterV1WorkspaceTaskQueueTaskQueuesStatistics `json:"task_queues_statistics"`
+	Meta                 *ListTaskQueuesStatistics200ApplicationJSONMeta             `json:"meta,omitempty"`
+	TaskQueuesStatistics []shared.TaskrouterV1WorkspaceTaskQueueTaskQueuesStatistics `json:"task_queues_statistics,omitempty"`
 }
 
 type ListTaskQueuesStatisticsResponse struct {

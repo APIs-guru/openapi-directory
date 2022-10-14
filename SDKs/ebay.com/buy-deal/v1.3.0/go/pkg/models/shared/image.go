@@ -1,8 +1,8 @@
 package shared
 
 type Image struct {
-	Height   *string `json:"height"`
-	ImageURL *string `json:"imageUrl"`
-	Text     *string `json:"text"`
-	Width    *string `json:"width"`
+	Height   *string `json:"height,omitempty"`
+	ImageURL *string `json:"imageUrl,omitempty"`
+	Text     *string `json:"text,omitempty"`
+	Width    *string `json:"width,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SiteType struct {
-	Description *string `json:"Description"`
-	ID          *string `json:"Id"`
+	Description *string `json:"Description,omitempty"`
+	ID          *string `json:"Id,omitempty"`
 }

@@ -1,16 +1,16 @@
 package shared
 
 type Contact struct {
-	AcceptCommands  []Command `json:"acceptCommands"`
-	AcceptTypes     []string  `json:"acceptTypes"`
-	DisplayName     *string   `json:"displayName"`
-	ID              *string   `json:"id"`
-	ImageUrls       []string  `json:"imageUrls"`
-	Kind            *string   `json:"kind"`
-	PhoneNumber     *string   `json:"phoneNumber"`
-	Priority        *int64    `json:"priority"`
-	SharingFeatures []string  `json:"sharingFeatures"`
-	Source          *string   `json:"source"`
-	SpeakableName   *string   `json:"speakableName"`
-	Type            *string   `json:"type"`
+	AcceptCommands  []Command `json:"acceptCommands,omitempty"`
+	AcceptTypes     []string  `json:"acceptTypes,omitempty"`
+	DisplayName     *string   `json:"displayName,omitempty"`
+	ID              *string   `json:"id,omitempty"`
+	ImageUrls       []string  `json:"imageUrls,omitempty"`
+	Kind            *string   `json:"kind,omitempty"`
+	PhoneNumber     *string   `json:"phoneNumber,omitempty"`
+	Priority        *int64    `json:"priority,omitempty"`
+	SharingFeatures []string  `json:"sharingFeatures,omitempty"`
+	Source          *string   `json:"source,omitempty"`
+	SpeakableName   *string   `json:"speakableName,omitempty"`
+	Type            *string   `json:"type,omitempty"`
 }

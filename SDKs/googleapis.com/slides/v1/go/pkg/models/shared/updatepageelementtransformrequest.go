@@ -9,7 +9,7 @@ const (
 )
 
 type UpdatePageElementTransformRequest struct {
-	ApplyMode *UpdatePageElementTransformRequestApplyModeEnum `json:"applyMode"`
-	ObjectID  *string                                         `json:"objectId"`
-	Transform *AffineTransform                                `json:"transform"`
+	ApplyMode *UpdatePageElementTransformRequestApplyModeEnum `json:"applyMode,omitempty"`
+	ObjectID  *string                                         `json:"objectId,omitempty"`
+	Transform *AffineTransform                                `json:"transform,omitempty"`
 }

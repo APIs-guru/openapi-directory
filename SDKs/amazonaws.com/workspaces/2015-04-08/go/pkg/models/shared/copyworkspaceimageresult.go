@@ -1,5 +1,5 @@
 package shared
 
 type CopyWorkspaceImageResult struct {
-	ImageID *string `json:"ImageId"`
+	ImageID *string `json:"ImageId,omitempty"`
 }

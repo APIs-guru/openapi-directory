@@ -12,11 +12,11 @@ const (
 )
 
 type Rule struct {
-	Action      *RuleActionEnum `json:"action"`
-	Conditions  []Condition     `json:"conditions"`
-	Description *string         `json:"description"`
-	In          []string        `json:"in"`
-	LogConfig   []LogConfig     `json:"logConfig"`
-	NotIn       []string        `json:"notIn"`
-	Permissions []string        `json:"permissions"`
+	Action      *RuleActionEnum `json:"action,omitempty"`
+	Conditions  []Condition     `json:"conditions,omitempty"`
+	Description *string         `json:"description,omitempty"`
+	In          []string        `json:"in,omitempty"`
+	LogConfig   []LogConfig     `json:"logConfig,omitempty"`
+	NotIn       []string        `json:"notIn,omitempty"`
+	Permissions []string        `json:"permissions,omitempty"`
 }

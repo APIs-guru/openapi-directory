@@ -1,5 +1,5 @@
 package shared
 
 type DeviceIPBlockCatalog struct {
-	IPBlocks []DeviceIPBlock `json:"ipBlocks"`
+	IPBlocks []DeviceIPBlock `json:"ipBlocks,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type PutPartnerEventsRequestEntry struct {
-	Detail     *string    `json:"Detail"`
-	DetailType *string    `json:"DetailType"`
-	Resources  []string   `json:"Resources"`
-	Source     *string    `json:"Source"`
-	Time       *time.Time `json:"Time"`
+	Detail     *string    `json:"Detail,omitempty"`
+	DetailType *string    `json:"DetailType,omitempty"`
+	Resources  []string   `json:"Resources,omitempty"`
+	Source     *string    `json:"Source,omitempty"`
+	Time       *time.Time `json:"Time,omitempty"`
 }

@@ -9,12 +9,12 @@ type GetDomainDomainnameRequest struct {
 }
 
 type GetDomainDomainname200ApplicationJSON struct {
-	AtID    *string       `json:"@id"`
-	Logo    *string       `json:"logo"`
-	Members []interface{} `json:"members"`
-	Name    *string       `json:"name"`
-	Profile *string       `json:"profile"`
-	Sub     *string       `json:"sub"`
+	AtID    *string       `json:"@id,omitempty"`
+	Logo    *string       `json:"logo,omitempty"`
+	Members []interface{} `json:"members,omitempty"`
+	Name    *string       `json:"name,omitempty"`
+	Profile *string       `json:"profile,omitempty"`
+	Sub     *string       `json:"sub,omitempty"`
 }
 
 type GetDomainDomainnameResponse struct {

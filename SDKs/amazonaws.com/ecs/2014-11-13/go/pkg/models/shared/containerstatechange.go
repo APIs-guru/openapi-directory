@@ -1,11 +1,11 @@
 package shared
 
 type ContainerStateChange struct {
-	ContainerName   *string          `json:"containerName"`
-	ExitCode        *int64           `json:"exitCode"`
-	ImageDigest     *string          `json:"imageDigest"`
-	NetworkBindings []NetworkBinding `json:"networkBindings"`
-	Reason          *string          `json:"reason"`
-	RuntimeID       *string          `json:"runtimeId"`
-	Status          *string          `json:"status"`
+	ContainerName   *string          `json:"containerName,omitempty"`
+	ExitCode        *int64           `json:"exitCode,omitempty"`
+	ImageDigest     *string          `json:"imageDigest,omitempty"`
+	NetworkBindings []NetworkBinding `json:"networkBindings,omitempty"`
+	Reason          *string          `json:"reason,omitempty"`
+	RuntimeID       *string          `json:"runtimeId,omitempty"`
+	Status          *string          `json:"status,omitempty"`
 }

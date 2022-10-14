@@ -5,7 +5,7 @@ import (
 )
 
 type ThingGroupMetadata struct {
-	CreationDate            *time.Time        `json:"creationDate"`
-	ParentGroupName         *string           `json:"parentGroupName"`
-	RootToParentThingGroups []GroupNameAndArn `json:"rootToParentThingGroups"`
+	CreationDate            *time.Time        `json:"creationDate,omitempty"`
+	ParentGroupName         *string           `json:"parentGroupName,omitempty"`
+	RootToParentThingGroups []GroupNameAndArn `json:"rootToParentThingGroups,omitempty"`
 }

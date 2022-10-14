@@ -1,13 +1,13 @@
 package shared
 
 type FunctionConfiguration struct {
-	DataSourceName          *string     `json:"dataSourceName"`
-	Description             *string     `json:"description"`
-	FunctionArn             *string     `json:"functionArn"`
-	FunctionID              *string     `json:"functionId"`
-	FunctionVersion         *string     `json:"functionVersion"`
-	Name                    *string     `json:"name"`
-	RequestMappingTemplate  *string     `json:"requestMappingTemplate"`
-	ResponseMappingTemplate *string     `json:"responseMappingTemplate"`
-	SyncConfig              *SyncConfig `json:"syncConfig"`
+	DataSourceName          *string     `json:"dataSourceName,omitempty"`
+	Description             *string     `json:"description,omitempty"`
+	FunctionArn             *string     `json:"functionArn,omitempty"`
+	FunctionID              *string     `json:"functionId,omitempty"`
+	FunctionVersion         *string     `json:"functionVersion,omitempty"`
+	Name                    *string     `json:"name,omitempty"`
+	RequestMappingTemplate  *string     `json:"requestMappingTemplate,omitempty"`
+	ResponseMappingTemplate *string     `json:"responseMappingTemplate,omitempty"`
+	SyncConfig              *SyncConfig `json:"syncConfig,omitempty"`
 }

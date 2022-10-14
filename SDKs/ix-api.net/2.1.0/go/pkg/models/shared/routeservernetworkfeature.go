@@ -30,10 +30,10 @@ type RouteServerNetworkFeature struct {
 	ID                       string                                                  `json:"id"`
 	IPV4                     string                                                  `json:"ip_v4"`
 	IPV6                     string                                                  `json:"ip_v6"`
-	LookingGlassURL          *string                                                 `json:"looking_glass_url"`
+	LookingGlassURL          *string                                                 `json:"looking_glass_url,omitempty"`
 	Name                     string                                                  `json:"name"`
 	NetworkService           string                                                  `json:"network_service"`
-	NfcRequiredContactRoles  []string                                                `json:"nfc_required_contact_roles"`
+	NfcRequiredContactRoles  []string                                                `json:"nfc_required_contact_roles,omitempty"`
 	Required                 bool                                                    `json:"required"`
 	SessionMode              RouteServerNetworkFeatureSessionModeEnum                `json:"session_mode"`
 	Type                     string                                                  `json:"type"`

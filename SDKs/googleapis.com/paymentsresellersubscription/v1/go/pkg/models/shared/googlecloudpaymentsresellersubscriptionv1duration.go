@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1Duration struct {
-	Count *int32                                                     `json:"count"`
-	Unit  *GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum `json:"unit"`
+	Count *int32                                                     `json:"count,omitempty"`
+	Unit  *GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum `json:"unit,omitempty"`
 }

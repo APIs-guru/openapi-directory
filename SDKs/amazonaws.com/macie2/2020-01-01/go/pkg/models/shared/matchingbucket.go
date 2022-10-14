@@ -1,15 +1,15 @@
 package shared
 
 type MatchingBucket struct {
-	AccountID                       *string                      `json:"accountId"`
-	BucketName                      *string                      `json:"bucketName"`
-	ClassifiableObjectCount         *int64                       `json:"classifiableObjectCount"`
-	ClassifiableSizeInBytes         *int64                       `json:"classifiableSizeInBytes"`
-	JobDetails                      *JobDetails                  `json:"jobDetails"`
-	ObjectCount                     *int64                       `json:"objectCount"`
-	ObjectCountByEncryptionType     *ObjectCountByEncryptionType `json:"objectCountByEncryptionType"`
-	SizeInBytes                     *int64                       `json:"sizeInBytes"`
-	SizeInBytesCompressed           *int64                       `json:"sizeInBytesCompressed"`
-	UnclassifiableObjectCount       *ObjectLevelStatistics       `json:"unclassifiableObjectCount"`
-	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics       `json:"unclassifiableObjectSizeInBytes"`
+	AccountID                       *string                      `json:"accountId,omitempty"`
+	BucketName                      *string                      `json:"bucketName,omitempty"`
+	ClassifiableObjectCount         *int64                       `json:"classifiableObjectCount,omitempty"`
+	ClassifiableSizeInBytes         *int64                       `json:"classifiableSizeInBytes,omitempty"`
+	JobDetails                      *JobDetails                  `json:"jobDetails,omitempty"`
+	ObjectCount                     *int64                       `json:"objectCount,omitempty"`
+	ObjectCountByEncryptionType     *ObjectCountByEncryptionType `json:"objectCountByEncryptionType,omitempty"`
+	SizeInBytes                     *int64                       `json:"sizeInBytes,omitempty"`
+	SizeInBytesCompressed           *int64                       `json:"sizeInBytesCompressed,omitempty"`
+	UnclassifiableObjectCount       *ObjectLevelStatistics       `json:"unclassifiableObjectCount,omitempty"`
+	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics       `json:"unclassifiableObjectSizeInBytes,omitempty"`
 }

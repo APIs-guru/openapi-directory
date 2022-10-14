@@ -5,9 +5,9 @@ import (
 )
 
 type OpsMetadata struct {
-	CreationDate     *time.Time `json:"CreationDate"`
-	LastModifiedDate *time.Time `json:"LastModifiedDate"`
-	LastModifiedUser *string    `json:"LastModifiedUser"`
-	OpsMetadataArn   *string    `json:"OpsMetadataArn"`
-	ResourceID       *string    `json:"ResourceId"`
+	CreationDate     *time.Time `json:"CreationDate,omitempty"`
+	LastModifiedDate *time.Time `json:"LastModifiedDate,omitempty"`
+	LastModifiedUser *string    `json:"LastModifiedUser,omitempty"`
+	OpsMetadataArn   *string    `json:"OpsMetadataArn,omitempty"`
+	ResourceID       *string    `json:"ResourceId,omitempty"`
 }

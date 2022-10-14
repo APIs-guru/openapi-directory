@@ -18,8 +18,8 @@ const (
 )
 
 type IlpmtRequestBody struct {
-	CertificateParameters *IlpmtRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *IlpmtRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                IlpmtRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Ilpmt400ApplicationJSON struct {
-	Error            *Ilpmt400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ilpmt400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ilpmt400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ilpmt400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ilpmt401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Ilpmt401ApplicationJSON struct {
-	Error            *Ilpmt401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ilpmt401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ilpmt401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ilpmt401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ilpmt404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Ilpmt404ApplicationJSON struct {
-	Error            *Ilpmt404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ilpmt404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ilpmt404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ilpmt404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ilpmt500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Ilpmt500ApplicationJSON struct {
-	Error            *Ilpmt500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ilpmt500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ilpmt500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ilpmt500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ilpmt502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Ilpmt502ApplicationJSON struct {
-	Error            *Ilpmt502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ilpmt502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ilpmt502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ilpmt502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ilpmt503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Ilpmt503ApplicationJSON struct {
-	Error            *Ilpmt503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ilpmt503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ilpmt503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ilpmt503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ilpmt504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Ilpmt504ApplicationJSON struct {
-	Error            *Ilpmt504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ilpmt504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ilpmt504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ilpmt504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type IlpmtResponse struct {

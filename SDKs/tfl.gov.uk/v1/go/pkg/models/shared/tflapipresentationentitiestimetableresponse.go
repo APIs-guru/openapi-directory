@@ -1,13 +1,13 @@
 package shared
 
 type TflAPIPresentationEntitiesTimetableResponse struct {
-	Direction          *string                                             `json:"direction"`
-	Disambiguation     *TflAPIPresentationEntitiesTimetablesDisambiguation `json:"disambiguation"`
-	LineID             *string                                             `json:"lineId"`
-	LineName           *string                                             `json:"lineName"`
-	PdfURL             *string                                             `json:"pdfUrl"`
-	Stations           []TflAPIPresentationEntitiesMatchedStop             `json:"stations"`
-	StatusErrorMessage *string                                             `json:"statusErrorMessage"`
-	Stops              []TflAPIPresentationEntitiesMatchedStop             `json:"stops"`
-	Timetable          *TflAPIPresentationEntitiesTimetable                `json:"timetable"`
+	Direction          *string                                             `json:"direction,omitempty"`
+	Disambiguation     *TflAPIPresentationEntitiesTimetablesDisambiguation `json:"disambiguation,omitempty"`
+	LineID             *string                                             `json:"lineId,omitempty"`
+	LineName           *string                                             `json:"lineName,omitempty"`
+	PdfURL             *string                                             `json:"pdfUrl,omitempty"`
+	Stations           []TflAPIPresentationEntitiesMatchedStop             `json:"stations,omitempty"`
+	StatusErrorMessage *string                                             `json:"statusErrorMessage,omitempty"`
+	Stops              []TflAPIPresentationEntitiesMatchedStop             `json:"stops,omitempty"`
+	Timetable          *TflAPIPresentationEntitiesTimetable                `json:"timetable,omitempty"`
 }

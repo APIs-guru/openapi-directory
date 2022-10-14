@@ -1,7 +1,7 @@
 package shared
 
 type ListMedicalTranscriptionJobsResponse struct {
-	MedicalTranscriptionJobSummaries []MedicalTranscriptionJobSummary `json:"MedicalTranscriptionJobSummaries"`
-	NextToken                        *string                          `json:"NextToken"`
-	Status                           *TranscriptionJobStatusEnum      `json:"Status"`
+	MedicalTranscriptionJobSummaries []MedicalTranscriptionJobSummary `json:"MedicalTranscriptionJobSummaries,omitempty"`
+	NextToken                        *string                          `json:"NextToken,omitempty"`
+	Status                           *TranscriptionJobStatusEnum      `json:"Status,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ClassificationCategory struct {
-	Confidence *float32 `json:"confidence"`
-	Name       *string  `json:"name"`
+	Confidence *float32 `json:"confidence,omitempty"`
+	Name       *string  `json:"name,omitempty"`
 }

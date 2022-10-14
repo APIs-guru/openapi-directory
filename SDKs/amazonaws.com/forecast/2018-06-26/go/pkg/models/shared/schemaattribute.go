@@ -1,6 +1,6 @@
 package shared
 
 type SchemaAttribute struct {
-	AttributeName *string            `json:"AttributeName"`
-	AttributeType *AttributeTypeEnum `json:"AttributeType"`
+	AttributeName *string            `json:"AttributeName,omitempty"`
+	AttributeType *AttributeTypeEnum `json:"AttributeType,omitempty"`
 }

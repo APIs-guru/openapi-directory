@@ -9,6 +9,6 @@ const (
 )
 
 type CarrierAndIspTargetingOptionDetails struct {
-	DisplayName *string                                      `json:"displayName"`
-	Type        *CarrierAndIspTargetingOptionDetailsTypeEnum `json:"type"`
+	DisplayName *string                                      `json:"displayName,omitempty"`
+	Type        *CarrierAndIspTargetingOptionDetailsTypeEnum `json:"type,omitempty"`
 }

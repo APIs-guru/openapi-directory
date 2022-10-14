@@ -1,5 +1,5 @@
 package shared
 
 type CreateCustomKeyStoreResponse struct {
-	CustomKeyStoreID *string `json:"CustomKeyStoreId"`
+	CustomKeyStoreID *string `json:"CustomKeyStoreId,omitempty"`
 }

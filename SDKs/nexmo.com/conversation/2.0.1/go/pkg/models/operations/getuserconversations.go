@@ -13,19 +13,19 @@ type GetuserConversationsRequest struct {
 }
 
 type GetuserConversations200ApplicationJSONTimestamp struct {
-	Created *string `json:"created"`
+	Created *string `json:"created,omitempty"`
 }
 
 type GetuserConversations200ApplicationJSON struct {
-	DisplayName    *string                                          `json:"display_name"`
-	Href           *string                                          `json:"href"`
-	ID             *string                                          `json:"id"`
-	ImageURL       *string                                          `json:"image_url"`
-	MemberID       *string                                          `json:"member_id"`
-	Name           *string                                          `json:"name"`
-	SequenceNumber *int64                                           `json:"sequence_number"`
-	State          *shared.MemberStateEnum                          `json:"state"`
-	Timestamp      *GetuserConversations200ApplicationJSONTimestamp `json:"timestamp"`
+	DisplayName    *string                                          `json:"display_name,omitempty"`
+	Href           *string                                          `json:"href,omitempty"`
+	ID             *string                                          `json:"id,omitempty"`
+	ImageURL       *string                                          `json:"image_url,omitempty"`
+	MemberID       *string                                          `json:"member_id,omitempty"`
+	Name           *string                                          `json:"name,omitempty"`
+	SequenceNumber *int64                                           `json:"sequence_number,omitempty"`
+	State          *shared.MemberStateEnum                          `json:"state,omitempty"`
+	Timestamp      *GetuserConversations200ApplicationJSONTimestamp `json:"timestamp,omitempty"`
 }
 
 type GetuserConversationsResponse struct {

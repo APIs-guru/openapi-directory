@@ -19,10 +19,10 @@ const (
 )
 
 type Entity struct {
-	Mentions  []EntityMention   `json:"mentions"`
-	Metadata  map[string]string `json:"metadata"`
-	Name      *string           `json:"name"`
-	Salience  *float32          `json:"salience"`
-	Sentiment *Sentiment        `json:"sentiment"`
-	Type      *EntityTypeEnum   `json:"type"`
+	Mentions  []EntityMention   `json:"mentions,omitempty"`
+	Metadata  map[string]string `json:"metadata,omitempty"`
+	Name      *string           `json:"name,omitempty"`
+	Salience  *float32          `json:"salience,omitempty"`
+	Sentiment *Sentiment        `json:"sentiment,omitempty"`
+	Type      *EntityTypeEnum   `json:"type,omitempty"`
 }

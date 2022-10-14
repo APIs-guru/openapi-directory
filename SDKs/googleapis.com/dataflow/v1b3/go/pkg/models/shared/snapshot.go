@@ -12,14 +12,14 @@ const (
 )
 
 type Snapshot struct {
-	CreationTime   *string                  `json:"creationTime"`
-	Description    *string                  `json:"description"`
-	DiskSizeBytes  *string                  `json:"diskSizeBytes"`
-	ID             *string                  `json:"id"`
-	ProjectID      *string                  `json:"projectId"`
-	PubsubMetadata []PubsubSnapshotMetadata `json:"pubsubMetadata"`
-	Region         *string                  `json:"region"`
-	SourceJobID    *string                  `json:"sourceJobId"`
-	State          *SnapshotStateEnum       `json:"state"`
-	TTL            *string                  `json:"ttl"`
+	CreationTime   *string                  `json:"creationTime,omitempty"`
+	Description    *string                  `json:"description,omitempty"`
+	DiskSizeBytes  *string                  `json:"diskSizeBytes,omitempty"`
+	ID             *string                  `json:"id,omitempty"`
+	ProjectID      *string                  `json:"projectId,omitempty"`
+	PubsubMetadata []PubsubSnapshotMetadata `json:"pubsubMetadata,omitempty"`
+	Region         *string                  `json:"region,omitempty"`
+	SourceJobID    *string                  `json:"sourceJobId,omitempty"`
+	State          *SnapshotStateEnum       `json:"state,omitempty"`
+	TTL            *string                  `json:"ttl,omitempty"`
 }

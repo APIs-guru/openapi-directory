@@ -1,11 +1,11 @@
 package shared
 
 type ItvPurchaseWithOfferResponse struct {
-	ClientSecret    *string `json:"clientSecret"`
-	CustomerID      *string `json:"customerId"`
-	IntentID        *string `json:"intentId"`
-	IntentType      *string `json:"intentType"`
-	PaymentMethodID *string `json:"paymentMethodId"`
-	Status          *string `json:"status"`
-	SubscriptionID  *string `json:"subscriptionId"`
+	ClientSecret    *string `json:"clientSecret,omitempty"`
+	CustomerID      *string `json:"customerId,omitempty"`
+	IntentID        *string `json:"intentId,omitempty"`
+	IntentType      *string `json:"intentType,omitempty"`
+	PaymentMethodID *string `json:"paymentMethodId,omitempty"`
+	Status          *string `json:"status,omitempty"`
+	SubscriptionID  *string `json:"subscriptionId,omitempty"`
 }

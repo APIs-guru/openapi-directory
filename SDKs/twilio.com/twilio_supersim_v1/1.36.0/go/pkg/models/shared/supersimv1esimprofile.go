@@ -5,16 +5,16 @@ import (
 )
 
 type SupersimV1EsimProfile struct {
-	AccountSid      *string                    `json:"account_sid"`
-	DateCreated     *time.Time                 `json:"date_created"`
-	DateUpdated     *time.Time                 `json:"date_updated"`
-	Eid             *string                    `json:"eid"`
-	ErrorCode       *string                    `json:"error_code"`
-	ErrorMessage    *string                    `json:"error_message"`
-	Iccid           *string                    `json:"iccid"`
-	Sid             *string                    `json:"sid"`
-	SimSid          *string                    `json:"sim_sid"`
-	SmdpPlusAddress *string                    `json:"smdp_plus_address"`
-	Status          *EsimProfileEnumStatusEnum `json:"status"`
-	URL             *string                    `json:"url"`
+	AccountSid      *string                    `json:"account_sid,omitempty"`
+	DateCreated     *time.Time                 `json:"date_created,omitempty"`
+	DateUpdated     *time.Time                 `json:"date_updated,omitempty"`
+	Eid             *string                    `json:"eid,omitempty"`
+	ErrorCode       *string                    `json:"error_code,omitempty"`
+	ErrorMessage    *string                    `json:"error_message,omitempty"`
+	Iccid           *string                    `json:"iccid,omitempty"`
+	Sid             *string                    `json:"sid,omitempty"`
+	SimSid          *string                    `json:"sim_sid,omitempty"`
+	SmdpPlusAddress *string                    `json:"smdp_plus_address,omitempty"`
+	Status          *EsimProfileEnumStatusEnum `json:"status,omitempty"`
+	URL             *string                    `json:"url,omitempty"`
 }

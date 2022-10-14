@@ -40,24 +40,24 @@ const (
 )
 
 type GetPaymentDetails200ApplicationJSONPaymentRequest struct {
-	AdditionalFields   *string                                                                                                  `json:"additionalFields"`
-	Amount             *int64                                                                                                   `json:"amount"`
-	CollectFields      *string                                                                                                  `json:"collectFields"`
-	Currency           *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency"`
-	Description        *string                                                                                                  `json:"description"`
-	Expiry             *time.Time                                                                                               `json:"expiry"`
-	IcanTo             *int64                                                                                                   `json:"icanTo"`
-	MandatoryFields    *string                                                                                                  `json:"mandatoryFields"`
-	MaxNumberPayments  *int64                                                                                                   `json:"maxNumberPayments"`
-	MyRef              *string                                                                                                  `json:"myRef"`
-	OrderDetails       *shared.OnepaymentrequestsPostRequestBodyContentApplication1jsonSchemaPropertiesOrderDetails             `json:"orderDetails"`
-	PaymentRequestCode *string                                                                                                  `json:"paymentRequestCode"`
-	PaymentUUID        *string                                                                                                  `json:"paymentUuid"`
-	ReturnURL          *string                                                                                                  `json:"returnUrl"`
-	Status             *GetPaymentDetails200ApplicationJSONStatusEnum                                                           `json:"status"`
-	TransactionType    *GetPaymentDetails200ApplicationJSONTransactionTypeEnum                                                  `json:"transactionType"`
-	Type               *GetPaymentDetails200ApplicationJSONTypeEnum                                                             `json:"type"`
-	WebhookURL         *string                                                                                                  `json:"webhookUrl"`
+	AdditionalFields   *string                                                                                                  `json:"additionalFields,omitempty"`
+	Amount             *int64                                                                                                   `json:"amount,omitempty"`
+	CollectFields      *string                                                                                                  `json:"collectFields,omitempty"`
+	Currency           *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
+	Description        *string                                                                                                  `json:"description,omitempty"`
+	Expiry             *time.Time                                                                                               `json:"expiry,omitempty"`
+	IcanTo             *int64                                                                                                   `json:"icanTo,omitempty"`
+	MandatoryFields    *string                                                                                                  `json:"mandatoryFields,omitempty"`
+	MaxNumberPayments  *int64                                                                                                   `json:"maxNumberPayments,omitempty"`
+	MyRef              *string                                                                                                  `json:"myRef,omitempty"`
+	OrderDetails       *shared.OnepaymentrequestsPostRequestBodyContentApplication1jsonSchemaPropertiesOrderDetails             `json:"orderDetails,omitempty"`
+	PaymentRequestCode *string                                                                                                  `json:"paymentRequestCode,omitempty"`
+	PaymentUUID        *string                                                                                                  `json:"paymentUuid,omitempty"`
+	ReturnURL          *string                                                                                                  `json:"returnUrl,omitempty"`
+	Status             *GetPaymentDetails200ApplicationJSONStatusEnum                                                           `json:"status,omitempty"`
+	TransactionType    *GetPaymentDetails200ApplicationJSONTransactionTypeEnum                                                  `json:"transactionType,omitempty"`
+	Type               *GetPaymentDetails200ApplicationJSONTypeEnum                                                             `json:"type,omitempty"`
+	WebhookURL         *string                                                                                                  `json:"webhookUrl,omitempty"`
 }
 
 type GetPaymentDetailsResponse struct {

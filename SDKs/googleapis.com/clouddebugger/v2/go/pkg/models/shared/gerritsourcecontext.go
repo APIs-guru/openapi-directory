@@ -1,9 +1,9 @@
 package shared
 
 type GerritSourceContext struct {
-	AliasContext  *AliasContext `json:"aliasContext"`
-	AliasName     *string       `json:"aliasName"`
-	GerritProject *string       `json:"gerritProject"`
-	HostURI       *string       `json:"hostUri"`
-	RevisionID    *string       `json:"revisionId"`
+	AliasContext  *AliasContext `json:"aliasContext,omitempty"`
+	AliasName     *string       `json:"aliasName,omitempty"`
+	GerritProject *string       `json:"gerritProject,omitempty"`
+	HostURI       *string       `json:"hostUri,omitempty"`
+	RevisionID    *string       `json:"revisionId,omitempty"`
 }

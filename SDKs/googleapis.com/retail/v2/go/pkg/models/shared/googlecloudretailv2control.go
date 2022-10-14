@@ -17,10 +17,10 @@ const (
 )
 
 type GoogleCloudRetailV2Control struct {
-	AssociatedServingConfigIds []string                                              `json:"associatedServingConfigIds"`
-	DisplayName                *string                                               `json:"displayName"`
-	Name                       *string                                               `json:"name"`
-	Rule                       *GoogleCloudRetailV2Rule                              `json:"rule"`
-	SearchSolutionUseCase      []GoogleCloudRetailV2ControlSearchSolutionUseCaseEnum `json:"searchSolutionUseCase"`
-	SolutionTypes              []GoogleCloudRetailV2ControlSolutionTypesEnum         `json:"solutionTypes"`
+	AssociatedServingConfigIds []string                                              `json:"associatedServingConfigIds,omitempty"`
+	DisplayName                *string                                               `json:"displayName,omitempty"`
+	Name                       *string                                               `json:"name,omitempty"`
+	Rule                       *GoogleCloudRetailV2Rule                              `json:"rule,omitempty"`
+	SearchSolutionUseCase      []GoogleCloudRetailV2ControlSearchSolutionUseCaseEnum `json:"searchSolutionUseCase,omitempty"`
+	SolutionTypes              []GoogleCloudRetailV2ControlSolutionTypesEnum         `json:"solutionTypes,omitempty"`
 }

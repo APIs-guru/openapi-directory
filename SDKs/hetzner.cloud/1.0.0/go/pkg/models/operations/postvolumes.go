@@ -1,12 +1,12 @@
 package operations
 
 type PostVolumesRequestBodyCreateVolumeRequest struct {
-	Automount *bool                  `json:"automount"`
-	Format    *string                `json:"format"`
-	Labels    map[string]interface{} `json:"labels"`
-	Location  *string                `json:"location"`
+	Automount *bool                  `json:"automount,omitempty"`
+	Format    *string                `json:"format,omitempty"`
+	Labels    map[string]interface{} `json:"labels,omitempty"`
+	Location  *string                `json:"location,omitempty"`
 	Name      string                 `json:"name"`
-	Server    *int64                 `json:"server"`
+	Server    *int64                 `json:"server,omitempty"`
 	Size      int64                  `json:"size"`
 }
 

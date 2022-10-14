@@ -10,7 +10,7 @@ type CreatePortfolioQueryParams struct {
 }
 
 type CreatePortfolioRequestBody struct {
-	Data *shared.PortfolioRequest `json:"data"`
+	Data *shared.PortfolioRequest `json:"data,omitempty"`
 }
 
 type CreatePortfolioRequest struct {
@@ -19,7 +19,7 @@ type CreatePortfolioRequest struct {
 }
 
 type CreatePortfolio201ApplicationJSON struct {
-	Data *shared.PortfolioResponse `json:"data"`
+	Data *shared.PortfolioResponse `json:"data,omitempty"`
 }
 
 type CreatePortfolioResponse struct {

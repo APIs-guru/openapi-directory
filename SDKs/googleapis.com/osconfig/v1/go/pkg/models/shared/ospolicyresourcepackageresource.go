@@ -9,12 +9,12 @@ const (
 )
 
 type OsPolicyResourcePackageResource struct {
-	Apt          *OsPolicyResourcePackageResourceApt              `json:"apt"`
-	Deb          *OsPolicyResourcePackageResourceDeb              `json:"deb"`
-	DesiredState *OsPolicyResourcePackageResourceDesiredStateEnum `json:"desiredState"`
-	Googet       *OsPolicyResourcePackageResourceGooGet           `json:"googet"`
-	Msi          *OsPolicyResourcePackageResourceMsi              `json:"msi"`
-	Rpm          *OsPolicyResourcePackageResourceRpm              `json:"rpm"`
-	Yum          *OsPolicyResourcePackageResourceYum              `json:"yum"`
-	Zypper       *OsPolicyResourcePackageResourceZypper           `json:"zypper"`
+	Apt          *OsPolicyResourcePackageResourceApt              `json:"apt,omitempty"`
+	Deb          *OsPolicyResourcePackageResourceDeb              `json:"deb,omitempty"`
+	DesiredState *OsPolicyResourcePackageResourceDesiredStateEnum `json:"desiredState,omitempty"`
+	Googet       *OsPolicyResourcePackageResourceGooGet           `json:"googet,omitempty"`
+	Msi          *OsPolicyResourcePackageResourceMsi              `json:"msi,omitempty"`
+	Rpm          *OsPolicyResourcePackageResourceRpm              `json:"rpm,omitempty"`
+	Yum          *OsPolicyResourcePackageResourceYum              `json:"yum,omitempty"`
+	Zypper       *OsPolicyResourcePackageResourceZypper           `json:"zypper,omitempty"`
 }

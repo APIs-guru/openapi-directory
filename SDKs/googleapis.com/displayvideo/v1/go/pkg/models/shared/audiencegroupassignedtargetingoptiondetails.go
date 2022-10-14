@@ -1,10 +1,10 @@
 package shared
 
 type AudienceGroupAssignedTargetingOptionDetails struct {
-	ExcludedFirstAndThirdPartyAudienceGroup  *FirstAndThirdPartyAudienceGroup  `json:"excludedFirstAndThirdPartyAudienceGroup"`
-	ExcludedGoogleAudienceGroup              *GoogleAudienceGroup              `json:"excludedGoogleAudienceGroup"`
-	IncludedCombinedAudienceGroup            *CombinedAudienceGroup            `json:"includedCombinedAudienceGroup"`
-	IncludedCustomListGroup                  *CustomListGroup                  `json:"includedCustomListGroup"`
-	IncludedFirstAndThirdPartyAudienceGroups []FirstAndThirdPartyAudienceGroup `json:"includedFirstAndThirdPartyAudienceGroups"`
-	IncludedGoogleAudienceGroup              *GoogleAudienceGroup              `json:"includedGoogleAudienceGroup"`
+	ExcludedFirstAndThirdPartyAudienceGroup  *FirstAndThirdPartyAudienceGroup  `json:"excludedFirstAndThirdPartyAudienceGroup,omitempty"`
+	ExcludedGoogleAudienceGroup              *GoogleAudienceGroup              `json:"excludedGoogleAudienceGroup,omitempty"`
+	IncludedCombinedAudienceGroup            *CombinedAudienceGroup            `json:"includedCombinedAudienceGroup,omitempty"`
+	IncludedCustomListGroup                  *CustomListGroup                  `json:"includedCustomListGroup,omitempty"`
+	IncludedFirstAndThirdPartyAudienceGroups []FirstAndThirdPartyAudienceGroup `json:"includedFirstAndThirdPartyAudienceGroups,omitempty"`
+	IncludedGoogleAudienceGroup              *GoogleAudienceGroup              `json:"includedGoogleAudienceGroup,omitempty"`
 }

@@ -18,12 +18,12 @@ const (
 )
 
 type Issue struct {
-	Attribute   *string              `json:"attribute"`
-	Description *string              `json:"description"`
-	Destination *string              `json:"destination"`
-	Resolution  *IssueResolutionEnum `json:"resolution"`
-	Severity    *IssueSeverityEnum   `json:"severity"`
-	Timestamp   *string              `json:"timestamp"`
-	Title       *string              `json:"title"`
-	Type        *string              `json:"type"`
+	Attribute   *string              `json:"attribute,omitempty"`
+	Description *string              `json:"description,omitempty"`
+	Destination *string              `json:"destination,omitempty"`
+	Resolution  *IssueResolutionEnum `json:"resolution,omitempty"`
+	Severity    *IssueSeverityEnum   `json:"severity,omitempty"`
+	Timestamp   *string              `json:"timestamp,omitempty"`
+	Title       *string              `json:"title,omitempty"`
+	Type        *string              `json:"type,omitempty"`
 }

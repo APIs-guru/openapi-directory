@@ -11,6 +11,6 @@ const (
 )
 
 type Score struct {
-	Type  *ScoreTypeEnum `json:"type"`
-	Value *float32       `json:"value"`
+	Type  *ScoreTypeEnum `json:"type,omitempty"`
+	Value *float32       `json:"value,omitempty"`
 }

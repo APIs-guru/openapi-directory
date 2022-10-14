@@ -19,8 +19,8 @@ type EnterpriseAdminListSelfHostedRunnersForEnterpriseRequest struct {
 }
 
 type EnterpriseAdminListSelfHostedRunnersForEnterprise200ApplicationJSON struct {
-	Runners    []shared.RunnerNoLabels `json:"runners"`
-	TotalCount *float64                `json:"total_count"`
+	Runners    []shared.RunnerNoLabels `json:"runners,omitempty"`
+	TotalCount *float64                `json:"total_count,omitempty"`
 }
 
 type EnterpriseAdminListSelfHostedRunnersForEnterpriseResponse struct {

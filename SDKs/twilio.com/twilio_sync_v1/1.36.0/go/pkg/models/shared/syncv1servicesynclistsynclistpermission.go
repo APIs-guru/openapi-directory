@@ -1,12 +1,12 @@
 package shared
 
 type SyncV1ServiceSyncListSyncListPermission struct {
-	AccountSid *string `json:"account_sid"`
-	Identity   *string `json:"identity"`
-	ListSid    *string `json:"list_sid"`
-	Manage     *bool   `json:"manage"`
-	Read       *bool   `json:"read"`
-	ServiceSid *string `json:"service_sid"`
-	URL        *string `json:"url"`
-	Write      *bool   `json:"write"`
+	AccountSid *string `json:"account_sid,omitempty"`
+	Identity   *string `json:"identity,omitempty"`
+	ListSid    *string `json:"list_sid,omitempty"`
+	Manage     *bool   `json:"manage,omitempty"`
+	Read       *bool   `json:"read,omitempty"`
+	ServiceSid *string `json:"service_sid,omitempty"`
+	URL        *string `json:"url,omitempty"`
+	Write      *bool   `json:"write,omitempty"`
 }

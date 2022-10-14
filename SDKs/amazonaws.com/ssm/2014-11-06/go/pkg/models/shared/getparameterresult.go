@@ -1,5 +1,5 @@
 package shared
 
 type GetParameterResult struct {
-	Parameter *Parameter `json:"Parameter"`
+	Parameter *Parameter `json:"Parameter,omitempty"`
 }

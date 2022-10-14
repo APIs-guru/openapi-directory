@@ -5,13 +5,13 @@ import (
 )
 
 type Customer struct {
-	AlternateEmail       *string                `json:"alternateEmail"`
-	CustomerCreationTime *time.Time             `json:"customerCreationTime"`
-	CustomerDomain       *string                `json:"customerDomain"`
-	Etag                 *string                `json:"etag"`
-	ID                   *string                `json:"id"`
-	Kind                 *string                `json:"kind"`
-	Language             *string                `json:"language"`
-	PhoneNumber          *string                `json:"phoneNumber"`
-	PostalAddress        *CustomerPostalAddress `json:"postalAddress"`
+	AlternateEmail       *string                `json:"alternateEmail,omitempty"`
+	CustomerCreationTime *time.Time             `json:"customerCreationTime,omitempty"`
+	CustomerDomain       *string                `json:"customerDomain,omitempty"`
+	Etag                 *string                `json:"etag,omitempty"`
+	ID                   *string                `json:"id,omitempty"`
+	Kind                 *string                `json:"kind,omitempty"`
+	Language             *string                `json:"language,omitempty"`
+	PhoneNumber          *string                `json:"phoneNumber,omitempty"`
+	PostalAddress        *CustomerPostalAddress `json:"postalAddress,omitempty"`
 }

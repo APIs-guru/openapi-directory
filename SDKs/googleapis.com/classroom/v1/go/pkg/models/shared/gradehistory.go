@@ -10,9 +10,9 @@ const (
 )
 
 type GradeHistory struct {
-	ActorUserID     *string                          `json:"actorUserId"`
-	GradeChangeType *GradeHistoryGradeChangeTypeEnum `json:"gradeChangeType"`
-	GradeTimestamp  *string                          `json:"gradeTimestamp"`
-	MaxPoints       *float64                         `json:"maxPoints"`
-	PointsEarned    *float64                         `json:"pointsEarned"`
+	ActorUserID     *string                          `json:"actorUserId,omitempty"`
+	GradeChangeType *GradeHistoryGradeChangeTypeEnum `json:"gradeChangeType,omitempty"`
+	GradeTimestamp  *string                          `json:"gradeTimestamp,omitempty"`
+	MaxPoints       *float64                         `json:"maxPoints,omitempty"`
+	PointsEarned    *float64                         `json:"pointsEarned,omitempty"`
 }

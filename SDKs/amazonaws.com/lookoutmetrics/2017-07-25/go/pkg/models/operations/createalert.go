@@ -15,17 +15,17 @@ type CreateAlertHeaders struct {
 }
 
 type CreateAlertRequestBodyAction struct {
-	LambdaConfiguration *shared.LambdaConfiguration `json:"LambdaConfiguration"`
-	SnsConfiguration    *shared.SnsConfiguration    `json:"SNSConfiguration"`
+	LambdaConfiguration *shared.LambdaConfiguration `json:"LambdaConfiguration,omitempty"`
+	SnsConfiguration    *shared.SnsConfiguration    `json:"SNSConfiguration,omitempty"`
 }
 
 type CreateAlertRequestBody struct {
 	Action                    CreateAlertRequestBodyAction `json:"Action"`
-	AlertDescription          *string                      `json:"AlertDescription"`
+	AlertDescription          *string                      `json:"AlertDescription,omitempty"`
 	AlertName                 string                       `json:"AlertName"`
 	AlertSensitivityThreshold int64                        `json:"AlertSensitivityThreshold"`
 	AnomalyDetectorArn        string                       `json:"AnomalyDetectorArn"`
-	Tags                      map[string]string            `json:"Tags"`
+	Tags                      map[string]string            `json:"Tags,omitempty"`
 }
 
 type CreateAlertRequest struct {

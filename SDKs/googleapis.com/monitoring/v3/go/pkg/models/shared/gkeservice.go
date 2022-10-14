@@ -1,9 +1,9 @@
 package shared
 
 type GkeService struct {
-	ClusterName   *string `json:"clusterName"`
-	Location      *string `json:"location"`
-	NamespaceName *string `json:"namespaceName"`
-	ProjectID     *string `json:"projectId"`
-	ServiceName   *string `json:"serviceName"`
+	ClusterName   *string `json:"clusterName,omitempty"`
+	Location      *string `json:"location,omitempty"`
+	NamespaceName *string `json:"namespaceName,omitempty"`
+	ProjectID     *string `json:"projectId,omitempty"`
+	ServiceName   *string `json:"serviceName,omitempty"`
 }

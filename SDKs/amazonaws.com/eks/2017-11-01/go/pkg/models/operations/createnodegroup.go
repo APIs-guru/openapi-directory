@@ -35,45 +35,45 @@ const (
 )
 
 type CreateNodegroupRequestBodyLaunchTemplate struct {
-	ID      *string `json:"id"`
-	Name    *string `json:"name"`
-	Version *string `json:"version"`
+	ID      *string `json:"id,omitempty"`
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 type CreateNodegroupRequestBodyRemoteAccess struct {
-	Ec2SSHKey            *string  `json:"ec2SshKey"`
-	SourceSecurityGroups []string `json:"sourceSecurityGroups"`
+	Ec2SSHKey            *string  `json:"ec2SshKey,omitempty"`
+	SourceSecurityGroups []string `json:"sourceSecurityGroups,omitempty"`
 }
 
 type CreateNodegroupRequestBodyScalingConfig struct {
-	DesiredSize *int64 `json:"desiredSize"`
-	MaxSize     *int64 `json:"maxSize"`
-	MinSize     *int64 `json:"minSize"`
+	DesiredSize *int64 `json:"desiredSize,omitempty"`
+	MaxSize     *int64 `json:"maxSize,omitempty"`
+	MinSize     *int64 `json:"minSize,omitempty"`
 }
 
 type CreateNodegroupRequestBodyUpdateConfig struct {
-	MaxUnavailable           *int64 `json:"maxUnavailable"`
-	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage"`
+	MaxUnavailable           *int64 `json:"maxUnavailable,omitempty"`
+	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage,omitempty"`
 }
 
 type CreateNodegroupRequestBody struct {
-	AmiType            *CreateNodegroupRequestBodyAmiTypeEnum      `json:"amiType"`
-	CapacityType       *CreateNodegroupRequestBodyCapacityTypeEnum `json:"capacityType"`
-	ClientRequestToken *string                                     `json:"clientRequestToken"`
-	DiskSize           *int64                                      `json:"diskSize"`
-	InstanceTypes      []string                                    `json:"instanceTypes"`
-	Labels             map[string]string                           `json:"labels"`
-	LaunchTemplate     *CreateNodegroupRequestBodyLaunchTemplate   `json:"launchTemplate"`
+	AmiType            *CreateNodegroupRequestBodyAmiTypeEnum      `json:"amiType,omitempty"`
+	CapacityType       *CreateNodegroupRequestBodyCapacityTypeEnum `json:"capacityType,omitempty"`
+	ClientRequestToken *string                                     `json:"clientRequestToken,omitempty"`
+	DiskSize           *int64                                      `json:"diskSize,omitempty"`
+	InstanceTypes      []string                                    `json:"instanceTypes,omitempty"`
+	Labels             map[string]string                           `json:"labels,omitempty"`
+	LaunchTemplate     *CreateNodegroupRequestBodyLaunchTemplate   `json:"launchTemplate,omitempty"`
 	NodeRole           string                                      `json:"nodeRole"`
 	NodegroupName      string                                      `json:"nodegroupName"`
-	ReleaseVersion     *string                                     `json:"releaseVersion"`
-	RemoteAccess       *CreateNodegroupRequestBodyRemoteAccess     `json:"remoteAccess"`
-	ScalingConfig      *CreateNodegroupRequestBodyScalingConfig    `json:"scalingConfig"`
+	ReleaseVersion     *string                                     `json:"releaseVersion,omitempty"`
+	RemoteAccess       *CreateNodegroupRequestBodyRemoteAccess     `json:"remoteAccess,omitempty"`
+	ScalingConfig      *CreateNodegroupRequestBodyScalingConfig    `json:"scalingConfig,omitempty"`
 	Subnets            []string                                    `json:"subnets"`
-	Tags               map[string]string                           `json:"tags"`
-	Taints             []shared.Taint                              `json:"taints"`
-	UpdateConfig       *CreateNodegroupRequestBodyUpdateConfig     `json:"updateConfig"`
-	Version            *string                                     `json:"version"`
+	Tags               map[string]string                           `json:"tags,omitempty"`
+	Taints             []shared.Taint                              `json:"taints,omitempty"`
+	UpdateConfig       *CreateNodegroupRequestBodyUpdateConfig     `json:"updateConfig,omitempty"`
+	Version            *string                                     `json:"version,omitempty"`
 }
 
 type CreateNodegroupRequest struct {

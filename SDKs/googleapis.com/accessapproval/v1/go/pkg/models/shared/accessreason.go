@@ -12,6 +12,6 @@ const (
 )
 
 type AccessReason struct {
-	Detail *string               `json:"detail"`
-	Type   *AccessReasonTypeEnum `json:"type"`
+	Detail *string               `json:"detail,omitempty"`
+	Type   *AccessReasonTypeEnum `json:"type,omitempty"`
 }

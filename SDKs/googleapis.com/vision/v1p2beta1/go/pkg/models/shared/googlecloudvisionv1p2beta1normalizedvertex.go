@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudVisionV1p2beta1NormalizedVertex struct {
-	X *float32 `json:"x"`
-	Y *float32 `json:"y"`
+	X *float32 `json:"x,omitempty"`
+	Y *float32 `json:"y,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ObjectDetectionResponse struct {
-	Object        *string           `json:"object"`
-	Probabilities []DetectionResult `json:"probabilities"`
-	SampleID      *string           `json:"sampleId"`
+	Object        *string           `json:"object,omitempty"`
+	Probabilities []DetectionResult `json:"probabilities,omitempty"`
+	SampleID      *string           `json:"sampleId,omitempty"`
 }

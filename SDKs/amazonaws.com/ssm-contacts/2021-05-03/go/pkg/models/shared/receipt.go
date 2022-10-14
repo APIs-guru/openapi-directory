@@ -5,8 +5,8 @@ import (
 )
 
 type Receipt struct {
-	ContactChannelArn *string         `json:"ContactChannelArn"`
-	ReceiptInfo       *string         `json:"ReceiptInfo"`
+	ContactChannelArn *string         `json:"ContactChannelArn,omitempty"`
+	ReceiptInfo       *string         `json:"ReceiptInfo,omitempty"`
 	ReceiptTime       time.Time       `json:"ReceiptTime"`
 	ReceiptType       ReceiptTypeEnum `json:"ReceiptType"`
 }

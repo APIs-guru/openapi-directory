@@ -1,6 +1,6 @@
 package shared
 
 type DescribeOrganizationConfigurationResponse struct {
-	AutoEnable                *bool `json:"AutoEnable"`
-	MemberAccountLimitReached *bool `json:"MemberAccountLimitReached"`
+	AutoEnable                *bool `json:"AutoEnable,omitempty"`
+	MemberAccountLimitReached *bool `json:"MemberAccountLimitReached,omitempty"`
 }

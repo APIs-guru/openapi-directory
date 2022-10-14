@@ -11,6 +11,6 @@ const (
 )
 
 type AttributeParameters struct {
-	ScoreThreshold *float32                          `json:"scoreThreshold"`
-	ScoreType      *AttributeParametersScoreTypeEnum `json:"scoreType"`
+	ScoreThreshold *float32                          `json:"scoreThreshold,omitempty"`
+	ScoreType      *AttributeParametersScoreTypeEnum `json:"scoreType,omitempty"`
 }

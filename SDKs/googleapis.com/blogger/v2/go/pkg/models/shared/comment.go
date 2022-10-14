@@ -1,26 +1,26 @@
 package shared
 
 type CommentAuthorImage struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type CommentAuthor struct {
-	DisplayName *string             `json:"displayName"`
-	ID          *string             `json:"id"`
-	Image       *CommentAuthorImage `json:"image"`
-	URL         *string             `json:"url"`
+	DisplayName *string             `json:"displayName,omitempty"`
+	ID          *string             `json:"id,omitempty"`
+	Image       *CommentAuthorImage `json:"image,omitempty"`
+	URL         *string             `json:"url,omitempty"`
 }
 
 type CommentBlog struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type CommentInReplyTo struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type CommentPost struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type CommentStatusEnum string
@@ -33,15 +33,15 @@ const (
 )
 
 type Comment struct {
-	Author    *CommentAuthor     `json:"author"`
-	Blog      *CommentBlog       `json:"blog"`
-	Content   *string            `json:"content"`
-	ID        *string            `json:"id"`
-	InReplyTo *CommentInReplyTo  `json:"inReplyTo"`
-	Kind      *string            `json:"kind"`
-	Post      *CommentPost       `json:"post"`
-	Published *string            `json:"published"`
-	SelfLink  *string            `json:"selfLink"`
-	Status    *CommentStatusEnum `json:"status"`
-	Updated   *string            `json:"updated"`
+	Author    *CommentAuthor     `json:"author,omitempty"`
+	Blog      *CommentBlog       `json:"blog,omitempty"`
+	Content   *string            `json:"content,omitempty"`
+	ID        *string            `json:"id,omitempty"`
+	InReplyTo *CommentInReplyTo  `json:"inReplyTo,omitempty"`
+	Kind      *string            `json:"kind,omitempty"`
+	Post      *CommentPost       `json:"post,omitempty"`
+	Published *string            `json:"published,omitempty"`
+	SelfLink  *string            `json:"selfLink,omitempty"`
+	Status    *CommentStatusEnum `json:"status,omitempty"`
+	Updated   *string            `json:"updated,omitempty"`
 }

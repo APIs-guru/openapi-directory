@@ -1,15 +1,15 @@
 package shared
 
 type EmbeddedObjectSuggestionState struct {
-	DescriptionSuggested                     *bool                                  `json:"descriptionSuggested"`
-	EmbeddedDrawingPropertiesSuggestionState map[string]interface{}                 `json:"embeddedDrawingPropertiesSuggestionState"`
-	EmbeddedObjectBorderSuggestionState      *EmbeddedObjectBorderSuggestionState   `json:"embeddedObjectBorderSuggestionState"`
-	ImagePropertiesSuggestionState           *ImagePropertiesSuggestionState        `json:"imagePropertiesSuggestionState"`
-	LinkedContentReferenceSuggestionState    *LinkedContentReferenceSuggestionState `json:"linkedContentReferenceSuggestionState"`
-	MarginBottomSuggested                    *bool                                  `json:"marginBottomSuggested"`
-	MarginLeftSuggested                      *bool                                  `json:"marginLeftSuggested"`
-	MarginRightSuggested                     *bool                                  `json:"marginRightSuggested"`
-	MarginTopSuggested                       *bool                                  `json:"marginTopSuggested"`
-	SizeSuggestionState                      *SizeSuggestionState                   `json:"sizeSuggestionState"`
-	TitleSuggested                           *bool                                  `json:"titleSuggested"`
+	DescriptionSuggested                     *bool                                  `json:"descriptionSuggested,omitempty"`
+	EmbeddedDrawingPropertiesSuggestionState map[string]interface{}                 `json:"embeddedDrawingPropertiesSuggestionState,omitempty"`
+	EmbeddedObjectBorderSuggestionState      *EmbeddedObjectBorderSuggestionState   `json:"embeddedObjectBorderSuggestionState,omitempty"`
+	ImagePropertiesSuggestionState           *ImagePropertiesSuggestionState        `json:"imagePropertiesSuggestionState,omitempty"`
+	LinkedContentReferenceSuggestionState    *LinkedContentReferenceSuggestionState `json:"linkedContentReferenceSuggestionState,omitempty"`
+	MarginBottomSuggested                    *bool                                  `json:"marginBottomSuggested,omitempty"`
+	MarginLeftSuggested                      *bool                                  `json:"marginLeftSuggested,omitempty"`
+	MarginRightSuggested                     *bool                                  `json:"marginRightSuggested,omitempty"`
+	MarginTopSuggested                       *bool                                  `json:"marginTopSuggested,omitempty"`
+	SizeSuggestionState                      *SizeSuggestionState                   `json:"sizeSuggestionState,omitempty"`
+	TitleSuggested                           *bool                                  `json:"titleSuggested,omitempty"`
 }

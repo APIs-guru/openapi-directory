@@ -1,10 +1,10 @@
 package shared
 
 type VerificationMessageTemplateType struct {
-	DefaultEmailOption *DefaultEmailOptionTypeEnum `json:"DefaultEmailOption"`
-	EmailMessage       *string                     `json:"EmailMessage"`
-	EmailMessageByLink *string                     `json:"EmailMessageByLink"`
-	EmailSubject       *string                     `json:"EmailSubject"`
-	EmailSubjectByLink *string                     `json:"EmailSubjectByLink"`
-	SmsMessage         *string                     `json:"SmsMessage"`
+	DefaultEmailOption *DefaultEmailOptionTypeEnum `json:"DefaultEmailOption,omitempty"`
+	EmailMessage       *string                     `json:"EmailMessage,omitempty"`
+	EmailMessageByLink *string                     `json:"EmailMessageByLink,omitempty"`
+	EmailSubject       *string                     `json:"EmailSubject,omitempty"`
+	EmailSubjectByLink *string                     `json:"EmailSubjectByLink,omitempty"`
+	SmsMessage         *string                     `json:"SmsMessage,omitempty"`
 }

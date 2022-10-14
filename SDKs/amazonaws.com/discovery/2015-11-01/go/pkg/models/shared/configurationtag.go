@@ -5,9 +5,9 @@ import (
 )
 
 type ConfigurationTag struct {
-	ConfigurationID   *string                    `json:"configurationId"`
-	ConfigurationType *ConfigurationItemTypeEnum `json:"configurationType"`
-	Key               *string                    `json:"key"`
-	TimeOfCreation    *time.Time                 `json:"timeOfCreation"`
-	Value             *string                    `json:"value"`
+	ConfigurationID   *string                    `json:"configurationId,omitempty"`
+	ConfigurationType *ConfigurationItemTypeEnum `json:"configurationType,omitempty"`
+	Key               *string                    `json:"key,omitempty"`
+	TimeOfCreation    *time.Time                 `json:"timeOfCreation,omitempty"`
+	Value             *string                    `json:"value,omitempty"`
 }

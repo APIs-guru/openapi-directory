@@ -1,6 +1,6 @@
 package shared
 
 type Amount struct {
-	Pretax *Price `json:"pretax"`
-	Tax    *Price `json:"tax"`
+	Pretax *Price `json:"pretax,omitempty"`
+	Tax    *Price `json:"tax,omitempty"`
 }

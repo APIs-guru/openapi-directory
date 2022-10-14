@@ -15,7 +15,7 @@ type PutEmailIdentityConfigurationSetAttributesHeaders struct {
 }
 
 type PutEmailIdentityConfigurationSetAttributesRequestBody struct {
-	ConfigurationSetName *string `json:"ConfigurationSetName"`
+	ConfigurationSetName *string `json:"ConfigurationSetName,omitempty"`
 }
 
 type PutEmailIdentityConfigurationSetAttributesRequest struct {

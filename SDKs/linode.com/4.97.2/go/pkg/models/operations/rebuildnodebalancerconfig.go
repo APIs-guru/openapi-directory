@@ -34,8 +34,8 @@ const (
 )
 
 type RebuildNodeBalancerConfigRequestBodyNodesStatus struct {
-	Down *int64 `json:"down"`
-	Up   *int64 `json:"up"`
+	Down *int64 `json:"down,omitempty"`
+	Up   *int64 `json:"up,omitempty"`
 }
 
 type RebuildNodeBalancerConfigRequestBodyProtocolEnum string
@@ -63,27 +63,27 @@ const (
 )
 
 type RebuildNodeBalancerConfigRequestBody struct {
-	Algorithm      *RebuildNodeBalancerConfigRequestBodyAlgorithmEnum     `json:"algorithm"`
-	Check          *RebuildNodeBalancerConfigRequestBodyCheckEnum         `json:"check"`
-	CheckAttempts  *int64                                                 `json:"check_attempts"`
-	CheckBody      *string                                                `json:"check_body"`
-	CheckInterval  *int64                                                 `json:"check_interval"`
-	CheckPassive   *bool                                                  `json:"check_passive"`
-	CheckPath      *string                                                `json:"check_path"`
-	CheckTimeout   *int64                                                 `json:"check_timeout"`
-	CipherSuite    *RebuildNodeBalancerConfigRequestBodyCipherSuiteEnum   `json:"cipher_suite"`
-	ID             *int64                                                 `json:"id"`
-	NodebalancerID *int64                                                 `json:"nodebalancer_id"`
-	Nodes          []shared.NodeBalancerNode                              `json:"nodes"`
-	NodesStatus    *RebuildNodeBalancerConfigRequestBodyNodesStatus       `json:"nodes_status"`
-	Port           *int64                                                 `json:"port"`
-	Protocol       *RebuildNodeBalancerConfigRequestBodyProtocolEnum      `json:"protocol"`
-	ProxyProtocol  *RebuildNodeBalancerConfigRequestBodyProxyProtocolEnum `json:"proxy_protocol"`
-	SslCert        *string                                                `json:"ssl_cert"`
-	SslCommonname  *string                                                `json:"ssl_commonname"`
-	SslFingerprint *string                                                `json:"ssl_fingerprint"`
-	SslKey         *string                                                `json:"ssl_key"`
-	Stickiness     *RebuildNodeBalancerConfigRequestBodyStickinessEnum    `json:"stickiness"`
+	Algorithm      *RebuildNodeBalancerConfigRequestBodyAlgorithmEnum     `json:"algorithm,omitempty"`
+	Check          *RebuildNodeBalancerConfigRequestBodyCheckEnum         `json:"check,omitempty"`
+	CheckAttempts  *int64                                                 `json:"check_attempts,omitempty"`
+	CheckBody      *string                                                `json:"check_body,omitempty"`
+	CheckInterval  *int64                                                 `json:"check_interval,omitempty"`
+	CheckPassive   *bool                                                  `json:"check_passive,omitempty"`
+	CheckPath      *string                                                `json:"check_path,omitempty"`
+	CheckTimeout   *int64                                                 `json:"check_timeout,omitempty"`
+	CipherSuite    *RebuildNodeBalancerConfigRequestBodyCipherSuiteEnum   `json:"cipher_suite,omitempty"`
+	ID             *int64                                                 `json:"id,omitempty"`
+	NodebalancerID *int64                                                 `json:"nodebalancer_id,omitempty"`
+	Nodes          []shared.NodeBalancerNode                              `json:"nodes,omitempty"`
+	NodesStatus    *RebuildNodeBalancerConfigRequestBodyNodesStatus       `json:"nodes_status,omitempty"`
+	Port           *int64                                                 `json:"port,omitempty"`
+	Protocol       *RebuildNodeBalancerConfigRequestBodyProtocolEnum      `json:"protocol,omitempty"`
+	ProxyProtocol  *RebuildNodeBalancerConfigRequestBodyProxyProtocolEnum `json:"proxy_protocol,omitempty"`
+	SslCert        *string                                                `json:"ssl_cert,omitempty"`
+	SslCommonname  *string                                                `json:"ssl_commonname,omitempty"`
+	SslFingerprint *string                                                `json:"ssl_fingerprint,omitempty"`
+	SslKey         *string                                                `json:"ssl_key,omitempty"`
+	Stickiness     *RebuildNodeBalancerConfigRequestBodyStickinessEnum    `json:"stickiness,omitempty"`
 }
 
 type RebuildNodeBalancerConfigSecurityOption1 struct {
@@ -106,7 +106,7 @@ type RebuildNodeBalancerConfigRequest struct {
 }
 
 type RebuildNodeBalancerConfigDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RebuildNodeBalancerConfigResponse struct {

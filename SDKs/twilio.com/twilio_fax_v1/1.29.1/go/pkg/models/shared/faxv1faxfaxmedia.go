@@ -5,11 +5,11 @@ import (
 )
 
 type FaxV1FaxFaxMedia struct {
-	AccountSid  *string    `json:"account_sid"`
-	ContentType *string    `json:"content_type"`
-	DateCreated *time.Time `json:"date_created"`
-	DateUpdated *time.Time `json:"date_updated"`
-	FaxSid      *string    `json:"fax_sid"`
-	Sid         *string    `json:"sid"`
-	URL         *string    `json:"url"`
+	AccountSid  *string    `json:"account_sid,omitempty"`
+	ContentType *string    `json:"content_type,omitempty"`
+	DateCreated *time.Time `json:"date_created,omitempty"`
+	DateUpdated *time.Time `json:"date_updated,omitempty"`
+	FaxSid      *string    `json:"fax_sid,omitempty"`
+	Sid         *string    `json:"sid,omitempty"`
+	URL         *string    `json:"url,omitempty"`
 }

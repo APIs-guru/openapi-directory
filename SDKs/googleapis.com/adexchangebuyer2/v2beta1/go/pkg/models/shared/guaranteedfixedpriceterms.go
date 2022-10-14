@@ -9,11 +9,11 @@ const (
 )
 
 type GuaranteedFixedPriceTerms struct {
-	FixedPrices           []PricePerBuyer                               `json:"fixedPrices"`
-	GuaranteedImpressions *string                                       `json:"guaranteedImpressions"`
-	GuaranteedLooks       *string                                       `json:"guaranteedLooks"`
-	ImpressionCap         *string                                       `json:"impressionCap"`
-	MinimumDailyLooks     *string                                       `json:"minimumDailyLooks"`
-	PercentShareOfVoice   *string                                       `json:"percentShareOfVoice"`
-	ReservationType       *GuaranteedFixedPriceTermsReservationTypeEnum `json:"reservationType"`
+	FixedPrices           []PricePerBuyer                               `json:"fixedPrices,omitempty"`
+	GuaranteedImpressions *string                                       `json:"guaranteedImpressions,omitempty"`
+	GuaranteedLooks       *string                                       `json:"guaranteedLooks,omitempty"`
+	ImpressionCap         *string                                       `json:"impressionCap,omitempty"`
+	MinimumDailyLooks     *string                                       `json:"minimumDailyLooks,omitempty"`
+	PercentShareOfVoice   *string                                       `json:"percentShareOfVoice,omitempty"`
+	ReservationType       *GuaranteedFixedPriceTermsReservationTypeEnum `json:"reservationType,omitempty"`
 }

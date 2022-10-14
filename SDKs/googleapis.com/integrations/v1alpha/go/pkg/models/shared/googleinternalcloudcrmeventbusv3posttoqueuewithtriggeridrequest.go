@@ -11,13 +11,13 @@ const (
 )
 
 type GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIDRequest struct {
-	ClientID                      *string                                                                      `json:"clientId"`
-	IgnoreErrorIfNoActiveWorkflow *bool                                                                        `json:"ignoreErrorIfNoActiveWorkflow"`
-	Parameters                    *EnterpriseCrmEventbusProtoEventParameters                                   `json:"parameters"`
-	Priority                      *GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIDRequestPriorityEnum `json:"priority"`
-	RequestID                     *string                                                                      `json:"requestId"`
-	ScheduledTime                 *string                                                                      `json:"scheduledTime"`
-	TestMode                      *bool                                                                        `json:"testMode"`
-	TriggerID                     *string                                                                      `json:"triggerId"`
-	WorkflowName                  *string                                                                      `json:"workflowName"`
+	ClientID                      *string                                                                      `json:"clientId,omitempty"`
+	IgnoreErrorIfNoActiveWorkflow *bool                                                                        `json:"ignoreErrorIfNoActiveWorkflow,omitempty"`
+	Parameters                    *EnterpriseCrmEventbusProtoEventParameters                                   `json:"parameters,omitempty"`
+	Priority                      *GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIDRequestPriorityEnum `json:"priority,omitempty"`
+	RequestID                     *string                                                                      `json:"requestId,omitempty"`
+	ScheduledTime                 *string                                                                      `json:"scheduledTime,omitempty"`
+	TestMode                      *bool                                                                        `json:"testMode,omitempty"`
+	TriggerID                     *string                                                                      `json:"triggerId,omitempty"`
+	WorkflowName                  *string                                                                      `json:"workflowName,omitempty"`
 }

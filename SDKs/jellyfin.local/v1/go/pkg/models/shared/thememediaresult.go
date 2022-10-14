@@ -1,8 +1,8 @@
 package shared
 
 type ThemeMediaResult struct {
-	Items            []BaseItemDto `json:"Items"`
-	OwnerID          *string       `json:"OwnerId"`
-	StartIndex       *int32        `json:"StartIndex"`
-	TotalRecordCount *int32        `json:"TotalRecordCount"`
+	Items            []BaseItemDto `json:"Items,omitempty"`
+	OwnerID          *string       `json:"OwnerId,omitempty"`
+	StartIndex       *int32        `json:"StartIndex,omitempty"`
+	TotalRecordCount *int32        `json:"TotalRecordCount,omitempty"`
 }

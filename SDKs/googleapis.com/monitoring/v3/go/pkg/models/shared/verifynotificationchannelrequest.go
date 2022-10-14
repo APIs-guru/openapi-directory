@@ -1,5 +1,5 @@
 package shared
 
 type VerifyNotificationChannelRequest struct {
-	Code *string `json:"code"`
+	Code *string `json:"code,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleFirestoreAdminV1beta1IndexField struct {
-	FieldPath *string                                        `json:"fieldPath"`
-	Mode      *GoogleFirestoreAdminV1beta1IndexFieldModeEnum `json:"mode"`
+	FieldPath *string                                        `json:"fieldPath,omitempty"`
+	Mode      *GoogleFirestoreAdminV1beta1IndexFieldModeEnum `json:"mode,omitempty"`
 }

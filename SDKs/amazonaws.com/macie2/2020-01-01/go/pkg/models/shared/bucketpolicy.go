@@ -1,6 +1,6 @@
 package shared
 
 type BucketPolicy struct {
-	AllowsPublicReadAccess  *bool `json:"allowsPublicReadAccess"`
-	AllowsPublicWriteAccess *bool `json:"allowsPublicWriteAccess"`
+	AllowsPublicReadAccess  *bool `json:"allowsPublicReadAccess,omitempty"`
+	AllowsPublicWriteAccess *bool `json:"allowsPublicWriteAccess,omitempty"`
 }

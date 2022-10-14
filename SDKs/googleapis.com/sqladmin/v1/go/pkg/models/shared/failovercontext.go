@@ -1,6 +1,6 @@
 package shared
 
 type FailoverContext struct {
-	Kind            *string `json:"kind"`
-	SettingsVersion *string `json:"settingsVersion"`
+	Kind            *string `json:"kind,omitempty"`
+	SettingsVersion *string `json:"settingsVersion,omitempty"`
 }

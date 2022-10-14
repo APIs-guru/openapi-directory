@@ -18,14 +18,14 @@ const (
 )
 
 type Database struct {
-	CreateTime             *string                      `json:"createTime"`
-	DatabaseDialect        *DatabaseDatabaseDialectEnum `json:"databaseDialect"`
-	DefaultLeader          *string                      `json:"defaultLeader"`
-	EarliestVersionTime    *string                      `json:"earliestVersionTime"`
-	EncryptionConfig       *EncryptionConfig            `json:"encryptionConfig"`
-	EncryptionInfo         []EncryptionInfo             `json:"encryptionInfo"`
-	Name                   *string                      `json:"name"`
-	RestoreInfo            *RestoreInfo                 `json:"restoreInfo"`
-	State                  *DatabaseStateEnum           `json:"state"`
-	VersionRetentionPeriod *string                      `json:"versionRetentionPeriod"`
+	CreateTime             *string                      `json:"createTime,omitempty"`
+	DatabaseDialect        *DatabaseDatabaseDialectEnum `json:"databaseDialect,omitempty"`
+	DefaultLeader          *string                      `json:"defaultLeader,omitempty"`
+	EarliestVersionTime    *string                      `json:"earliestVersionTime,omitempty"`
+	EncryptionConfig       *EncryptionConfig            `json:"encryptionConfig,omitempty"`
+	EncryptionInfo         []EncryptionInfo             `json:"encryptionInfo,omitempty"`
+	Name                   *string                      `json:"name,omitempty"`
+	RestoreInfo            *RestoreInfo                 `json:"restoreInfo,omitempty"`
+	State                  *DatabaseStateEnum           `json:"state,omitempty"`
+	VersionRetentionPeriod *string                      `json:"versionRetentionPeriod,omitempty"`
 }

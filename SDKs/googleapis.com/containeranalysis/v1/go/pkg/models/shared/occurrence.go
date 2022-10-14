@@ -17,22 +17,22 @@ const (
 )
 
 type Occurrence struct {
-	Attestation     *AttestationOccurrence     `json:"attestation"`
-	Build           *BuildOccurrence           `json:"build"`
-	Compliance      *ComplianceOccurrence      `json:"compliance"`
-	CreateTime      *string                    `json:"createTime"`
-	Deployment      *DeploymentOccurrence      `json:"deployment"`
-	Discovery       *DiscoveryOccurrence       `json:"discovery"`
-	DsseAttestation *DsseAttestationOccurrence `json:"dsseAttestation"`
-	Envelope        *Envelope                  `json:"envelope"`
-	Image           *ImageOccurrence           `json:"image"`
-	Kind            *OccurrenceKindEnum        `json:"kind"`
-	Name            *string                    `json:"name"`
-	NoteName        *string                    `json:"noteName"`
-	Package         *PackageOccurrence         `json:"package"`
-	Remediation     *string                    `json:"remediation"`
-	ResourceURI     *string                    `json:"resourceUri"`
-	UpdateTime      *string                    `json:"updateTime"`
-	Upgrade         *UpgradeOccurrence         `json:"upgrade"`
-	Vulnerability   *VulnerabilityOccurrence   `json:"vulnerability"`
+	Attestation     *AttestationOccurrence     `json:"attestation,omitempty"`
+	Build           *BuildOccurrence           `json:"build,omitempty"`
+	Compliance      *ComplianceOccurrence      `json:"compliance,omitempty"`
+	CreateTime      *string                    `json:"createTime,omitempty"`
+	Deployment      *DeploymentOccurrence      `json:"deployment,omitempty"`
+	Discovery       *DiscoveryOccurrence       `json:"discovery,omitempty"`
+	DsseAttestation *DsseAttestationOccurrence `json:"dsseAttestation,omitempty"`
+	Envelope        *Envelope                  `json:"envelope,omitempty"`
+	Image           *ImageOccurrence           `json:"image,omitempty"`
+	Kind            *OccurrenceKindEnum        `json:"kind,omitempty"`
+	Name            *string                    `json:"name,omitempty"`
+	NoteName        *string                    `json:"noteName,omitempty"`
+	Package         *PackageOccurrence         `json:"package,omitempty"`
+	Remediation     *string                    `json:"remediation,omitempty"`
+	ResourceURI     *string                    `json:"resourceUri,omitempty"`
+	UpdateTime      *string                    `json:"updateTime,omitempty"`
+	Upgrade         *UpgradeOccurrence         `json:"upgrade,omitempty"`
+	Vulnerability   *VulnerabilityOccurrence   `json:"vulnerability,omitempty"`
 }

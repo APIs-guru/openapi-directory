@@ -2,9 +2,9 @@ package shared
 
 type DescribedWorkflow struct {
 	Arn              string         `json:"Arn"`
-	Description      *string        `json:"Description"`
-	OnExceptionSteps []WorkflowStep `json:"OnExceptionSteps"`
-	Steps            []WorkflowStep `json:"Steps"`
-	Tags             []Tag          `json:"Tags"`
-	WorkflowID       *string        `json:"WorkflowId"`
+	Description      *string        `json:"Description,omitempty"`
+	OnExceptionSteps []WorkflowStep `json:"OnExceptionSteps,omitempty"`
+	Steps            []WorkflowStep `json:"Steps,omitempty"`
+	Tags             []Tag          `json:"Tags,omitempty"`
+	WorkflowID       *string        `json:"WorkflowId,omitempty"`
 }

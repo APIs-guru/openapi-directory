@@ -1,9 +1,9 @@
 package shared
 
 type ConsoleServerPort struct {
-	ConnectedConsole *string      `json:"connected_console"`
+	ConnectedConsole *string      `json:"connected_console,omitempty"`
 	Device           NestedDevice `json:"device"`
-	ID               *int64       `json:"id"`
+	ID               *int64       `json:"id,omitempty"`
 	Name             string       `json:"name"`
-	Tags             []string     `json:"tags"`
+	Tags             []string     `json:"tags,omitempty"`
 }

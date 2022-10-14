@@ -6,7 +6,7 @@ import (
 
 type DescribeAssetModelResponse struct {
 	AssetModelArn             string                     `json:"assetModelArn"`
-	AssetModelCompositeModels []AssetModelCompositeModel `json:"assetModelCompositeModels"`
+	AssetModelCompositeModels []AssetModelCompositeModel `json:"assetModelCompositeModels,omitempty"`
 	AssetModelCreationDate    time.Time                  `json:"assetModelCreationDate"`
 	AssetModelDescription     string                     `json:"assetModelDescription"`
 	AssetModelHierarchies     []AssetModelHierarchy      `json:"assetModelHierarchies"`

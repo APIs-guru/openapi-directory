@@ -1,16 +1,16 @@
 package shared
 
 type FirewallRule struct {
-	Action               *ActionEnum               `json:"Action"`
-	BlockOverrideDNSType *BlockOverrideDNSTypeEnum `json:"BlockOverrideDnsType"`
-	BlockOverrideDomain  *string                   `json:"BlockOverrideDomain"`
-	BlockOverrideTTL     *int64                    `json:"BlockOverrideTtl"`
-	BlockResponse        *BlockResponseEnum        `json:"BlockResponse"`
-	CreationTime         *string                   `json:"CreationTime"`
-	CreatorRequestID     *string                   `json:"CreatorRequestId"`
-	FirewallDomainListID *string                   `json:"FirewallDomainListId"`
-	FirewallRuleGroupID  *string                   `json:"FirewallRuleGroupId"`
-	ModificationTime     *string                   `json:"ModificationTime"`
-	Name                 *string                   `json:"Name"`
-	Priority             *int64                    `json:"Priority"`
+	Action               *ActionEnum               `json:"Action,omitempty"`
+	BlockOverrideDNSType *BlockOverrideDNSTypeEnum `json:"BlockOverrideDnsType,omitempty"`
+	BlockOverrideDomain  *string                   `json:"BlockOverrideDomain,omitempty"`
+	BlockOverrideTTL     *int64                    `json:"BlockOverrideTtl,omitempty"`
+	BlockResponse        *BlockResponseEnum        `json:"BlockResponse,omitempty"`
+	CreationTime         *string                   `json:"CreationTime,omitempty"`
+	CreatorRequestID     *string                   `json:"CreatorRequestId,omitempty"`
+	FirewallDomainListID *string                   `json:"FirewallDomainListId,omitempty"`
+	FirewallRuleGroupID  *string                   `json:"FirewallRuleGroupId,omitempty"`
+	ModificationTime     *string                   `json:"ModificationTime,omitempty"`
+	Name                 *string                   `json:"Name,omitempty"`
+	Priority             *int64                    `json:"Priority,omitempty"`
 }

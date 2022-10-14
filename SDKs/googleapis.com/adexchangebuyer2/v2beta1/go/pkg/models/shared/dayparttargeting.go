@@ -9,6 +9,6 @@ const (
 )
 
 type DayPartTargeting struct {
-	DayParts     []DayPart                         `json:"dayParts"`
-	TimeZoneType *DayPartTargetingTimeZoneTypeEnum `json:"timeZoneType"`
+	DayParts     []DayPart                         `json:"dayParts,omitempty"`
+	TimeZoneType *DayPartTargetingTimeZoneTypeEnum `json:"timeZoneType,omitempty"`
 }

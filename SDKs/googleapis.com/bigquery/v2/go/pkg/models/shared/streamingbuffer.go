@@ -1,7 +1,7 @@
 package shared
 
 type Streamingbuffer struct {
-	EstimatedBytes  *string `json:"estimatedBytes"`
-	EstimatedRows   *string `json:"estimatedRows"`
-	OldestEntryTime *string `json:"oldestEntryTime"`
+	EstimatedBytes  *string `json:"estimatedBytes,omitempty"`
+	EstimatedRows   *string `json:"estimatedRows,omitempty"`
+	OldestEntryTime *string `json:"oldestEntryTime,omitempty"`
 }

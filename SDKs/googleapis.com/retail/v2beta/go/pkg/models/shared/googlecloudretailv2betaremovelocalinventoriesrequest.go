@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudRetailV2betaRemoveLocalInventoriesRequest struct {
-	AllowMissing *bool    `json:"allowMissing"`
-	PlaceIds     []string `json:"placeIds"`
-	RemoveTime   *string  `json:"removeTime"`
+	AllowMissing *bool    `json:"allowMissing,omitempty"`
+	PlaceIds     []string `json:"placeIds,omitempty"`
+	RemoveTime   *string  `json:"removeTime,omitempty"`
 }

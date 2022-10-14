@@ -1,8 +1,8 @@
 package shared
 
 type UpdateConnectionRequest struct {
-	AuthParameters    *UpdateConnectionAuthRequestParameters `json:"AuthParameters"`
-	AuthorizationType *ConnectionAuthorizationTypeEnum       `json:"AuthorizationType"`
-	Description       *string                                `json:"Description"`
+	AuthParameters    *UpdateConnectionAuthRequestParameters `json:"AuthParameters,omitempty"`
+	AuthorizationType *ConnectionAuthorizationTypeEnum       `json:"AuthorizationType,omitempty"`
+	Description       *string                                `json:"Description,omitempty"`
 	Name              string                                 `json:"Name"`
 }

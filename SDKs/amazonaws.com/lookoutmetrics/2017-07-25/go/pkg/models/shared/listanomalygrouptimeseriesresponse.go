@@ -1,9 +1,9 @@
 package shared
 
 type ListAnomalyGroupTimeSeriesResponse struct {
-	AnomalyGroupID *string      `json:"AnomalyGroupId"`
-	MetricName     *string      `json:"MetricName"`
-	NextToken      *string      `json:"NextToken"`
-	TimeSeriesList []TimeSeries `json:"TimeSeriesList"`
-	TimestampList  []string     `json:"TimestampList"`
+	AnomalyGroupID *string      `json:"AnomalyGroupId,omitempty"`
+	MetricName     *string      `json:"MetricName,omitempty"`
+	NextToken      *string      `json:"NextToken,omitempty"`
+	TimeSeriesList []TimeSeries `json:"TimeSeriesList,omitempty"`
+	TimestampList  []string     `json:"TimestampList,omitempty"`
 }

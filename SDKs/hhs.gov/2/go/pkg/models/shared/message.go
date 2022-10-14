@@ -1,8 +1,8 @@
 package shared
 
 type Message struct {
-	ErrorCode    *string `json:"errorCode"`
-	ErrorDetail  *string `json:"errorDetail"`
-	ErrorMessage *string `json:"errorMessage"`
-	UserMessage  *string `json:"userMessage"`
+	ErrorCode    *string `json:"errorCode,omitempty"`
+	ErrorDetail  *string `json:"errorDetail,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitempty"`
+	UserMessage  *string `json:"userMessage,omitempty"`
 }

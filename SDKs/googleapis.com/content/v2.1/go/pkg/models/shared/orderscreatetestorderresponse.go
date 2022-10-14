@@ -1,6 +1,6 @@
 package shared
 
 type OrdersCreateTestOrderResponse struct {
-	Kind    *string `json:"kind"`
-	OrderID *string `json:"orderId"`
+	Kind    *string `json:"kind,omitempty"`
+	OrderID *string `json:"orderId,omitempty"`
 }

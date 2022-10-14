@@ -11,7 +11,7 @@ const (
 )
 
 type ListFindingsResult struct {
-	Finding     *Finding                           `json:"finding"`
-	Resource    *Resource                          `json:"resource"`
-	StateChange *ListFindingsResultStateChangeEnum `json:"stateChange"`
+	Finding     *Finding                           `json:"finding,omitempty"`
+	Resource    *Resource                          `json:"resource,omitempty"`
+	StateChange *ListFindingsResultStateChangeEnum `json:"stateChange,omitempty"`
 }

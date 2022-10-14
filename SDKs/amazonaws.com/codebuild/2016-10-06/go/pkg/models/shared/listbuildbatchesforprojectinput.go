@@ -1,9 +1,9 @@
 package shared
 
 type ListBuildBatchesForProjectInput struct {
-	Filter      *BuildBatchFilter  `json:"filter"`
-	MaxResults  *int64             `json:"maxResults"`
-	NextToken   *string            `json:"nextToken"`
-	ProjectName *string            `json:"projectName"`
-	SortOrder   *SortOrderTypeEnum `json:"sortOrder"`
+	Filter      *BuildBatchFilter  `json:"filter,omitempty"`
+	MaxResults  *int64             `json:"maxResults,omitempty"`
+	NextToken   *string            `json:"nextToken,omitempty"`
+	ProjectName *string            `json:"projectName,omitempty"`
+	SortOrder   *SortOrderTypeEnum `json:"sortOrder,omitempty"`
 }

@@ -18,13 +18,13 @@ const (
 )
 
 type CreateOAuthClientRequest struct {
-	AccessTokenValidity  *int32                                   `json:"accessTokenValidity"`
-	ApprovalValidity     *int32                                   `json:"approvalValidity"`
-	ClientID             *string                                  `json:"clientId"`
+	AccessTokenValidity  *int32                                   `json:"accessTokenValidity,omitempty"`
+	ApprovalValidity     *int32                                   `json:"approvalValidity,omitempty"`
+	ClientID             *string                                  `json:"clientId,omitempty"`
 	ClientName           string                                   `json:"clientName"`
-	ClientSecret         *string                                  `json:"clientSecret"`
-	ClientType           *CreateOAuthClientRequestClientTypeEnum  `json:"clientType"`
+	ClientSecret         *string                                  `json:"clientSecret,omitempty"`
+	ClientType           *CreateOAuthClientRequestClientTypeEnum  `json:"clientType,omitempty"`
 	GrantTypes           []CreateOAuthClientRequestGrantTypesEnum `json:"grantTypes"`
-	RedirectUris         []string                                 `json:"redirectUris"`
-	RefreshTokenValidity *int32                                   `json:"refreshTokenValidity"`
+	RedirectUris         []string                                 `json:"redirectUris,omitempty"`
+	RefreshTokenValidity *int32                                   `json:"refreshTokenValidity,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DatasetRelatedObjectsResponse struct {
-	Charts     *DatasetRelatedCharts     `json:"charts"`
-	Dashboards *DatasetRelatedDashboards `json:"dashboards"`
+	Charts     *DatasetRelatedCharts     `json:"charts,omitempty"`
+	Dashboards *DatasetRelatedDashboards `json:"dashboards,omitempty"`
 }

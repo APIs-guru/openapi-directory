@@ -9,18 +9,18 @@ type OrgsCreateWebhookPathParams struct {
 }
 
 type OrgsCreateWebhookRequestBodyConfig struct {
-	ContentType *string      `json:"content_type"`
-	InsecureSsl *interface{} `json:"insecure_ssl"`
-	Password    *string      `json:"password"`
-	Secret      *string      `json:"secret"`
+	ContentType *string      `json:"content_type,omitempty"`
+	InsecureSsl *interface{} `json:"insecure_ssl,omitempty"`
+	Password    *string      `json:"password,omitempty"`
+	Secret      *string      `json:"secret,omitempty"`
 	URL         string       `json:"url"`
-	Username    *string      `json:"username"`
+	Username    *string      `json:"username,omitempty"`
 }
 
 type OrgsCreateWebhookRequestBody struct {
-	Active *bool                              `json:"active"`
+	Active *bool                              `json:"active,omitempty"`
 	Config OrgsCreateWebhookRequestBodyConfig `json:"config"`
-	Events []string                           `json:"events"`
+	Events []string                           `json:"events,omitempty"`
 	Name   string                             `json:"name"`
 }
 

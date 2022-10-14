@@ -108,6 +108,6 @@ const (
 )
 
 type Disapproval struct {
-	Details []string               `json:"details"`
-	Reason  *DisapprovalReasonEnum `json:"reason"`
+	Details []string               `json:"details,omitempty"`
+	Reason  *DisapprovalReasonEnum `json:"reason,omitempty"`
 }

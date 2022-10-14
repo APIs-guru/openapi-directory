@@ -1,6 +1,6 @@
 package shared
 
 type CandlestickDomain struct {
-	Data     *ChartData `json:"data"`
-	Reversed *bool      `json:"reversed"`
+	Data     *ChartData `json:"data,omitempty"`
+	Reversed *bool      `json:"reversed,omitempty"`
 }

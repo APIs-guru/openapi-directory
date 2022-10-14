@@ -19,7 +19,7 @@ type TeamDiscussionAuthorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -40,7 +40,7 @@ type TeamDiscussion struct {
 	Number        int64                          `json:"number"`
 	Pinned        bool                           `json:"pinned"`
 	Private       bool                           `json:"private"`
-	Reactions     *ReactionRollup                `json:"reactions"`
+	Reactions     *ReactionRollup                `json:"reactions,omitempty"`
 	TeamURL       string                         `json:"team_url"`
 	Title         string                         `json:"title"`
 	UpdatedAt     time.Time                      `json:"updated_at"`

@@ -14,19 +14,19 @@ type PostDatabaseTestConnectionRequest struct {
 }
 
 type PostDatabaseTestConnection200ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseTestConnection400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseTestConnection422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseTestConnection500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseTestConnectionResponse struct {

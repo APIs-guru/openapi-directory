@@ -27,7 +27,7 @@ type CreatePromoCreditRequest struct {
 }
 
 type CreatePromoCreditDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreatePromoCreditResponse struct {

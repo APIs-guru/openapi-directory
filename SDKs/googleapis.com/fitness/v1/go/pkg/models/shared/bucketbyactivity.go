@@ -1,6 +1,6 @@
 package shared
 
 type BucketByActivity struct {
-	ActivityDataSourceID *string `json:"activityDataSourceId"`
-	MinDurationMillis    *string `json:"minDurationMillis"`
+	ActivityDataSourceID *string `json:"activityDataSourceId,omitempty"`
+	MinDurationMillis    *string `json:"minDurationMillis,omitempty"`
 }

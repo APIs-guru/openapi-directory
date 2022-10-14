@@ -1,7 +1,7 @@
 package shared
 
 type AwsVpcConfiguration struct {
-	AssignPublicIP *AssignPublicIPEnum `json:"AssignPublicIp"`
-	SecurityGroups []string            `json:"SecurityGroups"`
+	AssignPublicIP *AssignPublicIPEnum `json:"AssignPublicIp,omitempty"`
+	SecurityGroups []string            `json:"SecurityGroups,omitempty"`
 	Subnets        []string            `json:"Subnets"`
 }

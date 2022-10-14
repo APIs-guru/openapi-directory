@@ -19,11 +19,11 @@ type UpdateExperimentTemplateHeaders struct {
 }
 
 type UpdateExperimentTemplateRequestBody struct {
-	Actions        map[string]shared.UpdateExperimentTemplateActionInputItem `json:"actions"`
-	Description    *string                                                   `json:"description"`
-	RoleArn        *string                                                   `json:"roleArn"`
-	StopConditions []shared.UpdateExperimentTemplateStopConditionInput       `json:"stopConditions"`
-	Targets        map[string]shared.UpdateExperimentTemplateTargetInput     `json:"targets"`
+	Actions        map[string]shared.UpdateExperimentTemplateActionInputItem `json:"actions,omitempty"`
+	Description    *string                                                   `json:"description,omitempty"`
+	RoleArn        *string                                                   `json:"roleArn,omitempty"`
+	StopConditions []shared.UpdateExperimentTemplateStopConditionInput       `json:"stopConditions,omitempty"`
+	Targets        map[string]shared.UpdateExperimentTemplateTargetInput     `json:"targets,omitempty"`
 }
 
 type UpdateExperimentTemplateRequest struct {

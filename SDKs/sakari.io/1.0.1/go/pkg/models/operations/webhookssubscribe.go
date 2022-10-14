@@ -9,8 +9,8 @@ type WebhooksSubscribePathParams struct {
 }
 
 type WebhooksSubscribeRequestBody struct {
-	EventTypes []string `json:"eventTypes"`
-	URL        *string  `json:"url"`
+	EventTypes []string `json:"eventTypes,omitempty"`
+	URL        *string  `json:"url,omitempty"`
 }
 
 type WebhooksSubscribeSecurity struct {

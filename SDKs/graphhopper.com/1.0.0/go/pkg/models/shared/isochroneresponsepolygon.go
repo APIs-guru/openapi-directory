@@ -1,11 +1,11 @@
 package shared
 
 type IsochroneResponsePolygonProperties struct {
-	Bucket *int32 `json:"bucket"`
+	Bucket *int32 `json:"bucket,omitempty"`
 }
 
 type IsochroneResponsePolygon struct {
-	Geometry   *Polygon                            `json:"geometry"`
-	Properties *IsochroneResponsePolygonProperties `json:"properties"`
-	Type       *string                             `json:"type"`
+	Geometry   *Polygon                            `json:"geometry,omitempty"`
+	Properties *IsochroneResponsePolygonProperties `json:"properties,omitempty"`
+	Type       *string                             `json:"type,omitempty"`
 }

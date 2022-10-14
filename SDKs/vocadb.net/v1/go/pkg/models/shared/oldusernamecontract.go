@@ -5,6 +5,6 @@ import (
 )
 
 type OldUsernameContract struct {
-	Date    *time.Time `json:"date"`
-	OldName *string    `json:"oldName"`
+	Date    *time.Time `json:"date,omitempty"`
+	OldName *string    `json:"oldName,omitempty"`
 }

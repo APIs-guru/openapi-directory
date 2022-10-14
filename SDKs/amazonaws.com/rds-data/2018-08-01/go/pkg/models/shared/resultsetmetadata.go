@@ -1,6 +1,6 @@
 package shared
 
 type ResultSetMetadata struct {
-	ColumnCount    *int64           `json:"columnCount"`
-	ColumnMetadata []ColumnMetadata `json:"columnMetadata"`
+	ColumnCount    *int64           `json:"columnCount,omitempty"`
+	ColumnMetadata []ColumnMetadata `json:"columnMetadata,omitempty"`
 }

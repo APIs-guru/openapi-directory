@@ -1,6 +1,6 @@
 package shared
 
 type CreateRateBasedRuleResponse struct {
-	ChangeToken *string        `json:"ChangeToken"`
-	Rule        *RateBasedRule `json:"Rule"`
+	ChangeToken *string        `json:"ChangeToken,omitempty"`
+	Rule        *RateBasedRule `json:"Rule,omitempty"`
 }

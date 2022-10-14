@@ -16,8 +16,8 @@ type HiuSubscriptionRequestNotificationAcknowledgementAcknowledgement struct {
 }
 
 type HiuSubscriptionRequestNotificationAcknowledgement struct {
-	Acknowledgement *HiuSubscriptionRequestNotificationAcknowledgementAcknowledgement `json:"acknowledgement"`
-	Error           *Error                                                            `json:"error"`
+	Acknowledgement *HiuSubscriptionRequestNotificationAcknowledgementAcknowledgement `json:"acknowledgement,omitempty"`
+	Error           *Error                                                            `json:"error,omitempty"`
 	RequestID       string                                                            `json:"requestId"`
 	Resp            RequestReference                                                  `json:"resp"`
 	Timestamp       time.Time                                                         `json:"timestamp"`

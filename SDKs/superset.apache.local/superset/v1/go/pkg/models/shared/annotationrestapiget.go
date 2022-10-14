@@ -5,11 +5,11 @@ import (
 )
 
 type AnnotationRestAPIGet struct {
-	EndDttm      *time.Time `json:"end_dttm"`
-	ID           *int32     `json:"id"`
-	JSONMetadata *string    `json:"json_metadata"`
+	EndDttm      *time.Time `json:"end_dttm,omitempty"`
+	ID           *int32     `json:"id,omitempty"`
+	JSONMetadata *string    `json:"json_metadata,omitempty"`
 	Layer        Meta2      `json:"layer"`
-	LongDescr    *string    `json:"long_descr"`
-	ShortDescr   *string    `json:"short_descr"`
-	StartDttm    *time.Time `json:"start_dttm"`
+	LongDescr    *string    `json:"long_descr,omitempty"`
+	ShortDescr   *string    `json:"short_descr,omitempty"`
+	StartDttm    *time.Time `json:"start_dttm,omitempty"`
 }

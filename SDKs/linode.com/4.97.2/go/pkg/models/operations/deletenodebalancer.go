@@ -27,7 +27,7 @@ type DeleteNodeBalancerRequest struct {
 }
 
 type DeleteNodeBalancerDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteNodeBalancerResponse struct {

@@ -32,20 +32,20 @@ const (
 )
 
 type CreateDeploymentRequestBodyCanarySettings struct {
-	PercentTraffic         *float64          `json:"percentTraffic"`
-	StageVariableOverrides map[string]string `json:"stageVariableOverrides"`
-	UseStageCache          *bool             `json:"useStageCache"`
+	PercentTraffic         *float64          `json:"percentTraffic,omitempty"`
+	StageVariableOverrides map[string]string `json:"stageVariableOverrides,omitempty"`
+	UseStageCache          *bool             `json:"useStageCache,omitempty"`
 }
 
 type CreateDeploymentRequestBody struct {
-	CacheClusterEnabled *bool                                            `json:"cacheClusterEnabled"`
-	CacheClusterSize    *CreateDeploymentRequestBodyCacheClusterSizeEnum `json:"cacheClusterSize"`
-	CanarySettings      *CreateDeploymentRequestBodyCanarySettings       `json:"canarySettings"`
-	Description         *string                                          `json:"description"`
-	StageDescription    *string                                          `json:"stageDescription"`
-	StageName           *string                                          `json:"stageName"`
-	TracingEnabled      *bool                                            `json:"tracingEnabled"`
-	Variables           map[string]string                                `json:"variables"`
+	CacheClusterEnabled *bool                                            `json:"cacheClusterEnabled,omitempty"`
+	CacheClusterSize    *CreateDeploymentRequestBodyCacheClusterSizeEnum `json:"cacheClusterSize,omitempty"`
+	CanarySettings      *CreateDeploymentRequestBodyCanarySettings       `json:"canarySettings,omitempty"`
+	Description         *string                                          `json:"description,omitempty"`
+	StageDescription    *string                                          `json:"stageDescription,omitempty"`
+	StageName           *string                                          `json:"stageName,omitempty"`
+	TracingEnabled      *bool                                            `json:"tracingEnabled,omitempty"`
+	Variables           map[string]string                                `json:"variables,omitempty"`
 }
 
 type CreateDeploymentRequest struct {

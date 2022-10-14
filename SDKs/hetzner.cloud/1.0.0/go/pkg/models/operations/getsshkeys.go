@@ -45,7 +45,7 @@ type GetSSHKeys200ApplicationJSONSSHKeys struct {
 }
 
 type GetSSHKeys200ApplicationJSON struct {
-	Meta    *GetSSHKeys200ApplicationJSONMeta     `json:"meta"`
+	Meta    *GetSSHKeys200ApplicationJSONMeta     `json:"meta,omitempty"`
 	SSHKeys []GetSSHKeys200ApplicationJSONSSHKeys `json:"ssh_keys"`
 }
 

@@ -20,9 +20,9 @@ type UpdateContactHeaders struct {
 }
 
 type UpdateContactRequestBody struct {
-	AttributesData   *string                  `json:"AttributesData"`
-	TopicPreferences []shared.TopicPreference `json:"TopicPreferences"`
-	UnsubscribeAll   *bool                    `json:"UnsubscribeAll"`
+	AttributesData   *string                  `json:"AttributesData,omitempty"`
+	TopicPreferences []shared.TopicPreference `json:"TopicPreferences,omitempty"`
+	UnsubscribeAll   *bool                    `json:"UnsubscribeAll,omitempty"`
 }
 
 type UpdateContactRequest struct {

@@ -1,17 +1,17 @@
 package shared
 
 type PageElement struct {
-	Description  *string          `json:"description"`
-	ElementGroup *Group           `json:"elementGroup"`
-	Image        *Image           `json:"image"`
-	Line         *Line            `json:"line"`
-	ObjectID     *string          `json:"objectId"`
-	Shape        *Shape           `json:"shape"`
-	SheetsChart  *SheetsChart     `json:"sheetsChart"`
-	Size         *Size            `json:"size"`
-	Table        *Table           `json:"table"`
-	Title        *string          `json:"title"`
-	Transform    *AffineTransform `json:"transform"`
-	Video        *Video           `json:"video"`
-	WordArt      *WordArt         `json:"wordArt"`
+	Description  *string          `json:"description,omitempty"`
+	ElementGroup *Group           `json:"elementGroup,omitempty"`
+	Image        *Image           `json:"image,omitempty"`
+	Line         *Line            `json:"line,omitempty"`
+	ObjectID     *string          `json:"objectId,omitempty"`
+	Shape        *Shape           `json:"shape,omitempty"`
+	SheetsChart  *SheetsChart     `json:"sheetsChart,omitempty"`
+	Size         *Size            `json:"size,omitempty"`
+	Table        *Table           `json:"table,omitempty"`
+	Title        *string          `json:"title,omitempty"`
+	Transform    *AffineTransform `json:"transform,omitempty"`
+	Video        *Video           `json:"video,omitempty"`
+	WordArt      *WordArt         `json:"wordArt,omitempty"`
 }

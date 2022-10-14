@@ -1,7 +1,7 @@
 package shared
 
 type ListMedicalVocabulariesResponse struct {
-	NextToken    *string              `json:"NextToken"`
-	Status       *VocabularyStateEnum `json:"Status"`
-	Vocabularies []VocabularyInfo     `json:"Vocabularies"`
+	NextToken    *string              `json:"NextToken,omitempty"`
+	Status       *VocabularyStateEnum `json:"Status,omitempty"`
+	Vocabularies []VocabularyInfo     `json:"Vocabularies,omitempty"`
 }

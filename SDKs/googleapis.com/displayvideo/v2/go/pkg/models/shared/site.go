@@ -1,6 +1,6 @@
 package shared
 
 type Site struct {
-	Name       *string `json:"name"`
-	URLOrAppID *string `json:"urlOrAppId"`
+	Name       *string `json:"name,omitempty"`
+	URLOrAppID *string `json:"urlOrAppId,omitempty"`
 }

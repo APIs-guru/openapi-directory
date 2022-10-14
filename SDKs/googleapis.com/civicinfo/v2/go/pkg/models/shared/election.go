@@ -9,9 +9,9 @@ const (
 )
 
 type Election struct {
-	ElectionDay         *string                          `json:"electionDay"`
-	ID                  *string                          `json:"id"`
-	Name                *string                          `json:"name"`
-	OcdDivisionID       *string                          `json:"ocdDivisionId"`
-	ShapeLookupBehavior *ElectionShapeLookupBehaviorEnum `json:"shapeLookupBehavior"`
+	ElectionDay         *string                          `json:"electionDay,omitempty"`
+	ID                  *string                          `json:"id,omitempty"`
+	Name                *string                          `json:"name,omitempty"`
+	OcdDivisionID       *string                          `json:"ocdDivisionId,omitempty"`
+	ShapeLookupBehavior *ElectionShapeLookupBehaviorEnum `json:"shapeLookupBehavior,omitempty"`
 }

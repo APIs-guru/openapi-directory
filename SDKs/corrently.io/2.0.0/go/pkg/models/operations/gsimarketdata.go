@@ -13,7 +13,7 @@ type GsiMarketdataRequest struct {
 }
 
 type GsiMarketdata200ApplicationJSON struct {
-	Data []shared.MarketData `json:"data"`
+	Data []shared.MarketData `json:"data,omitempty"`
 }
 
 type GsiMarketdataResponse struct {

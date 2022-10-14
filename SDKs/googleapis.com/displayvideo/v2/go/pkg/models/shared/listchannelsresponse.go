@@ -1,6 +1,6 @@
 package shared
 
 type ListChannelsResponse struct {
-	Channels      []Channel `json:"channels"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Channels      []Channel `json:"channels,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
 }

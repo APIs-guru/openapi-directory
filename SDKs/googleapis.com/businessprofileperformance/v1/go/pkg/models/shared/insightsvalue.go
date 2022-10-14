@@ -1,6 +1,6 @@
 package shared
 
 type InsightsValue struct {
-	Threshold *string `json:"threshold"`
-	Value     *string `json:"value"`
+	Threshold *string `json:"threshold,omitempty"`
+	Value     *string `json:"value,omitempty"`
 }

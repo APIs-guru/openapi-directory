@@ -2,13 +2,13 @@ package shared
 
 type DescribedUser struct {
 	Arn                   string                  `json:"Arn"`
-	HomeDirectory         *string                 `json:"HomeDirectory"`
-	HomeDirectoryMappings []HomeDirectoryMapEntry `json:"HomeDirectoryMappings"`
-	HomeDirectoryType     *HomeDirectoryTypeEnum  `json:"HomeDirectoryType"`
-	Policy                *string                 `json:"Policy"`
-	PosixProfile          *PosixProfile           `json:"PosixProfile"`
-	Role                  *string                 `json:"Role"`
-	SSHPublicKeys         []SSHPublicKey          `json:"SshPublicKeys"`
-	Tags                  []Tag                   `json:"Tags"`
-	UserName              *string                 `json:"UserName"`
+	HomeDirectory         *string                 `json:"HomeDirectory,omitempty"`
+	HomeDirectoryMappings []HomeDirectoryMapEntry `json:"HomeDirectoryMappings,omitempty"`
+	HomeDirectoryType     *HomeDirectoryTypeEnum  `json:"HomeDirectoryType,omitempty"`
+	Policy                *string                 `json:"Policy,omitempty"`
+	PosixProfile          *PosixProfile           `json:"PosixProfile,omitempty"`
+	Role                  *string                 `json:"Role,omitempty"`
+	SSHPublicKeys         []SSHPublicKey          `json:"SshPublicKeys,omitempty"`
+	Tags                  []Tag                   `json:"Tags,omitempty"`
+	UserName              *string                 `json:"UserName,omitempty"`
 }

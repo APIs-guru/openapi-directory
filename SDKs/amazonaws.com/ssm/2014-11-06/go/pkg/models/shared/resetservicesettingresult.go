@@ -1,5 +1,5 @@
 package shared
 
 type ResetServiceSettingResult struct {
-	ServiceSetting *ServiceSetting `json:"ServiceSetting"`
+	ServiceSetting *ServiceSetting `json:"ServiceSetting,omitempty"`
 }

@@ -27,24 +27,24 @@ const (
 )
 
 type GoogleCloudFunctionRulePatchTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type GoogleCloudFunctionRulePatchTarget struct {
-	Enveloped    *bool                                         `json:"enveloped"`
-	Format       *GoogleCloudFunctionRulePatchTargetFormatEnum `json:"format"`
-	FunctionName *string                                       `json:"functionName"`
-	Headers      []GoogleCloudFunctionRulePatchTargetHeaders   `json:"headers"`
-	ProjectID    *string                                       `json:"projectId"`
-	Region       *string                                       `json:"region"`
-	SigningKeyID *string                                       `json:"signingKeyId"`
+	Enveloped    *bool                                         `json:"enveloped,omitempty"`
+	Format       *GoogleCloudFunctionRulePatchTargetFormatEnum `json:"format,omitempty"`
+	FunctionName *string                                       `json:"functionName,omitempty"`
+	Headers      []GoogleCloudFunctionRulePatchTargetHeaders   `json:"headers,omitempty"`
+	ProjectID    *string                                       `json:"projectId,omitempty"`
+	Region       *string                                       `json:"region,omitempty"`
+	SigningKeyID *string                                       `json:"signingKeyId,omitempty"`
 }
 
 type GoogleCloudFunctionRulePatch struct {
-	RequestMode *GoogleCloudFunctionRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *GoogleCloudFunctionRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                                  `json:"source"`
-	Status      *GoogleCloudFunctionRulePatchStatusEnum      `json:"status"`
-	Target      *GoogleCloudFunctionRulePatchTarget          `json:"target"`
+	RequestMode *GoogleCloudFunctionRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *GoogleCloudFunctionRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                                  `json:"source,omitempty"`
+	Status      *GoogleCloudFunctionRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *GoogleCloudFunctionRulePatchTarget          `json:"target,omitempty"`
 }

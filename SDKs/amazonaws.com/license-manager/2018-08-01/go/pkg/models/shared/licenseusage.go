@@ -1,5 +1,5 @@
 package shared
 
 type LicenseUsage struct {
-	EntitlementUsages []EntitlementUsage `json:"EntitlementUsages"`
+	EntitlementUsages []EntitlementUsage `json:"EntitlementUsages,omitempty"`
 }

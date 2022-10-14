@@ -9,9 +9,9 @@ const (
 )
 
 type AudioAsset struct {
-	Effect *AudioAssetEffectEnum `json:"effect"`
+	Effect *AudioAssetEffectEnum `json:"effect,omitempty"`
 	Src    string                `json:"src"`
-	Trim   *float64              `json:"trim"`
+	Trim   *float64              `json:"trim,omitempty"`
 	Type   string                `json:"type"`
-	Volume *float64              `json:"volume"`
+	Volume *float64              `json:"volume,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type QuotaSettings struct {
-	Limit  *int64               `json:"limit"`
-	Offset *int64               `json:"offset"`
-	Period *QuotaPeriodTypeEnum `json:"period"`
+	Limit  *int64               `json:"limit,omitempty"`
+	Offset *int64               `json:"offset,omitempty"`
+	Period *QuotaPeriodTypeEnum `json:"period,omitempty"`
 }

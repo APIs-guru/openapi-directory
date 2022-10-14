@@ -5,7 +5,7 @@ import (
 )
 
 type DetectorModelSummary struct {
-	CreationTime             *time.Time `json:"creationTime"`
-	DetectorModelDescription *string    `json:"detectorModelDescription"`
-	DetectorModelName        *string    `json:"detectorModelName"`
+	CreationTime             *time.Time `json:"creationTime,omitempty"`
+	DetectorModelDescription *string    `json:"detectorModelDescription,omitempty"`
+	DetectorModelName        *string    `json:"detectorModelName,omitempty"`
 }

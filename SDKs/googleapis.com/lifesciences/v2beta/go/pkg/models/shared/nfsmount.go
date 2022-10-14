@@ -1,5 +1,5 @@
 package shared
 
 type NfsMount struct {
-	Target *string `json:"target"`
+	Target *string `json:"target,omitempty"`
 }

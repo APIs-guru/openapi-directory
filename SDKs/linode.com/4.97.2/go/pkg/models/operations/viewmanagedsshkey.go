@@ -22,11 +22,11 @@ type ViewManagedSSHKeyRequest struct {
 }
 
 type ViewManagedSSHKey200ApplicationJSON struct {
-	SSHKey *string `json:"ssh_key"`
+	SSHKey *string `json:"ssh_key,omitempty"`
 }
 
 type ViewManagedSSHKeyDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ViewManagedSSHKeyResponse struct {

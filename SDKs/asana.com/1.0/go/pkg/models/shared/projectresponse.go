@@ -37,16 +37,16 @@ const (
 )
 
 type ProjectResponseCurrentStatus struct {
-	Author       *UserCompact                          `json:"author"`
+	Author       *UserCompact                          `json:"author,omitempty"`
 	Color        ProjectResponseCurrentStatusColorEnum `json:"color"`
-	CreatedAt    *time.Time                            `json:"created_at"`
-	CreatedBy    *UserCompact                          `json:"created_by"`
-	Gid          *string                               `json:"gid"`
-	HTMLText     *string                               `json:"html_text"`
-	ModifiedAt   *time.Time                            `json:"modified_at"`
-	ResourceType *string                               `json:"resource_type"`
+	CreatedAt    *time.Time                            `json:"created_at,omitempty"`
+	CreatedBy    *UserCompact                          `json:"created_by,omitempty"`
+	Gid          *string                               `json:"gid,omitempty"`
+	HTMLText     *string                               `json:"html_text,omitempty"`
+	ModifiedAt   *time.Time                            `json:"modified_at,omitempty"`
+	ResourceType *string                               `json:"resource_type,omitempty"`
 	Text         string                                `json:"text"`
-	Title        *string                               `json:"title"`
+	Title        *string                               `json:"title,omitempty"`
 }
 
 type ProjectResponseDefaultViewEnum string
@@ -96,47 +96,47 @@ const (
 )
 
 type ProjectResponseOwner struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type ProjectResponseTeam struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type ProjectResponseWorkspace struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type ProjectResponse struct {
-	Archived            *bool                           `json:"archived"`
-	Color               *ProjectResponseColorEnum       `json:"color"`
-	CreatedAt           *time.Time                      `json:"created_at"`
-	CurrentStatus       *ProjectResponseCurrentStatus   `json:"current_status"`
-	CustomFieldSettings []CustomFieldSettingCompact     `json:"custom_field_settings"`
-	CustomFields        []CustomFieldCompact            `json:"custom_fields"`
-	DefaultView         *ProjectResponseDefaultViewEnum `json:"default_view"`
-	DueDate             *time.Time                      `json:"due_date"`
-	DueOn               *time.Time                      `json:"due_on"`
-	Followers           []UserCompact                   `json:"followers"`
-	Gid                 *string                         `json:"gid"`
-	HTMLNotes           *string                         `json:"html_notes"`
-	Icon                *ProjectResponseIconEnum        `json:"icon"`
-	IsTemplate          *bool                           `json:"is_template"`
-	Members             []UserCompact                   `json:"members"`
-	ModifiedAt          *time.Time                      `json:"modified_at"`
-	Name                *string                         `json:"name"`
-	Notes               *string                         `json:"notes"`
-	Owner               *ProjectResponseOwner           `json:"owner"`
-	PermalinkURL        *string                         `json:"permalink_url"`
-	Public              *bool                           `json:"public"`
-	ResourceType        *string                         `json:"resource_type"`
-	StartOn             *time.Time                      `json:"start_on"`
-	Team                *ProjectResponseTeam            `json:"team"`
-	Workspace           *ProjectResponseWorkspace       `json:"workspace"`
+	Archived            *bool                           `json:"archived,omitempty"`
+	Color               *ProjectResponseColorEnum       `json:"color,omitempty"`
+	CreatedAt           *time.Time                      `json:"created_at,omitempty"`
+	CurrentStatus       *ProjectResponseCurrentStatus   `json:"current_status,omitempty"`
+	CustomFieldSettings []CustomFieldSettingCompact     `json:"custom_field_settings,omitempty"`
+	CustomFields        []CustomFieldCompact            `json:"custom_fields,omitempty"`
+	DefaultView         *ProjectResponseDefaultViewEnum `json:"default_view,omitempty"`
+	DueDate             *time.Time                      `json:"due_date,omitempty"`
+	DueOn               *time.Time                      `json:"due_on,omitempty"`
+	Followers           []UserCompact                   `json:"followers,omitempty"`
+	Gid                 *string                         `json:"gid,omitempty"`
+	HTMLNotes           *string                         `json:"html_notes,omitempty"`
+	Icon                *ProjectResponseIconEnum        `json:"icon,omitempty"`
+	IsTemplate          *bool                           `json:"is_template,omitempty"`
+	Members             []UserCompact                   `json:"members,omitempty"`
+	ModifiedAt          *time.Time                      `json:"modified_at,omitempty"`
+	Name                *string                         `json:"name,omitempty"`
+	Notes               *string                         `json:"notes,omitempty"`
+	Owner               *ProjectResponseOwner           `json:"owner,omitempty"`
+	PermalinkURL        *string                         `json:"permalink_url,omitempty"`
+	Public              *bool                           `json:"public,omitempty"`
+	ResourceType        *string                         `json:"resource_type,omitempty"`
+	StartOn             *time.Time                      `json:"start_on,omitempty"`
+	Team                *ProjectResponseTeam            `json:"team,omitempty"`
+	Workspace           *ProjectResponseWorkspace       `json:"workspace,omitempty"`
 }

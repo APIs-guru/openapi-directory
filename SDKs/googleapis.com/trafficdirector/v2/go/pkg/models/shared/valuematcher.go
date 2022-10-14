@@ -1,10 +1,10 @@
 package shared
 
 type ValueMatcher struct {
-	BoolMatch    *bool                  `json:"boolMatch"`
-	DoubleMatch  *DoubleMatcher         `json:"doubleMatch"`
-	ListMatch    *ListMatcher           `json:"listMatch"`
-	NullMatch    map[string]interface{} `json:"nullMatch"`
-	PresentMatch *bool                  `json:"presentMatch"`
-	StringMatch  *StringMatcher         `json:"stringMatch"`
+	BoolMatch    *bool                  `json:"boolMatch,omitempty"`
+	DoubleMatch  *DoubleMatcher         `json:"doubleMatch,omitempty"`
+	ListMatch    *ListMatcher           `json:"listMatch,omitempty"`
+	NullMatch    map[string]interface{} `json:"nullMatch,omitempty"`
+	PresentMatch *bool                  `json:"presentMatch,omitempty"`
+	StringMatch  *StringMatcher         `json:"stringMatch,omitempty"`
 }

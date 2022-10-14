@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudPolicyanalyzerV1Activity struct {
-	Activity          map[string]interface{}                        `json:"activity"`
-	ActivityType      *string                                       `json:"activityType"`
-	FullResourceName  *string                                       `json:"fullResourceName"`
-	ObservationPeriod *GoogleCloudPolicyanalyzerV1ObservationPeriod `json:"observationPeriod"`
+	Activity          map[string]interface{}                        `json:"activity,omitempty"`
+	ActivityType      *string                                       `json:"activityType,omitempty"`
+	FullResourceName  *string                                       `json:"fullResourceName,omitempty"`
+	ObservationPeriod *GoogleCloudPolicyanalyzerV1ObservationPeriod `json:"observationPeriod,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AwsAccount struct {
-	AccountID   *string `json:"accountId"`
-	PrincipalID *string `json:"principalId"`
+	AccountID   *string `json:"accountId,omitempty"`
+	PrincipalID *string `json:"principalId,omitempty"`
 }

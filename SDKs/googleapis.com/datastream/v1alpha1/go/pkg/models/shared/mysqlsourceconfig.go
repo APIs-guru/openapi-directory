@@ -1,6 +1,6 @@
 package shared
 
 type MysqlSourceConfig struct {
-	Allowlist  *MysqlRdbms `json:"allowlist"`
-	Rejectlist *MysqlRdbms `json:"rejectlist"`
+	Allowlist  *MysqlRdbms `json:"allowlist,omitempty"`
+	Rejectlist *MysqlRdbms `json:"rejectlist,omitempty"`
 }

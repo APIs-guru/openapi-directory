@@ -1,8 +1,8 @@
 package shared
 
 type LifecycleConfig struct {
-	AutoDeleteTime *string `json:"autoDeleteTime"`
-	AutoDeleteTTL  *string `json:"autoDeleteTtl"`
-	IdleDeleteTTL  *string `json:"idleDeleteTtl"`
-	IdleStartTime  *string `json:"idleStartTime"`
+	AutoDeleteTime *string `json:"autoDeleteTime,omitempty"`
+	AutoDeleteTTL  *string `json:"autoDeleteTtl,omitempty"`
+	IdleDeleteTTL  *string `json:"idleDeleteTtl,omitempty"`
+	IdleStartTime  *string `json:"idleStartTime,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type AwsIamGroupDetails struct {
-	AttachedManagedPolicies []AwsIamAttachedManagedPolicy `json:"AttachedManagedPolicies"`
-	CreateDate              *string                       `json:"CreateDate"`
-	GroupID                 *string                       `json:"GroupId"`
-	GroupName               *string                       `json:"GroupName"`
-	GroupPolicyList         []AwsIamGroupPolicy           `json:"GroupPolicyList"`
-	Path                    *string                       `json:"Path"`
+	AttachedManagedPolicies []AwsIamAttachedManagedPolicy `json:"AttachedManagedPolicies,omitempty"`
+	CreateDate              *string                       `json:"CreateDate,omitempty"`
+	GroupID                 *string                       `json:"GroupId,omitempty"`
+	GroupName               *string                       `json:"GroupName,omitempty"`
+	GroupPolicyList         []AwsIamGroupPolicy           `json:"GroupPolicyList,omitempty"`
+	Path                    *string                       `json:"Path,omitempty"`
 }

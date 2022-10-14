@@ -30,14 +30,14 @@ const (
 )
 
 type FolderSettings struct {
-	Description                    *string                       `json:"Description" form:"name=Description"`
-	Enable                         *bool                         `json:"Enable" form:"name=Enable"`
-	FolderType                     *FolderSettingsFolderTypeEnum `json:"FolderType" form:"name=FolderType"`
-	Name                           *string                       `json:"Name" form:"name=Name"`
-	ParentFolderID                 *string                       `json:"ParentFolderId" form:"name=ParentFolderId"`
-	SerialNumber                   *int64                        `json:"SerialNumber" form:"name=SerialNumber"`
-	UseableForVirtualBillingMeters *bool                         `json:"UseableForVirtualBillingMeters" form:"name=UseableForVirtualBillingMeters"`
-	ValueCorrection                *float64                      `json:"ValueCorrection" form:"name=ValueCorrection"`
-	ValueCorrectionParentFolder    *float64                      `json:"ValueCorrectionParentFolder" form:"name=ValueCorrectionParentFolder"`
-	VisualizationName              *string                       `json:"VisualizationName" form:"name=VisualizationName"`
+	Description                    *string                       `json:"Description,omitempty" form:"name=Description"`
+	Enable                         *bool                         `json:"Enable,omitempty" form:"name=Enable"`
+	FolderType                     *FolderSettingsFolderTypeEnum `json:"FolderType,omitempty" form:"name=FolderType"`
+	Name                           *string                       `json:"Name,omitempty" form:"name=Name"`
+	ParentFolderID                 *string                       `json:"ParentFolderId,omitempty" form:"name=ParentFolderId"`
+	SerialNumber                   *int64                        `json:"SerialNumber,omitempty" form:"name=SerialNumber"`
+	UseableForVirtualBillingMeters *bool                         `json:"UseableForVirtualBillingMeters,omitempty" form:"name=UseableForVirtualBillingMeters"`
+	ValueCorrection                *float64                      `json:"ValueCorrection,omitempty" form:"name=ValueCorrection"`
+	ValueCorrectionParentFolder    *float64                      `json:"ValueCorrectionParentFolder,omitempty" form:"name=ValueCorrectionParentFolder"`
+	VisualizationName              *string                       `json:"VisualizationName,omitempty" form:"name=VisualizationName"`
 }

@@ -30,9 +30,9 @@ const (
 )
 
 type RegisterCertificateRequestBody struct {
-	CaCertificatePem *string                                   `json:"caCertificatePem"`
+	CaCertificatePem *string                                   `json:"caCertificatePem,omitempty"`
 	CertificatePem   string                                    `json:"certificatePem"`
-	Status           *RegisterCertificateRequestBodyStatusEnum `json:"status"`
+	Status           *RegisterCertificateRequestBodyStatusEnum `json:"status,omitempty"`
 }
 
 type RegisterCertificateRequest struct {

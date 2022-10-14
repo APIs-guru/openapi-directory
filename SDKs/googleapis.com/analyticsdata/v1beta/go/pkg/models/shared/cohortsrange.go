@@ -10,7 +10,7 @@ const (
 )
 
 type CohortsRange struct {
-	EndOffset   *int32                       `json:"endOffset"`
-	Granularity *CohortsRangeGranularityEnum `json:"granularity"`
-	StartOffset *int32                       `json:"startOffset"`
+	EndOffset   *int32                       `json:"endOffset,omitempty"`
+	Granularity *CohortsRangeGranularityEnum `json:"granularity,omitempty"`
+	StartOffset *int32                       `json:"startOffset,omitempty"`
 }

@@ -15,8 +15,8 @@ const (
 
 type BatchResponseSubscriptionResponse struct {
 	CompletedAt time.Time                                   `json:"completedAt"`
-	Links       map[string]string                           `json:"links"`
-	RequestedAt *time.Time                                  `json:"requestedAt"`
+	Links       map[string]string                           `json:"links,omitempty"`
+	RequestedAt *time.Time                                  `json:"requestedAt,omitempty"`
 	Results     []SubscriptionResponse                      `json:"results"`
 	StartedAt   time.Time                                   `json:"startedAt"`
 	Status      BatchResponseSubscriptionResponseStatusEnum `json:"status"`

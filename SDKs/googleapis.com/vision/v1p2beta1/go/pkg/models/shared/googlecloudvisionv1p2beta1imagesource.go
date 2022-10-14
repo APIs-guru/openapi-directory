@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudVisionV1p2beta1ImageSource struct {
-	GcsImageURI *string `json:"gcsImageUri"`
-	ImageURI    *string `json:"imageUri"`
+	GcsImageURI *string `json:"gcsImageUri,omitempty"`
+	ImageURI    *string `json:"imageUri,omitempty"`
 }

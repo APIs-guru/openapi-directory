@@ -1,14 +1,14 @@
 package shared
 
 type ResolverQueryLogConfig struct {
-	Arn              *string                           `json:"Arn"`
-	AssociationCount *int64                            `json:"AssociationCount"`
-	CreationTime     *string                           `json:"CreationTime"`
-	CreatorRequestID *string                           `json:"CreatorRequestId"`
-	DestinationArn   *string                           `json:"DestinationArn"`
-	ID               *string                           `json:"Id"`
-	Name             *string                           `json:"Name"`
-	OwnerID          *string                           `json:"OwnerId"`
-	ShareStatus      *ShareStatusEnum                  `json:"ShareStatus"`
-	Status           *ResolverQueryLogConfigStatusEnum `json:"Status"`
+	Arn              *string                           `json:"Arn,omitempty"`
+	AssociationCount *int64                            `json:"AssociationCount,omitempty"`
+	CreationTime     *string                           `json:"CreationTime,omitempty"`
+	CreatorRequestID *string                           `json:"CreatorRequestId,omitempty"`
+	DestinationArn   *string                           `json:"DestinationArn,omitempty"`
+	ID               *string                           `json:"Id,omitempty"`
+	Name             *string                           `json:"Name,omitempty"`
+	OwnerID          *string                           `json:"OwnerId,omitempty"`
+	ShareStatus      *ShareStatusEnum                  `json:"ShareStatus,omitempty"`
+	Status           *ResolverQueryLogConfigStatusEnum `json:"Status,omitempty"`
 }

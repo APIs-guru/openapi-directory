@@ -15,5 +15,5 @@ const (
 )
 
 type LoggingConfig struct {
-	DriverLogLevels map[string]LoggingConfigDriverLogLevelsEnum `json:"driverLogLevels"`
+	DriverLogLevels map[string]LoggingConfigDriverLogLevelsEnum `json:"driverLogLevels,omitempty"`
 }

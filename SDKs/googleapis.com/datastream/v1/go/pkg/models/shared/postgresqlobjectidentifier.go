@@ -1,6 +1,6 @@
 package shared
 
 type PostgresqlObjectIdentifier struct {
-	Schema *string `json:"schema"`
-	Table  *string `json:"table"`
+	Schema *string `json:"schema,omitempty"`
+	Table  *string `json:"table,omitempty"`
 }

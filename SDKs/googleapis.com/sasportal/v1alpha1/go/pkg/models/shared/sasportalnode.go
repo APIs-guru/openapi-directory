@@ -1,7 +1,7 @@
 package shared
 
 type SasPortalNode struct {
-	DisplayName *string  `json:"displayName"`
-	Name        *string  `json:"name"`
-	SasUserIds  []string `json:"sasUserIds"`
+	DisplayName *string  `json:"displayName,omitempty"`
+	Name        *string  `json:"name,omitempty"`
+	SasUserIds  []string `json:"sasUserIds,omitempty"`
 }

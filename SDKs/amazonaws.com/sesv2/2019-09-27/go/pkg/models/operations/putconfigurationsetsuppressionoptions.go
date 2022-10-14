@@ -19,7 +19,7 @@ type PutConfigurationSetSuppressionOptionsHeaders struct {
 }
 
 type PutConfigurationSetSuppressionOptionsRequestBody struct {
-	SuppressedReasons []shared.SuppressionListReasonEnum `json:"SuppressedReasons"`
+	SuppressedReasons []shared.SuppressionListReasonEnum `json:"SuppressedReasons,omitempty"`
 }
 
 type PutConfigurationSetSuppressionOptionsRequest struct {

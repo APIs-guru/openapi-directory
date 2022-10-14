@@ -5,7 +5,7 @@ import (
 )
 
 type PolicyGeneration struct {
-	CompletedOn  *time.Time    `json:"completedOn"`
+	CompletedOn  *time.Time    `json:"completedOn,omitempty"`
 	JobID        string        `json:"jobId"`
 	PrincipalArn string        `json:"principalArn"`
 	StartedOn    time.Time     `json:"startedOn"`

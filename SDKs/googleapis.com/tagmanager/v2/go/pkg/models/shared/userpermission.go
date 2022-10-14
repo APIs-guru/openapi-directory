@@ -1,9 +1,9 @@
 package shared
 
 type UserPermission struct {
-	AccountAccess   *AccountAccess    `json:"accountAccess"`
-	AccountID       *string           `json:"accountId"`
-	ContainerAccess []ContainerAccess `json:"containerAccess"`
-	EmailAddress    *string           `json:"emailAddress"`
-	Path            *string           `json:"path"`
+	AccountAccess   *AccountAccess    `json:"accountAccess,omitempty"`
+	AccountID       *string           `json:"accountId,omitempty"`
+	ContainerAccess []ContainerAccess `json:"containerAccess,omitempty"`
+	EmailAddress    *string           `json:"emailAddress,omitempty"`
+	Path            *string           `json:"path,omitempty"`
 }

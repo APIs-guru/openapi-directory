@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDataplexV1Partition struct {
-	Etag     *string  `json:"etag"`
-	Location *string  `json:"location"`
-	Name     *string  `json:"name"`
-	Values   []string `json:"values"`
+	Etag     *string  `json:"etag,omitempty"`
+	Location *string  `json:"location,omitempty"`
+	Name     *string  `json:"name,omitempty"`
+	Values   []string `json:"values,omitempty"`
 }

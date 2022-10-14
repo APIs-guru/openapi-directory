@@ -1,7 +1,7 @@
 package shared
 
 type UpdateParagraphStyleRequest struct {
-	Fields         *string         `json:"fields"`
-	ParagraphStyle *ParagraphStyle `json:"paragraphStyle"`
-	Range          *Range          `json:"range"`
+	Fields         *string         `json:"fields,omitempty"`
+	ParagraphStyle *ParagraphStyle `json:"paragraphStyle,omitempty"`
+	Range          *Range          `json:"range,omitempty"`
 }

@@ -1,20 +1,20 @@
 package shared
 
 type GoogleCloudDialogflowV2QueryResult struct {
-	Action                      *string                                         `json:"action"`
-	AllRequiredParamsPresent    *bool                                           `json:"allRequiredParamsPresent"`
-	CancelsSlotFilling          *bool                                           `json:"cancelsSlotFilling"`
-	DiagnosticInfo              map[string]interface{}                          `json:"diagnosticInfo"`
-	FulfillmentMessages         []GoogleCloudDialogflowV2IntentMessage          `json:"fulfillmentMessages"`
-	FulfillmentText             *string                                         `json:"fulfillmentText"`
-	Intent                      *GoogleCloudDialogflowV2Intent                  `json:"intent"`
-	IntentDetectionConfidence   *float32                                        `json:"intentDetectionConfidence"`
-	LanguageCode                *string                                         `json:"languageCode"`
-	OutputContexts              []GoogleCloudDialogflowV2Context                `json:"outputContexts"`
-	Parameters                  map[string]interface{}                          `json:"parameters"`
-	QueryText                   *string                                         `json:"queryText"`
-	SentimentAnalysisResult     *GoogleCloudDialogflowV2SentimentAnalysisResult `json:"sentimentAnalysisResult"`
-	SpeechRecognitionConfidence *float32                                        `json:"speechRecognitionConfidence"`
-	WebhookPayload              map[string]interface{}                          `json:"webhookPayload"`
-	WebhookSource               *string                                         `json:"webhookSource"`
+	Action                      *string                                         `json:"action,omitempty"`
+	AllRequiredParamsPresent    *bool                                           `json:"allRequiredParamsPresent,omitempty"`
+	CancelsSlotFilling          *bool                                           `json:"cancelsSlotFilling,omitempty"`
+	DiagnosticInfo              map[string]interface{}                          `json:"diagnosticInfo,omitempty"`
+	FulfillmentMessages         []GoogleCloudDialogflowV2IntentMessage          `json:"fulfillmentMessages,omitempty"`
+	FulfillmentText             *string                                         `json:"fulfillmentText,omitempty"`
+	Intent                      *GoogleCloudDialogflowV2Intent                  `json:"intent,omitempty"`
+	IntentDetectionConfidence   *float32                                        `json:"intentDetectionConfidence,omitempty"`
+	LanguageCode                *string                                         `json:"languageCode,omitempty"`
+	OutputContexts              []GoogleCloudDialogflowV2Context                `json:"outputContexts,omitempty"`
+	Parameters                  map[string]interface{}                          `json:"parameters,omitempty"`
+	QueryText                   *string                                         `json:"queryText,omitempty"`
+	SentimentAnalysisResult     *GoogleCloudDialogflowV2SentimentAnalysisResult `json:"sentimentAnalysisResult,omitempty"`
+	SpeechRecognitionConfidence *float32                                        `json:"speechRecognitionConfidence,omitempty"`
+	WebhookPayload              map[string]interface{}                          `json:"webhookPayload,omitempty"`
+	WebhookSource               *string                                         `json:"webhookSource,omitempty"`
 }

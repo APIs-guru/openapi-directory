@@ -14,15 +14,15 @@ type GetPhotoSizesByIDRequest struct {
 }
 
 type GetPhotoSizesByID200ApplicationJSONSizes struct {
-	Canblog     *float64      `json:"canblog"`
-	Candownload *float64      `json:"candownload"`
-	Canprint    *float64      `json:"canprint"`
-	Sizes       []shared.Size `json:"sizes"`
+	Canblog     *float64      `json:"canblog,omitempty"`
+	Candownload *float64      `json:"candownload,omitempty"`
+	Canprint    *float64      `json:"canprint,omitempty"`
+	Sizes       []shared.Size `json:"sizes,omitempty"`
 }
 
 type GetPhotoSizesByID200ApplicationJSON struct {
-	Sizes *GetPhotoSizesByID200ApplicationJSONSizes `json:"sizes"`
-	Stat  *string                                   `json:"stat"`
+	Sizes *GetPhotoSizesByID200ApplicationJSONSizes `json:"sizes,omitempty"`
+	Stat  *string                                   `json:"stat,omitempty"`
 }
 
 type GetPhotoSizesByIDResponse struct {

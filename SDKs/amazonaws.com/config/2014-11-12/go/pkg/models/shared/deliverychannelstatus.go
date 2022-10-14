@@ -1,8 +1,8 @@
 package shared
 
 type DeliveryChannelStatus struct {
-	ConfigHistoryDeliveryInfo  *ConfigExportDeliveryInfo `json:"configHistoryDeliveryInfo"`
-	ConfigSnapshotDeliveryInfo *ConfigExportDeliveryInfo `json:"configSnapshotDeliveryInfo"`
-	ConfigStreamDeliveryInfo   *ConfigStreamDeliveryInfo `json:"configStreamDeliveryInfo"`
-	Name                       *string                   `json:"name"`
+	ConfigHistoryDeliveryInfo  *ConfigExportDeliveryInfo `json:"configHistoryDeliveryInfo,omitempty"`
+	ConfigSnapshotDeliveryInfo *ConfigExportDeliveryInfo `json:"configSnapshotDeliveryInfo,omitempty"`
+	ConfigStreamDeliveryInfo   *ConfigStreamDeliveryInfo `json:"configStreamDeliveryInfo,omitempty"`
+	Name                       *string                   `json:"name,omitempty"`
 }

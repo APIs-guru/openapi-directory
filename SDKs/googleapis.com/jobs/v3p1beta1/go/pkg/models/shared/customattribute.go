@@ -1,7 +1,7 @@
 package shared
 
 type CustomAttribute struct {
-	Filterable   *bool    `json:"filterable"`
-	LongValues   []string `json:"longValues"`
-	StringValues []string `json:"stringValues"`
+	Filterable   *bool    `json:"filterable,omitempty"`
+	LongValues   []string `json:"longValues,omitempty"`
+	StringValues []string `json:"stringValues,omitempty"`
 }

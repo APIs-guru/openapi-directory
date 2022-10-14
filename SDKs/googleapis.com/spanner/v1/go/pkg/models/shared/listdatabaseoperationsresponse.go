@@ -1,6 +1,6 @@
 package shared
 
 type ListDatabaseOperationsResponse struct {
-	NextPageToken *string     `json:"nextPageToken"`
-	Operations    []Operation `json:"operations"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
+	Operations    []Operation `json:"operations,omitempty"`
 }

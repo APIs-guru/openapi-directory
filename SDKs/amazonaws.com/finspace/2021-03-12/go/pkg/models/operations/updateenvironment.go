@@ -26,19 +26,19 @@ const (
 )
 
 type UpdateEnvironmentRequestBodyFederationParameters struct {
-	ApplicationCallBackURL *string           `json:"applicationCallBackURL"`
-	AttributeMap           map[string]string `json:"attributeMap"`
-	FederationProviderName *string           `json:"federationProviderName"`
-	FederationUrn          *string           `json:"federationURN"`
-	SamlMetadataDocument   *string           `json:"samlMetadataDocument"`
-	SamlMetadataURL        *string           `json:"samlMetadataURL"`
+	ApplicationCallBackURL *string           `json:"applicationCallBackURL,omitempty"`
+	AttributeMap           map[string]string `json:"attributeMap,omitempty"`
+	FederationProviderName *string           `json:"federationProviderName,omitempty"`
+	FederationUrn          *string           `json:"federationURN,omitempty"`
+	SamlMetadataDocument   *string           `json:"samlMetadataDocument,omitempty"`
+	SamlMetadataURL        *string           `json:"samlMetadataURL,omitempty"`
 }
 
 type UpdateEnvironmentRequestBody struct {
-	Description          *string                                           `json:"description"`
-	FederationMode       *UpdateEnvironmentRequestBodyFederationModeEnum   `json:"federationMode"`
-	FederationParameters *UpdateEnvironmentRequestBodyFederationParameters `json:"federationParameters"`
-	Name                 *string                                           `json:"name"`
+	Description          *string                                           `json:"description,omitempty"`
+	FederationMode       *UpdateEnvironmentRequestBodyFederationModeEnum   `json:"federationMode,omitempty"`
+	FederationParameters *UpdateEnvironmentRequestBodyFederationParameters `json:"federationParameters,omitempty"`
+	Name                 *string                                           `json:"name,omitempty"`
 }
 
 type UpdateEnvironmentRequest struct {

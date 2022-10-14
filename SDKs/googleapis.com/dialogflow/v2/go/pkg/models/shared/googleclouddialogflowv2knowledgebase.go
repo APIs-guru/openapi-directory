@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowV2KnowledgeBase struct {
-	DisplayName  *string `json:"displayName"`
-	LanguageCode *string `json:"languageCode"`
-	Name         *string `json:"name"`
+	DisplayName  *string `json:"displayName,omitempty"`
+	LanguageCode *string `json:"languageCode,omitempty"`
+	Name         *string `json:"name,omitempty"`
 }

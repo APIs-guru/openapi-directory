@@ -37,12 +37,12 @@ const (
 )
 
 type Property struct {
-	BuiltYear                  *int32                                  `json:"builtYear"`
-	BuiltYearException         *PropertyBuiltYearExceptionEnum         `json:"builtYearException"`
-	FloorsCount                *int32                                  `json:"floorsCount"`
-	FloorsCountException       *PropertyFloorsCountExceptionEnum       `json:"floorsCountException"`
-	LastRenovatedYear          *int32                                  `json:"lastRenovatedYear"`
-	LastRenovatedYearException *PropertyLastRenovatedYearExceptionEnum `json:"lastRenovatedYearException"`
-	RoomsCount                 *int32                                  `json:"roomsCount"`
-	RoomsCountException        *PropertyRoomsCountExceptionEnum        `json:"roomsCountException"`
+	BuiltYear                  *int32                                  `json:"builtYear,omitempty"`
+	BuiltYearException         *PropertyBuiltYearExceptionEnum         `json:"builtYearException,omitempty"`
+	FloorsCount                *int32                                  `json:"floorsCount,omitempty"`
+	FloorsCountException       *PropertyFloorsCountExceptionEnum       `json:"floorsCountException,omitempty"`
+	LastRenovatedYear          *int32                                  `json:"lastRenovatedYear,omitempty"`
+	LastRenovatedYearException *PropertyLastRenovatedYearExceptionEnum `json:"lastRenovatedYearException,omitempty"`
+	RoomsCount                 *int32                                  `json:"roomsCount,omitempty"`
+	RoomsCountException        *PropertyRoomsCountExceptionEnum        `json:"roomsCountException,omitempty"`
 }

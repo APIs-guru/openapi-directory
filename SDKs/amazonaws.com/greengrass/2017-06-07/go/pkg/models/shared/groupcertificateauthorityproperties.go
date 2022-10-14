@@ -1,6 +1,6 @@
 package shared
 
 type GroupCertificateAuthorityProperties struct {
-	GroupCertificateAuthorityArn *string `json:"GroupCertificateAuthorityArn"`
-	GroupCertificateAuthorityID  *string `json:"GroupCertificateAuthorityId"`
+	GroupCertificateAuthorityArn *string `json:"GroupCertificateAuthorityArn,omitempty"`
+	GroupCertificateAuthorityID  *string `json:"GroupCertificateAuthorityId,omitempty"`
 }

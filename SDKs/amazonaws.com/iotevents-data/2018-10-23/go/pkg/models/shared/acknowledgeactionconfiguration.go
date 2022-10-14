@@ -1,5 +1,5 @@
 package shared
 
 type AcknowledgeActionConfiguration struct {
-	Note *string `json:"note"`
+	Note *string `json:"note,omitempty"`
 }

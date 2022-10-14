@@ -1,5 +1,5 @@
 package shared
 
 type CreateSystemInstanceResponse struct {
-	Summary *SystemInstanceSummary `json:"summary"`
+	Summary *SystemInstanceSummary `json:"summary,omitempty"`
 }

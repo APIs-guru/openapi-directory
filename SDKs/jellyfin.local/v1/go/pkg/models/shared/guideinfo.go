@@ -5,6 +5,6 @@ import (
 )
 
 type GuideInfo struct {
-	EndDate   *time.Time `json:"EndDate"`
-	StartDate *time.Time `json:"StartDate"`
+	EndDate   *time.Time `json:"EndDate,omitempty"`
+	StartDate *time.Time `json:"StartDate,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type SchemaConfig struct {
-	RecursiveStructureDepth *string                     `json:"recursiveStructureDepth"`
-	SchemaType              *SchemaConfigSchemaTypeEnum `json:"schemaType"`
+	RecursiveStructureDepth *string                     `json:"recursiveStructureDepth,omitempty"`
+	SchemaType              *SchemaConfigSchemaTypeEnum `json:"schemaType,omitempty"`
 }

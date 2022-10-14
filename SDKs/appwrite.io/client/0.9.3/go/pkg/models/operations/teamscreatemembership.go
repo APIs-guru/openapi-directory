@@ -10,7 +10,7 @@ type TeamsCreateMembershipPathParams struct {
 
 type TeamsCreateMembershipRequestBody struct {
 	Email string   `json:"email"`
-	Name  *string  `json:"name"`
+	Name  *string  `json:"name,omitempty"`
 	Roles []string `json:"roles"`
 	URL   string   `json:"url"`
 }

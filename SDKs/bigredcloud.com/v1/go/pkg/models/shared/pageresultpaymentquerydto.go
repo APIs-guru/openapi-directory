@@ -1,7 +1,7 @@
 package shared
 
 type PageResultPaymentQueryDto struct {
-	Count        *int64            `json:"Count"`
-	Items        []PaymentQueryDto `json:"Items"`
-	NextPageLink *string           `json:"NextPageLink"`
+	Count        *int64            `json:"Count,omitempty"`
+	Items        []PaymentQueryDto `json:"Items,omitempty"`
+	NextPageLink *string           `json:"NextPageLink,omitempty"`
 }

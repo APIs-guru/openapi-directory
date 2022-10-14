@@ -30,13 +30,13 @@ const (
 )
 
 type FolderMenuItem struct {
-	AutoExportSettings *AutoExportSettings           `json:"AutoExportSettings"`
-	Children           []FolderMenuItem              `json:"Children"`
-	Description        *string                       `json:"Description"`
-	FolderType         *FolderMenuItemFolderTypeEnum `json:"FolderType"`
-	Icon               *string                       `json:"Icon"`
-	ID                 *string                       `json:"Id"`
-	MeterSerialNumber  *string                       `json:"MeterSerialNumber"`
-	Name               *string                       `json:"Name"`
-	UserID             *string                       `json:"UserId"`
+	AutoExportSettings *AutoExportSettings           `json:"AutoExportSettings,omitempty"`
+	Children           []FolderMenuItem              `json:"Children,omitempty"`
+	Description        *string                       `json:"Description,omitempty"`
+	FolderType         *FolderMenuItemFolderTypeEnum `json:"FolderType,omitempty"`
+	Icon               *string                       `json:"Icon,omitempty"`
+	ID                 *string                       `json:"Id,omitempty"`
+	MeterSerialNumber  *string                       `json:"MeterSerialNumber,omitempty"`
+	Name               *string                       `json:"Name,omitempty"`
+	UserID             *string                       `json:"UserId,omitempty"`
 }

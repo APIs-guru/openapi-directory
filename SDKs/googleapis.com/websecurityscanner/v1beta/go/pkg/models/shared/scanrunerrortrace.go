@@ -13,7 +13,7 @@ const (
 )
 
 type ScanRunErrorTrace struct {
-	Code                    *ScanRunErrorTraceCodeEnum `json:"code"`
-	MostCommonHTTPErrorCode *int32                     `json:"mostCommonHttpErrorCode"`
-	ScanConfigError         *ScanConfigError           `json:"scanConfigError"`
+	Code                    *ScanRunErrorTraceCodeEnum `json:"code,omitempty"`
+	MostCommonHTTPErrorCode *int32                     `json:"mostCommonHttpErrorCode,omitempty"`
+	ScanConfigError         *ScanConfigError           `json:"scanConfigError,omitempty"`
 }

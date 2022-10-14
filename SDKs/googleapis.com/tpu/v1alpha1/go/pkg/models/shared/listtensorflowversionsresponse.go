@@ -1,7 +1,7 @@
 package shared
 
 type ListTensorFlowVersionsResponse struct {
-	NextPageToken      *string             `json:"nextPageToken"`
-	TensorflowVersions []TensorFlowVersion `json:"tensorflowVersions"`
-	Unreachable        []string            `json:"unreachable"`
+	NextPageToken      *string             `json:"nextPageToken,omitempty"`
+	TensorflowVersions []TensorFlowVersion `json:"tensorflowVersions,omitempty"`
+	Unreachable        []string            `json:"unreachable,omitempty"`
 }

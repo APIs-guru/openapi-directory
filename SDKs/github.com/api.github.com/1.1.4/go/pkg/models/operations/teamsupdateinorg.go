@@ -25,11 +25,11 @@ const (
 )
 
 type TeamsUpdateInOrgRequestBody struct {
-	Description  *string                                    `json:"description"`
-	Name         *string                                    `json:"name"`
-	ParentTeamID *int64                                     `json:"parent_team_id"`
-	Permission   *TeamsUpdateInOrgRequestBodyPermissionEnum `json:"permission"`
-	Privacy      *TeamsUpdateInOrgRequestBodyPrivacyEnum    `json:"privacy"`
+	Description  *string                                    `json:"description,omitempty"`
+	Name         *string                                    `json:"name,omitempty"`
+	ParentTeamID *int64                                     `json:"parent_team_id,omitempty"`
+	Permission   *TeamsUpdateInOrgRequestBodyPermissionEnum `json:"permission,omitempty"`
+	Privacy      *TeamsUpdateInOrgRequestBodyPrivacyEnum    `json:"privacy,omitempty"`
 }
 
 type TeamsUpdateInOrgRequest struct {

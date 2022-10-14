@@ -1,5 +1,5 @@
 package shared
 
 type StartProjectVersionResponse struct {
-	Status *ProjectVersionStatusEnum `json:"Status"`
+	Status *ProjectVersionStatusEnum `json:"Status,omitempty"`
 }

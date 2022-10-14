@@ -1,19 +1,19 @@
 package shared
 
 type CalendarResource struct {
-	BuildingID             *string      `json:"buildingId"`
-	Capacity               *int32       `json:"capacity"`
-	Etags                  *string      `json:"etags"`
-	FeatureInstances       *interface{} `json:"featureInstances"`
-	FloorName              *string      `json:"floorName"`
-	FloorSection           *string      `json:"floorSection"`
-	GeneratedResourceName  *string      `json:"generatedResourceName"`
-	Kind                   *string      `json:"kind"`
-	ResourceCategory       *string      `json:"resourceCategory"`
-	ResourceDescription    *string      `json:"resourceDescription"`
-	ResourceEmail          *string      `json:"resourceEmail"`
-	ResourceID             *string      `json:"resourceId"`
-	ResourceName           *string      `json:"resourceName"`
-	ResourceType           *string      `json:"resourceType"`
-	UserVisibleDescription *string      `json:"userVisibleDescription"`
+	BuildingID             *string      `json:"buildingId,omitempty"`
+	Capacity               *int32       `json:"capacity,omitempty"`
+	Etags                  *string      `json:"etags,omitempty"`
+	FeatureInstances       *interface{} `json:"featureInstances,omitempty"`
+	FloorName              *string      `json:"floorName,omitempty"`
+	FloorSection           *string      `json:"floorSection,omitempty"`
+	GeneratedResourceName  *string      `json:"generatedResourceName,omitempty"`
+	Kind                   *string      `json:"kind,omitempty"`
+	ResourceCategory       *string      `json:"resourceCategory,omitempty"`
+	ResourceDescription    *string      `json:"resourceDescription,omitempty"`
+	ResourceEmail          *string      `json:"resourceEmail,omitempty"`
+	ResourceID             *string      `json:"resourceId,omitempty"`
+	ResourceName           *string      `json:"resourceName,omitempty"`
+	ResourceType           *string      `json:"resourceType,omitempty"`
+	UserVisibleDescription *string      `json:"userVisibleDescription,omitempty"`
 }

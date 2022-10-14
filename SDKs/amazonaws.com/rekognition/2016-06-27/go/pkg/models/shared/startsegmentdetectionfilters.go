@@ -1,6 +1,6 @@
 package shared
 
 type StartSegmentDetectionFilters struct {
-	ShotFilter         *StartShotDetectionFilter         `json:"ShotFilter"`
-	TechnicalCueFilter *StartTechnicalCueDetectionFilter `json:"TechnicalCueFilter"`
+	ShotFilter         *StartShotDetectionFilter         `json:"ShotFilter,omitempty"`
+	TechnicalCueFilter *StartTechnicalCueDetectionFilter `json:"TechnicalCueFilter,omitempty"`
 }

@@ -27,7 +27,7 @@ const (
 )
 
 type Image struct {
-	ImageURL *string          `json:"imageUrl"`
-	Status   *ImageStatusEnum `json:"status"`
-	Type     *ImageTypeEnum   `json:"type"`
+	ImageURL *string          `json:"imageUrl,omitempty"`
+	Status   *ImageStatusEnum `json:"status,omitempty"`
+	Type     *ImageTypeEnum   `json:"type,omitempty"`
 }

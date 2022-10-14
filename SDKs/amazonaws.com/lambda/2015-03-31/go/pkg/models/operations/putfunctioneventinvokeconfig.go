@@ -23,14 +23,14 @@ type PutFunctionEventInvokeConfigHeaders struct {
 }
 
 type PutFunctionEventInvokeConfigRequestBodyDestinationConfig struct {
-	OnFailure *shared.OnFailure `json:"OnFailure"`
-	OnSuccess *shared.OnSuccess `json:"OnSuccess"`
+	OnFailure *shared.OnFailure `json:"OnFailure,omitempty"`
+	OnSuccess *shared.OnSuccess `json:"OnSuccess,omitempty"`
 }
 
 type PutFunctionEventInvokeConfigRequestBody struct {
-	DestinationConfig        *PutFunctionEventInvokeConfigRequestBodyDestinationConfig `json:"DestinationConfig"`
-	MaximumEventAgeInSeconds *int64                                                    `json:"MaximumEventAgeInSeconds"`
-	MaximumRetryAttempts     *int64                                                    `json:"MaximumRetryAttempts"`
+	DestinationConfig        *PutFunctionEventInvokeConfigRequestBodyDestinationConfig `json:"DestinationConfig,omitempty"`
+	MaximumEventAgeInSeconds *int64                                                    `json:"MaximumEventAgeInSeconds,omitempty"`
+	MaximumRetryAttempts     *int64                                                    `json:"MaximumRetryAttempts,omitempty"`
 }
 
 type PutFunctionEventInvokeConfigRequest struct {

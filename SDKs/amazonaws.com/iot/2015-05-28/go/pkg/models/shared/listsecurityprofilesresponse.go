@@ -1,6 +1,6 @@
 package shared
 
 type ListSecurityProfilesResponse struct {
-	NextToken                  *string                     `json:"nextToken"`
-	SecurityProfileIdentifiers []SecurityProfileIdentifier `json:"securityProfileIdentifiers"`
+	NextToken                  *string                     `json:"nextToken,omitempty"`
+	SecurityProfileIdentifiers []SecurityProfileIdentifier `json:"securityProfileIdentifiers,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type Location struct {
-	Address *string `json:"address"`
-	City    *string `json:"city"`
-	Lat     *string `json:"lat"`
-	Lon     *string `json:"lon"`
-	State   *string `json:"state"`
-	Zip     *string `json:"zip"`
+	Address *string `json:"address,omitempty"`
+	City    *string `json:"city,omitempty"`
+	Lat     *string `json:"lat,omitempty"`
+	Lon     *string `json:"lon,omitempty"`
+	State   *string `json:"state,omitempty"`
+	Zip     *string `json:"zip,omitempty"`
 }

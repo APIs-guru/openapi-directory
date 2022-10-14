@@ -5,7 +5,7 @@ import (
 )
 
 type PermissionSetProvisioningStatusMetadata struct {
-	CreatedDate *time.Time        `json:"CreatedDate"`
-	RequestID   *string           `json:"RequestId"`
-	Status      *StatusValuesEnum `json:"Status"`
+	CreatedDate *time.Time        `json:"CreatedDate,omitempty"`
+	RequestID   *string           `json:"RequestId,omitempty"`
+	Status      *StatusValuesEnum `json:"Status,omitempty"`
 }

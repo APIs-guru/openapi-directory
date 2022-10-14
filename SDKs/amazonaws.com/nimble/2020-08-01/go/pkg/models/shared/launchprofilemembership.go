@@ -1,7 +1,7 @@
 package shared
 
 type LaunchProfileMembership struct {
-	IdentityStoreID *string                   `json:"identityStoreId"`
-	Persona         *LaunchProfilePersonaEnum `json:"persona"`
-	PrincipalID     *string                   `json:"principalId"`
+	IdentityStoreID *string                   `json:"identityStoreId,omitempty"`
+	Persona         *LaunchProfilePersonaEnum `json:"persona,omitempty"`
+	PrincipalID     *string                   `json:"principalId,omitempty"`
 }

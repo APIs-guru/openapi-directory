@@ -18,15 +18,15 @@ const (
 )
 
 type Queue struct {
-	AppEngineHTTPQueue       *AppEngineHTTPQueue       `json:"appEngineHttpQueue"`
-	Name                     *string                   `json:"name"`
-	PurgeTime                *string                   `json:"purgeTime"`
-	RateLimits               *RateLimits               `json:"rateLimits"`
-	RetryConfig              *RetryConfig              `json:"retryConfig"`
-	StackdriverLoggingConfig *StackdriverLoggingConfig `json:"stackdriverLoggingConfig"`
-	State                    *QueueStateEnum           `json:"state"`
-	Stats                    *QueueStats               `json:"stats"`
-	TaskTTL                  *string                   `json:"taskTtl"`
-	TombstoneTTL             *string                   `json:"tombstoneTtl"`
-	Type                     *QueueTypeEnum            `json:"type"`
+	AppEngineHTTPQueue       *AppEngineHTTPQueue       `json:"appEngineHttpQueue,omitempty"`
+	Name                     *string                   `json:"name,omitempty"`
+	PurgeTime                *string                   `json:"purgeTime,omitempty"`
+	RateLimits               *RateLimits               `json:"rateLimits,omitempty"`
+	RetryConfig              *RetryConfig              `json:"retryConfig,omitempty"`
+	StackdriverLoggingConfig *StackdriverLoggingConfig `json:"stackdriverLoggingConfig,omitempty"`
+	State                    *QueueStateEnum           `json:"state,omitempty"`
+	Stats                    *QueueStats               `json:"stats,omitempty"`
+	TaskTTL                  *string                   `json:"taskTtl,omitempty"`
+	TombstoneTTL             *string                   `json:"tombstoneTtl,omitempty"`
+	Type                     *QueueTypeEnum            `json:"type,omitempty"`
 }

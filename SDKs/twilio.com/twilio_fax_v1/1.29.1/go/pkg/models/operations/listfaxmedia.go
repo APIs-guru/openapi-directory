@@ -28,18 +28,18 @@ type ListFaxMediaRequest struct {
 }
 
 type ListFaxMedia200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListFaxMedia200ApplicationJSONListFaxMediaResponse struct {
-	Media []shared.FaxV1FaxFaxMedia           `json:"media"`
-	Meta  *ListFaxMedia200ApplicationJSONMeta `json:"meta"`
+	Media []shared.FaxV1FaxFaxMedia           `json:"media,omitempty"`
+	Meta  *ListFaxMedia200ApplicationJSONMeta `json:"meta,omitempty"`
 }
 
 type ListFaxMediaResponse struct {

@@ -1,11 +1,11 @@
 package shared
 
 type TflAPIPresentationEntitiesJourneyPlannerItineraryResult struct {
-	CycleHireDockingStationData *TflAPIPresentationEntitiesJourneyPlannerJourneyPlannerCycleHireDockingStationData `json:"cycleHireDockingStationData"`
-	JourneyVector               *TflAPIPresentationEntitiesJourneyPlannerJourneyVector                             `json:"journeyVector"`
-	Journeys                    []TflAPIPresentationEntitiesJourneyPlannerJourney                                  `json:"journeys"`
-	Lines                       []TflAPIPresentationEntitiesLine                                                   `json:"lines"`
-	RecommendedMaxAgeMinutes    *int32                                                                             `json:"recommendedMaxAgeMinutes"`
-	SearchCriteria              *TflAPIPresentationEntitiesJourneyPlannerSearchCriteria                            `json:"searchCriteria"`
-	StopMessages                []string                                                                           `json:"stopMessages"`
+	CycleHireDockingStationData *TflAPIPresentationEntitiesJourneyPlannerJourneyPlannerCycleHireDockingStationData `json:"cycleHireDockingStationData,omitempty"`
+	JourneyVector               *TflAPIPresentationEntitiesJourneyPlannerJourneyVector                             `json:"journeyVector,omitempty"`
+	Journeys                    []TflAPIPresentationEntitiesJourneyPlannerJourney                                  `json:"journeys,omitempty"`
+	Lines                       []TflAPIPresentationEntitiesLine                                                   `json:"lines,omitempty"`
+	RecommendedMaxAgeMinutes    *int32                                                                             `json:"recommendedMaxAgeMinutes,omitempty"`
+	SearchCriteria              *TflAPIPresentationEntitiesJourneyPlannerSearchCriteria                            `json:"searchCriteria,omitempty"`
+	StopMessages                []string                                                                           `json:"stopMessages,omitempty"`
 }

@@ -1,20 +1,20 @@
 package shared
 
 type ReviewObject struct {
-	OwnerAvatarURL *string `json:"ownerAvatarURL"`
-	OwnerCountry   *string `json:"ownerCountry"`
-	OwnerID        *int64  `json:"ownerId"`
-	OwnerName      *string `json:"ownerName"`
-	ProductCode    *string `json:"productCode"`
-	ProductTitle   *string `json:"productTitle"`
-	ProductURLName *string `json:"productUrlName"`
-	PublishedDate  *string `json:"publishedDate"`
-	Rating         *int64  `json:"rating"`
-	Review         *string `json:"review"`
-	ReviewID       *int64  `json:"reviewId"`
-	SortOrder      *int64  `json:"sortOrder"`
-	SslSupported   *bool   `json:"sslSupported"`
-	SubmissionDate *string `json:"submissionDate"`
-	ViatorFeedback *string `json:"viatorFeedback"`
-	ViatorNotes    *string `json:"viatorNotes"`
+	OwnerAvatarURL *string `json:"ownerAvatarURL,omitempty"`
+	OwnerCountry   *string `json:"ownerCountry,omitempty"`
+	OwnerID        *int64  `json:"ownerId,omitempty"`
+	OwnerName      *string `json:"ownerName,omitempty"`
+	ProductCode    *string `json:"productCode,omitempty"`
+	ProductTitle   *string `json:"productTitle,omitempty"`
+	ProductURLName *string `json:"productUrlName,omitempty"`
+	PublishedDate  *string `json:"publishedDate,omitempty"`
+	Rating         *int64  `json:"rating,omitempty"`
+	Review         *string `json:"review,omitempty"`
+	ReviewID       *int64  `json:"reviewId,omitempty"`
+	SortOrder      *int64  `json:"sortOrder,omitempty"`
+	SslSupported   *bool   `json:"sslSupported,omitempty"`
+	SubmissionDate *string `json:"submissionDate,omitempty"`
+	ViatorFeedback *string `json:"viatorFeedback,omitempty"`
+	ViatorNotes    *string `json:"viatorNotes,omitempty"`
 }

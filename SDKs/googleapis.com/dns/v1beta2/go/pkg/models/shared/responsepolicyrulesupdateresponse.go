@@ -1,6 +1,6 @@
 package shared
 
 type ResponsePolicyRulesUpdateResponse struct {
-	Header             *ResponseHeader     `json:"header"`
-	ResponsePolicyRule *ResponsePolicyRule `json:"responsePolicyRule"`
+	Header             *ResponseHeader     `json:"header,omitempty"`
+	ResponsePolicyRule *ResponsePolicyRule `json:"responsePolicyRule,omitempty"`
 }

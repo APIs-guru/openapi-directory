@@ -1,5 +1,5 @@
 package shared
 
 type CreateOutpostOutput struct {
-	Outpost *Outpost `json:"Outpost"`
+	Outpost *Outpost `json:"Outpost,omitempty"`
 }

@@ -12,7 +12,7 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaDataRetentionSettings struct {
-	EventDataRetention         *GoogleAnalyticsAdminV1alphaDataRetentionSettingsEventDataRetentionEnum `json:"eventDataRetention"`
-	Name                       *string                                                                 `json:"name"`
-	ResetUserDataOnNewActivity *bool                                                                   `json:"resetUserDataOnNewActivity"`
+	EventDataRetention         *GoogleAnalyticsAdminV1alphaDataRetentionSettingsEventDataRetentionEnum `json:"eventDataRetention,omitempty"`
+	Name                       *string                                                                 `json:"name,omitempty"`
+	ResetUserDataOnNewActivity *bool                                                                   `json:"resetUserDataOnNewActivity,omitempty"`
 }

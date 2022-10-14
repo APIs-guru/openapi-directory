@@ -1,12 +1,12 @@
 package shared
 
 type GoogleCloudSecuritycenterV1BigQueryExport struct {
-	CreateTime       *string `json:"createTime"`
-	Dataset          *string `json:"dataset"`
-	Description      *string `json:"description"`
-	Filter           *string `json:"filter"`
-	MostRecentEditor *string `json:"mostRecentEditor"`
-	Name             *string `json:"name"`
-	Principal        *string `json:"principal"`
-	UpdateTime       *string `json:"updateTime"`
+	CreateTime       *string `json:"createTime,omitempty"`
+	Dataset          *string `json:"dataset,omitempty"`
+	Description      *string `json:"description,omitempty"`
+	Filter           *string `json:"filter,omitempty"`
+	MostRecentEditor *string `json:"mostRecentEditor,omitempty"`
+	Name             *string `json:"name,omitempty"`
+	Principal        *string `json:"principal,omitempty"`
+	UpdateTime       *string `json:"updateTime,omitempty"`
 }

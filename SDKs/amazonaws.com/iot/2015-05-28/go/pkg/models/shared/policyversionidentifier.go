@@ -1,6 +1,6 @@
 package shared
 
 type PolicyVersionIdentifier struct {
-	PolicyName      *string `json:"policyName"`
-	PolicyVersionID *string `json:"policyVersionId"`
+	PolicyName      *string `json:"policyName,omitempty"`
+	PolicyVersionID *string `json:"policyVersionId,omitempty"`
 }

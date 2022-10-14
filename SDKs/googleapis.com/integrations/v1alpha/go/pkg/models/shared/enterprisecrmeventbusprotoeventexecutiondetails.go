@@ -14,12 +14,12 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoEventExecutionDetails struct {
-	EventAttemptStats              []EnterpriseCrmEventbusProtoEventExecutionDetailsEventAttemptStats      `json:"eventAttemptStats"`
-	EventExecutionSnapshot         []EnterpriseCrmEventbusProtoEventExecutionSnapshot                      `json:"eventExecutionSnapshot"`
-	EventExecutionState            *EnterpriseCrmEventbusProtoEventExecutionDetailsEventExecutionStateEnum `json:"eventExecutionState"`
-	EventRetriesFromBeginningCount *int32                                                                  `json:"eventRetriesFromBeginningCount"`
-	LogFilePath                    *string                                                                 `json:"logFilePath"`
-	NetworkAddress                 *string                                                                 `json:"networkAddress"`
-	NextExecutionTime              *string                                                                 `json:"nextExecutionTime"`
-	RyeLockUnheldCount             *int32                                                                  `json:"ryeLockUnheldCount"`
+	EventAttemptStats              []EnterpriseCrmEventbusProtoEventExecutionDetailsEventAttemptStats      `json:"eventAttemptStats,omitempty"`
+	EventExecutionSnapshot         []EnterpriseCrmEventbusProtoEventExecutionSnapshot                      `json:"eventExecutionSnapshot,omitempty"`
+	EventExecutionState            *EnterpriseCrmEventbusProtoEventExecutionDetailsEventExecutionStateEnum `json:"eventExecutionState,omitempty"`
+	EventRetriesFromBeginningCount *int32                                                                  `json:"eventRetriesFromBeginningCount,omitempty"`
+	LogFilePath                    *string                                                                 `json:"logFilePath,omitempty"`
+	NetworkAddress                 *string                                                                 `json:"networkAddress,omitempty"`
+	NextExecutionTime              *string                                                                 `json:"nextExecutionTime,omitempty"`
+	RyeLockUnheldCount             *int32                                                                  `json:"ryeLockUnheldCount,omitempty"`
 }

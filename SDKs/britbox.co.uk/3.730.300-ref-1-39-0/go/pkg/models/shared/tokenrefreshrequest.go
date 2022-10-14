@@ -8,6 +8,6 @@ const (
 )
 
 type TokenRefreshRequest struct {
-	CookieType *TokenRefreshRequestCookieTypeEnum `json:"cookieType"`
+	CookieType *TokenRefreshRequestCookieTypeEnum `json:"cookieType,omitempty"`
 	Token      string                             `json:"token"`
 }

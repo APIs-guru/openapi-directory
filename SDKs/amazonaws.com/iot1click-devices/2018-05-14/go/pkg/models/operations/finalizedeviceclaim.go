@@ -19,7 +19,7 @@ type FinalizeDeviceClaimHeaders struct {
 }
 
 type FinalizeDeviceClaimRequestBody struct {
-	Tags map[string]string `json:"tags"`
+	Tags map[string]string `json:"tags,omitempty"`
 }
 
 type FinalizeDeviceClaimRequest struct {

@@ -5,20 +5,20 @@ import (
 )
 
 type API struct {
-	APIEndpoint               *string           `json:"ApiEndpoint"`
-	APIGatewayManaged         *bool             `json:"ApiGatewayManaged"`
-	APIID                     *string           `json:"ApiId"`
-	APIKeySelectionExpression *string           `json:"ApiKeySelectionExpression"`
-	CorsConfiguration         *Cors             `json:"CorsConfiguration"`
-	CreatedDate               *time.Time        `json:"CreatedDate"`
-	Description               *string           `json:"Description"`
-	DisableExecuteAPIEndpoint *bool             `json:"DisableExecuteApiEndpoint"`
-	DisableSchemaValidation   *bool             `json:"DisableSchemaValidation"`
-	ImportInfo                []string          `json:"ImportInfo"`
+	APIEndpoint               *string           `json:"ApiEndpoint,omitempty"`
+	APIGatewayManaged         *bool             `json:"ApiGatewayManaged,omitempty"`
+	APIID                     *string           `json:"ApiId,omitempty"`
+	APIKeySelectionExpression *string           `json:"ApiKeySelectionExpression,omitempty"`
+	CorsConfiguration         *Cors             `json:"CorsConfiguration,omitempty"`
+	CreatedDate               *time.Time        `json:"CreatedDate,omitempty"`
+	Description               *string           `json:"Description,omitempty"`
+	DisableExecuteAPIEndpoint *bool             `json:"DisableExecuteApiEndpoint,omitempty"`
+	DisableSchemaValidation   *bool             `json:"DisableSchemaValidation,omitempty"`
+	ImportInfo                []string          `json:"ImportInfo,omitempty"`
 	Name                      string            `json:"Name"`
 	ProtocolType              ProtocolTypeEnum  `json:"ProtocolType"`
 	RouteSelectionExpression  string            `json:"RouteSelectionExpression"`
-	Tags                      map[string]string `json:"Tags"`
-	Version                   *string           `json:"Version"`
-	Warnings                  []string          `json:"Warnings"`
+	Tags                      map[string]string `json:"Tags,omitempty"`
+	Version                   *string           `json:"Version,omitempty"`
+	Warnings                  []string          `json:"Warnings,omitempty"`
 }

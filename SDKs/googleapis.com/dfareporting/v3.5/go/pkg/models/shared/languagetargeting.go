@@ -1,5 +1,5 @@
 package shared
 
 type LanguageTargeting struct {
-	Languages []Language `json:"languages"`
+	Languages []Language `json:"languages,omitempty"`
 }

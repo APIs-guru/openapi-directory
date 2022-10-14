@@ -11,9 +11,9 @@ const (
 )
 
 type LocalDiskInitializeParams struct {
-	Description *string                                `json:"description"`
-	DiskName    *string                                `json:"diskName"`
-	DiskSizeGb  *string                                `json:"diskSizeGb"`
-	DiskType    *LocalDiskInitializeParamsDiskTypeEnum `json:"diskType"`
-	Labels      map[string]string                      `json:"labels"`
+	Description *string                                `json:"description,omitempty"`
+	DiskName    *string                                `json:"diskName,omitempty"`
+	DiskSizeGb  *string                                `json:"diskSizeGb,omitempty"`
+	DiskType    *LocalDiskInitializeParamsDiskTypeEnum `json:"diskType,omitempty"`
+	Labels      map[string]string                      `json:"labels,omitempty"`
 }

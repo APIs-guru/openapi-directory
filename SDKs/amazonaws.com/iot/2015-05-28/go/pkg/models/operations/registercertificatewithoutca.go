@@ -27,7 +27,7 @@ const (
 
 type RegisterCertificateWithoutCaRequestBody struct {
 	CertificatePem string                                             `json:"certificatePem"`
-	Status         *RegisterCertificateWithoutCaRequestBodyStatusEnum `json:"status"`
+	Status         *RegisterCertificateWithoutCaRequestBodyStatusEnum `json:"status,omitempty"`
 }
 
 type RegisterCertificateWithoutCaRequest struct {

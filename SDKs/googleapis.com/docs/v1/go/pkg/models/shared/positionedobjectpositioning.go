@@ -13,7 +13,7 @@ const (
 )
 
 type PositionedObjectPositioning struct {
-	Layout     *PositionedObjectPositioningLayoutEnum `json:"layout"`
-	LeftOffset *Dimension                             `json:"leftOffset"`
-	TopOffset  *Dimension                             `json:"topOffset"`
+	Layout     *PositionedObjectPositioningLayoutEnum `json:"layout,omitempty"`
+	LeftOffset *Dimension                             `json:"leftOffset,omitempty"`
+	TopOffset  *Dimension                             `json:"topOffset,omitempty"`
 }

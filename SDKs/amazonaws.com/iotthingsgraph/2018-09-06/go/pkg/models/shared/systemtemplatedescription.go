@@ -1,7 +1,7 @@
 package shared
 
 type SystemTemplateDescription struct {
-	Definition                *DefinitionDocument    `json:"definition"`
-	Summary                   *SystemTemplateSummary `json:"summary"`
-	ValidatedNamespaceVersion *int64                 `json:"validatedNamespaceVersion"`
+	Definition                *DefinitionDocument    `json:"definition,omitempty"`
+	Summary                   *SystemTemplateSummary `json:"summary,omitempty"`
+	ValidatedNamespaceVersion *int64                 `json:"validatedNamespaceVersion,omitempty"`
 }

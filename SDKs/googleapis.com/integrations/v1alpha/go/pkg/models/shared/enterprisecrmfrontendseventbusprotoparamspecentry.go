@@ -24,16 +24,16 @@ const (
 )
 
 type EnterpriseCrmFrontendsEventbusProtoParamSpecEntry struct {
-	ClassName                  *string                                                        `json:"className"`
-	CollectionElementClassName *string                                                        `json:"collectionElementClassName"`
-	Config                     *EnterpriseCrmEventbusProtoParamSpecEntryConfig                `json:"config"`
-	DataType                   *EnterpriseCrmFrontendsEventbusProtoParamSpecEntryDataTypeEnum `json:"dataType"`
-	DefaultValue               *EnterpriseCrmFrontendsEventbusProtoParameterValueType         `json:"defaultValue"`
-	IsDeprecated               *bool                                                          `json:"isDeprecated"`
-	IsOutput                   *bool                                                          `json:"isOutput"`
-	JSONSchema                 *string                                                        `json:"jsonSchema"`
-	Key                        *string                                                        `json:"key"`
-	ProtoDef                   *EnterpriseCrmEventbusProtoParamSpecEntryProtoDefinition       `json:"protoDef"`
-	Required                   *bool                                                          `json:"required"`
-	ValidationRule             *EnterpriseCrmEventbusProtoParamSpecEntryValidationRule        `json:"validationRule"`
+	ClassName                  *string                                                        `json:"className,omitempty"`
+	CollectionElementClassName *string                                                        `json:"collectionElementClassName,omitempty"`
+	Config                     *EnterpriseCrmEventbusProtoParamSpecEntryConfig                `json:"config,omitempty"`
+	DataType                   *EnterpriseCrmFrontendsEventbusProtoParamSpecEntryDataTypeEnum `json:"dataType,omitempty"`
+	DefaultValue               *EnterpriseCrmFrontendsEventbusProtoParameterValueType         `json:"defaultValue,omitempty"`
+	IsDeprecated               *bool                                                          `json:"isDeprecated,omitempty"`
+	IsOutput                   *bool                                                          `json:"isOutput,omitempty"`
+	JSONSchema                 *string                                                        `json:"jsonSchema,omitempty"`
+	Key                        *string                                                        `json:"key,omitempty"`
+	ProtoDef                   *EnterpriseCrmEventbusProtoParamSpecEntryProtoDefinition       `json:"protoDef,omitempty"`
+	Required                   *bool                                                          `json:"required,omitempty"`
+	ValidationRule             *EnterpriseCrmEventbusProtoParamSpecEntryValidationRule        `json:"validationRule,omitempty"`
 }

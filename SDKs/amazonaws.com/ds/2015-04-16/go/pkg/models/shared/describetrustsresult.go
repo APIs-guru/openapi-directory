@@ -1,6 +1,6 @@
 package shared
 
 type DescribeTrustsResult struct {
-	NextToken *string `json:"NextToken"`
-	Trusts    []Trust `json:"Trusts"`
+	NextToken *string `json:"NextToken,omitempty"`
+	Trusts    []Trust `json:"Trusts,omitempty"`
 }

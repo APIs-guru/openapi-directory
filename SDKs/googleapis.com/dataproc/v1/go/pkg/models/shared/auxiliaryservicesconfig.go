@@ -1,6 +1,6 @@
 package shared
 
 type AuxiliaryServicesConfig struct {
-	MetastoreConfig          *MetastoreConfig          `json:"metastoreConfig"`
-	SparkHistoryServerConfig *SparkHistoryServerConfig `json:"sparkHistoryServerConfig"`
+	MetastoreConfig          *MetastoreConfig          `json:"metastoreConfig,omitempty"`
+	SparkHistoryServerConfig *SparkHistoryServerConfig `json:"sparkHistoryServerConfig,omitempty"`
 }

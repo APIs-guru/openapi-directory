@@ -1,212 +1,212 @@
 package shared
 
 type VolumeAccessInfoEpub struct {
-	AcsTokenLink *string `json:"acsTokenLink"`
-	DownloadLink *string `json:"downloadLink"`
-	IsAvailable  *bool   `json:"isAvailable"`
+	AcsTokenLink *string `json:"acsTokenLink,omitempty"`
+	DownloadLink *string `json:"downloadLink,omitempty"`
+	IsAvailable  *bool   `json:"isAvailable,omitempty"`
 }
 
 type VolumeAccessInfoPdf struct {
-	AcsTokenLink *string `json:"acsTokenLink"`
-	DownloadLink *string `json:"downloadLink"`
-	IsAvailable  *bool   `json:"isAvailable"`
+	AcsTokenLink *string `json:"acsTokenLink,omitempty"`
+	DownloadLink *string `json:"downloadLink,omitempty"`
+	IsAvailable  *bool   `json:"isAvailable,omitempty"`
 }
 
 type VolumeAccessInfo struct {
-	AccessViewStatus                 *string                    `json:"accessViewStatus"`
-	Country                          *string                    `json:"country"`
-	DownloadAccess                   *DownloadAccessRestriction `json:"downloadAccess"`
-	DriveImportedContentLink         *string                    `json:"driveImportedContentLink"`
-	Embeddable                       *bool                      `json:"embeddable"`
-	Epub                             *VolumeAccessInfoEpub      `json:"epub"`
-	ExplicitOfflineLicenseManagement *bool                      `json:"explicitOfflineLicenseManagement"`
-	Pdf                              *VolumeAccessInfoPdf       `json:"pdf"`
-	PublicDomain                     *bool                      `json:"publicDomain"`
-	QuoteSharingAllowed              *bool                      `json:"quoteSharingAllowed"`
-	TextToSpeechPermission           *string                    `json:"textToSpeechPermission"`
-	ViewOrderURL                     *string                    `json:"viewOrderUrl"`
-	Viewability                      *string                    `json:"viewability"`
-	WebReaderLink                    *string                    `json:"webReaderLink"`
+	AccessViewStatus                 *string                    `json:"accessViewStatus,omitempty"`
+	Country                          *string                    `json:"country,omitempty"`
+	DownloadAccess                   *DownloadAccessRestriction `json:"downloadAccess,omitempty"`
+	DriveImportedContentLink         *string                    `json:"driveImportedContentLink,omitempty"`
+	Embeddable                       *bool                      `json:"embeddable,omitempty"`
+	Epub                             *VolumeAccessInfoEpub      `json:"epub,omitempty"`
+	ExplicitOfflineLicenseManagement *bool                      `json:"explicitOfflineLicenseManagement,omitempty"`
+	Pdf                              *VolumeAccessInfoPdf       `json:"pdf,omitempty"`
+	PublicDomain                     *bool                      `json:"publicDomain,omitempty"`
+	QuoteSharingAllowed              *bool                      `json:"quoteSharingAllowed,omitempty"`
+	TextToSpeechPermission           *string                    `json:"textToSpeechPermission,omitempty"`
+	ViewOrderURL                     *string                    `json:"viewOrderUrl,omitempty"`
+	Viewability                      *string                    `json:"viewability,omitempty"`
+	WebReaderLink                    *string                    `json:"webReaderLink,omitempty"`
 }
 
 type VolumeLayerInfoLayers struct {
-	LayerID                  *string `json:"layerId"`
-	VolumeAnnotationsVersion *string `json:"volumeAnnotationsVersion"`
+	LayerID                  *string `json:"layerId,omitempty"`
+	VolumeAnnotationsVersion *string `json:"volumeAnnotationsVersion,omitempty"`
 }
 
 type VolumeLayerInfo struct {
-	Layers []VolumeLayerInfoLayers `json:"layers"`
+	Layers []VolumeLayerInfoLayers `json:"layers,omitempty"`
 }
 
 type VolumeRecommendedInfo struct {
-	Explanation *string `json:"explanation"`
+	Explanation *string `json:"explanation,omitempty"`
 }
 
 type VolumeSaleInfoListPrice struct {
-	Amount       *float64 `json:"amount"`
-	CurrencyCode *string  `json:"currencyCode"`
+	Amount       *float64 `json:"amount,omitempty"`
+	CurrencyCode *string  `json:"currencyCode,omitempty"`
 }
 
 type VolumeSaleInfoOffersListPrice struct {
-	AmountInMicros *float64 `json:"amountInMicros"`
-	CurrencyCode   *string  `json:"currencyCode"`
+	AmountInMicros *float64 `json:"amountInMicros,omitempty"`
+	CurrencyCode   *string  `json:"currencyCode,omitempty"`
 }
 
 type VolumeSaleInfoOffersRentalDuration struct {
-	Count *float64 `json:"count"`
-	Unit  *string  `json:"unit"`
+	Count *float64 `json:"count,omitempty"`
+	Unit  *string  `json:"unit,omitempty"`
 }
 
 type VolumeSaleInfoOffersRetailPrice struct {
-	AmountInMicros *float64 `json:"amountInMicros"`
-	CurrencyCode   *string  `json:"currencyCode"`
+	AmountInMicros *float64 `json:"amountInMicros,omitempty"`
+	CurrencyCode   *string  `json:"currencyCode,omitempty"`
 }
 
 type VolumeSaleInfoOffers struct {
-	FinskyOfferType *int32                              `json:"finskyOfferType"`
-	Giftable        *bool                               `json:"giftable"`
-	ListPrice       *VolumeSaleInfoOffersListPrice      `json:"listPrice"`
-	RentalDuration  *VolumeSaleInfoOffersRentalDuration `json:"rentalDuration"`
-	RetailPrice     *VolumeSaleInfoOffersRetailPrice    `json:"retailPrice"`
+	FinskyOfferType *int32                              `json:"finskyOfferType,omitempty"`
+	Giftable        *bool                               `json:"giftable,omitempty"`
+	ListPrice       *VolumeSaleInfoOffersListPrice      `json:"listPrice,omitempty"`
+	RentalDuration  *VolumeSaleInfoOffersRentalDuration `json:"rentalDuration,omitempty"`
+	RetailPrice     *VolumeSaleInfoOffersRetailPrice    `json:"retailPrice,omitempty"`
 }
 
 type VolumeSaleInfoRetailPrice struct {
-	Amount       *float64 `json:"amount"`
-	CurrencyCode *string  `json:"currencyCode"`
+	Amount       *float64 `json:"amount,omitempty"`
+	CurrencyCode *string  `json:"currencyCode,omitempty"`
 }
 
 type VolumeSaleInfo struct {
-	BuyLink     *string                    `json:"buyLink"`
-	Country     *string                    `json:"country"`
-	IsEbook     *bool                      `json:"isEbook"`
-	ListPrice   *VolumeSaleInfoListPrice   `json:"listPrice"`
-	Offers      []VolumeSaleInfoOffers     `json:"offers"`
-	OnSaleDate  *string                    `json:"onSaleDate"`
-	RetailPrice *VolumeSaleInfoRetailPrice `json:"retailPrice"`
-	Saleability *string                    `json:"saleability"`
+	BuyLink     *string                    `json:"buyLink,omitempty"`
+	Country     *string                    `json:"country,omitempty"`
+	IsEbook     *bool                      `json:"isEbook,omitempty"`
+	ListPrice   *VolumeSaleInfoListPrice   `json:"listPrice,omitempty"`
+	Offers      []VolumeSaleInfoOffers     `json:"offers,omitempty"`
+	OnSaleDate  *string                    `json:"onSaleDate,omitempty"`
+	RetailPrice *VolumeSaleInfoRetailPrice `json:"retailPrice,omitempty"`
+	Saleability *string                    `json:"saleability,omitempty"`
 }
 
 type VolumeSearchInfo struct {
-	TextSnippet *string `json:"textSnippet"`
+	TextSnippet *string `json:"textSnippet,omitempty"`
 }
 
 type VolumeUserInfoCopy struct {
-	AllowedCharacterCount   *int32  `json:"allowedCharacterCount"`
-	LimitType               *string `json:"limitType"`
-	RemainingCharacterCount *int32  `json:"remainingCharacterCount"`
-	Updated                 *string `json:"updated"`
+	AllowedCharacterCount   *int32  `json:"allowedCharacterCount,omitempty"`
+	LimitType               *string `json:"limitType,omitempty"`
+	RemainingCharacterCount *int32  `json:"remainingCharacterCount,omitempty"`
+	Updated                 *string `json:"updated,omitempty"`
 }
 
 type VolumeUserInfoFamilySharing struct {
-	FamilyRole             *string `json:"familyRole"`
-	IsSharingAllowed       *bool   `json:"isSharingAllowed"`
-	IsSharingDisabledByFop *bool   `json:"isSharingDisabledByFop"`
+	FamilyRole             *string `json:"familyRole,omitempty"`
+	IsSharingAllowed       *bool   `json:"isSharingAllowed,omitempty"`
+	IsSharingDisabledByFop *bool   `json:"isSharingDisabledByFop,omitempty"`
 }
 
 type VolumeUserInfoRentalPeriod struct {
-	EndUtcSec   *string `json:"endUtcSec"`
-	StartUtcSec *string `json:"startUtcSec"`
+	EndUtcSec   *string `json:"endUtcSec,omitempty"`
+	StartUtcSec *string `json:"startUtcSec,omitempty"`
 }
 
 type VolumeUserInfoUserUploadedVolumeInfo struct {
-	ProcessingState *string `json:"processingState"`
+	ProcessingState *string `json:"processingState,omitempty"`
 }
 
 type VolumeUserInfo struct {
-	AcquiredTime                 *string                               `json:"acquiredTime"`
-	AcquisitionType              *int32                                `json:"acquisitionType"`
-	Copy                         *VolumeUserInfoCopy                   `json:"copy"`
-	EntitlementType              *int32                                `json:"entitlementType"`
-	FamilySharing                *VolumeUserInfoFamilySharing          `json:"familySharing"`
-	IsFamilySharedFromUser       *bool                                 `json:"isFamilySharedFromUser"`
-	IsFamilySharedToUser         *bool                                 `json:"isFamilySharedToUser"`
-	IsFamilySharingAllowed       *bool                                 `json:"isFamilySharingAllowed"`
-	IsFamilySharingDisabledByFop *bool                                 `json:"isFamilySharingDisabledByFop"`
-	IsInMyBooks                  *bool                                 `json:"isInMyBooks"`
-	IsPreordered                 *bool                                 `json:"isPreordered"`
-	IsPurchased                  *bool                                 `json:"isPurchased"`
-	IsUploaded                   *bool                                 `json:"isUploaded"`
-	ReadingPosition              *ReadingPosition                      `json:"readingPosition"`
-	RentalPeriod                 *VolumeUserInfoRentalPeriod           `json:"rentalPeriod"`
-	RentalState                  *string                               `json:"rentalState"`
-	Review                       *Review                               `json:"review"`
-	Updated                      *string                               `json:"updated"`
-	UserUploadedVolumeInfo       *VolumeUserInfoUserUploadedVolumeInfo `json:"userUploadedVolumeInfo"`
+	AcquiredTime                 *string                               `json:"acquiredTime,omitempty"`
+	AcquisitionType              *int32                                `json:"acquisitionType,omitempty"`
+	Copy                         *VolumeUserInfoCopy                   `json:"copy,omitempty"`
+	EntitlementType              *int32                                `json:"entitlementType,omitempty"`
+	FamilySharing                *VolumeUserInfoFamilySharing          `json:"familySharing,omitempty"`
+	IsFamilySharedFromUser       *bool                                 `json:"isFamilySharedFromUser,omitempty"`
+	IsFamilySharedToUser         *bool                                 `json:"isFamilySharedToUser,omitempty"`
+	IsFamilySharingAllowed       *bool                                 `json:"isFamilySharingAllowed,omitempty"`
+	IsFamilySharingDisabledByFop *bool                                 `json:"isFamilySharingDisabledByFop,omitempty"`
+	IsInMyBooks                  *bool                                 `json:"isInMyBooks,omitempty"`
+	IsPreordered                 *bool                                 `json:"isPreordered,omitempty"`
+	IsPurchased                  *bool                                 `json:"isPurchased,omitempty"`
+	IsUploaded                   *bool                                 `json:"isUploaded,omitempty"`
+	ReadingPosition              *ReadingPosition                      `json:"readingPosition,omitempty"`
+	RentalPeriod                 *VolumeUserInfoRentalPeriod           `json:"rentalPeriod,omitempty"`
+	RentalState                  *string                               `json:"rentalState,omitempty"`
+	Review                       *Review                               `json:"review,omitempty"`
+	Updated                      *string                               `json:"updated,omitempty"`
+	UserUploadedVolumeInfo       *VolumeUserInfoUserUploadedVolumeInfo `json:"userUploadedVolumeInfo,omitempty"`
 }
 
 type VolumeVolumeInfoDimensions struct {
-	Height    *string `json:"height"`
-	Thickness *string `json:"thickness"`
-	Width     *string `json:"width"`
+	Height    *string `json:"height,omitempty"`
+	Thickness *string `json:"thickness,omitempty"`
+	Width     *string `json:"width,omitempty"`
 }
 
 type VolumeVolumeInfoImageLinks struct {
-	ExtraLarge     *string `json:"extraLarge"`
-	Large          *string `json:"large"`
-	Medium         *string `json:"medium"`
-	Small          *string `json:"small"`
-	SmallThumbnail *string `json:"smallThumbnail"`
-	Thumbnail      *string `json:"thumbnail"`
+	ExtraLarge     *string `json:"extraLarge,omitempty"`
+	Large          *string `json:"large,omitempty"`
+	Medium         *string `json:"medium,omitempty"`
+	Small          *string `json:"small,omitempty"`
+	SmallThumbnail *string `json:"smallThumbnail,omitempty"`
+	Thumbnail      *string `json:"thumbnail,omitempty"`
 }
 
 type VolumeVolumeInfoIndustryIdentifiers struct {
-	Identifier *string `json:"identifier"`
-	Type       *string `json:"type"`
+	Identifier *string `json:"identifier,omitempty"`
+	Type       *string `json:"type,omitempty"`
 }
 
 type VolumeVolumeInfoPanelizationSummary struct {
-	ContainsEpubBubbles  *bool   `json:"containsEpubBubbles"`
-	ContainsImageBubbles *bool   `json:"containsImageBubbles"`
-	EpubBubbleVersion    *string `json:"epubBubbleVersion"`
-	ImageBubbleVersion   *string `json:"imageBubbleVersion"`
+	ContainsEpubBubbles  *bool   `json:"containsEpubBubbles,omitempty"`
+	ContainsImageBubbles *bool   `json:"containsImageBubbles,omitempty"`
+	EpubBubbleVersion    *string `json:"epubBubbleVersion,omitempty"`
+	ImageBubbleVersion   *string `json:"imageBubbleVersion,omitempty"`
 }
 
 type VolumeVolumeInfoReadingModes struct {
-	Image *bool `json:"image"`
-	Text  *bool `json:"text"`
+	Image *bool `json:"image,omitempty"`
+	Text  *bool `json:"text,omitempty"`
 }
 
 type VolumeVolumeInfo struct {
-	AllowAnonLogging    *bool                                 `json:"allowAnonLogging"`
-	Authors             []string                              `json:"authors"`
-	AverageRating       *float64                              `json:"averageRating"`
-	CanonicalVolumeLink *string                               `json:"canonicalVolumeLink"`
-	Categories          []string                              `json:"categories"`
-	ComicsContent       *bool                                 `json:"comicsContent"`
-	ContentVersion      *string                               `json:"contentVersion"`
-	Description         *string                               `json:"description"`
-	Dimensions          *VolumeVolumeInfoDimensions           `json:"dimensions"`
-	ImageLinks          *VolumeVolumeInfoImageLinks           `json:"imageLinks"`
-	IndustryIdentifiers []VolumeVolumeInfoIndustryIdentifiers `json:"industryIdentifiers"`
-	InfoLink            *string                               `json:"infoLink"`
-	Language            *string                               `json:"language"`
-	MainCategory        *string                               `json:"mainCategory"`
-	MaturityRating      *string                               `json:"maturityRating"`
-	PageCount           *int32                                `json:"pageCount"`
-	PanelizationSummary *VolumeVolumeInfoPanelizationSummary  `json:"panelizationSummary"`
-	PreviewLink         *string                               `json:"previewLink"`
-	PrintType           *string                               `json:"printType"`
-	PrintedPageCount    *int32                                `json:"printedPageCount"`
-	PublishedDate       *string                               `json:"publishedDate"`
-	Publisher           *string                               `json:"publisher"`
-	RatingsCount        *int32                                `json:"ratingsCount"`
-	ReadingModes        *VolumeVolumeInfoReadingModes         `json:"readingModes"`
-	SamplePageCount     *int32                                `json:"samplePageCount"`
-	SeriesInfo          *Volumeseriesinfo                     `json:"seriesInfo"`
-	Subtitle            *string                               `json:"subtitle"`
-	Title               *string                               `json:"title"`
+	AllowAnonLogging    *bool                                 `json:"allowAnonLogging,omitempty"`
+	Authors             []string                              `json:"authors,omitempty"`
+	AverageRating       *float64                              `json:"averageRating,omitempty"`
+	CanonicalVolumeLink *string                               `json:"canonicalVolumeLink,omitempty"`
+	Categories          []string                              `json:"categories,omitempty"`
+	ComicsContent       *bool                                 `json:"comicsContent,omitempty"`
+	ContentVersion      *string                               `json:"contentVersion,omitempty"`
+	Description         *string                               `json:"description,omitempty"`
+	Dimensions          *VolumeVolumeInfoDimensions           `json:"dimensions,omitempty"`
+	ImageLinks          *VolumeVolumeInfoImageLinks           `json:"imageLinks,omitempty"`
+	IndustryIdentifiers []VolumeVolumeInfoIndustryIdentifiers `json:"industryIdentifiers,omitempty"`
+	InfoLink            *string                               `json:"infoLink,omitempty"`
+	Language            *string                               `json:"language,omitempty"`
+	MainCategory        *string                               `json:"mainCategory,omitempty"`
+	MaturityRating      *string                               `json:"maturityRating,omitempty"`
+	PageCount           *int32                                `json:"pageCount,omitempty"`
+	PanelizationSummary *VolumeVolumeInfoPanelizationSummary  `json:"panelizationSummary,omitempty"`
+	PreviewLink         *string                               `json:"previewLink,omitempty"`
+	PrintType           *string                               `json:"printType,omitempty"`
+	PrintedPageCount    *int32                                `json:"printedPageCount,omitempty"`
+	PublishedDate       *string                               `json:"publishedDate,omitempty"`
+	Publisher           *string                               `json:"publisher,omitempty"`
+	RatingsCount        *int32                                `json:"ratingsCount,omitempty"`
+	ReadingModes        *VolumeVolumeInfoReadingModes         `json:"readingModes,omitempty"`
+	SamplePageCount     *int32                                `json:"samplePageCount,omitempty"`
+	SeriesInfo          *Volumeseriesinfo                     `json:"seriesInfo,omitempty"`
+	Subtitle            *string                               `json:"subtitle,omitempty"`
+	Title               *string                               `json:"title,omitempty"`
 }
 
 type Volume struct {
-	AccessInfo      *VolumeAccessInfo      `json:"accessInfo"`
-	Etag            *string                `json:"etag"`
-	ID              *string                `json:"id"`
-	Kind            *string                `json:"kind"`
-	LayerInfo       *VolumeLayerInfo       `json:"layerInfo"`
-	RecommendedInfo *VolumeRecommendedInfo `json:"recommendedInfo"`
-	SaleInfo        *VolumeSaleInfo        `json:"saleInfo"`
-	SearchInfo      *VolumeSearchInfo      `json:"searchInfo"`
-	SelfLink        *string                `json:"selfLink"`
-	UserInfo        *VolumeUserInfo        `json:"userInfo"`
-	VolumeInfo      *VolumeVolumeInfo      `json:"volumeInfo"`
+	AccessInfo      *VolumeAccessInfo      `json:"accessInfo,omitempty"`
+	Etag            *string                `json:"etag,omitempty"`
+	ID              *string                `json:"id,omitempty"`
+	Kind            *string                `json:"kind,omitempty"`
+	LayerInfo       *VolumeLayerInfo       `json:"layerInfo,omitempty"`
+	RecommendedInfo *VolumeRecommendedInfo `json:"recommendedInfo,omitempty"`
+	SaleInfo        *VolumeSaleInfo        `json:"saleInfo,omitempty"`
+	SearchInfo      *VolumeSearchInfo      `json:"searchInfo,omitempty"`
+	SelfLink        *string                `json:"selfLink,omitempty"`
+	UserInfo        *VolumeUserInfo        `json:"userInfo,omitempty"`
+	VolumeInfo      *VolumeVolumeInfo      `json:"volumeInfo,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type Association struct {
-	FileID      *string          `json:"FileId"`
-	ObjectGroup *ObjectGroupEnum `json:"ObjectGroup"`
-	ObjectID    *string          `json:"ObjectId"`
-	ObjectType  *ObjectTypeEnum  `json:"ObjectType"`
+	FileID      *string          `json:"FileId,omitempty"`
+	ObjectGroup *ObjectGroupEnum `json:"ObjectGroup,omitempty"`
+	ObjectID    *string          `json:"ObjectId,omitempty"`
+	ObjectType  *ObjectTypeEnum  `json:"ObjectType,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ClusterAutoscalingConfig struct {
-	AutoscalingLimits  *AutoscalingLimits  `json:"autoscalingLimits"`
-	AutoscalingTargets *AutoscalingTargets `json:"autoscalingTargets"`
+	AutoscalingLimits  *AutoscalingLimits  `json:"autoscalingLimits,omitempty"`
+	AutoscalingTargets *AutoscalingTargets `json:"autoscalingTargets,omitempty"`
 }

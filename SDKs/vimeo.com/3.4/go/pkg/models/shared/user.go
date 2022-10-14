@@ -157,8 +157,8 @@ type UserMetadataConnections struct {
 }
 
 type UserMetadataInteractionsAddPrivacyUser struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type UserMetadataInteractionsBlock struct {
@@ -181,7 +181,7 @@ type UserMetadataInteractionsReport struct {
 }
 
 type UserMetadataInteractions struct {
-	AddPrivacyUser *UserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user"`
+	AddPrivacyUser *UserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
 	Block          UserMetadataInteractionsBlock           `json:"block"`
 	Follow         UserMetadataInteractionsFollow          `json:"follow"`
 	Report         UserMetadataInteractionsReport          `json:"report"`
@@ -221,19 +221,19 @@ const (
 )
 
 type UserPreferencesVideosPrivacy struct {
-	Add      *bool                                     `json:"add"`
-	Comments *UserPreferencesVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                     `json:"download"`
-	Embed    *UserPreferencesVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *UserPreferencesVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                     `json:"add,omitempty"`
+	Comments *UserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                     `json:"download,omitempty"`
+	Embed    *UserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *UserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type UserPreferencesVideos struct {
-	Privacy *UserPreferencesVideosPrivacy `json:"privacy"`
+	Privacy *UserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type UserPreferences struct {
-	Videos *UserPreferencesVideos `json:"videos"`
+	Videos *UserPreferencesVideos `json:"videos,omitempty"`
 }
 
 type UserUploadQuotaLifetime struct {
@@ -278,15 +278,15 @@ type UserWebsites struct {
 type User struct {
 	Account       UserAccountEnum  `json:"account"`
 	Bio           string           `json:"bio"`
-	ContentFilter []string         `json:"content_filter"`
+	ContentFilter []string         `json:"content_filter,omitempty"`
 	CreatedTime   string           `json:"created_time"`
-	Email         *string          `json:"email"`
+	Email         *string          `json:"email,omitempty"`
 	Link          string           `json:"link"`
 	Location      string           `json:"location"`
 	Metadata      UserMetadata     `json:"metadata"`
 	Name          string           `json:"name"`
 	Pictures      Picture          `json:"pictures"`
-	Preferences   *UserPreferences `json:"preferences"`
+	Preferences   *UserPreferences `json:"preferences,omitempty"`
 	ResourceKey   string           `json:"resource_key"`
 	UploadQuota   UserUploadQuota  `json:"upload_quota"`
 	URI           string           `json:"uri"`

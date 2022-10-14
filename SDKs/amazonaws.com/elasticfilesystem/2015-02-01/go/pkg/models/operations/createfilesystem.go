@@ -29,15 +29,15 @@ const (
 )
 
 type CreateFileSystemRequestBody struct {
-	AvailabilityZoneName         *string                                         `json:"AvailabilityZoneName"`
-	Backup                       *bool                                           `json:"Backup"`
+	AvailabilityZoneName         *string                                         `json:"AvailabilityZoneName,omitempty"`
+	Backup                       *bool                                           `json:"Backup,omitempty"`
 	CreationToken                string                                          `json:"CreationToken"`
-	Encrypted                    *bool                                           `json:"Encrypted"`
-	KmsKeyID                     *string                                         `json:"KmsKeyId"`
-	PerformanceMode              *CreateFileSystemRequestBodyPerformanceModeEnum `json:"PerformanceMode"`
-	ProvisionedThroughputInMibps *float64                                        `json:"ProvisionedThroughputInMibps"`
-	Tags                         []shared.Tag                                    `json:"Tags"`
-	ThroughputMode               *CreateFileSystemRequestBodyThroughputModeEnum  `json:"ThroughputMode"`
+	Encrypted                    *bool                                           `json:"Encrypted,omitempty"`
+	KmsKeyID                     *string                                         `json:"KmsKeyId,omitempty"`
+	PerformanceMode              *CreateFileSystemRequestBodyPerformanceModeEnum `json:"PerformanceMode,omitempty"`
+	ProvisionedThroughputInMibps *float64                                        `json:"ProvisionedThroughputInMibps,omitempty"`
+	Tags                         []shared.Tag                                    `json:"Tags,omitempty"`
+	ThroughputMode               *CreateFileSystemRequestBodyThroughputModeEnum  `json:"ThroughputMode,omitempty"`
 }
 
 type CreateFileSystemRequest struct {

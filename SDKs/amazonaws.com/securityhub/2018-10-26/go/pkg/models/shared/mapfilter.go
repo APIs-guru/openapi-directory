@@ -1,7 +1,7 @@
 package shared
 
 type MapFilter struct {
-	Comparison *MapFilterComparisonEnum `json:"Comparison"`
-	Key        *string                  `json:"Key"`
-	Value      *string                  `json:"Value"`
+	Comparison *MapFilterComparisonEnum `json:"Comparison,omitempty"`
+	Key        *string                  `json:"Key,omitempty"`
+	Value      *string                  `json:"Value,omitempty"`
 }

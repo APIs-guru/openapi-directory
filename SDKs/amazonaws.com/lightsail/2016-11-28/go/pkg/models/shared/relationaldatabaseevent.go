@@ -5,8 +5,8 @@ import (
 )
 
 type RelationalDatabaseEvent struct {
-	CreatedAt       *time.Time `json:"createdAt"`
-	EventCategories []string   `json:"eventCategories"`
-	Message         *string    `json:"message"`
-	Resource        *string    `json:"resource"`
+	CreatedAt       *time.Time `json:"createdAt,omitempty"`
+	EventCategories []string   `json:"eventCategories,omitempty"`
+	Message         *string    `json:"message,omitempty"`
+	Resource        *string    `json:"resource,omitempty"`
 }

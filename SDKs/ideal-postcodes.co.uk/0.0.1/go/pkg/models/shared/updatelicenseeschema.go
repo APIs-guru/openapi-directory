@@ -1,8 +1,8 @@
 package shared
 
 type UpdateLicenseeSchema struct {
-	Address   *string              `json:"address"`
-	Daily     *CreateLicenseeDaily `json:"daily"`
-	Postcode  *string              `json:"postcode"`
-	Whitelist []string             `json:"whitelist"`
+	Address   *string              `json:"address,omitempty"`
+	Daily     *CreateLicenseeDaily `json:"daily,omitempty"`
+	Postcode  *string              `json:"postcode,omitempty"`
+	Whitelist []string             `json:"whitelist,omitempty"`
 }

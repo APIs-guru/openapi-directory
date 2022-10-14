@@ -1,13 +1,13 @@
 package operations
 
 type AllWorkspaces200ApplicationJSONWorkspaces struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	Type *string `json:"type"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type AllWorkspaces200ApplicationJSON struct {
-	Workspaces []AllWorkspaces200ApplicationJSONWorkspaces `json:"workspaces"`
+	Workspaces []AllWorkspaces200ApplicationJSONWorkspaces `json:"workspaces,omitempty"`
 }
 
 type AllWorkspacesResponse struct {

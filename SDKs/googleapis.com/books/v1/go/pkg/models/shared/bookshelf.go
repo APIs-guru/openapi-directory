@@ -1,14 +1,14 @@
 package shared
 
 type Bookshelf struct {
-	Access             *string `json:"access"`
-	Created            *string `json:"created"`
-	Description        *string `json:"description"`
-	ID                 *int32  `json:"id"`
-	Kind               *string `json:"kind"`
-	SelfLink           *string `json:"selfLink"`
-	Title              *string `json:"title"`
-	Updated            *string `json:"updated"`
-	VolumeCount        *int32  `json:"volumeCount"`
-	VolumesLastUpdated *string `json:"volumesLastUpdated"`
+	Access             *string `json:"access,omitempty"`
+	Created            *string `json:"created,omitempty"`
+	Description        *string `json:"description,omitempty"`
+	ID                 *int32  `json:"id,omitempty"`
+	Kind               *string `json:"kind,omitempty"`
+	SelfLink           *string `json:"selfLink,omitempty"`
+	Title              *string `json:"title,omitempty"`
+	Updated            *string `json:"updated,omitempty"`
+	VolumeCount        *int32  `json:"volumeCount,omitempty"`
+	VolumesLastUpdated *string `json:"volumesLastUpdated,omitempty"`
 }

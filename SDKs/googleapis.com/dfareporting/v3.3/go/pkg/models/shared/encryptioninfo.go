@@ -21,8 +21,8 @@ const (
 )
 
 type EncryptionInfo struct {
-	EncryptionEntityID   *string                                 `json:"encryptionEntityId"`
-	EncryptionEntityType *EncryptionInfoEncryptionEntityTypeEnum `json:"encryptionEntityType"`
-	EncryptionSource     *EncryptionInfoEncryptionSourceEnum     `json:"encryptionSource"`
-	Kind                 *string                                 `json:"kind"`
+	EncryptionEntityID   *string                                 `json:"encryptionEntityId,omitempty"`
+	EncryptionEntityType *EncryptionInfoEncryptionEntityTypeEnum `json:"encryptionEntityType,omitempty"`
+	EncryptionSource     *EncryptionInfoEncryptionSourceEnum     `json:"encryptionSource,omitempty"`
+	Kind                 *string                                 `json:"kind,omitempty"`
 }

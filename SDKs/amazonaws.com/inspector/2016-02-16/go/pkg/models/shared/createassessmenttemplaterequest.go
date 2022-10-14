@@ -5,5 +5,5 @@ type CreateAssessmentTemplateRequest struct {
 	AssessmentTemplateName    string      `json:"assessmentTemplateName"`
 	DurationInSeconds         int64       `json:"durationInSeconds"`
 	RulesPackageArns          []string    `json:"rulesPackageArns"`
-	UserAttributesForFindings []Attribute `json:"userAttributesForFindings"`
+	UserAttributesForFindings []Attribute `json:"userAttributesForFindings,omitempty"`
 }

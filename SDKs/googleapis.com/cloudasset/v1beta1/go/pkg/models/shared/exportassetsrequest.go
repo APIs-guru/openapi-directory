@@ -9,8 +9,8 @@ const (
 )
 
 type ExportAssetsRequest struct {
-	AssetTypes   []string                            `json:"assetTypes"`
-	ContentType  *ExportAssetsRequestContentTypeEnum `json:"contentType"`
-	OutputConfig *OutputConfig                       `json:"outputConfig"`
-	ReadTime     *string                             `json:"readTime"`
+	AssetTypes   []string                            `json:"assetTypes,omitempty"`
+	ContentType  *ExportAssetsRequestContentTypeEnum `json:"contentType,omitempty"`
+	OutputConfig *OutputConfig                       `json:"outputConfig,omitempty"`
+	ReadTime     *string                             `json:"readTime,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListPhiDetectionJobsResponse struct {
-	ComprehendMedicalAsyncJobPropertiesList []ComprehendMedicalAsyncJobProperties `json:"ComprehendMedicalAsyncJobPropertiesList"`
-	NextToken                               *string                               `json:"NextToken"`
+	ComprehendMedicalAsyncJobPropertiesList []ComprehendMedicalAsyncJobProperties `json:"ComprehendMedicalAsyncJobPropertiesList,omitempty"`
+	NextToken                               *string                               `json:"NextToken,omitempty"`
 }

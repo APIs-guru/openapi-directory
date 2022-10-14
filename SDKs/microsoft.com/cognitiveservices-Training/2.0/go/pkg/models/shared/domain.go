@@ -8,9 +8,9 @@ const (
 )
 
 type Domain struct {
-	Enabled    *bool           `json:"enabled"`
-	Exportable *bool           `json:"exportable"`
-	ID         *string         `json:"id"`
-	Name       *string         `json:"name"`
-	Type       *DomainTypeEnum `json:"type"`
+	Enabled    *bool           `json:"enabled,omitempty"`
+	Exportable *bool           `json:"exportable,omitempty"`
+	ID         *string         `json:"id,omitempty"`
+	Name       *string         `json:"name,omitempty"`
+	Type       *DomainTypeEnum `json:"type,omitempty"`
 }

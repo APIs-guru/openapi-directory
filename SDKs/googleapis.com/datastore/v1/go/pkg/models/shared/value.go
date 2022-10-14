@@ -7,17 +7,17 @@ const (
 )
 
 type Value struct {
-	ArrayValue         *ArrayValue         `json:"arrayValue"`
-	BlobValue          *string             `json:"blobValue"`
-	BooleanValue       *bool               `json:"booleanValue"`
-	DoubleValue        *float64            `json:"doubleValue"`
-	EntityValue        *Entity             `json:"entityValue"`
-	ExcludeFromIndexes *bool               `json:"excludeFromIndexes"`
-	GeoPointValue      *LatLng             `json:"geoPointValue"`
-	IntegerValue       *string             `json:"integerValue"`
-	KeyValue           *Key                `json:"keyValue"`
-	Meaning            *int32              `json:"meaning"`
-	NullValue          *ValueNullValueEnum `json:"nullValue"`
-	StringValue        *string             `json:"stringValue"`
-	TimestampValue     *string             `json:"timestampValue"`
+	ArrayValue         *ArrayValue         `json:"arrayValue,omitempty"`
+	BlobValue          *string             `json:"blobValue,omitempty"`
+	BooleanValue       *bool               `json:"booleanValue,omitempty"`
+	DoubleValue        *float64            `json:"doubleValue,omitempty"`
+	EntityValue        *Entity             `json:"entityValue,omitempty"`
+	ExcludeFromIndexes *bool               `json:"excludeFromIndexes,omitempty"`
+	GeoPointValue      *LatLng             `json:"geoPointValue,omitempty"`
+	IntegerValue       *string             `json:"integerValue,omitempty"`
+	KeyValue           *Key                `json:"keyValue,omitempty"`
+	Meaning            *int32              `json:"meaning,omitempty"`
+	NullValue          *ValueNullValueEnum `json:"nullValue,omitempty"`
+	StringValue        *string             `json:"stringValue,omitempty"`
+	TimestampValue     *string             `json:"timestampValue,omitempty"`
 }

@@ -17,11 +17,11 @@ const (
 )
 
 type GoogleCloudDialogflowV2Conversation struct {
-	ConversationProfile *string                                                   `json:"conversationProfile"`
-	ConversationStage   *GoogleCloudDialogflowV2ConversationConversationStageEnum `json:"conversationStage"`
-	EndTime             *string                                                   `json:"endTime"`
-	LifecycleState      *GoogleCloudDialogflowV2ConversationLifecycleStateEnum    `json:"lifecycleState"`
-	Name                *string                                                   `json:"name"`
-	PhoneNumber         *GoogleCloudDialogflowV2ConversationPhoneNumber           `json:"phoneNumber"`
-	StartTime           *string                                                   `json:"startTime"`
+	ConversationProfile *string                                                   `json:"conversationProfile,omitempty"`
+	ConversationStage   *GoogleCloudDialogflowV2ConversationConversationStageEnum `json:"conversationStage,omitempty"`
+	EndTime             *string                                                   `json:"endTime,omitempty"`
+	LifecycleState      *GoogleCloudDialogflowV2ConversationLifecycleStateEnum    `json:"lifecycleState,omitempty"`
+	Name                *string                                                   `json:"name,omitempty"`
+	PhoneNumber         *GoogleCloudDialogflowV2ConversationPhoneNumber           `json:"phoneNumber,omitempty"`
+	StartTime           *string                                                   `json:"startTime,omitempty"`
 }

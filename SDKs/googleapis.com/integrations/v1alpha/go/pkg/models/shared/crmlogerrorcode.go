@@ -68,5 +68,5 @@ const (
 )
 
 type CrmlogErrorCode struct {
-	CommonErrorCode *CrmlogErrorCodeCommonErrorCodeEnum `json:"commonErrorCode"`
+	CommonErrorCode *CrmlogErrorCodeCommonErrorCodeEnum `json:"commonErrorCode,omitempty"`
 }

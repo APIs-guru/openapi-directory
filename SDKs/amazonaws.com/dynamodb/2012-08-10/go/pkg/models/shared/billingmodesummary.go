@@ -5,6 +5,6 @@ import (
 )
 
 type BillingModeSummary struct {
-	BillingMode                       *BillingModeEnum `json:"BillingMode"`
-	LastUpdateToPayPerRequestDateTime *time.Time       `json:"LastUpdateToPayPerRequestDateTime"`
+	BillingMode                       *BillingModeEnum `json:"BillingMode,omitempty"`
+	LastUpdateToPayPerRequestDateTime *time.Time       `json:"LastUpdateToPayPerRequestDateTime,omitempty"`
 }

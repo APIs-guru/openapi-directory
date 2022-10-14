@@ -22,8 +22,8 @@ const (
 )
 
 type CreateConnectorProfileRequestBodyConnectorProfileConfig struct {
-	ConnectorProfileCredentials *shared.ConnectorProfileCredentials `json:"connectorProfileCredentials"`
-	ConnectorProfileProperties  *shared.ConnectorProfileProperties  `json:"connectorProfileProperties"`
+	ConnectorProfileCredentials *shared.ConnectorProfileCredentials `json:"connectorProfileCredentials,omitempty"`
+	ConnectorProfileProperties  *shared.ConnectorProfileProperties  `json:"connectorProfileProperties,omitempty"`
 }
 
 type CreateConnectorProfileRequestBodyConnectorTypeEnum string
@@ -58,7 +58,7 @@ type CreateConnectorProfileRequestBody struct {
 	ConnectorProfileConfig CreateConnectorProfileRequestBodyConnectorProfileConfig `json:"connectorProfileConfig"`
 	ConnectorProfileName   string                                                  `json:"connectorProfileName"`
 	ConnectorType          CreateConnectorProfileRequestBodyConnectorTypeEnum      `json:"connectorType"`
-	KmsArn                 *string                                                 `json:"kmsArn"`
+	KmsArn                 *string                                                 `json:"kmsArn,omitempty"`
 }
 
 type CreateConnectorProfileRequest struct {

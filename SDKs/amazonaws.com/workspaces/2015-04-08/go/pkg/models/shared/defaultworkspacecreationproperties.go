@@ -1,10 +1,10 @@
 package shared
 
 type DefaultWorkspaceCreationProperties struct {
-	CustomSecurityGroupID           *string `json:"CustomSecurityGroupId"`
-	DefaultOu                       *string `json:"DefaultOu"`
-	EnableInternetAccess            *bool   `json:"EnableInternetAccess"`
-	EnableMaintenanceMode           *bool   `json:"EnableMaintenanceMode"`
-	EnableWorkDocs                  *bool   `json:"EnableWorkDocs"`
-	UserEnabledAsLocalAdministrator *bool   `json:"UserEnabledAsLocalAdministrator"`
+	CustomSecurityGroupID           *string `json:"CustomSecurityGroupId,omitempty"`
+	DefaultOu                       *string `json:"DefaultOu,omitempty"`
+	EnableInternetAccess            *bool   `json:"EnableInternetAccess,omitempty"`
+	EnableMaintenanceMode           *bool   `json:"EnableMaintenanceMode,omitempty"`
+	EnableWorkDocs                  *bool   `json:"EnableWorkDocs,omitempty"`
+	UserEnabledAsLocalAdministrator *bool   `json:"UserEnabledAsLocalAdministrator,omitempty"`
 }

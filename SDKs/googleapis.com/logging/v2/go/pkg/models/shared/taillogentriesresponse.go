@@ -1,6 +1,6 @@
 package shared
 
 type TailLogEntriesResponse struct {
-	Entries         []LogEntry        `json:"entries"`
-	SuppressionInfo []SuppressionInfo `json:"suppressionInfo"`
+	Entries         []LogEntry        `json:"entries,omitempty"`
+	SuppressionInfo []SuppressionInfo `json:"suppressionInfo,omitempty"`
 }

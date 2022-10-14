@@ -1,6 +1,6 @@
 package shared
 
 type PlaceInfo struct {
-	PlaceID   *string `json:"placeId"`
-	PlaceName *string `json:"placeName"`
+	PlaceID   *string `json:"placeId,omitempty"`
+	PlaceName *string `json:"placeName,omitempty"`
 }

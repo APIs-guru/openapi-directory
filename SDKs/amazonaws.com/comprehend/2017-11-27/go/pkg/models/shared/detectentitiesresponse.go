@@ -1,5 +1,5 @@
 package shared
 
 type DetectEntitiesResponse struct {
-	Entities []Entity `json:"Entities"`
+	Entities []Entity `json:"Entities,omitempty"`
 }

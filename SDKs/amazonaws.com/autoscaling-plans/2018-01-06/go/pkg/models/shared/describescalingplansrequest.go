@@ -1,9 +1,9 @@
 package shared
 
 type DescribeScalingPlansRequest struct {
-	ApplicationSources []ApplicationSource `json:"ApplicationSources"`
-	MaxResults         *int64              `json:"MaxResults"`
-	NextToken          *string             `json:"NextToken"`
-	ScalingPlanNames   []string            `json:"ScalingPlanNames"`
-	ScalingPlanVersion *int64              `json:"ScalingPlanVersion"`
+	ApplicationSources []ApplicationSource `json:"ApplicationSources,omitempty"`
+	MaxResults         *int64              `json:"MaxResults,omitempty"`
+	NextToken          *string             `json:"NextToken,omitempty"`
+	ScalingPlanNames   []string            `json:"ScalingPlanNames,omitempty"`
+	ScalingPlanVersion *int64              `json:"ScalingPlanVersion,omitempty"`
 }

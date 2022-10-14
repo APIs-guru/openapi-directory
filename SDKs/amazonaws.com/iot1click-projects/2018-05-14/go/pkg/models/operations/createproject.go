@@ -15,15 +15,15 @@ type CreateProjectHeaders struct {
 }
 
 type CreateProjectRequestBodyPlacementTemplate struct {
-	DefaultAttributes map[string]string                `json:"defaultAttributes"`
-	DeviceTemplates   map[string]shared.DeviceTemplate `json:"deviceTemplates"`
+	DefaultAttributes map[string]string                `json:"defaultAttributes,omitempty"`
+	DeviceTemplates   map[string]shared.DeviceTemplate `json:"deviceTemplates,omitempty"`
 }
 
 type CreateProjectRequestBody struct {
-	Description       *string                                    `json:"description"`
-	PlacementTemplate *CreateProjectRequestBodyPlacementTemplate `json:"placementTemplate"`
+	Description       *string                                    `json:"description,omitempty"`
+	PlacementTemplate *CreateProjectRequestBodyPlacementTemplate `json:"placementTemplate,omitempty"`
 	ProjectName       string                                     `json:"projectName"`
-	Tags              map[string]string                          `json:"tags"`
+	Tags              map[string]string                          `json:"tags,omitempty"`
 }
 
 type CreateProjectRequest struct {

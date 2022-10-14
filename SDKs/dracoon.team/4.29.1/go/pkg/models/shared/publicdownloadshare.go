@@ -7,17 +7,17 @@ import (
 type PublicDownloadShare struct {
 	CreatedAt           time.Time            `json:"createdAt"`
 	CreatorName         string               `json:"creatorName"`
-	CreatorUsername     *string              `json:"creatorUsername"`
-	ExpireAt            *time.Time           `json:"expireAt"`
-	FileKey             *FileKey             `json:"fileKey"`
+	CreatorUsername     *string              `json:"creatorUsername,omitempty"`
+	ExpireAt            *time.Time           `json:"expireAt,omitempty"`
+	FileKey             *FileKey             `json:"fileKey,omitempty"`
 	FileName            string               `json:"fileName"`
 	HasDownloadLimit    bool                 `json:"hasDownloadLimit"`
-	IsEncrypted         *bool                `json:"isEncrypted"`
+	IsEncrypted         *bool                `json:"isEncrypted,omitempty"`
 	IsProtected         bool                 `json:"isProtected"`
 	LimitReached        bool                 `json:"limitReached"`
 	MediaType           string               `json:"mediaType"`
-	Name                *string              `json:"name"`
-	Notes               *string              `json:"notes"`
-	PrivateKeyContainer *PrivateKeyContainer `json:"privateKeyContainer"`
+	Name                *string              `json:"name,omitempty"`
+	Notes               *string              `json:"notes,omitempty"`
+	PrivateKeyContainer *PrivateKeyContainer `json:"privateKeyContainer,omitempty"`
 	Size                int64                `json:"size"`
 }

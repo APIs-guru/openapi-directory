@@ -1,6 +1,6 @@
 package shared
 
 type GetActivityTaskOutput struct {
-	Input     *string `json:"input"`
-	TaskToken *string `json:"taskToken"`
+	Input     *string `json:"input,omitempty"`
+	TaskToken *string `json:"taskToken,omitempty"`
 }

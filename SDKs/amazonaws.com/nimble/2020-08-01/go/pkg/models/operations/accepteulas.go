@@ -20,7 +20,7 @@ type AcceptEulasHeaders struct {
 }
 
 type AcceptEulasRequestBody struct {
-	EulaIds []string `json:"eulaIds"`
+	EulaIds []string `json:"eulaIds,omitempty"`
 }
 
 type AcceptEulasRequest struct {

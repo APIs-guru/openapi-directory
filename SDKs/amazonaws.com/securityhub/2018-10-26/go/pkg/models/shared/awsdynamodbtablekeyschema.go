@@ -1,6 +1,6 @@
 package shared
 
 type AwsDynamoDbTableKeySchema struct {
-	AttributeName *string `json:"AttributeName"`
-	KeyType       *string `json:"KeyType"`
+	AttributeName *string `json:"AttributeName,omitempty"`
+	KeyType       *string `json:"KeyType,omitempty"`
 }

@@ -1,14 +1,14 @@
 package shared
 
 type HTTPRouteRouteAction struct {
-	CorsPolicy             *HTTPRouteCorsPolicy           `json:"corsPolicy"`
-	Destinations           []HTTPRouteDestination         `json:"destinations"`
-	FaultInjectionPolicy   *HTTPRouteFaultInjectionPolicy `json:"faultInjectionPolicy"`
-	Redirect               *HTTPRouteRedirect             `json:"redirect"`
-	RequestHeaderModifier  *HTTPRouteHeaderModifier       `json:"requestHeaderModifier"`
-	RequestMirrorPolicy    *HTTPRouteRequestMirrorPolicy  `json:"requestMirrorPolicy"`
-	ResponseHeaderModifier *HTTPRouteHeaderModifier       `json:"responseHeaderModifier"`
-	RetryPolicy            *HTTPRouteRetryPolicy          `json:"retryPolicy"`
-	Timeout                *string                        `json:"timeout"`
-	URLRewrite             *HTTPRouteURLRewrite           `json:"urlRewrite"`
+	CorsPolicy             *HTTPRouteCorsPolicy           `json:"corsPolicy,omitempty"`
+	Destinations           []HTTPRouteDestination         `json:"destinations,omitempty"`
+	FaultInjectionPolicy   *HTTPRouteFaultInjectionPolicy `json:"faultInjectionPolicy,omitempty"`
+	Redirect               *HTTPRouteRedirect             `json:"redirect,omitempty"`
+	RequestHeaderModifier  *HTTPRouteHeaderModifier       `json:"requestHeaderModifier,omitempty"`
+	RequestMirrorPolicy    *HTTPRouteRequestMirrorPolicy  `json:"requestMirrorPolicy,omitempty"`
+	ResponseHeaderModifier *HTTPRouteHeaderModifier       `json:"responseHeaderModifier,omitempty"`
+	RetryPolicy            *HTTPRouteRetryPolicy          `json:"retryPolicy,omitempty"`
+	Timeout                *string                        `json:"timeout,omitempty"`
+	URLRewrite             *HTTPRouteURLRewrite           `json:"urlRewrite,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ResponseCard struct {
-	ContentType        *ContentTypeEnum    `json:"contentType"`
-	GenericAttachments []GenericAttachment `json:"genericAttachments"`
-	Version            *string             `json:"version"`
+	ContentType        *ContentTypeEnum    `json:"contentType,omitempty"`
+	GenericAttachments []GenericAttachment `json:"genericAttachments,omitempty"`
+	Version            *string             `json:"version,omitempty"`
 }

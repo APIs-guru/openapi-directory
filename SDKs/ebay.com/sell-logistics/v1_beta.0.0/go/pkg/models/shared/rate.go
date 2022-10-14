@@ -1,18 +1,18 @@
 package shared
 
 type Rate struct {
-	AdditionalOptions        []AdditionalOption `json:"additionalOptions"`
-	BaseShippingCost         *Amount            `json:"baseShippingCost"`
-	DestinationTimeZone      *string            `json:"destinationTimeZone"`
-	MaxEstimatedDeliveryDate *string            `json:"maxEstimatedDeliveryDate"`
-	MinEstimatedDeliveryDate *string            `json:"minEstimatedDeliveryDate"`
-	PickupNetworks           []string           `json:"pickupNetworks"`
-	PickupSlots              []PickupSlot       `json:"pickupSlots"`
-	PickupType               *string            `json:"pickupType"`
-	RateID                   *string            `json:"rateId"`
-	RateRecommendation       []string           `json:"rateRecommendation"`
-	ShippingCarrierCode      *string            `json:"shippingCarrierCode"`
-	ShippingCarrierName      *string            `json:"shippingCarrierName"`
-	ShippingServiceCode      *string            `json:"shippingServiceCode"`
-	ShippingServiceName      *string            `json:"shippingServiceName"`
+	AdditionalOptions        []AdditionalOption `json:"additionalOptions,omitempty"`
+	BaseShippingCost         *Amount            `json:"baseShippingCost,omitempty"`
+	DestinationTimeZone      *string            `json:"destinationTimeZone,omitempty"`
+	MaxEstimatedDeliveryDate *string            `json:"maxEstimatedDeliveryDate,omitempty"`
+	MinEstimatedDeliveryDate *string            `json:"minEstimatedDeliveryDate,omitempty"`
+	PickupNetworks           []string           `json:"pickupNetworks,omitempty"`
+	PickupSlots              []PickupSlot       `json:"pickupSlots,omitempty"`
+	PickupType               *string            `json:"pickupType,omitempty"`
+	RateID                   *string            `json:"rateId,omitempty"`
+	RateRecommendation       []string           `json:"rateRecommendation,omitempty"`
+	ShippingCarrierCode      *string            `json:"shippingCarrierCode,omitempty"`
+	ShippingCarrierName      *string            `json:"shippingCarrierName,omitempty"`
+	ShippingServiceCode      *string            `json:"shippingServiceCode,omitempty"`
+	ShippingServiceName      *string            `json:"shippingServiceName,omitempty"`
 }

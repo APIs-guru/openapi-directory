@@ -1,6 +1,6 @@
 package shared
 
 type ListConsentArtifactsResponse struct {
-	ConsentArtifacts []ConsentArtifact `json:"consentArtifacts"`
-	NextPageToken    *string           `json:"nextPageToken"`
+	ConsentArtifacts []ConsentArtifact `json:"consentArtifacts,omitempty"`
+	NextPageToken    *string           `json:"nextPageToken,omitempty"`
 }

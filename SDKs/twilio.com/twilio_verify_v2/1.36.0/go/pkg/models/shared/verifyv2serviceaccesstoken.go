@@ -5,14 +5,14 @@ import (
 )
 
 type VerifyV2ServiceAccessToken struct {
-	AccountSid         *string                         `json:"account_sid"`
-	DateCreated        *time.Time                      `json:"date_created"`
-	EntityIdentity     *string                         `json:"entity_identity"`
-	FactorFriendlyName *string                         `json:"factor_friendly_name"`
-	FactorType         *AccessTokenEnumFactorTypesEnum `json:"factor_type"`
-	ServiceSid         *string                         `json:"service_sid"`
-	Sid                *string                         `json:"sid"`
-	Token              *string                         `json:"token"`
-	TTL                *int64                          `json:"ttl"`
-	URL                *string                         `json:"url"`
+	AccountSid         *string                         `json:"account_sid,omitempty"`
+	DateCreated        *time.Time                      `json:"date_created,omitempty"`
+	EntityIdentity     *string                         `json:"entity_identity,omitempty"`
+	FactorFriendlyName *string                         `json:"factor_friendly_name,omitempty"`
+	FactorType         *AccessTokenEnumFactorTypesEnum `json:"factor_type,omitempty"`
+	ServiceSid         *string                         `json:"service_sid,omitempty"`
+	Sid                *string                         `json:"sid,omitempty"`
+	Token              *string                         `json:"token,omitempty"`
+	TTL                *int64                          `json:"ttl,omitempty"`
+	URL                *string                         `json:"url,omitempty"`
 }

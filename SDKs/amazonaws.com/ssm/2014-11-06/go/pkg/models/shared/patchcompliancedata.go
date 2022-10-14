@@ -5,7 +5,7 @@ import (
 )
 
 type PatchComplianceData struct {
-	CveIds         *string                      `json:"CVEIds"`
+	CveIds         *string                      `json:"CVEIds,omitempty"`
 	Classification string                       `json:"Classification"`
 	InstalledTime  time.Time                    `json:"InstalledTime"`
 	KbID           string                       `json:"KBId"`

@@ -11,14 +11,14 @@ type ListInflectedFormsRequest struct {
 }
 
 type ListInflectedForms200ApplicationJSONFeatures struct {
-	Index *float64 `json:"index"`
-	Value *string  `json:"value"`
+	Index *float64 `json:"index,omitempty"`
+	Value *string  `json:"value,omitempty"`
 }
 
 type ListInflectedForms200ApplicationJSON struct {
-	Features []ListInflectedForms200ApplicationJSONFeatures `json:"features"`
-	IsLemma  *bool                                          `json:"isLemma"`
-	Text     *string                                        `json:"text"`
+	Features []ListInflectedForms200ApplicationJSONFeatures `json:"features,omitempty"`
+	IsLemma  *bool                                          `json:"isLemma,omitempty"`
+	Text     *string                                        `json:"text,omitempty"`
 }
 
 type ListInflectedFormsResponse struct {

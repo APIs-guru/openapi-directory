@@ -1,10 +1,10 @@
 package shared
 
 type HTTPRouteRouteMatch struct {
-	FullPathMatch   *string                        `json:"fullPathMatch"`
-	Headers         []HTTPRouteHeaderMatch         `json:"headers"`
-	IgnoreCase      *bool                          `json:"ignoreCase"`
-	PrefixMatch     *string                        `json:"prefixMatch"`
-	QueryParameters []HTTPRouteQueryParameterMatch `json:"queryParameters"`
-	RegexMatch      *string                        `json:"regexMatch"`
+	FullPathMatch   *string                        `json:"fullPathMatch,omitempty"`
+	Headers         []HTTPRouteHeaderMatch         `json:"headers,omitempty"`
+	IgnoreCase      *bool                          `json:"ignoreCase,omitempty"`
+	PrefixMatch     *string                        `json:"prefixMatch,omitempty"`
+	QueryParameters []HTTPRouteQueryParameterMatch `json:"queryParameters,omitempty"`
+	RegexMatch      *string                        `json:"regexMatch,omitempty"`
 }

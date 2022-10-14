@@ -5,7 +5,7 @@ import (
 )
 
 type KinesisStreamSourceDescription struct {
-	DeliveryStartTimestamp *time.Time `json:"DeliveryStartTimestamp"`
-	KinesisStreamArn       *string    `json:"KinesisStreamARN"`
-	RoleArn                *string    `json:"RoleARN"`
+	DeliveryStartTimestamp *time.Time `json:"DeliveryStartTimestamp,omitempty"`
+	KinesisStreamArn       *string    `json:"KinesisStreamARN,omitempty"`
+	RoleArn                *string    `json:"RoleARN,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DeleteInterconnectResponse struct {
-	InterconnectState *InterconnectStateEnum `json:"interconnectState"`
+	InterconnectState *InterconnectStateEnum `json:"interconnectState,omitempty"`
 }

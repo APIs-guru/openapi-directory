@@ -9,8 +9,8 @@ const (
 )
 
 type CardHeader struct {
-	ImageStyle *CardHeaderImageStyleEnum `json:"imageStyle"`
-	ImageURL   *string                   `json:"imageUrl"`
-	Subtitle   *string                   `json:"subtitle"`
-	Title      *string                   `json:"title"`
+	ImageStyle *CardHeaderImageStyleEnum `json:"imageStyle,omitempty"`
+	ImageURL   *string                   `json:"imageUrl,omitempty"`
+	Subtitle   *string                   `json:"subtitle,omitempty"`
+	Title      *string                   `json:"title,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeCertificateResult struct {
-	Certificate *Certificate `json:"Certificate"`
+	Certificate *Certificate `json:"Certificate,omitempty"`
 }

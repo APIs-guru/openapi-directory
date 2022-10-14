@@ -9,9 +9,9 @@ const (
 )
 
 type CompleteS3FileUploadRequest struct {
-	FileKey            *FileKey                                           `json:"fileKey"`
-	FileName           *string                                            `json:"fileName"`
-	KeepShareLinks     *bool                                              `json:"keepShareLinks"`
+	FileKey            *FileKey                                           `json:"fileKey,omitempty"`
+	FileName           *string                                            `json:"fileName,omitempty"`
+	KeepShareLinks     *bool                                              `json:"keepShareLinks,omitempty"`
 	Parts              []S3FileUploadPart                                 `json:"parts"`
-	ResolutionStrategy *CompleteS3FileUploadRequestResolutionStrategyEnum `json:"resolutionStrategy"`
+	ResolutionStrategy *CompleteS3FileUploadRequestResolutionStrategyEnum `json:"resolutionStrategy,omitempty"`
 }

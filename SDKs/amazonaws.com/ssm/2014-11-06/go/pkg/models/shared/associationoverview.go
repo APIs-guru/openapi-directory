@@ -1,7 +1,7 @@
 package shared
 
 type AssociationOverview struct {
-	AssociationStatusAggregatedCount map[string]int64 `json:"AssociationStatusAggregatedCount"`
-	DetailedStatus                   *string          `json:"DetailedStatus"`
-	Status                           *string          `json:"Status"`
+	AssociationStatusAggregatedCount map[string]int64 `json:"AssociationStatusAggregatedCount,omitempty"`
+	DetailedStatus                   *string          `json:"DetailedStatus,omitempty"`
+	Status                           *string          `json:"Status,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type SimpleEmail struct {
-	HTMLPart *SimpleEmailPart `json:"HtmlPart"`
-	Subject  *SimpleEmailPart `json:"Subject"`
-	TextPart *SimpleEmailPart `json:"TextPart"`
+	HTMLPart *SimpleEmailPart `json:"HtmlPart,omitempty"`
+	Subject  *SimpleEmailPart `json:"Subject,omitempty"`
+	TextPart *SimpleEmailPart `json:"TextPart,omitempty"`
 }

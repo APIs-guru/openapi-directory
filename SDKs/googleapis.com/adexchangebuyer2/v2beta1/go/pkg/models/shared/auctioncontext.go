@@ -8,5 +8,5 @@ const (
 )
 
 type AuctionContext struct {
-	AuctionTypes []AuctionContextAuctionTypesEnum `json:"auctionTypes"`
+	AuctionTypes []AuctionContextAuctionTypesEnum `json:"auctionTypes,omitempty"`
 }

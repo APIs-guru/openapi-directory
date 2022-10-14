@@ -1,9 +1,9 @@
 package shared
 
 type ShippingsettingsCustomBatchRequestEntry struct {
-	AccountID        *string           `json:"accountId"`
-	BatchID          *int64            `json:"batchId"`
-	MerchantID       *string           `json:"merchantId"`
-	Method           *string           `json:"method"`
-	ShippingSettings *ShippingSettings `json:"shippingSettings"`
+	AccountID        *string           `json:"accountId,omitempty"`
+	BatchID          *int64            `json:"batchId,omitempty"`
+	MerchantID       *string           `json:"merchantId,omitempty"`
+	Method           *string           `json:"method,omitempty"`
+	ShippingSettings *ShippingSettings `json:"shippingSettings,omitempty"`
 }

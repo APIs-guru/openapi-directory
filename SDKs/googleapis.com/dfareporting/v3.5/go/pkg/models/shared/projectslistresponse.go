@@ -1,7 +1,7 @@
 package shared
 
 type ProjectsListResponse struct {
-	Kind          *string   `json:"kind"`
-	NextPageToken *string   `json:"nextPageToken"`
-	Projects      []Project `json:"projects"`
+	Kind          *string   `json:"kind,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	Projects      []Project `json:"projects,omitempty"`
 }

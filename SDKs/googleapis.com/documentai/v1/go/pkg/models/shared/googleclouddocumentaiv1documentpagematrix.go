@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDocumentaiV1DocumentPageMatrix struct {
-	Cols *int32  `json:"cols"`
-	Data *string `json:"data"`
-	Rows *int32  `json:"rows"`
-	Type *int32  `json:"type"`
+	Cols *int32  `json:"cols,omitempty"`
+	Data *string `json:"data,omitempty"`
+	Rows *int32  `json:"rows,omitempty"`
+	Type *int32  `json:"type,omitempty"`
 }

@@ -7,7 +7,7 @@ const (
 )
 
 type AddPaymentMethodRequest struct {
-	MakeDefault *bool                           `json:"makeDefault"`
+	MakeDefault *bool                           `json:"makeDefault,omitempty"`
 	Token       string                          `json:"token"`
 	Type        AddPaymentMethodRequestTypeEnum `json:"type"`
 }

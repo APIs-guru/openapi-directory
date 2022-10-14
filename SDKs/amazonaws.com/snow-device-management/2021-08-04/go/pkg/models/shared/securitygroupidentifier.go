@@ -1,6 +1,6 @@
 package shared
 
 type SecurityGroupIdentifier struct {
-	GroupID   *string `json:"groupId"`
-	GroupName *string `json:"groupName"`
+	GroupID   *string `json:"groupId,omitempty"`
+	GroupName *string `json:"groupName,omitempty"`
 }

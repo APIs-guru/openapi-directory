@@ -1,6 +1,6 @@
 package shared
 
 type SyncState struct {
-	Attachment *Attachment                `json:"Attachment"`
-	Config     map[string]PerObjectStatus `json:"Config"`
+	Attachment *Attachment                `json:"Attachment,omitempty"`
+	Config     map[string]PerObjectStatus `json:"Config,omitempty"`
 }

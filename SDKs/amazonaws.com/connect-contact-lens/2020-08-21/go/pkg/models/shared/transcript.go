@@ -5,7 +5,7 @@ type Transcript struct {
 	Content           string             `json:"Content"`
 	EndOffsetMillis   int64              `json:"EndOffsetMillis"`
 	ID                string             `json:"Id"`
-	IssuesDetected    []IssueDetected    `json:"IssuesDetected"`
+	IssuesDetected    []IssueDetected    `json:"IssuesDetected,omitempty"`
 	ParticipantID     string             `json:"ParticipantId"`
 	ParticipantRole   string             `json:"ParticipantRole"`
 	Sentiment         SentimentValueEnum `json:"Sentiment"`

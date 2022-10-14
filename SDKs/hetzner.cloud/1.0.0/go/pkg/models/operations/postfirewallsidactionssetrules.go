@@ -22,12 +22,12 @@ const (
 )
 
 type PostFirewallsIDActionsSetRulesRequestBodyRulesRule struct {
-	Description    *string                                                     `json:"description"`
-	DestinationIps []string                                                    `json:"destination_ips"`
+	Description    *string                                                     `json:"description,omitempty"`
+	DestinationIps []string                                                    `json:"destination_ips,omitempty"`
 	Direction      PostFirewallsIDActionsSetRulesRequestBodyRulesDirectionEnum `json:"direction"`
-	Port           *string                                                     `json:"port"`
+	Port           *string                                                     `json:"port,omitempty"`
 	Protocol       PostFirewallsIDActionsSetRulesRequestBodyRulesProtocolEnum  `json:"protocol"`
-	SourceIps      []string                                                    `json:"source_ips"`
+	SourceIps      []string                                                    `json:"source_ips,omitempty"`
 }
 
 type PostFirewallsIDActionsSetRulesRequestBodySetRulesRequest struct {
@@ -83,7 +83,7 @@ type PostFirewallsIDActionsSetRules201ApplicationJSONMeta struct {
 
 type PostFirewallsIDActionsSetRules201ApplicationJSONActionsResponse struct {
 	Actions []PostFirewallsIDActionsSetRules201ApplicationJSONActionsAction `json:"actions"`
-	Meta    *PostFirewallsIDActionsSetRules201ApplicationJSONMeta           `json:"meta"`
+	Meta    *PostFirewallsIDActionsSetRules201ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type PostFirewallsIDActionsSetRulesResponse struct {

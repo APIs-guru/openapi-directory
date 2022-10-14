@@ -15,13 +15,13 @@ type CreateControlHeaders struct {
 }
 
 type CreateControlRequestBody struct {
-	ActionPlanInstructions *string                             `json:"actionPlanInstructions"`
-	ActionPlanTitle        *string                             `json:"actionPlanTitle"`
+	ActionPlanInstructions *string                             `json:"actionPlanInstructions,omitempty"`
+	ActionPlanTitle        *string                             `json:"actionPlanTitle,omitempty"`
 	ControlMappingSources  []shared.CreateControlMappingSource `json:"controlMappingSources"`
-	Description            *string                             `json:"description"`
+	Description            *string                             `json:"description,omitempty"`
 	Name                   string                              `json:"name"`
-	Tags                   map[string]string                   `json:"tags"`
-	TestingInformation     *string                             `json:"testingInformation"`
+	Tags                   map[string]string                   `json:"tags,omitempty"`
+	TestingInformation     *string                             `json:"testingInformation,omitempty"`
 }
 
 type CreateControlRequest struct {

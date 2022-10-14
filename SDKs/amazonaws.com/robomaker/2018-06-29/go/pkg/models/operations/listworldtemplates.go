@@ -20,8 +20,8 @@ type ListWorldTemplatesHeaders struct {
 }
 
 type ListWorldTemplatesRequestBody struct {
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
 }
 
 type ListWorldTemplatesRequest struct {

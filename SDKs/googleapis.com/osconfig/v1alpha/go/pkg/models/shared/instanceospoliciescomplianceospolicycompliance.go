@@ -11,8 +11,8 @@ const (
 )
 
 type InstanceOsPoliciesComplianceOsPolicyCompliance struct {
-	OsPolicyAssignment          *string                                                  `json:"osPolicyAssignment"`
-	OsPolicyID                  *string                                                  `json:"osPolicyId"`
-	OsPolicyResourceCompliances []OsPolicyResourceCompliance                             `json:"osPolicyResourceCompliances"`
-	State                       *InstanceOsPoliciesComplianceOsPolicyComplianceStateEnum `json:"state"`
+	OsPolicyAssignment          *string                                                  `json:"osPolicyAssignment,omitempty"`
+	OsPolicyID                  *string                                                  `json:"osPolicyId,omitempty"`
+	OsPolicyResourceCompliances []OsPolicyResourceCompliance                             `json:"osPolicyResourceCompliances,omitempty"`
+	State                       *InstanceOsPoliciesComplianceOsPolicyComplianceStateEnum `json:"state,omitempty"`
 }

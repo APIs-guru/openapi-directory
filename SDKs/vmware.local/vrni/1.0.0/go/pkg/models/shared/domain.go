@@ -8,6 +8,6 @@ const (
 )
 
 type Domain struct {
-	DomainType *DomainDomainTypeEnum `json:"domain_type"`
-	Value      *string               `json:"value"`
+	DomainType *DomainDomainTypeEnum `json:"domain_type,omitempty"`
+	Value      *string               `json:"value,omitempty"`
 }

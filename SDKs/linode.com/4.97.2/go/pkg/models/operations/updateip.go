@@ -28,7 +28,7 @@ type UpdateIPRequest struct {
 }
 
 type UpdateIPDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateIPResponse struct {

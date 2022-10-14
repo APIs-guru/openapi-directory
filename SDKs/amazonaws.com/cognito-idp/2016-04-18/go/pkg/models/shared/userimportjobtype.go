@@ -5,17 +5,17 @@ import (
 )
 
 type UserImportJobType struct {
-	CloudWatchLogsRoleArn *string                      `json:"CloudWatchLogsRoleArn"`
-	CompletionDate        *time.Time                   `json:"CompletionDate"`
-	CompletionMessage     *string                      `json:"CompletionMessage"`
-	CreationDate          *time.Time                   `json:"CreationDate"`
-	FailedUsers           *int64                       `json:"FailedUsers"`
-	ImportedUsers         *int64                       `json:"ImportedUsers"`
-	JobID                 *string                      `json:"JobId"`
-	JobName               *string                      `json:"JobName"`
-	PreSignedURL          *string                      `json:"PreSignedUrl"`
-	SkippedUsers          *int64                       `json:"SkippedUsers"`
-	StartDate             *time.Time                   `json:"StartDate"`
-	Status                *UserImportJobStatusTypeEnum `json:"Status"`
-	UserPoolID            *string                      `json:"UserPoolId"`
+	CloudWatchLogsRoleArn *string                      `json:"CloudWatchLogsRoleArn,omitempty"`
+	CompletionDate        *time.Time                   `json:"CompletionDate,omitempty"`
+	CompletionMessage     *string                      `json:"CompletionMessage,omitempty"`
+	CreationDate          *time.Time                   `json:"CreationDate,omitempty"`
+	FailedUsers           *int64                       `json:"FailedUsers,omitempty"`
+	ImportedUsers         *int64                       `json:"ImportedUsers,omitempty"`
+	JobID                 *string                      `json:"JobId,omitempty"`
+	JobName               *string                      `json:"JobName,omitempty"`
+	PreSignedURL          *string                      `json:"PreSignedUrl,omitempty"`
+	SkippedUsers          *int64                       `json:"SkippedUsers,omitempty"`
+	StartDate             *time.Time                   `json:"StartDate,omitempty"`
+	Status                *UserImportJobStatusTypeEnum `json:"Status,omitempty"`
+	UserPoolID            *string                      `json:"UserPoolId,omitempty"`
 }

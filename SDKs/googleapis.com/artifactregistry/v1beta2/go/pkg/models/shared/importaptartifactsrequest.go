@@ -1,5 +1,5 @@
 package shared
 
 type ImportAptArtifactsRequest struct {
-	GcsSource *ImportAptArtifactsGcsSource `json:"gcsSource"`
+	GcsSource *ImportAptArtifactsGcsSource `json:"gcsSource,omitempty"`
 }

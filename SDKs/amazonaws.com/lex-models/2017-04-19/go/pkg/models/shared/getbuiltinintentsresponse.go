@@ -1,6 +1,6 @@
 package shared
 
 type GetBuiltinIntentsResponse struct {
-	Intents   []BuiltinIntentMetadata `json:"intents"`
-	NextToken *string                 `json:"nextToken"`
+	Intents   []BuiltinIntentMetadata `json:"intents,omitempty"`
+	NextToken *string                 `json:"nextToken,omitempty"`
 }

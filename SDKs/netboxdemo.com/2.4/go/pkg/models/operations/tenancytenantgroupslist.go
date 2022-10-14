@@ -17,8 +17,8 @@ type TenancyTenantGroupsListRequest struct {
 
 type TenancyTenantGroupsList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
-	Next     *string              `json:"next"`
-	Previous *string              `json:"previous"`
+	Next     *string              `json:"next,omitempty"`
+	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.TenantGroup `json:"results"`
 }
 

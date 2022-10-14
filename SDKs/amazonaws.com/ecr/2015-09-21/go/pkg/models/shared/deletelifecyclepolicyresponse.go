@@ -5,8 +5,8 @@ import (
 )
 
 type DeleteLifecyclePolicyResponse struct {
-	LastEvaluatedAt     *time.Time `json:"lastEvaluatedAt"`
-	LifecyclePolicyText *string    `json:"lifecyclePolicyText"`
-	RegistryID          *string    `json:"registryId"`
-	RepositoryName      *string    `json:"repositoryName"`
+	LastEvaluatedAt     *time.Time `json:"lastEvaluatedAt,omitempty"`
+	LifecyclePolicyText *string    `json:"lifecyclePolicyText,omitempty"`
+	RegistryID          *string    `json:"registryId,omitempty"`
+	RepositoryName      *string    `json:"repositoryName,omitempty"`
 }

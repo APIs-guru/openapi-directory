@@ -8,6 +8,6 @@ const (
 )
 
 type BatchGetAmpUrlsRequest struct {
-	LookupStrategy *BatchGetAmpUrlsRequestLookupStrategyEnum `json:"lookupStrategy"`
-	Urls           []string                                  `json:"urls"`
+	LookupStrategy *BatchGetAmpUrlsRequestLookupStrategyEnum `json:"lookupStrategy,omitempty"`
+	Urls           []string                                  `json:"urls,omitempty"`
 }

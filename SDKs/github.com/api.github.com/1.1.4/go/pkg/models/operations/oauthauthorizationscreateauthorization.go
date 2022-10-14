@@ -5,12 +5,12 @@ import (
 )
 
 type OauthAuthorizationsCreateAuthorizationRequestBody struct {
-	ClientID     *string  `json:"client_id"`
-	ClientSecret *string  `json:"client_secret"`
-	Fingerprint  *string  `json:"fingerprint"`
-	Note         *string  `json:"note"`
-	NoteURL      *string  `json:"note_url"`
-	Scopes       []string `json:"scopes"`
+	ClientID     *string  `json:"client_id,omitempty"`
+	ClientSecret *string  `json:"client_secret,omitempty"`
+	Fingerprint  *string  `json:"fingerprint,omitempty"`
+	Note         *string  `json:"note,omitempty"`
+	NoteURL      *string  `json:"note_url,omitempty"`
+	Scopes       []string `json:"scopes,omitempty"`
 }
 
 type OauthAuthorizationsCreateAuthorizationRequest struct {

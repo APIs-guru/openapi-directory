@@ -1,6 +1,6 @@
 package shared
 
 type DescribeLunaClientRequest struct {
-	CertificateFingerprint *string `json:"CertificateFingerprint"`
-	ClientArn              *string `json:"ClientArn"`
+	CertificateFingerprint *string `json:"CertificateFingerprint,omitempty"`
+	ClientArn              *string `json:"ClientArn,omitempty"`
 }

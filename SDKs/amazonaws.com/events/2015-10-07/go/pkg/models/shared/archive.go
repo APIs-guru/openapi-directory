@@ -5,12 +5,12 @@ import (
 )
 
 type Archive struct {
-	ArchiveName    *string           `json:"ArchiveName"`
-	CreationTime   *time.Time        `json:"CreationTime"`
-	EventCount     *int64            `json:"EventCount"`
-	EventSourceArn *string           `json:"EventSourceArn"`
-	RetentionDays  *int64            `json:"RetentionDays"`
-	SizeBytes      *int64            `json:"SizeBytes"`
-	State          *ArchiveStateEnum `json:"State"`
-	StateReason    *string           `json:"StateReason"`
+	ArchiveName    *string           `json:"ArchiveName,omitempty"`
+	CreationTime   *time.Time        `json:"CreationTime,omitempty"`
+	EventCount     *int64            `json:"EventCount,omitempty"`
+	EventSourceArn *string           `json:"EventSourceArn,omitempty"`
+	RetentionDays  *int64            `json:"RetentionDays,omitempty"`
+	SizeBytes      *int64            `json:"SizeBytes,omitempty"`
+	State          *ArchiveStateEnum `json:"State,omitempty"`
+	StateReason    *string           `json:"StateReason,omitempty"`
 }

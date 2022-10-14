@@ -53,9 +53,9 @@ const (
 )
 
 type APIResponseListPublishedWrittenQuestion struct {
-	Errors     []string                                               `json:"Errors"`
-	PagingInfo *PagingInfo                                            `json:"PagingInfo"`
-	Response   []PublishedWrittenQuestion                             `json:"Response"`
-	StatusCode *APIResponseListPublishedWrittenQuestionStatusCodeEnum `json:"StatusCode"`
-	Success    *bool                                                  `json:"Success"`
+	Errors     []string                                               `json:"Errors,omitempty"`
+	PagingInfo *PagingInfo                                            `json:"PagingInfo,omitempty"`
+	Response   []PublishedWrittenQuestion                             `json:"Response,omitempty"`
+	StatusCode *APIResponseListPublishedWrittenQuestionStatusCodeEnum `json:"StatusCode,omitempty"`
+	Success    *bool                                                  `json:"Success,omitempty"`
 }

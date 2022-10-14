@@ -10,31 +10,31 @@ type GetHTMLUsingPostRequest struct {
 }
 
 type GetHTMLUsingPost200ApplicationJSONData struct {
-	HTML *string `json:"html"`
+	HTML *string `json:"html,omitempty"`
 }
 
 type GetHTMLUsingPost200ApplicationJSON struct {
-	Code    *int64                                  `json:"code"`
-	Data    *GetHTMLUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                 `json:"message"`
+	Code    *int64                                  `json:"code,omitempty"`
+	Data    *GetHTMLUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                 `json:"message,omitempty"`
 }
 
 type GetHTMLUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetHTMLUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetHTMLUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetHTMLUsingPostResponse struct {

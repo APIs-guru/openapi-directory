@@ -1,7 +1,7 @@
 package operations
 
 type PostAdminSettingsRequestBody struct {
-	FixedDelay *float64 `json:"fixedDelay"`
+	FixedDelay *float64 `json:"fixedDelay,omitempty"`
 }
 
 type PostAdminSettingsRequest struct {

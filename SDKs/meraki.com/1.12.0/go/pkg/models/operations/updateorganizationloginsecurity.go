@@ -5,18 +5,18 @@ type UpdateOrganizationLoginSecurityPathParams struct {
 }
 
 type UpdateOrganizationLoginSecurityRequestBody struct {
-	AccountLockoutAttempts    *int64   `json:"accountLockoutAttempts"`
-	EnforceAccountLockout     *bool    `json:"enforceAccountLockout"`
-	EnforceDifferentPasswords *bool    `json:"enforceDifferentPasswords"`
-	EnforceIdleTimeout        *bool    `json:"enforceIdleTimeout"`
-	EnforceLoginIPRanges      *bool    `json:"enforceLoginIpRanges"`
-	EnforcePasswordExpiration *bool    `json:"enforcePasswordExpiration"`
-	EnforceStrongPasswords    *bool    `json:"enforceStrongPasswords"`
-	EnforceTwoFactorAuth      *bool    `json:"enforceTwoFactorAuth"`
-	IdleTimeoutMinutes        *int64   `json:"idleTimeoutMinutes"`
-	LoginIPRanges             []string `json:"loginIpRanges"`
-	NumDifferentPasswords     *int64   `json:"numDifferentPasswords"`
-	PasswordExpirationDays    *int64   `json:"passwordExpirationDays"`
+	AccountLockoutAttempts    *int64   `json:"accountLockoutAttempts,omitempty"`
+	EnforceAccountLockout     *bool    `json:"enforceAccountLockout,omitempty"`
+	EnforceDifferentPasswords *bool    `json:"enforceDifferentPasswords,omitempty"`
+	EnforceIdleTimeout        *bool    `json:"enforceIdleTimeout,omitempty"`
+	EnforceLoginIPRanges      *bool    `json:"enforceLoginIpRanges,omitempty"`
+	EnforcePasswordExpiration *bool    `json:"enforcePasswordExpiration,omitempty"`
+	EnforceStrongPasswords    *bool    `json:"enforceStrongPasswords,omitempty"`
+	EnforceTwoFactorAuth      *bool    `json:"enforceTwoFactorAuth,omitempty"`
+	IdleTimeoutMinutes        *int64   `json:"idleTimeoutMinutes,omitempty"`
+	LoginIPRanges             []string `json:"loginIpRanges,omitempty"`
+	NumDifferentPasswords     *int64   `json:"numDifferentPasswords,omitempty"`
+	PasswordExpirationDays    *int64   `json:"passwordExpirationDays,omitempty"`
 }
 
 type UpdateOrganizationLoginSecurityRequest struct {

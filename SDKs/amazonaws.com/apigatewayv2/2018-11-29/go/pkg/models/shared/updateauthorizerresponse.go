@@ -1,15 +1,15 @@
 package shared
 
 type UpdateAuthorizerResponse struct {
-	AuthorizerCredentialsArn       *string             `json:"AuthorizerCredentialsArn"`
-	AuthorizerID                   *string             `json:"AuthorizerId"`
-	AuthorizerPayloadFormatVersion *string             `json:"AuthorizerPayloadFormatVersion"`
-	AuthorizerResultTTLInSeconds   *int64              `json:"AuthorizerResultTtlInSeconds"`
-	AuthorizerType                 *AuthorizerTypeEnum `json:"AuthorizerType"`
-	AuthorizerURI                  *string             `json:"AuthorizerUri"`
-	EnableSimpleResponses          *bool               `json:"EnableSimpleResponses"`
-	IdentitySource                 []string            `json:"IdentitySource"`
-	IdentityValidationExpression   *string             `json:"IdentityValidationExpression"`
-	JwtConfiguration               *JwtConfiguration   `json:"JwtConfiguration"`
-	Name                           *string             `json:"Name"`
+	AuthorizerCredentialsArn       *string             `json:"AuthorizerCredentialsArn,omitempty"`
+	AuthorizerID                   *string             `json:"AuthorizerId,omitempty"`
+	AuthorizerPayloadFormatVersion *string             `json:"AuthorizerPayloadFormatVersion,omitempty"`
+	AuthorizerResultTTLInSeconds   *int64              `json:"AuthorizerResultTtlInSeconds,omitempty"`
+	AuthorizerType                 *AuthorizerTypeEnum `json:"AuthorizerType,omitempty"`
+	AuthorizerURI                  *string             `json:"AuthorizerUri,omitempty"`
+	EnableSimpleResponses          *bool               `json:"EnableSimpleResponses,omitempty"`
+	IdentitySource                 []string            `json:"IdentitySource,omitempty"`
+	IdentityValidationExpression   *string             `json:"IdentityValidationExpression,omitempty"`
+	JwtConfiguration               *JwtConfiguration   `json:"JwtConfiguration,omitempty"`
+	Name                           *string             `json:"Name,omitempty"`
 }

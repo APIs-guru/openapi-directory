@@ -10,15 +10,15 @@ const (
 )
 
 type SasPortalDevice struct {
-	ActiveConfig         *SasPortalDeviceConfig      `json:"activeConfig"`
-	CurrentChannels      []SasPortalChannelWithScore `json:"currentChannels"`
-	DeviceMetadata       *SasPortalDeviceMetadata    `json:"deviceMetadata"`
-	DisplayName          *string                     `json:"displayName"`
-	FccID                *string                     `json:"fccId"`
-	GrantRangeAllowlists []SasPortalFrequencyRange   `json:"grantRangeAllowlists"`
-	Grants               []SasPortalDeviceGrant      `json:"grants"`
-	Name                 *string                     `json:"name"`
-	PreloadedConfig      *SasPortalDeviceConfig      `json:"preloadedConfig"`
-	SerialNumber         *string                     `json:"serialNumber"`
-	State                *SasPortalDeviceStateEnum   `json:"state"`
+	ActiveConfig         *SasPortalDeviceConfig      `json:"activeConfig,omitempty"`
+	CurrentChannels      []SasPortalChannelWithScore `json:"currentChannels,omitempty"`
+	DeviceMetadata       *SasPortalDeviceMetadata    `json:"deviceMetadata,omitempty"`
+	DisplayName          *string                     `json:"displayName,omitempty"`
+	FccID                *string                     `json:"fccId,omitempty"`
+	GrantRangeAllowlists []SasPortalFrequencyRange   `json:"grantRangeAllowlists,omitempty"`
+	Grants               []SasPortalDeviceGrant      `json:"grants,omitempty"`
+	Name                 *string                     `json:"name,omitempty"`
+	PreloadedConfig      *SasPortalDeviceConfig      `json:"preloadedConfig,omitempty"`
+	SerialNumber         *string                     `json:"serialNumber,omitempty"`
+	State                *SasPortalDeviceStateEnum   `json:"state,omitempty"`
 }

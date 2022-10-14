@@ -9,11 +9,11 @@ const (
 )
 
 type RegisterRealtimeAPIData struct {
-	APIURL            *string                                      `json:"ApiUrl" form:"name=ApiUrl"`
-	BasicAuthPassword *string                                      `json:"BasicAuthPassword" form:"name=BasicAuthPassword"`
-	BasicAuthUsername *string                                      `json:"BasicAuthUsername" form:"name=BasicAuthUsername"`
-	ID                *string                                      `json:"Id" form:"name=Id"`
-	MeterID           *string                                      `json:"MeterId" form:"name=MeterId"`
-	RegistrationType  *RegisterRealtimeAPIDataRegistrationTypeEnum `json:"RegistrationType" form:"name=RegistrationType"`
-	SerialNumber      *string                                      `json:"SerialNumber" form:"name=SerialNumber"`
+	APIURL            *string                                      `json:"ApiUrl,omitempty" form:"name=ApiUrl"`
+	BasicAuthPassword *string                                      `json:"BasicAuthPassword,omitempty" form:"name=BasicAuthPassword"`
+	BasicAuthUsername *string                                      `json:"BasicAuthUsername,omitempty" form:"name=BasicAuthUsername"`
+	ID                *string                                      `json:"Id,omitempty" form:"name=Id"`
+	MeterID           *string                                      `json:"MeterId,omitempty" form:"name=MeterId"`
+	RegistrationType  *RegisterRealtimeAPIDataRegistrationTypeEnum `json:"RegistrationType,omitempty" form:"name=RegistrationType"`
+	SerialNumber      *string                                      `json:"SerialNumber,omitempty" form:"name=SerialNumber"`
 }

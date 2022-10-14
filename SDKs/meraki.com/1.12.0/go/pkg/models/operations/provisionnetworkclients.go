@@ -6,7 +6,7 @@ type ProvisionNetworkClientsPathParams struct {
 
 type ProvisionNetworkClientsRequestBodyClients struct {
 	Mac  string  `json:"mac"`
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyDevicePolicyEnum string
@@ -28,7 +28,7 @@ const (
 )
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySecurityAppliance struct {
-	DevicePolicy *ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDevicePolicyEnum `json:"devicePolicy"`
+	DevicePolicy *ProvisionNetworkClientsRequestBodyPoliciesBySecurityApplianceDevicePolicyEnum `json:"devicePolicy,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnum string
@@ -42,7 +42,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid0 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid0DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnum string
@@ -56,7 +56,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid1 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid1DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnum string
@@ -70,7 +70,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid10 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid10DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                            `json:"groupPolicyId"`
+	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnum string
@@ -84,7 +84,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid11 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid11DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                            `json:"groupPolicyId"`
+	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnum string
@@ -98,7 +98,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid12 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid12DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                            `json:"groupPolicyId"`
+	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnum string
@@ -112,7 +112,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid13 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid13DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                            `json:"groupPolicyId"`
+	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnum string
@@ -126,7 +126,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid14 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid14DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                            `json:"groupPolicyId"`
+	GroupPolicyID *string                                                            `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnum string
@@ -140,7 +140,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid2 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid2DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnum string
@@ -154,7 +154,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid3 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid3DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnum string
@@ -168,7 +168,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid4 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid4DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnum string
@@ -182,7 +182,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid5 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid5DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnum string
@@ -196,7 +196,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid6 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid6DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnum string
@@ -210,7 +210,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid7 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid7DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnum string
@@ -224,7 +224,7 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid8 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid8DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnum string
@@ -238,33 +238,33 @@ const (
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid9 struct {
 	DevicePolicy  ProvisionNetworkClientsRequestBodyPoliciesBySsid9DevicePolicyEnum `json:"devicePolicy"`
-	GroupPolicyID *string                                                           `json:"groupPolicyId"`
+	GroupPolicyID *string                                                           `json:"groupPolicyId,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBodyPoliciesBySsid struct {
-	Zero     *ProvisionNetworkClientsRequestBodyPoliciesBySsid0  `json:"0"`
-	One      *ProvisionNetworkClientsRequestBodyPoliciesBySsid1  `json:"1"`
-	Ten      *ProvisionNetworkClientsRequestBodyPoliciesBySsid10 `json:"10"`
-	Eleven   *ProvisionNetworkClientsRequestBodyPoliciesBySsid11 `json:"11"`
-	Twelve   *ProvisionNetworkClientsRequestBodyPoliciesBySsid12 `json:"12"`
-	Thirteen *ProvisionNetworkClientsRequestBodyPoliciesBySsid13 `json:"13"`
-	Fourteen *ProvisionNetworkClientsRequestBodyPoliciesBySsid14 `json:"14"`
-	Two      *ProvisionNetworkClientsRequestBodyPoliciesBySsid2  `json:"2"`
-	Three    *ProvisionNetworkClientsRequestBodyPoliciesBySsid3  `json:"3"`
-	Four     *ProvisionNetworkClientsRequestBodyPoliciesBySsid4  `json:"4"`
-	Five     *ProvisionNetworkClientsRequestBodyPoliciesBySsid5  `json:"5"`
-	Six      *ProvisionNetworkClientsRequestBodyPoliciesBySsid6  `json:"6"`
-	Seven    *ProvisionNetworkClientsRequestBodyPoliciesBySsid7  `json:"7"`
-	Eight    *ProvisionNetworkClientsRequestBodyPoliciesBySsid8  `json:"8"`
-	Nine     *ProvisionNetworkClientsRequestBodyPoliciesBySsid9  `json:"9"`
+	Zero     *ProvisionNetworkClientsRequestBodyPoliciesBySsid0  `json:"0,omitempty"`
+	One      *ProvisionNetworkClientsRequestBodyPoliciesBySsid1  `json:"1,omitempty"`
+	Ten      *ProvisionNetworkClientsRequestBodyPoliciesBySsid10 `json:"10,omitempty"`
+	Eleven   *ProvisionNetworkClientsRequestBodyPoliciesBySsid11 `json:"11,omitempty"`
+	Twelve   *ProvisionNetworkClientsRequestBodyPoliciesBySsid12 `json:"12,omitempty"`
+	Thirteen *ProvisionNetworkClientsRequestBodyPoliciesBySsid13 `json:"13,omitempty"`
+	Fourteen *ProvisionNetworkClientsRequestBodyPoliciesBySsid14 `json:"14,omitempty"`
+	Two      *ProvisionNetworkClientsRequestBodyPoliciesBySsid2  `json:"2,omitempty"`
+	Three    *ProvisionNetworkClientsRequestBodyPoliciesBySsid3  `json:"3,omitempty"`
+	Four     *ProvisionNetworkClientsRequestBodyPoliciesBySsid4  `json:"4,omitempty"`
+	Five     *ProvisionNetworkClientsRequestBodyPoliciesBySsid5  `json:"5,omitempty"`
+	Six      *ProvisionNetworkClientsRequestBodyPoliciesBySsid6  `json:"6,omitempty"`
+	Seven    *ProvisionNetworkClientsRequestBodyPoliciesBySsid7  `json:"7,omitempty"`
+	Eight    *ProvisionNetworkClientsRequestBodyPoliciesBySsid8  `json:"8,omitempty"`
+	Nine     *ProvisionNetworkClientsRequestBodyPoliciesBySsid9  `json:"9,omitempty"`
 }
 
 type ProvisionNetworkClientsRequestBody struct {
 	Clients                     []ProvisionNetworkClientsRequestBodyClients                    `json:"clients"`
 	DevicePolicy                ProvisionNetworkClientsRequestBodyDevicePolicyEnum             `json:"devicePolicy"`
-	GroupPolicyID               *string                                                        `json:"groupPolicyId"`
-	PoliciesBySecurityAppliance *ProvisionNetworkClientsRequestBodyPoliciesBySecurityAppliance `json:"policiesBySecurityAppliance"`
-	PoliciesBySsid              *ProvisionNetworkClientsRequestBodyPoliciesBySsid              `json:"policiesBySsid"`
+	GroupPolicyID               *string                                                        `json:"groupPolicyId,omitempty"`
+	PoliciesBySecurityAppliance *ProvisionNetworkClientsRequestBodyPoliciesBySecurityAppliance `json:"policiesBySecurityAppliance,omitempty"`
+	PoliciesBySsid              *ProvisionNetworkClientsRequestBodyPoliciesBySsid              `json:"policiesBySsid,omitempty"`
 }
 
 type ProvisionNetworkClientsRequest struct {

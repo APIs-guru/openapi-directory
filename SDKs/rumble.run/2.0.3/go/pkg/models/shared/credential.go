@@ -8,16 +8,16 @@ const (
 )
 
 type Credential struct {
-	ACL            map[string]interface{} `json:"acl"`
-	Cidrs          []string               `json:"cidrs"`
-	ClientID       *string                `json:"client_id"`
-	CreatedAt      *int64                 `json:"created_at"`
-	CreatedByEmail *string                `json:"created_by_email"`
-	CreatedByID    *string                `json:"created_by_id"`
-	Global         *bool                  `json:"global"`
+	ACL            map[string]interface{} `json:"acl,omitempty"`
+	Cidrs          []string               `json:"cidrs,omitempty"`
+	ClientID       *string                `json:"client_id,omitempty"`
+	CreatedAt      *int64                 `json:"created_at,omitempty"`
+	CreatedByEmail *string                `json:"created_by_email,omitempty"`
+	CreatedByID    *string                `json:"created_by_id,omitempty"`
+	Global         *bool                  `json:"global,omitempty"`
 	ID             string                 `json:"id"`
-	LastUsedAt     *int64                 `json:"last_used_at"`
-	LastUsedByID   *string                `json:"last_used_by_id"`
-	Name           *string                `json:"name"`
-	Type           *CredentialTypeEnum    `json:"type"`
+	LastUsedAt     *int64                 `json:"last_used_at,omitempty"`
+	LastUsedByID   *string                `json:"last_used_by_id,omitempty"`
+	Name           *string                `json:"name,omitempty"`
+	Type           *CredentialTypeEnum    `json:"type,omitempty"`
 }

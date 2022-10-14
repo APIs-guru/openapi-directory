@@ -11,7 +11,7 @@ const (
 )
 
 type UsableSubnetworkSecondaryRange struct {
-	IPCidrRange *string                                   `json:"ipCidrRange"`
-	RangeName   *string                                   `json:"rangeName"`
-	Status      *UsableSubnetworkSecondaryRangeStatusEnum `json:"status"`
+	IPCidrRange *string                                   `json:"ipCidrRange,omitempty"`
+	RangeName   *string                                   `json:"rangeName,omitempty"`
+	Status      *UsableSubnetworkSecondaryRangeStatusEnum `json:"status,omitempty"`
 }

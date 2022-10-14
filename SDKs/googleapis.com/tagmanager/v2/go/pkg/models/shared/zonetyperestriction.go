@@ -1,6 +1,6 @@
 package shared
 
 type ZoneTypeRestriction struct {
-	Enable            *bool    `json:"enable"`
-	WhitelistedTypeID []string `json:"whitelistedTypeId"`
+	Enable            *bool    `json:"enable,omitempty"`
+	WhitelistedTypeID []string `json:"whitelistedTypeId,omitempty"`
 }

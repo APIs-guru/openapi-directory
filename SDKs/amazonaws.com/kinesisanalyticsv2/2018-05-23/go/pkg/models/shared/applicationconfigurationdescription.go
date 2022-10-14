@@ -1,12 +1,12 @@
 package shared
 
 type ApplicationConfigurationDescription struct {
-	ApplicationCodeConfigurationDescription     *ApplicationCodeConfigurationDescription     `json:"ApplicationCodeConfigurationDescription"`
-	ApplicationSnapshotConfigurationDescription *ApplicationSnapshotConfigurationDescription `json:"ApplicationSnapshotConfigurationDescription"`
-	EnvironmentPropertyDescriptions             *EnvironmentPropertyDescriptions             `json:"EnvironmentPropertyDescriptions"`
-	FlinkApplicationConfigurationDescription    *FlinkApplicationConfigurationDescription    `json:"FlinkApplicationConfigurationDescription"`
-	RunConfigurationDescription                 *RunConfigurationDescription                 `json:"RunConfigurationDescription"`
-	SQLApplicationConfigurationDescription      *SQLApplicationConfigurationDescription      `json:"SqlApplicationConfigurationDescription"`
-	VpcConfigurationDescriptions                []VpcConfigurationDescription                `json:"VpcConfigurationDescriptions"`
-	ZeppelinApplicationConfigurationDescription *ZeppelinApplicationConfigurationDescription `json:"ZeppelinApplicationConfigurationDescription"`
+	ApplicationCodeConfigurationDescription     *ApplicationCodeConfigurationDescription     `json:"ApplicationCodeConfigurationDescription,omitempty"`
+	ApplicationSnapshotConfigurationDescription *ApplicationSnapshotConfigurationDescription `json:"ApplicationSnapshotConfigurationDescription,omitempty"`
+	EnvironmentPropertyDescriptions             *EnvironmentPropertyDescriptions             `json:"EnvironmentPropertyDescriptions,omitempty"`
+	FlinkApplicationConfigurationDescription    *FlinkApplicationConfigurationDescription    `json:"FlinkApplicationConfigurationDescription,omitempty"`
+	RunConfigurationDescription                 *RunConfigurationDescription                 `json:"RunConfigurationDescription,omitempty"`
+	SQLApplicationConfigurationDescription      *SQLApplicationConfigurationDescription      `json:"SqlApplicationConfigurationDescription,omitempty"`
+	VpcConfigurationDescriptions                []VpcConfigurationDescription                `json:"VpcConfigurationDescriptions,omitempty"`
+	ZeppelinApplicationConfigurationDescription *ZeppelinApplicationConfigurationDescription `json:"ZeppelinApplicationConfigurationDescription,omitempty"`
 }

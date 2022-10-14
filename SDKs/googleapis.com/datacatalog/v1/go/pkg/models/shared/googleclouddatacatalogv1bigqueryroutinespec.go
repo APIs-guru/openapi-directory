@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDatacatalogV1BigQueryRoutineSpec struct {
-	ImportedLibraries []string `json:"importedLibraries"`
+	ImportedLibraries []string `json:"importedLibraries,omitempty"`
 }

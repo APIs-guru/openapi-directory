@@ -17,7 +17,7 @@ const (
 )
 
 type ItvPinAuthRequest struct {
-	CookieType *ItvPinAuthRequestCookieTypeEnum `json:"cookieType"`
+	CookieType *ItvPinAuthRequestCookieTypeEnum `json:"cookieType,omitempty"`
 	Pin        string                           `json:"pin"`
-	Scopes     []ItvPinAuthRequestScopesEnum    `json:"scopes"`
+	Scopes     []ItvPinAuthRequestScopesEnum    `json:"scopes,omitempty"`
 }

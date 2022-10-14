@@ -1,6 +1,6 @@
 package shared
 
 type BranchInfo struct {
-	BranchName *string `json:"branchName"`
-	CommitID   *string `json:"commitId"`
+	BranchName *string `json:"branchName,omitempty"`
+	CommitID   *string `json:"commitId,omitempty"`
 }

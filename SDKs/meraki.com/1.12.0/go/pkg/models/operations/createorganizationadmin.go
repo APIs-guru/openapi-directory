@@ -49,12 +49,12 @@ type CreateOrganizationAdminRequestBodyTags struct {
 }
 
 type CreateOrganizationAdminRequestBody struct {
-	AuthenticationMethod *CreateOrganizationAdminRequestBodyAuthenticationMethodEnum `json:"authenticationMethod"`
+	AuthenticationMethod *CreateOrganizationAdminRequestBodyAuthenticationMethodEnum `json:"authenticationMethod,omitempty"`
 	Email                string                                                      `json:"email"`
 	Name                 string                                                      `json:"name"`
-	Networks             []CreateOrganizationAdminRequestBodyNetworks                `json:"networks"`
+	Networks             []CreateOrganizationAdminRequestBodyNetworks                `json:"networks,omitempty"`
 	OrgAccess            CreateOrganizationAdminRequestBodyOrgAccessEnum             `json:"orgAccess"`
-	Tags                 []CreateOrganizationAdminRequestBodyTags                    `json:"tags"`
+	Tags                 []CreateOrganizationAdminRequestBodyTags                    `json:"tags,omitempty"`
 }
 
 type CreateOrganizationAdminRequest struct {

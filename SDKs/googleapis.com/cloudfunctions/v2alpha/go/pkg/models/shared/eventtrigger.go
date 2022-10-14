@@ -9,12 +9,12 @@ const (
 )
 
 type EventTrigger struct {
-	Channel             *string                      `json:"channel"`
-	EventFilters        []EventFilter                `json:"eventFilters"`
-	EventType           *string                      `json:"eventType"`
-	PubsubTopic         *string                      `json:"pubsubTopic"`
-	RetryPolicy         *EventTriggerRetryPolicyEnum `json:"retryPolicy"`
-	ServiceAccountEmail *string                      `json:"serviceAccountEmail"`
-	Trigger             *string                      `json:"trigger"`
-	TriggerRegion       *string                      `json:"triggerRegion"`
+	Channel             *string                      `json:"channel,omitempty"`
+	EventFilters        []EventFilter                `json:"eventFilters,omitempty"`
+	EventType           *string                      `json:"eventType,omitempty"`
+	PubsubTopic         *string                      `json:"pubsubTopic,omitempty"`
+	RetryPolicy         *EventTriggerRetryPolicyEnum `json:"retryPolicy,omitempty"`
+	ServiceAccountEmail *string                      `json:"serviceAccountEmail,omitempty"`
+	Trigger             *string                      `json:"trigger,omitempty"`
+	TriggerRegion       *string                      `json:"triggerRegion,omitempty"`
 }

@@ -8,9 +8,9 @@ const (
 )
 
 type GoogleAppsCardV1CardHeader struct {
-	ImageAltText *string                                  `json:"imageAltText"`
-	ImageType    *GoogleAppsCardV1CardHeaderImageTypeEnum `json:"imageType"`
-	ImageURL     *string                                  `json:"imageUrl"`
-	Subtitle     *string                                  `json:"subtitle"`
-	Title        *string                                  `json:"title"`
+	ImageAltText *string                                  `json:"imageAltText,omitempty"`
+	ImageType    *GoogleAppsCardV1CardHeaderImageTypeEnum `json:"imageType,omitempty"`
+	ImageURL     *string                                  `json:"imageUrl,omitempty"`
+	Subtitle     *string                                  `json:"subtitle,omitempty"`
+	Title        *string                                  `json:"title,omitempty"`
 }

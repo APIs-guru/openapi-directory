@@ -1,7 +1,7 @@
 package shared
 
 type ProductSearchResults struct {
-	IndexTime             *string         `json:"indexTime"`
-	ProductGroupedResults []GroupedResult `json:"productGroupedResults"`
-	Results               []Result        `json:"results"`
+	IndexTime             *string         `json:"indexTime,omitempty"`
+	ProductGroupedResults []GroupedResult `json:"productGroupedResults,omitempty"`
+	Results               []Result        `json:"results,omitempty"`
 }

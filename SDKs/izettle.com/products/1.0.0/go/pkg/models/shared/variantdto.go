@@ -1,14 +1,14 @@
 package shared
 
 type VariantDto struct {
-	Barcode       *string          `json:"barcode"`
-	CostPrice     *Price           `json:"costPrice"`
-	Description   *string          `json:"description"`
-	Name          *string          `json:"name"`
-	Options       []VariantOption  `json:"options"`
-	Presentation  *PresentationDto `json:"presentation"`
-	Price         *Price           `json:"price"`
-	Sku           *string          `json:"sku"`
+	Barcode       *string          `json:"barcode,omitempty"`
+	CostPrice     *Price           `json:"costPrice,omitempty"`
+	Description   *string          `json:"description,omitempty"`
+	Name          *string          `json:"name,omitempty"`
+	Options       []VariantOption  `json:"options,omitempty"`
+	Presentation  *PresentationDto `json:"presentation,omitempty"`
+	Price         *Price           `json:"price,omitempty"`
+	Sku           *string          `json:"sku,omitempty"`
 	UUID          string           `json:"uuid"`
-	VatPercentage *float64         `json:"vatPercentage"`
+	VatPercentage *float64         `json:"vatPercentage,omitempty"`
 }

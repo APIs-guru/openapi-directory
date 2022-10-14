@@ -12,11 +12,11 @@ const (
 )
 
 type UpdateNetworkWirelessSettingsRequestBody struct {
-	Ipv6BridgeEnabled        *bool                                                        `json:"ipv6BridgeEnabled"`
-	LedLightsOn              *bool                                                        `json:"ledLightsOn"`
-	LocationAnalyticsEnabled *bool                                                        `json:"locationAnalyticsEnabled"`
-	MeshingEnabled           *bool                                                        `json:"meshingEnabled"`
-	UpgradeStrategy          *UpdateNetworkWirelessSettingsRequestBodyUpgradeStrategyEnum `json:"upgradeStrategy"`
+	Ipv6BridgeEnabled        *bool                                                        `json:"ipv6BridgeEnabled,omitempty"`
+	LedLightsOn              *bool                                                        `json:"ledLightsOn,omitempty"`
+	LocationAnalyticsEnabled *bool                                                        `json:"locationAnalyticsEnabled,omitempty"`
+	MeshingEnabled           *bool                                                        `json:"meshingEnabled,omitempty"`
+	UpgradeStrategy          *UpdateNetworkWirelessSettingsRequestBodyUpgradeStrategyEnum `json:"upgradeStrategy,omitempty"`
 }
 
 type UpdateNetworkWirelessSettingsRequest struct {

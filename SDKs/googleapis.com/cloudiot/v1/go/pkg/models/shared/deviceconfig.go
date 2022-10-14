@@ -1,8 +1,8 @@
 package shared
 
 type DeviceConfig struct {
-	BinaryData      *string `json:"binaryData"`
-	CloudUpdateTime *string `json:"cloudUpdateTime"`
-	DeviceAckTime   *string `json:"deviceAckTime"`
-	Version         *string `json:"version"`
+	BinaryData      *string `json:"binaryData,omitempty"`
+	CloudUpdateTime *string `json:"cloudUpdateTime,omitempty"`
+	DeviceAckTime   *string `json:"deviceAckTime,omitempty"`
+	Version         *string `json:"version,omitempty"`
 }

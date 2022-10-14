@@ -25,13 +25,13 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaIntegrationAlertConfig struct {
-	AggregationPeriod *string                                                                `json:"aggregationPeriod"`
-	AlertThreshold    *int32                                                                 `json:"alertThreshold"`
-	DisableAlert      *bool                                                                  `json:"disableAlert"`
-	DisplayName       *string                                                                `json:"displayName"`
-	DurationThreshold *string                                                                `json:"durationThreshold"`
-	MetricType        *GoogleCloudIntegrationsV1alphaIntegrationAlertConfigMetricTypeEnum    `json:"metricType"`
-	OnlyFinalAttempt  *bool                                                                  `json:"onlyFinalAttempt"`
-	ThresholdType     *GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdTypeEnum `json:"thresholdType"`
-	ThresholdValue    *GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdValue    `json:"thresholdValue"`
+	AggregationPeriod *string                                                                `json:"aggregationPeriod,omitempty"`
+	AlertThreshold    *int32                                                                 `json:"alertThreshold,omitempty"`
+	DisableAlert      *bool                                                                  `json:"disableAlert,omitempty"`
+	DisplayName       *string                                                                `json:"displayName,omitempty"`
+	DurationThreshold *string                                                                `json:"durationThreshold,omitempty"`
+	MetricType        *GoogleCloudIntegrationsV1alphaIntegrationAlertConfigMetricTypeEnum    `json:"metricType,omitempty"`
+	OnlyFinalAttempt  *bool                                                                  `json:"onlyFinalAttempt,omitempty"`
+	ThresholdType     *GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdTypeEnum `json:"thresholdType,omitempty"`
+	ThresholdValue    *GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdValue    `json:"thresholdValue,omitempty"`
 }

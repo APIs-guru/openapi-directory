@@ -34,15 +34,15 @@ const (
 
 type Event struct {
 	AccountID   int64              `json:"accountId"`
-	AnswerTime  *time.Time         `json:"answerTime"`
-	CallerID    *string            `json:"callerId"`
+	AnswerTime  *time.Time         `json:"answerTime,omitempty"`
+	CallerID    *string            `json:"callerId,omitempty"`
 	Direction   EventDirectionEnum `json:"direction"`
-	Duration    *int64             `json:"duration"`
-	EndTime     *time.Time         `json:"endTime"`
-	ExternalID  *string            `json:"externalId"`
+	Duration    *int64             `json:"duration,omitempty"`
+	EndTime     *time.Time         `json:"endTime,omitempty"`
+	ExternalID  *string            `json:"externalId,omitempty"`
 	ID          int64              `json:"id"`
 	PhoneNumber string             `json:"phoneNumber"`
-	SmsData     *string            `json:"smsData"`
+	SmsData     *string            `json:"smsData,omitempty"`
 	StartTime   time.Time          `json:"startTime"`
 	State       EventStateEnum     `json:"state"`
 	Type        EventTypeEnum      `json:"type"`

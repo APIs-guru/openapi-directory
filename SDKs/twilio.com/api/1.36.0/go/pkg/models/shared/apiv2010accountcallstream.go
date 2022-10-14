@@ -1,11 +1,11 @@
 package shared
 
 type APIV2010AccountCallStream struct {
-	AccountSid  *string               `json:"account_sid"`
-	CallSid     *string               `json:"call_sid"`
-	DateUpdated *string               `json:"date_updated"`
-	Name        *string               `json:"name"`
-	Sid         *string               `json:"sid"`
-	Status      *StreamEnumStatusEnum `json:"status"`
-	URI         *string               `json:"uri"`
+	AccountSid  *string               `json:"account_sid,omitempty"`
+	CallSid     *string               `json:"call_sid,omitempty"`
+	DateUpdated *string               `json:"date_updated,omitempty"`
+	Name        *string               `json:"name,omitempty"`
+	Sid         *string               `json:"sid,omitempty"`
+	Status      *StreamEnumStatusEnum `json:"status,omitempty"`
+	URI         *string               `json:"uri,omitempty"`
 }

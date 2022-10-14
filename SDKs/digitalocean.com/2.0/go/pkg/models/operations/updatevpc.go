@@ -9,8 +9,8 @@ type UpdateVpcPathParams struct {
 }
 
 type UpdateVpcRequestBody struct {
-	Default     *bool   `json:"default"`
-	Description *string `json:"description"`
+	Default     *bool   `json:"default,omitempty"`
+	Description *string `json:"description,omitempty"`
 	Name        string  `json:"name"`
 }
 
@@ -20,13 +20,13 @@ type UpdateVpcRequest struct {
 }
 
 type UpdateVpc200ApplicationJSON struct {
-	Vpc *shared.Onev21vpcsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesVpcsItems `json:"vpc"`
+	Vpc *shared.Onev21vpcsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesVpcsItems `json:"vpc,omitempty"`
 }
 
 type UpdateVpc401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateVpcResponse struct {

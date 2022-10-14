@@ -1,6 +1,6 @@
 package shared
 
 type AsyncOptions struct {
-	MethodMatch    *string         `json:"methodMatch"`
-	PollingOptions *PollingOptions `json:"pollingOptions"`
+	MethodMatch    *string         `json:"methodMatch,omitempty"`
+	PollingOptions *PollingOptions `json:"pollingOptions,omitempty"`
 }

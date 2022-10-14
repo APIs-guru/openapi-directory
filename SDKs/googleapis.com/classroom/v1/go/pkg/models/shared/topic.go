@@ -1,8 +1,8 @@
 package shared
 
 type Topic struct {
-	CourseID   *string `json:"courseId"`
-	Name       *string `json:"name"`
-	TopicID    *string `json:"topicId"`
-	UpdateTime *string `json:"updateTime"`
+	CourseID   *string `json:"courseId,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	TopicID    *string `json:"topicId,omitempty"`
+	UpdateTime *string `json:"updateTime,omitempty"`
 }

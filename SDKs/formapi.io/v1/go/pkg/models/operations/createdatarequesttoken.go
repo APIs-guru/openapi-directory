@@ -32,7 +32,7 @@ type CreateDataRequestToken201ApplicationJSONToken struct {
 }
 
 type CreateDataRequestToken201ApplicationJSONCreateSubmissionDataRequestTokenResponse struct {
-	Errors []string                                           `json:"errors"`
+	Errors []string                                           `json:"errors,omitempty"`
 	Status CreateDataRequestToken201ApplicationJSONStatusEnum `json:"status"`
 	Token  CreateDataRequestToken201ApplicationJSONToken      `json:"token"`
 }

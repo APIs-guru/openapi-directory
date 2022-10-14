@@ -1,7 +1,7 @@
 package shared
 
 type FailedCreateAssociation struct {
-	Entry   *CreateAssociationBatchRequestEntry `json:"Entry"`
-	Fault   *FaultEnum                          `json:"Fault"`
-	Message *string                             `json:"Message"`
+	Entry   *CreateAssociationBatchRequestEntry `json:"Entry,omitempty"`
+	Fault   *FaultEnum                          `json:"Fault,omitempty"`
+	Message *string                             `json:"Message,omitempty"`
 }

@@ -8,11 +8,11 @@ const (
 )
 
 type FieldTransform struct {
-	AppendMissingElements *ArrayValue                         `json:"appendMissingElements"`
-	FieldPath             *string                             `json:"fieldPath"`
-	Increment             *Value                              `json:"increment"`
-	Maximum               *Value                              `json:"maximum"`
-	Minimum               *Value                              `json:"minimum"`
-	RemoveAllFromArray    *ArrayValue                         `json:"removeAllFromArray"`
-	SetToServerValue      *FieldTransformSetToServerValueEnum `json:"setToServerValue"`
+	AppendMissingElements *ArrayValue                         `json:"appendMissingElements,omitempty"`
+	FieldPath             *string                             `json:"fieldPath,omitempty"`
+	Increment             *Value                              `json:"increment,omitempty"`
+	Maximum               *Value                              `json:"maximum,omitempty"`
+	Minimum               *Value                              `json:"minimum,omitempty"`
+	RemoveAllFromArray    *ArrayValue                         `json:"removeAllFromArray,omitempty"`
+	SetToServerValue      *FieldTransformSetToServerValueEnum `json:"setToServerValue,omitempty"`
 }

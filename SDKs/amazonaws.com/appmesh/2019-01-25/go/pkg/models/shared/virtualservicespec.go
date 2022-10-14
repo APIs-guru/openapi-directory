@@ -1,5 +1,5 @@
 package shared
 
 type VirtualServiceSpec struct {
-	Provider *VirtualServiceProvider `json:"provider"`
+	Provider *VirtualServiceProvider `json:"provider,omitempty"`
 }

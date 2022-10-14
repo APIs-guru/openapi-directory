@@ -10,5 +10,5 @@ const (
 )
 
 type AccountState struct {
-	Status *AccountStateStatusEnum `json:"status"`
+	Status *AccountStateStatusEnum `json:"status,omitempty"`
 }

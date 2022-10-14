@@ -1,8 +1,8 @@
 package shared
 
 type Format struct {
-	FormatComplexity *FormatComplexity `json:"formatComplexity"`
-	FormatType       *string           `json:"formatType"`
-	Resources        []File            `json:"resources"`
-	Root             *File             `json:"root"`
+	FormatComplexity *FormatComplexity `json:"formatComplexity,omitempty"`
+	FormatType       *string           `json:"formatType,omitempty"`
+	Resources        []File            `json:"resources,omitempty"`
+	Root             *File             `json:"root,omitempty"`
 }

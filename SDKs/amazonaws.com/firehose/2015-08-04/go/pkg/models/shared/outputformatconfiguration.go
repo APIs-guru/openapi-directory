@@ -1,5 +1,5 @@
 package shared
 
 type OutputFormatConfiguration struct {
-	Serializer *Serializer `json:"Serializer"`
+	Serializer *Serializer `json:"Serializer,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type TflAPIPresentationEntitiesJourneyPlannerJourneyPlannerCycleHireDockingStationData struct {
-	DestinationID                 *string `json:"destinationId"`
-	DestinationNumberOfBikes      *int32  `json:"destinationNumberOfBikes"`
-	DestinationNumberOfEmptySlots *int32  `json:"destinationNumberOfEmptySlots"`
-	OriginID                      *string `json:"originId"`
-	OriginNumberOfBikes           *int32  `json:"originNumberOfBikes"`
-	OriginNumberOfEmptySlots      *int32  `json:"originNumberOfEmptySlots"`
+	DestinationID                 *string `json:"destinationId,omitempty"`
+	DestinationNumberOfBikes      *int32  `json:"destinationNumberOfBikes,omitempty"`
+	DestinationNumberOfEmptySlots *int32  `json:"destinationNumberOfEmptySlots,omitempty"`
+	OriginID                      *string `json:"originId,omitempty"`
+	OriginNumberOfBikes           *int32  `json:"originNumberOfBikes,omitempty"`
+	OriginNumberOfEmptySlots      *int32  `json:"originNumberOfEmptySlots,omitempty"`
 }

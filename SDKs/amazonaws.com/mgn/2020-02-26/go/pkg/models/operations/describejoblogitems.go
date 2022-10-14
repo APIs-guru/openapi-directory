@@ -21,8 +21,8 @@ type DescribeJobLogItemsHeaders struct {
 
 type DescribeJobLogItemsRequestBody struct {
 	JobID      string  `json:"jobID"`
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
 }
 
 type DescribeJobLogItemsRequest struct {

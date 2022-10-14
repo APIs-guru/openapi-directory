@@ -1,6 +1,6 @@
 package shared
 
 type ListSnapshotsResponse struct {
-	NextPageToken *string    `json:"nextPageToken"`
-	Snapshots     []Snapshot `json:"snapshots"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	Snapshots     []Snapshot `json:"snapshots,omitempty"`
 }

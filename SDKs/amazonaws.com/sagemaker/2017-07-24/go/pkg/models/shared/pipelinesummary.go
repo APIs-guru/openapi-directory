@@ -5,12 +5,12 @@ import (
 )
 
 type PipelineSummary struct {
-	CreationTime        *time.Time `json:"CreationTime"`
-	LastExecutionTime   *time.Time `json:"LastExecutionTime"`
-	LastModifiedTime    *time.Time `json:"LastModifiedTime"`
-	PipelineArn         *string    `json:"PipelineArn"`
-	PipelineDescription *string    `json:"PipelineDescription"`
-	PipelineDisplayName *string    `json:"PipelineDisplayName"`
-	PipelineName        *string    `json:"PipelineName"`
-	RoleArn             *string    `json:"RoleArn"`
+	CreationTime        *time.Time `json:"CreationTime,omitempty"`
+	LastExecutionTime   *time.Time `json:"LastExecutionTime,omitempty"`
+	LastModifiedTime    *time.Time `json:"LastModifiedTime,omitempty"`
+	PipelineArn         *string    `json:"PipelineArn,omitempty"`
+	PipelineDescription *string    `json:"PipelineDescription,omitempty"`
+	PipelineDisplayName *string    `json:"PipelineDisplayName,omitempty"`
+	PipelineName        *string    `json:"PipelineName,omitempty"`
+	RoleArn             *string    `json:"RoleArn,omitempty"`
 }

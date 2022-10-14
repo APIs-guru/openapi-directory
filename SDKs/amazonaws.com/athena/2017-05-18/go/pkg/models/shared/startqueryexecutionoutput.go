@@ -1,5 +1,5 @@
 package shared
 
 type StartQueryExecutionOutput struct {
-	QueryExecutionID *string `json:"QueryExecutionId"`
+	QueryExecutionID *string `json:"QueryExecutionId,omitempty"`
 }

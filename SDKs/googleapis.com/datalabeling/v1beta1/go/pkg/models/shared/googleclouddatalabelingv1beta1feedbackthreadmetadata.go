@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1FeedbackThreadMetadata struct {
-	CreateTime     *string                                                         `json:"createTime"`
-	LastUpdateTime *string                                                         `json:"lastUpdateTime"`
-	Status         *GoogleCloudDatalabelingV1beta1FeedbackThreadMetadataStatusEnum `json:"status"`
-	Thumbnail      *string                                                         `json:"thumbnail"`
+	CreateTime     *string                                                         `json:"createTime,omitempty"`
+	LastUpdateTime *string                                                         `json:"lastUpdateTime,omitempty"`
+	Status         *GoogleCloudDatalabelingV1beta1FeedbackThreadMetadataStatusEnum `json:"status,omitempty"`
+	Thumbnail      *string                                                         `json:"thumbnail,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ControlSet struct {
-	Controls []Control `json:"controls"`
-	ID       *string   `json:"id"`
-	Name     *string   `json:"name"`
+	Controls []Control `json:"controls,omitempty"`
+	ID       *string   `json:"id,omitempty"`
+	Name     *string   `json:"name,omitempty"`
 }

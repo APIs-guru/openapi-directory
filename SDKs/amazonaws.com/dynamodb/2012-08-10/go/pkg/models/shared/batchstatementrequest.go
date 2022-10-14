@@ -1,7 +1,7 @@
 package shared
 
 type BatchStatementRequest struct {
-	ConsistentRead *bool            `json:"ConsistentRead"`
-	Parameters     []AttributeValue `json:"Parameters"`
+	ConsistentRead *bool            `json:"ConsistentRead,omitempty"`
+	Parameters     []AttributeValue `json:"Parameters,omitempty"`
 	Statement      string           `json:"Statement"`
 }

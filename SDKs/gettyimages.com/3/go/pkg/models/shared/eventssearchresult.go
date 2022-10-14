@@ -1,6 +1,6 @@
 package shared
 
 type EventsSearchResult struct {
-	Events      []Event `json:"events"`
-	ResultCount *int32  `json:"result_count"`
+	Events      []Event `json:"events,omitempty"`
+	ResultCount *int32  `json:"result_count,omitempty"`
 }

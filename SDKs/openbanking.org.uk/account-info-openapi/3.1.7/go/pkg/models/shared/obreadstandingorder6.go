@@ -1,11 +1,11 @@
 package shared
 
 type ObReadStandingOrder6Data struct {
-	StandingOrder []ObStandingOrder6 `json:"StandingOrder"`
+	StandingOrder []ObStandingOrder6 `json:"StandingOrder,omitempty"`
 }
 
 type ObReadStandingOrder6 struct {
 	Data  ObReadStandingOrder6Data `json:"Data"`
-	Links *Links                   `json:"Links"`
-	Meta  *Meta                    `json:"Meta"`
+	Links *Links                   `json:"Links,omitempty"`
+	Meta  *Meta                    `json:"Meta,omitempty"`
 }

@@ -18,7 +18,7 @@ type PutGroupsIDJSONRequest struct {
 }
 
 type PutGroupsIDJSON200ApplicationJSON struct {
-	Success *string `json:"success"`
+	Success *string `json:"success,omitempty"`
 }
 
 type PutGroupsIDJSONResponse struct {

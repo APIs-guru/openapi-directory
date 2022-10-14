@@ -15,24 +15,24 @@ type CreateFlowHeaders struct {
 }
 
 type CreateFlowRequestBodySourceFlowConfig struct {
-	ConnectorProfileName      *string                           `json:"connectorProfileName"`
-	ConnectorType             *shared.ConnectorTypeEnum         `json:"connectorType"`
-	IncrementalPullConfig     *shared.IncrementalPullConfig     `json:"incrementalPullConfig"`
-	SourceConnectorProperties *shared.SourceConnectorProperties `json:"sourceConnectorProperties"`
+	ConnectorProfileName      *string                           `json:"connectorProfileName,omitempty"`
+	ConnectorType             *shared.ConnectorTypeEnum         `json:"connectorType,omitempty"`
+	IncrementalPullConfig     *shared.IncrementalPullConfig     `json:"incrementalPullConfig,omitempty"`
+	SourceConnectorProperties *shared.SourceConnectorProperties `json:"sourceConnectorProperties,omitempty"`
 }
 
 type CreateFlowRequestBodyTriggerConfig struct {
-	TriggerProperties *shared.TriggerProperties `json:"triggerProperties"`
-	TriggerType       *shared.TriggerTypeEnum   `json:"triggerType"`
+	TriggerProperties *shared.TriggerProperties `json:"triggerProperties,omitempty"`
+	TriggerType       *shared.TriggerTypeEnum   `json:"triggerType,omitempty"`
 }
 
 type CreateFlowRequestBody struct {
-	Description               *string                               `json:"description"`
+	Description               *string                               `json:"description,omitempty"`
 	DestinationFlowConfigList []shared.DestinationFlowConfig        `json:"destinationFlowConfigList"`
 	FlowName                  string                                `json:"flowName"`
-	KmsArn                    *string                               `json:"kmsArn"`
+	KmsArn                    *string                               `json:"kmsArn,omitempty"`
 	SourceFlowConfig          CreateFlowRequestBodySourceFlowConfig `json:"sourceFlowConfig"`
-	Tags                      map[string]string                     `json:"tags"`
+	Tags                      map[string]string                     `json:"tags,omitempty"`
 	Tasks                     []shared.Task                         `json:"tasks"`
 	TriggerConfig             CreateFlowRequestBodyTriggerConfig    `json:"triggerConfig"`
 }

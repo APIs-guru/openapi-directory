@@ -1,6 +1,6 @@
 package shared
 
 type ActiveContextTimeToLive struct {
-	TimeToLiveInSeconds *int64 `json:"timeToLiveInSeconds"`
-	TurnsToLive         *int64 `json:"turnsToLive"`
+	TimeToLiveInSeconds *int64 `json:"timeToLiveInSeconds,omitempty"`
+	TurnsToLive         *int64 `json:"turnsToLive,omitempty"`
 }

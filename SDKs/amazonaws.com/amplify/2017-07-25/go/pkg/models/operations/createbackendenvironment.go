@@ -19,9 +19,9 @@ type CreateBackendEnvironmentHeaders struct {
 }
 
 type CreateBackendEnvironmentRequestBody struct {
-	DeploymentArtifacts *string `json:"deploymentArtifacts"`
+	DeploymentArtifacts *string `json:"deploymentArtifacts,omitempty"`
 	EnvironmentName     string  `json:"environmentName"`
-	StackName           *string `json:"stackName"`
+	StackName           *string `json:"stackName,omitempty"`
 }
 
 type CreateBackendEnvironmentRequest struct {

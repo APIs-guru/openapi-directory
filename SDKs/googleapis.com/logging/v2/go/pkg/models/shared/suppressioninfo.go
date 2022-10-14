@@ -9,6 +9,6 @@ const (
 )
 
 type SuppressionInfo struct {
-	Reason          *SuppressionInfoReasonEnum `json:"reason"`
-	SuppressedCount *int32                     `json:"suppressedCount"`
+	Reason          *SuppressionInfoReasonEnum `json:"reason,omitempty"`
+	SuppressedCount *int32                     `json:"suppressedCount,omitempty"`
 }

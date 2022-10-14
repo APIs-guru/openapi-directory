@@ -15,7 +15,7 @@ type PutEmailIdentityFeedbackAttributesHeaders struct {
 }
 
 type PutEmailIdentityFeedbackAttributesRequestBody struct {
-	EmailForwardingEnabled *bool `json:"EmailForwardingEnabled"`
+	EmailForwardingEnabled *bool `json:"EmailForwardingEnabled,omitempty"`
 }
 
 type PutEmailIdentityFeedbackAttributesRequest struct {

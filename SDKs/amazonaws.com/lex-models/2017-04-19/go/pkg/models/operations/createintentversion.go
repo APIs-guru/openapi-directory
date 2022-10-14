@@ -19,7 +19,7 @@ type CreateIntentVersionHeaders struct {
 }
 
 type CreateIntentVersionRequestBody struct {
-	Checksum *string `json:"checksum"`
+	Checksum *string `json:"checksum,omitempty"`
 }
 
 type CreateIntentVersionRequest struct {

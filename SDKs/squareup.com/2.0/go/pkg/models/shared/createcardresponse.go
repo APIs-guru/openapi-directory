@@ -1,6 +1,6 @@
 package shared
 
 type CreateCardResponse struct {
-	Card   *Card   `json:"card"`
-	Errors []Error `json:"errors"`
+	Card   *Card   `json:"card,omitempty"`
+	Errors []Error `json:"errors,omitempty"`
 }

@@ -26,24 +26,24 @@ const (
 )
 
 type CreateVodRequestBodyBuyPrice struct {
-	Aud *float64 `json:"AUD"`
-	Cad *float64 `json:"CAD"`
-	Chf *float64 `json:"CHF"`
-	Dkk *float64 `json:"DKK"`
-	Eur *float64 `json:"EUR"`
-	Gbp *float64 `json:"GBP"`
-	Jpy *float64 `json:"JPY"`
-	Krw *float64 `json:"KRW"`
-	Nok *float64 `json:"NOK"`
-	Pln *float64 `json:"PLN"`
-	Sek *float64 `json:"SEK"`
-	Usd *float64 `json:"USD"`
+	Aud *float64 `json:"AUD,omitempty"`
+	Cad *float64 `json:"CAD,omitempty"`
+	Chf *float64 `json:"CHF,omitempty"`
+	Dkk *float64 `json:"DKK,omitempty"`
+	Eur *float64 `json:"EUR,omitempty"`
+	Gbp *float64 `json:"GBP,omitempty"`
+	Jpy *float64 `json:"JPY,omitempty"`
+	Krw *float64 `json:"KRW,omitempty"`
+	Nok *float64 `json:"NOK,omitempty"`
+	Pln *float64 `json:"PLN,omitempty"`
+	Sek *float64 `json:"SEK,omitempty"`
+	Usd *float64 `json:"USD,omitempty"`
 }
 
 type CreateVodRequestBodyBuy struct {
-	Active   *bool                         `json:"active"`
-	Download *bool                         `json:"download"`
-	Price    *CreateVodRequestBodyBuyPrice `json:"price"`
+	Active   *bool                         `json:"active,omitempty"`
+	Download *bool                         `json:"download,omitempty"`
+	Price    *CreateVodRequestBodyBuyPrice `json:"price,omitempty"`
 }
 
 type CreateVodRequestBodyContentRatingEnum string
@@ -58,13 +58,13 @@ const (
 )
 
 type CreateVodRequestBodyEpisodesBuyPrice struct {
-	Usd *float64 `json:"USD"`
+	Usd *float64 `json:"USD,omitempty"`
 }
 
 type CreateVodRequestBodyEpisodesBuy struct {
-	Active   *bool                                 `json:"active"`
-	Download *bool                                 `json:"download"`
-	Price    *CreateVodRequestBodyEpisodesBuyPrice `json:"price"`
+	Active   *bool                                 `json:"active,omitempty"`
+	Download *bool                                 `json:"download,omitempty"`
+	Price    *CreateVodRequestBodyEpisodesBuyPrice `json:"price,omitempty"`
 }
 
 type CreateVodRequestBodyEpisodesRentPeriodEnum string
@@ -81,18 +81,18 @@ const (
 )
 
 type CreateVodRequestBodyEpisodesRentPrice struct {
-	Usd *float64 `json:"USD"`
+	Usd *float64 `json:"USD,omitempty"`
 }
 
 type CreateVodRequestBodyEpisodesRent struct {
-	Active *bool                                       `json:"active"`
-	Period *CreateVodRequestBodyEpisodesRentPeriodEnum `json:"period"`
-	Price  *CreateVodRequestBodyEpisodesRentPrice      `json:"price"`
+	Active *bool                                       `json:"active,omitempty"`
+	Period *CreateVodRequestBodyEpisodesRentPeriodEnum `json:"period,omitempty"`
+	Price  *CreateVodRequestBodyEpisodesRentPrice      `json:"price,omitempty"`
 }
 
 type CreateVodRequestBodyEpisodes struct {
-	Buy  *CreateVodRequestBodyEpisodesBuy  `json:"buy"`
-	Rent *CreateVodRequestBodyEpisodesRent `json:"rent"`
+	Buy  *CreateVodRequestBodyEpisodesBuy  `json:"buy,omitempty"`
+	Rent *CreateVodRequestBodyEpisodesRent `json:"rent,omitempty"`
 }
 
 type CreateVodRequestBodyRentPeriodEnum string
@@ -109,37 +109,37 @@ const (
 )
 
 type CreateVodRequestBodyRentPrice struct {
-	Aud *float64 `json:"AUD"`
-	Cad *float64 `json:"CAD"`
-	Chf *float64 `json:"CHF"`
-	Dkk *float64 `json:"DKK"`
-	Eur *float64 `json:"EUR"`
-	Gbp *float64 `json:"GBP"`
-	Jpy *float64 `json:"JPY"`
-	Krw *float64 `json:"KRW"`
-	Nok *float64 `json:"NOK"`
-	Pln *float64 `json:"PLN"`
-	Sek *float64 `json:"SEK"`
-	Usd *float64 `json:"USD"`
+	Aud *float64 `json:"AUD,omitempty"`
+	Cad *float64 `json:"CAD,omitempty"`
+	Chf *float64 `json:"CHF,omitempty"`
+	Dkk *float64 `json:"DKK,omitempty"`
+	Eur *float64 `json:"EUR,omitempty"`
+	Gbp *float64 `json:"GBP,omitempty"`
+	Jpy *float64 `json:"JPY,omitempty"`
+	Krw *float64 `json:"KRW,omitempty"`
+	Nok *float64 `json:"NOK,omitempty"`
+	Pln *float64 `json:"PLN,omitempty"`
+	Sek *float64 `json:"SEK,omitempty"`
+	Usd *float64 `json:"USD,omitempty"`
 }
 
 type CreateVodRequestBodyRent struct {
-	Active *bool                               `json:"active"`
-	Period *CreateVodRequestBodyRentPeriodEnum `json:"period"`
-	Price  *CreateVodRequestBodyRentPrice      `json:"price"`
+	Active *bool                               `json:"active,omitempty"`
+	Period *CreateVodRequestBodyRentPeriodEnum `json:"period,omitempty"`
+	Price  *CreateVodRequestBodyRentPrice      `json:"price,omitempty"`
 }
 
 type CreateVodRequestBodySubscriptionMonthlyPrice struct {
-	Usd *float64 `json:"USD"`
+	Usd *float64 `json:"USD,omitempty"`
 }
 
 type CreateVodRequestBodySubscriptionMonthly struct {
-	Active *bool                                         `json:"active"`
-	Price  *CreateVodRequestBodySubscriptionMonthlyPrice `json:"price"`
+	Active *bool                                         `json:"active,omitempty"`
+	Price  *CreateVodRequestBodySubscriptionMonthlyPrice `json:"price,omitempty"`
 }
 
 type CreateVodRequestBodySubscription struct {
-	Monthly *CreateVodRequestBodySubscriptionMonthly `json:"monthly"`
+	Monthly *CreateVodRequestBodySubscriptionMonthly `json:"monthly,omitempty"`
 }
 
 type CreateVodRequestBodyTypeEnum string
@@ -150,16 +150,16 @@ const (
 )
 
 type CreateVodRequestBody struct {
-	AcceptedCurrencies *CreateVodRequestBodyAcceptedCurrenciesEnum `json:"accepted_currencies"`
-	Buy                *CreateVodRequestBodyBuy                    `json:"buy"`
+	AcceptedCurrencies *CreateVodRequestBodyAcceptedCurrenciesEnum `json:"accepted_currencies,omitempty"`
+	Buy                *CreateVodRequestBodyBuy                    `json:"buy,omitempty"`
 	ContentRating      CreateVodRequestBodyContentRatingEnum       `json:"content_rating"`
 	Description        string                                      `json:"description"`
-	DomainLink         *string                                     `json:"domain_link"`
-	Episodes           *CreateVodRequestBodyEpisodes               `json:"episodes"`
-	Link               *string                                     `json:"link"`
+	DomainLink         *string                                     `json:"domain_link,omitempty"`
+	Episodes           *CreateVodRequestBodyEpisodes               `json:"episodes,omitempty"`
+	Link               *string                                     `json:"link,omitempty"`
 	Name               string                                      `json:"name"`
-	Rent               *CreateVodRequestBodyRent                   `json:"rent"`
-	Subscription       *CreateVodRequestBodySubscription           `json:"subscription"`
+	Rent               *CreateVodRequestBodyRent                   `json:"rent,omitempty"`
+	Subscription       *CreateVodRequestBodySubscription           `json:"subscription,omitempty"`
 	Type               CreateVodRequestBodyTypeEnum                `json:"type"`
 }
 

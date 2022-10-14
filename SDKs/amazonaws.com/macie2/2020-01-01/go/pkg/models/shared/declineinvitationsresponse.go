@@ -1,5 +1,5 @@
 package shared
 
 type DeclineInvitationsResponse struct {
-	UnprocessedAccounts []UnprocessedAccount `json:"unprocessedAccounts"`
+	UnprocessedAccounts []UnprocessedAccount `json:"unprocessedAccounts,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListBigQueryExportsResponse struct {
-	BigQueryExports []GoogleCloudSecuritycenterV1BigQueryExport `json:"bigQueryExports"`
-	NextPageToken   *string                                     `json:"nextPageToken"`
+	BigQueryExports []GoogleCloudSecuritycenterV1BigQueryExport `json:"bigQueryExports,omitempty"`
+	NextPageToken   *string                                     `json:"nextPageToken,omitempty"`
 }

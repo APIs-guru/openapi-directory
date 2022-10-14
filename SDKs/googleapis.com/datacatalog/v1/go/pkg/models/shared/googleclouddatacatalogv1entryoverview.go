@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDatacatalogV1EntryOverview struct {
-	Overview *string `json:"overview"`
+	Overview *string `json:"overview,omitempty"`
 }

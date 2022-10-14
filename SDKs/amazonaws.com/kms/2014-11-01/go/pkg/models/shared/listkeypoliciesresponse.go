@@ -1,7 +1,7 @@
 package shared
 
 type ListKeyPoliciesResponse struct {
-	NextMarker  *string  `json:"NextMarker"`
-	PolicyNames []string `json:"PolicyNames"`
-	Truncated   *bool    `json:"Truncated"`
+	NextMarker  *string  `json:"NextMarker,omitempty"`
+	PolicyNames []string `json:"PolicyNames,omitempty"`
+	Truncated   *bool    `json:"Truncated,omitempty"`
 }

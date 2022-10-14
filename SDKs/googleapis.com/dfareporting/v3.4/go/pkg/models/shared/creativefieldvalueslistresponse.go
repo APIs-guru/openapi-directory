@@ -1,7 +1,7 @@
 package shared
 
 type CreativeFieldValuesListResponse struct {
-	CreativeFieldValues []CreativeFieldValue `json:"creativeFieldValues"`
-	Kind                *string              `json:"kind"`
-	NextPageToken       *string              `json:"nextPageToken"`
+	CreativeFieldValues []CreativeFieldValue `json:"creativeFieldValues,omitempty"`
+	Kind                *string              `json:"kind,omitempty"`
+	NextPageToken       *string              `json:"nextPageToken,omitempty"`
 }

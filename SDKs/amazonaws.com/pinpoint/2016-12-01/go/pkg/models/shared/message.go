@@ -1,16 +1,16 @@
 package shared
 
 type Message struct {
-	Action            *ActionEnum `json:"Action"`
-	Body              *string     `json:"Body"`
-	ImageIconURL      *string     `json:"ImageIconUrl"`
-	ImageSmallIconURL *string     `json:"ImageSmallIconUrl"`
-	ImageURL          *string     `json:"ImageUrl"`
-	JSONBody          *string     `json:"JsonBody"`
-	MediaURL          *string     `json:"MediaUrl"`
-	RawContent        *string     `json:"RawContent"`
-	SilentPush        *bool       `json:"SilentPush"`
-	TimeToLive        *int64      `json:"TimeToLive"`
-	Title             *string     `json:"Title"`
-	URL               *string     `json:"Url"`
+	Action            *ActionEnum `json:"Action,omitempty"`
+	Body              *string     `json:"Body,omitempty"`
+	ImageIconURL      *string     `json:"ImageIconUrl,omitempty"`
+	ImageSmallIconURL *string     `json:"ImageSmallIconUrl,omitempty"`
+	ImageURL          *string     `json:"ImageUrl,omitempty"`
+	JSONBody          *string     `json:"JsonBody,omitempty"`
+	MediaURL          *string     `json:"MediaUrl,omitempty"`
+	RawContent        *string     `json:"RawContent,omitempty"`
+	SilentPush        *bool       `json:"SilentPush,omitempty"`
+	TimeToLive        *int64      `json:"TimeToLive,omitempty"`
+	Title             *string     `json:"Title,omitempty"`
+	URL               *string     `json:"Url,omitempty"`
 }

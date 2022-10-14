@@ -5,7 +5,7 @@ import (
 )
 
 type DescribeWebsiteCertificateAuthorityResponse struct {
-	Certificate *string    `json:"Certificate"`
-	CreatedTime *time.Time `json:"CreatedTime"`
-	DisplayName *string    `json:"DisplayName"`
+	Certificate *string    `json:"Certificate,omitempty"`
+	CreatedTime *time.Time `json:"CreatedTime,omitempty"`
+	DisplayName *string    `json:"DisplayName,omitempty"`
 }

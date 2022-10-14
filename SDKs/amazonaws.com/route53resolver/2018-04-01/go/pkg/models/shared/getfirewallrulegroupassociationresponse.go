@@ -1,5 +1,5 @@
 package shared
 
 type GetFirewallRuleGroupAssociationResponse struct {
-	FirewallRuleGroupAssociation *FirewallRuleGroupAssociation `json:"FirewallRuleGroupAssociation"`
+	FirewallRuleGroupAssociation *FirewallRuleGroupAssociation `json:"FirewallRuleGroupAssociation,omitempty"`
 }

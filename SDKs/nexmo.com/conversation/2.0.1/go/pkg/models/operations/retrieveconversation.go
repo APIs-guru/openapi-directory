@@ -13,29 +13,29 @@ type RetrieveConversationRequest struct {
 }
 
 type RetrieveConversation200ApplicationJSONMembers struct {
-	Channel   *shared.Channel            `json:"channel"`
-	Initiator *shared.Initiator          `json:"initiator"`
-	MemberID  *string                    `json:"member_id"`
-	Name      *string                    `json:"name"`
-	State     *shared.MemberStateEnum    `json:"state"`
-	Timestamp *shared.TimestampResMember `json:"timestamp"`
-	UserID    *string                    `json:"user_id"`
+	Channel   *shared.Channel            `json:"channel,omitempty"`
+	Initiator *shared.Initiator          `json:"initiator,omitempty"`
+	MemberID  *string                    `json:"member_id,omitempty"`
+	Name      *string                    `json:"name,omitempty"`
+	State     *shared.MemberStateEnum    `json:"state,omitempty"`
+	Timestamp *shared.TimestampResMember `json:"timestamp,omitempty"`
+	UserID    *string                    `json:"user_id,omitempty"`
 }
 
 type RetrieveConversation200ApplicationJSONProperties struct {
-	Video *bool `json:"video"`
+	Video *bool `json:"video,omitempty"`
 }
 
 type RetrieveConversation200ApplicationJSON struct {
-	Links          *shared.LinksConversation                         `json:"_links"`
-	APIKey         *string                                           `json:"api_key"`
-	DisplayName    *string                                           `json:"display_name"`
-	Members        []RetrieveConversation200ApplicationJSONMembers   `json:"members"`
-	Name           *string                                           `json:"name"`
-	Numbers        map[string]interface{}                            `json:"numbers"`
-	Properties     *RetrieveConversation200ApplicationJSONProperties `json:"properties"`
-	SequenceNumber *string                                           `json:"sequence_number"`
-	Timestamp      *shared.TimestampResConversation                  `json:"timestamp"`
+	Links          *shared.LinksConversation                         `json:"_links,omitempty"`
+	APIKey         *string                                           `json:"api_key,omitempty"`
+	DisplayName    *string                                           `json:"display_name,omitempty"`
+	Members        []RetrieveConversation200ApplicationJSONMembers   `json:"members,omitempty"`
+	Name           *string                                           `json:"name,omitempty"`
+	Numbers        map[string]interface{}                            `json:"numbers,omitempty"`
+	Properties     *RetrieveConversation200ApplicationJSONProperties `json:"properties,omitempty"`
+	SequenceNumber *string                                           `json:"sequence_number,omitempty"`
+	Timestamp      *shared.TimestampResConversation                  `json:"timestamp,omitempty"`
 	UUID           string                                            `json:"uuid"`
 }
 

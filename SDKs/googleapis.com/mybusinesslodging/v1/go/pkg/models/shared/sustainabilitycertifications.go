@@ -42,9 +42,9 @@ const (
 )
 
 type SustainabilityCertifications struct {
-	BreeamCertification          *SustainabilityCertificationsBreeamCertificationEnum          `json:"breeamCertification"`
-	BreeamCertificationException *SustainabilityCertificationsBreeamCertificationExceptionEnum `json:"breeamCertificationException"`
-	EcoCertifications            []EcoCertification                                            `json:"ecoCertifications"`
-	LeedCertification            *SustainabilityCertificationsLeedCertificationEnum            `json:"leedCertification"`
-	LeedCertificationException   *SustainabilityCertificationsLeedCertificationExceptionEnum   `json:"leedCertificationException"`
+	BreeamCertification          *SustainabilityCertificationsBreeamCertificationEnum          `json:"breeamCertification,omitempty"`
+	BreeamCertificationException *SustainabilityCertificationsBreeamCertificationExceptionEnum `json:"breeamCertificationException,omitempty"`
+	EcoCertifications            []EcoCertification                                            `json:"ecoCertifications,omitempty"`
+	LeedCertification            *SustainabilityCertificationsLeedCertificationEnum            `json:"leedCertification,omitempty"`
+	LeedCertificationException   *SustainabilityCertificationsLeedCertificationExceptionEnum   `json:"leedCertificationException,omitempty"`
 }

@@ -17,7 +17,7 @@ const (
 )
 
 type DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJSON struct {
-	Message *DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJSONMessageEnum `json:"message"`
+	Message *DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJSONMessageEnum `json:"message,omitempty"`
 }
 
 type DeleteProjectUsernameProjectCheckoutKeyFingerprintResponse struct {

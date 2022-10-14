@@ -5,26 +5,26 @@ type AppendBlockChildrenPathParams struct {
 }
 
 type AppendBlockChildrenRequestBodyChildrenHeading2TextText struct {
-	Content *string `json:"content"`
+	Content *string `json:"content,omitempty"`
 }
 
 type AppendBlockChildrenRequestBodyChildrenHeading2Text struct {
-	Text *AppendBlockChildrenRequestBodyChildrenHeading2TextText `json:"text"`
-	Type *string                                                 `json:"type"`
+	Text *AppendBlockChildrenRequestBodyChildrenHeading2TextText `json:"text,omitempty"`
+	Type *string                                                 `json:"type,omitempty"`
 }
 
 type AppendBlockChildrenRequestBodyChildrenHeading2 struct {
-	Text []AppendBlockChildrenRequestBodyChildrenHeading2Text `json:"text"`
+	Text []AppendBlockChildrenRequestBodyChildrenHeading2Text `json:"text,omitempty"`
 }
 
 type AppendBlockChildrenRequestBodyChildren struct {
-	Heading2 *AppendBlockChildrenRequestBodyChildrenHeading2 `json:"heading_2"`
-	Object   *string                                         `json:"object"`
-	Type     *string                                         `json:"type"`
+	Heading2 *AppendBlockChildrenRequestBodyChildrenHeading2 `json:"heading_2,omitempty"`
+	Object   *string                                         `json:"object,omitempty"`
+	Type     *string                                         `json:"type,omitempty"`
 }
 
 type AppendBlockChildrenRequestBody struct {
-	Children []AppendBlockChildrenRequestBodyChildren `json:"children"`
+	Children []AppendBlockChildrenRequestBodyChildren `json:"children,omitempty"`
 }
 
 type AppendBlockChildrenRequest struct {
@@ -33,17 +33,17 @@ type AppendBlockChildrenRequest struct {
 }
 
 type AppendBlockChildren200ApplicationJSONChildPage struct {
-	Title *string `json:"title"`
+	Title *string `json:"title,omitempty"`
 }
 
 type AppendBlockChildren200ApplicationJSON struct {
-	ChildPage      *AppendBlockChildren200ApplicationJSONChildPage `json:"child_page"`
-	CreatedTime    *string                                         `json:"created_time"`
-	HasChildren    *bool                                           `json:"has_children"`
-	ID             *string                                         `json:"id"`
-	LastEditedTime *string                                         `json:"last_edited_time"`
-	Object         *string                                         `json:"object"`
-	Type           *string                                         `json:"type"`
+	ChildPage      *AppendBlockChildren200ApplicationJSONChildPage `json:"child_page,omitempty"`
+	CreatedTime    *string                                         `json:"created_time,omitempty"`
+	HasChildren    *bool                                           `json:"has_children,omitempty"`
+	ID             *string                                         `json:"id,omitempty"`
+	LastEditedTime *string                                         `json:"last_edited_time,omitempty"`
+	Object         *string                                         `json:"object,omitempty"`
+	Type           *string                                         `json:"type,omitempty"`
 }
 
 type AppendBlockChildrenResponse struct {

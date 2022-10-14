@@ -1,8 +1,8 @@
 package shared
 
 type AwsDynamoDbTableRestoreSummary struct {
-	RestoreDateTime   *string `json:"RestoreDateTime"`
-	RestoreInProgress *bool   `json:"RestoreInProgress"`
-	SourceBackupArn   *string `json:"SourceBackupArn"`
-	SourceTableArn    *string `json:"SourceTableArn"`
+	RestoreDateTime   *string `json:"RestoreDateTime,omitempty"`
+	RestoreInProgress *bool   `json:"RestoreInProgress,omitempty"`
+	SourceBackupArn   *string `json:"SourceBackupArn,omitempty"`
+	SourceTableArn    *string `json:"SourceTableArn,omitempty"`
 }

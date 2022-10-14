@@ -5,15 +5,15 @@ import (
 )
 
 type CategoryInfo struct {
-	Augmentations   []CategoryAugmentation `json:"augmentations"`
-	Color           *string                `json:"color"`
-	ID              *string                `json:"id"`
-	ImageName       *string                `json:"imageName"`
-	IsDefault       *bool                  `json:"isDefault"`
-	KeywordMatching *int32                 `json:"keywordMatching"`
-	Keywords        []string               `json:"keywords"`
-	LastMatch       *time.Time             `json:"lastMatch"`
-	Name            *string                `json:"name"`
-	Options         *int32                 `json:"options"`
-	Order           *int32                 `json:"order"`
+	Augmentations   []CategoryAugmentation `json:"augmentations,omitempty"`
+	Color           *string                `json:"color,omitempty"`
+	ID              *string                `json:"id,omitempty"`
+	ImageName       *string                `json:"imageName,omitempty"`
+	IsDefault       *bool                  `json:"isDefault,omitempty"`
+	KeywordMatching *int32                 `json:"keywordMatching,omitempty"`
+	Keywords        []string               `json:"keywords,omitempty"`
+	LastMatch       *time.Time             `json:"lastMatch,omitempty"`
+	Name            *string                `json:"name,omitempty"`
+	Options         *int32                 `json:"options,omitempty"`
+	Order           *int32                 `json:"order,omitempty"`
 }

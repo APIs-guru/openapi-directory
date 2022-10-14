@@ -1,5 +1,5 @@
 package shared
 
 type CreateAssociationResult struct {
-	AssociationDescription *AssociationDescription `json:"AssociationDescription"`
+	AssociationDescription *AssociationDescription `json:"AssociationDescription,omitempty"`
 }

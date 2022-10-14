@@ -1,11 +1,11 @@
 package shared
 
 type StreamObject struct {
-	BackfillJob  *BackfillJob            `json:"backfillJob"`
-	CreateTime   *string                 `json:"createTime"`
-	DisplayName  *string                 `json:"displayName"`
-	Errors       []Error                 `json:"errors"`
-	Name         *string                 `json:"name"`
-	SourceObject *SourceObjectIdentifier `json:"sourceObject"`
-	UpdateTime   *string                 `json:"updateTime"`
+	BackfillJob  *BackfillJob            `json:"backfillJob,omitempty"`
+	CreateTime   *string                 `json:"createTime,omitempty"`
+	DisplayName  *string                 `json:"displayName,omitempty"`
+	Errors       []Error                 `json:"errors,omitempty"`
+	Name         *string                 `json:"name,omitempty"`
+	SourceObject *SourceObjectIdentifier `json:"sourceObject,omitempty"`
+	UpdateTime   *string                 `json:"updateTime,omitempty"`
 }

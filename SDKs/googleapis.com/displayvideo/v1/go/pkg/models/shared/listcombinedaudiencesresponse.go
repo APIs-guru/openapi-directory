@@ -1,6 +1,6 @@
 package shared
 
 type ListCombinedAudiencesResponse struct {
-	CombinedAudiences []CombinedAudience `json:"combinedAudiences"`
-	NextPageToken     *string            `json:"nextPageToken"`
+	CombinedAudiences []CombinedAudience `json:"combinedAudiences,omitempty"`
+	NextPageToken     *string            `json:"nextPageToken,omitempty"`
 }

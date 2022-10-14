@@ -11,18 +11,18 @@ const (
 )
 
 type Job struct {
-	AppEngineHTTPTarget *AppEngineHTTPTarget `json:"appEngineHttpTarget"`
-	AttemptDeadline     *string              `json:"attemptDeadline"`
-	Description         *string              `json:"description"`
-	HTTPTarget          *HTTPTarget          `json:"httpTarget"`
-	LastAttemptTime     *string              `json:"lastAttemptTime"`
-	Name                *string              `json:"name"`
-	PubsubTarget        *PubsubTarget        `json:"pubsubTarget"`
-	RetryConfig         *RetryConfig         `json:"retryConfig"`
-	Schedule            *string              `json:"schedule"`
-	ScheduleTime        *string              `json:"scheduleTime"`
-	State               *JobStateEnum        `json:"state"`
-	Status              *Status              `json:"status"`
-	TimeZone            *string              `json:"timeZone"`
-	UserUpdateTime      *string              `json:"userUpdateTime"`
+	AppEngineHTTPTarget *AppEngineHTTPTarget `json:"appEngineHttpTarget,omitempty"`
+	AttemptDeadline     *string              `json:"attemptDeadline,omitempty"`
+	Description         *string              `json:"description,omitempty"`
+	HTTPTarget          *HTTPTarget          `json:"httpTarget,omitempty"`
+	LastAttemptTime     *string              `json:"lastAttemptTime,omitempty"`
+	Name                *string              `json:"name,omitempty"`
+	PubsubTarget        *PubsubTarget        `json:"pubsubTarget,omitempty"`
+	RetryConfig         *RetryConfig         `json:"retryConfig,omitempty"`
+	Schedule            *string              `json:"schedule,omitempty"`
+	ScheduleTime        *string              `json:"scheduleTime,omitempty"`
+	State               *JobStateEnum        `json:"state,omitempty"`
+	Status              *Status              `json:"status,omitempty"`
+	TimeZone            *string              `json:"timeZone,omitempty"`
+	UserUpdateTime      *string              `json:"userUpdateTime,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type LocalControllerState struct {
-	Description       *string                                    `json:"description"`
-	InstallationState *LocalControllerStateInstallationStateEnum `json:"installationState"`
+	Description       *string                                    `json:"description,omitempty"`
+	InstallationState *LocalControllerStateInstallationStateEnum `json:"installationState,omitempty"`
 }

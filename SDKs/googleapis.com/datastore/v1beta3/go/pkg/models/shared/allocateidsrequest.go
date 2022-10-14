@@ -1,5 +1,5 @@
 package shared
 
 type AllocateIdsRequest struct {
-	Keys []Key `json:"keys"`
+	Keys []Key `json:"keys,omitempty"`
 }

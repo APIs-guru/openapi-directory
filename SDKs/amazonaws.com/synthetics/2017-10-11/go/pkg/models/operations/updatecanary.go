@@ -19,45 +19,45 @@ type UpdateCanaryHeaders struct {
 }
 
 type UpdateCanaryRequestBodyCode struct {
-	Handler   *string `json:"Handler"`
-	S3Bucket  *string `json:"S3Bucket"`
-	S3Key     *string `json:"S3Key"`
-	S3Version *string `json:"S3Version"`
-	ZipFile   *string `json:"ZipFile"`
+	Handler   *string `json:"Handler,omitempty"`
+	S3Bucket  *string `json:"S3Bucket,omitempty"`
+	S3Key     *string `json:"S3Key,omitempty"`
+	S3Version *string `json:"S3Version,omitempty"`
+	ZipFile   *string `json:"ZipFile,omitempty"`
 }
 
 type UpdateCanaryRequestBodyRunConfig struct {
-	ActiveTracing        *bool             `json:"ActiveTracing"`
-	EnvironmentVariables map[string]string `json:"EnvironmentVariables"`
-	MemoryInMb           *int64            `json:"MemoryInMB"`
-	TimeoutInSeconds     *int64            `json:"TimeoutInSeconds"`
+	ActiveTracing        *bool             `json:"ActiveTracing,omitempty"`
+	EnvironmentVariables map[string]string `json:"EnvironmentVariables,omitempty"`
+	MemoryInMb           *int64            `json:"MemoryInMB,omitempty"`
+	TimeoutInSeconds     *int64            `json:"TimeoutInSeconds,omitempty"`
 }
 
 type UpdateCanaryRequestBodySchedule struct {
-	DurationInSeconds *int64  `json:"DurationInSeconds"`
-	Expression        *string `json:"Expression"`
+	DurationInSeconds *int64  `json:"DurationInSeconds,omitempty"`
+	Expression        *string `json:"Expression,omitempty"`
 }
 
 type UpdateCanaryRequestBodyVisualReference struct {
-	BaseCanaryRunID *string                 `json:"BaseCanaryRunId"`
-	BaseScreenshots []shared.BaseScreenshot `json:"BaseScreenshots"`
+	BaseCanaryRunID *string                 `json:"BaseCanaryRunId,omitempty"`
+	BaseScreenshots []shared.BaseScreenshot `json:"BaseScreenshots,omitempty"`
 }
 
 type UpdateCanaryRequestBodyVpcConfig struct {
-	SecurityGroupIds []string `json:"SecurityGroupIds"`
-	SubnetIds        []string `json:"SubnetIds"`
+	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
+	SubnetIds        []string `json:"SubnetIds,omitempty"`
 }
 
 type UpdateCanaryRequestBody struct {
-	Code                         *UpdateCanaryRequestBodyCode            `json:"Code"`
-	ExecutionRoleArn             *string                                 `json:"ExecutionRoleArn"`
-	FailureRetentionPeriodInDays *int64                                  `json:"FailureRetentionPeriodInDays"`
-	RunConfig                    *UpdateCanaryRequestBodyRunConfig       `json:"RunConfig"`
-	RuntimeVersion               *string                                 `json:"RuntimeVersion"`
-	Schedule                     *UpdateCanaryRequestBodySchedule        `json:"Schedule"`
-	SuccessRetentionPeriodInDays *int64                                  `json:"SuccessRetentionPeriodInDays"`
-	VisualReference              *UpdateCanaryRequestBodyVisualReference `json:"VisualReference"`
-	VpcConfig                    *UpdateCanaryRequestBodyVpcConfig       `json:"VpcConfig"`
+	Code                         *UpdateCanaryRequestBodyCode            `json:"Code,omitempty"`
+	ExecutionRoleArn             *string                                 `json:"ExecutionRoleArn,omitempty"`
+	FailureRetentionPeriodInDays *int64                                  `json:"FailureRetentionPeriodInDays,omitempty"`
+	RunConfig                    *UpdateCanaryRequestBodyRunConfig       `json:"RunConfig,omitempty"`
+	RuntimeVersion               *string                                 `json:"RuntimeVersion,omitempty"`
+	Schedule                     *UpdateCanaryRequestBodySchedule        `json:"Schedule,omitempty"`
+	SuccessRetentionPeriodInDays *int64                                  `json:"SuccessRetentionPeriodInDays,omitempty"`
+	VisualReference              *UpdateCanaryRequestBodyVisualReference `json:"VisualReference,omitempty"`
+	VpcConfig                    *UpdateCanaryRequestBodyVpcConfig       `json:"VpcConfig,omitempty"`
 }
 
 type UpdateCanaryRequest struct {

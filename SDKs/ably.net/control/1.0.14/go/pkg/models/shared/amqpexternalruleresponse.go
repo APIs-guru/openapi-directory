@@ -20,31 +20,31 @@ const (
 )
 
 type AmqpExternalRuleResponseTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AmqpExternalRuleResponseTarget struct {
-	Enveloped          *bool                                   `json:"enveloped"`
-	Format             *string                                 `json:"format"`
-	Headers            []AmqpExternalRuleResponseTargetHeaders `json:"headers"`
+	Enveloped          *bool                                   `json:"enveloped,omitempty"`
+	Format             *string                                 `json:"format,omitempty"`
+	Headers            []AmqpExternalRuleResponseTargetHeaders `json:"headers,omitempty"`
 	MandatoryRoute     bool                                    `json:"mandatoryRoute"`
-	MessageTTL         *int64                                  `json:"messageTtl"`
+	MessageTTL         *int64                                  `json:"messageTtl,omitempty"`
 	PersistentMessages bool                                    `json:"persistentMessages"`
 	RoutingKey         string                                  `json:"routingKey"`
 	URL                string                                  `json:"url"`
 }
 
 type AmqpExternalRuleResponse struct {
-	Links       map[string]interface{}                  `json:"_links"`
-	AppID       *string                                 `json:"appId"`
-	Created     *float64                                `json:"created"`
-	ID          *string                                 `json:"id"`
-	Modified    *float64                                `json:"modified"`
+	Links       map[string]interface{}                  `json:"_links,omitempty"`
+	AppID       *string                                 `json:"appId,omitempty"`
+	Created     *float64                                `json:"created,omitempty"`
+	ID          *string                                 `json:"id,omitempty"`
+	Modified    *float64                                `json:"modified,omitempty"`
 	RequestMode AmqpExternalRuleResponseRequestModeEnum `json:"requestMode"`
 	RuleType    AmqpExternalRuleResponseRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                              `json:"source"`
-	Status      *AmqpExternalRuleResponseStatusEnum     `json:"status"`
+	Status      *AmqpExternalRuleResponseStatusEnum     `json:"status,omitempty"`
 	Target      AmqpExternalRuleResponseTarget          `json:"target"`
-	Version     *string                                 `json:"version"`
+	Version     *string                                 `json:"version,omitempty"`
 }

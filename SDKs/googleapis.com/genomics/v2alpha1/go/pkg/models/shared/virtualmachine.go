@@ -1,19 +1,19 @@
 package shared
 
 type VirtualMachine struct {
-	Accelerators                []Accelerator     `json:"accelerators"`
-	BootDiskSizeGb              *int32            `json:"bootDiskSizeGb"`
-	BootImage                   *string           `json:"bootImage"`
-	CPUPlatform                 *string           `json:"cpuPlatform"`
-	Disks                       []Disk            `json:"disks"`
-	DockerCacheImages           []string          `json:"dockerCacheImages"`
-	EnableStackdriverMonitoring *bool             `json:"enableStackdriverMonitoring"`
-	Labels                      map[string]string `json:"labels"`
-	MachineType                 *string           `json:"machineType"`
-	Network                     *Network          `json:"network"`
-	NvidiaDriverVersion         *string           `json:"nvidiaDriverVersion"`
-	Preemptible                 *bool             `json:"preemptible"`
-	Reservation                 *string           `json:"reservation"`
-	ServiceAccount              *ServiceAccount   `json:"serviceAccount"`
-	Volumes                     []Volume          `json:"volumes"`
+	Accelerators                []Accelerator     `json:"accelerators,omitempty"`
+	BootDiskSizeGb              *int32            `json:"bootDiskSizeGb,omitempty"`
+	BootImage                   *string           `json:"bootImage,omitempty"`
+	CPUPlatform                 *string           `json:"cpuPlatform,omitempty"`
+	Disks                       []Disk            `json:"disks,omitempty"`
+	DockerCacheImages           []string          `json:"dockerCacheImages,omitempty"`
+	EnableStackdriverMonitoring *bool             `json:"enableStackdriverMonitoring,omitempty"`
+	Labels                      map[string]string `json:"labels,omitempty"`
+	MachineType                 *string           `json:"machineType,omitempty"`
+	Network                     *Network          `json:"network,omitempty"`
+	NvidiaDriverVersion         *string           `json:"nvidiaDriverVersion,omitempty"`
+	Preemptible                 *bool             `json:"preemptible,omitempty"`
+	Reservation                 *string           `json:"reservation,omitempty"`
+	ServiceAccount              *ServiceAccount   `json:"serviceAccount,omitempty"`
+	Volumes                     []Volume          `json:"volumes,omitempty"`
 }

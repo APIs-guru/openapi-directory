@@ -12,7 +12,7 @@ const (
 )
 
 type MemoryEvent struct {
-	ByteCount  *string                   `json:"byteCount"`
-	CreateTime *string                   `json:"createTime"`
-	EventType  *MemoryEventEventTypeEnum `json:"eventType"`
+	ByteCount  *string                   `json:"byteCount,omitempty"`
+	CreateTime *string                   `json:"createTime,omitempty"`
+	EventType  *MemoryEventEventTypeEnum `json:"eventType,omitempty"`
 }

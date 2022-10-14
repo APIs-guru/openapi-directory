@@ -1,6 +1,6 @@
 package shared
 
 type MoveItemRequest struct {
-	NewLocation      *Location `json:"newLocation"`
-	OriginalLocation *Location `json:"originalLocation"`
+	NewLocation      *Location `json:"newLocation,omitempty"`
+	OriginalLocation *Location `json:"originalLocation,omitempty"`
 }

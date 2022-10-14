@@ -1,5 +1,5 @@
 package shared
 
 type PollForJobsOutput struct {
-	Jobs []Job `json:"jobs"`
+	Jobs []Job `json:"jobs,omitempty"`
 }

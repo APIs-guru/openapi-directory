@@ -20,11 +20,11 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoAttributes struct {
-	DataType       *EnterpriseCrmEventbusProtoAttributesDataTypeEnum   `json:"dataType"`
-	DefaultValue   *EnterpriseCrmEventbusProtoValueType                `json:"defaultValue"`
-	IsRequired     *bool                                               `json:"isRequired"`
-	IsSearchable   *bool                                               `json:"isSearchable"`
-	LogSettings    *EnterpriseCrmEventbusProtoLogSettings              `json:"logSettings"`
-	Searchable     *EnterpriseCrmEventbusProtoAttributesSearchableEnum `json:"searchable"`
-	TaskVisibility []string                                            `json:"taskVisibility"`
+	DataType       *EnterpriseCrmEventbusProtoAttributesDataTypeEnum   `json:"dataType,omitempty"`
+	DefaultValue   *EnterpriseCrmEventbusProtoValueType                `json:"defaultValue,omitempty"`
+	IsRequired     *bool                                               `json:"isRequired,omitempty"`
+	IsSearchable   *bool                                               `json:"isSearchable,omitempty"`
+	LogSettings    *EnterpriseCrmEventbusProtoLogSettings              `json:"logSettings,omitempty"`
+	Searchable     *EnterpriseCrmEventbusProtoAttributesSearchableEnum `json:"searchable,omitempty"`
+	TaskVisibility []string                                            `json:"taskVisibility,omitempty"`
 }

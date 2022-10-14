@@ -5,9 +5,9 @@ import (
 )
 
 type Certificate struct {
-	CertificateArn  *string                `json:"certificateArn"`
-	CertificateID   *string                `json:"certificateId"`
-	CertificateMode *CertificateModeEnum   `json:"certificateMode"`
-	CreationDate    *time.Time             `json:"creationDate"`
-	Status          *CertificateStatusEnum `json:"status"`
+	CertificateArn  *string                `json:"certificateArn,omitempty"`
+	CertificateID   *string                `json:"certificateId,omitempty"`
+	CertificateMode *CertificateModeEnum   `json:"certificateMode,omitempty"`
+	CreationDate    *time.Time             `json:"creationDate,omitempty"`
+	Status          *CertificateStatusEnum `json:"status,omitempty"`
 }

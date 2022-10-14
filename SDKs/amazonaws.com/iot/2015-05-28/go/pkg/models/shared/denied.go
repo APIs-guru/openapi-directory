@@ -1,6 +1,6 @@
 package shared
 
 type Denied struct {
-	ExplicitDeny *ExplicitDeny `json:"explicitDeny"`
-	ImplicitDeny *ImplicitDeny `json:"implicitDeny"`
+	ExplicitDeny *ExplicitDeny `json:"explicitDeny,omitempty"`
+	ImplicitDeny *ImplicitDeny `json:"implicitDeny,omitempty"`
 }

@@ -11,10 +11,10 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponent struct {
-	BorgTaskMetric *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponentBorgTaskMetricEnum `json:"borgTaskMetric"`
-	DataFilters    []string                                                                                        `json:"dataFilters"`
-	FetchFilters   []string                                                                                        `json:"fetchFilters"`
-	GroupBy        *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestGroupBy                              `json:"groupBy"`
-	PointOperation *string                                                                                         `json:"pointOperation"`
-	TimeDelta      *string                                                                                         `json:"timeDelta"`
+	BorgTaskMetric *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponentBorgTaskMetricEnum `json:"borgTaskMetric,omitempty"`
+	DataFilters    []string                                                                                        `json:"dataFilters,omitempty"`
+	FetchFilters   []string                                                                                        `json:"fetchFilters,omitempty"`
+	GroupBy        *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestGroupBy                              `json:"groupBy,omitempty"`
+	PointOperation *string                                                                                         `json:"pointOperation,omitempty"`
+	TimeDelta      *string                                                                                         `json:"timeDelta,omitempty"`
 }

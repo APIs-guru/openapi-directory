@@ -5,7 +5,7 @@ import (
 )
 
 type EntityTransferEntities struct {
-	Linodes []int64 `json:"linodes"`
+	Linodes []int64 `json:"linodes,omitempty"`
 }
 
 type EntityTransferStatusEnum string
@@ -20,11 +20,11 @@ const (
 )
 
 type EntityTransfer struct {
-	Created  *time.Time                `json:"created"`
-	Entities *EntityTransferEntities   `json:"entities"`
-	Expiry   *time.Time                `json:"expiry"`
-	IsSender *bool                     `json:"is_sender"`
-	Status   *EntityTransferStatusEnum `json:"status"`
-	Token    *string                   `json:"token"`
-	Updated  *time.Time                `json:"updated"`
+	Created  *time.Time                `json:"created,omitempty"`
+	Entities *EntityTransferEntities   `json:"entities,omitempty"`
+	Expiry   *time.Time                `json:"expiry,omitempty"`
+	IsSender *bool                     `json:"is_sender,omitempty"`
+	Status   *EntityTransferStatusEnum `json:"status,omitempty"`
+	Token    *string                   `json:"token,omitempty"`
+	Updated  *time.Time                `json:"updated,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type MetadataEditorInfo struct {
-	ContentType           *string          `json:"ContentType"`
-	ContentTypeOptions    []NameValuePair  `json:"ContentTypeOptions"`
-	Countries             []CountryInfo    `json:"Countries"`
-	Cultures              []CultureDto     `json:"Cultures"`
-	ExternalIDInfos       []ExternalIDInfo `json:"ExternalIdInfos"`
-	ParentalRatingOptions []ParentalRating `json:"ParentalRatingOptions"`
+	ContentType           *string          `json:"ContentType,omitempty"`
+	ContentTypeOptions    []NameValuePair  `json:"ContentTypeOptions,omitempty"`
+	Countries             []CountryInfo    `json:"Countries,omitempty"`
+	Cultures              []CultureDto     `json:"Cultures,omitempty"`
+	ExternalIDInfos       []ExternalIDInfo `json:"ExternalIdInfos,omitempty"`
+	ParentalRatingOptions []ParentalRating `json:"ParentalRatingOptions,omitempty"`
 }

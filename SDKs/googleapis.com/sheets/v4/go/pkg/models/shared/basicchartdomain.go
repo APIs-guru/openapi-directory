@@ -1,6 +1,6 @@
 package shared
 
 type BasicChartDomain struct {
-	Domain   *ChartData `json:"domain"`
-	Reversed *bool      `json:"reversed"`
+	Domain   *ChartData `json:"domain,omitempty"`
+	Reversed *bool      `json:"reversed,omitempty"`
 }

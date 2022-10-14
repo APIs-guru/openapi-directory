@@ -1,5 +1,5 @@
 package shared
 
 type UpdateUserPoolDomainResponse struct {
-	CloudFrontDomain *string `json:"CloudFrontDomain"`
+	CloudFrontDomain *string `json:"CloudFrontDomain,omitempty"`
 }

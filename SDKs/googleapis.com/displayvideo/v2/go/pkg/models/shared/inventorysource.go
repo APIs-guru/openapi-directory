@@ -114,24 +114,24 @@ const (
 )
 
 type InventorySource struct {
-	Commitment                 *InventorySourceCommitmentEnum                 `json:"commitment"`
-	CreativeConfigs            []CreativeConfig                               `json:"creativeConfigs"`
-	DealID                     *string                                        `json:"dealId"`
-	DeliveryMethod             *InventorySourceDeliveryMethodEnum             `json:"deliveryMethod"`
-	DisplayName                *string                                        `json:"displayName"`
-	Exchange                   *InventorySourceExchangeEnum                   `json:"exchange"`
-	GuaranteedOrderID          *string                                        `json:"guaranteedOrderId"`
-	InventorySourceID          *string                                        `json:"inventorySourceId"`
-	InventorySourceProductType *InventorySourceInventorySourceProductTypeEnum `json:"inventorySourceProductType"`
-	InventorySourceType        *InventorySourceInventorySourceTypeEnum        `json:"inventorySourceType"`
-	Name                       *string                                        `json:"name"`
-	PublisherName              *string                                        `json:"publisherName"`
-	RateDetails                *RateDetails                                   `json:"rateDetails"`
-	ReadAdvertiserIds          []string                                       `json:"readAdvertiserIds"`
-	ReadPartnerIds             []string                                       `json:"readPartnerIds"`
-	ReadWriteAccessors         *InventorySourceAccessors                      `json:"readWriteAccessors"`
-	Status                     *InventorySourceStatus                         `json:"status"`
-	SubSitePropertyID          *string                                        `json:"subSitePropertyId"`
-	TimeRange                  *TimeRange                                     `json:"timeRange"`
-	UpdateTime                 *string                                        `json:"updateTime"`
+	Commitment                 *InventorySourceCommitmentEnum                 `json:"commitment,omitempty"`
+	CreativeConfigs            []CreativeConfig                               `json:"creativeConfigs,omitempty"`
+	DealID                     *string                                        `json:"dealId,omitempty"`
+	DeliveryMethod             *InventorySourceDeliveryMethodEnum             `json:"deliveryMethod,omitempty"`
+	DisplayName                *string                                        `json:"displayName,omitempty"`
+	Exchange                   *InventorySourceExchangeEnum                   `json:"exchange,omitempty"`
+	GuaranteedOrderID          *string                                        `json:"guaranteedOrderId,omitempty"`
+	InventorySourceID          *string                                        `json:"inventorySourceId,omitempty"`
+	InventorySourceProductType *InventorySourceInventorySourceProductTypeEnum `json:"inventorySourceProductType,omitempty"`
+	InventorySourceType        *InventorySourceInventorySourceTypeEnum        `json:"inventorySourceType,omitempty"`
+	Name                       *string                                        `json:"name,omitempty"`
+	PublisherName              *string                                        `json:"publisherName,omitempty"`
+	RateDetails                *RateDetails                                   `json:"rateDetails,omitempty"`
+	ReadAdvertiserIds          []string                                       `json:"readAdvertiserIds,omitempty"`
+	ReadPartnerIds             []string                                       `json:"readPartnerIds,omitempty"`
+	ReadWriteAccessors         *InventorySourceAccessors                      `json:"readWriteAccessors,omitempty"`
+	Status                     *InventorySourceStatus                         `json:"status,omitempty"`
+	SubSitePropertyID          *string                                        `json:"subSitePropertyId,omitempty"`
+	TimeRange                  *TimeRange                                     `json:"timeRange,omitempty"`
+	UpdateTime                 *string                                        `json:"updateTime,omitempty"`
 }

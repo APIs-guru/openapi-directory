@@ -1,6 +1,6 @@
 package shared
 
 type ListFunctionEventInvokeConfigsResponse struct {
-	FunctionEventInvokeConfigs []FunctionEventInvokeConfig `json:"FunctionEventInvokeConfigs"`
-	NextMarker                 *string                     `json:"NextMarker"`
+	FunctionEventInvokeConfigs []FunctionEventInvokeConfig `json:"FunctionEventInvokeConfigs,omitempty"`
+	NextMarker                 *string                     `json:"NextMarker,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation struct {
-	ContainerID    *string `json:"containerId"`
-	ContainerName  *string `json:"containerName"`
-	ContainerType  *string `json:"containerType"`
-	MapperID       *string `json:"mapperId"`
-	MapperName     *string `json:"mapperName"`
-	ProtocolMapper *string `json:"protocolMapper"`
+	ContainerID    *string `json:"containerId,omitempty"`
+	ContainerName  *string `json:"containerName,omitempty"`
+	ContainerType  *string `json:"containerType,omitempty"`
+	MapperID       *string `json:"mapperId,omitempty"`
+	MapperName     *string `json:"mapperName,omitempty"`
+	ProtocolMapper *string `json:"protocolMapper,omitempty"`
 }

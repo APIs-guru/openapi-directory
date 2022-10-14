@@ -8,5 +8,5 @@ const (
 )
 
 type VeteranStatusConfirmation struct {
-	VeteranStatus *VeteranStatusConfirmationVeteranStatusEnum `json:"veteran_status"`
+	VeteranStatus *VeteranStatusConfirmationVeteranStatusEnum `json:"veteran_status,omitempty"`
 }

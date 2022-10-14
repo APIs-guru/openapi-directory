@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaSuccessPolicy struct {
-	FinalState *GoogleCloudIntegrationsV1alphaSuccessPolicyFinalStateEnum `json:"finalState"`
+	FinalState *GoogleCloudIntegrationsV1alphaSuccessPolicyFinalStateEnum `json:"finalState,omitempty"`
 }

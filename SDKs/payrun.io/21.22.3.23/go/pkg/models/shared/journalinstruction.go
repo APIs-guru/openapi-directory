@@ -12,17 +12,17 @@ const (
 )
 
 type JournalInstructionJournalInstructionJournalInstruction struct {
-	AccountingType *JournalInstructionJournalInstructionAccountingTypeAccountingTypeEnum `json:"AccountingType"`
-	Description    *string                                                               `json:"Description"`
-	EndDate        *time.Time                                                            `json:"EndDate"`
-	Expression     *string                                                               `json:"Expression"`
-	JournalLineTag *string                                                               `json:"JournalLineTag"`
-	LedgerTarget   *string                                                               `json:"LedgerTarget"`
-	NomCode        *string                                                               `json:"NomCode"`
-	StartDate      *time.Time                                                            `json:"StartDate"`
-	SubNomCode     *string                                                               `json:"SubNomCode"`
+	AccountingType *JournalInstructionJournalInstructionAccountingTypeAccountingTypeEnum `json:"AccountingType,omitempty"`
+	Description    *string                                                               `json:"Description,omitempty"`
+	EndDate        *time.Time                                                            `json:"EndDate,omitempty"`
+	Expression     *string                                                               `json:"Expression,omitempty"`
+	JournalLineTag *string                                                               `json:"JournalLineTag,omitempty"`
+	LedgerTarget   *string                                                               `json:"LedgerTarget,omitempty"`
+	NomCode        *string                                                               `json:"NomCode,omitempty"`
+	StartDate      *time.Time                                                            `json:"StartDate,omitempty"`
+	SubNomCode     *string                                                               `json:"SubNomCode,omitempty"`
 }
 
 type JournalInstruction struct {
-	JournalInstruction *JournalInstructionJournalInstructionJournalInstruction `json:"JournalInstruction"`
+	JournalInstruction *JournalInstructionJournalInstructionJournalInstruction `json:"JournalInstruction,omitempty"`
 }

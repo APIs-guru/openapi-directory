@@ -1,9 +1,9 @@
 package shared
 
 type OrdersCustomBatchRequestEntryReturnLineItem struct {
-	LineItemID *string `json:"lineItemId"`
-	ProductID  *string `json:"productId"`
-	Quantity   *int64  `json:"quantity"`
-	Reason     *string `json:"reason"`
-	ReasonText *string `json:"reasonText"`
+	LineItemID *string `json:"lineItemId,omitempty"`
+	ProductID  *string `json:"productId,omitempty"`
+	Quantity   *int64  `json:"quantity,omitempty"`
+	Reason     *string `json:"reason,omitempty"`
+	ReasonText *string `json:"reasonText,omitempty"`
 }

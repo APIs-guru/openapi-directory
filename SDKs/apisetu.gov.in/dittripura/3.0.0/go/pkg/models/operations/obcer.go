@@ -16,8 +16,8 @@ const (
 )
 
 type ObcerRequestBody struct {
-	CertificateParameters *ObcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *ObcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                ObcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Obcer400ApplicationJSON struct {
-	Error            *Obcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Obcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Obcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Obcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Obcer401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Obcer401ApplicationJSON struct {
-	Error            *Obcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Obcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Obcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Obcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Obcer404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Obcer404ApplicationJSON struct {
-	Error            *Obcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Obcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Obcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Obcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Obcer500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Obcer500ApplicationJSON struct {
-	Error            *Obcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Obcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Obcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Obcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Obcer502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Obcer502ApplicationJSON struct {
-	Error            *Obcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Obcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Obcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Obcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Obcer503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Obcer503ApplicationJSON struct {
-	Error            *Obcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Obcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Obcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Obcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Obcer504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Obcer504ApplicationJSON struct {
-	Error            *Obcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Obcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Obcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Obcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ObcerResponse struct {

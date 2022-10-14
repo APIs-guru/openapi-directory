@@ -1,16 +1,16 @@
 package shared
 
 type Disk struct {
-	AutoDelete      *bool            `json:"autoDelete"`
-	Boot            *bool            `json:"boot"`
-	DeviceName      *string          `json:"deviceName"`
-	DiskSizeGb      *string          `json:"diskSizeGb"`
-	GuestOsFeatures []GuestOsFeature `json:"guestOsFeatures"`
-	Index           *string          `json:"index"`
-	Interface       *string          `json:"interface"`
-	Kind            *string          `json:"kind"`
-	Licenses        []string         `json:"licenses"`
-	Mode            *string          `json:"mode"`
-	Source          *string          `json:"source"`
-	Type            *string          `json:"type"`
+	AutoDelete      *bool            `json:"autoDelete,omitempty"`
+	Boot            *bool            `json:"boot,omitempty"`
+	DeviceName      *string          `json:"deviceName,omitempty"`
+	DiskSizeGb      *string          `json:"diskSizeGb,omitempty"`
+	GuestOsFeatures []GuestOsFeature `json:"guestOsFeatures,omitempty"`
+	Index           *string          `json:"index,omitempty"`
+	Interface       *string          `json:"interface,omitempty"`
+	Kind            *string          `json:"kind,omitempty"`
+	Licenses        []string         `json:"licenses,omitempty"`
+	Mode            *string          `json:"mode,omitempty"`
+	Source          *string          `json:"source,omitempty"`
+	Type            *string          `json:"type,omitempty"`
 }

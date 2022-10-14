@@ -1,5 +1,5 @@
 package shared
 
 type DeleteMembersResponse struct {
-	UnprocessedAccounts []Result `json:"UnprocessedAccounts"`
+	UnprocessedAccounts []Result `json:"UnprocessedAccounts,omitempty"`
 }

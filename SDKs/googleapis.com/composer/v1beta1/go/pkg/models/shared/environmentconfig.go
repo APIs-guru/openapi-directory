@@ -10,19 +10,19 @@ const (
 )
 
 type EnvironmentConfig struct {
-	AirflowURI                     *string                               `json:"airflowUri"`
-	DagGcsPrefix                   *string                               `json:"dagGcsPrefix"`
-	DatabaseConfig                 *DatabaseConfig                       `json:"databaseConfig"`
-	EncryptionConfig               *EncryptionConfig                     `json:"encryptionConfig"`
-	EnvironmentSize                *EnvironmentConfigEnvironmentSizeEnum `json:"environmentSize"`
-	GkeCluster                     *string                               `json:"gkeCluster"`
-	MaintenanceWindow              *MaintenanceWindow                    `json:"maintenanceWindow"`
-	MasterAuthorizedNetworksConfig *MasterAuthorizedNetworksConfig       `json:"masterAuthorizedNetworksConfig"`
-	NodeConfig                     *NodeConfig                           `json:"nodeConfig"`
-	NodeCount                      *int32                                `json:"nodeCount"`
-	PrivateEnvironmentConfig       *PrivateEnvironmentConfig             `json:"privateEnvironmentConfig"`
-	SoftwareConfig                 *SoftwareConfig                       `json:"softwareConfig"`
-	WebServerConfig                *WebServerConfig                      `json:"webServerConfig"`
-	WebServerNetworkAccessControl  *WebServerNetworkAccessControl        `json:"webServerNetworkAccessControl"`
-	WorkloadsConfig                *WorkloadsConfig                      `json:"workloadsConfig"`
+	AirflowURI                     *string                               `json:"airflowUri,omitempty"`
+	DagGcsPrefix                   *string                               `json:"dagGcsPrefix,omitempty"`
+	DatabaseConfig                 *DatabaseConfig                       `json:"databaseConfig,omitempty"`
+	EncryptionConfig               *EncryptionConfig                     `json:"encryptionConfig,omitempty"`
+	EnvironmentSize                *EnvironmentConfigEnvironmentSizeEnum `json:"environmentSize,omitempty"`
+	GkeCluster                     *string                               `json:"gkeCluster,omitempty"`
+	MaintenanceWindow              *MaintenanceWindow                    `json:"maintenanceWindow,omitempty"`
+	MasterAuthorizedNetworksConfig *MasterAuthorizedNetworksConfig       `json:"masterAuthorizedNetworksConfig,omitempty"`
+	NodeConfig                     *NodeConfig                           `json:"nodeConfig,omitempty"`
+	NodeCount                      *int32                                `json:"nodeCount,omitempty"`
+	PrivateEnvironmentConfig       *PrivateEnvironmentConfig             `json:"privateEnvironmentConfig,omitempty"`
+	SoftwareConfig                 *SoftwareConfig                       `json:"softwareConfig,omitempty"`
+	WebServerConfig                *WebServerConfig                      `json:"webServerConfig,omitempty"`
+	WebServerNetworkAccessControl  *WebServerNetworkAccessControl        `json:"webServerNetworkAccessControl,omitempty"`
+	WorkloadsConfig                *WorkloadsConfig                      `json:"workloadsConfig,omitempty"`
 }

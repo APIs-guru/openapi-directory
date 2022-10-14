@@ -296,6 +296,6 @@ const (
 )
 
 type FilterPair struct {
-	Type  *FilterPairTypeEnum `json:"type"`
-	Value *string             `json:"value"`
+	Type  *FilterPairTypeEnum `json:"type,omitempty"`
+	Value *string             `json:"value,omitempty"`
 }

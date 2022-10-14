@@ -33,30 +33,30 @@ type ListAllDomainRecordsRequest struct {
 }
 
 type ListAllDomainRecords200ApplicationJSONDomainRecords struct {
-	Data     *string `json:"data"`
-	Flags    *int64  `json:"flags"`
-	ID       *int64  `json:"id"`
-	Name     *string `json:"name"`
-	Port     *int64  `json:"port"`
-	Priority *int64  `json:"priority"`
-	Tag      *string `json:"tag"`
-	TTL      *int64  `json:"ttl"`
+	Data     *string `json:"data,omitempty"`
+	Flags    *int64  `json:"flags,omitempty"`
+	ID       *int64  `json:"id,omitempty"`
+	Name     *string `json:"name,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Priority *int64  `json:"priority,omitempty"`
+	Tag      *string `json:"tag,omitempty"`
+	TTL      *int64  `json:"ttl,omitempty"`
 	Type     string  `json:"type"`
-	Weight   *int64  `json:"weight"`
+	Weight   *int64  `json:"weight,omitempty"`
 }
 
 type ListAllDomainRecords200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllDomainRecords200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllDomainRecords200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllDomainRecords200ApplicationJSONMeta struct {
@@ -64,15 +64,15 @@ type ListAllDomainRecords200ApplicationJSONMeta struct {
 }
 
 type ListAllDomainRecords200ApplicationJSON struct {
-	DomainRecords []ListAllDomainRecords200ApplicationJSONDomainRecords `json:"domain_records"`
-	Links         *ListAllDomainRecords200ApplicationJSONLinks          `json:"links"`
+	DomainRecords []ListAllDomainRecords200ApplicationJSONDomainRecords `json:"domain_records,omitempty"`
+	Links         *ListAllDomainRecords200ApplicationJSONLinks          `json:"links,omitempty"`
 	Meta          ListAllDomainRecords200ApplicationJSONMeta            `json:"meta"`
 }
 
 type ListAllDomainRecords401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllDomainRecordsResponse struct {

@@ -26,16 +26,16 @@ const (
 )
 
 type UpdateFindingsFilterRequestBodyFindingCriteria struct {
-	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion"`
+	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion,omitempty"`
 }
 
 type UpdateFindingsFilterRequestBody struct {
-	Action          *UpdateFindingsFilterRequestBodyActionEnum      `json:"action"`
-	ClientToken     *string                                         `json:"clientToken"`
-	Description     *string                                         `json:"description"`
-	FindingCriteria *UpdateFindingsFilterRequestBodyFindingCriteria `json:"findingCriteria"`
-	Name            *string                                         `json:"name"`
-	Position        *int64                                          `json:"position"`
+	Action          *UpdateFindingsFilterRequestBodyActionEnum      `json:"action,omitempty"`
+	ClientToken     *string                                         `json:"clientToken,omitempty"`
+	Description     *string                                         `json:"description,omitempty"`
+	FindingCriteria *UpdateFindingsFilterRequestBodyFindingCriteria `json:"findingCriteria,omitempty"`
+	Name            *string                                         `json:"name,omitempty"`
+	Position        *int64                                          `json:"position,omitempty"`
 }
 
 type UpdateFindingsFilterRequest struct {

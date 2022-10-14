@@ -1,6 +1,6 @@
 package shared
 
 type ListPublisherConnectionsResponse struct {
-	NextPageToken        *string               `json:"nextPageToken"`
-	PublisherConnections []PublisherConnection `json:"publisherConnections"`
+	NextPageToken        *string               `json:"nextPageToken,omitempty"`
+	PublisherConnections []PublisherConnection `json:"publisherConnections,omitempty"`
 }

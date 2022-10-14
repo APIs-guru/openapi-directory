@@ -29,13 +29,13 @@ const (
 )
 
 type CreateNotificationRuleRequestBody struct {
-	ClientRequestToken *string                                         `json:"ClientRequestToken"`
+	ClientRequestToken *string                                         `json:"ClientRequestToken,omitempty"`
 	DetailType         CreateNotificationRuleRequestBodyDetailTypeEnum `json:"DetailType"`
 	EventTypeIds       []string                                        `json:"EventTypeIds"`
 	Name               string                                          `json:"Name"`
 	Resource           string                                          `json:"Resource"`
-	Status             *CreateNotificationRuleRequestBodyStatusEnum    `json:"Status"`
-	Tags               map[string]string                               `json:"Tags"`
+	Status             *CreateNotificationRuleRequestBodyStatusEnum    `json:"Status,omitempty"`
+	Tags               map[string]string                               `json:"Tags,omitempty"`
 	Targets            []shared.Target                                 `json:"Targets"`
 }
 

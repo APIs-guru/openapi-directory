@@ -12,10 +12,10 @@ const (
 )
 
 type GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfig struct {
-	Aggregation    *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum `json:"aggregation"`
-	CustomGrouping *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaCustomGrouping               `json:"customGrouping"`
-	EndTime        *string                                                                       `json:"endTime"`
-	FieldFilter    *string                                                                       `json:"fieldFilter"`
-	Group          *string                                                                       `json:"group"`
-	StartTime      *string                                                                       `json:"startTime"`
+	Aggregation    *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum `json:"aggregation,omitempty"`
+	CustomGrouping *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaCustomGrouping               `json:"customGrouping,omitempty"`
+	EndTime        *string                                                                       `json:"endTime,omitempty"`
+	FieldFilter    *string                                                                       `json:"fieldFilter,omitempty"`
+	Group          *string                                                                       `json:"group,omitempty"`
+	StartTime      *string                                                                       `json:"startTime,omitempty"`
 }

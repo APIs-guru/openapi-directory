@@ -20,12 +20,12 @@ type GetLatestTotalsRequest struct {
 }
 
 type GetLatestTotals200ApplicationJSON struct {
-	Confirmed  *int64     `json:"confirmed"`
-	Critical   *int64     `json:"critical"`
-	Deaths     *int64     `json:"deaths"`
-	LastChange *time.Time `json:"lastChange"`
-	LastUpdate *time.Time `json:"lastUpdate"`
-	Recovered  *int64     `json:"recovered"`
+	Confirmed  *int64     `json:"confirmed,omitempty"`
+	Critical   *int64     `json:"critical,omitempty"`
+	Deaths     *int64     `json:"deaths,omitempty"`
+	LastChange *time.Time `json:"lastChange,omitempty"`
+	LastUpdate *time.Time `json:"lastUpdate,omitempty"`
+	Recovered  *int64     `json:"recovered,omitempty"`
 }
 
 type GetLatestTotalsResponse struct {

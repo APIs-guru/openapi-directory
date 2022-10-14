@@ -18,7 +18,7 @@ const (
 )
 
 type Location struct {
-	Features   []LocationFeaturesEnum `json:"features"`
-	LocationID *string                `json:"locationId"`
-	Type       *LocationTypeEnum      `json:"type"`
+	Features   []LocationFeaturesEnum `json:"features,omitempty"`
+	LocationID *string                `json:"locationId,omitempty"`
+	Type       *LocationTypeEnum      `json:"type,omitempty"`
 }

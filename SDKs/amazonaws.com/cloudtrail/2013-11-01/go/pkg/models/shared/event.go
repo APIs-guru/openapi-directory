@@ -5,13 +5,13 @@ import (
 )
 
 type Event struct {
-	AccessKeyID     *string    `json:"AccessKeyId"`
-	CloudTrailEvent *string    `json:"CloudTrailEvent"`
-	EventID         *string    `json:"EventId"`
-	EventName       *string    `json:"EventName"`
-	EventSource     *string    `json:"EventSource"`
-	EventTime       *time.Time `json:"EventTime"`
-	ReadOnly        *string    `json:"ReadOnly"`
-	Resources       []Resource `json:"Resources"`
-	Username        *string    `json:"Username"`
+	AccessKeyID     *string    `json:"AccessKeyId,omitempty"`
+	CloudTrailEvent *string    `json:"CloudTrailEvent,omitempty"`
+	EventID         *string    `json:"EventId,omitempty"`
+	EventName       *string    `json:"EventName,omitempty"`
+	EventSource     *string    `json:"EventSource,omitempty"`
+	EventTime       *time.Time `json:"EventTime,omitempty"`
+	ReadOnly        *string    `json:"ReadOnly,omitempty"`
+	Resources       []Resource `json:"Resources,omitempty"`
+	Username        *string    `json:"Username,omitempty"`
 }

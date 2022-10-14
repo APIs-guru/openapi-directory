@@ -1,5 +1,5 @@
 package shared
 
 type GetApkDetailsResponse struct {
-	ApkDetail *ApkDetail `json:"apkDetail"`
+	ApkDetail *ApkDetail `json:"apkDetail,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetDetectorModelAnalysisResultsResponse struct {
-	AnalysisResults []AnalysisResult `json:"analysisResults"`
-	NextToken       *string          `json:"nextToken"`
+	AnalysisResults []AnalysisResult `json:"analysisResults,omitempty"`
+	NextToken       *string          `json:"nextToken,omitempty"`
 }

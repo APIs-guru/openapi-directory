@@ -1,5 +1,5 @@
 package shared
 
 type DescribeVolumesResult struct {
-	Volumes []Volume `json:"Volumes"`
+	Volumes []Volume `json:"Volumes,omitempty"`
 }

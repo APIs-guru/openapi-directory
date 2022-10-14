@@ -20,9 +20,9 @@ type GetResourcePoliciesHeaders struct {
 }
 
 type GetResourcePoliciesRequestBody struct {
-	MaxResults   *int64   `json:"maxResults"`
-	NextToken    *string  `json:"nextToken"`
-	Principal    *string  `json:"principal"`
+	MaxResults   *int64   `json:"maxResults,omitempty"`
+	NextToken    *string  `json:"nextToken,omitempty"`
+	Principal    *string  `json:"principal,omitempty"`
 	ResourceArns []string `json:"resourceArns"`
 }
 

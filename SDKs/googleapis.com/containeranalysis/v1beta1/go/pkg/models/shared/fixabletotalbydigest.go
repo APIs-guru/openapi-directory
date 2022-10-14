@@ -12,8 +12,8 @@ const (
 )
 
 type FixableTotalByDigest struct {
-	FixableCount *string                           `json:"fixableCount"`
-	Resource     *Resource                         `json:"resource"`
-	Severity     *FixableTotalByDigestSeverityEnum `json:"severity"`
-	TotalCount   *string                           `json:"totalCount"`
+	FixableCount *string                           `json:"fixableCount,omitempty"`
+	Resource     *Resource                         `json:"resource,omitempty"`
+	Severity     *FixableTotalByDigestSeverityEnum `json:"severity,omitempty"`
+	TotalCount   *string                           `json:"totalCount,omitempty"`
 }

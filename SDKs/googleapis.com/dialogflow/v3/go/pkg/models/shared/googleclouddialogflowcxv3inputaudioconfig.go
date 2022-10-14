@@ -23,11 +23,11 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3InputAudioConfig struct {
-	AudioEncoding   *GoogleCloudDialogflowCxV3InputAudioConfigAudioEncodingEnum `json:"audioEncoding"`
-	EnableWordInfo  *bool                                                       `json:"enableWordInfo"`
-	Model           *string                                                     `json:"model"`
-	ModelVariant    *GoogleCloudDialogflowCxV3InputAudioConfigModelVariantEnum  `json:"modelVariant"`
-	PhraseHints     []string                                                    `json:"phraseHints"`
-	SampleRateHertz *int32                                                      `json:"sampleRateHertz"`
-	SingleUtterance *bool                                                       `json:"singleUtterance"`
+	AudioEncoding   *GoogleCloudDialogflowCxV3InputAudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
+	EnableWordInfo  *bool                                                       `json:"enableWordInfo,omitempty"`
+	Model           *string                                                     `json:"model,omitempty"`
+	ModelVariant    *GoogleCloudDialogflowCxV3InputAudioConfigModelVariantEnum  `json:"modelVariant,omitempty"`
+	PhraseHints     []string                                                    `json:"phraseHints,omitempty"`
+	SampleRateHertz *int32                                                      `json:"sampleRateHertz,omitempty"`
+	SingleUtterance *bool                                                       `json:"singleUtterance,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type ResourceError struct {
-	ErrorCode      *FleetErrorCodeEnum `json:"ErrorCode"`
-	ErrorMessage   *string             `json:"ErrorMessage"`
-	ErrorTimestamp *time.Time          `json:"ErrorTimestamp"`
+	ErrorCode      *FleetErrorCodeEnum `json:"ErrorCode,omitempty"`
+	ErrorMessage   *string             `json:"ErrorMessage,omitempty"`
+	ErrorTimestamp *time.Time          `json:"ErrorTimestamp,omitempty"`
 }

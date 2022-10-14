@@ -19,28 +19,28 @@ type PutReportPkRequest struct {
 }
 
 type PutReportPk200ApplicationJSON struct {
-	ID     *float64                         `json:"id"`
-	Result *shared.ReportScheduleRestAPIPut `json:"result"`
+	ID     *float64                         `json:"id,omitempty"`
+	Result *shared.ReportScheduleRestAPIPut `json:"result,omitempty"`
 }
 
 type PutReportPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutReportPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutReportPk403ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutReportPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutReportPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutReportPkResponse struct {

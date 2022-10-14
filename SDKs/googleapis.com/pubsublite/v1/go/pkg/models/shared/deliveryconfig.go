@@ -9,5 +9,5 @@ const (
 )
 
 type DeliveryConfig struct {
-	DeliveryRequirement *DeliveryConfigDeliveryRequirementEnum `json:"deliveryRequirement"`
+	DeliveryRequirement *DeliveryConfigDeliveryRequirementEnum `json:"deliveryRequirement,omitempty"`
 }

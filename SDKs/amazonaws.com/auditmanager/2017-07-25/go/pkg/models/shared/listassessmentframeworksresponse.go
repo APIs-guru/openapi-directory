@@ -1,6 +1,6 @@
 package shared
 
 type ListAssessmentFrameworksResponse struct {
-	FrameworkMetadataList []AssessmentFrameworkMetadata `json:"frameworkMetadataList"`
-	NextToken             *string                       `json:"nextToken"`
+	FrameworkMetadataList []AssessmentFrameworkMetadata `json:"frameworkMetadataList,omitempty"`
+	NextToken             *string                       `json:"nextToken,omitempty"`
 }

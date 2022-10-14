@@ -5,21 +5,21 @@ import (
 )
 
 type DomainName struct {
-	CertificateArn                      *string                  `json:"certificateArn"`
-	CertificateName                     *string                  `json:"certificateName"`
-	CertificateUploadDate               *time.Time               `json:"certificateUploadDate"`
-	DistributionDomainName              *string                  `json:"distributionDomainName"`
-	DistributionHostedZoneID            *string                  `json:"distributionHostedZoneId"`
-	DomainName                          *string                  `json:"domainName"`
-	DomainNameStatus                    *DomainNameStatusEnum    `json:"domainNameStatus"`
-	DomainNameStatusMessage             *string                  `json:"domainNameStatusMessage"`
-	EndpointConfiguration               *EndpointConfiguration   `json:"endpointConfiguration"`
-	MutualTLSAuthentication             *MutualTLSAuthentication `json:"mutualTlsAuthentication"`
-	OwnershipVerificationCertificateArn *string                  `json:"ownershipVerificationCertificateArn"`
-	RegionalCertificateArn              *string                  `json:"regionalCertificateArn"`
-	RegionalCertificateName             *string                  `json:"regionalCertificateName"`
-	RegionalDomainName                  *string                  `json:"regionalDomainName"`
-	RegionalHostedZoneID                *string                  `json:"regionalHostedZoneId"`
-	SecurityPolicy                      *SecurityPolicyEnum      `json:"securityPolicy"`
-	Tags                                map[string]string        `json:"tags"`
+	CertificateArn                      *string                  `json:"certificateArn,omitempty"`
+	CertificateName                     *string                  `json:"certificateName,omitempty"`
+	CertificateUploadDate               *time.Time               `json:"certificateUploadDate,omitempty"`
+	DistributionDomainName              *string                  `json:"distributionDomainName,omitempty"`
+	DistributionHostedZoneID            *string                  `json:"distributionHostedZoneId,omitempty"`
+	DomainName                          *string                  `json:"domainName,omitempty"`
+	DomainNameStatus                    *DomainNameStatusEnum    `json:"domainNameStatus,omitempty"`
+	DomainNameStatusMessage             *string                  `json:"domainNameStatusMessage,omitempty"`
+	EndpointConfiguration               *EndpointConfiguration   `json:"endpointConfiguration,omitempty"`
+	MutualTLSAuthentication             *MutualTLSAuthentication `json:"mutualTlsAuthentication,omitempty"`
+	OwnershipVerificationCertificateArn *string                  `json:"ownershipVerificationCertificateArn,omitempty"`
+	RegionalCertificateArn              *string                  `json:"regionalCertificateArn,omitempty"`
+	RegionalCertificateName             *string                  `json:"regionalCertificateName,omitempty"`
+	RegionalDomainName                  *string                  `json:"regionalDomainName,omitempty"`
+	RegionalHostedZoneID                *string                  `json:"regionalHostedZoneId,omitempty"`
+	SecurityPolicy                      *SecurityPolicyEnum      `json:"securityPolicy,omitempty"`
+	Tags                                map[string]string        `json:"tags,omitempty"`
 }

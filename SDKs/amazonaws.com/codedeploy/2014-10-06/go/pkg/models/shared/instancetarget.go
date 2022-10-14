@@ -5,11 +5,11 @@ import (
 )
 
 type InstanceTarget struct {
-	DeploymentID    *string           `json:"deploymentId"`
-	InstanceLabel   *TargetLabelEnum  `json:"instanceLabel"`
-	LastUpdatedAt   *time.Time        `json:"lastUpdatedAt"`
-	LifecycleEvents []LifecycleEvent  `json:"lifecycleEvents"`
-	Status          *TargetStatusEnum `json:"status"`
-	TargetArn       *string           `json:"targetArn"`
-	TargetID        *string           `json:"targetId"`
+	DeploymentID    *string           `json:"deploymentId,omitempty"`
+	InstanceLabel   *TargetLabelEnum  `json:"instanceLabel,omitempty"`
+	LastUpdatedAt   *time.Time        `json:"lastUpdatedAt,omitempty"`
+	LifecycleEvents []LifecycleEvent  `json:"lifecycleEvents,omitempty"`
+	Status          *TargetStatusEnum `json:"status,omitempty"`
+	TargetArn       *string           `json:"targetArn,omitempty"`
+	TargetID        *string           `json:"targetId,omitempty"`
 }

@@ -8,9 +8,9 @@ const (
 )
 
 type ProjectMembershipResponse struct {
-	Gid          *string                                   `json:"gid"`
-	Project      *ProjectCompact                           `json:"project"`
-	ResourceType *string                                   `json:"resource_type"`
-	User         *UserCompact                              `json:"user"`
-	WriteAccess  *ProjectMembershipResponseWriteAccessEnum `json:"write_access"`
+	Gid          *string                                   `json:"gid,omitempty"`
+	Project      *ProjectCompact                           `json:"project,omitempty"`
+	ResourceType *string                                   `json:"resource_type,omitempty"`
+	User         *UserCompact                              `json:"user,omitempty"`
+	WriteAccess  *ProjectMembershipResponseWriteAccessEnum `json:"write_access,omitempty"`
 }

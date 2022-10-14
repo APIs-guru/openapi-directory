@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfo struct {
-	ServiceAccount *GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfoServiceAccount `json:"serviceAccount"`
+	ServiceAccount *GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfoServiceAccount `json:"serviceAccount,omitempty"`
 }

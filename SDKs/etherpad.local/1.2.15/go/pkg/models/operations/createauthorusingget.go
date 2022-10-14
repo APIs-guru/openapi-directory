@@ -9,31 +9,31 @@ type CreateAuthorUsingGetRequest struct {
 }
 
 type CreateAuthorUsingGet200ApplicationJSONData struct {
-	AuthorID *string `json:"authorID"`
+	AuthorID *string `json:"authorID,omitempty"`
 }
 
 type CreateAuthorUsingGet200ApplicationJSON struct {
-	Code    *int64                                      `json:"code"`
-	Data    *CreateAuthorUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                     `json:"message"`
+	Code    *int64                                      `json:"code,omitempty"`
+	Data    *CreateAuthorUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                     `json:"message,omitempty"`
 }
 
 type CreateAuthorUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateAuthorUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateAuthorUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateAuthorUsingGetResponse struct {

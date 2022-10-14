@@ -1,6 +1,6 @@
 package shared
 
 type ListClustersResponse struct {
-	Clusters     []Cluster `json:"clusters"`
-	MissingZones []string  `json:"missingZones"`
+	Clusters     []Cluster `json:"clusters,omitempty"`
+	MissingZones []string  `json:"missingZones,omitempty"`
 }

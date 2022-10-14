@@ -15,11 +15,11 @@ const (
 )
 
 type WebhookEntry struct {
-	Active              *bool                         `json:"active"`
-	ContactEmailAddress *string                       `json:"contactEmailAddress"`
-	InvokeOption        *WebhookEntryInvokeOptionEnum `json:"invokeOption"`
+	Active              *bool                         `json:"active,omitempty"`
+	ContactEmailAddress *string                       `json:"contactEmailAddress,omitempty"`
+	InvokeOption        *WebhookEntryInvokeOptionEnum `json:"invokeOption,omitempty"`
 	Name                string                        `json:"name"`
-	OnWebApp            *bool                         `json:"onWebApp"`
+	OnWebApp            *bool                         `json:"onWebApp,omitempty"`
 	TriggerScope        WebhookEntryTriggerScopeEnum  `json:"triggerScope"`
 	URL                 string                        `json:"url"`
 }

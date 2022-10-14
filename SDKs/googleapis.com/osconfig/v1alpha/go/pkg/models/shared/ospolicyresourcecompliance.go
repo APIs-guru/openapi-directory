@@ -11,8 +11,8 @@ const (
 )
 
 type OsPolicyResourceCompliance struct {
-	ConfigSteps        []OsPolicyResourceConfigStep                  `json:"configSteps"`
-	ExecResourceOutput *OsPolicyResourceComplianceExecResourceOutput `json:"execResourceOutput"`
-	OsPolicyResourceID *string                                       `json:"osPolicyResourceId"`
-	State              *OsPolicyResourceComplianceStateEnum          `json:"state"`
+	ConfigSteps        []OsPolicyResourceConfigStep                  `json:"configSteps,omitempty"`
+	ExecResourceOutput *OsPolicyResourceComplianceExecResourceOutput `json:"execResourceOutput,omitempty"`
+	OsPolicyResourceID *string                                       `json:"osPolicyResourceId,omitempty"`
+	State              *OsPolicyResourceComplianceStateEnum          `json:"state,omitempty"`
 }

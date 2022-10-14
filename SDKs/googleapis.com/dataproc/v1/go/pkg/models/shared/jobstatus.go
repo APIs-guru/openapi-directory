@@ -25,8 +25,8 @@ const (
 )
 
 type JobStatus struct {
-	Details        *string                `json:"details"`
-	State          *JobStatusStateEnum    `json:"state"`
-	StateStartTime *string                `json:"stateStartTime"`
-	Substate       *JobStatusSubstateEnum `json:"substate"`
+	Details        *string                `json:"details,omitempty"`
+	State          *JobStatusStateEnum    `json:"state,omitempty"`
+	StateStartTime *string                `json:"stateStartTime,omitempty"`
+	Substate       *JobStatusSubstateEnum `json:"substate,omitempty"`
 }

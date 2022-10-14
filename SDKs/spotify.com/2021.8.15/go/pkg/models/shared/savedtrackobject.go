@@ -5,6 +5,6 @@ import (
 )
 
 type SavedTrackObject struct {
-	AddedAt *time.Time   `json:"added_at"`
-	Track   *TrackObject `json:"track"`
+	AddedAt *time.Time   `json:"added_at,omitempty"`
+	Track   *TrackObject `json:"track,omitempty"`
 }

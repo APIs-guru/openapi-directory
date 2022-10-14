@@ -1,5 +1,5 @@
 package shared
 
 type CommandType struct {
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }

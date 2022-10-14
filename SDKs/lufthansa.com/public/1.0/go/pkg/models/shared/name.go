@@ -1,6 +1,6 @@
 package shared
 
 type Name struct {
-	Dollar         *string `json:"$"`
-	AtLanguageCode *string `json:"@LanguageCode"`
+	Dollar         *string `json:"$,omitempty"`
+	AtLanguageCode *string `json:"@LanguageCode,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type AdUnitAdCode struct {
-	AdCode *string `json:"adCode"`
+	AdCode *string `json:"adCode,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ModifyMembershipRolesRequest struct {
-	AddRoles          []MembershipRole              `json:"addRoles"`
-	RemoveRoles       []string                      `json:"removeRoles"`
-	UpdateRolesParams []UpdateMembershipRolesParams `json:"updateRolesParams"`
+	AddRoles          []MembershipRole              `json:"addRoles,omitempty"`
+	RemoveRoles       []string                      `json:"removeRoles,omitempty"`
+	UpdateRolesParams []UpdateMembershipRolesParams `json:"updateRolesParams,omitempty"`
 }

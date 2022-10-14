@@ -1,6 +1,6 @@
 package shared
 
 type StaffListItem struct {
-	Links []Link  `json:"links"`
-	Value []Staff `json:"value"`
+	Links []Link  `json:"links,omitempty"`
+	Value []Staff `json:"value,omitempty"`
 }

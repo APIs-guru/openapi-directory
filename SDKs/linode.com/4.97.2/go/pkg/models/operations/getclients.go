@@ -28,14 +28,14 @@ type GetClientsRequest struct {
 }
 
 type GetClients200ApplicationJSON struct {
-	Data    []shared.OAuthClient `json:"data"`
-	Page    *int64               `json:"page"`
-	Pages   *int64               `json:"pages"`
-	Results *int64               `json:"results"`
+	Data    []shared.OAuthClient `json:"data,omitempty"`
+	Page    *int64               `json:"page,omitempty"`
+	Pages   *int64               `json:"pages,omitempty"`
+	Results *int64               `json:"results,omitempty"`
 }
 
 type GetClientsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetClientsResponse struct {

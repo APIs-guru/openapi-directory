@@ -25,16 +25,16 @@ const (
 )
 
 type ObReadBalance1DataBalanceCreditLine struct {
-	Amount   *ObReadBalance1DataBalanceCreditLineAmount   `json:"Amount"`
+	Amount   *ObReadBalance1DataBalanceCreditLineAmount   `json:"Amount,omitempty"`
 	Included bool                                         `json:"Included"`
-	Type     *ObReadBalance1DataBalanceCreditLineTypeEnum `json:"Type"`
+	Type     *ObReadBalance1DataBalanceCreditLineTypeEnum `json:"Type,omitempty"`
 }
 
 type ObReadBalance1DataBalance struct {
 	AccountID            string                                `json:"AccountId"`
 	Amount               ObReadBalance1DataBalanceAmount       `json:"Amount"`
 	CreditDebitIndicator ObCreditDebitCode2Enum                `json:"CreditDebitIndicator"`
-	CreditLine           []ObReadBalance1DataBalanceCreditLine `json:"CreditLine"`
+	CreditLine           []ObReadBalance1DataBalanceCreditLine `json:"CreditLine,omitempty"`
 	DateTime             time.Time                             `json:"DateTime"`
 	Type                 ObBalanceType1CodeEnum                `json:"Type"`
 }
@@ -45,6 +45,6 @@ type ObReadBalance1Data struct {
 
 type ObReadBalance1 struct {
 	Data  ObReadBalance1Data `json:"Data"`
-	Links *Links             `json:"Links"`
-	Meta  *Meta              `json:"Meta"`
+	Links *Links             `json:"Links,omitempty"`
+	Meta  *Meta              `json:"Meta,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type Product struct {
-	Product *ProductFields `json:"product"`
+	Product *ProductFields `json:"product,omitempty"`
 }

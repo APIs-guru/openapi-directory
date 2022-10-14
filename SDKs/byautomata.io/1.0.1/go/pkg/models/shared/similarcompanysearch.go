@@ -1,13 +1,13 @@
 package shared
 
 type SimilarCompanySearch struct {
-	CompanyName *string   `json:"companyName"`
-	Description *string   `json:"description"`
-	Employee    *string   `json:"employee"`
-	Industry    *string   `json:"industry"`
-	Linkedin    *string   `json:"linkedin"`
-	Snippets    []Snippet `json:"snippets"`
-	Title       *string   `json:"title"`
-	Twitter     *string   `json:"twitter"`
-	Website     *string   `json:"website"`
+	CompanyName *string   `json:"companyName,omitempty"`
+	Description *string   `json:"description,omitempty"`
+	Employee    *string   `json:"employee,omitempty"`
+	Industry    *string   `json:"industry,omitempty"`
+	Linkedin    *string   `json:"linkedin,omitempty"`
+	Snippets    []Snippet `json:"snippets,omitempty"`
+	Title       *string   `json:"title,omitempty"`
+	Twitter     *string   `json:"twitter,omitempty"`
+	Website     *string   `json:"website,omitempty"`
 }

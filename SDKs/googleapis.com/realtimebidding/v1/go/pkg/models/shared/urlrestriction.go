@@ -15,8 +15,8 @@ const (
 )
 
 type URLRestriction struct {
-	EndDate         *Date                              `json:"endDate"`
-	RestrictionType *URLRestrictionRestrictionTypeEnum `json:"restrictionType"`
-	StartDate       *Date                              `json:"startDate"`
-	URL             *string                            `json:"url"`
+	EndDate         *Date                              `json:"endDate,omitempty"`
+	RestrictionType *URLRestrictionRestrictionTypeEnum `json:"restrictionType,omitempty"`
+	StartDate       *Date                              `json:"startDate,omitempty"`
+	URL             *string                            `json:"url,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type OverviewEventPagedResultsPublic struct {
-	ContinuationToken *PagedResultsPublicContinuationToken `json:"continuationToken"`
-	HasMore           *bool                                `json:"hasMore"`
-	Results           []OverviewEvent                      `json:"results"`
+	ContinuationToken *PagedResultsPublicContinuationToken `json:"continuationToken,omitempty"`
+	HasMore           *bool                                `json:"hasMore,omitempty"`
+	Results           []OverviewEvent                      `json:"results,omitempty"`
 }

@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance struct {
-	FeaturePolicy  *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy     `json:"featurePolicy"`
-	Location       *string                                                          `json:"location"`
-	LoggingEnabled *bool                                                            `json:"loggingEnabled"`
-	Name           *string                                                          `json:"name"`
-	State          *GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceStateEnum `json:"state"`
+	FeaturePolicy  *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy     `json:"featurePolicy,omitempty"`
+	Location       *string                                                          `json:"location,omitempty"`
+	LoggingEnabled *bool                                                            `json:"loggingEnabled,omitempty"`
+	Name           *string                                                          `json:"name,omitempty"`
+	State          *GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceStateEnum `json:"state,omitempty"`
 }

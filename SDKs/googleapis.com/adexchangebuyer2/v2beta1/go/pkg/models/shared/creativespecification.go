@@ -1,6 +1,6 @@
 package shared
 
 type CreativeSpecification struct {
-	CreativeCompanionSizes []AdSize `json:"creativeCompanionSizes"`
-	CreativeSize           *AdSize  `json:"creativeSize"`
+	CreativeCompanionSizes []AdSize `json:"creativeCompanionSizes,omitempty"`
+	CreativeSize           *AdSize  `json:"creativeSize,omitempty"`
 }

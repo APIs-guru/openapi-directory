@@ -1,6 +1,6 @@
 package shared
 
 type CreateParameterGroupRequest struct {
-	Description        *string `json:"Description"`
+	Description        *string `json:"Description,omitempty"`
 	ParameterGroupName string  `json:"ParameterGroupName"`
 }

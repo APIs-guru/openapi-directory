@@ -9,16 +9,16 @@ const (
 )
 
 type InstanceConfig struct {
-	AccountNetworksEnabled *bool                                            `json:"accountNetworksEnabled"`
-	ClientNetwork          *NetworkAddress                                  `json:"clientNetwork"`
-	Hyperthreading         *bool                                            `json:"hyperthreading"`
-	ID                     *string                                          `json:"id"`
-	InstanceType           *string                                          `json:"instanceType"`
-	LogicalInterfaces      []GoogleCloudBaremetalsolutionV2LogicalInterface `json:"logicalInterfaces"`
-	Name                   *string                                          `json:"name"`
-	NetworkConfig          *InstanceConfigNetworkConfigEnum                 `json:"networkConfig"`
-	NetworkTemplate        *string                                          `json:"networkTemplate"`
-	OsImage                *string                                          `json:"osImage"`
-	PrivateNetwork         *NetworkAddress                                  `json:"privateNetwork"`
-	UserNote               *string                                          `json:"userNote"`
+	AccountNetworksEnabled *bool                                            `json:"accountNetworksEnabled,omitempty"`
+	ClientNetwork          *NetworkAddress                                  `json:"clientNetwork,omitempty"`
+	Hyperthreading         *bool                                            `json:"hyperthreading,omitempty"`
+	ID                     *string                                          `json:"id,omitempty"`
+	InstanceType           *string                                          `json:"instanceType,omitempty"`
+	LogicalInterfaces      []GoogleCloudBaremetalsolutionV2LogicalInterface `json:"logicalInterfaces,omitempty"`
+	Name                   *string                                          `json:"name,omitempty"`
+	NetworkConfig          *InstanceConfigNetworkConfigEnum                 `json:"networkConfig,omitempty"`
+	NetworkTemplate        *string                                          `json:"networkTemplate,omitempty"`
+	OsImage                *string                                          `json:"osImage,omitempty"`
+	PrivateNetwork         *NetworkAddress                                  `json:"privateNetwork,omitempty"`
+	UserNote               *string                                          `json:"userNote,omitempty"`
 }

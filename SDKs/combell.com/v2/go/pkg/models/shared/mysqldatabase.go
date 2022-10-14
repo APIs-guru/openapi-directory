@@ -1,10 +1,10 @@
 package shared
 
 type MySQLDatabase struct {
-	AccountID  *int32  `json:"account_id"`
-	ActualSize *int32  `json:"actual_size"`
-	Hostname   *string `json:"hostname"`
-	MaxSize    *int32  `json:"max_size"`
-	Name       *string `json:"name"`
-	UserCount  *int32  `json:"user_count"`
+	AccountID  *int32  `json:"account_id,omitempty"`
+	ActualSize *int32  `json:"actual_size,omitempty"`
+	Hostname   *string `json:"hostname,omitempty"`
+	MaxSize    *int32  `json:"max_size,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	UserCount  *int32  `json:"user_count,omitempty"`
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type AptRepository struct {
-	ArchiveType  *AptRepositoryArchiveTypeEnum `json:"archiveType"`
-	Components   []string                      `json:"components"`
-	Distribution *string                       `json:"distribution"`
-	GpgKey       *string                       `json:"gpgKey"`
-	URI          *string                       `json:"uri"`
+	ArchiveType  *AptRepositoryArchiveTypeEnum `json:"archiveType,omitempty"`
+	Components   []string                      `json:"components,omitempty"`
+	Distribution *string                       `json:"distribution,omitempty"`
+	GpgKey       *string                       `json:"gpgKey,omitempty"`
+	URI          *string                       `json:"uri,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type OrdersCancelLineItemRequest struct {
-	Amount       *Price  `json:"amount"`
-	AmountPretax *Price  `json:"amountPretax"`
-	AmountTax    *Price  `json:"amountTax"`
-	LineItemID   *string `json:"lineItemId"`
-	OperationID  *string `json:"operationId"`
-	ProductID    *string `json:"productId"`
-	Quantity     *int64  `json:"quantity"`
-	Reason       *string `json:"reason"`
-	ReasonText   *string `json:"reasonText"`
+	Amount       *Price  `json:"amount,omitempty"`
+	AmountPretax *Price  `json:"amountPretax,omitempty"`
+	AmountTax    *Price  `json:"amountTax,omitempty"`
+	LineItemID   *string `json:"lineItemId,omitempty"`
+	OperationID  *string `json:"operationId,omitempty"`
+	ProductID    *string `json:"productId,omitempty"`
+	Quantity     *int64  `json:"quantity,omitempty"`
+	Reason       *string `json:"reason,omitempty"`
+	ReasonText   *string `json:"reasonText,omitempty"`
 }

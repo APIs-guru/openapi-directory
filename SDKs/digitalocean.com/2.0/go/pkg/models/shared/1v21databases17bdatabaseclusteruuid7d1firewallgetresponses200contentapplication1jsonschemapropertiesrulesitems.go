@@ -15,9 +15,9 @@ const (
 )
 
 type Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1firewallGetResponses200ContentApplication1jsonSchemaPropertiesRulesItems struct {
-	ClusterUUID *string                                                                                                                                `json:"cluster_uuid"`
-	CreatedAt   *time.Time                                                                                                                             `json:"created_at"`
+	ClusterUUID *string                                                                                                                                `json:"cluster_uuid,omitempty"`
+	CreatedAt   *time.Time                                                                                                                             `json:"created_at,omitempty"`
 	Type        Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1firewallGetResponses200ContentApplication1jsonSchemaPropertiesRulesItemsTypeEnum `json:"type"`
-	UUID        *string                                                                                                                                `json:"uuid"`
+	UUID        *string                                                                                                                                `json:"uuid,omitempty"`
 	Value       string                                                                                                                                 `json:"value"`
 }

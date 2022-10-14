@@ -1,5 +1,5 @@
 package shared
 
 type ImplicitDeny struct {
-	Policies []Policy `json:"policies"`
+	Policies []Policy `json:"policies,omitempty"`
 }

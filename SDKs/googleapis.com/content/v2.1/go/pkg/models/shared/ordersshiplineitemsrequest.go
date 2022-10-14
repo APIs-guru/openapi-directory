@@ -1,8 +1,8 @@
 package shared
 
 type OrdersShipLineItemsRequest struct {
-	LineItems       []OrderShipmentLineItemShipment                          `json:"lineItems"`
-	OperationID     *string                                                  `json:"operationId"`
-	ShipmentGroupID *string                                                  `json:"shipmentGroupId"`
-	ShipmentInfos   []OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo `json:"shipmentInfos"`
+	LineItems       []OrderShipmentLineItemShipment                          `json:"lineItems,omitempty"`
+	OperationID     *string                                                  `json:"operationId,omitempty"`
+	ShipmentGroupID *string                                                  `json:"shipmentGroupId,omitempty"`
+	ShipmentInfos   []OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo `json:"shipmentInfos,omitempty"`
 }

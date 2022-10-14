@@ -1,6 +1,6 @@
 package shared
 
 type StateFamilyConfig struct {
-	IsRead      *bool   `json:"isRead"`
-	StateFamily *string `json:"stateFamily"`
+	IsRead      *bool   `json:"isRead,omitempty"`
+	StateFamily *string `json:"stateFamily,omitempty"`
 }

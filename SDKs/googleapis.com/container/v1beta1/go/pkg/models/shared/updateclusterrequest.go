@@ -1,9 +1,9 @@
 package shared
 
 type UpdateClusterRequest struct {
-	ClusterID *string        `json:"clusterId"`
-	Name      *string        `json:"name"`
-	ProjectID *string        `json:"projectId"`
-	Update    *ClusterUpdate `json:"update"`
-	Zone      *string        `json:"zone"`
+	ClusterID *string        `json:"clusterId,omitempty"`
+	Name      *string        `json:"name,omitempty"`
+	ProjectID *string        `json:"projectId,omitempty"`
+	Update    *ClusterUpdate `json:"update,omitempty"`
+	Zone      *string        `json:"zone,omitempty"`
 }

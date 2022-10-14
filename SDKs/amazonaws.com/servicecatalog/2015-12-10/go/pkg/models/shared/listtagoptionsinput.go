@@ -1,7 +1,7 @@
 package shared
 
 type ListTagOptionsInput struct {
-	Filters   *ListTagOptionsFilters `json:"Filters"`
-	PageSize  *int64                 `json:"PageSize"`
-	PageToken *string                `json:"PageToken"`
+	Filters   *ListTagOptionsFilters `json:"Filters,omitempty"`
+	PageSize  *int64                 `json:"PageSize,omitempty"`
+	PageToken *string                `json:"PageToken,omitempty"`
 }

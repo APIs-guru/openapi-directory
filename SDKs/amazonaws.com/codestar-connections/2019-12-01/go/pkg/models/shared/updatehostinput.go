@@ -2,6 +2,6 @@ package shared
 
 type UpdateHostInput struct {
 	HostArn          string            `json:"HostArn"`
-	ProviderEndpoint *string           `json:"ProviderEndpoint"`
-	VpcConfiguration *VpcConfiguration `json:"VpcConfiguration"`
+	ProviderEndpoint *string           `json:"ProviderEndpoint,omitempty"`
+	VpcConfiguration *VpcConfiguration `json:"VpcConfiguration,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GooglePrivacyDlpV2InfoTypeTransformations struct {
-	Transformations []GooglePrivacyDlpV2InfoTypeTransformation `json:"transformations"`
+	Transformations []GooglePrivacyDlpV2InfoTypeTransformation `json:"transformations,omitempty"`
 }

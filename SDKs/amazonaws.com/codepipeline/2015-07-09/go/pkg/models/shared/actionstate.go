@@ -1,9 +1,9 @@
 package shared
 
 type ActionState struct {
-	ActionName      *string          `json:"actionName"`
-	CurrentRevision *ActionRevision  `json:"currentRevision"`
-	EntityURL       *string          `json:"entityUrl"`
-	LatestExecution *ActionExecution `json:"latestExecution"`
-	RevisionURL     *string          `json:"revisionUrl"`
+	ActionName      *string          `json:"actionName,omitempty"`
+	CurrentRevision *ActionRevision  `json:"currentRevision,omitempty"`
+	EntityURL       *string          `json:"entityUrl,omitempty"`
+	LatestExecution *ActionExecution `json:"latestExecution,omitempty"`
+	RevisionURL     *string          `json:"revisionUrl,omitempty"`
 }

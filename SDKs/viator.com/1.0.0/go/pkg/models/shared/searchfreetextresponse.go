@@ -10,6 +10,6 @@ const (
 )
 
 type SearchFreetextResponse struct {
-	SearchType *SearchFreetextResponseSearchTypeEnum `json:"searchType"`
-	SortOrder  *int64                                `json:"sortOrder"`
+	SearchType *SearchFreetextResponseSearchTypeEnum `json:"searchType,omitempty"`
+	SortOrder  *int64                                `json:"sortOrder,omitempty"`
 }

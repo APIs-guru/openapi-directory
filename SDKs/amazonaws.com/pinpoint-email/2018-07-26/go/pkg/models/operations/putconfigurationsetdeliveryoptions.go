@@ -22,8 +22,8 @@ const (
 )
 
 type PutConfigurationSetDeliveryOptionsRequestBody struct {
-	SendingPoolName *string                                                     `json:"SendingPoolName"`
-	TLSPolicy       *PutConfigurationSetDeliveryOptionsRequestBodyTLSPolicyEnum `json:"TlsPolicy"`
+	SendingPoolName *string                                                     `json:"SendingPoolName,omitempty"`
+	TLSPolicy       *PutConfigurationSetDeliveryOptionsRequestBodyTLSPolicyEnum `json:"TlsPolicy,omitempty"`
 }
 
 type PutConfigurationSetDeliveryOptionsRequest struct {

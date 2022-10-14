@@ -1,8 +1,8 @@
 package shared
 
 type Deployment struct {
-	CloudBuildOptions *CloudBuildOptions  `json:"cloudBuildOptions"`
-	Container         *ContainerInfo      `json:"container"`
-	Files             map[string]FileInfo `json:"files"`
-	Zip               *ZipInfo            `json:"zip"`
+	CloudBuildOptions *CloudBuildOptions  `json:"cloudBuildOptions,omitempty"`
+	Container         *ContainerInfo      `json:"container,omitempty"`
+	Files             map[string]FileInfo `json:"files,omitempty"`
+	Zip               *ZipInfo            `json:"zip,omitempty"`
 }

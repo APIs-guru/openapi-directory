@@ -1,11 +1,11 @@
 package shared
 
 type PagedComplianceViolationCollection struct {
-	Href              *string               `json:"href"`
-	Limit             *int32                `json:"limit"`
-	ListingViolations []ComplianceViolation `json:"listingViolations"`
-	Next              *string               `json:"next"`
-	Offset            *int32                `json:"offset"`
-	Prev              *string               `json:"prev"`
-	Total             *int32                `json:"total"`
+	Href              *string               `json:"href,omitempty"`
+	Limit             *int32                `json:"limit,omitempty"`
+	ListingViolations []ComplianceViolation `json:"listingViolations,omitempty"`
+	Next              *string               `json:"next,omitempty"`
+	Offset            *int32                `json:"offset,omitempty"`
+	Prev              *string               `json:"prev,omitempty"`
+	Total             *int32                `json:"total,omitempty"`
 }

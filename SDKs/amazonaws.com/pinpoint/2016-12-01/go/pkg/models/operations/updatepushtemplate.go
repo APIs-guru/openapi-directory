@@ -24,15 +24,15 @@ type UpdatePushTemplateHeaders struct {
 }
 
 type UpdatePushTemplateRequestBodyPushNotificationTemplateRequest struct {
-	Adm                  *shared.AndroidPushNotificationTemplate `json:"ADM"`
-	Apns                 *shared.ApnsPushNotificationTemplate    `json:"APNS"`
-	Baidu                *shared.AndroidPushNotificationTemplate `json:"Baidu"`
-	Default              *shared.DefaultPushNotificationTemplate `json:"Default"`
-	DefaultSubstitutions *string                                 `json:"DefaultSubstitutions"`
-	Gcm                  *shared.AndroidPushNotificationTemplate `json:"GCM"`
-	RecommenderID        *string                                 `json:"RecommenderId"`
-	TemplateDescription  *string                                 `json:"TemplateDescription"`
-	Tags                 map[string]string                       `json:"tags"`
+	Adm                  *shared.AndroidPushNotificationTemplate `json:"ADM,omitempty"`
+	Apns                 *shared.ApnsPushNotificationTemplate    `json:"APNS,omitempty"`
+	Baidu                *shared.AndroidPushNotificationTemplate `json:"Baidu,omitempty"`
+	Default              *shared.DefaultPushNotificationTemplate `json:"Default,omitempty"`
+	DefaultSubstitutions *string                                 `json:"DefaultSubstitutions,omitempty"`
+	Gcm                  *shared.AndroidPushNotificationTemplate `json:"GCM,omitempty"`
+	RecommenderID        *string                                 `json:"RecommenderId,omitempty"`
+	TemplateDescription  *string                                 `json:"TemplateDescription,omitempty"`
+	Tags                 map[string]string                       `json:"tags,omitempty"`
 }
 
 type UpdatePushTemplateRequestBody struct {

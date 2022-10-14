@@ -15,8 +15,8 @@ const (
 )
 
 type MncerRequestBody struct {
-	CertificateParameters *MncerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *MncerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                MncerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Mncer400ApplicationJSON struct {
-	Error            *Mncer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mncer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mncer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mncer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mncer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Mncer401ApplicationJSON struct {
-	Error            *Mncer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mncer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mncer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mncer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mncer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Mncer404ApplicationJSON struct {
-	Error            *Mncer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mncer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mncer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mncer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mncer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Mncer500ApplicationJSON struct {
-	Error            *Mncer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mncer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mncer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mncer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mncer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Mncer502ApplicationJSON struct {
-	Error            *Mncer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mncer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mncer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mncer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mncer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Mncer503ApplicationJSON struct {
-	Error            *Mncer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mncer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mncer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mncer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mncer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Mncer504ApplicationJSON struct {
-	Error            *Mncer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mncer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mncer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mncer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type MncerResponse struct {

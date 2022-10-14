@@ -17,16 +17,16 @@ const (
 )
 
 type ProblemEvent struct {
-	AdminState            *ProblemEventAdminStateEnum `json:"admin_state"`
-	AnchorEntities        []Reference                 `json:"anchor_entities"`
-	Archived              *bool                       `json:"archived"`
-	EntityID              *string                     `json:"entity_id"`
-	EntityType            *EntityTypeEnum             `json:"entity_type"`
-	EventCloseTimeEpochMs *int64                      `json:"event_close_time_epoch_ms"`
-	EventTags             []string                    `json:"event_tags"`
-	EventTimeEpochMs      *int64                      `json:"event_time_epoch_ms"`
-	Message               *string                     `json:"message"`
-	Name                  *string                     `json:"name"`
-	RelatedEntities       []Reference                 `json:"related_entities"`
-	Severity              *ProblemEventSeverityEnum   `json:"severity"`
+	AdminState            *ProblemEventAdminStateEnum `json:"admin_state,omitempty"`
+	AnchorEntities        []Reference                 `json:"anchor_entities,omitempty"`
+	Archived              *bool                       `json:"archived,omitempty"`
+	EntityID              *string                     `json:"entity_id,omitempty"`
+	EntityType            *EntityTypeEnum             `json:"entity_type,omitempty"`
+	EventCloseTimeEpochMs *int64                      `json:"event_close_time_epoch_ms,omitempty"`
+	EventTags             []string                    `json:"event_tags,omitempty"`
+	EventTimeEpochMs      *int64                      `json:"event_time_epoch_ms,omitempty"`
+	Message               *string                     `json:"message,omitempty"`
+	Name                  *string                     `json:"name,omitempty"`
+	RelatedEntities       []Reference                 `json:"related_entities,omitempty"`
+	Severity              *ProblemEventSeverityEnum   `json:"severity,omitempty"`
 }

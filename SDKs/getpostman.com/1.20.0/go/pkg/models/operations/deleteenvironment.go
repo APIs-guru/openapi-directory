@@ -9,21 +9,21 @@ type DeleteEnvironmentRequest struct {
 }
 
 type DeleteEnvironment200ApplicationJSONEnvironment struct {
-	ID  *string `json:"id"`
-	UID *string `json:"uid"`
+	ID  *string `json:"id,omitempty"`
+	UID *string `json:"uid,omitempty"`
 }
 
 type DeleteEnvironment200ApplicationJSON struct {
-	Environment *DeleteEnvironment200ApplicationJSONEnvironment `json:"environment"`
+	Environment *DeleteEnvironment200ApplicationJSONEnvironment `json:"environment,omitempty"`
 }
 
 type DeleteEnvironment404ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type DeleteEnvironment404ApplicationJSON struct {
-	Error *DeleteEnvironment404ApplicationJSONError `json:"error"`
+	Error *DeleteEnvironment404ApplicationJSONError `json:"error,omitempty"`
 }
 
 type DeleteEnvironmentResponse struct {

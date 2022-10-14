@@ -1,12 +1,12 @@
 package shared
 
 type DeviceInfo struct {
-	CveList            []Vulnerability `json:"cve_list"`
-	DeviceType         *string         `json:"device_type"`
-	FirmwareInfo       *FirmwareInfo   `json:"firmware_info"`
-	FirmwareVersion    *string         `json:"firmware_version"`
-	IsDiscontinued     *bool           `json:"is_discontinued"`
-	LatestFirmwareInfo *FirmwareInfo   `json:"latest_firmware_info"`
-	Manufacturer       *string         `json:"manufacturer"`
-	ModelName          *string         `json:"model_name"`
+	CveList            []Vulnerability `json:"cve_list,omitempty"`
+	DeviceType         *string         `json:"device_type,omitempty"`
+	FirmwareInfo       *FirmwareInfo   `json:"firmware_info,omitempty"`
+	FirmwareVersion    *string         `json:"firmware_version,omitempty"`
+	IsDiscontinued     *bool           `json:"is_discontinued,omitempty"`
+	LatestFirmwareInfo *FirmwareInfo   `json:"latest_firmware_info,omitempty"`
+	Manufacturer       *string         `json:"manufacturer,omitempty"`
+	ModelName          *string         `json:"model_name,omitempty"`
 }

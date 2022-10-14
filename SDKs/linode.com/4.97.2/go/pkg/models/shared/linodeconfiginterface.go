@@ -8,7 +8,7 @@ const (
 )
 
 type LinodeConfigInterface struct {
-	IpamAddress *string                           `json:"ipam_address"`
-	Label       *string                           `json:"label"`
-	Purpose     *LinodeConfigInterfacePurposeEnum `json:"purpose"`
+	IpamAddress *string                           `json:"ipam_address,omitempty"`
+	Label       *string                           `json:"label,omitempty"`
+	Purpose     *LinodeConfigInterfacePurposeEnum `json:"purpose,omitempty"`
 }

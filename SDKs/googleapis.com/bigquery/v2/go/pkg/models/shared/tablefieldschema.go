@@ -1,24 +1,24 @@
 package shared
 
 type TableFieldSchemaCategories struct {
-	Names []string `json:"names"`
+	Names []string `json:"names,omitempty"`
 }
 
 type TableFieldSchemaPolicyTags struct {
-	Names []string `json:"names"`
+	Names []string `json:"names,omitempty"`
 }
 
 type TableFieldSchema struct {
-	Categories             *TableFieldSchemaCategories `json:"categories"`
-	Collation              *string                     `json:"collation"`
-	DefaultValueExpression *string                     `json:"defaultValueExpression"`
-	Description            *string                     `json:"description"`
-	Fields                 []TableFieldSchema          `json:"fields"`
-	MaxLength              *string                     `json:"maxLength"`
-	Mode                   *string                     `json:"mode"`
-	Name                   *string                     `json:"name"`
-	PolicyTags             *TableFieldSchemaPolicyTags `json:"policyTags"`
-	Precision              *string                     `json:"precision"`
-	Scale                  *string                     `json:"scale"`
-	Type                   *string                     `json:"type"`
+	Categories             *TableFieldSchemaCategories `json:"categories,omitempty"`
+	Collation              *string                     `json:"collation,omitempty"`
+	DefaultValueExpression *string                     `json:"defaultValueExpression,omitempty"`
+	Description            *string                     `json:"description,omitempty"`
+	Fields                 []TableFieldSchema          `json:"fields,omitempty"`
+	MaxLength              *string                     `json:"maxLength,omitempty"`
+	Mode                   *string                     `json:"mode,omitempty"`
+	Name                   *string                     `json:"name,omitempty"`
+	PolicyTags             *TableFieldSchemaPolicyTags `json:"policyTags,omitempty"`
+	Precision              *string                     `json:"precision,omitempty"`
+	Scale                  *string                     `json:"scale,omitempty"`
+	Type                   *string                     `json:"type,omitempty"`
 }

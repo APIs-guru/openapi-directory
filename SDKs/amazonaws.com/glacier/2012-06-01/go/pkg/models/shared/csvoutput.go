@@ -1,9 +1,9 @@
 package shared
 
 type CsvOutput struct {
-	FieldDelimiter       *string          `json:"FieldDelimiter"`
-	QuoteCharacter       *string          `json:"QuoteCharacter"`
-	QuoteEscapeCharacter *string          `json:"QuoteEscapeCharacter"`
-	QuoteFields          *QuoteFieldsEnum `json:"QuoteFields"`
-	RecordDelimiter      *string          `json:"RecordDelimiter"`
+	FieldDelimiter       *string          `json:"FieldDelimiter,omitempty"`
+	QuoteCharacter       *string          `json:"QuoteCharacter,omitempty"`
+	QuoteEscapeCharacter *string          `json:"QuoteEscapeCharacter,omitempty"`
+	QuoteFields          *QuoteFieldsEnum `json:"QuoteFields,omitempty"`
+	RecordDelimiter      *string          `json:"RecordDelimiter,omitempty"`
 }

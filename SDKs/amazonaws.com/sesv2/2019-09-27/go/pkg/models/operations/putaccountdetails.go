@@ -25,10 +25,10 @@ const (
 )
 
 type PutAccountDetailsRequestBody struct {
-	AdditionalContactEmailAddresses []string                                         `json:"AdditionalContactEmailAddresses"`
-	ContactLanguage                 *PutAccountDetailsRequestBodyContactLanguageEnum `json:"ContactLanguage"`
+	AdditionalContactEmailAddresses []string                                         `json:"AdditionalContactEmailAddresses,omitempty"`
+	ContactLanguage                 *PutAccountDetailsRequestBodyContactLanguageEnum `json:"ContactLanguage,omitempty"`
 	MailType                        PutAccountDetailsRequestBodyMailTypeEnum         `json:"MailType"`
-	ProductionAccessEnabled         *bool                                            `json:"ProductionAccessEnabled"`
+	ProductionAccessEnabled         *bool                                            `json:"ProductionAccessEnabled,omitempty"`
 	UseCaseDescription              string                                           `json:"UseCaseDescription"`
 	WebsiteURL                      string                                           `json:"WebsiteURL"`
 }

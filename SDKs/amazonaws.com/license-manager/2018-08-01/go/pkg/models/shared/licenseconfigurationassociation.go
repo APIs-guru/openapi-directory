@@ -5,9 +5,9 @@ import (
 )
 
 type LicenseConfigurationAssociation struct {
-	AmiAssociationScope *string           `json:"AmiAssociationScope"`
-	AssociationTime     *time.Time        `json:"AssociationTime"`
-	ResourceArn         *string           `json:"ResourceArn"`
-	ResourceOwnerID     *string           `json:"ResourceOwnerId"`
-	ResourceType        *ResourceTypeEnum `json:"ResourceType"`
+	AmiAssociationScope *string           `json:"AmiAssociationScope,omitempty"`
+	AssociationTime     *time.Time        `json:"AssociationTime,omitempty"`
+	ResourceArn         *string           `json:"ResourceArn,omitempty"`
+	ResourceOwnerID     *string           `json:"ResourceOwnerId,omitempty"`
+	ResourceType        *ResourceTypeEnum `json:"ResourceType,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type BuildNote struct {
-	BuilderVersion *string `json:"builderVersion"`
+	BuilderVersion *string `json:"builderVersion,omitempty"`
 }

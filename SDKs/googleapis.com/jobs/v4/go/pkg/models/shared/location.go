@@ -17,8 +17,8 @@ const (
 )
 
 type Location struct {
-	LatLng        *LatLng                   `json:"latLng"`
-	LocationType  *LocationLocationTypeEnum `json:"locationType"`
-	PostalAddress *PostalAddress            `json:"postalAddress"`
-	RadiusMiles   *float64                  `json:"radiusMiles"`
+	LatLng        *LatLng                   `json:"latLng,omitempty"`
+	LocationType  *LocationLocationTypeEnum `json:"locationType,omitempty"`
+	PostalAddress *PostalAddress            `json:"postalAddress,omitempty"`
+	RadiusMiles   *float64                  `json:"radiusMiles,omitempty"`
 }

@@ -14,9 +14,9 @@ const (
 )
 
 type HTTPTarget struct {
-	HeaderOverrides []HeaderOverride          `json:"headerOverrides"`
-	HTTPMethod      *HTTPTargetHTTPMethodEnum `json:"httpMethod"`
-	OauthToken      *OAuthToken               `json:"oauthToken"`
-	OidcToken       *OidcToken                `json:"oidcToken"`
-	URIOverride     *URIOverride              `json:"uriOverride"`
+	HeaderOverrides []HeaderOverride          `json:"headerOverrides,omitempty"`
+	HTTPMethod      *HTTPTargetHTTPMethodEnum `json:"httpMethod,omitempty"`
+	OauthToken      *OAuthToken               `json:"oauthToken,omitempty"`
+	OidcToken       *OidcToken                `json:"oidcToken,omitempty"`
+	URIOverride     *URIOverride              `json:"uriOverride,omitempty"`
 }

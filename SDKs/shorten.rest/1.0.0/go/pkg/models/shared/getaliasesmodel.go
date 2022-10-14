@@ -1,6 +1,6 @@
 package shared
 
 type GetAliasesModel struct {
-	Aliases []string `json:"aliases"`
-	LastID  *string  `json:"lastId"`
+	Aliases []string `json:"aliases,omitempty"`
+	LastID  *string  `json:"lastId,omitempty"`
 }

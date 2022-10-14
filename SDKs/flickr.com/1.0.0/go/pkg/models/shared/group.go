@@ -1,87 +1,87 @@
 package shared
 
 type GroupBlast struct {
-	Content        *string `json:"_content"`
-	DateBlastAdded *string `json:"date_blast_added"`
-	UserID         *string `json:"user_id"`
+	Content        *string `json:"_content,omitempty"`
+	DateBlastAdded *string `json:"date_blast_added,omitempty"`
+	UserID         *string `json:"user_id,omitempty"`
 }
 
 type GroupDescription struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GroupMembers struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GroupName struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GroupPoolCount struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GroupPrivacy struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GroupRestrictions struct {
-	ArtOk        *bool `json:"art_ok"`
-	HasGeo       *bool `json:"has_geo"`
-	ImagesOk     *bool `json:"images_ok"`
-	ModerateOk   *bool `json:"moderate_ok"`
-	PhotosOk     *bool `json:"photos_ok"`
-	RestrictedOk *bool `json:"restricted_ok"`
-	SafeOk       *bool `json:"safe_ok"`
-	ScreensOk    *bool `json:"screens_ok"`
-	VideosOk     *bool `json:"videos_ok"`
+	ArtOk        *bool `json:"art_ok,omitempty"`
+	HasGeo       *bool `json:"has_geo,omitempty"`
+	ImagesOk     *bool `json:"images_ok,omitempty"`
+	ModerateOk   *bool `json:"moderate_ok,omitempty"`
+	PhotosOk     *bool `json:"photos_ok,omitempty"`
+	RestrictedOk *bool `json:"restricted_ok,omitempty"`
+	SafeOk       *bool `json:"safe_ok,omitempty"`
+	ScreensOk    *bool `json:"screens_ok,omitempty"`
+	VideosOk     *bool `json:"videos_ok,omitempty"`
 }
 
 type GroupRoles struct {
-	Admin     *string `json:"admin"`
-	Member    *string `json:"member"`
-	Moderator *string `json:"moderator"`
+	Admin     *string `json:"admin,omitempty"`
+	Member    *string `json:"member,omitempty"`
+	Moderator *string `json:"moderator,omitempty"`
 }
 
 type GroupRules struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GroupThrottle struct {
-	Count     *int64  `json:"count"`
-	Mode      *string `json:"mode"`
-	Remaining *string `json:"remaining"`
+	Count     *int64  `json:"count,omitempty"`
+	Mode      *string `json:"mode,omitempty"`
+	Remaining *string `json:"remaining,omitempty"`
 }
 
 type GroupTopicCount struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type Group struct {
-	Blast            *GroupBlast        `json:"blast"`
-	Cover            *Cover             `json:"cover"`
-	CoverphotoFarm   *string            `json:"coverphoto_farm"`
-	CoverphotoServer *string            `json:"coverphoto_server"`
-	CoverphotoURL    *PhotoUrLs         `json:"coverphoto_url"`
-	Description      *GroupDescription  `json:"description"`
-	Iconfarm         *string            `json:"iconfarm"`
-	Iconserver       *string            `json:"iconserver"`
-	ID               *string            `json:"id"`
-	IsAdmin          *bool              `json:"is_admin"`
-	IsMember         *bool              `json:"is_member"`
-	IsModerator      *bool              `json:"is_moderator"`
-	Ispoolmoderated  *bool              `json:"ispoolmoderated"`
-	Lang             *string            `json:"lang"`
-	Members          *GroupMembers      `json:"members"`
-	Name             *GroupName         `json:"name"`
-	PathAlias        *string            `json:"path_alias"`
-	PoolCount        *GroupPoolCount    `json:"pool_count"`
-	PoolRows         *int64             `json:"pool_rows"`
-	Privacy          *GroupPrivacy      `json:"privacy"`
-	Restrictions     *GroupRestrictions `json:"restrictions"`
-	Roles            *GroupRoles        `json:"roles"`
-	Rules            *GroupRules        `json:"rules"`
-	Throttle         *GroupThrottle     `json:"throttle"`
-	TopicCount       *GroupTopicCount   `json:"topic_count"`
+	Blast            *GroupBlast        `json:"blast,omitempty"`
+	Cover            *Cover             `json:"cover,omitempty"`
+	CoverphotoFarm   *string            `json:"coverphoto_farm,omitempty"`
+	CoverphotoServer *string            `json:"coverphoto_server,omitempty"`
+	CoverphotoURL    *PhotoUrLs         `json:"coverphoto_url,omitempty"`
+	Description      *GroupDescription  `json:"description,omitempty"`
+	Iconfarm         *string            `json:"iconfarm,omitempty"`
+	Iconserver       *string            `json:"iconserver,omitempty"`
+	ID               *string            `json:"id,omitempty"`
+	IsAdmin          *bool              `json:"is_admin,omitempty"`
+	IsMember         *bool              `json:"is_member,omitempty"`
+	IsModerator      *bool              `json:"is_moderator,omitempty"`
+	Ispoolmoderated  *bool              `json:"ispoolmoderated,omitempty"`
+	Lang             *string            `json:"lang,omitempty"`
+	Members          *GroupMembers      `json:"members,omitempty"`
+	Name             *GroupName         `json:"name,omitempty"`
+	PathAlias        *string            `json:"path_alias,omitempty"`
+	PoolCount        *GroupPoolCount    `json:"pool_count,omitempty"`
+	PoolRows         *int64             `json:"pool_rows,omitempty"`
+	Privacy          *GroupPrivacy      `json:"privacy,omitempty"`
+	Restrictions     *GroupRestrictions `json:"restrictions,omitempty"`
+	Roles            *GroupRoles        `json:"roles,omitempty"`
+	Rules            *GroupRules        `json:"rules,omitempty"`
+	Throttle         *GroupThrottle     `json:"throttle,omitempty"`
+	TopicCount       *GroupTopicCount   `json:"topic_count,omitempty"`
 }

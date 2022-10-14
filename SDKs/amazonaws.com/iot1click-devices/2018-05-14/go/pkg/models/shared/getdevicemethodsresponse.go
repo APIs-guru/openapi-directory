@@ -1,5 +1,5 @@
 package shared
 
 type GetDeviceMethodsResponse struct {
-	DeviceMethods []DeviceMethod `json:"DeviceMethods"`
+	DeviceMethods []DeviceMethod `json:"DeviceMethods,omitempty"`
 }

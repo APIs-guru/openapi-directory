@@ -27,7 +27,7 @@ type DeleteManagedCredentialRequest struct {
 }
 
 type DeleteManagedCredentialDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteManagedCredentialResponse struct {

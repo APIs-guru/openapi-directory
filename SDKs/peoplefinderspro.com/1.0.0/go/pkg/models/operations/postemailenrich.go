@@ -7,7 +7,7 @@ type PostEmailEnrichHeaders struct {
 }
 
 type PostEmailEnrichRequestBody struct {
-	Email *string `json:"Email"`
+	Email *string `json:"Email,omitempty"`
 }
 
 type PostEmailEnrichRequest struct {

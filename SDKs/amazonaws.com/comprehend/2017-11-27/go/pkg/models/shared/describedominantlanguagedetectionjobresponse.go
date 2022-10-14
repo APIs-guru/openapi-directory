@@ -1,5 +1,5 @@
 package shared
 
 type DescribeDominantLanguageDetectionJobResponse struct {
-	DominantLanguageDetectionJobProperties *DominantLanguageDetectionJobProperties `json:"DominantLanguageDetectionJobProperties"`
+	DominantLanguageDetectionJobProperties *DominantLanguageDetectionJobProperties `json:"DominantLanguageDetectionJobProperties,omitempty"`
 }

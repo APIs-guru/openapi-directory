@@ -1,19 +1,19 @@
 package shared
 
 type BatchWriteOperation struct {
-	AddFacetToObject       *BatchAddFacetToObject       `json:"AddFacetToObject"`
-	AttachObject           *BatchAttachObject           `json:"AttachObject"`
-	AttachPolicy           *BatchAttachPolicy           `json:"AttachPolicy"`
-	AttachToIndex          *BatchAttachToIndex          `json:"AttachToIndex"`
-	AttachTypedLink        *BatchAttachTypedLink        `json:"AttachTypedLink"`
-	CreateIndex            *BatchCreateIndex            `json:"CreateIndex"`
-	CreateObject           *BatchCreateObject           `json:"CreateObject"`
-	DeleteObject           *BatchDeleteObject           `json:"DeleteObject"`
-	DetachFromIndex        *BatchDetachFromIndex        `json:"DetachFromIndex"`
-	DetachObject           *BatchDetachObject           `json:"DetachObject"`
-	DetachPolicy           *BatchDetachPolicy           `json:"DetachPolicy"`
-	DetachTypedLink        *BatchDetachTypedLink        `json:"DetachTypedLink"`
-	RemoveFacetFromObject  *BatchRemoveFacetFromObject  `json:"RemoveFacetFromObject"`
-	UpdateLinkAttributes   *BatchUpdateLinkAttributes   `json:"UpdateLinkAttributes"`
-	UpdateObjectAttributes *BatchUpdateObjectAttributes `json:"UpdateObjectAttributes"`
+	AddFacetToObject       *BatchAddFacetToObject       `json:"AddFacetToObject,omitempty"`
+	AttachObject           *BatchAttachObject           `json:"AttachObject,omitempty"`
+	AttachPolicy           *BatchAttachPolicy           `json:"AttachPolicy,omitempty"`
+	AttachToIndex          *BatchAttachToIndex          `json:"AttachToIndex,omitempty"`
+	AttachTypedLink        *BatchAttachTypedLink        `json:"AttachTypedLink,omitempty"`
+	CreateIndex            *BatchCreateIndex            `json:"CreateIndex,omitempty"`
+	CreateObject           *BatchCreateObject           `json:"CreateObject,omitempty"`
+	DeleteObject           *BatchDeleteObject           `json:"DeleteObject,omitempty"`
+	DetachFromIndex        *BatchDetachFromIndex        `json:"DetachFromIndex,omitempty"`
+	DetachObject           *BatchDetachObject           `json:"DetachObject,omitempty"`
+	DetachPolicy           *BatchDetachPolicy           `json:"DetachPolicy,omitempty"`
+	DetachTypedLink        *BatchDetachTypedLink        `json:"DetachTypedLink,omitempty"`
+	RemoveFacetFromObject  *BatchRemoveFacetFromObject  `json:"RemoveFacetFromObject,omitempty"`
+	UpdateLinkAttributes   *BatchUpdateLinkAttributes   `json:"UpdateLinkAttributes,omitempty"`
+	UpdateObjectAttributes *BatchUpdateObjectAttributes `json:"UpdateObjectAttributes,omitempty"`
 }

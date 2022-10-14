@@ -1,6 +1,6 @@
 package shared
 
 type RegisteredInterestCategoryListItem struct {
-	Links []Link                       `json:"links"`
-	Value []RegisteredInterestCategory `json:"value"`
+	Links []Link                       `json:"links,omitempty"`
+	Value []RegisteredInterestCategory `json:"value,omitempty"`
 }

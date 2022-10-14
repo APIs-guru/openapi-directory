@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1IntentMessageRbmCardContentRbmMedia struct {
-	FileURI      *string                                                                    `json:"fileUri"`
-	Height       *GoogleCloudDialogflowV2beta1IntentMessageRbmCardContentRbmMediaHeightEnum `json:"height"`
-	ThumbnailURI *string                                                                    `json:"thumbnailUri"`
+	FileURI      *string                                                                    `json:"fileUri,omitempty"`
+	Height       *GoogleCloudDialogflowV2beta1IntentMessageRbmCardContentRbmMediaHeightEnum `json:"height,omitempty"`
+	ThumbnailURI *string                                                                    `json:"thumbnailUri,omitempty"`
 }

@@ -19,6 +19,6 @@ const (
 )
 
 type GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembership struct {
-	Membership *GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembershipMembershipEnum `json:"membership"`
-	Relevance  *GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembershipRelevanceEnum  `json:"relevance"`
+	Membership *GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembershipMembershipEnum `json:"membership,omitempty"`
+	Relevance  *GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembershipRelevanceEnum  `json:"relevance,omitempty"`
 }

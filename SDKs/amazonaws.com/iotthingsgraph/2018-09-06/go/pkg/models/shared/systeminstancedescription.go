@@ -1,11 +1,11 @@
 package shared
 
 type SystemInstanceDescription struct {
-	Definition                   *DefinitionDocument    `json:"definition"`
-	FlowActionsRoleArn           *string                `json:"flowActionsRoleArn"`
-	MetricsConfiguration         *MetricsConfiguration  `json:"metricsConfiguration"`
-	S3BucketName                 *string                `json:"s3BucketName"`
-	Summary                      *SystemInstanceSummary `json:"summary"`
-	ValidatedDependencyRevisions []DependencyRevision   `json:"validatedDependencyRevisions"`
-	ValidatedNamespaceVersion    *int64                 `json:"validatedNamespaceVersion"`
+	Definition                   *DefinitionDocument    `json:"definition,omitempty"`
+	FlowActionsRoleArn           *string                `json:"flowActionsRoleArn,omitempty"`
+	MetricsConfiguration         *MetricsConfiguration  `json:"metricsConfiguration,omitempty"`
+	S3BucketName                 *string                `json:"s3BucketName,omitempty"`
+	Summary                      *SystemInstanceSummary `json:"summary,omitempty"`
+	ValidatedDependencyRevisions []DependencyRevision   `json:"validatedDependencyRevisions,omitempty"`
+	ValidatedNamespaceVersion    *int64                 `json:"validatedNamespaceVersion,omitempty"`
 }

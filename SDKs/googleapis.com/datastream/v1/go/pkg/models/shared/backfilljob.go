@@ -22,9 +22,9 @@ const (
 )
 
 type BackfillJob struct {
-	Errors        []Error                 `json:"errors"`
-	LastEndTime   *string                 `json:"lastEndTime"`
-	LastStartTime *string                 `json:"lastStartTime"`
-	State         *BackfillJobStateEnum   `json:"state"`
-	Trigger       *BackfillJobTriggerEnum `json:"trigger"`
+	Errors        []Error                 `json:"errors,omitempty"`
+	LastEndTime   *string                 `json:"lastEndTime,omitempty"`
+	LastStartTime *string                 `json:"lastStartTime,omitempty"`
+	State         *BackfillJobStateEnum   `json:"state,omitempty"`
+	Trigger       *BackfillJobTriggerEnum `json:"trigger,omitempty"`
 }

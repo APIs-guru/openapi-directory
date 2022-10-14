@@ -54,15 +54,15 @@ const (
 )
 
 type Activity struct {
-	EstimationID     *int32            `json:"EstimationId"`
-	EstimationNumber *string           `json:"EstimationNumber"`
-	ID               *int32            `json:"Id"`
-	InvoiceID        *int32            `json:"InvoiceId"`
-	InvoiceNumber    *string           `json:"InvoiceNumber"`
-	Link             *string           `json:"Link"`
-	Message          *string           `json:"Message"`
-	OrderID          *int32            `json:"OrderId"`
-	OrderNumber      *string           `json:"OrderNumber"`
-	Type             *ActivityTypeEnum `json:"Type"`
-	UserID           *int32            `json:"UserId"`
+	EstimationID     *int32            `json:"EstimationId,omitempty"`
+	EstimationNumber *string           `json:"EstimationNumber,omitempty"`
+	ID               *int32            `json:"Id,omitempty"`
+	InvoiceID        *int32            `json:"InvoiceId,omitempty"`
+	InvoiceNumber    *string           `json:"InvoiceNumber,omitempty"`
+	Link             *string           `json:"Link,omitempty"`
+	Message          *string           `json:"Message,omitempty"`
+	OrderID          *int32            `json:"OrderId,omitempty"`
+	OrderNumber      *string           `json:"OrderNumber,omitempty"`
+	Type             *ActivityTypeEnum `json:"Type,omitempty"`
+	UserID           *int32            `json:"UserId,omitempty"`
 }

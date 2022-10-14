@@ -37,16 +37,16 @@ const (
 )
 
 type ProjectRequestCurrentStatus struct {
-	Author       *UserCompact                         `json:"author"`
+	Author       *UserCompact                         `json:"author,omitempty"`
 	Color        ProjectRequestCurrentStatusColorEnum `json:"color"`
-	CreatedAt    *time.Time                           `json:"created_at"`
-	CreatedBy    *UserCompact                         `json:"created_by"`
-	Gid          *string                              `json:"gid"`
-	HTMLText     *string                              `json:"html_text"`
-	ModifiedAt   *time.Time                           `json:"modified_at"`
-	ResourceType *string                              `json:"resource_type"`
+	CreatedAt    *time.Time                           `json:"created_at,omitempty"`
+	CreatedBy    *UserCompact                         `json:"created_by,omitempty"`
+	Gid          *string                              `json:"gid,omitempty"`
+	HTMLText     *string                              `json:"html_text,omitempty"`
+	ModifiedAt   *time.Time                           `json:"modified_at,omitempty"`
+	ResourceType *string                              `json:"resource_type,omitempty"`
 	Text         string                               `json:"text"`
-	Title        *string                              `json:"title"`
+	Title        *string                              `json:"title,omitempty"`
 }
 
 type ProjectRequestDefaultViewEnum string
@@ -59,33 +59,33 @@ const (
 )
 
 type ProjectRequestWorkspace struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type ProjectRequest struct {
-	Archived            *bool                          `json:"archived"`
-	Color               *ProjectRequestColorEnum       `json:"color"`
-	CreatedAt           *time.Time                     `json:"created_at"`
-	CurrentStatus       *ProjectRequestCurrentStatus   `json:"current_status"`
-	CustomFieldSettings []CustomFieldSettingCompact    `json:"custom_field_settings"`
-	CustomFields        map[string]string              `json:"custom_fields"`
-	DefaultView         *ProjectRequestDefaultViewEnum `json:"default_view"`
-	DueDate             *time.Time                     `json:"due_date"`
-	DueOn               *time.Time                     `json:"due_on"`
-	Followers           *string                        `json:"followers"`
-	Gid                 *string                        `json:"gid"`
-	HTMLNotes           *string                        `json:"html_notes"`
-	IsTemplate          *bool                          `json:"is_template"`
-	Members             []UserCompact                  `json:"members"`
-	ModifiedAt          *time.Time                     `json:"modified_at"`
-	Name                *string                        `json:"name"`
-	Notes               *string                        `json:"notes"`
-	Owner               *string                        `json:"owner"`
-	Public              *bool                          `json:"public"`
-	ResourceType        *string                        `json:"resource_type"`
-	StartOn             *time.Time                     `json:"start_on"`
-	Team                *string                        `json:"team"`
-	Workspace           *ProjectRequestWorkspace       `json:"workspace"`
+	Archived            *bool                          `json:"archived,omitempty"`
+	Color               *ProjectRequestColorEnum       `json:"color,omitempty"`
+	CreatedAt           *time.Time                     `json:"created_at,omitempty"`
+	CurrentStatus       *ProjectRequestCurrentStatus   `json:"current_status,omitempty"`
+	CustomFieldSettings []CustomFieldSettingCompact    `json:"custom_field_settings,omitempty"`
+	CustomFields        map[string]string              `json:"custom_fields,omitempty"`
+	DefaultView         *ProjectRequestDefaultViewEnum `json:"default_view,omitempty"`
+	DueDate             *time.Time                     `json:"due_date,omitempty"`
+	DueOn               *time.Time                     `json:"due_on,omitempty"`
+	Followers           *string                        `json:"followers,omitempty"`
+	Gid                 *string                        `json:"gid,omitempty"`
+	HTMLNotes           *string                        `json:"html_notes,omitempty"`
+	IsTemplate          *bool                          `json:"is_template,omitempty"`
+	Members             []UserCompact                  `json:"members,omitempty"`
+	ModifiedAt          *time.Time                     `json:"modified_at,omitempty"`
+	Name                *string                        `json:"name,omitempty"`
+	Notes               *string                        `json:"notes,omitempty"`
+	Owner               *string                        `json:"owner,omitempty"`
+	Public              *bool                          `json:"public,omitempty"`
+	ResourceType        *string                        `json:"resource_type,omitempty"`
+	StartOn             *time.Time                     `json:"start_on,omitempty"`
+	Team                *string                        `json:"team,omitempty"`
+	Workspace           *ProjectRequestWorkspace       `json:"workspace,omitempty"`
 }

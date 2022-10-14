@@ -25,41 +25,41 @@ const (
 )
 
 type CreateGraphqlAPIRequestBodyLambdaAuthorizerConfig struct {
-	AuthorizerResultTTLInSeconds *int64  `json:"authorizerResultTtlInSeconds"`
-	AuthorizerURI                *string `json:"authorizerUri"`
-	IdentityValidationExpression *string `json:"identityValidationExpression"`
+	AuthorizerResultTTLInSeconds *int64  `json:"authorizerResultTtlInSeconds,omitempty"`
+	AuthorizerURI                *string `json:"authorizerUri,omitempty"`
+	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty"`
 }
 
 type CreateGraphqlAPIRequestBodyLogConfig struct {
-	CloudWatchLogsRoleArn *string                   `json:"cloudWatchLogsRoleArn"`
-	ExcludeVerboseContent *bool                     `json:"excludeVerboseContent"`
-	FieldLogLevel         *shared.FieldLogLevelEnum `json:"fieldLogLevel"`
+	CloudWatchLogsRoleArn *string                   `json:"cloudWatchLogsRoleArn,omitempty"`
+	ExcludeVerboseContent *bool                     `json:"excludeVerboseContent,omitempty"`
+	FieldLogLevel         *shared.FieldLogLevelEnum `json:"fieldLogLevel,omitempty"`
 }
 
 type CreateGraphqlAPIRequestBodyOpenIDConnectConfig struct {
-	AuthTTL  *int64  `json:"authTTL"`
-	ClientID *string `json:"clientId"`
-	IatTTL   *int64  `json:"iatTTL"`
-	Issuer   *string `json:"issuer"`
+	AuthTTL  *int64  `json:"authTTL,omitempty"`
+	ClientID *string `json:"clientId,omitempty"`
+	IatTTL   *int64  `json:"iatTTL,omitempty"`
+	Issuer   *string `json:"issuer,omitempty"`
 }
 
 type CreateGraphqlAPIRequestBodyUserPoolConfig struct {
-	AppIDClientRegex *string                   `json:"appIdClientRegex"`
-	AwsRegion        *string                   `json:"awsRegion"`
-	DefaultAction    *shared.DefaultActionEnum `json:"defaultAction"`
-	UserPoolID       *string                   `json:"userPoolId"`
+	AppIDClientRegex *string                   `json:"appIdClientRegex,omitempty"`
+	AwsRegion        *string                   `json:"awsRegion,omitempty"`
+	DefaultAction    *shared.DefaultActionEnum `json:"defaultAction,omitempty"`
+	UserPoolID       *string                   `json:"userPoolId,omitempty"`
 }
 
 type CreateGraphqlAPIRequestBody struct {
-	AdditionalAuthenticationProviders []shared.AdditionalAuthenticationProvider          `json:"additionalAuthenticationProviders"`
+	AdditionalAuthenticationProviders []shared.AdditionalAuthenticationProvider          `json:"additionalAuthenticationProviders,omitempty"`
 	AuthenticationType                CreateGraphqlAPIRequestBodyAuthenticationTypeEnum  `json:"authenticationType"`
-	LambdaAuthorizerConfig            *CreateGraphqlAPIRequestBodyLambdaAuthorizerConfig `json:"lambdaAuthorizerConfig"`
-	LogConfig                         *CreateGraphqlAPIRequestBodyLogConfig              `json:"logConfig"`
+	LambdaAuthorizerConfig            *CreateGraphqlAPIRequestBodyLambdaAuthorizerConfig `json:"lambdaAuthorizerConfig,omitempty"`
+	LogConfig                         *CreateGraphqlAPIRequestBodyLogConfig              `json:"logConfig,omitempty"`
 	Name                              string                                             `json:"name"`
-	OpenIDConnectConfig               *CreateGraphqlAPIRequestBodyOpenIDConnectConfig    `json:"openIDConnectConfig"`
-	Tags                              map[string]string                                  `json:"tags"`
-	UserPoolConfig                    *CreateGraphqlAPIRequestBodyUserPoolConfig         `json:"userPoolConfig"`
-	XrayEnabled                       *bool                                              `json:"xrayEnabled"`
+	OpenIDConnectConfig               *CreateGraphqlAPIRequestBodyOpenIDConnectConfig    `json:"openIDConnectConfig,omitempty"`
+	Tags                              map[string]string                                  `json:"tags,omitempty"`
+	UserPoolConfig                    *CreateGraphqlAPIRequestBodyUserPoolConfig         `json:"userPoolConfig,omitempty"`
+	XrayEnabled                       *bool                                              `json:"xrayEnabled,omitempty"`
 }
 
 type CreateGraphqlAPIRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type RejectedLogEventsInfo struct {
-	ExpiredLogEventEndIndex  *int64 `json:"expiredLogEventEndIndex"`
-	TooNewLogEventStartIndex *int64 `json:"tooNewLogEventStartIndex"`
-	TooOldLogEventEndIndex   *int64 `json:"tooOldLogEventEndIndex"`
+	ExpiredLogEventEndIndex  *int64 `json:"expiredLogEventEndIndex,omitempty"`
+	TooNewLogEventStartIndex *int64 `json:"tooNewLogEventStartIndex,omitempty"`
+	TooOldLogEventEndIndex   *int64 `json:"tooOldLogEventEndIndex,omitempty"`
 }

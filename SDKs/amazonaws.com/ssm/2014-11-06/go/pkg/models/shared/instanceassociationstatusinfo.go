@@ -5,16 +5,16 @@ import (
 )
 
 type InstanceAssociationStatusInfo struct {
-	AssociationID      *string                       `json:"AssociationId"`
-	AssociationName    *string                       `json:"AssociationName"`
-	AssociationVersion *string                       `json:"AssociationVersion"`
-	DetailedStatus     *string                       `json:"DetailedStatus"`
-	DocumentVersion    *string                       `json:"DocumentVersion"`
-	ErrorCode          *string                       `json:"ErrorCode"`
-	ExecutionDate      *time.Time                    `json:"ExecutionDate"`
-	ExecutionSummary   *string                       `json:"ExecutionSummary"`
-	InstanceID         *string                       `json:"InstanceId"`
-	Name               *string                       `json:"Name"`
-	OutputURL          *InstanceAssociationOutputURL `json:"OutputUrl"`
-	Status             *string                       `json:"Status"`
+	AssociationID      *string                       `json:"AssociationId,omitempty"`
+	AssociationName    *string                       `json:"AssociationName,omitempty"`
+	AssociationVersion *string                       `json:"AssociationVersion,omitempty"`
+	DetailedStatus     *string                       `json:"DetailedStatus,omitempty"`
+	DocumentVersion    *string                       `json:"DocumentVersion,omitempty"`
+	ErrorCode          *string                       `json:"ErrorCode,omitempty"`
+	ExecutionDate      *time.Time                    `json:"ExecutionDate,omitempty"`
+	ExecutionSummary   *string                       `json:"ExecutionSummary,omitempty"`
+	InstanceID         *string                       `json:"InstanceId,omitempty"`
+	Name               *string                       `json:"Name,omitempty"`
+	OutputURL          *InstanceAssociationOutputURL `json:"OutputUrl,omitempty"`
+	Status             *string                       `json:"Status,omitempty"`
 }

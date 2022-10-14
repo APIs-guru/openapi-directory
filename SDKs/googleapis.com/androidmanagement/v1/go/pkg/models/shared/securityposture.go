@@ -10,6 +10,6 @@ const (
 )
 
 type SecurityPosture struct {
-	DevicePosture  *SecurityPostureDevicePostureEnum `json:"devicePosture"`
-	PostureDetails []PostureDetail                   `json:"postureDetails"`
+	DevicePosture  *SecurityPostureDevicePostureEnum `json:"devicePosture,omitempty"`
+	PostureDetails []PostureDetail                   `json:"postureDetails,omitempty"`
 }

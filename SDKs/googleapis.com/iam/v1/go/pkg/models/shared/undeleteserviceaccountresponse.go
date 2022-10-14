@@ -1,5 +1,5 @@
 package shared
 
 type UndeleteServiceAccountResponse struct {
-	RestoredAccount *ServiceAccount `json:"restoredAccount"`
+	RestoredAccount *ServiceAccount `json:"restoredAccount,omitempty"`
 }

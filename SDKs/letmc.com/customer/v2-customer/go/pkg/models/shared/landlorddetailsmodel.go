@@ -1,11 +1,11 @@
 package shared
 
 type LandlordDetailsModel struct {
-	Address         *string `json:"Address"`
-	Email           *string `json:"Email"`
-	GlobalReference *string `json:"GlobalReference"`
-	ID              *string `json:"ID"`
-	Mobile          *string `json:"Mobile"`
-	Name            *string `json:"Name"`
-	Phone           *string `json:"Phone"`
+	Address         *string `json:"Address,omitempty"`
+	Email           *string `json:"Email,omitempty"`
+	GlobalReference *string `json:"GlobalReference,omitempty"`
+	ID              *string `json:"ID,omitempty"`
+	Mobile          *string `json:"Mobile,omitempty"`
+	Name            *string `json:"Name,omitempty"`
+	Phone           *string `json:"Phone,omitempty"`
 }

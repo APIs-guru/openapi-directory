@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleCloudWebriskV1SearchUrisResponseThreatURI struct {
-	ExpireTime  *string                                                          `json:"expireTime"`
-	ThreatTypes []GoogleCloudWebriskV1SearchUrisResponseThreatURIThreatTypesEnum `json:"threatTypes"`
+	ExpireTime  *string                                                          `json:"expireTime,omitempty"`
+	ThreatTypes []GoogleCloudWebriskV1SearchUrisResponseThreatURIThreatTypesEnum `json:"threatTypes,omitempty"`
 }

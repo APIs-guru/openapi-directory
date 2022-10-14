@@ -1,7 +1,7 @@
 package shared
 
 type ListGroupsResponse struct {
-	Groups        []Group  `json:"groups"`
-	NextPageToken *string  `json:"nextPageToken"`
-	Unreachable   []string `json:"unreachable"`
+	Groups        []Group  `json:"groups,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Unreachable   []string `json:"unreachable,omitempty"`
 }

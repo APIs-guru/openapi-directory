@@ -24,7 +24,7 @@ const (
 )
 
 type EnterpriseCrmFrontendsEventbusProtoParameterEntry struct {
-	DataType *EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum `json:"dataType"`
-	Key      *string                                                        `json:"key"`
-	Value    *EnterpriseCrmFrontendsEventbusProtoParameterValueType         `json:"value"`
+	DataType *EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum `json:"dataType,omitempty"`
+	Key      *string                                                        `json:"key,omitempty"`
+	Value    *EnterpriseCrmFrontendsEventbusProtoParameterValueType         `json:"value,omitempty"`
 }

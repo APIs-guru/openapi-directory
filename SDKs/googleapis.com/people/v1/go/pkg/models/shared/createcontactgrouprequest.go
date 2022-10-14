@@ -1,6 +1,6 @@
 package shared
 
 type CreateContactGroupRequest struct {
-	ContactGroup    *ContactGroup `json:"contactGroup"`
-	ReadGroupFields *string       `json:"readGroupFields"`
+	ContactGroup    *ContactGroup `json:"contactGroup,omitempty"`
+	ReadGroupFields *string       `json:"readGroupFields,omitempty"`
 }

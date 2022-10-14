@@ -10,12 +10,12 @@ const (
 )
 
 type CustomBiddingScript struct {
-	Active                   *bool                         `json:"active"`
-	CreateTime               *string                       `json:"createTime"`
-	CustomBiddingAlgorithmID *string                       `json:"customBiddingAlgorithmId"`
-	CustomBiddingScriptID    *string                       `json:"customBiddingScriptId"`
-	Errors                   []ScriptError                 `json:"errors"`
-	Name                     *string                       `json:"name"`
-	Script                   *CustomBiddingScriptRef       `json:"script"`
-	State                    *CustomBiddingScriptStateEnum `json:"state"`
+	Active                   *bool                         `json:"active,omitempty"`
+	CreateTime               *string                       `json:"createTime,omitempty"`
+	CustomBiddingAlgorithmID *string                       `json:"customBiddingAlgorithmId,omitempty"`
+	CustomBiddingScriptID    *string                       `json:"customBiddingScriptId,omitempty"`
+	Errors                   []ScriptError                 `json:"errors,omitempty"`
+	Name                     *string                       `json:"name,omitempty"`
+	Script                   *CustomBiddingScriptRef       `json:"script,omitempty"`
+	State                    *CustomBiddingScriptStateEnum `json:"state,omitempty"`
 }

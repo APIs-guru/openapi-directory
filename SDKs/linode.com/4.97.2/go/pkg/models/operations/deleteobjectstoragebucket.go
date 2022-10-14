@@ -33,7 +33,7 @@ type DeleteObjectStorageBucketRequest struct {
 }
 
 type DeleteObjectStorageBucketDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteObjectStorageBucketResponse struct {

@@ -18,11 +18,11 @@ const (
 )
 
 type Onev21registry1Percent7BregistryNamePercent7D1garbageCollectionPostResponses201ContentApplication1jsonSchemaPropertiesGarbageCollection struct {
-	BlobsDeleted *int64                                                                                                                                             `json:"blobs_deleted"`
-	CreatedAt    *time.Time                                                                                                                                         `json:"created_at"`
-	FreedBytes   *int64                                                                                                                                             `json:"freed_bytes"`
-	RegistryName *string                                                                                                                                            `json:"registry_name"`
-	Status       *Onev21registry1Percent7BregistryNamePercent7D1garbageCollectionPostResponses201ContentApplication1jsonSchemaPropertiesGarbageCollectionStatusEnum `json:"status"`
-	UpdatedAt    *time.Time                                                                                                                                         `json:"updated_at"`
-	UUID         *string                                                                                                                                            `json:"uuid"`
+	BlobsDeleted *int64                                                                                                                                             `json:"blobs_deleted,omitempty"`
+	CreatedAt    *time.Time                                                                                                                                         `json:"created_at,omitempty"`
+	FreedBytes   *int64                                                                                                                                             `json:"freed_bytes,omitempty"`
+	RegistryName *string                                                                                                                                            `json:"registry_name,omitempty"`
+	Status       *Onev21registry1Percent7BregistryNamePercent7D1garbageCollectionPostResponses201ContentApplication1jsonSchemaPropertiesGarbageCollectionStatusEnum `json:"status,omitempty"`
+	UpdatedAt    *time.Time                                                                                                                                         `json:"updated_at,omitempty"`
+	UUID         *string                                                                                                                                            `json:"uuid,omitempty"`
 }

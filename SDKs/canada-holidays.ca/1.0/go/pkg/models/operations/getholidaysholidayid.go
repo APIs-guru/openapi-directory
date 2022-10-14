@@ -18,11 +18,11 @@ type GetHolidaysHolidayIDRequest struct {
 }
 
 type GetHolidaysHolidayID200ApplicationJSON struct {
-	Holiday *shared.Holiday `json:"holiday"`
+	Holiday *shared.Holiday `json:"holiday,omitempty"`
 }
 
 type GetHolidaysHolidayID404ApplicationJSON struct {
-	Error *shared.Error `json:"error"`
+	Error *shared.Error `json:"error,omitempty"`
 }
 
 type GetHolidaysHolidayIDResponse struct {

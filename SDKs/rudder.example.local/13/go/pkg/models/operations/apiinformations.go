@@ -19,8 +19,8 @@ const (
 )
 
 type APIInformations200ApplicationJSONDataEndpoints struct {
-	HTTPVerb *interface{}       `json:"httpVerb"`
-	Version  *shared.APIVersion `json:"version"`
+	HTTPVerb *interface{}       `json:"httpVerb,omitempty"`
+	Version  *shared.APIVersion `json:"version,omitempty"`
 }
 
 type APIInformations200ApplicationJSONData struct {

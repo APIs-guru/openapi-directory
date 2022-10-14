@@ -7,6 +7,6 @@ const (
 )
 
 type AwsAccessKeysResponse struct {
-	AccessKeyID        *string                                      `json:"accessKeyId"`
-	AuthenticationMode *AwsAccessKeysResponseAuthenticationModeEnum `json:"authenticationMode"`
+	AccessKeyID        *string                                      `json:"accessKeyId,omitempty"`
+	AuthenticationMode *AwsAccessKeysResponseAuthenticationModeEnum `json:"authenticationMode,omitempty"`
 }

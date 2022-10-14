@@ -20,12 +20,12 @@ const (
 )
 
 type DeletionResponse struct {
-	DeletedObjectID *string                                          `json:"deletedObjectId"`
-	ID              *string                                          `json:"id"`
-	Message         *string                                          `json:"message"`
-	Object          *string                                          `json:"object"`
-	OrganizationID  *string                                          `json:"organizationId"`
-	Progress        *float64                                         `json:"progress"`
-	Status          *DeletionResponseStatusStatusOfTheDeletionEnum   `json:"status"`
-	Type            *DeletionResponseTypeObjectThatSBeingDeletedEnum `json:"type"`
+	DeletedObjectID *string                                          `json:"deletedObjectId,omitempty"`
+	ID              *string                                          `json:"id,omitempty"`
+	Message         *string                                          `json:"message,omitempty"`
+	Object          *string                                          `json:"object,omitempty"`
+	OrganizationID  *string                                          `json:"organizationId,omitempty"`
+	Progress        *float64                                         `json:"progress,omitempty"`
+	Status          *DeletionResponseStatusStatusOfTheDeletionEnum   `json:"status,omitempty"`
+	Type            *DeletionResponseTypeObjectThatSBeingDeletedEnum `json:"type,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type CreateEntityRecognizerRequest struct {
-	ClientRequestToken *string                         `json:"ClientRequestToken"`
+	ClientRequestToken *string                         `json:"ClientRequestToken,omitempty"`
 	DataAccessRoleArn  string                          `json:"DataAccessRoleArn"`
 	InputDataConfig    EntityRecognizerInputDataConfig `json:"InputDataConfig"`
 	LanguageCode       LanguageCodeEnum                `json:"LanguageCode"`
-	ModelKmsKeyID      *string                         `json:"ModelKmsKeyId"`
+	ModelKmsKeyID      *string                         `json:"ModelKmsKeyId,omitempty"`
 	RecognizerName     string                          `json:"RecognizerName"`
-	Tags               []Tag                           `json:"Tags"`
-	VolumeKmsKeyID     *string                         `json:"VolumeKmsKeyId"`
-	VpcConfig          *VpcConfig                      `json:"VpcConfig"`
+	Tags               []Tag                           `json:"Tags,omitempty"`
+	VolumeKmsKeyID     *string                         `json:"VolumeKmsKeyId,omitempty"`
+	VpcConfig          *VpcConfig                      `json:"VpcConfig,omitempty"`
 }

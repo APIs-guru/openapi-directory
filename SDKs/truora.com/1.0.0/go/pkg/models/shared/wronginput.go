@@ -7,5 +7,5 @@ const (
 )
 
 type WrongInput struct {
-	Input *WrongInputInputEnum `json:"Input"`
+	Input *WrongInputInputEnum `json:"Input,omitempty"`
 }

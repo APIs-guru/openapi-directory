@@ -1,6 +1,6 @@
 package shared
 
 type ColumnStatisticsError struct {
-	ColumnStatistics *ColumnStatistics `json:"ColumnStatistics"`
-	Error            *ErrorDetail      `json:"Error"`
+	ColumnStatistics *ColumnStatistics `json:"ColumnStatistics,omitempty"`
+	Error            *ErrorDetail      `json:"Error,omitempty"`
 }

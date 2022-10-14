@@ -1,8 +1,8 @@
 package shared
 
 type CommitTransactionResult struct {
-	CommitDigest      *string            `json:"CommitDigest"`
-	ConsumedIOs       *IoUsage           `json:"ConsumedIOs"`
-	TimingInformation *TimingInformation `json:"TimingInformation"`
-	TransactionID     *string            `json:"TransactionId"`
+	CommitDigest      *string            `json:"CommitDigest,omitempty"`
+	ConsumedIOs       *IoUsage           `json:"ConsumedIOs,omitempty"`
+	TimingInformation *TimingInformation `json:"TimingInformation,omitempty"`
+	TransactionID     *string            `json:"TransactionId,omitempty"`
 }

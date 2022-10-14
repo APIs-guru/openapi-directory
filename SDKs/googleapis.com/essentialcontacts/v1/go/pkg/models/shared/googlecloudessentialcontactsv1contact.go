@@ -23,10 +23,10 @@ const (
 )
 
 type GoogleCloudEssentialcontactsV1Contact struct {
-	Email                             *string                                                                      `json:"email"`
-	LanguageTag                       *string                                                                      `json:"languageTag"`
-	Name                              *string                                                                      `json:"name"`
-	NotificationCategorySubscriptions []GoogleCloudEssentialcontactsV1ContactNotificationCategorySubscriptionsEnum `json:"notificationCategorySubscriptions"`
-	ValidateTime                      *string                                                                      `json:"validateTime"`
-	ValidationState                   *GoogleCloudEssentialcontactsV1ContactValidationStateEnum                    `json:"validationState"`
+	Email                             *string                                                                      `json:"email,omitempty"`
+	LanguageTag                       *string                                                                      `json:"languageTag,omitempty"`
+	Name                              *string                                                                      `json:"name,omitempty"`
+	NotificationCategorySubscriptions []GoogleCloudEssentialcontactsV1ContactNotificationCategorySubscriptionsEnum `json:"notificationCategorySubscriptions,omitempty"`
+	ValidateTime                      *string                                                                      `json:"validateTime,omitempty"`
+	ValidationState                   *GoogleCloudEssentialcontactsV1ContactValidationStateEnum                    `json:"validationState,omitempty"`
 }

@@ -5,25 +5,25 @@ import (
 )
 
 type ProductResponse struct {
-	Categories               []string                  `json:"categories"`
-	Category                 *CategoryDto              `json:"category"`
+	Categories               []string                  `json:"categories,omitempty"`
+	Category                 *CategoryDto              `json:"category,omitempty"`
 	Created                  time.Time                 `json:"created"`
-	Description              *string                   `json:"description"`
+	Description              *string                   `json:"description,omitempty"`
 	Etag                     string                    `json:"etag"`
-	ExternalReference        *string                   `json:"externalReference"`
-	ImageLookupKeys          []string                  `json:"imageLookupKeys"`
-	Metadata                 *MetadataDto              `json:"metadata"`
+	ExternalReference        *string                   `json:"externalReference,omitempty"`
+	ImageLookupKeys          []string                  `json:"imageLookupKeys,omitempty"`
+	Metadata                 *MetadataDto              `json:"metadata,omitempty"`
 	Name                     string                    `json:"name"`
-	Online                   *OnlineProperties         `json:"online"`
-	Presentation             *PresentationDto          `json:"presentation"`
-	TaxCode                  *string                   `json:"taxCode"`
-	TaxExempt                *bool                     `json:"taxExempt"`
-	TaxRates                 []string                  `json:"taxRates"`
-	UnitName                 *string                   `json:"unitName"`
+	Online                   *OnlineProperties         `json:"online,omitempty"`
+	Presentation             *PresentationDto          `json:"presentation,omitempty"`
+	TaxCode                  *string                   `json:"taxCode,omitempty"`
+	TaxExempt                *bool                     `json:"taxExempt,omitempty"`
+	TaxRates                 []string                  `json:"taxRates,omitempty"`
+	UnitName                 *string                   `json:"unitName,omitempty"`
 	Updated                  time.Time                 `json:"updated"`
-	UpdatedBy                *string                   `json:"updatedBy"`
+	UpdatedBy                *string                   `json:"updatedBy,omitempty"`
 	UUID                     string                    `json:"uuid"`
-	VariantOptionDefinitions *VariantOptionDefinitions `json:"variantOptionDefinitions"`
+	VariantOptionDefinitions *VariantOptionDefinitions `json:"variantOptionDefinitions,omitempty"`
 	Variants                 []VariantDto              `json:"variants"`
-	VatPercentage            *float64                  `json:"vatPercentage"`
+	VatPercentage            *float64                  `json:"vatPercentage,omitempty"`
 }

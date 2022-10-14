@@ -1,10 +1,10 @@
 package shared
 
 type GetCostEstimationResponse struct {
-	Costs              []ServiceResourceCost                   `json:"Costs"`
-	NextToken          *string                                 `json:"NextToken"`
-	ResourceCollection *CostEstimationResourceCollectionFilter `json:"ResourceCollection"`
-	Status             *CostEstimationStatusEnum               `json:"Status"`
-	TimeRange          *CostEstimationTimeRange                `json:"TimeRange"`
-	TotalCost          *float64                                `json:"TotalCost"`
+	Costs              []ServiceResourceCost                   `json:"Costs,omitempty"`
+	NextToken          *string                                 `json:"NextToken,omitempty"`
+	ResourceCollection *CostEstimationResourceCollectionFilter `json:"ResourceCollection,omitempty"`
+	Status             *CostEstimationStatusEnum               `json:"Status,omitempty"`
+	TimeRange          *CostEstimationTimeRange                `json:"TimeRange,omitempty"`
+	TotalCost          *float64                                `json:"TotalCost,omitempty"`
 }

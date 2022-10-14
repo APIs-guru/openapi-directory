@@ -1,7 +1,7 @@
 package shared
 
 type CreativeDealAssociation struct {
-	AccountID  *string `json:"accountId"`
-	CreativeID *string `json:"creativeId"`
-	DealsID    *string `json:"dealsId"`
+	AccountID  *string `json:"accountId,omitempty"`
+	CreativeID *string `json:"creativeId,omitempty"`
+	DealsID    *string `json:"dealsId,omitempty"`
 }

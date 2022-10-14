@@ -10,22 +10,22 @@ type GetglobaltimeRequest struct {
 }
 
 type Getglobaltime200ApplicationJSON struct {
-	ClockTime   *string `json:"ClockTime"`
-	Code        *string `json:"Code"`
-	Credits     *string `json:"Credits"`
-	CurrentDate *string `json:"CurrentDate"`
-	CurrentTime *string `json:"CurrentTime"`
-	Day         *string `json:"Day"`
-	Hour        *string `json:"Hour"`
-	Locale      *string `json:"Locale"`
-	Minute      *string `json:"Minute"`
-	Month       *string `json:"Month"`
-	MonthNumber *string `json:"MonthNumber"`
-	Second      *string `json:"Second"`
-	TimeStamp   *string `json:"TimeStamp"`
-	Weekday     *string `json:"Weekday"`
-	Year        *string `json:"Year"`
-	Zone        *string `json:"Zone"`
+	ClockTime   *string `json:"ClockTime,omitempty"`
+	Code        *string `json:"Code,omitempty"`
+	Credits     *string `json:"Credits,omitempty"`
+	CurrentDate *string `json:"CurrentDate,omitempty"`
+	CurrentTime *string `json:"CurrentTime,omitempty"`
+	Day         *string `json:"Day,omitempty"`
+	Hour        *string `json:"Hour,omitempty"`
+	Locale      *string `json:"Locale,omitempty"`
+	Minute      *string `json:"Minute,omitempty"`
+	Month       *string `json:"Month,omitempty"`
+	MonthNumber *string `json:"MonthNumber,omitempty"`
+	Second      *string `json:"Second,omitempty"`
+	TimeStamp   *string `json:"TimeStamp,omitempty"`
+	Weekday     *string `json:"Weekday,omitempty"`
+	Year        *string `json:"Year,omitempty"`
+	Zone        *string `json:"Zone,omitempty"`
 }
 
 type GetglobaltimeResponse struct {

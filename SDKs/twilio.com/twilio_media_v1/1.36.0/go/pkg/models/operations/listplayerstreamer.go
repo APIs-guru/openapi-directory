@@ -25,18 +25,18 @@ type ListPlayerStreamerRequest struct {
 }
 
 type ListPlayerStreamer200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListPlayerStreamer200ApplicationJSONListPlayerStreamerResponse struct {
-	Meta            *ListPlayerStreamer200ApplicationJSONMeta `json:"meta"`
-	PlayerStreamers []shared.MediaV1PlayerStreamer            `json:"player_streamers"`
+	Meta            *ListPlayerStreamer200ApplicationJSONMeta `json:"meta,omitempty"`
+	PlayerStreamers []shared.MediaV1PlayerStreamer            `json:"player_streamers,omitempty"`
 }
 
 type ListPlayerStreamerResponse struct {

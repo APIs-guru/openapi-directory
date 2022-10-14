@@ -11,8 +11,8 @@ const (
 )
 
 type PubsubConfig struct {
-	ServiceAccountEmail *string                `json:"serviceAccountEmail"`
-	State               *PubsubConfigStateEnum `json:"state"`
-	Subscription        *string                `json:"subscription"`
-	Topic               *string                `json:"topic"`
+	ServiceAccountEmail *string                `json:"serviceAccountEmail,omitempty"`
+	State               *PubsubConfigStateEnum `json:"state,omitempty"`
+	Subscription        *string                `json:"subscription,omitempty"`
+	Topic               *string                `json:"topic,omitempty"`
 }

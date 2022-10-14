@@ -1,10 +1,10 @@
 package shared
 
 type SettlementTransactionIdentifiers struct {
-	AdjustmentID      *string  `json:"adjustmentId"`
-	MerchantOrderID   *string  `json:"merchantOrderId"`
-	OrderItemID       *string  `json:"orderItemId"`
-	SettlementEntryID *string  `json:"settlementEntryId"`
-	ShipmentIds       []string `json:"shipmentIds"`
-	TransactionID     *string  `json:"transactionId"`
+	AdjustmentID      *string  `json:"adjustmentId,omitempty"`
+	MerchantOrderID   *string  `json:"merchantOrderId,omitempty"`
+	OrderItemID       *string  `json:"orderItemId,omitempty"`
+	SettlementEntryID *string  `json:"settlementEntryId,omitempty"`
+	ShipmentIds       []string `json:"shipmentIds,omitempty"`
+	TransactionID     *string  `json:"transactionId,omitempty"`
 }

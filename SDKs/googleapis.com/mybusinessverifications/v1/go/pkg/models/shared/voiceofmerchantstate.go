@@ -1,10 +1,10 @@
 package shared
 
 type VoiceOfMerchantState struct {
-	ComplyWithGuidelines     *ComplyWithGuidelines  `json:"complyWithGuidelines"`
-	HasBusinessAuthority     *bool                  `json:"hasBusinessAuthority"`
-	HasVoiceOfMerchant       *bool                  `json:"hasVoiceOfMerchant"`
-	ResolveOwnershipConflict map[string]interface{} `json:"resolveOwnershipConflict"`
-	Verify                   *Verify                `json:"verify"`
-	WaitForVoiceOfMerchant   map[string]interface{} `json:"waitForVoiceOfMerchant"`
+	ComplyWithGuidelines     *ComplyWithGuidelines  `json:"complyWithGuidelines,omitempty"`
+	HasBusinessAuthority     *bool                  `json:"hasBusinessAuthority,omitempty"`
+	HasVoiceOfMerchant       *bool                  `json:"hasVoiceOfMerchant,omitempty"`
+	ResolveOwnershipConflict map[string]interface{} `json:"resolveOwnershipConflict,omitempty"`
+	Verify                   *Verify                `json:"verify,omitempty"`
+	WaitForVoiceOfMerchant   map[string]interface{} `json:"waitForVoiceOfMerchant,omitempty"`
 }

@@ -38,7 +38,7 @@ type GetIsos200ApplicationJSONMeta struct {
 
 type GetIsos200ApplicationJSON struct {
 	Isos []GetIsos200ApplicationJSONIsos `json:"isos"`
-	Meta *GetIsos200ApplicationJSONMeta  `json:"meta"`
+	Meta *GetIsos200ApplicationJSONMeta  `json:"meta,omitempty"`
 }
 
 type GetIsosResponse struct {

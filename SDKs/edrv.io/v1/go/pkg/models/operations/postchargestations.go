@@ -9,9 +9,9 @@ type PostChargeStationsRequest struct {
 }
 
 type PostChargeStations201ApplicationJSON struct {
-	Chargestation map[string]interface{} `json:"chargestation"`
-	Message       *string                `json:"message"`
-	Ok            *bool                  `json:"ok"`
+	Chargestation map[string]interface{} `json:"chargestation,omitempty"`
+	Message       *string                `json:"message,omitempty"`
+	Ok            *bool                  `json:"ok,omitempty"`
 }
 
 type PostChargeStationsResponse struct {

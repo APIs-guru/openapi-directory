@@ -1,8 +1,8 @@
 package shared
 
 type V1SettlementEntry struct {
-	AmountMoney *V1Money `json:"amount_money"`
-	FeeMoney    *V1Money `json:"fee_money"`
-	PaymentID   *string  `json:"payment_id"`
-	Type        *string  `json:"type"`
+	AmountMoney *V1Money `json:"amount_money,omitempty"`
+	FeeMoney    *V1Money `json:"fee_money,omitempty"`
+	PaymentID   *string  `json:"payment_id,omitempty"`
+	Type        *string  `json:"type,omitempty"`
 }

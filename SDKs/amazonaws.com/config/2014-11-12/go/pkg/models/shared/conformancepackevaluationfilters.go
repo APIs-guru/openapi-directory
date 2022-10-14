@@ -1,8 +1,8 @@
 package shared
 
 type ConformancePackEvaluationFilters struct {
-	ComplianceType  *ConformancePackComplianceTypeEnum `json:"ComplianceType"`
-	ConfigRuleNames []string                           `json:"ConfigRuleNames"`
-	ResourceIds     []string                           `json:"ResourceIds"`
-	ResourceType    *string                            `json:"ResourceType"`
+	ComplianceType  *ConformancePackComplianceTypeEnum `json:"ComplianceType,omitempty"`
+	ConfigRuleNames []string                           `json:"ConfigRuleNames,omitempty"`
+	ResourceIds     []string                           `json:"ResourceIds,omitempty"`
+	ResourceType    *string                            `json:"ResourceType,omitempty"`
 }

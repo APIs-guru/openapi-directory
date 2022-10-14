@@ -13,8 +13,8 @@ const (
 )
 
 type GoogleCloudDocumentaiV1beta2DocumentProvenance struct {
-	ID       *int32                                                  `json:"id"`
-	Parents  []GoogleCloudDocumentaiV1beta2DocumentProvenanceParent  `json:"parents"`
-	Revision *int32                                                  `json:"revision"`
-	Type     *GoogleCloudDocumentaiV1beta2DocumentProvenanceTypeEnum `json:"type"`
+	ID       *int32                                                  `json:"id,omitempty"`
+	Parents  []GoogleCloudDocumentaiV1beta2DocumentProvenanceParent  `json:"parents,omitempty"`
+	Revision *int32                                                  `json:"revision,omitempty"`
+	Type     *GoogleCloudDocumentaiV1beta2DocumentProvenanceTypeEnum `json:"type,omitempty"`
 }

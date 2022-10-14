@@ -2,8 +2,8 @@ package shared
 
 type GetEmployeesResponse struct {
 	Data       []Employee `json:"data"`
-	Links      *Links     `json:"links"`
-	Meta       *Meta      `json:"meta"`
+	Links      *Links     `json:"links,omitempty"`
+	Meta       *Meta      `json:"meta,omitempty"`
 	Operation  string     `json:"operation"`
 	Resource   string     `json:"resource"`
 	Service    string     `json:"service"`

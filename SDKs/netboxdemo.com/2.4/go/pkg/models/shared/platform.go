@@ -9,11 +9,11 @@ const (
 )
 
 type Platform struct {
-	ID           *int64                                `json:"id"`
-	Manufacturer *NestedManufacturer                   `json:"manufacturer"`
+	ID           *int64                                `json:"id,omitempty"`
+	Manufacturer *NestedManufacturer                   `json:"manufacturer,omitempty"`
 	Name         string                                `json:"name"`
-	NapalmArgs   *string                               `json:"napalm_args"`
-	NapalmDriver *string                               `json:"napalm_driver"`
-	RPCClient    *PlatformRPCClientLegacyRPCClientEnum `json:"rpc_client"`
+	NapalmArgs   *string                               `json:"napalm_args,omitempty"`
+	NapalmDriver *string                               `json:"napalm_driver,omitempty"`
+	RPCClient    *PlatformRPCClientLegacyRPCClientEnum `json:"rpc_client,omitempty"`
 	Slug         string                                `json:"slug"`
 }

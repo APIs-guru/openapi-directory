@@ -23,12 +23,12 @@ type CreatePayPalPaymentRequest struct {
 }
 
 type CreatePayPalPayment200ApplicationJSON struct {
-	CheckoutToken *string `json:"checkout_token"`
-	PaymentID     *string `json:"payment_id"`
+	CheckoutToken *string `json:"checkout_token,omitempty"`
+	PaymentID     *string `json:"payment_id,omitempty"`
 }
 
 type CreatePayPalPaymentDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreatePayPalPaymentResponse struct {

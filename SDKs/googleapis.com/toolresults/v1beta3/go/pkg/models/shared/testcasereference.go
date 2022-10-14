@@ -1,7 +1,7 @@
 package shared
 
 type TestCaseReference struct {
-	ClassName     *string `json:"className"`
-	Name          *string `json:"name"`
-	TestSuiteName *string `json:"testSuiteName"`
+	ClassName     *string `json:"className,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	TestSuiteName *string `json:"testSuiteName,omitempty"`
 }

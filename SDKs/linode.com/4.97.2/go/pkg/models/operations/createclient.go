@@ -13,13 +13,13 @@ const (
 )
 
 type CreateClientRequestBody struct {
-	ID           *string                            `json:"id"`
+	ID           *string                            `json:"id,omitempty"`
 	Label        string                             `json:"label"`
-	Public       *bool                              `json:"public"`
+	Public       *bool                              `json:"public,omitempty"`
 	RedirectURI  string                             `json:"redirect_uri"`
-	Secret       *string                            `json:"secret"`
-	Status       *CreateClientRequestBodyStatusEnum `json:"status"`
-	ThumbnailURL *string                            `json:"thumbnail_url"`
+	Secret       *string                            `json:"secret,omitempty"`
+	Status       *CreateClientRequestBodyStatusEnum `json:"status,omitempty"`
+	ThumbnailURL *string                            `json:"thumbnail_url,omitempty"`
 }
 
 type CreateClientSecurityOption1 struct {
@@ -41,7 +41,7 @@ type CreateClientRequest struct {
 }
 
 type CreateClientDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateClientResponse struct {

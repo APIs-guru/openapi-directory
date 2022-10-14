@@ -8,6 +8,6 @@ const (
 )
 
 type BasicLevel struct {
-	CombiningFunction *BasicLevelCombiningFunctionEnum `json:"combiningFunction"`
-	Conditions        []Condition                      `json:"conditions"`
+	CombiningFunction *BasicLevelCombiningFunctionEnum `json:"combiningFunction,omitempty"`
+	Conditions        []Condition                      `json:"conditions,omitempty"`
 }

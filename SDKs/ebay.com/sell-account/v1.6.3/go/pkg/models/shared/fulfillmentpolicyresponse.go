@@ -1,11 +1,11 @@
 package shared
 
 type FulfillmentPolicyResponse struct {
-	FulfillmentPolicies []FulfillmentPolicy `json:"fulfillmentPolicies"`
-	Href                *string             `json:"href"`
-	Limit               *int32              `json:"limit"`
-	Next                *string             `json:"next"`
-	Offset              *int32              `json:"offset"`
-	Prev                *string             `json:"prev"`
-	Total               *int32              `json:"total"`
+	FulfillmentPolicies []FulfillmentPolicy `json:"fulfillmentPolicies,omitempty"`
+	Href                *string             `json:"href,omitempty"`
+	Limit               *int32              `json:"limit,omitempty"`
+	Next                *string             `json:"next,omitempty"`
+	Offset              *int32              `json:"offset,omitempty"`
+	Prev                *string             `json:"prev,omitempty"`
+	Total               *int32              `json:"total,omitempty"`
 }

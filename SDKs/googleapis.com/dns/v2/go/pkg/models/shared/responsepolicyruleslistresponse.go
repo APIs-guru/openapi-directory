@@ -1,7 +1,7 @@
 package shared
 
 type ResponsePolicyRulesListResponse struct {
-	Header              *ResponseHeader      `json:"header"`
-	NextPageToken       *string              `json:"nextPageToken"`
-	ResponsePolicyRules []ResponsePolicyRule `json:"responsePolicyRules"`
+	Header              *ResponseHeader      `json:"header,omitempty"`
+	NextPageToken       *string              `json:"nextPageToken,omitempty"`
+	ResponsePolicyRules []ResponsePolicyRule `json:"responsePolicyRules,omitempty"`
 }

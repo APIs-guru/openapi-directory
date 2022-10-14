@@ -3,7 +3,7 @@ package operations
 type PostAssetsCorrelationMatrixNearestRequestBody struct {
 	Assets                             int64       `json:"assets"`
 	AssetsApproximateCorrelationMatrix [][]float64 `json:"assetsApproximateCorrelationMatrix"`
-	AssetsFixedCorrelations            [][]int64   `json:"assetsFixedCorrelations"`
+	AssetsFixedCorrelations            [][]int64   `json:"assetsFixedCorrelations,omitempty"`
 }
 
 type PostAssetsCorrelationMatrixNearestRequest struct {

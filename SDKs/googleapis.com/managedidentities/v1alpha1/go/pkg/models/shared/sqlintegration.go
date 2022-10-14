@@ -10,9 +10,9 @@ const (
 )
 
 type SQLIntegration struct {
-	CreateTime  *string                  `json:"createTime"`
-	Name        *string                  `json:"name"`
-	SQLInstance *string                  `json:"sqlInstance"`
-	State       *SQLIntegrationStateEnum `json:"state"`
-	UpdateTime  *string                  `json:"updateTime"`
+	CreateTime  *string                  `json:"createTime,omitempty"`
+	Name        *string                  `json:"name,omitempty"`
+	SQLInstance *string                  `json:"sqlInstance,omitempty"`
+	State       *SQLIntegrationStateEnum `json:"state,omitempty"`
+	UpdateTime  *string                  `json:"updateTime,omitempty"`
 }

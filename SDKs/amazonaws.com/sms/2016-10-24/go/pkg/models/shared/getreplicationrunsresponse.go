@@ -1,7 +1,7 @@
 package shared
 
 type GetReplicationRunsResponse struct {
-	NextToken          *string          `json:"nextToken"`
-	ReplicationJob     *ReplicationJob  `json:"replicationJob"`
-	ReplicationRunList []ReplicationRun `json:"replicationRunList"`
+	NextToken          *string          `json:"nextToken,omitempty"`
+	ReplicationJob     *ReplicationJob  `json:"replicationJob,omitempty"`
+	ReplicationRunList []ReplicationRun `json:"replicationRunList,omitempty"`
 }

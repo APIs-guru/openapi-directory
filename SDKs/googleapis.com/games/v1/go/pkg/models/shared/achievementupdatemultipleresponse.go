@@ -1,6 +1,6 @@
 package shared
 
 type AchievementUpdateMultipleResponse struct {
-	Kind                *string                     `json:"kind"`
-	UpdatedAchievements []AchievementUpdateResponse `json:"updatedAchievements"`
+	Kind                *string                     `json:"kind,omitempty"`
+	UpdatedAchievements []AchievementUpdateResponse `json:"updatedAchievements,omitempty"`
 }

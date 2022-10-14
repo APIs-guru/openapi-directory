@@ -1,8 +1,8 @@
 package shared
 
 type FirstLastNameGenderIn struct {
-	FirstName *string `json:"firstName"`
-	Gender    *string `json:"gender"`
-	ID        *string `json:"id"`
-	LastName  *string `json:"lastName"`
+	FirstName *string `json:"firstName,omitempty"`
+	Gender    *string `json:"gender,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	LastName  *string `json:"lastName,omitempty"`
 }

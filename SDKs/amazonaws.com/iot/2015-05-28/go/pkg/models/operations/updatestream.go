@@ -19,9 +19,9 @@ type UpdateStreamHeaders struct {
 }
 
 type UpdateStreamRequestBody struct {
-	Description *string             `json:"description"`
-	Files       []shared.StreamFile `json:"files"`
-	RoleArn     *string             `json:"roleArn"`
+	Description *string             `json:"description,omitempty"`
+	Files       []shared.StreamFile `json:"files,omitempty"`
+	RoleArn     *string             `json:"roleArn,omitempty"`
 }
 
 type UpdateStreamRequest struct {

@@ -5,8 +5,8 @@ import (
 )
 
 type DirectoryConfig struct {
-	CreatedTime                          *time.Time                 `json:"CreatedTime"`
+	CreatedTime                          *time.Time                 `json:"CreatedTime,omitempty"`
 	DirectoryName                        string                     `json:"DirectoryName"`
-	OrganizationalUnitDistinguishedNames []string                   `json:"OrganizationalUnitDistinguishedNames"`
-	ServiceAccountCredentials            *ServiceAccountCredentials `json:"ServiceAccountCredentials"`
+	OrganizationalUnitDistinguishedNames []string                   `json:"OrganizationalUnitDistinguishedNames,omitempty"`
+	ServiceAccountCredentials            *ServiceAccountCredentials `json:"ServiceAccountCredentials,omitempty"`
 }

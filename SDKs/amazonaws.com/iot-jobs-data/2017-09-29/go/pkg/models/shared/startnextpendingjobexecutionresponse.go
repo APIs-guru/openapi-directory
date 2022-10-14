@@ -1,5 +1,5 @@
 package shared
 
 type StartNextPendingJobExecutionResponse struct {
-	Execution *JobExecution `json:"execution"`
+	Execution *JobExecution `json:"execution,omitempty"`
 }

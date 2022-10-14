@@ -1,6 +1,6 @@
 package shared
 
 type AvailableUpdates struct {
-	InPlaceUpdate          *ApplianceVersion `json:"inPlaceUpdate"`
-	NewDeployableAppliance *ApplianceVersion `json:"newDeployableAppliance"`
+	InPlaceUpdate          *ApplianceVersion `json:"inPlaceUpdate,omitempty"`
+	NewDeployableAppliance *ApplianceVersion `json:"newDeployableAppliance,omitempty"`
 }

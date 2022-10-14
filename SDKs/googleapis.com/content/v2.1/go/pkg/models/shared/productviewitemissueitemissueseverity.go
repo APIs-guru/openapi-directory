@@ -10,6 +10,6 @@ const (
 )
 
 type ProductViewItemIssueItemIssueSeverity struct {
-	AggregatedSeverity     *ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnum `json:"aggregatedSeverity"`
-	SeverityPerDestination []ProductViewItemIssueIssueSeverityPerDestination            `json:"severityPerDestination"`
+	AggregatedSeverity     *ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnum `json:"aggregatedSeverity,omitempty"`
+	SeverityPerDestination []ProductViewItemIssueIssueSeverityPerDestination            `json:"severityPerDestination,omitempty"`
 }

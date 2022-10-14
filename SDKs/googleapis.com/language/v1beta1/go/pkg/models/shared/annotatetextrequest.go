@@ -10,7 +10,7 @@ const (
 )
 
 type AnnotateTextRequest struct {
-	Document     *Document                            `json:"document"`
-	EncodingType *AnnotateTextRequestEncodingTypeEnum `json:"encodingType"`
-	Features     *Features                            `json:"features"`
+	Document     *Document                            `json:"document,omitempty"`
+	EncodingType *AnnotateTextRequestEncodingTypeEnum `json:"encodingType,omitempty"`
+	Features     *Features                            `json:"features,omitempty"`
 }

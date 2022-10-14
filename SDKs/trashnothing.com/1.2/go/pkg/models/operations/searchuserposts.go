@@ -51,14 +51,14 @@ type SearchUserPostsRequest struct {
 }
 
 type SearchUserPosts200ApplicationJSON struct {
-	EndIndex   *int64                    `json:"end_index"`
-	GroupIds   []string                  `json:"group_ids"`
-	NumPages   *int64                    `json:"num_pages"`
-	NumPosts   *int64                    `json:"num_posts"`
-	Page       *int64                    `json:"page"`
-	PerPage    *int64                    `json:"per_page"`
-	Posts      []shared.PostSearchResult `json:"posts"`
-	StartIndex *int64                    `json:"start_index"`
+	EndIndex   *int64                    `json:"end_index,omitempty"`
+	GroupIds   []string                  `json:"group_ids,omitempty"`
+	NumPages   *int64                    `json:"num_pages,omitempty"`
+	NumPosts   *int64                    `json:"num_posts,omitempty"`
+	Page       *int64                    `json:"page,omitempty"`
+	PerPage    *int64                    `json:"per_page,omitempty"`
+	Posts      []shared.PostSearchResult `json:"posts,omitempty"`
+	StartIndex *int64                    `json:"start_index,omitempty"`
 }
 
 type SearchUserPostsResponse struct {

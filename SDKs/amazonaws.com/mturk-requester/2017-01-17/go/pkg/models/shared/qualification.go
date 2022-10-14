@@ -5,10 +5,10 @@ import (
 )
 
 type Qualification struct {
-	GrantTime           *time.Time               `json:"GrantTime"`
-	IntegerValue        *int64                   `json:"IntegerValue"`
-	LocaleValue         *Locale                  `json:"LocaleValue"`
-	QualificationTypeID *string                  `json:"QualificationTypeId"`
-	Status              *QualificationStatusEnum `json:"Status"`
-	WorkerID            *string                  `json:"WorkerId"`
+	GrantTime           *time.Time               `json:"GrantTime,omitempty"`
+	IntegerValue        *int64                   `json:"IntegerValue,omitempty"`
+	LocaleValue         *Locale                  `json:"LocaleValue,omitempty"`
+	QualificationTypeID *string                  `json:"QualificationTypeId,omitempty"`
+	Status              *QualificationStatusEnum `json:"Status,omitempty"`
+	WorkerID            *string                  `json:"WorkerId,omitempty"`
 }

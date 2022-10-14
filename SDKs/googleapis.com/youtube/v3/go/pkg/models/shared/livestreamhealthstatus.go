@@ -11,7 +11,7 @@ const (
 )
 
 type LiveStreamHealthStatus struct {
-	ConfigurationIssues   []LiveStreamConfigurationIssue    `json:"configurationIssues"`
-	LastUpdateTimeSeconds *string                           `json:"lastUpdateTimeSeconds"`
-	Status                *LiveStreamHealthStatusStatusEnum `json:"status"`
+	ConfigurationIssues   []LiveStreamConfigurationIssue    `json:"configurationIssues,omitempty"`
+	LastUpdateTimeSeconds *string                           `json:"lastUpdateTimeSeconds,omitempty"`
+	Status                *LiveStreamHealthStatusStatusEnum `json:"status,omitempty"`
 }

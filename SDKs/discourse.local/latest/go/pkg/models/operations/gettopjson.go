@@ -10,69 +10,69 @@ type GetTopJSONRequest struct {
 }
 
 type GetTopJSON200ApplicationJSONTopicListTopicsPosters struct {
-	Description    *string `json:"description"`
-	Extras         *string `json:"extras"`
-	PrimaryGroupID *string `json:"primary_group_id"`
-	UserID         *int64  `json:"user_id"`
+	Description    *string `json:"description,omitempty"`
+	Extras         *string `json:"extras,omitempty"`
+	PrimaryGroupID *string `json:"primary_group_id,omitempty"`
+	UserID         *int64  `json:"user_id,omitempty"`
 }
 
 type GetTopJSON200ApplicationJSONTopicListTopics struct {
-	Archetype          *string                                              `json:"archetype"`
-	Archived           *bool                                                `json:"archived"`
-	Bookmarked         *bool                                                `json:"bookmarked"`
-	Bumped             *bool                                                `json:"bumped"`
-	BumpedAt           *string                                              `json:"bumped_at"`
-	CategoryID         *int64                                               `json:"category_id"`
-	Closed             *bool                                                `json:"closed"`
-	CreatedAt          *string                                              `json:"created_at"`
-	FancyTitle         *string                                              `json:"fancy_title"`
-	FeaturedLink       *string                                              `json:"featured_link"`
-	HasSummary         *bool                                                `json:"has_summary"`
-	HighestPostNumber  *int64                                               `json:"highest_post_number"`
-	ID                 *int64                                               `json:"id"`
-	ImageURL           *string                                              `json:"image_url"`
-	LastPostedAt       *string                                              `json:"last_posted_at"`
-	LastPosterUsername *string                                              `json:"last_poster_username"`
-	LastReadPostNumber *int64                                               `json:"last_read_post_number"`
-	LikeCount          *int64                                               `json:"like_count"`
-	Liked              *bool                                                `json:"liked"`
-	NotificationLevel  *int64                                               `json:"notification_level"`
-	OpLikeCount        *int64                                               `json:"op_like_count"`
-	Pinned             *bool                                                `json:"pinned"`
-	PinnedGlobally     *bool                                                `json:"pinned_globally"`
-	Posters            []GetTopJSON200ApplicationJSONTopicListTopicsPosters `json:"posters"`
-	PostsCount         *int64                                               `json:"posts_count"`
-	ReplyCount         *int64                                               `json:"reply_count"`
-	Slug               *string                                              `json:"slug"`
-	Title              *string                                              `json:"title"`
-	Unpinned           *bool                                                `json:"unpinned"`
-	UnreadPosts        *int64                                               `json:"unread_posts"`
-	Unseen             *bool                                                `json:"unseen"`
-	Views              *int64                                               `json:"views"`
-	Visible            *bool                                                `json:"visible"`
+	Archetype          *string                                              `json:"archetype,omitempty"`
+	Archived           *bool                                                `json:"archived,omitempty"`
+	Bookmarked         *bool                                                `json:"bookmarked,omitempty"`
+	Bumped             *bool                                                `json:"bumped,omitempty"`
+	BumpedAt           *string                                              `json:"bumped_at,omitempty"`
+	CategoryID         *int64                                               `json:"category_id,omitempty"`
+	Closed             *bool                                                `json:"closed,omitempty"`
+	CreatedAt          *string                                              `json:"created_at,omitempty"`
+	FancyTitle         *string                                              `json:"fancy_title,omitempty"`
+	FeaturedLink       *string                                              `json:"featured_link,omitempty"`
+	HasSummary         *bool                                                `json:"has_summary,omitempty"`
+	HighestPostNumber  *int64                                               `json:"highest_post_number,omitempty"`
+	ID                 *int64                                               `json:"id,omitempty"`
+	ImageURL           *string                                              `json:"image_url,omitempty"`
+	LastPostedAt       *string                                              `json:"last_posted_at,omitempty"`
+	LastPosterUsername *string                                              `json:"last_poster_username,omitempty"`
+	LastReadPostNumber *int64                                               `json:"last_read_post_number,omitempty"`
+	LikeCount          *int64                                               `json:"like_count,omitempty"`
+	Liked              *bool                                                `json:"liked,omitempty"`
+	NotificationLevel  *int64                                               `json:"notification_level,omitempty"`
+	OpLikeCount        *int64                                               `json:"op_like_count,omitempty"`
+	Pinned             *bool                                                `json:"pinned,omitempty"`
+	PinnedGlobally     *bool                                                `json:"pinned_globally,omitempty"`
+	Posters            []GetTopJSON200ApplicationJSONTopicListTopicsPosters `json:"posters,omitempty"`
+	PostsCount         *int64                                               `json:"posts_count,omitempty"`
+	ReplyCount         *int64                                               `json:"reply_count,omitempty"`
+	Slug               *string                                              `json:"slug,omitempty"`
+	Title              *string                                              `json:"title,omitempty"`
+	Unpinned           *bool                                                `json:"unpinned,omitempty"`
+	UnreadPosts        *int64                                               `json:"unread_posts,omitempty"`
+	Unseen             *bool                                                `json:"unseen,omitempty"`
+	Views              *int64                                               `json:"views,omitempty"`
+	Visible            *bool                                                `json:"visible,omitempty"`
 }
 
 type GetTopJSON200ApplicationJSONTopicList struct {
-	CanCreateTopic *bool                                         `json:"can_create_topic"`
-	Draft          *string                                       `json:"draft"`
-	DraftKey       *string                                       `json:"draft_key"`
-	DraftSequence  *int64                                        `json:"draft_sequence"`
-	ForPeriod      *string                                       `json:"for_period"`
-	PerPage        *int64                                        `json:"per_page"`
-	Topics         []GetTopJSON200ApplicationJSONTopicListTopics `json:"topics"`
+	CanCreateTopic *bool                                         `json:"can_create_topic,omitempty"`
+	Draft          *string                                       `json:"draft,omitempty"`
+	DraftKey       *string                                       `json:"draft_key,omitempty"`
+	DraftSequence  *int64                                        `json:"draft_sequence,omitempty"`
+	ForPeriod      *string                                       `json:"for_period,omitempty"`
+	PerPage        *int64                                        `json:"per_page,omitempty"`
+	Topics         []GetTopJSON200ApplicationJSONTopicListTopics `json:"topics,omitempty"`
 }
 
 type GetTopJSON200ApplicationJSONUsers struct {
-	AvatarTemplate *string `json:"avatar_template"`
-	ID             *int64  `json:"id"`
-	Name           *string `json:"name"`
-	Username       *string `json:"username"`
+	AvatarTemplate *string `json:"avatar_template,omitempty"`
+	ID             *int64  `json:"id,omitempty"`
+	Name           *string `json:"name,omitempty"`
+	Username       *string `json:"username,omitempty"`
 }
 
 type GetTopJSON200ApplicationJSON struct {
-	PrimaryGroups []interface{}                          `json:"primary_groups"`
-	TopicList     *GetTopJSON200ApplicationJSONTopicList `json:"topic_list"`
-	Users         []GetTopJSON200ApplicationJSONUsers    `json:"users"`
+	PrimaryGroups []interface{}                          `json:"primary_groups,omitempty"`
+	TopicList     *GetTopJSON200ApplicationJSONTopicList `json:"topic_list,omitempty"`
+	Users         []GetTopJSON200ApplicationJSONUsers    `json:"users,omitempty"`
 }
 
 type GetTopJSONResponse struct {

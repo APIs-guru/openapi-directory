@@ -1,14 +1,14 @@
 package shared
 
 type NetworkUnblockResponseInvalidDurationInvalidParameters struct {
-	Name   *string `json:"name"`
-	Reason *string `json:"reason"`
+	Name   *string `json:"name,omitempty"`
+	Reason *string `json:"reason,omitempty"`
 }
 
 type NetworkUnblockResponseInvalidDuration struct {
-	Detail            *string                                                  `json:"detail"`
-	Instance          *string                                                  `json:"instance"`
-	InvalidParameters []NetworkUnblockResponseInvalidDurationInvalidParameters `json:"invalid_parameters"`
-	Title             *string                                                  `json:"title"`
-	Type              *string                                                  `json:"type"`
+	Detail            *string                                                  `json:"detail,omitempty"`
+	Instance          *string                                                  `json:"instance,omitempty"`
+	InvalidParameters []NetworkUnblockResponseInvalidDurationInvalidParameters `json:"invalid_parameters,omitempty"`
+	Title             *string                                                  `json:"title,omitempty"`
+	Type              *string                                                  `json:"type,omitempty"`
 }

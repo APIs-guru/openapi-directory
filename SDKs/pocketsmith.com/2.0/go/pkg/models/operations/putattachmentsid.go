@@ -9,7 +9,7 @@ type PutAttachmentsIDPathParams struct {
 }
 
 type PutAttachmentsIDRequestBody struct {
-	Title *string `json:"title"`
+	Title *string `json:"title,omitempty"`
 }
 
 type PutAttachmentsIDRequest struct {

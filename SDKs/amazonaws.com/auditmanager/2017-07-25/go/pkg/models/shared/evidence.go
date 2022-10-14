@@ -5,19 +5,19 @@ import (
 )
 
 type Evidence struct {
-	AssessmentReportSelection *string           `json:"assessmentReportSelection"`
-	Attributes                map[string]string `json:"attributes"`
-	AwsAccountID              *string           `json:"awsAccountId"`
-	AwsOrganization           *string           `json:"awsOrganization"`
-	ComplianceCheck           *string           `json:"complianceCheck"`
-	DataSource                *string           `json:"dataSource"`
-	EventName                 *string           `json:"eventName"`
-	EventSource               *string           `json:"eventSource"`
-	EvidenceAwsAccountID      *string           `json:"evidenceAwsAccountId"`
-	EvidenceByType            *string           `json:"evidenceByType"`
-	EvidenceFolderID          *string           `json:"evidenceFolderId"`
-	IamID                     *string           `json:"iamId"`
-	ID                        *string           `json:"id"`
-	ResourcesIncluded         []Resource        `json:"resourcesIncluded"`
-	Time                      *time.Time        `json:"time"`
+	AssessmentReportSelection *string           `json:"assessmentReportSelection,omitempty"`
+	Attributes                map[string]string `json:"attributes,omitempty"`
+	AwsAccountID              *string           `json:"awsAccountId,omitempty"`
+	AwsOrganization           *string           `json:"awsOrganization,omitempty"`
+	ComplianceCheck           *string           `json:"complianceCheck,omitempty"`
+	DataSource                *string           `json:"dataSource,omitempty"`
+	EventName                 *string           `json:"eventName,omitempty"`
+	EventSource               *string           `json:"eventSource,omitempty"`
+	EvidenceAwsAccountID      *string           `json:"evidenceAwsAccountId,omitempty"`
+	EvidenceByType            *string           `json:"evidenceByType,omitempty"`
+	EvidenceFolderID          *string           `json:"evidenceFolderId,omitempty"`
+	IamID                     *string           `json:"iamId,omitempty"`
+	ID                        *string           `json:"id,omitempty"`
+	ResourcesIncluded         []Resource        `json:"resourcesIncluded,omitempty"`
+	Time                      *time.Time        `json:"time,omitempty"`
 }

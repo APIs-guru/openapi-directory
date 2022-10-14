@@ -19,7 +19,7 @@ type DeletePortfolioRequest struct {
 }
 
 type DeletePortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeletePortfolioResponse struct {

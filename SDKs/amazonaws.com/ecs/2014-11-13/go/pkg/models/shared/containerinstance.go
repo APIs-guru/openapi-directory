@@ -5,21 +5,21 @@ import (
 )
 
 type ContainerInstance struct {
-	AgentConnected       *bool                  `json:"agentConnected"`
-	AgentUpdateStatus    *AgentUpdateStatusEnum `json:"agentUpdateStatus"`
-	Attachments          []Attachment           `json:"attachments"`
-	Attributes           []Attribute            `json:"attributes"`
-	CapacityProviderName *string                `json:"capacityProviderName"`
-	ContainerInstanceArn *string                `json:"containerInstanceArn"`
-	Ec2InstanceID        *string                `json:"ec2InstanceId"`
-	PendingTasksCount    *int64                 `json:"pendingTasksCount"`
-	RegisteredAt         *time.Time             `json:"registeredAt"`
-	RegisteredResources  []Resource             `json:"registeredResources"`
-	RemainingResources   []Resource             `json:"remainingResources"`
-	RunningTasksCount    *int64                 `json:"runningTasksCount"`
-	Status               *string                `json:"status"`
-	StatusReason         *string                `json:"statusReason"`
-	Tags                 []Tag                  `json:"tags"`
-	Version              *int64                 `json:"version"`
-	VersionInfo          *VersionInfo           `json:"versionInfo"`
+	AgentConnected       *bool                  `json:"agentConnected,omitempty"`
+	AgentUpdateStatus    *AgentUpdateStatusEnum `json:"agentUpdateStatus,omitempty"`
+	Attachments          []Attachment           `json:"attachments,omitempty"`
+	Attributes           []Attribute            `json:"attributes,omitempty"`
+	CapacityProviderName *string                `json:"capacityProviderName,omitempty"`
+	ContainerInstanceArn *string                `json:"containerInstanceArn,omitempty"`
+	Ec2InstanceID        *string                `json:"ec2InstanceId,omitempty"`
+	PendingTasksCount    *int64                 `json:"pendingTasksCount,omitempty"`
+	RegisteredAt         *time.Time             `json:"registeredAt,omitempty"`
+	RegisteredResources  []Resource             `json:"registeredResources,omitempty"`
+	RemainingResources   []Resource             `json:"remainingResources,omitempty"`
+	RunningTasksCount    *int64                 `json:"runningTasksCount,omitempty"`
+	Status               *string                `json:"status,omitempty"`
+	StatusReason         *string                `json:"statusReason,omitempty"`
+	Tags                 []Tag                  `json:"tags,omitempty"`
+	Version              *int64                 `json:"version,omitempty"`
+	VersionInfo          *VersionInfo           `json:"versionInfo,omitempty"`
 }

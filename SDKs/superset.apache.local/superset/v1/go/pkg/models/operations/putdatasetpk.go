@@ -24,32 +24,32 @@ type PutDatasetPkRequest struct {
 }
 
 type PutDatasetPk200ApplicationJSON struct {
-	ID     *float64                  `json:"id"`
-	Result *shared.DatasetRestAPIPut `json:"result"`
+	ID     *float64                  `json:"id,omitempty"`
+	Result *shared.DatasetRestAPIPut `json:"result,omitempty"`
 }
 
 type PutDatasetPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatasetPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatasetPk403ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatasetPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatasetPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatasetPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDatasetPkResponse struct {

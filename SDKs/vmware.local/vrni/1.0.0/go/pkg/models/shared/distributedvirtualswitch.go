@@ -1,10 +1,10 @@
 package shared
 
 type DistributedVirtualSwitch struct {
-	EntityID       *string         `json:"entity_id"`
-	EntityType     *EntityTypeEnum `json:"entity_type"`
-	Hosts          []Reference     `json:"hosts"`
-	Name           *string         `json:"name"`
-	VcenterManager *Reference      `json:"vcenter_manager"`
-	VendorID       *string         `json:"vendor_id"`
+	EntityID       *string         `json:"entity_id,omitempty"`
+	EntityType     *EntityTypeEnum `json:"entity_type,omitempty"`
+	Hosts          []Reference     `json:"hosts,omitempty"`
+	Name           *string         `json:"name,omitempty"`
+	VcenterManager *Reference      `json:"vcenter_manager,omitempty"`
+	VendorID       *string         `json:"vendor_id,omitempty"`
 }

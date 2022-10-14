@@ -1,7 +1,7 @@
 package shared
 
 type SurveyDetail struct {
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
-	Title *string `json:"title"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
+	Title *string `json:"title,omitempty"`
 }

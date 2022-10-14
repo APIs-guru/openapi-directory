@@ -1,11 +1,11 @@
 package shared
 
 type TflAPICommonJourneyPlannerJpElevation struct {
-	Distance                *int32   `json:"distance"`
-	EndLat                  *float64 `json:"endLat"`
-	EndLon                  *float64 `json:"endLon"`
-	Gradient                *float64 `json:"gradient"`
-	HeightFromPreviousPoint *int32   `json:"heightFromPreviousPoint"`
-	StartLat                *float64 `json:"startLat"`
-	StartLon                *float64 `json:"startLon"`
+	Distance                *int32   `json:"distance,omitempty"`
+	EndLat                  *float64 `json:"endLat,omitempty"`
+	EndLon                  *float64 `json:"endLon,omitempty"`
+	Gradient                *float64 `json:"gradient,omitempty"`
+	HeightFromPreviousPoint *int32   `json:"heightFromPreviousPoint,omitempty"`
+	StartLat                *float64 `json:"startLat,omitempty"`
+	StartLon                *float64 `json:"startLon,omitempty"`
 }

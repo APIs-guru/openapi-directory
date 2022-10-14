@@ -1,5 +1,5 @@
 package shared
 
 type UpgradeInstanceRequest struct {
-	RedisVersion *string `json:"redisVersion"`
+	RedisVersion *string `json:"redisVersion,omitempty"`
 }

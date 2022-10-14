@@ -1,11 +1,11 @@
 package shared
 
 type Account struct {
-	CreationTime *string   `json:"creation_time"`
-	ID           *string   `json:"id"`
-	Kind         *string   `json:"kind"`
-	Name         *string   `json:"name"`
-	Premium      *bool     `json:"premium"`
-	SubAccounts  []Account `json:"subAccounts"`
-	Timezone     *string   `json:"timezone"`
+	CreationTime *string   `json:"creation_time,omitempty"`
+	ID           *string   `json:"id,omitempty"`
+	Kind         *string   `json:"kind,omitempty"`
+	Name         *string   `json:"name,omitempty"`
+	Premium      *bool     `json:"premium,omitempty"`
+	SubAccounts  []Account `json:"subAccounts,omitempty"`
+	Timezone     *string   `json:"timezone,omitempty"`
 }

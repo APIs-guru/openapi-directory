@@ -5,9 +5,9 @@ import (
 )
 
 type GetPipelineStateOutput struct {
-	Created         *time.Time   `json:"created"`
-	PipelineName    *string      `json:"pipelineName"`
-	PipelineVersion *int64       `json:"pipelineVersion"`
-	StageStates     []StageState `json:"stageStates"`
-	Updated         *time.Time   `json:"updated"`
+	Created         *time.Time   `json:"created,omitempty"`
+	PipelineName    *string      `json:"pipelineName,omitempty"`
+	PipelineVersion *int64       `json:"pipelineVersion,omitempty"`
+	StageStates     []StageState `json:"stageStates,omitempty"`
+	Updated         *time.Time   `json:"updated,omitempty"`
 }

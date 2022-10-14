@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowCxV3ListVersionsResponse struct {
-	NextPageToken *string                            `json:"nextPageToken"`
-	Versions      []GoogleCloudDialogflowCxV3Version `json:"versions"`
+	NextPageToken *string                            `json:"nextPageToken,omitempty"`
+	Versions      []GoogleCloudDialogflowCxV3Version `json:"versions,omitempty"`
 }

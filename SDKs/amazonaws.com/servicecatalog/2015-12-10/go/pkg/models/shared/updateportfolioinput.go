@@ -1,11 +1,11 @@
 package shared
 
 type UpdatePortfolioInput struct {
-	AcceptLanguage *string  `json:"AcceptLanguage"`
-	AddTags        []Tag    `json:"AddTags"`
-	Description    *string  `json:"Description"`
-	DisplayName    *string  `json:"DisplayName"`
+	AcceptLanguage *string  `json:"AcceptLanguage,omitempty"`
+	AddTags        []Tag    `json:"AddTags,omitempty"`
+	Description    *string  `json:"Description,omitempty"`
+	DisplayName    *string  `json:"DisplayName,omitempty"`
 	ID             string   `json:"Id"`
-	ProviderName   *string  `json:"ProviderName"`
-	RemoveTags     []string `json:"RemoveTags"`
+	ProviderName   *string  `json:"ProviderName,omitempty"`
+	RemoveTags     []string `json:"RemoveTags,omitempty"`
 }

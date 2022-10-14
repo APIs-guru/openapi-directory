@@ -5,8 +5,8 @@ import (
 )
 
 type ConfigStreamDeliveryInfo struct {
-	LastErrorCode        *string             `json:"lastErrorCode"`
-	LastErrorMessage     *string             `json:"lastErrorMessage"`
-	LastStatus           *DeliveryStatusEnum `json:"lastStatus"`
-	LastStatusChangeTime *time.Time          `json:"lastStatusChangeTime"`
+	LastErrorCode        *string             `json:"lastErrorCode,omitempty"`
+	LastErrorMessage     *string             `json:"lastErrorMessage,omitempty"`
+	LastStatus           *DeliveryStatusEnum `json:"lastStatus,omitempty"`
+	LastStatusChangeTime *time.Time          `json:"lastStatusChangeTime,omitempty"`
 }

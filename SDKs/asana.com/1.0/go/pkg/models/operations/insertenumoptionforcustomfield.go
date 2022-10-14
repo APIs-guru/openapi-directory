@@ -14,7 +14,7 @@ type InsertEnumOptionForCustomFieldQueryParams struct {
 }
 
 type InsertEnumOptionForCustomFieldRequestBody struct {
-	Data *shared.EnumOptionInsertRequest `json:"data"`
+	Data *shared.EnumOptionInsertRequest `json:"data,omitempty"`
 }
 
 type InsertEnumOptionForCustomFieldRequest struct {
@@ -24,7 +24,7 @@ type InsertEnumOptionForCustomFieldRequest struct {
 }
 
 type InsertEnumOptionForCustomField200ApplicationJSON struct {
-	Data *shared.EnumOption `json:"data"`
+	Data *shared.EnumOption `json:"data,omitempty"`
 }
 
 type InsertEnumOptionForCustomFieldResponse struct {

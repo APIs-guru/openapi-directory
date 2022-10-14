@@ -14,11 +14,11 @@ const (
 )
 
 type KeyResponse struct {
-	AppID      *string                                `json:"appId"`
-	Capability map[string][]KeyResponseCapabilityEnum `json:"capability"`
-	Created    *int64                                 `json:"created"`
-	ID         *string                                `json:"id"`
-	Key        *string                                `json:"key"`
-	Modified   *int64                                 `json:"modified"`
-	Name       *string                                `json:"name"`
+	AppID      *string                                `json:"appId,omitempty"`
+	Capability map[string][]KeyResponseCapabilityEnum `json:"capability,omitempty"`
+	Created    *int64                                 `json:"created,omitempty"`
+	ID         *string                                `json:"id,omitempty"`
+	Key        *string                                `json:"key,omitempty"`
+	Modified   *int64                                 `json:"modified,omitempty"`
+	Name       *string                                `json:"name,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type DescribeRaidArraysRequest struct {
-	InstanceID   *string  `json:"InstanceId"`
-	RaidArrayIds []string `json:"RaidArrayIds"`
-	StackID      *string  `json:"StackId"`
+	InstanceID   *string  `json:"InstanceId,omitempty"`
+	RaidArrayIds []string `json:"RaidArrayIds,omitempty"`
+	StackID      *string  `json:"StackId,omitempty"`
 }

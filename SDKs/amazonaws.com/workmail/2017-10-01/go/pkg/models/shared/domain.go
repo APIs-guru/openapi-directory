@@ -1,6 +1,6 @@
 package shared
 
 type Domain struct {
-	DomainName   *string `json:"DomainName"`
-	HostedZoneID *string `json:"HostedZoneId"`
+	DomainName   *string `json:"DomainName,omitempty"`
+	HostedZoneID *string `json:"HostedZoneId,omitempty"`
 }

@@ -14,14 +14,14 @@ type DeleteAccountsAccountOrdersCustomerOrderIDRequest struct {
 }
 
 type DeleteAccountsAccountOrdersCustomerOrderID200ApplicationJSON struct {
-	CustomerOrderID *string                 `json:"CustomerOrderId"`
-	OrderQty        *float64                `json:"OrderQty"`
-	OrderType       *float64                `json:"OrderType"`
-	Price           *string                 `json:"Price"`
-	Side            *float64                `json:"Side"`
-	Status          *shared.OrderStatusEnum `json:"Status"`
-	Symbol          *float64                `json:"Symbol"`
-	Warning         *string                 `json:"Warning"`
+	CustomerOrderID *string                 `json:"CustomerOrderId,omitempty"`
+	OrderQty        *float64                `json:"OrderQty,omitempty"`
+	OrderType       *float64                `json:"OrderType,omitempty"`
+	Price           *string                 `json:"Price,omitempty"`
+	Side            *float64                `json:"Side,omitempty"`
+	Status          *shared.OrderStatusEnum `json:"Status,omitempty"`
+	Symbol          *float64                `json:"Symbol,omitempty"`
+	Warning         *string                 `json:"Warning,omitempty"`
 }
 
 type DeleteAccountsAccountOrdersCustomerOrderIDResponse struct {

@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationMode struct {
-	JoinConfig    map[string]interface{}                                                                             `json:"joinConfig"`
-	OperationType *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeOperationTypeEnum `json:"operationType"`
-	UnionConfig   *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeUnionConfig       `json:"unionConfig"`
+	JoinConfig    map[string]interface{}                                                                             `json:"joinConfig,omitempty"`
+	OperationType *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeOperationTypeEnum `json:"operationType,omitempty"`
+	UnionConfig   *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeUnionConfig       `json:"unionConfig,omitempty"`
 }

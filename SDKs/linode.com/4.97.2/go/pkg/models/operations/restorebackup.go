@@ -11,7 +11,7 @@ type RestoreBackupPathParams struct {
 
 type RestoreBackupRequestBody struct {
 	LinodeID  int64 `json:"linode_id"`
-	Overwrite *bool `json:"overwrite"`
+	Overwrite *bool `json:"overwrite,omitempty"`
 }
 
 type RestoreBackupSecurityOption1 struct {
@@ -34,7 +34,7 @@ type RestoreBackupRequest struct {
 }
 
 type RestoreBackupDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RestoreBackupResponse struct {

@@ -10,7 +10,7 @@ type TeamsCreateDiscussionLegacyPathParams struct {
 
 type TeamsCreateDiscussionLegacyRequestBody struct {
 	Body    string `json:"body"`
-	Private *bool  `json:"private"`
+	Private *bool  `json:"private,omitempty"`
 	Title   string `json:"title"`
 }
 

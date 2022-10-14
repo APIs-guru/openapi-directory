@@ -33,7 +33,7 @@ type StartImportRequestBody struct {
 	MergeStrategy StartImportRequestBodyMergeStrategyEnum `json:"mergeStrategy"`
 	Payload       string                                  `json:"payload"`
 	ResourceType  StartImportRequestBodyResourceTypeEnum  `json:"resourceType"`
-	Tags          []shared.Tag                            `json:"tags"`
+	Tags          []shared.Tag                            `json:"tags,omitempty"`
 }
 
 type StartImportRequest struct {

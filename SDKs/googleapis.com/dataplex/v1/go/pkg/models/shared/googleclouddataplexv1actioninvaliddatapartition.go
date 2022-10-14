@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudDataplexV1ActionInvalidDataPartition struct {
-	ExpectedStructure *GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum `json:"expectedStructure"`
+	ExpectedStructure *GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum `json:"expectedStructure,omitempty"`
 }

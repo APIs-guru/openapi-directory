@@ -14,9 +14,9 @@ const (
 )
 
 type BlueGreenInfo struct {
-	BlueInstanceGroupUrls     []string                `json:"blueInstanceGroupUrls"`
-	BluePoolDeletionStartTime *string                 `json:"bluePoolDeletionStartTime"`
-	GreenInstanceGroupUrls    []string                `json:"greenInstanceGroupUrls"`
-	GreenPoolVersion          *string                 `json:"greenPoolVersion"`
-	Phase                     *BlueGreenInfoPhaseEnum `json:"phase"`
+	BlueInstanceGroupUrls     []string                `json:"blueInstanceGroupUrls,omitempty"`
+	BluePoolDeletionStartTime *string                 `json:"bluePoolDeletionStartTime,omitempty"`
+	GreenInstanceGroupUrls    []string                `json:"greenInstanceGroupUrls,omitempty"`
+	GreenPoolVersion          *string                 `json:"greenPoolVersion,omitempty"`
+	Phase                     *BlueGreenInfoPhaseEnum `json:"phase,omitempty"`
 }

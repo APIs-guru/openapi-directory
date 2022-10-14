@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudienceSequenceFilter struct {
-	Scope                   *GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum             `json:"scope"`
-	SequenceMaximumDuration *string                                                                 `json:"sequenceMaximumDuration"`
-	SequenceSteps           []GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep `json:"sequenceSteps"`
+	Scope                   *GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum             `json:"scope,omitempty"`
+	SequenceMaximumDuration *string                                                                 `json:"sequenceMaximumDuration,omitempty"`
+	SequenceSteps           []GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep `json:"sequenceSteps,omitempty"`
 }

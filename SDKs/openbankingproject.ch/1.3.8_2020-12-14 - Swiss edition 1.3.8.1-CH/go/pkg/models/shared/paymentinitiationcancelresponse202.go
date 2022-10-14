@@ -1,9 +1,9 @@
 package shared
 
 type PaymentInitiationCancelResponse202 struct {
-	Links             map[string]HrefType    `json:"_links"`
-	ChallengeData     *ChallengeData         `json:"challengeData"`
-	ChosenScaMethod   *ChosenScaMethod       `json:"chosenScaMethod"`
-	ScaMethods        []AuthenticationObject `json:"scaMethods"`
+	Links             map[string]HrefType    `json:"_links,omitempty"`
+	ChallengeData     *ChallengeData         `json:"challengeData,omitempty"`
+	ChosenScaMethod   *ChosenScaMethod       `json:"chosenScaMethod,omitempty"`
+	ScaMethods        []AuthenticationObject `json:"scaMethods,omitempty"`
 	TransactionStatus TransactionStatusEnum  `json:"transactionStatus"`
 }

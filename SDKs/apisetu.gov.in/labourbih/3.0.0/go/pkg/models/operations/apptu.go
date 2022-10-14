@@ -16,8 +16,8 @@ const (
 )
 
 type ApptuRequestBody struct {
-	CertificateParameters *ApptuRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *ApptuRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                ApptuRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Apptu400ApplicationJSON struct {
-	Error            *Apptu400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Apptu400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Apptu400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Apptu400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Apptu401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Apptu401ApplicationJSON struct {
-	Error            *Apptu401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Apptu401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Apptu401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Apptu401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Apptu404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Apptu404ApplicationJSON struct {
-	Error            *Apptu404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Apptu404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Apptu404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Apptu404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Apptu500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Apptu500ApplicationJSON struct {
-	Error            *Apptu500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Apptu500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Apptu500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Apptu500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Apptu502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Apptu502ApplicationJSON struct {
-	Error            *Apptu502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Apptu502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Apptu502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Apptu502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Apptu503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Apptu503ApplicationJSON struct {
-	Error            *Apptu503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Apptu503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Apptu503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Apptu503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Apptu504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Apptu504ApplicationJSON struct {
-	Error            *Apptu504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Apptu504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Apptu504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Apptu504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ApptuResponse struct {

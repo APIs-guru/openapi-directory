@@ -5,11 +5,11 @@ import (
 )
 
 type JobListEntry struct {
-	CreationDate *time.Time        `json:"CreationDate"`
-	Description  *string           `json:"Description"`
-	IsMaster     *bool             `json:"IsMaster"`
-	JobID        *string           `json:"JobId"`
-	JobState     *JobStateEnum     `json:"JobState"`
-	JobType      *JobTypeEnum      `json:"JobType"`
-	SnowballType *SnowballTypeEnum `json:"SnowballType"`
+	CreationDate *time.Time        `json:"CreationDate,omitempty"`
+	Description  *string           `json:"Description,omitempty"`
+	IsMaster     *bool             `json:"IsMaster,omitempty"`
+	JobID        *string           `json:"JobId,omitempty"`
+	JobState     *JobStateEnum     `json:"JobState,omitempty"`
+	JobType      *JobTypeEnum      `json:"JobType,omitempty"`
+	SnowballType *SnowballTypeEnum `json:"SnowballType,omitempty"`
 }

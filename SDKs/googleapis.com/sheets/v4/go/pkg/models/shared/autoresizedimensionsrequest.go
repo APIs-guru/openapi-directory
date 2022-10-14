@@ -1,6 +1,6 @@
 package shared
 
 type AutoResizeDimensionsRequest struct {
-	DataSourceSheetDimensions *DataSourceSheetDimensionRange `json:"dataSourceSheetDimensions"`
-	Dimensions                *DimensionRange                `json:"dimensions"`
+	DataSourceSheetDimensions *DataSourceSheetDimensionRange `json:"dataSourceSheetDimensions,omitempty"`
+	Dimensions                *DimensionRange                `json:"dimensions,omitempty"`
 }

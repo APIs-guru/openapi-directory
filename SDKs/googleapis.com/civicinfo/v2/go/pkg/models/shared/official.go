@@ -1,13 +1,13 @@
 package shared
 
 type Official struct {
-	Address            []SimpleAddressType `json:"address"`
-	Channels           []Channel           `json:"channels"`
-	Emails             []string            `json:"emails"`
-	GeocodingSummaries []GeocodingSummary  `json:"geocodingSummaries"`
-	Name               *string             `json:"name"`
-	Party              *string             `json:"party"`
-	Phones             []string            `json:"phones"`
-	PhotoURL           *string             `json:"photoUrl"`
-	Urls               []string            `json:"urls"`
+	Address            []SimpleAddressType `json:"address,omitempty"`
+	Channels           []Channel           `json:"channels,omitempty"`
+	Emails             []string            `json:"emails,omitempty"`
+	GeocodingSummaries []GeocodingSummary  `json:"geocodingSummaries,omitempty"`
+	Name               *string             `json:"name,omitempty"`
+	Party              *string             `json:"party,omitempty"`
+	Phones             []string            `json:"phones,omitempty"`
+	PhotoURL           *string             `json:"photoUrl,omitempty"`
+	Urls               []string            `json:"urls,omitempty"`
 }

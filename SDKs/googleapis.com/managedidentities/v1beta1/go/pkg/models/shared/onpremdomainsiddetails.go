@@ -9,6 +9,6 @@ const (
 )
 
 type OnPremDomainSidDetails struct {
-	Name              *string                                      `json:"name"`
-	SidFilteringState *OnPremDomainSidDetailsSidFilteringStateEnum `json:"sidFilteringState"`
+	Name              *string                                      `json:"name,omitempty"`
+	SidFilteringState *OnPremDomainSidDetailsSidFilteringStateEnum `json:"sidFilteringState,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type CaptionsUpdatePayload struct {
-	Default *bool `json:"default"`
+	Default *bool `json:"default,omitempty"`
 }

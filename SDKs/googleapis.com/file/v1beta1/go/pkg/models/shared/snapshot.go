@@ -10,10 +10,10 @@ const (
 )
 
 type Snapshot struct {
-	CreateTime          *string            `json:"createTime"`
-	Description         *string            `json:"description"`
-	FilesystemUsedBytes *string            `json:"filesystemUsedBytes"`
-	Labels              map[string]string  `json:"labels"`
-	Name                *string            `json:"name"`
-	State               *SnapshotStateEnum `json:"state"`
+	CreateTime          *string            `json:"createTime,omitempty"`
+	Description         *string            `json:"description,omitempty"`
+	FilesystemUsedBytes *string            `json:"filesystemUsedBytes,omitempty"`
+	Labels              map[string]string  `json:"labels,omitempty"`
+	Name                *string            `json:"name,omitempty"`
+	State               *SnapshotStateEnum `json:"state,omitempty"`
 }

@@ -19,18 +19,18 @@ const (
 )
 
 type UptimeCheckConfig struct {
-	CheckerType       *UptimeCheckConfigCheckerTypeEnum      `json:"checkerType"`
-	ContentMatchers   []ContentMatcher                       `json:"contentMatchers"`
-	DisplayName       *string                                `json:"displayName"`
-	HTTPCheck         *HTTPCheck                             `json:"httpCheck"`
-	InternalCheckers  []InternalChecker                      `json:"internalCheckers"`
-	IsInternal        *bool                                  `json:"isInternal"`
-	MonitoredResource *MonitoredResource                     `json:"monitoredResource"`
-	Name              *string                                `json:"name"`
-	Period            *string                                `json:"period"`
-	ResourceGroup     *ResourceGroup                         `json:"resourceGroup"`
-	SelectedRegions   []UptimeCheckConfigSelectedRegionsEnum `json:"selectedRegions"`
-	TCPCheck          *TCPCheck                              `json:"tcpCheck"`
-	Timeout           *string                                `json:"timeout"`
-	UserLabels        map[string]string                      `json:"userLabels"`
+	CheckerType       *UptimeCheckConfigCheckerTypeEnum      `json:"checkerType,omitempty"`
+	ContentMatchers   []ContentMatcher                       `json:"contentMatchers,omitempty"`
+	DisplayName       *string                                `json:"displayName,omitempty"`
+	HTTPCheck         *HTTPCheck                             `json:"httpCheck,omitempty"`
+	InternalCheckers  []InternalChecker                      `json:"internalCheckers,omitempty"`
+	IsInternal        *bool                                  `json:"isInternal,omitempty"`
+	MonitoredResource *MonitoredResource                     `json:"monitoredResource,omitempty"`
+	Name              *string                                `json:"name,omitempty"`
+	Period            *string                                `json:"period,omitempty"`
+	ResourceGroup     *ResourceGroup                         `json:"resourceGroup,omitempty"`
+	SelectedRegions   []UptimeCheckConfigSelectedRegionsEnum `json:"selectedRegions,omitempty"`
+	TCPCheck          *TCPCheck                              `json:"tcpCheck,omitempty"`
+	Timeout           *string                                `json:"timeout,omitempty"`
+	UserLabels        map[string]string                      `json:"userLabels,omitempty"`
 }

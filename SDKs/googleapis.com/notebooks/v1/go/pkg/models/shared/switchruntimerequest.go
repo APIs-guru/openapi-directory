@@ -1,7 +1,7 @@
 package shared
 
 type SwitchRuntimeRequest struct {
-	AcceleratorConfig *RuntimeAcceleratorConfig `json:"acceleratorConfig"`
-	MachineType       *string                   `json:"machineType"`
-	RequestID         *string                   `json:"requestId"`
+	AcceleratorConfig *RuntimeAcceleratorConfig `json:"acceleratorConfig,omitempty"`
+	MachineType       *string                   `json:"machineType,omitempty"`
+	RequestID         *string                   `json:"requestId,omitempty"`
 }

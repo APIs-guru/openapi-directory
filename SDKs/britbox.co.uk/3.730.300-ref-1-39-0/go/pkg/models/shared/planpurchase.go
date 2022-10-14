@@ -8,9 +8,9 @@ const (
 )
 
 type PlanPurchase struct {
-	ID             *string              `json:"id"`
-	Price          *float32             `json:"price"`
-	SubscriptionID *string              `json:"subscriptionId"`
+	ID             *string              `json:"id,omitempty"`
+	Price          *float32             `json:"price,omitempty"`
+	SubscriptionID *string              `json:"subscriptionId,omitempty"`
 	Title          string               `json:"title"`
 	Type           PlanPurchaseTypeEnum `json:"type"`
 }

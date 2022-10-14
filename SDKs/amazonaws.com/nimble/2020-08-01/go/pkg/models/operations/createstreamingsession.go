@@ -31,11 +31,11 @@ const (
 )
 
 type CreateStreamingSessionRequestBody struct {
-	Ec2InstanceType  *CreateStreamingSessionRequestBodyEc2InstanceTypeEnum `json:"ec2InstanceType"`
-	LaunchProfileID  *string                                               `json:"launchProfileId"`
-	OwnedBy          *string                                               `json:"ownedBy"`
-	StreamingImageID *string                                               `json:"streamingImageId"`
-	Tags             map[string]string                                     `json:"tags"`
+	Ec2InstanceType  *CreateStreamingSessionRequestBodyEc2InstanceTypeEnum `json:"ec2InstanceType,omitempty"`
+	LaunchProfileID  *string                                               `json:"launchProfileId,omitempty"`
+	OwnedBy          *string                                               `json:"ownedBy,omitempty"`
+	StreamingImageID *string                                               `json:"streamingImageId,omitempty"`
+	Tags             map[string]string                                     `json:"tags,omitempty"`
 }
 
 type CreateStreamingSessionRequest struct {

@@ -5,9 +5,9 @@ import (
 )
 
 type MediaV1PlayerStreamerPlayerStreamerPlaybackGrant struct {
-	AccountSid  *string      `json:"account_sid"`
-	DateCreated *time.Time   `json:"date_created"`
-	Grant       *interface{} `json:"grant"`
-	Sid         *string      `json:"sid"`
-	URL         *string      `json:"url"`
+	AccountSid  *string      `json:"account_sid,omitempty"`
+	DateCreated *time.Time   `json:"date_created,omitempty"`
+	Grant       *interface{} `json:"grant,omitempty"`
+	Sid         *string      `json:"sid,omitempty"`
+	URL         *string      `json:"url,omitempty"`
 }

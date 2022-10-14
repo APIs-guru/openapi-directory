@@ -1,6 +1,6 @@
 package shared
 
 type ListProvisioningTemplateVersionsResponse struct {
-	NextToken *string                              `json:"nextToken"`
-	Versions  []ProvisioningTemplateVersionSummary `json:"versions"`
+	NextToken *string                              `json:"nextToken,omitempty"`
+	Versions  []ProvisioningTemplateVersionSummary `json:"versions,omitempty"`
 }

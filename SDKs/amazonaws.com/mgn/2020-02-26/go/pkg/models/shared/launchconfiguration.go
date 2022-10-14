@@ -1,12 +1,12 @@
 package shared
 
 type LaunchConfiguration struct {
-	CopyPrivateIP                       *bool                                    `json:"copyPrivateIp"`
-	CopyTags                            *bool                                    `json:"copyTags"`
-	Ec2LaunchTemplateID                 *string                                  `json:"ec2LaunchTemplateID"`
-	LaunchDisposition                   *LaunchDispositionEnum                   `json:"launchDisposition"`
-	Licensing                           *Licensing                               `json:"licensing"`
-	Name                                *string                                  `json:"name"`
-	SourceServerID                      *string                                  `json:"sourceServerID"`
-	TargetInstanceTypeRightSizingMethod *TargetInstanceTypeRightSizingMethodEnum `json:"targetInstanceTypeRightSizingMethod"`
+	CopyPrivateIP                       *bool                                    `json:"copyPrivateIp,omitempty"`
+	CopyTags                            *bool                                    `json:"copyTags,omitempty"`
+	Ec2LaunchTemplateID                 *string                                  `json:"ec2LaunchTemplateID,omitempty"`
+	LaunchDisposition                   *LaunchDispositionEnum                   `json:"launchDisposition,omitempty"`
+	Licensing                           *Licensing                               `json:"licensing,omitempty"`
+	Name                                *string                                  `json:"name,omitempty"`
+	SourceServerID                      *string                                  `json:"sourceServerID,omitempty"`
+	TargetInstanceTypeRightSizingMethod *TargetInstanceTypeRightSizingMethodEnum `json:"targetInstanceTypeRightSizingMethod,omitempty"`
 }

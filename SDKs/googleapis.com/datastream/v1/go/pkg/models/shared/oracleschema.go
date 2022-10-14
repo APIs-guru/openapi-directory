@@ -1,6 +1,6 @@
 package shared
 
 type OracleSchema struct {
-	OracleTables []OracleTable `json:"oracleTables"`
-	Schema       *string       `json:"schema"`
+	OracleTables []OracleTable `json:"oracleTables,omitempty"`
+	Schema       *string       `json:"schema,omitempty"`
 }

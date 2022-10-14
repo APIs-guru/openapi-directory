@@ -32,19 +32,19 @@ const (
 )
 
 type UpdateDataRequestRequestBodyUpdateSubmissionDataRequestData struct {
-	AuthPhoneNumberHash  *string                                               `json:"auth_phone_number_hash"`
-	AuthProvider         *string                                               `json:"auth_provider"`
-	AuthSecondFactorType *UpdateDataRequestRequestBodyAuthSecondFactorTypeEnum `json:"auth_second_factor_type"`
-	AuthSessionIDHash    *string                                               `json:"auth_session_id_hash"`
-	AuthSessionStartedAt *string                                               `json:"auth_session_started_at"`
-	AuthType             *UpdateDataRequestRequestBodyAuthTypeEnum             `json:"auth_type"`
-	AuthUserIDHash       *string                                               `json:"auth_user_id_hash"`
-	AuthUsernameHash     *string                                               `json:"auth_username_hash"`
-	Email                *string                                               `json:"email"`
-	Fields               []string                                              `json:"fields"`
-	Metadata             map[string]interface{}                                `json:"metadata"`
-	Name                 *string                                               `json:"name"`
-	Order                *int64                                                `json:"order"`
+	AuthPhoneNumberHash  *string                                               `json:"auth_phone_number_hash,omitempty"`
+	AuthProvider         *string                                               `json:"auth_provider,omitempty"`
+	AuthSecondFactorType *UpdateDataRequestRequestBodyAuthSecondFactorTypeEnum `json:"auth_second_factor_type,omitempty"`
+	AuthSessionIDHash    *string                                               `json:"auth_session_id_hash,omitempty"`
+	AuthSessionStartedAt *string                                               `json:"auth_session_started_at,omitempty"`
+	AuthType             *UpdateDataRequestRequestBodyAuthTypeEnum             `json:"auth_type,omitempty"`
+	AuthUserIDHash       *string                                               `json:"auth_user_id_hash,omitempty"`
+	AuthUsernameHash     *string                                               `json:"auth_username_hash,omitempty"`
+	Email                *string                                               `json:"email,omitempty"`
+	Fields               []string                                              `json:"fields,omitempty"`
+	Metadata             map[string]interface{}                                `json:"metadata,omitempty"`
+	Name                 *string                                               `json:"name,omitempty"`
+	Order                *int64                                                `json:"order,omitempty"`
 }
 
 type UpdateDataRequestSecurity struct {
@@ -66,7 +66,7 @@ const (
 
 type UpdateDataRequest200ApplicationJSONUpdateDataRequestResponse struct {
 	DataRequest shared.SubmissionDataRequest                  `json:"data_request"`
-	Errors      []string                                      `json:"errors"`
+	Errors      []string                                      `json:"errors,omitempty"`
 	Status      UpdateDataRequest200ApplicationJSONStatusEnum `json:"status"`
 }
 

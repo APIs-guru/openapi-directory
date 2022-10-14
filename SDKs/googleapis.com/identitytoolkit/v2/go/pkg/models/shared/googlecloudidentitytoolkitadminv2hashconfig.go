@@ -20,9 +20,9 @@ const (
 )
 
 type GoogleCloudIdentitytoolkitAdminV2HashConfig struct {
-	Algorithm     *GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum `json:"algorithm"`
-	MemoryCost    *int32                                                    `json:"memoryCost"`
-	Rounds        *int32                                                    `json:"rounds"`
-	SaltSeparator *string                                                   `json:"saltSeparator"`
-	SignerKey     *string                                                   `json:"signerKey"`
+	Algorithm     *GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum `json:"algorithm,omitempty"`
+	MemoryCost    *int32                                                    `json:"memoryCost,omitempty"`
+	Rounds        *int32                                                    `json:"rounds,omitempty"`
+	SaltSeparator *string                                                   `json:"saltSeparator,omitempty"`
+	SignerKey     *string                                                   `json:"signerKey,omitempty"`
 }

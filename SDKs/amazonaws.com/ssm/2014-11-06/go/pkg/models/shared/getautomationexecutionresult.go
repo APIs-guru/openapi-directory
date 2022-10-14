@@ -1,5 +1,5 @@
 package shared
 
 type GetAutomationExecutionResult struct {
-	AutomationExecution *AutomationExecution `json:"AutomationExecution"`
+	AutomationExecution *AutomationExecution `json:"AutomationExecution,omitempty"`
 }

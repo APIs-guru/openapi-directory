@@ -5,14 +5,14 @@ import (
 )
 
 type ImportJobProperties struct {
-	DataAccessRoleArn   *string           `json:"DataAccessRoleArn"`
+	DataAccessRoleArn   *string           `json:"DataAccessRoleArn,omitempty"`
 	DatastoreID         string            `json:"DatastoreId"`
-	EndTime             *time.Time        `json:"EndTime"`
+	EndTime             *time.Time        `json:"EndTime,omitempty"`
 	InputDataConfig     InputDataConfig   `json:"InputDataConfig"`
 	JobID               string            `json:"JobId"`
-	JobName             *string           `json:"JobName"`
-	JobOutputDataConfig *OutputDataConfig `json:"JobOutputDataConfig"`
+	JobName             *string           `json:"JobName,omitempty"`
+	JobOutputDataConfig *OutputDataConfig `json:"JobOutputDataConfig,omitempty"`
 	JobStatus           JobStatusEnum     `json:"JobStatus"`
-	Message             *string           `json:"Message"`
+	Message             *string           `json:"Message,omitempty"`
 	SubmitTime          time.Time         `json:"SubmitTime"`
 }

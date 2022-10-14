@@ -1,6 +1,6 @@
 package shared
 
 type ListInferenceSchedulersResponse struct {
-	InferenceSchedulerSummaries []InferenceSchedulerSummary `json:"InferenceSchedulerSummaries"`
-	NextToken                   *string                     `json:"NextToken"`
+	InferenceSchedulerSummaries []InferenceSchedulerSummary `json:"InferenceSchedulerSummaries,omitempty"`
+	NextToken                   *string                     `json:"NextToken,omitempty"`
 }

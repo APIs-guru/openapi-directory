@@ -9,8 +9,8 @@ const (
 )
 
 type FindDevicesByOwnerRequest struct {
-	CustomerID  []string                                  `json:"customerId"`
-	Limit       *string                                   `json:"limit"`
-	PageToken   *string                                   `json:"pageToken"`
-	SectionType *FindDevicesByOwnerRequestSectionTypeEnum `json:"sectionType"`
+	CustomerID  []string                                  `json:"customerId,omitempty"`
+	Limit       *string                                   `json:"limit,omitempty"`
+	PageToken   *string                                   `json:"pageToken,omitempty"`
+	SectionType *FindDevicesByOwnerRequestSectionTypeEnum `json:"sectionType,omitempty"`
 }

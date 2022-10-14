@@ -1,6 +1,6 @@
 package shared
 
 type GoogleChromePolicyVersionsV1PolicySchemaRequiredItems struct {
-	FieldConditions []string `json:"fieldConditions"`
-	RequiredFields  []string `json:"requiredFields"`
+	FieldConditions []string `json:"fieldConditions,omitempty"`
+	RequiredFields  []string `json:"requiredFields,omitempty"`
 }

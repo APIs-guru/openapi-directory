@@ -35,18 +35,18 @@ const (
 )
 
 type GetTranscriptRequestBodyStartPosition struct {
-	AbsoluteTime *string `json:"AbsoluteTime"`
-	ID           *string `json:"Id"`
-	MostRecent   *int64  `json:"MostRecent"`
+	AbsoluteTime *string `json:"AbsoluteTime,omitempty"`
+	ID           *string `json:"Id,omitempty"`
+	MostRecent   *int64  `json:"MostRecent,omitempty"`
 }
 
 type GetTranscriptRequestBody struct {
-	ContactID     *string                                    `json:"ContactId"`
-	MaxResults    *int64                                     `json:"MaxResults"`
-	NextToken     *string                                    `json:"NextToken"`
-	ScanDirection *GetTranscriptRequestBodyScanDirectionEnum `json:"ScanDirection"`
-	SortOrder     *GetTranscriptRequestBodySortOrderEnum     `json:"SortOrder"`
-	StartPosition *GetTranscriptRequestBodyStartPosition     `json:"StartPosition"`
+	ContactID     *string                                    `json:"ContactId,omitempty"`
+	MaxResults    *int64                                     `json:"MaxResults,omitempty"`
+	NextToken     *string                                    `json:"NextToken,omitempty"`
+	ScanDirection *GetTranscriptRequestBodyScanDirectionEnum `json:"ScanDirection,omitempty"`
+	SortOrder     *GetTranscriptRequestBodySortOrderEnum     `json:"SortOrder,omitempty"`
+	StartPosition *GetTranscriptRequestBodyStartPosition     `json:"StartPosition,omitempty"`
 }
 
 type GetTranscriptRequest struct {

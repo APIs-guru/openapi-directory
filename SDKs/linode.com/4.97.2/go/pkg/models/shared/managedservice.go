@@ -21,17 +21,17 @@ const (
 )
 
 type ManagedService struct {
-	Address           *string                        `json:"address"`
-	Body              *string                        `json:"body"`
-	ConsultationGroup *string                        `json:"consultation_group"`
-	Created           *time.Time                     `json:"created"`
-	Credentials       []int64                        `json:"credentials"`
-	ID                *int64                         `json:"id"`
-	Label             *string                        `json:"label"`
-	Notes             *string                        `json:"notes"`
-	Region            *string                        `json:"region"`
-	ServiceType       *ManagedServiceServiceTypeEnum `json:"service_type"`
-	Status            *ManagedServiceStatusEnum      `json:"status"`
-	Timeout           *int64                         `json:"timeout"`
-	Updated           *time.Time                     `json:"updated"`
+	Address           *string                        `json:"address,omitempty"`
+	Body              *string                        `json:"body,omitempty"`
+	ConsultationGroup *string                        `json:"consultation_group,omitempty"`
+	Created           *time.Time                     `json:"created,omitempty"`
+	Credentials       []int64                        `json:"credentials,omitempty"`
+	ID                *int64                         `json:"id,omitempty"`
+	Label             *string                        `json:"label,omitempty"`
+	Notes             *string                        `json:"notes,omitempty"`
+	Region            *string                        `json:"region,omitempty"`
+	ServiceType       *ManagedServiceServiceTypeEnum `json:"service_type,omitempty"`
+	Status            *ManagedServiceStatusEnum      `json:"status,omitempty"`
+	Timeout           *int64                         `json:"timeout,omitempty"`
+	Updated           *time.Time                     `json:"updated,omitempty"`
 }

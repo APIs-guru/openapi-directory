@@ -9,5 +9,5 @@ const (
 )
 
 type SourceScoringConfig struct {
-	SourceImportance *SourceScoringConfigSourceImportanceEnum `json:"sourceImportance"`
+	SourceImportance *SourceScoringConfigSourceImportanceEnum `json:"sourceImportance,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type SuperFunds struct {
-	SuperFunds []SuperFund `json:"SuperFunds"`
+	SuperFunds []SuperFund `json:"SuperFunds,omitempty"`
 }

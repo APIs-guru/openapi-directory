@@ -5,8 +5,8 @@ import (
 )
 
 type EbsInstanceBlockDevice struct {
-	AttachTime          *time.Time            `json:"attachTime"`
-	DeleteOnTermination *bool                 `json:"deleteOnTermination"`
-	Status              *AttachmentStatusEnum `json:"status"`
-	VolumeID            *string               `json:"volumeId"`
+	AttachTime          *time.Time            `json:"attachTime,omitempty"`
+	DeleteOnTermination *bool                 `json:"deleteOnTermination,omitempty"`
+	Status              *AttachmentStatusEnum `json:"status,omitempty"`
+	VolumeID            *string               `json:"volumeId,omitempty"`
 }

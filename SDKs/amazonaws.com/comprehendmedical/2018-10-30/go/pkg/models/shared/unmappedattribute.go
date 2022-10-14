@@ -1,6 +1,6 @@
 package shared
 
 type UnmappedAttribute struct {
-	Attribute *Attribute      `json:"Attribute"`
-	Type      *EntityTypeEnum `json:"Type"`
+	Attribute *Attribute      `json:"Attribute,omitempty"`
+	Type      *EntityTypeEnum `json:"Type,omitempty"`
 }

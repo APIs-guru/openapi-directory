@@ -19,7 +19,7 @@ const (
 
 type Webcast struct {
 	Channel string          `json:"channel"`
-	Date    *string         `json:"date"`
-	File    *string         `json:"file"`
+	Date    *string         `json:"date,omitempty"`
+	File    *string         `json:"file,omitempty"`
 	Type    WebcastTypeEnum `json:"type"`
 }

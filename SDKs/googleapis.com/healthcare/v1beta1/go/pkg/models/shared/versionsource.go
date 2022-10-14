@@ -1,6 +1,6 @@
 package shared
 
 type VersionSource struct {
-	MshField *string `json:"mshField"`
-	Value    *string `json:"value"`
+	MshField *string `json:"mshField,omitempty"`
+	Value    *string `json:"value,omitempty"`
 }

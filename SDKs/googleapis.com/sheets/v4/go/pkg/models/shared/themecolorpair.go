@@ -16,6 +16,6 @@ const (
 )
 
 type ThemeColorPair struct {
-	Color     *ColorStyle                  `json:"color"`
-	ColorType *ThemeColorPairColorTypeEnum `json:"colorType"`
+	Color     *ColorStyle                  `json:"color,omitempty"`
+	ColorType *ThemeColorPairColorTypeEnum `json:"colorType,omitempty"`
 }

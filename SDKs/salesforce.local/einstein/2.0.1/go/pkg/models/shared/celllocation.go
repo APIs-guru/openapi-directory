@@ -1,6 +1,6 @@
 package shared
 
 type CellLocation struct {
-	ColIndex *int32 `json:"colIndex"`
-	RowIndex *int32 `json:"rowIndex"`
+	ColIndex *int32 `json:"colIndex,omitempty"`
+	RowIndex *int32 `json:"rowIndex,omitempty"`
 }

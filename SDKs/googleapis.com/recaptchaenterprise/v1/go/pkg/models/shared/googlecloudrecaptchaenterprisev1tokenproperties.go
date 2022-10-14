@@ -13,9 +13,9 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1TokenProperties struct {
-	Action        *string                                                           `json:"action"`
-	CreateTime    *string                                                           `json:"createTime"`
-	Hostname      *string                                                           `json:"hostname"`
-	InvalidReason *GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum `json:"invalidReason"`
-	Valid         *bool                                                             `json:"valid"`
+	Action        *string                                                           `json:"action,omitempty"`
+	CreateTime    *string                                                           `json:"createTime,omitempty"`
+	Hostname      *string                                                           `json:"hostname,omitempty"`
+	InvalidReason *GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum `json:"invalidReason,omitempty"`
+	Valid         *bool                                                             `json:"valid,omitempty"`
 }

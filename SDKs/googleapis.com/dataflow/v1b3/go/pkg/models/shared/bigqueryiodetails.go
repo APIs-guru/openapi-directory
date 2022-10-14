@@ -1,8 +1,8 @@
 package shared
 
 type BigQueryIoDetails struct {
-	Dataset   *string `json:"dataset"`
-	ProjectID *string `json:"projectId"`
-	Query     *string `json:"query"`
-	Table     *string `json:"table"`
+	Dataset   *string `json:"dataset,omitempty"`
+	ProjectID *string `json:"projectId,omitempty"`
+	Query     *string `json:"query,omitempty"`
+	Table     *string `json:"table,omitempty"`
 }

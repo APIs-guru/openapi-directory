@@ -1,12 +1,12 @@
 package shared
 
 type Settings struct {
-	ChannelIdentification  *bool                       `json:"ChannelIdentification"`
-	MaxAlternatives        *int64                      `json:"MaxAlternatives"`
-	MaxSpeakerLabels       *int64                      `json:"MaxSpeakerLabels"`
-	ShowAlternatives       *bool                       `json:"ShowAlternatives"`
-	ShowSpeakerLabels      *bool                       `json:"ShowSpeakerLabels"`
-	VocabularyFilterMethod *VocabularyFilterMethodEnum `json:"VocabularyFilterMethod"`
-	VocabularyFilterName   *string                     `json:"VocabularyFilterName"`
-	VocabularyName         *string                     `json:"VocabularyName"`
+	ChannelIdentification  *bool                       `json:"ChannelIdentification,omitempty"`
+	MaxAlternatives        *int64                      `json:"MaxAlternatives,omitempty"`
+	MaxSpeakerLabels       *int64                      `json:"MaxSpeakerLabels,omitempty"`
+	ShowAlternatives       *bool                       `json:"ShowAlternatives,omitempty"`
+	ShowSpeakerLabels      *bool                       `json:"ShowSpeakerLabels,omitempty"`
+	VocabularyFilterMethod *VocabularyFilterMethodEnum `json:"VocabularyFilterMethod,omitempty"`
+	VocabularyFilterName   *string                     `json:"VocabularyFilterName,omitempty"`
+	VocabularyName         *string                     `json:"VocabularyName,omitempty"`
 }

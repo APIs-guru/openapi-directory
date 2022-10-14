@@ -1,11 +1,11 @@
 package shared
 
 type Webhook struct {
-	Active              *bool    `json:"active"`
-	ContactEmailAddress *string  `json:"contactEmailAddress"`
-	ID                  *float64 `json:"id"`
-	Name                *string  `json:"name"`
-	OnWebApp            *bool    `json:"onWebApp"`
-	TriggerScope        *string  `json:"triggerScope"`
-	URL                 *string  `json:"url"`
+	Active              *bool    `json:"active,omitempty"`
+	ContactEmailAddress *string  `json:"contactEmailAddress,omitempty"`
+	ID                  *float64 `json:"id,omitempty"`
+	Name                *string  `json:"name,omitempty"`
+	OnWebApp            *bool    `json:"onWebApp,omitempty"`
+	TriggerScope        *string  `json:"triggerScope,omitempty"`
+	URL                 *string  `json:"url,omitempty"`
 }

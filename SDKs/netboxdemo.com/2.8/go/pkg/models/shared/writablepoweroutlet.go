@@ -80,16 +80,16 @@ const (
 )
 
 type WritablePowerOutlet struct {
-	Cable                 *NestedCable                           `json:"cable"`
-	ConnectedEndpoint     map[string]string                      `json:"connected_endpoint"`
-	ConnectedEndpointType *string                                `json:"connected_endpoint_type"`
-	ConnectionStatus      *bool                                  `json:"connection_status"`
-	Description           *string                                `json:"description"`
+	Cable                 *NestedCable                           `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                      `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                                `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *bool                                  `json:"connection_status,omitempty"`
+	Description           *string                                `json:"description,omitempty"`
 	Device                int64                                  `json:"device"`
-	FeedLeg               *WritablePowerOutletFeedLegFeedLegEnum `json:"feed_leg"`
-	ID                    *int64                                 `json:"id"`
+	FeedLeg               *WritablePowerOutletFeedLegFeedLegEnum `json:"feed_leg,omitempty"`
+	ID                    *int64                                 `json:"id,omitempty"`
 	Name                  string                                 `json:"name"`
-	PowerPort             *int64                                 `json:"power_port"`
-	Tags                  []string                               `json:"tags"`
-	Type                  *WritablePowerOutletTypeTypeEnum       `json:"type"`
+	PowerPort             *int64                                 `json:"power_port,omitempty"`
+	Tags                  []string                               `json:"tags,omitempty"`
+	Type                  *WritablePowerOutletTypeTypeEnum       `json:"type,omitempty"`
 }

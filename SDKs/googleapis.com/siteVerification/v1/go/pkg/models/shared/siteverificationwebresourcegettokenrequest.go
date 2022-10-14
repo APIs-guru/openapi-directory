@@ -1,11 +1,11 @@
 package shared
 
 type SiteVerificationWebResourceGettokenRequestSite struct {
-	Identifier *string `json:"identifier"`
-	Type       *string `json:"type"`
+	Identifier *string `json:"identifier,omitempty"`
+	Type       *string `json:"type,omitempty"`
 }
 
 type SiteVerificationWebResourceGettokenRequest struct {
-	Site               *SiteVerificationWebResourceGettokenRequestSite `json:"site"`
-	VerificationMethod *string                                         `json:"verificationMethod"`
+	Site               *SiteVerificationWebResourceGettokenRequestSite `json:"site,omitempty"`
+	VerificationMethod *string                                         `json:"verificationMethod,omitempty"`
 }

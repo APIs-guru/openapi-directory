@@ -1,9 +1,9 @@
 package shared
 
 type InboundSamlSsoProfile struct {
-	Customer    *string        `json:"customer"`
-	DisplayName *string        `json:"displayName"`
-	IdpConfig   *SamlIdpConfig `json:"idpConfig"`
-	Name        *string        `json:"name"`
-	SpConfig    *SamlSpConfig  `json:"spConfig"`
+	Customer    *string        `json:"customer,omitempty"`
+	DisplayName *string        `json:"displayName,omitempty"`
+	IdpConfig   *SamlIdpConfig `json:"idpConfig,omitempty"`
+	Name        *string        `json:"name,omitempty"`
+	SpConfig    *SamlSpConfig  `json:"spConfig,omitempty"`
 }

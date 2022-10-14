@@ -5,6 +5,6 @@ import (
 )
 
 type ByoipCidrEvent struct {
-	Message   *string    `json:"Message"`
-	Timestamp *time.Time `json:"Timestamp"`
+	Message   *string    `json:"Message,omitempty"`
+	Timestamp *time.Time `json:"Timestamp,omitempty"`
 }

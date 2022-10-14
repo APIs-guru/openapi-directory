@@ -22,8 +22,8 @@ const (
 )
 
 type DayAndTimeAssignedTargetingOptionDetails struct {
-	DayOfWeek          *DayAndTimeAssignedTargetingOptionDetailsDayOfWeekEnum          `json:"dayOfWeek"`
-	EndHour            *int32                                                          `json:"endHour"`
-	StartHour          *int32                                                          `json:"startHour"`
-	TimeZoneResolution *DayAndTimeAssignedTargetingOptionDetailsTimeZoneResolutionEnum `json:"timeZoneResolution"`
+	DayOfWeek          *DayAndTimeAssignedTargetingOptionDetailsDayOfWeekEnum          `json:"dayOfWeek,omitempty"`
+	EndHour            *int32                                                          `json:"endHour,omitempty"`
+	StartHour          *int32                                                          `json:"startHour,omitempty"`
+	TimeZoneResolution *DayAndTimeAssignedTargetingOptionDetailsTimeZoneResolutionEnum `json:"timeZoneResolution,omitempty"`
 }

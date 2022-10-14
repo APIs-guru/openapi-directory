@@ -14,29 +14,29 @@ type GetDestroyWithAssociatedResourcesStatusRequest struct {
 }
 
 type GetDestroyWithAssociatedResourcesStatus200ApplicationJSONDroplet struct {
-	DestroyedAt  *time.Time `json:"destroyed_at"`
-	ErrorMessage *string    `json:"error_message"`
-	ID           *string    `json:"id"`
-	Name         *string    `json:"name"`
+	DestroyedAt  *time.Time `json:"destroyed_at,omitempty"`
+	ErrorMessage *string    `json:"error_message,omitempty"`
+	ID           *string    `json:"id,omitempty"`
+	Name         *string    `json:"name,omitempty"`
 }
 
 type GetDestroyWithAssociatedResourcesStatus200ApplicationJSONResources struct {
-	Snapshots       []shared.Onev21droplets1Percent7BdropletIDPercent7D1destroyWithAssociatedResources1statusGetResponses200ContentApplication1jsonSchemaPropertiesDroplet `json:"snapshots"`
-	VolumeSnapshots []shared.Onev21droplets1Percent7BdropletIDPercent7D1destroyWithAssociatedResources1statusGetResponses200ContentApplication1jsonSchemaPropertiesDroplet `json:"volume_snapshots"`
-	Volumes         []shared.Onev21droplets1Percent7BdropletIDPercent7D1destroyWithAssociatedResources1statusGetResponses200ContentApplication1jsonSchemaPropertiesDroplet `json:"volumes"`
+	Snapshots       []shared.Onev21droplets1Percent7BdropletIDPercent7D1destroyWithAssociatedResources1statusGetResponses200ContentApplication1jsonSchemaPropertiesDroplet `json:"snapshots,omitempty"`
+	VolumeSnapshots []shared.Onev21droplets1Percent7BdropletIDPercent7D1destroyWithAssociatedResources1statusGetResponses200ContentApplication1jsonSchemaPropertiesDroplet `json:"volume_snapshots,omitempty"`
+	Volumes         []shared.Onev21droplets1Percent7BdropletIDPercent7D1destroyWithAssociatedResources1statusGetResponses200ContentApplication1jsonSchemaPropertiesDroplet `json:"volumes,omitempty"`
 }
 
 type GetDestroyWithAssociatedResourcesStatus200ApplicationJSON struct {
-	CompletedAt *time.Time                                                          `json:"completed_at"`
-	Droplet     *GetDestroyWithAssociatedResourcesStatus200ApplicationJSONDroplet   `json:"droplet"`
-	Failures    *int64                                                              `json:"failures"`
-	Resources   *GetDestroyWithAssociatedResourcesStatus200ApplicationJSONResources `json:"resources"`
+	CompletedAt *time.Time                                                          `json:"completed_at,omitempty"`
+	Droplet     *GetDestroyWithAssociatedResourcesStatus200ApplicationJSONDroplet   `json:"droplet,omitempty"`
+	Failures    *int64                                                              `json:"failures,omitempty"`
+	Resources   *GetDestroyWithAssociatedResourcesStatus200ApplicationJSONResources `json:"resources,omitempty"`
 }
 
 type GetDestroyWithAssociatedResourcesStatus401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetDestroyWithAssociatedResourcesStatusResponse struct {

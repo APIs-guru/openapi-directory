@@ -14,24 +14,24 @@ type PostSavedQueryRequest struct {
 }
 
 type PostSavedQuery201ApplicationJSON struct {
-	ID     *string                       `json:"id"`
-	Result *shared.SavedQueryRestAPIPost `json:"result"`
+	ID     *string                       `json:"id,omitempty"`
+	Result *shared.SavedQueryRestAPIPost `json:"result,omitempty"`
 }
 
 type PostSavedQuery400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSavedQuery401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSavedQuery422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSavedQuery500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSavedQueryResponse struct {

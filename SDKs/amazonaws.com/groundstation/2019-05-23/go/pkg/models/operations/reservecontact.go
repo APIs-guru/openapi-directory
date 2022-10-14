@@ -21,7 +21,7 @@ type ReserveContactRequestBody struct {
 	MissionProfileArn string            `json:"missionProfileArn"`
 	SatelliteArn      string            `json:"satelliteArn"`
 	StartTime         time.Time         `json:"startTime"`
-	Tags              map[string]string `json:"tags"`
+	Tags              map[string]string `json:"tags,omitempty"`
 }
 
 type ReserveContactRequest struct {

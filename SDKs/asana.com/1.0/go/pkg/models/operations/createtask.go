@@ -10,7 +10,7 @@ type CreateTaskQueryParams struct {
 }
 
 type CreateTaskRequestBody struct {
-	Data *shared.TaskRequest `json:"data"`
+	Data *shared.TaskRequest `json:"data,omitempty"`
 }
 
 type CreateTaskRequest struct {
@@ -19,7 +19,7 @@ type CreateTaskRequest struct {
 }
 
 type CreateTask201ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data"`
+	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type CreateTaskResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type DeleteAppRequest struct {
-	AppID                   *string `json:"appId"`
-	ForceStopAppReplication *bool   `json:"forceStopAppReplication"`
-	ForceTerminateApp       *bool   `json:"forceTerminateApp"`
+	AppID                   *string `json:"appId,omitempty"`
+	ForceStopAppReplication *bool   `json:"forceStopAppReplication,omitempty"`
+	ForceTerminateApp       *bool   `json:"forceTerminateApp,omitempty"`
 }

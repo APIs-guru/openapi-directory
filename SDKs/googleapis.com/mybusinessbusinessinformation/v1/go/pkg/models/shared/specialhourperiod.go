@@ -1,9 +1,9 @@
 package shared
 
 type SpecialHourPeriod struct {
-	CloseTime *TimeOfDay `json:"closeTime"`
-	Closed    *bool      `json:"closed"`
-	EndDate   *Date      `json:"endDate"`
-	OpenTime  *TimeOfDay `json:"openTime"`
-	StartDate *Date      `json:"startDate"`
+	CloseTime *TimeOfDay `json:"closeTime,omitempty"`
+	Closed    *bool      `json:"closed,omitempty"`
+	EndDate   *Date      `json:"endDate,omitempty"`
+	OpenTime  *TimeOfDay `json:"openTime,omitempty"`
+	StartDate *Date      `json:"startDate,omitempty"`
 }

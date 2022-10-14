@@ -22,7 +22,7 @@ type TfaEnableRequest struct {
 }
 
 type TfaEnableDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type TfaEnableResponse struct {

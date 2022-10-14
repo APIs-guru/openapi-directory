@@ -1,5 +1,5 @@
 package shared
 
 type TextAnswers struct {
-	Answers []TextAnswer `json:"answers"`
+	Answers []TextAnswer `json:"answers,omitempty"`
 }

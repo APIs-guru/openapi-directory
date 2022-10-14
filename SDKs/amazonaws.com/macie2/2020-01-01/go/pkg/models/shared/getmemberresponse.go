@@ -5,13 +5,13 @@ import (
 )
 
 type GetMemberResponse struct {
-	AccountID              *string                 `json:"accountId"`
-	AdministratorAccountID *string                 `json:"administratorAccountId"`
-	Arn                    *string                 `json:"arn"`
-	Email                  *string                 `json:"email"`
-	InvitedAt              *time.Time              `json:"invitedAt"`
-	MasterAccountID        *string                 `json:"masterAccountId"`
-	RelationshipStatus     *RelationshipStatusEnum `json:"relationshipStatus"`
-	Tags                   map[string]string       `json:"tags"`
-	UpdatedAt              *time.Time              `json:"updatedAt"`
+	AccountID              *string                 `json:"accountId,omitempty"`
+	AdministratorAccountID *string                 `json:"administratorAccountId,omitempty"`
+	Arn                    *string                 `json:"arn,omitempty"`
+	Email                  *string                 `json:"email,omitempty"`
+	InvitedAt              *time.Time              `json:"invitedAt,omitempty"`
+	MasterAccountID        *string                 `json:"masterAccountId,omitempty"`
+	RelationshipStatus     *RelationshipStatusEnum `json:"relationshipStatus,omitempty"`
+	Tags                   map[string]string       `json:"tags,omitempty"`
+	UpdatedAt              *time.Time              `json:"updatedAt,omitempty"`
 }

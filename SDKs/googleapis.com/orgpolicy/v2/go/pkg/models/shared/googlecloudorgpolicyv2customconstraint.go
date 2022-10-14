@@ -18,12 +18,12 @@ const (
 )
 
 type GoogleCloudOrgpolicyV2CustomConstraint struct {
-	ActionType    *GoogleCloudOrgpolicyV2CustomConstraintActionTypeEnum   `json:"actionType"`
-	Condition     *string                                                 `json:"condition"`
-	Description   *string                                                 `json:"description"`
-	DisplayName   *string                                                 `json:"displayName"`
-	MethodTypes   []GoogleCloudOrgpolicyV2CustomConstraintMethodTypesEnum `json:"methodTypes"`
-	Name          *string                                                 `json:"name"`
-	ResourceTypes []string                                                `json:"resourceTypes"`
-	UpdateTime    *string                                                 `json:"updateTime"`
+	ActionType    *GoogleCloudOrgpolicyV2CustomConstraintActionTypeEnum   `json:"actionType,omitempty"`
+	Condition     *string                                                 `json:"condition,omitempty"`
+	Description   *string                                                 `json:"description,omitempty"`
+	DisplayName   *string                                                 `json:"displayName,omitempty"`
+	MethodTypes   []GoogleCloudOrgpolicyV2CustomConstraintMethodTypesEnum `json:"methodTypes,omitempty"`
+	Name          *string                                                 `json:"name,omitempty"`
+	ResourceTypes []string                                                `json:"resourceTypes,omitempty"`
+	UpdateTime    *string                                                 `json:"updateTime,omitempty"`
 }

@@ -11,7 +11,7 @@ type KeyRevokeNosecretRequest struct {
 }
 
 type KeyRevokeNosecret200ApplicationJSON struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }
 
 type KeyRevokeNosecretResponse struct {

@@ -1,18 +1,18 @@
 package shared
 
 type Volume struct {
-	AvailabilityZone *string `json:"AvailabilityZone"`
-	Device           *string `json:"Device"`
-	Ec2VolumeID      *string `json:"Ec2VolumeId"`
-	Encrypted        *bool   `json:"Encrypted"`
-	InstanceID       *string `json:"InstanceId"`
-	Iops             *int64  `json:"Iops"`
-	MountPoint       *string `json:"MountPoint"`
-	Name             *string `json:"Name"`
-	RaidArrayID      *string `json:"RaidArrayId"`
-	Region           *string `json:"Region"`
-	Size             *int64  `json:"Size"`
-	Status           *string `json:"Status"`
-	VolumeID         *string `json:"VolumeId"`
-	VolumeType       *string `json:"VolumeType"`
+	AvailabilityZone *string `json:"AvailabilityZone,omitempty"`
+	Device           *string `json:"Device,omitempty"`
+	Ec2VolumeID      *string `json:"Ec2VolumeId,omitempty"`
+	Encrypted        *bool   `json:"Encrypted,omitempty"`
+	InstanceID       *string `json:"InstanceId,omitempty"`
+	Iops             *int64  `json:"Iops,omitempty"`
+	MountPoint       *string `json:"MountPoint,omitempty"`
+	Name             *string `json:"Name,omitempty"`
+	RaidArrayID      *string `json:"RaidArrayId,omitempty"`
+	Region           *string `json:"Region,omitempty"`
+	Size             *int64  `json:"Size,omitempty"`
+	Status           *string `json:"Status,omitempty"`
+	VolumeID         *string `json:"VolumeId,omitempty"`
+	VolumeType       *string `json:"VolumeType,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type StandardsProfile struct {
-	Cycle            *Cycle   `json:"cycle"`
-	DefaultProgram   *bool    `json:"defaultProgram"`
-	EvaluationReason *string  `json:"evaluationReason"`
-	Metrics          []Metric `json:"metrics"`
-	Program          *string  `json:"program"`
-	StandardsLevel   *string  `json:"standardsLevel"`
+	Cycle            *Cycle   `json:"cycle,omitempty"`
+	DefaultProgram   *bool    `json:"defaultProgram,omitempty"`
+	EvaluationReason *string  `json:"evaluationReason,omitempty"`
+	Metrics          []Metric `json:"metrics,omitempty"`
+	Program          *string  `json:"program,omitempty"`
+	StandardsLevel   *string  `json:"standardsLevel,omitempty"`
 }

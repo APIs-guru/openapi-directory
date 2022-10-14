@@ -1,6 +1,6 @@
 package shared
 
 type InventorySourceAccessors struct {
-	Advertisers *InventorySourceAccessorsAdvertiserAccessors `json:"advertisers"`
-	Partner     *InventorySourceAccessorsPartnerAccessor     `json:"partner"`
+	Advertisers *InventorySourceAccessorsAdvertiserAccessors `json:"advertisers,omitempty"`
+	Partner     *InventorySourceAccessorsPartnerAccessor     `json:"partner,omitempty"`
 }

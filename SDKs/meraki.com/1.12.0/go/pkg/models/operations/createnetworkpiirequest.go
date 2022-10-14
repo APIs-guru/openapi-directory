@@ -12,13 +12,13 @@ const (
 )
 
 type CreateNetworkPiiRequestRequestBody struct {
-	Datasets   []string                                    `json:"datasets"`
-	Email      *string                                     `json:"email"`
-	Mac        *string                                     `json:"mac"`
-	SmDeviceID *string                                     `json:"smDeviceId"`
-	SmUserID   *string                                     `json:"smUserId"`
-	Type       *CreateNetworkPiiRequestRequestBodyTypeEnum `json:"type"`
-	Username   *string                                     `json:"username"`
+	Datasets   []string                                    `json:"datasets,omitempty"`
+	Email      *string                                     `json:"email,omitempty"`
+	Mac        *string                                     `json:"mac,omitempty"`
+	SmDeviceID *string                                     `json:"smDeviceId,omitempty"`
+	SmUserID   *string                                     `json:"smUserId,omitempty"`
+	Type       *CreateNetworkPiiRequestRequestBodyTypeEnum `json:"type,omitempty"`
+	Username   *string                                     `json:"username,omitempty"`
 }
 
 type CreateNetworkPiiRequestRequest struct {

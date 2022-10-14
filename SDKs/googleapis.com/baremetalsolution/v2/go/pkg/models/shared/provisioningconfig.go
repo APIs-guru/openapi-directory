@@ -14,18 +14,18 @@ const (
 )
 
 type ProvisioningConfig struct {
-	CloudConsoleURI        *string                      `json:"cloudConsoleUri"`
-	CustomID               *string                      `json:"customId"`
-	Email                  *string                      `json:"email"`
-	HandoverServiceAccount *string                      `json:"handoverServiceAccount"`
-	Instances              []InstanceConfig             `json:"instances"`
-	Location               *string                      `json:"location"`
-	Name                   *string                      `json:"name"`
-	Networks               []NetworkConfig              `json:"networks"`
-	State                  *ProvisioningConfigStateEnum `json:"state"`
-	StatusMessage          *string                      `json:"statusMessage"`
-	TicketID               *string                      `json:"ticketId"`
-	UpdateTime             *string                      `json:"updateTime"`
-	Volumes                []VolumeConfig               `json:"volumes"`
-	VpcScEnabled           *bool                        `json:"vpcScEnabled"`
+	CloudConsoleURI        *string                      `json:"cloudConsoleUri,omitempty"`
+	CustomID               *string                      `json:"customId,omitempty"`
+	Email                  *string                      `json:"email,omitempty"`
+	HandoverServiceAccount *string                      `json:"handoverServiceAccount,omitempty"`
+	Instances              []InstanceConfig             `json:"instances,omitempty"`
+	Location               *string                      `json:"location,omitempty"`
+	Name                   *string                      `json:"name,omitempty"`
+	Networks               []NetworkConfig              `json:"networks,omitempty"`
+	State                  *ProvisioningConfigStateEnum `json:"state,omitempty"`
+	StatusMessage          *string                      `json:"statusMessage,omitempty"`
+	TicketID               *string                      `json:"ticketId,omitempty"`
+	UpdateTime             *string                      `json:"updateTime,omitempty"`
+	Volumes                []VolumeConfig               `json:"volumes,omitempty"`
+	VpcScEnabled           *bool                        `json:"vpcScEnabled,omitempty"`
 }

@@ -5,20 +5,20 @@ import (
 )
 
 type SecretListEntry struct {
-	Arn                    *string             `json:"ARN"`
-	CreatedDate            *time.Time          `json:"CreatedDate"`
-	DeletedDate            *time.Time          `json:"DeletedDate"`
-	Description            *string             `json:"Description"`
-	KmsKeyID               *string             `json:"KmsKeyId"`
-	LastAccessedDate       *time.Time          `json:"LastAccessedDate"`
-	LastChangedDate        *time.Time          `json:"LastChangedDate"`
-	LastRotatedDate        *time.Time          `json:"LastRotatedDate"`
-	Name                   *string             `json:"Name"`
-	OwningService          *string             `json:"OwningService"`
-	PrimaryRegion          *string             `json:"PrimaryRegion"`
-	RotationEnabled        *bool               `json:"RotationEnabled"`
-	RotationLambdaArn      *string             `json:"RotationLambdaARN"`
-	RotationRules          *RotationRulesType  `json:"RotationRules"`
-	SecretVersionsToStages map[string][]string `json:"SecretVersionsToStages"`
-	Tags                   []Tag               `json:"Tags"`
+	Arn                    *string             `json:"ARN,omitempty"`
+	CreatedDate            *time.Time          `json:"CreatedDate,omitempty"`
+	DeletedDate            *time.Time          `json:"DeletedDate,omitempty"`
+	Description            *string             `json:"Description,omitempty"`
+	KmsKeyID               *string             `json:"KmsKeyId,omitempty"`
+	LastAccessedDate       *time.Time          `json:"LastAccessedDate,omitempty"`
+	LastChangedDate        *time.Time          `json:"LastChangedDate,omitempty"`
+	LastRotatedDate        *time.Time          `json:"LastRotatedDate,omitempty"`
+	Name                   *string             `json:"Name,omitempty"`
+	OwningService          *string             `json:"OwningService,omitempty"`
+	PrimaryRegion          *string             `json:"PrimaryRegion,omitempty"`
+	RotationEnabled        *bool               `json:"RotationEnabled,omitempty"`
+	RotationLambdaArn      *string             `json:"RotationLambdaARN,omitempty"`
+	RotationRules          *RotationRulesType  `json:"RotationRules,omitempty"`
+	SecretVersionsToStages map[string][]string `json:"SecretVersionsToStages,omitempty"`
+	Tags                   []Tag               `json:"Tags,omitempty"`
 }

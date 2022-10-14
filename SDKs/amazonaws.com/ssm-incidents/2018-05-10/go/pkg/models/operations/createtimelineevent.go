@@ -16,7 +16,7 @@ type CreateTimelineEventHeaders struct {
 }
 
 type CreateTimelineEventRequestBody struct {
-	ClientToken       *string   `json:"clientToken"`
+	ClientToken       *string   `json:"clientToken,omitempty"`
 	EventData         string    `json:"eventData"`
 	EventTime         time.Time `json:"eventTime"`
 	EventType         string    `json:"eventType"`

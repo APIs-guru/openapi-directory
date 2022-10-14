@@ -1,11 +1,11 @@
 package shared
 
 type Source struct {
-	Acronym      *string `json:"acronym"`
-	ContactEmail *string `json:"contactEmail"`
-	ID           *int64  `json:"id"`
-	LargeLogoURL *string `json:"largeLogoUrl"`
-	Name         *string `json:"name"`
-	SmallLogoURL *string `json:"smallLogoUrl"`
-	WebsiteURL   *string `json:"websiteUrl"`
+	Acronym      *string `json:"acronym,omitempty"`
+	ContactEmail *string `json:"contactEmail,omitempty"`
+	ID           *int64  `json:"id,omitempty"`
+	LargeLogoURL *string `json:"largeLogoUrl,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	SmallLogoURL *string `json:"smallLogoUrl,omitempty"`
+	WebsiteURL   *string `json:"websiteUrl,omitempty"`
 }

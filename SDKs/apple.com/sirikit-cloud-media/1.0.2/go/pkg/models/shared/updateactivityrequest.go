@@ -5,9 +5,9 @@ import (
 )
 
 type UpdateActivityRequest struct {
-	Constraints       *Constraints                 `json:"constraints"`
-	NowPlaying        *PlayerContext               `json:"nowPlaying"`
-	PreviouslyPlaying *PlayerContext               `json:"previouslyPlaying"`
+	Constraints       *Constraints                 `json:"constraints,omitempty"`
+	NowPlaying        *PlayerContext               `json:"nowPlaying,omitempty"`
+	PreviouslyPlaying *PlayerContext               `json:"previouslyPlaying,omitempty"`
 	Report            QueueActivityReportEventEnum `json:"report"`
 	Timestamp         time.Time                    `json:"timestamp"`
 	UserActivity      UserActivity                 `json:"userActivity"`

@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudApigeeV1Alias struct {
-	Alias     *string                           `json:"alias"`
-	CertsInfo *GoogleCloudApigeeV1Certificate   `json:"certsInfo"`
-	Type      *GoogleCloudApigeeV1AliasTypeEnum `json:"type"`
+	Alias     *string                           `json:"alias,omitempty"`
+	CertsInfo *GoogleCloudApigeeV1Certificate   `json:"certsInfo,omitempty"`
+	Type      *GoogleCloudApigeeV1AliasTypeEnum `json:"type,omitempty"`
 }

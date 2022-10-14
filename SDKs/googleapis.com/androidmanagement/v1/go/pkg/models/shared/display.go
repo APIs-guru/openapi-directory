@@ -11,11 +11,11 @@ const (
 )
 
 type Display struct {
-	Density     *int32            `json:"density"`
-	DisplayID   *int32            `json:"displayId"`
-	Height      *int32            `json:"height"`
-	Name        *string           `json:"name"`
-	RefreshRate *int32            `json:"refreshRate"`
-	State       *DisplayStateEnum `json:"state"`
-	Width       *int32            `json:"width"`
+	Density     *int32            `json:"density,omitempty"`
+	DisplayID   *int32            `json:"displayId,omitempty"`
+	Height      *int32            `json:"height,omitempty"`
+	Name        *string           `json:"name,omitempty"`
+	RefreshRate *int32            `json:"refreshRate,omitempty"`
+	State       *DisplayStateEnum `json:"state,omitempty"`
+	Width       *int32            `json:"width,omitempty"`
 }

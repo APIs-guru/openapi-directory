@@ -1,7 +1,7 @@
 package shared
 
 type GoogleSecuritySafebrowsingV4ThreatEntry struct {
-	Digest *string `json:"digest"`
-	Hash   *string `json:"hash"`
-	URL    *string `json:"url"`
+	Digest *string `json:"digest,omitempty"`
+	Hash   *string `json:"hash,omitempty"`
+	URL    *string `json:"url,omitempty"`
 }

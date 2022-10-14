@@ -19,7 +19,7 @@ type UpdateProfilingGroupHeaders struct {
 }
 
 type UpdateProfilingGroupRequestBodyAgentOrchestrationConfig struct {
-	ProfilingEnabled *bool `json:"profilingEnabled"`
+	ProfilingEnabled *bool `json:"profilingEnabled,omitempty"`
 }
 
 type UpdateProfilingGroupRequestBody struct {

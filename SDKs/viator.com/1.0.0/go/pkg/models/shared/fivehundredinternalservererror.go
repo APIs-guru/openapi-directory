@@ -13,8 +13,8 @@ const (
 )
 
 type FiveHundredInternalServerError struct {
-	Code       *FiveHundredInternalServerErrorCodeEnum    `json:"code"`
-	Message    *FiveHundredInternalServerErrorMessageEnum `json:"message"`
-	Timestamp  *string                                    `json:"timestamp"`
-	TrackingID *string                                    `json:"trackingId"`
+	Code       *FiveHundredInternalServerErrorCodeEnum    `json:"code,omitempty"`
+	Message    *FiveHundredInternalServerErrorMessageEnum `json:"message,omitempty"`
+	Timestamp  *string                                    `json:"timestamp,omitempty"`
+	TrackingID *string                                    `json:"trackingId,omitempty"`
 }

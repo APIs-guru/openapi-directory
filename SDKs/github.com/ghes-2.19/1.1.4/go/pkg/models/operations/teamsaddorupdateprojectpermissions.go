@@ -18,7 +18,7 @@ const (
 )
 
 type TeamsAddOrUpdateProjectPermissionsRequestBody struct {
-	Permission *TeamsAddOrUpdateProjectPermissionsRequestBodyPermissionEnum `json:"permission"`
+	Permission *TeamsAddOrUpdateProjectPermissionsRequestBodyPermissionEnum `json:"permission,omitempty"`
 }
 
 type TeamsAddOrUpdateProjectPermissionsRequest struct {
@@ -28,8 +28,8 @@ type TeamsAddOrUpdateProjectPermissionsRequest struct {
 }
 
 type TeamsAddOrUpdateProjectPermissions403ApplicationJSON struct {
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type TeamsAddOrUpdateProjectPermissionsResponse struct {

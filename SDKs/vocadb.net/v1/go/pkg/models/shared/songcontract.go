@@ -48,20 +48,20 @@ const (
 )
 
 type SongContract struct {
-	AdditionalNames *string                     `json:"additionalNames"`
-	ArtistString    *string                     `json:"artistString"`
-	CreateDate      *time.Time                  `json:"createDate"`
-	Deleted         *bool                       `json:"deleted"`
-	FavoritedTimes  *int32                      `json:"favoritedTimes"`
-	ID              *int32                      `json:"id"`
-	LengthSeconds   *int32                      `json:"lengthSeconds"`
-	Name            *string                     `json:"name"`
-	NicoID          *string                     `json:"nicoId"`
-	PublishDate     *time.Time                  `json:"publishDate"`
-	PvServices      *SongContractPvServicesEnum `json:"pvServices"`
-	RatingScore     *int32                      `json:"ratingScore"`
-	SongType        *SongContractSongTypeEnum   `json:"songType"`
-	Status          *SongContractStatusEnum     `json:"status"`
-	ThumbURL        *string                     `json:"thumbUrl"`
-	Version         *int32                      `json:"version"`
+	AdditionalNames *string                     `json:"additionalNames,omitempty"`
+	ArtistString    *string                     `json:"artistString,omitempty"`
+	CreateDate      *time.Time                  `json:"createDate,omitempty"`
+	Deleted         *bool                       `json:"deleted,omitempty"`
+	FavoritedTimes  *int32                      `json:"favoritedTimes,omitempty"`
+	ID              *int32                      `json:"id,omitempty"`
+	LengthSeconds   *int32                      `json:"lengthSeconds,omitempty"`
+	Name            *string                     `json:"name,omitempty"`
+	NicoID          *string                     `json:"nicoId,omitempty"`
+	PublishDate     *time.Time                  `json:"publishDate,omitempty"`
+	PvServices      *SongContractPvServicesEnum `json:"pvServices,omitempty"`
+	RatingScore     *int32                      `json:"ratingScore,omitempty"`
+	SongType        *SongContractSongTypeEnum   `json:"songType,omitempty"`
+	Status          *SongContractStatusEnum     `json:"status,omitempty"`
+	ThumbURL        *string                     `json:"thumbUrl,omitempty"`
+	Version         *int32                      `json:"version,omitempty"`
 }

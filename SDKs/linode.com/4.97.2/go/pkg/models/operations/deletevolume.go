@@ -27,7 +27,7 @@ type DeleteVolumeRequest struct {
 }
 
 type DeleteVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteVolumeResponse struct {

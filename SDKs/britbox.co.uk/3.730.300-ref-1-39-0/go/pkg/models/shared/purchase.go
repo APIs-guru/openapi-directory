@@ -5,12 +5,12 @@ import (
 )
 
 type Purchase struct {
-	AuthorizationDate *time.Time    `json:"authorizationDate"`
+	AuthorizationDate *time.Time    `json:"authorizationDate,omitempty"`
 	CreationDate      time.Time     `json:"creationDate"`
 	Currency          string        `json:"currency"`
 	ID                string        `json:"id"`
-	Item              *ItemPurchase `json:"item"`
-	PaymentMethodID   *string       `json:"paymentMethodId"`
-	Plan              *PlanPurchase `json:"plan"`
+	Item              *ItemPurchase `json:"item,omitempty"`
+	PaymentMethodID   *string       `json:"paymentMethodId,omitempty"`
+	Plan              *PlanPurchase `json:"plan,omitempty"`
 	Total             float32       `json:"total"`
 }

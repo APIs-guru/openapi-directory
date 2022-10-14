@@ -1,8 +1,8 @@
 package shared
 
 type CreateConstraintInput struct {
-	AcceptLanguage   *string `json:"AcceptLanguage"`
-	Description      *string `json:"Description"`
+	AcceptLanguage   *string `json:"AcceptLanguage,omitempty"`
+	Description      *string `json:"Description,omitempty"`
 	IdempotencyToken string  `json:"IdempotencyToken"`
 	Parameters       string  `json:"Parameters"`
 	PortfolioID      string  `json:"PortfolioId"`

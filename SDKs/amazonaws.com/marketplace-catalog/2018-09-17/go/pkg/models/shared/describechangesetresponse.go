@@ -1,13 +1,13 @@
 package shared
 
 type DescribeChangeSetResponse struct {
-	ChangeSet          []ChangeSummary   `json:"ChangeSet"`
-	ChangeSetArn       *string           `json:"ChangeSetArn"`
-	ChangeSetID        *string           `json:"ChangeSetId"`
-	ChangeSetName      *string           `json:"ChangeSetName"`
-	EndTime            *string           `json:"EndTime"`
-	FailureCode        *FailureCodeEnum  `json:"FailureCode"`
-	FailureDescription *string           `json:"FailureDescription"`
-	StartTime          *string           `json:"StartTime"`
-	Status             *ChangeStatusEnum `json:"Status"`
+	ChangeSet          []ChangeSummary   `json:"ChangeSet,omitempty"`
+	ChangeSetArn       *string           `json:"ChangeSetArn,omitempty"`
+	ChangeSetID        *string           `json:"ChangeSetId,omitempty"`
+	ChangeSetName      *string           `json:"ChangeSetName,omitempty"`
+	EndTime            *string           `json:"EndTime,omitempty"`
+	FailureCode        *FailureCodeEnum  `json:"FailureCode,omitempty"`
+	FailureDescription *string           `json:"FailureDescription,omitempty"`
+	StartTime          *string           `json:"StartTime,omitempty"`
+	Status             *ChangeStatusEnum `json:"Status,omitempty"`
 }

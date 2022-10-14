@@ -1,5 +1,5 @@
 package shared
 
 type AdWordsLocationExtensions struct {
-	AdPhone *string `json:"adPhone"`
+	AdPhone *string `json:"adPhone,omitempty"`
 }

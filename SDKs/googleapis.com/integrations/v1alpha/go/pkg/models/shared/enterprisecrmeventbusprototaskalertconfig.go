@@ -20,17 +20,17 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoTaskAlertConfig struct {
-	AggregationPeriod     *string                                                     `json:"aggregationPeriod"`
-	AlertDisabled         *bool                                                       `json:"alertDisabled"`
-	AlertName             *string                                                     `json:"alertName"`
-	ClientID              *string                                                     `json:"clientId"`
-	DurationThresholdMs   *string                                                     `json:"durationThresholdMs"`
-	ErrorEnumList         *EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList     `json:"errorEnumList"`
-	MetricType            *EnterpriseCrmEventbusProtoTaskAlertConfigMetricTypeEnum    `json:"metricType"`
-	NumAggregationPeriods *int32                                                      `json:"numAggregationPeriods"`
-	OnlyFinalAttempt      *bool                                                       `json:"onlyFinalAttempt"`
-	PlaybookURL           *string                                                     `json:"playbookUrl"`
-	ThresholdType         *EnterpriseCrmEventbusProtoTaskAlertConfigThresholdTypeEnum `json:"thresholdType"`
-	ThresholdValue        *EnterpriseCrmEventbusProtoBaseAlertConfigThresholdValue    `json:"thresholdValue"`
-	WarningEnumList       *EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList     `json:"warningEnumList"`
+	AggregationPeriod     *string                                                     `json:"aggregationPeriod,omitempty"`
+	AlertDisabled         *bool                                                       `json:"alertDisabled,omitempty"`
+	AlertName             *string                                                     `json:"alertName,omitempty"`
+	ClientID              *string                                                     `json:"clientId,omitempty"`
+	DurationThresholdMs   *string                                                     `json:"durationThresholdMs,omitempty"`
+	ErrorEnumList         *EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList     `json:"errorEnumList,omitempty"`
+	MetricType            *EnterpriseCrmEventbusProtoTaskAlertConfigMetricTypeEnum    `json:"metricType,omitempty"`
+	NumAggregationPeriods *int32                                                      `json:"numAggregationPeriods,omitempty"`
+	OnlyFinalAttempt      *bool                                                       `json:"onlyFinalAttempt,omitempty"`
+	PlaybookURL           *string                                                     `json:"playbookUrl,omitempty"`
+	ThresholdType         *EnterpriseCrmEventbusProtoTaskAlertConfigThresholdTypeEnum `json:"thresholdType,omitempty"`
+	ThresholdValue        *EnterpriseCrmEventbusProtoBaseAlertConfigThresholdValue    `json:"thresholdValue,omitempty"`
+	WarningEnumList       *EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList     `json:"warningEnumList,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type BatchCreatePrintersRequest struct {
-	Requests []CreatePrinterRequest `json:"requests"`
+	Requests []CreatePrinterRequest `json:"requests,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudOrgpolicyV2AlternatePolicySpec struct {
-	Launch *string                           `json:"launch"`
-	Spec   *GoogleCloudOrgpolicyV2PolicySpec `json:"spec"`
+	Launch *string                           `json:"launch,omitempty"`
+	Spec   *GoogleCloudOrgpolicyV2PolicySpec `json:"spec,omitempty"`
 }

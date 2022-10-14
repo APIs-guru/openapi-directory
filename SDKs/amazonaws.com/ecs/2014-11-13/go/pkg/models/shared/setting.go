@@ -1,7 +1,7 @@
 package shared
 
 type Setting struct {
-	Name         *SettingNameEnum `json:"name"`
-	PrincipalArn *string          `json:"principalArn"`
-	Value        *string          `json:"value"`
+	Name         *SettingNameEnum `json:"name,omitempty"`
+	PrincipalArn *string          `json:"principalArn,omitempty"`
+	Value        *string          `json:"value,omitempty"`
 }

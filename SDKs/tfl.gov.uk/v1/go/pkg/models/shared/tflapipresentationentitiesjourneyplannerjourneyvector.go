@@ -1,8 +1,8 @@
 package shared
 
 type TflAPIPresentationEntitiesJourneyPlannerJourneyVector struct {
-	From *string `json:"from"`
-	To   *string `json:"to"`
-	URI  *string `json:"uri"`
-	Via  *string `json:"via"`
+	From *string `json:"from,omitempty"`
+	To   *string `json:"to,omitempty"`
+	URI  *string `json:"uri,omitempty"`
+	Via  *string `json:"via,omitempty"`
 }

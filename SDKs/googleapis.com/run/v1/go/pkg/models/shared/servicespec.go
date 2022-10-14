@@ -1,6 +1,6 @@
 package shared
 
 type ServiceSpec struct {
-	Template *RevisionTemplate `json:"template"`
-	Traffic  []TrafficTarget   `json:"traffic"`
+	Template *RevisionTemplate `json:"template,omitempty"`
+	Traffic  []TrafficTarget   `json:"traffic,omitempty"`
 }

@@ -10,13 +10,13 @@ const (
 )
 
 type VpnTunnelInfo struct {
-	DisplayName     *string                       `json:"displayName"`
-	NetworkURI      *string                       `json:"networkUri"`
-	Region          *string                       `json:"region"`
-	RemoteGateway   *string                       `json:"remoteGateway"`
-	RemoteGatewayIP *string                       `json:"remoteGatewayIp"`
-	RoutingType     *VpnTunnelInfoRoutingTypeEnum `json:"routingType"`
-	SourceGateway   *string                       `json:"sourceGateway"`
-	SourceGatewayIP *string                       `json:"sourceGatewayIp"`
-	URI             *string                       `json:"uri"`
+	DisplayName     *string                       `json:"displayName,omitempty"`
+	NetworkURI      *string                       `json:"networkUri,omitempty"`
+	Region          *string                       `json:"region,omitempty"`
+	RemoteGateway   *string                       `json:"remoteGateway,omitempty"`
+	RemoteGatewayIP *string                       `json:"remoteGatewayIp,omitempty"`
+	RoutingType     *VpnTunnelInfoRoutingTypeEnum `json:"routingType,omitempty"`
+	SourceGateway   *string                       `json:"sourceGateway,omitempty"`
+	SourceGatewayIP *string                       `json:"sourceGatewayIp,omitempty"`
+	URI             *string                       `json:"uri,omitempty"`
 }

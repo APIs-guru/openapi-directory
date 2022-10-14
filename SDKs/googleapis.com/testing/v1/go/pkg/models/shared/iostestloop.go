@@ -1,7 +1,7 @@
 package shared
 
 type IosTestLoop struct {
-	AppBundleID *string        `json:"appBundleId"`
-	AppIpa      *FileReference `json:"appIpa"`
-	Scenarios   []int32        `json:"scenarios"`
+	AppBundleID *string        `json:"appBundleId,omitempty"`
+	AppIpa      *FileReference `json:"appIpa,omitempty"`
+	Scenarios   []int32        `json:"scenarios,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type AutoscalingSettings struct {
-	Algorithm     *AutoscalingSettingsAlgorithmEnum `json:"algorithm"`
-	MaxNumWorkers *int32                            `json:"maxNumWorkers"`
+	Algorithm     *AutoscalingSettingsAlgorithmEnum `json:"algorithm,omitempty"`
+	MaxNumWorkers *int32                            `json:"maxNumWorkers,omitempty"`
 }

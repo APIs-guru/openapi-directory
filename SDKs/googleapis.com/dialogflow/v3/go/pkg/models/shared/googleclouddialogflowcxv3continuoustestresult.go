@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3ContinuousTestResult struct {
-	Name            *string                                                  `json:"name"`
-	Result          *GoogleCloudDialogflowCxV3ContinuousTestResultResultEnum `json:"result"`
-	RunTime         *string                                                  `json:"runTime"`
-	TestCaseResults []string                                                 `json:"testCaseResults"`
+	Name            *string                                                  `json:"name,omitempty"`
+	Result          *GoogleCloudDialogflowCxV3ContinuousTestResultResultEnum `json:"result,omitempty"`
+	RunTime         *string                                                  `json:"runTime,omitempty"`
+	TestCaseResults []string                                                 `json:"testCaseResults,omitempty"`
 }

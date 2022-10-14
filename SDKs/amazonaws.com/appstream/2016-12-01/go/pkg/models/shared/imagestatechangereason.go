@@ -1,6 +1,6 @@
 package shared
 
 type ImageStateChangeReason struct {
-	Code    *ImageStateChangeReasonCodeEnum `json:"Code"`
-	Message *string                         `json:"Message"`
+	Code    *ImageStateChangeReasonCodeEnum `json:"Code,omitempty"`
+	Message *string                         `json:"Message,omitempty"`
 }

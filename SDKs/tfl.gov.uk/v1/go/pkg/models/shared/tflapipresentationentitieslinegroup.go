@@ -1,7 +1,7 @@
 package shared
 
 type TflAPIPresentationEntitiesLineGroup struct {
-	LineIdentifier    []string `json:"lineIdentifier"`
-	NaptanIDReference *string  `json:"naptanIdReference"`
-	StationAtcoCode   *string  `json:"stationAtcoCode"`
+	LineIdentifier    []string `json:"lineIdentifier,omitempty"`
+	NaptanIDReference *string  `json:"naptanIdReference,omitempty"`
+	StationAtcoCode   *string  `json:"stationAtcoCode,omitempty"`
 }

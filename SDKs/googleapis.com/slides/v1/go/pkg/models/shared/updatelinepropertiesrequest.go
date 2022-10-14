@@ -1,7 +1,7 @@
 package shared
 
 type UpdateLinePropertiesRequest struct {
-	Fields         *string         `json:"fields"`
-	LineProperties *LineProperties `json:"lineProperties"`
-	ObjectID       *string         `json:"objectId"`
+	Fields         *string         `json:"fields,omitempty"`
+	LineProperties *LineProperties `json:"lineProperties,omitempty"`
+	ObjectID       *string         `json:"objectId,omitempty"`
 }

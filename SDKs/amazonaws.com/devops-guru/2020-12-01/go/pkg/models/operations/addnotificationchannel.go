@@ -15,7 +15,7 @@ type AddNotificationChannelHeaders struct {
 }
 
 type AddNotificationChannelRequestBodyConfig struct {
-	Sns *shared.SnsChannelConfig `json:"Sns"`
+	Sns *shared.SnsChannelConfig `json:"Sns,omitempty"`
 }
 
 type AddNotificationChannelRequestBody struct {

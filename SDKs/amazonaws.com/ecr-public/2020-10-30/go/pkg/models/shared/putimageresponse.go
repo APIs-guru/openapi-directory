@@ -1,5 +1,5 @@
 package shared
 
 type PutImageResponse struct {
-	Image *Image `json:"image"`
+	Image *Image `json:"image,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 
 type ChartDataQueryObjectDatasource struct {
 	ID   int32                                   `json:"id"`
-	Type *ChartDataQueryObjectDatasourceTypeEnum `json:"type"`
+	Type *ChartDataQueryObjectDatasourceTypeEnum `json:"type,omitempty"`
 }
 
 type ChartDataQueryObjectExtrasRelativeEndEnum string
@@ -51,14 +51,14 @@ const (
 )
 
 type ChartDataQueryObjectExtras struct {
-	DruidTimeOrigin    *string                                      `json:"druid_time_origin"`
-	Having             *string                                      `json:"having"`
-	HavingDruid        []ChartDataFilter                            `json:"having_druid"`
-	RelativeEnd        *ChartDataQueryObjectExtrasRelativeEndEnum   `json:"relative_end"`
-	RelativeStart      *ChartDataQueryObjectExtrasRelativeStartEnum `json:"relative_start"`
-	TimeGrainSqla      *ChartDataQueryObjectExtrasTimeGrainSqlaEnum `json:"time_grain_sqla"`
-	TimeRangeEndpoints []interface{}                                `json:"time_range_endpoints"`
-	Where              *string                                      `json:"where"`
+	DruidTimeOrigin    *string                                      `json:"druid_time_origin,omitempty"`
+	Having             *string                                      `json:"having,omitempty"`
+	HavingDruid        []ChartDataFilter                            `json:"having_druid,omitempty"`
+	RelativeEnd        *ChartDataQueryObjectExtrasRelativeEndEnum   `json:"relative_end,omitempty"`
+	RelativeStart      *ChartDataQueryObjectExtrasRelativeStartEnum `json:"relative_start,omitempty"`
+	TimeGrainSqla      *ChartDataQueryObjectExtrasTimeGrainSqlaEnum `json:"time_grain_sqla,omitempty"`
+	TimeRangeEndpoints []interface{}                                `json:"time_range_endpoints,omitempty"`
+	Where              *string                                      `json:"where,omitempty"`
 }
 
 type ChartDataQueryObjectPostProcessingOperationEnum string
@@ -82,37 +82,37 @@ const (
 
 type ChartDataQueryObjectPostProcessing struct {
 	Operation ChartDataQueryObjectPostProcessingOperationEnum `json:"operation"`
-	Options   map[string]interface{}                          `json:"options"`
+	Options   map[string]interface{}                          `json:"options,omitempty"`
 }
 
 type ChartDataQueryObject struct {
-	AnnotationLayers          []AnnotationLayer                    `json:"annotation_layers"`
-	AppliedTimeExtras         map[string]interface{}               `json:"applied_time_extras"`
-	ApplyFetchValuesPredicate *bool                                `json:"apply_fetch_values_predicate"`
-	Columns                   []string                             `json:"columns"`
-	Datasource                *ChartDataQueryObjectDatasource      `json:"datasource"`
-	DruidTimeOrigin           *string                              `json:"druid_time_origin"`
-	Extras                    *ChartDataQueryObjectExtras          `json:"extras"`
-	Filters                   []ChartDataFilter                    `json:"filters"`
-	Granularity               *string                              `json:"granularity"`
-	GranularitySqla           *string                              `json:"granularity_sqla"`
-	Groupby                   []string                             `json:"groupby"`
-	Having                    *string                              `json:"having"`
-	HavingFilters             []ChartDataFilter                    `json:"having_filters"`
-	IsRowcount                *bool                                `json:"is_rowcount"`
-	IsTimeseries              *bool                                `json:"is_timeseries"`
-	Metrics                   []interface{}                        `json:"metrics"`
-	OrderDesc                 *bool                                `json:"order_desc"`
-	Orderby                   []interface{}                        `json:"orderby"`
-	PostProcessing            []ChartDataQueryObjectPostProcessing `json:"post_processing"`
-	ResultType                *interface{}                         `json:"result_type"`
-	RowLimit                  *int32                               `json:"row_limit"`
-	RowOffset                 *int32                               `json:"row_offset"`
-	TimeOffsets               []string                             `json:"time_offsets"`
-	TimeRange                 *string                              `json:"time_range"`
-	TimeShift                 *string                              `json:"time_shift"`
-	TimeseriesLimit           *int32                               `json:"timeseries_limit"`
-	TimeseriesLimitMetric     *interface{}                         `json:"timeseries_limit_metric"`
-	URLParams                 map[string]string                    `json:"url_params"`
-	Where                     *string                              `json:"where"`
+	AnnotationLayers          []AnnotationLayer                    `json:"annotation_layers,omitempty"`
+	AppliedTimeExtras         map[string]interface{}               `json:"applied_time_extras,omitempty"`
+	ApplyFetchValuesPredicate *bool                                `json:"apply_fetch_values_predicate,omitempty"`
+	Columns                   []string                             `json:"columns,omitempty"`
+	Datasource                *ChartDataQueryObjectDatasource      `json:"datasource,omitempty"`
+	DruidTimeOrigin           *string                              `json:"druid_time_origin,omitempty"`
+	Extras                    *ChartDataQueryObjectExtras          `json:"extras,omitempty"`
+	Filters                   []ChartDataFilter                    `json:"filters,omitempty"`
+	Granularity               *string                              `json:"granularity,omitempty"`
+	GranularitySqla           *string                              `json:"granularity_sqla,omitempty"`
+	Groupby                   []string                             `json:"groupby,omitempty"`
+	Having                    *string                              `json:"having,omitempty"`
+	HavingFilters             []ChartDataFilter                    `json:"having_filters,omitempty"`
+	IsRowcount                *bool                                `json:"is_rowcount,omitempty"`
+	IsTimeseries              *bool                                `json:"is_timeseries,omitempty"`
+	Metrics                   []interface{}                        `json:"metrics,omitempty"`
+	OrderDesc                 *bool                                `json:"order_desc,omitempty"`
+	Orderby                   []interface{}                        `json:"orderby,omitempty"`
+	PostProcessing            []ChartDataQueryObjectPostProcessing `json:"post_processing,omitempty"`
+	ResultType                *interface{}                         `json:"result_type,omitempty"`
+	RowLimit                  *int32                               `json:"row_limit,omitempty"`
+	RowOffset                 *int32                               `json:"row_offset,omitempty"`
+	TimeOffsets               []string                             `json:"time_offsets,omitempty"`
+	TimeRange                 *string                              `json:"time_range,omitempty"`
+	TimeShift                 *string                              `json:"time_shift,omitempty"`
+	TimeseriesLimit           *int32                               `json:"timeseries_limit,omitempty"`
+	TimeseriesLimitMetric     *interface{}                         `json:"timeseries_limit_metric,omitempty"`
+	URLParams                 map[string]string                    `json:"url_params,omitempty"`
+	Where                     *string                              `json:"where,omitempty"`
 }

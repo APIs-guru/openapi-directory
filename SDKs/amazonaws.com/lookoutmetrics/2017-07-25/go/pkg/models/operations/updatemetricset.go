@@ -24,27 +24,27 @@ const (
 )
 
 type UpdateMetricSetRequestBodyMetricSource struct {
-	AppFlowConfig        *shared.AppFlowConfig        `json:"AppFlowConfig"`
-	CloudWatchConfig     *shared.CloudWatchConfig     `json:"CloudWatchConfig"`
-	RdsSourceConfig      *shared.RdsSourceConfig      `json:"RDSSourceConfig"`
-	RedshiftSourceConfig *shared.RedshiftSourceConfig `json:"RedshiftSourceConfig"`
-	S3SourceConfig       *shared.S3SourceConfig       `json:"S3SourceConfig"`
+	AppFlowConfig        *shared.AppFlowConfig        `json:"AppFlowConfig,omitempty"`
+	CloudWatchConfig     *shared.CloudWatchConfig     `json:"CloudWatchConfig,omitempty"`
+	RdsSourceConfig      *shared.RdsSourceConfig      `json:"RDSSourceConfig,omitempty"`
+	RedshiftSourceConfig *shared.RedshiftSourceConfig `json:"RedshiftSourceConfig,omitempty"`
+	S3SourceConfig       *shared.S3SourceConfig       `json:"S3SourceConfig,omitempty"`
 }
 
 type UpdateMetricSetRequestBodyTimestampColumn struct {
-	ColumnFormat *string `json:"ColumnFormat"`
-	ColumnName   *string `json:"ColumnName"`
+	ColumnFormat *string `json:"ColumnFormat,omitempty"`
+	ColumnName   *string `json:"ColumnName,omitempty"`
 }
 
 type UpdateMetricSetRequestBody struct {
-	DimensionList        []string                                          `json:"DimensionList"`
-	MetricList           []shared.Metric                                   `json:"MetricList"`
+	DimensionList        []string                                          `json:"DimensionList,omitempty"`
+	MetricList           []shared.Metric                                   `json:"MetricList,omitempty"`
 	MetricSetArn         string                                            `json:"MetricSetArn"`
-	MetricSetDescription *string                                           `json:"MetricSetDescription"`
-	MetricSetFrequency   *UpdateMetricSetRequestBodyMetricSetFrequencyEnum `json:"MetricSetFrequency"`
-	MetricSource         *UpdateMetricSetRequestBodyMetricSource           `json:"MetricSource"`
-	Offset               *int64                                            `json:"Offset"`
-	TimestampColumn      *UpdateMetricSetRequestBodyTimestampColumn        `json:"TimestampColumn"`
+	MetricSetDescription *string                                           `json:"MetricSetDescription,omitempty"`
+	MetricSetFrequency   *UpdateMetricSetRequestBodyMetricSetFrequencyEnum `json:"MetricSetFrequency,omitempty"`
+	MetricSource         *UpdateMetricSetRequestBodyMetricSource           `json:"MetricSource,omitempty"`
+	Offset               *int64                                            `json:"Offset,omitempty"`
+	TimestampColumn      *UpdateMetricSetRequestBodyTimestampColumn        `json:"TimestampColumn,omitempty"`
 }
 
 type UpdateMetricSetRequest struct {

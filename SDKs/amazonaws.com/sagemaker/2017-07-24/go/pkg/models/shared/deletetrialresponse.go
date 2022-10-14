@@ -1,5 +1,5 @@
 package shared
 
 type DeleteTrialResponse struct {
-	TrialArn *string `json:"TrialArn"`
+	TrialArn *string `json:"TrialArn,omitempty"`
 }

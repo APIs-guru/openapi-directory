@@ -1,5 +1,5 @@
 package shared
 
 type GrantAccessResult struct {
-	TemporaryCredential *TemporaryCredential `json:"TemporaryCredential"`
+	TemporaryCredential *TemporaryCredential `json:"TemporaryCredential,omitempty"`
 }

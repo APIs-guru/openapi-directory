@@ -1,6 +1,6 @@
 package shared
 
 type PostgresqlSchema struct {
-	PostgresqlTables []PostgresqlTable `json:"postgresqlTables"`
-	Schema           *string           `json:"schema"`
+	PostgresqlTables []PostgresqlTable `json:"postgresqlTables,omitempty"`
+	Schema           *string           `json:"schema,omitempty"`
 }

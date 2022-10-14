@@ -30,21 +30,21 @@ const (
 )
 
 type UpdateBranchRequestBody struct {
-	BackendEnvironmentArn      *string                           `json:"backendEnvironmentArn"`
-	BasicAuthCredentials       *string                           `json:"basicAuthCredentials"`
-	BuildSpec                  *string                           `json:"buildSpec"`
-	Description                *string                           `json:"description"`
-	DisplayName                *string                           `json:"displayName"`
-	EnableAutoBuild            *bool                             `json:"enableAutoBuild"`
-	EnableBasicAuth            *bool                             `json:"enableBasicAuth"`
-	EnableNotification         *bool                             `json:"enableNotification"`
-	EnablePerformanceMode      *bool                             `json:"enablePerformanceMode"`
-	EnablePullRequestPreview   *bool                             `json:"enablePullRequestPreview"`
-	EnvironmentVariables       map[string]string                 `json:"environmentVariables"`
-	Framework                  *string                           `json:"framework"`
-	PullRequestEnvironmentName *string                           `json:"pullRequestEnvironmentName"`
-	Stage                      *UpdateBranchRequestBodyStageEnum `json:"stage"`
-	TTL                        *string                           `json:"ttl"`
+	BackendEnvironmentArn      *string                           `json:"backendEnvironmentArn,omitempty"`
+	BasicAuthCredentials       *string                           `json:"basicAuthCredentials,omitempty"`
+	BuildSpec                  *string                           `json:"buildSpec,omitempty"`
+	Description                *string                           `json:"description,omitempty"`
+	DisplayName                *string                           `json:"displayName,omitempty"`
+	EnableAutoBuild            *bool                             `json:"enableAutoBuild,omitempty"`
+	EnableBasicAuth            *bool                             `json:"enableBasicAuth,omitempty"`
+	EnableNotification         *bool                             `json:"enableNotification,omitempty"`
+	EnablePerformanceMode      *bool                             `json:"enablePerformanceMode,omitempty"`
+	EnablePullRequestPreview   *bool                             `json:"enablePullRequestPreview,omitempty"`
+	EnvironmentVariables       map[string]string                 `json:"environmentVariables,omitempty"`
+	Framework                  *string                           `json:"framework,omitempty"`
+	PullRequestEnvironmentName *string                           `json:"pullRequestEnvironmentName,omitempty"`
+	Stage                      *UpdateBranchRequestBodyStageEnum `json:"stage,omitempty"`
+	TTL                        *string                           `json:"ttl,omitempty"`
 }
 
 type UpdateBranchRequest struct {

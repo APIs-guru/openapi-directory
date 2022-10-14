@@ -8,6 +8,6 @@ const (
 )
 
 type ReportRecipient struct {
-	RecipientConfigJSON *ReportRecipientConfigJSON `json:"recipient_config_json"`
+	RecipientConfigJSON *ReportRecipientConfigJSON `json:"recipient_config_json,omitempty"`
 	Type                ReportRecipientTypeEnum    `json:"type"`
 }

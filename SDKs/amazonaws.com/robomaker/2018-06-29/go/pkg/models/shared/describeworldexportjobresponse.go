@@ -5,14 +5,14 @@ import (
 )
 
 type DescribeWorldExportJobResponse struct {
-	Arn                *string                      `json:"arn"`
-	ClientRequestToken *string                      `json:"clientRequestToken"`
-	CreatedAt          *time.Time                   `json:"createdAt"`
-	FailureCode        *WorldExportJobErrorCodeEnum `json:"failureCode"`
-	FailureReason      *string                      `json:"failureReason"`
-	IamRole            *string                      `json:"iamRole"`
-	OutputLocation     *OutputLocation              `json:"outputLocation"`
-	Status             *WorldExportJobStatusEnum    `json:"status"`
-	Tags               map[string]string            `json:"tags"`
-	Worlds             []string                     `json:"worlds"`
+	Arn                *string                      `json:"arn,omitempty"`
+	ClientRequestToken *string                      `json:"clientRequestToken,omitempty"`
+	CreatedAt          *time.Time                   `json:"createdAt,omitempty"`
+	FailureCode        *WorldExportJobErrorCodeEnum `json:"failureCode,omitempty"`
+	FailureReason      *string                      `json:"failureReason,omitempty"`
+	IamRole            *string                      `json:"iamRole,omitempty"`
+	OutputLocation     *OutputLocation              `json:"outputLocation,omitempty"`
+	Status             *WorldExportJobStatusEnum    `json:"status,omitempty"`
+	Tags               map[string]string            `json:"tags,omitempty"`
+	Worlds             []string                     `json:"worlds,omitempty"`
 }

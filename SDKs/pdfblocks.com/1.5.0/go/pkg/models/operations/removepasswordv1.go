@@ -15,10 +15,10 @@ type RemovePasswordV1Request struct {
 }
 
 type RemovePasswordV14XxApplicationProblemPlusJSON struct {
-	Errors map[string]interface{} `json:"errors"`
-	Status *int64                 `json:"status"`
-	Title  *string                `json:"title"`
-	Type   *string                `json:"type"`
+	Errors map[string]interface{} `json:"errors,omitempty"`
+	Status *int64                 `json:"status,omitempty"`
+	Title  *string                `json:"title,omitempty"`
+	Type   *string                `json:"type,omitempty"`
 }
 
 type RemovePasswordV1Response struct {

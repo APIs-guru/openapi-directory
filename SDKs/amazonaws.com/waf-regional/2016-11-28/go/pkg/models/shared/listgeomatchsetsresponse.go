@@ -1,6 +1,6 @@
 package shared
 
 type ListGeoMatchSetsResponse struct {
-	GeoMatchSets []GeoMatchSetSummary `json:"GeoMatchSets"`
-	NextMarker   *string              `json:"NextMarker"`
+	GeoMatchSets []GeoMatchSetSummary `json:"GeoMatchSets,omitempty"`
+	NextMarker   *string              `json:"NextMarker,omitempty"`
 }

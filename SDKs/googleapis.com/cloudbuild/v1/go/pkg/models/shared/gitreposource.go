@@ -10,9 +10,9 @@ const (
 )
 
 type GitRepoSource struct {
-	BitbucketServerConfig  *string                    `json:"bitbucketServerConfig"`
-	GithubEnterpriseConfig *string                    `json:"githubEnterpriseConfig"`
-	Ref                    *string                    `json:"ref"`
-	RepoType               *GitRepoSourceRepoTypeEnum `json:"repoType"`
-	URI                    *string                    `json:"uri"`
+	BitbucketServerConfig  *string                    `json:"bitbucketServerConfig,omitempty"`
+	GithubEnterpriseConfig *string                    `json:"githubEnterpriseConfig,omitempty"`
+	Ref                    *string                    `json:"ref,omitempty"`
+	RepoType               *GitRepoSourceRepoTypeEnum `json:"repoType,omitempty"`
+	URI                    *string                    `json:"uri,omitempty"`
 }

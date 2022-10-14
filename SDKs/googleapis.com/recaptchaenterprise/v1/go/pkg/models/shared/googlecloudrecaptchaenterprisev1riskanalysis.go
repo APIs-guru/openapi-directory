@@ -12,6 +12,6 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1RiskAnalysis struct {
-	Reasons []GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnum `json:"reasons"`
-	Score   *float32                                                  `json:"score"`
+	Reasons []GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnum `json:"reasons,omitempty"`
+	Score   *float32                                                  `json:"score,omitempty"`
 }

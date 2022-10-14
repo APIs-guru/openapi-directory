@@ -1,6 +1,6 @@
 package shared
 
 type PullRequest struct {
-	ReturnImmediately *bool   `json:"returnImmediately"`
-	Subscription      *string `json:"subscription"`
+	ReturnImmediately *bool   `json:"returnImmediately,omitempty"`
+	Subscription      *string `json:"subscription,omitempty"`
 }

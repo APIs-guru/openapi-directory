@@ -1,14 +1,14 @@
 package shared
 
 type DirectConnectGatewayAssociation struct {
-	AllowedPrefixesToDirectConnectGateway []RouteFilterPrefix                       `json:"allowedPrefixesToDirectConnectGateway"`
-	AssociatedGateway                     *AssociatedGateway                        `json:"associatedGateway"`
-	AssociationID                         *string                                   `json:"associationId"`
-	AssociationState                      *DirectConnectGatewayAssociationStateEnum `json:"associationState"`
-	DirectConnectGatewayID                *string                                   `json:"directConnectGatewayId"`
-	DirectConnectGatewayOwnerAccount      *string                                   `json:"directConnectGatewayOwnerAccount"`
-	StateChangeError                      *string                                   `json:"stateChangeError"`
-	VirtualGatewayID                      *string                                   `json:"virtualGatewayId"`
-	VirtualGatewayOwnerAccount            *string                                   `json:"virtualGatewayOwnerAccount"`
-	VirtualGatewayRegion                  *string                                   `json:"virtualGatewayRegion"`
+	AllowedPrefixesToDirectConnectGateway []RouteFilterPrefix                       `json:"allowedPrefixesToDirectConnectGateway,omitempty"`
+	AssociatedGateway                     *AssociatedGateway                        `json:"associatedGateway,omitempty"`
+	AssociationID                         *string                                   `json:"associationId,omitempty"`
+	AssociationState                      *DirectConnectGatewayAssociationStateEnum `json:"associationState,omitempty"`
+	DirectConnectGatewayID                *string                                   `json:"directConnectGatewayId,omitempty"`
+	DirectConnectGatewayOwnerAccount      *string                                   `json:"directConnectGatewayOwnerAccount,omitempty"`
+	StateChangeError                      *string                                   `json:"stateChangeError,omitempty"`
+	VirtualGatewayID                      *string                                   `json:"virtualGatewayId,omitempty"`
+	VirtualGatewayOwnerAccount            *string                                   `json:"virtualGatewayOwnerAccount,omitempty"`
+	VirtualGatewayRegion                  *string                                   `json:"virtualGatewayRegion,omitempty"`
 }

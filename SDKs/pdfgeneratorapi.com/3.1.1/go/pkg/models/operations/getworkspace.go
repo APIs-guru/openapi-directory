@@ -13,7 +13,7 @@ type GetWorkspaceRequest struct {
 }
 
 type GetWorkspace200ApplicationJSON struct {
-	Response *shared.Workspace `json:"response"`
+	Response *shared.Workspace `json:"response,omitempty"`
 }
 
 type GetWorkspace401ApplicationJSONErrorEnum string
@@ -32,8 +32,8 @@ const (
 )
 
 type GetWorkspace401ApplicationJSON struct {
-	Error  *GetWorkspace401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetWorkspace401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetWorkspace403ApplicationJSONErrorEnum string
@@ -43,8 +43,8 @@ const (
 )
 
 type GetWorkspace403ApplicationJSON struct {
-	Error  *GetWorkspace403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetWorkspace403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetWorkspace404ApplicationJSONErrorEnum string
@@ -56,8 +56,8 @@ const (
 )
 
 type GetWorkspace404ApplicationJSON struct {
-	Error  *GetWorkspace404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetWorkspace404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetWorkspace422ApplicationJSONErrorEnum string
@@ -70,13 +70,13 @@ const (
 )
 
 type GetWorkspace422ApplicationJSON struct {
-	Error  *GetWorkspace422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetWorkspace422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetWorkspace500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type GetWorkspaceResponse struct {

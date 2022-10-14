@@ -15,7 +15,7 @@ const (
 
 type UpdateNetworkApplianceFirewallFirewalledServiceRequestBody struct {
 	Access     UpdateNetworkApplianceFirewallFirewalledServiceRequestBodyAccessEnum `json:"access"`
-	AllowedIps []string                                                             `json:"allowedIps"`
+	AllowedIps []string                                                             `json:"allowedIps,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallFirewalledServiceRequest struct {

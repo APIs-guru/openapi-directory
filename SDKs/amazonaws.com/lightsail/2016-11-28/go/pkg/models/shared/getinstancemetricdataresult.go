@@ -1,6 +1,6 @@
 package shared
 
 type GetInstanceMetricDataResult struct {
-	MetricData []MetricDatapoint       `json:"metricData"`
-	MetricName *InstanceMetricNameEnum `json:"metricName"`
+	MetricData []MetricDatapoint       `json:"metricData,omitempty"`
+	MetricName *InstanceMetricNameEnum `json:"metricName,omitempty"`
 }

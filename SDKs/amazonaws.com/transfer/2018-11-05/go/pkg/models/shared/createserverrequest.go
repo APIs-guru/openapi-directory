@@ -1,16 +1,16 @@
 package shared
 
 type CreateServerRequest struct {
-	Certificate             *string                   `json:"Certificate"`
-	Domain                  *DomainEnum               `json:"Domain"`
-	EndpointDetails         *EndpointDetails          `json:"EndpointDetails"`
-	EndpointType            *EndpointTypeEnum         `json:"EndpointType"`
-	HostKey                 *string                   `json:"HostKey"`
-	IdentityProviderDetails *IdentityProviderDetails  `json:"IdentityProviderDetails"`
-	IdentityProviderType    *IdentityProviderTypeEnum `json:"IdentityProviderType"`
-	LoggingRole             *string                   `json:"LoggingRole"`
-	Protocols               []ProtocolEnum            `json:"Protocols"`
-	SecurityPolicyName      *string                   `json:"SecurityPolicyName"`
-	Tags                    []Tag                     `json:"Tags"`
-	WorkflowDetails         *WorkflowDetails          `json:"WorkflowDetails"`
+	Certificate             *string                   `json:"Certificate,omitempty"`
+	Domain                  *DomainEnum               `json:"Domain,omitempty"`
+	EndpointDetails         *EndpointDetails          `json:"EndpointDetails,omitempty"`
+	EndpointType            *EndpointTypeEnum         `json:"EndpointType,omitempty"`
+	HostKey                 *string                   `json:"HostKey,omitempty"`
+	IdentityProviderDetails *IdentityProviderDetails  `json:"IdentityProviderDetails,omitempty"`
+	IdentityProviderType    *IdentityProviderTypeEnum `json:"IdentityProviderType,omitempty"`
+	LoggingRole             *string                   `json:"LoggingRole,omitempty"`
+	Protocols               []ProtocolEnum            `json:"Protocols,omitempty"`
+	SecurityPolicyName      *string                   `json:"SecurityPolicyName,omitempty"`
+	Tags                    []Tag                     `json:"Tags,omitempty"`
+	WorkflowDetails         *WorkflowDetails          `json:"WorkflowDetails,omitempty"`
 }

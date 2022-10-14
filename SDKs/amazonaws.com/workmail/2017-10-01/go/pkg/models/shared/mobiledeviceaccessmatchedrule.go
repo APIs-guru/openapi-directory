@@ -1,6 +1,6 @@
 package shared
 
 type MobileDeviceAccessMatchedRule struct {
-	MobileDeviceAccessRuleID *string `json:"MobileDeviceAccessRuleId"`
-	Name                     *string `json:"Name"`
+	MobileDeviceAccessRuleID *string `json:"MobileDeviceAccessRuleId,omitempty"`
+	Name                     *string `json:"Name,omitempty"`
 }

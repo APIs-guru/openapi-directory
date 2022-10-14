@@ -1,7 +1,7 @@
 package shared
 
 type GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource struct {
-	Digest     map[string]string `json:"digest"`
-	EntryPoint *string           `json:"entryPoint"`
-	URI        *string           `json:"uri"`
+	Digest     map[string]string `json:"digest,omitempty"`
+	EntryPoint *string           `json:"entryPoint,omitempty"`
+	URI        *string           `json:"uri,omitempty"`
 }

@@ -1,50 +1,50 @@
 package shared
 
 type RestMethodMediaUploadProtocolsResumable struct {
-	Multipart *bool   `json:"multipart"`
-	Path      *string `json:"path"`
+	Multipart *bool   `json:"multipart,omitempty"`
+	Path      *string `json:"path,omitempty"`
 }
 
 type RestMethodMediaUploadProtocolsSimple struct {
-	Multipart *bool   `json:"multipart"`
-	Path      *string `json:"path"`
+	Multipart *bool   `json:"multipart,omitempty"`
+	Path      *string `json:"path,omitempty"`
 }
 
 type RestMethodMediaUploadProtocols struct {
-	Resumable *RestMethodMediaUploadProtocolsResumable `json:"resumable"`
-	Simple    *RestMethodMediaUploadProtocolsSimple    `json:"simple"`
+	Resumable *RestMethodMediaUploadProtocolsResumable `json:"resumable,omitempty"`
+	Simple    *RestMethodMediaUploadProtocolsSimple    `json:"simple,omitempty"`
 }
 
 type RestMethodMediaUpload struct {
-	Accept    []string                        `json:"accept"`
-	MaxSize   *string                         `json:"maxSize"`
-	Protocols *RestMethodMediaUploadProtocols `json:"protocols"`
+	Accept    []string                        `json:"accept,omitempty"`
+	MaxSize   *string                         `json:"maxSize,omitempty"`
+	Protocols *RestMethodMediaUploadProtocols `json:"protocols,omitempty"`
 }
 
 type RestMethodRequest struct {
-	DollarRef     *string `json:"$ref"`
-	ParameterName *string `json:"parameterName"`
+	DollarRef     *string `json:"$ref,omitempty"`
+	ParameterName *string `json:"parameterName,omitempty"`
 }
 
 type RestMethodResponse struct {
-	DollarRef *string `json:"$ref"`
+	DollarRef *string `json:"$ref,omitempty"`
 }
 
 type RestMethod struct {
-	Description             *string                `json:"description"`
-	EtagRequired            *bool                  `json:"etagRequired"`
-	FlatPath                *string                `json:"flatPath"`
-	HTTPMethod              *string                `json:"httpMethod"`
-	ID                      *string                `json:"id"`
-	MediaUpload             *RestMethodMediaUpload `json:"mediaUpload"`
-	ParameterOrder          []string               `json:"parameterOrder"`
-	Parameters              map[string]JSONSchema  `json:"parameters"`
-	Path                    *string                `json:"path"`
-	Request                 *RestMethodRequest     `json:"request"`
-	Response                *RestMethodResponse    `json:"response"`
-	Scopes                  []string               `json:"scopes"`
-	SupportsMediaDownload   *bool                  `json:"supportsMediaDownload"`
-	SupportsMediaUpload     *bool                  `json:"supportsMediaUpload"`
-	SupportsSubscription    *bool                  `json:"supportsSubscription"`
-	UseMediaDownloadService *bool                  `json:"useMediaDownloadService"`
+	Description             *string                `json:"description,omitempty"`
+	EtagRequired            *bool                  `json:"etagRequired,omitempty"`
+	FlatPath                *string                `json:"flatPath,omitempty"`
+	HTTPMethod              *string                `json:"httpMethod,omitempty"`
+	ID                      *string                `json:"id,omitempty"`
+	MediaUpload             *RestMethodMediaUpload `json:"mediaUpload,omitempty"`
+	ParameterOrder          []string               `json:"parameterOrder,omitempty"`
+	Parameters              map[string]JSONSchema  `json:"parameters,omitempty"`
+	Path                    *string                `json:"path,omitempty"`
+	Request                 *RestMethodRequest     `json:"request,omitempty"`
+	Response                *RestMethodResponse    `json:"response,omitempty"`
+	Scopes                  []string               `json:"scopes,omitempty"`
+	SupportsMediaDownload   *bool                  `json:"supportsMediaDownload,omitempty"`
+	SupportsMediaUpload     *bool                  `json:"supportsMediaUpload,omitempty"`
+	SupportsSubscription    *bool                  `json:"supportsSubscription,omitempty"`
+	UseMediaDownloadService *bool                  `json:"useMediaDownloadService,omitempty"`
 }

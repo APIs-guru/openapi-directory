@@ -1,6 +1,6 @@
 package shared
 
 type SchedulePolicy struct {
-	IdleDuration     *string `json:"idleDuration"`
-	SkipOsAdaptation *bool   `json:"skipOsAdaptation"`
+	IdleDuration     *string `json:"idleDuration,omitempty"`
+	SkipOsAdaptation *bool   `json:"skipOsAdaptation,omitempty"`
 }

@@ -15,25 +15,25 @@ const (
 )
 
 type OpenIDIdpConfig struct {
-	AuthorizationEndPointURL *string                            `json:"authorizationEndPointUrl"`
-	ClientID                 *string                            `json:"clientId"`
-	ClientSecret             *string                            `json:"clientSecret"`
-	FallbackMappingClaim     *string                            `json:"fallbackMappingClaim"`
-	Flow                     *OpenIDIdpConfigFlowEnum           `json:"flow"`
+	AuthorizationEndPointURL *string                            `json:"authorizationEndPointUrl,omitempty"`
+	ClientID                 *string                            `json:"clientId,omitempty"`
+	ClientSecret             *string                            `json:"clientSecret,omitempty"`
+	FallbackMappingClaim     *string                            `json:"fallbackMappingClaim,omitempty"`
+	Flow                     *OpenIDIdpConfigFlowEnum           `json:"flow,omitempty"`
 	ID                       int32                              `json:"id"`
-	Issuer                   *string                            `json:"issuer"`
-	JwksEndPointURL          *string                            `json:"jwksEndPointUrl"`
-	MappingClaim             *string                            `json:"mappingClaim"`
-	Name                     *string                            `json:"name"`
-	PkceChallengeMethod      *string                            `json:"pkceChallengeMethod"`
-	PkceEnabled              *bool                              `json:"pkceEnabled"`
-	RedirectUris             []string                           `json:"redirectUris"`
-	Scopes                   []string                           `json:"scopes"`
-	TokenEndPointURL         *string                            `json:"tokenEndPointUrl"`
-	UserImportEnabled        *bool                              `json:"userImportEnabled"`
-	UserImportGroup          *int64                             `json:"userImportGroup"`
-	UserInfoEndPointURL      *string                            `json:"userInfoEndPointUrl"`
-	UserInfoSource           *OpenIDIdpConfigUserInfoSourceEnum `json:"userInfoSource"`
-	UserManagementURL        *string                            `json:"userManagementUrl"`
-	UserUpdateEnabled        *bool                              `json:"userUpdateEnabled"`
+	Issuer                   *string                            `json:"issuer,omitempty"`
+	JwksEndPointURL          *string                            `json:"jwksEndPointUrl,omitempty"`
+	MappingClaim             *string                            `json:"mappingClaim,omitempty"`
+	Name                     *string                            `json:"name,omitempty"`
+	PkceChallengeMethod      *string                            `json:"pkceChallengeMethod,omitempty"`
+	PkceEnabled              *bool                              `json:"pkceEnabled,omitempty"`
+	RedirectUris             []string                           `json:"redirectUris,omitempty"`
+	Scopes                   []string                           `json:"scopes,omitempty"`
+	TokenEndPointURL         *string                            `json:"tokenEndPointUrl,omitempty"`
+	UserImportEnabled        *bool                              `json:"userImportEnabled,omitempty"`
+	UserImportGroup          *int64                             `json:"userImportGroup,omitempty"`
+	UserInfoEndPointURL      *string                            `json:"userInfoEndPointUrl,omitempty"`
+	UserInfoSource           *OpenIDIdpConfigUserInfoSourceEnum `json:"userInfoSource,omitempty"`
+	UserManagementURL        *string                            `json:"userManagementUrl,omitempty"`
+	UserUpdateEnabled        *bool                              `json:"userUpdateEnabled,omitempty"`
 }

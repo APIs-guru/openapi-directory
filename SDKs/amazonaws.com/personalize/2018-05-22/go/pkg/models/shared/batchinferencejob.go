@@ -5,17 +5,17 @@ import (
 )
 
 type BatchInferenceJob struct {
-	BatchInferenceJobArn    *string                  `json:"batchInferenceJobArn"`
-	BatchInferenceJobConfig *BatchInferenceJobConfig `json:"batchInferenceJobConfig"`
-	CreationDateTime        *time.Time               `json:"creationDateTime"`
-	FailureReason           *string                  `json:"failureReason"`
-	FilterArn               *string                  `json:"filterArn"`
-	JobInput                *BatchInferenceJobInput  `json:"jobInput"`
-	JobName                 *string                  `json:"jobName"`
-	JobOutput               *BatchInferenceJobOutput `json:"jobOutput"`
-	LastUpdatedDateTime     *time.Time               `json:"lastUpdatedDateTime"`
-	NumResults              *int64                   `json:"numResults"`
-	RoleArn                 *string                  `json:"roleArn"`
-	SolutionVersionArn      *string                  `json:"solutionVersionArn"`
-	Status                  *string                  `json:"status"`
+	BatchInferenceJobArn    *string                  `json:"batchInferenceJobArn,omitempty"`
+	BatchInferenceJobConfig *BatchInferenceJobConfig `json:"batchInferenceJobConfig,omitempty"`
+	CreationDateTime        *time.Time               `json:"creationDateTime,omitempty"`
+	FailureReason           *string                  `json:"failureReason,omitempty"`
+	FilterArn               *string                  `json:"filterArn,omitempty"`
+	JobInput                *BatchInferenceJobInput  `json:"jobInput,omitempty"`
+	JobName                 *string                  `json:"jobName,omitempty"`
+	JobOutput               *BatchInferenceJobOutput `json:"jobOutput,omitempty"`
+	LastUpdatedDateTime     *time.Time               `json:"lastUpdatedDateTime,omitempty"`
+	NumResults              *int64                   `json:"numResults,omitempty"`
+	RoleArn                 *string                  `json:"roleArn,omitempty"`
+	SolutionVersionArn      *string                  `json:"solutionVersionArn,omitempty"`
+	Status                  *string                  `json:"status,omitempty"`
 }

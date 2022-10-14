@@ -8,5 +8,5 @@ const (
 )
 
 type DataAccessOptions struct {
-	LogMode *DataAccessOptionsLogModeEnum `json:"logMode"`
+	LogMode *DataAccessOptionsLogModeEnum `json:"logMode,omitempty"`
 }

@@ -10,5 +10,5 @@ const (
 )
 
 type SongRatingContract struct {
-	Rating *SongRatingContractRatingEnum `json:"rating" form:"name=rating"`
+	Rating *SongRatingContractRatingEnum `json:"rating,omitempty" form:"name=rating"`
 }

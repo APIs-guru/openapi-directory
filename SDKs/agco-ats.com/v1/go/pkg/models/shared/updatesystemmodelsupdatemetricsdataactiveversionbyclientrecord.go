@@ -1,7 +1,7 @@
 package shared
 
 type UpdateSystemModelsUpdateMetricsDataActiveVersionByClientRecord struct {
-	BundleNumber *int32  `json:"BundleNumber"`
-	ClientCount  *int32  `json:"ClientCount"`
-	ReleaseName  *string `json:"ReleaseName"`
+	BundleNumber *int32  `json:"BundleNumber,omitempty"`
+	ClientCount  *int32  `json:"ClientCount,omitempty"`
+	ReleaseName  *string `json:"ReleaseName,omitempty"`
 }

@@ -15,14 +15,14 @@ type BatchUpdateFindingsHeaders struct {
 }
 
 type BatchUpdateFindingsRequestBodyNote struct {
-	Text      *string `json:"Text"`
-	UpdatedBy *string `json:"UpdatedBy"`
+	Text      *string `json:"Text,omitempty"`
+	UpdatedBy *string `json:"UpdatedBy,omitempty"`
 }
 
 type BatchUpdateFindingsRequestBodySeverity struct {
-	Label      *shared.SeverityLabelEnum `json:"Label"`
-	Normalized *int64                    `json:"Normalized"`
-	Product    *float64                  `json:"Product"`
+	Label      *shared.SeverityLabelEnum `json:"Label,omitempty"`
+	Normalized *int64                    `json:"Normalized,omitempty"`
+	Product    *float64                  `json:"Product,omitempty"`
 }
 
 type BatchUpdateFindingsRequestBodyVerificationStateEnum string
@@ -35,20 +35,20 @@ const (
 )
 
 type BatchUpdateFindingsRequestBodyWorkflow struct {
-	Status *shared.WorkflowStatusEnum `json:"Status"`
+	Status *shared.WorkflowStatusEnum `json:"Status,omitempty"`
 }
 
 type BatchUpdateFindingsRequestBody struct {
-	Confidence         *int64                                               `json:"Confidence"`
-	Criticality        *int64                                               `json:"Criticality"`
+	Confidence         *int64                                               `json:"Confidence,omitempty"`
+	Criticality        *int64                                               `json:"Criticality,omitempty"`
 	FindingIdentifiers []shared.AwsSecurityFindingIdentifier                `json:"FindingIdentifiers"`
-	Note               *BatchUpdateFindingsRequestBodyNote                  `json:"Note"`
-	RelatedFindings    []shared.RelatedFinding                              `json:"RelatedFindings"`
-	Severity           *BatchUpdateFindingsRequestBodySeverity              `json:"Severity"`
-	Types              []string                                             `json:"Types"`
-	UserDefinedFields  map[string]string                                    `json:"UserDefinedFields"`
-	VerificationState  *BatchUpdateFindingsRequestBodyVerificationStateEnum `json:"VerificationState"`
-	Workflow           *BatchUpdateFindingsRequestBodyWorkflow              `json:"Workflow"`
+	Note               *BatchUpdateFindingsRequestBodyNote                  `json:"Note,omitempty"`
+	RelatedFindings    []shared.RelatedFinding                              `json:"RelatedFindings,omitempty"`
+	Severity           *BatchUpdateFindingsRequestBodySeverity              `json:"Severity,omitempty"`
+	Types              []string                                             `json:"Types,omitempty"`
+	UserDefinedFields  map[string]string                                    `json:"UserDefinedFields,omitempty"`
+	VerificationState  *BatchUpdateFindingsRequestBodyVerificationStateEnum `json:"VerificationState,omitempty"`
+	Workflow           *BatchUpdateFindingsRequestBodyWorkflow              `json:"Workflow,omitempty"`
 }
 
 type BatchUpdateFindingsRequest struct {

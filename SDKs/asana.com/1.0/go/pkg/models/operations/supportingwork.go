@@ -19,7 +19,7 @@ type SupportingWorkRequest struct {
 }
 
 type SupportingWork200ApplicationJSON struct {
-	Data []shared.ProjectCompact `json:"data"`
+	Data []shared.ProjectCompact `json:"data,omitempty"`
 }
 
 type SupportingWorkResponse struct {

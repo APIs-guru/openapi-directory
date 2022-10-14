@@ -1,8 +1,8 @@
 package shared
 
 type AccountTreeResponse struct {
-	Account     *Account     `json:"account"`
-	Kind        *string      `json:"kind"`
-	Profile     *Profile     `json:"profile"`
-	Webproperty *Webproperty `json:"webproperty"`
+	Account     *Account     `json:"account,omitempty"`
+	Kind        *string      `json:"kind,omitempty"`
+	Profile     *Profile     `json:"profile,omitempty"`
+	Webproperty *Webproperty `json:"webproperty,omitempty"`
 }

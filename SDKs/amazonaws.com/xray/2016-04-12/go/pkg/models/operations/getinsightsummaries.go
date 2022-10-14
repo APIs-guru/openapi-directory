@@ -22,12 +22,12 @@ type GetInsightSummariesHeaders struct {
 
 type GetInsightSummariesRequestBody struct {
 	EndTime    time.Time                 `json:"EndTime"`
-	GroupArn   *string                   `json:"GroupARN"`
-	GroupName  *string                   `json:"GroupName"`
-	MaxResults *int64                    `json:"MaxResults"`
-	NextToken  *string                   `json:"NextToken"`
+	GroupArn   *string                   `json:"GroupARN,omitempty"`
+	GroupName  *string                   `json:"GroupName,omitempty"`
+	MaxResults *int64                    `json:"MaxResults,omitempty"`
+	NextToken  *string                   `json:"NextToken,omitempty"`
 	StartTime  time.Time                 `json:"StartTime"`
-	States     []shared.InsightStateEnum `json:"States"`
+	States     []shared.InsightStateEnum `json:"States,omitempty"`
 }
 
 type GetInsightSummariesRequest struct {

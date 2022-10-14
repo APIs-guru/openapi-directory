@@ -21,7 +21,7 @@ const (
 )
 
 type PlanData struct {
-	Amount *int32                                           `json:"amount"`
-	Plan   *PlanDataPlanTypeOfPlanBasedOnTheSourceEnum      `json:"plan"`
-	Source *PlanDataSourceServiceThatProvisionedThePlanEnum `json:"source"`
+	Amount *int32                                           `json:"amount,omitempty"`
+	Plan   *PlanDataPlanTypeOfPlanBasedOnTheSourceEnum      `json:"plan,omitempty"`
+	Source *PlanDataSourceServiceThatProvisionedThePlanEnum `json:"source,omitempty"`
 }

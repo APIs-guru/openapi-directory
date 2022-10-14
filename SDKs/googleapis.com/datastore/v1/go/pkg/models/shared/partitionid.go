@@ -1,7 +1,7 @@
 package shared
 
 type PartitionID struct {
-	DatabaseID  *string `json:"databaseId"`
-	NamespaceID *string `json:"namespaceId"`
-	ProjectID   *string `json:"projectId"`
+	DatabaseID  *string `json:"databaseId,omitempty"`
+	NamespaceID *string `json:"namespaceId,omitempty"`
+	ProjectID   *string `json:"projectId,omitempty"`
 }

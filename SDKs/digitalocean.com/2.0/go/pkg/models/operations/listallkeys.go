@@ -14,17 +14,17 @@ type ListAllKeysRequest struct {
 }
 
 type ListAllKeys200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllKeys200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllKeys200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllKeys200ApplicationJSONMeta struct {
@@ -32,22 +32,22 @@ type ListAllKeys200ApplicationJSONMeta struct {
 }
 
 type ListAllKeys200ApplicationJSONSSHKeys struct {
-	Fingerprint *string `json:"fingerprint"`
-	ID          *int64  `json:"id"`
+	Fingerprint *string `json:"fingerprint,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
 	Name        string  `json:"name"`
 	PublicKey   string  `json:"public_key"`
 }
 
 type ListAllKeys200ApplicationJSON struct {
-	Links   *ListAllKeys200ApplicationJSONLinks    `json:"links"`
+	Links   *ListAllKeys200ApplicationJSONLinks    `json:"links,omitempty"`
 	Meta    ListAllKeys200ApplicationJSONMeta      `json:"meta"`
-	SSHKeys []ListAllKeys200ApplicationJSONSSHKeys `json:"ssh_keys"`
+	SSHKeys []ListAllKeys200ApplicationJSONSSHKeys `json:"ssh_keys,omitempty"`
 }
 
 type ListAllKeys401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllKeysResponse struct {

@@ -5,9 +5,9 @@ import (
 )
 
 type SolutionSummary struct {
-	CreationDateTime    *time.Time `json:"creationDateTime"`
-	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime"`
-	Name                *string    `json:"name"`
-	SolutionArn         *string    `json:"solutionArn"`
-	Status              *string    `json:"status"`
+	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
+	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	Name                *string    `json:"name,omitempty"`
+	SolutionArn         *string    `json:"solutionArn,omitempty"`
+	Status              *string    `json:"status,omitempty"`
 }

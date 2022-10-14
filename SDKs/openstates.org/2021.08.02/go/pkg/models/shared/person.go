@@ -7,7 +7,7 @@ import (
 type Person struct {
 	BirthDate        string                 `json:"birth_date"`
 	CreatedAt        time.Time              `json:"created_at"`
-	CurrentRole      *CurrentRole           `json:"current_role"`
+	CurrentRole      *CurrentRole           `json:"current_role,omitempty"`
 	DeathDate        string                 `json:"death_date"`
 	Email            string                 `json:"email"`
 	Extras           map[string]interface{} `json:"extras"`
@@ -17,13 +17,13 @@ type Person struct {
 	ID               string                 `json:"id"`
 	Image            string                 `json:"image"`
 	Jurisdiction     CompactJurisdiction    `json:"jurisdiction"`
-	Links            []Link                 `json:"links"`
+	Links            []Link                 `json:"links,omitempty"`
 	Name             string                 `json:"name"`
-	Offices          []Office               `json:"offices"`
+	Offices          []Office               `json:"offices,omitempty"`
 	OpenstatesURL    string                 `json:"openstates_url"`
-	OtherIdentifiers []AltIdentifier        `json:"other_identifiers"`
-	OtherNames       []AltName              `json:"other_names"`
+	OtherIdentifiers []AltIdentifier        `json:"other_identifiers,omitempty"`
+	OtherNames       []AltName              `json:"other_names,omitempty"`
 	Party            string                 `json:"party"`
-	Sources          []Link                 `json:"sources"`
+	Sources          []Link                 `json:"sources,omitempty"`
 	UpdatedAt        time.Time              `json:"updated_at"`
 }

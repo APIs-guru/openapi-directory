@@ -1,12 +1,12 @@
 package shared
 
 type AdminRespondToAuthChallengeRequest struct {
-	AnalyticsMetadata  *AnalyticsMetadataType `json:"AnalyticsMetadata"`
+	AnalyticsMetadata  *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ChallengeName      ChallengeNameTypeEnum  `json:"ChallengeName"`
-	ChallengeResponses map[string]string      `json:"ChallengeResponses"`
+	ChallengeResponses map[string]string      `json:"ChallengeResponses,omitempty"`
 	ClientID           string                 `json:"ClientId"`
-	ClientMetadata     map[string]string      `json:"ClientMetadata"`
-	ContextData        *ContextDataType       `json:"ContextData"`
-	Session            *string                `json:"Session"`
+	ClientMetadata     map[string]string      `json:"ClientMetadata,omitempty"`
+	ContextData        *ContextDataType       `json:"ContextData,omitempty"`
+	Session            *string                `json:"Session,omitempty"`
 	UserPoolID         string                 `json:"UserPoolId"`
 }

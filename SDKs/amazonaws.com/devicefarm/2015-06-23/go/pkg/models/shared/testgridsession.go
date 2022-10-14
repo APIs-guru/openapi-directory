@@ -5,10 +5,10 @@ import (
 )
 
 type TestGridSession struct {
-	Arn                *string                    `json:"arn"`
-	BillingMinutes     *float64                   `json:"billingMinutes"`
-	Created            *time.Time                 `json:"created"`
-	Ended              *time.Time                 `json:"ended"`
-	SeleniumProperties *string                    `json:"seleniumProperties"`
-	Status             *TestGridSessionStatusEnum `json:"status"`
+	Arn                *string                    `json:"arn,omitempty"`
+	BillingMinutes     *float64                   `json:"billingMinutes,omitempty"`
+	Created            *time.Time                 `json:"created,omitempty"`
+	Ended              *time.Time                 `json:"ended,omitempty"`
+	SeleniumProperties *string                    `json:"seleniumProperties,omitempty"`
+	Status             *TestGridSessionStatusEnum `json:"status,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudApigeeV1TraceSamplingConfig struct {
-	Sampler      *GoogleCloudApigeeV1TraceSamplingConfigSamplerEnum `json:"sampler"`
-	SamplingRate *float32                                           `json:"samplingRate"`
+	Sampler      *GoogleCloudApigeeV1TraceSamplingConfigSamplerEnum `json:"sampler,omitempty"`
+	SamplingRate *float32                                           `json:"samplingRate,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type BlockAction struct {
-	BlockAfterDays *int32                     `json:"blockAfterDays"`
-	BlockScope     *BlockActionBlockScopeEnum `json:"blockScope"`
+	BlockAfterDays *int32                     `json:"blockAfterDays,omitempty"`
+	BlockScope     *BlockActionBlockScopeEnum `json:"blockScope,omitempty"`
 }

@@ -19,13 +19,13 @@ const (
 )
 
 type ProbingDetails struct {
-	AbortCause                *ProbingDetailsAbortCauseEnum `json:"abortCause"`
-	DestinationEgressLocation *EdgeLocation                 `json:"destinationEgressLocation"`
-	EndpointInfo              *EndpointInfo                 `json:"endpointInfo"`
-	Error                     *Status                       `json:"error"`
-	ProbingLatency            *LatencyDistribution          `json:"probingLatency"`
-	Result                    *ProbingDetailsResultEnum     `json:"result"`
-	SentProbeCount            *int32                        `json:"sentProbeCount"`
-	SuccessfulProbeCount      *int32                        `json:"successfulProbeCount"`
-	VerifyTime                *string                       `json:"verifyTime"`
+	AbortCause                *ProbingDetailsAbortCauseEnum `json:"abortCause,omitempty"`
+	DestinationEgressLocation *EdgeLocation                 `json:"destinationEgressLocation,omitempty"`
+	EndpointInfo              *EndpointInfo                 `json:"endpointInfo,omitempty"`
+	Error                     *Status                       `json:"error,omitempty"`
+	ProbingLatency            *LatencyDistribution          `json:"probingLatency,omitempty"`
+	Result                    *ProbingDetailsResultEnum     `json:"result,omitempty"`
+	SentProbeCount            *int32                        `json:"sentProbeCount,omitempty"`
+	SuccessfulProbeCount      *int32                        `json:"successfulProbeCount,omitempty"`
+	VerifyTime                *string                       `json:"verifyTime,omitempty"`
 }

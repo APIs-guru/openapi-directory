@@ -1,5 +1,5 @@
 package shared
 
 type WafOverrideAction struct {
-	Type *string `json:"Type"`
+	Type *string `json:"Type,omitempty"`
 }

@@ -14,11 +14,11 @@ type GetSimilarRequest struct {
 }
 
 type GetSimilar200ApplicationJSON struct {
-	CallsPerMonth  *string                 `json:"calls_per_month"`
-	Companies      []shared.SimilarCompany `json:"companies"`
-	CountRemaining *string                 `json:"count_remaining"`
-	InputCompany   *shared.InputCompany    `json:"input_company"`
-	RenewalDate    *string                 `json:"renewal_date"`
+	CallsPerMonth  *string                 `json:"calls_per_month,omitempty"`
+	Companies      []shared.SimilarCompany `json:"companies,omitempty"`
+	CountRemaining *string                 `json:"count_remaining,omitempty"`
+	InputCompany   *shared.InputCompany    `json:"input_company,omitempty"`
+	RenewalDate    *string                 `json:"renewal_date,omitempty"`
 }
 
 type GetSimilarResponse struct {

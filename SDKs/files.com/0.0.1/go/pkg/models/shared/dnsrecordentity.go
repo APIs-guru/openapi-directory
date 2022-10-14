@@ -1,8 +1,8 @@
 package shared
 
 type DNSRecordEntity struct {
-	Domain *string `json:"domain"`
-	ID     *string `json:"id"`
-	Rrtype *string `json:"rrtype"`
-	Value  *string `json:"value"`
+	Domain *string `json:"domain,omitempty"`
+	ID     *string `json:"id,omitempty"`
+	Rrtype *string `json:"rrtype,omitempty"`
+	Value  *string `json:"value,omitempty"`
 }

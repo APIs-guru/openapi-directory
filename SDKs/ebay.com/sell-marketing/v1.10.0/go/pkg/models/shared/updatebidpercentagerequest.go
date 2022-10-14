@@ -1,5 +1,5 @@
 package shared
 
 type UpdateBidPercentageRequest struct {
-	BidPercentage *string `json:"bidPercentage"`
+	BidPercentage *string `json:"bidPercentage,omitempty"`
 }

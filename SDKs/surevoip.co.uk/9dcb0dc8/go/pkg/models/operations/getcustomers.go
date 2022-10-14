@@ -1,7 +1,7 @@
 package operations
 
 type GetCustomers302ApplicationJSON struct {
-	Location *string `json:"location"`
+	Location *string `json:"location,omitempty"`
 }
 
 type GetCustomersResponse struct {

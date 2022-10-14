@@ -1,11 +1,11 @@
 package shared
 
 type PublicSystemInfo struct {
-	ID                     *string `json:"Id"`
-	LocalAddress           *string `json:"LocalAddress"`
-	OperatingSystem        *string `json:"OperatingSystem"`
-	ProductName            *string `json:"ProductName"`
-	ServerName             *string `json:"ServerName"`
-	StartupWizardCompleted *bool   `json:"StartupWizardCompleted"`
-	Version                *string `json:"Version"`
+	ID                     *string `json:"Id,omitempty"`
+	LocalAddress           *string `json:"LocalAddress,omitempty"`
+	OperatingSystem        *string `json:"OperatingSystem,omitempty"`
+	ProductName            *string `json:"ProductName,omitempty"`
+	ServerName             *string `json:"ServerName,omitempty"`
+	StartupWizardCompleted *bool   `json:"StartupWizardCompleted,omitempty"`
+	Version                *string `json:"Version,omitempty"`
 }

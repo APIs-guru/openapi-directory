@@ -9,8 +9,8 @@ const (
 )
 
 type CommitRequest struct {
-	DatabaseID  *string                `json:"databaseId"`
-	Mode        *CommitRequestModeEnum `json:"mode"`
-	Mutations   []Mutation             `json:"mutations"`
-	Transaction *string                `json:"transaction"`
+	DatabaseID  *string                `json:"databaseId,omitempty"`
+	Mode        *CommitRequestModeEnum `json:"mode,omitempty"`
+	Mutations   []Mutation             `json:"mutations,omitempty"`
+	Transaction *string                `json:"transaction,omitempty"`
 }

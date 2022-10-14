@@ -8,9 +8,9 @@ const (
 )
 
 type RunnerLabels struct {
-	ID   *int64                `json:"id"`
-	Name *string               `json:"name"`
-	Type *RunnerLabelsTypeEnum `json:"type"`
+	ID   *int64                `json:"id,omitempty"`
+	Name *string               `json:"name,omitempty"`
+	Type *RunnerLabelsTypeEnum `json:"type,omitempty"`
 }
 
 type Runner struct {

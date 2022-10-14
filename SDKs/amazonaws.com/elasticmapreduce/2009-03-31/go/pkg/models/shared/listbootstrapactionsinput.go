@@ -2,5 +2,5 @@ package shared
 
 type ListBootstrapActionsInput struct {
 	ClusterID string  `json:"ClusterId"`
-	Marker    *string `json:"Marker"`
+	Marker    *string `json:"Marker,omitempty"`
 }

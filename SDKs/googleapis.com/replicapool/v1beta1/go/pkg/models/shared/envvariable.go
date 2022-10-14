@@ -1,7 +1,7 @@
 package shared
 
 type EnvVariable struct {
-	Hidden *bool   `json:"hidden"`
-	Name   *string `json:"name"`
-	Value  *string `json:"value"`
+	Hidden *bool   `json:"hidden,omitempty"`
+	Name   *string `json:"name,omitempty"`
+	Value  *string `json:"value,omitempty"`
 }

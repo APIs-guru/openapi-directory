@@ -38,13 +38,13 @@ const (
 )
 
 type ArtistContract struct {
-	AdditionalNames *string                       `json:"additionalNames"`
-	ArtistType      *ArtistContractArtistTypeEnum `json:"artistType"`
-	Deleted         *bool                         `json:"deleted"`
-	ID              *int32                        `json:"id"`
-	Name            *string                       `json:"name"`
-	PictureMime     *string                       `json:"pictureMime"`
-	ReleaseDate     *time.Time                    `json:"releaseDate"`
-	Status          *ArtistContractStatusEnum     `json:"status"`
-	Version         *int32                        `json:"version"`
+	AdditionalNames *string                       `json:"additionalNames,omitempty"`
+	ArtistType      *ArtistContractArtistTypeEnum `json:"artistType,omitempty"`
+	Deleted         *bool                         `json:"deleted,omitempty"`
+	ID              *int32                        `json:"id,omitempty"`
+	Name            *string                       `json:"name,omitempty"`
+	PictureMime     *string                       `json:"pictureMime,omitempty"`
+	ReleaseDate     *time.Time                    `json:"releaseDate,omitempty"`
+	Status          *ArtistContractStatusEnum     `json:"status,omitempty"`
+	Version         *int32                        `json:"version,omitempty"`
 }

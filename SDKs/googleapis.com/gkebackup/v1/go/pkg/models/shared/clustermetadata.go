@@ -1,9 +1,9 @@
 package shared
 
 type ClusterMetadata struct {
-	AnthosVersion     *string           `json:"anthosVersion"`
-	BackupCrdVersions map[string]string `json:"backupCrdVersions"`
-	Cluster           *string           `json:"cluster"`
-	GkeVersion        *string           `json:"gkeVersion"`
-	K8sVersion        *string           `json:"k8sVersion"`
+	AnthosVersion     *string           `json:"anthosVersion,omitempty"`
+	BackupCrdVersions map[string]string `json:"backupCrdVersions,omitempty"`
+	Cluster           *string           `json:"cluster,omitempty"`
+	GkeVersion        *string           `json:"gkeVersion,omitempty"`
+	K8sVersion        *string           `json:"k8sVersion,omitempty"`
 }

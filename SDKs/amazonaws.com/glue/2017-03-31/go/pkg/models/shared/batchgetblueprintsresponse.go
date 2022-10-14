@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetBlueprintsResponse struct {
-	Blueprints        []Blueprint `json:"Blueprints"`
-	MissingBlueprints []string    `json:"MissingBlueprints"`
+	Blueprints        []Blueprint `json:"Blueprints,omitempty"`
+	MissingBlueprints []string    `json:"MissingBlueprints,omitempty"`
 }

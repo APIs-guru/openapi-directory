@@ -1,8 +1,8 @@
 package shared
 
 type Exception struct {
-	InnerException *interface{} `json:"InnerException"`
-	Message        *string      `json:"Message"`
-	Source         *string      `json:"Source"`
-	StackTrace     *string      `json:"StackTrace"`
+	InnerException *interface{} `json:"InnerException,omitempty"`
+	Message        *string      `json:"Message,omitempty"`
+	Source         *string      `json:"Source,omitempty"`
+	StackTrace     *string      `json:"StackTrace,omitempty"`
 }

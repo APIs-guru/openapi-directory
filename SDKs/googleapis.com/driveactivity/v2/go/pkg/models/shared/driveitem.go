@@ -1,12 +1,12 @@
 package shared
 
 type DriveItem struct {
-	DriveFile   map[string]interface{} `json:"driveFile"`
-	DriveFolder *DriveFolder           `json:"driveFolder"`
-	File        map[string]interface{} `json:"file"`
-	Folder      *Folder                `json:"folder"`
-	MimeType    *string                `json:"mimeType"`
-	Name        *string                `json:"name"`
-	Owner       *Owner                 `json:"owner"`
-	Title       *string                `json:"title"`
+	DriveFile   map[string]interface{} `json:"driveFile,omitempty"`
+	DriveFolder *DriveFolder           `json:"driveFolder,omitempty"`
+	File        map[string]interface{} `json:"file,omitempty"`
+	Folder      *Folder                `json:"folder,omitempty"`
+	MimeType    *string                `json:"mimeType,omitempty"`
+	Name        *string                `json:"name,omitempty"`
+	Owner       *Owner                 `json:"owner,omitempty"`
+	Title       *string                `json:"title,omitempty"`
 }

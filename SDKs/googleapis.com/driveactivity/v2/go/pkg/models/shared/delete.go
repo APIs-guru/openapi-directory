@@ -9,5 +9,5 @@ const (
 )
 
 type Delete struct {
-	Type *DeleteTypeEnum `json:"type"`
+	Type *DeleteTypeEnum `json:"type,omitempty"`
 }

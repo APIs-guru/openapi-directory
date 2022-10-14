@@ -1,6 +1,6 @@
 package shared
 
 type ValueFilter struct {
-	OperatorName *string `json:"operatorName"`
-	Value        *Value  `json:"value"`
+	OperatorName *string `json:"operatorName,omitempty"`
+	Value        *Value  `json:"value,omitempty"`
 }

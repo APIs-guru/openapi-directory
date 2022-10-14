@@ -1,9 +1,9 @@
 package shared
 
 type Model struct {
-	ContentType *string `json:"contentType"`
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
-	Schema      *string `json:"schema"`
+	ContentType *string `json:"contentType,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Schema      *string `json:"schema,omitempty"`
 }

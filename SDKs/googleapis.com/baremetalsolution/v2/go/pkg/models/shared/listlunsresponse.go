@@ -1,7 +1,7 @@
 package shared
 
 type ListLunsResponse struct {
-	Luns          []Lun    `json:"luns"`
-	NextPageToken *string  `json:"nextPageToken"`
-	Unreachable   []string `json:"unreachable"`
+	Luns          []Lun    `json:"luns,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Unreachable   []string `json:"unreachable,omitempty"`
 }

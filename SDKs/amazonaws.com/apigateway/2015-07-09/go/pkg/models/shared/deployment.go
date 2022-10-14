@@ -5,8 +5,8 @@ import (
 )
 
 type Deployment struct {
-	APISummary  map[string]map[string]MethodSnapshot `json:"apiSummary"`
-	CreatedDate *time.Time                           `json:"createdDate"`
-	Description *string                              `json:"description"`
-	ID          *string                              `json:"id"`
+	APISummary  map[string]map[string]MethodSnapshot `json:"apiSummary,omitempty"`
+	CreatedDate *time.Time                           `json:"createdDate,omitempty"`
+	Description *string                              `json:"description,omitempty"`
+	ID          *string                              `json:"id,omitempty"`
 }

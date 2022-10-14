@@ -1,5 +1,5 @@
 package shared
 
 type ConnectionCredential struct {
-	CloudSQL *CloudSQLCredential `json:"cloudSql"`
+	CloudSQL *CloudSQLCredential `json:"cloudSql,omitempty"`
 }

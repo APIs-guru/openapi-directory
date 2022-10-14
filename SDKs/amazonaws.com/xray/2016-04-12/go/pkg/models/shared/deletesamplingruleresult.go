@@ -1,5 +1,5 @@
 package shared
 
 type DeleteSamplingRuleResult struct {
-	SamplingRuleRecord *SamplingRuleRecord `json:"SamplingRuleRecord"`
+	SamplingRuleRecord *SamplingRuleRecord `json:"SamplingRuleRecord,omitempty"`
 }

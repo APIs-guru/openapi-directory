@@ -21,20 +21,20 @@ const (
 )
 
 type ZapierRulePatchTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ZapierRulePatchTarget struct {
-	Headers      []ZapierRulePatchTargetHeaders `json:"headers"`
-	SigningKeyID *string                        `json:"signingKeyId"`
-	URL          *string                        `json:"url"`
+	Headers      []ZapierRulePatchTargetHeaders `json:"headers,omitempty"`
+	SigningKeyID *string                        `json:"signingKeyId,omitempty"`
+	URL          *string                        `json:"url,omitempty"`
 }
 
 type ZapierRulePatch struct {
-	RequestMode *ZapierRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *ZapierRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                     `json:"source"`
-	Status      *ZapierRulePatchStatusEnum      `json:"status"`
-	Target      *ZapierRulePatchTarget          `json:"target"`
+	RequestMode *ZapierRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *ZapierRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                     `json:"source,omitempty"`
+	Status      *ZapierRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *ZapierRulePatchTarget          `json:"target,omitempty"`
 }

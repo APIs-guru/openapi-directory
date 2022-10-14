@@ -14,11 +14,11 @@ const (
 )
 
 type CreateFirewallRequestBodyInboundRulesSources struct {
-	Addresses        []string `json:"addresses"`
-	DropletIds       []int64  `json:"droplet_ids"`
-	KubernetesIds    []string `json:"kubernetes_ids"`
-	LoadBalancerUids []string `json:"load_balancer_uids"`
-	Tags             []string `json:"tags"`
+	Addresses        []string `json:"addresses,omitempty"`
+	DropletIds       []int64  `json:"droplet_ids,omitempty"`
+	KubernetesIds    []string `json:"kubernetes_ids,omitempty"`
+	LoadBalancerUids []string `json:"load_balancer_uids,omitempty"`
+	Tags             []string `json:"tags,omitempty"`
 }
 
 type CreateFirewallRequestBodyInboundRules struct {
@@ -42,9 +42,9 @@ type CreateFirewallRequestBodyOutboundRules struct {
 }
 
 type CreateFirewallRequestBodyPendingChanges struct {
-	DropletID *int64  `json:"droplet_id"`
-	Removing  *bool   `json:"removing"`
-	Status    *string `json:"status"`
+	DropletID *int64  `json:"droplet_id,omitempty"`
+	Removing  *bool   `json:"removing,omitempty"`
+	Status    *string `json:"status,omitempty"`
 }
 
 type CreateFirewallRequestBodyStatusEnum string
@@ -56,15 +56,15 @@ const (
 )
 
 type CreateFirewallRequestBody struct {
-	CreatedAt      *time.Time                                `json:"created_at"`
-	DropletIds     []int64                                   `json:"droplet_ids"`
-	ID             *string                                   `json:"id"`
-	InboundRules   []CreateFirewallRequestBodyInboundRules   `json:"inbound_rules"`
+	CreatedAt      *time.Time                                `json:"created_at,omitempty"`
+	DropletIds     []int64                                   `json:"droplet_ids,omitempty"`
+	ID             *string                                   `json:"id,omitempty"`
+	InboundRules   []CreateFirewallRequestBodyInboundRules   `json:"inbound_rules,omitempty"`
 	Name           string                                    `json:"name"`
-	OutboundRules  []CreateFirewallRequestBodyOutboundRules  `json:"outbound_rules"`
-	PendingChanges []CreateFirewallRequestBodyPendingChanges `json:"pending_changes"`
-	Status         *CreateFirewallRequestBodyStatusEnum      `json:"status"`
-	Tags           []string                                  `json:"tags"`
+	OutboundRules  []CreateFirewallRequestBodyOutboundRules  `json:"outbound_rules,omitempty"`
+	PendingChanges []CreateFirewallRequestBodyPendingChanges `json:"pending_changes,omitempty"`
+	Status         *CreateFirewallRequestBodyStatusEnum      `json:"status,omitempty"`
+	Tags           []string                                  `json:"tags,omitempty"`
 }
 
 type CreateFirewallRequest struct {
@@ -74,7 +74,7 @@ type CreateFirewallRequest struct {
 type CreateFirewall401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateFirewallResponse struct {

@@ -1,14 +1,14 @@
 package shared
 
 type JobConfig struct {
-	AdBreaks          []AdBreak          `json:"adBreaks"`
-	EditList          []EditAtom         `json:"editList"`
-	ElementaryStreams []ElementaryStream `json:"elementaryStreams"`
-	Inputs            []Input            `json:"inputs"`
-	Manifests         []Manifest         `json:"manifests"`
-	MuxStreams        []MuxStream        `json:"muxStreams"`
-	Output            *Output            `json:"output"`
-	Overlays          []Overlay          `json:"overlays"`
-	PubsubDestination *PubsubDestination `json:"pubsubDestination"`
-	SpriteSheets      []SpriteSheet      `json:"spriteSheets"`
+	AdBreaks          []AdBreak          `json:"adBreaks,omitempty"`
+	EditList          []EditAtom         `json:"editList,omitempty"`
+	ElementaryStreams []ElementaryStream `json:"elementaryStreams,omitempty"`
+	Inputs            []Input            `json:"inputs,omitempty"`
+	Manifests         []Manifest         `json:"manifests,omitempty"`
+	MuxStreams        []MuxStream        `json:"muxStreams,omitempty"`
+	Output            *Output            `json:"output,omitempty"`
+	Overlays          []Overlay          `json:"overlays,omitempty"`
+	PubsubDestination *PubsubDestination `json:"pubsubDestination,omitempty"`
+	SpriteSheets      []SpriteSheet      `json:"spriteSheets,omitempty"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type MonitoringQueryLanguageCondition struct {
-	Duration              *string                                                    `json:"duration"`
-	EvaluationMissingData *MonitoringQueryLanguageConditionEvaluationMissingDataEnum `json:"evaluationMissingData"`
-	Query                 *string                                                    `json:"query"`
-	Trigger               *Trigger                                                   `json:"trigger"`
+	Duration              *string                                                    `json:"duration,omitempty"`
+	EvaluationMissingData *MonitoringQueryLanguageConditionEvaluationMissingDataEnum `json:"evaluationMissingData,omitempty"`
+	Query                 *string                                                    `json:"query,omitempty"`
+	Trigger               *Trigger                                                   `json:"trigger,omitempty"`
 }

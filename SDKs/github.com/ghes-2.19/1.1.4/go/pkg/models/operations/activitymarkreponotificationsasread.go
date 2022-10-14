@@ -10,7 +10,7 @@ type ActivityMarkRepoNotificationsAsReadPathParams struct {
 }
 
 type ActivityMarkRepoNotificationsAsReadRequestBody struct {
-	LastReadAt *time.Time `json:"last_read_at"`
+	LastReadAt *time.Time `json:"last_read_at,omitempty"`
 }
 
 type ActivityMarkRepoNotificationsAsReadRequest struct {
@@ -19,8 +19,8 @@ type ActivityMarkRepoNotificationsAsReadRequest struct {
 }
 
 type ActivityMarkRepoNotificationsAsRead202ApplicationJSON struct {
-	Message *string `json:"message"`
-	URL     *string `json:"url"`
+	Message *string `json:"message,omitempty"`
+	URL     *string `json:"url,omitempty"`
 }
 
 type ActivityMarkRepoNotificationsAsReadResponse struct {

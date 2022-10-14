@@ -1,6 +1,6 @@
 package shared
 
 type ListVerificationsResponse struct {
-	NextPageToken *string        `json:"nextPageToken"`
-	Verifications []Verification `json:"verifications"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
+	Verifications []Verification `json:"verifications,omitempty"`
 }

@@ -8,6 +8,6 @@ const (
 )
 
 type StatisticalTimeSeriesFilter struct {
-	NumTimeSeries *int32                                        `json:"numTimeSeries"`
-	RankingMethod *StatisticalTimeSeriesFilterRankingMethodEnum `json:"rankingMethod"`
+	NumTimeSeries *int32                                        `json:"numTimeSeries,omitempty"`
+	RankingMethod *StatisticalTimeSeriesFilterRankingMethodEnum `json:"rankingMethod,omitempty"`
 }

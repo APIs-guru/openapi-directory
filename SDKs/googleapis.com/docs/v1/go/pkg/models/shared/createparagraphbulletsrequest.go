@@ -22,6 +22,6 @@ const (
 )
 
 type CreateParagraphBulletsRequest struct {
-	BulletPreset *CreateParagraphBulletsRequestBulletPresetEnum `json:"bulletPreset"`
-	Range        *Range                                         `json:"range"`
+	BulletPreset *CreateParagraphBulletsRequestBulletPresetEnum `json:"bulletPreset,omitempty"`
+	Range        *Range                                         `json:"range,omitempty"`
 }

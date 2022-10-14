@@ -1,9 +1,9 @@
 package shared
 
 type GetMobileDeviceAccessEffectRequest struct {
-	DeviceModel           *string `json:"DeviceModel"`
-	DeviceOperatingSystem *string `json:"DeviceOperatingSystem"`
-	DeviceType            *string `json:"DeviceType"`
-	DeviceUserAgent       *string `json:"DeviceUserAgent"`
+	DeviceModel           *string `json:"DeviceModel,omitempty"`
+	DeviceOperatingSystem *string `json:"DeviceOperatingSystem,omitempty"`
+	DeviceType            *string `json:"DeviceType,omitempty"`
+	DeviceUserAgent       *string `json:"DeviceUserAgent,omitempty"`
 	OrganizationID        string  `json:"OrganizationId"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListLaunchProfileMembersResponse struct {
-	Members   []LaunchProfileMembership `json:"members"`
-	NextToken *string                   `json:"nextToken"`
+	Members   []LaunchProfileMembership `json:"members,omitempty"`
+	NextToken *string                   `json:"nextToken,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CertDNSChallenge struct {
-	DomainName *string `json:"domainName"`
-	Token      *string `json:"token"`
+	DomainName *string `json:"domainName,omitempty"`
+	Token      *string `json:"token,omitempty"`
 }

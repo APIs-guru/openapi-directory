@@ -1,5 +1,5 @@
 package shared
 
 type DisableActionConfiguration struct {
-	Note *string `json:"note"`
+	Note *string `json:"note,omitempty"`
 }

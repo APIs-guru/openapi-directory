@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetBuildBatchesOutput struct {
-	BuildBatches         []BuildBatch `json:"buildBatches"`
-	BuildBatchesNotFound []string     `json:"buildBatchesNotFound"`
+	BuildBatches         []BuildBatch `json:"buildBatches,omitempty"`
+	BuildBatchesNotFound []string     `json:"buildBatchesNotFound,omitempty"`
 }

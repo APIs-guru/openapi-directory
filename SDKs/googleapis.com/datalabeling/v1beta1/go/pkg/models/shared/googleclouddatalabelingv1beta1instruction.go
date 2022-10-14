@@ -11,13 +11,13 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1Instruction struct {
-	BlockingResources []string                                               `json:"blockingResources"`
-	CreateTime        *string                                                `json:"createTime"`
-	CsvInstruction    *GoogleCloudDatalabelingV1beta1CsvInstruction          `json:"csvInstruction"`
-	DataType          *GoogleCloudDatalabelingV1beta1InstructionDataTypeEnum `json:"dataType"`
-	Description       *string                                                `json:"description"`
-	DisplayName       *string                                                `json:"displayName"`
-	Name              *string                                                `json:"name"`
-	PdfInstruction    *GoogleCloudDatalabelingV1beta1PdfInstruction          `json:"pdfInstruction"`
-	UpdateTime        *string                                                `json:"updateTime"`
+	BlockingResources []string                                               `json:"blockingResources,omitempty"`
+	CreateTime        *string                                                `json:"createTime,omitempty"`
+	CsvInstruction    *GoogleCloudDatalabelingV1beta1CsvInstruction          `json:"csvInstruction,omitempty"`
+	DataType          *GoogleCloudDatalabelingV1beta1InstructionDataTypeEnum `json:"dataType,omitempty"`
+	Description       *string                                                `json:"description,omitempty"`
+	DisplayName       *string                                                `json:"displayName,omitempty"`
+	Name              *string                                                `json:"name,omitempty"`
+	PdfInstruction    *GoogleCloudDatalabelingV1beta1PdfInstruction          `json:"pdfInstruction,omitempty"`
+	UpdateTime        *string                                                `json:"updateTime,omitempty"`
 }

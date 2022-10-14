@@ -1,5 +1,5 @@
 package shared
 
 type DeleteStreamingSessionResponse struct {
-	Session *StreamingSession `json:"session"`
+	Session *StreamingSession `json:"session,omitempty"`
 }

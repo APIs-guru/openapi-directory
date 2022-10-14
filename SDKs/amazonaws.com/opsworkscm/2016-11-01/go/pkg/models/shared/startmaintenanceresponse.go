@@ -1,5 +1,5 @@
 package shared
 
 type StartMaintenanceResponse struct {
-	Server *Server `json:"Server"`
+	Server *Server `json:"Server,omitempty"`
 }

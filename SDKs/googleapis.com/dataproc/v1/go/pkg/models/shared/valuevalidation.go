@@ -1,5 +1,5 @@
 package shared
 
 type ValueValidation struct {
-	Values []string `json:"values"`
+	Values []string `json:"values,omitempty"`
 }

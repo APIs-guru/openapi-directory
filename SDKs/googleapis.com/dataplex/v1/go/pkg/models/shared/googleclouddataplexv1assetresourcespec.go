@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudDataplexV1AssetResourceSpec struct {
-	Name *string                                         `json:"name"`
-	Type *GoogleCloudDataplexV1AssetResourceSpecTypeEnum `json:"type"`
+	Name *string                                         `json:"name,omitempty"`
+	Type *GoogleCloudDataplexV1AssetResourceSpecTypeEnum `json:"type,omitempty"`
 }

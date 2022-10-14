@@ -10,8 +10,8 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoErrorDetail struct {
-	ErrorCode    *CrmlogErrorCode                                   `json:"errorCode"`
-	ErrorMessage *string                                            `json:"errorMessage"`
-	Severity     *EnterpriseCrmEventbusProtoErrorDetailSeverityEnum `json:"severity"`
-	TaskNumber   *int32                                             `json:"taskNumber"`
+	ErrorCode    *CrmlogErrorCode                                   `json:"errorCode,omitempty"`
+	ErrorMessage *string                                            `json:"errorMessage,omitempty"`
+	Severity     *EnterpriseCrmEventbusProtoErrorDetailSeverityEnum `json:"severity,omitempty"`
+	TaskNumber   *int32                                             `json:"taskNumber,omitempty"`
 }

@@ -23,7 +23,7 @@ const (
 )
 
 type SubmitFeedbackRequestBody struct {
-	Comment *string                           `json:"comment"`
+	Comment *string                           `json:"comment,omitempty"`
 	Type    SubmitFeedbackRequestBodyTypeEnum `json:"type"`
 }
 

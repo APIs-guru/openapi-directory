@@ -1,6 +1,6 @@
 package shared
 
 type AuthMeta struct {
-	Expiry *string `json:"expiry"`
-	Hint   *string `json:"hint"`
+	Expiry *string `json:"expiry,omitempty"`
+	Hint   *string `json:"hint,omitempty"`
 }

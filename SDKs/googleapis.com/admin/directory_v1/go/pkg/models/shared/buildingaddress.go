@@ -1,11 +1,11 @@
 package shared
 
 type BuildingAddress struct {
-	AddressLines       []string `json:"addressLines"`
-	AdministrativeArea *string  `json:"administrativeArea"`
-	LanguageCode       *string  `json:"languageCode"`
-	Locality           *string  `json:"locality"`
-	PostalCode         *string  `json:"postalCode"`
-	RegionCode         *string  `json:"regionCode"`
-	Sublocality        *string  `json:"sublocality"`
+	AddressLines       []string `json:"addressLines,omitempty"`
+	AdministrativeArea *string  `json:"administrativeArea,omitempty"`
+	LanguageCode       *string  `json:"languageCode,omitempty"`
+	Locality           *string  `json:"locality,omitempty"`
+	PostalCode         *string  `json:"postalCode,omitempty"`
+	RegionCode         *string  `json:"regionCode,omitempty"`
+	Sublocality        *string  `json:"sublocality,omitempty"`
 }

@@ -11,5 +11,5 @@ const (
 )
 
 type VideoPlayerSizeTargetingOptionDetails struct {
-	VideoPlayerSize *VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum `json:"videoPlayerSize"`
+	VideoPlayerSize *VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum `json:"videoPlayerSize,omitempty"`
 }

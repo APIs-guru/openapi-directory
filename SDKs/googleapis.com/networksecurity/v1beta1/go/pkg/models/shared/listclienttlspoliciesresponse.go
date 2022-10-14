@@ -1,6 +1,6 @@
 package shared
 
 type ListClientTLSPoliciesResponse struct {
-	ClientTLSPolicies []ClientTLSPolicy `json:"clientTlsPolicies"`
-	NextPageToken     *string           `json:"nextPageToken"`
+	ClientTLSPolicies []ClientTLSPolicy `json:"clientTlsPolicies,omitempty"`
+	NextPageToken     *string           `json:"nextPageToken,omitempty"`
 }

@@ -10,7 +10,7 @@ const (
 )
 
 type ProductOptionEditFields struct {
-	Name       *string                                `json:"name"`
-	OptionType *ProductOptionEditFieldsOptionTypeEnum `json:"option_type"`
-	Position   *int32                                 `json:"position"`
+	Name       *string                                `json:"name,omitempty"`
+	OptionType *ProductOptionEditFieldsOptionTypeEnum `json:"option_type,omitempty"`
+	Position   *int32                                 `json:"position,omitempty"`
 }

@@ -11,6 +11,6 @@ type DescribeRouteCalculatorResponse struct {
 	DataSource     string            `json:"DataSource"`
 	Description    string            `json:"Description"`
 	PricingPlan    PricingPlanEnum   `json:"PricingPlan"`
-	Tags           map[string]string `json:"Tags"`
+	Tags           map[string]string `json:"Tags,omitempty"`
 	UpdateTime     time.Time         `json:"UpdateTime"`
 }

@@ -14,17 +14,17 @@ const (
 )
 
 type Company struct {
-	CareerSiteURI                        *string             `json:"careerSiteUri"`
-	DerivedInfo                          *CompanyDerivedInfo `json:"derivedInfo"`
-	DisplayName                          *string             `json:"displayName"`
-	EeoText                              *string             `json:"eeoText"`
-	ExternalID                           *string             `json:"externalId"`
-	HeadquartersAddress                  *string             `json:"headquartersAddress"`
-	HiringAgency                         *bool               `json:"hiringAgency"`
-	ImageURI                             *string             `json:"imageUri"`
-	KeywordSearchableJobCustomAttributes []string            `json:"keywordSearchableJobCustomAttributes"`
-	Name                                 *string             `json:"name"`
-	Size                                 *CompanySizeEnum    `json:"size"`
-	Suspended                            *bool               `json:"suspended"`
-	WebsiteURI                           *string             `json:"websiteUri"`
+	CareerSiteURI                        *string             `json:"careerSiteUri,omitempty"`
+	DerivedInfo                          *CompanyDerivedInfo `json:"derivedInfo,omitempty"`
+	DisplayName                          *string             `json:"displayName,omitempty"`
+	EeoText                              *string             `json:"eeoText,omitempty"`
+	ExternalID                           *string             `json:"externalId,omitempty"`
+	HeadquartersAddress                  *string             `json:"headquartersAddress,omitempty"`
+	HiringAgency                         *bool               `json:"hiringAgency,omitempty"`
+	ImageURI                             *string             `json:"imageUri,omitempty"`
+	KeywordSearchableJobCustomAttributes []string            `json:"keywordSearchableJobCustomAttributes,omitempty"`
+	Name                                 *string             `json:"name,omitempty"`
+	Size                                 *CompanySizeEnum    `json:"size,omitempty"`
+	Suspended                            *bool               `json:"suspended,omitempty"`
+	WebsiteURI                           *string             `json:"websiteUri,omitempty"`
 }

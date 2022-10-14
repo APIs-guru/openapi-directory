@@ -9,7 +9,7 @@ type ObStatement2 struct {
 	CreationDateTime   time.Time                        `json:"CreationDateTime"`
 	EndDateTime        time.Time                        `json:"EndDateTime"`
 	StartDateTime      time.Time                        `json:"StartDateTime"`
-	StatementID        *string                          `json:"StatementId"`
-	StatementReference *string                          `json:"StatementReference"`
+	StatementID        *string                          `json:"StatementId,omitempty"`
+	StatementReference *string                          `json:"StatementReference,omitempty"`
 	Type               ObExternalStatementType1CodeEnum `json:"Type"`
 }

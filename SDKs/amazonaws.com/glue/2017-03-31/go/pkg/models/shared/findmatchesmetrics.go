@@ -1,10 +1,10 @@
 package shared
 
 type FindMatchesMetrics struct {
-	AreaUnderPrCurve  *float64           `json:"AreaUnderPRCurve"`
-	ColumnImportances []ColumnImportance `json:"ColumnImportances"`
-	ConfusionMatrix   *ConfusionMatrix   `json:"ConfusionMatrix"`
-	F1                *float64           `json:"F1"`
-	Precision         *float64           `json:"Precision"`
-	Recall            *float64           `json:"Recall"`
+	AreaUnderPrCurve  *float64           `json:"AreaUnderPRCurve,omitempty"`
+	ColumnImportances []ColumnImportance `json:"ColumnImportances,omitempty"`
+	ConfusionMatrix   *ConfusionMatrix   `json:"ConfusionMatrix,omitempty"`
+	F1                *float64           `json:"F1,omitempty"`
+	Precision         *float64           `json:"Precision,omitempty"`
+	Recall            *float64           `json:"Recall,omitempty"`
 }

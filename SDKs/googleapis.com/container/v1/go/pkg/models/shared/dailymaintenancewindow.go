@@ -1,6 +1,6 @@
 package shared
 
 type DailyMaintenanceWindow struct {
-	Duration  *string `json:"duration"`
-	StartTime *string `json:"startTime"`
+	Duration  *string `json:"duration,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }

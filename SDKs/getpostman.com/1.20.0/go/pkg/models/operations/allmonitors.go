@@ -1,14 +1,14 @@
 package operations
 
 type AllMonitors200ApplicationJSONMonitors struct {
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
-	Owner *string `json:"owner"`
-	UID   *string `json:"uid"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
+	Owner *string `json:"owner,omitempty"`
+	UID   *string `json:"uid,omitempty"`
 }
 
 type AllMonitors200ApplicationJSON struct {
-	Monitors []AllMonitors200ApplicationJSONMonitors `json:"monitors"`
+	Monitors []AllMonitors200ApplicationJSONMonitors `json:"monitors,omitempty"`
 }
 
 type AllMonitorsResponse struct {

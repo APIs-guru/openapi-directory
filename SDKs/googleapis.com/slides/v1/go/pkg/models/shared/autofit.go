@@ -10,7 +10,7 @@ const (
 )
 
 type Autofit struct {
-	AutofitType          *AutofitAutofitTypeEnum `json:"autofitType"`
-	FontScale            *float32                `json:"fontScale"`
-	LineSpacingReduction *float32                `json:"lineSpacingReduction"`
+	AutofitType          *AutofitAutofitTypeEnum `json:"autofitType,omitempty"`
+	FontScale            *float32                `json:"fontScale,omitempty"`
+	LineSpacingReduction *float32                `json:"lineSpacingReduction,omitempty"`
 }

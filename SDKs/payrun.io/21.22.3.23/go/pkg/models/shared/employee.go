@@ -35,27 +35,27 @@ const (
 )
 
 type EmployeeEmployeeAddressAddress struct {
-	Address1 *string `json:"Address1"`
-	Address2 *string `json:"Address2"`
-	Address3 *string `json:"Address3"`
-	Address4 *string `json:"Address4"`
-	Country  *string `json:"Country"`
-	Postcode *string `json:"Postcode"`
+	Address1 *string `json:"Address1,omitempty"`
+	Address2 *string `json:"Address2,omitempty"`
+	Address3 *string `json:"Address3,omitempty"`
+	Address4 *string `json:"Address4,omitempty"`
+	Country  *string `json:"Country,omitempty"`
+	Postcode *string `json:"Postcode,omitempty"`
 }
 
 type EmployeeEmployeeBankAccountBankAccount struct {
-	AccountName   *string `json:"AccountName"`
-	AccountNumber *string `json:"AccountNumber"`
-	Reference     *string `json:"Reference"`
-	SortCode      *string `json:"SortCode"`
+	AccountName   *string `json:"AccountName,omitempty"`
+	AccountNumber *string `json:"AccountNumber,omitempty"`
+	Reference     *string `json:"Reference,omitempty"`
+	SortCode      *string `json:"SortCode,omitempty"`
 }
 
 type EmployeeEmployeeEmployeePartnerEmployeePartner struct {
-	FirstName  *string `json:"FirstName"`
-	Initials   *string `json:"Initials"`
-	LastName   *string `json:"LastName"`
-	MiddleName *string `json:"MiddleName"`
-	NiNumber   *string `json:"NiNumber"`
+	FirstName  *string `json:"FirstName,omitempty"`
+	Initials   *string `json:"Initials,omitempty"`
+	LastName   *string `json:"LastName,omitempty"`
+	MiddleName *string `json:"MiddleName,omitempty"`
+	NiNumber   *string `json:"NiNumber,omitempty"`
 }
 
 type EmployeeEmployeeGenderGenderEnum string
@@ -102,9 +102,9 @@ const (
 )
 
 type EmployeeEmployeePaySchedulePaySchedule struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type EmployeeEmployeePaymentMethodPaymentMethodEnum string
@@ -190,51 +190,51 @@ const (
 )
 
 type EmployeeEmployeeEmployee struct {
-	AeAssessmentOverride        *EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum   `json:"AEAssessmentOverride"`
-	AeAssessmentOverrideDate    *time.Time                                                      `json:"AEAssessmentOverrideDate"`
-	AeExclusionReasonCode       *EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum `json:"AEExclusionReasonCode"`
-	AePostponementDate          *time.Time                                                      `json:"AEPostponementDate"`
-	Address                     *EmployeeEmployeeAddressAddress                                 `json:"Address"`
-	BankAccount                 *EmployeeEmployeeBankAccountBankAccount                         `json:"BankAccount"`
-	Code                        *string                                                         `json:"Code"`
-	DateOfBirth                 *time.Time                                                      `json:"DateOfBirth"`
-	Deactivated                 *bool                                                           `json:"Deactivated"`
-	DirectorshipAppointmentDate *time.Time                                                      `json:"DirectorshipAppointmentDate"`
-	EeaCitizen                  *bool                                                           `json:"EEACitizen"`
-	Epm6                        *bool                                                           `json:"EPM6"`
-	EffectiveDate               *time.Time                                                      `json:"EffectiveDate"`
-	EmployeePartner             *EmployeeEmployeeEmployeePartnerEmployeePartner                 `json:"EmployeePartner"`
-	FirstName                   *string                                                         `json:"FirstName"`
-	Gender                      *EmployeeEmployeeGenderGenderEnum                               `json:"Gender"`
-	HoursPerWeek                *float64                                                        `json:"HoursPerWeek"`
-	Initials                    *string                                                         `json:"Initials"`
-	IrregularEmployment         *bool                                                           `json:"IrregularEmployment"`
-	IsAgencyWorker              *bool                                                           `json:"IsAgencyWorker"`
-	LastName                    *string                                                         `json:"LastName"`
-	LeaverReason                *EmployeeEmployeeLeaverReasonLeaverReasonEnum                   `json:"LeaverReason"`
-	LeavingDate                 *time.Time                                                      `json:"LeavingDate"`
-	MaritalStatus               *EmployeeEmployeeMaritalStatusMaritalStatusEnum                 `json:"MaritalStatus"`
-	MetaData                    map[string]interface{}                                          `json:"MetaData"`
-	MiddleName                  *string                                                         `json:"MiddleName"`
-	NiNumber                    *string                                                         `json:"NiNumber"`
-	NicLiability                *EmployeeEmployeeNicLiabilityNicLiabilityEnum                   `json:"NicLiability"`
-	OffPayrollWorker            *bool                                                           `json:"OffPayrollWorker"`
-	OnStrike                    *bool                                                           `json:"OnStrike"`
-	PassportNumber              *string                                                         `json:"PassportNumber"`
-	PaySchedule                 *EmployeeEmployeePaySchedulePaySchedule                         `json:"PaySchedule"`
-	PaymentMethod               *EmployeeEmployeePaymentMethodPaymentMethodEnum                 `json:"PaymentMethod"`
-	PaymentToANonIndividual     *bool                                                           `json:"PaymentToANonIndividual"`
-	Region                      *EmployeeEmployeeRegionRegionEnum                               `json:"Region"`
-	Revision                    *int32                                                          `json:"Revision"`
-	RuleExclusions              *EmployeeEmployeeRuleExclusionsRuleExclusionsEnum               `json:"RuleExclusions"`
-	Seconded                    *EmployeeEmployeeSecondedSecondedEnum                           `json:"Seconded"`
-	StartDate                   *time.Time                                                      `json:"StartDate"`
-	StarterDeclaration          *EmployeeEmployeeStarterDeclarationStarterDeclarationEnum       `json:"StarterDeclaration"`
-	Territory                   *EmployeeEmployeeTerritoryTerritoryEnum                         `json:"Territory"`
-	Title                       *string                                                         `json:"Title"`
-	WorkingWeek                 *EmployeeEmployeeWorkingWeekWorkingWeekEnum                     `json:"WorkingWeek"`
+	AeAssessmentOverride        *EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum   `json:"AEAssessmentOverride,omitempty"`
+	AeAssessmentOverrideDate    *time.Time                                                      `json:"AEAssessmentOverrideDate,omitempty"`
+	AeExclusionReasonCode       *EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum `json:"AEExclusionReasonCode,omitempty"`
+	AePostponementDate          *time.Time                                                      `json:"AEPostponementDate,omitempty"`
+	Address                     *EmployeeEmployeeAddressAddress                                 `json:"Address,omitempty"`
+	BankAccount                 *EmployeeEmployeeBankAccountBankAccount                         `json:"BankAccount,omitempty"`
+	Code                        *string                                                         `json:"Code,omitempty"`
+	DateOfBirth                 *time.Time                                                      `json:"DateOfBirth,omitempty"`
+	Deactivated                 *bool                                                           `json:"Deactivated,omitempty"`
+	DirectorshipAppointmentDate *time.Time                                                      `json:"DirectorshipAppointmentDate,omitempty"`
+	EeaCitizen                  *bool                                                           `json:"EEACitizen,omitempty"`
+	Epm6                        *bool                                                           `json:"EPM6,omitempty"`
+	EffectiveDate               *time.Time                                                      `json:"EffectiveDate,omitempty"`
+	EmployeePartner             *EmployeeEmployeeEmployeePartnerEmployeePartner                 `json:"EmployeePartner,omitempty"`
+	FirstName                   *string                                                         `json:"FirstName,omitempty"`
+	Gender                      *EmployeeEmployeeGenderGenderEnum                               `json:"Gender,omitempty"`
+	HoursPerWeek                *float64                                                        `json:"HoursPerWeek,omitempty"`
+	Initials                    *string                                                         `json:"Initials,omitempty"`
+	IrregularEmployment         *bool                                                           `json:"IrregularEmployment,omitempty"`
+	IsAgencyWorker              *bool                                                           `json:"IsAgencyWorker,omitempty"`
+	LastName                    *string                                                         `json:"LastName,omitempty"`
+	LeaverReason                *EmployeeEmployeeLeaverReasonLeaverReasonEnum                   `json:"LeaverReason,omitempty"`
+	LeavingDate                 *time.Time                                                      `json:"LeavingDate,omitempty"`
+	MaritalStatus               *EmployeeEmployeeMaritalStatusMaritalStatusEnum                 `json:"MaritalStatus,omitempty"`
+	MetaData                    map[string]interface{}                                          `json:"MetaData,omitempty"`
+	MiddleName                  *string                                                         `json:"MiddleName,omitempty"`
+	NiNumber                    *string                                                         `json:"NiNumber,omitempty"`
+	NicLiability                *EmployeeEmployeeNicLiabilityNicLiabilityEnum                   `json:"NicLiability,omitempty"`
+	OffPayrollWorker            *bool                                                           `json:"OffPayrollWorker,omitempty"`
+	OnStrike                    *bool                                                           `json:"OnStrike,omitempty"`
+	PassportNumber              *string                                                         `json:"PassportNumber,omitempty"`
+	PaySchedule                 *EmployeeEmployeePaySchedulePaySchedule                         `json:"PaySchedule,omitempty"`
+	PaymentMethod               *EmployeeEmployeePaymentMethodPaymentMethodEnum                 `json:"PaymentMethod,omitempty"`
+	PaymentToANonIndividual     *bool                                                           `json:"PaymentToANonIndividual,omitempty"`
+	Region                      *EmployeeEmployeeRegionRegionEnum                               `json:"Region,omitempty"`
+	Revision                    *int32                                                          `json:"Revision,omitempty"`
+	RuleExclusions              *EmployeeEmployeeRuleExclusionsRuleExclusionsEnum               `json:"RuleExclusions,omitempty"`
+	Seconded                    *EmployeeEmployeeSecondedSecondedEnum                           `json:"Seconded,omitempty"`
+	StartDate                   *time.Time                                                      `json:"StartDate,omitempty"`
+	StarterDeclaration          *EmployeeEmployeeStarterDeclarationStarterDeclarationEnum       `json:"StarterDeclaration,omitempty"`
+	Territory                   *EmployeeEmployeeTerritoryTerritoryEnum                         `json:"Territory,omitempty"`
+	Title                       *string                                                         `json:"Title,omitempty"`
+	WorkingWeek                 *EmployeeEmployeeWorkingWeekWorkingWeekEnum                     `json:"WorkingWeek,omitempty"`
 }
 
 type Employee struct {
-	Employee *EmployeeEmployeeEmployee `json:"Employee"`
+	Employee *EmployeeEmployeeEmployee `json:"Employee,omitempty"`
 }

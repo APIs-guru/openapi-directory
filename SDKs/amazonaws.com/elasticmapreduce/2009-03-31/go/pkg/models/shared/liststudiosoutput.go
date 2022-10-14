@@ -1,6 +1,6 @@
 package shared
 
 type ListStudiosOutput struct {
-	Marker  *string         `json:"Marker"`
-	Studios []StudioSummary `json:"Studios"`
+	Marker  *string         `json:"Marker,omitempty"`
+	Studios []StudioSummary `json:"Studios,omitempty"`
 }

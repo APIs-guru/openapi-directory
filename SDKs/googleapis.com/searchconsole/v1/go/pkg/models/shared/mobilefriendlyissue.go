@@ -13,5 +13,5 @@ const (
 )
 
 type MobileFriendlyIssue struct {
-	Rule *MobileFriendlyIssueRuleEnum `json:"rule"`
+	Rule *MobileFriendlyIssueRuleEnum `json:"rule,omitempty"`
 }

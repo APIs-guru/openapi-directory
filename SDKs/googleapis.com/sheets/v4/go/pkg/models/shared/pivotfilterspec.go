@@ -1,7 +1,7 @@
 package shared
 
 type PivotFilterSpec struct {
-	ColumnOffsetIndex         *int32                     `json:"columnOffsetIndex"`
-	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference"`
-	FilterCriteria            *PivotFilterCriteria       `json:"filterCriteria"`
+	ColumnOffsetIndex         *int32                     `json:"columnOffsetIndex,omitempty"`
+	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference,omitempty"`
+	FilterCriteria            *PivotFilterCriteria       `json:"filterCriteria,omitempty"`
 }

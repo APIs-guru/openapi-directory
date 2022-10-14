@@ -1,16 +1,16 @@
 package shared
 
 type Zone struct {
-	AccountID       *string              `json:"accountId"`
-	Boundary        *ZoneBoundary        `json:"boundary"`
-	ChildContainer  []ZoneChildContainer `json:"childContainer"`
-	ContainerID     *string              `json:"containerId"`
-	Fingerprint     *string              `json:"fingerprint"`
-	Name            *string              `json:"name"`
-	Notes           *string              `json:"notes"`
-	Path            *string              `json:"path"`
-	TagManagerURL   *string              `json:"tagManagerUrl"`
-	TypeRestriction *ZoneTypeRestriction `json:"typeRestriction"`
-	WorkspaceID     *string              `json:"workspaceId"`
-	ZoneID          *string              `json:"zoneId"`
+	AccountID       *string              `json:"accountId,omitempty"`
+	Boundary        *ZoneBoundary        `json:"boundary,omitempty"`
+	ChildContainer  []ZoneChildContainer `json:"childContainer,omitempty"`
+	ContainerID     *string              `json:"containerId,omitempty"`
+	Fingerprint     *string              `json:"fingerprint,omitempty"`
+	Name            *string              `json:"name,omitempty"`
+	Notes           *string              `json:"notes,omitempty"`
+	Path            *string              `json:"path,omitempty"`
+	TagManagerURL   *string              `json:"tagManagerUrl,omitempty"`
+	TypeRestriction *ZoneTypeRestriction `json:"typeRestriction,omitempty"`
+	WorkspaceID     *string              `json:"workspaceId,omitempty"`
+	ZoneID          *string              `json:"zoneId,omitempty"`
 }

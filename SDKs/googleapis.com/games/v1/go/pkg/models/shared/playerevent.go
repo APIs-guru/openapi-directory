@@ -1,9 +1,9 @@
 package shared
 
 type PlayerEvent struct {
-	DefinitionID       *string `json:"definitionId"`
-	FormattedNumEvents *string `json:"formattedNumEvents"`
-	Kind               *string `json:"kind"`
-	NumEvents          *string `json:"numEvents"`
-	PlayerID           *string `json:"playerId"`
+	DefinitionID       *string `json:"definitionId,omitempty"`
+	FormattedNumEvents *string `json:"formattedNumEvents,omitempty"`
+	Kind               *string `json:"kind,omitempty"`
+	NumEvents          *string `json:"numEvents,omitempty"`
+	PlayerID           *string `json:"playerId,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type MigrationTask struct {
-	MigrationTaskName     *string             `json:"MigrationTaskName"`
-	ProgressUpdateStream  *string             `json:"ProgressUpdateStream"`
-	ResourceAttributeList []ResourceAttribute `json:"ResourceAttributeList"`
-	Task                  *Task               `json:"Task"`
-	UpdateDateTime        *time.Time          `json:"UpdateDateTime"`
+	MigrationTaskName     *string             `json:"MigrationTaskName,omitempty"`
+	ProgressUpdateStream  *string             `json:"ProgressUpdateStream,omitempty"`
+	ResourceAttributeList []ResourceAttribute `json:"ResourceAttributeList,omitempty"`
+	Task                  *Task               `json:"Task,omitempty"`
+	UpdateDateTime        *time.Time          `json:"UpdateDateTime,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type GoogleCloudRetailV2alphaSearchRequestFacetSpecFacetKey struct {
-	CaseInsensitive  *bool                              `json:"caseInsensitive"`
-	Contains         []string                           `json:"contains"`
-	Intervals        []GoogleCloudRetailV2alphaInterval `json:"intervals"`
-	Key              *string                            `json:"key"`
-	OrderBy          *string                            `json:"orderBy"`
-	Prefixes         []string                           `json:"prefixes"`
-	Query            *string                            `json:"query"`
-	RestrictedValues []string                           `json:"restrictedValues"`
-	ReturnMinMax     *bool                              `json:"returnMinMax"`
+	CaseInsensitive  *bool                              `json:"caseInsensitive,omitempty"`
+	Contains         []string                           `json:"contains,omitempty"`
+	Intervals        []GoogleCloudRetailV2alphaInterval `json:"intervals,omitempty"`
+	Key              *string                            `json:"key,omitempty"`
+	OrderBy          *string                            `json:"orderBy,omitempty"`
+	Prefixes         []string                           `json:"prefixes,omitempty"`
+	Query            *string                            `json:"query,omitempty"`
+	RestrictedValues []string                           `json:"restrictedValues,omitempty"`
+	ReturnMinMax     *bool                              `json:"returnMinMax,omitempty"`
 }

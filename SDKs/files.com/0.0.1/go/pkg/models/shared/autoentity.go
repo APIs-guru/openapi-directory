@@ -1,5 +1,5 @@
 package shared
 
 type AutoEntity struct {
-	Dynamic map[string]interface{} `json:"dynamic"`
+	Dynamic map[string]interface{} `json:"dynamic,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type MultiConditionalBranch struct {
-	Condition    *SimpleCondition `json:"Condition"`
-	NextActivity *string          `json:"NextActivity"`
+	Condition    *SimpleCondition `json:"Condition,omitempty"`
+	NextActivity *string          `json:"NextActivity,omitempty"`
 }

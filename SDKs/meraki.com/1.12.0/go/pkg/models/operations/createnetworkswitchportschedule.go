@@ -5,60 +5,60 @@ type CreateNetworkSwitchPortSchedulePathParams struct {
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBodyPortSchedule struct {
-	Friday    *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday    `json:"friday"`
-	Monday    *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday    `json:"monday"`
-	Saturday  *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday  `json:"saturday"`
-	Sunday    *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday    `json:"sunday"`
-	Thursday  *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday  `json:"thursday"`
-	Tuesday   *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday   `json:"tuesday"`
-	Wednesday *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday `json:"wednesday"`
+	Friday    *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday    `json:"friday,omitempty"`
+	Monday    *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday    `json:"monday,omitempty"`
+	Saturday  *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday  `json:"saturday,omitempty"`
+	Sunday    *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday    `json:"sunday,omitempty"`
+	Thursday  *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday  `json:"thursday,omitempty"`
+	Tuesday   *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday   `json:"tuesday,omitempty"`
+	Wednesday *CreateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday `json:"wednesday,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequestBody struct {
 	Name         string                                                  `json:"name"`
-	PortSchedule *CreateNetworkSwitchPortScheduleRequestBodyPortSchedule `json:"portSchedule"`
+	PortSchedule *CreateNetworkSwitchPortScheduleRequestBodyPortSchedule `json:"portSchedule,omitempty"`
 }
 
 type CreateNetworkSwitchPortScheduleRequest struct {

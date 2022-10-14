@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaExecuteIntegrationsRequest struct {
-	DoNotPropagateError *bool                                               `json:"doNotPropagateError"`
-	ExecutionID         *string                                             `json:"executionId"`
-	InputParameters     map[string]GoogleCloudIntegrationsV1alphaValueType  `json:"inputParameters"`
-	ParameterEntries    []EnterpriseCrmFrontendsEventbusProtoParameterEntry `json:"parameterEntries"`
-	Parameters          *EnterpriseCrmFrontendsEventbusProtoEventParameters `json:"parameters"`
-	RequestID           *string                                             `json:"requestId"`
-	TriggerID           *string                                             `json:"triggerId"`
+	DoNotPropagateError *bool                                               `json:"doNotPropagateError,omitempty"`
+	ExecutionID         *string                                             `json:"executionId,omitempty"`
+	InputParameters     map[string]GoogleCloudIntegrationsV1alphaValueType  `json:"inputParameters,omitempty"`
+	ParameterEntries    []EnterpriseCrmFrontendsEventbusProtoParameterEntry `json:"parameterEntries,omitempty"`
+	Parameters          *EnterpriseCrmFrontendsEventbusProtoEventParameters `json:"parameters,omitempty"`
+	RequestID           *string                                             `json:"requestId,omitempty"`
+	TriggerID           *string                                             `json:"triggerId,omitempty"`
 }

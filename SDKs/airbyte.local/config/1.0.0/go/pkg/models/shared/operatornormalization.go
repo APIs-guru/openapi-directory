@@ -7,5 +7,5 @@ const (
 )
 
 type OperatorNormalization struct {
-	Option *OperatorNormalizationOptionEnum `json:"option"`
+	Option *OperatorNormalizationOptionEnum `json:"option,omitempty"`
 }

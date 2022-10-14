@@ -8,6 +8,6 @@ const (
 )
 
 type DiscoveredParticipant struct {
-	Code  *DiscoveredParticipantCodeCodeEnum `json:"code"`
-	Email *bool                              `json:"email"`
+	Code  *DiscoveredParticipantCodeCodeEnum `json:"code,omitempty"`
+	Email *bool                              `json:"email,omitempty"`
 }

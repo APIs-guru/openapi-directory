@@ -9,17 +9,17 @@ const (
 )
 
 type GoogleChromePolicyVersionsV1PolicySchema struct {
-	AccessRestrictions       []string                                                           `json:"accessRestrictions"`
-	AdditionalTargetKeyNames []GoogleChromePolicyVersionsV1AdditionalTargetKeyName              `json:"additionalTargetKeyNames"`
-	CategoryTitle            *string                                                            `json:"categoryTitle"`
-	Definition               *Proto2FileDescriptorProto                                         `json:"definition"`
-	FieldDescriptions        []GoogleChromePolicyVersionsV1PolicySchemaFieldDescription         `json:"fieldDescriptions"`
-	Name                     *string                                                            `json:"name"`
-	Notices                  []GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription        `json:"notices"`
-	PolicyAPILifecycle       *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecycle               `json:"policyApiLifecycle"`
-	PolicyAPILifeycle        *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecycle               `json:"policyApiLifeycle"`
-	PolicyDescription        *string                                                            `json:"policyDescription"`
-	SchemaName               *string                                                            `json:"schemaName"`
-	SupportURI               *string                                                            `json:"supportUri"`
-	ValidTargetResources     []GoogleChromePolicyVersionsV1PolicySchemaValidTargetResourcesEnum `json:"validTargetResources"`
+	AccessRestrictions       []string                                                           `json:"accessRestrictions,omitempty"`
+	AdditionalTargetKeyNames []GoogleChromePolicyVersionsV1AdditionalTargetKeyName              `json:"additionalTargetKeyNames,omitempty"`
+	CategoryTitle            *string                                                            `json:"categoryTitle,omitempty"`
+	Definition               *Proto2FileDescriptorProto                                         `json:"definition,omitempty"`
+	FieldDescriptions        []GoogleChromePolicyVersionsV1PolicySchemaFieldDescription         `json:"fieldDescriptions,omitempty"`
+	Name                     *string                                                            `json:"name,omitempty"`
+	Notices                  []GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription        `json:"notices,omitempty"`
+	PolicyAPILifecycle       *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecycle               `json:"policyApiLifecycle,omitempty"`
+	PolicyAPILifeycle        *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecycle               `json:"policyApiLifeycle,omitempty"`
+	PolicyDescription        *string                                                            `json:"policyDescription,omitempty"`
+	SchemaName               *string                                                            `json:"schemaName,omitempty"`
+	SupportURI               *string                                                            `json:"supportUri,omitempty"`
+	ValidTargetResources     []GoogleChromePolicyVersionsV1PolicySchemaValidTargetResourcesEnum `json:"validTargetResources,omitempty"`
 }

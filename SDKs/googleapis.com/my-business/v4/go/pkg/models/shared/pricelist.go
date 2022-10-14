@@ -1,8 +1,8 @@
 package shared
 
 type PriceList struct {
-	Labels      []Label   `json:"labels"`
-	PriceListID *string   `json:"priceListId"`
-	Sections    []Section `json:"sections"`
-	SourceURL   *string   `json:"sourceUrl"`
+	Labels      []Label   `json:"labels,omitempty"`
+	PriceListID *string   `json:"priceListId,omitempty"`
+	Sections    []Section `json:"sections,omitempty"`
+	SourceURL   *string   `json:"sourceUrl,omitempty"`
 }

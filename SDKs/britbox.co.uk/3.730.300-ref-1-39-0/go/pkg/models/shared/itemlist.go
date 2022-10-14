@@ -15,19 +15,19 @@ const (
 )
 
 type ItemList struct {
-	CustomFields     map[string]interface{}  `json:"customFields"`
-	Description      *string                 `json:"description"`
+	CustomFields     map[string]interface{}  `json:"customFields,omitempty"`
+	Description      *string                 `json:"description,omitempty"`
 	ID               string                  `json:"id"`
-	Images           map[string]string       `json:"images"`
-	ItemTypes        []ItemListItemTypesEnum `json:"itemTypes"`
+	Images           map[string]string       `json:"images,omitempty"`
+	ItemTypes        []ItemListItemTypesEnum `json:"itemTypes,omitempty"`
 	Items            []ItemSummary           `json:"items"`
-	ListData         *ListData               `json:"listData"`
+	ListData         *ListData               `json:"listData,omitempty"`
 	Paging           Pagination              `json:"paging"`
-	Parameter        *string                 `json:"parameter"`
+	Parameter        *string                 `json:"parameter,omitempty"`
 	Path             string                  `json:"path"`
-	ShortDescription *string                 `json:"shortDescription"`
+	ShortDescription *string                 `json:"shortDescription,omitempty"`
 	Size             int32                   `json:"size"`
-	Tagline          *string                 `json:"tagline"`
-	Themes           []Theme                 `json:"themes"`
-	Title            *string                 `json:"title"`
+	Tagline          *string                 `json:"tagline,omitempty"`
+	Themes           []Theme                 `json:"themes,omitempty"`
+	Title            *string                 `json:"title,omitempty"`
 }

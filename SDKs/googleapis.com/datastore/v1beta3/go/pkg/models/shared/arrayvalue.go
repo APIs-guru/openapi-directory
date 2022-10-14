@@ -1,5 +1,5 @@
 package shared
 
 type ArrayValue struct {
-	Values []Value `json:"values"`
+	Values []Value `json:"values,omitempty"`
 }

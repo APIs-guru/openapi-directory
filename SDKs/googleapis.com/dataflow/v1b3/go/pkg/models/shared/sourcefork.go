@@ -1,8 +1,8 @@
 package shared
 
 type SourceFork struct {
-	Primary        *SourceSplitShard `json:"primary"`
-	PrimarySource  *DerivedSource    `json:"primarySource"`
-	Residual       *SourceSplitShard `json:"residual"`
-	ResidualSource *DerivedSource    `json:"residualSource"`
+	Primary        *SourceSplitShard `json:"primary,omitempty"`
+	PrimarySource  *DerivedSource    `json:"primarySource,omitempty"`
+	Residual       *SourceSplitShard `json:"residual,omitempty"`
+	ResidualSource *DerivedSource    `json:"residualSource,omitempty"`
 }

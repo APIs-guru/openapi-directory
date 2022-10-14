@@ -1,9 +1,9 @@
 package shared
 
 type ReportMetadata struct {
-	DimensionMetadata              []DimensionMetadata `json:"dimensionMetadata"`
-	MaxNumberOfDimensionsToRequest *int32              `json:"maxNumberOfDimensionsToRequest"`
-	MaxNumberOfMetricsToRequest    *int32              `json:"maxNumberOfMetricsToRequest"`
-	MetricMetadata                 []MetricMetadata    `json:"metricMetadata"`
-	ReportType                     *string             `json:"reportType"`
+	DimensionMetadata              []DimensionMetadata `json:"dimensionMetadata,omitempty"`
+	MaxNumberOfDimensionsToRequest *int32              `json:"maxNumberOfDimensionsToRequest,omitempty"`
+	MaxNumberOfMetricsToRequest    *int32              `json:"maxNumberOfMetricsToRequest,omitempty"`
+	MetricMetadata                 []MetricMetadata    `json:"metricMetadata,omitempty"`
+	ReportType                     *string             `json:"reportType,omitempty"`
 }

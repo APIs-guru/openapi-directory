@@ -35,7 +35,7 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaParameterMap struct {
-	Entries   []GoogleCloudIntegrationsV1alphaParameterMapEntry        `json:"entries"`
-	KeyType   *GoogleCloudIntegrationsV1alphaParameterMapKeyTypeEnum   `json:"keyType"`
-	ValueType *GoogleCloudIntegrationsV1alphaParameterMapValueTypeEnum `json:"valueType"`
+	Entries   []GoogleCloudIntegrationsV1alphaParameterMapEntry        `json:"entries,omitempty"`
+	KeyType   *GoogleCloudIntegrationsV1alphaParameterMapKeyTypeEnum   `json:"keyType,omitempty"`
+	ValueType *GoogleCloudIntegrationsV1alphaParameterMapValueTypeEnum `json:"valueType,omitempty"`
 }

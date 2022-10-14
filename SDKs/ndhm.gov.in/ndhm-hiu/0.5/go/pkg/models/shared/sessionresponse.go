@@ -1,9 +1,9 @@
 package shared
 
 type SessionResponse struct {
-	AccessToken      *string `json:"accessToken"`
-	ExpiresIn        *int64  `json:"expiresIn"`
-	RefreshExpiresIn *int64  `json:"refreshExpiresIn"`
-	RefreshToken     *string `json:"refreshToken"`
-	TokenType        *string `json:"tokenType"`
+	AccessToken      *string `json:"accessToken,omitempty"`
+	ExpiresIn        *int64  `json:"expiresIn,omitempty"`
+	RefreshExpiresIn *int64  `json:"refreshExpiresIn,omitempty"`
+	RefreshToken     *string `json:"refreshToken,omitempty"`
+	TokenType        *string `json:"tokenType,omitempty"`
 }

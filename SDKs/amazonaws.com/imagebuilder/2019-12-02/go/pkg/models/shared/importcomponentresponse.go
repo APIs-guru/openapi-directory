@@ -1,7 +1,7 @@
 package shared
 
 type ImportComponentResponse struct {
-	ClientToken              *string `json:"clientToken"`
-	ComponentBuildVersionArn *string `json:"componentBuildVersionArn"`
-	RequestID                *string `json:"requestId"`
+	ClientToken              *string `json:"clientToken,omitempty"`
+	ComponentBuildVersionArn *string `json:"componentBuildVersionArn,omitempty"`
+	RequestID                *string `json:"requestId,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type Configuration struct {
-	Routing *Routing `json:"routing"`
+	Routing *Routing `json:"routing,omitempty"`
 }

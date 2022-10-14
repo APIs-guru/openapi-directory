@@ -19,18 +19,18 @@ type GetCredentialsRequest struct {
 }
 
 type GetCredentials200ApplicationJSON struct {
-	CertificateAuthorityData *string    `json:"certificate_authority_data"`
-	ClientCertificateData    *string    `json:"client_certificate_data"`
-	ClientKeyData            *string    `json:"client_key_data"`
-	ExpiresAt                *time.Time `json:"expires_at"`
-	Server                   *string    `json:"server"`
-	Token                    *string    `json:"token"`
+	CertificateAuthorityData *string    `json:"certificate_authority_data,omitempty"`
+	ClientCertificateData    *string    `json:"client_certificate_data,omitempty"`
+	ClientKeyData            *string    `json:"client_key_data,omitempty"`
+	ExpiresAt                *time.Time `json:"expires_at,omitempty"`
+	Server                   *string    `json:"server,omitempty"`
+	Token                    *string    `json:"token,omitempty"`
 }
 
 type GetCredentials401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetCredentialsResponse struct {

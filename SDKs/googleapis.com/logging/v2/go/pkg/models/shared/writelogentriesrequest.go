@@ -1,10 +1,10 @@
 package shared
 
 type WriteLogEntriesRequest struct {
-	DryRun         *bool              `json:"dryRun"`
-	Entries        []LogEntry         `json:"entries"`
-	Labels         map[string]string  `json:"labels"`
-	LogName        *string            `json:"logName"`
-	PartialSuccess *bool              `json:"partialSuccess"`
-	Resource       *MonitoredResource `json:"resource"`
+	DryRun         *bool              `json:"dryRun,omitempty"`
+	Entries        []LogEntry         `json:"entries,omitempty"`
+	Labels         map[string]string  `json:"labels,omitempty"`
+	LogName        *string            `json:"logName,omitempty"`
+	PartialSuccess *bool              `json:"partialSuccess,omitempty"`
+	Resource       *MonitoredResource `json:"resource,omitempty"`
 }

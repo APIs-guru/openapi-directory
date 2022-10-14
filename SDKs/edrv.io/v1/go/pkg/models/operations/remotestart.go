@@ -1,10 +1,10 @@
 package operations
 
 type RemotestartRequestBody struct {
-	Chargestation *string `json:"chargestation"`
-	Connector     *string `json:"connector"`
-	Driver        *string `json:"driver"`
-	Token         *string `json:"token"`
+	Chargestation *string `json:"chargestation,omitempty"`
+	Connector     *string `json:"connector,omitempty"`
+	Driver        *string `json:"driver,omitempty"`
+	Token         *string `json:"token,omitempty"`
 }
 
 type RemotestartRequest struct {
@@ -12,9 +12,9 @@ type RemotestartRequest struct {
 }
 
 type Remotestart201ApplicationJSON struct {
-	Command map[string]interface{} `json:"command"`
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
+	Command map[string]interface{} `json:"command,omitempty"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
 }
 
 type RemotestartResponse struct {

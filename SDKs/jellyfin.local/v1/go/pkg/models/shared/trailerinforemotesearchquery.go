@@ -1,8 +1,8 @@
 package shared
 
 type TrailerInfoRemoteSearchQuery struct {
-	IncludeDisabledProviders *bool        `json:"IncludeDisabledProviders"`
-	ItemID                   *string      `json:"ItemId"`
-	SearchInfo               *TrailerInfo `json:"SearchInfo"`
-	SearchProviderName       *string      `json:"SearchProviderName"`
+	IncludeDisabledProviders *bool        `json:"IncludeDisabledProviders,omitempty"`
+	ItemID                   *string      `json:"ItemId,omitempty"`
+	SearchInfo               *TrailerInfo `json:"SearchInfo,omitempty"`
+	SearchProviderName       *string      `json:"SearchProviderName,omitempty"`
 }

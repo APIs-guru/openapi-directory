@@ -17,6 +17,6 @@ const (
 )
 
 type GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig struct {
-	EnabledProviders []GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum `json:"enabledProviders"`
-	State            *GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum             `json:"state"`
+	EnabledProviders []GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum `json:"enabledProviders,omitempty"`
+	State            *GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum             `json:"state,omitempty"`
 }

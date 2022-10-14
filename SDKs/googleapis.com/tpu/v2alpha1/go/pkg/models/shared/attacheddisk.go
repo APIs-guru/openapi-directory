@@ -9,6 +9,6 @@ const (
 )
 
 type AttachedDisk struct {
-	Mode       *AttachedDiskModeEnum `json:"mode"`
-	SourceDisk *string               `json:"sourceDisk"`
+	Mode       *AttachedDiskModeEnum `json:"mode,omitempty"`
+	SourceDisk *string               `json:"sourceDisk,omitempty"`
 }

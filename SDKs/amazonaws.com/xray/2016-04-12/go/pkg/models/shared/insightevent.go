@@ -5,9 +5,9 @@ import (
 )
 
 type InsightEvent struct {
-	ClientRequestImpactStatistics           *RequestImpactStatistics `json:"ClientRequestImpactStatistics"`
-	EventTime                               *time.Time               `json:"EventTime"`
-	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics `json:"RootCauseServiceRequestImpactStatistics"`
-	Summary                                 *string                  `json:"Summary"`
-	TopAnomalousServices                    []AnomalousService       `json:"TopAnomalousServices"`
+	ClientRequestImpactStatistics           *RequestImpactStatistics `json:"ClientRequestImpactStatistics,omitempty"`
+	EventTime                               *time.Time               `json:"EventTime,omitempty"`
+	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics `json:"RootCauseServiceRequestImpactStatistics,omitempty"`
+	Summary                                 *string                  `json:"Summary,omitempty"`
+	TopAnomalousServices                    []AnomalousService       `json:"TopAnomalousServices,omitempty"`
 }

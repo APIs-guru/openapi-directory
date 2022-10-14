@@ -1,7 +1,7 @@
 package shared
 
 type MonitoringBaselineConfig struct {
-	BaseliningJobName   *string                        `json:"BaseliningJobName"`
-	ConstraintsResource *MonitoringConstraintsResource `json:"ConstraintsResource"`
-	StatisticsResource  *MonitoringStatisticsResource  `json:"StatisticsResource"`
+	BaseliningJobName   *string                        `json:"BaseliningJobName,omitempty"`
+	ConstraintsResource *MonitoringConstraintsResource `json:"ConstraintsResource,omitempty"`
+	StatisticsResource  *MonitoringStatisticsResource  `json:"StatisticsResource,omitempty"`
 }

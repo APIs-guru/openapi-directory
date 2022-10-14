@@ -1,6 +1,6 @@
 package shared
 
 type ListFirewallRuleGroupAssociationsResponse struct {
-	FirewallRuleGroupAssociations []FirewallRuleGroupAssociation `json:"FirewallRuleGroupAssociations"`
-	NextToken                     *string                        `json:"NextToken"`
+	FirewallRuleGroupAssociations []FirewallRuleGroupAssociation `json:"FirewallRuleGroupAssociations,omitempty"`
+	NextToken                     *string                        `json:"NextToken,omitempty"`
 }

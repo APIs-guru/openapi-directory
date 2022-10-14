@@ -1,5 +1,5 @@
 package shared
 
 type TransferCertificateResponse struct {
-	TransferredCertificateArn *string `json:"transferredCertificateArn"`
+	TransferredCertificateArn *string `json:"transferredCertificateArn,omitempty"`
 }

@@ -9,9 +9,9 @@ type PostUsersIDAttachmentsPathParams struct {
 }
 
 type PostUsersIDAttachmentsRequestBody struct {
-	FileData *string `json:"file_data"`
-	FileName *string `json:"file_name"`
-	Title    *string `json:"title"`
+	FileData *string `json:"file_data,omitempty"`
+	FileName *string `json:"file_name,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }
 
 type PostUsersIDAttachmentsRequest struct {

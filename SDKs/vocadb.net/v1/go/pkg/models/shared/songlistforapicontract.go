@@ -24,16 +24,16 @@ const (
 )
 
 type SongListForAPIContract struct {
-	Author           *UserForAPIContract                         `json:"author"`
-	Deleted          *bool                                       `json:"deleted"`
-	Description      *string                                     `json:"description"`
-	EventDate        *time.Time                                  `json:"eventDate"`
-	Events           []ReleaseEventForAPIContract                `json:"events"`
-	FeaturedCategory *SongListForAPIContractFeaturedCategoryEnum `json:"featuredCategory"`
-	ID               *int32                                      `json:"id"`
-	LatestComments   []CommentForAPIContract                     `json:"latestComments"`
-	MainPicture      *EntryThumbForAPIContract                   `json:"mainPicture"`
-	Name             *string                                     `json:"name"`
-	Status           *SongListForAPIContractStatusEnum           `json:"status"`
-	Tags             []TagUsageForAPIContract                    `json:"tags"`
+	Author           *UserForAPIContract                         `json:"author,omitempty"`
+	Deleted          *bool                                       `json:"deleted,omitempty"`
+	Description      *string                                     `json:"description,omitempty"`
+	EventDate        *time.Time                                  `json:"eventDate,omitempty"`
+	Events           []ReleaseEventForAPIContract                `json:"events,omitempty"`
+	FeaturedCategory *SongListForAPIContractFeaturedCategoryEnum `json:"featuredCategory,omitempty"`
+	ID               *int32                                      `json:"id,omitempty"`
+	LatestComments   []CommentForAPIContract                     `json:"latestComments,omitempty"`
+	MainPicture      *EntryThumbForAPIContract                   `json:"mainPicture,omitempty"`
+	Name             *string                                     `json:"name,omitempty"`
+	Status           *SongListForAPIContractStatusEnum           `json:"status,omitempty"`
+	Tags             []TagUsageForAPIContract                    `json:"tags,omitempty"`
 }

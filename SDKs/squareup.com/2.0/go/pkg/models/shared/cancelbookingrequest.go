@@ -1,6 +1,6 @@
 package shared
 
 type CancelBookingRequest struct {
-	BookingVersion *int64  `json:"booking_version"`
-	IdempotencyKey *string `json:"idempotency_key"`
+	BookingVersion *int64  `json:"booking_version,omitempty"`
+	IdempotencyKey *string `json:"idempotency_key,omitempty"`
 }

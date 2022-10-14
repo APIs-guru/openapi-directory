@@ -20,10 +20,10 @@ const (
 )
 
 type EditTextTrackRequestBody struct {
-	Active   *bool                             `json:"active"`
-	Language *string                           `json:"language"`
-	Name     *string                           `json:"name"`
-	Type     *EditTextTrackRequestBodyTypeEnum `json:"type"`
+	Active   *bool                             `json:"active,omitempty"`
+	Language *string                           `json:"language,omitempty"`
+	Name     *string                           `json:"name,omitempty"`
+	Type     *EditTextTrackRequestBodyTypeEnum `json:"type,omitempty"`
 }
 
 type EditTextTrackSecurity struct {

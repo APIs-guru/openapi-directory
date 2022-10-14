@@ -19,7 +19,7 @@ type DeploymentStatusCreatorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -43,12 +43,12 @@ type DeploymentStatus struct {
 	Creator               DeploymentStatusCreatorSimpleUser `json:"creator"`
 	DeploymentURL         string                            `json:"deployment_url"`
 	Description           string                            `json:"description"`
-	Environment           *string                           `json:"environment"`
-	EnvironmentURL        *string                           `json:"environment_url"`
+	Environment           *string                           `json:"environment,omitempty"`
+	EnvironmentURL        *string                           `json:"environment_url,omitempty"`
 	ID                    int64                             `json:"id"`
-	LogURL                *string                           `json:"log_url"`
+	LogURL                *string                           `json:"log_url,omitempty"`
 	NodeID                string                            `json:"node_id"`
-	PerformedViaGithubApp map[string]interface{}            `json:"performed_via_github_app"`
+	PerformedViaGithubApp map[string]interface{}            `json:"performed_via_github_app,omitempty"`
 	RepositoryURL         string                            `json:"repository_url"`
 	State                 DeploymentStatusStateEnum         `json:"state"`
 	TargetURL             string                            `json:"target_url"`

@@ -1,8 +1,8 @@
 package shared
 
 type Name struct {
-	FirstName  *string `json:"firstName"`
-	LastName   *string `json:"lastName"`
-	OtherNames *string `json:"otherNames"`
-	Title      *string `json:"title"`
+	FirstName  *string `json:"firstName,omitempty"`
+	LastName   *string `json:"lastName,omitempty"`
+	OtherNames *string `json:"otherNames,omitempty"`
+	Title      *string `json:"title,omitempty"`
 }

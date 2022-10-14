@@ -1,7 +1,7 @@
 package shared
 
 type AdminCreateUserConfigType struct {
-	AllowAdminCreateUserOnly  *bool                `json:"AllowAdminCreateUserOnly"`
-	InviteMessageTemplate     *MessageTemplateType `json:"InviteMessageTemplate"`
-	UnusedAccountValidityDays *int64               `json:"UnusedAccountValidityDays"`
+	AllowAdminCreateUserOnly  *bool                `json:"AllowAdminCreateUserOnly,omitempty"`
+	InviteMessageTemplate     *MessageTemplateType `json:"InviteMessageTemplate,omitempty"`
+	UnusedAccountValidityDays *int64               `json:"UnusedAccountValidityDays,omitempty"`
 }

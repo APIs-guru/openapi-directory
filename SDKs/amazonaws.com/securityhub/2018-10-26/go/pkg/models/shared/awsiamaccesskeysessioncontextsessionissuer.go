@@ -1,9 +1,9 @@
 package shared
 
 type AwsIamAccessKeySessionContextSessionIssuer struct {
-	AccountID   *string `json:"AccountId"`
-	Arn         *string `json:"Arn"`
-	PrincipalID *string `json:"PrincipalId"`
-	Type        *string `json:"Type"`
-	UserName    *string `json:"UserName"`
+	AccountID   *string `json:"AccountId,omitempty"`
+	Arn         *string `json:"Arn,omitempty"`
+	PrincipalID *string `json:"PrincipalId,omitempty"`
+	Type        *string `json:"Type,omitempty"`
+	UserName    *string `json:"UserName,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type EmailAddress struct {
-	DisplayName   *string        `json:"displayName"`
-	FormattedType *string        `json:"formattedType"`
-	Metadata      *FieldMetadata `json:"metadata"`
-	Type          *string        `json:"type"`
-	Value         *string        `json:"value"`
+	DisplayName   *string        `json:"displayName,omitempty"`
+	FormattedType *string        `json:"formattedType,omitempty"`
+	Metadata      *FieldMetadata `json:"metadata,omitempty"`
+	Type          *string        `json:"type,omitempty"`
+	Value         *string        `json:"value,omitempty"`
 }

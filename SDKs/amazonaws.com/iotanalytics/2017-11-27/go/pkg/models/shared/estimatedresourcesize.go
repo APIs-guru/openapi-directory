@@ -5,6 +5,6 @@ import (
 )
 
 type EstimatedResourceSize struct {
-	EstimatedOn          *time.Time `json:"estimatedOn"`
-	EstimatedSizeInBytes *float64   `json:"estimatedSizeInBytes"`
+	EstimatedOn          *time.Time `json:"estimatedOn,omitempty"`
+	EstimatedSizeInBytes *float64   `json:"estimatedSizeInBytes,omitempty"`
 }

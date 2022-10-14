@@ -1,6 +1,6 @@
 package shared
 
 type GetDistributionsResult struct {
-	Distributions []LightsailDistribution `json:"distributions"`
-	NextPageToken *string                 `json:"nextPageToken"`
+	Distributions []LightsailDistribution `json:"distributions,omitempty"`
+	NextPageToken *string                 `json:"nextPageToken,omitempty"`
 }

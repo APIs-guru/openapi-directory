@@ -1,6 +1,6 @@
 package shared
 
 type ListFleetMetricsResponse struct {
-	FleetMetrics []FleetMetricNameAndArn `json:"fleetMetrics"`
-	NextToken    *string                 `json:"nextToken"`
+	FleetMetrics []FleetMetricNameAndArn `json:"fleetMetrics,omitempty"`
+	NextToken    *string                 `json:"nextToken,omitempty"`
 }

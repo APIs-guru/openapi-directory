@@ -24,22 +24,22 @@ const (
 )
 
 type AutomationEntity struct {
-	Automation             *AutomationEntityAutomationEnum `json:"automation"`
-	DestinationReplaceFrom *string                         `json:"destination_replace_from"`
-	DestinationReplaceTo   *string                         `json:"destination_replace_to"`
-	Destinations           *string                         `json:"destinations"`
-	GroupIds               []int32                         `json:"group_ids"`
-	ID                     *int32                          `json:"id"`
-	Interval               *string                         `json:"interval"`
-	NextProcessOn          *string                         `json:"next_process_on"`
-	Path                   *string                         `json:"path"`
-	Schedule               map[string]interface{}          `json:"schedule"`
-	Source                 *string                         `json:"source"`
-	Trigger                *AutomationEntityTriggerEnum    `json:"trigger"`
-	TriggerActionPath      *string                         `json:"trigger_action_path"`
-	TriggerActions         *string                         `json:"trigger_actions"`
-	UserID                 *int32                          `json:"user_id"`
-	UserIds                []int32                         `json:"user_ids"`
-	Value                  map[string]interface{}          `json:"value"`
-	WebhookURL             *string                         `json:"webhook_url"`
+	Automation             *AutomationEntityAutomationEnum `json:"automation,omitempty"`
+	DestinationReplaceFrom *string                         `json:"destination_replace_from,omitempty"`
+	DestinationReplaceTo   *string                         `json:"destination_replace_to,omitempty"`
+	Destinations           *string                         `json:"destinations,omitempty"`
+	GroupIds               []int32                         `json:"group_ids,omitempty"`
+	ID                     *int32                          `json:"id,omitempty"`
+	Interval               *string                         `json:"interval,omitempty"`
+	NextProcessOn          *string                         `json:"next_process_on,omitempty"`
+	Path                   *string                         `json:"path,omitempty"`
+	Schedule               map[string]interface{}          `json:"schedule,omitempty"`
+	Source                 *string                         `json:"source,omitempty"`
+	Trigger                *AutomationEntityTriggerEnum    `json:"trigger,omitempty"`
+	TriggerActionPath      *string                         `json:"trigger_action_path,omitempty"`
+	TriggerActions         *string                         `json:"trigger_actions,omitempty"`
+	UserID                 *int32                          `json:"user_id,omitempty"`
+	UserIds                []int32                         `json:"user_ids,omitempty"`
+	Value                  map[string]interface{}          `json:"value,omitempty"`
+	WebhookURL             *string                         `json:"webhook_url,omitempty"`
 }

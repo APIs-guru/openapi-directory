@@ -1,7 +1,7 @@
 package shared
 
 type GoogleChromeManagementV1CountChromeAppRequestsResponse struct {
-	NextPageToken *string                                    `json:"nextPageToken"`
-	RequestedApps []GoogleChromeManagementV1ChromeAppRequest `json:"requestedApps"`
-	TotalSize     *int32                                     `json:"totalSize"`
+	NextPageToken *string                                    `json:"nextPageToken,omitempty"`
+	RequestedApps []GoogleChromeManagementV1ChromeAppRequest `json:"requestedApps,omitempty"`
+	TotalSize     *int32                                     `json:"totalSize,omitempty"`
 }

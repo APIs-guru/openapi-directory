@@ -1,7 +1,7 @@
 package shared
 
 type PickupServicesPickupService struct {
-	CarrierName *string `json:"carrierName"`
-	Country     *string `json:"country"`
-	ServiceName *string `json:"serviceName"`
+	CarrierName *string `json:"carrierName,omitempty"`
+	Country     *string `json:"country,omitempty"`
+	ServiceName *string `json:"serviceName,omitempty"`
 }

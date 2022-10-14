@@ -1,9 +1,9 @@
 package shared
 
 type CommitRequest struct {
-	Mutations            []Mutation          `json:"mutations"`
-	RequestOptions       *RequestOptions     `json:"requestOptions"`
-	ReturnCommitStats    *bool               `json:"returnCommitStats"`
-	SingleUseTransaction *TransactionOptions `json:"singleUseTransaction"`
-	TransactionID        *string             `json:"transactionId"`
+	Mutations            []Mutation          `json:"mutations,omitempty"`
+	RequestOptions       *RequestOptions     `json:"requestOptions,omitempty"`
+	ReturnCommitStats    *bool               `json:"returnCommitStats,omitempty"`
+	SingleUseTransaction *TransactionOptions `json:"singleUseTransaction,omitempty"`
+	TransactionID        *string             `json:"transactionId,omitempty"`
 }

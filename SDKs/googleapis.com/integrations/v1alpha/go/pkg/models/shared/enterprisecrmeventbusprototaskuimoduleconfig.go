@@ -26,5 +26,5 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoTaskUIModuleConfig struct {
-	ModuleID *EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum `json:"moduleId"`
+	ModuleID *EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum `json:"moduleId,omitempty"`
 }

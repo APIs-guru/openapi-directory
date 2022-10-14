@@ -33,14 +33,14 @@ type GetInvoiceItemsRequest struct {
 }
 
 type GetInvoiceItems200ApplicationJSON struct {
-	Data    []shared.InvoiceItem `json:"data"`
-	Page    *int64               `json:"page"`
-	Pages   *int64               `json:"pages"`
-	Results *int64               `json:"results"`
+	Data    []shared.InvoiceItem `json:"data,omitempty"`
+	Page    *int64               `json:"page,omitempty"`
+	Pages   *int64               `json:"pages,omitempty"`
+	Results *int64               `json:"results,omitempty"`
 }
 
 type GetInvoiceItemsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetInvoiceItemsResponse struct {

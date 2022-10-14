@@ -1,7 +1,7 @@
 package shared
 
 type DescribeDocumentPermissionResponse struct {
-	AccountIds             []string             `json:"AccountIds"`
-	AccountSharingInfoList []AccountSharingInfo `json:"AccountSharingInfoList"`
-	NextToken              *string              `json:"NextToken"`
+	AccountIds             []string             `json:"AccountIds,omitempty"`
+	AccountSharingInfoList []AccountSharingInfo `json:"AccountSharingInfoList,omitempty"`
+	NextToken              *string              `json:"NextToken,omitempty"`
 }

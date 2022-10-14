@@ -11,7 +11,7 @@ type TeamsCreateDiscussionInOrgPathParams struct {
 
 type TeamsCreateDiscussionInOrgRequestBody struct {
 	Body    string `json:"body"`
-	Private *bool  `json:"private"`
+	Private *bool  `json:"private,omitempty"`
 	Title   string `json:"title"`
 }
 

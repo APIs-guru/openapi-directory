@@ -46,22 +46,22 @@ const (
 )
 
 type AeAssessmentAeAssessmentAeAssessment struct {
-	Age                                *int32                                                            `json:"Age"`
-	AssessmentCode                     *AeAssessmentAeAssessmentAssessmentCodeAssessmentCodeEnum         `json:"AssessmentCode"`
-	AssessmentDate                     *time.Time                                                        `json:"AssessmentDate"`
-	AssessmentEvent                    *AeAssessmentAeAssessmentAssessmentEventAssessmentEventEnum       `json:"AssessmentEvent"`
-	AssessmentOverride                 *AeAssessmentAeAssessmentAssessmentOverrideAssessmentOverrideEnum `json:"AssessmentOverride"`
-	AssessmentResult                   *AeAssessmentAeAssessmentAssessmentResultAssessmentResultEnum     `json:"AssessmentResult"`
-	IsMemberOfAlternativePensionScheme *bool                                                             `json:"IsMemberOfAlternativePensionScheme"`
-	OptOutWindowEndDate                *time.Time                                                        `json:"OptOutWindowEndDate"`
-	QualifyingEarnings                 *float64                                                          `json:"QualifyingEarnings"`
-	ReenrolmentDate                    *time.Time                                                        `json:"ReenrolmentDate"`
-	StatePensionAge                    *int32                                                            `json:"StatePensionAge"`
-	StatePensionDate                   *time.Time                                                        `json:"StatePensionDate"`
-	TaxPeriod                          *int32                                                            `json:"TaxPeriod"`
-	TaxYear                            *int32                                                            `json:"TaxYear"`
+	Age                                *int32                                                            `json:"Age,omitempty"`
+	AssessmentCode                     *AeAssessmentAeAssessmentAssessmentCodeAssessmentCodeEnum         `json:"AssessmentCode,omitempty"`
+	AssessmentDate                     *time.Time                                                        `json:"AssessmentDate,omitempty"`
+	AssessmentEvent                    *AeAssessmentAeAssessmentAssessmentEventAssessmentEventEnum       `json:"AssessmentEvent,omitempty"`
+	AssessmentOverride                 *AeAssessmentAeAssessmentAssessmentOverrideAssessmentOverrideEnum `json:"AssessmentOverride,omitempty"`
+	AssessmentResult                   *AeAssessmentAeAssessmentAssessmentResultAssessmentResultEnum     `json:"AssessmentResult,omitempty"`
+	IsMemberOfAlternativePensionScheme *bool                                                             `json:"IsMemberOfAlternativePensionScheme,omitempty"`
+	OptOutWindowEndDate                *time.Time                                                        `json:"OptOutWindowEndDate,omitempty"`
+	QualifyingEarnings                 *float64                                                          `json:"QualifyingEarnings,omitempty"`
+	ReenrolmentDate                    *time.Time                                                        `json:"ReenrolmentDate,omitempty"`
+	StatePensionAge                    *int32                                                            `json:"StatePensionAge,omitempty"`
+	StatePensionDate                   *time.Time                                                        `json:"StatePensionDate,omitempty"`
+	TaxPeriod                          *int32                                                            `json:"TaxPeriod,omitempty"`
+	TaxYear                            *int32                                                            `json:"TaxYear,omitempty"`
 }
 
 type AeAssessment struct {
-	AeAssessment *AeAssessmentAeAssessmentAeAssessment `json:"AEAssessment"`
+	AeAssessment *AeAssessmentAeAssessmentAeAssessment `json:"AEAssessment,omitempty"`
 }

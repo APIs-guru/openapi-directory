@@ -15,16 +15,16 @@ type CreateVirtualClusterHeaders struct {
 }
 
 type CreateVirtualClusterRequestBodyContainerProvider struct {
-	ID   *string                           `json:"id"`
-	Info *shared.ContainerInfo             `json:"info"`
-	Type *shared.ContainerProviderTypeEnum `json:"type"`
+	ID   *string                           `json:"id,omitempty"`
+	Info *shared.ContainerInfo             `json:"info,omitempty"`
+	Type *shared.ContainerProviderTypeEnum `json:"type,omitempty"`
 }
 
 type CreateVirtualClusterRequestBody struct {
 	ClientToken       string                                           `json:"clientToken"`
 	ContainerProvider CreateVirtualClusterRequestBodyContainerProvider `json:"containerProvider"`
 	Name              string                                           `json:"name"`
-	Tags              map[string]string                                `json:"tags"`
+	Tags              map[string]string                                `json:"tags,omitempty"`
 }
 
 type CreateVirtualClusterRequest struct {

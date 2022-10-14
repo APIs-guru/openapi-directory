@@ -19,12 +19,12 @@ type CreateVoiceTemplateHeaders struct {
 }
 
 type CreateVoiceTemplateRequestBodyVoiceTemplateRequest struct {
-	Body                 *string           `json:"Body"`
-	DefaultSubstitutions *string           `json:"DefaultSubstitutions"`
-	LanguageCode         *string           `json:"LanguageCode"`
-	TemplateDescription  *string           `json:"TemplateDescription"`
-	VoiceID              *string           `json:"VoiceId"`
-	Tags                 map[string]string `json:"tags"`
+	Body                 *string           `json:"Body,omitempty"`
+	DefaultSubstitutions *string           `json:"DefaultSubstitutions,omitempty"`
+	LanguageCode         *string           `json:"LanguageCode,omitempty"`
+	TemplateDescription  *string           `json:"TemplateDescription,omitempty"`
+	VoiceID              *string           `json:"VoiceId,omitempty"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }
 
 type CreateVoiceTemplateRequestBody struct {

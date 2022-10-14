@@ -5,14 +5,14 @@ import (
 )
 
 type CsvClassifier struct {
-	AllowSingleColumn    *bool                `json:"AllowSingleColumn"`
-	ContainsHeader       *CsvHeaderOptionEnum `json:"ContainsHeader"`
-	CreationTime         *time.Time           `json:"CreationTime"`
-	Delimiter            *string              `json:"Delimiter"`
-	DisableValueTrimming *bool                `json:"DisableValueTrimming"`
-	Header               []string             `json:"Header"`
-	LastUpdated          *time.Time           `json:"LastUpdated"`
+	AllowSingleColumn    *bool                `json:"AllowSingleColumn,omitempty"`
+	ContainsHeader       *CsvHeaderOptionEnum `json:"ContainsHeader,omitempty"`
+	CreationTime         *time.Time           `json:"CreationTime,omitempty"`
+	Delimiter            *string              `json:"Delimiter,omitempty"`
+	DisableValueTrimming *bool                `json:"DisableValueTrimming,omitempty"`
+	Header               []string             `json:"Header,omitempty"`
+	LastUpdated          *time.Time           `json:"LastUpdated,omitempty"`
 	Name                 string               `json:"Name"`
-	QuoteSymbol          *string              `json:"QuoteSymbol"`
-	Version              *int64               `json:"Version"`
+	QuoteSymbol          *string              `json:"QuoteSymbol,omitempty"`
+	Version              *int64               `json:"Version,omitempty"`
 }

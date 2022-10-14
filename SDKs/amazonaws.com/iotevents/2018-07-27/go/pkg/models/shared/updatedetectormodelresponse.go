@@ -1,5 +1,5 @@
 package shared
 
 type UpdateDetectorModelResponse struct {
-	DetectorModelConfiguration *DetectorModelConfiguration `json:"detectorModelConfiguration"`
+	DetectorModelConfiguration *DetectorModelConfiguration `json:"detectorModelConfiguration,omitempty"`
 }

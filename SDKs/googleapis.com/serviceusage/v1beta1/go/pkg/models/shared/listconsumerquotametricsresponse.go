@@ -1,6 +1,6 @@
 package shared
 
 type ListConsumerQuotaMetricsResponse struct {
-	Metrics       []ConsumerQuotaMetric `json:"metrics"`
-	NextPageToken *string               `json:"nextPageToken"`
+	Metrics       []ConsumerQuotaMetric `json:"metrics,omitempty"`
+	NextPageToken *string               `json:"nextPageToken,omitempty"`
 }

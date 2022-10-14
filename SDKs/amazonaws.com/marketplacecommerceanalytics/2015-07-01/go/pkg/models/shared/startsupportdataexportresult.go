@@ -1,5 +1,5 @@
 package shared
 
 type StartSupportDataExportResult struct {
-	DataSetRequestID *string `json:"dataSetRequestId"`
+	DataSetRequestID *string `json:"dataSetRequestId,omitempty"`
 }

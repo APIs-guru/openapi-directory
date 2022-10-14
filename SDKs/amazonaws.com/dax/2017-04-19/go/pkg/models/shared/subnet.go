@@ -1,6 +1,6 @@
 package shared
 
 type Subnet struct {
-	SubnetAvailabilityZone *string `json:"SubnetAvailabilityZone"`
-	SubnetIdentifier       *string `json:"SubnetIdentifier"`
+	SubnetAvailabilityZone *string `json:"SubnetAvailabilityZone,omitempty"`
+	SubnetIdentifier       *string `json:"SubnetIdentifier,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type BatchUpdatePhotosRequest struct {
-	UpdatePhotoRequests []UpdatePhotoRequest `json:"updatePhotoRequests"`
+	UpdatePhotoRequests []UpdatePhotoRequest `json:"updatePhotoRequests,omitempty"`
 }

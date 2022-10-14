@@ -5,11 +5,11 @@ import (
 )
 
 type DescribeLocationSmbResponse struct {
-	AgentArns    []string         `json:"AgentArns"`
-	CreationTime *time.Time       `json:"CreationTime"`
-	Domain       *string          `json:"Domain"`
-	LocationArn  *string          `json:"LocationArn"`
-	LocationURI  *string          `json:"LocationUri"`
-	MountOptions *SmbMountOptions `json:"MountOptions"`
-	User         *string          `json:"User"`
+	AgentArns    []string         `json:"AgentArns,omitempty"`
+	CreationTime *time.Time       `json:"CreationTime,omitempty"`
+	Domain       *string          `json:"Domain,omitempty"`
+	LocationArn  *string          `json:"LocationArn,omitempty"`
+	LocationURI  *string          `json:"LocationUri,omitempty"`
+	MountOptions *SmbMountOptions `json:"MountOptions,omitempty"`
+	User         *string          `json:"User,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type GatewayRouteSpec struct {
-	GrpcRoute  *GrpcGatewayRoute `json:"grpcRoute"`
-	Http2Route *HTTPGatewayRoute `json:"http2Route"`
-	HTTPRoute  *HTTPGatewayRoute `json:"httpRoute"`
-	Priority   *int64            `json:"priority"`
+	GrpcRoute  *GrpcGatewayRoute `json:"grpcRoute,omitempty"`
+	Http2Route *HTTPGatewayRoute `json:"http2Route,omitempty"`
+	HTTPRoute  *HTTPGatewayRoute `json:"httpRoute,omitempty"`
+	Priority   *int64            `json:"priority,omitempty"`
 }

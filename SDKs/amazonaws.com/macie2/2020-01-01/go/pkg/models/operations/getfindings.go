@@ -15,13 +15,13 @@ type GetFindingsHeaders struct {
 }
 
 type GetFindingsRequestBodySortCriteria struct {
-	AttributeName *string             `json:"attributeName"`
-	OrderBy       *shared.OrderByEnum `json:"orderBy"`
+	AttributeName *string             `json:"attributeName,omitempty"`
+	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`
 }
 
 type GetFindingsRequestBody struct {
 	FindingIds   []string                            `json:"findingIds"`
-	SortCriteria *GetFindingsRequestBodySortCriteria `json:"sortCriteria"`
+	SortCriteria *GetFindingsRequestBodySortCriteria `json:"sortCriteria,omitempty"`
 }
 
 type GetFindingsRequest struct {

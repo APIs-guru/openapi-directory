@@ -11,8 +11,8 @@ const (
 )
 
 type GoogleCloudDatacatalogV1DataplexExternalTable struct {
-	DataCatalogEntry    *string                                                  `json:"dataCatalogEntry"`
-	FullyQualifiedName  *string                                                  `json:"fullyQualifiedName"`
-	GoogleCloudResource *string                                                  `json:"googleCloudResource"`
-	System              *GoogleCloudDatacatalogV1DataplexExternalTableSystemEnum `json:"system"`
+	DataCatalogEntry    *string                                                  `json:"dataCatalogEntry,omitempty"`
+	FullyQualifiedName  *string                                                  `json:"fullyQualifiedName,omitempty"`
+	GoogleCloudResource *string                                                  `json:"googleCloudResource,omitempty"`
+	System              *GoogleCloudDatacatalogV1DataplexExternalTableSystemEnum `json:"system,omitempty"`
 }

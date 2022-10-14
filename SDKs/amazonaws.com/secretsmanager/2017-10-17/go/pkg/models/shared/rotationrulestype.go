@@ -1,5 +1,5 @@
 package shared
 
 type RotationRulesType struct {
-	AutomaticallyAfterDays *int64 `json:"AutomaticallyAfterDays"`
+	AutomaticallyAfterDays *int64 `json:"AutomaticallyAfterDays,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type MaintenancePolicy struct {
-	ResourceVersion *string            `json:"resourceVersion"`
-	Window          *MaintenanceWindow `json:"window"`
+	ResourceVersion *string            `json:"resourceVersion,omitempty"`
+	Window          *MaintenanceWindow `json:"window,omitempty"`
 }

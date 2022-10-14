@@ -1,12 +1,12 @@
 package shared
 
 type DataPoint struct {
-	ComputationTimeMillis *string `json:"computationTimeMillis"`
-	DataTypeName          *string `json:"dataTypeName"`
-	EndTimeNanos          *string `json:"endTimeNanos"`
-	ModifiedTimeMillis    *string `json:"modifiedTimeMillis"`
-	OriginDataSourceID    *string `json:"originDataSourceId"`
-	RawTimestampNanos     *string `json:"rawTimestampNanos"`
-	StartTimeNanos        *string `json:"startTimeNanos"`
-	Value                 []Value `json:"value"`
+	ComputationTimeMillis *string `json:"computationTimeMillis,omitempty"`
+	DataTypeName          *string `json:"dataTypeName,omitempty"`
+	EndTimeNanos          *string `json:"endTimeNanos,omitempty"`
+	ModifiedTimeMillis    *string `json:"modifiedTimeMillis,omitempty"`
+	OriginDataSourceID    *string `json:"originDataSourceId,omitempty"`
+	RawTimestampNanos     *string `json:"rawTimestampNanos,omitempty"`
+	StartTimeNanos        *string `json:"startTimeNanos,omitempty"`
+	Value                 []Value `json:"value,omitempty"`
 }

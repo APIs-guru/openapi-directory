@@ -1,15 +1,15 @@
 package shared
 
 type CreateEnvironmentEc2Request struct {
-	AutomaticStopTimeMinutes *int64              `json:"automaticStopTimeMinutes"`
-	ClientRequestToken       *string             `json:"clientRequestToken"`
-	ConnectionType           *ConnectionTypeEnum `json:"connectionType"`
-	Description              *string             `json:"description"`
-	DryRun                   *bool               `json:"dryRun"`
-	ImageID                  *string             `json:"imageId"`
+	AutomaticStopTimeMinutes *int64              `json:"automaticStopTimeMinutes,omitempty"`
+	ClientRequestToken       *string             `json:"clientRequestToken,omitempty"`
+	ConnectionType           *ConnectionTypeEnum `json:"connectionType,omitempty"`
+	Description              *string             `json:"description,omitempty"`
+	DryRun                   *bool               `json:"dryRun,omitempty"`
+	ImageID                  *string             `json:"imageId,omitempty"`
 	InstanceType             string              `json:"instanceType"`
 	Name                     string              `json:"name"`
-	OwnerArn                 *string             `json:"ownerArn"`
-	SubnetID                 *string             `json:"subnetId"`
-	Tags                     []Tag               `json:"tags"`
+	OwnerArn                 *string             `json:"ownerArn,omitempty"`
+	SubnetID                 *string             `json:"subnetId,omitempty"`
+	Tags                     []Tag               `json:"tags,omitempty"`
 }

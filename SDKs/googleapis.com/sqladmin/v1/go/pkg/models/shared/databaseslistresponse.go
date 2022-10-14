@@ -1,6 +1,6 @@
 package shared
 
 type DatabasesListResponse struct {
-	Items []Database `json:"items"`
-	Kind  *string    `json:"kind"`
+	Items []Database `json:"items,omitempty"`
+	Kind  *string    `json:"kind,omitempty"`
 }

@@ -20,16 +20,16 @@ type ListFindingsHeaders struct {
 }
 
 type ListFindingsRequestBodySort struct {
-	AttributeName *string             `json:"attributeName"`
-	OrderBy       *shared.OrderByEnum `json:"orderBy"`
+	AttributeName *string             `json:"attributeName,omitempty"`
+	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`
 }
 
 type ListFindingsRequestBody struct {
 	AnalyzerArn string                       `json:"analyzerArn"`
-	Filter      map[string]shared.Criterion  `json:"filter"`
-	MaxResults  *int64                       `json:"maxResults"`
-	NextToken   *string                      `json:"nextToken"`
-	Sort        *ListFindingsRequestBodySort `json:"sort"`
+	Filter      map[string]shared.Criterion  `json:"filter,omitempty"`
+	MaxResults  *int64                       `json:"maxResults,omitempty"`
+	NextToken   *string                      `json:"nextToken,omitempty"`
+	Sort        *ListFindingsRequestBodySort `json:"sort,omitempty"`
 }
 
 type ListFindingsRequest struct {

@@ -10,7 +10,7 @@ type DeleteOfferingsOfferingIDChannelsChannelIDLearnersPathParams struct {
 }
 
 type DeleteOfferingsOfferingIDChannelsChannelIDLearnersRequestBody struct {
-	Email *string `json:"email"`
+	Email *string `json:"email,omitempty"`
 }
 
 type DeleteOfferingsOfferingIDChannelsChannelIDLearnersRequest struct {

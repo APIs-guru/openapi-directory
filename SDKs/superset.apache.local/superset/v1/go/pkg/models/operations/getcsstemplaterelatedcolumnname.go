@@ -23,19 +23,19 @@ type GetCSSTemplateRelatedColumnNameRequest struct {
 }
 
 type GetCSSTemplateRelatedColumnName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateRelatedColumnName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateRelatedColumnName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateRelatedColumnName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplateRelatedColumnNameResponse struct {

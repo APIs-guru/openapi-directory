@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1EntityMentionData struct {
-	EntityUniqueID *string                                                      `json:"entityUniqueId"`
-	Sentiment      *GoogleCloudContactcenterinsightsV1SentimentData             `json:"sentiment"`
-	Type           *GoogleCloudContactcenterinsightsV1EntityMentionDataTypeEnum `json:"type"`
+	EntityUniqueID *string                                                      `json:"entityUniqueId,omitempty"`
+	Sentiment      *GoogleCloudContactcenterinsightsV1SentimentData             `json:"sentiment,omitempty"`
+	Type           *GoogleCloudContactcenterinsightsV1EntityMentionDataTypeEnum `json:"type,omitempty"`
 }

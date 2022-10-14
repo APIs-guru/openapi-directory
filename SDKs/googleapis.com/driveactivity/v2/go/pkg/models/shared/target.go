@@ -1,8 +1,8 @@
 package shared
 
 type Target struct {
-	Drive       *Drive       `json:"drive"`
-	DriveItem   *DriveItem   `json:"driveItem"`
-	FileComment *FileComment `json:"fileComment"`
-	TeamDrive   *TeamDrive   `json:"teamDrive"`
+	Drive       *Drive       `json:"drive,omitempty"`
+	DriveItem   *DriveItem   `json:"driveItem,omitempty"`
+	FileComment *FileComment `json:"fileComment,omitempty"`
+	TeamDrive   *TeamDrive   `json:"teamDrive,omitempty"`
 }

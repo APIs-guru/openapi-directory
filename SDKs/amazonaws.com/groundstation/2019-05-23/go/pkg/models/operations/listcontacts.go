@@ -22,11 +22,11 @@ type ListContactsHeaders struct {
 
 type ListContactsRequestBody struct {
 	EndTime           time.Time                  `json:"endTime"`
-	GroundStation     *string                    `json:"groundStation"`
-	MaxResults        *int64                     `json:"maxResults"`
-	MissionProfileArn *string                    `json:"missionProfileArn"`
-	NextToken         *string                    `json:"nextToken"`
-	SatelliteArn      *string                    `json:"satelliteArn"`
+	GroundStation     *string                    `json:"groundStation,omitempty"`
+	MaxResults        *int64                     `json:"maxResults,omitempty"`
+	MissionProfileArn *string                    `json:"missionProfileArn,omitempty"`
+	NextToken         *string                    `json:"nextToken,omitempty"`
+	SatelliteArn      *string                    `json:"satelliteArn,omitempty"`
 	StartTime         time.Time                  `json:"startTime"`
 	StatusList        []shared.ContactStatusEnum `json:"statusList"`
 }

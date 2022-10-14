@@ -27,16 +27,16 @@ const (
 )
 
 type InstanceConfig struct {
-	BaseConfig               *string                                     `json:"baseConfig"`
-	ConfigType               *InstanceConfigConfigTypeEnum               `json:"configType"`
-	DisplayName              *string                                     `json:"displayName"`
-	Etag                     *string                                     `json:"etag"`
-	FreeInstanceAvailability *InstanceConfigFreeInstanceAvailabilityEnum `json:"freeInstanceAvailability"`
-	Labels                   map[string]string                           `json:"labels"`
-	LeaderOptions            []string                                    `json:"leaderOptions"`
-	Name                     *string                                     `json:"name"`
-	OptionalReplicas         []ReplicaInfo                               `json:"optionalReplicas"`
-	Reconciling              *bool                                       `json:"reconciling"`
-	Replicas                 []ReplicaInfo                               `json:"replicas"`
-	State                    *InstanceConfigStateEnum                    `json:"state"`
+	BaseConfig               *string                                     `json:"baseConfig,omitempty"`
+	ConfigType               *InstanceConfigConfigTypeEnum               `json:"configType,omitempty"`
+	DisplayName              *string                                     `json:"displayName,omitempty"`
+	Etag                     *string                                     `json:"etag,omitempty"`
+	FreeInstanceAvailability *InstanceConfigFreeInstanceAvailabilityEnum `json:"freeInstanceAvailability,omitempty"`
+	Labels                   map[string]string                           `json:"labels,omitempty"`
+	LeaderOptions            []string                                    `json:"leaderOptions,omitempty"`
+	Name                     *string                                     `json:"name,omitempty"`
+	OptionalReplicas         []ReplicaInfo                               `json:"optionalReplicas,omitempty"`
+	Reconciling              *bool                                       `json:"reconciling,omitempty"`
+	Replicas                 []ReplicaInfo                               `json:"replicas,omitempty"`
+	State                    *InstanceConfigStateEnum                    `json:"state,omitempty"`
 }

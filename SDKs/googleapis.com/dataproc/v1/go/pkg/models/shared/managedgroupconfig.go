@@ -1,6 +1,6 @@
 package shared
 
 type ManagedGroupConfig struct {
-	InstanceGroupManagerName *string `json:"instanceGroupManagerName"`
-	InstanceTemplateName     *string `json:"instanceTemplateName"`
+	InstanceGroupManagerName *string `json:"instanceGroupManagerName,omitempty"`
+	InstanceTemplateName     *string `json:"instanceTemplateName,omitempty"`
 }

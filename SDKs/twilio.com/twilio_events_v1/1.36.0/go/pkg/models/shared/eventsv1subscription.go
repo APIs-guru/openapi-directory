@@ -5,12 +5,12 @@ import (
 )
 
 type EventsV1Subscription struct {
-	AccountSid  *string                `json:"account_sid"`
-	DateCreated *time.Time             `json:"date_created"`
-	DateUpdated *time.Time             `json:"date_updated"`
-	Description *string                `json:"description"`
-	Links       map[string]interface{} `json:"links"`
-	Sid         *string                `json:"sid"`
-	SinkSid     *string                `json:"sink_sid"`
-	URL         *string                `json:"url"`
+	AccountSid  *string                `json:"account_sid,omitempty"`
+	DateCreated *time.Time             `json:"date_created,omitempty"`
+	DateUpdated *time.Time             `json:"date_updated,omitempty"`
+	Description *string                `json:"description,omitempty"`
+	Links       map[string]interface{} `json:"links,omitempty"`
+	Sid         *string                `json:"sid,omitempty"`
+	SinkSid     *string                `json:"sink_sid,omitempty"`
+	URL         *string                `json:"url,omitempty"`
 }

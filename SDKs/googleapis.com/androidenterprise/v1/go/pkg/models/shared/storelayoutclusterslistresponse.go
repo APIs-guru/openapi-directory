@@ -1,5 +1,5 @@
 package shared
 
 type StoreLayoutClustersListResponse struct {
-	Cluster []StoreCluster `json:"cluster"`
+	Cluster []StoreCluster `json:"cluster,omitempty"`
 }

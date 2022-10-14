@@ -1,6 +1,6 @@
 package shared
 
 type ListInsertionOrdersResponse struct {
-	InsertionOrders []InsertionOrder `json:"insertionOrders"`
-	NextPageToken   *string          `json:"nextPageToken"`
+	InsertionOrders []InsertionOrder `json:"insertionOrders,omitempty"`
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
 }

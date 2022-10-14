@@ -5,11 +5,11 @@ import (
 )
 
 type AnomalyDetectorSummary struct {
-	AnomalyDetectorArn         *string                    `json:"AnomalyDetectorArn"`
-	AnomalyDetectorDescription *string                    `json:"AnomalyDetectorDescription"`
-	AnomalyDetectorName        *string                    `json:"AnomalyDetectorName"`
-	CreationTime               *time.Time                 `json:"CreationTime"`
-	LastModificationTime       *time.Time                 `json:"LastModificationTime"`
-	Status                     *AnomalyDetectorStatusEnum `json:"Status"`
-	Tags                       map[string]string          `json:"Tags"`
+	AnomalyDetectorArn         *string                    `json:"AnomalyDetectorArn,omitempty"`
+	AnomalyDetectorDescription *string                    `json:"AnomalyDetectorDescription,omitempty"`
+	AnomalyDetectorName        *string                    `json:"AnomalyDetectorName,omitempty"`
+	CreationTime               *time.Time                 `json:"CreationTime,omitempty"`
+	LastModificationTime       *time.Time                 `json:"LastModificationTime,omitempty"`
+	Status                     *AnomalyDetectorStatusEnum `json:"Status,omitempty"`
+	Tags                       map[string]string          `json:"Tags,omitempty"`
 }

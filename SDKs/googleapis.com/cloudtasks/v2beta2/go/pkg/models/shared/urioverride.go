@@ -9,9 +9,9 @@ const (
 )
 
 type URIOverride struct {
-	Host   *string                `json:"host"`
-	Path   *string                `json:"path"`
-	Port   *string                `json:"port"`
-	Query  *string                `json:"query"`
-	Scheme *URIOverrideSchemeEnum `json:"scheme"`
+	Host   *string                `json:"host,omitempty"`
+	Path   *string                `json:"path,omitempty"`
+	Port   *string                `json:"port,omitempty"`
+	Query  *string                `json:"query,omitempty"`
+	Scheme *URIOverrideSchemeEnum `json:"scheme,omitempty"`
 }

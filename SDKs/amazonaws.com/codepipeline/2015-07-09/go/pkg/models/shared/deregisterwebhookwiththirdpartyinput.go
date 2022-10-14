@@ -1,5 +1,5 @@
 package shared
 
 type DeregisterWebhookWithThirdPartyInput struct {
-	WebhookName *string `json:"webhookName"`
+	WebhookName *string `json:"webhookName,omitempty"`
 }

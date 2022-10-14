@@ -5,7 +5,7 @@ import (
 )
 
 type JobInfoJobInfoErrorsErrors struct {
-	Error []string `json:"Error"`
+	Error []string `json:"Error,omitempty"`
 }
 
 type JobInfoJobInfoJobStatusJobStatusEnum string
@@ -20,17 +20,17 @@ const (
 )
 
 type JobInfoJobInfoJobInfo struct {
-	Created     *time.Time                            `json:"Created"`
-	EmployerKey *string                               `json:"EmployerKey"`
-	Errors      *JobInfoJobInfoErrorsErrors           `json:"Errors"`
-	HoldingDate *time.Time                            `json:"HoldingDate"`
-	JobID       *string                               `json:"JobId"`
-	JobStatus   *JobInfoJobInfoJobStatusJobStatusEnum `json:"JobStatus"`
-	JobType     *string                               `json:"JobType"`
-	LastUpdated *time.Time                            `json:"LastUpdated"`
-	Progress    *float64                              `json:"Progress"`
+	Created     *time.Time                            `json:"Created,omitempty"`
+	EmployerKey *string                               `json:"EmployerKey,omitempty"`
+	Errors      *JobInfoJobInfoErrorsErrors           `json:"Errors,omitempty"`
+	HoldingDate *time.Time                            `json:"HoldingDate,omitempty"`
+	JobID       *string                               `json:"JobId,omitempty"`
+	JobStatus   *JobInfoJobInfoJobStatusJobStatusEnum `json:"JobStatus,omitempty"`
+	JobType     *string                               `json:"JobType,omitempty"`
+	LastUpdated *time.Time                            `json:"LastUpdated,omitempty"`
+	Progress    *float64                              `json:"Progress,omitempty"`
 }
 
 type JobInfo struct {
-	JobInfo *JobInfoJobInfoJobInfo `json:"JobInfo"`
+	JobInfo *JobInfoJobInfoJobInfo `json:"JobInfo,omitempty"`
 }

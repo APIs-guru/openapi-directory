@@ -10,8 +10,8 @@ const (
 )
 
 type Invitation struct {
-	CourseID *string             `json:"courseId"`
-	ID       *string             `json:"id"`
-	Role     *InvitationRoleEnum `json:"role"`
-	UserID   *string             `json:"userId"`
+	CourseID *string             `json:"courseId,omitempty"`
+	ID       *string             `json:"id,omitempty"`
+	Role     *InvitationRoleEnum `json:"role,omitempty"`
+	UserID   *string             `json:"userId,omitempty"`
 }

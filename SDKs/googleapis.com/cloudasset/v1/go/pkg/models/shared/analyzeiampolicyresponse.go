@@ -1,7 +1,7 @@
 package shared
 
 type AnalyzeIamPolicyResponse struct {
-	FullyExplored                       *bool               `json:"fullyExplored"`
-	MainAnalysis                        *IamPolicyAnalysis  `json:"mainAnalysis"`
-	ServiceAccountImpersonationAnalysis []IamPolicyAnalysis `json:"serviceAccountImpersonationAnalysis"`
+	FullyExplored                       *bool               `json:"fullyExplored,omitempty"`
+	MainAnalysis                        *IamPolicyAnalysis  `json:"mainAnalysis,omitempty"`
+	ServiceAccountImpersonationAnalysis []IamPolicyAnalysis `json:"serviceAccountImpersonationAnalysis,omitempty"`
 }

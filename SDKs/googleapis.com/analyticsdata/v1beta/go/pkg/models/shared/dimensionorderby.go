@@ -10,6 +10,6 @@ const (
 )
 
 type DimensionOrderBy struct {
-	DimensionName *string                        `json:"dimensionName"`
-	OrderType     *DimensionOrderByOrderTypeEnum `json:"orderType"`
+	DimensionName *string                        `json:"dimensionName,omitempty"`
+	OrderType     *DimensionOrderByOrderTypeEnum `json:"orderType,omitempty"`
 }

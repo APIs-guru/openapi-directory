@@ -5,12 +5,12 @@ import (
 )
 
 type Handshake struct {
-	Action              *ActionTypeEnum     `json:"Action"`
-	Arn                 *string             `json:"Arn"`
-	ExpirationTimestamp *time.Time          `json:"ExpirationTimestamp"`
-	ID                  *string             `json:"Id"`
-	Parties             []HandshakeParty    `json:"Parties"`
-	RequestedTimestamp  *time.Time          `json:"RequestedTimestamp"`
-	Resources           []HandshakeResource `json:"Resources"`
-	State               *HandshakeStateEnum `json:"State"`
+	Action              *ActionTypeEnum     `json:"Action,omitempty"`
+	Arn                 *string             `json:"Arn,omitempty"`
+	ExpirationTimestamp *time.Time          `json:"ExpirationTimestamp,omitempty"`
+	ID                  *string             `json:"Id,omitempty"`
+	Parties             []HandshakeParty    `json:"Parties,omitempty"`
+	RequestedTimestamp  *time.Time          `json:"RequestedTimestamp,omitempty"`
+	Resources           []HandshakeResource `json:"Resources,omitempty"`
+	State               *HandshakeStateEnum `json:"State,omitempty"`
 }

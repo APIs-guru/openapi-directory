@@ -9,9 +9,9 @@ const (
 )
 
 type ListPolicy struct {
-	AllValues         *ListPolicyAllValuesEnum `json:"allValues"`
-	AllowedValues     []string                 `json:"allowedValues"`
-	DeniedValues      []string                 `json:"deniedValues"`
-	InheritFromParent *bool                    `json:"inheritFromParent"`
-	SuggestedValue    *string                  `json:"suggestedValue"`
+	AllValues         *ListPolicyAllValuesEnum `json:"allValues,omitempty"`
+	AllowedValues     []string                 `json:"allowedValues,omitempty"`
+	DeniedValues      []string                 `json:"deniedValues,omitempty"`
+	InheritFromParent *bool                    `json:"inheritFromParent,omitempty"`
+	SuggestedValue    *string                  `json:"suggestedValue,omitempty"`
 }

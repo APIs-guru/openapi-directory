@@ -30,7 +30,7 @@ const (
 )
 
 type InvoiceResponseClarification struct {
-	Clarification         *string                                                                    `json:"clarification"`
+	Clarification         *string                                                                    `json:"clarification,omitempty"`
 	ClarificationCode     InvoiceResponseClarificationClarificationCodeClarificationCodeEnum         `json:"clarificationCode"`
 	ClarificationCodeType InvoiceResponseClarificationClarificationCodeTypeClarificationCodeTypeEnum `json:"clarificationCodeType"`
 }

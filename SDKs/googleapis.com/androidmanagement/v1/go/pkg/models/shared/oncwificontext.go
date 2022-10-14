@@ -1,5 +1,5 @@
 package shared
 
 type OncWifiContext struct {
-	WifiGUID *string `json:"wifiGuid"`
+	WifiGUID *string `json:"wifiGuid,omitempty"`
 }

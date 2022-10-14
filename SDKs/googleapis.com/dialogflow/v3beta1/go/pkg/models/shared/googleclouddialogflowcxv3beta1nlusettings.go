@@ -17,7 +17,7 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1NluSettings struct {
-	ClassificationThreshold *float32                                                        `json:"classificationThreshold"`
-	ModelTrainingMode       *GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum `json:"modelTrainingMode"`
-	ModelType               *GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum         `json:"modelType"`
+	ClassificationThreshold *float32                                                        `json:"classificationThreshold,omitempty"`
+	ModelTrainingMode       *GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum `json:"modelTrainingMode,omitempty"`
+	ModelType               *GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum         `json:"modelType,omitempty"`
 }

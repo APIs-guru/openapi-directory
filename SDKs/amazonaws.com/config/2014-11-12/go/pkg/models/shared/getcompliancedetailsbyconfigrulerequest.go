@@ -1,8 +1,8 @@
 package shared
 
 type GetComplianceDetailsByConfigRuleRequest struct {
-	ComplianceTypes []ComplianceTypeEnum `json:"ComplianceTypes"`
+	ComplianceTypes []ComplianceTypeEnum `json:"ComplianceTypes,omitempty"`
 	ConfigRuleName  string               `json:"ConfigRuleName"`
-	Limit           *int64               `json:"Limit"`
-	NextToken       *string              `json:"NextToken"`
+	Limit           *int64               `json:"Limit,omitempty"`
+	NextToken       *string              `json:"NextToken,omitempty"`
 }

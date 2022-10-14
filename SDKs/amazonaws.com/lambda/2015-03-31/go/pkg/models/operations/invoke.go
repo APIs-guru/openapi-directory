@@ -41,7 +41,7 @@ type InvokeHeaders struct {
 }
 
 type InvokeRequestBody struct {
-	Payload *string `json:"Payload"`
+	Payload *string `json:"Payload,omitempty"`
 }
 
 type InvokeRequest struct {

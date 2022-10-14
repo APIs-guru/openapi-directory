@@ -1,10 +1,10 @@
 package shared
 
 type SparkSQLJob struct {
-	JarFileUris     []string          `json:"jarFileUris"`
-	LoggingConfig   *LoggingConfig    `json:"loggingConfig"`
-	Properties      map[string]string `json:"properties"`
-	QueryFileURI    *string           `json:"queryFileUri"`
-	QueryList       *QueryList        `json:"queryList"`
-	ScriptVariables map[string]string `json:"scriptVariables"`
+	JarFileUris     []string          `json:"jarFileUris,omitempty"`
+	LoggingConfig   *LoggingConfig    `json:"loggingConfig,omitempty"`
+	Properties      map[string]string `json:"properties,omitempty"`
+	QueryFileURI    *string           `json:"queryFileUri,omitempty"`
+	QueryList       *QueryList        `json:"queryList,omitempty"`
+	ScriptVariables map[string]string `json:"scriptVariables,omitempty"`
 }

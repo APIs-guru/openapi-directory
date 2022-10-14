@@ -5,14 +5,14 @@ import (
 )
 
 type SuperChatEventSnippet struct {
-	AmountMicros         *string                `json:"amountMicros"`
-	ChannelID            *string                `json:"channelId"`
-	CommentText          *string                `json:"commentText"`
-	CreatedAt            *time.Time             `json:"createdAt"`
-	Currency             *string                `json:"currency"`
-	DisplayString        *string                `json:"displayString"`
-	IsSuperStickerEvent  *bool                  `json:"isSuperStickerEvent"`
-	MessageType          *int64                 `json:"messageType"`
-	SuperStickerMetadata *SuperStickerMetadata  `json:"superStickerMetadata"`
-	SupporterDetails     *ChannelProfileDetails `json:"supporterDetails"`
+	AmountMicros         *string                `json:"amountMicros,omitempty"`
+	ChannelID            *string                `json:"channelId,omitempty"`
+	CommentText          *string                `json:"commentText,omitempty"`
+	CreatedAt            *time.Time             `json:"createdAt,omitempty"`
+	Currency             *string                `json:"currency,omitempty"`
+	DisplayString        *string                `json:"displayString,omitempty"`
+	IsSuperStickerEvent  *bool                  `json:"isSuperStickerEvent,omitempty"`
+	MessageType          *int64                 `json:"messageType,omitempty"`
+	SuperStickerMetadata *SuperStickerMetadata  `json:"superStickerMetadata,omitempty"`
+	SupporterDetails     *ChannelProfileDetails `json:"supporterDetails,omitempty"`
 }

@@ -15,5 +15,5 @@ const (
 )
 
 type Suggestion struct {
-	Subtype *SuggestionSubtypeEnum `json:"subtype"`
+	Subtype *SuggestionSubtypeEnum `json:"subtype,omitempty"`
 }

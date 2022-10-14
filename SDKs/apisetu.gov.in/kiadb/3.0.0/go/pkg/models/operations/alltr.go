@@ -18,8 +18,8 @@ const (
 )
 
 type AlltrRequestBody struct {
-	CertificateParameters *AlltrRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *AlltrRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                AlltrRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Alltr400ApplicationJSON struct {
-	Error            *Alltr400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alltr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alltr400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alltr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alltr401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Alltr401ApplicationJSON struct {
-	Error            *Alltr401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alltr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alltr401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alltr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alltr404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Alltr404ApplicationJSON struct {
-	Error            *Alltr404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alltr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alltr404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alltr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alltr500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Alltr500ApplicationJSON struct {
-	Error            *Alltr500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alltr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alltr500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alltr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alltr502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Alltr502ApplicationJSON struct {
-	Error            *Alltr502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alltr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alltr502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alltr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alltr503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Alltr503ApplicationJSON struct {
-	Error            *Alltr503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alltr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alltr503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alltr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alltr504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Alltr504ApplicationJSON struct {
-	Error            *Alltr504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alltr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alltr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alltr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type AlltrResponse struct {

@@ -24,6 +24,6 @@ const (
 )
 
 type Layer struct {
-	Arguments *string             `json:"arguments"`
-	Directive *LayerDirectiveEnum `json:"directive"`
+	Arguments *string             `json:"arguments,omitempty"`
+	Directive *LayerDirectiveEnum `json:"directive,omitempty"`
 }

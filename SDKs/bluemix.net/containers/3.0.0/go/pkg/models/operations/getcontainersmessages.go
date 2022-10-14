@@ -10,8 +10,8 @@ type GetContainersMessagesRequest struct {
 }
 
 type GetContainersMessages200ApplicationJSON struct {
-	CreatedDate *string `json:"created_date"`
-	Message     *string `json:"message"`
+	CreatedDate *string `json:"created_date,omitempty"`
+	Message     *string `json:"message,omitempty"`
 }
 
 type GetContainersMessagesResponse struct {

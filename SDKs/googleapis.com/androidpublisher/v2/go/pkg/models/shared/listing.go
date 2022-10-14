@@ -1,9 +1,9 @@
 package shared
 
 type Listing struct {
-	FullDescription  *string `json:"fullDescription"`
-	Language         *string `json:"language"`
-	ShortDescription *string `json:"shortDescription"`
-	Title            *string `json:"title"`
-	Video            *string `json:"video"`
+	FullDescription  *string `json:"fullDescription,omitempty"`
+	Language         *string `json:"language,omitempty"`
+	ShortDescription *string `json:"shortDescription,omitempty"`
+	Title            *string `json:"title,omitempty"`
+	Video            *string `json:"video,omitempty"`
 }

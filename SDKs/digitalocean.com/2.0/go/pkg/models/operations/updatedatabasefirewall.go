@@ -9,7 +9,7 @@ type UpdateDatabaseFirewallPathParams struct {
 }
 
 type UpdateDatabaseFirewallRequestBody struct {
-	Rules []shared.Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1firewallGetResponses200ContentApplication1jsonSchemaPropertiesRulesItems `json:"rules"`
+	Rules []shared.Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1firewallGetResponses200ContentApplication1jsonSchemaPropertiesRulesItems `json:"rules,omitempty"`
 }
 
 type UpdateDatabaseFirewallRequest struct {
@@ -20,7 +20,7 @@ type UpdateDatabaseFirewallRequest struct {
 type UpdateDatabaseFirewall401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateDatabaseFirewallResponse struct {

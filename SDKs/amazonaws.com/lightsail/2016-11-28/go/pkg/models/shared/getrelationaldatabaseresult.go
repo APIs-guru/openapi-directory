@@ -1,5 +1,5 @@
 package shared
 
 type GetRelationalDatabaseResult struct {
-	RelationalDatabase *RelationalDatabase `json:"relationalDatabase"`
+	RelationalDatabase *RelationalDatabase `json:"relationalDatabase,omitempty"`
 }

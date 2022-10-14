@@ -12,9 +12,9 @@ const (
 )
 
 type PatientSmsNotifcationResponse struct {
-	Error     *Error                                   `json:"error"`
+	Error     *Error                                   `json:"error,omitempty"`
 	RequestID string                                   `json:"requestId"`
 	Resp      RequestReference                         `json:"resp"`
-	Status    *PatientSmsNotifcationResponseStatusEnum `json:"status"`
+	Status    *PatientSmsNotifcationResponseStatusEnum `json:"status,omitempty"`
 	Timestamp time.Time                                `json:"timestamp"`
 }

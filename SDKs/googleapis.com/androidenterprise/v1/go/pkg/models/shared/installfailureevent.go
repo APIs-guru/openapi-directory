@@ -8,9 +8,9 @@ const (
 )
 
 type InstallFailureEvent struct {
-	DeviceID       *string                               `json:"deviceId"`
-	FailureDetails *string                               `json:"failureDetails"`
-	FailureReason  *InstallFailureEventFailureReasonEnum `json:"failureReason"`
-	ProductID      *string                               `json:"productId"`
-	UserID         *string                               `json:"userId"`
+	DeviceID       *string                               `json:"deviceId,omitempty"`
+	FailureDetails *string                               `json:"failureDetails,omitempty"`
+	FailureReason  *InstallFailureEventFailureReasonEnum `json:"failureReason,omitempty"`
+	ProductID      *string                               `json:"productId,omitempty"`
+	UserID         *string                               `json:"userId,omitempty"`
 }

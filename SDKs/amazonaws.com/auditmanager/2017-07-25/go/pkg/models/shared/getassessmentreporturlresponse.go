@@ -1,5 +1,5 @@
 package shared
 
 type GetAssessmentReportURLResponse struct {
-	PreSignedURL *URL `json:"preSignedUrl"`
+	PreSignedURL *URL `json:"preSignedUrl,omitempty"`
 }

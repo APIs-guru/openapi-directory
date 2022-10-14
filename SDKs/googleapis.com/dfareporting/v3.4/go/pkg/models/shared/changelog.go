@@ -5,18 +5,18 @@ import (
 )
 
 type ChangeLog struct {
-	AccountID       *string    `json:"accountId"`
-	Action          *string    `json:"action"`
-	ChangeTime      *time.Time `json:"changeTime"`
-	FieldName       *string    `json:"fieldName"`
-	ID              *string    `json:"id"`
-	Kind            *string    `json:"kind"`
-	NewValue        *string    `json:"newValue"`
-	ObjectID        *string    `json:"objectId"`
-	ObjectType      *string    `json:"objectType"`
-	OldValue        *string    `json:"oldValue"`
-	SubaccountID    *string    `json:"subaccountId"`
-	TransactionID   *string    `json:"transactionId"`
-	UserProfileID   *string    `json:"userProfileId"`
-	UserProfileName *string    `json:"userProfileName"`
+	AccountID       *string    `json:"accountId,omitempty"`
+	Action          *string    `json:"action,omitempty"`
+	ChangeTime      *time.Time `json:"changeTime,omitempty"`
+	FieldName       *string    `json:"fieldName,omitempty"`
+	ID              *string    `json:"id,omitempty"`
+	Kind            *string    `json:"kind,omitempty"`
+	NewValue        *string    `json:"newValue,omitempty"`
+	ObjectID        *string    `json:"objectId,omitempty"`
+	ObjectType      *string    `json:"objectType,omitempty"`
+	OldValue        *string    `json:"oldValue,omitempty"`
+	SubaccountID    *string    `json:"subaccountId,omitempty"`
+	TransactionID   *string    `json:"transactionId,omitempty"`
+	UserProfileID   *string    `json:"userProfileId,omitempty"`
+	UserProfileName *string    `json:"userProfileName,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type SimpleSegment struct {
-	OrFiltersForSegment []OrFiltersForSegment `json:"orFiltersForSegment"`
+	OrFiltersForSegment []OrFiltersForSegment `json:"orFiltersForSegment,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDatacatalogV1StorageProperties struct {
-	FilePattern []string `json:"filePattern"`
-	FileType    *string  `json:"fileType"`
+	FilePattern []string `json:"filePattern,omitempty"`
+	FileType    *string  `json:"fileType,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ReplicationPendingModifiedValues struct {
-	AllocatedStorage         *int64  `json:"AllocatedStorage"`
-	EngineVersion            *string `json:"EngineVersion"`
-	MultiAz                  *bool   `json:"MultiAZ"`
-	ReplicationInstanceClass *string `json:"ReplicationInstanceClass"`
+	AllocatedStorage         *int64  `json:"AllocatedStorage,omitempty"`
+	EngineVersion            *string `json:"EngineVersion,omitempty"`
+	MultiAz                  *bool   `json:"MultiAZ,omitempty"`
+	ReplicationInstanceClass *string `json:"ReplicationInstanceClass,omitempty"`
 }

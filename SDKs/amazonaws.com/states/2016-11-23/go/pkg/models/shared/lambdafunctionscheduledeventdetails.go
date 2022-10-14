@@ -1,8 +1,8 @@
 package shared
 
 type LambdaFunctionScheduledEventDetails struct {
-	Input            *string                           `json:"input"`
-	InputDetails     *HistoryEventExecutionDataDetails `json:"inputDetails"`
+	Input            *string                           `json:"input,omitempty"`
+	InputDetails     *HistoryEventExecutionDataDetails `json:"inputDetails,omitempty"`
 	Resource         string                            `json:"resource"`
-	TimeoutInSeconds *int64                            `json:"timeoutInSeconds"`
+	TimeoutInSeconds *int64                            `json:"timeoutInSeconds,omitempty"`
 }

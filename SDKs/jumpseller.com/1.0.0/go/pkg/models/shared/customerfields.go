@@ -9,14 +9,14 @@ const (
 )
 
 type CustomerFields struct {
-	BillingAddress           *interface{}              `json:"billing_address"`
-	CustomerAdditionalFields []CustomerAdditionalField `json:"customer_additional_fields"`
-	CustomerCategories       []CustomerCategory        `json:"customer_categories"`
-	Email                    *string                   `json:"email"`
-	ID                       *int32                    `json:"id"`
-	Name                     *string                   `json:"name"`
-	Phone                    *string                   `json:"phone"`
-	ShippingAddress          *interface{}              `json:"shipping_address"`
-	Status                   *CustomerFieldsStatusEnum `json:"status"`
-	Surname                  *string                   `json:"surname"`
+	BillingAddress           *interface{}              `json:"billing_address,omitempty"`
+	CustomerAdditionalFields []CustomerAdditionalField `json:"customer_additional_fields,omitempty"`
+	CustomerCategories       []CustomerCategory        `json:"customer_categories,omitempty"`
+	Email                    *string                   `json:"email,omitempty"`
+	ID                       *int32                    `json:"id,omitempty"`
+	Name                     *string                   `json:"name,omitempty"`
+	Phone                    *string                   `json:"phone,omitempty"`
+	ShippingAddress          *interface{}              `json:"shipping_address,omitempty"`
+	Status                   *CustomerFieldsStatusEnum `json:"status,omitempty"`
+	Surname                  *string                   `json:"surname,omitempty"`
 }

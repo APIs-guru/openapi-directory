@@ -1,5 +1,5 @@
 package shared
 
 type HistoryEventExecutionDataDetails struct {
-	Truncated *bool `json:"truncated"`
+	Truncated *bool `json:"truncated,omitempty"`
 }

@@ -17,8 +17,8 @@ const (
 )
 
 type EscerRequestBody struct {
-	CertificateParameters *EscerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *EscerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                EscerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Escer400ApplicationJSON struct {
-	Error            *Escer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Escer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Escer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Escer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Escer401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Escer401ApplicationJSON struct {
-	Error            *Escer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Escer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Escer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Escer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Escer404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Escer404ApplicationJSON struct {
-	Error            *Escer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Escer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Escer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Escer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Escer500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Escer500ApplicationJSON struct {
-	Error            *Escer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Escer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Escer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Escer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Escer502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Escer502ApplicationJSON struct {
-	Error            *Escer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Escer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Escer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Escer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Escer503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Escer503ApplicationJSON struct {
-	Error            *Escer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Escer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Escer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Escer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Escer504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Escer504ApplicationJSON struct {
-	Error            *Escer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Escer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Escer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Escer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type EscerResponse struct {

@@ -27,13 +27,13 @@ const (
 )
 
 type ListResourcesRequestBody struct {
-	MaxResults        *int64                                    `json:"maxResults"`
-	NextToken         *string                                   `json:"nextToken"`
-	Principal         *string                                   `json:"principal"`
-	ResourceArns      []string                                  `json:"resourceArns"`
+	MaxResults        *int64                                    `json:"maxResults,omitempty"`
+	NextToken         *string                                   `json:"nextToken,omitempty"`
+	Principal         *string                                   `json:"principal,omitempty"`
+	ResourceArns      []string                                  `json:"resourceArns,omitempty"`
 	ResourceOwner     ListResourcesRequestBodyResourceOwnerEnum `json:"resourceOwner"`
-	ResourceShareArns []string                                  `json:"resourceShareArns"`
-	ResourceType      *string                                   `json:"resourceType"`
+	ResourceShareArns []string                                  `json:"resourceShareArns,omitempty"`
+	ResourceType      *string                                   `json:"resourceType,omitempty"`
 }
 
 type ListResourcesRequest struct {

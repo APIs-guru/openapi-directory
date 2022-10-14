@@ -2,5 +2,5 @@ package shared
 
 type DescribeExclusionsRequest struct {
 	ExclusionArns []string    `json:"exclusionArns"`
-	Locale        *LocaleEnum `json:"locale"`
+	Locale        *LocaleEnum `json:"locale,omitempty"`
 }

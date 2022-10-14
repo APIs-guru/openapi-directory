@@ -21,7 +21,7 @@ const (
 
 type AwsLambdaRulePostTarget struct {
 	Authentication interface{} `json:"authentication"`
-	Enveloped      *bool       `json:"enveloped"`
+	Enveloped      *bool       `json:"enveloped,omitempty"`
 	FunctionName   string      `json:"functionName"`
 	Region         string      `json:"region"`
 }
@@ -30,6 +30,6 @@ type AwsLambdaRulePost struct {
 	RequestMode AwsLambdaRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    AwsLambdaRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                       `json:"source"`
-	Status      *AwsLambdaRulePostStatusEnum     `json:"status"`
+	Status      *AwsLambdaRulePostStatusEnum     `json:"status,omitempty"`
 	Target      AwsLambdaRulePostTarget          `json:"target"`
 }

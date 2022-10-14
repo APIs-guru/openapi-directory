@@ -1,16 +1,16 @@
 package shared
 
 type Device struct {
-	Attributes                   map[string]interface{} `json:"attributes"`
-	CustomData                   map[string]interface{} `json:"customData"`
-	DeviceInfo                   *DeviceInfo            `json:"deviceInfo"`
-	ID                           *string                `json:"id"`
-	Name                         *DeviceNames           `json:"name"`
-	NotificationSupportedByAgent *bool                  `json:"notificationSupportedByAgent"`
-	OtherDeviceIds               []AgentOtherDeviceID   `json:"otherDeviceIds"`
-	RoomHint                     *string                `json:"roomHint"`
-	StructureHint                *string                `json:"structureHint"`
-	Traits                       []string               `json:"traits"`
-	Type                         *string                `json:"type"`
-	WillReportState              *bool                  `json:"willReportState"`
+	Attributes                   map[string]interface{} `json:"attributes,omitempty"`
+	CustomData                   map[string]interface{} `json:"customData,omitempty"`
+	DeviceInfo                   *DeviceInfo            `json:"deviceInfo,omitempty"`
+	ID                           *string                `json:"id,omitempty"`
+	Name                         *DeviceNames           `json:"name,omitempty"`
+	NotificationSupportedByAgent *bool                  `json:"notificationSupportedByAgent,omitempty"`
+	OtherDeviceIds               []AgentOtherDeviceID   `json:"otherDeviceIds,omitempty"`
+	RoomHint                     *string                `json:"roomHint,omitempty"`
+	StructureHint                *string                `json:"structureHint,omitempty"`
+	Traits                       []string               `json:"traits,omitempty"`
+	Type                         *string                `json:"type,omitempty"`
+	WillReportState              *bool                  `json:"willReportState,omitempty"`
 }

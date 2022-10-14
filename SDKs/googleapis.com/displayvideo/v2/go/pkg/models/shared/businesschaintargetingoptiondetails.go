@@ -35,7 +35,7 @@ const (
 )
 
 type BusinessChainTargetingOptionDetails struct {
-	BusinessChain *string                                               `json:"businessChain"`
-	GeoRegion     *string                                               `json:"geoRegion"`
-	GeoRegionType *BusinessChainTargetingOptionDetailsGeoRegionTypeEnum `json:"geoRegionType"`
+	BusinessChain *string                                               `json:"businessChain,omitempty"`
+	GeoRegion     *string                                               `json:"geoRegion,omitempty"`
+	GeoRegionType *BusinessChainTargetingOptionDetailsGeoRegionTypeEnum `json:"geoRegionType,omitempty"`
 }

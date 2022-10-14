@@ -9,16 +9,16 @@ type RetrieveAUserRequest struct {
 }
 
 type RetrieveAUser200ApplicationJSONPerson struct {
-	Email *string `json:"email"`
+	Email *string `json:"email,omitempty"`
 }
 
 type RetrieveAUser200ApplicationJSON struct {
-	AvatarURL *interface{}                           `json:"avatar_url"`
-	ID        *string                                `json:"id"`
-	Name      *string                                `json:"name"`
-	Object    *string                                `json:"object"`
-	Person    *RetrieveAUser200ApplicationJSONPerson `json:"person"`
-	Type      *string                                `json:"type"`
+	AvatarURL *interface{}                           `json:"avatar_url,omitempty"`
+	ID        *string                                `json:"id,omitempty"`
+	Name      *string                                `json:"name,omitempty"`
+	Object    *string                                `json:"object,omitempty"`
+	Person    *RetrieveAUser200ApplicationJSONPerson `json:"person,omitempty"`
+	Type      *string                                `json:"type,omitempty"`
 }
 
 type RetrieveAUserResponse struct {

@@ -13,13 +13,13 @@ const (
 )
 
 type VideoFileDetails struct {
-	AudioStreams []VideoFileDetailsAudioStream `json:"audioStreams"`
-	BitrateBps   *string                       `json:"bitrateBps"`
-	Container    *string                       `json:"container"`
-	CreationTime *string                       `json:"creationTime"`
-	DurationMs   *string                       `json:"durationMs"`
-	FileName     *string                       `json:"fileName"`
-	FileSize     *string                       `json:"fileSize"`
-	FileType     *VideoFileDetailsFileTypeEnum `json:"fileType"`
-	VideoStreams []VideoFileDetailsVideoStream `json:"videoStreams"`
+	AudioStreams []VideoFileDetailsAudioStream `json:"audioStreams,omitempty"`
+	BitrateBps   *string                       `json:"bitrateBps,omitempty"`
+	Container    *string                       `json:"container,omitempty"`
+	CreationTime *string                       `json:"creationTime,omitempty"`
+	DurationMs   *string                       `json:"durationMs,omitempty"`
+	FileName     *string                       `json:"fileName,omitempty"`
+	FileSize     *string                       `json:"fileSize,omitempty"`
+	FileType     *VideoFileDetailsFileTypeEnum `json:"fileType,omitempty"`
+	VideoStreams []VideoFileDetailsVideoStream `json:"videoStreams,omitempty"`
 }

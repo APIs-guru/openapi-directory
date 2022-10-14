@@ -5,12 +5,12 @@ import (
 )
 
 type NotificationDto struct {
-	Date        *time.Time             `json:"Date"`
-	Description *string                `json:"Description"`
-	ID          *string                `json:"Id"`
-	IsRead      *bool                  `json:"IsRead"`
-	Level       *NotificationLevelEnum `json:"Level"`
-	Name        *string                `json:"Name"`
-	URL         *string                `json:"Url"`
-	UserID      *string                `json:"UserId"`
+	Date        *time.Time             `json:"Date,omitempty"`
+	Description *string                `json:"Description,omitempty"`
+	ID          *string                `json:"Id,omitempty"`
+	IsRead      *bool                  `json:"IsRead,omitempty"`
+	Level       *NotificationLevelEnum `json:"Level,omitempty"`
+	Name        *string                `json:"Name,omitempty"`
+	URL         *string                `json:"Url,omitempty"`
+	UserID      *string                `json:"UserId,omitempty"`
 }

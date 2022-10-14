@@ -10,7 +10,7 @@ const (
 )
 
 type RevisionCheckResponse struct {
-	APIVersion     *string                                  `json:"apiVersion"`
-	Kind           *string                                  `json:"kind"`
-	RevisionStatus *RevisionCheckResponseRevisionStatusEnum `json:"revisionStatus"`
+	APIVersion     *string                                  `json:"apiVersion,omitempty"`
+	Kind           *string                                  `json:"kind,omitempty"`
+	RevisionStatus *RevisionCheckResponseRevisionStatusEnum `json:"revisionStatus,omitempty"`
 }

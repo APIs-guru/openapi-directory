@@ -1,8 +1,8 @@
 package shared
 
 type DomainMapping struct {
-	ID              *string          `json:"id"`
-	Name            *string          `json:"name"`
-	ResourceRecords []ResourceRecord `json:"resourceRecords"`
-	SslSettings     *SslSettings     `json:"sslSettings"`
+	ID              *string          `json:"id,omitempty"`
+	Name            *string          `json:"name,omitempty"`
+	ResourceRecords []ResourceRecord `json:"resourceRecords,omitempty"`
+	SslSettings     *SslSettings     `json:"sslSettings,omitempty"`
 }

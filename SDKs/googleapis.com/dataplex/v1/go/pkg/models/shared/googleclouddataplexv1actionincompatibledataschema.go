@@ -9,9 +9,9 @@ const (
 )
 
 type GoogleCloudDataplexV1ActionIncompatibleDataSchema struct {
-	ExistingSchema       *string                                                            `json:"existingSchema"`
-	NewSchema            *string                                                            `json:"newSchema"`
-	SampledDataLocations []string                                                           `json:"sampledDataLocations"`
-	SchemaChange         *GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnum `json:"schemaChange"`
-	Table                *string                                                            `json:"table"`
+	ExistingSchema       *string                                                            `json:"existingSchema,omitempty"`
+	NewSchema            *string                                                            `json:"newSchema,omitempty"`
+	SampledDataLocations []string                                                           `json:"sampledDataLocations,omitempty"`
+	SchemaChange         *GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnum `json:"schemaChange,omitempty"`
+	Table                *string                                                            `json:"table,omitempty"`
 }

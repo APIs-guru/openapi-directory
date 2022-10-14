@@ -26,7 +26,7 @@ const (
 )
 
 type CrossProfilePolicies struct {
-	CrossProfileCopyPaste             *CrossProfilePoliciesCrossProfileCopyPasteEnum             `json:"crossProfileCopyPaste"`
-	CrossProfileDataSharing           *CrossProfilePoliciesCrossProfileDataSharingEnum           `json:"crossProfileDataSharing"`
-	ShowWorkContactsInPersonalProfile *CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum `json:"showWorkContactsInPersonalProfile"`
+	CrossProfileCopyPaste             *CrossProfilePoliciesCrossProfileCopyPasteEnum             `json:"crossProfileCopyPaste,omitempty"`
+	CrossProfileDataSharing           *CrossProfilePoliciesCrossProfileDataSharingEnum           `json:"crossProfileDataSharing,omitempty"`
+	ShowWorkContactsInPersonalProfile *CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum `json:"showWorkContactsInPersonalProfile,omitempty"`
 }

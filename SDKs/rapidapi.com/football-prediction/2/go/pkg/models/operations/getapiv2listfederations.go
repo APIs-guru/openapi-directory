@@ -9,11 +9,11 @@ type GetAPIV2ListFederationsRequest struct {
 }
 
 type GetAPIV2ListFederations200ApplicationJSON struct {
-	Data []string `json:"data"`
+	Data []string `json:"data,omitempty"`
 }
 
 type GetAPIV2ListFederations404ApplicationJSON struct {
-	Errors map[string]interface{} `json:"errors"`
+	Errors map[string]interface{} `json:"errors,omitempty"`
 }
 
 type GetAPIV2ListFederationsResponse struct {

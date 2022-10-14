@@ -1,13 +1,13 @@
 package shared
 
 type ScheduleRunConfiguration struct {
-	AuxiliaryApps         []string               `json:"auxiliaryApps"`
-	BillingMethod         *BillingMethodEnum     `json:"billingMethod"`
-	CustomerArtifactPaths *CustomerArtifactPaths `json:"customerArtifactPaths"`
-	ExtraDataPackageArn   *string                `json:"extraDataPackageArn"`
-	Locale                *string                `json:"locale"`
-	Location              *Location              `json:"location"`
-	NetworkProfileArn     *string                `json:"networkProfileArn"`
-	Radios                *Radios                `json:"radios"`
-	VpceConfigurationArns []string               `json:"vpceConfigurationArns"`
+	AuxiliaryApps         []string               `json:"auxiliaryApps,omitempty"`
+	BillingMethod         *BillingMethodEnum     `json:"billingMethod,omitempty"`
+	CustomerArtifactPaths *CustomerArtifactPaths `json:"customerArtifactPaths,omitempty"`
+	ExtraDataPackageArn   *string                `json:"extraDataPackageArn,omitempty"`
+	Locale                *string                `json:"locale,omitempty"`
+	Location              *Location              `json:"location,omitempty"`
+	NetworkProfileArn     *string                `json:"networkProfileArn,omitempty"`
+	Radios                *Radios                `json:"radios,omitempty"`
+	VpceConfigurationArns []string               `json:"vpceConfigurationArns,omitempty"`
 }

@@ -33,25 +33,25 @@ const (
 )
 
 type GoogleCloudAssuredworkloadsV1beta1Workload struct {
-	BillingAccount                 *string                                                            `json:"billingAccount"`
-	CjisSettings                   *GoogleCloudAssuredworkloadsV1beta1WorkloadCjisSettings            `json:"cjisSettings"`
-	ComplianceRegime               *GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceRegimeEnum    `json:"complianceRegime"`
-	ComplianceStatus               *GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceStatus        `json:"complianceStatus"`
-	CompliantButDisallowedServices []string                                                           `json:"compliantButDisallowedServices"`
-	CreateTime                     *string                                                            `json:"createTime"`
-	DisplayName                    *string                                                            `json:"displayName"`
-	EnableSovereignControls        *bool                                                              `json:"enableSovereignControls"`
-	Etag                           *string                                                            `json:"etag"`
-	FedrampHighSettings            *GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampHighSettings     `json:"fedrampHighSettings"`
-	FedrampModerateSettings        *GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampModerateSettings `json:"fedrampModerateSettings"`
-	Il4Settings                    *GoogleCloudAssuredworkloadsV1beta1WorkloadIl4Settings             `json:"il4Settings"`
-	KajEnrollmentState             *GoogleCloudAssuredworkloadsV1beta1WorkloadKajEnrollmentStateEnum  `json:"kajEnrollmentState"`
-	KmsSettings                    *GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings             `json:"kmsSettings"`
-	Labels                         map[string]string                                                  `json:"labels"`
-	Name                           *string                                                            `json:"name"`
-	Partner                        *GoogleCloudAssuredworkloadsV1beta1WorkloadPartnerEnum             `json:"partner"`
-	ProvisionedResourcesParent     *string                                                            `json:"provisionedResourcesParent"`
-	ResourceSettings               []GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings       `json:"resourceSettings"`
-	Resources                      []GoogleCloudAssuredworkloadsV1beta1WorkloadResourceInfo           `json:"resources"`
-	SaaEnrollmentResponse          *GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponse   `json:"saaEnrollmentResponse"`
+	BillingAccount                 *string                                                            `json:"billingAccount,omitempty"`
+	CjisSettings                   *GoogleCloudAssuredworkloadsV1beta1WorkloadCjisSettings            `json:"cjisSettings,omitempty"`
+	ComplianceRegime               *GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceRegimeEnum    `json:"complianceRegime,omitempty"`
+	ComplianceStatus               *GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceStatus        `json:"complianceStatus,omitempty"`
+	CompliantButDisallowedServices []string                                                           `json:"compliantButDisallowedServices,omitempty"`
+	CreateTime                     *string                                                            `json:"createTime,omitempty"`
+	DisplayName                    *string                                                            `json:"displayName,omitempty"`
+	EnableSovereignControls        *bool                                                              `json:"enableSovereignControls,omitempty"`
+	Etag                           *string                                                            `json:"etag,omitempty"`
+	FedrampHighSettings            *GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampHighSettings     `json:"fedrampHighSettings,omitempty"`
+	FedrampModerateSettings        *GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampModerateSettings `json:"fedrampModerateSettings,omitempty"`
+	Il4Settings                    *GoogleCloudAssuredworkloadsV1beta1WorkloadIl4Settings             `json:"il4Settings,omitempty"`
+	KajEnrollmentState             *GoogleCloudAssuredworkloadsV1beta1WorkloadKajEnrollmentStateEnum  `json:"kajEnrollmentState,omitempty"`
+	KmsSettings                    *GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings             `json:"kmsSettings,omitempty"`
+	Labels                         map[string]string                                                  `json:"labels,omitempty"`
+	Name                           *string                                                            `json:"name,omitempty"`
+	Partner                        *GoogleCloudAssuredworkloadsV1beta1WorkloadPartnerEnum             `json:"partner,omitempty"`
+	ProvisionedResourcesParent     *string                                                            `json:"provisionedResourcesParent,omitempty"`
+	ResourceSettings               []GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings       `json:"resourceSettings,omitempty"`
+	Resources                      []GoogleCloudAssuredworkloadsV1beta1WorkloadResourceInfo           `json:"resources,omitempty"`
+	SaaEnrollmentResponse          *GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponse   `json:"saaEnrollmentResponse,omitempty"`
 }

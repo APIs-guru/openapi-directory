@@ -9,18 +9,18 @@ type WellsFilesListRequest struct {
 }
 
 type WellsFilesList200ApplicationJSONPrivate struct {
-	Name *string `json:"name"`
-	URL  *string `json:"url"`
+	Name *string `json:"name,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type WellsFilesList200ApplicationJSONPublic struct {
-	Name *string `json:"name"`
-	URL  *string `json:"url"`
+	Name *string `json:"name,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type WellsFilesList200ApplicationJSON struct {
-	Private []WellsFilesList200ApplicationJSONPrivate `json:"private"`
-	Public  []WellsFilesList200ApplicationJSONPublic  `json:"public"`
+	Private []WellsFilesList200ApplicationJSONPrivate `json:"private,omitempty"`
+	Public  []WellsFilesList200ApplicationJSONPublic  `json:"public,omitempty"`
 }
 
 type WellsFilesListResponse struct {

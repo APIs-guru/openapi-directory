@@ -19,13 +19,13 @@ type UpdateBotHeaders struct {
 }
 
 type UpdateBotRequestBodyDataPrivacy struct {
-	ChildDirected *bool `json:"childDirected"`
+	ChildDirected *bool `json:"childDirected,omitempty"`
 }
 
 type UpdateBotRequestBody struct {
 	BotName                 string                          `json:"botName"`
 	DataPrivacy             UpdateBotRequestBodyDataPrivacy `json:"dataPrivacy"`
-	Description             *string                         `json:"description"`
+	Description             *string                         `json:"description,omitempty"`
 	IdleSessionTTLInSeconds int64                           `json:"idleSessionTTLInSeconds"`
 	RoleArn                 string                          `json:"roleArn"`
 }

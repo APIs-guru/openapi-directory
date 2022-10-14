@@ -15,20 +15,20 @@ type UpdateRobotApplicationHeaders struct {
 }
 
 type UpdateRobotApplicationRequestBodyEnvironment struct {
-	URI *string `json:"uri"`
+	URI *string `json:"uri,omitempty"`
 }
 
 type UpdateRobotApplicationRequestBodyRobotSoftwareSuite struct {
-	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name"`
-	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version"`
+	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name,omitempty"`
+	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version,omitempty"`
 }
 
 type UpdateRobotApplicationRequestBody struct {
 	Application        string                                              `json:"application"`
-	CurrentRevisionID  *string                                             `json:"currentRevisionId"`
-	Environment        *UpdateRobotApplicationRequestBodyEnvironment       `json:"environment"`
+	CurrentRevisionID  *string                                             `json:"currentRevisionId,omitempty"`
+	Environment        *UpdateRobotApplicationRequestBodyEnvironment       `json:"environment,omitempty"`
 	RobotSoftwareSuite UpdateRobotApplicationRequestBodyRobotSoftwareSuite `json:"robotSoftwareSuite"`
-	Sources            []shared.SourceConfig                               `json:"sources"`
+	Sources            []shared.SourceConfig                               `json:"sources,omitempty"`
 }
 
 type UpdateRobotApplicationRequest struct {

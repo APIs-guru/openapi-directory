@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudApigeeV1ListDebugSessionsResponse struct {
-	NextPageToken *string                      `json:"nextPageToken"`
-	Sessions      []GoogleCloudApigeeV1Session `json:"sessions"`
+	NextPageToken *string                      `json:"nextPageToken,omitempty"`
+	Sessions      []GoogleCloudApigeeV1Session `json:"sessions,omitempty"`
 }

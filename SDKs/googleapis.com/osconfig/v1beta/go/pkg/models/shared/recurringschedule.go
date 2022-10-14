@@ -10,13 +10,13 @@ const (
 )
 
 type RecurringSchedule struct {
-	EndTime         *string                         `json:"endTime"`
-	Frequency       *RecurringScheduleFrequencyEnum `json:"frequency"`
-	LastExecuteTime *string                         `json:"lastExecuteTime"`
-	Monthly         *MonthlySchedule                `json:"monthly"`
-	NextExecuteTime *string                         `json:"nextExecuteTime"`
-	StartTime       *string                         `json:"startTime"`
-	TimeOfDay       *TimeOfDay                      `json:"timeOfDay"`
-	TimeZone        *TimeZone                       `json:"timeZone"`
-	Weekly          *WeeklySchedule                 `json:"weekly"`
+	EndTime         *string                         `json:"endTime,omitempty"`
+	Frequency       *RecurringScheduleFrequencyEnum `json:"frequency,omitempty"`
+	LastExecuteTime *string                         `json:"lastExecuteTime,omitempty"`
+	Monthly         *MonthlySchedule                `json:"monthly,omitempty"`
+	NextExecuteTime *string                         `json:"nextExecuteTime,omitempty"`
+	StartTime       *string                         `json:"startTime,omitempty"`
+	TimeOfDay       *TimeOfDay                      `json:"timeOfDay,omitempty"`
+	TimeZone        *TimeZone                       `json:"timeZone,omitempty"`
+	Weekly          *WeeklySchedule                 `json:"weekly,omitempty"`
 }

@@ -2,10 +2,10 @@ package shared
 
 type Channel struct {
 	ChannelName       string                 `json:"ChannelName"`
-	CompressionType   *CompressionTypeEnum   `json:"CompressionType"`
-	ContentType       *string                `json:"ContentType"`
+	CompressionType   *CompressionTypeEnum   `json:"CompressionType,omitempty"`
+	ContentType       *string                `json:"ContentType,omitempty"`
 	DataSource        DataSource             `json:"DataSource"`
-	InputMode         *TrainingInputModeEnum `json:"InputMode"`
-	RecordWrapperType *RecordWrapperEnum     `json:"RecordWrapperType"`
-	ShuffleConfig     *ShuffleConfig         `json:"ShuffleConfig"`
+	InputMode         *TrainingInputModeEnum `json:"InputMode,omitempty"`
+	RecordWrapperType *RecordWrapperEnum     `json:"RecordWrapperType,omitempty"`
+	ShuffleConfig     *ShuffleConfig         `json:"ShuffleConfig,omitempty"`
 }

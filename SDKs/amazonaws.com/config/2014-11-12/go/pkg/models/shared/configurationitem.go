@@ -5,22 +5,22 @@ import (
 )
 
 type ConfigurationItem struct {
-	AccountID                    *string                      `json:"accountId"`
-	Arn                          *string                      `json:"arn"`
-	AvailabilityZone             *string                      `json:"availabilityZone"`
-	AwsRegion                    *string                      `json:"awsRegion"`
-	Configuration                *string                      `json:"configuration"`
-	ConfigurationItemCaptureTime *time.Time                   `json:"configurationItemCaptureTime"`
-	ConfigurationItemMd5Hash     *string                      `json:"configurationItemMD5Hash"`
-	ConfigurationItemStatus      *ConfigurationItemStatusEnum `json:"configurationItemStatus"`
-	ConfigurationStateID         *string                      `json:"configurationStateId"`
-	RelatedEvents                []string                     `json:"relatedEvents"`
-	Relationships                []Relationship               `json:"relationships"`
-	ResourceCreationTime         *time.Time                   `json:"resourceCreationTime"`
-	ResourceID                   *string                      `json:"resourceId"`
-	ResourceName                 *string                      `json:"resourceName"`
-	ResourceType                 *ResourceTypeEnum            `json:"resourceType"`
-	SupplementaryConfiguration   map[string]string            `json:"supplementaryConfiguration"`
-	Tags                         map[string]string            `json:"tags"`
-	Version                      *string                      `json:"version"`
+	AccountID                    *string                      `json:"accountId,omitempty"`
+	Arn                          *string                      `json:"arn,omitempty"`
+	AvailabilityZone             *string                      `json:"availabilityZone,omitempty"`
+	AwsRegion                    *string                      `json:"awsRegion,omitempty"`
+	Configuration                *string                      `json:"configuration,omitempty"`
+	ConfigurationItemCaptureTime *time.Time                   `json:"configurationItemCaptureTime,omitempty"`
+	ConfigurationItemMd5Hash     *string                      `json:"configurationItemMD5Hash,omitempty"`
+	ConfigurationItemStatus      *ConfigurationItemStatusEnum `json:"configurationItemStatus,omitempty"`
+	ConfigurationStateID         *string                      `json:"configurationStateId,omitempty"`
+	RelatedEvents                []string                     `json:"relatedEvents,omitempty"`
+	Relationships                []Relationship               `json:"relationships,omitempty"`
+	ResourceCreationTime         *time.Time                   `json:"resourceCreationTime,omitempty"`
+	ResourceID                   *string                      `json:"resourceId,omitempty"`
+	ResourceName                 *string                      `json:"resourceName,omitempty"`
+	ResourceType                 *ResourceTypeEnum            `json:"resourceType,omitempty"`
+	SupplementaryConfiguration   map[string]string            `json:"supplementaryConfiguration,omitempty"`
+	Tags                         map[string]string            `json:"tags,omitempty"`
+	Version                      *string                      `json:"version,omitempty"`
 }

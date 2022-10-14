@@ -1,5 +1,5 @@
 package shared
 
 type BatchDeletePrintersRequest struct {
-	PrinterIds []string `json:"printerIds"`
+	PrinterIds []string `json:"printerIds,omitempty"`
 }

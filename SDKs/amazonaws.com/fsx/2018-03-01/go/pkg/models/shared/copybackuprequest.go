@@ -1,10 +1,10 @@
 package shared
 
 type CopyBackupRequest struct {
-	ClientRequestToken *string `json:"ClientRequestToken"`
-	CopyTags           *bool   `json:"CopyTags"`
-	KmsKeyID           *string `json:"KmsKeyId"`
+	ClientRequestToken *string `json:"ClientRequestToken,omitempty"`
+	CopyTags           *bool   `json:"CopyTags,omitempty"`
+	KmsKeyID           *string `json:"KmsKeyId,omitempty"`
 	SourceBackupID     string  `json:"SourceBackupId"`
-	SourceRegion       *string `json:"SourceRegion"`
-	Tags               []Tag   `json:"Tags"`
+	SourceRegion       *string `json:"SourceRegion,omitempty"`
+	Tags               []Tag   `json:"Tags,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudienceEventTrigger struct {
-	EventName    *string                                                          `json:"eventName"`
-	LogCondition *GoogleAnalyticsAdminV1alphaAudienceEventTriggerLogConditionEnum `json:"logCondition"`
+	EventName    *string                                                          `json:"eventName,omitempty"`
+	LogCondition *GoogleAnalyticsAdminV1alphaAudienceEventTriggerLogConditionEnum `json:"logCondition,omitempty"`
 }

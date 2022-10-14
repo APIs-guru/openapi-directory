@@ -1,8 +1,8 @@
 package shared
 
 type MutationResult struct {
-	ConflictDetected *bool   `json:"conflictDetected"`
-	Key              *Key    `json:"key"`
-	UpdateTime       *string `json:"updateTime"`
-	Version          *string `json:"version"`
+	ConflictDetected *bool   `json:"conflictDetected,omitempty"`
+	Key              *Key    `json:"key,omitempty"`
+	UpdateTime       *string `json:"updateTime,omitempty"`
+	Version          *string `json:"version,omitempty"`
 }

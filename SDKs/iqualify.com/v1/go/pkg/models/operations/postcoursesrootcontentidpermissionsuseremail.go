@@ -10,8 +10,8 @@ type PostCoursesRootContentIDPermissionsUserEmailPathParams struct {
 }
 
 type PostCoursesRootContentIDPermissionsUserEmailRequestBodyPermissionToBeGrantedToTheUser struct {
-	IsBuilder  *bool `json:"isBuilder"`
-	IsReviewer *bool `json:"isReviewer"`
+	IsBuilder  *bool `json:"isBuilder,omitempty"`
+	IsReviewer *bool `json:"isReviewer,omitempty"`
 }
 
 type PostCoursesRootContentIDPermissionsUserEmailRequest struct {
@@ -20,7 +20,7 @@ type PostCoursesRootContentIDPermissionsUserEmailRequest struct {
 }
 
 type PostCoursesRootContentIDPermissionsUserEmail201ApplicationJSON struct {
-	ContentID *string `json:"contentId"`
+	ContentID *string `json:"contentId,omitempty"`
 }
 
 type PostCoursesRootContentIDPermissionsUserEmailResponse struct {

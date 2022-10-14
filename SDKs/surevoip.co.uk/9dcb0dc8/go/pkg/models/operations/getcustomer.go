@@ -9,21 +9,21 @@ type GetCustomerRequest struct {
 }
 
 type GetCustomer200ApplicationJSON struct {
-	Address        *string `json:"address"`
-	Balance        *int64  `json:"balance"`
-	City           *string `json:"city"`
-	CompanyName    *string `json:"company_name"`
-	CompanyWebsite *string `json:"company_website"`
-	Country        *string `json:"country"`
-	Creditlimit    *string `json:"creditlimit"`
-	Email          *string `json:"email"`
-	Fax            *string `json:"fax"`
-	Firstname      *string `json:"firstname"`
-	Lastname       *string `json:"lastname"`
-	Phone          *string `json:"phone"`
-	Postcode       *string `json:"postcode"`
-	State          *string `json:"state"`
-	Username       *int64  `json:"username"`
+	Address        *string `json:"address,omitempty"`
+	Balance        *int64  `json:"balance,omitempty"`
+	City           *string `json:"city,omitempty"`
+	CompanyName    *string `json:"company_name,omitempty"`
+	CompanyWebsite *string `json:"company_website,omitempty"`
+	Country        *string `json:"country,omitempty"`
+	Creditlimit    *string `json:"creditlimit,omitempty"`
+	Email          *string `json:"email,omitempty"`
+	Fax            *string `json:"fax,omitempty"`
+	Firstname      *string `json:"firstname,omitempty"`
+	Lastname       *string `json:"lastname,omitempty"`
+	Phone          *string `json:"phone,omitempty"`
+	Postcode       *string `json:"postcode,omitempty"`
+	State          *string `json:"state,omitempty"`
+	Username       *int64  `json:"username,omitempty"`
 }
 
 type GetCustomerResponse struct {

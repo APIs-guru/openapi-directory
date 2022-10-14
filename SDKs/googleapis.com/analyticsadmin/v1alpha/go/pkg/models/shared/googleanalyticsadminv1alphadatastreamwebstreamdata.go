@@ -1,7 +1,7 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaDataStreamWebStreamData struct {
-	DefaultURI    *string `json:"defaultUri"`
-	FirebaseAppID *string `json:"firebaseAppId"`
-	MeasurementID *string `json:"measurementId"`
+	DefaultURI    *string `json:"defaultUri,omitempty"`
+	FirebaseAppID *string `json:"firebaseAppId,omitempty"`
+	MeasurementID *string `json:"measurementId,omitempty"`
 }

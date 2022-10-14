@@ -1,9 +1,9 @@
 package shared
 
 type InlineObjectElement struct {
-	InlineObjectID            *string                       `json:"inlineObjectId"`
-	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds"`
-	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges"`
-	TextStyle                 *TextStyle                    `json:"textStyle"`
+	InlineObjectID            *string                       `json:"inlineObjectId,omitempty"`
+	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds,omitempty"`
+	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges,omitempty"`
+	TextStyle                 *TextStyle                    `json:"textStyle,omitempty"`
 }

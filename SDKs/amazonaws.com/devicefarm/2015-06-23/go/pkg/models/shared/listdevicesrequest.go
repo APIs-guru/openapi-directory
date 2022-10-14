@@ -1,7 +1,7 @@
 package shared
 
 type ListDevicesRequest struct {
-	Arn       *string        `json:"arn"`
-	Filters   []DeviceFilter `json:"filters"`
-	NextToken *string        `json:"nextToken"`
+	Arn       *string        `json:"arn,omitempty"`
+	Filters   []DeviceFilter `json:"filters,omitempty"`
+	NextToken *string        `json:"nextToken,omitempty"`
 }

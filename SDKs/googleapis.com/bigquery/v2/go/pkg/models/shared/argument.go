@@ -18,8 +18,8 @@ const (
 )
 
 type Argument struct {
-	ArgumentKind *ArgumentArgumentKindEnum `json:"argumentKind"`
-	DataType     *StandardSQLDataType      `json:"dataType"`
-	Mode         *ArgumentModeEnum         `json:"mode"`
-	Name         *string                   `json:"name"`
+	ArgumentKind *ArgumentArgumentKindEnum `json:"argumentKind,omitempty"`
+	DataType     *StandardSQLDataType      `json:"dataType,omitempty"`
+	Mode         *ArgumentModeEnum         `json:"mode,omitempty"`
+	Name         *string                   `json:"name,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type ReinitializeActionConfiguration struct {
-	ResetAlertActions                 *int32 `json:"resetAlertActions"`
-	ResetAlertAfterNTimes             *int32 `json:"resetAlertAfterNTimes"`
-	ResetDebugMode                    *int32 `json:"resetDebugMode"`
-	ResetDiscoveryAndPollingIntervals *int32 `json:"resetDiscoveryAndPollingIntervals"`
-	ResetJavaSettings                 *int32 `json:"resetJavaSettings"`
-	ResetOtherAlertSettings           *int32 `json:"resetOtherAlertSettings"`
-	ResetRemovedPausedObjectList      *int32 `json:"resetRemovedPausedObjectList"`
-	ResetReportSettings               *int32 `json:"resetReportSettings"`
-	ResetThresholds                   *int32 `json:"resetThresholds"`
+	ResetAlertActions                 *int32 `json:"resetAlertActions,omitempty"`
+	ResetAlertAfterNTimes             *int32 `json:"resetAlertAfterNTimes,omitempty"`
+	ResetDebugMode                    *int32 `json:"resetDebugMode,omitempty"`
+	ResetDiscoveryAndPollingIntervals *int32 `json:"resetDiscoveryAndPollingIntervals,omitempty"`
+	ResetJavaSettings                 *int32 `json:"resetJavaSettings,omitempty"`
+	ResetOtherAlertSettings           *int32 `json:"resetOtherAlertSettings,omitempty"`
+	ResetRemovedPausedObjectList      *int32 `json:"resetRemovedPausedObjectList,omitempty"`
+	ResetReportSettings               *int32 `json:"resetReportSettings,omitempty"`
+	ResetThresholds                   *int32 `json:"resetThresholds,omitempty"`
 }

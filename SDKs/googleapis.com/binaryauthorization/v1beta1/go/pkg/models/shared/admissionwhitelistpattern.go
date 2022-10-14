@@ -1,5 +1,5 @@
 package shared
 
 type AdmissionWhitelistPattern struct {
-	NamePattern *string `json:"namePattern"`
+	NamePattern *string `json:"namePattern,omitempty"`
 }

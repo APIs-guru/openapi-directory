@@ -1,8 +1,8 @@
 package shared
 
 type ValidationErrorsResponse struct {
-	Instance          *string                `json:"instance"`
-	InvalidParameters []DetailedInvalidParam `json:"invalid_parameters"`
-	Status            *float64               `json:"status"`
-	Title             *string                `json:"title"`
+	Instance          *string                `json:"instance,omitempty"`
+	InvalidParameters []DetailedInvalidParam `json:"invalid_parameters,omitempty"`
+	Status            *float64               `json:"status,omitempty"`
+	Title             *string                `json:"title,omitempty"`
 }

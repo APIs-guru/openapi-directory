@@ -9,6 +9,6 @@ const (
 )
 
 type Dimension struct {
-	Magnitude *float64           `json:"magnitude"`
-	Unit      *DimensionUnitEnum `json:"unit"`
+	Magnitude *float64           `json:"magnitude,omitempty"`
+	Unit      *DimensionUnitEnum `json:"unit,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type HTTPRequest struct {
-	ClientIP    *string      `json:"ClientIP"`
-	Country     *string      `json:"Country"`
-	HTTPVersion *string      `json:"HTTPVersion"`
-	Headers     []HTTPHeader `json:"Headers"`
-	Method      *string      `json:"Method"`
-	URI         *string      `json:"URI"`
+	ClientIP    *string      `json:"ClientIP,omitempty"`
+	Country     *string      `json:"Country,omitempty"`
+	HTTPVersion *string      `json:"HTTPVersion,omitempty"`
+	Headers     []HTTPHeader `json:"Headers,omitempty"`
+	Method      *string      `json:"Method,omitempty"`
+	URI         *string      `json:"URI,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeCustomRoutingAcceleratorResponse struct {
-	Accelerator *CustomRoutingAccelerator `json:"Accelerator"`
+	Accelerator *CustomRoutingAccelerator `json:"Accelerator,omitempty"`
 }

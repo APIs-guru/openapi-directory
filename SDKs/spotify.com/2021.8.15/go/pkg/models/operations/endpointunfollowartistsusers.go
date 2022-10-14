@@ -15,7 +15,7 @@ type EndpointUnfollowArtistsUsersHeaders struct {
 }
 
 type EndpointUnfollowArtistsUsersRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type EndpointUnfollowArtistsUsersSecurity struct {

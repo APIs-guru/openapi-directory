@@ -1,5 +1,5 @@
 package shared
 
 type CreateRepositoryResponse struct {
-	Repository *Repository `json:"repository"`
+	Repository *Repository `json:"repository,omitempty"`
 }

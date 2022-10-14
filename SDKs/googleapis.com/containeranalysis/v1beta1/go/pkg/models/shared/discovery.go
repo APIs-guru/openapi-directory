@@ -19,5 +19,5 @@ const (
 )
 
 type Discovery struct {
-	AnalysisKind *DiscoveryAnalysisKindEnum `json:"analysisKind"`
+	AnalysisKind *DiscoveryAnalysisKindEnum `json:"analysisKind,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type AffiliateImage struct {
-	Caption        *string             `json:"caption"`
-	DestinationURL *string             `json:"destination_url"`
-	ID             *string             `json:"id"`
-	PreviewUrls    *AffiliateImageUrls `json:"preview_urls"`
-	Title          *string             `json:"title"`
+	Caption        *string             `json:"caption,omitempty"`
+	DestinationURL *string             `json:"destination_url,omitempty"`
+	ID             *string             `json:"id,omitempty"`
+	PreviewUrls    *AffiliateImageUrls `json:"preview_urls,omitempty"`
+	Title          *string             `json:"title,omitempty"`
 }

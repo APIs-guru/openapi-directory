@@ -8,6 +8,6 @@ type LabelSearchResultItem struct {
 	Name        string                    `json:"name"`
 	NodeID      string                    `json:"node_id"`
 	Score       float64                   `json:"score"`
-	TextMatches []SearchResultTextMatches `json:"text_matches"`
+	TextMatches []SearchResultTextMatches `json:"text_matches,omitempty"`
 	URL         string                    `json:"url"`
 }

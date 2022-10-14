@@ -5,10 +5,10 @@ import (
 )
 
 type ArtifactRevision struct {
-	Created                  *time.Time `json:"created"`
-	Name                     *string    `json:"name"`
-	RevisionChangeIdentifier *string    `json:"revisionChangeIdentifier"`
-	RevisionID               *string    `json:"revisionId"`
-	RevisionSummary          *string    `json:"revisionSummary"`
-	RevisionURL              *string    `json:"revisionUrl"`
+	Created                  *time.Time `json:"created,omitempty"`
+	Name                     *string    `json:"name,omitempty"`
+	RevisionChangeIdentifier *string    `json:"revisionChangeIdentifier,omitempty"`
+	RevisionID               *string    `json:"revisionId,omitempty"`
+	RevisionSummary          *string    `json:"revisionSummary,omitempty"`
+	RevisionURL              *string    `json:"revisionUrl,omitempty"`
 }

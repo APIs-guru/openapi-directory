@@ -1,7 +1,7 @@
 package shared
 
 type ReferenceImage struct {
-	BoundingPolys []BoundingPoly `json:"boundingPolys"`
-	Name          *string        `json:"name"`
-	URI           *string        `json:"uri"`
+	BoundingPolys []BoundingPoly `json:"boundingPolys,omitempty"`
+	Name          *string        `json:"name,omitempty"`
+	URI           *string        `json:"uri,omitempty"`
 }

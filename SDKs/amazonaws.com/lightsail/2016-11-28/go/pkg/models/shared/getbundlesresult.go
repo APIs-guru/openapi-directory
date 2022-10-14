@@ -1,6 +1,6 @@
 package shared
 
 type GetBundlesResult struct {
-	Bundles       []Bundle `json:"bundles"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Bundles       []Bundle `json:"bundles,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

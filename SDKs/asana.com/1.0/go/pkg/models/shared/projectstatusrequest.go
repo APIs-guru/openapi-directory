@@ -11,9 +11,9 @@ const (
 
 type ProjectStatusRequest struct {
 	Color        ProjectStatusRequestColorEnum `json:"color"`
-	Gid          *string                       `json:"gid"`
-	HTMLText     *string                       `json:"html_text"`
-	ResourceType *string                       `json:"resource_type"`
+	Gid          *string                       `json:"gid,omitempty"`
+	HTMLText     *string                       `json:"html_text,omitempty"`
+	ResourceType *string                       `json:"resource_type,omitempty"`
 	Text         string                        `json:"text"`
-	Title        *string                       `json:"title"`
+	Title        *string                       `json:"title,omitempty"`
 }

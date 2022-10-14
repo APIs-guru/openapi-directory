@@ -1,6 +1,6 @@
 package shared
 
 type DeregisterPatchBaselineForPatchGroupResult struct {
-	BaselineID *string `json:"BaselineId"`
-	PatchGroup *string `json:"PatchGroup"`
+	BaselineID *string `json:"BaselineId,omitempty"`
+	PatchGroup *string `json:"PatchGroup,omitempty"`
 }

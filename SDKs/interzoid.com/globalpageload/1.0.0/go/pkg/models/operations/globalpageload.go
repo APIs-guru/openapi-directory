@@ -11,12 +11,12 @@ type GlobalpageloadRequest struct {
 }
 
 type Globalpageload200ApplicationJSON struct {
-	Code               *string `json:"Code"`
-	Contents           *string `json:"Contents"`
-	Credits            *string `json:"Credits"`
-	Origin             *string `json:"Origin"`
-	PageResponseStatus *string `json:"PageResponseStatus"`
-	Seconds            *string `json:"Seconds"`
+	Code               *string `json:"Code,omitempty"`
+	Contents           *string `json:"Contents,omitempty"`
+	Credits            *string `json:"Credits,omitempty"`
+	Origin             *string `json:"Origin,omitempty"`
+	PageResponseStatus *string `json:"PageResponseStatus,omitempty"`
+	Seconds            *string `json:"Seconds,omitempty"`
 }
 
 type GlobalpageloadResponse struct {

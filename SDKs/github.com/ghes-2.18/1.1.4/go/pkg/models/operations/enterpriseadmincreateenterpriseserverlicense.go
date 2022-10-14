@@ -2,8 +2,8 @@ package operations
 
 type EnterpriseAdminCreateEnterpriseServerLicenseRequestBody struct {
 	License  string  `json:"license"`
-	Password *string `json:"password"`
-	Settings *string `json:"settings"`
+	Password *string `json:"password,omitempty"`
+	Settings *string `json:"settings,omitempty"`
 }
 
 type EnterpriseAdminCreateEnterpriseServerLicenseRequest struct {

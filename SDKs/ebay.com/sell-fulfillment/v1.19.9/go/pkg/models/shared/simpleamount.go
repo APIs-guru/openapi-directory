@@ -1,6 +1,6 @@
 package shared
 
 type SimpleAmount struct {
-	Currency *string `json:"currency"`
-	Value    *string `json:"value"`
+	Currency *string `json:"currency,omitempty"`
+	Value    *string `json:"value,omitempty"`
 }

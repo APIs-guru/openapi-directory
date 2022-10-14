@@ -12,12 +12,12 @@ const (
 )
 
 type UpdateNetworkApplianceFirewallOneToManyNatRulesRequestBodyRulesPortRules struct {
-	AllowedIps []string                                                                              `json:"allowedIps"`
-	LocalIP    *string                                                                               `json:"localIp"`
-	LocalPort  *string                                                                               `json:"localPort"`
-	Name       *string                                                                               `json:"name"`
-	Protocol   *UpdateNetworkApplianceFirewallOneToManyNatRulesRequestBodyRulesPortRulesProtocolEnum `json:"protocol"`
-	PublicPort *string                                                                               `json:"publicPort"`
+	AllowedIps []string                                                                              `json:"allowedIps,omitempty"`
+	LocalIP    *string                                                                               `json:"localIp,omitempty"`
+	LocalPort  *string                                                                               `json:"localPort,omitempty"`
+	Name       *string                                                                               `json:"name,omitempty"`
+	Protocol   *UpdateNetworkApplianceFirewallOneToManyNatRulesRequestBodyRulesPortRulesProtocolEnum `json:"protocol,omitempty"`
+	PublicPort *string                                                                               `json:"publicPort,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallOneToManyNatRulesRequestBodyRulesUplinkEnum string

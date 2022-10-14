@@ -1,13 +1,13 @@
 package shared
 
 type ProductStatus struct {
-	CreationDate         *string                          `json:"creationDate"`
-	DestinationStatuses  []ProductStatusDestinationStatus `json:"destinationStatuses"`
-	GoogleExpirationDate *string                          `json:"googleExpirationDate"`
-	ItemLevelIssues      []ProductStatusItemLevelIssue    `json:"itemLevelIssues"`
-	Kind                 *string                          `json:"kind"`
-	LastUpdateDate       *string                          `json:"lastUpdateDate"`
-	Link                 *string                          `json:"link"`
-	ProductID            *string                          `json:"productId"`
-	Title                *string                          `json:"title"`
+	CreationDate         *string                          `json:"creationDate,omitempty"`
+	DestinationStatuses  []ProductStatusDestinationStatus `json:"destinationStatuses,omitempty"`
+	GoogleExpirationDate *string                          `json:"googleExpirationDate,omitempty"`
+	ItemLevelIssues      []ProductStatusItemLevelIssue    `json:"itemLevelIssues,omitempty"`
+	Kind                 *string                          `json:"kind,omitempty"`
+	LastUpdateDate       *string                          `json:"lastUpdateDate,omitempty"`
+	Link                 *string                          `json:"link,omitempty"`
+	ProductID            *string                          `json:"productId,omitempty"`
+	Title                *string                          `json:"title,omitempty"`
 }

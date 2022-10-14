@@ -9,7 +9,7 @@ type MutateLinodeInstancePathParams struct {
 }
 
 type MutateLinodeInstanceRequestBody struct {
-	AllowAutoDiskResize *bool `json:"allow_auto_disk_resize"`
+	AllowAutoDiskResize *bool `json:"allow_auto_disk_resize,omitempty"`
 }
 
 type MutateLinodeInstanceSecurityOption1 struct {
@@ -32,7 +32,7 @@ type MutateLinodeInstanceRequest struct {
 }
 
 type MutateLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type MutateLinodeInstanceResponse struct {

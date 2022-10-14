@@ -15,7 +15,7 @@ const (
 )
 
 type ImageCreateResult struct {
-	Image     *Image                       `json:"Image"`
-	SourceURL *string                      `json:"SourceUrl"`
-	Status    *ImageCreateResultStatusEnum `json:"Status"`
+	Image     *Image                       `json:"Image,omitempty"`
+	SourceURL *string                      `json:"SourceUrl,omitempty"`
+	Status    *ImageCreateResultStatusEnum `json:"Status,omitempty"`
 }

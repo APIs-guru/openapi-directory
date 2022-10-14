@@ -13,11 +13,11 @@ const (
 )
 
 type DeviceSettings struct {
-	AdbEnabled                 *bool                               `json:"adbEnabled"`
-	DevelopmentSettingsEnabled *bool                               `json:"developmentSettingsEnabled"`
-	EncryptionStatus           *DeviceSettingsEncryptionStatusEnum `json:"encryptionStatus"`
-	IsDeviceSecure             *bool                               `json:"isDeviceSecure"`
-	IsEncrypted                *bool                               `json:"isEncrypted"`
-	UnknownSourcesEnabled      *bool                               `json:"unknownSourcesEnabled"`
-	VerifyAppsEnabled          *bool                               `json:"verifyAppsEnabled"`
+	AdbEnabled                 *bool                               `json:"adbEnabled,omitempty"`
+	DevelopmentSettingsEnabled *bool                               `json:"developmentSettingsEnabled,omitempty"`
+	EncryptionStatus           *DeviceSettingsEncryptionStatusEnum `json:"encryptionStatus,omitempty"`
+	IsDeviceSecure             *bool                               `json:"isDeviceSecure,omitempty"`
+	IsEncrypted                *bool                               `json:"isEncrypted,omitempty"`
+	UnknownSourcesEnabled      *bool                               `json:"unknownSourcesEnabled,omitempty"`
+	VerifyAppsEnabled          *bool                               `json:"verifyAppsEnabled,omitempty"`
 }

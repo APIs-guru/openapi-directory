@@ -1,10 +1,10 @@
 package shared
 
 type MerchantOrderReturn struct {
-	CreationDate    *string                   `json:"creationDate"`
-	MerchantOrderID *string                   `json:"merchantOrderId"`
-	OrderID         *string                   `json:"orderId"`
-	OrderReturnID   *string                   `json:"orderReturnId"`
-	ReturnItems     []MerchantOrderReturnItem `json:"returnItems"`
-	ReturnShipments []ReturnShipment          `json:"returnShipments"`
+	CreationDate    *string                   `json:"creationDate,omitempty"`
+	MerchantOrderID *string                   `json:"merchantOrderId,omitempty"`
+	OrderID         *string                   `json:"orderId,omitempty"`
+	OrderReturnID   *string                   `json:"orderReturnId,omitempty"`
+	ReturnItems     []MerchantOrderReturnItem `json:"returnItems,omitempty"`
+	ReturnShipments []ReturnShipment          `json:"returnShipments,omitempty"`
 }

@@ -87,16 +87,16 @@ const (
 )
 
 type Cvss struct {
-	AttackComplexity      *CvssAttackComplexityEnum      `json:"attackComplexity"`
-	AttackVector          *CvssAttackVectorEnum          `json:"attackVector"`
-	Authentication        *CvssAuthenticationEnum        `json:"authentication"`
-	AvailabilityImpact    *CvssAvailabilityImpactEnum    `json:"availabilityImpact"`
-	BaseScore             *float32                       `json:"baseScore"`
-	ConfidentialityImpact *CvssConfidentialityImpactEnum `json:"confidentialityImpact"`
-	ExploitabilityScore   *float32                       `json:"exploitabilityScore"`
-	ImpactScore           *float32                       `json:"impactScore"`
-	IntegrityImpact       *CvssIntegrityImpactEnum       `json:"integrityImpact"`
-	PrivilegesRequired    *CvssPrivilegesRequiredEnum    `json:"privilegesRequired"`
-	Scope                 *CvssScopeEnum                 `json:"scope"`
-	UserInteraction       *CvssUserInteractionEnum       `json:"userInteraction"`
+	AttackComplexity      *CvssAttackComplexityEnum      `json:"attackComplexity,omitempty"`
+	AttackVector          *CvssAttackVectorEnum          `json:"attackVector,omitempty"`
+	Authentication        *CvssAuthenticationEnum        `json:"authentication,omitempty"`
+	AvailabilityImpact    *CvssAvailabilityImpactEnum    `json:"availabilityImpact,omitempty"`
+	BaseScore             *float32                       `json:"baseScore,omitempty"`
+	ConfidentialityImpact *CvssConfidentialityImpactEnum `json:"confidentialityImpact,omitempty"`
+	ExploitabilityScore   *float32                       `json:"exploitabilityScore,omitempty"`
+	ImpactScore           *float32                       `json:"impactScore,omitempty"`
+	IntegrityImpact       *CvssIntegrityImpactEnum       `json:"integrityImpact,omitempty"`
+	PrivilegesRequired    *CvssPrivilegesRequiredEnum    `json:"privilegesRequired,omitempty"`
+	Scope                 *CvssScopeEnum                 `json:"scope,omitempty"`
+	UserInteraction       *CvssUserInteractionEnum       `json:"userInteraction,omitempty"`
 }

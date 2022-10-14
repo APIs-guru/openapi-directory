@@ -9,7 +9,7 @@ type AssignProjectResourcesPathParams struct {
 }
 
 type AssignProjectResourcesRequestBody struct {
-	Resources []string `json:"resources"`
+	Resources []string `json:"resources,omitempty"`
 }
 
 type AssignProjectResourcesRequest struct {
@@ -18,13 +18,13 @@ type AssignProjectResourcesRequest struct {
 }
 
 type AssignProjectResources200ApplicationJSON struct {
-	Resources []shared.Onev21projects1Percent7BprojectIDPercent7D1resourcesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesResourcesItems `json:"resources"`
+	Resources []shared.Onev21projects1Percent7BprojectIDPercent7D1resourcesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesResourcesItems `json:"resources,omitempty"`
 }
 
 type AssignProjectResources401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type AssignProjectResourcesResponse struct {

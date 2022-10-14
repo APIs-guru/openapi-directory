@@ -1,7 +1,7 @@
 package shared
 
 type SourceDetail struct {
-	EventSource               *EventSourceEnum               `json:"EventSource"`
-	MaximumExecutionFrequency *MaximumExecutionFrequencyEnum `json:"MaximumExecutionFrequency"`
-	MessageType               *MessageTypeEnum               `json:"MessageType"`
+	EventSource               *EventSourceEnum               `json:"EventSource,omitempty"`
+	MaximumExecutionFrequency *MaximumExecutionFrequencyEnum `json:"MaximumExecutionFrequency,omitempty"`
+	MessageType               *MessageTypeEnum               `json:"MessageType,omitempty"`
 }

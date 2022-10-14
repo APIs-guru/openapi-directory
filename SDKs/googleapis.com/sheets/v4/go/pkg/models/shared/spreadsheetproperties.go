@@ -10,11 +10,11 @@ const (
 )
 
 type SpreadsheetProperties struct {
-	AutoRecalc                   *SpreadsheetPropertiesAutoRecalcEnum `json:"autoRecalc"`
-	DefaultFormat                *CellFormat                          `json:"defaultFormat"`
-	IterativeCalculationSettings *IterativeCalculationSettings        `json:"iterativeCalculationSettings"`
-	Locale                       *string                              `json:"locale"`
-	SpreadsheetTheme             *SpreadsheetTheme                    `json:"spreadsheetTheme"`
-	TimeZone                     *string                              `json:"timeZone"`
-	Title                        *string                              `json:"title"`
+	AutoRecalc                   *SpreadsheetPropertiesAutoRecalcEnum `json:"autoRecalc,omitempty"`
+	DefaultFormat                *CellFormat                          `json:"defaultFormat,omitempty"`
+	IterativeCalculationSettings *IterativeCalculationSettings        `json:"iterativeCalculationSettings,omitempty"`
+	Locale                       *string                              `json:"locale,omitempty"`
+	SpreadsheetTheme             *SpreadsheetTheme                    `json:"spreadsheetTheme,omitempty"`
+	TimeZone                     *string                              `json:"timeZone,omitempty"`
+	Title                        *string                              `json:"title,omitempty"`
 }

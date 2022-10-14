@@ -1,8 +1,8 @@
 package shared
 
 type OpenTunnelRequest struct {
-	Description       *string            `json:"description"`
-	DestinationConfig *DestinationConfig `json:"destinationConfig"`
-	Tags              []Tag              `json:"tags"`
-	TimeoutConfig     *TimeoutConfig     `json:"timeoutConfig"`
+	Description       *string            `json:"description,omitempty"`
+	DestinationConfig *DestinationConfig `json:"destinationConfig,omitempty"`
+	Tags              []Tag              `json:"tags,omitempty"`
+	TimeoutConfig     *TimeoutConfig     `json:"timeoutConfig,omitempty"`
 }

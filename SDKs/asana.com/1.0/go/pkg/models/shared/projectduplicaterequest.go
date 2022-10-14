@@ -18,14 +18,14 @@ const (
 )
 
 type ProjectDuplicateRequestScheduleDates struct {
-	DueOn              *string `json:"due_on"`
+	DueOn              *string `json:"due_on,omitempty"`
 	ShouldSkipWeekends bool    `json:"should_skip_weekends"`
-	StartOn            *string `json:"start_on"`
+	StartOn            *string `json:"start_on,omitempty"`
 }
 
 type ProjectDuplicateRequest struct {
-	Include       *ProjectDuplicateRequestIncludeEnum   `json:"include"`
+	Include       *ProjectDuplicateRequestIncludeEnum   `json:"include,omitempty"`
 	Name          string                                `json:"name"`
-	ScheduleDates *ProjectDuplicateRequestScheduleDates `json:"schedule_dates"`
-	Team          *string                               `json:"team"`
+	ScheduleDates *ProjectDuplicateRequestScheduleDates `json:"schedule_dates,omitempty"`
+	Team          *string                               `json:"team,omitempty"`
 }

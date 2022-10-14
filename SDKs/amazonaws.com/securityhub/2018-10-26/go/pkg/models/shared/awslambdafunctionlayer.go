@@ -1,6 +1,6 @@
 package shared
 
 type AwsLambdaFunctionLayer struct {
-	Arn      *string `json:"Arn"`
-	CodeSize *int64  `json:"CodeSize"`
+	Arn      *string `json:"Arn,omitempty"`
+	CodeSize *int64  `json:"CodeSize,omitempty"`
 }

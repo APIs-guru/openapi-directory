@@ -5,9 +5,9 @@ import (
 )
 
 type GistCommitChangeStatus struct {
-	Additions *int64 `json:"additions"`
-	Deletions *int64 `json:"deletions"`
-	Total     *int64 `json:"total"`
+	Additions *int64 `json:"additions,omitempty"`
+	Deletions *int64 `json:"deletions,omitempty"`
+	Total     *int64 `json:"total,omitempty"`
 }
 
 type GistCommitUserSimpleUser struct {
@@ -25,7 +25,7 @@ type GistCommitUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`

@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetResourceConfigResponse struct {
-	BaseConfigurationItems  []BaseConfigurationItem `json:"baseConfigurationItems"`
-	UnprocessedResourceKeys []ResourceKey           `json:"unprocessedResourceKeys"`
+	BaseConfigurationItems  []BaseConfigurationItem `json:"baseConfigurationItems,omitempty"`
+	UnprocessedResourceKeys []ResourceKey           `json:"unprocessedResourceKeys,omitempty"`
 }

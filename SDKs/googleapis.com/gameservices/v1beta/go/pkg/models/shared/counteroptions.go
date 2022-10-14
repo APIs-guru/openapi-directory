@@ -1,7 +1,7 @@
 package shared
 
 type CounterOptions struct {
-	CustomFields []CustomField `json:"customFields"`
-	Field        *string       `json:"field"`
-	Metric       *string       `json:"metric"`
+	CustomFields []CustomField `json:"customFields,omitempty"`
+	Field        *string       `json:"field,omitempty"`
+	Metric       *string       `json:"metric,omitempty"`
 }

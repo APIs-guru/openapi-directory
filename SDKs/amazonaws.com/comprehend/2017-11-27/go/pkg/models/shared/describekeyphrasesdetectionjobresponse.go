@@ -1,5 +1,5 @@
 package shared
 
 type DescribeKeyPhrasesDetectionJobResponse struct {
-	KeyPhrasesDetectionJobProperties *KeyPhrasesDetectionJobProperties `json:"KeyPhrasesDetectionJobProperties"`
+	KeyPhrasesDetectionJobProperties *KeyPhrasesDetectionJobProperties `json:"KeyPhrasesDetectionJobProperties,omitempty"`
 }

@@ -6,7 +6,7 @@ type ActionsSetSelectedReposForOrgSecretPathParams struct {
 }
 
 type ActionsSetSelectedReposForOrgSecretRequestBody struct {
-	SelectedRepositoryIds []int64 `json:"selected_repository_ids"`
+	SelectedRepositoryIds []int64 `json:"selected_repository_ids,omitempty"`
 }
 
 type ActionsSetSelectedReposForOrgSecretRequest struct {

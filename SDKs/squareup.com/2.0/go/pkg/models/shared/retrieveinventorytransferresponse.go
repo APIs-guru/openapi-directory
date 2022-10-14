@@ -1,6 +1,6 @@
 package shared
 
 type RetrieveInventoryTransferResponse struct {
-	Errors   []Error            `json:"errors"`
-	Transfer *InventoryTransfer `json:"transfer"`
+	Errors   []Error            `json:"errors,omitempty"`
+	Transfer *InventoryTransfer `json:"transfer,omitempty"`
 }

@@ -8,5 +8,5 @@ const (
 )
 
 type QueryInfo struct {
-	QueryProperty []QueryInfoQueryPropertyEnum `json:"queryProperty"`
+	QueryProperty []QueryInfoQueryPropertyEnum `json:"queryProperty,omitempty"`
 }

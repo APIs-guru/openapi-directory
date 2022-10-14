@@ -19,8 +19,8 @@ type CreateFleetMetricHeaders struct {
 }
 
 type CreateFleetMetricRequestBodyAggregationType struct {
-	Name   *shared.AggregationTypeNameEnum `json:"name"`
-	Values []string                        `json:"values"`
+	Name   *shared.AggregationTypeNameEnum `json:"name,omitempty"`
+	Values []string                        `json:"values,omitempty"`
 }
 
 type CreateFleetMetricRequestBodyUnitEnum string
@@ -58,13 +58,13 @@ const (
 type CreateFleetMetricRequestBody struct {
 	AggregationField string                                      `json:"aggregationField"`
 	AggregationType  CreateFleetMetricRequestBodyAggregationType `json:"aggregationType"`
-	Description      *string                                     `json:"description"`
-	IndexName        *string                                     `json:"indexName"`
+	Description      *string                                     `json:"description,omitempty"`
+	IndexName        *string                                     `json:"indexName,omitempty"`
 	Period           int64                                       `json:"period"`
 	QueryString      string                                      `json:"queryString"`
-	QueryVersion     *string                                     `json:"queryVersion"`
-	Tags             []shared.Tag                                `json:"tags"`
-	Unit             *CreateFleetMetricRequestBodyUnitEnum       `json:"unit"`
+	QueryVersion     *string                                     `json:"queryVersion,omitempty"`
+	Tags             []shared.Tag                                `json:"tags,omitempty"`
+	Unit             *CreateFleetMetricRequestBodyUnitEnum       `json:"unit,omitempty"`
 }
 
 type CreateFleetMetricRequest struct {

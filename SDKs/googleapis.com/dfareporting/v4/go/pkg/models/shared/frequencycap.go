@@ -1,6 +1,6 @@
 package shared
 
 type FrequencyCap struct {
-	Duration    *string `json:"duration"`
-	Impressions *string `json:"impressions"`
+	Duration    *string `json:"duration,omitempty"`
+	Impressions *string `json:"impressions,omitempty"`
 }

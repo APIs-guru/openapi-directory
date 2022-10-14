@@ -9,9 +9,9 @@ type SignRetrieveRequest struct {
 }
 
 type SignRetrieve200ApplicationJSONJwt struct {
-	Exp   *int64  `json:"exp"`
-	Field *string `json:"field"`
-	Sub   *string `json:"sub"`
+	Exp   *int64  `json:"exp,omitempty"`
+	Field *string `json:"field,omitempty"`
+	Sub   *string `json:"sub,omitempty"`
 }
 
 type SignRetrieveResponse struct {

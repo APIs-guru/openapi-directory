@@ -5,7 +5,7 @@ import (
 )
 
 type MetricData struct {
-	MetricName *string    `json:"MetricName"`
-	Timestamp  *time.Time `json:"Timestamp"`
-	Value      *float32   `json:"Value"`
+	MetricName *string    `json:"MetricName,omitempty"`
+	Timestamp  *time.Time `json:"Timestamp,omitempty"`
+	Value      *float32   `json:"Value,omitempty"`
 }

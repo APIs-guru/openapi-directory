@@ -19,10 +19,10 @@ const (
 )
 
 type LintResult struct {
-	DebugMessage       *string                 `json:"debugMessage"`
-	FieldName          *string                 `json:"fieldName"`
-	Level              *LintResultLevelEnum    `json:"level"`
-	LocationOffset     *int32                  `json:"locationOffset"`
-	Severity           *LintResultSeverityEnum `json:"severity"`
-	ValidationUnitName *string                 `json:"validationUnitName"`
+	DebugMessage       *string                 `json:"debugMessage,omitempty"`
+	FieldName          *string                 `json:"fieldName,omitempty"`
+	Level              *LintResultLevelEnum    `json:"level,omitempty"`
+	LocationOffset     *int32                  `json:"locationOffset,omitempty"`
+	Severity           *LintResultSeverityEnum `json:"severity,omitempty"`
+	ValidationUnitName *string                 `json:"validationUnitName,omitempty"`
 }

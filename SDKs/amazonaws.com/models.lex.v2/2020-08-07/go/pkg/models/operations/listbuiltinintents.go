@@ -24,14 +24,14 @@ type ListBuiltInIntentsHeaders struct {
 }
 
 type ListBuiltInIntentsRequestBodySortBy struct {
-	Attribute *shared.BuiltInIntentSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum                  `json:"order"`
+	Attribute *shared.BuiltInIntentSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum                  `json:"order,omitempty"`
 }
 
 type ListBuiltInIntentsRequestBody struct {
-	MaxResults *int64                               `json:"maxResults"`
-	NextToken  *string                              `json:"nextToken"`
-	SortBy     *ListBuiltInIntentsRequestBodySortBy `json:"sortBy"`
+	MaxResults *int64                               `json:"maxResults,omitempty"`
+	NextToken  *string                              `json:"nextToken,omitempty"`
+	SortBy     *ListBuiltInIntentsRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListBuiltInIntentsRequest struct {

@@ -20,12 +20,12 @@ type CreateFunctionDefinitionVersionHeaders struct {
 }
 
 type CreateFunctionDefinitionVersionRequestBodyDefaultConfig struct {
-	Execution *shared.FunctionDefaultExecutionConfig `json:"Execution"`
+	Execution *shared.FunctionDefaultExecutionConfig `json:"Execution,omitempty"`
 }
 
 type CreateFunctionDefinitionVersionRequestBody struct {
-	DefaultConfig *CreateFunctionDefinitionVersionRequestBodyDefaultConfig `json:"DefaultConfig"`
-	Functions     []shared.Function                                        `json:"Functions"`
+	DefaultConfig *CreateFunctionDefinitionVersionRequestBodyDefaultConfig `json:"DefaultConfig,omitempty"`
+	Functions     []shared.Function                                        `json:"Functions,omitempty"`
 }
 
 type CreateFunctionDefinitionVersionRequest struct {

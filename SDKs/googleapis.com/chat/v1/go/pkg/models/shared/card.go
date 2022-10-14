@@ -1,8 +1,8 @@
 package shared
 
 type Card struct {
-	CardActions []CardAction `json:"cardActions"`
-	Header      *CardHeader  `json:"header"`
-	Name        *string      `json:"name"`
-	Sections    []Section    `json:"sections"`
+	CardActions []CardAction `json:"cardActions,omitempty"`
+	Header      *CardHeader  `json:"header,omitempty"`
+	Name        *string      `json:"name,omitempty"`
+	Sections    []Section    `json:"sections,omitempty"`
 }

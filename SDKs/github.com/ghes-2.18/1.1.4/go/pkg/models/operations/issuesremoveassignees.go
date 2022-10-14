@@ -11,7 +11,7 @@ type IssuesRemoveAssigneesPathParams struct {
 }
 
 type IssuesRemoveAssigneesRequestBody struct {
-	Assignees []string `json:"assignees"`
+	Assignees []string `json:"assignees,omitempty"`
 }
 
 type IssuesRemoveAssigneesRequest struct {

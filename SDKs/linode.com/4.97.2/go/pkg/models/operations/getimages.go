@@ -14,14 +14,14 @@ type GetImagesRequest struct {
 }
 
 type GetImages200ApplicationJSON struct {
-	Data    []shared.ImagePublic `json:"data"`
-	Page    *int64               `json:"page"`
-	Pages   *int64               `json:"pages"`
-	Results *int64               `json:"results"`
+	Data    []shared.ImagePublic `json:"data,omitempty"`
+	Page    *int64               `json:"page,omitempty"`
+	Pages   *int64               `json:"pages,omitempty"`
+	Results *int64               `json:"results,omitempty"`
 }
 
 type GetImagesDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetImagesResponse struct {

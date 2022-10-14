@@ -5,9 +5,9 @@ import (
 )
 
 type ContactPoint struct {
-	ContactPointType *ContactPointType `json:"contactPointType"`
-	Content          *string           `json:"content"`
-	Created          *time.Time        `json:"created"`
-	ID               *int64            `json:"id"`
-	LastUpdate       *time.Time        `json:"lastUpdate"`
+	ContactPointType *ContactPointType `json:"contactPointType,omitempty"`
+	Content          *string           `json:"content,omitempty"`
+	Created          *time.Time        `json:"created,omitempty"`
+	ID               *int64            `json:"id,omitempty"`
+	LastUpdate       *time.Time        `json:"lastUpdate,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type FindCredentials struct {
-	Key    *string `json:"key"`
-	Serial *string `json:"serial"`
+	Key    *string `json:"key,omitempty"`
+	Serial *string `json:"serial,omitempty"`
 }

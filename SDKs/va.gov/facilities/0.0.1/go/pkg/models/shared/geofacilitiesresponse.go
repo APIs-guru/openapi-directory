@@ -7,6 +7,6 @@ const (
 )
 
 type GeoFacilitiesResponse struct {
-	Features []GeoFacility                 `json:"features"`
+	Features []GeoFacility                 `json:"features,omitempty"`
 	Type     GeoFacilitiesResponseTypeEnum `json:"type"`
 }

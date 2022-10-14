@@ -1,5 +1,5 @@
 package shared
 
 type TransferLocationRequest struct {
-	DestinationAccount *string `json:"destinationAccount"`
+	DestinationAccount *string `json:"destinationAccount,omitempty"`
 }

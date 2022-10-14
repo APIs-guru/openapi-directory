@@ -19,19 +19,19 @@ const (
 )
 
 type CreateDomainRequestBody struct {
-	AxfrIps     []string                           `json:"axfr_ips"`
-	Description *string                            `json:"description"`
+	AxfrIps     []string                           `json:"axfr_ips,omitempty"`
+	Description *string                            `json:"description,omitempty"`
 	Domain      string                             `json:"domain"`
-	ExpireSec   *int64                             `json:"expire_sec"`
-	Group       *string                            `json:"group"`
-	ID          *int64                             `json:"id"`
-	MasterIps   []string                           `json:"master_ips"`
-	RefreshSec  *int64                             `json:"refresh_sec"`
-	RetrySec    *int64                             `json:"retry_sec"`
-	SoaEmail    *string                            `json:"soa_email"`
-	Status      *CreateDomainRequestBodyStatusEnum `json:"status"`
-	Tags        []string                           `json:"tags"`
-	TTLSec      *int64                             `json:"ttl_sec"`
+	ExpireSec   *int64                             `json:"expire_sec,omitempty"`
+	Group       *string                            `json:"group,omitempty"`
+	ID          *int64                             `json:"id,omitempty"`
+	MasterIps   []string                           `json:"master_ips,omitempty"`
+	RefreshSec  *int64                             `json:"refresh_sec,omitempty"`
+	RetrySec    *int64                             `json:"retry_sec,omitempty"`
+	SoaEmail    *string                            `json:"soa_email,omitempty"`
+	Status      *CreateDomainRequestBodyStatusEnum `json:"status,omitempty"`
+	Tags        []string                           `json:"tags,omitempty"`
+	TTLSec      *int64                             `json:"ttl_sec,omitempty"`
 	Type        CreateDomainRequestBodyTypeEnum    `json:"type"`
 }
 
@@ -54,7 +54,7 @@ type CreateDomainRequest struct {
 }
 
 type CreateDomainDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateDomainResponse struct {

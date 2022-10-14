@@ -20,18 +20,18 @@ const (
 )
 
 type GetShopScriptTags200ApplicationJSONScriptTags struct {
-	AccountID          *string                                                        `json:"account_id"`
-	DisplayScope       *GetShopScriptTags200ApplicationJSONScriptTagsDisplayScopeEnum `json:"display_scope"`
-	ID                 *int64                                                         `json:"id"`
-	Integrity          *string                                                        `json:"integrity"`
-	MakeDate           *int64                                                         `json:"make_date"`
-	OauthApplicationID *int64                                                         `json:"oauth_application_id"`
-	Src                *string                                                        `json:"src"`
-	UpdateDate         *int64                                                         `json:"update_date"`
+	AccountID          *string                                                        `json:"account_id,omitempty"`
+	DisplayScope       *GetShopScriptTags200ApplicationJSONScriptTagsDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID                 *int64                                                         `json:"id,omitempty"`
+	Integrity          *string                                                        `json:"integrity,omitempty"`
+	MakeDate           *int64                                                         `json:"make_date,omitempty"`
+	OauthApplicationID *int64                                                         `json:"oauth_application_id,omitempty"`
+	Src                *string                                                        `json:"src,omitempty"`
+	UpdateDate         *int64                                                         `json:"update_date,omitempty"`
 }
 
 type GetShopScriptTags200ApplicationJSON struct {
-	ScriptTags []GetShopScriptTags200ApplicationJSONScriptTags `json:"script_tags"`
+	ScriptTags []GetShopScriptTags200ApplicationJSONScriptTags `json:"script_tags,omitempty"`
 }
 
 type GetShopScriptTagsResponse struct {

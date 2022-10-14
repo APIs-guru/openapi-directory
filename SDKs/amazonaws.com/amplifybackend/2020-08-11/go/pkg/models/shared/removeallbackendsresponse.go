@@ -1,9 +1,9 @@
 package shared
 
 type RemoveAllBackendsResponse struct {
-	AppID     *string `json:"AppId"`
-	Error     *string `json:"Error"`
-	JobID     *string `json:"JobId"`
-	Operation *string `json:"Operation"`
-	Status    *string `json:"Status"`
+	AppID     *string `json:"AppId,omitempty"`
+	Error     *string `json:"Error,omitempty"`
+	JobID     *string `json:"JobId,omitempty"`
+	Operation *string `json:"Operation,omitempty"`
+	Status    *string `json:"Status,omitempty"`
 }

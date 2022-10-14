@@ -5,7 +5,7 @@ import (
 )
 
 type ThingTypeMetadata struct {
-	CreationDate    *time.Time `json:"creationDate"`
-	Deprecated      *bool      `json:"deprecated"`
-	DeprecationDate *time.Time `json:"deprecationDate"`
+	CreationDate    *time.Time `json:"creationDate,omitempty"`
+	Deprecated      *bool      `json:"deprecated,omitempty"`
+	DeprecationDate *time.Time `json:"deprecationDate,omitempty"`
 }

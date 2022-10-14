@@ -1,7 +1,7 @@
 package shared
 
 type Item struct {
-	ItemID *string `json:"itemId"`
-	Labels []Label `json:"labels"`
-	Price  *Money  `json:"price"`
+	ItemID *string `json:"itemId,omitempty"`
+	Labels []Label `json:"labels,omitempty"`
+	Price  *Money  `json:"price,omitempty"`
 }

@@ -8,6 +8,6 @@ const (
 )
 
 type SortByClause struct {
-	Field *string                `json:"field"`
-	Order *SortByClauseOrderEnum `json:"order"`
+	Field *string                `json:"field,omitempty"`
+	Order *SortByClauseOrderEnum `json:"order,omitempty"`
 }

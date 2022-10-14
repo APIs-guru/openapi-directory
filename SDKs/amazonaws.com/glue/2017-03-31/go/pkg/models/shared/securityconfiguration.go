@@ -5,7 +5,7 @@ import (
 )
 
 type SecurityConfiguration struct {
-	CreatedTimeStamp        *time.Time               `json:"CreatedTimeStamp"`
-	EncryptionConfiguration *EncryptionConfiguration `json:"EncryptionConfiguration"`
-	Name                    *string                  `json:"Name"`
+	CreatedTimeStamp        *time.Time               `json:"CreatedTimeStamp,omitempty"`
+	EncryptionConfiguration *EncryptionConfiguration `json:"EncryptionConfiguration,omitempty"`
+	Name                    *string                  `json:"Name,omitempty"`
 }

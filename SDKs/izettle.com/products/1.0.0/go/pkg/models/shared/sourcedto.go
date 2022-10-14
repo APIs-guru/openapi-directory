@@ -1,6 +1,6 @@
 package shared
 
 type SourceDto struct {
-	External *bool   `json:"external"`
-	Name     *string `json:"name"`
+	External *bool   `json:"external,omitempty"`
+	Name     *string `json:"name,omitempty"`
 }

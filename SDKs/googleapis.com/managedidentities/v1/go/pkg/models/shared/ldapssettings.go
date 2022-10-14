@@ -10,10 +10,10 @@ const (
 )
 
 type LdapsSettings struct {
-	Certificate         *Certificate            `json:"certificate"`
-	CertificatePassword *string                 `json:"certificatePassword"`
-	CertificatePfx      *string                 `json:"certificatePfx"`
-	Name                *string                 `json:"name"`
-	State               *LdapsSettingsStateEnum `json:"state"`
-	UpdateTime          *string                 `json:"updateTime"`
+	Certificate         *Certificate            `json:"certificate,omitempty"`
+	CertificatePassword *string                 `json:"certificatePassword,omitempty"`
+	CertificatePfx      *string                 `json:"certificatePfx,omitempty"`
+	Name                *string                 `json:"name,omitempty"`
+	State               *LdapsSettingsStateEnum `json:"state,omitempty"`
+	UpdateTime          *string                 `json:"updateTime,omitempty"`
 }

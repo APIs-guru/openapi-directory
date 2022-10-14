@@ -9,18 +9,18 @@ type AquifersFilesListRequest struct {
 }
 
 type AquifersFilesList200ApplicationJSONPrivate struct {
-	Name *string `json:"name"`
-	URL  *string `json:"url"`
+	Name *string `json:"name,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type AquifersFilesList200ApplicationJSONPublic struct {
-	Name *string `json:"name"`
-	URL  *string `json:"url"`
+	Name *string `json:"name,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type AquifersFilesList200ApplicationJSON struct {
-	Private []AquifersFilesList200ApplicationJSONPrivate `json:"private"`
-	Public  []AquifersFilesList200ApplicationJSONPublic  `json:"public"`
+	Private []AquifersFilesList200ApplicationJSONPrivate `json:"private,omitempty"`
+	Public  []AquifersFilesList200ApplicationJSONPublic  `json:"public,omitempty"`
 }
 
 type AquifersFilesListResponse struct {

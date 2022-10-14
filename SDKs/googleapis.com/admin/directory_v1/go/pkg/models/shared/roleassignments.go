@@ -1,8 +1,8 @@
 package shared
 
 type RoleAssignments struct {
-	Etag          *string          `json:"etag"`
-	Items         []RoleAssignment `json:"items"`
-	Kind          *string          `json:"kind"`
-	NextPageToken *string          `json:"nextPageToken"`
+	Etag          *string          `json:"etag,omitempty"`
+	Items         []RoleAssignment `json:"items,omitempty"`
+	Kind          *string          `json:"kind,omitempty"`
+	NextPageToken *string          `json:"nextPageToken,omitempty"`
 }

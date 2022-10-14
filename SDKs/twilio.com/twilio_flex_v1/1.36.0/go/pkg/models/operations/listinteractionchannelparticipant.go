@@ -29,18 +29,18 @@ type ListInteractionChannelParticipantRequest struct {
 }
 
 type ListInteractionChannelParticipant200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListInteractionChannelParticipant200ApplicationJSONListInteractionChannelParticipantResponse struct {
-	Meta         *ListInteractionChannelParticipant200ApplicationJSONMeta                  `json:"meta"`
-	Participants []shared.FlexV1InteractionInteractionChannelInteractionChannelParticipant `json:"participants"`
+	Meta         *ListInteractionChannelParticipant200ApplicationJSONMeta                  `json:"meta,omitempty"`
+	Participants []shared.FlexV1InteractionInteractionChannelInteractionChannelParticipant `json:"participants,omitempty"`
 }
 
 type ListInteractionChannelParticipantResponse struct {

@@ -8,6 +8,6 @@ const (
 )
 
 type CodeScanningSarifsStatus struct {
-	AnalysesURL      *string                                       `json:"analyses_url"`
-	ProcessingStatus *CodeScanningSarifsStatusProcessingStatusEnum `json:"processing_status"`
+	AnalysesURL      *string                                       `json:"analyses_url,omitempty"`
+	ProcessingStatus *CodeScanningSarifsStatusProcessingStatusEnum `json:"processing_status,omitempty"`
 }

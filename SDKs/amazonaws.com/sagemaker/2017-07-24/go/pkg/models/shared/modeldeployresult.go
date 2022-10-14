@@ -1,5 +1,5 @@
 package shared
 
 type ModelDeployResult struct {
-	EndpointName *string `json:"EndpointName"`
+	EndpointName *string `json:"EndpointName,omitempty"`
 }

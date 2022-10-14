@@ -9,9 +9,9 @@ const (
 )
 
 type Folder struct {
-	CreateTime     *string                   `json:"createTime"`
-	DisplayName    *string                   `json:"displayName"`
-	LifecycleState *FolderLifecycleStateEnum `json:"lifecycleState"`
-	Name           *string                   `json:"name"`
-	Parent         *string                   `json:"parent"`
+	CreateTime     *string                   `json:"createTime,omitempty"`
+	DisplayName    *string                   `json:"displayName,omitempty"`
+	LifecycleState *FolderLifecycleStateEnum `json:"lifecycleState,omitempty"`
+	Name           *string                   `json:"name,omitempty"`
+	Parent         *string                   `json:"parent,omitempty"`
 }

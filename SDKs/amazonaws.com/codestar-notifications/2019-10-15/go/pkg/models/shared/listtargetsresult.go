@@ -1,6 +1,6 @@
 package shared
 
 type ListTargetsResult struct {
-	NextToken *string         `json:"NextToken"`
-	Targets   []TargetSummary `json:"Targets"`
+	NextToken *string         `json:"NextToken,omitempty"`
+	Targets   []TargetSummary `json:"Targets,omitempty"`
 }

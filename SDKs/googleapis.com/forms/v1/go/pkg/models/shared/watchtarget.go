@@ -1,5 +1,5 @@
 package shared
 
 type WatchTarget struct {
-	Topic *CloudPubsubTopic `json:"topic"`
+	Topic *CloudPubsubTopic `json:"topic,omitempty"`
 }

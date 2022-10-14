@@ -1,8 +1,8 @@
 package shared
 
 type AnalyzeDocumentResponse struct {
-	AnalyzeDocumentModelVersion *string                    `json:"AnalyzeDocumentModelVersion"`
-	Blocks                      []Block                    `json:"Blocks"`
-	DocumentMetadata            *DocumentMetadata          `json:"DocumentMetadata"`
-	HumanLoopActivationOutput   *HumanLoopActivationOutput `json:"HumanLoopActivationOutput"`
+	AnalyzeDocumentModelVersion *string                    `json:"AnalyzeDocumentModelVersion,omitempty"`
+	Blocks                      []Block                    `json:"Blocks,omitempty"`
+	DocumentMetadata            *DocumentMetadata          `json:"DocumentMetadata,omitempty"`
+	HumanLoopActivationOutput   *HumanLoopActivationOutput `json:"HumanLoopActivationOutput,omitempty"`
 }

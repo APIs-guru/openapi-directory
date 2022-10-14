@@ -1,7 +1,7 @@
 package shared
 
 type Review struct {
-	AuthorName *string   `json:"authorName"`
-	Comments   []Comment `json:"comments"`
-	ReviewID   *string   `json:"reviewId"`
+	AuthorName *string   `json:"authorName,omitempty"`
+	Comments   []Comment `json:"comments,omitempty"`
+	ReviewID   *string   `json:"reviewId,omitempty"`
 }

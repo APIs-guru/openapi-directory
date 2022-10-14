@@ -10,11 +10,11 @@ type ObCurrencyExchange5InstructedAmount struct {
 }
 
 type ObCurrencyExchange5 struct {
-	ContractIdentification *string                              `json:"ContractIdentification"`
+	ContractIdentification *string                              `json:"ContractIdentification,omitempty"`
 	ExchangeRate           float64                              `json:"ExchangeRate"`
-	InstructedAmount       *ObCurrencyExchange5InstructedAmount `json:"InstructedAmount"`
-	QuotationDate          *time.Time                           `json:"QuotationDate"`
+	InstructedAmount       *ObCurrencyExchange5InstructedAmount `json:"InstructedAmount,omitempty"`
+	QuotationDate          *time.Time                           `json:"QuotationDate,omitempty"`
 	SourceCurrency         string                               `json:"SourceCurrency"`
-	TargetCurrency         *string                              `json:"TargetCurrency"`
-	UnitCurrency           *string                              `json:"UnitCurrency"`
+	TargetCurrency         *string                              `json:"TargetCurrency,omitempty"`
+	UnitCurrency           *string                              `json:"UnitCurrency,omitempty"`
 }

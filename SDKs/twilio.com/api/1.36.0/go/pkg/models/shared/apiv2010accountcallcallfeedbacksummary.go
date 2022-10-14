@@ -5,18 +5,18 @@ import (
 )
 
 type APIV2010AccountCallCallFeedbackSummary struct {
-	AccountSid                    *string                            `json:"account_sid"`
-	CallCount                     *int64                             `json:"call_count"`
-	CallFeedbackCount             *int64                             `json:"call_feedback_count"`
-	DateCreated                   *string                            `json:"date_created"`
-	DateUpdated                   *string                            `json:"date_updated"`
-	EndDate                       *time.Time                         `json:"end_date"`
-	IncludeSubaccounts            *bool                              `json:"include_subaccounts"`
-	Issues                        []interface{}                      `json:"issues"`
-	QualityScoreAverage           *float64                           `json:"quality_score_average"`
-	QualityScoreMedian            *float64                           `json:"quality_score_median"`
-	QualityScoreStandardDeviation *float64                           `json:"quality_score_standard_deviation"`
-	Sid                           *string                            `json:"sid"`
-	StartDate                     *time.Time                         `json:"start_date"`
-	Status                        *CallFeedbackSummaryEnumStatusEnum `json:"status"`
+	AccountSid                    *string                            `json:"account_sid,omitempty"`
+	CallCount                     *int64                             `json:"call_count,omitempty"`
+	CallFeedbackCount             *int64                             `json:"call_feedback_count,omitempty"`
+	DateCreated                   *string                            `json:"date_created,omitempty"`
+	DateUpdated                   *string                            `json:"date_updated,omitempty"`
+	EndDate                       *time.Time                         `json:"end_date,omitempty"`
+	IncludeSubaccounts            *bool                              `json:"include_subaccounts,omitempty"`
+	Issues                        []interface{}                      `json:"issues,omitempty"`
+	QualityScoreAverage           *float64                           `json:"quality_score_average,omitempty"`
+	QualityScoreMedian            *float64                           `json:"quality_score_median,omitempty"`
+	QualityScoreStandardDeviation *float64                           `json:"quality_score_standard_deviation,omitempty"`
+	Sid                           *string                            `json:"sid,omitempty"`
+	StartDate                     *time.Time                         `json:"start_date,omitempty"`
+	Status                        *CallFeedbackSummaryEnumStatusEnum `json:"status,omitempty"`
 }

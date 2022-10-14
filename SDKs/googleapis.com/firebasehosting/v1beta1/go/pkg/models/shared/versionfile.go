@@ -9,7 +9,7 @@ const (
 )
 
 type VersionFile struct {
-	Hash   *string                `json:"hash"`
-	Path   *string                `json:"path"`
-	Status *VersionFileStatusEnum `json:"status"`
+	Hash   *string                `json:"hash,omitempty"`
+	Path   *string                `json:"path,omitempty"`
+	Status *VersionFileStatusEnum `json:"status,omitempty"`
 }

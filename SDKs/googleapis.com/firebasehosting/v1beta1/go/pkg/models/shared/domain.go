@@ -11,10 +11,10 @@ const (
 )
 
 type Domain struct {
-	DomainName     *string             `json:"domainName"`
-	DomainRedirect *DomainRedirect     `json:"domainRedirect"`
-	Provisioning   *DomainProvisioning `json:"provisioning"`
-	Site           *string             `json:"site"`
-	Status         *DomainStatusEnum   `json:"status"`
-	UpdateTime     *string             `json:"updateTime"`
+	DomainName     *string             `json:"domainName,omitempty"`
+	DomainRedirect *DomainRedirect     `json:"domainRedirect,omitempty"`
+	Provisioning   *DomainProvisioning `json:"provisioning,omitempty"`
+	Site           *string             `json:"site,omitempty"`
+	Status         *DomainStatusEnum   `json:"status,omitempty"`
+	UpdateTime     *string             `json:"updateTime,omitempty"`
 }

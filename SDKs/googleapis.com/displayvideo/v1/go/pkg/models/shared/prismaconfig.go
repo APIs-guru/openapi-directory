@@ -13,7 +13,7 @@ const (
 )
 
 type PrismaConfig struct {
-	PrismaCpeCode *PrismaCpeCode              `json:"prismaCpeCode"`
-	PrismaType    *PrismaConfigPrismaTypeEnum `json:"prismaType"`
-	Supplier      *string                     `json:"supplier"`
+	PrismaCpeCode *PrismaCpeCode              `json:"prismaCpeCode,omitempty"`
+	PrismaType    *PrismaConfigPrismaTypeEnum `json:"prismaType,omitempty"`
+	Supplier      *string                     `json:"supplier,omitempty"`
 }

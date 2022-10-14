@@ -51,7 +51,7 @@ const (
 )
 
 type ResultMetadata struct {
-	DataType    *ResultMetadataDataTypeEnum `json:"dataType"`
-	Description *string                     `json:"description"`
-	Name        *string                     `json:"name"`
+	DataType    *ResultMetadataDataTypeEnum `json:"dataType,omitempty"`
+	Description *string                     `json:"description,omitempty"`
+	Name        *string                     `json:"name,omitempty"`
 }

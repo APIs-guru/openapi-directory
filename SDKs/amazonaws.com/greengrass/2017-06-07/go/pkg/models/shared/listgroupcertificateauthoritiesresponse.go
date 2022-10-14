@@ -1,5 +1,5 @@
 package shared
 
 type ListGroupCertificateAuthoritiesResponse struct {
-	GroupCertificateAuthorities []GroupCertificateAuthorityProperties `json:"GroupCertificateAuthorities"`
+	GroupCertificateAuthorities []GroupCertificateAuthorityProperties `json:"GroupCertificateAuthorities,omitempty"`
 }

@@ -5,29 +5,29 @@ import (
 )
 
 type ObWriteInternationalStandingOrder4DataInitiationCreditor struct {
-	Name          *string           `json:"Name"`
-	PostalAddress *ObPostalAddress6 `json:"PostalAddress"`
+	Name          *string           `json:"Name,omitempty"`
+	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
 type ObWriteInternationalStandingOrder4DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalStandingOrder4DataInitiationCreditorAgent struct {
-	Identification *string           `json:"Identification"`
-	Name           *string           `json:"Name"`
-	PostalAddress  *ObPostalAddress6 `json:"PostalAddress"`
-	SchemeName     *string           `json:"SchemeName"`
+	Identification *string           `json:"Identification,omitempty"`
+	Name           *string           `json:"Name,omitempty"`
+	PostalAddress  *ObPostalAddress6 `json:"PostalAddress,omitempty"`
+	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
 type ObWriteInternationalStandingOrder4DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalStandingOrder4DataInitiationInstructedAmount struct {
@@ -36,22 +36,22 @@ type ObWriteInternationalStandingOrder4DataInitiationInstructedAmount struct {
 }
 
 type ObWriteInternationalStandingOrder4DataInitiation struct {
-	ChargeBearer           *ObChargeBearerType1CodeEnum                                     `json:"ChargeBearer"`
-	Creditor               *ObWriteInternationalStandingOrder4DataInitiationCreditor        `json:"Creditor"`
+	ChargeBearer           *ObChargeBearerType1CodeEnum                                     `json:"ChargeBearer,omitempty"`
+	Creditor               *ObWriteInternationalStandingOrder4DataInitiationCreditor        `json:"Creditor,omitempty"`
 	CreditorAccount        ObWriteInternationalStandingOrder4DataInitiationCreditorAccount  `json:"CreditorAccount"`
-	CreditorAgent          *ObWriteInternationalStandingOrder4DataInitiationCreditorAgent   `json:"CreditorAgent"`
+	CreditorAgent          *ObWriteInternationalStandingOrder4DataInitiationCreditorAgent   `json:"CreditorAgent,omitempty"`
 	CurrencyOfTransfer     string                                                           `json:"CurrencyOfTransfer"`
-	DebtorAccount          *ObWriteInternationalStandingOrder4DataInitiationDebtorAccount   `json:"DebtorAccount"`
-	DestinationCountryCode *string                                                          `json:"DestinationCountryCode"`
-	ExtendedPurpose        *string                                                          `json:"ExtendedPurpose"`
-	FinalPaymentDateTime   *time.Time                                                       `json:"FinalPaymentDateTime"`
+	DebtorAccount          *ObWriteInternationalStandingOrder4DataInitiationDebtorAccount   `json:"DebtorAccount,omitempty"`
+	DestinationCountryCode *string                                                          `json:"DestinationCountryCode,omitempty"`
+	ExtendedPurpose        *string                                                          `json:"ExtendedPurpose,omitempty"`
+	FinalPaymentDateTime   *time.Time                                                       `json:"FinalPaymentDateTime,omitempty"`
 	FirstPaymentDateTime   time.Time                                                        `json:"FirstPaymentDateTime"`
 	Frequency              string                                                           `json:"Frequency"`
 	InstructedAmount       ObWriteInternationalStandingOrder4DataInitiationInstructedAmount `json:"InstructedAmount"`
-	NumberOfPayments       *string                                                          `json:"NumberOfPayments"`
-	Purpose                *string                                                          `json:"Purpose"`
-	Reference              *string                                                          `json:"Reference"`
-	SupplementaryData      map[string]interface{}                                           `json:"SupplementaryData"`
+	NumberOfPayments       *string                                                          `json:"NumberOfPayments,omitempty"`
+	Purpose                *string                                                          `json:"Purpose,omitempty"`
+	Reference              *string                                                          `json:"Reference,omitempty"`
+	SupplementaryData      map[string]interface{}                                           `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteInternationalStandingOrder4Data struct {

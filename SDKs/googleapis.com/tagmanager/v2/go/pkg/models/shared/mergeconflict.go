@@ -1,6 +1,6 @@
 package shared
 
 type MergeConflict struct {
-	EntityInBaseVersion *Entity `json:"entityInBaseVersion"`
-	EntityInWorkspace   *Entity `json:"entityInWorkspace"`
+	EntityInBaseVersion *Entity `json:"entityInBaseVersion,omitempty"`
+	EntityInWorkspace   *Entity `json:"entityInWorkspace,omitempty"`
 }

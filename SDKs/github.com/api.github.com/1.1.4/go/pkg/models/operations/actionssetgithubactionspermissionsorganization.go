@@ -9,7 +9,7 @@ type ActionsSetGithubActionsPermissionsOrganizationPathParams struct {
 }
 
 type ActionsSetGithubActionsPermissionsOrganizationRequestBody struct {
-	AllowedActions      *shared.AllowedActionsEnum     `json:"allowed_actions"`
+	AllowedActions      *shared.AllowedActionsEnum     `json:"allowed_actions,omitempty"`
 	EnabledRepositories shared.EnabledRepositoriesEnum `json:"enabled_repositories"`
 }
 

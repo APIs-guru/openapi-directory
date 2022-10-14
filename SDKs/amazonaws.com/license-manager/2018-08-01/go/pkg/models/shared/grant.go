@@ -9,6 +9,6 @@ type Grant struct {
 	HomeRegion          string                 `json:"HomeRegion"`
 	LicenseArn          string                 `json:"LicenseArn"`
 	ParentArn           string                 `json:"ParentArn"`
-	StatusReason        *string                `json:"StatusReason"`
+	StatusReason        *string                `json:"StatusReason,omitempty"`
 	Version             string                 `json:"Version"`
 }

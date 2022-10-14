@@ -9,12 +9,12 @@ type EnterpriseAdminUpdatePreReceiveHookPathParams struct {
 }
 
 type EnterpriseAdminUpdatePreReceiveHookRequestBody struct {
-	AllowDownstreamConfiguration *bool                  `json:"allow_downstream_configuration"`
-	Enforcement                  *string                `json:"enforcement"`
-	Environment                  map[string]interface{} `json:"environment"`
-	Name                         *string                `json:"name"`
-	Script                       *string                `json:"script"`
-	ScriptRepository             map[string]interface{} `json:"script_repository"`
+	AllowDownstreamConfiguration *bool                  `json:"allow_downstream_configuration,omitempty"`
+	Enforcement                  *string                `json:"enforcement,omitempty"`
+	Environment                  map[string]interface{} `json:"environment,omitempty"`
+	Name                         *string                `json:"name,omitempty"`
+	Script                       *string                `json:"script,omitempty"`
+	ScriptRepository             map[string]interface{} `json:"script_repository,omitempty"`
 }
 
 type EnterpriseAdminUpdatePreReceiveHookRequest struct {

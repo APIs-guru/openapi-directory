@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaSuspensionApprovalConfig struct {
-	CustomMessage  *string                                                     `json:"customMessage"`
-	EmailAddresses []string                                                    `json:"emailAddresses"`
-	Expiration     *GoogleCloudIntegrationsV1alphaSuspensionApprovalExpiration `json:"expiration"`
+	CustomMessage  *string                                                     `json:"customMessage,omitempty"`
+	EmailAddresses []string                                                    `json:"emailAddresses,omitempty"`
+	Expiration     *GoogleCloudIntegrationsV1alphaSuspensionApprovalExpiration `json:"expiration,omitempty"`
 }

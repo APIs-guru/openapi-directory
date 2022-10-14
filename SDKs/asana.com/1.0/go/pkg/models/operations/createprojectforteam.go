@@ -14,7 +14,7 @@ type CreateProjectForTeamQueryParams struct {
 }
 
 type CreateProjectForTeamRequestBody struct {
-	Data *shared.ProjectRequest `json:"data"`
+	Data *shared.ProjectRequest `json:"data,omitempty"`
 }
 
 type CreateProjectForTeamRequest struct {
@@ -24,7 +24,7 @@ type CreateProjectForTeamRequest struct {
 }
 
 type CreateProjectForTeam201ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data"`
+	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type CreateProjectForTeamResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type RelationshipInterest struct {
-	FormattedValue *string        `json:"formattedValue"`
-	Metadata       *FieldMetadata `json:"metadata"`
-	Value          *string        `json:"value"`
+	FormattedValue *string        `json:"formattedValue,omitempty"`
+	Metadata       *FieldMetadata `json:"metadata,omitempty"`
+	Value          *string        `json:"value,omitempty"`
 }

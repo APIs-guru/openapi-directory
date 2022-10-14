@@ -1,6 +1,6 @@
 package shared
 
 type SearchHintResult struct {
-	SearchHints      []SearchHint `json:"SearchHints"`
-	TotalRecordCount *int32       `json:"TotalRecordCount"`
+	SearchHints      []SearchHint `json:"SearchHints,omitempty"`
+	TotalRecordCount *int32       `json:"TotalRecordCount,omitempty"`
 }

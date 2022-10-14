@@ -32,12 +32,12 @@ const (
 type UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies struct {
 	DevicePolicy  UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDevicePolicyEnum `json:"devicePolicy"`
 	DeviceType    UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDeviceTypeEnum   `json:"deviceType"`
-	GroupPolicyID *int64                                                                                        `json:"groupPolicyId"`
+	GroupPolicyID *int64                                                                                        `json:"groupPolicyId,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBody struct {
-	DeviceTypePolicies []UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies `json:"deviceTypePolicies"`
-	Enabled            *bool                                                                           `json:"enabled"`
+	DeviceTypePolicies []UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies `json:"deviceTypePolicies,omitempty"`
+	Enabled            *bool                                                                           `json:"enabled,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequest struct {

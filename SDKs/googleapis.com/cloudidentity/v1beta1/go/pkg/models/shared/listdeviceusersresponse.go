@@ -1,6 +1,6 @@
 package shared
 
 type ListDeviceUsersResponse struct {
-	DeviceUsers   []DeviceUser `json:"deviceUsers"`
-	NextPageToken *string      `json:"nextPageToken"`
+	DeviceUsers   []DeviceUser `json:"deviceUsers,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

@@ -12,30 +12,30 @@ type AppAPIWmmEndpointsWmmMagneticFieldRequest struct {
 }
 
 type AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONDeclination struct {
-	Units *string  `json:"units"`
-	Value *float64 `json:"value"`
+	Units *string  `json:"units,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONGridVariation struct {
-	Units *string  `json:"units"`
-	Value *float64 `json:"value"`
+	Units *string  `json:"units,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONInclination struct {
-	Units *string  `json:"units"`
-	Value *float64 `json:"value"`
+	Units *string  `json:"units,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONTotalIntensity struct {
-	Units *string  `json:"units"`
-	Value *float64 `json:"value"`
+	Units *string  `json:"units,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type AppAPIWmmEndpointsWmmMagneticField200ApplicationJSON struct {
-	Declination    *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONDeclination    `json:"declination"`
-	GridVariation  *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONGridVariation  `json:"grid_variation"`
-	Inclination    *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONInclination    `json:"inclination"`
-	TotalIntensity *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONTotalIntensity `json:"total_intensity"`
+	Declination    *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONDeclination    `json:"declination,omitempty"`
+	GridVariation  *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONGridVariation  `json:"grid_variation,omitempty"`
+	Inclination    *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONInclination    `json:"inclination,omitempty"`
+	TotalIntensity *AppAPIWmmEndpointsWmmMagneticField200ApplicationJSONTotalIntensity `json:"total_intensity,omitempty"`
 }
 
 type AppAPIWmmEndpointsWmmMagneticFieldResponse struct {

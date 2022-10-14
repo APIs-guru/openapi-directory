@@ -1,9 +1,9 @@
 package shared
 
 type LensUpgradeSummary struct {
-	CurrentLensVersion *string `json:"CurrentLensVersion"`
-	LatestLensVersion  *string `json:"LatestLensVersion"`
-	LensAlias          *string `json:"LensAlias"`
-	WorkloadID         *string `json:"WorkloadId"`
-	WorkloadName       *string `json:"WorkloadName"`
+	CurrentLensVersion *string `json:"CurrentLensVersion,omitempty"`
+	LatestLensVersion  *string `json:"LatestLensVersion,omitempty"`
+	LensAlias          *string `json:"LensAlias,omitempty"`
+	WorkloadID         *string `json:"WorkloadId,omitempty"`
+	WorkloadName       *string `json:"WorkloadName,omitempty"`
 }

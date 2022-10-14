@@ -26,21 +26,21 @@ const (
 )
 
 type LiveChatMessageSnippet struct {
-	AuthorChannelID               *string                                `json:"authorChannelId"`
-	DisplayMessage                *string                                `json:"displayMessage"`
-	FanFundingEventDetails        *LiveChatFanFundingEventDetails        `json:"fanFundingEventDetails"`
-	GiftMembershipReceivedDetails *LiveChatGiftMembershipReceivedDetails `json:"giftMembershipReceivedDetails"`
-	HasDisplayContent             *bool                                  `json:"hasDisplayContent"`
-	LiveChatID                    *string                                `json:"liveChatId"`
-	MemberMilestoneChatDetails    *LiveChatMemberMilestoneChatDetails    `json:"memberMilestoneChatDetails"`
-	MembershipGiftingDetails      *LiveChatMembershipGiftingDetails      `json:"membershipGiftingDetails"`
-	MessageDeletedDetails         *LiveChatMessageDeletedDetails         `json:"messageDeletedDetails"`
-	MessageRetractedDetails       *LiveChatMessageRetractedDetails       `json:"messageRetractedDetails"`
-	NewSponsorDetails             *LiveChatNewSponsorDetails             `json:"newSponsorDetails"`
-	PublishedAt                   *time.Time                             `json:"publishedAt"`
-	SuperChatDetails              *LiveChatSuperChatDetails              `json:"superChatDetails"`
-	SuperStickerDetails           *LiveChatSuperStickerDetails           `json:"superStickerDetails"`
-	TextMessageDetails            *LiveChatTextMessageDetails            `json:"textMessageDetails"`
-	Type                          *LiveChatMessageSnippetTypeEnum        `json:"type"`
-	UserBannedDetails             *LiveChatUserBannedMessageDetails      `json:"userBannedDetails"`
+	AuthorChannelID               *string                                `json:"authorChannelId,omitempty"`
+	DisplayMessage                *string                                `json:"displayMessage,omitempty"`
+	FanFundingEventDetails        *LiveChatFanFundingEventDetails        `json:"fanFundingEventDetails,omitempty"`
+	GiftMembershipReceivedDetails *LiveChatGiftMembershipReceivedDetails `json:"giftMembershipReceivedDetails,omitempty"`
+	HasDisplayContent             *bool                                  `json:"hasDisplayContent,omitempty"`
+	LiveChatID                    *string                                `json:"liveChatId,omitempty"`
+	MemberMilestoneChatDetails    *LiveChatMemberMilestoneChatDetails    `json:"memberMilestoneChatDetails,omitempty"`
+	MembershipGiftingDetails      *LiveChatMembershipGiftingDetails      `json:"membershipGiftingDetails,omitempty"`
+	MessageDeletedDetails         *LiveChatMessageDeletedDetails         `json:"messageDeletedDetails,omitempty"`
+	MessageRetractedDetails       *LiveChatMessageRetractedDetails       `json:"messageRetractedDetails,omitempty"`
+	NewSponsorDetails             *LiveChatNewSponsorDetails             `json:"newSponsorDetails,omitempty"`
+	PublishedAt                   *time.Time                             `json:"publishedAt,omitempty"`
+	SuperChatDetails              *LiveChatSuperChatDetails              `json:"superChatDetails,omitempty"`
+	SuperStickerDetails           *LiveChatSuperStickerDetails           `json:"superStickerDetails,omitempty"`
+	TextMessageDetails            *LiveChatTextMessageDetails            `json:"textMessageDetails,omitempty"`
+	Type                          *LiveChatMessageSnippetTypeEnum        `json:"type,omitempty"`
+	UserBannedDetails             *LiveChatUserBannedMessageDetails      `json:"userBannedDetails,omitempty"`
 }

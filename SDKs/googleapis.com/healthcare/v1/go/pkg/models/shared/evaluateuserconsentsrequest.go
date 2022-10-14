@@ -9,11 +9,11 @@ const (
 )
 
 type EvaluateUserConsentsRequest struct {
-	ConsentList        *ConsentList                                 `json:"consentList"`
-	PageSize           *int32                                       `json:"pageSize"`
-	PageToken          *string                                      `json:"pageToken"`
-	RequestAttributes  map[string]string                            `json:"requestAttributes"`
-	ResourceAttributes map[string]string                            `json:"resourceAttributes"`
-	ResponseView       *EvaluateUserConsentsRequestResponseViewEnum `json:"responseView"`
-	UserID             *string                                      `json:"userId"`
+	ConsentList        *ConsentList                                 `json:"consentList,omitempty"`
+	PageSize           *int32                                       `json:"pageSize,omitempty"`
+	PageToken          *string                                      `json:"pageToken,omitempty"`
+	RequestAttributes  map[string]string                            `json:"requestAttributes,omitempty"`
+	ResourceAttributes map[string]string                            `json:"resourceAttributes,omitempty"`
+	ResponseView       *EvaluateUserConsentsRequestResponseViewEnum `json:"responseView,omitempty"`
+	UserID             *string                                      `json:"userId,omitempty"`
 }

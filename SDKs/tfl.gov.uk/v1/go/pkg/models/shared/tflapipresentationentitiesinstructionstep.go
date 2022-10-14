@@ -27,17 +27,17 @@ const (
 )
 
 type TflAPIPresentationEntitiesInstructionStep struct {
-	CumulativeDistance      *int32                                                                `json:"cumulativeDistance"`
-	CumulativeTravelTime    *int32                                                                `json:"cumulativeTravelTime"`
-	Description             *string                                                               `json:"description"`
-	DescriptionHeading      *string                                                               `json:"descriptionHeading"`
-	Distance                *int32                                                                `json:"distance"`
-	Latitude                *float64                                                              `json:"latitude"`
-	Longitude               *float64                                                              `json:"longitude"`
-	PathAttribute           *TflAPIPresentationEntitiesPathAttribute                              `json:"pathAttribute"`
-	SkyDirection            *int32                                                                `json:"skyDirection"`
-	SkyDirectionDescription *TflAPIPresentationEntitiesInstructionStepSkyDirectionDescriptionEnum `json:"skyDirectionDescription"`
-	StreetName              *string                                                               `json:"streetName"`
-	TrackType               *TflAPIPresentationEntitiesInstructionStepTrackTypeEnum               `json:"trackType"`
-	TurnDirection           *string                                                               `json:"turnDirection"`
+	CumulativeDistance      *int32                                                                `json:"cumulativeDistance,omitempty"`
+	CumulativeTravelTime    *int32                                                                `json:"cumulativeTravelTime,omitempty"`
+	Description             *string                                                               `json:"description,omitempty"`
+	DescriptionHeading      *string                                                               `json:"descriptionHeading,omitempty"`
+	Distance                *int32                                                                `json:"distance,omitempty"`
+	Latitude                *float64                                                              `json:"latitude,omitempty"`
+	Longitude               *float64                                                              `json:"longitude,omitempty"`
+	PathAttribute           *TflAPIPresentationEntitiesPathAttribute                              `json:"pathAttribute,omitempty"`
+	SkyDirection            *int32                                                                `json:"skyDirection,omitempty"`
+	SkyDirectionDescription *TflAPIPresentationEntitiesInstructionStepSkyDirectionDescriptionEnum `json:"skyDirectionDescription,omitempty"`
+	StreetName              *string                                                               `json:"streetName,omitempty"`
+	TrackType               *TflAPIPresentationEntitiesInstructionStepTrackTypeEnum               `json:"trackType,omitempty"`
+	TurnDirection           *string                                                               `json:"turnDirection,omitempty"`
 }

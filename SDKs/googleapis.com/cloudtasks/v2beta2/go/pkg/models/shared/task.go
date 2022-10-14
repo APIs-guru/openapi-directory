@@ -9,12 +9,12 @@ const (
 )
 
 type Task struct {
-	AppEngineHTTPRequest *AppEngineHTTPRequest `json:"appEngineHttpRequest"`
-	CreateTime           *string               `json:"createTime"`
-	HTTPRequest          *HTTPRequest          `json:"httpRequest"`
-	Name                 *string               `json:"name"`
-	PullMessage          *PullMessage          `json:"pullMessage"`
-	ScheduleTime         *string               `json:"scheduleTime"`
-	Status               *TaskStatus           `json:"status"`
-	View                 *TaskViewEnum         `json:"view"`
+	AppEngineHTTPRequest *AppEngineHTTPRequest `json:"appEngineHttpRequest,omitempty"`
+	CreateTime           *string               `json:"createTime,omitempty"`
+	HTTPRequest          *HTTPRequest          `json:"httpRequest,omitempty"`
+	Name                 *string               `json:"name,omitempty"`
+	PullMessage          *PullMessage          `json:"pullMessage,omitempty"`
+	ScheduleTime         *string               `json:"scheduleTime,omitempty"`
+	Status               *TaskStatus           `json:"status,omitempty"`
+	View                 *TaskViewEnum         `json:"view,omitempty"`
 }

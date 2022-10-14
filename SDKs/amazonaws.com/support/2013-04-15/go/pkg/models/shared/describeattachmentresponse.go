@@ -1,5 +1,5 @@
 package shared
 
 type DescribeAttachmentResponse struct {
-	Attachment *Attachment `json:"attachment"`
+	Attachment *Attachment `json:"attachment,omitempty"`
 }

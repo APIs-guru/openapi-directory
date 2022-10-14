@@ -5,12 +5,12 @@ import (
 )
 
 type DetectorModelVersionSummary struct {
-	CreationTime         *time.Time                      `json:"creationTime"`
-	DetectorModelArn     *string                         `json:"detectorModelArn"`
-	DetectorModelName    *string                         `json:"detectorModelName"`
-	DetectorModelVersion *string                         `json:"detectorModelVersion"`
-	EvaluationMethod     *EvaluationMethodEnum           `json:"evaluationMethod"`
-	LastUpdateTime       *time.Time                      `json:"lastUpdateTime"`
-	RoleArn              *string                         `json:"roleArn"`
-	Status               *DetectorModelVersionStatusEnum `json:"status"`
+	CreationTime         *time.Time                      `json:"creationTime,omitempty"`
+	DetectorModelArn     *string                         `json:"detectorModelArn,omitempty"`
+	DetectorModelName    *string                         `json:"detectorModelName,omitempty"`
+	DetectorModelVersion *string                         `json:"detectorModelVersion,omitempty"`
+	EvaluationMethod     *EvaluationMethodEnum           `json:"evaluationMethod,omitempty"`
+	LastUpdateTime       *time.Time                      `json:"lastUpdateTime,omitempty"`
+	RoleArn              *string                         `json:"roleArn,omitempty"`
+	Status               *DetectorModelVersionStatusEnum `json:"status,omitempty"`
 }

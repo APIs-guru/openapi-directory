@@ -10,13 +10,13 @@ const (
 )
 
 type IosModel struct {
-	DeviceCapabilities  []string                `json:"deviceCapabilities"`
-	FormFactor          *IosModelFormFactorEnum `json:"formFactor"`
-	ID                  *string                 `json:"id"`
-	Name                *string                 `json:"name"`
-	ScreenDensity       *int32                  `json:"screenDensity"`
-	ScreenX             *int32                  `json:"screenX"`
-	ScreenY             *int32                  `json:"screenY"`
-	SupportedVersionIds []string                `json:"supportedVersionIds"`
-	Tags                []string                `json:"tags"`
+	DeviceCapabilities  []string                `json:"deviceCapabilities,omitempty"`
+	FormFactor          *IosModelFormFactorEnum `json:"formFactor,omitempty"`
+	ID                  *string                 `json:"id,omitempty"`
+	Name                *string                 `json:"name,omitempty"`
+	ScreenDensity       *int32                  `json:"screenDensity,omitempty"`
+	ScreenX             *int32                  `json:"screenX,omitempty"`
+	ScreenY             *int32                  `json:"screenY,omitempty"`
+	SupportedVersionIds []string                `json:"supportedVersionIds,omitempty"`
+	Tags                []string                `json:"tags,omitempty"`
 }

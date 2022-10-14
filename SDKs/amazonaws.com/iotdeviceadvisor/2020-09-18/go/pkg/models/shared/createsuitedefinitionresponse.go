@@ -5,8 +5,8 @@ import (
 )
 
 type CreateSuiteDefinitionResponse struct {
-	CreatedAt           *time.Time `json:"createdAt"`
-	SuiteDefinitionArn  *string    `json:"suiteDefinitionArn"`
-	SuiteDefinitionID   *string    `json:"suiteDefinitionId"`
-	SuiteDefinitionName *string    `json:"suiteDefinitionName"`
+	CreatedAt           *time.Time `json:"createdAt,omitempty"`
+	SuiteDefinitionArn  *string    `json:"suiteDefinitionArn,omitempty"`
+	SuiteDefinitionID   *string    `json:"suiteDefinitionId,omitempty"`
+	SuiteDefinitionName *string    `json:"suiteDefinitionName,omitempty"`
 }

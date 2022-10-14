@@ -8,9 +8,9 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequest struct {
-	IntentBatchInline *GoogleCloudDialogflowV2beta1IntentBatch                             `json:"intentBatchInline"`
-	IntentBatchURI    *string                                                              `json:"intentBatchUri"`
-	IntentView        *GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequestIntentViewEnum `json:"intentView"`
-	LanguageCode      *string                                                              `json:"languageCode"`
-	UpdateMask        *string                                                              `json:"updateMask"`
+	IntentBatchInline *GoogleCloudDialogflowV2beta1IntentBatch                             `json:"intentBatchInline,omitempty"`
+	IntentBatchURI    *string                                                              `json:"intentBatchUri,omitempty"`
+	IntentView        *GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequestIntentViewEnum `json:"intentView,omitempty"`
+	LanguageCode      *string                                                              `json:"languageCode,omitempty"`
+	UpdateMask        *string                                                              `json:"updateMask,omitempty"`
 }

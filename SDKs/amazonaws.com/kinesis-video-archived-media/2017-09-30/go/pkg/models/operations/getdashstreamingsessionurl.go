@@ -15,8 +15,8 @@ type GetDashStreamingSessionURLHeaders struct {
 }
 
 type GetDashStreamingSessionURLRequestBodyDashFragmentSelector struct {
-	FragmentSelectorType *shared.DashFragmentSelectorTypeEnum `json:"FragmentSelectorType"`
-	TimestampRange       *shared.DashTimestampRange           `json:"TimestampRange"`
+	FragmentSelectorType *shared.DashFragmentSelectorTypeEnum `json:"FragmentSelectorType,omitempty"`
+	TimestampRange       *shared.DashTimestampRange           `json:"TimestampRange,omitempty"`
 }
 
 type GetDashStreamingSessionURLRequestBodyDisplayFragmentNumberEnum string
@@ -42,14 +42,14 @@ const (
 )
 
 type GetDashStreamingSessionURLRequestBody struct {
-	DashFragmentSelector       *GetDashStreamingSessionURLRequestBodyDashFragmentSelector         `json:"DASHFragmentSelector"`
-	DisplayFragmentNumber      *GetDashStreamingSessionURLRequestBodyDisplayFragmentNumberEnum    `json:"DisplayFragmentNumber"`
-	DisplayFragmentTimestamp   *GetDashStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum `json:"DisplayFragmentTimestamp"`
-	Expires                    *int64                                                             `json:"Expires"`
-	MaxManifestFragmentResults *int64                                                             `json:"MaxManifestFragmentResults"`
-	PlaybackMode               *GetDashStreamingSessionURLRequestBodyPlaybackModeEnum             `json:"PlaybackMode"`
-	StreamArn                  *string                                                            `json:"StreamARN"`
-	StreamName                 *string                                                            `json:"StreamName"`
+	DashFragmentSelector       *GetDashStreamingSessionURLRequestBodyDashFragmentSelector         `json:"DASHFragmentSelector,omitempty"`
+	DisplayFragmentNumber      *GetDashStreamingSessionURLRequestBodyDisplayFragmentNumberEnum    `json:"DisplayFragmentNumber,omitempty"`
+	DisplayFragmentTimestamp   *GetDashStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum `json:"DisplayFragmentTimestamp,omitempty"`
+	Expires                    *int64                                                             `json:"Expires,omitempty"`
+	MaxManifestFragmentResults *int64                                                             `json:"MaxManifestFragmentResults,omitempty"`
+	PlaybackMode               *GetDashStreamingSessionURLRequestBodyPlaybackModeEnum             `json:"PlaybackMode,omitempty"`
+	StreamArn                  *string                                                            `json:"StreamARN,omitempty"`
+	StreamName                 *string                                                            `json:"StreamName,omitempty"`
 }
 
 type GetDashStreamingSessionURLRequest struct {

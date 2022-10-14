@@ -15,7 +15,7 @@ type DescribeFeedbackHeaders struct {
 }
 
 type DescribeFeedbackRequestBody struct {
-	InsightID *string `json:"InsightId"`
+	InsightID *string `json:"InsightId,omitempty"`
 }
 
 type DescribeFeedbackRequest struct {

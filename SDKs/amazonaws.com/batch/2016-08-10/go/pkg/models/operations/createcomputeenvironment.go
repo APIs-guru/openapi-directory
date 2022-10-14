@@ -15,23 +15,23 @@ type CreateComputeEnvironmentHeaders struct {
 }
 
 type CreateComputeEnvironmentRequestBodyComputeResources struct {
-	AllocationStrategy *shared.CrAllocationStrategyEnum    `json:"allocationStrategy"`
-	BidPercentage      *int64                              `json:"bidPercentage"`
-	DesiredvCpus       *int64                              `json:"desiredvCpus"`
-	Ec2Configuration   []shared.Ec2Configuration           `json:"ec2Configuration"`
-	Ec2KeyPair         *string                             `json:"ec2KeyPair"`
-	ImageID            *string                             `json:"imageId"`
-	InstanceRole       *string                             `json:"instanceRole"`
-	InstanceTypes      []string                            `json:"instanceTypes"`
-	LaunchTemplate     *shared.LaunchTemplateSpecification `json:"launchTemplate"`
-	MaxvCpus           *int64                              `json:"maxvCpus"`
-	MinvCpus           *int64                              `json:"minvCpus"`
-	PlacementGroup     *string                             `json:"placementGroup"`
-	SecurityGroupIds   []string                            `json:"securityGroupIds"`
-	SpotIamFleetRole   *string                             `json:"spotIamFleetRole"`
-	Subnets            []string                            `json:"subnets"`
-	Tags               map[string]string                   `json:"tags"`
-	Type               *shared.CrTypeEnum                  `json:"type"`
+	AllocationStrategy *shared.CrAllocationStrategyEnum    `json:"allocationStrategy,omitempty"`
+	BidPercentage      *int64                              `json:"bidPercentage,omitempty"`
+	DesiredvCpus       *int64                              `json:"desiredvCpus,omitempty"`
+	Ec2Configuration   []shared.Ec2Configuration           `json:"ec2Configuration,omitempty"`
+	Ec2KeyPair         *string                             `json:"ec2KeyPair,omitempty"`
+	ImageID            *string                             `json:"imageId,omitempty"`
+	InstanceRole       *string                             `json:"instanceRole,omitempty"`
+	InstanceTypes      []string                            `json:"instanceTypes,omitempty"`
+	LaunchTemplate     *shared.LaunchTemplateSpecification `json:"launchTemplate,omitempty"`
+	MaxvCpus           *int64                              `json:"maxvCpus,omitempty"`
+	MinvCpus           *int64                              `json:"minvCpus,omitempty"`
+	PlacementGroup     *string                             `json:"placementGroup,omitempty"`
+	SecurityGroupIds   []string                            `json:"securityGroupIds,omitempty"`
+	SpotIamFleetRole   *string                             `json:"spotIamFleetRole,omitempty"`
+	Subnets            []string                            `json:"subnets,omitempty"`
+	Tags               map[string]string                   `json:"tags,omitempty"`
+	Type               *shared.CrTypeEnum                  `json:"type,omitempty"`
 }
 
 type CreateComputeEnvironmentRequestBodyStateEnum string
@@ -50,10 +50,10 @@ const (
 
 type CreateComputeEnvironmentRequestBody struct {
 	ComputeEnvironmentName string                                               `json:"computeEnvironmentName"`
-	ComputeResources       *CreateComputeEnvironmentRequestBodyComputeResources `json:"computeResources"`
-	ServiceRole            *string                                              `json:"serviceRole"`
-	State                  *CreateComputeEnvironmentRequestBodyStateEnum        `json:"state"`
-	Tags                   map[string]string                                    `json:"tags"`
+	ComputeResources       *CreateComputeEnvironmentRequestBodyComputeResources `json:"computeResources,omitempty"`
+	ServiceRole            *string                                              `json:"serviceRole,omitempty"`
+	State                  *CreateComputeEnvironmentRequestBodyStateEnum        `json:"state,omitempty"`
+	Tags                   map[string]string                                    `json:"tags,omitempty"`
 	Type                   CreateComputeEnvironmentRequestBodyTypeEnum          `json:"type"`
 }
 

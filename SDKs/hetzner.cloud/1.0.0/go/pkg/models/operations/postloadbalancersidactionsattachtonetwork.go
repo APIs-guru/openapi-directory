@@ -5,7 +5,7 @@ type PostLoadBalancersIDActionsAttachToNetworkPathParams struct {
 }
 
 type PostLoadBalancersIDActionsAttachToNetworkRequestBody struct {
-	IP      *string `json:"ip"`
+	IP      *string `json:"ip,omitempty"`
 	Network float64 `json:"network"`
 }
 

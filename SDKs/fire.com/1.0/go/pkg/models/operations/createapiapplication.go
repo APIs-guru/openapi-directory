@@ -5,13 +5,13 @@ import (
 )
 
 type CreateAPIApplicationRequestBodyNewAPIApplication struct {
-	ApplicationName                  *string    `json:"applicationName"`
-	Enabled                          *bool      `json:"enabled"`
-	Expiry                           *time.Time `json:"expiry"`
-	Ican                             *int64     `json:"ican"`
-	NumberOfPayeeApprovalsRequired   *int64     `json:"numberOfPayeeApprovalsRequired"`
-	NumberOfPaymentApprovalsRequired *int64     `json:"numberOfPaymentApprovalsRequired"`
-	Permissions                      []string   `json:"permissions"`
+	ApplicationName                  *string    `json:"applicationName,omitempty"`
+	Enabled                          *bool      `json:"enabled,omitempty"`
+	Expiry                           *time.Time `json:"expiry,omitempty"`
+	Ican                             *int64     `json:"ican,omitempty"`
+	NumberOfPayeeApprovalsRequired   *int64     `json:"numberOfPayeeApprovalsRequired,omitempty"`
+	NumberOfPaymentApprovalsRequired *int64     `json:"numberOfPaymentApprovalsRequired,omitempty"`
+	Permissions                      []string   `json:"permissions,omitempty"`
 }
 
 type CreateAPIApplicationRequest struct {
@@ -19,15 +19,15 @@ type CreateAPIApplicationRequest struct {
 }
 
 type CreateAPIApplication200ApplicationJSONAPIApplication struct {
-	ApplicationID                    *int64     `json:"applicationId"`
-	ClientID                         *string    `json:"clientId"`
-	ClientKey                        *string    `json:"clientKey"`
-	Enabled                          *bool      `json:"enabled"`
-	Expiry                           *time.Time `json:"expiry"`
-	Ican                             *int64     `json:"ican"`
-	NumberOfPayeeApprovalsRequired   *int64     `json:"numberOfPayeeApprovalsRequired"`
-	NumberOfPaymentApprovalsRequired *int64     `json:"numberOfPaymentApprovalsRequired"`
-	RefreshToken                     *string    `json:"refreshToken"`
+	ApplicationID                    *int64     `json:"applicationId,omitempty"`
+	ClientID                         *string    `json:"clientId,omitempty"`
+	ClientKey                        *string    `json:"clientKey,omitempty"`
+	Enabled                          *bool      `json:"enabled,omitempty"`
+	Expiry                           *time.Time `json:"expiry,omitempty"`
+	Ican                             *int64     `json:"ican,omitempty"`
+	NumberOfPayeeApprovalsRequired   *int64     `json:"numberOfPayeeApprovalsRequired,omitempty"`
+	NumberOfPaymentApprovalsRequired *int64     `json:"numberOfPaymentApprovalsRequired,omitempty"`
+	RefreshToken                     *string    `json:"refreshToken,omitempty"`
 }
 
 type CreateAPIApplicationResponse struct {

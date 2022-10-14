@@ -1,8 +1,8 @@
 package shared
 
 type EditAtom struct {
-	EndTimeOffset   *string  `json:"endTimeOffset"`
-	Inputs          []string `json:"inputs"`
-	Key             *string  `json:"key"`
-	StartTimeOffset *string  `json:"startTimeOffset"`
+	EndTimeOffset   *string  `json:"endTimeOffset,omitempty"`
+	Inputs          []string `json:"inputs,omitempty"`
+	Key             *string  `json:"key,omitempty"`
+	StartTimeOffset *string  `json:"startTimeOffset,omitempty"`
 }

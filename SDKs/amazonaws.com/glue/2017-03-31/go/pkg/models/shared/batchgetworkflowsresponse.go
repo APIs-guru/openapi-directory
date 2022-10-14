@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetWorkflowsResponse struct {
-	MissingWorkflows []string   `json:"MissingWorkflows"`
-	Workflows        []Workflow `json:"Workflows"`
+	MissingWorkflows []string   `json:"MissingWorkflows,omitempty"`
+	Workflows        []Workflow `json:"Workflows,omitempty"`
 }

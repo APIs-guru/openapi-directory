@@ -25,10 +25,10 @@ type FxSummaryV3 struct {
 	CreationDateTime   time.Time                    `json:"creationDateTime"`
 	FundingStatus      FxSummaryV3FundingStatusEnum `json:"fundingStatus"`
 	InvertedRate       float32                      `json:"invertedRate"`
-	PaymentCurrency    *PaymentAuditCurrencyV3Enum  `json:"paymentCurrency"`
+	PaymentCurrency    *PaymentAuditCurrencyV3Enum  `json:"paymentCurrency,omitempty"`
 	QuoteID            string                       `json:"quoteId"`
 	Rate               float32                      `json:"rate"`
-	SourceCurrency     *PaymentAuditCurrencyV3Enum  `json:"sourceCurrency"`
+	SourceCurrency     *PaymentAuditCurrencyV3Enum  `json:"sourceCurrency,omitempty"`
 	Status             FxSummaryV3StatusEnum        `json:"status"`
 	TotalCost          int64                        `json:"totalCost"`
 	TotalPaymentAmount int64                        `json:"totalPaymentAmount"`

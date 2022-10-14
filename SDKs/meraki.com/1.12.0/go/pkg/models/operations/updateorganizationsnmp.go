@@ -19,13 +19,13 @@ const (
 )
 
 type UpdateOrganizationSnmpRequestBody struct {
-	PeerIps    []string                                         `json:"peerIps"`
-	V2cEnabled *bool                                            `json:"v2cEnabled"`
-	V3AuthMode *UpdateOrganizationSnmpRequestBodyV3AuthModeEnum `json:"v3AuthMode"`
-	V3AuthPass *string                                          `json:"v3AuthPass"`
-	V3Enabled  *bool                                            `json:"v3Enabled"`
-	V3PrivMode *UpdateOrganizationSnmpRequestBodyV3PrivModeEnum `json:"v3PrivMode"`
-	V3PrivPass *string                                          `json:"v3PrivPass"`
+	PeerIps    []string                                         `json:"peerIps,omitempty"`
+	V2cEnabled *bool                                            `json:"v2cEnabled,omitempty"`
+	V3AuthMode *UpdateOrganizationSnmpRequestBodyV3AuthModeEnum `json:"v3AuthMode,omitempty"`
+	V3AuthPass *string                                          `json:"v3AuthPass,omitempty"`
+	V3Enabled  *bool                                            `json:"v3Enabled,omitempty"`
+	V3PrivMode *UpdateOrganizationSnmpRequestBodyV3PrivModeEnum `json:"v3PrivMode,omitempty"`
+	V3PrivPass *string                                          `json:"v3PrivPass,omitempty"`
 }
 
 type UpdateOrganizationSnmpRequest struct {

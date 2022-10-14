@@ -1,7 +1,7 @@
 package shared
 
 type ChannelToStoreLinkDetails struct {
-	MerchantID *string `json:"merchantId"`
-	StoreName  *string `json:"storeName"`
-	StoreURL   *string `json:"storeUrl"`
+	MerchantID *string `json:"merchantId,omitempty"`
+	StoreName  *string `json:"storeName,omitempty"`
+	StoreURL   *string `json:"storeUrl,omitempty"`
 }

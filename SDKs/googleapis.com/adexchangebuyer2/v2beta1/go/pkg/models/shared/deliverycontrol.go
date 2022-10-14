@@ -18,7 +18,7 @@ const (
 )
 
 type DeliveryControl struct {
-	CreativeBlockingLevel *DeliveryControlCreativeBlockingLevelEnum `json:"creativeBlockingLevel"`
-	DeliveryRateType      *DeliveryControlDeliveryRateTypeEnum      `json:"deliveryRateType"`
-	FrequencyCaps         []FrequencyCap                            `json:"frequencyCaps"`
+	CreativeBlockingLevel *DeliveryControlCreativeBlockingLevelEnum `json:"creativeBlockingLevel,omitempty"`
+	DeliveryRateType      *DeliveryControlDeliveryRateTypeEnum      `json:"deliveryRateType,omitempty"`
+	FrequencyCaps         []FrequencyCap                            `json:"frequencyCaps,omitempty"`
 }

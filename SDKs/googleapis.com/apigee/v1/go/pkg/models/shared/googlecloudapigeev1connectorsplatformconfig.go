@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudApigeeV1ConnectorsPlatformConfig struct {
-	Enabled   *bool   `json:"enabled"`
-	ExpiresAt *string `json:"expiresAt"`
+	Enabled   *bool   `json:"enabled,omitempty"`
+	ExpiresAt *string `json:"expiresAt,omitempty"`
 }

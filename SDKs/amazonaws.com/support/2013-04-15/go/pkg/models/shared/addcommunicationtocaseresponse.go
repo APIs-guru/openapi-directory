@@ -1,5 +1,5 @@
 package shared
 
 type AddCommunicationToCaseResponse struct {
-	Result *bool `json:"result"`
+	Result *bool `json:"result,omitempty"`
 }

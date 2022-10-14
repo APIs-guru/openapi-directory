@@ -1,31 +1,31 @@
 package operations
 
 type ListAllPadsUsingGet200ApplicationJSONData struct {
-	PadIDs []string `json:"padIDs"`
+	PadIDs []string `json:"padIDs,omitempty"`
 }
 
 type ListAllPadsUsingGet200ApplicationJSON struct {
-	Code    *int64                                     `json:"code"`
-	Data    *ListAllPadsUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                    `json:"message"`
+	Code    *int64                                     `json:"code,omitempty"`
+	Data    *ListAllPadsUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                    `json:"message,omitempty"`
 }
 
 type ListAllPadsUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListAllPadsUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListAllPadsUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListAllPadsUsingGetResponse struct {

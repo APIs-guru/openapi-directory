@@ -26,8 +26,8 @@ const (
 )
 
 type UpdateFileSystemRequestBody struct {
-	ProvisionedThroughputInMibps *float64                                       `json:"ProvisionedThroughputInMibps"`
-	ThroughputMode               *UpdateFileSystemRequestBodyThroughputModeEnum `json:"ThroughputMode"`
+	ProvisionedThroughputInMibps *float64                                       `json:"ProvisionedThroughputInMibps,omitempty"`
+	ThroughputMode               *UpdateFileSystemRequestBodyThroughputModeEnum `json:"ThroughputMode,omitempty"`
 }
 
 type UpdateFileSystemRequest struct {

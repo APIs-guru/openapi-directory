@@ -1,6 +1,6 @@
 package shared
 
 type MaintenanceWindowStepFunctionsParameters struct {
-	Input *string `json:"Input"`
-	Name  *string `json:"Name"`
+	Input *string `json:"Input,omitempty"`
+	Name  *string `json:"Name,omitempty"`
 }

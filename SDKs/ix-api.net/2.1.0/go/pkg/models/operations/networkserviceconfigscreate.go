@@ -11,10 +11,10 @@ const (
 )
 
 type NetworkServiceConfigsCreate400ApplicationJSON struct {
-	Detail   *string                                               `json:"detail"`
-	Instance *string                                               `json:"instance"`
-	Status   *interface{}                                          `json:"status"`
-	Title    *interface{}                                          `json:"title"`
+	Detail   *string                                               `json:"detail,omitempty"`
+	Instance *string                                               `json:"instance,omitempty"`
+	Status   *interface{}                                          `json:"status,omitempty"`
+	Title    *interface{}                                          `json:"title,omitempty"`
 	Type     NetworkServiceConfigsCreate400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -26,10 +26,10 @@ const (
 )
 
 type NetworkServiceConfigsCreate401ApplicationJSON struct {
-	Detail   *string                                               `json:"detail"`
-	Instance *string                                               `json:"instance"`
-	Status   *interface{}                                          `json:"status"`
-	Title    *interface{}                                          `json:"title"`
+	Detail   *string                                               `json:"detail,omitempty"`
+	Instance *string                                               `json:"instance,omitempty"`
+	Status   *interface{}                                          `json:"status,omitempty"`
+	Title    *interface{}                                          `json:"title,omitempty"`
 	Type     NetworkServiceConfigsCreate401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -40,10 +40,10 @@ const (
 )
 
 type NetworkServiceConfigsCreate403ApplicationJSON struct {
-	Detail   *string                                               `json:"detail"`
-	Instance *string                                               `json:"instance"`
-	Status   *interface{}                                          `json:"status"`
-	Title    *interface{}                                          `json:"title"`
+	Detail   *string                                               `json:"detail,omitempty"`
+	Instance *string                                               `json:"instance,omitempty"`
+	Status   *interface{}                                          `json:"status,omitempty"`
+	Title    *interface{}                                          `json:"title,omitempty"`
 	Type     NetworkServiceConfigsCreate403ApplicationJSONTypeEnum `json:"type"`
 }
 

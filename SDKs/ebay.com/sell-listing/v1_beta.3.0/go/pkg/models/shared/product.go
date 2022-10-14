@@ -1,10 +1,10 @@
 package shared
 
 type Product struct {
-	Aspects     []Aspect `json:"aspects"`
-	Brand       *string  `json:"brand"`
-	Description *string  `json:"description"`
-	Epid        *string  `json:"epid"`
-	ImageUrls   []string `json:"imageUrls"`
-	Title       *string  `json:"title"`
+	Aspects     []Aspect `json:"aspects,omitempty"`
+	Brand       *string  `json:"brand,omitempty"`
+	Description *string  `json:"description,omitempty"`
+	Epid        *string  `json:"epid,omitempty"`
+	ImageUrls   []string `json:"imageUrls,omitempty"`
+	Title       *string  `json:"title,omitempty"`
 }

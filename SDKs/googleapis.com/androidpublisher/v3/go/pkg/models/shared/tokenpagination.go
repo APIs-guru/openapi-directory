@@ -1,6 +1,6 @@
 package shared
 
 type TokenPagination struct {
-	NextPageToken     *string `json:"nextPageToken"`
-	PreviousPageToken *string `json:"previousPageToken"`
+	NextPageToken     *string `json:"nextPageToken,omitempty"`
+	PreviousPageToken *string `json:"previousPageToken,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ProxyInfo struct {
-	ExcludedHosts []string `json:"excludedHosts"`
-	Host          *string  `json:"host"`
-	PacURI        *string  `json:"pacUri"`
-	Port          *int32   `json:"port"`
+	ExcludedHosts []string `json:"excludedHosts,omitempty"`
+	Host          *string  `json:"host,omitempty"`
+	PacURI        *string  `json:"pacUri,omitempty"`
+	Port          *int32   `json:"port,omitempty"`
 }

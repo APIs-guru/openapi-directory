@@ -1,6 +1,6 @@
 package shared
 
 type ResultDisplayMetadata struct {
-	Metalines       []ResultDisplayLine `json:"metalines"`
-	ObjectTypeLabel *string             `json:"objectTypeLabel"`
+	Metalines       []ResultDisplayLine `json:"metalines,omitempty"`
+	ObjectTypeLabel *string             `json:"objectTypeLabel,omitempty"`
 }

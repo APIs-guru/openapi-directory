@@ -1,6 +1,6 @@
 package shared
 
 type CertificateRequest struct {
-	BeneficiaryID *string `json:"beneficiaryId"`
-	Mobile        *string `json:"mobile"`
+	BeneficiaryID *string `json:"beneficiaryId,omitempty"`
+	Mobile        *string `json:"mobile,omitempty"`
 }

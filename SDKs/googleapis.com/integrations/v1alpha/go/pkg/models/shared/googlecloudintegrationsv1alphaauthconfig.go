@@ -38,21 +38,21 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaAuthConfig struct {
-	CertificateID              *string                                                     `json:"certificateId"`
-	CreateTime                 *string                                                     `json:"createTime"`
-	CreatorEmail               *string                                                     `json:"creatorEmail"`
-	CredentialType             *GoogleCloudIntegrationsV1alphaAuthConfigCredentialTypeEnum `json:"credentialType"`
-	DecryptedCredential        *GoogleCloudIntegrationsV1alphaCredential                   `json:"decryptedCredential"`
-	Description                *string                                                     `json:"description"`
-	DisplayName                *string                                                     `json:"displayName"`
-	EncryptedCredential        *string                                                     `json:"encryptedCredential"`
-	ExpiryNotificationDuration []string                                                    `json:"expiryNotificationDuration"`
-	LastModifierEmail          *string                                                     `json:"lastModifierEmail"`
-	Name                       *string                                                     `json:"name"`
-	OverrideValidTime          *string                                                     `json:"overrideValidTime"`
-	Reason                     *string                                                     `json:"reason"`
-	State                      *GoogleCloudIntegrationsV1alphaAuthConfigStateEnum          `json:"state"`
-	UpdateTime                 *string                                                     `json:"updateTime"`
-	ValidTime                  *string                                                     `json:"validTime"`
-	Visibility                 *GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum     `json:"visibility"`
+	CertificateID              *string                                                     `json:"certificateId,omitempty"`
+	CreateTime                 *string                                                     `json:"createTime,omitempty"`
+	CreatorEmail               *string                                                     `json:"creatorEmail,omitempty"`
+	CredentialType             *GoogleCloudIntegrationsV1alphaAuthConfigCredentialTypeEnum `json:"credentialType,omitempty"`
+	DecryptedCredential        *GoogleCloudIntegrationsV1alphaCredential                   `json:"decryptedCredential,omitempty"`
+	Description                *string                                                     `json:"description,omitempty"`
+	DisplayName                *string                                                     `json:"displayName,omitempty"`
+	EncryptedCredential        *string                                                     `json:"encryptedCredential,omitempty"`
+	ExpiryNotificationDuration []string                                                    `json:"expiryNotificationDuration,omitempty"`
+	LastModifierEmail          *string                                                     `json:"lastModifierEmail,omitempty"`
+	Name                       *string                                                     `json:"name,omitempty"`
+	OverrideValidTime          *string                                                     `json:"overrideValidTime,omitempty"`
+	Reason                     *string                                                     `json:"reason,omitempty"`
+	State                      *GoogleCloudIntegrationsV1alphaAuthConfigStateEnum          `json:"state,omitempty"`
+	UpdateTime                 *string                                                     `json:"updateTime,omitempty"`
+	ValidTime                  *string                                                     `json:"validTime,omitempty"`
+	Visibility                 *GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum     `json:"visibility,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SmsMfaSettingsType struct {
-	Enabled      *bool `json:"Enabled"`
-	PreferredMfa *bool `json:"PreferredMfa"`
+	Enabled      *bool `json:"Enabled,omitempty"`
+	PreferredMfa *bool `json:"PreferredMfa,omitempty"`
 }

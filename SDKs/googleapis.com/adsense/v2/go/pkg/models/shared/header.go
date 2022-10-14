@@ -13,7 +13,7 @@ const (
 )
 
 type Header struct {
-	CurrencyCode *string         `json:"currencyCode"`
-	Name         *string         `json:"name"`
-	Type         *HeaderTypeEnum `json:"type"`
+	CurrencyCode *string         `json:"currencyCode,omitempty"`
+	Name         *string         `json:"name,omitempty"`
+	Type         *HeaderTypeEnum `json:"type,omitempty"`
 }

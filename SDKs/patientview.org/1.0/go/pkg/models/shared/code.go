@@ -12,20 +12,20 @@ const (
 )
 
 type Code struct {
-	Code                *string                `json:"code"`
-	CodeCategories      []CodeCategory         `json:"codeCategories"`
-	CodeType            *Lookup                `json:"codeType"`
-	Created             *time.Time             `json:"created"`
-	Description         *string                `json:"description"`
-	DisplayOrder        *int32                 `json:"displayOrder"`
-	ExternalStandards   []CodeExternalStandard `json:"externalStandards"`
-	FullDescription     *string                `json:"fullDescription"`
-	HideFromPatients    *bool                  `json:"hideFromPatients"`
-	ID                  *int64                 `json:"id"`
-	LastUpdate          *time.Time             `json:"lastUpdate"`
-	Links               []Link                 `json:"links"`
-	PatientFriendlyName *string                `json:"patientFriendlyName"`
-	RemovedExternally   *bool                  `json:"removedExternally"`
-	SourceType          *CodeSourceTypeEnum    `json:"sourceType"`
-	StandardType        *Lookup                `json:"standardType"`
+	Code                *string                `json:"code,omitempty"`
+	CodeCategories      []CodeCategory         `json:"codeCategories,omitempty"`
+	CodeType            *Lookup                `json:"codeType,omitempty"`
+	Created             *time.Time             `json:"created,omitempty"`
+	Description         *string                `json:"description,omitempty"`
+	DisplayOrder        *int32                 `json:"displayOrder,omitempty"`
+	ExternalStandards   []CodeExternalStandard `json:"externalStandards,omitempty"`
+	FullDescription     *string                `json:"fullDescription,omitempty"`
+	HideFromPatients    *bool                  `json:"hideFromPatients,omitempty"`
+	ID                  *int64                 `json:"id,omitempty"`
+	LastUpdate          *time.Time             `json:"lastUpdate,omitempty"`
+	Links               []Link                 `json:"links,omitempty"`
+	PatientFriendlyName *string                `json:"patientFriendlyName,omitempty"`
+	RemovedExternally   *bool                  `json:"removedExternally,omitempty"`
+	SourceType          *CodeSourceTypeEnum    `json:"sourceType,omitempty"`
+	StandardType        *Lookup                `json:"standardType,omitempty"`
 }

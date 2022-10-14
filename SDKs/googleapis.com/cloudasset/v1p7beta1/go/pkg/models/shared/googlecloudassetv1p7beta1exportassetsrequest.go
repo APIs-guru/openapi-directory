@@ -12,9 +12,9 @@ const (
 )
 
 type GoogleCloudAssetV1p7beta1ExportAssetsRequest struct {
-	AssetTypes        []string                                                     `json:"assetTypes"`
-	ContentType       *GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum `json:"contentType"`
-	OutputConfig      *GoogleCloudAssetV1p7beta1OutputConfig                       `json:"outputConfig"`
-	ReadTime          *string                                                      `json:"readTime"`
-	RelationshipTypes []string                                                     `json:"relationshipTypes"`
+	AssetTypes        []string                                                     `json:"assetTypes,omitempty"`
+	ContentType       *GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum `json:"contentType,omitempty"`
+	OutputConfig      *GoogleCloudAssetV1p7beta1OutputConfig                       `json:"outputConfig,omitempty"`
+	ReadTime          *string                                                      `json:"readTime,omitempty"`
+	RelationshipTypes []string                                                     `json:"relationshipTypes,omitempty"`
 }

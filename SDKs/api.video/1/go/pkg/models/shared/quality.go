@@ -21,6 +21,6 @@ const (
 )
 
 type Quality struct {
-	Quality *QualityQualityEnum `json:"quality"`
-	Status  *QualityStatusEnum  `json:"status"`
+	Quality *QualityQualityEnum `json:"quality,omitempty"`
+	Status  *QualityStatusEnum  `json:"status,omitempty"`
 }

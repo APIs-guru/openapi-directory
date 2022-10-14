@@ -19,7 +19,7 @@ type PutEventsHeaders struct {
 }
 
 type PutEventsRequestBodyEventsRequest struct {
-	BatchItem map[string]shared.EventsBatch `json:"BatchItem"`
+	BatchItem map[string]shared.EventsBatch `json:"BatchItem,omitempty"`
 }
 
 type PutEventsRequestBody struct {

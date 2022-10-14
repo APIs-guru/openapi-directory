@@ -5,9 +5,9 @@ import (
 )
 
 type RobotApplicationSummary struct {
-	Arn                *string             `json:"arn"`
-	LastUpdatedAt      *time.Time          `json:"lastUpdatedAt"`
-	Name               *string             `json:"name"`
-	RobotSoftwareSuite *RobotSoftwareSuite `json:"robotSoftwareSuite"`
-	Version            *string             `json:"version"`
+	Arn                *string             `json:"arn,omitempty"`
+	LastUpdatedAt      *time.Time          `json:"lastUpdatedAt,omitempty"`
+	Name               *string             `json:"name,omitempty"`
+	RobotSoftwareSuite *RobotSoftwareSuite `json:"robotSoftwareSuite,omitempty"`
+	Version            *string             `json:"version,omitempty"`
 }

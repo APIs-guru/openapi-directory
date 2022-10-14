@@ -81,9 +81,9 @@ const (
 
 type WritablePowerOutletTemplate struct {
 	DeviceType int64                                          `json:"device_type"`
-	FeedLeg    *WritablePowerOutletTemplateFeedLegFeedLegEnum `json:"feed_leg"`
-	ID         *int64                                         `json:"id"`
+	FeedLeg    *WritablePowerOutletTemplateFeedLegFeedLegEnum `json:"feed_leg,omitempty"`
+	ID         *int64                                         `json:"id,omitempty"`
 	Name       string                                         `json:"name"`
-	PowerPort  *int64                                         `json:"power_port"`
-	Type       *WritablePowerOutletTemplateTypeTypeEnum       `json:"type"`
+	PowerPort  *int64                                         `json:"power_port,omitempty"`
+	Type       *WritablePowerOutletTemplateTypeTypeEnum       `json:"type,omitempty"`
 }

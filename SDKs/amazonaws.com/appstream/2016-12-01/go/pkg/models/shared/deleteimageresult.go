@@ -1,5 +1,5 @@
 package shared
 
 type DeleteImageResult struct {
-	Image *Image `json:"Image"`
+	Image *Image `json:"Image,omitempty"`
 }

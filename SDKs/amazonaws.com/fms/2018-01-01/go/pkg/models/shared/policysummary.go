@@ -1,11 +1,11 @@
 package shared
 
 type PolicySummary struct {
-	DeleteUnusedFmManagedResources *bool                    `json:"DeleteUnusedFMManagedResources"`
-	PolicyArn                      *string                  `json:"PolicyArn"`
-	PolicyID                       *string                  `json:"PolicyId"`
-	PolicyName                     *string                  `json:"PolicyName"`
-	RemediationEnabled             *bool                    `json:"RemediationEnabled"`
-	ResourceType                   *string                  `json:"ResourceType"`
-	SecurityServiceType            *SecurityServiceTypeEnum `json:"SecurityServiceType"`
+	DeleteUnusedFmManagedResources *bool                    `json:"DeleteUnusedFMManagedResources,omitempty"`
+	PolicyArn                      *string                  `json:"PolicyArn,omitempty"`
+	PolicyID                       *string                  `json:"PolicyId,omitempty"`
+	PolicyName                     *string                  `json:"PolicyName,omitempty"`
+	RemediationEnabled             *bool                    `json:"RemediationEnabled,omitempty"`
+	ResourceType                   *string                  `json:"ResourceType,omitempty"`
+	SecurityServiceType            *SecurityServiceTypeEnum `json:"SecurityServiceType,omitempty"`
 }

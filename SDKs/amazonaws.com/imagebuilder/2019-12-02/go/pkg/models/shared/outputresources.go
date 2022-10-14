@@ -1,6 +1,6 @@
 package shared
 
 type OutputResources struct {
-	Amis       []Ami       `json:"amis"`
-	Containers []Container `json:"containers"`
+	Amis       []Ami       `json:"amis,omitempty"`
+	Containers []Container `json:"containers,omitempty"`
 }

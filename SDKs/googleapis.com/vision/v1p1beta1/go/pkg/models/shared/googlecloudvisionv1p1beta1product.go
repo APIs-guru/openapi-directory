@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudVisionV1p1beta1Product struct {
-	Description     *string                                     `json:"description"`
-	DisplayName     *string                                     `json:"displayName"`
-	Name            *string                                     `json:"name"`
-	ProductCategory *string                                     `json:"productCategory"`
-	ProductLabels   []GoogleCloudVisionV1p1beta1ProductKeyValue `json:"productLabels"`
+	Description     *string                                     `json:"description,omitempty"`
+	DisplayName     *string                                     `json:"displayName,omitempty"`
+	Name            *string                                     `json:"name,omitempty"`
+	ProductCategory *string                                     `json:"productCategory,omitempty"`
+	ProductLabels   []GoogleCloudVisionV1p1beta1ProductKeyValue `json:"productLabels,omitempty"`
 }

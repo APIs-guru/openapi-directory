@@ -6,7 +6,7 @@ type UpdateOrganizationLicensePathParams struct {
 }
 
 type UpdateOrganizationLicenseRequestBody struct {
-	DeviceSerial *string `json:"deviceSerial"`
+	DeviceSerial *string `json:"deviceSerial,omitempty"`
 }
 
 type UpdateOrganizationLicenseRequest struct {

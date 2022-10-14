@@ -19,10 +19,10 @@ type UpdatePipelineNotificationsHeaders struct {
 }
 
 type UpdatePipelineNotificationsRequestBodyNotifications struct {
-	Completed   *string `json:"Completed"`
-	Error       *string `json:"Error"`
-	Progressing *string `json:"Progressing"`
-	Warning     *string `json:"Warning"`
+	Completed   *string `json:"Completed,omitempty"`
+	Error       *string `json:"Error,omitempty"`
+	Progressing *string `json:"Progressing,omitempty"`
+	Warning     *string `json:"Warning,omitempty"`
 }
 
 type UpdatePipelineNotificationsRequestBody struct {

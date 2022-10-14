@@ -19,7 +19,7 @@ type BatchAssociateClientDeviceWithCoreDeviceHeaders struct {
 }
 
 type BatchAssociateClientDeviceWithCoreDeviceRequestBody struct {
-	Entries []shared.AssociateClientDeviceWithCoreDeviceEntry `json:"entries"`
+	Entries []shared.AssociateClientDeviceWithCoreDeviceEntry `json:"entries,omitempty"`
 }
 
 type BatchAssociateClientDeviceWithCoreDeviceRequest struct {

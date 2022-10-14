@@ -1,7 +1,7 @@
 package shared
 
 type DescribeReplicationTaskAssessmentResultsResponse struct {
-	BucketName                       *string                           `json:"BucketName"`
-	Marker                           *string                           `json:"Marker"`
-	ReplicationTaskAssessmentResults []ReplicationTaskAssessmentResult `json:"ReplicationTaskAssessmentResults"`
+	BucketName                       *string                           `json:"BucketName,omitempty"`
+	Marker                           *string                           `json:"Marker,omitempty"`
+	ReplicationTaskAssessmentResults []ReplicationTaskAssessmentResult `json:"ReplicationTaskAssessmentResults,omitempty"`
 }

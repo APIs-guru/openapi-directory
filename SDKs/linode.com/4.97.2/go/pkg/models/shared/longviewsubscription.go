@@ -10,13 +10,13 @@ const (
 )
 
 type LongviewSubscriptionPrice struct {
-	Hourly  *float64 `json:"hourly"`
-	Monthly *float64 `json:"monthly"`
+	Hourly  *float64 `json:"hourly,omitempty"`
+	Monthly *float64 `json:"monthly,omitempty"`
 }
 
 type LongviewSubscription struct {
-	ClientsIncluded *int64                      `json:"clients_included"`
-	ID              *LongviewSubscriptionIDEnum `json:"id"`
-	Label           *string                     `json:"label"`
-	Price           *LongviewSubscriptionPrice  `json:"price"`
+	ClientsIncluded *int64                      `json:"clients_included,omitempty"`
+	ID              *LongviewSubscriptionIDEnum `json:"id,omitempty"`
+	Label           *string                     `json:"label,omitempty"`
+	Price           *LongviewSubscriptionPrice  `json:"price,omitempty"`
 }

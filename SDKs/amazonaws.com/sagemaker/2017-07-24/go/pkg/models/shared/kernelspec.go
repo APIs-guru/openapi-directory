@@ -1,6 +1,6 @@
 package shared
 
 type KernelSpec struct {
-	DisplayName *string `json:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitempty"`
 	Name        string  `json:"Name"`
 }

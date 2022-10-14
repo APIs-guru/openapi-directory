@@ -1,7 +1,7 @@
 package shared
 
 type GkeNodePoolAcceleratorConfig struct {
-	AcceleratorCount *string `json:"acceleratorCount"`
-	AcceleratorType  *string `json:"acceleratorType"`
-	GpuPartitionSize *string `json:"gpuPartitionSize"`
+	AcceleratorCount *string `json:"acceleratorCount,omitempty"`
+	AcceleratorType  *string `json:"acceleratorType,omitempty"`
+	GpuPartitionSize *string `json:"gpuPartitionSize,omitempty"`
 }

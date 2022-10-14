@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudIdentitytoolkitAdminV2AllowlistOnly struct {
-	AllowedRegions []string `json:"allowedRegions"`
+	AllowedRegions []string `json:"allowedRegions,omitempty"`
 }

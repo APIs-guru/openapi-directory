@@ -10,7 +10,7 @@ const (
 
 type Onev21volumes1actionsPostRequestBodyContentApplication1jsonSchemaAnyOf0 struct {
 	DropletID int64                                                                                                                             `json:"droplet_id"`
-	Region    *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
-	Tags      []string                                                                                                                          `json:"tags"`
+	Region    *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region,omitempty"`
+	Tags      []string                                                                                                                          `json:"tags,omitempty"`
 	Type      Onev21volumes1actionsPostRequestBodyContentApplication1jsonSchemaAnyOf0TypeEnum                                                   `json:"type"`
 }

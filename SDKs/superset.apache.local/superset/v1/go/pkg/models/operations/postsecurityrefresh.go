@@ -13,15 +13,15 @@ type PostSecurityRefreshRequest struct {
 }
 
 type PostSecurityRefresh200ApplicationJSON struct {
-	AccessToken *string `json:"access_token"`
+	AccessToken *string `json:"access_token,omitempty"`
 }
 
 type PostSecurityRefresh401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSecurityRefresh500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSecurityRefreshResponse struct {

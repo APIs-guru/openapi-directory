@@ -1,6 +1,6 @@
 package shared
 
 type AirbyteStreamAndConfiguration struct {
-	Config *AirbyteStreamConfiguration `json:"config"`
-	Stream *AirbyteStream              `json:"stream"`
+	Config *AirbyteStreamConfiguration `json:"config,omitempty"`
+	Stream *AirbyteStream              `json:"stream,omitempty"`
 }

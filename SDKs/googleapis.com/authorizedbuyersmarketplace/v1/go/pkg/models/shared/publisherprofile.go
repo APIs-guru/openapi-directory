@@ -1,19 +1,19 @@
 package shared
 
 type PublisherProfile struct {
-	AudienceDescription      *string                             `json:"audienceDescription"`
-	DirectDealsContact       *string                             `json:"directDealsContact"`
-	DisplayName              *string                             `json:"displayName"`
-	Domains                  []string                            `json:"domains"`
-	IsParent                 *bool                               `json:"isParent"`
-	LogoURL                  *string                             `json:"logoUrl"`
-	MediaKitURL              *string                             `json:"mediaKitUrl"`
-	MobileApps               []PublisherProfileMobileApplication `json:"mobileApps"`
-	Name                     *string                             `json:"name"`
-	Overview                 *string                             `json:"overview"`
-	PitchStatement           *string                             `json:"pitchStatement"`
-	ProgrammaticDealsContact *string                             `json:"programmaticDealsContact"`
-	PublisherCode            *string                             `json:"publisherCode"`
-	SamplePageURL            *string                             `json:"samplePageUrl"`
-	TopHeadlines             []string                            `json:"topHeadlines"`
+	AudienceDescription      *string                             `json:"audienceDescription,omitempty"`
+	DirectDealsContact       *string                             `json:"directDealsContact,omitempty"`
+	DisplayName              *string                             `json:"displayName,omitempty"`
+	Domains                  []string                            `json:"domains,omitempty"`
+	IsParent                 *bool                               `json:"isParent,omitempty"`
+	LogoURL                  *string                             `json:"logoUrl,omitempty"`
+	MediaKitURL              *string                             `json:"mediaKitUrl,omitempty"`
+	MobileApps               []PublisherProfileMobileApplication `json:"mobileApps,omitempty"`
+	Name                     *string                             `json:"name,omitempty"`
+	Overview                 *string                             `json:"overview,omitempty"`
+	PitchStatement           *string                             `json:"pitchStatement,omitempty"`
+	ProgrammaticDealsContact *string                             `json:"programmaticDealsContact,omitempty"`
+	PublisherCode            *string                             `json:"publisherCode,omitempty"`
+	SamplePageURL            *string                             `json:"samplePageUrl,omitempty"`
+	TopHeadlines             []string                            `json:"topHeadlines,omitempty"`
 }

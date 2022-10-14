@@ -1,7 +1,7 @@
 package shared
 
 type Issue struct {
-	Code        *NodegroupIssueCodeEnum `json:"code"`
-	Message     *string                 `json:"message"`
-	ResourceIds []string                `json:"resourceIds"`
+	Code        *NodegroupIssueCodeEnum `json:"code,omitempty"`
+	Message     *string                 `json:"message,omitempty"`
+	ResourceIds []string                `json:"resourceIds,omitempty"`
 }

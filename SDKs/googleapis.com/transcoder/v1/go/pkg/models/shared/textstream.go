@@ -1,6 +1,6 @@
 package shared
 
 type TextStream struct {
-	Codec   *string       `json:"codec"`
-	Mapping []TextMapping `json:"mapping"`
+	Codec   *string       `json:"codec,omitempty"`
+	Mapping []TextMapping `json:"mapping,omitempty"`
 }

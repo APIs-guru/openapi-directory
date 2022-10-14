@@ -1,6 +1,6 @@
 package shared
 
 type ListPythonPackagesResponse struct {
-	NextPageToken  *string         `json:"nextPageToken"`
-	PythonPackages []PythonPackage `json:"pythonPackages"`
+	NextPageToken  *string         `json:"nextPageToken,omitempty"`
+	PythonPackages []PythonPackage `json:"pythonPackages,omitempty"`
 }

@@ -14,7 +14,7 @@ type GetGalleryPhotosByIDRequest struct {
 }
 
 type GetGalleryPhotosByID200ApplicationJSON struct {
-	Photos []shared.Photo `json:"photos"`
+	Photos []shared.Photo `json:"photos,omitempty"`
 }
 
 type GetGalleryPhotosByIDResponse struct {

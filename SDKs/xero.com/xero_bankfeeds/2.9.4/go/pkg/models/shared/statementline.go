@@ -5,12 +5,12 @@ import (
 )
 
 type StatementLine struct {
-	Amount               *float64                  `json:"amount"`
-	ChequeNumber         *string                   `json:"chequeNumber"`
-	CreditDebitIndicator *CreditDebitIndicatorEnum `json:"creditDebitIndicator"`
-	Description          *string                   `json:"description"`
-	PayeeName            *string                   `json:"payeeName"`
-	PostedDate           *time.Time                `json:"postedDate"`
-	Reference            *string                   `json:"reference"`
-	TransactionID        *string                   `json:"transactionId"`
+	Amount               *float64                  `json:"amount,omitempty"`
+	ChequeNumber         *string                   `json:"chequeNumber,omitempty"`
+	CreditDebitIndicator *CreditDebitIndicatorEnum `json:"creditDebitIndicator,omitempty"`
+	Description          *string                   `json:"description,omitempty"`
+	PayeeName            *string                   `json:"payeeName,omitempty"`
+	PostedDate           *time.Time                `json:"postedDate,omitempty"`
+	Reference            *string                   `json:"reference,omitempty"`
+	TransactionID        *string                   `json:"transactionId,omitempty"`
 }

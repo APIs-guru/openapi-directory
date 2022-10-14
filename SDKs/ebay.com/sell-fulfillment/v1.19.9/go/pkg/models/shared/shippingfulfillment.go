@@ -1,9 +1,9 @@
 package shared
 
 type ShippingFulfillment struct {
-	FulfillmentID          *string             `json:"fulfillmentId"`
-	LineItems              []LineItemReference `json:"lineItems"`
-	ShipmentTrackingNumber *string             `json:"shipmentTrackingNumber"`
-	ShippedDate            *string             `json:"shippedDate"`
-	ShippingCarrierCode    *string             `json:"shippingCarrierCode"`
+	FulfillmentID          *string             `json:"fulfillmentId,omitempty"`
+	LineItems              []LineItemReference `json:"lineItems,omitempty"`
+	ShipmentTrackingNumber *string             `json:"shipmentTrackingNumber,omitempty"`
+	ShippedDate            *string             `json:"shippedDate,omitempty"`
+	ShippingCarrierCode    *string             `json:"shippingCarrierCode,omitempty"`
 }

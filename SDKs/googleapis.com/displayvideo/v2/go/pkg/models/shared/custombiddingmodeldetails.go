@@ -20,7 +20,7 @@ const (
 )
 
 type CustomBiddingModelDetails struct {
-	AdvertiserID    *string                                       `json:"advertiserId"`
-	ReadinessState  *CustomBiddingModelDetailsReadinessStateEnum  `json:"readinessState"`
-	SuspensionState *CustomBiddingModelDetailsSuspensionStateEnum `json:"suspensionState"`
+	AdvertiserID    *string                                       `json:"advertiserId,omitempty"`
+	ReadinessState  *CustomBiddingModelDetailsReadinessStateEnum  `json:"readinessState,omitempty"`
+	SuspensionState *CustomBiddingModelDetailsSuspensionStateEnum `json:"suspensionState,omitempty"`
 }

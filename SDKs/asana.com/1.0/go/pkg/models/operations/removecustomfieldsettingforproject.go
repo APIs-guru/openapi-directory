@@ -13,7 +13,7 @@ type RemoveCustomFieldSettingForProjectQueryParams struct {
 }
 
 type RemoveCustomFieldSettingForProjectRequestBody struct {
-	Data *shared.RemoveCustomFieldSettingRequest `json:"data"`
+	Data *shared.RemoveCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
 type RemoveCustomFieldSettingForProjectRequest struct {
@@ -23,7 +23,7 @@ type RemoveCustomFieldSettingForProjectRequest struct {
 }
 
 type RemoveCustomFieldSettingForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveCustomFieldSettingForProjectResponse struct {

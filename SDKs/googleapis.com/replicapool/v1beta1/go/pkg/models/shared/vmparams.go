@@ -1,15 +1,15 @@
 package shared
 
 type VMParams struct {
-	BaseInstanceName  *string            `json:"baseInstanceName"`
-	CanIPForward      *bool              `json:"canIpForward"`
-	Description       *string            `json:"description"`
-	DisksToAttach     []ExistingDisk     `json:"disksToAttach"`
-	DisksToCreate     []NewDisk          `json:"disksToCreate"`
-	MachineType       *string            `json:"machineType"`
-	Metadata          *Metadata          `json:"metadata"`
-	NetworkInterfaces []NetworkInterface `json:"networkInterfaces"`
-	OnHostMaintenance *string            `json:"onHostMaintenance"`
-	ServiceAccounts   []ServiceAccount   `json:"serviceAccounts"`
-	Tags              *Tag               `json:"tags"`
+	BaseInstanceName  *string            `json:"baseInstanceName,omitempty"`
+	CanIPForward      *bool              `json:"canIpForward,omitempty"`
+	Description       *string            `json:"description,omitempty"`
+	DisksToAttach     []ExistingDisk     `json:"disksToAttach,omitempty"`
+	DisksToCreate     []NewDisk          `json:"disksToCreate,omitempty"`
+	MachineType       *string            `json:"machineType,omitempty"`
+	Metadata          *Metadata          `json:"metadata,omitempty"`
+	NetworkInterfaces []NetworkInterface `json:"networkInterfaces,omitempty"`
+	OnHostMaintenance *string            `json:"onHostMaintenance,omitempty"`
+	ServiceAccounts   []ServiceAccount   `json:"serviceAccounts,omitempty"`
+	Tags              *Tag               `json:"tags,omitempty"`
 }

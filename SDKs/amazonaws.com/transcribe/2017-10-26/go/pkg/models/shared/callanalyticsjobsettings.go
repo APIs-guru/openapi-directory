@@ -1,10 +1,10 @@
 package shared
 
 type CallAnalyticsJobSettings struct {
-	ContentRedaction       *ContentRedaction           `json:"ContentRedaction"`
-	LanguageModelName      *string                     `json:"LanguageModelName"`
-	LanguageOptions        []LanguageCodeEnum          `json:"LanguageOptions"`
-	VocabularyFilterMethod *VocabularyFilterMethodEnum `json:"VocabularyFilterMethod"`
-	VocabularyFilterName   *string                     `json:"VocabularyFilterName"`
-	VocabularyName         *string                     `json:"VocabularyName"`
+	ContentRedaction       *ContentRedaction           `json:"ContentRedaction,omitempty"`
+	LanguageModelName      *string                     `json:"LanguageModelName,omitempty"`
+	LanguageOptions        []LanguageCodeEnum          `json:"LanguageOptions,omitempty"`
+	VocabularyFilterMethod *VocabularyFilterMethodEnum `json:"VocabularyFilterMethod,omitempty"`
+	VocabularyFilterName   *string                     `json:"VocabularyFilterName,omitempty"`
+	VocabularyName         *string                     `json:"VocabularyName,omitempty"`
 }

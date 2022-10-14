@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1LabelTextRequest struct {
-	BasicConfig                *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig       `json:"basicConfig"`
-	Feature                    *GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum `json:"feature"`
-	TextClassificationConfig   *GoogleCloudDatalabelingV1beta1TextClassificationConfig    `json:"textClassificationConfig"`
-	TextEntityExtractionConfig *GoogleCloudDatalabelingV1beta1TextEntityExtractionConfig  `json:"textEntityExtractionConfig"`
+	BasicConfig                *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig       `json:"basicConfig,omitempty"`
+	Feature                    *GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum `json:"feature,omitempty"`
+	TextClassificationConfig   *GoogleCloudDatalabelingV1beta1TextClassificationConfig    `json:"textClassificationConfig,omitempty"`
+	TextEntityExtractionConfig *GoogleCloudDatalabelingV1beta1TextEntityExtractionConfig  `json:"textEntityExtractionConfig,omitempty"`
 }

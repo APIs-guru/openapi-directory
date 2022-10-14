@@ -12,6 +12,6 @@ const (
 )
 
 type GoogleCloudRecommenderV1RecommendationStateInfo struct {
-	State         *GoogleCloudRecommenderV1RecommendationStateInfoStateEnum `json:"state"`
-	StateMetadata map[string]string                                         `json:"stateMetadata"`
+	State         *GoogleCloudRecommenderV1RecommendationStateInfoStateEnum `json:"state,omitempty"`
+	StateMetadata map[string]string                                         `json:"stateMetadata,omitempty"`
 }

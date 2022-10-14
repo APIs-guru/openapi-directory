@@ -1,5 +1,5 @@
 package shared
 
 type GetStudioMemberResponse struct {
-	Member *StudioMembership `json:"member"`
+	Member *StudioMembership `json:"member,omitempty"`
 }

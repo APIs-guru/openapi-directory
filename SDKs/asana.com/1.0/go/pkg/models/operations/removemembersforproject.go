@@ -14,7 +14,7 @@ type RemoveMembersForProjectQueryParams struct {
 }
 
 type RemoveMembersForProjectRequestBody struct {
-	Data *shared.RemoveMembersRequest `json:"data"`
+	Data *shared.RemoveMembersRequest `json:"data,omitempty"`
 }
 
 type RemoveMembersForProjectRequest struct {
@@ -24,7 +24,7 @@ type RemoveMembersForProjectRequest struct {
 }
 
 type RemoveMembersForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveMembersForProjectResponse struct {

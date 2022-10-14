@@ -1,6 +1,6 @@
 package shared
 
 type AgentOtherDeviceID struct {
-	AgentID  *string `json:"agentId"`
-	DeviceID *string `json:"deviceId"`
+	AgentID  *string `json:"agentId,omitempty"`
+	DeviceID *string `json:"deviceId,omitempty"`
 }

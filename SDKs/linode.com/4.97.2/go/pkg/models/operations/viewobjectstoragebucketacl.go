@@ -48,12 +48,12 @@ const (
 )
 
 type ViewObjectStorageBucketACL200ApplicationJSON struct {
-	ACL    *ViewObjectStorageBucketACL200ApplicationJSONACLEnum `json:"acl"`
-	ACLXML *string                                              `json:"acl_xml"`
+	ACL    *ViewObjectStorageBucketACL200ApplicationJSONACLEnum `json:"acl,omitempty"`
+	ACLXML *string                                              `json:"acl_xml,omitempty"`
 }
 
 type ViewObjectStorageBucketACLDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ViewObjectStorageBucketACLResponse struct {

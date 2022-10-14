@@ -14,7 +14,7 @@ const (
 )
 
 type WeeklyMaintenanceWindow struct {
-	Day       *WeeklyMaintenanceWindowDayEnum `json:"day"`
-	Duration  *string                         `json:"duration"`
-	StartTime *TimeOfDay                      `json:"startTime"`
+	Day       *WeeklyMaintenanceWindowDayEnum `json:"day,omitempty"`
+	Duration  *string                         `json:"duration,omitempty"`
+	StartTime *TimeOfDay                      `json:"startTime,omitempty"`
 }

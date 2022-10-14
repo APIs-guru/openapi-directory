@@ -1,11 +1,11 @@
 package shared
 
 type AccessApprovalSettings struct {
-	ActiveKeyVersion            *string           `json:"activeKeyVersion"`
-	AncestorHasActiveKeyVersion *bool             `json:"ancestorHasActiveKeyVersion"`
-	EnrolledAncestor            *bool             `json:"enrolledAncestor"`
-	EnrolledServices            []EnrolledService `json:"enrolledServices"`
-	InvalidKeyVersion           *bool             `json:"invalidKeyVersion"`
-	Name                        *string           `json:"name"`
-	NotificationEmails          []string          `json:"notificationEmails"`
+	ActiveKeyVersion            *string           `json:"activeKeyVersion,omitempty"`
+	AncestorHasActiveKeyVersion *bool             `json:"ancestorHasActiveKeyVersion,omitempty"`
+	EnrolledAncestor            *bool             `json:"enrolledAncestor,omitempty"`
+	EnrolledServices            []EnrolledService `json:"enrolledServices,omitempty"`
+	InvalidKeyVersion           *bool             `json:"invalidKeyVersion,omitempty"`
+	Name                        *string           `json:"name,omitempty"`
+	NotificationEmails          []string          `json:"notificationEmails,omitempty"`
 }

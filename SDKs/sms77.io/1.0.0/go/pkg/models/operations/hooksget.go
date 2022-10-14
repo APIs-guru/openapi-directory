@@ -15,16 +15,16 @@ type HooksGetRequest struct {
 }
 
 type HooksGet200ApplicationJSONHooks struct {
-	Created       *string `json:"created"`
-	EventType     *string `json:"event_type"`
-	ID            *string `json:"id"`
-	RequestMethod *string `json:"request_method"`
-	TargetURL     *string `json:"target_url"`
+	Created       *string `json:"created,omitempty"`
+	EventType     *string `json:"event_type,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	RequestMethod *string `json:"request_method,omitempty"`
+	TargetURL     *string `json:"target_url,omitempty"`
 }
 
 type HooksGet200ApplicationJSON struct {
-	Hooks   []HooksGet200ApplicationJSONHooks `json:"hooks"`
-	Success *bool                             `json:"success"`
+	Hooks   []HooksGet200ApplicationJSONHooks `json:"hooks,omitempty"`
+	Success *bool                             `json:"success,omitempty"`
 }
 
 type HooksGetResponse struct {

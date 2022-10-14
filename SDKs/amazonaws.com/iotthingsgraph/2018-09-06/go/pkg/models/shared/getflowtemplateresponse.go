@@ -1,5 +1,5 @@
 package shared
 
 type GetFlowTemplateResponse struct {
-	Description *FlowTemplateDescription `json:"description"`
+	Description *FlowTemplateDescription `json:"description,omitempty"`
 }

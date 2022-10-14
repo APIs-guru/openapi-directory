@@ -22,15 +22,15 @@ type UpdateSlotTypeHeaders struct {
 }
 
 type UpdateSlotTypeRequestBodyValueSelectionSetting struct {
-	RegexFilter        *shared.SlotValueRegexFilter            `json:"regexFilter"`
-	ResolutionStrategy *shared.SlotValueResolutionStrategyEnum `json:"resolutionStrategy"`
+	RegexFilter        *shared.SlotValueRegexFilter            `json:"regexFilter,omitempty"`
+	ResolutionStrategy *shared.SlotValueResolutionStrategyEnum `json:"resolutionStrategy,omitempty"`
 }
 
 type UpdateSlotTypeRequestBody struct {
-	Description             *string                                        `json:"description"`
-	ParentSlotTypeSignature *string                                        `json:"parentSlotTypeSignature"`
+	Description             *string                                        `json:"description,omitempty"`
+	ParentSlotTypeSignature *string                                        `json:"parentSlotTypeSignature,omitempty"`
 	SlotTypeName            string                                         `json:"slotTypeName"`
-	SlotTypeValues          []shared.SlotTypeValue                         `json:"slotTypeValues"`
+	SlotTypeValues          []shared.SlotTypeValue                         `json:"slotTypeValues,omitempty"`
 	ValueSelectionSetting   UpdateSlotTypeRequestBodyValueSelectionSetting `json:"valueSelectionSetting"`
 }
 

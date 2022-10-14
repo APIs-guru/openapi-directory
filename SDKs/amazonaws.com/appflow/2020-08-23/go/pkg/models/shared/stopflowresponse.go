@@ -1,6 +1,6 @@
 package shared
 
 type StopFlowResponse struct {
-	FlowArn    *string         `json:"flowArn"`
-	FlowStatus *FlowStatusEnum `json:"flowStatus"`
+	FlowArn    *string         `json:"flowArn,omitempty"`
+	FlowStatus *FlowStatusEnum `json:"flowStatus,omitempty"`
 }

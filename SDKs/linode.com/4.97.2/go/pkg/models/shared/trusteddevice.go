@@ -5,10 +5,10 @@ import (
 )
 
 type TrustedDevice struct {
-	Created           *time.Time `json:"created"`
-	Expiry            *time.Time `json:"expiry"`
-	ID                *int64     `json:"id"`
-	LastAuthenticated *time.Time `json:"last_authenticated"`
-	LastRemoteAddr    *string    `json:"last_remote_addr"`
-	UserAgent         *string    `json:"user_agent"`
+	Created           *time.Time `json:"created,omitempty"`
+	Expiry            *time.Time `json:"expiry,omitempty"`
+	ID                *int64     `json:"id,omitempty"`
+	LastAuthenticated *time.Time `json:"last_authenticated,omitempty"`
+	LastRemoteAddr    *string    `json:"last_remote_addr,omitempty"`
+	UserAgent         *string    `json:"user_agent,omitempty"`
 }

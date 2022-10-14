@@ -1,10 +1,10 @@
 package shared
 
 type ScopeRepresentation struct {
-	DisplayName *string                  `json:"displayName"`
-	IconURI     *string                  `json:"iconUri"`
-	ID          *string                  `json:"id"`
-	Name        *string                  `json:"name"`
-	Policies    []PolicyRepresentation   `json:"policies"`
-	Resources   []ResourceRepresentation `json:"resources"`
+	DisplayName *string                  `json:"displayName,omitempty"`
+	IconURI     *string                  `json:"iconUri,omitempty"`
+	ID          *string                  `json:"id,omitempty"`
+	Name        *string                  `json:"name,omitempty"`
+	Policies    []PolicyRepresentation   `json:"policies,omitempty"`
+	Resources   []ResourceRepresentation `json:"resources,omitempty"`
 }

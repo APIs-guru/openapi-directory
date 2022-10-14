@@ -8,10 +8,10 @@ const (
 )
 
 type GcsDestinationConfig struct {
-	AvroFileFormat       map[string]interface{}                 `json:"avroFileFormat"`
-	FileRotationInterval *string                                `json:"fileRotationInterval"`
-	FileRotationMb       *int32                                 `json:"fileRotationMb"`
-	GcsFileFormat        *GcsDestinationConfigGcsFileFormatEnum `json:"gcsFileFormat"`
-	JSONFileFormat       *JSONFileFormat                        `json:"jsonFileFormat"`
-	Path                 *string                                `json:"path"`
+	AvroFileFormat       map[string]interface{}                 `json:"avroFileFormat,omitempty"`
+	FileRotationInterval *string                                `json:"fileRotationInterval,omitempty"`
+	FileRotationMb       *int32                                 `json:"fileRotationMb,omitempty"`
+	GcsFileFormat        *GcsDestinationConfigGcsFileFormatEnum `json:"gcsFileFormat,omitempty"`
+	JSONFileFormat       *JSONFileFormat                        `json:"jsonFileFormat,omitempty"`
+	Path                 *string                                `json:"path,omitempty"`
 }

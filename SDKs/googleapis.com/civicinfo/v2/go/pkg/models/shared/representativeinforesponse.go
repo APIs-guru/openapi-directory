@@ -1,9 +1,9 @@
 package shared
 
 type RepresentativeInfoResponse struct {
-	Divisions       map[string]GeographicDivision `json:"divisions"`
-	Kind            *string                       `json:"kind"`
-	NormalizedInput *SimpleAddressType            `json:"normalizedInput"`
-	Offices         []Office                      `json:"offices"`
-	Officials       []Official                    `json:"officials"`
+	Divisions       map[string]GeographicDivision `json:"divisions,omitempty"`
+	Kind            *string                       `json:"kind,omitempty"`
+	NormalizedInput *SimpleAddressType            `json:"normalizedInput,omitempty"`
+	Offices         []Office                      `json:"offices,omitempty"`
+	Officials       []Official                    `json:"officials,omitempty"`
 }

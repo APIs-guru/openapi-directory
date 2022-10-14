@@ -1,10 +1,10 @@
 package shared
 
 type DirectConnectGateway struct {
-	AmazonSideAsn             *int64                         `json:"amazonSideAsn"`
-	DirectConnectGatewayID    *string                        `json:"directConnectGatewayId"`
-	DirectConnectGatewayName  *string                        `json:"directConnectGatewayName"`
-	DirectConnectGatewayState *DirectConnectGatewayStateEnum `json:"directConnectGatewayState"`
-	OwnerAccount              *string                        `json:"ownerAccount"`
-	StateChangeError          *string                        `json:"stateChangeError"`
+	AmazonSideAsn             *int64                         `json:"amazonSideAsn,omitempty"`
+	DirectConnectGatewayID    *string                        `json:"directConnectGatewayId,omitempty"`
+	DirectConnectGatewayName  *string                        `json:"directConnectGatewayName,omitempty"`
+	DirectConnectGatewayState *DirectConnectGatewayStateEnum `json:"directConnectGatewayState,omitempty"`
+	OwnerAccount              *string                        `json:"ownerAccount,omitempty"`
+	StateChangeError          *string                        `json:"stateChangeError,omitempty"`
 }

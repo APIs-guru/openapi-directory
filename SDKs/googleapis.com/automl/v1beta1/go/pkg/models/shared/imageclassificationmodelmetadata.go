@@ -1,11 +1,11 @@
 package shared
 
 type ImageClassificationModelMetadata struct {
-	BaseModelID *string  `json:"baseModelId"`
-	ModelType   *string  `json:"modelType"`
-	NodeCount   *string  `json:"nodeCount"`
-	NodeQPS     *float64 `json:"nodeQps"`
-	StopReason  *string  `json:"stopReason"`
-	TrainBudget *string  `json:"trainBudget"`
-	TrainCost   *string  `json:"trainCost"`
+	BaseModelID *string  `json:"baseModelId,omitempty"`
+	ModelType   *string  `json:"modelType,omitempty"`
+	NodeCount   *string  `json:"nodeCount,omitempty"`
+	NodeQPS     *float64 `json:"nodeQps,omitempty"`
+	StopReason  *string  `json:"stopReason,omitempty"`
+	TrainBudget *string  `json:"trainBudget,omitempty"`
+	TrainCost   *string  `json:"trainCost,omitempty"`
 }

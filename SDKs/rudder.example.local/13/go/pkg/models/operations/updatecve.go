@@ -1,8 +1,8 @@
 package operations
 
 type UpdateCveRequestBody struct {
-	URL   *string  `json:"url"`
-	Years []string `json:"years"`
+	URL   *string  `json:"url,omitempty"`
+	Years []string `json:"years,omitempty"`
 }
 
 type UpdateCveRequest struct {

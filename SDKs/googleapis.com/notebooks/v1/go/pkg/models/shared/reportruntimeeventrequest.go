@@ -1,6 +1,6 @@
 package shared
 
 type ReportRuntimeEventRequest struct {
-	Event *Event  `json:"event"`
-	VMID  *string `json:"vmId"`
+	Event *Event  `json:"event,omitempty"`
+	VMID  *string `json:"vmId,omitempty"`
 }

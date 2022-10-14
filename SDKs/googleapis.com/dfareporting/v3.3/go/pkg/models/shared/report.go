@@ -5,12 +5,12 @@ import (
 )
 
 type ReportCriteria struct {
-	Activities            *Activities            `json:"activities"`
-	CustomRichMediaEvents *CustomRichMediaEvents `json:"customRichMediaEvents"`
-	DateRange             *DateRange             `json:"dateRange"`
-	DimensionFilters      []DimensionValue       `json:"dimensionFilters"`
-	Dimensions            []SortedDimension      `json:"dimensions"`
-	MetricNames           []string               `json:"metricNames"`
+	Activities            *Activities            `json:"activities,omitempty"`
+	CustomRichMediaEvents *CustomRichMediaEvents `json:"customRichMediaEvents,omitempty"`
+	DateRange             *DateRange             `json:"dateRange,omitempty"`
+	DimensionFilters      []DimensionValue       `json:"dimensionFilters,omitempty"`
+	Dimensions            []SortedDimension      `json:"dimensions,omitempty"`
+	MetricNames           []string               `json:"metricNames,omitempty"`
 }
 
 type ReportCrossDimensionReachCriteriaDimensionEnum string
@@ -23,13 +23,13 @@ const (
 )
 
 type ReportCrossDimensionReachCriteria struct {
-	Breakdown          []SortedDimension                               `json:"breakdown"`
-	DateRange          *DateRange                                      `json:"dateRange"`
-	Dimension          *ReportCrossDimensionReachCriteriaDimensionEnum `json:"dimension"`
-	DimensionFilters   []DimensionValue                                `json:"dimensionFilters"`
-	MetricNames        []string                                        `json:"metricNames"`
-	OverlapMetricNames []string                                        `json:"overlapMetricNames"`
-	Pivoted            *bool                                           `json:"pivoted"`
+	Breakdown          []SortedDimension                               `json:"breakdown,omitempty"`
+	DateRange          *DateRange                                      `json:"dateRange,omitempty"`
+	Dimension          *ReportCrossDimensionReachCriteriaDimensionEnum `json:"dimension,omitempty"`
+	DimensionFilters   []DimensionValue                                `json:"dimensionFilters,omitempty"`
+	MetricNames        []string                                        `json:"metricNames,omitempty"`
+	OverlapMetricNames []string                                        `json:"overlapMetricNames,omitempty"`
+	Pivoted            *bool                                           `json:"pivoted,omitempty"`
 }
 
 type ReportDeliveryEmailOwnerDeliveryTypeEnum string
@@ -40,26 +40,26 @@ const (
 )
 
 type ReportDelivery struct {
-	EmailOwner             *bool                                     `json:"emailOwner"`
-	EmailOwnerDeliveryType *ReportDeliveryEmailOwnerDeliveryTypeEnum `json:"emailOwnerDeliveryType"`
-	Message                *string                                   `json:"message"`
-	Recipients             []Recipient                               `json:"recipients"`
+	EmailOwner             *bool                                     `json:"emailOwner,omitempty"`
+	EmailOwnerDeliveryType *ReportDeliveryEmailOwnerDeliveryTypeEnum `json:"emailOwnerDeliveryType,omitempty"`
+	Message                *string                                   `json:"message,omitempty"`
+	Recipients             []Recipient                               `json:"recipients,omitempty"`
 }
 
 type ReportFloodlightCriteriaReportProperties struct {
-	IncludeAttributedIPConversions       *bool `json:"includeAttributedIPConversions"`
-	IncludeUnattributedCookieConversions *bool `json:"includeUnattributedCookieConversions"`
-	IncludeUnattributedIPConversions     *bool `json:"includeUnattributedIPConversions"`
+	IncludeAttributedIPConversions       *bool `json:"includeAttributedIPConversions,omitempty"`
+	IncludeUnattributedCookieConversions *bool `json:"includeUnattributedCookieConversions,omitempty"`
+	IncludeUnattributedIPConversions     *bool `json:"includeUnattributedIPConversions,omitempty"`
 }
 
 type ReportFloodlightCriteria struct {
-	CustomRichMediaEvents []DimensionValue                          `json:"customRichMediaEvents"`
-	DateRange             *DateRange                                `json:"dateRange"`
-	DimensionFilters      []DimensionValue                          `json:"dimensionFilters"`
-	Dimensions            []SortedDimension                         `json:"dimensions"`
-	FloodlightConfigID    *DimensionValue                           `json:"floodlightConfigId"`
-	MetricNames           []string                                  `json:"metricNames"`
-	ReportProperties      *ReportFloodlightCriteriaReportProperties `json:"reportProperties"`
+	CustomRichMediaEvents []DimensionValue                          `json:"customRichMediaEvents,omitempty"`
+	DateRange             *DateRange                                `json:"dateRange,omitempty"`
+	DimensionFilters      []DimensionValue                          `json:"dimensionFilters,omitempty"`
+	Dimensions            []SortedDimension                         `json:"dimensions,omitempty"`
+	FloodlightConfigID    *DimensionValue                           `json:"floodlightConfigId,omitempty"`
+	MetricNames           []string                                  `json:"metricNames,omitempty"`
+	ReportProperties      *ReportFloodlightCriteriaReportProperties `json:"reportProperties,omitempty"`
 }
 
 type ReportFormatEnum string
@@ -70,38 +70,38 @@ const (
 )
 
 type ReportPathToConversionCriteriaReportProperties struct {
-	ClicksLookbackWindow                 *int32 `json:"clicksLookbackWindow"`
-	ImpressionsLookbackWindow            *int32 `json:"impressionsLookbackWindow"`
-	IncludeAttributedIPConversions       *bool  `json:"includeAttributedIPConversions"`
-	IncludeUnattributedCookieConversions *bool  `json:"includeUnattributedCookieConversions"`
-	IncludeUnattributedIPConversions     *bool  `json:"includeUnattributedIPConversions"`
-	MaximumClickInteractions             *int32 `json:"maximumClickInteractions"`
-	MaximumImpressionInteractions        *int32 `json:"maximumImpressionInteractions"`
-	MaximumInteractionGap                *int32 `json:"maximumInteractionGap"`
-	PivotOnInteractionPath               *bool  `json:"pivotOnInteractionPath"`
+	ClicksLookbackWindow                 *int32 `json:"clicksLookbackWindow,omitempty"`
+	ImpressionsLookbackWindow            *int32 `json:"impressionsLookbackWindow,omitempty"`
+	IncludeAttributedIPConversions       *bool  `json:"includeAttributedIPConversions,omitempty"`
+	IncludeUnattributedCookieConversions *bool  `json:"includeUnattributedCookieConversions,omitempty"`
+	IncludeUnattributedIPConversions     *bool  `json:"includeUnattributedIPConversions,omitempty"`
+	MaximumClickInteractions             *int32 `json:"maximumClickInteractions,omitempty"`
+	MaximumImpressionInteractions        *int32 `json:"maximumImpressionInteractions,omitempty"`
+	MaximumInteractionGap                *int32 `json:"maximumInteractionGap,omitempty"`
+	PivotOnInteractionPath               *bool  `json:"pivotOnInteractionPath,omitempty"`
 }
 
 type ReportPathToConversionCriteria struct {
-	ActivityFilters           []DimensionValue                                `json:"activityFilters"`
-	ConversionDimensions      []SortedDimension                               `json:"conversionDimensions"`
-	CustomFloodlightVariables []SortedDimension                               `json:"customFloodlightVariables"`
-	CustomRichMediaEvents     []DimensionValue                                `json:"customRichMediaEvents"`
-	DateRange                 *DateRange                                      `json:"dateRange"`
-	FloodlightConfigID        *DimensionValue                                 `json:"floodlightConfigId"`
-	MetricNames               []string                                        `json:"metricNames"`
-	PerInteractionDimensions  []SortedDimension                               `json:"perInteractionDimensions"`
-	ReportProperties          *ReportPathToConversionCriteriaReportProperties `json:"reportProperties"`
+	ActivityFilters           []DimensionValue                                `json:"activityFilters,omitempty"`
+	ConversionDimensions      []SortedDimension                               `json:"conversionDimensions,omitempty"`
+	CustomFloodlightVariables []SortedDimension                               `json:"customFloodlightVariables,omitempty"`
+	CustomRichMediaEvents     []DimensionValue                                `json:"customRichMediaEvents,omitempty"`
+	DateRange                 *DateRange                                      `json:"dateRange,omitempty"`
+	FloodlightConfigID        *DimensionValue                                 `json:"floodlightConfigId,omitempty"`
+	MetricNames               []string                                        `json:"metricNames,omitempty"`
+	PerInteractionDimensions  []SortedDimension                               `json:"perInteractionDimensions,omitempty"`
+	ReportProperties          *ReportPathToConversionCriteriaReportProperties `json:"reportProperties,omitempty"`
 }
 
 type ReportReachCriteria struct {
-	Activities                     *Activities            `json:"activities"`
-	CustomRichMediaEvents          *CustomRichMediaEvents `json:"customRichMediaEvents"`
-	DateRange                      *DateRange             `json:"dateRange"`
-	DimensionFilters               []DimensionValue       `json:"dimensionFilters"`
-	Dimensions                     []SortedDimension      `json:"dimensions"`
-	EnableAllDimensionCombinations *bool                  `json:"enableAllDimensionCombinations"`
-	MetricNames                    []string               `json:"metricNames"`
-	ReachByFrequencyMetricNames    []string               `json:"reachByFrequencyMetricNames"`
+	Activities                     *Activities            `json:"activities,omitempty"`
+	CustomRichMediaEvents          *CustomRichMediaEvents `json:"customRichMediaEvents,omitempty"`
+	DateRange                      *DateRange             `json:"dateRange,omitempty"`
+	DimensionFilters               []DimensionValue       `json:"dimensionFilters,omitempty"`
+	Dimensions                     []SortedDimension      `json:"dimensions,omitempty"`
+	EnableAllDimensionCombinations *bool                  `json:"enableAllDimensionCombinations,omitempty"`
+	MetricNames                    []string               `json:"metricNames,omitempty"`
+	ReachByFrequencyMetricNames    []string               `json:"reachByFrequencyMetricNames,omitempty"`
 }
 
 type ReportScheduleRepeatsOnWeekDaysEnum string
@@ -124,13 +124,13 @@ const (
 )
 
 type ReportSchedule struct {
-	Active            *bool                                 `json:"active"`
-	Every             *int32                                `json:"every"`
-	ExpirationDate    *time.Time                            `json:"expirationDate"`
-	Repeats           *string                               `json:"repeats"`
-	RepeatsOnWeekDays []ReportScheduleRepeatsOnWeekDaysEnum `json:"repeatsOnWeekDays"`
-	RunsOnDayOfMonth  *ReportScheduleRunsOnDayOfMonthEnum   `json:"runsOnDayOfMonth"`
-	StartDate         *time.Time                            `json:"startDate"`
+	Active            *bool                                 `json:"active,omitempty"`
+	Every             *int32                                `json:"every,omitempty"`
+	ExpirationDate    *time.Time                            `json:"expirationDate,omitempty"`
+	Repeats           *string                               `json:"repeats,omitempty"`
+	RepeatsOnWeekDays []ReportScheduleRepeatsOnWeekDaysEnum `json:"repeatsOnWeekDays,omitempty"`
+	RunsOnDayOfMonth  *ReportScheduleRunsOnDayOfMonthEnum   `json:"runsOnDayOfMonth,omitempty"`
+	StartDate         *time.Time                            `json:"startDate,omitempty"`
 }
 
 type ReportTypeEnum string
@@ -144,22 +144,22 @@ const (
 )
 
 type Report struct {
-	AccountID                   *string                            `json:"accountId"`
-	Criteria                    *ReportCriteria                    `json:"criteria"`
-	CrossDimensionReachCriteria *ReportCrossDimensionReachCriteria `json:"crossDimensionReachCriteria"`
-	Delivery                    *ReportDelivery                    `json:"delivery"`
-	Etag                        *string                            `json:"etag"`
-	FileName                    *string                            `json:"fileName"`
-	FloodlightCriteria          *ReportFloodlightCriteria          `json:"floodlightCriteria"`
-	Format                      *ReportFormatEnum                  `json:"format"`
-	ID                          *string                            `json:"id"`
-	Kind                        *string                            `json:"kind"`
-	LastModifiedTime            *string                            `json:"lastModifiedTime"`
-	Name                        *string                            `json:"name"`
-	OwnerProfileID              *string                            `json:"ownerProfileId"`
-	PathToConversionCriteria    *ReportPathToConversionCriteria    `json:"pathToConversionCriteria"`
-	ReachCriteria               *ReportReachCriteria               `json:"reachCriteria"`
-	Schedule                    *ReportSchedule                    `json:"schedule"`
-	SubAccountID                *string                            `json:"subAccountId"`
-	Type                        *ReportTypeEnum                    `json:"type"`
+	AccountID                   *string                            `json:"accountId,omitempty"`
+	Criteria                    *ReportCriteria                    `json:"criteria,omitempty"`
+	CrossDimensionReachCriteria *ReportCrossDimensionReachCriteria `json:"crossDimensionReachCriteria,omitempty"`
+	Delivery                    *ReportDelivery                    `json:"delivery,omitempty"`
+	Etag                        *string                            `json:"etag,omitempty"`
+	FileName                    *string                            `json:"fileName,omitempty"`
+	FloodlightCriteria          *ReportFloodlightCriteria          `json:"floodlightCriteria,omitempty"`
+	Format                      *ReportFormatEnum                  `json:"format,omitempty"`
+	ID                          *string                            `json:"id,omitempty"`
+	Kind                        *string                            `json:"kind,omitempty"`
+	LastModifiedTime            *string                            `json:"lastModifiedTime,omitempty"`
+	Name                        *string                            `json:"name,omitempty"`
+	OwnerProfileID              *string                            `json:"ownerProfileId,omitempty"`
+	PathToConversionCriteria    *ReportPathToConversionCriteria    `json:"pathToConversionCriteria,omitempty"`
+	ReachCriteria               *ReportReachCriteria               `json:"reachCriteria,omitempty"`
+	Schedule                    *ReportSchedule                    `json:"schedule,omitempty"`
+	SubAccountID                *string                            `json:"subAccountId,omitempty"`
+	Type                        *ReportTypeEnum                    `json:"type,omitempty"`
 }

@@ -11,18 +11,18 @@ const (
 )
 
 type DatacenterConnector struct {
-	ApplianceInfrastructureVersion *string                       `json:"applianceInfrastructureVersion"`
-	ApplianceSoftwareVersion       *string                       `json:"applianceSoftwareVersion"`
-	AvailableVersions              *AvailableUpdates             `json:"availableVersions"`
-	Bucket                         *string                       `json:"bucket"`
-	CreateTime                     *string                       `json:"createTime"`
-	Error                          *Status                       `json:"error"`
-	Name                           *string                       `json:"name"`
-	RegistrationID                 *string                       `json:"registrationId"`
-	ServiceAccount                 *string                       `json:"serviceAccount"`
-	State                          *DatacenterConnectorStateEnum `json:"state"`
-	StateTime                      *string                       `json:"stateTime"`
-	UpdateTime                     *string                       `json:"updateTime"`
-	UpgradeStatus                  *UpgradeStatus                `json:"upgradeStatus"`
-	Version                        *string                       `json:"version"`
+	ApplianceInfrastructureVersion *string                       `json:"applianceInfrastructureVersion,omitempty"`
+	ApplianceSoftwareVersion       *string                       `json:"applianceSoftwareVersion,omitempty"`
+	AvailableVersions              *AvailableUpdates             `json:"availableVersions,omitempty"`
+	Bucket                         *string                       `json:"bucket,omitempty"`
+	CreateTime                     *string                       `json:"createTime,omitempty"`
+	Error                          *Status                       `json:"error,omitempty"`
+	Name                           *string                       `json:"name,omitempty"`
+	RegistrationID                 *string                       `json:"registrationId,omitempty"`
+	ServiceAccount                 *string                       `json:"serviceAccount,omitempty"`
+	State                          *DatacenterConnectorStateEnum `json:"state,omitempty"`
+	StateTime                      *string                       `json:"stateTime,omitempty"`
+	UpdateTime                     *string                       `json:"updateTime,omitempty"`
+	UpgradeStatus                  *UpgradeStatus                `json:"upgradeStatus,omitempty"`
+	Version                        *string                       `json:"version,omitempty"`
 }

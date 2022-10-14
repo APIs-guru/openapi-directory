@@ -1,5 +1,5 @@
 package shared
 
 type AutoCorrections struct {
-	Phrase *string `json:"phrase"`
+	Phrase *string `json:"phrase,omitempty"`
 }

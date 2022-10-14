@@ -5,11 +5,11 @@ import (
 )
 
 type LearnerProgressResponse struct {
-	Completion     *string    `json:"completion"`
-	CourseID       *string    `json:"courseId"`
-	Email          *string    `json:"email"`
-	FirstName      *string    `json:"firstName"`
-	LastLoggedInAt *time.Time `json:"lastLoggedInAt"`
-	LastName       *string    `json:"lastName"`
-	PersonID       *string    `json:"personId"`
+	Completion     *string    `json:"completion,omitempty"`
+	CourseID       *string    `json:"courseId,omitempty"`
+	Email          *string    `json:"email,omitempty"`
+	FirstName      *string    `json:"firstName,omitempty"`
+	LastLoggedInAt *time.Time `json:"lastLoggedInAt,omitempty"`
+	LastName       *string    `json:"lastName,omitempty"`
+	PersonID       *string    `json:"personId,omitempty"`
 }

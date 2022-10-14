@@ -5,14 +5,14 @@ import (
 )
 
 type ListStudioLifecycleConfigsRequest struct {
-	AppTypeEquals      *StudioLifecycleConfigAppTypeEnum `json:"AppTypeEquals"`
-	CreationTimeAfter  *time.Time                        `json:"CreationTimeAfter"`
-	CreationTimeBefore *time.Time                        `json:"CreationTimeBefore"`
-	MaxResults         *int64                            `json:"MaxResults"`
-	ModifiedTimeAfter  *time.Time                        `json:"ModifiedTimeAfter"`
-	ModifiedTimeBefore *time.Time                        `json:"ModifiedTimeBefore"`
-	NameContains       *string                           `json:"NameContains"`
-	NextToken          *string                           `json:"NextToken"`
-	SortBy             *StudioLifecycleConfigSortKeyEnum `json:"SortBy"`
-	SortOrder          *SortOrderEnum                    `json:"SortOrder"`
+	AppTypeEquals      *StudioLifecycleConfigAppTypeEnum `json:"AppTypeEquals,omitempty"`
+	CreationTimeAfter  *time.Time                        `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore *time.Time                        `json:"CreationTimeBefore,omitempty"`
+	MaxResults         *int64                            `json:"MaxResults,omitempty"`
+	ModifiedTimeAfter  *time.Time                        `json:"ModifiedTimeAfter,omitempty"`
+	ModifiedTimeBefore *time.Time                        `json:"ModifiedTimeBefore,omitempty"`
+	NameContains       *string                           `json:"NameContains,omitempty"`
+	NextToken          *string                           `json:"NextToken,omitempty"`
+	SortBy             *StudioLifecycleConfigSortKeyEnum `json:"SortBy,omitempty"`
+	SortOrder          *SortOrderEnum                    `json:"SortOrder,omitempty"`
 }

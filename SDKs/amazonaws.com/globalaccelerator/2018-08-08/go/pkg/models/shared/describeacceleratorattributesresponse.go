@@ -1,5 +1,5 @@
 package shared
 
 type DescribeAcceleratorAttributesResponse struct {
-	AcceleratorAttributes *AcceleratorAttributes `json:"AcceleratorAttributes"`
+	AcceleratorAttributes *AcceleratorAttributes `json:"AcceleratorAttributes,omitempty"`
 }

@@ -20,7 +20,7 @@ type AppsListReposAccessibleToInstallationRequest struct {
 
 type AppsListReposAccessibleToInstallation200ApplicationJSON struct {
 	Repositories        []shared.Repository `json:"repositories"`
-	RepositorySelection *string             `json:"repository_selection"`
+	RepositorySelection *string             `json:"repository_selection,omitempty"`
 	TotalCount          int64               `json:"total_count"`
 }
 

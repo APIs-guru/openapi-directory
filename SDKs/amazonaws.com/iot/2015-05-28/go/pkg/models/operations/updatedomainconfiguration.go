@@ -19,8 +19,8 @@ type UpdateDomainConfigurationHeaders struct {
 }
 
 type UpdateDomainConfigurationRequestBodyAuthorizerConfig struct {
-	AllowAuthorizerOverride *bool   `json:"allowAuthorizerOverride"`
-	DefaultAuthorizerName   *string `json:"defaultAuthorizerName"`
+	AllowAuthorizerOverride *bool   `json:"allowAuthorizerOverride,omitempty"`
+	DefaultAuthorizerName   *string `json:"defaultAuthorizerName,omitempty"`
 }
 
 type UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum string
@@ -31,9 +31,9 @@ const (
 )
 
 type UpdateDomainConfigurationRequestBody struct {
-	AuthorizerConfig          *UpdateDomainConfigurationRequestBodyAuthorizerConfig              `json:"authorizerConfig"`
-	DomainConfigurationStatus *UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum `json:"domainConfigurationStatus"`
-	RemoveAuthorizerConfig    *bool                                                              `json:"removeAuthorizerConfig"`
+	AuthorizerConfig          *UpdateDomainConfigurationRequestBodyAuthorizerConfig              `json:"authorizerConfig,omitempty"`
+	DomainConfigurationStatus *UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum `json:"domainConfigurationStatus,omitempty"`
+	RemoveAuthorizerConfig    *bool                                                              `json:"removeAuthorizerConfig,omitempty"`
 }
 
 type UpdateDomainConfigurationRequest struct {

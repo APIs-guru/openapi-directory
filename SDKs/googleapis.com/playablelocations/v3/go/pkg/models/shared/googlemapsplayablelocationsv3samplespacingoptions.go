@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleMapsPlayablelocationsV3SampleSpacingOptions struct {
-	MinSpacingMeters *float64                                                        `json:"minSpacingMeters"`
-	PointType        *GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnum `json:"pointType"`
+	MinSpacingMeters *float64                                                        `json:"minSpacingMeters,omitempty"`
+	PointType        *GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnum `json:"pointType,omitempty"`
 }

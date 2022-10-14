@@ -20,22 +20,22 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1Subscription struct {
-	CancellationDetails     *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails     `json:"cancellationDetails"`
-	CreateTime              *string                                                                       `json:"createTime"`
-	CycleEndTime            *string                                                                       `json:"cycleEndTime"`
-	EndUserEntitled         *bool                                                                         `json:"endUserEntitled"`
-	FreeTrialEndTime        *string                                                                       `json:"freeTrialEndTime"`
-	LineItems               []GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem               `json:"lineItems"`
-	Name                    *string                                                                       `json:"name"`
-	PartnerUserToken        *string                                                                       `json:"partnerUserToken"`
-	ProcessingState         *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionProcessingStateEnum     `json:"processingState"`
-	Products                []string                                                                      `json:"products"`
-	PromotionSpecs          []GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec          `json:"promotionSpecs"`
-	Promotions              []string                                                                      `json:"promotions"`
-	RedirectURI             *string                                                                       `json:"redirectUri"`
-	RenewalTime             *string                                                                       `json:"renewalTime"`
-	ServiceLocation         *GoogleCloudPaymentsResellerSubscriptionV1Location                            `json:"serviceLocation"`
-	State                   *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum               `json:"state"`
-	UpdateTime              *string                                                                       `json:"updateTime"`
-	UpgradeDowngradeDetails *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails `json:"upgradeDowngradeDetails"`
+	CancellationDetails     *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails     `json:"cancellationDetails,omitempty"`
+	CreateTime              *string                                                                       `json:"createTime,omitempty"`
+	CycleEndTime            *string                                                                       `json:"cycleEndTime,omitempty"`
+	EndUserEntitled         *bool                                                                         `json:"endUserEntitled,omitempty"`
+	FreeTrialEndTime        *string                                                                       `json:"freeTrialEndTime,omitempty"`
+	LineItems               []GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem               `json:"lineItems,omitempty"`
+	Name                    *string                                                                       `json:"name,omitempty"`
+	PartnerUserToken        *string                                                                       `json:"partnerUserToken,omitempty"`
+	ProcessingState         *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionProcessingStateEnum     `json:"processingState,omitempty"`
+	Products                []string                                                                      `json:"products,omitempty"`
+	PromotionSpecs          []GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec          `json:"promotionSpecs,omitempty"`
+	Promotions              []string                                                                      `json:"promotions,omitempty"`
+	RedirectURI             *string                                                                       `json:"redirectUri,omitempty"`
+	RenewalTime             *string                                                                       `json:"renewalTime,omitempty"`
+	ServiceLocation         *GoogleCloudPaymentsResellerSubscriptionV1Location                            `json:"serviceLocation,omitempty"`
+	State                   *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum               `json:"state,omitempty"`
+	UpdateTime              *string                                                                       `json:"updateTime,omitempty"`
+	UpgradeDowngradeDetails *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails `json:"upgradeDowngradeDetails,omitempty"`
 }

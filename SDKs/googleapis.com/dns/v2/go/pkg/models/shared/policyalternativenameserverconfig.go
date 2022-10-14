@@ -1,6 +1,6 @@
 package shared
 
 type PolicyAlternativeNameServerConfig struct {
-	Kind              *string                                             `json:"kind"`
-	TargetNameServers []PolicyAlternativeNameServerConfigTargetNameServer `json:"targetNameServers"`
+	Kind              *string                                             `json:"kind,omitempty"`
+	TargetNameServers []PolicyAlternativeNameServerConfigTargetNameServer `json:"targetNameServers,omitempty"`
 }

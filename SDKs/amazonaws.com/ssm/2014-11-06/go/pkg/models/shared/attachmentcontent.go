@@ -1,9 +1,9 @@
 package shared
 
 type AttachmentContent struct {
-	Hash     *string                 `json:"Hash"`
-	HashType *AttachmentHashTypeEnum `json:"HashType"`
-	Name     *string                 `json:"Name"`
-	Size     *int64                  `json:"Size"`
-	URL      *string                 `json:"Url"`
+	Hash     *string                 `json:"Hash,omitempty"`
+	HashType *AttachmentHashTypeEnum `json:"HashType,omitempty"`
+	Name     *string                 `json:"Name,omitempty"`
+	Size     *int64                  `json:"Size,omitempty"`
+	URL      *string                 `json:"Url,omitempty"`
 }

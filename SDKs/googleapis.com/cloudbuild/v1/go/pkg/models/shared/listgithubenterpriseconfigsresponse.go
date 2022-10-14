@@ -1,5 +1,5 @@
 package shared
 
 type ListGithubEnterpriseConfigsResponse struct {
-	Configs []GitHubEnterpriseConfig `json:"configs"`
+	Configs []GitHubEnterpriseConfig `json:"configs,omitempty"`
 }

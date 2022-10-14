@@ -5,9 +5,9 @@ import (
 )
 
 type GetBulkPublishDetailsResponse struct {
-	BulkPublishCompleteTime *time.Time             `json:"BulkPublishCompleteTime"`
-	BulkPublishStartTime    *time.Time             `json:"BulkPublishStartTime"`
-	BulkPublishStatus       *BulkPublishStatusEnum `json:"BulkPublishStatus"`
-	FailureMessage          *string                `json:"FailureMessage"`
-	IdentityPoolID          *string                `json:"IdentityPoolId"`
+	BulkPublishCompleteTime *time.Time             `json:"BulkPublishCompleteTime,omitempty"`
+	BulkPublishStartTime    *time.Time             `json:"BulkPublishStartTime,omitempty"`
+	BulkPublishStatus       *BulkPublishStatusEnum `json:"BulkPublishStatus,omitempty"`
+	FailureMessage          *string                `json:"FailureMessage,omitempty"`
+	IdentityPoolID          *string                `json:"IdentityPoolId,omitempty"`
 }

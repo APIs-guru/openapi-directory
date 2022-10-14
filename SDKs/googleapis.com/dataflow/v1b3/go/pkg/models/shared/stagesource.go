@@ -1,8 +1,8 @@
 package shared
 
 type StageSource struct {
-	Name                          *string `json:"name"`
-	OriginalTransformOrCollection *string `json:"originalTransformOrCollection"`
-	SizeBytes                     *string `json:"sizeBytes"`
-	UserName                      *string `json:"userName"`
+	Name                          *string `json:"name,omitempty"`
+	OriginalTransformOrCollection *string `json:"originalTransformOrCollection,omitempty"`
+	SizeBytes                     *string `json:"sizeBytes,omitempty"`
+	UserName                      *string `json:"userName,omitempty"`
 }

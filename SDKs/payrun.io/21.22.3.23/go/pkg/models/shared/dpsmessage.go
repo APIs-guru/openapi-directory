@@ -15,17 +15,17 @@ const (
 )
 
 type DpsMessageDpsMessageDpsMessage struct {
-	FormType         *string                                             `json:"FormType"`
-	IssueDate        *time.Time                                          `json:"IssueDate"`
-	LastUpdated      *time.Time                                          `json:"LastUpdated"`
-	Message          *string                                             `json:"Message"`
-	MessageStatus    *DpsMessageDpsMessageMessageStatusMessageStatusEnum `json:"MessageStatus"`
-	MessageType      *string                                             `json:"MessageType"`
-	ProcessingResult *string                                             `json:"ProcessingResult"`
-	RetrieveDate     *time.Time                                          `json:"RetrieveDate"`
-	SequenceNumber   *int32                                              `json:"SequenceNumber"`
+	FormType         *string                                             `json:"FormType,omitempty"`
+	IssueDate        *time.Time                                          `json:"IssueDate,omitempty"`
+	LastUpdated      *time.Time                                          `json:"LastUpdated,omitempty"`
+	Message          *string                                             `json:"Message,omitempty"`
+	MessageStatus    *DpsMessageDpsMessageMessageStatusMessageStatusEnum `json:"MessageStatus,omitempty"`
+	MessageType      *string                                             `json:"MessageType,omitempty"`
+	ProcessingResult *string                                             `json:"ProcessingResult,omitempty"`
+	RetrieveDate     *time.Time                                          `json:"RetrieveDate,omitempty"`
+	SequenceNumber   *int32                                              `json:"SequenceNumber,omitempty"`
 }
 
 type DpsMessage struct {
-	DpsMessage *DpsMessageDpsMessageDpsMessage `json:"DpsMessage"`
+	DpsMessage *DpsMessageDpsMessageDpsMessage `json:"DpsMessage,omitempty"`
 }

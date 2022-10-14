@@ -1,10 +1,10 @@
 package shared
 
 type UserActivitySession struct {
-	Activities     []Activity `json:"activities"`
-	DataSource     *string    `json:"dataSource"`
-	DeviceCategory *string    `json:"deviceCategory"`
-	Platform       *string    `json:"platform"`
-	SessionDate    *string    `json:"sessionDate"`
-	SessionID      *string    `json:"sessionId"`
+	Activities     []Activity `json:"activities,omitempty"`
+	DataSource     *string    `json:"dataSource,omitempty"`
+	DeviceCategory *string    `json:"deviceCategory,omitempty"`
+	Platform       *string    `json:"platform,omitempty"`
+	SessionDate    *string    `json:"sessionDate,omitempty"`
+	SessionID      *string    `json:"sessionId,omitempty"`
 }

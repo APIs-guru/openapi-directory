@@ -1,6 +1,6 @@
 package shared
 
 type DynamicPartitioningConfiguration struct {
-	Enabled      *bool         `json:"Enabled"`
-	RetryOptions *RetryOptions `json:"RetryOptions"`
+	Enabled      *bool         `json:"Enabled,omitempty"`
+	RetryOptions *RetryOptions `json:"RetryOptions,omitempty"`
 }

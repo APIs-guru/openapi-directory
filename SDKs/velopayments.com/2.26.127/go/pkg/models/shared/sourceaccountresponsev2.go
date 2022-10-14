@@ -8,18 +8,18 @@ const (
 
 type SourceAccountResponseV2 struct {
 	AccountType         string                               `json:"accountType"`
-	AutoTopUpConfig     *AutoTopUpConfig                     `json:"autoTopUpConfig"`
-	Balance             *int64                               `json:"balance"`
+	AutoTopUpConfig     *AutoTopUpConfig                     `json:"autoTopUpConfig,omitempty"`
+	Balance             *int64                               `json:"balance,omitempty"`
 	BalanceVisible      bool                                 `json:"balanceVisible"`
-	Currency            *SourceAccountResponseV2CurrencyEnum `json:"currency"`
-	CustomerID          *string                              `json:"customerId"`
-	FundingAccountID    *string                              `json:"fundingAccountId"`
+	Currency            *SourceAccountResponseV2CurrencyEnum `json:"currency,omitempty"`
+	CustomerID          *string                              `json:"customerId,omitempty"`
+	FundingAccountID    *string                              `json:"fundingAccountId,omitempty"`
 	FundingRef          string                               `json:"fundingRef"`
 	ID                  string                               `json:"id"`
-	Name                *string                              `json:"name"`
-	Notifications       *Notifications                       `json:"notifications"`
-	PayorID             *string                              `json:"payorId"`
-	PhysicalAccountID   *string                              `json:"physicalAccountId"`
+	Name                *string                              `json:"name,omitempty"`
+	Notifications       *Notifications                       `json:"notifications,omitempty"`
+	PayorID             *string                              `json:"payorId,omitempty"`
+	PhysicalAccountID   *string                              `json:"physicalAccountId,omitempty"`
 	PhysicalAccountName string                               `json:"physicalAccountName"`
 	Pooled              bool                                 `json:"pooled"`
 	RailsID             string                               `json:"railsId"`

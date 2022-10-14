@@ -1,8 +1,8 @@
 package shared
 
 type Signature struct {
-	Image         *Image            `json:"image"`
-	Metadata      map[string]string `json:"metadata"`
-	SignatureTime *string           `json:"signatureTime"`
-	UserID        *string           `json:"userId"`
+	Image         *Image            `json:"image,omitempty"`
+	Metadata      map[string]string `json:"metadata,omitempty"`
+	SignatureTime *string           `json:"signatureTime,omitempty"`
+	UserID        *string           `json:"userId,omitempty"`
 }

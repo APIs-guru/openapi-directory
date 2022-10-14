@@ -1,7 +1,7 @@
 package shared
 
 type CollectdPayloadError struct {
-	Error       *Status              `json:"error"`
-	Index       *int32               `json:"index"`
-	ValueErrors []CollectdValueError `json:"valueErrors"`
+	Error       *Status              `json:"error,omitempty"`
+	Index       *int32               `json:"index,omitempty"`
+	ValueErrors []CollectdValueError `json:"valueErrors,omitempty"`
 }

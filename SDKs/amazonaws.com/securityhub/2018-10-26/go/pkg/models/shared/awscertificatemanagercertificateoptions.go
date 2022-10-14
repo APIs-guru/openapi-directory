@@ -1,5 +1,5 @@
 package shared
 
 type AwsCertificateManagerCertificateOptions struct {
-	CertificateTransparencyLoggingPreference *string `json:"CertificateTransparencyLoggingPreference"`
+	CertificateTransparencyLoggingPreference *string `json:"CertificateTransparencyLoggingPreference,omitempty"`
 }

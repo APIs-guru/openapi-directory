@@ -9,10 +9,10 @@ const (
 )
 
 type AttributeDefinition struct {
-	AllowedValues           []string                         `json:"allowedValues"`
-	Category                *AttributeDefinitionCategoryEnum `json:"category"`
-	ConsentDefaultValues    []string                         `json:"consentDefaultValues"`
-	DataMappingDefaultValue *string                          `json:"dataMappingDefaultValue"`
-	Description             *string                          `json:"description"`
-	Name                    *string                          `json:"name"`
+	AllowedValues           []string                         `json:"allowedValues,omitempty"`
+	Category                *AttributeDefinitionCategoryEnum `json:"category,omitempty"`
+	ConsentDefaultValues    []string                         `json:"consentDefaultValues,omitempty"`
+	DataMappingDefaultValue *string                          `json:"dataMappingDefaultValue,omitempty"`
+	Description             *string                          `json:"description,omitempty"`
+	Name                    *string                          `json:"name,omitempty"`
 }

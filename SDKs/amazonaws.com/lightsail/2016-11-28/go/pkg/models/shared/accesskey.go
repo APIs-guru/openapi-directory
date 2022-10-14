@@ -5,9 +5,9 @@ import (
 )
 
 type AccessKey struct {
-	AccessKeyID     *string            `json:"accessKeyId"`
-	CreatedAt       *time.Time         `json:"createdAt"`
-	LastUsed        *AccessKeyLastUsed `json:"lastUsed"`
-	SecretAccessKey *string            `json:"secretAccessKey"`
-	Status          *StatusTypeEnum    `json:"status"`
+	AccessKeyID     *string            `json:"accessKeyId,omitempty"`
+	CreatedAt       *time.Time         `json:"createdAt,omitempty"`
+	LastUsed        *AccessKeyLastUsed `json:"lastUsed,omitempty"`
+	SecretAccessKey *string            `json:"secretAccessKey,omitempty"`
+	Status          *StatusTypeEnum    `json:"status,omitempty"`
 }

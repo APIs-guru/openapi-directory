@@ -9,7 +9,7 @@ const (
 )
 
 type SslSettings struct {
-	CertificateID               *string                           `json:"certificateId"`
-	PendingManagedCertificateID *string                           `json:"pendingManagedCertificateId"`
-	SslManagementType           *SslSettingsSslManagementTypeEnum `json:"sslManagementType"`
+	CertificateID               *string                           `json:"certificateId,omitempty"`
+	PendingManagedCertificateID *string                           `json:"pendingManagedCertificateId,omitempty"`
+	SslManagementType           *SslSettingsSslManagementTypeEnum `json:"sslManagementType,omitempty"`
 }

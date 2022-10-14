@@ -6,8 +6,8 @@ type UpdateNetworkCameraWirelessProfilePathParams struct {
 }
 
 type UpdateNetworkCameraWirelessProfileRequestBodyIdentity struct {
-	Password *string `json:"password"`
-	Username *string `json:"username"`
+	Password *string `json:"password,omitempty"`
+	Username *string `json:"username,omitempty"`
 }
 
 type UpdateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum string
@@ -18,16 +18,16 @@ const (
 )
 
 type UpdateNetworkCameraWirelessProfileRequestBodySsid struct {
-	AuthMode       *UpdateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum `json:"authMode"`
-	EncryptionMode *string                                                        `json:"encryptionMode"`
-	Name           *string                                                        `json:"name"`
-	Psk            *string                                                        `json:"psk"`
+	AuthMode       *UpdateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum `json:"authMode,omitempty"`
+	EncryptionMode *string                                                        `json:"encryptionMode,omitempty"`
+	Name           *string                                                        `json:"name,omitempty"`
+	Psk            *string                                                        `json:"psk,omitempty"`
 }
 
 type UpdateNetworkCameraWirelessProfileRequestBody struct {
-	Identity *UpdateNetworkCameraWirelessProfileRequestBodyIdentity `json:"identity"`
-	Name     *string                                                `json:"name"`
-	Ssid     *UpdateNetworkCameraWirelessProfileRequestBodySsid     `json:"ssid"`
+	Identity *UpdateNetworkCameraWirelessProfileRequestBodyIdentity `json:"identity,omitempty"`
+	Name     *string                                                `json:"name,omitempty"`
+	Ssid     *UpdateNetworkCameraWirelessProfileRequestBodySsid     `json:"ssid,omitempty"`
 }
 
 type UpdateNetworkCameraWirelessProfileRequest struct {

@@ -5,10 +5,10 @@ import (
 )
 
 type FeatureTransformation struct {
-	CreationDateTime         *time.Time        `json:"creationDateTime"`
-	DefaultParameters        map[string]string `json:"defaultParameters"`
-	FeatureTransformationArn *string           `json:"featureTransformationArn"`
-	LastUpdatedDateTime      *time.Time        `json:"lastUpdatedDateTime"`
-	Name                     *string           `json:"name"`
-	Status                   *string           `json:"status"`
+	CreationDateTime         *time.Time        `json:"creationDateTime,omitempty"`
+	DefaultParameters        map[string]string `json:"defaultParameters,omitempty"`
+	FeatureTransformationArn *string           `json:"featureTransformationArn,omitempty"`
+	LastUpdatedDateTime      *time.Time        `json:"lastUpdatedDateTime,omitempty"`
+	Name                     *string           `json:"name,omitempty"`
+	Status                   *string           `json:"status,omitempty"`
 }

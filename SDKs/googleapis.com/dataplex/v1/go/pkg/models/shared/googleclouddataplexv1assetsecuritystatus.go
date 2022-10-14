@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudDataplexV1AssetSecurityStatus struct {
-	Message    *string                                            `json:"message"`
-	State      *GoogleCloudDataplexV1AssetSecurityStatusStateEnum `json:"state"`
-	UpdateTime *string                                            `json:"updateTime"`
+	Message    *string                                            `json:"message,omitempty"`
+	State      *GoogleCloudDataplexV1AssetSecurityStatusStateEnum `json:"state,omitempty"`
+	UpdateTime *string                                            `json:"updateTime,omitempty"`
 }

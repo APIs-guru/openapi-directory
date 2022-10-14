@@ -14,7 +14,7 @@ const (
 )
 
 type StatusMessage struct {
-	Description *FormatMessage             `json:"description"`
-	IsError     *bool                      `json:"isError"`
-	RefersTo    *StatusMessageRefersToEnum `json:"refersTo"`
+	Description *FormatMessage             `json:"description,omitempty"`
+	IsError     *bool                      `json:"isError,omitempty"`
+	RefersTo    *StatusMessageRefersToEnum `json:"refersTo,omitempty"`
 }

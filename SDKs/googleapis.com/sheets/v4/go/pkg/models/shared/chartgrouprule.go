@@ -1,6 +1,6 @@
 package shared
 
 type ChartGroupRule struct {
-	DateTimeRule  *ChartDateTimeRule  `json:"dateTimeRule"`
-	HistogramRule *ChartHistogramRule `json:"histogramRule"`
+	DateTimeRule  *ChartDateTimeRule  `json:"dateTimeRule,omitempty"`
+	HistogramRule *ChartHistogramRule `json:"histogramRule,omitempty"`
 }

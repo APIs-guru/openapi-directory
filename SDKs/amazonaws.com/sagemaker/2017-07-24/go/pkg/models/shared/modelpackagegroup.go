@@ -5,11 +5,11 @@ import (
 )
 
 type ModelPackageGroup struct {
-	CreatedBy                    *UserContext                 `json:"CreatedBy"`
-	CreationTime                 *time.Time                   `json:"CreationTime"`
-	ModelPackageGroupArn         *string                      `json:"ModelPackageGroupArn"`
-	ModelPackageGroupDescription *string                      `json:"ModelPackageGroupDescription"`
-	ModelPackageGroupName        *string                      `json:"ModelPackageGroupName"`
-	ModelPackageGroupStatus      *ModelPackageGroupStatusEnum `json:"ModelPackageGroupStatus"`
-	Tags                         []Tag                        `json:"Tags"`
+	CreatedBy                    *UserContext                 `json:"CreatedBy,omitempty"`
+	CreationTime                 *time.Time                   `json:"CreationTime,omitempty"`
+	ModelPackageGroupArn         *string                      `json:"ModelPackageGroupArn,omitempty"`
+	ModelPackageGroupDescription *string                      `json:"ModelPackageGroupDescription,omitempty"`
+	ModelPackageGroupName        *string                      `json:"ModelPackageGroupName,omitempty"`
+	ModelPackageGroupStatus      *ModelPackageGroupStatusEnum `json:"ModelPackageGroupStatus,omitempty"`
+	Tags                         []Tag                        `json:"Tags,omitempty"`
 }

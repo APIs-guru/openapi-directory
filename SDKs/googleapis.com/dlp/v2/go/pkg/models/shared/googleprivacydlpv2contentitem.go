@@ -1,7 +1,7 @@
 package shared
 
 type GooglePrivacyDlpV2ContentItem struct {
-	ByteItem *GooglePrivacyDlpV2ByteContentItem `json:"byteItem"`
-	Table    *GooglePrivacyDlpV2Table           `json:"table"`
-	Value    *string                            `json:"value"`
+	ByteItem *GooglePrivacyDlpV2ByteContentItem `json:"byteItem,omitempty"`
+	Table    *GooglePrivacyDlpV2Table           `json:"table,omitempty"`
+	Value    *string                            `json:"value,omitempty"`
 }

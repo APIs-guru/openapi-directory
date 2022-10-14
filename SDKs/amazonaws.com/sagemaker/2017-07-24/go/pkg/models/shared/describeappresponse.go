@@ -5,15 +5,15 @@ import (
 )
 
 type DescribeAppResponse struct {
-	AppArn                    *string        `json:"AppArn"`
-	AppName                   *string        `json:"AppName"`
-	AppType                   *AppTypeEnum   `json:"AppType"`
-	CreationTime              *time.Time     `json:"CreationTime"`
-	DomainID                  *string        `json:"DomainId"`
-	FailureReason             *string        `json:"FailureReason"`
-	LastHealthCheckTimestamp  *time.Time     `json:"LastHealthCheckTimestamp"`
-	LastUserActivityTimestamp *time.Time     `json:"LastUserActivityTimestamp"`
-	ResourceSpec              *ResourceSpec  `json:"ResourceSpec"`
-	Status                    *AppStatusEnum `json:"Status"`
-	UserProfileName           *string        `json:"UserProfileName"`
+	AppArn                    *string        `json:"AppArn,omitempty"`
+	AppName                   *string        `json:"AppName,omitempty"`
+	AppType                   *AppTypeEnum   `json:"AppType,omitempty"`
+	CreationTime              *time.Time     `json:"CreationTime,omitempty"`
+	DomainID                  *string        `json:"DomainId,omitempty"`
+	FailureReason             *string        `json:"FailureReason,omitempty"`
+	LastHealthCheckTimestamp  *time.Time     `json:"LastHealthCheckTimestamp,omitempty"`
+	LastUserActivityTimestamp *time.Time     `json:"LastUserActivityTimestamp,omitempty"`
+	ResourceSpec              *ResourceSpec  `json:"ResourceSpec,omitempty"`
+	Status                    *AppStatusEnum `json:"Status,omitempty"`
+	UserProfileName           *string        `json:"UserProfileName,omitempty"`
 }

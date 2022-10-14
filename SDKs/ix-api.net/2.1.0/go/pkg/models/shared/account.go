@@ -17,15 +17,15 @@ const (
 )
 
 type Account struct {
-	Address                  *Address            `json:"address"`
-	BillingInformation       *BillingInformation `json:"billing_information"`
-	Discoverable             *bool               `json:"discoverable"`
-	ExternalRef              *string             `json:"external_ref"`
+	Address                  *Address            `json:"address,omitempty"`
+	BillingInformation       *BillingInformation `json:"billing_information,omitempty"`
+	Discoverable             *bool               `json:"discoverable,omitempty"`
+	ExternalRef              *string             `json:"external_ref,omitempty"`
 	ID                       string              `json:"id"`
-	LegalName                *string             `json:"legal_name"`
-	ManagingAccount          *string             `json:"managing_account"`
+	LegalName                *string             `json:"legal_name,omitempty"`
+	ManagingAccount          *string             `json:"managing_account,omitempty"`
 	MetroAreaNetworkPresence []string            `json:"metro_area_network_presence"`
 	Name                     string              `json:"name"`
 	State                    AccountStateEnum    `json:"state"`
-	Status                   []Status            `json:"status"`
+	Status                   []Status            `json:"status,omitempty"`
 }

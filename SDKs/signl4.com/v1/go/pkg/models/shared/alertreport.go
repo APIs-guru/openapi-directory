@@ -1,11 +1,11 @@
 package shared
 
 type AlertReport struct {
-	Last24Hours        *AlertCounts `json:"last24Hours"`
-	SubscriptionID     *string      `json:"subscriptionId"`
-	TeamCurrentDuty    *AlertCounts `json:"teamCurrentDuty"`
-	TeamID             *string      `json:"teamId"`
-	TeamLastDuty       *AlertCounts `json:"teamLastDuty"`
-	UserID             *string      `json:"userId"`
-	UserLastDutyChange *AlertCounts `json:"userLastDutyChange"`
+	Last24Hours        *AlertCounts `json:"last24Hours,omitempty"`
+	SubscriptionID     *string      `json:"subscriptionId,omitempty"`
+	TeamCurrentDuty    *AlertCounts `json:"teamCurrentDuty,omitempty"`
+	TeamID             *string      `json:"teamId,omitempty"`
+	TeamLastDuty       *AlertCounts `json:"teamLastDuty,omitempty"`
+	UserID             *string      `json:"userId,omitempty"`
+	UserLastDutyChange *AlertCounts `json:"userLastDutyChange,omitempty"`
 }

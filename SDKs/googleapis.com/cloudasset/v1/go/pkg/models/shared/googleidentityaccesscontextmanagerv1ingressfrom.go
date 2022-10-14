@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleIdentityAccesscontextmanagerV1IngressFrom struct {
-	Identities   []string                                                         `json:"identities"`
-	IdentityType *GoogleIdentityAccesscontextmanagerV1IngressFromIdentityTypeEnum `json:"identityType"`
-	Sources      []GoogleIdentityAccesscontextmanagerV1IngressSource              `json:"sources"`
+	Identities   []string                                                         `json:"identities,omitempty"`
+	IdentityType *GoogleIdentityAccesscontextmanagerV1IngressFromIdentityTypeEnum `json:"identityType,omitempty"`
+	Sources      []GoogleIdentityAccesscontextmanagerV1IngressSource              `json:"sources,omitempty"`
 }

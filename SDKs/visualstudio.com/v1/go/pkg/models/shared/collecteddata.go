@@ -5,8 +5,8 @@ import (
 )
 
 type CollectedData struct {
-	EnvironmentID    *string    `json:"environmentId"`
-	Name             *string    `json:"name"`
-	ParentActivityID *string    `json:"parentActivityId"`
-	Timestamp        *time.Time `json:"timestamp"`
+	EnvironmentID    *string    `json:"environmentId,omitempty"`
+	Name             *string    `json:"name,omitempty"`
+	ParentActivityID *string    `json:"parentActivityId,omitempty"`
+	Timestamp        *time.Time `json:"timestamp,omitempty"`
 }

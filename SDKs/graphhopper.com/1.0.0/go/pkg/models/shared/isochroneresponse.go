@@ -1,6 +1,6 @@
 package shared
 
 type IsochroneResponse struct {
-	Copyrights []string                   `json:"copyrights"`
-	Polygons   []IsochroneResponsePolygon `json:"polygons"`
+	Copyrights []string                   `json:"copyrights,omitempty"`
+	Polygons   []IsochroneResponsePolygon `json:"polygons,omitempty"`
 }

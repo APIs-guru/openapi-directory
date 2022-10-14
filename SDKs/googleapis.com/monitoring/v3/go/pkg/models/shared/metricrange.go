@@ -1,6 +1,6 @@
 package shared
 
 type MetricRange struct {
-	Range      *GoogleMonitoringV3Range `json:"range"`
-	TimeSeries *string                  `json:"timeSeries"`
+	Range      *GoogleMonitoringV3Range `json:"range,omitempty"`
+	TimeSeries *string                  `json:"timeSeries,omitempty"`
 }

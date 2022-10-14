@@ -9,11 +9,11 @@ type DeleteWorkspaceRequest struct {
 }
 
 type DeleteWorkspace200ApplicationJSONWorkspace struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type DeleteWorkspace200ApplicationJSON struct {
-	Workspace *DeleteWorkspace200ApplicationJSONWorkspace `json:"workspace"`
+	Workspace *DeleteWorkspace200ApplicationJSONWorkspace `json:"workspace,omitempty"`
 }
 
 type DeleteWorkspaceResponse struct {

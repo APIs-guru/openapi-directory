@@ -1,5 +1,5 @@
 package shared
 
 type CreateOrganizationRequest struct {
-	FeatureSet *OrganizationFeatureSetEnum `json:"FeatureSet"`
+	FeatureSet *OrganizationFeatureSetEnum `json:"FeatureSet,omitempty"`
 }

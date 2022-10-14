@@ -1,5 +1,5 @@
 package shared
 
 type CreateAgentResponse struct {
-	AgentArn *string `json:"AgentArn"`
+	AgentArn *string `json:"AgentArn,omitempty"`
 }

@@ -28,8 +28,8 @@ type GetReportingDatesRequest struct {
 }
 
 type GetReportingDatesDefaultApplicationJSON struct {
-	Pagination *shared.OffsetInfo  `json:"pagination"`
-	Results    []shared.ReportDate `json:"results"`
+	Pagination *shared.OffsetInfo  `json:"pagination,omitempty"`
+	Results    []shared.ReportDate `json:"results,omitempty"`
 }
 
 type GetReportingDatesResponse struct {

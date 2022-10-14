@@ -1,12 +1,12 @@
 package shared
 
 type SourceServer struct {
-	Arn                 *string              `json:"arn"`
-	DataReplicationInfo *DataReplicationInfo `json:"dataReplicationInfo"`
-	IsArchived          *bool                `json:"isArchived"`
-	LaunchedInstance    *LaunchedInstance    `json:"launchedInstance"`
-	LifeCycle           *LifeCycle           `json:"lifeCycle"`
-	SourceProperties    *SourceProperties    `json:"sourceProperties"`
-	SourceServerID      *string              `json:"sourceServerID"`
-	Tags                map[string]string    `json:"tags"`
+	Arn                 *string              `json:"arn,omitempty"`
+	DataReplicationInfo *DataReplicationInfo `json:"dataReplicationInfo,omitempty"`
+	IsArchived          *bool                `json:"isArchived,omitempty"`
+	LaunchedInstance    *LaunchedInstance    `json:"launchedInstance,omitempty"`
+	LifeCycle           *LifeCycle           `json:"lifeCycle,omitempty"`
+	SourceProperties    *SourceProperties    `json:"sourceProperties,omitempty"`
+	SourceServerID      *string              `json:"sourceServerID,omitempty"`
+	Tags                map[string]string    `json:"tags,omitempty"`
 }

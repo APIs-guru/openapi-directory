@@ -1,5 +1,5 @@
 package shared
 
 type AnomalySourceDetails struct {
-	CloudWatchMetrics []CloudWatchMetricsDetail `json:"CloudWatchMetrics"`
+	CloudWatchMetrics []CloudWatchMetricsDetail `json:"CloudWatchMetrics,omitempty"`
 }

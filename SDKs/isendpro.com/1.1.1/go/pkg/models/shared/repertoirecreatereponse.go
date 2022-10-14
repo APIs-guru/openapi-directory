@@ -1,5 +1,5 @@
 package shared
 
 type RepertoirEcreatereponse struct {
-	Etat *interface{} `json:"etat"`
+	Etat *interface{} `json:"etat,omitempty"`
 }

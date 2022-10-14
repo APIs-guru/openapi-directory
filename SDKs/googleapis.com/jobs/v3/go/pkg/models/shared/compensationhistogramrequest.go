@@ -10,6 +10,6 @@ const (
 )
 
 type CompensationHistogramRequest struct {
-	BucketingOption *NumericBucketingOption               `json:"bucketingOption"`
-	Type            *CompensationHistogramRequestTypeEnum `json:"type"`
+	BucketingOption *NumericBucketingOption               `json:"bucketingOption,omitempty"`
+	Type            *CompensationHistogramRequestTypeEnum `json:"type,omitempty"`
 }

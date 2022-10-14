@@ -12,7 +12,7 @@ const (
 )
 
 type AccessToken struct {
-	AccountCreated *bool               `json:"accountCreated"`
+	AccountCreated *bool               `json:"accountCreated,omitempty"`
 	ExpirationDate time.Time           `json:"expirationDate"`
 	Refreshable    bool                `json:"refreshable"`
 	Type           AccessTokenTypeEnum `json:"type"`

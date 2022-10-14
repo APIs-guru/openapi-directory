@@ -11,6 +11,6 @@ const (
 )
 
 type CustomBiddingModelReadinessState struct {
-	AdvertiserID   *string                                             `json:"advertiserId"`
-	ReadinessState *CustomBiddingModelReadinessStateReadinessStateEnum `json:"readinessState"`
+	AdvertiserID   *string                                             `json:"advertiserId,omitempty"`
+	ReadinessState *CustomBiddingModelReadinessStateReadinessStateEnum `json:"readinessState,omitempty"`
 }

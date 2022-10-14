@@ -1,20 +1,20 @@
 package shared
 
 type ServiceInputModel struct {
-	Availability    *AvailabilityInputModel    `json:"availability"`
-	BookingInterval *int32                     `json:"bookingInterval"`
-	BookingLimit    *int32                     `json:"bookingLimit"`
-	Description     *string                    `json:"description"`
-	Duration        *int32                     `json:"duration"`
-	Fees            *ServiceFeesInputModel     `json:"fees"`
-	LocationID      *string                    `json:"locationId"`
-	MaxCapacity     *int32                     `json:"maxCapacity"`
-	MaxGroupSize    *int32                     `json:"maxGroupSize"`
-	MediaPageURL    *string                    `json:"mediaPageUrl"`
-	Name            *string                    `json:"name"`
-	Options         *ServiceOptionsInputModel  `json:"options"`
-	Public          *bool                      `json:"public"`
-	ServiceGroupID  *string                    `json:"serviceGroupId"`
-	Settings        *ServiceSettingsInputModel `json:"settings"`
-	Type            *string                    `json:"type"`
+	Availability    *AvailabilityInputModel    `json:"availability,omitempty"`
+	BookingInterval *int32                     `json:"bookingInterval,omitempty"`
+	BookingLimit    *int32                     `json:"bookingLimit,omitempty"`
+	Description     *string                    `json:"description,omitempty"`
+	Duration        *int32                     `json:"duration,omitempty"`
+	Fees            *ServiceFeesInputModel     `json:"fees,omitempty"`
+	LocationID      *string                    `json:"locationId,omitempty"`
+	MaxCapacity     *int32                     `json:"maxCapacity,omitempty"`
+	MaxGroupSize    *int32                     `json:"maxGroupSize,omitempty"`
+	MediaPageURL    *string                    `json:"mediaPageUrl,omitempty"`
+	Name            *string                    `json:"name,omitempty"`
+	Options         *ServiceOptionsInputModel  `json:"options,omitempty"`
+	Public          *bool                      `json:"public,omitempty"`
+	ServiceGroupID  *string                    `json:"serviceGroupId,omitempty"`
+	Settings        *ServiceSettingsInputModel `json:"settings,omitempty"`
+	Type            *string                    `json:"type,omitempty"`
 }

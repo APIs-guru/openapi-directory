@@ -1,6 +1,6 @@
 package shared
 
 type UpdateFilterViewRequest struct {
-	Fields *string     `json:"fields"`
-	Filter *FilterView `json:"filter"`
+	Fields *string     `json:"fields,omitempty"`
+	Filter *FilterView `json:"filter,omitempty"`
 }

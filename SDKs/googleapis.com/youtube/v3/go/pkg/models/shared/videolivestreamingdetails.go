@@ -5,10 +5,10 @@ import (
 )
 
 type VideoLiveStreamingDetails struct {
-	ActiveLiveChatID   *string    `json:"activeLiveChatId"`
-	ActualEndTime      *time.Time `json:"actualEndTime"`
-	ActualStartTime    *time.Time `json:"actualStartTime"`
-	ConcurrentViewers  *string    `json:"concurrentViewers"`
-	ScheduledEndTime   *time.Time `json:"scheduledEndTime"`
-	ScheduledStartTime *time.Time `json:"scheduledStartTime"`
+	ActiveLiveChatID   *string    `json:"activeLiveChatId,omitempty"`
+	ActualEndTime      *time.Time `json:"actualEndTime,omitempty"`
+	ActualStartTime    *time.Time `json:"actualStartTime,omitempty"`
+	ConcurrentViewers  *string    `json:"concurrentViewers,omitempty"`
+	ScheduledEndTime   *time.Time `json:"scheduledEndTime,omitempty"`
+	ScheduledStartTime *time.Time `json:"scheduledStartTime,omitempty"`
 }

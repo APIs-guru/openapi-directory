@@ -36,23 +36,23 @@ const (
 )
 
 type Rollout struct {
-	Annotations        map[string]string              `json:"annotations"`
-	ApprovalState      *RolloutApprovalStateEnum      `json:"approvalState"`
-	ApproveTime        *string                        `json:"approveTime"`
-	CreateTime         *string                        `json:"createTime"`
-	DeployEndTime      *string                        `json:"deployEndTime"`
-	DeployFailureCause *RolloutDeployFailureCauseEnum `json:"deployFailureCause"`
-	DeployStartTime    *string                        `json:"deployStartTime"`
-	DeployingBuild     *string                        `json:"deployingBuild"`
-	Description        *string                        `json:"description"`
-	EnqueueTime        *string                        `json:"enqueueTime"`
-	Etag               *string                        `json:"etag"`
-	FailureReason      *string                        `json:"failureReason"`
-	Labels             map[string]string              `json:"labels"`
-	Metadata           *Metadata                      `json:"metadata"`
-	Name               *string                        `json:"name"`
-	Phases             []Phase                        `json:"phases"`
-	State              *RolloutStateEnum              `json:"state"`
-	TargetID           *string                        `json:"targetId"`
-	UID                *string                        `json:"uid"`
+	Annotations        map[string]string              `json:"annotations,omitempty"`
+	ApprovalState      *RolloutApprovalStateEnum      `json:"approvalState,omitempty"`
+	ApproveTime        *string                        `json:"approveTime,omitempty"`
+	CreateTime         *string                        `json:"createTime,omitempty"`
+	DeployEndTime      *string                        `json:"deployEndTime,omitempty"`
+	DeployFailureCause *RolloutDeployFailureCauseEnum `json:"deployFailureCause,omitempty"`
+	DeployStartTime    *string                        `json:"deployStartTime,omitempty"`
+	DeployingBuild     *string                        `json:"deployingBuild,omitempty"`
+	Description        *string                        `json:"description,omitempty"`
+	EnqueueTime        *string                        `json:"enqueueTime,omitempty"`
+	Etag               *string                        `json:"etag,omitempty"`
+	FailureReason      *string                        `json:"failureReason,omitempty"`
+	Labels             map[string]string              `json:"labels,omitempty"`
+	Metadata           *Metadata                      `json:"metadata,omitempty"`
+	Name               *string                        `json:"name,omitempty"`
+	Phases             []Phase                        `json:"phases,omitempty"`
+	State              *RolloutStateEnum              `json:"state,omitempty"`
+	TargetID           *string                        `json:"targetId,omitempty"`
+	UID                *string                        `json:"uid,omitempty"`
 }

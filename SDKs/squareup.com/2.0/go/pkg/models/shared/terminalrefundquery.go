@@ -1,6 +1,6 @@
 package shared
 
 type TerminalRefundQuery struct {
-	Filter *TerminalRefundQueryFilter `json:"filter"`
-	Sort   *TerminalRefundQuerySort   `json:"sort"`
+	Filter *TerminalRefundQueryFilter `json:"filter,omitempty"`
+	Sort   *TerminalRefundQuerySort   `json:"sort,omitempty"`
 }

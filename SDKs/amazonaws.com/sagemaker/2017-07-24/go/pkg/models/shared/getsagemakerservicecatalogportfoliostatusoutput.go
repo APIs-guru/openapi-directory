@@ -1,5 +1,5 @@
 package shared
 
 type GetSagemakerServicecatalogPortfolioStatusOutput struct {
-	Status *SagemakerServicecatalogStatusEnum `json:"Status"`
+	Status *SagemakerServicecatalogStatusEnum `json:"Status,omitempty"`
 }

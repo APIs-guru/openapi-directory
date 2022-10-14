@@ -1,5 +1,5 @@
 package shared
 
 type BatchEnableStandardsResponse struct {
-	StandardsSubscriptions []StandardsSubscription `json:"StandardsSubscriptions"`
+	StandardsSubscriptions []StandardsSubscription `json:"StandardsSubscriptions,omitempty"`
 }

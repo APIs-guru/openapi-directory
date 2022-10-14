@@ -9,6 +9,6 @@ const (
 )
 
 type CloudBuildMembershipSpec struct {
-	SecurityPolicy *CloudBuildMembershipSpecSecurityPolicyEnum `json:"securityPolicy"`
-	Version        *string                                     `json:"version"`
+	SecurityPolicy *CloudBuildMembershipSpecSecurityPolicyEnum `json:"securityPolicy,omitempty"`
+	Version        *string                                     `json:"version,omitempty"`
 }

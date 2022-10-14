@@ -9,10 +9,10 @@ type RunClusterlintPathParams struct {
 }
 
 type RunClusterlintRequestBody struct {
-	ExcludeChecks []string `json:"exclude_checks"`
-	ExcludeGroups []string `json:"exclude_groups"`
-	IncludeChecks []string `json:"include_checks"`
-	IncludeGroups []string `json:"include_groups"`
+	ExcludeChecks []string `json:"exclude_checks,omitempty"`
+	ExcludeGroups []string `json:"exclude_groups,omitempty"`
+	IncludeChecks []string `json:"include_checks,omitempty"`
+	IncludeGroups []string `json:"include_groups,omitempty"`
 }
 
 type RunClusterlintRequest struct {
@@ -23,7 +23,7 @@ type RunClusterlintRequest struct {
 type RunClusterlint401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type RunClusterlintResponse struct {

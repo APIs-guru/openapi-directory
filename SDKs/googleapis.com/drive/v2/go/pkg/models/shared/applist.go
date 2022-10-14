@@ -1,9 +1,9 @@
 package shared
 
 type AppList struct {
-	DefaultAppIds []string `json:"defaultAppIds"`
-	Etag          *string  `json:"etag"`
-	Items         []App    `json:"items"`
-	Kind          *string  `json:"kind"`
-	SelfLink      *string  `json:"selfLink"`
+	DefaultAppIds []string `json:"defaultAppIds,omitempty"`
+	Etag          *string  `json:"etag,omitempty"`
+	Items         []App    `json:"items,omitempty"`
+	Kind          *string  `json:"kind,omitempty"`
+	SelfLink      *string  `json:"selfLink,omitempty"`
 }

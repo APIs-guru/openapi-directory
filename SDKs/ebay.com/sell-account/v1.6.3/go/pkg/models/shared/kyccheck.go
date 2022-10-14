@@ -1,9 +1,9 @@
 package shared
 
 type KycCheck struct {
-	Alert         *string `json:"alert"`
-	DataRequired  *string `json:"dataRequired"`
-	DetailMessage *string `json:"detailMessage"`
-	DueDate       *string `json:"dueDate"`
-	RemedyURL     *string `json:"remedyUrl"`
+	Alert         *string `json:"alert,omitempty"`
+	DataRequired  *string `json:"dataRequired,omitempty"`
+	DetailMessage *string `json:"detailMessage,omitempty"`
+	DueDate       *string `json:"dueDate,omitempty"`
+	RemedyURL     *string `json:"remedyUrl,omitempty"`
 }

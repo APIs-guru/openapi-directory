@@ -11,13 +11,13 @@ const (
 )
 
 type RepricingRuleReport struct {
-	BuyboxWinningRuleStats *RepricingRuleReportBuyboxWinningRuleStats `json:"buyboxWinningRuleStats"`
-	Date                   *Date                                      `json:"date"`
-	ImpactedProducts       []string                                   `json:"impactedProducts"`
-	InapplicabilityDetails []InapplicabilityDetails                   `json:"inapplicabilityDetails"`
-	InapplicableProducts   []string                                   `json:"inapplicableProducts"`
-	OrderItemCount         *int32                                     `json:"orderItemCount"`
-	RuleID                 *string                                    `json:"ruleId"`
-	TotalGmv               *PriceAmount                               `json:"totalGmv"`
-	Type                   *RepricingRuleReportTypeEnum               `json:"type"`
+	BuyboxWinningRuleStats *RepricingRuleReportBuyboxWinningRuleStats `json:"buyboxWinningRuleStats,omitempty"`
+	Date                   *Date                                      `json:"date,omitempty"`
+	ImpactedProducts       []string                                   `json:"impactedProducts,omitempty"`
+	InapplicabilityDetails []InapplicabilityDetails                   `json:"inapplicabilityDetails,omitempty"`
+	InapplicableProducts   []string                                   `json:"inapplicableProducts,omitempty"`
+	OrderItemCount         *int32                                     `json:"orderItemCount,omitempty"`
+	RuleID                 *string                                    `json:"ruleId,omitempty"`
+	TotalGmv               *PriceAmount                               `json:"totalGmv,omitempty"`
+	Type                   *RepricingRuleReportTypeEnum               `json:"type,omitempty"`
 }

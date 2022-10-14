@@ -19,8 +19,8 @@ type UpdateGcmChannelHeaders struct {
 }
 
 type UpdateGcmChannelRequestBodyGcmChannelRequest struct {
-	APIKey  *string `json:"ApiKey"`
-	Enabled *bool   `json:"Enabled"`
+	APIKey  *string `json:"ApiKey,omitempty"`
+	Enabled *bool   `json:"Enabled,omitempty"`
 }
 
 type UpdateGcmChannelRequestBody struct {

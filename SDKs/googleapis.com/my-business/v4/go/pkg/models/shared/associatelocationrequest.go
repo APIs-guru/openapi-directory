@@ -1,5 +1,5 @@
 package shared
 
 type AssociateLocationRequest struct {
-	PlaceID *string `json:"placeId"`
+	PlaceID *string `json:"placeId,omitempty"`
 }

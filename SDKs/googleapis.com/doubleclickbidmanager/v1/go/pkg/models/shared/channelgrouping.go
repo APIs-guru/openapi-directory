@@ -1,7 +1,7 @@
 package shared
 
 type ChannelGrouping struct {
-	FallbackName *string `json:"fallbackName"`
-	Name         *string `json:"name"`
-	Rules        []Rule  `json:"rules"`
+	FallbackName *string `json:"fallbackName,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	Rules        []Rule  `json:"rules,omitempty"`
 }

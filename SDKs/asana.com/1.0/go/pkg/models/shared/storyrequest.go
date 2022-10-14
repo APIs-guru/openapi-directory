@@ -22,12 +22,12 @@ const (
 )
 
 type StoryRequest struct {
-	CreatedAt       *time.Time                   `json:"created_at"`
-	Gid             *string                      `json:"gid"`
-	HTMLText        *string                      `json:"html_text"`
-	IsPinned        *bool                        `json:"is_pinned"`
-	ResourceSubtype *string                      `json:"resource_subtype"`
-	ResourceType    *string                      `json:"resource_type"`
-	StickerName     *StoryRequestStickerNameEnum `json:"sticker_name"`
-	Text            *string                      `json:"text"`
+	CreatedAt       *time.Time                   `json:"created_at,omitempty"`
+	Gid             *string                      `json:"gid,omitempty"`
+	HTMLText        *string                      `json:"html_text,omitempty"`
+	IsPinned        *bool                        `json:"is_pinned,omitempty"`
+	ResourceSubtype *string                      `json:"resource_subtype,omitempty"`
+	ResourceType    *string                      `json:"resource_type,omitempty"`
+	StickerName     *StoryRequestStickerNameEnum `json:"sticker_name,omitempty"`
+	Text            *string                      `json:"text,omitempty"`
 }

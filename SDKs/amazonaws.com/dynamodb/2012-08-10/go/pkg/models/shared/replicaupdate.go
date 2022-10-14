@@ -1,6 +1,6 @@
 package shared
 
 type ReplicaUpdate struct {
-	Create *CreateReplicaAction `json:"Create"`
-	Delete *DeleteReplicaAction `json:"Delete"`
+	Create *CreateReplicaAction `json:"Create,omitempty"`
+	Delete *DeleteReplicaAction `json:"Delete,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type Profile struct {
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type Voice struct {
-	AdditionalLanguageCodes []LanguageCodeEnum `json:"AdditionalLanguageCodes"`
-	Gender                  *GenderEnum        `json:"Gender"`
-	ID                      *VoiceIDEnum       `json:"Id"`
-	LanguageCode            *LanguageCodeEnum  `json:"LanguageCode"`
-	LanguageName            *string            `json:"LanguageName"`
-	Name                    *string            `json:"Name"`
-	SupportedEngines        []EngineEnum       `json:"SupportedEngines"`
+	AdditionalLanguageCodes []LanguageCodeEnum `json:"AdditionalLanguageCodes,omitempty"`
+	Gender                  *GenderEnum        `json:"Gender,omitempty"`
+	ID                      *VoiceIDEnum       `json:"Id,omitempty"`
+	LanguageCode            *LanguageCodeEnum  `json:"LanguageCode,omitempty"`
+	LanguageName            *string            `json:"LanguageName,omitempty"`
+	Name                    *string            `json:"Name,omitempty"`
+	SupportedEngines        []EngineEnum       `json:"SupportedEngines,omitempty"`
 }

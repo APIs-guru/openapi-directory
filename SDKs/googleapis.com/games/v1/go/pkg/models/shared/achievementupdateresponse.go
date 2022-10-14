@@ -10,10 +10,10 @@ const (
 )
 
 type AchievementUpdateResponse struct {
-	AchievementID  *string                                    `json:"achievementId"`
-	CurrentState   *AchievementUpdateResponseCurrentStateEnum `json:"currentState"`
-	CurrentSteps   *int32                                     `json:"currentSteps"`
-	Kind           *string                                    `json:"kind"`
-	NewlyUnlocked  *bool                                      `json:"newlyUnlocked"`
-	UpdateOccurred *bool                                      `json:"updateOccurred"`
+	AchievementID  *string                                    `json:"achievementId,omitempty"`
+	CurrentState   *AchievementUpdateResponseCurrentStateEnum `json:"currentState,omitempty"`
+	CurrentSteps   *int32                                     `json:"currentSteps,omitempty"`
+	Kind           *string                                    `json:"kind,omitempty"`
+	NewlyUnlocked  *bool                                      `json:"newlyUnlocked,omitempty"`
+	UpdateOccurred *bool                                      `json:"updateOccurred,omitempty"`
 }

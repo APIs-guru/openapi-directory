@@ -21,8 +21,8 @@ type SearchDevicesHeaders struct {
 
 type SearchDevicesRequestBody struct {
 	Filters    []shared.SearchDevicesFilter `json:"filters"`
-	MaxResults *int64                       `json:"maxResults"`
-	NextToken  *string                      `json:"nextToken"`
+	MaxResults *int64                       `json:"maxResults,omitempty"`
+	NextToken  *string                      `json:"nextToken,omitempty"`
 }
 
 type SearchDevicesRequest struct {

@@ -6,5 +6,5 @@ type CreateStreamProcessorRequest struct {
 	Output   StreamProcessorOutput   `json:"Output"`
 	RoleArn  string                  `json:"RoleArn"`
 	Settings StreamProcessorSettings `json:"Settings"`
-	Tags     map[string]string       `json:"Tags"`
+	Tags     map[string]string       `json:"Tags,omitempty"`
 }

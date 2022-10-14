@@ -14,7 +14,7 @@ type EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBodyMembers struct {
 
 type EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBody struct {
 	DisplayName string                                                               `json:"displayName"`
-	Members     []EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBodyMembers `json:"members"`
+	Members     []EnterpriseAdminProvisionAndInviteEnterpriseGroupRequestBodyMembers `json:"members,omitempty"`
 	Schemas     []string                                                             `json:"schemas"`
 }
 

@@ -5,8 +5,8 @@ import (
 )
 
 type Vlans struct {
-	Created *time.Time `json:"created"`
-	Label   *string    `json:"label"`
-	Linodes []int64    `json:"linodes"`
-	Region  *string    `json:"region"`
+	Created *time.Time `json:"created,omitempty"`
+	Label   *string    `json:"label,omitempty"`
+	Linodes []int64    `json:"linodes,omitempty"`
+	Region  *string    `json:"region,omitempty"`
 }

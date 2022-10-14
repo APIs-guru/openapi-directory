@@ -6,14 +6,14 @@ type UpdateNetworkWirelessSsidSplashSettingsPathParams struct {
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodyBillingFreeAccess struct {
-	DurationInMinutes *int64 `json:"durationInMinutes"`
-	Enabled           *bool  `json:"enabled"`
+	DurationInMinutes *int64 `json:"durationInMinutes,omitempty"`
+	Enabled           *bool  `json:"enabled,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodyBilling struct {
-	FreeAccess                    *UpdateNetworkWirelessSsidSplashSettingsRequestBodyBillingFreeAccess `json:"freeAccess"`
-	PrepaidAccessFastLoginEnabled *bool                                                                `json:"prepaidAccessFastLoginEnabled"`
-	ReplyToEmailAddress           *string                                                              `json:"replyToEmailAddress"`
+	FreeAccess                    *UpdateNetworkWirelessSsidSplashSettingsRequestBodyBillingFreeAccess `json:"freeAccess,omitempty"`
+	PrepaidAccessFastLoginEnabled *bool                                                                `json:"prepaidAccessFastLoginEnabled,omitempty"`
+	ReplyToEmailAddress           *string                                                              `json:"replyToEmailAddress,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodyControllerDisconnectionBehaviorEnum string
@@ -25,8 +25,8 @@ const (
 )
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodyGuestSponsorship struct {
-	DurationInMinutes        *int64 `json:"durationInMinutes"`
-	GuestCanRequestTimeframe *bool  `json:"guestCanRequestTimeframe"`
+	DurationInMinutes        *int64 `json:"durationInMinutes,omitempty"`
+	GuestCanRequestTimeframe *bool  `json:"guestCanRequestTimeframe,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentStrengthEnum string
@@ -42,42 +42,42 @@ type UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentSystemsMa
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollment struct {
-	EnforcedSystems       []string                                                                                 `json:"enforcedSystems"`
-	Strength              *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentStrengthEnum          `json:"strength"`
-	SystemsManagerNetwork *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentSystemsManagerNetwork `json:"systemsManagerNetwork"`
+	EnforcedSystems       []string                                                                                 `json:"enforcedSystems,omitempty"`
+	Strength              *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentStrengthEnum          `json:"strength,omitempty"`
+	SystemsManagerNetwork *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollmentSystemsManagerNetwork `json:"systemsManagerNetwork,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashImage struct {
-	Extension *string `json:"extension"`
-	Md5       *string `json:"md5"`
+	Extension *string `json:"extension,omitempty"`
+	Md5       *string `json:"md5,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashLogo struct {
-	Extension *string `json:"extension"`
-	Md5       *string `json:"md5"`
+	Extension *string `json:"extension,omitempty"`
+	Md5       *string `json:"md5,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashPrepaidFront struct {
-	Extension *string `json:"extension"`
-	Md5       *string `json:"md5"`
+	Extension *string `json:"extension,omitempty"`
+	Md5       *string `json:"md5,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequestBody struct {
-	AllowSimultaneousLogins         *bool                                                                                  `json:"allowSimultaneousLogins"`
-	Billing                         *UpdateNetworkWirelessSsidSplashSettingsRequestBodyBilling                             `json:"billing"`
-	BlockAllTrafficBeforeSignOn     *bool                                                                                  `json:"blockAllTrafficBeforeSignOn"`
-	ControllerDisconnectionBehavior *UpdateNetworkWirelessSsidSplashSettingsRequestBodyControllerDisconnectionBehaviorEnum `json:"controllerDisconnectionBehavior"`
-	GuestSponsorship                *UpdateNetworkWirelessSsidSplashSettingsRequestBodyGuestSponsorship                    `json:"guestSponsorship"`
-	RedirectURL                     *string                                                                                `json:"redirectUrl"`
-	SentryEnrollment                *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollment                    `json:"sentryEnrollment"`
-	SplashImage                     *UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashImage                         `json:"splashImage"`
-	SplashLogo                      *UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashLogo                          `json:"splashLogo"`
-	SplashPrepaidFront              *UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashPrepaidFront                  `json:"splashPrepaidFront"`
-	SplashTimeout                   *int64                                                                                 `json:"splashTimeout"`
-	SplashURL                       *string                                                                                `json:"splashUrl"`
-	UseRedirectURL                  *bool                                                                                  `json:"useRedirectUrl"`
-	UseSplashURL                    *bool                                                                                  `json:"useSplashUrl"`
-	WelcomeMessage                  *string                                                                                `json:"welcomeMessage"`
+	AllowSimultaneousLogins         *bool                                                                                  `json:"allowSimultaneousLogins,omitempty"`
+	Billing                         *UpdateNetworkWirelessSsidSplashSettingsRequestBodyBilling                             `json:"billing,omitempty"`
+	BlockAllTrafficBeforeSignOn     *bool                                                                                  `json:"blockAllTrafficBeforeSignOn,omitempty"`
+	ControllerDisconnectionBehavior *UpdateNetworkWirelessSsidSplashSettingsRequestBodyControllerDisconnectionBehaviorEnum `json:"controllerDisconnectionBehavior,omitempty"`
+	GuestSponsorship                *UpdateNetworkWirelessSsidSplashSettingsRequestBodyGuestSponsorship                    `json:"guestSponsorship,omitempty"`
+	RedirectURL                     *string                                                                                `json:"redirectUrl,omitempty"`
+	SentryEnrollment                *UpdateNetworkWirelessSsidSplashSettingsRequestBodySentryEnrollment                    `json:"sentryEnrollment,omitempty"`
+	SplashImage                     *UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashImage                         `json:"splashImage,omitempty"`
+	SplashLogo                      *UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashLogo                          `json:"splashLogo,omitempty"`
+	SplashPrepaidFront              *UpdateNetworkWirelessSsidSplashSettingsRequestBodySplashPrepaidFront                  `json:"splashPrepaidFront,omitempty"`
+	SplashTimeout                   *int64                                                                                 `json:"splashTimeout,omitempty"`
+	SplashURL                       *string                                                                                `json:"splashUrl,omitempty"`
+	UseRedirectURL                  *bool                                                                                  `json:"useRedirectUrl,omitempty"`
+	UseSplashURL                    *bool                                                                                  `json:"useSplashUrl,omitempty"`
+	WelcomeMessage                  *string                                                                                `json:"welcomeMessage,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSplashSettingsRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListPolicyPrincipalsResponse struct {
-	NextMarker *string  `json:"nextMarker"`
-	Principals []string `json:"principals"`
+	NextMarker *string  `json:"nextMarker,omitempty"`
+	Principals []string `json:"principals,omitempty"`
 }

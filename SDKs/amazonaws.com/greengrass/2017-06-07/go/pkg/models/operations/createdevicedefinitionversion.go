@@ -20,7 +20,7 @@ type CreateDeviceDefinitionVersionHeaders struct {
 }
 
 type CreateDeviceDefinitionVersionRequestBody struct {
-	Devices []shared.Device `json:"Devices"`
+	Devices []shared.Device `json:"Devices,omitempty"`
 }
 
 type CreateDeviceDefinitionVersionRequest struct {

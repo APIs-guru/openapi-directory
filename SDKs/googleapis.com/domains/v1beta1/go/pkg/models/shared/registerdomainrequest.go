@@ -15,9 +15,9 @@ const (
 )
 
 type RegisterDomainRequest struct {
-	ContactNotices []RegisterDomainRequestContactNoticesEnum `json:"contactNotices"`
-	DomainNotices  []RegisterDomainRequestDomainNoticesEnum  `json:"domainNotices"`
-	Registration   *Registration                             `json:"registration"`
-	ValidateOnly   *bool                                     `json:"validateOnly"`
-	YearlyPrice    *Money                                    `json:"yearlyPrice"`
+	ContactNotices []RegisterDomainRequestContactNoticesEnum `json:"contactNotices,omitempty"`
+	DomainNotices  []RegisterDomainRequestDomainNoticesEnum  `json:"domainNotices,omitempty"`
+	Registration   *Registration                             `json:"registration,omitempty"`
+	ValidateOnly   *bool                                     `json:"validateOnly,omitempty"`
+	YearlyPrice    *Money                                    `json:"yearlyPrice,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type EmailLinkSigninResponse struct {
-	Email        *string `json:"email"`
-	ExpiresIn    *string `json:"expiresIn"`
-	IDToken      *string `json:"idToken"`
-	IsNewUser    *bool   `json:"isNewUser"`
-	Kind         *string `json:"kind"`
-	LocalID      *string `json:"localId"`
-	RefreshToken *string `json:"refreshToken"`
+	Email        *string `json:"email,omitempty"`
+	ExpiresIn    *string `json:"expiresIn,omitempty"`
+	IDToken      *string `json:"idToken,omitempty"`
+	IsNewUser    *bool   `json:"isNewUser,omitempty"`
+	Kind         *string `json:"kind,omitempty"`
+	LocalID      *string `json:"localId,omitempty"`
+	RefreshToken *string `json:"refreshToken,omitempty"`
 }

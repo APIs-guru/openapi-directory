@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleCloudRecommenderV1beta1InsightStateInfo struct {
-	State         *GoogleCloudRecommenderV1beta1InsightStateInfoStateEnum `json:"state"`
-	StateMetadata map[string]string                                       `json:"stateMetadata"`
+	State         *GoogleCloudRecommenderV1beta1InsightStateInfoStateEnum `json:"state,omitempty"`
+	StateMetadata map[string]string                                       `json:"stateMetadata,omitempty"`
 }

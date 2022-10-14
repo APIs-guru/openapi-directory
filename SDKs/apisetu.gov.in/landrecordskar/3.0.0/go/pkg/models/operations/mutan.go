@@ -16,8 +16,8 @@ const (
 )
 
 type MutanRequestBody struct {
-	CertificateParameters *MutanRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *MutanRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                MutanRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Mutan400ApplicationJSON struct {
-	Error            *Mutan400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mutan400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mutan400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mutan400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mutan401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Mutan401ApplicationJSON struct {
-	Error            *Mutan401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mutan401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mutan401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mutan401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mutan404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Mutan404ApplicationJSON struct {
-	Error            *Mutan404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mutan404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mutan404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mutan404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mutan500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Mutan500ApplicationJSON struct {
-	Error            *Mutan500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mutan500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mutan500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mutan500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mutan502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Mutan502ApplicationJSON struct {
-	Error            *Mutan502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mutan502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mutan502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mutan502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mutan503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Mutan503ApplicationJSON struct {
-	Error            *Mutan503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mutan503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mutan503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mutan503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mutan504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Mutan504ApplicationJSON struct {
-	Error            *Mutan504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mutan504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mutan504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mutan504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type MutanResponse struct {

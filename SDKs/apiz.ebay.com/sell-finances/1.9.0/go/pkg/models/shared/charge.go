@@ -1,12 +1,12 @@
 package shared
 
 type Charge struct {
-	CancellationID   *string `json:"cancellationId"`
-	CaseID           *string `json:"caseId"`
-	ChargeNetAmount  *Amount `json:"chargeNetAmount"`
-	InquiryID        *string `json:"inquiryId"`
-	OrderID          *string `json:"orderId"`
-	PaymentDisputeID *string `json:"paymentDisputeId"`
-	RefundID         *string `json:"refundId"`
-	ReturnID         *string `json:"returnId"`
+	CancellationID   *string `json:"cancellationId,omitempty"`
+	CaseID           *string `json:"caseId,omitempty"`
+	ChargeNetAmount  *Amount `json:"chargeNetAmount,omitempty"`
+	InquiryID        *string `json:"inquiryId,omitempty"`
+	OrderID          *string `json:"orderId,omitempty"`
+	PaymentDisputeID *string `json:"paymentDisputeId,omitempty"`
+	RefundID         *string `json:"refundId,omitempty"`
+	ReturnID         *string `json:"returnId,omitempty"`
 }

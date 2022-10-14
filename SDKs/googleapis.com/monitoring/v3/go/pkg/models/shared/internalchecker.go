@@ -9,10 +9,10 @@ const (
 )
 
 type InternalChecker struct {
-	DisplayName   *string                   `json:"displayName"`
-	GcpZone       *string                   `json:"gcpZone"`
-	Name          *string                   `json:"name"`
-	Network       *string                   `json:"network"`
-	PeerProjectID *string                   `json:"peerProjectId"`
-	State         *InternalCheckerStateEnum `json:"state"`
+	DisplayName   *string                   `json:"displayName,omitempty"`
+	GcpZone       *string                   `json:"gcpZone,omitempty"`
+	Name          *string                   `json:"name,omitempty"`
+	Network       *string                   `json:"network,omitempty"`
+	PeerProjectID *string                   `json:"peerProjectId,omitempty"`
+	State         *InternalCheckerStateEnum `json:"state,omitempty"`
 }

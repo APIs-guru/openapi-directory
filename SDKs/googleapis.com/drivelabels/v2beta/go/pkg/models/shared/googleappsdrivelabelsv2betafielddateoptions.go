@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleAppsDriveLabelsV2betaFieldDateOptions struct {
-	DateFormat     *string                                                        `json:"dateFormat"`
-	DateFormatType *GoogleAppsDriveLabelsV2betaFieldDateOptionsDateFormatTypeEnum `json:"dateFormatType"`
-	MaxValue       *GoogleTypeDate                                                `json:"maxValue"`
-	MinValue       *GoogleTypeDate                                                `json:"minValue"`
+	DateFormat     *string                                                        `json:"dateFormat,omitempty"`
+	DateFormatType *GoogleAppsDriveLabelsV2betaFieldDateOptionsDateFormatTypeEnum `json:"dateFormatType,omitempty"`
+	MaxValue       *GoogleTypeDate                                                `json:"maxValue,omitempty"`
+	MinValue       *GoogleTypeDate                                                `json:"minValue,omitempty"`
 }

@@ -9,7 +9,7 @@ type LdapAuthModuleConfig struct {
 	ID                string  `json:"id"`
 	Name              string  `json:"name"`
 	NameField         string  `json:"nameField"`
-	OtoroshiDataField *string `json:"otoroshiDataField"`
+	OtoroshiDataField *string `json:"otoroshiDataField,omitempty"`
 	SearchBase        string  `json:"searchBase"`
 	SearchFilter      string  `json:"searchFilter"`
 	ServerURL         string  `json:"serverUrl"`

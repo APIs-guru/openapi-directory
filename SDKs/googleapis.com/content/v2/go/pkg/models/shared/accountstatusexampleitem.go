@@ -1,9 +1,9 @@
 package shared
 
 type AccountStatusExampleItem struct {
-	ItemID             *string `json:"itemId"`
-	Link               *string `json:"link"`
-	SubmittedValue     *string `json:"submittedValue"`
-	Title              *string `json:"title"`
-	ValueOnLandingPage *string `json:"valueOnLandingPage"`
+	ItemID             *string `json:"itemId,omitempty"`
+	Link               *string `json:"link,omitempty"`
+	SubmittedValue     *string `json:"submittedValue,omitempty"`
+	Title              *string `json:"title,omitempty"`
+	ValueOnLandingPage *string `json:"valueOnLandingPage,omitempty"`
 }

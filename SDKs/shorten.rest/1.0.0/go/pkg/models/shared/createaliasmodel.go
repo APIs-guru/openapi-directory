@@ -1,7 +1,7 @@
 package shared
 
 type CreateAliasModel struct {
-	Destinations []DestinationModel `json:"destinations"`
-	Metatags     []MetaTagModel     `json:"metatags"`
-	Snippets     []SnippetModel     `json:"snippets"`
+	Destinations []DestinationModel `json:"destinations,omitempty"`
+	Metatags     []MetaTagModel     `json:"metatags,omitempty"`
+	Snippets     []SnippetModel     `json:"snippets,omitempty"`
 }

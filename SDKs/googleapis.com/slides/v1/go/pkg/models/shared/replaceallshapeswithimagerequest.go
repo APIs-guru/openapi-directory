@@ -16,9 +16,9 @@ const (
 )
 
 type ReplaceAllShapesWithImageRequest struct {
-	ContainsText       *SubstringMatchCriteria                                 `json:"containsText"`
-	ImageReplaceMethod *ReplaceAllShapesWithImageRequestImageReplaceMethodEnum `json:"imageReplaceMethod"`
-	ImageURL           *string                                                 `json:"imageUrl"`
-	PageObjectIds      []string                                                `json:"pageObjectIds"`
-	ReplaceMethod      *ReplaceAllShapesWithImageRequestReplaceMethodEnum      `json:"replaceMethod"`
+	ContainsText       *SubstringMatchCriteria                                 `json:"containsText,omitempty"`
+	ImageReplaceMethod *ReplaceAllShapesWithImageRequestImageReplaceMethodEnum `json:"imageReplaceMethod,omitempty"`
+	ImageURL           *string                                                 `json:"imageUrl,omitempty"`
+	PageObjectIds      []string                                                `json:"pageObjectIds,omitempty"`
+	ReplaceMethod      *ReplaceAllShapesWithImageRequestReplaceMethodEnum      `json:"replaceMethod,omitempty"`
 }

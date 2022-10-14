@@ -1,10 +1,10 @@
 package shared
 
 type FootnoteReference struct {
-	FootnoteID                *string                       `json:"footnoteId"`
-	FootnoteNumber            *string                       `json:"footnoteNumber"`
-	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds"`
-	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges"`
-	TextStyle                 *TextStyle                    `json:"textStyle"`
+	FootnoteID                *string                       `json:"footnoteId,omitempty"`
+	FootnoteNumber            *string                       `json:"footnoteNumber,omitempty"`
+	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds,omitempty"`
+	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges,omitempty"`
+	TextStyle                 *TextStyle                    `json:"textStyle,omitempty"`
 }

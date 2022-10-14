@@ -1,5 +1,5 @@
 package shared
 
 type ReservationConfig struct {
-	ThroughputReservation *string `json:"throughputReservation"`
+	ThroughputReservation *string `json:"throughputReservation,omitempty"`
 }

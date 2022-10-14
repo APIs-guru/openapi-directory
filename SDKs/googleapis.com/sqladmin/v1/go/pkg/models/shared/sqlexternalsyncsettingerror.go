@@ -34,7 +34,7 @@ const (
 )
 
 type SQLExternalSyncSettingError struct {
-	Detail *string                              `json:"detail"`
-	Kind   *string                              `json:"kind"`
-	Type   *SQLExternalSyncSettingErrorTypeEnum `json:"type"`
+	Detail *string                              `json:"detail,omitempty"`
+	Kind   *string                              `json:"kind,omitempty"`
+	Type   *SQLExternalSyncSettingErrorTypeEnum `json:"type,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type AltLabel struct {
-	LangIdent *string `json:"langIdent"`
-	Mode      *int32  `json:"mode"`
-	Text      *string `json:"text"`
+	LangIdent *string `json:"langIdent,omitempty"`
+	Mode      *int32  `json:"mode,omitempty"`
+	Text      *string `json:"text,omitempty"`
 }

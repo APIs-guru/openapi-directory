@@ -9,9 +9,9 @@ const (
 )
 
 type QueryMetadata struct {
-	DataRange         *DataRange               `json:"dataRange"`
-	Format            *QueryMetadataFormatEnum `json:"format"`
-	SendNotification  *bool                    `json:"sendNotification"`
-	ShareEmailAddress []string                 `json:"shareEmailAddress"`
-	Title             *string                  `json:"title"`
+	DataRange         *DataRange               `json:"dataRange,omitempty"`
+	Format            *QueryMetadataFormatEnum `json:"format,omitempty"`
+	SendNotification  *bool                    `json:"sendNotification,omitempty"`
+	ShareEmailAddress []string                 `json:"shareEmailAddress,omitempty"`
+	Title             *string                  `json:"title,omitempty"`
 }

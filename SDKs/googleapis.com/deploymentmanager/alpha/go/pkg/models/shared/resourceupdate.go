@@ -1,13 +1,13 @@
 package shared
 
 type ResourceUpdateErrorErrors struct {
-	Code     *string `json:"code"`
-	Location *string `json:"location"`
-	Message  *string `json:"message"`
+	Code     *string `json:"code,omitempty"`
+	Location *string `json:"location,omitempty"`
+	Message  *string `json:"message,omitempty"`
 }
 
 type ResourceUpdateError struct {
-	Errors []ResourceUpdateErrorErrors `json:"errors"`
+	Errors []ResourceUpdateErrorErrors `json:"errors,omitempty"`
 }
 
 type ResourceUpdateIntentEnum string
@@ -73,25 +73,25 @@ const (
 )
 
 type ResourceUpdateWarningsData struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ResourceUpdateWarnings struct {
-	Code    *ResourceUpdateWarningsCodeEnum `json:"code"`
-	Data    []ResourceUpdateWarningsData    `json:"data"`
-	Message *string                         `json:"message"`
+	Code    *ResourceUpdateWarningsCodeEnum `json:"code,omitempty"`
+	Data    []ResourceUpdateWarningsData    `json:"data,omitempty"`
+	Message *string                         `json:"message,omitempty"`
 }
 
 type ResourceUpdate struct {
-	AccessControl   *ResourceAccessControl              `json:"accessControl"`
-	Credential      *Credential                         `json:"credential"`
-	Error           *ResourceUpdateError                `json:"error"`
-	FinalProperties *string                             `json:"finalProperties"`
-	Intent          *ResourceUpdateIntentEnum           `json:"intent"`
-	Manifest        *string                             `json:"manifest"`
-	Properties      *string                             `json:"properties"`
-	RuntimePolicies []ResourceUpdateRuntimePoliciesEnum `json:"runtimePolicies"`
-	State           *ResourceUpdateStateEnum            `json:"state"`
-	Warnings        []ResourceUpdateWarnings            `json:"warnings"`
+	AccessControl   *ResourceAccessControl              `json:"accessControl,omitempty"`
+	Credential      *Credential                         `json:"credential,omitempty"`
+	Error           *ResourceUpdateError                `json:"error,omitempty"`
+	FinalProperties *string                             `json:"finalProperties,omitempty"`
+	Intent          *ResourceUpdateIntentEnum           `json:"intent,omitempty"`
+	Manifest        *string                             `json:"manifest,omitempty"`
+	Properties      *string                             `json:"properties,omitempty"`
+	RuntimePolicies []ResourceUpdateRuntimePoliciesEnum `json:"runtimePolicies,omitempty"`
+	State           *ResourceUpdateStateEnum            `json:"state,omitempty"`
+	Warnings        []ResourceUpdateWarnings            `json:"warnings,omitempty"`
 }

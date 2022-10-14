@@ -1,10 +1,10 @@
 package shared
 
 type CreateCustomRoutingAcceleratorRequest struct {
-	Enabled          *bool              `json:"Enabled"`
+	Enabled          *bool              `json:"Enabled,omitempty"`
 	IdempotencyToken string             `json:"IdempotencyToken"`
-	IPAddressType    *IPAddressTypeEnum `json:"IpAddressType"`
-	IPAddresses      []string           `json:"IpAddresses"`
+	IPAddressType    *IPAddressTypeEnum `json:"IpAddressType,omitempty"`
+	IPAddresses      []string           `json:"IpAddresses,omitempty"`
 	Name             string             `json:"Name"`
-	Tags             []Tag              `json:"Tags"`
+	Tags             []Tag              `json:"Tags,omitempty"`
 }

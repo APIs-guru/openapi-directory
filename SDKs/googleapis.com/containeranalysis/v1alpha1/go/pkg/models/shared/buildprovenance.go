@@ -1,17 +1,17 @@
 package shared
 
 type BuildProvenance struct {
-	BuildOptions     map[string]string `json:"buildOptions"`
-	BuilderVersion   *string           `json:"builderVersion"`
-	BuiltArtifacts   []Artifact        `json:"builtArtifacts"`
-	Commands         []Command         `json:"commands"`
-	CreateTime       *string           `json:"createTime"`
-	Creator          *string           `json:"creator"`
-	FinishTime       *string           `json:"finishTime"`
-	ID               *string           `json:"id"`
-	LogsBucket       *string           `json:"logsBucket"`
-	ProjectID        *string           `json:"projectId"`
-	SourceProvenance *Source           `json:"sourceProvenance"`
-	StartTime        *string           `json:"startTime"`
-	TriggerID        *string           `json:"triggerId"`
+	BuildOptions     map[string]string `json:"buildOptions,omitempty"`
+	BuilderVersion   *string           `json:"builderVersion,omitempty"`
+	BuiltArtifacts   []Artifact        `json:"builtArtifacts,omitempty"`
+	Commands         []Command         `json:"commands,omitempty"`
+	CreateTime       *string           `json:"createTime,omitempty"`
+	Creator          *string           `json:"creator,omitempty"`
+	FinishTime       *string           `json:"finishTime,omitempty"`
+	ID               *string           `json:"id,omitempty"`
+	LogsBucket       *string           `json:"logsBucket,omitempty"`
+	ProjectID        *string           `json:"projectId,omitempty"`
+	SourceProvenance *Source           `json:"sourceProvenance,omitempty"`
+	StartTime        *string           `json:"startTime,omitempty"`
+	TriggerID        *string           `json:"triggerId,omitempty"`
 }

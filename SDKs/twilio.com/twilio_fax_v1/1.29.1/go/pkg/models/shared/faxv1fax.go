@@ -35,22 +35,22 @@ const (
 )
 
 type FaxV1Fax struct {
-	AccountSid  *string                `json:"account_sid"`
-	APIVersion  *string                `json:"api_version"`
-	DateCreated *time.Time             `json:"date_created"`
-	DateUpdated *time.Time             `json:"date_updated"`
-	Direction   *FaxV1FaxDirectionEnum `json:"direction"`
-	Duration    *int64                 `json:"duration"`
-	From        *string                `json:"from"`
-	Links       map[string]interface{} `json:"links"`
-	MediaSid    *string                `json:"media_sid"`
-	MediaURL    *string                `json:"media_url"`
-	NumPages    *int64                 `json:"num_pages"`
-	Price       *float64               `json:"price"`
-	PriceUnit   *string                `json:"price_unit"`
-	Quality     *FaxV1FaxQualityEnum   `json:"quality"`
-	Sid         *string                `json:"sid"`
-	Status      *FaxV1FaxStatusEnum    `json:"status"`
-	To          *string                `json:"to"`
-	URL         *string                `json:"url"`
+	AccountSid  *string                `json:"account_sid,omitempty"`
+	APIVersion  *string                `json:"api_version,omitempty"`
+	DateCreated *time.Time             `json:"date_created,omitempty"`
+	DateUpdated *time.Time             `json:"date_updated,omitempty"`
+	Direction   *FaxV1FaxDirectionEnum `json:"direction,omitempty"`
+	Duration    *int64                 `json:"duration,omitempty"`
+	From        *string                `json:"from,omitempty"`
+	Links       map[string]interface{} `json:"links,omitempty"`
+	MediaSid    *string                `json:"media_sid,omitempty"`
+	MediaURL    *string                `json:"media_url,omitempty"`
+	NumPages    *int64                 `json:"num_pages,omitempty"`
+	Price       *float64               `json:"price,omitempty"`
+	PriceUnit   *string                `json:"price_unit,omitempty"`
+	Quality     *FaxV1FaxQualityEnum   `json:"quality,omitempty"`
+	Sid         *string                `json:"sid,omitempty"`
+	Status      *FaxV1FaxStatusEnum    `json:"status,omitempty"`
+	To          *string                `json:"to,omitempty"`
+	URL         *string                `json:"url,omitempty"`
 }

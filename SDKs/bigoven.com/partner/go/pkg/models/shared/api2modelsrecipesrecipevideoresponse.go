@@ -5,8 +5,8 @@ import (
 )
 
 type Api2ModelsRecipesRecipeVideoResponse struct {
-	InsertedOn     *time.Time `json:"InsertedOn"`
-	IsPrimaryVideo *bool      `json:"IsPrimaryVideo"`
-	MediaID        *string    `json:"MediaId"`
-	VidID          *int32     `json:"VidId"`
+	InsertedOn     *time.Time `json:"InsertedOn,omitempty"`
+	IsPrimaryVideo *bool      `json:"IsPrimaryVideo,omitempty"`
+	MediaID        *string    `json:"MediaId,omitempty"`
+	VidID          *int32     `json:"VidId,omitempty"`
 }

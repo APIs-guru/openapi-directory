@@ -1,5 +1,5 @@
 package shared
 
 type DocumentMask struct {
-	FieldPaths []string `json:"fieldPaths"`
+	FieldPaths []string `json:"fieldPaths,omitempty"`
 }

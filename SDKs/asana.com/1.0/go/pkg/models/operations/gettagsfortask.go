@@ -21,7 +21,7 @@ type GetTagsForTaskRequest struct {
 }
 
 type GetTagsForTask200ApplicationJSON struct {
-	Data []shared.TagCompact `json:"data"`
+	Data []shared.TagCompact `json:"data,omitempty"`
 }
 
 type GetTagsForTaskResponse struct {

@@ -1,21 +1,21 @@
 package operations
 
 type PostLocationsRequestBodyAddress struct {
-	City            *string `json:"city"`
-	Country         *string `json:"country"`
-	PostalCode      *string `json:"postalCode"`
-	StreetAndNumber *string `json:"streetAndNumber"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	StreetAndNumber *string `json:"streetAndNumber,omitempty"`
 }
 
 type PostLocationsRequestBodyCoordinates struct {
-	Latitude  *float64 `json:"latitude"`
-	Longitude *float64 `json:"longitude"`
+	Latitude  *float64 `json:"latitude,omitempty"`
+	Longitude *float64 `json:"longitude,omitempty"`
 }
 
 type PostLocationsRequestBody struct {
-	Active         *bool                               `json:"active"`
+	Active         *bool                               `json:"active,omitempty"`
 	Address        PostLocationsRequestBodyAddress     `json:"address"`
-	Chargestations []interface{}                       `json:"chargestations"`
+	Chargestations []interface{}                       `json:"chargestations,omitempty"`
 	Coordinates    PostLocationsRequestBodyCoordinates `json:"coordinates"`
 	OperatorName   string                              `json:"operatorName"`
 }
@@ -25,9 +25,9 @@ type PostLocationsRequest struct {
 }
 
 type PostLocations200ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type PostLocationsResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListSpeechSynthesisTasksOutput struct {
-	NextToken      *string         `json:"NextToken"`
-	SynthesisTasks []SynthesisTask `json:"SynthesisTasks"`
+	NextToken      *string         `json:"NextToken,omitempty"`
+	SynthesisTasks []SynthesisTask `json:"SynthesisTasks,omitempty"`
 }

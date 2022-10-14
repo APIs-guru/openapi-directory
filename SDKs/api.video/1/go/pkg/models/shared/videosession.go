@@ -1,10 +1,10 @@
 package shared
 
 type VideoSession struct {
-	Client   *VideoSessionClient   `json:"client"`
-	Device   *VideoSessionDevice   `json:"device"`
-	Location *VideoSessionLocation `json:"location"`
-	Os       *VideoSessionOs       `json:"os"`
-	Referrer *VideoSessionReferrer `json:"referrer"`
-	Session  *VideoSessionSession  `json:"session"`
+	Client   *VideoSessionClient   `json:"client,omitempty"`
+	Device   *VideoSessionDevice   `json:"device,omitempty"`
+	Location *VideoSessionLocation `json:"location,omitempty"`
+	Os       *VideoSessionOs       `json:"os,omitempty"`
+	Referrer *VideoSessionReferrer `json:"referrer,omitempty"`
+	Session  *VideoSessionSession  `json:"session,omitempty"`
 }

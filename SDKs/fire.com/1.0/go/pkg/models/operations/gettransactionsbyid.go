@@ -14,31 +14,31 @@ type GetTransactionsByIDRequest struct {
 }
 
 type GetTransactionsByID200ApplicationJSONCardRelatedCard struct {
-	Alias              *string    `json:"alias"`
-	CardID             *float64   `json:"cardId"`
-	EmbossBusinessName *string    `json:"embossBusinessName"`
-	EmbossCardName     *string    `json:"embossCardName"`
-	ExpiryDate         *time.Time `json:"expiryDate"`
-	MaskedPan          *string    `json:"maskedPan"`
-	Provider           *string    `json:"provider"`
+	Alias              *string    `json:"alias,omitempty"`
+	CardID             *float64   `json:"cardId,omitempty"`
+	EmbossBusinessName *string    `json:"embossBusinessName,omitempty"`
+	EmbossCardName     *string    `json:"embossCardName,omitempty"`
+	ExpiryDate         *time.Time `json:"expiryDate,omitempty"`
+	MaskedPan          *string    `json:"maskedPan,omitempty"`
+	Provider           *string    `json:"provider,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade struct {
-	BuyAmount    *int64  `json:"buyAmount"`
-	BuyCurrency  *string `json:"buyCurrency"`
-	FixedSide    *string `json:"fixedSide"`
-	Rate4d       *int64  `json:"rate4d"`
-	SellAmount   *int64  `json:"sellAmount"`
-	SellCurrency *string `json:"sellCurrency"`
+	BuyAmount    *int64  `json:"buyAmount,omitempty"`
+	BuyCurrency  *string `json:"buyCurrency,omitempty"`
+	FixedSide    *string `json:"fixedSide,omitempty"`
+	Rate4d       *int64  `json:"rate4d,omitempty"`
+	SellAmount   *int64  `json:"sellAmount,omitempty"`
+	SellCurrency *string `json:"sellCurrency,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty1Account struct {
-	AccountNumber *string `json:"accountNumber"`
-	Alias         *string `json:"alias"`
-	Bic           *string `json:"bic"`
-	Iban          *string `json:"iban"`
-	ID            *int64  `json:"id"`
-	Nsc           *string `json:"nsc"`
+	AccountNumber *string `json:"accountNumber,omitempty"`
+	Alias         *string `json:"alias,omitempty"`
+	Bic           *string `json:"bic,omitempty"`
+	Iban          *string `json:"iban,omitempty"`
+	ID            *int64  `json:"id,omitempty"`
+	Nsc           *string `json:"nsc,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum string
@@ -48,17 +48,17 @@ const (
 )
 
 type GetTransactionsByID200ApplicationJSONRelatedParty1RelatedPartyFireAccount struct {
-	Account *GetTransactionsByID200ApplicationJSONRelatedParty1Account  `json:"account"`
-	Type    *GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum `json:"type"`
+	Account *GetTransactionsByID200ApplicationJSONRelatedParty1Account  `json:"account,omitempty"`
+	Type    *GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum `json:"type,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty2Account struct {
-	AccountNumber *string `json:"accountNumber"`
-	Alias         *string `json:"alias"`
-	Bic           *string `json:"bic"`
-	Iban          *string `json:"iban"`
-	ID            *int64  `json:"id"`
-	Nsc           *string `json:"nsc"`
+	AccountNumber *string `json:"accountNumber,omitempty"`
+	Alias         *string `json:"alias,omitempty"`
+	Bic           *string `json:"bic,omitempty"`
+	Iban          *string `json:"iban,omitempty"`
+	ID            *int64  `json:"id,omitempty"`
+	Nsc           *string `json:"nsc,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum string
@@ -68,17 +68,17 @@ const (
 )
 
 type GetTransactionsByID200ApplicationJSONRelatedParty2RelatedPartyExternalAccount struct {
-	Account *GetTransactionsByID200ApplicationJSONRelatedParty2Account  `json:"account"`
-	Type    *GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum `json:"type"`
+	Account *GetTransactionsByID200ApplicationJSONRelatedParty2Account  `json:"account,omitempty"`
+	Type    *GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum `json:"type,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty3Account struct {
-	AccountNumber *string `json:"accountNumber"`
-	Alias         *string `json:"alias"`
-	Bic           *string `json:"bic"`
-	Iban          *string `json:"iban"`
-	ID            *int64  `json:"id"`
-	Nsc           *string `json:"nsc"`
+	AccountNumber *string `json:"accountNumber,omitempty"`
+	Alias         *string `json:"alias,omitempty"`
+	Bic           *string `json:"bic,omitempty"`
+	Iban          *string `json:"iban,omitempty"`
+	ID            *int64  `json:"id,omitempty"`
+	Nsc           *string `json:"nsc,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum string
@@ -88,40 +88,40 @@ const (
 )
 
 type GetTransactionsByID200ApplicationJSONRelatedParty3RelatedPartyPayee struct {
-	Account *GetTransactionsByID200ApplicationJSONRelatedParty3Account  `json:"account"`
-	Type    *GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum `json:"type"`
+	Account *GetTransactionsByID200ApplicationJSONRelatedParty3Account  `json:"account,omitempty"`
+	Type    *GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum `json:"type,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant struct {
-	AcquirerIDDe32      *string  `json:"acquirerIdDe32"`
-	AdditionalAmtDe54   *string  `json:"additionalAmtDe54"`
-	AdditionalDataDe124 *string  `json:"additionalDataDe124"`
-	AdditionalDataDe48  *string  `json:"additionalDataDe48"`
-	AuthCodeDe38        *string  `json:"authCodeDe38"`
-	AuthorisedByGps     *string  `json:"authorisedByGps"`
-	AvsResult           *string  `json:"avsResult"`
-	BillAmt             *float64 `json:"billAmt"`
-	BillCcy             *string  `json:"billCcy"`
-	ExpiryDate          *string  `json:"expiryDate"`
-	MccCode             *string  `json:"mccCode"`
-	MerchIDDe42         *string  `json:"merchIdDe42"`
-	MerchNameDe43       *string  `json:"merchNameDe43"`
-	MtID                *string  `json:"mtId"`
-	PosDataDe22         *string  `json:"posDataDe22"`
-	PosDataDe61         *string  `json:"posDataDe61"`
-	PosTermnlDe41       *string  `json:"posTermnlDe41"`
-	ProcCode            *string  `json:"procCode"`
-	RecordDataDe120     *string  `json:"recordDataDe120"`
-	RespCodeDe39        *string  `json:"respCodeDe39"`
-	RetRefNoDe37        *string  `json:"retRefNoDe37"`
-	StatusCode          *string  `json:"statusCode"`
-	Token               *string  `json:"token"`
-	TxnAmt4d            *float64 `json:"txnAmt4d"`
-	TxnCcy              *string  `json:"txnCcy"`
-	TxnCtry             *string  `json:"txnCtry"`
-	TxnDesc             *string  `json:"txnDesc"`
-	TxnStatCode         *string  `json:"txnStatCode"`
-	TxnType             *string  `json:"txnType"`
+	AcquirerIDDe32      *string  `json:"acquirerIdDe32,omitempty"`
+	AdditionalAmtDe54   *string  `json:"additionalAmtDe54,omitempty"`
+	AdditionalDataDe124 *string  `json:"additionalDataDe124,omitempty"`
+	AdditionalDataDe48  *string  `json:"additionalDataDe48,omitempty"`
+	AuthCodeDe38        *string  `json:"authCodeDe38,omitempty"`
+	AuthorisedByGps     *string  `json:"authorisedByGps,omitempty"`
+	AvsResult           *string  `json:"avsResult,omitempty"`
+	BillAmt             *float64 `json:"billAmt,omitempty"`
+	BillCcy             *string  `json:"billCcy,omitempty"`
+	ExpiryDate          *string  `json:"expiryDate,omitempty"`
+	MccCode             *string  `json:"mccCode,omitempty"`
+	MerchIDDe42         *string  `json:"merchIdDe42,omitempty"`
+	MerchNameDe43       *string  `json:"merchNameDe43,omitempty"`
+	MtID                *string  `json:"mtId,omitempty"`
+	PosDataDe22         *string  `json:"posDataDe22,omitempty"`
+	PosDataDe61         *string  `json:"posDataDe61,omitempty"`
+	PosTermnlDe41       *string  `json:"posTermnlDe41,omitempty"`
+	ProcCode            *string  `json:"procCode,omitempty"`
+	RecordDataDe120     *string  `json:"recordDataDe120,omitempty"`
+	RespCodeDe39        *string  `json:"respCodeDe39,omitempty"`
+	RetRefNoDe37        *string  `json:"retRefNoDe37,omitempty"`
+	StatusCode          *string  `json:"statusCode,omitempty"`
+	Token               *string  `json:"token,omitempty"`
+	TxnAmt4d            *float64 `json:"txnAmt4d,omitempty"`
+	TxnCcy              *string  `json:"txnCcy,omitempty"`
+	TxnCtry             *string  `json:"txnCtry,omitempty"`
+	TxnDesc             *string  `json:"txnDesc,omitempty"`
+	TxnStatCode         *string  `json:"txnStatCode,omitempty"`
+	TxnType             *string  `json:"txnType,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum string
@@ -132,28 +132,28 @@ const (
 )
 
 type GetTransactionsByID200ApplicationJSONRelatedParty4RelatedPartyCardPayment struct {
-	CardMerchant *GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant `json:"cardMerchant"`
-	Type         *GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum     `json:"type"`
+	CardMerchant *GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant `json:"cardMerchant,omitempty"`
+	Type         *GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum     `json:"type,omitempty"`
 }
 
 type GetTransactionsByID200ApplicationJSONTransaction struct {
-	AmountAfterCharges       *int64                                                                                                   `json:"amountAfterCharges"`
-	AmountBeforeCharges      *int64                                                                                                   `json:"amountBeforeCharges"`
-	Balance                  *int64                                                                                                   `json:"balance"`
-	Card                     *GetTransactionsByID200ApplicationJSONCardRelatedCard                                                    `json:"card"`
-	Currency                 *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency"`
-	Date                     *time.Time                                                                                               `json:"date"`
-	DateAcknowledged         *time.Time                                                                                               `json:"dateAcknowledged"`
-	FeeAmount                *int64                                                                                                   `json:"feeAmount"`
-	FxTradeDetails           *GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade                                              `json:"fxTradeDetails"`
-	Ican                     *int64                                                                                                   `json:"ican"`
-	MyRef                    *string                                                                                                  `json:"myRef"`
-	PaymentRequestPublicCode *string                                                                                                  `json:"paymentRequestPublicCode"`
-	RefID                    *int64                                                                                                   `json:"refId"`
-	RelatedParty             *interface{}                                                                                             `json:"relatedParty"`
-	TaxAmount                *int64                                                                                                   `json:"taxAmount"`
-	TxnID                    *int64                                                                                                   `json:"txnId"`
-	Type                     *string                                                                                                  `json:"type"`
+	AmountAfterCharges       *int64                                                                                                   `json:"amountAfterCharges,omitempty"`
+	AmountBeforeCharges      *int64                                                                                                   `json:"amountBeforeCharges,omitempty"`
+	Balance                  *int64                                                                                                   `json:"balance,omitempty"`
+	Card                     *GetTransactionsByID200ApplicationJSONCardRelatedCard                                                    `json:"card,omitempty"`
+	Currency                 *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
+	Date                     *time.Time                                                                                               `json:"date,omitempty"`
+	DateAcknowledged         *time.Time                                                                                               `json:"dateAcknowledged,omitempty"`
+	FeeAmount                *int64                                                                                                   `json:"feeAmount,omitempty"`
+	FxTradeDetails           *GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade                                              `json:"fxTradeDetails,omitempty"`
+	Ican                     *int64                                                                                                   `json:"ican,omitempty"`
+	MyRef                    *string                                                                                                  `json:"myRef,omitempty"`
+	PaymentRequestPublicCode *string                                                                                                  `json:"paymentRequestPublicCode,omitempty"`
+	RefID                    *int64                                                                                                   `json:"refId,omitempty"`
+	RelatedParty             *interface{}                                                                                             `json:"relatedParty,omitempty"`
+	TaxAmount                *int64                                                                                                   `json:"taxAmount,omitempty"`
+	TxnID                    *int64                                                                                                   `json:"txnId,omitempty"`
+	Type                     *string                                                                                                  `json:"type,omitempty"`
 }
 
 type GetTransactionsByIDResponse struct {

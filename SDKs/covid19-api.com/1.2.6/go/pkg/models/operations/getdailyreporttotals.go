@@ -27,12 +27,12 @@ type GetDailyReportTotalsRequest struct {
 }
 
 type GetDailyReportTotals200ApplicationJSON struct {
-	Active    *int64  `json:"active"`
-	Confirmed *int64  `json:"confirmed"`
-	Critical  *int64  `json:"critical"`
-	Date      *string `json:"date"`
-	Deaths    *int64  `json:"deaths"`
-	Recovered *int64  `json:"recovered"`
+	Active    *int64  `json:"active,omitempty"`
+	Confirmed *int64  `json:"confirmed,omitempty"`
+	Critical  *int64  `json:"critical,omitempty"`
+	Date      *string `json:"date,omitempty"`
+	Deaths    *int64  `json:"deaths,omitempty"`
+	Recovered *int64  `json:"recovered,omitempty"`
 }
 
 type GetDailyReportTotalsResponse struct {

@@ -20,9 +20,9 @@ const (
 )
 
 type BadgeExpiry struct {
-	ExpirationDate  *time.Time                    `json:"expirationDate"`
-	Expires         *bool                         `json:"expires"`
-	ExpiryType      *BadgeExpiryExpiryTypeEnum    `json:"expiryType"`
-	TimeframeAmount *float64                      `json:"timeframeAmount"`
-	TimeframeUnit   *BadgeExpiryTimeframeUnitEnum `json:"timeframeUnit"`
+	ExpirationDate  *time.Time                    `json:"expirationDate,omitempty"`
+	Expires         *bool                         `json:"expires,omitempty"`
+	ExpiryType      *BadgeExpiryExpiryTypeEnum    `json:"expiryType,omitempty"`
+	TimeframeAmount *float64                      `json:"timeframeAmount,omitempty"`
+	TimeframeUnit   *BadgeExpiryTimeframeUnitEnum `json:"timeframeUnit,omitempty"`
 }

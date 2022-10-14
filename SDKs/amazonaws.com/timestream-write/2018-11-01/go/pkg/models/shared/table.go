@@ -5,11 +5,11 @@ import (
 )
 
 type Table struct {
-	Arn                 *string              `json:"Arn"`
-	CreationTime        *time.Time           `json:"CreationTime"`
-	DatabaseName        *string              `json:"DatabaseName"`
-	LastUpdatedTime     *time.Time           `json:"LastUpdatedTime"`
-	RetentionProperties *RetentionProperties `json:"RetentionProperties"`
-	TableName           *string              `json:"TableName"`
-	TableStatus         *TableStatusEnum     `json:"TableStatus"`
+	Arn                 *string              `json:"Arn,omitempty"`
+	CreationTime        *time.Time           `json:"CreationTime,omitempty"`
+	DatabaseName        *string              `json:"DatabaseName,omitempty"`
+	LastUpdatedTime     *time.Time           `json:"LastUpdatedTime,omitempty"`
+	RetentionProperties *RetentionProperties `json:"RetentionProperties,omitempty"`
+	TableName           *string              `json:"TableName,omitempty"`
+	TableStatus         *TableStatusEnum     `json:"TableStatus,omitempty"`
 }

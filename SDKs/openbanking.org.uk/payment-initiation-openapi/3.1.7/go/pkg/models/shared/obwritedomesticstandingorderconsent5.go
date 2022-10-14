@@ -13,21 +13,21 @@ const (
 
 type ObWriteDomesticStandingOrderConsent5DataAuthorisation struct {
 	AuthorisationType  ObWriteDomesticStandingOrderConsent5DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
-	CompletionDateTime *time.Time                                                                 `json:"CompletionDateTime"`
+	CompletionDateTime *time.Time                                                                 `json:"CompletionDateTime,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderConsent5DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderConsent5DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderConsent5DataInitiationFinalPaymentAmount struct {
@@ -47,17 +47,17 @@ type ObWriteDomesticStandingOrderConsent5DataInitiationRecurringPaymentAmount st
 
 type ObWriteDomesticStandingOrderConsent5DataInitiation struct {
 	CreditorAccount          ObWriteDomesticStandingOrderConsent5DataInitiationCreditorAccount         `json:"CreditorAccount"`
-	DebtorAccount            *ObWriteDomesticStandingOrderConsent5DataInitiationDebtorAccount          `json:"DebtorAccount"`
-	FinalPaymentAmount       *ObWriteDomesticStandingOrderConsent5DataInitiationFinalPaymentAmount     `json:"FinalPaymentAmount"`
-	FinalPaymentDateTime     *time.Time                                                                `json:"FinalPaymentDateTime"`
+	DebtorAccount            *ObWriteDomesticStandingOrderConsent5DataInitiationDebtorAccount          `json:"DebtorAccount,omitempty"`
+	FinalPaymentAmount       *ObWriteDomesticStandingOrderConsent5DataInitiationFinalPaymentAmount     `json:"FinalPaymentAmount,omitempty"`
+	FinalPaymentDateTime     *time.Time                                                                `json:"FinalPaymentDateTime,omitempty"`
 	FirstPaymentAmount       ObWriteDomesticStandingOrderConsent5DataInitiationFirstPaymentAmount      `json:"FirstPaymentAmount"`
 	FirstPaymentDateTime     time.Time                                                                 `json:"FirstPaymentDateTime"`
 	Frequency                string                                                                    `json:"Frequency"`
-	NumberOfPayments         *string                                                                   `json:"NumberOfPayments"`
-	RecurringPaymentAmount   *ObWriteDomesticStandingOrderConsent5DataInitiationRecurringPaymentAmount `json:"RecurringPaymentAmount"`
-	RecurringPaymentDateTime *time.Time                                                                `json:"RecurringPaymentDateTime"`
-	Reference                *string                                                                   `json:"Reference"`
-	SupplementaryData        map[string]interface{}                                                    `json:"SupplementaryData"`
+	NumberOfPayments         *string                                                                   `json:"NumberOfPayments,omitempty"`
+	RecurringPaymentAmount   *ObWriteDomesticStandingOrderConsent5DataInitiationRecurringPaymentAmount `json:"RecurringPaymentAmount,omitempty"`
+	RecurringPaymentDateTime *time.Time                                                                `json:"RecurringPaymentDateTime,omitempty"`
+	Reference                *string                                                                   `json:"Reference,omitempty"`
+	SupplementaryData        map[string]interface{}                                                    `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderConsent5DataPermissionEnum string
@@ -74,11 +74,11 @@ const (
 )
 
 type ObWriteDomesticStandingOrderConsent5Data struct {
-	Authorisation     *ObWriteDomesticStandingOrderConsent5DataAuthorisation         `json:"Authorisation"`
+	Authorisation     *ObWriteDomesticStandingOrderConsent5DataAuthorisation         `json:"Authorisation,omitempty"`
 	Initiation        ObWriteDomesticStandingOrderConsent5DataInitiation             `json:"Initiation"`
 	Permission        ObWriteDomesticStandingOrderConsent5DataPermissionEnum         `json:"Permission"`
-	ReadRefundAccount *ObWriteDomesticStandingOrderConsent5DataReadRefundAccountEnum `json:"ReadRefundAccount"`
-	ScaSupportData    *ObscaSupportData1                                             `json:"SCASupportData"`
+	ReadRefundAccount *ObWriteDomesticStandingOrderConsent5DataReadRefundAccountEnum `json:"ReadRefundAccount,omitempty"`
+	ScaSupportData    *ObscaSupportData1                                             `json:"SCASupportData,omitempty"`
 }
 
 type ObWriteDomesticStandingOrderConsent5 struct {

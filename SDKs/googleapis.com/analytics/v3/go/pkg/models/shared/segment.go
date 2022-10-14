@@ -5,13 +5,13 @@ import (
 )
 
 type Segment struct {
-	Created    *time.Time `json:"created"`
-	Definition *string    `json:"definition"`
-	ID         *string    `json:"id"`
-	Kind       *string    `json:"kind"`
-	Name       *string    `json:"name"`
-	SegmentID  *string    `json:"segmentId"`
-	SelfLink   *string    `json:"selfLink"`
-	Type       *string    `json:"type"`
-	Updated    *time.Time `json:"updated"`
+	Created    *time.Time `json:"created,omitempty"`
+	Definition *string    `json:"definition,omitempty"`
+	ID         *string    `json:"id,omitempty"`
+	Kind       *string    `json:"kind,omitempty"`
+	Name       *string    `json:"name,omitempty"`
+	SegmentID  *string    `json:"segmentId,omitempty"`
+	SelfLink   *string    `json:"selfLink,omitempty"`
+	Type       *string    `json:"type,omitempty"`
+	Updated    *time.Time `json:"updated,omitempty"`
 }

@@ -306,7 +306,7 @@ const (
 )
 
 type PathQueryOptionsFilter struct {
-	Filter *PathQueryOptionsFilterFilterEnum `json:"filter"`
-	Match  *PathQueryOptionsFilterMatchEnum  `json:"match"`
-	Values []string                          `json:"values"`
+	Filter *PathQueryOptionsFilterFilterEnum `json:"filter,omitempty"`
+	Match  *PathQueryOptionsFilterMatchEnum  `json:"match,omitempty"`
+	Values []string                          `json:"values,omitempty"`
 }

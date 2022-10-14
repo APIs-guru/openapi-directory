@@ -28,7 +28,7 @@ type UpdateUserRequest struct {
 }
 
 type UpdateUserDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateUserResponse struct {

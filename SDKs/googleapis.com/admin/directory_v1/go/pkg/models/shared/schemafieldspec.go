@@ -1,19 +1,19 @@
 package shared
 
 type SchemaFieldSpecNumericIndexingSpec struct {
-	MaxValue *float64 `json:"maxValue"`
-	MinValue *float64 `json:"minValue"`
+	MaxValue *float64 `json:"maxValue,omitempty"`
+	MinValue *float64 `json:"minValue,omitempty"`
 }
 
 type SchemaFieldSpec struct {
-	DisplayName         *string                             `json:"displayName"`
-	Etag                *string                             `json:"etag"`
-	FieldID             *string                             `json:"fieldId"`
-	FieldName           *string                             `json:"fieldName"`
-	FieldType           *string                             `json:"fieldType"`
-	Indexed             *bool                               `json:"indexed"`
-	Kind                *string                             `json:"kind"`
-	MultiValued         *bool                               `json:"multiValued"`
-	NumericIndexingSpec *SchemaFieldSpecNumericIndexingSpec `json:"numericIndexingSpec"`
-	ReadAccessType      *string                             `json:"readAccessType"`
+	DisplayName         *string                             `json:"displayName,omitempty"`
+	Etag                *string                             `json:"etag,omitempty"`
+	FieldID             *string                             `json:"fieldId,omitempty"`
+	FieldName           *string                             `json:"fieldName,omitempty"`
+	FieldType           *string                             `json:"fieldType,omitempty"`
+	Indexed             *bool                               `json:"indexed,omitempty"`
+	Kind                *string                             `json:"kind,omitempty"`
+	MultiValued         *bool                               `json:"multiValued,omitempty"`
+	NumericIndexingSpec *SchemaFieldSpecNumericIndexingSpec `json:"numericIndexingSpec,omitempty"`
+	ReadAccessType      *string                             `json:"readAccessType,omitempty"`
 }

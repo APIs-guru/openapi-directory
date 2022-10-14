@@ -1,9 +1,9 @@
 package shared
 
 type UpdateDomainNameResponse struct {
-	APIMappingSelectionExpression *string                   `json:"ApiMappingSelectionExpression"`
-	DomainName                    *string                   `json:"DomainName"`
-	DomainNameConfigurations      []DomainNameConfiguration `json:"DomainNameConfigurations"`
-	MutualTLSAuthentication       *MutualTLSAuthentication  `json:"MutualTlsAuthentication"`
-	Tags                          map[string]string         `json:"Tags"`
+	APIMappingSelectionExpression *string                   `json:"ApiMappingSelectionExpression,omitempty"`
+	DomainName                    *string                   `json:"DomainName,omitempty"`
+	DomainNameConfigurations      []DomainNameConfiguration `json:"DomainNameConfigurations,omitempty"`
+	MutualTLSAuthentication       *MutualTLSAuthentication  `json:"MutualTlsAuthentication,omitempty"`
+	Tags                          map[string]string         `json:"Tags,omitempty"`
 }

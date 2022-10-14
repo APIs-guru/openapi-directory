@@ -21,11 +21,11 @@ const (
 )
 
 type JobSteps struct {
-	CompletedAt *time.Time         `json:"completed_at"`
+	CompletedAt *time.Time         `json:"completed_at,omitempty"`
 	Conclusion  string             `json:"conclusion"`
 	Name        string             `json:"name"`
 	Number      int64              `json:"number"`
-	StartedAt   *time.Time         `json:"started_at"`
+	StartedAt   *time.Time         `json:"started_at,omitempty"`
 	Status      JobStepsStatusEnum `json:"status"`
 }
 
@@ -42,6 +42,6 @@ type Job struct {
 	RunURL      string        `json:"run_url"`
 	StartedAt   time.Time     `json:"started_at"`
 	Status      JobStatusEnum `json:"status"`
-	Steps       []JobSteps    `json:"steps"`
+	Steps       []JobSteps    `json:"steps,omitempty"`
 	URL         string        `json:"url"`
 }

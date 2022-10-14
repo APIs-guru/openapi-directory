@@ -57,8 +57,8 @@ const (
 )
 
 type Services struct {
-	Benefits    []ServicesBenefitsEnum `json:"benefits"`
-	Health      []ServicesHealthEnum   `json:"health"`
-	LastUpdated *time.Time             `json:"last_updated"`
-	Other       []ServicesOtherEnum    `json:"other"`
+	Benefits    []ServicesBenefitsEnum `json:"benefits,omitempty"`
+	Health      []ServicesHealthEnum   `json:"health,omitempty"`
+	LastUpdated *time.Time             `json:"last_updated,omitempty"`
+	Other       []ServicesOtherEnum    `json:"other,omitempty"`
 }

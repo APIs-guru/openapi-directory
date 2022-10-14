@@ -11,8 +11,8 @@ type ReposCreateDeployKeyPathParams struct {
 
 type ReposCreateDeployKeyRequestBody struct {
 	Key      string  `json:"key"`
-	ReadOnly *bool   `json:"read_only"`
-	Title    *string `json:"title"`
+	ReadOnly *bool   `json:"read_only,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }
 
 type ReposCreateDeployKeyRequest struct {

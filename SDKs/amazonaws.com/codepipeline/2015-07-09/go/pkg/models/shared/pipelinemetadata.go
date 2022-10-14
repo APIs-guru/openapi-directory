@@ -5,7 +5,7 @@ import (
 )
 
 type PipelineMetadata struct {
-	Created     *time.Time `json:"created"`
-	PipelineArn *string    `json:"pipelineArn"`
-	Updated     *time.Time `json:"updated"`
+	Created     *time.Time `json:"created,omitempty"`
+	PipelineArn *string    `json:"pipelineArn,omitempty"`
+	Updated     *time.Time `json:"updated,omitempty"`
 }

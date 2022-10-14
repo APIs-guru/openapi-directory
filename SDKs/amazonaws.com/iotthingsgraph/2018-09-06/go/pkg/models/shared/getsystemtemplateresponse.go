@@ -1,5 +1,5 @@
 package shared
 
 type GetSystemTemplateResponse struct {
-	Description *SystemTemplateDescription `json:"description"`
+	Description *SystemTemplateDescription `json:"description,omitempty"`
 }

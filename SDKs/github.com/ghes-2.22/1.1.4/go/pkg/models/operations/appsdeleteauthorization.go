@@ -9,7 +9,7 @@ type AppsDeleteAuthorizationPathParams struct {
 }
 
 type AppsDeleteAuthorizationRequestBody struct {
-	AccessToken *string `json:"access_token"`
+	AccessToken *string `json:"access_token,omitempty"`
 }
 
 type AppsDeleteAuthorizationRequest struct {

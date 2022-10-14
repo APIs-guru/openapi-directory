@@ -1,5 +1,5 @@
 package shared
 
 type ModifyColumnFamiliesRequest struct {
-	Modifications []Modification `json:"modifications"`
+	Modifications []Modification `json:"modifications,omitempty"`
 }

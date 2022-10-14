@@ -152,17 +152,17 @@ const (
 )
 
 type EventEntity struct {
-	ID    *int64               `json:"id"`
-	Label *string              `json:"label"`
-	Type  *EventEntityTypeEnum `json:"type"`
-	URL   *string              `json:"url"`
+	ID    *int64               `json:"id,omitempty"`
+	Label *string              `json:"label,omitempty"`
+	Type  *EventEntityTypeEnum `json:"type,omitempty"`
+	URL   *string              `json:"url,omitempty"`
 }
 
 type EventSecondaryEntity struct {
-	ID    *string `json:"id"`
-	Label *string `json:"label"`
-	Type  *string `json:"type"`
-	URL   *string `json:"url"`
+	ID    *string `json:"id,omitempty"`
+	Label *string `json:"label,omitempty"`
+	Type  *string `json:"type,omitempty"`
+	URL   *string `json:"url,omitempty"`
 }
 
 type EventStatusEnum string
@@ -176,18 +176,18 @@ const (
 )
 
 type Event struct {
-	Action          *EventActionEnum      `json:"action"`
-	Created         *time.Time            `json:"created"`
-	Duration        *float64              `json:"duration"`
-	Entity          *EventEntity          `json:"entity"`
-	ID              *int64                `json:"id"`
-	Message         *string               `json:"message"`
-	PercentComplete *int64                `json:"percent_complete"`
-	Rate            *string               `json:"rate"`
-	Read            *bool                 `json:"read"`
-	SecondaryEntity *EventSecondaryEntity `json:"secondary_entity"`
-	Seen            *bool                 `json:"seen"`
-	Status          *EventStatusEnum      `json:"status"`
-	TimeRemaining   *string               `json:"time_remaining"`
-	Username        *string               `json:"username"`
+	Action          *EventActionEnum      `json:"action,omitempty"`
+	Created         *time.Time            `json:"created,omitempty"`
+	Duration        *float64              `json:"duration,omitempty"`
+	Entity          *EventEntity          `json:"entity,omitempty"`
+	ID              *int64                `json:"id,omitempty"`
+	Message         *string               `json:"message,omitempty"`
+	PercentComplete *int64                `json:"percent_complete,omitempty"`
+	Rate            *string               `json:"rate,omitempty"`
+	Read            *bool                 `json:"read,omitempty"`
+	SecondaryEntity *EventSecondaryEntity `json:"secondary_entity,omitempty"`
+	Seen            *bool                 `json:"seen,omitempty"`
+	Status          *EventStatusEnum      `json:"status,omitempty"`
+	TimeRemaining   *string               `json:"time_remaining,omitempty"`
+	Username        *string               `json:"username,omitempty"`
 }

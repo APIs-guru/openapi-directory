@@ -1,6 +1,6 @@
 package shared
 
 type VaultNotificationConfig struct {
-	Events   []string `json:"Events"`
-	SnsTopic *string  `json:"SNSTopic"`
+	Events   []string `json:"Events,omitempty"`
+	SnsTopic *string  `json:"SNSTopic,omitempty"`
 }

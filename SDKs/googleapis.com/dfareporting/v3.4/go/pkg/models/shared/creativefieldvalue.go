@@ -1,7 +1,7 @@
 package shared
 
 type CreativeFieldValue struct {
-	ID    *string `json:"id"`
-	Kind  *string `json:"kind"`
-	Value *string `json:"value"`
+	ID    *string `json:"id,omitempty"`
+	Kind  *string `json:"kind,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

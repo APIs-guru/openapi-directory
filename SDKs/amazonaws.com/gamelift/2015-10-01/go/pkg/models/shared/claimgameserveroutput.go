@@ -1,5 +1,5 @@
 package shared
 
 type ClaimGameServerOutput struct {
-	GameServer *GameServer `json:"GameServer"`
+	GameServer *GameServer `json:"GameServer,omitempty"`
 }

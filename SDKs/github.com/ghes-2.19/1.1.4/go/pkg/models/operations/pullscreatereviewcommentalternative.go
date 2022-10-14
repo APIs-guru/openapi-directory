@@ -12,7 +12,7 @@ type PullsCreateReviewCommentAlternativePathParams struct {
 
 type PullsCreateReviewCommentAlternativeRequestBody struct {
 	Body      string `json:"body"`
-	InReplyTo *int64 `json:"in_reply_to"`
+	InReplyTo *int64 `json:"in_reply_to,omitempty"`
 }
 
 type PullsCreateReviewCommentAlternativeRequest struct {

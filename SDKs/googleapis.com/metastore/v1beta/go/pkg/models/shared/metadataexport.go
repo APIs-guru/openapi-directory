@@ -19,9 +19,9 @@ const (
 )
 
 type MetadataExport struct {
-	DatabaseDumpType  *MetadataExportDatabaseDumpTypeEnum `json:"databaseDumpType"`
-	DestinationGcsURI *string                             `json:"destinationGcsUri"`
-	EndTime           *string                             `json:"endTime"`
-	StartTime         *string                             `json:"startTime"`
-	State             *MetadataExportStateEnum            `json:"state"`
+	DatabaseDumpType  *MetadataExportDatabaseDumpTypeEnum `json:"databaseDumpType,omitempty"`
+	DestinationGcsURI *string                             `json:"destinationGcsUri,omitempty"`
+	EndTime           *string                             `json:"endTime,omitempty"`
+	StartTime         *string                             `json:"startTime,omitempty"`
+	State             *MetadataExportStateEnum            `json:"state,omitempty"`
 }

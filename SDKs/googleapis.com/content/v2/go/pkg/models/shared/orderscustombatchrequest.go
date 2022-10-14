@@ -1,5 +1,5 @@
 package shared
 
 type OrdersCustomBatchRequest struct {
-	Entries []OrdersCustomBatchRequestEntry `json:"entries"`
+	Entries []OrdersCustomBatchRequestEntry `json:"entries,omitempty"`
 }

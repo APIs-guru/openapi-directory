@@ -18,6 +18,6 @@ const (
 )
 
 type ProfileMetadata struct {
-	ObjectType *ProfileMetadataObjectTypeEnum `json:"objectType"`
-	UserTypes  []ProfileMetadataUserTypesEnum `json:"userTypes"`
+	ObjectType *ProfileMetadataObjectTypeEnum `json:"objectType,omitempty"`
+	UserTypes  []ProfileMetadataUserTypesEnum `json:"userTypes,omitempty"`
 }

@@ -8,7 +8,7 @@ const (
 )
 
 type BuildSystemSharedDtoParameterValue struct {
-	Direction *BuildSystemSharedDtoParameterValueDirectionEnum `json:"Direction"`
-	Name      *string                                          `json:"Name"`
-	Value     *string                                          `json:"Value"`
+	Direction *BuildSystemSharedDtoParameterValueDirectionEnum `json:"Direction,omitempty"`
+	Name      *string                                          `json:"Name,omitempty"`
+	Value     *string                                          `json:"Value,omitempty"`
 }

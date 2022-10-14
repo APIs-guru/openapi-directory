@@ -18,7 +18,7 @@ type UploadArchiveHeaders struct {
 }
 
 type UploadArchiveRequestBody struct {
-	Body *string `json:"body"`
+	Body *string `json:"body,omitempty"`
 }
 
 type UploadArchiveRequest struct {

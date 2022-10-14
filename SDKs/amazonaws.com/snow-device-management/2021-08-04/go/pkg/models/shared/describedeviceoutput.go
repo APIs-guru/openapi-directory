@@ -5,15 +5,15 @@ import (
 )
 
 type DescribeDeviceOutput struct {
-	AssociatedWithJob         *string                    `json:"associatedWithJob"`
-	DeviceCapacities          []Capacity                 `json:"deviceCapacities"`
-	DeviceState               *UnlockStateEnum           `json:"deviceState"`
-	DeviceType                *string                    `json:"deviceType"`
-	LastReachedOutAt          *time.Time                 `json:"lastReachedOutAt"`
-	LastUpdatedAt             *time.Time                 `json:"lastUpdatedAt"`
-	ManagedDeviceArn          *string                    `json:"managedDeviceArn"`
-	ManagedDeviceID           *string                    `json:"managedDeviceId"`
-	PhysicalNetworkInterfaces []PhysicalNetworkInterface `json:"physicalNetworkInterfaces"`
-	Software                  *SoftwareInformation       `json:"software"`
-	Tags                      map[string]string          `json:"tags"`
+	AssociatedWithJob         *string                    `json:"associatedWithJob,omitempty"`
+	DeviceCapacities          []Capacity                 `json:"deviceCapacities,omitempty"`
+	DeviceState               *UnlockStateEnum           `json:"deviceState,omitempty"`
+	DeviceType                *string                    `json:"deviceType,omitempty"`
+	LastReachedOutAt          *time.Time                 `json:"lastReachedOutAt,omitempty"`
+	LastUpdatedAt             *time.Time                 `json:"lastUpdatedAt,omitempty"`
+	ManagedDeviceArn          *string                    `json:"managedDeviceArn,omitempty"`
+	ManagedDeviceID           *string                    `json:"managedDeviceId,omitempty"`
+	PhysicalNetworkInterfaces []PhysicalNetworkInterface `json:"physicalNetworkInterfaces,omitempty"`
+	Software                  *SoftwareInformation       `json:"software,omitempty"`
+	Tags                      map[string]string          `json:"tags,omitempty"`
 }

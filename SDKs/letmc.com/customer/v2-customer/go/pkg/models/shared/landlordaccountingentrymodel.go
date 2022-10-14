@@ -5,8 +5,8 @@ import (
 )
 
 type LandlordAccountingEntryModel struct {
-	Amount            *float64   `json:"Amount"`
-	Date              *time.Time `json:"Date"`
-	Description       *string    `json:"Description"`
-	TransactionNumber *int32     `json:"TransactionNumber"`
+	Amount            *float64   `json:"Amount,omitempty"`
+	Date              *time.Time `json:"Date,omitempty"`
+	Description       *string    `json:"Description,omitempty"`
+	TransactionNumber *int32     `json:"TransactionNumber,omitempty"`
 }

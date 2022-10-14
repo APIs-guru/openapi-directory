@@ -16,7 +16,7 @@ type CreateEmailIdentityHeaders struct {
 
 type CreateEmailIdentityRequestBody struct {
 	EmailIdentity string       `json:"EmailIdentity"`
-	Tags          []shared.Tag `json:"Tags"`
+	Tags          []shared.Tag `json:"Tags,omitempty"`
 }
 
 type CreateEmailIdentityRequest struct {

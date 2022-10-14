@@ -7,8 +7,8 @@ type ActionsCreateOrUpdateEnvironmentSecretPathParams struct {
 }
 
 type ActionsCreateOrUpdateEnvironmentSecretRequestBody struct {
-	EncryptedValue *string `json:"encrypted_value"`
-	KeyID          *string `json:"key_id"`
+	EncryptedValue *string `json:"encrypted_value,omitempty"`
+	KeyID          *string `json:"key_id,omitempty"`
 }
 
 type ActionsCreateOrUpdateEnvironmentSecretRequest struct {

@@ -1,9 +1,9 @@
 package shared
 
 type WorkerStatus struct {
-	AttachedDisks map[string]DiskStatus `json:"attachedDisks"`
-	BootDisk      *DiskStatus           `json:"bootDisk"`
-	FreeRAMBytes  *string               `json:"freeRamBytes"`
-	TotalRAMBytes *string               `json:"totalRamBytes"`
-	UptimeSeconds *string               `json:"uptimeSeconds"`
+	AttachedDisks map[string]DiskStatus `json:"attachedDisks,omitempty"`
+	BootDisk      *DiskStatus           `json:"bootDisk,omitempty"`
+	FreeRAMBytes  *string               `json:"freeRamBytes,omitempty"`
+	TotalRAMBytes *string               `json:"totalRamBytes,omitempty"`
+	UptimeSeconds *string               `json:"uptimeSeconds,omitempty"`
 }

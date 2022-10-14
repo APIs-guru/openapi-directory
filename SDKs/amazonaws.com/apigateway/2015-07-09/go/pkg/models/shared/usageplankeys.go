@@ -1,6 +1,6 @@
 package shared
 
 type UsagePlanKeys struct {
-	Items    []UsagePlanKey `json:"items"`
-	Position *string        `json:"position"`
+	Items    []UsagePlanKey `json:"items,omitempty"`
+	Position *string        `json:"position,omitempty"`
 }

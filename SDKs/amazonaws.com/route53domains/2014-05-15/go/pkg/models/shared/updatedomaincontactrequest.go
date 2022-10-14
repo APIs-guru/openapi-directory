@@ -1,8 +1,8 @@
 package shared
 
 type UpdateDomainContactRequest struct {
-	AdminContact      *ContactDetail `json:"AdminContact"`
+	AdminContact      *ContactDetail `json:"AdminContact,omitempty"`
 	DomainName        string         `json:"DomainName"`
-	RegistrantContact *ContactDetail `json:"RegistrantContact"`
-	TechContact       *ContactDetail `json:"TechContact"`
+	RegistrantContact *ContactDetail `json:"RegistrantContact,omitempty"`
+	TechContact       *ContactDetail `json:"TechContact,omitempty"`
 }

@@ -9,11 +9,11 @@ const (
 )
 
 type Constraint struct {
-	BooleanConstraint map[string]interface{}           `json:"booleanConstraint"`
-	ConstraintDefault *ConstraintConstraintDefaultEnum `json:"constraintDefault"`
-	Description       *string                          `json:"description"`
-	DisplayName       *string                          `json:"displayName"`
-	ListConstraint    *ListConstraint                  `json:"listConstraint"`
-	Name              *string                          `json:"name"`
-	Version           *int32                           `json:"version"`
+	BooleanConstraint map[string]interface{}           `json:"booleanConstraint,omitempty"`
+	ConstraintDefault *ConstraintConstraintDefaultEnum `json:"constraintDefault,omitempty"`
+	Description       *string                          `json:"description,omitempty"`
+	DisplayName       *string                          `json:"displayName,omitempty"`
+	ListConstraint    *ListConstraint                  `json:"listConstraint,omitempty"`
+	Name              *string                          `json:"name,omitempty"`
+	Version           *int32                           `json:"version,omitempty"`
 }

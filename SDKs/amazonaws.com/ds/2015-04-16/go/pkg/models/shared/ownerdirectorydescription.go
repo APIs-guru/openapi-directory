@@ -1,10 +1,10 @@
 package shared
 
 type OwnerDirectoryDescription struct {
-	AccountID      *string                          `json:"AccountId"`
-	DirectoryID    *string                          `json:"DirectoryId"`
-	DNSIPAddrs     []string                         `json:"DnsIpAddrs"`
-	RadiusSettings *RadiusSettings                  `json:"RadiusSettings"`
-	RadiusStatus   *RadiusStatusEnum                `json:"RadiusStatus"`
-	VpcSettings    *DirectoryVpcSettingsDescription `json:"VpcSettings"`
+	AccountID      *string                          `json:"AccountId,omitempty"`
+	DirectoryID    *string                          `json:"DirectoryId,omitempty"`
+	DNSIPAddrs     []string                         `json:"DnsIpAddrs,omitempty"`
+	RadiusSettings *RadiusSettings                  `json:"RadiusSettings,omitempty"`
+	RadiusStatus   *RadiusStatusEnum                `json:"RadiusStatus,omitempty"`
+	VpcSettings    *DirectoryVpcSettingsDescription `json:"VpcSettings,omitempty"`
 }

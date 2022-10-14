@@ -16,13 +16,13 @@ type CreateDeviceDefinitionHeaders struct {
 }
 
 type CreateDeviceDefinitionRequestBodyInitialVersion struct {
-	Devices []shared.Device `json:"Devices"`
+	Devices []shared.Device `json:"Devices,omitempty"`
 }
 
 type CreateDeviceDefinitionRequestBody struct {
-	InitialVersion *CreateDeviceDefinitionRequestBodyInitialVersion `json:"InitialVersion"`
-	Name           *string                                          `json:"Name"`
-	Tags           map[string]string                                `json:"tags"`
+	InitialVersion *CreateDeviceDefinitionRequestBodyInitialVersion `json:"InitialVersion,omitempty"`
+	Name           *string                                          `json:"Name,omitempty"`
+	Tags           map[string]string                                `json:"tags,omitempty"`
 }
 
 type CreateDeviceDefinitionRequest struct {

@@ -29,15 +29,15 @@ const (
 )
 
 type NetworkConfig struct {
-	Bandwidth          *NetworkConfigBandwidthEnum   `json:"bandwidth"`
-	Cidr               *string                       `json:"cidr"`
-	GcpService         *string                       `json:"gcpService"`
-	ID                 *string                       `json:"id"`
-	JumboFramesEnabled *bool                         `json:"jumboFramesEnabled"`
-	Name               *string                       `json:"name"`
-	ServiceCidr        *NetworkConfigServiceCidrEnum `json:"serviceCidr"`
-	Type               *NetworkConfigTypeEnum        `json:"type"`
-	UserNote           *string                       `json:"userNote"`
-	VlanAttachments    []IntakeVlanAttachment        `json:"vlanAttachments"`
-	VlanSameProject    *bool                         `json:"vlanSameProject"`
+	Bandwidth          *NetworkConfigBandwidthEnum   `json:"bandwidth,omitempty"`
+	Cidr               *string                       `json:"cidr,omitempty"`
+	GcpService         *string                       `json:"gcpService,omitempty"`
+	ID                 *string                       `json:"id,omitempty"`
+	JumboFramesEnabled *bool                         `json:"jumboFramesEnabled,omitempty"`
+	Name               *string                       `json:"name,omitempty"`
+	ServiceCidr        *NetworkConfigServiceCidrEnum `json:"serviceCidr,omitempty"`
+	Type               *NetworkConfigTypeEnum        `json:"type,omitempty"`
+	UserNote           *string                       `json:"userNote,omitempty"`
+	VlanAttachments    []IntakeVlanAttachment        `json:"vlanAttachments,omitempty"`
+	VlanSameProject    *bool                         `json:"vlanSameProject,omitempty"`
 }

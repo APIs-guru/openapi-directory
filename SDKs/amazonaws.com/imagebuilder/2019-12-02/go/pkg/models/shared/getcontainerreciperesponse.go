@@ -1,6 +1,6 @@
 package shared
 
 type GetContainerRecipeResponse struct {
-	ContainerRecipe *ContainerRecipe `json:"containerRecipe"`
-	RequestID       *string          `json:"requestId"`
+	ContainerRecipe *ContainerRecipe `json:"containerRecipe,omitempty"`
+	RequestID       *string          `json:"requestId,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type AptSettings struct {
-	Excludes          []string             `json:"excludes"`
-	ExclusivePackages []string             `json:"exclusivePackages"`
-	Type              *AptSettingsTypeEnum `json:"type"`
+	Excludes          []string             `json:"excludes,omitempty"`
+	ExclusivePackages []string             `json:"exclusivePackages,omitempty"`
+	Type              *AptSettingsTypeEnum `json:"type,omitempty"`
 }

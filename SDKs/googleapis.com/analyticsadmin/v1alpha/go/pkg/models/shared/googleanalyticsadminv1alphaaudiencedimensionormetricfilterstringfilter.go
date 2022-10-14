@@ -12,7 +12,7 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilter struct {
-	CaseSensitive *bool                                                                                `json:"caseSensitive"`
-	MatchType     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnum `json:"matchType"`
-	Value         *string                                                                              `json:"value"`
+	CaseSensitive *bool                                                                                `json:"caseSensitive,omitempty"`
+	MatchType     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnum `json:"matchType,omitempty"`
+	Value         *string                                                                              `json:"value,omitempty"`
 }

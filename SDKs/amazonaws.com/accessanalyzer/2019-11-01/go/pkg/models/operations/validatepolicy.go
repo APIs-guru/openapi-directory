@@ -43,7 +43,7 @@ const (
 )
 
 type ValidatePolicyRequestBody struct {
-	Locale         *ValidatePolicyRequestBodyLocaleEnum    `json:"locale"`
+	Locale         *ValidatePolicyRequestBodyLocaleEnum    `json:"locale,omitempty"`
 	PolicyDocument string                                  `json:"policyDocument"`
 	PolicyType     ValidatePolicyRequestBodyPolicyTypeEnum `json:"policyType"`
 }

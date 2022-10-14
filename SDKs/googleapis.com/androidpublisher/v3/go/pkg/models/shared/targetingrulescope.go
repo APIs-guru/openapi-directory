@@ -1,5 +1,5 @@
 package shared
 
 type TargetingRuleScope struct {
-	SpecificSubscriptionInApp *string `json:"specificSubscriptionInApp"`
+	SpecificSubscriptionInApp *string `json:"specificSubscriptionInApp,omitempty"`
 }

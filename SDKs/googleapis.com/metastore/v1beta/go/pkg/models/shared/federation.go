@@ -12,14 +12,14 @@ const (
 )
 
 type Federation struct {
-	BackendMetastores map[string]BackendMetastore `json:"backendMetastores"`
-	CreateTime        *string                     `json:"createTime"`
-	EndpointURI       *string                     `json:"endpointUri"`
-	Labels            map[string]string           `json:"labels"`
-	Name              *string                     `json:"name"`
-	State             *FederationStateEnum        `json:"state"`
-	StateMessage      *string                     `json:"stateMessage"`
-	UID               *string                     `json:"uid"`
-	UpdateTime        *string                     `json:"updateTime"`
-	Version           *string                     `json:"version"`
+	BackendMetastores map[string]BackendMetastore `json:"backendMetastores,omitempty"`
+	CreateTime        *string                     `json:"createTime,omitempty"`
+	EndpointURI       *string                     `json:"endpointUri,omitempty"`
+	Labels            map[string]string           `json:"labels,omitempty"`
+	Name              *string                     `json:"name,omitempty"`
+	State             *FederationStateEnum        `json:"state,omitempty"`
+	StateMessage      *string                     `json:"stateMessage,omitempty"`
+	UID               *string                     `json:"uid,omitempty"`
+	UpdateTime        *string                     `json:"updateTime,omitempty"`
+	Version           *string                     `json:"version,omitempty"`
 }

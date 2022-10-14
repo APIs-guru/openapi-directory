@@ -1,43 +1,43 @@
 package shared
 
 type ArticleMultimedia struct {
-	Caption   *string `json:"caption"`
-	Copyright *string `json:"copyright"`
-	Format    *string `json:"format"`
-	Height    *int64  `json:"height"`
-	Subtype   *string `json:"subtype"`
-	Type      *string `json:"type"`
-	URL       *string `json:"url"`
-	Width     *int64  `json:"width"`
+	Caption   *string `json:"caption,omitempty"`
+	Copyright *string `json:"copyright,omitempty"`
+	Format    *string `json:"format,omitempty"`
+	Height    *int64  `json:"height,omitempty"`
+	Subtype   *string `json:"subtype,omitempty"`
+	Type      *string `json:"type,omitempty"`
+	URL       *string `json:"url,omitempty"`
+	Width     *int64  `json:"width,omitempty"`
 }
 
 type ArticleRelatedUrls struct {
-	SuggestedLinkText *string `json:"suggested_link_text"`
-	URL               *string `json:"url"`
+	SuggestedLinkText *string `json:"suggested_link_text,omitempty"`
+	URL               *string `json:"url,omitempty"`
 }
 
 type Article struct {
-	Abstract          *string              `json:"abstract"`
-	BlogName          *string              `json:"blog_name"`
-	Byline            *string              `json:"byline"`
-	CreatedDate       *string              `json:"created_date"`
-	DesFacet          []string             `json:"des_facet"`
-	GeoFacet          []string             `json:"geo_facet"`
-	Headline          *string              `json:"headline"`
-	ItemType          *string              `json:"item_type"`
-	Kicker            *string              `json:"kicker"`
-	MaterialTypeFacet *string              `json:"material_type_facet"`
-	Multimedia        []ArticleMultimedia  `json:"multimedia"`
-	OrgFacet          *string              `json:"org_facet"`
-	PerFacet          []string             `json:"per_facet"`
-	PublishedDate     *string              `json:"published_date"`
-	RelatedUrls       []ArticleRelatedUrls `json:"related_urls"`
-	Section           *string              `json:"section"`
-	ShortURL          *string              `json:"short_url"`
-	Source            *string              `json:"source"`
-	Subsection        *string              `json:"subsection"`
-	ThumbnailStandard *string              `json:"thumbnail_standard"`
-	Title             *string              `json:"title"`
-	UpdatedDate       *string              `json:"updated_date"`
-	URL               *string              `json:"url"`
+	Abstract          *string              `json:"abstract,omitempty"`
+	BlogName          *string              `json:"blog_name,omitempty"`
+	Byline            *string              `json:"byline,omitempty"`
+	CreatedDate       *string              `json:"created_date,omitempty"`
+	DesFacet          []string             `json:"des_facet,omitempty"`
+	GeoFacet          []string             `json:"geo_facet,omitempty"`
+	Headline          *string              `json:"headline,omitempty"`
+	ItemType          *string              `json:"item_type,omitempty"`
+	Kicker            *string              `json:"kicker,omitempty"`
+	MaterialTypeFacet *string              `json:"material_type_facet,omitempty"`
+	Multimedia        []ArticleMultimedia  `json:"multimedia,omitempty"`
+	OrgFacet          *string              `json:"org_facet,omitempty"`
+	PerFacet          []string             `json:"per_facet,omitempty"`
+	PublishedDate     *string              `json:"published_date,omitempty"`
+	RelatedUrls       []ArticleRelatedUrls `json:"related_urls,omitempty"`
+	Section           *string              `json:"section,omitempty"`
+	ShortURL          *string              `json:"short_url,omitempty"`
+	Source            *string              `json:"source,omitempty"`
+	Subsection        *string              `json:"subsection,omitempty"`
+	ThumbnailStandard *string              `json:"thumbnail_standard,omitempty"`
+	Title             *string              `json:"title,omitempty"`
+	UpdatedDate       *string              `json:"updated_date,omitempty"`
+	URL               *string              `json:"url,omitempty"`
 }

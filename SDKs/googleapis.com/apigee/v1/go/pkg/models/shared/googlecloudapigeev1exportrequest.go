@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudApigeeV1ExportRequest struct {
-	CsvDelimiter  *string                       `json:"csvDelimiter"`
-	DatastoreName *string                       `json:"datastoreName"`
-	DateRange     *GoogleCloudApigeeV1DateRange `json:"dateRange"`
-	Description   *string                       `json:"description"`
-	Name          *string                       `json:"name"`
-	OutputFormat  *string                       `json:"outputFormat"`
+	CsvDelimiter  *string                       `json:"csvDelimiter,omitempty"`
+	DatastoreName *string                       `json:"datastoreName,omitempty"`
+	DateRange     *GoogleCloudApigeeV1DateRange `json:"dateRange,omitempty"`
+	Description   *string                       `json:"description,omitempty"`
+	Name          *string                       `json:"name,omitempty"`
+	OutputFormat  *string                       `json:"outputFormat,omitempty"`
 }

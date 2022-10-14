@@ -1,13 +1,13 @@
 package shared
 
 type DetailedServiceAddress struct {
-	AddressLine1          *string `json:"address_line1"`
-	AddressLine2          *string `json:"address_line2"`
-	BuildingNameNumber    *string `json:"building_name_number"`
-	City                  *string `json:"city"`
-	ClinicName            *string `json:"clinic_name"`
-	CountryCode           *string `json:"country_code"`
-	State                 *string `json:"state"`
-	WingFloorOrRoomNumber *string `json:"wing_floor_or_room_number"`
-	ZipCode               *string `json:"zip_code"`
+	AddressLine1          *string `json:"address_line1,omitempty"`
+	AddressLine2          *string `json:"address_line2,omitempty"`
+	BuildingNameNumber    *string `json:"building_name_number,omitempty"`
+	City                  *string `json:"city,omitempty"`
+	ClinicName            *string `json:"clinic_name,omitempty"`
+	CountryCode           *string `json:"country_code,omitempty"`
+	State                 *string `json:"state,omitempty"`
+	WingFloorOrRoomNumber *string `json:"wing_floor_or_room_number,omitempty"`
+	ZipCode               *string `json:"zip_code,omitempty"`
 }

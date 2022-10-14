@@ -1,6 +1,6 @@
 package shared
 
 type ListIdpCredentialsResponse struct {
-	IdpCredentials []IdpCredential `json:"idpCredentials"`
-	NextPageToken  *string         `json:"nextPageToken"`
+	IdpCredentials []IdpCredential `json:"idpCredentials,omitempty"`
+	NextPageToken  *string         `json:"nextPageToken,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type AwsEcrContainerImageDetails struct {
-	Architecture     *string  `json:"Architecture"`
-	ImageDigest      *string  `json:"ImageDigest"`
-	ImagePublishedAt *string  `json:"ImagePublishedAt"`
-	ImageTags        []string `json:"ImageTags"`
-	RegistryID       *string  `json:"RegistryId"`
-	RepositoryName   *string  `json:"RepositoryName"`
+	Architecture     *string  `json:"Architecture,omitempty"`
+	ImageDigest      *string  `json:"ImageDigest,omitempty"`
+	ImagePublishedAt *string  `json:"ImagePublishedAt,omitempty"`
+	ImageTags        []string `json:"ImageTags,omitempty"`
+	RegistryID       *string  `json:"RegistryId,omitempty"`
+	RepositoryName   *string  `json:"RepositoryName,omitempty"`
 }

@@ -5,15 +5,15 @@ import (
 )
 
 type PlaylistItemSnippet struct {
-	ChannelID              *string           `json:"channelId"`
-	ChannelTitle           *string           `json:"channelTitle"`
-	Description            *string           `json:"description"`
-	PlaylistID             *string           `json:"playlistId"`
-	Position               *int64            `json:"position"`
-	PublishedAt            *time.Time        `json:"publishedAt"`
-	ResourceID             *ResourceID       `json:"resourceId"`
-	Thumbnails             *ThumbnailDetails `json:"thumbnails"`
-	Title                  *string           `json:"title"`
-	VideoOwnerChannelID    *string           `json:"videoOwnerChannelId"`
-	VideoOwnerChannelTitle *string           `json:"videoOwnerChannelTitle"`
+	ChannelID              *string           `json:"channelId,omitempty"`
+	ChannelTitle           *string           `json:"channelTitle,omitempty"`
+	Description            *string           `json:"description,omitempty"`
+	PlaylistID             *string           `json:"playlistId,omitempty"`
+	Position               *int64            `json:"position,omitempty"`
+	PublishedAt            *time.Time        `json:"publishedAt,omitempty"`
+	ResourceID             *ResourceID       `json:"resourceId,omitempty"`
+	Thumbnails             *ThumbnailDetails `json:"thumbnails,omitempty"`
+	Title                  *string           `json:"title,omitempty"`
+	VideoOwnerChannelID    *string           `json:"videoOwnerChannelId,omitempty"`
+	VideoOwnerChannelTitle *string           `json:"videoOwnerChannelTitle,omitempty"`
 }

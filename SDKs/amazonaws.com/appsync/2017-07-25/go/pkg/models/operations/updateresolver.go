@@ -21,8 +21,8 @@ type UpdateResolverHeaders struct {
 }
 
 type UpdateResolverRequestBodyCachingConfig struct {
-	CachingKeys []string `json:"cachingKeys"`
-	TTL         *int64   `json:"ttl"`
+	CachingKeys []string `json:"cachingKeys,omitempty"`
+	TTL         *int64   `json:"ttl,omitempty"`
 }
 
 type UpdateResolverRequestBodyKindEnum string
@@ -33,23 +33,23 @@ const (
 )
 
 type UpdateResolverRequestBodyPipelineConfig struct {
-	Functions []string `json:"functions"`
+	Functions []string `json:"functions,omitempty"`
 }
 
 type UpdateResolverRequestBodySyncConfig struct {
-	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection"`
-	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler"`
-	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig"`
+	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection,omitempty"`
+	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler,omitempty"`
+	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig,omitempty"`
 }
 
 type UpdateResolverRequestBody struct {
-	CachingConfig           *UpdateResolverRequestBodyCachingConfig  `json:"cachingConfig"`
-	DataSourceName          *string                                  `json:"dataSourceName"`
-	Kind                    *UpdateResolverRequestBodyKindEnum       `json:"kind"`
-	PipelineConfig          *UpdateResolverRequestBodyPipelineConfig `json:"pipelineConfig"`
-	RequestMappingTemplate  *string                                  `json:"requestMappingTemplate"`
-	ResponseMappingTemplate *string                                  `json:"responseMappingTemplate"`
-	SyncConfig              *UpdateResolverRequestBodySyncConfig     `json:"syncConfig"`
+	CachingConfig           *UpdateResolverRequestBodyCachingConfig  `json:"cachingConfig,omitempty"`
+	DataSourceName          *string                                  `json:"dataSourceName,omitempty"`
+	Kind                    *UpdateResolverRequestBodyKindEnum       `json:"kind,omitempty"`
+	PipelineConfig          *UpdateResolverRequestBodyPipelineConfig `json:"pipelineConfig,omitempty"`
+	RequestMappingTemplate  *string                                  `json:"requestMappingTemplate,omitempty"`
+	ResponseMappingTemplate *string                                  `json:"responseMappingTemplate,omitempty"`
+	SyncConfig              *UpdateResolverRequestBodySyncConfig     `json:"syncConfig,omitempty"`
 }
 
 type UpdateResolverRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type HeaderObject struct {
-	HeadersAllowList []HeaderEnumEnum   `json:"headersAllowList"`
-	Option           *ForwardValuesEnum `json:"option"`
+	HeadersAllowList []HeaderEnumEnum   `json:"headersAllowList,omitempty"`
+	Option           *ForwardValuesEnum `json:"option,omitempty"`
 }

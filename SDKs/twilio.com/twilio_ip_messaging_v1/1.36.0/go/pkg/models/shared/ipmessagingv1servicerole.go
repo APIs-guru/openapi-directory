@@ -5,13 +5,13 @@ import (
 )
 
 type IPMessagingV1ServiceRole struct {
-	AccountSid   *string               `json:"account_sid"`
-	DateCreated  *time.Time            `json:"date_created"`
-	DateUpdated  *time.Time            `json:"date_updated"`
-	FriendlyName *string               `json:"friendly_name"`
-	Permissions  []string              `json:"permissions"`
-	ServiceSid   *string               `json:"service_sid"`
-	Sid          *string               `json:"sid"`
-	Type         *RoleEnumRoleTypeEnum `json:"type"`
-	URL          *string               `json:"url"`
+	AccountSid   *string               `json:"account_sid,omitempty"`
+	DateCreated  *time.Time            `json:"date_created,omitempty"`
+	DateUpdated  *time.Time            `json:"date_updated,omitempty"`
+	FriendlyName *string               `json:"friendly_name,omitempty"`
+	Permissions  []string              `json:"permissions,omitempty"`
+	ServiceSid   *string               `json:"service_sid,omitempty"`
+	Sid          *string               `json:"sid,omitempty"`
+	Type         *RoleEnumRoleTypeEnum `json:"type,omitempty"`
+	URL          *string               `json:"url,omitempty"`
 }

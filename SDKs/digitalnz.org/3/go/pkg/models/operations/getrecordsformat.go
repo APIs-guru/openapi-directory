@@ -123,12 +123,12 @@ type GetRecordsFormatRequest struct {
 }
 
 type GetRecordsFormat200ApplicationJSON struct {
-	Facets      map[string]map[string]int64 `json:"facets"`
-	Page        *int64                      `json:"page"`
-	PerPage     *int64                      `json:"per_page"`
-	Records     []shared.Record             `json:"records"`
-	RequestURL  *string                     `json:"request_url"`
-	ResultCount *int64                      `json:"result_count"`
+	Facets      map[string]map[string]int64 `json:"facets,omitempty"`
+	Page        *int64                      `json:"page,omitempty"`
+	PerPage     *int64                      `json:"per_page,omitempty"`
+	Records     []shared.Record             `json:"records,omitempty"`
+	RequestURL  *string                     `json:"request_url,omitempty"`
+	ResultCount *int64                      `json:"result_count,omitempty"`
 }
 
 type GetRecordsFormatResponse struct {

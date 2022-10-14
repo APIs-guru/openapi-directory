@@ -23,20 +23,20 @@ const (
 )
 
 type ListOutgoingTypedLinksRequestBodyFilterTypedLink struct {
-	SchemaArn     *string `json:"SchemaArn"`
-	TypedLinkName *string `json:"TypedLinkName"`
+	SchemaArn     *string `json:"SchemaArn,omitempty"`
+	TypedLinkName *string `json:"TypedLinkName,omitempty"`
 }
 
 type ListOutgoingTypedLinksRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type ListOutgoingTypedLinksRequestBody struct {
-	ConsistencyLevel      *ListOutgoingTypedLinksRequestBodyConsistencyLevelEnum `json:"ConsistencyLevel"`
-	FilterAttributeRanges []shared.TypedLinkAttributeRange                       `json:"FilterAttributeRanges"`
-	FilterTypedLink       *ListOutgoingTypedLinksRequestBodyFilterTypedLink      `json:"FilterTypedLink"`
-	MaxResults            *int64                                                 `json:"MaxResults"`
-	NextToken             *string                                                `json:"NextToken"`
+	ConsistencyLevel      *ListOutgoingTypedLinksRequestBodyConsistencyLevelEnum `json:"ConsistencyLevel,omitempty"`
+	FilterAttributeRanges []shared.TypedLinkAttributeRange                       `json:"FilterAttributeRanges,omitempty"`
+	FilterTypedLink       *ListOutgoingTypedLinksRequestBodyFilterTypedLink      `json:"FilterTypedLink,omitempty"`
+	MaxResults            *int64                                                 `json:"MaxResults,omitempty"`
+	NextToken             *string                                                `json:"NextToken,omitempty"`
 	ObjectReference       ListOutgoingTypedLinksRequestBodyObjectReference       `json:"ObjectReference"`
 }
 

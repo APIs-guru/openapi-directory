@@ -1,6 +1,6 @@
 package shared
 
 type PolicyInfo struct {
-	AttachedResource *string `json:"attachedResource"`
-	Policy           *Policy `json:"policy"`
+	AttachedResource *string `json:"attachedResource,omitempty"`
+	Policy           *Policy `json:"policy,omitempty"`
 }

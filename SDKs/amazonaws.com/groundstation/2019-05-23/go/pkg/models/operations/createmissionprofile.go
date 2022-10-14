@@ -15,12 +15,12 @@ type CreateMissionProfileHeaders struct {
 }
 
 type CreateMissionProfileRequestBody struct {
-	ContactPostPassDurationSeconds      *int64            `json:"contactPostPassDurationSeconds"`
-	ContactPrePassDurationSeconds       *int64            `json:"contactPrePassDurationSeconds"`
+	ContactPostPassDurationSeconds      *int64            `json:"contactPostPassDurationSeconds,omitempty"`
+	ContactPrePassDurationSeconds       *int64            `json:"contactPrePassDurationSeconds,omitempty"`
 	DataflowEdges                       [][]string        `json:"dataflowEdges"`
 	MinimumViableContactDurationSeconds int64             `json:"minimumViableContactDurationSeconds"`
 	Name                                string            `json:"name"`
-	Tags                                map[string]string `json:"tags"`
+	Tags                                map[string]string `json:"tags,omitempty"`
 	TrackingConfigArn                   string            `json:"trackingConfigArn"`
 }
 

@@ -1,12 +1,12 @@
 package shared
 
 type AttributeContext struct {
-	API         *API                     `json:"api"`
-	Destination *Peer                    `json:"destination"`
-	Extensions  []map[string]interface{} `json:"extensions"`
-	Origin      *Peer                    `json:"origin"`
-	Request     *Request                 `json:"request"`
-	Resource    *Resource                `json:"resource"`
-	Response    *Response                `json:"response"`
-	Source      *Peer                    `json:"source"`
+	API         *API                     `json:"api,omitempty"`
+	Destination *Peer                    `json:"destination,omitempty"`
+	Extensions  []map[string]interface{} `json:"extensions,omitempty"`
+	Origin      *Peer                    `json:"origin,omitempty"`
+	Request     *Request                 `json:"request,omitempty"`
+	Resource    *Resource                `json:"resource,omitempty"`
+	Response    *Response                `json:"response,omitempty"`
+	Source      *Peer                    `json:"source,omitempty"`
 }

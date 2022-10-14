@@ -5,9 +5,9 @@ import (
 )
 
 type RemediationExecutionStep struct {
-	ErrorMessage *string                            `json:"ErrorMessage"`
-	Name         *string                            `json:"Name"`
-	StartTime    *time.Time                         `json:"StartTime"`
-	State        *RemediationExecutionStepStateEnum `json:"State"`
-	StopTime     *time.Time                         `json:"StopTime"`
+	ErrorMessage *string                            `json:"ErrorMessage,omitempty"`
+	Name         *string                            `json:"Name,omitempty"`
+	StartTime    *time.Time                         `json:"StartTime,omitempty"`
+	State        *RemediationExecutionStepStateEnum `json:"State,omitempty"`
+	StopTime     *time.Time                         `json:"StopTime,omitempty"`
 }

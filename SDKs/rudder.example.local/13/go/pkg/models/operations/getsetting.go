@@ -15,7 +15,7 @@ const (
 )
 
 type GetSetting200ApplicationJSONData struct {
-	SettingID *string `json:"settingId"`
+	SettingID *string `json:"settingId,omitempty"`
 }
 
 type GetSetting200ApplicationJSONResultEnum string

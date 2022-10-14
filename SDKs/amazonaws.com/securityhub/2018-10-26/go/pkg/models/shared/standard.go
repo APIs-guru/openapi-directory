@@ -1,8 +1,8 @@
 package shared
 
 type Standard struct {
-	Description      *string `json:"Description"`
-	EnabledByDefault *bool   `json:"EnabledByDefault"`
-	Name             *string `json:"Name"`
-	StandardsArn     *string `json:"StandardsArn"`
+	Description      *string `json:"Description,omitempty"`
+	EnabledByDefault *bool   `json:"EnabledByDefault,omitempty"`
+	Name             *string `json:"Name,omitempty"`
+	StandardsArn     *string `json:"StandardsArn,omitempty"`
 }

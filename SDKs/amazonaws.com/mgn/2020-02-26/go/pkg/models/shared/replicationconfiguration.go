@@ -1,19 +1,19 @@
 package shared
 
 type ReplicationConfiguration struct {
-	AssociateDefaultSecurityGroup       *bool                                                    `json:"associateDefaultSecurityGroup"`
-	BandwidthThrottling                 *int64                                                   `json:"bandwidthThrottling"`
-	CreatePublicIP                      *bool                                                    `json:"createPublicIP"`
-	DataPlaneRouting                    *ReplicationConfigurationDataPlaneRoutingEnum            `json:"dataPlaneRouting"`
-	DefaultLargeStagingDiskType         *ReplicationConfigurationDefaultLargeStagingDiskTypeEnum `json:"defaultLargeStagingDiskType"`
-	EbsEncryption                       *ReplicationConfigurationEbsEncryptionEnum               `json:"ebsEncryption"`
-	EbsEncryptionKeyArn                 *string                                                  `json:"ebsEncryptionKeyArn"`
-	Name                                *string                                                  `json:"name"`
-	ReplicatedDisks                     []ReplicationConfigurationReplicatedDisk                 `json:"replicatedDisks"`
-	ReplicationServerInstanceType       *string                                                  `json:"replicationServerInstanceType"`
-	ReplicationServersSecurityGroupsIDs []string                                                 `json:"replicationServersSecurityGroupsIDs"`
-	SourceServerID                      *string                                                  `json:"sourceServerID"`
-	StagingAreaSubnetID                 *string                                                  `json:"stagingAreaSubnetId"`
-	StagingAreaTags                     map[string]string                                        `json:"stagingAreaTags"`
-	UseDedicatedReplicationServer       *bool                                                    `json:"useDedicatedReplicationServer"`
+	AssociateDefaultSecurityGroup       *bool                                                    `json:"associateDefaultSecurityGroup,omitempty"`
+	BandwidthThrottling                 *int64                                                   `json:"bandwidthThrottling,omitempty"`
+	CreatePublicIP                      *bool                                                    `json:"createPublicIP,omitempty"`
+	DataPlaneRouting                    *ReplicationConfigurationDataPlaneRoutingEnum            `json:"dataPlaneRouting,omitempty"`
+	DefaultLargeStagingDiskType         *ReplicationConfigurationDefaultLargeStagingDiskTypeEnum `json:"defaultLargeStagingDiskType,omitempty"`
+	EbsEncryption                       *ReplicationConfigurationEbsEncryptionEnum               `json:"ebsEncryption,omitempty"`
+	EbsEncryptionKeyArn                 *string                                                  `json:"ebsEncryptionKeyArn,omitempty"`
+	Name                                *string                                                  `json:"name,omitempty"`
+	ReplicatedDisks                     []ReplicationConfigurationReplicatedDisk                 `json:"replicatedDisks,omitempty"`
+	ReplicationServerInstanceType       *string                                                  `json:"replicationServerInstanceType,omitempty"`
+	ReplicationServersSecurityGroupsIDs []string                                                 `json:"replicationServersSecurityGroupsIDs,omitempty"`
+	SourceServerID                      *string                                                  `json:"sourceServerID,omitempty"`
+	StagingAreaSubnetID                 *string                                                  `json:"stagingAreaSubnetId,omitempty"`
+	StagingAreaTags                     map[string]string                                        `json:"stagingAreaTags,omitempty"`
+	UseDedicatedReplicationServer       *bool                                                    `json:"useDedicatedReplicationServer,omitempty"`
 }

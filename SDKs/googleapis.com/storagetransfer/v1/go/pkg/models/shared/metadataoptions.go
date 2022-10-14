@@ -77,13 +77,13 @@ const (
 )
 
 type MetadataOptions struct {
-	ACL           *MetadataOptionsACLEnum           `json:"acl"`
-	Gid           *MetadataOptionsGidEnum           `json:"gid"`
-	KmsKey        *MetadataOptionsKmsKeyEnum        `json:"kmsKey"`
-	Mode          *MetadataOptionsModeEnum          `json:"mode"`
-	StorageClass  *MetadataOptionsStorageClassEnum  `json:"storageClass"`
-	Symlink       *MetadataOptionsSymlinkEnum       `json:"symlink"`
-	TemporaryHold *MetadataOptionsTemporaryHoldEnum `json:"temporaryHold"`
-	TimeCreated   *MetadataOptionsTimeCreatedEnum   `json:"timeCreated"`
-	UID           *MetadataOptionsUIDEnum           `json:"uid"`
+	ACL           *MetadataOptionsACLEnum           `json:"acl,omitempty"`
+	Gid           *MetadataOptionsGidEnum           `json:"gid,omitempty"`
+	KmsKey        *MetadataOptionsKmsKeyEnum        `json:"kmsKey,omitempty"`
+	Mode          *MetadataOptionsModeEnum          `json:"mode,omitempty"`
+	StorageClass  *MetadataOptionsStorageClassEnum  `json:"storageClass,omitempty"`
+	Symlink       *MetadataOptionsSymlinkEnum       `json:"symlink,omitempty"`
+	TemporaryHold *MetadataOptionsTemporaryHoldEnum `json:"temporaryHold,omitempty"`
+	TimeCreated   *MetadataOptionsTimeCreatedEnum   `json:"timeCreated,omitempty"`
+	UID           *MetadataOptionsUIDEnum           `json:"uid,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type SandboxBankTransferFireWebhookRequest struct {
-	ClientID *string `json:"client_id"`
-	Secret   *string `json:"secret"`
+	ClientID *string `json:"client_id,omitempty"`
+	Secret   *string `json:"secret,omitempty"`
 	Webhook  string  `json:"webhook"`
 }

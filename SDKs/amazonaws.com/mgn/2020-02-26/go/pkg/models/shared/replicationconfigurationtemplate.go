@@ -1,19 +1,19 @@
 package shared
 
 type ReplicationConfigurationTemplate struct {
-	Arn                                 *string                                                  `json:"arn"`
-	AssociateDefaultSecurityGroup       *bool                                                    `json:"associateDefaultSecurityGroup"`
-	BandwidthThrottling                 *int64                                                   `json:"bandwidthThrottling"`
-	CreatePublicIP                      *bool                                                    `json:"createPublicIP"`
-	DataPlaneRouting                    *ReplicationConfigurationDataPlaneRoutingEnum            `json:"dataPlaneRouting"`
-	DefaultLargeStagingDiskType         *ReplicationConfigurationDefaultLargeStagingDiskTypeEnum `json:"defaultLargeStagingDiskType"`
-	EbsEncryption                       *ReplicationConfigurationEbsEncryptionEnum               `json:"ebsEncryption"`
-	EbsEncryptionKeyArn                 *string                                                  `json:"ebsEncryptionKeyArn"`
+	Arn                                 *string                                                  `json:"arn,omitempty"`
+	AssociateDefaultSecurityGroup       *bool                                                    `json:"associateDefaultSecurityGroup,omitempty"`
+	BandwidthThrottling                 *int64                                                   `json:"bandwidthThrottling,omitempty"`
+	CreatePublicIP                      *bool                                                    `json:"createPublicIP,omitempty"`
+	DataPlaneRouting                    *ReplicationConfigurationDataPlaneRoutingEnum            `json:"dataPlaneRouting,omitempty"`
+	DefaultLargeStagingDiskType         *ReplicationConfigurationDefaultLargeStagingDiskTypeEnum `json:"defaultLargeStagingDiskType,omitempty"`
+	EbsEncryption                       *ReplicationConfigurationEbsEncryptionEnum               `json:"ebsEncryption,omitempty"`
+	EbsEncryptionKeyArn                 *string                                                  `json:"ebsEncryptionKeyArn,omitempty"`
 	ReplicationConfigurationTemplateID  string                                                   `json:"replicationConfigurationTemplateID"`
-	ReplicationServerInstanceType       *string                                                  `json:"replicationServerInstanceType"`
-	ReplicationServersSecurityGroupsIDs []string                                                 `json:"replicationServersSecurityGroupsIDs"`
-	StagingAreaSubnetID                 *string                                                  `json:"stagingAreaSubnetId"`
-	StagingAreaTags                     map[string]string                                        `json:"stagingAreaTags"`
-	Tags                                map[string]string                                        `json:"tags"`
-	UseDedicatedReplicationServer       *bool                                                    `json:"useDedicatedReplicationServer"`
+	ReplicationServerInstanceType       *string                                                  `json:"replicationServerInstanceType,omitempty"`
+	ReplicationServersSecurityGroupsIDs []string                                                 `json:"replicationServersSecurityGroupsIDs,omitempty"`
+	StagingAreaSubnetID                 *string                                                  `json:"stagingAreaSubnetId,omitempty"`
+	StagingAreaTags                     map[string]string                                        `json:"stagingAreaTags,omitempty"`
+	Tags                                map[string]string                                        `json:"tags,omitempty"`
+	UseDedicatedReplicationServer       *bool                                                    `json:"useDedicatedReplicationServer,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type SslConfig struct {
-	CaCertificate     *string            `json:"caCertificate"`
-	ClientCertificate *string            `json:"clientCertificate"`
-	ClientKey         *string            `json:"clientKey"`
-	Type              *SslConfigTypeEnum `json:"type"`
+	CaCertificate     *string            `json:"caCertificate,omitempty"`
+	ClientCertificate *string            `json:"clientCertificate,omitempty"`
+	ClientKey         *string            `json:"clientKey,omitempty"`
+	Type              *SslConfigTypeEnum `json:"type,omitempty"`
 }

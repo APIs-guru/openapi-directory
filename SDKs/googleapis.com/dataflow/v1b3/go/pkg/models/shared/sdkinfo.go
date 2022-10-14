@@ -10,6 +10,6 @@ const (
 )
 
 type SdkInfo struct {
-	Language *SdkInfoLanguageEnum `json:"language"`
-	Version  *string              `json:"version"`
+	Language *SdkInfoLanguageEnum `json:"language,omitempty"`
+	Version  *string              `json:"version,omitempty"`
 }

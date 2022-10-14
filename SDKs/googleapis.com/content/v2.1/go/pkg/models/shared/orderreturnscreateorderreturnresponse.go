@@ -1,7 +1,7 @@
 package shared
 
 type OrderreturnsCreateOrderReturnResponse struct {
-	ExecutionStatus *string              `json:"executionStatus"`
-	Kind            *string              `json:"kind"`
-	OrderReturn     *MerchantOrderReturn `json:"orderReturn"`
+	ExecutionStatus *string              `json:"executionStatus,omitempty"`
+	Kind            *string              `json:"kind,omitempty"`
+	OrderReturn     *MerchantOrderReturn `json:"orderReturn,omitempty"`
 }

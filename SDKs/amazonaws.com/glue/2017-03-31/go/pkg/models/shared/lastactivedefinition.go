@@ -5,9 +5,9 @@ import (
 )
 
 type LastActiveDefinition struct {
-	BlueprintLocation        *string    `json:"BlueprintLocation"`
-	BlueprintServiceLocation *string    `json:"BlueprintServiceLocation"`
-	Description              *string    `json:"Description"`
-	LastModifiedOn           *time.Time `json:"LastModifiedOn"`
-	ParameterSpec            *string    `json:"ParameterSpec"`
+	BlueprintLocation        *string    `json:"BlueprintLocation,omitempty"`
+	BlueprintServiceLocation *string    `json:"BlueprintServiceLocation,omitempty"`
+	Description              *string    `json:"Description,omitempty"`
+	LastModifiedOn           *time.Time `json:"LastModifiedOn,omitempty"`
+	ParameterSpec            *string    `json:"ParameterSpec,omitempty"`
 }

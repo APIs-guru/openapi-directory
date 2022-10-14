@@ -25,8 +25,8 @@ const (
 )
 
 type ClusterStatus struct {
-	Detail         *string                    `json:"detail"`
-	State          *ClusterStatusStateEnum    `json:"state"`
-	StateStartTime *string                    `json:"stateStartTime"`
-	Substate       *ClusterStatusSubstateEnum `json:"substate"`
+	Detail         *string                    `json:"detail,omitempty"`
+	State          *ClusterStatusStateEnum    `json:"state,omitempty"`
+	StateStartTime *string                    `json:"stateStartTime,omitempty"`
+	Substate       *ClusterStatusSubstateEnum `json:"substate,omitempty"`
 }

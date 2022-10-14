@@ -23,19 +23,19 @@ type GetDatasetRelatedColumnNameRequest struct {
 }
 
 type GetDatasetRelatedColumnName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetRelatedColumnName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetRelatedColumnName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetRelatedColumnName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetRelatedColumnNameResponse struct {

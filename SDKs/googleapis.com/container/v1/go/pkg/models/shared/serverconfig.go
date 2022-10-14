@@ -1,10 +1,10 @@
 package shared
 
 type ServerConfig struct {
-	Channels              []ReleaseChannelConfig `json:"channels"`
-	DefaultClusterVersion *string                `json:"defaultClusterVersion"`
-	DefaultImageType      *string                `json:"defaultImageType"`
-	ValidImageTypes       []string               `json:"validImageTypes"`
-	ValidMasterVersions   []string               `json:"validMasterVersions"`
-	ValidNodeVersions     []string               `json:"validNodeVersions"`
+	Channels              []ReleaseChannelConfig `json:"channels,omitempty"`
+	DefaultClusterVersion *string                `json:"defaultClusterVersion,omitempty"`
+	DefaultImageType      *string                `json:"defaultImageType,omitempty"`
+	ValidImageTypes       []string               `json:"validImageTypes,omitempty"`
+	ValidMasterVersions   []string               `json:"validMasterVersions,omitempty"`
+	ValidNodeVersions     []string               `json:"validNodeVersions,omitempty"`
 }

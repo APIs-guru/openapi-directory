@@ -6,7 +6,7 @@ import (
 
 type DescribeStorageConfigurationResponse struct {
 	ConfigurationStatus ConfigurationStatus `json:"configurationStatus"`
-	LastUpdateDate      *time.Time          `json:"lastUpdateDate"`
-	MultiLayerStorage   *MultiLayerStorage  `json:"multiLayerStorage"`
+	LastUpdateDate      *time.Time          `json:"lastUpdateDate,omitempty"`
+	MultiLayerStorage   *MultiLayerStorage  `json:"multiLayerStorage,omitempty"`
 	StorageType         StorageTypeEnum     `json:"storageType"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AddAttachmentsToSetResponse struct {
-	AttachmentSetID *string `json:"attachmentSetId"`
-	ExpiryTime      *string `json:"expiryTime"`
+	AttachmentSetID *string `json:"attachmentSetId,omitempty"`
+	ExpiryTime      *string `json:"expiryTime,omitempty"`
 }

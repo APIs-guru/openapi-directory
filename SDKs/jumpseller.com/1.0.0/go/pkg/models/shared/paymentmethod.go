@@ -1,5 +1,5 @@
 package shared
 
 type PaymentMethod struct {
-	PaymentMethod *PaymentMethodFields `json:"payment_method"`
+	PaymentMethod *PaymentMethodFields `json:"payment_method,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type ObjectFilter struct {
-	Kind      *string                 `json:"kind"`
-	ObjectIds []string                `json:"objectIds"`
-	Status    *ObjectFilterStatusEnum `json:"status"`
+	Kind      *string                 `json:"kind,omitempty"`
+	ObjectIds []string                `json:"objectIds,omitempty"`
+	Status    *ObjectFilterStatusEnum `json:"status,omitempty"`
 }

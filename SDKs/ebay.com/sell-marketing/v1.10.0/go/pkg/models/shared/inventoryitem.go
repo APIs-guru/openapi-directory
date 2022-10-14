@@ -1,5 +1,5 @@
 package shared
 
 type InventoryItem struct {
-	InventoryReferenceID *string `json:"inventoryReferenceId"`
+	InventoryReferenceID *string `json:"inventoryReferenceId,omitempty"`
 }

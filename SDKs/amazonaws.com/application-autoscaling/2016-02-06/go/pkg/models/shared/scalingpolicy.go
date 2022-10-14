@@ -5,7 +5,7 @@ import (
 )
 
 type ScalingPolicy struct {
-	Alarms                                   []Alarm                                   `json:"Alarms"`
+	Alarms                                   []Alarm                                   `json:"Alarms,omitempty"`
 	CreationTime                             time.Time                                 `json:"CreationTime"`
 	PolicyArn                                string                                    `json:"PolicyARN"`
 	PolicyName                               string                                    `json:"PolicyName"`
@@ -13,6 +13,6 @@ type ScalingPolicy struct {
 	ResourceID                               string                                    `json:"ResourceId"`
 	ScalableDimension                        ScalableDimensionEnum                     `json:"ScalableDimension"`
 	ServiceNamespace                         ServiceNamespaceEnum                      `json:"ServiceNamespace"`
-	StepScalingPolicyConfiguration           *StepScalingPolicyConfiguration           `json:"StepScalingPolicyConfiguration"`
-	TargetTrackingScalingPolicyConfiguration *TargetTrackingScalingPolicyConfiguration `json:"TargetTrackingScalingPolicyConfiguration"`
+	StepScalingPolicyConfiguration           *StepScalingPolicyConfiguration           `json:"StepScalingPolicyConfiguration,omitempty"`
+	TargetTrackingScalingPolicyConfiguration *TargetTrackingScalingPolicyConfiguration `json:"TargetTrackingScalingPolicyConfiguration,omitempty"`
 }

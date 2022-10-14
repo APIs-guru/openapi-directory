@@ -5,8 +5,8 @@ import (
 )
 
 type ListStreamConsumersInput struct {
-	MaxResults              *int64     `json:"MaxResults"`
-	NextToken               *string    `json:"NextToken"`
+	MaxResults              *int64     `json:"MaxResults,omitempty"`
+	NextToken               *string    `json:"NextToken,omitempty"`
 	StreamArn               string     `json:"StreamARN"`
-	StreamCreationTimestamp *time.Time `json:"StreamCreationTimestamp"`
+	StreamCreationTimestamp *time.Time `json:"StreamCreationTimestamp,omitempty"`
 }

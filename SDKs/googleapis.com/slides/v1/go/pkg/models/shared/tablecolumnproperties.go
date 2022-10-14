@@ -1,5 +1,5 @@
 package shared
 
 type TableColumnProperties struct {
-	ColumnWidth *Dimension `json:"columnWidth"`
+	ColumnWidth *Dimension `json:"columnWidth,omitempty"`
 }

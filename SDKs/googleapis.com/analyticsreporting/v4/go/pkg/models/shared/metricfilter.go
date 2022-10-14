@@ -11,8 +11,8 @@ const (
 )
 
 type MetricFilter struct {
-	ComparisonValue *string                   `json:"comparisonValue"`
-	MetricName      *string                   `json:"metricName"`
-	Not             *bool                     `json:"not"`
-	Operator        *MetricFilterOperatorEnum `json:"operator"`
+	ComparisonValue *string                   `json:"comparisonValue,omitempty"`
+	MetricName      *string                   `json:"metricName,omitempty"`
+	Not             *bool                     `json:"not,omitempty"`
+	Operator        *MetricFilterOperatorEnum `json:"operator,omitempty"`
 }

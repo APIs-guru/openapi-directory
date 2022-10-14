@@ -5,14 +5,14 @@ type UpdateDeviceCameraSensePathParams struct {
 }
 
 type UpdateDeviceCameraSenseRequestBodyAudioDetection struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type UpdateDeviceCameraSenseRequestBody struct {
-	AudioDetection   *UpdateDeviceCameraSenseRequestBodyAudioDetection `json:"audioDetection"`
-	DetectionModelID *string                                           `json:"detectionModelId"`
-	MqttBrokerID     *string                                           `json:"mqttBrokerId"`
-	SenseEnabled     *bool                                             `json:"senseEnabled"`
+	AudioDetection   *UpdateDeviceCameraSenseRequestBodyAudioDetection `json:"audioDetection,omitempty"`
+	DetectionModelID *string                                           `json:"detectionModelId,omitempty"`
+	MqttBrokerID     *string                                           `json:"mqttBrokerId,omitempty"`
+	SenseEnabled     *bool                                             `json:"senseEnabled,omitempty"`
 }
 
 type UpdateDeviceCameraSenseRequest struct {

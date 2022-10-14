@@ -1,6 +1,6 @@
 package shared
 
 type ListNodegroupsResponse struct {
-	NextToken  *string  `json:"nextToken"`
-	Nodegroups []string `json:"nodegroups"`
+	NextToken  *string  `json:"nextToken,omitempty"`
+	Nodegroups []string `json:"nodegroups,omitempty"`
 }

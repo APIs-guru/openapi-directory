@@ -12,12 +12,12 @@ type RemoveFacetFromObjectHeaders struct {
 }
 
 type RemoveFacetFromObjectRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type RemoveFacetFromObjectRequestBodySchemaFacet struct {
-	FacetName *string `json:"FacetName"`
-	SchemaArn *string `json:"SchemaArn"`
+	FacetName *string `json:"FacetName,omitempty"`
+	SchemaArn *string `json:"SchemaArn,omitempty"`
 }
 
 type RemoveFacetFromObjectRequestBody struct {

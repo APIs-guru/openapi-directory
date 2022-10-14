@@ -16,7 +16,7 @@ type CreateDataflowEndpointGroupHeaders struct {
 
 type CreateDataflowEndpointGroupRequestBody struct {
 	EndpointDetails []shared.EndpointDetails `json:"endpointDetails"`
-	Tags            map[string]string        `json:"tags"`
+	Tags            map[string]string        `json:"tags,omitempty"`
 }
 
 type CreateDataflowEndpointGroupRequest struct {

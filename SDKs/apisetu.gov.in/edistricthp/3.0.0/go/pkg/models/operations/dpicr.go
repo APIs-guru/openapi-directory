@@ -15,8 +15,8 @@ const (
 )
 
 type DpicrRequestBody struct {
-	CertificateParameters *DpicrRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *DpicrRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                DpicrRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Dpicr400ApplicationJSON struct {
-	Error            *Dpicr400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dpicr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dpicr400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dpicr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dpicr401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Dpicr401ApplicationJSON struct {
-	Error            *Dpicr401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dpicr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dpicr401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dpicr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dpicr404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Dpicr404ApplicationJSON struct {
-	Error            *Dpicr404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dpicr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dpicr404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dpicr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dpicr500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Dpicr500ApplicationJSON struct {
-	Error            *Dpicr500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dpicr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dpicr500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dpicr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dpicr502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Dpicr502ApplicationJSON struct {
-	Error            *Dpicr502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dpicr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dpicr502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dpicr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dpicr503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Dpicr503ApplicationJSON struct {
-	Error            *Dpicr503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dpicr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dpicr503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dpicr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dpicr504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Dpicr504ApplicationJSON struct {
-	Error            *Dpicr504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dpicr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dpicr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dpicr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type DpicrResponse struct {

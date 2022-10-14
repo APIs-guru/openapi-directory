@@ -1,5 +1,5 @@
 package shared
 
 type DescribeTrustedAdvisorCheckResultResponse struct {
-	Result *TrustedAdvisorCheckResult `json:"result"`
+	Result *TrustedAdvisorCheckResult `json:"result,omitempty"`
 }

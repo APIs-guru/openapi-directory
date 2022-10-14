@@ -1,6 +1,6 @@
 package shared
 
 type VirtualGatewayClientTLSCertificate struct {
-	File *VirtualGatewayListenerTLSFileCertificate `json:"file"`
-	Sds  *VirtualGatewayListenerTLSSdsCertificate  `json:"sds"`
+	File *VirtualGatewayListenerTLSFileCertificate `json:"file,omitempty"`
+	Sds  *VirtualGatewayListenerTLSSdsCertificate  `json:"sds,omitempty"`
 }

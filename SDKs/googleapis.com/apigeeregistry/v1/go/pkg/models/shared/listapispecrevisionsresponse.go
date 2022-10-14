@@ -1,6 +1,6 @@
 package shared
 
 type ListAPISpecRevisionsResponse struct {
-	APISpecs      []APISpec `json:"apiSpecs"`
-	NextPageToken *string   `json:"nextPageToken"`
+	APISpecs      []APISpec `json:"apiSpecs,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
 }

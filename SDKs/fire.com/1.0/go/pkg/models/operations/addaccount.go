@@ -12,9 +12,9 @@ const (
 )
 
 type AddAccountRequestBodyNewAccount struct {
-	AcceptFeesAndCharges *bool                              `json:"acceptFeesAndCharges"`
-	AccountName          *string                            `json:"accountName"`
-	Currency             *AddAccountRequestBodyCurrencyEnum `json:"currency"`
+	AcceptFeesAndCharges *bool                              `json:"acceptFeesAndCharges,omitempty"`
+	AccountName          *string                            `json:"accountName,omitempty"`
+	Currency             *AddAccountRequestBodyCurrencyEnum `json:"currency,omitempty"`
 }
 
 type AddAccountRequest struct {

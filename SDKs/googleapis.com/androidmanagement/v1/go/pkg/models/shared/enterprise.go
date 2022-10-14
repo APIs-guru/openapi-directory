@@ -12,14 +12,14 @@ const (
 )
 
 type Enterprise struct {
-	AppAutoApprovalEnabled   *bool                                    `json:"appAutoApprovalEnabled"`
-	ContactInfo              *ContactInfo                             `json:"contactInfo"`
-	EnabledNotificationTypes []EnterpriseEnabledNotificationTypesEnum `json:"enabledNotificationTypes"`
-	EnterpriseDisplayName    *string                                  `json:"enterpriseDisplayName"`
-	Logo                     *ExternalData                            `json:"logo"`
-	Name                     *string                                  `json:"name"`
-	PrimaryColor             *int32                                   `json:"primaryColor"`
-	PubsubTopic              *string                                  `json:"pubsubTopic"`
-	SigninDetails            []SigninDetail                           `json:"signinDetails"`
-	TermsAndConditions       []TermsAndConditions                     `json:"termsAndConditions"`
+	AppAutoApprovalEnabled   *bool                                    `json:"appAutoApprovalEnabled,omitempty"`
+	ContactInfo              *ContactInfo                             `json:"contactInfo,omitempty"`
+	EnabledNotificationTypes []EnterpriseEnabledNotificationTypesEnum `json:"enabledNotificationTypes,omitempty"`
+	EnterpriseDisplayName    *string                                  `json:"enterpriseDisplayName,omitempty"`
+	Logo                     *ExternalData                            `json:"logo,omitempty"`
+	Name                     *string                                  `json:"name,omitempty"`
+	PrimaryColor             *int32                                   `json:"primaryColor,omitempty"`
+	PubsubTopic              *string                                  `json:"pubsubTopic,omitempty"`
+	SigninDetails            []SigninDetail                           `json:"signinDetails,omitempty"`
+	TermsAndConditions       []TermsAndConditions                     `json:"termsAndConditions,omitempty"`
 }

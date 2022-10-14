@@ -1,6 +1,6 @@
 package shared
 
 type ContactTargetInfo struct {
-	ContactID   *string `json:"ContactId"`
+	ContactID   *string `json:"ContactId,omitempty"`
 	IsEssential bool    `json:"IsEssential"`
 }

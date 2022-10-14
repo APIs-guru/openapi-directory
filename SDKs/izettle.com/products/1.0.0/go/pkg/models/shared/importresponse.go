@@ -13,10 +13,10 @@ const (
 )
 
 type ImportResponse struct {
-	Created      *time.Time               `json:"created"`
-	ErrorMessage *string                  `json:"errorMessage"`
-	Finished     *time.Time               `json:"finished"`
-	Items        *int64                   `json:"items"`
-	State        *ImportResponseStateEnum `json:"state"`
-	UUID         *string                  `json:"uuid"`
+	Created      *time.Time               `json:"created,omitempty"`
+	ErrorMessage *string                  `json:"errorMessage,omitempty"`
+	Finished     *time.Time               `json:"finished,omitempty"`
+	Items        *int64                   `json:"items,omitempty"`
+	State        *ImportResponseStateEnum `json:"state,omitempty"`
+	UUID         *string                  `json:"uuid,omitempty"`
 }

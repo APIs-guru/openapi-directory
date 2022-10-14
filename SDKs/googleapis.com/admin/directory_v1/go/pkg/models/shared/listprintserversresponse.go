@@ -1,6 +1,6 @@
 package shared
 
 type ListPrintServersResponse struct {
-	NextPageToken *string       `json:"nextPageToken"`
-	PrintServers  []PrintServer `json:"printServers"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	PrintServers  []PrintServer `json:"printServers,omitempty"`
 }

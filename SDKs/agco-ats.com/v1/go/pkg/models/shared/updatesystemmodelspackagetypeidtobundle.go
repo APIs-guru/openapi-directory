@@ -13,5 +13,5 @@ type UpdateSystemModelsPackageTypeIDtoBundle struct {
 	PackageTypeID    string                                                       `json:"PackageTypeID" form:"name=PackageTypeID"`
 	PackageVersion   int32                                                        `json:"PackageVersion" form:"name=PackageVersion"`
 	Priority         int32                                                        `json:"Priority" form:"name=Priority"`
-	SubscriptionType *UpdateSystemModelsPackageTypeIDtoBundleSubscriptionTypeEnum `json:"SubscriptionType" form:"name=SubscriptionType"`
+	SubscriptionType *UpdateSystemModelsPackageTypeIDtoBundleSubscriptionTypeEnum `json:"SubscriptionType,omitempty" form:"name=SubscriptionType"`
 }

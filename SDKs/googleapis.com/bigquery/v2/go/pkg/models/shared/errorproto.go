@@ -1,8 +1,8 @@
 package shared
 
 type ErrorProto struct {
-	DebugInfo *string `json:"debugInfo"`
-	Location  *string `json:"location"`
-	Message   *string `json:"message"`
-	Reason    *string `json:"reason"`
+	DebugInfo *string `json:"debugInfo,omitempty"`
+	Location  *string `json:"location,omitempty"`
+	Message   *string `json:"message,omitempty"`
+	Reason    *string `json:"reason,omitempty"`
 }

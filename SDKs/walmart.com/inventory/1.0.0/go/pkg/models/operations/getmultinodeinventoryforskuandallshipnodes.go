@@ -43,10 +43,10 @@ const (
 )
 
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsCauses struct {
-	Code        *string `json:"code"`
-	Description *string `json:"description"`
-	Field       *string `json:"field"`
-	Type        *string `json:"type"`
+	Code        *string `json:"code,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Field       *string `json:"field,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }
 
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsSeverityEnum string
@@ -58,14 +58,14 @@ const (
 )
 
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrors struct {
-	Category         *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsCategoryEnum `json:"category"`
-	Causes           []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsCauses      `json:"causes"`
+	Category         *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsCategoryEnum `json:"category,omitempty"`
+	Causes           []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsCauses      `json:"causes,omitempty"`
 	Code             string                                                                               `json:"code"`
-	Description      *string                                                                              `json:"description"`
-	ErrorIdentifiers map[string]map[string]interface{}                                                    `json:"errorIdentifiers"`
-	Field            *string                                                                              `json:"field"`
-	Info             *string                                                                              `json:"info"`
-	Severity         *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsSeverityEnum `json:"severity"`
+	Description      *string                                                                              `json:"description,omitempty"`
+	ErrorIdentifiers map[string]map[string]interface{}                                                    `json:"errorIdentifiers,omitempty"`
+	Field            *string                                                                              `json:"field,omitempty"`
+	Info             *string                                                                              `json:"info,omitempty"`
+	Severity         *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsSeverityEnum `json:"severity,omitempty"`
 }
 
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesInputQtyUnitEnum string
@@ -80,15 +80,15 @@ type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesInputQty s
 }
 
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodes struct {
-	AvailToSellQty *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesAvailToSellQty `json:"availToSellQty"`
-	Errors         []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrors        `json:"errors"`
-	InputQty       *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesInputQty       `json:"inputQty"`
-	ShipNode       *string                                                                          `json:"shipNode"`
+	AvailToSellQty *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesAvailToSellQty `json:"availToSellQty,omitempty"`
+	Errors         []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrors        `json:"errors,omitempty"`
+	InputQty       *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesInputQty       `json:"inputQty,omitempty"`
+	ShipNode       *string                                                                          `json:"shipNode,omitempty"`
 }
 
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSON struct {
-	Nodes []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodes `json:"nodes"`
-	Sku   *string                                                             `json:"sku"`
+	Nodes []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodes `json:"nodes,omitempty"`
+	Sku   *string                                                             `json:"sku,omitempty"`
 }
 
 type GetMultiNodeInventoryForSkuAndAllShipnodesResponse struct {

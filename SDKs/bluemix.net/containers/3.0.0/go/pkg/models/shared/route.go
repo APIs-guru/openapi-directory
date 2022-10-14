@@ -1,6 +1,6 @@
 package shared
 
 type Route struct {
-	Domain *string `json:"domain"`
-	Host   *string `json:"host"`
+	Domain *string `json:"domain,omitempty"`
+	Host   *string `json:"host,omitempty"`
 }

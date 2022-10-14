@@ -14,7 +14,7 @@ type AddItemForPortfolioQueryParams struct {
 }
 
 type AddItemForPortfolioRequestBody struct {
-	Data *shared.PortfolioAddItemRequest `json:"data"`
+	Data *shared.PortfolioAddItemRequest `json:"data,omitempty"`
 }
 
 type AddItemForPortfolioRequest struct {
@@ -24,7 +24,7 @@ type AddItemForPortfolioRequest struct {
 }
 
 type AddItemForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddItemForPortfolioResponse struct {

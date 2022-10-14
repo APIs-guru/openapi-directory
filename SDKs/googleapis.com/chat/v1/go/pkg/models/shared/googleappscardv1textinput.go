@@ -8,12 +8,12 @@ const (
 )
 
 type GoogleAppsCardV1TextInput struct {
-	AutoCompleteAction *GoogleAppsCardV1Action            `json:"autoCompleteAction"`
-	HintText           *string                            `json:"hintText"`
-	InitialSuggestions *GoogleAppsCardV1Suggestions       `json:"initialSuggestions"`
-	Label              *string                            `json:"label"`
-	Name               *string                            `json:"name"`
-	OnChangeAction     *GoogleAppsCardV1Action            `json:"onChangeAction"`
-	Type               *GoogleAppsCardV1TextInputTypeEnum `json:"type"`
-	Value              *string                            `json:"value"`
+	AutoCompleteAction *GoogleAppsCardV1Action            `json:"autoCompleteAction,omitempty"`
+	HintText           *string                            `json:"hintText,omitempty"`
+	InitialSuggestions *GoogleAppsCardV1Suggestions       `json:"initialSuggestions,omitempty"`
+	Label              *string                            `json:"label,omitempty"`
+	Name               *string                            `json:"name,omitempty"`
+	OnChangeAction     *GoogleAppsCardV1Action            `json:"onChangeAction,omitempty"`
+	Type               *GoogleAppsCardV1TextInputTypeEnum `json:"type,omitempty"`
+	Value              *string                            `json:"value,omitempty"`
 }

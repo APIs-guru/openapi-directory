@@ -10,8 +10,8 @@ const (
 )
 
 type Device struct {
-	AndroidID      *string                   `json:"androidId"`
-	ManagementType *DeviceManagementTypeEnum `json:"managementType"`
-	Policy         *Policy                   `json:"policy"`
-	Report         *DeviceReport             `json:"report"`
+	AndroidID      *string                   `json:"androidId,omitempty"`
+	ManagementType *DeviceManagementTypeEnum `json:"managementType,omitempty"`
+	Policy         *Policy                   `json:"policy,omitempty"`
+	Report         *DeviceReport             `json:"report,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetFunctionResponse struct {
-	FunctionConfiguration *FunctionConfiguration `json:"functionConfiguration"`
+	FunctionConfiguration *FunctionConfiguration `json:"functionConfiguration,omitempty"`
 }

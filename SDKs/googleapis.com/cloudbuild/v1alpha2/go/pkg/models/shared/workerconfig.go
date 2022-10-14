@@ -1,6 +1,6 @@
 package shared
 
 type WorkerConfig struct {
-	DiskSizeGb  *string `json:"diskSizeGb"`
-	MachineType *string `json:"machineType"`
+	DiskSizeGb  *string `json:"diskSizeGb,omitempty"`
+	MachineType *string `json:"machineType,omitempty"`
 }

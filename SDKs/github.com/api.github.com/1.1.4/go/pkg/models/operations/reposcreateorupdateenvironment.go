@@ -11,14 +11,14 @@ type ReposCreateOrUpdateEnvironmentPathParams struct {
 }
 
 type ReposCreateOrUpdateEnvironmentRequestBodyReviewers struct {
-	ID   *int64                             `json:"id"`
-	Type *shared.DeploymentReviewerTypeEnum `json:"type"`
+	ID   *int64                             `json:"id,omitempty"`
+	Type *shared.DeploymentReviewerTypeEnum `json:"type,omitempty"`
 }
 
 type ReposCreateOrUpdateEnvironmentRequestBody struct {
-	DeploymentBranchPolicy *shared.DeploymentBranchPolicy                       `json:"deployment_branch_policy"`
-	Reviewers              []ReposCreateOrUpdateEnvironmentRequestBodyReviewers `json:"reviewers"`
-	WaitTimer              *int64                                               `json:"wait_timer"`
+	DeploymentBranchPolicy *shared.DeploymentBranchPolicy                       `json:"deployment_branch_policy,omitempty"`
+	Reviewers              []ReposCreateOrUpdateEnvironmentRequestBodyReviewers `json:"reviewers,omitempty"`
+	WaitTimer              *int64                                               `json:"wait_timer,omitempty"`
 }
 
 type ReposCreateOrUpdateEnvironmentRequest struct {

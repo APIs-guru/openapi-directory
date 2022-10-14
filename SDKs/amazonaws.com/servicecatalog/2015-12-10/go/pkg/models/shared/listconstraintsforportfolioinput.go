@@ -1,9 +1,9 @@
 package shared
 
 type ListConstraintsForPortfolioInput struct {
-	AcceptLanguage *string `json:"AcceptLanguage"`
-	PageSize       *int64  `json:"PageSize"`
-	PageToken      *string `json:"PageToken"`
+	AcceptLanguage *string `json:"AcceptLanguage,omitempty"`
+	PageSize       *int64  `json:"PageSize,omitempty"`
+	PageToken      *string `json:"PageToken,omitempty"`
 	PortfolioID    string  `json:"PortfolioId"`
-	ProductID      *string `json:"ProductId"`
+	ProductID      *string `json:"ProductId,omitempty"`
 }

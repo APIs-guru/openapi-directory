@@ -5,8 +5,8 @@ import (
 )
 
 type Credentials struct {
-	AccessKeyID  *string    `json:"AccessKeyId"`
-	Expiration   *time.Time `json:"Expiration"`
-	SecretKey    *string    `json:"SecretKey"`
-	SessionToken *string    `json:"SessionToken"`
+	AccessKeyID  *string    `json:"AccessKeyId,omitempty"`
+	Expiration   *time.Time `json:"Expiration,omitempty"`
+	SecretKey    *string    `json:"SecretKey,omitempty"`
+	SessionToken *string    `json:"SessionToken,omitempty"`
 }

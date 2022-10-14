@@ -1,6 +1,6 @@
 package shared
 
 type ListSuiteDefinitionsResponse struct {
-	NextToken                      *string                      `json:"nextToken"`
-	SuiteDefinitionInformationList []SuiteDefinitionInformation `json:"suiteDefinitionInformationList"`
+	NextToken                      *string                      `json:"nextToken,omitempty"`
+	SuiteDefinitionInformationList []SuiteDefinitionInformation `json:"suiteDefinitionInformationList,omitempty"`
 }

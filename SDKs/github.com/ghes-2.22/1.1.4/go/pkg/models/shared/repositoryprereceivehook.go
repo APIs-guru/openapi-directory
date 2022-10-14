@@ -1,8 +1,8 @@
 package shared
 
 type RepositoryPreReceiveHook struct {
-	ConfigurationURL *string `json:"configuration_url"`
-	Enforcement      *string `json:"enforcement"`
-	ID               *int64  `json:"id"`
-	Name             *string `json:"name"`
+	ConfigurationURL *string `json:"configuration_url,omitempty"`
+	Enforcement      *string `json:"enforcement,omitempty"`
+	ID               *int64  `json:"id,omitempty"`
+	Name             *string `json:"name,omitempty"`
 }

@@ -5,23 +5,23 @@ import (
 )
 
 type MlTransform struct {
-	CreatedOn           *time.Time               `json:"CreatedOn"`
-	Description         *string                  `json:"Description"`
-	EvaluationMetrics   *EvaluationMetrics       `json:"EvaluationMetrics"`
-	GlueVersion         *string                  `json:"GlueVersion"`
-	InputRecordTables   []GlueTable              `json:"InputRecordTables"`
-	LabelCount          *int64                   `json:"LabelCount"`
-	LastModifiedOn      *time.Time               `json:"LastModifiedOn"`
-	MaxCapacity         *float64                 `json:"MaxCapacity"`
-	MaxRetries          *int64                   `json:"MaxRetries"`
-	Name                *string                  `json:"Name"`
-	NumberOfWorkers     *int64                   `json:"NumberOfWorkers"`
-	Parameters          *TransformParameters     `json:"Parameters"`
-	Role                *string                  `json:"Role"`
-	Schema              []SchemaColumn           `json:"Schema"`
-	Status              *TransformStatusTypeEnum `json:"Status"`
-	Timeout             *int64                   `json:"Timeout"`
-	TransformEncryption *TransformEncryption     `json:"TransformEncryption"`
-	TransformID         *string                  `json:"TransformId"`
-	WorkerType          *WorkerTypeEnum          `json:"WorkerType"`
+	CreatedOn           *time.Time               `json:"CreatedOn,omitempty"`
+	Description         *string                  `json:"Description,omitempty"`
+	EvaluationMetrics   *EvaluationMetrics       `json:"EvaluationMetrics,omitempty"`
+	GlueVersion         *string                  `json:"GlueVersion,omitempty"`
+	InputRecordTables   []GlueTable              `json:"InputRecordTables,omitempty"`
+	LabelCount          *int64                   `json:"LabelCount,omitempty"`
+	LastModifiedOn      *time.Time               `json:"LastModifiedOn,omitempty"`
+	MaxCapacity         *float64                 `json:"MaxCapacity,omitempty"`
+	MaxRetries          *int64                   `json:"MaxRetries,omitempty"`
+	Name                *string                  `json:"Name,omitempty"`
+	NumberOfWorkers     *int64                   `json:"NumberOfWorkers,omitempty"`
+	Parameters          *TransformParameters     `json:"Parameters,omitempty"`
+	Role                *string                  `json:"Role,omitempty"`
+	Schema              []SchemaColumn           `json:"Schema,omitempty"`
+	Status              *TransformStatusTypeEnum `json:"Status,omitempty"`
+	Timeout             *int64                   `json:"Timeout,omitempty"`
+	TransformEncryption *TransformEncryption     `json:"TransformEncryption,omitempty"`
+	TransformID         *string                  `json:"TransformId,omitempty"`
+	WorkerType          *WorkerTypeEnum          `json:"WorkerType,omitempty"`
 }

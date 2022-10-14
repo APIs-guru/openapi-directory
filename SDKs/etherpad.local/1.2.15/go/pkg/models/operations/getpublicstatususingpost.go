@@ -9,31 +9,31 @@ type GetPublicStatusUsingPostRequest struct {
 }
 
 type GetPublicStatusUsingPost200ApplicationJSONData struct {
-	PublicStatus *bool `json:"publicStatus"`
+	PublicStatus *bool `json:"publicStatus,omitempty"`
 }
 
 type GetPublicStatusUsingPost200ApplicationJSON struct {
-	Code    *int64                                          `json:"code"`
-	Data    *GetPublicStatusUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                         `json:"message"`
+	Code    *int64                                          `json:"code,omitempty"`
+	Data    *GetPublicStatusUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                         `json:"message,omitempty"`
 }
 
 type GetPublicStatusUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetPublicStatusUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetPublicStatusUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetPublicStatusUsingPostResponse struct {

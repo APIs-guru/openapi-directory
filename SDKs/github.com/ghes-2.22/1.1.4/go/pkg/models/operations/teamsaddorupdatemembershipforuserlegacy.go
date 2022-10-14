@@ -17,7 +17,7 @@ const (
 )
 
 type TeamsAddOrUpdateMembershipForUserLegacyRequestBody struct {
-	Role *TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum `json:"role"`
+	Role *TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum `json:"role,omitempty"`
 }
 
 type TeamsAddOrUpdateMembershipForUserLegacyRequest struct {

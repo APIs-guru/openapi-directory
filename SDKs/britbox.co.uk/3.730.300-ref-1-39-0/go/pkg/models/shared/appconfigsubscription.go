@@ -1,5 +1,5 @@
 package shared
 
 type AppConfigSubscription struct {
-	Plans []Plan `json:"plans"`
+	Plans []Plan `json:"plans,omitempty"`
 }

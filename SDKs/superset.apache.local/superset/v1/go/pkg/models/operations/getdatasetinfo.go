@@ -18,35 +18,35 @@ type GetDatasetInfoRequest struct {
 }
 
 type GetDatasetInfo200ApplicationJSONFiltersColumnName struct {
-	Name     *string `json:"name"`
-	Operator *string `json:"operator"`
+	Name     *string `json:"name,omitempty"`
+	Operator *string `json:"operator,omitempty"`
 }
 
 type GetDatasetInfo200ApplicationJSONFilters struct {
-	ColumnName []GetDatasetInfo200ApplicationJSONFiltersColumnName `json:"column_name"`
+	ColumnName []GetDatasetInfo200ApplicationJSONFiltersColumnName `json:"column_name,omitempty"`
 }
 
 type GetDatasetInfo200ApplicationJSON struct {
-	AddColumns  map[string]interface{}                   `json:"add_columns"`
-	EditColumns map[string]interface{}                   `json:"edit_columns"`
-	Filters     *GetDatasetInfo200ApplicationJSONFilters `json:"filters"`
-	Permissions []string                                 `json:"permissions"`
+	AddColumns  map[string]interface{}                   `json:"add_columns,omitempty"`
+	EditColumns map[string]interface{}                   `json:"edit_columns,omitempty"`
+	Filters     *GetDatasetInfo200ApplicationJSONFilters `json:"filters,omitempty"`
+	Permissions []string                                 `json:"permissions,omitempty"`
 }
 
 type GetDatasetInfo400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetInfo401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetInfo422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetInfo500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetInfoResponse struct {

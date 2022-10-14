@@ -16,9 +16,9 @@ const (
 )
 
 type DimensionFilter struct {
-	CaseSensitive *bool                        `json:"caseSensitive"`
-	DimensionName *string                      `json:"dimensionName"`
-	Expressions   []string                     `json:"expressions"`
-	Not           *bool                        `json:"not"`
-	Operator      *DimensionFilterOperatorEnum `json:"operator"`
+	CaseSensitive *bool                        `json:"caseSensitive,omitempty"`
+	DimensionName *string                      `json:"dimensionName,omitempty"`
+	Expressions   []string                     `json:"expressions,omitempty"`
+	Not           *bool                        `json:"not,omitempty"`
+	Operator      *DimensionFilterOperatorEnum `json:"operator,omitempty"`
 }

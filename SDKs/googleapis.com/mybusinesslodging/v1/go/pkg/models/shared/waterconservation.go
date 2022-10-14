@@ -55,16 +55,16 @@ const (
 )
 
 type WaterConservation struct {
-	IndependentOrganizationAuditsWaterUse          *bool                                                                `json:"independentOrganizationAuditsWaterUse"`
-	IndependentOrganizationAuditsWaterUseException *WaterConservationIndependentOrganizationAuditsWaterUseExceptionEnum `json:"independentOrganizationAuditsWaterUseException"`
-	LinenReuseProgram                              *bool                                                                `json:"linenReuseProgram"`
-	LinenReuseProgramException                     *WaterConservationLinenReuseProgramExceptionEnum                     `json:"linenReuseProgramException"`
-	TowelReuseProgram                              *bool                                                                `json:"towelReuseProgram"`
-	TowelReuseProgramException                     *WaterConservationTowelReuseProgramExceptionEnum                     `json:"towelReuseProgramException"`
-	WaterSavingShowers                             *bool                                                                `json:"waterSavingShowers"`
-	WaterSavingShowersException                    *WaterConservationWaterSavingShowersExceptionEnum                    `json:"waterSavingShowersException"`
-	WaterSavingSinks                               *bool                                                                `json:"waterSavingSinks"`
-	WaterSavingSinksException                      *WaterConservationWaterSavingSinksExceptionEnum                      `json:"waterSavingSinksException"`
-	WaterSavingToilets                             *bool                                                                `json:"waterSavingToilets"`
-	WaterSavingToiletsException                    *WaterConservationWaterSavingToiletsExceptionEnum                    `json:"waterSavingToiletsException"`
+	IndependentOrganizationAuditsWaterUse          *bool                                                                `json:"independentOrganizationAuditsWaterUse,omitempty"`
+	IndependentOrganizationAuditsWaterUseException *WaterConservationIndependentOrganizationAuditsWaterUseExceptionEnum `json:"independentOrganizationAuditsWaterUseException,omitempty"`
+	LinenReuseProgram                              *bool                                                                `json:"linenReuseProgram,omitempty"`
+	LinenReuseProgramException                     *WaterConservationLinenReuseProgramExceptionEnum                     `json:"linenReuseProgramException,omitempty"`
+	TowelReuseProgram                              *bool                                                                `json:"towelReuseProgram,omitempty"`
+	TowelReuseProgramException                     *WaterConservationTowelReuseProgramExceptionEnum                     `json:"towelReuseProgramException,omitempty"`
+	WaterSavingShowers                             *bool                                                                `json:"waterSavingShowers,omitempty"`
+	WaterSavingShowersException                    *WaterConservationWaterSavingShowersExceptionEnum                    `json:"waterSavingShowersException,omitempty"`
+	WaterSavingSinks                               *bool                                                                `json:"waterSavingSinks,omitempty"`
+	WaterSavingSinksException                      *WaterConservationWaterSavingSinksExceptionEnum                      `json:"waterSavingSinksException,omitempty"`
+	WaterSavingToilets                             *bool                                                                `json:"waterSavingToilets,omitempty"`
+	WaterSavingToiletsException                    *WaterConservationWaterSavingToiletsExceptionEnum                    `json:"waterSavingToiletsException,omitempty"`
 }

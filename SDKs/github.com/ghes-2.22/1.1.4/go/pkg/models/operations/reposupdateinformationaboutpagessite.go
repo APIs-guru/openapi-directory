@@ -30,10 +30,10 @@ type ReposUpdateInformationAboutPagesSiteRequestBodySource2 struct {
 }
 
 type ReposUpdateInformationAboutPagesSiteRequestBody struct {
-	Cname         *string      `json:"cname"`
-	HTTPSEnforced *bool        `json:"https_enforced"`
-	Public        *bool        `json:"public"`
-	Source        *interface{} `json:"source"`
+	Cname         *string      `json:"cname,omitempty"`
+	HTTPSEnforced *bool        `json:"https_enforced,omitempty"`
+	Public        *bool        `json:"public,omitempty"`
+	Source        *interface{} `json:"source,omitempty"`
 }
 
 type ReposUpdateInformationAboutPagesSiteRequest struct {

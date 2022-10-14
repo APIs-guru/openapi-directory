@@ -20,9 +20,9 @@ const (
 
 type CreateFirewallDeviceRequestBody struct {
 	ID    int64                                   `json:"id"`
-	Label *string                                 `json:"label"`
+	Label *string                                 `json:"label,omitempty"`
 	Type  CreateFirewallDeviceRequestBodyTypeEnum `json:"type"`
-	URL   *string                                 `json:"url"`
+	URL   *string                                 `json:"url,omitempty"`
 }
 
 type CreateFirewallDeviceSecurityOption1 struct {
@@ -46,7 +46,7 @@ type CreateFirewallDeviceRequest struct {
 }
 
 type CreateFirewallDeviceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateFirewallDeviceResponse struct {

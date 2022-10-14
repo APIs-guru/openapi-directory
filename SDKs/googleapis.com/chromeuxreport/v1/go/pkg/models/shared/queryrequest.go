@@ -10,9 +10,9 @@ const (
 )
 
 type QueryRequest struct {
-	EffectiveConnectionType *string                     `json:"effectiveConnectionType"`
-	FormFactor              *QueryRequestFormFactorEnum `json:"formFactor"`
-	Metrics                 []string                    `json:"metrics"`
-	Origin                  *string                     `json:"origin"`
-	URL                     *string                     `json:"url"`
+	EffectiveConnectionType *string                     `json:"effectiveConnectionType,omitempty"`
+	FormFactor              *QueryRequestFormFactorEnum `json:"formFactor,omitempty"`
+	Metrics                 []string                    `json:"metrics,omitempty"`
+	Origin                  *string                     `json:"origin,omitempty"`
+	URL                     *string                     `json:"url,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListImportJobsResponse struct {
-	ImportJobs []ImportJobSummary `json:"ImportJobs"`
-	NextToken  *string            `json:"NextToken"`
+	ImportJobs []ImportJobSummary `json:"ImportJobs,omitempty"`
+	NextToken  *string            `json:"NextToken,omitempty"`
 }

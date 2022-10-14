@@ -5,7 +5,7 @@ import (
 )
 
 type ProvisioningTemplateVersionSummary struct {
-	CreationDate     *time.Time `json:"creationDate"`
-	IsDefaultVersion *bool      `json:"isDefaultVersion"`
-	VersionID        *int64     `json:"versionId"`
+	CreationDate     *time.Time `json:"creationDate,omitempty"`
+	IsDefaultVersion *bool      `json:"isDefaultVersion,omitempty"`
+	VersionID        *int64     `json:"versionId,omitempty"`
 }

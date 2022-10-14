@@ -78,19 +78,19 @@ const (
 )
 
 type FaceAnnotation struct {
-	AngerLikelihood        *FaceAnnotationAngerLikelihoodEnum        `json:"angerLikelihood"`
-	BlurredLikelihood      *FaceAnnotationBlurredLikelihoodEnum      `json:"blurredLikelihood"`
-	BoundingPoly           *BoundingPoly                             `json:"boundingPoly"`
-	DetectionConfidence    *float32                                  `json:"detectionConfidence"`
-	FdBoundingPoly         *BoundingPoly                             `json:"fdBoundingPoly"`
-	HeadwearLikelihood     *FaceAnnotationHeadwearLikelihoodEnum     `json:"headwearLikelihood"`
-	JoyLikelihood          *FaceAnnotationJoyLikelihoodEnum          `json:"joyLikelihood"`
-	LandmarkingConfidence  *float32                                  `json:"landmarkingConfidence"`
-	Landmarks              []Landmark                                `json:"landmarks"`
-	PanAngle               *float32                                  `json:"panAngle"`
-	RollAngle              *float32                                  `json:"rollAngle"`
-	SorrowLikelihood       *FaceAnnotationSorrowLikelihoodEnum       `json:"sorrowLikelihood"`
-	SurpriseLikelihood     *FaceAnnotationSurpriseLikelihoodEnum     `json:"surpriseLikelihood"`
-	TiltAngle              *float32                                  `json:"tiltAngle"`
-	UnderExposedLikelihood *FaceAnnotationUnderExposedLikelihoodEnum `json:"underExposedLikelihood"`
+	AngerLikelihood        *FaceAnnotationAngerLikelihoodEnum        `json:"angerLikelihood,omitempty"`
+	BlurredLikelihood      *FaceAnnotationBlurredLikelihoodEnum      `json:"blurredLikelihood,omitempty"`
+	BoundingPoly           *BoundingPoly                             `json:"boundingPoly,omitempty"`
+	DetectionConfidence    *float32                                  `json:"detectionConfidence,omitempty"`
+	FdBoundingPoly         *BoundingPoly                             `json:"fdBoundingPoly,omitempty"`
+	HeadwearLikelihood     *FaceAnnotationHeadwearLikelihoodEnum     `json:"headwearLikelihood,omitempty"`
+	JoyLikelihood          *FaceAnnotationJoyLikelihoodEnum          `json:"joyLikelihood,omitempty"`
+	LandmarkingConfidence  *float32                                  `json:"landmarkingConfidence,omitempty"`
+	Landmarks              []Landmark                                `json:"landmarks,omitempty"`
+	PanAngle               *float32                                  `json:"panAngle,omitempty"`
+	RollAngle              *float32                                  `json:"rollAngle,omitempty"`
+	SorrowLikelihood       *FaceAnnotationSorrowLikelihoodEnum       `json:"sorrowLikelihood,omitempty"`
+	SurpriseLikelihood     *FaceAnnotationSurpriseLikelihoodEnum     `json:"surpriseLikelihood,omitempty"`
+	TiltAngle              *float32                                  `json:"tiltAngle,omitempty"`
+	UnderExposedLikelihood *FaceAnnotationUnderExposedLikelihoodEnum `json:"underExposedLikelihood,omitempty"`
 }

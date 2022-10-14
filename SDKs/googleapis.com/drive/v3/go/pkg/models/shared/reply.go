@@ -5,13 +5,13 @@ import (
 )
 
 type Reply struct {
-	Action       *string    `json:"action"`
-	Author       *User      `json:"author"`
-	Content      *string    `json:"content"`
-	CreatedTime  *time.Time `json:"createdTime"`
-	Deleted      *bool      `json:"deleted"`
-	HTMLContent  *string    `json:"htmlContent"`
-	ID           *string    `json:"id"`
-	Kind         *string    `json:"kind"`
-	ModifiedTime *time.Time `json:"modifiedTime"`
+	Action       *string    `json:"action,omitempty"`
+	Author       *User      `json:"author,omitempty"`
+	Content      *string    `json:"content,omitempty"`
+	CreatedTime  *time.Time `json:"createdTime,omitempty"`
+	Deleted      *bool      `json:"deleted,omitempty"`
+	HTMLContent  *string    `json:"htmlContent,omitempty"`
+	ID           *string    `json:"id,omitempty"`
+	Kind         *string    `json:"kind,omitempty"`
+	ModifiedTime *time.Time `json:"modifiedTime,omitempty"`
 }

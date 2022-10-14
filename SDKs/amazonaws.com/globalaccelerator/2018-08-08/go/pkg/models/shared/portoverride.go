@@ -1,6 +1,6 @@
 package shared
 
 type PortOverride struct {
-	EndpointPort *int64 `json:"EndpointPort"`
-	ListenerPort *int64 `json:"ListenerPort"`
+	EndpointPort *int64 `json:"EndpointPort,omitempty"`
+	ListenerPort *int64 `json:"ListenerPort,omitempty"`
 }

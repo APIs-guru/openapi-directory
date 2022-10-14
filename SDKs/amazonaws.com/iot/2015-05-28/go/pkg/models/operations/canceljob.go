@@ -23,8 +23,8 @@ type CancelJobHeaders struct {
 }
 
 type CancelJobRequestBody struct {
-	Comment    *string `json:"comment"`
-	ReasonCode *string `json:"reasonCode"`
+	Comment    *string `json:"comment,omitempty"`
+	ReasonCode *string `json:"reasonCode,omitempty"`
 }
 
 type CancelJobRequest struct {

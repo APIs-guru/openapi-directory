@@ -1,9 +1,9 @@
 package shared
 
 type DfpSettings struct {
-	DfpNetworkCode                *string `json:"dfpNetworkCode"`
-	DfpNetworkName                *string `json:"dfpNetworkName"`
-	ProgrammaticPlacementAccepted *bool   `json:"programmaticPlacementAccepted"`
-	PubPaidPlacementAccepted      *bool   `json:"pubPaidPlacementAccepted"`
-	PublisherPortalOnly           *bool   `json:"publisherPortalOnly"`
+	DfpNetworkCode                *string `json:"dfpNetworkCode,omitempty"`
+	DfpNetworkName                *string `json:"dfpNetworkName,omitempty"`
+	ProgrammaticPlacementAccepted *bool   `json:"programmaticPlacementAccepted,omitempty"`
+	PubPaidPlacementAccepted      *bool   `json:"pubPaidPlacementAccepted,omitempty"`
+	PublisherPortalOnly           *bool   `json:"publisherPortalOnly,omitempty"`
 }

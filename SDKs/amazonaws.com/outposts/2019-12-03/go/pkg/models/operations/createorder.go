@@ -32,7 +32,7 @@ type CreateOrderRequestBody struct {
 	LineItems         []shared.LineItemRequest                `json:"LineItems"`
 	OutpostIdentifier string                                  `json:"OutpostIdentifier"`
 	PaymentOption     CreateOrderRequestBodyPaymentOptionEnum `json:"PaymentOption"`
-	PaymentTerm       *CreateOrderRequestBodyPaymentTermEnum  `json:"PaymentTerm"`
+	PaymentTerm       *CreateOrderRequestBodyPaymentTermEnum  `json:"PaymentTerm,omitempty"`
 }
 
 type CreateOrderRequest struct {

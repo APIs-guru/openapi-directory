@@ -5,12 +5,12 @@ import (
 )
 
 type CreateVolumeRequestBody struct {
-	ConfigID *int64   `json:"config_id"`
-	Label    *string  `json:"label"`
-	LinodeID *int64   `json:"linode_id"`
-	Region   *string  `json:"region"`
-	Size     *int64   `json:"size"`
-	Tags     []string `json:"tags"`
+	ConfigID *int64   `json:"config_id,omitempty"`
+	Label    *string  `json:"label,omitempty"`
+	LinodeID *int64   `json:"linode_id,omitempty"`
+	Region   *string  `json:"region,omitempty"`
+	Size     *int64   `json:"size,omitempty"`
+	Tags     []string `json:"tags,omitempty"`
 }
 
 type CreateVolumeSecurityOption1 struct {
@@ -32,7 +32,7 @@ type CreateVolumeRequest struct {
 }
 
 type CreateVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateVolumeResponse struct {

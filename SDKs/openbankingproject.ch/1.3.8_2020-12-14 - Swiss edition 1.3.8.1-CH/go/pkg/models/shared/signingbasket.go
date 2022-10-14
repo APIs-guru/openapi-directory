@@ -1,6 +1,6 @@
 package shared
 
 type SigningBasket struct {
-	ConsentIds []string `json:"consentIds"`
-	PaymentIds []string `json:"paymentIds"`
+	ConsentIds []string `json:"consentIds,omitempty"`
+	PaymentIds []string `json:"paymentIds,omitempty"`
 }

@@ -1,15 +1,15 @@
 package shared
 
 type ProfileSummary struct {
-	Color                  *string                `json:"color"`
-	HeroAutoplay           *bool                  `json:"heroAutoplay"`
-	HeroWithAudio          *bool                  `json:"heroWithAudio"`
+	Color                  *string                `json:"color,omitempty"`
+	HeroAutoplay           *bool                  `json:"heroAutoplay,omitempty"`
+	HeroWithAudio          *bool                  `json:"heroWithAudio,omitempty"`
 	ID                     string                 `json:"id"`
 	IsActive               bool                   `json:"isActive"`
-	LanguageCode           *string                `json:"languageCode"`
+	LanguageCode           *string                `json:"languageCode,omitempty"`
 	MarketingEnabled       bool                   `json:"marketingEnabled"`
-	MaxRatingContentFilter *ClassificationSummary `json:"maxRatingContentFilter"`
-	MinRatingPlaybackGuard *ClassificationSummary `json:"minRatingPlaybackGuard"`
+	MaxRatingContentFilter *ClassificationSummary `json:"maxRatingContentFilter,omitempty"`
+	MinRatingPlaybackGuard *ClassificationSummary `json:"minRatingPlaybackGuard,omitempty"`
 	Name                   string                 `json:"name"`
 	PinEnabled             bool                   `json:"pinEnabled"`
 	PurchaseEnabled        bool                   `json:"purchaseEnabled"`

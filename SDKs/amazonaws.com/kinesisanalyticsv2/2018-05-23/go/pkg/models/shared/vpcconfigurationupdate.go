@@ -1,7 +1,7 @@
 package shared
 
 type VpcConfigurationUpdate struct {
-	SecurityGroupIDUpdates []string `json:"SecurityGroupIdUpdates"`
-	SubnetIDUpdates        []string `json:"SubnetIdUpdates"`
+	SecurityGroupIDUpdates []string `json:"SecurityGroupIdUpdates,omitempty"`
+	SubnetIDUpdates        []string `json:"SubnetIdUpdates,omitempty"`
 	VpcConfigurationID     string   `json:"VpcConfigurationId"`
 }

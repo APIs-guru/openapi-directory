@@ -1,14 +1,14 @@
 package shared
 
 type CreateUnreferencedMergeCommitInput struct {
-	AuthorName                 *string                                 `json:"authorName"`
-	CommitMessage              *string                                 `json:"commitMessage"`
-	ConflictDetailLevel        *ConflictDetailLevelTypeEnumEnum        `json:"conflictDetailLevel"`
-	ConflictResolution         *ConflictResolution                     `json:"conflictResolution"`
-	ConflictResolutionStrategy *ConflictResolutionStrategyTypeEnumEnum `json:"conflictResolutionStrategy"`
+	AuthorName                 *string                                 `json:"authorName,omitempty"`
+	CommitMessage              *string                                 `json:"commitMessage,omitempty"`
+	ConflictDetailLevel        *ConflictDetailLevelTypeEnumEnum        `json:"conflictDetailLevel,omitempty"`
+	ConflictResolution         *ConflictResolution                     `json:"conflictResolution,omitempty"`
+	ConflictResolutionStrategy *ConflictResolutionStrategyTypeEnumEnum `json:"conflictResolutionStrategy,omitempty"`
 	DestinationCommitSpecifier string                                  `json:"destinationCommitSpecifier"`
-	Email                      *string                                 `json:"email"`
-	KeepEmptyFolders           *bool                                   `json:"keepEmptyFolders"`
+	Email                      *string                                 `json:"email,omitempty"`
+	KeepEmptyFolders           *bool                                   `json:"keepEmptyFolders,omitempty"`
 	MergeOption                MergeOptionTypeEnumEnum                 `json:"mergeOption"`
 	RepositoryName             string                                  `json:"repositoryName"`
 	SourceCommitSpecifier      string                                  `json:"sourceCommitSpecifier"`

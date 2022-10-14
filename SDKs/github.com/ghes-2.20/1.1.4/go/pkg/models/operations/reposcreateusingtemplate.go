@@ -10,11 +10,11 @@ type ReposCreateUsingTemplatePathParams struct {
 }
 
 type ReposCreateUsingTemplateRequestBody struct {
-	Description        *string `json:"description"`
-	IncludeAllBranches *bool   `json:"include_all_branches"`
+	Description        *string `json:"description,omitempty"`
+	IncludeAllBranches *bool   `json:"include_all_branches,omitempty"`
 	Name               string  `json:"name"`
-	Owner              *string `json:"owner"`
-	Private            *bool   `json:"private"`
+	Owner              *string `json:"owner,omitempty"`
+	Private            *bool   `json:"private,omitempty"`
 }
 
 type ReposCreateUsingTemplateRequest struct {

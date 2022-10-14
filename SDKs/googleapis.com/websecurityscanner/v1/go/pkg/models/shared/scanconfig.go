@@ -26,17 +26,17 @@ const (
 )
 
 type ScanConfig struct {
-	Authentication                *Authentication                              `json:"authentication"`
-	BlacklistPatterns             []string                                     `json:"blacklistPatterns"`
-	DisplayName                   *string                                      `json:"displayName"`
-	ExportToSecurityCommandCenter *ScanConfigExportToSecurityCommandCenterEnum `json:"exportToSecurityCommandCenter"`
-	IgnoreHTTPStatusErrors        *bool                                        `json:"ignoreHttpStatusErrors"`
-	ManagedScan                   *bool                                        `json:"managedScan"`
-	MaxQPS                        *int32                                       `json:"maxQps"`
-	Name                          *string                                      `json:"name"`
-	RiskLevel                     *ScanConfigRiskLevelEnum                     `json:"riskLevel"`
-	Schedule                      *Schedule                                    `json:"schedule"`
-	StartingUrls                  []string                                     `json:"startingUrls"`
-	StaticIPScan                  *bool                                        `json:"staticIpScan"`
-	UserAgent                     *ScanConfigUserAgentEnum                     `json:"userAgent"`
+	Authentication                *Authentication                              `json:"authentication,omitempty"`
+	BlacklistPatterns             []string                                     `json:"blacklistPatterns,omitempty"`
+	DisplayName                   *string                                      `json:"displayName,omitempty"`
+	ExportToSecurityCommandCenter *ScanConfigExportToSecurityCommandCenterEnum `json:"exportToSecurityCommandCenter,omitempty"`
+	IgnoreHTTPStatusErrors        *bool                                        `json:"ignoreHttpStatusErrors,omitempty"`
+	ManagedScan                   *bool                                        `json:"managedScan,omitempty"`
+	MaxQPS                        *int32                                       `json:"maxQps,omitempty"`
+	Name                          *string                                      `json:"name,omitempty"`
+	RiskLevel                     *ScanConfigRiskLevelEnum                     `json:"riskLevel,omitempty"`
+	Schedule                      *Schedule                                    `json:"schedule,omitempty"`
+	StartingUrls                  []string                                     `json:"startingUrls,omitempty"`
+	StaticIPScan                  *bool                                        `json:"staticIpScan,omitempty"`
+	UserAgent                     *ScanConfigUserAgentEnum                     `json:"userAgent,omitempty"`
 }

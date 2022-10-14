@@ -1,6 +1,6 @@
 package shared
 
 type ListContextsResponse struct {
-	ContextSummaries []ContextSummary `json:"ContextSummaries"`
-	NextToken        *string          `json:"NextToken"`
+	ContextSummaries []ContextSummary `json:"ContextSummaries,omitempty"`
+	NextToken        *string          `json:"NextToken,omitempty"`
 }

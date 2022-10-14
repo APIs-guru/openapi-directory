@@ -1,7 +1,7 @@
 package shared
 
 type MirrorConfig struct {
-	DeployKeyID *string `json:"deployKeyId"`
-	URL         *string `json:"url"`
-	WebhookID   *string `json:"webhookId"`
+	DeployKeyID *string `json:"deployKeyId,omitempty"`
+	URL         *string `json:"url,omitempty"`
+	WebhookID   *string `json:"webhookId,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type Status struct {
-	Code        *StatusCodeEnum `json:"code"`
-	Description *string         `json:"description"`
+	Code        *StatusCodeEnum `json:"code,omitempty"`
+	Description *string         `json:"description,omitempty"`
 }

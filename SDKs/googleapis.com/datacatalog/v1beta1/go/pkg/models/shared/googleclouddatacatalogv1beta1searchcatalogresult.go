@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleCloudDatacatalogV1beta1SearchCatalogResult struct {
-	LinkedResource       *string                                                               `json:"linkedResource"`
-	ModifyTime           *string                                                               `json:"modifyTime"`
-	RelativeResourceName *string                                                               `json:"relativeResourceName"`
-	SearchResultSubtype  *string                                                               `json:"searchResultSubtype"`
-	SearchResultType     *GoogleCloudDatacatalogV1beta1SearchCatalogResultSearchResultTypeEnum `json:"searchResultType"`
+	LinkedResource       *string                                                               `json:"linkedResource,omitempty"`
+	ModifyTime           *string                                                               `json:"modifyTime,omitempty"`
+	RelativeResourceName *string                                                               `json:"relativeResourceName,omitempty"`
+	SearchResultSubtype  *string                                                               `json:"searchResultSubtype,omitempty"`
+	SearchResultType     *GoogleCloudDatacatalogV1beta1SearchCatalogResultSearchResultTypeEnum `json:"searchResultType,omitempty"`
 }

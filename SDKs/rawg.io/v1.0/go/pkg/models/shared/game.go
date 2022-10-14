@@ -27,46 +27,46 @@ const (
 )
 
 type GameEsrbRating struct {
-	ID   *int64                  `json:"id"`
-	Name *GameEsrbRatingNameEnum `json:"name"`
-	Slug *GameEsrbRatingSlugEnum `json:"slug"`
+	ID   *int64                  `json:"id,omitempty"`
+	Name *GameEsrbRatingNameEnum `json:"name,omitempty"`
+	Slug *GameEsrbRatingSlugEnum `json:"slug,omitempty"`
 }
 
 type GamePlatformsPlatform struct {
-	ID   *int64  `json:"id"`
-	Name *string `json:"name"`
-	Slug *string `json:"slug"`
+	ID   *int64  `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Slug *string `json:"slug,omitempty"`
 }
 
 type GamePlatformsRequirements struct {
-	Minimum     *string `json:"minimum"`
-	Recommended *string `json:"recommended"`
+	Minimum     *string `json:"minimum,omitempty"`
+	Recommended *string `json:"recommended,omitempty"`
 }
 
 type GamePlatforms struct {
-	Platform     *GamePlatformsPlatform     `json:"platform"`
-	ReleasedAt   *string                    `json:"released_at"`
-	Requirements *GamePlatformsRequirements `json:"requirements"`
+	Platform     *GamePlatformsPlatform     `json:"platform,omitempty"`
+	ReleasedAt   *string                    `json:"released_at,omitempty"`
+	Requirements *GamePlatformsRequirements `json:"requirements,omitempty"`
 }
 
 type Game struct {
-	Added            *int64                 `json:"added"`
-	AddedByStatus    map[string]interface{} `json:"added_by_status"`
-	BackgroundImage  *string                `json:"background_image"`
-	EsrbRating       *GameEsrbRating        `json:"esrb_rating"`
-	ID               *int64                 `json:"id"`
-	Metacritic       *int64                 `json:"metacritic"`
-	Name             *string                `json:"name"`
-	Platforms        []GamePlatforms        `json:"platforms"`
-	Playtime         *int64                 `json:"playtime"`
+	Added            *int64                 `json:"added,omitempty"`
+	AddedByStatus    map[string]interface{} `json:"added_by_status,omitempty"`
+	BackgroundImage  *string                `json:"background_image,omitempty"`
+	EsrbRating       *GameEsrbRating        `json:"esrb_rating,omitempty"`
+	ID               *int64                 `json:"id,omitempty"`
+	Metacritic       *int64                 `json:"metacritic,omitempty"`
+	Name             *string                `json:"name,omitempty"`
+	Platforms        []GamePlatforms        `json:"platforms,omitempty"`
+	Playtime         *int64                 `json:"playtime,omitempty"`
 	Rating           float64                `json:"rating"`
-	RatingTop        *int64                 `json:"rating_top"`
-	Ratings          map[string]interface{} `json:"ratings"`
-	RatingsCount     *int64                 `json:"ratings_count"`
-	Released         *time.Time             `json:"released"`
-	ReviewsTextCount *string                `json:"reviews_text_count"`
-	Slug             *string                `json:"slug"`
-	SuggestionsCount *int64                 `json:"suggestions_count"`
-	Tba              *bool                  `json:"tba"`
-	Updated          *time.Time             `json:"updated"`
+	RatingTop        *int64                 `json:"rating_top,omitempty"`
+	Ratings          map[string]interface{} `json:"ratings,omitempty"`
+	RatingsCount     *int64                 `json:"ratings_count,omitempty"`
+	Released         *time.Time             `json:"released,omitempty"`
+	ReviewsTextCount *string                `json:"reviews_text_count,omitempty"`
+	Slug             *string                `json:"slug,omitempty"`
+	SuggestionsCount *int64                 `json:"suggestions_count,omitempty"`
+	Tba              *bool                  `json:"tba,omitempty"`
+	Updated          *time.Time             `json:"updated,omitempty"`
 }

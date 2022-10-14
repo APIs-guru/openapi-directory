@@ -1,7 +1,7 @@
 package shared
 
 type IdentityAwareProxyClient struct {
-	DisplayName *string `json:"displayName"`
-	Name        *string `json:"name"`
-	Secret      *string `json:"secret"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Secret      *string `json:"secret,omitempty"`
 }

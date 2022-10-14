@@ -11,9 +11,9 @@ type PutFeedbackHeaders struct {
 }
 
 type PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback struct {
-	AnomalyGroupID *string `json:"AnomalyGroupId"`
-	IsAnomaly      *bool   `json:"IsAnomaly"`
-	TimeSeriesID   *string `json:"TimeSeriesId"`
+	AnomalyGroupID *string `json:"AnomalyGroupId,omitempty"`
+	IsAnomaly      *bool   `json:"IsAnomaly,omitempty"`
+	TimeSeriesID   *string `json:"TimeSeriesId,omitempty"`
 }
 
 type PutFeedbackRequestBody struct {

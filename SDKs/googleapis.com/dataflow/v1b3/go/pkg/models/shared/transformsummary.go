@@ -15,10 +15,10 @@ const (
 )
 
 type TransformSummary struct {
-	DisplayData          []DisplayData             `json:"displayData"`
-	ID                   *string                   `json:"id"`
-	InputCollectionName  []string                  `json:"inputCollectionName"`
-	Kind                 *TransformSummaryKindEnum `json:"kind"`
-	Name                 *string                   `json:"name"`
-	OutputCollectionName []string                  `json:"outputCollectionName"`
+	DisplayData          []DisplayData             `json:"displayData,omitempty"`
+	ID                   *string                   `json:"id,omitempty"`
+	InputCollectionName  []string                  `json:"inputCollectionName,omitempty"`
+	Kind                 *TransformSummaryKindEnum `json:"kind,omitempty"`
+	Name                 *string                   `json:"name,omitempty"`
+	OutputCollectionName []string                  `json:"outputCollectionName,omitempty"`
 }

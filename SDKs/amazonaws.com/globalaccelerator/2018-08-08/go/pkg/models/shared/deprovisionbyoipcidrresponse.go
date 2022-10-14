@@ -1,5 +1,5 @@
 package shared
 
 type DeprovisionByoipCidrResponse struct {
-	ByoipCidr *ByoipCidr `json:"ByoipCidr"`
+	ByoipCidr *ByoipCidr `json:"ByoipCidr,omitempty"`
 }

@@ -6,16 +6,16 @@ type PostAdminNearMissesRequestPatternRequestBodyBasicAuthCredentials struct {
 }
 
 type PostAdminNearMissesRequestPatternRequestBody struct {
-	BasicAuthCredentials *PostAdminNearMissesRequestPatternRequestBodyBasicAuthCredentials `json:"basicAuthCredentials"`
-	BodyPatterns         []map[string]interface{}                                          `json:"bodyPatterns"`
-	Cookies              map[string]interface{}                                            `json:"cookies"`
-	Headers              map[string]interface{}                                            `json:"headers"`
-	Method               *string                                                           `json:"method"`
-	QueryParameters      map[string]interface{}                                            `json:"queryParameters"`
-	URL                  *string                                                           `json:"url"`
-	URLPath              *string                                                           `json:"urlPath"`
-	URLPathPattern       *string                                                           `json:"urlPathPattern"`
-	URLPattern           *string                                                           `json:"urlPattern"`
+	BasicAuthCredentials *PostAdminNearMissesRequestPatternRequestBodyBasicAuthCredentials `json:"basicAuthCredentials,omitempty"`
+	BodyPatterns         []map[string]interface{}                                          `json:"bodyPatterns,omitempty"`
+	Cookies              map[string]interface{}                                            `json:"cookies,omitempty"`
+	Headers              map[string]interface{}                                            `json:"headers,omitempty"`
+	Method               *string                                                           `json:"method,omitempty"`
+	QueryParameters      map[string]interface{}                                            `json:"queryParameters,omitempty"`
+	URL                  *string                                                           `json:"url,omitempty"`
+	URLPath              *string                                                           `json:"urlPath,omitempty"`
+	URLPathPattern       *string                                                           `json:"urlPathPattern,omitempty"`
+	URLPattern           *string                                                           `json:"urlPattern,omitempty"`
 }
 
 type PostAdminNearMissesRequestPatternRequest struct {
@@ -23,16 +23,16 @@ type PostAdminNearMissesRequestPatternRequest struct {
 }
 
 type PostAdminNearMissesRequestPattern200ApplicationJSONNearMisses struct {
-	AbsoluteURL *string                `json:"absoluteUrl"`
-	Body        *string                `json:"body"`
-	Cookies     map[string]interface{} `json:"cookies"`
-	Headers     map[string]interface{} `json:"headers"`
-	Method      *string                `json:"method"`
-	URL         *string                `json:"url"`
+	AbsoluteURL *string                `json:"absoluteUrl,omitempty"`
+	Body        *string                `json:"body,omitempty"`
+	Cookies     map[string]interface{} `json:"cookies,omitempty"`
+	Headers     map[string]interface{} `json:"headers,omitempty"`
+	Method      *string                `json:"method,omitempty"`
+	URL         *string                `json:"url,omitempty"`
 }
 
 type PostAdminNearMissesRequestPattern200ApplicationJSON struct {
-	NearMisses []PostAdminNearMissesRequestPattern200ApplicationJSONNearMisses `json:"nearMisses"`
+	NearMisses []PostAdminNearMissesRequestPattern200ApplicationJSONNearMisses `json:"nearMisses,omitempty"`
 }
 
 type PostAdminNearMissesRequestPatternResponse struct {

@@ -15,12 +15,12 @@ type UpdateRelatedItemsHeaders struct {
 }
 
 type UpdateRelatedItemsRequestBodyRelatedItemsUpdate struct {
-	ItemToAdd    *shared.RelatedItem    `json:"itemToAdd"`
-	ItemToRemove *shared.ItemIdentifier `json:"itemToRemove"`
+	ItemToAdd    *shared.RelatedItem    `json:"itemToAdd,omitempty"`
+	ItemToRemove *shared.ItemIdentifier `json:"itemToRemove,omitempty"`
 }
 
 type UpdateRelatedItemsRequestBody struct {
-	ClientToken        *string                                         `json:"clientToken"`
+	ClientToken        *string                                         `json:"clientToken,omitempty"`
 	IncidentRecordArn  string                                          `json:"incidentRecordArn"`
 	RelatedItemsUpdate UpdateRelatedItemsRequestBodyRelatedItemsUpdate `json:"relatedItemsUpdate"`
 }

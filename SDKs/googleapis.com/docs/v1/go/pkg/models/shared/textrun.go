@@ -1,9 +1,9 @@
 package shared
 
 type TextRun struct {
-	Content                   *string                       `json:"content"`
-	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds"`
-	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges"`
-	TextStyle                 *TextStyle                    `json:"textStyle"`
+	Content                   *string                       `json:"content,omitempty"`
+	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds,omitempty"`
+	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges,omitempty"`
+	TextStyle                 *TextStyle                    `json:"textStyle,omitempty"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type PipelineExecutionStep struct {
-	CacheHitResult *CacheHitResult                `json:"CacheHitResult"`
-	EndTime        *time.Time                     `json:"EndTime"`
-	FailureReason  *string                        `json:"FailureReason"`
-	Metadata       *PipelineExecutionStepMetadata `json:"Metadata"`
-	StartTime      *time.Time                     `json:"StartTime"`
-	StepName       *string                        `json:"StepName"`
-	StepStatus     *StepStatusEnum                `json:"StepStatus"`
+	CacheHitResult *CacheHitResult                `json:"CacheHitResult,omitempty"`
+	EndTime        *time.Time                     `json:"EndTime,omitempty"`
+	FailureReason  *string                        `json:"FailureReason,omitempty"`
+	Metadata       *PipelineExecutionStepMetadata `json:"Metadata,omitempty"`
+	StartTime      *time.Time                     `json:"StartTime,omitempty"`
+	StepName       *string                        `json:"StepName,omitempty"`
+	StepStatus     *StepStatusEnum                `json:"StepStatus,omitempty"`
 }

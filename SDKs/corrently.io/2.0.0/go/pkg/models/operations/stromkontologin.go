@@ -1,7 +1,7 @@
 package operations
 
 type StromkontoLoginRequestBody struct {
-	Email *string `json:"email"`
+	Email *string `json:"email,omitempty"`
 }
 
 type StromkontoLoginRequest struct {
@@ -16,7 +16,7 @@ const (
 )
 
 type StromkontoLogin200ApplicationJSON struct {
-	Status *StromkontoLogin200ApplicationJSONStatusEnum `json:"status"`
+	Status *StromkontoLogin200ApplicationJSONStatusEnum `json:"status,omitempty"`
 }
 
 type StromkontoLoginResponse struct {

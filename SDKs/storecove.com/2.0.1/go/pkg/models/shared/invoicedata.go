@@ -9,6 +9,6 @@ const (
 )
 
 type InvoiceData struct {
-	ConversionStrategy *InvoiceDataConversionStrategyConversionStrategyEnum `json:"conversionStrategy"`
-	Document           *string                                              `json:"document"`
+	ConversionStrategy *InvoiceDataConversionStrategyConversionStrategyEnum `json:"conversionStrategy,omitempty"`
+	Document           *string                                              `json:"document,omitempty"`
 }

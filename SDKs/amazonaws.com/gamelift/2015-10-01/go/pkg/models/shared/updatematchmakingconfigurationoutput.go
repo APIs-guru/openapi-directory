@@ -1,5 +1,5 @@
 package shared
 
 type UpdateMatchmakingConfigurationOutput struct {
-	Configuration *MatchmakingConfiguration `json:"Configuration"`
+	Configuration *MatchmakingConfiguration `json:"Configuration,omitempty"`
 }

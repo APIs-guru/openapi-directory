@@ -11,9 +11,9 @@ const (
 )
 
 type Balance struct {
-	Balance   *int64                `json:"balance"`
-	Haben     *int64                `json:"haben"`
-	Soll      *int64                `json:"soll"`
-	Txs       []Transactions        `json:"txs"`
-	Variation *BalanceVariationEnum `json:"variation"`
+	Balance   *int64                `json:"balance,omitempty"`
+	Haben     *int64                `json:"haben,omitempty"`
+	Soll      *int64                `json:"soll,omitempty"`
+	Txs       []Transactions        `json:"txs,omitempty"`
+	Variation *BalanceVariationEnum `json:"variation,omitempty"`
 }

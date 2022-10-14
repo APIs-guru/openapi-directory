@@ -1,6 +1,6 @@
 package shared
 
 type DescribeStacksResult struct {
-	NextToken *string `json:"NextToken"`
-	Stacks    []Stack `json:"Stacks"`
+	NextToken *string `json:"NextToken,omitempty"`
+	Stacks    []Stack `json:"Stacks,omitempty"`
 }

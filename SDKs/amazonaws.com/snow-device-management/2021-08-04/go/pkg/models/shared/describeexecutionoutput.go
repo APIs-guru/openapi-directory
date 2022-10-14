@@ -5,10 +5,10 @@ import (
 )
 
 type DescribeExecutionOutput struct {
-	ExecutionID     *string             `json:"executionId"`
-	LastUpdatedAt   *time.Time          `json:"lastUpdatedAt"`
-	ManagedDeviceID *string             `json:"managedDeviceId"`
-	StartedAt       *time.Time          `json:"startedAt"`
-	State           *ExecutionStateEnum `json:"state"`
-	TaskID          *string             `json:"taskId"`
+	ExecutionID     *string             `json:"executionId,omitempty"`
+	LastUpdatedAt   *time.Time          `json:"lastUpdatedAt,omitempty"`
+	ManagedDeviceID *string             `json:"managedDeviceId,omitempty"`
+	StartedAt       *time.Time          `json:"startedAt,omitempty"`
+	State           *ExecutionStateEnum `json:"state,omitempty"`
+	TaskID          *string             `json:"taskId,omitempty"`
 }

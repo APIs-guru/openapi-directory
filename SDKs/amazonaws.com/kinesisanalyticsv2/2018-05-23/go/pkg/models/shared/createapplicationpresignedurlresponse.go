@@ -1,5 +1,5 @@
 package shared
 
 type CreateApplicationPresignedURLResponse struct {
-	AuthorizedURL *string `json:"AuthorizedUrl"`
+	AuthorizedURL *string `json:"AuthorizedUrl,omitempty"`
 }

@@ -1,11 +1,11 @@
 package operations
 
 type GetSecdefRequestBody struct {
-	Conid    *float64 `json:"conid"`
-	Currency *string  `json:"currency"`
-	Exchange *string  `json:"exchange"`
-	Symbol   *string  `json:"symbol"`
-	Type     *string  `json:"type"`
+	Conid    *float64 `json:"conid,omitempty"`
+	Currency *string  `json:"currency,omitempty"`
+	Exchange *string  `json:"exchange,omitempty"`
+	Symbol   *string  `json:"symbol,omitempty"`
+	Type     *string  `json:"type,omitempty"`
 }
 
 type GetSecdefRequest struct {
@@ -13,12 +13,12 @@ type GetSecdefRequest struct {
 }
 
 type GetSecdef200ApplicationJSON struct {
-	CompanyName  *string  `json:"CompanyName"`
-	ContractID   *float64 `json:"ContractId"`
-	Currency     *string  `json:"Currency"`
-	Exchange     *string  `json:"Exchange"`
-	SecurityType *string  `json:"SecurityType"`
-	Ticker       *string  `json:"Ticker"`
+	CompanyName  *string  `json:"CompanyName,omitempty"`
+	ContractID   *float64 `json:"ContractId,omitempty"`
+	Currency     *string  `json:"Currency,omitempty"`
+	Exchange     *string  `json:"Exchange,omitempty"`
+	SecurityType *string  `json:"SecurityType,omitempty"`
+	Ticker       *string  `json:"Ticker,omitempty"`
 }
 
 type GetSecdefResponse struct {

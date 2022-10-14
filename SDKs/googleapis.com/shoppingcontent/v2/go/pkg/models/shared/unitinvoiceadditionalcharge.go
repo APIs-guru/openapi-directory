@@ -1,7 +1,7 @@
 package shared
 
 type UnitInvoiceAdditionalCharge struct {
-	AdditionalChargeAmount     *Amount     `json:"additionalChargeAmount"`
-	AdditionalChargePromotions []Promotion `json:"additionalChargePromotions"`
-	Type                       *string     `json:"type"`
+	AdditionalChargeAmount     *Amount     `json:"additionalChargeAmount,omitempty"`
+	AdditionalChargePromotions []Promotion `json:"additionalChargePromotions,omitempty"`
+	Type                       *string     `json:"type,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Transcript struct {
-	RedactedTranscriptFileURI *string `json:"RedactedTranscriptFileUri"`
-	TranscriptFileURI         *string `json:"TranscriptFileUri"`
+	RedactedTranscriptFileURI *string `json:"RedactedTranscriptFileUri,omitempty"`
+	TranscriptFileURI         *string `json:"TranscriptFileUri,omitempty"`
 }

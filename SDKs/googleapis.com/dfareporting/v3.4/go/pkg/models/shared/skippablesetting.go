@@ -1,8 +1,8 @@
 package shared
 
 type SkippableSetting struct {
-	Kind           *string      `json:"kind"`
-	ProgressOffset *VideoOffset `json:"progressOffset"`
-	SkipOffset     *VideoOffset `json:"skipOffset"`
-	Skippable      *bool        `json:"skippable"`
+	Kind           *string      `json:"kind,omitempty"`
+	ProgressOffset *VideoOffset `json:"progressOffset,omitempty"`
+	SkipOffset     *VideoOffset `json:"skipOffset,omitempty"`
+	Skippable      *bool        `json:"skippable,omitempty"`
 }

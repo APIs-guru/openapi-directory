@@ -20,7 +20,7 @@ type PutPostsIDLockedJSONRequest struct {
 }
 
 type PutPostsIDLockedJSON200ApplicationJSON struct {
-	Locked *bool `json:"locked"`
+	Locked *bool `json:"locked,omitempty"`
 }
 
 type PutPostsIDLockedJSONResponse struct {

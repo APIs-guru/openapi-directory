@@ -1,11 +1,11 @@
 package shared
 
 type InventoryScriptInfo struct {
-	Config                    *interface{}               `json:"config"`
-	Data                      *ScriptDescriptionData     `json:"data"`
-	EventPattern              *interface{}               `json:"eventPattern"`
-	ScriptID                  *string                    `json:"scriptId"`
-	ScriptLocalizationDetails []ScriptLocalizationDetail `json:"scriptLocalizationDetails"`
-	ScriptName                *string                    `json:"scriptName"`
-	Visibility                *string                    `json:"visibility"`
+	Config                    *interface{}               `json:"config,omitempty"`
+	Data                      *ScriptDescriptionData     `json:"data,omitempty"`
+	EventPattern              *interface{}               `json:"eventPattern,omitempty"`
+	ScriptID                  *string                    `json:"scriptId,omitempty"`
+	ScriptLocalizationDetails []ScriptLocalizationDetail `json:"scriptLocalizationDetails,omitempty"`
+	ScriptName                *string                    `json:"scriptName,omitempty"`
+	Visibility                *string                    `json:"visibility,omitempty"`
 }

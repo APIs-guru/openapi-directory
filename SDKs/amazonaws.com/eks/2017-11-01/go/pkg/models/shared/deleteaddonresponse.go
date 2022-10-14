@@ -1,5 +1,5 @@
 package shared
 
 type DeleteAddonResponse struct {
-	Addon *Addon `json:"addon"`
+	Addon *Addon `json:"addon,omitempty"`
 }

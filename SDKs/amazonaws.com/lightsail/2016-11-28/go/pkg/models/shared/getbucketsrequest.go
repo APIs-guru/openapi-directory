@@ -1,7 +1,7 @@
 package shared
 
 type GetBucketsRequest struct {
-	BucketName                *string `json:"bucketName"`
-	IncludeConnectedResources *bool   `json:"includeConnectedResources"`
-	PageToken                 *string `json:"pageToken"`
+	BucketName                *string `json:"bucketName,omitempty"`
+	IncludeConnectedResources *bool   `json:"includeConnectedResources,omitempty"`
+	PageToken                 *string `json:"pageToken,omitempty"`
 }

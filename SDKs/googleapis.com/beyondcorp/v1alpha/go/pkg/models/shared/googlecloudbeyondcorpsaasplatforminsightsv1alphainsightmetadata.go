@@ -12,11 +12,11 @@ const (
 )
 
 type GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadata struct {
-	Aggregations []GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregationsEnum `json:"aggregations"`
-	Category     *string                                                                           `json:"category"`
-	DisplayName  *string                                                                           `json:"displayName"`
-	Fields       []GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField            `json:"fields"`
-	Groups       []string                                                                          `json:"groups"`
-	SubCategory  *string                                                                           `json:"subCategory"`
-	Type         *string                                                                           `json:"type"`
+	Aggregations []GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregationsEnum `json:"aggregations,omitempty"`
+	Category     *string                                                                           `json:"category,omitempty"`
+	DisplayName  *string                                                                           `json:"displayName,omitempty"`
+	Fields       []GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField            `json:"fields,omitempty"`
+	Groups       []string                                                                          `json:"groups,omitempty"`
+	SubCategory  *string                                                                           `json:"subCategory,omitempty"`
+	Type         *string                                                                           `json:"type,omitempty"`
 }

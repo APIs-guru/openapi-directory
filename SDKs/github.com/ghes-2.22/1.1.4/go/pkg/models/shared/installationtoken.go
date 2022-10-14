@@ -1,10 +1,10 @@
 package shared
 
 type InstallationTokenPermissions struct {
-	Contents   *string `json:"contents"`
-	Issues     *string `json:"issues"`
-	Metadata   *string `json:"metadata"`
-	SingleFile *string `json:"single_file"`
+	Contents   *string `json:"contents,omitempty"`
+	Issues     *string `json:"issues,omitempty"`
+	Metadata   *string `json:"metadata,omitempty"`
+	SingleFile *string `json:"single_file,omitempty"`
 }
 
 type InstallationTokenRepositorySelectionEnum string
@@ -16,11 +16,11 @@ const (
 
 type InstallationToken struct {
 	ExpiresAt              string                                    `json:"expires_at"`
-	HasMultipleSingleFiles *bool                                     `json:"has_multiple_single_files"`
-	Permissions            *InstallationTokenPermissions             `json:"permissions"`
-	Repositories           []Repository                              `json:"repositories"`
-	RepositorySelection    *InstallationTokenRepositorySelectionEnum `json:"repository_selection"`
-	SingleFile             *string                                   `json:"single_file"`
-	SingleFilePaths        []string                                  `json:"single_file_paths"`
+	HasMultipleSingleFiles *bool                                     `json:"has_multiple_single_files,omitempty"`
+	Permissions            *InstallationTokenPermissions             `json:"permissions,omitempty"`
+	Repositories           []Repository                              `json:"repositories,omitempty"`
+	RepositorySelection    *InstallationTokenRepositorySelectionEnum `json:"repository_selection,omitempty"`
+	SingleFile             *string                                   `json:"single_file,omitempty"`
+	SingleFilePaths        []string                                  `json:"single_file_paths,omitempty"`
 	Token                  string                                    `json:"token"`
 }

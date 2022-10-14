@@ -27,20 +27,20 @@ const (
 )
 
 type Routine struct {
-	Arguments             []Argument                   `json:"arguments"`
-	CreationTime          *string                      `json:"creationTime"`
-	DefinitionBody        *string                      `json:"definitionBody"`
-	Description           *string                      `json:"description"`
-	DeterminismLevel      *RoutineDeterminismLevelEnum `json:"determinismLevel"`
-	Etag                  *string                      `json:"etag"`
-	ImportedLibraries     []string                     `json:"importedLibraries"`
-	Language              *RoutineLanguageEnum         `json:"language"`
-	LastModifiedTime      *string                      `json:"lastModifiedTime"`
-	RemoteFunctionOptions *RemoteFunctionOptions       `json:"remoteFunctionOptions"`
-	ReturnTableType       *StandardSQLTableType        `json:"returnTableType"`
-	ReturnType            *StandardSQLDataType         `json:"returnType"`
-	RoutineReference      *RoutineReference            `json:"routineReference"`
-	RoutineType           *RoutineRoutineTypeEnum      `json:"routineType"`
-	SparkOptions          *SparkOptions                `json:"sparkOptions"`
-	StrictMode            *bool                        `json:"strictMode"`
+	Arguments             []Argument                   `json:"arguments,omitempty"`
+	CreationTime          *string                      `json:"creationTime,omitempty"`
+	DefinitionBody        *string                      `json:"definitionBody,omitempty"`
+	Description           *string                      `json:"description,omitempty"`
+	DeterminismLevel      *RoutineDeterminismLevelEnum `json:"determinismLevel,omitempty"`
+	Etag                  *string                      `json:"etag,omitempty"`
+	ImportedLibraries     []string                     `json:"importedLibraries,omitempty"`
+	Language              *RoutineLanguageEnum         `json:"language,omitempty"`
+	LastModifiedTime      *string                      `json:"lastModifiedTime,omitempty"`
+	RemoteFunctionOptions *RemoteFunctionOptions       `json:"remoteFunctionOptions,omitempty"`
+	ReturnTableType       *StandardSQLTableType        `json:"returnTableType,omitempty"`
+	ReturnType            *StandardSQLDataType         `json:"returnType,omitempty"`
+	RoutineReference      *RoutineReference            `json:"routineReference,omitempty"`
+	RoutineType           *RoutineRoutineTypeEnum      `json:"routineType,omitempty"`
+	SparkOptions          *SparkOptions                `json:"sparkOptions,omitempty"`
+	StrictMode            *bool                        `json:"strictMode,omitempty"`
 }

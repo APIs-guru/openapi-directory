@@ -1,7 +1,7 @@
 package shared
 
 type ClusterCustomerAddress struct {
-	Lat        *float64 `json:"lat"`
-	Lon        *float64 `json:"lon"`
-	StreetHint *string  `json:"street_hint"`
+	Lat        *float64 `json:"lat,omitempty"`
+	Lon        *float64 `json:"lon,omitempty"`
+	StreetHint *string  `json:"street_hint,omitempty"`
 }

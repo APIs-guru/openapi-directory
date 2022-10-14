@@ -5,8 +5,8 @@ import (
 )
 
 type CreateConnectionResponse struct {
-	ConnectionArn    *string              `json:"ConnectionArn"`
-	ConnectionState  *ConnectionStateEnum `json:"ConnectionState"`
-	CreationTime     *time.Time           `json:"CreationTime"`
-	LastModifiedTime *time.Time           `json:"LastModifiedTime"`
+	ConnectionArn    *string              `json:"ConnectionArn,omitempty"`
+	ConnectionState  *ConnectionStateEnum `json:"ConnectionState,omitempty"`
+	CreationTime     *time.Time           `json:"CreationTime,omitempty"`
+	LastModifiedTime *time.Time           `json:"LastModifiedTime,omitempty"`
 }

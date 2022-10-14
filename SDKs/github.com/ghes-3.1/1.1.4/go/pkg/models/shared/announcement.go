@@ -6,5 +6,5 @@ import (
 
 type Announcement struct {
 	Announcement string     `json:"announcement"`
-	ExpiresAt    *time.Time `json:"expires_at"`
+	ExpiresAt    *time.Time `json:"expires_at,omitempty"`
 }

@@ -24,11 +24,11 @@ const (
 
 type CreateGeofenceCollectionRequestBody struct {
 	CollectionName        string                                             `json:"CollectionName"`
-	Description           *string                                            `json:"Description"`
-	KmsKeyID              *string                                            `json:"KmsKeyId"`
+	Description           *string                                            `json:"Description,omitempty"`
+	KmsKeyID              *string                                            `json:"KmsKeyId,omitempty"`
 	PricingPlan           CreateGeofenceCollectionRequestBodyPricingPlanEnum `json:"PricingPlan"`
-	PricingPlanDataSource *string                                            `json:"PricingPlanDataSource"`
-	Tags                  map[string]string                                  `json:"Tags"`
+	PricingPlanDataSource *string                                            `json:"PricingPlanDataSource,omitempty"`
+	Tags                  map[string]string                                  `json:"Tags,omitempty"`
 }
 
 type CreateGeofenceCollectionRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type DetectDocumentTextResponse struct {
-	Blocks                         []Block           `json:"Blocks"`
-	DetectDocumentTextModelVersion *string           `json:"DetectDocumentTextModelVersion"`
-	DocumentMetadata               *DocumentMetadata `json:"DocumentMetadata"`
+	Blocks                         []Block           `json:"Blocks,omitempty"`
+	DetectDocumentTextModelVersion *string           `json:"DetectDocumentTextModelVersion,omitempty"`
+	DocumentMetadata               *DocumentMetadata `json:"DocumentMetadata,omitempty"`
 }

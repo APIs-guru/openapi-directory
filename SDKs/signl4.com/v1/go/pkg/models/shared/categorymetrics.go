@@ -5,8 +5,8 @@ import (
 )
 
 type CategoryMetrics struct {
-	CategoryID      *string    `json:"categoryId"`
-	Last24Hours     *int64     `json:"last24Hours"`
-	LastAlert       *time.Time `json:"lastAlert"`
-	SubscriberCount *int32     `json:"subscriberCount"`
+	CategoryID      *string    `json:"categoryId,omitempty"`
+	Last24Hours     *int64     `json:"last24Hours,omitempty"`
+	LastAlert       *time.Time `json:"lastAlert,omitempty"`
+	SubscriberCount *int32     `json:"subscriberCount,omitempty"`
 }

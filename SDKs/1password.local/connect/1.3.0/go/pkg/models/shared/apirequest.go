@@ -14,15 +14,15 @@ const (
 )
 
 type APIRequestActor struct {
-	Account   *string `json:"account"`
-	ID        *string `json:"id"`
-	Jti       *string `json:"jti"`
-	RequestIP *string `json:"requestIp"`
-	UserAgent *string `json:"userAgent"`
+	Account   *string `json:"account,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Jti       *string `json:"jti,omitempty"`
+	RequestIP *string `json:"requestIp,omitempty"`
+	UserAgent *string `json:"userAgent,omitempty"`
 }
 
 type APIRequestResourceItem struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type APIRequestResourceTypeEnum string
@@ -33,14 +33,14 @@ const (
 )
 
 type APIRequestResourceVault struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type APIRequestResource struct {
-	Item        *APIRequestResourceItem     `json:"item"`
-	ItemVersion *int64                      `json:"itemVersion"`
-	Type        *APIRequestResourceTypeEnum `json:"type"`
-	Vault       *APIRequestResourceVault    `json:"vault"`
+	Item        *APIRequestResourceItem     `json:"item,omitempty"`
+	ItemVersion *int64                      `json:"itemVersion,omitempty"`
+	Type        *APIRequestResourceTypeEnum `json:"type,omitempty"`
+	Vault       *APIRequestResourceVault    `json:"vault,omitempty"`
 }
 
 type APIRequestResultEnum string
@@ -51,10 +51,10 @@ const (
 )
 
 type APIRequest struct {
-	Action    *APIRequestActionEnum `json:"action"`
-	Actor     *APIRequestActor      `json:"actor"`
-	RequestID *string               `json:"requestId"`
-	Resource  *APIRequestResource   `json:"resource"`
-	Result    *APIRequestResultEnum `json:"result"`
-	Timestamp *time.Time            `json:"timestamp"`
+	Action    *APIRequestActionEnum `json:"action,omitempty"`
+	Actor     *APIRequestActor      `json:"actor,omitempty"`
+	RequestID *string               `json:"requestId,omitempty"`
+	Resource  *APIRequestResource   `json:"resource,omitempty"`
+	Result    *APIRequestResultEnum `json:"result,omitempty"`
+	Timestamp *time.Time            `json:"timestamp,omitempty"`
 }

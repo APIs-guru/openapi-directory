@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleCloudDocumentaiV1HumanReviewStatus struct {
-	HumanReviewOperation *string                                            `json:"humanReviewOperation"`
-	State                *GoogleCloudDocumentaiV1HumanReviewStatusStateEnum `json:"state"`
-	StateMessage         *string                                            `json:"stateMessage"`
+	HumanReviewOperation *string                                            `json:"humanReviewOperation,omitempty"`
+	State                *GoogleCloudDocumentaiV1HumanReviewStatusStateEnum `json:"state,omitempty"`
+	StateMessage         *string                                            `json:"stateMessage,omitempty"`
 }

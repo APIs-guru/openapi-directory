@@ -15,8 +15,8 @@ const (
 )
 
 type GenerateDefaultLineItemRequest struct {
-	DisplayName      *string                                         `json:"displayName"`
-	InsertionOrderID *string                                         `json:"insertionOrderId"`
-	LineItemType     *GenerateDefaultLineItemRequestLineItemTypeEnum `json:"lineItemType"`
-	MobileApp        *MobileApp                                      `json:"mobileApp"`
+	DisplayName      *string                                         `json:"displayName,omitempty"`
+	InsertionOrderID *string                                         `json:"insertionOrderId,omitempty"`
+	LineItemType     *GenerateDefaultLineItemRequestLineItemTypeEnum `json:"lineItemType,omitempty"`
+	MobileApp        *MobileApp                                      `json:"mobileApp,omitempty"`
 }

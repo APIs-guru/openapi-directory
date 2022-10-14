@@ -1,7 +1,7 @@
 package shared
 
 type ServerGroupLaunchConfiguration struct {
-	LaunchOrder                *int64                      `json:"launchOrder"`
-	ServerGroupID              *string                     `json:"serverGroupId"`
-	ServerLaunchConfigurations []ServerLaunchConfiguration `json:"serverLaunchConfigurations"`
+	LaunchOrder                *int64                      `json:"launchOrder,omitempty"`
+	ServerGroupID              *string                     `json:"serverGroupId,omitempty"`
+	ServerLaunchConfigurations []ServerLaunchConfiguration `json:"serverLaunchConfigurations,omitempty"`
 }

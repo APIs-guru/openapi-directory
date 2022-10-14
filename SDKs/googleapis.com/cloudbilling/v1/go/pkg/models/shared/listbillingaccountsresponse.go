@@ -1,6 +1,6 @@
 package shared
 
 type ListBillingAccountsResponse struct {
-	BillingAccounts []BillingAccount `json:"billingAccounts"`
-	NextPageToken   *string          `json:"nextPageToken"`
+	BillingAccounts []BillingAccount `json:"billingAccounts,omitempty"`
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
 }

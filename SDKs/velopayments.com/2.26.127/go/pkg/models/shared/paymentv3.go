@@ -16,17 +16,17 @@ const (
 )
 
 type PaymentV3 struct {
-	Amount            *int64                `json:"amount"`
-	Currency          *string               `json:"currency"`
-	Payee             *PayoutPayeeV3        `json:"payee"`
+	Amount            *int64                `json:"amount,omitempty"`
+	Currency          *string               `json:"currency,omitempty"`
+	Payee             *PayoutPayeeV3        `json:"payee,omitempty"`
 	PaymentID         string                `json:"paymentId"`
-	PaymentMemo       *string               `json:"paymentMemo"`
-	PaymentMetadata   *string               `json:"paymentMetadata"`
-	PayorPaymentID    *string               `json:"payorPaymentId"`
-	RemoteID          *string               `json:"remoteId"`
-	RemoteSystemID    *string               `json:"remoteSystemId"`
-	SourceAccountName *string               `json:"sourceAccountName"`
-	Status            *PaymentV3StatusEnum  `json:"status"`
-	TransmissionType  *TransmissionTypeEnum `json:"transmissionType"`
-	Withdrawable      *bool                 `json:"withdrawable"`
+	PaymentMemo       *string               `json:"paymentMemo,omitempty"`
+	PaymentMetadata   *string               `json:"paymentMetadata,omitempty"`
+	PayorPaymentID    *string               `json:"payorPaymentId,omitempty"`
+	RemoteID          *string               `json:"remoteId,omitempty"`
+	RemoteSystemID    *string               `json:"remoteSystemId,omitempty"`
+	SourceAccountName *string               `json:"sourceAccountName,omitempty"`
+	Status            *PaymentV3StatusEnum  `json:"status,omitempty"`
+	TransmissionType  *TransmissionTypeEnum `json:"transmissionType,omitempty"`
+	Withdrawable      *bool                 `json:"withdrawable,omitempty"`
 }

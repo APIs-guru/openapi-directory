@@ -1,6 +1,6 @@
 package shared
 
 type SecurityGroupMembership struct {
-	SecurityGroupID *string `json:"SecurityGroupId"`
-	Status          *string `json:"Status"`
+	SecurityGroupID *string `json:"SecurityGroupId,omitempty"`
+	Status          *string `json:"Status,omitempty"`
 }

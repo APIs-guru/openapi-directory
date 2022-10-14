@@ -1,18 +1,18 @@
 package shared
 
 type ProductPurchase struct {
-	AcknowledgementState        *int32  `json:"acknowledgementState"`
-	ConsumptionState            *int32  `json:"consumptionState"`
-	DeveloperPayload            *string `json:"developerPayload"`
-	Kind                        *string `json:"kind"`
-	ObfuscatedExternalAccountID *string `json:"obfuscatedExternalAccountId"`
-	ObfuscatedExternalProfileID *string `json:"obfuscatedExternalProfileId"`
-	OrderID                     *string `json:"orderId"`
-	ProductID                   *string `json:"productId"`
-	PurchaseState               *int32  `json:"purchaseState"`
-	PurchaseTimeMillis          *string `json:"purchaseTimeMillis"`
-	PurchaseToken               *string `json:"purchaseToken"`
-	PurchaseType                *int32  `json:"purchaseType"`
-	Quantity                    *int32  `json:"quantity"`
-	RegionCode                  *string `json:"regionCode"`
+	AcknowledgementState        *int32  `json:"acknowledgementState,omitempty"`
+	ConsumptionState            *int32  `json:"consumptionState,omitempty"`
+	DeveloperPayload            *string `json:"developerPayload,omitempty"`
+	Kind                        *string `json:"kind,omitempty"`
+	ObfuscatedExternalAccountID *string `json:"obfuscatedExternalAccountId,omitempty"`
+	ObfuscatedExternalProfileID *string `json:"obfuscatedExternalProfileId,omitempty"`
+	OrderID                     *string `json:"orderId,omitempty"`
+	ProductID                   *string `json:"productId,omitempty"`
+	PurchaseState               *int32  `json:"purchaseState,omitempty"`
+	PurchaseTimeMillis          *string `json:"purchaseTimeMillis,omitempty"`
+	PurchaseToken               *string `json:"purchaseToken,omitempty"`
+	PurchaseType                *int32  `json:"purchaseType,omitempty"`
+	Quantity                    *int32  `json:"quantity,omitempty"`
+	RegionCode                  *string `json:"regionCode,omitempty"`
 }

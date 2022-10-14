@@ -1,6 +1,6 @@
 package shared
 
 type DescribeReplicationTasksResponse struct {
-	Marker           *string           `json:"Marker"`
-	ReplicationTasks []ReplicationTask `json:"ReplicationTasks"`
+	Marker           *string           `json:"Marker,omitempty"`
+	ReplicationTasks []ReplicationTask `json:"ReplicationTasks,omitempty"`
 }

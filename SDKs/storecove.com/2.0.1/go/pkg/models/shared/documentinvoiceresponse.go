@@ -12,8 +12,8 @@ const (
 )
 
 type DocumentInvoiceResponse struct {
-	Clarifications []InvoiceResponseClarification                      `json:"clarifications"`
-	EffectiveDate  *string                                             `json:"effectiveDate"`
-	Note           *string                                             `json:"note"`
+	Clarifications []InvoiceResponseClarification                      `json:"clarifications,omitempty"`
+	EffectiveDate  *string                                             `json:"effectiveDate,omitempty"`
+	Note           *string                                             `json:"note,omitempty"`
 	ResponseCode   DocumentInvoiceResponseResponseCodeResponseCodeEnum `json:"responseCode"`
 }

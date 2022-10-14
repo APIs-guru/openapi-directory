@@ -1,12 +1,12 @@
 package shared
 
 type SendMessagesRequestFilters struct {
-	Attributes []map[string]interface{} `json:"attributes"`
-	Tags       []string                 `json:"tags"`
+	Attributes []map[string]interface{} `json:"attributes,omitempty"`
+	Tags       []string                 `json:"tags,omitempty"`
 }
 
 type SendMessagesRequestMedia struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type SendMessagesRequestTypeEnum string
@@ -17,11 +17,11 @@ const (
 )
 
 type SendMessagesRequest struct {
-	Contacts             []ContactRequest             `json:"contacts"`
-	ConversationStrategy *string                      `json:"conversationStrategy"`
-	Conversations        []string                     `json:"conversations"`
-	Filters              *SendMessagesRequestFilters  `json:"filters"`
-	Media                []SendMessagesRequestMedia   `json:"media"`
-	Template             *string                      `json:"template"`
-	Type                 *SendMessagesRequestTypeEnum `json:"type"`
+	Contacts             []ContactRequest             `json:"contacts,omitempty"`
+	ConversationStrategy *string                      `json:"conversationStrategy,omitempty"`
+	Conversations        []string                     `json:"conversations,omitempty"`
+	Filters              *SendMessagesRequestFilters  `json:"filters,omitempty"`
+	Media                []SendMessagesRequestMedia   `json:"media,omitempty"`
+	Template             *string                      `json:"template,omitempty"`
+	Type                 *SendMessagesRequestTypeEnum `json:"type,omitempty"`
 }

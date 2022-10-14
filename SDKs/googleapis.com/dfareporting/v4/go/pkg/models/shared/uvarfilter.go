@@ -9,9 +9,9 @@ const (
 )
 
 type UvarFilter struct {
-	Complement *bool                `json:"complement"`
-	Index      *string              `json:"index"`
-	Kind       *string              `json:"kind"`
-	Match      *UvarFilterMatchEnum `json:"match"`
-	Values     []string             `json:"values"`
+	Complement *bool                `json:"complement,omitempty"`
+	Index      *string              `json:"index,omitempty"`
+	Kind       *string              `json:"kind,omitempty"`
+	Match      *UvarFilterMatchEnum `json:"match,omitempty"`
+	Values     []string             `json:"values,omitempty"`
 }

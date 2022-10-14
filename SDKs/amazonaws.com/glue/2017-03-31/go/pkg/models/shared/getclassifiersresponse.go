@@ -1,6 +1,6 @@
 package shared
 
 type GetClassifiersResponse struct {
-	Classifiers []Classifier `json:"Classifiers"`
-	NextToken   *string      `json:"NextToken"`
+	Classifiers []Classifier `json:"Classifiers,omitempty"`
+	NextToken   *string      `json:"NextToken,omitempty"`
 }

@@ -5,10 +5,10 @@ import (
 )
 
 type IPRouteInfo struct {
-	AddedDateTime       *time.Time            `json:"AddedDateTime"`
-	CidrIP              *string               `json:"CidrIp"`
-	Description         *string               `json:"Description"`
-	DirectoryID         *string               `json:"DirectoryId"`
-	IPRouteStatusMsg    *IPRouteStatusMsgEnum `json:"IpRouteStatusMsg"`
-	IPRouteStatusReason *string               `json:"IpRouteStatusReason"`
+	AddedDateTime       *time.Time            `json:"AddedDateTime,omitempty"`
+	CidrIP              *string               `json:"CidrIp,omitempty"`
+	Description         *string               `json:"Description,omitempty"`
+	DirectoryID         *string               `json:"DirectoryId,omitempty"`
+	IPRouteStatusMsg    *IPRouteStatusMsgEnum `json:"IpRouteStatusMsg,omitempty"`
+	IPRouteStatusReason *string               `json:"IpRouteStatusReason,omitempty"`
 }

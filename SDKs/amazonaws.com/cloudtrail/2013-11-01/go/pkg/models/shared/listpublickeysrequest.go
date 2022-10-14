@@ -5,7 +5,7 @@ import (
 )
 
 type ListPublicKeysRequest struct {
-	EndTime   *time.Time `json:"EndTime"`
-	NextToken *string    `json:"NextToken"`
-	StartTime *time.Time `json:"StartTime"`
+	EndTime   *time.Time `json:"EndTime,omitempty"`
+	NextToken *string    `json:"NextToken,omitempty"`
+	StartTime *time.Time `json:"StartTime,omitempty"`
 }

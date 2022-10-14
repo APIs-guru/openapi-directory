@@ -19,23 +19,23 @@ const (
 )
 
 type Instance struct {
-	AuthorizedNetwork   *string                                      `json:"authorizedNetwork"`
-	CreateTime          *string                                      `json:"createTime"`
-	DiscoveryEndpoint   *string                                      `json:"discoveryEndpoint"`
-	DisplayName         *string                                      `json:"displayName"`
-	InstanceMessages    []InstanceMessage                            `json:"instanceMessages"`
-	Labels              map[string]string                            `json:"labels"`
-	MaintenancePolicy   *GoogleCloudMemcacheV1beta2MaintenancePolicy `json:"maintenancePolicy"`
-	MaintenanceSchedule *MaintenanceSchedule                         `json:"maintenanceSchedule"`
-	MemcacheFullVersion *string                                      `json:"memcacheFullVersion"`
-	MemcacheNodes       []Node                                       `json:"memcacheNodes"`
-	MemcacheVersion     *InstanceMemcacheVersionEnum                 `json:"memcacheVersion"`
-	Name                *string                                      `json:"name"`
-	NodeConfig          *NodeConfig                                  `json:"nodeConfig"`
-	NodeCount           *int32                                       `json:"nodeCount"`
-	Parameters          *MemcacheParameters                          `json:"parameters"`
-	State               *InstanceStateEnum                           `json:"state"`
-	UpdateAvailable     *bool                                        `json:"updateAvailable"`
-	UpdateTime          *string                                      `json:"updateTime"`
-	Zones               []string                                     `json:"zones"`
+	AuthorizedNetwork   *string                                      `json:"authorizedNetwork,omitempty"`
+	CreateTime          *string                                      `json:"createTime,omitempty"`
+	DiscoveryEndpoint   *string                                      `json:"discoveryEndpoint,omitempty"`
+	DisplayName         *string                                      `json:"displayName,omitempty"`
+	InstanceMessages    []InstanceMessage                            `json:"instanceMessages,omitempty"`
+	Labels              map[string]string                            `json:"labels,omitempty"`
+	MaintenancePolicy   *GoogleCloudMemcacheV1beta2MaintenancePolicy `json:"maintenancePolicy,omitempty"`
+	MaintenanceSchedule *MaintenanceSchedule                         `json:"maintenanceSchedule,omitempty"`
+	MemcacheFullVersion *string                                      `json:"memcacheFullVersion,omitempty"`
+	MemcacheNodes       []Node                                       `json:"memcacheNodes,omitempty"`
+	MemcacheVersion     *InstanceMemcacheVersionEnum                 `json:"memcacheVersion,omitempty"`
+	Name                *string                                      `json:"name,omitempty"`
+	NodeConfig          *NodeConfig                                  `json:"nodeConfig,omitempty"`
+	NodeCount           *int32                                       `json:"nodeCount,omitempty"`
+	Parameters          *MemcacheParameters                          `json:"parameters,omitempty"`
+	State               *InstanceStateEnum                           `json:"state,omitempty"`
+	UpdateAvailable     *bool                                        `json:"updateAvailable,omitempty"`
+	UpdateTime          *string                                      `json:"updateTime,omitempty"`
+	Zones               []string                                     `json:"zones,omitempty"`
 }

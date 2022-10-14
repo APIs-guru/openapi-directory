@@ -5,6 +5,6 @@ import (
 )
 
 type RegisterUsageResult struct {
-	PublicKeyRotationTimestamp *time.Time `json:"PublicKeyRotationTimestamp"`
-	Signature                  *string    `json:"Signature"`
+	PublicKeyRotationTimestamp *time.Time `json:"PublicKeyRotationTimestamp,omitempty"`
+	Signature                  *string    `json:"Signature,omitempty"`
 }

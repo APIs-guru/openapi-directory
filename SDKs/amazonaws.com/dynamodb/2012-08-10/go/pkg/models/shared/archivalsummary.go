@@ -5,7 +5,7 @@ import (
 )
 
 type ArchivalSummary struct {
-	ArchivalBackupArn *string    `json:"ArchivalBackupArn"`
-	ArchivalDateTime  *time.Time `json:"ArchivalDateTime"`
-	ArchivalReason    *string    `json:"ArchivalReason"`
+	ArchivalBackupArn *string    `json:"ArchivalBackupArn,omitempty"`
+	ArchivalDateTime  *time.Time `json:"ArchivalDateTime,omitempty"`
+	ArchivalReason    *string    `json:"ArchivalReason,omitempty"`
 }

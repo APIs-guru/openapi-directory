@@ -13,7 +13,7 @@ const (
 )
 
 type TextToColumnsRequest struct {
-	Delimiter     *string                                `json:"delimiter"`
-	DelimiterType *TextToColumnsRequestDelimiterTypeEnum `json:"delimiterType"`
-	Source        *GridRange                             `json:"source"`
+	Delimiter     *string                                `json:"delimiter,omitempty"`
+	DelimiterType *TextToColumnsRequestDelimiterTypeEnum `json:"delimiterType,omitempty"`
+	Source        *GridRange                             `json:"source,omitempty"`
 }

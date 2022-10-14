@@ -22,7 +22,7 @@ const (
 )
 
 type MeasurementPartnerAdvertiserLink struct {
-	LinkStatus          *MeasurementPartnerAdvertiserLinkLinkStatusEnum         `json:"linkStatus"`
-	MeasurementPartner  *MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum `json:"measurementPartner"`
-	PartnerAdvertiserID *string                                                 `json:"partnerAdvertiserId"`
+	LinkStatus          *MeasurementPartnerAdvertiserLinkLinkStatusEnum         `json:"linkStatus,omitempty"`
+	MeasurementPartner  *MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum `json:"measurementPartner,omitempty"`
+	PartnerAdvertiserID *string                                                 `json:"partnerAdvertiserId,omitempty"`
 }

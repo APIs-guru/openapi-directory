@@ -1,14 +1,14 @@
 package shared
 
 type InstancePortInfo struct {
-	AccessDirection *AccessDirectionEnum `json:"accessDirection"`
-	AccessFrom      *string              `json:"accessFrom"`
-	AccessType      *PortAccessTypeEnum  `json:"accessType"`
-	CidrListAliases []string             `json:"cidrListAliases"`
-	Cidrs           []string             `json:"cidrs"`
-	CommonName      *string              `json:"commonName"`
-	FromPort        *int64               `json:"fromPort"`
-	Ipv6Cidrs       []string             `json:"ipv6Cidrs"`
-	Protocol        *NetworkProtocolEnum `json:"protocol"`
-	ToPort          *int64               `json:"toPort"`
+	AccessDirection *AccessDirectionEnum `json:"accessDirection,omitempty"`
+	AccessFrom      *string              `json:"accessFrom,omitempty"`
+	AccessType      *PortAccessTypeEnum  `json:"accessType,omitempty"`
+	CidrListAliases []string             `json:"cidrListAliases,omitempty"`
+	Cidrs           []string             `json:"cidrs,omitempty"`
+	CommonName      *string              `json:"commonName,omitempty"`
+	FromPort        *int64               `json:"fromPort,omitempty"`
+	Ipv6Cidrs       []string             `json:"ipv6Cidrs,omitempty"`
+	Protocol        *NetworkProtocolEnum `json:"protocol,omitempty"`
+	ToPort          *int64               `json:"toPort,omitempty"`
 }

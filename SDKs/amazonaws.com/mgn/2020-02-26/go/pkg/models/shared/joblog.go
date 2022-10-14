@@ -1,7 +1,7 @@
 package shared
 
 type JobLog struct {
-	Event       *JobLogEventEnum `json:"event"`
-	EventData   *JobLogEventData `json:"eventData"`
-	LogDateTime *string          `json:"logDateTime"`
+	Event       *JobLogEventEnum `json:"event,omitempty"`
+	EventData   *JobLogEventData `json:"eventData,omitempty"`
+	LogDateTime *string          `json:"logDateTime,omitempty"`
 }

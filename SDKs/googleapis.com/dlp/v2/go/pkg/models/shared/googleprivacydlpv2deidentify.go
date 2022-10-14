@@ -17,8 +17,8 @@ const (
 )
 
 type GooglePrivacyDlpV2Deidentify struct {
-	CloudStorageOutput                 *string                                                `json:"cloudStorageOutput"`
-	FileTypesToTransform               []GooglePrivacyDlpV2DeidentifyFileTypesToTransformEnum `json:"fileTypesToTransform"`
-	TransformationConfig               *GooglePrivacyDlpV2TransformationConfig                `json:"transformationConfig"`
-	TransformationDetailsStorageConfig *GooglePrivacyDlpV2TransformationDetailsStorageConfig  `json:"transformationDetailsStorageConfig"`
+	CloudStorageOutput                 *string                                                `json:"cloudStorageOutput,omitempty"`
+	FileTypesToTransform               []GooglePrivacyDlpV2DeidentifyFileTypesToTransformEnum `json:"fileTypesToTransform,omitempty"`
+	TransformationConfig               *GooglePrivacyDlpV2TransformationConfig                `json:"transformationConfig,omitempty"`
+	TransformationDetailsStorageConfig *GooglePrivacyDlpV2TransformationDetailsStorageConfig  `json:"transformationDetailsStorageConfig,omitempty"`
 }

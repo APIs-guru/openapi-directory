@@ -18,10 +18,10 @@ const (
 )
 
 type Client struct {
-	DisplayName     *string          `json:"displayName"`
-	Name            *string          `json:"name"`
-	PartnerClientID *string          `json:"partnerClientId"`
-	Role            *ClientRoleEnum  `json:"role"`
-	SellerVisible   *bool            `json:"sellerVisible"`
-	State           *ClientStateEnum `json:"state"`
+	DisplayName     *string          `json:"displayName,omitempty"`
+	Name            *string          `json:"name,omitempty"`
+	PartnerClientID *string          `json:"partnerClientId,omitempty"`
+	Role            *ClientRoleEnum  `json:"role,omitempty"`
+	SellerVisible   *bool            `json:"sellerVisible,omitempty"`
+	State           *ClientStateEnum `json:"state,omitempty"`
 }

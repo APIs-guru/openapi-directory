@@ -1,6 +1,6 @@
 package shared
 
 type RuntimeConfig struct {
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }

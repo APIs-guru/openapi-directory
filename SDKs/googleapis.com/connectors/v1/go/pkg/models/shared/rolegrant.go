@@ -8,8 +8,8 @@ const (
 )
 
 type RoleGrant struct {
-	HelperTextTemplate *string                 `json:"helperTextTemplate"`
-	Principal          *RoleGrantPrincipalEnum `json:"principal"`
-	Resource           *Resource               `json:"resource"`
-	Roles              []string                `json:"roles"`
+	HelperTextTemplate *string                 `json:"helperTextTemplate,omitempty"`
+	Principal          *RoleGrantPrincipalEnum `json:"principal,omitempty"`
+	Resource           *Resource               `json:"resource,omitempty"`
+	Roles              []string                `json:"roles,omitempty"`
 }

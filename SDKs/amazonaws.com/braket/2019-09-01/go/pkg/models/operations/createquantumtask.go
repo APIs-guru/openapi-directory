@@ -18,11 +18,11 @@ type CreateQuantumTaskRequestBody struct {
 	Action            string            `json:"action"`
 	ClientToken       string            `json:"clientToken"`
 	DeviceArn         string            `json:"deviceArn"`
-	DeviceParameters  *string           `json:"deviceParameters"`
+	DeviceParameters  *string           `json:"deviceParameters,omitempty"`
 	OutputS3Bucket    string            `json:"outputS3Bucket"`
 	OutputS3KeyPrefix string            `json:"outputS3KeyPrefix"`
 	Shots             int64             `json:"shots"`
-	Tags              map[string]string `json:"tags"`
+	Tags              map[string]string `json:"tags,omitempty"`
 }
 
 type CreateQuantumTaskRequest struct {

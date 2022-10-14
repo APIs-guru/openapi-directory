@@ -1,5 +1,5 @@
 package shared
 
 type GatewayRouteHostnameRewrite struct {
-	DefaultTargetHostname *DefaultGatewayRouteRewriteEnum `json:"defaultTargetHostname"`
+	DefaultTargetHostname *DefaultGatewayRouteRewriteEnum `json:"defaultTargetHostname,omitempty"`
 }

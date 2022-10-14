@@ -1,11 +1,11 @@
 package shared
 
 type GoogleAppsDriveLabelsV2betaLabelLimits struct {
-	FieldLimits          *GoogleAppsDriveLabelsV2betaFieldLimits `json:"fieldLimits"`
-	MaxDeletedFields     *int32                                  `json:"maxDeletedFields"`
-	MaxDescriptionLength *int32                                  `json:"maxDescriptionLength"`
-	MaxDraftRevisions    *int32                                  `json:"maxDraftRevisions"`
-	MaxFields            *int32                                  `json:"maxFields"`
-	MaxTitleLength       *int32                                  `json:"maxTitleLength"`
-	Name                 *string                                 `json:"name"`
+	FieldLimits          *GoogleAppsDriveLabelsV2betaFieldLimits `json:"fieldLimits,omitempty"`
+	MaxDeletedFields     *int32                                  `json:"maxDeletedFields,omitempty"`
+	MaxDescriptionLength *int32                                  `json:"maxDescriptionLength,omitempty"`
+	MaxDraftRevisions    *int32                                  `json:"maxDraftRevisions,omitempty"`
+	MaxFields            *int32                                  `json:"maxFields,omitempty"`
+	MaxTitleLength       *int32                                  `json:"maxTitleLength,omitempty"`
+	Name                 *string                                 `json:"name,omitempty"`
 }

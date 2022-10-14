@@ -1,7 +1,7 @@
 package shared
 
 type Input struct {
-	Key                 *string              `json:"key"`
-	PreprocessingConfig *PreprocessingConfig `json:"preprocessingConfig"`
-	URI                 *string              `json:"uri"`
+	Key                 *string              `json:"key,omitempty"`
+	PreprocessingConfig *PreprocessingConfig `json:"preprocessingConfig,omitempty"`
+	URI                 *string              `json:"uri,omitempty"`
 }

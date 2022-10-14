@@ -11,9 +11,9 @@ type PostProjectUsernameProjectTreeBranchPathParams struct {
 }
 
 type PostProjectUsernameProjectTreeBranchRequestBody struct {
-	BuildParameters map[string]interface{} `json:"build_parameters"`
-	Parallel        *string                `json:"parallel"`
-	Revision        *string                `json:"revision"`
+	BuildParameters map[string]interface{} `json:"build_parameters,omitempty"`
+	Parallel        *string                `json:"parallel,omitempty"`
+	Revision        *string                `json:"revision,omitempty"`
 }
 
 type PostProjectUsernameProjectTreeBranchRequest struct {

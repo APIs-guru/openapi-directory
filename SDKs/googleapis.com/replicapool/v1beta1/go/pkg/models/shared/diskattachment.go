@@ -1,6 +1,6 @@
 package shared
 
 type DiskAttachment struct {
-	DeviceName *string `json:"deviceName"`
-	Index      *int64  `json:"index"`
+	DeviceName *string `json:"deviceName,omitempty"`
+	Index      *int64  `json:"index,omitempty"`
 }

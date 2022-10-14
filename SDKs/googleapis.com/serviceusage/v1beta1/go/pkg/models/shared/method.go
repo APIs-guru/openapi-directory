@@ -8,11 +8,11 @@ const (
 )
 
 type Method struct {
-	Name              *string           `json:"name"`
-	Options           []Option          `json:"options"`
-	RequestStreaming  *bool             `json:"requestStreaming"`
-	RequestTypeURL    *string           `json:"requestTypeUrl"`
-	ResponseStreaming *bool             `json:"responseStreaming"`
-	ResponseTypeURL   *string           `json:"responseTypeUrl"`
-	Syntax            *MethodSyntaxEnum `json:"syntax"`
+	Name              *string           `json:"name,omitempty"`
+	Options           []Option          `json:"options,omitempty"`
+	RequestStreaming  *bool             `json:"requestStreaming,omitempty"`
+	RequestTypeURL    *string           `json:"requestTypeUrl,omitempty"`
+	ResponseStreaming *bool             `json:"responseStreaming,omitempty"`
+	ResponseTypeURL   *string           `json:"responseTypeUrl,omitempty"`
+	Syntax            *MethodSyntaxEnum `json:"syntax,omitempty"`
 }

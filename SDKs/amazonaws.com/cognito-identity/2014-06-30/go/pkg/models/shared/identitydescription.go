@@ -5,8 +5,8 @@ import (
 )
 
 type IdentityDescription struct {
-	CreationDate     *time.Time `json:"CreationDate"`
-	IdentityID       *string    `json:"IdentityId"`
-	LastModifiedDate *time.Time `json:"LastModifiedDate"`
-	Logins           []string   `json:"Logins"`
+	CreationDate     *time.Time `json:"CreationDate,omitempty"`
+	IdentityID       *string    `json:"IdentityId,omitempty"`
+	LastModifiedDate *time.Time `json:"LastModifiedDate,omitempty"`
+	Logins           []string   `json:"Logins,omitempty"`
 }

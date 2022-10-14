@@ -27,18 +27,18 @@ type GetDailyReportAllCountriesRequest struct {
 }
 
 type GetDailyReportAllCountries200ApplicationJSONProvince struct {
-	Active    *int64 `json:"active"`
-	Confirmed *int64 `json:"confirmed"`
-	Deaths    *int64 `json:"deaths"`
-	Recovered *int64 `json:"recovered"`
+	Active    *int64 `json:"active,omitempty"`
+	Confirmed *int64 `json:"confirmed,omitempty"`
+	Deaths    *int64 `json:"deaths,omitempty"`
+	Recovered *int64 `json:"recovered,omitempty"`
 }
 
 type GetDailyReportAllCountries200ApplicationJSON struct {
-	Country   *string                                                `json:"country"`
-	Date      *string                                                `json:"date"`
-	Latitude  *float32                                               `json:"latitude"`
-	Longitude *float32                                               `json:"longitude"`
-	Province  []GetDailyReportAllCountries200ApplicationJSONProvince `json:"province"`
+	Country   *string                                                `json:"country,omitempty"`
+	Date      *string                                                `json:"date,omitempty"`
+	Latitude  *float32                                               `json:"latitude,omitempty"`
+	Longitude *float32                                               `json:"longitude,omitempty"`
+	Province  []GetDailyReportAllCountries200ApplicationJSONProvince `json:"province,omitempty"`
 }
 
 type GetDailyReportAllCountriesResponse struct {

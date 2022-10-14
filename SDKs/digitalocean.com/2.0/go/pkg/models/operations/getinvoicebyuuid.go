@@ -13,31 +13,31 @@ type GetInvoiceByUUIDRequest struct {
 }
 
 type GetInvoiceByUUID200ApplicationJSONInvoiceItems struct {
-	Amount           *string `json:"amount"`
-	Description      *string `json:"description"`
-	Duration         *string `json:"duration"`
-	DurationUnit     *string `json:"duration_unit"`
-	EndTime          *string `json:"end_time"`
-	GroupDescription *string `json:"group_description"`
-	Product          *string `json:"product"`
-	ProjectName      *string `json:"project_name"`
-	ResourceID       *string `json:"resource_id"`
-	ResourceUUID     *string `json:"resource_uuid"`
-	StartTime        *string `json:"start_time"`
+	Amount           *string `json:"amount,omitempty"`
+	Description      *string `json:"description,omitempty"`
+	Duration         *string `json:"duration,omitempty"`
+	DurationUnit     *string `json:"duration_unit,omitempty"`
+	EndTime          *string `json:"end_time,omitempty"`
+	GroupDescription *string `json:"group_description,omitempty"`
+	Product          *string `json:"product,omitempty"`
+	ProjectName      *string `json:"project_name,omitempty"`
+	ResourceID       *string `json:"resource_id,omitempty"`
+	ResourceUUID     *string `json:"resource_uuid,omitempty"`
+	StartTime        *string `json:"start_time,omitempty"`
 }
 
 type GetInvoiceByUUID200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type GetInvoiceByUUID200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type GetInvoiceByUUID200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type GetInvoiceByUUID200ApplicationJSONMeta struct {
@@ -45,15 +45,15 @@ type GetInvoiceByUUID200ApplicationJSONMeta struct {
 }
 
 type GetInvoiceByUUID200ApplicationJSON struct {
-	InvoiceItems []GetInvoiceByUUID200ApplicationJSONInvoiceItems `json:"invoice_items"`
-	Links        *GetInvoiceByUUID200ApplicationJSONLinks         `json:"links"`
+	InvoiceItems []GetInvoiceByUUID200ApplicationJSONInvoiceItems `json:"invoice_items,omitempty"`
+	Links        *GetInvoiceByUUID200ApplicationJSONLinks         `json:"links,omitempty"`
 	Meta         GetInvoiceByUUID200ApplicationJSONMeta           `json:"meta"`
 }
 
 type GetInvoiceByUUID401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetInvoiceByUUIDResponse struct {

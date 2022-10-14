@@ -1,7 +1,7 @@
 package shared
 
 type ListDeliveryPipelinesResponse struct {
-	DeliveryPipelines []DeliveryPipeline `json:"deliveryPipelines"`
-	NextPageToken     *string            `json:"nextPageToken"`
-	Unreachable       []string           `json:"unreachable"`
+	DeliveryPipelines []DeliveryPipeline `json:"deliveryPipelines,omitempty"`
+	NextPageToken     *string            `json:"nextPageToken,omitempty"`
+	Unreachable       []string           `json:"unreachable,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Referrer struct {
-	Count  *int64  `json:"count"`
-	Source *string `json:"source"`
+	Count  *int64  `json:"count,omitempty"`
+	Source *string `json:"source,omitempty"`
 }

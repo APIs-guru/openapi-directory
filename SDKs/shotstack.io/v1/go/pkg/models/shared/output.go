@@ -50,15 +50,15 @@ const (
 )
 
 type Output struct {
-	AspectRatio  *OutputAspectRatioEnum `json:"aspectRatio"`
-	Destinations []interface{}          `json:"destinations"`
+	AspectRatio  *OutputAspectRatioEnum `json:"aspectRatio,omitempty"`
+	Destinations []interface{}          `json:"destinations,omitempty"`
 	Format       OutputFormatEnum       `json:"format"`
-	Fps          *int64                 `json:"fps"`
-	Poster       *Poster                `json:"poster"`
-	Quality      *OutputQualityEnum     `json:"quality"`
-	Range        *Range                 `json:"range"`
-	Resolution   *OutputResolutionEnum  `json:"resolution"`
-	ScaleTo      *OutputScaleToEnum     `json:"scaleTo"`
-	Size         *Size                  `json:"size"`
-	Thumbnail    *Thumbnail             `json:"thumbnail"`
+	Fps          *int64                 `json:"fps,omitempty"`
+	Poster       *Poster                `json:"poster,omitempty"`
+	Quality      *OutputQualityEnum     `json:"quality,omitempty"`
+	Range        *Range                 `json:"range,omitempty"`
+	Resolution   *OutputResolutionEnum  `json:"resolution,omitempty"`
+	ScaleTo      *OutputScaleToEnum     `json:"scaleTo,omitempty"`
+	Size         *Size                  `json:"size,omitempty"`
+	Thumbnail    *Thumbnail             `json:"thumbnail,omitempty"`
 }

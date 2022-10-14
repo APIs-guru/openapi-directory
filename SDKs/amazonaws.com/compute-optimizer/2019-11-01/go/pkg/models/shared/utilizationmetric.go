@@ -1,7 +1,7 @@
 package shared
 
 type UtilizationMetric struct {
-	Name      *MetricNameEnum      `json:"name"`
-	Statistic *MetricStatisticEnum `json:"statistic"`
-	Value     *float64             `json:"value"`
+	Name      *MetricNameEnum      `json:"name,omitempty"`
+	Statistic *MetricStatisticEnum `json:"statistic,omitempty"`
+	Value     *float64             `json:"value,omitempty"`
 }

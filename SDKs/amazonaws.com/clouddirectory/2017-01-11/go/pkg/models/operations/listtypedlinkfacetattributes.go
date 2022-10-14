@@ -21,9 +21,9 @@ type ListTypedLinkFacetAttributesHeaders struct {
 }
 
 type ListTypedLinkFacetAttributesRequestBody struct {
-	MaxResults *int64  `json:"MaxResults"`
+	MaxResults *int64  `json:"MaxResults,omitempty"`
 	Name       string  `json:"Name"`
-	NextToken  *string `json:"NextToken"`
+	NextToken  *string `json:"NextToken,omitempty"`
 }
 
 type ListTypedLinkFacetAttributesRequest struct {

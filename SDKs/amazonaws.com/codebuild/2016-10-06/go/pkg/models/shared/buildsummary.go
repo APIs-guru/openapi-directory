@@ -5,9 +5,9 @@ import (
 )
 
 type BuildSummary struct {
-	Arn                *string            `json:"arn"`
-	BuildStatus        *StatusTypeEnum    `json:"buildStatus"`
-	PrimaryArtifact    *ResolvedArtifact  `json:"primaryArtifact"`
-	RequestedOn        *time.Time         `json:"requestedOn"`
-	SecondaryArtifacts []ResolvedArtifact `json:"secondaryArtifacts"`
+	Arn                *string            `json:"arn,omitempty"`
+	BuildStatus        *StatusTypeEnum    `json:"buildStatus,omitempty"`
+	PrimaryArtifact    *ResolvedArtifact  `json:"primaryArtifact,omitempty"`
+	RequestedOn        *time.Time         `json:"requestedOn,omitempty"`
+	SecondaryArtifacts []ResolvedArtifact `json:"secondaryArtifacts,omitempty"`
 }

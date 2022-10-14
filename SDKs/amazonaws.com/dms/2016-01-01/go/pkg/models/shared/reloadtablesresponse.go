@@ -1,5 +1,5 @@
 package shared
 
 type ReloadTablesResponse struct {
-	ReplicationTaskArn *string `json:"ReplicationTaskArn"`
+	ReplicationTaskArn *string `json:"ReplicationTaskArn,omitempty"`
 }

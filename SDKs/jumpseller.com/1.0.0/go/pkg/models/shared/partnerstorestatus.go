@@ -1,10 +1,10 @@
 package shared
 
 type PartnerStoreStatusStatus struct {
-	Message    *string `json:"message"`
-	Percentage *string `json:"percentage"`
+	Message    *string `json:"message,omitempty"`
+	Percentage *string `json:"percentage,omitempty"`
 }
 
 type PartnerStoreStatus struct {
-	Status *PartnerStoreStatusStatus `json:"status"`
+	Status *PartnerStoreStatusStatus `json:"status,omitempty"`
 }

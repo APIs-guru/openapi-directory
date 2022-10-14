@@ -1,9 +1,9 @@
 package shared
 
 type GetPersonTrackingResponse struct {
-	JobStatus     *VideoJobStatusEnum `json:"JobStatus"`
-	NextToken     *string             `json:"NextToken"`
-	Persons       []PersonDetection   `json:"Persons"`
-	StatusMessage *string             `json:"StatusMessage"`
-	VideoMetadata *VideoMetadata      `json:"VideoMetadata"`
+	JobStatus     *VideoJobStatusEnum `json:"JobStatus,omitempty"`
+	NextToken     *string             `json:"NextToken,omitempty"`
+	Persons       []PersonDetection   `json:"Persons,omitempty"`
+	StatusMessage *string             `json:"StatusMessage,omitempty"`
+	VideoMetadata *VideoMetadata      `json:"VideoMetadata,omitempty"`
 }

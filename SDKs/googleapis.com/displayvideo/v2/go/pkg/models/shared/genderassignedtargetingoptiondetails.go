@@ -10,5 +10,5 @@ const (
 )
 
 type GenderAssignedTargetingOptionDetails struct {
-	Gender *GenderAssignedTargetingOptionDetailsGenderEnum `json:"gender"`
+	Gender *GenderAssignedTargetingOptionDetailsGenderEnum `json:"gender,omitempty"`
 }

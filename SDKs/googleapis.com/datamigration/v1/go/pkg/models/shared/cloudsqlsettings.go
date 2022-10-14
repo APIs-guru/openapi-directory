@@ -32,20 +32,20 @@ const (
 )
 
 type CloudSQLSettings struct {
-	ActivationPolicy       *CloudSQLSettingsActivationPolicyEnum `json:"activationPolicy"`
-	AutoStorageIncrease    *bool                                 `json:"autoStorageIncrease"`
-	CmekKeyName            *string                               `json:"cmekKeyName"`
-	Collation              *string                               `json:"collation"`
-	DataDiskSizeGb         *string                               `json:"dataDiskSizeGb"`
-	DataDiskType           *CloudSQLSettingsDataDiskTypeEnum     `json:"dataDiskType"`
-	DatabaseFlags          map[string]string                     `json:"databaseFlags"`
-	DatabaseVersion        *CloudSQLSettingsDatabaseVersionEnum  `json:"databaseVersion"`
-	IPConfig               *SQLIPConfig                          `json:"ipConfig"`
-	RootPassword           *string                               `json:"rootPassword"`
-	RootPasswordSet        *bool                                 `json:"rootPasswordSet"`
-	SourceID               *string                               `json:"sourceId"`
-	StorageAutoResizeLimit *string                               `json:"storageAutoResizeLimit"`
-	Tier                   *string                               `json:"tier"`
-	UserLabels             map[string]string                     `json:"userLabels"`
-	Zone                   *string                               `json:"zone"`
+	ActivationPolicy       *CloudSQLSettingsActivationPolicyEnum `json:"activationPolicy,omitempty"`
+	AutoStorageIncrease    *bool                                 `json:"autoStorageIncrease,omitempty"`
+	CmekKeyName            *string                               `json:"cmekKeyName,omitempty"`
+	Collation              *string                               `json:"collation,omitempty"`
+	DataDiskSizeGb         *string                               `json:"dataDiskSizeGb,omitempty"`
+	DataDiskType           *CloudSQLSettingsDataDiskTypeEnum     `json:"dataDiskType,omitempty"`
+	DatabaseFlags          map[string]string                     `json:"databaseFlags,omitempty"`
+	DatabaseVersion        *CloudSQLSettingsDatabaseVersionEnum  `json:"databaseVersion,omitempty"`
+	IPConfig               *SQLIPConfig                          `json:"ipConfig,omitempty"`
+	RootPassword           *string                               `json:"rootPassword,omitempty"`
+	RootPasswordSet        *bool                                 `json:"rootPasswordSet,omitempty"`
+	SourceID               *string                               `json:"sourceId,omitempty"`
+	StorageAutoResizeLimit *string                               `json:"storageAutoResizeLimit,omitempty"`
+	Tier                   *string                               `json:"tier,omitempty"`
+	UserLabels             map[string]string                     `json:"userLabels,omitempty"`
+	Zone                   *string                               `json:"zone,omitempty"`
 }

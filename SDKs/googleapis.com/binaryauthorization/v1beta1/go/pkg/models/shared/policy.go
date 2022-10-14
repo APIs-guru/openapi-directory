@@ -9,15 +9,15 @@ const (
 )
 
 type Policy struct {
-	AdmissionWhitelistPatterns             []AdmissionWhitelistPattern           `json:"admissionWhitelistPatterns"`
-	ClusterAdmissionRules                  map[string]AdmissionRule              `json:"clusterAdmissionRules"`
-	DefaultAdmissionRule                   *AdmissionRule                        `json:"defaultAdmissionRule"`
-	Description                            *string                               `json:"description"`
-	Etag                                   *string                               `json:"etag"`
-	GlobalPolicyEvaluationMode             *PolicyGlobalPolicyEvaluationModeEnum `json:"globalPolicyEvaluationMode"`
-	IstioServiceIdentityAdmissionRules     map[string]AdmissionRule              `json:"istioServiceIdentityAdmissionRules"`
-	KubernetesNamespaceAdmissionRules      map[string]AdmissionRule              `json:"kubernetesNamespaceAdmissionRules"`
-	KubernetesServiceAccountAdmissionRules map[string]AdmissionRule              `json:"kubernetesServiceAccountAdmissionRules"`
-	Name                                   *string                               `json:"name"`
-	UpdateTime                             *string                               `json:"updateTime"`
+	AdmissionWhitelistPatterns             []AdmissionWhitelistPattern           `json:"admissionWhitelistPatterns,omitempty"`
+	ClusterAdmissionRules                  map[string]AdmissionRule              `json:"clusterAdmissionRules,omitempty"`
+	DefaultAdmissionRule                   *AdmissionRule                        `json:"defaultAdmissionRule,omitempty"`
+	Description                            *string                               `json:"description,omitempty"`
+	Etag                                   *string                               `json:"etag,omitempty"`
+	GlobalPolicyEvaluationMode             *PolicyGlobalPolicyEvaluationModeEnum `json:"globalPolicyEvaluationMode,omitempty"`
+	IstioServiceIdentityAdmissionRules     map[string]AdmissionRule              `json:"istioServiceIdentityAdmissionRules,omitempty"`
+	KubernetesNamespaceAdmissionRules      map[string]AdmissionRule              `json:"kubernetesNamespaceAdmissionRules,omitempty"`
+	KubernetesServiceAccountAdmissionRules map[string]AdmissionRule              `json:"kubernetesServiceAccountAdmissionRules,omitempty"`
+	Name                                   *string                               `json:"name,omitempty"`
+	UpdateTime                             *string                               `json:"updateTime,omitempty"`
 }

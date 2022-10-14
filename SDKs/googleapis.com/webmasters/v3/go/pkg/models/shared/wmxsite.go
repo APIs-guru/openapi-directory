@@ -1,6 +1,6 @@
 package shared
 
 type WmxSite struct {
-	PermissionLevel *string `json:"permissionLevel"`
-	SiteURL         *string `json:"siteUrl"`
+	PermissionLevel *string `json:"permissionLevel,omitempty"`
+	SiteURL         *string `json:"siteUrl,omitempty"`
 }

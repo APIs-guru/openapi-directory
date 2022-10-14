@@ -9,6 +9,6 @@ const (
 )
 
 type AchievementRevealResponse struct {
-	CurrentState *AchievementRevealResponseCurrentStateEnum `json:"currentState"`
-	Kind         *string                                    `json:"kind"`
+	CurrentState *AchievementRevealResponseCurrentStateEnum `json:"currentState,omitempty"`
+	Kind         *string                                    `json:"kind,omitempty"`
 }

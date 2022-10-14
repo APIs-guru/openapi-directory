@@ -15,5 +15,5 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails struct {
-	Reason *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetailsReasonEnum `json:"reason"`
+	Reason *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetailsReasonEnum `json:"reason,omitempty"`
 }

@@ -31,18 +31,18 @@ const (
 )
 
 type AlbumContract struct {
-	AdditionalNames  *string                     `json:"additionalNames"`
-	ArtistString     *string                     `json:"artistString"`
-	CoverPictureMime *string                     `json:"coverPictureMime"`
-	CreateDate       *time.Time                  `json:"createDate"`
-	Deleted          *bool                       `json:"deleted"`
-	DiscType         *AlbumContractDiscTypeEnum  `json:"discType"`
-	ID               *int32                      `json:"id"`
-	Name             *string                     `json:"name"`
-	RatingAverage    *float64                    `json:"ratingAverage"`
-	RatingCount      *int32                      `json:"ratingCount"`
-	ReleaseDate      *OptionalDateTimeContract   `json:"releaseDate"`
-	ReleaseEvent     *ReleaseEventForAPIContract `json:"releaseEvent"`
-	Status           *AlbumContractStatusEnum    `json:"status"`
-	Version          *int32                      `json:"version"`
+	AdditionalNames  *string                     `json:"additionalNames,omitempty"`
+	ArtistString     *string                     `json:"artistString,omitempty"`
+	CoverPictureMime *string                     `json:"coverPictureMime,omitempty"`
+	CreateDate       *time.Time                  `json:"createDate,omitempty"`
+	Deleted          *bool                       `json:"deleted,omitempty"`
+	DiscType         *AlbumContractDiscTypeEnum  `json:"discType,omitempty"`
+	ID               *int32                      `json:"id,omitempty"`
+	Name             *string                     `json:"name,omitempty"`
+	RatingAverage    *float64                    `json:"ratingAverage,omitempty"`
+	RatingCount      *int32                      `json:"ratingCount,omitempty"`
+	ReleaseDate      *OptionalDateTimeContract   `json:"releaseDate,omitempty"`
+	ReleaseEvent     *ReleaseEventForAPIContract `json:"releaseEvent,omitempty"`
+	Status           *AlbumContractStatusEnum    `json:"status,omitempty"`
+	Version          *int32                      `json:"version,omitempty"`
 }

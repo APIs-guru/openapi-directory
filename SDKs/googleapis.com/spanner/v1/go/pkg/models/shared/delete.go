@@ -1,6 +1,6 @@
 package shared
 
 type Delete struct {
-	KeySet *KeySet `json:"keySet"`
-	Table  *string `json:"table"`
+	KeySet *KeySet `json:"keySet,omitempty"`
+	Table  *string `json:"table,omitempty"`
 }

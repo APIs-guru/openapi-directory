@@ -16,11 +16,11 @@ const (
 )
 
 type InventoryItem struct {
-	AvailablePackage *InventorySoftwarePackage    `json:"availablePackage"`
-	CreateTime       *string                      `json:"createTime"`
-	ID               *string                      `json:"id"`
-	InstalledPackage *InventorySoftwarePackage    `json:"installedPackage"`
-	OriginType       *InventoryItemOriginTypeEnum `json:"originType"`
-	Type             *InventoryItemTypeEnum       `json:"type"`
-	UpdateTime       *string                      `json:"updateTime"`
+	AvailablePackage *InventorySoftwarePackage    `json:"availablePackage,omitempty"`
+	CreateTime       *string                      `json:"createTime,omitempty"`
+	ID               *string                      `json:"id,omitempty"`
+	InstalledPackage *InventorySoftwarePackage    `json:"installedPackage,omitempty"`
+	OriginType       *InventoryItemOriginTypeEnum `json:"originType,omitempty"`
+	Type             *InventoryItemTypeEnum       `json:"type,omitempty"`
+	UpdateTime       *string                      `json:"updateTime,omitempty"`
 }

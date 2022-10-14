@@ -66,12 +66,12 @@ const (
 )
 
 type GoogleCloudRunV2Condition struct {
-	ExecutionReason    *GoogleCloudRunV2ConditionExecutionReasonEnum `json:"executionReason"`
-	LastTransitionTime *string                                       `json:"lastTransitionTime"`
-	Message            *string                                       `json:"message"`
-	Reason             *GoogleCloudRunV2ConditionReasonEnum          `json:"reason"`
-	RevisionReason     *GoogleCloudRunV2ConditionRevisionReasonEnum  `json:"revisionReason"`
-	Severity           *GoogleCloudRunV2ConditionSeverityEnum        `json:"severity"`
-	State              *GoogleCloudRunV2ConditionStateEnum           `json:"state"`
-	Type               *string                                       `json:"type"`
+	ExecutionReason    *GoogleCloudRunV2ConditionExecutionReasonEnum `json:"executionReason,omitempty"`
+	LastTransitionTime *string                                       `json:"lastTransitionTime,omitempty"`
+	Message            *string                                       `json:"message,omitempty"`
+	Reason             *GoogleCloudRunV2ConditionReasonEnum          `json:"reason,omitempty"`
+	RevisionReason     *GoogleCloudRunV2ConditionRevisionReasonEnum  `json:"revisionReason,omitempty"`
+	Severity           *GoogleCloudRunV2ConditionSeverityEnum        `json:"severity,omitempty"`
+	State              *GoogleCloudRunV2ConditionStateEnum           `json:"state,omitempty"`
+	Type               *string                                       `json:"type,omitempty"`
 }

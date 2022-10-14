@@ -1,9 +1,9 @@
 package shared
 
 type SchemaGroup struct {
-	Choice    *bool            `json:"choice"`
-	MaxOccurs *int32           `json:"maxOccurs"`
-	Members   []GroupOrSegment `json:"members"`
-	MinOccurs *int32           `json:"minOccurs"`
-	Name      *string          `json:"name"`
+	Choice    *bool            `json:"choice,omitempty"`
+	MaxOccurs *int32           `json:"maxOccurs,omitempty"`
+	Members   []GroupOrSegment `json:"members,omitempty"`
+	MinOccurs *int32           `json:"minOccurs,omitempty"`
+	Name      *string          `json:"name,omitempty"`
 }

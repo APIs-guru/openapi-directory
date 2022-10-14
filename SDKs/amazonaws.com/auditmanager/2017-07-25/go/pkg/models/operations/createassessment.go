@@ -15,23 +15,23 @@ type CreateAssessmentHeaders struct {
 }
 
 type CreateAssessmentRequestBodyAssessmentReportsDestination struct {
-	Destination     *string                                     `json:"destination"`
-	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType"`
+	Destination     *string                                     `json:"destination,omitempty"`
+	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType,omitempty"`
 }
 
 type CreateAssessmentRequestBodyScope struct {
-	AwsAccounts []shared.AwsAccount `json:"awsAccounts"`
-	AwsServices []shared.AwsService `json:"awsServices"`
+	AwsAccounts []shared.AwsAccount `json:"awsAccounts,omitempty"`
+	AwsServices []shared.AwsService `json:"awsServices,omitempty"`
 }
 
 type CreateAssessmentRequestBody struct {
 	AssessmentReportsDestination CreateAssessmentRequestBodyAssessmentReportsDestination `json:"assessmentReportsDestination"`
-	Description                  *string                                                 `json:"description"`
+	Description                  *string                                                 `json:"description,omitempty"`
 	FrameworkID                  string                                                  `json:"frameworkId"`
 	Name                         string                                                  `json:"name"`
 	Roles                        []shared.Role                                           `json:"roles"`
 	Scope                        CreateAssessmentRequestBodyScope                        `json:"scope"`
-	Tags                         map[string]string                                       `json:"tags"`
+	Tags                         map[string]string                                       `json:"tags,omitempty"`
 }
 
 type CreateAssessmentRequest struct {

@@ -9,7 +9,7 @@ type EditPictureAlt1PathParams struct {
 }
 
 type EditPictureAlt1RequestBody struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type EditPictureAlt1Security struct {

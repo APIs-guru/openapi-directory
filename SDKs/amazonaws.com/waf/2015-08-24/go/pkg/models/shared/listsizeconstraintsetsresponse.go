@@ -1,6 +1,6 @@
 package shared
 
 type ListSizeConstraintSetsResponse struct {
-	NextMarker         *string                    `json:"NextMarker"`
-	SizeConstraintSets []SizeConstraintSetSummary `json:"SizeConstraintSets"`
+	NextMarker         *string                    `json:"NextMarker,omitempty"`
+	SizeConstraintSets []SizeConstraintSetSummary `json:"SizeConstraintSets,omitempty"`
 }

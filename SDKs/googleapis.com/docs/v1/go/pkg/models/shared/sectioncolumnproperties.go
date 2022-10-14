@@ -1,6 +1,6 @@
 package shared
 
 type SectionColumnProperties struct {
-	PaddingEnd *Dimension `json:"paddingEnd"`
-	Width      *Dimension `json:"width"`
+	PaddingEnd *Dimension `json:"paddingEnd,omitempty"`
+	Width      *Dimension `json:"width,omitempty"`
 }

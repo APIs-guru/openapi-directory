@@ -5,8 +5,8 @@ import (
 )
 
 type VirtualTariffsOfFolder struct {
-	Date           *time.Time      `json:"Date"`
-	FolderID       *string         `json:"FolderId"`
-	Name           *string         `json:"Name"`
-	VirtualTariffs []VirtualTariff `json:"VirtualTariffs"`
+	Date           *time.Time      `json:"Date,omitempty"`
+	FolderID       *string         `json:"FolderId,omitempty"`
+	Name           *string         `json:"Name,omitempty"`
+	VirtualTariffs []VirtualTariff `json:"VirtualTariffs,omitempty"`
 }

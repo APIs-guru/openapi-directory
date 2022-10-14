@@ -30,7 +30,7 @@ type GetTrack200ApplicationJSONOriginGeometryGeometry struct {
 }
 
 type GetTrack200ApplicationJSONOriginProperties struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type GetTrack200ApplicationJSONOriginTypeEnum string
@@ -40,12 +40,12 @@ const (
 )
 
 type GetTrack200ApplicationJSONOriginFeature struct {
-	Bbox       []interface{}                                                                                  `json:"bbox"`
-	Centerline *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry `json:"centerline"`
+	Bbox       []interface{}                                                                                  `json:"bbox,omitempty"`
+	Centerline *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry `json:"centerline,omitempty"`
 	Geometry   GetTrack200ApplicationJSONOriginGeometryGeometry                                               `json:"geometry"`
-	ID         *int64                                                                                         `json:"id"`
+	ID         *int64                                                                                         `json:"id,omitempty"`
 	Properties GetTrack200ApplicationJSONOriginProperties                                                     `json:"properties"`
-	Title      *string                                                                                        `json:"title"`
+	Title      *string                                                                                        `json:"title,omitempty"`
 	Type       GetTrack200ApplicationJSONOriginTypeEnum                                                       `json:"type"`
 }
 
@@ -57,12 +57,12 @@ const (
 )
 
 type GetTrack200ApplicationJSONTrackedEventsTrackingEventV2 struct {
-	EventCategory     *string                                                                      `json:"eventCategory"`
-	EventCategoryCode *int64                                                                       `json:"eventCategoryCode"`
-	EventDateTime     *time.Time                                                                   `json:"eventDateTime"`
-	EventLocation     *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin `json:"eventLocation"`
-	EventSource       *GetTrack200ApplicationJSONTrackedEventsEventSourceEnum                      `json:"eventSource"`
-	EventStatus       *string                                                                      `json:"eventStatus"`
+	EventCategory     *string                                                                      `json:"eventCategory,omitempty"`
+	EventCategoryCode *int64                                                                       `json:"eventCategoryCode,omitempty"`
+	EventDateTime     *time.Time                                                                   `json:"eventDateTime,omitempty"`
+	EventLocation     *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin `json:"eventLocation,omitempty"`
+	EventSource       *GetTrack200ApplicationJSONTrackedEventsEventSourceEnum                      `json:"eventSource,omitempty"`
+	EventStatus       *string                                                                      `json:"eventStatus,omitempty"`
 }
 
 type GetTrack200ApplicationJSONTrackingNumberCarrierCarrierSimpleV2 struct {
@@ -70,25 +70,25 @@ type GetTrack200ApplicationJSONTrackingNumberCarrierCarrierSimpleV2 struct {
 }
 
 type GetTrack200ApplicationJSONTrackingNumberTrackingNumberV2 struct {
-	BarcodeScanValue *string                                                         `json:"barcodeScanValue"`
-	Carrier          *GetTrack200ApplicationJSONTrackingNumberCarrierCarrierSimpleV2 `json:"carrier"`
-	Value            *string                                                         `json:"value"`
+	BarcodeScanValue *string                                                         `json:"barcodeScanValue,omitempty"`
+	Carrier          *GetTrack200ApplicationJSONTrackingNumberCarrierCarrierSimpleV2 `json:"carrier,omitempty"`
+	Value            *string                                                         `json:"value,omitempty"`
 }
 
 type GetTrack200ApplicationJSONTrackingResponse struct {
-	Destination          *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin `json:"destination"`
-	FdcOrderID           *int64                                                                       `json:"fdcOrderId"`
-	FirstCheckedDateTime *time.Time                                                                   `json:"firstCheckedDateTime"`
-	FirstTransitEvent    *time.Time                                                                   `json:"firstTransitEvent"`
-	LastCheckedDateTime  *time.Time                                                                   `json:"lastCheckedDateTime"`
-	LastUpdatedDateTime  *time.Time                                                                   `json:"lastUpdatedDateTime"`
-	Origin               *GetTrack200ApplicationJSONOriginFeature                                     `json:"origin"`
-	Status               *string                                                                      `json:"status"`
-	StatusCategoryCode   *int64                                                                       `json:"statusCategoryCode"`
-	StatusDateTime       *time.Time                                                                   `json:"statusDateTime"`
-	StatusMessage        *string                                                                      `json:"statusMessage"`
-	TrackedEvents        []GetTrack200ApplicationJSONTrackedEventsTrackingEventV2                     `json:"trackedEvents"`
-	TrackingNumber       *GetTrack200ApplicationJSONTrackingNumberTrackingNumberV2                    `json:"trackingNumber"`
+	Destination          *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin `json:"destination,omitempty"`
+	FdcOrderID           *int64                                                                       `json:"fdcOrderId,omitempty"`
+	FirstCheckedDateTime *time.Time                                                                   `json:"firstCheckedDateTime,omitempty"`
+	FirstTransitEvent    *time.Time                                                                   `json:"firstTransitEvent,omitempty"`
+	LastCheckedDateTime  *time.Time                                                                   `json:"lastCheckedDateTime,omitempty"`
+	LastUpdatedDateTime  *time.Time                                                                   `json:"lastUpdatedDateTime,omitempty"`
+	Origin               *GetTrack200ApplicationJSONOriginFeature                                     `json:"origin,omitempty"`
+	Status               *string                                                                      `json:"status,omitempty"`
+	StatusCategoryCode   *int64                                                                       `json:"statusCategoryCode,omitempty"`
+	StatusDateTime       *time.Time                                                                   `json:"statusDateTime,omitempty"`
+	StatusMessage        *string                                                                      `json:"statusMessage,omitempty"`
+	TrackedEvents        []GetTrack200ApplicationJSONTrackedEventsTrackingEventV2                     `json:"trackedEvents,omitempty"`
+	TrackingNumber       *GetTrack200ApplicationJSONTrackingNumberTrackingNumberV2                    `json:"trackingNumber,omitempty"`
 }
 
 type GetTrackResponse struct {

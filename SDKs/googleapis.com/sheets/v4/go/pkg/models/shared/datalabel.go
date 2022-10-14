@@ -24,8 +24,8 @@ const (
 )
 
 type DataLabel struct {
-	CustomLabelData *ChartData              `json:"customLabelData"`
-	Placement       *DataLabelPlacementEnum `json:"placement"`
-	TextFormat      *TextFormat             `json:"textFormat"`
-	Type            *DataLabelTypeEnum      `json:"type"`
+	CustomLabelData *ChartData              `json:"customLabelData,omitempty"`
+	Placement       *DataLabelPlacementEnum `json:"placement,omitempty"`
+	TextFormat      *TextFormat             `json:"textFormat,omitempty"`
+	Type            *DataLabelTypeEnum      `json:"type,omitempty"`
 }

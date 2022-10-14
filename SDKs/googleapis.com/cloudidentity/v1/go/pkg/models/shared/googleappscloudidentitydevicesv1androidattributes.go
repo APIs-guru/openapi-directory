@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleAppsCloudidentityDevicesV1AndroidAttributes struct {
-	EnabledUnknownSources *bool                                                                    `json:"enabledUnknownSources"`
-	OwnerProfileAccount   *bool                                                                    `json:"ownerProfileAccount"`
-	OwnershipPrivilege    *GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilegeEnum `json:"ownershipPrivilege"`
-	SupportsWorkProfile   *bool                                                                    `json:"supportsWorkProfile"`
+	EnabledUnknownSources *bool                                                                    `json:"enabledUnknownSources,omitempty"`
+	OwnerProfileAccount   *bool                                                                    `json:"ownerProfileAccount,omitempty"`
+	OwnershipPrivilege    *GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilegeEnum `json:"ownershipPrivilege,omitempty"`
+	SupportsWorkProfile   *bool                                                                    `json:"supportsWorkProfile,omitempty"`
 }

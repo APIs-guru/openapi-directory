@@ -1,7 +1,7 @@
 package shared
 
 type PersonName struct {
-	Name          *string               `json:"name"`
-	PersonGUID    *string               `json:"person_guid"`
-	Registrations []RegistrationsNumber `json:"registrations"`
+	Name          *string               `json:"name,omitempty"`
+	PersonGUID    *string               `json:"person_guid,omitempty"`
+	Registrations []RegistrationsNumber `json:"registrations,omitempty"`
 }

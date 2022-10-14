@@ -20,6 +20,6 @@ const (
 )
 
 type LocationAssociation struct {
-	Category        *LocationAssociationCategoryEnum `json:"category"`
-	PriceListItemID *string                          `json:"priceListItemId"`
+	Category        *LocationAssociationCategoryEnum `json:"category,omitempty"`
+	PriceListItemID *string                          `json:"priceListItemId,omitempty"`
 }

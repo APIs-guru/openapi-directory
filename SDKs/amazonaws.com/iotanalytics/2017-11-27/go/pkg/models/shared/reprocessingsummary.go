@@ -5,7 +5,7 @@ import (
 )
 
 type ReprocessingSummary struct {
-	CreationTime *time.Time              `json:"creationTime"`
-	ID           *string                 `json:"id"`
-	Status       *ReprocessingStatusEnum `json:"status"`
+	CreationTime *time.Time              `json:"creationTime,omitempty"`
+	ID           *string                 `json:"id,omitempty"`
+	Status       *ReprocessingStatusEnum `json:"status,omitempty"`
 }

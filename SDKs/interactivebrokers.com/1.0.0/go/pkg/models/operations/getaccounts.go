@@ -9,7 +9,7 @@ type GetAccountsRequest struct {
 }
 
 type GetAccounts200ApplicationJSON struct {
-	Accounts []string `json:"accounts"`
+	Accounts []string `json:"accounts,omitempty"`
 }
 
 type GetAccountsResponse struct {

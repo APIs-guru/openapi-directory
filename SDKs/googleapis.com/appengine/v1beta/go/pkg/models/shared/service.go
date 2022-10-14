@@ -1,9 +1,9 @@
 package shared
 
 type Service struct {
-	ID              *string           `json:"id"`
-	Labels          map[string]string `json:"labels"`
-	Name            *string           `json:"name"`
-	NetworkSettings *NetworkSettings  `json:"networkSettings"`
-	Split           *TrafficSplit     `json:"split"`
+	ID              *string           `json:"id,omitempty"`
+	Labels          map[string]string `json:"labels,omitempty"`
+	Name            *string           `json:"name,omitempty"`
+	NetworkSettings *NetworkSettings  `json:"networkSettings,omitempty"`
+	Split           *TrafficSplit     `json:"split,omitempty"`
 }

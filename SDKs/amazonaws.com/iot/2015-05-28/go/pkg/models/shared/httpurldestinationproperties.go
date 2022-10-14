@@ -1,5 +1,5 @@
 package shared
 
 type HTTPURLDestinationProperties struct {
-	ConfirmationURL *string `json:"confirmationUrl"`
+	ConfirmationURL *string `json:"confirmationUrl,omitempty"`
 }

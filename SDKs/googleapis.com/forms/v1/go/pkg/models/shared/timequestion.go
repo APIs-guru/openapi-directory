@@ -1,5 +1,5 @@
 package shared
 
 type TimeQuestion struct {
-	Duration *bool `json:"duration"`
+	Duration *bool `json:"duration,omitempty"`
 }

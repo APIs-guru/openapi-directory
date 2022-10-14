@@ -11,8 +11,8 @@ const (
 )
 
 type IPReputation struct {
-	IPCount    *string                     `json:"ipCount"`
-	NumIps     *string                     `json:"numIps"`
-	Reputation *IPReputationReputationEnum `json:"reputation"`
-	SampleIps  []string                    `json:"sampleIps"`
+	IPCount    *string                     `json:"ipCount,omitempty"`
+	NumIps     *string                     `json:"numIps,omitempty"`
+	Reputation *IPReputationReputationEnum `json:"reputation,omitempty"`
+	SampleIps  []string                    `json:"sampleIps,omitempty"`
 }

@@ -36,14 +36,14 @@ type CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons struct {
 }
 
 type CreateNetworkFirmwareUpgradesRollbackRequestBodyToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type CreateNetworkFirmwareUpgradesRollbackRequestBody struct {
-	Product   *CreateNetworkFirmwareUpgradesRollbackRequestBodyProductEnum `json:"product"`
+	Product   *CreateNetworkFirmwareUpgradesRollbackRequestBodyProductEnum `json:"product,omitempty"`
 	Reasons   []CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons    `json:"reasons"`
-	Time      *time.Time                                                   `json:"time"`
-	ToVersion *CreateNetworkFirmwareUpgradesRollbackRequestBodyToVersion   `json:"toVersion"`
+	Time      *time.Time                                                   `json:"time,omitempty"`
+	ToVersion *CreateNetworkFirmwareUpgradesRollbackRequestBodyToVersion   `json:"toVersion,omitempty"`
 }
 
 type CreateNetworkFirmwareUpgradesRollbackRequest struct {

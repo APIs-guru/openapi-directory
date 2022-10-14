@@ -9,5 +9,5 @@ const (
 )
 
 type SystemEvent struct {
-	Type *SystemEventTypeEnum `json:"type"`
+	Type *SystemEventTypeEnum `json:"type,omitempty"`
 }

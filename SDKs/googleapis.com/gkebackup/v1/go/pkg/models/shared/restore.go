@@ -12,21 +12,21 @@ const (
 )
 
 type Restore struct {
-	Backup                 *string           `json:"backup"`
-	Cluster                *string           `json:"cluster"`
-	CompleteTime           *string           `json:"completeTime"`
-	CreateTime             *string           `json:"createTime"`
-	Description            *string           `json:"description"`
-	Etag                   *string           `json:"etag"`
-	Labels                 map[string]string `json:"labels"`
-	Name                   *string           `json:"name"`
-	ResourcesExcludedCount *int32            `json:"resourcesExcludedCount"`
-	ResourcesFailedCount   *int32            `json:"resourcesFailedCount"`
-	ResourcesRestoredCount *int32            `json:"resourcesRestoredCount"`
-	RestoreConfig          *RestoreConfig    `json:"restoreConfig"`
-	State                  *RestoreStateEnum `json:"state"`
-	StateReason            *string           `json:"stateReason"`
-	UID                    *string           `json:"uid"`
-	UpdateTime             *string           `json:"updateTime"`
-	VolumesRestoredCount   *int32            `json:"volumesRestoredCount"`
+	Backup                 *string           `json:"backup,omitempty"`
+	Cluster                *string           `json:"cluster,omitempty"`
+	CompleteTime           *string           `json:"completeTime,omitempty"`
+	CreateTime             *string           `json:"createTime,omitempty"`
+	Description            *string           `json:"description,omitempty"`
+	Etag                   *string           `json:"etag,omitempty"`
+	Labels                 map[string]string `json:"labels,omitempty"`
+	Name                   *string           `json:"name,omitempty"`
+	ResourcesExcludedCount *int32            `json:"resourcesExcludedCount,omitempty"`
+	ResourcesFailedCount   *int32            `json:"resourcesFailedCount,omitempty"`
+	ResourcesRestoredCount *int32            `json:"resourcesRestoredCount,omitempty"`
+	RestoreConfig          *RestoreConfig    `json:"restoreConfig,omitempty"`
+	State                  *RestoreStateEnum `json:"state,omitempty"`
+	StateReason            *string           `json:"stateReason,omitempty"`
+	UID                    *string           `json:"uid,omitempty"`
+	UpdateTime             *string           `json:"updateTime,omitempty"`
+	VolumesRestoredCount   *int32            `json:"volumesRestoredCount,omitempty"`
 }

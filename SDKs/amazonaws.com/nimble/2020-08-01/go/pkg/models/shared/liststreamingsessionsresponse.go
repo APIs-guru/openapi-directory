@@ -1,6 +1,6 @@
 package shared
 
 type ListStreamingSessionsResponse struct {
-	NextToken *string            `json:"nextToken"`
-	Sessions  []StreamingSession `json:"sessions"`
+	NextToken *string            `json:"nextToken,omitempty"`
+	Sessions  []StreamingSession `json:"sessions,omitempty"`
 }

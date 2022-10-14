@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDatacatalogV1ListTagsResponse struct {
-	NextPageToken *string                       `json:"nextPageToken"`
-	Tags          []GoogleCloudDatacatalogV1Tag `json:"tags"`
+	NextPageToken *string                       `json:"nextPageToken,omitempty"`
+	Tags          []GoogleCloudDatacatalogV1Tag `json:"tags,omitempty"`
 }

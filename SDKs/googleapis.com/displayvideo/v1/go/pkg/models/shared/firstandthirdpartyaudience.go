@@ -35,22 +35,22 @@ const (
 )
 
 type FirstAndThirdPartyAudience struct {
-	ActiveDisplayAudienceSize      *string                                                       `json:"activeDisplayAudienceSize"`
-	AppID                          *string                                                       `json:"appId"`
-	AudienceSource                 *FirstAndThirdPartyAudienceAudienceSourceEnum                 `json:"audienceSource"`
-	AudienceType                   *FirstAndThirdPartyAudienceAudienceTypeEnum                   `json:"audienceType"`
-	ContactInfoList                *ContactInfoList                                              `json:"contactInfoList"`
-	Description                    *string                                                       `json:"description"`
-	DisplayAudienceSize            *string                                                       `json:"displayAudienceSize"`
-	DisplayDesktopAudienceSize     *string                                                       `json:"displayDesktopAudienceSize"`
-	DisplayMobileAppAudienceSize   *string                                                       `json:"displayMobileAppAudienceSize"`
-	DisplayMobileWebAudienceSize   *string                                                       `json:"displayMobileWebAudienceSize"`
-	DisplayName                    *string                                                       `json:"displayName"`
-	FirstAndThirdPartyAudienceID   *string                                                       `json:"firstAndThirdPartyAudienceId"`
-	FirstAndThirdPartyAudienceType *FirstAndThirdPartyAudienceFirstAndThirdPartyAudienceTypeEnum `json:"firstAndThirdPartyAudienceType"`
-	GmailAudienceSize              *string                                                       `json:"gmailAudienceSize"`
-	MembershipDurationDays         *string                                                       `json:"membershipDurationDays"`
-	MobileDeviceIDList             *MobileDeviceIDList                                           `json:"mobileDeviceIdList"`
-	Name                           *string                                                       `json:"name"`
-	YoutubeAudienceSize            *string                                                       `json:"youtubeAudienceSize"`
+	ActiveDisplayAudienceSize      *string                                                       `json:"activeDisplayAudienceSize,omitempty"`
+	AppID                          *string                                                       `json:"appId,omitempty"`
+	AudienceSource                 *FirstAndThirdPartyAudienceAudienceSourceEnum                 `json:"audienceSource,omitempty"`
+	AudienceType                   *FirstAndThirdPartyAudienceAudienceTypeEnum                   `json:"audienceType,omitempty"`
+	ContactInfoList                *ContactInfoList                                              `json:"contactInfoList,omitempty"`
+	Description                    *string                                                       `json:"description,omitempty"`
+	DisplayAudienceSize            *string                                                       `json:"displayAudienceSize,omitempty"`
+	DisplayDesktopAudienceSize     *string                                                       `json:"displayDesktopAudienceSize,omitempty"`
+	DisplayMobileAppAudienceSize   *string                                                       `json:"displayMobileAppAudienceSize,omitempty"`
+	DisplayMobileWebAudienceSize   *string                                                       `json:"displayMobileWebAudienceSize,omitempty"`
+	DisplayName                    *string                                                       `json:"displayName,omitempty"`
+	FirstAndThirdPartyAudienceID   *string                                                       `json:"firstAndThirdPartyAudienceId,omitempty"`
+	FirstAndThirdPartyAudienceType *FirstAndThirdPartyAudienceFirstAndThirdPartyAudienceTypeEnum `json:"firstAndThirdPartyAudienceType,omitempty"`
+	GmailAudienceSize              *string                                                       `json:"gmailAudienceSize,omitempty"`
+	MembershipDurationDays         *string                                                       `json:"membershipDurationDays,omitempty"`
+	MobileDeviceIDList             *MobileDeviceIDList                                           `json:"mobileDeviceIdList,omitempty"`
+	Name                           *string                                                       `json:"name,omitempty"`
+	YoutubeAudienceSize            *string                                                       `json:"youtubeAudienceSize,omitempty"`
 }

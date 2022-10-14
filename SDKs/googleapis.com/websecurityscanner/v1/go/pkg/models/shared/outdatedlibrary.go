@@ -1,7 +1,7 @@
 package shared
 
 type OutdatedLibrary struct {
-	LearnMoreUrls []string `json:"learnMoreUrls"`
-	LibraryName   *string  `json:"libraryName"`
-	Version       *string  `json:"version"`
+	LearnMoreUrls []string `json:"learnMoreUrls,omitempty"`
+	LibraryName   *string  `json:"libraryName,omitempty"`
+	Version       *string  `json:"version,omitempty"`
 }

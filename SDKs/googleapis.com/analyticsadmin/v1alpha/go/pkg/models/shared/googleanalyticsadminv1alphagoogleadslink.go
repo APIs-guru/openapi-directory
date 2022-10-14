@@ -1,11 +1,11 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaGoogleAdsLink struct {
-	AdsPersonalizationEnabled *bool   `json:"adsPersonalizationEnabled"`
-	CanManageClients          *bool   `json:"canManageClients"`
-	CreateTime                *string `json:"createTime"`
-	CreatorEmailAddress       *string `json:"creatorEmailAddress"`
-	CustomerID                *string `json:"customerId"`
-	Name                      *string `json:"name"`
-	UpdateTime                *string `json:"updateTime"`
+	AdsPersonalizationEnabled *bool   `json:"adsPersonalizationEnabled,omitempty"`
+	CanManageClients          *bool   `json:"canManageClients,omitempty"`
+	CreateTime                *string `json:"createTime,omitempty"`
+	CreatorEmailAddress       *string `json:"creatorEmailAddress,omitempty"`
+	CustomerID                *string `json:"customerId,omitempty"`
+	Name                      *string `json:"name,omitempty"`
+	UpdateTime                *string `json:"updateTime,omitempty"`
 }

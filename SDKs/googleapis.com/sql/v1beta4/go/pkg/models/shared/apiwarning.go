@@ -9,7 +9,7 @@ const (
 )
 
 type APIWarning struct {
-	Code    *APIWarningCodeEnum `json:"code"`
-	Message *string             `json:"message"`
-	Region  *string             `json:"region"`
+	Code    *APIWarningCodeEnum `json:"code,omitempty"`
+	Message *string             `json:"message,omitempty"`
+	Region  *string             `json:"region,omitempty"`
 }

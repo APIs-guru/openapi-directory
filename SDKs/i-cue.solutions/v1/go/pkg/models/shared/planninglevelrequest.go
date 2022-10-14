@@ -23,10 +23,10 @@ const (
 )
 
 type PlanningLevelRequest struct {
-	Data            []PlanningLevelDataDto         `json:"data"`
+	Data            []PlanningLevelDataDto         `json:"data,omitempty"`
 	Method          PlanningLevelRequestMethodEnum `json:"method"`
-	Override        *bool                          `json:"override"`
-	Params          *PlanningLevelInfoRequest      `json:"params"`
+	Override        *bool                          `json:"override,omitempty"`
+	Params          *PlanningLevelInfoRequest      `json:"params,omitempty"`
 	PlanningLevelID string                         `json:"planningLevelId"`
 	StartDate       string                         `json:"startDate"`
 }

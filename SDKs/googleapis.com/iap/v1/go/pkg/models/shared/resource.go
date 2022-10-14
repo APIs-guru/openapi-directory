@@ -1,8 +1,8 @@
 package shared
 
 type Resource struct {
-	Labels  map[string]string `json:"labels"`
-	Name    *string           `json:"name"`
-	Service *string           `json:"service"`
-	Type    *string           `json:"type"`
+	Labels  map[string]string `json:"labels,omitempty"`
+	Name    *string           `json:"name,omitempty"`
+	Service *string           `json:"service,omitempty"`
+	Type    *string           `json:"type,omitempty"`
 }

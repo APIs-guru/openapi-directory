@@ -8,7 +8,7 @@ const (
 )
 
 type Grant struct {
-	ID          *int64                `json:"id"`
-	Label       *string               `json:"label"`
-	Permissions *GrantPermissionsEnum `json:"permissions"`
+	ID          *int64                `json:"id,omitempty"`
+	Label       *string               `json:"label,omitempty"`
+	Permissions *GrantPermissionsEnum `json:"permissions,omitempty"`
 }

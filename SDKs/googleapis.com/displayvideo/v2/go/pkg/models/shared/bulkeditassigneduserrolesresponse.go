@@ -1,5 +1,5 @@
 package shared
 
 type BulkEditAssignedUserRolesResponse struct {
-	CreatedAssignedUserRoles []AssignedUserRole `json:"createdAssignedUserRoles"`
+	CreatedAssignedUserRoles []AssignedUserRole `json:"createdAssignedUserRoles,omitempty"`
 }

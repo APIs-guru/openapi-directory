@@ -1,6 +1,6 @@
 package shared
 
 type GetComplianceSummaryOutput struct {
-	PaginationToken *string   `json:"PaginationToken"`
-	SummaryList     []Summary `json:"SummaryList"`
+	PaginationToken *string   `json:"PaginationToken,omitempty"`
+	SummaryList     []Summary `json:"SummaryList,omitempty"`
 }

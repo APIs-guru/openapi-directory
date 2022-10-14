@@ -21,7 +21,7 @@ type GetAttachmentsForTaskRequest struct {
 }
 
 type GetAttachmentsForTask200ApplicationJSON struct {
-	Data []shared.AttachmentCompact `json:"data"`
+	Data []shared.AttachmentCompact `json:"data,omitempty"`
 }
 
 type GetAttachmentsForTaskResponse struct {

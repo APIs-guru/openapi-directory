@@ -20,14 +20,14 @@ type ListStreamsHeaders struct {
 }
 
 type ListStreamsRequestBodyStreamNameCondition struct {
-	ComparisonOperator *shared.ComparisonOperatorEnum `json:"ComparisonOperator"`
-	ComparisonValue    *string                        `json:"ComparisonValue"`
+	ComparisonOperator *shared.ComparisonOperatorEnum `json:"ComparisonOperator,omitempty"`
+	ComparisonValue    *string                        `json:"ComparisonValue,omitempty"`
 }
 
 type ListStreamsRequestBody struct {
-	MaxResults          *int64                                     `json:"MaxResults"`
-	NextToken           *string                                    `json:"NextToken"`
-	StreamNameCondition *ListStreamsRequestBodyStreamNameCondition `json:"StreamNameCondition"`
+	MaxResults          *int64                                     `json:"MaxResults,omitempty"`
+	NextToken           *string                                    `json:"NextToken,omitempty"`
+	StreamNameCondition *ListStreamsRequestBodyStreamNameCondition `json:"StreamNameCondition,omitempty"`
 }
 
 type ListStreamsRequest struct {

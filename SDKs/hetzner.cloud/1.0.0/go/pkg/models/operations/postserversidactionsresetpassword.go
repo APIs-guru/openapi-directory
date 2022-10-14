@@ -38,8 +38,8 @@ type PostServersIDActionsResetPassword201ApplicationJSONActionAction struct {
 }
 
 type PostServersIDActionsResetPassword201ApplicationJSON struct {
-	Action       *PostServersIDActionsResetPassword201ApplicationJSONActionAction `json:"action"`
-	RootPassword *string                                                          `json:"root_password"`
+	Action       *PostServersIDActionsResetPassword201ApplicationJSONActionAction `json:"action,omitempty"`
+	RootPassword *string                                                          `json:"root_password,omitempty"`
 }
 
 type PostServersIDActionsResetPasswordResponse struct {

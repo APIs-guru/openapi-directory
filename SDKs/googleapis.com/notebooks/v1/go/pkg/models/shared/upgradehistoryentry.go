@@ -18,14 +18,14 @@ const (
 )
 
 type UpgradeHistoryEntry struct {
-	Action         *UpgradeHistoryEntryActionEnum `json:"action"`
-	ContainerImage *string                        `json:"containerImage"`
-	CreateTime     *string                        `json:"createTime"`
-	Framework      *string                        `json:"framework"`
-	Snapshot       *string                        `json:"snapshot"`
-	State          *UpgradeHistoryEntryStateEnum  `json:"state"`
-	TargetImage    *string                        `json:"targetImage"`
-	TargetVersion  *string                        `json:"targetVersion"`
-	Version        *string                        `json:"version"`
-	VMImage        *string                        `json:"vmImage"`
+	Action         *UpgradeHistoryEntryActionEnum `json:"action,omitempty"`
+	ContainerImage *string                        `json:"containerImage,omitempty"`
+	CreateTime     *string                        `json:"createTime,omitempty"`
+	Framework      *string                        `json:"framework,omitempty"`
+	Snapshot       *string                        `json:"snapshot,omitempty"`
+	State          *UpgradeHistoryEntryStateEnum  `json:"state,omitempty"`
+	TargetImage    *string                        `json:"targetImage,omitempty"`
+	TargetVersion  *string                        `json:"targetVersion,omitempty"`
+	Version        *string                        `json:"version,omitempty"`
+	VMImage        *string                        `json:"vmImage,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type PingRequestDto struct {
-	Ping *int64 `json:"Ping"`
+	Ping *int64 `json:"Ping,omitempty"`
 }

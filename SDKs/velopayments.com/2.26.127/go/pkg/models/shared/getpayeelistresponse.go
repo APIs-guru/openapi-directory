@@ -5,21 +5,21 @@ import (
 )
 
 type GetPayeeListResponse struct {
-	Company                         *GetPayeeListResponseCompany    `json:"company"`
-	Country                         *string                         `json:"country"`
-	Created                         *time.Time                      `json:"created"`
-	Disabled                        *bool                           `json:"disabled"`
-	DisabledComment                 *string                         `json:"disabledComment"`
-	DisabledUpdatedTimestamp        *time.Time                      `json:"disabledUpdatedTimestamp"`
-	DisplayName                     *string                         `json:"displayName"`
-	Email                           *string                         `json:"email"`
-	Individual                      *GetPayeeListResponseIndividual `json:"individual"`
-	Language                        *string                         `json:"language"`
-	OnboardedStatus                 *OnboardedStatus2Enum           `json:"onboardedStatus"`
-	PayeeID                         *string                         `json:"payeeId"`
-	PayeeType                       *PayeeTypeEnum                  `json:"payeeType"`
-	PayorRefs                       []PayeePayorRefV3               `json:"payorRefs"`
-	WatchlistOverrideComment        *string                         `json:"watchlistOverrideComment"`
-	WatchlistStatus                 *WatchlistStatusEnum            `json:"watchlistStatus"`
-	WatchlistStatusUpdatedTimestamp *string                         `json:"watchlistStatusUpdatedTimestamp"`
+	Company                         *GetPayeeListResponseCompany    `json:"company,omitempty"`
+	Country                         *string                         `json:"country,omitempty"`
+	Created                         *time.Time                      `json:"created,omitempty"`
+	Disabled                        *bool                           `json:"disabled,omitempty"`
+	DisabledComment                 *string                         `json:"disabledComment,omitempty"`
+	DisabledUpdatedTimestamp        *time.Time                      `json:"disabledUpdatedTimestamp,omitempty"`
+	DisplayName                     *string                         `json:"displayName,omitempty"`
+	Email                           *string                         `json:"email,omitempty"`
+	Individual                      *GetPayeeListResponseIndividual `json:"individual,omitempty"`
+	Language                        *string                         `json:"language,omitempty"`
+	OnboardedStatus                 *OnboardedStatus2Enum           `json:"onboardedStatus,omitempty"`
+	PayeeID                         *string                         `json:"payeeId,omitempty"`
+	PayeeType                       *PayeeTypeEnum                  `json:"payeeType,omitempty"`
+	PayorRefs                       []PayeePayorRefV3               `json:"payorRefs,omitempty"`
+	WatchlistOverrideComment        *string                         `json:"watchlistOverrideComment,omitempty"`
+	WatchlistStatus                 *WatchlistStatusEnum            `json:"watchlistStatus,omitempty"`
+	WatchlistStatusUpdatedTimestamp *string                         `json:"watchlistStatusUpdatedTimestamp,omitempty"`
 }

@@ -29,15 +29,15 @@ const (
 )
 
 type Trust struct {
-	CreateTime                           *string                  `json:"createTime"`
-	LastKnownTrustConnectedHeartbeatTime *string                  `json:"lastKnownTrustConnectedHeartbeatTime"`
-	SelectiveAuthentication              *bool                    `json:"selectiveAuthentication"`
-	State                                *TrustStateEnum          `json:"state"`
-	StateDescription                     *string                  `json:"stateDescription"`
-	TargetDNSIPAddresses                 []string                 `json:"targetDnsIpAddresses"`
-	TargetDomainName                     *string                  `json:"targetDomainName"`
-	TrustDirection                       *TrustTrustDirectionEnum `json:"trustDirection"`
-	TrustHandshakeSecret                 *string                  `json:"trustHandshakeSecret"`
-	TrustType                            *TrustTrustTypeEnum      `json:"trustType"`
-	UpdateTime                           *string                  `json:"updateTime"`
+	CreateTime                           *string                  `json:"createTime,omitempty"`
+	LastKnownTrustConnectedHeartbeatTime *string                  `json:"lastKnownTrustConnectedHeartbeatTime,omitempty"`
+	SelectiveAuthentication              *bool                    `json:"selectiveAuthentication,omitempty"`
+	State                                *TrustStateEnum          `json:"state,omitempty"`
+	StateDescription                     *string                  `json:"stateDescription,omitempty"`
+	TargetDNSIPAddresses                 []string                 `json:"targetDnsIpAddresses,omitempty"`
+	TargetDomainName                     *string                  `json:"targetDomainName,omitempty"`
+	TrustDirection                       *TrustTrustDirectionEnum `json:"trustDirection,omitempty"`
+	TrustHandshakeSecret                 *string                  `json:"trustHandshakeSecret,omitempty"`
+	TrustType                            *TrustTrustTypeEnum      `json:"trustType,omitempty"`
+	UpdateTime                           *string                  `json:"updateTime,omitempty"`
 }

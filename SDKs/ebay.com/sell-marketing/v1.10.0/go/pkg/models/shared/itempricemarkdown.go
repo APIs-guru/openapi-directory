@@ -1,16 +1,16 @@
 package shared
 
 type ItemPriceMarkdown struct {
-	ApplyFreeShipping                *bool                       `json:"applyFreeShipping"`
-	AutoSelectFutureInventory        *bool                       `json:"autoSelectFutureInventory"`
-	BlockPriceIncreaseInItemRevision *bool                       `json:"blockPriceIncreaseInItemRevision"`
-	Description                      *string                     `json:"description"`
-	EndDate                          *string                     `json:"endDate"`
-	MarketplaceID                    *string                     `json:"marketplaceId"`
-	Name                             *string                     `json:"name"`
-	Priority                         *string                     `json:"priority"`
-	PromotionImageURL                *string                     `json:"promotionImageUrl"`
-	PromotionStatus                  *string                     `json:"promotionStatus"`
-	SelectedInventoryDiscounts       []SelectedInventoryDiscount `json:"selectedInventoryDiscounts"`
-	StartDate                        *string                     `json:"startDate"`
+	ApplyFreeShipping                *bool                       `json:"applyFreeShipping,omitempty"`
+	AutoSelectFutureInventory        *bool                       `json:"autoSelectFutureInventory,omitempty"`
+	BlockPriceIncreaseInItemRevision *bool                       `json:"blockPriceIncreaseInItemRevision,omitempty"`
+	Description                      *string                     `json:"description,omitempty"`
+	EndDate                          *string                     `json:"endDate,omitempty"`
+	MarketplaceID                    *string                     `json:"marketplaceId,omitempty"`
+	Name                             *string                     `json:"name,omitempty"`
+	Priority                         *string                     `json:"priority,omitempty"`
+	PromotionImageURL                *string                     `json:"promotionImageUrl,omitempty"`
+	PromotionStatus                  *string                     `json:"promotionStatus,omitempty"`
+	SelectedInventoryDiscounts       []SelectedInventoryDiscount `json:"selectedInventoryDiscounts,omitempty"`
+	StartDate                        *string                     `json:"startDate,omitempty"`
 }

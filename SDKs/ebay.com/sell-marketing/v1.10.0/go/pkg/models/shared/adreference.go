@@ -1,6 +1,6 @@
 package shared
 
 type AdReference struct {
-	AdID *string `json:"adId"`
-	Href *string `json:"href"`
+	AdID *string `json:"adId,omitempty"`
+	Href *string `json:"href,omitempty"`
 }

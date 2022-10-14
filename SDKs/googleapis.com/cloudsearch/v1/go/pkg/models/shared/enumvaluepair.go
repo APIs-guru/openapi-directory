@@ -1,6 +1,6 @@
 package shared
 
 type EnumValuePair struct {
-	IntegerValue *int32  `json:"integerValue"`
-	StringValue  *string `json:"stringValue"`
+	IntegerValue *int32  `json:"integerValue,omitempty"`
+	StringValue  *string `json:"stringValue,omitempty"`
 }

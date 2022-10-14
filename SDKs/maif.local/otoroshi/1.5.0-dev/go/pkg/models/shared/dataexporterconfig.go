@@ -13,19 +13,19 @@ const (
 )
 
 type DataExporterConfig struct {
-	BufferSize    *int32                     `json:"bufferSize"`
-	Config        *interface{}               `json:"config"`
-	Desc          *string                    `json:"desc"`
-	Enabled       *string                    `json:"enabled"`
-	Filtering     *Filtering                 `json:"filtering"`
-	GroupDuration *int64                     `json:"groupDuration"`
-	GroupSize     *int32                     `json:"groupSize"`
-	ID            *string                    `json:"id"`
-	JSONWorkers   *int32                     `json:"jsonWorkers"`
-	Location      *Location                  `json:"location"`
-	Metadata      map[string]string          `json:"metadata"`
-	Name          *string                    `json:"name"`
-	Projection    map[string]string          `json:"projection"`
-	SendWorkers   *int32                     `json:"sendWorkers"`
-	Typ           *DataExporterConfigTypEnum `json:"typ"`
+	BufferSize    *int32                     `json:"bufferSize,omitempty"`
+	Config        *interface{}               `json:"config,omitempty"`
+	Desc          *string                    `json:"desc,omitempty"`
+	Enabled       *string                    `json:"enabled,omitempty"`
+	Filtering     *Filtering                 `json:"filtering,omitempty"`
+	GroupDuration *int64                     `json:"groupDuration,omitempty"`
+	GroupSize     *int32                     `json:"groupSize,omitempty"`
+	ID            *string                    `json:"id,omitempty"`
+	JSONWorkers   *int32                     `json:"jsonWorkers,omitempty"`
+	Location      *Location                  `json:"location,omitempty"`
+	Metadata      map[string]string          `json:"metadata,omitempty"`
+	Name          *string                    `json:"name,omitempty"`
+	Projection    map[string]string          `json:"projection,omitempty"`
+	SendWorkers   *int32                     `json:"sendWorkers,omitempty"`
+	Typ           *DataExporterConfigTypEnum `json:"typ,omitempty"`
 }

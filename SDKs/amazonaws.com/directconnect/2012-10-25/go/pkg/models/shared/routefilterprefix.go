@@ -1,5 +1,5 @@
 package shared
 
 type RouteFilterPrefix struct {
-	Cidr *string `json:"cidr"`
+	Cidr *string `json:"cidr,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type PerformanceThreshold struct {
-	BasicSliPerformance *BasicSli        `json:"basicSliPerformance"`
-	Performance         *RequestBasedSli `json:"performance"`
-	Threshold           *float64         `json:"threshold"`
+	BasicSliPerformance *BasicSli        `json:"basicSliPerformance,omitempty"`
+	Performance         *RequestBasedSli `json:"performance,omitempty"`
+	Threshold           *float64         `json:"threshold,omitempty"`
 }

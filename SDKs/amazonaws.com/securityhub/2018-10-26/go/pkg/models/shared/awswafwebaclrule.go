@@ -1,10 +1,10 @@
 package shared
 
 type AwsWafWebACLRule struct {
-	Action         *WafAction         `json:"Action"`
-	ExcludedRules  []WafExcludedRule  `json:"ExcludedRules"`
-	OverrideAction *WafOverrideAction `json:"OverrideAction"`
-	Priority       *int64             `json:"Priority"`
-	RuleID         *string            `json:"RuleId"`
-	Type           *string            `json:"Type"`
+	Action         *WafAction         `json:"Action,omitempty"`
+	ExcludedRules  []WafExcludedRule  `json:"ExcludedRules,omitempty"`
+	OverrideAction *WafOverrideAction `json:"OverrideAction,omitempty"`
+	Priority       *int64             `json:"Priority,omitempty"`
+	RuleID         *string            `json:"RuleId,omitempty"`
+	Type           *string            `json:"Type,omitempty"`
 }

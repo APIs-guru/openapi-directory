@@ -18,8 +18,8 @@ const (
 )
 
 type CreateLineRequest struct {
-	Category          *CreateLineRequestCategoryEnum     `json:"category"`
-	ElementProperties *PageElementProperties             `json:"elementProperties"`
-	LineCategory      *CreateLineRequestLineCategoryEnum `json:"lineCategory"`
-	ObjectID          *string                            `json:"objectId"`
+	Category          *CreateLineRequestCategoryEnum     `json:"category,omitempty"`
+	ElementProperties *PageElementProperties             `json:"elementProperties,omitempty"`
+	LineCategory      *CreateLineRequestLineCategoryEnum `json:"lineCategory,omitempty"`
+	ObjectID          *string                            `json:"objectId,omitempty"`
 }

@@ -7,7 +7,7 @@ const (
 )
 
 type PostPlacementGroupsRequestBodyCreatePlacementGroupRequest struct {
-	Labels map[string]interface{}                 `json:"labels"`
+	Labels map[string]interface{}                 `json:"labels,omitempty"`
 	Name   string                                 `json:"name"`
 	Type   PostPlacementGroupsRequestBodyTypeEnum `json:"type"`
 }
@@ -61,7 +61,7 @@ type PostPlacementGroups201ApplicationJSONPlacementGroupPlacementGroup struct {
 }
 
 type PostPlacementGroups201ApplicationJSONCreatePlacementGroupResponse struct {
-	Action         *PostPlacementGroups201ApplicationJSONActionNullableAction        `json:"action"`
+	Action         *PostPlacementGroups201ApplicationJSONActionNullableAction        `json:"action,omitempty"`
 	PlacementGroup PostPlacementGroups201ApplicationJSONPlacementGroupPlacementGroup `json:"placement_group"`
 }
 

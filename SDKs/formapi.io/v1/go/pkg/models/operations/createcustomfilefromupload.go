@@ -31,7 +31,7 @@ const (
 
 type CreateCustomFileFromUpload201ApplicationJSONCreateCustomFileResponse struct {
 	CustomFile CreateCustomFileFromUpload201ApplicationJSONCustomFileCustomFile `json:"custom_file"`
-	Errors     []string                                                         `json:"errors"`
+	Errors     []string                                                         `json:"errors,omitempty"`
 	Status     CreateCustomFileFromUpload201ApplicationJSONStatusEnum           `json:"status"`
 }
 

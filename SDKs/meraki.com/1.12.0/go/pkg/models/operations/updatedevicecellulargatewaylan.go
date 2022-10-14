@@ -7,7 +7,7 @@ type UpdateDeviceCellularGatewayLanPathParams struct {
 type UpdateDeviceCellularGatewayLanRequestBodyFixedIPAssignments struct {
 	IP   string  `json:"ip"`
 	Mac  string  `json:"mac"`
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdateDeviceCellularGatewayLanRequestBodyReservedIPRanges struct {
@@ -17,8 +17,8 @@ type UpdateDeviceCellularGatewayLanRequestBodyReservedIPRanges struct {
 }
 
 type UpdateDeviceCellularGatewayLanRequestBody struct {
-	FixedIPAssignments []UpdateDeviceCellularGatewayLanRequestBodyFixedIPAssignments `json:"fixedIpAssignments"`
-	ReservedIPRanges   []UpdateDeviceCellularGatewayLanRequestBodyReservedIPRanges   `json:"reservedIpRanges"`
+	FixedIPAssignments []UpdateDeviceCellularGatewayLanRequestBodyFixedIPAssignments `json:"fixedIpAssignments,omitempty"`
+	ReservedIPRanges   []UpdateDeviceCellularGatewayLanRequestBodyReservedIPRanges   `json:"reservedIpRanges,omitempty"`
 }
 
 type UpdateDeviceCellularGatewayLanRequest struct {

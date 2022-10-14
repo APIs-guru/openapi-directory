@@ -30,13 +30,13 @@ const (
 )
 
 type FileMigrationEntity struct {
-	DestPath   *string                           `json:"dest_path"`
-	FilesMoved *int32                            `json:"files_moved"`
-	FilesTotal *int32                            `json:"files_total"`
-	ID         *int32                            `json:"id"`
-	LogURL     *string                           `json:"log_url"`
-	Operation  *FileMigrationEntityOperationEnum `json:"operation"`
-	Path       *string                           `json:"path"`
-	Region     *string                           `json:"region"`
-	Status     *FileMigrationEntityStatusEnum    `json:"status"`
+	DestPath   *string                           `json:"dest_path,omitempty"`
+	FilesMoved *int32                            `json:"files_moved,omitempty"`
+	FilesTotal *int32                            `json:"files_total,omitempty"`
+	ID         *int32                            `json:"id,omitempty"`
+	LogURL     *string                           `json:"log_url,omitempty"`
+	Operation  *FileMigrationEntityOperationEnum `json:"operation,omitempty"`
+	Path       *string                           `json:"path,omitempty"`
+	Region     *string                           `json:"region,omitempty"`
+	Status     *FileMigrationEntityStatusEnum    `json:"status,omitempty"`
 }

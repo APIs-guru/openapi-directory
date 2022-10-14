@@ -33,8 +33,8 @@ type GetCertificatesRequest struct {
 }
 
 type GetCertificates200ApplicationJSONCertificatesStatusError struct {
-	Code    *string `json:"code"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCertificates200ApplicationJSONCertificatesStatusIssuanceEnum string
@@ -55,9 +55,9 @@ const (
 )
 
 type GetCertificates200ApplicationJSONCertificatesStatus struct {
-	Error    *GetCertificates200ApplicationJSONCertificatesStatusError        `json:"error"`
-	Issuance *GetCertificates200ApplicationJSONCertificatesStatusIssuanceEnum `json:"issuance"`
-	Renewal  *GetCertificates200ApplicationJSONCertificatesStatusRenewalEnum  `json:"renewal"`
+	Error    *GetCertificates200ApplicationJSONCertificatesStatusError        `json:"error,omitempty"`
+	Issuance *GetCertificates200ApplicationJSONCertificatesStatusIssuanceEnum `json:"issuance,omitempty"`
+	Renewal  *GetCertificates200ApplicationJSONCertificatesStatusRenewalEnum  `json:"renewal,omitempty"`
 }
 
 type GetCertificates200ApplicationJSONCertificatesTypeEnum string
@@ -82,8 +82,8 @@ type GetCertificates200ApplicationJSONCertificatesCertificate struct {
 	Name           string                                                 `json:"name"`
 	NotValidAfter  string                                                 `json:"not_valid_after"`
 	NotValidBefore string                                                 `json:"not_valid_before"`
-	Status         *GetCertificates200ApplicationJSONCertificatesStatus   `json:"status"`
-	Type           *GetCertificates200ApplicationJSONCertificatesTypeEnum `json:"type"`
+	Status         *GetCertificates200ApplicationJSONCertificatesStatus   `json:"status,omitempty"`
+	Type           *GetCertificates200ApplicationJSONCertificatesTypeEnum `json:"type,omitempty"`
 	UsedBy         []GetCertificates200ApplicationJSONCertificatesUsedBy  `json:"used_by"`
 }
 
@@ -102,7 +102,7 @@ type GetCertificates200ApplicationJSONMeta struct {
 
 type GetCertificates200ApplicationJSONCertificatesResponse struct {
 	Certificates []GetCertificates200ApplicationJSONCertificatesCertificate `json:"certificates"`
-	Meta         *GetCertificates200ApplicationJSONMeta                     `json:"meta"`
+	Meta         *GetCertificates200ApplicationJSONMeta                     `json:"meta,omitempty"`
 }
 
 type GetCertificatesResponse struct {

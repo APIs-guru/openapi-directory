@@ -1,6 +1,6 @@
 package shared
 
 type EditGuaranteedOrderReadAccessorsResponse struct {
-	ReadAccessInherited *bool    `json:"readAccessInherited"`
-	ReadAdvertiserIds   []string `json:"readAdvertiserIds"`
+	ReadAccessInherited *bool    `json:"readAccessInherited,omitempty"`
+	ReadAdvertiserIds   []string `json:"readAdvertiserIds,omitempty"`
 }

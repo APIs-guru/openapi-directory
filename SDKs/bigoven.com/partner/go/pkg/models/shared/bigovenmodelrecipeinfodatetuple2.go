@@ -5,6 +5,6 @@ import (
 )
 
 type BigOvenModelRecipeInfoDateTuple2 struct {
-	Date       *time.Time                   `json:"date"`
-	RecipeInfo *BigOvenModelApi2RecipeInfox `json:"recipeInfo"`
+	Date       *time.Time                   `json:"date,omitempty"`
+	RecipeInfo *BigOvenModelApi2RecipeInfox `json:"recipeInfo,omitempty"`
 }

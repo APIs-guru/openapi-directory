@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleAppsCardV1BorderStyle struct {
-	CornerRadius *int32                               `json:"cornerRadius"`
-	StrokeColor  *Color                               `json:"strokeColor"`
-	Type         *GoogleAppsCardV1BorderStyleTypeEnum `json:"type"`
+	CornerRadius *int32                               `json:"cornerRadius,omitempty"`
+	StrokeColor  *Color                               `json:"strokeColor,omitempty"`
+	Type         *GoogleAppsCardV1BorderStyleTypeEnum `json:"type,omitempty"`
 }

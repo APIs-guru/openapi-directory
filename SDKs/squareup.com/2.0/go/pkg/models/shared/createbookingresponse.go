@@ -1,6 +1,6 @@
 package shared
 
 type CreateBookingResponse struct {
-	Booking *Booking `json:"booking"`
-	Errors  []Error  `json:"errors"`
+	Booking *Booking `json:"booking,omitempty"`
+	Errors  []Error  `json:"errors,omitempty"`
 }

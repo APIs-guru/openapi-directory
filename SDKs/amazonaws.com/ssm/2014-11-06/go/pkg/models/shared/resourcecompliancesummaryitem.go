@@ -1,12 +1,12 @@
 package shared
 
 type ResourceComplianceSummaryItem struct {
-	ComplianceType      *string                     `json:"ComplianceType"`
-	CompliantSummary    *CompliantSummary           `json:"CompliantSummary"`
-	ExecutionSummary    *ComplianceExecutionSummary `json:"ExecutionSummary"`
-	NonCompliantSummary *NonCompliantSummary        `json:"NonCompliantSummary"`
-	OverallSeverity     *ComplianceSeverityEnum     `json:"OverallSeverity"`
-	ResourceID          *string                     `json:"ResourceId"`
-	ResourceType        *string                     `json:"ResourceType"`
-	Status              *ComplianceStatusEnum       `json:"Status"`
+	ComplianceType      *string                     `json:"ComplianceType,omitempty"`
+	CompliantSummary    *CompliantSummary           `json:"CompliantSummary,omitempty"`
+	ExecutionSummary    *ComplianceExecutionSummary `json:"ExecutionSummary,omitempty"`
+	NonCompliantSummary *NonCompliantSummary        `json:"NonCompliantSummary,omitempty"`
+	OverallSeverity     *ComplianceSeverityEnum     `json:"OverallSeverity,omitempty"`
+	ResourceID          *string                     `json:"ResourceId,omitempty"`
+	ResourceType        *string                     `json:"ResourceType,omitempty"`
+	Status              *ComplianceStatusEnum       `json:"Status,omitempty"`
 }

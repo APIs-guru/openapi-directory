@@ -1,15 +1,15 @@
 package shared
 
 type UpdateProductInput struct {
-	AcceptLanguage     *string  `json:"AcceptLanguage"`
-	AddTags            []Tag    `json:"AddTags"`
-	Description        *string  `json:"Description"`
-	Distributor        *string  `json:"Distributor"`
+	AcceptLanguage     *string  `json:"AcceptLanguage,omitempty"`
+	AddTags            []Tag    `json:"AddTags,omitempty"`
+	Description        *string  `json:"Description,omitempty"`
+	Distributor        *string  `json:"Distributor,omitempty"`
 	ID                 string   `json:"Id"`
-	Name               *string  `json:"Name"`
-	Owner              *string  `json:"Owner"`
-	RemoveTags         []string `json:"RemoveTags"`
-	SupportDescription *string  `json:"SupportDescription"`
-	SupportEmail       *string  `json:"SupportEmail"`
-	SupportURL         *string  `json:"SupportUrl"`
+	Name               *string  `json:"Name,omitempty"`
+	Owner              *string  `json:"Owner,omitempty"`
+	RemoveTags         []string `json:"RemoveTags,omitempty"`
+	SupportDescription *string  `json:"SupportDescription,omitempty"`
+	SupportEmail       *string  `json:"SupportEmail,omitempty"`
+	SupportURL         *string  `json:"SupportUrl,omitempty"`
 }

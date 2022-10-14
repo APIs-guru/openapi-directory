@@ -1,12 +1,12 @@
 package shared
 
 type GoogleCloudDataplexV1TaskSparkTaskConfig struct {
-	ArchiveUris        []string                                     `json:"archiveUris"`
-	FileUris           []string                                     `json:"fileUris"`
-	InfrastructureSpec *GoogleCloudDataplexV1TaskInfrastructureSpec `json:"infrastructureSpec"`
-	MainClass          *string                                      `json:"mainClass"`
-	MainJarFileURI     *string                                      `json:"mainJarFileUri"`
-	PythonScriptFile   *string                                      `json:"pythonScriptFile"`
-	SQLScript          *string                                      `json:"sqlScript"`
-	SQLScriptFile      *string                                      `json:"sqlScriptFile"`
+	ArchiveUris        []string                                     `json:"archiveUris,omitempty"`
+	FileUris           []string                                     `json:"fileUris,omitempty"`
+	InfrastructureSpec *GoogleCloudDataplexV1TaskInfrastructureSpec `json:"infrastructureSpec,omitempty"`
+	MainClass          *string                                      `json:"mainClass,omitempty"`
+	MainJarFileURI     *string                                      `json:"mainJarFileUri,omitempty"`
+	PythonScriptFile   *string                                      `json:"pythonScriptFile,omitempty"`
+	SQLScript          *string                                      `json:"sqlScript,omitempty"`
+	SQLScriptFile      *string                                      `json:"sqlScriptFile,omitempty"`
 }

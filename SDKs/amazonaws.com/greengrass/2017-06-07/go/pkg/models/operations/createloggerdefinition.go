@@ -16,13 +16,13 @@ type CreateLoggerDefinitionHeaders struct {
 }
 
 type CreateLoggerDefinitionRequestBodyInitialVersion struct {
-	Loggers []shared.Logger `json:"Loggers"`
+	Loggers []shared.Logger `json:"Loggers,omitempty"`
 }
 
 type CreateLoggerDefinitionRequestBody struct {
-	InitialVersion *CreateLoggerDefinitionRequestBodyInitialVersion `json:"InitialVersion"`
-	Name           *string                                          `json:"Name"`
-	Tags           map[string]string                                `json:"tags"`
+	InitialVersion *CreateLoggerDefinitionRequestBodyInitialVersion `json:"InitialVersion,omitempty"`
+	Name           *string                                          `json:"Name,omitempty"`
+	Tags           map[string]string                                `json:"tags,omitempty"`
 }
 
 type CreateLoggerDefinitionRequest struct {

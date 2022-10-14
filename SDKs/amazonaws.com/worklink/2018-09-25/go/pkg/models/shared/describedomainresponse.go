@@ -5,9 +5,9 @@ import (
 )
 
 type DescribeDomainResponse struct {
-	AcmCertificateArn *string           `json:"AcmCertificateArn"`
-	CreatedTime       *time.Time        `json:"CreatedTime"`
-	DisplayName       *string           `json:"DisplayName"`
-	DomainName        *string           `json:"DomainName"`
-	DomainStatus      *DomainStatusEnum `json:"DomainStatus"`
+	AcmCertificateArn *string           `json:"AcmCertificateArn,omitempty"`
+	CreatedTime       *time.Time        `json:"CreatedTime,omitempty"`
+	DisplayName       *string           `json:"DisplayName,omitempty"`
+	DomainName        *string           `json:"DomainName,omitempty"`
+	DomainStatus      *DomainStatusEnum `json:"DomainStatus,omitempty"`
 }

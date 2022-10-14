@@ -1,7 +1,7 @@
 package shared
 
 type PreviewTrustedCommsCps struct {
-	CpsURL      *string `json:"cps_url"`
-	PhoneNumber *string `json:"phone_number"`
-	URL         *string `json:"url"`
+	CpsURL      *string `json:"cps_url,omitempty"`
+	PhoneNumber *string `json:"phone_number,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }

@@ -9,12 +9,12 @@ const (
 )
 
 type WebApp struct {
-	APIKeyID    *string          `json:"apiKeyId"`
-	AppID       *string          `json:"appId"`
-	AppUrls     []string         `json:"appUrls"`
-	DisplayName *string          `json:"displayName"`
-	Name        *string          `json:"name"`
-	ProjectID   *string          `json:"projectId"`
-	State       *WebAppStateEnum `json:"state"`
-	WebID       *string          `json:"webId"`
+	APIKeyID    *string          `json:"apiKeyId,omitempty"`
+	AppID       *string          `json:"appId,omitempty"`
+	AppUrls     []string         `json:"appUrls,omitempty"`
+	DisplayName *string          `json:"displayName,omitempty"`
+	Name        *string          `json:"name,omitempty"`
+	ProjectID   *string          `json:"projectId,omitempty"`
+	State       *WebAppStateEnum `json:"state,omitempty"`
+	WebID       *string          `json:"webId,omitempty"`
 }

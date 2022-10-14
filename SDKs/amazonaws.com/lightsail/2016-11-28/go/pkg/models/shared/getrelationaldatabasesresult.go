@@ -1,6 +1,6 @@
 package shared
 
 type GetRelationalDatabasesResult struct {
-	NextPageToken       *string              `json:"nextPageToken"`
-	RelationalDatabases []RelationalDatabase `json:"relationalDatabases"`
+	NextPageToken       *string              `json:"nextPageToken,omitempty"`
+	RelationalDatabases []RelationalDatabase `json:"relationalDatabases,omitempty"`
 }

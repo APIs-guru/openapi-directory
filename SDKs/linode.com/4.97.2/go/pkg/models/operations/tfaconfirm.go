@@ -23,7 +23,7 @@ type TfaConfirmRequest struct {
 }
 
 type TfaConfirmDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type TfaConfirmResponse struct {

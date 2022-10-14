@@ -18,9 +18,9 @@ const (
 )
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsMaintenancePolicy struct {
-	Day       *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsMaintenancePolicyDayEnum `json:"day"`
-	Duration  *string                                                                                                                               `json:"duration"`
-	StartTime *string                                                                                                                               `json:"start_time"`
+	Day       *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsMaintenancePolicyDayEnum `json:"day,omitempty"`
+	Duration  *string                                                                                                                               `json:"duration,omitempty"`
+	StartTime *string                                                                                                                               `json:"start_time,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodesStatusStateEnum string
@@ -33,16 +33,16 @@ const (
 )
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodesStatus struct {
-	State *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodesStatusStateEnum `json:"state"`
+	State *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodesStatusStateEnum `json:"state,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodes struct {
-	CreatedAt *time.Time                                                                                                                        `json:"created_at"`
-	DropletID *string                                                                                                                           `json:"droplet_id"`
-	ID        *string                                                                                                                           `json:"id"`
-	Name      *string                                                                                                                           `json:"name"`
-	Status    *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodesStatus `json:"status"`
-	UpdatedAt *time.Time                                                                                                                        `json:"updated_at"`
+	CreatedAt *time.Time                                                                                                                        `json:"created_at,omitempty"`
+	DropletID *string                                                                                                                           `json:"droplet_id,omitempty"`
+	ID        *string                                                                                                                           `json:"id,omitempty"`
+	Name      *string                                                                                                                           `json:"name,omitempty"`
+	Status    *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodesStatus `json:"status,omitempty"`
+	UpdatedAt *time.Time                                                                                                                        `json:"updated_at,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsTaintsEffectEnum string
@@ -54,23 +54,23 @@ const (
 )
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsTaints struct {
-	Effect *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsTaintsEffectEnum `json:"effect"`
-	Key    *string                                                                                                                                `json:"key"`
-	Value  *string                                                                                                                                `json:"value"`
+	Effect *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsTaintsEffectEnum `json:"effect,omitempty"`
+	Key    *string                                                                                                                                `json:"key,omitempty"`
+	Value  *string                                                                                                                                `json:"value,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePools struct {
-	AutoScale *bool                                                                                                                         `json:"auto_scale"`
+	AutoScale *bool                                                                                                                         `json:"auto_scale,omitempty"`
 	Count     int64                                                                                                                         `json:"count"`
-	ID        *string                                                                                                                       `json:"id"`
-	Labels    map[string]interface{}                                                                                                        `json:"labels"`
-	MaxNodes  *int64                                                                                                                        `json:"max_nodes"`
-	MinNodes  *int64                                                                                                                        `json:"min_nodes"`
+	ID        *string                                                                                                                       `json:"id,omitempty"`
+	Labels    map[string]interface{}                                                                                                        `json:"labels,omitempty"`
+	MaxNodes  *int64                                                                                                                        `json:"max_nodes,omitempty"`
+	MinNodes  *int64                                                                                                                        `json:"min_nodes,omitempty"`
 	Name      string                                                                                                                        `json:"name"`
-	Nodes     []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodes  `json:"nodes"`
+	Nodes     []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsNodes  `json:"nodes,omitempty"`
 	Size      string                                                                                                                        `json:"size"`
-	Tags      []string                                                                                                                      `json:"tags"`
-	Taints    []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsTaints `json:"taints"`
+	Tags      []string                                                                                                                      `json:"tags,omitempty"`
+	Taints    []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePoolsTaints `json:"taints,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsStatusStateEnum string
@@ -86,27 +86,27 @@ const (
 )
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsStatus struct {
-	Message *string                                                                                                                      `json:"message"`
-	State   *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsStatusStateEnum `json:"state"`
+	Message *string                                                                                                                      `json:"message,omitempty"`
+	State   *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsStatusStateEnum `json:"state,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItems struct {
-	AutoUpgrade       *bool                                                                                                                          `json:"auto_upgrade"`
-	ClusterSubnet     *string                                                                                                                        `json:"cluster_subnet"`
-	CreatedAt         *time.Time                                                                                                                     `json:"created_at"`
-	Endpoint          *string                                                                                                                        `json:"endpoint"`
-	ID                *string                                                                                                                        `json:"id"`
-	Ipv4              *string                                                                                                                        `json:"ipv4"`
-	MaintenancePolicy *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsMaintenancePolicy `json:"maintenance_policy"`
+	AutoUpgrade       *bool                                                                                                                          `json:"auto_upgrade,omitempty"`
+	ClusterSubnet     *string                                                                                                                        `json:"cluster_subnet,omitempty"`
+	CreatedAt         *time.Time                                                                                                                     `json:"created_at,omitempty"`
+	Endpoint          *string                                                                                                                        `json:"endpoint,omitempty"`
+	ID                *string                                                                                                                        `json:"id,omitempty"`
+	Ipv4              *string                                                                                                                        `json:"ipv4,omitempty"`
+	MaintenancePolicy *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsMaintenancePolicy `json:"maintenance_policy,omitempty"`
 	Name              string                                                                                                                         `json:"name"`
 	NodePools         []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsNodePools        `json:"node_pools"`
 	Region            string                                                                                                                         `json:"region"`
-	RegistryEnabled   *bool                                                                                                                          `json:"registry_enabled"`
-	ServiceSubnet     *string                                                                                                                        `json:"service_subnet"`
-	Status            *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsStatus            `json:"status"`
-	SurgeUpgrade      *bool                                                                                                                          `json:"surge_upgrade"`
-	Tags              []string                                                                                                                       `json:"tags"`
-	UpdatedAt         *time.Time                                                                                                                     `json:"updated_at"`
+	RegistryEnabled   *bool                                                                                                                          `json:"registry_enabled,omitempty"`
+	ServiceSubnet     *string                                                                                                                        `json:"service_subnet,omitempty"`
+	Status            *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsStatus            `json:"status,omitempty"`
+	SurgeUpgrade      *bool                                                                                                                          `json:"surge_upgrade,omitempty"`
+	Tags              []string                                                                                                                       `json:"tags,omitempty"`
+	UpdatedAt         *time.Time                                                                                                                     `json:"updated_at,omitempty"`
 	Version           string                                                                                                                         `json:"version"`
-	VpcUUID           *string                                                                                                                        `json:"vpc_uuid"`
+	VpcUUID           *string                                                                                                                        `json:"vpc_uuid,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type LiveStream struct {
-	Cdn            *CdnSettings              `json:"cdn"`
-	ContentDetails *LiveStreamContentDetails `json:"contentDetails"`
-	Etag           *string                   `json:"etag"`
-	ID             *string                   `json:"id"`
-	Kind           *string                   `json:"kind"`
-	Snippet        *LiveStreamSnippet        `json:"snippet"`
-	Status         *LiveStreamStatus         `json:"status"`
+	Cdn            *CdnSettings              `json:"cdn,omitempty"`
+	ContentDetails *LiveStreamContentDetails `json:"contentDetails,omitempty"`
+	Etag           *string                   `json:"etag,omitempty"`
+	ID             *string                   `json:"id,omitempty"`
+	Kind           *string                   `json:"kind,omitempty"`
+	Snippet        *LiveStreamSnippet        `json:"snippet,omitempty"`
+	Status         *LiveStreamStatus         `json:"status,omitempty"`
 }

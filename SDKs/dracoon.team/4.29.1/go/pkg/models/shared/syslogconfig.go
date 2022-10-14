@@ -8,9 +8,9 @@ const (
 )
 
 type SyslogConfig struct {
-	Enabled      *bool                     `json:"enabled"`
-	Host         *string                   `json:"host"`
-	LogIPEnabled *bool                     `json:"logIpEnabled"`
-	Port         *int32                    `json:"port"`
-	Protocol     *SyslogConfigProtocolEnum `json:"protocol"`
+	Enabled      *bool                     `json:"enabled,omitempty"`
+	Host         *string                   `json:"host,omitempty"`
+	LogIPEnabled *bool                     `json:"logIpEnabled,omitempty"`
+	Port         *int32                    `json:"port,omitempty"`
+	Protocol     *SyslogConfigProtocolEnum `json:"protocol,omitempty"`
 }

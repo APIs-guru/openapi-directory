@@ -6,6 +6,6 @@ type TestActiveDirectoryConfigRequest struct {
 	ServerAdminPassword string  `json:"serverAdminPassword"`
 	ServerIP            string  `json:"serverIp"`
 	ServerPort          int32   `json:"serverPort"`
-	SslFingerPrint      *string `json:"sslFingerPrint"`
-	UseLdaps            *bool   `json:"useLdaps"`
+	SslFingerPrint      *string `json:"sslFingerPrint,omitempty"`
+	UseLdaps            *bool   `json:"useLdaps,omitempty"`
 }

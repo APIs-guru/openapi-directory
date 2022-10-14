@@ -15,15 +15,15 @@ type CreateWorldExportJobHeaders struct {
 }
 
 type CreateWorldExportJobRequestBodyOutputLocation struct {
-	S3Bucket *string `json:"s3Bucket"`
-	S3Prefix *string `json:"s3Prefix"`
+	S3Bucket *string `json:"s3Bucket,omitempty"`
+	S3Prefix *string `json:"s3Prefix,omitempty"`
 }
 
 type CreateWorldExportJobRequestBody struct {
-	ClientRequestToken *string                                       `json:"clientRequestToken"`
+	ClientRequestToken *string                                       `json:"clientRequestToken,omitempty"`
 	IamRole            string                                        `json:"iamRole"`
 	OutputLocation     CreateWorldExportJobRequestBodyOutputLocation `json:"outputLocation"`
-	Tags               map[string]string                             `json:"tags"`
+	Tags               map[string]string                             `json:"tags,omitempty"`
 	Worlds             []string                                      `json:"worlds"`
 }
 

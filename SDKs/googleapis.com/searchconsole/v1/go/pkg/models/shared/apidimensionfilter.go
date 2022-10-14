@@ -22,7 +22,7 @@ const (
 )
 
 type APIDimensionFilter struct {
-	Dimension  *APIDimensionFilterDimensionEnum `json:"dimension"`
-	Expression *string                          `json:"expression"`
-	Operator   *APIDimensionFilterOperatorEnum  `json:"operator"`
+	Dimension  *APIDimensionFilterDimensionEnum `json:"dimension,omitempty"`
+	Expression *string                          `json:"expression,omitempty"`
+	Operator   *APIDimensionFilterOperatorEnum  `json:"operator,omitempty"`
 }

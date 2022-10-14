@@ -9,5 +9,5 @@ const (
 )
 
 type FailoverInstanceRequest struct {
-	DataProtectionMode *FailoverInstanceRequestDataProtectionModeEnum `json:"dataProtectionMode"`
+	DataProtectionMode *FailoverInstanceRequestDataProtectionModeEnum `json:"dataProtectionMode,omitempty"`
 }

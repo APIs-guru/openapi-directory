@@ -5,15 +5,15 @@ import (
 )
 
 type UserResponse struct {
-	AvatarURL     *string       `json:"avatarUrl"`
-	Email         *string       `json:"email"`
-	FirstAccessAt *time.Time    `json:"firstAccessAt"`
-	FirstName     *string       `json:"firstName"`
-	ID            *string       `json:"id"`
-	Invite        *Invite       `json:"invite"`
-	LastAccessAt  *time.Time    `json:"lastAccessAt"`
-	LastName      *string       `json:"lastName"`
-	Metadata      *UserMetadata `json:"metadata"`
-	PersonID      *string       `json:"personId"`
-	Profile       *UserProfile  `json:"profile"`
+	AvatarURL     *string       `json:"avatarUrl,omitempty"`
+	Email         *string       `json:"email,omitempty"`
+	FirstAccessAt *time.Time    `json:"firstAccessAt,omitempty"`
+	FirstName     *string       `json:"firstName,omitempty"`
+	ID            *string       `json:"id,omitempty"`
+	Invite        *Invite       `json:"invite,omitempty"`
+	LastAccessAt  *time.Time    `json:"lastAccessAt,omitempty"`
+	LastName      *string       `json:"lastName,omitempty"`
+	Metadata      *UserMetadata `json:"metadata,omitempty"`
+	PersonID      *string       `json:"personId,omitempty"`
+	Profile       *UserProfile  `json:"profile,omitempty"`
 }

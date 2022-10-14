@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup struct {
-	PhraseMatchRules []GoogleCloudContactcenterinsightsV1PhraseMatchRule             `json:"phraseMatchRules"`
-	Type             *GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum `json:"type"`
+	PhraseMatchRules []GoogleCloudContactcenterinsightsV1PhraseMatchRule             `json:"phraseMatchRules,omitempty"`
+	Type             *GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum `json:"type,omitempty"`
 }

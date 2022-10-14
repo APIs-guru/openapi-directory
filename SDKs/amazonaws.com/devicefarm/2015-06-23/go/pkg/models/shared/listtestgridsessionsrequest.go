@@ -5,12 +5,12 @@ import (
 )
 
 type ListTestGridSessionsRequest struct {
-	CreationTimeAfter  *time.Time                 `json:"creationTimeAfter"`
-	CreationTimeBefore *time.Time                 `json:"creationTimeBefore"`
-	EndTimeAfter       *time.Time                 `json:"endTimeAfter"`
-	EndTimeBefore      *time.Time                 `json:"endTimeBefore"`
-	MaxResult          *int64                     `json:"maxResult"`
-	NextToken          *string                    `json:"nextToken"`
+	CreationTimeAfter  *time.Time                 `json:"creationTimeAfter,omitempty"`
+	CreationTimeBefore *time.Time                 `json:"creationTimeBefore,omitempty"`
+	EndTimeAfter       *time.Time                 `json:"endTimeAfter,omitempty"`
+	EndTimeBefore      *time.Time                 `json:"endTimeBefore,omitempty"`
+	MaxResult          *int64                     `json:"maxResult,omitempty"`
+	NextToken          *string                    `json:"nextToken,omitempty"`
 	ProjectArn         string                     `json:"projectArn"`
-	Status             *TestGridSessionStatusEnum `json:"status"`
+	Status             *TestGridSessionStatusEnum `json:"status,omitempty"`
 }

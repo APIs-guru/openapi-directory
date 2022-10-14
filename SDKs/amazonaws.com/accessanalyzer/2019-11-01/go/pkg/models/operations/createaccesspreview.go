@@ -16,7 +16,7 @@ type CreateAccessPreviewHeaders struct {
 
 type CreateAccessPreviewRequestBody struct {
 	AnalyzerArn    string                          `json:"analyzerArn"`
-	ClientToken    *string                         `json:"clientToken"`
+	ClientToken    *string                         `json:"clientToken,omitempty"`
 	Configurations map[string]shared.Configuration `json:"configurations"`
 }
 

@@ -12,6 +12,6 @@ const (
 )
 
 type ContainerAccess struct {
-	ContainerID *string                         `json:"containerId"`
-	Permission  []ContainerAccessPermissionEnum `json:"permission"`
+	ContainerID *string                         `json:"containerId,omitempty"`
+	Permission  []ContainerAccessPermissionEnum `json:"permission,omitempty"`
 }

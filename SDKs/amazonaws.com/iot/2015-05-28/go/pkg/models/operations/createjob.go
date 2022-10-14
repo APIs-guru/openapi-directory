@@ -19,17 +19,17 @@ type CreateJobHeaders struct {
 }
 
 type CreateJobRequestBodyAbortConfig struct {
-	CriteriaList []shared.AbortCriteria `json:"criteriaList"`
+	CriteriaList []shared.AbortCriteria `json:"criteriaList,omitempty"`
 }
 
 type CreateJobRequestBodyJobExecutionsRolloutConfig struct {
-	ExponentialRate  *shared.ExponentialRolloutRate `json:"exponentialRate"`
-	MaximumPerMinute *int64                         `json:"maximumPerMinute"`
+	ExponentialRate  *shared.ExponentialRolloutRate `json:"exponentialRate,omitempty"`
+	MaximumPerMinute *int64                         `json:"maximumPerMinute,omitempty"`
 }
 
 type CreateJobRequestBodyPresignedURLConfig struct {
-	ExpiresInSec *int64  `json:"expiresInSec"`
-	RoleArn      *string `json:"roleArn"`
+	ExpiresInSec *int64  `json:"expiresInSec,omitempty"`
+	RoleArn      *string `json:"roleArn,omitempty"`
 }
 
 type CreateJobRequestBodyTargetSelectionEnum string
@@ -40,22 +40,22 @@ const (
 )
 
 type CreateJobRequestBodyTimeoutConfig struct {
-	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes"`
+	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes,omitempty"`
 }
 
 type CreateJobRequestBody struct {
-	AbortConfig                *CreateJobRequestBodyAbortConfig                `json:"abortConfig"`
-	Description                *string                                         `json:"description"`
-	Document                   *string                                         `json:"document"`
-	DocumentSource             *string                                         `json:"documentSource"`
-	JobExecutionsRolloutConfig *CreateJobRequestBodyJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig"`
-	JobTemplateArn             *string                                         `json:"jobTemplateArn"`
-	NamespaceID                *string                                         `json:"namespaceId"`
-	PresignedURLConfig         *CreateJobRequestBodyPresignedURLConfig         `json:"presignedUrlConfig"`
-	Tags                       []shared.Tag                                    `json:"tags"`
-	TargetSelection            *CreateJobRequestBodyTargetSelectionEnum        `json:"targetSelection"`
+	AbortConfig                *CreateJobRequestBodyAbortConfig                `json:"abortConfig,omitempty"`
+	Description                *string                                         `json:"description,omitempty"`
+	Document                   *string                                         `json:"document,omitempty"`
+	DocumentSource             *string                                         `json:"documentSource,omitempty"`
+	JobExecutionsRolloutConfig *CreateJobRequestBodyJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig,omitempty"`
+	JobTemplateArn             *string                                         `json:"jobTemplateArn,omitempty"`
+	NamespaceID                *string                                         `json:"namespaceId,omitempty"`
+	PresignedURLConfig         *CreateJobRequestBodyPresignedURLConfig         `json:"presignedUrlConfig,omitempty"`
+	Tags                       []shared.Tag                                    `json:"tags,omitempty"`
+	TargetSelection            *CreateJobRequestBodyTargetSelectionEnum        `json:"targetSelection,omitempty"`
 	Targets                    []string                                        `json:"targets"`
-	TimeoutConfig              *CreateJobRequestBodyTimeoutConfig              `json:"timeoutConfig"`
+	TimeoutConfig              *CreateJobRequestBodyTimeoutConfig              `json:"timeoutConfig,omitempty"`
 }
 
 type CreateJobRequest struct {

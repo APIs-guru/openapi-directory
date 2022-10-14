@@ -1,7 +1,7 @@
 package shared
 
 type PositionedObjectPositioningSuggestionState struct {
-	LayoutSuggested     *bool `json:"layoutSuggested"`
-	LeftOffsetSuggested *bool `json:"leftOffsetSuggested"`
-	TopOffsetSuggested  *bool `json:"topOffsetSuggested"`
+	LayoutSuggested     *bool `json:"layoutSuggested,omitempty"`
+	LeftOffsetSuggested *bool `json:"leftOffsetSuggested,omitempty"`
+	TopOffsetSuggested  *bool `json:"topOffsetSuggested,omitempty"`
 }

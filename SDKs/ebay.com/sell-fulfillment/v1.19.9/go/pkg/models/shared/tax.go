@@ -1,6 +1,6 @@
 package shared
 
 type Tax struct {
-	Amount  *Amount `json:"amount"`
-	TaxType *string `json:"taxType"`
+	Amount  *Amount `json:"amount,omitempty"`
+	TaxType *string `json:"taxType,omitempty"`
 }

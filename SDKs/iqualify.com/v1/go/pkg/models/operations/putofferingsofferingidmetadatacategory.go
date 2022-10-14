@@ -9,7 +9,7 @@ type PutOfferingsOfferingIDMetadataCategoryPathParams struct {
 }
 
 type PutOfferingsOfferingIDMetadataCategoryRequestBody struct {
-	Category *string `json:"category"`
+	Category *string `json:"category,omitempty"`
 }
 
 type PutOfferingsOfferingIDMetadataCategoryRequest struct {

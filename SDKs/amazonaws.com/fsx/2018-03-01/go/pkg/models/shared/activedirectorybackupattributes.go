@@ -1,7 +1,7 @@
 package shared
 
 type ActiveDirectoryBackupAttributes struct {
-	ActiveDirectoryID *string `json:"ActiveDirectoryId"`
-	DomainName        *string `json:"DomainName"`
-	ResourceArn       *string `json:"ResourceARN"`
+	ActiveDirectoryID *string `json:"ActiveDirectoryId,omitempty"`
+	DomainName        *string `json:"DomainName,omitempty"`
+	ResourceArn       *string `json:"ResourceARN,omitempty"`
 }

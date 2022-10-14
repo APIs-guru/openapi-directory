@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudDialogflowV2ArticleAnswer struct {
-	AnswerRecord *string           `json:"answerRecord"`
-	Confidence   *float32          `json:"confidence"`
-	Metadata     map[string]string `json:"metadata"`
-	Snippets     []string          `json:"snippets"`
-	Title        *string           `json:"title"`
-	URI          *string           `json:"uri"`
+	AnswerRecord *string           `json:"answerRecord,omitempty"`
+	Confidence   *float32          `json:"confidence,omitempty"`
+	Metadata     map[string]string `json:"metadata,omitempty"`
+	Snippets     []string          `json:"snippets,omitempty"`
+	Title        *string           `json:"title,omitempty"`
+	URI          *string           `json:"uri,omitempty"`
 }

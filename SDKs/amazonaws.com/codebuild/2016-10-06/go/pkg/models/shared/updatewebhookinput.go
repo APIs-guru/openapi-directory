@@ -1,9 +1,9 @@
 package shared
 
 type UpdateWebhookInput struct {
-	BranchFilter *string               `json:"branchFilter"`
-	BuildType    *WebhookBuildTypeEnum `json:"buildType"`
-	FilterGroups [][]WebhookFilter     `json:"filterGroups"`
+	BranchFilter *string               `json:"branchFilter,omitempty"`
+	BuildType    *WebhookBuildTypeEnum `json:"buildType,omitempty"`
+	FilterGroups [][]WebhookFilter     `json:"filterGroups,omitempty"`
 	ProjectName  string                `json:"projectName"`
-	RotateSecret *bool                 `json:"rotateSecret"`
+	RotateSecret *bool                 `json:"rotateSecret,omitempty"`
 }

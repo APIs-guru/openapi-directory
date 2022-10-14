@@ -28,12 +28,12 @@ const (
 )
 
 type ListImagesRequestBody struct {
-	ByName            *bool                           `json:"byName"`
-	Filters           []shared.Filter                 `json:"filters"`
-	IncludeDeprecated *bool                           `json:"includeDeprecated"`
-	MaxResults        *int64                          `json:"maxResults"`
-	NextToken         *string                         `json:"nextToken"`
-	Owner             *ListImagesRequestBodyOwnerEnum `json:"owner"`
+	ByName            *bool                           `json:"byName,omitempty"`
+	Filters           []shared.Filter                 `json:"filters,omitempty"`
+	IncludeDeprecated *bool                           `json:"includeDeprecated,omitempty"`
+	MaxResults        *int64                          `json:"maxResults,omitempty"`
+	NextToken         *string                         `json:"nextToken,omitempty"`
+	Owner             *ListImagesRequestBodyOwnerEnum `json:"owner,omitempty"`
 }
 
 type ListImagesRequest struct {

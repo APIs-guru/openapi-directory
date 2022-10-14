@@ -1,7 +1,7 @@
 package shared
 
 type ReportsConfiguration struct {
-	ExposureToConversionEnabled *bool                  `json:"exposureToConversionEnabled"`
-	LookbackConfiguration       *LookbackConfiguration `json:"lookbackConfiguration"`
-	ReportGenerationTimeZoneID  *string                `json:"reportGenerationTimeZoneId"`
+	ExposureToConversionEnabled *bool                  `json:"exposureToConversionEnabled,omitempty"`
+	LookbackConfiguration       *LookbackConfiguration `json:"lookbackConfiguration,omitempty"`
+	ReportGenerationTimeZoneID  *string                `json:"reportGenerationTimeZoneId,omitempty"`
 }

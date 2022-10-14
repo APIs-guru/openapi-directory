@@ -8,8 +8,8 @@ const (
 )
 
 type Template struct {
-	ID       *string           `json:"id"`
-	Name     *string           `json:"name"`
-	Template *string           `json:"template"`
-	Type     *TemplateTypeEnum `json:"type"`
+	ID       *string           `json:"id,omitempty"`
+	Name     *string           `json:"name,omitempty"`
+	Template *string           `json:"template,omitempty"`
+	Type     *TemplateTypeEnum `json:"type,omitempty"`
 }

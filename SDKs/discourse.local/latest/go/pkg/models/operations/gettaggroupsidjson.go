@@ -9,20 +9,20 @@ type GetTagGroupsIDJSONRequest struct {
 }
 
 type GetTagGroupsIDJSON200ApplicationJSONTagGroupPermissions struct {
-	Everyone *int64 `json:"everyone"`
+	Everyone *int64 `json:"everyone,omitempty"`
 }
 
 type GetTagGroupsIDJSON200ApplicationJSONTagGroup struct {
-	ID            *int64                                                   `json:"id"`
-	Name          *string                                                  `json:"name"`
-	OnePerTopic   *bool                                                    `json:"one_per_topic"`
-	ParentTagName []interface{}                                            `json:"parent_tag_name"`
-	Permissions   *GetTagGroupsIDJSON200ApplicationJSONTagGroupPermissions `json:"permissions"`
-	TagNames      []interface{}                                            `json:"tag_names"`
+	ID            *int64                                                   `json:"id,omitempty"`
+	Name          *string                                                  `json:"name,omitempty"`
+	OnePerTopic   *bool                                                    `json:"one_per_topic,omitempty"`
+	ParentTagName []interface{}                                            `json:"parent_tag_name,omitempty"`
+	Permissions   *GetTagGroupsIDJSON200ApplicationJSONTagGroupPermissions `json:"permissions,omitempty"`
+	TagNames      []interface{}                                            `json:"tag_names,omitempty"`
 }
 
 type GetTagGroupsIDJSON200ApplicationJSON struct {
-	TagGroup *GetTagGroupsIDJSON200ApplicationJSONTagGroup `json:"tag_group"`
+	TagGroup *GetTagGroupsIDJSON200ApplicationJSONTagGroup `json:"tag_group,omitempty"`
 }
 
 type GetTagGroupsIDJSONResponse struct {

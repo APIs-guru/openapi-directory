@@ -10,6 +10,6 @@ const (
 )
 
 type SharedDriveFile struct {
-	DriveFile *DriveFile                    `json:"driveFile"`
-	ShareMode *SharedDriveFileShareModeEnum `json:"shareMode"`
+	DriveFile *DriveFile                    `json:"driveFile,omitempty"`
+	ShareMode *SharedDriveFileShareModeEnum `json:"shareMode,omitempty"`
 }

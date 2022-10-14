@@ -1,6 +1,6 @@
 package shared
 
 type PretargetingConfigList struct {
-	Items []PretargetingConfig `json:"items"`
-	Kind  *string              `json:"kind"`
+	Items []PretargetingConfig `json:"items,omitempty"`
+	Kind  *string              `json:"kind,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type GetServiceGraphResult struct {
-	ContainsOldGroupVersions *bool      `json:"ContainsOldGroupVersions"`
-	EndTime                  *time.Time `json:"EndTime"`
-	NextToken                *string    `json:"NextToken"`
-	Services                 []Service  `json:"Services"`
-	StartTime                *time.Time `json:"StartTime"`
+	ContainsOldGroupVersions *bool      `json:"ContainsOldGroupVersions,omitempty"`
+	EndTime                  *time.Time `json:"EndTime,omitempty"`
+	NextToken                *string    `json:"NextToken,omitempty"`
+	Services                 []Service  `json:"Services,omitempty"`
+	StartTime                *time.Time `json:"StartTime,omitempty"`
 }

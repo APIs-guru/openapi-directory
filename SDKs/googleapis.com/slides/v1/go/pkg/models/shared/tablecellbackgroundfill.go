@@ -9,6 +9,6 @@ const (
 )
 
 type TableCellBackgroundFill struct {
-	PropertyState *TableCellBackgroundFillPropertyStateEnum `json:"propertyState"`
-	SolidFill     *SolidFill                                `json:"solidFill"`
+	PropertyState *TableCellBackgroundFillPropertyStateEnum `json:"propertyState,omitempty"`
+	SolidFill     *SolidFill                                `json:"solidFill,omitempty"`
 }

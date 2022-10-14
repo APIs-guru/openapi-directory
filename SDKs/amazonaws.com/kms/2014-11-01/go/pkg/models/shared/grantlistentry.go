@@ -5,13 +5,13 @@ import (
 )
 
 type GrantListEntry struct {
-	Constraints       *GrantConstraints    `json:"Constraints"`
-	CreationDate      *time.Time           `json:"CreationDate"`
-	GrantID           *string              `json:"GrantId"`
-	GranteePrincipal  *string              `json:"GranteePrincipal"`
-	IssuingAccount    *string              `json:"IssuingAccount"`
-	KeyID             *string              `json:"KeyId"`
-	Name              *string              `json:"Name"`
-	Operations        []GrantOperationEnum `json:"Operations"`
-	RetiringPrincipal *string              `json:"RetiringPrincipal"`
+	Constraints       *GrantConstraints    `json:"Constraints,omitempty"`
+	CreationDate      *time.Time           `json:"CreationDate,omitempty"`
+	GrantID           *string              `json:"GrantId,omitempty"`
+	GranteePrincipal  *string              `json:"GranteePrincipal,omitempty"`
+	IssuingAccount    *string              `json:"IssuingAccount,omitempty"`
+	KeyID             *string              `json:"KeyId,omitempty"`
+	Name              *string              `json:"Name,omitempty"`
+	Operations        []GrantOperationEnum `json:"Operations,omitempty"`
+	RetiringPrincipal *string              `json:"RetiringPrincipal,omitempty"`
 }

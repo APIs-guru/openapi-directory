@@ -1,7 +1,7 @@
 package shared
 
 type OrderDocumentsListResponse struct {
-	Kind           *string         `json:"kind"`
-	NextPageToken  *string         `json:"nextPageToken"`
-	OrderDocuments []OrderDocument `json:"orderDocuments"`
+	Kind           *string         `json:"kind,omitempty"`
+	NextPageToken  *string         `json:"nextPageToken,omitempty"`
+	OrderDocuments []OrderDocument `json:"orderDocuments,omitempty"`
 }

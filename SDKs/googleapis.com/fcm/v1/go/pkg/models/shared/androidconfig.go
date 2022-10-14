@@ -8,12 +8,12 @@ const (
 )
 
 type AndroidConfig struct {
-	CollapseKey           *string                    `json:"collapseKey"`
-	Data                  map[string]string          `json:"data"`
-	DirectBootOk          *bool                      `json:"directBootOk"`
-	FcmOptions            *AndroidFcmOptions         `json:"fcmOptions"`
-	Notification          *AndroidNotification       `json:"notification"`
-	Priority              *AndroidConfigPriorityEnum `json:"priority"`
-	RestrictedPackageName *string                    `json:"restrictedPackageName"`
-	TTL                   *string                    `json:"ttl"`
+	CollapseKey           *string                    `json:"collapseKey,omitempty"`
+	Data                  map[string]string          `json:"data,omitempty"`
+	DirectBootOk          *bool                      `json:"directBootOk,omitempty"`
+	FcmOptions            *AndroidFcmOptions         `json:"fcmOptions,omitempty"`
+	Notification          *AndroidNotification       `json:"notification,omitempty"`
+	Priority              *AndroidConfigPriorityEnum `json:"priority,omitempty"`
+	RestrictedPackageName *string                    `json:"restrictedPackageName,omitempty"`
+	TTL                   *string                    `json:"ttl,omitempty"`
 }

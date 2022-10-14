@@ -9,17 +9,17 @@ const (
 )
 
 type Membership struct {
-	Authority          *Authority                        `json:"authority"`
-	CreateTime         *string                           `json:"createTime"`
-	DeleteTime         *string                           `json:"deleteTime"`
-	Description        *string                           `json:"description"`
-	Endpoint           *MembershipEndpoint               `json:"endpoint"`
-	ExternalID         *string                           `json:"externalId"`
-	InfrastructureType *MembershipInfrastructureTypeEnum `json:"infrastructureType"`
-	Labels             map[string]string                 `json:"labels"`
-	LastConnectionTime *string                           `json:"lastConnectionTime"`
-	Name               *string                           `json:"name"`
-	State              *MembershipState                  `json:"state"`
-	UniqueID           *string                           `json:"uniqueId"`
-	UpdateTime         *string                           `json:"updateTime"`
+	Authority          *Authority                        `json:"authority,omitempty"`
+	CreateTime         *string                           `json:"createTime,omitempty"`
+	DeleteTime         *string                           `json:"deleteTime,omitempty"`
+	Description        *string                           `json:"description,omitempty"`
+	Endpoint           *MembershipEndpoint               `json:"endpoint,omitempty"`
+	ExternalID         *string                           `json:"externalId,omitempty"`
+	InfrastructureType *MembershipInfrastructureTypeEnum `json:"infrastructureType,omitempty"`
+	Labels             map[string]string                 `json:"labels,omitempty"`
+	LastConnectionTime *string                           `json:"lastConnectionTime,omitempty"`
+	Name               *string                           `json:"name,omitempty"`
+	State              *MembershipState                  `json:"state,omitempty"`
+	UniqueID           *string                           `json:"uniqueId,omitempty"`
+	UpdateTime         *string                           `json:"updateTime,omitempty"`
 }

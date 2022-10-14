@@ -8,6 +8,6 @@ const (
 )
 
 type RestoreInfo struct {
-	BackupInfo *BackupInfo                `json:"backupInfo"`
-	SourceType *RestoreInfoSourceTypeEnum `json:"sourceType"`
+	BackupInfo *BackupInfo                `json:"backupInfo,omitempty"`
+	SourceType *RestoreInfoSourceTypeEnum `json:"sourceType,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type TflAPIPresentationEntitiesJourneyPlannerTimeAdjustments struct {
-	Earlier  *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"earlier"`
-	Earliest *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"earliest"`
-	Later    *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"later"`
-	Latest   *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"latest"`
+	Earlier  *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"earlier,omitempty"`
+	Earliest *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"earliest,omitempty"`
+	Later    *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"later,omitempty"`
+	Latest   *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustment `json:"latest,omitempty"`
 }

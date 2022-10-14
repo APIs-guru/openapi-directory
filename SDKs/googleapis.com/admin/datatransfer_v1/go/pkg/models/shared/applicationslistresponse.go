@@ -1,8 +1,8 @@
 package shared
 
 type ApplicationsListResponse struct {
-	Applications  []Application `json:"applications"`
-	Etag          *string       `json:"etag"`
-	Kind          *string       `json:"kind"`
-	NextPageToken *string       `json:"nextPageToken"`
+	Applications  []Application `json:"applications,omitempty"`
+	Etag          *string       `json:"etag,omitempty"`
+	Kind          *string       `json:"kind,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
 }

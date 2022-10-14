@@ -15,8 +15,8 @@ type CreatePortalHeaders struct {
 }
 
 type CreatePortalRequestBodyAlarms struct {
-	AlarmRoleArn          *string `json:"alarmRoleArn"`
-	NotificationLambdaArn *string `json:"notificationLambdaArn"`
+	AlarmRoleArn          *string `json:"alarmRoleArn,omitempty"`
+	NotificationLambdaArn *string `json:"notificationLambdaArn,omitempty"`
 }
 
 type CreatePortalRequestBodyPortalAuthModeEnum string
@@ -27,21 +27,21 @@ const (
 )
 
 type CreatePortalRequestBodyPortalLogoImageFile struct {
-	Data *string                   `json:"data"`
-	Type *shared.ImageFileTypeEnum `json:"type"`
+	Data *string                   `json:"data,omitempty"`
+	Type *shared.ImageFileTypeEnum `json:"type,omitempty"`
 }
 
 type CreatePortalRequestBody struct {
-	Alarms                  *CreatePortalRequestBodyAlarms              `json:"alarms"`
-	ClientToken             *string                                     `json:"clientToken"`
-	NotificationSenderEmail *string                                     `json:"notificationSenderEmail"`
-	PortalAuthMode          *CreatePortalRequestBodyPortalAuthModeEnum  `json:"portalAuthMode"`
+	Alarms                  *CreatePortalRequestBodyAlarms              `json:"alarms,omitempty"`
+	ClientToken             *string                                     `json:"clientToken,omitempty"`
+	NotificationSenderEmail *string                                     `json:"notificationSenderEmail,omitempty"`
+	PortalAuthMode          *CreatePortalRequestBodyPortalAuthModeEnum  `json:"portalAuthMode,omitempty"`
 	PortalContactEmail      string                                      `json:"portalContactEmail"`
-	PortalDescription       *string                                     `json:"portalDescription"`
-	PortalLogoImageFile     *CreatePortalRequestBodyPortalLogoImageFile `json:"portalLogoImageFile"`
+	PortalDescription       *string                                     `json:"portalDescription,omitempty"`
+	PortalLogoImageFile     *CreatePortalRequestBodyPortalLogoImageFile `json:"portalLogoImageFile,omitempty"`
 	PortalName              string                                      `json:"portalName"`
 	RoleArn                 string                                      `json:"roleArn"`
-	Tags                    map[string]string                           `json:"tags"`
+	Tags                    map[string]string                           `json:"tags,omitempty"`
 }
 
 type CreatePortalRequest struct {

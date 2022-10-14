@@ -5,13 +5,13 @@ import (
 )
 
 type Session struct {
-	Details      *string                  `json:"Details"`
-	DocumentName *string                  `json:"DocumentName"`
-	EndDate      *time.Time               `json:"EndDate"`
-	OutputURL    *SessionManagerOutputURL `json:"OutputUrl"`
-	Owner        *string                  `json:"Owner"`
-	SessionID    *string                  `json:"SessionId"`
-	StartDate    *time.Time               `json:"StartDate"`
-	Status       *SessionStatusEnum       `json:"Status"`
-	Target       *string                  `json:"Target"`
+	Details      *string                  `json:"Details,omitempty"`
+	DocumentName *string                  `json:"DocumentName,omitempty"`
+	EndDate      *time.Time               `json:"EndDate,omitempty"`
+	OutputURL    *SessionManagerOutputURL `json:"OutputUrl,omitempty"`
+	Owner        *string                  `json:"Owner,omitempty"`
+	SessionID    *string                  `json:"SessionId,omitempty"`
+	StartDate    *time.Time               `json:"StartDate,omitempty"`
+	Status       *SessionStatusEnum       `json:"Status,omitempty"`
+	Target       *string                  `json:"Target,omitempty"`
 }

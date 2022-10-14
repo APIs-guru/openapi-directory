@@ -1,5 +1,5 @@
 package shared
 
 type GetPolicyOptions struct {
-	RequestedPolicyVersion *int32 `json:"requestedPolicyVersion"`
+	RequestedPolicyVersion *int32 `json:"requestedPolicyVersion,omitempty"`
 }

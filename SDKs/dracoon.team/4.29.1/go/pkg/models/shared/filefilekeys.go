@@ -1,6 +1,6 @@
 package shared
 
 type FileFileKeys struct {
-	FileKeyContainer *FileKeyContainer `json:"fileKeyContainer"`
-	ID               *int64            `json:"id"`
+	FileKeyContainer *FileKeyContainer `json:"fileKeyContainer,omitempty"`
+	ID               *int64            `json:"id,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeCreateAccountStatusResponse struct {
-	CreateAccountStatus *CreateAccountStatus `json:"CreateAccountStatus"`
+	CreateAccountStatus *CreateAccountStatus `json:"CreateAccountStatus,omitempty"`
 }

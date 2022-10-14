@@ -1,6 +1,6 @@
 package shared
 
 type GoogleSecuritySafebrowsingV4ThreatHitUserInfo struct {
-	RegionCode *string `json:"regionCode"`
-	UserID     *string `json:"userId"`
+	RegionCode *string `json:"regionCode,omitempty"`
+	UserID     *string `json:"userId,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AuditConfig struct {
-	AuditLogConfigs []AuditLogConfig `json:"auditLogConfigs"`
-	Service         *string          `json:"service"`
+	AuditLogConfigs []AuditLogConfig `json:"auditLogConfigs,omitempty"`
+	Service         *string          `json:"service,omitempty"`
 }

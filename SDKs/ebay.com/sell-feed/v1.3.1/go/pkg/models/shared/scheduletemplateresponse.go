@@ -1,10 +1,10 @@
 package shared
 
 type ScheduleTemplateResponse struct {
-	FeedType                *string                  `json:"feedType"`
-	Frequency               *string                  `json:"frequency"`
-	Name                    *string                  `json:"name"`
-	ScheduleTemplateID      *string                  `json:"scheduleTemplateId"`
-	Status                  *string                  `json:"status"`
-	SupportedConfigurations []SupportedConfiguration `json:"supportedConfigurations"`
+	FeedType                *string                  `json:"feedType,omitempty"`
+	Frequency               *string                  `json:"frequency,omitempty"`
+	Name                    *string                  `json:"name,omitempty"`
+	ScheduleTemplateID      *string                  `json:"scheduleTemplateId,omitempty"`
+	Status                  *string                  `json:"status,omitempty"`
+	SupportedConfigurations []SupportedConfiguration `json:"supportedConfigurations,omitempty"`
 }

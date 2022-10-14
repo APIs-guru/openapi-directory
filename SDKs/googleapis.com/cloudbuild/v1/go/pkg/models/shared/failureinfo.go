@@ -13,6 +13,6 @@ const (
 )
 
 type FailureInfo struct {
-	Detail *string              `json:"detail"`
-	Type   *FailureInfoTypeEnum `json:"type"`
+	Detail *string              `json:"detail,omitempty"`
+	Type   *FailureInfoTypeEnum `json:"type,omitempty"`
 }

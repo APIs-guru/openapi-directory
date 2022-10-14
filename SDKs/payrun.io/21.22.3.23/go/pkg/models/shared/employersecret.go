@@ -5,11 +5,11 @@ import (
 )
 
 type EmployerSecretEmployerSecretEmployerSecret struct {
-	Created *time.Time `json:"Created"`
-	Name    *string    `json:"Name"`
-	Value   *string    `json:"Value"`
+	Created *time.Time `json:"Created,omitempty"`
+	Name    *string    `json:"Name,omitempty"`
+	Value   *string    `json:"Value,omitempty"`
 }
 
 type EmployerSecret struct {
-	EmployerSecret *EmployerSecretEmployerSecretEmployerSecret `json:"EmployerSecret"`
+	EmployerSecret *EmployerSecretEmployerSecretEmployerSecret `json:"EmployerSecret,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type AndroidTest struct {
-	AndroidAppInfo             *AndroidAppInfo             `json:"androidAppInfo"`
-	AndroidInstrumentationTest *AndroidInstrumentationTest `json:"androidInstrumentationTest"`
-	AndroidRoboTest            *AndroidRoboTest            `json:"androidRoboTest"`
-	AndroidTestLoop            map[string]interface{}      `json:"androidTestLoop"`
-	TestTimeout                *Duration                   `json:"testTimeout"`
+	AndroidAppInfo             *AndroidAppInfo             `json:"androidAppInfo,omitempty"`
+	AndroidInstrumentationTest *AndroidInstrumentationTest `json:"androidInstrumentationTest,omitempty"`
+	AndroidRoboTest            *AndroidRoboTest            `json:"androidRoboTest,omitempty"`
+	AndroidTestLoop            map[string]interface{}      `json:"androidTestLoop,omitempty"`
+	TestTimeout                *Duration                   `json:"testTimeout,omitempty"`
 }

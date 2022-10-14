@@ -1,5 +1,5 @@
 package shared
 
 type CustomerWithPasswordNoID struct {
-	Customer *CustomerFieldsWithPasswordNoID `json:"customer"`
+	Customer *CustomerFieldsWithPasswordNoID `json:"customer,omitempty"`
 }

@@ -5,12 +5,12 @@ type UpdateNetworkCellularGatewayUplinkPathParams struct {
 }
 
 type UpdateNetworkCellularGatewayUplinkRequestBodyBandwidthLimits struct {
-	LimitDown *int64 `json:"limitDown"`
-	LimitUp   *int64 `json:"limitUp"`
+	LimitDown *int64 `json:"limitDown,omitempty"`
+	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
 type UpdateNetworkCellularGatewayUplinkRequestBody struct {
-	BandwidthLimits *UpdateNetworkCellularGatewayUplinkRequestBodyBandwidthLimits `json:"bandwidthLimits"`
+	BandwidthLimits *UpdateNetworkCellularGatewayUplinkRequestBodyBandwidthLimits `json:"bandwidthLimits,omitempty"`
 }
 
 type UpdateNetworkCellularGatewayUplinkRequest struct {

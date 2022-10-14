@@ -1,5 +1,5 @@
 package shared
 
 type GetNamedQueryOutput struct {
-	NamedQuery *NamedQuery `json:"NamedQuery"`
+	NamedQuery *NamedQuery `json:"NamedQuery,omitempty"`
 }

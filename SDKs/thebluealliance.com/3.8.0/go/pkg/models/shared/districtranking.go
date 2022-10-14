@@ -11,9 +11,9 @@ type DistrictRankingEventPoints struct {
 }
 
 type DistrictRanking struct {
-	EventPoints []DistrictRankingEventPoints `json:"event_points"`
+	EventPoints []DistrictRankingEventPoints `json:"event_points,omitempty"`
 	PointTotal  int64                        `json:"point_total"`
 	Rank        int64                        `json:"rank"`
-	RookieBonus *int64                       `json:"rookie_bonus"`
+	RookieBonus *int64                       `json:"rookie_bonus,omitempty"`
 	TeamKey     string                       `json:"team_key"`
 }

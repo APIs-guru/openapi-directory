@@ -1,13 +1,13 @@
 package shared
 
 type LeaveType struct {
-	CurrentRecord     *bool    `json:"CurrentRecord"`
-	IsPaidLeave       *bool    `json:"IsPaidLeave"`
-	LeaveLoadingRate  *float64 `json:"LeaveLoadingRate"`
-	LeaveTypeID       *string  `json:"LeaveTypeID"`
-	Name              *string  `json:"Name"`
-	NormalEntitlement *float64 `json:"NormalEntitlement"`
-	ShowOnPayslip     *bool    `json:"ShowOnPayslip"`
-	TypeOfUnits       *string  `json:"TypeOfUnits"`
-	UpdatedDateUtc    *string  `json:"UpdatedDateUTC"`
+	CurrentRecord     *bool    `json:"CurrentRecord,omitempty"`
+	IsPaidLeave       *bool    `json:"IsPaidLeave,omitempty"`
+	LeaveLoadingRate  *float64 `json:"LeaveLoadingRate,omitempty"`
+	LeaveTypeID       *string  `json:"LeaveTypeID,omitempty"`
+	Name              *string  `json:"Name,omitempty"`
+	NormalEntitlement *float64 `json:"NormalEntitlement,omitempty"`
+	ShowOnPayslip     *bool    `json:"ShowOnPayslip,omitempty"`
+	TypeOfUnits       *string  `json:"TypeOfUnits,omitempty"`
+	UpdatedDateUtc    *string  `json:"UpdatedDateUTC,omitempty"`
 }

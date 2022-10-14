@@ -1,19 +1,19 @@
 package shared
 
 type Dataset struct {
-	CreateTime                          *string                             `json:"createTime"`
-	Description                         *string                             `json:"description"`
-	DisplayName                         *string                             `json:"displayName"`
-	Etag                                *string                             `json:"etag"`
-	ExampleCount                        *int32                              `json:"exampleCount"`
-	ImageClassificationDatasetMetadata  *ImageClassificationDatasetMetadata `json:"imageClassificationDatasetMetadata"`
-	ImageObjectDetectionDatasetMetadata map[string]interface{}              `json:"imageObjectDetectionDatasetMetadata"`
-	Name                                *string                             `json:"name"`
-	TablesDatasetMetadata               *TablesDatasetMetadata              `json:"tablesDatasetMetadata"`
-	TextClassificationDatasetMetadata   *TextClassificationDatasetMetadata  `json:"textClassificationDatasetMetadata"`
-	TextExtractionDatasetMetadata       map[string]interface{}              `json:"textExtractionDatasetMetadata"`
-	TextSentimentDatasetMetadata        *TextSentimentDatasetMetadata       `json:"textSentimentDatasetMetadata"`
-	TranslationDatasetMetadata          *TranslationDatasetMetadata         `json:"translationDatasetMetadata"`
-	VideoClassificationDatasetMetadata  map[string]interface{}              `json:"videoClassificationDatasetMetadata"`
-	VideoObjectTrackingDatasetMetadata  map[string]interface{}              `json:"videoObjectTrackingDatasetMetadata"`
+	CreateTime                          *string                             `json:"createTime,omitempty"`
+	Description                         *string                             `json:"description,omitempty"`
+	DisplayName                         *string                             `json:"displayName,omitempty"`
+	Etag                                *string                             `json:"etag,omitempty"`
+	ExampleCount                        *int32                              `json:"exampleCount,omitempty"`
+	ImageClassificationDatasetMetadata  *ImageClassificationDatasetMetadata `json:"imageClassificationDatasetMetadata,omitempty"`
+	ImageObjectDetectionDatasetMetadata map[string]interface{}              `json:"imageObjectDetectionDatasetMetadata,omitempty"`
+	Name                                *string                             `json:"name,omitempty"`
+	TablesDatasetMetadata               *TablesDatasetMetadata              `json:"tablesDatasetMetadata,omitempty"`
+	TextClassificationDatasetMetadata   *TextClassificationDatasetMetadata  `json:"textClassificationDatasetMetadata,omitempty"`
+	TextExtractionDatasetMetadata       map[string]interface{}              `json:"textExtractionDatasetMetadata,omitempty"`
+	TextSentimentDatasetMetadata        *TextSentimentDatasetMetadata       `json:"textSentimentDatasetMetadata,omitempty"`
+	TranslationDatasetMetadata          *TranslationDatasetMetadata         `json:"translationDatasetMetadata,omitempty"`
+	VideoClassificationDatasetMetadata  map[string]interface{}              `json:"videoClassificationDatasetMetadata,omitempty"`
+	VideoObjectTrackingDatasetMetadata  map[string]interface{}              `json:"videoObjectTrackingDatasetMetadata,omitempty"`
 }

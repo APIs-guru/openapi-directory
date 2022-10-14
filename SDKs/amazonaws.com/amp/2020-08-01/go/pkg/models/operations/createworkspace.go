@@ -15,9 +15,9 @@ type CreateWorkspaceHeaders struct {
 }
 
 type CreateWorkspaceRequestBody struct {
-	Alias       *string           `json:"alias"`
-	ClientToken *string           `json:"clientToken"`
-	Tags        map[string]string `json:"tags"`
+	Alias       *string           `json:"alias,omitempty"`
+	ClientToken *string           `json:"clientToken,omitempty"`
+	Tags        map[string]string `json:"tags,omitempty"`
 }
 
 type CreateWorkspaceRequest struct {

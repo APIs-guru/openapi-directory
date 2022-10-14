@@ -19,8 +19,8 @@ type GetEffectivePoliciesHeaders struct {
 }
 
 type GetEffectivePoliciesRequestBody struct {
-	CognitoIdentityPoolID *string `json:"cognitoIdentityPoolId"`
-	Principal             *string `json:"principal"`
+	CognitoIdentityPoolID *string `json:"cognitoIdentityPoolId,omitempty"`
+	Principal             *string `json:"principal,omitempty"`
 }
 
 type GetEffectivePoliciesRequest struct {

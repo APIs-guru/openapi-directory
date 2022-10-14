@@ -1,6 +1,6 @@
 package shared
 
 type AwsSnsTopicSubscription struct {
-	Endpoint *string `json:"Endpoint"`
-	Protocol *string `json:"Protocol"`
+	Endpoint *string `json:"Endpoint,omitempty"`
+	Protocol *string `json:"Protocol,omitempty"`
 }

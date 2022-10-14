@@ -1,9 +1,9 @@
 package shared
 
 type Volumeannotations struct {
-	Items         []Volumeannotation `json:"items"`
-	Kind          *string            `json:"kind"`
-	NextPageToken *string            `json:"nextPageToken"`
-	TotalItems    *int32             `json:"totalItems"`
-	Version       *string            `json:"version"`
+	Items         []Volumeannotation `json:"items,omitempty"`
+	Kind          *string            `json:"kind,omitempty"`
+	NextPageToken *string            `json:"nextPageToken,omitempty"`
+	TotalItems    *int32             `json:"totalItems,omitempty"`
+	Version       *string            `json:"version,omitempty"`
 }

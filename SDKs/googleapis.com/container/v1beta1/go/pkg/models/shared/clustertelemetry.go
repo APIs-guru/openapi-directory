@@ -10,5 +10,5 @@ const (
 )
 
 type ClusterTelemetry struct {
-	Type *ClusterTelemetryTypeEnum `json:"type"`
+	Type *ClusterTelemetryTypeEnum `json:"type,omitempty"`
 }

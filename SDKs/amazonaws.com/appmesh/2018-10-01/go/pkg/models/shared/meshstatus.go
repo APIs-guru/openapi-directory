@@ -1,5 +1,5 @@
 package shared
 
 type MeshStatus struct {
-	Status *MeshStatusCodeEnum `json:"status"`
+	Status *MeshStatusCodeEnum `json:"status,omitempty"`
 }

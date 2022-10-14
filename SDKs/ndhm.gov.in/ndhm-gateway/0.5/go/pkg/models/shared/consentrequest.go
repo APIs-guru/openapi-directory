@@ -13,13 +13,13 @@ type ConsentRequestConsentHiu struct {
 }
 
 type ConsentRequestConsentPatient struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type ConsentRequestConsent struct {
-	CareContexts []CareContextDefinition      `json:"careContexts"`
+	CareContexts []CareContextDefinition      `json:"careContexts,omitempty"`
 	HiTypes      []HiTypeEnumEnum             `json:"hiTypes"`
-	Hip          *ConsentRequestConsentHip    `json:"hip"`
+	Hip          *ConsentRequestConsentHip    `json:"hip,omitempty"`
 	Hiu          ConsentRequestConsentHiu     `json:"hiu"`
 	Patient      ConsentRequestConsentPatient `json:"patient"`
 	Permission   Permission                   `json:"permission"`

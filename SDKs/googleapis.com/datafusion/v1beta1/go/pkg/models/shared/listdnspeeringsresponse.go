@@ -1,6 +1,6 @@
 package shared
 
 type ListDNSPeeringsResponse struct {
-	DNSPeerings   []DNSPeering `json:"dnsPeerings"`
-	NextPageToken *string      `json:"nextPageToken"`
+	DNSPeerings   []DNSPeering `json:"dnsPeerings,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

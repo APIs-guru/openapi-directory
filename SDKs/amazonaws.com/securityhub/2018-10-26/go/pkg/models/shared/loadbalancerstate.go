@@ -1,6 +1,6 @@
 package shared
 
 type LoadBalancerState struct {
-	Code   *string `json:"Code"`
-	Reason *string `json:"Reason"`
+	Code   *string `json:"Code,omitempty"`
+	Reason *string `json:"Reason,omitempty"`
 }

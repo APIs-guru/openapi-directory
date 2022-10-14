@@ -5,52 +5,52 @@ import (
 )
 
 type TeamDriveBackgroundImageFile struct {
-	ID          *string  `json:"id"`
-	Width       *float32 `json:"width"`
-	XCoordinate *float32 `json:"xCoordinate"`
-	YCoordinate *float32 `json:"yCoordinate"`
+	ID          *string  `json:"id,omitempty"`
+	Width       *float32 `json:"width,omitempty"`
+	XCoordinate *float32 `json:"xCoordinate,omitempty"`
+	YCoordinate *float32 `json:"yCoordinate,omitempty"`
 }
 
 type TeamDriveCapabilities struct {
-	CanAddChildren                                   *bool `json:"canAddChildren"`
-	CanChangeCopyRequiresWriterPermissionRestriction *bool `json:"canChangeCopyRequiresWriterPermissionRestriction"`
-	CanChangeDomainUsersOnlyRestriction              *bool `json:"canChangeDomainUsersOnlyRestriction"`
-	CanChangeTeamDriveBackground                     *bool `json:"canChangeTeamDriveBackground"`
-	CanChangeTeamMembersOnlyRestriction              *bool `json:"canChangeTeamMembersOnlyRestriction"`
-	CanComment                                       *bool `json:"canComment"`
-	CanCopy                                          *bool `json:"canCopy"`
-	CanDeleteChildren                                *bool `json:"canDeleteChildren"`
-	CanDeleteTeamDrive                               *bool `json:"canDeleteTeamDrive"`
-	CanDownload                                      *bool `json:"canDownload"`
-	CanEdit                                          *bool `json:"canEdit"`
-	CanListChildren                                  *bool `json:"canListChildren"`
-	CanManageMembers                                 *bool `json:"canManageMembers"`
-	CanReadRevisions                                 *bool `json:"canReadRevisions"`
-	CanRemoveChildren                                *bool `json:"canRemoveChildren"`
-	CanRename                                        *bool `json:"canRename"`
-	CanRenameTeamDrive                               *bool `json:"canRenameTeamDrive"`
-	CanResetTeamDriveRestrictions                    *bool `json:"canResetTeamDriveRestrictions"`
-	CanShare                                         *bool `json:"canShare"`
-	CanTrashChildren                                 *bool `json:"canTrashChildren"`
+	CanAddChildren                                   *bool `json:"canAddChildren,omitempty"`
+	CanChangeCopyRequiresWriterPermissionRestriction *bool `json:"canChangeCopyRequiresWriterPermissionRestriction,omitempty"`
+	CanChangeDomainUsersOnlyRestriction              *bool `json:"canChangeDomainUsersOnlyRestriction,omitempty"`
+	CanChangeTeamDriveBackground                     *bool `json:"canChangeTeamDriveBackground,omitempty"`
+	CanChangeTeamMembersOnlyRestriction              *bool `json:"canChangeTeamMembersOnlyRestriction,omitempty"`
+	CanComment                                       *bool `json:"canComment,omitempty"`
+	CanCopy                                          *bool `json:"canCopy,omitempty"`
+	CanDeleteChildren                                *bool `json:"canDeleteChildren,omitempty"`
+	CanDeleteTeamDrive                               *bool `json:"canDeleteTeamDrive,omitempty"`
+	CanDownload                                      *bool `json:"canDownload,omitempty"`
+	CanEdit                                          *bool `json:"canEdit,omitempty"`
+	CanListChildren                                  *bool `json:"canListChildren,omitempty"`
+	CanManageMembers                                 *bool `json:"canManageMembers,omitempty"`
+	CanReadRevisions                                 *bool `json:"canReadRevisions,omitempty"`
+	CanRemoveChildren                                *bool `json:"canRemoveChildren,omitempty"`
+	CanRename                                        *bool `json:"canRename,omitempty"`
+	CanRenameTeamDrive                               *bool `json:"canRenameTeamDrive,omitempty"`
+	CanResetTeamDriveRestrictions                    *bool `json:"canResetTeamDriveRestrictions,omitempty"`
+	CanShare                                         *bool `json:"canShare,omitempty"`
+	CanTrashChildren                                 *bool `json:"canTrashChildren,omitempty"`
 }
 
 type TeamDriveRestrictions struct {
-	AdminManagedRestrictions     *bool `json:"adminManagedRestrictions"`
-	CopyRequiresWriterPermission *bool `json:"copyRequiresWriterPermission"`
-	DomainUsersOnly              *bool `json:"domainUsersOnly"`
-	TeamMembersOnly              *bool `json:"teamMembersOnly"`
+	AdminManagedRestrictions     *bool `json:"adminManagedRestrictions,omitempty"`
+	CopyRequiresWriterPermission *bool `json:"copyRequiresWriterPermission,omitempty"`
+	DomainUsersOnly              *bool `json:"domainUsersOnly,omitempty"`
+	TeamMembersOnly              *bool `json:"teamMembersOnly,omitempty"`
 }
 
 type TeamDrive struct {
-	BackgroundImageFile *TeamDriveBackgroundImageFile `json:"backgroundImageFile"`
-	BackgroundImageLink *string                       `json:"backgroundImageLink"`
-	Capabilities        *TeamDriveCapabilities        `json:"capabilities"`
-	ColorRgb            *string                       `json:"colorRgb"`
-	CreatedTime         *time.Time                    `json:"createdTime"`
-	ID                  *string                       `json:"id"`
-	Kind                *string                       `json:"kind"`
-	Name                *string                       `json:"name"`
-	OrgUnitID           *string                       `json:"orgUnitId"`
-	Restrictions        *TeamDriveRestrictions        `json:"restrictions"`
-	ThemeID             *string                       `json:"themeId"`
+	BackgroundImageFile *TeamDriveBackgroundImageFile `json:"backgroundImageFile,omitempty"`
+	BackgroundImageLink *string                       `json:"backgroundImageLink,omitempty"`
+	Capabilities        *TeamDriveCapabilities        `json:"capabilities,omitempty"`
+	ColorRgb            *string                       `json:"colorRgb,omitempty"`
+	CreatedTime         *time.Time                    `json:"createdTime,omitempty"`
+	ID                  *string                       `json:"id,omitempty"`
+	Kind                *string                       `json:"kind,omitempty"`
+	Name                *string                       `json:"name,omitempty"`
+	OrgUnitID           *string                       `json:"orgUnitId,omitempty"`
+	Restrictions        *TeamDriveRestrictions        `json:"restrictions,omitempty"`
+	ThemeID             *string                       `json:"themeId,omitempty"`
 }

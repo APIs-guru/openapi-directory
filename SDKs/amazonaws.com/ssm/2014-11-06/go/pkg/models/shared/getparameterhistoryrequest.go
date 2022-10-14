@@ -1,8 +1,8 @@
 package shared
 
 type GetParameterHistoryRequest struct {
-	MaxResults     *int64  `json:"MaxResults"`
+	MaxResults     *int64  `json:"MaxResults,omitempty"`
 	Name           string  `json:"Name"`
-	NextToken      *string `json:"NextToken"`
-	WithDecryption *bool   `json:"WithDecryption"`
+	NextToken      *string `json:"NextToken,omitempty"`
+	WithDecryption *bool   `json:"WithDecryption,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type APIIPagedResponseGlobalResourcesSharedModelsTranslationRequest struct {
-	Entities []GlobalResourcesSharedModelsTranslationRequest `json:"Entities"`
-	Metadata *APIPagedResponseMetadata                       `json:"Metadata"`
+	Entities []GlobalResourcesSharedModelsTranslationRequest `json:"Entities,omitempty"`
+	Metadata *APIPagedResponseMetadata                       `json:"Metadata,omitempty"`
 }

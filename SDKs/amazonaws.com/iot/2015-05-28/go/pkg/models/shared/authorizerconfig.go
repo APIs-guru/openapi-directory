@@ -1,6 +1,6 @@
 package shared
 
 type AuthorizerConfig struct {
-	AllowAuthorizerOverride *bool   `json:"allowAuthorizerOverride"`
-	DefaultAuthorizerName   *string `json:"defaultAuthorizerName"`
+	AllowAuthorizerOverride *bool   `json:"allowAuthorizerOverride,omitempty"`
+	DefaultAuthorizerName   *string `json:"defaultAuthorizerName,omitempty"`
 }

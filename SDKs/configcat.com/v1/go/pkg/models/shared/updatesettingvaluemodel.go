@@ -1,7 +1,7 @@
 package shared
 
 type UpdateSettingValueModel struct {
-	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems"`
-	RolloutRules           []RolloutRuleModel           `json:"rolloutRules"`
-	Value                  map[string]interface{}       `json:"value"`
+	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
+	RolloutRules           []RolloutRuleModel           `json:"rolloutRules,omitempty"`
+	Value                  map[string]interface{}       `json:"value,omitempty"`
 }

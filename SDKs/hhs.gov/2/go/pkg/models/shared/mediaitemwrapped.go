@@ -1,7 +1,7 @@
 package shared
 
 type MediaItemWrapped struct {
-	Callback *string     `json:"callback"`
-	Meta     *Meta       `json:"meta"`
-	Results  []MediaItem `json:"results"`
+	Callback *string     `json:"callback,omitempty"`
+	Meta     *Meta       `json:"meta,omitempty"`
+	Results  []MediaItem `json:"results,omitempty"`
 }

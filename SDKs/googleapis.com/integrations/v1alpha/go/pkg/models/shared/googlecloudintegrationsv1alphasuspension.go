@@ -10,14 +10,14 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaSuspension struct {
-	ApprovalConfig       *GoogleCloudIntegrationsV1alphaSuspensionApprovalConfig `json:"approvalConfig"`
-	Audit                *GoogleCloudIntegrationsV1alphaSuspensionAudit          `json:"audit"`
-	CreateTime           *string                                                 `json:"createTime"`
-	EventExecutionInfoID *string                                                 `json:"eventExecutionInfoId"`
-	Integration          *string                                                 `json:"integration"`
-	LastModifyTime       *string                                                 `json:"lastModifyTime"`
-	Name                 *string                                                 `json:"name"`
-	State                *GoogleCloudIntegrationsV1alphaSuspensionStateEnum      `json:"state"`
-	SuspensionConfig     *EnterpriseCrmEventbusProtoSuspensionConfig             `json:"suspensionConfig"`
-	TaskID               *string                                                 `json:"taskId"`
+	ApprovalConfig       *GoogleCloudIntegrationsV1alphaSuspensionApprovalConfig `json:"approvalConfig,omitempty"`
+	Audit                *GoogleCloudIntegrationsV1alphaSuspensionAudit          `json:"audit,omitempty"`
+	CreateTime           *string                                                 `json:"createTime,omitempty"`
+	EventExecutionInfoID *string                                                 `json:"eventExecutionInfoId,omitempty"`
+	Integration          *string                                                 `json:"integration,omitempty"`
+	LastModifyTime       *string                                                 `json:"lastModifyTime,omitempty"`
+	Name                 *string                                                 `json:"name,omitempty"`
+	State                *GoogleCloudIntegrationsV1alphaSuspensionStateEnum      `json:"state,omitempty"`
+	SuspensionConfig     *EnterpriseCrmEventbusProtoSuspensionConfig             `json:"suspensionConfig,omitempty"`
+	TaskID               *string                                                 `json:"taskId,omitempty"`
 }

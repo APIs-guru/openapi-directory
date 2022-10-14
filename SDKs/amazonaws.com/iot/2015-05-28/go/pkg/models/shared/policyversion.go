@@ -5,7 +5,7 @@ import (
 )
 
 type PolicyVersion struct {
-	CreateDate       *time.Time `json:"createDate"`
-	IsDefaultVersion *bool      `json:"isDefaultVersion"`
-	VersionID        *string    `json:"versionId"`
+	CreateDate       *time.Time `json:"createDate,omitempty"`
+	IsDefaultVersion *bool      `json:"isDefaultVersion,omitempty"`
+	VersionID        *string    `json:"versionId,omitempty"`
 }

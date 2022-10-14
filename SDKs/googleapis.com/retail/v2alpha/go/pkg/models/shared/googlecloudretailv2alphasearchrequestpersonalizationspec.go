@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec struct {
-	Mode *GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum `json:"mode"`
+	Mode *GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum `json:"mode,omitempty"`
 }

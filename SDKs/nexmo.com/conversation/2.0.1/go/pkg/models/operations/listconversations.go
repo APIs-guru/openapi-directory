@@ -17,15 +17,15 @@ type ListConversationsRequest struct {
 }
 
 type ListConversations200ApplicationJSONEmbeddedConversationsLinksSelf struct {
-	Href *string `json:"href"`
+	Href *string `json:"href,omitempty"`
 }
 
 type ListConversations200ApplicationJSONEmbeddedConversationsLinks struct {
-	Self *ListConversations200ApplicationJSONEmbeddedConversationsLinksSelf `json:"self"`
+	Self *ListConversations200ApplicationJSONEmbeddedConversationsLinksSelf `json:"self,omitempty"`
 }
 
 type ListConversations200ApplicationJSONEmbeddedConversations struct {
-	Links *ListConversations200ApplicationJSONEmbeddedConversationsLinks `json:"_links"`
+	Links *ListConversations200ApplicationJSONEmbeddedConversationsLinks `json:"_links,omitempty"`
 	Name  string                                                         `json:"name"`
 	UUID  string                                                         `json:"uuid"`
 }

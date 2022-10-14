@@ -1,5 +1,5 @@
 package shared
 
 type ExpiryDetail struct {
-	ExpireTime *string `json:"expireTime"`
+	ExpireTime *string `json:"expireTime,omitempty"`
 }

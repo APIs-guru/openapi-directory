@@ -5,15 +5,15 @@ import (
 )
 
 type VoiceV1ConnectionPolicyConnectionPolicyTarget struct {
-	AccountSid          *string    `json:"account_sid"`
-	ConnectionPolicySid *string    `json:"connection_policy_sid"`
-	DateCreated         *time.Time `json:"date_created"`
-	DateUpdated         *time.Time `json:"date_updated"`
-	Enabled             *bool      `json:"enabled"`
-	FriendlyName        *string    `json:"friendly_name"`
-	Priority            *int64     `json:"priority"`
-	Sid                 *string    `json:"sid"`
-	Target              *string    `json:"target"`
-	URL                 *string    `json:"url"`
-	Weight              *int64     `json:"weight"`
+	AccountSid          *string    `json:"account_sid,omitempty"`
+	ConnectionPolicySid *string    `json:"connection_policy_sid,omitempty"`
+	DateCreated         *time.Time `json:"date_created,omitempty"`
+	DateUpdated         *time.Time `json:"date_updated,omitempty"`
+	Enabled             *bool      `json:"enabled,omitempty"`
+	FriendlyName        *string    `json:"friendly_name,omitempty"`
+	Priority            *int64     `json:"priority,omitempty"`
+	Sid                 *string    `json:"sid,omitempty"`
+	Target              *string    `json:"target,omitempty"`
+	URL                 *string    `json:"url,omitempty"`
+	Weight              *int64     `json:"weight,omitempty"`
 }

@@ -5,7 +5,7 @@ type PostVolumesIDActionsAttachPathParams struct {
 }
 
 type PostVolumesIDActionsAttachRequestBodyAttachVolumeRequest struct {
-	Automount *bool `json:"automount"`
+	Automount *bool `json:"automount,omitempty"`
 	Server    int64 `json:"server"`
 }
 

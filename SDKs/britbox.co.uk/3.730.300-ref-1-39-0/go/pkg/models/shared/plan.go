@@ -30,13 +30,13 @@ type Plan struct {
 	BillingPeriodFrequency int32                     `json:"billingPeriodFrequency"`
 	BillingPeriodType      PlanBillingPeriodTypeEnum `json:"billingPeriodType"`
 	Currency               string                    `json:"currency"`
-	CustomFields           map[string]interface{}    `json:"customFields"`
+	CustomFields           map[string]interface{}    `json:"customFields,omitempty"`
 	HasTrialPeriod         bool                      `json:"hasTrialPeriod"`
 	ID                     string                    `json:"id"`
 	IsActive               bool                      `json:"isActive"`
 	IsFeatured             bool                      `json:"isFeatured"`
 	IsPrivate              bool                      `json:"isPrivate"`
-	Price                  *float32                  `json:"price"`
+	Price                  *float32                  `json:"price,omitempty"`
 	RevenueType            PlanRevenueTypeEnum       `json:"revenueType"`
 	SubscriptionCode       string                    `json:"subscriptionCode"`
 	Tagline                string                    `json:"tagline"`

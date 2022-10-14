@@ -8,8 +8,8 @@ const (
 )
 
 type SynthesizeSpeechRequest struct {
-	AudioConfig        *AudioConfig                                    `json:"audioConfig"`
-	EnableTimePointing []SynthesizeSpeechRequestEnableTimePointingEnum `json:"enableTimePointing"`
-	Input              *SynthesisInput                                 `json:"input"`
-	Voice              *VoiceSelectionParams                           `json:"voice"`
+	AudioConfig        *AudioConfig                                    `json:"audioConfig,omitempty"`
+	EnableTimePointing []SynthesizeSpeechRequestEnableTimePointingEnum `json:"enableTimePointing,omitempty"`
+	Input              *SynthesisInput                                 `json:"input,omitempty"`
+	Voice              *VoiceSelectionParams                           `json:"voice,omitempty"`
 }

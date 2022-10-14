@@ -16,17 +16,17 @@ const (
 )
 
 type PolicyRepresentation struct {
-	Config           map[string]interface{}                    `json:"config"`
-	DecisionStrategy *PolicyRepresentationDecisionStrategyEnum `json:"decisionStrategy"`
-	Description      *string                                   `json:"description"`
-	ID               *string                                   `json:"id"`
-	Logic            *PolicyRepresentationLogicEnum            `json:"logic"`
-	Name             *string                                   `json:"name"`
-	Owner            *string                                   `json:"owner"`
-	Policies         []string                                  `json:"policies"`
-	Resources        []string                                  `json:"resources"`
-	ResourcesData    []ResourceRepresentation                  `json:"resourcesData"`
-	Scopes           []string                                  `json:"scopes"`
-	ScopesData       []ScopeRepresentation                     `json:"scopesData"`
-	Type             *string                                   `json:"type"`
+	Config           map[string]interface{}                    `json:"config,omitempty"`
+	DecisionStrategy *PolicyRepresentationDecisionStrategyEnum `json:"decisionStrategy,omitempty"`
+	Description      *string                                   `json:"description,omitempty"`
+	ID               *string                                   `json:"id,omitempty"`
+	Logic            *PolicyRepresentationLogicEnum            `json:"logic,omitempty"`
+	Name             *string                                   `json:"name,omitempty"`
+	Owner            *string                                   `json:"owner,omitempty"`
+	Policies         []string                                  `json:"policies,omitempty"`
+	Resources        []string                                  `json:"resources,omitempty"`
+	ResourcesData    []ResourceRepresentation                  `json:"resourcesData,omitempty"`
+	Scopes           []string                                  `json:"scopes,omitempty"`
+	ScopesData       []ScopeRepresentation                     `json:"scopesData,omitempty"`
+	Type             *string                                   `json:"type,omitempty"`
 }

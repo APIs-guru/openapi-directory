@@ -1,5 +1,5 @@
 package shared
 
 type ListingNestMedia struct {
-	PhotoLinks []string `json:"photo_links"`
+	PhotoLinks []string `json:"photo_links,omitempty"`
 }

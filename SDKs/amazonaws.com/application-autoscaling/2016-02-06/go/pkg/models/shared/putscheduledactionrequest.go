@@ -5,13 +5,13 @@ import (
 )
 
 type PutScheduledActionRequest struct {
-	EndTime              *time.Time            `json:"EndTime"`
+	EndTime              *time.Time            `json:"EndTime,omitempty"`
 	ResourceID           string                `json:"ResourceId"`
 	ScalableDimension    ScalableDimensionEnum `json:"ScalableDimension"`
-	ScalableTargetAction *ScalableTargetAction `json:"ScalableTargetAction"`
-	Schedule             *string               `json:"Schedule"`
+	ScalableTargetAction *ScalableTargetAction `json:"ScalableTargetAction,omitempty"`
+	Schedule             *string               `json:"Schedule,omitempty"`
 	ScheduledActionName  string                `json:"ScheduledActionName"`
 	ServiceNamespace     ServiceNamespaceEnum  `json:"ServiceNamespace"`
-	StartTime            *time.Time            `json:"StartTime"`
-	Timezone             *string               `json:"Timezone"`
+	StartTime            *time.Time            `json:"StartTime,omitempty"`
+	Timezone             *string               `json:"Timezone,omitempty"`
 }

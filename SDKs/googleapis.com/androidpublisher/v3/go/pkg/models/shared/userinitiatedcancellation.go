@@ -1,6 +1,6 @@
 package shared
 
 type UserInitiatedCancellation struct {
-	CancelSurveyResult *CancelSurveyResult `json:"cancelSurveyResult"`
-	CancelTime         *string             `json:"cancelTime"`
+	CancelSurveyResult *CancelSurveyResult `json:"cancelSurveyResult,omitempty"`
+	CancelTime         *string             `json:"cancelTime,omitempty"`
 }

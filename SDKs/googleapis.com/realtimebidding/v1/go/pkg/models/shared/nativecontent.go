@@ -1,17 +1,17 @@
 package shared
 
 type NativeContent struct {
-	AdvertiserName   *string  `json:"advertiserName"`
-	AppIcon          *Image   `json:"appIcon"`
-	Body             *string  `json:"body"`
-	CallToAction     *string  `json:"callToAction"`
-	ClickLinkURL     *string  `json:"clickLinkUrl"`
-	ClickTrackingURL *string  `json:"clickTrackingUrl"`
-	Headline         *string  `json:"headline"`
-	Image            *Image   `json:"image"`
-	Logo             *Image   `json:"logo"`
-	PriceDisplayText *string  `json:"priceDisplayText"`
-	StarRating       *float64 `json:"starRating"`
-	VideoURL         *string  `json:"videoUrl"`
-	VideoVastXML     *string  `json:"videoVastXml"`
+	AdvertiserName   *string  `json:"advertiserName,omitempty"`
+	AppIcon          *Image   `json:"appIcon,omitempty"`
+	Body             *string  `json:"body,omitempty"`
+	CallToAction     *string  `json:"callToAction,omitempty"`
+	ClickLinkURL     *string  `json:"clickLinkUrl,omitempty"`
+	ClickTrackingURL *string  `json:"clickTrackingUrl,omitempty"`
+	Headline         *string  `json:"headline,omitempty"`
+	Image            *Image   `json:"image,omitempty"`
+	Logo             *Image   `json:"logo,omitempty"`
+	PriceDisplayText *string  `json:"priceDisplayText,omitempty"`
+	StarRating       *float64 `json:"starRating,omitempty"`
+	VideoURL         *string  `json:"videoUrl,omitempty"`
+	VideoVastXML     *string  `json:"videoVastXml,omitempty"`
 }

@@ -16,12 +16,12 @@ type GetRecommendationsHeaders struct {
 
 type GetRecommendationsRequestBody struct {
 	CampaignArn  string            `json:"campaignArn"`
-	Context      map[string]string `json:"context"`
-	FilterArn    *string           `json:"filterArn"`
-	FilterValues map[string]string `json:"filterValues"`
-	ItemID       *string           `json:"itemId"`
-	NumResults   *int64            `json:"numResults"`
-	UserID       *string           `json:"userId"`
+	Context      map[string]string `json:"context,omitempty"`
+	FilterArn    *string           `json:"filterArn,omitempty"`
+	FilterValues map[string]string `json:"filterValues,omitempty"`
+	ItemID       *string           `json:"itemId,omitempty"`
+	NumResults   *int64            `json:"numResults,omitempty"`
+	UserID       *string           `json:"userId,omitempty"`
 }
 
 type GetRecommendationsRequest struct {

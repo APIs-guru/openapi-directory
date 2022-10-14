@@ -5,9 +5,9 @@ import (
 )
 
 type DeauthorizeConnectionResponse struct {
-	ConnectionArn      *string              `json:"ConnectionArn"`
-	ConnectionState    *ConnectionStateEnum `json:"ConnectionState"`
-	CreationTime       *time.Time           `json:"CreationTime"`
-	LastAuthorizedTime *time.Time           `json:"LastAuthorizedTime"`
-	LastModifiedTime   *time.Time           `json:"LastModifiedTime"`
+	ConnectionArn      *string              `json:"ConnectionArn,omitempty"`
+	ConnectionState    *ConnectionStateEnum `json:"ConnectionState,omitempty"`
+	CreationTime       *time.Time           `json:"CreationTime,omitempty"`
+	LastAuthorizedTime *time.Time           `json:"LastAuthorizedTime,omitempty"`
+	LastModifiedTime   *time.Time           `json:"LastModifiedTime,omitempty"`
 }

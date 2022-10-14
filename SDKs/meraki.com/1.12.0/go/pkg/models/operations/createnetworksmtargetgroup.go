@@ -5,8 +5,8 @@ type CreateNetworkSmTargetGroupPathParams struct {
 }
 
 type CreateNetworkSmTargetGroupRequestBody struct {
-	Name  *string `json:"name"`
-	Scope *string `json:"scope"`
+	Name  *string `json:"name,omitempty"`
+	Scope *string `json:"scope,omitempty"`
 }
 
 type CreateNetworkSmTargetGroupRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type UpgradeAppliedSchemaResponse struct {
-	DirectoryArn      *string `json:"DirectoryArn"`
-	UpgradedSchemaArn *string `json:"UpgradedSchemaArn"`
+	DirectoryArn      *string `json:"DirectoryArn,omitempty"`
+	UpgradedSchemaArn *string `json:"UpgradedSchemaArn,omitempty"`
 }

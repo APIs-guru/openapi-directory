@@ -5,9 +5,9 @@ import (
 )
 
 type DescribeAuditSuppressionResponse struct {
-	CheckName            *string             `json:"checkName"`
-	Description          *string             `json:"description"`
-	ExpirationDate       *time.Time          `json:"expirationDate"`
-	ResourceIdentifier   *ResourceIdentifier `json:"resourceIdentifier"`
-	SuppressIndefinitely *bool               `json:"suppressIndefinitely"`
+	CheckName            *string             `json:"checkName,omitempty"`
+	Description          *string             `json:"description,omitempty"`
+	ExpirationDate       *time.Time          `json:"expirationDate,omitempty"`
+	ResourceIdentifier   *ResourceIdentifier `json:"resourceIdentifier,omitempty"`
+	SuppressIndefinitely *bool               `json:"suppressIndefinitely,omitempty"`
 }

@@ -18,17 +18,17 @@ const (
 )
 
 type FhirStore struct {
-	ComplexDataTypeReferenceParsing *FhirStoreComplexDataTypeReferenceParsingEnum `json:"complexDataTypeReferenceParsing"`
-	DefaultSearchHandlingStrict     *bool                                         `json:"defaultSearchHandlingStrict"`
-	DisableReferentialIntegrity     *bool                                         `json:"disableReferentialIntegrity"`
-	DisableResourceVersioning       *bool                                         `json:"disableResourceVersioning"`
-	EnableUpdateCreate              *bool                                         `json:"enableUpdateCreate"`
-	Labels                          map[string]string                             `json:"labels"`
-	Name                            *string                                       `json:"name"`
-	NotificationConfig              *NotificationConfig                           `json:"notificationConfig"`
-	NotificationConfigs             []FhirNotificationConfig                      `json:"notificationConfigs"`
-	SearchConfig                    *SearchConfig                                 `json:"searchConfig"`
-	StreamConfigs                   []StreamConfig                                `json:"streamConfigs"`
-	ValidationConfig                *ValidationConfig                             `json:"validationConfig"`
-	Version                         *FhirStoreVersionEnum                         `json:"version"`
+	ComplexDataTypeReferenceParsing *FhirStoreComplexDataTypeReferenceParsingEnum `json:"complexDataTypeReferenceParsing,omitempty"`
+	DefaultSearchHandlingStrict     *bool                                         `json:"defaultSearchHandlingStrict,omitempty"`
+	DisableReferentialIntegrity     *bool                                         `json:"disableReferentialIntegrity,omitempty"`
+	DisableResourceVersioning       *bool                                         `json:"disableResourceVersioning,omitempty"`
+	EnableUpdateCreate              *bool                                         `json:"enableUpdateCreate,omitempty"`
+	Labels                          map[string]string                             `json:"labels,omitempty"`
+	Name                            *string                                       `json:"name,omitempty"`
+	NotificationConfig              *NotificationConfig                           `json:"notificationConfig,omitempty"`
+	NotificationConfigs             []FhirNotificationConfig                      `json:"notificationConfigs,omitempty"`
+	SearchConfig                    *SearchConfig                                 `json:"searchConfig,omitempty"`
+	StreamConfigs                   []StreamConfig                                `json:"streamConfigs,omitempty"`
+	ValidationConfig                *ValidationConfig                             `json:"validationConfig,omitempty"`
+	Version                         *FhirStoreVersionEnum                         `json:"version,omitempty"`
 }

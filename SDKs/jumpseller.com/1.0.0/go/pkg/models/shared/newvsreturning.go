@@ -1,7 +1,7 @@
 package shared
 
 type NewVsReturning struct {
-	Date      *string `json:"date"`
-	New       *int64  `json:"new"`
-	Returning *int64  `json:"returning"`
+	Date      *string `json:"date,omitempty"`
+	New       *int64  `json:"new,omitempty"`
+	Returning *int64  `json:"returning,omitempty"`
 }

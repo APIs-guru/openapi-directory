@@ -1,8 +1,8 @@
 package shared
 
 type RiskSummary struct {
-	ClientToolsRisk *string `json:"client_tools_risk"`
-	CryptoRisk      *string `json:"crypto_risk"`
-	KernelRisk      *string `json:"kernel_risk"`
-	NetServicesRisk *string `json:"net_services_risk"`
+	ClientToolsRisk *string `json:"client_tools_risk,omitempty"`
+	CryptoRisk      *string `json:"crypto_risk,omitempty"`
+	KernelRisk      *string `json:"kernel_risk,omitempty"`
+	NetServicesRisk *string `json:"net_services_risk,omitempty"`
 }

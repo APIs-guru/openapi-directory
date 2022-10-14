@@ -1,6 +1,6 @@
 package shared
 
 type IntegrationLinkDetailsModel struct {
-	AllIntegrationLinkCount *int32                  `json:"allIntegrationLinkCount"`
-	Details                 []IntegrationLinkDetail `json:"details"`
+	AllIntegrationLinkCount *int32                  `json:"allIntegrationLinkCount,omitempty"`
+	Details                 []IntegrationLinkDetail `json:"details,omitempty"`
 }

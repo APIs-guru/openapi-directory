@@ -1,6 +1,6 @@
 package shared
 
 type RandomSplitEntry struct {
-	NextActivity *string `json:"NextActivity"`
-	Percentage   *int64  `json:"Percentage"`
+	NextActivity *string `json:"NextActivity,omitempty"`
+	Percentage   *int64  `json:"Percentage,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Page struct {
-	NextPageToken *string       `json:"NextPageToken"`
-	Values        []ValueHolder `json:"Values"`
+	NextPageToken *string       `json:"NextPageToken,omitempty"`
+	Values        []ValueHolder `json:"Values,omitempty"`
 }

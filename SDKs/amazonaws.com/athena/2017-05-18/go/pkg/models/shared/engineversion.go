@@ -1,6 +1,6 @@
 package shared
 
 type EngineVersion struct {
-	EffectiveEngineVersion *string `json:"EffectiveEngineVersion"`
-	SelectedEngineVersion  *string `json:"SelectedEngineVersion"`
+	EffectiveEngineVersion *string `json:"EffectiveEngineVersion,omitempty"`
+	SelectedEngineVersion  *string `json:"SelectedEngineVersion,omitempty"`
 }

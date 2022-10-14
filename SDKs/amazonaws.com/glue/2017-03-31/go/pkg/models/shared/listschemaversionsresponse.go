@@ -1,6 +1,6 @@
 package shared
 
 type ListSchemaVersionsResponse struct {
-	NextToken *string                 `json:"NextToken"`
-	Schemas   []SchemaVersionListItem `json:"Schemas"`
+	NextToken *string                 `json:"NextToken,omitempty"`
+	Schemas   []SchemaVersionListItem `json:"Schemas,omitempty"`
 }

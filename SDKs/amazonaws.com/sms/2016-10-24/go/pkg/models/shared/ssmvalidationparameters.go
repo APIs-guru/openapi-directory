@@ -1,10 +1,10 @@
 package shared
 
 type SsmValidationParameters struct {
-	Command                 *string         `json:"command"`
-	ExecutionTimeoutSeconds *int64          `json:"executionTimeoutSeconds"`
-	InstanceID              *string         `json:"instanceId"`
-	OutputS3BucketName      *string         `json:"outputS3BucketName"`
-	ScriptType              *ScriptTypeEnum `json:"scriptType"`
-	Source                  *Source         `json:"source"`
+	Command                 *string         `json:"command,omitempty"`
+	ExecutionTimeoutSeconds *int64          `json:"executionTimeoutSeconds,omitempty"`
+	InstanceID              *string         `json:"instanceId,omitempty"`
+	OutputS3BucketName      *string         `json:"outputS3BucketName,omitempty"`
+	ScriptType              *ScriptTypeEnum `json:"scriptType,omitempty"`
+	Source                  *Source         `json:"source,omitempty"`
 }

@@ -40,25 +40,25 @@ const (
 )
 
 type Node struct {
-	AcceleratorType        *string                 `json:"acceleratorType"`
-	APIVersion             *NodeAPIVersionEnum     `json:"apiVersion"`
-	CidrBlock              *string                 `json:"cidrBlock"`
-	CreateTime             *string                 `json:"createTime"`
-	DataDisks              []AttachedDisk          `json:"dataDisks"`
-	Description            *string                 `json:"description"`
-	Health                 *NodeHealthEnum         `json:"health"`
-	HealthDescription      *string                 `json:"healthDescription"`
-	ID                     *string                 `json:"id"`
-	Labels                 map[string]string       `json:"labels"`
-	Metadata               map[string]string       `json:"metadata"`
-	Name                   *string                 `json:"name"`
-	NetworkConfig          *NetworkConfig          `json:"networkConfig"`
-	NetworkEndpoints       []NetworkEndpoint       `json:"networkEndpoints"`
-	RuntimeVersion         *string                 `json:"runtimeVersion"`
-	SchedulingConfig       *SchedulingConfig       `json:"schedulingConfig"`
-	ServiceAccount         *ServiceAccount         `json:"serviceAccount"`
-	ShieldedInstanceConfig *ShieldedInstanceConfig `json:"shieldedInstanceConfig"`
-	State                  *NodeStateEnum          `json:"state"`
-	Symptoms               []Symptom               `json:"symptoms"`
-	Tags                   []string                `json:"tags"`
+	AcceleratorType        *string                 `json:"acceleratorType,omitempty"`
+	APIVersion             *NodeAPIVersionEnum     `json:"apiVersion,omitempty"`
+	CidrBlock              *string                 `json:"cidrBlock,omitempty"`
+	CreateTime             *string                 `json:"createTime,omitempty"`
+	DataDisks              []AttachedDisk          `json:"dataDisks,omitempty"`
+	Description            *string                 `json:"description,omitempty"`
+	Health                 *NodeHealthEnum         `json:"health,omitempty"`
+	HealthDescription      *string                 `json:"healthDescription,omitempty"`
+	ID                     *string                 `json:"id,omitempty"`
+	Labels                 map[string]string       `json:"labels,omitempty"`
+	Metadata               map[string]string       `json:"metadata,omitempty"`
+	Name                   *string                 `json:"name,omitempty"`
+	NetworkConfig          *NetworkConfig          `json:"networkConfig,omitempty"`
+	NetworkEndpoints       []NetworkEndpoint       `json:"networkEndpoints,omitempty"`
+	RuntimeVersion         *string                 `json:"runtimeVersion,omitempty"`
+	SchedulingConfig       *SchedulingConfig       `json:"schedulingConfig,omitempty"`
+	ServiceAccount         *ServiceAccount         `json:"serviceAccount,omitempty"`
+	ShieldedInstanceConfig *ShieldedInstanceConfig `json:"shieldedInstanceConfig,omitempty"`
+	State                  *NodeStateEnum          `json:"state,omitempty"`
+	Symptoms               []Symptom               `json:"symptoms,omitempty"`
+	Tags                   []string                `json:"tags,omitempty"`
 }

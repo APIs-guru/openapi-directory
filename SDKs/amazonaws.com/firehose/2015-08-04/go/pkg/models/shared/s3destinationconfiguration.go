@@ -2,11 +2,11 @@ package shared
 
 type S3DestinationConfiguration struct {
 	BucketArn                string                    `json:"BucketARN"`
-	BufferingHints           *BufferingHints           `json:"BufferingHints"`
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions"`
-	CompressionFormat        *CompressionFormatEnum    `json:"CompressionFormat"`
-	EncryptionConfiguration  *EncryptionConfiguration  `json:"EncryptionConfiguration"`
-	ErrorOutputPrefix        *string                   `json:"ErrorOutputPrefix"`
-	Prefix                   *string                   `json:"Prefix"`
+	BufferingHints           *BufferingHints           `json:"BufferingHints,omitempty"`
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions,omitempty"`
+	CompressionFormat        *CompressionFormatEnum    `json:"CompressionFormat,omitempty"`
+	EncryptionConfiguration  *EncryptionConfiguration  `json:"EncryptionConfiguration,omitempty"`
+	ErrorOutputPrefix        *string                   `json:"ErrorOutputPrefix,omitempty"`
+	Prefix                   *string                   `json:"Prefix,omitempty"`
 	RoleArn                  string                    `json:"RoleARN"`
 }

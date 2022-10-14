@@ -5,17 +5,17 @@ type ChangeRecoveryQuestionPathParams struct {
 }
 
 type ChangeRecoveryQuestionRequestBodyPassword struct {
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ChangeRecoveryQuestionRequestBodyRecoveryQuestion struct {
-	Answer   *string `json:"answer"`
-	Question *string `json:"question"`
+	Answer   *string `json:"answer,omitempty"`
+	Question *string `json:"question,omitempty"`
 }
 
 type ChangeRecoveryQuestionRequestBody struct {
-	Password         *ChangeRecoveryQuestionRequestBodyPassword         `json:"password"`
-	RecoveryQuestion *ChangeRecoveryQuestionRequestBodyRecoveryQuestion `json:"recovery_question"`
+	Password         *ChangeRecoveryQuestionRequestBodyPassword         `json:"password,omitempty"`
+	RecoveryQuestion *ChangeRecoveryQuestionRequestBodyRecoveryQuestion `json:"recovery_question,omitempty"`
 }
 
 type ChangeRecoveryQuestionRequest struct {

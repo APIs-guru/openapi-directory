@@ -1,5 +1,5 @@
 package shared
 
 type GetKeyRotationStatusResponse struct {
-	KeyRotationEnabled *bool `json:"KeyRotationEnabled"`
+	KeyRotationEnabled *bool `json:"KeyRotationEnabled,omitempty"`
 }

@@ -9,10 +9,10 @@ const (
 )
 
 type AccountResponse struct {
-	AccessToken  *string                     `json:"access_token"`
+	AccessToken  *string                     `json:"access_token,omitempty"`
 	APIKey       string                      `json:"api_key"`
-	Applications []string                    `json:"applications"`
+	Applications []string                    `json:"applications,omitempty"`
 	ExternalID   string                      `json:"external_id"`
-	Name         *string                     `json:"name"`
+	Name         *string                     `json:"name,omitempty"`
 	Provider     AccountResponseProviderEnum `json:"provider"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type BatchDeleteCatalogObjectsRequest struct {
-	ObjectIds []string `json:"object_ids"`
+	ObjectIds []string `json:"object_ids,omitempty"`
 }

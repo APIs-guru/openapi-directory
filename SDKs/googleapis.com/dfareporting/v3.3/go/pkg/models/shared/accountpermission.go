@@ -15,10 +15,10 @@ const (
 )
 
 type AccountPermission struct {
-	AccountProfiles   []AccountPermissionAccountProfilesEnum `json:"accountProfiles"`
-	ID                *string                                `json:"id"`
-	Kind              *string                                `json:"kind"`
-	Level             *AccountPermissionLevelEnum            `json:"level"`
-	Name              *string                                `json:"name"`
-	PermissionGroupID *string                                `json:"permissionGroupId"`
+	AccountProfiles   []AccountPermissionAccountProfilesEnum `json:"accountProfiles,omitempty"`
+	ID                *string                                `json:"id,omitempty"`
+	Kind              *string                                `json:"kind,omitempty"`
+	Level             *AccountPermissionLevelEnum            `json:"level,omitempty"`
+	Name              *string                                `json:"name,omitempty"`
+	PermissionGroupID *string                                `json:"permissionGroupId,omitempty"`
 }

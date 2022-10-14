@@ -1,7 +1,7 @@
 package shared
 
 type ExportMessagesRequest struct {
-	EndTime        *string         `json:"endTime"`
-	GcsDestination *GcsDestination `json:"gcsDestination"`
-	StartTime      *string         `json:"startTime"`
+	EndTime        *string         `json:"endTime,omitempty"`
+	GcsDestination *GcsDestination `json:"gcsDestination,omitempty"`
+	StartTime      *string         `json:"startTime,omitempty"`
 }

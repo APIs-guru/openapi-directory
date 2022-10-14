@@ -1,5 +1,5 @@
 package shared
 
 type SetResourceAccessForBucketResult struct {
-	Operations []Operation `json:"operations"`
+	Operations []Operation `json:"operations,omitempty"`
 }

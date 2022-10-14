@@ -19,9 +19,9 @@ type CreateBasePathMappingHeaders struct {
 }
 
 type CreateBasePathMappingRequestBody struct {
-	BasePath  *string `json:"basePath"`
+	BasePath  *string `json:"basePath,omitempty"`
 	RestAPIID string  `json:"restApiId"`
-	Stage     *string `json:"stage"`
+	Stage     *string `json:"stage,omitempty"`
 }
 
 type CreateBasePathMappingRequest struct {

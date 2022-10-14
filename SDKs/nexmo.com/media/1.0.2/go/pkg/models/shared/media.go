@@ -1,18 +1,18 @@
 package shared
 
 type Media struct {
-	AccountID           *string `json:"account_id"`
-	Etag                *string `json:"etag"`
-	ID                  *string `json:"id"`
-	MaxDownloadsAllowed *int64  `json:"max_downloads_allowed"`
-	MediaSize           *int64  `json:"media_size"`
-	MetadataPrimary     *string `json:"metadata_primary"`
-	MetadataSecondary   *string `json:"metadata_secondary"`
-	MimeType            *string `json:"mime_type"`
-	OriginalFileName    *string `json:"original_file_name"`
-	Public              *bool   `json:"public"`
-	StoreID             *string `json:"store_id"`
-	TimeCreated         *string `json:"time_created"`
-	TimeLastUpdated     *string `json:"time_last_updated"`
-	TimesDownloaded     *int64  `json:"times_downloaded"`
+	AccountID           *string `json:"account_id,omitempty"`
+	Etag                *string `json:"etag,omitempty"`
+	ID                  *string `json:"id,omitempty"`
+	MaxDownloadsAllowed *int64  `json:"max_downloads_allowed,omitempty"`
+	MediaSize           *int64  `json:"media_size,omitempty"`
+	MetadataPrimary     *string `json:"metadata_primary,omitempty"`
+	MetadataSecondary   *string `json:"metadata_secondary,omitempty"`
+	MimeType            *string `json:"mime_type,omitempty"`
+	OriginalFileName    *string `json:"original_file_name,omitempty"`
+	Public              *bool   `json:"public,omitempty"`
+	StoreID             *string `json:"store_id,omitempty"`
+	TimeCreated         *string `json:"time_created,omitempty"`
+	TimeLastUpdated     *string `json:"time_last_updated,omitempty"`
+	TimesDownloaded     *int64  `json:"times_downloaded,omitempty"`
 }

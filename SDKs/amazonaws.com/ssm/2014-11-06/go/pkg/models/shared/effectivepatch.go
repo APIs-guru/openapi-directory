@@ -1,6 +1,6 @@
 package shared
 
 type EffectivePatch struct {
-	Patch       *Patch       `json:"Patch"`
-	PatchStatus *PatchStatus `json:"PatchStatus"`
+	Patch       *Patch       `json:"Patch,omitempty"`
+	PatchStatus *PatchStatus `json:"PatchStatus,omitempty"`
 }

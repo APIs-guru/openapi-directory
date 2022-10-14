@@ -16,8 +16,8 @@ const (
 )
 
 type RitinRequestBody struct {
-	CertificateParameters *RitinRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *RitinRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                RitinRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Ritin400ApplicationJSON struct {
-	Error            *Ritin400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ritin400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ritin400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ritin400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ritin401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Ritin401ApplicationJSON struct {
-	Error            *Ritin401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ritin401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ritin401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ritin401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ritin404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Ritin404ApplicationJSON struct {
-	Error            *Ritin404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ritin404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ritin404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ritin404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ritin500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Ritin500ApplicationJSON struct {
-	Error            *Ritin500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ritin500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ritin500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ritin500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ritin502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Ritin502ApplicationJSON struct {
-	Error            *Ritin502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ritin502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ritin502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ritin502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ritin503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Ritin503ApplicationJSON struct {
-	Error            *Ritin503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ritin503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ritin503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ritin503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ritin504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Ritin504ApplicationJSON struct {
-	Error            *Ritin504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ritin504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ritin504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ritin504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type RitinResponse struct {

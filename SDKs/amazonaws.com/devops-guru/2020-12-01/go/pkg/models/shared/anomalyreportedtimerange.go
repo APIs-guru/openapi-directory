@@ -5,6 +5,6 @@ import (
 )
 
 type AnomalyReportedTimeRange struct {
-	CloseTime *time.Time `json:"CloseTime"`
+	CloseTime *time.Time `json:"CloseTime,omitempty"`
 	OpenTime  time.Time  `json:"OpenTime"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type StartTaskExecutionResponse struct {
-	TaskExecutionArn *string `json:"TaskExecutionArn"`
+	TaskExecutionArn *string `json:"TaskExecutionArn,omitempty"`
 }

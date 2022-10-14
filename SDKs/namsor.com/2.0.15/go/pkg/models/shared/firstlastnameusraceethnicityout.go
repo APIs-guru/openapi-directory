@@ -23,14 +23,14 @@ const (
 )
 
 type FirstLastNameUsRaceEthnicityOut struct {
-	FirstName                *string                                              `json:"firstName"`
-	ID                       *string                                              `json:"id"`
-	LastName                 *string                                              `json:"lastName"`
-	ProbabilityAltCalibrated *float64                                             `json:"probabilityAltCalibrated"`
-	ProbabilityCalibrated    *float64                                             `json:"probabilityCalibrated"`
-	RaceEthnicitiesTop       []string                                             `json:"raceEthnicitiesTop"`
-	RaceEthnicity            *FirstLastNameUsRaceEthnicityOutRaceEthnicityEnum    `json:"raceEthnicity"`
-	RaceEthnicityAlt         *FirstLastNameUsRaceEthnicityOutRaceEthnicityAltEnum `json:"raceEthnicityAlt"`
-	Score                    *float64                                             `json:"score"`
-	Script                   *string                                              `json:"script"`
+	FirstName                *string                                              `json:"firstName,omitempty"`
+	ID                       *string                                              `json:"id,omitempty"`
+	LastName                 *string                                              `json:"lastName,omitempty"`
+	ProbabilityAltCalibrated *float64                                             `json:"probabilityAltCalibrated,omitempty"`
+	ProbabilityCalibrated    *float64                                             `json:"probabilityCalibrated,omitempty"`
+	RaceEthnicitiesTop       []string                                             `json:"raceEthnicitiesTop,omitempty"`
+	RaceEthnicity            *FirstLastNameUsRaceEthnicityOutRaceEthnicityEnum    `json:"raceEthnicity,omitempty"`
+	RaceEthnicityAlt         *FirstLastNameUsRaceEthnicityOutRaceEthnicityAltEnum `json:"raceEthnicityAlt,omitempty"`
+	Score                    *float64                                             `json:"score,omitempty"`
+	Script                   *string                                              `json:"script,omitempty"`
 }

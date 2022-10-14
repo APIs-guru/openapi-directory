@@ -42,29 +42,29 @@ const (
 )
 
 type ResourceWarningsData struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ResourceWarnings struct {
-	Code    *ResourceWarningsCodeEnum `json:"code"`
-	Data    []ResourceWarningsData    `json:"data"`
-	Message *string                   `json:"message"`
+	Code    *ResourceWarningsCodeEnum `json:"code,omitempty"`
+	Data    []ResourceWarningsData    `json:"data,omitempty"`
+	Message *string                   `json:"message,omitempty"`
 }
 
 type Resource struct {
-	AccessControl      *ResourceAccessControl        `json:"accessControl"`
-	FinalProperties    *string                       `json:"finalProperties"`
-	ID                 *string                       `json:"id"`
-	InsertTime         *string                       `json:"insertTime"`
-	LastUsedCredential *Credential                   `json:"lastUsedCredential"`
-	Manifest           *string                       `json:"manifest"`
-	Name               *string                       `json:"name"`
-	Properties         *string                       `json:"properties"`
-	RuntimePolicies    []ResourceRuntimePoliciesEnum `json:"runtimePolicies"`
-	Type               *string                       `json:"type"`
-	Update             *ResourceUpdate               `json:"update"`
-	UpdateTime         *string                       `json:"updateTime"`
-	URL                *string                       `json:"url"`
-	Warnings           []ResourceWarnings            `json:"warnings"`
+	AccessControl      *ResourceAccessControl        `json:"accessControl,omitempty"`
+	FinalProperties    *string                       `json:"finalProperties,omitempty"`
+	ID                 *string                       `json:"id,omitempty"`
+	InsertTime         *string                       `json:"insertTime,omitempty"`
+	LastUsedCredential *Credential                   `json:"lastUsedCredential,omitempty"`
+	Manifest           *string                       `json:"manifest,omitempty"`
+	Name               *string                       `json:"name,omitempty"`
+	Properties         *string                       `json:"properties,omitempty"`
+	RuntimePolicies    []ResourceRuntimePoliciesEnum `json:"runtimePolicies,omitempty"`
+	Type               *string                       `json:"type,omitempty"`
+	Update             *ResourceUpdate               `json:"update,omitempty"`
+	UpdateTime         *string                       `json:"updateTime,omitempty"`
+	URL                *string                       `json:"url,omitempty"`
+	Warnings           []ResourceWarnings            `json:"warnings,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type PipelineContext struct {
-	Action              *ActionContext `json:"action"`
-	PipelineArn         *string        `json:"pipelineArn"`
-	PipelineExecutionID *string        `json:"pipelineExecutionId"`
-	PipelineName        *string        `json:"pipelineName"`
-	Stage               *StageContext  `json:"stage"`
+	Action              *ActionContext `json:"action,omitempty"`
+	PipelineArn         *string        `json:"pipelineArn,omitempty"`
+	PipelineExecutionID *string        `json:"pipelineExecutionId,omitempty"`
+	PipelineName        *string        `json:"pipelineName,omitempty"`
+	Stage               *StageContext  `json:"stage,omitempty"`
 }

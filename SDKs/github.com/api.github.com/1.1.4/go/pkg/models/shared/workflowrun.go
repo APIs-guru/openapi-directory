@@ -14,13 +14,13 @@ type WorkflowRun struct {
 	HeadBranch       string               `json:"head_branch"`
 	HeadCommit       SimpleCommit         `json:"head_commit"`
 	HeadRepository   MinimalRepository    `json:"head_repository"`
-	HeadRepositoryID *int64               `json:"head_repository_id"`
+	HeadRepositoryID *int64               `json:"head_repository_id,omitempty"`
 	HeadSha          string               `json:"head_sha"`
 	HTMLURL          string               `json:"html_url"`
 	ID               int64                `json:"id"`
 	JobsURL          string               `json:"jobs_url"`
 	LogsURL          string               `json:"logs_url"`
-	Name             *string              `json:"name"`
+	Name             *string              `json:"name,omitempty"`
 	NodeID           string               `json:"node_id"`
 	PullRequests     []PullRequestMinimal `json:"pull_requests"`
 	Repository       MinimalRepository    `json:"repository"`

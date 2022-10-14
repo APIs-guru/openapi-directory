@@ -1,14 +1,14 @@
 package shared
 
 type PipelineActivity struct {
-	AddAttributes        *AddAttributesActivity        `json:"addAttributes"`
-	Channel              *ChannelActivity              `json:"channel"`
-	Datastore            *DatastoreActivity            `json:"datastore"`
-	DeviceRegistryEnrich *DeviceRegistryEnrichActivity `json:"deviceRegistryEnrich"`
-	DeviceShadowEnrich   *DeviceShadowEnrichActivity   `json:"deviceShadowEnrich"`
-	Filter               *FilterActivity               `json:"filter"`
-	Lambda               *LambdaActivity               `json:"lambda"`
-	Math                 *MathActivity                 `json:"math"`
-	RemoveAttributes     *RemoveAttributesActivity     `json:"removeAttributes"`
-	SelectAttributes     *SelectAttributesActivity     `json:"selectAttributes"`
+	AddAttributes        *AddAttributesActivity        `json:"addAttributes,omitempty"`
+	Channel              *ChannelActivity              `json:"channel,omitempty"`
+	Datastore            *DatastoreActivity            `json:"datastore,omitempty"`
+	DeviceRegistryEnrich *DeviceRegistryEnrichActivity `json:"deviceRegistryEnrich,omitempty"`
+	DeviceShadowEnrich   *DeviceShadowEnrichActivity   `json:"deviceShadowEnrich,omitempty"`
+	Filter               *FilterActivity               `json:"filter,omitempty"`
+	Lambda               *LambdaActivity               `json:"lambda,omitempty"`
+	Math                 *MathActivity                 `json:"math,omitempty"`
+	RemoveAttributes     *RemoveAttributesActivity     `json:"removeAttributes,omitempty"`
+	SelectAttributes     *SelectAttributesActivity     `json:"selectAttributes,omitempty"`
 }

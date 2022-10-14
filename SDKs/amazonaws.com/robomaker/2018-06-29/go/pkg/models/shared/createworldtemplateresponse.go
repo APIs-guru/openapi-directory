@@ -5,9 +5,9 @@ import (
 )
 
 type CreateWorldTemplateResponse struct {
-	Arn                *string           `json:"arn"`
-	ClientRequestToken *string           `json:"clientRequestToken"`
-	CreatedAt          *time.Time        `json:"createdAt"`
-	Name               *string           `json:"name"`
-	Tags               map[string]string `json:"tags"`
+	Arn                *string           `json:"arn,omitempty"`
+	ClientRequestToken *string           `json:"clientRequestToken,omitempty"`
+	CreatedAt          *time.Time        `json:"createdAt,omitempty"`
+	Name               *string           `json:"name,omitempty"`
+	Tags               map[string]string `json:"tags,omitempty"`
 }

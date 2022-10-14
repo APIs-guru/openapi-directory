@@ -5,40 +5,40 @@ import (
 )
 
 type PermissionPermissionDetails struct {
-	AdditionalRoles []string `json:"additionalRoles"`
-	Inherited       *bool    `json:"inherited"`
-	InheritedFrom   *string  `json:"inheritedFrom"`
-	PermissionType  *string  `json:"permissionType"`
-	Role            *string  `json:"role"`
+	AdditionalRoles []string `json:"additionalRoles,omitempty"`
+	Inherited       *bool    `json:"inherited,omitempty"`
+	InheritedFrom   *string  `json:"inheritedFrom,omitempty"`
+	PermissionType  *string  `json:"permissionType,omitempty"`
+	Role            *string  `json:"role,omitempty"`
 }
 
 type PermissionTeamDrivePermissionDetails struct {
-	AdditionalRoles         []string `json:"additionalRoles"`
-	Inherited               *bool    `json:"inherited"`
-	InheritedFrom           *string  `json:"inheritedFrom"`
-	Role                    *string  `json:"role"`
-	TeamDrivePermissionType *string  `json:"teamDrivePermissionType"`
+	AdditionalRoles         []string `json:"additionalRoles,omitempty"`
+	Inherited               *bool    `json:"inherited,omitempty"`
+	InheritedFrom           *string  `json:"inheritedFrom,omitempty"`
+	Role                    *string  `json:"role,omitempty"`
+	TeamDrivePermissionType *string  `json:"teamDrivePermissionType,omitempty"`
 }
 
 type Permission struct {
-	AdditionalRoles            []string                               `json:"additionalRoles"`
-	AuthKey                    *string                                `json:"authKey"`
-	Deleted                    *bool                                  `json:"deleted"`
-	Domain                     *string                                `json:"domain"`
-	EmailAddress               *string                                `json:"emailAddress"`
-	Etag                       *string                                `json:"etag"`
-	ExpirationDate             *time.Time                             `json:"expirationDate"`
-	ID                         *string                                `json:"id"`
-	Kind                       *string                                `json:"kind"`
-	Name                       *string                                `json:"name"`
-	PendingOwner               *bool                                  `json:"pendingOwner"`
-	PermissionDetails          []PermissionPermissionDetails          `json:"permissionDetails"`
-	PhotoLink                  *string                                `json:"photoLink"`
-	Role                       *string                                `json:"role"`
-	SelfLink                   *string                                `json:"selfLink"`
-	TeamDrivePermissionDetails []PermissionTeamDrivePermissionDetails `json:"teamDrivePermissionDetails"`
-	Type                       *string                                `json:"type"`
-	Value                      *string                                `json:"value"`
-	View                       *string                                `json:"view"`
-	WithLink                   *bool                                  `json:"withLink"`
+	AdditionalRoles            []string                               `json:"additionalRoles,omitempty"`
+	AuthKey                    *string                                `json:"authKey,omitempty"`
+	Deleted                    *bool                                  `json:"deleted,omitempty"`
+	Domain                     *string                                `json:"domain,omitempty"`
+	EmailAddress               *string                                `json:"emailAddress,omitempty"`
+	Etag                       *string                                `json:"etag,omitempty"`
+	ExpirationDate             *time.Time                             `json:"expirationDate,omitempty"`
+	ID                         *string                                `json:"id,omitempty"`
+	Kind                       *string                                `json:"kind,omitempty"`
+	Name                       *string                                `json:"name,omitempty"`
+	PendingOwner               *bool                                  `json:"pendingOwner,omitempty"`
+	PermissionDetails          []PermissionPermissionDetails          `json:"permissionDetails,omitempty"`
+	PhotoLink                  *string                                `json:"photoLink,omitempty"`
+	Role                       *string                                `json:"role,omitempty"`
+	SelfLink                   *string                                `json:"selfLink,omitempty"`
+	TeamDrivePermissionDetails []PermissionTeamDrivePermissionDetails `json:"teamDrivePermissionDetails,omitempty"`
+	Type                       *string                                `json:"type,omitempty"`
+	Value                      *string                                `json:"value,omitempty"`
+	View                       *string                                `json:"view,omitempty"`
+	WithLink                   *bool                                  `json:"withLink,omitempty"`
 }

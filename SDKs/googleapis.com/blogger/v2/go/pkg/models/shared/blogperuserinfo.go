@@ -10,10 +10,10 @@ const (
 )
 
 type BlogPerUserInfo struct {
-	BlogID         *string                  `json:"blogId"`
-	HasAdminAccess *bool                    `json:"hasAdminAccess"`
-	Kind           *string                  `json:"kind"`
-	PhotosAlbumKey *string                  `json:"photosAlbumKey"`
-	Role           *BlogPerUserInfoRoleEnum `json:"role"`
-	UserID         *string                  `json:"userId"`
+	BlogID         *string                  `json:"blogId,omitempty"`
+	HasAdminAccess *bool                    `json:"hasAdminAccess,omitempty"`
+	Kind           *string                  `json:"kind,omitempty"`
+	PhotosAlbumKey *string                  `json:"photosAlbumKey,omitempty"`
+	Role           *BlogPerUserInfoRoleEnum `json:"role,omitempty"`
+	UserID         *string                  `json:"userId,omitempty"`
 }

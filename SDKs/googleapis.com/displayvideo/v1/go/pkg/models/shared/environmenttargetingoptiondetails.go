@@ -10,5 +10,5 @@ const (
 )
 
 type EnvironmentTargetingOptionDetails struct {
-	Environment *EnvironmentTargetingOptionDetailsEnvironmentEnum `json:"environment"`
+	Environment *EnvironmentTargetingOptionDetailsEnvironmentEnum `json:"environment,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeActivationsResult struct {
-	ActivationList []Activation `json:"ActivationList"`
-	NextToken      *string      `json:"NextToken"`
+	ActivationList []Activation `json:"ActivationList,omitempty"`
+	NextToken      *string      `json:"NextToken,omitempty"`
 }

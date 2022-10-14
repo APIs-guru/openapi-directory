@@ -1,6 +1,6 @@
 package shared
 
 type AnthosVMMembershipState struct {
-	LocalControllerState *LocalControllerState     `json:"localControllerState"`
-	SubfeatureState      []AnthosVMSubFeatureState `json:"subfeatureState"`
+	LocalControllerState *LocalControllerState     `json:"localControllerState,omitempty"`
+	SubfeatureState      []AnthosVMSubFeatureState `json:"subfeatureState,omitempty"`
 }

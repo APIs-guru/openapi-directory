@@ -8,8 +8,8 @@ const (
 )
 
 type QueryBatchResponse2 struct {
-	FailureCount *int64                         `json:"failureCount"`
-	Failures     []FailedSubmission2            `json:"failures"`
-	PendingCount *int64                         `json:"pendingCount"`
-	Status       *QueryBatchResponse2StatusEnum `json:"status"`
+	FailureCount *int64                         `json:"failureCount,omitempty"`
+	Failures     []FailedSubmission2            `json:"failures,omitempty"`
+	PendingCount *int64                         `json:"pendingCount,omitempty"`
+	Status       *QueryBatchResponse2StatusEnum `json:"status,omitempty"`
 }

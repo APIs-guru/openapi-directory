@@ -1,9 +1,9 @@
 package shared
 
 type PollingOptions struct {
-	Diagnostics     []Diagnostic `json:"diagnostics"`
-	FailCondition   *string      `json:"failCondition"`
-	FinishCondition *string      `json:"finishCondition"`
-	PollingLink     *string      `json:"pollingLink"`
-	TargetLink      *string      `json:"targetLink"`
+	Diagnostics     []Diagnostic `json:"diagnostics,omitempty"`
+	FailCondition   *string      `json:"failCondition,omitempty"`
+	FinishCondition *string      `json:"finishCondition,omitempty"`
+	PollingLink     *string      `json:"pollingLink,omitempty"`
+	TargetLink      *string      `json:"targetLink,omitempty"`
 }

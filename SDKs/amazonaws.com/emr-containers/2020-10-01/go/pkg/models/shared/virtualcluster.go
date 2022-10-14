@@ -5,11 +5,11 @@ import (
 )
 
 type VirtualCluster struct {
-	Arn               *string                  `json:"arn"`
-	ContainerProvider *ContainerProvider       `json:"containerProvider"`
-	CreatedAt         *time.Time               `json:"createdAt"`
-	ID                *string                  `json:"id"`
-	Name              *string                  `json:"name"`
-	State             *VirtualClusterStateEnum `json:"state"`
-	Tags              map[string]string        `json:"tags"`
+	Arn               *string                  `json:"arn,omitempty"`
+	ContainerProvider *ContainerProvider       `json:"containerProvider,omitempty"`
+	CreatedAt         *time.Time               `json:"createdAt,omitempty"`
+	ID                *string                  `json:"id,omitempty"`
+	Name              *string                  `json:"name,omitempty"`
+	State             *VirtualClusterStateEnum `json:"state,omitempty"`
+	Tags              map[string]string        `json:"tags,omitempty"`
 }

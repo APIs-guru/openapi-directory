@@ -5,11 +5,11 @@ import (
 )
 
 type CreateCustomImageRequestBody struct {
-	Description  *string                                                                                                                                  `json:"description"`
-	Distribution *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesDistributionEnum `json:"distribution"`
+	Description  *string                                                                                                                                  `json:"description,omitempty"`
+	Distribution *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesDistributionEnum `json:"distribution,omitempty"`
 	Name         string                                                                                                                                   `json:"name"`
 	Region       shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum  `json:"region"`
-	Tags         []string                                                                                                                                 `json:"tags"`
+	Tags         []string                                                                                                                                 `json:"tags,omitempty"`
 	URL          string                                                                                                                                   `json:"url"`
 }
 
@@ -20,7 +20,7 @@ type CreateCustomImageRequest struct {
 type CreateCustomImage401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateCustomImageResponse struct {

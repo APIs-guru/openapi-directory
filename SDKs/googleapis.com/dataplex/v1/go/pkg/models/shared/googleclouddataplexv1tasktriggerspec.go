@@ -9,9 +9,9 @@ const (
 )
 
 type GoogleCloudDataplexV1TaskTriggerSpec struct {
-	Disabled   *bool                                         `json:"disabled"`
-	MaxRetries *int32                                        `json:"maxRetries"`
-	Schedule   *string                                       `json:"schedule"`
-	StartTime  *string                                       `json:"startTime"`
-	Type       *GoogleCloudDataplexV1TaskTriggerSpecTypeEnum `json:"type"`
+	Disabled   *bool                                         `json:"disabled,omitempty"`
+	MaxRetries *int32                                        `json:"maxRetries,omitempty"`
+	Schedule   *string                                       `json:"schedule,omitempty"`
+	StartTime  *string                                       `json:"startTime,omitempty"`
+	Type       *GoogleCloudDataplexV1TaskTriggerSpecTypeEnum `json:"type,omitempty"`
 }

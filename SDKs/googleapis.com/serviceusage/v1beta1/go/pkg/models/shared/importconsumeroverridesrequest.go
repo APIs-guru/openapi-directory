@@ -9,7 +9,7 @@ const (
 )
 
 type ImportConsumerOverridesRequest struct {
-	Force        *bool                                         `json:"force"`
-	ForceOnly    []ImportConsumerOverridesRequestForceOnlyEnum `json:"forceOnly"`
-	InlineSource *OverrideInlineSource                         `json:"inlineSource"`
+	Force        *bool                                         `json:"force,omitempty"`
+	ForceOnly    []ImportConsumerOverridesRequestForceOnlyEnum `json:"forceOnly,omitempty"`
+	InlineSource *OverrideInlineSource                         `json:"inlineSource,omitempty"`
 }

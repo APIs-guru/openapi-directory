@@ -1,8 +1,8 @@
 package shared
 
 type Container struct {
-	Command     []string                                `json:"command"`
-	Environment map[string]string                       `json:"environment"`
-	Image       *string                                 `json:"image"`
-	Ports       map[string]ContainerServiceProtocolEnum `json:"ports"`
+	Command     []string                                `json:"command,omitempty"`
+	Environment map[string]string                       `json:"environment,omitempty"`
+	Image       *string                                 `json:"image,omitempty"`
+	Ports       map[string]ContainerServiceProtocolEnum `json:"ports,omitempty"`
 }

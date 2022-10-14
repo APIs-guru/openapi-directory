@@ -14,7 +14,7 @@ const (
 
 type PublicUpdateSubscriptionStatusRequest struct {
 	EmailAddress          string                                               `json:"emailAddress"`
-	LegalBasis            *PublicUpdateSubscriptionStatusRequestLegalBasisEnum `json:"legalBasis"`
-	LegalBasisExplanation *string                                              `json:"legalBasisExplanation"`
+	LegalBasis            *PublicUpdateSubscriptionStatusRequestLegalBasisEnum `json:"legalBasis,omitempty"`
+	LegalBasisExplanation *string                                              `json:"legalBasisExplanation,omitempty"`
 	SubscriptionID        string                                               `json:"subscriptionId"`
 }

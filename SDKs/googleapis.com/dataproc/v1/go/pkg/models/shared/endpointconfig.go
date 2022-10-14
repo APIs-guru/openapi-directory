@@ -1,6 +1,6 @@
 package shared
 
 type EndpointConfig struct {
-	EnableHTTPPortAccess *bool             `json:"enableHttpPortAccess"`
-	HTTPPorts            map[string]string `json:"httpPorts"`
+	EnableHTTPPortAccess *bool             `json:"enableHttpPortAccess,omitempty"`
+	HTTPPorts            map[string]string `json:"httpPorts,omitempty"`
 }

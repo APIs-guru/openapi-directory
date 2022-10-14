@@ -10,12 +10,12 @@ type PutTIDJSONHeaders struct {
 }
 
 type PutTIDJSONRequestBodyTopic struct {
-	CategoryID *int64  `json:"category_id"`
-	Title      *string `json:"title"`
+	CategoryID *int64  `json:"category_id,omitempty"`
+	Title      *string `json:"title,omitempty"`
 }
 
 type PutTIDJSONRequestBody struct {
-	Topic *PutTIDJSONRequestBodyTopic `json:"topic"`
+	Topic *PutTIDJSONRequestBodyTopic `json:"topic,omitempty"`
 }
 
 type PutTIDJSONRequest struct {
@@ -25,15 +25,15 @@ type PutTIDJSONRequest struct {
 }
 
 type PutTIDJSON200ApplicationJSONBasicTopic struct {
-	FancyTitle *string `json:"fancy_title"`
-	ID         *int64  `json:"id"`
-	PostsCount *int64  `json:"posts_count"`
-	Slug       *string `json:"slug"`
-	Title      *string `json:"title"`
+	FancyTitle *string `json:"fancy_title,omitempty"`
+	ID         *int64  `json:"id,omitempty"`
+	PostsCount *int64  `json:"posts_count,omitempty"`
+	Slug       *string `json:"slug,omitempty"`
+	Title      *string `json:"title,omitempty"`
 }
 
 type PutTIDJSON200ApplicationJSON struct {
-	BasicTopic *PutTIDJSON200ApplicationJSONBasicTopic `json:"basic_topic"`
+	BasicTopic *PutTIDJSON200ApplicationJSONBasicTopic `json:"basic_topic,omitempty"`
 }
 
 type PutTIDJSONResponse struct {

@@ -22,14 +22,14 @@ const (
 )
 
 type UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRules struct {
-	Description *string                                                                  `json:"description"`
+	Description *string                                                                  `json:"description,omitempty"`
 	Services    []UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRulesServicesEnum `json:"services"`
 	VlanID      string                                                                   `json:"vlanId"`
 }
 
 type UpdateNetworkWirelessSsidBonjourForwardingRequestBody struct {
-	Enabled *bool                                                        `json:"enabled"`
-	Rules   []UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRules `json:"rules"`
+	Enabled *bool                                                        `json:"enabled,omitempty"`
+	Rules   []UpdateNetworkWirelessSsidBonjourForwardingRequestBodyRules `json:"rules,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidBonjourForwardingRequest struct {

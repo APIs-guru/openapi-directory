@@ -1,12 +1,12 @@
 package shared
 
 type Place struct {
-	Address    *Address          `json:"address"`
-	Area       *Area             `json:"area"`
-	City       *City             `json:"city"`
-	Country    *Country          `json:"country"`
-	Location   *Location         `json:"location"`
-	Names      map[string]string `json:"names"`
-	PostalCode *string           `json:"postalCode"`
-	State      *State            `json:"state"`
+	Address    *Address          `json:"address,omitempty"`
+	Area       *Area             `json:"area,omitempty"`
+	City       *City             `json:"city,omitempty"`
+	Country    *Country          `json:"country,omitempty"`
+	Location   *Location         `json:"location,omitempty"`
+	Names      map[string]string `json:"names,omitempty"`
+	PostalCode *string           `json:"postalCode,omitempty"`
+	State      *State            `json:"state,omitempty"`
 }

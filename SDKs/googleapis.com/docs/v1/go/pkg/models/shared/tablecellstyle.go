@@ -11,16 +11,16 @@ const (
 )
 
 type TableCellStyle struct {
-	BackgroundColor  *OptionalColor                      `json:"backgroundColor"`
-	BorderBottom     *TableCellBorder                    `json:"borderBottom"`
-	BorderLeft       *TableCellBorder                    `json:"borderLeft"`
-	BorderRight      *TableCellBorder                    `json:"borderRight"`
-	BorderTop        *TableCellBorder                    `json:"borderTop"`
-	ColumnSpan       *int32                              `json:"columnSpan"`
-	ContentAlignment *TableCellStyleContentAlignmentEnum `json:"contentAlignment"`
-	PaddingBottom    *Dimension                          `json:"paddingBottom"`
-	PaddingLeft      *Dimension                          `json:"paddingLeft"`
-	PaddingRight     *Dimension                          `json:"paddingRight"`
-	PaddingTop       *Dimension                          `json:"paddingTop"`
-	RowSpan          *int32                              `json:"rowSpan"`
+	BackgroundColor  *OptionalColor                      `json:"backgroundColor,omitempty"`
+	BorderBottom     *TableCellBorder                    `json:"borderBottom,omitempty"`
+	BorderLeft       *TableCellBorder                    `json:"borderLeft,omitempty"`
+	BorderRight      *TableCellBorder                    `json:"borderRight,omitempty"`
+	BorderTop        *TableCellBorder                    `json:"borderTop,omitempty"`
+	ColumnSpan       *int32                              `json:"columnSpan,omitempty"`
+	ContentAlignment *TableCellStyleContentAlignmentEnum `json:"contentAlignment,omitempty"`
+	PaddingBottom    *Dimension                          `json:"paddingBottom,omitempty"`
+	PaddingLeft      *Dimension                          `json:"paddingLeft,omitempty"`
+	PaddingRight     *Dimension                          `json:"paddingRight,omitempty"`
+	PaddingTop       *Dimension                          `json:"paddingTop,omitempty"`
+	RowSpan          *int32                              `json:"rowSpan,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type PostalAddress6Ch struct {
-	AddressLine1   *string `json:"addressLine1"`
-	AddressLine2   *string `json:"addressLine2"`
-	BuildingNumber *string `json:"buildingNumber"`
-	Country        *string `json:"country"`
-	PostCode       *string `json:"postCode"`
-	StreetName     *string `json:"streetName"`
-	TownName       *string `json:"townName"`
+	AddressLine1   *string `json:"addressLine1,omitempty"`
+	AddressLine2   *string `json:"addressLine2,omitempty"`
+	BuildingNumber *string `json:"buildingNumber,omitempty"`
+	Country        *string `json:"country,omitempty"`
+	PostCode       *string `json:"postCode,omitempty"`
+	StreetName     *string `json:"streetName,omitempty"`
+	TownName       *string `json:"townName,omitempty"`
 }

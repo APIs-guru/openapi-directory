@@ -20,16 +20,16 @@ type GetBackendAPIHeaders struct {
 }
 
 type GetBackendAPIRequestBodyResourceConfig struct {
-	AdditionalAuthTypes []shared.BackendAPIAuthType          `json:"AdditionalAuthTypes"`
-	APIName             *string                              `json:"ApiName"`
-	ConflictResolution  *shared.BackendAPIConflictResolution `json:"ConflictResolution"`
-	DefaultAuthType     *shared.BackendAPIAuthType           `json:"DefaultAuthType"`
-	Service             *string                              `json:"Service"`
-	TransformSchema     *string                              `json:"TransformSchema"`
+	AdditionalAuthTypes []shared.BackendAPIAuthType          `json:"AdditionalAuthTypes,omitempty"`
+	APIName             *string                              `json:"ApiName,omitempty"`
+	ConflictResolution  *shared.BackendAPIConflictResolution `json:"ConflictResolution,omitempty"`
+	DefaultAuthType     *shared.BackendAPIAuthType           `json:"DefaultAuthType,omitempty"`
+	Service             *string                              `json:"Service,omitempty"`
+	TransformSchema     *string                              `json:"TransformSchema,omitempty"`
 }
 
 type GetBackendAPIRequestBody struct {
-	ResourceConfig *GetBackendAPIRequestBodyResourceConfig `json:"resourceConfig"`
+	ResourceConfig *GetBackendAPIRequestBodyResourceConfig `json:"resourceConfig,omitempty"`
 	ResourceName   string                                  `json:"resourceName"`
 }
 

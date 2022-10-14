@@ -1,5 +1,5 @@
 package shared
 
 type CreateEndpointGroupResponse struct {
-	EndpointGroup *EndpointGroup `json:"EndpointGroup"`
+	EndpointGroup *EndpointGroup `json:"EndpointGroup,omitempty"`
 }

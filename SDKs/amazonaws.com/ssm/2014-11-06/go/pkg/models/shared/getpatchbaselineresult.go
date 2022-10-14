@@ -5,19 +5,19 @@ import (
 )
 
 type GetPatchBaselineResult struct {
-	ApprovalRules                    *PatchRuleGroup           `json:"ApprovalRules"`
-	ApprovedPatches                  []string                  `json:"ApprovedPatches"`
-	ApprovedPatchesComplianceLevel   *PatchComplianceLevelEnum `json:"ApprovedPatchesComplianceLevel"`
-	ApprovedPatchesEnableNonSecurity *bool                     `json:"ApprovedPatchesEnableNonSecurity"`
-	BaselineID                       *string                   `json:"BaselineId"`
-	CreatedDate                      *time.Time                `json:"CreatedDate"`
-	Description                      *string                   `json:"Description"`
-	GlobalFilters                    *PatchFilterGroup         `json:"GlobalFilters"`
-	ModifiedDate                     *time.Time                `json:"ModifiedDate"`
-	Name                             *string                   `json:"Name"`
-	OperatingSystem                  *OperatingSystemEnum      `json:"OperatingSystem"`
-	PatchGroups                      []string                  `json:"PatchGroups"`
-	RejectedPatches                  []string                  `json:"RejectedPatches"`
-	RejectedPatchesAction            *PatchActionEnum          `json:"RejectedPatchesAction"`
-	Sources                          []PatchSource             `json:"Sources"`
+	ApprovalRules                    *PatchRuleGroup           `json:"ApprovalRules,omitempty"`
+	ApprovedPatches                  []string                  `json:"ApprovedPatches,omitempty"`
+	ApprovedPatchesComplianceLevel   *PatchComplianceLevelEnum `json:"ApprovedPatchesComplianceLevel,omitempty"`
+	ApprovedPatchesEnableNonSecurity *bool                     `json:"ApprovedPatchesEnableNonSecurity,omitempty"`
+	BaselineID                       *string                   `json:"BaselineId,omitempty"`
+	CreatedDate                      *time.Time                `json:"CreatedDate,omitempty"`
+	Description                      *string                   `json:"Description,omitempty"`
+	GlobalFilters                    *PatchFilterGroup         `json:"GlobalFilters,omitempty"`
+	ModifiedDate                     *time.Time                `json:"ModifiedDate,omitempty"`
+	Name                             *string                   `json:"Name,omitempty"`
+	OperatingSystem                  *OperatingSystemEnum      `json:"OperatingSystem,omitempty"`
+	PatchGroups                      []string                  `json:"PatchGroups,omitempty"`
+	RejectedPatches                  []string                  `json:"RejectedPatches,omitempty"`
+	RejectedPatchesAction            *PatchActionEnum          `json:"RejectedPatchesAction,omitempty"`
+	Sources                          []PatchSource             `json:"Sources,omitempty"`
 }

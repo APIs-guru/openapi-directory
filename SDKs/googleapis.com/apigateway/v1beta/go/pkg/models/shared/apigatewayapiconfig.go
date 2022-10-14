@@ -13,16 +13,16 @@ const (
 )
 
 type ApigatewayAPIConfig struct {
-	CreateTime            *string                                    `json:"createTime"`
-	DisplayName           *string                                    `json:"displayName"`
-	GatewayConfig         *ApigatewayGatewayConfig                   `json:"gatewayConfig"`
-	GatewayServiceAccount *string                                    `json:"gatewayServiceAccount"`
-	GrpcServices          []ApigatewayAPIConfigGrpcServiceDefinition `json:"grpcServices"`
-	Labels                map[string]string                          `json:"labels"`
-	ManagedServiceConfigs []ApigatewayAPIConfigFile                  `json:"managedServiceConfigs"`
-	Name                  *string                                    `json:"name"`
-	OpenapiDocuments      []ApigatewayAPIConfigOpenAPIDocument       `json:"openapiDocuments"`
-	ServiceConfigID       *string                                    `json:"serviceConfigId"`
-	State                 *ApigatewayAPIConfigStateEnum              `json:"state"`
-	UpdateTime            *string                                    `json:"updateTime"`
+	CreateTime            *string                                    `json:"createTime,omitempty"`
+	DisplayName           *string                                    `json:"displayName,omitempty"`
+	GatewayConfig         *ApigatewayGatewayConfig                   `json:"gatewayConfig,omitempty"`
+	GatewayServiceAccount *string                                    `json:"gatewayServiceAccount,omitempty"`
+	GrpcServices          []ApigatewayAPIConfigGrpcServiceDefinition `json:"grpcServices,omitempty"`
+	Labels                map[string]string                          `json:"labels,omitempty"`
+	ManagedServiceConfigs []ApigatewayAPIConfigFile                  `json:"managedServiceConfigs,omitempty"`
+	Name                  *string                                    `json:"name,omitempty"`
+	OpenapiDocuments      []ApigatewayAPIConfigOpenAPIDocument       `json:"openapiDocuments,omitempty"`
+	ServiceConfigID       *string                                    `json:"serviceConfigId,omitempty"`
+	State                 *ApigatewayAPIConfigStateEnum              `json:"state,omitempty"`
+	UpdateTime            *string                                    `json:"updateTime,omitempty"`
 }

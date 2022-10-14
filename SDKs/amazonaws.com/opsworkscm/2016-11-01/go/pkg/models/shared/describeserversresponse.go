@@ -1,6 +1,6 @@
 package shared
 
 type DescribeServersResponse struct {
-	NextToken *string  `json:"NextToken"`
-	Servers   []Server `json:"Servers"`
+	NextToken *string  `json:"NextToken,omitempty"`
+	Servers   []Server `json:"Servers,omitempty"`
 }

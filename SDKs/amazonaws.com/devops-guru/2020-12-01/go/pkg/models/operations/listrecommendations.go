@@ -36,8 +36,8 @@ const (
 
 type ListRecommendationsRequestBody struct {
 	InsightID string                                    `json:"InsightId"`
-	Locale    *ListRecommendationsRequestBodyLocaleEnum `json:"Locale"`
-	NextToken *string                                   `json:"NextToken"`
+	Locale    *ListRecommendationsRequestBodyLocaleEnum `json:"Locale,omitempty"`
+	NextToken *string                                   `json:"NextToken,omitempty"`
 }
 
 type ListRecommendationsRequest struct {

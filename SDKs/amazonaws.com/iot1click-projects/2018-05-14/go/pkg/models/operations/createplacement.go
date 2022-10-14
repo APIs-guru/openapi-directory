@@ -15,7 +15,7 @@ type CreatePlacementHeaders struct {
 }
 
 type CreatePlacementRequestBody struct {
-	Attributes    map[string]string `json:"attributes"`
+	Attributes    map[string]string `json:"attributes,omitempty"`
 	PlacementName string            `json:"placementName"`
 }
 

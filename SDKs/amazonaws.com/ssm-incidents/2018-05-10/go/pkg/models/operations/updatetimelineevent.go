@@ -15,11 +15,11 @@ type UpdateTimelineEventHeaders struct {
 }
 
 type UpdateTimelineEventRequestBody struct {
-	ClientToken       *string    `json:"clientToken"`
-	EventData         *string    `json:"eventData"`
+	ClientToken       *string    `json:"clientToken,omitempty"`
+	EventData         *string    `json:"eventData,omitempty"`
 	EventID           string     `json:"eventId"`
-	EventTime         *time.Time `json:"eventTime"`
-	EventType         *string    `json:"eventType"`
+	EventTime         *time.Time `json:"eventTime,omitempty"`
+	EventType         *string    `json:"eventType,omitempty"`
 	IncidentRecordArn string     `json:"incidentRecordArn"`
 }
 

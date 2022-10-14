@@ -1,6 +1,6 @@
 package shared
 
 type SystemParameterRule struct {
-	Parameters []SystemParameter `json:"parameters"`
-	Selector   *string           `json:"selector"`
+	Parameters []SystemParameter `json:"parameters,omitempty"`
+	Selector   *string           `json:"selector,omitempty"`
 }

@@ -18,9 +18,9 @@ const (
 )
 
 type ChannelStatus struct {
-	IsLinked                *bool                               `json:"isLinked"`
-	LongUploadsStatus       *ChannelStatusLongUploadsStatusEnum `json:"longUploadsStatus"`
-	MadeForKids             *bool                               `json:"madeForKids"`
-	PrivacyStatus           *ChannelStatusPrivacyStatusEnum     `json:"privacyStatus"`
-	SelfDeclaredMadeForKids *bool                               `json:"selfDeclaredMadeForKids"`
+	IsLinked                *bool                               `json:"isLinked,omitempty"`
+	LongUploadsStatus       *ChannelStatusLongUploadsStatusEnum `json:"longUploadsStatus,omitempty"`
+	MadeForKids             *bool                               `json:"madeForKids,omitempty"`
+	PrivacyStatus           *ChannelStatusPrivacyStatusEnum     `json:"privacyStatus,omitempty"`
+	SelfDeclaredMadeForKids *bool                               `json:"selfDeclaredMadeForKids,omitempty"`
 }

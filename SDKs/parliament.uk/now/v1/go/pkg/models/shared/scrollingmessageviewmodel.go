@@ -23,10 +23,10 @@ const (
 )
 
 type ScrollingMessageViewModel struct {
-	AlertType         *ScrollingMessageViewModelAlertTypeEnum         `json:"alertType"`
-	Content           *string                                         `json:"content"`
-	DisplayFrom       *time.Time                                      `json:"displayFrom"`
-	DisplayTo         *time.Time                                      `json:"displayTo"`
-	ID                *int32                                          `json:"id"`
-	VerticalAlignment *ScrollingMessageViewModelVerticalAlignmentEnum `json:"verticalAlignment"`
+	AlertType         *ScrollingMessageViewModelAlertTypeEnum         `json:"alertType,omitempty"`
+	Content           *string                                         `json:"content,omitempty"`
+	DisplayFrom       *time.Time                                      `json:"displayFrom,omitempty"`
+	DisplayTo         *time.Time                                      `json:"displayTo,omitempty"`
+	ID                *int32                                          `json:"id,omitempty"`
+	VerticalAlignment *ScrollingMessageViewModelVerticalAlignmentEnum `json:"verticalAlignment,omitempty"`
 }

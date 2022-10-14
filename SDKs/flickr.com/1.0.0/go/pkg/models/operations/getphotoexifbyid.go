@@ -11,29 +11,29 @@ type GetPhotoExifByIDRequest struct {
 }
 
 type GetPhotoExifByID200ApplicationJSONPhotoExifRaw struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type GetPhotoExifByID200ApplicationJSONPhotoExif struct {
-	Label      *string                                         `json:"label"`
-	Raw        *GetPhotoExifByID200ApplicationJSONPhotoExifRaw `json:"raw"`
-	Tag        *string                                         `json:"tag"`
-	Tagspace   *string                                         `json:"tagspace"`
-	Tagspaceid *string                                         `json:"tagspaceid"`
+	Label      *string                                         `json:"label,omitempty"`
+	Raw        *GetPhotoExifByID200ApplicationJSONPhotoExifRaw `json:"raw,omitempty"`
+	Tag        *string                                         `json:"tag,omitempty"`
+	Tagspace   *string                                         `json:"tagspace,omitempty"`
+	Tagspaceid *string                                         `json:"tagspaceid,omitempty"`
 }
 
 type GetPhotoExifByID200ApplicationJSONPhoto struct {
-	Camera *string                                       `json:"camera"`
-	Exif   []GetPhotoExifByID200ApplicationJSONPhotoExif `json:"exif"`
-	Farm   *string                                       `json:"farm"`
-	ID     *string                                       `json:"id"`
-	Secret *string                                       `json:"secret"`
-	Server *string                                       `json:"server"`
+	Camera *string                                       `json:"camera,omitempty"`
+	Exif   []GetPhotoExifByID200ApplicationJSONPhotoExif `json:"exif,omitempty"`
+	Farm   *string                                       `json:"farm,omitempty"`
+	ID     *string                                       `json:"id,omitempty"`
+	Secret *string                                       `json:"secret,omitempty"`
+	Server *string                                       `json:"server,omitempty"`
 }
 
 type GetPhotoExifByID200ApplicationJSON struct {
-	Photo *GetPhotoExifByID200ApplicationJSONPhoto `json:"photo"`
-	Stat  *string                                  `json:"stat"`
+	Photo *GetPhotoExifByID200ApplicationJSONPhoto `json:"photo,omitempty"`
+	Stat  *string                                  `json:"stat,omitempty"`
 }
 
 type GetPhotoExifByIDResponse struct {

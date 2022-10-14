@@ -54,15 +54,15 @@ const (
 )
 
 type CreateVodPromotionRequestBody struct {
-	AccessType   *CreateVodPromotionRequestBodyAccessTypeEnum   `json:"access_type"`
-	Code         *string                                        `json:"code"`
-	DiscountType *CreateVodPromotionRequestBodyDiscountTypeEnum `json:"discount_type"`
+	AccessType   *CreateVodPromotionRequestBodyAccessTypeEnum   `json:"access_type,omitempty"`
+	Code         *string                                        `json:"code,omitempty"`
+	DiscountType *CreateVodPromotionRequestBodyDiscountTypeEnum `json:"discount_type,omitempty"`
 	Download     bool                                           `json:"download"`
-	EndTime      *string                                        `json:"end_time"`
-	Label        *string                                        `json:"label"`
-	PercentOff   *float64                                       `json:"percent_off"`
-	ProductType  *CreateVodPromotionRequestBodyProductTypeEnum  `json:"product_type"`
-	StartTime    *string                                        `json:"start_time"`
+	EndTime      *string                                        `json:"end_time,omitempty"`
+	Label        *string                                        `json:"label,omitempty"`
+	PercentOff   *float64                                       `json:"percent_off,omitempty"`
+	ProductType  *CreateVodPromotionRequestBodyProductTypeEnum  `json:"product_type,omitempty"`
+	StartTime    *string                                        `json:"start_time,omitempty"`
 	StreamPeriod CreateVodPromotionRequestBodyStreamPeriodEnum  `json:"stream_period"`
 	Total        float64                                        `json:"total"`
 	Type         CreateVodPromotionRequestBodyTypeEnum          `json:"type"`

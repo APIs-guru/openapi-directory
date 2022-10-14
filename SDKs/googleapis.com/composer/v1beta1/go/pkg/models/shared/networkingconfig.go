@@ -9,5 +9,5 @@ const (
 )
 
 type NetworkingConfig struct {
-	ConnectionType *NetworkingConfigConnectionTypeEnum `json:"connectionType"`
+	ConnectionType *NetworkingConfigConnectionTypeEnum `json:"connectionType,omitempty"`
 }

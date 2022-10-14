@@ -16,8 +16,8 @@ const (
 )
 
 type IncerRequestBody struct {
-	CertificateParameters *IncerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *IncerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                IncerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Incer400ApplicationJSON struct {
-	Error            *Incer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Incer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Incer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Incer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Incer401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Incer401ApplicationJSON struct {
-	Error            *Incer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Incer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Incer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Incer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Incer404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Incer404ApplicationJSON struct {
-	Error            *Incer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Incer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Incer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Incer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Incer500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Incer500ApplicationJSON struct {
-	Error            *Incer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Incer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Incer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Incer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Incer502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Incer502ApplicationJSON struct {
-	Error            *Incer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Incer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Incer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Incer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Incer503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Incer503ApplicationJSON struct {
-	Error            *Incer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Incer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Incer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Incer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Incer504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Incer504ApplicationJSON struct {
-	Error            *Incer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Incer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Incer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Incer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type IncerResponse struct {

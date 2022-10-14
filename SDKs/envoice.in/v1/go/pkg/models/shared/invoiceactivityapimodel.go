@@ -54,9 +54,9 @@ const (
 )
 
 type InvoiceActivityAPIModel struct {
-	ID            *int32                           `json:"Id"`
-	InvoiceNumber *string                          `json:"InvoiceNumber"`
-	Link          *string                          `json:"Link"`
-	Message       *string                          `json:"Message"`
-	Type          *InvoiceActivityAPIModelTypeEnum `json:"Type"`
+	ID            *int32                           `json:"Id,omitempty"`
+	InvoiceNumber *string                          `json:"InvoiceNumber,omitempty"`
+	Link          *string                          `json:"Link,omitempty"`
+	Message       *string                          `json:"Message,omitempty"`
+	Type          *InvoiceActivityAPIModelTypeEnum `json:"Type,omitempty"`
 }

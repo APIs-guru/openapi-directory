@@ -1,10 +1,10 @@
 package shared
 
 type ReachReportCompatibleFields struct {
-	DimensionFilters        []Dimension `json:"dimensionFilters"`
-	Dimensions              []Dimension `json:"dimensions"`
-	Kind                    *string     `json:"kind"`
-	Metrics                 []Metric    `json:"metrics"`
-	PivotedActivityMetrics  []Metric    `json:"pivotedActivityMetrics"`
-	ReachByFrequencyMetrics []Metric    `json:"reachByFrequencyMetrics"`
+	DimensionFilters        []Dimension `json:"dimensionFilters,omitempty"`
+	Dimensions              []Dimension `json:"dimensions,omitempty"`
+	Kind                    *string     `json:"kind,omitempty"`
+	Metrics                 []Metric    `json:"metrics,omitempty"`
+	PivotedActivityMetrics  []Metric    `json:"pivotedActivityMetrics,omitempty"`
+	ReachByFrequencyMetrics []Metric    `json:"reachByFrequencyMetrics,omitempty"`
 }

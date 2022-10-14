@@ -21,8 +21,8 @@ type GenerateAccessLogsHeaders struct {
 
 type GenerateAccessLogsRequestBody struct {
 	DomainName string     `json:"domainName"`
-	EndTime    *time.Time `json:"endTime"`
-	StartTime  *time.Time `json:"startTime"`
+	EndTime    *time.Time `json:"endTime,omitempty"`
+	StartTime  *time.Time `json:"startTime,omitempty"`
 }
 
 type GenerateAccessLogsRequest struct {

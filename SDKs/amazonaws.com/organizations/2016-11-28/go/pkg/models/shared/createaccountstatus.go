@@ -5,12 +5,12 @@ import (
 )
 
 type CreateAccountStatus struct {
-	AccountID          *string                         `json:"AccountId"`
-	AccountName        *string                         `json:"AccountName"`
-	CompletedTimestamp *time.Time                      `json:"CompletedTimestamp"`
-	FailureReason      *CreateAccountFailureReasonEnum `json:"FailureReason"`
-	GovCloudAccountID  *string                         `json:"GovCloudAccountId"`
-	ID                 *string                         `json:"Id"`
-	RequestedTimestamp *time.Time                      `json:"RequestedTimestamp"`
-	State              *CreateAccountStateEnum         `json:"State"`
+	AccountID          *string                         `json:"AccountId,omitempty"`
+	AccountName        *string                         `json:"AccountName,omitempty"`
+	CompletedTimestamp *time.Time                      `json:"CompletedTimestamp,omitempty"`
+	FailureReason      *CreateAccountFailureReasonEnum `json:"FailureReason,omitempty"`
+	GovCloudAccountID  *string                         `json:"GovCloudAccountId,omitempty"`
+	ID                 *string                         `json:"Id,omitempty"`
+	RequestedTimestamp *time.Time                      `json:"RequestedTimestamp,omitempty"`
+	State              *CreateAccountStateEnum         `json:"State,omitempty"`
 }

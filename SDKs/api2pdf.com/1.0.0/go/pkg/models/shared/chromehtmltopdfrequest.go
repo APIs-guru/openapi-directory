@@ -1,8 +1,8 @@
 package shared
 
 type ChromeHTMLToPdfRequest struct {
-	FileName  *string                `json:"fileName"`
+	FileName  *string                `json:"fileName,omitempty"`
 	HTML      string                 `json:"html"`
-	InlinePdf *bool                  `json:"inlinePdf"`
-	Options   *ChromeAdvancedOptions `json:"options"`
+	InlinePdf *bool                  `json:"inlinePdf,omitempty"`
+	Options   *ChromeAdvancedOptions `json:"options,omitempty"`
 }

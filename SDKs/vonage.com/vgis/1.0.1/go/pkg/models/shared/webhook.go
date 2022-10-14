@@ -22,10 +22,10 @@ const (
 )
 
 type WebhookStatistics struct {
-	Failed         *bool  `json:"failed"`
-	TotalAttempts  *int64 `json:"totalAttempts"`
-	TotalFailures  *int64 `json:"totalFailures"`
-	TotalSuccesses *int64 `json:"totalSuccesses"`
+	Failed         *bool  `json:"failed,omitempty"`
+	TotalAttempts  *int64 `json:"totalAttempts,omitempty"`
+	TotalFailures  *int64 `json:"totalFailures,omitempty"`
+	TotalSuccesses *int64 `json:"totalSuccesses,omitempty"`
 }
 
 type WebhookStatusEnum string
@@ -36,18 +36,18 @@ const (
 )
 
 type Webhook struct {
-	AccountID      *string                    `json:"accountId"`
-	CreatedAt      *string                    `json:"createdAt"`
-	Events         []WebhookEventsEnum        `json:"events"`
-	ExpireAt       *string                    `json:"expireAt"`
-	ID             *string                    `json:"id"`
-	MetadataPolicy *WebhookMetadataPolicyEnum `json:"metadataPolicy"`
-	PurgeAt        *string                    `json:"purgeAt"`
-	RenewedAt      *string                    `json:"renewedAt"`
-	SigningAlgo    *WebhookSigningAlgoEnum    `json:"signingAlgo"`
-	SigningKey     *string                    `json:"signingKey"`
-	Statistics     *WebhookStatistics         `json:"statistics"`
-	Status         *WebhookStatusEnum         `json:"status"`
-	URL            *string                    `json:"url"`
-	UserID         *string                    `json:"userId"`
+	AccountID      *string                    `json:"accountId,omitempty"`
+	CreatedAt      *string                    `json:"createdAt,omitempty"`
+	Events         []WebhookEventsEnum        `json:"events,omitempty"`
+	ExpireAt       *string                    `json:"expireAt,omitempty"`
+	ID             *string                    `json:"id,omitempty"`
+	MetadataPolicy *WebhookMetadataPolicyEnum `json:"metadataPolicy,omitempty"`
+	PurgeAt        *string                    `json:"purgeAt,omitempty"`
+	RenewedAt      *string                    `json:"renewedAt,omitempty"`
+	SigningAlgo    *WebhookSigningAlgoEnum    `json:"signingAlgo,omitempty"`
+	SigningKey     *string                    `json:"signingKey,omitempty"`
+	Statistics     *WebhookStatistics         `json:"statistics,omitempty"`
+	Status         *WebhookStatusEnum         `json:"status,omitempty"`
+	URL            *string                    `json:"url,omitempty"`
+	UserID         *string                    `json:"userId,omitempty"`
 }

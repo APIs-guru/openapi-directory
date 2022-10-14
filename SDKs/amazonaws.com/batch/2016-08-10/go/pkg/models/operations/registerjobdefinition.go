@@ -15,41 +15,41 @@ type RegisterJobDefinitionHeaders struct {
 }
 
 type RegisterJobDefinitionRequestBodyContainerProperties struct {
-	Command                      []string                             `json:"command"`
-	Environment                  []shared.KeyValuePair                `json:"environment"`
-	ExecutionRoleArn             *string                              `json:"executionRoleArn"`
-	FargatePlatformConfiguration *shared.FargatePlatformConfiguration `json:"fargatePlatformConfiguration"`
-	Image                        *string                              `json:"image"`
-	InstanceType                 *string                              `json:"instanceType"`
-	JobRoleArn                   *string                              `json:"jobRoleArn"`
-	LinuxParameters              *shared.LinuxParameters              `json:"linuxParameters"`
-	LogConfiguration             *shared.LogConfiguration             `json:"logConfiguration"`
-	Memory                       *int64                               `json:"memory"`
-	MountPoints                  []shared.MountPoint                  `json:"mountPoints"`
-	NetworkConfiguration         *shared.NetworkConfiguration         `json:"networkConfiguration"`
-	Privileged                   *bool                                `json:"privileged"`
-	ReadonlyRootFilesystem       *bool                                `json:"readonlyRootFilesystem"`
-	ResourceRequirements         []shared.ResourceRequirement         `json:"resourceRequirements"`
-	Secrets                      []shared.Secret                      `json:"secrets"`
-	Ulimits                      []shared.Ulimit                      `json:"ulimits"`
-	User                         *string                              `json:"user"`
-	Vcpus                        *int64                               `json:"vcpus"`
-	Volumes                      []shared.Volume                      `json:"volumes"`
+	Command                      []string                             `json:"command,omitempty"`
+	Environment                  []shared.KeyValuePair                `json:"environment,omitempty"`
+	ExecutionRoleArn             *string                              `json:"executionRoleArn,omitempty"`
+	FargatePlatformConfiguration *shared.FargatePlatformConfiguration `json:"fargatePlatformConfiguration,omitempty"`
+	Image                        *string                              `json:"image,omitempty"`
+	InstanceType                 *string                              `json:"instanceType,omitempty"`
+	JobRoleArn                   *string                              `json:"jobRoleArn,omitempty"`
+	LinuxParameters              *shared.LinuxParameters              `json:"linuxParameters,omitempty"`
+	LogConfiguration             *shared.LogConfiguration             `json:"logConfiguration,omitempty"`
+	Memory                       *int64                               `json:"memory,omitempty"`
+	MountPoints                  []shared.MountPoint                  `json:"mountPoints,omitempty"`
+	NetworkConfiguration         *shared.NetworkConfiguration         `json:"networkConfiguration,omitempty"`
+	Privileged                   *bool                                `json:"privileged,omitempty"`
+	ReadonlyRootFilesystem       *bool                                `json:"readonlyRootFilesystem,omitempty"`
+	ResourceRequirements         []shared.ResourceRequirement         `json:"resourceRequirements,omitempty"`
+	Secrets                      []shared.Secret                      `json:"secrets,omitempty"`
+	Ulimits                      []shared.Ulimit                      `json:"ulimits,omitempty"`
+	User                         *string                              `json:"user,omitempty"`
+	Vcpus                        *int64                               `json:"vcpus,omitempty"`
+	Volumes                      []shared.Volume                      `json:"volumes,omitempty"`
 }
 
 type RegisterJobDefinitionRequestBodyNodeProperties struct {
-	MainNode            *int64                     `json:"mainNode"`
-	NodeRangeProperties []shared.NodeRangeProperty `json:"nodeRangeProperties"`
-	NumNodes            *int64                     `json:"numNodes"`
+	MainNode            *int64                     `json:"mainNode,omitempty"`
+	NodeRangeProperties []shared.NodeRangeProperty `json:"nodeRangeProperties,omitempty"`
+	NumNodes            *int64                     `json:"numNodes,omitempty"`
 }
 
 type RegisterJobDefinitionRequestBodyRetryStrategy struct {
-	Attempts       *int64                  `json:"attempts"`
-	EvaluateOnExit []shared.EvaluateOnExit `json:"evaluateOnExit"`
+	Attempts       *int64                  `json:"attempts,omitempty"`
+	EvaluateOnExit []shared.EvaluateOnExit `json:"evaluateOnExit,omitempty"`
 }
 
 type RegisterJobDefinitionRequestBodyTimeout struct {
-	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds"`
+	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds,omitempty"`
 }
 
 type RegisterJobDefinitionRequestBodyTypeEnum string
@@ -60,15 +60,15 @@ const (
 )
 
 type RegisterJobDefinitionRequestBody struct {
-	ContainerProperties  *RegisterJobDefinitionRequestBodyContainerProperties `json:"containerProperties"`
+	ContainerProperties  *RegisterJobDefinitionRequestBodyContainerProperties `json:"containerProperties,omitempty"`
 	JobDefinitionName    string                                               `json:"jobDefinitionName"`
-	NodeProperties       *RegisterJobDefinitionRequestBodyNodeProperties      `json:"nodeProperties"`
-	Parameters           map[string]string                                    `json:"parameters"`
-	PlatformCapabilities []shared.PlatformCapabilityEnum                      `json:"platformCapabilities"`
-	PropagateTags        *bool                                                `json:"propagateTags"`
-	RetryStrategy        *RegisterJobDefinitionRequestBodyRetryStrategy       `json:"retryStrategy"`
-	Tags                 map[string]string                                    `json:"tags"`
-	Timeout              *RegisterJobDefinitionRequestBodyTimeout             `json:"timeout"`
+	NodeProperties       *RegisterJobDefinitionRequestBodyNodeProperties      `json:"nodeProperties,omitempty"`
+	Parameters           map[string]string                                    `json:"parameters,omitempty"`
+	PlatformCapabilities []shared.PlatformCapabilityEnum                      `json:"platformCapabilities,omitempty"`
+	PropagateTags        *bool                                                `json:"propagateTags,omitempty"`
+	RetryStrategy        *RegisterJobDefinitionRequestBodyRetryStrategy       `json:"retryStrategy,omitempty"`
+	Tags                 map[string]string                                    `json:"tags,omitempty"`
+	Timeout              *RegisterJobDefinitionRequestBodyTimeout             `json:"timeout,omitempty"`
 	Type                 RegisterJobDefinitionRequestBodyTypeEnum             `json:"type"`
 }
 

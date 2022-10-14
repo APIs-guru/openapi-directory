@@ -5,9 +5,9 @@ import (
 )
 
 type ProductCouponAPIModel struct {
-	Code               *string    `json:"Code"`
-	DiscountAmount     *float64   `json:"DiscountAmount"`
-	DiscountPercentage *float64   `json:"DiscountPercentage"`
-	ID                 *int32     `json:"Id"`
-	ValidUntil         *time.Time `json:"ValidUntil"`
+	Code               *string    `json:"Code,omitempty"`
+	DiscountAmount     *float64   `json:"DiscountAmount,omitempty"`
+	DiscountPercentage *float64   `json:"DiscountPercentage,omitempty"`
+	ID                 *int32     `json:"Id,omitempty"`
+	ValidUntil         *time.Time `json:"ValidUntil,omitempty"`
 }

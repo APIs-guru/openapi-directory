@@ -6,23 +6,23 @@ type UpdateNetworkWirelessSsidPathParams struct {
 }
 
 type UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials struct {
-	LogonName *string `json:"logonName"`
-	Password  *string `json:"password"`
+	LogonName *string `json:"logonName,omitempty"`
+	Password  *string `json:"password,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers struct {
 	Host string `json:"host"`
-	Port *int64 `json:"port"`
+	Port *int64 `json:"port,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyActiveDirectory struct {
-	Credentials *UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials `json:"credentials"`
-	Servers     []UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers    `json:"servers"`
+	Credentials *UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials `json:"credentials,omitempty"`
+	Servers     []UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers    `json:"servers,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyApTagsAndVlanIds struct {
-	Tags   []string `json:"tags"`
-	VlanID *int64   `json:"vlanId"`
+	Tags   []string `json:"tags,omitempty"`
+	VlanID *int64   `json:"vlanId,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyAuthModeEnum string
@@ -40,18 +40,18 @@ const (
 )
 
 type UpdateNetworkWirelessSsidRequestBodyDNSRewrite struct {
-	DNSCustomNameservers []string `json:"dnsCustomNameservers"`
-	Enabled              *bool    `json:"enabled"`
+	DNSCustomNameservers []string `json:"dnsCustomNameservers,omitempty"`
+	Enabled              *bool    `json:"enabled,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyDot11r struct {
-	Adaptive *bool `json:"adaptive"`
-	Enabled  *bool `json:"enabled"`
+	Adaptive *bool `json:"adaptive,omitempty"`
+	Enabled  *bool `json:"enabled,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyDot11w struct {
-	Enabled  *bool `json:"enabled"`
-	Required *bool `json:"required"`
+	Enabled  *bool `json:"enabled,omitempty"`
+	Required *bool `json:"required,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyEncryptionModeEnum string
@@ -69,12 +69,12 @@ const (
 )
 
 type UpdateNetworkWirelessSsidRequestBodyLdapCredentials struct {
-	DistinguishedName *string `json:"distinguishedName"`
-	Password          *string `json:"password"`
+	DistinguishedName *string `json:"distinguishedName,omitempty"`
+	Password          *string `json:"password,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyLdapServerCaCertificate struct {
-	Contents *string `json:"contents"`
+	Contents *string `json:"contents,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyLdapServers struct {
@@ -83,43 +83,43 @@ type UpdateNetworkWirelessSsidRequestBodyLdapServers struct {
 }
 
 type UpdateNetworkWirelessSsidRequestBodyLdap struct {
-	BaseDistinguishedName *string                                                      `json:"baseDistinguishedName"`
-	Credentials           *UpdateNetworkWirelessSsidRequestBodyLdapCredentials         `json:"credentials"`
-	ServerCaCertificate   *UpdateNetworkWirelessSsidRequestBodyLdapServerCaCertificate `json:"serverCaCertificate"`
-	Servers               []UpdateNetworkWirelessSsidRequestBodyLdapServers            `json:"servers"`
+	BaseDistinguishedName *string                                                      `json:"baseDistinguishedName,omitempty"`
+	Credentials           *UpdateNetworkWirelessSsidRequestBodyLdapCredentials         `json:"credentials,omitempty"`
+	ServerCaCertificate   *UpdateNetworkWirelessSsidRequestBodyLdapServerCaCertificate `json:"serverCaCertificate,omitempty"`
+	Servers               []UpdateNetworkWirelessSsidRequestBodyLdapServers            `json:"servers,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate struct {
-	Contents *string `json:"contents"`
+	Contents *string `json:"contents,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication struct {
-	ClientRootCaCertificate *UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate `json:"clientRootCaCertificate"`
-	Enabled                 *bool                                                                                            `json:"enabled"`
-	OcspResponderURL        *string                                                                                          `json:"ocspResponderUrl"`
-	UseLdap                 *bool                                                                                            `json:"useLdap"`
-	UseOcsp                 *bool                                                                                            `json:"useOcsp"`
+	ClientRootCaCertificate *UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate `json:"clientRootCaCertificate,omitempty"`
+	Enabled                 *bool                                                                                            `json:"enabled,omitempty"`
+	OcspResponderURL        *string                                                                                          `json:"ocspResponderUrl,omitempty"`
+	UseLdap                 *bool                                                                                            `json:"useLdap,omitempty"`
+	UseOcsp                 *bool                                                                                            `json:"useOcsp,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyLocalRadius struct {
-	CacheTimeout              *int64                                                                    `json:"cacheTimeout"`
-	CertificateAuthentication *UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication `json:"certificateAuthentication"`
-	PasswordAuthentication    *UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication    `json:"passwordAuthentication"`
+	CacheTimeout              *int64                                                                    `json:"cacheTimeout,omitempty"`
+	CertificateAuthentication *UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication `json:"certificateAuthentication,omitempty"`
+	PasswordAuthentication    *UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication    `json:"passwordAuthentication,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyOauth struct {
-	AllowedDomains []string `json:"allowedDomains"`
+	AllowedDomains []string `json:"allowedDomains,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyRadiusAccountingServers struct {
 	Host          string  `json:"host"`
-	Port          *int64  `json:"port"`
-	RadsecEnabled *bool   `json:"radsecEnabled"`
-	Secret        *string `json:"secret"`
+	Port          *int64  `json:"port,omitempty"`
+	RadsecEnabled *bool   `json:"radsecEnabled,omitempty"`
+	Secret        *string `json:"secret,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodyRadiusAttributeForGroupPoliciesEnum string
@@ -147,9 +147,9 @@ const (
 
 type UpdateNetworkWirelessSsidRequestBodyRadiusServers struct {
 	Host          string  `json:"host"`
-	Port          *int64  `json:"port"`
-	RadsecEnabled *bool   `json:"radsecEnabled"`
-	Secret        *string `json:"secret"`
+	Port          *int64  `json:"port,omitempty"`
+	RadsecEnabled *bool   `json:"radsecEnabled,omitempty"`
+	Secret        *string `json:"secret,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequestBodySplashPageEnum string
@@ -182,60 +182,60 @@ const (
 )
 
 type UpdateNetworkWirelessSsidRequestBody struct {
-	ActiveDirectory                 *UpdateNetworkWirelessSsidRequestBodyActiveDirectory                     `json:"activeDirectory"`
-	AdultContentFilteringEnabled    *bool                                                                    `json:"adultContentFilteringEnabled"`
-	ApTagsAndVlanIds                []UpdateNetworkWirelessSsidRequestBodyApTagsAndVlanIds                   `json:"apTagsAndVlanIds"`
-	AuthMode                        *UpdateNetworkWirelessSsidRequestBodyAuthModeEnum                        `json:"authMode"`
-	AvailabilityTags                []string                                                                 `json:"availabilityTags"`
-	AvailableOnAllAps               *bool                                                                    `json:"availableOnAllAps"`
-	BandSelection                   *string                                                                  `json:"bandSelection"`
-	ConcentratorNetworkID           *string                                                                  `json:"concentratorNetworkId"`
-	DefaultVlanID                   *int64                                                                   `json:"defaultVlanId"`
-	DNSRewrite                      *UpdateNetworkWirelessSsidRequestBodyDNSRewrite                          `json:"dnsRewrite"`
-	Dot11r                          *UpdateNetworkWirelessSsidRequestBodyDot11r                              `json:"dot11r"`
-	Dot11w                          *UpdateNetworkWirelessSsidRequestBodyDot11w                              `json:"dot11w"`
-	Enabled                         *bool                                                                    `json:"enabled"`
-	EncryptionMode                  *UpdateNetworkWirelessSsidRequestBodyEncryptionModeEnum                  `json:"encryptionMode"`
-	EnterpriseAdminAccess           *UpdateNetworkWirelessSsidRequestBodyEnterpriseAdminAccessEnum           `json:"enterpriseAdminAccess"`
-	IPAssignmentMode                *string                                                                  `json:"ipAssignmentMode"`
-	LanIsolationEnabled             *bool                                                                    `json:"lanIsolationEnabled"`
-	Ldap                            *UpdateNetworkWirelessSsidRequestBodyLdap                                `json:"ldap"`
-	LocalRadius                     *UpdateNetworkWirelessSsidRequestBodyLocalRadius                         `json:"localRadius"`
-	MandatoryDhcpEnabled            *bool                                                                    `json:"mandatoryDhcpEnabled"`
-	MinBitrate                      *float32                                                                 `json:"minBitrate"`
-	Name                            *string                                                                  `json:"name"`
-	Oauth                           *UpdateNetworkWirelessSsidRequestBodyOauth                               `json:"oauth"`
-	PerClientBandwidthLimitDown     *int64                                                                   `json:"perClientBandwidthLimitDown"`
-	PerClientBandwidthLimitUp       *int64                                                                   `json:"perClientBandwidthLimitUp"`
-	PerSsidBandwidthLimitDown       *int64                                                                   `json:"perSsidBandwidthLimitDown"`
-	PerSsidBandwidthLimitUp         *int64                                                                   `json:"perSsidBandwidthLimitUp"`
-	Psk                             *string                                                                  `json:"psk"`
-	RadiusAccountingEnabled         *bool                                                                    `json:"radiusAccountingEnabled"`
-	RadiusAccountingInterimInterval *int64                                                                   `json:"radiusAccountingInterimInterval"`
-	RadiusAccountingServers         []UpdateNetworkWirelessSsidRequestBodyRadiusAccountingServers            `json:"radiusAccountingServers"`
-	RadiusAttributeForGroupPolicies *UpdateNetworkWirelessSsidRequestBodyRadiusAttributeForGroupPoliciesEnum `json:"radiusAttributeForGroupPolicies"`
-	RadiusAuthenticationNasID       *string                                                                  `json:"radiusAuthenticationNasId"`
-	RadiusCalledStationID           *string                                                                  `json:"radiusCalledStationId"`
-	RadiusCoaEnabled                *bool                                                                    `json:"radiusCoaEnabled"`
-	RadiusFailoverPolicy            *UpdateNetworkWirelessSsidRequestBodyRadiusFailoverPolicyEnum            `json:"radiusFailoverPolicy"`
-	RadiusFallbackEnabled           *bool                                                                    `json:"radiusFallbackEnabled"`
-	RadiusGuestVlanEnabled          *bool                                                                    `json:"radiusGuestVlanEnabled"`
-	RadiusGuestVlanID               *int64                                                                   `json:"radiusGuestVlanId"`
-	RadiusLoadBalancingPolicy       *UpdateNetworkWirelessSsidRequestBodyRadiusLoadBalancingPolicyEnum       `json:"radiusLoadBalancingPolicy"`
-	RadiusOverride                  *bool                                                                    `json:"radiusOverride"`
-	RadiusProxyEnabled              *bool                                                                    `json:"radiusProxyEnabled"`
-	RadiusServerAttemptsLimit       *int64                                                                   `json:"radiusServerAttemptsLimit"`
-	RadiusServerTimeout             *int64                                                                   `json:"radiusServerTimeout"`
-	RadiusServers                   []UpdateNetworkWirelessSsidRequestBodyRadiusServers                      `json:"radiusServers"`
-	RadiusTestingEnabled            *bool                                                                    `json:"radiusTestingEnabled"`
-	SplashGuestSponsorDomains       []string                                                                 `json:"splashGuestSponsorDomains"`
-	SplashPage                      *UpdateNetworkWirelessSsidRequestBodySplashPageEnum                      `json:"splashPage"`
-	UseVlanTagging                  *bool                                                                    `json:"useVlanTagging"`
-	Visible                         *bool                                                                    `json:"visible"`
-	VlanID                          *int64                                                                   `json:"vlanId"`
-	WalledGardenEnabled             *bool                                                                    `json:"walledGardenEnabled"`
-	WalledGardenRanges              []string                                                                 `json:"walledGardenRanges"`
-	WpaEncryptionMode               *UpdateNetworkWirelessSsidRequestBodyWpaEncryptionModeEnum               `json:"wpaEncryptionMode"`
+	ActiveDirectory                 *UpdateNetworkWirelessSsidRequestBodyActiveDirectory                     `json:"activeDirectory,omitempty"`
+	AdultContentFilteringEnabled    *bool                                                                    `json:"adultContentFilteringEnabled,omitempty"`
+	ApTagsAndVlanIds                []UpdateNetworkWirelessSsidRequestBodyApTagsAndVlanIds                   `json:"apTagsAndVlanIds,omitempty"`
+	AuthMode                        *UpdateNetworkWirelessSsidRequestBodyAuthModeEnum                        `json:"authMode,omitempty"`
+	AvailabilityTags                []string                                                                 `json:"availabilityTags,omitempty"`
+	AvailableOnAllAps               *bool                                                                    `json:"availableOnAllAps,omitempty"`
+	BandSelection                   *string                                                                  `json:"bandSelection,omitempty"`
+	ConcentratorNetworkID           *string                                                                  `json:"concentratorNetworkId,omitempty"`
+	DefaultVlanID                   *int64                                                                   `json:"defaultVlanId,omitempty"`
+	DNSRewrite                      *UpdateNetworkWirelessSsidRequestBodyDNSRewrite                          `json:"dnsRewrite,omitempty"`
+	Dot11r                          *UpdateNetworkWirelessSsidRequestBodyDot11r                              `json:"dot11r,omitempty"`
+	Dot11w                          *UpdateNetworkWirelessSsidRequestBodyDot11w                              `json:"dot11w,omitempty"`
+	Enabled                         *bool                                                                    `json:"enabled,omitempty"`
+	EncryptionMode                  *UpdateNetworkWirelessSsidRequestBodyEncryptionModeEnum                  `json:"encryptionMode,omitempty"`
+	EnterpriseAdminAccess           *UpdateNetworkWirelessSsidRequestBodyEnterpriseAdminAccessEnum           `json:"enterpriseAdminAccess,omitempty"`
+	IPAssignmentMode                *string                                                                  `json:"ipAssignmentMode,omitempty"`
+	LanIsolationEnabled             *bool                                                                    `json:"lanIsolationEnabled,omitempty"`
+	Ldap                            *UpdateNetworkWirelessSsidRequestBodyLdap                                `json:"ldap,omitempty"`
+	LocalRadius                     *UpdateNetworkWirelessSsidRequestBodyLocalRadius                         `json:"localRadius,omitempty"`
+	MandatoryDhcpEnabled            *bool                                                                    `json:"mandatoryDhcpEnabled,omitempty"`
+	MinBitrate                      *float32                                                                 `json:"minBitrate,omitempty"`
+	Name                            *string                                                                  `json:"name,omitempty"`
+	Oauth                           *UpdateNetworkWirelessSsidRequestBodyOauth                               `json:"oauth,omitempty"`
+	PerClientBandwidthLimitDown     *int64                                                                   `json:"perClientBandwidthLimitDown,omitempty"`
+	PerClientBandwidthLimitUp       *int64                                                                   `json:"perClientBandwidthLimitUp,omitempty"`
+	PerSsidBandwidthLimitDown       *int64                                                                   `json:"perSsidBandwidthLimitDown,omitempty"`
+	PerSsidBandwidthLimitUp         *int64                                                                   `json:"perSsidBandwidthLimitUp,omitempty"`
+	Psk                             *string                                                                  `json:"psk,omitempty"`
+	RadiusAccountingEnabled         *bool                                                                    `json:"radiusAccountingEnabled,omitempty"`
+	RadiusAccountingInterimInterval *int64                                                                   `json:"radiusAccountingInterimInterval,omitempty"`
+	RadiusAccountingServers         []UpdateNetworkWirelessSsidRequestBodyRadiusAccountingServers            `json:"radiusAccountingServers,omitempty"`
+	RadiusAttributeForGroupPolicies *UpdateNetworkWirelessSsidRequestBodyRadiusAttributeForGroupPoliciesEnum `json:"radiusAttributeForGroupPolicies,omitempty"`
+	RadiusAuthenticationNasID       *string                                                                  `json:"radiusAuthenticationNasId,omitempty"`
+	RadiusCalledStationID           *string                                                                  `json:"radiusCalledStationId,omitempty"`
+	RadiusCoaEnabled                *bool                                                                    `json:"radiusCoaEnabled,omitempty"`
+	RadiusFailoverPolicy            *UpdateNetworkWirelessSsidRequestBodyRadiusFailoverPolicyEnum            `json:"radiusFailoverPolicy,omitempty"`
+	RadiusFallbackEnabled           *bool                                                                    `json:"radiusFallbackEnabled,omitempty"`
+	RadiusGuestVlanEnabled          *bool                                                                    `json:"radiusGuestVlanEnabled,omitempty"`
+	RadiusGuestVlanID               *int64                                                                   `json:"radiusGuestVlanId,omitempty"`
+	RadiusLoadBalancingPolicy       *UpdateNetworkWirelessSsidRequestBodyRadiusLoadBalancingPolicyEnum       `json:"radiusLoadBalancingPolicy,omitempty"`
+	RadiusOverride                  *bool                                                                    `json:"radiusOverride,omitempty"`
+	RadiusProxyEnabled              *bool                                                                    `json:"radiusProxyEnabled,omitempty"`
+	RadiusServerAttemptsLimit       *int64                                                                   `json:"radiusServerAttemptsLimit,omitempty"`
+	RadiusServerTimeout             *int64                                                                   `json:"radiusServerTimeout,omitempty"`
+	RadiusServers                   []UpdateNetworkWirelessSsidRequestBodyRadiusServers                      `json:"radiusServers,omitempty"`
+	RadiusTestingEnabled            *bool                                                                    `json:"radiusTestingEnabled,omitempty"`
+	SplashGuestSponsorDomains       []string                                                                 `json:"splashGuestSponsorDomains,omitempty"`
+	SplashPage                      *UpdateNetworkWirelessSsidRequestBodySplashPageEnum                      `json:"splashPage,omitempty"`
+	UseVlanTagging                  *bool                                                                    `json:"useVlanTagging,omitempty"`
+	Visible                         *bool                                                                    `json:"visible,omitempty"`
+	VlanID                          *int64                                                                   `json:"vlanId,omitempty"`
+	WalledGardenEnabled             *bool                                                                    `json:"walledGardenEnabled,omitempty"`
+	WalledGardenRanges              []string                                                                 `json:"walledGardenRanges,omitempty"`
+	WpaEncryptionMode               *UpdateNetworkWirelessSsidRequestBodyWpaEncryptionModeEnum               `json:"wpaEncryptionMode,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidRequest struct {

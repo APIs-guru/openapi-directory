@@ -1,10 +1,10 @@
 package shared
 
 type Tag struct {
-	Color       *string `json:"color"`
-	Description *string `json:"description"`
-	ID          *int64  `json:"id"`
+	Color       *string `json:"color,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
 	Name        string  `json:"name"`
 	Slug        string  `json:"slug"`
-	TaggedItems *int64  `json:"tagged_items"`
+	TaggedItems *int64  `json:"tagged_items,omitempty"`
 }

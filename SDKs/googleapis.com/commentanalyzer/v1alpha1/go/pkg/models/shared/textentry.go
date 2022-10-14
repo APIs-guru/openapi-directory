@@ -9,6 +9,6 @@ const (
 )
 
 type TextEntry struct {
-	Text *string            `json:"text"`
-	Type *TextEntryTypeEnum `json:"type"`
+	Text *string            `json:"text,omitempty"`
+	Type *TextEntryTypeEnum `json:"type,omitempty"`
 }

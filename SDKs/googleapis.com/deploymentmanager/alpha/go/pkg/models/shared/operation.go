@@ -1,13 +1,13 @@
 package shared
 
 type OperationErrorErrors struct {
-	Code     *string `json:"code"`
-	Location *string `json:"location"`
-	Message  *string `json:"message"`
+	Code     *string `json:"code,omitempty"`
+	Location *string `json:"location,omitempty"`
+	Message  *string `json:"message,omitempty"`
 }
 
 type OperationError struct {
-	Errors []OperationErrorErrors `json:"errors"`
+	Errors []OperationErrorErrors `json:"errors,omitempty"`
 }
 
 type OperationStatusEnum string
@@ -51,39 +51,39 @@ const (
 )
 
 type OperationWarningsData struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type OperationWarnings struct {
-	Code    *OperationWarningsCodeEnum `json:"code"`
-	Data    []OperationWarningsData    `json:"data"`
-	Message *string                    `json:"message"`
+	Code    *OperationWarningsCodeEnum `json:"code,omitempty"`
+	Data    []OperationWarningsData    `json:"data,omitempty"`
+	Message *string                    `json:"message,omitempty"`
 }
 
 type Operation struct {
-	ClientOperationID   *string              `json:"clientOperationId"`
-	CreationTimestamp   *string              `json:"creationTimestamp"`
-	Description         *string              `json:"description"`
-	EndTime             *string              `json:"endTime"`
-	Error               *OperationError      `json:"error"`
-	HTTPErrorMessage    *string              `json:"httpErrorMessage"`
-	HTTPErrorStatusCode *int32               `json:"httpErrorStatusCode"`
-	ID                  *string              `json:"id"`
-	InsertTime          *string              `json:"insertTime"`
-	Kind                *string              `json:"kind"`
-	Name                *string              `json:"name"`
-	OperationGroupID    *string              `json:"operationGroupId"`
-	OperationType       *string              `json:"operationType"`
-	Progress            *int32               `json:"progress"`
-	Region              *string              `json:"region"`
-	SelfLink            *string              `json:"selfLink"`
-	StartTime           *string              `json:"startTime"`
-	Status              *OperationStatusEnum `json:"status"`
-	StatusMessage       *string              `json:"statusMessage"`
-	TargetID            *string              `json:"targetId"`
-	TargetLink          *string              `json:"targetLink"`
-	User                *string              `json:"user"`
-	Warnings            []OperationWarnings  `json:"warnings"`
-	Zone                *string              `json:"zone"`
+	ClientOperationID   *string              `json:"clientOperationId,omitempty"`
+	CreationTimestamp   *string              `json:"creationTimestamp,omitempty"`
+	Description         *string              `json:"description,omitempty"`
+	EndTime             *string              `json:"endTime,omitempty"`
+	Error               *OperationError      `json:"error,omitempty"`
+	HTTPErrorMessage    *string              `json:"httpErrorMessage,omitempty"`
+	HTTPErrorStatusCode *int32               `json:"httpErrorStatusCode,omitempty"`
+	ID                  *string              `json:"id,omitempty"`
+	InsertTime          *string              `json:"insertTime,omitempty"`
+	Kind                *string              `json:"kind,omitempty"`
+	Name                *string              `json:"name,omitempty"`
+	OperationGroupID    *string              `json:"operationGroupId,omitempty"`
+	OperationType       *string              `json:"operationType,omitempty"`
+	Progress            *int32               `json:"progress,omitempty"`
+	Region              *string              `json:"region,omitempty"`
+	SelfLink            *string              `json:"selfLink,omitempty"`
+	StartTime           *string              `json:"startTime,omitempty"`
+	Status              *OperationStatusEnum `json:"status,omitempty"`
+	StatusMessage       *string              `json:"statusMessage,omitempty"`
+	TargetID            *string              `json:"targetId,omitempty"`
+	TargetLink          *string              `json:"targetLink,omitempty"`
+	User                *string              `json:"user,omitempty"`
+	Warnings            []OperationWarnings  `json:"warnings,omitempty"`
+	Zone                *string              `json:"zone,omitempty"`
 }

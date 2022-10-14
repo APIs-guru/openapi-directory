@@ -11,6 +11,6 @@ const (
 )
 
 type MobileUsabilityInspectionResult struct {
-	Issues  []MobileUsabilityIssue                      `json:"issues"`
-	Verdict *MobileUsabilityInspectionResultVerdictEnum `json:"verdict"`
+	Issues  []MobileUsabilityIssue                      `json:"issues,omitempty"`
+	Verdict *MobileUsabilityInspectionResultVerdictEnum `json:"verdict,omitempty"`
 }

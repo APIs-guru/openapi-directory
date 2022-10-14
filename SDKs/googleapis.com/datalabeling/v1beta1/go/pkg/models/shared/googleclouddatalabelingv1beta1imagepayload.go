@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDatalabelingV1beta1ImagePayload struct {
-	ImageThumbnail *string `json:"imageThumbnail"`
-	ImageURI       *string `json:"imageUri"`
-	MimeType       *string `json:"mimeType"`
-	SignedURI      *string `json:"signedUri"`
+	ImageThumbnail *string `json:"imageThumbnail,omitempty"`
+	ImageURI       *string `json:"imageUri,omitempty"`
+	MimeType       *string `json:"mimeType,omitempty"`
+	SignedURI      *string `json:"signedUri,omitempty"`
 }

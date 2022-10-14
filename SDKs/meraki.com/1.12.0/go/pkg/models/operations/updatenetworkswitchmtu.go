@@ -6,13 +6,13 @@ type UpdateNetworkSwitchMtuPathParams struct {
 
 type UpdateNetworkSwitchMtuRequestBodyOverrides struct {
 	MtuSize        int64    `json:"mtuSize"`
-	SwitchProfiles []string `json:"switchProfiles"`
-	Switches       []string `json:"switches"`
+	SwitchProfiles []string `json:"switchProfiles,omitempty"`
+	Switches       []string `json:"switches,omitempty"`
 }
 
 type UpdateNetworkSwitchMtuRequestBody struct {
-	DefaultMtuSize *int64                                       `json:"defaultMtuSize"`
-	Overrides      []UpdateNetworkSwitchMtuRequestBodyOverrides `json:"overrides"`
+	DefaultMtuSize *int64                                       `json:"defaultMtuSize,omitempty"`
+	Overrides      []UpdateNetworkSwitchMtuRequestBodyOverrides `json:"overrides,omitempty"`
 }
 
 type UpdateNetworkSwitchMtuRequest struct {

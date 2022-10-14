@@ -14,7 +14,7 @@ type InsertSectionForProjectQueryParams struct {
 }
 
 type InsertSectionForProjectRequestBody struct {
-	Data *shared.ProjectSectionInsertRequest `json:"data"`
+	Data *shared.ProjectSectionInsertRequest `json:"data,omitempty"`
 }
 
 type InsertSectionForProjectRequest struct {
@@ -24,7 +24,7 @@ type InsertSectionForProjectRequest struct {
 }
 
 type InsertSectionForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type InsertSectionForProjectResponse struct {

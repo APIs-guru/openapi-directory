@@ -1,7 +1,7 @@
 package shared
 
 type QueryParameterValue struct {
-	ArrayValues  []QueryParameterValue          `json:"arrayValues"`
-	StructValues map[string]QueryParameterValue `json:"structValues"`
-	Value        *string                        `json:"value"`
+	ArrayValues  []QueryParameterValue          `json:"arrayValues,omitempty"`
+	StructValues map[string]QueryParameterValue `json:"structValues,omitempty"`
+	Value        *string                        `json:"value,omitempty"`
 }

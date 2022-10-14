@@ -1,8 +1,8 @@
 package shared
 
 type ListSessionsResponse struct {
-	DeletedSession []Session `json:"deletedSession"`
-	HasMoreData    *bool     `json:"hasMoreData"`
-	NextPageToken  *string   `json:"nextPageToken"`
-	Session        []Session `json:"session"`
+	DeletedSession []Session `json:"deletedSession,omitempty"`
+	HasMoreData    *bool     `json:"hasMoreData,omitempty"`
+	NextPageToken  *string   `json:"nextPageToken,omitempty"`
+	Session        []Session `json:"session,omitempty"`
 }

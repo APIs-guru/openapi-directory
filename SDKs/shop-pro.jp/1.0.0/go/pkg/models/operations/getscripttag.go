@@ -27,15 +27,15 @@ const (
 )
 
 type GetScriptTag200ApplicationJSONScriptTag struct {
-	DisplayScope *GetScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope"`
-	ID           *int64                                                   `json:"id"`
-	MakeDate     *int64                                                   `json:"make_date"`
-	Src          *string                                                  `json:"src"`
-	UpdateDate   *int64                                                   `json:"update_date"`
+	DisplayScope *GetScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID           *int64                                                   `json:"id,omitempty"`
+	MakeDate     *int64                                                   `json:"make_date,omitempty"`
+	Src          *string                                                  `json:"src,omitempty"`
+	UpdateDate   *int64                                                   `json:"update_date,omitempty"`
 }
 
 type GetScriptTag200ApplicationJSON struct {
-	ScriptTag *GetScriptTag200ApplicationJSONScriptTag `json:"script_tag"`
+	ScriptTag *GetScriptTag200ApplicationJSONScriptTag `json:"script_tag,omitempty"`
 }
 
 type GetScriptTagResponse struct {

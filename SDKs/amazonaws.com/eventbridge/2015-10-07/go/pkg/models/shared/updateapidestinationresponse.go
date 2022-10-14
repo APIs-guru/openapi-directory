@@ -5,8 +5,8 @@ import (
 )
 
 type UpdateAPIDestinationResponse struct {
-	APIDestinationArn   *string                  `json:"ApiDestinationArn"`
-	APIDestinationState *APIDestinationStateEnum `json:"ApiDestinationState"`
-	CreationTime        *time.Time               `json:"CreationTime"`
-	LastModifiedTime    *time.Time               `json:"LastModifiedTime"`
+	APIDestinationArn   *string                  `json:"ApiDestinationArn,omitempty"`
+	APIDestinationState *APIDestinationStateEnum `json:"ApiDestinationState,omitempty"`
+	CreationTime        *time.Time               `json:"CreationTime,omitempty"`
+	LastModifiedTime    *time.Time               `json:"LastModifiedTime,omitempty"`
 }

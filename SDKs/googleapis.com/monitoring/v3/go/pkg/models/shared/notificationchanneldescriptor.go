@@ -22,11 +22,11 @@ const (
 )
 
 type NotificationChannelDescriptor struct {
-	Description    *string                                           `json:"description"`
-	DisplayName    *string                                           `json:"displayName"`
-	Labels         []LabelDescriptor                                 `json:"labels"`
-	LaunchStage    *NotificationChannelDescriptorLaunchStageEnum     `json:"launchStage"`
-	Name           *string                                           `json:"name"`
-	SupportedTiers []NotificationChannelDescriptorSupportedTiersEnum `json:"supportedTiers"`
-	Type           *string                                           `json:"type"`
+	Description    *string                                           `json:"description,omitempty"`
+	DisplayName    *string                                           `json:"displayName,omitempty"`
+	Labels         []LabelDescriptor                                 `json:"labels,omitempty"`
+	LaunchStage    *NotificationChannelDescriptorLaunchStageEnum     `json:"launchStage,omitempty"`
+	Name           *string                                           `json:"name,omitempty"`
+	SupportedTiers []NotificationChannelDescriptorSupportedTiersEnum `json:"supportedTiers,omitempty"`
+	Type           *string                                           `json:"type,omitempty"`
 }

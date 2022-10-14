@@ -1,8 +1,8 @@
 package shared
 
 type VpcDestinationProperties struct {
-	RoleArn        *string  `json:"roleArn"`
-	SecurityGroups []string `json:"securityGroups"`
-	SubnetIds      []string `json:"subnetIds"`
-	VpcID          *string  `json:"vpcId"`
+	RoleArn        *string  `json:"roleArn,omitempty"`
+	SecurityGroups []string `json:"securityGroups,omitempty"`
+	SubnetIds      []string `json:"subnetIds,omitempty"`
+	VpcID          *string  `json:"vpcId,omitempty"`
 }

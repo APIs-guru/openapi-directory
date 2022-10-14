@@ -9,7 +9,7 @@ const (
 )
 
 type ImportAdminOverridesRequest struct {
-	Force        *bool                                      `json:"force"`
-	ForceOnly    []ImportAdminOverridesRequestForceOnlyEnum `json:"forceOnly"`
-	InlineSource *OverrideInlineSource                      `json:"inlineSource"`
+	Force        *bool                                      `json:"force,omitempty"`
+	ForceOnly    []ImportAdminOverridesRequestForceOnlyEnum `json:"forceOnly,omitempty"`
+	InlineSource *OverrideInlineSource                      `json:"inlineSource,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SubscriptionCancelSurveyResult struct {
-	CancelSurveyReason    *int32  `json:"cancelSurveyReason"`
-	UserInputCancelReason *string `json:"userInputCancelReason"`
+	CancelSurveyReason    *int32  `json:"cancelSurveyReason,omitempty"`
+	UserInputCancelReason *string `json:"userInputCancelReason,omitempty"`
 }

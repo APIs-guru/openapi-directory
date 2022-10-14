@@ -1,8 +1,8 @@
 package shared
 
 type IceServer struct {
-	Password *string  `json:"Password"`
-	TTL      *int64   `json:"Ttl"`
-	Uris     []string `json:"Uris"`
-	Username *string  `json:"Username"`
+	Password *string  `json:"Password,omitempty"`
+	TTL      *int64   `json:"Ttl,omitempty"`
+	Uris     []string `json:"Uris,omitempty"`
+	Username *string  `json:"Username,omitempty"`
 }

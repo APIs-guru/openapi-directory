@@ -11,6 +11,6 @@ const (
 )
 
 type AdvertisedID struct {
-	ID   *string               `json:"id"`
-	Type *AdvertisedIDTypeEnum `json:"type"`
+	ID   *string               `json:"id,omitempty"`
+	Type *AdvertisedIDTypeEnum `json:"type,omitempty"`
 }

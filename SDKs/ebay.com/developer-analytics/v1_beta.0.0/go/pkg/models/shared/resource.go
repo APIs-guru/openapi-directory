@@ -1,6 +1,6 @@
 package shared
 
 type Resource struct {
-	Name  *string `json:"name"`
-	Rates []Rate  `json:"rates"`
+	Name  *string `json:"name,omitempty"`
+	Rates []Rate  `json:"rates,omitempty"`
 }

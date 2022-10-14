@@ -9,31 +9,31 @@ type CreateGroupIfNotExistsForUsingPostRequest struct {
 }
 
 type CreateGroupIfNotExistsForUsingPost200ApplicationJSONData struct {
-	GroupID *string `json:"groupID"`
+	GroupID *string `json:"groupID,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingPost200ApplicationJSON struct {
-	Code    *int64                                                    `json:"code"`
-	Data    *CreateGroupIfNotExistsForUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                                   `json:"message"`
+	Code    *int64                                                    `json:"code,omitempty"`
+	Data    *CreateGroupIfNotExistsForUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                                   `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingPostResponse struct {

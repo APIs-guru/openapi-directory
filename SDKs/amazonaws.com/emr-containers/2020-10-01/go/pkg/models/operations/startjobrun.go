@@ -19,22 +19,22 @@ type StartJobRunHeaders struct {
 }
 
 type StartJobRunRequestBodyConfigurationOverrides struct {
-	ApplicationConfiguration []shared.Configuration          `json:"applicationConfiguration"`
-	MonitoringConfiguration  *shared.MonitoringConfiguration `json:"monitoringConfiguration"`
+	ApplicationConfiguration []shared.Configuration          `json:"applicationConfiguration,omitempty"`
+	MonitoringConfiguration  *shared.MonitoringConfiguration `json:"monitoringConfiguration,omitempty"`
 }
 
 type StartJobRunRequestBodyJobDriver struct {
-	SparkSubmitJobDriver *shared.SparkSubmitJobDriver `json:"sparkSubmitJobDriver"`
+	SparkSubmitJobDriver *shared.SparkSubmitJobDriver `json:"sparkSubmitJobDriver,omitempty"`
 }
 
 type StartJobRunRequestBody struct {
 	ClientToken            string                                        `json:"clientToken"`
-	ConfigurationOverrides *StartJobRunRequestBodyConfigurationOverrides `json:"configurationOverrides"`
+	ConfigurationOverrides *StartJobRunRequestBodyConfigurationOverrides `json:"configurationOverrides,omitempty"`
 	ExecutionRoleArn       string                                        `json:"executionRoleArn"`
 	JobDriver              StartJobRunRequestBodyJobDriver               `json:"jobDriver"`
-	Name                   *string                                       `json:"name"`
+	Name                   *string                                       `json:"name,omitempty"`
 	ReleaseLabel           string                                        `json:"releaseLabel"`
-	Tags                   map[string]string                             `json:"tags"`
+	Tags                   map[string]string                             `json:"tags,omitempty"`
 }
 
 type StartJobRunRequest struct {

@@ -18,9 +18,9 @@ type UpdateNetworkWirelessSsidSchedulesRequestBodyRangesInSeconds struct {
 }
 
 type UpdateNetworkWirelessSsidSchedulesRequestBody struct {
-	Enabled         *bool                                                          `json:"enabled"`
-	Ranges          []UpdateNetworkWirelessSsidSchedulesRequestBodyRanges          `json:"ranges"`
-	RangesInSeconds []UpdateNetworkWirelessSsidSchedulesRequestBodyRangesInSeconds `json:"rangesInSeconds"`
+	Enabled         *bool                                                          `json:"enabled,omitempty"`
+	Ranges          []UpdateNetworkWirelessSsidSchedulesRequestBodyRanges          `json:"ranges,omitempty"`
+	RangesInSeconds []UpdateNetworkWirelessSsidSchedulesRequestBodyRangesInSeconds `json:"rangesInSeconds,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidSchedulesRequest struct {

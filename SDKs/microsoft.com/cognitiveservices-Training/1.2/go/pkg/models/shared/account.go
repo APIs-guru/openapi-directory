@@ -1,8 +1,8 @@
 package shared
 
 type Account struct {
-	Email    *string       `json:"Email"`
-	Keys     *APIKeys      `json:"Keys"`
-	Quotas   *AccountQuota `json:"Quotas"`
-	UserName *string       `json:"UserName"`
+	Email    *string       `json:"Email,omitempty"`
+	Keys     *APIKeys      `json:"Keys,omitempty"`
+	Quotas   *AccountQuota `json:"Quotas,omitempty"`
+	UserName *string       `json:"UserName,omitempty"`
 }

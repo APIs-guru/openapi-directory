@@ -1,6 +1,6 @@
 package shared
 
 type APIPassthrough struct {
-	Extensions *Extensions  `json:"Extensions"`
-	Subject    *Asn1Subject `json:"Subject"`
+	Extensions *Extensions  `json:"Extensions,omitempty"`
+	Subject    *Asn1Subject `json:"Subject,omitempty"`
 }

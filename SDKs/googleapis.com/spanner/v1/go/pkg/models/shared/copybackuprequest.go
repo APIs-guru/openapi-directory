@@ -1,8 +1,8 @@
 package shared
 
 type CopyBackupRequest struct {
-	BackupID         *string                     `json:"backupId"`
-	EncryptionConfig *CopyBackupEncryptionConfig `json:"encryptionConfig"`
-	ExpireTime       *string                     `json:"expireTime"`
-	SourceBackup     *string                     `json:"sourceBackup"`
+	BackupID         *string                     `json:"backupId,omitempty"`
+	EncryptionConfig *CopyBackupEncryptionConfig `json:"encryptionConfig,omitempty"`
+	ExpireTime       *string                     `json:"expireTime,omitempty"`
+	SourceBackup     *string                     `json:"sourceBackup,omitempty"`
 }

@@ -5,10 +5,10 @@ import (
 )
 
 type SectionResponse struct {
-	CreatedAt    *time.Time       `json:"created_at"`
-	Gid          *string          `json:"gid"`
-	Name         *string          `json:"name"`
-	Project      *ProjectCompact  `json:"project"`
-	Projects     []ProjectCompact `json:"projects"`
-	ResourceType *string          `json:"resource_type"`
+	CreatedAt    *time.Time       `json:"created_at,omitempty"`
+	Gid          *string          `json:"gid,omitempty"`
+	Name         *string          `json:"name,omitempty"`
+	Project      *ProjectCompact  `json:"project,omitempty"`
+	Projects     []ProjectCompact `json:"projects,omitempty"`
+	ResourceType *string          `json:"resource_type,omitempty"`
 }

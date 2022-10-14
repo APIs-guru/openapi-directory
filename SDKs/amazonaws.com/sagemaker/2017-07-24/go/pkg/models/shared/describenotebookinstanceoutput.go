@@ -5,25 +5,25 @@ import (
 )
 
 type DescribeNotebookInstanceOutput struct {
-	AcceleratorTypes                    []NotebookInstanceAcceleratorTypeEnum `json:"AcceleratorTypes"`
-	AdditionalCodeRepositories          []string                              `json:"AdditionalCodeRepositories"`
-	CreationTime                        *time.Time                            `json:"CreationTime"`
-	DefaultCodeRepository               *string                               `json:"DefaultCodeRepository"`
-	DirectInternetAccess                *DirectInternetAccessEnum             `json:"DirectInternetAccess"`
-	FailureReason                       *string                               `json:"FailureReason"`
-	InstanceType                        *InstanceTypeEnum                     `json:"InstanceType"`
-	KmsKeyID                            *string                               `json:"KmsKeyId"`
-	LastModifiedTime                    *time.Time                            `json:"LastModifiedTime"`
-	NetworkInterfaceID                  *string                               `json:"NetworkInterfaceId"`
-	NotebookInstanceArn                 *string                               `json:"NotebookInstanceArn"`
-	NotebookInstanceLifecycleConfigName *string                               `json:"NotebookInstanceLifecycleConfigName"`
-	NotebookInstanceName                *string                               `json:"NotebookInstanceName"`
-	NotebookInstanceStatus              *NotebookInstanceStatusEnum           `json:"NotebookInstanceStatus"`
-	PlatformIdentifier                  *string                               `json:"PlatformIdentifier"`
-	RoleArn                             *string                               `json:"RoleArn"`
-	RootAccess                          *RootAccessEnum                       `json:"RootAccess"`
-	SecurityGroups                      []string                              `json:"SecurityGroups"`
-	SubnetID                            *string                               `json:"SubnetId"`
-	URL                                 *string                               `json:"Url"`
-	VolumeSizeInGb                      *int64                                `json:"VolumeSizeInGB"`
+	AcceleratorTypes                    []NotebookInstanceAcceleratorTypeEnum `json:"AcceleratorTypes,omitempty"`
+	AdditionalCodeRepositories          []string                              `json:"AdditionalCodeRepositories,omitempty"`
+	CreationTime                        *time.Time                            `json:"CreationTime,omitempty"`
+	DefaultCodeRepository               *string                               `json:"DefaultCodeRepository,omitempty"`
+	DirectInternetAccess                *DirectInternetAccessEnum             `json:"DirectInternetAccess,omitempty"`
+	FailureReason                       *string                               `json:"FailureReason,omitempty"`
+	InstanceType                        *InstanceTypeEnum                     `json:"InstanceType,omitempty"`
+	KmsKeyID                            *string                               `json:"KmsKeyId,omitempty"`
+	LastModifiedTime                    *time.Time                            `json:"LastModifiedTime,omitempty"`
+	NetworkInterfaceID                  *string                               `json:"NetworkInterfaceId,omitempty"`
+	NotebookInstanceArn                 *string                               `json:"NotebookInstanceArn,omitempty"`
+	NotebookInstanceLifecycleConfigName *string                               `json:"NotebookInstanceLifecycleConfigName,omitempty"`
+	NotebookInstanceName                *string                               `json:"NotebookInstanceName,omitempty"`
+	NotebookInstanceStatus              *NotebookInstanceStatusEnum           `json:"NotebookInstanceStatus,omitempty"`
+	PlatformIdentifier                  *string                               `json:"PlatformIdentifier,omitempty"`
+	RoleArn                             *string                               `json:"RoleArn,omitempty"`
+	RootAccess                          *RootAccessEnum                       `json:"RootAccess,omitempty"`
+	SecurityGroups                      []string                              `json:"SecurityGroups,omitempty"`
+	SubnetID                            *string                               `json:"SubnetId,omitempty"`
+	URL                                 *string                               `json:"Url,omitempty"`
+	VolumeSizeInGb                      *int64                                `json:"VolumeSizeInGB,omitempty"`
 }

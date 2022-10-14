@@ -28,23 +28,23 @@ const (
 )
 
 type Proposal struct {
-	BilledBuyer                *Buyer                                  `json:"billedBuyer"`
-	Buyer                      *Buyer                                  `json:"buyer"`
-	BuyerContacts              []ContactInformation                    `json:"buyerContacts"`
-	BuyerPrivateData           *PrivateData                            `json:"buyerPrivateData"`
-	Deals                      []Deal                                  `json:"deals"`
-	DisplayName                *string                                 `json:"displayName"`
-	IsRenegotiating            *bool                                   `json:"isRenegotiating"`
-	IsSetupComplete            *bool                                   `json:"isSetupComplete"`
-	LastUpdaterOrCommentorRole *ProposalLastUpdaterOrCommentorRoleEnum `json:"lastUpdaterOrCommentorRole"`
-	Notes                      []Note                                  `json:"notes"`
-	OriginatorRole             *ProposalOriginatorRoleEnum             `json:"originatorRole"`
-	PrivateAuctionID           *string                                 `json:"privateAuctionId"`
-	ProposalID                 *string                                 `json:"proposalId"`
-	ProposalRevision           *string                                 `json:"proposalRevision"`
-	ProposalState              *ProposalProposalStateEnum              `json:"proposalState"`
-	Seller                     *Seller                                 `json:"seller"`
-	SellerContacts             []ContactInformation                    `json:"sellerContacts"`
-	TermsAndConditions         *string                                 `json:"termsAndConditions"`
-	UpdateTime                 *string                                 `json:"updateTime"`
+	BilledBuyer                *Buyer                                  `json:"billedBuyer,omitempty"`
+	Buyer                      *Buyer                                  `json:"buyer,omitempty"`
+	BuyerContacts              []ContactInformation                    `json:"buyerContacts,omitempty"`
+	BuyerPrivateData           *PrivateData                            `json:"buyerPrivateData,omitempty"`
+	Deals                      []Deal                                  `json:"deals,omitempty"`
+	DisplayName                *string                                 `json:"displayName,omitempty"`
+	IsRenegotiating            *bool                                   `json:"isRenegotiating,omitempty"`
+	IsSetupComplete            *bool                                   `json:"isSetupComplete,omitempty"`
+	LastUpdaterOrCommentorRole *ProposalLastUpdaterOrCommentorRoleEnum `json:"lastUpdaterOrCommentorRole,omitempty"`
+	Notes                      []Note                                  `json:"notes,omitempty"`
+	OriginatorRole             *ProposalOriginatorRoleEnum             `json:"originatorRole,omitempty"`
+	PrivateAuctionID           *string                                 `json:"privateAuctionId,omitempty"`
+	ProposalID                 *string                                 `json:"proposalId,omitempty"`
+	ProposalRevision           *string                                 `json:"proposalRevision,omitempty"`
+	ProposalState              *ProposalProposalStateEnum              `json:"proposalState,omitempty"`
+	Seller                     *Seller                                 `json:"seller,omitempty"`
+	SellerContacts             []ContactInformation                    `json:"sellerContacts,omitempty"`
+	TermsAndConditions         *string                                 `json:"termsAndConditions,omitempty"`
+	UpdateTime                 *string                                 `json:"updateTime,omitempty"`
 }

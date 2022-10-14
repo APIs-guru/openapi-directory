@@ -1,6 +1,6 @@
 package shared
 
 type GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIDValues struct {
-	EstimatedProbability *float64                  `json:"estimatedProbability"`
-	QuasiIdsValues       []GooglePrivacyDlpV2Value `json:"quasiIdsValues"`
+	EstimatedProbability *float64                  `json:"estimatedProbability,omitempty"`
+	QuasiIdsValues       []GooglePrivacyDlpV2Value `json:"quasiIdsValues,omitempty"`
 }

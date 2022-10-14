@@ -1,8 +1,8 @@
 package shared
 
 type GenerateEphemeralCertRequest struct {
-	AccessToken   *string `json:"access_token"`
-	PublicKey     *string `json:"public_key"`
-	ReadTime      *string `json:"readTime"`
-	ValidDuration *string `json:"validDuration"`
+	AccessToken   *string `json:"access_token,omitempty"`
+	PublicKey     *string `json:"public_key,omitempty"`
+	ReadTime      *string `json:"readTime,omitempty"`
+	ValidDuration *string `json:"validDuration,omitempty"`
 }

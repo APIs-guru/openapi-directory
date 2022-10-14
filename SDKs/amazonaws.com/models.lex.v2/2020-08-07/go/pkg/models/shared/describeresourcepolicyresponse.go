@@ -1,7 +1,7 @@
 package shared
 
 type DescribeResourcePolicyResponse struct {
-	Policy      *string `json:"policy"`
-	ResourceArn *string `json:"resourceArn"`
-	RevisionID  *string `json:"revisionId"`
+	Policy      *string `json:"policy,omitempty"`
+	ResourceArn *string `json:"resourceArn,omitempty"`
+	RevisionID  *string `json:"revisionId,omitempty"`
 }

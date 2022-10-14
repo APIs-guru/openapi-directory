@@ -11,7 +11,7 @@ const (
 )
 
 type SongListBaseContract struct {
-	FeaturedCategory *SongListBaseContractFeaturedCategoryEnum `json:"featuredCategory"`
-	ID               *int32                                    `json:"id"`
-	Name             *string                                   `json:"name"`
+	FeaturedCategory *SongListBaseContractFeaturedCategoryEnum `json:"featuredCategory,omitempty"`
+	ID               *int32                                    `json:"id,omitempty"`
+	Name             *string                                   `json:"name,omitempty"`
 }

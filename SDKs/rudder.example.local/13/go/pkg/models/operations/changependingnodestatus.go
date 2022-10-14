@@ -16,7 +16,7 @@ const (
 )
 
 type ChangePendingNodeStatusRequestBody struct {
-	Status *ChangePendingNodeStatusRequestBodyStatusEnum `json:"status"`
+	Status *ChangePendingNodeStatusRequestBodyStatusEnum `json:"status,omitempty"`
 }
 
 type ChangePendingNodeStatusRequest struct {

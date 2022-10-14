@@ -1,6 +1,6 @@
 package shared
 
 type ErrorRootCause struct {
-	ClientImpacting *bool                   `json:"ClientImpacting"`
-	Services        []ErrorRootCauseService `json:"Services"`
+	ClientImpacting *bool                   `json:"ClientImpacting,omitempty"`
+	Services        []ErrorRootCauseService `json:"Services,omitempty"`
 }

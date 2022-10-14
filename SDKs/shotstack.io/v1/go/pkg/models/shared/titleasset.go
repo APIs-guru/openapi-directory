@@ -42,12 +42,12 @@ const (
 )
 
 type TitleAsset struct {
-	Background *string                 `json:"background"`
-	Color      *string                 `json:"color"`
-	Offset     *Offset                 `json:"offset"`
-	Position   *TitleAssetPositionEnum `json:"position"`
-	Size       *TitleAssetSizeEnum     `json:"size"`
-	Style      *TitleAssetStyleEnum    `json:"style"`
+	Background *string                 `json:"background,omitempty"`
+	Color      *string                 `json:"color,omitempty"`
+	Offset     *Offset                 `json:"offset,omitempty"`
+	Position   *TitleAssetPositionEnum `json:"position,omitempty"`
+	Size       *TitleAssetSizeEnum     `json:"size,omitempty"`
+	Style      *TitleAssetStyleEnum    `json:"style,omitempty"`
 	Text       string                  `json:"text"`
 	Type       string                  `json:"type"`
 }

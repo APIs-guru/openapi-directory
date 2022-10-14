@@ -1,7 +1,7 @@
 package shared
 
 type Failure struct {
-	Arn    *string `json:"arn"`
-	Detail *string `json:"detail"`
-	Reason *string `json:"reason"`
+	Arn    *string `json:"arn,omitempty"`
+	Detail *string `json:"detail,omitempty"`
+	Reason *string `json:"reason,omitempty"`
 }

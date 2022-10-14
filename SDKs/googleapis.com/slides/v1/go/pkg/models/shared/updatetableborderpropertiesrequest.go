@@ -15,9 +15,9 @@ const (
 )
 
 type UpdateTableBorderPropertiesRequest struct {
-	BorderPosition        *UpdateTableBorderPropertiesRequestBorderPositionEnum `json:"borderPosition"`
-	Fields                *string                                               `json:"fields"`
-	ObjectID              *string                                               `json:"objectId"`
-	TableBorderProperties *TableBorderProperties                                `json:"tableBorderProperties"`
-	TableRange            *TableRange                                           `json:"tableRange"`
+	BorderPosition        *UpdateTableBorderPropertiesRequestBorderPositionEnum `json:"borderPosition,omitempty"`
+	Fields                *string                                               `json:"fields,omitempty"`
+	ObjectID              *string                                               `json:"objectId,omitempty"`
+	TableBorderProperties *TableBorderProperties                                `json:"tableBorderProperties,omitempty"`
+	TableRange            *TableRange                                           `json:"tableRange,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type LocalizedStringContract struct {
-	Language *LocalizedStringContractLanguageEnum `json:"language"`
-	Value    *string                              `json:"value"`
+	Language *LocalizedStringContractLanguageEnum `json:"language,omitempty"`
+	Value    *string                              `json:"value,omitempty"`
 }

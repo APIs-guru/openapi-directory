@@ -10,6 +10,6 @@ const (
 )
 
 type ProximityLocationListAssignedTargetingOptionDetails struct {
-	ProximityLocationListID *string                                                                      `json:"proximityLocationListId"`
-	ProximityRadiusRange    *ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusRangeEnum `json:"proximityRadiusRange"`
+	ProximityLocationListID *string                                                                      `json:"proximityLocationListId,omitempty"`
+	ProximityRadiusRange    *ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusRangeEnum `json:"proximityRadiusRange,omitempty"`
 }

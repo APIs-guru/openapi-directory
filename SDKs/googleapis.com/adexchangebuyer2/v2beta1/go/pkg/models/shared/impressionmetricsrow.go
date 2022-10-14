@@ -1,10 +1,10 @@
 package shared
 
 type ImpressionMetricsRow struct {
-	AvailableImpressions *MetricValue   `json:"availableImpressions"`
-	BidRequests          *MetricValue   `json:"bidRequests"`
-	InventoryMatches     *MetricValue   `json:"inventoryMatches"`
-	ResponsesWithBids    *MetricValue   `json:"responsesWithBids"`
-	RowDimensions        *RowDimensions `json:"rowDimensions"`
-	SuccessfulResponses  *MetricValue   `json:"successfulResponses"`
+	AvailableImpressions *MetricValue   `json:"availableImpressions,omitempty"`
+	BidRequests          *MetricValue   `json:"bidRequests,omitempty"`
+	InventoryMatches     *MetricValue   `json:"inventoryMatches,omitempty"`
+	ResponsesWithBids    *MetricValue   `json:"responsesWithBids,omitempty"`
+	RowDimensions        *RowDimensions `json:"rowDimensions,omitempty"`
+	SuccessfulResponses  *MetricValue   `json:"successfulResponses,omitempty"`
 }

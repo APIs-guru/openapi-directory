@@ -1,5 +1,5 @@
 package shared
 
 type GetBlueprintRunResponse struct {
-	BlueprintRun *BlueprintRun `json:"BlueprintRun"`
+	BlueprintRun *BlueprintRun `json:"BlueprintRun,omitempty"`
 }

@@ -16,8 +16,8 @@ const (
 )
 
 type GrredRequestBody struct {
-	CertificateParameters *GrredRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *GrredRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                GrredRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Grred400ApplicationJSON struct {
-	Error            *Grred400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Grred400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Grred400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Grred400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Grred401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Grred401ApplicationJSON struct {
-	Error            *Grred401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Grred401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Grred401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Grred401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Grred404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Grred404ApplicationJSON struct {
-	Error            *Grred404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Grred404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Grred404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Grred404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Grred500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Grred500ApplicationJSON struct {
-	Error            *Grred500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Grred500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Grred500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Grred500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Grred502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Grred502ApplicationJSON struct {
-	Error            *Grred502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Grred502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Grred502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Grred502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Grred503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Grred503ApplicationJSON struct {
-	Error            *Grred503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Grred503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Grred503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Grred503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Grred504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Grred504ApplicationJSON struct {
-	Error            *Grred504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Grred504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Grred504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Grred504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type GrredResponse struct {

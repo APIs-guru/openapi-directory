@@ -13,7 +13,7 @@ type GetSpecificSentenceRequest struct {
 }
 
 type GetSpecificSentence200ApplicationJSON struct {
-	Data *shared.Sentence `json:"data"`
+	Data *shared.Sentence `json:"data,omitempty"`
 }
 
 type GetSpecificSentenceResponse struct {

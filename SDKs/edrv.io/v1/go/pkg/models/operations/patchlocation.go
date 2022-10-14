@@ -5,71 +5,71 @@ type PatchLocationPathParams struct {
 }
 
 type PatchLocationRequestBodyAddress struct {
-	City            *string `json:"city"`
-	Country         *string `json:"country"`
-	PostalCode      *string `json:"postalCode"`
-	State           *string `json:"state"`
-	StreetAndNumber *string `json:"streetAndNumber"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	State           *string `json:"state,omitempty"`
+	StreetAndNumber *string `json:"streetAndNumber,omitempty"`
 }
 
 type PatchLocationRequestBodyCoordinates struct {
-	Latitude  *float64 `json:"latitude"`
-	Longitude *float64 `json:"longitude"`
+	Latitude  *float64 `json:"latitude,omitempty"`
+	Longitude *float64 `json:"longitude,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours0 struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours1 struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours2 struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours3 struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours4 struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours5 struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours6 struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }
 
 type PatchLocationRequestBodyOpeningHours struct {
-	Zero  []PatchLocationRequestBodyOpeningHours0 `json:"0"`
-	One   []PatchLocationRequestBodyOpeningHours1 `json:"1"`
-	Two   []PatchLocationRequestBodyOpeningHours2 `json:"2"`
-	Three []PatchLocationRequestBodyOpeningHours3 `json:"3"`
-	Four  []PatchLocationRequestBodyOpeningHours4 `json:"4"`
-	Five  []PatchLocationRequestBodyOpeningHours5 `json:"5"`
-	Six   []PatchLocationRequestBodyOpeningHours6 `json:"6"`
+	Zero  []PatchLocationRequestBodyOpeningHours0 `json:"0,omitempty"`
+	One   []PatchLocationRequestBodyOpeningHours1 `json:"1,omitempty"`
+	Two   []PatchLocationRequestBodyOpeningHours2 `json:"2,omitempty"`
+	Three []PatchLocationRequestBodyOpeningHours3 `json:"3,omitempty"`
+	Four  []PatchLocationRequestBodyOpeningHours4 `json:"4,omitempty"`
+	Five  []PatchLocationRequestBodyOpeningHours5 `json:"5,omitempty"`
+	Six   []PatchLocationRequestBodyOpeningHours6 `json:"6,omitempty"`
 }
 
 type PatchLocationRequestBody struct {
-	Active         *bool                                 `json:"active"`
-	Address        *PatchLocationRequestBodyAddress      `json:"address"`
-	Chargestations []interface{}                         `json:"chargestations"`
-	Coordinates    *PatchLocationRequestBodyCoordinates  `json:"coordinates"`
-	OpeningHours   *PatchLocationRequestBodyOpeningHours `json:"openingHours"`
-	OperatorName   *string                               `json:"operatorName"`
-	Timezone       *string                               `json:"timezone"`
+	Active         *bool                                 `json:"active,omitempty"`
+	Address        *PatchLocationRequestBodyAddress      `json:"address,omitempty"`
+	Chargestations []interface{}                         `json:"chargestations,omitempty"`
+	Coordinates    *PatchLocationRequestBodyCoordinates  `json:"coordinates,omitempty"`
+	OpeningHours   *PatchLocationRequestBodyOpeningHours `json:"openingHours,omitempty"`
+	OperatorName   *string                               `json:"operatorName,omitempty"`
+	Timezone       *string                               `json:"timezone,omitempty"`
 }
 
 type PatchLocationRequest struct {
@@ -78,9 +78,9 @@ type PatchLocationRequest struct {
 }
 
 type PatchLocation200ApplicationJSON struct {
-	Message *string       `json:"message"`
-	Ok      *bool         `json:"ok"`
-	Result  []interface{} `json:"result"`
+	Message *string       `json:"message,omitempty"`
+	Ok      *bool         `json:"ok,omitempty"`
+	Result  []interface{} `json:"result,omitempty"`
 }
 
 type PatchLocationResponse struct {

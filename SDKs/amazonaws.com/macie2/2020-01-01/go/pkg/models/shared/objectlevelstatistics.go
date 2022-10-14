@@ -1,7 +1,7 @@
 package shared
 
 type ObjectLevelStatistics struct {
-	FileType     *int64 `json:"fileType"`
-	StorageClass *int64 `json:"storageClass"`
-	Total        *int64 `json:"total"`
+	FileType     *int64 `json:"fileType,omitempty"`
+	StorageClass *int64 `json:"storageClass,omitempty"`
+	Total        *int64 `json:"total,omitempty"`
 }

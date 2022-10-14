@@ -12,8 +12,8 @@ const (
 )
 
 type IndividualOutcome struct {
-	MultistepNumber *int32                               `json:"multistepNumber"`
-	OutcomeSummary  *IndividualOutcomeOutcomeSummaryEnum `json:"outcomeSummary"`
-	RunDuration     *Duration                            `json:"runDuration"`
-	StepID          *string                              `json:"stepId"`
+	MultistepNumber *int32                               `json:"multistepNumber,omitempty"`
+	OutcomeSummary  *IndividualOutcomeOutcomeSummaryEnum `json:"outcomeSummary,omitempty"`
+	RunDuration     *Duration                            `json:"runDuration,omitempty"`
+	StepID          *string                              `json:"stepId,omitempty"`
 }

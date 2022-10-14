@@ -33,17 +33,17 @@ const (
 )
 
 type EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry struct {
-	Attributes   *EnterpriseCrmEventbusProtoAttributes                                   `json:"attributes"`
-	Children     []EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry             `json:"children"`
-	DataType     *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum  `json:"dataType"`
-	DefaultValue *EnterpriseCrmFrontendsEventbusProtoParameterValueType                  `json:"defaultValue"`
-	InOutType    *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum `json:"inOutType"`
-	IsTransient  *bool                                                                   `json:"isTransient"`
-	JSONSchema   *string                                                                 `json:"jsonSchema"`
-	Key          *string                                                                 `json:"key"`
-	Name         *string                                                                 `json:"name"`
-	ProducedBy   *EnterpriseCrmEventbusProtoNodeIdentifier                               `json:"producedBy"`
-	Producer     *string                                                                 `json:"producer"`
-	ProtoDefName *string                                                                 `json:"protoDefName"`
-	ProtoDefPath *string                                                                 `json:"protoDefPath"`
+	Attributes   *EnterpriseCrmEventbusProtoAttributes                                   `json:"attributes,omitempty"`
+	Children     []EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry             `json:"children,omitempty"`
+	DataType     *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum  `json:"dataType,omitempty"`
+	DefaultValue *EnterpriseCrmFrontendsEventbusProtoParameterValueType                  `json:"defaultValue,omitempty"`
+	InOutType    *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum `json:"inOutType,omitempty"`
+	IsTransient  *bool                                                                   `json:"isTransient,omitempty"`
+	JSONSchema   *string                                                                 `json:"jsonSchema,omitempty"`
+	Key          *string                                                                 `json:"key,omitempty"`
+	Name         *string                                                                 `json:"name,omitempty"`
+	ProducedBy   *EnterpriseCrmEventbusProtoNodeIdentifier                               `json:"producedBy,omitempty"`
+	Producer     *string                                                                 `json:"producer,omitempty"`
+	ProtoDefName *string                                                                 `json:"protoDefName,omitempty"`
+	ProtoDefPath *string                                                                 `json:"protoDefPath,omitempty"`
 }

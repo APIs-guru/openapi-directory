@@ -1,10 +1,10 @@
 package shared
 
 type UserDataMapping struct {
-	ArchiveTime        *string     `json:"archiveTime"`
-	Archived           *bool       `json:"archived"`
-	DataID             *string     `json:"dataId"`
-	Name               *string     `json:"name"`
-	ResourceAttributes []Attribute `json:"resourceAttributes"`
-	UserID             *string     `json:"userId"`
+	ArchiveTime        *string     `json:"archiveTime,omitempty"`
+	Archived           *bool       `json:"archived,omitempty"`
+	DataID             *string     `json:"dataId,omitempty"`
+	Name               *string     `json:"name,omitempty"`
+	ResourceAttributes []Attribute `json:"resourceAttributes,omitempty"`
+	UserID             *string     `json:"userId,omitempty"`
 }

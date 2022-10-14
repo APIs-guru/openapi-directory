@@ -23,7 +23,7 @@ const (
 
 type PutDefaultEncryptionConfigurationRequestBody struct {
 	EncryptionType PutDefaultEncryptionConfigurationRequestBodyEncryptionTypeEnum `json:"encryptionType"`
-	KmsKeyID       *string                                                        `json:"kmsKeyId"`
+	KmsKeyID       *string                                                        `json:"kmsKeyId,omitempty"`
 }
 
 type PutDefaultEncryptionConfigurationRequest struct {

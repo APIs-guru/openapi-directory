@@ -5,12 +5,12 @@ import (
 )
 
 type Event struct {
-	DataSource         *EventDataSourceEnum `json:"DataSource"`
-	EventClass         *EventClassEnum      `json:"EventClass"`
-	EventSource        *string              `json:"EventSource"`
-	ID                 *string              `json:"Id"`
-	Name               *string              `json:"Name"`
-	ResourceCollection *ResourceCollection  `json:"ResourceCollection"`
-	Resources          []EventResource      `json:"Resources"`
-	Time               *time.Time           `json:"Time"`
+	DataSource         *EventDataSourceEnum `json:"DataSource,omitempty"`
+	EventClass         *EventClassEnum      `json:"EventClass,omitempty"`
+	EventSource        *string              `json:"EventSource,omitempty"`
+	ID                 *string              `json:"Id,omitempty"`
+	Name               *string              `json:"Name,omitempty"`
+	ResourceCollection *ResourceCollection  `json:"ResourceCollection,omitempty"`
+	Resources          []EventResource      `json:"Resources,omitempty"`
+	Time               *time.Time           `json:"Time,omitempty"`
 }

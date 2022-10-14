@@ -27,7 +27,7 @@ type GetNodeBalancerRequest struct {
 }
 
 type GetNodeBalancerDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetNodeBalancerResponse struct {

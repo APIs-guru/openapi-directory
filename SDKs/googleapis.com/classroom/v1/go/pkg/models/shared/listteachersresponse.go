@@ -1,6 +1,6 @@
 package shared
 
 type ListTeachersResponse struct {
-	NextPageToken *string   `json:"nextPageToken"`
-	Teachers      []Teacher `json:"teachers"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	Teachers      []Teacher `json:"teachers,omitempty"`
 }

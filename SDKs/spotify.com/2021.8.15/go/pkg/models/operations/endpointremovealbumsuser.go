@@ -14,7 +14,7 @@ type EndpointRemoveAlbumsUserHeaders struct {
 }
 
 type EndpointRemoveAlbumsUserRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type EndpointRemoveAlbumsUserSecurity struct {

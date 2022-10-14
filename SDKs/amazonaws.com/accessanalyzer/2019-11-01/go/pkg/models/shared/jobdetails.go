@@ -5,8 +5,8 @@ import (
 )
 
 type JobDetails struct {
-	CompletedOn *time.Time    `json:"completedOn"`
-	JobError    *JobError     `json:"jobError"`
+	CompletedOn *time.Time    `json:"completedOn,omitempty"`
+	JobError    *JobError     `json:"jobError,omitempty"`
 	JobID       string        `json:"jobId"`
 	StartedOn   time.Time     `json:"startedOn"`
 	Status      JobStatusEnum `json:"status"`

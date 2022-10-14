@@ -12,9 +12,9 @@ const (
 )
 
 type Outcome struct {
-	FailureDetail      *FailureDetail      `json:"failureDetail"`
-	InconclusiveDetail *InconclusiveDetail `json:"inconclusiveDetail"`
-	SkippedDetail      *SkippedDetail      `json:"skippedDetail"`
-	SuccessDetail      *SuccessDetail      `json:"successDetail"`
-	Summary            *OutcomeSummaryEnum `json:"summary"`
+	FailureDetail      *FailureDetail      `json:"failureDetail,omitempty"`
+	InconclusiveDetail *InconclusiveDetail `json:"inconclusiveDetail,omitempty"`
+	SkippedDetail      *SkippedDetail      `json:"skippedDetail,omitempty"`
+	SuccessDetail      *SuccessDetail      `json:"successDetail,omitempty"`
+	Summary            *OutcomeSummaryEnum `json:"summary,omitempty"`
 }

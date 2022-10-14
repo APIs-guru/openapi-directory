@@ -8,10 +8,10 @@ const (
 )
 
 type CredentialOptions struct {
-	ACL    map[string]interface{}     `json:"acl"`
-	Cidrs  *string                    `json:"cidrs"`
-	Global *bool                      `json:"global"`
-	Name   *string                    `json:"name"`
-	Secret map[string]interface{}     `json:"secret"`
-	Type   *CredentialOptionsTypeEnum `json:"type"`
+	ACL    map[string]interface{}     `json:"acl,omitempty"`
+	Cidrs  *string                    `json:"cidrs,omitempty"`
+	Global *bool                      `json:"global,omitempty"`
+	Name   *string                    `json:"name,omitempty"`
+	Secret map[string]interface{}     `json:"secret,omitempty"`
+	Type   *CredentialOptionsTypeEnum `json:"type,omitempty"`
 }

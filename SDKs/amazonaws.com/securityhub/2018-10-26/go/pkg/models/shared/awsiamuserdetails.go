@@ -1,12 +1,12 @@
 package shared
 
 type AwsIamUserDetails struct {
-	AttachedManagedPolicies []AwsIamAttachedManagedPolicy `json:"AttachedManagedPolicies"`
-	CreateDate              *string                       `json:"CreateDate"`
-	GroupList               []string                      `json:"GroupList"`
-	Path                    *string                       `json:"Path"`
-	PermissionsBoundary     *AwsIamPermissionsBoundary    `json:"PermissionsBoundary"`
-	UserID                  *string                       `json:"UserId"`
-	UserName                *string                       `json:"UserName"`
-	UserPolicyList          []AwsIamUserPolicy            `json:"UserPolicyList"`
+	AttachedManagedPolicies []AwsIamAttachedManagedPolicy `json:"AttachedManagedPolicies,omitempty"`
+	CreateDate              *string                       `json:"CreateDate,omitempty"`
+	GroupList               []string                      `json:"GroupList,omitempty"`
+	Path                    *string                       `json:"Path,omitempty"`
+	PermissionsBoundary     *AwsIamPermissionsBoundary    `json:"PermissionsBoundary,omitempty"`
+	UserID                  *string                       `json:"UserId,omitempty"`
+	UserName                *string                       `json:"UserName,omitempty"`
+	UserPolicyList          []AwsIamUserPolicy            `json:"UserPolicyList,omitempty"`
 }

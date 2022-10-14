@@ -1,6 +1,6 @@
 package shared
 
 type CreateLogPatternResponse struct {
-	LogPattern        *LogPattern `json:"LogPattern"`
-	ResourceGroupName *string     `json:"ResourceGroupName"`
+	LogPattern        *LogPattern `json:"LogPattern,omitempty"`
+	ResourceGroupName *string     `json:"ResourceGroupName,omitempty"`
 }

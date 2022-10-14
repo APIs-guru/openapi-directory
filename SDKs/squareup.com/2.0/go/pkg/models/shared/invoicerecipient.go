@@ -1,11 +1,11 @@
 package shared
 
 type InvoiceRecipient struct {
-	Address      *Address `json:"address"`
-	CompanyName  *string  `json:"company_name"`
-	CustomerID   *string  `json:"customer_id"`
-	EmailAddress *string  `json:"email_address"`
-	FamilyName   *string  `json:"family_name"`
-	GivenName    *string  `json:"given_name"`
-	PhoneNumber  *string  `json:"phone_number"`
+	Address      *Address `json:"address,omitempty"`
+	CompanyName  *string  `json:"company_name,omitempty"`
+	CustomerID   *string  `json:"customer_id,omitempty"`
+	EmailAddress *string  `json:"email_address,omitempty"`
+	FamilyName   *string  `json:"family_name,omitempty"`
+	GivenName    *string  `json:"given_name,omitempty"`
+	PhoneNumber  *string  `json:"phone_number,omitempty"`
 }

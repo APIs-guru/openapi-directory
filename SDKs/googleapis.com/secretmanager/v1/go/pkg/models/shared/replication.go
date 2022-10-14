@@ -1,6 +1,6 @@
 package shared
 
 type Replication struct {
-	Automatic   *Automatic   `json:"automatic"`
-	UserManaged *UserManaged `json:"userManaged"`
+	Automatic   *Automatic   `json:"automatic,omitempty"`
+	UserManaged *UserManaged `json:"userManaged,omitempty"`
 }

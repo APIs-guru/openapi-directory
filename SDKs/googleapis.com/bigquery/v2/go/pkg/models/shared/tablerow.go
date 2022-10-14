@@ -1,5 +1,5 @@
 package shared
 
 type TableRow struct {
-	F []TableCell `json:"f"`
+	F []TableCell `json:"f,omitempty"`
 }

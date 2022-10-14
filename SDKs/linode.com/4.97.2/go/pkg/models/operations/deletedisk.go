@@ -28,7 +28,7 @@ type DeleteDiskRequest struct {
 }
 
 type DeleteDiskDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteDiskResponse struct {

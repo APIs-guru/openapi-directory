@@ -1,11 +1,11 @@
 package shared
 
 type RuleTargetsExclude struct {
-	Or []RuleTargetEnum `json:"or"`
+	Or []RuleTargetEnum `json:"or,omitempty"`
 }
 
 type RuleTargetsInclude struct {
-	Or []RuleTargetEnum `json:"or"`
+	Or []RuleTargetEnum `json:"or,omitempty"`
 }
 
 type RuleTargets struct {

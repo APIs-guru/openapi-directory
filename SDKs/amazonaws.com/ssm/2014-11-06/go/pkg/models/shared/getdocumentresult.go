@@ -5,17 +5,17 @@ import (
 )
 
 type GetDocumentResult struct {
-	AttachmentsContent []AttachmentContent `json:"AttachmentsContent"`
-	Content            *string             `json:"Content"`
-	CreatedDate        *time.Time          `json:"CreatedDate"`
-	DisplayName        *string             `json:"DisplayName"`
-	DocumentFormat     *DocumentFormatEnum `json:"DocumentFormat"`
-	DocumentType       *DocumentTypeEnum   `json:"DocumentType"`
-	DocumentVersion    *string             `json:"DocumentVersion"`
-	Name               *string             `json:"Name"`
-	Requires           []DocumentRequires  `json:"Requires"`
-	ReviewStatus       *ReviewStatusEnum   `json:"ReviewStatus"`
-	Status             *DocumentStatusEnum `json:"Status"`
-	StatusInformation  *string             `json:"StatusInformation"`
-	VersionName        *string             `json:"VersionName"`
+	AttachmentsContent []AttachmentContent `json:"AttachmentsContent,omitempty"`
+	Content            *string             `json:"Content,omitempty"`
+	CreatedDate        *time.Time          `json:"CreatedDate,omitempty"`
+	DisplayName        *string             `json:"DisplayName,omitempty"`
+	DocumentFormat     *DocumentFormatEnum `json:"DocumentFormat,omitempty"`
+	DocumentType       *DocumentTypeEnum   `json:"DocumentType,omitempty"`
+	DocumentVersion    *string             `json:"DocumentVersion,omitempty"`
+	Name               *string             `json:"Name,omitempty"`
+	Requires           []DocumentRequires  `json:"Requires,omitempty"`
+	ReviewStatus       *ReviewStatusEnum   `json:"ReviewStatus,omitempty"`
+	Status             *DocumentStatusEnum `json:"Status,omitempty"`
+	StatusInformation  *string             `json:"StatusInformation,omitempty"`
+	VersionName        *string             `json:"VersionName,omitempty"`
 }

@@ -52,10 +52,10 @@ const (
 )
 
 type UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCauses struct {
-	Code        *string `json:"code"`
-	Description *string `json:"description"`
-	Field       *string `json:"field"`
-	Type        *string `json:"type"`
+	Code        *string `json:"code,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Field       *string `json:"field,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }
 
 type UpdateMultiNodeInventory200ApplicationJSONNodesErrorsSeverityEnum string
@@ -67,25 +67,25 @@ const (
 )
 
 type UpdateMultiNodeInventory200ApplicationJSONNodesErrors struct {
-	Category         *UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCategoryEnum `json:"category"`
-	Causes           []UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCauses      `json:"causes"`
+	Category         *UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCategoryEnum `json:"category,omitempty"`
+	Causes           []UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCauses      `json:"causes,omitempty"`
 	Code             string                                                             `json:"code"`
-	Description      *string                                                            `json:"description"`
-	ErrorIdentifiers map[string]map[string]interface{}                                  `json:"errorIdentifiers"`
-	Field            *string                                                            `json:"field"`
-	Info             *string                                                            `json:"info"`
-	Severity         *UpdateMultiNodeInventory200ApplicationJSONNodesErrorsSeverityEnum `json:"severity"`
+	Description      *string                                                            `json:"description,omitempty"`
+	ErrorIdentifiers map[string]map[string]interface{}                                  `json:"errorIdentifiers,omitempty"`
+	Field            *string                                                            `json:"field,omitempty"`
+	Info             *string                                                            `json:"info,omitempty"`
+	Severity         *UpdateMultiNodeInventory200ApplicationJSONNodesErrorsSeverityEnum `json:"severity,omitempty"`
 }
 
 type UpdateMultiNodeInventory200ApplicationJSONNodes struct {
-	Errors   []UpdateMultiNodeInventory200ApplicationJSONNodesErrors `json:"errors"`
-	ShipNode *string                                                 `json:"shipNode"`
-	Status   *string                                                 `json:"status"`
+	Errors   []UpdateMultiNodeInventory200ApplicationJSONNodesErrors `json:"errors,omitempty"`
+	ShipNode *string                                                 `json:"shipNode,omitempty"`
+	Status   *string                                                 `json:"status,omitempty"`
 }
 
 type UpdateMultiNodeInventory200ApplicationJSON struct {
-	Nodes []UpdateMultiNodeInventory200ApplicationJSONNodes `json:"nodes"`
-	Sku   *string                                           `json:"sku"`
+	Nodes []UpdateMultiNodeInventory200ApplicationJSONNodes `json:"nodes,omitempty"`
+	Sku   *string                                           `json:"sku,omitempty"`
 }
 
 type UpdateMultiNodeInventoryResponse struct {

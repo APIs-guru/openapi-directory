@@ -1,5 +1,5 @@
 package shared
 
 type CreateJobResponse struct {
-	Job *Job `json:"Job"`
+	Job *Job `json:"Job,omitempty"`
 }

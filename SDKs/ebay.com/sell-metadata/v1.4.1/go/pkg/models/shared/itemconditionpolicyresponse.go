@@ -1,6 +1,6 @@
 package shared
 
 type ItemConditionPolicyResponse struct {
-	ItemConditionPolicies []ItemConditionPolicy `json:"itemConditionPolicies"`
-	Warnings              []Error               `json:"warnings"`
+	ItemConditionPolicies []ItemConditionPolicy `json:"itemConditionPolicies,omitempty"`
+	Warnings              []Error               `json:"warnings,omitempty"`
 }

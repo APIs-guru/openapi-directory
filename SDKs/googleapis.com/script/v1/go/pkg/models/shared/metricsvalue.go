@@ -1,7 +1,7 @@
 package shared
 
 type MetricsValue struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
-	Value     *string `json:"value"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
+	Value     *string `json:"value,omitempty"`
 }

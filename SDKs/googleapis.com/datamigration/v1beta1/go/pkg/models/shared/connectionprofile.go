@@ -22,14 +22,14 @@ const (
 )
 
 type ConnectionProfile struct {
-	Cloudsql    *CloudSQLConnectionProfile     `json:"cloudsql"`
-	CreateTime  *string                        `json:"createTime"`
-	DisplayName *string                        `json:"displayName"`
-	Error       *Status                        `json:"error"`
-	Labels      map[string]string              `json:"labels"`
-	Mysql       *MySQLConnectionProfile        `json:"mysql"`
-	Name        *string                        `json:"name"`
-	Provider    *ConnectionProfileProviderEnum `json:"provider"`
-	State       *ConnectionProfileStateEnum    `json:"state"`
-	UpdateTime  *string                        `json:"updateTime"`
+	Cloudsql    *CloudSQLConnectionProfile     `json:"cloudsql,omitempty"`
+	CreateTime  *string                        `json:"createTime,omitempty"`
+	DisplayName *string                        `json:"displayName,omitempty"`
+	Error       *Status                        `json:"error,omitempty"`
+	Labels      map[string]string              `json:"labels,omitempty"`
+	Mysql       *MySQLConnectionProfile        `json:"mysql,omitempty"`
+	Name        *string                        `json:"name,omitempty"`
+	Provider    *ConnectionProfileProviderEnum `json:"provider,omitempty"`
+	State       *ConnectionProfileStateEnum    `json:"state,omitempty"`
+	UpdateTime  *string                        `json:"updateTime,omitempty"`
 }

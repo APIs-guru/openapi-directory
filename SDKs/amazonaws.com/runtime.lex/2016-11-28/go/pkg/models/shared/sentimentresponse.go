@@ -1,6 +1,6 @@
 package shared
 
 type SentimentResponse struct {
-	SentimentLabel *string `json:"sentimentLabel"`
-	SentimentScore *string `json:"sentimentScore"`
+	SentimentLabel *string `json:"sentimentLabel,omitempty"`
+	SentimentScore *string `json:"sentimentScore,omitempty"`
 }

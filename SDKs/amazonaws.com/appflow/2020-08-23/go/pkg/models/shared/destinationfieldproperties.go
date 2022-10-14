@@ -1,9 +1,9 @@
 package shared
 
 type DestinationFieldProperties struct {
-	IsCreatable              *bool                    `json:"isCreatable"`
-	IsNullable               *bool                    `json:"isNullable"`
-	IsUpdatable              *bool                    `json:"isUpdatable"`
-	IsUpsertable             *bool                    `json:"isUpsertable"`
-	SupportedWriteOperations []WriteOperationTypeEnum `json:"supportedWriteOperations"`
+	IsCreatable              *bool                    `json:"isCreatable,omitempty"`
+	IsNullable               *bool                    `json:"isNullable,omitempty"`
+	IsUpdatable              *bool                    `json:"isUpdatable,omitempty"`
+	IsUpsertable             *bool                    `json:"isUpsertable,omitempty"`
+	SupportedWriteOperations []WriteOperationTypeEnum `json:"supportedWriteOperations,omitempty"`
 }

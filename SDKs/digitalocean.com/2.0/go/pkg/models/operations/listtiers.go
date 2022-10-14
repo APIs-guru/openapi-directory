@@ -5,21 +5,21 @@ import (
 )
 
 type ListTiers200ApplicationJSONTiers struct {
-	BuildSeconds         *string `json:"build_seconds"`
-	EgressBandwidthBytes *string `json:"egress_bandwidth_bytes"`
-	Name                 *string `json:"name"`
-	Slug                 *string `json:"slug"`
-	StorageBytes         *string `json:"storage_bytes"`
+	BuildSeconds         *string `json:"build_seconds,omitempty"`
+	EgressBandwidthBytes *string `json:"egress_bandwidth_bytes,omitempty"`
+	Name                 *string `json:"name,omitempty"`
+	Slug                 *string `json:"slug,omitempty"`
+	StorageBytes         *string `json:"storage_bytes,omitempty"`
 }
 
 type ListTiers200ApplicationJSON struct {
-	Tiers []ListTiers200ApplicationJSONTiers `json:"tiers"`
+	Tiers []ListTiers200ApplicationJSONTiers `json:"tiers,omitempty"`
 }
 
 type ListTiers401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListTiersResponse struct {

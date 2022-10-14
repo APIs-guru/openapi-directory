@@ -5,29 +5,29 @@ type UpdateNetworkAlertsSettingsPathParams struct {
 }
 
 type UpdateNetworkAlertsSettingsRequestBodyAlertsAlertDestinations struct {
-	AllAdmins     *bool    `json:"allAdmins"`
-	Emails        []string `json:"emails"`
-	HTTPServerIds []string `json:"httpServerIds"`
-	Snmp          *bool    `json:"snmp"`
+	AllAdmins     *bool    `json:"allAdmins,omitempty"`
+	Emails        []string `json:"emails,omitempty"`
+	HTTPServerIds []string `json:"httpServerIds,omitempty"`
+	Snmp          *bool    `json:"snmp,omitempty"`
 }
 
 type UpdateNetworkAlertsSettingsRequestBodyAlerts struct {
-	AlertDestinations *UpdateNetworkAlertsSettingsRequestBodyAlertsAlertDestinations `json:"alertDestinations"`
-	Enabled           *bool                                                          `json:"enabled"`
-	Filters           map[string]interface{}                                         `json:"filters"`
+	AlertDestinations *UpdateNetworkAlertsSettingsRequestBodyAlertsAlertDestinations `json:"alertDestinations,omitempty"`
+	Enabled           *bool                                                          `json:"enabled,omitempty"`
+	Filters           map[string]interface{}                                         `json:"filters,omitempty"`
 	Type              string                                                         `json:"type"`
 }
 
 type UpdateNetworkAlertsSettingsRequestBodyDefaultDestinations struct {
-	AllAdmins     *bool    `json:"allAdmins"`
-	Emails        []string `json:"emails"`
-	HTTPServerIds []string `json:"httpServerIds"`
-	Snmp          *bool    `json:"snmp"`
+	AllAdmins     *bool    `json:"allAdmins,omitempty"`
+	Emails        []string `json:"emails,omitempty"`
+	HTTPServerIds []string `json:"httpServerIds,omitempty"`
+	Snmp          *bool    `json:"snmp,omitempty"`
 }
 
 type UpdateNetworkAlertsSettingsRequestBody struct {
-	Alerts              []UpdateNetworkAlertsSettingsRequestBodyAlerts             `json:"alerts"`
-	DefaultDestinations *UpdateNetworkAlertsSettingsRequestBodyDefaultDestinations `json:"defaultDestinations"`
+	Alerts              []UpdateNetworkAlertsSettingsRequestBodyAlerts             `json:"alerts,omitempty"`
+	DefaultDestinations *UpdateNetworkAlertsSettingsRequestBodyDefaultDestinations `json:"defaultDestinations,omitempty"`
 }
 
 type UpdateNetworkAlertsSettingsRequest struct {

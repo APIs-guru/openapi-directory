@@ -5,21 +5,21 @@ import (
 )
 
 type OpsItemSummary struct {
-	ActualEndTime    *time.Time                  `json:"ActualEndTime"`
-	ActualStartTime  *time.Time                  `json:"ActualStartTime"`
-	Category         *string                     `json:"Category"`
-	CreatedBy        *string                     `json:"CreatedBy"`
-	CreatedTime      *time.Time                  `json:"CreatedTime"`
-	LastModifiedBy   *string                     `json:"LastModifiedBy"`
-	LastModifiedTime *time.Time                  `json:"LastModifiedTime"`
-	OperationalData  map[string]OpsItemDataValue `json:"OperationalData"`
-	OpsItemID        *string                     `json:"OpsItemId"`
-	OpsItemType      *string                     `json:"OpsItemType"`
-	PlannedEndTime   *time.Time                  `json:"PlannedEndTime"`
-	PlannedStartTime *time.Time                  `json:"PlannedStartTime"`
-	Priority         *int64                      `json:"Priority"`
-	Severity         *string                     `json:"Severity"`
-	Source           *string                     `json:"Source"`
-	Status           *OpsItemStatusEnum          `json:"Status"`
-	Title            *string                     `json:"Title"`
+	ActualEndTime    *time.Time                  `json:"ActualEndTime,omitempty"`
+	ActualStartTime  *time.Time                  `json:"ActualStartTime,omitempty"`
+	Category         *string                     `json:"Category,omitempty"`
+	CreatedBy        *string                     `json:"CreatedBy,omitempty"`
+	CreatedTime      *time.Time                  `json:"CreatedTime,omitempty"`
+	LastModifiedBy   *string                     `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime *time.Time                  `json:"LastModifiedTime,omitempty"`
+	OperationalData  map[string]OpsItemDataValue `json:"OperationalData,omitempty"`
+	OpsItemID        *string                     `json:"OpsItemId,omitempty"`
+	OpsItemType      *string                     `json:"OpsItemType,omitempty"`
+	PlannedEndTime   *time.Time                  `json:"PlannedEndTime,omitempty"`
+	PlannedStartTime *time.Time                  `json:"PlannedStartTime,omitempty"`
+	Priority         *int64                      `json:"Priority,omitempty"`
+	Severity         *string                     `json:"Severity,omitempty"`
+	Source           *string                     `json:"Source,omitempty"`
+	Status           *OpsItemStatusEnum          `json:"Status,omitempty"`
+	Title            *string                     `json:"Title,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ReplicaDescription struct {
-	GlobalSecondaryIndexes        []ReplicaGlobalSecondaryIndexDescription `json:"GlobalSecondaryIndexes"`
-	KmsMasterKeyID                *string                                  `json:"KMSMasterKeyId"`
-	ProvisionedThroughputOverride *ProvisionedThroughputOverride           `json:"ProvisionedThroughputOverride"`
-	RegionName                    *string                                  `json:"RegionName"`
-	ReplicaInaccessibleDateTime   *time.Time                               `json:"ReplicaInaccessibleDateTime"`
-	ReplicaStatus                 *ReplicaStatusEnum                       `json:"ReplicaStatus"`
-	ReplicaStatusDescription      *string                                  `json:"ReplicaStatusDescription"`
-	ReplicaStatusPercentProgress  *string                                  `json:"ReplicaStatusPercentProgress"`
+	GlobalSecondaryIndexes        []ReplicaGlobalSecondaryIndexDescription `json:"GlobalSecondaryIndexes,omitempty"`
+	KmsMasterKeyID                *string                                  `json:"KMSMasterKeyId,omitempty"`
+	ProvisionedThroughputOverride *ProvisionedThroughputOverride           `json:"ProvisionedThroughputOverride,omitempty"`
+	RegionName                    *string                                  `json:"RegionName,omitempty"`
+	ReplicaInaccessibleDateTime   *time.Time                               `json:"ReplicaInaccessibleDateTime,omitempty"`
+	ReplicaStatus                 *ReplicaStatusEnum                       `json:"ReplicaStatus,omitempty"`
+	ReplicaStatusDescription      *string                                  `json:"ReplicaStatusDescription,omitempty"`
+	ReplicaStatusPercentProgress  *string                                  `json:"ReplicaStatusPercentProgress,omitempty"`
 }

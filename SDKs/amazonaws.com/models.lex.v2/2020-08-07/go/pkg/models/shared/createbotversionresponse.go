@@ -5,10 +5,10 @@ import (
 )
 
 type CreateBotVersionResponse struct {
-	BotID                         *string                            `json:"botId"`
-	BotStatus                     *BotStatusEnum                     `json:"botStatus"`
-	BotVersion                    *string                            `json:"botVersion"`
-	BotVersionLocaleSpecification map[string]BotVersionLocaleDetails `json:"botVersionLocaleSpecification"`
-	CreationDateTime              *time.Time                         `json:"creationDateTime"`
-	Description                   *string                            `json:"description"`
+	BotID                         *string                            `json:"botId,omitempty"`
+	BotStatus                     *BotStatusEnum                     `json:"botStatus,omitempty"`
+	BotVersion                    *string                            `json:"botVersion,omitempty"`
+	BotVersionLocaleSpecification map[string]BotVersionLocaleDetails `json:"botVersionLocaleSpecification,omitempty"`
+	CreationDateTime              *time.Time                         `json:"creationDateTime,omitempty"`
+	Description                   *string                            `json:"description,omitempty"`
 }

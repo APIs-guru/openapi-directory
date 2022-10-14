@@ -10,9 +10,9 @@ const (
 )
 
 type LocationFilter struct {
-	Address               *string                                  `json:"address"`
-	DistanceInMiles       *float64                                 `json:"distanceInMiles"`
-	LatLng                *LatLng                                  `json:"latLng"`
-	RegionCode            *string                                  `json:"regionCode"`
-	TelecommutePreference *LocationFilterTelecommutePreferenceEnum `json:"telecommutePreference"`
+	Address               *string                                  `json:"address,omitempty"`
+	DistanceInMiles       *float64                                 `json:"distanceInMiles,omitempty"`
+	LatLng                *LatLng                                  `json:"latLng,omitempty"`
+	RegionCode            *string                                  `json:"regionCode,omitempty"`
+	TelecommutePreference *LocationFilterTelecommutePreferenceEnum `json:"telecommutePreference,omitempty"`
 }

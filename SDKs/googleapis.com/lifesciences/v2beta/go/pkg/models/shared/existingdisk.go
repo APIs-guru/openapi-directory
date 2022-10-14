@@ -1,5 +1,5 @@
 package shared
 
 type ExistingDisk struct {
-	Disk *string `json:"disk"`
+	Disk *string `json:"disk,omitempty"`
 }

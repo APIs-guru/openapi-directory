@@ -16,7 +16,7 @@ type UpdateObjectAttributesHeaders struct {
 }
 
 type UpdateObjectAttributesRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type UpdateObjectAttributesRequestBody struct {

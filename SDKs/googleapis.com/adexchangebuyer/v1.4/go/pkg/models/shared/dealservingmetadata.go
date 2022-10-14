@@ -1,6 +1,6 @@
 package shared
 
 type DealServingMetadata struct {
-	AlcoholAdsAllowed *bool                               `json:"alcoholAdsAllowed"`
-	DealPauseStatus   *DealServingMetadataDealPauseStatus `json:"dealPauseStatus"`
+	AlcoholAdsAllowed *bool                               `json:"alcoholAdsAllowed,omitempty"`
+	DealPauseStatus   *DealServingMetadataDealPauseStatus `json:"dealPauseStatus,omitempty"`
 }

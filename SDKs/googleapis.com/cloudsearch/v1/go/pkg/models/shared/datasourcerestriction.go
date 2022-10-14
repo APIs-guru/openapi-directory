@@ -1,6 +1,6 @@
 package shared
 
 type DataSourceRestriction struct {
-	FilterOptions []FilterOptions `json:"filterOptions"`
-	Source        *Source         `json:"source"`
+	FilterOptions []FilterOptions `json:"filterOptions,omitempty"`
+	Source        *Source         `json:"source,omitempty"`
 }

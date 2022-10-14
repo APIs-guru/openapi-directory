@@ -1,9 +1,9 @@
 package shared
 
 type CommonFeatureSpec struct {
-	Anthosobservability *AnthosObservabilityFeatureSpec `json:"anthosobservability"`
-	Appdevexperience    map[string]interface{}          `json:"appdevexperience"`
-	Cloudauditlogging   *CloudAuditLoggingFeatureSpec   `json:"cloudauditlogging"`
-	Multiclusteringress *MultiClusterIngressFeatureSpec `json:"multiclusteringress"`
-	Workloadcertificate *FeatureSpec                    `json:"workloadcertificate"`
+	Anthosobservability *AnthosObservabilityFeatureSpec `json:"anthosobservability,omitempty"`
+	Appdevexperience    map[string]interface{}          `json:"appdevexperience,omitempty"`
+	Cloudauditlogging   *CloudAuditLoggingFeatureSpec   `json:"cloudauditlogging,omitempty"`
+	Multiclusteringress *MultiClusterIngressFeatureSpec `json:"multiclusteringress,omitempty"`
+	Workloadcertificate *FeatureSpec                    `json:"workloadcertificate,omitempty"`
 }

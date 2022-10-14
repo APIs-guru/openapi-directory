@@ -1,17 +1,17 @@
 package shared
 
 type ComposeRequestSourceObjectsObjectPreconditions struct {
-	IfGenerationMatch *string `json:"ifGenerationMatch"`
+	IfGenerationMatch *string `json:"ifGenerationMatch,omitempty"`
 }
 
 type ComposeRequestSourceObjects struct {
-	Generation          *string                                         `json:"generation"`
-	Name                *string                                         `json:"name"`
-	ObjectPreconditions *ComposeRequestSourceObjectsObjectPreconditions `json:"objectPreconditions"`
+	Generation          *string                                         `json:"generation,omitempty"`
+	Name                *string                                         `json:"name,omitempty"`
+	ObjectPreconditions *ComposeRequestSourceObjectsObjectPreconditions `json:"objectPreconditions,omitempty"`
 }
 
 type ComposeRequest struct {
-	Destination   *Object                       `json:"destination"`
-	Kind          *string                       `json:"kind"`
-	SourceObjects []ComposeRequestSourceObjects `json:"sourceObjects"`
+	Destination   *Object                       `json:"destination,omitempty"`
+	Kind          *string                       `json:"kind,omitempty"`
+	SourceObjects []ComposeRequestSourceObjects `json:"sourceObjects,omitempty"`
 }

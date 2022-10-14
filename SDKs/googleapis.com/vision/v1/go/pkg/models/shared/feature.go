@@ -19,7 +19,7 @@ const (
 )
 
 type Feature struct {
-	MaxResults *int32           `json:"maxResults"`
-	Model      *string          `json:"model"`
-	Type       *FeatureTypeEnum `json:"type"`
+	MaxResults *int32           `json:"maxResults,omitempty"`
+	Model      *string          `json:"model,omitempty"`
+	Type       *FeatureTypeEnum `json:"type,omitempty"`
 }

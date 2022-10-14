@@ -16,8 +16,8 @@ type SendEventHeaders struct {
 }
 
 type SendEventRequestBody struct {
-	ClientToken *string `json:"ClientToken"`
-	Content     *string `json:"Content"`
+	ClientToken *string `json:"ClientToken,omitempty"`
+	Content     *string `json:"Content,omitempty"`
 	ContentType string  `json:"ContentType"`
 }
 

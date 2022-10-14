@@ -1,5 +1,5 @@
 package shared
 
 type DeleteIdentitiesResponse struct {
-	UnprocessedIdentityIds []UnprocessedIdentityID `json:"UnprocessedIdentityIds"`
+	UnprocessedIdentityIds []UnprocessedIdentityID `json:"UnprocessedIdentityIds,omitempty"`
 }

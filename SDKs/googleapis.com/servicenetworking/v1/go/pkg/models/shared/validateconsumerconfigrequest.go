@@ -1,9 +1,9 @@
 package shared
 
 type ValidateConsumerConfigRequest struct {
-	CheckServiceNetworkingUsePermission *bool             `json:"checkServiceNetworkingUsePermission"`
-	ConsumerNetwork                     *string           `json:"consumerNetwork"`
-	ConsumerProject                     *ConsumerProject  `json:"consumerProject"`
-	RangeReservation                    *RangeReservation `json:"rangeReservation"`
-	ValidateNetwork                     *bool             `json:"validateNetwork"`
+	CheckServiceNetworkingUsePermission *bool             `json:"checkServiceNetworkingUsePermission,omitempty"`
+	ConsumerNetwork                     *string           `json:"consumerNetwork,omitempty"`
+	ConsumerProject                     *ConsumerProject  `json:"consumerProject,omitempty"`
+	RangeReservation                    *RangeReservation `json:"rangeReservation,omitempty"`
+	ValidateNetwork                     *bool             `json:"validateNetwork,omitempty"`
 }

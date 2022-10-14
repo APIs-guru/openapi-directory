@@ -1,6 +1,6 @@
 package shared
 
 type ProjectSummary struct {
-	ProjectArn *string `json:"projectArn"`
-	ProjectID  *string `json:"projectId"`
+	ProjectArn *string `json:"projectArn,omitempty"`
+	ProjectID  *string `json:"projectId,omitempty"`
 }

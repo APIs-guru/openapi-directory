@@ -1,5 +1,5 @@
 package shared
 
 type ObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }

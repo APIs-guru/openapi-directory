@@ -32,13 +32,13 @@ type UpdateConfigHeaders struct {
 }
 
 type UpdateConfigRequestBodyConfigData struct {
-	AntennaDownlinkConfig            *shared.AntennaDownlinkConfig            `json:"antennaDownlinkConfig"`
-	AntennaDownlinkDemodDecodeConfig *shared.AntennaDownlinkDemodDecodeConfig `json:"antennaDownlinkDemodDecodeConfig"`
-	AntennaUplinkConfig              *shared.AntennaUplinkConfig              `json:"antennaUplinkConfig"`
-	DataflowEndpointConfig           *shared.DataflowEndpointConfig           `json:"dataflowEndpointConfig"`
-	S3RecordingConfig                *shared.S3RecordingConfig                `json:"s3RecordingConfig"`
-	TrackingConfig                   *shared.TrackingConfig                   `json:"trackingConfig"`
-	UplinkEchoConfig                 *shared.UplinkEchoConfig                 `json:"uplinkEchoConfig"`
+	AntennaDownlinkConfig            *shared.AntennaDownlinkConfig            `json:"antennaDownlinkConfig,omitempty"`
+	AntennaDownlinkDemodDecodeConfig *shared.AntennaDownlinkDemodDecodeConfig `json:"antennaDownlinkDemodDecodeConfig,omitempty"`
+	AntennaUplinkConfig              *shared.AntennaUplinkConfig              `json:"antennaUplinkConfig,omitempty"`
+	DataflowEndpointConfig           *shared.DataflowEndpointConfig           `json:"dataflowEndpointConfig,omitempty"`
+	S3RecordingConfig                *shared.S3RecordingConfig                `json:"s3RecordingConfig,omitempty"`
+	TrackingConfig                   *shared.TrackingConfig                   `json:"trackingConfig,omitempty"`
+	UplinkEchoConfig                 *shared.UplinkEchoConfig                 `json:"uplinkEchoConfig,omitempty"`
 }
 
 type UpdateConfigRequestBody struct {

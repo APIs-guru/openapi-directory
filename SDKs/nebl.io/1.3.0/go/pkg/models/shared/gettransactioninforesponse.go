@@ -1,77 +1,77 @@
 package shared
 
 type GetTransactionInfoResponseVinPreviousOutput struct {
-	Addresses []string `json:"addresses"`
-	Asm       *string  `json:"asm"`
-	Hex       *string  `json:"hex"`
-	ReqSigs   *float64 `json:"reqSigs"`
-	Type      *string  `json:"type"`
+	Addresses []string `json:"addresses,omitempty"`
+	Asm       *string  `json:"asm,omitempty"`
+	Hex       *string  `json:"hex,omitempty"`
+	ReqSigs   *float64 `json:"reqSigs,omitempty"`
+	Type      *string  `json:"type,omitempty"`
 }
 
 type GetTransactionInfoResponseVinScriptSig struct {
-	Asm *string `json:"asm"`
-	Hex *string `json:"hex"`
+	Asm *string `json:"asm,omitempty"`
+	Hex *string `json:"hex,omitempty"`
 }
 
 type GetTransactionInfoResponseVinTokens struct {
-	AggregationPolicy *string  `json:"aggregationPolicy"`
-	Amount            *float64 `json:"amount"`
-	Divisibility      *float64 `json:"divisibility"`
-	IssueTxid         *string  `json:"issueTxid"`
-	LockStatus        *bool    `json:"lockStatus"`
-	TokenID           *string  `json:"tokenId"`
+	AggregationPolicy *string  `json:"aggregationPolicy,omitempty"`
+	Amount            *float64 `json:"amount,omitempty"`
+	Divisibility      *float64 `json:"divisibility,omitempty"`
+	IssueTxid         *string  `json:"issueTxid,omitempty"`
+	LockStatus        *bool    `json:"lockStatus,omitempty"`
+	TokenID           *string  `json:"tokenId,omitempty"`
 }
 
 type GetTransactionInfoResponseVin struct {
-	PreviousOutput *GetTransactionInfoResponseVinPreviousOutput `json:"previousOutput"`
-	ScriptSig      *GetTransactionInfoResponseVinScriptSig      `json:"scriptSig"`
-	Sequence       *float64                                     `json:"sequence"`
-	Tokens         []GetTransactionInfoResponseVinTokens        `json:"tokens"`
-	Txid           *string                                      `json:"txid"`
-	Value          *float64                                     `json:"value"`
-	Vout           *float64                                     `json:"vout"`
+	PreviousOutput *GetTransactionInfoResponseVinPreviousOutput `json:"previousOutput,omitempty"`
+	ScriptSig      *GetTransactionInfoResponseVinScriptSig      `json:"scriptSig,omitempty"`
+	Sequence       *float64                                     `json:"sequence,omitempty"`
+	Tokens         []GetTransactionInfoResponseVinTokens        `json:"tokens,omitempty"`
+	Txid           *string                                      `json:"txid,omitempty"`
+	Value          *float64                                     `json:"value,omitempty"`
+	Vout           *float64                                     `json:"vout,omitempty"`
 }
 
 type GetTransactionInfoResponseVoutScriptPubKey struct {
-	Addresses []string `json:"addresses"`
-	Asm       *string  `json:"asm"`
-	Hex       *string  `json:"hex"`
-	ReqSigs   *float64 `json:"reqSigs"`
-	Type      *string  `json:"type"`
+	Addresses []string `json:"addresses,omitempty"`
+	Asm       *string  `json:"asm,omitempty"`
+	Hex       *string  `json:"hex,omitempty"`
+	ReqSigs   *float64 `json:"reqSigs,omitempty"`
+	Type      *string  `json:"type,omitempty"`
 }
 
 type GetTransactionInfoResponseVoutTokens struct {
-	AggregationPolicy *string  `json:"aggregationPolicy"`
-	Amount            *float64 `json:"amount"`
-	Divisibility      *float64 `json:"divisibility"`
-	IssueTxid         *string  `json:"issueTxid"`
-	LockStatus        *bool    `json:"lockStatus"`
-	TokenID           *string  `json:"tokenId"`
+	AggregationPolicy *string  `json:"aggregationPolicy,omitempty"`
+	Amount            *float64 `json:"amount,omitempty"`
+	Divisibility      *float64 `json:"divisibility,omitempty"`
+	IssueTxid         *string  `json:"issueTxid,omitempty"`
+	LockStatus        *bool    `json:"lockStatus,omitempty"`
+	TokenID           *string  `json:"tokenId,omitempty"`
 }
 
 type GetTransactionInfoResponseVout struct {
-	Blockheight     *float64                                    `json:"blockheight"`
-	N               *float64                                    `json:"n"`
-	ScriptPubKey    *GetTransactionInfoResponseVoutScriptPubKey `json:"scriptPubKey"`
-	Tokens          []GetTransactionInfoResponseVoutTokens      `json:"tokens"`
-	Used            *bool                                       `json:"used"`
-	UsedBlockheight *float64                                    `json:"usedBlockheight"`
-	UsedTxid        *string                                     `json:"usedTxid"`
-	Value           *float64                                    `json:"value"`
+	Blockheight     *float64                                    `json:"blockheight,omitempty"`
+	N               *float64                                    `json:"n,omitempty"`
+	ScriptPubKey    *GetTransactionInfoResponseVoutScriptPubKey `json:"scriptPubKey,omitempty"`
+	Tokens          []GetTransactionInfoResponseVoutTokens      `json:"tokens,omitempty"`
+	Used            *bool                                       `json:"used,omitempty"`
+	UsedBlockheight *float64                                    `json:"usedBlockheight,omitempty"`
+	UsedTxid        *string                                     `json:"usedTxid,omitempty"`
+	Value           *float64                                    `json:"value,omitempty"`
 }
 
 type GetTransactionInfoResponse struct {
-	Blockhash     *string                          `json:"blockhash"`
-	Blockheight   *float64                         `json:"blockheight"`
-	Blocktime     *float64                         `json:"blocktime"`
-	Confirmations *float64                         `json:"confirmations"`
-	Fee           *float64                         `json:"fee"`
-	Hex           *string                          `json:"hex"`
-	Locktime      *float64                         `json:"locktime"`
-	Time          *float64                         `json:"time"`
-	Totalsent     *float64                         `json:"totalsent"`
-	Txid          *string                          `json:"txid"`
-	Version       *float64                         `json:"version"`
-	Vin           []GetTransactionInfoResponseVin  `json:"vin"`
-	Vout          []GetTransactionInfoResponseVout `json:"vout"`
+	Blockhash     *string                          `json:"blockhash,omitempty"`
+	Blockheight   *float64                         `json:"blockheight,omitempty"`
+	Blocktime     *float64                         `json:"blocktime,omitempty"`
+	Confirmations *float64                         `json:"confirmations,omitempty"`
+	Fee           *float64                         `json:"fee,omitempty"`
+	Hex           *string                          `json:"hex,omitempty"`
+	Locktime      *float64                         `json:"locktime,omitempty"`
+	Time          *float64                         `json:"time,omitempty"`
+	Totalsent     *float64                         `json:"totalsent,omitempty"`
+	Txid          *string                          `json:"txid,omitempty"`
+	Version       *float64                         `json:"version,omitempty"`
+	Vin           []GetTransactionInfoResponseVin  `json:"vin,omitempty"`
+	Vout          []GetTransactionInfoResponseVout `json:"vout,omitempty"`
 }

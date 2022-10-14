@@ -1,5 +1,5 @@
 package shared
 
 type MultipleValuesSetting struct {
-	AllowMultipleValues *bool `json:"allowMultipleValues"`
+	AllowMultipleValues *bool `json:"allowMultipleValues,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type UserSettings struct {
-	ExecutionRole            *string                   `json:"ExecutionRole"`
-	JupyterServerAppSettings *JupyterServerAppSettings `json:"JupyterServerAppSettings"`
-	KernelGatewayAppSettings *KernelGatewayAppSettings `json:"KernelGatewayAppSettings"`
-	SecurityGroups           []string                  `json:"SecurityGroups"`
-	SharingSettings          *SharingSettings          `json:"SharingSettings"`
-	TensorBoardAppSettings   *TensorBoardAppSettings   `json:"TensorBoardAppSettings"`
+	ExecutionRole            *string                   `json:"ExecutionRole,omitempty"`
+	JupyterServerAppSettings *JupyterServerAppSettings `json:"JupyterServerAppSettings,omitempty"`
+	KernelGatewayAppSettings *KernelGatewayAppSettings `json:"KernelGatewayAppSettings,omitempty"`
+	SecurityGroups           []string                  `json:"SecurityGroups,omitempty"`
+	SharingSettings          *SharingSettings          `json:"SharingSettings,omitempty"`
+	TensorBoardAppSettings   *TensorBoardAppSettings   `json:"TensorBoardAppSettings,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDocumentaiV1DocumentEntityRelation struct {
-	ObjectID  *string `json:"objectId"`
-	Relation  *string `json:"relation"`
-	SubjectID *string `json:"subjectId"`
+	ObjectID  *string `json:"objectId,omitempty"`
+	Relation  *string `json:"relation,omitempty"`
+	SubjectID *string `json:"subjectId,omitempty"`
 }

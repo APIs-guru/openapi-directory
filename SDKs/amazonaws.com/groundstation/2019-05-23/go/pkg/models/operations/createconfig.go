@@ -15,19 +15,19 @@ type CreateConfigHeaders struct {
 }
 
 type CreateConfigRequestBodyConfigData struct {
-	AntennaDownlinkConfig            *shared.AntennaDownlinkConfig            `json:"antennaDownlinkConfig"`
-	AntennaDownlinkDemodDecodeConfig *shared.AntennaDownlinkDemodDecodeConfig `json:"antennaDownlinkDemodDecodeConfig"`
-	AntennaUplinkConfig              *shared.AntennaUplinkConfig              `json:"antennaUplinkConfig"`
-	DataflowEndpointConfig           *shared.DataflowEndpointConfig           `json:"dataflowEndpointConfig"`
-	S3RecordingConfig                *shared.S3RecordingConfig                `json:"s3RecordingConfig"`
-	TrackingConfig                   *shared.TrackingConfig                   `json:"trackingConfig"`
-	UplinkEchoConfig                 *shared.UplinkEchoConfig                 `json:"uplinkEchoConfig"`
+	AntennaDownlinkConfig            *shared.AntennaDownlinkConfig            `json:"antennaDownlinkConfig,omitempty"`
+	AntennaDownlinkDemodDecodeConfig *shared.AntennaDownlinkDemodDecodeConfig `json:"antennaDownlinkDemodDecodeConfig,omitempty"`
+	AntennaUplinkConfig              *shared.AntennaUplinkConfig              `json:"antennaUplinkConfig,omitempty"`
+	DataflowEndpointConfig           *shared.DataflowEndpointConfig           `json:"dataflowEndpointConfig,omitempty"`
+	S3RecordingConfig                *shared.S3RecordingConfig                `json:"s3RecordingConfig,omitempty"`
+	TrackingConfig                   *shared.TrackingConfig                   `json:"trackingConfig,omitempty"`
+	UplinkEchoConfig                 *shared.UplinkEchoConfig                 `json:"uplinkEchoConfig,omitempty"`
 }
 
 type CreateConfigRequestBody struct {
 	ConfigData CreateConfigRequestBodyConfigData `json:"configData"`
 	Name       string                            `json:"name"`
-	Tags       map[string]string                 `json:"tags"`
+	Tags       map[string]string                 `json:"tags,omitempty"`
 }
 
 type CreateConfigRequest struct {

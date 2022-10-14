@@ -6,10 +6,10 @@ type CreateRelationsPathParams struct {
 }
 
 type CreateRelationsRequestBody struct {
-	Contracttest  []string `json:"contracttest"`
-	Documentation []string `json:"documentation"`
-	Mock          []string `json:"mock"`
-	Testsuite     []string `json:"testsuite"`
+	Contracttest  []string `json:"contracttest,omitempty"`
+	Documentation []string `json:"documentation,omitempty"`
+	Mock          []string `json:"mock,omitempty"`
+	Testsuite     []string `json:"testsuite,omitempty"`
 }
 
 type CreateRelationsRequest struct {
@@ -18,9 +18,9 @@ type CreateRelationsRequest struct {
 }
 
 type CreateRelations200ApplicationJSON struct {
-	Contracttest  []string `json:"contracttest"`
-	Documentation []string `json:"documentation"`
-	Testsuite     []string `json:"testsuite"`
+	Contracttest  []string `json:"contracttest,omitempty"`
+	Documentation []string `json:"documentation,omitempty"`
+	Testsuite     []string `json:"testsuite,omitempty"`
 }
 
 type CreateRelationsResponse struct {

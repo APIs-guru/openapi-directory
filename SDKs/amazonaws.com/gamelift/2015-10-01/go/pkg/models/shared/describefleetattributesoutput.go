@@ -1,6 +1,6 @@
 package shared
 
 type DescribeFleetAttributesOutput struct {
-	FleetAttributes []FleetAttributes `json:"FleetAttributes"`
-	NextToken       *string           `json:"NextToken"`
+	FleetAttributes []FleetAttributes `json:"FleetAttributes,omitempty"`
+	NextToken       *string           `json:"NextToken,omitempty"`
 }

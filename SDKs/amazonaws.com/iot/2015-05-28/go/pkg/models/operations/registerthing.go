@@ -15,7 +15,7 @@ type RegisterThingHeaders struct {
 }
 
 type RegisterThingRequestBody struct {
-	Parameters   map[string]string `json:"parameters"`
+	Parameters   map[string]string `json:"parameters,omitempty"`
 	TemplateBody string            `json:"templateBody"`
 }
 

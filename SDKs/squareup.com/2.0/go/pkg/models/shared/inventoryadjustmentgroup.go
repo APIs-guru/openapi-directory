@@ -1,8 +1,8 @@
 package shared
 
 type InventoryAdjustmentGroup struct {
-	FromState        *string `json:"from_state"`
-	ID               *string `json:"id"`
-	RootAdjustmentID *string `json:"root_adjustment_id"`
-	ToState          *string `json:"to_state"`
+	FromState        *string `json:"from_state,omitempty"`
+	ID               *string `json:"id,omitempty"`
+	RootAdjustmentID *string `json:"root_adjustment_id,omitempty"`
+	ToState          *string `json:"to_state,omitempty"`
 }

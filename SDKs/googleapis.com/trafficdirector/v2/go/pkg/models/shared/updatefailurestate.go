@@ -1,7 +1,7 @@
 package shared
 
 type UpdateFailureState struct {
-	Details             *string                `json:"details"`
-	FailedConfiguration map[string]interface{} `json:"failedConfiguration"`
-	LastUpdateAttempt   *string                `json:"lastUpdateAttempt"`
+	Details             *string                `json:"details,omitempty"`
+	FailedConfiguration map[string]interface{} `json:"failedConfiguration,omitempty"`
+	LastUpdateAttempt   *string                `json:"lastUpdateAttempt,omitempty"`
 }

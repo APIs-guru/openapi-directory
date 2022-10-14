@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaListAuthConfigsResponse struct {
-	AuthConfigs   []GoogleCloudIntegrationsV1alphaAuthConfig `json:"authConfigs"`
-	NextPageToken *string                                    `json:"nextPageToken"`
+	AuthConfigs   []GoogleCloudIntegrationsV1alphaAuthConfig `json:"authConfigs,omitempty"`
+	NextPageToken *string                                    `json:"nextPageToken,omitempty"`
 }

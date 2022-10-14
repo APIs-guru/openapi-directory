@@ -1,7 +1,7 @@
 package shared
 
 type TestGridSessionArtifact struct {
-	Filename *string                          `json:"filename"`
-	Type     *TestGridSessionArtifactTypeEnum `json:"type"`
-	URL      *string                          `json:"url"`
+	Filename *string                          `json:"filename,omitempty"`
+	Type     *TestGridSessionArtifactTypeEnum `json:"type,omitempty"`
+	URL      *string                          `json:"url,omitempty"`
 }

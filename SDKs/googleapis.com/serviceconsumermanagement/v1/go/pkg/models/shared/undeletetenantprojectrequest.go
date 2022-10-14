@@ -1,5 +1,5 @@
 package shared
 
 type UndeleteTenantProjectRequest struct {
-	Tag *string `json:"tag"`
+	Tag *string `json:"tag,omitempty"`
 }

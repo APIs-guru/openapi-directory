@@ -1,13 +1,13 @@
 package shared
 
 type DynamicLinkInfo struct {
-	AnalyticsInfo     *AnalyticsInfo     `json:"analyticsInfo"`
-	AndroidInfo       *AndroidInfo       `json:"androidInfo"`
-	DesktopInfo       *DesktopInfo       `json:"desktopInfo"`
-	DomainURIPrefix   *string            `json:"domainUriPrefix"`
-	DynamicLinkDomain *string            `json:"dynamicLinkDomain"`
-	IosInfo           *IosInfo           `json:"iosInfo"`
-	Link              *string            `json:"link"`
-	NavigationInfo    *NavigationInfo    `json:"navigationInfo"`
-	SocialMetaTagInfo *SocialMetaTagInfo `json:"socialMetaTagInfo"`
+	AnalyticsInfo     *AnalyticsInfo     `json:"analyticsInfo,omitempty"`
+	AndroidInfo       *AndroidInfo       `json:"androidInfo,omitempty"`
+	DesktopInfo       *DesktopInfo       `json:"desktopInfo,omitempty"`
+	DomainURIPrefix   *string            `json:"domainUriPrefix,omitempty"`
+	DynamicLinkDomain *string            `json:"dynamicLinkDomain,omitempty"`
+	IosInfo           *IosInfo           `json:"iosInfo,omitempty"`
+	Link              *string            `json:"link,omitempty"`
+	NavigationInfo    *NavigationInfo    `json:"navigationInfo,omitempty"`
+	SocialMetaTagInfo *SocialMetaTagInfo `json:"socialMetaTagInfo,omitempty"`
 }

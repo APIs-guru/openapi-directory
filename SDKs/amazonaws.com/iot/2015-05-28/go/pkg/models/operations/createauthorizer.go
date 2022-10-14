@@ -27,11 +27,11 @@ const (
 
 type CreateAuthorizerRequestBody struct {
 	AuthorizerFunctionArn  string                                 `json:"authorizerFunctionArn"`
-	SigningDisabled        *bool                                  `json:"signingDisabled"`
-	Status                 *CreateAuthorizerRequestBodyStatusEnum `json:"status"`
-	Tags                   []shared.Tag                           `json:"tags"`
-	TokenKeyName           *string                                `json:"tokenKeyName"`
-	TokenSigningPublicKeys map[string]string                      `json:"tokenSigningPublicKeys"`
+	SigningDisabled        *bool                                  `json:"signingDisabled,omitempty"`
+	Status                 *CreateAuthorizerRequestBodyStatusEnum `json:"status,omitempty"`
+	Tags                   []shared.Tag                           `json:"tags,omitempty"`
+	TokenKeyName           *string                                `json:"tokenKeyName,omitempty"`
+	TokenSigningPublicKeys map[string]string                      `json:"tokenSigningPublicKeys,omitempty"`
 }
 
 type CreateAuthorizerRequest struct {

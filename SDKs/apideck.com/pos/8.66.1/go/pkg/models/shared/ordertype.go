@@ -5,11 +5,11 @@ import (
 )
 
 type OrderType struct {
-	CreatedAt *time.Time `json:"created_at"`
-	CreatedBy *string    `json:"created_by"`
-	Default   *bool      `json:"default"`
-	ID        *string    `json:"id"`
-	Name      *string    `json:"name"`
-	UpdatedAt *time.Time `json:"updated_at"`
-	UpdatedBy *string    `json:"updated_by"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedBy *string    `json:"created_by,omitempty"`
+	Default   *bool      `json:"default,omitempty"`
+	ID        *string    `json:"id,omitempty"`
+	Name      *string    `json:"name,omitempty"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	UpdatedBy *string    `json:"updated_by,omitempty"`
 }

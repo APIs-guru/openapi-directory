@@ -16,7 +16,7 @@ type CreateDedicatedIPPoolHeaders struct {
 
 type CreateDedicatedIPPoolRequestBody struct {
 	PoolName string       `json:"PoolName"`
-	Tags     []shared.Tag `json:"Tags"`
+	Tags     []shared.Tag `json:"Tags,omitempty"`
 }
 
 type CreateDedicatedIPPoolRequest struct {

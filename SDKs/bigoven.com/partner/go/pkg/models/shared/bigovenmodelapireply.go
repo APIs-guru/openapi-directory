@@ -5,10 +5,10 @@ import (
 )
 
 type BigOvenModelAPIReply struct {
-	Comment      *string                      `json:"Comment"`
-	CreationDate *time.Time                   `json:"CreationDate"`
-	ID           *string                      `json:"ID"`
-	LastModified *time.Time                   `json:"LastModified"`
-	Poster       *BigOvenModelAPIUserInfoTiny `json:"Poster"`
-	ReviewID     *string                      `json:"ReviewID"`
+	Comment      *string                      `json:"Comment,omitempty"`
+	CreationDate *time.Time                   `json:"CreationDate,omitempty"`
+	ID           *string                      `json:"ID,omitempty"`
+	LastModified *time.Time                   `json:"LastModified,omitempty"`
+	Poster       *BigOvenModelAPIUserInfoTiny `json:"Poster,omitempty"`
+	ReviewID     *string                      `json:"ReviewID,omitempty"`
 }

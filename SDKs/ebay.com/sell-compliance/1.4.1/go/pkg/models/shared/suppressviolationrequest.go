@@ -1,6 +1,6 @@
 package shared
 
 type SuppressViolationRequest struct {
-	ComplianceType *string `json:"complianceType"`
-	ListingID      *string `json:"listingId"`
+	ComplianceType *string `json:"complianceType,omitempty"`
+	ListingID      *string `json:"listingId,omitempty"`
 }

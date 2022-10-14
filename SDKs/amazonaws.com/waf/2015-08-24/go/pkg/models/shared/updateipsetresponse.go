@@ -1,5 +1,5 @@
 package shared
 
 type UpdateIPSetResponse struct {
-	ChangeToken *string `json:"ChangeToken"`
+	ChangeToken *string `json:"ChangeToken,omitempty"`
 }

@@ -5,34 +5,34 @@ import (
 )
 
 type Event struct {
-	Address           *string       `json:"address"`
-	City              *string       `json:"city"`
-	Country           *string       `json:"country"`
-	District          *DistrictList `json:"district"`
-	DivisionKeys      []string      `json:"division_keys"`
+	Address           *string       `json:"address,omitempty"`
+	City              *string       `json:"city,omitempty"`
+	Country           *string       `json:"country,omitempty"`
+	District          *DistrictList `json:"district,omitempty"`
+	DivisionKeys      []string      `json:"division_keys,omitempty"`
 	EndDate           time.Time     `json:"end_date"`
 	EventCode         string        `json:"event_code"`
 	EventType         int64         `json:"event_type"`
 	EventTypeString   string        `json:"event_type_string"`
-	FirstEventCode    *string       `json:"first_event_code"`
-	FirstEventID      *string       `json:"first_event_id"`
-	GmapsPlaceID      *string       `json:"gmaps_place_id"`
-	GmapsURL          *string       `json:"gmaps_url"`
+	FirstEventCode    *string       `json:"first_event_code,omitempty"`
+	FirstEventID      *string       `json:"first_event_id,omitempty"`
+	GmapsPlaceID      *string       `json:"gmaps_place_id,omitempty"`
+	GmapsURL          *string       `json:"gmaps_url,omitempty"`
 	Key               string        `json:"key"`
-	Lat               *float64      `json:"lat"`
-	Lng               *float64      `json:"lng"`
-	LocationName      *string       `json:"location_name"`
+	Lat               *float64      `json:"lat,omitempty"`
+	Lng               *float64      `json:"lng,omitempty"`
+	LocationName      *string       `json:"location_name,omitempty"`
 	Name              string        `json:"name"`
-	ParentEventKey    *string       `json:"parent_event_key"`
-	PlayoffType       *int64        `json:"playoff_type"`
-	PlayoffTypeString *string       `json:"playoff_type_string"`
-	PostalCode        *string       `json:"postal_code"`
-	ShortName         *string       `json:"short_name"`
+	ParentEventKey    *string       `json:"parent_event_key,omitempty"`
+	PlayoffType       *int64        `json:"playoff_type,omitempty"`
+	PlayoffTypeString *string       `json:"playoff_type_string,omitempty"`
+	PostalCode        *string       `json:"postal_code,omitempty"`
+	ShortName         *string       `json:"short_name,omitempty"`
 	StartDate         time.Time     `json:"start_date"`
-	StateProv         *string       `json:"state_prov"`
-	Timezone          *string       `json:"timezone"`
-	Webcasts          []Webcast     `json:"webcasts"`
-	Website           *string       `json:"website"`
-	Week              *int64        `json:"week"`
+	StateProv         *string       `json:"state_prov,omitempty"`
+	Timezone          *string       `json:"timezone,omitempty"`
+	Webcasts          []Webcast     `json:"webcasts,omitempty"`
+	Website           *string       `json:"website,omitempty"`
+	Week              *int64        `json:"week,omitempty"`
 	Year              int64         `json:"year"`
 }

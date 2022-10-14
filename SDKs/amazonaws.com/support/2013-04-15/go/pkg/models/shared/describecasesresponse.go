@@ -1,6 +1,6 @@
 package shared
 
 type DescribeCasesResponse struct {
-	Cases     []CaseDetails `json:"cases"`
-	NextToken *string       `json:"nextToken"`
+	Cases     []CaseDetails `json:"cases,omitempty"`
+	NextToken *string       `json:"nextToken,omitempty"`
 }

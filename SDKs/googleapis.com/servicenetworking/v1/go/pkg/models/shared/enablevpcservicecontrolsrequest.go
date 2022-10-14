@@ -1,5 +1,5 @@
 package shared
 
 type EnableVpcServiceControlsRequest struct {
-	ConsumerNetwork *string `json:"consumerNetwork"`
+	ConsumerNetwork *string `json:"consumerNetwork,omitempty"`
 }

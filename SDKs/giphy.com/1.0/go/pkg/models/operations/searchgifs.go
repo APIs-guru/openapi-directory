@@ -17,9 +17,9 @@ type SearchGifsRequest struct {
 }
 
 type SearchGifs200ApplicationJSON struct {
-	Data       []shared.Gif       `json:"data"`
-	Meta       *shared.Meta       `json:"meta"`
-	Pagination *shared.Pagination `json:"pagination"`
+	Data       []shared.Gif       `json:"data,omitempty"`
+	Meta       *shared.Meta       `json:"meta,omitempty"`
+	Pagination *shared.Pagination `json:"pagination,omitempty"`
 }
 
 type SearchGifsResponse struct {

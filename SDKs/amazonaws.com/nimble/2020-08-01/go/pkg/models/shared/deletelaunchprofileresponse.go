@@ -1,5 +1,5 @@
 package shared
 
 type DeleteLaunchProfileResponse struct {
-	LaunchProfile *LaunchProfile `json:"launchProfile"`
+	LaunchProfile *LaunchProfile `json:"launchProfile,omitempty"`
 }

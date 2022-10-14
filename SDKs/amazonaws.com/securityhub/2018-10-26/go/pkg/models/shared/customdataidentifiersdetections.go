@@ -1,8 +1,8 @@
 package shared
 
 type CustomDataIdentifiersDetections struct {
-	Arn         *string      `json:"Arn"`
-	Count       *int64       `json:"Count"`
-	Name        *string      `json:"Name"`
-	Occurrences *Occurrences `json:"Occurrences"`
+	Arn         *string      `json:"Arn,omitempty"`
+	Count       *int64       `json:"Count,omitempty"`
+	Name        *string      `json:"Name,omitempty"`
+	Occurrences *Occurrences `json:"Occurrences,omitempty"`
 }

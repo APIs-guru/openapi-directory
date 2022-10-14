@@ -16,13 +16,13 @@ const (
 )
 
 type UpdateShopScriptTagRequestBodyScriptTag struct {
-	DisplayScope *UpdateShopScriptTagRequestBodyScriptTagDisplayScopeEnum `json:"display_scope"`
-	Integrity    *string                                                  `json:"integrity"`
-	Src          *string                                                  `json:"src"`
+	DisplayScope *UpdateShopScriptTagRequestBodyScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	Integrity    *string                                                  `json:"integrity,omitempty"`
+	Src          *string                                                  `json:"src,omitempty"`
 }
 
 type UpdateShopScriptTagRequestBody struct {
-	ScriptTag *UpdateShopScriptTagRequestBodyScriptTag `json:"script_tag"`
+	ScriptTag *UpdateShopScriptTagRequestBodyScriptTag `json:"script_tag,omitempty"`
 }
 
 type UpdateShopScriptTagSecurity struct {
@@ -43,18 +43,18 @@ const (
 )
 
 type UpdateShopScriptTag200ApplicationJSONScriptTag struct {
-	AccountID          *string                                                         `json:"account_id"`
-	DisplayScope       *UpdateShopScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope"`
-	ID                 *int64                                                          `json:"id"`
-	Integrity          *string                                                         `json:"integrity"`
-	MakeDate           *int64                                                          `json:"make_date"`
-	OauthApplicationID *int64                                                          `json:"oauth_application_id"`
-	Src                *string                                                         `json:"src"`
-	UpdateDate         *int64                                                          `json:"update_date"`
+	AccountID          *string                                                         `json:"account_id,omitempty"`
+	DisplayScope       *UpdateShopScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID                 *int64                                                          `json:"id,omitempty"`
+	Integrity          *string                                                         `json:"integrity,omitempty"`
+	MakeDate           *int64                                                          `json:"make_date,omitempty"`
+	OauthApplicationID *int64                                                          `json:"oauth_application_id,omitempty"`
+	Src                *string                                                         `json:"src,omitempty"`
+	UpdateDate         *int64                                                          `json:"update_date,omitempty"`
 }
 
 type UpdateShopScriptTag200ApplicationJSON struct {
-	ScriptTag *UpdateShopScriptTag200ApplicationJSONScriptTag `json:"script_tag"`
+	ScriptTag *UpdateShopScriptTag200ApplicationJSONScriptTag `json:"script_tag,omitempty"`
 }
 
 type UpdateShopScriptTagResponse struct {

@@ -19,7 +19,7 @@ type MigrationOwnerSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -27,9 +27,9 @@ type MigrationOwnerSimpleUser struct {
 }
 
 type Migration struct {
-	ArchiveURL         *string                  `json:"archive_url"`
+	ArchiveURL         *string                  `json:"archive_url,omitempty"`
 	CreatedAt          time.Time                `json:"created_at"`
-	Exclude            []interface{}            `json:"exclude"`
+	Exclude            []interface{}            `json:"exclude,omitempty"`
 	ExcludeAttachments bool                     `json:"exclude_attachments"`
 	GUID               string                   `json:"guid"`
 	ID                 int64                    `json:"id"`

@@ -11,6 +11,6 @@ const (
 )
 
 type SuggestionClusterProto struct {
-	Category    *SuggestionClusterProtoCategoryEnum `json:"category"`
-	Suggestions []SuggestionProto                   `json:"suggestions"`
+	Category    *SuggestionClusterProtoCategoryEnum `json:"category,omitempty"`
+	Suggestions []SuggestionProto                   `json:"suggestions,omitempty"`
 }

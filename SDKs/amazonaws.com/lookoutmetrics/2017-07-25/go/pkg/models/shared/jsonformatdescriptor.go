@@ -1,6 +1,6 @@
 package shared
 
 type JSONFormatDescriptor struct {
-	Charset         *string                  `json:"Charset"`
-	FileCompression *JSONFileCompressionEnum `json:"FileCompression"`
+	Charset         *string                  `json:"Charset,omitempty"`
+	FileCompression *JSONFileCompressionEnum `json:"FileCompression,omitempty"`
 }

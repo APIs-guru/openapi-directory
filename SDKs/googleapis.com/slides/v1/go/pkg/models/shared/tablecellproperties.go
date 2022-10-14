@@ -11,6 +11,6 @@ const (
 )
 
 type TableCellProperties struct {
-	ContentAlignment        *TableCellPropertiesContentAlignmentEnum `json:"contentAlignment"`
-	TableCellBackgroundFill *TableCellBackgroundFill                 `json:"tableCellBackgroundFill"`
+	ContentAlignment        *TableCellPropertiesContentAlignmentEnum `json:"contentAlignment,omitempty"`
+	TableCellBackgroundFill *TableCellBackgroundFill                 `json:"tableCellBackgroundFill,omitempty"`
 }

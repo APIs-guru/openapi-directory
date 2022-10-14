@@ -1,6 +1,6 @@
 package shared
 
 type ListOperationsResponse struct {
-	NextToken            *string            `json:"NextToken"`
-	OperationSummaryList []OperationSummary `json:"OperationSummaryList"`
+	NextToken            *string            `json:"NextToken,omitempty"`
+	OperationSummaryList []OperationSummary `json:"OperationSummaryList,omitempty"`
 }

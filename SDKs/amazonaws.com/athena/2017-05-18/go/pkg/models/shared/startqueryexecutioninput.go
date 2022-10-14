@@ -1,9 +1,9 @@
 package shared
 
 type StartQueryExecutionInput struct {
-	ClientRequestToken    *string                `json:"ClientRequestToken"`
-	QueryExecutionContext *QueryExecutionContext `json:"QueryExecutionContext"`
+	ClientRequestToken    *string                `json:"ClientRequestToken,omitempty"`
+	QueryExecutionContext *QueryExecutionContext `json:"QueryExecutionContext,omitempty"`
 	QueryString           string                 `json:"QueryString"`
-	ResultConfiguration   *ResultConfiguration   `json:"ResultConfiguration"`
-	WorkGroup             *string                `json:"WorkGroup"`
+	ResultConfiguration   *ResultConfiguration   `json:"ResultConfiguration,omitempty"`
+	WorkGroup             *string                `json:"WorkGroup,omitempty"`
 }

@@ -22,8 +22,8 @@ const (
 
 type EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperations struct {
 	Op    EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBodyOperationsOpEnum `json:"op"`
-	Path  *string                                                                     `json:"path"`
-	Value *interface{}                                                                `json:"value"`
+	Path  *string                                                                     `json:"path,omitempty"`
+	Value *interface{}                                                                `json:"value,omitempty"`
 }
 
 type EnterpriseAdminUpdateAttributeForEnterpriseGroupRequestBody struct {

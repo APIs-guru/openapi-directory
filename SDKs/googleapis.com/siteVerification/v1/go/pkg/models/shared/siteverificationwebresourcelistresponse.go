@@ -1,5 +1,5 @@
 package shared
 
 type SiteVerificationWebResourceListResponse struct {
-	Items []SiteVerificationWebResourceResource `json:"items"`
+	Items []SiteVerificationWebResourceResource `json:"items,omitempty"`
 }

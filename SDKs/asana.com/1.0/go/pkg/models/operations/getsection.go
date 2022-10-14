@@ -19,7 +19,7 @@ type GetSectionRequest struct {
 }
 
 type GetSection200ApplicationJSON struct {
-	Data *shared.SectionResponse `json:"data"`
+	Data *shared.SectionResponse `json:"data,omitempty"`
 }
 
 type GetSectionResponse struct {

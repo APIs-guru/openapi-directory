@@ -1,6 +1,6 @@
 package shared
 
 type UpdatePortfolioShareOutput struct {
-	PortfolioShareToken *string          `json:"PortfolioShareToken"`
-	Status              *ShareStatusEnum `json:"Status"`
+	PortfolioShareToken *string          `json:"PortfolioShareToken,omitempty"`
+	Status              *ShareStatusEnum `json:"Status,omitempty"`
 }

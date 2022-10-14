@@ -8,5 +8,5 @@ const (
 )
 
 type GoogleCloudDataplexV1ContentNotebook struct {
-	KernelType *GoogleCloudDataplexV1ContentNotebookKernelTypeEnum `json:"kernelType"`
+	KernelType *GoogleCloudDataplexV1ContentNotebookKernelTypeEnum `json:"kernelType,omitempty"`
 }

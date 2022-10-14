@@ -1,8 +1,8 @@
 package shared
 
 type StartTaskExecutionRequest struct {
-	Excludes        []FilterRule `json:"Excludes"`
-	Includes        []FilterRule `json:"Includes"`
-	OverrideOptions *Options     `json:"OverrideOptions"`
+	Excludes        []FilterRule `json:"Excludes,omitempty"`
+	Includes        []FilterRule `json:"Includes,omitempty"`
+	OverrideOptions *Options     `json:"OverrideOptions,omitempty"`
 	TaskArn         string       `json:"TaskArn"`
 }

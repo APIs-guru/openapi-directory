@@ -22,22 +22,22 @@ const (
 )
 
 type CreateRestAPIRequestBodyEndpointConfiguration struct {
-	Types          []shared.EndpointTypeEnum `json:"types"`
-	VpcEndpointIds []string                  `json:"vpcEndpointIds"`
+	Types          []shared.EndpointTypeEnum `json:"types,omitempty"`
+	VpcEndpointIds []string                  `json:"vpcEndpointIds,omitempty"`
 }
 
 type CreateRestAPIRequestBody struct {
-	APIKeySource              *CreateRestAPIRequestBodyAPIKeySourceEnum      `json:"apiKeySource"`
-	BinaryMediaTypes          []string                                       `json:"binaryMediaTypes"`
-	CloneFrom                 *string                                        `json:"cloneFrom"`
-	Description               *string                                        `json:"description"`
-	DisableExecuteAPIEndpoint *bool                                          `json:"disableExecuteApiEndpoint"`
-	EndpointConfiguration     *CreateRestAPIRequestBodyEndpointConfiguration `json:"endpointConfiguration"`
-	MinimumCompressionSize    *int64                                         `json:"minimumCompressionSize"`
+	APIKeySource              *CreateRestAPIRequestBodyAPIKeySourceEnum      `json:"apiKeySource,omitempty"`
+	BinaryMediaTypes          []string                                       `json:"binaryMediaTypes,omitempty"`
+	CloneFrom                 *string                                        `json:"cloneFrom,omitempty"`
+	Description               *string                                        `json:"description,omitempty"`
+	DisableExecuteAPIEndpoint *bool                                          `json:"disableExecuteApiEndpoint,omitempty"`
+	EndpointConfiguration     *CreateRestAPIRequestBodyEndpointConfiguration `json:"endpointConfiguration,omitempty"`
+	MinimumCompressionSize    *int64                                         `json:"minimumCompressionSize,omitempty"`
 	Name                      string                                         `json:"name"`
-	Policy                    *string                                        `json:"policy"`
-	Tags                      map[string]string                              `json:"tags"`
-	Version                   *string                                        `json:"version"`
+	Policy                    *string                                        `json:"policy,omitempty"`
+	Tags                      map[string]string                              `json:"tags,omitempty"`
+	Version                   *string                                        `json:"version,omitempty"`
 }
 
 type CreateRestAPIRequest struct {

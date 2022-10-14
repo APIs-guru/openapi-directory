@@ -1,6 +1,6 @@
 package shared
 
 type ListChangeSetsResponse struct {
-	ChangeSetSummaryList []ChangeSetSummaryListItem `json:"ChangeSetSummaryList"`
-	NextToken            *string                    `json:"NextToken"`
+	ChangeSetSummaryList []ChangeSetSummaryListItem `json:"ChangeSetSummaryList,omitempty"`
+	NextToken            *string                    `json:"NextToken,omitempty"`
 }

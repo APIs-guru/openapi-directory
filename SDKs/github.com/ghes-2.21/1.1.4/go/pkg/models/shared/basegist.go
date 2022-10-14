@@ -5,11 +5,11 @@ import (
 )
 
 type BaseGistFiles struct {
-	Filename *string `json:"filename"`
-	Language *string `json:"language"`
-	RawURL   *string `json:"raw_url"`
-	Size     *int64  `json:"size"`
-	Type     *string `json:"type"`
+	Filename *string `json:"filename,omitempty"`
+	Language *string `json:"language,omitempty"`
+	RawURL   *string `json:"raw_url,omitempty"`
+	Size     *int64  `json:"size,omitempty"`
+	Type     *string `json:"type,omitempty"`
 }
 
 type BaseGistOwnerSimpleUser struct {
@@ -27,7 +27,7 @@ type BaseGistOwnerSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -49,7 +49,7 @@ type BaseGistUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -63,17 +63,17 @@ type BaseGist struct {
 	CreatedAt   time.Time                `json:"created_at"`
 	Description string                   `json:"description"`
 	Files       map[string]BaseGistFiles `json:"files"`
-	Forks       []interface{}            `json:"forks"`
+	Forks       []interface{}            `json:"forks,omitempty"`
 	ForksURL    string                   `json:"forks_url"`
 	GitPullURL  string                   `json:"git_pull_url"`
 	GitPushURL  string                   `json:"git_push_url"`
-	History     []interface{}            `json:"history"`
+	History     []interface{}            `json:"history,omitempty"`
 	HTMLURL     string                   `json:"html_url"`
 	ID          string                   `json:"id"`
 	NodeID      string                   `json:"node_id"`
-	Owner       *BaseGistOwnerSimpleUser `json:"owner"`
+	Owner       *BaseGistOwnerSimpleUser `json:"owner,omitempty"`
 	Public      bool                     `json:"public"`
-	Truncated   *bool                    `json:"truncated"`
+	Truncated   *bool                    `json:"truncated,omitempty"`
 	UpdatedAt   time.Time                `json:"updated_at"`
 	URL         string                   `json:"url"`
 	User        BaseGistUserSimpleUser   `json:"user"`

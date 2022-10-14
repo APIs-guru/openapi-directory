@@ -10,15 +10,15 @@ const (
 )
 
 type Queue struct {
-	AppEngineHTTPTarget *AppEngineHTTPTarget   `json:"appEngineHttpTarget"`
-	HTTPTarget          *HTTPTarget            `json:"httpTarget"`
-	Name                *string                `json:"name"`
-	PullTarget          map[string]interface{} `json:"pullTarget"`
-	PurgeTime           *string                `json:"purgeTime"`
-	RateLimits          *RateLimits            `json:"rateLimits"`
-	RetryConfig         *RetryConfig           `json:"retryConfig"`
-	State               *QueueStateEnum        `json:"state"`
-	Stats               *QueueStats            `json:"stats"`
-	TaskTTL             *string                `json:"taskTtl"`
-	TombstoneTTL        *string                `json:"tombstoneTtl"`
+	AppEngineHTTPTarget *AppEngineHTTPTarget   `json:"appEngineHttpTarget,omitempty"`
+	HTTPTarget          *HTTPTarget            `json:"httpTarget,omitempty"`
+	Name                *string                `json:"name,omitempty"`
+	PullTarget          map[string]interface{} `json:"pullTarget,omitempty"`
+	PurgeTime           *string                `json:"purgeTime,omitempty"`
+	RateLimits          *RateLimits            `json:"rateLimits,omitempty"`
+	RetryConfig         *RetryConfig           `json:"retryConfig,omitempty"`
+	State               *QueueStateEnum        `json:"state,omitempty"`
+	Stats               *QueueStats            `json:"stats,omitempty"`
+	TaskTTL             *string                `json:"taskTtl,omitempty"`
+	TombstoneTTL        *string                `json:"tombstoneTtl,omitempty"`
 }

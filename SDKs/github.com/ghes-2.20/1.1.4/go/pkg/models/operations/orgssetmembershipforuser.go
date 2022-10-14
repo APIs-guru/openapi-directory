@@ -17,7 +17,7 @@ const (
 )
 
 type OrgsSetMembershipForUserRequestBody struct {
-	Role *OrgsSetMembershipForUserRequestBodyRoleEnum `json:"role"`
+	Role *OrgsSetMembershipForUserRequestBodyRoleEnum `json:"role,omitempty"`
 }
 
 type OrgsSetMembershipForUserRequest struct {

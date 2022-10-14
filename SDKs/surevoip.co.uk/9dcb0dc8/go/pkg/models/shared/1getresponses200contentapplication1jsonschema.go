@@ -7,5 +7,5 @@ const (
 )
 
 type OneGetResponses200ContentApplication1jsonSchema struct {
-	Status *OneGetResponses200ContentApplication1jsonSchemaStatusEnum `json:"status"`
+	Status *OneGetResponses200ContentApplication1jsonSchemaStatusEnum `json:"status,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type LinkService struct {
-	Service *string `json:"service"`
-	Status  *string `json:"status"`
+	Service *string `json:"service,omitempty"`
+	Status  *string `json:"status,omitempty"`
 }

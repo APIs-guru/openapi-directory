@@ -11,6 +11,6 @@ const (
 )
 
 type AudioContentTypeAssignedTargetingOptionDetails struct {
-	AudioContentType  *AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum `json:"audioContentType"`
-	TargetingOptionID *string                                                             `json:"targetingOptionId"`
+	AudioContentType  *AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum `json:"audioContentType,omitempty"`
+	TargetingOptionID *string                                                             `json:"targetingOptionId,omitempty"`
 }

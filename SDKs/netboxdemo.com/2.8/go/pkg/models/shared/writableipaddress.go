@@ -28,19 +28,19 @@ const (
 
 type WritableIPAddress struct {
 	Address      string                             `json:"address"`
-	Created      *time.Time                         `json:"created"`
-	CustomFields map[string]interface{}             `json:"custom_fields"`
-	Description  *string                            `json:"description"`
-	DNSName      *string                            `json:"dns_name"`
-	Family       *string                            `json:"family"`
-	ID           *int64                             `json:"id"`
-	Interface    *int64                             `json:"interface"`
-	LastUpdated  *time.Time                         `json:"last_updated"`
-	NatInside    *int64                             `json:"nat_inside"`
+	Created      *time.Time                         `json:"created,omitempty"`
+	CustomFields map[string]interface{}             `json:"custom_fields,omitempty"`
+	Description  *string                            `json:"description,omitempty"`
+	DNSName      *string                            `json:"dns_name,omitempty"`
+	Family       *string                            `json:"family,omitempty"`
+	ID           *int64                             `json:"id,omitempty"`
+	Interface    *int64                             `json:"interface,omitempty"`
+	LastUpdated  *time.Time                         `json:"last_updated,omitempty"`
+	NatInside    *int64                             `json:"nat_inside,omitempty"`
 	NatOutside   int64                              `json:"nat_outside"`
-	Role         *WritableIPAddressRoleRoleEnum     `json:"role"`
-	Status       *WritableIPAddressStatusStatusEnum `json:"status"`
-	Tags         []string                           `json:"tags"`
-	Tenant       *int64                             `json:"tenant"`
-	Vrf          *int64                             `json:"vrf"`
+	Role         *WritableIPAddressRoleRoleEnum     `json:"role,omitempty"`
+	Status       *WritableIPAddressStatusStatusEnum `json:"status,omitempty"`
+	Tags         []string                           `json:"tags,omitempty"`
+	Tenant       *int64                             `json:"tenant,omitempty"`
+	Vrf          *int64                             `json:"vrf,omitempty"`
 }

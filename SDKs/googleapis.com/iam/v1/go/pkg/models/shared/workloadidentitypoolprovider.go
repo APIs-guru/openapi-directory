@@ -9,14 +9,14 @@ const (
 )
 
 type WorkloadIdentityPoolProvider struct {
-	AttributeCondition *string                                `json:"attributeCondition"`
-	AttributeMapping   map[string]string                      `json:"attributeMapping"`
-	Aws                *Aws                                   `json:"aws"`
-	Description        *string                                `json:"description"`
-	Disabled           *bool                                  `json:"disabled"`
-	DisplayName        *string                                `json:"displayName"`
-	Name               *string                                `json:"name"`
-	Oidc               *Oidc                                  `json:"oidc"`
-	Saml               *Saml                                  `json:"saml"`
-	State              *WorkloadIdentityPoolProviderStateEnum `json:"state"`
+	AttributeCondition *string                                `json:"attributeCondition,omitempty"`
+	AttributeMapping   map[string]string                      `json:"attributeMapping,omitempty"`
+	Aws                *Aws                                   `json:"aws,omitempty"`
+	Description        *string                                `json:"description,omitempty"`
+	Disabled           *bool                                  `json:"disabled,omitempty"`
+	DisplayName        *string                                `json:"displayName,omitempty"`
+	Name               *string                                `json:"name,omitempty"`
+	Oidc               *Oidc                                  `json:"oidc,omitempty"`
+	Saml               *Saml                                  `json:"saml,omitempty"`
+	State              *WorkloadIdentityPoolProviderStateEnum `json:"state,omitempty"`
 }

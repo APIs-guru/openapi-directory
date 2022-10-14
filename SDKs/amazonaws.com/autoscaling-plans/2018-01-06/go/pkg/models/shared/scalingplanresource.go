@@ -5,8 +5,8 @@ type ScalingPlanResource struct {
 	ScalableDimension    ScalableDimensionEnum `json:"ScalableDimension"`
 	ScalingPlanName      string                `json:"ScalingPlanName"`
 	ScalingPlanVersion   int64                 `json:"ScalingPlanVersion"`
-	ScalingPolicies      []ScalingPolicy       `json:"ScalingPolicies"`
+	ScalingPolicies      []ScalingPolicy       `json:"ScalingPolicies,omitempty"`
 	ScalingStatusCode    ScalingStatusCodeEnum `json:"ScalingStatusCode"`
-	ScalingStatusMessage *string               `json:"ScalingStatusMessage"`
+	ScalingStatusMessage *string               `json:"ScalingStatusMessage,omitempty"`
 	ServiceNamespace     ServiceNamespaceEnum  `json:"ServiceNamespace"`
 }

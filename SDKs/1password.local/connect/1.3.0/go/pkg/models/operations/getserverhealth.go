@@ -13,7 +13,7 @@ type GetServerHealthRequest struct {
 }
 
 type GetServerHealth200ApplicationJSON struct {
-	Dependencies []shared.ServiceDependency `json:"dependencies"`
+	Dependencies []shared.ServiceDependency `json:"dependencies,omitempty"`
 	Name         string                     `json:"name"`
 	Version      string                     `json:"version"`
 }

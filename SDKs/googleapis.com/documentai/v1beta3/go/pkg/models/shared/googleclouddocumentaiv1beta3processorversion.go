@@ -14,12 +14,12 @@ const (
 )
 
 type GoogleCloudDocumentaiV1beta3ProcessorVersion struct {
-	CreateTime        *string                                                      `json:"createTime"`
-	DeprecationInfo   *GoogleCloudDocumentaiV1beta3ProcessorVersionDeprecationInfo `json:"deprecationInfo"`
-	DisplayName       *string                                                      `json:"displayName"`
-	GoogleManaged     *bool                                                        `json:"googleManaged"`
-	KmsKeyName        *string                                                      `json:"kmsKeyName"`
-	KmsKeyVersionName *string                                                      `json:"kmsKeyVersionName"`
-	Name              *string                                                      `json:"name"`
-	State             *GoogleCloudDocumentaiV1beta3ProcessorVersionStateEnum       `json:"state"`
+	CreateTime        *string                                                      `json:"createTime,omitempty"`
+	DeprecationInfo   *GoogleCloudDocumentaiV1beta3ProcessorVersionDeprecationInfo `json:"deprecationInfo,omitempty"`
+	DisplayName       *string                                                      `json:"displayName,omitempty"`
+	GoogleManaged     *bool                                                        `json:"googleManaged,omitempty"`
+	KmsKeyName        *string                                                      `json:"kmsKeyName,omitempty"`
+	KmsKeyVersionName *string                                                      `json:"kmsKeyVersionName,omitempty"`
+	Name              *string                                                      `json:"name,omitempty"`
+	State             *GoogleCloudDocumentaiV1beta3ProcessorVersionStateEnum       `json:"state,omitempty"`
 }

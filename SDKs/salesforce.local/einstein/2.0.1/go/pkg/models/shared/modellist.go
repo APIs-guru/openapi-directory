@@ -1,6 +1,6 @@
 package shared
 
 type ModelList struct {
-	Data   []Model `json:"data"`
-	Object *string `json:"object"`
+	Data   []Model `json:"data,omitempty"`
+	Object *string `json:"object,omitempty"`
 }

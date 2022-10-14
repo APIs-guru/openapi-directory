@@ -1,7 +1,7 @@
 package shared
 
 type BatchImportEvidenceToAssessmentControlError struct {
-	ErrorCode      *string         `json:"errorCode"`
-	ErrorMessage   *string         `json:"errorMessage"`
-	ManualEvidence *ManualEvidence `json:"manualEvidence"`
+	ErrorCode      *string         `json:"errorCode,omitempty"`
+	ErrorMessage   *string         `json:"errorMessage,omitempty"`
+	ManualEvidence *ManualEvidence `json:"manualEvidence,omitempty"`
 }

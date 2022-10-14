@@ -10,6 +10,6 @@ const (
 )
 
 type DestinationStatus struct {
-	Destination *string                      `json:"destination"`
-	Status      *DestinationStatusStatusEnum `json:"status"`
+	Destination *string                      `json:"destination,omitempty"`
+	Status      *DestinationStatusStatusEnum `json:"status,omitempty"`
 }

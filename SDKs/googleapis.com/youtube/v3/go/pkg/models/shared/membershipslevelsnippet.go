@@ -1,6 +1,6 @@
 package shared
 
 type MembershipsLevelSnippet struct {
-	CreatorChannelID *string       `json:"creatorChannelId"`
-	LevelDetails     *LevelDetails `json:"levelDetails"`
+	CreatorChannelID *string       `json:"creatorChannelId,omitempty"`
+	LevelDetails     *LevelDetails `json:"levelDetails,omitempty"`
 }

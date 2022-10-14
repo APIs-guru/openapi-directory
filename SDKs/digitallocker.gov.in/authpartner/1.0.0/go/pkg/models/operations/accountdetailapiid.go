@@ -13,13 +13,13 @@ type AccountDetailAPIIDRequest struct {
 }
 
 type AccountDetailAPIID401ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type AccountDetailAPIID500ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type AccountDetailAPIIDResponse struct {

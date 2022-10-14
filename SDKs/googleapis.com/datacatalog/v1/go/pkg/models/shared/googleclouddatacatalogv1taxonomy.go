@@ -8,10 +8,10 @@ const (
 )
 
 type GoogleCloudDatacatalogV1Taxonomy struct {
-	ActivatedPolicyTypes []GoogleCloudDatacatalogV1TaxonomyActivatedPolicyTypesEnum `json:"activatedPolicyTypes"`
-	Description          *string                                                    `json:"description"`
-	DisplayName          *string                                                    `json:"displayName"`
-	Name                 *string                                                    `json:"name"`
-	PolicyTagCount       *int32                                                     `json:"policyTagCount"`
-	TaxonomyTimestamps   *GoogleCloudDatacatalogV1SystemTimestamps                  `json:"taxonomyTimestamps"`
+	ActivatedPolicyTypes []GoogleCloudDatacatalogV1TaxonomyActivatedPolicyTypesEnum `json:"activatedPolicyTypes,omitempty"`
+	Description          *string                                                    `json:"description,omitempty"`
+	DisplayName          *string                                                    `json:"displayName,omitempty"`
+	Name                 *string                                                    `json:"name,omitempty"`
+	PolicyTagCount       *int32                                                     `json:"policyTagCount,omitempty"`
+	TaxonomyTimestamps   *GoogleCloudDatacatalogV1SystemTimestamps                  `json:"taxonomyTimestamps,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type IdentitytoolkitRelyingpartySignOutUserResponse struct {
-	LocalID *string `json:"localId"`
+	LocalID *string `json:"localId,omitempty"`
 }

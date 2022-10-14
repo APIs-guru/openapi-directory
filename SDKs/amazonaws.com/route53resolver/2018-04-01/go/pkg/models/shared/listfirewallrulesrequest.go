@@ -1,9 +1,9 @@
 package shared
 
 type ListFirewallRulesRequest struct {
-	Action              *ActionEnum `json:"Action"`
+	Action              *ActionEnum `json:"Action,omitempty"`
 	FirewallRuleGroupID string      `json:"FirewallRuleGroupId"`
-	MaxResults          *int64      `json:"MaxResults"`
-	NextToken           *string     `json:"NextToken"`
-	Priority            *int64      `json:"Priority"`
+	MaxResults          *int64      `json:"MaxResults,omitempty"`
+	NextToken           *string     `json:"NextToken,omitempty"`
+	Priority            *int64      `json:"Priority,omitempty"`
 }

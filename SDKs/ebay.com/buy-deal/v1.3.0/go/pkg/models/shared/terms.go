@@ -1,6 +1,6 @@
 package shared
 
 type Terms struct {
-	FullText *string `json:"fullText"`
-	Summary  *string `json:"summary"`
+	FullText *string `json:"fullText,omitempty"`
+	Summary  *string `json:"summary,omitempty"`
 }

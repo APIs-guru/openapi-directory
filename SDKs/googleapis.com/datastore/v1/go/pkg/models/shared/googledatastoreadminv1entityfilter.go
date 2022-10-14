@@ -1,6 +1,6 @@
 package shared
 
 type GoogleDatastoreAdminV1EntityFilter struct {
-	Kinds        []string `json:"kinds"`
-	NamespaceIds []string `json:"namespaceIds"`
+	Kinds        []string `json:"kinds,omitempty"`
+	NamespaceIds []string `json:"namespaceIds,omitempty"`
 }

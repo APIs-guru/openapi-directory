@@ -5,7 +5,7 @@ import (
 )
 
 type StateModelGet struct {
-	By    *string    `json:"by"`
-	Since *time.Time `json:"since"`
-	Value *bool      `json:"value"`
+	By    *string    `json:"by,omitempty"`
+	Since *time.Time `json:"since,omitempty"`
+	Value *bool      `json:"value,omitempty"`
 }

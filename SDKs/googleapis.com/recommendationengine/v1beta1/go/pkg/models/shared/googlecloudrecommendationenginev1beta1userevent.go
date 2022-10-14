@@ -10,10 +10,10 @@ const (
 )
 
 type GoogleCloudRecommendationengineV1beta1UserEvent struct {
-	EventDetail        *GoogleCloudRecommendationengineV1beta1EventDetail              `json:"eventDetail"`
-	EventSource        *GoogleCloudRecommendationengineV1beta1UserEventEventSourceEnum `json:"eventSource"`
-	EventTime          *string                                                         `json:"eventTime"`
-	EventType          *string                                                         `json:"eventType"`
-	ProductEventDetail *GoogleCloudRecommendationengineV1beta1ProductEventDetail       `json:"productEventDetail"`
-	UserInfo           *GoogleCloudRecommendationengineV1beta1UserInfo                 `json:"userInfo"`
+	EventDetail        *GoogleCloudRecommendationengineV1beta1EventDetail              `json:"eventDetail,omitempty"`
+	EventSource        *GoogleCloudRecommendationengineV1beta1UserEventEventSourceEnum `json:"eventSource,omitempty"`
+	EventTime          *string                                                         `json:"eventTime,omitempty"`
+	EventType          *string                                                         `json:"eventType,omitempty"`
+	ProductEventDetail *GoogleCloudRecommendationengineV1beta1ProductEventDetail       `json:"productEventDetail,omitempty"`
+	UserInfo           *GoogleCloudRecommendationengineV1beta1UserInfo                 `json:"userInfo,omitempty"`
 }

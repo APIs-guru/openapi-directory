@@ -9,5 +9,5 @@ const (
 )
 
 type PasswordPoliciesContext struct {
-	PasswordPolicyScope *PasswordPoliciesContextPasswordPolicyScopeEnum `json:"passwordPolicyScope"`
+	PasswordPolicyScope *PasswordPoliciesContextPasswordPolicyScopeEnum `json:"passwordPolicyScope,omitempty"`
 }

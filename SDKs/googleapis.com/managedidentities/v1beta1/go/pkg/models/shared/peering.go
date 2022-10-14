@@ -11,12 +11,12 @@ const (
 )
 
 type Peering struct {
-	AuthorizedNetwork *string           `json:"authorizedNetwork"`
-	CreateTime        *string           `json:"createTime"`
-	DomainResource    *string           `json:"domainResource"`
-	Labels            map[string]string `json:"labels"`
-	Name              *string           `json:"name"`
-	State             *PeeringStateEnum `json:"state"`
-	StatusMessage     *string           `json:"statusMessage"`
-	UpdateTime        *string           `json:"updateTime"`
+	AuthorizedNetwork *string           `json:"authorizedNetwork,omitempty"`
+	CreateTime        *string           `json:"createTime,omitempty"`
+	DomainResource    *string           `json:"domainResource,omitempty"`
+	Labels            map[string]string `json:"labels,omitempty"`
+	Name              *string           `json:"name,omitempty"`
+	State             *PeeringStateEnum `json:"state,omitempty"`
+	StatusMessage     *string           `json:"statusMessage,omitempty"`
+	UpdateTime        *string           `json:"updateTime,omitempty"`
 }

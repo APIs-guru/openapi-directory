@@ -14,7 +14,7 @@ type AddUserForWorkspaceQueryParams struct {
 }
 
 type AddUserForWorkspaceRequestBody struct {
-	Data *shared.WorkspaceAddUserRequest `json:"data"`
+	Data *shared.WorkspaceAddUserRequest `json:"data,omitempty"`
 }
 
 type AddUserForWorkspaceRequest struct {
@@ -24,7 +24,7 @@ type AddUserForWorkspaceRequest struct {
 }
 
 type AddUserForWorkspace200ApplicationJSON struct {
-	Data *shared.UserResponse `json:"data"`
+	Data *shared.UserResponse `json:"data,omitempty"`
 }
 
 type AddUserForWorkspaceResponse struct {

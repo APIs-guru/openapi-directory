@@ -29,7 +29,7 @@ type PostTIDNotificationsJSONRequest struct {
 }
 
 type PostTIDNotificationsJSON200ApplicationJSON struct {
-	Success *string `json:"success"`
+	Success *string `json:"success,omitempty"`
 }
 
 type PostTIDNotificationsJSONResponse struct {

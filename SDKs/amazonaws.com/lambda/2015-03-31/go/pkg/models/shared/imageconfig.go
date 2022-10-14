@@ -1,7 +1,7 @@
 package shared
 
 type ImageConfig struct {
-	Command          []string `json:"Command"`
-	EntryPoint       []string `json:"EntryPoint"`
-	WorkingDirectory *string  `json:"WorkingDirectory"`
+	Command          []string `json:"Command,omitempty"`
+	EntryPoint       []string `json:"EntryPoint,omitempty"`
+	WorkingDirectory *string  `json:"WorkingDirectory,omitempty"`
 }

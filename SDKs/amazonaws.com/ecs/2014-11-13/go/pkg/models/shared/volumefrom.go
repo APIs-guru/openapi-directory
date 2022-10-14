@@ -1,6 +1,6 @@
 package shared
 
 type VolumeFrom struct {
-	ReadOnly        *bool   `json:"readOnly"`
-	SourceContainer *string `json:"sourceContainer"`
+	ReadOnly        *bool   `json:"readOnly,omitempty"`
+	SourceContainer *string `json:"sourceContainer,omitempty"`
 }

@@ -29,13 +29,13 @@ type ListObjectParentsHeaders struct {
 }
 
 type ListObjectParentsRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type ListObjectParentsRequestBody struct {
-	IncludeAllLinksToEachParent *bool                                       `json:"IncludeAllLinksToEachParent"`
-	MaxResults                  *int64                                      `json:"MaxResults"`
-	NextToken                   *string                                     `json:"NextToken"`
+	IncludeAllLinksToEachParent *bool                                       `json:"IncludeAllLinksToEachParent,omitempty"`
+	MaxResults                  *int64                                      `json:"MaxResults,omitempty"`
+	NextToken                   *string                                     `json:"NextToken,omitempty"`
 	ObjectReference             ListObjectParentsRequestBodyObjectReference `json:"ObjectReference"`
 }
 

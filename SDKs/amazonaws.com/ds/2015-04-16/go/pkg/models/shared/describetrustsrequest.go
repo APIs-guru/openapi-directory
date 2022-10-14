@@ -1,8 +1,8 @@
 package shared
 
 type DescribeTrustsRequest struct {
-	DirectoryID *string  `json:"DirectoryId"`
-	Limit       *int64   `json:"Limit"`
-	NextToken   *string  `json:"NextToken"`
-	TrustIds    []string `json:"TrustIds"`
+	DirectoryID *string  `json:"DirectoryId,omitempty"`
+	Limit       *int64   `json:"Limit,omitempty"`
+	NextToken   *string  `json:"NextToken,omitempty"`
+	TrustIds    []string `json:"TrustIds,omitempty"`
 }

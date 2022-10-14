@@ -13,7 +13,7 @@ const (
 
 type ObWriteDomesticConsentResponse5DataAuthorisation struct {
 	AuthorisationType  ObWriteDomesticConsentResponse5DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
-	CompletionDateTime *time.Time                                                            `json:"CompletionDateTime"`
+	CompletionDateTime *time.Time                                                            `json:"CompletionDateTime,omitempty"`
 }
 
 type ObWriteDomesticConsentResponse5DataCharges struct {
@@ -26,14 +26,14 @@ type ObWriteDomesticConsentResponse5DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticConsentResponse5DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticConsentResponse5DataInitiationInstructedAmount struct {
@@ -42,20 +42,20 @@ type ObWriteDomesticConsentResponse5DataInitiationInstructedAmount struct {
 }
 
 type ObWriteDomesticConsentResponse5DataInitiationRemittanceInformation struct {
-	Reference    *string `json:"Reference"`
-	Unstructured *string `json:"Unstructured"`
+	Reference    *string `json:"Reference,omitempty"`
+	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
 type ObWriteDomesticConsentResponse5DataInitiation struct {
 	CreditorAccount           ObWriteDomesticConsentResponse5DataInitiationCreditorAccount        `json:"CreditorAccount"`
-	CreditorPostalAddress     *ObPostalAddress6                                                   `json:"CreditorPostalAddress"`
-	DebtorAccount             *ObWriteDomesticConsentResponse5DataInitiationDebtorAccount         `json:"DebtorAccount"`
+	CreditorPostalAddress     *ObPostalAddress6                                                   `json:"CreditorPostalAddress,omitempty"`
+	DebtorAccount             *ObWriteDomesticConsentResponse5DataInitiationDebtorAccount         `json:"DebtorAccount,omitempty"`
 	EndToEndIdentification    string                                                              `json:"EndToEndIdentification"`
 	InstructedAmount          ObWriteDomesticConsentResponse5DataInitiationInstructedAmount       `json:"InstructedAmount"`
 	InstructionIdentification string                                                              `json:"InstructionIdentification"`
-	LocalInstrument           *string                                                             `json:"LocalInstrument"`
-	RemittanceInformation     *ObWriteDomesticConsentResponse5DataInitiationRemittanceInformation `json:"RemittanceInformation"`
-	SupplementaryData         map[string]interface{}                                              `json:"SupplementaryData"`
+	LocalInstrument           *string                                                             `json:"LocalInstrument,omitempty"`
+	RemittanceInformation     *ObWriteDomesticConsentResponse5DataInitiationRemittanceInformation `json:"RemittanceInformation,omitempty"`
+	SupplementaryData         map[string]interface{}                                              `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteDomesticConsentResponse5DataReadRefundAccountEnum string
@@ -75,24 +75,24 @@ const (
 )
 
 type ObWriteDomesticConsentResponse5Data struct {
-	Authorisation              *ObWriteDomesticConsentResponse5DataAuthorisation         `json:"Authorisation"`
-	Charges                    []ObWriteDomesticConsentResponse5DataCharges              `json:"Charges"`
+	Authorisation              *ObWriteDomesticConsentResponse5DataAuthorisation         `json:"Authorisation,omitempty"`
+	Charges                    []ObWriteDomesticConsentResponse5DataCharges              `json:"Charges,omitempty"`
 	ConsentID                  string                                                    `json:"ConsentId"`
 	CreationDateTime           time.Time                                                 `json:"CreationDateTime"`
-	CutOffDateTime             *time.Time                                                `json:"CutOffDateTime"`
-	Debtor                     *ObCashAccountDebtor4                                     `json:"Debtor"`
-	ExpectedExecutionDateTime  *time.Time                                                `json:"ExpectedExecutionDateTime"`
-	ExpectedSettlementDateTime *time.Time                                                `json:"ExpectedSettlementDateTime"`
+	CutOffDateTime             *time.Time                                                `json:"CutOffDateTime,omitempty"`
+	Debtor                     *ObCashAccountDebtor4                                     `json:"Debtor,omitempty"`
+	ExpectedExecutionDateTime  *time.Time                                                `json:"ExpectedExecutionDateTime,omitempty"`
+	ExpectedSettlementDateTime *time.Time                                                `json:"ExpectedSettlementDateTime,omitempty"`
 	Initiation                 ObWriteDomesticConsentResponse5DataInitiation             `json:"Initiation"`
-	ReadRefundAccount          *ObWriteDomesticConsentResponse5DataReadRefundAccountEnum `json:"ReadRefundAccount"`
-	ScaSupportData             *ObscaSupportData1                                        `json:"SCASupportData"`
+	ReadRefundAccount          *ObWriteDomesticConsentResponse5DataReadRefundAccountEnum `json:"ReadRefundAccount,omitempty"`
+	ScaSupportData             *ObscaSupportData1                                        `json:"SCASupportData,omitempty"`
 	Status                     ObWriteDomesticConsentResponse5DataStatusEnum             `json:"Status"`
 	StatusUpdateDateTime       time.Time                                                 `json:"StatusUpdateDateTime"`
 }
 
 type ObWriteDomesticConsentResponse5 struct {
 	Data  ObWriteDomesticConsentResponse5Data `json:"Data"`
-	Links *Links                              `json:"Links"`
-	Meta  *Meta                               `json:"Meta"`
+	Links *Links                              `json:"Links,omitempty"`
+	Meta  *Meta                               `json:"Meta,omitempty"`
 	Risk  ObRisk1                             `json:"Risk"`
 }

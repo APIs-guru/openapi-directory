@@ -1,5 +1,5 @@
 package shared
 
 type ResetJobBookmarkResponse struct {
-	JobBookmarkEntry *JobBookmarkEntry `json:"JobBookmarkEntry"`
+	JobBookmarkEntry *JobBookmarkEntry `json:"JobBookmarkEntry,omitempty"`
 }

@@ -21,23 +21,23 @@ const (
 )
 
 type EnterpriseCrmFrontendsEventbusProtoEventExecutionInfo struct {
-	ClientID                            *string                                                              `json:"clientId"`
-	CreateTime                          *string                                                              `json:"createTime"`
-	ErrorCode                           *CrmlogErrorCode                                                     `json:"errorCode"`
-	Errors                              []EnterpriseCrmEventbusProtoErrorDetail                              `json:"errors"`
-	EventExecutionDetails               *EnterpriseCrmFrontendsEventbusProtoEventExecutionDetails            `json:"eventExecutionDetails"`
-	EventExecutionInfoID                *string                                                              `json:"eventExecutionInfoId"`
-	ExecutionTraceInfo                  *EnterpriseCrmEventbusProtoExecutionTraceInfo                        `json:"executionTraceInfo"`
-	LastModifiedTime                    *string                                                              `json:"lastModifiedTime"`
-	PostMethod                          *EnterpriseCrmFrontendsEventbusProtoEventExecutionInfoPostMethodEnum `json:"postMethod"`
-	Product                             *EnterpriseCrmFrontendsEventbusProtoEventExecutionInfoProductEnum    `json:"product"`
-	RequestID                           *string                                                              `json:"requestId"`
-	RequestParams                       *EnterpriseCrmFrontendsEventbusProtoEventParameters                  `json:"requestParams"`
-	ResponseParams                      *EnterpriseCrmFrontendsEventbusProtoEventParameters                  `json:"responseParams"`
-	SnapshotNumber                      *string                                                              `json:"snapshotNumber"`
-	Tenant                              *string                                                              `json:"tenant"`
-	TriggerID                           *string                                                              `json:"triggerId"`
-	WorkflowID                          *string                                                              `json:"workflowId"`
-	WorkflowName                        *string                                                              `json:"workflowName"`
-	WorkflowRetryBackoffIntervalSeconds *string                                                              `json:"workflowRetryBackoffIntervalSeconds"`
+	ClientID                            *string                                                              `json:"clientId,omitempty"`
+	CreateTime                          *string                                                              `json:"createTime,omitempty"`
+	ErrorCode                           *CrmlogErrorCode                                                     `json:"errorCode,omitempty"`
+	Errors                              []EnterpriseCrmEventbusProtoErrorDetail                              `json:"errors,omitempty"`
+	EventExecutionDetails               *EnterpriseCrmFrontendsEventbusProtoEventExecutionDetails            `json:"eventExecutionDetails,omitempty"`
+	EventExecutionInfoID                *string                                                              `json:"eventExecutionInfoId,omitempty"`
+	ExecutionTraceInfo                  *EnterpriseCrmEventbusProtoExecutionTraceInfo                        `json:"executionTraceInfo,omitempty"`
+	LastModifiedTime                    *string                                                              `json:"lastModifiedTime,omitempty"`
+	PostMethod                          *EnterpriseCrmFrontendsEventbusProtoEventExecutionInfoPostMethodEnum `json:"postMethod,omitempty"`
+	Product                             *EnterpriseCrmFrontendsEventbusProtoEventExecutionInfoProductEnum    `json:"product,omitempty"`
+	RequestID                           *string                                                              `json:"requestId,omitempty"`
+	RequestParams                       *EnterpriseCrmFrontendsEventbusProtoEventParameters                  `json:"requestParams,omitempty"`
+	ResponseParams                      *EnterpriseCrmFrontendsEventbusProtoEventParameters                  `json:"responseParams,omitempty"`
+	SnapshotNumber                      *string                                                              `json:"snapshotNumber,omitempty"`
+	Tenant                              *string                                                              `json:"tenant,omitempty"`
+	TriggerID                           *string                                                              `json:"triggerId,omitempty"`
+	WorkflowID                          *string                                                              `json:"workflowId,omitempty"`
+	WorkflowName                        *string                                                              `json:"workflowName,omitempty"`
+	WorkflowRetryBackoffIntervalSeconds *string                                                              `json:"workflowRetryBackoffIntervalSeconds,omitempty"`
 }

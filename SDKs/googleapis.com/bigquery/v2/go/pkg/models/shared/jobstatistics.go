@@ -1,29 +1,29 @@
 package shared
 
 type JobStatisticsReservationUsage struct {
-	Name   *string `json:"name"`
-	SlotMs *string `json:"slotMs"`
+	Name   *string `json:"name,omitempty"`
+	SlotMs *string `json:"slotMs,omitempty"`
 }
 
 type JobStatistics struct {
-	CompletionRatio            *float64                        `json:"completionRatio"`
-	Copy                       *JobStatistics5                 `json:"copy"`
-	CreationTime               *string                         `json:"creationTime"`
-	DataMaskingStatistics      *DataMaskingStatistics          `json:"dataMaskingStatistics"`
-	EndTime                    *string                         `json:"endTime"`
-	Extract                    *JobStatistics4                 `json:"extract"`
-	Load                       *JobStatistics3                 `json:"load"`
-	NumChildJobs               *string                         `json:"numChildJobs"`
-	ParentJobID                *string                         `json:"parentJobId"`
-	Query                      *JobStatistics2                 `json:"query"`
-	QuotaDeferments            []string                        `json:"quotaDeferments"`
-	ReservationUsage           []JobStatisticsReservationUsage `json:"reservationUsage"`
-	ReservationID              *string                         `json:"reservation_id"`
-	RowLevelSecurityStatistics *RowLevelSecurityStatistics     `json:"rowLevelSecurityStatistics"`
-	ScriptStatistics           *ScriptStatistics               `json:"scriptStatistics"`
-	SessionInfo                *SessionInfo                    `json:"sessionInfo"`
-	StartTime                  *string                         `json:"startTime"`
-	TotalBytesProcessed        *string                         `json:"totalBytesProcessed"`
-	TotalSlotMs                *string                         `json:"totalSlotMs"`
-	TransactionInfo            *TransactionInfo                `json:"transactionInfo"`
+	CompletionRatio            *float64                        `json:"completionRatio,omitempty"`
+	Copy                       *JobStatistics5                 `json:"copy,omitempty"`
+	CreationTime               *string                         `json:"creationTime,omitempty"`
+	DataMaskingStatistics      *DataMaskingStatistics          `json:"dataMaskingStatistics,omitempty"`
+	EndTime                    *string                         `json:"endTime,omitempty"`
+	Extract                    *JobStatistics4                 `json:"extract,omitempty"`
+	Load                       *JobStatistics3                 `json:"load,omitempty"`
+	NumChildJobs               *string                         `json:"numChildJobs,omitempty"`
+	ParentJobID                *string                         `json:"parentJobId,omitempty"`
+	Query                      *JobStatistics2                 `json:"query,omitempty"`
+	QuotaDeferments            []string                        `json:"quotaDeferments,omitempty"`
+	ReservationUsage           []JobStatisticsReservationUsage `json:"reservationUsage,omitempty"`
+	ReservationID              *string                         `json:"reservation_id,omitempty"`
+	RowLevelSecurityStatistics *RowLevelSecurityStatistics     `json:"rowLevelSecurityStatistics,omitempty"`
+	ScriptStatistics           *ScriptStatistics               `json:"scriptStatistics,omitempty"`
+	SessionInfo                *SessionInfo                    `json:"sessionInfo,omitempty"`
+	StartTime                  *string                         `json:"startTime,omitempty"`
+	TotalBytesProcessed        *string                         `json:"totalBytesProcessed,omitempty"`
+	TotalSlotMs                *string                         `json:"totalSlotMs,omitempty"`
+	TransactionInfo            *TransactionInfo                `json:"transactionInfo,omitempty"`
 }

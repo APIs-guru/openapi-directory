@@ -16,8 +16,8 @@ const (
 )
 
 type LpgsvRequestBody struct {
-	CertificateParameters *LpgsvRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *LpgsvRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                LpgsvRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Lpgsv400ApplicationJSON struct {
-	Error            *Lpgsv400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgsv400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgsv400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgsv400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgsv401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Lpgsv401ApplicationJSON struct {
-	Error            *Lpgsv401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgsv401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgsv401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgsv401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgsv404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Lpgsv404ApplicationJSON struct {
-	Error            *Lpgsv404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgsv404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgsv404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgsv404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgsv500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Lpgsv500ApplicationJSON struct {
-	Error            *Lpgsv500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgsv500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgsv500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgsv500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgsv502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Lpgsv502ApplicationJSON struct {
-	Error            *Lpgsv502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgsv502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgsv502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgsv502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgsv503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Lpgsv503ApplicationJSON struct {
-	Error            *Lpgsv503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgsv503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgsv503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgsv503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgsv504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Lpgsv504ApplicationJSON struct {
-	Error            *Lpgsv504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgsv504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgsv504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgsv504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type LpgsvResponse struct {

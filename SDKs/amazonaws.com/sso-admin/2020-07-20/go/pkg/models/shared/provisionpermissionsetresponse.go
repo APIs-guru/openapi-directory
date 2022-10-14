@@ -1,5 +1,5 @@
 package shared
 
 type ProvisionPermissionSetResponse struct {
-	PermissionSetProvisioningStatus *PermissionSetProvisioningStatus `json:"PermissionSetProvisioningStatus"`
+	PermissionSetProvisioningStatus *PermissionSetProvisioningStatus `json:"PermissionSetProvisioningStatus,omitempty"`
 }

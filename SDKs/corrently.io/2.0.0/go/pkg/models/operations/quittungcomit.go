@@ -1,7 +1,7 @@
 package operations
 
 type QuittungComitRequestBody struct {
-	Account *string `json:"account"`
+	Account *string `json:"account,omitempty"`
 }
 
 type QuittungComitRequest struct {

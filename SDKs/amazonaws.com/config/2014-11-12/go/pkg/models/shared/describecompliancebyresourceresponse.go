@@ -1,6 +1,6 @@
 package shared
 
 type DescribeComplianceByResourceResponse struct {
-	ComplianceByResources []ComplianceByResource `json:"ComplianceByResources"`
-	NextToken             *string                `json:"NextToken"`
+	ComplianceByResources []ComplianceByResource `json:"ComplianceByResources,omitempty"`
+	NextToken             *string                `json:"NextToken,omitempty"`
 }

@@ -23,40 +23,40 @@ type GetCSSTemplatePkRequest struct {
 }
 
 type GetCSSTemplatePk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetCSSTemplatePk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetCSSTemplatePk200ApplicationJSON struct {
-	DescriptionColumns *GetCSSTemplatePk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                               `json:"id"`
-	LabelColumns       *GetCSSTemplatePk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.CSSTemplateRestAPIGet                         `json:"result"`
-	ShowColumns        []string                                              `json:"show_columns"`
-	ShowTitle          *string                                               `json:"show_title"`
+	DescriptionColumns *GetCSSTemplatePk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                               `json:"id,omitempty"`
+	LabelColumns       *GetCSSTemplatePk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.CSSTemplateRestAPIGet                         `json:"result,omitempty"`
+	ShowColumns        []string                                              `json:"show_columns,omitempty"`
+	ShowTitle          *string                                               `json:"show_title,omitempty"`
 }
 
 type GetCSSTemplatePk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplatePk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplatePk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplatePk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplatePk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetCSSTemplatePkResponse struct {

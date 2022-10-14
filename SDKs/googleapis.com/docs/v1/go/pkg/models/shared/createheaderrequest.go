@@ -8,6 +8,6 @@ const (
 )
 
 type CreateHeaderRequest struct {
-	SectionBreakLocation *Location                    `json:"sectionBreakLocation"`
-	Type                 *CreateHeaderRequestTypeEnum `json:"type"`
+	SectionBreakLocation *Location                    `json:"sectionBreakLocation,omitempty"`
+	Type                 *CreateHeaderRequestTypeEnum `json:"type,omitempty"`
 }

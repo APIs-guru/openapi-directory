@@ -1,5 +1,5 @@
 package shared
 
 type DevicesObject struct {
-	Devices []DeviceObject `json:"devices"`
+	Devices []DeviceObject `json:"devices,omitempty"`
 }

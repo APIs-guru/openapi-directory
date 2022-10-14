@@ -9,5 +9,5 @@ const (
 )
 
 type RunTaskRequest struct {
-	ResponseView *RunTaskRequestResponseViewEnum `json:"responseView"`
+	ResponseView *RunTaskRequestResponseViewEnum `json:"responseView,omitempty"`
 }

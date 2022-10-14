@@ -30,9 +30,9 @@ const (
 )
 
 type EnterpriseCrmLoggingGwsFieldLimits struct {
-	LogAction       *EnterpriseCrmLoggingGwsFieldLimitsLogActionEnum     `json:"logAction"`
-	LogType         []EnterpriseCrmLoggingGwsFieldLimitsLogTypeEnum      `json:"logType"`
-	MaxArraySize    *int32                                               `json:"maxArraySize"`
-	MaxStringLength *int32                                               `json:"maxStringLength"`
-	ShortenerType   *EnterpriseCrmLoggingGwsFieldLimitsShortenerTypeEnum `json:"shortenerType"`
+	LogAction       *EnterpriseCrmLoggingGwsFieldLimitsLogActionEnum     `json:"logAction,omitempty"`
+	LogType         []EnterpriseCrmLoggingGwsFieldLimitsLogTypeEnum      `json:"logType,omitempty"`
+	MaxArraySize    *int32                                               `json:"maxArraySize,omitempty"`
+	MaxStringLength *int32                                               `json:"maxStringLength,omitempty"`
+	ShortenerType   *EnterpriseCrmLoggingGwsFieldLimitsShortenerTypeEnum `json:"shortenerType,omitempty"`
 }

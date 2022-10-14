@@ -10,8 +10,8 @@ const (
 )
 
 type SecretVersion struct {
-	CreateTime  *string                 `json:"createTime"`
-	DestroyTime *string                 `json:"destroyTime"`
-	Name        *string                 `json:"name"`
-	State       *SecretVersionStateEnum `json:"state"`
+	CreateTime  *string                 `json:"createTime,omitempty"`
+	DestroyTime *string                 `json:"destroyTime,omitempty"`
+	Name        *string                 `json:"name,omitempty"`
+	State       *SecretVersionStateEnum `json:"state,omitempty"`
 }

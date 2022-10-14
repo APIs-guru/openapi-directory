@@ -1,5 +1,5 @@
 package shared
 
 type AwsEcsServiceDeploymentControllerDetails struct {
-	Type *string `json:"Type"`
+	Type *string `json:"Type,omitempty"`
 }

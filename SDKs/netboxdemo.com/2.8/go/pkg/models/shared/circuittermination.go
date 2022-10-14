@@ -20,17 +20,17 @@ const (
 )
 
 type CircuitTermination struct {
-	Cable                 *NestedCable                                        `json:"cable"`
+	Cable                 *NestedCable                                        `json:"cable,omitempty"`
 	Circuit               NestedCircuit                                       `json:"circuit"`
-	ConnectedEndpoint     map[string]string                                   `json:"connected_endpoint"`
-	ConnectedEndpointType *string                                             `json:"connected_endpoint_type"`
-	ConnectionStatus      *CircuitTerminationConnectionStatusConnectionStatus `json:"connection_status"`
-	Description           *string                                             `json:"description"`
-	ID                    *int64                                              `json:"id"`
+	ConnectedEndpoint     map[string]string                                   `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                                             `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *CircuitTerminationConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
+	Description           *string                                             `json:"description,omitempty"`
+	ID                    *int64                                              `json:"id,omitempty"`
 	PortSpeed             int64                                               `json:"port_speed"`
-	PpInfo                *string                                             `json:"pp_info"`
+	PpInfo                *string                                             `json:"pp_info,omitempty"`
 	Site                  NestedSite                                          `json:"site"`
 	TermSide              CircuitTerminationTermSideTerminationEnum           `json:"term_side"`
-	UpstreamSpeed         *int64                                              `json:"upstream_speed"`
-	XconnectID            *string                                             `json:"xconnect_id"`
+	UpstreamSpeed         *int64                                              `json:"upstream_speed,omitempty"`
+	XconnectID            *string                                             `json:"xconnect_id,omitempty"`
 }

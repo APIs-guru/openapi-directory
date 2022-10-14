@@ -1,7 +1,7 @@
 package shared
 
 type SmsConfiguration struct {
-	AdditionalMessage *string           `json:"additionalMessage"`
+	AdditionalMessage *string           `json:"additionalMessage,omitempty"`
 	Recipients        []RecipientDetail `json:"recipients"`
-	SenderID          *string           `json:"senderId"`
+	SenderID          *string           `json:"senderId,omitempty"`
 }

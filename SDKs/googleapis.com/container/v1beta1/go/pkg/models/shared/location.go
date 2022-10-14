@@ -9,7 +9,7 @@ const (
 )
 
 type Location struct {
-	Name        *string           `json:"name"`
-	Recommended *bool             `json:"recommended"`
-	Type        *LocationTypeEnum `json:"type"`
+	Name        *string           `json:"name,omitempty"`
+	Recommended *bool             `json:"recommended,omitempty"`
+	Type        *LocationTypeEnum `json:"type,omitempty"`
 }

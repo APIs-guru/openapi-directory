@@ -1,16 +1,16 @@
 package shared
 
 type PlayerSearchResult struct {
-	FirstName          *string `json:"firstName"`
-	Height             *int64  `json:"height"`
-	Hometown           *string `json:"hometown"`
-	ID                 *int64  `json:"id"`
-	Jersey             *int64  `json:"jersey"`
-	LastName           *string `json:"lastName"`
-	Name               *string `json:"name"`
-	Position           *string `json:"position"`
-	Team               *string `json:"team"`
-	TeamColor          *string `json:"teamColor"`
-	TeamColorSecondary *string `json:"teamColorSecondary"`
-	Weight             *int64  `json:"weight"`
+	FirstName          *string `json:"firstName,omitempty"`
+	Height             *int64  `json:"height,omitempty"`
+	Hometown           *string `json:"hometown,omitempty"`
+	ID                 *int64  `json:"id,omitempty"`
+	Jersey             *int64  `json:"jersey,omitempty"`
+	LastName           *string `json:"lastName,omitempty"`
+	Name               *string `json:"name,omitempty"`
+	Position           *string `json:"position,omitempty"`
+	Team               *string `json:"team,omitempty"`
+	TeamColor          *string `json:"teamColor,omitempty"`
+	TeamColorSecondary *string `json:"teamColorSecondary,omitempty"`
+	Weight             *int64  `json:"weight,omitempty"`
 }

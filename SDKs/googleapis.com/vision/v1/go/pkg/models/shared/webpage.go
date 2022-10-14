@@ -1,9 +1,9 @@
 package shared
 
 type WebPage struct {
-	FullMatchingImages    []WebImage `json:"fullMatchingImages"`
-	PageTitle             *string    `json:"pageTitle"`
-	PartialMatchingImages []WebImage `json:"partialMatchingImages"`
-	Score                 *float32   `json:"score"`
-	URL                   *string    `json:"url"`
+	FullMatchingImages    []WebImage `json:"fullMatchingImages,omitempty"`
+	PageTitle             *string    `json:"pageTitle,omitempty"`
+	PartialMatchingImages []WebImage `json:"partialMatchingImages,omitempty"`
+	Score                 *float32   `json:"score,omitempty"`
+	URL                   *string    `json:"url,omitempty"`
 }

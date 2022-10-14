@@ -1,9 +1,9 @@
 package shared
 
 type Artifact struct {
-	Arn       *string           `json:"arn"`
-	Extension *string           `json:"extension"`
-	Name      *string           `json:"name"`
-	Type      *ArtifactTypeEnum `json:"type"`
-	URL       *string           `json:"url"`
+	Arn       *string           `json:"arn,omitempty"`
+	Extension *string           `json:"extension,omitempty"`
+	Name      *string           `json:"name,omitempty"`
+	Type      *ArtifactTypeEnum `json:"type,omitempty"`
+	URL       *string           `json:"url,omitempty"`
 }

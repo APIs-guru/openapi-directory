@@ -1,5 +1,5 @@
 package shared
 
 type AwsLambdaFunctionTracingConfig struct {
-	Mode *string `json:"Mode"`
+	Mode *string `json:"Mode,omitempty"`
 }

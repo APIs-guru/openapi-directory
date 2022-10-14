@@ -1,6 +1,6 @@
 package shared
 
 type Filter struct {
-	Key    *FilterNameStringTypeEnum `json:"Key"`
-	Values []string                  `json:"Values"`
+	Key    *FilterNameStringTypeEnum `json:"Key,omitempty"`
+	Values []string                  `json:"Values,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type DataRepositoryTaskStatus struct {
-	FailedCount     *int64     `json:"FailedCount"`
-	LastUpdatedTime *time.Time `json:"LastUpdatedTime"`
-	SucceededCount  *int64     `json:"SucceededCount"`
-	TotalCount      *int64     `json:"TotalCount"`
+	FailedCount     *int64     `json:"FailedCount,omitempty"`
+	LastUpdatedTime *time.Time `json:"LastUpdatedTime,omitempty"`
+	SucceededCount  *int64     `json:"SucceededCount,omitempty"`
+	TotalCount      *int64     `json:"TotalCount,omitempty"`
 }

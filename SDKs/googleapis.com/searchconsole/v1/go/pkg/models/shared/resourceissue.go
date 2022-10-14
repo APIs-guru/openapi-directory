@@ -1,5 +1,5 @@
 package shared
 
 type ResourceIssue struct {
-	BlockedResource *BlockedResource `json:"blockedResource"`
+	BlockedResource *BlockedResource `json:"blockedResource,omitempty"`
 }

@@ -11,10 +11,10 @@ const (
 )
 
 type MacVerifyResponse struct {
-	Name                     *string                               `json:"name"`
-	ProtectionLevel          *MacVerifyResponseProtectionLevelEnum `json:"protectionLevel"`
-	Success                  *bool                                 `json:"success"`
-	VerifiedDataCrc32c       *bool                                 `json:"verifiedDataCrc32c"`
-	VerifiedMacCrc32c        *bool                                 `json:"verifiedMacCrc32c"`
-	VerifiedSuccessIntegrity *bool                                 `json:"verifiedSuccessIntegrity"`
+	Name                     *string                               `json:"name,omitempty"`
+	ProtectionLevel          *MacVerifyResponseProtectionLevelEnum `json:"protectionLevel,omitempty"`
+	Success                  *bool                                 `json:"success,omitempty"`
+	VerifiedDataCrc32c       *bool                                 `json:"verifiedDataCrc32c,omitempty"`
+	VerifiedMacCrc32c        *bool                                 `json:"verifiedMacCrc32c,omitempty"`
+	VerifiedSuccessIntegrity *bool                                 `json:"verifiedSuccessIntegrity,omitempty"`
 }

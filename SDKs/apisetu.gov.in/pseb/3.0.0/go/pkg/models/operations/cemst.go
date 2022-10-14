@@ -18,8 +18,8 @@ const (
 )
 
 type CemstRequestBody struct {
-	CertificateParameters *CemstRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *CemstRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                CemstRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Cemst400ApplicationJSON struct {
-	Error            *Cemst400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cemst400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cemst400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cemst400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cemst401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Cemst401ApplicationJSON struct {
-	Error            *Cemst401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cemst401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cemst401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cemst401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cemst404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Cemst404ApplicationJSON struct {
-	Error            *Cemst404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cemst404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cemst404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cemst404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cemst500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Cemst500ApplicationJSON struct {
-	Error            *Cemst500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cemst500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cemst500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cemst500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cemst502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Cemst502ApplicationJSON struct {
-	Error            *Cemst502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cemst502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cemst502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cemst502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cemst503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Cemst503ApplicationJSON struct {
-	Error            *Cemst503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cemst503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cemst503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cemst503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cemst504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Cemst504ApplicationJSON struct {
-	Error            *Cemst504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cemst504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cemst504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cemst504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type CemstResponse struct {

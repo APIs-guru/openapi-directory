@@ -1,12 +1,12 @@
 package shared
 
 type GoalData struct {
-	GoalCompletionLocation *string  `json:"goalCompletionLocation"`
-	GoalCompletions        *string  `json:"goalCompletions"`
-	GoalIndex              *int32   `json:"goalIndex"`
-	GoalName               *string  `json:"goalName"`
-	GoalPreviousStep1      *string  `json:"goalPreviousStep1"`
-	GoalPreviousStep2      *string  `json:"goalPreviousStep2"`
-	GoalPreviousStep3      *string  `json:"goalPreviousStep3"`
-	GoalValue              *float64 `json:"goalValue"`
+	GoalCompletionLocation *string  `json:"goalCompletionLocation,omitempty"`
+	GoalCompletions        *string  `json:"goalCompletions,omitempty"`
+	GoalIndex              *int32   `json:"goalIndex,omitempty"`
+	GoalName               *string  `json:"goalName,omitempty"`
+	GoalPreviousStep1      *string  `json:"goalPreviousStep1,omitempty"`
+	GoalPreviousStep2      *string  `json:"goalPreviousStep2,omitempty"`
+	GoalPreviousStep3      *string  `json:"goalPreviousStep3,omitempty"`
+	GoalValue              *float64 `json:"goalValue,omitempty"`
 }

@@ -12,11 +12,11 @@ type AttachPolicyHeaders struct {
 }
 
 type AttachPolicyRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachPolicyRequestBodyPolicyReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachPolicyRequestBody struct {

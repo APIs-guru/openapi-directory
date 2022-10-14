@@ -1,6 +1,6 @@
 package shared
 
 type CustomerTextFilter struct {
-	Exact *string `json:"exact"`
-	Fuzzy *string `json:"fuzzy"`
+	Exact *string `json:"exact,omitempty"`
+	Fuzzy *string `json:"fuzzy,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type PublishingOptions struct {
-	PublishCaCert *bool `json:"publishCaCert"`
-	PublishCrl    *bool `json:"publishCrl"`
+	PublishCaCert *bool `json:"publishCaCert,omitempty"`
+	PublishCrl    *bool `json:"publishCrl,omitempty"`
 }

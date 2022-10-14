@@ -1,5 +1,5 @@
 package shared
 
 type ListMatcher struct {
-	OneOf *ValueMatcher `json:"oneOf"`
+	OneOf *ValueMatcher `json:"oneOf,omitempty"`
 }

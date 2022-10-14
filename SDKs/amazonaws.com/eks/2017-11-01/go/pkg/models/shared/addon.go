@@ -5,14 +5,14 @@ import (
 )
 
 type Addon struct {
-	AddonArn              *string           `json:"addonArn"`
-	AddonName             *string           `json:"addonName"`
-	AddonVersion          *string           `json:"addonVersion"`
-	ClusterName           *string           `json:"clusterName"`
-	CreatedAt             *time.Time        `json:"createdAt"`
-	Health                *AddonHealth      `json:"health"`
-	ModifiedAt            *time.Time        `json:"modifiedAt"`
-	ServiceAccountRoleArn *string           `json:"serviceAccountRoleArn"`
-	Status                *AddonStatusEnum  `json:"status"`
-	Tags                  map[string]string `json:"tags"`
+	AddonArn              *string           `json:"addonArn,omitempty"`
+	AddonName             *string           `json:"addonName,omitempty"`
+	AddonVersion          *string           `json:"addonVersion,omitempty"`
+	ClusterName           *string           `json:"clusterName,omitempty"`
+	CreatedAt             *time.Time        `json:"createdAt,omitempty"`
+	Health                *AddonHealth      `json:"health,omitempty"`
+	ModifiedAt            *time.Time        `json:"modifiedAt,omitempty"`
+	ServiceAccountRoleArn *string           `json:"serviceAccountRoleArn,omitempty"`
+	Status                *AddonStatusEnum  `json:"status,omitempty"`
+	Tags                  map[string]string `json:"tags,omitempty"`
 }

@@ -20,19 +20,9 @@ type SasportalCustomersListQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
-type SasportalCustomersListSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-}
-
-type SasportalCustomersListSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-}
-
 type SasportalCustomersListSecurity struct {
-	Option1 *SasportalCustomersListSecurityOption1 `security:"option"`
-	Option2 *SasportalCustomersListSecurityOption2 `security:"option"`
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type SasportalCustomersListRequest struct {

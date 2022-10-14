@@ -12,5 +12,5 @@ type ScalableTarget struct {
 	RoleArn           string                `json:"RoleARN"`
 	ScalableDimension ScalableDimensionEnum `json:"ScalableDimension"`
 	ServiceNamespace  ServiceNamespaceEnum  `json:"ServiceNamespace"`
-	SuspendedState    *SuspendedState       `json:"SuspendedState"`
+	SuspendedState    *SuspendedState       `json:"SuspendedState,omitempty"`
 }

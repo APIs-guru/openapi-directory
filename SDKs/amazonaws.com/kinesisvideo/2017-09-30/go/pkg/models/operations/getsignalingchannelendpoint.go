@@ -15,13 +15,13 @@ type GetSignalingChannelEndpointHeaders struct {
 }
 
 type GetSignalingChannelEndpointRequestBodySingleMasterChannelEndpointConfiguration struct {
-	Protocols []shared.ChannelProtocolEnum `json:"Protocols"`
-	Role      *shared.ChannelRoleEnum      `json:"Role"`
+	Protocols []shared.ChannelProtocolEnum `json:"Protocols,omitempty"`
+	Role      *shared.ChannelRoleEnum      `json:"Role,omitempty"`
 }
 
 type GetSignalingChannelEndpointRequestBody struct {
 	ChannelArn                               string                                                                          `json:"ChannelARN"`
-	SingleMasterChannelEndpointConfiguration *GetSignalingChannelEndpointRequestBodySingleMasterChannelEndpointConfiguration `json:"SingleMasterChannelEndpointConfiguration"`
+	SingleMasterChannelEndpointConfiguration *GetSignalingChannelEndpointRequestBodySingleMasterChannelEndpointConfiguration `json:"SingleMasterChannelEndpointConfiguration,omitempty"`
 }
 
 type GetSignalingChannelEndpointRequest struct {

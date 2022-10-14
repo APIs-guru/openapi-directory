@@ -29,7 +29,7 @@ type UpdateLinodeIPRequest struct {
 }
 
 type UpdateLinodeIPDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateLinodeIPResponse struct {

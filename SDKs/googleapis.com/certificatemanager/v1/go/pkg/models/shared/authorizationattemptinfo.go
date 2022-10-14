@@ -19,8 +19,8 @@ const (
 )
 
 type AuthorizationAttemptInfo struct {
-	Details       *string                                    `json:"details"`
-	Domain        *string                                    `json:"domain"`
-	FailureReason *AuthorizationAttemptInfoFailureReasonEnum `json:"failureReason"`
-	State         *AuthorizationAttemptInfoStateEnum         `json:"state"`
+	Details       *string                                    `json:"details,omitempty"`
+	Domain        *string                                    `json:"domain,omitempty"`
+	FailureReason *AuthorizationAttemptInfoFailureReasonEnum `json:"failureReason,omitempty"`
+	State         *AuthorizationAttemptInfoStateEnum         `json:"state,omitempty"`
 }

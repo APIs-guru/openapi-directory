@@ -1,5 +1,5 @@
 package shared
 
 type DomainDetails struct {
-	DomainName *string `json:"domainName"`
+	DomainName *string `json:"domainName,omitempty"`
 }

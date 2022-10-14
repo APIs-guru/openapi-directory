@@ -1,7 +1,7 @@
 package shared
 
 type GradientRule struct {
-	Maxpoint *InterpolationPoint `json:"maxpoint"`
-	Midpoint *InterpolationPoint `json:"midpoint"`
-	Minpoint *InterpolationPoint `json:"minpoint"`
+	Maxpoint *InterpolationPoint `json:"maxpoint,omitempty"`
+	Midpoint *InterpolationPoint `json:"midpoint,omitempty"`
+	Minpoint *InterpolationPoint `json:"minpoint,omitempty"`
 }

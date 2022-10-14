@@ -17,11 +17,11 @@ const (
 )
 
 type DeleteFirewallRulesRequestBodyInboundRulesSources struct {
-	Addresses        []string `json:"addresses"`
-	DropletIds       []int64  `json:"droplet_ids"`
-	KubernetesIds    []string `json:"kubernetes_ids"`
-	LoadBalancerUids []string `json:"load_balancer_uids"`
-	Tags             []string `json:"tags"`
+	Addresses        []string `json:"addresses,omitempty"`
+	DropletIds       []int64  `json:"droplet_ids,omitempty"`
+	KubernetesIds    []string `json:"kubernetes_ids,omitempty"`
+	LoadBalancerUids []string `json:"load_balancer_uids,omitempty"`
+	Tags             []string `json:"tags,omitempty"`
 }
 
 type DeleteFirewallRulesRequestBodyInboundRules struct {
@@ -45,8 +45,8 @@ type DeleteFirewallRulesRequestBodyOutboundRules struct {
 }
 
 type DeleteFirewallRulesRequestBody struct {
-	InboundRules  []DeleteFirewallRulesRequestBodyInboundRules  `json:"inbound_rules"`
-	OutboundRules []DeleteFirewallRulesRequestBodyOutboundRules `json:"outbound_rules"`
+	InboundRules  []DeleteFirewallRulesRequestBodyInboundRules  `json:"inbound_rules,omitempty"`
+	OutboundRules []DeleteFirewallRulesRequestBodyOutboundRules `json:"outbound_rules,omitempty"`
 }
 
 type DeleteFirewallRulesRequest struct {
@@ -57,7 +57,7 @@ type DeleteFirewallRulesRequest struct {
 type DeleteFirewallRules401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type DeleteFirewallRulesResponse struct {

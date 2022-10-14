@@ -1,14 +1,14 @@
 package shared
 
 type VideoStreamingPlaylistsRedundancies struct {
-	BaseURL *string `json:"baseUrl"`
+	BaseURL *string `json:"baseUrl,omitempty"`
 }
 
 type VideoStreamingPlaylists struct {
-	Files             []interface{}                         `json:"files"`
-	ID                *int64                                `json:"id"`
-	PlaylistURL       *string                               `json:"playlistUrl"`
-	Redundancies      []VideoStreamingPlaylistsRedundancies `json:"redundancies"`
-	SegmentsSha256URL *string                               `json:"segmentsSha256Url"`
-	Type              *int64                                `json:"type"`
+	Files             []interface{}                         `json:"files,omitempty"`
+	ID                *int64                                `json:"id,omitempty"`
+	PlaylistURL       *string                               `json:"playlistUrl,omitempty"`
+	Redundancies      []VideoStreamingPlaylistsRedundancies `json:"redundancies,omitempty"`
+	SegmentsSha256URL *string                               `json:"segmentsSha256Url,omitempty"`
+	Type              *int64                                `json:"type,omitempty"`
 }

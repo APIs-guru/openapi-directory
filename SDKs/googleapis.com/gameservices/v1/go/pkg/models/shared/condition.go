@@ -35,9 +35,9 @@ const (
 )
 
 type Condition struct {
-	Iam    *ConditionIamEnum `json:"iam"`
-	Op     *ConditionOpEnum  `json:"op"`
-	Svc    *string           `json:"svc"`
-	Sys    *ConditionSysEnum `json:"sys"`
-	Values []string          `json:"values"`
+	Iam    *ConditionIamEnum `json:"iam,omitempty"`
+	Op     *ConditionOpEnum  `json:"op,omitempty"`
+	Svc    *string           `json:"svc,omitempty"`
+	Sys    *ConditionSysEnum `json:"sys,omitempty"`
+	Values []string          `json:"values,omitempty"`
 }

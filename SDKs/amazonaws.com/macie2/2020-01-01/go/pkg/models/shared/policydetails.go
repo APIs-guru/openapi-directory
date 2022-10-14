@@ -1,6 +1,6 @@
 package shared
 
 type PolicyDetails struct {
-	Action *FindingAction `json:"action"`
-	Actor  *FindingActor  `json:"actor"`
+	Action *FindingAction `json:"action,omitempty"`
+	Actor  *FindingActor  `json:"actor,omitempty"`
 }

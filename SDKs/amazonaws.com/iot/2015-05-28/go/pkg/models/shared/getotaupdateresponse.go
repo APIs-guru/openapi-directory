@@ -1,5 +1,5 @@
 package shared
 
 type GetOtaUpdateResponse struct {
-	OtaUpdateInfo *OtaUpdateInfo `json:"otaUpdateInfo"`
+	OtaUpdateInfo *OtaUpdateInfo `json:"otaUpdateInfo,omitempty"`
 }

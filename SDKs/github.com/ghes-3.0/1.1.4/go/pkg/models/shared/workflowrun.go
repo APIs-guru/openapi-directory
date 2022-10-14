@@ -26,8 +26,8 @@ type WorkflowRunHeadCommitSimpleCommit struct {
 type WorkflowRun struct {
 	ArtifactsURL     string                            `json:"artifacts_url"`
 	CancelURL        string                            `json:"cancel_url"`
-	CheckSuiteID     *int64                            `json:"check_suite_id"`
-	CheckSuiteNodeID *string                           `json:"check_suite_node_id"`
+	CheckSuiteID     *int64                            `json:"check_suite_id,omitempty"`
+	CheckSuiteNodeID *string                           `json:"check_suite_node_id,omitempty"`
 	CheckSuiteURL    string                            `json:"check_suite_url"`
 	Conclusion       string                            `json:"conclusion"`
 	CreatedAt        time.Time                         `json:"created_at"`
@@ -35,13 +35,13 @@ type WorkflowRun struct {
 	HeadBranch       string                            `json:"head_branch"`
 	HeadCommit       WorkflowRunHeadCommitSimpleCommit `json:"head_commit"`
 	HeadRepository   MinimalRepository                 `json:"head_repository"`
-	HeadRepositoryID *int64                            `json:"head_repository_id"`
+	HeadRepositoryID *int64                            `json:"head_repository_id,omitempty"`
 	HeadSha          string                            `json:"head_sha"`
 	HTMLURL          string                            `json:"html_url"`
 	ID               int64                             `json:"id"`
 	JobsURL          string                            `json:"jobs_url"`
 	LogsURL          string                            `json:"logs_url"`
-	Name             *string                           `json:"name"`
+	Name             *string                           `json:"name,omitempty"`
 	NodeID           string                            `json:"node_id"`
 	PullRequests     []PullRequestMinimal              `json:"pull_requests"`
 	Repository       MinimalRepository                 `json:"repository"`

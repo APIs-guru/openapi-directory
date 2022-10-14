@@ -12,7 +12,7 @@ type PullsDismissReviewPathParams struct {
 }
 
 type PullsDismissReviewRequestBody struct {
-	Event   *string `json:"event"`
+	Event   *string `json:"event,omitempty"`
 	Message string  `json:"message"`
 }
 

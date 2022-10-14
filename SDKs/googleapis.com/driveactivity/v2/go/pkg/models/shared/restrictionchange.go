@@ -19,6 +19,6 @@ const (
 )
 
 type RestrictionChange struct {
-	Feature        *RestrictionChangeFeatureEnum        `json:"feature"`
-	NewRestriction *RestrictionChangeNewRestrictionEnum `json:"newRestriction"`
+	Feature        *RestrictionChangeFeatureEnum        `json:"feature,omitempty"`
+	NewRestriction *RestrictionChangeNewRestrictionEnum `json:"newRestriction,omitempty"`
 }

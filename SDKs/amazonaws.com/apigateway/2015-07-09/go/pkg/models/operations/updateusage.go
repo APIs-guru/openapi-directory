@@ -20,7 +20,7 @@ type UpdateUsageHeaders struct {
 }
 
 type UpdateUsageRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateUsageRequest struct {

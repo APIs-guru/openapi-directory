@@ -20,8 +20,8 @@ type GetUsageStatisticsHeaders struct {
 }
 
 type GetUsageStatisticsRequestBodySortBy struct {
-	Key     *shared.UsageStatisticsSortKeyEnum `json:"key"`
-	OrderBy *shared.OrderByEnum                `json:"orderBy"`
+	Key     *shared.UsageStatisticsSortKeyEnum `json:"key,omitempty"`
+	OrderBy *shared.OrderByEnum                `json:"orderBy,omitempty"`
 }
 
 type GetUsageStatisticsRequestBodyTimeRangeEnum string
@@ -32,11 +32,11 @@ const (
 )
 
 type GetUsageStatisticsRequestBody struct {
-	FilterBy   []shared.UsageStatisticsFilter              `json:"filterBy"`
-	MaxResults *int64                                      `json:"maxResults"`
-	NextToken  *string                                     `json:"nextToken"`
-	SortBy     *GetUsageStatisticsRequestBodySortBy        `json:"sortBy"`
-	TimeRange  *GetUsageStatisticsRequestBodyTimeRangeEnum `json:"timeRange"`
+	FilterBy   []shared.UsageStatisticsFilter              `json:"filterBy,omitempty"`
+	MaxResults *int64                                      `json:"maxResults,omitempty"`
+	NextToken  *string                                     `json:"nextToken,omitempty"`
+	SortBy     *GetUsageStatisticsRequestBodySortBy        `json:"sortBy,omitempty"`
+	TimeRange  *GetUsageStatisticsRequestBodyTimeRangeEnum `json:"timeRange,omitempty"`
 }
 
 type GetUsageStatisticsRequest struct {

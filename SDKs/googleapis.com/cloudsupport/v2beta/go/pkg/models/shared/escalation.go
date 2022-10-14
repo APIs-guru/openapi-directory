@@ -10,6 +10,6 @@ const (
 )
 
 type Escalation struct {
-	Justification *string               `json:"justification"`
-	Reason        *EscalationReasonEnum `json:"reason"`
+	Justification *string               `json:"justification,omitempty"`
+	Reason        *EscalationReasonEnum `json:"reason,omitempty"`
 }

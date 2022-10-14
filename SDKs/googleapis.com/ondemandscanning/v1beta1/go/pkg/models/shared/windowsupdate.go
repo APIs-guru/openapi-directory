@@ -1,11 +1,11 @@
 package shared
 
 type WindowsUpdate struct {
-	Categories             []Category `json:"categories"`
-	Description            *string    `json:"description"`
-	Identity               *Identity  `json:"identity"`
-	KbArticleIds           []string   `json:"kbArticleIds"`
-	LastPublishedTimestamp *string    `json:"lastPublishedTimestamp"`
-	SupportURL             *string    `json:"supportUrl"`
-	Title                  *string    `json:"title"`
+	Categories             []Category `json:"categories,omitempty"`
+	Description            *string    `json:"description,omitempty"`
+	Identity               *Identity  `json:"identity,omitempty"`
+	KbArticleIds           []string   `json:"kbArticleIds,omitempty"`
+	LastPublishedTimestamp *string    `json:"lastPublishedTimestamp,omitempty"`
+	SupportURL             *string    `json:"supportUrl,omitempty"`
+	Title                  *string    `json:"title,omitempty"`
 }

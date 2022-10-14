@@ -1,6 +1,6 @@
 package shared
 
 type RunQueryResponse struct {
-	Batch *QueryResultBatch `json:"batch"`
-	Query *Query            `json:"query"`
+	Batch *QueryResultBatch `json:"batch,omitempty"`
+	Query *Query            `json:"query,omitempty"`
 }

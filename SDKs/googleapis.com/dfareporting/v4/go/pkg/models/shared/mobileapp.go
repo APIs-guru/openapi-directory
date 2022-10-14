@@ -17,9 +17,9 @@ const (
 )
 
 type MobileApp struct {
-	Directory     *MobileAppDirectoryEnum `json:"directory"`
-	ID            *string                 `json:"id"`
-	Kind          *string                 `json:"kind"`
-	PublisherName *string                 `json:"publisherName"`
-	Title         *string                 `json:"title"`
+	Directory     *MobileAppDirectoryEnum `json:"directory,omitempty"`
+	ID            *string                 `json:"id,omitempty"`
+	Kind          *string                 `json:"kind,omitempty"`
+	PublisherName *string                 `json:"publisherName,omitempty"`
+	Title         *string                 `json:"title,omitempty"`
 }

@@ -14,17 +14,17 @@ type ListAllRegionsRequest struct {
 }
 
 type ListAllRegions200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllRegions200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllRegions200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllRegions200ApplicationJSONMeta struct {
@@ -32,7 +32,7 @@ type ListAllRegions200ApplicationJSONMeta struct {
 }
 
 type ListAllRegions200ApplicationJSON struct {
-	Links   *ListAllRegions200ApplicationJSONLinks                                                                         `json:"links"`
+	Links   *ListAllRegions200ApplicationJSONLinks                                                                         `json:"links,omitempty"`
 	Meta    ListAllRegions200ApplicationJSONMeta                                                                           `json:"meta"`
 	Regions []shared.Onev21actionsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesActionsItemsPropertiesRegion `json:"regions"`
 }
@@ -40,7 +40,7 @@ type ListAllRegions200ApplicationJSON struct {
 type ListAllRegions401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllRegionsResponse struct {

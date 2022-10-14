@@ -10,7 +10,7 @@ type GitCreateRefPathParams struct {
 }
 
 type GitCreateRefRequestBody struct {
-	Key *string `json:"key"`
+	Key *string `json:"key,omitempty"`
 	Ref string  `json:"ref"`
 	Sha string  `json:"sha"`
 }

@@ -10,11 +10,11 @@ const (
 )
 
 type BasePlan struct {
-	AutoRenewingBasePlanType *AutoRenewingBasePlanType   `json:"autoRenewingBasePlanType"`
-	BasePlanID               *string                     `json:"basePlanId"`
-	OfferTags                []OfferTag                  `json:"offerTags"`
-	OtherRegionsConfig       *OtherRegionsBasePlanConfig `json:"otherRegionsConfig"`
-	PrepaidBasePlanType      *PrepaidBasePlanType        `json:"prepaidBasePlanType"`
-	RegionalConfigs          []RegionalBasePlanConfig    `json:"regionalConfigs"`
-	State                    *BasePlanStateEnum          `json:"state"`
+	AutoRenewingBasePlanType *AutoRenewingBasePlanType   `json:"autoRenewingBasePlanType,omitempty"`
+	BasePlanID               *string                     `json:"basePlanId,omitempty"`
+	OfferTags                []OfferTag                  `json:"offerTags,omitempty"`
+	OtherRegionsConfig       *OtherRegionsBasePlanConfig `json:"otherRegionsConfig,omitempty"`
+	PrepaidBasePlanType      *PrepaidBasePlanType        `json:"prepaidBasePlanType,omitempty"`
+	RegionalConfigs          []RegionalBasePlanConfig    `json:"regionalConfigs,omitempty"`
+	State                    *BasePlanStateEnum          `json:"state,omitempty"`
 }

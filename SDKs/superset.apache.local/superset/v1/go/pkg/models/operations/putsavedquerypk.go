@@ -19,27 +19,27 @@ type PutSavedQueryPkRequest struct {
 }
 
 type PutSavedQueryPk200ApplicationJSON struct {
-	Result *shared.SavedQueryRestAPIPut `json:"result"`
+	Result *shared.SavedQueryRestAPIPut `json:"result,omitempty"`
 }
 
 type PutSavedQueryPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutSavedQueryPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutSavedQueryPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutSavedQueryPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutSavedQueryPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutSavedQueryPkResponse struct {

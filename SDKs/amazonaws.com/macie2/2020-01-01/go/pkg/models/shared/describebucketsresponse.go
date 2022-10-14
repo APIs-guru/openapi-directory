@@ -1,6 +1,6 @@
 package shared
 
 type DescribeBucketsResponse struct {
-	Buckets   []BucketMetadata `json:"buckets"`
-	NextToken *string          `json:"nextToken"`
+	Buckets   []BucketMetadata `json:"buckets,omitempty"`
+	NextToken *string          `json:"nextToken,omitempty"`
 }

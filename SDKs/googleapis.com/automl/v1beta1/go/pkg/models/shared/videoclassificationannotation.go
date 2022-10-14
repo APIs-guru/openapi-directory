@@ -1,7 +1,7 @@
 package shared
 
 type VideoClassificationAnnotation struct {
-	ClassificationAnnotation *ClassificationAnnotation `json:"classificationAnnotation"`
-	TimeSegment              *TimeSegment              `json:"timeSegment"`
-	Type                     *string                   `json:"type"`
+	ClassificationAnnotation *ClassificationAnnotation `json:"classificationAnnotation,omitempty"`
+	TimeSegment              *TimeSegment              `json:"timeSegment,omitempty"`
+	Type                     *string                   `json:"type,omitempty"`
 }

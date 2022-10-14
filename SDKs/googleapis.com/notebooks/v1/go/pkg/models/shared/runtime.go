@@ -25,13 +25,13 @@ const (
 )
 
 type Runtime struct {
-	AccessConfig   *RuntimeAccessConfig    `json:"accessConfig"`
-	CreateTime     *string                 `json:"createTime"`
-	HealthState    *RuntimeHealthStateEnum `json:"healthState"`
-	Metrics        *RuntimeMetrics         `json:"metrics"`
-	Name           *string                 `json:"name"`
-	SoftwareConfig *RuntimeSoftwareConfig  `json:"softwareConfig"`
-	State          *RuntimeStateEnum       `json:"state"`
-	UpdateTime     *string                 `json:"updateTime"`
-	VirtualMachine *VirtualMachine         `json:"virtualMachine"`
+	AccessConfig   *RuntimeAccessConfig    `json:"accessConfig,omitempty"`
+	CreateTime     *string                 `json:"createTime,omitempty"`
+	HealthState    *RuntimeHealthStateEnum `json:"healthState,omitempty"`
+	Metrics        *RuntimeMetrics         `json:"metrics,omitempty"`
+	Name           *string                 `json:"name,omitempty"`
+	SoftwareConfig *RuntimeSoftwareConfig  `json:"softwareConfig,omitempty"`
+	State          *RuntimeStateEnum       `json:"state,omitempty"`
+	UpdateTime     *string                 `json:"updateTime,omitempty"`
+	VirtualMachine *VirtualMachine         `json:"virtualMachine,omitempty"`
 }

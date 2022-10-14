@@ -5,13 +5,13 @@ import (
 )
 
 type SharedDirectory struct {
-	CreatedDateTime     *time.Time       `json:"CreatedDateTime"`
-	LastUpdatedDateTime *time.Time       `json:"LastUpdatedDateTime"`
-	OwnerAccountID      *string          `json:"OwnerAccountId"`
-	OwnerDirectoryID    *string          `json:"OwnerDirectoryId"`
-	ShareMethod         *ShareMethodEnum `json:"ShareMethod"`
-	ShareNotes          *string          `json:"ShareNotes"`
-	ShareStatus         *ShareStatusEnum `json:"ShareStatus"`
-	SharedAccountID     *string          `json:"SharedAccountId"`
-	SharedDirectoryID   *string          `json:"SharedDirectoryId"`
+	CreatedDateTime     *time.Time       `json:"CreatedDateTime,omitempty"`
+	LastUpdatedDateTime *time.Time       `json:"LastUpdatedDateTime,omitempty"`
+	OwnerAccountID      *string          `json:"OwnerAccountId,omitempty"`
+	OwnerDirectoryID    *string          `json:"OwnerDirectoryId,omitempty"`
+	ShareMethod         *ShareMethodEnum `json:"ShareMethod,omitempty"`
+	ShareNotes          *string          `json:"ShareNotes,omitempty"`
+	ShareStatus         *ShareStatusEnum `json:"ShareStatus,omitempty"`
+	SharedAccountID     *string          `json:"SharedAccountId,omitempty"`
+	SharedDirectoryID   *string          `json:"SharedDirectoryId,omitempty"`
 }

@@ -13,20 +13,20 @@ type ListKubernetesAssociatedResourcesRequest struct {
 }
 
 type ListKubernetesAssociatedResources200ApplicationJSONLoadBalancers struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type ListKubernetesAssociatedResources200ApplicationJSON struct {
-	LoadBalancers   []ListKubernetesAssociatedResources200ApplicationJSONLoadBalancers                                                                                                    `json:"load_balancers"`
-	VolumeSnapshots []shared.Onev21kubernetes1clusters1Percent7BclusterIDPercent7D1destroyWithAssociatedResourcesGetResponses200ContentApplication1jsonSchemaPropertiesLoadBalancersItems `json:"volume_snapshots"`
-	Volumes         []shared.Onev21kubernetes1clusters1Percent7BclusterIDPercent7D1destroyWithAssociatedResourcesGetResponses200ContentApplication1jsonSchemaPropertiesLoadBalancersItems `json:"volumes"`
+	LoadBalancers   []ListKubernetesAssociatedResources200ApplicationJSONLoadBalancers                                                                                                    `json:"load_balancers,omitempty"`
+	VolumeSnapshots []shared.Onev21kubernetes1clusters1Percent7BclusterIDPercent7D1destroyWithAssociatedResourcesGetResponses200ContentApplication1jsonSchemaPropertiesLoadBalancersItems `json:"volume_snapshots,omitempty"`
+	Volumes         []shared.Onev21kubernetes1clusters1Percent7BclusterIDPercent7D1destroyWithAssociatedResourcesGetResponses200ContentApplication1jsonSchemaPropertiesLoadBalancersItems `json:"volumes,omitempty"`
 }
 
 type ListKubernetesAssociatedResources401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListKubernetesAssociatedResourcesResponse struct {

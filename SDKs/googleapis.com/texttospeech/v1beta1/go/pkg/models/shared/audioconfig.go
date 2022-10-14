@@ -13,10 +13,10 @@ const (
 )
 
 type AudioConfig struct {
-	AudioEncoding    *AudioConfigAudioEncodingEnum `json:"audioEncoding"`
-	EffectsProfileID []string                      `json:"effectsProfileId"`
-	Pitch            *float64                      `json:"pitch"`
-	SampleRateHertz  *int32                        `json:"sampleRateHertz"`
-	SpeakingRate     *float64                      `json:"speakingRate"`
-	VolumeGainDb     *float64                      `json:"volumeGainDb"`
+	AudioEncoding    *AudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
+	EffectsProfileID []string                      `json:"effectsProfileId,omitempty"`
+	Pitch            *float64                      `json:"pitch,omitempty"`
+	SampleRateHertz  *int32                        `json:"sampleRateHertz,omitempty"`
+	SpeakingRate     *float64                      `json:"speakingRate,omitempty"`
+	VolumeGainDb     *float64                      `json:"volumeGainDb,omitempty"`
 }

@@ -10,14 +10,14 @@ const (
 )
 
 type Item struct {
-	ACL            *ItemACL            `json:"acl"`
-	Content        *ItemContent        `json:"content"`
-	ItemType       *ItemItemTypeEnum   `json:"itemType"`
-	Metadata       *ItemMetadata       `json:"metadata"`
-	Name           *string             `json:"name"`
-	Payload        *string             `json:"payload"`
-	Queue          *string             `json:"queue"`
-	Status         *ItemStatus         `json:"status"`
-	StructuredData *ItemStructuredData `json:"structuredData"`
-	Version        *string             `json:"version"`
+	ACL            *ItemACL            `json:"acl,omitempty"`
+	Content        *ItemContent        `json:"content,omitempty"`
+	ItemType       *ItemItemTypeEnum   `json:"itemType,omitempty"`
+	Metadata       *ItemMetadata       `json:"metadata,omitempty"`
+	Name           *string             `json:"name,omitempty"`
+	Payload        *string             `json:"payload,omitempty"`
+	Queue          *string             `json:"queue,omitempty"`
+	Status         *ItemStatus         `json:"status,omitempty"`
+	StructuredData *ItemStructuredData `json:"structuredData,omitempty"`
+	Version        *string             `json:"version,omitempty"`
 }

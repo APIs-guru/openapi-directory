@@ -1,7 +1,7 @@
 package shared
 
 type GetGroupCertificateConfigurationResponse struct {
-	CertificateAuthorityExpiryInMilliseconds *string `json:"CertificateAuthorityExpiryInMilliseconds"`
-	CertificateExpiryInMilliseconds          *string `json:"CertificateExpiryInMilliseconds"`
-	GroupID                                  *string `json:"GroupId"`
+	CertificateAuthorityExpiryInMilliseconds *string `json:"CertificateAuthorityExpiryInMilliseconds,omitempty"`
+	CertificateExpiryInMilliseconds          *string `json:"CertificateExpiryInMilliseconds,omitempty"`
+	GroupID                                  *string `json:"GroupId,omitempty"`
 }

@@ -19,8 +19,8 @@ type UpdateDetectorModelHeaders struct {
 }
 
 type UpdateDetectorModelRequestBodyDetectorModelDefinition struct {
-	InitialStateName *string        `json:"initialStateName"`
-	States           []shared.State `json:"states"`
+	InitialStateName *string        `json:"initialStateName,omitempty"`
+	States           []shared.State `json:"states,omitempty"`
 }
 
 type UpdateDetectorModelRequestBodyEvaluationMethodEnum string
@@ -32,8 +32,8 @@ const (
 
 type UpdateDetectorModelRequestBody struct {
 	DetectorModelDefinition  UpdateDetectorModelRequestBodyDetectorModelDefinition `json:"detectorModelDefinition"`
-	DetectorModelDescription *string                                               `json:"detectorModelDescription"`
-	EvaluationMethod         *UpdateDetectorModelRequestBodyEvaluationMethodEnum   `json:"evaluationMethod"`
+	DetectorModelDescription *string                                               `json:"detectorModelDescription,omitempty"`
+	EvaluationMethod         *UpdateDetectorModelRequestBodyEvaluationMethodEnum   `json:"evaluationMethod,omitempty"`
 	RoleArn                  string                                                `json:"roleArn"`
 }
 

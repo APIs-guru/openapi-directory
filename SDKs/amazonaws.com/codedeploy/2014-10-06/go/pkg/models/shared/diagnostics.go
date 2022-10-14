@@ -1,8 +1,8 @@
 package shared
 
 type Diagnostics struct {
-	ErrorCode  *LifecycleErrorCodeEnum `json:"errorCode"`
-	LogTail    *string                 `json:"logTail"`
-	Message    *string                 `json:"message"`
-	ScriptName *string                 `json:"scriptName"`
+	ErrorCode  *LifecycleErrorCodeEnum `json:"errorCode,omitempty"`
+	LogTail    *string                 `json:"logTail,omitempty"`
+	Message    *string                 `json:"message,omitempty"`
+	ScriptName *string                 `json:"scriptName,omitempty"`
 }

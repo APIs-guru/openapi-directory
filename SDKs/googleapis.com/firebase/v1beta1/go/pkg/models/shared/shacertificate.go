@@ -9,7 +9,7 @@ const (
 )
 
 type ShaCertificate struct {
-	CertType *ShaCertificateCertTypeEnum `json:"certType"`
-	Name     *string                     `json:"name"`
-	ShaHash  *string                     `json:"shaHash"`
+	CertType *ShaCertificateCertTypeEnum `json:"certType,omitempty"`
+	Name     *string                     `json:"name,omitempty"`
+	ShaHash  *string                     `json:"shaHash,omitempty"`
 }

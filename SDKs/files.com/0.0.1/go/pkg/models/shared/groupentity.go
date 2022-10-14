@@ -1,10 +1,10 @@
 package shared
 
 type GroupEntity struct {
-	AdminIds  *string  `json:"admin_ids"`
-	ID        *int32   `json:"id"`
-	Name      *string  `json:"name"`
-	Notes     *string  `json:"notes"`
-	UserIds   []int32  `json:"user_ids"`
-	Usernames []string `json:"usernames"`
+	AdminIds  *string  `json:"admin_ids,omitempty"`
+	ID        *int32   `json:"id,omitempty"`
+	Name      *string  `json:"name,omitempty"`
+	Notes     *string  `json:"notes,omitempty"`
+	UserIds   []int32  `json:"user_ids,omitempty"`
+	Usernames []string `json:"usernames,omitempty"`
 }

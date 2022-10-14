@@ -1,7 +1,7 @@
 package shared
 
 type OrderPickupDetails struct {
-	Address    *OrderAddress                 `json:"address"`
-	Collectors []OrderPickupDetailsCollector `json:"collectors"`
-	LocationID *string                       `json:"locationId"`
+	Address    *OrderAddress                 `json:"address,omitempty"`
+	Collectors []OrderPickupDetailsCollector `json:"collectors,omitempty"`
+	LocationID *string                       `json:"locationId,omitempty"`
 }

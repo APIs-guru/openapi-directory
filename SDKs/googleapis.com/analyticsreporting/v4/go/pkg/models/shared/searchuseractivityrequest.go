@@ -12,10 +12,10 @@ const (
 )
 
 type SearchUserActivityRequest struct {
-	ActivityTypes []SearchUserActivityRequestActivityTypesEnum `json:"activityTypes"`
-	DateRange     *DateRange                                   `json:"dateRange"`
-	PageSize      *int32                                       `json:"pageSize"`
-	PageToken     *string                                      `json:"pageToken"`
-	User          *User                                        `json:"user"`
-	ViewID        *string                                      `json:"viewId"`
+	ActivityTypes []SearchUserActivityRequestActivityTypesEnum `json:"activityTypes,omitempty"`
+	DateRange     *DateRange                                   `json:"dateRange,omitempty"`
+	PageSize      *int32                                       `json:"pageSize,omitempty"`
+	PageToken     *string                                      `json:"pageToken,omitempty"`
+	User          *User                                        `json:"user,omitempty"`
+	ViewID        *string                                      `json:"viewId,omitempty"`
 }

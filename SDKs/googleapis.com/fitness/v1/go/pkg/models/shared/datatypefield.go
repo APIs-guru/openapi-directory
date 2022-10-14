@@ -13,7 +13,7 @@ const (
 )
 
 type DataTypeField struct {
-	Format   *DataTypeFieldFormatEnum `json:"format"`
-	Name     *string                  `json:"name"`
-	Optional *bool                    `json:"optional"`
+	Format   *DataTypeFieldFormatEnum `json:"format,omitempty"`
+	Name     *string                  `json:"name,omitempty"`
+	Optional *bool                    `json:"optional,omitempty"`
 }

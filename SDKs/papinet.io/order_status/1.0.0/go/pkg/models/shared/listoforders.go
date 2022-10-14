@@ -1,6 +1,6 @@
 package shared
 
 type ListOfOrders struct {
-	Links  *PaginationLinks `json:"links"`
-	Orders []OrderHeader    `json:"orders"`
+	Links  *PaginationLinks `json:"links,omitempty"`
+	Orders []OrderHeader    `json:"orders,omitempty"`
 }

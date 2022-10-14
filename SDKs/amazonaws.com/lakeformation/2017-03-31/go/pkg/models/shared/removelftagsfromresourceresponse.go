@@ -1,5 +1,5 @@
 package shared
 
 type RemoveLfTagsFromResourceResponse struct {
-	Failures []LfTagError `json:"Failures"`
+	Failures []LfTagError `json:"Failures,omitempty"`
 }

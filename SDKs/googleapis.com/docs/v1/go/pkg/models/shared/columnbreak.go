@@ -1,8 +1,8 @@
 package shared
 
 type ColumnBreak struct {
-	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds"`
-	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges"`
-	TextStyle                 *TextStyle                    `json:"textStyle"`
+	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds,omitempty"`
+	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges,omitempty"`
+	TextStyle                 *TextStyle                    `json:"textStyle,omitempty"`
 }

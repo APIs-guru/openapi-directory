@@ -1,7 +1,7 @@
 package shared
 
 type VMImage struct {
-	ImageFamily *string `json:"imageFamily"`
-	ImageName   *string `json:"imageName"`
-	Project     *string `json:"project"`
+	ImageFamily *string `json:"imageFamily,omitempty"`
+	ImageName   *string `json:"imageName,omitempty"`
+	Project     *string `json:"project,omitempty"`
 }

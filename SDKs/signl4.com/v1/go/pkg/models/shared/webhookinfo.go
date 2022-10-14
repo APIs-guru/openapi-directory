@@ -1,10 +1,10 @@
 package shared
 
 type WebhookInfo struct {
-	Enabled         *bool   `json:"enabled"`
-	ExternalAddress *string `json:"externalAddress"`
-	ID              *string `json:"id"`
-	Name            *string `json:"name"`
-	SubscriptionID  *string `json:"subscriptionId"`
-	TeamID          *string `json:"teamId"`
+	Enabled         *bool   `json:"enabled,omitempty"`
+	ExternalAddress *string `json:"externalAddress,omitempty"`
+	ID              *string `json:"id,omitempty"`
+	Name            *string `json:"name,omitempty"`
+	SubscriptionID  *string `json:"subscriptionId,omitempty"`
+	TeamID          *string `json:"teamId,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ProductSubscriptionCost struct {
-	Amount       *Price  `json:"amount"`
-	Period       *string `json:"period"`
-	PeriodLength *string `json:"periodLength"`
+	Amount       *Price  `json:"amount,omitempty"`
+	Period       *string `json:"period,omitempty"`
+	PeriodLength *string `json:"periodLength,omitempty"`
 }

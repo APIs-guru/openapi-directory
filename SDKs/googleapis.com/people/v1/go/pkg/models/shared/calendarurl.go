@@ -1,8 +1,8 @@
 package shared
 
 type CalendarURL struct {
-	FormattedType *string        `json:"formattedType"`
-	Metadata      *FieldMetadata `json:"metadata"`
-	Type          *string        `json:"type"`
-	URL           *string        `json:"url"`
+	FormattedType *string        `json:"formattedType,omitempty"`
+	Metadata      *FieldMetadata `json:"metadata,omitempty"`
+	Type          *string        `json:"type,omitempty"`
+	URL           *string        `json:"url,omitempty"`
 }

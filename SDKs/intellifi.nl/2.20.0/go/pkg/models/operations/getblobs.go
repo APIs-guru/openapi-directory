@@ -36,13 +36,13 @@ type GetBlobsRequest struct {
 }
 
 type GetBlobs200ApplicationJSON struct {
-	Count           *int64        `json:"count"`
-	CountCurrent    *int64        `json:"count_current"`
-	IsLimited       *bool         `json:"is_limited"`
-	NextURL         *string       `json:"next_url"`
-	QueryDurationMs *int64        `json:"query_duration_ms"`
-	Results         []shared.Blob `json:"results"`
-	URL             *string       `json:"url"`
+	Count           *int64        `json:"count,omitempty"`
+	CountCurrent    *int64        `json:"count_current,omitempty"`
+	IsLimited       *bool         `json:"is_limited,omitempty"`
+	NextURL         *string       `json:"next_url,omitempty"`
+	QueryDurationMs *int64        `json:"query_duration_ms,omitempty"`
+	Results         []shared.Blob `json:"results,omitempty"`
+	URL             *string       `json:"url,omitempty"`
 }
 
 type GetBlobsResponse struct {

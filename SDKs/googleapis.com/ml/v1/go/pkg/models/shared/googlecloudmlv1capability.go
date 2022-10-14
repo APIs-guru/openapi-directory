@@ -26,6 +26,6 @@ const (
 )
 
 type GoogleCloudMlV1Capability struct {
-	AvailableAccelerators []GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum `json:"availableAccelerators"`
-	Type                  *GoogleCloudMlV1CapabilityTypeEnum                   `json:"type"`
+	AvailableAccelerators []GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum `json:"availableAccelerators,omitempty"`
+	Type                  *GoogleCloudMlV1CapabilityTypeEnum                   `json:"type,omitempty"`
 }

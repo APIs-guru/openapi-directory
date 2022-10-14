@@ -11,7 +11,7 @@ const (
 )
 
 type BuildApproval struct {
-	Config *ApprovalConfig         `json:"config"`
-	Result *ApprovalResult         `json:"result"`
-	State  *BuildApprovalStateEnum `json:"state"`
+	Config *ApprovalConfig         `json:"config,omitempty"`
+	Result *ApprovalResult         `json:"result,omitempty"`
+	State  *BuildApprovalStateEnum `json:"state,omitempty"`
 }

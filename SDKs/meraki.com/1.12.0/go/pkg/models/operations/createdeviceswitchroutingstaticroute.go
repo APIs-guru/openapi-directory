@@ -5,10 +5,10 @@ type CreateDeviceSwitchRoutingStaticRoutePathParams struct {
 }
 
 type CreateDeviceSwitchRoutingStaticRouteRequestBody struct {
-	AdvertiseViaOspfEnabled     *bool   `json:"advertiseViaOspfEnabled"`
-	Name                        *string `json:"name"`
+	AdvertiseViaOspfEnabled     *bool   `json:"advertiseViaOspfEnabled,omitempty"`
+	Name                        *string `json:"name,omitempty"`
 	NextHopIP                   string  `json:"nextHopIp"`
-	PreferOverOspfRoutesEnabled *bool   `json:"preferOverOspfRoutesEnabled"`
+	PreferOverOspfRoutesEnabled *bool   `json:"preferOverOspfRoutesEnabled,omitempty"`
 	Subnet                      string  `json:"subnet"`
 }
 

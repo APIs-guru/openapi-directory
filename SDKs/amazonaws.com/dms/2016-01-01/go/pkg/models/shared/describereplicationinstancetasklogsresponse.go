@@ -1,7 +1,7 @@
 package shared
 
 type DescribeReplicationInstanceTaskLogsResponse struct {
-	Marker                      *string                      `json:"Marker"`
-	ReplicationInstanceArn      *string                      `json:"ReplicationInstanceArn"`
-	ReplicationInstanceTaskLogs []ReplicationInstanceTaskLog `json:"ReplicationInstanceTaskLogs"`
+	Marker                      *string                      `json:"Marker,omitempty"`
+	ReplicationInstanceArn      *string                      `json:"ReplicationInstanceArn,omitempty"`
+	ReplicationInstanceTaskLogs []ReplicationInstanceTaskLog `json:"ReplicationInstanceTaskLogs,omitempty"`
 }

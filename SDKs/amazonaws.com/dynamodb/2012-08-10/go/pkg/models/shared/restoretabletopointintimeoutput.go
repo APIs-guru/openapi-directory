@@ -1,5 +1,5 @@
 package shared
 
 type RestoreTableToPointInTimeOutput struct {
-	TableDescription *TableDescription `json:"TableDescription"`
+	TableDescription *TableDescription `json:"TableDescription,omitempty"`
 }

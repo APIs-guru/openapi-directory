@@ -1,5 +1,5 @@
 package shared
 
 type BatchArrayProperties struct {
-	Size *int64 `json:"Size"`
+	Size *int64 `json:"Size,omitempty"`
 }

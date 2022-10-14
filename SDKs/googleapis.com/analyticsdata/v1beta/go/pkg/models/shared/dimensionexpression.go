@@ -1,7 +1,7 @@
 package shared
 
 type DimensionExpression struct {
-	Concatenate *ConcatenateExpression `json:"concatenate"`
-	LowerCase   *CaseExpression        `json:"lowerCase"`
-	UpperCase   *CaseExpression        `json:"upperCase"`
+	Concatenate *ConcatenateExpression `json:"concatenate,omitempty"`
+	LowerCase   *CaseExpression        `json:"lowerCase,omitempty"`
+	UpperCase   *CaseExpression        `json:"upperCase,omitempty"`
 }

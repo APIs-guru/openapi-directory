@@ -1,5 +1,5 @@
 package shared
 
 type CreateDirectConnectGatewayAssociationResult struct {
-	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `json:"directConnectGatewayAssociation"`
+	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `json:"directConnectGatewayAssociation,omitempty"`
 }

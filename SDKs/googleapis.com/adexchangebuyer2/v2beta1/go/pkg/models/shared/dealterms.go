@@ -9,12 +9,12 @@ const (
 )
 
 type DealTerms struct {
-	BrandingType                 *DealTermsBrandingTypeEnum    `json:"brandingType"`
-	Description                  *string                       `json:"description"`
-	EstimatedGrossSpend          *Price                        `json:"estimatedGrossSpend"`
-	EstimatedImpressionsPerDay   *string                       `json:"estimatedImpressionsPerDay"`
-	GuaranteedFixedPriceTerms    *GuaranteedFixedPriceTerms    `json:"guaranteedFixedPriceTerms"`
-	NonGuaranteedAuctionTerms    *NonGuaranteedAuctionTerms    `json:"nonGuaranteedAuctionTerms"`
-	NonGuaranteedFixedPriceTerms *NonGuaranteedFixedPriceTerms `json:"nonGuaranteedFixedPriceTerms"`
-	SellerTimeZone               *string                       `json:"sellerTimeZone"`
+	BrandingType                 *DealTermsBrandingTypeEnum    `json:"brandingType,omitempty"`
+	Description                  *string                       `json:"description,omitempty"`
+	EstimatedGrossSpend          *Price                        `json:"estimatedGrossSpend,omitempty"`
+	EstimatedImpressionsPerDay   *string                       `json:"estimatedImpressionsPerDay,omitempty"`
+	GuaranteedFixedPriceTerms    *GuaranteedFixedPriceTerms    `json:"guaranteedFixedPriceTerms,omitempty"`
+	NonGuaranteedAuctionTerms    *NonGuaranteedAuctionTerms    `json:"nonGuaranteedAuctionTerms,omitempty"`
+	NonGuaranteedFixedPriceTerms *NonGuaranteedFixedPriceTerms `json:"nonGuaranteedFixedPriceTerms,omitempty"`
+	SellerTimeZone               *string                       `json:"sellerTimeZone,omitempty"`
 }

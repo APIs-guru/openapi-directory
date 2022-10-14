@@ -1,6 +1,6 @@
 package shared
 
 type ConversationResponse struct {
-	Data    *Conversation `json:"data"`
-	Success *bool         `json:"success"`
+	Data    *Conversation `json:"data,omitempty"`
+	Success *bool         `json:"success,omitempty"`
 }

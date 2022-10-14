@@ -5,10 +5,10 @@ import (
 )
 
 type DatasetImportJobSummary struct {
-	CreationDateTime    *time.Time `json:"creationDateTime"`
-	DatasetImportJobArn *string    `json:"datasetImportJobArn"`
-	FailureReason       *string    `json:"failureReason"`
-	JobName             *string    `json:"jobName"`
-	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime"`
-	Status              *string    `json:"status"`
+	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
+	DatasetImportJobArn *string    `json:"datasetImportJobArn,omitempty"`
+	FailureReason       *string    `json:"failureReason,omitempty"`
+	JobName             *string    `json:"jobName,omitempty"`
+	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	Status              *string    `json:"status,omitempty"`
 }

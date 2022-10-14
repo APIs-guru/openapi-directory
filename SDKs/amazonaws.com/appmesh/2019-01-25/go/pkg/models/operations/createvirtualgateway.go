@@ -23,15 +23,15 @@ type CreateVirtualGatewayHeaders struct {
 }
 
 type CreateVirtualGatewayRequestBodySpec struct {
-	BackendDefaults *shared.VirtualGatewayBackendDefaults `json:"backendDefaults"`
-	Listeners       []shared.VirtualGatewayListener       `json:"listeners"`
-	Logging         *shared.VirtualGatewayLogging         `json:"logging"`
+	BackendDefaults *shared.VirtualGatewayBackendDefaults `json:"backendDefaults,omitempty"`
+	Listeners       []shared.VirtualGatewayListener       `json:"listeners,omitempty"`
+	Logging         *shared.VirtualGatewayLogging         `json:"logging,omitempty"`
 }
 
 type CreateVirtualGatewayRequestBody struct {
-	ClientToken        *string                             `json:"clientToken"`
+	ClientToken        *string                             `json:"clientToken,omitempty"`
 	Spec               CreateVirtualGatewayRequestBodySpec `json:"spec"`
-	Tags               []shared.TagRef                     `json:"tags"`
+	Tags               []shared.TagRef                     `json:"tags,omitempty"`
 	VirtualGatewayName string                              `json:"virtualGatewayName"`
 }
 

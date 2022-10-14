@@ -5,9 +5,9 @@ import (
 )
 
 type UserProfileDetails struct {
-	CreationTime     *time.Time             `json:"CreationTime"`
-	DomainID         *string                `json:"DomainId"`
-	LastModifiedTime *time.Time             `json:"LastModifiedTime"`
-	Status           *UserProfileStatusEnum `json:"Status"`
-	UserProfileName  *string                `json:"UserProfileName"`
+	CreationTime     *time.Time             `json:"CreationTime,omitempty"`
+	DomainID         *string                `json:"DomainId,omitempty"`
+	LastModifiedTime *time.Time             `json:"LastModifiedTime,omitempty"`
+	Status           *UserProfileStatusEnum `json:"Status,omitempty"`
+	UserProfileName  *string                `json:"UserProfileName,omitempty"`
 }

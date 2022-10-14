@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudRetailV2SearchRequestFacetSpec struct {
-	EnableDynamicPosition *bool                                              `json:"enableDynamicPosition"`
-	ExcludedFilterKeys    []string                                           `json:"excludedFilterKeys"`
-	FacetKey              *GoogleCloudRetailV2SearchRequestFacetSpecFacetKey `json:"facetKey"`
-	Limit                 *int32                                             `json:"limit"`
+	EnableDynamicPosition *bool                                              `json:"enableDynamicPosition,omitempty"`
+	ExcludedFilterKeys    []string                                           `json:"excludedFilterKeys,omitempty"`
+	FacetKey              *GoogleCloudRetailV2SearchRequestFacetSpecFacetKey `json:"facetKey,omitempty"`
+	Limit                 *int32                                             `json:"limit,omitempty"`
 }

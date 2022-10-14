@@ -13,8 +13,8 @@ const (
 )
 
 type PostServersIDActionsEnableRescueRequestBody struct {
-	SSHKeys []int64                                              `json:"ssh_keys"`
-	Type    *PostServersIDActionsEnableRescueRequestBodyTypeEnum `json:"type"`
+	SSHKeys []int64                                              `json:"ssh_keys,omitempty"`
+	Type    *PostServersIDActionsEnableRescueRequestBodyTypeEnum `json:"type,omitempty"`
 }
 
 type PostServersIDActionsEnableRescueRequest struct {
@@ -52,8 +52,8 @@ type PostServersIDActionsEnableRescue201ApplicationJSONActionAction struct {
 }
 
 type PostServersIDActionsEnableRescue201ApplicationJSON struct {
-	Action       *PostServersIDActionsEnableRescue201ApplicationJSONActionAction `json:"action"`
-	RootPassword *string                                                         `json:"root_password"`
+	Action       *PostServersIDActionsEnableRescue201ApplicationJSONActionAction `json:"action,omitempty"`
+	RootPassword *string                                                         `json:"root_password,omitempty"`
 }
 
 type PostServersIDActionsEnableRescueResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type SQLActiveDirectoryConfig struct {
-	Domain *string `json:"domain"`
-	Kind   *string `json:"kind"`
+	Domain *string `json:"domain,omitempty"`
+	Kind   *string `json:"kind,omitempty"`
 }

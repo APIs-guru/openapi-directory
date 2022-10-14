@@ -1,6 +1,6 @@
 package shared
 
 type DailyReportViewModelItem struct {
-	Links []Link                `json:"links"`
-	Value *DailyReportViewModel `json:"value"`
+	Links []Link                `json:"links,omitempty"`
+	Value *DailyReportViewModel `json:"value,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ReportResponse struct {
-	ReportErrors     []ReportError `json:"reportErrors"`
-	ServiceConfigID  *string       `json:"serviceConfigId"`
-	ServiceRolloutID *string       `json:"serviceRolloutId"`
+	ReportErrors     []ReportError `json:"reportErrors,omitempty"`
+	ServiceConfigID  *string       `json:"serviceConfigId,omitempty"`
+	ServiceRolloutID *string       `json:"serviceRolloutId,omitempty"`
 }

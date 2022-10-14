@@ -1,8 +1,8 @@
 package shared
 
 type ListServiceQuotaIncreaseRequestsInTemplateRequest struct {
-	AwsRegion   *string `json:"AwsRegion"`
-	MaxResults  *int64  `json:"MaxResults"`
-	NextToken   *string `json:"NextToken"`
-	ServiceCode *string `json:"ServiceCode"`
+	AwsRegion   *string `json:"AwsRegion,omitempty"`
+	MaxResults  *int64  `json:"MaxResults,omitempty"`
+	NextToken   *string `json:"NextToken,omitempty"`
+	ServiceCode *string `json:"ServiceCode,omitempty"`
 }

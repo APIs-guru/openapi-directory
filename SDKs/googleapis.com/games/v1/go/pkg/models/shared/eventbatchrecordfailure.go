@@ -13,7 +13,7 @@ const (
 )
 
 type EventBatchRecordFailure struct {
-	FailureCause *EventBatchRecordFailureFailureCauseEnum `json:"failureCause"`
-	Kind         *string                                  `json:"kind"`
-	Range        *EventPeriodRange                        `json:"range"`
+	FailureCause *EventBatchRecordFailureFailureCauseEnum `json:"failureCause,omitempty"`
+	Kind         *string                                  `json:"kind,omitempty"`
+	Range        *EventPeriodRange                        `json:"range,omitempty"`
 }

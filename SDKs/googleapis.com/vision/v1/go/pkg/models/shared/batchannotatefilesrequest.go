@@ -1,6 +1,6 @@
 package shared
 
 type BatchAnnotateFilesRequest struct {
-	Parent   *string               `json:"parent"`
-	Requests []AnnotateFileRequest `json:"requests"`
+	Parent   *string               `json:"parent,omitempty"`
+	Requests []AnnotateFileRequest `json:"requests,omitempty"`
 }

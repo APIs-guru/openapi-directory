@@ -10,5 +10,5 @@ const (
 )
 
 type QuotaProperties struct {
-	QuotaMode *QuotaPropertiesQuotaModeEnum `json:"quotaMode"`
+	QuotaMode *QuotaPropertiesQuotaModeEnum `json:"quotaMode,omitempty"`
 }

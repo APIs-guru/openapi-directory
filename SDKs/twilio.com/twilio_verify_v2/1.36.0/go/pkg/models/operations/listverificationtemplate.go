@@ -24,18 +24,18 @@ type ListVerificationTemplateRequest struct {
 }
 
 type ListVerificationTemplate200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListVerificationTemplate200ApplicationJSONListVerificationTemplateResponse struct {
-	Meta      *ListVerificationTemplate200ApplicationJSONMeta `json:"meta"`
-	Templates []shared.VerifyV2VerificationTemplate           `json:"templates"`
+	Meta      *ListVerificationTemplate200ApplicationJSONMeta `json:"meta,omitempty"`
+	Templates []shared.VerifyV2VerificationTemplate           `json:"templates,omitempty"`
 }
 
 type ListVerificationTemplateResponse struct {

@@ -1,8 +1,8 @@
 package shared
 
 type NewDisk struct {
-	Attachment       *DiskAttachment          `json:"attachment"`
-	AutoDelete       *bool                    `json:"autoDelete"`
-	Boot             *bool                    `json:"boot"`
-	InitializeParams *NewDiskInitializeParams `json:"initializeParams"`
+	Attachment       *DiskAttachment          `json:"attachment,omitempty"`
+	AutoDelete       *bool                    `json:"autoDelete,omitempty"`
+	Boot             *bool                    `json:"boot,omitempty"`
+	InitializeParams *NewDiskInitializeParams `json:"initializeParams,omitempty"`
 }

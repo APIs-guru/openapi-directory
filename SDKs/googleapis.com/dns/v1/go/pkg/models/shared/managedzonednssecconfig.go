@@ -16,8 +16,8 @@ const (
 )
 
 type ManagedZoneDNSSecConfig struct {
-	DefaultKeySpecs []DNSKeySpec                             `json:"defaultKeySpecs"`
-	Kind            *string                                  `json:"kind"`
-	NonExistence    *ManagedZoneDNSSecConfigNonExistenceEnum `json:"nonExistence"`
-	State           *ManagedZoneDNSSecConfigStateEnum        `json:"state"`
+	DefaultKeySpecs []DNSKeySpec                             `json:"defaultKeySpecs,omitempty"`
+	Kind            *string                                  `json:"kind,omitempty"`
+	NonExistence    *ManagedZoneDNSSecConfigNonExistenceEnum `json:"nonExistence,omitempty"`
+	State           *ManagedZoneDNSSecConfigStateEnum        `json:"state,omitempty"`
 }

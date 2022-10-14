@@ -16,9 +16,9 @@ type ExecuteSQLHeaders struct {
 
 type ExecuteSQLRequestBody struct {
 	AwsSecretStoreArn      string  `json:"awsSecretStoreArn"`
-	Database               *string `json:"database"`
+	Database               *string `json:"database,omitempty"`
 	DbClusterOrInstanceArn string  `json:"dbClusterOrInstanceArn"`
-	Schema                 *string `json:"schema"`
+	Schema                 *string `json:"schema,omitempty"`
 	SQLStatements          string  `json:"sqlStatements"`
 }
 

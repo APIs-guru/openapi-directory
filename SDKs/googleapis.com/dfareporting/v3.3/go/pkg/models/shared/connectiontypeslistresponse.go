@@ -1,6 +1,6 @@
 package shared
 
 type ConnectionTypesListResponse struct {
-	ConnectionTypes []ConnectionType `json:"connectionTypes"`
-	Kind            *string          `json:"kind"`
+	ConnectionTypes []ConnectionType `json:"connectionTypes,omitempty"`
+	Kind            *string          `json:"kind,omitempty"`
 }

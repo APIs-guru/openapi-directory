@@ -27,17 +27,17 @@ const (
 )
 
 type DomainRecord struct {
-	Created  *time.Time            `json:"created"`
-	ID       *int64                `json:"id"`
-	Name     *string               `json:"name"`
-	Port     *int64                `json:"port"`
-	Priority *int64                `json:"priority"`
-	Protocol *string               `json:"protocol"`
-	Service  *string               `json:"service"`
-	Tag      *DomainRecordTagEnum  `json:"tag"`
-	Target   *string               `json:"target"`
-	TTLSec   *int64                `json:"ttl_sec"`
-	Type     *DomainRecordTypeEnum `json:"type"`
-	Updated  *time.Time            `json:"updated"`
-	Weight   *int64                `json:"weight"`
+	Created  *time.Time            `json:"created,omitempty"`
+	ID       *int64                `json:"id,omitempty"`
+	Name     *string               `json:"name,omitempty"`
+	Port     *int64                `json:"port,omitempty"`
+	Priority *int64                `json:"priority,omitempty"`
+	Protocol *string               `json:"protocol,omitempty"`
+	Service  *string               `json:"service,omitempty"`
+	Tag      *DomainRecordTagEnum  `json:"tag,omitempty"`
+	Target   *string               `json:"target,omitempty"`
+	TTLSec   *int64                `json:"ttl_sec,omitempty"`
+	Type     *DomainRecordTypeEnum `json:"type,omitempty"`
+	Updated  *time.Time            `json:"updated,omitempty"`
+	Weight   *int64                `json:"weight,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type LandlordAccountingModel struct {
-	AccountBalance *float64                         `json:"AccountBalance"`
-	LastPayment    *time.Time                       `json:"LastPayment"`
-	PaymentHistory []LandlordAccountingEntryModel   `json:"PaymentHistory"`
-	Statements     []LandlordAccountingInvoiceModel `json:"Statements"`
+	AccountBalance *float64                         `json:"AccountBalance,omitempty"`
+	LastPayment    *time.Time                       `json:"LastPayment,omitempty"`
+	PaymentHistory []LandlordAccountingEntryModel   `json:"PaymentHistory,omitempty"`
+	Statements     []LandlordAccountingInvoiceModel `json:"Statements,omitempty"`
 }

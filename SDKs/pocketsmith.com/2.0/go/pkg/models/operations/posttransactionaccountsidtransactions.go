@@ -10,13 +10,13 @@ type PostTransactionAccountsIDTransactionsPathParams struct {
 
 type PostTransactionAccountsIDTransactionsRequestBody struct {
 	Amount       float64 `json:"amount"`
-	CategoryID   *int64  `json:"category_id"`
-	ChequeNumber *string `json:"cheque_number"`
+	CategoryID   *int64  `json:"category_id,omitempty"`
+	ChequeNumber *string `json:"cheque_number,omitempty"`
 	Date         string  `json:"date"`
-	IsTransfer   *bool   `json:"is_transfer"`
-	Labels       *string `json:"labels"`
-	Memo         *string `json:"memo"`
-	Note         *string `json:"note"`
+	IsTransfer   *bool   `json:"is_transfer,omitempty"`
+	Labels       *string `json:"labels,omitempty"`
+	Memo         *string `json:"memo,omitempty"`
+	Note         *string `json:"note,omitempty"`
 	Payee        string  `json:"payee"`
 }
 

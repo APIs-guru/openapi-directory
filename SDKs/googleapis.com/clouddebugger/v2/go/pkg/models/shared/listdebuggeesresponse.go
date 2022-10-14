@@ -1,5 +1,5 @@
 package shared
 
 type ListDebuggeesResponse struct {
-	Debuggees []Debuggee `json:"debuggees"`
+	Debuggees []Debuggee `json:"debuggees,omitempty"`
 }

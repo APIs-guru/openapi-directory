@@ -9,7 +9,7 @@ const (
 )
 
 type ProximityLocationListAssignedTargetingOptionDetails struct {
-	ProximityLocationListID *string                                                                     `json:"proximityLocationListId"`
-	ProximityRadius         *float64                                                                    `json:"proximityRadius"`
-	ProximityRadiusUnit     *ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit"`
+	ProximityLocationListID *string                                                                     `json:"proximityLocationListId,omitempty"`
+	ProximityRadius         *float64                                                                    `json:"proximityRadius,omitempty"`
+	ProximityRadiusUnit     *ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit,omitempty"`
 }

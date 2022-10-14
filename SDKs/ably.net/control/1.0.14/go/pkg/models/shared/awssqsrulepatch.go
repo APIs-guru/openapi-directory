@@ -20,18 +20,18 @@ const (
 )
 
 type AwsSqsRulePatchTarget struct {
-	Authentication *interface{} `json:"authentication"`
-	AwsAccountID   *string      `json:"awsAccountId"`
-	Enveloped      *bool        `json:"enveloped"`
-	Format         *string      `json:"format"`
-	QueueName      *string      `json:"queueName"`
-	Region         *string      `json:"region"`
+	Authentication *interface{} `json:"authentication,omitempty"`
+	AwsAccountID   *string      `json:"awsAccountId,omitempty"`
+	Enveloped      *bool        `json:"enveloped,omitempty"`
+	Format         *string      `json:"format,omitempty"`
+	QueueName      *string      `json:"queueName,omitempty"`
+	Region         *string      `json:"region,omitempty"`
 }
 
 type AwsSqsRulePatch struct {
-	RequestMode *AwsSqsRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *AwsSqsRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                     `json:"source"`
-	Status      *AwsSqsRulePatchStatusEnum      `json:"status"`
-	Target      *AwsSqsRulePatchTarget          `json:"target"`
+	RequestMode *AwsSqsRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *AwsSqsRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                     `json:"source,omitempty"`
+	Status      *AwsSqsRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *AwsSqsRulePatchTarget          `json:"target,omitempty"`
 }

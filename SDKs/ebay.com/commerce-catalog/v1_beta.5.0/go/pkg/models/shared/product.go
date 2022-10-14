@@ -1,20 +1,20 @@
 package shared
 
 type Product struct {
-	AdditionalImages           []Image  `json:"additionalImages"`
-	Aspects                    []Aspect `json:"aspects"`
-	Brand                      *string  `json:"brand"`
-	Description                *string  `json:"description"`
-	Ean                        []string `json:"ean"`
-	Epid                       *string  `json:"epid"`
-	Gtin                       []string `json:"gtin"`
-	Image                      *Image   `json:"image"`
-	Isbn                       []string `json:"isbn"`
-	Mpn                        []string `json:"mpn"`
-	OtherApplicableCategoryIds []string `json:"otherApplicableCategoryIds"`
-	PrimaryCategoryID          *string  `json:"primaryCategoryId"`
-	ProductWebURL              *string  `json:"productWebUrl"`
-	Title                      *string  `json:"title"`
-	Upc                        []string `json:"upc"`
-	Version                    *string  `json:"version"`
+	AdditionalImages           []Image  `json:"additionalImages,omitempty"`
+	Aspects                    []Aspect `json:"aspects,omitempty"`
+	Brand                      *string  `json:"brand,omitempty"`
+	Description                *string  `json:"description,omitempty"`
+	Ean                        []string `json:"ean,omitempty"`
+	Epid                       *string  `json:"epid,omitempty"`
+	Gtin                       []string `json:"gtin,omitempty"`
+	Image                      *Image   `json:"image,omitempty"`
+	Isbn                       []string `json:"isbn,omitempty"`
+	Mpn                        []string `json:"mpn,omitempty"`
+	OtherApplicableCategoryIds []string `json:"otherApplicableCategoryIds,omitempty"`
+	PrimaryCategoryID          *string  `json:"primaryCategoryId,omitempty"`
+	ProductWebURL              *string  `json:"productWebUrl,omitempty"`
+	Title                      *string  `json:"title,omitempty"`
+	Upc                        []string `json:"upc,omitempty"`
+	Version                    *string  `json:"version,omitempty"`
 }

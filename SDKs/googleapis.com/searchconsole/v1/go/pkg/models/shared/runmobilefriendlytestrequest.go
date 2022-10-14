@@ -1,6 +1,6 @@
 package shared
 
 type RunMobileFriendlyTestRequest struct {
-	RequestScreenshot *bool   `json:"requestScreenshot"`
-	URL               *string `json:"url"`
+	RequestScreenshot *bool   `json:"requestScreenshot,omitempty"`
+	URL               *string `json:"url,omitempty"`
 }

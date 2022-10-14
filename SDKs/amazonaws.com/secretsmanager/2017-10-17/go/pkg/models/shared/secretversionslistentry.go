@@ -5,9 +5,9 @@ import (
 )
 
 type SecretVersionsListEntry struct {
-	CreatedDate      *time.Time `json:"CreatedDate"`
-	KmsKeyIds        []string   `json:"KmsKeyIds"`
-	LastAccessedDate *time.Time `json:"LastAccessedDate"`
-	VersionID        *string    `json:"VersionId"`
-	VersionStages    []string   `json:"VersionStages"`
+	CreatedDate      *time.Time `json:"CreatedDate,omitempty"`
+	KmsKeyIds        []string   `json:"KmsKeyIds,omitempty"`
+	LastAccessedDate *time.Time `json:"LastAccessedDate,omitempty"`
+	VersionID        *string    `json:"VersionId,omitempty"`
+	VersionStages    []string   `json:"VersionStages,omitempty"`
 }

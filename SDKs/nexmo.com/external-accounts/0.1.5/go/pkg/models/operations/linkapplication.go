@@ -41,15 +41,15 @@ type LinkApplicationRequest struct {
 }
 
 type LinkApplication403ApplicationJSON struct {
-	Detail *string `json:"detail"`
-	Title  *string `json:"title"`
-	Type   *string `json:"type"`
+	Detail *string `json:"detail,omitempty"`
+	Title  *string `json:"title,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }
 
 type LinkApplication409ApplicationJSON struct {
-	Detail *string `json:"detail"`
-	Title  *string `json:"title"`
-	Type   *string `json:"type"`
+	Detail *string `json:"detail,omitempty"`
+	Title  *string `json:"title,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }
 
 type LinkApplicationResponse struct {

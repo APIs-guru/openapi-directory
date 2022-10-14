@@ -1,7 +1,7 @@
 package shared
 
 type CidrBlockAssociation struct {
-	AssociationID  *string `json:"AssociationId"`
-	CidrBlock      *string `json:"CidrBlock"`
-	CidrBlockState *string `json:"CidrBlockState"`
+	AssociationID  *string `json:"AssociationId,omitempty"`
+	CidrBlock      *string `json:"CidrBlock,omitempty"`
+	CidrBlockState *string `json:"CidrBlockState,omitempty"`
 }

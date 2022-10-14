@@ -5,20 +5,20 @@ import (
 )
 
 type CommandInvocation struct {
-	CloudWatchOutputConfig *CloudWatchOutputConfig      `json:"CloudWatchOutputConfig"`
-	CommandID              *string                      `json:"CommandId"`
-	CommandPlugins         []CommandPlugin              `json:"CommandPlugins"`
-	Comment                *string                      `json:"Comment"`
-	DocumentName           *string                      `json:"DocumentName"`
-	DocumentVersion        *string                      `json:"DocumentVersion"`
-	InstanceID             *string                      `json:"InstanceId"`
-	InstanceName           *string                      `json:"InstanceName"`
-	NotificationConfig     *NotificationConfig          `json:"NotificationConfig"`
-	RequestedDateTime      *time.Time                   `json:"RequestedDateTime"`
-	ServiceRole            *string                      `json:"ServiceRole"`
-	StandardErrorURL       *string                      `json:"StandardErrorUrl"`
-	StandardOutputURL      *string                      `json:"StandardOutputUrl"`
-	Status                 *CommandInvocationStatusEnum `json:"Status"`
-	StatusDetails          *string                      `json:"StatusDetails"`
-	TraceOutput            *string                      `json:"TraceOutput"`
+	CloudWatchOutputConfig *CloudWatchOutputConfig      `json:"CloudWatchOutputConfig,omitempty"`
+	CommandID              *string                      `json:"CommandId,omitempty"`
+	CommandPlugins         []CommandPlugin              `json:"CommandPlugins,omitempty"`
+	Comment                *string                      `json:"Comment,omitempty"`
+	DocumentName           *string                      `json:"DocumentName,omitempty"`
+	DocumentVersion        *string                      `json:"DocumentVersion,omitempty"`
+	InstanceID             *string                      `json:"InstanceId,omitempty"`
+	InstanceName           *string                      `json:"InstanceName,omitempty"`
+	NotificationConfig     *NotificationConfig          `json:"NotificationConfig,omitempty"`
+	RequestedDateTime      *time.Time                   `json:"RequestedDateTime,omitempty"`
+	ServiceRole            *string                      `json:"ServiceRole,omitempty"`
+	StandardErrorURL       *string                      `json:"StandardErrorUrl,omitempty"`
+	StandardOutputURL      *string                      `json:"StandardOutputUrl,omitempty"`
+	Status                 *CommandInvocationStatusEnum `json:"Status,omitempty"`
+	StatusDetails          *string                      `json:"StatusDetails,omitempty"`
+	TraceOutput            *string                      `json:"TraceOutput,omitempty"`
 }

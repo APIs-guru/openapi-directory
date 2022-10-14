@@ -10,6 +10,6 @@ const (
 )
 
 type CheckMigrationPermissionResponse struct {
-	OnpremDomains []OnPremDomainSidDetails                   `json:"onpremDomains"`
-	State         *CheckMigrationPermissionResponseStateEnum `json:"state"`
+	OnpremDomains []OnPremDomainSidDetails                   `json:"onpremDomains,omitempty"`
+	State         *CheckMigrationPermissionResponseStateEnum `json:"state,omitempty"`
 }

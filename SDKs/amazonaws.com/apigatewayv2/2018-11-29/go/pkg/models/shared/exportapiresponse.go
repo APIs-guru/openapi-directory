@@ -1,5 +1,5 @@
 package shared
 
 type ExportAPIResponse struct {
-	Body *string `json:"body"`
+	Body *string `json:"body,omitempty"`
 }

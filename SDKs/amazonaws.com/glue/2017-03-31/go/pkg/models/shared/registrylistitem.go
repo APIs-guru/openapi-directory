@@ -1,10 +1,10 @@
 package shared
 
 type RegistryListItem struct {
-	CreatedTime  *string             `json:"CreatedTime"`
-	Description  *string             `json:"Description"`
-	RegistryArn  *string             `json:"RegistryArn"`
-	RegistryName *string             `json:"RegistryName"`
-	Status       *RegistryStatusEnum `json:"Status"`
-	UpdatedTime  *string             `json:"UpdatedTime"`
+	CreatedTime  *string             `json:"CreatedTime,omitempty"`
+	Description  *string             `json:"Description,omitempty"`
+	RegistryArn  *string             `json:"RegistryArn,omitempty"`
+	RegistryName *string             `json:"RegistryName,omitempty"`
+	Status       *RegistryStatusEnum `json:"Status,omitempty"`
+	UpdatedTime  *string             `json:"UpdatedTime,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type TracksListResponse struct {
-	Kind   *string `json:"kind"`
-	Tracks []Track `json:"tracks"`
+	Kind   *string `json:"kind,omitempty"`
+	Tracks []Track `json:"tracks,omitempty"`
 }

@@ -14,24 +14,24 @@ type PostDatabaseRequest struct {
 }
 
 type PostDatabase201ApplicationJSON struct {
-	ID     *float64                    `json:"id"`
-	Result *shared.DatabaseRestAPIPost `json:"result"`
+	ID     *float64                    `json:"id,omitempty"`
+	Result *shared.DatabaseRestAPIPost `json:"result,omitempty"`
 }
 
 type PostDatabase400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabase401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabase404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabase500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseResponse struct {

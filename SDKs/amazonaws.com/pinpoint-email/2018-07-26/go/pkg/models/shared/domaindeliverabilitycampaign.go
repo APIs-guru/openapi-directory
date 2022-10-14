@@ -5,18 +5,18 @@ import (
 )
 
 type DomainDeliverabilityCampaign struct {
-	CampaignID        *string    `json:"CampaignId"`
-	DeleteRate        *float64   `json:"DeleteRate"`
-	Esps              []string   `json:"Esps"`
-	FirstSeenDateTime *time.Time `json:"FirstSeenDateTime"`
-	FromAddress       *string    `json:"FromAddress"`
-	ImageURL          *string    `json:"ImageUrl"`
-	InboxCount        *int64     `json:"InboxCount"`
-	LastSeenDateTime  *time.Time `json:"LastSeenDateTime"`
-	ProjectedVolume   *int64     `json:"ProjectedVolume"`
-	ReadDeleteRate    *float64   `json:"ReadDeleteRate"`
-	ReadRate          *float64   `json:"ReadRate"`
-	SendingIps        []string   `json:"SendingIps"`
-	SpamCount         *int64     `json:"SpamCount"`
-	Subject           *string    `json:"Subject"`
+	CampaignID        *string    `json:"CampaignId,omitempty"`
+	DeleteRate        *float64   `json:"DeleteRate,omitempty"`
+	Esps              []string   `json:"Esps,omitempty"`
+	FirstSeenDateTime *time.Time `json:"FirstSeenDateTime,omitempty"`
+	FromAddress       *string    `json:"FromAddress,omitempty"`
+	ImageURL          *string    `json:"ImageUrl,omitempty"`
+	InboxCount        *int64     `json:"InboxCount,omitempty"`
+	LastSeenDateTime  *time.Time `json:"LastSeenDateTime,omitempty"`
+	ProjectedVolume   *int64     `json:"ProjectedVolume,omitempty"`
+	ReadDeleteRate    *float64   `json:"ReadDeleteRate,omitempty"`
+	ReadRate          *float64   `json:"ReadRate,omitempty"`
+	SendingIps        []string   `json:"SendingIps,omitempty"`
+	SpamCount         *int64     `json:"SpamCount,omitempty"`
+	Subject           *string    `json:"Subject,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ChannelSnippet struct {
-	Country         *string              `json:"country"`
-	CustomURL       *string              `json:"customUrl"`
-	DefaultLanguage *string              `json:"defaultLanguage"`
-	Description     *string              `json:"description"`
-	Localized       *ChannelLocalization `json:"localized"`
-	PublishedAt     *time.Time           `json:"publishedAt"`
-	Thumbnails      *ThumbnailDetails    `json:"thumbnails"`
-	Title           *string              `json:"title"`
+	Country         *string              `json:"country,omitempty"`
+	CustomURL       *string              `json:"customUrl,omitempty"`
+	DefaultLanguage *string              `json:"defaultLanguage,omitempty"`
+	Description     *string              `json:"description,omitempty"`
+	Localized       *ChannelLocalization `json:"localized,omitempty"`
+	PublishedAt     *time.Time           `json:"publishedAt,omitempty"`
+	Thumbnails      *ThumbnailDetails    `json:"thumbnails,omitempty"`
+	Title           *string              `json:"title,omitempty"`
 }

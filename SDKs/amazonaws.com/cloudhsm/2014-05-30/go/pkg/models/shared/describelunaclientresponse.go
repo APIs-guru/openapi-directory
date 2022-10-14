@@ -1,9 +1,9 @@
 package shared
 
 type DescribeLunaClientResponse struct {
-	Certificate            *string `json:"Certificate"`
-	CertificateFingerprint *string `json:"CertificateFingerprint"`
-	ClientArn              *string `json:"ClientArn"`
-	Label                  *string `json:"Label"`
-	LastModifiedTimestamp  *string `json:"LastModifiedTimestamp"`
+	Certificate            *string `json:"Certificate,omitempty"`
+	CertificateFingerprint *string `json:"CertificateFingerprint,omitempty"`
+	ClientArn              *string `json:"ClientArn,omitempty"`
+	Label                  *string `json:"Label,omitempty"`
+	LastModifiedTimestamp  *string `json:"LastModifiedTimestamp,omitempty"`
 }

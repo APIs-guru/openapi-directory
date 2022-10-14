@@ -9,7 +9,7 @@ type DomainRankRequest struct {
 }
 
 type DomainRank200ApplicationJSON struct {
-	Rank *float64 `json:"rank"`
+	Rank *float64 `json:"rank,omitempty"`
 }
 
 type DomainRankResponse struct {

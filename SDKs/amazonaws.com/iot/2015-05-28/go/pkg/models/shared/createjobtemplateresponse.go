@@ -1,6 +1,6 @@
 package shared
 
 type CreateJobTemplateResponse struct {
-	JobTemplateArn *string `json:"jobTemplateArn"`
-	JobTemplateID  *string `json:"jobTemplateId"`
+	JobTemplateArn *string `json:"jobTemplateArn,omitempty"`
+	JobTemplateID  *string `json:"jobTemplateId,omitempty"`
 }

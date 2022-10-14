@@ -1,6 +1,6 @@
 package shared
 
 type GoogleAdsHomeservicesLocalservicesV1SearchAccountReportsResponse struct {
-	AccountReports []GoogleAdsHomeservicesLocalservicesV1AccountReport `json:"accountReports"`
-	NextPageToken  *string                                             `json:"nextPageToken"`
+	AccountReports []GoogleAdsHomeservicesLocalservicesV1AccountReport `json:"accountReports,omitempty"`
+	NextPageToken  *string                                             `json:"nextPageToken,omitempty"`
 }

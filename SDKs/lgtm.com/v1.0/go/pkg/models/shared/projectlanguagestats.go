@@ -24,12 +24,12 @@ const (
 )
 
 type ProjectLanguageStats struct {
-	Alerts       *int32                          `json:"alerts"`
-	AnalysisDate *time.Time                      `json:"analysis-date"`
-	CommitDate   *time.Time                      `json:"commit-date"`
-	CommitID     *string                         `json:"commit-id"`
-	Grade        *ProjectLanguageStatsGradeEnum  `json:"grade"`
-	Language     *string                         `json:"language"`
-	Lines        *int32                          `json:"lines"`
-	Status       *ProjectLanguageStatsStatusEnum `json:"status"`
+	Alerts       *int32                          `json:"alerts,omitempty"`
+	AnalysisDate *time.Time                      `json:"analysis-date,omitempty"`
+	CommitDate   *time.Time                      `json:"commit-date,omitempty"`
+	CommitID     *string                         `json:"commit-id,omitempty"`
+	Grade        *ProjectLanguageStatsGradeEnum  `json:"grade,omitempty"`
+	Language     *string                         `json:"language,omitempty"`
+	Lines        *int32                          `json:"lines,omitempty"`
+	Status       *ProjectLanguageStatsStatusEnum `json:"status,omitempty"`
 }

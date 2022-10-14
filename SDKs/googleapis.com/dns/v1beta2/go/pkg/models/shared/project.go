@@ -1,8 +1,8 @@
 package shared
 
 type Project struct {
-	ID     *string `json:"id"`
-	Kind   *string `json:"kind"`
-	Number *string `json:"number"`
-	Quota  *Quota  `json:"quota"`
+	ID     *string `json:"id,omitempty"`
+	Kind   *string `json:"kind,omitempty"`
+	Number *string `json:"number,omitempty"`
+	Quota  *Quota  `json:"quota,omitempty"`
 }

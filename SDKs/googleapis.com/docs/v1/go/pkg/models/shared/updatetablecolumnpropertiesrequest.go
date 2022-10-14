@@ -1,8 +1,8 @@
 package shared
 
 type UpdateTableColumnPropertiesRequest struct {
-	ColumnIndices         []int32                `json:"columnIndices"`
-	Fields                *string                `json:"fields"`
-	TableColumnProperties *TableColumnProperties `json:"tableColumnProperties"`
-	TableStartLocation    *Location              `json:"tableStartLocation"`
+	ColumnIndices         []int32                `json:"columnIndices,omitempty"`
+	Fields                *string                `json:"fields,omitempty"`
+	TableColumnProperties *TableColumnProperties `json:"tableColumnProperties,omitempty"`
+	TableStartLocation    *Location              `json:"tableStartLocation,omitempty"`
 }

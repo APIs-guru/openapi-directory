@@ -1,12 +1,12 @@
 package shared
 
 type DeviceRole struct {
-	Color               *string `json:"color"`
-	Description         *string `json:"description"`
-	DeviceCount         *int64  `json:"device_count"`
-	ID                  *int64  `json:"id"`
+	Color               *string `json:"color,omitempty"`
+	Description         *string `json:"description,omitempty"`
+	DeviceCount         *int64  `json:"device_count,omitempty"`
+	ID                  *int64  `json:"id,omitempty"`
 	Name                string  `json:"name"`
 	Slug                string  `json:"slug"`
-	VirtualmachineCount *int64  `json:"virtualmachine_count"`
-	VMRole              *bool   `json:"vm_role"`
+	VirtualmachineCount *int64  `json:"virtualmachine_count,omitempty"`
+	VMRole              *bool   `json:"vm_role,omitempty"`
 }

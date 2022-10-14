@@ -19,7 +19,7 @@ type ItvPlanListItem struct {
 	IntervalCount   int32                       `json:"intervalCount"`
 	Nickname        string                      `json:"nickname"`
 	Product         string                      `json:"product"`
-	SavingLabel     *string                     `json:"savingLabel"`
-	SwitchingText   *string                     `json:"switchingText"`
-	TrialPeriodDays *int32                      `json:"trialPeriodDays"`
+	SavingLabel     *string                     `json:"savingLabel,omitempty"`
+	SwitchingText   *string                     `json:"switchingText,omitempty"`
+	TrialPeriodDays *int32                      `json:"trialPeriodDays,omitempty"`
 }

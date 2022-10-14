@@ -1,6 +1,6 @@
 package shared
 
 type ListPatchDeploymentsResponse struct {
-	NextPageToken    *string           `json:"nextPageToken"`
-	PatchDeployments []PatchDeployment `json:"patchDeployments"`
+	NextPageToken    *string           `json:"nextPageToken,omitempty"`
+	PatchDeployments []PatchDeployment `json:"patchDeployments,omitempty"`
 }

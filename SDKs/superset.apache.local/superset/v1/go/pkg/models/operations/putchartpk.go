@@ -19,32 +19,32 @@ type PutChartPkRequest struct {
 }
 
 type PutChartPk200ApplicationJSON struct {
-	ID     *float64                `json:"id"`
-	Result *shared.ChartRestAPIPut `json:"result"`
+	ID     *float64                `json:"id,omitempty"`
+	Result *shared.ChartRestAPIPut `json:"result,omitempty"`
 }
 
 type PutChartPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutChartPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutChartPk403ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutChartPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutChartPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutChartPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutChartPkResponse struct {

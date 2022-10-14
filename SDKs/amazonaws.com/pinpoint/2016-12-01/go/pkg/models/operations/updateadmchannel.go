@@ -19,9 +19,9 @@ type UpdateAdmChannelHeaders struct {
 }
 
 type UpdateAdmChannelRequestBodyAdmChannelRequest struct {
-	ClientID     *string `json:"ClientId"`
-	ClientSecret *string `json:"ClientSecret"`
-	Enabled      *bool   `json:"Enabled"`
+	ClientID     *string `json:"ClientId,omitempty"`
+	ClientSecret *string `json:"ClientSecret,omitempty"`
+	Enabled      *bool   `json:"Enabled,omitempty"`
 }
 
 type UpdateAdmChannelRequestBody struct {

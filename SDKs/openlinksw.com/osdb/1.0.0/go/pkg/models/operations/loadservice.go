@@ -6,7 +6,7 @@ import (
 
 type LoadServiceRequestBody struct {
 	ServiceDescriptionURL string  `json:"service_description_url"`
-	ServiceMoniker        *string `json:"service_moniker"`
+	ServiceMoniker        *string `json:"service_moniker,omitempty"`
 }
 
 type LoadServiceRequest struct {

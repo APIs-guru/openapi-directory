@@ -20,11 +20,11 @@ type CreateRouteHeaders struct {
 }
 
 type CreateRouteRequestBodySpec struct {
-	HTTPRoute *shared.HTTPRoute `json:"httpRoute"`
+	HTTPRoute *shared.HTTPRoute `json:"httpRoute,omitempty"`
 }
 
 type CreateRouteRequestBody struct {
-	ClientToken *string                    `json:"clientToken"`
+	ClientToken *string                    `json:"clientToken,omitempty"`
 	RouteName   string                     `json:"routeName"`
 	Spec        CreateRouteRequestBodySpec `json:"spec"`
 }

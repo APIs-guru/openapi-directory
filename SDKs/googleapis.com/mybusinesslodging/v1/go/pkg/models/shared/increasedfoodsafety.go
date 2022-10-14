@@ -46,14 +46,14 @@ const (
 )
 
 type IncreasedFoodSafety struct {
-	DiningAreasAdditionalSanitation                    *bool                                                                      `json:"diningAreasAdditionalSanitation"`
-	DiningAreasAdditionalSanitationException           *IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum           `json:"diningAreasAdditionalSanitationException"`
-	DisposableFlatware                                 *bool                                                                      `json:"disposableFlatware"`
-	DisposableFlatwareException                        *IncreasedFoodSafetyDisposableFlatwareExceptionEnum                        `json:"disposableFlatwareException"`
-	FoodPreparationAndServingAdditionalSafety          *bool                                                                      `json:"foodPreparationAndServingAdditionalSafety"`
-	FoodPreparationAndServingAdditionalSafetyException *IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum `json:"foodPreparationAndServingAdditionalSafetyException"`
-	IndividualPackagedMeals                            *bool                                                                      `json:"individualPackagedMeals"`
-	IndividualPackagedMealsException                   *IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum                   `json:"individualPackagedMealsException"`
-	SingleUseFoodMenus                                 *bool                                                                      `json:"singleUseFoodMenus"`
-	SingleUseFoodMenusException                        *IncreasedFoodSafetySingleUseFoodMenusExceptionEnum                        `json:"singleUseFoodMenusException"`
+	DiningAreasAdditionalSanitation                    *bool                                                                      `json:"diningAreasAdditionalSanitation,omitempty"`
+	DiningAreasAdditionalSanitationException           *IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum           `json:"diningAreasAdditionalSanitationException,omitempty"`
+	DisposableFlatware                                 *bool                                                                      `json:"disposableFlatware,omitempty"`
+	DisposableFlatwareException                        *IncreasedFoodSafetyDisposableFlatwareExceptionEnum                        `json:"disposableFlatwareException,omitempty"`
+	FoodPreparationAndServingAdditionalSafety          *bool                                                                      `json:"foodPreparationAndServingAdditionalSafety,omitempty"`
+	FoodPreparationAndServingAdditionalSafetyException *IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum `json:"foodPreparationAndServingAdditionalSafetyException,omitempty"`
+	IndividualPackagedMeals                            *bool                                                                      `json:"individualPackagedMeals,omitempty"`
+	IndividualPackagedMealsException                   *IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum                   `json:"individualPackagedMealsException,omitempty"`
+	SingleUseFoodMenus                                 *bool                                                                      `json:"singleUseFoodMenus,omitempty"`
+	SingleUseFoodMenusException                        *IncreasedFoodSafetySingleUseFoodMenusExceptionEnum                        `json:"singleUseFoodMenusException,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type AccountGoogleMyBusinessLink struct {
-	GmbAccountID *string `json:"gmbAccountId"`
-	GmbEmail     *string `json:"gmbEmail"`
-	Status       *string `json:"status"`
+	GmbAccountID *string `json:"gmbAccountId,omitempty"`
+	GmbEmail     *string `json:"gmbEmail,omitempty"`
+	Status       *string `json:"status,omitempty"`
 }

@@ -13,7 +13,7 @@ const (
 )
 
 type ContentMatcher struct {
-	Content         *string                    `json:"content"`
-	JSONPathMatcher *JSONPathMatcher           `json:"jsonPathMatcher"`
-	Matcher         *ContentMatcherMatcherEnum `json:"matcher"`
+	Content         *string                    `json:"content,omitempty"`
+	JSONPathMatcher *JSONPathMatcher           `json:"jsonPathMatcher,omitempty"`
+	Matcher         *ContentMatcherMatcherEnum `json:"matcher,omitempty"`
 }

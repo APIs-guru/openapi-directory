@@ -23,19 +23,19 @@ type GetSavedQueryRelatedColumnNameRequest struct {
 }
 
 type GetSavedQueryRelatedColumnName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryRelatedColumnName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryRelatedColumnName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryRelatedColumnName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryRelatedColumnNameResponse struct {

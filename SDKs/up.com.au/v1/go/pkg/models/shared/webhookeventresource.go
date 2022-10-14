@@ -20,7 +20,7 @@ type WebhookEventResourceRelationshipsTransactionLinks struct {
 
 type WebhookEventResourceRelationshipsTransaction struct {
 	Data  WebhookEventResourceRelationshipsTransactionData   `json:"data"`
-	Links *WebhookEventResourceRelationshipsTransactionLinks `json:"links"`
+	Links *WebhookEventResourceRelationshipsTransactionLinks `json:"links,omitempty"`
 }
 
 type WebhookEventResourceRelationshipsWebhookData struct {
@@ -34,11 +34,11 @@ type WebhookEventResourceRelationshipsWebhookLinks struct {
 
 type WebhookEventResourceRelationshipsWebhook struct {
 	Data  WebhookEventResourceRelationshipsWebhookData   `json:"data"`
-	Links *WebhookEventResourceRelationshipsWebhookLinks `json:"links"`
+	Links *WebhookEventResourceRelationshipsWebhookLinks `json:"links,omitempty"`
 }
 
 type WebhookEventResourceRelationships struct {
-	Transaction *WebhookEventResourceRelationshipsTransaction `json:"transaction"`
+	Transaction *WebhookEventResourceRelationshipsTransaction `json:"transaction,omitempty"`
 	Webhook     WebhookEventResourceRelationshipsWebhook      `json:"webhook"`
 }
 

@@ -22,7 +22,7 @@ const (
 )
 
 type UpdateLaunchConfigurationRequestBodyLicensing struct {
-	OsByol *bool `json:"osByol"`
+	OsByol *bool `json:"osByol,omitempty"`
 }
 
 type UpdateLaunchConfigurationRequestBodyTargetInstanceTypeRightSizingMethodEnum string
@@ -33,13 +33,13 @@ const (
 )
 
 type UpdateLaunchConfigurationRequestBody struct {
-	CopyPrivateIP                       *bool                                                                        `json:"copyPrivateIp"`
-	CopyTags                            *bool                                                                        `json:"copyTags"`
-	LaunchDisposition                   *UpdateLaunchConfigurationRequestBodyLaunchDispositionEnum                   `json:"launchDisposition"`
-	Licensing                           *UpdateLaunchConfigurationRequestBodyLicensing                               `json:"licensing"`
-	Name                                *string                                                                      `json:"name"`
+	CopyPrivateIP                       *bool                                                                        `json:"copyPrivateIp,omitempty"`
+	CopyTags                            *bool                                                                        `json:"copyTags,omitempty"`
+	LaunchDisposition                   *UpdateLaunchConfigurationRequestBodyLaunchDispositionEnum                   `json:"launchDisposition,omitempty"`
+	Licensing                           *UpdateLaunchConfigurationRequestBodyLicensing                               `json:"licensing,omitempty"`
+	Name                                *string                                                                      `json:"name,omitempty"`
 	SourceServerID                      string                                                                       `json:"sourceServerID"`
-	TargetInstanceTypeRightSizingMethod *UpdateLaunchConfigurationRequestBodyTargetInstanceTypeRightSizingMethodEnum `json:"targetInstanceTypeRightSizingMethod"`
+	TargetInstanceTypeRightSizingMethod *UpdateLaunchConfigurationRequestBodyTargetInstanceTypeRightSizingMethodEnum `json:"targetInstanceTypeRightSizingMethod,omitempty"`
 }
 
 type UpdateLaunchConfigurationRequest struct {

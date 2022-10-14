@@ -13,9 +13,9 @@ const (
 )
 
 type DataType struct {
-	ListElementType *DataType             `json:"listElementType"`
-	Nullable        *bool                 `json:"nullable"`
-	StructType      *StructType           `json:"structType"`
-	TimeFormat      *string               `json:"timeFormat"`
-	TypeCode        *DataTypeTypeCodeEnum `json:"typeCode"`
+	ListElementType *DataType             `json:"listElementType,omitempty"`
+	Nullable        *bool                 `json:"nullable,omitempty"`
+	StructType      *StructType           `json:"structType,omitempty"`
+	TimeFormat      *string               `json:"timeFormat,omitempty"`
+	TypeCode        *DataTypeTypeCodeEnum `json:"typeCode,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type AcceptEulasResponse struct {
-	EulaAcceptances []EulaAcceptance `json:"eulaAcceptances"`
+	EulaAcceptances []EulaAcceptance `json:"eulaAcceptances,omitempty"`
 }

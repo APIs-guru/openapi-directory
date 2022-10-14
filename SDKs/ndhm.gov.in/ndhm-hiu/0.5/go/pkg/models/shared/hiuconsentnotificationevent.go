@@ -5,7 +5,7 @@ import (
 )
 
 type HiuConsentNotificationEventNotification struct {
-	ConsentArtefacts []ConsentArtefactReference `json:"consentArtefacts"`
+	ConsentArtefacts []ConsentArtefactReference `json:"consentArtefacts,omitempty"`
 	ConsentRequestID string                     `json:"consentRequestId"`
 	Status           ConsentStatusEnum          `json:"status"`
 }

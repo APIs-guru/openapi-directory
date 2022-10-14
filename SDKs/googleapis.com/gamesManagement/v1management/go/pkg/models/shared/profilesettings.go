@@ -1,6 +1,6 @@
 package shared
 
 type ProfileSettings struct {
-	Kind           *string `json:"kind"`
-	ProfileVisible *bool   `json:"profileVisible"`
+	Kind           *string `json:"kind,omitempty"`
+	ProfileVisible *bool   `json:"profileVisible,omitempty"`
 }

@@ -23,11 +23,11 @@ const (
 )
 
 type PaymentMeans struct {
-	Account     *string                  `json:"account"`
-	BrancheCode *string                  `json:"branche_code"`
+	Account     *string                  `json:"account,omitempty"`
+	BrancheCode *string                  `json:"branche_code,omitempty"`
 	Code        PaymentMeansCodeCodeEnum `json:"code"`
-	Holder      *string                  `json:"holder"`
-	Mandate     *string                  `json:"mandate"`
-	Network     *string                  `json:"network"`
-	PaymentID   *string                  `json:"paymentId"`
+	Holder      *string                  `json:"holder,omitempty"`
+	Mandate     *string                  `json:"mandate,omitempty"`
+	Network     *string                  `json:"network,omitempty"`
+	PaymentID   *string                  `json:"paymentId,omitempty"`
 }

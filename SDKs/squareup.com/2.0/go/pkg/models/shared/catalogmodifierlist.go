@@ -1,8 +1,8 @@
 package shared
 
 type CatalogModifierList struct {
-	Modifiers     []CatalogObject `json:"modifiers"`
-	Name          *string         `json:"name"`
-	Ordinal       *int64          `json:"ordinal"`
-	SelectionType *string         `json:"selection_type"`
+	Modifiers     []CatalogObject `json:"modifiers,omitempty"`
+	Name          *string         `json:"name,omitempty"`
+	Ordinal       *int64          `json:"ordinal,omitempty"`
+	SelectionType *string         `json:"selection_type,omitempty"`
 }

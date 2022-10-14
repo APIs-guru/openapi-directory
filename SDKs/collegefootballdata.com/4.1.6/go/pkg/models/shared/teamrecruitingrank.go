@@ -1,8 +1,8 @@
 package shared
 
 type TeamRecruitingRank struct {
-	Points *float64 `json:"points"`
-	Rank   *int64   `json:"rank"`
-	Team   *string  `json:"team"`
-	Year   *int64   `json:"year"`
+	Points *float64 `json:"points,omitempty"`
+	Rank   *int64   `json:"rank,omitempty"`
+	Team   *string  `json:"team,omitempty"`
+	Year   *int64   `json:"year,omitempty"`
 }

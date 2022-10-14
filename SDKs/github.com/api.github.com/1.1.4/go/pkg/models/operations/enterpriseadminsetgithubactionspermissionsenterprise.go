@@ -9,7 +9,7 @@ type EnterpriseAdminSetGithubActionsPermissionsEnterprisePathParams struct {
 }
 
 type EnterpriseAdminSetGithubActionsPermissionsEnterpriseRequestBody struct {
-	AllowedActions       *shared.AllowedActionsEnum      `json:"allowed_actions"`
+	AllowedActions       *shared.AllowedActionsEnum      `json:"allowed_actions,omitempty"`
 	EnabledOrganizations shared.EnabledOrganizationsEnum `json:"enabled_organizations"`
 }
 

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeEndpointGroupResponse struct {
-	EndpointGroup *EndpointGroup `json:"EndpointGroup"`
+	EndpointGroup *EndpointGroup `json:"EndpointGroup,omitempty"`
 }

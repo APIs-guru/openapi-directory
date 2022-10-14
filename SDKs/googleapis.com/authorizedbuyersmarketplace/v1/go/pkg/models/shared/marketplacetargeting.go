@@ -1,12 +1,12 @@
 package shared
 
 type MarketplaceTargeting struct {
-	DaypartTargeting       *DayPartTargeting       `json:"daypartTargeting"`
-	GeoTargeting           *CriteriaTargeting      `json:"geoTargeting"`
-	InventorySizeTargeting *InventorySizeTargeting `json:"inventorySizeTargeting"`
-	InventoryTypeTargeting *InventoryTypeTargeting `json:"inventoryTypeTargeting"`
-	PlacementTargeting     *PlacementTargeting     `json:"placementTargeting"`
-	TechnologyTargeting    *TechnologyTargeting    `json:"technologyTargeting"`
-	UserListTargeting      *CriteriaTargeting      `json:"userListTargeting"`
-	VideoTargeting         *VideoTargeting         `json:"videoTargeting"`
+	DaypartTargeting       *DayPartTargeting       `json:"daypartTargeting,omitempty"`
+	GeoTargeting           *CriteriaTargeting      `json:"geoTargeting,omitempty"`
+	InventorySizeTargeting *InventorySizeTargeting `json:"inventorySizeTargeting,omitempty"`
+	InventoryTypeTargeting *InventoryTypeTargeting `json:"inventoryTypeTargeting,omitempty"`
+	PlacementTargeting     *PlacementTargeting     `json:"placementTargeting,omitempty"`
+	TechnologyTargeting    *TechnologyTargeting    `json:"technologyTargeting,omitempty"`
+	UserListTargeting      *CriteriaTargeting      `json:"userListTargeting,omitempty"`
+	VideoTargeting         *VideoTargeting         `json:"videoTargeting,omitempty"`
 }

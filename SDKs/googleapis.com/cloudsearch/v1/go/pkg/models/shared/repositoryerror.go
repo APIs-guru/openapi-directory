@@ -16,7 +16,7 @@ const (
 )
 
 type RepositoryError struct {
-	ErrorMessage   *string                  `json:"errorMessage"`
-	HTTPStatusCode *int32                   `json:"httpStatusCode"`
-	Type           *RepositoryErrorTypeEnum `json:"type"`
+	ErrorMessage   *string                  `json:"errorMessage,omitempty"`
+	HTTPStatusCode *int32                   `json:"httpStatusCode,omitempty"`
+	Type           *RepositoryErrorTypeEnum `json:"type,omitempty"`
 }

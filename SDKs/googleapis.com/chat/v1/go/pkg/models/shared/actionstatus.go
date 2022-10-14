@@ -23,6 +23,6 @@ const (
 )
 
 type ActionStatus struct {
-	StatusCode        *ActionStatusStatusCodeEnum `json:"statusCode"`
-	UserFacingMessage *string                     `json:"userFacingMessage"`
+	StatusCode        *ActionStatusStatusCodeEnum `json:"statusCode,omitempty"`
+	UserFacingMessage *string                     `json:"userFacingMessage,omitempty"`
 }

@@ -25,25 +25,25 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1Intent struct {
-	Action                   *string                                                          `json:"action"`
-	DefaultResponsePlatforms []GoogleCloudDialogflowV2beta1IntentDefaultResponsePlatformsEnum `json:"defaultResponsePlatforms"`
-	DisplayName              *string                                                          `json:"displayName"`
-	EndInteraction           *bool                                                            `json:"endInteraction"`
-	Events                   []string                                                         `json:"events"`
-	FollowupIntentInfo       []GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo           `json:"followupIntentInfo"`
-	InputContextNames        []string                                                         `json:"inputContextNames"`
-	IsFallback               *bool                                                            `json:"isFallback"`
-	LiveAgentHandoff         *bool                                                            `json:"liveAgentHandoff"`
-	Messages                 []GoogleCloudDialogflowV2beta1IntentMessage                      `json:"messages"`
-	MlDisabled               *bool                                                            `json:"mlDisabled"`
-	MlEnabled                *bool                                                            `json:"mlEnabled"`
-	Name                     *string                                                          `json:"name"`
-	OutputContexts           []GoogleCloudDialogflowV2beta1Context                            `json:"outputContexts"`
-	Parameters               []GoogleCloudDialogflowV2beta1IntentParameter                    `json:"parameters"`
-	ParentFollowupIntentName *string                                                          `json:"parentFollowupIntentName"`
-	Priority                 *int32                                                           `json:"priority"`
-	ResetContexts            *bool                                                            `json:"resetContexts"`
-	RootFollowupIntentName   *string                                                          `json:"rootFollowupIntentName"`
-	TrainingPhrases          []GoogleCloudDialogflowV2beta1IntentTrainingPhrase               `json:"trainingPhrases"`
-	WebhookState             *GoogleCloudDialogflowV2beta1IntentWebhookStateEnum              `json:"webhookState"`
+	Action                   *string                                                          `json:"action,omitempty"`
+	DefaultResponsePlatforms []GoogleCloudDialogflowV2beta1IntentDefaultResponsePlatformsEnum `json:"defaultResponsePlatforms,omitempty"`
+	DisplayName              *string                                                          `json:"displayName,omitempty"`
+	EndInteraction           *bool                                                            `json:"endInteraction,omitempty"`
+	Events                   []string                                                         `json:"events,omitempty"`
+	FollowupIntentInfo       []GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo           `json:"followupIntentInfo,omitempty"`
+	InputContextNames        []string                                                         `json:"inputContextNames,omitempty"`
+	IsFallback               *bool                                                            `json:"isFallback,omitempty"`
+	LiveAgentHandoff         *bool                                                            `json:"liveAgentHandoff,omitempty"`
+	Messages                 []GoogleCloudDialogflowV2beta1IntentMessage                      `json:"messages,omitempty"`
+	MlDisabled               *bool                                                            `json:"mlDisabled,omitempty"`
+	MlEnabled                *bool                                                            `json:"mlEnabled,omitempty"`
+	Name                     *string                                                          `json:"name,omitempty"`
+	OutputContexts           []GoogleCloudDialogflowV2beta1Context                            `json:"outputContexts,omitempty"`
+	Parameters               []GoogleCloudDialogflowV2beta1IntentParameter                    `json:"parameters,omitempty"`
+	ParentFollowupIntentName *string                                                          `json:"parentFollowupIntentName,omitempty"`
+	Priority                 *int32                                                           `json:"priority,omitempty"`
+	ResetContexts            *bool                                                            `json:"resetContexts,omitempty"`
+	RootFollowupIntentName   *string                                                          `json:"rootFollowupIntentName,omitempty"`
+	TrainingPhrases          []GoogleCloudDialogflowV2beta1IntentTrainingPhrase               `json:"trainingPhrases,omitempty"`
+	WebhookState             *GoogleCloudDialogflowV2beta1IntentWebhookStateEnum              `json:"webhookState,omitempty"`
 }

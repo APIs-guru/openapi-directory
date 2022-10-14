@@ -1,18 +1,18 @@
 package shared
 
 type Precinct struct {
-	AdministrationRegionID *string  `json:"administrationRegionId"`
-	ContestID              []string `json:"contestId"`
-	DatasetID              *string  `json:"datasetId"`
-	EarlyVoteSiteID        []string `json:"earlyVoteSiteId"`
-	ElectoralDistrictID    []string `json:"electoralDistrictId"`
-	ID                     *string  `json:"id"`
-	MailOnly               *bool    `json:"mailOnly"`
-	Name                   *string  `json:"name"`
-	Number                 *string  `json:"number"`
-	OcdID                  []string `json:"ocdId"`
-	PollingLocationID      []string `json:"pollingLocationId"`
-	SpatialBoundaryID      []string `json:"spatialBoundaryId"`
-	SplitName              *string  `json:"splitName"`
-	Ward                   *string  `json:"ward"`
+	AdministrationRegionID *string  `json:"administrationRegionId,omitempty"`
+	ContestID              []string `json:"contestId,omitempty"`
+	DatasetID              *string  `json:"datasetId,omitempty"`
+	EarlyVoteSiteID        []string `json:"earlyVoteSiteId,omitempty"`
+	ElectoralDistrictID    []string `json:"electoralDistrictId,omitempty"`
+	ID                     *string  `json:"id,omitempty"`
+	MailOnly               *bool    `json:"mailOnly,omitempty"`
+	Name                   *string  `json:"name,omitempty"`
+	Number                 *string  `json:"number,omitempty"`
+	OcdID                  []string `json:"ocdId,omitempty"`
+	PollingLocationID      []string `json:"pollingLocationId,omitempty"`
+	SpatialBoundaryID      []string `json:"spatialBoundaryId,omitempty"`
+	SplitName              *string  `json:"splitName,omitempty"`
+	Ward                   *string  `json:"ward,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type AwsRedshiftClusterClusterNode struct {
-	NodeRole         *string `json:"NodeRole"`
-	PrivateIPAddress *string `json:"PrivateIpAddress"`
-	PublicIPAddress  *string `json:"PublicIpAddress"`
+	NodeRole         *string `json:"NodeRole,omitempty"`
+	PrivateIPAddress *string `json:"PrivateIpAddress,omitempty"`
+	PublicIPAddress  *string `json:"PublicIpAddress,omitempty"`
 }

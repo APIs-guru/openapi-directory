@@ -1,12 +1,12 @@
 package shared
 
 type InAppMessageCampaign struct {
-	CampaignID   *string                `json:"CampaignId"`
-	DailyCap     *int64                 `json:"DailyCap"`
-	InAppMessage *InAppMessage          `json:"InAppMessage"`
-	Priority     *int64                 `json:"Priority"`
-	Schedule     *InAppCampaignSchedule `json:"Schedule"`
-	SessionCap   *int64                 `json:"SessionCap"`
-	TotalCap     *int64                 `json:"TotalCap"`
-	TreatmentID  *string                `json:"TreatmentId"`
+	CampaignID   *string                `json:"CampaignId,omitempty"`
+	DailyCap     *int64                 `json:"DailyCap,omitempty"`
+	InAppMessage *InAppMessage          `json:"InAppMessage,omitempty"`
+	Priority     *int64                 `json:"Priority,omitempty"`
+	Schedule     *InAppCampaignSchedule `json:"Schedule,omitempty"`
+	SessionCap   *int64                 `json:"SessionCap,omitempty"`
+	TotalCap     *int64                 `json:"TotalCap,omitempty"`
+	TreatmentID  *string                `json:"TreatmentId,omitempty"`
 }

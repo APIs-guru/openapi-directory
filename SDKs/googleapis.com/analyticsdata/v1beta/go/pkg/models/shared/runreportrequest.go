@@ -11,18 +11,18 @@ const (
 )
 
 type RunReportRequest struct {
-	CohortSpec          *CohortSpec                              `json:"cohortSpec"`
-	CurrencyCode        *string                                  `json:"currencyCode"`
-	DateRanges          []DateRange                              `json:"dateRanges"`
-	DimensionFilter     *FilterExpression                        `json:"dimensionFilter"`
-	Dimensions          []Dimension                              `json:"dimensions"`
-	KeepEmptyRows       *bool                                    `json:"keepEmptyRows"`
-	Limit               *string                                  `json:"limit"`
-	MetricAggregations  []RunReportRequestMetricAggregationsEnum `json:"metricAggregations"`
-	MetricFilter        *FilterExpression                        `json:"metricFilter"`
-	Metrics             []Metric                                 `json:"metrics"`
-	Offset              *string                                  `json:"offset"`
-	OrderBys            []OrderBy                                `json:"orderBys"`
-	Property            *string                                  `json:"property"`
-	ReturnPropertyQuota *bool                                    `json:"returnPropertyQuota"`
+	CohortSpec          *CohortSpec                              `json:"cohortSpec,omitempty"`
+	CurrencyCode        *string                                  `json:"currencyCode,omitempty"`
+	DateRanges          []DateRange                              `json:"dateRanges,omitempty"`
+	DimensionFilter     *FilterExpression                        `json:"dimensionFilter,omitempty"`
+	Dimensions          []Dimension                              `json:"dimensions,omitempty"`
+	KeepEmptyRows       *bool                                    `json:"keepEmptyRows,omitempty"`
+	Limit               *string                                  `json:"limit,omitempty"`
+	MetricAggregations  []RunReportRequestMetricAggregationsEnum `json:"metricAggregations,omitempty"`
+	MetricFilter        *FilterExpression                        `json:"metricFilter,omitempty"`
+	Metrics             []Metric                                 `json:"metrics,omitempty"`
+	Offset              *string                                  `json:"offset,omitempty"`
+	OrderBys            []OrderBy                                `json:"orderBys,omitempty"`
+	Property            *string                                  `json:"property,omitempty"`
+	ReturnPropertyQuota *bool                                    `json:"returnPropertyQuota,omitempty"`
 }

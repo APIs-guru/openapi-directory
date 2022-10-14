@@ -1,5 +1,5 @@
 package shared
 
 type GetTranscriptionJobResponse struct {
-	TranscriptionJob *TranscriptionJob `json:"TranscriptionJob"`
+	TranscriptionJob *TranscriptionJob `json:"TranscriptionJob,omitempty"`
 }

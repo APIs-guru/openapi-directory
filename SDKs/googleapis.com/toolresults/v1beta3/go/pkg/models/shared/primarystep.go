@@ -12,6 +12,6 @@ const (
 )
 
 type PrimaryStep struct {
-	IndividualOutcome []IndividualOutcome    `json:"individualOutcome"`
-	RollUp            *PrimaryStepRollUpEnum `json:"rollUp"`
+	IndividualOutcome []IndividualOutcome    `json:"individualOutcome,omitempty"`
+	RollUp            *PrimaryStepRollUpEnum `json:"rollUp,omitempty"`
 }

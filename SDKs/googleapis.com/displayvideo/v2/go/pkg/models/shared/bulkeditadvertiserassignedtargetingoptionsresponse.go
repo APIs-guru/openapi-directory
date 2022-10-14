@@ -1,5 +1,5 @@
 package shared
 
 type BulkEditAdvertiserAssignedTargetingOptionsResponse struct {
-	CreatedAssignedTargetingOptions []AssignedTargetingOption `json:"createdAssignedTargetingOptions"`
+	CreatedAssignedTargetingOptions []AssignedTargetingOption `json:"createdAssignedTargetingOptions,omitempty"`
 }

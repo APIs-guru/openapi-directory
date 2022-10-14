@@ -20,10 +20,10 @@ type ListChannelsHeaders struct {
 }
 
 type ListChannelsRequestBody struct {
-	FilterByName                      *string `json:"filterByName"`
-	FilterByRecordingConfigurationArn *string `json:"filterByRecordingConfigurationArn"`
-	MaxResults                        *int64  `json:"maxResults"`
-	NextToken                         *string `json:"nextToken"`
+	FilterByName                      *string `json:"filterByName,omitempty"`
+	FilterByRecordingConfigurationArn *string `json:"filterByRecordingConfigurationArn,omitempty"`
+	MaxResults                        *int64  `json:"maxResults,omitempty"`
+	NextToken                         *string `json:"nextToken,omitempty"`
 }
 
 type ListChannelsRequest struct {

@@ -1,12 +1,12 @@
 package shared
 
 type RelationalDatabaseParameter struct {
-	AllowedValues  *string `json:"allowedValues"`
-	ApplyMethod    *string `json:"applyMethod"`
-	ApplyType      *string `json:"applyType"`
-	DataType       *string `json:"dataType"`
-	Description    *string `json:"description"`
-	IsModifiable   *bool   `json:"isModifiable"`
-	ParameterName  *string `json:"parameterName"`
-	ParameterValue *string `json:"parameterValue"`
+	AllowedValues  *string `json:"allowedValues,omitempty"`
+	ApplyMethod    *string `json:"applyMethod,omitempty"`
+	ApplyType      *string `json:"applyType,omitempty"`
+	DataType       *string `json:"dataType,omitempty"`
+	Description    *string `json:"description,omitempty"`
+	IsModifiable   *bool   `json:"isModifiable,omitempty"`
+	ParameterName  *string `json:"parameterName,omitempty"`
+	ParameterValue *string `json:"parameterValue,omitempty"`
 }

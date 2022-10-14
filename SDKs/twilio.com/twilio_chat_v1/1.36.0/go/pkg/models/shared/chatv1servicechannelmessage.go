@@ -5,17 +5,17 @@ import (
 )
 
 type ChatV1ServiceChannelMessage struct {
-	AccountSid  *string    `json:"account_sid"`
-	Attributes  *string    `json:"attributes"`
-	Body        *string    `json:"body"`
-	ChannelSid  *string    `json:"channel_sid"`
-	DateCreated *time.Time `json:"date_created"`
-	DateUpdated *time.Time `json:"date_updated"`
-	From        *string    `json:"from"`
-	Index       *int64     `json:"index"`
-	ServiceSid  *string    `json:"service_sid"`
-	Sid         *string    `json:"sid"`
-	To          *string    `json:"to"`
-	URL         *string    `json:"url"`
-	WasEdited   *bool      `json:"was_edited"`
+	AccountSid  *string    `json:"account_sid,omitempty"`
+	Attributes  *string    `json:"attributes,omitempty"`
+	Body        *string    `json:"body,omitempty"`
+	ChannelSid  *string    `json:"channel_sid,omitempty"`
+	DateCreated *time.Time `json:"date_created,omitempty"`
+	DateUpdated *time.Time `json:"date_updated,omitempty"`
+	From        *string    `json:"from,omitempty"`
+	Index       *int64     `json:"index,omitempty"`
+	ServiceSid  *string    `json:"service_sid,omitempty"`
+	Sid         *string    `json:"sid,omitempty"`
+	To          *string    `json:"to,omitempty"`
+	URL         *string    `json:"url,omitempty"`
+	WasEdited   *bool      `json:"was_edited,omitempty"`
 }

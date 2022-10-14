@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudienceSimpleFilter struct {
-	FilterExpression *GoogleAnalyticsAdminV1alphaAudienceFilterExpression      `json:"filterExpression"`
-	Scope            *GoogleAnalyticsAdminV1alphaAudienceSimpleFilterScopeEnum `json:"scope"`
+	FilterExpression *GoogleAnalyticsAdminV1alphaAudienceFilterExpression      `json:"filterExpression,omitempty"`
+	Scope            *GoogleAnalyticsAdminV1alphaAudienceSimpleFilterScopeEnum `json:"scope,omitempty"`
 }

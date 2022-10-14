@@ -1,6 +1,6 @@
 package shared
 
 type NewDeviceMetadataType struct {
-	DeviceGroupKey *string `json:"DeviceGroupKey"`
-	DeviceKey      *string `json:"DeviceKey"`
+	DeviceGroupKey *string `json:"DeviceGroupKey,omitempty"`
+	DeviceKey      *string `json:"DeviceKey,omitempty"`
 }

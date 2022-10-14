@@ -1,9 +1,9 @@
 package shared
 
 type Contact struct {
-	Email     *string `json:"email"`
-	FirstName *string `json:"firstName"`
-	ID        *string `json:"id"`
-	LastName  *string `json:"lastName"`
-	Phone     *string `json:"phone"`
+	Email     *string `json:"email,omitempty"`
+	FirstName *string `json:"firstName,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	LastName  *string `json:"lastName,omitempty"`
+	Phone     *string `json:"phone,omitempty"`
 }

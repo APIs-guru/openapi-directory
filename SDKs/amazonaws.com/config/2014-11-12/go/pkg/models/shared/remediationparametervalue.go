@@ -1,6 +1,6 @@
 package shared
 
 type RemediationParameterValue struct {
-	ResourceValue *ResourceValue `json:"ResourceValue"`
-	StaticValue   *StaticValue   `json:"StaticValue"`
+	ResourceValue *ResourceValue `json:"ResourceValue,omitempty"`
+	StaticValue   *StaticValue   `json:"StaticValue,omitempty"`
 }

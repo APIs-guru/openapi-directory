@@ -10,10 +10,10 @@ const (
 )
 
 type WebLinkContract struct {
-	Category         *WebLinkContractCategoryEnum `json:"category"`
-	Description      *string                      `json:"description"`
-	DescriptionOrURL *string                      `json:"descriptionOrUrl"`
-	Disabled         *bool                        `json:"disabled"`
-	ID               *int32                       `json:"id"`
-	URL              *string                      `json:"url"`
+	Category         *WebLinkContractCategoryEnum `json:"category,omitempty"`
+	Description      *string                      `json:"description,omitempty"`
+	DescriptionOrURL *string                      `json:"descriptionOrUrl,omitempty"`
+	Disabled         *bool                        `json:"disabled,omitempty"`
+	ID               *int32                       `json:"id,omitempty"`
+	URL              *string                      `json:"url,omitempty"`
 }

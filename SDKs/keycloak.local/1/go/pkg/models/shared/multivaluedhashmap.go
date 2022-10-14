@@ -1,7 +1,7 @@
 package shared
 
 type MultivaluedHashMap struct {
-	Empty      *bool    `json:"empty"`
-	LoadFactor *float32 `json:"loadFactor"`
-	Threshold  *int32   `json:"threshold"`
+	Empty      *bool    `json:"empty,omitempty"`
+	LoadFactor *float32 `json:"loadFactor,omitempty"`
+	Threshold  *int32   `json:"threshold,omitempty"`
 }

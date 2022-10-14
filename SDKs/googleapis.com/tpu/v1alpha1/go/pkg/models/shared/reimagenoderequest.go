@@ -1,5 +1,5 @@
 package shared
 
 type ReimageNodeRequest struct {
-	TensorflowVersion *string `json:"tensorflowVersion"`
+	TensorflowVersion *string `json:"tensorflowVersion,omitempty"`
 }

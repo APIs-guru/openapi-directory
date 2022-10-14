@@ -1,9 +1,9 @@
 package shared
 
 type ProgressCounters struct {
-	CancelledSteps *int64 `json:"CancelledSteps"`
-	FailedSteps    *int64 `json:"FailedSteps"`
-	SuccessSteps   *int64 `json:"SuccessSteps"`
-	TimedOutSteps  *int64 `json:"TimedOutSteps"`
-	TotalSteps     *int64 `json:"TotalSteps"`
+	CancelledSteps *int64 `json:"CancelledSteps,omitempty"`
+	FailedSteps    *int64 `json:"FailedSteps,omitempty"`
+	SuccessSteps   *int64 `json:"SuccessSteps,omitempty"`
+	TimedOutSteps  *int64 `json:"TimedOutSteps,omitempty"`
+	TotalSteps     *int64 `json:"TotalSteps,omitempty"`
 }

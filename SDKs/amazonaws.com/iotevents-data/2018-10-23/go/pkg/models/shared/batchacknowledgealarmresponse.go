@@ -1,5 +1,5 @@
 package shared
 
 type BatchAcknowledgeAlarmResponse struct {
-	ErrorEntries []BatchAlarmActionErrorEntry `json:"errorEntries"`
+	ErrorEntries []BatchAlarmActionErrorEntry `json:"errorEntries,omitempty"`
 }

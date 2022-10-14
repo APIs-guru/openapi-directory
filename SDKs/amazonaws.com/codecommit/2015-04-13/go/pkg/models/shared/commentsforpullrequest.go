@@ -1,12 +1,12 @@
 package shared
 
 type CommentsForPullRequest struct {
-	AfterBlobID    *string   `json:"afterBlobId"`
-	AfterCommitID  *string   `json:"afterCommitId"`
-	BeforeBlobID   *string   `json:"beforeBlobId"`
-	BeforeCommitID *string   `json:"beforeCommitId"`
-	Comments       []Comment `json:"comments"`
-	Location       *Location `json:"location"`
-	PullRequestID  *string   `json:"pullRequestId"`
-	RepositoryName *string   `json:"repositoryName"`
+	AfterBlobID    *string   `json:"afterBlobId,omitempty"`
+	AfterCommitID  *string   `json:"afterCommitId,omitempty"`
+	BeforeBlobID   *string   `json:"beforeBlobId,omitempty"`
+	BeforeCommitID *string   `json:"beforeCommitId,omitempty"`
+	Comments       []Comment `json:"comments,omitempty"`
+	Location       *Location `json:"location,omitempty"`
+	PullRequestID  *string   `json:"pullRequestId,omitempty"`
+	RepositoryName *string   `json:"repositoryName,omitempty"`
 }

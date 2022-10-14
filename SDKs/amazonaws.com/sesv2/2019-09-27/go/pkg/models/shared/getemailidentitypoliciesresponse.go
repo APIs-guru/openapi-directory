@@ -1,5 +1,5 @@
 package shared
 
 type GetEmailIdentityPoliciesResponse struct {
-	Policies map[string]string `json:"Policies"`
+	Policies map[string]string `json:"Policies,omitempty"`
 }

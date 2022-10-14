@@ -1,8 +1,8 @@
 package shared
 
 type ResourceGroupInputModel struct {
-	Description *string `json:"description"`
-	Email       *string `json:"email"`
-	LocationID  *string `json:"locationId"`
-	Name        *string `json:"name"`
+	Description *string `json:"description,omitempty"`
+	Email       *string `json:"email,omitempty"`
+	LocationID  *string `json:"locationId,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }

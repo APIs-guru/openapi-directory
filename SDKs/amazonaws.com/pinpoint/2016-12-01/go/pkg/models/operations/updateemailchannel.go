@@ -19,11 +19,11 @@ type UpdateEmailChannelHeaders struct {
 }
 
 type UpdateEmailChannelRequestBodyEmailChannelRequest struct {
-	ConfigurationSet *string `json:"ConfigurationSet"`
-	Enabled          *bool   `json:"Enabled"`
-	FromAddress      *string `json:"FromAddress"`
-	Identity         *string `json:"Identity"`
-	RoleArn          *string `json:"RoleArn"`
+	ConfigurationSet *string `json:"ConfigurationSet,omitempty"`
+	Enabled          *bool   `json:"Enabled,omitempty"`
+	FromAddress      *string `json:"FromAddress,omitempty"`
+	Identity         *string `json:"Identity,omitempty"`
+	RoleArn          *string `json:"RoleArn,omitempty"`
 }
 
 type UpdateEmailChannelRequestBody struct {

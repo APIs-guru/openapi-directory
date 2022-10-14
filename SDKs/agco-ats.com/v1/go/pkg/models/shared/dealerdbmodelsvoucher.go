@@ -14,17 +14,17 @@ const (
 )
 
 type DealerDbModelsVoucher struct {
-	CreatedDate    *time.Time                     `json:"CreatedDate" form:"name=CreatedDate"`
-	DealerCode     *string                        `json:"DealerCode" form:"name=DealerCode"`
-	Deleted        *bool                          `json:"Deleted" form:"name=Deleted"`
-	Email          *string                        `json:"Email" form:"name=Email"`
-	ExpirationDate *time.Time                     `json:"ExpirationDate" form:"name=ExpirationDate"`
-	LicenseTo      *string                        `json:"LicenseTo" form:"name=LicenseTo"`
-	ModifiedBy     *string                        `json:"ModifiedBy" form:"name=ModifiedBy"`
-	OrderNumber    *string                        `json:"OrderNumber" form:"name=OrderNumber"`
-	Punched        *bool                          `json:"Punched" form:"name=Punched"`
-	PunchedDate    *time.Time                     `json:"PunchedDate" form:"name=PunchedDate"`
-	Purpose        *string                        `json:"Purpose" form:"name=Purpose"`
-	Type           *DealerDbModelsVoucherTypeEnum `json:"Type" form:"name=Type"`
-	VoucherCode    *string                        `json:"VoucherCode" form:"name=VoucherCode"`
+	CreatedDate    *time.Time                     `json:"CreatedDate,omitempty" form:"name=CreatedDate"`
+	DealerCode     *string                        `json:"DealerCode,omitempty" form:"name=DealerCode"`
+	Deleted        *bool                          `json:"Deleted,omitempty" form:"name=Deleted"`
+	Email          *string                        `json:"Email,omitempty" form:"name=Email"`
+	ExpirationDate *time.Time                     `json:"ExpirationDate,omitempty" form:"name=ExpirationDate"`
+	LicenseTo      *string                        `json:"LicenseTo,omitempty" form:"name=LicenseTo"`
+	ModifiedBy     *string                        `json:"ModifiedBy,omitempty" form:"name=ModifiedBy"`
+	OrderNumber    *string                        `json:"OrderNumber,omitempty" form:"name=OrderNumber"`
+	Punched        *bool                          `json:"Punched,omitempty" form:"name=Punched"`
+	PunchedDate    *time.Time                     `json:"PunchedDate,omitempty" form:"name=PunchedDate"`
+	Purpose        *string                        `json:"Purpose,omitempty" form:"name=Purpose"`
+	Type           *DealerDbModelsVoucherTypeEnum `json:"Type,omitempty" form:"name=Type"`
+	VoucherCode    *string                        `json:"VoucherCode,omitempty" form:"name=VoucherCode"`
 }

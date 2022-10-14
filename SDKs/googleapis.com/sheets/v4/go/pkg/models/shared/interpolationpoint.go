@@ -12,8 +12,8 @@ const (
 )
 
 type InterpolationPoint struct {
-	Color      *Color                      `json:"color"`
-	ColorStyle *ColorStyle                 `json:"colorStyle"`
-	Type       *InterpolationPointTypeEnum `json:"type"`
-	Value      *string                     `json:"value"`
+	Color      *Color                      `json:"color,omitempty"`
+	ColorStyle *ColorStyle                 `json:"colorStyle,omitempty"`
+	Type       *InterpolationPointTypeEnum `json:"type,omitempty"`
+	Value      *string                     `json:"value,omitempty"`
 }

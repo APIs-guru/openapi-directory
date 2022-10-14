@@ -9,6 +9,6 @@ const (
 )
 
 type ProjectEntity struct {
-	GlobalAccess *ProjectEntityGlobalAccessEnum `json:"global_access"`
-	ID           *int32                         `json:"id"`
+	GlobalAccess *ProjectEntityGlobalAccessEnum `json:"global_access,omitempty"`
+	ID           *int32                         `json:"id,omitempty"`
 }

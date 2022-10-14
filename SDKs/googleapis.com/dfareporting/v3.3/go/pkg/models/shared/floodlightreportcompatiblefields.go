@@ -1,8 +1,8 @@
 package shared
 
 type FloodlightReportCompatibleFields struct {
-	DimensionFilters []Dimension `json:"dimensionFilters"`
-	Dimensions       []Dimension `json:"dimensions"`
-	Kind             *string     `json:"kind"`
-	Metrics          []Metric    `json:"metrics"`
+	DimensionFilters []Dimension `json:"dimensionFilters,omitempty"`
+	Dimensions       []Dimension `json:"dimensions,omitempty"`
+	Kind             *string     `json:"kind,omitempty"`
+	Metrics          []Metric    `json:"metrics,omitempty"`
 }

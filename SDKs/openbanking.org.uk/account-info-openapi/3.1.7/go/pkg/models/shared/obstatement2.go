@@ -23,20 +23,20 @@ type ObStatement2StatementDateTime struct {
 type ObStatement2StatementFee struct {
 	Amount               ObActiveOrHistoricCurrencyAndAmount6 `json:"Amount"`
 	CreditDebitIndicator ObCreditDebitCode0Enum               `json:"CreditDebitIndicator"`
-	Description          *string                              `json:"Description"`
-	Frequency            *string                              `json:"Frequency"`
-	Rate                 *float64                             `json:"Rate"`
-	RateType             *string                              `json:"RateType"`
+	Description          *string                              `json:"Description,omitempty"`
+	Frequency            *string                              `json:"Frequency,omitempty"`
+	Rate                 *float64                             `json:"Rate,omitempty"`
+	RateType             *string                              `json:"RateType,omitempty"`
 	Type                 string                               `json:"Type"`
 }
 
 type ObStatement2StatementInterest struct {
 	Amount               ObActiveOrHistoricCurrencyAndAmount7 `json:"Amount"`
 	CreditDebitIndicator ObCreditDebitCode0Enum               `json:"CreditDebitIndicator"`
-	Description          *string                              `json:"Description"`
-	Frequency            *string                              `json:"Frequency"`
-	Rate                 *float64                             `json:"Rate"`
-	RateType             *string                              `json:"RateType"`
+	Description          *string                              `json:"Description,omitempty"`
+	Frequency            *string                              `json:"Frequency,omitempty"`
+	Rate                 *float64                             `json:"Rate,omitempty"`
+	RateType             *string                              `json:"RateType,omitempty"`
 	Type                 string                               `json:"Type"`
 }
 
@@ -55,15 +55,15 @@ type ObStatement2 struct {
 	CreationDateTime     time.Time                        `json:"CreationDateTime"`
 	EndDateTime          time.Time                        `json:"EndDateTime"`
 	StartDateTime        time.Time                        `json:"StartDateTime"`
-	StatementAmount      []ObStatement2StatementAmount    `json:"StatementAmount"`
-	StatementBenefit     []ObStatement2StatementBenefit   `json:"StatementBenefit"`
-	StatementDateTime    []ObStatement2StatementDateTime  `json:"StatementDateTime"`
-	StatementDescription []string                         `json:"StatementDescription"`
-	StatementFee         []ObStatement2StatementFee       `json:"StatementFee"`
-	StatementID          *string                          `json:"StatementId"`
-	StatementInterest    []ObStatement2StatementInterest  `json:"StatementInterest"`
-	StatementRate        []ObStatement2StatementRate      `json:"StatementRate"`
-	StatementReference   *string                          `json:"StatementReference"`
-	StatementValue       []ObStatement2StatementValue     `json:"StatementValue"`
+	StatementAmount      []ObStatement2StatementAmount    `json:"StatementAmount,omitempty"`
+	StatementBenefit     []ObStatement2StatementBenefit   `json:"StatementBenefit,omitempty"`
+	StatementDateTime    []ObStatement2StatementDateTime  `json:"StatementDateTime,omitempty"`
+	StatementDescription []string                         `json:"StatementDescription,omitempty"`
+	StatementFee         []ObStatement2StatementFee       `json:"StatementFee,omitempty"`
+	StatementID          *string                          `json:"StatementId,omitempty"`
+	StatementInterest    []ObStatement2StatementInterest  `json:"StatementInterest,omitempty"`
+	StatementRate        []ObStatement2StatementRate      `json:"StatementRate,omitempty"`
+	StatementReference   *string                          `json:"StatementReference,omitempty"`
+	StatementValue       []ObStatement2StatementValue     `json:"StatementValue,omitempty"`
 	Type                 ObExternalStatementType1CodeEnum `json:"Type"`
 }

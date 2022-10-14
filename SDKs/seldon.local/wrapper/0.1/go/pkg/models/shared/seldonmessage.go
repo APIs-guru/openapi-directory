@@ -1,9 +1,9 @@
 package shared
 
 type SeldonMessage struct {
-	BinData *string      `json:"binData"`
-	Data    *DefaultData `json:"data"`
-	Meta    *Meta        `json:"meta"`
-	Status  *Status      `json:"status"`
-	StrData *string      `json:"strData"`
+	BinData *string      `json:"binData,omitempty"`
+	Data    *DefaultData `json:"data,omitempty"`
+	Meta    *Meta        `json:"meta,omitempty"`
+	Status  *Status      `json:"status,omitempty"`
+	StrData *string      `json:"strData,omitempty"`
 }

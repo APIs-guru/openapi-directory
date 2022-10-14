@@ -1,8 +1,8 @@
 package shared
 
 type BillingAccount struct {
-	DisplayName          *string `json:"displayName"`
-	MasterBillingAccount *string `json:"masterBillingAccount"`
-	Name                 *string `json:"name"`
-	Open                 *bool   `json:"open"`
+	DisplayName          *string `json:"displayName,omitempty"`
+	MasterBillingAccount *string `json:"masterBillingAccount,omitempty"`
+	Name                 *string `json:"name,omitempty"`
+	Open                 *bool   `json:"open,omitempty"`
 }

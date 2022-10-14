@@ -1,7 +1,7 @@
 package shared
 
 type RecordOutput struct {
-	Description *string `json:"Description"`
-	OutputKey   *string `json:"OutputKey"`
-	OutputValue *string `json:"OutputValue"`
+	Description *string `json:"Description,omitempty"`
+	OutputKey   *string `json:"OutputKey,omitempty"`
+	OutputValue *string `json:"OutputValue,omitempty"`
 }

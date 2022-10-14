@@ -25,9 +25,9 @@ type GetDevicePositionHistoryHeaders struct {
 }
 
 type GetDevicePositionHistoryRequestBody struct {
-	EndTimeExclusive   *time.Time `json:"EndTimeExclusive"`
-	NextToken          *string    `json:"NextToken"`
-	StartTimeInclusive *time.Time `json:"StartTimeInclusive"`
+	EndTimeExclusive   *time.Time `json:"EndTimeExclusive,omitempty"`
+	NextToken          *string    `json:"NextToken,omitempty"`
+	StartTimeInclusive *time.Time `json:"StartTimeInclusive,omitempty"`
 }
 
 type GetDevicePositionHistoryRequest struct {

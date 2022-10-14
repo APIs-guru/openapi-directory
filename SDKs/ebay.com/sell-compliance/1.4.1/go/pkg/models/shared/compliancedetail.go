@@ -1,10 +1,10 @@
 package shared
 
 type ComplianceDetail struct {
-	ComplianceState           *string                    `json:"complianceState"`
-	CorrectiveRecommendations *CorrectiveRecommendations `json:"correctiveRecommendations"`
-	Message                   *string                    `json:"message"`
-	ReasonCode                *string                    `json:"reasonCode"`
-	Variation                 *VariationDetails          `json:"variation"`
-	ViolationData             []NameValueList            `json:"violationData"`
+	ComplianceState           *string                    `json:"complianceState,omitempty"`
+	CorrectiveRecommendations *CorrectiveRecommendations `json:"correctiveRecommendations,omitempty"`
+	Message                   *string                    `json:"message,omitempty"`
+	ReasonCode                *string                    `json:"reasonCode,omitempty"`
+	Variation                 *VariationDetails          `json:"variation,omitempty"`
+	ViolationData             []NameValueList            `json:"violationData,omitempty"`
 }

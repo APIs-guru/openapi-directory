@@ -1,6 +1,6 @@
 package shared
 
 type Serializer struct {
-	OrcSerDe     *OrcSerDe     `json:"OrcSerDe"`
-	ParquetSerDe *ParquetSerDe `json:"ParquetSerDe"`
+	OrcSerDe     *OrcSerDe     `json:"OrcSerDe,omitempty"`
+	ParquetSerDe *ParquetSerDe `json:"ParquetSerDe,omitempty"`
 }

@@ -5,10 +5,10 @@ import (
 )
 
 type GetOperationDetailResponse struct {
-	DomainName    *string              `json:"DomainName"`
-	Message       *string              `json:"Message"`
-	OperationID   *string              `json:"OperationId"`
-	Status        *OperationStatusEnum `json:"Status"`
-	SubmittedDate *time.Time           `json:"SubmittedDate"`
-	Type          *OperationTypeEnum   `json:"Type"`
+	DomainName    *string              `json:"DomainName,omitempty"`
+	Message       *string              `json:"Message,omitempty"`
+	OperationID   *string              `json:"OperationId,omitempty"`
+	Status        *OperationStatusEnum `json:"Status,omitempty"`
+	SubmittedDate *time.Time           `json:"SubmittedDate,omitempty"`
+	Type          *OperationTypeEnum   `json:"Type,omitempty"`
 }

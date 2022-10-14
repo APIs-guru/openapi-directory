@@ -1,8 +1,8 @@
 package shared
 
 type GetDefaultRetentionPolicyResponse struct {
-	Description          *string               `json:"Description"`
-	FolderConfigurations []FolderConfiguration `json:"FolderConfigurations"`
-	ID                   *string               `json:"Id"`
-	Name                 *string               `json:"Name"`
+	Description          *string               `json:"Description,omitempty"`
+	FolderConfigurations []FolderConfiguration `json:"FolderConfigurations,omitempty"`
+	ID                   *string               `json:"Id,omitempty"`
+	Name                 *string               `json:"Name,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type GetDeploymentStatusResponse struct {
-	DeploymentStatus *string             `json:"DeploymentStatus"`
-	DeploymentType   *DeploymentTypeEnum `json:"DeploymentType"`
-	ErrorDetails     []ErrorDetail       `json:"ErrorDetails"`
-	ErrorMessage     *string             `json:"ErrorMessage"`
-	UpdatedAt        *string             `json:"UpdatedAt"`
+	DeploymentStatus *string             `json:"DeploymentStatus,omitempty"`
+	DeploymentType   *DeploymentTypeEnum `json:"DeploymentType,omitempty"`
+	ErrorDetails     []ErrorDetail       `json:"ErrorDetails,omitempty"`
+	ErrorMessage     *string             `json:"ErrorMessage,omitempty"`
+	UpdatedAt        *string             `json:"UpdatedAt,omitempty"`
 }

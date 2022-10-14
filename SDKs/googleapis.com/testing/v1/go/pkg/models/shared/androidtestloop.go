@@ -1,9 +1,9 @@
 package shared
 
 type AndroidTestLoop struct {
-	AppApk         *FileReference `json:"appApk"`
-	AppBundle      *AppBundle     `json:"appBundle"`
-	AppPackageID   *string        `json:"appPackageId"`
-	ScenarioLabels []string       `json:"scenarioLabels"`
-	Scenarios      []int32        `json:"scenarios"`
+	AppApk         *FileReference `json:"appApk,omitempty"`
+	AppBundle      *AppBundle     `json:"appBundle,omitempty"`
+	AppPackageID   *string        `json:"appPackageId,omitempty"`
+	ScenarioLabels []string       `json:"scenarioLabels,omitempty"`
+	Scenarios      []int32        `json:"scenarios,omitempty"`
 }

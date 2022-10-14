@@ -1,9 +1,9 @@
 package shared
 
 type Source struct {
-	BaseSpecs            []map[string]interface{} `json:"baseSpecs"`
-	Codec                map[string]interface{}   `json:"codec"`
-	DoesNotNeedSplitting *bool                    `json:"doesNotNeedSplitting"`
-	Metadata             *SourceMetadata          `json:"metadata"`
-	Spec                 map[string]interface{}   `json:"spec"`
+	BaseSpecs            []map[string]interface{} `json:"baseSpecs,omitempty"`
+	Codec                map[string]interface{}   `json:"codec,omitempty"`
+	DoesNotNeedSplitting *bool                    `json:"doesNotNeedSplitting,omitempty"`
+	Metadata             *SourceMetadata          `json:"metadata,omitempty"`
+	Spec                 map[string]interface{}   `json:"spec,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ListSecretVersionIdsResponse struct {
-	Arn       *string                   `json:"ARN"`
-	Name      *string                   `json:"Name"`
-	NextToken *string                   `json:"NextToken"`
-	Versions  []SecretVersionsListEntry `json:"Versions"`
+	Arn       *string                   `json:"ARN,omitempty"`
+	Name      *string                   `json:"Name,omitempty"`
+	NextToken *string                   `json:"NextToken,omitempty"`
+	Versions  []SecretVersionsListEntry `json:"Versions,omitempty"`
 }

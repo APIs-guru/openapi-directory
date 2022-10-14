@@ -19,11 +19,11 @@ const (
 )
 
 type Backup struct {
-	CreateTime    *string           `json:"createTime"`
-	Labels        map[string]string `json:"labels"`
-	Name          *string           `json:"name"`
-	State         *BackupStateEnum  `json:"state"`
-	StatusMessage *string           `json:"statusMessage"`
-	Type          *BackupTypeEnum   `json:"type"`
-	UpdateTime    *string           `json:"updateTime"`
+	CreateTime    *string           `json:"createTime,omitempty"`
+	Labels        map[string]string `json:"labels,omitempty"`
+	Name          *string           `json:"name,omitempty"`
+	State         *BackupStateEnum  `json:"state,omitempty"`
+	StatusMessage *string           `json:"statusMessage,omitempty"`
+	Type          *BackupTypeEnum   `json:"type,omitempty"`
+	UpdateTime    *string           `json:"updateTime,omitempty"`
 }

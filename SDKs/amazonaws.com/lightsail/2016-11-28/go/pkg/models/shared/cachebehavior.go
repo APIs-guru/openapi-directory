@@ -1,5 +1,5 @@
 package shared
 
 type CacheBehavior struct {
-	Behavior *BehaviorEnumEnum `json:"behavior"`
+	Behavior *BehaviorEnumEnum `json:"behavior,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type SrcSearchlyAPIV1ControllersSimilarityByContentRequestBody struct {
-	Content *string `json:"content"`
+	Content *string `json:"content,omitempty"`
 }
 
 type SrcSearchlyAPIV1ControllersSimilarityByContentRequest struct {

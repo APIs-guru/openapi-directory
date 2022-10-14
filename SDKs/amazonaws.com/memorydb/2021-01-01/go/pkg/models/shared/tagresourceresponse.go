@@ -1,5 +1,5 @@
 package shared
 
 type TagResourceResponse struct {
-	TagList []Tag `json:"TagList"`
+	TagList []Tag `json:"TagList,omitempty"`
 }

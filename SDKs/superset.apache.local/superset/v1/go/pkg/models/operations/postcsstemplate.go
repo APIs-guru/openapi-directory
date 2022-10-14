@@ -14,24 +14,24 @@ type PostCSSTemplateRequest struct {
 }
 
 type PostCSSTemplate201ApplicationJSON struct {
-	ID     *string                        `json:"id"`
-	Result *shared.CSSTemplateRestAPIPost `json:"result"`
+	ID     *string                        `json:"id,omitempty"`
+	Result *shared.CSSTemplateRestAPIPost `json:"result,omitempty"`
 }
 
 type PostCSSTemplate400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostCSSTemplate401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostCSSTemplate422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostCSSTemplate500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostCSSTemplateResponse struct {

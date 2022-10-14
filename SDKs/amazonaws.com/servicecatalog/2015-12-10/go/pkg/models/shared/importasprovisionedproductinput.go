@@ -1,7 +1,7 @@
 package shared
 
 type ImportAsProvisionedProductInput struct {
-	AcceptLanguage         *string `json:"AcceptLanguage"`
+	AcceptLanguage         *string `json:"AcceptLanguage,omitempty"`
 	IdempotencyToken       string  `json:"IdempotencyToken"`
 	PhysicalID             string  `json:"PhysicalId"`
 	ProductID              string  `json:"ProductId"`

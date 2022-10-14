@@ -11,5 +11,5 @@ const (
 )
 
 type FleetLifecycleState struct {
-	Code *FleetLifecycleStateCodeEnum `json:"code"`
+	Code *FleetLifecycleStateCodeEnum `json:"code,omitempty"`
 }

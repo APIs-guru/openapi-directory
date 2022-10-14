@@ -33,12 +33,12 @@ const (
 )
 
 type ListTimelineEventsRequestBody struct {
-	Filters           []shared.Filter                             `json:"filters"`
+	Filters           []shared.Filter                             `json:"filters,omitempty"`
 	IncidentRecordArn string                                      `json:"incidentRecordArn"`
-	MaxResults        *int64                                      `json:"maxResults"`
-	NextToken         *string                                     `json:"nextToken"`
-	SortBy            *ListTimelineEventsRequestBodySortByEnum    `json:"sortBy"`
-	SortOrder         *ListTimelineEventsRequestBodySortOrderEnum `json:"sortOrder"`
+	MaxResults        *int64                                      `json:"maxResults,omitempty"`
+	NextToken         *string                                     `json:"nextToken,omitempty"`
+	SortBy            *ListTimelineEventsRequestBodySortByEnum    `json:"sortBy,omitempty"`
+	SortOrder         *ListTimelineEventsRequestBodySortOrderEnum `json:"sortOrder,omitempty"`
 }
 
 type ListTimelineEventsRequest struct {

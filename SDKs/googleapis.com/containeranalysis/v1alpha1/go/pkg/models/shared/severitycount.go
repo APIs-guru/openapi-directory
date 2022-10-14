@@ -12,6 +12,6 @@ const (
 )
 
 type SeverityCount struct {
-	Count    *string                    `json:"count"`
-	Severity *SeverityCountSeverityEnum `json:"severity"`
+	Count    *string                    `json:"count,omitempty"`
+	Severity *SeverityCountSeverityEnum `json:"severity,omitempty"`
 }

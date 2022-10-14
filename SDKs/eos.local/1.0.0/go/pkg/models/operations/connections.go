@@ -5,28 +5,28 @@ type ConnectionsRequest struct {
 }
 
 type Connections200ApplicationJSONLastHandshake struct {
-	Agent                    *string `json:"agent"`
-	ChainID                  *string `json:"chain_id"`
-	Generation               *int64  `json:"generation"`
-	HeadID                   *string `json:"head_id"`
-	HeadNum                  *int64  `json:"head_num"`
-	Key                      *string `json:"key"`
-	LastIrreversibleBlockID  *string `json:"last_irreversible_block_id"`
-	LastIrreversibleBlockNum *int64  `json:"last_irreversible_block_num"`
-	NetworkVersion           *int64  `json:"network_version"`
-	NodeID                   *string `json:"node_id"`
-	Os                       *string `json:"os"`
-	P2pAddress               *string `json:"p2p_address"`
-	Sig                      *string `json:"sig"`
-	Time                     *string `json:"time"`
-	Token                    *string `json:"token"`
+	Agent                    *string `json:"agent,omitempty"`
+	ChainID                  *string `json:"chain_id,omitempty"`
+	Generation               *int64  `json:"generation,omitempty"`
+	HeadID                   *string `json:"head_id,omitempty"`
+	HeadNum                  *int64  `json:"head_num,omitempty"`
+	Key                      *string `json:"key,omitempty"`
+	LastIrreversibleBlockID  *string `json:"last_irreversible_block_id,omitempty"`
+	LastIrreversibleBlockNum *int64  `json:"last_irreversible_block_num,omitempty"`
+	NetworkVersion           *int64  `json:"network_version,omitempty"`
+	NodeID                   *string `json:"node_id,omitempty"`
+	Os                       *string `json:"os,omitempty"`
+	P2pAddress               *string `json:"p2p_address,omitempty"`
+	Sig                      *string `json:"sig,omitempty"`
+	Time                     *string `json:"time,omitempty"`
+	Token                    *string `json:"token,omitempty"`
 }
 
 type Connections200ApplicationJSON struct {
-	Connecting    *bool                                       `json:"connecting"`
-	LastHandshake *Connections200ApplicationJSONLastHandshake `json:"last_handshake"`
-	Peer          *string                                     `json:"peer"`
-	Syncing       *bool                                       `json:"syncing"`
+	Connecting    *bool                                       `json:"connecting,omitempty"`
+	LastHandshake *Connections200ApplicationJSONLastHandshake `json:"last_handshake,omitempty"`
+	Peer          *string                                     `json:"peer,omitempty"`
+	Syncing       *bool                                       `json:"syncing,omitempty"`
 }
 
 type ConnectionsResponse struct {

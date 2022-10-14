@@ -40,12 +40,12 @@ type ChromepolicyCustomersPoliciesResolveSecurity struct {
 type ChromepolicyCustomersPoliciesResolveRequest struct {
 	PathParams  ChromepolicyCustomersPoliciesResolvePathParams
 	QueryParams ChromepolicyCustomersPoliciesResolveQueryParams
-	Request     *shared.GoogleChromePolicyV1ResolveRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleChromePolicyVersionsV1ResolveRequest `request:"mediaType=application/json"`
 	Security    ChromepolicyCustomersPoliciesResolveSecurity
 }
 
 type ChromepolicyCustomersPoliciesResolveResponse struct {
-	ContentType                         string
-	GoogleChromePolicyV1ResolveResponse *shared.GoogleChromePolicyV1ResolveResponse
-	StatusCode                          int64
+	ContentType                                 string
+	GoogleChromePolicyVersionsV1ResolveResponse *shared.GoogleChromePolicyVersionsV1ResolveResponse
+	StatusCode                                  int64
 }

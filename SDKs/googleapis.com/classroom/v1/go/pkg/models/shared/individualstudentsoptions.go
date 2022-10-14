@@ -1,5 +1,5 @@
 package shared
 
 type IndividualStudentsOptions struct {
-	StudentIds []string `json:"studentIds"`
+	StudentIds []string `json:"studentIds,omitempty"`
 }

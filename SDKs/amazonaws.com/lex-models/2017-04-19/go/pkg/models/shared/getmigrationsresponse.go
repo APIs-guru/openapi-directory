@@ -1,6 +1,6 @@
 package shared
 
 type GetMigrationsResponse struct {
-	MigrationSummaries []MigrationSummary `json:"migrationSummaries"`
-	NextToken          *string            `json:"nextToken"`
+	MigrationSummaries []MigrationSummary `json:"migrationSummaries,omitempty"`
+	NextToken          *string            `json:"nextToken,omitempty"`
 }

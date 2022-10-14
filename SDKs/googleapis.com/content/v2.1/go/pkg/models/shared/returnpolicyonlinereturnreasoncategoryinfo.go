@@ -18,7 +18,7 @@ const (
 )
 
 type ReturnPolicyOnlineReturnReasonCategoryInfo struct {
-	ReturnLabelSource    *ReturnPolicyOnlineReturnReasonCategoryInfoReturnLabelSourceEnum    `json:"returnLabelSource"`
-	ReturnReasonCategory *ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnum `json:"returnReasonCategory"`
-	ReturnShippingFee    *ReturnPolicyOnlineReturnShippingFee                                `json:"returnShippingFee"`
+	ReturnLabelSource    *ReturnPolicyOnlineReturnReasonCategoryInfoReturnLabelSourceEnum    `json:"returnLabelSource,omitempty"`
+	ReturnReasonCategory *ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnum `json:"returnReasonCategory,omitempty"`
+	ReturnShippingFee    *ReturnPolicyOnlineReturnShippingFee                                `json:"returnShippingFee,omitempty"`
 }

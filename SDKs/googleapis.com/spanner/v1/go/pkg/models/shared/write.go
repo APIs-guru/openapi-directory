@@ -1,7 +1,7 @@
 package shared
 
 type Write struct {
-	Columns []string        `json:"columns"`
-	Table   *string         `json:"table"`
-	Values  [][]interface{} `json:"values"`
+	Columns []string        `json:"columns,omitempty"`
+	Table   *string         `json:"table,omitempty"`
+	Values  [][]interface{} `json:"values,omitempty"`
 }

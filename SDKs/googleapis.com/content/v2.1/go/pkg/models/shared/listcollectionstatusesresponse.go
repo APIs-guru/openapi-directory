@@ -1,6 +1,6 @@
 package shared
 
 type ListCollectionStatusesResponse struct {
-	NextPageToken *string            `json:"nextPageToken"`
-	Resources     []CollectionStatus `json:"resources"`
+	NextPageToken *string            `json:"nextPageToken,omitempty"`
+	Resources     []CollectionStatus `json:"resources,omitempty"`
 }

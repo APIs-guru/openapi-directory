@@ -12,9 +12,9 @@ const (
 )
 
 type GoogleCloudApigeeV1DataCollector struct {
-	CreatedAt      *string                                   `json:"createdAt"`
-	Description    *string                                   `json:"description"`
-	LastModifiedAt *string                                   `json:"lastModifiedAt"`
-	Name           *string                                   `json:"name"`
-	Type           *GoogleCloudApigeeV1DataCollectorTypeEnum `json:"type"`
+	CreatedAt      *string                                   `json:"createdAt,omitempty"`
+	Description    *string                                   `json:"description,omitempty"`
+	LastModifiedAt *string                                   `json:"lastModifiedAt,omitempty"`
+	Name           *string                                   `json:"name,omitempty"`
+	Type           *GoogleCloudApigeeV1DataCollectorTypeEnum `json:"type,omitempty"`
 }

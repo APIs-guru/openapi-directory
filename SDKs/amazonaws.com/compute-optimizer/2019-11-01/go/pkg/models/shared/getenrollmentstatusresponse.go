@@ -5,9 +5,9 @@ import (
 )
 
 type GetEnrollmentStatusResponse struct {
-	LastUpdatedTimestamp          *time.Time  `json:"lastUpdatedTimestamp"`
-	MemberAccountsEnrolled        *bool       `json:"memberAccountsEnrolled"`
-	NumberOfMemberAccountsOptedIn *int64      `json:"numberOfMemberAccountsOptedIn"`
-	Status                        *StatusEnum `json:"status"`
-	StatusReason                  *string     `json:"statusReason"`
+	LastUpdatedTimestamp          *time.Time  `json:"lastUpdatedTimestamp,omitempty"`
+	MemberAccountsEnrolled        *bool       `json:"memberAccountsEnrolled,omitempty"`
+	NumberOfMemberAccountsOptedIn *int64      `json:"numberOfMemberAccountsOptedIn,omitempty"`
+	Status                        *StatusEnum `json:"status,omitempty"`
+	StatusReason                  *string     `json:"statusReason,omitempty"`
 }

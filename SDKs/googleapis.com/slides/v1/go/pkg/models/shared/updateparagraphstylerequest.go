@@ -1,9 +1,9 @@
 package shared
 
 type UpdateParagraphStyleRequest struct {
-	CellLocation *TableCellLocation `json:"cellLocation"`
-	Fields       *string            `json:"fields"`
-	ObjectID     *string            `json:"objectId"`
-	Style        *ParagraphStyle    `json:"style"`
-	TextRange    *Range             `json:"textRange"`
+	CellLocation *TableCellLocation `json:"cellLocation,omitempty"`
+	Fields       *string            `json:"fields,omitempty"`
+	ObjectID     *string            `json:"objectId,omitempty"`
+	Style        *ParagraphStyle    `json:"style,omitempty"`
+	TextRange    *Range             `json:"textRange,omitempty"`
 }

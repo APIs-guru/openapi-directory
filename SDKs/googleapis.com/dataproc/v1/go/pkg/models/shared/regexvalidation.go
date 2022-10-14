@@ -1,5 +1,5 @@
 package shared
 
 type RegexValidation struct {
-	Regexes []string `json:"regexes"`
+	Regexes []string `json:"regexes,omitempty"`
 }

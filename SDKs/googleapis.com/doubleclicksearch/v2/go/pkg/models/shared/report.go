@@ -1,18 +1,18 @@
 package shared
 
 type ReportFiles struct {
-	ByteCount *string `json:"byteCount"`
-	URL       *string `json:"url"`
+	ByteCount *string `json:"byteCount,omitempty"`
+	URL       *string `json:"url,omitempty"`
 }
 
 type Report struct {
-	Files                  []ReportFiles            `json:"files"`
-	ID                     *string                  `json:"id"`
-	IsReportReady          *bool                    `json:"isReportReady"`
-	Kind                   *string                  `json:"kind"`
-	Request                *ReportRequest           `json:"request"`
-	RowCount               *int32                   `json:"rowCount"`
-	Rows                   []map[string]interface{} `json:"rows"`
-	StatisticsCurrencyCode *string                  `json:"statisticsCurrencyCode"`
-	StatisticsTimeZone     *string                  `json:"statisticsTimeZone"`
+	Files                  []ReportFiles            `json:"files,omitempty"`
+	ID                     *string                  `json:"id,omitempty"`
+	IsReportReady          *bool                    `json:"isReportReady,omitempty"`
+	Kind                   *string                  `json:"kind,omitempty"`
+	Request                *ReportRequest           `json:"request,omitempty"`
+	RowCount               *int32                   `json:"rowCount,omitempty"`
+	Rows                   []map[string]interface{} `json:"rows,omitempty"`
+	StatisticsCurrencyCode *string                  `json:"statisticsCurrencyCode,omitempty"`
+	StatisticsTimeZone     *string                  `json:"statisticsTimeZone,omitempty"`
 }

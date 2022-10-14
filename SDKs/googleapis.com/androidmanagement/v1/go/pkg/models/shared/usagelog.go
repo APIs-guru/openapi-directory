@@ -17,6 +17,6 @@ const (
 )
 
 type UsageLog struct {
-	EnabledLogTypes         []UsageLogEnabledLogTypesEnum         `json:"enabledLogTypes"`
-	UploadOnCellularAllowed []UsageLogUploadOnCellularAllowedEnum `json:"uploadOnCellularAllowed"`
+	EnabledLogTypes         []UsageLogEnabledLogTypesEnum         `json:"enabledLogTypes,omitempty"`
+	UploadOnCellularAllowed []UsageLogUploadOnCellularAllowedEnum `json:"uploadOnCellularAllowed,omitempty"`
 }

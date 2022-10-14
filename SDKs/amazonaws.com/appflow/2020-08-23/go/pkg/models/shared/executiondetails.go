@@ -5,7 +5,7 @@ import (
 )
 
 type ExecutionDetails struct {
-	MostRecentExecutionMessage *string              `json:"mostRecentExecutionMessage"`
-	MostRecentExecutionStatus  *ExecutionStatusEnum `json:"mostRecentExecutionStatus"`
-	MostRecentExecutionTime    *time.Time           `json:"mostRecentExecutionTime"`
+	MostRecentExecutionMessage *string              `json:"mostRecentExecutionMessage,omitempty"`
+	MostRecentExecutionStatus  *ExecutionStatusEnum `json:"mostRecentExecutionStatus,omitempty"`
+	MostRecentExecutionTime    *time.Time           `json:"mostRecentExecutionTime,omitempty"`
 }

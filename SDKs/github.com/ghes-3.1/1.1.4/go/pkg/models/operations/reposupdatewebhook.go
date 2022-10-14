@@ -11,20 +11,20 @@ type ReposUpdateWebhookPathParams struct {
 }
 
 type ReposUpdateWebhookRequestBodyConfig struct {
-	Address     *string      `json:"address"`
-	ContentType *string      `json:"content_type"`
-	InsecureSsl *interface{} `json:"insecure_ssl"`
-	Room        *string      `json:"room"`
-	Secret      *string      `json:"secret"`
+	Address     *string      `json:"address,omitempty"`
+	ContentType *string      `json:"content_type,omitempty"`
+	InsecureSsl *interface{} `json:"insecure_ssl,omitempty"`
+	Room        *string      `json:"room,omitempty"`
+	Secret      *string      `json:"secret,omitempty"`
 	URL         string       `json:"url"`
 }
 
 type ReposUpdateWebhookRequestBody struct {
-	Active       *bool                                `json:"active"`
-	AddEvents    []string                             `json:"add_events"`
-	Config       *ReposUpdateWebhookRequestBodyConfig `json:"config"`
-	Events       []string                             `json:"events"`
-	RemoveEvents []string                             `json:"remove_events"`
+	Active       *bool                                `json:"active,omitempty"`
+	AddEvents    []string                             `json:"add_events,omitempty"`
+	Config       *ReposUpdateWebhookRequestBodyConfig `json:"config,omitempty"`
+	Events       []string                             `json:"events,omitempty"`
+	RemoveEvents []string                             `json:"remove_events,omitempty"`
 }
 
 type ReposUpdateWebhookRequest struct {

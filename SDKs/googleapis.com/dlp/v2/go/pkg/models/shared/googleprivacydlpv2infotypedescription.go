@@ -9,10 +9,10 @@ const (
 )
 
 type GooglePrivacyDlpV2InfoTypeDescription struct {
-	Categories  []GooglePrivacyDlpV2InfoTypeCategory                   `json:"categories"`
-	Description *string                                                `json:"description"`
-	DisplayName *string                                                `json:"displayName"`
-	Name        *string                                                `json:"name"`
-	SupportedBy []GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum `json:"supportedBy"`
-	Versions    []GooglePrivacyDlpV2VersionDescription                 `json:"versions"`
+	Categories  []GooglePrivacyDlpV2InfoTypeCategory                   `json:"categories,omitempty"`
+	Description *string                                                `json:"description,omitempty"`
+	DisplayName *string                                                `json:"displayName,omitempty"`
+	Name        *string                                                `json:"name,omitempty"`
+	SupportedBy []GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum `json:"supportedBy,omitempty"`
+	Versions    []GooglePrivacyDlpV2VersionDescription                 `json:"versions,omitempty"`
 }

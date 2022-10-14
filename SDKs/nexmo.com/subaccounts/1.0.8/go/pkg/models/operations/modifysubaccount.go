@@ -34,8 +34,8 @@ type ModifySubaccount404ApplicationJSON struct {
 }
 
 type ModifySubaccount422ApplicationJSONInvalidParameters struct {
-	Name   *string `json:"name"`
-	Reason *string `json:"reason"`
+	Name   *string `json:"name,omitempty"`
+	Reason *string `json:"reason,omitempty"`
 }
 
 type ModifySubaccount422ApplicationJSON struct {

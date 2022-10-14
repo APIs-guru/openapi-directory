@@ -1,7 +1,7 @@
 package shared
 
 type ListTunnelsRequest struct {
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
-	ThingName  *string `json:"thingName"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
+	ThingName  *string `json:"thingName,omitempty"`
 }

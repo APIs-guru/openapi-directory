@@ -8,9 +8,9 @@ const (
 )
 
 type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequest struct {
-	LanguageCode   *string                                                     `json:"languageCode"`
-	Requests       []GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestRequest `json:"requests"`
-	UseAdminAccess *bool                                                       `json:"useAdminAccess"`
-	View           *GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestViewEnum `json:"view"`
-	WriteControl   *GoogleAppsDriveLabelsV2betaWriteControl                    `json:"writeControl"`
+	LanguageCode   *string                                                     `json:"languageCode,omitempty"`
+	Requests       []GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestRequest `json:"requests,omitempty"`
+	UseAdminAccess *bool                                                       `json:"useAdminAccess,omitempty"`
+	View           *GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestViewEnum `json:"view,omitempty"`
+	WriteControl   *GoogleAppsDriveLabelsV2betaWriteControl                    `json:"writeControl,omitempty"`
 }

@@ -1,80 +1,80 @@
 package shared
 
 type SendTokenRequestFlags struct {
-	SplitChange *bool `json:"splitChange"`
+	SplitChange *bool `json:"splitChange,omitempty"`
 }
 
 type SendTokenRequestMetadataEncryptions struct {
-	Format *string `json:"format"`
-	Key    *string `json:"key"`
-	Pubkey *string `json:"pubkey"`
-	Type   *string `json:"type"`
+	Format *string `json:"format,omitempty"`
+	Key    *string `json:"key,omitempty"`
+	Pubkey *string `json:"pubkey,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }
 
 type SendTokenRequestMetadataRulesExpiration struct {
-	Locked     *bool    `json:"locked"`
-	ValidUntil *float64 `json:"validUntil"`
+	Locked     *bool    `json:"locked,omitempty"`
+	ValidUntil *float64 `json:"validUntil,omitempty"`
 }
 
 type SendTokenRequestMetadataRulesFeesItems struct {
-	Address *string `json:"address"`
-	TokenID *string `json:"tokenId"`
-	Value   *string `json:"value"`
+	Address *string `json:"address,omitempty"`
+	TokenID *string `json:"tokenId,omitempty"`
+	Value   *string `json:"value,omitempty"`
 }
 
 type SendTokenRequestMetadataRulesFees struct {
-	Items  []SendTokenRequestMetadataRulesFeesItems `json:"items"`
-	Locked *bool                                    `json:"locked"`
+	Items  []SendTokenRequestMetadataRulesFeesItems `json:"items,omitempty"`
+	Locked *bool                                    `json:"locked,omitempty"`
 }
 
 type SendTokenRequestMetadataRulesHolders struct {
-	Address *string `json:"address"`
-	Locked  *bool   `json:"locked"`
+	Address *string `json:"address,omitempty"`
+	Locked  *bool   `json:"locked,omitempty"`
 }
 
 type SendTokenRequestMetadataRules struct {
-	Expiration *SendTokenRequestMetadataRulesExpiration `json:"expiration"`
-	Fees       *SendTokenRequestMetadataRulesFees       `json:"fees"`
-	Holders    []SendTokenRequestMetadataRulesHolders   `json:"holders"`
+	Expiration *SendTokenRequestMetadataRulesExpiration `json:"expiration,omitempty"`
+	Fees       *SendTokenRequestMetadataRulesFees       `json:"fees,omitempty"`
+	Holders    []SendTokenRequestMetadataRulesHolders   `json:"holders,omitempty"`
 }
 
 type SendTokenRequestMetadataUrls struct {
-	DataHash *string `json:"dataHash"`
-	MimeType *string `json:"mimeType"`
-	Name     *string `json:"name"`
-	URL      *string `json:"url"`
+	DataHash *string `json:"dataHash,omitempty"`
+	MimeType *string `json:"mimeType,omitempty"`
+	Name     *string `json:"name,omitempty"`
+	URL      *string `json:"url,omitempty"`
 }
 
 type SendTokenRequestMetadataUserDataMeta struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type SendTokenRequestMetadataUserData struct {
-	Meta []SendTokenRequestMetadataUserDataMeta `json:"meta"`
+	Meta []SendTokenRequestMetadataUserDataMeta `json:"meta,omitempty"`
 }
 
 type SendTokenRequestMetadata struct {
-	Description *string                               `json:"description"`
-	Encryptions []SendTokenRequestMetadataEncryptions `json:"encryptions"`
-	Issuer      *string                               `json:"issuer"`
-	Rules       *SendTokenRequestMetadataRules        `json:"rules"`
-	TokenName   *string                               `json:"tokenName"`
-	Urls        []SendTokenRequestMetadataUrls        `json:"urls"`
-	UserData    *SendTokenRequestMetadataUserData     `json:"userData"`
+	Description *string                               `json:"description,omitempty"`
+	Encryptions []SendTokenRequestMetadataEncryptions `json:"encryptions,omitempty"`
+	Issuer      *string                               `json:"issuer,omitempty"`
+	Rules       *SendTokenRequestMetadataRules        `json:"rules,omitempty"`
+	TokenName   *string                               `json:"tokenName,omitempty"`
+	Urls        []SendTokenRequestMetadataUrls        `json:"urls,omitempty"`
+	UserData    *SendTokenRequestMetadataUserData     `json:"userData,omitempty"`
 }
 
 type SendTokenRequestTo struct {
-	Address *string  `json:"address"`
-	Amount  *float64 `json:"amount"`
-	TokenID *string  `json:"tokenId"`
+	Address *string  `json:"address,omitempty"`
+	Amount  *float64 `json:"amount,omitempty"`
+	TokenID *string  `json:"tokenId,omitempty"`
 }
 
 type SendTokenRequest struct {
 	Fee      float64                   `json:"fee"`
-	Flags    *SendTokenRequestFlags    `json:"flags"`
-	From     []string                  `json:"from"`
-	Metadata *SendTokenRequestMetadata `json:"metadata"`
-	Sendutxo []string                  `json:"sendutxo"`
+	Flags    *SendTokenRequestFlags    `json:"flags,omitempty"`
+	From     []string                  `json:"from,omitempty"`
+	Metadata *SendTokenRequestMetadata `json:"metadata,omitempty"`
+	Sendutxo []string                  `json:"sendutxo,omitempty"`
 	To       []SendTokenRequestTo      `json:"to"`
 }

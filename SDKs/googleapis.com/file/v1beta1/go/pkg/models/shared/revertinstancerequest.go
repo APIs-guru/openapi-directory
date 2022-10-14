@@ -1,5 +1,5 @@
 package shared
 
 type RevertInstanceRequest struct {
-	TargetSnapshotID *string `json:"targetSnapshotId"`
+	TargetSnapshotID *string `json:"targetSnapshotId,omitempty"`
 }

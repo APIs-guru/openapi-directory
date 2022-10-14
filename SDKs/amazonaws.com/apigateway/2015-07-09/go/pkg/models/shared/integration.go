@@ -1,19 +1,19 @@
 package shared
 
 type Integration struct {
-	CacheKeyParameters   []string                       `json:"cacheKeyParameters"`
-	CacheNamespace       *string                        `json:"cacheNamespace"`
-	ConnectionID         *string                        `json:"connectionId"`
-	ConnectionType       *ConnectionTypeEnum            `json:"connectionType"`
-	ContentHandling      *ContentHandlingStrategyEnum   `json:"contentHandling"`
-	Credentials          *string                        `json:"credentials"`
-	HTTPMethod           *string                        `json:"httpMethod"`
-	IntegrationResponses map[string]IntegrationResponse `json:"integrationResponses"`
-	PassthroughBehavior  *string                        `json:"passthroughBehavior"`
-	RequestParameters    map[string]string              `json:"requestParameters"`
-	RequestTemplates     map[string]string              `json:"requestTemplates"`
-	TimeoutInMillis      *int64                         `json:"timeoutInMillis"`
-	TLSConfig            *TLSConfig                     `json:"tlsConfig"`
-	Type                 *IntegrationTypeEnum           `json:"type"`
-	URI                  *string                        `json:"uri"`
+	CacheKeyParameters   []string                       `json:"cacheKeyParameters,omitempty"`
+	CacheNamespace       *string                        `json:"cacheNamespace,omitempty"`
+	ConnectionID         *string                        `json:"connectionId,omitempty"`
+	ConnectionType       *ConnectionTypeEnum            `json:"connectionType,omitempty"`
+	ContentHandling      *ContentHandlingStrategyEnum   `json:"contentHandling,omitempty"`
+	Credentials          *string                        `json:"credentials,omitempty"`
+	HTTPMethod           *string                        `json:"httpMethod,omitempty"`
+	IntegrationResponses map[string]IntegrationResponse `json:"integrationResponses,omitempty"`
+	PassthroughBehavior  *string                        `json:"passthroughBehavior,omitempty"`
+	RequestParameters    map[string]string              `json:"requestParameters,omitempty"`
+	RequestTemplates     map[string]string              `json:"requestTemplates,omitempty"`
+	TimeoutInMillis      *int64                         `json:"timeoutInMillis,omitempty"`
+	TLSConfig            *TLSConfig                     `json:"tlsConfig,omitempty"`
+	Type                 *IntegrationTypeEnum           `json:"type,omitempty"`
+	URI                  *string                        `json:"uri,omitempty"`
 }

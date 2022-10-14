@@ -18,6 +18,6 @@ const (
 )
 
 type LayoutReference struct {
-	LayoutID         *string                              `json:"layoutId"`
-	PredefinedLayout *LayoutReferencePredefinedLayoutEnum `json:"predefinedLayout"`
+	LayoutID         *string                              `json:"layoutId,omitempty"`
+	PredefinedLayout *LayoutReferencePredefinedLayoutEnum `json:"predefinedLayout,omitempty"`
 }

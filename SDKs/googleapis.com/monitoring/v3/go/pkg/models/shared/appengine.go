@@ -1,5 +1,5 @@
 package shared
 
 type AppEngine struct {
-	ModuleID *string `json:"moduleId"`
+	ModuleID *string `json:"moduleId,omitempty"`
 }

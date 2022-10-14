@@ -9,6 +9,6 @@ const (
 )
 
 type PatchRollout struct {
-	DisruptionBudget *FixedOrPercent       `json:"disruptionBudget"`
-	Mode             *PatchRolloutModeEnum `json:"mode"`
+	DisruptionBudget *FixedOrPercent       `json:"disruptionBudget,omitempty"`
+	Mode             *PatchRolloutModeEnum `json:"mode,omitempty"`
 }

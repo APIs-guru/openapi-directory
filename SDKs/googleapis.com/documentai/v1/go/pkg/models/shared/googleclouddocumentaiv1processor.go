@@ -14,12 +14,12 @@ const (
 )
 
 type GoogleCloudDocumentaiV1Processor struct {
-	CreateTime              *string                                    `json:"createTime"`
-	DefaultProcessorVersion *string                                    `json:"defaultProcessorVersion"`
-	DisplayName             *string                                    `json:"displayName"`
-	KmsKeyName              *string                                    `json:"kmsKeyName"`
-	Name                    *string                                    `json:"name"`
-	ProcessEndpoint         *string                                    `json:"processEndpoint"`
-	State                   *GoogleCloudDocumentaiV1ProcessorStateEnum `json:"state"`
-	Type                    *string                                    `json:"type"`
+	CreateTime              *string                                    `json:"createTime,omitempty"`
+	DefaultProcessorVersion *string                                    `json:"defaultProcessorVersion,omitempty"`
+	DisplayName             *string                                    `json:"displayName,omitempty"`
+	KmsKeyName              *string                                    `json:"kmsKeyName,omitempty"`
+	Name                    *string                                    `json:"name,omitempty"`
+	ProcessEndpoint         *string                                    `json:"processEndpoint,omitempty"`
+	State                   *GoogleCloudDocumentaiV1ProcessorStateEnum `json:"state,omitempty"`
+	Type                    *string                                    `json:"type,omitempty"`
 }

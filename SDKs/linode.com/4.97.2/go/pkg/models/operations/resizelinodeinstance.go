@@ -9,7 +9,7 @@ type ResizeLinodeInstancePathParams struct {
 }
 
 type ResizeLinodeInstanceRequestBody struct {
-	AllowAutoDiskResize *bool  `json:"allow_auto_disk_resize"`
+	AllowAutoDiskResize *bool  `json:"allow_auto_disk_resize,omitempty"`
 	Type                string `json:"type"`
 }
 
@@ -33,7 +33,7 @@ type ResizeLinodeInstanceRequest struct {
 }
 
 type ResizeLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ResizeLinodeInstanceResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type DesktopInfo struct {
-	DesktopFallbackLink *string `json:"desktopFallbackLink"`
+	DesktopFallbackLink *string `json:"desktopFallbackLink,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type Node struct {
-	AvailabilityZone *string    `json:"AvailabilityZone"`
-	CreateTime       *time.Time `json:"CreateTime"`
-	Endpoint         *Endpoint  `json:"Endpoint"`
-	Name             *string    `json:"Name"`
-	Status           *string    `json:"Status"`
+	AvailabilityZone *string    `json:"AvailabilityZone,omitempty"`
+	CreateTime       *time.Time `json:"CreateTime,omitempty"`
+	Endpoint         *Endpoint  `json:"Endpoint,omitempty"`
+	Name             *string    `json:"Name,omitempty"`
+	Status           *string    `json:"Status,omitempty"`
 }

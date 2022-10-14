@@ -1,7 +1,7 @@
 package shared
 
 type HTTPEndpointConfiguration struct {
-	AccessKey *string `json:"AccessKey"`
-	Name      *string `json:"Name"`
+	AccessKey *string `json:"AccessKey,omitempty"`
+	Name      *string `json:"Name,omitempty"`
 	URL       string  `json:"Url"`
 }

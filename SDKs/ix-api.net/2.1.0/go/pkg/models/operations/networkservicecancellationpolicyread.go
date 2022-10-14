@@ -25,10 +25,10 @@ const (
 )
 
 type NetworkServiceCancellationPolicyRead401ApplicationJSON struct {
-	Detail   *string                                                        `json:"detail"`
-	Instance *string                                                        `json:"instance"`
-	Status   *interface{}                                                   `json:"status"`
-	Title    *interface{}                                                   `json:"title"`
+	Detail   *string                                                        `json:"detail,omitempty"`
+	Instance *string                                                        `json:"instance,omitempty"`
+	Status   *interface{}                                                   `json:"status,omitempty"`
+	Title    *interface{}                                                   `json:"title,omitempty"`
 	Type     NetworkServiceCancellationPolicyRead401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -39,10 +39,10 @@ const (
 )
 
 type NetworkServiceCancellationPolicyRead403ApplicationJSON struct {
-	Detail   *string                                                        `json:"detail"`
-	Instance *string                                                        `json:"instance"`
-	Status   *interface{}                                                   `json:"status"`
-	Title    *interface{}                                                   `json:"title"`
+	Detail   *string                                                        `json:"detail,omitempty"`
+	Instance *string                                                        `json:"instance,omitempty"`
+	Status   *interface{}                                                   `json:"status,omitempty"`
+	Title    *interface{}                                                   `json:"title,omitempty"`
 	Type     NetworkServiceCancellationPolicyRead403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -53,10 +53,10 @@ const (
 )
 
 type NetworkServiceCancellationPolicyRead404ApplicationJSON struct {
-	Detail   *string                                                        `json:"detail"`
-	Instance *string                                                        `json:"instance"`
-	Status   *interface{}                                                   `json:"status"`
-	Title    *interface{}                                                   `json:"title"`
+	Detail   *string                                                        `json:"detail,omitempty"`
+	Instance *string                                                        `json:"instance,omitempty"`
+	Status   *interface{}                                                   `json:"status,omitempty"`
+	Title    *interface{}                                                   `json:"title,omitempty"`
 	Type     NetworkServiceCancellationPolicyRead404ApplicationJSONTypeEnum `json:"type"`
 }
 

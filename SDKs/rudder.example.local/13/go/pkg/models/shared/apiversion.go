@@ -6,6 +6,6 @@ type APIVersionAll struct {
 }
 
 type APIVersion struct {
-	All    []APIVersionAll `json:"all"`
-	Latest *int64          `json:"latest"`
+	All    []APIVersionAll `json:"all,omitempty"`
+	Latest *int64          `json:"latest,omitempty"`
 }

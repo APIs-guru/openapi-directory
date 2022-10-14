@@ -1,8 +1,8 @@
 package shared
 
 type Staff struct {
-	Details  *string `json:"details"`
-	Forename *string `json:"forename"`
-	Surname  *string `json:"surname"`
-	Title    *string `json:"title"`
+	Details  *string `json:"details,omitempty"`
+	Forename *string `json:"forename,omitempty"`
+	Surname  *string `json:"surname,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }

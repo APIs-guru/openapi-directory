@@ -5,14 +5,14 @@ import (
 )
 
 type LifecyclePolicy struct {
-	DateCreated      *time.Time                     `json:"DateCreated"`
-	DateModified     *time.Time                     `json:"DateModified"`
-	Description      *string                        `json:"Description"`
-	ExecutionRoleArn *string                        `json:"ExecutionRoleArn"`
-	PolicyArn        *string                        `json:"PolicyArn"`
-	PolicyDetails    *PolicyDetails                 `json:"PolicyDetails"`
-	PolicyID         *string                        `json:"PolicyId"`
-	State            *GettablePolicyStateValuesEnum `json:"State"`
-	StatusMessage    *string                        `json:"StatusMessage"`
-	Tags             map[string]string              `json:"Tags"`
+	DateCreated      *time.Time                     `json:"DateCreated,omitempty"`
+	DateModified     *time.Time                     `json:"DateModified,omitempty"`
+	Description      *string                        `json:"Description,omitempty"`
+	ExecutionRoleArn *string                        `json:"ExecutionRoleArn,omitempty"`
+	PolicyArn        *string                        `json:"PolicyArn,omitempty"`
+	PolicyDetails    *PolicyDetails                 `json:"PolicyDetails,omitempty"`
+	PolicyID         *string                        `json:"PolicyId,omitempty"`
+	State            *GettablePolicyStateValuesEnum `json:"State,omitempty"`
+	StatusMessage    *string                        `json:"StatusMessage,omitempty"`
+	Tags             map[string]string              `json:"Tags,omitempty"`
 }

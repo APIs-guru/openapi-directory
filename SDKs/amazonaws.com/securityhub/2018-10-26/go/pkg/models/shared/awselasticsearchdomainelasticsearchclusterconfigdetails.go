@@ -1,11 +1,11 @@
 package shared
 
 type AwsElasticsearchDomainElasticsearchClusterConfigDetails struct {
-	DedicatedMasterCount   *int64                                                                      `json:"DedicatedMasterCount"`
-	DedicatedMasterEnabled *bool                                                                       `json:"DedicatedMasterEnabled"`
-	DedicatedMasterType    *string                                                                     `json:"DedicatedMasterType"`
-	InstanceCount          *int64                                                                      `json:"InstanceCount"`
-	InstanceType           *string                                                                     `json:"InstanceType"`
-	ZoneAwarenessConfig    *AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails `json:"ZoneAwarenessConfig"`
-	ZoneAwarenessEnabled   *bool                                                                       `json:"ZoneAwarenessEnabled"`
+	DedicatedMasterCount   *int64                                                                      `json:"DedicatedMasterCount,omitempty"`
+	DedicatedMasterEnabled *bool                                                                       `json:"DedicatedMasterEnabled,omitempty"`
+	DedicatedMasterType    *string                                                                     `json:"DedicatedMasterType,omitempty"`
+	InstanceCount          *int64                                                                      `json:"InstanceCount,omitempty"`
+	InstanceType           *string                                                                     `json:"InstanceType,omitempty"`
+	ZoneAwarenessConfig    *AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails `json:"ZoneAwarenessConfig,omitempty"`
+	ZoneAwarenessEnabled   *bool                                                                       `json:"ZoneAwarenessEnabled,omitempty"`
 }

@@ -1,16 +1,16 @@
 package shared
 
 type PromotionDetail struct {
-	CouponCode        *string `json:"couponCode"`
-	Description       *string `json:"description"`
-	EndDate           *string `json:"endDate"`
-	MarketplaceID     *string `json:"marketplaceId"`
-	Name              *string `json:"name"`
-	Priority          *string `json:"priority"`
-	PromotionHref     *string `json:"promotionHref"`
-	PromotionID       *string `json:"promotionId"`
-	PromotionImageURL *string `json:"promotionImageUrl"`
-	PromotionStatus   *string `json:"promotionStatus"`
-	PromotionType     *string `json:"promotionType"`
-	StartDate         *string `json:"startDate"`
+	CouponCode        *string `json:"couponCode,omitempty"`
+	Description       *string `json:"description,omitempty"`
+	EndDate           *string `json:"endDate,omitempty"`
+	MarketplaceID     *string `json:"marketplaceId,omitempty"`
+	Name              *string `json:"name,omitempty"`
+	Priority          *string `json:"priority,omitempty"`
+	PromotionHref     *string `json:"promotionHref,omitempty"`
+	PromotionID       *string `json:"promotionId,omitempty"`
+	PromotionImageURL *string `json:"promotionImageUrl,omitempty"`
+	PromotionStatus   *string `json:"promotionStatus,omitempty"`
+	PromotionType     *string `json:"promotionType,omitempty"`
+	StartDate         *string `json:"startDate,omitempty"`
 }

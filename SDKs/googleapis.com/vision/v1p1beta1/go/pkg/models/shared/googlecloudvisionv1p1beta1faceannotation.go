@@ -78,19 +78,19 @@ const (
 )
 
 type GoogleCloudVisionV1p1beta1FaceAnnotation struct {
-	AngerLikelihood        *GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum        `json:"angerLikelihood"`
-	BlurredLikelihood      *GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum      `json:"blurredLikelihood"`
-	BoundingPoly           *GoogleCloudVisionV1p1beta1BoundingPoly                             `json:"boundingPoly"`
-	DetectionConfidence    *float32                                                            `json:"detectionConfidence"`
-	FdBoundingPoly         *GoogleCloudVisionV1p1beta1BoundingPoly                             `json:"fdBoundingPoly"`
-	HeadwearLikelihood     *GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum     `json:"headwearLikelihood"`
-	JoyLikelihood          *GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum          `json:"joyLikelihood"`
-	LandmarkingConfidence  *float32                                                            `json:"landmarkingConfidence"`
-	Landmarks              []GoogleCloudVisionV1p1beta1FaceAnnotationLandmark                  `json:"landmarks"`
-	PanAngle               *float32                                                            `json:"panAngle"`
-	RollAngle              *float32                                                            `json:"rollAngle"`
-	SorrowLikelihood       *GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum       `json:"sorrowLikelihood"`
-	SurpriseLikelihood     *GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum     `json:"surpriseLikelihood"`
-	TiltAngle              *float32                                                            `json:"tiltAngle"`
-	UnderExposedLikelihood *GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum `json:"underExposedLikelihood"`
+	AngerLikelihood        *GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum        `json:"angerLikelihood,omitempty"`
+	BlurredLikelihood      *GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum      `json:"blurredLikelihood,omitempty"`
+	BoundingPoly           *GoogleCloudVisionV1p1beta1BoundingPoly                             `json:"boundingPoly,omitempty"`
+	DetectionConfidence    *float32                                                            `json:"detectionConfidence,omitempty"`
+	FdBoundingPoly         *GoogleCloudVisionV1p1beta1BoundingPoly                             `json:"fdBoundingPoly,omitempty"`
+	HeadwearLikelihood     *GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum     `json:"headwearLikelihood,omitempty"`
+	JoyLikelihood          *GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum          `json:"joyLikelihood,omitempty"`
+	LandmarkingConfidence  *float32                                                            `json:"landmarkingConfidence,omitempty"`
+	Landmarks              []GoogleCloudVisionV1p1beta1FaceAnnotationLandmark                  `json:"landmarks,omitempty"`
+	PanAngle               *float32                                                            `json:"panAngle,omitempty"`
+	RollAngle              *float32                                                            `json:"rollAngle,omitempty"`
+	SorrowLikelihood       *GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum       `json:"sorrowLikelihood,omitempty"`
+	SurpriseLikelihood     *GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum     `json:"surpriseLikelihood,omitempty"`
+	TiltAngle              *float32                                                            `json:"tiltAngle,omitempty"`
+	UnderExposedLikelihood *GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum `json:"underExposedLikelihood,omitempty"`
 }

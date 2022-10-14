@@ -1,5 +1,5 @@
 package shared
 
 type AssociateResolverEndpointIPAddressResponse struct {
-	ResolverEndpoint *ResolverEndpoint `json:"ResolverEndpoint"`
+	ResolverEndpoint *ResolverEndpoint `json:"ResolverEndpoint,omitempty"`
 }

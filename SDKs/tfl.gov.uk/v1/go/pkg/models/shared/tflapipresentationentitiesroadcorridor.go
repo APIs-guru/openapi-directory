@@ -5,14 +5,14 @@ import (
 )
 
 type TflAPIPresentationEntitiesRoadCorridor struct {
-	Bounds                     *string    `json:"bounds"`
-	DisplayName                *string    `json:"displayName"`
-	Envelope                   *string    `json:"envelope"`
-	Group                      *string    `json:"group"`
-	ID                         *string    `json:"id"`
-	StatusAggregationEndDate   *time.Time `json:"statusAggregationEndDate"`
-	StatusAggregationStartDate *time.Time `json:"statusAggregationStartDate"`
-	StatusSeverity             *string    `json:"statusSeverity"`
-	StatusSeverityDescription  *string    `json:"statusSeverityDescription"`
-	URL                        *string    `json:"url"`
+	Bounds                     *string    `json:"bounds,omitempty"`
+	DisplayName                *string    `json:"displayName,omitempty"`
+	Envelope                   *string    `json:"envelope,omitempty"`
+	Group                      *string    `json:"group,omitempty"`
+	ID                         *string    `json:"id,omitempty"`
+	StatusAggregationEndDate   *time.Time `json:"statusAggregationEndDate,omitempty"`
+	StatusAggregationStartDate *time.Time `json:"statusAggregationStartDate,omitempty"`
+	StatusSeverity             *string    `json:"statusSeverity,omitempty"`
+	StatusSeverityDescription  *string    `json:"statusSeverityDescription,omitempty"`
+	URL                        *string    `json:"url,omitempty"`
 }

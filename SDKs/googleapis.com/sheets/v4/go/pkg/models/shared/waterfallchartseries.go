@@ -1,11 +1,11 @@
 package shared
 
 type WaterfallChartSeries struct {
-	CustomSubtotals      []WaterfallChartCustomSubtotal `json:"customSubtotals"`
-	Data                 *ChartData                     `json:"data"`
-	DataLabel            *DataLabel                     `json:"dataLabel"`
-	HideTrailingSubtotal *bool                          `json:"hideTrailingSubtotal"`
-	NegativeColumnsStyle *WaterfallChartColumnStyle     `json:"negativeColumnsStyle"`
-	PositiveColumnsStyle *WaterfallChartColumnStyle     `json:"positiveColumnsStyle"`
-	SubtotalColumnsStyle *WaterfallChartColumnStyle     `json:"subtotalColumnsStyle"`
+	CustomSubtotals      []WaterfallChartCustomSubtotal `json:"customSubtotals,omitempty"`
+	Data                 *ChartData                     `json:"data,omitempty"`
+	DataLabel            *DataLabel                     `json:"dataLabel,omitempty"`
+	HideTrailingSubtotal *bool                          `json:"hideTrailingSubtotal,omitempty"`
+	NegativeColumnsStyle *WaterfallChartColumnStyle     `json:"negativeColumnsStyle,omitempty"`
+	PositiveColumnsStyle *WaterfallChartColumnStyle     `json:"positiveColumnsStyle,omitempty"`
+	SubtotalColumnsStyle *WaterfallChartColumnStyle     `json:"subtotalColumnsStyle,omitempty"`
 }

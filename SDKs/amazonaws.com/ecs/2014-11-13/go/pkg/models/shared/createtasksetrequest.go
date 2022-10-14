@@ -1,17 +1,17 @@
 package shared
 
 type CreateTaskSetRequest struct {
-	CapacityProviderStrategy []CapacityProviderStrategyItem `json:"capacityProviderStrategy"`
-	ClientToken              *string                        `json:"clientToken"`
+	CapacityProviderStrategy []CapacityProviderStrategyItem `json:"capacityProviderStrategy,omitempty"`
+	ClientToken              *string                        `json:"clientToken,omitempty"`
 	Cluster                  string                         `json:"cluster"`
-	ExternalID               *string                        `json:"externalId"`
-	LaunchType               *LaunchTypeEnum                `json:"launchType"`
-	LoadBalancers            []LoadBalancer                 `json:"loadBalancers"`
-	NetworkConfiguration     *NetworkConfiguration          `json:"networkConfiguration"`
-	PlatformVersion          *string                        `json:"platformVersion"`
-	Scale                    *Scale                         `json:"scale"`
+	ExternalID               *string                        `json:"externalId,omitempty"`
+	LaunchType               *LaunchTypeEnum                `json:"launchType,omitempty"`
+	LoadBalancers            []LoadBalancer                 `json:"loadBalancers,omitempty"`
+	NetworkConfiguration     *NetworkConfiguration          `json:"networkConfiguration,omitempty"`
+	PlatformVersion          *string                        `json:"platformVersion,omitempty"`
+	Scale                    *Scale                         `json:"scale,omitempty"`
 	Service                  string                         `json:"service"`
-	ServiceRegistries        []ServiceRegistry              `json:"serviceRegistries"`
-	Tags                     []Tag                          `json:"tags"`
+	ServiceRegistries        []ServiceRegistry              `json:"serviceRegistries,omitempty"`
+	Tags                     []Tag                          `json:"tags,omitempty"`
 	TaskDefinition           string                         `json:"taskDefinition"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CustomEventClickAnnotation struct {
-	Gclid *string `json:"gclid"`
-	Kind  *string `json:"kind"`
+	Gclid *string `json:"gclid,omitempty"`
+	Kind  *string `json:"kind,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetRateBasedRuleManagedKeysResponse struct {
-	ManagedKeys []string `json:"ManagedKeys"`
-	NextMarker  *string  `json:"NextMarker"`
+	ManagedKeys []string `json:"ManagedKeys,omitempty"`
+	NextMarker  *string  `json:"NextMarker,omitempty"`
 }

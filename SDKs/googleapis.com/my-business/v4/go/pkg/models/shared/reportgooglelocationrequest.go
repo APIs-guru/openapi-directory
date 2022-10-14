@@ -23,9 +23,9 @@ const (
 )
 
 type ReportGoogleLocationRequest struct {
-	LocationGroupName             *string                                                       `json:"locationGroupName"`
-	ReportReasonBadLocation       *ReportGoogleLocationRequestReportReasonBadLocationEnum       `json:"reportReasonBadLocation"`
-	ReportReasonBadRecommendation *ReportGoogleLocationRequestReportReasonBadRecommendationEnum `json:"reportReasonBadRecommendation"`
-	ReportReasonElaboration       *string                                                       `json:"reportReasonElaboration"`
-	ReportReasonLanguageCode      *string                                                       `json:"reportReasonLanguageCode"`
+	LocationGroupName             *string                                                       `json:"locationGroupName,omitempty"`
+	ReportReasonBadLocation       *ReportGoogleLocationRequestReportReasonBadLocationEnum       `json:"reportReasonBadLocation,omitempty"`
+	ReportReasonBadRecommendation *ReportGoogleLocationRequestReportReasonBadRecommendationEnum `json:"reportReasonBadRecommendation,omitempty"`
+	ReportReasonElaboration       *string                                                       `json:"reportReasonElaboration,omitempty"`
+	ReportReasonLanguageCode      *string                                                       `json:"reportReasonLanguageCode,omitempty"`
 }

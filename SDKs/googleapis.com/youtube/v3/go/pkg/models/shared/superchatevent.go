@@ -1,8 +1,8 @@
 package shared
 
 type SuperChatEvent struct {
-	Etag    *string                `json:"etag"`
-	ID      *string                `json:"id"`
-	Kind    *string                `json:"kind"`
-	Snippet *SuperChatEventSnippet `json:"snippet"`
+	Etag    *string                `json:"etag,omitempty"`
+	ID      *string                `json:"id,omitempty"`
+	Kind    *string                `json:"kind,omitempty"`
+	Snippet *SuperChatEventSnippet `json:"snippet,omitempty"`
 }

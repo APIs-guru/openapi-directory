@@ -1,7 +1,7 @@
 package shared
 
 type IntentFilter struct {
-	ActionNames   []string `json:"actionNames"`
-	CategoryNames []string `json:"categoryNames"`
-	MimeType      *string  `json:"mimeType"`
+	ActionNames   []string `json:"actionNames,omitempty"`
+	CategoryNames []string `json:"categoryNames,omitempty"`
+	MimeType      *string  `json:"mimeType,omitempty"`
 }

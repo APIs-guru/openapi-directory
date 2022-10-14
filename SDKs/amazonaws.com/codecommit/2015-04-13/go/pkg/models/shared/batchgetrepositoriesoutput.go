@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetRepositoriesOutput struct {
-	Repositories         []RepositoryMetadata `json:"repositories"`
-	RepositoriesNotFound []string             `json:"repositoriesNotFound"`
+	Repositories         []RepositoryMetadata `json:"repositories,omitempty"`
+	RepositoriesNotFound []string             `json:"repositoriesNotFound,omitempty"`
 }

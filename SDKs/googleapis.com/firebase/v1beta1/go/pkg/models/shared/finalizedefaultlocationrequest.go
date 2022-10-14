@@ -1,5 +1,5 @@
 package shared
 
 type FinalizeDefaultLocationRequest struct {
-	LocationID *string `json:"locationId"`
+	LocationID *string `json:"locationId,omitempty"`
 }

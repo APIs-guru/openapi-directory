@@ -9,8 +9,8 @@ const (
 )
 
 type CopyNodesRequest struct {
-	Items              []CopyNode                              `json:"items"`
-	KeepShareLinks     *bool                                   `json:"keepShareLinks"`
-	NodeIds            []int64                                 `json:"nodeIds"`
-	ResolutionStrategy *CopyNodesRequestResolutionStrategyEnum `json:"resolutionStrategy"`
+	Items              []CopyNode                              `json:"items,omitempty"`
+	KeepShareLinks     *bool                                   `json:"keepShareLinks,omitempty"`
+	NodeIds            []int64                                 `json:"nodeIds,omitempty"`
+	ResolutionStrategy *CopyNodesRequestResolutionStrategyEnum `json:"resolutionStrategy,omitempty"`
 }

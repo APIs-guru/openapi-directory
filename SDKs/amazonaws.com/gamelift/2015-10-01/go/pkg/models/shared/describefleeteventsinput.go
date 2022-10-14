@@ -5,9 +5,9 @@ import (
 )
 
 type DescribeFleetEventsInput struct {
-	EndTime   *time.Time `json:"EndTime"`
+	EndTime   *time.Time `json:"EndTime,omitempty"`
 	FleetID   string     `json:"FleetId"`
-	Limit     *int64     `json:"Limit"`
-	NextToken *string    `json:"NextToken"`
-	StartTime *time.Time `json:"StartTime"`
+	Limit     *int64     `json:"Limit,omitempty"`
+	NextToken *string    `json:"NextToken,omitempty"`
+	StartTime *time.Time `json:"StartTime,omitempty"`
 }

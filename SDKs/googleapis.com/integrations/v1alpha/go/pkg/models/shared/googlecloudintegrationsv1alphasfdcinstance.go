@@ -1,13 +1,13 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaSfdcInstance struct {
-	AuthConfigID     []string `json:"authConfigId"`
-	CreateTime       *string  `json:"createTime"`
-	DeleteTime       *string  `json:"deleteTime"`
-	Description      *string  `json:"description"`
-	DisplayName      *string  `json:"displayName"`
-	Name             *string  `json:"name"`
-	ServiceAuthority *string  `json:"serviceAuthority"`
-	SfdcOrgID        *string  `json:"sfdcOrgId"`
-	UpdateTime       *string  `json:"updateTime"`
+	AuthConfigID     []string `json:"authConfigId,omitempty"`
+	CreateTime       *string  `json:"createTime,omitempty"`
+	DeleteTime       *string  `json:"deleteTime,omitempty"`
+	Description      *string  `json:"description,omitempty"`
+	DisplayName      *string  `json:"displayName,omitempty"`
+	Name             *string  `json:"name,omitempty"`
+	ServiceAuthority *string  `json:"serviceAuthority,omitempty"`
+	SfdcOrgID        *string  `json:"sfdcOrgId,omitempty"`
+	UpdateTime       *string  `json:"updateTime,omitempty"`
 }

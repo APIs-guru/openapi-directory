@@ -1,6 +1,6 @@
 package shared
 
 type TimeSpan struct {
-	Duration  *string `json:"Duration"`
-	StartTime *string `json:"StartTime"`
+	Duration  *string `json:"Duration,omitempty"`
+	StartTime *string `json:"StartTime,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDocumentaiV1ProcessRequest struct {
-	FieldMask       *string                             `json:"fieldMask"`
-	InlineDocument  *GoogleCloudDocumentaiV1Document    `json:"inlineDocument"`
-	RawDocument     *GoogleCloudDocumentaiV1RawDocument `json:"rawDocument"`
-	SkipHumanReview *bool                               `json:"skipHumanReview"`
+	FieldMask       *string                             `json:"fieldMask,omitempty"`
+	InlineDocument  *GoogleCloudDocumentaiV1Document    `json:"inlineDocument,omitempty"`
+	RawDocument     *GoogleCloudDocumentaiV1RawDocument `json:"rawDocument,omitempty"`
+	SkipHumanReview *bool                               `json:"skipHumanReview,omitempty"`
 }

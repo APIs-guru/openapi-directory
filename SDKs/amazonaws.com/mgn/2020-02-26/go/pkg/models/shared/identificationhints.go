@@ -1,8 +1,8 @@
 package shared
 
 type IdentificationHints struct {
-	AwsInstanceID *string `json:"awsInstanceID"`
-	Fqdn          *string `json:"fqdn"`
-	Hostname      *string `json:"hostname"`
-	VMWareUUID    *string `json:"vmWareUuid"`
+	AwsInstanceID *string `json:"awsInstanceID,omitempty"`
+	Fqdn          *string `json:"fqdn,omitempty"`
+	Hostname      *string `json:"hostname,omitempty"`
+	VMWareUUID    *string `json:"vmWareUuid,omitempty"`
 }

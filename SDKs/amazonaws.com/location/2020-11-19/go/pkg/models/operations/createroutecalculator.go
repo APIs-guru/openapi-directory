@@ -25,9 +25,9 @@ const (
 type CreateRouteCalculatorRequestBody struct {
 	CalculatorName string                                          `json:"CalculatorName"`
 	DataSource     string                                          `json:"DataSource"`
-	Description    *string                                         `json:"Description"`
+	Description    *string                                         `json:"Description,omitempty"`
 	PricingPlan    CreateRouteCalculatorRequestBodyPricingPlanEnum `json:"PricingPlan"`
-	Tags           map[string]string                               `json:"Tags"`
+	Tags           map[string]string                               `json:"Tags,omitempty"`
 }
 
 type CreateRouteCalculatorRequest struct {

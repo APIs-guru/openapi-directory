@@ -1,6 +1,6 @@
 package shared
 
 type ReviewReplyResult struct {
-	LastEdited *Timestamp `json:"lastEdited"`
-	ReplyText  *string    `json:"replyText"`
+	LastEdited *Timestamp `json:"lastEdited,omitempty"`
+	ReplyText  *string    `json:"replyText,omitempty"`
 }

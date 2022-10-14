@@ -22,7 +22,7 @@ const (
 )
 
 type GetWorkingLocationRequestBody struct {
-	LocationType *GetWorkingLocationRequestBodyLocationTypeEnum `json:"locationType"`
+	LocationType *GetWorkingLocationRequestBodyLocationTypeEnum `json:"locationType,omitempty"`
 }
 
 type GetWorkingLocationRequest struct {

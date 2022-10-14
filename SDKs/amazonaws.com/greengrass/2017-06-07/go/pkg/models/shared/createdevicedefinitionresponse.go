@@ -1,11 +1,11 @@
 package shared
 
 type CreateDeviceDefinitionResponse struct {
-	Arn                  *string `json:"Arn"`
-	CreationTimestamp    *string `json:"CreationTimestamp"`
-	ID                   *string `json:"Id"`
-	LastUpdatedTimestamp *string `json:"LastUpdatedTimestamp"`
-	LatestVersion        *string `json:"LatestVersion"`
-	LatestVersionArn     *string `json:"LatestVersionArn"`
-	Name                 *string `json:"Name"`
+	Arn                  *string `json:"Arn,omitempty"`
+	CreationTimestamp    *string `json:"CreationTimestamp,omitempty"`
+	ID                   *string `json:"Id,omitempty"`
+	LastUpdatedTimestamp *string `json:"LastUpdatedTimestamp,omitempty"`
+	LatestVersion        *string `json:"LatestVersion,omitempty"`
+	LatestVersionArn     *string `json:"LatestVersionArn,omitempty"`
+	Name                 *string `json:"Name,omitempty"`
 }

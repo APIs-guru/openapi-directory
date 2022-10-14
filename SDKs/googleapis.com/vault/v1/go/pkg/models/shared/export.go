@@ -10,14 +10,14 @@ const (
 )
 
 type Export struct {
-	CloudStorageSink *CloudStorageSink `json:"cloudStorageSink"`
-	CreateTime       *string           `json:"createTime"`
-	ExportOptions    *ExportOptions    `json:"exportOptions"`
-	ID               *string           `json:"id"`
-	MatterID         *string           `json:"matterId"`
-	Name             *string           `json:"name"`
-	Query            *Query            `json:"query"`
-	Requester        *UserInfo         `json:"requester"`
-	Stats            *ExportStats      `json:"stats"`
-	Status           *ExportStatusEnum `json:"status"`
+	CloudStorageSink *CloudStorageSink `json:"cloudStorageSink,omitempty"`
+	CreateTime       *string           `json:"createTime,omitempty"`
+	ExportOptions    *ExportOptions    `json:"exportOptions,omitempty"`
+	ID               *string           `json:"id,omitempty"`
+	MatterID         *string           `json:"matterId,omitempty"`
+	Name             *string           `json:"name,omitempty"`
+	Query            *Query            `json:"query,omitempty"`
+	Requester        *UserInfo         `json:"requester,omitempty"`
+	Stats            *ExportStats      `json:"stats,omitempty"`
+	Status           *ExportStatusEnum `json:"status,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type BillingGroupProperties struct {
-	BillingGroupDescription *string `json:"billingGroupDescription"`
+	BillingGroupDescription *string `json:"billingGroupDescription,omitempty"`
 }

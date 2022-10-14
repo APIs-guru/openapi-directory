@@ -5,8 +5,8 @@ import (
 )
 
 type EndpointFilter struct {
-	CreationTimeAfter  *time.Time          `json:"CreationTimeAfter"`
-	CreationTimeBefore *time.Time          `json:"CreationTimeBefore"`
-	ModelArn           *string             `json:"ModelArn"`
-	Status             *EndpointStatusEnum `json:"Status"`
+	CreationTimeAfter  *time.Time          `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore *time.Time          `json:"CreationTimeBefore,omitempty"`
+	ModelArn           *string             `json:"ModelArn,omitempty"`
+	Status             *EndpointStatusEnum `json:"Status,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type FolderEntities struct {
-	Tag      []Tag      `json:"tag"`
-	Trigger  []Trigger  `json:"trigger"`
-	Variable []Variable `json:"variable"`
+	Tag      []Tag      `json:"tag,omitempty"`
+	Trigger  []Trigger  `json:"trigger,omitempty"`
+	Variable []Variable `json:"variable,omitempty"`
 }

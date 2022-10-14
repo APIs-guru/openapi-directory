@@ -1,5 +1,5 @@
 package shared
 
 type CheckValidCredsResponse struct {
-	HasValidCreds *bool `json:"hasValidCreds"`
+	HasValidCreds *bool `json:"hasValidCreds,omitempty"`
 }

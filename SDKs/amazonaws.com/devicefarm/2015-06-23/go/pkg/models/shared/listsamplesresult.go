@@ -1,6 +1,6 @@
 package shared
 
 type ListSamplesResult struct {
-	NextToken *string  `json:"nextToken"`
-	Samples   []Sample `json:"samples"`
+	NextToken *string  `json:"nextToken,omitempty"`
+	Samples   []Sample `json:"samples,omitempty"`
 }

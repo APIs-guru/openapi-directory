@@ -1,5 +1,5 @@
 package shared
 
 type CheckUpgradeRequest struct {
-	ImageVersion *string `json:"imageVersion"`
+	ImageVersion *string `json:"imageVersion,omitempty"`
 }

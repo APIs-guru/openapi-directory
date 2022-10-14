@@ -9,9 +9,9 @@ const (
 )
 
 type DeveloperMetadata struct {
-	Location      *DeveloperMetadataLocation       `json:"location"`
-	MetadataID    *int32                           `json:"metadataId"`
-	MetadataKey   *string                          `json:"metadataKey"`
-	MetadataValue *string                          `json:"metadataValue"`
-	Visibility    *DeveloperMetadataVisibilityEnum `json:"visibility"`
+	Location      *DeveloperMetadataLocation       `json:"location,omitempty"`
+	MetadataID    *int32                           `json:"metadataId,omitempty"`
+	MetadataKey   *string                          `json:"metadataKey,omitempty"`
+	MetadataValue *string                          `json:"metadataValue,omitempty"`
+	Visibility    *DeveloperMetadataVisibilityEnum `json:"visibility,omitempty"`
 }

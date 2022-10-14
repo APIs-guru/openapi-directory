@@ -28,15 +28,15 @@ const (
 )
 
 type UpdateNetworkSwitchAccessControlListsRequestBodyRules struct {
-	Comment   *string                                                             `json:"comment"`
+	Comment   *string                                                             `json:"comment,omitempty"`
 	DstCidr   string                                                              `json:"dstCidr"`
-	DstPort   *string                                                             `json:"dstPort"`
-	IPVersion *UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum `json:"ipVersion"`
+	DstPort   *string                                                             `json:"dstPort,omitempty"`
+	IPVersion *UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum `json:"ipVersion,omitempty"`
 	Policy    UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum     `json:"policy"`
 	Protocol  UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum   `json:"protocol"`
 	SrcCidr   string                                                              `json:"srcCidr"`
-	SrcPort   *string                                                             `json:"srcPort"`
-	Vlan      *string                                                             `json:"vlan"`
+	SrcPort   *string                                                             `json:"srcPort,omitempty"`
+	Vlan      *string                                                             `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkSwitchAccessControlListsRequestBody struct {

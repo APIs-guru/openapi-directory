@@ -1,5 +1,5 @@
 package shared
 
 type ListBeaconAttachmentsResponse struct {
-	Attachments []BeaconAttachment `json:"attachments"`
+	Attachments []BeaconAttachment `json:"attachments,omitempty"`
 }

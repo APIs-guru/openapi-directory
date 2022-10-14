@@ -1,10 +1,10 @@
 package shared
 
 type Account struct {
-	AccountID     *string `json:"accountId"`
-	Fingerprint   *string `json:"fingerprint"`
-	Name          *string `json:"name"`
-	Path          *string `json:"path"`
-	ShareData     *bool   `json:"shareData"`
-	TagManagerURL *string `json:"tagManagerUrl"`
+	AccountID     *string `json:"accountId,omitempty"`
+	Fingerprint   *string `json:"fingerprint,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	Path          *string `json:"path,omitempty"`
+	ShareData     *bool   `json:"shareData,omitempty"`
+	TagManagerURL *string `json:"tagManagerUrl,omitempty"`
 }

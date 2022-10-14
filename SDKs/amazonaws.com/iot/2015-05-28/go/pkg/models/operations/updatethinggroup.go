@@ -19,12 +19,12 @@ type UpdateThingGroupHeaders struct {
 }
 
 type UpdateThingGroupRequestBodyThingGroupProperties struct {
-	AttributePayload      *shared.AttributePayload `json:"attributePayload"`
-	ThingGroupDescription *string                  `json:"thingGroupDescription"`
+	AttributePayload      *shared.AttributePayload `json:"attributePayload,omitempty"`
+	ThingGroupDescription *string                  `json:"thingGroupDescription,omitempty"`
 }
 
 type UpdateThingGroupRequestBody struct {
-	ExpectedVersion      *int64                                          `json:"expectedVersion"`
+	ExpectedVersion      *int64                                          `json:"expectedVersion,omitempty"`
 	ThingGroupProperties UpdateThingGroupRequestBodyThingGroupProperties `json:"thingGroupProperties"`
 }
 

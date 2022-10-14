@@ -1,5 +1,5 @@
 package shared
 
 type FunctionDefaultConfig struct {
-	Execution *FunctionDefaultExecutionConfig `json:"Execution"`
+	Execution *FunctionDefaultExecutionConfig `json:"Execution,omitempty"`
 }

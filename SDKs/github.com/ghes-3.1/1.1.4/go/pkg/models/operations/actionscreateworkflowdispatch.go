@@ -7,7 +7,7 @@ type ActionsCreateWorkflowDispatchPathParams struct {
 }
 
 type ActionsCreateWorkflowDispatchRequestBody struct {
-	Inputs map[string]string `json:"inputs"`
+	Inputs map[string]string `json:"inputs,omitempty"`
 	Ref    string            `json:"ref"`
 }
 

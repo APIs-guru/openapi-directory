@@ -6,8 +6,8 @@ import (
 
 type RemediationException struct {
 	ConfigRuleName string     `json:"ConfigRuleName"`
-	ExpirationTime *time.Time `json:"ExpirationTime"`
-	Message        *string    `json:"Message"`
+	ExpirationTime *time.Time `json:"ExpirationTime,omitempty"`
+	Message        *string    `json:"Message,omitempty"`
 	ResourceID     string     `json:"ResourceId"`
 	ResourceType   string     `json:"ResourceType"`
 }

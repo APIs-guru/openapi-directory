@@ -13,15 +13,15 @@ const (
 )
 
 type Location struct {
-	Address      *Address                  `json:"address"`
-	BusinessName *string                   `json:"business_name"`
-	CreatedAt    *time.Time                `json:"created_at"`
-	CreatedBy    *string                   `json:"created_by"`
-	Currency     *CurrencyEnum             `json:"currency"`
-	ID           *string                   `json:"id"`
-	MerchantID   *string                   `json:"merchant_id"`
-	Name         *string                   `json:"name"`
-	Status       *LocationStatusStatusEnum `json:"status"`
-	UpdatedAt    *time.Time                `json:"updated_at"`
-	UpdatedBy    *string                   `json:"updated_by"`
+	Address      *Address                  `json:"address,omitempty"`
+	BusinessName *string                   `json:"business_name,omitempty"`
+	CreatedAt    *time.Time                `json:"created_at,omitempty"`
+	CreatedBy    *string                   `json:"created_by,omitempty"`
+	Currency     *CurrencyEnum             `json:"currency,omitempty"`
+	ID           *string                   `json:"id,omitempty"`
+	MerchantID   *string                   `json:"merchant_id,omitempty"`
+	Name         *string                   `json:"name,omitempty"`
+	Status       *LocationStatusStatusEnum `json:"status,omitempty"`
+	UpdatedAt    *time.Time                `json:"updated_at,omitempty"`
+	UpdatedBy    *string                   `json:"updated_by,omitempty"`
 }

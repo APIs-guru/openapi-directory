@@ -5,7 +5,7 @@ import (
 )
 
 type ProjectDescription struct {
-	CreationTimestamp *time.Time         `json:"CreationTimestamp"`
-	ProjectArn        *string            `json:"ProjectArn"`
-	Status            *ProjectStatusEnum `json:"Status"`
+	CreationTimestamp *time.Time         `json:"CreationTimestamp,omitempty"`
+	ProjectArn        *string            `json:"ProjectArn,omitempty"`
+	Status            *ProjectStatusEnum `json:"Status,omitempty"`
 }

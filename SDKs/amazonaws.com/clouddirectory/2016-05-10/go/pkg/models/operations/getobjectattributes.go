@@ -24,12 +24,12 @@ type GetObjectAttributesHeaders struct {
 }
 
 type GetObjectAttributesRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type GetObjectAttributesRequestBodySchemaFacet struct {
-	FacetName *string `json:"FacetName"`
-	SchemaArn *string `json:"SchemaArn"`
+	FacetName *string `json:"FacetName,omitempty"`
+	SchemaArn *string `json:"SchemaArn,omitempty"`
 }
 
 type GetObjectAttributesRequestBody struct {

@@ -1,10 +1,10 @@
 package shared
 
 type CreateFhirDatastoreRequest struct {
-	ClientToken          *string            `json:"ClientToken"`
-	DatastoreName        *string            `json:"DatastoreName"`
+	ClientToken          *string            `json:"ClientToken,omitempty"`
+	DatastoreName        *string            `json:"DatastoreName,omitempty"`
 	DatastoreTypeVersion FhirVersionEnum    `json:"DatastoreTypeVersion"`
-	PreloadDataConfig    *PreloadDataConfig `json:"PreloadDataConfig"`
-	SseConfiguration     *SseConfiguration  `json:"SseConfiguration"`
-	Tags                 []Tag              `json:"Tags"`
+	PreloadDataConfig    *PreloadDataConfig `json:"PreloadDataConfig,omitempty"`
+	SseConfiguration     *SseConfiguration  `json:"SseConfiguration,omitempty"`
+	Tags                 []Tag              `json:"Tags,omitempty"`
 }

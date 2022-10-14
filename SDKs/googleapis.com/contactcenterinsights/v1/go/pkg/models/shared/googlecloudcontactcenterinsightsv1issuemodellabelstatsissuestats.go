@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1IssueModelLabelStatsIssueStats struct {
-	DisplayName               *string `json:"displayName"`
-	Issue                     *string `json:"issue"`
-	LabeledConversationsCount *string `json:"labeledConversationsCount"`
+	DisplayName               *string `json:"displayName,omitempty"`
+	Issue                     *string `json:"issue,omitempty"`
+	LabeledConversationsCount *string `json:"labeledConversationsCount,omitempty"`
 }

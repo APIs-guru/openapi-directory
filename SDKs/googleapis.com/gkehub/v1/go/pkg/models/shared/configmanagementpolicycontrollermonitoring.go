@@ -9,5 +9,5 @@ const (
 )
 
 type ConfigManagementPolicyControllerMonitoring struct {
-	Backends []ConfigManagementPolicyControllerMonitoringBackendsEnum `json:"backends"`
+	Backends []ConfigManagementPolicyControllerMonitoringBackendsEnum `json:"backends,omitempty"`
 }

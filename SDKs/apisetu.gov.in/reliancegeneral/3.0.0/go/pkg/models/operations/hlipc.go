@@ -19,8 +19,8 @@ const (
 )
 
 type HlipcRequestBody struct {
-	CertificateParameters *HlipcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *HlipcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                HlipcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -56,8 +56,8 @@ const (
 )
 
 type Hlipc400ApplicationJSON struct {
-	Error            *Hlipc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hlipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hlipc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hlipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hlipc401ApplicationJSONErrorEnum string
@@ -75,8 +75,8 @@ const (
 )
 
 type Hlipc401ApplicationJSON struct {
-	Error            *Hlipc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hlipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hlipc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hlipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hlipc404ApplicationJSONErrorEnum string
@@ -94,8 +94,8 @@ const (
 )
 
 type Hlipc404ApplicationJSON struct {
-	Error            *Hlipc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hlipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hlipc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hlipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hlipc500ApplicationJSONErrorEnum string
@@ -111,8 +111,8 @@ const (
 )
 
 type Hlipc500ApplicationJSON struct {
-	Error            *Hlipc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hlipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hlipc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hlipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hlipc502ApplicationJSONErrorEnum string
@@ -128,8 +128,8 @@ const (
 )
 
 type Hlipc502ApplicationJSON struct {
-	Error            *Hlipc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hlipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hlipc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hlipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hlipc503ApplicationJSONErrorEnum string
@@ -145,8 +145,8 @@ const (
 )
 
 type Hlipc503ApplicationJSON struct {
-	Error            *Hlipc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hlipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hlipc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hlipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hlipc504ApplicationJSONErrorEnum string
@@ -162,8 +162,8 @@ const (
 )
 
 type Hlipc504ApplicationJSON struct {
-	Error            *Hlipc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hlipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hlipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hlipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type HlipcResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type Schema struct {
-	Attributes []SchemaAttribute `json:"Attributes"`
+	Attributes []SchemaAttribute `json:"Attributes,omitempty"`
 }

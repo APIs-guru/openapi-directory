@@ -1,6 +1,6 @@
 package shared
 
 type DescribeInventoryDeletionsResult struct {
-	InventoryDeletions []InventoryDeletionStatusItem `json:"InventoryDeletions"`
-	NextToken          *string                       `json:"NextToken"`
+	InventoryDeletions []InventoryDeletionStatusItem `json:"InventoryDeletions,omitempty"`
+	NextToken          *string                       `json:"NextToken,omitempty"`
 }

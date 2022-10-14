@@ -9,7 +9,7 @@ type BootLinodeInstancePathParams struct {
 }
 
 type BootLinodeInstanceRequestBody struct {
-	ConfigID *int64 `json:"config_id"`
+	ConfigID *int64 `json:"config_id,omitempty"`
 }
 
 type BootLinodeInstanceSecurityOption1 struct {
@@ -32,7 +32,7 @@ type BootLinodeInstanceRequest struct {
 }
 
 type BootLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type BootLinodeInstanceResponse struct {

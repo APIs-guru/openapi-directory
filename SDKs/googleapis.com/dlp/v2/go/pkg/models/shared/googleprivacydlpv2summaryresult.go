@@ -9,7 +9,7 @@ const (
 )
 
 type GooglePrivacyDlpV2SummaryResult struct {
-	Code    *GooglePrivacyDlpV2SummaryResultCodeEnum `json:"code"`
-	Count   *string                                  `json:"count"`
-	Details *string                                  `json:"details"`
+	Code    *GooglePrivacyDlpV2SummaryResultCodeEnum `json:"code,omitempty"`
+	Count   *string                                  `json:"count,omitempty"`
+	Details *string                                  `json:"details,omitempty"`
 }

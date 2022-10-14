@@ -1,7 +1,7 @@
 package shared
 
 type TflAPIPresentationEntitiesJourneyPlannerJourneyFare struct {
-	Caveats   []TflAPIPresentationEntitiesJourneyPlannerFareCaveat `json:"caveats"`
-	Fares     []TflAPIPresentationEntitiesJourneyPlannerFare       `json:"fares"`
-	TotalCost *int32                                               `json:"totalCost"`
+	Caveats   []TflAPIPresentationEntitiesJourneyPlannerFareCaveat `json:"caveats,omitempty"`
+	Fares     []TflAPIPresentationEntitiesJourneyPlannerFare       `json:"fares,omitempty"`
+	TotalCost *int32                                               `json:"totalCost,omitempty"`
 }

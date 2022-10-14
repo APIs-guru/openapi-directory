@@ -31,18 +31,18 @@ type ListUnderstandQueryRequest struct {
 }
 
 type ListUnderstandQuery200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListUnderstandQuery200ApplicationJSONListUnderstandQueryResponse struct {
-	Meta    *ListUnderstandQuery200ApplicationJSONMeta `json:"meta"`
-	Queries []shared.PreviewUnderstandAssistantQuery   `json:"queries"`
+	Meta    *ListUnderstandQuery200ApplicationJSONMeta `json:"meta,omitempty"`
+	Queries []shared.PreviewUnderstandAssistantQuery   `json:"queries,omitempty"`
 }
 
 type ListUnderstandQueryResponse struct {

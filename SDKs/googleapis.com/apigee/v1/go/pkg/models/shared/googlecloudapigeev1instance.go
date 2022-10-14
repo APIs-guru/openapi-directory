@@ -24,19 +24,19 @@ const (
 )
 
 type GoogleCloudApigeeV1Instance struct {
-	ConsumerAcceptList    []string                                         `json:"consumerAcceptList"`
-	CreatedAt             *string                                          `json:"createdAt"`
-	Description           *string                                          `json:"description"`
-	DiskEncryptionKeyName *string                                          `json:"diskEncryptionKeyName"`
-	DisplayName           *string                                          `json:"displayName"`
-	Host                  *string                                          `json:"host"`
-	IPRange               *string                                          `json:"ipRange"`
-	LastModifiedAt        *string                                          `json:"lastModifiedAt"`
-	Location              *string                                          `json:"location"`
-	Name                  *string                                          `json:"name"`
-	PeeringCidrRange      *GoogleCloudApigeeV1InstancePeeringCidrRangeEnum `json:"peeringCidrRange"`
-	Port                  *string                                          `json:"port"`
-	RuntimeVersion        *string                                          `json:"runtimeVersion"`
-	ServiceAttachment     *string                                          `json:"serviceAttachment"`
-	State                 *GoogleCloudApigeeV1InstanceStateEnum            `json:"state"`
+	ConsumerAcceptList    []string                                         `json:"consumerAcceptList,omitempty"`
+	CreatedAt             *string                                          `json:"createdAt,omitempty"`
+	Description           *string                                          `json:"description,omitempty"`
+	DiskEncryptionKeyName *string                                          `json:"diskEncryptionKeyName,omitempty"`
+	DisplayName           *string                                          `json:"displayName,omitempty"`
+	Host                  *string                                          `json:"host,omitempty"`
+	IPRange               *string                                          `json:"ipRange,omitempty"`
+	LastModifiedAt        *string                                          `json:"lastModifiedAt,omitempty"`
+	Location              *string                                          `json:"location,omitempty"`
+	Name                  *string                                          `json:"name,omitempty"`
+	PeeringCidrRange      *GoogleCloudApigeeV1InstancePeeringCidrRangeEnum `json:"peeringCidrRange,omitempty"`
+	Port                  *string                                          `json:"port,omitempty"`
+	RuntimeVersion        *string                                          `json:"runtimeVersion,omitempty"`
+	ServiceAttachment     *string                                          `json:"serviceAttachment,omitempty"`
+	State                 *GoogleCloudApigeeV1InstanceStateEnum            `json:"state,omitempty"`
 }

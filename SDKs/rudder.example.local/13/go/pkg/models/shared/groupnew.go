@@ -13,26 +13,26 @@ const (
 )
 
 type GroupNewQueryWhere struct {
-	Attribute  *string `json:"attribute"`
-	Comparator *string `json:"comparator"`
-	ObjectType *string `json:"objectType"`
-	Value      *string `json:"value"`
+	Attribute  *string `json:"attribute,omitempty"`
+	Comparator *string `json:"comparator,omitempty"`
+	ObjectType *string `json:"objectType,omitempty"`
+	Value      *string `json:"value,omitempty"`
 }
 
 type GroupNewQuery struct {
-	Composition *GroupNewQueryCompositionEnum `json:"composition"`
-	Select      *string                       `json:"select"`
-	Where       []GroupNewQueryWhere          `json:"where"`
+	Composition *GroupNewQueryCompositionEnum `json:"composition,omitempty"`
+	Select      *string                       `json:"select,omitempty"`
+	Where       []GroupNewQueryWhere          `json:"where,omitempty"`
 }
 
 type GroupNew struct {
 	Category    string               `json:"category"`
-	Description *string              `json:"description"`
+	Description *string              `json:"description,omitempty"`
 	DisplayName string               `json:"displayName"`
-	Dynamic     *bool                `json:"dynamic"`
-	Enabled     *bool                `json:"enabled"`
-	ID          *string              `json:"id"`
-	Properties  []GroupNewProperties `json:"properties"`
-	Query       *GroupNewQuery       `json:"query"`
-	Source      *string              `json:"source"`
+	Dynamic     *bool                `json:"dynamic,omitempty"`
+	Enabled     *bool                `json:"enabled,omitempty"`
+	ID          *string              `json:"id,omitempty"`
+	Properties  []GroupNewProperties `json:"properties,omitempty"`
+	Query       *GroupNewQuery       `json:"query,omitempty"`
+	Source      *string              `json:"source,omitempty"`
 }

@@ -15,7 +15,7 @@ type CreateClusterHeaders struct {
 }
 
 type CreateClusterRequestBody struct {
-	ClientToken *string `json:"ClientToken"`
+	ClientToken *string `json:"ClientToken,omitempty"`
 	ClusterName string  `json:"ClusterName"`
 }
 

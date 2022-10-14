@@ -20,15 +20,15 @@ type UpdateConfigurationSetEventDestinationHeaders struct {
 }
 
 type UpdateConfigurationSetEventDestinationRequestBodyEventDestination struct {
-	CloudWatchLogsDestination  *shared.CloudWatchLogsDestination  `json:"CloudWatchLogsDestination"`
-	Enabled                    *bool                              `json:"Enabled"`
-	KinesisFirehoseDestination *shared.KinesisFirehoseDestination `json:"KinesisFirehoseDestination"`
-	MatchingEventTypes         []shared.EventTypeEnum             `json:"MatchingEventTypes"`
-	SnsDestination             *shared.SnsDestination             `json:"SnsDestination"`
+	CloudWatchLogsDestination  *shared.CloudWatchLogsDestination  `json:"CloudWatchLogsDestination,omitempty"`
+	Enabled                    *bool                              `json:"Enabled,omitempty"`
+	KinesisFirehoseDestination *shared.KinesisFirehoseDestination `json:"KinesisFirehoseDestination,omitempty"`
+	MatchingEventTypes         []shared.EventTypeEnum             `json:"MatchingEventTypes,omitempty"`
+	SnsDestination             *shared.SnsDestination             `json:"SnsDestination,omitempty"`
 }
 
 type UpdateConfigurationSetEventDestinationRequestBody struct {
-	EventDestination *UpdateConfigurationSetEventDestinationRequestBodyEventDestination `json:"EventDestination"`
+	EventDestination *UpdateConfigurationSetEventDestinationRequestBodyEventDestination `json:"EventDestination,omitempty"`
 }
 
 type UpdateConfigurationSetEventDestinationRequest struct {

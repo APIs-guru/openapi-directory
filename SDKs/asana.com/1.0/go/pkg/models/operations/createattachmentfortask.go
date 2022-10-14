@@ -22,7 +22,7 @@ type CreateAttachmentForTaskRequest struct {
 }
 
 type CreateAttachmentForTask200ApplicationJSON struct {
-	Data *shared.AttachmentResponse `json:"data"`
+	Data *shared.AttachmentResponse `json:"data,omitempty"`
 }
 
 type CreateAttachmentForTaskResponse struct {

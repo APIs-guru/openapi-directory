@@ -14,7 +14,7 @@ const (
 )
 
 type WeekDayOfMonth struct {
-	DayOfWeek   *WeekDayOfMonthDayOfWeekEnum `json:"dayOfWeek"`
-	DayOffset   *int32                       `json:"dayOffset"`
-	WeekOrdinal *int32                       `json:"weekOrdinal"`
+	DayOfWeek   *WeekDayOfMonthDayOfWeekEnum `json:"dayOfWeek,omitempty"`
+	DayOffset   *int32                       `json:"dayOffset,omitempty"`
+	WeekOrdinal *int32                       `json:"weekOrdinal,omitempty"`
 }

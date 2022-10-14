@@ -20,7 +20,7 @@ type GetUsersForTeamRequest struct {
 }
 
 type GetUsersForTeam200ApplicationJSON struct {
-	Data []shared.UserCompact `json:"data"`
+	Data []shared.UserCompact `json:"data,omitempty"`
 }
 
 type GetUsersForTeamResponse struct {

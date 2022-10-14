@@ -49,12 +49,12 @@ const (
 )
 
 type GoogleCloudRetailV2betaCatalogAttribute struct {
-	DynamicFacetableOption         *GoogleCloudRetailV2betaCatalogAttributeDynamicFacetableOptionEnum         `json:"dynamicFacetableOption"`
-	ExactSearchableOption          *GoogleCloudRetailV2betaCatalogAttributeExactSearchableOptionEnum          `json:"exactSearchableOption"`
-	InUse                          *bool                                                                      `json:"inUse"`
-	IndexableOption                *GoogleCloudRetailV2betaCatalogAttributeIndexableOptionEnum                `json:"indexableOption"`
-	Key                            *string                                                                    `json:"key"`
-	RecommendationsFilteringOption *GoogleCloudRetailV2betaCatalogAttributeRecommendationsFilteringOptionEnum `json:"recommendationsFilteringOption"`
-	SearchableOption               *GoogleCloudRetailV2betaCatalogAttributeSearchableOptionEnum               `json:"searchableOption"`
-	Type                           *GoogleCloudRetailV2betaCatalogAttributeTypeEnum                           `json:"type"`
+	DynamicFacetableOption         *GoogleCloudRetailV2betaCatalogAttributeDynamicFacetableOptionEnum         `json:"dynamicFacetableOption,omitempty"`
+	ExactSearchableOption          *GoogleCloudRetailV2betaCatalogAttributeExactSearchableOptionEnum          `json:"exactSearchableOption,omitempty"`
+	InUse                          *bool                                                                      `json:"inUse,omitempty"`
+	IndexableOption                *GoogleCloudRetailV2betaCatalogAttributeIndexableOptionEnum                `json:"indexableOption,omitempty"`
+	Key                            *string                                                                    `json:"key,omitempty"`
+	RecommendationsFilteringOption *GoogleCloudRetailV2betaCatalogAttributeRecommendationsFilteringOptionEnum `json:"recommendationsFilteringOption,omitempty"`
+	SearchableOption               *GoogleCloudRetailV2betaCatalogAttributeSearchableOptionEnum               `json:"searchableOption,omitempty"`
+	Type                           *GoogleCloudRetailV2betaCatalogAttributeTypeEnum                           `json:"type,omitempty"`
 }

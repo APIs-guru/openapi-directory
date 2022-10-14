@@ -9,7 +9,7 @@ const (
 )
 
 type ExportMetadataRequest struct {
-	DatabaseDumpType     *ExportMetadataRequestDatabaseDumpTypeEnum `json:"databaseDumpType"`
-	DestinationGcsFolder *string                                    `json:"destinationGcsFolder"`
-	RequestID            *string                                    `json:"requestId"`
+	DatabaseDumpType     *ExportMetadataRequestDatabaseDumpTypeEnum `json:"databaseDumpType,omitempty"`
+	DestinationGcsFolder *string                                    `json:"destinationGcsFolder,omitempty"`
+	RequestID            *string                                    `json:"requestId,omitempty"`
 }

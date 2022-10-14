@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetPartitionResponse struct {
-	Partitions      []Partition          `json:"Partitions"`
-	UnprocessedKeys []PartitionValueList `json:"UnprocessedKeys"`
+	Partitions      []Partition          `json:"Partitions,omitempty"`
+	UnprocessedKeys []PartitionValueList `json:"UnprocessedKeys,omitempty"`
 }

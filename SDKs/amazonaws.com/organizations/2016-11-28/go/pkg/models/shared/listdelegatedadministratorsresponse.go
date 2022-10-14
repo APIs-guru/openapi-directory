@@ -1,6 +1,6 @@
 package shared
 
 type ListDelegatedAdministratorsResponse struct {
-	DelegatedAdministrators []DelegatedAdministrator `json:"DelegatedAdministrators"`
-	NextToken               *string                  `json:"NextToken"`
+	DelegatedAdministrators []DelegatedAdministrator `json:"DelegatedAdministrators,omitempty"`
+	NextToken               *string                  `json:"NextToken,omitempty"`
 }

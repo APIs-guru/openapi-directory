@@ -1,6 +1,6 @@
 package shared
 
 type VolumeFilter struct {
-	Name   *VolumeFilterNameEnum `json:"Name"`
-	Values []string              `json:"Values"`
+	Name   *VolumeFilterNameEnum `json:"Name,omitempty"`
+	Values []string              `json:"Values,omitempty"`
 }

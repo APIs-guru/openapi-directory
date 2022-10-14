@@ -5,8 +5,8 @@ import (
 )
 
 type DescribeCertificateAuthorityAuditReportResponse struct {
-	AuditReportStatus *AuditReportStatusEnum `json:"AuditReportStatus"`
-	CreatedAt         *time.Time             `json:"CreatedAt"`
-	S3BucketName      *string                `json:"S3BucketName"`
-	S3Key             *string                `json:"S3Key"`
+	AuditReportStatus *AuditReportStatusEnum `json:"AuditReportStatus,omitempty"`
+	CreatedAt         *time.Time             `json:"CreatedAt,omitempty"`
+	S3BucketName      *string                `json:"S3BucketName,omitempty"`
+	S3Key             *string                `json:"S3Key,omitempty"`
 }

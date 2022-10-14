@@ -20,6 +20,6 @@ const (
 )
 
 type GooglePrivacyDlpV2ByteContentItem struct {
-	Data *string                                    `json:"data"`
-	Type *GooglePrivacyDlpV2ByteContentItemTypeEnum `json:"type"`
+	Data *string                                    `json:"data,omitempty"`
+	Type *GooglePrivacyDlpV2ByteContentItemTypeEnum `json:"type,omitempty"`
 }

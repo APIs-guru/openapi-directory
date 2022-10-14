@@ -14,10 +14,10 @@ const (
 )
 
 type Profile struct {
-	Deployment   *Deployment             `json:"deployment"`
-	Duration     *string                 `json:"duration"`
-	Labels       map[string]string       `json:"labels"`
-	Name         *string                 `json:"name"`
-	ProfileBytes *string                 `json:"profileBytes"`
-	ProfileType  *ProfileProfileTypeEnum `json:"profileType"`
+	Deployment   *Deployment             `json:"deployment,omitempty"`
+	Duration     *string                 `json:"duration,omitempty"`
+	Labels       map[string]string       `json:"labels,omitempty"`
+	Name         *string                 `json:"name,omitempty"`
+	ProfileBytes *string                 `json:"profileBytes,omitempty"`
+	ProfileType  *ProfileProfileTypeEnum `json:"profileType,omitempty"`
 }

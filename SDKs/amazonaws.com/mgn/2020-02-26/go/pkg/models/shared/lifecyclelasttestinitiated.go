@@ -1,6 +1,6 @@
 package shared
 
 type LifeCycleLastTestInitiated struct {
-	APICallDateTime *string `json:"apiCallDateTime"`
-	JobID           *string `json:"jobID"`
+	APICallDateTime *string `json:"apiCallDateTime,omitempty"`
+	JobID           *string `json:"jobID,omitempty"`
 }

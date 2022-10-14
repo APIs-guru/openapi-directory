@@ -19,7 +19,7 @@ type GetUserRequest struct {
 }
 
 type GetUser200ApplicationJSON struct {
-	Data *shared.UserResponse `json:"data"`
+	Data *shared.UserResponse `json:"data,omitempty"`
 }
 
 type GetUserResponse struct {

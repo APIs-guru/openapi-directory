@@ -9,6 +9,6 @@ const (
 )
 
 type VideoRating struct {
-	Rating  *VideoRatingRatingEnum `json:"rating"`
-	VideoID *string                `json:"videoId"`
+	Rating  *VideoRatingRatingEnum `json:"rating,omitempty"`
+	VideoID *string                `json:"videoId,omitempty"`
 }

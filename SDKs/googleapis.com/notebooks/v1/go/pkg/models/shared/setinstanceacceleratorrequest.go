@@ -18,6 +18,6 @@ const (
 )
 
 type SetInstanceAcceleratorRequest struct {
-	CoreCount *string                                `json:"coreCount"`
-	Type      *SetInstanceAcceleratorRequestTypeEnum `json:"type"`
+	CoreCount *string                                `json:"coreCount,omitempty"`
+	Type      *SetInstanceAcceleratorRequestTypeEnum `json:"type,omitempty"`
 }

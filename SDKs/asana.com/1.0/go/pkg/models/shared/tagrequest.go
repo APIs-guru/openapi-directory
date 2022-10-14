@@ -24,10 +24,10 @@ const (
 )
 
 type TagRequest struct {
-	Color        *TagRequestColorEnum `json:"color"`
-	Followers    []string             `json:"followers"`
-	Gid          *string              `json:"gid"`
-	Name         *string              `json:"name"`
-	ResourceType *string              `json:"resource_type"`
-	Workspace    *string              `json:"workspace"`
+	Color        *TagRequestColorEnum `json:"color,omitempty"`
+	Followers    []string             `json:"followers,omitempty"`
+	Gid          *string              `json:"gid,omitempty"`
+	Name         *string              `json:"name,omitempty"`
+	ResourceType *string              `json:"resource_type,omitempty"`
+	Workspace    *string              `json:"workspace,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type OnlineStoreConfig struct {
-	EnableOnlineStore *bool                      `json:"EnableOnlineStore"`
-	SecurityConfig    *OnlineStoreSecurityConfig `json:"SecurityConfig"`
+	EnableOnlineStore *bool                      `json:"EnableOnlineStore,omitempty"`
+	SecurityConfig    *OnlineStoreSecurityConfig `json:"SecurityConfig,omitempty"`
 }

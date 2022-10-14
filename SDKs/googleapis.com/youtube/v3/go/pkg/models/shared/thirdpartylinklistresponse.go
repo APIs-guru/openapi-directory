@@ -1,7 +1,7 @@
 package shared
 
 type ThirdPartyLinkListResponse struct {
-	Etag  *string          `json:"etag"`
-	Items []ThirdPartyLink `json:"items"`
-	Kind  *string          `json:"kind"`
+	Etag  *string          `json:"etag,omitempty"`
+	Items []ThirdPartyLink `json:"items,omitempty"`
+	Kind  *string          `json:"kind,omitempty"`
 }

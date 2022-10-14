@@ -20,10 +20,10 @@ type ListImageBuildVersionsHeaders struct {
 }
 
 type ListImageBuildVersionsRequestBody struct {
-	Filters         []shared.Filter `json:"filters"`
+	Filters         []shared.Filter `json:"filters,omitempty"`
 	ImageVersionArn string          `json:"imageVersionArn"`
-	MaxResults      *int64          `json:"maxResults"`
-	NextToken       *string         `json:"nextToken"`
+	MaxResults      *int64          `json:"maxResults,omitempty"`
+	NextToken       *string         `json:"nextToken,omitempty"`
 }
 
 type ListImageBuildVersionsRequest struct {

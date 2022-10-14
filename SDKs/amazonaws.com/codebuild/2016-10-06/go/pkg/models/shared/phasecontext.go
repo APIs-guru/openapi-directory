@@ -1,6 +1,6 @@
 package shared
 
 type PhaseContext struct {
-	Message    *string `json:"message"`
-	StatusCode *string `json:"statusCode"`
+	Message    *string `json:"message,omitempty"`
+	StatusCode *string `json:"statusCode,omitempty"`
 }

@@ -56,24 +56,24 @@ const (
 )
 
 type APIV2010AccountApplication struct {
-	AccountSid            *string                                             `json:"account_sid"`
-	APIVersion            *string                                             `json:"api_version"`
-	DateCreated           *string                                             `json:"date_created"`
-	DateUpdated           *string                                             `json:"date_updated"`
-	FriendlyName          *string                                             `json:"friendly_name"`
-	MessageStatusCallback *string                                             `json:"message_status_callback"`
-	Sid                   *string                                             `json:"sid"`
-	SmsFallbackMethod     *APIV2010AccountApplicationSmsFallbackMethodEnum    `json:"sms_fallback_method"`
-	SmsFallbackURL        *string                                             `json:"sms_fallback_url"`
-	SmsMethod             *APIV2010AccountApplicationSmsMethodEnum            `json:"sms_method"`
-	SmsStatusCallback     *string                                             `json:"sms_status_callback"`
-	SmsURL                *string                                             `json:"sms_url"`
-	StatusCallback        *string                                             `json:"status_callback"`
-	StatusCallbackMethod  *APIV2010AccountApplicationStatusCallbackMethodEnum `json:"status_callback_method"`
-	URI                   *string                                             `json:"uri"`
-	VoiceCallerIDLookup   *bool                                               `json:"voice_caller_id_lookup"`
-	VoiceFallbackMethod   *APIV2010AccountApplicationVoiceFallbackMethodEnum  `json:"voice_fallback_method"`
-	VoiceFallbackURL      *string                                             `json:"voice_fallback_url"`
-	VoiceMethod           *APIV2010AccountApplicationVoiceMethodEnum          `json:"voice_method"`
-	VoiceURL              *string                                             `json:"voice_url"`
+	AccountSid            *string                                             `json:"account_sid,omitempty"`
+	APIVersion            *string                                             `json:"api_version,omitempty"`
+	DateCreated           *string                                             `json:"date_created,omitempty"`
+	DateUpdated           *string                                             `json:"date_updated,omitempty"`
+	FriendlyName          *string                                             `json:"friendly_name,omitempty"`
+	MessageStatusCallback *string                                             `json:"message_status_callback,omitempty"`
+	Sid                   *string                                             `json:"sid,omitempty"`
+	SmsFallbackMethod     *APIV2010AccountApplicationSmsFallbackMethodEnum    `json:"sms_fallback_method,omitempty"`
+	SmsFallbackURL        *string                                             `json:"sms_fallback_url,omitempty"`
+	SmsMethod             *APIV2010AccountApplicationSmsMethodEnum            `json:"sms_method,omitempty"`
+	SmsStatusCallback     *string                                             `json:"sms_status_callback,omitempty"`
+	SmsURL                *string                                             `json:"sms_url,omitempty"`
+	StatusCallback        *string                                             `json:"status_callback,omitempty"`
+	StatusCallbackMethod  *APIV2010AccountApplicationStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	URI                   *string                                             `json:"uri,omitempty"`
+	VoiceCallerIDLookup   *bool                                               `json:"voice_caller_id_lookup,omitempty"`
+	VoiceFallbackMethod   *APIV2010AccountApplicationVoiceFallbackMethodEnum  `json:"voice_fallback_method,omitempty"`
+	VoiceFallbackURL      *string                                             `json:"voice_fallback_url,omitempty"`
+	VoiceMethod           *APIV2010AccountApplicationVoiceMethodEnum          `json:"voice_method,omitempty"`
+	VoiceURL              *string                                             `json:"voice_url,omitempty"`
 }

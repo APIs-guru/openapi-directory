@@ -16,23 +16,23 @@ type CreateAuditSuppressionHeaders struct {
 }
 
 type CreateAuditSuppressionRequestBodyResourceIdentifier struct {
-	Account                 *string                         `json:"account"`
-	CaCertificateID         *string                         `json:"caCertificateId"`
-	ClientID                *string                         `json:"clientId"`
-	CognitoIdentityPoolID   *string                         `json:"cognitoIdentityPoolId"`
-	DeviceCertificateID     *string                         `json:"deviceCertificateId"`
-	IamRoleArn              *string                         `json:"iamRoleArn"`
-	PolicyVersionIdentifier *shared.PolicyVersionIdentifier `json:"policyVersionIdentifier"`
-	RoleAliasArn            *string                         `json:"roleAliasArn"`
+	Account                 *string                         `json:"account,omitempty"`
+	CaCertificateID         *string                         `json:"caCertificateId,omitempty"`
+	ClientID                *string                         `json:"clientId,omitempty"`
+	CognitoIdentityPoolID   *string                         `json:"cognitoIdentityPoolId,omitempty"`
+	DeviceCertificateID     *string                         `json:"deviceCertificateId,omitempty"`
+	IamRoleArn              *string                         `json:"iamRoleArn,omitempty"`
+	PolicyVersionIdentifier *shared.PolicyVersionIdentifier `json:"policyVersionIdentifier,omitempty"`
+	RoleAliasArn            *string                         `json:"roleAliasArn,omitempty"`
 }
 
 type CreateAuditSuppressionRequestBody struct {
 	CheckName            string                                              `json:"checkName"`
 	ClientRequestToken   string                                              `json:"clientRequestToken"`
-	Description          *string                                             `json:"description"`
-	ExpirationDate       *time.Time                                          `json:"expirationDate"`
+	Description          *string                                             `json:"description,omitempty"`
+	ExpirationDate       *time.Time                                          `json:"expirationDate,omitempty"`
 	ResourceIdentifier   CreateAuditSuppressionRequestBodyResourceIdentifier `json:"resourceIdentifier"`
-	SuppressIndefinitely *bool                                               `json:"suppressIndefinitely"`
+	SuppressIndefinitely *bool                                               `json:"suppressIndefinitely,omitempty"`
 }
 
 type CreateAuditSuppressionRequest struct {

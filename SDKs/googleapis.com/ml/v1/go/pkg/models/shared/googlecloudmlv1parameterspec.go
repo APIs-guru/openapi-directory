@@ -20,11 +20,11 @@ const (
 )
 
 type GoogleCloudMlV1ParameterSpec struct {
-	CategoricalValues []string                                   `json:"categoricalValues"`
-	DiscreteValues    []float64                                  `json:"discreteValues"`
-	MaxValue          *float64                                   `json:"maxValue"`
-	MinValue          *float64                                   `json:"minValue"`
-	ParameterName     *string                                    `json:"parameterName"`
-	ScaleType         *GoogleCloudMlV1ParameterSpecScaleTypeEnum `json:"scaleType"`
-	Type              *GoogleCloudMlV1ParameterSpecTypeEnum      `json:"type"`
+	CategoricalValues []string                                   `json:"categoricalValues,omitempty"`
+	DiscreteValues    []float64                                  `json:"discreteValues,omitempty"`
+	MaxValue          *float64                                   `json:"maxValue,omitempty"`
+	MinValue          *float64                                   `json:"minValue,omitempty"`
+	ParameterName     *string                                    `json:"parameterName,omitempty"`
+	ScaleType         *GoogleCloudMlV1ParameterSpecScaleTypeEnum `json:"scaleType,omitempty"`
+	Type              *GoogleCloudMlV1ParameterSpecTypeEnum      `json:"type,omitempty"`
 }

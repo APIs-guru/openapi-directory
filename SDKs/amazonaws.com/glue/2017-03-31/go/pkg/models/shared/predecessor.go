@@ -1,6 +1,6 @@
 package shared
 
 type Predecessor struct {
-	JobName *string `json:"JobName"`
-	RunID   *string `json:"RunId"`
+	JobName *string `json:"JobName,omitempty"`
+	RunID   *string `json:"RunId,omitempty"`
 }

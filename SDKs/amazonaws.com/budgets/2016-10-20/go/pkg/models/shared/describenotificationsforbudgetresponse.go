@@ -1,6 +1,6 @@
 package shared
 
 type DescribeNotificationsForBudgetResponse struct {
-	NextToken     *string        `json:"NextToken"`
-	Notifications []Notification `json:"Notifications"`
+	NextToken     *string        `json:"NextToken,omitempty"`
+	Notifications []Notification `json:"Notifications,omitempty"`
 }

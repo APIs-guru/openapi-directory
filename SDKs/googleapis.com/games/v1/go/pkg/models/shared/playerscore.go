@@ -10,9 +10,9 @@ const (
 )
 
 type PlayerScore struct {
-	FormattedScore *string                  `json:"formattedScore"`
-	Kind           *string                  `json:"kind"`
-	Score          *string                  `json:"score"`
-	ScoreTag       *string                  `json:"scoreTag"`
-	TimeSpan       *PlayerScoreTimeSpanEnum `json:"timeSpan"`
+	FormattedScore *string                  `json:"formattedScore,omitempty"`
+	Kind           *string                  `json:"kind,omitempty"`
+	Score          *string                  `json:"score,omitempty"`
+	ScoreTag       *string                  `json:"scoreTag,omitempty"`
+	TimeSpan       *PlayerScoreTimeSpanEnum `json:"timeSpan,omitempty"`
 }

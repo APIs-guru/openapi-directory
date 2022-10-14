@@ -13,7 +13,7 @@ type RemoveCustomFieldSettingForPortfolioQueryParams struct {
 }
 
 type RemoveCustomFieldSettingForPortfolioRequestBody struct {
-	Data *shared.RemoveCustomFieldSettingRequest `json:"data"`
+	Data *shared.RemoveCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
 type RemoveCustomFieldSettingForPortfolioRequest struct {
@@ -23,7 +23,7 @@ type RemoveCustomFieldSettingForPortfolioRequest struct {
 }
 
 type RemoveCustomFieldSettingForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveCustomFieldSettingForPortfolioResponse struct {

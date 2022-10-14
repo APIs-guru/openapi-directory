@@ -1,6 +1,6 @@
 package shared
 
 type ObjectAccessControls struct {
-	Items []interface{} `json:"items"`
-	Kind  *string       `json:"kind"`
+	Items []interface{} `json:"items,omitempty"`
+	Kind  *string       `json:"kind,omitempty"`
 }

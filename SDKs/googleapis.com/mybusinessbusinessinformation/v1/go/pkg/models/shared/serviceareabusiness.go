@@ -9,7 +9,7 @@ const (
 )
 
 type ServiceAreaBusiness struct {
-	BusinessType *ServiceAreaBusinessBusinessTypeEnum `json:"businessType"`
-	Places       *Places                              `json:"places"`
-	RegionCode   *string                              `json:"regionCode"`
+	BusinessType *ServiceAreaBusinessBusinessTypeEnum `json:"businessType,omitempty"`
+	Places       *Places                              `json:"places,omitempty"`
+	RegionCode   *string                              `json:"regionCode,omitempty"`
 }

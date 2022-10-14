@@ -1,9 +1,9 @@
 package shared
 
 type RdsDataSpec struct {
-	DataRearrangement   *string                `json:"DataRearrangement"`
-	DataSchema          *string                `json:"DataSchema"`
-	DataSchemaURI       *string                `json:"DataSchemaUri"`
+	DataRearrangement   *string                `json:"DataRearrangement,omitempty"`
+	DataSchema          *string                `json:"DataSchema,omitempty"`
+	DataSchemaURI       *string                `json:"DataSchemaUri,omitempty"`
 	DatabaseCredentials RdsDatabaseCredentials `json:"DatabaseCredentials"`
 	DatabaseInformation RdsDatabase            `json:"DatabaseInformation"`
 	ResourceRole        string                 `json:"ResourceRole"`

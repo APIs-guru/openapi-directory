@@ -1,7 +1,7 @@
 package shared
 
 type ListDisputeEvidenceResponse struct {
-	Cursor   *string           `json:"cursor"`
-	Errors   []Error           `json:"errors"`
-	Evidence []DisputeEvidence `json:"evidence"`
+	Cursor   *string           `json:"cursor,omitempty"`
+	Errors   []Error           `json:"errors,omitempty"`
+	Evidence []DisputeEvidence `json:"evidence,omitempty"`
 }

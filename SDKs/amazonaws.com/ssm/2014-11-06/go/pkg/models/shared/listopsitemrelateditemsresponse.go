@@ -1,6 +1,6 @@
 package shared
 
 type ListOpsItemRelatedItemsResponse struct {
-	NextToken *string                     `json:"NextToken"`
-	Summaries []OpsItemRelatedItemSummary `json:"Summaries"`
+	NextToken *string                     `json:"NextToken,omitempty"`
+	Summaries []OpsItemRelatedItemSummary `json:"Summaries,omitempty"`
 }

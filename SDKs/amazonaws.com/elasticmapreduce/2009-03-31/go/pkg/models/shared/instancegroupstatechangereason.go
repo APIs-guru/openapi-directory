@@ -1,6 +1,6 @@
 package shared
 
 type InstanceGroupStateChangeReason struct {
-	Code    *InstanceGroupStateChangeReasonCodeEnum `json:"Code"`
-	Message *string                                 `json:"Message"`
+	Code    *InstanceGroupStateChangeReasonCodeEnum `json:"Code,omitempty"`
+	Message *string                                 `json:"Message,omitempty"`
 }

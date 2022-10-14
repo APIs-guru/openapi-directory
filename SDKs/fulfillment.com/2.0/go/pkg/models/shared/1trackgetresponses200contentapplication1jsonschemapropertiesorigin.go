@@ -17,7 +17,7 @@ type OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometr
 }
 
 type OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginProperties struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginTypeEnum string
@@ -27,11 +27,11 @@ const (
 )
 
 type OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin struct {
-	Bbox       []interface{}                                                                           `json:"bbox"`
-	Centerline *OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry `json:"centerline"`
+	Bbox       []interface{}                                                                           `json:"bbox,omitempty"`
+	Centerline *OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry `json:"centerline,omitempty"`
 	Geometry   OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometryGeometry    `json:"geometry"`
-	ID         *int64                                                                                  `json:"id"`
+	ID         *int64                                                                                  `json:"id,omitempty"`
 	Properties OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginProperties          `json:"properties"`
-	Title      *string                                                                                 `json:"title"`
+	Title      *string                                                                                 `json:"title,omitempty"`
 	Type       OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginTypeEnum            `json:"type"`
 }

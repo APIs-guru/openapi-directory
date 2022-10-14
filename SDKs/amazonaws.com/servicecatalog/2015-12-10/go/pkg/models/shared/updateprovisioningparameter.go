@@ -1,7 +1,7 @@
 package shared
 
 type UpdateProvisioningParameter struct {
-	Key              *string `json:"Key"`
-	UsePreviousValue *bool   `json:"UsePreviousValue"`
-	Value            *string `json:"Value"`
+	Key              *string `json:"Key,omitempty"`
+	UsePreviousValue *bool   `json:"UsePreviousValue,omitempty"`
+	Value            *string `json:"Value,omitempty"`
 }

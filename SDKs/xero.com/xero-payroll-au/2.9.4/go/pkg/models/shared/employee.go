@@ -10,35 +10,35 @@ const (
 )
 
 type Employee struct {
-	BankAccounts                    []BankAccount       `json:"BankAccounts"`
-	Classification                  *string             `json:"Classification"`
+	BankAccounts                    []BankAccount       `json:"BankAccounts,omitempty"`
+	Classification                  *string             `json:"Classification,omitempty"`
 	DateOfBirth                     string              `json:"DateOfBirth"`
-	Email                           *string             `json:"Email"`
-	EmployeeGroupName               *string             `json:"EmployeeGroupName"`
-	EmployeeID                      *string             `json:"EmployeeID"`
+	Email                           *string             `json:"Email,omitempty"`
+	EmployeeGroupName               *string             `json:"EmployeeGroupName,omitempty"`
+	EmployeeID                      *string             `json:"EmployeeID,omitempty"`
 	FirstName                       string              `json:"FirstName"`
-	Gender                          *EmployeeGenderEnum `json:"Gender"`
-	HomeAddress                     *HomeAddress        `json:"HomeAddress"`
-	IsAuthorisedToApproveLeave      *bool               `json:"IsAuthorisedToApproveLeave"`
-	IsAuthorisedToApproveTimesheets *bool               `json:"IsAuthorisedToApproveTimesheets"`
-	JobTitle                        *string             `json:"JobTitle"`
+	Gender                          *EmployeeGenderEnum `json:"Gender,omitempty"`
+	HomeAddress                     *HomeAddress        `json:"HomeAddress,omitempty"`
+	IsAuthorisedToApproveLeave      *bool               `json:"IsAuthorisedToApproveLeave,omitempty"`
+	IsAuthorisedToApproveTimesheets *bool               `json:"IsAuthorisedToApproveTimesheets,omitempty"`
+	JobTitle                        *string             `json:"JobTitle,omitempty"`
 	LastName                        string              `json:"LastName"`
-	LeaveBalances                   []LeaveBalance      `json:"LeaveBalances"`
-	LeaveLines                      []LeaveLine         `json:"LeaveLines"`
-	MiddleNames                     *string             `json:"MiddleNames"`
-	Mobile                          *string             `json:"Mobile"`
-	OpeningBalances                 *OpeningBalances    `json:"OpeningBalances"`
-	OrdinaryEarningsRateID          *string             `json:"OrdinaryEarningsRateID"`
-	PayTemplate                     *PayTemplate        `json:"PayTemplate"`
-	PayrollCalendarID               *string             `json:"PayrollCalendarID"`
-	Phone                           *string             `json:"Phone"`
-	StartDate                       *string             `json:"StartDate"`
-	Status                          *EmployeeStatusEnum `json:"Status"`
-	SuperMemberships                []SuperMembership   `json:"SuperMemberships"`
-	TaxDeclaration                  *TaxDeclaration     `json:"TaxDeclaration"`
-	TerminationDate                 *string             `json:"TerminationDate"`
-	Title                           *string             `json:"Title"`
-	TwitterUserName                 *string             `json:"TwitterUserName"`
-	UpdatedDateUtc                  *string             `json:"UpdatedDateUTC"`
-	ValidationErrors                []ValidationError   `json:"ValidationErrors"`
+	LeaveBalances                   []LeaveBalance      `json:"LeaveBalances,omitempty"`
+	LeaveLines                      []LeaveLine         `json:"LeaveLines,omitempty"`
+	MiddleNames                     *string             `json:"MiddleNames,omitempty"`
+	Mobile                          *string             `json:"Mobile,omitempty"`
+	OpeningBalances                 *OpeningBalances    `json:"OpeningBalances,omitempty"`
+	OrdinaryEarningsRateID          *string             `json:"OrdinaryEarningsRateID,omitempty"`
+	PayTemplate                     *PayTemplate        `json:"PayTemplate,omitempty"`
+	PayrollCalendarID               *string             `json:"PayrollCalendarID,omitempty"`
+	Phone                           *string             `json:"Phone,omitempty"`
+	StartDate                       *string             `json:"StartDate,omitempty"`
+	Status                          *EmployeeStatusEnum `json:"Status,omitempty"`
+	SuperMemberships                []SuperMembership   `json:"SuperMemberships,omitempty"`
+	TaxDeclaration                  *TaxDeclaration     `json:"TaxDeclaration,omitempty"`
+	TerminationDate                 *string             `json:"TerminationDate,omitempty"`
+	Title                           *string             `json:"Title,omitempty"`
+	TwitterUserName                 *string             `json:"TwitterUserName,omitempty"`
+	UpdatedDateUtc                  *string             `json:"UpdatedDateUTC,omitempty"`
+	ValidationErrors                []ValidationError   `json:"ValidationErrors,omitempty"`
 }

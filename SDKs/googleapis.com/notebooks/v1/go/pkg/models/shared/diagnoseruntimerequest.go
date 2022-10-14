@@ -1,5 +1,5 @@
 package shared
 
 type DiagnoseRuntimeRequest struct {
-	DiagnosticConfig *DiagnosticConfig `json:"diagnosticConfig"`
+	DiagnosticConfig *DiagnosticConfig `json:"diagnosticConfig,omitempty"`
 }

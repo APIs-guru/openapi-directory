@@ -17,10 +17,10 @@ const (
 )
 
 type PhoneNumber struct {
-	AreaCode    *string              `json:"area_code"`
-	CountryCode *string              `json:"country_code"`
-	Extension   *string              `json:"extension"`
-	ID          *string              `json:"id"`
+	AreaCode    *string              `json:"area_code,omitempty"`
+	CountryCode *string              `json:"country_code,omitempty"`
+	Extension   *string              `json:"extension,omitempty"`
+	ID          *string              `json:"id,omitempty"`
 	Number      string               `json:"number"`
-	Type        *PhoneNumberTypeEnum `json:"type"`
+	Type        *PhoneNumberTypeEnum `json:"type,omitempty"`
 }

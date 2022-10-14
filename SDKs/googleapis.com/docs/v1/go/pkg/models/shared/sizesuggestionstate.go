@@ -1,6 +1,6 @@
 package shared
 
 type SizeSuggestionState struct {
-	HeightSuggested *bool `json:"heightSuggested"`
-	WidthSuggested  *bool `json:"widthSuggested"`
+	HeightSuggested *bool `json:"heightSuggested,omitempty"`
+	WidthSuggested  *bool `json:"widthSuggested,omitempty"`
 }

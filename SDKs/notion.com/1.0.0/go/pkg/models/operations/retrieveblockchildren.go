@@ -14,20 +14,20 @@ type RetrieveBlockChildrenRequest struct {
 }
 
 type RetrieveBlockChildren200ApplicationJSONResults struct {
-	CreatedTime    *string                `json:"created_time"`
-	HasChildren    *bool                  `json:"has_children"`
-	ID             *string                `json:"id"`
-	LastEditedTime *string                `json:"last_edited_time"`
-	Object         *string                `json:"object"`
-	Type           *string                `json:"type"`
-	Unsupported    map[string]interface{} `json:"unsupported"`
+	CreatedTime    *string                `json:"created_time,omitempty"`
+	HasChildren    *bool                  `json:"has_children,omitempty"`
+	ID             *string                `json:"id,omitempty"`
+	LastEditedTime *string                `json:"last_edited_time,omitempty"`
+	Object         *string                `json:"object,omitempty"`
+	Type           *string                `json:"type,omitempty"`
+	Unsupported    map[string]interface{} `json:"unsupported,omitempty"`
 }
 
 type RetrieveBlockChildren200ApplicationJSON struct {
-	HasMore    *bool                                            `json:"has_more"`
-	NextCursor *interface{}                                     `json:"next_cursor"`
-	Object     *string                                          `json:"object"`
-	Results    []RetrieveBlockChildren200ApplicationJSONResults `json:"results"`
+	HasMore    *bool                                            `json:"has_more,omitempty"`
+	NextCursor *interface{}                                     `json:"next_cursor,omitempty"`
+	Object     *string                                          `json:"object,omitempty"`
+	Results    []RetrieveBlockChildren200ApplicationJSONResults `json:"results,omitempty"`
 }
 
 type RetrieveBlockChildrenResponse struct {

@@ -16,25 +16,25 @@ const (
 )
 
 type ProfileReferrals struct {
-	Code      *string `json:"code"`
-	Completed *int64  `json:"completed"`
-	Credit    *int64  `json:"credit"`
-	Pending   *int64  `json:"pending"`
-	Total     *int64  `json:"total"`
-	URL       *string `json:"url"`
+	Code      *string `json:"code,omitempty"`
+	Completed *int64  `json:"completed,omitempty"`
+	Credit    *int64  `json:"credit,omitempty"`
+	Pending   *int64  `json:"pending,omitempty"`
+	Total     *int64  `json:"total,omitempty"`
+	URL       *string `json:"url,omitempty"`
 }
 
 type Profile struct {
-	AuthenticationType *ProfileAuthenticationTypeEnum `json:"authentication_type"`
-	AuthorizedKeys     []string                       `json:"authorized_keys"`
-	Email              *string                        `json:"email"`
-	EmailNotifications *bool                          `json:"email_notifications"`
-	IPWhitelistEnabled *bool                          `json:"ip_whitelist_enabled"`
-	LishAuthMethod     *ProfileLishAuthMethodEnum     `json:"lish_auth_method"`
-	Referrals          *ProfileReferrals              `json:"referrals"`
-	Restricted         *bool                          `json:"restricted"`
-	Timezone           *string                        `json:"timezone"`
-	TwoFactorAuth      *bool                          `json:"two_factor_auth"`
-	UID                *int64                         `json:"uid"`
-	Username           *string                        `json:"username"`
+	AuthenticationType *ProfileAuthenticationTypeEnum `json:"authentication_type,omitempty"`
+	AuthorizedKeys     []string                       `json:"authorized_keys,omitempty"`
+	Email              *string                        `json:"email,omitempty"`
+	EmailNotifications *bool                          `json:"email_notifications,omitempty"`
+	IPWhitelistEnabled *bool                          `json:"ip_whitelist_enabled,omitempty"`
+	LishAuthMethod     *ProfileLishAuthMethodEnum     `json:"lish_auth_method,omitempty"`
+	Referrals          *ProfileReferrals              `json:"referrals,omitempty"`
+	Restricted         *bool                          `json:"restricted,omitempty"`
+	Timezone           *string                        `json:"timezone,omitempty"`
+	TwoFactorAuth      *bool                          `json:"two_factor_auth,omitempty"`
+	UID                *int64                         `json:"uid,omitempty"`
+	Username           *string                        `json:"username,omitempty"`
 }

@@ -10,7 +10,7 @@ const (
 )
 
 type RequestOptions struct {
-	Priority       *RequestOptionsPriorityEnum `json:"priority"`
-	RequestTag     *string                     `json:"requestTag"`
-	TransactionTag *string                     `json:"transactionTag"`
+	Priority       *RequestOptionsPriorityEnum `json:"priority,omitempty"`
+	RequestTag     *string                     `json:"requestTag,omitempty"`
+	TransactionTag *string                     `json:"transactionTag,omitempty"`
 }

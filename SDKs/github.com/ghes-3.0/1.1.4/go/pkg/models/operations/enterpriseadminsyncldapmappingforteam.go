@@ -9,7 +9,7 @@ type EnterpriseAdminSyncLdapMappingForTeamRequest struct {
 }
 
 type EnterpriseAdminSyncLdapMappingForTeam201ApplicationJSON struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }
 
 type EnterpriseAdminSyncLdapMappingForTeamResponse struct {

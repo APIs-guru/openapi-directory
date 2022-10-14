@@ -1,6 +1,6 @@
 package shared
 
 type Footer struct {
-	Content  []StructuralElement `json:"content"`
-	FooterID *string             `json:"footerId"`
+	Content  []StructuralElement `json:"content,omitempty"`
+	FooterID *string             `json:"footerId,omitempty"`
 }

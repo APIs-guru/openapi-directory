@@ -5,13 +5,13 @@ import (
 )
 
 type CommentReply struct {
-	Author       *User      `json:"author"`
-	Content      *string    `json:"content"`
-	CreatedDate  *time.Time `json:"createdDate"`
-	Deleted      *bool      `json:"deleted"`
-	HTMLContent  *string    `json:"htmlContent"`
-	Kind         *string    `json:"kind"`
-	ModifiedDate *time.Time `json:"modifiedDate"`
-	ReplyID      *string    `json:"replyId"`
-	Verb         *string    `json:"verb"`
+	Author       *User      `json:"author,omitempty"`
+	Content      *string    `json:"content,omitempty"`
+	CreatedDate  *time.Time `json:"createdDate,omitempty"`
+	Deleted      *bool      `json:"deleted,omitempty"`
+	HTMLContent  *string    `json:"htmlContent,omitempty"`
+	Kind         *string    `json:"kind,omitempty"`
+	ModifiedDate *time.Time `json:"modifiedDate,omitempty"`
+	ReplyID      *string    `json:"replyId,omitempty"`
+	Verb         *string    `json:"verb,omitempty"`
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type CloudSQLProperties struct {
-	Credential       *CloudSQLCredential         `json:"credential"`
-	Database         *string                     `json:"database"`
-	InstanceID       *string                     `json:"instanceId"`
-	ServiceAccountID *string                     `json:"serviceAccountId"`
-	Type             *CloudSQLPropertiesTypeEnum `json:"type"`
+	Credential       *CloudSQLCredential         `json:"credential,omitempty"`
+	Database         *string                     `json:"database,omitempty"`
+	InstanceID       *string                     `json:"instanceId,omitempty"`
+	ServiceAccountID *string                     `json:"serviceAccountId,omitempty"`
+	Type             *CloudSQLPropertiesTypeEnum `json:"type,omitempty"`
 }

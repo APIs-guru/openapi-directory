@@ -5,21 +5,21 @@ import (
 )
 
 type Disk struct {
-	AddOns          []AddOn           `json:"addOns"`
-	Arn             *string           `json:"arn"`
-	AttachedTo      *string           `json:"attachedTo"`
-	AttachmentState *string           `json:"attachmentState"`
-	CreatedAt       *time.Time        `json:"createdAt"`
-	GbInUse         *int64            `json:"gbInUse"`
-	Iops            *int64            `json:"iops"`
-	IsAttached      *bool             `json:"isAttached"`
-	IsSystemDisk    *bool             `json:"isSystemDisk"`
-	Location        *ResourceLocation `json:"location"`
-	Name            *string           `json:"name"`
-	Path            *string           `json:"path"`
-	ResourceType    *ResourceTypeEnum `json:"resourceType"`
-	SizeInGb        *int64            `json:"sizeInGb"`
-	State           *DiskStateEnum    `json:"state"`
-	SupportCode     *string           `json:"supportCode"`
-	Tags            []Tag             `json:"tags"`
+	AddOns          []AddOn           `json:"addOns,omitempty"`
+	Arn             *string           `json:"arn,omitempty"`
+	AttachedTo      *string           `json:"attachedTo,omitempty"`
+	AttachmentState *string           `json:"attachmentState,omitempty"`
+	CreatedAt       *time.Time        `json:"createdAt,omitempty"`
+	GbInUse         *int64            `json:"gbInUse,omitempty"`
+	Iops            *int64            `json:"iops,omitempty"`
+	IsAttached      *bool             `json:"isAttached,omitempty"`
+	IsSystemDisk    *bool             `json:"isSystemDisk,omitempty"`
+	Location        *ResourceLocation `json:"location,omitempty"`
+	Name            *string           `json:"name,omitempty"`
+	Path            *string           `json:"path,omitempty"`
+	ResourceType    *ResourceTypeEnum `json:"resourceType,omitempty"`
+	SizeInGb        *int64            `json:"sizeInGb,omitempty"`
+	State           *DiskStateEnum    `json:"state,omitempty"`
+	SupportCode     *string           `json:"supportCode,omitempty"`
+	Tags            []Tag             `json:"tags,omitempty"`
 }

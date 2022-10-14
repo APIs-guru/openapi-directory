@@ -1,6 +1,6 @@
 package shared
 
 type ServicePrincipalListResult struct {
-	OdataNextLink *string                             `json:"odata.nextLink"`
-	Value         []map[string]map[string]interface{} `json:"value"`
+	OdataNextLink *string                             `json:"odata.nextLink,omitempty"`
+	Value         []map[string]map[string]interface{} `json:"value,omitempty"`
 }

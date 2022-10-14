@@ -21,9 +21,9 @@ const (
 )
 
 type ActionHookActionBody struct {
-	Confirmation          *ActionConfirmationBody            `json:"confirmation"`
+	Confirmation          *ActionConfirmationBody            `json:"confirmation,omitempty"`
 	HTTPMethod            ActionHookActionBodyHTTPMethodEnum `json:"httpMethod"`
-	Label                 *string                            `json:"label"`
+	Label                 *string                            `json:"label,omitempty"`
 	PropertyNamesIncluded []string                           `json:"propertyNamesIncluded"`
 	Type                  ActionHookActionBodyTypeEnum       `json:"type"`
 	URL                   string                             `json:"url"`

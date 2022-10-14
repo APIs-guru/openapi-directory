@@ -1,15 +1,15 @@
 package shared
 
 type PutParameterRequest struct {
-	AllowedPattern *string            `json:"AllowedPattern"`
-	DataType       *string            `json:"DataType"`
-	Description    *string            `json:"Description"`
-	KeyID          *string            `json:"KeyId"`
+	AllowedPattern *string            `json:"AllowedPattern,omitempty"`
+	DataType       *string            `json:"DataType,omitempty"`
+	Description    *string            `json:"Description,omitempty"`
+	KeyID          *string            `json:"KeyId,omitempty"`
 	Name           string             `json:"Name"`
-	Overwrite      *bool              `json:"Overwrite"`
-	Policies       *string            `json:"Policies"`
-	Tags           []Tag              `json:"Tags"`
-	Tier           *ParameterTierEnum `json:"Tier"`
-	Type           *ParameterTypeEnum `json:"Type"`
+	Overwrite      *bool              `json:"Overwrite,omitempty"`
+	Policies       *string            `json:"Policies,omitempty"`
+	Tags           []Tag              `json:"Tags,omitempty"`
+	Tier           *ParameterTierEnum `json:"Tier,omitempty"`
+	Type           *ParameterTypeEnum `json:"Type,omitempty"`
 	Value          string             `json:"Value"`
 }

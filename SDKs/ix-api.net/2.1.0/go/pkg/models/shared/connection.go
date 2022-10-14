@@ -51,19 +51,19 @@ const (
 type Connection struct {
 	BillingAccount      string                              `json:"billing_account"`
 	ConsumingAccount    string                              `json:"consuming_account"`
-	ContractRef         *string                             `json:"contract_ref"`
-	ExternalRef         *string                             `json:"external_ref"`
+	ContractRef         *string                             `json:"contract_ref,omitempty"`
+	ExternalRef         *string                             `json:"external_ref,omitempty"`
 	ID                  string                              `json:"id"`
-	LacpTimeout         *ConnectionLacpTimeoutEnum          `json:"lacp_timeout"`
+	LacpTimeout         *ConnectionLacpTimeoutEnum          `json:"lacp_timeout,omitempty"`
 	ManagingAccount     string                              `json:"managing_account"`
 	Mode                ConnectionModeEnum                  `json:"mode"`
 	Name                string                              `json:"name"`
 	OuterVlanEthertypes []ConnectionOuterVlanEthertypesEnum `json:"outer_vlan_ethertypes"`
-	Ports               []string                            `json:"ports"`
-	PurchaseOrder       *string                             `json:"purchase_order"`
+	Ports               []string                            `json:"ports,omitempty"`
+	PurchaseOrder       *string                             `json:"purchase_order,omitempty"`
 	RoleAssignments     []string                            `json:"role_assignments"`
-	Speed               *int64                              `json:"speed"`
+	Speed               *int64                              `json:"speed,omitempty"`
 	State               ConnectionStateEnum                 `json:"state"`
-	Status              []Status                            `json:"status"`
+	Status              []Status                            `json:"status,omitempty"`
 	VlanTypes           []ConnectionVlanTypesEnum           `json:"vlan_types"`
 }

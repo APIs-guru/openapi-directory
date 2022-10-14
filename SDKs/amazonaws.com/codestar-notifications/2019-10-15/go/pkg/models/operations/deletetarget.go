@@ -11,7 +11,7 @@ type DeleteTargetHeaders struct {
 }
 
 type DeleteTargetRequestBody struct {
-	ForceUnsubscribeAll *bool  `json:"ForceUnsubscribeAll"`
+	ForceUnsubscribeAll *bool  `json:"ForceUnsubscribeAll,omitempty"`
 	TargetAddress       string `json:"TargetAddress"`
 }
 

@@ -5,8 +5,8 @@ import (
 )
 
 type EffectivePolicy struct {
-	LastUpdatedTimestamp *time.Time               `json:"LastUpdatedTimestamp"`
-	PolicyContent        *string                  `json:"PolicyContent"`
-	PolicyType           *EffectivePolicyTypeEnum `json:"PolicyType"`
-	TargetID             *string                  `json:"TargetId"`
+	LastUpdatedTimestamp *time.Time               `json:"LastUpdatedTimestamp,omitempty"`
+	PolicyContent        *string                  `json:"PolicyContent,omitempty"`
+	PolicyType           *EffectivePolicyTypeEnum `json:"PolicyType,omitempty"`
+	TargetID             *string                  `json:"TargetId,omitempty"`
 }

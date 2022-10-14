@@ -1,5 +1,5 @@
 package shared
 
 type TestConnectionResponse struct {
-	Connection *Connection `json:"Connection"`
+	Connection *Connection `json:"Connection,omitempty"`
 }

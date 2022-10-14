@@ -1,5 +1,5 @@
 package shared
 
 type DescribeContainerInput struct {
-	ContainerName *string `json:"ContainerName"`
+	ContainerName *string `json:"ContainerName,omitempty"`
 }

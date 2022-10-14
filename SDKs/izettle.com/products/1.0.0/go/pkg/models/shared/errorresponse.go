@@ -1,7 +1,7 @@
 package shared
 
 type ErrorResponse struct {
-	DeveloperMessage *string               `json:"developerMessage"`
-	ErrorType        *string               `json:"errorType"`
-	Violations       []ConstraintViolation `json:"violations"`
+	DeveloperMessage *string               `json:"developerMessage,omitempty"`
+	ErrorType        *string               `json:"errorType,omitempty"`
+	Violations       []ConstraintViolation `json:"violations,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type OnboardBuyOnGoogleProgramRequest struct {
-	CustomerServiceEmail *string `json:"customerServiceEmail"`
+	CustomerServiceEmail *string `json:"customerServiceEmail,omitempty"`
 }

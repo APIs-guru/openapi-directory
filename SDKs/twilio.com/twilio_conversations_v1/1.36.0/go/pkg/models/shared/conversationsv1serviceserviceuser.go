@@ -5,17 +5,17 @@ import (
 )
 
 type ConversationsV1ServiceServiceUser struct {
-	AccountSid     *string                `json:"account_sid"`
-	Attributes     *string                `json:"attributes"`
-	ChatServiceSid *string                `json:"chat_service_sid"`
-	DateCreated    *time.Time             `json:"date_created"`
-	DateUpdated    *time.Time             `json:"date_updated"`
-	FriendlyName   *string                `json:"friendly_name"`
-	Identity       *string                `json:"identity"`
-	IsNotifiable   *bool                  `json:"is_notifiable"`
-	IsOnline       *bool                  `json:"is_online"`
-	Links          map[string]interface{} `json:"links"`
-	RoleSid        *string                `json:"role_sid"`
-	Sid            *string                `json:"sid"`
-	URL            *string                `json:"url"`
+	AccountSid     *string                `json:"account_sid,omitempty"`
+	Attributes     *string                `json:"attributes,omitempty"`
+	ChatServiceSid *string                `json:"chat_service_sid,omitempty"`
+	DateCreated    *time.Time             `json:"date_created,omitempty"`
+	DateUpdated    *time.Time             `json:"date_updated,omitempty"`
+	FriendlyName   *string                `json:"friendly_name,omitempty"`
+	Identity       *string                `json:"identity,omitempty"`
+	IsNotifiable   *bool                  `json:"is_notifiable,omitempty"`
+	IsOnline       *bool                  `json:"is_online,omitempty"`
+	Links          map[string]interface{} `json:"links,omitempty"`
+	RoleSid        *string                `json:"role_sid,omitempty"`
+	Sid            *string                `json:"sid,omitempty"`
+	URL            *string                `json:"url,omitempty"`
 }

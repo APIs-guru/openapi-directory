@@ -5,25 +5,25 @@ import (
 )
 
 type PayRunJobInstructionPayRunJobInstructionEmployeesEmployee struct {
-	Employee []interface{} `json:"Employee"`
+	Employee []interface{} `json:"Employee,omitempty"`
 }
 
 type PayRunJobInstructionPayRunJobInstructionPaySchedulePaySchedule struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type PayRunJobInstructionPayRunJobInstructionPayRunJobInstruction struct {
-	Employees       *PayRunJobInstructionPayRunJobInstructionEmployeesEmployee      `json:"Employees"`
-	EndDate         *time.Time                                                      `json:"EndDate"`
-	HoldingDate     *time.Time                                                      `json:"HoldingDate"`
-	IsSupplementary *bool                                                           `json:"IsSupplementary"`
-	PaySchedule     *PayRunJobInstructionPayRunJobInstructionPaySchedulePaySchedule `json:"PaySchedule"`
-	PaymentDate     *time.Time                                                      `json:"PaymentDate"`
-	StartDate       *time.Time                                                      `json:"StartDate"`
+	Employees       *PayRunJobInstructionPayRunJobInstructionEmployeesEmployee      `json:"Employees,omitempty"`
+	EndDate         *time.Time                                                      `json:"EndDate,omitempty"`
+	HoldingDate     *time.Time                                                      `json:"HoldingDate,omitempty"`
+	IsSupplementary *bool                                                           `json:"IsSupplementary,omitempty"`
+	PaySchedule     *PayRunJobInstructionPayRunJobInstructionPaySchedulePaySchedule `json:"PaySchedule,omitempty"`
+	PaymentDate     *time.Time                                                      `json:"PaymentDate,omitempty"`
+	StartDate       *time.Time                                                      `json:"StartDate,omitempty"`
 }
 
 type PayRunJobInstruction struct {
-	PayRunJobInstruction *PayRunJobInstructionPayRunJobInstructionPayRunJobInstruction `json:"PayRunJobInstruction"`
+	PayRunJobInstruction *PayRunJobInstructionPayRunJobInstructionPayRunJobInstruction `json:"PayRunJobInstruction,omitempty"`
 }

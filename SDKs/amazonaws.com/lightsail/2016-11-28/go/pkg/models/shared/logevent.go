@@ -5,6 +5,6 @@ import (
 )
 
 type LogEvent struct {
-	CreatedAt *time.Time `json:"createdAt"`
-	Message   *string    `json:"message"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	Message   *string    `json:"message,omitempty"`
 }

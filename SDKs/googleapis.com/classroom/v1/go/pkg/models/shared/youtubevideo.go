@@ -1,8 +1,8 @@
 package shared
 
 type YouTubeVideo struct {
-	AlternateLink *string `json:"alternateLink"`
-	ID            *string `json:"id"`
-	ThumbnailURL  *string `json:"thumbnailUrl"`
-	Title         *string `json:"title"`
+	AlternateLink *string `json:"alternateLink,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	ThumbnailURL  *string `json:"thumbnailUrl,omitempty"`
+	Title         *string `json:"title,omitempty"`
 }

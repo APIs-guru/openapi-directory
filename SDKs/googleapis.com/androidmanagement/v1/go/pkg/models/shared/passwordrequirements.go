@@ -41,18 +41,18 @@ const (
 )
 
 type PasswordRequirements struct {
-	MaximumFailedPasswordsForWipe *int32                                         `json:"maximumFailedPasswordsForWipe"`
-	PasswordExpirationTimeout     *string                                        `json:"passwordExpirationTimeout"`
-	PasswordHistoryLength         *int32                                         `json:"passwordHistoryLength"`
-	PasswordMinimumLength         *int32                                         `json:"passwordMinimumLength"`
-	PasswordMinimumLetters        *int32                                         `json:"passwordMinimumLetters"`
-	PasswordMinimumLowerCase      *int32                                         `json:"passwordMinimumLowerCase"`
-	PasswordMinimumNonLetter      *int32                                         `json:"passwordMinimumNonLetter"`
-	PasswordMinimumNumeric        *int32                                         `json:"passwordMinimumNumeric"`
-	PasswordMinimumSymbols        *int32                                         `json:"passwordMinimumSymbols"`
-	PasswordMinimumUpperCase      *int32                                         `json:"passwordMinimumUpperCase"`
-	PasswordQuality               *PasswordRequirementsPasswordQualityEnum       `json:"passwordQuality"`
-	PasswordScope                 *PasswordRequirementsPasswordScopeEnum         `json:"passwordScope"`
-	RequirePasswordUnlock         *PasswordRequirementsRequirePasswordUnlockEnum `json:"requirePasswordUnlock"`
-	UnifiedLockSettings           *PasswordRequirementsUnifiedLockSettingsEnum   `json:"unifiedLockSettings"`
+	MaximumFailedPasswordsForWipe *int32                                         `json:"maximumFailedPasswordsForWipe,omitempty"`
+	PasswordExpirationTimeout     *string                                        `json:"passwordExpirationTimeout,omitempty"`
+	PasswordHistoryLength         *int32                                         `json:"passwordHistoryLength,omitempty"`
+	PasswordMinimumLength         *int32                                         `json:"passwordMinimumLength,omitempty"`
+	PasswordMinimumLetters        *int32                                         `json:"passwordMinimumLetters,omitempty"`
+	PasswordMinimumLowerCase      *int32                                         `json:"passwordMinimumLowerCase,omitempty"`
+	PasswordMinimumNonLetter      *int32                                         `json:"passwordMinimumNonLetter,omitempty"`
+	PasswordMinimumNumeric        *int32                                         `json:"passwordMinimumNumeric,omitempty"`
+	PasswordMinimumSymbols        *int32                                         `json:"passwordMinimumSymbols,omitempty"`
+	PasswordMinimumUpperCase      *int32                                         `json:"passwordMinimumUpperCase,omitempty"`
+	PasswordQuality               *PasswordRequirementsPasswordQualityEnum       `json:"passwordQuality,omitempty"`
+	PasswordScope                 *PasswordRequirementsPasswordScopeEnum         `json:"passwordScope,omitempty"`
+	RequirePasswordUnlock         *PasswordRequirementsRequirePasswordUnlockEnum `json:"requirePasswordUnlock,omitempty"`
+	UnifiedLockSettings           *PasswordRequirementsUnifiedLockSettingsEnum   `json:"unifiedLockSettings,omitempty"`
 }

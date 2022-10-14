@@ -1,8 +1,8 @@
 package shared
 
 type DefaultResponseDtoOfListOfPackageSearchDto struct {
-	IsError           *bool              `json:"isError"`
-	Message           *string            `json:"message"`
-	ResponseException *interface{}       `json:"responseException"`
-	Result            []PackageSearchDto `json:"result"`
+	IsError           *bool              `json:"isError,omitempty"`
+	Message           *string            `json:"message,omitempty"`
+	ResponseException *interface{}       `json:"responseException,omitempty"`
+	Result            []PackageSearchDto `json:"result,omitempty"`
 }

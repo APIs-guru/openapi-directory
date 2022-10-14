@@ -5,16 +5,16 @@ import (
 )
 
 type ScriptInstanceDetails struct {
-	Config                  *interface{}                               `json:"config"`
-	CustomScriptDescription *string                                    `json:"customScriptDescription"`
-	CustomScriptName        *string                                    `json:"customScriptName"`
-	Enabled                 *bool                                      `json:"enabled"`
-	EventPattern            *interface{}                               `json:"eventPattern"`
-	InstanceID              *string                                    `json:"instanceId"`
-	LastModified            *time.Time                                 `json:"lastModified"`
-	RuntimeInformation      *ScriptInstanceInfoRuntimeInformationModel `json:"runtimeInformation"`
-	ScriptID                *string                                    `json:"scriptId"`
-	ScriptName              *string                                    `json:"scriptName"`
-	SubscriptionID          *string                                    `json:"subscriptionId"`
-	TeamID                  *string                                    `json:"teamId"`
+	Config                  *interface{}                               `json:"config,omitempty"`
+	CustomScriptDescription *string                                    `json:"customScriptDescription,omitempty"`
+	CustomScriptName        *string                                    `json:"customScriptName,omitempty"`
+	Enabled                 *bool                                      `json:"enabled,omitempty"`
+	EventPattern            *interface{}                               `json:"eventPattern,omitempty"`
+	InstanceID              *string                                    `json:"instanceId,omitempty"`
+	LastModified            *time.Time                                 `json:"lastModified,omitempty"`
+	RuntimeInformation      *ScriptInstanceInfoRuntimeInformationModel `json:"runtimeInformation,omitempty"`
+	ScriptID                *string                                    `json:"scriptId,omitempty"`
+	ScriptName              *string                                    `json:"scriptName,omitempty"`
+	SubscriptionID          *string                                    `json:"subscriptionId,omitempty"`
+	TeamID                  *string                                    `json:"teamId,omitempty"`
 }

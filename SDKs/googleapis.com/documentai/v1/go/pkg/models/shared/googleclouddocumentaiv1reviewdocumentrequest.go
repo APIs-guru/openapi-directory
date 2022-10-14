@@ -8,8 +8,8 @@ const (
 )
 
 type GoogleCloudDocumentaiV1ReviewDocumentRequest struct {
-	DocumentSchema         *GoogleCloudDocumentaiV1DocumentSchema                    `json:"documentSchema"`
-	EnableSchemaValidation *bool                                                     `json:"enableSchemaValidation"`
-	InlineDocument         *GoogleCloudDocumentaiV1Document                          `json:"inlineDocument"`
-	Priority               *GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum `json:"priority"`
+	DocumentSchema         *GoogleCloudDocumentaiV1DocumentSchema                    `json:"documentSchema,omitempty"`
+	EnableSchemaValidation *bool                                                     `json:"enableSchemaValidation,omitempty"`
+	InlineDocument         *GoogleCloudDocumentaiV1Document                          `json:"inlineDocument,omitempty"`
+	Priority               *GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum `json:"priority,omitempty"`
 }

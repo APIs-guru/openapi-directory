@@ -13,8 +13,8 @@ const (
 )
 
 type Symptom struct {
-	CreateTime  *string                 `json:"createTime"`
-	Details     *string                 `json:"details"`
-	SymptomType *SymptomSymptomTypeEnum `json:"symptomType"`
-	WorkerID    *string                 `json:"workerId"`
+	CreateTime  *string                 `json:"createTime,omitempty"`
+	Details     *string                 `json:"details,omitempty"`
+	SymptomType *SymptomSymptomTypeEnum `json:"symptomType,omitempty"`
+	WorkerID    *string                 `json:"workerId,omitempty"`
 }

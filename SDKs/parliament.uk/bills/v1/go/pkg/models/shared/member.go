@@ -1,12 +1,12 @@
 package shared
 
 type Member struct {
-	House       *HouseEnum `json:"house"`
-	MemberFrom  *string    `json:"memberFrom"`
-	MemberID    *int32     `json:"memberId"`
-	MemberPage  *string    `json:"memberPage"`
-	MemberPhoto *string    `json:"memberPhoto"`
-	Name        *string    `json:"name"`
-	Party       *string    `json:"party"`
-	PartyColour *string    `json:"partyColour"`
+	House       *HouseEnum `json:"house,omitempty"`
+	MemberFrom  *string    `json:"memberFrom,omitempty"`
+	MemberID    *int32     `json:"memberId,omitempty"`
+	MemberPage  *string    `json:"memberPage,omitempty"`
+	MemberPhoto *string    `json:"memberPhoto,omitempty"`
+	Name        *string    `json:"name,omitempty"`
+	Party       *string    `json:"party,omitempty"`
+	PartyColour *string    `json:"partyColour,omitempty"`
 }

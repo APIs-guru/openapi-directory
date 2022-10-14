@@ -1,5 +1,5 @@
 package shared
 
 type CreateUploadResult struct {
-	Upload *Upload `json:"upload"`
+	Upload *Upload `json:"upload,omitempty"`
 }

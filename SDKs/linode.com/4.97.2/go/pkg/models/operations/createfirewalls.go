@@ -10,7 +10,7 @@ var CreateFirewallsServers = []string{
 }
 
 type CreateFirewallsRequestBodyDevices struct {
-	Linodes []int64 `json:"linodes"`
+	Linodes []int64 `json:"linodes,omitempty"`
 }
 
 type CreateFirewallsRequestBodyRulesInboundPolicyEnum string
@@ -28,10 +28,10 @@ const (
 )
 
 type CreateFirewallsRequestBodyRules struct {
-	Inbound        []shared.FirewallRuleConfig                        `json:"inbound"`
-	InboundPolicy  *CreateFirewallsRequestBodyRulesInboundPolicyEnum  `json:"inbound_policy"`
-	Outbound       []shared.FirewallRuleConfig                        `json:"outbound"`
-	OutboundPolicy *CreateFirewallsRequestBodyRulesOutboundPolicyEnum `json:"outbound_policy"`
+	Inbound        []shared.FirewallRuleConfig                        `json:"inbound,omitempty"`
+	InboundPolicy  *CreateFirewallsRequestBodyRulesInboundPolicyEnum  `json:"inbound_policy,omitempty"`
+	Outbound       []shared.FirewallRuleConfig                        `json:"outbound,omitempty"`
+	OutboundPolicy *CreateFirewallsRequestBodyRulesOutboundPolicyEnum `json:"outbound_policy,omitempty"`
 }
 
 type CreateFirewallsRequestBodyStatusEnum string
@@ -43,14 +43,14 @@ const (
 )
 
 type CreateFirewallsRequestBody struct {
-	Created *time.Time                            `json:"created"`
-	Devices *CreateFirewallsRequestBodyDevices    `json:"devices"`
-	ID      *int64                                `json:"id"`
+	Created *time.Time                            `json:"created,omitempty"`
+	Devices *CreateFirewallsRequestBodyDevices    `json:"devices,omitempty"`
+	ID      *int64                                `json:"id,omitempty"`
 	Label   string                                `json:"label"`
 	Rules   CreateFirewallsRequestBodyRules       `json:"rules"`
-	Status  *CreateFirewallsRequestBodyStatusEnum `json:"status"`
-	Tags    []string                              `json:"tags"`
-	Updated *time.Time                            `json:"updated"`
+	Status  *CreateFirewallsRequestBodyStatusEnum `json:"status,omitempty"`
+	Tags    []string                              `json:"tags,omitempty"`
+	Updated *time.Time                            `json:"updated,omitempty"`
 }
 
 type CreateFirewallsSecurityOption1 struct {
@@ -73,7 +73,7 @@ type CreateFirewallsRequest struct {
 }
 
 type CreateFirewallsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateFirewallsResponse struct {

@@ -1,10 +1,10 @@
 package shared
 
 type DiscoverConnectionProfileRequest struct {
-	ConnectionProfile     *ConnectionProfile `json:"connectionProfile"`
-	ConnectionProfileName *string            `json:"connectionProfileName"`
-	MysqlRdbms            *MysqlRdbms        `json:"mysqlRdbms"`
-	OracleRdbms           *OracleRdbms       `json:"oracleRdbms"`
-	RecursionDepth        *int32             `json:"recursionDepth"`
-	Recursive             *bool              `json:"recursive"`
+	ConnectionProfile     *ConnectionProfile `json:"connectionProfile,omitempty"`
+	ConnectionProfileName *string            `json:"connectionProfileName,omitempty"`
+	MysqlRdbms            *MysqlRdbms        `json:"mysqlRdbms,omitempty"`
+	OracleRdbms           *OracleRdbms       `json:"oracleRdbms,omitempty"`
+	RecursionDepth        *int32             `json:"recursionDepth,omitempty"`
+	Recursive             *bool              `json:"recursive,omitempty"`
 }

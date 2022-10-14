@@ -1,5 +1,5 @@
 package shared
 
 type RetryBuildOutput struct {
-	Build *Build `json:"build"`
+	Build *Build `json:"build,omitempty"`
 }

@@ -5,10 +5,10 @@ import (
 )
 
 type ChannelSummary struct {
-	ChannelName            *string                `json:"channelName"`
-	ChannelStorage         *ChannelStorageSummary `json:"channelStorage"`
-	CreationTime           *time.Time             `json:"creationTime"`
-	LastMessageArrivalTime *time.Time             `json:"lastMessageArrivalTime"`
-	LastUpdateTime         *time.Time             `json:"lastUpdateTime"`
-	Status                 *ChannelStatusEnum     `json:"status"`
+	ChannelName            *string                `json:"channelName,omitempty"`
+	ChannelStorage         *ChannelStorageSummary `json:"channelStorage,omitempty"`
+	CreationTime           *time.Time             `json:"creationTime,omitempty"`
+	LastMessageArrivalTime *time.Time             `json:"lastMessageArrivalTime,omitempty"`
+	LastUpdateTime         *time.Time             `json:"lastUpdateTime,omitempty"`
+	Status                 *ChannelStatusEnum     `json:"status,omitempty"`
 }

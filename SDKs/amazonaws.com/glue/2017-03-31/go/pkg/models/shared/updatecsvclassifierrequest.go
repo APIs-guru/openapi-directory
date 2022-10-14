@@ -1,11 +1,11 @@
 package shared
 
 type UpdateCsvClassifierRequest struct {
-	AllowSingleColumn    *bool                `json:"AllowSingleColumn"`
-	ContainsHeader       *CsvHeaderOptionEnum `json:"ContainsHeader"`
-	Delimiter            *string              `json:"Delimiter"`
-	DisableValueTrimming *bool                `json:"DisableValueTrimming"`
-	Header               []string             `json:"Header"`
+	AllowSingleColumn    *bool                `json:"AllowSingleColumn,omitempty"`
+	ContainsHeader       *CsvHeaderOptionEnum `json:"ContainsHeader,omitempty"`
+	Delimiter            *string              `json:"Delimiter,omitempty"`
+	DisableValueTrimming *bool                `json:"DisableValueTrimming,omitempty"`
+	Header               []string             `json:"Header,omitempty"`
 	Name                 string               `json:"Name"`
-	QuoteSymbol          *string              `json:"QuoteSymbol"`
+	QuoteSymbol          *string              `json:"QuoteSymbol,omitempty"`
 }

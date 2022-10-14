@@ -1,16 +1,16 @@
 package shared
 
 type ObjectAccessControl struct {
-	Bucket     *string `json:"bucket"`
-	Domain     *string `json:"domain"`
-	Email      *string `json:"email"`
-	Entity     *string `json:"entity"`
-	EntityID   *string `json:"entityId"`
-	Etag       *string `json:"etag"`
-	Generation *string `json:"generation"`
-	ID         *string `json:"id"`
-	Kind       *string `json:"kind"`
-	Object     *string `json:"object"`
-	Role       *string `json:"role"`
-	SelfLink   *string `json:"selfLink"`
+	Bucket     *string `json:"bucket,omitempty"`
+	Domain     *string `json:"domain,omitempty"`
+	Email      *string `json:"email,omitempty"`
+	Entity     *string `json:"entity,omitempty"`
+	EntityID   *string `json:"entityId,omitempty"`
+	Etag       *string `json:"etag,omitempty"`
+	Generation *string `json:"generation,omitempty"`
+	ID         *string `json:"id,omitempty"`
+	Kind       *string `json:"kind,omitempty"`
+	Object     *string `json:"object,omitempty"`
+	Role       *string `json:"role,omitempty"`
+	SelfLink   *string `json:"selfLink,omitempty"`
 }

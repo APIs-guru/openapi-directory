@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowCxV3ExportFlowRequest struct {
-	FlowURI                *string `json:"flowUri"`
-	IncludeReferencedFlows *bool   `json:"includeReferencedFlows"`
+	FlowURI                *string `json:"flowUri,omitempty"`
+	IncludeReferencedFlows *bool   `json:"includeReferencedFlows,omitempty"`
 }

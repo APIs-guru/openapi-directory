@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudRetailV2betaCustomAttribute struct {
-	Indexable  *bool     `json:"indexable"`
-	Numbers    []float64 `json:"numbers"`
-	Searchable *bool     `json:"searchable"`
-	Text       []string  `json:"text"`
+	Indexable  *bool     `json:"indexable,omitempty"`
+	Numbers    []float64 `json:"numbers,omitempty"`
+	Searchable *bool     `json:"searchable,omitempty"`
+	Text       []string  `json:"text,omitempty"`
 }

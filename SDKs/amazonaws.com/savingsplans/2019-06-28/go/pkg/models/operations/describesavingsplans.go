@@ -15,12 +15,12 @@ type DescribeSavingsPlansHeaders struct {
 }
 
 type DescribeSavingsPlansRequestBody struct {
-	Filters         []shared.SavingsPlanFilter    `json:"filters"`
-	MaxResults      *int64                        `json:"maxResults"`
-	NextToken       *string                       `json:"nextToken"`
-	SavingsPlanArns []string                      `json:"savingsPlanArns"`
-	SavingsPlanIds  []string                      `json:"savingsPlanIds"`
-	States          []shared.SavingsPlanStateEnum `json:"states"`
+	Filters         []shared.SavingsPlanFilter    `json:"filters,omitempty"`
+	MaxResults      *int64                        `json:"maxResults,omitempty"`
+	NextToken       *string                       `json:"nextToken,omitempty"`
+	SavingsPlanArns []string                      `json:"savingsPlanArns,omitempty"`
+	SavingsPlanIds  []string                      `json:"savingsPlanIds,omitempty"`
+	States          []shared.SavingsPlanStateEnum `json:"states,omitempty"`
 }
 
 type DescribeSavingsPlansRequest struct {

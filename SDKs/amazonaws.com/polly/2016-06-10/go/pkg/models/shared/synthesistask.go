@@ -5,19 +5,19 @@ import (
 )
 
 type SynthesisTask struct {
-	CreationTime      *time.Time           `json:"CreationTime"`
-	Engine            *EngineEnum          `json:"Engine"`
-	LanguageCode      *LanguageCodeEnum    `json:"LanguageCode"`
-	LexiconNames      []string             `json:"LexiconNames"`
-	OutputFormat      *OutputFormatEnum    `json:"OutputFormat"`
-	OutputURI         *string              `json:"OutputUri"`
-	RequestCharacters *int64               `json:"RequestCharacters"`
-	SampleRate        *string              `json:"SampleRate"`
-	SnsTopicArn       *string              `json:"SnsTopicArn"`
-	SpeechMarkTypes   []SpeechMarkTypeEnum `json:"SpeechMarkTypes"`
-	TaskID            *string              `json:"TaskId"`
-	TaskStatus        *TaskStatusEnum      `json:"TaskStatus"`
-	TaskStatusReason  *string              `json:"TaskStatusReason"`
-	TextType          *TextTypeEnum        `json:"TextType"`
-	VoiceID           *VoiceIDEnum         `json:"VoiceId"`
+	CreationTime      *time.Time           `json:"CreationTime,omitempty"`
+	Engine            *EngineEnum          `json:"Engine,omitempty"`
+	LanguageCode      *LanguageCodeEnum    `json:"LanguageCode,omitempty"`
+	LexiconNames      []string             `json:"LexiconNames,omitempty"`
+	OutputFormat      *OutputFormatEnum    `json:"OutputFormat,omitempty"`
+	OutputURI         *string              `json:"OutputUri,omitempty"`
+	RequestCharacters *int64               `json:"RequestCharacters,omitempty"`
+	SampleRate        *string              `json:"SampleRate,omitempty"`
+	SnsTopicArn       *string              `json:"SnsTopicArn,omitempty"`
+	SpeechMarkTypes   []SpeechMarkTypeEnum `json:"SpeechMarkTypes,omitempty"`
+	TaskID            *string              `json:"TaskId,omitempty"`
+	TaskStatus        *TaskStatusEnum      `json:"TaskStatus,omitempty"`
+	TaskStatusReason  *string              `json:"TaskStatusReason,omitempty"`
+	TextType          *TextTypeEnum        `json:"TextType,omitempty"`
+	VoiceID           *VoiceIDEnum         `json:"VoiceId,omitempty"`
 }

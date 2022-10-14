@@ -1,7 +1,7 @@
 package shared
 
 type ProductViewItemIssueIssueSeverityPerDestination struct {
-	DemotedCountries     []string `json:"demotedCountries"`
-	Destination          *string  `json:"destination"`
-	DisapprovedCountries []string `json:"disapprovedCountries"`
+	DemotedCountries     []string `json:"demotedCountries,omitempty"`
+	Destination          *string  `json:"destination,omitempty"`
+	DisapprovedCountries []string `json:"disapprovedCountries,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDialogflowV2ExportAgentRequest struct {
-	AgentURI *string `json:"agentUri"`
+	AgentURI *string `json:"agentUri,omitempty"`
 }

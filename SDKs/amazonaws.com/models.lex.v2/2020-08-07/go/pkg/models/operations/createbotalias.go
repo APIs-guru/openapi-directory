@@ -19,22 +19,22 @@ type CreateBotAliasHeaders struct {
 }
 
 type CreateBotAliasRequestBodyConversationLogSettings struct {
-	AudioLogSettings []shared.AudioLogSetting `json:"audioLogSettings"`
-	TextLogSettings  []shared.TextLogSetting  `json:"textLogSettings"`
+	AudioLogSettings []shared.AudioLogSetting `json:"audioLogSettings,omitempty"`
+	TextLogSettings  []shared.TextLogSetting  `json:"textLogSettings,omitempty"`
 }
 
 type CreateBotAliasRequestBodySentimentAnalysisSettings struct {
-	DetectSentiment *bool `json:"detectSentiment"`
+	DetectSentiment *bool `json:"detectSentiment,omitempty"`
 }
 
 type CreateBotAliasRequestBody struct {
-	BotAliasLocaleSettings    map[string]shared.BotAliasLocaleSettings            `json:"botAliasLocaleSettings"`
+	BotAliasLocaleSettings    map[string]shared.BotAliasLocaleSettings            `json:"botAliasLocaleSettings,omitempty"`
 	BotAliasName              string                                              `json:"botAliasName"`
-	BotVersion                *string                                             `json:"botVersion"`
-	ConversationLogSettings   *CreateBotAliasRequestBodyConversationLogSettings   `json:"conversationLogSettings"`
-	Description               *string                                             `json:"description"`
-	SentimentAnalysisSettings *CreateBotAliasRequestBodySentimentAnalysisSettings `json:"sentimentAnalysisSettings"`
-	Tags                      map[string]string                                   `json:"tags"`
+	BotVersion                *string                                             `json:"botVersion,omitempty"`
+	ConversationLogSettings   *CreateBotAliasRequestBodyConversationLogSettings   `json:"conversationLogSettings,omitempty"`
+	Description               *string                                             `json:"description,omitempty"`
+	SentimentAnalysisSettings *CreateBotAliasRequestBodySentimentAnalysisSettings `json:"sentimentAnalysisSettings,omitempty"`
+	Tags                      map[string]string                                   `json:"tags,omitempty"`
 }
 
 type CreateBotAliasRequest struct {

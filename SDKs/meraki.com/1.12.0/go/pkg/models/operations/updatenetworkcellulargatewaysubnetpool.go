@@ -5,8 +5,8 @@ type UpdateNetworkCellularGatewaySubnetPoolPathParams struct {
 }
 
 type UpdateNetworkCellularGatewaySubnetPoolRequestBody struct {
-	Cidr *string `json:"cidr"`
-	Mask *int64  `json:"mask"`
+	Cidr *string `json:"cidr,omitempty"`
+	Mask *int64  `json:"mask,omitempty"`
 }
 
 type UpdateNetworkCellularGatewaySubnetPoolRequest struct {

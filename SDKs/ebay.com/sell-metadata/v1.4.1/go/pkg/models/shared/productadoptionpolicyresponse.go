@@ -1,6 +1,6 @@
 package shared
 
 type ProductAdoptionPolicyResponse struct {
-	ProductAdoptionPolicies []ProductAdoptionPolicy `json:"productAdoptionPolicies"`
-	Warnings                []Error                 `json:"warnings"`
+	ProductAdoptionPolicies []ProductAdoptionPolicy `json:"productAdoptionPolicies,omitempty"`
+	Warnings                []Error                 `json:"warnings,omitempty"`
 }

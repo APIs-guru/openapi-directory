@@ -1,5 +1,5 @@
 package shared
 
 type AutomaticStatus struct {
-	CustomerManagedEncryption *CustomerManagedEncryptionStatus `json:"customerManagedEncryption"`
+	CustomerManagedEncryption *CustomerManagedEncryptionStatus `json:"customerManagedEncryption,omitempty"`
 }

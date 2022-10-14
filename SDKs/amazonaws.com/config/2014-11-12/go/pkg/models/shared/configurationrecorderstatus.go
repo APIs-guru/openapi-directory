@@ -5,12 +5,12 @@ import (
 )
 
 type ConfigurationRecorderStatus struct {
-	LastErrorCode        *string             `json:"lastErrorCode"`
-	LastErrorMessage     *string             `json:"lastErrorMessage"`
-	LastStartTime        *time.Time          `json:"lastStartTime"`
-	LastStatus           *RecorderStatusEnum `json:"lastStatus"`
-	LastStatusChangeTime *time.Time          `json:"lastStatusChangeTime"`
-	LastStopTime         *time.Time          `json:"lastStopTime"`
-	Name                 *string             `json:"name"`
-	Recording            *bool               `json:"recording"`
+	LastErrorCode        *string             `json:"lastErrorCode,omitempty"`
+	LastErrorMessage     *string             `json:"lastErrorMessage,omitempty"`
+	LastStartTime        *time.Time          `json:"lastStartTime,omitempty"`
+	LastStatus           *RecorderStatusEnum `json:"lastStatus,omitempty"`
+	LastStatusChangeTime *time.Time          `json:"lastStatusChangeTime,omitempty"`
+	LastStopTime         *time.Time          `json:"lastStopTime,omitempty"`
+	Name                 *string             `json:"name,omitempty"`
+	Recording            *bool               `json:"recording,omitempty"`
 }

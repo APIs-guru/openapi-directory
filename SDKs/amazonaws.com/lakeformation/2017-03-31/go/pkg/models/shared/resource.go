@@ -1,11 +1,11 @@
 package shared
 
 type Resource struct {
-	Catalog          map[string]interface{}    `json:"Catalog"`
-	DataLocation     *DataLocationResource     `json:"DataLocation"`
-	Database         *DatabaseResource         `json:"Database"`
-	LfTag            *LfTagKeyResource         `json:"LFTag"`
-	LfTagPolicy      *LfTagPolicyResource      `json:"LFTagPolicy"`
-	Table            *TableResource            `json:"Table"`
-	TableWithColumns *TableWithColumnsResource `json:"TableWithColumns"`
+	Catalog          map[string]interface{}    `json:"Catalog,omitempty"`
+	DataLocation     *DataLocationResource     `json:"DataLocation,omitempty"`
+	Database         *DatabaseResource         `json:"Database,omitempty"`
+	LfTag            *LfTagKeyResource         `json:"LFTag,omitempty"`
+	LfTagPolicy      *LfTagPolicyResource      `json:"LFTagPolicy,omitempty"`
+	Table            *TableResource            `json:"Table,omitempty"`
+	TableWithColumns *TableWithColumnsResource `json:"TableWithColumns,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type HotTablet struct {
-	EndKey              *string  `json:"endKey"`
-	EndTime             *string  `json:"endTime"`
-	Name                *string  `json:"name"`
-	NodeCPUUsagePercent *float32 `json:"nodeCpuUsagePercent"`
-	StartKey            *string  `json:"startKey"`
-	StartTime           *string  `json:"startTime"`
-	TableName           *string  `json:"tableName"`
+	EndKey              *string  `json:"endKey,omitempty"`
+	EndTime             *string  `json:"endTime,omitempty"`
+	Name                *string  `json:"name,omitempty"`
+	NodeCPUUsagePercent *float32 `json:"nodeCpuUsagePercent,omitempty"`
+	StartKey            *string  `json:"startKey,omitempty"`
+	StartTime           *string  `json:"startTime,omitempty"`
+	TableName           *string  `json:"tableName,omitempty"`
 }

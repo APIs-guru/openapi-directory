@@ -1,7 +1,7 @@
 package shared
 
 type LandlordMaintenancePreferenceModel struct {
-	Name  *string `json:"Name"`
-	Notes *string `json:"Notes"`
-	Type  *string `json:"Type"`
+	Name  *string `json:"Name,omitempty"`
+	Notes *string `json:"Notes,omitempty"`
+	Type  *string `json:"Type,omitempty"`
 }

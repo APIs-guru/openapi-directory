@@ -9,5 +9,5 @@ const (
 )
 
 type MqttConfig struct {
-	MqttEnabledState *MqttConfigMqttEnabledStateEnum `json:"mqttEnabledState"`
+	MqttEnabledState *MqttConfigMqttEnabledStateEnum `json:"mqttEnabledState,omitempty"`
 }

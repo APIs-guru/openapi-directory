@@ -1,8 +1,8 @@
 package shared
 
 type ChannelBrandingSettings struct {
-	Channel *ChannelSettings `json:"channel"`
-	Hints   []PropertyValue  `json:"hints"`
-	Image   *ImageSettings   `json:"image"`
-	Watch   *WatchSettings   `json:"watch"`
+	Channel *ChannelSettings `json:"channel,omitempty"`
+	Hints   []PropertyValue  `json:"hints,omitempty"`
+	Image   *ImageSettings   `json:"image,omitempty"`
+	Watch   *WatchSettings   `json:"watch,omitempty"`
 }

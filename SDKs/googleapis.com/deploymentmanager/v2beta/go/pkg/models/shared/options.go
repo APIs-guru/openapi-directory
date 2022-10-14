@@ -1,8 +1,8 @@
 package shared
 
 type Options struct {
-	AsyncOptions      []AsyncOptions     `json:"asyncOptions"`
-	InputMappings     []InputMapping     `json:"inputMappings"`
-	ValidationOptions *ValidationOptions `json:"validationOptions"`
-	VirtualProperties *string            `json:"virtualProperties"`
+	AsyncOptions      []AsyncOptions     `json:"asyncOptions,omitempty"`
+	InputMappings     []InputMapping     `json:"inputMappings,omitempty"`
+	ValidationOptions *ValidationOptions `json:"validationOptions,omitempty"`
+	VirtualProperties *string            `json:"virtualProperties,omitempty"`
 }

@@ -1,14 +1,14 @@
 package shared
 
 type PosSaleResponse struct {
-	ContentLanguage *string `json:"contentLanguage"`
-	Gtin            *string `json:"gtin"`
-	ItemID          *string `json:"itemId"`
-	Kind            *string `json:"kind"`
-	Price           *Price  `json:"price"`
-	Quantity        *string `json:"quantity"`
-	SaleID          *string `json:"saleId"`
-	StoreCode       *string `json:"storeCode"`
-	TargetCountry   *string `json:"targetCountry"`
-	Timestamp       *string `json:"timestamp"`
+	ContentLanguage *string `json:"contentLanguage,omitempty"`
+	Gtin            *string `json:"gtin,omitempty"`
+	ItemID          *string `json:"itemId,omitempty"`
+	Kind            *string `json:"kind,omitempty"`
+	Price           *Price  `json:"price,omitempty"`
+	Quantity        *string `json:"quantity,omitempty"`
+	SaleID          *string `json:"saleId,omitempty"`
+	StoreCode       *string `json:"storeCode,omitempty"`
+	TargetCountry   *string `json:"targetCountry,omitempty"`
+	Timestamp       *string `json:"timestamp,omitempty"`
 }

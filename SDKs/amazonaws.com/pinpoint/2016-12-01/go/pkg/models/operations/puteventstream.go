@@ -19,8 +19,8 @@ type PutEventStreamHeaders struct {
 }
 
 type PutEventStreamRequestBodyWriteEventStream struct {
-	DestinationStreamArn *string `json:"DestinationStreamArn"`
-	RoleArn              *string `json:"RoleArn"`
+	DestinationStreamArn *string `json:"DestinationStreamArn,omitempty"`
+	RoleArn              *string `json:"RoleArn,omitempty"`
 }
 
 type PutEventStreamRequestBody struct {

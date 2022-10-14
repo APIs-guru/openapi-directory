@@ -54,15 +54,15 @@ const (
 )
 
 type IndexStatusInspectionResult struct {
-	CoverageState   *string                                        `json:"coverageState"`
-	CrawledAs       *IndexStatusInspectionResultCrawledAsEnum      `json:"crawledAs"`
-	GoogleCanonical *string                                        `json:"googleCanonical"`
-	IndexingState   *IndexStatusInspectionResultIndexingStateEnum  `json:"indexingState"`
-	LastCrawlTime   *string                                        `json:"lastCrawlTime"`
-	PageFetchState  *IndexStatusInspectionResultPageFetchStateEnum `json:"pageFetchState"`
-	ReferringUrls   []string                                       `json:"referringUrls"`
-	RobotsTxtState  *IndexStatusInspectionResultRobotsTxtStateEnum `json:"robotsTxtState"`
-	Sitemap         []string                                       `json:"sitemap"`
-	UserCanonical   *string                                        `json:"userCanonical"`
-	Verdict         *IndexStatusInspectionResultVerdictEnum        `json:"verdict"`
+	CoverageState   *string                                        `json:"coverageState,omitempty"`
+	CrawledAs       *IndexStatusInspectionResultCrawledAsEnum      `json:"crawledAs,omitempty"`
+	GoogleCanonical *string                                        `json:"googleCanonical,omitempty"`
+	IndexingState   *IndexStatusInspectionResultIndexingStateEnum  `json:"indexingState,omitempty"`
+	LastCrawlTime   *string                                        `json:"lastCrawlTime,omitempty"`
+	PageFetchState  *IndexStatusInspectionResultPageFetchStateEnum `json:"pageFetchState,omitempty"`
+	ReferringUrls   []string                                       `json:"referringUrls,omitempty"`
+	RobotsTxtState  *IndexStatusInspectionResultRobotsTxtStateEnum `json:"robotsTxtState,omitempty"`
+	Sitemap         []string                                       `json:"sitemap,omitempty"`
+	UserCanonical   *string                                        `json:"userCanonical,omitempty"`
+	Verdict         *IndexStatusInspectionResultVerdictEnum        `json:"verdict,omitempty"`
 }

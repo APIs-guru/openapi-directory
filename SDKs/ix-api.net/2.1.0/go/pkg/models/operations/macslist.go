@@ -27,10 +27,10 @@ const (
 )
 
 type MacsList400ApplicationJSON struct {
-	Detail   *string                            `json:"detail"`
-	Instance *string                            `json:"instance"`
-	Status   *interface{}                       `json:"status"`
-	Title    *interface{}                       `json:"title"`
+	Detail   *string                            `json:"detail,omitempty"`
+	Instance *string                            `json:"instance,omitempty"`
+	Status   *interface{}                       `json:"status,omitempty"`
+	Title    *interface{}                       `json:"title,omitempty"`
 	Type     MacsList400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -42,10 +42,10 @@ const (
 )
 
 type MacsList401ApplicationJSON struct {
-	Detail   *string                            `json:"detail"`
-	Instance *string                            `json:"instance"`
-	Status   *interface{}                       `json:"status"`
-	Title    *interface{}                       `json:"title"`
+	Detail   *string                            `json:"detail,omitempty"`
+	Instance *string                            `json:"instance,omitempty"`
+	Status   *interface{}                       `json:"status,omitempty"`
+	Title    *interface{}                       `json:"title,omitempty"`
 	Type     MacsList401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -56,10 +56,10 @@ const (
 )
 
 type MacsList403ApplicationJSON struct {
-	Detail   *string                            `json:"detail"`
-	Instance *string                            `json:"instance"`
-	Status   *interface{}                       `json:"status"`
-	Title    *interface{}                       `json:"title"`
+	Detail   *string                            `json:"detail,omitempty"`
+	Instance *string                            `json:"instance,omitempty"`
+	Status   *interface{}                       `json:"status,omitempty"`
+	Title    *interface{}                       `json:"title,omitempty"`
 	Type     MacsList403ApplicationJSONTypeEnum `json:"type"`
 }
 

@@ -12,8 +12,8 @@ const (
 )
 
 type GoogleCloudDialogflowV2TextToSpeechSettings struct {
-	EnableTextToSpeech      *bool                                                               `json:"enableTextToSpeech"`
-	OutputAudioEncoding     *GoogleCloudDialogflowV2TextToSpeechSettingsOutputAudioEncodingEnum `json:"outputAudioEncoding"`
-	SampleRateHertz         *int32                                                              `json:"sampleRateHertz"`
-	SynthesizeSpeechConfigs map[string]GoogleCloudDialogflowV2SynthesizeSpeechConfig            `json:"synthesizeSpeechConfigs"`
+	EnableTextToSpeech      *bool                                                               `json:"enableTextToSpeech,omitempty"`
+	OutputAudioEncoding     *GoogleCloudDialogflowV2TextToSpeechSettingsOutputAudioEncodingEnum `json:"outputAudioEncoding,omitempty"`
+	SampleRateHertz         *int32                                                              `json:"sampleRateHertz,omitempty"`
+	SynthesizeSpeechConfigs map[string]GoogleCloudDialogflowV2SynthesizeSpeechConfig            `json:"synthesizeSpeechConfigs,omitempty"`
 }

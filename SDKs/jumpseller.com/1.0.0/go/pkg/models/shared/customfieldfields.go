@@ -9,8 +9,8 @@ const (
 )
 
 type CustomFieldFields struct {
-	ID     *int32                     `json:"id"`
-	Label  *string                    `json:"label"`
-	Type   *CustomFieldFieldsTypeEnum `json:"type"`
-	Values []string                   `json:"values"`
+	ID     *int32                     `json:"id,omitempty"`
+	Label  *string                    `json:"label,omitempty"`
+	Type   *CustomFieldFieldsTypeEnum `json:"type,omitempty"`
+	Values []string                   `json:"values,omitempty"`
 }

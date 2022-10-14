@@ -1,6 +1,6 @@
 package shared
 
 type DataSourceSheetDimensionRange struct {
-	ColumnReferences []DataSourceColumnReference `json:"columnReferences"`
-	SheetID          *int32                      `json:"sheetId"`
+	ColumnReferences []DataSourceColumnReference `json:"columnReferences,omitempty"`
+	SheetID          *int32                      `json:"sheetId,omitempty"`
 }

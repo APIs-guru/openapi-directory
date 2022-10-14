@@ -5,16 +5,16 @@ import (
 )
 
 type Report struct {
-	Arn                 *string                    `json:"arn"`
-	CodeCoverageSummary *CodeCoverageReportSummary `json:"codeCoverageSummary"`
-	Created             *time.Time                 `json:"created"`
-	ExecutionID         *string                    `json:"executionId"`
-	Expired             *time.Time                 `json:"expired"`
-	ExportConfig        *ReportExportConfig        `json:"exportConfig"`
-	Name                *string                    `json:"name"`
-	ReportGroupArn      *string                    `json:"reportGroupArn"`
-	Status              *ReportStatusTypeEnum      `json:"status"`
-	TestSummary         *TestReportSummary         `json:"testSummary"`
-	Truncated           *bool                      `json:"truncated"`
-	Type                *ReportTypeEnum            `json:"type"`
+	Arn                 *string                    `json:"arn,omitempty"`
+	CodeCoverageSummary *CodeCoverageReportSummary `json:"codeCoverageSummary,omitempty"`
+	Created             *time.Time                 `json:"created,omitempty"`
+	ExecutionID         *string                    `json:"executionId,omitempty"`
+	Expired             *time.Time                 `json:"expired,omitempty"`
+	ExportConfig        *ReportExportConfig        `json:"exportConfig,omitempty"`
+	Name                *string                    `json:"name,omitempty"`
+	ReportGroupArn      *string                    `json:"reportGroupArn,omitempty"`
+	Status              *ReportStatusTypeEnum      `json:"status,omitempty"`
+	TestSummary         *TestReportSummary         `json:"testSummary,omitempty"`
+	Truncated           *bool                      `json:"truncated,omitempty"`
+	Type                *ReportTypeEnum            `json:"type,omitempty"`
 }

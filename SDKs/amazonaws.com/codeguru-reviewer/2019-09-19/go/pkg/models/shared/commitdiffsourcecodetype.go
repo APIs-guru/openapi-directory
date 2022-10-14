@@ -1,7 +1,7 @@
 package shared
 
 type CommitDiffSourceCodeType struct {
-	DestinationCommit *string `json:"DestinationCommit"`
-	MergeBaseCommit   *string `json:"MergeBaseCommit"`
-	SourceCommit      *string `json:"SourceCommit"`
+	DestinationCommit *string `json:"DestinationCommit,omitempty"`
+	MergeBaseCommit   *string `json:"MergeBaseCommit,omitempty"`
+	SourceCommit      *string `json:"SourceCommit,omitempty"`
 }

@@ -8,6 +8,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1IntentMessageMediaContent struct {
-	MediaObjects []GoogleCloudDialogflowV2beta1IntentMessageMediaContentResponseMediaObject `json:"mediaObjects"`
-	MediaType    *GoogleCloudDialogflowV2beta1IntentMessageMediaContentMediaTypeEnum        `json:"mediaType"`
+	MediaObjects []GoogleCloudDialogflowV2beta1IntentMessageMediaContentResponseMediaObject `json:"mediaObjects,omitempty"`
+	MediaType    *GoogleCloudDialogflowV2beta1IntentMessageMediaContentMediaTypeEnum        `json:"mediaType,omitempty"`
 }

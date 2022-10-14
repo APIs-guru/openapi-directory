@@ -16,9 +16,9 @@ type CreateMembersHeaders struct {
 
 type CreateMembersRequestBody struct {
 	Accounts                 []shared.Account `json:"Accounts"`
-	DisableEmailNotification *bool            `json:"DisableEmailNotification"`
+	DisableEmailNotification *bool            `json:"DisableEmailNotification,omitempty"`
 	GraphArn                 string           `json:"GraphArn"`
-	Message                  *string          `json:"Message"`
+	Message                  *string          `json:"Message,omitempty"`
 }
 
 type CreateMembersRequest struct {

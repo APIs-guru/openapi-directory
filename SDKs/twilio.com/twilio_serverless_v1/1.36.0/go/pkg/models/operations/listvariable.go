@@ -29,18 +29,18 @@ type ListVariableRequest struct {
 }
 
 type ListVariable200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListVariable200ApplicationJSONListVariableResponse struct {
-	Meta      *ListVariable200ApplicationJSONMeta             `json:"meta"`
-	Variables []shared.ServerlessV1ServiceEnvironmentVariable `json:"variables"`
+	Meta      *ListVariable200ApplicationJSONMeta             `json:"meta,omitempty"`
+	Variables []shared.ServerlessV1ServiceEnvironmentVariable `json:"variables,omitempty"`
 }
 
 type ListVariableResponse struct {

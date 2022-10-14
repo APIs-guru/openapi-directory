@@ -15,9 +15,9 @@ const (
 )
 
 type NextPlaybackItem struct {
-	FirstWatchedDate *time.Time                          `json:"firstWatchedDate"`
-	LastWatchedDate  *time.Time                          `json:"lastWatchedDate"`
-	Next             *ItemDetail                         `json:"next"`
+	FirstWatchedDate *time.Time                          `json:"firstWatchedDate,omitempty"`
+	LastWatchedDate  *time.Time                          `json:"lastWatchedDate,omitempty"`
+	Next             *ItemDetail                         `json:"next,omitempty"`
 	SourceItemID     string                              `json:"sourceItemId"`
-	SuggestionType   *NextPlaybackItemSuggestionTypeEnum `json:"suggestionType"`
+	SuggestionType   *NextPlaybackItemSuggestionTypeEnum `json:"suggestionType,omitempty"`
 }

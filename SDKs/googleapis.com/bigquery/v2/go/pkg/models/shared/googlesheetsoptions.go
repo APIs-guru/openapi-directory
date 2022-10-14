@@ -1,6 +1,6 @@
 package shared
 
 type GoogleSheetsOptions struct {
-	Range           *string `json:"range"`
-	SkipLeadingRows *string `json:"skipLeadingRows"`
+	Range           *string `json:"range,omitempty"`
+	SkipLeadingRows *string `json:"skipLeadingRows,omitempty"`
 }

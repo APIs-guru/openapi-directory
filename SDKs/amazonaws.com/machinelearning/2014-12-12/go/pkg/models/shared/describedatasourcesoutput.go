@@ -1,6 +1,6 @@
 package shared
 
 type DescribeDataSourcesOutput struct {
-	NextToken *string      `json:"NextToken"`
-	Results   []DataSource `json:"Results"`
+	NextToken *string      `json:"NextToken,omitempty"`
+	Results   []DataSource `json:"Results,omitempty"`
 }

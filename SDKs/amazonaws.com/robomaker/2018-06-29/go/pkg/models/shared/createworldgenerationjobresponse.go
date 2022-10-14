@@ -5,13 +5,13 @@ import (
 )
 
 type CreateWorldGenerationJobResponse struct {
-	Arn                *string                          `json:"arn"`
-	ClientRequestToken *string                          `json:"clientRequestToken"`
-	CreatedAt          *time.Time                       `json:"createdAt"`
-	FailureCode        *WorldGenerationJobErrorCodeEnum `json:"failureCode"`
-	Status             *WorldGenerationJobStatusEnum    `json:"status"`
-	Tags               map[string]string                `json:"tags"`
-	Template           *string                          `json:"template"`
-	WorldCount         *WorldCount                      `json:"worldCount"`
-	WorldTags          map[string]string                `json:"worldTags"`
+	Arn                *string                          `json:"arn,omitempty"`
+	ClientRequestToken *string                          `json:"clientRequestToken,omitempty"`
+	CreatedAt          *time.Time                       `json:"createdAt,omitempty"`
+	FailureCode        *WorldGenerationJobErrorCodeEnum `json:"failureCode,omitempty"`
+	Status             *WorldGenerationJobStatusEnum    `json:"status,omitempty"`
+	Tags               map[string]string                `json:"tags,omitempty"`
+	Template           *string                          `json:"template,omitempty"`
+	WorldCount         *WorldCount                      `json:"worldCount,omitempty"`
+	WorldTags          map[string]string                `json:"worldTags,omitempty"`
 }

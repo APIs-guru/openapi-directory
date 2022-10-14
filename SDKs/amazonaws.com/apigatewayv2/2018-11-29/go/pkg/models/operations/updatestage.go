@@ -20,27 +20,27 @@ type UpdateStageHeaders struct {
 }
 
 type UpdateStageRequestBodyAccessLogSettings struct {
-	DestinationArn *string `json:"DestinationArn"`
-	Format         *string `json:"Format"`
+	DestinationArn *string `json:"DestinationArn,omitempty"`
+	Format         *string `json:"Format,omitempty"`
 }
 
 type UpdateStageRequestBodyDefaultRouteSettings struct {
-	DataTraceEnabled       *bool                    `json:"DataTraceEnabled"`
-	DetailedMetricsEnabled *bool                    `json:"DetailedMetricsEnabled"`
-	LoggingLevel           *shared.LoggingLevelEnum `json:"LoggingLevel"`
-	ThrottlingBurstLimit   *int64                   `json:"ThrottlingBurstLimit"`
-	ThrottlingRateLimit    *float64                 `json:"ThrottlingRateLimit"`
+	DataTraceEnabled       *bool                    `json:"DataTraceEnabled,omitempty"`
+	DetailedMetricsEnabled *bool                    `json:"DetailedMetricsEnabled,omitempty"`
+	LoggingLevel           *shared.LoggingLevelEnum `json:"LoggingLevel,omitempty"`
+	ThrottlingBurstLimit   *int64                   `json:"ThrottlingBurstLimit,omitempty"`
+	ThrottlingRateLimit    *float64                 `json:"ThrottlingRateLimit,omitempty"`
 }
 
 type UpdateStageRequestBody struct {
-	AccessLogSettings    *UpdateStageRequestBodyAccessLogSettings    `json:"accessLogSettings"`
-	AutoDeploy           *bool                                       `json:"autoDeploy"`
-	ClientCertificateID  *string                                     `json:"clientCertificateId"`
-	DefaultRouteSettings *UpdateStageRequestBodyDefaultRouteSettings `json:"defaultRouteSettings"`
-	DeploymentID         *string                                     `json:"deploymentId"`
-	Description          *string                                     `json:"description"`
-	RouteSettings        map[string]shared.RouteSettings             `json:"routeSettings"`
-	StageVariables       map[string]string                           `json:"stageVariables"`
+	AccessLogSettings    *UpdateStageRequestBodyAccessLogSettings    `json:"accessLogSettings,omitempty"`
+	AutoDeploy           *bool                                       `json:"autoDeploy,omitempty"`
+	ClientCertificateID  *string                                     `json:"clientCertificateId,omitempty"`
+	DefaultRouteSettings *UpdateStageRequestBodyDefaultRouteSettings `json:"defaultRouteSettings,omitempty"`
+	DeploymentID         *string                                     `json:"deploymentId,omitempty"`
+	Description          *string                                     `json:"description,omitempty"`
+	RouteSettings        map[string]shared.RouteSettings             `json:"routeSettings,omitempty"`
+	StageVariables       map[string]string                           `json:"stageVariables,omitempty"`
 }
 
 type UpdateStageRequest struct {

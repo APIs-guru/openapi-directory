@@ -1,21 +1,21 @@
 package shared
 
 type GlobalHookConfig struct {
-	ContentType *string `json:"content_type"`
-	InsecureSsl *string `json:"insecure_ssl"`
-	Secret      *string `json:"secret"`
-	URL         *string `json:"url"`
+	ContentType *string `json:"content_type,omitempty"`
+	InsecureSsl *string `json:"insecure_ssl,omitempty"`
+	Secret      *string `json:"secret,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }
 
 type GlobalHook struct {
-	Active    *bool             `json:"active"`
-	Config    *GlobalHookConfig `json:"config"`
-	CreatedAt *string           `json:"created_at"`
-	Events    []string          `json:"events"`
-	ID        *int64            `json:"id"`
-	Name      *string           `json:"name"`
-	PingURL   *string           `json:"ping_url"`
-	Type      *string           `json:"type"`
-	UpdatedAt *string           `json:"updated_at"`
-	URL       *string           `json:"url"`
+	Active    *bool             `json:"active,omitempty"`
+	Config    *GlobalHookConfig `json:"config,omitempty"`
+	CreatedAt *string           `json:"created_at,omitempty"`
+	Events    []string          `json:"events,omitempty"`
+	ID        *int64            `json:"id,omitempty"`
+	Name      *string           `json:"name,omitempty"`
+	PingURL   *string           `json:"ping_url,omitempty"`
+	Type      *string           `json:"type,omitempty"`
+	UpdatedAt *string           `json:"updated_at,omitempty"`
+	URL       *string           `json:"url,omitempty"`
 }

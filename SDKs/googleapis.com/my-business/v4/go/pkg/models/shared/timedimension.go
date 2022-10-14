@@ -14,7 +14,7 @@ const (
 )
 
 type TimeDimension struct {
-	DayOfWeek *TimeDimensionDayOfWeekEnum `json:"dayOfWeek"`
-	TimeOfDay *TimeOfDay                  `json:"timeOfDay"`
-	TimeRange *TimeRange                  `json:"timeRange"`
+	DayOfWeek *TimeDimensionDayOfWeekEnum `json:"dayOfWeek,omitempty"`
+	TimeOfDay *TimeOfDay                  `json:"timeOfDay,omitempty"`
+	TimeRange *TimeRange                  `json:"timeRange,omitempty"`
 }

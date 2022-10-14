@@ -1,6 +1,6 @@
 package shared
 
 type TerminalCheckoutQuery struct {
-	Filter *TerminalCheckoutQueryFilter `json:"filter"`
-	Sort   *TerminalCheckoutQuerySort   `json:"sort"`
+	Filter *TerminalCheckoutQueryFilter `json:"filter,omitempty"`
+	Sort   *TerminalCheckoutQuerySort   `json:"sort,omitempty"`
 }

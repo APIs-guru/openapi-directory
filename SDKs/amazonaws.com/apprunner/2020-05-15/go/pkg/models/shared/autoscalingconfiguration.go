@@ -5,14 +5,14 @@ import (
 )
 
 type AutoScalingConfiguration struct {
-	AutoScalingConfigurationArn      *string                             `json:"AutoScalingConfigurationArn"`
-	AutoScalingConfigurationName     *string                             `json:"AutoScalingConfigurationName"`
-	AutoScalingConfigurationRevision *int64                              `json:"AutoScalingConfigurationRevision"`
-	CreatedAt                        *time.Time                          `json:"CreatedAt"`
-	DeletedAt                        *time.Time                          `json:"DeletedAt"`
-	Latest                           *bool                               `json:"Latest"`
-	MaxConcurrency                   *int64                              `json:"MaxConcurrency"`
-	MaxSize                          *int64                              `json:"MaxSize"`
-	MinSize                          *int64                              `json:"MinSize"`
-	Status                           *AutoScalingConfigurationStatusEnum `json:"Status"`
+	AutoScalingConfigurationArn      *string                             `json:"AutoScalingConfigurationArn,omitempty"`
+	AutoScalingConfigurationName     *string                             `json:"AutoScalingConfigurationName,omitempty"`
+	AutoScalingConfigurationRevision *int64                              `json:"AutoScalingConfigurationRevision,omitempty"`
+	CreatedAt                        *time.Time                          `json:"CreatedAt,omitempty"`
+	DeletedAt                        *time.Time                          `json:"DeletedAt,omitempty"`
+	Latest                           *bool                               `json:"Latest,omitempty"`
+	MaxConcurrency                   *int64                              `json:"MaxConcurrency,omitempty"`
+	MaxSize                          *int64                              `json:"MaxSize,omitempty"`
+	MinSize                          *int64                              `json:"MinSize,omitempty"`
+	Status                           *AutoScalingConfigurationStatusEnum `json:"Status,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type SearchAnalyticsQueryResponse struct {
-	ResponseAggregationType *SearchAnalyticsQueryResponseResponseAggregationTypeEnum `json:"responseAggregationType"`
-	Rows                    []APIDataRow                                             `json:"rows"`
+	ResponseAggregationType *SearchAnalyticsQueryResponseResponseAggregationTypeEnum `json:"responseAggregationType,omitempty"`
+	Rows                    []APIDataRow                                             `json:"rows,omitempty"`
 }

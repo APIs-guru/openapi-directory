@@ -1,6 +1,6 @@
 package shared
 
 type GetDownloadURLForLayerResponse struct {
-	DownloadURL *string `json:"downloadUrl"`
-	LayerDigest *string `json:"layerDigest"`
+	DownloadURL *string `json:"downloadUrl,omitempty"`
+	LayerDigest *string `json:"layerDigest,omitempty"`
 }

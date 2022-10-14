@@ -2,5 +2,5 @@ package shared
 
 type CreateLunaClientRequest struct {
 	Certificate string  `json:"Certificate"`
-	Label       *string `json:"Label"`
+	Label       *string `json:"Label,omitempty"`
 }

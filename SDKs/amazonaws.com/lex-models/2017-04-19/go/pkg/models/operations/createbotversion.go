@@ -19,7 +19,7 @@ type CreateBotVersionHeaders struct {
 }
 
 type CreateBotVersionRequestBody struct {
-	Checksum *string `json:"checksum"`
+	Checksum *string `json:"checksum,omitempty"`
 }
 
 type CreateBotVersionRequest struct {

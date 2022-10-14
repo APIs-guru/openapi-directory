@@ -1,7 +1,7 @@
 package shared
 
 type PosDataProvidersPosDataProvider struct {
-	DisplayName *string `json:"displayName"`
-	FullName    *string `json:"fullName"`
-	ProviderID  *string `json:"providerId"`
+	DisplayName *string `json:"displayName,omitempty"`
+	FullName    *string `json:"fullName,omitempty"`
+	ProviderID  *string `json:"providerId,omitempty"`
 }

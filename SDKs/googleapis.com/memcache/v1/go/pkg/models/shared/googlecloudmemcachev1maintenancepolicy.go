@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudMemcacheV1MaintenancePolicy struct {
-	CreateTime              *string                   `json:"createTime"`
-	Description             *string                   `json:"description"`
-	UpdateTime              *string                   `json:"updateTime"`
-	WeeklyMaintenanceWindow []WeeklyMaintenanceWindow `json:"weeklyMaintenanceWindow"`
+	CreateTime              *string                   `json:"createTime,omitempty"`
+	Description             *string                   `json:"description,omitempty"`
+	UpdateTime              *string                   `json:"updateTime,omitempty"`
+	WeeklyMaintenanceWindow []WeeklyMaintenanceWindow `json:"weeklyMaintenanceWindow,omitempty"`
 }

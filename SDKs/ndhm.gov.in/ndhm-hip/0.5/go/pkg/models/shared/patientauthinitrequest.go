@@ -17,7 +17,7 @@ type PatientAuthInitRequestQueryRequester struct {
 }
 
 type PatientAuthInitRequestQuery struct {
-	AuthMode  *AuthenticationModeEnum              `json:"authMode"`
+	AuthMode  *AuthenticationModeEnum              `json:"authMode,omitempty"`
 	ID        string                               `json:"id"`
 	Purpose   PatientAuthPurposeEnum               `json:"purpose"`
 	Requester PatientAuthInitRequestQueryRequester `json:"requester"`

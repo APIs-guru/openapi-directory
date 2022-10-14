@@ -14,10 +14,10 @@ const (
 )
 
 type HTTPTarget struct {
-	Body       *string                   `json:"body"`
-	Headers    map[string]string         `json:"headers"`
-	HTTPMethod *HTTPTargetHTTPMethodEnum `json:"httpMethod"`
-	OauthToken *OAuthToken               `json:"oauthToken"`
-	OidcToken  *OidcToken                `json:"oidcToken"`
-	URI        *string                   `json:"uri"`
+	Body       *string                   `json:"body,omitempty"`
+	Headers    map[string]string         `json:"headers,omitempty"`
+	HTTPMethod *HTTPTargetHTTPMethodEnum `json:"httpMethod,omitempty"`
+	OauthToken *OAuthToken               `json:"oauthToken,omitempty"`
+	OidcToken  *OidcToken                `json:"oidcToken,omitempty"`
+	URI        *string                   `json:"uri,omitempty"`
 }

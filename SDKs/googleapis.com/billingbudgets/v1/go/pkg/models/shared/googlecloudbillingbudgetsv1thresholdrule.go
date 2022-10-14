@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudBillingBudgetsV1ThresholdRule struct {
-	SpendBasis       *GoogleCloudBillingBudgetsV1ThresholdRuleSpendBasisEnum `json:"spendBasis"`
-	ThresholdPercent *float64                                                `json:"thresholdPercent"`
+	SpendBasis       *GoogleCloudBillingBudgetsV1ThresholdRuleSpendBasisEnum `json:"spendBasis,omitempty"`
+	ThresholdPercent *float64                                                `json:"thresholdPercent,omitempty"`
 }

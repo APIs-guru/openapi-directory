@@ -5,7 +5,7 @@ type CreateOrganizationSamlIdpPathParams struct {
 }
 
 type CreateOrganizationSamlIdpRequestBody struct {
-	SloLogoutURL            *string `json:"sloLogoutUrl"`
+	SloLogoutURL            *string `json:"sloLogoutUrl,omitempty"`
 	X509certSha1Fingerprint string  `json:"x509certSha1Fingerprint"`
 }
 

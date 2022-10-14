@@ -13,7 +13,7 @@ type UpdateObjectStorageKeyPathParams struct {
 }
 
 type UpdateObjectStorageKeyRequestBody struct {
-	Label *string `json:"label"`
+	Label *string `json:"label,omitempty"`
 }
 
 type UpdateObjectStorageKeySecurityOption1 struct {
@@ -37,7 +37,7 @@ type UpdateObjectStorageKeyRequest struct {
 }
 
 type UpdateObjectStorageKeyDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateObjectStorageKeyResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeJobsResponse struct {
-	Items     []Job   `json:"items"`
-	NextToken *string `json:"nextToken"`
+	Items     []Job   `json:"items,omitempty"`
+	NextToken *string `json:"nextToken,omitempty"`
 }

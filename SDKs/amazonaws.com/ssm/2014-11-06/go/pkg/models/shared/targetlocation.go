@@ -1,9 +1,9 @@
 package shared
 
 type TargetLocation struct {
-	Accounts                     []string `json:"Accounts"`
-	ExecutionRoleName            *string  `json:"ExecutionRoleName"`
-	Regions                      []string `json:"Regions"`
-	TargetLocationMaxConcurrency *string  `json:"TargetLocationMaxConcurrency"`
-	TargetLocationMaxErrors      *string  `json:"TargetLocationMaxErrors"`
+	Accounts                     []string `json:"Accounts,omitempty"`
+	ExecutionRoleName            *string  `json:"ExecutionRoleName,omitempty"`
+	Regions                      []string `json:"Regions,omitempty"`
+	TargetLocationMaxConcurrency *string  `json:"TargetLocationMaxConcurrency,omitempty"`
+	TargetLocationMaxErrors      *string  `json:"TargetLocationMaxErrors,omitempty"`
 }

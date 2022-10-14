@@ -5,13 +5,13 @@ import (
 )
 
 type APIUsage struct {
-	EndsAt          *time.Time `json:"endsAt"`
-	ID              *string    `json:"id"`
-	LicenseID       *string    `json:"licenseId"`
-	Object          *string    `json:"object"`
-	OrganizationID  *string    `json:"organizationId"`
-	PlanData        []PlanData `json:"planData"`
-	PredictionsMax  *int64     `json:"predictionsMax"`
-	PredictionsUsed *int64     `json:"predictionsUsed"`
-	StartsAt        *time.Time `json:"startsAt"`
+	EndsAt          *time.Time `json:"endsAt,omitempty"`
+	ID              *string    `json:"id,omitempty"`
+	LicenseID       *string    `json:"licenseId,omitempty"`
+	Object          *string    `json:"object,omitempty"`
+	OrganizationID  *string    `json:"organizationId,omitempty"`
+	PlanData        []PlanData `json:"planData,omitempty"`
+	PredictionsMax  *int64     `json:"predictionsMax,omitempty"`
+	PredictionsUsed *int64     `json:"predictionsUsed,omitempty"`
+	StartsAt        *time.Time `json:"startsAt,omitempty"`
 }

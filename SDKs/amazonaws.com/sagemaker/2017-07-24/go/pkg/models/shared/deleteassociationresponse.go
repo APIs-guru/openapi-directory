@@ -1,6 +1,6 @@
 package shared
 
 type DeleteAssociationResponse struct {
-	DestinationArn *string `json:"DestinationArn"`
-	SourceArn      *string `json:"SourceArn"`
+	DestinationArn *string `json:"DestinationArn,omitempty"`
+	SourceArn      *string `json:"SourceArn,omitempty"`
 }

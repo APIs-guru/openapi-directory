@@ -2,13 +2,13 @@ package shared
 
 type CreateTableInput struct {
 	AttributeDefinitions   []AttributeDefinition  `json:"AttributeDefinitions"`
-	BillingMode            *BillingModeEnum       `json:"BillingMode"`
-	GlobalSecondaryIndexes []GlobalSecondaryIndex `json:"GlobalSecondaryIndexes"`
+	BillingMode            *BillingModeEnum       `json:"BillingMode,omitempty"`
+	GlobalSecondaryIndexes []GlobalSecondaryIndex `json:"GlobalSecondaryIndexes,omitempty"`
 	KeySchema              []KeySchemaElement     `json:"KeySchema"`
-	LocalSecondaryIndexes  []LocalSecondaryIndex  `json:"LocalSecondaryIndexes"`
-	ProvisionedThroughput  *ProvisionedThroughput `json:"ProvisionedThroughput"`
-	SseSpecification       *SseSpecification      `json:"SSESpecification"`
-	StreamSpecification    *StreamSpecification   `json:"StreamSpecification"`
+	LocalSecondaryIndexes  []LocalSecondaryIndex  `json:"LocalSecondaryIndexes,omitempty"`
+	ProvisionedThroughput  *ProvisionedThroughput `json:"ProvisionedThroughput,omitempty"`
+	SseSpecification       *SseSpecification      `json:"SSESpecification,omitempty"`
+	StreamSpecification    *StreamSpecification   `json:"StreamSpecification,omitempty"`
 	TableName              string                 `json:"TableName"`
-	Tags                   []Tag                  `json:"Tags"`
+	Tags                   []Tag                  `json:"Tags,omitempty"`
 }

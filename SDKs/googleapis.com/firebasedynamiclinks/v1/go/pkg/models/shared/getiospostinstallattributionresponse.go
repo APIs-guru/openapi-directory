@@ -18,20 +18,20 @@ const (
 )
 
 type GetIosPostInstallAttributionResponse struct {
-	AppMinimumVersion              *string                                                        `json:"appMinimumVersion"`
-	AttributionConfidence          *GetIosPostInstallAttributionResponseAttributionConfidenceEnum `json:"attributionConfidence"`
-	DeepLink                       *string                                                        `json:"deepLink"`
-	ExternalBrowserDestinationLink *string                                                        `json:"externalBrowserDestinationLink"`
-	FallbackLink                   *string                                                        `json:"fallbackLink"`
-	InvitationID                   *string                                                        `json:"invitationId"`
-	IsStrongMatchExecutable        *bool                                                          `json:"isStrongMatchExecutable"`
-	MatchMessage                   *string                                                        `json:"matchMessage"`
-	RequestIPVersion               *GetIosPostInstallAttributionResponseRequestIPVersionEnum      `json:"requestIpVersion"`
-	RequestedLink                  *string                                                        `json:"requestedLink"`
-	ResolvedLink                   *string                                                        `json:"resolvedLink"`
-	UtmCampaign                    *string                                                        `json:"utmCampaign"`
-	UtmContent                     *string                                                        `json:"utmContent"`
-	UtmMedium                      *string                                                        `json:"utmMedium"`
-	UtmSource                      *string                                                        `json:"utmSource"`
-	UtmTerm                        *string                                                        `json:"utmTerm"`
+	AppMinimumVersion              *string                                                        `json:"appMinimumVersion,omitempty"`
+	AttributionConfidence          *GetIosPostInstallAttributionResponseAttributionConfidenceEnum `json:"attributionConfidence,omitempty"`
+	DeepLink                       *string                                                        `json:"deepLink,omitempty"`
+	ExternalBrowserDestinationLink *string                                                        `json:"externalBrowserDestinationLink,omitempty"`
+	FallbackLink                   *string                                                        `json:"fallbackLink,omitempty"`
+	InvitationID                   *string                                                        `json:"invitationId,omitempty"`
+	IsStrongMatchExecutable        *bool                                                          `json:"isStrongMatchExecutable,omitempty"`
+	MatchMessage                   *string                                                        `json:"matchMessage,omitempty"`
+	RequestIPVersion               *GetIosPostInstallAttributionResponseRequestIPVersionEnum      `json:"requestIpVersion,omitempty"`
+	RequestedLink                  *string                                                        `json:"requestedLink,omitempty"`
+	ResolvedLink                   *string                                                        `json:"resolvedLink,omitempty"`
+	UtmCampaign                    *string                                                        `json:"utmCampaign,omitempty"`
+	UtmContent                     *string                                                        `json:"utmContent,omitempty"`
+	UtmMedium                      *string                                                        `json:"utmMedium,omitempty"`
+	UtmSource                      *string                                                        `json:"utmSource,omitempty"`
+	UtmTerm                        *string                                                        `json:"utmTerm,omitempty"`
 }

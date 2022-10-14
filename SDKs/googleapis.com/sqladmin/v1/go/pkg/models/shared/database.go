@@ -1,13 +1,13 @@
 package shared
 
 type Database struct {
-	Charset                  *string                   `json:"charset"`
-	Collation                *string                   `json:"collation"`
-	Etag                     *string                   `json:"etag"`
-	Instance                 *string                   `json:"instance"`
-	Kind                     *string                   `json:"kind"`
-	Name                     *string                   `json:"name"`
-	Project                  *string                   `json:"project"`
-	SelfLink                 *string                   `json:"selfLink"`
-	SqlserverDatabaseDetails *SQLServerDatabaseDetails `json:"sqlserverDatabaseDetails"`
+	Charset                  *string                   `json:"charset,omitempty"`
+	Collation                *string                   `json:"collation,omitempty"`
+	Etag                     *string                   `json:"etag,omitempty"`
+	Instance                 *string                   `json:"instance,omitempty"`
+	Kind                     *string                   `json:"kind,omitempty"`
+	Name                     *string                   `json:"name,omitempty"`
+	Project                  *string                   `json:"project,omitempty"`
+	SelfLink                 *string                   `json:"selfLink,omitempty"`
+	SqlserverDatabaseDetails *SQLServerDatabaseDetails `json:"sqlserverDatabaseDetails,omitempty"`
 }

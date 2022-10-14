@@ -9,7 +9,7 @@ type PutMyConversationsIDPathParams struct {
 }
 
 type PutMyConversationsIDRequestBody struct {
-	Read *bool `json:"read"`
+	Read *bool `json:"read,omitempty"`
 }
 
 type PutMyConversationsIDSecurity struct {

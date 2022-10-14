@@ -30,11 +30,11 @@ const (
 
 type UpdateChannelRequestBody struct {
 	Arn                       string                                   `json:"arn"`
-	Authorized                *bool                                    `json:"authorized"`
-	LatencyMode               *UpdateChannelRequestBodyLatencyModeEnum `json:"latencyMode"`
-	Name                      *string                                  `json:"name"`
-	RecordingConfigurationArn *string                                  `json:"recordingConfigurationArn"`
-	Type                      *UpdateChannelRequestBodyTypeEnum        `json:"type"`
+	Authorized                *bool                                    `json:"authorized,omitempty"`
+	LatencyMode               *UpdateChannelRequestBodyLatencyModeEnum `json:"latencyMode,omitempty"`
+	Name                      *string                                  `json:"name,omitempty"`
+	RecordingConfigurationArn *string                                  `json:"recordingConfigurationArn,omitempty"`
+	Type                      *UpdateChannelRequestBodyTypeEnum        `json:"type,omitempty"`
 }
 
 type UpdateChannelRequest struct {

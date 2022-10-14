@@ -1,5 +1,5 @@
 package shared
 
 type SnowflakeMetadata struct {
-	SupportedRegions []string `json:"supportedRegions"`
+	SupportedRegions []string `json:"supportedRegions,omitempty"`
 }

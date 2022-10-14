@@ -1,6 +1,6 @@
 package shared
 
 type ListSchemasResponse struct {
-	NextPageToken *string  `json:"nextPageToken"`
-	Schemas       []Schema `json:"schemas"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Schemas       []Schema `json:"schemas,omitempty"`
 }

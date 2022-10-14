@@ -1,6 +1,6 @@
 package shared
 
 type RevocationConfiguration struct {
-	CrlConfiguration  *CrlConfiguration  `json:"CrlConfiguration"`
-	OcspConfiguration *OcspConfiguration `json:"OcspConfiguration"`
+	CrlConfiguration  *CrlConfiguration  `json:"CrlConfiguration,omitempty"`
+	OcspConfiguration *OcspConfiguration `json:"OcspConfiguration,omitempty"`
 }

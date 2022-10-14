@@ -1,6 +1,6 @@
 package shared
 
 type IPRoute struct {
-	CidrIP      *string `json:"CidrIp"`
-	Description *string `json:"Description"`
+	CidrIP      *string `json:"CidrIp,omitempty"`
+	Description *string `json:"Description,omitempty"`
 }

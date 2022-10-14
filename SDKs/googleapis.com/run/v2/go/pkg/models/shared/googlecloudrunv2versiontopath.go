@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudRunV2VersionToPath struct {
-	Mode    *int32  `json:"mode"`
-	Path    *string `json:"path"`
-	Version *string `json:"version"`
+	Mode    *int32  `json:"mode,omitempty"`
+	Path    *string `json:"path,omitempty"`
+	Version *string `json:"version,omitempty"`
 }

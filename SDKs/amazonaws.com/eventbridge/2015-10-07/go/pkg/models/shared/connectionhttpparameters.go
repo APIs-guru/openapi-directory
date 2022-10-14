@@ -1,7 +1,7 @@
 package shared
 
 type ConnectionHTTPParameters struct {
-	BodyParameters        []ConnectionBodyParameter        `json:"BodyParameters"`
-	HeaderParameters      []ConnectionHeaderParameter      `json:"HeaderParameters"`
-	QueryStringParameters []ConnectionQueryStringParameter `json:"QueryStringParameters"`
+	BodyParameters        []ConnectionBodyParameter        `json:"BodyParameters,omitempty"`
+	HeaderParameters      []ConnectionHeaderParameter      `json:"HeaderParameters,omitempty"`
+	QueryStringParameters []ConnectionQueryStringParameter `json:"QueryStringParameters,omitempty"`
 }

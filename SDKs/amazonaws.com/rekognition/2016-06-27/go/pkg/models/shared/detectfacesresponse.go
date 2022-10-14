@@ -1,6 +1,6 @@
 package shared
 
 type DetectFacesResponse struct {
-	FaceDetails           []FaceDetail               `json:"FaceDetails"`
-	OrientationCorrection *OrientationCorrectionEnum `json:"OrientationCorrection"`
+	FaceDetails           []FaceDetail               `json:"FaceDetails,omitempty"`
+	OrientationCorrection *OrientationCorrectionEnum `json:"OrientationCorrection,omitempty"`
 }

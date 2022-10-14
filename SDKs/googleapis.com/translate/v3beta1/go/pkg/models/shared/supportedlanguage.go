@@ -1,8 +1,8 @@
 package shared
 
 type SupportedLanguage struct {
-	DisplayName   *string `json:"displayName"`
-	LanguageCode  *string `json:"languageCode"`
-	SupportSource *bool   `json:"supportSource"`
-	SupportTarget *bool   `json:"supportTarget"`
+	DisplayName   *string `json:"displayName,omitempty"`
+	LanguageCode  *string `json:"languageCode,omitempty"`
+	SupportSource *bool   `json:"supportSource,omitempty"`
+	SupportTarget *bool   `json:"supportTarget,omitempty"`
 }

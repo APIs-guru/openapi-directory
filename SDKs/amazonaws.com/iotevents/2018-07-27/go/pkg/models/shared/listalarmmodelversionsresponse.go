@@ -1,6 +1,6 @@
 package shared
 
 type ListAlarmModelVersionsResponse struct {
-	AlarmModelVersionSummaries []AlarmModelVersionSummary `json:"alarmModelVersionSummaries"`
-	NextToken                  *string                    `json:"nextToken"`
+	AlarmModelVersionSummaries []AlarmModelVersionSummary `json:"alarmModelVersionSummaries,omitempty"`
+	NextToken                  *string                    `json:"nextToken,omitempty"`
 }

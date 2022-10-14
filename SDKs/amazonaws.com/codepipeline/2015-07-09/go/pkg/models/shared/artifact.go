@@ -1,7 +1,7 @@
 package shared
 
 type Artifact struct {
-	Location *ArtifactLocation `json:"location"`
-	Name     *string           `json:"name"`
-	Revision *string           `json:"revision"`
+	Location *ArtifactLocation `json:"location,omitempty"`
+	Name     *string           `json:"name,omitempty"`
+	Revision *string           `json:"revision,omitempty"`
 }

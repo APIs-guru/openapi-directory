@@ -21,7 +21,7 @@ type GetCustomFieldSettingsForProjectRequest struct {
 }
 
 type GetCustomFieldSettingsForProject200ApplicationJSON struct {
-	Data []shared.CustomFieldSettingResponse `json:"data"`
+	Data []shared.CustomFieldSettingResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldSettingsForProjectResponse struct {

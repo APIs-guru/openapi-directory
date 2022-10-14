@@ -1,8 +1,8 @@
 package shared
 
 type CreateManagedEndpointResponse struct {
-	Arn              *string `json:"arn"`
-	ID               *string `json:"id"`
-	Name             *string `json:"name"`
-	VirtualClusterID *string `json:"virtualClusterId"`
+	Arn              *string `json:"arn,omitempty"`
+	ID               *string `json:"id,omitempty"`
+	Name             *string `json:"name,omitempty"`
+	VirtualClusterID *string `json:"virtualClusterId,omitempty"`
 }

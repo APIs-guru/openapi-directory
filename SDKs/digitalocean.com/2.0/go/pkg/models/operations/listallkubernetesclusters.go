@@ -28,9 +28,9 @@ const (
 )
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersMaintenancePolicy struct {
-	Day       *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersMaintenancePolicyDayEnum `json:"day"`
-	Duration  *string                                                                                `json:"duration"`
-	StartTime *string                                                                                `json:"start_time"`
+	Day       *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersMaintenancePolicyDayEnum `json:"day,omitempty"`
+	Duration  *string                                                                                `json:"duration,omitempty"`
+	StartTime *string                                                                                `json:"start_time,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodesStatusStateEnum string
@@ -43,16 +43,16 @@ const (
 )
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodesStatus struct {
-	State *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodesStatusStateEnum `json:"state"`
+	State *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodesStatusStateEnum `json:"state,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodes struct {
-	CreatedAt *time.Time                                                                         `json:"created_at"`
-	DropletID *string                                                                            `json:"droplet_id"`
-	ID        *string                                                                            `json:"id"`
-	Name      *string                                                                            `json:"name"`
-	Status    *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodesStatus `json:"status"`
-	UpdatedAt *time.Time                                                                         `json:"updated_at"`
+	CreatedAt *time.Time                                                                         `json:"created_at,omitempty"`
+	DropletID *string                                                                            `json:"droplet_id,omitempty"`
+	ID        *string                                                                            `json:"id,omitempty"`
+	Name      *string                                                                            `json:"name,omitempty"`
+	Status    *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodesStatus `json:"status,omitempty"`
+	UpdatedAt *time.Time                                                                         `json:"updated_at,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsTaintsEffectEnum string
@@ -64,23 +64,23 @@ const (
 )
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsTaints struct {
-	Effect *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsTaintsEffectEnum `json:"effect"`
-	Key    *string                                                                                 `json:"key"`
-	Value  *string                                                                                 `json:"value"`
+	Effect *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsTaintsEffectEnum `json:"effect,omitempty"`
+	Key    *string                                                                                 `json:"key,omitempty"`
+	Value  *string                                                                                 `json:"value,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePools struct {
-	AutoScale *bool                                                                          `json:"auto_scale"`
+	AutoScale *bool                                                                          `json:"auto_scale,omitempty"`
 	Count     int64                                                                          `json:"count"`
-	ID        *string                                                                        `json:"id"`
-	Labels    map[string]interface{}                                                         `json:"labels"`
-	MaxNodes  *int64                                                                         `json:"max_nodes"`
-	MinNodes  *int64                                                                         `json:"min_nodes"`
+	ID        *string                                                                        `json:"id,omitempty"`
+	Labels    map[string]interface{}                                                         `json:"labels,omitempty"`
+	MaxNodes  *int64                                                                         `json:"max_nodes,omitempty"`
+	MinNodes  *int64                                                                         `json:"min_nodes,omitempty"`
 	Name      string                                                                         `json:"name"`
-	Nodes     []ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodes  `json:"nodes"`
+	Nodes     []ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsNodes  `json:"nodes,omitempty"`
 	Size      string                                                                         `json:"size"`
-	Tags      []string                                                                       `json:"tags"`
-	Taints    []ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsTaints `json:"taints"`
+	Tags      []string                                                                       `json:"tags,omitempty"`
+	Taints    []ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePoolsTaints `json:"taints,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersStatusStateEnum string
@@ -96,43 +96,43 @@ const (
 )
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClustersStatus struct {
-	Message *string                                                                       `json:"message"`
-	State   *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersStatusStateEnum `json:"state"`
+	Message *string                                                                       `json:"message,omitempty"`
+	State   *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersStatusStateEnum `json:"state,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONKubernetesClusters struct {
-	AutoUpgrade       *bool                                                                           `json:"auto_upgrade"`
-	ClusterSubnet     *string                                                                         `json:"cluster_subnet"`
-	CreatedAt         *time.Time                                                                      `json:"created_at"`
-	Endpoint          *string                                                                         `json:"endpoint"`
-	ID                *string                                                                         `json:"id"`
-	Ipv4              *string                                                                         `json:"ipv4"`
-	MaintenancePolicy *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersMaintenancePolicy `json:"maintenance_policy"`
+	AutoUpgrade       *bool                                                                           `json:"auto_upgrade,omitempty"`
+	ClusterSubnet     *string                                                                         `json:"cluster_subnet,omitempty"`
+	CreatedAt         *time.Time                                                                      `json:"created_at,omitempty"`
+	Endpoint          *string                                                                         `json:"endpoint,omitempty"`
+	ID                *string                                                                         `json:"id,omitempty"`
+	Ipv4              *string                                                                         `json:"ipv4,omitempty"`
+	MaintenancePolicy *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersMaintenancePolicy `json:"maintenance_policy,omitempty"`
 	Name              string                                                                          `json:"name"`
 	NodePools         []ListAllKubernetesClusters200ApplicationJSONKubernetesClustersNodePools        `json:"node_pools"`
 	Region            string                                                                          `json:"region"`
-	RegistryEnabled   *bool                                                                           `json:"registry_enabled"`
-	ServiceSubnet     *string                                                                         `json:"service_subnet"`
-	Status            *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersStatus            `json:"status"`
-	SurgeUpgrade      *bool                                                                           `json:"surge_upgrade"`
-	Tags              []string                                                                        `json:"tags"`
-	UpdatedAt         *time.Time                                                                      `json:"updated_at"`
+	RegistryEnabled   *bool                                                                           `json:"registry_enabled,omitempty"`
+	ServiceSubnet     *string                                                                         `json:"service_subnet,omitempty"`
+	Status            *ListAllKubernetesClusters200ApplicationJSONKubernetesClustersStatus            `json:"status,omitempty"`
+	SurgeUpgrade      *bool                                                                           `json:"surge_upgrade,omitempty"`
+	Tags              []string                                                                        `json:"tags,omitempty"`
+	UpdatedAt         *time.Time                                                                      `json:"updated_at,omitempty"`
 	Version           string                                                                          `json:"version"`
-	VpcUUID           *string                                                                         `json:"vpc_uuid"`
+	VpcUUID           *string                                                                         `json:"vpc_uuid,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllKubernetesClusters200ApplicationJSONMeta struct {
@@ -140,15 +140,15 @@ type ListAllKubernetesClusters200ApplicationJSONMeta struct {
 }
 
 type ListAllKubernetesClusters200ApplicationJSON struct {
-	KubernetesClusters []ListAllKubernetesClusters200ApplicationJSONKubernetesClusters `json:"kubernetes_clusters"`
-	Links              *ListAllKubernetesClusters200ApplicationJSONLinks               `json:"links"`
+	KubernetesClusters []ListAllKubernetesClusters200ApplicationJSONKubernetesClusters `json:"kubernetes_clusters,omitempty"`
+	Links              *ListAllKubernetesClusters200ApplicationJSONLinks               `json:"links,omitempty"`
 	Meta               ListAllKubernetesClusters200ApplicationJSONMeta                 `json:"meta"`
 }
 
 type ListAllKubernetesClusters401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllKubernetesClustersResponse struct {

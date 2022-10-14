@@ -5,23 +5,23 @@ import (
 )
 
 type DescribeModelPackageOutput struct {
-	ApprovalDescription          *string                              `json:"ApprovalDescription"`
-	CertifyForMarketplace        *bool                                `json:"CertifyForMarketplace"`
-	CreatedBy                    *UserContext                         `json:"CreatedBy"`
+	ApprovalDescription          *string                              `json:"ApprovalDescription,omitempty"`
+	CertifyForMarketplace        *bool                                `json:"CertifyForMarketplace,omitempty"`
+	CreatedBy                    *UserContext                         `json:"CreatedBy,omitempty"`
 	CreationTime                 time.Time                            `json:"CreationTime"`
-	InferenceSpecification       *InferenceSpecification              `json:"InferenceSpecification"`
-	LastModifiedBy               *UserContext                         `json:"LastModifiedBy"`
-	LastModifiedTime             *time.Time                           `json:"LastModifiedTime"`
-	MetadataProperties           *MetadataProperties                  `json:"MetadataProperties"`
-	ModelApprovalStatus          *ModelApprovalStatusEnum             `json:"ModelApprovalStatus"`
-	ModelMetrics                 *ModelMetrics                        `json:"ModelMetrics"`
+	InferenceSpecification       *InferenceSpecification              `json:"InferenceSpecification,omitempty"`
+	LastModifiedBy               *UserContext                         `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime             *time.Time                           `json:"LastModifiedTime,omitempty"`
+	MetadataProperties           *MetadataProperties                  `json:"MetadataProperties,omitempty"`
+	ModelApprovalStatus          *ModelApprovalStatusEnum             `json:"ModelApprovalStatus,omitempty"`
+	ModelMetrics                 *ModelMetrics                        `json:"ModelMetrics,omitempty"`
 	ModelPackageArn              string                               `json:"ModelPackageArn"`
-	ModelPackageDescription      *string                              `json:"ModelPackageDescription"`
-	ModelPackageGroupName        *string                              `json:"ModelPackageGroupName"`
+	ModelPackageDescription      *string                              `json:"ModelPackageDescription,omitempty"`
+	ModelPackageGroupName        *string                              `json:"ModelPackageGroupName,omitempty"`
 	ModelPackageName             string                               `json:"ModelPackageName"`
 	ModelPackageStatus           ModelPackageStatusEnum               `json:"ModelPackageStatus"`
 	ModelPackageStatusDetails    ModelPackageStatusDetails            `json:"ModelPackageStatusDetails"`
-	ModelPackageVersion          *int64                               `json:"ModelPackageVersion"`
-	SourceAlgorithmSpecification *SourceAlgorithmSpecification        `json:"SourceAlgorithmSpecification"`
-	ValidationSpecification      *ModelPackageValidationSpecification `json:"ValidationSpecification"`
+	ModelPackageVersion          *int64                               `json:"ModelPackageVersion,omitempty"`
+	SourceAlgorithmSpecification *SourceAlgorithmSpecification        `json:"SourceAlgorithmSpecification,omitempty"`
+	ValidationSpecification      *ModelPackageValidationSpecification `json:"ValidationSpecification,omitempty"`
 }

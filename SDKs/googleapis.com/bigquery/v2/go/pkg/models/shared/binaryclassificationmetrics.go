@@ -1,8 +1,8 @@
 package shared
 
 type BinaryClassificationMetrics struct {
-	AggregateClassificationMetrics *AggregateClassificationMetrics `json:"aggregateClassificationMetrics"`
-	BinaryConfusionMatrixList      []BinaryConfusionMatrix         `json:"binaryConfusionMatrixList"`
-	NegativeLabel                  *string                         `json:"negativeLabel"`
-	PositiveLabel                  *string                         `json:"positiveLabel"`
+	AggregateClassificationMetrics *AggregateClassificationMetrics `json:"aggregateClassificationMetrics,omitempty"`
+	BinaryConfusionMatrixList      []BinaryConfusionMatrix         `json:"binaryConfusionMatrixList,omitempty"`
+	NegativeLabel                  *string                         `json:"negativeLabel,omitempty"`
+	PositiveLabel                  *string                         `json:"positiveLabel,omitempty"`
 }

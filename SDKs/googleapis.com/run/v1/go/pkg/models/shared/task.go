@@ -1,9 +1,9 @@
 package shared
 
 type Task struct {
-	APIVersion *string     `json:"apiVersion"`
-	Kind       *string     `json:"kind"`
-	Metadata   *ObjectMeta `json:"metadata"`
-	Spec       *TaskSpec   `json:"spec"`
-	Status     *TaskStatus `json:"status"`
+	APIVersion *string     `json:"apiVersion,omitempty"`
+	Kind       *string     `json:"kind,omitempty"`
+	Metadata   *ObjectMeta `json:"metadata,omitempty"`
+	Spec       *TaskSpec   `json:"spec,omitempty"`
+	Status     *TaskStatus `json:"status,omitempty"`
 }

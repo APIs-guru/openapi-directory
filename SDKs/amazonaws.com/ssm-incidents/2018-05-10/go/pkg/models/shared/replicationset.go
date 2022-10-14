@@ -5,7 +5,7 @@ import (
 )
 
 type ReplicationSet struct {
-	Arn               *string                  `json:"arn"`
+	Arn               *string                  `json:"arn,omitempty"`
 	CreatedBy         string                   `json:"createdBy"`
 	CreatedTime       time.Time                `json:"createdTime"`
 	DeletionProtected bool                     `json:"deletionProtected"`

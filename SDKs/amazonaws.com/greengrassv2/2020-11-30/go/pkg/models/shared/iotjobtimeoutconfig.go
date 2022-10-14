@@ -1,5 +1,5 @@
 package shared
 
 type IoTJobTimeoutConfig struct {
-	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes"`
+	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes,omitempty"`
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3TestCaseResult struct {
-	ConversationTurns []GoogleCloudDialogflowCxV3ConversationTurn            `json:"conversationTurns"`
-	Environment       *string                                                `json:"environment"`
-	Name              *string                                                `json:"name"`
-	TestResult        *GoogleCloudDialogflowCxV3TestCaseResultTestResultEnum `json:"testResult"`
-	TestTime          *string                                                `json:"testTime"`
+	ConversationTurns []GoogleCloudDialogflowCxV3ConversationTurn            `json:"conversationTurns,omitempty"`
+	Environment       *string                                                `json:"environment,omitempty"`
+	Name              *string                                                `json:"name,omitempty"`
+	TestResult        *GoogleCloudDialogflowCxV3TestCaseResultTestResultEnum `json:"testResult,omitempty"`
+	TestTime          *string                                                `json:"testTime,omitempty"`
 }

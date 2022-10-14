@@ -1,6 +1,6 @@
 package shared
 
 type WebfontList struct {
-	Items []Webfont `json:"items"`
-	Kind  *string   `json:"kind"`
+	Items []Webfont `json:"items,omitempty"`
+	Kind  *string   `json:"kind,omitempty"`
 }

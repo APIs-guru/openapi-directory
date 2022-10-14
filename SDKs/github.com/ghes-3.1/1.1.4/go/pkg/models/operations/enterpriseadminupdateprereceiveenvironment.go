@@ -9,8 +9,8 @@ type EnterpriseAdminUpdatePreReceiveEnvironmentPathParams struct {
 }
 
 type EnterpriseAdminUpdatePreReceiveEnvironmentRequestBody struct {
-	ImageURL *string `json:"image_url"`
-	Name     *string `json:"name"`
+	ImageURL *string `json:"image_url,omitempty"`
+	Name     *string `json:"name,omitempty"`
 }
 
 type EnterpriseAdminUpdatePreReceiveEnvironmentRequest struct {
@@ -19,14 +19,14 @@ type EnterpriseAdminUpdatePreReceiveEnvironmentRequest struct {
 }
 
 type EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSONErrors struct {
-	Code     *string `json:"code"`
-	Message  *string `json:"message"`
-	Resource *string `json:"resource"`
+	Code     *string `json:"code,omitempty"`
+	Message  *string `json:"message,omitempty"`
+	Resource *string `json:"resource,omitempty"`
 }
 
 type EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSON struct {
-	Errors  []EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSONErrors `json:"errors"`
-	Message *string                                                              `json:"message"`
+	Errors  []EnterpriseAdminUpdatePreReceiveEnvironment422ApplicationJSONErrors `json:"errors,omitempty"`
+	Message *string                                                              `json:"message,omitempty"`
 }
 
 type EnterpriseAdminUpdatePreReceiveEnvironmentResponse struct {

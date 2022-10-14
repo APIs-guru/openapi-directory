@@ -15,7 +15,7 @@ type ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecks struct {
 }
 
 type ChecksSetSuitesPreferencesRequestBody struct {
-	AutoTriggerChecks []ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecks `json:"auto_trigger_checks"`
+	AutoTriggerChecks []ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecks `json:"auto_trigger_checks,omitempty"`
 }
 
 type ChecksSetSuitesPreferencesRequest struct {

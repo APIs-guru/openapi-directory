@@ -29,12 +29,12 @@ type ListObjectPoliciesHeaders struct {
 }
 
 type ListObjectPoliciesRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type ListObjectPoliciesRequestBody struct {
-	MaxResults      *int64                                       `json:"MaxResults"`
-	NextToken       *string                                      `json:"NextToken"`
+	MaxResults      *int64                                       `json:"MaxResults,omitempty"`
+	NextToken       *string                                      `json:"NextToken,omitempty"`
 	ObjectReference ListObjectPoliciesRequestBodyObjectReference `json:"ObjectReference"`
 }
 

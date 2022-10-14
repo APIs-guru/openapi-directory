@@ -1,16 +1,16 @@
 package shared
 
 type ResourceUpdateModel struct {
-	Address      *AddressUpdateModel         `json:"address"`
-	Availability *AvailabilityInputModel     `json:"availability"`
-	Contact      *ContactUpdateModel         `json:"contact"`
-	CustomFields *CustomFieldUpdateModel     `json:"customFields"`
-	Description  *string                     `json:"description"`
-	Email        *string                     `json:"email"`
-	GroupID      *string                     `json:"groupId"`
-	LocationID   *string                     `json:"locationId"`
-	Name         *string                     `json:"name"`
-	Options      *ResourceOptionsUpdateModel `json:"options"`
-	ServiceIds   []string                    `json:"serviceIds"`
-	TimezoneID   *string                     `json:"timezoneId"`
+	Address      *AddressUpdateModel         `json:"address,omitempty"`
+	Availability *AvailabilityInputModel     `json:"availability,omitempty"`
+	Contact      *ContactUpdateModel         `json:"contact,omitempty"`
+	CustomFields *CustomFieldUpdateModel     `json:"customFields,omitempty"`
+	Description  *string                     `json:"description,omitempty"`
+	Email        *string                     `json:"email,omitempty"`
+	GroupID      *string                     `json:"groupId,omitempty"`
+	LocationID   *string                     `json:"locationId,omitempty"`
+	Name         *string                     `json:"name,omitempty"`
+	Options      *ResourceOptionsUpdateModel `json:"options,omitempty"`
+	ServiceIds   []string                    `json:"serviceIds,omitempty"`
+	TimezoneID   *string                     `json:"timezoneId,omitempty"`
 }

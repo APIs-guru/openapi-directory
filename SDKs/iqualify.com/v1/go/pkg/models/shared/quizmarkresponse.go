@@ -5,12 +5,12 @@ import (
 )
 
 type QuizMarkResponse struct {
-	Attempts        *int32     `json:"attempts"`
-	LastAttemptAt   *time.Time `json:"lastAttemptAt"`
-	LearnerEmail    *string    `json:"learnerEmail"`
-	LearnerFullname *string    `json:"learnerFullname"`
-	LearnerPersonID *string    `json:"learnerPersonId"`
-	Mark            *string    `json:"mark"`
-	QuizID          *string    `json:"quizId"`
-	QuizTitle       *string    `json:"quizTitle"`
+	Attempts        *int32     `json:"attempts,omitempty"`
+	LastAttemptAt   *time.Time `json:"lastAttemptAt,omitempty"`
+	LearnerEmail    *string    `json:"learnerEmail,omitempty"`
+	LearnerFullname *string    `json:"learnerFullname,omitempty"`
+	LearnerPersonID *string    `json:"learnerPersonId,omitempty"`
+	Mark            *string    `json:"mark,omitempty"`
+	QuizID          *string    `json:"quizId,omitempty"`
+	QuizTitle       *string    `json:"quizTitle,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type UpdateFlowResponse struct {
-	FlowStatus *FlowStatusEnum `json:"flowStatus"`
+	FlowStatus *FlowStatusEnum `json:"flowStatus,omitempty"`
 }

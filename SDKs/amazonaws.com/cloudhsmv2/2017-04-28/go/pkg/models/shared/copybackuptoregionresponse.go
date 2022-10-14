@@ -1,5 +1,5 @@
 package shared
 
 type CopyBackupToRegionResponse struct {
-	DestinationBackup *DestinationBackup `json:"DestinationBackup"`
+	DestinationBackup *DestinationBackup `json:"DestinationBackup,omitempty"`
 }

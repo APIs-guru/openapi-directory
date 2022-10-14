@@ -15,31 +15,31 @@ const (
 )
 
 type PayRunPayRunPaySchedulePaySchedule struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type PayRunPayRunProceedingPayRunProceedingPayRun struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type PayRunPayRunPayRun struct {
-	Executed         *time.Time                                    `json:"Executed"`
-	IsSupplementary  *bool                                         `json:"IsSupplementary"`
-	PayFrequency     *PayRunPayRunPayFrequencyPayFrequencyEnum     `json:"PayFrequency"`
-	PaySchedule      *PayRunPayRunPaySchedulePaySchedule           `json:"PaySchedule"`
-	PaymentDate      *time.Time                                    `json:"PaymentDate"`
-	PeriodEnd        *time.Time                                    `json:"PeriodEnd"`
-	PeriodStart      *time.Time                                    `json:"PeriodStart"`
-	ProceedingPayRun *PayRunPayRunProceedingPayRunProceedingPayRun `json:"ProceedingPayRun"`
-	Sequence         *int32                                        `json:"Sequence"`
-	TaxPeriod        *int32                                        `json:"TaxPeriod"`
-	TaxYear          *int32                                        `json:"TaxYear"`
+	Executed         *time.Time                                    `json:"Executed,omitempty"`
+	IsSupplementary  *bool                                         `json:"IsSupplementary,omitempty"`
+	PayFrequency     *PayRunPayRunPayFrequencyPayFrequencyEnum     `json:"PayFrequency,omitempty"`
+	PaySchedule      *PayRunPayRunPaySchedulePaySchedule           `json:"PaySchedule,omitempty"`
+	PaymentDate      *time.Time                                    `json:"PaymentDate,omitempty"`
+	PeriodEnd        *time.Time                                    `json:"PeriodEnd,omitempty"`
+	PeriodStart      *time.Time                                    `json:"PeriodStart,omitempty"`
+	ProceedingPayRun *PayRunPayRunProceedingPayRunProceedingPayRun `json:"ProceedingPayRun,omitempty"`
+	Sequence         *int32                                        `json:"Sequence,omitempty"`
+	TaxPeriod        *int32                                        `json:"TaxPeriod,omitempty"`
+	TaxYear          *int32                                        `json:"TaxYear,omitempty"`
 }
 
 type PayRun struct {
-	PayRun *PayRunPayRunPayRun `json:"PayRun"`
+	PayRun *PayRunPayRunPayRun `json:"PayRun,omitempty"`
 }

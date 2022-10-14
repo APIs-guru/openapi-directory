@@ -1,6 +1,6 @@
 package shared
 
 type CommitCursorRequest struct {
-	Cursor    *Cursor `json:"cursor"`
-	Partition *string `json:"partition"`
+	Cursor    *Cursor `json:"cursor,omitempty"`
+	Partition *string `json:"partition,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CreateCustomerGroupResponse struct {
-	Errors []Error        `json:"errors"`
-	Group  *CustomerGroup `json:"group"`
+	Errors []Error        `json:"errors,omitempty"`
+	Group  *CustomerGroup `json:"group,omitempty"`
 }

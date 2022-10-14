@@ -44,19 +44,19 @@ const (
 )
 
 type CreativeServingDecision struct {
-	AdTechnologyProviders       *AdTechnologyProviders                          `json:"adTechnologyProviders"`
-	ChinaPolicyCompliance       *PolicyCompliance                               `json:"chinaPolicyCompliance"`
-	DealsPolicyCompliance       *PolicyCompliance                               `json:"dealsPolicyCompliance"`
-	DetectedAdvertisers         []AdvertiserAndBrand                            `json:"detectedAdvertisers"`
-	DetectedAttributes          []CreativeServingDecisionDetectedAttributesEnum `json:"detectedAttributes"`
-	DetectedClickThroughUrls    []string                                        `json:"detectedClickThroughUrls"`
-	DetectedDomains             []string                                        `json:"detectedDomains"`
-	DetectedLanguages           []string                                        `json:"detectedLanguages"`
-	DetectedProductCategories   []int32                                         `json:"detectedProductCategories"`
-	DetectedSensitiveCategories []int32                                         `json:"detectedSensitiveCategories"`
-	DetectedVendorIds           []int32                                         `json:"detectedVendorIds"`
-	LastStatusUpdate            *string                                         `json:"lastStatusUpdate"`
-	NetworkPolicyCompliance     *PolicyCompliance                               `json:"networkPolicyCompliance"`
-	PlatformPolicyCompliance    *PolicyCompliance                               `json:"platformPolicyCompliance"`
-	RussiaPolicyCompliance      *PolicyCompliance                               `json:"russiaPolicyCompliance"`
+	AdTechnologyProviders       *AdTechnologyProviders                          `json:"adTechnologyProviders,omitempty"`
+	ChinaPolicyCompliance       *PolicyCompliance                               `json:"chinaPolicyCompliance,omitempty"`
+	DealsPolicyCompliance       *PolicyCompliance                               `json:"dealsPolicyCompliance,omitempty"`
+	DetectedAdvertisers         []AdvertiserAndBrand                            `json:"detectedAdvertisers,omitempty"`
+	DetectedAttributes          []CreativeServingDecisionDetectedAttributesEnum `json:"detectedAttributes,omitempty"`
+	DetectedClickThroughUrls    []string                                        `json:"detectedClickThroughUrls,omitempty"`
+	DetectedDomains             []string                                        `json:"detectedDomains,omitempty"`
+	DetectedLanguages           []string                                        `json:"detectedLanguages,omitempty"`
+	DetectedProductCategories   []int32                                         `json:"detectedProductCategories,omitempty"`
+	DetectedSensitiveCategories []int32                                         `json:"detectedSensitiveCategories,omitempty"`
+	DetectedVendorIds           []int32                                         `json:"detectedVendorIds,omitempty"`
+	LastStatusUpdate            *string                                         `json:"lastStatusUpdate,omitempty"`
+	NetworkPolicyCompliance     *PolicyCompliance                               `json:"networkPolicyCompliance,omitempty"`
+	PlatformPolicyCompliance    *PolicyCompliance                               `json:"platformPolicyCompliance,omitempty"`
+	RussiaPolicyCompliance      *PolicyCompliance                               `json:"russiaPolicyCompliance,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type GeneralCommand struct {
-	Arguments         map[string]string       `json:"Arguments"`
-	ControllingUserID *string                 `json:"ControllingUserId"`
-	Name              *GeneralCommandTypeEnum `json:"Name"`
+	Arguments         map[string]string       `json:"Arguments,omitempty"`
+	ControllingUserID *string                 `json:"ControllingUserId,omitempty"`
+	Name              *GeneralCommandTypeEnum `json:"Name,omitempty"`
 }

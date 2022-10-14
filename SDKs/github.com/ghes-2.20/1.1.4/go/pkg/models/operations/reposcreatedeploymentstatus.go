@@ -31,13 +31,13 @@ const (
 )
 
 type ReposCreateDeploymentStatusRequestBody struct {
-	AutoInactive   *bool                                                  `json:"auto_inactive"`
-	Description    *string                                                `json:"description"`
-	Environment    *ReposCreateDeploymentStatusRequestBodyEnvironmentEnum `json:"environment"`
-	EnvironmentURL *string                                                `json:"environment_url"`
-	LogURL         *string                                                `json:"log_url"`
+	AutoInactive   *bool                                                  `json:"auto_inactive,omitempty"`
+	Description    *string                                                `json:"description,omitempty"`
+	Environment    *ReposCreateDeploymentStatusRequestBodyEnvironmentEnum `json:"environment,omitempty"`
+	EnvironmentURL *string                                                `json:"environment_url,omitempty"`
+	LogURL         *string                                                `json:"log_url,omitempty"`
 	State          ReposCreateDeploymentStatusRequestBodyStateEnum        `json:"state"`
-	TargetURL      *string                                                `json:"target_url"`
+	TargetURL      *string                                                `json:"target_url,omitempty"`
 }
 
 type ReposCreateDeploymentStatusRequest struct {

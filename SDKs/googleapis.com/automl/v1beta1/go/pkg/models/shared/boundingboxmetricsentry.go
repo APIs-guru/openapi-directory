@@ -1,7 +1,7 @@
 package shared
 
 type BoundingBoxMetricsEntry struct {
-	ConfidenceMetricsEntries []BoundingBoxMetricsEntryConfidenceMetricsEntry `json:"confidenceMetricsEntries"`
-	IouThreshold             *float32                                        `json:"iouThreshold"`
-	MeanAveragePrecision     *float32                                        `json:"meanAveragePrecision"`
+	ConfidenceMetricsEntries []BoundingBoxMetricsEntryConfidenceMetricsEntry `json:"confidenceMetricsEntries,omitempty"`
+	IouThreshold             *float32                                        `json:"iouThreshold,omitempty"`
+	MeanAveragePrecision     *float32                                        `json:"meanAveragePrecision,omitempty"`
 }

@@ -16,7 +16,7 @@ type DescribeSimulationApplicationHeaders struct {
 
 type DescribeSimulationApplicationRequestBody struct {
 	Application        string  `json:"application"`
-	ApplicationVersion *string `json:"applicationVersion"`
+	ApplicationVersion *string `json:"applicationVersion,omitempty"`
 }
 
 type DescribeSimulationApplicationRequest struct {

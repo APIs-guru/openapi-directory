@@ -5,6 +5,6 @@ import (
 )
 
 type CertificateValidity struct {
-	NotAfter  *time.Time `json:"notAfter"`
-	NotBefore *time.Time `json:"notBefore"`
+	NotAfter  *time.Time `json:"notAfter,omitempty"`
+	NotBefore *time.Time `json:"notBefore,omitempty"`
 }

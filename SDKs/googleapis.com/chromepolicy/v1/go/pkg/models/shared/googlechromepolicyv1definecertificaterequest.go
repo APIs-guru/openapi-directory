@@ -1,8 +1,8 @@
 package shared
 
 type GoogleChromePolicyV1DefineCertificateRequest struct {
-	CeritificateName *string                              `json:"ceritificateName"`
-	Certificate      *string                              `json:"certificate"`
-	Settings         []GoogleChromePolicyV1NetworkSetting `json:"settings"`
-	TargetResource   *string                              `json:"targetResource"`
+	CeritificateName *string                              `json:"ceritificateName,omitempty"`
+	Certificate      *string                              `json:"certificate,omitempty"`
+	Settings         []GoogleChromePolicyV1NetworkSetting `json:"settings,omitempty"`
+	TargetResource   *string                              `json:"targetResource,omitempty"`
 }

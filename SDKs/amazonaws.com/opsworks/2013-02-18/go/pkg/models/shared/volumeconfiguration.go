@@ -1,11 +1,11 @@
 package shared
 
 type VolumeConfiguration struct {
-	Encrypted     *bool   `json:"Encrypted"`
-	Iops          *int64  `json:"Iops"`
+	Encrypted     *bool   `json:"Encrypted,omitempty"`
+	Iops          *int64  `json:"Iops,omitempty"`
 	MountPoint    string  `json:"MountPoint"`
 	NumberOfDisks int64   `json:"NumberOfDisks"`
-	RaidLevel     *int64  `json:"RaidLevel"`
+	RaidLevel     *int64  `json:"RaidLevel,omitempty"`
 	Size          int64   `json:"Size"`
-	VolumeType    *string `json:"VolumeType"`
+	VolumeType    *string `json:"VolumeType,omitempty"`
 }

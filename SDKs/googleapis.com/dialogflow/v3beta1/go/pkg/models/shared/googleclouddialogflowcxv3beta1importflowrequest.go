@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1ImportFlowRequest struct {
-	FlowContent  *string                                                          `json:"flowContent"`
-	FlowURI      *string                                                          `json:"flowUri"`
-	ImportOption *GoogleCloudDialogflowCxV3beta1ImportFlowRequestImportOptionEnum `json:"importOption"`
+	FlowContent  *string                                                          `json:"flowContent,omitempty"`
+	FlowURI      *string                                                          `json:"flowUri,omitempty"`
+	ImportOption *GoogleCloudDialogflowCxV3beta1ImportFlowRequestImportOptionEnum `json:"importOption,omitempty"`
 }

@@ -9,11 +9,11 @@ const (
 )
 
 type TraceSpan struct {
-	EndTime      *string            `json:"endTime"`
-	Kind         *TraceSpanKindEnum `json:"kind"`
-	Labels       map[string]string  `json:"labels"`
-	Name         *string            `json:"name"`
-	ParentSpanID *string            `json:"parentSpanId"`
-	SpanID       *string            `json:"spanId"`
-	StartTime    *string            `json:"startTime"`
+	EndTime      *string            `json:"endTime,omitempty"`
+	Kind         *TraceSpanKindEnum `json:"kind,omitempty"`
+	Labels       map[string]string  `json:"labels,omitempty"`
+	Name         *string            `json:"name,omitempty"`
+	ParentSpanID *string            `json:"parentSpanId,omitempty"`
+	SpanID       *string            `json:"spanId,omitempty"`
+	StartTime    *string            `json:"startTime,omitempty"`
 }

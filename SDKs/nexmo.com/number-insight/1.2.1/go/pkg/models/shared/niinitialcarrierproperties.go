@@ -14,8 +14,8 @@ const (
 )
 
 type NiInitialCarrierProperties struct {
-	Country     *string                                    `json:"country"`
-	Name        *string                                    `json:"name"`
-	NetworkCode *string                                    `json:"network_code"`
-	NetworkType *NiInitialCarrierPropertiesNetworkTypeEnum `json:"network_type"`
+	Country     *string                                    `json:"country,omitempty"`
+	Name        *string                                    `json:"name,omitempty"`
+	NetworkCode *string                                    `json:"network_code,omitempty"`
+	NetworkType *NiInitialCarrierPropertiesNetworkTypeEnum `json:"network_type,omitempty"`
 }

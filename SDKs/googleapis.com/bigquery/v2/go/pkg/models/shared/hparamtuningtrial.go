@@ -13,14 +13,14 @@ const (
 )
 
 type HparamTuningTrial struct {
-	EndTimeMs                     *string                      `json:"endTimeMs"`
-	ErrorMessage                  *string                      `json:"errorMessage"`
-	EvalLoss                      *float64                     `json:"evalLoss"`
-	EvaluationMetrics             *EvaluationMetrics           `json:"evaluationMetrics"`
-	HparamTuningEvaluationMetrics *EvaluationMetrics           `json:"hparamTuningEvaluationMetrics"`
-	Hparams                       *TrainingOptions             `json:"hparams"`
-	StartTimeMs                   *string                      `json:"startTimeMs"`
-	Status                        *HparamTuningTrialStatusEnum `json:"status"`
-	TrainingLoss                  *float64                     `json:"trainingLoss"`
-	TrialID                       *string                      `json:"trialId"`
+	EndTimeMs                     *string                      `json:"endTimeMs,omitempty"`
+	ErrorMessage                  *string                      `json:"errorMessage,omitempty"`
+	EvalLoss                      *float64                     `json:"evalLoss,omitempty"`
+	EvaluationMetrics             *EvaluationMetrics           `json:"evaluationMetrics,omitempty"`
+	HparamTuningEvaluationMetrics *EvaluationMetrics           `json:"hparamTuningEvaluationMetrics,omitempty"`
+	Hparams                       *TrainingOptions             `json:"hparams,omitempty"`
+	StartTimeMs                   *string                      `json:"startTimeMs,omitempty"`
+	Status                        *HparamTuningTrialStatusEnum `json:"status,omitempty"`
+	TrainingLoss                  *float64                     `json:"trainingLoss,omitempty"`
+	TrialID                       *string                      `json:"trialId,omitempty"`
 }

@@ -14,7 +14,7 @@ type CreateProjectStatusForProjectQueryParams struct {
 }
 
 type CreateProjectStatusForProjectRequestBody struct {
-	Data *shared.ProjectStatusRequest `json:"data"`
+	Data *shared.ProjectStatusRequest `json:"data,omitempty"`
 }
 
 type CreateProjectStatusForProjectRequest struct {
@@ -24,7 +24,7 @@ type CreateProjectStatusForProjectRequest struct {
 }
 
 type CreateProjectStatusForProject201ApplicationJSON struct {
-	Data *shared.ProjectStatusResponse `json:"data"`
+	Data *shared.ProjectStatusResponse `json:"data,omitempty"`
 }
 
 type CreateProjectStatusForProjectResponse struct {

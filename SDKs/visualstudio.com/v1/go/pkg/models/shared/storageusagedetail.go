@@ -1,7 +1,7 @@
 package shared
 
 type StorageUsageDetail struct {
-	Size  *int32   `json:"size"`
-	Sku   *string  `json:"sku"`
-	Usage *float64 `json:"usage"`
+	Size  *int32   `json:"size,omitempty"`
+	Sku   *string  `json:"sku,omitempty"`
+	Usage *float64 `json:"usage,omitempty"`
 }

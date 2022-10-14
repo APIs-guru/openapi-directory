@@ -1,15 +1,15 @@
 package shared
 
 type AccountStatusDataQualityIssue struct {
-	Country        *string                    `json:"country"`
-	Destination    *string                    `json:"destination"`
-	Detail         *string                    `json:"detail"`
-	DisplayedValue *string                    `json:"displayedValue"`
-	ExampleItems   []AccountStatusExampleItem `json:"exampleItems"`
-	ID             *string                    `json:"id"`
-	LastChecked    *string                    `json:"lastChecked"`
-	Location       *string                    `json:"location"`
-	NumItems       *int64                     `json:"numItems"`
-	Severity       *string                    `json:"severity"`
-	SubmittedValue *string                    `json:"submittedValue"`
+	Country        *string                    `json:"country,omitempty"`
+	Destination    *string                    `json:"destination,omitempty"`
+	Detail         *string                    `json:"detail,omitempty"`
+	DisplayedValue *string                    `json:"displayedValue,omitempty"`
+	ExampleItems   []AccountStatusExampleItem `json:"exampleItems,omitempty"`
+	ID             *string                    `json:"id,omitempty"`
+	LastChecked    *string                    `json:"lastChecked,omitempty"`
+	Location       *string                    `json:"location,omitempty"`
+	NumItems       *int64                     `json:"numItems,omitempty"`
+	Severity       *string                    `json:"severity,omitempty"`
+	SubmittedValue *string                    `json:"submittedValue,omitempty"`
 }

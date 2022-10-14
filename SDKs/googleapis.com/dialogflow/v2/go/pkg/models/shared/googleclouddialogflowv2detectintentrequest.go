@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudDialogflowV2DetectIntentRequest struct {
-	InputAudio            *string                                   `json:"inputAudio"`
-	OutputAudioConfig     *GoogleCloudDialogflowV2OutputAudioConfig `json:"outputAudioConfig"`
-	OutputAudioConfigMask *string                                   `json:"outputAudioConfigMask"`
-	QueryInput            *GoogleCloudDialogflowV2QueryInput        `json:"queryInput"`
-	QueryParams           *GoogleCloudDialogflowV2QueryParameters   `json:"queryParams"`
+	InputAudio            *string                                   `json:"inputAudio,omitempty"`
+	OutputAudioConfig     *GoogleCloudDialogflowV2OutputAudioConfig `json:"outputAudioConfig,omitempty"`
+	OutputAudioConfigMask *string                                   `json:"outputAudioConfigMask,omitempty"`
+	QueryInput            *GoogleCloudDialogflowV2QueryInput        `json:"queryInput,omitempty"`
+	QueryParams           *GoogleCloudDialogflowV2QueryParameters   `json:"queryParams,omitempty"`
 }

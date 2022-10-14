@@ -10,16 +10,16 @@ const (
 )
 
 type TransferJob struct {
-	CreationTime         *string                `json:"creationTime"`
-	DeletionTime         *string                `json:"deletionTime"`
-	Description          *string                `json:"description"`
-	LastModificationTime *string                `json:"lastModificationTime"`
-	LatestOperationName  *string                `json:"latestOperationName"`
-	LoggingConfig        *LoggingConfig         `json:"loggingConfig"`
-	Name                 *string                `json:"name"`
-	NotificationConfig   *NotificationConfig    `json:"notificationConfig"`
-	ProjectID            *string                `json:"projectId"`
-	Schedule             *Schedule              `json:"schedule"`
-	Status               *TransferJobStatusEnum `json:"status"`
-	TransferSpec         *TransferSpec          `json:"transferSpec"`
+	CreationTime         *string                `json:"creationTime,omitempty"`
+	DeletionTime         *string                `json:"deletionTime,omitempty"`
+	Description          *string                `json:"description,omitempty"`
+	LastModificationTime *string                `json:"lastModificationTime,omitempty"`
+	LatestOperationName  *string                `json:"latestOperationName,omitempty"`
+	LoggingConfig        *LoggingConfig         `json:"loggingConfig,omitempty"`
+	Name                 *string                `json:"name,omitempty"`
+	NotificationConfig   *NotificationConfig    `json:"notificationConfig,omitempty"`
+	ProjectID            *string                `json:"projectId,omitempty"`
+	Schedule             *Schedule              `json:"schedule,omitempty"`
+	Status               *TransferJobStatusEnum `json:"status,omitempty"`
+	TransferSpec         *TransferSpec          `json:"transferSpec,omitempty"`
 }

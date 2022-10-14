@@ -25,14 +25,14 @@ type QueryTableRowsHeaders struct {
 }
 
 type QueryTableRowsRequestBodyFilterFormula struct {
-	ContextRowID *string `json:"contextRowId"`
-	Formula      *string `json:"formula"`
+	ContextRowID *string `json:"contextRowId,omitempty"`
+	Formula      *string `json:"formula,omitempty"`
 }
 
 type QueryTableRowsRequestBody struct {
 	FilterFormula QueryTableRowsRequestBodyFilterFormula `json:"filterFormula"`
-	MaxResults    *int64                                 `json:"maxResults"`
-	NextToken     *string                                `json:"nextToken"`
+	MaxResults    *int64                                 `json:"maxResults,omitempty"`
+	NextToken     *string                                `json:"nextToken,omitempty"`
 }
 
 type QueryTableRowsRequest struct {

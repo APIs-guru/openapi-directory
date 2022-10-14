@@ -1,5 +1,5 @@
 package shared
 
 type CertificateProviderInstance struct {
-	PluginInstance *string `json:"pluginInstance"`
+	PluginInstance *string `json:"pluginInstance,omitempty"`
 }

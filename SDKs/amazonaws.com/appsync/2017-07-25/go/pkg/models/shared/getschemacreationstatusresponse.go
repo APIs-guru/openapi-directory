@@ -1,6 +1,6 @@
 package shared
 
 type GetSchemaCreationStatusResponse struct {
-	Details *string           `json:"details"`
-	Status  *SchemaStatusEnum `json:"status"`
+	Details *string           `json:"details,omitempty"`
+	Status  *SchemaStatusEnum `json:"status,omitempty"`
 }

@@ -121,9 +121,9 @@ const (
 )
 
 type MitreAttack struct {
-	AdditionalTactics    []MitreAttackAdditionalTacticsEnum    `json:"additionalTactics"`
-	AdditionalTechniques []MitreAttackAdditionalTechniquesEnum `json:"additionalTechniques"`
-	PrimaryTactic        *MitreAttackPrimaryTacticEnum         `json:"primaryTactic"`
-	PrimaryTechniques    []MitreAttackPrimaryTechniquesEnum    `json:"primaryTechniques"`
-	Version              *string                               `json:"version"`
+	AdditionalTactics    []MitreAttackAdditionalTacticsEnum    `json:"additionalTactics,omitempty"`
+	AdditionalTechniques []MitreAttackAdditionalTechniquesEnum `json:"additionalTechniques,omitempty"`
+	PrimaryTactic        *MitreAttackPrimaryTacticEnum         `json:"primaryTactic,omitempty"`
+	PrimaryTechniques    []MitreAttackPrimaryTechniquesEnum    `json:"primaryTechniques,omitempty"`
+	Version              *string                               `json:"version,omitempty"`
 }

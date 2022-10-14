@@ -1,5 +1,5 @@
 package shared
 
 type GoogleAppsScriptTypeExecutionAPIEntryPoint struct {
-	EntryPointConfig *GoogleAppsScriptTypeExecutionAPIConfig `json:"entryPointConfig"`
+	EntryPointConfig *GoogleAppsScriptTypeExecutionAPIConfig `json:"entryPointConfig,omitempty"`
 }

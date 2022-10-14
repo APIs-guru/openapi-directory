@@ -1,8 +1,8 @@
 package shared
 
 type GroupSummary struct {
-	FilterExpression      *string                `json:"FilterExpression"`
-	GroupArn              *string                `json:"GroupARN"`
-	GroupName             *string                `json:"GroupName"`
-	InsightsConfiguration *InsightsConfiguration `json:"InsightsConfiguration"`
+	FilterExpression      *string                `json:"FilterExpression,omitempty"`
+	GroupArn              *string                `json:"GroupARN,omitempty"`
+	GroupName             *string                `json:"GroupName,omitempty"`
+	InsightsConfiguration *InsightsConfiguration `json:"InsightsConfiguration,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type PhoneNumber struct {
-	PhoneNumber *string              `json:"phoneNumber"`
-	Type        *PhoneNumberTypeEnum `json:"type"`
+	PhoneNumber *string              `json:"phoneNumber,omitempty"`
+	Type        *PhoneNumberTypeEnum `json:"type,omitempty"`
 }

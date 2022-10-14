@@ -1,6 +1,6 @@
 package shared
 
 type ListConnectionsOutput struct {
-	Connections []Connection `json:"Connections"`
-	NextToken   *string      `json:"NextToken"`
+	Connections []Connection `json:"Connections,omitempty"`
+	NextToken   *string      `json:"NextToken,omitempty"`
 }

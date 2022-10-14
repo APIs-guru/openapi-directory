@@ -5,11 +5,11 @@ import (
 )
 
 type Member struct {
-	AccountID       *string    `json:"AccountId"`
-	AdministratorID *string    `json:"AdministratorId"`
-	Email           *string    `json:"Email"`
-	InvitedAt       *time.Time `json:"InvitedAt"`
-	MasterID        *string    `json:"MasterId"`
-	MemberStatus    *string    `json:"MemberStatus"`
-	UpdatedAt       *time.Time `json:"UpdatedAt"`
+	AccountID       *string    `json:"AccountId,omitempty"`
+	AdministratorID *string    `json:"AdministratorId,omitempty"`
+	Email           *string    `json:"Email,omitempty"`
+	InvitedAt       *time.Time `json:"InvitedAt,omitempty"`
+	MasterID        *string    `json:"MasterId,omitempty"`
+	MemberStatus    *string    `json:"MemberStatus,omitempty"`
+	UpdatedAt       *time.Time `json:"UpdatedAt,omitempty"`
 }

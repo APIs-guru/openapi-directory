@@ -8,16 +8,16 @@ const (
 )
 
 type ObjectStorageKeyBucketAccess struct {
-	BucketName  *string                                      `json:"bucket_name"`
-	Cluster     *string                                      `json:"cluster"`
-	Permissions *ObjectStorageKeyBucketAccessPermissionsEnum `json:"permissions"`
+	BucketName  *string                                      `json:"bucket_name,omitempty"`
+	Cluster     *string                                      `json:"cluster,omitempty"`
+	Permissions *ObjectStorageKeyBucketAccessPermissionsEnum `json:"permissions,omitempty"`
 }
 
 type ObjectStorageKey struct {
-	AccessKey    *string                        `json:"access_key"`
-	BucketAccess []ObjectStorageKeyBucketAccess `json:"bucket_access"`
-	ID           *int64                         `json:"id"`
-	Label        *string                        `json:"label"`
-	Limited      *bool                          `json:"limited"`
-	SecretKey    *string                        `json:"secret_key"`
+	AccessKey    *string                        `json:"access_key,omitempty"`
+	BucketAccess []ObjectStorageKeyBucketAccess `json:"bucket_access,omitempty"`
+	ID           *int64                         `json:"id,omitempty"`
+	Label        *string                        `json:"label,omitempty"`
+	Limited      *bool                          `json:"limited,omitempty"`
+	SecretKey    *string                        `json:"secret_key,omitempty"`
 }

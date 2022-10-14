@@ -5,6 +5,6 @@ import (
 )
 
 type CloneDefinition struct {
-	BaseTableReference *TableReference `json:"baseTableReference"`
-	CloneTime          *time.Time      `json:"cloneTime"`
+	BaseTableReference *TableReference `json:"baseTableReference,omitempty"`
+	CloneTime          *time.Time      `json:"cloneTime,omitempty"`
 }

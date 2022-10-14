@@ -1,5 +1,5 @@
 package shared
 
 type SheetsChartProperties struct {
-	ChartImageProperties *ImageProperties `json:"chartImageProperties"`
+	ChartImageProperties *ImageProperties `json:"chartImageProperties,omitempty"`
 }

@@ -1,7 +1,7 @@
 package operations
 
 type CancelreservationRequestBody struct {
-	Reservation *string `json:"reservation"`
+	Reservation *string `json:"reservation,omitempty"`
 }
 
 type CancelreservationRequest struct {
@@ -9,9 +9,9 @@ type CancelreservationRequest struct {
 }
 
 type Cancelreservation201ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type CancelreservationResponse struct {

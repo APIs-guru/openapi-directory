@@ -16,9 +16,9 @@ type WorkflowRunUsageBillableWindows struct {
 }
 
 type WorkflowRunUsageBillable struct {
-	Macos   *WorkflowRunUsageBillableMacos   `json:"MACOS"`
-	Ubuntu  *WorkflowRunUsageBillableUbuntu  `json:"UBUNTU"`
-	Windows *WorkflowRunUsageBillableWindows `json:"WINDOWS"`
+	Macos   *WorkflowRunUsageBillableMacos   `json:"MACOS,omitempty"`
+	Ubuntu  *WorkflowRunUsageBillableUbuntu  `json:"UBUNTU,omitempty"`
+	Windows *WorkflowRunUsageBillableWindows `json:"WINDOWS,omitempty"`
 }
 
 type WorkflowRunUsage struct {

@@ -1,7 +1,7 @@
 package shared
 
 type InAppProductListing struct {
-	Benefits    []string `json:"benefits"`
-	Description *string  `json:"description"`
-	Title       *string  `json:"title"`
+	Benefits    []string `json:"benefits,omitempty"`
+	Description *string  `json:"description,omitempty"`
+	Title       *string  `json:"title,omitempty"`
 }

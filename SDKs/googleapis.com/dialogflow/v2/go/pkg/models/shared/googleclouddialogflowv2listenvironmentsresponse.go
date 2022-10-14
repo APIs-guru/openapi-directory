@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowV2ListEnvironmentsResponse struct {
-	Environments  []GoogleCloudDialogflowV2Environment `json:"environments"`
-	NextPageToken *string                              `json:"nextPageToken"`
+	Environments  []GoogleCloudDialogflowV2Environment `json:"environments,omitempty"`
+	NextPageToken *string                              `json:"nextPageToken,omitempty"`
 }

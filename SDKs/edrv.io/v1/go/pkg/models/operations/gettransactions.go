@@ -38,11 +38,11 @@ type GetTransactionsRequest struct {
 }
 
 type GetTransactions200ApplicationJSON struct {
-	HasNext     *bool         `json:"hasNext"`
-	HasPrevious *bool         `json:"hasPrevious"`
-	Message     *string       `json:"message"`
-	Ok          *bool         `json:"ok"`
-	Result      []interface{} `json:"result"`
+	HasNext     *bool         `json:"hasNext,omitempty"`
+	HasPrevious *bool         `json:"hasPrevious,omitempty"`
+	Message     *string       `json:"message,omitempty"`
+	Ok          *bool         `json:"ok,omitempty"`
+	Result      []interface{} `json:"result,omitempty"`
 }
 
 type GetTransactionsResponse struct {

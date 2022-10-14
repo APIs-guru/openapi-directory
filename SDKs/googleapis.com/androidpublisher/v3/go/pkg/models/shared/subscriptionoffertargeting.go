@@ -1,6 +1,6 @@
 package shared
 
 type SubscriptionOfferTargeting struct {
-	AcquisitionRule *AcquisitionTargetingRule `json:"acquisitionRule"`
-	UpgradeRule     *UpgradeTargetingRule     `json:"upgradeRule"`
+	AcquisitionRule *AcquisitionTargetingRule `json:"acquisitionRule,omitempty"`
+	UpgradeRule     *UpgradeTargetingRule     `json:"upgradeRule,omitempty"`
 }

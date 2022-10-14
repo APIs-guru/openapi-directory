@@ -1,8 +1,8 @@
 package shared
 
 type ListRulesRequest struct {
-	EventBusName *string `json:"EventBusName"`
-	Limit        *int64  `json:"Limit"`
-	NamePrefix   *string `json:"NamePrefix"`
-	NextToken    *string `json:"NextToken"`
+	EventBusName *string `json:"EventBusName,omitempty"`
+	Limit        *int64  `json:"Limit,omitempty"`
+	NamePrefix   *string `json:"NamePrefix,omitempty"`
+	NextToken    *string `json:"NextToken,omitempty"`
 }

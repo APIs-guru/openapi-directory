@@ -13,13 +13,13 @@ type GetEAadhaarDataInXMLFormatIDRequest struct {
 }
 
 type GetEAadhaarDataInXMLFormatID401ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetEAadhaarDataInXMLFormatID404ApplicationJSON struct {
-	Error            *interface{} `json:"error"`
-	ErrorDescription *interface{} `json:"error_description"`
+	Error            *interface{} `json:"error,omitempty"`
+	ErrorDescription *interface{} `json:"error_description,omitempty"`
 }
 
 type GetEAadhaarDataInXMLFormatIDResponse struct {

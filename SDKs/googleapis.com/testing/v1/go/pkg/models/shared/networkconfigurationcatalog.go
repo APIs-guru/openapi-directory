@@ -1,5 +1,5 @@
 package shared
 
 type NetworkConfigurationCatalog struct {
-	Configurations []NetworkConfiguration `json:"configurations"`
+	Configurations []NetworkConfiguration `json:"configurations,omitempty"`
 }

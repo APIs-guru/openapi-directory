@@ -1,14 +1,14 @@
 package shared
 
 type AwsEc2EipDetails struct {
-	AllocationID            *string `json:"AllocationId"`
-	AssociationID           *string `json:"AssociationId"`
-	Domain                  *string `json:"Domain"`
-	InstanceID              *string `json:"InstanceId"`
-	NetworkBorderGroup      *string `json:"NetworkBorderGroup"`
-	NetworkInterfaceID      *string `json:"NetworkInterfaceId"`
-	NetworkInterfaceOwnerID *string `json:"NetworkInterfaceOwnerId"`
-	PrivateIPAddress        *string `json:"PrivateIpAddress"`
-	PublicIP                *string `json:"PublicIp"`
-	PublicIpv4Pool          *string `json:"PublicIpv4Pool"`
+	AllocationID            *string `json:"AllocationId,omitempty"`
+	AssociationID           *string `json:"AssociationId,omitempty"`
+	Domain                  *string `json:"Domain,omitempty"`
+	InstanceID              *string `json:"InstanceId,omitempty"`
+	NetworkBorderGroup      *string `json:"NetworkBorderGroup,omitempty"`
+	NetworkInterfaceID      *string `json:"NetworkInterfaceId,omitempty"`
+	NetworkInterfaceOwnerID *string `json:"NetworkInterfaceOwnerId,omitempty"`
+	PrivateIPAddress        *string `json:"PrivateIpAddress,omitempty"`
+	PublicIP                *string `json:"PublicIp,omitempty"`
+	PublicIpv4Pool          *string `json:"PublicIpv4Pool,omitempty"`
 }

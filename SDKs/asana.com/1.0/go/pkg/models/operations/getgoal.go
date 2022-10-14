@@ -19,7 +19,7 @@ type GetGoalRequest struct {
 }
 
 type GetGoal200ApplicationJSON struct {
-	Data *shared.GoalResponse `json:"data"`
+	Data *shared.GoalResponse `json:"data,omitempty"`
 }
 
 type GetGoalResponse struct {

@@ -9,6 +9,6 @@ const (
 )
 
 type TableColumnProperties struct {
-	Width     *Dimension                          `json:"width"`
-	WidthType *TableColumnPropertiesWidthTypeEnum `json:"widthType"`
+	Width     *Dimension                          `json:"width,omitempty"`
+	WidthType *TableColumnPropertiesWidthTypeEnum `json:"widthType,omitempty"`
 }

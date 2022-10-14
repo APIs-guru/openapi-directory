@@ -29,7 +29,7 @@ type UpdateDomainRecordRequest struct {
 }
 
 type UpdateDomainRecordDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateDomainRecordResponse struct {

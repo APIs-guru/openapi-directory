@@ -1,8 +1,8 @@
 package shared
 
 type FileShareConfig struct {
-	CapacityGb       *string            `json:"capacityGb"`
-	Name             *string            `json:"name"`
-	NfsExportOptions []NfsExportOptions `json:"nfsExportOptions"`
-	SourceBackup     *string            `json:"sourceBackup"`
+	CapacityGb       *string            `json:"capacityGb,omitempty"`
+	Name             *string            `json:"name,omitempty"`
+	NfsExportOptions []NfsExportOptions `json:"nfsExportOptions,omitempty"`
+	SourceBackup     *string            `json:"sourceBackup,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CreateInstanceRequest struct {
-	Instance   *Instance `json:"instance"`
-	InstanceID *string   `json:"instanceId"`
+	Instance   *Instance `json:"instance,omitempty"`
+	InstanceID *string   `json:"instanceId,omitempty"`
 }

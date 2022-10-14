@@ -20,8 +20,8 @@ type CreateExperimentTemplateRequestBody struct {
 	Description    string                                                `json:"description"`
 	RoleArn        string                                                `json:"roleArn"`
 	StopConditions []shared.CreateExperimentTemplateStopConditionInput   `json:"stopConditions"`
-	Tags           map[string]string                                     `json:"tags"`
-	Targets        map[string]shared.CreateExperimentTemplateTargetInput `json:"targets"`
+	Tags           map[string]string                                     `json:"tags,omitempty"`
+	Targets        map[string]shared.CreateExperimentTemplateTargetInput `json:"targets,omitempty"`
 }
 
 type CreateExperimentTemplateRequest struct {

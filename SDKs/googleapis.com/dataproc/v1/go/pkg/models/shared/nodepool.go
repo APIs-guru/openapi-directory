@@ -8,7 +8,7 @@ const (
 )
 
 type NodePool struct {
-	ID            *string                   `json:"id"`
-	InstanceNames []string                  `json:"instanceNames"`
-	RepairAction  *NodePoolRepairActionEnum `json:"repairAction"`
+	ID            *string                   `json:"id,omitempty"`
+	InstanceNames []string                  `json:"instanceNames,omitempty"`
+	RepairAction  *NodePoolRepairActionEnum `json:"repairAction,omitempty"`
 }

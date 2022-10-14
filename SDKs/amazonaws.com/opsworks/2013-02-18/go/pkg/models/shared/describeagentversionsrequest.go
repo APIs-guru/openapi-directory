@@ -1,6 +1,6 @@
 package shared
 
 type DescribeAgentVersionsRequest struct {
-	ConfigurationManager *StackConfigurationManager `json:"ConfigurationManager"`
-	StackID              *string                    `json:"StackId"`
+	ConfigurationManager *StackConfigurationManager `json:"ConfigurationManager,omitempty"`
+	StackID              *string                    `json:"StackId,omitempty"`
 }

@@ -16,8 +16,8 @@ const (
 )
 
 type PalcsRequestBody struct {
-	CertificateParameters *PalcsRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *PalcsRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                PalcsRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Palcs400ApplicationJSON struct {
-	Error            *Palcs400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Palcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Palcs400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Palcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Palcs401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Palcs401ApplicationJSON struct {
-	Error            *Palcs401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Palcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Palcs401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Palcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Palcs404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Palcs404ApplicationJSON struct {
-	Error            *Palcs404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Palcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Palcs404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Palcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Palcs500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Palcs500ApplicationJSON struct {
-	Error            *Palcs500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Palcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Palcs500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Palcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Palcs502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Palcs502ApplicationJSON struct {
-	Error            *Palcs502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Palcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Palcs502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Palcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Palcs503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Palcs503ApplicationJSON struct {
-	Error            *Palcs503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Palcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Palcs503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Palcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Palcs504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Palcs504ApplicationJSON struct {
-	Error            *Palcs504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Palcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Palcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Palcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type PalcsResponse struct {

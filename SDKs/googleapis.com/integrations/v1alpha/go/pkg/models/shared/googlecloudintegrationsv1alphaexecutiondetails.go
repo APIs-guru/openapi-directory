@@ -14,7 +14,7 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaExecutionDetails struct {
-	AttemptStats       []GoogleCloudIntegrationsV1alphaAttemptStats             `json:"attemptStats"`
-	ExecutionSnapshots []GoogleCloudIntegrationsV1alphaExecutionSnapshot        `json:"executionSnapshots"`
-	State              *GoogleCloudIntegrationsV1alphaExecutionDetailsStateEnum `json:"state"`
+	AttemptStats       []GoogleCloudIntegrationsV1alphaAttemptStats             `json:"attemptStats,omitempty"`
+	ExecutionSnapshots []GoogleCloudIntegrationsV1alphaExecutionSnapshot        `json:"executionSnapshots,omitempty"`
+	State              *GoogleCloudIntegrationsV1alphaExecutionDetailsStateEnum `json:"state,omitempty"`
 }

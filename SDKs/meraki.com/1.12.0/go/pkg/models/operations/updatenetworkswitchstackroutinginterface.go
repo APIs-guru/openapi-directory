@@ -15,18 +15,18 @@ const (
 )
 
 type UpdateNetworkSwitchStackRoutingInterfaceRequestBodyOspfSettings struct {
-	Area             *string `json:"area"`
-	Cost             *int64  `json:"cost"`
-	IsPassiveEnabled *bool   `json:"isPassiveEnabled"`
+	Area             *string `json:"area,omitempty"`
+	Cost             *int64  `json:"cost,omitempty"`
+	IsPassiveEnabled *bool   `json:"isPassiveEnabled,omitempty"`
 }
 
 type UpdateNetworkSwitchStackRoutingInterfaceRequestBody struct {
-	InterfaceIP      *string                                                                  `json:"interfaceIp"`
-	MulticastRouting *UpdateNetworkSwitchStackRoutingInterfaceRequestBodyMulticastRoutingEnum `json:"multicastRouting"`
-	Name             *string                                                                  `json:"name"`
-	OspfSettings     *UpdateNetworkSwitchStackRoutingInterfaceRequestBodyOspfSettings         `json:"ospfSettings"`
-	Subnet           *string                                                                  `json:"subnet"`
-	VlanID           *int64                                                                   `json:"vlanId"`
+	InterfaceIP      *string                                                                  `json:"interfaceIp,omitempty"`
+	MulticastRouting *UpdateNetworkSwitchStackRoutingInterfaceRequestBodyMulticastRoutingEnum `json:"multicastRouting,omitempty"`
+	Name             *string                                                                  `json:"name,omitempty"`
+	OspfSettings     *UpdateNetworkSwitchStackRoutingInterfaceRequestBodyOspfSettings         `json:"ospfSettings,omitempty"`
+	Subnet           *string                                                                  `json:"subnet,omitempty"`
+	VlanID           *int64                                                                   `json:"vlanId,omitempty"`
 }
 
 type UpdateNetworkSwitchStackRoutingInterfaceRequest struct {

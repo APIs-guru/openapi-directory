@@ -1,5 +1,5 @@
 package shared
 
 type ImageClassificationModelDeploymentMetadata struct {
-	NodeCount *string `json:"nodeCount"`
+	NodeCount *string `json:"nodeCount,omitempty"`
 }

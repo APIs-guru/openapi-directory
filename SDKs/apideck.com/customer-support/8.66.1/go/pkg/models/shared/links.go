@@ -1,7 +1,7 @@
 package shared
 
 type Links struct {
-	Current  *string `json:"current"`
-	Next     *string `json:"next"`
-	Previous *string `json:"previous"`
+	Current  *string `json:"current,omitempty"`
+	Next     *string `json:"next,omitempty"`
+	Previous *string `json:"previous,omitempty"`
 }

@@ -18,11 +18,11 @@ type GetOpenapiVersionOpenapiRequest struct {
 }
 
 type GetOpenapiVersionOpenapi404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetOpenapiVersionOpenapi500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetOpenapiVersionOpenapiResponse struct {

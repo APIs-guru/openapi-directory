@@ -1,7 +1,7 @@
 package shared
 
 type MongoDbTarget struct {
-	ConnectionName *string `json:"ConnectionName"`
-	Path           *string `json:"Path"`
-	ScanAll        *bool   `json:"ScanAll"`
+	ConnectionName *string `json:"ConnectionName,omitempty"`
+	Path           *string `json:"Path,omitempty"`
+	ScanAll        *bool   `json:"ScanAll,omitempty"`
 }

@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudAssetV1p7beta1PartitionSpec struct {
-	PartitionKey *GoogleCloudAssetV1p7beta1PartitionSpecPartitionKeyEnum `json:"partitionKey"`
+	PartitionKey *GoogleCloudAssetV1p7beta1PartitionSpecPartitionKeyEnum `json:"partitionKey,omitempty"`
 }

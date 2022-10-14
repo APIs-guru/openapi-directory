@@ -1,6 +1,6 @@
 package shared
 
 type ListAnnotationsResponse struct {
-	Annotations   []Annotation `json:"annotations"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Annotations   []Annotation `json:"annotations,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

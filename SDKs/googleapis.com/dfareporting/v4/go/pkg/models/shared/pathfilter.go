@@ -10,7 +10,7 @@ const (
 )
 
 type PathFilter struct {
-	EventFilters      []EventFilter                    `json:"eventFilters"`
-	Kind              *string                          `json:"kind"`
-	PathMatchPosition *PathFilterPathMatchPositionEnum `json:"pathMatchPosition"`
+	EventFilters      []EventFilter                    `json:"eventFilters,omitempty"`
+	Kind              *string                          `json:"kind,omitempty"`
+	PathMatchPosition *PathFilterPathMatchPositionEnum `json:"pathMatchPosition,omitempty"`
 }

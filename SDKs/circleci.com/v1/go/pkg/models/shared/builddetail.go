@@ -5,14 +5,14 @@ import (
 )
 
 type BuildDetail struct {
-	AllCommitDetails        []CommitDetail `json:"all_commit_details"`
-	Compare                 *string        `json:"compare"`
-	JobName                 *string        `json:"job_name"`
-	Node                    *interface{}   `json:"node"`
-	PreviousSuccessfulBuild *PreviousBuild `json:"previous_successful_build"`
-	Retries                 *bool          `json:"retries"`
-	SSHEnabled              *bool          `json:"ssh_enabled"`
-	Timedout                *bool          `json:"timedout"`
-	UsageQueuedAt           *time.Time     `json:"usage_queued_at"`
-	User                    *User          `json:"user"`
+	AllCommitDetails        []CommitDetail `json:"all_commit_details,omitempty"`
+	Compare                 *string        `json:"compare,omitempty"`
+	JobName                 *string        `json:"job_name,omitempty"`
+	Node                    *interface{}   `json:"node,omitempty"`
+	PreviousSuccessfulBuild *PreviousBuild `json:"previous_successful_build,omitempty"`
+	Retries                 *bool          `json:"retries,omitempty"`
+	SSHEnabled              *bool          `json:"ssh_enabled,omitempty"`
+	Timedout                *bool          `json:"timedout,omitempty"`
+	UsageQueuedAt           *time.Time     `json:"usage_queued_at,omitempty"`
+	User                    *User          `json:"user,omitempty"`
 }

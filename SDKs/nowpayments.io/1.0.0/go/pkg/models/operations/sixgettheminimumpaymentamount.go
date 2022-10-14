@@ -10,9 +10,9 @@ type SixGetTheMinimumPaymentAmountRequest struct {
 }
 
 type SixGetTheMinimumPaymentAmount200ApplicationJSON struct {
-	CurrencyFrom *string  `json:"currency_from"`
-	CurrencyTo   *string  `json:"currency_to"`
-	MinAmount    *float64 `json:"min_amount"`
+	CurrencyFrom *string  `json:"currency_from,omitempty"`
+	CurrencyTo   *string  `json:"currency_to,omitempty"`
+	MinAmount    *float64 `json:"min_amount,omitempty"`
 }
 
 type SixGetTheMinimumPaymentAmountResponse struct {

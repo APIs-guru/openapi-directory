@@ -1,8 +1,8 @@
 package shared
 
 type ServiceResolver struct {
-	EndpointFilter          *string       `json:"endpointFilter"`
-	Hostname                *string       `json:"hostname"`
-	ServerCertificates      []Certificate `json:"serverCertificates"`
-	ServiceDirectoryService *string       `json:"serviceDirectoryService"`
+	EndpointFilter          *string       `json:"endpointFilter,omitempty"`
+	Hostname                *string       `json:"hostname,omitempty"`
+	ServerCertificates      []Certificate `json:"serverCertificates,omitempty"`
+	ServiceDirectoryService *string       `json:"serviceDirectoryService,omitempty"`
 }

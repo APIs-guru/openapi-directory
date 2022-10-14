@@ -1,5 +1,5 @@
 package shared
 
 type ScriptHandler struct {
-	ScriptPath *string `json:"scriptPath"`
+	ScriptPath *string `json:"scriptPath,omitempty"`
 }

@@ -19,7 +19,7 @@ type UpdatePlaceIndexHeaders struct {
 }
 
 type UpdatePlaceIndexRequestBodyDataSourceConfiguration struct {
-	IntendedUse *shared.IntendedUseEnum `json:"IntendedUse"`
+	IntendedUse *shared.IntendedUseEnum `json:"IntendedUse,omitempty"`
 }
 
 type UpdatePlaceIndexRequestBodyPricingPlanEnum string
@@ -31,9 +31,9 @@ const (
 )
 
 type UpdatePlaceIndexRequestBody struct {
-	DataSourceConfiguration *UpdatePlaceIndexRequestBodyDataSourceConfiguration `json:"DataSourceConfiguration"`
-	Description             *string                                             `json:"Description"`
-	PricingPlan             *UpdatePlaceIndexRequestBodyPricingPlanEnum         `json:"PricingPlan"`
+	DataSourceConfiguration *UpdatePlaceIndexRequestBodyDataSourceConfiguration `json:"DataSourceConfiguration,omitempty"`
+	Description             *string                                             `json:"Description,omitempty"`
+	PricingPlan             *UpdatePlaceIndexRequestBodyPricingPlanEnum         `json:"PricingPlan,omitempty"`
 }
 
 type UpdatePlaceIndexRequest struct {

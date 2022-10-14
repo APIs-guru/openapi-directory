@@ -5,12 +5,12 @@ type ModifyAllowedNetworksPathParams struct {
 }
 
 type ModifyAllowedNetworksRequestBodyAllowedNetworks struct {
-	Add    []interface{} `json:"add"`
-	Delete []interface{} `json:"delete"`
+	Add    []interface{} `json:"add,omitempty"`
+	Delete []interface{} `json:"delete,omitempty"`
 }
 
 type ModifyAllowedNetworksRequestBody struct {
-	AllowedNetworks *ModifyAllowedNetworksRequestBodyAllowedNetworks `json:"allowed_networks"`
+	AllowedNetworks *ModifyAllowedNetworksRequestBodyAllowedNetworks `json:"allowed_networks,omitempty"`
 }
 
 type ModifyAllowedNetworksRequest struct {
@@ -25,7 +25,7 @@ const (
 )
 
 type ModifyAllowedNetworks200ApplicationJSONData struct {
-	AllowedNetworks []interface{} `json:"allowed_networks"`
+	AllowedNetworks []interface{} `json:"allowed_networks,omitempty"`
 }
 
 type ModifyAllowedNetworks200ApplicationJSONResultEnum string

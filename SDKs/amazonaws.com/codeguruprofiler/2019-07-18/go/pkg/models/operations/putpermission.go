@@ -27,7 +27,7 @@ type PutPermissionHeaders struct {
 
 type PutPermissionRequestBody struct {
 	Principals []string `json:"principals"`
-	RevisionID *string  `json:"revisionId"`
+	RevisionID *string  `json:"revisionId,omitempty"`
 }
 
 type PutPermissionRequest struct {

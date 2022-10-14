@@ -1,5 +1,5 @@
 package shared
 
 type PredictOutput struct {
-	Prediction *Prediction `json:"Prediction"`
+	Prediction *Prediction `json:"Prediction,omitempty"`
 }

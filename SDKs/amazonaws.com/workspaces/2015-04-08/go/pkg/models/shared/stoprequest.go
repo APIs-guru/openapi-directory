@@ -1,5 +1,5 @@
 package shared
 
 type StopRequest struct {
-	WorkspaceID *string `json:"WorkspaceId"`
+	WorkspaceID *string `json:"WorkspaceId,omitempty"`
 }

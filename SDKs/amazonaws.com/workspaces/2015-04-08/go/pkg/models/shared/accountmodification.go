@@ -5,10 +5,10 @@ import (
 )
 
 type AccountModification struct {
-	DedicatedTenancyManagementCidrRange *string                                    `json:"DedicatedTenancyManagementCidrRange"`
-	DedicatedTenancySupport             *DedicatedTenancySupportResultEnumEnum     `json:"DedicatedTenancySupport"`
-	ErrorCode                           *string                                    `json:"ErrorCode"`
-	ErrorMessage                        *string                                    `json:"ErrorMessage"`
-	ModificationState                   *DedicatedTenancyModificationStateEnumEnum `json:"ModificationState"`
-	StartTime                           *time.Time                                 `json:"StartTime"`
+	DedicatedTenancyManagementCidrRange *string                                    `json:"DedicatedTenancyManagementCidrRange,omitempty"`
+	DedicatedTenancySupport             *DedicatedTenancySupportResultEnumEnum     `json:"DedicatedTenancySupport,omitempty"`
+	ErrorCode                           *string                                    `json:"ErrorCode,omitempty"`
+	ErrorMessage                        *string                                    `json:"ErrorMessage,omitempty"`
+	ModificationState                   *DedicatedTenancyModificationStateEnumEnum `json:"ModificationState,omitempty"`
+	StartTime                           *time.Time                                 `json:"StartTime,omitempty"`
 }

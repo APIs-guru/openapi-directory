@@ -1,5 +1,5 @@
 package shared
 
 type DescribeFilterResponse struct {
-	Filter *Filter `json:"filter"`
+	Filter *Filter `json:"filter,omitempty"`
 }

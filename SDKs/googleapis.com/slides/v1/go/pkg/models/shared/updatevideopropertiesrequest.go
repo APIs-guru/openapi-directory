@@ -1,7 +1,7 @@
 package shared
 
 type UpdateVideoPropertiesRequest struct {
-	Fields          *string          `json:"fields"`
-	ObjectID        *string          `json:"objectId"`
-	VideoProperties *VideoProperties `json:"videoProperties"`
+	Fields          *string          `json:"fields,omitempty"`
+	ObjectID        *string          `json:"objectId,omitempty"`
+	VideoProperties *VideoProperties `json:"videoProperties,omitempty"`
 }

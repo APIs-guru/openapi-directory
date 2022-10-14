@@ -9,5 +9,5 @@ const (
 )
 
 type LoggingVariantConfig struct {
-	Variant *LoggingVariantConfigVariantEnum `json:"variant"`
+	Variant *LoggingVariantConfigVariantEnum `json:"variant,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type BucketByTime struct {
-	DurationMillis *string             `json:"durationMillis"`
-	Period         *BucketByTimePeriod `json:"period"`
+	DurationMillis *string             `json:"durationMillis,omitempty"`
+	Period         *BucketByTimePeriod `json:"period,omitempty"`
 }

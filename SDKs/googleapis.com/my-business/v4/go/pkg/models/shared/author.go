@@ -10,7 +10,7 @@ const (
 )
 
 type Author struct {
-	DisplayName     *string         `json:"displayName"`
-	ProfilePhotoURL *string         `json:"profilePhotoUrl"`
-	Type            *AuthorTypeEnum `json:"type"`
+	DisplayName     *string         `json:"displayName,omitempty"`
+	ProfilePhotoURL *string         `json:"profilePhotoUrl,omitempty"`
+	Type            *AuthorTypeEnum `json:"type,omitempty"`
 }

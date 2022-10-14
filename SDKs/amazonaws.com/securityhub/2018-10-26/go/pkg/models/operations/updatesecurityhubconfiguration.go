@@ -11,7 +11,7 @@ type UpdateSecurityHubConfigurationHeaders struct {
 }
 
 type UpdateSecurityHubConfigurationRequestBody struct {
-	AutoEnableControls *bool `json:"AutoEnableControls"`
+	AutoEnableControls *bool `json:"AutoEnableControls,omitempty"`
 }
 
 type UpdateSecurityHubConfigurationRequest struct {

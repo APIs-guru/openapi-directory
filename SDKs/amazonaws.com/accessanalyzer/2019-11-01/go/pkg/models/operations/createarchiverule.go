@@ -19,7 +19,7 @@ type CreateArchiveRuleHeaders struct {
 }
 
 type CreateArchiveRuleRequestBody struct {
-	ClientToken *string                     `json:"clientToken"`
+	ClientToken *string                     `json:"clientToken,omitempty"`
 	Filter      map[string]shared.Criterion `json:"filter"`
 	RuleName    string                      `json:"ruleName"`
 }

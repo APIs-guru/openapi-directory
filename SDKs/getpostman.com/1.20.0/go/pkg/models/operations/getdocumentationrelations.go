@@ -10,14 +10,14 @@ type GetDocumentationRelationsRequest struct {
 }
 
 type GetDocumentationRelations200ApplicationJSONDocumentation struct {
-	CollectionID *string `json:"collectionId"`
-	ID           *string `json:"id"`
-	Name         *string `json:"name"`
-	UpdatedAt    *string `json:"updatedAt"`
+	CollectionID *string `json:"collectionId,omitempty"`
+	ID           *string `json:"id,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	UpdatedAt    *string `json:"updatedAt,omitempty"`
 }
 
 type GetDocumentationRelations200ApplicationJSON struct {
-	Documentation []GetDocumentationRelations200ApplicationJSONDocumentation `json:"documentation"`
+	Documentation []GetDocumentationRelations200ApplicationJSONDocumentation `json:"documentation,omitempty"`
 }
 
 type GetDocumentationRelationsResponse struct {

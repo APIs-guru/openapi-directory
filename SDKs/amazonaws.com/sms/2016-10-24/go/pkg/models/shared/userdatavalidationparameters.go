@@ -1,6 +1,6 @@
 package shared
 
 type UserDataValidationParameters struct {
-	ScriptType *ScriptTypeEnum `json:"scriptType"`
-	Source     *Source         `json:"source"`
+	ScriptType *ScriptTypeEnum `json:"scriptType,omitempty"`
+	Source     *Source         `json:"source,omitempty"`
 }

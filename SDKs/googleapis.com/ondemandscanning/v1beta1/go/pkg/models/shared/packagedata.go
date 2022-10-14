@@ -11,15 +11,15 @@ const (
 )
 
 type PackageData struct {
-	CpeURI          *string                     `json:"cpeUri"`
-	DependencyChain []LanguagePackageDependency `json:"dependencyChain"`
-	FileLocation    []FileLocation              `json:"fileLocation"`
-	HashDigest      *string                     `json:"hashDigest"`
-	Os              *string                     `json:"os"`
-	OsVersion       *string                     `json:"osVersion"`
-	Package         *string                     `json:"package"`
-	PackageType     *PackageDataPackageTypeEnum `json:"packageType"`
-	PatchedCve      []string                    `json:"patchedCve"`
-	Unused          *string                     `json:"unused"`
-	Version         *string                     `json:"version"`
+	CpeURI          *string                     `json:"cpeUri,omitempty"`
+	DependencyChain []LanguagePackageDependency `json:"dependencyChain,omitempty"`
+	FileLocation    []FileLocation              `json:"fileLocation,omitempty"`
+	HashDigest      *string                     `json:"hashDigest,omitempty"`
+	Os              *string                     `json:"os,omitempty"`
+	OsVersion       *string                     `json:"osVersion,omitempty"`
+	Package         *string                     `json:"package,omitempty"`
+	PackageType     *PackageDataPackageTypeEnum `json:"packageType,omitempty"`
+	PatchedCve      []string                    `json:"patchedCve,omitempty"`
+	Unused          *string                     `json:"unused,omitempty"`
+	Version         *string                     `json:"version,omitempty"`
 }

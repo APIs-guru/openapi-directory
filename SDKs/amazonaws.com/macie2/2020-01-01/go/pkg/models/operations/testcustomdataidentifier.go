@@ -15,9 +15,9 @@ type TestCustomDataIdentifierHeaders struct {
 }
 
 type TestCustomDataIdentifierRequestBody struct {
-	IgnoreWords          []string `json:"ignoreWords"`
-	Keywords             []string `json:"keywords"`
-	MaximumMatchDistance *int64   `json:"maximumMatchDistance"`
+	IgnoreWords          []string `json:"ignoreWords,omitempty"`
+	Keywords             []string `json:"keywords,omitempty"`
+	MaximumMatchDistance *int64   `json:"maximumMatchDistance,omitempty"`
 	Regex                string   `json:"regex"`
 	SampleText           string   `json:"sampleText"`
 }

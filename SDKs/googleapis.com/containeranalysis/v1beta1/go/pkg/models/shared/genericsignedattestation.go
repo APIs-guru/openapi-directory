@@ -8,7 +8,7 @@ const (
 )
 
 type GenericSignedAttestation struct {
-	ContentType       *GenericSignedAttestationContentTypeEnum `json:"contentType"`
-	SerializedPayload *string                                  `json:"serializedPayload"`
-	Signatures        []Signature                              `json:"signatures"`
+	ContentType       *GenericSignedAttestationContentTypeEnum `json:"contentType,omitempty"`
+	SerializedPayload *string                                  `json:"serializedPayload,omitempty"`
+	Signatures        []Signature                              `json:"signatures,omitempty"`
 }

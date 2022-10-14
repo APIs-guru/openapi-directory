@@ -1,6 +1,6 @@
 package shared
 
 type CreatePipelineOutput struct {
-	Pipeline *PipelineDeclaration `json:"pipeline"`
-	Tags     []Tag                `json:"tags"`
+	Pipeline *PipelineDeclaration `json:"pipeline,omitempty"`
+	Tags     []Tag                `json:"tags,omitempty"`
 }

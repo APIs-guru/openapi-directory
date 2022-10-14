@@ -23,7 +23,7 @@ const (
 )
 
 type Placeholder struct {
-	Index          *int32               `json:"index"`
-	ParentObjectID *string              `json:"parentObjectId"`
-	Type           *PlaceholderTypeEnum `json:"type"`
+	Index          *int32               `json:"index,omitempty"`
+	ParentObjectID *string              `json:"parentObjectId,omitempty"`
+	Type           *PlaceholderTypeEnum `json:"type,omitempty"`
 }

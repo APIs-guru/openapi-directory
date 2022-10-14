@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleMapsPlayablelocationsV3Impression struct {
-	GameObjectType *int32                                                     `json:"gameObjectType"`
-	ImpressionType *GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnum `json:"impressionType"`
-	LocationName   *string                                                    `json:"locationName"`
+	GameObjectType *int32                                                     `json:"gameObjectType,omitempty"`
+	ImpressionType *GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnum `json:"impressionType,omitempty"`
+	LocationName   *string                                                    `json:"locationName,omitempty"`
 }

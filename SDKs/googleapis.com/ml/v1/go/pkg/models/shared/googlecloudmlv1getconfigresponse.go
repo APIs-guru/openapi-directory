@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudMlV1GetConfigResponse struct {
-	Config                *GoogleCloudMlV1Config `json:"config"`
-	ServiceAccount        *string                `json:"serviceAccount"`
-	ServiceAccountProject *string                `json:"serviceAccountProject"`
+	Config                *GoogleCloudMlV1Config `json:"config,omitempty"`
+	ServiceAccount        *string                `json:"serviceAccount,omitempty"`
+	ServiceAccountProject *string                `json:"serviceAccountProject,omitempty"`
 }

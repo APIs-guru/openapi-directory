@@ -18,11 +18,11 @@ type EndpointReorderOrReplacePlaylistsTracksHeaders struct {
 }
 
 type EndpointReorderOrReplacePlaylistsTracksRequestBody struct {
-	InsertBefore *int32   `json:"insert_before"`
-	RangeLength  *int32   `json:"range_length"`
-	RangeStart   *int32   `json:"range_start"`
-	SnapshotID   *string  `json:"snapshot_id"`
-	Uris         []string `json:"uris"`
+	InsertBefore *int32   `json:"insert_before,omitempty"`
+	RangeLength  *int32   `json:"range_length,omitempty"`
+	RangeStart   *int32   `json:"range_start,omitempty"`
+	SnapshotID   *string  `json:"snapshot_id,omitempty"`
+	Uris         []string `json:"uris,omitempty"`
 }
 
 type EndpointReorderOrReplacePlaylistsTracksSecurity struct {

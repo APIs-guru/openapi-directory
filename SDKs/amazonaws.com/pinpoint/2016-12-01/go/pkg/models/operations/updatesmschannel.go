@@ -19,9 +19,9 @@ type UpdateSmsChannelHeaders struct {
 }
 
 type UpdateSmsChannelRequestBodySmsChannelRequest struct {
-	Enabled   *bool   `json:"Enabled"`
-	SenderID  *string `json:"SenderId"`
-	ShortCode *string `json:"ShortCode"`
+	Enabled   *bool   `json:"Enabled,omitempty"`
+	SenderID  *string `json:"SenderId,omitempty"`
+	ShortCode *string `json:"ShortCode,omitempty"`
 }
 
 type UpdateSmsChannelRequestBody struct {

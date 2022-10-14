@@ -1,8 +1,8 @@
 package shared
 
 type RegionProto struct {
-	HeightPx *int32 `json:"heightPx"`
-	LeftPx   *int32 `json:"leftPx"`
-	TopPx    *int32 `json:"topPx"`
-	WidthPx  *int32 `json:"widthPx"`
+	HeightPx *int32 `json:"heightPx,omitempty"`
+	LeftPx   *int32 `json:"leftPx,omitempty"`
+	TopPx    *int32 `json:"topPx,omitempty"`
+	WidthPx  *int32 `json:"widthPx,omitempty"`
 }

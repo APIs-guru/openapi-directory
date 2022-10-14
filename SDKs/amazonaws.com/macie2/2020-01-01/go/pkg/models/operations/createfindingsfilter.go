@@ -22,17 +22,17 @@ const (
 )
 
 type CreateFindingsFilterRequestBodyFindingCriteria struct {
-	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion"`
+	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion,omitempty"`
 }
 
 type CreateFindingsFilterRequestBody struct {
 	Action          CreateFindingsFilterRequestBodyActionEnum      `json:"action"`
-	ClientToken     *string                                        `json:"clientToken"`
-	Description     *string                                        `json:"description"`
+	ClientToken     *string                                        `json:"clientToken,omitempty"`
+	Description     *string                                        `json:"description,omitempty"`
 	FindingCriteria CreateFindingsFilterRequestBodyFindingCriteria `json:"findingCriteria"`
 	Name            string                                         `json:"name"`
-	Position        *int64                                         `json:"position"`
-	Tags            map[string]string                              `json:"tags"`
+	Position        *int64                                         `json:"position,omitempty"`
+	Tags            map[string]string                              `json:"tags,omitempty"`
 }
 
 type CreateFindingsFilterRequest struct {

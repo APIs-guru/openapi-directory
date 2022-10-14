@@ -9,9 +9,9 @@ const (
 )
 
 type CompleteUploadRequest struct {
-	FileKey            *FileKey                                     `json:"fileKey"`
-	FileName           *string                                      `json:"fileName"`
-	KeepShareLinks     *bool                                        `json:"keepShareLinks"`
-	ResolutionStrategy *CompleteUploadRequestResolutionStrategyEnum `json:"resolutionStrategy"`
-	UserFileKeyList    *UserFileKeyList                             `json:"userFileKeyList"`
+	FileKey            *FileKey                                     `json:"fileKey,omitempty"`
+	FileName           *string                                      `json:"fileName,omitempty"`
+	KeepShareLinks     *bool                                        `json:"keepShareLinks,omitempty"`
+	ResolutionStrategy *CompleteUploadRequestResolutionStrategyEnum `json:"resolutionStrategy,omitempty"`
+	UserFileKeyList    *UserFileKeyList                             `json:"userFileKeyList,omitempty"`
 }

@@ -19,14 +19,14 @@ type UpdateLifecyclePolicyHeaders struct {
 }
 
 type UpdateLifecyclePolicyRequestBodyPolicyDetails struct {
-	Actions           []shared.Action                     `json:"Actions"`
-	EventSource       *shared.EventSource                 `json:"EventSource"`
-	Parameters        *shared.Parameters                  `json:"Parameters"`
-	PolicyType        *shared.PolicyTypeValuesEnum        `json:"PolicyType"`
-	ResourceLocations []shared.ResourceLocationValuesEnum `json:"ResourceLocations"`
-	ResourceTypes     []shared.ResourceTypeValuesEnum     `json:"ResourceTypes"`
-	Schedules         []shared.Schedule                   `json:"Schedules"`
-	TargetTags        []shared.Tag                        `json:"TargetTags"`
+	Actions           []shared.Action                     `json:"Actions,omitempty"`
+	EventSource       *shared.EventSource                 `json:"EventSource,omitempty"`
+	Parameters        *shared.Parameters                  `json:"Parameters,omitempty"`
+	PolicyType        *shared.PolicyTypeValuesEnum        `json:"PolicyType,omitempty"`
+	ResourceLocations []shared.ResourceLocationValuesEnum `json:"ResourceLocations,omitempty"`
+	ResourceTypes     []shared.ResourceTypeValuesEnum     `json:"ResourceTypes,omitempty"`
+	Schedules         []shared.Schedule                   `json:"Schedules,omitempty"`
+	TargetTags        []shared.Tag                        `json:"TargetTags,omitempty"`
 }
 
 type UpdateLifecyclePolicyRequestBodyStateEnum string
@@ -37,10 +37,10 @@ const (
 )
 
 type UpdateLifecyclePolicyRequestBody struct {
-	Description      *string                                        `json:"Description"`
-	ExecutionRoleArn *string                                        `json:"ExecutionRoleArn"`
-	PolicyDetails    *UpdateLifecyclePolicyRequestBodyPolicyDetails `json:"PolicyDetails"`
-	State            *UpdateLifecyclePolicyRequestBodyStateEnum     `json:"State"`
+	Description      *string                                        `json:"Description,omitempty"`
+	ExecutionRoleArn *string                                        `json:"ExecutionRoleArn,omitempty"`
+	PolicyDetails    *UpdateLifecyclePolicyRequestBodyPolicyDetails `json:"PolicyDetails,omitempty"`
+	State            *UpdateLifecyclePolicyRequestBodyStateEnum     `json:"State,omitempty"`
 }
 
 type UpdateLifecyclePolicyRequest struct {

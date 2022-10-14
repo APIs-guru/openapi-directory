@@ -1,12 +1,12 @@
 package shared
 
 type CompatibleFields struct {
-	CrossDimensionReachReportCompatibleFields *CrossDimensionReachReportCompatibleFields `json:"crossDimensionReachReportCompatibleFields"`
-	FloodlightReportCompatibleFields          *FloodlightReportCompatibleFields          `json:"floodlightReportCompatibleFields"`
-	Kind                                      *string                                    `json:"kind"`
-	PathAttributionReportCompatibleFields     *PathReportCompatibleFields                `json:"pathAttributionReportCompatibleFields"`
-	PathReportCompatibleFields                *PathReportCompatibleFields                `json:"pathReportCompatibleFields"`
-	PathToConversionReportCompatibleFields    *PathToConversionReportCompatibleFields    `json:"pathToConversionReportCompatibleFields"`
-	ReachReportCompatibleFields               *ReachReportCompatibleFields               `json:"reachReportCompatibleFields"`
-	ReportCompatibleFields                    *ReportCompatibleFields                    `json:"reportCompatibleFields"`
+	CrossDimensionReachReportCompatibleFields *CrossDimensionReachReportCompatibleFields `json:"crossDimensionReachReportCompatibleFields,omitempty"`
+	FloodlightReportCompatibleFields          *FloodlightReportCompatibleFields          `json:"floodlightReportCompatibleFields,omitempty"`
+	Kind                                      *string                                    `json:"kind,omitempty"`
+	PathAttributionReportCompatibleFields     *PathReportCompatibleFields                `json:"pathAttributionReportCompatibleFields,omitempty"`
+	PathReportCompatibleFields                *PathReportCompatibleFields                `json:"pathReportCompatibleFields,omitempty"`
+	PathToConversionReportCompatibleFields    *PathToConversionReportCompatibleFields    `json:"pathToConversionReportCompatibleFields,omitempty"`
+	ReachReportCompatibleFields               *ReachReportCompatibleFields               `json:"reachReportCompatibleFields,omitempty"`
+	ReportCompatibleFields                    *ReportCompatibleFields                    `json:"reportCompatibleFields,omitempty"`
 }

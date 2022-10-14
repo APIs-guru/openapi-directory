@@ -21,7 +21,7 @@ const (
 )
 
 type CreativeConfig struct {
-	CreativeType          *CreativeConfigCreativeTypeEnum       `json:"creativeType"`
-	DisplayCreativeConfig *InventorySourceDisplayCreativeConfig `json:"displayCreativeConfig"`
-	VideoCreativeConfig   *InventorySourceVideoCreativeConfig   `json:"videoCreativeConfig"`
+	CreativeType          *CreativeConfigCreativeTypeEnum       `json:"creativeType,omitempty"`
+	DisplayCreativeConfig *InventorySourceDisplayCreativeConfig `json:"displayCreativeConfig,omitempty"`
+	VideoCreativeConfig   *InventorySourceVideoCreativeConfig   `json:"videoCreativeConfig,omitempty"`
 }

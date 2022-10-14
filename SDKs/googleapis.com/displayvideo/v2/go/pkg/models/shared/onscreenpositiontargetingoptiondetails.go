@@ -10,5 +10,5 @@ const (
 )
 
 type OnScreenPositionTargetingOptionDetails struct {
-	OnScreenPosition *OnScreenPositionTargetingOptionDetailsOnScreenPositionEnum `json:"onScreenPosition"`
+	OnScreenPosition *OnScreenPositionTargetingOptionDetailsOnScreenPositionEnum `json:"onScreenPosition,omitempty"`
 }

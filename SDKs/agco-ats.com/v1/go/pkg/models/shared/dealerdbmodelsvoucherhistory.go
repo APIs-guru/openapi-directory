@@ -14,19 +14,19 @@ const (
 )
 
 type DealerDbModelsVoucherHistory struct {
-	ChangedDate    *time.Time                            `json:"ChangedDate"`
-	CreatedDate    *time.Time                            `json:"CreatedDate"`
-	DealerCode     *string                               `json:"DealerCode"`
-	Deleted        *bool                                 `json:"Deleted"`
-	Email          *string                               `json:"Email"`
-	ExpirationDate *time.Time                            `json:"ExpirationDate"`
-	ID             *int32                                `json:"ID"`
-	LicenseTo      *string                               `json:"LicenseTo"`
-	ModifiedBy     *string                               `json:"ModifiedBy"`
-	OrderNumber    *string                               `json:"OrderNumber"`
-	Punched        *bool                                 `json:"Punched"`
-	PunchedDate    *time.Time                            `json:"PunchedDate"`
-	Purpose        *string                               `json:"Purpose"`
-	Type           *DealerDbModelsVoucherHistoryTypeEnum `json:"Type"`
-	VoucherCode    *string                               `json:"VoucherCode"`
+	ChangedDate    *time.Time                            `json:"ChangedDate,omitempty"`
+	CreatedDate    *time.Time                            `json:"CreatedDate,omitempty"`
+	DealerCode     *string                               `json:"DealerCode,omitempty"`
+	Deleted        *bool                                 `json:"Deleted,omitempty"`
+	Email          *string                               `json:"Email,omitempty"`
+	ExpirationDate *time.Time                            `json:"ExpirationDate,omitempty"`
+	ID             *int32                                `json:"ID,omitempty"`
+	LicenseTo      *string                               `json:"LicenseTo,omitempty"`
+	ModifiedBy     *string                               `json:"ModifiedBy,omitempty"`
+	OrderNumber    *string                               `json:"OrderNumber,omitempty"`
+	Punched        *bool                                 `json:"Punched,omitempty"`
+	PunchedDate    *time.Time                            `json:"PunchedDate,omitempty"`
+	Purpose        *string                               `json:"Purpose,omitempty"`
+	Type           *DealerDbModelsVoucherHistoryTypeEnum `json:"Type,omitempty"`
+	VoucherCode    *string                               `json:"VoucherCode,omitempty"`
 }

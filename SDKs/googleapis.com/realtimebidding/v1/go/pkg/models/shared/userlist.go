@@ -9,10 +9,10 @@ const (
 )
 
 type UserList struct {
-	Description            *string             `json:"description"`
-	DisplayName            *string             `json:"displayName"`
-	MembershipDurationDays *string             `json:"membershipDurationDays"`
-	Name                   *string             `json:"name"`
-	Status                 *UserListStatusEnum `json:"status"`
-	URLRestriction         *URLRestriction     `json:"urlRestriction"`
+	Description            *string             `json:"description,omitempty"`
+	DisplayName            *string             `json:"displayName,omitempty"`
+	MembershipDurationDays *string             `json:"membershipDurationDays,omitempty"`
+	Name                   *string             `json:"name,omitempty"`
+	Status                 *UserListStatusEnum `json:"status,omitempty"`
+	URLRestriction         *URLRestriction     `json:"urlRestriction,omitempty"`
 }

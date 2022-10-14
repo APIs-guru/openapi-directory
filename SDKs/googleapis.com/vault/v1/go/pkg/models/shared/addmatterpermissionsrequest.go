@@ -1,7 +1,7 @@
 package shared
 
 type AddMatterPermissionsRequest struct {
-	CcMe             *bool             `json:"ccMe"`
-	MatterPermission *MatterPermission `json:"matterPermission"`
-	SendEmails       *bool             `json:"sendEmails"`
+	CcMe             *bool             `json:"ccMe,omitempty"`
+	MatterPermission *MatterPermission `json:"matterPermission,omitempty"`
+	SendEmails       *bool             `json:"sendEmails,omitempty"`
 }

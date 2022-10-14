@@ -1,8 +1,8 @@
 package shared
 
 type CustomChannels struct {
-	Etag          *string         `json:"etag"`
-	Items         []CustomChannel `json:"items"`
-	Kind          *string         `json:"kind"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Etag          *string         `json:"etag,omitempty"`
+	Items         []CustomChannel `json:"items,omitempty"`
+	Kind          *string         `json:"kind,omitempty"`
+	NextPageToken *string         `json:"nextPageToken,omitempty"`
 }

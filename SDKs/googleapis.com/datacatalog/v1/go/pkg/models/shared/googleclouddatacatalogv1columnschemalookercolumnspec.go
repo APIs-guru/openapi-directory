@@ -12,5 +12,5 @@ const (
 )
 
 type GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpec struct {
-	Type *GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum `json:"type"`
+	Type *GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum `json:"type,omitempty"`
 }

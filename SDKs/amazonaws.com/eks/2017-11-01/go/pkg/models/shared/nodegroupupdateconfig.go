@@ -1,6 +1,6 @@
 package shared
 
 type NodegroupUpdateConfig struct {
-	MaxUnavailable           *int64 `json:"maxUnavailable"`
-	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage"`
+	MaxUnavailable           *int64 `json:"maxUnavailable,omitempty"`
+	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage,omitempty"`
 }

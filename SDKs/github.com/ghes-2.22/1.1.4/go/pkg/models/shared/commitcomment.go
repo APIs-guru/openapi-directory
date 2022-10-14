@@ -19,7 +19,7 @@ type CommitCommentUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -37,7 +37,7 @@ type CommitComment struct {
 	NodeID            string                      `json:"node_id"`
 	Path              string                      `json:"path"`
 	Position          int64                       `json:"position"`
-	Reactions         *ReactionRollup             `json:"reactions"`
+	Reactions         *ReactionRollup             `json:"reactions,omitempty"`
 	UpdatedAt         time.Time                   `json:"updated_at"`
 	URL               string                      `json:"url"`
 	User              CommitCommentUserSimpleUser `json:"user"`

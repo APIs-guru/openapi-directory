@@ -1,5 +1,5 @@
 package shared
 
 type OrgUnitInfo struct {
-	OrgUnitID *string `json:"orgUnitId"`
+	OrgUnitID *string `json:"orgUnitId,omitempty"`
 }

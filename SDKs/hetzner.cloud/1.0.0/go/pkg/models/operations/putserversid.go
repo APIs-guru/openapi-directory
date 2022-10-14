@@ -5,8 +5,8 @@ type PutServersIDPathParams struct {
 }
 
 type PutServersIDRequestBodyUpdateServerRequest struct {
-	Labels map[string]interface{} `json:"labels"`
-	Name   *string                `json:"name"`
+	Labels map[string]interface{} `json:"labels,omitempty"`
+	Name   *string                `json:"name,omitempty"`
 }
 
 type PutServersIDRequest struct {
@@ -78,7 +78,7 @@ const (
 
 type PutServersID200ApplicationJSONServerImage struct {
 	BoundTo     int64                                                 `json:"bound_to"`
-	BuildID     *string                                               `json:"build_id"`
+	BuildID     *string                                               `json:"build_id,omitempty"`
 	Created     string                                                `json:"created"`
 	CreatedFrom PutServersID200ApplicationJSONServerImageCreatedFrom  `json:"created_from"`
 	Deleted     string                                                `json:"deleted"`
@@ -92,7 +92,7 @@ type PutServersID200ApplicationJSONServerImage struct {
 	OsFlavor    PutServersID200ApplicationJSONServerImageOsFlavorEnum `json:"os_flavor"`
 	OsVersion   string                                                `json:"os_version"`
 	Protection  PutServersID200ApplicationJSONServerImageProtection   `json:"protection"`
-	RapidDeploy *bool                                                 `json:"rapid_deploy"`
+	RapidDeploy *bool                                                 `json:"rapid_deploy,omitempty"`
 	Status      PutServersID200ApplicationJSONServerImageStatusEnum   `json:"status"`
 	Type        PutServersID200ApplicationJSONServerImageTypeEnum     `json:"type"`
 }
@@ -128,10 +128,10 @@ type PutServersID200ApplicationJSONServerPlacementGroupPlacementGroupNullable st
 }
 
 type PutServersID200ApplicationJSONServerPrivateNet struct {
-	AliasIps   []string `json:"alias_ips"`
-	IP         *string  `json:"ip"`
-	MacAddress *string  `json:"mac_address"`
-	Network    *int64   `json:"network"`
+	AliasIps   []string `json:"alias_ips,omitempty"`
+	IP         *string  `json:"ip,omitempty"`
+	MacAddress *string  `json:"mac_address,omitempty"`
+	Network    *int64   `json:"network,omitempty"`
 }
 
 type PutServersID200ApplicationJSONServerProtection struct {
@@ -147,8 +147,8 @@ const (
 )
 
 type PutServersID200ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall struct {
-	ID     *int64                                                            `json:"id"`
-	Status *PutServersID200ApplicationJSONServerPublicNetFirewallsStatusEnum `json:"status"`
+	ID     *int64                                                            `json:"id,omitempty"`
+	Status *PutServersID200ApplicationJSONServerPublicNetFirewallsStatusEnum `json:"status,omitempty"`
 }
 
 type PutServersID200ApplicationJSONServerPublicNetIpv4 struct {
@@ -169,7 +169,7 @@ type PutServersID200ApplicationJSONServerPublicNetIpv6 struct {
 }
 
 type PutServersID200ApplicationJSONServerPublicNet struct {
-	Firewalls   []PutServersID200ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall `json:"firewalls"`
+	Firewalls   []PutServersID200ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall `json:"firewalls,omitempty"`
 	FloatingIps []int64                                                                         `json:"floating_ips"`
 	Ipv4        PutServersID200ApplicationJSONServerPublicNetIpv4                               `json:"ipv4"`
 	Ipv6        PutServersID200ApplicationJSONServerPublicNetIpv6                               `json:"ipv6"`
@@ -242,11 +242,11 @@ type PutServersID200ApplicationJSONServer struct {
 	IngoingTraffic  float64                                                                   `json:"ingoing_traffic"`
 	Iso             PutServersID200ApplicationJSONServerIso                                   `json:"iso"`
 	Labels          map[string]string                                                         `json:"labels"`
-	LoadBalancers   []int64                                                                   `json:"load_balancers"`
+	LoadBalancers   []int64                                                                   `json:"load_balancers,omitempty"`
 	Locked          bool                                                                      `json:"locked"`
 	Name            string                                                                    `json:"name"`
 	OutgoingTraffic float64                                                                   `json:"outgoing_traffic"`
-	PlacementGroup  *PutServersID200ApplicationJSONServerPlacementGroupPlacementGroupNullable `json:"placement_group"`
+	PlacementGroup  *PutServersID200ApplicationJSONServerPlacementGroupPlacementGroupNullable `json:"placement_group,omitempty"`
 	PrimaryDiskSize float64                                                                   `json:"primary_disk_size"`
 	PrivateNet      []PutServersID200ApplicationJSONServerPrivateNet                          `json:"private_net"`
 	Protection      PutServersID200ApplicationJSONServerProtection                            `json:"protection"`
@@ -254,11 +254,11 @@ type PutServersID200ApplicationJSONServer struct {
 	RescueEnabled   bool                                                                      `json:"rescue_enabled"`
 	ServerType      PutServersID200ApplicationJSONServerServerType                            `json:"server_type"`
 	Status          PutServersID200ApplicationJSONServerStatusEnum                            `json:"status"`
-	Volumes         []int64                                                                   `json:"volumes"`
+	Volumes         []int64                                                                   `json:"volumes,omitempty"`
 }
 
 type PutServersID200ApplicationJSON struct {
-	Server *PutServersID200ApplicationJSONServer `json:"server"`
+	Server *PutServersID200ApplicationJSONServer `json:"server,omitempty"`
 }
 
 type PutServersIDResponse struct {

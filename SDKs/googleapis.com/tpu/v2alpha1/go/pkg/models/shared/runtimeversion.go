@@ -1,6 +1,6 @@
 package shared
 
 type RuntimeVersion struct {
-	Name    *string `json:"name"`
-	Version *string `json:"version"`
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
 }

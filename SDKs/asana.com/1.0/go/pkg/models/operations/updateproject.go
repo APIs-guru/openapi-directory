@@ -14,7 +14,7 @@ type UpdateProjectQueryParams struct {
 }
 
 type UpdateProjectRequestBody struct {
-	Data *shared.ProjectRequest `json:"data"`
+	Data *shared.ProjectRequest `json:"data,omitempty"`
 }
 
 type UpdateProjectRequest struct {
@@ -24,7 +24,7 @@ type UpdateProjectRequest struct {
 }
 
 type UpdateProject200ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data"`
+	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type UpdateProjectResponse struct {

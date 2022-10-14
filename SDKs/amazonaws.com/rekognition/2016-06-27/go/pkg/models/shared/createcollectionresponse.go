@@ -1,7 +1,7 @@
 package shared
 
 type CreateCollectionResponse struct {
-	CollectionArn    *string `json:"CollectionArn"`
-	FaceModelVersion *string `json:"FaceModelVersion"`
-	StatusCode       *int64  `json:"StatusCode"`
+	CollectionArn    *string `json:"CollectionArn,omitempty"`
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty"`
+	StatusCode       *int64  `json:"StatusCode,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type EventTracker struct {
-	AccountID           *string    `json:"accountId"`
-	CreationDateTime    *time.Time `json:"creationDateTime"`
-	DatasetGroupArn     *string    `json:"datasetGroupArn"`
-	EventTrackerArn     *string    `json:"eventTrackerArn"`
-	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime"`
-	Name                *string    `json:"name"`
-	Status              *string    `json:"status"`
-	TrackingID          *string    `json:"trackingId"`
+	AccountID           *string    `json:"accountId,omitempty"`
+	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
+	DatasetGroupArn     *string    `json:"datasetGroupArn,omitempty"`
+	EventTrackerArn     *string    `json:"eventTrackerArn,omitempty"`
+	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	Name                *string    `json:"name,omitempty"`
+	Status              *string    `json:"status,omitempty"`
+	TrackingID          *string    `json:"trackingId,omitempty"`
 }

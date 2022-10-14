@@ -1,7 +1,7 @@
 package shared
 
 type ParameterGroupStatus struct {
-	NodeIdsToReboot      []string `json:"NodeIdsToReboot"`
-	ParameterApplyStatus *string  `json:"ParameterApplyStatus"`
-	ParameterGroupName   *string  `json:"ParameterGroupName"`
+	NodeIdsToReboot      []string `json:"NodeIdsToReboot,omitempty"`
+	ParameterApplyStatus *string  `json:"ParameterApplyStatus,omitempty"`
+	ParameterGroupName   *string  `json:"ParameterGroupName,omitempty"`
 }

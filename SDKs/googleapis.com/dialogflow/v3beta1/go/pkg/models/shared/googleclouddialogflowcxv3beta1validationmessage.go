@@ -29,9 +29,9 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1ValidationMessage struct {
-	Detail        *string                                                          `json:"detail"`
-	ResourceNames []GoogleCloudDialogflowCxV3beta1ResourceName                     `json:"resourceNames"`
-	ResourceType  *GoogleCloudDialogflowCxV3beta1ValidationMessageResourceTypeEnum `json:"resourceType"`
-	Resources     []string                                                         `json:"resources"`
-	Severity      *GoogleCloudDialogflowCxV3beta1ValidationMessageSeverityEnum     `json:"severity"`
+	Detail        *string                                                          `json:"detail,omitempty"`
+	ResourceNames []GoogleCloudDialogflowCxV3beta1ResourceName                     `json:"resourceNames,omitempty"`
+	ResourceType  *GoogleCloudDialogflowCxV3beta1ValidationMessageResourceTypeEnum `json:"resourceType,omitempty"`
+	Resources     []string                                                         `json:"resources,omitempty"`
+	Severity      *GoogleCloudDialogflowCxV3beta1ValidationMessageSeverityEnum     `json:"severity,omitempty"`
 }

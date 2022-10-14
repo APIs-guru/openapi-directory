@@ -11,8 +11,8 @@ type EnableSecurityHubHeaders struct {
 }
 
 type EnableSecurityHubRequestBody struct {
-	EnableDefaultStandards *bool             `json:"EnableDefaultStandards"`
-	Tags                   map[string]string `json:"Tags"`
+	EnableDefaultStandards *bool             `json:"EnableDefaultStandards,omitempty"`
+	Tags                   map[string]string `json:"Tags,omitempty"`
 }
 
 type EnableSecurityHubRequest struct {

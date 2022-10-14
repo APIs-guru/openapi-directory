@@ -5,8 +5,8 @@ type PutSSHKeysIDPathParams struct {
 }
 
 type PutSSHKeysIDRequestBody struct {
-	Labels map[string]interface{} `json:"labels"`
-	Name   *string                `json:"name"`
+	Labels map[string]interface{} `json:"labels,omitempty"`
+	Name   *string                `json:"name,omitempty"`
 }
 
 type PutSSHKeysIDRequest struct {

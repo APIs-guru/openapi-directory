@@ -1,6 +1,6 @@
 package shared
 
 type ConversationLogSettings struct {
-	AudioLogSettings []AudioLogSetting `json:"audioLogSettings"`
-	TextLogSettings  []TextLogSetting  `json:"textLogSettings"`
+	AudioLogSettings []AudioLogSetting `json:"audioLogSettings,omitempty"`
+	TextLogSettings  []TextLogSetting  `json:"textLogSettings,omitempty"`
 }

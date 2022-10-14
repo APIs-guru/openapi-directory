@@ -1,6 +1,6 @@
 package shared
 
 type RawStatisticsListSessionsResponse struct {
-	Data       []VideoSession `json:"data"`
-	Pagination *Pagination    `json:"pagination"`
+	Data       []VideoSession `json:"data,omitempty"`
+	Pagination *Pagination    `json:"pagination,omitempty"`
 }

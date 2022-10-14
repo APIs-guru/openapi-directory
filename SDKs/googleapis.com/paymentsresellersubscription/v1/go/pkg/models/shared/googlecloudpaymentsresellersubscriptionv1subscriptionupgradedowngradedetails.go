@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails struct {
-	BillingCycleSpec       *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum `json:"billingCycleSpec"`
-	PreviousSubscriptionID *string                                                                                           `json:"previousSubscriptionId"`
+	BillingCycleSpec       *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum `json:"billingCycleSpec,omitempty"`
+	PreviousSubscriptionID *string                                                                                           `json:"previousSubscriptionId,omitempty"`
 }

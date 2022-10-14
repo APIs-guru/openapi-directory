@@ -1,6 +1,6 @@
 package shared
 
 type Equation struct {
-	SuggestedDeletionIds  []string `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds []string `json:"suggestedInsertionIds"`
+	SuggestedDeletionIds  []string `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds []string `json:"suggestedInsertionIds,omitempty"`
 }

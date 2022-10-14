@@ -1,6 +1,6 @@
 package shared
 
 type DeleteImageResponse struct {
-	ImageBuildVersionArn *string `json:"imageBuildVersionArn"`
-	RequestID            *string `json:"requestId"`
+	ImageBuildVersionArn *string `json:"imageBuildVersionArn,omitempty"`
+	RequestID            *string `json:"requestId,omitempty"`
 }

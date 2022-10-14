@@ -1,10 +1,10 @@
 package shared
 
 type IndividualAccount struct {
-	Email               *string  `json:"email"`
-	FirstName           *string  `json:"firstName"`
-	LastName            *string  `json:"lastName"`
-	PrimaryPhone        *Phone   `json:"primaryPhone"`
-	RegistrationAddress *Address `json:"registrationAddress"`
-	SecondaryPhone      *Phone   `json:"secondaryPhone"`
+	Email               *string  `json:"email,omitempty"`
+	FirstName           *string  `json:"firstName,omitempty"`
+	LastName            *string  `json:"lastName,omitempty"`
+	PrimaryPhone        *Phone   `json:"primaryPhone,omitempty"`
+	RegistrationAddress *Address `json:"registrationAddress,omitempty"`
+	SecondaryPhone      *Phone   `json:"secondaryPhone,omitempty"`
 }

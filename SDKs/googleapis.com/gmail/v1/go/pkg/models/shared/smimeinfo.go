@@ -1,11 +1,11 @@
 package shared
 
 type SmimeInfo struct {
-	EncryptedKeyPassword *string `json:"encryptedKeyPassword"`
-	Expiration           *string `json:"expiration"`
-	ID                   *string `json:"id"`
-	IsDefault            *bool   `json:"isDefault"`
-	IssuerCn             *string `json:"issuerCn"`
-	Pem                  *string `json:"pem"`
-	Pkcs12               *string `json:"pkcs12"`
+	EncryptedKeyPassword *string `json:"encryptedKeyPassword,omitempty"`
+	Expiration           *string `json:"expiration,omitempty"`
+	ID                   *string `json:"id,omitempty"`
+	IsDefault            *bool   `json:"isDefault,omitempty"`
+	IssuerCn             *string `json:"issuerCn,omitempty"`
+	Pem                  *string `json:"pem,omitempty"`
+	Pkcs12               *string `json:"pkcs12,omitempty"`
 }

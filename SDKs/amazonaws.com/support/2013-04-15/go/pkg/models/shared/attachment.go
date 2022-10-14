@@ -1,6 +1,6 @@
 package shared
 
 type Attachment struct {
-	Data     *string `json:"data"`
-	FileName *string `json:"fileName"`
+	Data     *string `json:"data,omitempty"`
+	FileName *string `json:"fileName,omitempty"`
 }

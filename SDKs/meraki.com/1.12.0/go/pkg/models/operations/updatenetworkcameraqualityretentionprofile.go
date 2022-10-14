@@ -106,23 +106,23 @@ type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32 stru
 }
 
 type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettings struct {
-	Mv12Mv22Mv72 *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72 `json:"MV12/MV22/MV72"`
-	Mv12We       *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12We       `json:"MV12WE"`
-	Mv21Mv71     *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71     `json:"MV21/MV71"`
-	Mv22XMv72X   *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72X   `json:"MV22X/MV72X"`
-	Mv32         *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32         `json:"MV32"`
+	Mv12Mv22Mv72 *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72 `json:"MV12/MV22/MV72,omitempty"`
+	Mv12We       *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12We       `json:"MV12WE,omitempty"`
+	Mv21Mv71     *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71     `json:"MV21/MV71,omitempty"`
+	Mv22XMv72X   *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72X   `json:"MV22X/MV72X,omitempty"`
+	Mv32         *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32         `json:"MV32,omitempty"`
 }
 
 type UpdateNetworkCameraQualityRetentionProfileRequestBody struct {
-	AudioRecordingEnabled          *bool                                                               `json:"audioRecordingEnabled"`
-	CloudArchiveEnabled            *bool                                                               `json:"cloudArchiveEnabled"`
-	MaxRetentionDays               *int64                                                              `json:"maxRetentionDays"`
-	MotionBasedRetentionEnabled    *bool                                                               `json:"motionBasedRetentionEnabled"`
-	MotionDetectorVersion          *int64                                                              `json:"motionDetectorVersion"`
-	Name                           *string                                                             `json:"name"`
-	RestrictedBandwidthModeEnabled *bool                                                               `json:"restrictedBandwidthModeEnabled"`
-	ScheduleID                     *string                                                             `json:"scheduleId"`
-	VideoSettings                  *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettings `json:"videoSettings"`
+	AudioRecordingEnabled          *bool                                                               `json:"audioRecordingEnabled,omitempty"`
+	CloudArchiveEnabled            *bool                                                               `json:"cloudArchiveEnabled,omitempty"`
+	MaxRetentionDays               *int64                                                              `json:"maxRetentionDays,omitempty"`
+	MotionBasedRetentionEnabled    *bool                                                               `json:"motionBasedRetentionEnabled,omitempty"`
+	MotionDetectorVersion          *int64                                                              `json:"motionDetectorVersion,omitempty"`
+	Name                           *string                                                             `json:"name,omitempty"`
+	RestrictedBandwidthModeEnabled *bool                                                               `json:"restrictedBandwidthModeEnabled,omitempty"`
+	ScheduleID                     *string                                                             `json:"scheduleId,omitempty"`
+	VideoSettings                  *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettings `json:"videoSettings,omitempty"`
 }
 
 type UpdateNetworkCameraQualityRetentionProfileRequest struct {

@@ -5,9 +5,9 @@ import (
 )
 
 type Event struct {
-	Date             *time.Time      `json:"Date"`
-	EventCategories  []string        `json:"EventCategories"`
-	Message          *string         `json:"Message"`
-	SourceIdentifier *string         `json:"SourceIdentifier"`
-	SourceType       *SourceTypeEnum `json:"SourceType"`
+	Date             *time.Time      `json:"Date,omitempty"`
+	EventCategories  []string        `json:"EventCategories,omitempty"`
+	Message          *string         `json:"Message,omitempty"`
+	SourceIdentifier *string         `json:"SourceIdentifier,omitempty"`
+	SourceType       *SourceTypeEnum `json:"SourceType,omitempty"`
 }

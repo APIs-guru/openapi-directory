@@ -14,7 +14,7 @@ type SetParentForTaskQueryParams struct {
 }
 
 type SetParentForTaskRequestBody struct {
-	Data *shared.TaskSetParentRequest `json:"data"`
+	Data *shared.TaskSetParentRequest `json:"data,omitempty"`
 }
 
 type SetParentForTaskRequest struct {
@@ -24,7 +24,7 @@ type SetParentForTaskRequest struct {
 }
 
 type SetParentForTask200ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data"`
+	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type SetParentForTaskResponse struct {

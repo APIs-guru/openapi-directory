@@ -1,9 +1,9 @@
 package shared
 
 type LogSettingsResponse struct {
-	Destination    *DestinationEnum `json:"destination"`
-	KmsKeyArn      *string          `json:"kmsKeyArn"`
-	LogType        *LogTypeEnum     `json:"logType"`
-	ResourceArn    *string          `json:"resourceArn"`
-	ResourcePrefix *string          `json:"resourcePrefix"`
+	Destination    *DestinationEnum `json:"destination,omitempty"`
+	KmsKeyArn      *string          `json:"kmsKeyArn,omitempty"`
+	LogType        *LogTypeEnum     `json:"logType,omitempty"`
+	ResourceArn    *string          `json:"resourceArn,omitempty"`
+	ResourcePrefix *string          `json:"resourcePrefix,omitempty"`
 }

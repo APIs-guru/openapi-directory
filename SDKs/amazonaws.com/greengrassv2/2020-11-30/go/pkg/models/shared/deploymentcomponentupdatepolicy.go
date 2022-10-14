@@ -1,6 +1,6 @@
 package shared
 
 type DeploymentComponentUpdatePolicy struct {
-	Action           *DeploymentComponentUpdatePolicyActionEnum `json:"action"`
-	TimeoutInSeconds *int64                                     `json:"timeoutInSeconds"`
+	Action           *DeploymentComponentUpdatePolicyActionEnum `json:"action,omitempty"`
+	TimeoutInSeconds *int64                                     `json:"timeoutInSeconds,omitempty"`
 }

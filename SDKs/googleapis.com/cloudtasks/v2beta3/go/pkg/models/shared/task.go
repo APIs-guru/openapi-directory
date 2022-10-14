@@ -9,16 +9,16 @@ const (
 )
 
 type Task struct {
-	AppEngineHTTPRequest *AppEngineHTTPRequest `json:"appEngineHttpRequest"`
-	CreateTime           *string               `json:"createTime"`
-	DispatchCount        *int32                `json:"dispatchCount"`
-	DispatchDeadline     *string               `json:"dispatchDeadline"`
-	FirstAttempt         *Attempt              `json:"firstAttempt"`
-	HTTPRequest          *HTTPRequest          `json:"httpRequest"`
-	LastAttempt          *Attempt              `json:"lastAttempt"`
-	Name                 *string               `json:"name"`
-	PullMessage          *PullMessage          `json:"pullMessage"`
-	ResponseCount        *int32                `json:"responseCount"`
-	ScheduleTime         *string               `json:"scheduleTime"`
-	View                 *TaskViewEnum         `json:"view"`
+	AppEngineHTTPRequest *AppEngineHTTPRequest `json:"appEngineHttpRequest,omitempty"`
+	CreateTime           *string               `json:"createTime,omitempty"`
+	DispatchCount        *int32                `json:"dispatchCount,omitempty"`
+	DispatchDeadline     *string               `json:"dispatchDeadline,omitempty"`
+	FirstAttempt         *Attempt              `json:"firstAttempt,omitempty"`
+	HTTPRequest          *HTTPRequest          `json:"httpRequest,omitempty"`
+	LastAttempt          *Attempt              `json:"lastAttempt,omitempty"`
+	Name                 *string               `json:"name,omitempty"`
+	PullMessage          *PullMessage          `json:"pullMessage,omitempty"`
+	ResponseCount        *int32                `json:"responseCount,omitempty"`
+	ScheduleTime         *string               `json:"scheduleTime,omitempty"`
+	View                 *TaskViewEnum         `json:"view,omitempty"`
 }

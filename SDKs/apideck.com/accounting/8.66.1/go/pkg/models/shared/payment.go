@@ -16,10 +16,10 @@ const (
 )
 
 type PaymentAllocations struct {
-	Amount *float64                                  `json:"amount"`
-	Code   *string                                   `json:"code"`
-	ID     *string                                   `json:"id"`
-	Type   *PaymentAllocationsTypeAllocationTypeEnum `json:"type"`
+	Amount *float64                                  `json:"amount,omitempty"`
+	Code   *string                                   `json:"code,omitempty"`
+	ID     *string                                   `json:"id,omitempty"`
+	Type   *PaymentAllocationsTypeAllocationTypeEnum `json:"type,omitempty"`
 }
 
 type PaymentStatusPaymentStatusEnum string
@@ -45,27 +45,27 @@ const (
 )
 
 type Payment struct {
-	Account                       *LinkedLedgerAccount            `json:"account"`
-	AccountsReceivableAccountID   *string                         `json:"accounts_receivable_account_id"`
-	AccountsReceivableAccountType *string                         `json:"accounts_receivable_account_type"`
-	Allocations                   []PaymentAllocations            `json:"allocations"`
-	CreatedAt                     *time.Time                      `json:"created_at"`
-	CreatedBy                     *string                         `json:"created_by"`
-	Currency                      *CurrencyEnum                   `json:"currency"`
-	CurrencyRate                  *float64                        `json:"currency_rate"`
-	Customer                      *LinkedCustomer                 `json:"customer"`
-	DisplayID                     *string                         `json:"display_id"`
-	ID                            *string                         `json:"id"`
-	Note                          *string                         `json:"note"`
-	PaymentMethod                 *string                         `json:"payment_method"`
-	PaymentMethodReference        *string                         `json:"payment_method_reference"`
-	Reconciled                    *bool                           `json:"reconciled"`
-	Reference                     *string                         `json:"reference"`
-	RowVersion                    *string                         `json:"row_version"`
-	Status                        *PaymentStatusPaymentStatusEnum `json:"status"`
+	Account                       *LinkedLedgerAccount            `json:"account,omitempty"`
+	AccountsReceivableAccountID   *string                         `json:"accounts_receivable_account_id,omitempty"`
+	AccountsReceivableAccountType *string                         `json:"accounts_receivable_account_type,omitempty"`
+	Allocations                   []PaymentAllocations            `json:"allocations,omitempty"`
+	CreatedAt                     *time.Time                      `json:"created_at,omitempty"`
+	CreatedBy                     *string                         `json:"created_by,omitempty"`
+	Currency                      *CurrencyEnum                   `json:"currency,omitempty"`
+	CurrencyRate                  *float64                        `json:"currency_rate,omitempty"`
+	Customer                      *LinkedCustomer                 `json:"customer,omitempty"`
+	DisplayID                     *string                         `json:"display_id,omitempty"`
+	ID                            *string                         `json:"id,omitempty"`
+	Note                          *string                         `json:"note,omitempty"`
+	PaymentMethod                 *string                         `json:"payment_method,omitempty"`
+	PaymentMethodReference        *string                         `json:"payment_method_reference,omitempty"`
+	Reconciled                    *bool                           `json:"reconciled,omitempty"`
+	Reference                     *string                         `json:"reference,omitempty"`
+	RowVersion                    *string                         `json:"row_version,omitempty"`
+	Status                        *PaymentStatusPaymentStatusEnum `json:"status,omitempty"`
 	TotalAmount                   float64                         `json:"total_amount"`
 	TransactionDate               time.Time                       `json:"transaction_date"`
-	Type                          *PaymentTypePaymentTypeEnum     `json:"type"`
-	UpdatedAt                     *time.Time                      `json:"updated_at"`
-	UpdatedBy                     *string                         `json:"updated_by"`
+	Type                          *PaymentTypePaymentTypeEnum     `json:"type,omitempty"`
+	UpdatedAt                     *time.Time                      `json:"updated_at,omitempty"`
+	UpdatedBy                     *string                         `json:"updated_by,omitempty"`
 }

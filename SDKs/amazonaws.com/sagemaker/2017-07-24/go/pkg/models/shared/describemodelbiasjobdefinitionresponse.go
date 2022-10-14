@@ -10,10 +10,10 @@ type DescribeModelBiasJobDefinitionResponse struct {
 	JobDefinitionName         string                       `json:"JobDefinitionName"`
 	JobResources              MonitoringResources          `json:"JobResources"`
 	ModelBiasAppSpecification ModelBiasAppSpecification    `json:"ModelBiasAppSpecification"`
-	ModelBiasBaselineConfig   *ModelBiasBaselineConfig     `json:"ModelBiasBaselineConfig"`
+	ModelBiasBaselineConfig   *ModelBiasBaselineConfig     `json:"ModelBiasBaselineConfig,omitempty"`
 	ModelBiasJobInput         ModelBiasJobInput            `json:"ModelBiasJobInput"`
 	ModelBiasJobOutputConfig  MonitoringOutputConfig       `json:"ModelBiasJobOutputConfig"`
-	NetworkConfig             *MonitoringNetworkConfig     `json:"NetworkConfig"`
+	NetworkConfig             *MonitoringNetworkConfig     `json:"NetworkConfig,omitempty"`
 	RoleArn                   string                       `json:"RoleArn"`
-	StoppingCondition         *MonitoringStoppingCondition `json:"StoppingCondition"`
+	StoppingCondition         *MonitoringStoppingCondition `json:"StoppingCondition,omitempty"`
 }

@@ -19,8 +19,8 @@ const (
 )
 
 type UpdateOrganizationBrandingPolicyRequestBodyAdminSettings struct {
-	AppliesTo *UpdateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum `json:"appliesTo"`
-	Values    []string                                                               `json:"values"`
+	AppliesTo *UpdateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum `json:"appliesTo,omitempty"`
+	Values    []string                                                               `json:"values,omitempty"`
 }
 
 type UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum string
@@ -112,27 +112,27 @@ const (
 )
 
 type UpdateOrganizationBrandingPolicyRequestBodyHelpSettings struct {
-	APIDocsSubtab                      *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum                      `json:"apiDocsSubtab"`
-	CasesSubtab                        *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum                        `json:"casesSubtab"`
-	CiscoMerakiProductDocumentation    *string                                                                                        `json:"ciscoMerakiProductDocumentation"`
-	CommunitySubtab                    *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum                    `json:"communitySubtab"`
-	DataProtectionRequestsSubtab       *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum       `json:"dataProtectionRequestsSubtab"`
-	FirewallInfoSubtab                 *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum                 `json:"firewallInfoSubtab"`
-	GetHelpSubtab                      *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum                      `json:"getHelpSubtab"`
-	GetHelpSubtabKnowledgeBaseSearch   *string                                                                                        `json:"getHelpSubtabKnowledgeBaseSearch"`
-	HardwareReplacementsSubtab         *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum         `json:"hardwareReplacementsSubtab"`
-	HelpTab                            *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum                            `json:"helpTab"`
-	NewFeaturesSubtab                  *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum                  `json:"newFeaturesSubtab"`
-	SmForums                           *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum                           `json:"smForums"`
-	SupportContactInfo                 *string                                                                                        `json:"supportContactInfo"`
-	UniversalSearchKnowledgeBaseSearch *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum `json:"universalSearchKnowledgeBaseSearch"`
+	APIDocsSubtab                      *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum                      `json:"apiDocsSubtab,omitempty"`
+	CasesSubtab                        *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum                        `json:"casesSubtab,omitempty"`
+	CiscoMerakiProductDocumentation    *string                                                                                        `json:"ciscoMerakiProductDocumentation,omitempty"`
+	CommunitySubtab                    *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum                    `json:"communitySubtab,omitempty"`
+	DataProtectionRequestsSubtab       *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum       `json:"dataProtectionRequestsSubtab,omitempty"`
+	FirewallInfoSubtab                 *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum                 `json:"firewallInfoSubtab,omitempty"`
+	GetHelpSubtab                      *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum                      `json:"getHelpSubtab,omitempty"`
+	GetHelpSubtabKnowledgeBaseSearch   *string                                                                                        `json:"getHelpSubtabKnowledgeBaseSearch,omitempty"`
+	HardwareReplacementsSubtab         *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum         `json:"hardwareReplacementsSubtab,omitempty"`
+	HelpTab                            *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum                            `json:"helpTab,omitempty"`
+	NewFeaturesSubtab                  *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum                  `json:"newFeaturesSubtab,omitempty"`
+	SmForums                           *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum                           `json:"smForums,omitempty"`
+	SupportContactInfo                 *string                                                                                        `json:"supportContactInfo,omitempty"`
+	UniversalSearchKnowledgeBaseSearch *UpdateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum `json:"universalSearchKnowledgeBaseSearch,omitempty"`
 }
 
 type UpdateOrganizationBrandingPolicyRequestBody struct {
-	AdminSettings *UpdateOrganizationBrandingPolicyRequestBodyAdminSettings `json:"adminSettings"`
-	Enabled       *bool                                                     `json:"enabled"`
-	HelpSettings  *UpdateOrganizationBrandingPolicyRequestBodyHelpSettings  `json:"helpSettings"`
-	Name          *string                                                   `json:"name"`
+	AdminSettings *UpdateOrganizationBrandingPolicyRequestBodyAdminSettings `json:"adminSettings,omitempty"`
+	Enabled       *bool                                                     `json:"enabled,omitempty"`
+	HelpSettings  *UpdateOrganizationBrandingPolicyRequestBodyHelpSettings  `json:"helpSettings,omitempty"`
+	Name          *string                                                   `json:"name,omitempty"`
 }
 
 type UpdateOrganizationBrandingPolicyRequest struct {

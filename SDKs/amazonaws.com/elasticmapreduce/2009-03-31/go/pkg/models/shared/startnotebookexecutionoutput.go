@@ -1,5 +1,5 @@
 package shared
 
 type StartNotebookExecutionOutput struct {
-	NotebookExecutionID *string `json:"NotebookExecutionId"`
+	NotebookExecutionID *string `json:"NotebookExecutionId,omitempty"`
 }

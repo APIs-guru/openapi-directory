@@ -1,7 +1,7 @@
 package shared
 
 type Compliance struct {
-	Ids      []string `json:"ids"`
-	Standard *string  `json:"standard"`
-	Version  *string  `json:"version"`
+	Ids      []string `json:"ids,omitempty"`
+	Standard *string  `json:"standard,omitempty"`
+	Version  *string  `json:"version,omitempty"`
 }

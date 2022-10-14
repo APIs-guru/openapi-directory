@@ -1,8 +1,8 @@
 package shared
 
 type ElementaryStream struct {
-	AudioStream *AudioStream `json:"audioStream"`
-	Key         *string      `json:"key"`
-	TextStream  *TextStream  `json:"textStream"`
-	VideoStream *VideoStream `json:"videoStream"`
+	AudioStream *AudioStream `json:"audioStream,omitempty"`
+	Key         *string      `json:"key,omitempty"`
+	TextStream  *TextStream  `json:"textStream,omitempty"`
+	VideoStream *VideoStream `json:"videoStream,omitempty"`
 }

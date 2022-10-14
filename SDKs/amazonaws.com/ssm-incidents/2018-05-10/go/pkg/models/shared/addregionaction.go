@@ -2,5 +2,5 @@ package shared
 
 type AddRegionAction struct {
 	RegionName  string  `json:"regionName"`
-	SseKmsKeyID *string `json:"sseKmsKeyId"`
+	SseKmsKeyID *string `json:"sseKmsKeyId,omitempty"`
 }

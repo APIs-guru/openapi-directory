@@ -1,5 +1,5 @@
 package shared
 
 type DescribeStreamOutput struct {
-	StreamDescription *StreamDescription `json:"StreamDescription"`
+	StreamDescription *StreamDescription `json:"StreamDescription,omitempty"`
 }

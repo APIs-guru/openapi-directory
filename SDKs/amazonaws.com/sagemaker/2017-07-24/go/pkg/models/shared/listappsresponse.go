@@ -1,6 +1,6 @@
 package shared
 
 type ListAppsResponse struct {
-	Apps      []AppDetails `json:"Apps"`
-	NextToken *string      `json:"NextToken"`
+	Apps      []AppDetails `json:"Apps,omitempty"`
+	NextToken *string      `json:"NextToken,omitempty"`
 }

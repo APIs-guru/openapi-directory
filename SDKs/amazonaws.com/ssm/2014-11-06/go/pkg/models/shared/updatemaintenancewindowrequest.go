@@ -1,17 +1,17 @@
 package shared
 
 type UpdateMaintenanceWindowRequest struct {
-	AllowUnassociatedTargets *bool   `json:"AllowUnassociatedTargets"`
-	Cutoff                   *int64  `json:"Cutoff"`
-	Description              *string `json:"Description"`
-	Duration                 *int64  `json:"Duration"`
-	Enabled                  *bool   `json:"Enabled"`
-	EndDate                  *string `json:"EndDate"`
-	Name                     *string `json:"Name"`
-	Replace                  *bool   `json:"Replace"`
-	Schedule                 *string `json:"Schedule"`
-	ScheduleOffset           *int64  `json:"ScheduleOffset"`
-	ScheduleTimezone         *string `json:"ScheduleTimezone"`
-	StartDate                *string `json:"StartDate"`
+	AllowUnassociatedTargets *bool   `json:"AllowUnassociatedTargets,omitempty"`
+	Cutoff                   *int64  `json:"Cutoff,omitempty"`
+	Description              *string `json:"Description,omitempty"`
+	Duration                 *int64  `json:"Duration,omitempty"`
+	Enabled                  *bool   `json:"Enabled,omitempty"`
+	EndDate                  *string `json:"EndDate,omitempty"`
+	Name                     *string `json:"Name,omitempty"`
+	Replace                  *bool   `json:"Replace,omitempty"`
+	Schedule                 *string `json:"Schedule,omitempty"`
+	ScheduleOffset           *int64  `json:"ScheduleOffset,omitempty"`
+	ScheduleTimezone         *string `json:"ScheduleTimezone,omitempty"`
+	StartDate                *string `json:"StartDate,omitempty"`
 	WindowID                 string  `json:"WindowId"`
 }

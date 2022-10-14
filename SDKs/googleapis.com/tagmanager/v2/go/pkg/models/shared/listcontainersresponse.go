@@ -1,6 +1,6 @@
 package shared
 
 type ListContainersResponse struct {
-	Container     []Container `json:"container"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Container     []Container `json:"container,omitempty"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
 }

@@ -6,11 +6,11 @@ import (
 
 type PostMyConversationsRequestBody struct {
 	Body             string   `json:"body"`
-	CloudinaryPhotos []string `json:"cloudinary_photos"`
-	ListingID        *int64   `json:"listing_id"`
-	RecipientID      *int64   `json:"recipient_id"`
-	RecipientUUID    *string  `json:"recipient_uuid"`
-	ShopID           *string  `json:"shop_id"`
+	CloudinaryPhotos []string `json:"cloudinary_photos,omitempty"`
+	ListingID        *int64   `json:"listing_id,omitempty"`
+	RecipientID      *int64   `json:"recipient_id,omitempty"`
+	RecipientUUID    *string  `json:"recipient_uuid,omitempty"`
+	ShopID           *string  `json:"shop_id,omitempty"`
 }
 
 type PostMyConversationsSecurity struct {

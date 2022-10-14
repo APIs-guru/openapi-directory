@@ -1,6 +1,6 @@
 package shared
 
 type BalanceAdjustment struct {
-	AdjustmentAmount *Amount `json:"adjustmentAmount"`
-	AdjustmentType   *string `json:"adjustmentType"`
+	AdjustmentAmount *Amount `json:"adjustmentAmount,omitempty"`
+	AdjustmentType   *string `json:"adjustmentType,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ErrorResponse struct {
-	ErrorCode    *string `json:"errorCode"`
-	ErrorMessage *string `json:"errorMessage"`
-	Errors       []Error `json:"errors"`
+	ErrorCode    *string `json:"errorCode,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitempty"`
+	Errors       []Error `json:"errors,omitempty"`
 }

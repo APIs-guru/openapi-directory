@@ -1,5 +1,5 @@
 package shared
 
 type ReshardingStatus struct {
-	SlotMigration *SlotMigration `json:"SlotMigration"`
+	SlotMigration *SlotMigration `json:"SlotMigration,omitempty"`
 }

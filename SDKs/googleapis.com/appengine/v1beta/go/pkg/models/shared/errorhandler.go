@@ -11,7 +11,7 @@ const (
 )
 
 type ErrorHandler struct {
-	ErrorCode  *ErrorHandlerErrorCodeEnum `json:"errorCode"`
-	MimeType   *string                    `json:"mimeType"`
-	StaticFile *string                    `json:"staticFile"`
+	ErrorCode  *ErrorHandlerErrorCodeEnum `json:"errorCode,omitempty"`
+	MimeType   *string                    `json:"mimeType,omitempty"`
+	StaticFile *string                    `json:"staticFile,omitempty"`
 }

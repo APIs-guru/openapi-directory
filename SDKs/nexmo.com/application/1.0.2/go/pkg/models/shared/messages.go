@@ -21,5 +21,5 @@ type MessagesWebhooks struct {
 }
 
 type Messages struct {
-	Webhooks []MessagesWebhooks `json:"webhooks"`
+	Webhooks []MessagesWebhooks `json:"webhooks,omitempty"`
 }

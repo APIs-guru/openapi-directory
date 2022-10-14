@@ -1,10 +1,10 @@
 package shared
 
 type CreateDynamicThingGroupResponse struct {
-	IndexName      *string `json:"indexName"`
-	QueryString    *string `json:"queryString"`
-	QueryVersion   *string `json:"queryVersion"`
-	ThingGroupArn  *string `json:"thingGroupArn"`
-	ThingGroupID   *string `json:"thingGroupId"`
-	ThingGroupName *string `json:"thingGroupName"`
+	IndexName      *string `json:"indexName,omitempty"`
+	QueryString    *string `json:"queryString,omitempty"`
+	QueryVersion   *string `json:"queryVersion,omitempty"`
+	ThingGroupArn  *string `json:"thingGroupArn,omitempty"`
+	ThingGroupID   *string `json:"thingGroupId,omitempty"`
+	ThingGroupName *string `json:"thingGroupName,omitempty"`
 }

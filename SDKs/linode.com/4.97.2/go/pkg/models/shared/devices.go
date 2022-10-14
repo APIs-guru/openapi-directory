@@ -1,12 +1,12 @@
 package shared
 
 type Devices struct {
-	Sda *Device `json:"sda"`
-	Sdb *Device `json:"sdb"`
-	Sdc *Device `json:"sdc"`
-	Sdd *Device `json:"sdd"`
-	Sde *Device `json:"sde"`
-	Sdf *Device `json:"sdf"`
-	Sdg *Device `json:"sdg"`
-	Sdh *Device `json:"sdh"`
+	Sda *Device `json:"sda,omitempty"`
+	Sdb *Device `json:"sdb,omitempty"`
+	Sdc *Device `json:"sdc,omitempty"`
+	Sdd *Device `json:"sdd,omitempty"`
+	Sde *Device `json:"sde,omitempty"`
+	Sdf *Device `json:"sdf,omitempty"`
+	Sdg *Device `json:"sdg,omitempty"`
+	Sdh *Device `json:"sdh,omitempty"`
 }

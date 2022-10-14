@@ -1,6 +1,6 @@
 package shared
 
 type AwsRedshiftClusterResizeInfo struct {
-	AllowCancelResize *bool   `json:"AllowCancelResize"`
-	ResizeType        *string `json:"ResizeType"`
+	AllowCancelResize *bool   `json:"AllowCancelResize,omitempty"`
+	ResizeType        *string `json:"ResizeType,omitempty"`
 }

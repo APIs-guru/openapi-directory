@@ -8,7 +8,7 @@ type AssessmentRunNotification struct {
 	Date                 time.Time                                   `json:"date"`
 	Error                bool                                        `json:"error"`
 	Event                InspectorEventEnum                          `json:"event"`
-	Message              *string                                     `json:"message"`
-	SnsPublishStatusCode *AssessmentRunNotificationSnsStatusCodeEnum `json:"snsPublishStatusCode"`
-	SnsTopicArn          *string                                     `json:"snsTopicArn"`
+	Message              *string                                     `json:"message,omitempty"`
+	SnsPublishStatusCode *AssessmentRunNotificationSnsStatusCodeEnum `json:"snsPublishStatusCode,omitempty"`
+	SnsTopicArn          *string                                     `json:"snsTopicArn,omitempty"`
 }

@@ -27,7 +27,7 @@ type DeleteEntityTransferRequest struct {
 }
 
 type DeleteEntityTransferDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteEntityTransferResponse struct {

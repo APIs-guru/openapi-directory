@@ -19,12 +19,12 @@ type UpdateAssetModelHeaders struct {
 }
 
 type UpdateAssetModelRequestBody struct {
-	AssetModelCompositeModels []shared.AssetModelCompositeModel `json:"assetModelCompositeModels"`
-	AssetModelDescription     *string                           `json:"assetModelDescription"`
-	AssetModelHierarchies     []shared.AssetModelHierarchy      `json:"assetModelHierarchies"`
+	AssetModelCompositeModels []shared.AssetModelCompositeModel `json:"assetModelCompositeModels,omitempty"`
+	AssetModelDescription     *string                           `json:"assetModelDescription,omitempty"`
+	AssetModelHierarchies     []shared.AssetModelHierarchy      `json:"assetModelHierarchies,omitempty"`
 	AssetModelName            string                            `json:"assetModelName"`
-	AssetModelProperties      []shared.AssetModelProperty       `json:"assetModelProperties"`
-	ClientToken               *string                           `json:"clientToken"`
+	AssetModelProperties      []shared.AssetModelProperty       `json:"assetModelProperties,omitempty"`
+	ClientToken               *string                           `json:"clientToken,omitempty"`
 }
 
 type UpdateAssetModelRequest struct {

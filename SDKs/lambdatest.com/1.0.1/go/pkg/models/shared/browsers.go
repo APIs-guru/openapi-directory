@@ -1,7 +1,7 @@
 package shared
 
 type Browsers struct {
-	Chrome  []string `json:"chrome"`
-	Firefox []string `json:"firefox"`
-	Opera   []string `json:"opera"`
+	Chrome  []string `json:"chrome,omitempty"`
+	Firefox []string `json:"firefox,omitempty"`
+	Opera   []string `json:"opera,omitempty"`
 }

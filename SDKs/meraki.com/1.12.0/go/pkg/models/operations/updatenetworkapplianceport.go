@@ -6,12 +6,12 @@ type UpdateNetworkAppliancePortPathParams struct {
 }
 
 type UpdateNetworkAppliancePortRequestBody struct {
-	AccessPolicy        *string `json:"accessPolicy"`
-	AllowedVlans        *string `json:"allowedVlans"`
-	DropUntaggedTraffic *bool   `json:"dropUntaggedTraffic"`
-	Enabled             *bool   `json:"enabled"`
-	Type                *string `json:"type"`
-	Vlan                *int64  `json:"vlan"`
+	AccessPolicy        *string `json:"accessPolicy,omitempty"`
+	AllowedVlans        *string `json:"allowedVlans,omitempty"`
+	DropUntaggedTraffic *bool   `json:"dropUntaggedTraffic,omitempty"`
+	Enabled             *bool   `json:"enabled,omitempty"`
+	Type                *string `json:"type,omitempty"`
+	Vlan                *int64  `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkAppliancePortRequest struct {

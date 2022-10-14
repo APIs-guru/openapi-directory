@@ -27,7 +27,7 @@ type DetachVolumeRequest struct {
 }
 
 type DetachVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DetachVolumeResponse struct {

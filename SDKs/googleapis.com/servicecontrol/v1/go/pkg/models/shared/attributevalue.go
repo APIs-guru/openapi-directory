@@ -1,7 +1,7 @@
 package shared
 
 type AttributeValue struct {
-	BoolValue   *bool              `json:"boolValue"`
-	IntValue    *string            `json:"intValue"`
-	StringValue *TruncatableString `json:"stringValue"`
+	BoolValue   *bool              `json:"boolValue,omitempty"`
+	IntValue    *string            `json:"intValue,omitempty"`
+	StringValue *TruncatableString `json:"stringValue,omitempty"`
 }

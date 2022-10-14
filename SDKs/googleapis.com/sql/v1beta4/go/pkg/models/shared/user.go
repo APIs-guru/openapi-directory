@@ -18,15 +18,15 @@ const (
 )
 
 type User struct {
-	DualPasswordType     *UserDualPasswordTypeEnum     `json:"dualPasswordType"`
-	Etag                 *string                       `json:"etag"`
-	Host                 *string                       `json:"host"`
-	Instance             *string                       `json:"instance"`
-	Kind                 *string                       `json:"kind"`
-	Name                 *string                       `json:"name"`
-	Password             *string                       `json:"password"`
-	PasswordPolicy       *UserPasswordValidationPolicy `json:"passwordPolicy"`
-	Project              *string                       `json:"project"`
-	SqlserverUserDetails *SQLServerUserDetails         `json:"sqlserverUserDetails"`
-	Type                 *UserTypeEnum                 `json:"type"`
+	DualPasswordType     *UserDualPasswordTypeEnum     `json:"dualPasswordType,omitempty"`
+	Etag                 *string                       `json:"etag,omitempty"`
+	Host                 *string                       `json:"host,omitempty"`
+	Instance             *string                       `json:"instance,omitempty"`
+	Kind                 *string                       `json:"kind,omitempty"`
+	Name                 *string                       `json:"name,omitempty"`
+	Password             *string                       `json:"password,omitempty"`
+	PasswordPolicy       *UserPasswordValidationPolicy `json:"passwordPolicy,omitempty"`
+	Project              *string                       `json:"project,omitempty"`
+	SqlserverUserDetails *SQLServerUserDetails         `json:"sqlserverUserDetails,omitempty"`
+	Type                 *UserTypeEnum                 `json:"type,omitempty"`
 }

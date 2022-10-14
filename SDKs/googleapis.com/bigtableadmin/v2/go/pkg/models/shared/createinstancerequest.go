@@ -1,8 +1,8 @@
 package shared
 
 type CreateInstanceRequest struct {
-	Clusters   map[string]Cluster `json:"clusters"`
-	Instance   *Instance          `json:"instance"`
-	InstanceID *string            `json:"instanceId"`
-	Parent     *string            `json:"parent"`
+	Clusters   map[string]Cluster `json:"clusters,omitempty"`
+	Instance   *Instance          `json:"instance,omitempty"`
+	InstanceID *string            `json:"instanceId,omitempty"`
+	Parent     *string            `json:"parent,omitempty"`
 }

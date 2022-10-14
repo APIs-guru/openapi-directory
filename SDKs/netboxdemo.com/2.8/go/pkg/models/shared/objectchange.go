@@ -26,14 +26,14 @@ type ObjectChangeActionAction struct {
 }
 
 type ObjectChange struct {
-	Action            *ObjectChangeActionAction `json:"action"`
-	ChangedObject     map[string]string         `json:"changed_object"`
+	Action            *ObjectChangeActionAction `json:"action,omitempty"`
+	ChangedObject     map[string]string         `json:"changed_object,omitempty"`
 	ChangedObjectID   int64                     `json:"changed_object_id"`
-	ChangedObjectType *string                   `json:"changed_object_type"`
-	ID                *int64                    `json:"id"`
-	ObjectData        *string                   `json:"object_data"`
-	RequestID         *string                   `json:"request_id"`
-	Time              *time.Time                `json:"time"`
-	User              *NestedUser               `json:"user"`
-	UserName          *string                   `json:"user_name"`
+	ChangedObjectType *string                   `json:"changed_object_type,omitempty"`
+	ID                *int64                    `json:"id,omitempty"`
+	ObjectData        *string                   `json:"object_data,omitempty"`
+	RequestID         *string                   `json:"request_id,omitempty"`
+	Time              *time.Time                `json:"time,omitempty"`
+	User              *NestedUser               `json:"user,omitempty"`
+	UserName          *string                   `json:"user_name,omitempty"`
 }

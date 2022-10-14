@@ -1,9 +1,9 @@
 package shared
 
 type ConnectionAlias struct {
-	AliasID          *string                      `json:"AliasId"`
-	Associations     []ConnectionAliasAssociation `json:"Associations"`
-	ConnectionString *string                      `json:"ConnectionString"`
-	OwnerAccountID   *string                      `json:"OwnerAccountId"`
-	State            *ConnectionAliasStateEnum    `json:"State"`
+	AliasID          *string                      `json:"AliasId,omitempty"`
+	Associations     []ConnectionAliasAssociation `json:"Associations,omitempty"`
+	ConnectionString *string                      `json:"ConnectionString,omitempty"`
+	OwnerAccountID   *string                      `json:"OwnerAccountId,omitempty"`
+	State            *ConnectionAliasStateEnum    `json:"State,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type Deployment struct {
-	Created     *time.Time `json:"created"`
-	CreatedBy   *string    `json:"createdBy"`
-	Description *string    `json:"description"`
-	ID          *string    `json:"id"`
-	LogID       *string    `json:"logId"`
-	UserEmail   *string    `json:"userEmail"`
-	UserName    *string    `json:"userName"`
-	Version     *string    `json:"version"`
+	Created     *time.Time `json:"created,omitempty"`
+	CreatedBy   *string    `json:"createdBy,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	ID          *string    `json:"id,omitempty"`
+	LogID       *string    `json:"logId,omitempty"`
+	UserEmail   *string    `json:"userEmail,omitempty"`
+	UserName    *string    `json:"userName,omitempty"`
+	Version     *string    `json:"version,omitempty"`
 }

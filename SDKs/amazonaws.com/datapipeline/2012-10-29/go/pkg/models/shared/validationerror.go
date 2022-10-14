@@ -1,6 +1,6 @@
 package shared
 
 type ValidationError struct {
-	Errors []string `json:"errors"`
-	ID     *string  `json:"id"`
+	Errors []string `json:"errors,omitempty"`
+	ID     *string  `json:"id,omitempty"`
 }

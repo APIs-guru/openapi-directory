@@ -5,16 +5,16 @@ type SetRecoveryCredentialPathParams struct {
 }
 
 type SetRecoveryCredentialRequestBodyCredentialsRecoveryQuestion struct {
-	Answer   *string `json:"answer"`
-	Question *string `json:"question"`
+	Answer   *string `json:"answer,omitempty"`
+	Question *string `json:"question,omitempty"`
 }
 
 type SetRecoveryCredentialRequestBodyCredentials struct {
-	RecoveryQuestion *SetRecoveryCredentialRequestBodyCredentialsRecoveryQuestion `json:"recovery_question"`
+	RecoveryQuestion *SetRecoveryCredentialRequestBodyCredentialsRecoveryQuestion `json:"recovery_question,omitempty"`
 }
 
 type SetRecoveryCredentialRequestBody struct {
-	Credentials *SetRecoveryCredentialRequestBodyCredentials `json:"credentials"`
+	Credentials *SetRecoveryCredentialRequestBodyCredentials `json:"credentials,omitempty"`
 }
 
 type SetRecoveryCredentialRequest struct {

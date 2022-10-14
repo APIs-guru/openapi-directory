@@ -5,11 +5,11 @@ import (
 )
 
 type Order struct {
-	LineItems           []LineItem         `json:"LineItems"`
-	OrderFulfilledDate  *time.Time         `json:"OrderFulfilledDate"`
-	OrderID             *string            `json:"OrderId"`
-	OrderSubmissionDate *time.Time         `json:"OrderSubmissionDate"`
-	OutpostID           *string            `json:"OutpostId"`
-	PaymentOption       *PaymentOptionEnum `json:"PaymentOption"`
-	Status              *OrderStatusEnum   `json:"Status"`
+	LineItems           []LineItem         `json:"LineItems,omitempty"`
+	OrderFulfilledDate  *time.Time         `json:"OrderFulfilledDate,omitempty"`
+	OrderID             *string            `json:"OrderId,omitempty"`
+	OrderSubmissionDate *time.Time         `json:"OrderSubmissionDate,omitempty"`
+	OutpostID           *string            `json:"OutpostId,omitempty"`
+	PaymentOption       *PaymentOptionEnum `json:"PaymentOption,omitempty"`
+	Status              *OrderStatusEnum   `json:"Status,omitempty"`
 }

@@ -22,7 +22,7 @@ const (
 )
 
 type PostVolumeActionByIDRequestBody3 struct {
-	Region        *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
+	Region        *shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region,omitempty"`
 	SizeGigabytes int64                                                                                                                                    `json:"size_gigabytes"`
 	Type          PostVolumeActionByIDRequestBody3TypeEnum                                                                                                 `json:"type"`
 }
@@ -36,7 +36,7 @@ type PostVolumeActionByIDRequest struct {
 type PostVolumeActionByID401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type PostVolumeActionByIDResponse struct {

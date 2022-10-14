@@ -1,6 +1,6 @@
 package shared
 
 type ModifyLabelsResponse struct {
-	Kind           *string `json:"kind"`
-	ModifiedLabels []Label `json:"modifiedLabels"`
+	Kind           *string `json:"kind,omitempty"`
+	ModifiedLabels []Label `json:"modifiedLabels,omitempty"`
 }

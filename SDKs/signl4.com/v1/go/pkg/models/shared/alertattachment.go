@@ -1,9 +1,9 @@
 package shared
 
 type AlertAttachment struct {
-	Content     *string `json:"content"`
-	ContentType *string `json:"contentType"`
-	Encoding    *int32  `json:"encoding"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
+	Content     *string `json:"content,omitempty"`
+	ContentType *string `json:"contentType,omitempty"`
+	Encoding    *int32  `json:"encoding,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }

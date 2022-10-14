@@ -5,19 +5,19 @@ import (
 )
 
 type ClusterMetadata struct {
-	AddressID                    *string                       `json:"AddressId"`
-	ClusterID                    *string                       `json:"ClusterId"`
-	ClusterState                 *ClusterStateEnum             `json:"ClusterState"`
-	CreationDate                 *time.Time                    `json:"CreationDate"`
-	Description                  *string                       `json:"Description"`
-	ForwardingAddressID          *string                       `json:"ForwardingAddressId"`
-	JobType                      *JobTypeEnum                  `json:"JobType"`
-	KmsKeyArn                    *string                       `json:"KmsKeyARN"`
-	Notification                 *Notification                 `json:"Notification"`
-	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration `json:"OnDeviceServiceConfiguration"`
-	Resources                    *JobResource                  `json:"Resources"`
-	RoleArn                      *string                       `json:"RoleARN"`
-	ShippingOption               *ShippingOptionEnum           `json:"ShippingOption"`
-	SnowballType                 *SnowballTypeEnum             `json:"SnowballType"`
-	TaxDocuments                 *TaxDocuments                 `json:"TaxDocuments"`
+	AddressID                    *string                       `json:"AddressId,omitempty"`
+	ClusterID                    *string                       `json:"ClusterId,omitempty"`
+	ClusterState                 *ClusterStateEnum             `json:"ClusterState,omitempty"`
+	CreationDate                 *time.Time                    `json:"CreationDate,omitempty"`
+	Description                  *string                       `json:"Description,omitempty"`
+	ForwardingAddressID          *string                       `json:"ForwardingAddressId,omitempty"`
+	JobType                      *JobTypeEnum                  `json:"JobType,omitempty"`
+	KmsKeyArn                    *string                       `json:"KmsKeyARN,omitempty"`
+	Notification                 *Notification                 `json:"Notification,omitempty"`
+	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration `json:"OnDeviceServiceConfiguration,omitempty"`
+	Resources                    *JobResource                  `json:"Resources,omitempty"`
+	RoleArn                      *string                       `json:"RoleARN,omitempty"`
+	ShippingOption               *ShippingOptionEnum           `json:"ShippingOption,omitempty"`
+	SnowballType                 *SnowballTypeEnum             `json:"SnowballType,omitempty"`
+	TaxDocuments                 *TaxDocuments                 `json:"TaxDocuments,omitempty"`
 }

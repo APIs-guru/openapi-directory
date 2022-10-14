@@ -1,6 +1,6 @@
 package shared
 
 type OrderPricingOptions struct {
-	AutoApplyDiscounts *bool `json:"auto_apply_discounts"`
-	AutoApplyTaxes     *bool `json:"auto_apply_taxes"`
+	AutoApplyDiscounts *bool `json:"auto_apply_discounts,omitempty"`
+	AutoApplyTaxes     *bool `json:"auto_apply_taxes,omitempty"`
 }

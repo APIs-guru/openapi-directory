@@ -1,5 +1,5 @@
 package shared
 
 type FinalizeDeviceClaimResponse struct {
-	State *string `json:"State"`
+	State *string `json:"State,omitempty"`
 }

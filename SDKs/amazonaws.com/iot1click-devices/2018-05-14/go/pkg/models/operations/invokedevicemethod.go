@@ -19,13 +19,13 @@ type InvokeDeviceMethodHeaders struct {
 }
 
 type InvokeDeviceMethodRequestBodyDeviceMethod struct {
-	DeviceType *string `json:"DeviceType"`
-	MethodName *string `json:"MethodName"`
+	DeviceType *string `json:"DeviceType,omitempty"`
+	MethodName *string `json:"MethodName,omitempty"`
 }
 
 type InvokeDeviceMethodRequestBody struct {
-	DeviceMethod           *InvokeDeviceMethodRequestBodyDeviceMethod `json:"deviceMethod"`
-	DeviceMethodParameters *string                                    `json:"deviceMethodParameters"`
+	DeviceMethod           *InvokeDeviceMethodRequestBodyDeviceMethod `json:"deviceMethod,omitempty"`
+	DeviceMethodParameters *string                                    `json:"deviceMethodParameters,omitempty"`
 }
 
 type InvokeDeviceMethodRequest struct {

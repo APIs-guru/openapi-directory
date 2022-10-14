@@ -1,7 +1,7 @@
 package shared
 
 type ServerCertificateSummary struct {
-	ServerCertificateArn          *string                      `json:"serverCertificateArn"`
-	ServerCertificateStatus       *ServerCertificateStatusEnum `json:"serverCertificateStatus"`
-	ServerCertificateStatusDetail *string                      `json:"serverCertificateStatusDetail"`
+	ServerCertificateArn          *string                      `json:"serverCertificateArn,omitempty"`
+	ServerCertificateStatus       *ServerCertificateStatusEnum `json:"serverCertificateStatus,omitempty"`
+	ServerCertificateStatusDetail *string                      `json:"serverCertificateStatusDetail,omitempty"`
 }

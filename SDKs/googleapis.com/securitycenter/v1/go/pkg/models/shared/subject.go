@@ -10,7 +10,7 @@ const (
 )
 
 type Subject struct {
-	Kind *SubjectKindEnum `json:"kind"`
-	Name *string          `json:"name"`
-	Ns   *string          `json:"ns"`
+	Kind *SubjectKindEnum `json:"kind,omitempty"`
+	Name *string          `json:"name,omitempty"`
+	Ns   *string          `json:"ns,omitempty"`
 }

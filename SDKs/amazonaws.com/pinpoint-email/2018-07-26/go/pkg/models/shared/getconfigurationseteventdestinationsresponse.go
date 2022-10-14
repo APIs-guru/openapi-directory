@@ -1,5 +1,5 @@
 package shared
 
 type GetConfigurationSetEventDestinationsResponse struct {
-	EventDestinations []EventDestination `json:"EventDestinations"`
+	EventDestinations []EventDestination `json:"EventDestinations,omitempty"`
 }

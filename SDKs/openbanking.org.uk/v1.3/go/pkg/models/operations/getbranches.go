@@ -155,18 +155,18 @@ const (
 )
 
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress struct {
-	BuildingNumberOrName *string `json:"BuildingNumberOrName"`
+	BuildingNumberOrName *string `json:"BuildingNumberOrName,omitempty"`
 	Country              string  `json:"Country"`
-	CountrySubDivision   *string `json:"CountrySubDivision"`
-	OptionalAddressField *string `json:"OptionalAddressField"`
-	PostCode             *string `json:"PostCode"`
-	StreetName           *string `json:"StreetName"`
-	TownName             *string `json:"TownName"`
+	CountrySubDivision   *string `json:"CountrySubDivision,omitempty"`
+	OptionalAddressField *string `json:"OptionalAddressField,omitempty"`
+	PostCode             *string `json:"PostCode,omitempty"`
+	StreetName           *string `json:"StreetName,omitempty"`
+	TownName             *string `json:"TownName,omitempty"`
 }
 
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAlternatePhone struct {
-	AlternateTelephoneNumber            *string `json:"AlternateTelephoneNumber"`
-	AlternateTelephoneNumberDescription *string `json:"AlternateTelephoneNumberDescription"`
+	AlternateTelephoneNumber            *string `json:"AlternateTelephoneNumber,omitempty"`
+	AlternateTelephoneNumberDescription *string `json:"AlternateTelephoneNumberDescription,omitempty"`
 }
 
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchFacilitiesNameEnum string
@@ -259,8 +259,8 @@ type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOpeningTimes 
 	ClosingTime           string                                                                                   `json:"ClosingTime"`
 	OpeningDay            GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOpeningTimesOpeningDayEnum `json:"OpeningDay"`
 	OpeningTime           string                                                                                   `json:"OpeningTime"`
-	UnavailableFinishTime *string                                                                                  `json:"UnavailableFinishTime"`
-	UnavailableStartTime  *string                                                                                  `json:"UnavailableStartTime"`
+	UnavailableFinishTime *string                                                                                  `json:"UnavailableFinishTime,omitempty"`
+	UnavailableStartTime  *string                                                                                  `json:"UnavailableStartTime,omitempty"`
 }
 
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum string
@@ -280,8 +280,8 @@ type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationP
 }
 
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation struct {
-	Bic              *string                                                                                                      `json:"BIC"`
-	Lei              *string                                                                                                      `json:"LEI"`
+	Bic              *string                                                                                                      `json:"BIC,omitempty"`
+	Lei              *string                                                                                                      `json:"LEI,omitempty"`
 	OrganisationName GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
@@ -291,37 +291,37 @@ type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation 
 }
 
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataPlannedBranchClosure struct {
-	EndDate   *string `json:"EndDate"`
-	StartDate *string `json:"StartDate"`
+	EndDate   *string `json:"EndDate,omitempty"`
+	StartDate *string `json:"StartDate,omitempty"`
 }
 
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranch struct {
 	AtmAtBranch                 bool                                                                                           `json:"ATMAtBranch"`
-	AccessibilityTypes          *GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum          `json:"AccessibilityTypes"`
+	AccessibilityTypes          *GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum          `json:"AccessibilityTypes,omitempty"`
 	Address                     GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress                          `json:"Address"`
-	AlternatePhone              []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAlternatePhone                 `json:"AlternatePhone"`
-	ArrivalTime                 *string                                                                                        `json:"ArrivalTime"`
-	BranchDescription           *string                                                                                        `json:"BranchDescription"`
-	BranchFacilitiesName        []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchFacilitiesNameEnum       `json:"BranchFacilitiesName"`
+	AlternatePhone              []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAlternatePhone                 `json:"AlternatePhone,omitempty"`
+	ArrivalTime                 *string                                                                                        `json:"ArrivalTime,omitempty"`
+	BranchDescription           *string                                                                                        `json:"BranchDescription,omitempty"`
+	BranchFacilitiesName        []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchFacilitiesNameEnum       `json:"BranchFacilitiesName,omitempty"`
 	BranchIdentification        string                                                                                         `json:"BranchIdentification"`
-	BranchMediatedServiceName   []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchMediatedServiceNameEnum  `json:"BranchMediatedServiceName"`
-	BranchName                  *string                                                                                        `json:"BranchName"`
-	BranchOtherFacilities       []string                                                                                       `json:"BranchOtherFacilities"`
-	BranchOtherMediatedServices []string                                                                                       `json:"BranchOtherMediatedServices"`
-	BranchOtherSelfServices     []string                                                                                       `json:"BranchOtherSelfServices"`
-	BranchPhoto                 *string                                                                                        `json:"BranchPhoto"`
-	BranchSelfServeServiceName  []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchSelfServeServiceNameEnum `json:"BranchSelfServeServiceName"`
+	BranchMediatedServiceName   []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchMediatedServiceNameEnum  `json:"BranchMediatedServiceName,omitempty"`
+	BranchName                  *string                                                                                        `json:"BranchName,omitempty"`
+	BranchOtherFacilities       []string                                                                                       `json:"BranchOtherFacilities,omitempty"`
+	BranchOtherMediatedServices []string                                                                                       `json:"BranchOtherMediatedServices,omitempty"`
+	BranchOtherSelfServices     []string                                                                                       `json:"BranchOtherSelfServices,omitempty"`
+	BranchPhoto                 *string                                                                                        `json:"BranchPhoto,omitempty"`
+	BranchSelfServeServiceName  []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchSelfServeServiceNameEnum `json:"BranchSelfServeServiceName,omitempty"`
 	BranchType                  GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBranchTypeEnum                   `json:"BranchType"`
 	CustomerSegment             []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerSegmentEnum            `json:"CustomerSegment"`
-	DaysOfTheWeek               *string                                                                                        `json:"DaysOfTheWeek"`
-	DepartureTime               *string                                                                                        `json:"DepartureTime"`
-	FaxNumber                   []string                                                                                       `json:"FaxNumber"`
-	GeographicLocation          *GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation              `json:"GeographicLocation"`
+	DaysOfTheWeek               *string                                                                                        `json:"DaysOfTheWeek,omitempty"`
+	DepartureTime               *string                                                                                        `json:"DepartureTime,omitempty"`
+	FaxNumber                   []string                                                                                       `json:"FaxNumber,omitempty"`
+	GeographicLocation          *GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation              `json:"GeographicLocation,omitempty"`
 	OpeningTimes                []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOpeningTimes                   `json:"OpeningTimes"`
 	Organisation                GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation                     `json:"Organisation"`
-	ParkingLocation             *string                                                                                        `json:"ParkingLocation"`
-	PlannedBranchClosure        []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataPlannedBranchClosure           `json:"PlannedBranchClosure"`
-	StopName                    *string                                                                                        `json:"StopName"`
+	ParkingLocation             *string                                                                                        `json:"ParkingLocation,omitempty"`
+	PlannedBranchClosure        []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONDataPlannedBranchClosure           `json:"PlannedBranchClosure,omitempty"`
+	StopName                    *string                                                                                        `json:"StopName,omitempty"`
 	TelephoneNumber             string                                                                                         `json:"TelephoneNumber"`
 }
 

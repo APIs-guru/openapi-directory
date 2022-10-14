@@ -1,6 +1,6 @@
 package shared
 
 type DescribeOrganizationConfigRuleStatusesResponse struct {
-	NextToken                      *string                        `json:"NextToken"`
-	OrganizationConfigRuleStatuses []OrganizationConfigRuleStatus `json:"OrganizationConfigRuleStatuses"`
+	NextToken                      *string                        `json:"NextToken,omitempty"`
+	OrganizationConfigRuleStatuses []OrganizationConfigRuleStatus `json:"OrganizationConfigRuleStatuses,omitempty"`
 }

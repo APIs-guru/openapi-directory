@@ -24,23 +24,23 @@ const (
 )
 
 type Model struct {
-	BestTrialID             *string                  `json:"bestTrialId"`
-	CreationTime            *string                  `json:"creationTime"`
-	DefaultTrialID          *string                  `json:"defaultTrialId"`
-	Description             *string                  `json:"description"`
-	EncryptionConfiguration *EncryptionConfiguration `json:"encryptionConfiguration"`
-	Etag                    *string                  `json:"etag"`
-	ExpirationTime          *string                  `json:"expirationTime"`
-	FeatureColumns          []StandardSQLField       `json:"featureColumns"`
-	FriendlyName            *string                  `json:"friendlyName"`
-	HparamSearchSpaces      *HparamSearchSpaces      `json:"hparamSearchSpaces"`
-	HparamTrials            []HparamTuningTrial      `json:"hparamTrials"`
-	LabelColumns            []StandardSQLField       `json:"labelColumns"`
-	Labels                  map[string]string        `json:"labels"`
-	LastModifiedTime        *string                  `json:"lastModifiedTime"`
-	Location                *string                  `json:"location"`
-	ModelReference          *ModelReference          `json:"modelReference"`
-	ModelType               *ModelModelTypeEnum      `json:"modelType"`
-	OptimalTrialIds         []string                 `json:"optimalTrialIds"`
-	TrainingRuns            []TrainingRun            `json:"trainingRuns"`
+	BestTrialID             *string                  `json:"bestTrialId,omitempty"`
+	CreationTime            *string                  `json:"creationTime,omitempty"`
+	DefaultTrialID          *string                  `json:"defaultTrialId,omitempty"`
+	Description             *string                  `json:"description,omitempty"`
+	EncryptionConfiguration *EncryptionConfiguration `json:"encryptionConfiguration,omitempty"`
+	Etag                    *string                  `json:"etag,omitempty"`
+	ExpirationTime          *string                  `json:"expirationTime,omitempty"`
+	FeatureColumns          []StandardSQLField       `json:"featureColumns,omitempty"`
+	FriendlyName            *string                  `json:"friendlyName,omitempty"`
+	HparamSearchSpaces      *HparamSearchSpaces      `json:"hparamSearchSpaces,omitempty"`
+	HparamTrials            []HparamTuningTrial      `json:"hparamTrials,omitempty"`
+	LabelColumns            []StandardSQLField       `json:"labelColumns,omitempty"`
+	Labels                  map[string]string        `json:"labels,omitempty"`
+	LastModifiedTime        *string                  `json:"lastModifiedTime,omitempty"`
+	Location                *string                  `json:"location,omitempty"`
+	ModelReference          *ModelReference          `json:"modelReference,omitempty"`
+	ModelType               *ModelModelTypeEnum      `json:"modelType,omitempty"`
+	OptimalTrialIds         []string                 `json:"optimalTrialIds,omitempty"`
+	TrainingRuns            []TrainingRun            `json:"trainingRuns,omitempty"`
 }

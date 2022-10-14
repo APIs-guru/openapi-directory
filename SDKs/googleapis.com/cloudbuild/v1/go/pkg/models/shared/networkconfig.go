@@ -9,6 +9,6 @@ const (
 )
 
 type NetworkConfig struct {
-	EgressOption  *NetworkConfigEgressOptionEnum `json:"egressOption"`
-	PeeredNetwork *string                        `json:"peeredNetwork"`
+	EgressOption  *NetworkConfigEgressOptionEnum `json:"egressOption,omitempty"`
+	PeeredNetwork *string                        `json:"peeredNetwork,omitempty"`
 }

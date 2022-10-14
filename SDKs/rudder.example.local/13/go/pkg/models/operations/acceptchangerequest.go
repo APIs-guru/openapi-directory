@@ -16,7 +16,7 @@ const (
 )
 
 type AcceptChangeRequestRequestBody struct {
-	Status *AcceptChangeRequestRequestBodyStatusEnum `json:"status"`
+	Status *AcceptChangeRequestRequestBodyStatusEnum `json:"status,omitempty"`
 }
 
 type AcceptChangeRequestRequest struct {

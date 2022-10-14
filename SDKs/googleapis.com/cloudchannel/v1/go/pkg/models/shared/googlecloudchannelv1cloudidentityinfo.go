@@ -9,12 +9,12 @@ const (
 )
 
 type GoogleCloudChannelV1CloudIdentityInfo struct {
-	AdminConsoleURI  *string                                                `json:"adminConsoleUri"`
-	AlternateEmail   *string                                                `json:"alternateEmail"`
-	CustomerType     *GoogleCloudChannelV1CloudIdentityInfoCustomerTypeEnum `json:"customerType"`
-	EduData          *GoogleCloudChannelV1EduData                           `json:"eduData"`
-	IsDomainVerified *bool                                                  `json:"isDomainVerified"`
-	LanguageCode     *string                                                `json:"languageCode"`
-	PhoneNumber      *string                                                `json:"phoneNumber"`
-	PrimaryDomain    *string                                                `json:"primaryDomain"`
+	AdminConsoleURI  *string                                                `json:"adminConsoleUri,omitempty"`
+	AlternateEmail   *string                                                `json:"alternateEmail,omitempty"`
+	CustomerType     *GoogleCloudChannelV1CloudIdentityInfoCustomerTypeEnum `json:"customerType,omitempty"`
+	EduData          *GoogleCloudChannelV1EduData                           `json:"eduData,omitempty"`
+	IsDomainVerified *bool                                                  `json:"isDomainVerified,omitempty"`
+	LanguageCode     *string                                                `json:"languageCode,omitempty"`
+	PhoneNumber      *string                                                `json:"phoneNumber,omitempty"`
+	PrimaryDomain    *string                                                `json:"primaryDomain,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeGameServerInstancesOutput struct {
-	GameServerInstances []GameServerInstance `json:"GameServerInstances"`
-	NextToken           *string              `json:"NextToken"`
+	GameServerInstances []GameServerInstance `json:"GameServerInstances,omitempty"`
+	NextToken           *string              `json:"NextToken,omitempty"`
 }

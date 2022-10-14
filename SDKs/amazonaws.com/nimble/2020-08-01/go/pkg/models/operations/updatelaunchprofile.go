@@ -21,18 +21,18 @@ type UpdateLaunchProfileHeaders struct {
 }
 
 type UpdateLaunchProfileRequestBodyStreamConfiguration struct {
-	ClipboardMode             *shared.StreamingClipboardModeEnum `json:"clipboardMode"`
-	Ec2InstanceTypes          []shared.StreamingInstanceTypeEnum `json:"ec2InstanceTypes"`
-	MaxSessionLengthInMinutes *int64                             `json:"maxSessionLengthInMinutes"`
-	StreamingImageIds         []string                           `json:"streamingImageIds"`
+	ClipboardMode             *shared.StreamingClipboardModeEnum `json:"clipboardMode,omitempty"`
+	Ec2InstanceTypes          []shared.StreamingInstanceTypeEnum `json:"ec2InstanceTypes,omitempty"`
+	MaxSessionLengthInMinutes *int64                             `json:"maxSessionLengthInMinutes,omitempty"`
+	StreamingImageIds         []string                           `json:"streamingImageIds,omitempty"`
 }
 
 type UpdateLaunchProfileRequestBody struct {
-	Description                   *string                                            `json:"description"`
-	LaunchProfileProtocolVersions []string                                           `json:"launchProfileProtocolVersions"`
-	Name                          *string                                            `json:"name"`
-	StreamConfiguration           *UpdateLaunchProfileRequestBodyStreamConfiguration `json:"streamConfiguration"`
-	StudioComponentIds            []string                                           `json:"studioComponentIds"`
+	Description                   *string                                            `json:"description,omitempty"`
+	LaunchProfileProtocolVersions []string                                           `json:"launchProfileProtocolVersions,omitempty"`
+	Name                          *string                                            `json:"name,omitempty"`
+	StreamConfiguration           *UpdateLaunchProfileRequestBodyStreamConfiguration `json:"streamConfiguration,omitempty"`
+	StudioComponentIds            []string                                           `json:"studioComponentIds,omitempty"`
 }
 
 type UpdateLaunchProfileRequest struct {

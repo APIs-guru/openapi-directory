@@ -11,5 +11,5 @@ type SessionRequest struct {
 	ClientID     string                      `json:"clientId"`
 	ClientSecret string                      `json:"clientSecret"`
 	GrantType    SessionRequestGrantTypeEnum `json:"grantType"`
-	RefreshToken *string                     `json:"refreshToken"`
+	RefreshToken *string                     `json:"refreshToken,omitempty"`
 }

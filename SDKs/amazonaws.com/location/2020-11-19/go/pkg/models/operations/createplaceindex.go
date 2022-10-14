@@ -15,7 +15,7 @@ type CreatePlaceIndexHeaders struct {
 }
 
 type CreatePlaceIndexRequestBodyDataSourceConfiguration struct {
-	IntendedUse *shared.IntendedUseEnum `json:"IntendedUse"`
+	IntendedUse *shared.IntendedUseEnum `json:"IntendedUse,omitempty"`
 }
 
 type CreatePlaceIndexRequestBodyPricingPlanEnum string
@@ -28,11 +28,11 @@ const (
 
 type CreatePlaceIndexRequestBody struct {
 	DataSource              string                                              `json:"DataSource"`
-	DataSourceConfiguration *CreatePlaceIndexRequestBodyDataSourceConfiguration `json:"DataSourceConfiguration"`
-	Description             *string                                             `json:"Description"`
+	DataSourceConfiguration *CreatePlaceIndexRequestBodyDataSourceConfiguration `json:"DataSourceConfiguration,omitempty"`
+	Description             *string                                             `json:"Description,omitempty"`
 	IndexName               string                                              `json:"IndexName"`
 	PricingPlan             CreatePlaceIndexRequestBodyPricingPlanEnum          `json:"PricingPlan"`
-	Tags                    map[string]string                                   `json:"Tags"`
+	Tags                    map[string]string                                   `json:"Tags,omitempty"`
 }
 
 type CreatePlaceIndexRequest struct {

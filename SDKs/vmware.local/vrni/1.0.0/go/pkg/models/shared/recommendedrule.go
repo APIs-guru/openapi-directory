@@ -8,9 +8,9 @@ const (
 )
 
 type RecommendedRule struct {
-	Action       *RecommendedRuleActionEnum `json:"action"`
-	Destinations []Reference                `json:"destinations"`
-	PortRanges   []SimplePortRange          `json:"port_ranges"`
-	Protocols    []string                   `json:"protocols"`
-	Sources      []Reference                `json:"sources"`
+	Action       *RecommendedRuleActionEnum `json:"action,omitempty"`
+	Destinations []Reference                `json:"destinations,omitempty"`
+	PortRanges   []SimplePortRange          `json:"port_ranges,omitempty"`
+	Protocols    []string                   `json:"protocols,omitempty"`
+	Sources      []Reference                `json:"sources,omitempty"`
 }

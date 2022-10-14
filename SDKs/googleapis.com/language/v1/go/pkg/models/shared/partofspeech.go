@@ -143,16 +143,16 @@ const (
 )
 
 type PartOfSpeech struct {
-	Aspect      *PartOfSpeechAspectEnum      `json:"aspect"`
-	Case        *PartOfSpeechCaseEnum        `json:"case"`
-	Form        *PartOfSpeechFormEnum        `json:"form"`
-	Gender      *PartOfSpeechGenderEnum      `json:"gender"`
-	Mood        *PartOfSpeechMoodEnum        `json:"mood"`
-	Number      *PartOfSpeechNumberEnum      `json:"number"`
-	Person      *PartOfSpeechPersonEnum      `json:"person"`
-	Proper      *PartOfSpeechProperEnum      `json:"proper"`
-	Reciprocity *PartOfSpeechReciprocityEnum `json:"reciprocity"`
-	Tag         *PartOfSpeechTagEnum         `json:"tag"`
-	Tense       *PartOfSpeechTenseEnum       `json:"tense"`
-	Voice       *PartOfSpeechVoiceEnum       `json:"voice"`
+	Aspect      *PartOfSpeechAspectEnum      `json:"aspect,omitempty"`
+	Case        *PartOfSpeechCaseEnum        `json:"case,omitempty"`
+	Form        *PartOfSpeechFormEnum        `json:"form,omitempty"`
+	Gender      *PartOfSpeechGenderEnum      `json:"gender,omitempty"`
+	Mood        *PartOfSpeechMoodEnum        `json:"mood,omitempty"`
+	Number      *PartOfSpeechNumberEnum      `json:"number,omitempty"`
+	Person      *PartOfSpeechPersonEnum      `json:"person,omitempty"`
+	Proper      *PartOfSpeechProperEnum      `json:"proper,omitempty"`
+	Reciprocity *PartOfSpeechReciprocityEnum `json:"reciprocity,omitempty"`
+	Tag         *PartOfSpeechTagEnum         `json:"tag,omitempty"`
+	Tense       *PartOfSpeechTenseEnum       `json:"tense,omitempty"`
+	Voice       *PartOfSpeechVoiceEnum       `json:"voice,omitempty"`
 }

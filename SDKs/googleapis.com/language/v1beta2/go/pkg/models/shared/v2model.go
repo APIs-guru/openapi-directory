@@ -9,5 +9,5 @@ const (
 )
 
 type V2Model struct {
-	ContentCategoriesVersion *V2ModelContentCategoriesVersionEnum `json:"contentCategoriesVersion"`
+	ContentCategoriesVersion *V2ModelContentCategoriesVersionEnum `json:"contentCategoriesVersion,omitempty"`
 }

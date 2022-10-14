@@ -1,9 +1,9 @@
 package shared
 
 type TestOrderLineItem struct {
-	Product         *TestOrderLineItemProduct     `json:"product"`
-	QuantityOrdered *int64                        `json:"quantityOrdered"`
-	ReturnInfo      *OrderLineItemReturnInfo      `json:"returnInfo"`
-	ShippingDetails *OrderLineItemShippingDetails `json:"shippingDetails"`
-	UnitTax         *Price                        `json:"unitTax"`
+	Product         *TestOrderLineItemProduct     `json:"product,omitempty"`
+	QuantityOrdered *int64                        `json:"quantityOrdered,omitempty"`
+	ReturnInfo      *OrderLineItemReturnInfo      `json:"returnInfo,omitempty"`
+	ShippingDetails *OrderLineItemShippingDetails `json:"shippingDetails,omitempty"`
+	UnitTax         *Price                        `json:"unitTax,omitempty"`
 }

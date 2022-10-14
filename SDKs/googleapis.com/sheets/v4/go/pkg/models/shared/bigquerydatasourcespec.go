@@ -1,7 +1,7 @@
 package shared
 
 type BigQueryDataSourceSpec struct {
-	ProjectID *string            `json:"projectId"`
-	QuerySpec *BigQueryQuerySpec `json:"querySpec"`
-	TableSpec *BigQueryTableSpec `json:"tableSpec"`
+	ProjectID *string            `json:"projectId,omitempty"`
+	QuerySpec *BigQueryQuerySpec `json:"querySpec,omitempty"`
+	TableSpec *BigQueryTableSpec `json:"tableSpec,omitempty"`
 }

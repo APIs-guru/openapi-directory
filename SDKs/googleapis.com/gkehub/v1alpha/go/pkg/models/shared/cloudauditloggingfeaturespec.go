@@ -1,5 +1,5 @@
 package shared
 
 type CloudAuditLoggingFeatureSpec struct {
-	AllowlistedServiceAccounts []string `json:"allowlistedServiceAccounts"`
+	AllowlistedServiceAccounts []string `json:"allowlistedServiceAccounts,omitempty"`
 }

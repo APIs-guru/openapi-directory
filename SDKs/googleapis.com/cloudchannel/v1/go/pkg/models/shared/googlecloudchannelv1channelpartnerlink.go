@@ -11,12 +11,12 @@ const (
 )
 
 type GoogleCloudChannelV1ChannelPartnerLink struct {
-	ChannelPartnerCloudIdentityInfo *GoogleCloudChannelV1CloudIdentityInfo               `json:"channelPartnerCloudIdentityInfo"`
-	CreateTime                      *string                                              `json:"createTime"`
-	InviteLinkURI                   *string                                              `json:"inviteLinkUri"`
-	LinkState                       *GoogleCloudChannelV1ChannelPartnerLinkLinkStateEnum `json:"linkState"`
-	Name                            *string                                              `json:"name"`
-	PublicID                        *string                                              `json:"publicId"`
-	ResellerCloudIdentityID         *string                                              `json:"resellerCloudIdentityId"`
-	UpdateTime                      *string                                              `json:"updateTime"`
+	ChannelPartnerCloudIdentityInfo *GoogleCloudChannelV1CloudIdentityInfo               `json:"channelPartnerCloudIdentityInfo,omitempty"`
+	CreateTime                      *string                                              `json:"createTime,omitempty"`
+	InviteLinkURI                   *string                                              `json:"inviteLinkUri,omitempty"`
+	LinkState                       *GoogleCloudChannelV1ChannelPartnerLinkLinkStateEnum `json:"linkState,omitempty"`
+	Name                            *string                                              `json:"name,omitempty"`
+	PublicID                        *string                                              `json:"publicId,omitempty"`
+	ResellerCloudIdentityID         *string                                              `json:"resellerCloudIdentityId,omitempty"`
+	UpdateTime                      *string                                              `json:"updateTime,omitempty"`
 }

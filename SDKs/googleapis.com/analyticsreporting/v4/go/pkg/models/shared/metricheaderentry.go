@@ -12,6 +12,6 @@ const (
 )
 
 type MetricHeaderEntry struct {
-	Name *string                    `json:"name"`
-	Type *MetricHeaderEntryTypeEnum `json:"type"`
+	Name *string                    `json:"name,omitempty"`
+	Type *MetricHeaderEntryTypeEnum `json:"type,omitempty"`
 }

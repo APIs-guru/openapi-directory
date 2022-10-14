@@ -19,7 +19,7 @@ type GetTimePeriodRequest struct {
 }
 
 type GetTimePeriod200ApplicationJSON struct {
-	Data *shared.TimePeriodResponse `json:"data"`
+	Data *shared.TimePeriodResponse `json:"data,omitempty"`
 }
 
 type GetTimePeriodResponse struct {

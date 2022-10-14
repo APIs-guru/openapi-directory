@@ -8,9 +8,9 @@ const (
 )
 
 type ObjectStorageCluster struct {
-	Domain           *string                         `json:"domain"`
-	ID               *string                         `json:"id"`
-	Region           *string                         `json:"region"`
-	StaticSiteDomain *string                         `json:"static_site_domain"`
-	Status           *ObjectStorageClusterStatusEnum `json:"status"`
+	Domain           *string                         `json:"domain,omitempty"`
+	ID               *string                         `json:"id,omitempty"`
+	Region           *string                         `json:"region,omitempty"`
+	StaticSiteDomain *string                         `json:"static_site_domain,omitempty"`
+	Status           *ObjectStorageClusterStatusEnum `json:"status,omitempty"`
 }

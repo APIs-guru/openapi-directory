@@ -1,8 +1,8 @@
 package shared
 
 type IPAlias struct {
-	IP        *string `json:"IP"`
-	Interface *string `json:"interface"`
-	Mask      *string `json:"mask"`
-	Port      *int32  `json:"port"`
+	IP        *string `json:"IP,omitempty"`
+	Interface *string `json:"interface,omitempty"`
+	Mask      *string `json:"mask,omitempty"`
+	Port      *int32  `json:"port,omitempty"`
 }

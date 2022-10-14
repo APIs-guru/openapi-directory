@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudBillingBudgetsV1Budget struct {
-	Amount            *GoogleCloudBillingBudgetsV1BudgetAmount      `json:"amount"`
-	BudgetFilter      *GoogleCloudBillingBudgetsV1Filter            `json:"budgetFilter"`
-	DisplayName       *string                                       `json:"displayName"`
-	Etag              *string                                       `json:"etag"`
-	Name              *string                                       `json:"name"`
-	NotificationsRule *GoogleCloudBillingBudgetsV1NotificationsRule `json:"notificationsRule"`
-	ThresholdRules    []GoogleCloudBillingBudgetsV1ThresholdRule    `json:"thresholdRules"`
+	Amount            *GoogleCloudBillingBudgetsV1BudgetAmount      `json:"amount,omitempty"`
+	BudgetFilter      *GoogleCloudBillingBudgetsV1Filter            `json:"budgetFilter,omitempty"`
+	DisplayName       *string                                       `json:"displayName,omitempty"`
+	Etag              *string                                       `json:"etag,omitempty"`
+	Name              *string                                       `json:"name,omitempty"`
+	NotificationsRule *GoogleCloudBillingBudgetsV1NotificationsRule `json:"notificationsRule,omitempty"`
+	ThresholdRules    []GoogleCloudBillingBudgetsV1ThresholdRule    `json:"thresholdRules,omitempty"`
 }

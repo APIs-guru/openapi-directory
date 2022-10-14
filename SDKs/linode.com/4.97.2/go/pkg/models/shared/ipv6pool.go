@@ -1,8 +1,8 @@
 package shared
 
 type IPv6Pool struct {
-	Prefix      *int64  `json:"prefix"`
-	Range       *string `json:"range"`
-	Region      *string `json:"region"`
-	RouteTarget *string `json:"route_target"`
+	Prefix      *int64  `json:"prefix,omitempty"`
+	Range       *string `json:"range,omitempty"`
+	Region      *string `json:"region,omitempty"`
+	RouteTarget *string `json:"route_target,omitempty"`
 }

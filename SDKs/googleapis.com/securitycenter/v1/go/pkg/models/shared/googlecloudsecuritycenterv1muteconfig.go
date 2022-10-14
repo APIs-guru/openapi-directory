@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudSecuritycenterV1MuteConfig struct {
-	CreateTime       *string `json:"createTime"`
-	Description      *string `json:"description"`
-	DisplayName      *string `json:"displayName"`
-	Filter           *string `json:"filter"`
-	MostRecentEditor *string `json:"mostRecentEditor"`
-	Name             *string `json:"name"`
-	UpdateTime       *string `json:"updateTime"`
+	CreateTime       *string `json:"createTime,omitempty"`
+	Description      *string `json:"description,omitempty"`
+	DisplayName      *string `json:"displayName,omitempty"`
+	Filter           *string `json:"filter,omitempty"`
+	MostRecentEditor *string `json:"mostRecentEditor,omitempty"`
+	Name             *string `json:"name,omitempty"`
+	UpdateTime       *string `json:"updateTime,omitempty"`
 }

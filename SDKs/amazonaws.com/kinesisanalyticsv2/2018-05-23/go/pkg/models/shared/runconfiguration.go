@@ -1,7 +1,7 @@
 package shared
 
 type RunConfiguration struct {
-	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration `json:"ApplicationRestoreConfiguration"`
-	FlinkRunConfiguration           *FlinkRunConfiguration           `json:"FlinkRunConfiguration"`
-	SQLRunConfigurations            []SQLRunConfiguration            `json:"SqlRunConfigurations"`
+	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration `json:"ApplicationRestoreConfiguration,omitempty"`
+	FlinkRunConfiguration           *FlinkRunConfiguration           `json:"FlinkRunConfiguration,omitempty"`
+	SQLRunConfigurations            []SQLRunConfiguration            `json:"SqlRunConfigurations,omitempty"`
 }

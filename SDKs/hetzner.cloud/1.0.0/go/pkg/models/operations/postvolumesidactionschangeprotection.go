@@ -5,7 +5,7 @@ type PostVolumesIDActionsChangeProtectionPathParams struct {
 }
 
 type PostVolumesIDActionsChangeProtectionRequestBody struct {
-	Delete *bool `json:"delete"`
+	Delete *bool `json:"delete,omitempty"`
 }
 
 type PostVolumesIDActionsChangeProtectionRequest struct {

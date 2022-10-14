@@ -1,6 +1,6 @@
 package shared
 
 type BiEngineStatistics struct {
-	BiEngineMode    *string          `json:"biEngineMode"`
-	BiEngineReasons []BiEngineReason `json:"biEngineReasons"`
+	BiEngineMode    *string          `json:"biEngineMode,omitempty"`
+	BiEngineReasons []BiEngineReason `json:"biEngineReasons,omitempty"`
 }

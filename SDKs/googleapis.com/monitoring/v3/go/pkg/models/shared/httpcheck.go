@@ -16,16 +16,16 @@ const (
 )
 
 type HTTPCheck struct {
-	AcceptedResponseStatusCodes []ResponseStatusCode        `json:"acceptedResponseStatusCodes"`
-	AuthInfo                    *BasicAuthentication        `json:"authInfo"`
-	Body                        *string                     `json:"body"`
-	ContentType                 *HTTPCheckContentTypeEnum   `json:"contentType"`
-	Headers                     map[string]string           `json:"headers"`
-	MaskHeaders                 *bool                       `json:"maskHeaders"`
-	Path                        *string                     `json:"path"`
-	PingConfig                  *PingConfig                 `json:"pingConfig"`
-	Port                        *int32                      `json:"port"`
-	RequestMethod               *HTTPCheckRequestMethodEnum `json:"requestMethod"`
-	UseSsl                      *bool                       `json:"useSsl"`
-	ValidateSsl                 *bool                       `json:"validateSsl"`
+	AcceptedResponseStatusCodes []ResponseStatusCode        `json:"acceptedResponseStatusCodes,omitempty"`
+	AuthInfo                    *BasicAuthentication        `json:"authInfo,omitempty"`
+	Body                        *string                     `json:"body,omitempty"`
+	ContentType                 *HTTPCheckContentTypeEnum   `json:"contentType,omitempty"`
+	Headers                     map[string]string           `json:"headers,omitempty"`
+	MaskHeaders                 *bool                       `json:"maskHeaders,omitempty"`
+	Path                        *string                     `json:"path,omitempty"`
+	PingConfig                  *PingConfig                 `json:"pingConfig,omitempty"`
+	Port                        *int32                      `json:"port,omitempty"`
+	RequestMethod               *HTTPCheckRequestMethodEnum `json:"requestMethod,omitempty"`
+	UseSsl                      *bool                       `json:"useSsl,omitempty"`
+	ValidateSsl                 *bool                       `json:"validateSsl,omitempty"`
 }

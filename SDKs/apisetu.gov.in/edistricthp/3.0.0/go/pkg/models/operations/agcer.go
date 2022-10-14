@@ -15,8 +15,8 @@ const (
 )
 
 type AgcerRequestBody struct {
-	CertificateParameters *AgcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *AgcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                AgcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Agcer400ApplicationJSON struct {
-	Error            *Agcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Agcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Agcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Agcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Agcer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Agcer401ApplicationJSON struct {
-	Error            *Agcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Agcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Agcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Agcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Agcer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Agcer404ApplicationJSON struct {
-	Error            *Agcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Agcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Agcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Agcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Agcer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Agcer500ApplicationJSON struct {
-	Error            *Agcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Agcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Agcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Agcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Agcer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Agcer502ApplicationJSON struct {
-	Error            *Agcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Agcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Agcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Agcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Agcer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Agcer503ApplicationJSON struct {
-	Error            *Agcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Agcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Agcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Agcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Agcer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Agcer504ApplicationJSON struct {
-	Error            *Agcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Agcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Agcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Agcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type AgcerResponse struct {

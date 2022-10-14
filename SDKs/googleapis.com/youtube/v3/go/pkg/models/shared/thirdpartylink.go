@@ -1,9 +1,9 @@
 package shared
 
 type ThirdPartyLink struct {
-	Etag         *string                `json:"etag"`
-	Kind         *string                `json:"kind"`
-	LinkingToken *string                `json:"linkingToken"`
-	Snippet      *ThirdPartyLinkSnippet `json:"snippet"`
-	Status       *ThirdPartyLinkStatus  `json:"status"`
+	Etag         *string                `json:"etag,omitempty"`
+	Kind         *string                `json:"kind,omitempty"`
+	LinkingToken *string                `json:"linkingToken,omitempty"`
+	Snippet      *ThirdPartyLinkSnippet `json:"snippet,omitempty"`
+	Status       *ThirdPartyLinkStatus  `json:"status,omitempty"`
 }

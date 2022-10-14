@@ -5,22 +5,22 @@ import (
 )
 
 type StudioComponent struct {
-	Arn                   *string                               `json:"arn"`
-	Configuration         *StudioComponentConfiguration         `json:"configuration"`
-	CreatedAt             *time.Time                            `json:"createdAt"`
-	CreatedBy             *string                               `json:"createdBy"`
-	Description           *string                               `json:"description"`
-	Ec2SecurityGroupIds   []string                              `json:"ec2SecurityGroupIds"`
-	InitializationScripts []StudioComponentInitializationScript `json:"initializationScripts"`
-	Name                  *string                               `json:"name"`
-	ScriptParameters      []ScriptParameterKeyValue             `json:"scriptParameters"`
-	State                 *StudioComponentStateEnum             `json:"state"`
-	StatusCode            *StudioComponentStatusCodeEnum        `json:"statusCode"`
-	StatusMessage         *string                               `json:"statusMessage"`
-	StudioComponentID     *string                               `json:"studioComponentId"`
-	Subtype               *StudioComponentSubtypeEnum           `json:"subtype"`
-	Tags                  map[string]string                     `json:"tags"`
-	Type                  *StudioComponentTypeEnum              `json:"type"`
-	UpdatedAt             *time.Time                            `json:"updatedAt"`
-	UpdatedBy             *string                               `json:"updatedBy"`
+	Arn                   *string                               `json:"arn,omitempty"`
+	Configuration         *StudioComponentConfiguration         `json:"configuration,omitempty"`
+	CreatedAt             *time.Time                            `json:"createdAt,omitempty"`
+	CreatedBy             *string                               `json:"createdBy,omitempty"`
+	Description           *string                               `json:"description,omitempty"`
+	Ec2SecurityGroupIds   []string                              `json:"ec2SecurityGroupIds,omitempty"`
+	InitializationScripts []StudioComponentInitializationScript `json:"initializationScripts,omitempty"`
+	Name                  *string                               `json:"name,omitempty"`
+	ScriptParameters      []ScriptParameterKeyValue             `json:"scriptParameters,omitempty"`
+	State                 *StudioComponentStateEnum             `json:"state,omitempty"`
+	StatusCode            *StudioComponentStatusCodeEnum        `json:"statusCode,omitempty"`
+	StatusMessage         *string                               `json:"statusMessage,omitempty"`
+	StudioComponentID     *string                               `json:"studioComponentId,omitempty"`
+	Subtype               *StudioComponentSubtypeEnum           `json:"subtype,omitempty"`
+	Tags                  map[string]string                     `json:"tags,omitempty"`
+	Type                  *StudioComponentTypeEnum              `json:"type,omitempty"`
+	UpdatedAt             *time.Time                            `json:"updatedAt,omitempty"`
+	UpdatedBy             *string                               `json:"updatedBy,omitempty"`
 }

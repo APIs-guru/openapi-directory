@@ -1,9 +1,9 @@
 package shared
 
 type StartLabelDetectionRequest struct {
-	ClientRequestToken  *string              `json:"ClientRequestToken"`
-	JobTag              *string              `json:"JobTag"`
-	MinConfidence       *float32             `json:"MinConfidence"`
-	NotificationChannel *NotificationChannel `json:"NotificationChannel"`
+	ClientRequestToken  *string              `json:"ClientRequestToken,omitempty"`
+	JobTag              *string              `json:"JobTag,omitempty"`
+	MinConfidence       *float32             `json:"MinConfidence,omitempty"`
+	NotificationChannel *NotificationChannel `json:"NotificationChannel,omitempty"`
 	Video               Video                `json:"Video"`
 }

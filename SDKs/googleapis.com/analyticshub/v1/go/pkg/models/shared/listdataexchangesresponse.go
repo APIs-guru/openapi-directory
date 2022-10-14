@@ -1,6 +1,6 @@
 package shared
 
 type ListDataExchangesResponse struct {
-	DataExchanges []DataExchange `json:"dataExchanges"`
-	NextPageToken *string        `json:"nextPageToken"`
+	DataExchanges []DataExchange `json:"dataExchanges,omitempty"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
 }

@@ -13,15 +13,15 @@ const (
 )
 
 type CreateNetworkMerakiAuthUserRequestBodyAuthorizations struct {
-	ExpiresAt  *string `json:"expiresAt"`
-	SsidNumber *int64  `json:"ssidNumber"`
+	ExpiresAt  *string `json:"expiresAt,omitempty"`
+	SsidNumber *int64  `json:"ssidNumber,omitempty"`
 }
 
 type CreateNetworkMerakiAuthUserRequestBody struct {
-	AccountType         *CreateNetworkMerakiAuthUserRequestBodyAccountTypeEnum `json:"accountType"`
+	AccountType         *CreateNetworkMerakiAuthUserRequestBodyAccountTypeEnum `json:"accountType,omitempty"`
 	Authorizations      []CreateNetworkMerakiAuthUserRequestBodyAuthorizations `json:"authorizations"`
 	Email               string                                                 `json:"email"`
-	EmailPasswordToUser *bool                                                  `json:"emailPasswordToUser"`
+	EmailPasswordToUser *bool                                                  `json:"emailPasswordToUser,omitempty"`
 	Name                string                                                 `json:"name"`
 	Password            string                                                 `json:"password"`
 }

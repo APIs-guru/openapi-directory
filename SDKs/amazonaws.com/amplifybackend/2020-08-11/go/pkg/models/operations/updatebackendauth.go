@@ -20,10 +20,10 @@ type UpdateBackendAuthHeaders struct {
 }
 
 type UpdateBackendAuthRequestBodyResourceConfig struct {
-	AuthResources       *shared.AuthResourcesEnum                   `json:"AuthResources"`
-	IdentityPoolConfigs *shared.UpdateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs"`
-	Service             *shared.ServiceEnum                         `json:"Service"`
-	UserPoolConfigs     *shared.UpdateBackendAuthUserPoolConfig     `json:"UserPoolConfigs"`
+	AuthResources       *shared.AuthResourcesEnum                   `json:"AuthResources,omitempty"`
+	IdentityPoolConfigs *shared.UpdateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs,omitempty"`
+	Service             *shared.ServiceEnum                         `json:"Service,omitempty"`
+	UserPoolConfigs     *shared.UpdateBackendAuthUserPoolConfig     `json:"UserPoolConfigs,omitempty"`
 }
 
 type UpdateBackendAuthRequestBody struct {

@@ -14,9 +14,9 @@ const (
 )
 
 type AppEngineHTTPRequest struct {
-	AppEngineRouting *AppEngineRouting                   `json:"appEngineRouting"`
-	Body             *string                             `json:"body"`
-	Headers          map[string]string                   `json:"headers"`
-	HTTPMethod       *AppEngineHTTPRequestHTTPMethodEnum `json:"httpMethod"`
-	RelativeURI      *string                             `json:"relativeUri"`
+	AppEngineRouting *AppEngineRouting                   `json:"appEngineRouting,omitempty"`
+	Body             *string                             `json:"body,omitempty"`
+	Headers          map[string]string                   `json:"headers,omitempty"`
+	HTTPMethod       *AppEngineHTTPRequestHTTPMethodEnum `json:"httpMethod,omitempty"`
+	RelativeURI      *string                             `json:"relativeUri,omitempty"`
 }

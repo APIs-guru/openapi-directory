@@ -10,13 +10,13 @@ type GetEnvironmentRelationsRequest struct {
 }
 
 type GetEnvironmentRelations200ApplicationJSONEnvironment struct {
-	ID        *string `json:"id"`
-	Name      *string `json:"name"`
-	UpdatedAt *string `json:"updatedAt"`
+	ID        *string `json:"id,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 type GetEnvironmentRelations200ApplicationJSON struct {
-	Environment []GetEnvironmentRelations200ApplicationJSONEnvironment `json:"environment"`
+	Environment []GetEnvironmentRelations200ApplicationJSONEnvironment `json:"environment,omitempty"`
 }
 
 type GetEnvironmentRelationsResponse struct {

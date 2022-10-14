@@ -1,6 +1,6 @@
 package shared
 
 type ListFailuresForLicenseConfigurationOperationsResponse struct {
-	LicenseOperationFailureList []LicenseOperationFailure `json:"LicenseOperationFailureList"`
-	NextToken                   *string                   `json:"NextToken"`
+	LicenseOperationFailureList []LicenseOperationFailure `json:"LicenseOperationFailureList,omitempty"`
+	NextToken                   *string                   `json:"NextToken,omitempty"`
 }

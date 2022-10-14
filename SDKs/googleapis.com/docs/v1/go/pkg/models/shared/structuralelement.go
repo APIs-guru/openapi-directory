@@ -1,10 +1,10 @@
 package shared
 
 type StructuralElement struct {
-	EndIndex        *int32           `json:"endIndex"`
-	Paragraph       *Paragraph       `json:"paragraph"`
-	SectionBreak    *SectionBreak    `json:"sectionBreak"`
-	StartIndex      *int32           `json:"startIndex"`
-	Table           *Table           `json:"table"`
-	TableOfContents *TableOfContents `json:"tableOfContents"`
+	EndIndex        *int32           `json:"endIndex,omitempty"`
+	Paragraph       *Paragraph       `json:"paragraph,omitempty"`
+	SectionBreak    *SectionBreak    `json:"sectionBreak,omitempty"`
+	StartIndex      *int32           `json:"startIndex,omitempty"`
+	Table           *Table           `json:"table,omitempty"`
+	TableOfContents *TableOfContents `json:"tableOfContents,omitempty"`
 }

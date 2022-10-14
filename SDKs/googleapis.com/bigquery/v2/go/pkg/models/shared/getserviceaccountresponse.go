@@ -1,6 +1,6 @@
 package shared
 
 type GetServiceAccountResponse struct {
-	Email *string `json:"email"`
-	Kind  *string `json:"kind"`
+	Email *string `json:"email,omitempty"`
+	Kind  *string `json:"kind,omitempty"`
 }

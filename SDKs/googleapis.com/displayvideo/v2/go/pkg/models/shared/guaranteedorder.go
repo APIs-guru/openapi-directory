@@ -75,18 +75,18 @@ const (
 )
 
 type GuaranteedOrder struct {
-	DefaultAdvertiserID     *string                      `json:"defaultAdvertiserId"`
-	DefaultCampaignID       *string                      `json:"defaultCampaignId"`
-	DisplayName             *string                      `json:"displayName"`
-	Exchange                *GuaranteedOrderExchangeEnum `json:"exchange"`
-	GuaranteedOrderID       *string                      `json:"guaranteedOrderId"`
-	LegacyGuaranteedOrderID *string                      `json:"legacyGuaranteedOrderId"`
-	Name                    *string                      `json:"name"`
-	PublisherName           *string                      `json:"publisherName"`
-	ReadAccessInherited     *bool                        `json:"readAccessInherited"`
-	ReadAdvertiserIds       []string                     `json:"readAdvertiserIds"`
-	ReadWriteAdvertiserID   *string                      `json:"readWriteAdvertiserId"`
-	ReadWritePartnerID      *string                      `json:"readWritePartnerId"`
-	Status                  *GuaranteedOrderStatus       `json:"status"`
-	UpdateTime              *string                      `json:"updateTime"`
+	DefaultAdvertiserID     *string                      `json:"defaultAdvertiserId,omitempty"`
+	DefaultCampaignID       *string                      `json:"defaultCampaignId,omitempty"`
+	DisplayName             *string                      `json:"displayName,omitempty"`
+	Exchange                *GuaranteedOrderExchangeEnum `json:"exchange,omitempty"`
+	GuaranteedOrderID       *string                      `json:"guaranteedOrderId,omitempty"`
+	LegacyGuaranteedOrderID *string                      `json:"legacyGuaranteedOrderId,omitempty"`
+	Name                    *string                      `json:"name,omitempty"`
+	PublisherName           *string                      `json:"publisherName,omitempty"`
+	ReadAccessInherited     *bool                        `json:"readAccessInherited,omitempty"`
+	ReadAdvertiserIds       []string                     `json:"readAdvertiserIds,omitempty"`
+	ReadWriteAdvertiserID   *string                      `json:"readWriteAdvertiserId,omitempty"`
+	ReadWritePartnerID      *string                      `json:"readWritePartnerId,omitempty"`
+	Status                  *GuaranteedOrderStatus       `json:"status,omitempty"`
+	UpdateTime              *string                      `json:"updateTime,omitempty"`
 }

@@ -10,5 +10,5 @@ const (
 )
 
 type ConditionEvaluation struct {
-	EvaluationValue *ConditionEvaluationEvaluationValueEnum `json:"evaluationValue"`
+	EvaluationValue *ConditionEvaluationEvaluationValueEnum `json:"evaluationValue,omitempty"`
 }

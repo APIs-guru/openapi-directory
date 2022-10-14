@@ -12,9 +12,9 @@ type ReposCreateCommitCommentPathParams struct {
 
 type ReposCreateCommitCommentRequestBody struct {
 	Body     string  `json:"body"`
-	Line     *int64  `json:"line"`
-	Path     *string `json:"path"`
-	Position *int64  `json:"position"`
+	Line     *int64  `json:"line,omitempty"`
+	Path     *string `json:"path,omitempty"`
+	Position *int64  `json:"position,omitempty"`
 }
 
 type ReposCreateCommitCommentRequest struct {

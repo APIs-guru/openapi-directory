@@ -1,7 +1,7 @@
 package shared
 
 type ListComponentBuildVersionsResponse struct {
-	ComponentSummaryList []ComponentSummary `json:"componentSummaryList"`
-	NextToken            *string            `json:"nextToken"`
-	RequestID            *string            `json:"requestId"`
+	ComponentSummaryList []ComponentSummary `json:"componentSummaryList,omitempty"`
+	NextToken            *string            `json:"nextToken,omitempty"`
+	RequestID            *string            `json:"requestId,omitempty"`
 }

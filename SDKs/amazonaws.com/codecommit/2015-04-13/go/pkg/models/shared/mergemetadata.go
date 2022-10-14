@@ -1,8 +1,8 @@
 package shared
 
 type MergeMetadata struct {
-	IsMerged      *bool                    `json:"isMerged"`
-	MergeCommitID *string                  `json:"mergeCommitId"`
-	MergeOption   *MergeOptionTypeEnumEnum `json:"mergeOption"`
-	MergedBy      *string                  `json:"mergedBy"`
+	IsMerged      *bool                    `json:"isMerged,omitempty"`
+	MergeCommitID *string                  `json:"mergeCommitId,omitempty"`
+	MergeOption   *MergeOptionTypeEnumEnum `json:"mergeOption,omitempty"`
+	MergedBy      *string                  `json:"mergedBy,omitempty"`
 }

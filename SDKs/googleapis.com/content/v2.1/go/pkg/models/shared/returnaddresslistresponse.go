@@ -1,7 +1,7 @@
 package shared
 
 type ReturnaddressListResponse struct {
-	Kind          *string         `json:"kind"`
-	NextPageToken *string         `json:"nextPageToken"`
-	Resources     []ReturnAddress `json:"resources"`
+	Kind          *string         `json:"kind,omitempty"`
+	NextPageToken *string         `json:"nextPageToken,omitempty"`
+	Resources     []ReturnAddress `json:"resources,omitempty"`
 }

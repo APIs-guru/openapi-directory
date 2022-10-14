@@ -19,15 +19,15 @@ const (
 )
 
 type Connection struct {
-	ApplicationEndpoint *ApplicationEndpoint `json:"applicationEndpoint"`
-	Connectors          []string             `json:"connectors"`
-	CreateTime          *string              `json:"createTime"`
-	DisplayName         *string              `json:"displayName"`
-	Gateway             *Gateway             `json:"gateway"`
-	Labels              map[string]string    `json:"labels"`
-	Name                *string              `json:"name"`
-	State               *ConnectionStateEnum `json:"state"`
-	Type                *ConnectionTypeEnum  `json:"type"`
-	UID                 *string              `json:"uid"`
-	UpdateTime          *string              `json:"updateTime"`
+	ApplicationEndpoint *ApplicationEndpoint `json:"applicationEndpoint,omitempty"`
+	Connectors          []string             `json:"connectors,omitempty"`
+	CreateTime          *string              `json:"createTime,omitempty"`
+	DisplayName         *string              `json:"displayName,omitempty"`
+	Gateway             *Gateway             `json:"gateway,omitempty"`
+	Labels              map[string]string    `json:"labels,omitempty"`
+	Name                *string              `json:"name,omitempty"`
+	State               *ConnectionStateEnum `json:"state,omitempty"`
+	Type                *ConnectionTypeEnum  `json:"type,omitempty"`
+	UID                 *string              `json:"uid,omitempty"`
+	UpdateTime          *string              `json:"updateTime,omitempty"`
 }

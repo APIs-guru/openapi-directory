@@ -6,7 +6,7 @@ import (
 
 type SubscriptionRequestSubscription struct {
 	Categories []SubscriptionCategoryEnum   `json:"categories"`
-	Hips       []OrganizationRepresentation `json:"hips"`
+	Hips       []OrganizationRepresentation `json:"hips,omitempty"`
 	Hiu        OrganizationRepresentation   `json:"hiu"`
 	Patient    ConsentManagerPatientID      `json:"patient"`
 	Period     SubscriptionPeriod           `json:"period"`

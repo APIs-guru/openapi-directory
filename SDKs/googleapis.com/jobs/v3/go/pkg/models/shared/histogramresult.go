@@ -23,6 +23,6 @@ const (
 )
 
 type HistogramResult struct {
-	SearchType *HistogramResultSearchTypeEnum `json:"searchType"`
-	Values     map[string]int32               `json:"values"`
+	SearchType *HistogramResultSearchTypeEnum `json:"searchType,omitempty"`
+	Values     map[string]int32               `json:"values,omitempty"`
 }

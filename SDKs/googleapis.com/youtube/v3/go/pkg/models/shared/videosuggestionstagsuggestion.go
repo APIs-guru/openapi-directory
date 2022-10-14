@@ -1,6 +1,6 @@
 package shared
 
 type VideoSuggestionsTagSuggestion struct {
-	CategoryRestricts []string `json:"categoryRestricts"`
-	Tag               *string  `json:"tag"`
+	CategoryRestricts []string `json:"categoryRestricts,omitempty"`
+	Tag               *string  `json:"tag,omitempty"`
 }

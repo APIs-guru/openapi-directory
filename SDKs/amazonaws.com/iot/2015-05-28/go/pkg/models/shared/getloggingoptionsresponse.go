@@ -1,6 +1,6 @@
 package shared
 
 type GetLoggingOptionsResponse struct {
-	LogLevel *LogLevelEnum `json:"logLevel"`
-	RoleArn  *string       `json:"roleArn"`
+	LogLevel *LogLevelEnum `json:"logLevel,omitempty"`
+	RoleArn  *string       `json:"roleArn,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type BatchUpdateDocumentResponse struct {
-	DocumentID   *string       `json:"documentId"`
-	Replies      []Response    `json:"replies"`
-	WriteControl *WriteControl `json:"writeControl"`
+	DocumentID   *string       `json:"documentId,omitempty"`
+	Replies      []Response    `json:"replies,omitempty"`
+	WriteControl *WriteControl `json:"writeControl,omitempty"`
 }

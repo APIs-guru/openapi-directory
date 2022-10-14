@@ -13,9 +13,9 @@ type CrawlRequest struct {
 }
 
 type Crawl200ApplicationJSON struct {
-	Answer  *string  `json:"answer"`
-	Results []string `json:"results"`
-	Total   *string  `json:"total"`
+	Answer  *string  `json:"answer,omitempty"`
+	Results []string `json:"results,omitempty"`
+	Total   *string  `json:"total,omitempty"`
 }
 
 type CrawlResponse struct {

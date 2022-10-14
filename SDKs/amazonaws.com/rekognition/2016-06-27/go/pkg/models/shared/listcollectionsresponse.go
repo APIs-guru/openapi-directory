@@ -1,7 +1,7 @@
 package shared
 
 type ListCollectionsResponse struct {
-	CollectionIds     []string `json:"CollectionIds"`
-	FaceModelVersions []string `json:"FaceModelVersions"`
-	NextToken         *string  `json:"NextToken"`
+	CollectionIds     []string `json:"CollectionIds,omitempty"`
+	FaceModelVersions []string `json:"FaceModelVersions,omitempty"`
+	NextToken         *string  `json:"NextToken,omitempty"`
 }

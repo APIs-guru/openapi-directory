@@ -27,11 +27,11 @@ const (
 )
 
 type DeveloperMetadataLookup struct {
-	LocationMatchingStrategy *DeveloperMetadataLookupLocationMatchingStrategyEnum `json:"locationMatchingStrategy"`
-	LocationType             *DeveloperMetadataLookupLocationTypeEnum             `json:"locationType"`
-	MetadataID               *int32                                               `json:"metadataId"`
-	MetadataKey              *string                                              `json:"metadataKey"`
-	MetadataLocation         *DeveloperMetadataLocation                           `json:"metadataLocation"`
-	MetadataValue            *string                                              `json:"metadataValue"`
-	Visibility               *DeveloperMetadataLookupVisibilityEnum               `json:"visibility"`
+	LocationMatchingStrategy *DeveloperMetadataLookupLocationMatchingStrategyEnum `json:"locationMatchingStrategy,omitempty"`
+	LocationType             *DeveloperMetadataLookupLocationTypeEnum             `json:"locationType,omitempty"`
+	MetadataID               *int32                                               `json:"metadataId,omitempty"`
+	MetadataKey              *string                                              `json:"metadataKey,omitempty"`
+	MetadataLocation         *DeveloperMetadataLocation                           `json:"metadataLocation,omitempty"`
+	MetadataValue            *string                                              `json:"metadataValue,omitempty"`
+	Visibility               *DeveloperMetadataLookupVisibilityEnum               `json:"visibility,omitempty"`
 }

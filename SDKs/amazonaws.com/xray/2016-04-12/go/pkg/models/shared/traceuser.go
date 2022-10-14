@@ -1,6 +1,6 @@
 package shared
 
 type TraceUser struct {
-	ServiceIds []ServiceID `json:"ServiceIds"`
-	UserName   *string     `json:"UserName"`
+	ServiceIds []ServiceID `json:"ServiceIds,omitempty"`
+	UserName   *string     `json:"UserName,omitempty"`
 }

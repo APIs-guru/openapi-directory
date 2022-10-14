@@ -1,7 +1,7 @@
 package shared
 
 type ClusterCustomer struct {
-	Address  *ClusterCustomerAddress `json:"address"`
-	ID       *string                 `json:"id"`
-	Quantity *float64                `json:"quantity"`
+	Address  *ClusterCustomerAddress `json:"address,omitempty"`
+	ID       *string                 `json:"id,omitempty"`
+	Quantity *float64                `json:"quantity,omitempty"`
 }

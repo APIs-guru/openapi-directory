@@ -10,5 +10,5 @@ const (
 )
 
 type HeldVoiceQuery struct {
-	CoveredData []HeldVoiceQueryCoveredDataEnum `json:"coveredData"`
+	CoveredData []HeldVoiceQueryCoveredDataEnum `json:"coveredData,omitempty"`
 }

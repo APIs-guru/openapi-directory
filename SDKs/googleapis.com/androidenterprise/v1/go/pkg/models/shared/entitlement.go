@@ -9,6 +9,6 @@ const (
 )
 
 type Entitlement struct {
-	ProductID *string                `json:"productId"`
-	Reason    *EntitlementReasonEnum `json:"reason"`
+	ProductID *string                `json:"productId,omitempty"`
+	Reason    *EntitlementReasonEnum `json:"reason,omitempty"`
 }

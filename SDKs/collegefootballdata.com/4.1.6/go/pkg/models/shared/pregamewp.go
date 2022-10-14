@@ -1,12 +1,12 @@
 package shared
 
 type PregameWp struct {
-	AwayTeam    *string  `json:"awayTeam"`
-	GameID      *int64   `json:"gameId"`
-	HomeTeam    *string  `json:"homeTeam"`
-	HomeWinProb *float64 `json:"homeWinProb"`
-	Season      *int64   `json:"season"`
-	SeasonType  *string  `json:"seasonType"`
-	Spread      *float64 `json:"spread"`
-	Week        *int64   `json:"week"`
+	AwayTeam    *string  `json:"awayTeam,omitempty"`
+	GameID      *int64   `json:"gameId,omitempty"`
+	HomeTeam    *string  `json:"homeTeam,omitempty"`
+	HomeWinProb *float64 `json:"homeWinProb,omitempty"`
+	Season      *int64   `json:"season,omitempty"`
+	SeasonType  *string  `json:"seasonType,omitempty"`
+	Spread      *float64 `json:"spread,omitempty"`
+	Week        *int64   `json:"week,omitempty"`
 }

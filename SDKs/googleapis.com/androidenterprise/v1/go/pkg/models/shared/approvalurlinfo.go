@@ -1,5 +1,5 @@
 package shared
 
 type ApprovalURLInfo struct {
-	ApprovalURL *string `json:"approvalUrl"`
+	ApprovalURL *string `json:"approvalUrl,omitempty"`
 }

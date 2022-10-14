@@ -15,32 +15,32 @@ type DeviceStatusStatus struct {
 }
 
 type Device struct {
-	AssetTag         *string                `json:"asset_tag"`
-	Cluster          *NestedCluster         `json:"cluster"`
-	Comments         *string                `json:"comments"`
-	Created          *time.Time             `json:"created"`
-	CustomFields     map[string]interface{} `json:"custom_fields"`
+	AssetTag         *string                `json:"asset_tag,omitempty"`
+	Cluster          *NestedCluster         `json:"cluster,omitempty"`
+	Comments         *string                `json:"comments,omitempty"`
+	Created          *time.Time             `json:"created,omitempty"`
+	CustomFields     map[string]interface{} `json:"custom_fields,omitempty"`
 	DeviceRole       NestedDeviceRole       `json:"device_role"`
 	DeviceType       NestedDeviceType       `json:"device_type"`
-	DisplayName      *string                `json:"display_name"`
-	Face             *DeviceFaceFace        `json:"face"`
-	ID               *int64                 `json:"id"`
-	LastUpdated      *time.Time             `json:"last_updated"`
-	LocalContextData *string                `json:"local_context_data"`
-	Name             *string                `json:"name"`
-	ParentDevice     *string                `json:"parent_device"`
-	Platform         *NestedPlatform        `json:"platform"`
-	Position         *int64                 `json:"position"`
-	PrimaryIP        *DeviceIPAddress       `json:"primary_ip"`
-	PrimaryIp4       *DeviceIPAddress       `json:"primary_ip4"`
-	PrimaryIp6       *DeviceIPAddress       `json:"primary_ip6"`
-	Rack             *NestedRack            `json:"rack"`
-	Serial           *string                `json:"serial"`
+	DisplayName      *string                `json:"display_name,omitempty"`
+	Face             *DeviceFaceFace        `json:"face,omitempty"`
+	ID               *int64                 `json:"id,omitempty"`
+	LastUpdated      *time.Time             `json:"last_updated,omitempty"`
+	LocalContextData *string                `json:"local_context_data,omitempty"`
+	Name             *string                `json:"name,omitempty"`
+	ParentDevice     *string                `json:"parent_device,omitempty"`
+	Platform         *NestedPlatform        `json:"platform,omitempty"`
+	Position         *int64                 `json:"position,omitempty"`
+	PrimaryIP        *DeviceIPAddress       `json:"primary_ip,omitempty"`
+	PrimaryIp4       *DeviceIPAddress       `json:"primary_ip4,omitempty"`
+	PrimaryIp6       *DeviceIPAddress       `json:"primary_ip6,omitempty"`
+	Rack             *NestedRack            `json:"rack,omitempty"`
+	Serial           *string                `json:"serial,omitempty"`
 	Site             NestedSite             `json:"site"`
-	Status           *DeviceStatusStatus    `json:"status"`
-	Tags             []string               `json:"tags"`
-	Tenant           *NestedTenant          `json:"tenant"`
-	VcPosition       *int64                 `json:"vc_position"`
-	VcPriority       *int64                 `json:"vc_priority"`
-	VirtualChassis   *DeviceVirtualChassis  `json:"virtual_chassis"`
+	Status           *DeviceStatusStatus    `json:"status,omitempty"`
+	Tags             []string               `json:"tags,omitempty"`
+	Tenant           *NestedTenant          `json:"tenant,omitempty"`
+	VcPosition       *int64                 `json:"vc_position,omitempty"`
+	VcPriority       *int64                 `json:"vc_priority,omitempty"`
+	VirtualChassis   *DeviceVirtualChassis  `json:"virtual_chassis,omitempty"`
 }

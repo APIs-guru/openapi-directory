@@ -13,22 +13,22 @@ const (
 )
 
 type NodePool struct {
-	Autoscaling       *NodePoolAutoscaling `json:"autoscaling"`
-	Conditions        []StatusCondition    `json:"conditions"`
-	Config            *NodeConfig          `json:"config"`
-	InitialNodeCount  *int32               `json:"initialNodeCount"`
-	InstanceGroupUrls []string             `json:"instanceGroupUrls"`
-	Locations         []string             `json:"locations"`
-	Management        *NodeManagement      `json:"management"`
-	MaxPodsConstraint *MaxPodsConstraint   `json:"maxPodsConstraint"`
-	Name              *string              `json:"name"`
-	NetworkConfig     *NodeNetworkConfig   `json:"networkConfig"`
-	PlacementPolicy   *PlacementPolicy     `json:"placementPolicy"`
-	PodIpv4CidrSize   *int32               `json:"podIpv4CidrSize"`
-	SelfLink          *string              `json:"selfLink"`
-	Status            *NodePoolStatusEnum  `json:"status"`
-	StatusMessage     *string              `json:"statusMessage"`
-	UpdateInfo        *UpdateInfo          `json:"updateInfo"`
-	UpgradeSettings   *UpgradeSettings     `json:"upgradeSettings"`
-	Version           *string              `json:"version"`
+	Autoscaling       *NodePoolAutoscaling `json:"autoscaling,omitempty"`
+	Conditions        []StatusCondition    `json:"conditions,omitempty"`
+	Config            *NodeConfig          `json:"config,omitempty"`
+	InitialNodeCount  *int32               `json:"initialNodeCount,omitempty"`
+	InstanceGroupUrls []string             `json:"instanceGroupUrls,omitempty"`
+	Locations         []string             `json:"locations,omitempty"`
+	Management        *NodeManagement      `json:"management,omitempty"`
+	MaxPodsConstraint *MaxPodsConstraint   `json:"maxPodsConstraint,omitempty"`
+	Name              *string              `json:"name,omitempty"`
+	NetworkConfig     *NodeNetworkConfig   `json:"networkConfig,omitempty"`
+	PlacementPolicy   *PlacementPolicy     `json:"placementPolicy,omitempty"`
+	PodIpv4CidrSize   *int32               `json:"podIpv4CidrSize,omitempty"`
+	SelfLink          *string              `json:"selfLink,omitempty"`
+	Status            *NodePoolStatusEnum  `json:"status,omitempty"`
+	StatusMessage     *string              `json:"statusMessage,omitempty"`
+	UpdateInfo        *UpdateInfo          `json:"updateInfo,omitempty"`
+	UpgradeSettings   *UpgradeSettings     `json:"upgradeSettings,omitempty"`
+	Version           *string              `json:"version,omitempty"`
 }

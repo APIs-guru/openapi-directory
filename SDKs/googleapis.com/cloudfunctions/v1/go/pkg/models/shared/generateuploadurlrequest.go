@@ -1,5 +1,5 @@
 package shared
 
 type GenerateUploadURLRequest struct {
-	KmsKeyName *string `json:"kmsKeyName"`
+	KmsKeyName *string `json:"kmsKeyName,omitempty"`
 }

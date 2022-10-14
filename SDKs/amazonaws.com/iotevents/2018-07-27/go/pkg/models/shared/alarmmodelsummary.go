@@ -5,7 +5,7 @@ import (
 )
 
 type AlarmModelSummary struct {
-	AlarmModelDescription *string    `json:"alarmModelDescription"`
-	AlarmModelName        *string    `json:"alarmModelName"`
-	CreationTime          *time.Time `json:"creationTime"`
+	AlarmModelDescription *string    `json:"alarmModelDescription,omitempty"`
+	AlarmModelName        *string    `json:"alarmModelName,omitempty"`
+	CreationTime          *time.Time `json:"creationTime,omitempty"`
 }

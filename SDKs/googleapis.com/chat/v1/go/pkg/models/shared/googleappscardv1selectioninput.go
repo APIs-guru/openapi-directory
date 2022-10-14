@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleAppsCardV1SelectionInput struct {
-	Items          []GoogleAppsCardV1SelectionItem         `json:"items"`
-	Label          *string                                 `json:"label"`
-	Name           *string                                 `json:"name"`
-	OnChangeAction *GoogleAppsCardV1Action                 `json:"onChangeAction"`
-	Type           *GoogleAppsCardV1SelectionInputTypeEnum `json:"type"`
+	Items          []GoogleAppsCardV1SelectionItem         `json:"items,omitempty"`
+	Label          *string                                 `json:"label,omitempty"`
+	Name           *string                                 `json:"name,omitempty"`
+	OnChangeAction *GoogleAppsCardV1Action                 `json:"onChangeAction,omitempty"`
+	Type           *GoogleAppsCardV1SelectionInputTypeEnum `json:"type,omitempty"`
 }

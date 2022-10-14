@@ -1,12 +1,12 @@
 package shared
 
 type SuperLine struct {
-	Amount                 *float64                            `json:"Amount"`
-	CalculationType        *SuperannuationCalculationTypeEnum  `json:"CalculationType"`
-	ContributionType       *SuperannuationContributionTypeEnum `json:"ContributionType"`
-	ExpenseAccountCode     *string                             `json:"ExpenseAccountCode"`
-	LiabilityAccountCode   *string                             `json:"LiabilityAccountCode"`
-	MinimumMonthlyEarnings *float64                            `json:"MinimumMonthlyEarnings"`
-	Percentage             *float64                            `json:"Percentage"`
-	SuperMembershipID      *string                             `json:"SuperMembershipID"`
+	Amount                 *float64                            `json:"Amount,omitempty"`
+	CalculationType        *SuperannuationCalculationTypeEnum  `json:"CalculationType,omitempty"`
+	ContributionType       *SuperannuationContributionTypeEnum `json:"ContributionType,omitempty"`
+	ExpenseAccountCode     *string                             `json:"ExpenseAccountCode,omitempty"`
+	LiabilityAccountCode   *string                             `json:"LiabilityAccountCode,omitempty"`
+	MinimumMonthlyEarnings *float64                            `json:"MinimumMonthlyEarnings,omitempty"`
+	Percentage             *float64                            `json:"Percentage,omitempty"`
+	SuperMembershipID      *string                             `json:"SuperMembershipID,omitempty"`
 }

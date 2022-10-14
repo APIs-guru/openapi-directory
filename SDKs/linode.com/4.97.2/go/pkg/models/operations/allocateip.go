@@ -23,7 +23,7 @@ type AllocateIPRequest struct {
 }
 
 type AllocateIPDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type AllocateIPResponse struct {

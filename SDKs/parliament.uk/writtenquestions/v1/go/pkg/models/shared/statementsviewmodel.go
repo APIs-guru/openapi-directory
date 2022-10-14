@@ -5,20 +5,20 @@ import (
 )
 
 type StatementsViewModel struct {
-	AnsweringBodyID     *int32                `json:"answeringBodyId"`
-	AnsweringBodyName   *string               `json:"answeringBodyName"`
-	Attachments         []AttachmentViewModel `json:"attachments"`
-	DateMade            *time.Time            `json:"dateMade"`
-	HasAttachments      *bool                 `json:"hasAttachments"`
-	HasLinkedStatements *bool                 `json:"hasLinkedStatements"`
-	House               *HouseEnumEnum        `json:"house"`
-	ID                  *int32                `json:"id"`
-	LinkedStatements    []LinkedStatements    `json:"linkedStatements"`
-	Member              *MemberViewModel      `json:"member"`
-	MemberID            *int32                `json:"memberId"`
-	MemberRole          *string               `json:"memberRole"`
-	NoticeNumber        *int32                `json:"noticeNumber"`
-	Text                *string               `json:"text"`
-	Title               *string               `json:"title"`
-	Uin                 *string               `json:"uin"`
+	AnsweringBodyID     *int32                `json:"answeringBodyId,omitempty"`
+	AnsweringBodyName   *string               `json:"answeringBodyName,omitempty"`
+	Attachments         []AttachmentViewModel `json:"attachments,omitempty"`
+	DateMade            *time.Time            `json:"dateMade,omitempty"`
+	HasAttachments      *bool                 `json:"hasAttachments,omitempty"`
+	HasLinkedStatements *bool                 `json:"hasLinkedStatements,omitempty"`
+	House               *HouseEnumEnum        `json:"house,omitempty"`
+	ID                  *int32                `json:"id,omitempty"`
+	LinkedStatements    []LinkedStatements    `json:"linkedStatements,omitempty"`
+	Member              *MemberViewModel      `json:"member,omitempty"`
+	MemberID            *int32                `json:"memberId,omitempty"`
+	MemberRole          *string               `json:"memberRole,omitempty"`
+	NoticeNumber        *int32                `json:"noticeNumber,omitempty"`
+	Text                *string               `json:"text,omitempty"`
+	Title               *string               `json:"title,omitempty"`
+	Uin                 *string               `json:"uin,omitempty"`
 }

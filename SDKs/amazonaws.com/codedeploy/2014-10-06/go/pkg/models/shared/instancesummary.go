@@ -5,10 +5,10 @@ import (
 )
 
 type InstanceSummary struct {
-	DeploymentID    *string             `json:"deploymentId"`
-	InstanceID      *string             `json:"instanceId"`
-	InstanceType    *InstanceTypeEnum   `json:"instanceType"`
-	LastUpdatedAt   *time.Time          `json:"lastUpdatedAt"`
-	LifecycleEvents []LifecycleEvent    `json:"lifecycleEvents"`
-	Status          *InstanceStatusEnum `json:"status"`
+	DeploymentID    *string             `json:"deploymentId,omitempty"`
+	InstanceID      *string             `json:"instanceId,omitempty"`
+	InstanceType    *InstanceTypeEnum   `json:"instanceType,omitempty"`
+	LastUpdatedAt   *time.Time          `json:"lastUpdatedAt,omitempty"`
+	LifecycleEvents []LifecycleEvent    `json:"lifecycleEvents,omitempty"`
+	Status          *InstanceStatusEnum `json:"status,omitempty"`
 }

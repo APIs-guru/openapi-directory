@@ -21,20 +21,20 @@ const (
 )
 
 type CisInstructionCisInstructionCisInstruction struct {
-	CisLineTag   *string                                                   `json:"CisLineTag"`
-	CisLineType  *string                                                   `json:"CisLineType"`
-	Description  *string                                                   `json:"Description"`
-	PayFrequency *CisInstructionCisInstructionPayFrequencyPayFrequencyEnum `json:"PayFrequency"`
-	PeriodEnd    *int32                                                    `json:"PeriodEnd"`
-	PeriodStart  *int32                                                    `json:"PeriodStart"`
-	TaxYearEnd   *int32                                                    `json:"TaxYearEnd"`
-	TaxYearStart *int32                                                    `json:"TaxYearStart"`
-	Uom          *CisInstructionCisInstructionUomUomEnum                   `json:"UOM"`
-	Units        *float64                                                  `json:"Units"`
-	Vat          *float64                                                  `json:"VAT"`
-	Value        *float64                                                  `json:"Value"`
+	CisLineTag   *string                                                   `json:"CisLineTag,omitempty"`
+	CisLineType  *string                                                   `json:"CisLineType,omitempty"`
+	Description  *string                                                   `json:"Description,omitempty"`
+	PayFrequency *CisInstructionCisInstructionPayFrequencyPayFrequencyEnum `json:"PayFrequency,omitempty"`
+	PeriodEnd    *int32                                                    `json:"PeriodEnd,omitempty"`
+	PeriodStart  *int32                                                    `json:"PeriodStart,omitempty"`
+	TaxYearEnd   *int32                                                    `json:"TaxYearEnd,omitempty"`
+	TaxYearStart *int32                                                    `json:"TaxYearStart,omitempty"`
+	Uom          *CisInstructionCisInstructionUomUomEnum                   `json:"UOM,omitempty"`
+	Units        *float64                                                  `json:"Units,omitempty"`
+	Vat          *float64                                                  `json:"VAT,omitempty"`
+	Value        *float64                                                  `json:"Value,omitempty"`
 }
 
 type CisInstruction struct {
-	CisInstruction *CisInstructionCisInstructionCisInstruction `json:"CisInstruction"`
+	CisInstruction *CisInstructionCisInstructionCisInstruction `json:"CisInstruction,omitempty"`
 }

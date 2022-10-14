@@ -1,6 +1,6 @@
 package shared
 
 type GetClicksModel struct {
-	Clicks []ClickModel `json:"clicks"`
-	LastID *string      `json:"lastId"`
+	Clicks []ClickModel `json:"clicks,omitempty"`
+	LastID *string      `json:"lastId,omitempty"`
 }

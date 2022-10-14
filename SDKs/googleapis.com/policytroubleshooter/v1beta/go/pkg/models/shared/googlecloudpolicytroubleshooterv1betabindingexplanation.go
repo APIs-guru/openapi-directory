@@ -36,11 +36,11 @@ const (
 )
 
 type GoogleCloudPolicytroubleshooterV1betaBindingExplanation struct {
-	Access                  *GoogleCloudPolicytroubleshooterV1betaBindingExplanationAccessEnum                    `json:"access"`
-	Condition               *GoogleTypeExpr                                                                       `json:"condition"`
-	Memberships             map[string]GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembership `json:"memberships"`
-	Relevance               *GoogleCloudPolicytroubleshooterV1betaBindingExplanationRelevanceEnum                 `json:"relevance"`
-	Role                    *string                                                                               `json:"role"`
-	RolePermission          *GoogleCloudPolicytroubleshooterV1betaBindingExplanationRolePermissionEnum            `json:"rolePermission"`
-	RolePermissionRelevance *GoogleCloudPolicytroubleshooterV1betaBindingExplanationRolePermissionRelevanceEnum   `json:"rolePermissionRelevance"`
+	Access                  *GoogleCloudPolicytroubleshooterV1betaBindingExplanationAccessEnum                    `json:"access,omitempty"`
+	Condition               *GoogleTypeExpr                                                                       `json:"condition,omitempty"`
+	Memberships             map[string]GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembership `json:"memberships,omitempty"`
+	Relevance               *GoogleCloudPolicytroubleshooterV1betaBindingExplanationRelevanceEnum                 `json:"relevance,omitempty"`
+	Role                    *string                                                                               `json:"role,omitempty"`
+	RolePermission          *GoogleCloudPolicytroubleshooterV1betaBindingExplanationRolePermissionEnum            `json:"rolePermission,omitempty"`
+	RolePermissionRelevance *GoogleCloudPolicytroubleshooterV1betaBindingExplanationRolePermissionRelevanceEnum   `json:"rolePermissionRelevance,omitempty"`
 }

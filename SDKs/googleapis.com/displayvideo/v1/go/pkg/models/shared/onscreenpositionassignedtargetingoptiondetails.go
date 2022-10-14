@@ -19,7 +19,7 @@ const (
 )
 
 type OnScreenPositionAssignedTargetingOptionDetails struct {
-	AdType            *OnScreenPositionAssignedTargetingOptionDetailsAdTypeEnum           `json:"adType"`
-	OnScreenPosition  *OnScreenPositionAssignedTargetingOptionDetailsOnScreenPositionEnum `json:"onScreenPosition"`
-	TargetingOptionID *string                                                             `json:"targetingOptionId"`
+	AdType            *OnScreenPositionAssignedTargetingOptionDetailsAdTypeEnum           `json:"adType,omitempty"`
+	OnScreenPosition  *OnScreenPositionAssignedTargetingOptionDetailsOnScreenPositionEnum `json:"onScreenPosition,omitempty"`
+	TargetingOptionID *string                                                             `json:"targetingOptionId,omitempty"`
 }

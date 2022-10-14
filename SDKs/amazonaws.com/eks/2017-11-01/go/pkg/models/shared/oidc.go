@@ -1,5 +1,5 @@
 package shared
 
 type Oidc struct {
-	Issuer *string `json:"issuer"`
+	Issuer *string `json:"issuer,omitempty"`
 }

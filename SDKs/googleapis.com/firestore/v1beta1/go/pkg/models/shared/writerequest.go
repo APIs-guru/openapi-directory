@@ -1,8 +1,8 @@
 package shared
 
 type WriteRequest struct {
-	Labels      map[string]string `json:"labels"`
-	StreamID    *string           `json:"streamId"`
-	StreamToken *string           `json:"streamToken"`
-	Writes      []Write           `json:"writes"`
+	Labels      map[string]string `json:"labels,omitempty"`
+	StreamID    *string           `json:"streamId,omitempty"`
+	StreamToken *string           `json:"streamToken,omitempty"`
+	Writes      []Write           `json:"writes,omitempty"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type DescribeOrganizationResponse struct {
-	Arn               *string    `json:"ARN"`
-	Alias             *string    `json:"Alias"`
-	CompletedDate     *time.Time `json:"CompletedDate"`
-	DefaultMailDomain *string    `json:"DefaultMailDomain"`
-	DirectoryID       *string    `json:"DirectoryId"`
-	DirectoryType     *string    `json:"DirectoryType"`
-	ErrorMessage      *string    `json:"ErrorMessage"`
-	OrganizationID    *string    `json:"OrganizationId"`
-	State             *string    `json:"State"`
+	Arn               *string    `json:"ARN,omitempty"`
+	Alias             *string    `json:"Alias,omitempty"`
+	CompletedDate     *time.Time `json:"CompletedDate,omitempty"`
+	DefaultMailDomain *string    `json:"DefaultMailDomain,omitempty"`
+	DirectoryID       *string    `json:"DirectoryId,omitempty"`
+	DirectoryType     *string    `json:"DirectoryType,omitempty"`
+	ErrorMessage      *string    `json:"ErrorMessage,omitempty"`
+	OrganizationID    *string    `json:"OrganizationId,omitempty"`
+	State             *string    `json:"State,omitempty"`
 }

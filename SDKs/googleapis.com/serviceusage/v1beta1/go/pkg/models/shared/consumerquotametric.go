@@ -1,10 +1,10 @@
 package shared
 
 type ConsumerQuotaMetric struct {
-	ConsumerQuotaLimits           []ConsumerQuotaLimit `json:"consumerQuotaLimits"`
-	DescendantConsumerQuotaLimits []ConsumerQuotaLimit `json:"descendantConsumerQuotaLimits"`
-	DisplayName                   *string              `json:"displayName"`
-	Metric                        *string              `json:"metric"`
-	Name                          *string              `json:"name"`
-	Unit                          *string              `json:"unit"`
+	ConsumerQuotaLimits           []ConsumerQuotaLimit `json:"consumerQuotaLimits,omitempty"`
+	DescendantConsumerQuotaLimits []ConsumerQuotaLimit `json:"descendantConsumerQuotaLimits,omitempty"`
+	DisplayName                   *string              `json:"displayName,omitempty"`
+	Metric                        *string              `json:"metric,omitempty"`
+	Name                          *string              `json:"name,omitempty"`
+	Unit                          *string              `json:"unit,omitempty"`
 }

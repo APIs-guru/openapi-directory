@@ -13,8 +13,8 @@ const (
 )
 
 type FiveHundredAndThreeServiceUnavailable struct {
-	Code       *FiveHundredAndThreeServiceUnavailableCodeEnum    `json:"code"`
-	Message    *FiveHundredAndThreeServiceUnavailableMessageEnum `json:"message"`
-	Timestamp  *string                                           `json:"timestamp"`
-	TrackingID *string                                           `json:"trackingId"`
+	Code       *FiveHundredAndThreeServiceUnavailableCodeEnum    `json:"code,omitempty"`
+	Message    *FiveHundredAndThreeServiceUnavailableMessageEnum `json:"message,omitempty"`
+	Timestamp  *string                                           `json:"timestamp,omitempty"`
+	TrackingID *string                                           `json:"trackingId,omitempty"`
 }

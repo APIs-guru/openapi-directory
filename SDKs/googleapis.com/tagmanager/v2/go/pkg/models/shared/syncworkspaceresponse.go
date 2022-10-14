@@ -1,6 +1,6 @@
 package shared
 
 type SyncWorkspaceResponse struct {
-	MergeConflict []MergeConflict `json:"mergeConflict"`
-	SyncStatus    *SyncStatus     `json:"syncStatus"`
+	MergeConflict []MergeConflict `json:"mergeConflict,omitempty"`
+	SyncStatus    *SyncStatus     `json:"syncStatus,omitempty"`
 }

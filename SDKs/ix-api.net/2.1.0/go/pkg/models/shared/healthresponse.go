@@ -9,13 +9,13 @@ const (
 )
 
 type HealthResponse struct {
-	Checks      map[string]map[string]string `json:"checks"`
-	Description *string                      `json:"description"`
-	Links       map[string]string            `json:"links"`
-	Notes       []string                     `json:"notes"`
-	Output      *string                      `json:"output"`
-	ReleaseID   *string                      `json:"releaseId"`
-	ServiceID   *string                      `json:"serviceId"`
+	Checks      map[string]map[string]string `json:"checks,omitempty"`
+	Description *string                      `json:"description,omitempty"`
+	Links       map[string]string            `json:"links,omitempty"`
+	Notes       []string                     `json:"notes,omitempty"`
+	Output      *string                      `json:"output,omitempty"`
+	ReleaseID   *string                      `json:"releaseId,omitempty"`
+	ServiceID   *string                      `json:"serviceId,omitempty"`
 	Status      HealthResponseStatusEnum     `json:"status"`
-	Version     *string                      `json:"version"`
+	Version     *string                      `json:"version,omitempty"`
 }

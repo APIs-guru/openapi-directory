@@ -21,7 +21,7 @@ type GetCustomFieldsForWorkspaceRequest struct {
 }
 
 type GetCustomFieldsForWorkspace200ApplicationJSON struct {
-	Data []shared.CustomFieldResponse `json:"data"`
+	Data []shared.CustomFieldResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldsForWorkspaceResponse struct {

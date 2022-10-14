@@ -5,15 +5,15 @@ import (
 )
 
 type SandboxTransaction struct {
-	AccountingBalance *float64   `json:"accountingBalance"`
-	Amount            *float64   `json:"amount"`
-	BookingDateTime   *time.Time `json:"bookingDateTime"`
-	CreditDebit       *string    `json:"creditDebit"`
-	Currency          *string    `json:"currency"`
-	Description       *string    `json:"description"`
-	Reference         *string    `json:"reference"`
-	RelatedAccount    *string    `json:"relatedAccount"`
-	RelatedName       *string    `json:"relatedName"`
-	TransactionCode   *string    `json:"transactionCode"`
-	ValueDateTime     *time.Time `json:"valueDateTime"`
+	AccountingBalance *float64   `json:"accountingBalance,omitempty"`
+	Amount            *float64   `json:"amount,omitempty"`
+	BookingDateTime   *time.Time `json:"bookingDateTime,omitempty"`
+	CreditDebit       *string    `json:"creditDebit,omitempty"`
+	Currency          *string    `json:"currency,omitempty"`
+	Description       *string    `json:"description,omitempty"`
+	Reference         *string    `json:"reference,omitempty"`
+	RelatedAccount    *string    `json:"relatedAccount,omitempty"`
+	RelatedName       *string    `json:"relatedName,omitempty"`
+	TransactionCode   *string    `json:"transactionCode,omitempty"`
+	ValueDateTime     *time.Time `json:"valueDateTime,omitempty"`
 }

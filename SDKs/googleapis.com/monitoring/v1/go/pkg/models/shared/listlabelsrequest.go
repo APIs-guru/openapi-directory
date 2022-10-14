@@ -1,7 +1,7 @@
 package shared
 
 type ListLabelsRequest struct {
-	End   *string `json:"end"`
-	Match *string `json:"match"`
-	Start *string `json:"start"`
+	End   *string `json:"end,omitempty"`
+	Match *string `json:"match,omitempty"`
+	Start *string `json:"start,omitempty"`
 }

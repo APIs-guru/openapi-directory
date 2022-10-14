@@ -1,6 +1,6 @@
 package shared
 
 type ListCrawlersResponse struct {
-	CrawlerNames []string `json:"CrawlerNames"`
-	NextToken    *string  `json:"NextToken"`
+	CrawlerNames []string `json:"CrawlerNames,omitempty"`
+	NextToken    *string  `json:"NextToken,omitempty"`
 }

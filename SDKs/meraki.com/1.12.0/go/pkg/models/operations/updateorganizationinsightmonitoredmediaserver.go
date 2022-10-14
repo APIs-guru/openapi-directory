@@ -6,9 +6,9 @@ type UpdateOrganizationInsightMonitoredMediaServerPathParams struct {
 }
 
 type UpdateOrganizationInsightMonitoredMediaServerRequestBody struct {
-	Address                     *string `json:"address"`
-	BestEffortMonitoringEnabled *bool   `json:"bestEffortMonitoringEnabled"`
-	Name                        *string `json:"name"`
+	Address                     *string `json:"address,omitempty"`
+	BestEffortMonitoringEnabled *bool   `json:"bestEffortMonitoringEnabled,omitempty"`
+	Name                        *string `json:"name,omitempty"`
 }
 
 type UpdateOrganizationInsightMonitoredMediaServerRequest struct {

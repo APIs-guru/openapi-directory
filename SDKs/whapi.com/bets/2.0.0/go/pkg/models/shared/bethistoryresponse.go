@@ -1,5 +1,5 @@
 package shared
 
 type BetHistoryResponse struct {
-	Bets []PlacedBet `json:"bets"`
+	Bets []PlacedBet `json:"bets,omitempty"`
 }

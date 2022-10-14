@@ -1,11 +1,11 @@
 package shared
 
 type TranslateTextRequest struct {
-	Contents           []string                     `json:"contents"`
-	GlossaryConfig     *TranslateTextGlossaryConfig `json:"glossaryConfig"`
-	Labels             map[string]string            `json:"labels"`
-	MimeType           *string                      `json:"mimeType"`
-	Model              *string                      `json:"model"`
-	SourceLanguageCode *string                      `json:"sourceLanguageCode"`
-	TargetLanguageCode *string                      `json:"targetLanguageCode"`
+	Contents           []string                     `json:"contents,omitempty"`
+	GlossaryConfig     *TranslateTextGlossaryConfig `json:"glossaryConfig,omitempty"`
+	Labels             map[string]string            `json:"labels,omitempty"`
+	MimeType           *string                      `json:"mimeType,omitempty"`
+	Model              *string                      `json:"model,omitempty"`
+	SourceLanguageCode *string                      `json:"sourceLanguageCode,omitempty"`
+	TargetLanguageCode *string                      `json:"targetLanguageCode,omitempty"`
 }

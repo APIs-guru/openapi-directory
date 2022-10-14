@@ -1,6 +1,6 @@
 package shared
 
 type InstanceConfiguration struct {
-	BlockDeviceMappings []InstanceBlockDeviceMapping `json:"blockDeviceMappings"`
-	Image               *string                      `json:"image"`
+	BlockDeviceMappings []InstanceBlockDeviceMapping `json:"blockDeviceMappings,omitempty"`
+	Image               *string                      `json:"image,omitempty"`
 }

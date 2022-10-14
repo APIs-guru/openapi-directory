@@ -50,9 +50,9 @@ const (
 )
 
 type VideoSuggestions struct {
-	EditorSuggestions  []VideoSuggestionsEditorSuggestionsEnum  `json:"editorSuggestions"`
-	ProcessingErrors   []VideoSuggestionsProcessingErrorsEnum   `json:"processingErrors"`
-	ProcessingHints    []VideoSuggestionsProcessingHintsEnum    `json:"processingHints"`
-	ProcessingWarnings []VideoSuggestionsProcessingWarningsEnum `json:"processingWarnings"`
-	TagSuggestions     []VideoSuggestionsTagSuggestion          `json:"tagSuggestions"`
+	EditorSuggestions  []VideoSuggestionsEditorSuggestionsEnum  `json:"editorSuggestions,omitempty"`
+	ProcessingErrors   []VideoSuggestionsProcessingErrorsEnum   `json:"processingErrors,omitempty"`
+	ProcessingHints    []VideoSuggestionsProcessingHintsEnum    `json:"processingHints,omitempty"`
+	ProcessingWarnings []VideoSuggestionsProcessingWarningsEnum `json:"processingWarnings,omitempty"`
+	TagSuggestions     []VideoSuggestionsTagSuggestion          `json:"tagSuggestions,omitempty"`
 }

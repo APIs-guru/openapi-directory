@@ -9,12 +9,12 @@ type FunctionsUpdatePathParams struct {
 }
 
 type FunctionsUpdateRequestBody struct {
-	Events   []string               `json:"events"`
+	Events   []string               `json:"events,omitempty"`
 	Execute  []string               `json:"execute"`
 	Name     string                 `json:"name"`
-	Schedule *string                `json:"schedule"`
-	Timeout  *int64                 `json:"timeout"`
-	Vars     map[string]interface{} `json:"vars"`
+	Schedule *string                `json:"schedule,omitempty"`
+	Timeout  *int64                 `json:"timeout,omitempty"`
+	Vars     map[string]interface{} `json:"vars,omitempty"`
 }
 
 type FunctionsUpdateSecurity struct {

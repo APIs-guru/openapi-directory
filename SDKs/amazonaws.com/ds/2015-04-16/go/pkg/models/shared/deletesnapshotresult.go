@@ -1,5 +1,5 @@
 package shared
 
 type DeleteSnapshotResult struct {
-	SnapshotID *string `json:"SnapshotId"`
+	SnapshotID *string `json:"SnapshotId,omitempty"`
 }

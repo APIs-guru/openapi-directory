@@ -1,5 +1,5 @@
 package shared
 
 type V2GetKeyStringResponse struct {
-	KeyString *string `json:"keyString"`
+	KeyString *string `json:"keyString,omitempty"`
 }

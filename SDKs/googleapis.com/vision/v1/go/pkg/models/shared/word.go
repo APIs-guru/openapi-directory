@@ -1,8 +1,8 @@
 package shared
 
 type Word struct {
-	BoundingBox *BoundingPoly `json:"boundingBox"`
-	Confidence  *float32      `json:"confidence"`
-	Property    *TextProperty `json:"property"`
-	Symbols     []Symbol      `json:"symbols"`
+	BoundingBox *BoundingPoly `json:"boundingBox,omitempty"`
+	Confidence  *float32      `json:"confidence,omitempty"`
+	Property    *TextProperty `json:"property,omitempty"`
+	Symbols     []Symbol      `json:"symbols,omitempty"`
 }

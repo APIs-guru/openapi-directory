@@ -16,9 +16,9 @@ const (
 )
 
 type NetworkConfig struct {
-	ConnectMode     *NetworkConfigConnectModeEnum `json:"connectMode"`
-	IPAddresses     []string                      `json:"ipAddresses"`
-	Modes           []NetworkConfigModesEnum      `json:"modes"`
-	Network         *string                       `json:"network"`
-	ReservedIPRange *string                       `json:"reservedIpRange"`
+	ConnectMode     *NetworkConfigConnectModeEnum `json:"connectMode,omitempty"`
+	IPAddresses     []string                      `json:"ipAddresses,omitempty"`
+	Modes           []NetworkConfigModesEnum      `json:"modes,omitempty"`
+	Network         *string                       `json:"network,omitempty"`
+	ReservedIPRange *string                       `json:"reservedIpRange,omitempty"`
 }

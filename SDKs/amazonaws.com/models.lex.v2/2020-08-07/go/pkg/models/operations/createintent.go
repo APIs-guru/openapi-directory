@@ -21,42 +21,42 @@ type CreateIntentHeaders struct {
 }
 
 type CreateIntentRequestBodyDialogCodeHook struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type CreateIntentRequestBodyFulfillmentCodeHook struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type CreateIntentRequestBodyIntentClosingSetting struct {
-	Active          *bool                         `json:"active"`
-	ClosingResponse *shared.ResponseSpecification `json:"closingResponse"`
+	Active          *bool                         `json:"active,omitempty"`
+	ClosingResponse *shared.ResponseSpecification `json:"closingResponse,omitempty"`
 }
 
 type CreateIntentRequestBodyIntentConfirmationSetting struct {
-	Active              *bool                         `json:"active"`
-	DeclinationResponse *shared.ResponseSpecification `json:"declinationResponse"`
-	PromptSpecification *shared.PromptSpecification   `json:"promptSpecification"`
+	Active              *bool                         `json:"active,omitempty"`
+	DeclinationResponse *shared.ResponseSpecification `json:"declinationResponse,omitempty"`
+	PromptSpecification *shared.PromptSpecification   `json:"promptSpecification,omitempty"`
 }
 
 type CreateIntentRequestBodyKendraConfiguration struct {
-	KendraIndex              *string `json:"kendraIndex"`
-	QueryFilterString        *string `json:"queryFilterString"`
-	QueryFilterStringEnabled *bool   `json:"queryFilterStringEnabled"`
+	KendraIndex              *string `json:"kendraIndex,omitempty"`
+	QueryFilterString        *string `json:"queryFilterString,omitempty"`
+	QueryFilterStringEnabled *bool   `json:"queryFilterStringEnabled,omitempty"`
 }
 
 type CreateIntentRequestBody struct {
-	Description               *string                                           `json:"description"`
-	DialogCodeHook            *CreateIntentRequestBodyDialogCodeHook            `json:"dialogCodeHook"`
-	FulfillmentCodeHook       *CreateIntentRequestBodyFulfillmentCodeHook       `json:"fulfillmentCodeHook"`
-	InputContexts             []shared.InputContext                             `json:"inputContexts"`
-	IntentClosingSetting      *CreateIntentRequestBodyIntentClosingSetting      `json:"intentClosingSetting"`
-	IntentConfirmationSetting *CreateIntentRequestBodyIntentConfirmationSetting `json:"intentConfirmationSetting"`
+	Description               *string                                           `json:"description,omitempty"`
+	DialogCodeHook            *CreateIntentRequestBodyDialogCodeHook            `json:"dialogCodeHook,omitempty"`
+	FulfillmentCodeHook       *CreateIntentRequestBodyFulfillmentCodeHook       `json:"fulfillmentCodeHook,omitempty"`
+	InputContexts             []shared.InputContext                             `json:"inputContexts,omitempty"`
+	IntentClosingSetting      *CreateIntentRequestBodyIntentClosingSetting      `json:"intentClosingSetting,omitempty"`
+	IntentConfirmationSetting *CreateIntentRequestBodyIntentConfirmationSetting `json:"intentConfirmationSetting,omitempty"`
 	IntentName                string                                            `json:"intentName"`
-	KendraConfiguration       *CreateIntentRequestBodyKendraConfiguration       `json:"kendraConfiguration"`
-	OutputContexts            []shared.OutputContext                            `json:"outputContexts"`
-	ParentIntentSignature     *string                                           `json:"parentIntentSignature"`
-	SampleUtterances          []shared.SampleUtterance                          `json:"sampleUtterances"`
+	KendraConfiguration       *CreateIntentRequestBodyKendraConfiguration       `json:"kendraConfiguration,omitempty"`
+	OutputContexts            []shared.OutputContext                            `json:"outputContexts,omitempty"`
+	ParentIntentSignature     *string                                           `json:"parentIntentSignature,omitempty"`
+	SampleUtterances          []shared.SampleUtterance                          `json:"sampleUtterances,omitempty"`
 }
 
 type CreateIntentRequest struct {

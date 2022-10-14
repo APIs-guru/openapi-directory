@@ -20,7 +20,7 @@ type CreateLoggerDefinitionVersionHeaders struct {
 }
 
 type CreateLoggerDefinitionVersionRequestBody struct {
-	Loggers []shared.Logger `json:"Loggers"`
+	Loggers []shared.Logger `json:"Loggers,omitempty"`
 }
 
 type CreateLoggerDefinitionVersionRequest struct {

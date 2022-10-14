@@ -1,7 +1,7 @@
 package shared
 
 type EnterpriseCrmFrontendsEventbusProtoRollbackStrategy struct {
-	Parameters                          *EnterpriseCrmFrontendsEventbusProtoEventParameters `json:"parameters"`
-	RollbackTaskImplementationClassName *string                                             `json:"rollbackTaskImplementationClassName"`
-	TaskNumbersToRollback               []string                                            `json:"taskNumbersToRollback"`
+	Parameters                          *EnterpriseCrmFrontendsEventbusProtoEventParameters `json:"parameters,omitempty"`
+	RollbackTaskImplementationClassName *string                                             `json:"rollbackTaskImplementationClassName,omitempty"`
+	TaskNumbersToRollback               []string                                            `json:"taskNumbersToRollback,omitempty"`
 }

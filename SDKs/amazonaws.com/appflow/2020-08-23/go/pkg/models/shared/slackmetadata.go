@@ -1,5 +1,5 @@
 package shared
 
 type SlackMetadata struct {
-	OAuthScopes []string `json:"oAuthScopes"`
+	OAuthScopes []string `json:"oAuthScopes,omitempty"`
 }

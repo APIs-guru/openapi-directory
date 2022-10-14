@@ -1,9 +1,9 @@
 package shared
 
 type Step struct {
-	ActionOnFailure *ActionOnFailureEnum `json:"ActionOnFailure"`
-	Config          *HadoopStepConfig    `json:"Config"`
-	ID              *string              `json:"Id"`
-	Name            *string              `json:"Name"`
-	Status          *StepStatus          `json:"Status"`
+	ActionOnFailure *ActionOnFailureEnum `json:"ActionOnFailure,omitempty"`
+	Config          *HadoopStepConfig    `json:"Config,omitempty"`
+	ID              *string              `json:"Id,omitempty"`
+	Name            *string              `json:"Name,omitempty"`
+	Status          *StepStatus          `json:"Status,omitempty"`
 }

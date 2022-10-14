@@ -35,7 +35,7 @@ const (
 )
 
 type PutIntegrationRequestBodyTLSConfig struct {
-	InsecureSkipVerification *bool `json:"insecureSkipVerification"`
+	InsecureSkipVerification *bool `json:"insecureSkipVerification,omitempty"`
 }
 
 type PutIntegrationRequestBodyTypeEnum string
@@ -49,20 +49,20 @@ const (
 )
 
 type PutIntegrationRequestBody struct {
-	CacheKeyParameters  []string                                      `json:"cacheKeyParameters"`
-	CacheNamespace      *string                                       `json:"cacheNamespace"`
-	ConnectionID        *string                                       `json:"connectionId"`
-	ConnectionType      *PutIntegrationRequestBodyConnectionTypeEnum  `json:"connectionType"`
-	ContentHandling     *PutIntegrationRequestBodyContentHandlingEnum `json:"contentHandling"`
-	Credentials         *string                                       `json:"credentials"`
-	HTTPMethod          *string                                       `json:"httpMethod"`
-	PassthroughBehavior *string                                       `json:"passthroughBehavior"`
-	RequestParameters   map[string]string                             `json:"requestParameters"`
-	RequestTemplates    map[string]string                             `json:"requestTemplates"`
-	TimeoutInMillis     *int64                                        `json:"timeoutInMillis"`
-	TLSConfig           *PutIntegrationRequestBodyTLSConfig           `json:"tlsConfig"`
+	CacheKeyParameters  []string                                      `json:"cacheKeyParameters,omitempty"`
+	CacheNamespace      *string                                       `json:"cacheNamespace,omitempty"`
+	ConnectionID        *string                                       `json:"connectionId,omitempty"`
+	ConnectionType      *PutIntegrationRequestBodyConnectionTypeEnum  `json:"connectionType,omitempty"`
+	ContentHandling     *PutIntegrationRequestBodyContentHandlingEnum `json:"contentHandling,omitempty"`
+	Credentials         *string                                       `json:"credentials,omitempty"`
+	HTTPMethod          *string                                       `json:"httpMethod,omitempty"`
+	PassthroughBehavior *string                                       `json:"passthroughBehavior,omitempty"`
+	RequestParameters   map[string]string                             `json:"requestParameters,omitempty"`
+	RequestTemplates    map[string]string                             `json:"requestTemplates,omitempty"`
+	TimeoutInMillis     *int64                                        `json:"timeoutInMillis,omitempty"`
+	TLSConfig           *PutIntegrationRequestBodyTLSConfig           `json:"tlsConfig,omitempty"`
 	Type                PutIntegrationRequestBodyTypeEnum             `json:"type"`
-	URI                 *string                                       `json:"uri"`
+	URI                 *string                                       `json:"uri,omitempty"`
 }
 
 type PutIntegrationRequest struct {

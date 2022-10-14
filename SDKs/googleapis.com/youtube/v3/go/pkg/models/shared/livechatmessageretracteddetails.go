@@ -1,5 +1,5 @@
 package shared
 
 type LiveChatMessageRetractedDetails struct {
-	RetractedMessageID *string `json:"retractedMessageId"`
+	RetractedMessageID *string `json:"retractedMessageId,omitempty"`
 }

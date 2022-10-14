@@ -20,11 +20,11 @@ type DescribeJobDefinitionsHeaders struct {
 }
 
 type DescribeJobDefinitionsRequestBody struct {
-	JobDefinitionName *string  `json:"jobDefinitionName"`
-	JobDefinitions    []string `json:"jobDefinitions"`
-	MaxResults        *int64   `json:"maxResults"`
-	NextToken         *string  `json:"nextToken"`
-	Status            *string  `json:"status"`
+	JobDefinitionName *string  `json:"jobDefinitionName,omitempty"`
+	JobDefinitions    []string `json:"jobDefinitions,omitempty"`
+	MaxResults        *int64   `json:"maxResults,omitempty"`
+	NextToken         *string  `json:"nextToken,omitempty"`
+	Status            *string  `json:"status,omitempty"`
 }
 
 type DescribeJobDefinitionsRequest struct {

@@ -30,10 +30,10 @@ const (
 )
 
 type PaginationOptions struct {
-	Completed *bool                          `json:"completed"`
-	ItemType  *PaginationOptionsItemTypeEnum `json:"itemType"`
-	MaxRating *string                        `json:"maxRating"`
-	Order     *PaginationOptionsOrderEnum    `json:"order"`
-	OrderBy   *PaginationOptionsOrderByEnum  `json:"orderBy"`
-	PageSize  *int32                         `json:"pageSize"`
+	Completed *bool                          `json:"completed,omitempty"`
+	ItemType  *PaginationOptionsItemTypeEnum `json:"itemType,omitempty"`
+	MaxRating *string                        `json:"maxRating,omitempty"`
+	Order     *PaginationOptionsOrderEnum    `json:"order,omitempty"`
+	OrderBy   *PaginationOptionsOrderByEnum  `json:"orderBy,omitempty"`
+	PageSize  *int32                         `json:"pageSize,omitempty"`
 }

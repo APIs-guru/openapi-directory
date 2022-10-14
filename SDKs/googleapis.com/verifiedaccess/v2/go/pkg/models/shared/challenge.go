@@ -1,6 +1,6 @@
 package shared
 
 type Challenge struct {
-	AlternativeChallenge *string `json:"alternativeChallenge"`
-	Challenge            *string `json:"challenge"`
+	AlternativeChallenge *string `json:"alternativeChallenge,omitempty"`
+	Challenge            *string `json:"challenge,omitempty"`
 }

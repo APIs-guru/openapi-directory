@@ -73,20 +73,20 @@ const (
 )
 
 type LivingAreaAccessibility struct {
-	AdaCompliantUnit                    *bool                                                           `json:"adaCompliantUnit"`
-	AdaCompliantUnitException           *LivingAreaAccessibilityAdaCompliantUnitExceptionEnum           `json:"adaCompliantUnitException"`
-	HearingAccessibleDoorbell           *bool                                                           `json:"hearingAccessibleDoorbell"`
-	HearingAccessibleDoorbellException  *LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum  `json:"hearingAccessibleDoorbellException"`
-	HearingAccessibleFireAlarm          *bool                                                           `json:"hearingAccessibleFireAlarm"`
-	HearingAccessibleFireAlarmException *LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum `json:"hearingAccessibleFireAlarmException"`
-	HearingAccessibleUnit               *bool                                                           `json:"hearingAccessibleUnit"`
-	HearingAccessibleUnitException      *LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum      `json:"hearingAccessibleUnitException"`
-	MobilityAccessibleBathtub           *bool                                                           `json:"mobilityAccessibleBathtub"`
-	MobilityAccessibleBathtubException  *LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum  `json:"mobilityAccessibleBathtubException"`
-	MobilityAccessibleShower            *bool                                                           `json:"mobilityAccessibleShower"`
-	MobilityAccessibleShowerException   *LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum   `json:"mobilityAccessibleShowerException"`
-	MobilityAccessibleToilet            *bool                                                           `json:"mobilityAccessibleToilet"`
-	MobilityAccessibleToiletException   *LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum   `json:"mobilityAccessibleToiletException"`
-	MobilityAccessibleUnit              *bool                                                           `json:"mobilityAccessibleUnit"`
-	MobilityAccessibleUnitException     *LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum     `json:"mobilityAccessibleUnitException"`
+	AdaCompliantUnit                    *bool                                                           `json:"adaCompliantUnit,omitempty"`
+	AdaCompliantUnitException           *LivingAreaAccessibilityAdaCompliantUnitExceptionEnum           `json:"adaCompliantUnitException,omitempty"`
+	HearingAccessibleDoorbell           *bool                                                           `json:"hearingAccessibleDoorbell,omitempty"`
+	HearingAccessibleDoorbellException  *LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum  `json:"hearingAccessibleDoorbellException,omitempty"`
+	HearingAccessibleFireAlarm          *bool                                                           `json:"hearingAccessibleFireAlarm,omitempty"`
+	HearingAccessibleFireAlarmException *LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum `json:"hearingAccessibleFireAlarmException,omitempty"`
+	HearingAccessibleUnit               *bool                                                           `json:"hearingAccessibleUnit,omitempty"`
+	HearingAccessibleUnitException      *LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum      `json:"hearingAccessibleUnitException,omitempty"`
+	MobilityAccessibleBathtub           *bool                                                           `json:"mobilityAccessibleBathtub,omitempty"`
+	MobilityAccessibleBathtubException  *LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum  `json:"mobilityAccessibleBathtubException,omitempty"`
+	MobilityAccessibleShower            *bool                                                           `json:"mobilityAccessibleShower,omitempty"`
+	MobilityAccessibleShowerException   *LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum   `json:"mobilityAccessibleShowerException,omitempty"`
+	MobilityAccessibleToilet            *bool                                                           `json:"mobilityAccessibleToilet,omitempty"`
+	MobilityAccessibleToiletException   *LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum   `json:"mobilityAccessibleToiletException,omitempty"`
+	MobilityAccessibleUnit              *bool                                                           `json:"mobilityAccessibleUnit,omitempty"`
+	MobilityAccessibleUnitException     *LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum     `json:"mobilityAccessibleUnitException,omitempty"`
 }

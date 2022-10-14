@@ -1,6 +1,6 @@
 package shared
 
 type ListImagesResponse struct {
-	ImageIds  []ImageIdentifier `json:"imageIds"`
-	NextToken *string           `json:"nextToken"`
+	ImageIds  []ImageIdentifier `json:"imageIds,omitempty"`
+	NextToken *string           `json:"nextToken,omitempty"`
 }

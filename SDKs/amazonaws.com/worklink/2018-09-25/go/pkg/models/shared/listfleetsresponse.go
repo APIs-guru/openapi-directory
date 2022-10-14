@@ -1,6 +1,6 @@
 package shared
 
 type ListFleetsResponse struct {
-	FleetSummaryList []FleetSummary `json:"FleetSummaryList"`
-	NextToken        *string        `json:"NextToken"`
+	FleetSummaryList []FleetSummary `json:"FleetSummaryList,omitempty"`
+	NextToken        *string        `json:"NextToken,omitempty"`
 }

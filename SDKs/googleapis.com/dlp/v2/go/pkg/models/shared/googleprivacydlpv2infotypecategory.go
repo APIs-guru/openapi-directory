@@ -69,7 +69,7 @@ const (
 )
 
 type GooglePrivacyDlpV2InfoTypeCategory struct {
-	IndustryCategory *GooglePrivacyDlpV2InfoTypeCategoryIndustryCategoryEnum `json:"industryCategory"`
-	LocationCategory *GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum `json:"locationCategory"`
-	TypeCategory     *GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum     `json:"typeCategory"`
+	IndustryCategory *GooglePrivacyDlpV2InfoTypeCategoryIndustryCategoryEnum `json:"industryCategory,omitempty"`
+	LocationCategory *GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum `json:"locationCategory,omitempty"`
+	TypeCategory     *GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum     `json:"typeCategory,omitempty"`
 }

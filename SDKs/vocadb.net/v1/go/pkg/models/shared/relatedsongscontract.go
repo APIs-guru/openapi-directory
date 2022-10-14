@@ -1,7 +1,7 @@
 package shared
 
 type RelatedSongsContract struct {
-	ArtistMatches []SongForAPIContract `json:"artistMatches"`
-	LikeMatches   []SongForAPIContract `json:"likeMatches"`
-	TagMatches    []SongForAPIContract `json:"tagMatches"`
+	ArtistMatches []SongForAPIContract `json:"artistMatches,omitempty"`
+	LikeMatches   []SongForAPIContract `json:"likeMatches,omitempty"`
+	TagMatches    []SongForAPIContract `json:"tagMatches,omitempty"`
 }

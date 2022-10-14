@@ -1,6 +1,6 @@
 package shared
 
 type Reference struct {
-	ReferenceID   *string `json:"referenceId"`
-	ReferenceType *string `json:"referenceType"`
+	ReferenceID   *string `json:"referenceId,omitempty"`
+	ReferenceType *string `json:"referenceType,omitempty"`
 }

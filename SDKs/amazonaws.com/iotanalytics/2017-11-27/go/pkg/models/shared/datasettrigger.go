@@ -1,6 +1,6 @@
 package shared
 
 type DatasetTrigger struct {
-	Dataset  *TriggeringDataset `json:"dataset"`
-	Schedule *Schedule          `json:"schedule"`
+	Dataset  *TriggeringDataset `json:"dataset,omitempty"`
+	Schedule *Schedule          `json:"schedule,omitempty"`
 }

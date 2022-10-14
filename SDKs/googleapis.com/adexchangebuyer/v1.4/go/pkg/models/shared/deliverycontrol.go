@@ -1,7 +1,7 @@
 package shared
 
 type DeliveryControl struct {
-	CreativeBlockingLevel *string                       `json:"creativeBlockingLevel"`
-	DeliveryRateType      *string                       `json:"deliveryRateType"`
-	FrequencyCaps         []DeliveryControlFrequencyCap `json:"frequencyCaps"`
+	CreativeBlockingLevel *string                       `json:"creativeBlockingLevel,omitempty"`
+	DeliveryRateType      *string                       `json:"deliveryRateType,omitempty"`
+	FrequencyCaps         []DeliveryControlFrequencyCap `json:"frequencyCaps,omitempty"`
 }

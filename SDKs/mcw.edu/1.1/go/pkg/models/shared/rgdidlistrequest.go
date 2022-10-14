@@ -1,5 +1,5 @@
 package shared
 
 type RgdidListRequest struct {
-	RgdIds []int32 `json:"rgdIds"`
+	RgdIds []int32 `json:"rgdIds,omitempty"`
 }

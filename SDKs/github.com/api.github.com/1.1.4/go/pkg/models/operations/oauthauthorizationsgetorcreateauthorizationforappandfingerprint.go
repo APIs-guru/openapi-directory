@@ -11,9 +11,9 @@ type OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintPathParams s
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintRequestBody struct {
 	ClientSecret string   `json:"client_secret"`
-	Note         *string  `json:"note"`
-	NoteURL      *string  `json:"note_url"`
-	Scopes       []string `json:"scopes"`
+	Note         *string  `json:"note,omitempty"`
+	NoteURL      *string  `json:"note_url,omitempty"`
+	Scopes       []string `json:"scopes,omitempty"`
 }
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintRequest struct {

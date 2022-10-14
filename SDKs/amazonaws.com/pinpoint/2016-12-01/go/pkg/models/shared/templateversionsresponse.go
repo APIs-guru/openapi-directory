@@ -2,7 +2,7 @@ package shared
 
 type TemplateVersionsResponse struct {
 	Item      []TemplateVersionResponse `json:"Item"`
-	Message   *string                   `json:"Message"`
-	NextToken *string                   `json:"NextToken"`
-	RequestID *string                   `json:"RequestID"`
+	Message   *string                   `json:"Message,omitempty"`
+	NextToken *string                   `json:"NextToken,omitempty"`
+	RequestID *string                   `json:"RequestID,omitempty"`
 }

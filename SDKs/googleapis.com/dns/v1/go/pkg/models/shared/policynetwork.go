@@ -1,6 +1,6 @@
 package shared
 
 type PolicyNetwork struct {
-	Kind       *string `json:"kind"`
-	NetworkURL *string `json:"networkUrl"`
+	Kind       *string `json:"kind,omitempty"`
+	NetworkURL *string `json:"networkUrl,omitempty"`
 }

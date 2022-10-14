@@ -19,11 +19,11 @@ type UpdateThingRuntimeConfigurationHeaders struct {
 }
 
 type UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration struct {
-	Telemetry *shared.TelemetryEnum `json:"Telemetry"`
+	Telemetry *shared.TelemetryEnum `json:"Telemetry,omitempty"`
 }
 
 type UpdateThingRuntimeConfigurationRequestBody struct {
-	TelemetryConfiguration *UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration `json:"TelemetryConfiguration"`
+	TelemetryConfiguration *UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration `json:"TelemetryConfiguration,omitempty"`
 }
 
 type UpdateThingRuntimeConfigurationRequest struct {

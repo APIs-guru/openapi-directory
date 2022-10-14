@@ -1,9 +1,9 @@
 package shared
 
 type TestEnvironmentCatalog struct {
-	AndroidDeviceCatalog        *AndroidDeviceCatalog        `json:"androidDeviceCatalog"`
-	DeviceIPBlockCatalog        *DeviceIPBlockCatalog        `json:"deviceIpBlockCatalog"`
-	IosDeviceCatalog            *IosDeviceCatalog            `json:"iosDeviceCatalog"`
-	NetworkConfigurationCatalog *NetworkConfigurationCatalog `json:"networkConfigurationCatalog"`
-	SoftwareCatalog             *ProvidedSoftwareCatalog     `json:"softwareCatalog"`
+	AndroidDeviceCatalog        *AndroidDeviceCatalog        `json:"androidDeviceCatalog,omitempty"`
+	DeviceIPBlockCatalog        *DeviceIPBlockCatalog        `json:"deviceIpBlockCatalog,omitempty"`
+	IosDeviceCatalog            *IosDeviceCatalog            `json:"iosDeviceCatalog,omitempty"`
+	NetworkConfigurationCatalog *NetworkConfigurationCatalog `json:"networkConfigurationCatalog,omitempty"`
+	SoftwareCatalog             *ProvidedSoftwareCatalog     `json:"softwareCatalog,omitempty"`
 }

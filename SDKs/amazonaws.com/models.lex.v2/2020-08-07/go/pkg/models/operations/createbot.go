@@ -15,17 +15,17 @@ type CreateBotHeaders struct {
 }
 
 type CreateBotRequestBodyDataPrivacy struct {
-	ChildDirected *bool `json:"childDirected"`
+	ChildDirected *bool `json:"childDirected,omitempty"`
 }
 
 type CreateBotRequestBody struct {
 	BotName                 string                          `json:"botName"`
-	BotTags                 map[string]string               `json:"botTags"`
+	BotTags                 map[string]string               `json:"botTags,omitempty"`
 	DataPrivacy             CreateBotRequestBodyDataPrivacy `json:"dataPrivacy"`
-	Description             *string                         `json:"description"`
+	Description             *string                         `json:"description,omitempty"`
 	IdleSessionTTLInSeconds int64                           `json:"idleSessionTTLInSeconds"`
 	RoleArn                 string                          `json:"roleArn"`
-	TestBotAliasTags        map[string]string               `json:"testBotAliasTags"`
+	TestBotAliasTags        map[string]string               `json:"testBotAliasTags,omitempty"`
 }
 
 type CreateBotRequest struct {

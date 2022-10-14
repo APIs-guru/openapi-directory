@@ -34,9 +34,9 @@ const (
 )
 
 type AdvancedSecurityOverrides struct {
-	CommonCriteriaMode                       *AdvancedSecurityOverridesCommonCriteriaModeEnum          `json:"commonCriteriaMode"`
-	DeveloperSettings                        *AdvancedSecurityOverridesDeveloperSettingsEnum           `json:"developerSettings"`
-	GooglePlayProtectVerifyApps              *AdvancedSecurityOverridesGooglePlayProtectVerifyAppsEnum `json:"googlePlayProtectVerifyApps"`
-	PersonalAppsThatCanReadWorkNotifications []string                                                  `json:"personalAppsThatCanReadWorkNotifications"`
-	UntrustedAppsPolicy                      *AdvancedSecurityOverridesUntrustedAppsPolicyEnum         `json:"untrustedAppsPolicy"`
+	CommonCriteriaMode                       *AdvancedSecurityOverridesCommonCriteriaModeEnum          `json:"commonCriteriaMode,omitempty"`
+	DeveloperSettings                        *AdvancedSecurityOverridesDeveloperSettingsEnum           `json:"developerSettings,omitempty"`
+	GooglePlayProtectVerifyApps              *AdvancedSecurityOverridesGooglePlayProtectVerifyAppsEnum `json:"googlePlayProtectVerifyApps,omitempty"`
+	PersonalAppsThatCanReadWorkNotifications []string                                                  `json:"personalAppsThatCanReadWorkNotifications,omitempty"`
+	UntrustedAppsPolicy                      *AdvancedSecurityOverridesUntrustedAppsPolicyEnum         `json:"untrustedAppsPolicy,omitempty"`
 }

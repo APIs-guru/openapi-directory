@@ -1,10 +1,10 @@
 package shared
 
 type Color struct {
-	Blue          *int64  `json:"blue"`
-	Green         *int64  `json:"green"`
-	Hex           *string `json:"hex"`
-	NumberOfPixel *int64  `json:"number_of_pixel"`
-	Percentage    *string `json:"percentage"`
-	Red           *int64  `json:"red"`
+	Blue          *int64  `json:"blue,omitempty"`
+	Green         *int64  `json:"green,omitempty"`
+	Hex           *string `json:"hex,omitempty"`
+	NumberOfPixel *int64  `json:"number_of_pixel,omitempty"`
+	Percentage    *string `json:"percentage,omitempty"`
+	Red           *int64  `json:"red,omitempty"`
 }

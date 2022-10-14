@@ -7,8 +7,8 @@ type DiffEntry struct {
 	ContentsURL      string  `json:"contents_url"`
 	Deletions        int64   `json:"deletions"`
 	Filename         string  `json:"filename"`
-	Patch            *string `json:"patch"`
-	PreviousFilename *string `json:"previous_filename"`
+	Patch            *string `json:"patch,omitempty"`
+	PreviousFilename *string `json:"previous_filename,omitempty"`
 	RawURL           string  `json:"raw_url"`
 	Sha              string  `json:"sha"`
 	Status           string  `json:"status"`

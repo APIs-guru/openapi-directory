@@ -33,20 +33,20 @@ const (
 )
 
 type GoogleCloudAssuredworkloadsV1Workload struct {
-	BillingAccount                 *string                                                      `json:"billingAccount"`
-	ComplianceRegime               *GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum   `json:"complianceRegime"`
-	CompliantButDisallowedServices []string                                                     `json:"compliantButDisallowedServices"`
-	CreateTime                     *string                                                      `json:"createTime"`
-	DisplayName                    *string                                                      `json:"displayName"`
-	EnableSovereignControls        *bool                                                        `json:"enableSovereignControls"`
-	Etag                           *string                                                      `json:"etag"`
-	KajEnrollmentState             *GoogleCloudAssuredworkloadsV1WorkloadKajEnrollmentStateEnum `json:"kajEnrollmentState"`
-	KmsSettings                    *GoogleCloudAssuredworkloadsV1WorkloadKmsSettings            `json:"kmsSettings"`
-	Labels                         map[string]string                                            `json:"labels"`
-	Name                           *string                                                      `json:"name"`
-	Partner                        *GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum            `json:"partner"`
-	ProvisionedResourcesParent     *string                                                      `json:"provisionedResourcesParent"`
-	ResourceSettings               []GoogleCloudAssuredworkloadsV1WorkloadResourceSettings      `json:"resourceSettings"`
-	Resources                      []GoogleCloudAssuredworkloadsV1WorkloadResourceInfo          `json:"resources"`
-	SaaEnrollmentResponse          *GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse  `json:"saaEnrollmentResponse"`
+	BillingAccount                 *string                                                      `json:"billingAccount,omitempty"`
+	ComplianceRegime               *GoogleCloudAssuredworkloadsV1WorkloadComplianceRegimeEnum   `json:"complianceRegime,omitempty"`
+	CompliantButDisallowedServices []string                                                     `json:"compliantButDisallowedServices,omitempty"`
+	CreateTime                     *string                                                      `json:"createTime,omitempty"`
+	DisplayName                    *string                                                      `json:"displayName,omitempty"`
+	EnableSovereignControls        *bool                                                        `json:"enableSovereignControls,omitempty"`
+	Etag                           *string                                                      `json:"etag,omitempty"`
+	KajEnrollmentState             *GoogleCloudAssuredworkloadsV1WorkloadKajEnrollmentStateEnum `json:"kajEnrollmentState,omitempty"`
+	KmsSettings                    *GoogleCloudAssuredworkloadsV1WorkloadKmsSettings            `json:"kmsSettings,omitempty"`
+	Labels                         map[string]string                                            `json:"labels,omitempty"`
+	Name                           *string                                                      `json:"name,omitempty"`
+	Partner                        *GoogleCloudAssuredworkloadsV1WorkloadPartnerEnum            `json:"partner,omitempty"`
+	ProvisionedResourcesParent     *string                                                      `json:"provisionedResourcesParent,omitempty"`
+	ResourceSettings               []GoogleCloudAssuredworkloadsV1WorkloadResourceSettings      `json:"resourceSettings,omitempty"`
+	Resources                      []GoogleCloudAssuredworkloadsV1WorkloadResourceInfo          `json:"resources,omitempty"`
+	SaaEnrollmentResponse          *GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse  `json:"saaEnrollmentResponse,omitempty"`
 }

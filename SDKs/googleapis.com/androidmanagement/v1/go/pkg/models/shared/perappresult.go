@@ -11,5 +11,5 @@ const (
 )
 
 type PerAppResult struct {
-	ClearingResult *PerAppResultClearingResultEnum `json:"clearingResult"`
+	ClearingResult *PerAppResultClearingResultEnum `json:"clearingResult,omitempty"`
 }

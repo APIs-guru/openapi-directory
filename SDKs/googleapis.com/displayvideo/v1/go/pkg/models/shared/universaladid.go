@@ -12,6 +12,6 @@ const (
 )
 
 type UniversalAdID struct {
-	ID       *string                    `json:"id"`
-	Registry *UniversalAdIDRegistryEnum `json:"registry"`
+	ID       *string                    `json:"id,omitempty"`
+	Registry *UniversalAdIDRegistryEnum `json:"registry,omitempty"`
 }

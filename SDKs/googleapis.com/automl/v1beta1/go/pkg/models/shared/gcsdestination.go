@@ -1,5 +1,5 @@
 package shared
 
 type GcsDestination struct {
-	OutputURIPrefix *string `json:"outputUriPrefix"`
+	OutputURIPrefix *string `json:"outputUriPrefix,omitempty"`
 }

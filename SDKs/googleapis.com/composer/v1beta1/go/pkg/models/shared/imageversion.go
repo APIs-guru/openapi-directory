@@ -1,10 +1,10 @@
 package shared
 
 type ImageVersion struct {
-	CreationDisabled        *bool    `json:"creationDisabled"`
-	ImageVersionID          *string  `json:"imageVersionId"`
-	IsDefault               *bool    `json:"isDefault"`
-	ReleaseDate             *Date    `json:"releaseDate"`
-	SupportedPythonVersions []string `json:"supportedPythonVersions"`
-	UpgradeDisabled         *bool    `json:"upgradeDisabled"`
+	CreationDisabled        *bool    `json:"creationDisabled,omitempty"`
+	ImageVersionID          *string  `json:"imageVersionId,omitempty"`
+	IsDefault               *bool    `json:"isDefault,omitempty"`
+	ReleaseDate             *Date    `json:"releaseDate,omitempty"`
+	SupportedPythonVersions []string `json:"supportedPythonVersions,omitempty"`
+	UpgradeDisabled         *bool    `json:"upgradeDisabled,omitempty"`
 }

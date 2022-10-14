@@ -5,6 +5,6 @@ import (
 )
 
 type LandlordLettingsInspectionModel struct {
-	InspectionDate *time.Time `json:"InspectionDate"`
-	Notes          *string    `json:"Notes"`
+	InspectionDate *time.Time `json:"InspectionDate,omitempty"`
+	Notes          *string    `json:"Notes,omitempty"`
 }

@@ -2,5 +2,5 @@ package shared
 
 type DatasetContentDeliveryRule struct {
 	Destination DatasetContentDeliveryDestination `json:"destination"`
-	EntryName   *string                           `json:"entryName"`
+	EntryName   *string                           `json:"entryName,omitempty"`
 }

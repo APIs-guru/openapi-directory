@@ -1,17 +1,17 @@
 package shared
 
 type Shipment struct {
-	Cancellation           *ShipmentCancellation `json:"cancellation"`
-	CreationDate           *string               `json:"creationDate"`
-	LabelCustomMessage     *string               `json:"labelCustomMessage"`
-	LabelDownloadURL       *string               `json:"labelDownloadUrl"`
-	LabelSize              *string               `json:"labelSize"`
-	Orders                 []Order               `json:"orders"`
-	PackageSpecification   *PackageSpecification `json:"packageSpecification"`
-	Rate                   *PurchasedRate        `json:"rate"`
-	ReturnTo               *Contact              `json:"returnTo"`
-	ShipFrom               *Contact              `json:"shipFrom"`
-	ShipTo                 *Contact              `json:"shipTo"`
-	ShipmentID             *string               `json:"shipmentId"`
-	ShipmentTrackingNumber *string               `json:"shipmentTrackingNumber"`
+	Cancellation           *ShipmentCancellation `json:"cancellation,omitempty"`
+	CreationDate           *string               `json:"creationDate,omitempty"`
+	LabelCustomMessage     *string               `json:"labelCustomMessage,omitempty"`
+	LabelDownloadURL       *string               `json:"labelDownloadUrl,omitempty"`
+	LabelSize              *string               `json:"labelSize,omitempty"`
+	Orders                 []Order               `json:"orders,omitempty"`
+	PackageSpecification   *PackageSpecification `json:"packageSpecification,omitempty"`
+	Rate                   *PurchasedRate        `json:"rate,omitempty"`
+	ReturnTo               *Contact              `json:"returnTo,omitempty"`
+	ShipFrom               *Contact              `json:"shipFrom,omitempty"`
+	ShipTo                 *Contact              `json:"shipTo,omitempty"`
+	ShipmentID             *string               `json:"shipmentId,omitempty"`
+	ShipmentTrackingNumber *string               `json:"shipmentTrackingNumber,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowCxV3CompareVersionsRequest struct {
-	LanguageCode  *string `json:"languageCode"`
-	TargetVersion *string `json:"targetVersion"`
+	LanguageCode  *string `json:"languageCode,omitempty"`
+	TargetVersion *string `json:"targetVersion,omitempty"`
 }

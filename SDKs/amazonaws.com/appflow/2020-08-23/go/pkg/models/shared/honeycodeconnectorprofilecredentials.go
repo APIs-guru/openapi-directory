@@ -1,7 +1,7 @@
 package shared
 
 type HoneycodeConnectorProfileCredentials struct {
-	AccessToken  *string                `json:"accessToken"`
-	OAuthRequest *ConnectorOAuthRequest `json:"oAuthRequest"`
-	RefreshToken *string                `json:"refreshToken"`
+	AccessToken  *string                `json:"accessToken,omitempty"`
+	OAuthRequest *ConnectorOAuthRequest `json:"oAuthRequest,omitempty"`
+	RefreshToken *string                `json:"refreshToken,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type BookingWindowUpdateModel struct {
-	FromTime    *int32  `json:"fromTime"`
-	MaxBookings *int32  `json:"maxBookings"`
-	ServiceID   *string `json:"serviceId"`
-	ToTime      *int32  `json:"toTime"`
+	FromTime    *int32  `json:"fromTime,omitempty"`
+	MaxBookings *int32  `json:"maxBookings,omitempty"`
+	ServiceID   *string `json:"serviceId,omitempty"`
+	ToTime      *int32  `json:"toTime,omitempty"`
 }

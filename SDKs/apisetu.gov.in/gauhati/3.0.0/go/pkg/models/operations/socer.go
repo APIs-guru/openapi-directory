@@ -18,8 +18,8 @@ const (
 )
 
 type SocerRequestBody struct {
-	CertificateParameters *SocerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *SocerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                SocerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Socer400ApplicationJSON struct {
-	Error            *Socer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Socer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Socer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Socer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Socer401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Socer401ApplicationJSON struct {
-	Error            *Socer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Socer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Socer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Socer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Socer404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Socer404ApplicationJSON struct {
-	Error            *Socer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Socer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Socer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Socer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Socer500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Socer500ApplicationJSON struct {
-	Error            *Socer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Socer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Socer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Socer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Socer502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Socer502ApplicationJSON struct {
-	Error            *Socer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Socer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Socer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Socer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Socer503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Socer503ApplicationJSON struct {
-	Error            *Socer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Socer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Socer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Socer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Socer504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Socer504ApplicationJSON struct {
-	Error            *Socer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Socer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Socer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Socer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SocerResponse struct {

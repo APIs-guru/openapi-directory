@@ -16,9 +16,9 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1Annotation struct {
-	AnnotationMetadata  *GoogleCloudDatalabelingV1beta1AnnotationMetadata                `json:"annotationMetadata"`
-	AnnotationSentiment *GoogleCloudDatalabelingV1beta1AnnotationAnnotationSentimentEnum `json:"annotationSentiment"`
-	AnnotationSource    *GoogleCloudDatalabelingV1beta1AnnotationAnnotationSourceEnum    `json:"annotationSource"`
-	AnnotationValue     *GoogleCloudDatalabelingV1beta1AnnotationValue                   `json:"annotationValue"`
-	Name                *string                                                          `json:"name"`
+	AnnotationMetadata  *GoogleCloudDatalabelingV1beta1AnnotationMetadata                `json:"annotationMetadata,omitempty"`
+	AnnotationSentiment *GoogleCloudDatalabelingV1beta1AnnotationAnnotationSentimentEnum `json:"annotationSentiment,omitempty"`
+	AnnotationSource    *GoogleCloudDatalabelingV1beta1AnnotationAnnotationSourceEnum    `json:"annotationSource,omitempty"`
+	AnnotationValue     *GoogleCloudDatalabelingV1beta1AnnotationValue                   `json:"annotationValue,omitempty"`
+	Name                *string                                                          `json:"name,omitempty"`
 }

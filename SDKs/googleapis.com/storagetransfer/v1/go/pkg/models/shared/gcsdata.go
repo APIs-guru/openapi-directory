@@ -1,6 +1,6 @@
 package shared
 
 type GcsData struct {
-	BucketName *string `json:"bucketName"`
-	Path       *string `json:"path"`
+	BucketName *string `json:"bucketName,omitempty"`
+	Path       *string `json:"path,omitempty"`
 }

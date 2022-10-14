@@ -1,5 +1,5 @@
 package shared
 
 type NotificationRateLimit struct {
-	Period *string `json:"period"`
+	Period *string `json:"period,omitempty"`
 }

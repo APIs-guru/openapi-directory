@@ -1,5 +1,5 @@
 package shared
 
 type VirtualRouterSpec struct {
-	Listeners []VirtualRouterListener `json:"listeners"`
+	Listeners []VirtualRouterListener `json:"listeners,omitempty"`
 }

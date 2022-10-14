@@ -5,17 +5,17 @@ import (
 )
 
 type RestAPI struct {
-	APIKeySource              *APIKeySourceTypeEnum  `json:"apiKeySource"`
-	BinaryMediaTypes          []string               `json:"binaryMediaTypes"`
-	CreatedDate               *time.Time             `json:"createdDate"`
-	Description               *string                `json:"description"`
-	DisableExecuteAPIEndpoint *bool                  `json:"disableExecuteApiEndpoint"`
-	EndpointConfiguration     *EndpointConfiguration `json:"endpointConfiguration"`
-	ID                        *string                `json:"id"`
-	MinimumCompressionSize    *int64                 `json:"minimumCompressionSize"`
-	Name                      *string                `json:"name"`
-	Policy                    *string                `json:"policy"`
-	Tags                      map[string]string      `json:"tags"`
-	Version                   *string                `json:"version"`
-	Warnings                  []string               `json:"warnings"`
+	APIKeySource              *APIKeySourceTypeEnum  `json:"apiKeySource,omitempty"`
+	BinaryMediaTypes          []string               `json:"binaryMediaTypes,omitempty"`
+	CreatedDate               *time.Time             `json:"createdDate,omitempty"`
+	Description               *string                `json:"description,omitempty"`
+	DisableExecuteAPIEndpoint *bool                  `json:"disableExecuteApiEndpoint,omitempty"`
+	EndpointConfiguration     *EndpointConfiguration `json:"endpointConfiguration,omitempty"`
+	ID                        *string                `json:"id,omitempty"`
+	MinimumCompressionSize    *int64                 `json:"minimumCompressionSize,omitempty"`
+	Name                      *string                `json:"name,omitempty"`
+	Policy                    *string                `json:"policy,omitempty"`
+	Tags                      map[string]string      `json:"tags,omitempty"`
+	Version                   *string                `json:"version,omitempty"`
+	Warnings                  []string               `json:"warnings,omitempty"`
 }

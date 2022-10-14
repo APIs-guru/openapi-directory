@@ -1,9 +1,9 @@
 package shared
 
 type FirewallPolicy struct {
-	StatefulRuleGroupReferences     []StatefulRuleGroupReference  `json:"StatefulRuleGroupReferences"`
-	StatelessCustomActions          []CustomAction                `json:"StatelessCustomActions"`
+	StatefulRuleGroupReferences     []StatefulRuleGroupReference  `json:"StatefulRuleGroupReferences,omitempty"`
+	StatelessCustomActions          []CustomAction                `json:"StatelessCustomActions,omitempty"`
 	StatelessDefaultActions         []string                      `json:"StatelessDefaultActions"`
 	StatelessFragmentDefaultActions []string                      `json:"StatelessFragmentDefaultActions"`
-	StatelessRuleGroupReferences    []StatelessRuleGroupReference `json:"StatelessRuleGroupReferences"`
+	StatelessRuleGroupReferences    []StatelessRuleGroupReference `json:"StatelessRuleGroupReferences,omitempty"`
 }

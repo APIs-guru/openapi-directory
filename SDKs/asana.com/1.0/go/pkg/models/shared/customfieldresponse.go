@@ -8,11 +8,11 @@ const (
 )
 
 type CustomFieldResponseEnumValue struct {
-	Color        *string `json:"color"`
-	Enabled      *bool   `json:"enabled"`
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Color        *string `json:"color,omitempty"`
+	Enabled      *bool   `json:"enabled,omitempty"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type CustomFieldResponseFormatEnum string
@@ -44,25 +44,25 @@ const (
 )
 
 type CustomFieldResponse struct {
-	CreatedBy               *UserCompact                                `json:"created_by"`
-	CurrencyCode            *string                                     `json:"currency_code"`
-	CustomLabel             *string                                     `json:"custom_label"`
-	CustomLabelPosition     *CustomFieldResponseCustomLabelPositionEnum `json:"custom_label_position"`
-	Description             *string                                     `json:"description"`
-	DisplayValue            *string                                     `json:"display_value"`
-	Enabled                 *bool                                       `json:"enabled"`
-	EnumOptions             []EnumOption                                `json:"enum_options"`
-	EnumValue               *CustomFieldResponseEnumValue               `json:"enum_value"`
-	Format                  *CustomFieldResponseFormatEnum              `json:"format"`
-	Gid                     *string                                     `json:"gid"`
-	HasNotificationsEnabled *bool                                       `json:"has_notifications_enabled"`
-	IsGlobalToWorkspace     *bool                                       `json:"is_global_to_workspace"`
-	MultiEnumValues         []EnumOption                                `json:"multi_enum_values"`
-	Name                    *string                                     `json:"name"`
-	NumberValue             *float64                                    `json:"number_value"`
-	Precision               *int64                                      `json:"precision"`
-	ResourceSubtype         *CustomFieldResponseResourceSubtypeEnum     `json:"resource_subtype"`
-	ResourceType            *string                                     `json:"resource_type"`
-	TextValue               *string                                     `json:"text_value"`
-	Type                    *CustomFieldResponseTypeEnum                `json:"type"`
+	CreatedBy               *UserCompact                                `json:"created_by,omitempty"`
+	CurrencyCode            *string                                     `json:"currency_code,omitempty"`
+	CustomLabel             *string                                     `json:"custom_label,omitempty"`
+	CustomLabelPosition     *CustomFieldResponseCustomLabelPositionEnum `json:"custom_label_position,omitempty"`
+	Description             *string                                     `json:"description,omitempty"`
+	DisplayValue            *string                                     `json:"display_value,omitempty"`
+	Enabled                 *bool                                       `json:"enabled,omitempty"`
+	EnumOptions             []EnumOption                                `json:"enum_options,omitempty"`
+	EnumValue               *CustomFieldResponseEnumValue               `json:"enum_value,omitempty"`
+	Format                  *CustomFieldResponseFormatEnum              `json:"format,omitempty"`
+	Gid                     *string                                     `json:"gid,omitempty"`
+	HasNotificationsEnabled *bool                                       `json:"has_notifications_enabled,omitempty"`
+	IsGlobalToWorkspace     *bool                                       `json:"is_global_to_workspace,omitempty"`
+	MultiEnumValues         []EnumOption                                `json:"multi_enum_values,omitempty"`
+	Name                    *string                                     `json:"name,omitempty"`
+	NumberValue             *float64                                    `json:"number_value,omitempty"`
+	Precision               *int64                                      `json:"precision,omitempty"`
+	ResourceSubtype         *CustomFieldResponseResourceSubtypeEnum     `json:"resource_subtype,omitempty"`
+	ResourceType            *string                                     `json:"resource_type,omitempty"`
+	TextValue               *string                                     `json:"text_value,omitempty"`
+	Type                    *CustomFieldResponseTypeEnum                `json:"type,omitempty"`
 }

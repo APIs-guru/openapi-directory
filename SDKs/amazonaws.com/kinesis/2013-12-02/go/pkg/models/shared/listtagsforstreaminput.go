@@ -1,7 +1,7 @@
 package shared
 
 type ListTagsForStreamInput struct {
-	ExclusiveStartTagKey *string `json:"ExclusiveStartTagKey"`
-	Limit                *int64  `json:"Limit"`
+	ExclusiveStartTagKey *string `json:"ExclusiveStartTagKey,omitempty"`
+	Limit                *int64  `json:"Limit,omitempty"`
 	StreamName           string  `json:"StreamName"`
 }

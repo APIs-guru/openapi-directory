@@ -1,9 +1,9 @@
 package shared
 
 type SasPortalDeviceMetadata struct {
-	AntennaModel                  *string                  `json:"antennaModel"`
-	CommonChannelGroup            *string                  `json:"commonChannelGroup"`
-	InterferenceCoordinationGroup *string                  `json:"interferenceCoordinationGroup"`
-	NrqzValidated                 *bool                    `json:"nrqzValidated"`
-	NrqzValidation                *SasPortalNrqzValidation `json:"nrqzValidation"`
+	AntennaModel                  *string                  `json:"antennaModel,omitempty"`
+	CommonChannelGroup            *string                  `json:"commonChannelGroup,omitempty"`
+	InterferenceCoordinationGroup *string                  `json:"interferenceCoordinationGroup,omitempty"`
+	NrqzValidated                 *bool                    `json:"nrqzValidated,omitempty"`
+	NrqzValidation                *SasPortalNrqzValidation `json:"nrqzValidation,omitempty"`
 }

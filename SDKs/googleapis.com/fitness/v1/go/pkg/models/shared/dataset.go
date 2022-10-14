@@ -1,9 +1,9 @@
 package shared
 
 type Dataset struct {
-	DataSourceID   *string     `json:"dataSourceId"`
-	MaxEndTimeNs   *string     `json:"maxEndTimeNs"`
-	MinStartTimeNs *string     `json:"minStartTimeNs"`
-	NextPageToken  *string     `json:"nextPageToken"`
-	Point          []DataPoint `json:"point"`
+	DataSourceID   *string     `json:"dataSourceId,omitempty"`
+	MaxEndTimeNs   *string     `json:"maxEndTimeNs,omitempty"`
+	MinStartTimeNs *string     `json:"minStartTimeNs,omitempty"`
+	NextPageToken  *string     `json:"nextPageToken,omitempty"`
+	Point          []DataPoint `json:"point,omitempty"`
 }

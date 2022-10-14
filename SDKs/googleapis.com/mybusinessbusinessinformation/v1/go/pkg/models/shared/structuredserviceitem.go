@@ -1,6 +1,6 @@
 package shared
 
 type StructuredServiceItem struct {
-	Description   *string `json:"description"`
-	ServiceTypeID *string `json:"serviceTypeId"`
+	Description   *string `json:"description,omitempty"`
+	ServiceTypeID *string `json:"serviceTypeId,omitempty"`
 }

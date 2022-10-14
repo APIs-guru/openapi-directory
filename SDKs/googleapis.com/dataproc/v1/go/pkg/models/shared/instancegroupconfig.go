@@ -10,15 +10,15 @@ const (
 )
 
 type InstanceGroupConfig struct {
-	Accelerators       []AcceleratorConfig                    `json:"accelerators"`
-	DiskConfig         *DiskConfig                            `json:"diskConfig"`
-	ImageURI           *string                                `json:"imageUri"`
-	InstanceNames      []string                               `json:"instanceNames"`
-	InstanceReferences []InstanceReference                    `json:"instanceReferences"`
-	IsPreemptible      *bool                                  `json:"isPreemptible"`
-	MachineTypeURI     *string                                `json:"machineTypeUri"`
-	ManagedGroupConfig *ManagedGroupConfig                    `json:"managedGroupConfig"`
-	MinCPUPlatform     *string                                `json:"minCpuPlatform"`
-	NumInstances       *int32                                 `json:"numInstances"`
-	Preemptibility     *InstanceGroupConfigPreemptibilityEnum `json:"preemptibility"`
+	Accelerators       []AcceleratorConfig                    `json:"accelerators,omitempty"`
+	DiskConfig         *DiskConfig                            `json:"diskConfig,omitempty"`
+	ImageURI           *string                                `json:"imageUri,omitempty"`
+	InstanceNames      []string                               `json:"instanceNames,omitempty"`
+	InstanceReferences []InstanceReference                    `json:"instanceReferences,omitempty"`
+	IsPreemptible      *bool                                  `json:"isPreemptible,omitempty"`
+	MachineTypeURI     *string                                `json:"machineTypeUri,omitempty"`
+	ManagedGroupConfig *ManagedGroupConfig                    `json:"managedGroupConfig,omitempty"`
+	MinCPUPlatform     *string                                `json:"minCpuPlatform,omitempty"`
+	NumInstances       *int32                                 `json:"numInstances,omitempty"`
+	Preemptibility     *InstanceGroupConfigPreemptibilityEnum `json:"preemptibility,omitempty"`
 }

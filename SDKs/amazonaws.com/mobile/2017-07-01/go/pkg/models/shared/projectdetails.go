@@ -5,12 +5,12 @@ import (
 )
 
 type ProjectDetails struct {
-	ConsoleURL      *string           `json:"consoleUrl"`
-	CreatedDate     *time.Time        `json:"createdDate"`
-	LastUpdatedDate *time.Time        `json:"lastUpdatedDate"`
-	Name            *string           `json:"name"`
-	ProjectID       *string           `json:"projectId"`
-	Region          *string           `json:"region"`
-	Resources       []Resource        `json:"resources"`
-	State           *ProjectStateEnum `json:"state"`
+	ConsoleURL      *string           `json:"consoleUrl,omitempty"`
+	CreatedDate     *time.Time        `json:"createdDate,omitempty"`
+	LastUpdatedDate *time.Time        `json:"lastUpdatedDate,omitempty"`
+	Name            *string           `json:"name,omitempty"`
+	ProjectID       *string           `json:"projectId,omitempty"`
+	Region          *string           `json:"region,omitempty"`
+	Resources       []Resource        `json:"resources,omitempty"`
+	State           *ProjectStateEnum `json:"state,omitempty"`
 }

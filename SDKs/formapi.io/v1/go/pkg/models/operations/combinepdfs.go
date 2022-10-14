@@ -30,11 +30,11 @@ type CombinePdfsRequestBodySourcePdfs2 struct {
 }
 
 type CombinePdfsRequestBodyCombinePdfsData struct {
-	DeleteCustomFiles *bool                  `json:"delete_custom_files"`
-	ExpiresIn         *int64                 `json:"expires_in"`
-	Metadata          map[string]interface{} `json:"metadata"`
+	DeleteCustomFiles *bool                  `json:"delete_custom_files,omitempty"`
+	ExpiresIn         *int64                 `json:"expires_in,omitempty"`
+	Metadata          map[string]interface{} `json:"metadata,omitempty"`
 	SourcePdfs        []interface{}          `json:"source_pdfs"`
-	Test              *bool                  `json:"test"`
+	Test              *bool                  `json:"test,omitempty"`
 }
 
 type CombinePdfsSecurity struct {
@@ -80,13 +80,13 @@ const (
 )
 
 type CombinePdfs201ApplicationJSONCombinedSubmissionCombinedSubmission struct {
-	Actions       []shared.CombinedSubmissionAction                        `json:"actions"`
-	DownloadURL   *string                                                  `json:"download_url"`
+	Actions       []shared.CombinedSubmissionAction                        `json:"actions,omitempty"`
+	DownloadURL   *string                                                  `json:"download_url,omitempty"`
 	Expired       bool                                                     `json:"expired"`
-	ExpiresAt     *string                                                  `json:"expires_at"`
+	ExpiresAt     *string                                                  `json:"expires_at,omitempty"`
 	ID            string                                                   `json:"id"`
-	Metadata      map[string]interface{}                                   `json:"metadata"`
-	PdfHash       *string                                                  `json:"pdf_hash"`
+	Metadata      map[string]interface{}                                   `json:"metadata,omitempty"`
+	PdfHash       *string                                                  `json:"pdf_hash,omitempty"`
 	SourcePdfs    []interface{}                                            `json:"source_pdfs"`
 	State         CombinePdfs201ApplicationJSONCombinedSubmissionStateEnum `json:"state"`
 	SubmissionIds []string                                                 `json:"submission_ids"`
@@ -101,7 +101,7 @@ const (
 
 type CombinePdfs201ApplicationJSONCreateCombinedSubmissionResponse struct {
 	CombinedSubmission CombinePdfs201ApplicationJSONCombinedSubmissionCombinedSubmission `json:"combined_submission"`
-	Errors             []string                                                          `json:"errors"`
+	Errors             []string                                                          `json:"errors,omitempty"`
 	Status             CombinePdfs201ApplicationJSONStatusEnum                           `json:"status"`
 }
 

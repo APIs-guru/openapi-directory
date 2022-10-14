@@ -13,11 +13,11 @@ const (
 )
 
 type ClientConnectorService struct {
-	CreateTime  *string                          `json:"createTime"`
-	DisplayName *string                          `json:"displayName"`
-	Egress      *Egress                          `json:"egress"`
-	Ingress     *Ingress                         `json:"ingress"`
-	Name        *string                          `json:"name"`
-	State       *ClientConnectorServiceStateEnum `json:"state"`
-	UpdateTime  *string                          `json:"updateTime"`
+	CreateTime  *string                          `json:"createTime,omitempty"`
+	DisplayName *string                          `json:"displayName,omitempty"`
+	Egress      *Egress                          `json:"egress,omitempty"`
+	Ingress     *Ingress                         `json:"ingress,omitempty"`
+	Name        *string                          `json:"name,omitempty"`
+	State       *ClientConnectorServiceStateEnum `json:"state,omitempty"`
+	UpdateTime  *string                          `json:"updateTime,omitempty"`
 }

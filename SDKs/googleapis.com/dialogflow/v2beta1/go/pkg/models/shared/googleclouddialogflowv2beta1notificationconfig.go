@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1NotificationConfig struct {
-	MessageFormat *GoogleCloudDialogflowV2beta1NotificationConfigMessageFormatEnum `json:"messageFormat"`
-	Topic         *string                                                          `json:"topic"`
+	MessageFormat *GoogleCloudDialogflowV2beta1NotificationConfigMessageFormatEnum `json:"messageFormat,omitempty"`
+	Topic         *string                                                          `json:"topic,omitempty"`
 }

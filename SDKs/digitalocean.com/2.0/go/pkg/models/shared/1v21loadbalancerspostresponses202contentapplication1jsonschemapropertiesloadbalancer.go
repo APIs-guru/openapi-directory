@@ -30,12 +30,12 @@ const (
 )
 
 type Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerForwardingRules struct {
-	CertificateID  *string                                                                                                                 `json:"certificate_id"`
+	CertificateID  *string                                                                                                                 `json:"certificate_id,omitempty"`
 	EntryPort      int64                                                                                                                   `json:"entry_port"`
 	EntryProtocol  Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerForwardingRulesEntryProtocolEnum  `json:"entry_protocol"`
 	TargetPort     int64                                                                                                                   `json:"target_port"`
 	TargetProtocol Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerForwardingRulesTargetProtocolEnum `json:"target_protocol"`
-	TLSPassthrough *bool                                                                                                                   `json:"tls_passthrough"`
+	TLSPassthrough *bool                                                                                                                   `json:"tls_passthrough,omitempty"`
 }
 
 type Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerHealthCheckProtocolEnum string
@@ -47,13 +47,13 @@ const (
 )
 
 type Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerHealthCheck struct {
-	CheckIntervalSeconds   *int64                                                                                                         `json:"check_interval_seconds"`
-	HealthyThreshold       *int64                                                                                                         `json:"healthy_threshold"`
-	Path                   *string                                                                                                        `json:"path"`
-	Port                   *int64                                                                                                         `json:"port"`
-	Protocol               *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerHealthCheckProtocolEnum `json:"protocol"`
-	ResponseTimeoutSeconds *int64                                                                                                         `json:"response_timeout_seconds"`
-	UnhealthyThreshold     *int64                                                                                                         `json:"unhealthy_threshold"`
+	CheckIntervalSeconds   *int64                                                                                                         `json:"check_interval_seconds,omitempty"`
+	HealthyThreshold       *int64                                                                                                         `json:"healthy_threshold,omitempty"`
+	Path                   *string                                                                                                        `json:"path,omitempty"`
+	Port                   *int64                                                                                                         `json:"port,omitempty"`
+	Protocol               *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerHealthCheckProtocolEnum `json:"protocol,omitempty"`
+	ResponseTimeoutSeconds *int64                                                                                                         `json:"response_timeout_seconds,omitempty"`
+	UnhealthyThreshold     *int64                                                                                                         `json:"unhealthy_threshold,omitempty"`
 }
 
 type Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerRegion struct {
@@ -88,27 +88,27 @@ const (
 )
 
 type Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerStickySessions struct {
-	CookieName       *string                                                                                                       `json:"cookie_name"`
-	CookieTTLSeconds *int64                                                                                                        `json:"cookie_ttl_seconds"`
-	Type             *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerStickySessionsTypeEnum `json:"type"`
+	CookieName       *string                                                                                                       `json:"cookie_name,omitempty"`
+	CookieTTLSeconds *int64                                                                                                        `json:"cookie_ttl_seconds,omitempty"`
+	Type             *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerStickySessionsTypeEnum `json:"type,omitempty"`
 }
 
 type Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancer struct {
-	Algorithm              *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerAlgorithmEnum    `json:"algorithm"`
-	CreatedAt              *time.Time                                                                                              `json:"created_at"`
-	DropletIds             []int64                                                                                                 `json:"droplet_ids"`
-	EnableBackendKeepalive *bool                                                                                                   `json:"enable_backend_keepalive"`
-	EnableProxyProtocol    *bool                                                                                                   `json:"enable_proxy_protocol"`
+	Algorithm              *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerAlgorithmEnum    `json:"algorithm,omitempty"`
+	CreatedAt              *time.Time                                                                                              `json:"created_at,omitempty"`
+	DropletIds             []int64                                                                                                 `json:"droplet_ids,omitempty"`
+	EnableBackendKeepalive *bool                                                                                                   `json:"enable_backend_keepalive,omitempty"`
+	EnableProxyProtocol    *bool                                                                                                   `json:"enable_proxy_protocol,omitempty"`
 	ForwardingRules        []Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerForwardingRules `json:"forwarding_rules"`
-	HealthCheck            *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerHealthCheck      `json:"health_check"`
-	ID                     *string                                                                                                 `json:"id"`
-	IP                     *string                                                                                                 `json:"ip"`
-	Name                   *string                                                                                                 `json:"name"`
-	RedirectHTTPToHTTPS    *bool                                                                                                   `json:"redirect_http_to_https"`
-	Region                 *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerRegion           `json:"region"`
-	Size                   *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerSizeEnum         `json:"size"`
-	Status                 *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerStatusEnum       `json:"status"`
-	StickySessions         *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerStickySessions   `json:"sticky_sessions"`
-	Tag                    *string                                                                                                 `json:"tag"`
-	VpcUUID                *string                                                                                                 `json:"vpc_uuid"`
+	HealthCheck            *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerHealthCheck      `json:"health_check,omitempty"`
+	ID                     *string                                                                                                 `json:"id,omitempty"`
+	IP                     *string                                                                                                 `json:"ip,omitempty"`
+	Name                   *string                                                                                                 `json:"name,omitempty"`
+	RedirectHTTPToHTTPS    *bool                                                                                                   `json:"redirect_http_to_https,omitempty"`
+	Region                 *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerRegion           `json:"region,omitempty"`
+	Size                   *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerSizeEnum         `json:"size,omitempty"`
+	Status                 *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerStatusEnum       `json:"status,omitempty"`
+	StickySessions         *Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancerStickySessions   `json:"sticky_sessions,omitempty"`
+	Tag                    *string                                                                                                 `json:"tag,omitempty"`
+	VpcUUID                *string                                                                                                 `json:"vpc_uuid,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type OsPolicyResourcePackageResourceRpm struct {
-	PullDeps *bool                 `json:"pullDeps"`
-	Source   *OsPolicyResourceFile `json:"source"`
+	PullDeps *bool                 `json:"pullDeps,omitempty"`
+	Source   *OsPolicyResourceFile `json:"source,omitempty"`
 }

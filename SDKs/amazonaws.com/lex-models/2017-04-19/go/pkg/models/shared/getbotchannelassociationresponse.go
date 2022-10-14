@@ -5,13 +5,13 @@ import (
 )
 
 type GetBotChannelAssociationResponse struct {
-	BotAlias         *string            `json:"botAlias"`
-	BotConfiguration map[string]string  `json:"botConfiguration"`
-	BotName          *string            `json:"botName"`
-	CreatedDate      *time.Time         `json:"createdDate"`
-	Description      *string            `json:"description"`
-	FailureReason    *string            `json:"failureReason"`
-	Name             *string            `json:"name"`
-	Status           *ChannelStatusEnum `json:"status"`
-	Type             *ChannelTypeEnum   `json:"type"`
+	BotAlias         *string            `json:"botAlias,omitempty"`
+	BotConfiguration map[string]string  `json:"botConfiguration,omitempty"`
+	BotName          *string            `json:"botName,omitempty"`
+	CreatedDate      *time.Time         `json:"createdDate,omitempty"`
+	Description      *string            `json:"description,omitempty"`
+	FailureReason    *string            `json:"failureReason,omitempty"`
+	Name             *string            `json:"name,omitempty"`
+	Status           *ChannelStatusEnum `json:"status,omitempty"`
+	Type             *ChannelTypeEnum   `json:"type,omitempty"`
 }

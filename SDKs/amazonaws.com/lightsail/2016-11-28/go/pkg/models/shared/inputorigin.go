@@ -1,7 +1,7 @@
 package shared
 
 type InputOrigin struct {
-	Name           *string                       `json:"name"`
-	ProtocolPolicy *OriginProtocolPolicyEnumEnum `json:"protocolPolicy"`
-	RegionName     *RegionNameEnum               `json:"regionName"`
+	Name           *string                       `json:"name,omitempty"`
+	ProtocolPolicy *OriginProtocolPolicyEnumEnum `json:"protocolPolicy,omitempty"`
+	RegionName     *RegionNameEnum               `json:"regionName,omitempty"`
 }

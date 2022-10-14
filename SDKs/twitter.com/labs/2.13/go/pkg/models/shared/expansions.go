@@ -1,9 +1,9 @@
 package shared
 
 type Expansions struct {
-	Media  []interface{} `json:"media"`
-	Places []interface{} `json:"places"`
-	Polls  []Poll        `json:"polls"`
-	Tweets []interface{} `json:"tweets"`
-	Users  []interface{} `json:"users"`
+	Media  []interface{} `json:"media,omitempty"`
+	Places []interface{} `json:"places,omitempty"`
+	Polls  []Poll        `json:"polls,omitempty"`
+	Tweets []interface{} `json:"tweets,omitempty"`
+	Users  []interface{} `json:"users,omitempty"`
 }

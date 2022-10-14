@@ -24,6 +24,6 @@ const (
 type PagesHTTPSCertificate struct {
 	Description string                         `json:"description"`
 	Domains     []interface{}                  `json:"domains"`
-	ExpiresAt   *time.Time                     `json:"expires_at"`
+	ExpiresAt   *time.Time                     `json:"expires_at,omitempty"`
 	State       PagesHTTPSCertificateStateEnum `json:"state"`
 }

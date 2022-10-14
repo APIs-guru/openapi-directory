@@ -10,9 +10,9 @@ const (
 )
 
 type SMTPMsa struct {
-	Host         *string                  `json:"host"`
-	Password     *string                  `json:"password"`
-	Port         *int32                   `json:"port"`
-	SecurityMode *SMTPMsaSecurityModeEnum `json:"securityMode"`
-	Username     *string                  `json:"username"`
+	Host         *string                  `json:"host,omitempty"`
+	Password     *string                  `json:"password,omitempty"`
+	Port         *int32                   `json:"port,omitempty"`
+	SecurityMode *SMTPMsaSecurityModeEnum `json:"securityMode,omitempty"`
+	Username     *string                  `json:"username,omitempty"`
 }

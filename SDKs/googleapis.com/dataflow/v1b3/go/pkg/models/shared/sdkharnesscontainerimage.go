@@ -1,8 +1,8 @@
 package shared
 
 type SdkHarnessContainerImage struct {
-	Capabilities              []string `json:"capabilities"`
-	ContainerImage            *string  `json:"containerImage"`
-	EnvironmentID             *string  `json:"environmentId"`
-	UseSingleCorePerContainer *bool    `json:"useSingleCorePerContainer"`
+	Capabilities              []string `json:"capabilities,omitempty"`
+	ContainerImage            *string  `json:"containerImage,omitempty"`
+	EnvironmentID             *string  `json:"environmentId,omitempty"`
+	UseSingleCorePerContainer *bool    `json:"useSingleCorePerContainer,omitempty"`
 }

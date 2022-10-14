@@ -22,12 +22,12 @@ const (
 )
 
 type ActivitySnippet struct {
-	ChannelID    *string                  `json:"channelId"`
-	ChannelTitle *string                  `json:"channelTitle"`
-	Description  *string                  `json:"description"`
-	GroupID      *string                  `json:"groupId"`
-	PublishedAt  *time.Time               `json:"publishedAt"`
-	Thumbnails   *ThumbnailDetails        `json:"thumbnails"`
-	Title        *string                  `json:"title"`
-	Type         *ActivitySnippetTypeEnum `json:"type"`
+	ChannelID    *string                  `json:"channelId,omitempty"`
+	ChannelTitle *string                  `json:"channelTitle,omitempty"`
+	Description  *string                  `json:"description,omitempty"`
+	GroupID      *string                  `json:"groupId,omitempty"`
+	PublishedAt  *time.Time               `json:"publishedAt,omitempty"`
+	Thumbnails   *ThumbnailDetails        `json:"thumbnails,omitempty"`
+	Title        *string                  `json:"title,omitempty"`
+	Type         *ActivitySnippetTypeEnum `json:"type,omitempty"`
 }

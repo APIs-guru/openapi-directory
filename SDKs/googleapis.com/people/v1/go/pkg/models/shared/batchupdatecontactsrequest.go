@@ -10,8 +10,8 @@ const (
 )
 
 type BatchUpdateContactsRequest struct {
-	Contacts   map[string]Person                       `json:"contacts"`
-	ReadMask   *string                                 `json:"readMask"`
-	Sources    []BatchUpdateContactsRequestSourcesEnum `json:"sources"`
-	UpdateMask *string                                 `json:"updateMask"`
+	Contacts   map[string]Person                       `json:"contacts,omitempty"`
+	ReadMask   *string                                 `json:"readMask,omitempty"`
+	Sources    []BatchUpdateContactsRequestSourcesEnum `json:"sources,omitempty"`
+	UpdateMask *string                                 `json:"updateMask,omitempty"`
 }

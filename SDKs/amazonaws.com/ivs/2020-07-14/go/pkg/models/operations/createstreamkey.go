@@ -16,7 +16,7 @@ type CreateStreamKeyHeaders struct {
 
 type CreateStreamKeyRequestBody struct {
 	ChannelArn string            `json:"channelArn"`
-	Tags       map[string]string `json:"tags"`
+	Tags       map[string]string `json:"tags,omitempty"`
 }
 
 type CreateStreamKeyRequest struct {

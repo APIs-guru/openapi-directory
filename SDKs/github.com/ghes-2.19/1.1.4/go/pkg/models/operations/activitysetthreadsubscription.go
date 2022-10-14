@@ -9,7 +9,7 @@ type ActivitySetThreadSubscriptionPathParams struct {
 }
 
 type ActivitySetThreadSubscriptionRequestBody struct {
-	Ignored *bool `json:"ignored"`
+	Ignored *bool `json:"ignored,omitempty"`
 }
 
 type ActivitySetThreadSubscriptionRequest struct {

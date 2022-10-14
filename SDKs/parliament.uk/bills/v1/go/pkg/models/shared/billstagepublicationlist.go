@@ -1,7 +1,7 @@
 package shared
 
 type BillStagePublicationList struct {
-	BillStageID  *int32                            `json:"billStageId"`
-	Publications []Publication                     `json:"publications"`
-	Sittings     []BillStageSittingPublicationList `json:"sittings"`
+	BillStageID  *int32                            `json:"billStageId,omitempty"`
+	Publications []Publication                     `json:"publications,omitempty"`
+	Sittings     []BillStageSittingPublicationList `json:"sittings,omitempty"`
 }

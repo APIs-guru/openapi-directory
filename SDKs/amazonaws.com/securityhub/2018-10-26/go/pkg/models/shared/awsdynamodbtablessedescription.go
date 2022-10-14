@@ -1,8 +1,8 @@
 package shared
 
 type AwsDynamoDbTableSseDescription struct {
-	InaccessibleEncryptionDateTime *string `json:"InaccessibleEncryptionDateTime"`
-	KmsMasterKeyArn                *string `json:"KmsMasterKeyArn"`
-	SseType                        *string `json:"SseType"`
-	Status                         *string `json:"Status"`
+	InaccessibleEncryptionDateTime *string `json:"InaccessibleEncryptionDateTime,omitempty"`
+	KmsMasterKeyArn                *string `json:"KmsMasterKeyArn,omitempty"`
+	SseType                        *string `json:"SseType,omitempty"`
+	Status                         *string `json:"Status,omitempty"`
 }

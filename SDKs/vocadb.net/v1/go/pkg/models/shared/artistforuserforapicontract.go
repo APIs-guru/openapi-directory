@@ -1,5 +1,5 @@
 package shared
 
 type ArtistForUserForAPIContract struct {
-	Artist *ArtistForAPIContract `json:"artist"`
+	Artist *ArtistForAPIContract `json:"artist,omitempty"`
 }

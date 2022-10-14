@@ -1,5 +1,5 @@
 package shared
 
 type DeleteAttributeGroupResponse struct {
-	AttributeGroup *AttributeGroupSummary `json:"attributeGroup"`
+	AttributeGroup *AttributeGroupSummary `json:"attributeGroup,omitempty"`
 }

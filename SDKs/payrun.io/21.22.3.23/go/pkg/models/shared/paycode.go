@@ -5,9 +5,9 @@ import (
 )
 
 type PayCodePayCodeNominalCodeNominalCode struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type PayCodePayCodeRegionRegionEnum string
@@ -34,23 +34,23 @@ const (
 )
 
 type PayCodePayCodePayCode struct {
-	Benefit       *bool                                 `json:"Benefit"`
-	Code          *string                               `json:"Code"`
-	Description   *string                               `json:"Description"`
-	EffectiveDate *time.Time                            `json:"EffectiveDate"`
-	MetaData      map[string]interface{}                `json:"MetaData"`
-	Niable        *bool                                 `json:"Niable"`
-	NominalCode   *PayCodePayCodeNominalCodeNominalCode `json:"NominalCode"`
-	NonArrestable *bool                                 `json:"NonArrestable"`
-	Notional      *bool                                 `json:"Notional"`
-	Readonly      *bool                                 `json:"Readonly"`
-	Region        *PayCodePayCodeRegionRegionEnum       `json:"Region"`
-	Revision      *int32                                `json:"Revision"`
-	Taxable       *bool                                 `json:"Taxable"`
-	Territory     *PayCodePayCodeTerritoryTerritoryEnum `json:"Territory"`
-	Type          *PayCodePayCodeTypeTypeEnum           `json:"Type"`
+	Benefit       *bool                                 `json:"Benefit,omitempty"`
+	Code          *string                               `json:"Code,omitempty"`
+	Description   *string                               `json:"Description,omitempty"`
+	EffectiveDate *time.Time                            `json:"EffectiveDate,omitempty"`
+	MetaData      map[string]interface{}                `json:"MetaData,omitempty"`
+	Niable        *bool                                 `json:"Niable,omitempty"`
+	NominalCode   *PayCodePayCodeNominalCodeNominalCode `json:"NominalCode,omitempty"`
+	NonArrestable *bool                                 `json:"NonArrestable,omitempty"`
+	Notional      *bool                                 `json:"Notional,omitempty"`
+	Readonly      *bool                                 `json:"Readonly,omitempty"`
+	Region        *PayCodePayCodeRegionRegionEnum       `json:"Region,omitempty"`
+	Revision      *int32                                `json:"Revision,omitempty"`
+	Taxable       *bool                                 `json:"Taxable,omitempty"`
+	Territory     *PayCodePayCodeTerritoryTerritoryEnum `json:"Territory,omitempty"`
+	Type          *PayCodePayCodeTypeTypeEnum           `json:"Type,omitempty"`
 }
 
 type PayCode struct {
-	PayCode *PayCodePayCodePayCode `json:"PayCode"`
+	PayCode *PayCodePayCodePayCode `json:"PayCode,omitempty"`
 }

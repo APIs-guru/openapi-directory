@@ -1,6 +1,6 @@
 package shared
 
 type Namespace struct {
-	IamPolicy *IamPolicy `json:"iamPolicy"`
-	Name      *string    `json:"name"`
+	IamPolicy *IamPolicy `json:"iamPolicy,omitempty"`
+	Name      *string    `json:"name,omitempty"`
 }

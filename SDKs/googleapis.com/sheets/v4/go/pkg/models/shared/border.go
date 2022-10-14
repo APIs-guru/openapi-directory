@@ -14,8 +14,8 @@ const (
 )
 
 type Border struct {
-	Color      *Color           `json:"color"`
-	ColorStyle *ColorStyle      `json:"colorStyle"`
-	Style      *BorderStyleEnum `json:"style"`
-	Width      *int32           `json:"width"`
+	Color      *Color           `json:"color,omitempty"`
+	ColorStyle *ColorStyle      `json:"colorStyle,omitempty"`
+	Style      *BorderStyleEnum `json:"style,omitempty"`
+	Width      *int32           `json:"width,omitempty"`
 }

@@ -28,14 +28,14 @@ type GetIPv6RangesRequest struct {
 }
 
 type GetIPv6Ranges200ApplicationJSON struct {
-	Data    []shared.IPv6Range `json:"data"`
-	Page    *int64             `json:"page"`
-	Pages   *int64             `json:"pages"`
-	Results *int64             `json:"results"`
+	Data    []shared.IPv6Range `json:"data,omitempty"`
+	Page    *int64             `json:"page,omitempty"`
+	Pages   *int64             `json:"pages,omitempty"`
+	Results *int64             `json:"results,omitempty"`
 }
 
 type GetIPv6RangesDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetIPv6RangesResponse struct {

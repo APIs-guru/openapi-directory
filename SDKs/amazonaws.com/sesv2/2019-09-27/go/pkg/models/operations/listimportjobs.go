@@ -27,7 +27,7 @@ const (
 )
 
 type ListImportJobsRequestBody struct {
-	ImportDestinationType *ListImportJobsRequestBodyImportDestinationTypeEnum `json:"ImportDestinationType"`
+	ImportDestinationType *ListImportJobsRequestBodyImportDestinationTypeEnum `json:"ImportDestinationType,omitempty"`
 }
 
 type ListImportJobsRequest struct {

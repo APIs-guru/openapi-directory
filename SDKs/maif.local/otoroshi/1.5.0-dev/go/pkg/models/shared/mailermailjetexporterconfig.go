@@ -7,8 +7,8 @@ const (
 )
 
 type MailerMailjetExporterConfig struct {
-	APIKeyPrivate *string                             `json:"apiKeyPrivate"`
-	APIKeyPublic  *string                             `json:"apiKeyPublic"`
-	To            []string                            `json:"to"`
+	APIKeyPrivate *string                             `json:"apiKeyPrivate,omitempty"`
+	APIKeyPublic  *string                             `json:"apiKeyPublic,omitempty"`
+	To            []string                            `json:"to,omitempty"`
 	Type          MailerMailjetExporterConfigTypeEnum `json:"type"`
 }

@@ -20,25 +20,25 @@ const (
 )
 
 type AmqpExternalRulePatchTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AmqpExternalRulePatchTarget struct {
-	Enveloped          *bool                                `json:"enveloped"`
-	Format             *string                              `json:"format"`
-	Headers            []AmqpExternalRulePatchTargetHeaders `json:"headers"`
-	MandatoryRoute     *bool                                `json:"mandatoryRoute"`
-	MessageTTL         *int64                               `json:"messageTtl"`
-	PersistentMessages *bool                                `json:"persistentMessages"`
-	RoutingKey         *string                              `json:"routingKey"`
-	URL                *string                              `json:"url"`
+	Enveloped          *bool                                `json:"enveloped,omitempty"`
+	Format             *string                              `json:"format,omitempty"`
+	Headers            []AmqpExternalRulePatchTargetHeaders `json:"headers,omitempty"`
+	MandatoryRoute     *bool                                `json:"mandatoryRoute,omitempty"`
+	MessageTTL         *int64                               `json:"messageTtl,omitempty"`
+	PersistentMessages *bool                                `json:"persistentMessages,omitempty"`
+	RoutingKey         *string                              `json:"routingKey,omitempty"`
+	URL                *string                              `json:"url,omitempty"`
 }
 
 type AmqpExternalRulePatch struct {
-	RequestMode *AmqpExternalRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *AmqpExternalRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                           `json:"source"`
-	Status      *AmqpExternalRulePatchStatusEnum      `json:"status"`
-	Target      *AmqpExternalRulePatchTarget          `json:"target"`
+	RequestMode *AmqpExternalRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *AmqpExternalRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                           `json:"source,omitempty"`
+	Status      *AmqpExternalRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *AmqpExternalRulePatchTarget          `json:"target,omitempty"`
 }

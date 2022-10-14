@@ -6,60 +6,60 @@ type UpdateNetworkSwitchPortSchedulePathParams struct {
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBodyPortSchedule struct {
-	Friday    *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday    `json:"friday"`
-	Monday    *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday    `json:"monday"`
-	Saturday  *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday  `json:"saturday"`
-	Sunday    *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday    `json:"sunday"`
-	Thursday  *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday  `json:"thursday"`
-	Tuesday   *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday   `json:"tuesday"`
-	Wednesday *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday `json:"wednesday"`
+	Friday    *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday    `json:"friday,omitempty"`
+	Monday    *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday    `json:"monday,omitempty"`
+	Saturday  *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday  `json:"saturday,omitempty"`
+	Sunday    *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday    `json:"sunday,omitempty"`
+	Thursday  *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday  `json:"thursday,omitempty"`
+	Tuesday   *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday   `json:"tuesday,omitempty"`
+	Wednesday *UpdateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday `json:"wednesday,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequestBody struct {
-	Name         *string                                                 `json:"name"`
-	PortSchedule *UpdateNetworkSwitchPortScheduleRequestBodyPortSchedule `json:"portSchedule"`
+	Name         *string                                                 `json:"name,omitempty"`
+	PortSchedule *UpdateNetworkSwitchPortScheduleRequestBodyPortSchedule `json:"portSchedule,omitempty"`
 }
 
 type UpdateNetworkSwitchPortScheduleRequest struct {

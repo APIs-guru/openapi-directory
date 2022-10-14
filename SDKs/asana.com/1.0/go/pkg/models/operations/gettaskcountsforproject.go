@@ -21,7 +21,7 @@ type GetTaskCountsForProjectRequest struct {
 }
 
 type GetTaskCountsForProject200ApplicationJSON struct {
-	Data *shared.TaskCountResponse `json:"data"`
+	Data *shared.TaskCountResponse `json:"data,omitempty"`
 }
 
 type GetTaskCountsForProjectResponse struct {

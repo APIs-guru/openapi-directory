@@ -20,7 +20,7 @@ type ResetDeploymentsHeaders struct {
 }
 
 type ResetDeploymentsRequestBody struct {
-	Force *bool `json:"Force"`
+	Force *bool `json:"Force,omitempty"`
 }
 
 type ResetDeploymentsRequest struct {

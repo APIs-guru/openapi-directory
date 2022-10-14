@@ -16,7 +16,7 @@ type UpdatePlacementHeaders struct {
 }
 
 type UpdatePlacementRequestBody struct {
-	Attributes map[string]string `json:"attributes"`
+	Attributes map[string]string `json:"attributes,omitempty"`
 }
 
 type UpdatePlacementRequest struct {

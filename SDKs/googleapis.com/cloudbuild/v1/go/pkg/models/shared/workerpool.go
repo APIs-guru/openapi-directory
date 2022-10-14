@@ -12,14 +12,14 @@ const (
 )
 
 type WorkerPool struct {
-	Annotations         map[string]string    `json:"annotations"`
-	CreateTime          *string              `json:"createTime"`
-	DeleteTime          *string              `json:"deleteTime"`
-	DisplayName         *string              `json:"displayName"`
-	Etag                *string              `json:"etag"`
-	Name                *string              `json:"name"`
-	PrivatePoolV1Config *PrivatePoolV1Config `json:"privatePoolV1Config"`
-	State               *WorkerPoolStateEnum `json:"state"`
-	UID                 *string              `json:"uid"`
-	UpdateTime          *string              `json:"updateTime"`
+	Annotations         map[string]string    `json:"annotations,omitempty"`
+	CreateTime          *string              `json:"createTime,omitempty"`
+	DeleteTime          *string              `json:"deleteTime,omitempty"`
+	DisplayName         *string              `json:"displayName,omitempty"`
+	Etag                *string              `json:"etag,omitempty"`
+	Name                *string              `json:"name,omitempty"`
+	PrivatePoolV1Config *PrivatePoolV1Config `json:"privatePoolV1Config,omitempty"`
+	State               *WorkerPoolStateEnum `json:"state,omitempty"`
+	UID                 *string              `json:"uid,omitempty"`
+	UpdateTime          *string              `json:"updateTime,omitempty"`
 }

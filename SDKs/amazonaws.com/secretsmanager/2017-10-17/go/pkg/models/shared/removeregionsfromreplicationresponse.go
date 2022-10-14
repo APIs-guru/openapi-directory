@@ -1,6 +1,6 @@
 package shared
 
 type RemoveRegionsFromReplicationResponse struct {
-	Arn               *string                 `json:"ARN"`
-	ReplicationStatus []ReplicationStatusType `json:"ReplicationStatus"`
+	Arn               *string                 `json:"ARN,omitempty"`
+	ReplicationStatus []ReplicationStatusType `json:"ReplicationStatus,omitempty"`
 }

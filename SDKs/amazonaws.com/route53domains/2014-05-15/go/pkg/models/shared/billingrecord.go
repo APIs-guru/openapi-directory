@@ -5,9 +5,9 @@ import (
 )
 
 type BillingRecord struct {
-	BillDate   *time.Time         `json:"BillDate"`
-	DomainName *string            `json:"DomainName"`
-	InvoiceID  *string            `json:"InvoiceId"`
-	Operation  *OperationTypeEnum `json:"Operation"`
-	Price      *float64           `json:"Price"`
+	BillDate   *time.Time         `json:"BillDate,omitempty"`
+	DomainName *string            `json:"DomainName,omitempty"`
+	InvoiceID  *string            `json:"InvoiceId,omitempty"`
+	Operation  *OperationTypeEnum `json:"Operation,omitempty"`
+	Price      *float64           `json:"Price,omitempty"`
 }

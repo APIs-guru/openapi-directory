@@ -5,6 +5,6 @@ import (
 )
 
 type StartTimeRange struct {
-	FromTime *time.Time `json:"FromTime"`
-	ToTime   *time.Time `json:"ToTime"`
+	FromTime *time.Time `json:"FromTime,omitempty"`
+	ToTime   *time.Time `json:"ToTime,omitempty"`
 }

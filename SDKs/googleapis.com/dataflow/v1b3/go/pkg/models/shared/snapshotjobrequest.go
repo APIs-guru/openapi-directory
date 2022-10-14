@@ -1,8 +1,8 @@
 package shared
 
 type SnapshotJobRequest struct {
-	Description     *string `json:"description"`
-	Location        *string `json:"location"`
-	SnapshotSources *bool   `json:"snapshotSources"`
-	TTL             *string `json:"ttl"`
+	Description     *string `json:"description,omitempty"`
+	Location        *string `json:"location,omitempty"`
+	SnapshotSources *bool   `json:"snapshotSources,omitempty"`
+	TTL             *string `json:"ttl,omitempty"`
 }

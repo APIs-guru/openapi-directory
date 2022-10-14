@@ -10,8 +10,8 @@ const (
 )
 
 type ReleaseChannelConfig struct {
-	AvailableVersions []AvailableVersion               `json:"availableVersions"`
-	Channel           *ReleaseChannelConfigChannelEnum `json:"channel"`
-	DefaultVersion    *string                          `json:"defaultVersion"`
-	ValidVersions     []string                         `json:"validVersions"`
+	AvailableVersions []AvailableVersion               `json:"availableVersions,omitempty"`
+	Channel           *ReleaseChannelConfigChannelEnum `json:"channel,omitempty"`
+	DefaultVersion    *string                          `json:"defaultVersion,omitempty"`
+	ValidVersions     []string                         `json:"validVersions,omitempty"`
 }

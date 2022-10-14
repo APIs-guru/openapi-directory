@@ -1,16 +1,16 @@
 package shared
 
 type PrivateUserObject struct {
-	Country         *string                        `json:"country"`
-	DisplayName     *string                        `json:"display_name"`
-	Email           *string                        `json:"email"`
-	ExplicitContent *ExplicitContentSettingsObject `json:"explicit_content"`
-	ExternalUrls    *ExternalURLObject             `json:"external_urls"`
-	Followers       *FollowersObject               `json:"followers"`
-	Href            *string                        `json:"href"`
-	ID              *string                        `json:"id"`
-	Images          []ImageObject                  `json:"images"`
-	Product         *string                        `json:"product"`
-	Type            *string                        `json:"type"`
-	URI             *string                        `json:"uri"`
+	Country         *string                        `json:"country,omitempty"`
+	DisplayName     *string                        `json:"display_name,omitempty"`
+	Email           *string                        `json:"email,omitempty"`
+	ExplicitContent *ExplicitContentSettingsObject `json:"explicit_content,omitempty"`
+	ExternalUrls    *ExternalURLObject             `json:"external_urls,omitempty"`
+	Followers       *FollowersObject               `json:"followers,omitempty"`
+	Href            *string                        `json:"href,omitempty"`
+	ID              *string                        `json:"id,omitempty"`
+	Images          []ImageObject                  `json:"images,omitempty"`
+	Product         *string                        `json:"product,omitempty"`
+	Type            *string                        `json:"type,omitempty"`
+	URI             *string                        `json:"uri,omitempty"`
 }

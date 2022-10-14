@@ -1,11 +1,11 @@
 package shared
 
 type Subject struct {
-	CountryCode        *string `json:"countryCode"`
-	Locality           *string `json:"locality"`
-	Organization       *string `json:"organization"`
-	OrganizationalUnit *string `json:"organizationalUnit"`
-	PostalCode         *string `json:"postalCode"`
-	Province           *string `json:"province"`
-	StreetAddress      *string `json:"streetAddress"`
+	CountryCode        *string `json:"countryCode,omitempty"`
+	Locality           *string `json:"locality,omitempty"`
+	Organization       *string `json:"organization,omitempty"`
+	OrganizationalUnit *string `json:"organizationalUnit,omitempty"`
+	PostalCode         *string `json:"postalCode,omitempty"`
+	Province           *string `json:"province,omitempty"`
+	StreetAddress      *string `json:"streetAddress,omitempty"`
 }

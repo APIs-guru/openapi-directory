@@ -30,7 +30,7 @@ type ChromepolicyCustomersPoliciesGroupsBatchModifySecurity struct {
 type ChromepolicyCustomersPoliciesGroupsBatchModifyRequest struct {
 	PathParams  ChromepolicyCustomersPoliciesGroupsBatchModifyPathParams
 	QueryParams ChromepolicyCustomersPoliciesGroupsBatchModifyQueryParams
-	Request     *shared.GoogleChromePolicyV1BatchModifyGroupPoliciesRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleChromePolicyVersionsV1BatchModifyGroupPoliciesRequest `request:"mediaType=application/json"`
 	Security    ChromepolicyCustomersPoliciesGroupsBatchModifySecurity
 }
 

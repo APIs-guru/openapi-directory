@@ -1,17 +1,17 @@
 package shared
 
 type GraphqlAPI struct {
-	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider `json:"additionalAuthenticationProviders"`
-	APIID                             *string                            `json:"apiId"`
-	Arn                               *string                            `json:"arn"`
-	AuthenticationType                *AuthenticationTypeEnum            `json:"authenticationType"`
-	LambdaAuthorizerConfig            *LambdaAuthorizerConfig            `json:"lambdaAuthorizerConfig"`
-	LogConfig                         *LogConfig                         `json:"logConfig"`
-	Name                              *string                            `json:"name"`
-	OpenIDConnectConfig               *OpenIDConnectConfig               `json:"openIDConnectConfig"`
-	Tags                              map[string]string                  `json:"tags"`
-	Uris                              map[string]string                  `json:"uris"`
-	UserPoolConfig                    *UserPoolConfig                    `json:"userPoolConfig"`
-	WafWebACLArn                      *string                            `json:"wafWebAclArn"`
-	XrayEnabled                       *bool                              `json:"xrayEnabled"`
+	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider `json:"additionalAuthenticationProviders,omitempty"`
+	APIID                             *string                            `json:"apiId,omitempty"`
+	Arn                               *string                            `json:"arn,omitempty"`
+	AuthenticationType                *AuthenticationTypeEnum            `json:"authenticationType,omitempty"`
+	LambdaAuthorizerConfig            *LambdaAuthorizerConfig            `json:"lambdaAuthorizerConfig,omitempty"`
+	LogConfig                         *LogConfig                         `json:"logConfig,omitempty"`
+	Name                              *string                            `json:"name,omitempty"`
+	OpenIDConnectConfig               *OpenIDConnectConfig               `json:"openIDConnectConfig,omitempty"`
+	Tags                              map[string]string                  `json:"tags,omitempty"`
+	Uris                              map[string]string                  `json:"uris,omitempty"`
+	UserPoolConfig                    *UserPoolConfig                    `json:"userPoolConfig,omitempty"`
+	WafWebACLArn                      *string                            `json:"wafWebAclArn,omitempty"`
+	XrayEnabled                       *bool                              `json:"xrayEnabled,omitempty"`
 }

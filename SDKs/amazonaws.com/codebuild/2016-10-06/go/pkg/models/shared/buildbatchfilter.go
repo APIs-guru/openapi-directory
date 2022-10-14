@@ -1,5 +1,5 @@
 package shared
 
 type BuildBatchFilter struct {
-	Status *StatusTypeEnum `json:"status"`
+	Status *StatusTypeEnum `json:"status,omitempty"`
 }

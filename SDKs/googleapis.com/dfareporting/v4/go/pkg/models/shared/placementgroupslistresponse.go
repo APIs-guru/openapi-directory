@@ -1,7 +1,7 @@
 package shared
 
 type PlacementGroupsListResponse struct {
-	Kind            *string          `json:"kind"`
-	NextPageToken   *string          `json:"nextPageToken"`
-	PlacementGroups []PlacementGroup `json:"placementGroups"`
+	Kind            *string          `json:"kind,omitempty"`
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
+	PlacementGroups []PlacementGroup `json:"placementGroups,omitempty"`
 }

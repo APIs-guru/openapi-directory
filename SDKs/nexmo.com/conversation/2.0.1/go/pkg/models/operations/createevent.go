@@ -5,9 +5,9 @@ type CreateEventPathParams struct {
 }
 
 type CreateEventRequestBody struct {
-	Body map[string]interface{} `json:"body"`
+	Body map[string]interface{} `json:"body,omitempty"`
 	From string                 `json:"from"`
-	To   *string                `json:"to"`
+	To   *string                `json:"to,omitempty"`
 	Type string                 `json:"type"`
 }
 
@@ -17,9 +17,9 @@ type CreateEventRequest struct {
 }
 
 type CreateEvent201ApplicationJSON struct {
-	Href      *string `json:"href"`
-	ID        *string `json:"id"`
-	Timestamp *string `json:"timestamp"`
+	Href      *string `json:"href,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Timestamp *string `json:"timestamp,omitempty"`
 }
 
 type CreateEventResponse struct {

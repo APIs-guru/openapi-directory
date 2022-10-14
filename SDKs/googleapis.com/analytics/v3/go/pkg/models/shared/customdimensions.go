@@ -1,12 +1,12 @@
 package shared
 
 type CustomDimensions struct {
-	Items        []CustomDimension `json:"items"`
-	ItemsPerPage *int32            `json:"itemsPerPage"`
-	Kind         *string           `json:"kind"`
-	NextLink     *string           `json:"nextLink"`
-	PreviousLink *string           `json:"previousLink"`
-	StartIndex   *int32            `json:"startIndex"`
-	TotalResults *int32            `json:"totalResults"`
-	Username     *string           `json:"username"`
+	Items        []CustomDimension `json:"items,omitempty"`
+	ItemsPerPage *int32            `json:"itemsPerPage,omitempty"`
+	Kind         *string           `json:"kind,omitempty"`
+	NextLink     *string           `json:"nextLink,omitempty"`
+	PreviousLink *string           `json:"previousLink,omitempty"`
+	StartIndex   *int32            `json:"startIndex,omitempty"`
+	TotalResults *int32            `json:"totalResults,omitempty"`
+	Username     *string           `json:"username,omitempty"`
 }

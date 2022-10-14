@@ -18,10 +18,10 @@ const (
 )
 
 type GoogleAppsCardV1GridItem struct {
-	ID            *string                                    `json:"id"`
-	Image         *GoogleAppsCardV1ImageComponent            `json:"image"`
-	Layout        *GoogleAppsCardV1GridItemLayoutEnum        `json:"layout"`
-	Subtitle      *string                                    `json:"subtitle"`
-	TextAlignment *GoogleAppsCardV1GridItemTextAlignmentEnum `json:"textAlignment"`
-	Title         *string                                    `json:"title"`
+	ID            *string                                    `json:"id,omitempty"`
+	Image         *GoogleAppsCardV1ImageComponent            `json:"image,omitempty"`
+	Layout        *GoogleAppsCardV1GridItemLayoutEnum        `json:"layout,omitempty"`
+	Subtitle      *string                                    `json:"subtitle,omitempty"`
+	TextAlignment *GoogleAppsCardV1GridItemTextAlignmentEnum `json:"textAlignment,omitempty"`
+	Title         *string                                    `json:"title,omitempty"`
 }

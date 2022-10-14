@@ -1,6 +1,6 @@
 package shared
 
 type ResourceLocation struct {
-	AvailabilityZone *string         `json:"availabilityZone"`
-	RegionName       *RegionNameEnum `json:"regionName"`
+	AvailabilityZone *string         `json:"availabilityZone,omitempty"`
+	RegionName       *RegionNameEnum `json:"regionName,omitempty"`
 }

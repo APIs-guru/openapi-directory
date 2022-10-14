@@ -1,9 +1,9 @@
 package shared
 
 type Operation struct {
-	Done     *bool                  `json:"done"`
-	Error    *Status                `json:"error"`
-	Metadata map[string]interface{} `json:"metadata"`
-	Name     *string                `json:"name"`
-	Response map[string]interface{} `json:"response"`
+	Done     *bool                  `json:"done,omitempty"`
+	Error    *Status                `json:"error,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Name     *string                `json:"name,omitempty"`
+	Response map[string]interface{} `json:"response,omitempty"`
 }

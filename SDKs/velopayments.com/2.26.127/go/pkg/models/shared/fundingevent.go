@@ -5,8 +5,8 @@ import (
 )
 
 type FundingEvent struct {
-	EventDateTime    *time.Time            `json:"eventDateTime"`
-	EventID          *string               `json:"eventId"`
-	FundingEventType *FundingEventTypeEnum `json:"fundingEventType"`
-	Principal        *string               `json:"principal"`
+	EventDateTime    *time.Time            `json:"eventDateTime,omitempty"`
+	EventID          *string               `json:"eventId,omitempty"`
+	FundingEventType *FundingEventTypeEnum `json:"fundingEventType,omitempty"`
+	Principal        *string               `json:"principal,omitempty"`
 }

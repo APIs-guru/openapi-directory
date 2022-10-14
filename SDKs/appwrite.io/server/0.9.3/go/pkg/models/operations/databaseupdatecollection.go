@@ -10,9 +10,9 @@ type DatabaseUpdateCollectionPathParams struct {
 
 type DatabaseUpdateCollectionRequestBody struct {
 	Name  string   `json:"name"`
-	Read  []string `json:"read"`
-	Rules []string `json:"rules"`
-	Write []string `json:"write"`
+	Read  []string `json:"read,omitempty"`
+	Rules []string `json:"rules,omitempty"`
+	Write []string `json:"write,omitempty"`
 }
 
 type DatabaseUpdateCollectionSecurity struct {

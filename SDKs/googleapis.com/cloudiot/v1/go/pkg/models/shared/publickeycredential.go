@@ -11,6 +11,6 @@ const (
 )
 
 type PublicKeyCredential struct {
-	Format *PublicKeyCredentialFormatEnum `json:"format"`
-	Key    *string                        `json:"key"`
+	Format *PublicKeyCredentialFormatEnum `json:"format,omitempty"`
+	Key    *string                        `json:"key,omitempty"`
 }

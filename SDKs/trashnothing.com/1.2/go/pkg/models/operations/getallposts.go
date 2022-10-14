@@ -38,7 +38,7 @@ type GetAllPostsRequest struct {
 }
 
 type GetAllPosts200ApplicationJSON struct {
-	Posts []shared.Post `json:"posts"`
+	Posts []shared.Post `json:"posts,omitempty"`
 }
 
 type GetAllPostsResponse struct {

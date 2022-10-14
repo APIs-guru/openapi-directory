@@ -1,8 +1,8 @@
 package shared
 
 type ServiceActionSummary struct {
-	DefinitionType *ServiceActionDefinitionTypeEnum `json:"DefinitionType"`
-	Description    *string                          `json:"Description"`
-	ID             *string                          `json:"Id"`
-	Name           *string                          `json:"Name"`
+	DefinitionType *ServiceActionDefinitionTypeEnum `json:"DefinitionType,omitempty"`
+	Description    *string                          `json:"Description,omitempty"`
+	ID             *string                          `json:"Id,omitempty"`
+	Name           *string                          `json:"Name,omitempty"`
 }

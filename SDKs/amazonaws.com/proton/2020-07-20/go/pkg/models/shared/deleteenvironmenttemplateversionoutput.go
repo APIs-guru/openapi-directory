@@ -1,5 +1,5 @@
 package shared
 
 type DeleteEnvironmentTemplateVersionOutput struct {
-	EnvironmentTemplateVersion *EnvironmentTemplateVersion `json:"environmentTemplateVersion"`
+	EnvironmentTemplateVersion *EnvironmentTemplateVersion `json:"environmentTemplateVersion,omitempty"`
 }

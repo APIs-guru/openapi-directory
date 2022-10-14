@@ -9,7 +9,7 @@ const (
 )
 
 type VideostatusIngest struct {
-	Filesize      *int64                       `json:"filesize"`
-	ReceivedBytes []BytesRange                 `json:"receivedBytes"`
-	Status        *VideostatusIngestStatusEnum `json:"status"`
+	Filesize      *int64                       `json:"filesize,omitempty"`
+	ReceivedBytes []BytesRange                 `json:"receivedBytes,omitempty"`
+	Status        *VideostatusIngestStatusEnum `json:"status,omitempty"`
 }

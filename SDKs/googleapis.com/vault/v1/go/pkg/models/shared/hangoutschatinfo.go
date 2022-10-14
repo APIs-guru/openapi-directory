@@ -1,5 +1,5 @@
 package shared
 
 type HangoutsChatInfo struct {
-	RoomID []string `json:"roomId"`
+	RoomID []string `json:"roomId,omitempty"`
 }

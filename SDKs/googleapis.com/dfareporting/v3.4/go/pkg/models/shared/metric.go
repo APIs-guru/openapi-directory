@@ -1,6 +1,6 @@
 package shared
 
 type Metric struct {
-	Kind *string `json:"kind"`
-	Name *string `json:"name"`
+	Kind *string `json:"kind,omitempty"`
+	Name *string `json:"name,omitempty"`
 }

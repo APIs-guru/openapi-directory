@@ -7,6 +7,6 @@ import (
 type RestoreSummary struct {
 	RestoreDateTime   time.Time `json:"RestoreDateTime"`
 	RestoreInProgress bool      `json:"RestoreInProgress"`
-	SourceBackupArn   *string   `json:"SourceBackupArn"`
-	SourceTableArn    *string   `json:"SourceTableArn"`
+	SourceBackupArn   *string   `json:"SourceBackupArn,omitempty"`
+	SourceTableArn    *string   `json:"SourceTableArn,omitempty"`
 }

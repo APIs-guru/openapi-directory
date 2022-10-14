@@ -1,7 +1,7 @@
 package shared
 
 type ResultTableColumnHeader struct {
-	ColumnType *string `json:"columnType"`
-	DataType   *string `json:"dataType"`
-	Name       *string `json:"name"`
+	ColumnType *string `json:"columnType,omitempty"`
+	DataType   *string `json:"dataType,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }

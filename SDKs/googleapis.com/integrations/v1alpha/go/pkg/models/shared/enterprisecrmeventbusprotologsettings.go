@@ -19,9 +19,9 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoLogSettings struct {
-	LogFieldName     *string                                              `json:"logFieldName"`
-	SanitizeOptions  *EnterpriseCrmLoggingGwsSanitizeOptions              `json:"sanitizeOptions"`
-	SeedPeriod       *EnterpriseCrmEventbusProtoLogSettingsSeedPeriodEnum `json:"seedPeriod"`
-	SeedScope        *EnterpriseCrmEventbusProtoLogSettingsSeedScopeEnum  `json:"seedScope"`
-	ShorteningLimits *EnterpriseCrmLoggingGwsFieldLimits                  `json:"shorteningLimits"`
+	LogFieldName     *string                                              `json:"logFieldName,omitempty"`
+	SanitizeOptions  *EnterpriseCrmLoggingGwsSanitizeOptions              `json:"sanitizeOptions,omitempty"`
+	SeedPeriod       *EnterpriseCrmEventbusProtoLogSettingsSeedPeriodEnum `json:"seedPeriod,omitempty"`
+	SeedScope        *EnterpriseCrmEventbusProtoLogSettingsSeedScopeEnum  `json:"seedScope,omitempty"`
+	ShorteningLimits *EnterpriseCrmLoggingGwsFieldLimits                  `json:"shorteningLimits,omitempty"`
 }

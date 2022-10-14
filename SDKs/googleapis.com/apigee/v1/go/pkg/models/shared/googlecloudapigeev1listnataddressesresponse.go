@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudApigeeV1ListNatAddressesResponse struct {
-	NatAddresses  []GoogleCloudApigeeV1NatAddress `json:"natAddresses"`
-	NextPageToken *string                         `json:"nextPageToken"`
+	NatAddresses  []GoogleCloudApigeeV1NatAddress `json:"natAddresses,omitempty"`
+	NextPageToken *string                         `json:"nextPageToken,omitempty"`
 }

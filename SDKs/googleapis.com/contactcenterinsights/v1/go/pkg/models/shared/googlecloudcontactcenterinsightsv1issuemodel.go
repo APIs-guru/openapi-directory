@@ -12,11 +12,11 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1IssueModel struct {
-	CreateTime      *string                                                      `json:"createTime"`
-	DisplayName     *string                                                      `json:"displayName"`
-	InputDataConfig *GoogleCloudContactcenterinsightsV1IssueModelInputDataConfig `json:"inputDataConfig"`
-	Name            *string                                                      `json:"name"`
-	State           *GoogleCloudContactcenterinsightsV1IssueModelStateEnum       `json:"state"`
-	TrainingStats   *GoogleCloudContactcenterinsightsV1IssueModelLabelStats      `json:"trainingStats"`
-	UpdateTime      *string                                                      `json:"updateTime"`
+	CreateTime      *string                                                      `json:"createTime,omitempty"`
+	DisplayName     *string                                                      `json:"displayName,omitempty"`
+	InputDataConfig *GoogleCloudContactcenterinsightsV1IssueModelInputDataConfig `json:"inputDataConfig,omitempty"`
+	Name            *string                                                      `json:"name,omitempty"`
+	State           *GoogleCloudContactcenterinsightsV1IssueModelStateEnum       `json:"state,omitempty"`
+	TrainingStats   *GoogleCloudContactcenterinsightsV1IssueModelLabelStats      `json:"trainingStats,omitempty"`
+	UpdateTime      *string                                                      `json:"updateTime,omitempty"`
 }

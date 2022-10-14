@@ -14,17 +14,17 @@ type ListFirewallsRequest struct {
 }
 
 type ListFirewalls200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListFirewalls200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListFirewalls200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListFirewalls200ApplicationJSONMeta struct {
@@ -32,15 +32,15 @@ type ListFirewalls200ApplicationJSONMeta struct {
 }
 
 type ListFirewalls200ApplicationJSON struct {
-	Firewalls []shared.Onev21droplets1Percent7BdropletIDPercent7D1firewallsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesFirewallsItems `json:"firewalls"`
-	Links     *ListFirewalls200ApplicationJSONLinks                                                                                                   `json:"links"`
+	Firewalls []shared.Onev21droplets1Percent7BdropletIDPercent7D1firewallsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesFirewallsItems `json:"firewalls,omitempty"`
+	Links     *ListFirewalls200ApplicationJSONLinks                                                                                                   `json:"links,omitempty"`
 	Meta      ListFirewalls200ApplicationJSONMeta                                                                                                     `json:"meta"`
 }
 
 type ListFirewalls401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListFirewallsResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ResourceManifest struct {
-	ClusterScoped *bool   `json:"clusterScoped"`
-	Manifest      *string `json:"manifest"`
+	ClusterScoped *bool   `json:"clusterScoped,omitempty"`
+	Manifest      *string `json:"manifest,omitempty"`
 }

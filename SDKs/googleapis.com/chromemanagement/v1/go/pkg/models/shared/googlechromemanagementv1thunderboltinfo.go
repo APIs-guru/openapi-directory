@@ -13,5 +13,5 @@ const (
 )
 
 type GoogleChromeManagementV1ThunderboltInfo struct {
-	SecurityLevel *GoogleChromeManagementV1ThunderboltInfoSecurityLevelEnum `json:"securityLevel"`
+	SecurityLevel *GoogleChromeManagementV1ThunderboltInfoSecurityLevelEnum `json:"securityLevel,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type RestoreDatabaseEncryptionConfig struct {
-	EncryptionType *RestoreDatabaseEncryptionConfigEncryptionTypeEnum `json:"encryptionType"`
-	KmsKeyName     *string                                            `json:"kmsKeyName"`
+	EncryptionType *RestoreDatabaseEncryptionConfigEncryptionTypeEnum `json:"encryptionType,omitempty"`
+	KmsKeyName     *string                                            `json:"kmsKeyName,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type ReadOptions struct {
-	ReadConsistency *ReadOptionsReadConsistencyEnum `json:"readConsistency"`
-	ReadTime        *string                         `json:"readTime"`
-	Transaction     *string                         `json:"transaction"`
+	ReadConsistency *ReadOptionsReadConsistencyEnum `json:"readConsistency,omitempty"`
+	ReadTime        *string                         `json:"readTime,omitempty"`
+	Transaction     *string                         `json:"transaction,omitempty"`
 }

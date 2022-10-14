@@ -1,6 +1,6 @@
 package shared
 
 type RegionProposal struct {
-	BoundingBox *BoundingBox `json:"boundingBox"`
-	Confidence  *float32     `json:"confidence"`
+	BoundingBox *BoundingBox `json:"boundingBox,omitempty"`
+	Confidence  *float32     `json:"confidence,omitempty"`
 }

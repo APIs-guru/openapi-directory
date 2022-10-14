@@ -5,5 +5,5 @@ import (
 )
 
 type ProfileTime struct {
-	Start *time.Time `json:"start"`
+	Start *time.Time `json:"start,omitempty"`
 }

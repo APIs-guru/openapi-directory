@@ -27,7 +27,7 @@ type ShutdownLinodeInstanceRequest struct {
 }
 
 type ShutdownLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ShutdownLinodeInstanceResponse struct {

@@ -5,20 +5,20 @@ import (
 )
 
 type InstanceSnapshot struct {
-	Arn                *string                    `json:"arn"`
-	CreatedAt          *time.Time                 `json:"createdAt"`
-	FromAttachedDisks  []Disk                     `json:"fromAttachedDisks"`
-	FromBlueprintID    *string                    `json:"fromBlueprintId"`
-	FromBundleID       *string                    `json:"fromBundleId"`
-	FromInstanceArn    *string                    `json:"fromInstanceArn"`
-	FromInstanceName   *string                    `json:"fromInstanceName"`
-	IsFromAutoSnapshot *bool                      `json:"isFromAutoSnapshot"`
-	Location           *ResourceLocation          `json:"location"`
-	Name               *string                    `json:"name"`
-	Progress           *string                    `json:"progress"`
-	ResourceType       *ResourceTypeEnum          `json:"resourceType"`
-	SizeInGb           *int64                     `json:"sizeInGb"`
-	State              *InstanceSnapshotStateEnum `json:"state"`
-	SupportCode        *string                    `json:"supportCode"`
-	Tags               []Tag                      `json:"tags"`
+	Arn                *string                    `json:"arn,omitempty"`
+	CreatedAt          *time.Time                 `json:"createdAt,omitempty"`
+	FromAttachedDisks  []Disk                     `json:"fromAttachedDisks,omitempty"`
+	FromBlueprintID    *string                    `json:"fromBlueprintId,omitempty"`
+	FromBundleID       *string                    `json:"fromBundleId,omitempty"`
+	FromInstanceArn    *string                    `json:"fromInstanceArn,omitempty"`
+	FromInstanceName   *string                    `json:"fromInstanceName,omitempty"`
+	IsFromAutoSnapshot *bool                      `json:"isFromAutoSnapshot,omitempty"`
+	Location           *ResourceLocation          `json:"location,omitempty"`
+	Name               *string                    `json:"name,omitempty"`
+	Progress           *string                    `json:"progress,omitempty"`
+	ResourceType       *ResourceTypeEnum          `json:"resourceType,omitempty"`
+	SizeInGb           *int64                     `json:"sizeInGb,omitempty"`
+	State              *InstanceSnapshotStateEnum `json:"state,omitempty"`
+	SupportCode        *string                    `json:"supportCode,omitempty"`
+	Tags               []Tag                      `json:"tags,omitempty"`
 }

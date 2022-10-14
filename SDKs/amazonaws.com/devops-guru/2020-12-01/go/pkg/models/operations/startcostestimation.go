@@ -15,11 +15,11 @@ type StartCostEstimationHeaders struct {
 }
 
 type StartCostEstimationRequestBodyResourceCollection struct {
-	CloudFormation *shared.CloudFormationCostEstimationResourceCollectionFilter `json:"CloudFormation"`
+	CloudFormation *shared.CloudFormationCostEstimationResourceCollectionFilter `json:"CloudFormation,omitempty"`
 }
 
 type StartCostEstimationRequestBody struct {
-	ClientToken        *string                                          `json:"ClientToken"`
+	ClientToken        *string                                          `json:"ClientToken,omitempty"`
 	ResourceCollection StartCostEstimationRequestBodyResourceCollection `json:"ResourceCollection"`
 }
 

@@ -11,7 +11,7 @@ type DeregisterOrganizationAdminAccountHeaders struct {
 }
 
 type DeregisterOrganizationAdminAccountRequestBody struct {
-	AdminAccountID *string `json:"adminAccountId"`
+	AdminAccountID *string `json:"adminAccountId,omitempty"`
 }
 
 type DeregisterOrganizationAdminAccountRequest struct {

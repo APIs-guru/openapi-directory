@@ -17,8 +17,8 @@ const (
 )
 
 type TripcRequestBody struct {
-	CertificateParameters *TripcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *TripcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                TripcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Tripc400ApplicationJSON struct {
-	Error            *Tripc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tripc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tripc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tripc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tripc401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Tripc401ApplicationJSON struct {
-	Error            *Tripc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tripc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tripc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tripc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tripc404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Tripc404ApplicationJSON struct {
-	Error            *Tripc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tripc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tripc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tripc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tripc500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Tripc500ApplicationJSON struct {
-	Error            *Tripc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tripc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tripc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tripc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tripc502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Tripc502ApplicationJSON struct {
-	Error            *Tripc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tripc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tripc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tripc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tripc503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Tripc503ApplicationJSON struct {
-	Error            *Tripc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tripc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tripc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tripc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tripc504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Tripc504ApplicationJSON struct {
-	Error            *Tripc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tripc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type TripcResponse struct {

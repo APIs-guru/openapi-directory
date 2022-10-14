@@ -10,8 +10,8 @@ const (
 )
 
 type SystemUpdate struct {
-	EndMinutes    *int32                `json:"endMinutes"`
-	FreezePeriods []FreezePeriod        `json:"freezePeriods"`
-	StartMinutes  *int32                `json:"startMinutes"`
-	Type          *SystemUpdateTypeEnum `json:"type"`
+	EndMinutes    *int32                `json:"endMinutes,omitempty"`
+	FreezePeriods []FreezePeriod        `json:"freezePeriods,omitempty"`
+	StartMinutes  *int32                `json:"startMinutes,omitempty"`
+	Type          *SystemUpdateTypeEnum `json:"type,omitempty"`
 }

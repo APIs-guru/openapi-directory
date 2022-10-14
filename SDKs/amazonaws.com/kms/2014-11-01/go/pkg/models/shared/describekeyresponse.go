@@ -1,5 +1,5 @@
 package shared
 
 type DescribeKeyResponse struct {
-	KeyMetadata *KeyMetadata `json:"KeyMetadata"`
+	KeyMetadata *KeyMetadata `json:"KeyMetadata,omitempty"`
 }

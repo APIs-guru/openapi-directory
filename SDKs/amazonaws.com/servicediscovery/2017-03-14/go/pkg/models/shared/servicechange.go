@@ -1,7 +1,7 @@
 package shared
 
 type ServiceChange struct {
-	Description       *string            `json:"Description"`
-	DNSConfig         *DNSConfigChange   `json:"DnsConfig"`
-	HealthCheckConfig *HealthCheckConfig `json:"HealthCheckConfig"`
+	Description       *string            `json:"Description,omitempty"`
+	DNSConfig         *DNSConfigChange   `json:"DnsConfig,omitempty"`
+	HealthCheckConfig *HealthCheckConfig `json:"HealthCheckConfig,omitempty"`
 }

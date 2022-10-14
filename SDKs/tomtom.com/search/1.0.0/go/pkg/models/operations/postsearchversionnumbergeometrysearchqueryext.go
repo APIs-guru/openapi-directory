@@ -18,14 +18,14 @@ type PostSearchVersionNumberGeometrySearchQueryExtQueryParams struct {
 }
 
 type PostSearchVersionNumberGeometrySearchQueryExtRequestBodyGeometryList struct {
-	Position *string  `json:"position"`
-	Radius   *int64   `json:"radius"`
-	Type     *string  `json:"type"`
-	Vertices []string `json:"vertices"`
+	Position *string  `json:"position,omitempty"`
+	Radius   *int64   `json:"radius,omitempty"`
+	Type     *string  `json:"type,omitempty"`
+	Vertices []string `json:"vertices,omitempty"`
 }
 
 type PostSearchVersionNumberGeometrySearchQueryExtRequestBody struct {
-	GeometryList []PostSearchVersionNumberGeometrySearchQueryExtRequestBodyGeometryList `json:"geometryList"`
+	GeometryList []PostSearchVersionNumberGeometrySearchQueryExtRequestBodyGeometryList `json:"geometryList,omitempty"`
 }
 
 type PostSearchVersionNumberGeometrySearchQueryExtRequest struct {

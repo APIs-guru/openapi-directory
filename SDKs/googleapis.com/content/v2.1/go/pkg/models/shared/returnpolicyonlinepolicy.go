@@ -10,6 +10,6 @@ const (
 )
 
 type ReturnPolicyOnlinePolicy struct {
-	Days *string                           `json:"days"`
-	Type *ReturnPolicyOnlinePolicyTypeEnum `json:"type"`
+	Days *string                           `json:"days,omitempty"`
+	Type *ReturnPolicyOnlinePolicyTypeEnum `json:"type,omitempty"`
 }

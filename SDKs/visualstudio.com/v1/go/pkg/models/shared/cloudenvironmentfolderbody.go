@@ -1,5 +1,5 @@
 package shared
 
 type CloudEnvironmentFolderBody struct {
-	RecentFolderPaths []string `json:"recentFolderPaths"`
+	RecentFolderPaths []string `json:"recentFolderPaths,omitempty"`
 }

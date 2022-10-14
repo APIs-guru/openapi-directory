@@ -1,5 +1,5 @@
 package shared
 
 type GetPercentilesResponse struct {
-	Percentiles []PercentPair `json:"percentiles"`
+	Percentiles []PercentPair `json:"percentiles,omitempty"`
 }

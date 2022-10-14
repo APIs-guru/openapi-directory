@@ -5,12 +5,12 @@ import (
 )
 
 type Project struct {
-	Created            *time.Time       `json:"Created" form:"name=Created"`
-	CurrentIterationID *string          `json:"CurrentIterationId" form:"name=CurrentIterationId"`
-	Description        *string          `json:"Description" form:"name=Description"`
-	ID                 *string          `json:"Id" form:"name=Id"`
-	LastModified       *time.Time       `json:"LastModified" form:"name=LastModified"`
-	Name               *string          `json:"Name" form:"name=Name"`
-	Settings           *ProjectSettings `json:"Settings" form:"name=Settings"`
-	ThumbnailURI       *string          `json:"ThumbnailUri" form:"name=ThumbnailUri"`
+	Created            *time.Time       `json:"Created,omitempty" form:"name=Created"`
+	CurrentIterationID *string          `json:"CurrentIterationId,omitempty" form:"name=CurrentIterationId"`
+	Description        *string          `json:"Description,omitempty" form:"name=Description"`
+	ID                 *string          `json:"Id,omitempty" form:"name=Id"`
+	LastModified       *time.Time       `json:"LastModified,omitempty" form:"name=LastModified"`
+	Name               *string          `json:"Name,omitempty" form:"name=Name"`
+	Settings           *ProjectSettings `json:"Settings,omitempty" form:"name=Settings"`
+	ThumbnailURI       *string          `json:"ThumbnailUri,omitempty" form:"name=ThumbnailUri"`
 }

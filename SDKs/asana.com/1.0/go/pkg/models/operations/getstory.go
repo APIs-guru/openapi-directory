@@ -21,7 +21,7 @@ type GetStoryRequest struct {
 }
 
 type GetStory200ApplicationJSON struct {
-	Data *shared.StoryResponse `json:"data"`
+	Data *shared.StoryResponse `json:"data,omitempty"`
 }
 
 type GetStoryResponse struct {

@@ -18,11 +18,11 @@ const (
 )
 
 type PullsUpdateRequestBody struct {
-	Base                *string                          `json:"base"`
-	Body                *string                          `json:"body"`
-	MaintainerCanModify *bool                            `json:"maintainer_can_modify"`
-	State               *PullsUpdateRequestBodyStateEnum `json:"state"`
-	Title               *string                          `json:"title"`
+	Base                *string                          `json:"base,omitempty"`
+	Body                *string                          `json:"body,omitempty"`
+	MaintainerCanModify *bool                            `json:"maintainer_can_modify,omitempty"`
+	State               *PullsUpdateRequestBodyStateEnum `json:"state,omitempty"`
+	Title               *string                          `json:"title,omitempty"`
 }
 
 type PullsUpdateRequest struct {

@@ -5,11 +5,11 @@ import (
 )
 
 type DescribeEventsRequest struct {
-	Duration   *int64          `json:"Duration"`
-	EndTime    *time.Time      `json:"EndTime"`
-	MaxResults *int64          `json:"MaxResults"`
-	NextToken  *string         `json:"NextToken"`
-	SourceName *string         `json:"SourceName"`
-	SourceType *SourceTypeEnum `json:"SourceType"`
-	StartTime  *time.Time      `json:"StartTime"`
+	Duration   *int64          `json:"Duration,omitempty"`
+	EndTime    *time.Time      `json:"EndTime,omitempty"`
+	MaxResults *int64          `json:"MaxResults,omitempty"`
+	NextToken  *string         `json:"NextToken,omitempty"`
+	SourceName *string         `json:"SourceName,omitempty"`
+	SourceType *SourceTypeEnum `json:"SourceType,omitempty"`
+	StartTime  *time.Time      `json:"StartTime,omitempty"`
 }

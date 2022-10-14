@@ -15,8 +15,8 @@ type CreateDetectorModelHeaders struct {
 }
 
 type CreateDetectorModelRequestBodyDetectorModelDefinition struct {
-	InitialStateName *string        `json:"initialStateName"`
-	States           []shared.State `json:"states"`
+	InitialStateName *string        `json:"initialStateName,omitempty"`
+	States           []shared.State `json:"states,omitempty"`
 }
 
 type CreateDetectorModelRequestBodyEvaluationMethodEnum string
@@ -28,12 +28,12 @@ const (
 
 type CreateDetectorModelRequestBody struct {
 	DetectorModelDefinition  CreateDetectorModelRequestBodyDetectorModelDefinition `json:"detectorModelDefinition"`
-	DetectorModelDescription *string                                               `json:"detectorModelDescription"`
+	DetectorModelDescription *string                                               `json:"detectorModelDescription,omitempty"`
 	DetectorModelName        string                                                `json:"detectorModelName"`
-	EvaluationMethod         *CreateDetectorModelRequestBodyEvaluationMethodEnum   `json:"evaluationMethod"`
-	Key                      *string                                               `json:"key"`
+	EvaluationMethod         *CreateDetectorModelRequestBodyEvaluationMethodEnum   `json:"evaluationMethod,omitempty"`
+	Key                      *string                                               `json:"key,omitempty"`
 	RoleArn                  string                                                `json:"roleArn"`
-	Tags                     []shared.Tag                                          `json:"tags"`
+	Tags                     []shared.Tag                                          `json:"tags,omitempty"`
 }
 
 type CreateDetectorModelRequest struct {

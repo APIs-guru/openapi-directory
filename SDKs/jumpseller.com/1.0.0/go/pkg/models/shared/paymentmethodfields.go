@@ -23,7 +23,7 @@ const (
 )
 
 type PaymentMethodFields struct {
-	ID   *int32                       `json:"id"`
-	Name *string                      `json:"name"`
-	Type *PaymentMethodFieldsTypeEnum `json:"type"`
+	ID   *int32                       `json:"id,omitempty"`
+	Name *string                      `json:"name,omitempty"`
+	Type *PaymentMethodFieldsTypeEnum `json:"type,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type BillingAssignment struct {
-	AccountID    *string `json:"accountId"`
-	AdvertiserID *string `json:"advertiserId"`
-	CampaignID   *string `json:"campaignId"`
-	Kind         *string `json:"kind"`
-	SubaccountID *string `json:"subaccountId"`
+	AccountID    *string `json:"accountId,omitempty"`
+	AdvertiserID *string `json:"advertiserId,omitempty"`
+	CampaignID   *string `json:"campaignId,omitempty"`
+	Kind         *string `json:"kind,omitempty"`
+	SubaccountID *string `json:"subaccountId,omitempty"`
 }

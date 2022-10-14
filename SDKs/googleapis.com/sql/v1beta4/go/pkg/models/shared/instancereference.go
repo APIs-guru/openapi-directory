@@ -1,7 +1,7 @@
 package shared
 
 type InstanceReference struct {
-	Name    *string `json:"name"`
-	Project *string `json:"project"`
-	Region  *string `json:"region"`
+	Name    *string `json:"name,omitempty"`
+	Project *string `json:"project,omitempty"`
+	Region  *string `json:"region,omitempty"`
 }

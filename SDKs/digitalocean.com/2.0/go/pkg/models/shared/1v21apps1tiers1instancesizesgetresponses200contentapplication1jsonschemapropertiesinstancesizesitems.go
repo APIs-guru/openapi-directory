@@ -9,14 +9,14 @@ const (
 )
 
 type Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItems struct {
-	CPUType         *Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItemsCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum `json:"cpu_type"`
-	Cpus            *string                                                                                                                                                            `json:"cpus"`
-	MemoryBytes     *string                                                                                                                                                            `json:"memory_bytes"`
-	Name            *string                                                                                                                                                            `json:"name"`
-	Slug            *string                                                                                                                                                            `json:"slug"`
-	TierDowngradeTo *string                                                                                                                                                            `json:"tier_downgrade_to"`
-	TierSlug        *string                                                                                                                                                            `json:"tier_slug"`
-	TierUpgradeTo   *string                                                                                                                                                            `json:"tier_upgrade_to"`
-	UsdPerMonth     *string                                                                                                                                                            `json:"usd_per_month"`
-	UsdPerSecond    *string                                                                                                                                                            `json:"usd_per_second"`
+	CPUType         *Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItemsCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum `json:"cpu_type,omitempty"`
+	Cpus            *string                                                                                                                                                            `json:"cpus,omitempty"`
+	MemoryBytes     *string                                                                                                                                                            `json:"memory_bytes,omitempty"`
+	Name            *string                                                                                                                                                            `json:"name,omitempty"`
+	Slug            *string                                                                                                                                                            `json:"slug,omitempty"`
+	TierDowngradeTo *string                                                                                                                                                            `json:"tier_downgrade_to,omitempty"`
+	TierSlug        *string                                                                                                                                                            `json:"tier_slug,omitempty"`
+	TierUpgradeTo   *string                                                                                                                                                            `json:"tier_upgrade_to,omitempty"`
+	UsdPerMonth     *string                                                                                                                                                            `json:"usd_per_month,omitempty"`
+	UsdPerSecond    *string                                                                                                                                                            `json:"usd_per_second,omitempty"`
 }

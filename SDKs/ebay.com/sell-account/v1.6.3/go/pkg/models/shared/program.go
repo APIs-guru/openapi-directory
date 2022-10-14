@@ -1,5 +1,5 @@
 package shared
 
 type Program struct {
-	ProgramType *string `json:"programType"`
+	ProgramType *string `json:"programType,omitempty"`
 }

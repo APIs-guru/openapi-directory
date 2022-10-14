@@ -1,5 +1,5 @@
 package shared
 
 type FindingSourceDetail struct {
-	AccessPointArn *string `json:"accessPointArn"`
+	AccessPointArn *string `json:"accessPointArn,omitempty"`
 }

@@ -20,9 +20,9 @@ type GetEnabledStandardsHeaders struct {
 }
 
 type GetEnabledStandardsRequestBody struct {
-	MaxResults                *int64   `json:"MaxResults"`
-	NextToken                 *string  `json:"NextToken"`
-	StandardsSubscriptionArns []string `json:"StandardsSubscriptionArns"`
+	MaxResults                *int64   `json:"MaxResults,omitempty"`
+	NextToken                 *string  `json:"NextToken,omitempty"`
+	StandardsSubscriptionArns []string `json:"StandardsSubscriptionArns,omitempty"`
 }
 
 type GetEnabledStandardsRequest struct {

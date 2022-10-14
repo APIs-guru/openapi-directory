@@ -1,6 +1,6 @@
 package shared
 
 type ModelsPackageUpdate struct {
-	Advisory *string `json:"advisory"`
-	Evra     *string `json:"evra"`
+	Advisory *string `json:"advisory,omitempty"`
+	Evra     *string `json:"evra,omitempty"`
 }

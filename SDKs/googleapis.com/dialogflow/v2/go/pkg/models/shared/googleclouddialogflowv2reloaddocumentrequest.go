@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowV2ReloadDocumentRequest struct {
-	ContentURI                  *string `json:"contentUri"`
-	ImportGcsCustomMetadata     *bool   `json:"importGcsCustomMetadata"`
-	SmartMessagingPartialUpdate *bool   `json:"smartMessagingPartialUpdate"`
+	ContentURI                  *string `json:"contentUri,omitempty"`
+	ImportGcsCustomMetadata     *bool   `json:"importGcsCustomMetadata,omitempty"`
+	SmartMessagingPartialUpdate *bool   `json:"smartMessagingPartialUpdate,omitempty"`
 }

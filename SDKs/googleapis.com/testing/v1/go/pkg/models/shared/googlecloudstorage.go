@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudStorage struct {
-	GcsPath *string `json:"gcsPath"`
+	GcsPath *string `json:"gcsPath,omitempty"`
 }

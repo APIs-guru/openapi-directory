@@ -15,17 +15,17 @@ type SendVoiceMessageHeaders struct {
 }
 
 type SendVoiceMessageRequestBodyContent struct {
-	CallInstructionsMessage *shared.CallInstructionsMessageType `json:"CallInstructionsMessage"`
-	PlainTextMessage        *shared.PlainTextMessageType        `json:"PlainTextMessage"`
-	SsmlMessage             *shared.SsmlMessageType             `json:"SSMLMessage"`
+	CallInstructionsMessage *shared.CallInstructionsMessageType `json:"CallInstructionsMessage,omitempty"`
+	PlainTextMessage        *shared.PlainTextMessageType        `json:"PlainTextMessage,omitempty"`
+	SsmlMessage             *shared.SsmlMessageType             `json:"SSMLMessage,omitempty"`
 }
 
 type SendVoiceMessageRequestBody struct {
-	CallerID               *string                             `json:"CallerId"`
-	ConfigurationSetName   *string                             `json:"ConfigurationSetName"`
-	Content                *SendVoiceMessageRequestBodyContent `json:"Content"`
-	DestinationPhoneNumber *string                             `json:"DestinationPhoneNumber"`
-	OriginationPhoneNumber *string                             `json:"OriginationPhoneNumber"`
+	CallerID               *string                             `json:"CallerId,omitempty"`
+	ConfigurationSetName   *string                             `json:"ConfigurationSetName,omitempty"`
+	Content                *SendVoiceMessageRequestBodyContent `json:"Content,omitempty"`
+	DestinationPhoneNumber *string                             `json:"DestinationPhoneNumber,omitempty"`
+	OriginationPhoneNumber *string                             `json:"OriginationPhoneNumber,omitempty"`
 }
 
 type SendVoiceMessageRequest struct {

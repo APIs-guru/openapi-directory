@@ -21,12 +21,12 @@ const (
 )
 
 type ListPopulationTerm struct {
-	Contains             *bool                           `json:"contains"`
-	Negation             *bool                           `json:"negation"`
-	Operator             *ListPopulationTermOperatorEnum `json:"operator"`
-	RemarketingListID    *string                         `json:"remarketingListId"`
-	Type                 *ListPopulationTermTypeEnum     `json:"type"`
-	Value                *string                         `json:"value"`
-	VariableFriendlyName *string                         `json:"variableFriendlyName"`
-	VariableName         *string                         `json:"variableName"`
+	Contains             *bool                           `json:"contains,omitempty"`
+	Negation             *bool                           `json:"negation,omitempty"`
+	Operator             *ListPopulationTermOperatorEnum `json:"operator,omitempty"`
+	RemarketingListID    *string                         `json:"remarketingListId,omitempty"`
+	Type                 *ListPopulationTermTypeEnum     `json:"type,omitempty"`
+	Value                *string                         `json:"value,omitempty"`
+	VariableFriendlyName *string                         `json:"variableFriendlyName,omitempty"`
+	VariableName         *string                         `json:"variableName,omitempty"`
 }

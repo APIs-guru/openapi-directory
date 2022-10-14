@@ -1,7 +1,7 @@
 package shared
 
 type ExtendedAttribute struct {
-	ID    *int64  `json:"id"`
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	ID    *int64  `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

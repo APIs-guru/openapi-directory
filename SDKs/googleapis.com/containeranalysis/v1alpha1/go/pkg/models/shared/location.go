@@ -1,7 +1,7 @@
 package shared
 
 type Location struct {
-	CpeURI  *string  `json:"cpeUri"`
-	Path    *string  `json:"path"`
-	Version *Version `json:"version"`
+	CpeURI  *string  `json:"cpeUri,omitempty"`
+	Path    *string  `json:"path,omitempty"`
+	Version *Version `json:"version,omitempty"`
 }

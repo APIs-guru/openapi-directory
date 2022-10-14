@@ -9,25 +9,25 @@ const (
 )
 
 type ProductFullDetailsAPIModel struct {
-	AccessToken                *string                               `json:"AccessToken"`
-	AfterPaymentDescription    *string                               `json:"AfterPaymentDescription"`
-	Attachments                []ProductAttachmentAPIModel           `json:"Attachments"`
-	ButtonCallToAction         *string                               `json:"ButtonCallToAction"`
-	Coupons                    []ProductCouponAPIModel               `json:"Coupons"`
-	Currency                   *CurrencyDetailsAPIModel              `json:"Currency"`
-	CurrencyID                 *int32                                `json:"CurrencyId"`
-	Description                *string                               `json:"Description"`
-	Discounts                  []ProductDiscountAPIModel             `json:"Discounts"`
-	ID                         *int32                                `json:"Id"`
-	IsFeatured                 *bool                                 `json:"IsFeatured"`
-	Items                      []ProductItemAPIModel                 `json:"Items"`
-	Name                       *string                               `json:"Name"`
-	PaymentGateways            []ProductGatewayAPIModel              `json:"PaymentGateways"`
-	ShippingAmount             *float64                              `json:"ShippingAmount"`
-	ShippingDescription        *string                               `json:"ShippingDescription"`
-	Status                     *ProductFullDetailsAPIModelStatusEnum `json:"Status"`
-	SubTotalAmount             *float64                              `json:"SubTotalAmount"`
-	TotalAmount                *float64                              `json:"TotalAmount"`
-	TotalWithShipping          *float64                              `json:"TotalWithShipping"`
-	WhatHappensNextDescription *string                               `json:"WhatHappensNextDescription"`
+	AccessToken                *string                               `json:"AccessToken,omitempty"`
+	AfterPaymentDescription    *string                               `json:"AfterPaymentDescription,omitempty"`
+	Attachments                []ProductAttachmentAPIModel           `json:"Attachments,omitempty"`
+	ButtonCallToAction         *string                               `json:"ButtonCallToAction,omitempty"`
+	Coupons                    []ProductCouponAPIModel               `json:"Coupons,omitempty"`
+	Currency                   *CurrencyDetailsAPIModel              `json:"Currency,omitempty"`
+	CurrencyID                 *int32                                `json:"CurrencyId,omitempty"`
+	Description                *string                               `json:"Description,omitempty"`
+	Discounts                  []ProductDiscountAPIModel             `json:"Discounts,omitempty"`
+	ID                         *int32                                `json:"Id,omitempty"`
+	IsFeatured                 *bool                                 `json:"IsFeatured,omitempty"`
+	Items                      []ProductItemAPIModel                 `json:"Items,omitempty"`
+	Name                       *string                               `json:"Name,omitempty"`
+	PaymentGateways            []ProductGatewayAPIModel              `json:"PaymentGateways,omitempty"`
+	ShippingAmount             *float64                              `json:"ShippingAmount,omitempty"`
+	ShippingDescription        *string                               `json:"ShippingDescription,omitempty"`
+	Status                     *ProductFullDetailsAPIModelStatusEnum `json:"Status,omitempty"`
+	SubTotalAmount             *float64                              `json:"SubTotalAmount,omitempty"`
+	TotalAmount                *float64                              `json:"TotalAmount,omitempty"`
+	TotalWithShipping          *float64                              `json:"TotalWithShipping,omitempty"`
+	WhatHappensNextDescription *string                               `json:"WhatHappensNextDescription,omitempty"`
 }

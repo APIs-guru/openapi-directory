@@ -1,5 +1,5 @@
 package shared
 
 type GenerateVerificationTokenRequest struct {
-	Location *Location `json:"location"`
+	Location *Location `json:"location,omitempty"`
 }

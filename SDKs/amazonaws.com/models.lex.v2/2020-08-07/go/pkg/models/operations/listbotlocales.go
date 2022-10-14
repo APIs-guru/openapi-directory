@@ -25,15 +25,15 @@ type ListBotLocalesHeaders struct {
 }
 
 type ListBotLocalesRequestBodySortBy struct {
-	Attribute *shared.BotLocaleSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum              `json:"order"`
+	Attribute *shared.BotLocaleSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum              `json:"order,omitempty"`
 }
 
 type ListBotLocalesRequestBody struct {
-	Filters    []shared.BotLocaleFilter         `json:"filters"`
-	MaxResults *int64                           `json:"maxResults"`
-	NextToken  *string                          `json:"nextToken"`
-	SortBy     *ListBotLocalesRequestBodySortBy `json:"sortBy"`
+	Filters    []shared.BotLocaleFilter         `json:"filters,omitempty"`
+	MaxResults *int64                           `json:"maxResults,omitempty"`
+	NextToken  *string                          `json:"nextToken,omitempty"`
+	SortBy     *ListBotLocalesRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListBotLocalesRequest struct {

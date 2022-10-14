@@ -1,7 +1,7 @@
 package shared
 
 type RetireGrantRequest struct {
-	GrantID    *string `json:"GrantId"`
-	GrantToken *string `json:"GrantToken"`
-	KeyID      *string `json:"KeyId"`
+	GrantID    *string `json:"GrantId,omitempty"`
+	GrantToken *string `json:"GrantToken,omitempty"`
+	KeyID      *string `json:"KeyId,omitempty"`
 }

@@ -11,7 +11,7 @@ const (
 )
 
 type ProcessingError struct {
-	Code            *ProcessingErrorCodeEnum `json:"code"`
-	ErrorMessage    *string                  `json:"errorMessage"`
-	FieldViolations []FieldViolation         `json:"fieldViolations"`
+	Code            *ProcessingErrorCodeEnum `json:"code,omitempty"`
+	ErrorMessage    *string                  `json:"errorMessage,omitempty"`
+	FieldViolations []FieldViolation         `json:"fieldViolations,omitempty"`
 }

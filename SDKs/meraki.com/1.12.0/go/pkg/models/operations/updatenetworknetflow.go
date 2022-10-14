@@ -5,11 +5,11 @@ type UpdateNetworkNetflowPathParams struct {
 }
 
 type UpdateNetworkNetflowRequestBody struct {
-	CollectorIP      *string `json:"collectorIp"`
-	CollectorPort    *int64  `json:"collectorPort"`
-	EtaDstPort       *int64  `json:"etaDstPort"`
-	EtaEnabled       *bool   `json:"etaEnabled"`
-	ReportingEnabled *bool   `json:"reportingEnabled"`
+	CollectorIP      *string `json:"collectorIp,omitempty"`
+	CollectorPort    *int64  `json:"collectorPort,omitempty"`
+	EtaDstPort       *int64  `json:"etaDstPort,omitempty"`
+	EtaEnabled       *bool   `json:"etaEnabled,omitempty"`
+	ReportingEnabled *bool   `json:"reportingEnabled,omitempty"`
 }
 
 type UpdateNetworkNetflowRequest struct {

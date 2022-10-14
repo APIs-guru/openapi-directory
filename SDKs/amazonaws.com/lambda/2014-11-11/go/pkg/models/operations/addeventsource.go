@@ -15,10 +15,10 @@ type AddEventSourceHeaders struct {
 }
 
 type AddEventSourceRequestBody struct {
-	BatchSize    *int64            `json:"BatchSize"`
+	BatchSize    *int64            `json:"BatchSize,omitempty"`
 	EventSource  string            `json:"EventSource"`
 	FunctionName string            `json:"FunctionName"`
-	Parameters   map[string]string `json:"Parameters"`
+	Parameters   map[string]string `json:"Parameters,omitempty"`
 	Role         string            `json:"Role"`
 }
 

@@ -10,7 +10,7 @@ const (
 )
 
 type CopyOtherContactToMyContactsGroupRequest struct {
-	CopyMask *string                                               `json:"copyMask"`
-	ReadMask *string                                               `json:"readMask"`
-	Sources  []CopyOtherContactToMyContactsGroupRequestSourcesEnum `json:"sources"`
+	CopyMask *string                                               `json:"copyMask,omitempty"`
+	ReadMask *string                                               `json:"readMask,omitempty"`
+	Sources  []CopyOtherContactToMyContactsGroupRequestSourcesEnum `json:"sources,omitempty"`
 }

@@ -31,17 +31,17 @@ const (
 )
 
 type RouteInfo struct {
-	DestIPRange    *string                   `json:"destIpRange"`
-	DestPortRanges []string                  `json:"destPortRanges"`
-	DisplayName    *string                   `json:"displayName"`
-	InstanceTags   []string                  `json:"instanceTags"`
-	NetworkURI     *string                   `json:"networkUri"`
-	NextHop        *string                   `json:"nextHop"`
-	NextHopType    *RouteInfoNextHopTypeEnum `json:"nextHopType"`
-	Priority       *int32                    `json:"priority"`
-	Protocols      []string                  `json:"protocols"`
-	RouteType      *RouteInfoRouteTypeEnum   `json:"routeType"`
-	SrcIPRange     *string                   `json:"srcIpRange"`
-	SrcPortRanges  []string                  `json:"srcPortRanges"`
-	URI            *string                   `json:"uri"`
+	DestIPRange    *string                   `json:"destIpRange,omitempty"`
+	DestPortRanges []string                  `json:"destPortRanges,omitempty"`
+	DisplayName    *string                   `json:"displayName,omitempty"`
+	InstanceTags   []string                  `json:"instanceTags,omitempty"`
+	NetworkURI     *string                   `json:"networkUri,omitempty"`
+	NextHop        *string                   `json:"nextHop,omitempty"`
+	NextHopType    *RouteInfoNextHopTypeEnum `json:"nextHopType,omitempty"`
+	Priority       *int32                    `json:"priority,omitempty"`
+	Protocols      []string                  `json:"protocols,omitempty"`
+	RouteType      *RouteInfoRouteTypeEnum   `json:"routeType,omitempty"`
+	SrcIPRange     *string                   `json:"srcIpRange,omitempty"`
+	SrcPortRanges  []string                  `json:"srcPortRanges,omitempty"`
+	URI            *string                   `json:"uri,omitempty"`
 }

@@ -14,24 +14,24 @@ type PostAnnotationLayerRequest struct {
 }
 
 type PostAnnotationLayer201ApplicationJSON struct {
-	ID     *float64                           `json:"id"`
-	Result *shared.AnnotationLayerRestAPIPost `json:"result"`
+	ID     *float64                           `json:"id,omitempty"`
+	Result *shared.AnnotationLayerRestAPIPost `json:"result,omitempty"`
 }
 
 type PostAnnotationLayer400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayer401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayer404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayer500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnotationLayerResponse struct {

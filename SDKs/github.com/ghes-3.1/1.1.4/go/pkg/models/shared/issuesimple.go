@@ -19,7 +19,7 @@ type IssueSimpleAssigneeSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -41,7 +41,7 @@ type IssueSimpleMilestoneCreatorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -77,7 +77,7 @@ type IssueSimpleMilestoneMilestone struct {
 type IssueSimplePullRequest struct {
 	DiffURL  string     `json:"diff_url"`
 	HTMLURL  string     `json:"html_url"`
-	MergedAt *time.Time `json:"merged_at"`
+	MergedAt *time.Time `json:"merged_at,omitempty"`
 	PatchURL string     `json:"patch_url"`
 	URL      string     `json:"url"`
 }
@@ -97,7 +97,7 @@ type IssueSimpleUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -105,13 +105,13 @@ type IssueSimpleUserSimpleUser struct {
 }
 
 type IssueSimple struct {
-	ActiveLockReason      *string                       `json:"active_lock_reason"`
+	ActiveLockReason      *string                       `json:"active_lock_reason,omitempty"`
 	Assignee              IssueSimpleAssigneeSimpleUser `json:"assignee"`
-	Assignees             []SimpleUser                  `json:"assignees"`
+	Assignees             []SimpleUser                  `json:"assignees,omitempty"`
 	AuthorAssociation     AuthorAssociationEnum         `json:"author_association"`
-	Body                  *string                       `json:"body"`
-	BodyHTML              *string                       `json:"body_html"`
-	BodyText              *string                       `json:"body_text"`
+	Body                  *string                       `json:"body,omitempty"`
+	BodyHTML              *string                       `json:"body_html,omitempty"`
+	BodyText              *string                       `json:"body_text,omitempty"`
 	ClosedAt              time.Time                     `json:"closed_at"`
 	Comments              int64                         `json:"comments"`
 	CommentsURL           string                        `json:"comments_url"`
@@ -125,12 +125,12 @@ type IssueSimple struct {
 	Milestone             IssueSimpleMilestoneMilestone `json:"milestone"`
 	NodeID                string                        `json:"node_id"`
 	Number                int64                         `json:"number"`
-	PerformedViaGithubApp map[string]interface{}        `json:"performed_via_github_app"`
-	PullRequest           *IssueSimplePullRequest       `json:"pull_request"`
-	Repository            *Repository                   `json:"repository"`
+	PerformedViaGithubApp map[string]interface{}        `json:"performed_via_github_app,omitempty"`
+	PullRequest           *IssueSimplePullRequest       `json:"pull_request,omitempty"`
+	Repository            *Repository                   `json:"repository,omitempty"`
 	RepositoryURL         string                        `json:"repository_url"`
 	State                 string                        `json:"state"`
-	TimelineURL           *string                       `json:"timeline_url"`
+	TimelineURL           *string                       `json:"timeline_url,omitempty"`
 	Title                 string                        `json:"title"`
 	UpdatedAt             time.Time                     `json:"updated_at"`
 	URL                   string                        `json:"url"`

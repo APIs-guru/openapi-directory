@@ -1,13 +1,13 @@
 package shared
 
 type DictionaryAnnotationdata struct {
-	AnnotationType *string        `json:"annotationType"`
-	Data           *Dictlayerdata `json:"data"`
-	EncodedData    *string        `json:"encodedData"`
-	ID             *string        `json:"id"`
-	Kind           *string        `json:"kind"`
-	LayerID        *string        `json:"layerId"`
-	SelfLink       *string        `json:"selfLink"`
-	Updated        *string        `json:"updated"`
-	VolumeID       *string        `json:"volumeId"`
+	AnnotationType *string        `json:"annotationType,omitempty"`
+	Data           *Dictlayerdata `json:"data,omitempty"`
+	EncodedData    *string        `json:"encodedData,omitempty"`
+	ID             *string        `json:"id,omitempty"`
+	Kind           *string        `json:"kind,omitempty"`
+	LayerID        *string        `json:"layerId,omitempty"`
+	SelfLink       *string        `json:"selfLink,omitempty"`
+	Updated        *string        `json:"updated,omitempty"`
+	VolumeID       *string        `json:"volumeId,omitempty"`
 }

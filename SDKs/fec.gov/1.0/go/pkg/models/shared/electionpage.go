@@ -1,6 +1,6 @@
 package shared
 
 type ElectionPage struct {
-	Pagination *OffsetInfo `json:"pagination"`
-	Results    []Election  `json:"results"`
+	Pagination *OffsetInfo `json:"pagination,omitempty"`
+	Results    []Election  `json:"results,omitempty"`
 }

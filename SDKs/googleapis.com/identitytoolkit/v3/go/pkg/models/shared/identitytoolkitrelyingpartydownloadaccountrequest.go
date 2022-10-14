@@ -1,8 +1,8 @@
 package shared
 
 type IdentitytoolkitRelyingpartyDownloadAccountRequest struct {
-	DelegatedProjectNumber *string `json:"delegatedProjectNumber"`
-	MaxResults             *int64  `json:"maxResults"`
-	NextPageToken          *string `json:"nextPageToken"`
-	TargetProjectID        *string `json:"targetProjectId"`
+	DelegatedProjectNumber *string `json:"delegatedProjectNumber,omitempty"`
+	MaxResults             *int64  `json:"maxResults,omitempty"`
+	NextPageToken          *string `json:"nextPageToken,omitempty"`
+	TargetProjectID        *string `json:"targetProjectId,omitempty"`
 }

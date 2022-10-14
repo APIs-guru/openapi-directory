@@ -1,8 +1,8 @@
 package shared
 
 type Query struct {
-	Metadata *QueryMetadata `json:"metadata"`
-	Params   *Parameters    `json:"params"`
-	QueryID  *string        `json:"queryId"`
-	Schedule *QuerySchedule `json:"schedule"`
+	Metadata *QueryMetadata `json:"metadata,omitempty"`
+	Params   *Parameters    `json:"params,omitempty"`
+	QueryID  *string        `json:"queryId,omitempty"`
+	Schedule *QuerySchedule `json:"schedule,omitempty"`
 }

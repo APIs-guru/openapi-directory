@@ -21,7 +21,7 @@ type GetSubtasksForTaskRequest struct {
 }
 
 type GetSubtasksForTask200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data"`
+	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type GetSubtasksForTaskResponse struct {

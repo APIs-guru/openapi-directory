@@ -1,18 +1,18 @@
 package shared
 
 type ImageRecipe struct {
-	AdditionalInstanceConfiguration *AdditionalInstanceConfiguration `json:"additionalInstanceConfiguration"`
-	Arn                             *string                          `json:"arn"`
-	BlockDeviceMappings             []InstanceBlockDeviceMapping     `json:"blockDeviceMappings"`
-	Components                      []ComponentConfiguration         `json:"components"`
-	DateCreated                     *string                          `json:"dateCreated"`
-	Description                     *string                          `json:"description"`
-	Name                            *string                          `json:"name"`
-	Owner                           *string                          `json:"owner"`
-	ParentImage                     *string                          `json:"parentImage"`
-	Platform                        *PlatformEnum                    `json:"platform"`
-	Tags                            map[string]string                `json:"tags"`
-	Type                            *ImageTypeEnum                   `json:"type"`
-	Version                         *string                          `json:"version"`
-	WorkingDirectory                *string                          `json:"workingDirectory"`
+	AdditionalInstanceConfiguration *AdditionalInstanceConfiguration `json:"additionalInstanceConfiguration,omitempty"`
+	Arn                             *string                          `json:"arn,omitempty"`
+	BlockDeviceMappings             []InstanceBlockDeviceMapping     `json:"blockDeviceMappings,omitempty"`
+	Components                      []ComponentConfiguration         `json:"components,omitempty"`
+	DateCreated                     *string                          `json:"dateCreated,omitempty"`
+	Description                     *string                          `json:"description,omitempty"`
+	Name                            *string                          `json:"name,omitempty"`
+	Owner                           *string                          `json:"owner,omitempty"`
+	ParentImage                     *string                          `json:"parentImage,omitempty"`
+	Platform                        *PlatformEnum                    `json:"platform,omitempty"`
+	Tags                            map[string]string                `json:"tags,omitempty"`
+	Type                            *ImageTypeEnum                   `json:"type,omitempty"`
+	Version                         *string                          `json:"version,omitempty"`
+	WorkingDirectory                *string                          `json:"workingDirectory,omitempty"`
 }

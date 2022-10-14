@@ -1,5 +1,5 @@
 package shared
 
 type CodeSigningSignature struct {
-	InlineDocument *string `json:"inlineDocument"`
+	InlineDocument *string `json:"inlineDocument,omitempty"`
 }

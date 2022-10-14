@@ -1,8 +1,8 @@
 package shared
 
 type GqlQuery struct {
-	AllowLiterals      *bool                        `json:"allowLiterals"`
-	NamedBindings      map[string]GqlQueryParameter `json:"namedBindings"`
-	PositionalBindings []GqlQueryParameter          `json:"positionalBindings"`
-	QueryString        *string                      `json:"queryString"`
+	AllowLiterals      *bool                        `json:"allowLiterals,omitempty"`
+	NamedBindings      map[string]GqlQueryParameter `json:"namedBindings,omitempty"`
+	PositionalBindings []GqlQueryParameter          `json:"positionalBindings,omitempty"`
+	QueryString        *string                      `json:"queryString,omitempty"`
 }

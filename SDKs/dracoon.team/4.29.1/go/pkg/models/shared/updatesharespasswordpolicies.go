@@ -1,9 +1,9 @@
 package shared
 
 type UpdateSharesPasswordPolicies struct {
-	CharacterRules         *CharacterRules `json:"characterRules"`
-	MinLength              *int32          `json:"minLength"`
-	RejectDictionaryWords  *bool           `json:"rejectDictionaryWords"`
-	RejectKeyboardPatterns *bool           `json:"rejectKeyboardPatterns"`
-	RejectUserInfo         *bool           `json:"rejectUserInfo"`
+	CharacterRules         *CharacterRules `json:"characterRules,omitempty"`
+	MinLength              *int32          `json:"minLength,omitempty"`
+	RejectDictionaryWords  *bool           `json:"rejectDictionaryWords,omitempty"`
+	RejectKeyboardPatterns *bool           `json:"rejectKeyboardPatterns,omitempty"`
+	RejectUserInfo         *bool           `json:"rejectUserInfo,omitempty"`
 }

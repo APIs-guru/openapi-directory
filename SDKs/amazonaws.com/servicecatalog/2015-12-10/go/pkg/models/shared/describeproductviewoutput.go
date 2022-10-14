@@ -1,6 +1,6 @@
 package shared
 
 type DescribeProductViewOutput struct {
-	ProductViewSummary    *ProductViewSummary    `json:"ProductViewSummary"`
-	ProvisioningArtifacts []ProvisioningArtifact `json:"ProvisioningArtifacts"`
+	ProductViewSummary    *ProductViewSummary    `json:"ProductViewSummary,omitempty"`
+	ProvisioningArtifacts []ProvisioningArtifact `json:"ProvisioningArtifacts,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type WorkerConfigurationRevisionSummary struct {
-	CreationTime *time.Time `json:"creationTime"`
-	Description  *string    `json:"description"`
-	Revision     *int64     `json:"revision"`
+	CreationTime *time.Time `json:"creationTime,omitempty"`
+	Description  *string    `json:"description,omitempty"`
+	Revision     *int64     `json:"revision,omitempty"`
 }

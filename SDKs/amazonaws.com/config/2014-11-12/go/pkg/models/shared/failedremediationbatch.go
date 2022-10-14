@@ -1,6 +1,6 @@
 package shared
 
 type FailedRemediationBatch struct {
-	FailedItems    []RemediationConfiguration `json:"FailedItems"`
-	FailureMessage *string                    `json:"FailureMessage"`
+	FailedItems    []RemediationConfiguration `json:"FailedItems,omitempty"`
+	FailureMessage *string                    `json:"FailureMessage,omitempty"`
 }

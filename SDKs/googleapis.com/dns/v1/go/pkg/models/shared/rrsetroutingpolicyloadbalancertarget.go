@@ -16,12 +16,12 @@ const (
 )
 
 type RrSetRoutingPolicyLoadBalancerTarget struct {
-	IPAddress        *string                                                   `json:"ipAddress"`
-	IPProtocol       *RrSetRoutingPolicyLoadBalancerTargetIPProtocolEnum       `json:"ipProtocol"`
-	Kind             *string                                                   `json:"kind"`
-	LoadBalancerType *RrSetRoutingPolicyLoadBalancerTargetLoadBalancerTypeEnum `json:"loadBalancerType"`
-	NetworkURL       *string                                                   `json:"networkUrl"`
-	Port             *string                                                   `json:"port"`
-	Project          *string                                                   `json:"project"`
-	Region           *string                                                   `json:"region"`
+	IPAddress        *string                                                   `json:"ipAddress,omitempty"`
+	IPProtocol       *RrSetRoutingPolicyLoadBalancerTargetIPProtocolEnum       `json:"ipProtocol,omitempty"`
+	Kind             *string                                                   `json:"kind,omitempty"`
+	LoadBalancerType *RrSetRoutingPolicyLoadBalancerTargetLoadBalancerTypeEnum `json:"loadBalancerType,omitempty"`
+	NetworkURL       *string                                                   `json:"networkUrl,omitempty"`
+	Port             *string                                                   `json:"port,omitempty"`
+	Project          *string                                                   `json:"project,omitempty"`
+	Region           *string                                                   `json:"region,omitempty"`
 }

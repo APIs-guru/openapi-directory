@@ -1,5 +1,5 @@
 package shared
 
 type OptionalColor struct {
-	OpaqueColor *OpaqueColor `json:"opaqueColor"`
+	OpaqueColor *OpaqueColor `json:"opaqueColor,omitempty"`
 }

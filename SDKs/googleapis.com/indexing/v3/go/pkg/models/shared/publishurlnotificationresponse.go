@@ -1,5 +1,5 @@
 package shared
 
 type PublishURLNotificationResponse struct {
-	URLNotificationMetadata *URLNotificationMetadata `json:"urlNotificationMetadata"`
+	URLNotificationMetadata *URLNotificationMetadata `json:"urlNotificationMetadata,omitempty"`
 }

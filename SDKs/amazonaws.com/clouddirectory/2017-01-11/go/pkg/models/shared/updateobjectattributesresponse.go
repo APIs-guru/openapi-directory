@@ -1,5 +1,5 @@
 package shared
 
 type UpdateObjectAttributesResponse struct {
-	ObjectIdentifier *string `json:"ObjectIdentifier"`
+	ObjectIdentifier *string `json:"ObjectIdentifier,omitempty"`
 }

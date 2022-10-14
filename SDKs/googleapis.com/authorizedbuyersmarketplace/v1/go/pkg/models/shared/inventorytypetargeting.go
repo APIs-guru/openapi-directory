@@ -10,5 +10,5 @@ const (
 )
 
 type InventoryTypeTargeting struct {
-	InventoryTypes []InventoryTypeTargetingInventoryTypesEnum `json:"inventoryTypes"`
+	InventoryTypes []InventoryTypeTargetingInventoryTypesEnum `json:"inventoryTypes,omitempty"`
 }

@@ -18,8 +18,8 @@ const (
 )
 
 type MicerRequestBody struct {
-	CertificateParameters *MicerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *MicerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                MicerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Micer400ApplicationJSON struct {
-	Error            *Micer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Micer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Micer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Micer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Micer401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Micer401ApplicationJSON struct {
-	Error            *Micer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Micer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Micer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Micer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Micer404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Micer404ApplicationJSON struct {
-	Error            *Micer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Micer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Micer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Micer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Micer500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Micer500ApplicationJSON struct {
-	Error            *Micer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Micer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Micer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Micer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Micer502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Micer502ApplicationJSON struct {
-	Error            *Micer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Micer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Micer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Micer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Micer503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Micer503ApplicationJSON struct {
-	Error            *Micer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Micer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Micer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Micer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Micer504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Micer504ApplicationJSON struct {
-	Error            *Micer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Micer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Micer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Micer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type MicerResponse struct {

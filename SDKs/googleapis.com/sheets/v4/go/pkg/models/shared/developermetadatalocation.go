@@ -11,8 +11,8 @@ const (
 )
 
 type DeveloperMetadataLocation struct {
-	DimensionRange *DimensionRange                            `json:"dimensionRange"`
-	LocationType   *DeveloperMetadataLocationLocationTypeEnum `json:"locationType"`
-	SheetID        *int32                                     `json:"sheetId"`
-	Spreadsheet    *bool                                      `json:"spreadsheet"`
+	DimensionRange *DimensionRange                            `json:"dimensionRange,omitempty"`
+	LocationType   *DeveloperMetadataLocationLocationTypeEnum `json:"locationType,omitempty"`
+	SheetID        *int32                                     `json:"sheetId,omitempty"`
+	Spreadsheet    *bool                                      `json:"spreadsheet,omitempty"`
 }

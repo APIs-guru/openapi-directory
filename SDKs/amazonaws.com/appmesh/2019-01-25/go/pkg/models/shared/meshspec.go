@@ -1,5 +1,5 @@
 package shared
 
 type MeshSpec struct {
-	EgressFilter *EgressFilter `json:"egressFilter"`
+	EgressFilter *EgressFilter `json:"egressFilter,omitempty"`
 }

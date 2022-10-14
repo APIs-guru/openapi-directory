@@ -46,19 +46,19 @@ const (
 )
 
 type EditAlbumRequestBody struct {
-	BrandColor      *string                          `json:"brand_color"`
-	Description     *string                          `json:"description"`
-	Domain          *string                          `json:"domain"`
-	HideNav         *bool                            `json:"hide_nav"`
-	Layout          *EditAlbumRequestBodyLayoutEnum  `json:"layout"`
-	Name            *string                          `json:"name"`
-	Password        *string                          `json:"password"`
-	Privacy         *EditAlbumRequestBodyPrivacyEnum `json:"privacy"`
-	ReviewMode      *bool                            `json:"review_mode"`
-	Sort            *EditAlbumRequestBodySortEnum    `json:"sort"`
-	Theme           *EditAlbumRequestBodyThemeEnum   `json:"theme"`
-	URL             *string                          `json:"url"`
-	UseCustomDomain *bool                            `json:"use_custom_domain"`
+	BrandColor      *string                          `json:"brand_color,omitempty"`
+	Description     *string                          `json:"description,omitempty"`
+	Domain          *string                          `json:"domain,omitempty"`
+	HideNav         *bool                            `json:"hide_nav,omitempty"`
+	Layout          *EditAlbumRequestBodyLayoutEnum  `json:"layout,omitempty"`
+	Name            *string                          `json:"name,omitempty"`
+	Password        *string                          `json:"password,omitempty"`
+	Privacy         *EditAlbumRequestBodyPrivacyEnum `json:"privacy,omitempty"`
+	ReviewMode      *bool                            `json:"review_mode,omitempty"`
+	Sort            *EditAlbumRequestBodySortEnum    `json:"sort,omitempty"`
+	Theme           *EditAlbumRequestBodyThemeEnum   `json:"theme,omitempty"`
+	URL             *string                          `json:"url,omitempty"`
+	UseCustomDomain *bool                            `json:"use_custom_domain,omitempty"`
 }
 
 type EditAlbumSecurity struct {

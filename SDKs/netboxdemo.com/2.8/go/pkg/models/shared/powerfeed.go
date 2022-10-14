@@ -85,20 +85,20 @@ type PowerFeedTypeType struct {
 }
 
 type PowerFeed struct {
-	Amperage       *int64                 `json:"amperage"`
-	Comments       *string                `json:"comments"`
-	Created        *time.Time             `json:"created"`
-	CustomFields   map[string]interface{} `json:"custom_fields"`
-	ID             *int64                 `json:"id"`
-	LastUpdated    *time.Time             `json:"last_updated"`
-	MaxUtilization *int64                 `json:"max_utilization"`
+	Amperage       *int64                 `json:"amperage,omitempty"`
+	Comments       *string                `json:"comments,omitempty"`
+	Created        *time.Time             `json:"created,omitempty"`
+	CustomFields   map[string]interface{} `json:"custom_fields,omitempty"`
+	ID             *int64                 `json:"id,omitempty"`
+	LastUpdated    *time.Time             `json:"last_updated,omitempty"`
+	MaxUtilization *int64                 `json:"max_utilization,omitempty"`
 	Name           string                 `json:"name"`
-	Phase          *PowerFeedPhasePhase   `json:"phase"`
+	Phase          *PowerFeedPhasePhase   `json:"phase,omitempty"`
 	PowerPanel     NestedPowerPanel       `json:"power_panel"`
-	Rack           *NestedRack            `json:"rack"`
-	Status         *PowerFeedStatusStatus `json:"status"`
-	Supply         *PowerFeedSupplySupply `json:"supply"`
-	Tags           []string               `json:"tags"`
-	Type           *PowerFeedTypeType     `json:"type"`
-	Voltage        *int64                 `json:"voltage"`
+	Rack           *NestedRack            `json:"rack,omitempty"`
+	Status         *PowerFeedStatusStatus `json:"status,omitempty"`
+	Supply         *PowerFeedSupplySupply `json:"supply,omitempty"`
+	Tags           []string               `json:"tags,omitempty"`
+	Type           *PowerFeedTypeType     `json:"type,omitempty"`
+	Voltage        *int64                 `json:"voltage,omitempty"`
 }

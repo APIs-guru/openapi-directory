@@ -8,8 +8,8 @@ const (
 )
 
 type ConfigureContactSettingsRequest struct {
-	ContactNotices  []ConfigureContactSettingsRequestContactNoticesEnum `json:"contactNotices"`
-	ContactSettings *ContactSettings                                    `json:"contactSettings"`
-	UpdateMask      *string                                             `json:"updateMask"`
-	ValidateOnly    *bool                                               `json:"validateOnly"`
+	ContactNotices  []ConfigureContactSettingsRequestContactNoticesEnum `json:"contactNotices,omitempty"`
+	ContactSettings *ContactSettings                                    `json:"contactSettings,omitempty"`
+	UpdateMask      *string                                             `json:"updateMask,omitempty"`
+	ValidateOnly    *bool                                               `json:"validateOnly,omitempty"`
 }

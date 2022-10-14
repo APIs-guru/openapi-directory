@@ -1,5 +1,5 @@
 package shared
 
 type KeyUsage struct {
-	Name *KeyUsageNameEnum `json:"Name"`
+	Name *KeyUsageNameEnum `json:"Name,omitempty"`
 }

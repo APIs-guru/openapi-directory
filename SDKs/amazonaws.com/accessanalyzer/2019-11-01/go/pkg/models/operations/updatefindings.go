@@ -19,9 +19,9 @@ const (
 
 type UpdateFindingsRequestBody struct {
 	AnalyzerArn string                              `json:"analyzerArn"`
-	ClientToken *string                             `json:"clientToken"`
-	Ids         []string                            `json:"ids"`
-	ResourceArn *string                             `json:"resourceArn"`
+	ClientToken *string                             `json:"clientToken,omitempty"`
+	Ids         []string                            `json:"ids,omitempty"`
+	ResourceArn *string                             `json:"resourceArn,omitempty"`
 	Status      UpdateFindingsRequestBodyStatusEnum `json:"status"`
 }
 

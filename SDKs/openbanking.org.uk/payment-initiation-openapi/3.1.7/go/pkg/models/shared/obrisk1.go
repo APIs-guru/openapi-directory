@@ -1,12 +1,12 @@
 package shared
 
 type ObRisk1DeliveryAddress struct {
-	AddressLine        []string `json:"AddressLine"`
-	BuildingNumber     *string  `json:"BuildingNumber"`
+	AddressLine        []string `json:"AddressLine,omitempty"`
+	BuildingNumber     *string  `json:"BuildingNumber,omitempty"`
 	Country            string   `json:"Country"`
-	CountrySubDivision *string  `json:"CountrySubDivision"`
-	PostCode           *string  `json:"PostCode"`
-	StreetName         *string  `json:"StreetName"`
+	CountrySubDivision *string  `json:"CountrySubDivision,omitempty"`
+	PostCode           *string  `json:"PostCode,omitempty"`
+	StreetName         *string  `json:"StreetName,omitempty"`
 	TownName           string   `json:"TownName"`
 }
 
@@ -21,8 +21,8 @@ const (
 )
 
 type ObRisk1 struct {
-	DeliveryAddress                *ObRisk1DeliveryAddress        `json:"DeliveryAddress"`
-	MerchantCategoryCode           *string                        `json:"MerchantCategoryCode"`
-	MerchantCustomerIdentification *string                        `json:"MerchantCustomerIdentification"`
-	PaymentContextCode             *ObRisk1PaymentContextCodeEnum `json:"PaymentContextCode"`
+	DeliveryAddress                *ObRisk1DeliveryAddress        `json:"DeliveryAddress,omitempty"`
+	MerchantCategoryCode           *string                        `json:"MerchantCategoryCode,omitempty"`
+	MerchantCustomerIdentification *string                        `json:"MerchantCustomerIdentification,omitempty"`
+	PaymentContextCode             *ObRisk1PaymentContextCodeEnum `json:"PaymentContextCode,omitempty"`
 }

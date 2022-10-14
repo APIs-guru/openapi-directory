@@ -1,8 +1,8 @@
 package shared
 
 type GroupAssetsResponse struct {
-	GroupByResults []GroupResult `json:"groupByResults"`
-	NextPageToken  *string       `json:"nextPageToken"`
-	ReadTime       *string       `json:"readTime"`
-	TotalSize      *int32        `json:"totalSize"`
+	GroupByResults []GroupResult `json:"groupByResults,omitempty"`
+	NextPageToken  *string       `json:"nextPageToken,omitempty"`
+	ReadTime       *string       `json:"readTime,omitempty"`
+	TotalSize      *int32        `json:"totalSize,omitempty"`
 }

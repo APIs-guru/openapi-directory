@@ -5,10 +5,10 @@ import (
 )
 
 type MigrationTaskSummary struct {
-	MigrationTaskName    *string     `json:"MigrationTaskName"`
-	ProgressPercent      *int64      `json:"ProgressPercent"`
-	ProgressUpdateStream *string     `json:"ProgressUpdateStream"`
-	Status               *StatusEnum `json:"Status"`
-	StatusDetail         *string     `json:"StatusDetail"`
-	UpdateDateTime       *time.Time  `json:"UpdateDateTime"`
+	MigrationTaskName    *string     `json:"MigrationTaskName,omitempty"`
+	ProgressPercent      *int64      `json:"ProgressPercent,omitempty"`
+	ProgressUpdateStream *string     `json:"ProgressUpdateStream,omitempty"`
+	Status               *StatusEnum `json:"Status,omitempty"`
+	StatusDetail         *string     `json:"StatusDetail,omitempty"`
+	UpdateDateTime       *time.Time  `json:"UpdateDateTime,omitempty"`
 }

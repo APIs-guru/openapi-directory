@@ -29,8 +29,8 @@ const (
 )
 
 type CounterMetadata struct {
-	Description   *string                           `json:"description"`
-	Kind          *CounterMetadataKindEnum          `json:"kind"`
-	OtherUnits    *string                           `json:"otherUnits"`
-	StandardUnits *CounterMetadataStandardUnitsEnum `json:"standardUnits"`
+	Description   *string                           `json:"description,omitempty"`
+	Kind          *CounterMetadataKindEnum          `json:"kind,omitempty"`
+	OtherUnits    *string                           `json:"otherUnits,omitempty"`
+	StandardUnits *CounterMetadataStandardUnitsEnum `json:"standardUnits,omitempty"`
 }

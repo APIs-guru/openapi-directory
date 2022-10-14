@@ -5,10 +5,10 @@ import (
 )
 
 type Permission struct {
-	Actions                 []ActionTypeEnum `json:"Actions"`
-	CertificateAuthorityArn *string          `json:"CertificateAuthorityArn"`
-	CreatedAt               *time.Time       `json:"CreatedAt"`
-	Policy                  *string          `json:"Policy"`
-	Principal               *string          `json:"Principal"`
-	SourceAccount           *string          `json:"SourceAccount"`
+	Actions                 []ActionTypeEnum `json:"Actions,omitempty"`
+	CertificateAuthorityArn *string          `json:"CertificateAuthorityArn,omitempty"`
+	CreatedAt               *time.Time       `json:"CreatedAt,omitempty"`
+	Policy                  *string          `json:"Policy,omitempty"`
+	Principal               *string          `json:"Principal,omitempty"`
+	SourceAccount           *string          `json:"SourceAccount,omitempty"`
 }

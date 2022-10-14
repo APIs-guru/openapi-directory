@@ -14,13 +14,13 @@ type GetReplicaRequest struct {
 }
 
 type GetReplica200ApplicationJSON struct {
-	Replica *shared.Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1replicasGetResponses200ContentApplication1jsonSchemaPropertiesReplicasItems `json:"replica"`
+	Replica *shared.Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1replicasGetResponses200ContentApplication1jsonSchemaPropertiesReplicasItems `json:"replica,omitempty"`
 }
 
 type GetReplica401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetReplicaResponse struct {

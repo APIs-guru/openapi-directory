@@ -15,15 +15,15 @@ type CreateDomainNameHeaders struct {
 }
 
 type CreateDomainNameRequestBodyMutualTLSAuthentication struct {
-	TruststoreURI     *string `json:"TruststoreUri"`
-	TruststoreVersion *string `json:"TruststoreVersion"`
+	TruststoreURI     *string `json:"TruststoreUri,omitempty"`
+	TruststoreVersion *string `json:"TruststoreVersion,omitempty"`
 }
 
 type CreateDomainNameRequestBody struct {
 	DomainName               string                                              `json:"domainName"`
-	DomainNameConfigurations []shared.DomainNameConfiguration                    `json:"domainNameConfigurations"`
-	MutualTLSAuthentication  *CreateDomainNameRequestBodyMutualTLSAuthentication `json:"mutualTlsAuthentication"`
-	Tags                     map[string]string                                   `json:"tags"`
+	DomainNameConfigurations []shared.DomainNameConfiguration                    `json:"domainNameConfigurations,omitempty"`
+	MutualTLSAuthentication  *CreateDomainNameRequestBodyMutualTLSAuthentication `json:"mutualTlsAuthentication,omitempty"`
+	Tags                     map[string]string                                   `json:"tags,omitempty"`
 }
 
 type CreateDomainNameRequest struct {

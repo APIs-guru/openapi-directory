@@ -1,5 +1,5 @@
 package shared
 
 type OpenInstancePublicPortsResult struct {
-	Operation *Operation `json:"operation"`
+	Operation *Operation `json:"operation,omitempty"`
 }

@@ -18,9 +18,9 @@ const (
 )
 
 type PublisherConnection struct {
-	BiddingState      *PublisherConnectionBiddingStateEnum      `json:"biddingState"`
-	CreateTime        *string                                   `json:"createTime"`
-	DisplayName       *string                                   `json:"displayName"`
-	Name              *string                                   `json:"name"`
-	PublisherPlatform *PublisherConnectionPublisherPlatformEnum `json:"publisherPlatform"`
+	BiddingState      *PublisherConnectionBiddingStateEnum      `json:"biddingState,omitempty"`
+	CreateTime        *string                                   `json:"createTime,omitempty"`
+	DisplayName       *string                                   `json:"displayName,omitempty"`
+	Name              *string                                   `json:"name,omitempty"`
+	PublisherPlatform *PublisherConnectionPublisherPlatformEnum `json:"publisherPlatform,omitempty"`
 }

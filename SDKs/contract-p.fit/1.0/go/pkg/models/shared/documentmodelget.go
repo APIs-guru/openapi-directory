@@ -1,22 +1,22 @@
 package shared
 
 type DocumentModelGet struct {
-	Escalate         *StateModelGet           `json:"escalate"`
-	Feedback         map[string]interface{}   `json:"feedback"`
-	Files            map[string]interface{}   `json:"files"`
-	FlagForReview    *bool                    `json:"flag_for_review"`
+	Escalate         *StateModelGet           `json:"escalate,omitempty"`
+	Feedback         map[string]interface{}   `json:"feedback,omitempty"`
+	Files            map[string]interface{}   `json:"files,omitempty"`
+	FlagForReview    *bool                    `json:"flag_for_review,omitempty"`
 	ID               string                   `json:"id"`
 	Inbox            string                   `json:"inbox"`
-	LastVersion      *string                  `json:"last_version"`
-	Lock             *StateModelGet           `json:"lock"`
-	MetaInformation  map[string]interface{}   `json:"meta_information"`
+	LastVersion      *string                  `json:"last_version,omitempty"`
+	Lock             *StateModelGet           `json:"lock,omitempty"`
+	MetaInformation  map[string]interface{}   `json:"meta_information,omitempty"`
 	OriginalFilename string                   `json:"original_filename"`
 	PageCount        int64                    `json:"page_count"`
-	Prediction       map[string]interface{}   `json:"prediction"`
-	Reject           *StateModelGet           `json:"reject"`
-	StatusData       *StatusDataModel         `json:"status_data"`
-	Submitted        *StateModelGet           `json:"submitted"`
-	Timings          *TimingsModelGet         `json:"timings"`
-	UsageData        map[string]interface{}   `json:"usage_data"`
-	Versions         []map[string]interface{} `json:"versions"`
+	Prediction       map[string]interface{}   `json:"prediction,omitempty"`
+	Reject           *StateModelGet           `json:"reject,omitempty"`
+	StatusData       *StatusDataModel         `json:"status_data,omitempty"`
+	Submitted        *StateModelGet           `json:"submitted,omitempty"`
+	Timings          *TimingsModelGet         `json:"timings,omitempty"`
+	UsageData        map[string]interface{}   `json:"usage_data,omitempty"`
+	Versions         []map[string]interface{} `json:"versions,omitempty"`
 }

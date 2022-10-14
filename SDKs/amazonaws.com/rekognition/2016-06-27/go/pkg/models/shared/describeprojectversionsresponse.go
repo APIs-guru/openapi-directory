@@ -1,6 +1,6 @@
 package shared
 
 type DescribeProjectVersionsResponse struct {
-	NextToken                  *string                     `json:"NextToken"`
-	ProjectVersionDescriptions []ProjectVersionDescription `json:"ProjectVersionDescriptions"`
+	NextToken                  *string                     `json:"NextToken,omitempty"`
+	ProjectVersionDescriptions []ProjectVersionDescription `json:"ProjectVersionDescriptions,omitempty"`
 }

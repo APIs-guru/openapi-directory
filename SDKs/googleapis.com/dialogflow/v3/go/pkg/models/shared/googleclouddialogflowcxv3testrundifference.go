@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3TestRunDifference struct {
-	Description *string                                             `json:"description"`
-	Type        *GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum `json:"type"`
+	Description *string                                             `json:"description,omitempty"`
+	Type        *GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum `json:"type,omitempty"`
 }

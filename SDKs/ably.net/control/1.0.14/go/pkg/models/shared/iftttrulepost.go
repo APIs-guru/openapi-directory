@@ -28,6 +28,6 @@ type IftttRulePost struct {
 	RequestMode IftttRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    IftttRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                   `json:"source"`
-	Status      *IftttRulePostStatusEnum     `json:"status"`
+	Status      *IftttRulePostStatusEnum     `json:"status,omitempty"`
 	Target      IftttRulePostTarget          `json:"target"`
 }

@@ -16,11 +16,11 @@ type DetachFromIndexHeaders struct {
 }
 
 type DetachFromIndexRequestBodyIndexReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type DetachFromIndexRequestBodyTargetReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type DetachFromIndexRequestBody struct {

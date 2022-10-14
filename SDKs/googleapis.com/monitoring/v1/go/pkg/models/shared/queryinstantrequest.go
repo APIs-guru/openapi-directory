@@ -1,7 +1,7 @@
 package shared
 
 type QueryInstantRequest struct {
-	Query   *string `json:"query"`
-	Time    *string `json:"time"`
-	Timeout *string `json:"timeout"`
+	Query   *string `json:"query,omitempty"`
+	Time    *string `json:"time,omitempty"`
+	Timeout *string `json:"timeout,omitempty"`
 }

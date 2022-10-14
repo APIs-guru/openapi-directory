@@ -25,7 +25,7 @@ type ApplicationGrantUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -39,5 +39,5 @@ type ApplicationGrant struct {
 	Scopes    []string                        `json:"scopes"`
 	UpdatedAt time.Time                       `json:"updated_at"`
 	URL       string                          `json:"url"`
-	User      *ApplicationGrantUserSimpleUser `json:"user"`
+	User      *ApplicationGrantUserSimpleUser `json:"user,omitempty"`
 }

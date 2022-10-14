@@ -9,13 +9,13 @@ const (
 )
 
 type Endpoint struct {
-	CloudFunction    *CloudFunctionEndpoint   `json:"cloudFunction"`
-	CloudSQLInstance *string                  `json:"cloudSqlInstance"`
-	GkeMasterCluster *string                  `json:"gkeMasterCluster"`
-	Instance         *string                  `json:"instance"`
-	IPAddress        *string                  `json:"ipAddress"`
-	Network          *string                  `json:"network"`
-	NetworkType      *EndpointNetworkTypeEnum `json:"networkType"`
-	Port             *int32                   `json:"port"`
-	ProjectID        *string                  `json:"projectId"`
+	CloudFunction    *CloudFunctionEndpoint   `json:"cloudFunction,omitempty"`
+	CloudSQLInstance *string                  `json:"cloudSqlInstance,omitempty"`
+	GkeMasterCluster *string                  `json:"gkeMasterCluster,omitempty"`
+	Instance         *string                  `json:"instance,omitempty"`
+	IPAddress        *string                  `json:"ipAddress,omitempty"`
+	Network          *string                  `json:"network,omitempty"`
+	NetworkType      *EndpointNetworkTypeEnum `json:"networkType,omitempty"`
+	Port             *int32                   `json:"port,omitempty"`
+	ProjectID        *string                  `json:"projectId,omitempty"`
 }

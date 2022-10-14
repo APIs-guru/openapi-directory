@@ -5,7 +5,7 @@ import (
 )
 
 type ImageTagDetail struct {
-	CreatedAt   *time.Time             `json:"createdAt"`
-	ImageDetail *ReferencedImageDetail `json:"imageDetail"`
-	ImageTag    *string                `json:"imageTag"`
+	CreatedAt   *time.Time             `json:"createdAt,omitempty"`
+	ImageDetail *ReferencedImageDetail `json:"imageDetail,omitempty"`
+	ImageTag    *string                `json:"imageTag,omitempty"`
 }

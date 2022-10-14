@@ -21,9 +21,9 @@ const (
 )
 
 type SegmentMetricFilter struct {
-	ComparisonValue    *string                          `json:"comparisonValue"`
-	MaxComparisonValue *string                          `json:"maxComparisonValue"`
-	MetricName         *string                          `json:"metricName"`
-	Operator           *SegmentMetricFilterOperatorEnum `json:"operator"`
-	Scope              *SegmentMetricFilterScopeEnum    `json:"scope"`
+	ComparisonValue    *string                          `json:"comparisonValue,omitempty"`
+	MaxComparisonValue *string                          `json:"maxComparisonValue,omitempty"`
+	MetricName         *string                          `json:"metricName,omitempty"`
+	Operator           *SegmentMetricFilterOperatorEnum `json:"operator,omitempty"`
+	Scope              *SegmentMetricFilterScopeEnum    `json:"scope,omitempty"`
 }

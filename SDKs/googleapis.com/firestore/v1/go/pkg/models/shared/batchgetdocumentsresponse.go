@@ -1,8 +1,8 @@
 package shared
 
 type BatchGetDocumentsResponse struct {
-	Found       *Document `json:"found"`
-	Missing     *string   `json:"missing"`
-	ReadTime    *string   `json:"readTime"`
-	Transaction *string   `json:"transaction"`
+	Found       *Document `json:"found,omitempty"`
+	Missing     *string   `json:"missing,omitempty"`
+	ReadTime    *string   `json:"readTime,omitempty"`
+	Transaction *string   `json:"transaction,omitempty"`
 }

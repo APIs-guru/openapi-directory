@@ -30,13 +30,13 @@ const (
 )
 
 type Activity31 struct {
-	Category *Category          `json:"category"`
-	Channel  *Channel           `json:"channel"`
+	Category *Category          `json:"category,omitempty"`
+	Channel  *Channel           `json:"channel,omitempty"`
 	Clip     Video              `json:"clip"`
-	Group    *Group             `json:"group"`
+	Group    *Group             `json:"group,omitempty"`
 	Metadata Activity31Metadata `json:"metadata"`
-	Tag      *Tag               `json:"tag"`
+	Tag      *Tag               `json:"tag,omitempty"`
 	Time     string             `json:"time"`
 	Type     Activity31TypeEnum `json:"type"`
-	User     *User              `json:"user"`
+	User     *User              `json:"user,omitempty"`
 }

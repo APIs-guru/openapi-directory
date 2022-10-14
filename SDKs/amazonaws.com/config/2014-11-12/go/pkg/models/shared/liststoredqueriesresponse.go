@@ -1,6 +1,6 @@
 package shared
 
 type ListStoredQueriesResponse struct {
-	NextToken           *string               `json:"NextToken"`
-	StoredQueryMetadata []StoredQueryMetadata `json:"StoredQueryMetadata"`
+	NextToken           *string               `json:"NextToken,omitempty"`
+	StoredQueryMetadata []StoredQueryMetadata `json:"StoredQueryMetadata,omitempty"`
 }

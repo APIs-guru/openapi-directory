@@ -22,16 +22,16 @@ const (
 )
 
 type UpdateNetworkWirelessSsidFirewallL3FirewallRulesRequestBodyRules struct {
-	Comment  *string                                                                      `json:"comment"`
+	Comment  *string                                                                      `json:"comment,omitempty"`
 	DestCidr string                                                                       `json:"destCidr"`
-	DestPort *string                                                                      `json:"destPort"`
+	DestPort *string                                                                      `json:"destPort,omitempty"`
 	Policy   UpdateNetworkWirelessSsidFirewallL3FirewallRulesRequestBodyRulesPolicyEnum   `json:"policy"`
 	Protocol UpdateNetworkWirelessSsidFirewallL3FirewallRulesRequestBodyRulesProtocolEnum `json:"protocol"`
 }
 
 type UpdateNetworkWirelessSsidFirewallL3FirewallRulesRequestBody struct {
-	AllowLanAccess *bool                                                              `json:"allowLanAccess"`
-	Rules          []UpdateNetworkWirelessSsidFirewallL3FirewallRulesRequestBodyRules `json:"rules"`
+	AllowLanAccess *bool                                                              `json:"allowLanAccess,omitempty"`
+	Rules          []UpdateNetworkWirelessSsidFirewallL3FirewallRulesRequestBodyRules `json:"rules,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidFirewallL3FirewallRulesRequest struct {

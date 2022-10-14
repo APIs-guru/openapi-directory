@@ -1,7 +1,7 @@
 package shared
 
 type Dpc struct {
-	DpcName     *string `json:"dpcName"`
-	Name        *string `json:"name"`
-	PackageName *string `json:"packageName"`
+	DpcName     *string `json:"dpcName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	PackageName *string `json:"packageName,omitempty"`
 }

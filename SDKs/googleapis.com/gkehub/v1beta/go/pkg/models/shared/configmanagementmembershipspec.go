@@ -1,9 +1,9 @@
 package shared
 
 type ConfigManagementMembershipSpec struct {
-	Binauthz            *ConfigManagementBinauthzConfig            `json:"binauthz"`
-	ConfigSync          *ConfigManagementConfigSync                `json:"configSync"`
-	HierarchyController *ConfigManagementHierarchyControllerConfig `json:"hierarchyController"`
-	PolicyController    *ConfigManagementPolicyController          `json:"policyController"`
-	Version             *string                                    `json:"version"`
+	Binauthz            *ConfigManagementBinauthzConfig            `json:"binauthz,omitempty"`
+	ConfigSync          *ConfigManagementConfigSync                `json:"configSync,omitempty"`
+	HierarchyController *ConfigManagementHierarchyControllerConfig `json:"hierarchyController,omitempty"`
+	PolicyController    *ConfigManagementPolicyController          `json:"policyController,omitempty"`
+	Version             *string                                    `json:"version,omitempty"`
 }

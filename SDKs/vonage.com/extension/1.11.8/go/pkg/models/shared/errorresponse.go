@@ -1,6 +1,6 @@
 package shared
 
 type ErrorResponse struct {
-	Msg    *string  `json:"msg"`
-	Status *float64 `json:"status"`
+	Msg    *string  `json:"msg,omitempty"`
+	Status *float64 `json:"status,omitempty"`
 }

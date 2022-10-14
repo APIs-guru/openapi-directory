@@ -1,10 +1,10 @@
 package shared
 
 type DomainAlias struct {
-	CreationTime     *string `json:"creationTime"`
-	DomainAliasName  *string `json:"domainAliasName"`
-	Etag             *string `json:"etag"`
-	Kind             *string `json:"kind"`
-	ParentDomainName *string `json:"parentDomainName"`
-	Verified         *bool   `json:"verified"`
+	CreationTime     *string `json:"creationTime,omitempty"`
+	DomainAliasName  *string `json:"domainAliasName,omitempty"`
+	Etag             *string `json:"etag,omitempty"`
+	Kind             *string `json:"kind,omitempty"`
+	ParentDomainName *string `json:"parentDomainName,omitempty"`
+	Verified         *bool   `json:"verified,omitempty"`
 }

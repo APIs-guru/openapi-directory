@@ -8,7 +8,7 @@ const (
 )
 
 type Recipient struct {
-	DeliveryType *RecipientDeliveryTypeEnum `json:"deliveryType"`
-	Email        *string                    `json:"email"`
-	Kind         *string                    `json:"kind"`
+	DeliveryType *RecipientDeliveryTypeEnum `json:"deliveryType,omitempty"`
+	Email        *string                    `json:"email,omitempty"`
+	Kind         *string                    `json:"kind,omitempty"`
 }

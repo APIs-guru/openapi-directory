@@ -1,8 +1,8 @@
 package shared
 
 type BuildOccurrence struct {
-	IntotoProvenance *InTotoProvenance `json:"intotoProvenance"`
-	IntotoStatement  *InTotoStatement  `json:"intotoStatement"`
-	Provenance       *BuildProvenance  `json:"provenance"`
-	ProvenanceBytes  *string           `json:"provenanceBytes"`
+	IntotoProvenance *InTotoProvenance `json:"intotoProvenance,omitempty"`
+	IntotoStatement  *InTotoStatement  `json:"intotoStatement,omitempty"`
+	Provenance       *BuildProvenance  `json:"provenance,omitempty"`
+	ProvenanceBytes  *string           `json:"provenanceBytes,omitempty"`
 }

@@ -9,11 +9,11 @@ const (
 )
 
 type WaterfallChartSpec struct {
-	ConnectorLineStyle *LineStyle                         `json:"connectorLineStyle"`
-	Domain             *WaterfallChartDomain              `json:"domain"`
-	FirstValueIsTotal  *bool                              `json:"firstValueIsTotal"`
-	HideConnectorLines *bool                              `json:"hideConnectorLines"`
-	Series             []WaterfallChartSeries             `json:"series"`
-	StackedType        *WaterfallChartSpecStackedTypeEnum `json:"stackedType"`
-	TotalDataLabel     *DataLabel                         `json:"totalDataLabel"`
+	ConnectorLineStyle *LineStyle                         `json:"connectorLineStyle,omitempty"`
+	Domain             *WaterfallChartDomain              `json:"domain,omitempty"`
+	FirstValueIsTotal  *bool                              `json:"firstValueIsTotal,omitempty"`
+	HideConnectorLines *bool                              `json:"hideConnectorLines,omitempty"`
+	Series             []WaterfallChartSeries             `json:"series,omitempty"`
+	StackedType        *WaterfallChartSpecStackedTypeEnum `json:"stackedType,omitempty"`
+	TotalDataLabel     *DataLabel                         `json:"totalDataLabel,omitempty"`
 }

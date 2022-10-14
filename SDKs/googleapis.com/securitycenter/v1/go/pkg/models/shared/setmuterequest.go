@@ -10,5 +10,5 @@ const (
 )
 
 type SetMuteRequest struct {
-	Mute *SetMuteRequestMuteEnum `json:"mute"`
+	Mute *SetMuteRequestMuteEnum `json:"mute,omitempty"`
 }

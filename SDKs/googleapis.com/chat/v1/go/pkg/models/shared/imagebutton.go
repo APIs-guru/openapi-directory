@@ -37,8 +37,8 @@ const (
 )
 
 type ImageButton struct {
-	Icon    *ImageButtonIconEnum `json:"icon"`
-	IconURL *string              `json:"iconUrl"`
-	Name    *string              `json:"name"`
-	OnClick *OnClick             `json:"onClick"`
+	Icon    *ImageButtonIconEnum `json:"icon,omitempty"`
+	IconURL *string              `json:"iconUrl,omitempty"`
+	Name    *string              `json:"name,omitempty"`
+	OnClick *OnClick             `json:"onClick,omitempty"`
 }

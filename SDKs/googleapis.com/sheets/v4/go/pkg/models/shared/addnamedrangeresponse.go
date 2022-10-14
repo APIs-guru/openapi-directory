@@ -1,5 +1,5 @@
 package shared
 
 type AddNamedRangeResponse struct {
-	NamedRange *NamedRange `json:"namedRange"`
+	NamedRange *NamedRange `json:"namedRange,omitempty"`
 }

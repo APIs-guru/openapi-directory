@@ -1,7 +1,7 @@
 package shared
 
 type AnalyzeSyntaxResponse struct {
-	Language  *string    `json:"language"`
-	Sentences []Sentence `json:"sentences"`
-	Tokens    []Token    `json:"tokens"`
+	Language  *string    `json:"language,omitempty"`
+	Sentences []Sentence `json:"sentences,omitempty"`
+	Tokens    []Token    `json:"tokens,omitempty"`
 }

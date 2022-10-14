@@ -15,45 +15,45 @@ type SubmitJobHeaders struct {
 }
 
 type SubmitJobRequestBodyArrayProperties struct {
-	Size *int64 `json:"size"`
+	Size *int64 `json:"size,omitempty"`
 }
 
 type SubmitJobRequestBodyContainerOverrides struct {
-	Command              []string                     `json:"command"`
-	Environment          []shared.KeyValuePair        `json:"environment"`
-	InstanceType         *string                      `json:"instanceType"`
-	Memory               *int64                       `json:"memory"`
-	ResourceRequirements []shared.ResourceRequirement `json:"resourceRequirements"`
-	Vcpus                *int64                       `json:"vcpus"`
+	Command              []string                     `json:"command,omitempty"`
+	Environment          []shared.KeyValuePair        `json:"environment,omitempty"`
+	InstanceType         *string                      `json:"instanceType,omitempty"`
+	Memory               *int64                       `json:"memory,omitempty"`
+	ResourceRequirements []shared.ResourceRequirement `json:"resourceRequirements,omitempty"`
+	Vcpus                *int64                       `json:"vcpus,omitempty"`
 }
 
 type SubmitJobRequestBodyNodeOverrides struct {
-	NodePropertyOverrides []shared.NodePropertyOverride `json:"nodePropertyOverrides"`
-	NumNodes              *int64                        `json:"numNodes"`
+	NodePropertyOverrides []shared.NodePropertyOverride `json:"nodePropertyOverrides,omitempty"`
+	NumNodes              *int64                        `json:"numNodes,omitempty"`
 }
 
 type SubmitJobRequestBodyRetryStrategy struct {
-	Attempts       *int64                  `json:"attempts"`
-	EvaluateOnExit []shared.EvaluateOnExit `json:"evaluateOnExit"`
+	Attempts       *int64                  `json:"attempts,omitempty"`
+	EvaluateOnExit []shared.EvaluateOnExit `json:"evaluateOnExit,omitempty"`
 }
 
 type SubmitJobRequestBodyTimeout struct {
-	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds"`
+	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds,omitempty"`
 }
 
 type SubmitJobRequestBody struct {
-	ArrayProperties    *SubmitJobRequestBodyArrayProperties    `json:"arrayProperties"`
-	ContainerOverrides *SubmitJobRequestBodyContainerOverrides `json:"containerOverrides"`
-	DependsOn          []shared.JobDependency                  `json:"dependsOn"`
+	ArrayProperties    *SubmitJobRequestBodyArrayProperties    `json:"arrayProperties,omitempty"`
+	ContainerOverrides *SubmitJobRequestBodyContainerOverrides `json:"containerOverrides,omitempty"`
+	DependsOn          []shared.JobDependency                  `json:"dependsOn,omitempty"`
 	JobDefinition      string                                  `json:"jobDefinition"`
 	JobName            string                                  `json:"jobName"`
 	JobQueue           string                                  `json:"jobQueue"`
-	NodeOverrides      *SubmitJobRequestBodyNodeOverrides      `json:"nodeOverrides"`
-	Parameters         map[string]string                       `json:"parameters"`
-	PropagateTags      *bool                                   `json:"propagateTags"`
-	RetryStrategy      *SubmitJobRequestBodyRetryStrategy      `json:"retryStrategy"`
-	Tags               map[string]string                       `json:"tags"`
-	Timeout            *SubmitJobRequestBodyTimeout            `json:"timeout"`
+	NodeOverrides      *SubmitJobRequestBodyNodeOverrides      `json:"nodeOverrides,omitempty"`
+	Parameters         map[string]string                       `json:"parameters,omitempty"`
+	PropagateTags      *bool                                   `json:"propagateTags,omitempty"`
+	RetryStrategy      *SubmitJobRequestBodyRetryStrategy      `json:"retryStrategy,omitempty"`
+	Tags               map[string]string                       `json:"tags,omitempty"`
+	Timeout            *SubmitJobRequestBodyTimeout            `json:"timeout,omitempty"`
 }
 
 type SubmitJobRequest struct {

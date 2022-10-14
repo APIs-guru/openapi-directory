@@ -5,11 +5,11 @@ type PutVolumesIDPathParams struct {
 }
 
 type PutVolumesIDRequestBodyLabels struct {
-	Labelkey *string `json:"labelkey"`
+	Labelkey *string `json:"labelkey,omitempty"`
 }
 
 type PutVolumesIDRequestBodyUpdateVolumeRequest struct {
-	Labels *PutVolumesIDRequestBodyLabels `json:"labels"`
+	Labels *PutVolumesIDRequestBodyLabels `json:"labels,omitempty"`
 	Name   string                         `json:"name"`
 }
 

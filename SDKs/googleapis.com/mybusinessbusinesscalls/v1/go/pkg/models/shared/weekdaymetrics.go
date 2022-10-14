@@ -14,6 +14,6 @@ const (
 )
 
 type WeekDayMetrics struct {
-	Day              *WeekDayMetricsDayEnum `json:"day"`
-	MissedCallsCount *int32                 `json:"missedCallsCount"`
+	Day              *WeekDayMetricsDayEnum `json:"day,omitempty"`
+	MissedCallsCount *int32                 `json:"missedCallsCount,omitempty"`
 }

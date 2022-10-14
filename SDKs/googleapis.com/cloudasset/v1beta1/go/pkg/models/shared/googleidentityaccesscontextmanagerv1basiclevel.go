@@ -8,6 +8,6 @@ const (
 )
 
 type GoogleIdentityAccesscontextmanagerV1BasicLevel struct {
-	CombiningFunction *GoogleIdentityAccesscontextmanagerV1BasicLevelCombiningFunctionEnum `json:"combiningFunction"`
-	Conditions        []GoogleIdentityAccesscontextmanagerV1Condition                      `json:"conditions"`
+	CombiningFunction *GoogleIdentityAccesscontextmanagerV1BasicLevelCombiningFunctionEnum `json:"combiningFunction,omitempty"`
+	Conditions        []GoogleIdentityAccesscontextmanagerV1Condition                      `json:"conditions,omitempty"`
 }

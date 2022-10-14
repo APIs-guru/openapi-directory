@@ -1,17 +1,17 @@
 package shared
 
 type RvBuild struct {
-	Area         *string `json:"area"`
-	Class        *string `json:"class"`
-	Engine       *string `json:"engine"`
-	FuelType     *string `json:"fuel_type"`
-	Gvwr         *string `json:"gvwr"`
-	Length       *string `json:"length"`
-	MadeIn       *string `json:"made_in"`
-	Make         *string `json:"make"`
-	Model        *string `json:"model"`
-	Sleeps       *string `json:"sleeps"`
-	Slideouts    *string `json:"slideouts"`
-	Transmission *string `json:"transmission"`
-	Year         *int64  `json:"year"`
+	Area         *string `json:"area,omitempty"`
+	Class        *string `json:"class,omitempty"`
+	Engine       *string `json:"engine,omitempty"`
+	FuelType     *string `json:"fuel_type,omitempty"`
+	Gvwr         *string `json:"gvwr,omitempty"`
+	Length       *string `json:"length,omitempty"`
+	MadeIn       *string `json:"made_in,omitempty"`
+	Make         *string `json:"make,omitempty"`
+	Model        *string `json:"model,omitempty"`
+	Sleeps       *string `json:"sleeps,omitempty"`
+	Slideouts    *string `json:"slideouts,omitempty"`
+	Transmission *string `json:"transmission,omitempty"`
+	Year         *int64  `json:"year,omitempty"`
 }

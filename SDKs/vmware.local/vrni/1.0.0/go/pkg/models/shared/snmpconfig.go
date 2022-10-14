@@ -8,8 +8,8 @@ const (
 )
 
 type SnmpConfig struct {
-	ConfigSnmp2c *Snmp2cConfig              `json:"config_snmp_2c"`
-	ConfigSnmp3  *Snmp3Config               `json:"config_snmp_3"`
-	SnmpEnabled  *bool                      `json:"snmp_enabled"`
-	SnmpVersion  *SnmpConfigSnmpVersionEnum `json:"snmp_version"`
+	ConfigSnmp2c *Snmp2cConfig              `json:"config_snmp_2c,omitempty"`
+	ConfigSnmp3  *Snmp3Config               `json:"config_snmp_3,omitempty"`
+	SnmpEnabled  *bool                      `json:"snmp_enabled,omitempty"`
+	SnmpVersion  *SnmpConfigSnmpVersionEnum `json:"snmp_version,omitempty"`
 }

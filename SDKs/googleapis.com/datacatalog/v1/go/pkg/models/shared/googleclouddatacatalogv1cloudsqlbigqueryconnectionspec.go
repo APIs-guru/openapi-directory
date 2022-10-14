@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpec struct {
-	Database   *string                                                         `json:"database"`
-	InstanceID *string                                                         `json:"instanceId"`
-	Type       *GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpecTypeEnum `json:"type"`
+	Database   *string                                                         `json:"database,omitempty"`
+	InstanceID *string                                                         `json:"instanceId,omitempty"`
+	Type       *GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpecTypeEnum `json:"type,omitempty"`
 }

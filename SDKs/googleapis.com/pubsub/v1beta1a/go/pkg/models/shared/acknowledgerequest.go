@@ -1,6 +1,6 @@
 package shared
 
 type AcknowledgeRequest struct {
-	AckID        []string `json:"ackId"`
-	Subscription *string  `json:"subscription"`
+	AckID        []string `json:"ackId,omitempty"`
+	Subscription *string  `json:"subscription,omitempty"`
 }

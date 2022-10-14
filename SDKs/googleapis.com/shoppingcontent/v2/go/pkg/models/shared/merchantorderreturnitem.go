@@ -1,10 +1,10 @@
 package shared
 
 type MerchantOrderReturnItem struct {
-	CustomerReturnReason *CustomerReturnReason `json:"customerReturnReason"`
-	ItemID               *string               `json:"itemId"`
-	MerchantReturnReason *RefundReason         `json:"merchantReturnReason"`
-	Product              *OrderLineItemProduct `json:"product"`
-	ReturnShipmentIds    []string              `json:"returnShipmentIds"`
-	State                *string               `json:"state"`
+	CustomerReturnReason *CustomerReturnReason `json:"customerReturnReason,omitempty"`
+	ItemID               *string               `json:"itemId,omitempty"`
+	MerchantReturnReason *RefundReason         `json:"merchantReturnReason,omitempty"`
+	Product              *OrderLineItemProduct `json:"product,omitempty"`
+	ReturnShipmentIds    []string              `json:"returnShipmentIds,omitempty"`
+	State                *string               `json:"state,omitempty"`
 }

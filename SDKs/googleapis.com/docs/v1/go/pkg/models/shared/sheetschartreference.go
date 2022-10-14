@@ -1,6 +1,6 @@
 package shared
 
 type SheetsChartReference struct {
-	ChartID       *int32  `json:"chartId"`
-	SpreadsheetID *string `json:"spreadsheetId"`
+	ChartID       *int32  `json:"chartId,omitempty"`
+	SpreadsheetID *string `json:"spreadsheetId,omitempty"`
 }

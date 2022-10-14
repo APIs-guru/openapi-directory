@@ -12,9 +12,9 @@ const (
 )
 
 type UserRolePermission struct {
-	Availability      *UserRolePermissionAvailabilityEnum `json:"availability"`
-	ID                *string                             `json:"id"`
-	Kind              *string                             `json:"kind"`
-	Name              *string                             `json:"name"`
-	PermissionGroupID *string                             `json:"permissionGroupId"`
+	Availability      *UserRolePermissionAvailabilityEnum `json:"availability,omitempty"`
+	ID                *string                             `json:"id,omitempty"`
+	Kind              *string                             `json:"kind,omitempty"`
+	Name              *string                             `json:"name,omitempty"`
+	PermissionGroupID *string                             `json:"permissionGroupId,omitempty"`
 }

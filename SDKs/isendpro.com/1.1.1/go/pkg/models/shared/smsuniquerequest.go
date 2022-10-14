@@ -102,15 +102,15 @@ const (
 )
 
 type SmsUniqueRequest struct {
-	DateEnvoi *string                      `json:"date_envoi"`
-	Emetteur  *string                      `json:"emetteur"`
-	GmtZone   *SmsUniqueRequestGmtZoneEnum `json:"gmt_zone"`
+	DateEnvoi *string                      `json:"date_envoi,omitempty"`
+	Emetteur  *string                      `json:"emetteur,omitempty"`
+	GmtZone   *SmsUniqueRequestGmtZoneEnum `json:"gmt_zone,omitempty"`
 	Keyid     string                       `json:"keyid"`
-	Nostop    *string                      `json:"nostop"`
+	Nostop    *string                      `json:"nostop,omitempty"`
 	Num       string                       `json:"num"`
-	NumAzur   *SmsUniqueRequestNumAzurEnum `json:"numAzur"`
+	NumAzur   *SmsUniqueRequestNumAzurEnum `json:"numAzur,omitempty"`
 	Sms       string                       `json:"sms"`
-	Smslong   *string                      `json:"smslong"`
-	Tracker   *string                      `json:"tracker"`
-	Ucs2      *string                      `json:"ucs2"`
+	Smslong   *string                      `json:"smslong,omitempty"`
+	Tracker   *string                      `json:"tracker,omitempty"`
+	Ucs2      *string                      `json:"ucs2,omitempty"`
 }

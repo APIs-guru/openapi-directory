@@ -24,6 +24,6 @@ const (
 
 type PlanningLevelReRunRequest struct {
 	Method          PlanningLevelReRunRequestMethodEnum `json:"method"`
-	Params          *PlanningLevelInfoRequest           `json:"params"`
+	Params          *PlanningLevelInfoRequest           `json:"params,omitempty"`
 	PlanningLevelID int32                               `json:"planningLevelId"`
 }

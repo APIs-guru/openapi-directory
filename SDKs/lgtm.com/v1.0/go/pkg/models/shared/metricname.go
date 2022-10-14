@@ -1,6 +1,6 @@
 package shared
 
 type MetricName struct {
-	Description *string `json:"description"`
-	MetricID    *string `json:"metric-id"`
+	Description *string `json:"description,omitempty"`
+	MetricID    *string `json:"metric-id,omitempty"`
 }

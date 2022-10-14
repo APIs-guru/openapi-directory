@@ -1,8 +1,8 @@
 package shared
 
 type DescribeRecommendationExportJobsRequest struct {
-	Filters    []JobFilter `json:"filters"`
-	JobIds     []string    `json:"jobIds"`
-	MaxResults *int64      `json:"maxResults"`
-	NextToken  *string     `json:"nextToken"`
+	Filters    []JobFilter `json:"filters,omitempty"`
+	JobIds     []string    `json:"jobIds,omitempty"`
+	MaxResults *int64      `json:"maxResults,omitempty"`
+	NextToken  *string     `json:"nextToken,omitempty"`
 }

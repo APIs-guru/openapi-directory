@@ -8,7 +8,7 @@ const (
 )
 
 type GoogleCloudChannelV1Media struct {
-	Content *string                            `json:"content"`
-	Title   *string                            `json:"title"`
-	Type    *GoogleCloudChannelV1MediaTypeEnum `json:"type"`
+	Content *string                            `json:"content,omitempty"`
+	Title   *string                            `json:"title,omitempty"`
+	Type    *GoogleCloudChannelV1MediaTypeEnum `json:"type,omitempty"`
 }

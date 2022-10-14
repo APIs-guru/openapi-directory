@@ -6,7 +6,7 @@ import (
 
 type UsersCreateRequestBody struct {
 	Email    string  `json:"email"`
-	Name     *string `json:"name"`
+	Name     *string `json:"name,omitempty"`
 	Password string  `json:"password"`
 }
 

@@ -1,9 +1,9 @@
 package shared
 
 type Communication struct {
-	AttachmentSet []AttachmentDetails `json:"attachmentSet"`
-	Body          *string             `json:"body"`
-	CaseID        *string             `json:"caseId"`
-	SubmittedBy   *string             `json:"submittedBy"`
-	TimeCreated   *string             `json:"timeCreated"`
+	AttachmentSet []AttachmentDetails `json:"attachmentSet,omitempty"`
+	Body          *string             `json:"body,omitempty"`
+	CaseID        *string             `json:"caseId,omitempty"`
+	SubmittedBy   *string             `json:"submittedBy,omitempty"`
+	TimeCreated   *string             `json:"timeCreated,omitempty"`
 }

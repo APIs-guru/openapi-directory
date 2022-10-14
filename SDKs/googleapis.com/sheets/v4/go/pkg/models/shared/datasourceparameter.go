@@ -1,7 +1,7 @@
 package shared
 
 type DataSourceParameter struct {
-	Name         *string    `json:"name"`
-	NamedRangeID *string    `json:"namedRangeId"`
-	Range        *GridRange `json:"range"`
+	Name         *string    `json:"name,omitempty"`
+	NamedRangeID *string    `json:"namedRangeId,omitempty"`
+	Range        *GridRange `json:"range,omitempty"`
 }

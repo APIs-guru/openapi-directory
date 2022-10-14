@@ -1,6 +1,6 @@
 package shared
 
 type JobTemplate struct {
-	Config *JobConfig `json:"config"`
-	Name   *string    `json:"name"`
+	Config *JobConfig `json:"config,omitempty"`
+	Name   *string    `json:"name,omitempty"`
 }

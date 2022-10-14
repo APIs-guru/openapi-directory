@@ -1,5 +1,5 @@
 package shared
 
 type UniversalTwoFactor struct {
-	AppID *string `json:"appId"`
+	AppID *string `json:"appId,omitempty"`
 }

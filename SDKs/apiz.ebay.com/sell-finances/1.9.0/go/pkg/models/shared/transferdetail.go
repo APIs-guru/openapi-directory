@@ -1,7 +1,7 @@
 package shared
 
 type TransferDetail struct {
-	BalanceAdjustment    *BalanceAdjustment `json:"balanceAdjustment"`
-	Charges              []Charge           `json:"charges"`
-	TotalChargeNetAmount *Amount            `json:"totalChargeNetAmount"`
+	BalanceAdjustment    *BalanceAdjustment `json:"balanceAdjustment,omitempty"`
+	Charges              []Charge           `json:"charges,omitempty"`
+	TotalChargeNetAmount *Amount            `json:"totalChargeNetAmount,omitempty"`
 }

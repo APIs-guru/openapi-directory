@@ -5,17 +5,17 @@ import (
 )
 
 type Instance struct {
-	AmiLaunchIndex      *int64                       `json:"amiLaunchIndex"`
-	BlockDeviceMappings []InstanceBlockDeviceMapping `json:"blockDeviceMappings"`
-	CPUOptions          *CPUOptions                  `json:"cpuOptions"`
-	CreatedAt           *time.Time                   `json:"createdAt"`
-	ImageID             *string                      `json:"imageId"`
-	InstanceID          *string                      `json:"instanceId"`
-	InstanceType        *string                      `json:"instanceType"`
-	PrivateIPAddress    *string                      `json:"privateIpAddress"`
-	PublicIPAddress     *string                      `json:"publicIpAddress"`
-	RootDeviceName      *string                      `json:"rootDeviceName"`
-	SecurityGroups      []SecurityGroupIdentifier    `json:"securityGroups"`
-	State               *InstanceState               `json:"state"`
-	UpdatedAt           *time.Time                   `json:"updatedAt"`
+	AmiLaunchIndex      *int64                       `json:"amiLaunchIndex,omitempty"`
+	BlockDeviceMappings []InstanceBlockDeviceMapping `json:"blockDeviceMappings,omitempty"`
+	CPUOptions          *CPUOptions                  `json:"cpuOptions,omitempty"`
+	CreatedAt           *time.Time                   `json:"createdAt,omitempty"`
+	ImageID             *string                      `json:"imageId,omitempty"`
+	InstanceID          *string                      `json:"instanceId,omitempty"`
+	InstanceType        *string                      `json:"instanceType,omitempty"`
+	PrivateIPAddress    *string                      `json:"privateIpAddress,omitempty"`
+	PublicIPAddress     *string                      `json:"publicIpAddress,omitempty"`
+	RootDeviceName      *string                      `json:"rootDeviceName,omitempty"`
+	SecurityGroups      []SecurityGroupIdentifier    `json:"securityGroups,omitempty"`
+	State               *InstanceState               `json:"state,omitempty"`
+	UpdatedAt           *time.Time                   `json:"updatedAt,omitempty"`
 }

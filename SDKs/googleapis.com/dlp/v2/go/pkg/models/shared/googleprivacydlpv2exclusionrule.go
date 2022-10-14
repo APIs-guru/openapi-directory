@@ -10,8 +10,8 @@ const (
 )
 
 type GooglePrivacyDlpV2ExclusionRule struct {
-	Dictionary       *GooglePrivacyDlpV2Dictionary                    `json:"dictionary"`
-	ExcludeInfoTypes *GooglePrivacyDlpV2ExcludeInfoTypes              `json:"excludeInfoTypes"`
-	MatchingType     *GooglePrivacyDlpV2ExclusionRuleMatchingTypeEnum `json:"matchingType"`
-	Regex            *GooglePrivacyDlpV2Regex                         `json:"regex"`
+	Dictionary       *GooglePrivacyDlpV2Dictionary                    `json:"dictionary,omitempty"`
+	ExcludeInfoTypes *GooglePrivacyDlpV2ExcludeInfoTypes              `json:"excludeInfoTypes,omitempty"`
+	MatchingType     *GooglePrivacyDlpV2ExclusionRuleMatchingTypeEnum `json:"matchingType,omitempty"`
+	Regex            *GooglePrivacyDlpV2Regex                         `json:"regex,omitempty"`
 }

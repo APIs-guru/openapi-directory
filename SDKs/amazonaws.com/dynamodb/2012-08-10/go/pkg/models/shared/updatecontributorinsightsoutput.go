@@ -1,7 +1,7 @@
 package shared
 
 type UpdateContributorInsightsOutput struct {
-	ContributorInsightsStatus *ContributorInsightsStatusEnum `json:"ContributorInsightsStatus"`
-	IndexName                 *string                        `json:"IndexName"`
-	TableName                 *string                        `json:"TableName"`
+	ContributorInsightsStatus *ContributorInsightsStatusEnum `json:"ContributorInsightsStatus,omitempty"`
+	IndexName                 *string                        `json:"IndexName,omitempty"`
+	TableName                 *string                        `json:"TableName,omitempty"`
 }

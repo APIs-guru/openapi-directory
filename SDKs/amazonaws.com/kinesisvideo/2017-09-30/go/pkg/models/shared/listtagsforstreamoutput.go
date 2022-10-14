@@ -1,6 +1,6 @@
 package shared
 
 type ListTagsForStreamOutput struct {
-	NextToken *string           `json:"NextToken"`
-	Tags      map[string]string `json:"Tags"`
+	NextToken *string           `json:"NextToken,omitempty"`
+	Tags      map[string]string `json:"Tags,omitempty"`
 }

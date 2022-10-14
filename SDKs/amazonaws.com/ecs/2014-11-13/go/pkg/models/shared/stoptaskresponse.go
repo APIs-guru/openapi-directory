@@ -1,5 +1,5 @@
 package shared
 
 type StopTaskResponse struct {
-	Task *Task `json:"task"`
+	Task *Task `json:"task,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type ExportTask struct {
-	Destination       *string                  `json:"destination"`
-	DestinationPrefix *string                  `json:"destinationPrefix"`
-	ExecutionInfo     *ExportTaskExecutionInfo `json:"executionInfo"`
-	From              *int64                   `json:"from"`
-	LogGroupName      *string                  `json:"logGroupName"`
-	Status            *ExportTaskStatus        `json:"status"`
-	TaskID            *string                  `json:"taskId"`
-	TaskName          *string                  `json:"taskName"`
-	To                *int64                   `json:"to"`
+	Destination       *string                  `json:"destination,omitempty"`
+	DestinationPrefix *string                  `json:"destinationPrefix,omitempty"`
+	ExecutionInfo     *ExportTaskExecutionInfo `json:"executionInfo,omitempty"`
+	From              *int64                   `json:"from,omitempty"`
+	LogGroupName      *string                  `json:"logGroupName,omitempty"`
+	Status            *ExportTaskStatus        `json:"status,omitempty"`
+	TaskID            *string                  `json:"taskId,omitempty"`
+	TaskName          *string                  `json:"taskName,omitempty"`
+	To                *int64                   `json:"to,omitempty"`
 }

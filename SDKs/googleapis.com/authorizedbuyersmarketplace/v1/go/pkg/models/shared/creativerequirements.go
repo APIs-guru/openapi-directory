@@ -43,10 +43,10 @@ const (
 )
 
 type CreativeRequirements struct {
-	CreativeFormat                 *CreativeRequirementsCreativeFormatEnum                 `json:"creativeFormat"`
-	CreativePreApprovalPolicy      *CreativeRequirementsCreativePreApprovalPolicyEnum      `json:"creativePreApprovalPolicy"`
-	CreativeSafeFrameCompatibility *CreativeRequirementsCreativeSafeFrameCompatibilityEnum `json:"creativeSafeFrameCompatibility"`
-	MaxAdDurationMs                *string                                                 `json:"maxAdDurationMs"`
-	ProgrammaticCreativeSource     *CreativeRequirementsProgrammaticCreativeSourceEnum     `json:"programmaticCreativeSource"`
-	SkippableAdType                *CreativeRequirementsSkippableAdTypeEnum                `json:"skippableAdType"`
+	CreativeFormat                 *CreativeRequirementsCreativeFormatEnum                 `json:"creativeFormat,omitempty"`
+	CreativePreApprovalPolicy      *CreativeRequirementsCreativePreApprovalPolicyEnum      `json:"creativePreApprovalPolicy,omitempty"`
+	CreativeSafeFrameCompatibility *CreativeRequirementsCreativeSafeFrameCompatibilityEnum `json:"creativeSafeFrameCompatibility,omitempty"`
+	MaxAdDurationMs                *string                                                 `json:"maxAdDurationMs,omitempty"`
+	ProgrammaticCreativeSource     *CreativeRequirementsProgrammaticCreativeSourceEnum     `json:"programmaticCreativeSource,omitempty"`
+	SkippableAdType                *CreativeRequirementsSkippableAdTypeEnum                `json:"skippableAdType,omitempty"`
 }

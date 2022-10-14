@@ -1,5 +1,5 @@
 package shared
 
 type DescribeServiceIntegrationResponse struct {
-	ServiceIntegration *ServiceIntegrationConfig `json:"ServiceIntegration"`
+	ServiceIntegration *ServiceIntegrationConfig `json:"ServiceIntegration,omitempty"`
 }

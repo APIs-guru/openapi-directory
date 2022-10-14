@@ -9,5 +9,5 @@ const (
 )
 
 type DataLeakPreventionChange struct {
-	Type *DataLeakPreventionChangeTypeEnum `json:"type"`
+	Type *DataLeakPreventionChangeTypeEnum `json:"type,omitempty"`
 }

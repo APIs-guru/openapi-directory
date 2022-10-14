@@ -1,5 +1,5 @@
 package shared
 
 type DataLakePrincipal struct {
-	DataLakePrincipalIdentifier *string `json:"DataLakePrincipalIdentifier"`
+	DataLakePrincipalIdentifier *string `json:"DataLakePrincipalIdentifier,omitempty"`
 }

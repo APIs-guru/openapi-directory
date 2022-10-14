@@ -9,8 +9,8 @@ const (
 )
 
 type IntegerPropertyOptions struct {
-	MaximumValue    *string                                   `json:"maximumValue"`
-	MinimumValue    *string                                   `json:"minimumValue"`
-	OperatorOptions *IntegerOperatorOptions                   `json:"operatorOptions"`
-	OrderedRanking  *IntegerPropertyOptionsOrderedRankingEnum `json:"orderedRanking"`
+	MaximumValue    *string                                   `json:"maximumValue,omitempty"`
+	MinimumValue    *string                                   `json:"minimumValue,omitempty"`
+	OperatorOptions *IntegerOperatorOptions                   `json:"operatorOptions,omitempty"`
+	OrderedRanking  *IntegerPropertyOptionsOrderedRankingEnum `json:"orderedRanking,omitempty"`
 }

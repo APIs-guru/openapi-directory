@@ -19,9 +19,9 @@ const (
 )
 
 type Province struct {
-	ID          *ProvinceIDEnum `json:"id"`
-	NameEn      *string         `json:"nameEn"`
-	NameFr      *string         `json:"nameFr"`
-	NextHoliday *Holiday        `json:"nextHoliday"`
-	Provinces   []Holiday       `json:"provinces"`
+	ID          *ProvinceIDEnum `json:"id,omitempty"`
+	NameEn      *string         `json:"nameEn,omitempty"`
+	NameFr      *string         `json:"nameFr,omitempty"`
+	NextHoliday *Holiday        `json:"nextHoliday,omitempty"`
+	Provinces   []Holiday       `json:"provinces,omitempty"`
 }

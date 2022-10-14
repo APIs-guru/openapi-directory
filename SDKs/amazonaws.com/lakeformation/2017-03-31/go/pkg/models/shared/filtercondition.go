@@ -1,7 +1,7 @@
 package shared
 
 type FilterCondition struct {
-	ComparisonOperator *ComparisonOperatorEnum `json:"ComparisonOperator"`
-	Field              *FieldNameStringEnum    `json:"Field"`
-	StringValueList    []string                `json:"StringValueList"`
+	ComparisonOperator *ComparisonOperatorEnum `json:"ComparisonOperator,omitempty"`
+	Field              *FieldNameStringEnum    `json:"Field,omitempty"`
+	StringValueList    []string                `json:"StringValueList,omitempty"`
 }

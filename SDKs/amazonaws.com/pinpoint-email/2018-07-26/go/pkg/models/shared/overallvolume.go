@@ -1,7 +1,7 @@
 package shared
 
 type OverallVolume struct {
-	DomainIspPlacements []DomainIspPlacement `json:"DomainIspPlacements"`
-	ReadRatePercent     *float64             `json:"ReadRatePercent"`
-	VolumeStatistics    *VolumeStatistics    `json:"VolumeStatistics"`
+	DomainIspPlacements []DomainIspPlacement `json:"DomainIspPlacements,omitempty"`
+	ReadRatePercent     *float64             `json:"ReadRatePercent,omitempty"`
+	VolumeStatistics    *VolumeStatistics    `json:"VolumeStatistics,omitempty"`
 }

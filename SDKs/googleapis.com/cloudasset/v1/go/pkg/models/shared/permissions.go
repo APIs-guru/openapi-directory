@@ -1,5 +1,5 @@
 package shared
 
 type Permissions struct {
-	Permissions []string `json:"permissions"`
+	Permissions []string `json:"permissions,omitempty"`
 }

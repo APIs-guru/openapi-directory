@@ -1,6 +1,6 @@
 package shared
 
 type DescribeClustersResponse struct {
-	Clusters  []Cluster `json:"Clusters"`
-	NextToken *string   `json:"NextToken"`
+	Clusters  []Cluster `json:"Clusters,omitempty"`
+	NextToken *string   `json:"NextToken,omitempty"`
 }

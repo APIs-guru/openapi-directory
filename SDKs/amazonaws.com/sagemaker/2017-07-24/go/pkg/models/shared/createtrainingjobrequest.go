@@ -2,25 +2,25 @@ package shared
 
 type CreateTrainingJobRequest struct {
 	AlgorithmSpecification                AlgorithmSpecification      `json:"AlgorithmSpecification"`
-	CheckpointConfig                      *CheckpointConfig           `json:"CheckpointConfig"`
-	DebugHookConfig                       *DebugHookConfig            `json:"DebugHookConfig"`
-	DebugRuleConfigurations               []DebugRuleConfiguration    `json:"DebugRuleConfigurations"`
-	EnableInterContainerTrafficEncryption *bool                       `json:"EnableInterContainerTrafficEncryption"`
-	EnableManagedSpotTraining             *bool                       `json:"EnableManagedSpotTraining"`
-	EnableNetworkIsolation                *bool                       `json:"EnableNetworkIsolation"`
-	Environment                           map[string]string           `json:"Environment"`
-	ExperimentConfig                      *ExperimentConfig           `json:"ExperimentConfig"`
-	HyperParameters                       map[string]string           `json:"HyperParameters"`
-	InputDataConfig                       []Channel                   `json:"InputDataConfig"`
+	CheckpointConfig                      *CheckpointConfig           `json:"CheckpointConfig,omitempty"`
+	DebugHookConfig                       *DebugHookConfig            `json:"DebugHookConfig,omitempty"`
+	DebugRuleConfigurations               []DebugRuleConfiguration    `json:"DebugRuleConfigurations,omitempty"`
+	EnableInterContainerTrafficEncryption *bool                       `json:"EnableInterContainerTrafficEncryption,omitempty"`
+	EnableManagedSpotTraining             *bool                       `json:"EnableManagedSpotTraining,omitempty"`
+	EnableNetworkIsolation                *bool                       `json:"EnableNetworkIsolation,omitempty"`
+	Environment                           map[string]string           `json:"Environment,omitempty"`
+	ExperimentConfig                      *ExperimentConfig           `json:"ExperimentConfig,omitempty"`
+	HyperParameters                       map[string]string           `json:"HyperParameters,omitempty"`
+	InputDataConfig                       []Channel                   `json:"InputDataConfig,omitempty"`
 	OutputDataConfig                      OutputDataConfig            `json:"OutputDataConfig"`
-	ProfilerConfig                        *ProfilerConfig             `json:"ProfilerConfig"`
-	ProfilerRuleConfigurations            []ProfilerRuleConfiguration `json:"ProfilerRuleConfigurations"`
+	ProfilerConfig                        *ProfilerConfig             `json:"ProfilerConfig,omitempty"`
+	ProfilerRuleConfigurations            []ProfilerRuleConfiguration `json:"ProfilerRuleConfigurations,omitempty"`
 	ResourceConfig                        ResourceConfig              `json:"ResourceConfig"`
-	RetryStrategy                         *RetryStrategy              `json:"RetryStrategy"`
+	RetryStrategy                         *RetryStrategy              `json:"RetryStrategy,omitempty"`
 	RoleArn                               string                      `json:"RoleArn"`
 	StoppingCondition                     StoppingCondition           `json:"StoppingCondition"`
-	Tags                                  []Tag                       `json:"Tags"`
-	TensorBoardOutputConfig               *TensorBoardOutputConfig    `json:"TensorBoardOutputConfig"`
+	Tags                                  []Tag                       `json:"Tags,omitempty"`
+	TensorBoardOutputConfig               *TensorBoardOutputConfig    `json:"TensorBoardOutputConfig,omitempty"`
 	TrainingJobName                       string                      `json:"TrainingJobName"`
-	VpcConfig                             *VpcConfig                  `json:"VpcConfig"`
+	VpcConfig                             *VpcConfig                  `json:"VpcConfig,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type TrafficTarget struct {
-	ConfigurationName *string `json:"configurationName"`
-	LatestRevision    *bool   `json:"latestRevision"`
-	Percent           *int32  `json:"percent"`
-	RevisionName      *string `json:"revisionName"`
-	Tag               *string `json:"tag"`
-	URL               *string `json:"url"`
+	ConfigurationName *string `json:"configurationName,omitempty"`
+	LatestRevision    *bool   `json:"latestRevision,omitempty"`
+	Percent           *int32  `json:"percent,omitempty"`
+	RevisionName      *string `json:"revisionName,omitempty"`
+	Tag               *string `json:"tag,omitempty"`
+	URL               *string `json:"url,omitempty"`
 }

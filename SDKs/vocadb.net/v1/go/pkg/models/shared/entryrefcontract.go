@@ -18,6 +18,6 @@ const (
 )
 
 type EntryRefContract struct {
-	EntryType *EntryRefContractEntryTypeEnum `json:"entryType"`
-	ID        *int32                         `json:"id"`
+	EntryType *EntryRefContractEntryTypeEnum `json:"entryType,omitempty"`
+	ID        *int32                         `json:"id,omitempty"`
 }

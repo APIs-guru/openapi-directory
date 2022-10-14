@@ -19,9 +19,9 @@ type UpdateAttributeGroupHeaders struct {
 }
 
 type UpdateAttributeGroupRequestBody struct {
-	Attributes  *string `json:"attributes"`
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
+	Attributes  *string `json:"attributes,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 type UpdateAttributeGroupRequest struct {

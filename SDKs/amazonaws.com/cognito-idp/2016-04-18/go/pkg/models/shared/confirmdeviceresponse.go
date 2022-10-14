@@ -1,5 +1,5 @@
 package shared
 
 type ConfirmDeviceResponse struct {
-	UserConfirmationNecessary *bool `json:"UserConfirmationNecessary"`
+	UserConfirmationNecessary *bool `json:"UserConfirmationNecessary,omitempty"`
 }

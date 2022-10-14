@@ -7,8 +7,8 @@ const (
 )
 
 type FourHundredAndSixNotAcceptable struct {
-	Code       *FourHundredAndSixNotAcceptableCodeEnum `json:"code"`
-	Message    *string                                 `json:"message"`
-	Timestamp  *string                                 `json:"timestamp"`
-	TrackingID *string                                 `json:"trackingId"`
+	Code       *FourHundredAndSixNotAcceptableCodeEnum `json:"code,omitempty"`
+	Message    *string                                 `json:"message,omitempty"`
+	Timestamp  *string                                 `json:"timestamp,omitempty"`
+	TrackingID *string                                 `json:"trackingId,omitempty"`
 }

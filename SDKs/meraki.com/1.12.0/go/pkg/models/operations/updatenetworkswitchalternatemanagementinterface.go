@@ -18,10 +18,10 @@ type UpdateNetworkSwitchAlternateManagementInterfaceRequestBodySwitches struct {
 }
 
 type UpdateNetworkSwitchAlternateManagementInterfaceRequestBody struct {
-	Enabled   *bool                                                                     `json:"enabled"`
-	Protocols []UpdateNetworkSwitchAlternateManagementInterfaceRequestBodyProtocolsEnum `json:"protocols"`
-	Switches  []UpdateNetworkSwitchAlternateManagementInterfaceRequestBodySwitches      `json:"switches"`
-	VlanID    *int64                                                                    `json:"vlanId"`
+	Enabled   *bool                                                                     `json:"enabled,omitempty"`
+	Protocols []UpdateNetworkSwitchAlternateManagementInterfaceRequestBodyProtocolsEnum `json:"protocols,omitempty"`
+	Switches  []UpdateNetworkSwitchAlternateManagementInterfaceRequestBodySwitches      `json:"switches,omitempty"`
+	VlanID    *int64                                                                    `json:"vlanId,omitempty"`
 }
 
 type UpdateNetworkSwitchAlternateManagementInterfaceRequest struct {

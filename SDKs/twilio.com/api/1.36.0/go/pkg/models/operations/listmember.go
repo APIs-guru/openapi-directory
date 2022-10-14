@@ -29,15 +29,15 @@ type ListMemberRequest struct {
 }
 
 type ListMember200ApplicationJSONListMemberResponse struct {
-	End             *int64                              `json:"end"`
-	FirstPageURI    *string                             `json:"first_page_uri"`
-	NextPageURI     *string                             `json:"next_page_uri"`
-	Page            *int64                              `json:"page"`
-	PageSize        *int64                              `json:"page_size"`
-	PreviousPageURI *string                             `json:"previous_page_uri"`
-	QueueMembers    []shared.APIV2010AccountQueueMember `json:"queue_members"`
-	Start           *int64                              `json:"start"`
-	URI             *string                             `json:"uri"`
+	End             *int64                              `json:"end,omitempty"`
+	FirstPageURI    *string                             `json:"first_page_uri,omitempty"`
+	NextPageURI     *string                             `json:"next_page_uri,omitempty"`
+	Page            *int64                              `json:"page,omitempty"`
+	PageSize        *int64                              `json:"page_size,omitempty"`
+	PreviousPageURI *string                             `json:"previous_page_uri,omitempty"`
+	QueueMembers    []shared.APIV2010AccountQueueMember `json:"queue_members,omitempty"`
+	Start           *int64                              `json:"start,omitempty"`
+	URI             *string                             `json:"uri,omitempty"`
 }
 
 type ListMemberResponse struct {

@@ -1,11 +1,11 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilter struct {
-	AtAnyPointInTime *bool                                                                    `json:"atAnyPointInTime"`
-	BetweenFilter    *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterBetweenFilter `json:"betweenFilter"`
-	FieldName        *string                                                                  `json:"fieldName"`
-	InAnyNDayPeriod  *int32                                                                   `json:"inAnyNDayPeriod"`
-	InListFilter     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterInListFilter  `json:"inListFilter"`
-	NumericFilter    *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter `json:"numericFilter"`
-	StringFilter     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilter  `json:"stringFilter"`
+	AtAnyPointInTime *bool                                                                    `json:"atAnyPointInTime,omitempty"`
+	BetweenFilter    *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterBetweenFilter `json:"betweenFilter,omitempty"`
+	FieldName        *string                                                                  `json:"fieldName,omitempty"`
+	InAnyNDayPeriod  *int32                                                                   `json:"inAnyNDayPeriod,omitempty"`
+	InListFilter     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterInListFilter  `json:"inListFilter,omitempty"`
+	NumericFilter    *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter `json:"numericFilter,omitempty"`
+	StringFilter     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilter  `json:"stringFilter,omitempty"`
 }

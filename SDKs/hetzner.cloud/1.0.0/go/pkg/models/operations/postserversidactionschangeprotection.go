@@ -5,8 +5,8 @@ type PostServersIDActionsChangeProtectionPathParams struct {
 }
 
 type PostServersIDActionsChangeProtectionRequestBody struct {
-	Delete  *bool `json:"delete"`
-	Rebuild *bool `json:"rebuild"`
+	Delete  *bool `json:"delete,omitempty"`
+	Rebuild *bool `json:"rebuild,omitempty"`
 }
 
 type PostServersIDActionsChangeProtectionRequest struct {

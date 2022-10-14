@@ -15,8 +15,8 @@ const (
 )
 
 type BacerRequestBody struct {
-	CertificateParameters *BacerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *BacerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                BacerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Bacer400ApplicationJSON struct {
-	Error            *Bacer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Bacer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Bacer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Bacer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Bacer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Bacer401ApplicationJSON struct {
-	Error            *Bacer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Bacer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Bacer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Bacer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Bacer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Bacer404ApplicationJSON struct {
-	Error            *Bacer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Bacer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Bacer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Bacer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Bacer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Bacer500ApplicationJSON struct {
-	Error            *Bacer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Bacer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Bacer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Bacer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Bacer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Bacer502ApplicationJSON struct {
-	Error            *Bacer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Bacer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Bacer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Bacer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Bacer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Bacer503ApplicationJSON struct {
-	Error            *Bacer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Bacer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Bacer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Bacer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Bacer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Bacer504ApplicationJSON struct {
-	Error            *Bacer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Bacer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Bacer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Bacer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type BacerResponse struct {

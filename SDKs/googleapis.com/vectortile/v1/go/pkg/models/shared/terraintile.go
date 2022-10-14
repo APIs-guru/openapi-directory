@@ -1,8 +1,8 @@
 package shared
 
 type TerrainTile struct {
-	Coordinates      *TileCoordinates               `json:"coordinates"`
-	FirstDerivative  *FirstDerivativeElevationGrid  `json:"firstDerivative"`
-	Name             *string                        `json:"name"`
-	SecondDerivative *SecondDerivativeElevationGrid `json:"secondDerivative"`
+	Coordinates      *TileCoordinates               `json:"coordinates,omitempty"`
+	FirstDerivative  *FirstDerivativeElevationGrid  `json:"firstDerivative,omitempty"`
+	Name             *string                        `json:"name,omitempty"`
+	SecondDerivative *SecondDerivativeElevationGrid `json:"secondDerivative,omitempty"`
 }

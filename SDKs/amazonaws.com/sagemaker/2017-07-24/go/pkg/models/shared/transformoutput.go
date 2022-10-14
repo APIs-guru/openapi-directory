@@ -1,8 +1,8 @@
 package shared
 
 type TransformOutput struct {
-	Accept       *string           `json:"Accept"`
-	AssembleWith *AssemblyTypeEnum `json:"AssembleWith"`
-	KmsKeyID     *string           `json:"KmsKeyId"`
+	Accept       *string           `json:"Accept,omitempty"`
+	AssembleWith *AssemblyTypeEnum `json:"AssembleWith,omitempty"`
+	KmsKeyID     *string           `json:"KmsKeyId,omitempty"`
 	S3OutputPath string            `json:"S3OutputPath"`
 }

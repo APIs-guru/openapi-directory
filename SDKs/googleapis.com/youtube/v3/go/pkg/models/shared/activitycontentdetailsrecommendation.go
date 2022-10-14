@@ -10,7 +10,7 @@ const (
 )
 
 type ActivityContentDetailsRecommendation struct {
-	Reason         *ActivityContentDetailsRecommendationReasonEnum `json:"reason"`
-	ResourceID     *ResourceID                                     `json:"resourceId"`
-	SeedResourceID *ResourceID                                     `json:"seedResourceId"`
+	Reason         *ActivityContentDetailsRecommendationReasonEnum `json:"reason,omitempty"`
+	ResourceID     *ResourceID                                     `json:"resourceId,omitempty"`
+	SeedResourceID *ResourceID                                     `json:"seedResourceId,omitempty"`
 }

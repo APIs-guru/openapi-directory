@@ -5,12 +5,12 @@ import (
 )
 
 type AuthEventType struct {
-	ChallengeResponses []ChallengeResponseType `json:"ChallengeResponses"`
-	CreationDate       *time.Time              `json:"CreationDate"`
-	EventContextData   *EventContextDataType   `json:"EventContextData"`
-	EventFeedback      *EventFeedbackType      `json:"EventFeedback"`
-	EventID            *string                 `json:"EventId"`
-	EventResponse      *EventResponseTypeEnum  `json:"EventResponse"`
-	EventRisk          *EventRiskType          `json:"EventRisk"`
-	EventType          *EventTypeEnum          `json:"EventType"`
+	ChallengeResponses []ChallengeResponseType `json:"ChallengeResponses,omitempty"`
+	CreationDate       *time.Time              `json:"CreationDate,omitempty"`
+	EventContextData   *EventContextDataType   `json:"EventContextData,omitempty"`
+	EventFeedback      *EventFeedbackType      `json:"EventFeedback,omitempty"`
+	EventID            *string                 `json:"EventId,omitempty"`
+	EventResponse      *EventResponseTypeEnum  `json:"EventResponse,omitempty"`
+	EventRisk          *EventRiskType          `json:"EventRisk,omitempty"`
+	EventType          *EventTypeEnum          `json:"EventType,omitempty"`
 }

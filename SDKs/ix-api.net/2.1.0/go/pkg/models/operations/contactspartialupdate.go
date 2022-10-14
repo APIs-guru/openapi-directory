@@ -20,10 +20,10 @@ const (
 )
 
 type ContactsPartialUpdate400ApplicationJSON struct {
-	Detail   *string                                         `json:"detail"`
-	Instance *string                                         `json:"instance"`
-	Status   *interface{}                                    `json:"status"`
-	Title    *interface{}                                    `json:"title"`
+	Detail   *string                                         `json:"detail,omitempty"`
+	Instance *string                                         `json:"instance,omitempty"`
+	Status   *interface{}                                    `json:"status,omitempty"`
+	Title    *interface{}                                    `json:"title,omitempty"`
 	Type     ContactsPartialUpdate400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -35,10 +35,10 @@ const (
 )
 
 type ContactsPartialUpdate401ApplicationJSON struct {
-	Detail   *string                                         `json:"detail"`
-	Instance *string                                         `json:"instance"`
-	Status   *interface{}                                    `json:"status"`
-	Title    *interface{}                                    `json:"title"`
+	Detail   *string                                         `json:"detail,omitempty"`
+	Instance *string                                         `json:"instance,omitempty"`
+	Status   *interface{}                                    `json:"status,omitempty"`
+	Title    *interface{}                                    `json:"title,omitempty"`
 	Type     ContactsPartialUpdate401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -49,10 +49,10 @@ const (
 )
 
 type ContactsPartialUpdate403ApplicationJSON struct {
-	Detail   *string                                         `json:"detail"`
-	Instance *string                                         `json:"instance"`
-	Status   *interface{}                                    `json:"status"`
-	Title    *interface{}                                    `json:"title"`
+	Detail   *string                                         `json:"detail,omitempty"`
+	Instance *string                                         `json:"instance,omitempty"`
+	Status   *interface{}                                    `json:"status,omitempty"`
+	Title    *interface{}                                    `json:"title,omitempty"`
 	Type     ContactsPartialUpdate403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -63,10 +63,10 @@ const (
 )
 
 type ContactsPartialUpdate404ApplicationJSON struct {
-	Detail   *string                                         `json:"detail"`
-	Instance *string                                         `json:"instance"`
-	Status   *interface{}                                    `json:"status"`
-	Title    *interface{}                                    `json:"title"`
+	Detail   *string                                         `json:"detail,omitempty"`
+	Instance *string                                         `json:"instance,omitempty"`
+	Status   *interface{}                                    `json:"status,omitempty"`
+	Title    *interface{}                                    `json:"title,omitempty"`
 	Type     ContactsPartialUpdate404ApplicationJSONTypeEnum `json:"type"`
 }
 

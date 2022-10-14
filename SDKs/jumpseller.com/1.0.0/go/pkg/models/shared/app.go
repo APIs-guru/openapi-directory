@@ -1,5 +1,5 @@
 package shared
 
 type App struct {
-	Apps []AppFields `json:"apps"`
+	Apps []AppFields `json:"apps,omitempty"`
 }

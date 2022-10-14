@@ -5,13 +5,13 @@ import (
 )
 
 type ReceiptRecognitionResult struct {
-	AddressString   *string           `json:"AddressString"`
-	BusinessName    *string           `json:"BusinessName"`
-	BusinessWebsite *string           `json:"BusinessWebsite"`
-	PhoneNumber     *string           `json:"PhoneNumber"`
-	ReceiptItems    []ReceiptLineItem `json:"ReceiptItems"`
-	ReceiptSubTotal *float64          `json:"ReceiptSubTotal"`
-	ReceiptTotal    *float64          `json:"ReceiptTotal"`
-	Successful      *bool             `json:"Successful"`
-	Timestamp       *time.Time        `json:"Timestamp"`
+	AddressString   *string           `json:"AddressString,omitempty"`
+	BusinessName    *string           `json:"BusinessName,omitempty"`
+	BusinessWebsite *string           `json:"BusinessWebsite,omitempty"`
+	PhoneNumber     *string           `json:"PhoneNumber,omitempty"`
+	ReceiptItems    []ReceiptLineItem `json:"ReceiptItems,omitempty"`
+	ReceiptSubTotal *float64          `json:"ReceiptSubTotal,omitempty"`
+	ReceiptTotal    *float64          `json:"ReceiptTotal,omitempty"`
+	Successful      *bool             `json:"Successful,omitempty"`
+	Timestamp       *time.Time        `json:"Timestamp,omitempty"`
 }

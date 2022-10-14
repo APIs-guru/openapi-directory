@@ -1,10 +1,10 @@
 package shared
 
 type GooglePlayDeveloperReportingV1alpha1QueryStuckBackgroundWakelockRateMetricSetRequest struct {
-	Dimensions   []string                                          `json:"dimensions"`
-	Filter       *string                                           `json:"filter"`
-	Metrics      []string                                          `json:"metrics"`
-	PageSize     *int32                                            `json:"pageSize"`
-	PageToken    *string                                           `json:"pageToken"`
-	TimelineSpec *GooglePlayDeveloperReportingV1alpha1TimelineSpec `json:"timelineSpec"`
+	Dimensions   []string                                          `json:"dimensions,omitempty"`
+	Filter       *string                                           `json:"filter,omitempty"`
+	Metrics      []string                                          `json:"metrics,omitempty"`
+	PageSize     *int32                                            `json:"pageSize,omitempty"`
+	PageToken    *string                                           `json:"pageToken,omitempty"`
+	TimelineSpec *GooglePlayDeveloperReportingV1alpha1TimelineSpec `json:"timelineSpec,omitempty"`
 }

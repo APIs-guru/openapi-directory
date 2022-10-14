@@ -1,9 +1,9 @@
 package shared
 
 type DiscoverInputSchemaRequest struct {
-	InputProcessingConfiguration       *InputProcessingConfiguration       `json:"InputProcessingConfiguration"`
-	InputStartingPositionConfiguration *InputStartingPositionConfiguration `json:"InputStartingPositionConfiguration"`
-	ResourceArn                        *string                             `json:"ResourceARN"`
-	RoleArn                            *string                             `json:"RoleARN"`
-	S3Configuration                    *S3Configuration                    `json:"S3Configuration"`
+	InputProcessingConfiguration       *InputProcessingConfiguration       `json:"InputProcessingConfiguration,omitempty"`
+	InputStartingPositionConfiguration *InputStartingPositionConfiguration `json:"InputStartingPositionConfiguration,omitempty"`
+	ResourceArn                        *string                             `json:"ResourceARN,omitempty"`
+	RoleArn                            *string                             `json:"RoleARN,omitempty"`
+	S3Configuration                    *S3Configuration                    `json:"S3Configuration,omitempty"`
 }

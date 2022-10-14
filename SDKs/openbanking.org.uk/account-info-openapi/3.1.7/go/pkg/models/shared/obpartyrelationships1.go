@@ -6,5 +6,5 @@ type ObPartyRelationships1Account struct {
 }
 
 type ObPartyRelationships1 struct {
-	Account *ObPartyRelationships1Account `json:"Account"`
+	Account *ObPartyRelationships1Account `json:"Account,omitempty"`
 }

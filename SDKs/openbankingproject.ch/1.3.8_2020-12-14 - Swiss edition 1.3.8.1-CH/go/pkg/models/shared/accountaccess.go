@@ -22,12 +22,12 @@ const (
 )
 
 type AccountAccess struct {
-	Accounts                     []AccountReference16Ch                         `json:"accounts"`
-	AdditionalInformation        *AdditionalInformationAccess                   `json:"additionalInformation"`
-	AllPsd2                      *AccountAccessAllPsd2Enum                      `json:"allPsd2"`
-	AvailableAccounts            *AccountAccessAvailableAccountsEnum            `json:"availableAccounts"`
-	AvailableAccountsWithBalance *AccountAccessAvailableAccountsWithBalanceEnum `json:"availableAccountsWithBalance"`
-	Balances                     []AccountReference16Ch                         `json:"balances"`
-	RestrictedTo                 []string                                       `json:"restrictedTo"`
-	Transactions                 []AccountReference16Ch                         `json:"transactions"`
+	Accounts                     []AccountReference16Ch                         `json:"accounts,omitempty"`
+	AdditionalInformation        *AdditionalInformationAccess                   `json:"additionalInformation,omitempty"`
+	AllPsd2                      *AccountAccessAllPsd2Enum                      `json:"allPsd2,omitempty"`
+	AvailableAccounts            *AccountAccessAvailableAccountsEnum            `json:"availableAccounts,omitempty"`
+	AvailableAccountsWithBalance *AccountAccessAvailableAccountsWithBalanceEnum `json:"availableAccountsWithBalance,omitempty"`
+	Balances                     []AccountReference16Ch                         `json:"balances,omitempty"`
+	RestrictedTo                 []string                                       `json:"restrictedTo,omitempty"`
+	Transactions                 []AccountReference16Ch                         `json:"transactions,omitempty"`
 }

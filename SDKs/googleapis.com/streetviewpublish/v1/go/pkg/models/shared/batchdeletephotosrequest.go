@@ -1,5 +1,5 @@
 package shared
 
 type BatchDeletePhotosRequest struct {
-	PhotoIds []string `json:"photoIds"`
+	PhotoIds []string `json:"photoIds,omitempty"`
 }

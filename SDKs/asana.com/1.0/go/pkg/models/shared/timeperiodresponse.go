@@ -13,10 +13,10 @@ const (
 )
 
 type TimePeriodResponse struct {
-	EndOn        *string                       `json:"end_on"`
-	Gid          *string                       `json:"gid"`
-	Parent       *TimePeriodCompact            `json:"parent"`
-	Period       *TimePeriodResponsePeriodEnum `json:"period"`
-	ResourceType *string                       `json:"resource_type"`
-	StartOn      *string                       `json:"start_on"`
+	EndOn        *string                       `json:"end_on,omitempty"`
+	Gid          *string                       `json:"gid,omitempty"`
+	Parent       *TimePeriodCompact            `json:"parent,omitempty"`
+	Period       *TimePeriodResponsePeriodEnum `json:"period,omitempty"`
+	ResourceType *string                       `json:"resource_type,omitempty"`
+	StartOn      *string                       `json:"start_on,omitempty"`
 }

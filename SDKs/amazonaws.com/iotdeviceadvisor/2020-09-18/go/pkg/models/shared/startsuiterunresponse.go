@@ -5,7 +5,7 @@ import (
 )
 
 type StartSuiteRunResponse struct {
-	CreatedAt   *time.Time `json:"createdAt"`
-	SuiteRunArn *string    `json:"suiteRunArn"`
-	SuiteRunID  *string    `json:"suiteRunId"`
+	CreatedAt   *time.Time `json:"createdAt,omitempty"`
+	SuiteRunArn *string    `json:"suiteRunArn,omitempty"`
+	SuiteRunID  *string    `json:"suiteRunId,omitempty"`
 }

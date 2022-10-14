@@ -15,7 +15,7 @@ type CreateSampleFindingsHeaders struct {
 }
 
 type CreateSampleFindingsRequestBody struct {
-	FindingTypes []shared.FindingTypeEnum `json:"findingTypes"`
+	FindingTypes []shared.FindingTypeEnum `json:"findingTypes,omitempty"`
 }
 
 type CreateSampleFindingsRequest struct {

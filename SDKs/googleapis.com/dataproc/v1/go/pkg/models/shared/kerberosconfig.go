@@ -1,19 +1,19 @@
 package shared
 
 type KerberosConfig struct {
-	CrossRealmTrustAdminServer       *string `json:"crossRealmTrustAdminServer"`
-	CrossRealmTrustKdc               *string `json:"crossRealmTrustKdc"`
-	CrossRealmTrustRealm             *string `json:"crossRealmTrustRealm"`
-	CrossRealmTrustSharedPasswordURI *string `json:"crossRealmTrustSharedPasswordUri"`
-	EnableKerberos                   *bool   `json:"enableKerberos"`
-	KdcDbKeyURI                      *string `json:"kdcDbKeyUri"`
-	KeyPasswordURI                   *string `json:"keyPasswordUri"`
-	KeystorePasswordURI              *string `json:"keystorePasswordUri"`
-	KeystoreURI                      *string `json:"keystoreUri"`
-	KmsKeyURI                        *string `json:"kmsKeyUri"`
-	Realm                            *string `json:"realm"`
-	RootPrincipalPasswordURI         *string `json:"rootPrincipalPasswordUri"`
-	TgtLifetimeHours                 *int32  `json:"tgtLifetimeHours"`
-	TruststorePasswordURI            *string `json:"truststorePasswordUri"`
-	TruststoreURI                    *string `json:"truststoreUri"`
+	CrossRealmTrustAdminServer       *string `json:"crossRealmTrustAdminServer,omitempty"`
+	CrossRealmTrustKdc               *string `json:"crossRealmTrustKdc,omitempty"`
+	CrossRealmTrustRealm             *string `json:"crossRealmTrustRealm,omitempty"`
+	CrossRealmTrustSharedPasswordURI *string `json:"crossRealmTrustSharedPasswordUri,omitempty"`
+	EnableKerberos                   *bool   `json:"enableKerberos,omitempty"`
+	KdcDbKeyURI                      *string `json:"kdcDbKeyUri,omitempty"`
+	KeyPasswordURI                   *string `json:"keyPasswordUri,omitempty"`
+	KeystorePasswordURI              *string `json:"keystorePasswordUri,omitempty"`
+	KeystoreURI                      *string `json:"keystoreUri,omitempty"`
+	KmsKeyURI                        *string `json:"kmsKeyUri,omitempty"`
+	Realm                            *string `json:"realm,omitempty"`
+	RootPrincipalPasswordURI         *string `json:"rootPrincipalPasswordUri,omitempty"`
+	TgtLifetimeHours                 *int32  `json:"tgtLifetimeHours,omitempty"`
+	TruststorePasswordURI            *string `json:"truststorePasswordUri,omitempty"`
+	TruststoreURI                    *string `json:"truststoreUri,omitempty"`
 }

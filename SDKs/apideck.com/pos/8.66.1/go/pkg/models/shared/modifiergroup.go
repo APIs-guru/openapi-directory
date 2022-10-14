@@ -12,18 +12,18 @@ const (
 )
 
 type ModifierGroup struct {
-	AlternateName         *string                                                                                                                    `json:"alternate_name"`
-	CreatedAt             *time.Time                                                                                                                 `json:"created_at"`
-	CreatedBy             *string                                                                                                                    `json:"created_by"`
-	Deleted               *bool                                                                                                                      `json:"deleted"`
-	ID                    *string                                                                                                                    `json:"id"`
-	MaximumAllowed        *int64                                                                                                                     `json:"maximum_allowed"`
-	MinimumRequired       *int64                                                                                                                     `json:"minimum_required"`
-	Modifiers             []interface{}                                                                                                              `json:"modifiers"`
-	Name                  *string                                                                                                                    `json:"name"`
-	PresentAtAllLocations *bool                                                                                                                      `json:"present_at_all_locations"`
-	RowVersion            *string                                                                                                                    `json:"row_version"`
-	SelectionType         *ModifierGroupSelectionTypeIndicatesWhetherMultipleOptionsFromTheModifierGroupCanBeAppliedToASingleOrMultipleModifiersEnum `json:"selection_type"`
-	UpdatedAt             *time.Time                                                                                                                 `json:"updated_at"`
-	UpdatedBy             *string                                                                                                                    `json:"updated_by"`
+	AlternateName         *string                                                                                                                    `json:"alternate_name,omitempty"`
+	CreatedAt             *time.Time                                                                                                                 `json:"created_at,omitempty"`
+	CreatedBy             *string                                                                                                                    `json:"created_by,omitempty"`
+	Deleted               *bool                                                                                                                      `json:"deleted,omitempty"`
+	ID                    *string                                                                                                                    `json:"id,omitempty"`
+	MaximumAllowed        *int64                                                                                                                     `json:"maximum_allowed,omitempty"`
+	MinimumRequired       *int64                                                                                                                     `json:"minimum_required,omitempty"`
+	Modifiers             []interface{}                                                                                                              `json:"modifiers,omitempty"`
+	Name                  *string                                                                                                                    `json:"name,omitempty"`
+	PresentAtAllLocations *bool                                                                                                                      `json:"present_at_all_locations,omitempty"`
+	RowVersion            *string                                                                                                                    `json:"row_version,omitempty"`
+	SelectionType         *ModifierGroupSelectionTypeIndicatesWhetherMultipleOptionsFromTheModifierGroupCanBeAppliedToASingleOrMultipleModifiersEnum `json:"selection_type,omitempty"`
+	UpdatedAt             *time.Time                                                                                                                 `json:"updated_at,omitempty"`
+	UpdatedBy             *string                                                                                                                    `json:"updated_by,omitempty"`
 }

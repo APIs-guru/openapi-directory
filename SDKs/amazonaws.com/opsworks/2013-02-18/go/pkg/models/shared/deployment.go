@@ -1,16 +1,16 @@
 package shared
 
 type Deployment struct {
-	AppID        *string            `json:"AppId"`
-	Command      *DeploymentCommand `json:"Command"`
-	Comment      *string            `json:"Comment"`
-	CompletedAt  *string            `json:"CompletedAt"`
-	CreatedAt    *string            `json:"CreatedAt"`
-	CustomJSON   *string            `json:"CustomJson"`
-	DeploymentID *string            `json:"DeploymentId"`
-	Duration     *int64             `json:"Duration"`
-	IamUserArn   *string            `json:"IamUserArn"`
-	InstanceIds  []string           `json:"InstanceIds"`
-	StackID      *string            `json:"StackId"`
-	Status       *string            `json:"Status"`
+	AppID        *string            `json:"AppId,omitempty"`
+	Command      *DeploymentCommand `json:"Command,omitempty"`
+	Comment      *string            `json:"Comment,omitempty"`
+	CompletedAt  *string            `json:"CompletedAt,omitempty"`
+	CreatedAt    *string            `json:"CreatedAt,omitempty"`
+	CustomJSON   *string            `json:"CustomJson,omitempty"`
+	DeploymentID *string            `json:"DeploymentId,omitempty"`
+	Duration     *int64             `json:"Duration,omitempty"`
+	IamUserArn   *string            `json:"IamUserArn,omitempty"`
+	InstanceIds  []string           `json:"InstanceIds,omitempty"`
+	StackID      *string            `json:"StackId,omitempty"`
+	Status       *string            `json:"Status,omitempty"`
 }

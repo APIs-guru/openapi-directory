@@ -56,7 +56,7 @@ const (
 type CreateSoftwareUpdateJobRequestBody struct {
 	S3URLSignerRole              string                                                             `json:"S3UrlSignerRole"`
 	SoftwareToUpdate             CreateSoftwareUpdateJobRequestBodySoftwareToUpdateEnum             `json:"SoftwareToUpdate"`
-	UpdateAgentLogLevel          *CreateSoftwareUpdateJobRequestBodyUpdateAgentLogLevelEnum         `json:"UpdateAgentLogLevel"`
+	UpdateAgentLogLevel          *CreateSoftwareUpdateJobRequestBodyUpdateAgentLogLevelEnum         `json:"UpdateAgentLogLevel,omitempty"`
 	UpdateTargets                []string                                                           `json:"UpdateTargets"`
 	UpdateTargetsArchitecture    CreateSoftwareUpdateJobRequestBodyUpdateTargetsArchitectureEnum    `json:"UpdateTargetsArchitecture"`
 	UpdateTargetsOperatingSystem CreateSoftwareUpdateJobRequestBodyUpdateTargetsOperatingSystemEnum `json:"UpdateTargetsOperatingSystem"`

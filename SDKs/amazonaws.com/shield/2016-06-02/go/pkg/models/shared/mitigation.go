@@ -1,5 +1,5 @@
 package shared
 
 type Mitigation struct {
-	MitigationName *string `json:"MitigationName"`
+	MitigationName *string `json:"MitigationName,omitempty"`
 }

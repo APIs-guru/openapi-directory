@@ -1,6 +1,6 @@
 package shared
 
 type ListMembersResponse struct {
-	Members   []Member `json:"members"`
-	NextToken *string  `json:"nextToken"`
+	Members   []Member `json:"members,omitempty"`
+	NextToken *string  `json:"nextToken,omitempty"`
 }

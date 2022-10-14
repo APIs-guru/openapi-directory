@@ -1,5 +1,5 @@
 package shared
 
 type ColumnLayout struct {
-	Columns []Column `json:"columns"`
+	Columns []Column `json:"columns,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type CreateRobotApplicationVersionResponse struct {
-	Arn                *string             `json:"arn"`
-	Environment        *Environment        `json:"environment"`
-	LastUpdatedAt      *time.Time          `json:"lastUpdatedAt"`
-	Name               *string             `json:"name"`
-	RevisionID         *string             `json:"revisionId"`
-	RobotSoftwareSuite *RobotSoftwareSuite `json:"robotSoftwareSuite"`
-	Sources            []Source            `json:"sources"`
-	Version            *string             `json:"version"`
+	Arn                *string             `json:"arn,omitempty"`
+	Environment        *Environment        `json:"environment,omitempty"`
+	LastUpdatedAt      *time.Time          `json:"lastUpdatedAt,omitempty"`
+	Name               *string             `json:"name,omitempty"`
+	RevisionID         *string             `json:"revisionId,omitempty"`
+	RobotSoftwareSuite *RobotSoftwareSuite `json:"robotSoftwareSuite,omitempty"`
+	Sources            []Source            `json:"sources,omitempty"`
+	Version            *string             `json:"version,omitempty"`
 }

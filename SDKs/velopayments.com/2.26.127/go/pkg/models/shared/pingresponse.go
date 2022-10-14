@@ -1,6 +1,6 @@
 package shared
 
 type PingResponse struct {
-	ID        *string `json:"id"`
-	WebhookID *string `json:"webhookId"`
+	ID        *string `json:"id,omitempty"`
+	WebhookID *string `json:"webhookId,omitempty"`
 }

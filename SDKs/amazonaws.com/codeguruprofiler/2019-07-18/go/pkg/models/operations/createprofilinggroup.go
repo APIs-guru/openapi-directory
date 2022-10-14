@@ -19,7 +19,7 @@ type CreateProfilingGroupHeaders struct {
 }
 
 type CreateProfilingGroupRequestBodyAgentOrchestrationConfig struct {
-	ProfilingEnabled *bool `json:"profilingEnabled"`
+	ProfilingEnabled *bool `json:"profilingEnabled,omitempty"`
 }
 
 type CreateProfilingGroupRequestBodyComputePlatformEnum string
@@ -30,10 +30,10 @@ const (
 )
 
 type CreateProfilingGroupRequestBody struct {
-	AgentOrchestrationConfig *CreateProfilingGroupRequestBodyAgentOrchestrationConfig `json:"agentOrchestrationConfig"`
-	ComputePlatform          *CreateProfilingGroupRequestBodyComputePlatformEnum      `json:"computePlatform"`
+	AgentOrchestrationConfig *CreateProfilingGroupRequestBodyAgentOrchestrationConfig `json:"agentOrchestrationConfig,omitempty"`
+	ComputePlatform          *CreateProfilingGroupRequestBodyComputePlatformEnum      `json:"computePlatform,omitempty"`
 	ProfilingGroupName       string                                                   `json:"profilingGroupName"`
-	Tags                     map[string]string                                        `json:"tags"`
+	Tags                     map[string]string                                        `json:"tags,omitempty"`
 }
 
 type CreateProfilingGroupRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type GetFindingsPublicationConfigurationResponse struct {
-	SecurityHubConfiguration *SecurityHubConfiguration `json:"securityHubConfiguration"`
+	SecurityHubConfiguration *SecurityHubConfiguration `json:"securityHubConfiguration,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type Tag struct {
-	Key         *string `json:"Key"`
-	ResourceArn *string `json:"ResourceArn"`
-	Value       *string `json:"Value"`
+	Key         *string `json:"Key,omitempty"`
+	ResourceArn *string `json:"ResourceArn,omitempty"`
+	Value       *string `json:"Value,omitempty"`
 }

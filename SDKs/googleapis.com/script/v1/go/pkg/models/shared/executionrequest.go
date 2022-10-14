@@ -1,8 +1,8 @@
 package shared
 
 type ExecutionRequest struct {
-	DevMode      *bool         `json:"devMode"`
-	Function     *string       `json:"function"`
-	Parameters   []interface{} `json:"parameters"`
-	SessionState *string       `json:"sessionState"`
+	DevMode      *bool         `json:"devMode,omitempty"`
+	Function     *string       `json:"function,omitempty"`
+	Parameters   []interface{} `json:"parameters,omitempty"`
+	SessionState *string       `json:"sessionState,omitempty"`
 }

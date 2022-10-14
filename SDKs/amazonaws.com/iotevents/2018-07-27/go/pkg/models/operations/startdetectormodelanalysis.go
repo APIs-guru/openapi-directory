@@ -15,8 +15,8 @@ type StartDetectorModelAnalysisHeaders struct {
 }
 
 type StartDetectorModelAnalysisRequestBodyDetectorModelDefinition struct {
-	InitialStateName *string        `json:"initialStateName"`
-	States           []shared.State `json:"states"`
+	InitialStateName *string        `json:"initialStateName,omitempty"`
+	States           []shared.State `json:"states,omitempty"`
 }
 
 type StartDetectorModelAnalysisRequestBody struct {

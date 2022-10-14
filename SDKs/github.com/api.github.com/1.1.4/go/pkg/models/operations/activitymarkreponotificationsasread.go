@@ -6,7 +6,7 @@ type ActivityMarkRepoNotificationsAsReadPathParams struct {
 }
 
 type ActivityMarkRepoNotificationsAsReadRequestBody struct {
-	LastReadAt *string `json:"last_read_at"`
+	LastReadAt *string `json:"last_read_at,omitempty"`
 }
 
 type ActivityMarkRepoNotificationsAsReadRequest struct {

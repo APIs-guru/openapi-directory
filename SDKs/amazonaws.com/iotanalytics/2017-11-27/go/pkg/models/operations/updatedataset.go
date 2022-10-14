@@ -19,22 +19,22 @@ type UpdateDatasetHeaders struct {
 }
 
 type UpdateDatasetRequestBodyRetentionPeriod struct {
-	NumberOfDays *int64 `json:"numberOfDays"`
-	Unlimited    *bool  `json:"unlimited"`
+	NumberOfDays *int64 `json:"numberOfDays,omitempty"`
+	Unlimited    *bool  `json:"unlimited,omitempty"`
 }
 
 type UpdateDatasetRequestBodyVersioningConfiguration struct {
-	MaxVersions *int64 `json:"maxVersions"`
-	Unlimited   *bool  `json:"unlimited"`
+	MaxVersions *int64 `json:"maxVersions,omitempty"`
+	Unlimited   *bool  `json:"unlimited,omitempty"`
 }
 
 type UpdateDatasetRequestBody struct {
 	Actions                 []shared.DatasetAction                           `json:"actions"`
-	ContentDeliveryRules    []shared.DatasetContentDeliveryRule              `json:"contentDeliveryRules"`
-	LateDataRules           []shared.LateDataRule                            `json:"lateDataRules"`
-	RetentionPeriod         *UpdateDatasetRequestBodyRetentionPeriod         `json:"retentionPeriod"`
-	Triggers                []shared.DatasetTrigger                          `json:"triggers"`
-	VersioningConfiguration *UpdateDatasetRequestBodyVersioningConfiguration `json:"versioningConfiguration"`
+	ContentDeliveryRules    []shared.DatasetContentDeliveryRule              `json:"contentDeliveryRules,omitempty"`
+	LateDataRules           []shared.LateDataRule                            `json:"lateDataRules,omitempty"`
+	RetentionPeriod         *UpdateDatasetRequestBodyRetentionPeriod         `json:"retentionPeriod,omitempty"`
+	Triggers                []shared.DatasetTrigger                          `json:"triggers,omitempty"`
+	VersioningConfiguration *UpdateDatasetRequestBodyVersioningConfiguration `json:"versioningConfiguration,omitempty"`
 }
 
 type UpdateDatasetRequest struct {

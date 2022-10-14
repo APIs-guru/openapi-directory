@@ -9,8 +9,8 @@ const (
 )
 
 type CreateDatabaseRequest struct {
-	CreateStatement  *string                                   `json:"createStatement"`
-	DatabaseDialect  *CreateDatabaseRequestDatabaseDialectEnum `json:"databaseDialect"`
-	EncryptionConfig *EncryptionConfig                         `json:"encryptionConfig"`
-	ExtraStatements  []string                                  `json:"extraStatements"`
+	CreateStatement  *string                                   `json:"createStatement,omitempty"`
+	DatabaseDialect  *CreateDatabaseRequestDatabaseDialectEnum `json:"databaseDialect,omitempty"`
+	EncryptionConfig *EncryptionConfig                         `json:"encryptionConfig,omitempty"`
+	ExtraStatements  []string                                  `json:"extraStatements,omitempty"`
 }

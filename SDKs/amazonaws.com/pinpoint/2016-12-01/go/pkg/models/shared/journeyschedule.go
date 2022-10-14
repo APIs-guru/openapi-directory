@@ -5,7 +5,7 @@ import (
 )
 
 type JourneySchedule struct {
-	EndTime   *time.Time `json:"EndTime"`
-	StartTime *time.Time `json:"StartTime"`
-	Timezone  *string    `json:"Timezone"`
+	EndTime   *time.Time `json:"EndTime,omitempty"`
+	StartTime *time.Time `json:"StartTime,omitempty"`
+	Timezone  *string    `json:"Timezone,omitempty"`
 }

@@ -19,7 +19,7 @@ type AssociateEncryptionConfigHeaders struct {
 }
 
 type AssociateEncryptionConfigRequestBody struct {
-	ClientRequestToken *string                   `json:"clientRequestToken"`
+	ClientRequestToken *string                   `json:"clientRequestToken,omitempty"`
 	EncryptionConfig   []shared.EncryptionConfig `json:"encryptionConfig"`
 }
 

@@ -23,13 +23,13 @@ const (
 )
 
 type UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth struct {
-	DataVlanID        *int64 `json:"dataVlanId"`
-	SuspendPortBounce *bool  `json:"suspendPortBounce"`
-	VoiceVlanID       *int64 `json:"voiceVlanId"`
+	DataVlanID        *int64 `json:"dataVlanId,omitempty"`
+	SuspendPortBounce *bool  `json:"suspendPortBounce,omitempty"`
+	VoiceVlanID       *int64 `json:"voiceVlanId,omitempty"`
 }
 
 type UpdateNetworkSwitchAccessPolicyRequestBodyRadius struct {
-	CriticalAuth *UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth `json:"criticalAuth"`
+	CriticalAuth *UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth `json:"criticalAuth,omitempty"`
 }
 
 type UpdateNetworkSwitchAccessPolicyRequestBodyRadiusAccountingServers struct {
@@ -45,21 +45,21 @@ type UpdateNetworkSwitchAccessPolicyRequestBodyRadiusServers struct {
 }
 
 type UpdateNetworkSwitchAccessPolicyRequestBody struct {
-	AccessPolicyType               *UpdateNetworkSwitchAccessPolicyRequestBodyAccessPolicyTypeEnum     `json:"accessPolicyType"`
-	GuestVlanID                    *int64                                                              `json:"guestVlanId"`
-	HostMode                       *UpdateNetworkSwitchAccessPolicyRequestBodyHostModeEnum             `json:"hostMode"`
-	IncreaseAccessSpeed            *bool                                                               `json:"increaseAccessSpeed"`
-	Name                           *string                                                             `json:"name"`
-	Radius                         *UpdateNetworkSwitchAccessPolicyRequestBodyRadius                   `json:"radius"`
-	RadiusAccountingEnabled        *bool                                                               `json:"radiusAccountingEnabled"`
-	RadiusAccountingServers        []UpdateNetworkSwitchAccessPolicyRequestBodyRadiusAccountingServers `json:"radiusAccountingServers"`
-	RadiusCoaSupportEnabled        *bool                                                               `json:"radiusCoaSupportEnabled"`
-	RadiusGroupAttribute           *string                                                             `json:"radiusGroupAttribute"`
-	RadiusServers                  []UpdateNetworkSwitchAccessPolicyRequestBodyRadiusServers           `json:"radiusServers"`
-	RadiusTestingEnabled           *bool                                                               `json:"radiusTestingEnabled"`
-	URLRedirectWalledGardenEnabled *bool                                                               `json:"urlRedirectWalledGardenEnabled"`
-	URLRedirectWalledGardenRanges  []string                                                            `json:"urlRedirectWalledGardenRanges"`
-	VoiceVlanClients               *bool                                                               `json:"voiceVlanClients"`
+	AccessPolicyType               *UpdateNetworkSwitchAccessPolicyRequestBodyAccessPolicyTypeEnum     `json:"accessPolicyType,omitempty"`
+	GuestVlanID                    *int64                                                              `json:"guestVlanId,omitempty"`
+	HostMode                       *UpdateNetworkSwitchAccessPolicyRequestBodyHostModeEnum             `json:"hostMode,omitempty"`
+	IncreaseAccessSpeed            *bool                                                               `json:"increaseAccessSpeed,omitempty"`
+	Name                           *string                                                             `json:"name,omitempty"`
+	Radius                         *UpdateNetworkSwitchAccessPolicyRequestBodyRadius                   `json:"radius,omitempty"`
+	RadiusAccountingEnabled        *bool                                                               `json:"radiusAccountingEnabled,omitempty"`
+	RadiusAccountingServers        []UpdateNetworkSwitchAccessPolicyRequestBodyRadiusAccountingServers `json:"radiusAccountingServers,omitempty"`
+	RadiusCoaSupportEnabled        *bool                                                               `json:"radiusCoaSupportEnabled,omitempty"`
+	RadiusGroupAttribute           *string                                                             `json:"radiusGroupAttribute,omitempty"`
+	RadiusServers                  []UpdateNetworkSwitchAccessPolicyRequestBodyRadiusServers           `json:"radiusServers,omitempty"`
+	RadiusTestingEnabled           *bool                                                               `json:"radiusTestingEnabled,omitempty"`
+	URLRedirectWalledGardenEnabled *bool                                                               `json:"urlRedirectWalledGardenEnabled,omitempty"`
+	URLRedirectWalledGardenRanges  []string                                                            `json:"urlRedirectWalledGardenRanges,omitempty"`
+	VoiceVlanClients               *bool                                                               `json:"voiceVlanClients,omitempty"`
 }
 
 type UpdateNetworkSwitchAccessPolicyRequest struct {

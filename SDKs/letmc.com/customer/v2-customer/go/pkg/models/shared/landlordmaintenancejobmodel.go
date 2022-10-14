@@ -5,11 +5,11 @@ import (
 )
 
 type LandlordMaintenanceJobModel struct {
-	AssignedTo       *string                           `json:"AssignedTo"`
-	ClosedDate       *time.Time                        `json:"ClosedDate"`
-	Description      *string                           `json:"Description"`
-	MaintenanceNotes []LandlordMaintenanceJobNoteModel `json:"MaintenanceNotes"`
-	Property         *string                           `json:"Property"`
-	Reported         *time.Time                        `json:"Reported"`
-	Status           *string                           `json:"Status"`
+	AssignedTo       *string                           `json:"AssignedTo,omitempty"`
+	ClosedDate       *time.Time                        `json:"ClosedDate,omitempty"`
+	Description      *string                           `json:"Description,omitempty"`
+	MaintenanceNotes []LandlordMaintenanceJobNoteModel `json:"MaintenanceNotes,omitempty"`
+	Property         *string                           `json:"Property,omitempty"`
+	Reported         *time.Time                        `json:"Reported,omitempty"`
+	Status           *string                           `json:"Status,omitempty"`
 }

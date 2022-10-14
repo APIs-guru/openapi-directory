@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetDevEndpointsResponse struct {
-	DevEndpoints         []DevEndpoint `json:"DevEndpoints"`
-	DevEndpointsNotFound []string      `json:"DevEndpointsNotFound"`
+	DevEndpoints         []DevEndpoint `json:"DevEndpoints,omitempty"`
+	DevEndpointsNotFound []string      `json:"DevEndpointsNotFound,omitempty"`
 }

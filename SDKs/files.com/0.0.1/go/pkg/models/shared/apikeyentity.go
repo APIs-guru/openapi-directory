@@ -16,15 +16,15 @@ const (
 )
 
 type APIKeyEntity struct {
-	CreatedAt        *time.Time                     `json:"created_at"`
-	DescriptiveLabel *string                        `json:"descriptive_label"`
-	ExpiresAt        *time.Time                     `json:"expires_at"`
-	ID               *int32                         `json:"id"`
-	Key              *string                        `json:"key"`
-	LastUseAt        *time.Time                     `json:"last_use_at"`
-	Name             *string                        `json:"name"`
-	Path             *string                        `json:"path"`
-	PermissionSet    *APIKeyEntityPermissionSetEnum `json:"permission_set"`
-	Platform         *string                        `json:"platform"`
-	UserID           *int32                         `json:"user_id"`
+	CreatedAt        *time.Time                     `json:"created_at,omitempty"`
+	DescriptiveLabel *string                        `json:"descriptive_label,omitempty"`
+	ExpiresAt        *time.Time                     `json:"expires_at,omitempty"`
+	ID               *int32                         `json:"id,omitempty"`
+	Key              *string                        `json:"key,omitempty"`
+	LastUseAt        *time.Time                     `json:"last_use_at,omitempty"`
+	Name             *string                        `json:"name,omitempty"`
+	Path             *string                        `json:"path,omitempty"`
+	PermissionSet    *APIKeyEntityPermissionSetEnum `json:"permission_set,omitempty"`
+	Platform         *string                        `json:"platform,omitempty"`
+	UserID           *int32                         `json:"user_id,omitempty"`
 }

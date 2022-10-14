@@ -11,7 +11,7 @@ type SecretScanningUpdateAlertPathParams struct {
 }
 
 type SecretScanningUpdateAlertRequestBody struct {
-	Resolution *string                             `json:"resolution"`
+	Resolution *string                             `json:"resolution,omitempty"`
 	State      shared.SecretScanningAlertStateEnum `json:"state"`
 }
 
@@ -21,9 +21,9 @@ type SecretScanningUpdateAlertRequest struct {
 }
 
 type SecretScanningUpdateAlert503ApplicationJSON struct {
-	Code             *string `json:"code"`
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	Code             *string `json:"code,omitempty"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type SecretScanningUpdateAlertResponse struct {

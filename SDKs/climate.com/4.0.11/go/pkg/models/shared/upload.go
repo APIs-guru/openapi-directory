@@ -16,5 +16,5 @@ type Upload struct {
 	ContentType UploadContentTypeEnum  `json:"contentType"`
 	Length      int64                  `json:"length"`
 	Md5         string                 `json:"md5"`
-	Metadata    map[string]interface{} `json:"metadata"`
+	Metadata    map[string]interface{} `json:"metadata,omitempty"`
 }

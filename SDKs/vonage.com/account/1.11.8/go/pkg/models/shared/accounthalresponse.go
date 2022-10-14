@@ -1,10 +1,10 @@
 package shared
 
 type AccountHalResponse struct {
-	Embedded   *AccountEmbeddedObject `json:"_embedded"`
-	Links      *Links                 `json:"_links"`
-	Page       *float64               `json:"page"`
-	PageSize   *float64               `json:"page_size"`
-	TotalItems *float64               `json:"total_items"`
-	TotalPages *float64               `json:"total_pages"`
+	Embedded   *AccountEmbeddedObject `json:"_embedded,omitempty"`
+	Links      *Links                 `json:"_links,omitempty"`
+	Page       *float64               `json:"page,omitempty"`
+	PageSize   *float64               `json:"page_size,omitempty"`
+	TotalItems *float64               `json:"total_items,omitempty"`
+	TotalPages *float64               `json:"total_pages,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ApplianceCluster struct {
-	ResourceLink *string `json:"resourceLink"`
+	ResourceLink *string `json:"resourceLink,omitempty"`
 }

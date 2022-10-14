@@ -5,6 +5,6 @@ import (
 )
 
 type CreateTestGridURLResult struct {
-	Expires *time.Time `json:"expires"`
-	URL     *string    `json:"url"`
+	Expires *time.Time `json:"expires,omitempty"`
+	URL     *string    `json:"url,omitempty"`
 }

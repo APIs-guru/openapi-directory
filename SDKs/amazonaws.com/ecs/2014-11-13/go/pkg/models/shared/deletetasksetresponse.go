@@ -1,5 +1,5 @@
 package shared
 
 type DeleteTaskSetResponse struct {
-	TaskSet *TaskSet `json:"taskSet"`
+	TaskSet *TaskSet `json:"taskSet,omitempty"`
 }

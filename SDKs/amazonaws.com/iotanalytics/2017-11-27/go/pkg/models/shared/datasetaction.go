@@ -1,7 +1,7 @@
 package shared
 
 type DatasetAction struct {
-	ActionName      *string                 `json:"actionName"`
-	ContainerAction *ContainerDatasetAction `json:"containerAction"`
-	QueryAction     *SQLQueryDatasetAction  `json:"queryAction"`
+	ActionName      *string                 `json:"actionName,omitempty"`
+	ContainerAction *ContainerDatasetAction `json:"containerAction,omitempty"`
+	QueryAction     *SQLQueryDatasetAction  `json:"queryAction,omitempty"`
 }

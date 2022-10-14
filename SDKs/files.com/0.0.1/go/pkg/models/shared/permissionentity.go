@@ -13,12 +13,12 @@ const (
 )
 
 type PermissionEntity struct {
-	GroupID    *int32                          `json:"group_id"`
-	GroupName  *string                         `json:"group_name"`
-	ID         *int32                          `json:"id"`
-	Path       *string                         `json:"path"`
-	Permission *PermissionEntityPermissionEnum `json:"permission"`
-	Recursive  *bool                           `json:"recursive"`
-	UserID     *int32                          `json:"user_id"`
-	Username   *string                         `json:"username"`
+	GroupID    *int32                          `json:"group_id,omitempty"`
+	GroupName  *string                         `json:"group_name,omitempty"`
+	ID         *int32                          `json:"id,omitempty"`
+	Path       *string                         `json:"path,omitempty"`
+	Permission *PermissionEntityPermissionEnum `json:"permission,omitempty"`
+	Recursive  *bool                           `json:"recursive,omitempty"`
+	UserID     *int32                          `json:"user_id,omitempty"`
+	Username   *string                         `json:"username,omitempty"`
 }

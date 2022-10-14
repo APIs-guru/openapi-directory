@@ -1,6 +1,6 @@
 package shared
 
 type AudioVideoOffset struct {
-	Percentage *string `json:"percentage"`
-	Seconds    *string `json:"seconds"`
+	Percentage *string `json:"percentage,omitempty"`
+	Seconds    *string `json:"seconds,omitempty"`
 }

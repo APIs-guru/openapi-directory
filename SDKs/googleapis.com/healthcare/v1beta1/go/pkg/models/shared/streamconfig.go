@@ -1,7 +1,7 @@
 package shared
 
 type StreamConfig struct {
-	BigqueryDestination          *GoogleCloudHealthcareV1beta1FhirBigQueryDestination `json:"bigqueryDestination"`
-	DeidentifiedStoreDestination *DeidentifiedStoreDestination                        `json:"deidentifiedStoreDestination"`
-	ResourceTypes                []string                                             `json:"resourceTypes"`
+	BigqueryDestination          *GoogleCloudHealthcareV1beta1FhirBigQueryDestination `json:"bigqueryDestination,omitempty"`
+	DeidentifiedStoreDestination *DeidentifiedStoreDestination                        `json:"deidentifiedStoreDestination,omitempty"`
+	ResourceTypes                []string                                             `json:"resourceTypes,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type CustomRoutingEndpointGroup struct {
-	DestinationDescriptions []CustomRoutingDestinationDescription `json:"DestinationDescriptions"`
-	EndpointDescriptions    []CustomRoutingEndpointDescription    `json:"EndpointDescriptions"`
-	EndpointGroupArn        *string                               `json:"EndpointGroupArn"`
-	EndpointGroupRegion     *string                               `json:"EndpointGroupRegion"`
+	DestinationDescriptions []CustomRoutingDestinationDescription `json:"DestinationDescriptions,omitempty"`
+	EndpointDescriptions    []CustomRoutingEndpointDescription    `json:"EndpointDescriptions,omitempty"`
+	EndpointGroupArn        *string                               `json:"EndpointGroupArn,omitempty"`
+	EndpointGroupRegion     *string                               `json:"EndpointGroupRegion,omitempty"`
 }

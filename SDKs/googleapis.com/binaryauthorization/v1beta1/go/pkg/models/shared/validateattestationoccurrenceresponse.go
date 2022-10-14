@@ -9,6 +9,6 @@ const (
 )
 
 type ValidateAttestationOccurrenceResponse struct {
-	DenialReason *string                                          `json:"denialReason"`
-	Result       *ValidateAttestationOccurrenceResponseResultEnum `json:"result"`
+	DenialReason *string                                          `json:"denialReason,omitempty"`
+	Result       *ValidateAttestationOccurrenceResponseResultEnum `json:"result,omitempty"`
 }

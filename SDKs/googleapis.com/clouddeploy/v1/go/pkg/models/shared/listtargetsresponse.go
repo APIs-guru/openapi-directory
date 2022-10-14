@@ -1,7 +1,7 @@
 package shared
 
 type ListTargetsResponse struct {
-	NextPageToken *string  `json:"nextPageToken"`
-	Targets       []Target `json:"targets"`
-	Unreachable   []string `json:"unreachable"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Targets       []Target `json:"targets,omitempty"`
+	Unreachable   []string `json:"unreachable,omitempty"`
 }

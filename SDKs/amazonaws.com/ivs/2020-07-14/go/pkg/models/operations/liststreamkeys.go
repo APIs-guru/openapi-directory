@@ -21,8 +21,8 @@ type ListStreamKeysHeaders struct {
 
 type ListStreamKeysRequestBody struct {
 	ChannelArn string  `json:"channelArn"`
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
 }
 
 type ListStreamKeysRequest struct {

@@ -24,21 +24,21 @@ type DeviceTypeSubdeviceRoleSubdeviceRole struct {
 }
 
 type DeviceType struct {
-	Comments      *string                               `json:"comments"`
-	Created       *time.Time                            `json:"created"`
-	CustomFields  map[string]interface{}                `json:"custom_fields"`
-	DeviceCount   *int64                                `json:"device_count"`
-	DisplayName   *string                               `json:"display_name"`
-	FrontImage    *string                               `json:"front_image"`
-	ID            *int64                                `json:"id"`
-	IsFullDepth   *bool                                 `json:"is_full_depth"`
-	LastUpdated   *time.Time                            `json:"last_updated"`
+	Comments      *string                               `json:"comments,omitempty"`
+	Created       *time.Time                            `json:"created,omitempty"`
+	CustomFields  map[string]interface{}                `json:"custom_fields,omitempty"`
+	DeviceCount   *int64                                `json:"device_count,omitempty"`
+	DisplayName   *string                               `json:"display_name,omitempty"`
+	FrontImage    *string                               `json:"front_image,omitempty"`
+	ID            *int64                                `json:"id,omitempty"`
+	IsFullDepth   *bool                                 `json:"is_full_depth,omitempty"`
+	LastUpdated   *time.Time                            `json:"last_updated,omitempty"`
 	Manufacturer  NestedManufacturer                    `json:"manufacturer"`
 	Model         string                                `json:"model"`
-	PartNumber    *string                               `json:"part_number"`
-	RearImage     *string                               `json:"rear_image"`
+	PartNumber    *string                               `json:"part_number,omitempty"`
+	RearImage     *string                               `json:"rear_image,omitempty"`
 	Slug          string                                `json:"slug"`
-	SubdeviceRole *DeviceTypeSubdeviceRoleSubdeviceRole `json:"subdevice_role"`
-	Tags          []string                              `json:"tags"`
-	UHeight       *int64                                `json:"u_height"`
+	SubdeviceRole *DeviceTypeSubdeviceRoleSubdeviceRole `json:"subdevice_role,omitempty"`
+	Tags          []string                              `json:"tags,omitempty"`
+	UHeight       *int64                                `json:"u_height,omitempty"`
 }

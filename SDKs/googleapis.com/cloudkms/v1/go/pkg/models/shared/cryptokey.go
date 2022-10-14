@@ -11,15 +11,15 @@ const (
 )
 
 type CryptoKey struct {
-	CreateTime               *string                   `json:"createTime"`
-	CryptoKeyBackend         *string                   `json:"cryptoKeyBackend"`
-	DestroyScheduledDuration *string                   `json:"destroyScheduledDuration"`
-	ImportOnly               *bool                     `json:"importOnly"`
-	Labels                   map[string]string         `json:"labels"`
-	Name                     *string                   `json:"name"`
-	NextRotationTime         *string                   `json:"nextRotationTime"`
-	Primary                  *CryptoKeyVersion         `json:"primary"`
-	Purpose                  *CryptoKeyPurposeEnum     `json:"purpose"`
-	RotationPeriod           *string                   `json:"rotationPeriod"`
-	VersionTemplate          *CryptoKeyVersionTemplate `json:"versionTemplate"`
+	CreateTime               *string                   `json:"createTime,omitempty"`
+	CryptoKeyBackend         *string                   `json:"cryptoKeyBackend,omitempty"`
+	DestroyScheduledDuration *string                   `json:"destroyScheduledDuration,omitempty"`
+	ImportOnly               *bool                     `json:"importOnly,omitempty"`
+	Labels                   map[string]string         `json:"labels,omitempty"`
+	Name                     *string                   `json:"name,omitempty"`
+	NextRotationTime         *string                   `json:"nextRotationTime,omitempty"`
+	Primary                  *CryptoKeyVersion         `json:"primary,omitempty"`
+	Purpose                  *CryptoKeyPurposeEnum     `json:"purpose,omitempty"`
+	RotationPeriod           *string                   `json:"rotationPeriod,omitempty"`
+	VersionTemplate          *CryptoKeyVersionTemplate `json:"versionTemplate,omitempty"`
 }

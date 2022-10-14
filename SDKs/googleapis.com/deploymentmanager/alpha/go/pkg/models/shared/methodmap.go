@@ -1,9 +1,9 @@
 package shared
 
 type MethodMap struct {
-	Create       *string `json:"create"`
-	Delete       *string `json:"delete"`
-	Get          *string `json:"get"`
-	SetIamPolicy *string `json:"setIamPolicy"`
-	Update       *string `json:"update"`
+	Create       *string `json:"create,omitempty"`
+	Delete       *string `json:"delete,omitempty"`
+	Get          *string `json:"get,omitempty"`
+	SetIamPolicy *string `json:"setIamPolicy,omitempty"`
+	Update       *string `json:"update,omitempty"`
 }

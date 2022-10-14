@@ -9,8 +9,8 @@ type GenerateDeviceCameraSnapshotPathParams struct {
 }
 
 type GenerateDeviceCameraSnapshotRequestBody struct {
-	Fullframe *bool      `json:"fullframe"`
-	Timestamp *time.Time `json:"timestamp"`
+	Fullframe *bool      `json:"fullframe,omitempty"`
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
 
 type GenerateDeviceCameraSnapshotRequest struct {

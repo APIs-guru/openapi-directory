@@ -1,7 +1,7 @@
 package shared
 
 type ExecuteCommandConfiguration struct {
-	KmsKeyID         *string                         `json:"kmsKeyId"`
-	LogConfiguration *ExecuteCommandLogConfiguration `json:"logConfiguration"`
-	Logging          *ExecuteCommandLoggingEnum      `json:"logging"`
+	KmsKeyID         *string                         `json:"kmsKeyId,omitempty"`
+	LogConfiguration *ExecuteCommandLogConfiguration `json:"logConfiguration,omitempty"`
+	Logging          *ExecuteCommandLoggingEnum      `json:"logging,omitempty"`
 }

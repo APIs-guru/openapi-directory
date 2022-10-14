@@ -9,8 +9,8 @@ const (
 
 type CustomConfiguration struct {
 	Format                CustomConfigurationFormatEnum `json:"format"`
-	NameFormat            *string                       `json:"nameFormat"`
-	ReceivingOrganization *string                       `json:"receivingOrganization"`
+	NameFormat            *string                       `json:"nameFormat,omitempty"`
+	ReceivingOrganization *string                       `json:"receivingOrganization,omitempty"`
 	SchemaName            string                        `json:"schemaName"`
 	Transport             interface{}                   `json:"transport"`
 	Type                  string                        `json:"type"`

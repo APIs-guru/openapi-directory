@@ -5,8 +5,8 @@ import (
 )
 
 type TextTranslationJobFilter struct {
-	JobName             *string        `json:"JobName"`
-	JobStatus           *JobStatusEnum `json:"JobStatus"`
-	SubmittedAfterTime  *time.Time     `json:"SubmittedAfterTime"`
-	SubmittedBeforeTime *time.Time     `json:"SubmittedBeforeTime"`
+	JobName             *string        `json:"JobName,omitempty"`
+	JobStatus           *JobStatusEnum `json:"JobStatus,omitempty"`
+	SubmittedAfterTime  *time.Time     `json:"SubmittedAfterTime,omitempty"`
+	SubmittedBeforeTime *time.Time     `json:"SubmittedBeforeTime,omitempty"`
 }

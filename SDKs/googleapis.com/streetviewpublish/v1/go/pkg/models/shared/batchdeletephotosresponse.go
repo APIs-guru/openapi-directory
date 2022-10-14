@@ -1,5 +1,5 @@
 package shared
 
 type BatchDeletePhotosResponse struct {
-	Status []Status `json:"status"`
+	Status []Status `json:"status,omitempty"`
 }

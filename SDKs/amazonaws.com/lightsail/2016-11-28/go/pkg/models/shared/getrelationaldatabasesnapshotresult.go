@@ -1,5 +1,5 @@
 package shared
 
 type GetRelationalDatabaseSnapshotResult struct {
-	RelationalDatabaseSnapshot *RelationalDatabaseSnapshot `json:"relationalDatabaseSnapshot"`
+	RelationalDatabaseSnapshot *RelationalDatabaseSnapshot `json:"relationalDatabaseSnapshot,omitempty"`
 }

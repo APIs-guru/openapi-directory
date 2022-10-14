@@ -1,7 +1,7 @@
 package shared
 
 type AddonInfo struct {
-	AddonName     *string            `json:"addonName"`
-	AddonVersions []AddonVersionInfo `json:"addonVersions"`
-	Type          *string            `json:"type"`
+	AddonName     *string            `json:"addonName,omitempty"`
+	AddonVersions []AddonVersionInfo `json:"addonVersions,omitempty"`
+	Type          *string            `json:"type,omitempty"`
 }

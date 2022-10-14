@@ -1,6 +1,6 @@
 package shared
 
 type ListStudioLifecycleConfigsResponse struct {
-	NextToken              *string                        `json:"NextToken"`
-	StudioLifecycleConfigs []StudioLifecycleConfigDetails `json:"StudioLifecycleConfigs"`
+	NextToken              *string                        `json:"NextToken,omitempty"`
+	StudioLifecycleConfigs []StudioLifecycleConfigDetails `json:"StudioLifecycleConfigs,omitempty"`
 }

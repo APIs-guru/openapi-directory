@@ -1,6 +1,6 @@
 package shared
 
 type PlacementTargeting struct {
-	MobileApplicationTargeting *MobileApplicationTargeting `json:"mobileApplicationTargeting"`
-	URLTargeting               *URLTargeting               `json:"urlTargeting"`
+	MobileApplicationTargeting *MobileApplicationTargeting `json:"mobileApplicationTargeting,omitempty"`
+	URLTargeting               *URLTargeting               `json:"urlTargeting,omitempty"`
 }

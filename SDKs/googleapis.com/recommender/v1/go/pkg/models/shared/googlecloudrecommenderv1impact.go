@@ -13,9 +13,9 @@ const (
 )
 
 type GoogleCloudRecommenderV1Impact struct {
-	Category                 *GoogleCloudRecommenderV1ImpactCategoryEnum       `json:"category"`
-	CostProjection           *GoogleCloudRecommenderV1CostProjection           `json:"costProjection"`
-	ReliabilityProjection    *GoogleCloudRecommenderV1ReliabilityProjection    `json:"reliabilityProjection"`
-	SecurityProjection       *GoogleCloudRecommenderV1SecurityProjection       `json:"securityProjection"`
-	SustainabilityProjection *GoogleCloudRecommenderV1SustainabilityProjection `json:"sustainabilityProjection"`
+	Category                 *GoogleCloudRecommenderV1ImpactCategoryEnum       `json:"category,omitempty"`
+	CostProjection           *GoogleCloudRecommenderV1CostProjection           `json:"costProjection,omitempty"`
+	ReliabilityProjection    *GoogleCloudRecommenderV1ReliabilityProjection    `json:"reliabilityProjection,omitempty"`
+	SecurityProjection       *GoogleCloudRecommenderV1SecurityProjection       `json:"securityProjection,omitempty"`
+	SustainabilityProjection *GoogleCloudRecommenderV1SustainabilityProjection `json:"sustainabilityProjection,omitempty"`
 }

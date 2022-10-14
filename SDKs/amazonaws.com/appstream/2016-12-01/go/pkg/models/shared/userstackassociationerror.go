@@ -1,7 +1,7 @@
 package shared
 
 type UserStackAssociationError struct {
-	ErrorCode            *UserStackAssociationErrorCodeEnum `json:"ErrorCode"`
-	ErrorMessage         *string                            `json:"ErrorMessage"`
-	UserStackAssociation *UserStackAssociation              `json:"UserStackAssociation"`
+	ErrorCode            *UserStackAssociationErrorCodeEnum `json:"ErrorCode,omitempty"`
+	ErrorMessage         *string                            `json:"ErrorMessage,omitempty"`
+	UserStackAssociation *UserStackAssociation              `json:"UserStackAssociation,omitempty"`
 }

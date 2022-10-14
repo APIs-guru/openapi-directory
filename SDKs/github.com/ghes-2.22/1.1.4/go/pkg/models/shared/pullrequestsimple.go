@@ -30,7 +30,7 @@ type PullRequestSimpleAssigneeSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -52,7 +52,7 @@ type PullRequestSimpleBaseUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -82,7 +82,7 @@ type PullRequestSimpleHeadUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -98,13 +98,13 @@ type PullRequestSimpleHead struct {
 }
 
 type PullRequestSimpleLabels struct {
-	Color       *string `json:"color"`
-	Default     *bool   `json:"default"`
-	Description *string `json:"description"`
-	ID          *int64  `json:"id"`
-	Name        *string `json:"name"`
-	NodeID      *string `json:"node_id"`
-	URL         *string `json:"url"`
+	Color       *string `json:"color,omitempty"`
+	Default     *bool   `json:"default,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	NodeID      *string `json:"node_id,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }
 
 type PullRequestSimpleMilestoneCreatorSimpleUser struct {
@@ -122,7 +122,7 @@ type PullRequestSimpleMilestoneCreatorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -170,7 +170,7 @@ type PullRequestSimpleUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -179,9 +179,9 @@ type PullRequestSimpleUserSimpleUser struct {
 
 type PullRequestSimple struct {
 	Links              PullRequestSimpleLinks              `json:"_links"`
-	ActiveLockReason   *string                             `json:"active_lock_reason"`
+	ActiveLockReason   *string                             `json:"active_lock_reason,omitempty"`
 	Assignee           PullRequestSimpleAssigneeSimpleUser `json:"assignee"`
-	Assignees          []SimpleUser                        `json:"assignees"`
+	Assignees          []SimpleUser                        `json:"assignees,omitempty"`
 	AuthorAssociation  AuthorAssociationEnum               `json:"author_association"`
 	Base               PullRequestSimpleBase               `json:"base"`
 	Body               string                              `json:"body"`
@@ -190,7 +190,7 @@ type PullRequestSimple struct {
 	CommitsURL         string                              `json:"commits_url"`
 	CreatedAt          time.Time                           `json:"created_at"`
 	DiffURL            string                              `json:"diff_url"`
-	Draft              *bool                               `json:"draft"`
+	Draft              *bool                               `json:"draft,omitempty"`
 	Head               PullRequestSimpleHead               `json:"head"`
 	HTMLURL            string                              `json:"html_url"`
 	ID                 int64                               `json:"id"`
@@ -203,8 +203,8 @@ type PullRequestSimple struct {
 	NodeID             string                              `json:"node_id"`
 	Number             int64                               `json:"number"`
 	PatchURL           string                              `json:"patch_url"`
-	RequestedReviewers []SimpleUser                        `json:"requested_reviewers"`
-	RequestedTeams     []TeamSimple                        `json:"requested_teams"`
+	RequestedReviewers []SimpleUser                        `json:"requested_reviewers,omitempty"`
+	RequestedTeams     []TeamSimple                        `json:"requested_teams,omitempty"`
 	ReviewCommentURL   string                              `json:"review_comment_url"`
 	ReviewCommentsURL  string                              `json:"review_comments_url"`
 	State              string                              `json:"state"`

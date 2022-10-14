@@ -9,15 +9,15 @@ const (
 )
 
 type PosixAccount struct {
-	AccountID           *string                              `json:"accountId"`
-	Gecos               *string                              `json:"gecos"`
-	Gid                 *string                              `json:"gid"`
-	HomeDirectory       *string                              `json:"homeDirectory"`
-	Name                *string                              `json:"name"`
-	OperatingSystemType *PosixAccountOperatingSystemTypeEnum `json:"operatingSystemType"`
-	Primary             *bool                                `json:"primary"`
-	Shell               *string                              `json:"shell"`
-	SystemID            *string                              `json:"systemId"`
-	UID                 *string                              `json:"uid"`
-	Username            *string                              `json:"username"`
+	AccountID           *string                              `json:"accountId,omitempty"`
+	Gecos               *string                              `json:"gecos,omitempty"`
+	Gid                 *string                              `json:"gid,omitempty"`
+	HomeDirectory       *string                              `json:"homeDirectory,omitempty"`
+	Name                *string                              `json:"name,omitempty"`
+	OperatingSystemType *PosixAccountOperatingSystemTypeEnum `json:"operatingSystemType,omitempty"`
+	Primary             *bool                                `json:"primary,omitempty"`
+	Shell               *string                              `json:"shell,omitempty"`
+	SystemID            *string                              `json:"systemId,omitempty"`
+	UID                 *string                              `json:"uid,omitempty"`
+	Username            *string                              `json:"username,omitempty"`
 }

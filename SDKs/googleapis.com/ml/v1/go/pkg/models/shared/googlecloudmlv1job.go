@@ -14,17 +14,17 @@ const (
 )
 
 type GoogleCloudMlV1Job struct {
-	CreateTime       *string                          `json:"createTime"`
-	EndTime          *string                          `json:"endTime"`
-	ErrorMessage     *string                          `json:"errorMessage"`
-	Etag             *string                          `json:"etag"`
-	JobID            *string                          `json:"jobId"`
-	JobPosition      *string                          `json:"jobPosition"`
-	Labels           map[string]string                `json:"labels"`
-	PredictionInput  *GoogleCloudMlV1PredictionInput  `json:"predictionInput"`
-	PredictionOutput *GoogleCloudMlV1PredictionOutput `json:"predictionOutput"`
-	StartTime        *string                          `json:"startTime"`
-	State            *GoogleCloudMlV1JobStateEnum     `json:"state"`
-	TrainingInput    *GoogleCloudMlV1TrainingInput    `json:"trainingInput"`
-	TrainingOutput   *GoogleCloudMlV1TrainingOutput   `json:"trainingOutput"`
+	CreateTime       *string                          `json:"createTime,omitempty"`
+	EndTime          *string                          `json:"endTime,omitempty"`
+	ErrorMessage     *string                          `json:"errorMessage,omitempty"`
+	Etag             *string                          `json:"etag,omitempty"`
+	JobID            *string                          `json:"jobId,omitempty"`
+	JobPosition      *string                          `json:"jobPosition,omitempty"`
+	Labels           map[string]string                `json:"labels,omitempty"`
+	PredictionInput  *GoogleCloudMlV1PredictionInput  `json:"predictionInput,omitempty"`
+	PredictionOutput *GoogleCloudMlV1PredictionOutput `json:"predictionOutput,omitempty"`
+	StartTime        *string                          `json:"startTime,omitempty"`
+	State            *GoogleCloudMlV1JobStateEnum     `json:"state,omitempty"`
+	TrainingInput    *GoogleCloudMlV1TrainingInput    `json:"trainingInput,omitempty"`
+	TrainingOutput   *GoogleCloudMlV1TrainingOutput   `json:"trainingOutput,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListDomainsResponse struct {
-	Domains   []DomainDetails `json:"Domains"`
-	NextToken *string         `json:"NextToken"`
+	Domains   []DomainDetails `json:"Domains,omitempty"`
+	NextToken *string         `json:"NextToken,omitempty"`
 }

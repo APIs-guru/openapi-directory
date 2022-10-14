@@ -1,6 +1,6 @@
 package shared
 
 type SearchResponse struct {
-	NextPageToken *string     `json:"nextPageToken"`
-	Results       []ReportRow `json:"results"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
+	Results       []ReportRow `json:"results,omitempty"`
 }

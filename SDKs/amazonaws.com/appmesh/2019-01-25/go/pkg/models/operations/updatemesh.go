@@ -19,12 +19,12 @@ type UpdateMeshHeaders struct {
 }
 
 type UpdateMeshRequestBodySpec struct {
-	EgressFilter *shared.EgressFilter `json:"egressFilter"`
+	EgressFilter *shared.EgressFilter `json:"egressFilter,omitempty"`
 }
 
 type UpdateMeshRequestBody struct {
-	ClientToken *string                    `json:"clientToken"`
-	Spec        *UpdateMeshRequestBodySpec `json:"spec"`
+	ClientToken *string                    `json:"clientToken,omitempty"`
+	Spec        *UpdateMeshRequestBodySpec `json:"spec,omitempty"`
 }
 
 type UpdateMeshRequest struct {

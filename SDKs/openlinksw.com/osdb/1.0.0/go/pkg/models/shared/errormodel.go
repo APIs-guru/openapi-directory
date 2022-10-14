@@ -7,8 +7,8 @@ const (
 )
 
 type ErrorModel struct {
-	API      *string               `json:"api"`
-	Method   *string               `json:"method"`
-	Response *string               `json:"response"`
-	Status   *ErrorModelStatusEnum `json:"status"`
+	API      *string               `json:"api,omitempty"`
+	Method   *string               `json:"method,omitempty"`
+	Response *string               `json:"response,omitempty"`
+	Status   *ErrorModelStatusEnum `json:"status,omitempty"`
 }

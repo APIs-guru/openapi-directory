@@ -1,14 +1,14 @@
 package shared
 
 type QuotaLimit struct {
-	DefaultLimit *string           `json:"defaultLimit"`
-	Description  *string           `json:"description"`
-	DisplayName  *string           `json:"displayName"`
-	Duration     *string           `json:"duration"`
-	FreeTier     *string           `json:"freeTier"`
-	MaxLimit     *string           `json:"maxLimit"`
-	Metric       *string           `json:"metric"`
-	Name         *string           `json:"name"`
-	Unit         *string           `json:"unit"`
-	Values       map[string]string `json:"values"`
+	DefaultLimit *string           `json:"defaultLimit,omitempty"`
+	Description  *string           `json:"description,omitempty"`
+	DisplayName  *string           `json:"displayName,omitempty"`
+	Duration     *string           `json:"duration,omitempty"`
+	FreeTier     *string           `json:"freeTier,omitempty"`
+	MaxLimit     *string           `json:"maxLimit,omitempty"`
+	Metric       *string           `json:"metric,omitempty"`
+	Name         *string           `json:"name,omitempty"`
+	Unit         *string           `json:"unit,omitempty"`
+	Values       map[string]string `json:"values,omitempty"`
 }

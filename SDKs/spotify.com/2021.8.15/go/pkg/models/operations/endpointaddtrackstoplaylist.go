@@ -19,8 +19,8 @@ type EndpointAddTracksToPlaylistHeaders struct {
 }
 
 type EndpointAddTracksToPlaylistRequestBody struct {
-	Position *int32   `json:"position"`
-	Uris     []string `json:"uris"`
+	Position *int32   `json:"position,omitempty"`
+	Uris     []string `json:"uris,omitempty"`
 }
 
 type EndpointAddTracksToPlaylistSecurity struct {

@@ -9,6 +9,6 @@ const (
 )
 
 type PersonalApplicationPolicy struct {
-	InstallType *PersonalApplicationPolicyInstallTypeEnum `json:"installType"`
-	PackageName *string                                   `json:"packageName"`
+	InstallType *PersonalApplicationPolicyInstallTypeEnum `json:"installType,omitempty"`
+	PackageName *string                                   `json:"packageName,omitempty"`
 }

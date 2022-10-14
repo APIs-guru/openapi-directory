@@ -5,6 +5,6 @@ import (
 )
 
 type DescribePipelineDefinitionForExecutionResponse struct {
-	CreationTime       *time.Time `json:"CreationTime"`
-	PipelineDefinition *string    `json:"PipelineDefinition"`
+	CreationTime       *time.Time `json:"CreationTime,omitempty"`
+	PipelineDefinition *string    `json:"PipelineDefinition,omitempty"`
 }

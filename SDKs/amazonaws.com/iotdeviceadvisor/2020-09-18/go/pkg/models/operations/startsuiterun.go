@@ -19,14 +19,14 @@ type StartSuiteRunHeaders struct {
 }
 
 type StartSuiteRunRequestBodySuiteRunConfiguration struct {
-	PrimaryDevice    *shared.DeviceUnderTest `json:"primaryDevice"`
-	SelectedTestList []string                `json:"selectedTestList"`
+	PrimaryDevice    *shared.DeviceUnderTest `json:"primaryDevice,omitempty"`
+	SelectedTestList []string                `json:"selectedTestList,omitempty"`
 }
 
 type StartSuiteRunRequestBody struct {
-	SuiteDefinitionVersion *string                                        `json:"suiteDefinitionVersion"`
-	SuiteRunConfiguration  *StartSuiteRunRequestBodySuiteRunConfiguration `json:"suiteRunConfiguration"`
-	Tags                   map[string]string                              `json:"tags"`
+	SuiteDefinitionVersion *string                                        `json:"suiteDefinitionVersion,omitempty"`
+	SuiteRunConfiguration  *StartSuiteRunRequestBodySuiteRunConfiguration `json:"suiteRunConfiguration,omitempty"`
+	Tags                   map[string]string                              `json:"tags,omitempty"`
 }
 
 type StartSuiteRunRequest struct {

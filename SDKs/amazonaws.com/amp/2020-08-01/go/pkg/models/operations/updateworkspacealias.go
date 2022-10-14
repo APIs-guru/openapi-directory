@@ -15,8 +15,8 @@ type UpdateWorkspaceAliasHeaders struct {
 }
 
 type UpdateWorkspaceAliasRequestBody struct {
-	Alias       *string `json:"alias"`
-	ClientToken *string `json:"clientToken"`
+	Alias       *string `json:"alias,omitempty"`
+	ClientToken *string `json:"clientToken,omitempty"`
 }
 
 type UpdateWorkspaceAliasRequest struct {

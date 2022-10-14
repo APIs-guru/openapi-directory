@@ -9,7 +9,7 @@ type PostTransactionsIDAttachmentsPathParams struct {
 }
 
 type PostTransactionsIDAttachmentsRequestBody struct {
-	AttachmentID *int64 `json:"attachment_id"`
+	AttachmentID *int64 `json:"attachment_id,omitempty"`
 }
 
 type PostTransactionsIDAttachmentsRequest struct {

@@ -14,7 +14,7 @@ type OrderServiceOfferingRequest struct {
 }
 
 type OrderServiceOffering200ApplicationJSON struct {
-	TaskID *string `json:"task_id"`
+	TaskID *string `json:"task_id,omitempty"`
 }
 
 type OrderServiceOfferingResponse struct {

@@ -11,7 +11,7 @@ type UpdateDevicePolicyConfigurationHeaders struct {
 }
 
 type UpdateDevicePolicyConfigurationRequestBody struct {
-	DeviceCaCertificate *string `json:"DeviceCaCertificate"`
+	DeviceCaCertificate *string `json:"DeviceCaCertificate,omitempty"`
 	FleetArn            string  `json:"FleetArn"`
 }
 

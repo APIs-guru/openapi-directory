@@ -15,16 +15,16 @@ const (
 )
 
 type QueryOperator struct {
-	DisplayName             *string                `json:"displayName"`
-	EnumValues              []string               `json:"enumValues"`
-	GreaterThanOperatorName *string                `json:"greaterThanOperatorName"`
-	IsFacetable             *bool                  `json:"isFacetable"`
-	IsRepeatable            *bool                  `json:"isRepeatable"`
-	IsReturnable            *bool                  `json:"isReturnable"`
-	IsSortable              *bool                  `json:"isSortable"`
-	IsSuggestable           *bool                  `json:"isSuggestable"`
-	LessThanOperatorName    *string                `json:"lessThanOperatorName"`
-	ObjectType              *string                `json:"objectType"`
-	OperatorName            *string                `json:"operatorName"`
-	Type                    *QueryOperatorTypeEnum `json:"type"`
+	DisplayName             *string                `json:"displayName,omitempty"`
+	EnumValues              []string               `json:"enumValues,omitempty"`
+	GreaterThanOperatorName *string                `json:"greaterThanOperatorName,omitempty"`
+	IsFacetable             *bool                  `json:"isFacetable,omitempty"`
+	IsRepeatable            *bool                  `json:"isRepeatable,omitempty"`
+	IsReturnable            *bool                  `json:"isReturnable,omitempty"`
+	IsSortable              *bool                  `json:"isSortable,omitempty"`
+	IsSuggestable           *bool                  `json:"isSuggestable,omitempty"`
+	LessThanOperatorName    *string                `json:"lessThanOperatorName,omitempty"`
+	ObjectType              *string                `json:"objectType,omitempty"`
+	OperatorName            *string                `json:"operatorName,omitempty"`
+	Type                    *QueryOperatorTypeEnum `json:"type,omitempty"`
 }

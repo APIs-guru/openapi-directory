@@ -1,9 +1,9 @@
 package shared
 
 type StateViewModel struct {
-	Code        *string `json:"code"`
-	Country     *string `json:"country"`
-	CountryName *string `json:"countryName"`
-	Name        *string `json:"name"`
-	ObjectName  *string `json:"objectName"`
+	Code        *string `json:"code,omitempty"`
+	Country     *string `json:"country,omitempty"`
+	CountryName *string `json:"countryName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	ObjectName  *string `json:"objectName,omitempty"`
 }

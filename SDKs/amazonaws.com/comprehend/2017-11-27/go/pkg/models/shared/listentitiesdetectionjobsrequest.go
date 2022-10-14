@@ -1,7 +1,7 @@
 package shared
 
 type ListEntitiesDetectionJobsRequest struct {
-	Filter     *EntitiesDetectionJobFilter `json:"Filter"`
-	MaxResults *int64                      `json:"MaxResults"`
-	NextToken  *string                     `json:"NextToken"`
+	Filter     *EntitiesDetectionJobFilter `json:"Filter,omitempty"`
+	MaxResults *int64                      `json:"MaxResults,omitempty"`
+	NextToken  *string                     `json:"NextToken,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type MoveNodesRequest struct {
-	Items              []MoveNode                              `json:"items"`
-	KeepShareLinks     *bool                                   `json:"keepShareLinks"`
-	NodeIds            []int64                                 `json:"nodeIds"`
-	ResolutionStrategy *MoveNodesRequestResolutionStrategyEnum `json:"resolutionStrategy"`
+	Items              []MoveNode                              `json:"items,omitempty"`
+	KeepShareLinks     *bool                                   `json:"keepShareLinks,omitempty"`
+	NodeIds            []int64                                 `json:"nodeIds,omitempty"`
+	ResolutionStrategy *MoveNodesRequestResolutionStrategyEnum `json:"resolutionStrategy,omitempty"`
 }

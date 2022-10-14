@@ -5,16 +5,16 @@ import (
 )
 
 type DescribePipelineResponse struct {
-	CreatedBy           *UserContext        `json:"CreatedBy"`
-	CreationTime        *time.Time          `json:"CreationTime"`
-	LastModifiedBy      *UserContext        `json:"LastModifiedBy"`
-	LastModifiedTime    *time.Time          `json:"LastModifiedTime"`
-	LastRunTime         *time.Time          `json:"LastRunTime"`
-	PipelineArn         *string             `json:"PipelineArn"`
-	PipelineDefinition  *string             `json:"PipelineDefinition"`
-	PipelineDescription *string             `json:"PipelineDescription"`
-	PipelineDisplayName *string             `json:"PipelineDisplayName"`
-	PipelineName        *string             `json:"PipelineName"`
-	PipelineStatus      *PipelineStatusEnum `json:"PipelineStatus"`
-	RoleArn             *string             `json:"RoleArn"`
+	CreatedBy           *UserContext        `json:"CreatedBy,omitempty"`
+	CreationTime        *time.Time          `json:"CreationTime,omitempty"`
+	LastModifiedBy      *UserContext        `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime    *time.Time          `json:"LastModifiedTime,omitempty"`
+	LastRunTime         *time.Time          `json:"LastRunTime,omitempty"`
+	PipelineArn         *string             `json:"PipelineArn,omitempty"`
+	PipelineDefinition  *string             `json:"PipelineDefinition,omitempty"`
+	PipelineDescription *string             `json:"PipelineDescription,omitempty"`
+	PipelineDisplayName *string             `json:"PipelineDisplayName,omitempty"`
+	PipelineName        *string             `json:"PipelineName,omitempty"`
+	PipelineStatus      *PipelineStatusEnum `json:"PipelineStatus,omitempty"`
+	RoleArn             *string             `json:"RoleArn,omitempty"`
 }

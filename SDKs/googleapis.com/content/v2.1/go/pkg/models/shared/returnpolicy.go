@@ -1,13 +1,13 @@
 package shared
 
 type ReturnPolicy struct {
-	Country              *string                        `json:"country"`
-	Kind                 *string                        `json:"kind"`
-	Label                *string                        `json:"label"`
-	Name                 *string                        `json:"name"`
-	NonFreeReturnReasons []string                       `json:"nonFreeReturnReasons"`
-	Policy               *ReturnPolicyPolicy            `json:"policy"`
-	ReturnPolicyID       *string                        `json:"returnPolicyId"`
-	ReturnShippingFee    *Price                         `json:"returnShippingFee"`
-	SeasonalOverrides    []ReturnPolicySeasonalOverride `json:"seasonalOverrides"`
+	Country              *string                        `json:"country,omitempty"`
+	Kind                 *string                        `json:"kind,omitempty"`
+	Label                *string                        `json:"label,omitempty"`
+	Name                 *string                        `json:"name,omitempty"`
+	NonFreeReturnReasons []string                       `json:"nonFreeReturnReasons,omitempty"`
+	Policy               *ReturnPolicyPolicy            `json:"policy,omitempty"`
+	ReturnPolicyID       *string                        `json:"returnPolicyId,omitempty"`
+	ReturnShippingFee    *Price                         `json:"returnShippingFee,omitempty"`
+	SeasonalOverrides    []ReturnPolicySeasonalOverride `json:"seasonalOverrides,omitempty"`
 }

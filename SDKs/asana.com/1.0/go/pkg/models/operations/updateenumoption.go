@@ -14,7 +14,7 @@ type UpdateEnumOptionQueryParams struct {
 }
 
 type UpdateEnumOptionRequestBody struct {
-	Data *shared.EnumOptionRequest `json:"data"`
+	Data *shared.EnumOptionRequest `json:"data,omitempty"`
 }
 
 type UpdateEnumOptionRequest struct {
@@ -24,7 +24,7 @@ type UpdateEnumOptionRequest struct {
 }
 
 type UpdateEnumOption200ApplicationJSON struct {
-	Data *shared.EnumOption `json:"data"`
+	Data *shared.EnumOption `json:"data,omitempty"`
 }
 
 type UpdateEnumOptionResponse struct {

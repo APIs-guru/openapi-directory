@@ -19,11 +19,11 @@ type CreateVirtualRouterHeaders struct {
 }
 
 type CreateVirtualRouterRequestBodySpec struct {
-	ServiceNames []string `json:"serviceNames"`
+	ServiceNames []string `json:"serviceNames,omitempty"`
 }
 
 type CreateVirtualRouterRequestBody struct {
-	ClientToken       *string                            `json:"clientToken"`
+	ClientToken       *string                            `json:"clientToken,omitempty"`
 	Spec              CreateVirtualRouterRequestBodySpec `json:"spec"`
 	VirtualRouterName string                             `json:"virtualRouterName"`
 }

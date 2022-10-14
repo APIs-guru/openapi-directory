@@ -1,6 +1,6 @@
 package shared
 
 type Value struct {
-	Applicable *bool                  `json:"applicable"`
-	Value      map[string]interface{} `json:"value"`
+	Applicable *bool                  `json:"applicable,omitempty"`
+	Value      map[string]interface{} `json:"value,omitempty"`
 }

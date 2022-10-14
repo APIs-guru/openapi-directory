@@ -1,7 +1,7 @@
 package shared
 
 type GitHubCodeDestination struct {
-	Description       *string `json:"description"`
+	Description       *string `json:"description,omitempty"`
 	IssuesEnabled     bool    `json:"issuesEnabled"`
 	Name              string  `json:"name"`
 	Owner             string  `json:"owner"`

@@ -1,6 +1,6 @@
 package shared
 
 type InstanceFleetProvisioningSpecifications struct {
-	OnDemandSpecification *OnDemandProvisioningSpecification `json:"OnDemandSpecification"`
-	SpotSpecification     *SpotProvisioningSpecification     `json:"SpotSpecification"`
+	OnDemandSpecification *OnDemandProvisioningSpecification `json:"OnDemandSpecification,omitempty"`
+	SpotSpecification     *SpotProvisioningSpecification     `json:"SpotSpecification,omitempty"`
 }

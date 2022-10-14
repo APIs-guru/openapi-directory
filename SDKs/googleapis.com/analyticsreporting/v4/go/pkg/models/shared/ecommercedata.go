@@ -23,8 +23,8 @@ const (
 )
 
 type EcommerceData struct {
-	ActionType    *EcommerceDataActionTypeEnum    `json:"actionType"`
-	EcommerceType *EcommerceDataEcommerceTypeEnum `json:"ecommerceType"`
-	Products      []ProductData                   `json:"products"`
-	Transaction   *TransactionData                `json:"transaction"`
+	ActionType    *EcommerceDataActionTypeEnum    `json:"actionType,omitempty"`
+	EcommerceType *EcommerceDataEcommerceTypeEnum `json:"ecommerceType,omitempty"`
+	Products      []ProductData                   `json:"products,omitempty"`
+	Transaction   *TransactionData                `json:"transaction,omitempty"`
 }

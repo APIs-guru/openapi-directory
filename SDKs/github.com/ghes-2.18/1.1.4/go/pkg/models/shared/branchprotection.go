@@ -1,7 +1,7 @@
 package shared
 
 type BranchProtectionRequiredConversationResolution struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type BranchProtectionRequiredSignatures struct {
@@ -11,19 +11,19 @@ type BranchProtectionRequiredSignatures struct {
 
 type BranchProtectionRequiredStatusChecks struct {
 	Contexts         []string `json:"contexts"`
-	ContextsURL      *string  `json:"contexts_url"`
-	EnforcementLevel *string  `json:"enforcement_level"`
-	URL              *string  `json:"url"`
+	ContextsURL      *string  `json:"contexts_url,omitempty"`
+	EnforcementLevel *string  `json:"enforcement_level,omitempty"`
+	URL              *string  `json:"url,omitempty"`
 }
 
 type BranchProtection struct {
-	EnforceAdmins                  *ProtectedBranchAdminEnforced                   `json:"enforce_admins"`
-	Name                           *string                                         `json:"name"`
-	ProtectionURL                  *string                                         `json:"protection_url"`
-	RequiredConversationResolution *BranchProtectionRequiredConversationResolution `json:"required_conversation_resolution"`
-	RequiredPullRequestReviews     *ProtectedBranchPullRequestReview               `json:"required_pull_request_reviews"`
-	RequiredSignatures             *BranchProtectionRequiredSignatures             `json:"required_signatures"`
-	RequiredStatusChecks           *BranchProtectionRequiredStatusChecks           `json:"required_status_checks"`
-	Restrictions                   *BranchRestrictionPolicy                        `json:"restrictions"`
-	URL                            *string                                         `json:"url"`
+	EnforceAdmins                  *ProtectedBranchAdminEnforced                   `json:"enforce_admins,omitempty"`
+	Name                           *string                                         `json:"name,omitempty"`
+	ProtectionURL                  *string                                         `json:"protection_url,omitempty"`
+	RequiredConversationResolution *BranchProtectionRequiredConversationResolution `json:"required_conversation_resolution,omitempty"`
+	RequiredPullRequestReviews     *ProtectedBranchPullRequestReview               `json:"required_pull_request_reviews,omitempty"`
+	RequiredSignatures             *BranchProtectionRequiredSignatures             `json:"required_signatures,omitempty"`
+	RequiredStatusChecks           *BranchProtectionRequiredStatusChecks           `json:"required_status_checks,omitempty"`
+	Restrictions                   *BranchRestrictionPolicy                        `json:"restrictions,omitempty"`
+	URL                            *string                                         `json:"url,omitempty"`
 }

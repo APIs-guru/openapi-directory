@@ -1,6 +1,6 @@
 package shared
 
 type EffectiveGuestPolicySourcedSoftwareRecipe struct {
-	SoftwareRecipe *SoftwareRecipe `json:"softwareRecipe"`
-	Source         *string         `json:"source"`
+	SoftwareRecipe *SoftwareRecipe `json:"softwareRecipe,omitempty"`
+	Source         *string         `json:"source,omitempty"`
 }

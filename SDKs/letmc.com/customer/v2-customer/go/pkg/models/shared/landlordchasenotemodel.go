@@ -5,8 +5,8 @@ import (
 )
 
 type LandlordChaseNoteModel struct {
-	Date     *time.Time `json:"Date"`
-	Note     *string    `json:"Note"`
-	NoteType *string    `json:"NoteType"`
-	TenantID *string    `json:"TenantID"`
+	Date     *time.Time `json:"Date,omitempty"`
+	Note     *string    `json:"Note,omitempty"`
+	NoteType *string    `json:"NoteType,omitempty"`
+	TenantID *string    `json:"TenantID,omitempty"`
 }

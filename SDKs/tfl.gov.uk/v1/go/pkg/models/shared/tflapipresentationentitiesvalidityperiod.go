@@ -5,7 +5,7 @@ import (
 )
 
 type TflAPIPresentationEntitiesValidityPeriod struct {
-	FromDate *time.Time `json:"fromDate"`
-	IsNow    *bool      `json:"isNow"`
-	ToDate   *time.Time `json:"toDate"`
+	FromDate *time.Time `json:"fromDate,omitempty"`
+	IsNow    *bool      `json:"isNow,omitempty"`
+	ToDate   *time.Time `json:"toDate,omitempty"`
 }

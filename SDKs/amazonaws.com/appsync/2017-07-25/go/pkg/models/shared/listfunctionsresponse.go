@@ -1,6 +1,6 @@
 package shared
 
 type ListFunctionsResponse struct {
-	Functions []FunctionConfiguration `json:"functions"`
-	NextToken *string                 `json:"nextToken"`
+	Functions []FunctionConfiguration `json:"functions,omitempty"`
+	NextToken *string                 `json:"nextToken,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type DescribeTasksRequest struct {
-	Cluster *string         `json:"cluster"`
-	Include []TaskFieldEnum `json:"include"`
+	Cluster *string         `json:"cluster,omitempty"`
+	Include []TaskFieldEnum `json:"include,omitempty"`
 	Tasks   []string        `json:"tasks"`
 }

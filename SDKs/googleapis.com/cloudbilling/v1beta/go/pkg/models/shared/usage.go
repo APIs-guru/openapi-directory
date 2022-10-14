@@ -1,5 +1,5 @@
 package shared
 
 type Usage struct {
-	UsageRateTimeline *UsageRateTimeline `json:"usageRateTimeline"`
+	UsageRateTimeline *UsageRateTimeline `json:"usageRateTimeline,omitempty"`
 }

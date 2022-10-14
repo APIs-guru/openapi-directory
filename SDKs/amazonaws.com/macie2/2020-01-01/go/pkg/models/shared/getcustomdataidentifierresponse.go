@@ -5,15 +5,15 @@ import (
 )
 
 type GetCustomDataIdentifierResponse struct {
-	Arn                  *string           `json:"arn"`
-	CreatedAt            *time.Time        `json:"createdAt"`
-	Deleted              *bool             `json:"deleted"`
-	Description          *string           `json:"description"`
-	ID                   *string           `json:"id"`
-	IgnoreWords          []string          `json:"ignoreWords"`
-	Keywords             []string          `json:"keywords"`
-	MaximumMatchDistance *int64            `json:"maximumMatchDistance"`
-	Name                 *string           `json:"name"`
-	Regex                *string           `json:"regex"`
-	Tags                 map[string]string `json:"tags"`
+	Arn                  *string           `json:"arn,omitempty"`
+	CreatedAt            *time.Time        `json:"createdAt,omitempty"`
+	Deleted              *bool             `json:"deleted,omitempty"`
+	Description          *string           `json:"description,omitempty"`
+	ID                   *string           `json:"id,omitempty"`
+	IgnoreWords          []string          `json:"ignoreWords,omitempty"`
+	Keywords             []string          `json:"keywords,omitempty"`
+	MaximumMatchDistance *int64            `json:"maximumMatchDistance,omitempty"`
+	Name                 *string           `json:"name,omitempty"`
+	Regex                *string           `json:"regex,omitempty"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }

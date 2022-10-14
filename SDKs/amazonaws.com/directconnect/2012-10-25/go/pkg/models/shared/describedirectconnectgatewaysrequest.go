@@ -1,7 +1,7 @@
 package shared
 
 type DescribeDirectConnectGatewaysRequest struct {
-	DirectConnectGatewayID *string `json:"directConnectGatewayId"`
-	MaxResults             *int64  `json:"maxResults"`
-	NextToken              *string `json:"nextToken"`
+	DirectConnectGatewayID *string `json:"directConnectGatewayId,omitempty"`
+	MaxResults             *int64  `json:"maxResults,omitempty"`
+	NextToken              *string `json:"nextToken,omitempty"`
 }

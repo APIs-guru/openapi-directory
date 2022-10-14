@@ -20,11 +20,11 @@ type UpdateVirtualRouterHeaders struct {
 }
 
 type UpdateVirtualRouterRequestBodySpec struct {
-	ServiceNames []string `json:"serviceNames"`
+	ServiceNames []string `json:"serviceNames,omitempty"`
 }
 
 type UpdateVirtualRouterRequestBody struct {
-	ClientToken *string                            `json:"clientToken"`
+	ClientToken *string                            `json:"clientToken,omitempty"`
 	Spec        UpdateVirtualRouterRequestBodySpec `json:"spec"`
 }
 

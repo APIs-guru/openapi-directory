@@ -18,7 +18,7 @@ const (
 )
 
 type Correction struct {
-	Contexts []ServingContext    `json:"contexts"`
-	Details  []string            `json:"details"`
-	Type     *CorrectionTypeEnum `json:"type"`
+	Contexts []ServingContext    `json:"contexts,omitempty"`
+	Details  []string            `json:"details,omitempty"`
+	Type     *CorrectionTypeEnum `json:"type,omitempty"`
 }

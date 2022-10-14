@@ -1,6 +1,6 @@
 package shared
 
 type EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate struct {
-	AddedAdvertisers   []string `json:"addedAdvertisers"`
-	RemovedAdvertisers []string `json:"removedAdvertisers"`
+	AddedAdvertisers   []string `json:"addedAdvertisers,omitempty"`
+	RemovedAdvertisers []string `json:"removedAdvertisers,omitempty"`
 }

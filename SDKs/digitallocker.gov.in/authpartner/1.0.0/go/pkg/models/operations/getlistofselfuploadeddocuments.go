@@ -13,18 +13,18 @@ type GetListOfSelfUploadedDocumentsRequest struct {
 }
 
 type GetListOfSelfUploadedDocuments401ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetListOfSelfUploadedDocuments404ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetListOfSelfUploadedDocuments500ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetListOfSelfUploadedDocumentsResponse struct {

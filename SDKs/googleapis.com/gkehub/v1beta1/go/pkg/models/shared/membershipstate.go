@@ -12,7 +12,7 @@ const (
 )
 
 type MembershipState struct {
-	Code        *MembershipStateCodeEnum `json:"code"`
-	Description *string                  `json:"description"`
-	UpdateTime  *string                  `json:"updateTime"`
+	Code        *MembershipStateCodeEnum `json:"code,omitempty"`
+	Description *string                  `json:"description,omitempty"`
+	UpdateTime  *string                  `json:"updateTime,omitempty"`
 }

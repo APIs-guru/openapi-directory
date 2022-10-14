@@ -11,5 +11,5 @@ const (
 )
 
 type RetrievalImportance struct {
-	Importance *RetrievalImportanceImportanceEnum `json:"importance"`
+	Importance *RetrievalImportanceImportanceEnum `json:"importance,omitempty"`
 }

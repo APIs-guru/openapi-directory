@@ -1,5 +1,5 @@
 package shared
 
 type GetTagKeysInput struct {
-	PaginationToken *string `json:"PaginationToken"`
+	PaginationToken *string `json:"PaginationToken,omitempty"`
 }

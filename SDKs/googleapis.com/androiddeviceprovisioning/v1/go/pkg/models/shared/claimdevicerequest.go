@@ -9,8 +9,8 @@ const (
 )
 
 type ClaimDeviceRequest struct {
-	CustomerID       *string                            `json:"customerId"`
-	DeviceIdentifier *DeviceIdentifier                  `json:"deviceIdentifier"`
-	DeviceMetadata   *DeviceMetadata                    `json:"deviceMetadata"`
-	SectionType      *ClaimDeviceRequestSectionTypeEnum `json:"sectionType"`
+	CustomerID       *string                            `json:"customerId,omitempty"`
+	DeviceIdentifier *DeviceIdentifier                  `json:"deviceIdentifier,omitempty"`
+	DeviceMetadata   *DeviceMetadata                    `json:"deviceMetadata,omitempty"`
+	SectionType      *ClaimDeviceRequestSectionTypeEnum `json:"sectionType,omitempty"`
 }

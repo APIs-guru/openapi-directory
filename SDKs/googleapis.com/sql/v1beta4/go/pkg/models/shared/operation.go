@@ -52,20 +52,20 @@ const (
 )
 
 type Operation struct {
-	BackupContext *BackupContext              `json:"backupContext"`
-	EndTime       *string                     `json:"endTime"`
-	Error         *OperationErrors            `json:"error"`
-	ExportContext *ExportContext              `json:"exportContext"`
-	ImportContext *ImportContext              `json:"importContext"`
-	InsertTime    *string                     `json:"insertTime"`
-	Kind          *string                     `json:"kind"`
-	Name          *string                     `json:"name"`
-	OperationType *OperationOperationTypeEnum `json:"operationType"`
-	SelfLink      *string                     `json:"selfLink"`
-	StartTime     *string                     `json:"startTime"`
-	Status        *OperationStatusEnum        `json:"status"`
-	TargetID      *string                     `json:"targetId"`
-	TargetLink    *string                     `json:"targetLink"`
-	TargetProject *string                     `json:"targetProject"`
-	User          *string                     `json:"user"`
+	BackupContext *BackupContext              `json:"backupContext,omitempty"`
+	EndTime       *string                     `json:"endTime,omitempty"`
+	Error         *OperationErrors            `json:"error,omitempty"`
+	ExportContext *ExportContext              `json:"exportContext,omitempty"`
+	ImportContext *ImportContext              `json:"importContext,omitempty"`
+	InsertTime    *string                     `json:"insertTime,omitempty"`
+	Kind          *string                     `json:"kind,omitempty"`
+	Name          *string                     `json:"name,omitempty"`
+	OperationType *OperationOperationTypeEnum `json:"operationType,omitempty"`
+	SelfLink      *string                     `json:"selfLink,omitempty"`
+	StartTime     *string                     `json:"startTime,omitempty"`
+	Status        *OperationStatusEnum        `json:"status,omitempty"`
+	TargetID      *string                     `json:"targetId,omitempty"`
+	TargetLink    *string                     `json:"targetLink,omitempty"`
+	TargetProject *string                     `json:"targetProject,omitempty"`
+	User          *string                     `json:"user,omitempty"`
 }

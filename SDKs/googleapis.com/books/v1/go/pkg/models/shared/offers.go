@@ -1,22 +1,22 @@
 package shared
 
 type OffersItemsItems struct {
-	Author              *string `json:"author"`
-	CanonicalVolumeLink *string `json:"canonicalVolumeLink"`
-	CoverURL            *string `json:"coverUrl"`
-	Description         *string `json:"description"`
-	Title               *string `json:"title"`
-	VolumeID            *string `json:"volumeId"`
+	Author              *string `json:"author,omitempty"`
+	CanonicalVolumeLink *string `json:"canonicalVolumeLink,omitempty"`
+	CoverURL            *string `json:"coverUrl,omitempty"`
+	Description         *string `json:"description,omitempty"`
+	Title               *string `json:"title,omitempty"`
+	VolumeID            *string `json:"volumeId,omitempty"`
 }
 
 type OffersItems struct {
-	ArtURL       *string            `json:"artUrl"`
-	GservicesKey *string            `json:"gservicesKey"`
-	ID           *string            `json:"id"`
-	Items        []OffersItemsItems `json:"items"`
+	ArtURL       *string            `json:"artUrl,omitempty"`
+	GservicesKey *string            `json:"gservicesKey,omitempty"`
+	ID           *string            `json:"id,omitempty"`
+	Items        []OffersItemsItems `json:"items,omitempty"`
 }
 
 type Offers struct {
-	Items []OffersItems `json:"items"`
-	Kind  *string       `json:"kind"`
+	Items []OffersItems `json:"items,omitempty"`
+	Kind  *string       `json:"kind,omitempty"`
 }

@@ -27,11 +27,11 @@ const (
 )
 
 type CreateIntegrationResponseRequestBody struct {
-	ContentHandlingStrategy     *CreateIntegrationResponseRequestBodyContentHandlingStrategyEnum `json:"contentHandlingStrategy"`
+	ContentHandlingStrategy     *CreateIntegrationResponseRequestBodyContentHandlingStrategyEnum `json:"contentHandlingStrategy,omitempty"`
 	IntegrationResponseKey      string                                                           `json:"integrationResponseKey"`
-	ResponseParameters          map[string]string                                                `json:"responseParameters"`
-	ResponseTemplates           map[string]string                                                `json:"responseTemplates"`
-	TemplateSelectionExpression *string                                                          `json:"templateSelectionExpression"`
+	ResponseParameters          map[string]string                                                `json:"responseParameters,omitempty"`
+	ResponseTemplates           map[string]string                                                `json:"responseTemplates,omitempty"`
+	TemplateSelectionExpression *string                                                          `json:"templateSelectionExpression,omitempty"`
 }
 
 type CreateIntegrationResponseRequest struct {

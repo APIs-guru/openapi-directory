@@ -14,17 +14,17 @@ type GsiDispatchRequest struct {
 }
 
 type GsiDispatch200ApplicationJSONTimeframe struct {
-	End   *int64 `json:"end"`
-	Start *int64 `json:"start"`
+	End   *int64 `json:"end,omitempty"`
+	Start *int64 `json:"start,omitempty"`
 }
 
 type GsiDispatch200ApplicationJSON struct {
-	AvgDistanceKm  *float64                                `json:"avg_distance_km"`
-	DispatchFrom   []shared.DispatchLocation               `json:"dispatch_from"`
-	DispatchTarget []shared.DispatchLocation               `json:"dispatch_target"`
-	Postmix        map[string]interface{}                  `json:"postmix"`
-	Premix         map[string]interface{}                  `json:"premix"`
-	Timeframe      *GsiDispatch200ApplicationJSONTimeframe `json:"timeframe"`
+	AvgDistanceKm  *float64                                `json:"avg_distance_km,omitempty"`
+	DispatchFrom   []shared.DispatchLocation               `json:"dispatch_from,omitempty"`
+	DispatchTarget []shared.DispatchLocation               `json:"dispatch_target,omitempty"`
+	Postmix        map[string]interface{}                  `json:"postmix,omitempty"`
+	Premix         map[string]interface{}                  `json:"premix,omitempty"`
+	Timeframe      *GsiDispatch200ApplicationJSONTimeframe `json:"timeframe,omitempty"`
 }
 
 type GsiDispatchResponse struct {

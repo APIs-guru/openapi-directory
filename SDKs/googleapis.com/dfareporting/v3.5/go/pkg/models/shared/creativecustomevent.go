@@ -28,14 +28,14 @@ const (
 )
 
 type CreativeCustomEvent struct {
-	AdvertiserCustomEventID   *string                                           `json:"advertiserCustomEventId"`
-	AdvertiserCustomEventName *string                                           `json:"advertiserCustomEventName"`
-	AdvertiserCustomEventType *CreativeCustomEventAdvertiserCustomEventTypeEnum `json:"advertiserCustomEventType"`
-	ArtworkLabel              *string                                           `json:"artworkLabel"`
-	ArtworkType               *CreativeCustomEventArtworkTypeEnum               `json:"artworkType"`
-	ExitClickThroughURL       *CreativeClickThroughURL                          `json:"exitClickThroughUrl"`
-	ID                        *string                                           `json:"id"`
-	PopupWindowProperties     *PopupWindowProperties                            `json:"popupWindowProperties"`
-	TargetType                *CreativeCustomEventTargetTypeEnum                `json:"targetType"`
-	VideoReportingID          *string                                           `json:"videoReportingId"`
+	AdvertiserCustomEventID   *string                                           `json:"advertiserCustomEventId,omitempty"`
+	AdvertiserCustomEventName *string                                           `json:"advertiserCustomEventName,omitempty"`
+	AdvertiserCustomEventType *CreativeCustomEventAdvertiserCustomEventTypeEnum `json:"advertiserCustomEventType,omitempty"`
+	ArtworkLabel              *string                                           `json:"artworkLabel,omitempty"`
+	ArtworkType               *CreativeCustomEventArtworkTypeEnum               `json:"artworkType,omitempty"`
+	ExitClickThroughURL       *CreativeClickThroughURL                          `json:"exitClickThroughUrl,omitempty"`
+	ID                        *string                                           `json:"id,omitempty"`
+	PopupWindowProperties     *PopupWindowProperties                            `json:"popupWindowProperties,omitempty"`
+	TargetType                *CreativeCustomEventTargetTypeEnum                `json:"targetType,omitempty"`
+	VideoReportingID          *string                                           `json:"videoReportingId,omitempty"`
 }

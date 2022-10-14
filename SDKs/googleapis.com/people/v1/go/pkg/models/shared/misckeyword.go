@@ -18,8 +18,8 @@ const (
 )
 
 type MiscKeyword struct {
-	FormattedType *string              `json:"formattedType"`
-	Metadata      *FieldMetadata       `json:"metadata"`
-	Type          *MiscKeywordTypeEnum `json:"type"`
-	Value         *string              `json:"value"`
+	FormattedType *string              `json:"formattedType,omitempty"`
+	Metadata      *FieldMetadata       `json:"metadata,omitempty"`
+	Type          *MiscKeywordTypeEnum `json:"type,omitempty"`
+	Value         *string              `json:"value,omitempty"`
 }

@@ -20,16 +20,16 @@ const (
 )
 
 type GoogleCloudChannelV1Entitlement struct {
-	AssociationInfo    *GoogleCloudChannelV1AssociationInfo                   `json:"associationInfo"`
-	CommitmentSettings *GoogleCloudChannelV1CommitmentSettings                `json:"commitmentSettings"`
-	CreateTime         *string                                                `json:"createTime"`
-	Name               *string                                                `json:"name"`
-	Offer              *string                                                `json:"offer"`
-	Parameters         []GoogleCloudChannelV1Parameter                        `json:"parameters"`
-	ProvisionedService *GoogleCloudChannelV1ProvisionedService                `json:"provisionedService"`
-	ProvisioningState  *GoogleCloudChannelV1EntitlementProvisioningStateEnum  `json:"provisioningState"`
-	PurchaseOrderID    *string                                                `json:"purchaseOrderId"`
-	SuspensionReasons  []GoogleCloudChannelV1EntitlementSuspensionReasonsEnum `json:"suspensionReasons"`
-	TrialSettings      *GoogleCloudChannelV1TrialSettings                     `json:"trialSettings"`
-	UpdateTime         *string                                                `json:"updateTime"`
+	AssociationInfo    *GoogleCloudChannelV1AssociationInfo                   `json:"associationInfo,omitempty"`
+	CommitmentSettings *GoogleCloudChannelV1CommitmentSettings                `json:"commitmentSettings,omitempty"`
+	CreateTime         *string                                                `json:"createTime,omitempty"`
+	Name               *string                                                `json:"name,omitempty"`
+	Offer              *string                                                `json:"offer,omitempty"`
+	Parameters         []GoogleCloudChannelV1Parameter                        `json:"parameters,omitempty"`
+	ProvisionedService *GoogleCloudChannelV1ProvisionedService                `json:"provisionedService,omitempty"`
+	ProvisioningState  *GoogleCloudChannelV1EntitlementProvisioningStateEnum  `json:"provisioningState,omitempty"`
+	PurchaseOrderID    *string                                                `json:"purchaseOrderId,omitempty"`
+	SuspensionReasons  []GoogleCloudChannelV1EntitlementSuspensionReasonsEnum `json:"suspensionReasons,omitempty"`
+	TrialSettings      *GoogleCloudChannelV1TrialSettings                     `json:"trialSettings,omitempty"`
+	UpdateTime         *string                                                `json:"updateTime,omitempty"`
 }

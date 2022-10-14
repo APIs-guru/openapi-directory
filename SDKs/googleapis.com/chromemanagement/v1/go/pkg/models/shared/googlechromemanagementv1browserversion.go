@@ -24,9 +24,9 @@ const (
 )
 
 type GoogleChromeManagementV1BrowserVersion struct {
-	Channel         *GoogleChromeManagementV1BrowserVersionChannelEnum `json:"channel"`
-	Count           *string                                            `json:"count"`
-	DeviceOsVersion *string                                            `json:"deviceOsVersion"`
-	System          *GoogleChromeManagementV1BrowserVersionSystemEnum  `json:"system"`
-	Version         *string                                            `json:"version"`
+	Channel         *GoogleChromeManagementV1BrowserVersionChannelEnum `json:"channel,omitempty"`
+	Count           *string                                            `json:"count,omitempty"`
+	DeviceOsVersion *string                                            `json:"deviceOsVersion,omitempty"`
+	System          *GoogleChromeManagementV1BrowserVersionSystemEnum  `json:"system,omitempty"`
+	Version         *string                                            `json:"version,omitempty"`
 }

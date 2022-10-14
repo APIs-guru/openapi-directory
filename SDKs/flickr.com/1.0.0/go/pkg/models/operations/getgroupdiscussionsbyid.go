@@ -16,18 +16,18 @@ type GetGroupDiscussionsByIDRequest struct {
 }
 
 type GetGroupDiscussionsByID200ApplicationJSON struct {
-	Iconfarm        *float64       `json:"iconfarm"`
-	Iconserver      *float64       `json:"iconserver"`
-	Ispoolmoderated *bool          `json:"ispoolmoderated"`
-	Lang            *string        `json:"lang"`
-	Members         *float64       `json:"members"`
-	Name            *string        `json:"name"`
-	Page            *float64       `json:"page"`
-	Pages           *float64       `json:"pages"`
-	PerPage         *float64       `json:"per_page"`
-	Privacy         *float64       `json:"privacy"`
-	Topics          []shared.Topic `json:"topics"`
-	Total           *float64       `json:"total"`
+	Iconfarm        *float64       `json:"iconfarm,omitempty"`
+	Iconserver      *float64       `json:"iconserver,omitempty"`
+	Ispoolmoderated *bool          `json:"ispoolmoderated,omitempty"`
+	Lang            *string        `json:"lang,omitempty"`
+	Members         *float64       `json:"members,omitempty"`
+	Name            *string        `json:"name,omitempty"`
+	Page            *float64       `json:"page,omitempty"`
+	Pages           *float64       `json:"pages,omitempty"`
+	PerPage         *float64       `json:"per_page,omitempty"`
+	Privacy         *float64       `json:"privacy,omitempty"`
+	Topics          []shared.Topic `json:"topics,omitempty"`
+	Total           *float64       `json:"total,omitempty"`
 }
 
 type GetGroupDiscussionsByIDResponse struct {

@@ -5,10 +5,10 @@ import (
 )
 
 type InputSummary struct {
-	CreationTime     *time.Time       `json:"creationTime"`
-	InputArn         *string          `json:"inputArn"`
-	InputDescription *string          `json:"inputDescription"`
-	InputName        *string          `json:"inputName"`
-	LastUpdateTime   *time.Time       `json:"lastUpdateTime"`
-	Status           *InputStatusEnum `json:"status"`
+	CreationTime     *time.Time       `json:"creationTime,omitempty"`
+	InputArn         *string          `json:"inputArn,omitempty"`
+	InputDescription *string          `json:"inputDescription,omitempty"`
+	InputName        *string          `json:"inputName,omitempty"`
+	LastUpdateTime   *time.Time       `json:"lastUpdateTime,omitempty"`
+	Status           *InputStatusEnum `json:"status,omitempty"`
 }

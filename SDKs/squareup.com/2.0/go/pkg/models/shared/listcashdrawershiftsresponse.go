@@ -1,7 +1,7 @@
 package shared
 
 type ListCashDrawerShiftsResponse struct {
-	Cursor *string                  `json:"cursor"`
-	Errors []Error                  `json:"errors"`
-	Items  []CashDrawerShiftSummary `json:"items"`
+	Cursor *string                  `json:"cursor,omitempty"`
+	Errors []Error                  `json:"errors,omitempty"`
+	Items  []CashDrawerShiftSummary `json:"items,omitempty"`
 }

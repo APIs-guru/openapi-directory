@@ -14,24 +14,24 @@ type PostReportRequest struct {
 }
 
 type PostReport201ApplicationJSON struct {
-	ID     *float64                          `json:"id"`
-	Result *shared.ReportScheduleRestAPIPost `json:"result"`
+	ID     *float64                          `json:"id,omitempty"`
+	Result *shared.ReportScheduleRestAPIPost `json:"result,omitempty"`
 }
 
 type PostReport400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostReport401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostReport404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostReport500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostReportResponse struct {

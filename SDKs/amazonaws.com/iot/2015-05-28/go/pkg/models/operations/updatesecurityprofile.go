@@ -23,14 +23,14 @@ type UpdateSecurityProfileHeaders struct {
 }
 
 type UpdateSecurityProfileRequestBody struct {
-	AdditionalMetricsToRetain       []string                      `json:"additionalMetricsToRetain"`
-	AdditionalMetricsToRetainV2     []shared.MetricToRetain       `json:"additionalMetricsToRetainV2"`
-	AlertTargets                    map[string]shared.AlertTarget `json:"alertTargets"`
-	Behaviors                       []shared.Behavior             `json:"behaviors"`
-	DeleteAdditionalMetricsToRetain *bool                         `json:"deleteAdditionalMetricsToRetain"`
-	DeleteAlertTargets              *bool                         `json:"deleteAlertTargets"`
-	DeleteBehaviors                 *bool                         `json:"deleteBehaviors"`
-	SecurityProfileDescription      *string                       `json:"securityProfileDescription"`
+	AdditionalMetricsToRetain       []string                      `json:"additionalMetricsToRetain,omitempty"`
+	AdditionalMetricsToRetainV2     []shared.MetricToRetain       `json:"additionalMetricsToRetainV2,omitempty"`
+	AlertTargets                    map[string]shared.AlertTarget `json:"alertTargets,omitempty"`
+	Behaviors                       []shared.Behavior             `json:"behaviors,omitempty"`
+	DeleteAdditionalMetricsToRetain *bool                         `json:"deleteAdditionalMetricsToRetain,omitempty"`
+	DeleteAlertTargets              *bool                         `json:"deleteAlertTargets,omitempty"`
+	DeleteBehaviors                 *bool                         `json:"deleteBehaviors,omitempty"`
+	SecurityProfileDescription      *string                       `json:"securityProfileDescription,omitempty"`
 }
 
 type UpdateSecurityProfileRequest struct {

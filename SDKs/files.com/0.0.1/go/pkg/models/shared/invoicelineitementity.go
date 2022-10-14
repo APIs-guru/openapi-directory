@@ -16,13 +16,13 @@ const (
 )
 
 type InvoiceLineItemEntity struct {
-	Amount         *float64                       `json:"amount"`
-	CreatedAt      *time.Time                     `json:"created_at"`
-	Description    *string                        `json:"description"`
-	Plan           *string                        `json:"plan"`
-	ServiceEndAt   *time.Time                     `json:"service_end_at"`
-	ServiceStartAt *time.Time                     `json:"service_start_at"`
-	Site           *string                        `json:"site"`
-	Type           *InvoiceLineItemEntityTypeEnum `json:"type"`
-	UpdatedAt      *time.Time                     `json:"updated_at"`
+	Amount         *float64                       `json:"amount,omitempty"`
+	CreatedAt      *time.Time                     `json:"created_at,omitempty"`
+	Description    *string                        `json:"description,omitempty"`
+	Plan           *string                        `json:"plan,omitempty"`
+	ServiceEndAt   *time.Time                     `json:"service_end_at,omitempty"`
+	ServiceStartAt *time.Time                     `json:"service_start_at,omitempty"`
+	Site           *string                        `json:"site,omitempty"`
+	Type           *InvoiceLineItemEntityTypeEnum `json:"type,omitempty"`
+	UpdatedAt      *time.Time                     `json:"updated_at,omitempty"`
 }

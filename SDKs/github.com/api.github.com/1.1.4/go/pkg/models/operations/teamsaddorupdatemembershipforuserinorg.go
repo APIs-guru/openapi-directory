@@ -18,7 +18,7 @@ const (
 )
 
 type TeamsAddOrUpdateMembershipForUserInOrgRequestBody struct {
-	Role *TeamsAddOrUpdateMembershipForUserInOrgRequestBodyRoleEnum `json:"role"`
+	Role *TeamsAddOrUpdateMembershipForUserInOrgRequestBodyRoleEnum `json:"role,omitempty"`
 }
 
 type TeamsAddOrUpdateMembershipForUserInOrgRequest struct {
@@ -27,14 +27,14 @@ type TeamsAddOrUpdateMembershipForUserInOrgRequest struct {
 }
 
 type TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSONErrors struct {
-	Code     *string `json:"code"`
-	Field    *string `json:"field"`
-	Resource *string `json:"resource"`
+	Code     *string `json:"code,omitempty"`
+	Field    *string `json:"field,omitempty"`
+	Resource *string `json:"resource,omitempty"`
 }
 
 type TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSON struct {
-	Errors  []TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSONErrors `json:"errors"`
-	Message *string                                                          `json:"message"`
+	Errors  []TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSONErrors `json:"errors,omitempty"`
+	Message *string                                                          `json:"message,omitempty"`
 }
 
 type TeamsAddOrUpdateMembershipForUserInOrgResponse struct {

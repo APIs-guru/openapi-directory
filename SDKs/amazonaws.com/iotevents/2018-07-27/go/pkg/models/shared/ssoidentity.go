@@ -2,5 +2,5 @@ package shared
 
 type SsoIdentity struct {
 	IdentityStoreID string  `json:"identityStoreId"`
-	UserID          *string `json:"userId"`
+	UserID          *string `json:"userId,omitempty"`
 }

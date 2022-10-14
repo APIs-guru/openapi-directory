@@ -15,5 +15,5 @@ const (
 )
 
 type Adloox struct {
-	ExcludedAdlooxCategories []AdlooxExcludedAdlooxCategoriesEnum `json:"excludedAdlooxCategories"`
+	ExcludedAdlooxCategories []AdlooxExcludedAdlooxCategoriesEnum `json:"excludedAdlooxCategories,omitempty"`
 }

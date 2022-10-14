@@ -1,6 +1,6 @@
 package shared
 
 type DomainCallEvidence struct {
-	TopHTTPCallDomains []DomainCalls `json:"topHttpCallDomains"`
-	TotalHTTPCallCount *int32        `json:"totalHttpCallCount"`
+	TopHTTPCallDomains []DomainCalls `json:"topHttpCallDomains,omitempty"`
+	TotalHTTPCallCount *int32        `json:"totalHttpCallCount,omitempty"`
 }

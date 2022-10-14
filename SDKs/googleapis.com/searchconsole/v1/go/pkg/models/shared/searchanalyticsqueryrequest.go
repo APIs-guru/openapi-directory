@@ -50,14 +50,14 @@ const (
 )
 
 type SearchAnalyticsQueryRequest struct {
-	AggregationType       *SearchAnalyticsQueryRequestAggregationTypeEnum `json:"aggregationType"`
-	DataState             *SearchAnalyticsQueryRequestDataStateEnum       `json:"dataState"`
-	DimensionFilterGroups []APIDimensionFilterGroup                       `json:"dimensionFilterGroups"`
-	Dimensions            []SearchAnalyticsQueryRequestDimensionsEnum     `json:"dimensions"`
-	EndDate               *string                                         `json:"endDate"`
-	RowLimit              *int32                                          `json:"rowLimit"`
-	SearchType            *SearchAnalyticsQueryRequestSearchTypeEnum      `json:"searchType"`
-	StartDate             *string                                         `json:"startDate"`
-	StartRow              *int32                                          `json:"startRow"`
-	Type                  *SearchAnalyticsQueryRequestTypeEnum            `json:"type"`
+	AggregationType       *SearchAnalyticsQueryRequestAggregationTypeEnum `json:"aggregationType,omitempty"`
+	DataState             *SearchAnalyticsQueryRequestDataStateEnum       `json:"dataState,omitempty"`
+	DimensionFilterGroups []APIDimensionFilterGroup                       `json:"dimensionFilterGroups,omitempty"`
+	Dimensions            []SearchAnalyticsQueryRequestDimensionsEnum     `json:"dimensions,omitempty"`
+	EndDate               *string                                         `json:"endDate,omitempty"`
+	RowLimit              *int32                                          `json:"rowLimit,omitempty"`
+	SearchType            *SearchAnalyticsQueryRequestSearchTypeEnum      `json:"searchType,omitempty"`
+	StartDate             *string                                         `json:"startDate,omitempty"`
+	StartRow              *int32                                          `json:"startRow,omitempty"`
+	Type                  *SearchAnalyticsQueryRequestTypeEnum            `json:"type,omitempty"`
 }

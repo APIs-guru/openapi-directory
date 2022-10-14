@@ -2,10 +2,10 @@ package shared
 
 type ConsentsResponse201 struct {
 	Links           map[string]HrefType    `json:"_links"`
-	ChallengeData   *ChallengeData         `json:"challengeData"`
-	ChosenScaMethod *ChosenScaMethod       `json:"chosenScaMethod"`
+	ChallengeData   *ChallengeData         `json:"challengeData,omitempty"`
+	ChosenScaMethod *ChosenScaMethod       `json:"chosenScaMethod,omitempty"`
 	ConsentID       string                 `json:"consentId"`
 	ConsentStatus   ConsentStatusEnum      `json:"consentStatus"`
-	PsuMessage      *string                `json:"psuMessage"`
-	ScaMethods      []AuthenticationObject `json:"scaMethods"`
+	PsuMessage      *string                `json:"psuMessage,omitempty"`
+	ScaMethods      []AuthenticationObject `json:"scaMethods,omitempty"`
 }

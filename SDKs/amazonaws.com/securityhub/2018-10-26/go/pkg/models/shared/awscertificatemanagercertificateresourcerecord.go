@@ -1,7 +1,7 @@
 package shared
 
 type AwsCertificateManagerCertificateResourceRecord struct {
-	Name  *string `json:"Name"`
-	Type  *string `json:"Type"`
-	Value *string `json:"Value"`
+	Name  *string `json:"Name,omitempty"`
+	Type  *string `json:"Type,omitempty"`
+	Value *string `json:"Value,omitempty"`
 }

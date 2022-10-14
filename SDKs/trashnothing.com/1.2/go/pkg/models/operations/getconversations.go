@@ -18,10 +18,10 @@ type GetConversationsRequest struct {
 }
 
 type GetConversations200ApplicationJSON struct {
-	Conversations []shared.Conversation `json:"conversations"`
-	NumUnread     *int64                `json:"num_unread"`
-	Page          *int64                `json:"page"`
-	PerPage       *int64                `json:"per_page"`
+	Conversations []shared.Conversation `json:"conversations,omitempty"`
+	NumUnread     *int64                `json:"num_unread,omitempty"`
+	Page          *int64                `json:"page,omitempty"`
+	PerPage       *int64                `json:"per_page,omitempty"`
 }
 
 type GetConversationsResponse struct {

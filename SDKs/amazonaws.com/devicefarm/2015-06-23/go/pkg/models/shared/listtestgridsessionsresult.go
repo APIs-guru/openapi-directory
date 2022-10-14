@@ -1,6 +1,6 @@
 package shared
 
 type ListTestGridSessionsResult struct {
-	NextToken        *string           `json:"nextToken"`
-	TestGridSessions []TestGridSession `json:"testGridSessions"`
+	NextToken        *string           `json:"nextToken,omitempty"`
+	TestGridSessions []TestGridSession `json:"testGridSessions,omitempty"`
 }

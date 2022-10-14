@@ -10,8 +10,8 @@ const (
 )
 
 type ScriptError struct {
-	Column       *string                   `json:"column"`
-	ErrorCode    *ScriptErrorErrorCodeEnum `json:"errorCode"`
-	ErrorMessage *string                   `json:"errorMessage"`
-	Line         *string                   `json:"line"`
+	Column       *string                   `json:"column,omitempty"`
+	ErrorCode    *ScriptErrorErrorCodeEnum `json:"errorCode,omitempty"`
+	ErrorMessage *string                   `json:"errorMessage,omitempty"`
+	Line         *string                   `json:"line,omitempty"`
 }

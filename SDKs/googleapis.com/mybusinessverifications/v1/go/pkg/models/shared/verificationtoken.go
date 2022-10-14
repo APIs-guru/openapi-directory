@@ -1,5 +1,5 @@
 package shared
 
 type VerificationToken struct {
-	TokenString *string `json:"tokenString"`
+	TokenString *string `json:"tokenString,omitempty"`
 }

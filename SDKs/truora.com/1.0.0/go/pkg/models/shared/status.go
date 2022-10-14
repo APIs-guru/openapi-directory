@@ -20,9 +20,9 @@ const (
 )
 
 type Status struct {
-	DataSet       *StatusDataSetEnum `json:"data_set"`
-	DatabaseID    *string            `json:"database_id"`
-	DatabaseName  *string            `json:"database_name"`
-	InvalidInputs []string           `json:"invalid_inputs"`
-	Status        *interface{}       `json:"status"`
+	DataSet       *StatusDataSetEnum `json:"data_set,omitempty"`
+	DatabaseID    *string            `json:"database_id,omitempty"`
+	DatabaseName  *string            `json:"database_name,omitempty"`
+	InvalidInputs []string           `json:"invalid_inputs,omitempty"`
+	Status        *interface{}       `json:"status,omitempty"`
 }

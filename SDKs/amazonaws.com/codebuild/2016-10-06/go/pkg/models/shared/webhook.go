@@ -5,11 +5,11 @@ import (
 )
 
 type Webhook struct {
-	BranchFilter       *string               `json:"branchFilter"`
-	BuildType          *WebhookBuildTypeEnum `json:"buildType"`
-	FilterGroups       [][]WebhookFilter     `json:"filterGroups"`
-	LastModifiedSecret *time.Time            `json:"lastModifiedSecret"`
-	PayloadURL         *string               `json:"payloadUrl"`
-	Secret             *string               `json:"secret"`
-	URL                *string               `json:"url"`
+	BranchFilter       *string               `json:"branchFilter,omitempty"`
+	BuildType          *WebhookBuildTypeEnum `json:"buildType,omitempty"`
+	FilterGroups       [][]WebhookFilter     `json:"filterGroups,omitempty"`
+	LastModifiedSecret *time.Time            `json:"lastModifiedSecret,omitempty"`
+	PayloadURL         *string               `json:"payloadUrl,omitempty"`
+	Secret             *string               `json:"secret,omitempty"`
+	URL                *string               `json:"url,omitempty"`
 }

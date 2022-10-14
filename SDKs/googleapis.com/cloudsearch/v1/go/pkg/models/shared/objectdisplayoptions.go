@@ -1,6 +1,6 @@
 package shared
 
 type ObjectDisplayOptions struct {
-	Metalines          []Metaline `json:"metalines"`
-	ObjectDisplayLabel *string    `json:"objectDisplayLabel"`
+	Metalines          []Metaline `json:"metalines,omitempty"`
+	ObjectDisplayLabel *string    `json:"objectDisplayLabel,omitempty"`
 }

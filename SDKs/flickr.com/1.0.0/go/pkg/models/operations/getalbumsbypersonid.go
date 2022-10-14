@@ -16,11 +16,11 @@ type GetAlbumsByPersonIDRequest struct {
 }
 
 type GetAlbumsByPersonID200ApplicationJSON struct {
-	Page      *float64       `json:"page"`
-	Pages     *float64       `json:"pages"`
-	Perpage   *float64       `json:"perpage"`
-	Photosets []shared.Album `json:"photosets"`
-	Total     *float64       `json:"total"`
+	Page      *float64       `json:"page,omitempty"`
+	Pages     *float64       `json:"pages,omitempty"`
+	Perpage   *float64       `json:"perpage,omitempty"`
+	Photosets []shared.Album `json:"photosets,omitempty"`
+	Total     *float64       `json:"total,omitempty"`
 }
 
 type GetAlbumsByPersonIDResponse struct {

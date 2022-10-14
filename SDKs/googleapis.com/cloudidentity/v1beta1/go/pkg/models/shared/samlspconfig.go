@@ -1,6 +1,6 @@
 package shared
 
 type SamlSpConfig struct {
-	AssertionConsumerServiceURI *string `json:"assertionConsumerServiceUri"`
-	EntityID                    *string `json:"entityId"`
+	AssertionConsumerServiceURI *string `json:"assertionConsumerServiceUri,omitempty"`
+	EntityID                    *string `json:"entityId,omitempty"`
 }

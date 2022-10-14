@@ -1,5 +1,5 @@
 package shared
 
 type V2IosKeyRestrictions struct {
-	AllowedBundleIds []string `json:"allowedBundleIds"`
+	AllowedBundleIds []string `json:"allowedBundleIds,omitempty"`
 }

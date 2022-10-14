@@ -5,9 +5,9 @@ import (
 )
 
 type BuildBotLocaleResponse struct {
-	BotID                      *string              `json:"botId"`
-	BotLocaleStatus            *BotLocaleStatusEnum `json:"botLocaleStatus"`
-	BotVersion                 *string              `json:"botVersion"`
-	LastBuildSubmittedDateTime *time.Time           `json:"lastBuildSubmittedDateTime"`
-	LocaleID                   *string              `json:"localeId"`
+	BotID                      *string              `json:"botId,omitempty"`
+	BotLocaleStatus            *BotLocaleStatusEnum `json:"botLocaleStatus,omitempty"`
+	BotVersion                 *string              `json:"botVersion,omitempty"`
+	LastBuildSubmittedDateTime *time.Time           `json:"lastBuildSubmittedDateTime,omitempty"`
+	LocaleID                   *string              `json:"localeId,omitempty"`
 }

@@ -13,8 +13,8 @@ type GetClusterSolutionRequest struct {
 }
 
 type GetClusterSolution404ApplicationJSON struct {
-	Message *string `json:"message"`
-	Status  *string `json:"status"`
+	Message *string `json:"message,omitempty"`
+	Status  *string `json:"status,omitempty"`
 }
 
 type GetClusterSolutionResponse struct {

@@ -22,26 +22,26 @@ type UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitions str
 }
 
 type UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits struct {
-	LimitDown *int64 `json:"limitDown"`
-	LimitUp   *int64 `json:"limitUp"`
+	LimitDown *int64 `json:"limitDown,omitempty"`
+	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits struct {
-	BandwidthLimits *UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits"`
-	Settings        *string                                                                                              `json:"settings"`
+	BandwidthLimits *UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits,omitempty"`
+	Settings        *string                                                                                              `json:"settings,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRules struct {
 	Definitions              []UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitions             `json:"definitions"`
-	DscpTagValue             *int64                                                                                `json:"dscpTagValue"`
-	PcpTagValue              *int64                                                                                `json:"pcpTagValue"`
-	PerClientBandwidthLimits *UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits `json:"perClientBandwidthLimits"`
+	DscpTagValue             *int64                                                                                `json:"dscpTagValue,omitempty"`
+	PcpTagValue              *int64                                                                                `json:"pcpTagValue,omitempty"`
+	PerClientBandwidthLimits *UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits `json:"perClientBandwidthLimits,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidTrafficShapingRulesRequestBody struct {
-	DefaultRulesEnabled   *bool                                                          `json:"defaultRulesEnabled"`
-	Rules                 []UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRules `json:"rules"`
-	TrafficShapingEnabled *bool                                                          `json:"trafficShapingEnabled"`
+	DefaultRulesEnabled   *bool                                                          `json:"defaultRulesEnabled,omitempty"`
+	Rules                 []UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRules `json:"rules,omitempty"`
+	TrafficShapingEnabled *bool                                                          `json:"trafficShapingEnabled,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidTrafficShapingRulesRequest struct {

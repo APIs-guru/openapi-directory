@@ -1,6 +1,6 @@
 package shared
 
 type DisputeEvidenceFile struct {
-	Filename *string `json:"filename"`
-	Filetype *string `json:"filetype"`
+	Filename *string `json:"filename,omitempty"`
+	Filetype *string `json:"filetype,omitempty"`
 }

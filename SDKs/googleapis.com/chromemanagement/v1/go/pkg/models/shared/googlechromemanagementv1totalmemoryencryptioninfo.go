@@ -20,8 +20,8 @@ const (
 )
 
 type GoogleChromeManagementV1TotalMemoryEncryptionInfo struct {
-	EncryptionAlgorithm *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum `json:"encryptionAlgorithm"`
-	EncryptionState     *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum     `json:"encryptionState"`
-	KeyLength           *string                                                                   `json:"keyLength"`
-	MaxKeys             *string                                                                   `json:"maxKeys"`
+	EncryptionAlgorithm *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum `json:"encryptionAlgorithm,omitempty"`
+	EncryptionState     *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum     `json:"encryptionState,omitempty"`
+	KeyLength           *string                                                                   `json:"keyLength,omitempty"`
+	MaxKeys             *string                                                                   `json:"maxKeys,omitempty"`
 }

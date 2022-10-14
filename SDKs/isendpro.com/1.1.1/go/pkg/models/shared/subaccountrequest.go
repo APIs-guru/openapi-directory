@@ -24,11 +24,11 @@ const (
 
 type SubaccountRequest struct {
 	Keyid                     string                                          `json:"keyid"`
-	SubAccountAddCredit       *string                                         `json:"subAccountAddCredit"`
-	SubAccountCountryCode     *string                                         `json:"subAccountCountryCode"`
+	SubAccountAddCredit       *string                                         `json:"subAccountAddCredit,omitempty"`
+	SubAccountCountryCode     *string                                         `json:"subAccountCountryCode,omitempty"`
 	SubAccountEdit            SubaccountRequestSubAccountEditEnum             `json:"subAccountEdit"`
-	SubAccountKeyID           *string                                         `json:"subAccountKeyId"`
-	SubAccountPrice           *string                                         `json:"subAccountPrice"`
-	SubAccountRestrictionStop *SubaccountRequestSubAccountRestrictionStopEnum `json:"subAccountRestrictionStop"`
-	SubAccountRestrictionTime *SubaccountRequestSubAccountRestrictionTimeEnum `json:"subAccountRestrictionTime"`
+	SubAccountKeyID           *string                                         `json:"subAccountKeyId,omitempty"`
+	SubAccountPrice           *string                                         `json:"subAccountPrice,omitempty"`
+	SubAccountRestrictionStop *SubaccountRequestSubAccountRestrictionStopEnum `json:"subAccountRestrictionStop,omitempty"`
+	SubAccountRestrictionTime *SubaccountRequestSubAccountRestrictionTimeEnum `json:"subAccountRestrictionTime,omitempty"`
 }

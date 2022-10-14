@@ -17,8 +17,8 @@ const (
 )
 
 type TetmsRequestBody struct {
-	CertificateParameters *TetmsRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *TetmsRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                TetmsRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Tetms400ApplicationJSON struct {
-	Error            *Tetms400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tetms400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tetms400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tetms400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tetms401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Tetms401ApplicationJSON struct {
-	Error            *Tetms401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tetms401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tetms401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tetms401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tetms404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Tetms404ApplicationJSON struct {
-	Error            *Tetms404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tetms404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tetms404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tetms404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tetms500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Tetms500ApplicationJSON struct {
-	Error            *Tetms500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tetms500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tetms500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tetms500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tetms502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Tetms502ApplicationJSON struct {
-	Error            *Tetms502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tetms502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tetms502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tetms502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tetms503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Tetms503ApplicationJSON struct {
-	Error            *Tetms503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tetms503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tetms503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tetms503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tetms504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Tetms504ApplicationJSON struct {
-	Error            *Tetms504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tetms504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tetms504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tetms504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type TetmsResponse struct {

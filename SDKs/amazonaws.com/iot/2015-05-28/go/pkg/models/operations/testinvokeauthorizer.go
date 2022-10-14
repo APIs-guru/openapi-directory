@@ -19,26 +19,26 @@ type TestInvokeAuthorizerHeaders struct {
 }
 
 type TestInvokeAuthorizerRequestBodyHTTPContext struct {
-	Headers     map[string]string `json:"headers"`
-	QueryString *string           `json:"queryString"`
+	Headers     map[string]string `json:"headers,omitempty"`
+	QueryString *string           `json:"queryString,omitempty"`
 }
 
 type TestInvokeAuthorizerRequestBodyMqttContext struct {
-	ClientID *string `json:"clientId"`
-	Password *string `json:"password"`
-	Username *string `json:"username"`
+	ClientID *string `json:"clientId,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Username *string `json:"username,omitempty"`
 }
 
 type TestInvokeAuthorizerRequestBodyTLSContext struct {
-	ServerName *string `json:"serverName"`
+	ServerName *string `json:"serverName,omitempty"`
 }
 
 type TestInvokeAuthorizerRequestBody struct {
-	HTTPContext    *TestInvokeAuthorizerRequestBodyHTTPContext `json:"httpContext"`
-	MqttContext    *TestInvokeAuthorizerRequestBodyMqttContext `json:"mqttContext"`
-	TLSContext     *TestInvokeAuthorizerRequestBodyTLSContext  `json:"tlsContext"`
-	Token          *string                                     `json:"token"`
-	TokenSignature *string                                     `json:"tokenSignature"`
+	HTTPContext    *TestInvokeAuthorizerRequestBodyHTTPContext `json:"httpContext,omitempty"`
+	MqttContext    *TestInvokeAuthorizerRequestBodyMqttContext `json:"mqttContext,omitempty"`
+	TLSContext     *TestInvokeAuthorizerRequestBodyTLSContext  `json:"tlsContext,omitempty"`
+	Token          *string                                     `json:"token,omitempty"`
+	TokenSignature *string                                     `json:"tokenSignature,omitempty"`
 }
 
 type TestInvokeAuthorizerRequest struct {

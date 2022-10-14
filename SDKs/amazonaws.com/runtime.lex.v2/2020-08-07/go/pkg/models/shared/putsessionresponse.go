@@ -1,5 +1,5 @@
 package shared
 
 type PutSessionResponse struct {
-	AudioStream *string `json:"audioStream"`
+	AudioStream *string `json:"audioStream,omitempty"`
 }

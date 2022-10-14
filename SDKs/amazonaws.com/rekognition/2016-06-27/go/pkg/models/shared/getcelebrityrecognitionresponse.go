@@ -1,9 +1,9 @@
 package shared
 
 type GetCelebrityRecognitionResponse struct {
-	Celebrities   []CelebrityRecognition `json:"Celebrities"`
-	JobStatus     *VideoJobStatusEnum    `json:"JobStatus"`
-	NextToken     *string                `json:"NextToken"`
-	StatusMessage *string                `json:"StatusMessage"`
-	VideoMetadata *VideoMetadata         `json:"VideoMetadata"`
+	Celebrities   []CelebrityRecognition `json:"Celebrities,omitempty"`
+	JobStatus     *VideoJobStatusEnum    `json:"JobStatus,omitempty"`
+	NextToken     *string                `json:"NextToken,omitempty"`
+	StatusMessage *string                `json:"StatusMessage,omitempty"`
+	VideoMetadata *VideoMetadata         `json:"VideoMetadata,omitempty"`
 }

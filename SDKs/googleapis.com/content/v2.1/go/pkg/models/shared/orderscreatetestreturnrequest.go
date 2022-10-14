@@ -1,5 +1,5 @@
 package shared
 
 type OrdersCreateTestReturnRequest struct {
-	Items []OrdersCustomBatchRequestEntryCreateTestReturnReturnItem `json:"items"`
+	Items []OrdersCustomBatchRequestEntryCreateTestReturnReturnItem `json:"items,omitempty"`
 }

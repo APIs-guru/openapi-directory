@@ -5,8 +5,8 @@ type PostServersIDActionsAttachToNetworkPathParams struct {
 }
 
 type PostServersIDActionsAttachToNetworkRequestBodyAttachToNetworkRequest struct {
-	AliasIps []string `json:"alias_ips"`
-	IP       *string  `json:"ip"`
+	AliasIps []string `json:"alias_ips,omitempty"`
+	IP       *string  `json:"ip,omitempty"`
 	Network  int64    `json:"network"`
 }
 

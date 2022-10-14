@@ -9,7 +9,7 @@ type DeleteVodRegionsPathParams struct {
 }
 
 type DeleteVodRegionsRequestBody struct {
-	Countries []string `json:"countries"`
+	Countries []string `json:"countries,omitempty"`
 }
 
 type DeleteVodRegionsSecurity struct {

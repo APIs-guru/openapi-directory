@@ -1,8 +1,8 @@
 package shared
 
 type UpdateCellsRequest struct {
-	Fields *string         `json:"fields"`
-	Range  *GridRange      `json:"range"`
-	Rows   []RowData       `json:"rows"`
-	Start  *GridCoordinate `json:"start"`
+	Fields *string         `json:"fields,omitempty"`
+	Range  *GridRange      `json:"range,omitempty"`
+	Rows   []RowData       `json:"rows,omitempty"`
+	Start  *GridCoordinate `json:"start,omitempty"`
 }

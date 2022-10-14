@@ -8,11 +8,11 @@ const (
 )
 
 type API struct {
-	Methods       []Method       `json:"methods"`
-	Mixins        []Mixin        `json:"mixins"`
-	Name          *string        `json:"name"`
-	Options       []Option       `json:"options"`
-	SourceContext *SourceContext `json:"sourceContext"`
-	Syntax        *APISyntaxEnum `json:"syntax"`
-	Version       *string        `json:"version"`
+	Methods       []Method       `json:"methods,omitempty"`
+	Mixins        []Mixin        `json:"mixins,omitempty"`
+	Name          *string        `json:"name,omitempty"`
+	Options       []Option       `json:"options,omitempty"`
+	SourceContext *SourceContext `json:"sourceContext,omitempty"`
+	Syntax        *APISyntaxEnum `json:"syntax,omitempty"`
+	Version       *string        `json:"version,omitempty"`
 }

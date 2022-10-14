@@ -10,6 +10,6 @@ const (
 )
 
 type Warning struct {
-	Priority *WarningPriorityEnum `json:"priority"`
-	Text     *string              `json:"text"`
+	Priority *WarningPriorityEnum `json:"priority,omitempty"`
+	Text     *string              `json:"text,omitempty"`
 }

@@ -15,14 +15,14 @@ type CreateAPIKeyHeaders struct {
 }
 
 type CreateAPIKeyRequestBody struct {
-	CustomerID         *string           `json:"customerId"`
-	Description        *string           `json:"description"`
-	Enabled            *bool             `json:"enabled"`
-	GenerateDistinctID *bool             `json:"generateDistinctId"`
-	Name               *string           `json:"name"`
-	StageKeys          []shared.StageKey `json:"stageKeys"`
-	Tags               map[string]string `json:"tags"`
-	Value              *string           `json:"value"`
+	CustomerID         *string           `json:"customerId,omitempty"`
+	Description        *string           `json:"description,omitempty"`
+	Enabled            *bool             `json:"enabled,omitempty"`
+	GenerateDistinctID *bool             `json:"generateDistinctId,omitempty"`
+	Name               *string           `json:"name,omitempty"`
+	StageKeys          []shared.StageKey `json:"stageKeys,omitempty"`
+	Tags               map[string]string `json:"tags,omitempty"`
+	Value              *string           `json:"value,omitempty"`
 }
 
 type CreateAPIKeyRequest struct {

@@ -1,12 +1,12 @@
 package shared
 
 type PublishLayerVersionResponse struct {
-	CompatibleRuntimes []RuntimeEnum              `json:"CompatibleRuntimes"`
-	Content            *LayerVersionContentOutput `json:"Content"`
-	CreatedDate        *string                    `json:"CreatedDate"`
-	Description        *string                    `json:"Description"`
-	LayerArn           *string                    `json:"LayerArn"`
-	LayerVersionArn    *string                    `json:"LayerVersionArn"`
-	LicenseInfo        *string                    `json:"LicenseInfo"`
-	Version            *int64                     `json:"Version"`
+	CompatibleRuntimes []RuntimeEnum              `json:"CompatibleRuntimes,omitempty"`
+	Content            *LayerVersionContentOutput `json:"Content,omitempty"`
+	CreatedDate        *string                    `json:"CreatedDate,omitempty"`
+	Description        *string                    `json:"Description,omitempty"`
+	LayerArn           *string                    `json:"LayerArn,omitempty"`
+	LayerVersionArn    *string                    `json:"LayerVersionArn,omitempty"`
+	LicenseInfo        *string                    `json:"LicenseInfo,omitempty"`
+	Version            *int64                     `json:"Version,omitempty"`
 }

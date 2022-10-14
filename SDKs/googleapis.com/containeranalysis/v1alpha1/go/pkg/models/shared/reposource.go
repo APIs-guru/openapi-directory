@@ -1,9 +1,9 @@
 package shared
 
 type RepoSource struct {
-	BranchName *string `json:"branchName"`
-	CommitSha  *string `json:"commitSha"`
-	ProjectID  *string `json:"projectId"`
-	RepoName   *string `json:"repoName"`
-	TagName    *string `json:"tagName"`
+	BranchName *string `json:"branchName,omitempty"`
+	CommitSha  *string `json:"commitSha,omitempty"`
+	ProjectID  *string `json:"projectId,omitempty"`
+	RepoName   *string `json:"repoName,omitempty"`
+	TagName    *string `json:"tagName,omitempty"`
 }

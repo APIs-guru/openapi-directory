@@ -30,7 +30,7 @@ const (
 type GetPresignURL200ApplicationJSONUploadPresign struct {
 	Fields  GetPresignURL200ApplicationJSONFields      `json:"fields"`
 	Headers map[string]interface{}                     `json:"headers"`
-	Method  *GetPresignURL200ApplicationJSONMethodEnum `json:"method"`
+	Method  *GetPresignURL200ApplicationJSONMethodEnum `json:"method,omitempty"`
 	URL     string                                     `json:"url"`
 }
 

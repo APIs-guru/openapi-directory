@@ -30,7 +30,7 @@ type ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingSecurity stru
 type ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingRequest struct {
 	PathParams  ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingPathParams
 	QueryParams ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingQueryParams
-	Request     *shared.GoogleChromePolicyV1UpdateGroupPriorityOrderingRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleChromePolicyVersionsV1UpdateGroupPriorityOrderingRequest `request:"mediaType=application/json"`
 	Security    ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingSecurity
 }
 

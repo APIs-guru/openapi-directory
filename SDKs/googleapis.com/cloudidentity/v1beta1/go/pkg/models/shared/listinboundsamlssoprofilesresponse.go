@@ -1,6 +1,6 @@
 package shared
 
 type ListInboundSamlSsoProfilesResponse struct {
-	InboundSamlSsoProfiles []InboundSamlSsoProfile `json:"inboundSamlSsoProfiles"`
-	NextPageToken          *string                 `json:"nextPageToken"`
+	InboundSamlSsoProfiles []InboundSamlSsoProfile `json:"inboundSamlSsoProfiles,omitempty"`
+	NextPageToken          *string                 `json:"nextPageToken,omitempty"`
 }

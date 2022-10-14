@@ -1,6 +1,6 @@
 package shared
 
 type CreatePortfolioOutput struct {
-	PortfolioDetail *PortfolioDetail `json:"PortfolioDetail"`
-	Tags            []Tag            `json:"Tags"`
+	PortfolioDetail *PortfolioDetail `json:"PortfolioDetail,omitempty"`
+	Tags            []Tag            `json:"Tags,omitempty"`
 }

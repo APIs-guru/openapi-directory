@@ -1,6 +1,6 @@
 package shared
 
 type PayorCreateAPIKeyResponse struct {
-	APIKey    *string `json:"apiKey"`
-	APISecret *string `json:"apiSecret"`
+	APIKey    *string `json:"apiKey,omitempty"`
+	APISecret *string `json:"apiSecret,omitempty"`
 }

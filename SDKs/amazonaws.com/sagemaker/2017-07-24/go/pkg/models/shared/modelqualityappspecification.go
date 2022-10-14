@@ -1,11 +1,11 @@
 package shared
 
 type ModelQualityAppSpecification struct {
-	ContainerArguments              []string                   `json:"ContainerArguments"`
-	ContainerEntrypoint             []string                   `json:"ContainerEntrypoint"`
-	Environment                     map[string]string          `json:"Environment"`
+	ContainerArguments              []string                   `json:"ContainerArguments,omitempty"`
+	ContainerEntrypoint             []string                   `json:"ContainerEntrypoint,omitempty"`
+	Environment                     map[string]string          `json:"Environment,omitempty"`
 	ImageURI                        string                     `json:"ImageUri"`
-	PostAnalyticsProcessorSourceURI *string                    `json:"PostAnalyticsProcessorSourceUri"`
-	ProblemType                     *MonitoringProblemTypeEnum `json:"ProblemType"`
-	RecordPreprocessorSourceURI     *string                    `json:"RecordPreprocessorSourceUri"`
+	PostAnalyticsProcessorSourceURI *string                    `json:"PostAnalyticsProcessorSourceUri,omitempty"`
+	ProblemType                     *MonitoringProblemTypeEnum `json:"ProblemType,omitempty"`
+	RecordPreprocessorSourceURI     *string                    `json:"RecordPreprocessorSourceUri,omitempty"`
 }

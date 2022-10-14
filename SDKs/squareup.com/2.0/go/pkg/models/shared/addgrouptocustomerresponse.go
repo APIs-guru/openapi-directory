@@ -1,5 +1,5 @@
 package shared
 
 type AddGroupToCustomerResponse struct {
-	Errors []Error `json:"errors"`
+	Errors []Error `json:"errors,omitempty"`
 }

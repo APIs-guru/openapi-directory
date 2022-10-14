@@ -1,9 +1,9 @@
 package shared
 
 type RouteSpec struct {
-	GrpcRoute  *GrpcRoute `json:"grpcRoute"`
-	Http2Route *HTTPRoute `json:"http2Route"`
-	HTTPRoute  *HTTPRoute `json:"httpRoute"`
-	Priority   *int64     `json:"priority"`
-	TCPRoute   *TCPRoute  `json:"tcpRoute"`
+	GrpcRoute  *GrpcRoute `json:"grpcRoute,omitempty"`
+	Http2Route *HTTPRoute `json:"http2Route,omitempty"`
+	HTTPRoute  *HTTPRoute `json:"httpRoute,omitempty"`
+	Priority   *int64     `json:"priority,omitempty"`
+	TCPRoute   *TCPRoute  `json:"tcpRoute,omitempty"`
 }

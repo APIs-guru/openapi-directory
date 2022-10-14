@@ -1,5 +1,5 @@
 package shared
 
 type MicroSecGroup struct {
-	Entity *Reference `json:"entity"`
+	Entity *Reference `json:"entity,omitempty"`
 }

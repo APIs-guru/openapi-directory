@@ -1,6 +1,6 @@
 package shared
 
 type ListDatasetImportJobsResponse struct {
-	DatasetImportJobs []DatasetImportJobSummary `json:"datasetImportJobs"`
-	NextToken         *string                   `json:"nextToken"`
+	DatasetImportJobs []DatasetImportJobSummary `json:"datasetImportJobs,omitempty"`
+	NextToken         *string                   `json:"nextToken,omitempty"`
 }

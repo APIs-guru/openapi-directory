@@ -19,20 +19,20 @@ type CreateOtaUpdateHeaders struct {
 }
 
 type CreateOtaUpdateRequestBodyAwsJobAbortConfig struct {
-	AbortCriteriaList []shared.AwsJobAbortCriteria `json:"abortCriteriaList"`
+	AbortCriteriaList []shared.AwsJobAbortCriteria `json:"abortCriteriaList,omitempty"`
 }
 
 type CreateOtaUpdateRequestBodyAwsJobExecutionsRolloutConfig struct {
-	ExponentialRate  *shared.AwsJobExponentialRolloutRate `json:"exponentialRate"`
-	MaximumPerMinute *int64                               `json:"maximumPerMinute"`
+	ExponentialRate  *shared.AwsJobExponentialRolloutRate `json:"exponentialRate,omitempty"`
+	MaximumPerMinute *int64                               `json:"maximumPerMinute,omitempty"`
 }
 
 type CreateOtaUpdateRequestBodyAwsJobPresignedURLConfig struct {
-	ExpiresInSec *int64 `json:"expiresInSec"`
+	ExpiresInSec *int64 `json:"expiresInSec,omitempty"`
 }
 
 type CreateOtaUpdateRequestBodyAwsJobTimeoutConfig struct {
-	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes"`
+	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes,omitempty"`
 }
 
 type CreateOtaUpdateRequestBodyTargetSelectionEnum string
@@ -43,17 +43,17 @@ const (
 )
 
 type CreateOtaUpdateRequestBody struct {
-	AdditionalParameters          map[string]string                                        `json:"additionalParameters"`
-	AwsJobAbortConfig             *CreateOtaUpdateRequestBodyAwsJobAbortConfig             `json:"awsJobAbortConfig"`
-	AwsJobExecutionsRolloutConfig *CreateOtaUpdateRequestBodyAwsJobExecutionsRolloutConfig `json:"awsJobExecutionsRolloutConfig"`
-	AwsJobPresignedURLConfig      *CreateOtaUpdateRequestBodyAwsJobPresignedURLConfig      `json:"awsJobPresignedUrlConfig"`
-	AwsJobTimeoutConfig           *CreateOtaUpdateRequestBodyAwsJobTimeoutConfig           `json:"awsJobTimeoutConfig"`
-	Description                   *string                                                  `json:"description"`
+	AdditionalParameters          map[string]string                                        `json:"additionalParameters,omitempty"`
+	AwsJobAbortConfig             *CreateOtaUpdateRequestBodyAwsJobAbortConfig             `json:"awsJobAbortConfig,omitempty"`
+	AwsJobExecutionsRolloutConfig *CreateOtaUpdateRequestBodyAwsJobExecutionsRolloutConfig `json:"awsJobExecutionsRolloutConfig,omitempty"`
+	AwsJobPresignedURLConfig      *CreateOtaUpdateRequestBodyAwsJobPresignedURLConfig      `json:"awsJobPresignedUrlConfig,omitempty"`
+	AwsJobTimeoutConfig           *CreateOtaUpdateRequestBodyAwsJobTimeoutConfig           `json:"awsJobTimeoutConfig,omitempty"`
+	Description                   *string                                                  `json:"description,omitempty"`
 	Files                         []shared.OtaUpdateFile                                   `json:"files"`
-	Protocols                     []shared.ProtocolEnum                                    `json:"protocols"`
+	Protocols                     []shared.ProtocolEnum                                    `json:"protocols,omitempty"`
 	RoleArn                       string                                                   `json:"roleArn"`
-	Tags                          []shared.Tag                                             `json:"tags"`
-	TargetSelection               *CreateOtaUpdateRequestBodyTargetSelectionEnum           `json:"targetSelection"`
+	Tags                          []shared.Tag                                             `json:"tags,omitempty"`
+	TargetSelection               *CreateOtaUpdateRequestBodyTargetSelectionEnum           `json:"targetSelection,omitempty"`
 	Targets                       []string                                                 `json:"targets"`
 }
 

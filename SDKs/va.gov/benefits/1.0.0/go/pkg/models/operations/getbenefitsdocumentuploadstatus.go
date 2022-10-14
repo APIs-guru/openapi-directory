@@ -18,29 +18,29 @@ type GetBenefitsDocumentUploadStatusRequest struct {
 }
 
 type GetBenefitsDocumentUploadStatus401ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatus403ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatus404ApplicationJSON struct {
-	Code   *string `json:"code"`
-	Detail *string `json:"detail"`
-	Status *string `json:"status"`
-	Title  *string `json:"title"`
+	Code   *string `json:"code,omitempty"`
+	Detail *string `json:"detail,omitempty"`
+	Status *string `json:"status,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatus429ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatus500ApplicationJSON struct {
-	Code   *string `json:"code"`
-	Detail *string `json:"detail"`
-	Status *string `json:"status"`
-	Title  *string `json:"title"`
+	Code   *string `json:"code,omitempty"`
+	Detail *string `json:"detail,omitempty"`
+	Status *string `json:"status,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatusResponse struct {

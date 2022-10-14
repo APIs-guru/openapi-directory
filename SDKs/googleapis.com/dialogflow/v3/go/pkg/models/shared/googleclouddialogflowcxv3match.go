@@ -13,10 +13,10 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3Match struct {
-	Confidence    *float32                                     `json:"confidence"`
-	Event         *string                                      `json:"event"`
-	Intent        *GoogleCloudDialogflowCxV3Intent             `json:"intent"`
-	MatchType     *GoogleCloudDialogflowCxV3MatchMatchTypeEnum `json:"matchType"`
-	Parameters    map[string]interface{}                       `json:"parameters"`
-	ResolvedInput *string                                      `json:"resolvedInput"`
+	Confidence    *float32                                     `json:"confidence,omitempty"`
+	Event         *string                                      `json:"event,omitempty"`
+	Intent        *GoogleCloudDialogflowCxV3Intent             `json:"intent,omitempty"`
+	MatchType     *GoogleCloudDialogflowCxV3MatchMatchTypeEnum `json:"matchType,omitempty"`
+	Parameters    map[string]interface{}                       `json:"parameters,omitempty"`
+	ResolvedInput *string                                      `json:"resolvedInput,omitempty"`
 }

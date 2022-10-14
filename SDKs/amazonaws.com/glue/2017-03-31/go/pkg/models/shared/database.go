@@ -5,12 +5,12 @@ import (
 )
 
 type Database struct {
-	CatalogID                     *string                `json:"CatalogId"`
-	CreateTableDefaultPermissions []PrincipalPermissions `json:"CreateTableDefaultPermissions"`
-	CreateTime                    *time.Time             `json:"CreateTime"`
-	Description                   *string                `json:"Description"`
-	LocationURI                   *string                `json:"LocationUri"`
+	CatalogID                     *string                `json:"CatalogId,omitempty"`
+	CreateTableDefaultPermissions []PrincipalPermissions `json:"CreateTableDefaultPermissions,omitempty"`
+	CreateTime                    *time.Time             `json:"CreateTime,omitempty"`
+	Description                   *string                `json:"Description,omitempty"`
+	LocationURI                   *string                `json:"LocationUri,omitempty"`
 	Name                          string                 `json:"Name"`
-	Parameters                    map[string]string      `json:"Parameters"`
-	TargetDatabase                *DatabaseIdentifier    `json:"TargetDatabase"`
+	Parameters                    map[string]string      `json:"Parameters,omitempty"`
+	TargetDatabase                *DatabaseIdentifier    `json:"TargetDatabase,omitempty"`
 }

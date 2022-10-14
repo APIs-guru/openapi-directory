@@ -5,7 +5,7 @@ import (
 )
 
 type ListOperationsRequest struct {
-	Marker         *string    `json:"Marker"`
-	MaxItems       *int64     `json:"MaxItems"`
-	SubmittedSince *time.Time `json:"SubmittedSince"`
+	Marker         *string    `json:"Marker,omitempty"`
+	MaxItems       *int64     `json:"MaxItems,omitempty"`
+	SubmittedSince *time.Time `json:"SubmittedSince,omitempty"`
 }

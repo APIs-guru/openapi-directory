@@ -1,9 +1,9 @@
 package shared
 
 type OrdersRefundOrderRequest struct {
-	Amount      *MonetaryAmount `json:"amount"`
-	FullRefund  *bool           `json:"fullRefund"`
-	OperationID *string         `json:"operationId"`
-	Reason      *string         `json:"reason"`
-	ReasonText  *string         `json:"reasonText"`
+	Amount      *MonetaryAmount `json:"amount,omitempty"`
+	FullRefund  *bool           `json:"fullRefund,omitempty"`
+	OperationID *string         `json:"operationId,omitempty"`
+	Reason      *string         `json:"reason,omitempty"`
+	ReasonText  *string         `json:"reasonText,omitempty"`
 }

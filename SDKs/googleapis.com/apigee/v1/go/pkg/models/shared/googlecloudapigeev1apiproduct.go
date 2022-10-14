@@ -9,21 +9,21 @@ const (
 )
 
 type GoogleCloudApigeeV1APIProduct struct {
-	APIResources          []string                                            `json:"apiResources"`
-	ApprovalType          *string                                             `json:"approvalType"`
-	Attributes            []GoogleCloudApigeeV1Attribute                      `json:"attributes"`
-	CreatedAt             *string                                             `json:"createdAt"`
-	Description           *string                                             `json:"description"`
-	DisplayName           *string                                             `json:"displayName"`
-	Environments          []string                                            `json:"environments"`
-	GraphqlOperationGroup *GoogleCloudApigeeV1GraphQlOperationGroup           `json:"graphqlOperationGroup"`
-	LastModifiedAt        *string                                             `json:"lastModifiedAt"`
-	Name                  *string                                             `json:"name"`
-	OperationGroup        *GoogleCloudApigeeV1OperationGroup                  `json:"operationGroup"`
-	Proxies               []string                                            `json:"proxies"`
-	Quota                 *string                                             `json:"quota"`
-	QuotaCounterScope     *GoogleCloudApigeeV1APIProductQuotaCounterScopeEnum `json:"quotaCounterScope"`
-	QuotaInterval         *string                                             `json:"quotaInterval"`
-	QuotaTimeUnit         *string                                             `json:"quotaTimeUnit"`
-	Scopes                []string                                            `json:"scopes"`
+	APIResources          []string                                            `json:"apiResources,omitempty"`
+	ApprovalType          *string                                             `json:"approvalType,omitempty"`
+	Attributes            []GoogleCloudApigeeV1Attribute                      `json:"attributes,omitempty"`
+	CreatedAt             *string                                             `json:"createdAt,omitempty"`
+	Description           *string                                             `json:"description,omitempty"`
+	DisplayName           *string                                             `json:"displayName,omitempty"`
+	Environments          []string                                            `json:"environments,omitempty"`
+	GraphqlOperationGroup *GoogleCloudApigeeV1GraphQlOperationGroup           `json:"graphqlOperationGroup,omitempty"`
+	LastModifiedAt        *string                                             `json:"lastModifiedAt,omitempty"`
+	Name                  *string                                             `json:"name,omitempty"`
+	OperationGroup        *GoogleCloudApigeeV1OperationGroup                  `json:"operationGroup,omitempty"`
+	Proxies               []string                                            `json:"proxies,omitempty"`
+	Quota                 *string                                             `json:"quota,omitempty"`
+	QuotaCounterScope     *GoogleCloudApigeeV1APIProductQuotaCounterScopeEnum `json:"quotaCounterScope,omitempty"`
+	QuotaInterval         *string                                             `json:"quotaInterval,omitempty"`
+	QuotaTimeUnit         *string                                             `json:"quotaTimeUnit,omitempty"`
+	Scopes                []string                                            `json:"scopes,omitempty"`
 }

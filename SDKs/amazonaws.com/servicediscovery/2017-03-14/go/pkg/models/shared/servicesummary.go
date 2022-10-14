@@ -5,14 +5,14 @@ import (
 )
 
 type ServiceSummary struct {
-	Arn                     *string                  `json:"Arn"`
-	CreateDate              *time.Time               `json:"CreateDate"`
-	Description             *string                  `json:"Description"`
-	DNSConfig               *DNSConfig               `json:"DnsConfig"`
-	HealthCheckConfig       *HealthCheckConfig       `json:"HealthCheckConfig"`
-	HealthCheckCustomConfig *HealthCheckCustomConfig `json:"HealthCheckCustomConfig"`
-	ID                      *string                  `json:"Id"`
-	InstanceCount           *int64                   `json:"InstanceCount"`
-	Name                    *string                  `json:"Name"`
-	Type                    *ServiceTypeEnum         `json:"Type"`
+	Arn                     *string                  `json:"Arn,omitempty"`
+	CreateDate              *time.Time               `json:"CreateDate,omitempty"`
+	Description             *string                  `json:"Description,omitempty"`
+	DNSConfig               *DNSConfig               `json:"DnsConfig,omitempty"`
+	HealthCheckConfig       *HealthCheckConfig       `json:"HealthCheckConfig,omitempty"`
+	HealthCheckCustomConfig *HealthCheckCustomConfig `json:"HealthCheckCustomConfig,omitempty"`
+	ID                      *string                  `json:"Id,omitempty"`
+	InstanceCount           *int64                   `json:"InstanceCount,omitempty"`
+	Name                    *string                  `json:"Name,omitempty"`
+	Type                    *ServiceTypeEnum         `json:"Type,omitempty"`
 }

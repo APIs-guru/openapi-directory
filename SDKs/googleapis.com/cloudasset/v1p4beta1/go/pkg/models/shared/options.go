@@ -1,10 +1,10 @@
 package shared
 
 type Options struct {
-	AnalyzeServiceAccountImpersonation *bool `json:"analyzeServiceAccountImpersonation"`
-	ExpandGroups                       *bool `json:"expandGroups"`
-	ExpandResources                    *bool `json:"expandResources"`
-	ExpandRoles                        *bool `json:"expandRoles"`
-	OutputGroupEdges                   *bool `json:"outputGroupEdges"`
-	OutputResourceEdges                *bool `json:"outputResourceEdges"`
+	AnalyzeServiceAccountImpersonation *bool `json:"analyzeServiceAccountImpersonation,omitempty"`
+	ExpandGroups                       *bool `json:"expandGroups,omitempty"`
+	ExpandResources                    *bool `json:"expandResources,omitempty"`
+	ExpandRoles                        *bool `json:"expandRoles,omitempty"`
+	OutputGroupEdges                   *bool `json:"outputGroupEdges,omitempty"`
+	OutputResourceEdges                *bool `json:"outputResourceEdges,omitempty"`
 }

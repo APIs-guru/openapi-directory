@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer struct {
-	Answer               *string                                                                     `json:"answer"`
-	FaqQuestion          *string                                                                     `json:"faqQuestion"`
-	MatchConfidence      *float32                                                                    `json:"matchConfidence"`
-	MatchConfidenceLevel *GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLevelEnum `json:"matchConfidenceLevel"`
-	Source               *string                                                                     `json:"source"`
+	Answer               *string                                                                     `json:"answer,omitempty"`
+	FaqQuestion          *string                                                                     `json:"faqQuestion,omitempty"`
+	MatchConfidence      *float32                                                                    `json:"matchConfidence,omitempty"`
+	MatchConfidenceLevel *GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLevelEnum `json:"matchConfidenceLevel,omitempty"`
+	Source               *string                                                                     `json:"source,omitempty"`
 }

@@ -1,21 +1,21 @@
 package shared
 
 type QueryQueryGroupsGroup struct {
-	Group []interface{} `json:"Group"`
+	Group []interface{} `json:"Group,omitempty"`
 }
 
 type QueryQueryVariablesVariable struct {
-	Variable []interface{} `json:"Variable"`
+	Variable []interface{} `json:"Variable,omitempty"`
 }
 
 type QueryQueryQuery struct {
-	ExcludeNullOrEmptyElements *bool                        `json:"ExcludeNullOrEmptyElements"`
-	Groups                     *QueryQueryGroupsGroup       `json:"Groups"`
-	RootNodeName               *string                      `json:"RootNodeName"`
-	SuppressMetricAttributes   *bool                        `json:"SuppressMetricAttributes"`
-	Variables                  *QueryQueryVariablesVariable `json:"Variables"`
+	ExcludeNullOrEmptyElements *bool                        `json:"ExcludeNullOrEmptyElements,omitempty"`
+	Groups                     *QueryQueryGroupsGroup       `json:"Groups,omitempty"`
+	RootNodeName               *string                      `json:"RootNodeName,omitempty"`
+	SuppressMetricAttributes   *bool                        `json:"SuppressMetricAttributes,omitempty"`
+	Variables                  *QueryQueryVariablesVariable `json:"Variables,omitempty"`
 }
 
 type Query struct {
-	Query *QueryQueryQuery `json:"Query"`
+	Query *QueryQueryQuery `json:"Query,omitempty"`
 }

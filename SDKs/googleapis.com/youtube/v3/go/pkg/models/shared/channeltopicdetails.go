@@ -1,6 +1,6 @@
 package shared
 
 type ChannelTopicDetails struct {
-	TopicCategories []string `json:"topicCategories"`
-	TopicIds        []string `json:"topicIds"`
+	TopicCategories []string `json:"topicCategories,omitempty"`
+	TopicIds        []string `json:"topicIds,omitempty"`
 }

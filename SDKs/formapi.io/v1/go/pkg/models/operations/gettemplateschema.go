@@ -18,15 +18,15 @@ type GetTemplateSchemaRequest struct {
 }
 
 type GetTemplateSchema200ApplicationJSONTemplateSchema struct {
-	DollarSchema         *string                `json:"$schema"`
-	AdditionalProperties *bool                  `json:"additionalProperties"`
-	Definitions          map[string]interface{} `json:"definitions"`
-	Description          *string                `json:"description"`
-	ID                   *string                `json:"id"`
-	Properties           map[string]interface{} `json:"properties"`
-	Required             []interface{}          `json:"required"`
-	Title                *string                `json:"title"`
-	Type                 *string                `json:"type"`
+	DollarSchema         *string                `json:"$schema,omitempty"`
+	AdditionalProperties *bool                  `json:"additionalProperties,omitempty"`
+	Definitions          map[string]interface{} `json:"definitions,omitempty"`
+	Description          *string                `json:"description,omitempty"`
+	ID                   *string                `json:"id,omitempty"`
+	Properties           map[string]interface{} `json:"properties,omitempty"`
+	Required             []interface{}          `json:"required,omitempty"`
+	Title                *string                `json:"title,omitempty"`
+	Type                 *string                `json:"type,omitempty"`
 }
 
 type GetTemplateSchemaResponse struct {

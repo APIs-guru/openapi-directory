@@ -1,9 +1,9 @@
 package shared
 
 type Occurrences struct {
-	Cells        []Cell   `json:"Cells"`
-	LineRanges   []Range  `json:"LineRanges"`
-	OffsetRanges []Range  `json:"OffsetRanges"`
-	Pages        []Page   `json:"Pages"`
-	Records      []Record `json:"Records"`
+	Cells        []Cell   `json:"Cells,omitempty"`
+	LineRanges   []Range  `json:"LineRanges,omitempty"`
+	OffsetRanges []Range  `json:"OffsetRanges,omitempty"`
+	Pages        []Page   `json:"Pages,omitempty"`
+	Records      []Record `json:"Records,omitempty"`
 }

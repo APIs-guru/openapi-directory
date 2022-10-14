@@ -50,5 +50,5 @@ const (
 )
 
 type RelationshipNote struct {
-	Type *RelationshipNoteTypeEnum `json:"type"`
+	Type *RelationshipNoteTypeEnum `json:"type,omitempty"`
 }

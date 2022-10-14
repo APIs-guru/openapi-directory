@@ -1,7 +1,7 @@
 package shared
 
 type PlayerListResponse struct {
-	Items         []Player `json:"items"`
-	Kind          *string  `json:"kind"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Player `json:"items,omitempty"`
+	Kind          *string  `json:"kind,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

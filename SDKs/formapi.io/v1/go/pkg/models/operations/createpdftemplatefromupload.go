@@ -44,24 +44,24 @@ const (
 )
 
 type CreatePdfTemplateFromUploadRequestBodyTemplateUploadTemplateData struct {
-	AllowAdditionalProperties *bool                                                                 `json:"allow_additional_properties"`
-	Description               *string                                                               `json:"description"`
-	Document                  *CreatePdfTemplateFromUploadRequestBodyTemplateDocument               `json:"document"`
-	EditableSubmissions       *bool                                                                 `json:"editable_submissions"`
-	ExpirationInterval        *CreatePdfTemplateFromUploadRequestBodyTemplateExpirationIntervalEnum `json:"expiration_interval"`
-	ExpireAfter               *float64                                                              `json:"expire_after"`
-	ExpireSubmissions         *bool                                                                 `json:"expire_submissions"`
-	FooterHTML                *string                                                               `json:"footer_html"`
-	HeaderHTML                *string                                                               `json:"header_html"`
-	HTML                      *string                                                               `json:"html"`
+	AllowAdditionalProperties *bool                                                                 `json:"allow_additional_properties,omitempty"`
+	Description               *string                                                               `json:"description,omitempty"`
+	Document                  *CreatePdfTemplateFromUploadRequestBodyTemplateDocument               `json:"document,omitempty"`
+	EditableSubmissions       *bool                                                                 `json:"editable_submissions,omitempty"`
+	ExpirationInterval        *CreatePdfTemplateFromUploadRequestBodyTemplateExpirationIntervalEnum `json:"expiration_interval,omitempty"`
+	ExpireAfter               *float64                                                              `json:"expire_after,omitempty"`
+	ExpireSubmissions         *bool                                                                 `json:"expire_submissions,omitempty"`
+	FooterHTML                *string                                                               `json:"footer_html,omitempty"`
+	HeaderHTML                *string                                                               `json:"header_html,omitempty"`
+	HTML                      *string                                                               `json:"html,omitempty"`
 	Name                      string                                                                `json:"name"`
-	PublicSubmissions         *bool                                                                 `json:"public_submissions"`
-	PublicWebForm             *bool                                                                 `json:"public_web_form"`
-	RedirectURL               *string                                                               `json:"redirect_url"`
-	Scss                      *string                                                               `json:"scss"`
-	SlackWebhookURL           *string                                                               `json:"slack_webhook_url"`
-	TemplateType              *CreatePdfTemplateFromUploadRequestBodyTemplateTemplateTypeEnum       `json:"template_type"`
-	WebhookURL                *string                                                               `json:"webhook_url"`
+	PublicSubmissions         *bool                                                                 `json:"public_submissions,omitempty"`
+	PublicWebForm             *bool                                                                 `json:"public_web_form,omitempty"`
+	RedirectURL               *string                                                               `json:"redirect_url,omitempty"`
+	Scss                      *string                                                               `json:"scss,omitempty"`
+	SlackWebhookURL           *string                                                               `json:"slack_webhook_url,omitempty"`
+	TemplateType              *CreatePdfTemplateFromUploadRequestBodyTemplateTemplateTypeEnum       `json:"template_type,omitempty"`
+	WebhookURL                *string                                                               `json:"webhook_url,omitempty"`
 }
 
 type CreatePdfTemplateFromUploadRequestBodyCreateTemplateFromUploadData struct {
@@ -89,14 +89,14 @@ type CreatePdfTemplateFromUpload201ApplicationJSONPendingTemplate struct {
 	AllowAdditionalProperties bool                                                                 `json:"allow_additional_properties"`
 	Description               string                                                               `json:"description"`
 	EditableSubmissions       bool                                                                 `json:"editable_submissions"`
-	ExpirationInterval        *CreatePdfTemplateFromUpload201ApplicationJSONExpirationIntervalEnum `json:"expiration_interval"`
-	ExpireAfter               *float64                                                             `json:"expire_after"`
+	ExpirationInterval        *CreatePdfTemplateFromUpload201ApplicationJSONExpirationIntervalEnum `json:"expiration_interval,omitempty"`
+	ExpireAfter               *float64                                                             `json:"expire_after,omitempty"`
 	ExpireSubmissions         bool                                                                 `json:"expire_submissions"`
 	ID                        string                                                               `json:"id"`
 	Locked                    bool                                                                 `json:"locked"`
 	Name                      string                                                               `json:"name"`
-	ParentFolderID            *string                                                              `json:"parent_folder_id"`
-	Path                      *string                                                              `json:"path"`
+	ParentFolderID            *string                                                              `json:"parent_folder_id,omitempty"`
+	Path                      *string                                                              `json:"path,omitempty"`
 	PublicSubmissions         bool                                                                 `json:"public_submissions"`
 	PublicWebForm             bool                                                                 `json:"public_web_form"`
 	RedirectURL               string                                                               `json:"redirect_url"`

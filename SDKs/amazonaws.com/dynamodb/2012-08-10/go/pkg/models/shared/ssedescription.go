@@ -5,8 +5,8 @@ import (
 )
 
 type SseDescription struct {
-	InaccessibleEncryptionDateTime *time.Time     `json:"InaccessibleEncryptionDateTime"`
-	KmsMasterKeyArn                *string        `json:"KMSMasterKeyArn"`
-	SseType                        *SseTypeEnum   `json:"SSEType"`
-	Status                         *SseStatusEnum `json:"Status"`
+	InaccessibleEncryptionDateTime *time.Time     `json:"InaccessibleEncryptionDateTime,omitempty"`
+	KmsMasterKeyArn                *string        `json:"KMSMasterKeyArn,omitempty"`
+	SseType                        *SseTypeEnum   `json:"SSEType,omitempty"`
+	Status                         *SseStatusEnum `json:"Status,omitempty"`
 }

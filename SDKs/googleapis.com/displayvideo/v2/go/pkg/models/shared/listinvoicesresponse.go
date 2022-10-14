@@ -1,6 +1,6 @@
 package shared
 
 type ListInvoicesResponse struct {
-	Invoices      []Invoice `json:"invoices"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Invoices      []Invoice `json:"invoices,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
 }

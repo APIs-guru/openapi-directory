@@ -13,13 +13,13 @@ type ListDropletNeighborsRequest struct {
 }
 
 type ListDropletNeighbors200ApplicationJSON struct {
-	Droplets []shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItems `json:"droplets"`
+	Droplets []shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItems `json:"droplets,omitempty"`
 }
 
 type ListDropletNeighbors401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListDropletNeighborsResponse struct {

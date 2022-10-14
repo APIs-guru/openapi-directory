@@ -1,8 +1,8 @@
 package shared
 
 type AudioChannelInput struct {
-	Channel *int32   `json:"channel"`
-	GainDb  *float64 `json:"gainDb"`
-	Key     *string  `json:"key"`
-	Track   *int32   `json:"track"`
+	Channel *int32   `json:"channel,omitempty"`
+	GainDb  *float64 `json:"gainDb,omitempty"`
+	Key     *string  `json:"key,omitempty"`
+	Track   *int32   `json:"track,omitempty"`
 }

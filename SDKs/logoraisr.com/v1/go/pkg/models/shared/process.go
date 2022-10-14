@@ -1,10 +1,10 @@
 package shared
 
 type Process struct {
-	Crop                *string `json:"crop"`
-	Flip                *bool   `json:"flip"`
-	Mirror              *bool   `json:"mirror"`
+	Crop                *string `json:"crop,omitempty"`
+	Flip                *bool   `json:"flip,omitempty"`
+	Mirror              *bool   `json:"mirror,omitempty"`
 	ProcessingAlgorithm string  `json:"processing_algorithm"`
-	Resize              *string `json:"resize"`
-	Rotate              *int64  `json:"rotate"`
+	Resize              *string `json:"resize,omitempty"`
+	Rotate              *int64  `json:"rotate,omitempty"`
 }

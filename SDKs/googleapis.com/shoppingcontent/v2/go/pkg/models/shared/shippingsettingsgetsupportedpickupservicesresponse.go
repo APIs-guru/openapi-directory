@@ -1,6 +1,6 @@
 package shared
 
 type ShippingsettingsGetSupportedPickupServicesResponse struct {
-	Kind           *string                       `json:"kind"`
-	PickupServices []PickupServicesPickupService `json:"pickupServices"`
+	Kind           *string                       `json:"kind,omitempty"`
+	PickupServices []PickupServicesPickupService `json:"pickupServices,omitempty"`
 }

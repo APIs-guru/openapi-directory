@@ -1,5 +1,5 @@
 package shared
 
 type ResourceCollectionFilter struct {
-	CloudFormation *CloudFormationCollectionFilter `json:"CloudFormation"`
+	CloudFormation *CloudFormationCollectionFilter `json:"CloudFormation,omitempty"`
 }

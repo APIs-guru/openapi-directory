@@ -21,13 +21,13 @@ type GetSpinsRequest struct {
 }
 
 type GetSpins200ApplicationJSONLinks struct {
-	Self *shared.Link `json:"self"`
+	Self *shared.Link `json:"self,omitempty"`
 }
 
 type GetSpins200ApplicationJSON struct {
-	Links *GetSpins200ApplicationJSONLinks `json:"_links"`
-	Meta  *shared.Pagination               `json:"_meta"`
-	Items []shared.Spin                    `json:"items"`
+	Links *GetSpins200ApplicationJSONLinks `json:"_links,omitempty"`
+	Meta  *shared.Pagination               `json:"_meta,omitempty"`
+	Items []shared.Spin                    `json:"items,omitempty"`
 }
 
 type GetSpinsResponse struct {

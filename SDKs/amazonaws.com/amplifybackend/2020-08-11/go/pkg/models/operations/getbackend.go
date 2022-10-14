@@ -19,7 +19,7 @@ type GetBackendHeaders struct {
 }
 
 type GetBackendRequestBody struct {
-	BackendEnvironmentName *string `json:"backendEnvironmentName"`
+	BackendEnvironmentName *string `json:"backendEnvironmentName,omitempty"`
 }
 
 type GetBackendRequest struct {

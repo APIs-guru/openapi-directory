@@ -5,10 +5,10 @@ import (
 )
 
 type SearchFlowExecutionsRequest struct {
-	EndTime          *time.Time `json:"endTime"`
-	FlowExecutionID  *string    `json:"flowExecutionId"`
-	MaxResults       *int64     `json:"maxResults"`
-	NextToken        *string    `json:"nextToken"`
-	StartTime        *time.Time `json:"startTime"`
+	EndTime          *time.Time `json:"endTime,omitempty"`
+	FlowExecutionID  *string    `json:"flowExecutionId,omitempty"`
+	MaxResults       *int64     `json:"maxResults,omitempty"`
+	NextToken        *string    `json:"nextToken,omitempty"`
+	StartTime        *time.Time `json:"startTime,omitempty"`
 	SystemInstanceID string     `json:"systemInstanceId"`
 }

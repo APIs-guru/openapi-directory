@@ -1,9 +1,9 @@
 package shared
 
 type NestedRack struct {
-	DeviceCount *int64  `json:"device_count"`
-	DisplayName *string `json:"display_name"`
-	ID          *int64  `json:"id"`
+	DeviceCount *int64  `json:"device_count,omitempty"`
+	DisplayName *string `json:"display_name,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
 	Name        string  `json:"name"`
-	URL         *string `json:"url"`
+	URL         *string `json:"url,omitempty"`
 }

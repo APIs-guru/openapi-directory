@@ -1,16 +1,16 @@
 package shared
 
 type UpdateItemInput struct {
-	AttributeUpdates            map[string]AttributeValueUpdate   `json:"AttributeUpdates"`
-	ConditionExpression         *string                           `json:"ConditionExpression"`
-	ConditionalOperator         *ConditionalOperatorEnum          `json:"ConditionalOperator"`
-	Expected                    map[string]ExpectedAttributeValue `json:"Expected"`
-	ExpressionAttributeNames    map[string]string                 `json:"ExpressionAttributeNames"`
-	ExpressionAttributeValues   map[string]AttributeValue         `json:"ExpressionAttributeValues"`
+	AttributeUpdates            map[string]AttributeValueUpdate   `json:"AttributeUpdates,omitempty"`
+	ConditionExpression         *string                           `json:"ConditionExpression,omitempty"`
+	ConditionalOperator         *ConditionalOperatorEnum          `json:"ConditionalOperator,omitempty"`
+	Expected                    map[string]ExpectedAttributeValue `json:"Expected,omitempty"`
+	ExpressionAttributeNames    map[string]string                 `json:"ExpressionAttributeNames,omitempty"`
+	ExpressionAttributeValues   map[string]AttributeValue         `json:"ExpressionAttributeValues,omitempty"`
 	Key                         map[string]AttributeValue         `json:"Key"`
-	ReturnConsumedCapacity      *ReturnConsumedCapacityEnum       `json:"ReturnConsumedCapacity"`
-	ReturnItemCollectionMetrics *ReturnItemCollectionMetricsEnum  `json:"ReturnItemCollectionMetrics"`
-	ReturnValues                *ReturnValueEnum                  `json:"ReturnValues"`
+	ReturnConsumedCapacity      *ReturnConsumedCapacityEnum       `json:"ReturnConsumedCapacity,omitempty"`
+	ReturnItemCollectionMetrics *ReturnItemCollectionMetricsEnum  `json:"ReturnItemCollectionMetrics,omitempty"`
+	ReturnValues                *ReturnValueEnum                  `json:"ReturnValues,omitempty"`
 	TableName                   string                            `json:"TableName"`
-	UpdateExpression            *string                           `json:"UpdateExpression"`
+	UpdateExpression            *string                           `json:"UpdateExpression,omitempty"`
 }

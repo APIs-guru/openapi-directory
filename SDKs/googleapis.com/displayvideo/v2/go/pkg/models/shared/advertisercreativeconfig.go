@@ -1,8 +1,8 @@
 package shared
 
 type AdvertiserCreativeConfig struct {
-	DynamicCreativeEnabled             *bool   `json:"dynamicCreativeEnabled"`
-	IasClientID                        *string `json:"iasClientId"`
-	ObaComplianceDisabled              *bool   `json:"obaComplianceDisabled"`
-	VideoCreativeDataSharingAuthorized *bool   `json:"videoCreativeDataSharingAuthorized"`
+	DynamicCreativeEnabled             *bool   `json:"dynamicCreativeEnabled,omitempty"`
+	IasClientID                        *string `json:"iasClientId,omitempty"`
+	ObaComplianceDisabled              *bool   `json:"obaComplianceDisabled,omitempty"`
+	VideoCreativeDataSharingAuthorized *bool   `json:"videoCreativeDataSharingAuthorized,omitempty"`
 }

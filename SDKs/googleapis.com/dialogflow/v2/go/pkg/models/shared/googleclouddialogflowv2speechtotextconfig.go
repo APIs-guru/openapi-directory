@@ -10,5 +10,5 @@ const (
 )
 
 type GoogleCloudDialogflowV2SpeechToTextConfig struct {
-	SpeechModelVariant *GoogleCloudDialogflowV2SpeechToTextConfigSpeechModelVariantEnum `json:"speechModelVariant"`
+	SpeechModelVariant *GoogleCloudDialogflowV2SpeechToTextConfigSpeechModelVariantEnum `json:"speechModelVariant,omitempty"`
 }

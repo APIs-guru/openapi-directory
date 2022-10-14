@@ -5,47 +5,47 @@ type UpdateCollectionPathParams struct {
 }
 
 type UpdateCollectionRequestBodyCollectionInfo struct {
-	PostmanID   *string `json:"_postman_id"`
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
-	Schema      *string `json:"schema"`
+	PostmanID   *string `json:"_postman_id,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Schema      *string `json:"schema,omitempty"`
 }
 
 type UpdateCollectionRequestBodyCollectionItemItemRequestBody struct {
-	Mode *string `json:"mode"`
-	Raw  *string `json:"raw"`
+	Mode *string `json:"mode,omitempty"`
+	Raw  *string `json:"raw,omitempty"`
 }
 
 type UpdateCollectionRequestBodyCollectionItemItemRequestHeader struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type UpdateCollectionRequestBodyCollectionItemItemRequest struct {
-	Body        *UpdateCollectionRequestBodyCollectionItemItemRequestBody    `json:"body"`
-	Description *string                                                      `json:"description"`
-	Header      []UpdateCollectionRequestBodyCollectionItemItemRequestHeader `json:"header"`
-	Method      *string                                                      `json:"method"`
-	URL         *string                                                      `json:"url"`
+	Body        *UpdateCollectionRequestBodyCollectionItemItemRequestBody    `json:"body,omitempty"`
+	Description *string                                                      `json:"description,omitempty"`
+	Header      []UpdateCollectionRequestBodyCollectionItemItemRequestHeader `json:"header,omitempty"`
+	Method      *string                                                      `json:"method,omitempty"`
+	URL         *string                                                      `json:"url,omitempty"`
 }
 
 type UpdateCollectionRequestBodyCollectionItemItem struct {
-	Name    *string                                               `json:"name"`
-	Request *UpdateCollectionRequestBodyCollectionItemItemRequest `json:"request"`
+	Name    *string                                               `json:"name,omitempty"`
+	Request *UpdateCollectionRequestBodyCollectionItemItemRequest `json:"request,omitempty"`
 }
 
 type UpdateCollectionRequestBodyCollectionItem struct {
-	Item []UpdateCollectionRequestBodyCollectionItemItem `json:"item"`
-	Name *string                                         `json:"name"`
+	Item []UpdateCollectionRequestBodyCollectionItemItem `json:"item,omitempty"`
+	Name *string                                         `json:"name,omitempty"`
 }
 
 type UpdateCollectionRequestBodyCollection struct {
-	Info *UpdateCollectionRequestBodyCollectionInfo  `json:"info"`
-	Item []UpdateCollectionRequestBodyCollectionItem `json:"item"`
+	Info *UpdateCollectionRequestBodyCollectionInfo  `json:"info,omitempty"`
+	Item []UpdateCollectionRequestBodyCollectionItem `json:"item,omitempty"`
 }
 
 type UpdateCollectionRequestBody struct {
-	Collection *UpdateCollectionRequestBodyCollection `json:"collection"`
+	Collection *UpdateCollectionRequestBodyCollection `json:"collection,omitempty"`
 }
 
 type UpdateCollectionRequest struct {
@@ -54,46 +54,46 @@ type UpdateCollectionRequest struct {
 }
 
 type UpdateCollection200ApplicationJSONCollection struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type UpdateCollection200ApplicationJSON struct {
-	Collection *UpdateCollection200ApplicationJSONCollection `json:"collection"`
+	Collection *UpdateCollection200ApplicationJSONCollection `json:"collection,omitempty"`
 }
 
 type UpdateCollection400ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type UpdateCollection400ApplicationJSON struct {
-	Error *UpdateCollection400ApplicationJSONError `json:"error"`
+	Error *UpdateCollection400ApplicationJSONError `json:"error,omitempty"`
 }
 
 type UpdateCollection403ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type UpdateCollection403ApplicationJSON struct {
-	Error *UpdateCollection403ApplicationJSONError `json:"error"`
+	Error *UpdateCollection403ApplicationJSONError `json:"error,omitempty"`
 }
 
 type UpdateCollection404ApplicationJSONErrorDetails struct {
-	ID   *string `json:"id"`
-	Item *string `json:"item"`
+	ID   *string `json:"id,omitempty"`
+	Item *string `json:"item,omitempty"`
 }
 
 type UpdateCollection404ApplicationJSONError struct {
-	Details *UpdateCollection404ApplicationJSONErrorDetails `json:"details"`
-	Message *string                                         `json:"message"`
-	Name    *string                                         `json:"name"`
+	Details *UpdateCollection404ApplicationJSONErrorDetails `json:"details,omitempty"`
+	Message *string                                         `json:"message,omitempty"`
+	Name    *string                                         `json:"name,omitempty"`
 }
 
 type UpdateCollection404ApplicationJSON struct {
-	Error *UpdateCollection404ApplicationJSONError `json:"error"`
+	Error *UpdateCollection404ApplicationJSONError `json:"error,omitempty"`
 }
 
 type UpdateCollectionResponse struct {

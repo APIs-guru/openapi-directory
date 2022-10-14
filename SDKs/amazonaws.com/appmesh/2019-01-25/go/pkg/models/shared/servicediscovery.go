@@ -1,6 +1,6 @@
 package shared
 
 type ServiceDiscovery struct {
-	AwsCloudMap *AwsCloudMapServiceDiscovery `json:"awsCloudMap"`
-	DNS         *DNSServiceDiscovery         `json:"dns"`
+	AwsCloudMap *AwsCloudMapServiceDiscovery `json:"awsCloudMap,omitempty"`
+	DNS         *DNSServiceDiscovery         `json:"dns,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type BulkCheckRequest struct {
-	AllowGoogleInternalDataSources *bool               `json:"allowGoogleInternalDataSources"`
-	DefaultRelation                *string             `json:"defaultRelation"`
-	DefaultSource                  *Asset              `json:"defaultSource"`
-	DefaultTarget                  *Asset              `json:"defaultTarget"`
-	SkipCacheLookup                *bool               `json:"skipCacheLookup"`
-	Statements                     []StatementTemplate `json:"statements"`
+	AllowGoogleInternalDataSources *bool               `json:"allowGoogleInternalDataSources,omitempty"`
+	DefaultRelation                *string             `json:"defaultRelation,omitempty"`
+	DefaultSource                  *Asset              `json:"defaultSource,omitempty"`
+	DefaultTarget                  *Asset              `json:"defaultTarget,omitempty"`
+	SkipCacheLookup                *bool               `json:"skipCacheLookup,omitempty"`
+	Statements                     []StatementTemplate `json:"statements,omitempty"`
 }

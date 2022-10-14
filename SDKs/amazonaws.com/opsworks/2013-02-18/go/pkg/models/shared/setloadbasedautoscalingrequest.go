@@ -1,8 +1,8 @@
 package shared
 
 type SetLoadBasedAutoScalingRequest struct {
-	DownScaling *AutoScalingThresholds `json:"DownScaling"`
-	Enable      *bool                  `json:"Enable"`
+	DownScaling *AutoScalingThresholds `json:"DownScaling,omitempty"`
+	Enable      *bool                  `json:"Enable,omitempty"`
 	LayerID     string                 `json:"LayerId"`
-	UpScaling   *AutoScalingThresholds `json:"UpScaling"`
+	UpScaling   *AutoScalingThresholds `json:"UpScaling,omitempty"`
 }

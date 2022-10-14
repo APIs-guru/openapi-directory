@@ -49,21 +49,21 @@ const (
 )
 
 type OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItems struct {
-	Amount                 *int64                                                                                                            `json:"amount"`
-	Currency               *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency                 `json:"currency"`
-	DateCreated            *time.Time                                                                                                        `json:"dateCreated"`
-	DirectDebitReference   *string                                                                                                           `json:"directDebitReference"`
-	DirectDebitUUID        *string                                                                                                           `json:"directDebitUuid"`
-	IsDdic                 *bool                                                                                                             `json:"isDDIC"`
-	LastUpdated            *time.Time                                                                                                        `json:"lastUpdated"`
-	MandateUUID            *string                                                                                                           `json:"mandateUUid"`
-	OriginatorAlias        *string                                                                                                           `json:"originatorAlias"`
-	OriginatorName         *string                                                                                                           `json:"originatorName"`
-	OriginatorReference    *string                                                                                                           `json:"originatorReference"`
-	SchemeRejectReason     *string                                                                                                           `json:"schemeRejectReason"`
-	SchemeRejectReasonCode *OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItemsSchemeRejectReasonCodeEnum `json:"schemeRejectReasonCode"`
-	Status                 *OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItemsStatusEnum                 `json:"status"`
-	TargetIcan             *int64                                                                                                            `json:"targetIcan"`
-	TargetPayeeID          *int64                                                                                                            `json:"targetPayeeId"`
-	Type                   *OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItemsTypeEnum                   `json:"type"`
+	Amount                 *int64                                                                                                            `json:"amount,omitempty"`
+	Currency               *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency                 `json:"currency,omitempty"`
+	DateCreated            *time.Time                                                                                                        `json:"dateCreated,omitempty"`
+	DirectDebitReference   *string                                                                                                           `json:"directDebitReference,omitempty"`
+	DirectDebitUUID        *string                                                                                                           `json:"directDebitUuid,omitempty"`
+	IsDdic                 *bool                                                                                                             `json:"isDDIC,omitempty"`
+	LastUpdated            *time.Time                                                                                                        `json:"lastUpdated,omitempty"`
+	MandateUUID            *string                                                                                                           `json:"mandateUUid,omitempty"`
+	OriginatorAlias        *string                                                                                                           `json:"originatorAlias,omitempty"`
+	OriginatorName         *string                                                                                                           `json:"originatorName,omitempty"`
+	OriginatorReference    *string                                                                                                           `json:"originatorReference,omitempty"`
+	SchemeRejectReason     *string                                                                                                           `json:"schemeRejectReason,omitempty"`
+	SchemeRejectReasonCode *OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItemsSchemeRejectReasonCodeEnum `json:"schemeRejectReasonCode,omitempty"`
+	Status                 *OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItemsStatusEnum                 `json:"status,omitempty"`
+	TargetIcan             *int64                                                                                                            `json:"targetIcan,omitempty"`
+	TargetPayeeID          *int64                                                                                                            `json:"targetPayeeId,omitempty"`
+	Type                   *OnedirectdebitsGetResponses200ContentApplication1jsonSchemaPropertiesDirectdebitsItemsTypeEnum                   `json:"type,omitempty"`
 }

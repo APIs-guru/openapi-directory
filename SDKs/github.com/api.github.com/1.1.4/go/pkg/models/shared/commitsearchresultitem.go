@@ -19,7 +19,7 @@ type CommitSearchResultItemAuthorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -33,9 +33,9 @@ type CommitSearchResultItemCommitAuthor struct {
 }
 
 type CommitSearchResultItemCommitCommitterGitUser struct {
-	Date  *string `json:"date"`
-	Email *string `json:"email"`
-	Name  *string `json:"name"`
+	Date  *string `json:"date,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type CommitSearchResultItemCommitTree struct {
@@ -50,19 +50,19 @@ type CommitSearchResultItemCommit struct {
 	Message      string                                       `json:"message"`
 	Tree         CommitSearchResultItemCommitTree             `json:"tree"`
 	URL          string                                       `json:"url"`
-	Verification *Verification                                `json:"verification"`
+	Verification *Verification                                `json:"verification,omitempty"`
 }
 
 type CommitSearchResultItemCommitterGitUser struct {
-	Date  *string `json:"date"`
-	Email *string `json:"email"`
-	Name  *string `json:"name"`
+	Date  *string `json:"date,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type CommitSearchResultItemParents struct {
-	HTMLURL *string `json:"html_url"`
-	Sha     *string `json:"sha"`
-	URL     *string `json:"url"`
+	HTMLURL *string `json:"html_url,omitempty"`
+	Sha     *string `json:"sha,omitempty"`
+	URL     *string `json:"url,omitempty"`
 }
 
 type CommitSearchResultItem struct {
@@ -76,6 +76,6 @@ type CommitSearchResultItem struct {
 	Repository  MinimalRepository                      `json:"repository"`
 	Score       int64                                  `json:"score"`
 	Sha         string                                 `json:"sha"`
-	TextMatches []SearchResultTextMatches              `json:"text_matches"`
+	TextMatches []SearchResultTextMatches              `json:"text_matches,omitempty"`
 	URL         string                                 `json:"url"`
 }

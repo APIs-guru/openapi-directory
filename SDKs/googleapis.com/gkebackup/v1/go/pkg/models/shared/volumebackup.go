@@ -20,17 +20,17 @@ const (
 )
 
 type VolumeBackup struct {
-	CompleteTime       *string                 `json:"completeTime"`
-	CreateTime         *string                 `json:"createTime"`
-	DiskSizeBytes      *string                 `json:"diskSizeBytes"`
-	Etag               *string                 `json:"etag"`
-	Format             *VolumeBackupFormatEnum `json:"format"`
-	Name               *string                 `json:"name"`
-	SourcePvc          *NamespacedName         `json:"sourcePvc"`
-	State              *VolumeBackupStateEnum  `json:"state"`
-	StateMessage       *string                 `json:"stateMessage"`
-	StorageBytes       *string                 `json:"storageBytes"`
-	UID                *string                 `json:"uid"`
-	UpdateTime         *string                 `json:"updateTime"`
-	VolumeBackupHandle *string                 `json:"volumeBackupHandle"`
+	CompleteTime       *string                 `json:"completeTime,omitempty"`
+	CreateTime         *string                 `json:"createTime,omitempty"`
+	DiskSizeBytes      *string                 `json:"diskSizeBytes,omitempty"`
+	Etag               *string                 `json:"etag,omitempty"`
+	Format             *VolumeBackupFormatEnum `json:"format,omitempty"`
+	Name               *string                 `json:"name,omitempty"`
+	SourcePvc          *NamespacedName         `json:"sourcePvc,omitempty"`
+	State              *VolumeBackupStateEnum  `json:"state,omitempty"`
+	StateMessage       *string                 `json:"stateMessage,omitempty"`
+	StorageBytes       *string                 `json:"storageBytes,omitempty"`
+	UID                *string                 `json:"uid,omitempty"`
+	UpdateTime         *string                 `json:"updateTime,omitempty"`
+	VolumeBackupHandle *string                 `json:"volumeBackupHandle,omitempty"`
 }

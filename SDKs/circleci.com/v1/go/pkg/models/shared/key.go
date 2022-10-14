@@ -12,9 +12,9 @@ const (
 )
 
 type Key struct {
-	Fingerprint *string      `json:"fingerprint"`
-	Preferred   *bool        `json:"preferred"`
-	PublicKey   *string      `json:"public_key"`
-	Time        *time.Time   `json:"time"`
-	Type        *KeyTypeEnum `json:"type"`
+	Fingerprint *string      `json:"fingerprint,omitempty"`
+	Preferred   *bool        `json:"preferred,omitempty"`
+	PublicKey   *string      `json:"public_key,omitempty"`
+	Time        *time.Time   `json:"time,omitempty"`
+	Type        *KeyTypeEnum `json:"type,omitempty"`
 }

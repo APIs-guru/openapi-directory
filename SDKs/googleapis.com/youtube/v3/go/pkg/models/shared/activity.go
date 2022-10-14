@@ -1,9 +1,9 @@
 package shared
 
 type Activity struct {
-	ContentDetails *ActivityContentDetails `json:"contentDetails"`
-	Etag           *string                 `json:"etag"`
-	ID             *string                 `json:"id"`
-	Kind           *string                 `json:"kind"`
-	Snippet        *ActivitySnippet        `json:"snippet"`
+	ContentDetails *ActivityContentDetails `json:"contentDetails,omitempty"`
+	Etag           *string                 `json:"etag,omitempty"`
+	ID             *string                 `json:"id,omitempty"`
+	Kind           *string                 `json:"kind,omitempty"`
+	Snippet        *ActivitySnippet        `json:"snippet,omitempty"`
 }

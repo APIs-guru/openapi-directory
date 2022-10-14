@@ -1,6 +1,6 @@
 package shared
 
 type ListWaitersResponse struct {
-	NextPageToken *string  `json:"nextPageToken"`
-	Waiters       []Waiter `json:"waiters"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Waiters       []Waiter `json:"waiters,omitempty"`
 }

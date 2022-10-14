@@ -26,18 +26,18 @@ const (
 )
 
 type AwsKinesisRulePatchTarget struct {
-	Authentication *interface{}                         `json:"authentication"`
-	Enveloped      *bool                                `json:"enveloped"`
-	Format         *AwsKinesisRulePatchTargetFormatEnum `json:"format"`
-	PartitionKey   *string                              `json:"partitionKey"`
-	Region         *string                              `json:"region"`
-	StreamName     *string                              `json:"streamName"`
+	Authentication *interface{}                         `json:"authentication,omitempty"`
+	Enveloped      *bool                                `json:"enveloped,omitempty"`
+	Format         *AwsKinesisRulePatchTargetFormatEnum `json:"format,omitempty"`
+	PartitionKey   *string                              `json:"partitionKey,omitempty"`
+	Region         *string                              `json:"region,omitempty"`
+	StreamName     *string                              `json:"streamName,omitempty"`
 }
 
 type AwsKinesisRulePatch struct {
-	RequestMode *AwsKinesisRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *AwsKinesisRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                         `json:"source"`
-	Status      *AwsKinesisRulePatchStatusEnum      `json:"status"`
-	Target      *AwsKinesisRulePatchTarget          `json:"target"`
+	RequestMode *AwsKinesisRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *AwsKinesisRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                         `json:"source,omitempty"`
+	Status      *AwsKinesisRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *AwsKinesisRulePatchTarget          `json:"target,omitempty"`
 }

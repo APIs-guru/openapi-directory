@@ -7,15 +7,15 @@ const (
 )
 
 type Value struct {
-	ArrayValue     *ArrayValue         `json:"arrayValue"`
-	BooleanValue   *bool               `json:"booleanValue"`
-	BytesValue     *string             `json:"bytesValue"`
-	DoubleValue    *float64            `json:"doubleValue"`
-	GeoPointValue  *LatLng             `json:"geoPointValue"`
-	IntegerValue   *string             `json:"integerValue"`
-	MapValue       *MapValue           `json:"mapValue"`
-	NullValue      *ValueNullValueEnum `json:"nullValue"`
-	ReferenceValue *string             `json:"referenceValue"`
-	StringValue    *string             `json:"stringValue"`
-	TimestampValue *string             `json:"timestampValue"`
+	ArrayValue     *ArrayValue         `json:"arrayValue,omitempty"`
+	BooleanValue   *bool               `json:"booleanValue,omitempty"`
+	BytesValue     *string             `json:"bytesValue,omitempty"`
+	DoubleValue    *float64            `json:"doubleValue,omitempty"`
+	GeoPointValue  *LatLng             `json:"geoPointValue,omitempty"`
+	IntegerValue   *string             `json:"integerValue,omitempty"`
+	MapValue       *MapValue           `json:"mapValue,omitempty"`
+	NullValue      *ValueNullValueEnum `json:"nullValue,omitempty"`
+	ReferenceValue *string             `json:"referenceValue,omitempty"`
+	StringValue    *string             `json:"stringValue,omitempty"`
+	TimestampValue *string             `json:"timestampValue,omitempty"`
 }

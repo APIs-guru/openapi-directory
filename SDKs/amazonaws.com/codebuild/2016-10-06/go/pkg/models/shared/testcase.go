@@ -5,12 +5,12 @@ import (
 )
 
 type TestCase struct {
-	DurationInNanoSeconds *int64     `json:"durationInNanoSeconds"`
-	Expired               *time.Time `json:"expired"`
-	Message               *string    `json:"message"`
-	Name                  *string    `json:"name"`
-	Prefix                *string    `json:"prefix"`
-	ReportArn             *string    `json:"reportArn"`
-	Status                *string    `json:"status"`
-	TestRawDataPath       *string    `json:"testRawDataPath"`
+	DurationInNanoSeconds *int64     `json:"durationInNanoSeconds,omitempty"`
+	Expired               *time.Time `json:"expired,omitempty"`
+	Message               *string    `json:"message,omitempty"`
+	Name                  *string    `json:"name,omitempty"`
+	Prefix                *string    `json:"prefix,omitempty"`
+	ReportArn             *string    `json:"reportArn,omitempty"`
+	Status                *string    `json:"status,omitempty"`
+	TestRawDataPath       *string    `json:"testRawDataPath,omitempty"`
 }

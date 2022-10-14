@@ -1,7 +1,7 @@
 package shared
 
 type ParameterRange struct {
-	CategoricalParameterRangeSpecification *CategoricalParameterRangeSpecification `json:"CategoricalParameterRangeSpecification"`
-	ContinuousParameterRangeSpecification  *ContinuousParameterRangeSpecification  `json:"ContinuousParameterRangeSpecification"`
-	IntegerParameterRangeSpecification     *IntegerParameterRangeSpecification     `json:"IntegerParameterRangeSpecification"`
+	CategoricalParameterRangeSpecification *CategoricalParameterRangeSpecification `json:"CategoricalParameterRangeSpecification,omitempty"`
+	ContinuousParameterRangeSpecification  *ContinuousParameterRangeSpecification  `json:"ContinuousParameterRangeSpecification,omitempty"`
+	IntegerParameterRangeSpecification     *IntegerParameterRangeSpecification     `json:"IntegerParameterRangeSpecification,omitempty"`
 }

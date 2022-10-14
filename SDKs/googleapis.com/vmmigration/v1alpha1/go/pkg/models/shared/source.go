@@ -1,11 +1,11 @@
 package shared
 
 type Source struct {
-	CreateTime  *string              `json:"createTime"`
-	Description *string              `json:"description"`
-	Error       *Status              `json:"error"`
-	Labels      map[string]string    `json:"labels"`
-	Name        *string              `json:"name"`
-	UpdateTime  *string              `json:"updateTime"`
-	Vmware      *VmwareSourceDetails `json:"vmware"`
+	CreateTime  *string              `json:"createTime,omitempty"`
+	Description *string              `json:"description,omitempty"`
+	Error       *Status              `json:"error,omitempty"`
+	Labels      map[string]string    `json:"labels,omitempty"`
+	Name        *string              `json:"name,omitempty"`
+	UpdateTime  *string              `json:"updateTime,omitempty"`
+	Vmware      *VmwareSourceDetails `json:"vmware,omitempty"`
 }

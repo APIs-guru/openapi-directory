@@ -1,9 +1,9 @@
 package shared
 
 type UserFederationMapperRepresentation struct {
-	Config                        map[string]interface{} `json:"config"`
-	FederationMapperType          *string                `json:"federationMapperType"`
-	FederationProviderDisplayName *string                `json:"federationProviderDisplayName"`
-	ID                            *string                `json:"id"`
-	Name                          *string                `json:"name"`
+	Config                        map[string]interface{} `json:"config,omitempty"`
+	FederationMapperType          *string                `json:"federationMapperType,omitempty"`
+	FederationProviderDisplayName *string                `json:"federationProviderDisplayName,omitempty"`
+	ID                            *string                `json:"id,omitempty"`
+	Name                          *string                `json:"name,omitempty"`
 }

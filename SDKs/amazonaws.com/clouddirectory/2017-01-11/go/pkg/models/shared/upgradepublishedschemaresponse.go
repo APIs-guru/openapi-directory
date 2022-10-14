@@ -1,5 +1,5 @@
 package shared
 
 type UpgradePublishedSchemaResponse struct {
-	UpgradedSchemaArn *string `json:"UpgradedSchemaArn"`
+	UpgradedSchemaArn *string `json:"UpgradedSchemaArn,omitempty"`
 }

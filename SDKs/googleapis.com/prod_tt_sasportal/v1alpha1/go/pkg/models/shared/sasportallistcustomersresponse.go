@@ -1,6 +1,6 @@
 package shared
 
 type SasPortalListCustomersResponse struct {
-	Customers     []SasPortalCustomer `json:"customers"`
-	NextPageToken *string             `json:"nextPageToken"`
+	Customers     []SasPortalCustomer `json:"customers,omitempty"`
+	NextPageToken *string             `json:"nextPageToken,omitempty"`
 }

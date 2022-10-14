@@ -21,11 +21,11 @@ type UpdateRouteHeaders struct {
 }
 
 type UpdateRouteRequestBodySpec struct {
-	HTTPRoute *shared.HTTPRoute `json:"httpRoute"`
+	HTTPRoute *shared.HTTPRoute `json:"httpRoute,omitempty"`
 }
 
 type UpdateRouteRequestBody struct {
-	ClientToken *string                    `json:"clientToken"`
+	ClientToken *string                    `json:"clientToken,omitempty"`
 	Spec        UpdateRouteRequestBodySpec `json:"spec"`
 }
 

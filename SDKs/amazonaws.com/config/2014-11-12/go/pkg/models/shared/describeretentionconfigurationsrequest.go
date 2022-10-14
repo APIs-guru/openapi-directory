@@ -1,6 +1,6 @@
 package shared
 
 type DescribeRetentionConfigurationsRequest struct {
-	NextToken                   *string  `json:"NextToken"`
-	RetentionConfigurationNames []string `json:"RetentionConfigurationNames"`
+	NextToken                   *string  `json:"NextToken,omitempty"`
+	RetentionConfigurationNames []string `json:"RetentionConfigurationNames,omitempty"`
 }

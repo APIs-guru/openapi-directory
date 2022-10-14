@@ -14,11 +14,11 @@ type GetUsersUserEmailOfferingsOfferingIDProgressRequest struct {
 }
 
 type GetUsersUserEmailOfferingsOfferingIDProgress200ApplicationJSON struct {
-	Completion *string `json:"completion"`
-	Email      *string `json:"email"`
-	FirstName  *string `json:"firstName"`
-	ID         *string `json:"id"`
-	LastName   *string `json:"lastName"`
+	Completion *string `json:"completion,omitempty"`
+	Email      *string `json:"email,omitempty"`
+	FirstName  *string `json:"firstName,omitempty"`
+	ID         *string `json:"id,omitempty"`
+	LastName   *string `json:"lastName,omitempty"`
 }
 
 type GetUsersUserEmailOfferingsOfferingIDProgressResponse struct {

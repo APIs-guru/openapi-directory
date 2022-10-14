@@ -1,6 +1,6 @@
 package shared
 
 type TestOrderCustomerMarketingRightsInfo struct {
-	ExplicitMarketingPreference *string `json:"explicitMarketingPreference"`
-	LastUpdatedTimestamp        *string `json:"lastUpdatedTimestamp"`
+	ExplicitMarketingPreference *string `json:"explicitMarketingPreference,omitempty"`
+	LastUpdatedTimestamp        *string `json:"lastUpdatedTimestamp,omitempty"`
 }

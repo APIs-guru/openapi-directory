@@ -1,6 +1,6 @@
 package shared
 
 type EventCondition struct {
-	Dimensions      *EventDimensions `json:"Dimensions"`
-	MessageActivity *string          `json:"MessageActivity"`
+	Dimensions      *EventDimensions `json:"Dimensions,omitempty"`
+	MessageActivity *string          `json:"MessageActivity,omitempty"`
 }

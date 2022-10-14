@@ -15,8 +15,8 @@ const (
 )
 
 type VlcerRequestBody struct {
-	CertificateParameters *VlcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *VlcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                VlcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Vlcer400ApplicationJSON struct {
-	Error            *Vlcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vlcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vlcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vlcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vlcer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Vlcer401ApplicationJSON struct {
-	Error            *Vlcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vlcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vlcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vlcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vlcer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Vlcer404ApplicationJSON struct {
-	Error            *Vlcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vlcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vlcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vlcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vlcer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Vlcer500ApplicationJSON struct {
-	Error            *Vlcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vlcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vlcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vlcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vlcer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Vlcer502ApplicationJSON struct {
-	Error            *Vlcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vlcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vlcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vlcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vlcer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Vlcer503ApplicationJSON struct {
-	Error            *Vlcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vlcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vlcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vlcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vlcer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Vlcer504ApplicationJSON struct {
-	Error            *Vlcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vlcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vlcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vlcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type VlcerResponse struct {

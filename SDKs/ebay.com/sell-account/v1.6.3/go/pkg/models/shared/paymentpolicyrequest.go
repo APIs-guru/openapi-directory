@@ -1,13 +1,13 @@
 package shared
 
 type PaymentPolicyRequest struct {
-	CategoryTypes       []CategoryType  `json:"categoryTypes"`
-	Deposit             *Deposit        `json:"deposit"`
-	Description         *string         `json:"description"`
-	FullPaymentDueIn    *TimeDuration   `json:"fullPaymentDueIn"`
-	ImmediatePay        *bool           `json:"immediatePay"`
-	MarketplaceID       *string         `json:"marketplaceId"`
-	Name                *string         `json:"name"`
-	PaymentInstructions *string         `json:"paymentInstructions"`
-	PaymentMethods      []PaymentMethod `json:"paymentMethods"`
+	CategoryTypes       []CategoryType  `json:"categoryTypes,omitempty"`
+	Deposit             *Deposit        `json:"deposit,omitempty"`
+	Description         *string         `json:"description,omitempty"`
+	FullPaymentDueIn    *TimeDuration   `json:"fullPaymentDueIn,omitempty"`
+	ImmediatePay        *bool           `json:"immediatePay,omitempty"`
+	MarketplaceID       *string         `json:"marketplaceId,omitempty"`
+	Name                *string         `json:"name,omitempty"`
+	PaymentInstructions *string         `json:"paymentInstructions,omitempty"`
+	PaymentMethods      []PaymentMethod `json:"paymentMethods,omitempty"`
 }

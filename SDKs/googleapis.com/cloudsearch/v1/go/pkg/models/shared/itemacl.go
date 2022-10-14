@@ -10,9 +10,9 @@ const (
 )
 
 type ItemACL struct {
-	ACLInheritanceType *ItemACLACLInheritanceTypeEnum `json:"aclInheritanceType"`
-	DeniedReaders      []Principal                    `json:"deniedReaders"`
-	InheritACLFrom     *string                        `json:"inheritAclFrom"`
-	Owners             []Principal                    `json:"owners"`
-	Readers            []Principal                    `json:"readers"`
+	ACLInheritanceType *ItemACLACLInheritanceTypeEnum `json:"aclInheritanceType,omitempty"`
+	DeniedReaders      []Principal                    `json:"deniedReaders,omitempty"`
+	InheritACLFrom     *string                        `json:"inheritAclFrom,omitempty"`
+	Owners             []Principal                    `json:"owners,omitempty"`
+	Readers            []Principal                    `json:"readers,omitempty"`
 }

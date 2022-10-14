@@ -1,7 +1,7 @@
 package shared
 
 type IntegerOperatorOptions struct {
-	GreaterThanOperatorName *string `json:"greaterThanOperatorName"`
-	LessThanOperatorName    *string `json:"lessThanOperatorName"`
-	OperatorName            *string `json:"operatorName"`
+	GreaterThanOperatorName *string `json:"greaterThanOperatorName,omitempty"`
+	LessThanOperatorName    *string `json:"lessThanOperatorName,omitempty"`
+	OperatorName            *string `json:"operatorName,omitempty"`
 }

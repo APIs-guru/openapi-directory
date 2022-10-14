@@ -1,5 +1,5 @@
 package shared
 
 type PostCommentReplyOutput struct {
-	Comment *Comment `json:"comment"`
+	Comment *Comment `json:"comment,omitempty"`
 }

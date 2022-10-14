@@ -1,17 +1,17 @@
 package shared
 
 type ProjectListProjects struct {
-	FriendlyName     *string           `json:"friendlyName"`
-	ID               *string           `json:"id"`
-	Kind             *string           `json:"kind"`
-	NumericID        *string           `json:"numericId"`
-	ProjectReference *ProjectReference `json:"projectReference"`
+	FriendlyName     *string           `json:"friendlyName,omitempty"`
+	ID               *string           `json:"id,omitempty"`
+	Kind             *string           `json:"kind,omitempty"`
+	NumericID        *string           `json:"numericId,omitempty"`
+	ProjectReference *ProjectReference `json:"projectReference,omitempty"`
 }
 
 type ProjectList struct {
-	Etag          *string               `json:"etag"`
-	Kind          *string               `json:"kind"`
-	NextPageToken *string               `json:"nextPageToken"`
-	Projects      []ProjectListProjects `json:"projects"`
-	TotalItems    *int32                `json:"totalItems"`
+	Etag          *string               `json:"etag,omitempty"`
+	Kind          *string               `json:"kind,omitempty"`
+	NextPageToken *string               `json:"nextPageToken,omitempty"`
+	Projects      []ProjectListProjects `json:"projects,omitempty"`
+	TotalItems    *int32                `json:"totalItems,omitempty"`
 }

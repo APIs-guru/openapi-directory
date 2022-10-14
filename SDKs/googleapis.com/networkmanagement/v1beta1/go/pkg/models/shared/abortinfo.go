@@ -23,7 +23,7 @@ const (
 )
 
 type AbortInfo struct {
-	Cause                     *AbortInfoCauseEnum `json:"cause"`
-	ProjectsMissingPermission []string            `json:"projectsMissingPermission"`
-	ResourceURI               *string             `json:"resourceUri"`
+	Cause                     *AbortInfoCauseEnum `json:"cause,omitempty"`
+	ProjectsMissingPermission []string            `json:"projectsMissingPermission,omitempty"`
+	ResourceURI               *string             `json:"resourceUri,omitempty"`
 }

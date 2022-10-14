@@ -18,7 +18,7 @@ const (
 )
 
 type InsertionOrderBudget struct {
-	AutomationType *InsertionOrderBudgetAutomationTypeEnum `json:"automationType"`
-	BudgetSegments []InsertionOrderBudgetSegment           `json:"budgetSegments"`
-	BudgetUnit     *InsertionOrderBudgetBudgetUnitEnum     `json:"budgetUnit"`
+	AutomationType *InsertionOrderBudgetAutomationTypeEnum `json:"automationType,omitempty"`
+	BudgetSegments []InsertionOrderBudgetSegment           `json:"budgetSegments,omitempty"`
+	BudgetUnit     *InsertionOrderBudgetBudgetUnitEnum     `json:"budgetUnit,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type FilterConfiguration struct {
-	AllowedLocations []string `json:"AllowedLocations"`
+	AllowedLocations []string `json:"AllowedLocations,omitempty"`
 }

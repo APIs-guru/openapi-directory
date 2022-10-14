@@ -9,13 +9,13 @@ type PutUsersIDPathParams struct {
 }
 
 type PutUsersIDRequestBody struct {
-	AlwaysShowBaseCurrency *bool   `json:"always_show_base_currency"`
-	BaseCurrencyCode       *string `json:"base_currency_code"`
-	BetaUser               *bool   `json:"beta_user"`
-	Email                  *string `json:"email"`
-	Name                   *string `json:"name"`
-	TimeZone               *string `json:"time_zone"`
-	WeekStartDay           *int64  `json:"week_start_day"`
+	AlwaysShowBaseCurrency *bool   `json:"always_show_base_currency,omitempty"`
+	BaseCurrencyCode       *string `json:"base_currency_code,omitempty"`
+	BetaUser               *bool   `json:"beta_user,omitempty"`
+	Email                  *string `json:"email,omitempty"`
+	Name                   *string `json:"name,omitempty"`
+	TimeZone               *string `json:"time_zone,omitempty"`
+	WeekStartDay           *int64  `json:"week_start_day,omitempty"`
 }
 
 type PutUsersIDRequest struct {

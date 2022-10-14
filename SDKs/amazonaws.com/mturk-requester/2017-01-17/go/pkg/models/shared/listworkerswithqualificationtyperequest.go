@@ -1,8 +1,8 @@
 package shared
 
 type ListWorkersWithQualificationTypeRequest struct {
-	MaxResults          *int64                   `json:"MaxResults"`
-	NextToken           *string                  `json:"NextToken"`
+	MaxResults          *int64                   `json:"MaxResults,omitempty"`
+	NextToken           *string                  `json:"NextToken,omitempty"`
 	QualificationTypeID string                   `json:"QualificationTypeId"`
-	Status              *QualificationStatusEnum `json:"Status"`
+	Status              *QualificationStatusEnum `json:"Status,omitempty"`
 }

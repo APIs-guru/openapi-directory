@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetDeploymentTargetsInput struct {
-	DeploymentID *string  `json:"deploymentId"`
-	TargetIds    []string `json:"targetIds"`
+	DeploymentID *string  `json:"deploymentId,omitempty"`
+	TargetIds    []string `json:"targetIds,omitempty"`
 }

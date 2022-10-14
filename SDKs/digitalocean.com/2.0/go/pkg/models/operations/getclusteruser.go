@@ -13,18 +13,18 @@ type GetClusterUserRequest struct {
 }
 
 type GetClusterUser200ApplicationJSONKubernetesClusterUser struct {
-	Groups   []string `json:"groups"`
-	Username *string  `json:"username"`
+	Groups   []string `json:"groups,omitempty"`
+	Username *string  `json:"username,omitempty"`
 }
 
 type GetClusterUser200ApplicationJSON struct {
-	KubernetesClusterUser *GetClusterUser200ApplicationJSONKubernetesClusterUser `json:"kubernetes_cluster_user"`
+	KubernetesClusterUser *GetClusterUser200ApplicationJSONKubernetesClusterUser `json:"kubernetes_cluster_user,omitempty"`
 }
 
 type GetClusterUser401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetClusterUserResponse struct {

@@ -19,7 +19,7 @@ type GetProjectStatusRequest struct {
 }
 
 type GetProjectStatus200ApplicationJSON struct {
-	Data *shared.ProjectStatusResponse `json:"data"`
+	Data *shared.ProjectStatusResponse `json:"data,omitempty"`
 }
 
 type GetProjectStatusResponse struct {

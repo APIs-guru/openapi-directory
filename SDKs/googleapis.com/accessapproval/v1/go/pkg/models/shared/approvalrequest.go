@@ -1,13 +1,13 @@
 package shared
 
 type ApprovalRequest struct {
-	Approve                     *ApproveDecision    `json:"approve"`
-	Dismiss                     *DismissDecision    `json:"dismiss"`
-	Name                        *string             `json:"name"`
-	RequestTime                 *string             `json:"requestTime"`
-	RequestedExpiration         *string             `json:"requestedExpiration"`
-	RequestedLocations          *AccessLocations    `json:"requestedLocations"`
-	RequestedReason             *AccessReason       `json:"requestedReason"`
-	RequestedResourceName       *string             `json:"requestedResourceName"`
-	RequestedResourceProperties *ResourceProperties `json:"requestedResourceProperties"`
+	Approve                     *ApproveDecision    `json:"approve,omitempty"`
+	Dismiss                     *DismissDecision    `json:"dismiss,omitempty"`
+	Name                        *string             `json:"name,omitempty"`
+	RequestTime                 *string             `json:"requestTime,omitempty"`
+	RequestedExpiration         *string             `json:"requestedExpiration,omitempty"`
+	RequestedLocations          *AccessLocations    `json:"requestedLocations,omitempty"`
+	RequestedReason             *AccessReason       `json:"requestedReason,omitempty"`
+	RequestedResourceName       *string             `json:"requestedResourceName,omitempty"`
+	RequestedResourceProperties *ResourceProperties `json:"requestedResourceProperties,omitempty"`
 }

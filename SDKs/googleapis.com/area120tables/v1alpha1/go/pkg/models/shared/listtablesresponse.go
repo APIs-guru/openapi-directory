@@ -1,6 +1,6 @@
 package shared
 
 type ListTablesResponse struct {
-	NextPageToken *string `json:"nextPageToken"`
-	Tables        []Table `json:"tables"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Tables        []Table `json:"tables,omitempty"`
 }

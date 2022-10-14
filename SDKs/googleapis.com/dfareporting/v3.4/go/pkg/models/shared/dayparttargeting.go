@@ -13,7 +13,7 @@ const (
 )
 
 type DayPartTargeting struct {
-	DaysOfWeek    []DayPartTargetingDaysOfWeekEnum `json:"daysOfWeek"`
-	HoursOfDay    []int32                          `json:"hoursOfDay"`
-	UserLocalTime *bool                            `json:"userLocalTime"`
+	DaysOfWeek    []DayPartTargetingDaysOfWeekEnum `json:"daysOfWeek,omitempty"`
+	HoursOfDay    []int32                          `json:"hoursOfDay,omitempty"`
+	UserLocalTime *bool                            `json:"userLocalTime,omitempty"`
 }

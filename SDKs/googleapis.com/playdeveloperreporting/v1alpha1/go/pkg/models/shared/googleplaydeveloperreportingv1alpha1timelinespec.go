@@ -9,7 +9,7 @@ const (
 )
 
 type GooglePlayDeveloperReportingV1alpha1TimelineSpec struct {
-	AggregationPeriod *GooglePlayDeveloperReportingV1alpha1TimelineSpecAggregationPeriodEnum `json:"aggregationPeriod"`
-	EndTime           *GoogleTypeDateTime                                                    `json:"endTime"`
-	StartTime         *GoogleTypeDateTime                                                    `json:"startTime"`
+	AggregationPeriod *GooglePlayDeveloperReportingV1alpha1TimelineSpecAggregationPeriodEnum `json:"aggregationPeriod,omitempty"`
+	EndTime           *GoogleTypeDateTime                                                    `json:"endTime,omitempty"`
+	StartTime         *GoogleTypeDateTime                                                    `json:"startTime,omitempty"`
 }

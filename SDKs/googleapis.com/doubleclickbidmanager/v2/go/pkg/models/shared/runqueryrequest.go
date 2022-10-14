@@ -1,5 +1,5 @@
 package shared
 
 type RunQueryRequest struct {
-	DataRange *DataRange `json:"dataRange"`
+	DataRange *DataRange `json:"dataRange,omitempty"`
 }

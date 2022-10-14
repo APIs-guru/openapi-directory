@@ -1,6 +1,6 @@
 package shared
 
 type AwsCertificateManagerCertificateExtendedKeyUsage struct {
-	Name *string `json:"Name"`
-	OID  *string `json:"OId"`
+	Name *string `json:"Name,omitempty"`
+	OID  *string `json:"OId,omitempty"`
 }

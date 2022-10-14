@@ -5,16 +5,16 @@ import (
 )
 
 type PortfolioActivationsMetadata struct {
-	RootContentID *string `json:"rootContentId"`
+	RootContentID *string `json:"rootContentId,omitempty"`
 }
 
 type PortfolioActivations struct {
-	ContentID     *string                       `json:"contentId"`
-	End           *time.Time                    `json:"end"`
-	ID            *string                       `json:"id"`
-	Info          *string                       `json:"info"`
-	LearnersCount *float64                      `json:"learnersCount"`
-	Metadata      *PortfolioActivationsMetadata `json:"metadata"`
-	Name          *string                       `json:"name"`
-	Start         *time.Time                    `json:"start"`
+	ContentID     *string                       `json:"contentId,omitempty"`
+	End           *time.Time                    `json:"end,omitempty"`
+	ID            *string                       `json:"id,omitempty"`
+	Info          *string                       `json:"info,omitempty"`
+	LearnersCount *float64                      `json:"learnersCount,omitempty"`
+	Metadata      *PortfolioActivationsMetadata `json:"metadata,omitempty"`
+	Name          *string                       `json:"name,omitempty"`
+	Start         *time.Time                    `json:"start,omitempty"`
 }

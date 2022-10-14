@@ -21,8 +21,8 @@ const (
 )
 
 type ReposAddCollaboratorRequestBody struct {
-	Permission  *ReposAddCollaboratorRequestBodyPermissionEnum `json:"permission"`
-	Permissions *string                                        `json:"permissions"`
+	Permission  *ReposAddCollaboratorRequestBodyPermissionEnum `json:"permission,omitempty"`
+	Permissions *string                                        `json:"permissions,omitempty"`
 }
 
 type ReposAddCollaboratorRequest struct {

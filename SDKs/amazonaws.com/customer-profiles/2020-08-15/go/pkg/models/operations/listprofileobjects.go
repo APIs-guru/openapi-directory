@@ -24,12 +24,12 @@ type ListProfileObjectsHeaders struct {
 }
 
 type ListProfileObjectsRequestBodyObjectFilter struct {
-	KeyName *string  `json:"KeyName"`
-	Values  []string `json:"Values"`
+	KeyName *string  `json:"KeyName,omitempty"`
+	Values  []string `json:"Values,omitempty"`
 }
 
 type ListProfileObjectsRequestBody struct {
-	ObjectFilter   *ListProfileObjectsRequestBodyObjectFilter `json:"ObjectFilter"`
+	ObjectFilter   *ListProfileObjectsRequestBodyObjectFilter `json:"ObjectFilter,omitempty"`
 	ObjectTypeName string                                     `json:"ObjectTypeName"`
 	ProfileID      string                                     `json:"ProfileId"`
 }

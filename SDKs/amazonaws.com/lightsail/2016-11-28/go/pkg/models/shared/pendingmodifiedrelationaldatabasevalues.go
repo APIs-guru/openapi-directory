@@ -1,7 +1,7 @@
 package shared
 
 type PendingModifiedRelationalDatabaseValues struct {
-	BackupRetentionEnabled *bool   `json:"backupRetentionEnabled"`
-	EngineVersion          *string `json:"engineVersion"`
-	MasterUserPassword     *string `json:"masterUserPassword"`
+	BackupRetentionEnabled *bool   `json:"backupRetentionEnabled,omitempty"`
+	EngineVersion          *string `json:"engineVersion,omitempty"`
+	MasterUserPassword     *string `json:"masterUserPassword,omitempty"`
 }

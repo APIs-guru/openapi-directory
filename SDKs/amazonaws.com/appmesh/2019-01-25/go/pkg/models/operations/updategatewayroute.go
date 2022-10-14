@@ -25,14 +25,14 @@ type UpdateGatewayRouteHeaders struct {
 }
 
 type UpdateGatewayRouteRequestBodySpec struct {
-	GrpcRoute  *shared.GrpcGatewayRoute `json:"grpcRoute"`
-	Http2Route *shared.HTTPGatewayRoute `json:"http2Route"`
-	HTTPRoute  *shared.HTTPGatewayRoute `json:"httpRoute"`
-	Priority   *int64                   `json:"priority"`
+	GrpcRoute  *shared.GrpcGatewayRoute `json:"grpcRoute,omitempty"`
+	Http2Route *shared.HTTPGatewayRoute `json:"http2Route,omitempty"`
+	HTTPRoute  *shared.HTTPGatewayRoute `json:"httpRoute,omitempty"`
+	Priority   *int64                   `json:"priority,omitempty"`
 }
 
 type UpdateGatewayRouteRequestBody struct {
-	ClientToken *string                           `json:"clientToken"`
+	ClientToken *string                           `json:"clientToken,omitempty"`
 	Spec        UpdateGatewayRouteRequestBodySpec `json:"spec"`
 }
 

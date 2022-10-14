@@ -18,6 +18,6 @@ const (
 )
 
 type WorkloadMetadataConfig struct {
-	Mode         *WorkloadMetadataConfigModeEnum         `json:"mode"`
-	NodeMetadata *WorkloadMetadataConfigNodeMetadataEnum `json:"nodeMetadata"`
+	Mode         *WorkloadMetadataConfigModeEnum         `json:"mode,omitempty"`
+	NodeMetadata *WorkloadMetadataConfigNodeMetadataEnum `json:"nodeMetadata,omitempty"`
 }

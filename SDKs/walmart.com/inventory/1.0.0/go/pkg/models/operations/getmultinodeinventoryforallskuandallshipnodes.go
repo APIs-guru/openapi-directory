@@ -41,28 +41,28 @@ type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInve
 }
 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodes struct {
-	AvailToSellQty *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodesAvailToSellQty `json:"availToSellQty"`
-	InputQty       *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodesInputQty       `json:"inputQty"`
-	ShipNode       *string                                                                                                `json:"shipNode"`
+	AvailToSellQty *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodesAvailToSellQty `json:"availToSellQty,omitempty"`
+	InputQty       *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodesInputQty       `json:"inputQty,omitempty"`
+	ShipNode       *string                                                                                                `json:"shipNode,omitempty"`
 }
 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventories struct {
-	Nodes []GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodes `json:"nodes"`
-	Sku   *string                                                                                   `json:"sku"`
+	Nodes []GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodes `json:"nodes,omitempty"`
+	Sku   *string                                                                                   `json:"sku,omitempty"`
 }
 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElements struct {
-	Inventories []GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventories `json:"inventories"`
+	Inventories []GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventories `json:"inventories,omitempty"`
 }
 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONMeta struct {
-	NextCursor *string  `json:"nextCursor"`
-	TotalCount *float64 `json:"totalCount"`
+	NextCursor *string  `json:"nextCursor,omitempty"`
+	TotalCount *float64 `json:"totalCount,omitempty"`
 }
 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSON struct {
-	Elements *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElements `json:"elements"`
-	Meta     *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONMeta     `json:"meta"`
+	Elements *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElements `json:"elements,omitempty"`
+	Meta     *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONMeta     `json:"meta,omitempty"`
 }
 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodesResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type PutEvaluationsRequest struct {
-	Evaluations []Evaluation `json:"Evaluations"`
+	Evaluations []Evaluation `json:"Evaluations,omitempty"`
 	ResultToken string       `json:"ResultToken"`
-	TestMode    *bool        `json:"TestMode"`
+	TestMode    *bool        `json:"TestMode,omitempty"`
 }

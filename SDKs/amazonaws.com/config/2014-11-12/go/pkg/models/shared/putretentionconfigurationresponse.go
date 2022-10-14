@@ -1,5 +1,5 @@
 package shared
 
 type PutRetentionConfigurationResponse struct {
-	RetentionConfiguration *RetentionConfiguration `json:"RetentionConfiguration"`
+	RetentionConfiguration *RetentionConfiguration `json:"RetentionConfiguration,omitempty"`
 }

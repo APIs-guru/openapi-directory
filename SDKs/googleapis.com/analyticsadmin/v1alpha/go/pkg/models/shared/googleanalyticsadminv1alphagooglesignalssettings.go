@@ -17,7 +17,7 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaGoogleSignalsSettings struct {
-	Consent *GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsConsentEnum `json:"consent"`
-	Name    *string                                                      `json:"name"`
-	State   *GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsStateEnum   `json:"state"`
+	Consent *GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsConsentEnum `json:"consent,omitempty"`
+	Name    *string                                                      `json:"name,omitempty"`
+	State   *GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsStateEnum   `json:"state,omitempty"`
 }

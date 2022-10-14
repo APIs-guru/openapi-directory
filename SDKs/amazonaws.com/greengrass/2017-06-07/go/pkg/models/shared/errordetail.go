@@ -1,6 +1,6 @@
 package shared
 
 type ErrorDetail struct {
-	DetailedErrorCode    *string `json:"DetailedErrorCode"`
-	DetailedErrorMessage *string `json:"DetailedErrorMessage"`
+	DetailedErrorCode    *string `json:"DetailedErrorCode,omitempty"`
+	DetailedErrorMessage *string `json:"DetailedErrorMessage,omitempty"`
 }

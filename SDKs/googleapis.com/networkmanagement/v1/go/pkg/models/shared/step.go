@@ -31,25 +31,25 @@ const (
 )
 
 type Step struct {
-	Abort            *AbortInfo            `json:"abort"`
-	CausesDrop       *bool                 `json:"causesDrop"`
-	CloudFunction    *CloudFunctionInfo    `json:"cloudFunction"`
-	CloudSQLInstance *CloudSQLInstanceInfo `json:"cloudSqlInstance"`
-	Deliver          *DeliverInfo          `json:"deliver"`
-	Description      *string               `json:"description"`
-	Drop             *DropInfo             `json:"drop"`
-	Endpoint         *EndpointInfo         `json:"endpoint"`
-	Firewall         *FirewallInfo         `json:"firewall"`
-	Forward          *ForwardInfo          `json:"forward"`
-	ForwardingRule   *ForwardingRuleInfo   `json:"forwardingRule"`
-	GkeMaster        *GkeMasterInfo        `json:"gkeMaster"`
-	Instance         *InstanceInfo         `json:"instance"`
-	LoadBalancer     *LoadBalancerInfo     `json:"loadBalancer"`
-	Network          *NetworkInfo          `json:"network"`
-	ProjectID        *string               `json:"projectId"`
-	Route            *RouteInfo            `json:"route"`
-	State            *StepStateEnum        `json:"state"`
-	VpcConnector     *VpcConnectorInfo     `json:"vpcConnector"`
-	VpnGateway       *VpnGatewayInfo       `json:"vpnGateway"`
-	VpnTunnel        *VpnTunnelInfo        `json:"vpnTunnel"`
+	Abort            *AbortInfo            `json:"abort,omitempty"`
+	CausesDrop       *bool                 `json:"causesDrop,omitempty"`
+	CloudFunction    *CloudFunctionInfo    `json:"cloudFunction,omitempty"`
+	CloudSQLInstance *CloudSQLInstanceInfo `json:"cloudSqlInstance,omitempty"`
+	Deliver          *DeliverInfo          `json:"deliver,omitempty"`
+	Description      *string               `json:"description,omitempty"`
+	Drop             *DropInfo             `json:"drop,omitempty"`
+	Endpoint         *EndpointInfo         `json:"endpoint,omitempty"`
+	Firewall         *FirewallInfo         `json:"firewall,omitempty"`
+	Forward          *ForwardInfo          `json:"forward,omitempty"`
+	ForwardingRule   *ForwardingRuleInfo   `json:"forwardingRule,omitempty"`
+	GkeMaster        *GkeMasterInfo        `json:"gkeMaster,omitempty"`
+	Instance         *InstanceInfo         `json:"instance,omitempty"`
+	LoadBalancer     *LoadBalancerInfo     `json:"loadBalancer,omitempty"`
+	Network          *NetworkInfo          `json:"network,omitempty"`
+	ProjectID        *string               `json:"projectId,omitempty"`
+	Route            *RouteInfo            `json:"route,omitempty"`
+	State            *StepStateEnum        `json:"state,omitempty"`
+	VpcConnector     *VpcConnectorInfo     `json:"vpcConnector,omitempty"`
+	VpnGateway       *VpnGatewayInfo       `json:"vpnGateway,omitempty"`
+	VpnTunnel        *VpnTunnelInfo        `json:"vpnTunnel,omitempty"`
 }

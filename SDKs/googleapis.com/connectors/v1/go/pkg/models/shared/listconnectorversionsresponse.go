@@ -1,7 +1,7 @@
 package shared
 
 type ListConnectorVersionsResponse struct {
-	ConnectorVersions []ConnectorVersion `json:"connectorVersions"`
-	NextPageToken     *string            `json:"nextPageToken"`
-	Unreachable       []string           `json:"unreachable"`
+	ConnectorVersions []ConnectorVersion `json:"connectorVersions,omitempty"`
+	NextPageToken     *string            `json:"nextPageToken,omitempty"`
+	Unreachable       []string           `json:"unreachable,omitempty"`
 }

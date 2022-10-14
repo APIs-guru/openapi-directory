@@ -1,6 +1,6 @@
 package shared
 
 type LocalizedText struct {
-	Locale *string `json:"locale"`
-	Text   *string `json:"text"`
+	Locale *string `json:"locale,omitempty"`
+	Text   *string `json:"text,omitempty"`
 }

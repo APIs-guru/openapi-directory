@@ -1,7 +1,7 @@
 package shared
 
 type DescribeProvisionedProductInput struct {
-	AcceptLanguage *string `json:"AcceptLanguage"`
-	ID             *string `json:"Id"`
-	Name           *string `json:"Name"`
+	AcceptLanguage *string `json:"AcceptLanguage,omitempty"`
+	ID             *string `json:"Id,omitempty"`
+	Name           *string `json:"Name,omitempty"`
 }

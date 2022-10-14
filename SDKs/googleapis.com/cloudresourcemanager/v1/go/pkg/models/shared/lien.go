@@ -1,10 +1,10 @@
 package shared
 
 type Lien struct {
-	CreateTime   *string  `json:"createTime"`
-	Name         *string  `json:"name"`
-	Origin       *string  `json:"origin"`
-	Parent       *string  `json:"parent"`
-	Reason       *string  `json:"reason"`
-	Restrictions []string `json:"restrictions"`
+	CreateTime   *string  `json:"createTime,omitempty"`
+	Name         *string  `json:"name,omitempty"`
+	Origin       *string  `json:"origin,omitempty"`
+	Parent       *string  `json:"parent,omitempty"`
+	Reason       *string  `json:"reason,omitempty"`
+	Restrictions []string `json:"restrictions,omitempty"`
 }

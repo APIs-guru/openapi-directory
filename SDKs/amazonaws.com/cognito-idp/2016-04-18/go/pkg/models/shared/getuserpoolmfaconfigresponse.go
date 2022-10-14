@@ -1,7 +1,7 @@
 package shared
 
 type GetUserPoolMfaConfigResponse struct {
-	MfaConfiguration              *UserPoolMfaTypeEnum        `json:"MfaConfiguration"`
-	SmsMfaConfiguration           *SmsMfaConfigType           `json:"SmsMfaConfiguration"`
-	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigType `json:"SoftwareTokenMfaConfiguration"`
+	MfaConfiguration              *UserPoolMfaTypeEnum        `json:"MfaConfiguration,omitempty"`
+	SmsMfaConfiguration           *SmsMfaConfigType           `json:"SmsMfaConfiguration,omitempty"`
+	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigType `json:"SoftwareTokenMfaConfiguration,omitempty"`
 }

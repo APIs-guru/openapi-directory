@@ -5,9 +5,9 @@ import (
 )
 
 type JobExecutionSummary struct {
-	ExecutionNumber *int64                  `json:"executionNumber"`
-	LastUpdatedAt   *time.Time              `json:"lastUpdatedAt"`
-	QueuedAt        *time.Time              `json:"queuedAt"`
-	StartedAt       *time.Time              `json:"startedAt"`
-	Status          *JobExecutionStatusEnum `json:"status"`
+	ExecutionNumber *int64                  `json:"executionNumber,omitempty"`
+	LastUpdatedAt   *time.Time              `json:"lastUpdatedAt,omitempty"`
+	QueuedAt        *time.Time              `json:"queuedAt,omitempty"`
+	StartedAt       *time.Time              `json:"startedAt,omitempty"`
+	Status          *JobExecutionStatusEnum `json:"status,omitempty"`
 }

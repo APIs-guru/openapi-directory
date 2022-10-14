@@ -5,12 +5,12 @@ import (
 )
 
 type JobSummary struct {
-	CompletedAt     *time.Time           `json:"completedAt"`
-	CreatedAt       *time.Time           `json:"createdAt"`
-	JobArn          *string              `json:"jobArn"`
-	JobID           *string              `json:"jobId"`
-	LastUpdatedAt   *time.Time           `json:"lastUpdatedAt"`
-	Status          *JobStatusEnum       `json:"status"`
-	TargetSelection *TargetSelectionEnum `json:"targetSelection"`
-	ThingGroupID    *string              `json:"thingGroupId"`
+	CompletedAt     *time.Time           `json:"completedAt,omitempty"`
+	CreatedAt       *time.Time           `json:"createdAt,omitempty"`
+	JobArn          *string              `json:"jobArn,omitempty"`
+	JobID           *string              `json:"jobId,omitempty"`
+	LastUpdatedAt   *time.Time           `json:"lastUpdatedAt,omitempty"`
+	Status          *JobStatusEnum       `json:"status,omitempty"`
+	TargetSelection *TargetSelectionEnum `json:"targetSelection,omitempty"`
+	ThingGroupID    *string              `json:"thingGroupId,omitempty"`
 }

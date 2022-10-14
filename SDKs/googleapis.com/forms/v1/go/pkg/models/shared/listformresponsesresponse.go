@@ -1,6 +1,6 @@
 package shared
 
 type ListFormResponsesResponse struct {
-	NextPageToken *string        `json:"nextPageToken"`
-	Responses     []FormResponse `json:"responses"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
+	Responses     []FormResponse `json:"responses,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type APIResponseFailure struct {
-	Reason  *string `json:"reason"`
-	Success *bool   `json:"success"`
+	Reason  *string `json:"reason,omitempty"`
+	Success *bool   `json:"success,omitempty"`
 }

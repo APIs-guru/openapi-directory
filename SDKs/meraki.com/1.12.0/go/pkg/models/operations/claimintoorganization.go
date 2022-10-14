@@ -13,13 +13,13 @@ const (
 
 type ClaimIntoOrganizationRequestBodyLicenses struct {
 	Key  string                                            `json:"key"`
-	Mode *ClaimIntoOrganizationRequestBodyLicensesModeEnum `json:"mode"`
+	Mode *ClaimIntoOrganizationRequestBodyLicensesModeEnum `json:"mode,omitempty"`
 }
 
 type ClaimIntoOrganizationRequestBody struct {
-	Licenses []ClaimIntoOrganizationRequestBodyLicenses `json:"licenses"`
-	Orders   []string                                   `json:"orders"`
-	Serials  []string                                   `json:"serials"`
+	Licenses []ClaimIntoOrganizationRequestBodyLicenses `json:"licenses,omitempty"`
+	Orders   []string                                   `json:"orders,omitempty"`
+	Serials  []string                                   `json:"serials,omitempty"`
 }
 
 type ClaimIntoOrganizationRequest struct {

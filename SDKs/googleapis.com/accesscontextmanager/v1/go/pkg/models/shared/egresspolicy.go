@@ -1,6 +1,6 @@
 package shared
 
 type EgressPolicy struct {
-	EgressFrom *EgressFrom `json:"egressFrom"`
-	EgressTo   *EgressTo   `json:"egressTo"`
+	EgressFrom *EgressFrom `json:"egressFrom,omitempty"`
+	EgressTo   *EgressTo   `json:"egressTo,omitempty"`
 }

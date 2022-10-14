@@ -25,9 +25,9 @@ type ListAccessPreviewFindingsHeaders struct {
 
 type ListAccessPreviewFindingsRequestBody struct {
 	AnalyzerArn string                      `json:"analyzerArn"`
-	Filter      map[string]shared.Criterion `json:"filter"`
-	MaxResults  *int64                      `json:"maxResults"`
-	NextToken   *string                     `json:"nextToken"`
+	Filter      map[string]shared.Criterion `json:"filter,omitempty"`
+	MaxResults  *int64                      `json:"maxResults,omitempty"`
+	NextToken   *string                     `json:"nextToken,omitempty"`
 }
 
 type ListAccessPreviewFindingsRequest struct {

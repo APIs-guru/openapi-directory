@@ -1,5 +1,5 @@
 package shared
 
 type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelResponseUpdateSelectionChoicePropertiesResponse struct {
-	Priority *int32 `json:"priority"`
+	Priority *int32 `json:"priority,omitempty"`
 }

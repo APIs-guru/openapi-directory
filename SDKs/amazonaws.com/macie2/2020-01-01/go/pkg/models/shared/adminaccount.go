@@ -1,6 +1,6 @@
 package shared
 
 type AdminAccount struct {
-	AccountID *string          `json:"accountId"`
-	Status    *AdminStatusEnum `json:"status"`
+	AccountID *string          `json:"accountId,omitempty"`
+	Status    *AdminStatusEnum `json:"status,omitempty"`
 }

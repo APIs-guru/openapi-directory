@@ -1,6 +1,6 @@
 package shared
 
 type TimeWindow struct {
-	Earliest *int64 `json:"earliest"`
-	Latest   *int64 `json:"latest"`
+	Earliest *int64 `json:"earliest,omitempty"`
+	Latest   *int64 `json:"latest,omitempty"`
 }

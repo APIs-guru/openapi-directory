@@ -1,6 +1,6 @@
 package shared
 
 type ListGlossariesResponse struct {
-	Glossaries    []Glossary `json:"glossaries"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Glossaries    []Glossary `json:"glossaries,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
 }

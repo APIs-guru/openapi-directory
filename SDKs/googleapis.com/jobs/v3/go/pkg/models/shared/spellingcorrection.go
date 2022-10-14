@@ -1,6 +1,6 @@
 package shared
 
 type SpellingCorrection struct {
-	Corrected     *bool   `json:"corrected"`
-	CorrectedText *string `json:"correctedText"`
+	Corrected     *bool   `json:"corrected,omitempty"`
+	CorrectedText *string `json:"correctedText,omitempty"`
 }

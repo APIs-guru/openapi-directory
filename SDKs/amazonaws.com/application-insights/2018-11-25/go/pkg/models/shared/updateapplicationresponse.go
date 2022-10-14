@@ -1,5 +1,5 @@
 package shared
 
 type UpdateApplicationResponse struct {
-	ApplicationInfo *ApplicationInfo `json:"ApplicationInfo"`
+	ApplicationInfo *ApplicationInfo `json:"ApplicationInfo,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type LookupEffectiveGuestPolicyRequest struct {
-	OsArchitecture *string `json:"osArchitecture"`
-	OsShortName    *string `json:"osShortName"`
-	OsVersion      *string `json:"osVersion"`
+	OsArchitecture *string `json:"osArchitecture,omitempty"`
+	OsShortName    *string `json:"osShortName,omitempty"`
+	OsVersion      *string `json:"osVersion,omitempty"`
 }

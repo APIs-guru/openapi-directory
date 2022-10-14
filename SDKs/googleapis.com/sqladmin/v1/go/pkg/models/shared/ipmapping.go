@@ -11,7 +11,7 @@ const (
 )
 
 type IPMapping struct {
-	IPAddress    *string            `json:"ipAddress"`
-	TimeToRetire *string            `json:"timeToRetire"`
-	Type         *IPMappingTypeEnum `json:"type"`
+	IPAddress    *string            `json:"ipAddress,omitempty"`
+	TimeToRetire *string            `json:"timeToRetire,omitempty"`
+	Type         *IPMappingTypeEnum `json:"type,omitempty"`
 }

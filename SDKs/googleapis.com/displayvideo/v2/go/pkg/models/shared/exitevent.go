@@ -9,8 +9,8 @@ const (
 )
 
 type ExitEvent struct {
-	Name          *string            `json:"name"`
-	ReportingName *string            `json:"reportingName"`
-	Type          *ExitEventTypeEnum `json:"type"`
-	URL           *string            `json:"url"`
+	Name          *string            `json:"name,omitempty"`
+	ReportingName *string            `json:"reportingName,omitempty"`
+	Type          *ExitEventTypeEnum `json:"type,omitempty"`
+	URL           *string            `json:"url,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListDatabasesResponse struct {
-	Databases []Database `json:"Databases"`
-	NextToken *string    `json:"NextToken"`
+	Databases []Database `json:"Databases,omitempty"`
+	NextToken *string    `json:"NextToken,omitempty"`
 }

@@ -5,6 +5,6 @@ type RunnerApplication struct {
 	DownloadURL       string  `json:"download_url"`
 	Filename          string  `json:"filename"`
 	Os                string  `json:"os"`
-	Sha256Checksum    *string `json:"sha256_checksum"`
-	TempDownloadToken *string `json:"temp_download_token"`
+	Sha256Checksum    *string `json:"sha256_checksum,omitempty"`
+	TempDownloadToken *string `json:"temp_download_token,omitempty"`
 }

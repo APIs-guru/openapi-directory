@@ -14,27 +14,27 @@ type SevenGetListOfPaymentsRequest struct {
 }
 
 type SevenGetListOfPayments200ApplicationJSONData struct {
-	ActuallyPaid     *float64 `json:"actually_paid"`
-	OrderDescription *string  `json:"order_description"`
-	OrderID          *string  `json:"order_id"`
-	OutcomeAmount    *float64 `json:"outcome_amount"`
-	OutcomeCurrency  *string  `json:"outcome_currency"`
-	PayAddress       *string  `json:"pay_address"`
-	PayAmount        *float64 `json:"pay_amount"`
-	PayCurrency      *string  `json:"pay_currency"`
-	PaymentID        *float64 `json:"payment_id"`
-	PaymentStatus    *string  `json:"payment_status"`
-	PriceAmount      *float64 `json:"price_amount"`
-	PriceCurrency    *string  `json:"price_currency"`
-	PurchaseID       *string  `json:"purchase_id"`
+	ActuallyPaid     *float64 `json:"actually_paid,omitempty"`
+	OrderDescription *string  `json:"order_description,omitempty"`
+	OrderID          *string  `json:"order_id,omitempty"`
+	OutcomeAmount    *float64 `json:"outcome_amount,omitempty"`
+	OutcomeCurrency  *string  `json:"outcome_currency,omitempty"`
+	PayAddress       *string  `json:"pay_address,omitempty"`
+	PayAmount        *float64 `json:"pay_amount,omitempty"`
+	PayCurrency      *string  `json:"pay_currency,omitempty"`
+	PaymentID        *float64 `json:"payment_id,omitempty"`
+	PaymentStatus    *string  `json:"payment_status,omitempty"`
+	PriceAmount      *float64 `json:"price_amount,omitempty"`
+	PriceCurrency    *string  `json:"price_currency,omitempty"`
+	PurchaseID       *string  `json:"purchase_id,omitempty"`
 }
 
 type SevenGetListOfPayments200ApplicationJSON struct {
-	Data       []SevenGetListOfPayments200ApplicationJSONData `json:"data"`
-	Limit      *float64                                       `json:"limit"`
-	Page       *float64                                       `json:"page"`
-	PagesCount *float64                                       `json:"pagesCount"`
-	Total      *float64                                       `json:"total"`
+	Data       []SevenGetListOfPayments200ApplicationJSONData `json:"data,omitempty"`
+	Limit      *float64                                       `json:"limit,omitempty"`
+	Page       *float64                                       `json:"page,omitempty"`
+	PagesCount *float64                                       `json:"pagesCount,omitempty"`
+	Total      *float64                                       `json:"total,omitempty"`
 }
 
 type SevenGetListOfPaymentsResponse struct {

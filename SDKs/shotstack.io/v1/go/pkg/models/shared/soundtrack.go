@@ -9,7 +9,7 @@ const (
 )
 
 type Soundtrack struct {
-	Effect *SoundtrackEffectEnum `json:"effect"`
+	Effect *SoundtrackEffectEnum `json:"effect,omitempty"`
 	Src    string                `json:"src"`
-	Volume *float64              `json:"volume"`
+	Volume *float64              `json:"volume,omitempty"`
 }

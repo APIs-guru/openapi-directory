@@ -5,13 +5,13 @@ import (
 )
 
 type StudioV1Flow struct {
-	AccountSid   *string                `json:"account_sid"`
-	DateCreated  *time.Time             `json:"date_created"`
-	DateUpdated  *time.Time             `json:"date_updated"`
-	FriendlyName *string                `json:"friendly_name"`
-	Links        map[string]interface{} `json:"links"`
-	Sid          *string                `json:"sid"`
-	Status       *FlowEnumStatusEnum    `json:"status"`
-	URL          *string                `json:"url"`
-	Version      *int64                 `json:"version"`
+	AccountSid   *string                `json:"account_sid,omitempty"`
+	DateCreated  *time.Time             `json:"date_created,omitempty"`
+	DateUpdated  *time.Time             `json:"date_updated,omitempty"`
+	FriendlyName *string                `json:"friendly_name,omitempty"`
+	Links        map[string]interface{} `json:"links,omitempty"`
+	Sid          *string                `json:"sid,omitempty"`
+	Status       *FlowEnumStatusEnum    `json:"status,omitempty"`
+	URL          *string                `json:"url,omitempty"`
+	Version      *int64                 `json:"version,omitempty"`
 }

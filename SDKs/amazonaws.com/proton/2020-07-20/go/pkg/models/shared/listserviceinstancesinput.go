@@ -1,7 +1,7 @@
 package shared
 
 type ListServiceInstancesInput struct {
-	MaxResults  *int64  `json:"maxResults"`
-	NextToken   *string `json:"nextToken"`
-	ServiceName *string `json:"serviceName"`
+	MaxResults  *int64  `json:"maxResults,omitempty"`
+	NextToken   *string `json:"nextToken,omitempty"`
+	ServiceName *string `json:"serviceName,omitempty"`
 }

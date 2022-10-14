@@ -15,7 +15,7 @@ const (
 )
 
 type WmxSitemapContent struct {
-	Indexed   *string                    `json:"indexed"`
-	Submitted *string                    `json:"submitted"`
-	Type      *WmxSitemapContentTypeEnum `json:"type"`
+	Indexed   *string                    `json:"indexed,omitempty"`
+	Submitted *string                    `json:"submitted,omitempty"`
+	Type      *WmxSitemapContentTypeEnum `json:"type,omitempty"`
 }

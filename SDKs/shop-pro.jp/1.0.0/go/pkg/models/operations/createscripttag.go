@@ -14,12 +14,12 @@ const (
 )
 
 type CreateScriptTagRequestBodyScriptTag struct {
-	DisplayScope *CreateScriptTagRequestBodyScriptTagDisplayScopeEnum `json:"display_scope"`
-	Src          *string                                              `json:"src"`
+	DisplayScope *CreateScriptTagRequestBodyScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	Src          *string                                              `json:"src,omitempty"`
 }
 
 type CreateScriptTagRequestBody struct {
-	ScriptTag *CreateScriptTagRequestBodyScriptTag `json:"script_tag"`
+	ScriptTag *CreateScriptTagRequestBodyScriptTag `json:"script_tag,omitempty"`
 }
 
 type CreateScriptTagSecurity struct {
@@ -41,15 +41,15 @@ const (
 )
 
 type CreateScriptTag200ApplicationJSONScriptTag struct {
-	DisplayScope *CreateScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope"`
-	ID           *int64                                                      `json:"id"`
-	MakeDate     *int64                                                      `json:"make_date"`
-	Src          *string                                                     `json:"src"`
-	UpdateDate   *int64                                                      `json:"update_date"`
+	DisplayScope *CreateScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID           *int64                                                      `json:"id,omitempty"`
+	MakeDate     *int64                                                      `json:"make_date,omitempty"`
+	Src          *string                                                     `json:"src,omitempty"`
+	UpdateDate   *int64                                                      `json:"update_date,omitempty"`
 }
 
 type CreateScriptTag200ApplicationJSON struct {
-	ScriptTag *CreateScriptTag200ApplicationJSONScriptTag `json:"script_tag"`
+	ScriptTag *CreateScriptTag200ApplicationJSONScriptTag `json:"script_tag,omitempty"`
 }
 
 type CreateScriptTagResponse struct {

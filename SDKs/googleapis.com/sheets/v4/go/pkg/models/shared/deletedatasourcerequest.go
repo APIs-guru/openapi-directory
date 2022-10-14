@@ -1,5 +1,5 @@
 package shared
 
 type DeleteDataSourceRequest struct {
-	DataSourceID *string `json:"dataSourceId"`
+	DataSourceID *string `json:"dataSourceId,omitempty"`
 }

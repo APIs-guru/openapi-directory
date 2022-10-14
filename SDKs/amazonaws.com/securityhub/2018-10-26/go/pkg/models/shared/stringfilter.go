@@ -1,6 +1,6 @@
 package shared
 
 type StringFilter struct {
-	Comparison *StringFilterComparisonEnum `json:"Comparison"`
-	Value      *string                     `json:"Value"`
+	Comparison *StringFilterComparisonEnum `json:"Comparison,omitempty"`
+	Value      *string                     `json:"Value,omitempty"`
 }

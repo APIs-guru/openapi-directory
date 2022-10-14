@@ -1,8 +1,8 @@
 package shared
 
 type TaskSummary struct {
-	State   *TaskStateEnum    `json:"state"`
-	Tags    map[string]string `json:"tags"`
-	TaskArn *string           `json:"taskArn"`
+	State   *TaskStateEnum    `json:"state,omitempty"`
+	Tags    map[string]string `json:"tags,omitempty"`
+	TaskArn *string           `json:"taskArn,omitempty"`
 	TaskID  string            `json:"taskId"`
 }

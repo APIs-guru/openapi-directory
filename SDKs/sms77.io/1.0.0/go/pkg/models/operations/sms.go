@@ -24,17 +24,17 @@ type SmsRequest struct {
 }
 
 type Sms200ApplicationJSONMessages struct {
-	Encoding  *string  `json:"encoding"`
-	Error     *string  `json:"error"`
-	ErrorText *string  `json:"error_text"`
-	ID        *string  `json:"id"`
-	Messages  []string `json:"messages"`
-	Parts     *int64   `json:"parts"`
-	Price     *int64   `json:"price"`
-	Recipient *string  `json:"recipient"`
-	Sender    *string  `json:"sender"`
-	Success   *bool    `json:"success"`
-	Text      *string  `json:"text"`
+	Encoding  *string  `json:"encoding,omitempty"`
+	Error     *string  `json:"error,omitempty"`
+	ErrorText *string  `json:"error_text,omitempty"`
+	ID        *string  `json:"id,omitempty"`
+	Messages  []string `json:"messages,omitempty"`
+	Parts     *int64   `json:"parts,omitempty"`
+	Price     *int64   `json:"price,omitempty"`
+	Recipient *string  `json:"recipient,omitempty"`
+	Sender    *string  `json:"sender,omitempty"`
+	Success   *bool    `json:"success,omitempty"`
+	Text      *string  `json:"text,omitempty"`
 }
 
 type Sms200ApplicationJSONSmsTypeEnum string
@@ -45,12 +45,12 @@ const (
 )
 
 type Sms200ApplicationJSON struct {
-	Balance    *float32                          `json:"balance"`
-	Debug      *string                           `json:"debug"`
-	Messages   []Sms200ApplicationJSONMessages   `json:"messages"`
-	SmsType    *Sms200ApplicationJSONSmsTypeEnum `json:"sms_type"`
-	Success    *string                           `json:"success"`
-	TotalPrice *float32                          `json:"total_price"`
+	Balance    *float32                          `json:"balance,omitempty"`
+	Debug      *string                           `json:"debug,omitempty"`
+	Messages   []Sms200ApplicationJSONMessages   `json:"messages,omitempty"`
+	SmsType    *Sms200ApplicationJSONSmsTypeEnum `json:"sms_type,omitempty"`
+	Success    *string                           `json:"success,omitempty"`
+	TotalPrice *float32                          `json:"total_price,omitempty"`
 }
 
 type SmsResponse struct {

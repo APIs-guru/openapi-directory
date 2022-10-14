@@ -5,12 +5,12 @@ type UpdateOrganizationPathParams struct {
 }
 
 type UpdateOrganizationRequestBodyAPI struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type UpdateOrganizationRequestBody struct {
-	API  *UpdateOrganizationRequestBodyAPI `json:"api"`
-	Name *string                           `json:"name"`
+	API  *UpdateOrganizationRequestBodyAPI `json:"api,omitempty"`
+	Name *string                           `json:"name,omitempty"`
 }
 
 type UpdateOrganizationRequest struct {

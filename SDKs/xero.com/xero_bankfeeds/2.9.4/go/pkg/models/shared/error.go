@@ -26,8 +26,8 @@ const (
 )
 
 type Error struct {
-	Detail *string        `json:"detail"`
-	Status *int64         `json:"status"`
-	Title  *string        `json:"title"`
-	Type   *ErrorTypeEnum `json:"type"`
+	Detail *string        `json:"detail,omitempty"`
+	Status *int64         `json:"status,omitempty"`
+	Title  *string        `json:"title,omitempty"`
+	Type   *ErrorTypeEnum `json:"type,omitempty"`
 }

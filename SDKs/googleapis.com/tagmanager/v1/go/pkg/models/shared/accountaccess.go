@@ -12,5 +12,5 @@ const (
 )
 
 type AccountAccess struct {
-	Permission []AccountAccessPermissionEnum `json:"permission"`
+	Permission []AccountAccessPermissionEnum `json:"permission,omitempty"`
 }

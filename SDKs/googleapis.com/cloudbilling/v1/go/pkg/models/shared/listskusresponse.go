@@ -1,6 +1,6 @@
 package shared
 
 type ListSkusResponse struct {
-	NextPageToken *string `json:"nextPageToken"`
-	Skus          []Sku   `json:"skus"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Skus          []Sku   `json:"skus,omitempty"`
 }

@@ -14,7 +14,7 @@ type GetGroupPhotosByIDRequest struct {
 }
 
 type GetGroupPhotosByID200ApplicationJSON struct {
-	Photos []shared.Photo `json:"photos"`
+	Photos []shared.Photo `json:"photos,omitempty"`
 }
 
 type GetGroupPhotosByIDResponse struct {

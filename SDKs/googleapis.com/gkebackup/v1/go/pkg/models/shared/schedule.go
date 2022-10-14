@@ -1,6 +1,6 @@
 package shared
 
 type Schedule struct {
-	CronSchedule *string `json:"cronSchedule"`
-	Paused       *bool   `json:"paused"`
+	CronSchedule *string `json:"cronSchedule,omitempty"`
+	Paused       *bool   `json:"paused,omitempty"`
 }

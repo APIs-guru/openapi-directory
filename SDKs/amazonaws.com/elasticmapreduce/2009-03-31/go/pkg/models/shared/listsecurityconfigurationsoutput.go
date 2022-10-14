@@ -1,6 +1,6 @@
 package shared
 
 type ListSecurityConfigurationsOutput struct {
-	Marker                 *string                        `json:"Marker"`
-	SecurityConfigurations []SecurityConfigurationSummary `json:"SecurityConfigurations"`
+	Marker                 *string                        `json:"Marker,omitempty"`
+	SecurityConfigurations []SecurityConfigurationSummary `json:"SecurityConfigurations,omitempty"`
 }

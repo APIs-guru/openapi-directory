@@ -1,9 +1,9 @@
 package shared
 
 type ReportStateAndNotificationRequest struct {
-	AgentUserID   *string                      `json:"agentUserId"`
-	EventID       *string                      `json:"eventId"`
-	FollowUpToken *string                      `json:"followUpToken"`
-	Payload       *StateAndNotificationPayload `json:"payload"`
-	RequestID     *string                      `json:"requestId"`
+	AgentUserID   *string                      `json:"agentUserId,omitempty"`
+	EventID       *string                      `json:"eventId,omitempty"`
+	FollowUpToken *string                      `json:"followUpToken,omitempty"`
+	Payload       *StateAndNotificationPayload `json:"payload,omitempty"`
+	RequestID     *string                      `json:"requestId,omitempty"`
 }

@@ -9,13 +9,13 @@ const (
 )
 
 type GoogleAppsDriveLabelsV2betaLabelLock struct {
-	Capabilities *GoogleAppsDriveLabelsV2betaLabelLockCapabilities `json:"capabilities"`
-	ChoiceID     *string                                           `json:"choiceId"`
-	CreateTime   *string                                           `json:"createTime"`
-	Creator      *GoogleAppsDriveLabelsV2betaUserInfo              `json:"creator"`
-	DeleteTime   *string                                           `json:"deleteTime"`
-	FieldID      *string                                           `json:"fieldId"`
-	Name         *string                                           `json:"name"`
-	PolicyURI    *string                                           `json:"policyUri"`
-	State        *GoogleAppsDriveLabelsV2betaLabelLockStateEnum    `json:"state"`
+	Capabilities *GoogleAppsDriveLabelsV2betaLabelLockCapabilities `json:"capabilities,omitempty"`
+	ChoiceID     *string                                           `json:"choiceId,omitempty"`
+	CreateTime   *string                                           `json:"createTime,omitempty"`
+	Creator      *GoogleAppsDriveLabelsV2betaUserInfo              `json:"creator,omitempty"`
+	DeleteTime   *string                                           `json:"deleteTime,omitempty"`
+	FieldID      *string                                           `json:"fieldId,omitempty"`
+	Name         *string                                           `json:"name,omitempty"`
+	PolicyURI    *string                                           `json:"policyUri,omitempty"`
+	State        *GoogleAppsDriveLabelsV2betaLabelLockStateEnum    `json:"state,omitempty"`
 }

@@ -20,12 +20,12 @@ const (
 )
 
 type QueryResultBatch struct {
-	EndCursor        *string                               `json:"endCursor"`
-	EntityResultType *QueryResultBatchEntityResultTypeEnum `json:"entityResultType"`
-	EntityResults    []EntityResult                        `json:"entityResults"`
-	MoreResults      *QueryResultBatchMoreResultsEnum      `json:"moreResults"`
-	ReadTime         *string                               `json:"readTime"`
-	SkippedCursor    *string                               `json:"skippedCursor"`
-	SkippedResults   *int32                                `json:"skippedResults"`
-	SnapshotVersion  *string                               `json:"snapshotVersion"`
+	EndCursor        *string                               `json:"endCursor,omitempty"`
+	EntityResultType *QueryResultBatchEntityResultTypeEnum `json:"entityResultType,omitempty"`
+	EntityResults    []EntityResult                        `json:"entityResults,omitempty"`
+	MoreResults      *QueryResultBatchMoreResultsEnum      `json:"moreResults,omitempty"`
+	ReadTime         *string                               `json:"readTime,omitempty"`
+	SkippedCursor    *string                               `json:"skippedCursor,omitempty"`
+	SkippedResults   *int32                                `json:"skippedResults,omitempty"`
+	SnapshotVersion  *string                               `json:"snapshotVersion,omitempty"`
 }

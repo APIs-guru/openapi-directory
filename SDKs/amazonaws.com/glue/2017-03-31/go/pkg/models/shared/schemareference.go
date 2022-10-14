@@ -1,7 +1,7 @@
 package shared
 
 type SchemaReference struct {
-	SchemaID            *SchemaID `json:"SchemaId"`
-	SchemaVersionID     *string   `json:"SchemaVersionId"`
-	SchemaVersionNumber *int64    `json:"SchemaVersionNumber"`
+	SchemaID            *SchemaID `json:"SchemaId,omitempty"`
+	SchemaVersionID     *string   `json:"SchemaVersionId,omitempty"`
+	SchemaVersionNumber *int64    `json:"SchemaVersionNumber,omitempty"`
 }

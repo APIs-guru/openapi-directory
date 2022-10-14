@@ -1,7 +1,7 @@
 package shared
 
 type AdvertiserLandingPagesListResponse struct {
-	Kind          *string       `json:"kind"`
-	LandingPages  []LandingPage `json:"landingPages"`
-	NextPageToken *string       `json:"nextPageToken"`
+	Kind          *string       `json:"kind,omitempty"`
+	LandingPages  []LandingPage `json:"landingPages,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
 }

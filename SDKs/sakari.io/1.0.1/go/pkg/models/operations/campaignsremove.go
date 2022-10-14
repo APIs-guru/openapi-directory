@@ -19,7 +19,7 @@ type CampaignsRemoveRequest struct {
 }
 
 type CampaignsRemove200ApplicationJSON struct {
-	Success *bool `json:"success"`
+	Success *bool `json:"success,omitempty"`
 }
 
 type CampaignsRemoveResponse struct {

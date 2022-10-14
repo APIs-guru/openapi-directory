@@ -16,8 +16,8 @@ const (
 )
 
 type DatabaseDump struct {
-	DatabaseType   *DatabaseDumpDatabaseTypeEnum `json:"databaseType"`
-	GcsURI         *string                       `json:"gcsUri"`
-	SourceDatabase *string                       `json:"sourceDatabase"`
-	Type           *DatabaseDumpTypeEnum         `json:"type"`
+	DatabaseType   *DatabaseDumpDatabaseTypeEnum `json:"databaseType,omitempty"`
+	GcsURI         *string                       `json:"gcsUri,omitempty"`
+	SourceDatabase *string                       `json:"sourceDatabase,omitempty"`
+	Type           *DatabaseDumpTypeEnum         `json:"type,omitempty"`
 }

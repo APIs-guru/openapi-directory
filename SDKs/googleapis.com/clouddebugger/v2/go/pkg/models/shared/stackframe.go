@@ -1,8 +1,8 @@
 package shared
 
 type StackFrame struct {
-	Arguments []Variable      `json:"arguments"`
-	Function  *string         `json:"function"`
-	Locals    []Variable      `json:"locals"`
-	Location  *SourceLocation `json:"location"`
+	Arguments []Variable      `json:"arguments,omitempty"`
+	Function  *string         `json:"function,omitempty"`
+	Locals    []Variable      `json:"locals,omitempty"`
+	Location  *SourceLocation `json:"location,omitempty"`
 }

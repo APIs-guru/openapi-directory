@@ -1,6 +1,6 @@
 package shared
 
 type FhirConfig struct {
-	DefaultKeepExtensions *bool           `json:"defaultKeepExtensions"`
-	FieldMetadataList     []FieldMetadata `json:"fieldMetadataList"`
+	DefaultKeepExtensions *bool           `json:"defaultKeepExtensions,omitempty"`
+	FieldMetadataList     []FieldMetadata `json:"fieldMetadataList,omitempty"`
 }

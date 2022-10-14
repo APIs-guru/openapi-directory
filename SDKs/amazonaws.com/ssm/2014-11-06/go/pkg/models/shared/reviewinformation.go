@@ -5,7 +5,7 @@ import (
 )
 
 type ReviewInformation struct {
-	ReviewedTime *time.Time        `json:"ReviewedTime"`
-	Reviewer     *string           `json:"Reviewer"`
-	Status       *ReviewStatusEnum `json:"Status"`
+	ReviewedTime *time.Time        `json:"ReviewedTime,omitempty"`
+	Reviewer     *string           `json:"Reviewer,omitempty"`
+	Status       *ReviewStatusEnum `json:"Status,omitempty"`
 }

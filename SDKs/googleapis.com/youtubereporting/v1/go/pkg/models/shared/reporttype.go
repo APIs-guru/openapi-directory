@@ -1,8 +1,8 @@
 package shared
 
 type ReportType struct {
-	DeprecateTime *string `json:"deprecateTime"`
-	ID            *string `json:"id"`
-	Name          *string `json:"name"`
-	SystemManaged *bool   `json:"systemManaged"`
+	DeprecateTime *string `json:"deprecateTime,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	SystemManaged *bool   `json:"systemManaged,omitempty"`
 }

@@ -1,16 +1,16 @@
 package shared
 
 type ResolverEndpoint struct {
-	Arn              *string                        `json:"Arn"`
-	CreationTime     *string                        `json:"CreationTime"`
-	CreatorRequestID *string                        `json:"CreatorRequestId"`
-	Direction        *ResolverEndpointDirectionEnum `json:"Direction"`
-	HostVpcID        *string                        `json:"HostVPCId"`
-	ID               *string                        `json:"Id"`
-	IPAddressCount   *int64                         `json:"IpAddressCount"`
-	ModificationTime *string                        `json:"ModificationTime"`
-	Name             *string                        `json:"Name"`
-	SecurityGroupIds []string                       `json:"SecurityGroupIds"`
-	Status           *ResolverEndpointStatusEnum    `json:"Status"`
-	StatusMessage    *string                        `json:"StatusMessage"`
+	Arn              *string                        `json:"Arn,omitempty"`
+	CreationTime     *string                        `json:"CreationTime,omitempty"`
+	CreatorRequestID *string                        `json:"CreatorRequestId,omitempty"`
+	Direction        *ResolverEndpointDirectionEnum `json:"Direction,omitempty"`
+	HostVpcID        *string                        `json:"HostVPCId,omitempty"`
+	ID               *string                        `json:"Id,omitempty"`
+	IPAddressCount   *int64                         `json:"IpAddressCount,omitempty"`
+	ModificationTime *string                        `json:"ModificationTime,omitempty"`
+	Name             *string                        `json:"Name,omitempty"`
+	SecurityGroupIds []string                       `json:"SecurityGroupIds,omitempty"`
+	Status           *ResolverEndpointStatusEnum    `json:"Status,omitempty"`
+	StatusMessage    *string                        `json:"StatusMessage,omitempty"`
 }

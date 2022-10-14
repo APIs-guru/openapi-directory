@@ -1,8 +1,8 @@
 package shared
 
 type IdentitytoolkitRelyingpartySendVerificationCodeRequest struct {
-	IosReceipt     *string `json:"iosReceipt"`
-	IosSecret      *string `json:"iosSecret"`
-	PhoneNumber    *string `json:"phoneNumber"`
-	RecaptchaToken *string `json:"recaptchaToken"`
+	IosReceipt     *string `json:"iosReceipt,omitempty"`
+	IosSecret      *string `json:"iosSecret,omitempty"`
+	PhoneNumber    *string `json:"phoneNumber,omitempty"`
+	RecaptchaToken *string `json:"recaptchaToken,omitempty"`
 }

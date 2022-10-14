@@ -1,15 +1,15 @@
 package shared
 
 type PostalAddress struct {
-	AddressLines       []string `json:"addressLines"`
-	AdministrativeArea *string  `json:"administrativeArea"`
-	LanguageCode       *string  `json:"languageCode"`
-	Locality           *string  `json:"locality"`
-	Organization       *string  `json:"organization"`
-	PostalCode         *string  `json:"postalCode"`
-	Recipients         []string `json:"recipients"`
-	RegionCode         *string  `json:"regionCode"`
-	Revision           *int32   `json:"revision"`
-	SortingCode        *string  `json:"sortingCode"`
-	Sublocality        *string  `json:"sublocality"`
+	AddressLines       []string `json:"addressLines,omitempty"`
+	AdministrativeArea *string  `json:"administrativeArea,omitempty"`
+	LanguageCode       *string  `json:"languageCode,omitempty"`
+	Locality           *string  `json:"locality,omitempty"`
+	Organization       *string  `json:"organization,omitempty"`
+	PostalCode         *string  `json:"postalCode,omitempty"`
+	Recipients         []string `json:"recipients,omitempty"`
+	RegionCode         *string  `json:"regionCode,omitempty"`
+	Revision           *int32   `json:"revision,omitempty"`
+	SortingCode        *string  `json:"sortingCode,omitempty"`
+	Sublocality        *string  `json:"sublocality,omitempty"`
 }

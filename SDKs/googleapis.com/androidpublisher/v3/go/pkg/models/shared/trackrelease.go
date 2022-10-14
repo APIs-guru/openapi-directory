@@ -11,11 +11,11 @@ const (
 )
 
 type TrackRelease struct {
-	CountryTargeting    *CountryTargeting       `json:"countryTargeting"`
-	InAppUpdatePriority *int32                  `json:"inAppUpdatePriority"`
-	Name                *string                 `json:"name"`
-	ReleaseNotes        []LocalizedText         `json:"releaseNotes"`
-	Status              *TrackReleaseStatusEnum `json:"status"`
-	UserFraction        *float64                `json:"userFraction"`
-	VersionCodes        []string                `json:"versionCodes"`
+	CountryTargeting    *CountryTargeting       `json:"countryTargeting,omitempty"`
+	InAppUpdatePriority *int32                  `json:"inAppUpdatePriority,omitempty"`
+	Name                *string                 `json:"name,omitempty"`
+	ReleaseNotes        []LocalizedText         `json:"releaseNotes,omitempty"`
+	Status              *TrackReleaseStatusEnum `json:"status,omitempty"`
+	UserFraction        *float64                `json:"userFraction,omitempty"`
+	VersionCodes        []string                `json:"versionCodes,omitempty"`
 }

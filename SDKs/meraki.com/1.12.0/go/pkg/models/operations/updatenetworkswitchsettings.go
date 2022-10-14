@@ -18,9 +18,9 @@ type UpdateNetworkSwitchSettingsRequestBodyPowerExceptions struct {
 }
 
 type UpdateNetworkSwitchSettingsRequestBody struct {
-	PowerExceptions  []UpdateNetworkSwitchSettingsRequestBodyPowerExceptions `json:"powerExceptions"`
-	UseCombinedPower *bool                                                   `json:"useCombinedPower"`
-	Vlan             *int64                                                  `json:"vlan"`
+	PowerExceptions  []UpdateNetworkSwitchSettingsRequestBodyPowerExceptions `json:"powerExceptions,omitempty"`
+	UseCombinedPower *bool                                                   `json:"useCombinedPower,omitempty"`
+	Vlan             *int64                                                  `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkSwitchSettingsRequest struct {

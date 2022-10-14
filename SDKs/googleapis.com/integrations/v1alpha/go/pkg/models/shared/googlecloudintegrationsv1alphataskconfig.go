@@ -28,17 +28,17 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaTaskConfig struct {
-	Description                  *string                                                               `json:"description"`
-	DisplayName                  *string                                                               `json:"displayName"`
-	FailurePolicy                *GoogleCloudIntegrationsV1alphaFailurePolicy                          `json:"failurePolicy"`
-	JSONValidationOption         *GoogleCloudIntegrationsV1alphaTaskConfigJSONValidationOptionEnum     `json:"jsonValidationOption"`
-	NextTasks                    []GoogleCloudIntegrationsV1alphaNextTask                              `json:"nextTasks"`
-	NextTasksExecutionPolicy     *GoogleCloudIntegrationsV1alphaTaskConfigNextTasksExecutionPolicyEnum `json:"nextTasksExecutionPolicy"`
-	Parameters                   map[string]GoogleCloudIntegrationsV1alphaEventParameter               `json:"parameters"`
-	SuccessPolicy                *GoogleCloudIntegrationsV1alphaSuccessPolicy                          `json:"successPolicy"`
-	SynchronousCallFailurePolicy *GoogleCloudIntegrationsV1alphaFailurePolicy                          `json:"synchronousCallFailurePolicy"`
-	Task                         *string                                                               `json:"task"`
-	TaskExecutionStrategy        *GoogleCloudIntegrationsV1alphaTaskConfigTaskExecutionStrategyEnum    `json:"taskExecutionStrategy"`
-	TaskID                       *string                                                               `json:"taskId"`
-	TaskTemplate                 *string                                                               `json:"taskTemplate"`
+	Description                  *string                                                               `json:"description,omitempty"`
+	DisplayName                  *string                                                               `json:"displayName,omitempty"`
+	FailurePolicy                *GoogleCloudIntegrationsV1alphaFailurePolicy                          `json:"failurePolicy,omitempty"`
+	JSONValidationOption         *GoogleCloudIntegrationsV1alphaTaskConfigJSONValidationOptionEnum     `json:"jsonValidationOption,omitempty"`
+	NextTasks                    []GoogleCloudIntegrationsV1alphaNextTask                              `json:"nextTasks,omitempty"`
+	NextTasksExecutionPolicy     *GoogleCloudIntegrationsV1alphaTaskConfigNextTasksExecutionPolicyEnum `json:"nextTasksExecutionPolicy,omitempty"`
+	Parameters                   map[string]GoogleCloudIntegrationsV1alphaEventParameter               `json:"parameters,omitempty"`
+	SuccessPolicy                *GoogleCloudIntegrationsV1alphaSuccessPolicy                          `json:"successPolicy,omitempty"`
+	SynchronousCallFailurePolicy *GoogleCloudIntegrationsV1alphaFailurePolicy                          `json:"synchronousCallFailurePolicy,omitempty"`
+	Task                         *string                                                               `json:"task,omitempty"`
+	TaskExecutionStrategy        *GoogleCloudIntegrationsV1alphaTaskConfigTaskExecutionStrategyEnum    `json:"taskExecutionStrategy,omitempty"`
+	TaskID                       *string                                                               `json:"taskId,omitempty"`
+	TaskTemplate                 *string                                                               `json:"taskTemplate,omitempty"`
 }

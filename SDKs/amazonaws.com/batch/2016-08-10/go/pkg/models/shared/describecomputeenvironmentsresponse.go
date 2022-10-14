@@ -1,6 +1,6 @@
 package shared
 
 type DescribeComputeEnvironmentsResponse struct {
-	ComputeEnvironments []ComputeEnvironmentDetail `json:"computeEnvironments"`
-	NextToken           *string                    `json:"nextToken"`
+	ComputeEnvironments []ComputeEnvironmentDetail `json:"computeEnvironments,omitempty"`
+	NextToken           *string                    `json:"nextToken,omitempty"`
 }

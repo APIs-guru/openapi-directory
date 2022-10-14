@@ -9,5 +9,5 @@ type AccessPreviewSummary struct {
 	CreatedAt    time.Time                  `json:"createdAt"`
 	ID           string                     `json:"id"`
 	Status       AccessPreviewStatusEnum    `json:"status"`
-	StatusReason *AccessPreviewStatusReason `json:"statusReason"`
+	StatusReason *AccessPreviewStatusReason `json:"statusReason,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type CreateStreamOutput struct {
-	StreamArn *string `json:"StreamARN"`
+	StreamArn *string `json:"StreamARN,omitempty"`
 }

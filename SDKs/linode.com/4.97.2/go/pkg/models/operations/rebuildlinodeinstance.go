@@ -9,13 +9,13 @@ type RebuildLinodeInstancePathParams struct {
 }
 
 type RebuildLinodeInstanceRequestBody struct {
-	AuthorizedKeys  []string               `json:"authorized_keys"`
-	AuthorizedUsers []string               `json:"authorized_users"`
-	Booted          *bool                  `json:"booted"`
+	AuthorizedKeys  []string               `json:"authorized_keys,omitempty"`
+	AuthorizedUsers []string               `json:"authorized_users,omitempty"`
+	Booted          *bool                  `json:"booted,omitempty"`
 	Image           string                 `json:"image"`
 	RootPass        string                 `json:"root_pass"`
-	StackscriptData map[string]interface{} `json:"stackscript_data"`
-	StackscriptID   *int64                 `json:"stackscript_id"`
+	StackscriptData map[string]interface{} `json:"stackscript_data,omitempty"`
+	StackscriptID   *int64                 `json:"stackscript_id,omitempty"`
 }
 
 type RebuildLinodeInstanceSecurityOption1 struct {
@@ -38,7 +38,7 @@ type RebuildLinodeInstanceRequest struct {
 }
 
 type RebuildLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RebuildLinodeInstanceResponse struct {

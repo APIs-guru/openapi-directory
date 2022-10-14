@@ -1,10 +1,10 @@
 package shared
 
 type GetEventIntegrationResponse struct {
-	Description         *string           `json:"Description"`
-	EventBridgeBus      *string           `json:"EventBridgeBus"`
-	EventFilter         *EventFilter      `json:"EventFilter"`
-	EventIntegrationArn *string           `json:"EventIntegrationArn"`
-	Name                *string           `json:"Name"`
-	Tags                map[string]string `json:"Tags"`
+	Description         *string           `json:"Description,omitempty"`
+	EventBridgeBus      *string           `json:"EventBridgeBus,omitempty"`
+	EventFilter         *EventFilter      `json:"EventFilter,omitempty"`
+	EventIntegrationArn *string           `json:"EventIntegrationArn,omitempty"`
+	Name                *string           `json:"Name,omitempty"`
+	Tags                map[string]string `json:"Tags,omitempty"`
 }

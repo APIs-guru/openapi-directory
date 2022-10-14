@@ -1,6 +1,6 @@
 package shared
 
 type SslCertsListResponse struct {
-	Items []SslCert `json:"items"`
-	Kind  *string   `json:"kind"`
+	Items []SslCert `json:"items,omitempty"`
+	Kind  *string   `json:"kind,omitempty"`
 }

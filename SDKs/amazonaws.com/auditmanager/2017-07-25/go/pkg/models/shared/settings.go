@@ -1,9 +1,9 @@
 package shared
 
 type Settings struct {
-	DefaultAssessmentReportsDestination *AssessmentReportsDestination `json:"defaultAssessmentReportsDestination"`
-	DefaultProcessOwners                []Role                        `json:"defaultProcessOwners"`
-	IsAwsOrgEnabled                     *bool                         `json:"isAwsOrgEnabled"`
-	KmsKey                              *string                       `json:"kmsKey"`
-	SnsTopic                            *string                       `json:"snsTopic"`
+	DefaultAssessmentReportsDestination *AssessmentReportsDestination `json:"defaultAssessmentReportsDestination,omitempty"`
+	DefaultProcessOwners                []Role                        `json:"defaultProcessOwners,omitempty"`
+	IsAwsOrgEnabled                     *bool                         `json:"isAwsOrgEnabled,omitempty"`
+	KmsKey                              *string                       `json:"kmsKey,omitempty"`
+	SnsTopic                            *string                       `json:"snsTopic,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type BulkEditLineItemAssignedTargetingOptionsRequest struct {
-	CreateRequests []CreateAssignedTargetingOptionsRequest `json:"createRequests"`
-	DeleteRequests []DeleteAssignedTargetingOptionsRequest `json:"deleteRequests"`
+	CreateRequests []CreateAssignedTargetingOptionsRequest `json:"createRequests,omitempty"`
+	DeleteRequests []DeleteAssignedTargetingOptionsRequest `json:"deleteRequests,omitempty"`
 }

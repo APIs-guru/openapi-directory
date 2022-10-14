@@ -20,10 +20,10 @@ type CreateStreamingImageHeaders struct {
 }
 
 type CreateStreamingImageRequestBody struct {
-	Description *string           `json:"description"`
+	Description *string           `json:"description,omitempty"`
 	Ec2ImageID  string            `json:"ec2ImageId"`
 	Name        string            `json:"name"`
-	Tags        map[string]string `json:"tags"`
+	Tags        map[string]string `json:"tags,omitempty"`
 }
 
 type CreateStreamingImageRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeDeviceEc2Output struct {
-	Instances []InstanceSummary `json:"instances"`
+	Instances []InstanceSummary `json:"instances,omitempty"`
 }

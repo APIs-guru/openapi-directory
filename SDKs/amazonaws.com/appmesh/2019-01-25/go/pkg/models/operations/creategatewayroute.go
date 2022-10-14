@@ -24,17 +24,17 @@ type CreateGatewayRouteHeaders struct {
 }
 
 type CreateGatewayRouteRequestBodySpec struct {
-	GrpcRoute  *shared.GrpcGatewayRoute `json:"grpcRoute"`
-	Http2Route *shared.HTTPGatewayRoute `json:"http2Route"`
-	HTTPRoute  *shared.HTTPGatewayRoute `json:"httpRoute"`
-	Priority   *int64                   `json:"priority"`
+	GrpcRoute  *shared.GrpcGatewayRoute `json:"grpcRoute,omitempty"`
+	Http2Route *shared.HTTPGatewayRoute `json:"http2Route,omitempty"`
+	HTTPRoute  *shared.HTTPGatewayRoute `json:"httpRoute,omitempty"`
+	Priority   *int64                   `json:"priority,omitempty"`
 }
 
 type CreateGatewayRouteRequestBody struct {
-	ClientToken      *string                           `json:"clientToken"`
+	ClientToken      *string                           `json:"clientToken,omitempty"`
 	GatewayRouteName string                            `json:"gatewayRouteName"`
 	Spec             CreateGatewayRouteRequestBodySpec `json:"spec"`
-	Tags             []shared.TagRef                   `json:"tags"`
+	Tags             []shared.TagRef                   `json:"tags,omitempty"`
 }
 
 type CreateGatewayRouteRequest struct {

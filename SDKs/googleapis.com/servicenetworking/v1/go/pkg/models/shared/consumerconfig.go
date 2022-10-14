@@ -1,17 +1,17 @@
 package shared
 
 type ConsumerConfig struct {
-	CloudsqlConfigs                        []CloudSQLConfig                                            `json:"cloudsqlConfigs"`
-	ConsumerExportCustomRoutes             *bool                                                       `json:"consumerExportCustomRoutes"`
-	ConsumerExportSubnetRoutesWithPublicIP *bool                                                       `json:"consumerExportSubnetRoutesWithPublicIp"`
-	ConsumerImportCustomRoutes             *bool                                                       `json:"consumerImportCustomRoutes"`
-	ConsumerImportSubnetRoutesWithPublicIP *bool                                                       `json:"consumerImportSubnetRoutesWithPublicIp"`
-	ProducerExportCustomRoutes             *bool                                                       `json:"producerExportCustomRoutes"`
-	ProducerExportSubnetRoutesWithPublicIP *bool                                                       `json:"producerExportSubnetRoutesWithPublicIp"`
-	ProducerImportCustomRoutes             *bool                                                       `json:"producerImportCustomRoutes"`
-	ProducerImportSubnetRoutesWithPublicIP *bool                                                       `json:"producerImportSubnetRoutesWithPublicIp"`
-	ProducerNetwork                        *string                                                     `json:"producerNetwork"`
-	ReservedRanges                         []GoogleCloudServicenetworkingV1ConsumerConfigReservedRange `json:"reservedRanges"`
-	UsedIPRanges                           []string                                                    `json:"usedIpRanges"`
-	VpcScReferenceArchitectureEnabled      *bool                                                       `json:"vpcScReferenceArchitectureEnabled"`
+	CloudsqlConfigs                        []CloudSQLConfig                                            `json:"cloudsqlConfigs,omitempty"`
+	ConsumerExportCustomRoutes             *bool                                                       `json:"consumerExportCustomRoutes,omitempty"`
+	ConsumerExportSubnetRoutesWithPublicIP *bool                                                       `json:"consumerExportSubnetRoutesWithPublicIp,omitempty"`
+	ConsumerImportCustomRoutes             *bool                                                       `json:"consumerImportCustomRoutes,omitempty"`
+	ConsumerImportSubnetRoutesWithPublicIP *bool                                                       `json:"consumerImportSubnetRoutesWithPublicIp,omitempty"`
+	ProducerExportCustomRoutes             *bool                                                       `json:"producerExportCustomRoutes,omitempty"`
+	ProducerExportSubnetRoutesWithPublicIP *bool                                                       `json:"producerExportSubnetRoutesWithPublicIp,omitempty"`
+	ProducerImportCustomRoutes             *bool                                                       `json:"producerImportCustomRoutes,omitempty"`
+	ProducerImportSubnetRoutesWithPublicIP *bool                                                       `json:"producerImportSubnetRoutesWithPublicIp,omitempty"`
+	ProducerNetwork                        *string                                                     `json:"producerNetwork,omitempty"`
+	ReservedRanges                         []GoogleCloudServicenetworkingV1ConsumerConfigReservedRange `json:"reservedRanges,omitempty"`
+	UsedIPRanges                           []string                                                    `json:"usedIpRanges,omitempty"`
+	VpcScReferenceArchitectureEnabled      *bool                                                       `json:"vpcScReferenceArchitectureEnabled,omitempty"`
 }

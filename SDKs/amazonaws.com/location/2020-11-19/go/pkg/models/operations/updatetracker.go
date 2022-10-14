@@ -27,9 +27,9 @@ const (
 )
 
 type UpdateTrackerRequestBody struct {
-	Description           *string                                  `json:"Description"`
-	PricingPlan           *UpdateTrackerRequestBodyPricingPlanEnum `json:"PricingPlan"`
-	PricingPlanDataSource *string                                  `json:"PricingPlanDataSource"`
+	Description           *string                                  `json:"Description,omitempty"`
+	PricingPlan           *UpdateTrackerRequestBodyPricingPlanEnum `json:"PricingPlan,omitempty"`
+	PricingPlanDataSource *string                                  `json:"PricingPlanDataSource,omitempty"`
 }
 
 type UpdateTrackerRequest struct {

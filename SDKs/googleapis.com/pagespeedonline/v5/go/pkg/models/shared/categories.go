@@ -1,9 +1,9 @@
 package shared
 
 type Categories struct {
-	Accessibility *LighthouseCategoryV5 `json:"accessibility"`
-	BestPractices *LighthouseCategoryV5 `json:"best-practices"`
-	Performance   *LighthouseCategoryV5 `json:"performance"`
-	Pwa           *LighthouseCategoryV5 `json:"pwa"`
-	Seo           *LighthouseCategoryV5 `json:"seo"`
+	Accessibility *LighthouseCategoryV5 `json:"accessibility,omitempty"`
+	BestPractices *LighthouseCategoryV5 `json:"best-practices,omitempty"`
+	Performance   *LighthouseCategoryV5 `json:"performance,omitempty"`
+	Pwa           *LighthouseCategoryV5 `json:"pwa,omitempty"`
+	Seo           *LighthouseCategoryV5 `json:"seo,omitempty"`
 }

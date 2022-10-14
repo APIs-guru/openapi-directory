@@ -27,9 +27,9 @@ const (
 )
 
 type GoogleCloudDataplexV1StorageFormat struct {
-	CompressionFormat *GoogleCloudDataplexV1StorageFormatCompressionFormatEnum `json:"compressionFormat"`
-	Csv               *GoogleCloudDataplexV1StorageFormatCsvOptions            `json:"csv"`
-	Format            *GoogleCloudDataplexV1StorageFormatFormatEnum            `json:"format"`
-	JSON              *GoogleCloudDataplexV1StorageFormatJSONOptions           `json:"json"`
-	MimeType          *string                                                  `json:"mimeType"`
+	CompressionFormat *GoogleCloudDataplexV1StorageFormatCompressionFormatEnum `json:"compressionFormat,omitempty"`
+	Csv               *GoogleCloudDataplexV1StorageFormatCsvOptions            `json:"csv,omitempty"`
+	Format            *GoogleCloudDataplexV1StorageFormatFormatEnum            `json:"format,omitempty"`
+	JSON              *GoogleCloudDataplexV1StorageFormatJSONOptions           `json:"json,omitempty"`
+	MimeType          *string                                                  `json:"mimeType,omitempty"`
 }

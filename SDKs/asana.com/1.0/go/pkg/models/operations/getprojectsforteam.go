@@ -22,7 +22,7 @@ type GetProjectsForTeamRequest struct {
 }
 
 type GetProjectsForTeam200ApplicationJSON struct {
-	Data []shared.ProjectCompact `json:"data"`
+	Data []shared.ProjectCompact `json:"data,omitempty"`
 }
 
 type GetProjectsForTeamResponse struct {

@@ -5,8 +5,8 @@ import (
 )
 
 type AccountEnrollmentStatus struct {
-	AccountID            *string     `json:"accountId"`
-	LastUpdatedTimestamp *time.Time  `json:"lastUpdatedTimestamp"`
-	Status               *StatusEnum `json:"status"`
-	StatusReason         *string     `json:"statusReason"`
+	AccountID            *string     `json:"accountId,omitempty"`
+	LastUpdatedTimestamp *time.Time  `json:"lastUpdatedTimestamp,omitempty"`
+	Status               *StatusEnum `json:"status,omitempty"`
+	StatusReason         *string     `json:"statusReason,omitempty"`
 }

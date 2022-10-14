@@ -5,9 +5,9 @@ import (
 )
 
 type AppImageConfigDetails struct {
-	AppImageConfigArn        *string                   `json:"AppImageConfigArn"`
-	AppImageConfigName       *string                   `json:"AppImageConfigName"`
-	CreationTime             *time.Time                `json:"CreationTime"`
-	KernelGatewayImageConfig *KernelGatewayImageConfig `json:"KernelGatewayImageConfig"`
-	LastModifiedTime         *time.Time                `json:"LastModifiedTime"`
+	AppImageConfigArn        *string                   `json:"AppImageConfigArn,omitempty"`
+	AppImageConfigName       *string                   `json:"AppImageConfigName,omitempty"`
+	CreationTime             *time.Time                `json:"CreationTime,omitempty"`
+	KernelGatewayImageConfig *KernelGatewayImageConfig `json:"KernelGatewayImageConfig,omitempty"`
+	LastModifiedTime         *time.Time                `json:"LastModifiedTime,omitempty"`
 }

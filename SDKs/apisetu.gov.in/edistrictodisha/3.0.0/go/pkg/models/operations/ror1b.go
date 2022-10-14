@@ -16,8 +16,8 @@ const (
 )
 
 type Ror1bRequestBody struct {
-	CertificateParameters *Ror1bRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *Ror1bRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                Ror1bRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Ror1b400ApplicationJSON struct {
-	Error            *Ror1b400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ror1b400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ror1b400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ror1b400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ror1b401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Ror1b401ApplicationJSON struct {
-	Error            *Ror1b401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ror1b401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ror1b401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ror1b401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ror1b404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Ror1b404ApplicationJSON struct {
-	Error            *Ror1b404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ror1b404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ror1b404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ror1b404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ror1b500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Ror1b500ApplicationJSON struct {
-	Error            *Ror1b500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ror1b500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ror1b500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ror1b500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ror1b502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Ror1b502ApplicationJSON struct {
-	Error            *Ror1b502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ror1b502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ror1b502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ror1b502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ror1b503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Ror1b503ApplicationJSON struct {
-	Error            *Ror1b503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ror1b503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ror1b503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ror1b503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ror1b504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Ror1b504ApplicationJSON struct {
-	Error            *Ror1b504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ror1b504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ror1b504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ror1b504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ror1bResponse struct {

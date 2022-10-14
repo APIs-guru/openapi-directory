@@ -5,6 +5,6 @@ import (
 )
 
 type TimeRange struct {
-	FromInclusive *time.Time `json:"FromInclusive"`
-	ToExclusive   *time.Time `json:"ToExclusive"`
+	FromInclusive *time.Time `json:"FromInclusive,omitempty"`
+	ToExclusive   *time.Time `json:"ToExclusive,omitempty"`
 }

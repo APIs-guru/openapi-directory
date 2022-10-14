@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1SecuritySettingsAudioExportSettings struct {
-	AudioExportPattern   *string                                                                           `json:"audioExportPattern"`
-	AudioFormat          *GoogleCloudDialogflowCxV3beta1SecuritySettingsAudioExportSettingsAudioFormatEnum `json:"audioFormat"`
-	EnableAudioRedaction *bool                                                                             `json:"enableAudioRedaction"`
-	GcsBucket            *string                                                                           `json:"gcsBucket"`
+	AudioExportPattern   *string                                                                           `json:"audioExportPattern,omitempty"`
+	AudioFormat          *GoogleCloudDialogflowCxV3beta1SecuritySettingsAudioExportSettingsAudioFormatEnum `json:"audioFormat,omitempty"`
+	EnableAudioRedaction *bool                                                                             `json:"enableAudioRedaction,omitempty"`
+	GcsBucket            *string                                                                           `json:"gcsBucket,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type CompleteVerificationRequest struct {
-	Pin *string `json:"pin"`
+	Pin *string `json:"pin,omitempty"`
 }

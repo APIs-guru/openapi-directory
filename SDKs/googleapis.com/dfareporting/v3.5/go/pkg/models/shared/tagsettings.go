@@ -1,6 +1,6 @@
 package shared
 
 type TagSettings struct {
-	DynamicTagEnabled *bool `json:"dynamicTagEnabled"`
-	ImageTagEnabled   *bool `json:"imageTagEnabled"`
+	DynamicTagEnabled *bool `json:"dynamicTagEnabled,omitempty"`
+	ImageTagEnabled   *bool `json:"imageTagEnabled,omitempty"`
 }

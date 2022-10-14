@@ -1,5 +1,5 @@
 package shared
 
 type NetworkConfig struct {
-	PeeredNetwork *string `json:"peeredNetwork"`
+	PeeredNetwork *string `json:"peeredNetwork,omitempty"`
 }

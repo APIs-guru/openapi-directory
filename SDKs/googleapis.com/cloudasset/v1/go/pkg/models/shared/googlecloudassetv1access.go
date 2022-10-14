@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudAssetV1Access struct {
-	AnalysisState *IamPolicyAnalysisState `json:"analysisState"`
-	Permission    *string                 `json:"permission"`
-	Role          *string                 `json:"role"`
+	AnalysisState *IamPolicyAnalysisState `json:"analysisState,omitempty"`
+	Permission    *string                 `json:"permission,omitempty"`
+	Role          *string                 `json:"role,omitempty"`
 }

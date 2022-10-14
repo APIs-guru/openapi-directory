@@ -10,8 +10,8 @@ const (
 )
 
 type AdClient struct {
-	Name                 *string            `json:"name"`
-	ProductCode          *string            `json:"productCode"`
-	ReportingDimensionID *string            `json:"reportingDimensionId"`
-	State                *AdClientStateEnum `json:"state"`
+	Name                 *string            `json:"name,omitempty"`
+	ProductCode          *string            `json:"productCode,omitempty"`
+	ReportingDimensionID *string            `json:"reportingDimensionId,omitempty"`
+	State                *AdClientStateEnum `json:"state,omitempty"`
 }

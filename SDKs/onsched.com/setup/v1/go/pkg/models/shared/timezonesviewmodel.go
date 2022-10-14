@@ -1,8 +1,8 @@
 package shared
 
 type TimezonesViewModel struct {
-	Name          *string `json:"name"`
-	Region        *string `json:"region"`
-	TimezoneIanna *string `json:"timezoneIanna"`
-	TzOffset      *int32  `json:"tzOffset"`
+	Name          *string `json:"name,omitempty"`
+	Region        *string `json:"region,omitempty"`
+	TimezoneIanna *string `json:"timezoneIanna,omitempty"`
+	TzOffset      *int32  `json:"tzOffset,omitempty"`
 }

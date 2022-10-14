@@ -1,5 +1,5 @@
 package shared
 
 type AssociateRoleToGroupResponse struct {
-	AssociatedAt *string `json:"AssociatedAt"`
+	AssociatedAt *string `json:"AssociatedAt,omitempty"`
 }

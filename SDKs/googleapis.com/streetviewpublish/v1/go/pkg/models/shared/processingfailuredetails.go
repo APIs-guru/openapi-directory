@@ -1,8 +1,8 @@
 package shared
 
 type ProcessingFailureDetails struct {
-	GpsDataGapDetails      *GpsDataGapFailureDetails      `json:"gpsDataGapDetails"`
-	ImuDataGapDetails      *ImuDataGapFailureDetails      `json:"imuDataGapDetails"`
-	InsufficientGpsDetails *InsufficientGpsFailureDetails `json:"insufficientGpsDetails"`
-	NotOutdoorsDetails     *NotOutdoorsFailureDetails     `json:"notOutdoorsDetails"`
+	GpsDataGapDetails      *GpsDataGapFailureDetails      `json:"gpsDataGapDetails,omitempty"`
+	ImuDataGapDetails      *ImuDataGapFailureDetails      `json:"imuDataGapDetails,omitempty"`
+	InsufficientGpsDetails *InsufficientGpsFailureDetails `json:"insufficientGpsDetails,omitempty"`
+	NotOutdoorsDetails     *NotOutdoorsFailureDetails     `json:"notOutdoorsDetails,omitempty"`
 }

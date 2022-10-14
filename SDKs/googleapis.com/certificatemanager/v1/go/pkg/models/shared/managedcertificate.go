@@ -10,10 +10,10 @@ const (
 )
 
 type ManagedCertificate struct {
-	AuthorizationAttemptInfo []AuthorizationAttemptInfo   `json:"authorizationAttemptInfo"`
-	DNSAuthorizations        []string                     `json:"dnsAuthorizations"`
-	Domains                  []string                     `json:"domains"`
-	IssuanceConfig           *string                      `json:"issuanceConfig"`
-	ProvisioningIssue        *ProvisioningIssue           `json:"provisioningIssue"`
-	State                    *ManagedCertificateStateEnum `json:"state"`
+	AuthorizationAttemptInfo []AuthorizationAttemptInfo   `json:"authorizationAttemptInfo,omitempty"`
+	DNSAuthorizations        []string                     `json:"dnsAuthorizations,omitempty"`
+	Domains                  []string                     `json:"domains,omitempty"`
+	IssuanceConfig           *string                      `json:"issuanceConfig,omitempty"`
+	ProvisioningIssue        *ProvisioningIssue           `json:"provisioningIssue,omitempty"`
+	State                    *ManagedCertificateStateEnum `json:"state,omitempty"`
 }

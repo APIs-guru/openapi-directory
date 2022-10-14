@@ -9,7 +9,7 @@ const (
 )
 
 type SQLInstancesStartExternalSyncRequest struct {
-	MysqlSyncConfig  *MySQLSyncConfig                                  `json:"mysqlSyncConfig"`
-	SkipVerification *bool                                             `json:"skipVerification"`
-	SyncMode         *SQLInstancesStartExternalSyncRequestSyncModeEnum `json:"syncMode"`
+	MysqlSyncConfig  *MySQLSyncConfig                                  `json:"mysqlSyncConfig,omitempty"`
+	SkipVerification *bool                                             `json:"skipVerification,omitempty"`
+	SyncMode         *SQLInstancesStartExternalSyncRequestSyncModeEnum `json:"syncMode,omitempty"`
 }

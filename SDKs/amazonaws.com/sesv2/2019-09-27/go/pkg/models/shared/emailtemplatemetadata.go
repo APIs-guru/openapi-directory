@@ -5,6 +5,6 @@ import (
 )
 
 type EmailTemplateMetadata struct {
-	CreatedTimestamp *time.Time `json:"CreatedTimestamp"`
-	TemplateName     *string    `json:"TemplateName"`
+	CreatedTimestamp *time.Time `json:"CreatedTimestamp,omitempty"`
+	TemplateName     *string    `json:"TemplateName,omitempty"`
 }

@@ -15,20 +15,20 @@ type ExecuteStatementHeaders struct {
 }
 
 type ExecuteStatementRequestBodyResultSetOptions struct {
-	DecimalReturnType *shared.DecimalReturnTypeEnum `json:"decimalReturnType"`
+	DecimalReturnType *shared.DecimalReturnTypeEnum `json:"decimalReturnType,omitempty"`
 }
 
 type ExecuteStatementRequestBody struct {
-	ContinueAfterTimeout  *bool                                        `json:"continueAfterTimeout"`
-	Database              *string                                      `json:"database"`
-	IncludeResultMetadata *bool                                        `json:"includeResultMetadata"`
-	Parameters            []shared.SQLParameter                        `json:"parameters"`
+	ContinueAfterTimeout  *bool                                        `json:"continueAfterTimeout,omitempty"`
+	Database              *string                                      `json:"database,omitempty"`
+	IncludeResultMetadata *bool                                        `json:"includeResultMetadata,omitempty"`
+	Parameters            []shared.SQLParameter                        `json:"parameters,omitempty"`
 	ResourceArn           string                                       `json:"resourceArn"`
-	ResultSetOptions      *ExecuteStatementRequestBodyResultSetOptions `json:"resultSetOptions"`
-	Schema                *string                                      `json:"schema"`
+	ResultSetOptions      *ExecuteStatementRequestBodyResultSetOptions `json:"resultSetOptions,omitempty"`
+	Schema                *string                                      `json:"schema,omitempty"`
 	SecretArn             string                                       `json:"secretArn"`
 	SQL                   string                                       `json:"sql"`
-	TransactionID         *string                                      `json:"transactionId"`
+	TransactionID         *string                                      `json:"transactionId,omitempty"`
 }
 
 type ExecuteStatementRequest struct {

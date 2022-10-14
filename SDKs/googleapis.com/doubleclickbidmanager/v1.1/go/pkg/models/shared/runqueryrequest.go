@@ -26,8 +26,8 @@ const (
 )
 
 type RunQueryRequest struct {
-	DataRange             *RunQueryRequestDataRangeEnum `json:"dataRange"`
-	ReportDataEndTimeMs   *string                       `json:"reportDataEndTimeMs"`
-	ReportDataStartTimeMs *string                       `json:"reportDataStartTimeMs"`
-	TimezoneCode          *string                       `json:"timezoneCode"`
+	DataRange             *RunQueryRequestDataRangeEnum `json:"dataRange,omitempty"`
+	ReportDataEndTimeMs   *string                       `json:"reportDataEndTimeMs,omitempty"`
+	ReportDataStartTimeMs *string                       `json:"reportDataStartTimeMs,omitempty"`
+	TimezoneCode          *string                       `json:"timezoneCode,omitempty"`
 }

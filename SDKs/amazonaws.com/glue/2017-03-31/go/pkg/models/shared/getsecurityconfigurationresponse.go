@@ -1,5 +1,5 @@
 package shared
 
 type GetSecurityConfigurationResponse struct {
-	SecurityConfiguration *SecurityConfiguration `json:"SecurityConfiguration"`
+	SecurityConfiguration *SecurityConfiguration `json:"SecurityConfiguration,omitempty"`
 }

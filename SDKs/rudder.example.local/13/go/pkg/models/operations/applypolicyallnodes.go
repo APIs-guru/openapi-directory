@@ -7,9 +7,9 @@ const (
 )
 
 type ApplyPolicyAllNodes200ApplicationJSONData struct {
-	Hostname *string `json:"hostname"`
-	ID       *string `json:"id"`
-	Result   *string `json:"result"`
+	Hostname *string `json:"hostname,omitempty"`
+	ID       *string `json:"id,omitempty"`
+	Result   *string `json:"result,omitempty"`
 }
 
 type ApplyPolicyAllNodes200ApplicationJSONResultEnum string

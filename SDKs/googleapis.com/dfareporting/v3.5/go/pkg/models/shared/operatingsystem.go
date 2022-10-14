@@ -1,9 +1,9 @@
 package shared
 
 type OperatingSystem struct {
-	DartID  *string `json:"dartId"`
-	Desktop *bool   `json:"desktop"`
-	Kind    *string `json:"kind"`
-	Mobile  *bool   `json:"mobile"`
-	Name    *string `json:"name"`
+	DartID  *string `json:"dartId,omitempty"`
+	Desktop *bool   `json:"desktop,omitempty"`
+	Kind    *string `json:"kind,omitempty"`
+	Mobile  *bool   `json:"mobile,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }

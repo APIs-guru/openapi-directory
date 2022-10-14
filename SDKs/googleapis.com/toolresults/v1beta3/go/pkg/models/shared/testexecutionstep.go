@@ -1,8 +1,8 @@
 package shared
 
 type TestExecutionStep struct {
-	TestIssues         []TestIssue         `json:"testIssues"`
-	TestSuiteOverviews []TestSuiteOverview `json:"testSuiteOverviews"`
-	TestTiming         *TestTiming         `json:"testTiming"`
-	ToolExecution      *ToolExecution      `json:"toolExecution"`
+	TestIssues         []TestIssue         `json:"testIssues,omitempty"`
+	TestSuiteOverviews []TestSuiteOverview `json:"testSuiteOverviews,omitempty"`
+	TestTiming         *TestTiming         `json:"testTiming,omitempty"`
+	ToolExecution      *ToolExecution      `json:"toolExecution,omitempty"`
 }

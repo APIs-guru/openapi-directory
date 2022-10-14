@@ -1,6 +1,6 @@
 package shared
 
 type ListStreamObjectsResponse struct {
-	NextPageToken *string        `json:"nextPageToken"`
-	StreamObjects []StreamObject `json:"streamObjects"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
+	StreamObjects []StreamObject `json:"streamObjects,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type GoogleCloudVideointelligenceV1beta2SpeechTranscriptionConfig struct {
-	AudioTracks                []int32                                            `json:"audioTracks"`
-	DiarizationSpeakerCount    *int32                                             `json:"diarizationSpeakerCount"`
-	EnableAutomaticPunctuation *bool                                              `json:"enableAutomaticPunctuation"`
-	EnableSpeakerDiarization   *bool                                              `json:"enableSpeakerDiarization"`
-	EnableWordConfidence       *bool                                              `json:"enableWordConfidence"`
-	FilterProfanity            *bool                                              `json:"filterProfanity"`
-	LanguageCode               *string                                            `json:"languageCode"`
-	MaxAlternatives            *int32                                             `json:"maxAlternatives"`
-	SpeechContexts             []GoogleCloudVideointelligenceV1beta2SpeechContext `json:"speechContexts"`
+	AudioTracks                []int32                                            `json:"audioTracks,omitempty"`
+	DiarizationSpeakerCount    *int32                                             `json:"diarizationSpeakerCount,omitempty"`
+	EnableAutomaticPunctuation *bool                                              `json:"enableAutomaticPunctuation,omitempty"`
+	EnableSpeakerDiarization   *bool                                              `json:"enableSpeakerDiarization,omitempty"`
+	EnableWordConfidence       *bool                                              `json:"enableWordConfidence,omitempty"`
+	FilterProfanity            *bool                                              `json:"filterProfanity,omitempty"`
+	LanguageCode               *string                                            `json:"languageCode,omitempty"`
+	MaxAlternatives            *int32                                             `json:"maxAlternatives,omitempty"`
+	SpeechContexts             []GoogleCloudVideointelligenceV1beta2SpeechContext `json:"speechContexts,omitempty"`
 }

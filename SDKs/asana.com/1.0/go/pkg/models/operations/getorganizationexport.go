@@ -19,7 +19,7 @@ type GetOrganizationExportRequest struct {
 }
 
 type GetOrganizationExport200ApplicationJSON struct {
-	Data *shared.OrganizationExportResponse `json:"data"`
+	Data *shared.OrganizationExportResponse `json:"data,omitempty"`
 }
 
 type GetOrganizationExportResponse struct {

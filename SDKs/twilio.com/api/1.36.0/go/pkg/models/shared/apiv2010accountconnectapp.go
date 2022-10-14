@@ -12,15 +12,15 @@ const (
 )
 
 type APIV2010AccountConnectApp struct {
-	AccountSid                *string                                                 `json:"account_sid"`
-	AuthorizeRedirectURL      *string                                                 `json:"authorize_redirect_url"`
-	CompanyName               *string                                                 `json:"company_name"`
-	DeauthorizeCallbackMethod *APIV2010AccountConnectAppDeauthorizeCallbackMethodEnum `json:"deauthorize_callback_method"`
-	DeauthorizeCallbackURL    *string                                                 `json:"deauthorize_callback_url"`
-	Description               *string                                                 `json:"description"`
-	FriendlyName              *string                                                 `json:"friendly_name"`
-	HomepageURL               *string                                                 `json:"homepage_url"`
-	Permissions               []ConnectAppEnumPermissionEnum                          `json:"permissions"`
-	Sid                       *string                                                 `json:"sid"`
-	URI                       *string                                                 `json:"uri"`
+	AccountSid                *string                                                 `json:"account_sid,omitempty"`
+	AuthorizeRedirectURL      *string                                                 `json:"authorize_redirect_url,omitempty"`
+	CompanyName               *string                                                 `json:"company_name,omitempty"`
+	DeauthorizeCallbackMethod *APIV2010AccountConnectAppDeauthorizeCallbackMethodEnum `json:"deauthorize_callback_method,omitempty"`
+	DeauthorizeCallbackURL    *string                                                 `json:"deauthorize_callback_url,omitempty"`
+	Description               *string                                                 `json:"description,omitempty"`
+	FriendlyName              *string                                                 `json:"friendly_name,omitempty"`
+	HomepageURL               *string                                                 `json:"homepage_url,omitempty"`
+	Permissions               []ConnectAppEnumPermissionEnum                          `json:"permissions,omitempty"`
+	Sid                       *string                                                 `json:"sid,omitempty"`
+	URI                       *string                                                 `json:"uri,omitempty"`
 }

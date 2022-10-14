@@ -5,21 +5,21 @@ import (
 )
 
 type Cluster struct {
-	Arn                     *string                          `json:"arn"`
-	CertificateAuthority    *Certificate                     `json:"certificateAuthority"`
-	ClientRequestToken      *string                          `json:"clientRequestToken"`
-	ConnectorConfig         *ConnectorConfigResponse         `json:"connectorConfig"`
-	CreatedAt               *time.Time                       `json:"createdAt"`
-	EncryptionConfig        []EncryptionConfig               `json:"encryptionConfig"`
-	Endpoint                *string                          `json:"endpoint"`
-	Identity                *Identity                        `json:"identity"`
-	KubernetesNetworkConfig *KubernetesNetworkConfigResponse `json:"kubernetesNetworkConfig"`
-	Logging                 *Logging                         `json:"logging"`
-	Name                    *string                          `json:"name"`
-	PlatformVersion         *string                          `json:"platformVersion"`
-	ResourcesVpcConfig      *VpcConfigResponse               `json:"resourcesVpcConfig"`
-	RoleArn                 *string                          `json:"roleArn"`
-	Status                  *ClusterStatusEnum               `json:"status"`
-	Tags                    map[string]string                `json:"tags"`
-	Version                 *string                          `json:"version"`
+	Arn                     *string                          `json:"arn,omitempty"`
+	CertificateAuthority    *Certificate                     `json:"certificateAuthority,omitempty"`
+	ClientRequestToken      *string                          `json:"clientRequestToken,omitempty"`
+	ConnectorConfig         *ConnectorConfigResponse         `json:"connectorConfig,omitempty"`
+	CreatedAt               *time.Time                       `json:"createdAt,omitempty"`
+	EncryptionConfig        []EncryptionConfig               `json:"encryptionConfig,omitempty"`
+	Endpoint                *string                          `json:"endpoint,omitempty"`
+	Identity                *Identity                        `json:"identity,omitempty"`
+	KubernetesNetworkConfig *KubernetesNetworkConfigResponse `json:"kubernetesNetworkConfig,omitempty"`
+	Logging                 *Logging                         `json:"logging,omitempty"`
+	Name                    *string                          `json:"name,omitempty"`
+	PlatformVersion         *string                          `json:"platformVersion,omitempty"`
+	ResourcesVpcConfig      *VpcConfigResponse               `json:"resourcesVpcConfig,omitempty"`
+	RoleArn                 *string                          `json:"roleArn,omitempty"`
+	Status                  *ClusterStatusEnum               `json:"status,omitempty"`
+	Tags                    map[string]string                `json:"tags,omitempty"`
+	Version                 *string                          `json:"version,omitempty"`
 }

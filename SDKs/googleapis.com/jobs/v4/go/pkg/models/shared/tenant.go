@@ -1,6 +1,6 @@
 package shared
 
 type Tenant struct {
-	ExternalID *string `json:"externalId"`
-	Name       *string `json:"name"`
+	ExternalID *string `json:"externalId,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }

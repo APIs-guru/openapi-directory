@@ -11,9 +11,9 @@ const (
 )
 
 type GooglePrivacyDlpV2StoredInfoTypeVersion struct {
-	Config     *GooglePrivacyDlpV2StoredInfoTypeConfig           `json:"config"`
-	CreateTime *string                                           `json:"createTime"`
-	Errors     []GooglePrivacyDlpV2Error                         `json:"errors"`
-	State      *GooglePrivacyDlpV2StoredInfoTypeVersionStateEnum `json:"state"`
-	Stats      *GooglePrivacyDlpV2StoredInfoTypeStats            `json:"stats"`
+	Config     *GooglePrivacyDlpV2StoredInfoTypeConfig           `json:"config,omitempty"`
+	CreateTime *string                                           `json:"createTime,omitempty"`
+	Errors     []GooglePrivacyDlpV2Error                         `json:"errors,omitempty"`
+	State      *GooglePrivacyDlpV2StoredInfoTypeVersionStateEnum `json:"state,omitempty"`
+	Stats      *GooglePrivacyDlpV2StoredInfoTypeStats            `json:"stats,omitempty"`
 }

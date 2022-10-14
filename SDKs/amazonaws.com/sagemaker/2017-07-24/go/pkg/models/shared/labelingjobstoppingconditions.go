@@ -1,6 +1,6 @@
 package shared
 
 type LabelingJobStoppingConditions struct {
-	MaxHumanLabeledObjectCount         *int64 `json:"MaxHumanLabeledObjectCount"`
-	MaxPercentageOfInputDatasetLabeled *int64 `json:"MaxPercentageOfInputDatasetLabeled"`
+	MaxHumanLabeledObjectCount         *int64 `json:"MaxHumanLabeledObjectCount,omitempty"`
+	MaxPercentageOfInputDatasetLabeled *int64 `json:"MaxPercentageOfInputDatasetLabeled,omitempty"`
 }

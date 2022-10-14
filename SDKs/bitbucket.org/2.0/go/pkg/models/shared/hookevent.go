@@ -31,8 +31,8 @@ const (
 )
 
 type HookEvent struct {
-	Category    *string             `json:"category"`
-	Description *string             `json:"description"`
-	Event       *HookEventEventEnum `json:"event"`
-	Label       *string             `json:"label"`
+	Category    *string             `json:"category,omitempty"`
+	Description *string             `json:"description,omitempty"`
+	Event       *HookEventEventEnum `json:"event,omitempty"`
+	Label       *string             `json:"label,omitempty"`
 }

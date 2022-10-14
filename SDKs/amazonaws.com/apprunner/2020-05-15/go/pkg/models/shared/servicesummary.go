@@ -5,11 +5,11 @@ import (
 )
 
 type ServiceSummary struct {
-	CreatedAt   *time.Time         `json:"CreatedAt"`
-	ServiceArn  *string            `json:"ServiceArn"`
-	ServiceID   *string            `json:"ServiceId"`
-	ServiceName *string            `json:"ServiceName"`
-	ServiceURL  *string            `json:"ServiceUrl"`
-	Status      *ServiceStatusEnum `json:"Status"`
-	UpdatedAt   *time.Time         `json:"UpdatedAt"`
+	CreatedAt   *time.Time         `json:"CreatedAt,omitempty"`
+	ServiceArn  *string            `json:"ServiceArn,omitempty"`
+	ServiceID   *string            `json:"ServiceId,omitempty"`
+	ServiceName *string            `json:"ServiceName,omitempty"`
+	ServiceURL  *string            `json:"ServiceUrl,omitempty"`
+	Status      *ServiceStatusEnum `json:"Status,omitempty"`
+	UpdatedAt   *time.Time         `json:"UpdatedAt,omitempty"`
 }

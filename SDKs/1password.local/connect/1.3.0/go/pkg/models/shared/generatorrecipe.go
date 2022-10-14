@@ -9,6 +9,6 @@ const (
 )
 
 type GeneratorRecipe struct {
-	CharacterSets []GeneratorRecipeCharacterSetsEnum `json:"characterSets"`
-	Length        *int64                             `json:"length"`
+	CharacterSets []GeneratorRecipeCharacterSetsEnum `json:"characterSets,omitempty"`
+	Length        *int64                             `json:"length,omitempty"`
 }

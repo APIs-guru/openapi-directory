@@ -1,8 +1,8 @@
 package shared
 
 type DataSource struct {
-	CalculatedColumns []DataSourceColumn `json:"calculatedColumns"`
-	DataSourceID      *string            `json:"dataSourceId"`
-	SheetID           *int32             `json:"sheetId"`
-	Spec              *DataSourceSpec    `json:"spec"`
+	CalculatedColumns []DataSourceColumn `json:"calculatedColumns,omitempty"`
+	DataSourceID      *string            `json:"dataSourceId,omitempty"`
+	SheetID           *int32             `json:"sheetId,omitempty"`
+	Spec              *DataSourceSpec    `json:"spec,omitempty"`
 }

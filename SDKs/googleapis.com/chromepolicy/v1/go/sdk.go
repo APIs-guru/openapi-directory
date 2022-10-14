@@ -179,12 +179,12 @@ func (s *SDK) ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrdering(ctx c
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleChromePolicyV1ListGroupPriorityOrderingResponse
+			var out *shared.GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.GoogleChromePolicyV1ListGroupPriorityOrderingResponse = out
+			res.GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse = out
 		}
 	}
 
@@ -555,12 +555,12 @@ func (s *SDK) ChromepolicyCustomersPoliciesResolve(ctx context.Context, request 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleChromePolicyV1ResolveResponse
+			var out *shared.GoogleChromePolicyVersionsV1ResolveResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.GoogleChromePolicyV1ResolveResponse = out
+			res.GoogleChromePolicyVersionsV1ResolveResponse = out
 		}
 	}
 

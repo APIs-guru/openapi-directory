@@ -1,7 +1,7 @@
 package shared
 
 type DimensionGroup struct {
-	Dimensions []string `json:"Dimensions"`
+	Dimensions []string `json:"Dimensions,omitempty"`
 	Group      string   `json:"Group"`
-	Limit      *int64   `json:"Limit"`
+	Limit      *int64   `json:"Limit,omitempty"`
 }

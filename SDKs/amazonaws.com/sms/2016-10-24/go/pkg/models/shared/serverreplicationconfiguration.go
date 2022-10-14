@@ -1,6 +1,6 @@
 package shared
 
 type ServerReplicationConfiguration struct {
-	Server                      *Server                      `json:"server"`
-	ServerReplicationParameters *ServerReplicationParameters `json:"serverReplicationParameters"`
+	Server                      *Server                      `json:"server,omitempty"`
+	ServerReplicationParameters *ServerReplicationParameters `json:"serverReplicationParameters,omitempty"`
 }

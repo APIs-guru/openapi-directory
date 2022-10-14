@@ -27,8 +27,8 @@ const (
 )
 
 type UpdateMapRequestBody struct {
-	Description *string                              `json:"Description"`
-	PricingPlan *UpdateMapRequestBodyPricingPlanEnum `json:"PricingPlan"`
+	Description *string                              `json:"Description,omitempty"`
+	PricingPlan *UpdateMapRequestBodyPricingPlanEnum `json:"PricingPlan,omitempty"`
 }
 
 type UpdateMapRequest struct {

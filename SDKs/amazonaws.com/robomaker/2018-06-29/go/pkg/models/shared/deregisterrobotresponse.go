@@ -1,6 +1,6 @@
 package shared
 
 type DeregisterRobotResponse struct {
-	Fleet *string `json:"fleet"`
-	Robot *string `json:"robot"`
+	Fleet *string `json:"fleet,omitempty"`
+	Robot *string `json:"robot,omitempty"`
 }

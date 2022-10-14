@@ -1,5 +1,5 @@
 package shared
 
 type UnshareDirectoryResult struct {
-	SharedDirectoryID *string `json:"SharedDirectoryId"`
+	SharedDirectoryID *string `json:"SharedDirectoryId,omitempty"`
 }

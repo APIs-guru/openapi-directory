@@ -5,6 +5,6 @@ import (
 )
 
 type AuthorizationData struct {
-	AuthorizationToken *string    `json:"authorizationToken"`
-	ExpiresAt          *time.Time `json:"expiresAt"`
+	AuthorizationToken *string    `json:"authorizationToken,omitempty"`
+	ExpiresAt          *time.Time `json:"expiresAt,omitempty"`
 }

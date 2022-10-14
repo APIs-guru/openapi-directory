@@ -1,11 +1,11 @@
 package shared
 
 type AndroidVersion struct {
-	APILevel      *int32        `json:"apiLevel"`
-	CodeName      *string       `json:"codeName"`
-	Distribution  *Distribution `json:"distribution"`
-	ID            *string       `json:"id"`
-	ReleaseDate   *Date         `json:"releaseDate"`
-	Tags          []string      `json:"tags"`
-	VersionString *string       `json:"versionString"`
+	APILevel      *int32        `json:"apiLevel,omitempty"`
+	CodeName      *string       `json:"codeName,omitempty"`
+	Distribution  *Distribution `json:"distribution,omitempty"`
+	ID            *string       `json:"id,omitempty"`
+	ReleaseDate   *Date         `json:"releaseDate,omitempty"`
+	Tags          []string      `json:"tags,omitempty"`
+	VersionString *string       `json:"versionString,omitempty"`
 }

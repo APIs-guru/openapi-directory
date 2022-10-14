@@ -11,7 +11,7 @@ const (
 )
 
 type ChromeCrosDpanelAutosettingsProtoPolicyAPILifecycle struct {
-	Description             *string                                                                         `json:"description"`
-	EndSupport              *GoogleTypeDate                                                                 `json:"endSupport"`
-	PolicyAPILifecycleStage *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum `json:"policyApiLifecycleStage"`
+	Description             *string                                                                         `json:"description,omitempty"`
+	EndSupport              *GoogleTypeDate                                                                 `json:"endSupport,omitempty"`
+	PolicyAPILifecycleStage *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum `json:"policyApiLifecycleStage,omitempty"`
 }

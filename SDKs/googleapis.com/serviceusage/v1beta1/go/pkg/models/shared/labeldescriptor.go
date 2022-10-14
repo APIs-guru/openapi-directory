@@ -9,7 +9,7 @@ const (
 )
 
 type LabelDescriptor struct {
-	Description *string                       `json:"description"`
-	Key         *string                       `json:"key"`
-	ValueType   *LabelDescriptorValueTypeEnum `json:"valueType"`
+	Description *string                       `json:"description,omitempty"`
+	Key         *string                       `json:"key,omitempty"`
+	ValueType   *LabelDescriptorValueTypeEnum `json:"valueType,omitempty"`
 }

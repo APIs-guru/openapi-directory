@@ -1,6 +1,6 @@
 package shared
 
 type DeviceCredential struct {
-	ExpirationTime *string              `json:"expirationTime"`
-	PublicKey      *PublicKeyCredential `json:"publicKey"`
+	ExpirationTime *string              `json:"expirationTime,omitempty"`
+	PublicKey      *PublicKeyCredential `json:"publicKey,omitempty"`
 }

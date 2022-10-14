@@ -1,5 +1,5 @@
 package shared
 
 type ShortAnswerSubmission struct {
-	Answer *string `json:"answer"`
+	Answer *string `json:"answer,omitempty"`
 }

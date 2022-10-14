@@ -1,5 +1,5 @@
 package shared
 
 type KinesisVideoStream struct {
-	Arn *string `json:"Arn"`
+	Arn *string `json:"Arn,omitempty"`
 }

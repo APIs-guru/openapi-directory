@@ -15,7 +15,7 @@ type UpdateEventConfigurationsHeaders struct {
 }
 
 type UpdateEventConfigurationsRequestBody struct {
-	EventConfigurations map[string]shared.Configuration `json:"eventConfigurations"`
+	EventConfigurations map[string]shared.Configuration `json:"eventConfigurations,omitempty"`
 }
 
 type UpdateEventConfigurationsRequest struct {

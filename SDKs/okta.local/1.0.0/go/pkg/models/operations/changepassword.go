@@ -5,16 +5,16 @@ type ChangePasswordPathParams struct {
 }
 
 type ChangePasswordRequestBodyNewPassword struct {
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ChangePasswordRequestBodyOldPassword struct {
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ChangePasswordRequestBody struct {
-	NewPassword *ChangePasswordRequestBodyNewPassword `json:"newPassword"`
-	OldPassword *ChangePasswordRequestBodyOldPassword `json:"oldPassword"`
+	NewPassword *ChangePasswordRequestBodyNewPassword `json:"newPassword,omitempty"`
+	OldPassword *ChangePasswordRequestBodyOldPassword `json:"oldPassword,omitempty"`
 }
 
 type ChangePasswordRequest struct {

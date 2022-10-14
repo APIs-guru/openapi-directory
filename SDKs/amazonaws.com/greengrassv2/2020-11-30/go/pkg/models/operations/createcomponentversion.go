@@ -15,19 +15,19 @@ type CreateComponentVersionHeaders struct {
 }
 
 type CreateComponentVersionRequestBodyLambdaFunction struct {
-	ComponentDependencies     map[string]shared.ComponentDependencyRequirement `json:"componentDependencies"`
-	ComponentLambdaParameters *shared.LambdaExecutionParameters                `json:"componentLambdaParameters"`
-	ComponentName             *string                                          `json:"componentName"`
-	ComponentPlatforms        []shared.ComponentPlatform                       `json:"componentPlatforms"`
-	ComponentVersion          *string                                          `json:"componentVersion"`
-	LambdaArn                 *string                                          `json:"lambdaArn"`
+	ComponentDependencies     map[string]shared.ComponentDependencyRequirement `json:"componentDependencies,omitempty"`
+	ComponentLambdaParameters *shared.LambdaExecutionParameters                `json:"componentLambdaParameters,omitempty"`
+	ComponentName             *string                                          `json:"componentName,omitempty"`
+	ComponentPlatforms        []shared.ComponentPlatform                       `json:"componentPlatforms,omitempty"`
+	ComponentVersion          *string                                          `json:"componentVersion,omitempty"`
+	LambdaArn                 *string                                          `json:"lambdaArn,omitempty"`
 }
 
 type CreateComponentVersionRequestBody struct {
-	ClientToken    *string                                          `json:"clientToken"`
-	InlineRecipe   *string                                          `json:"inlineRecipe"`
-	LambdaFunction *CreateComponentVersionRequestBodyLambdaFunction `json:"lambdaFunction"`
-	Tags           map[string]string                                `json:"tags"`
+	ClientToken    *string                                          `json:"clientToken,omitempty"`
+	InlineRecipe   *string                                          `json:"inlineRecipe,omitempty"`
+	LambdaFunction *CreateComponentVersionRequestBodyLambdaFunction `json:"lambdaFunction,omitempty"`
+	Tags           map[string]string                                `json:"tags,omitempty"`
 }
 
 type CreateComponentVersionRequest struct {

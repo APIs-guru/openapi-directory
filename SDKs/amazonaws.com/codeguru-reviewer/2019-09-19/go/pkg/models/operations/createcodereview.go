@@ -15,12 +15,12 @@ type CreateCodeReviewHeaders struct {
 }
 
 type CreateCodeReviewRequestBodyType struct {
-	AnalysisTypes      []shared.AnalysisTypeEnum  `json:"AnalysisTypes"`
-	RepositoryAnalysis *shared.RepositoryAnalysis `json:"RepositoryAnalysis"`
+	AnalysisTypes      []shared.AnalysisTypeEnum  `json:"AnalysisTypes,omitempty"`
+	RepositoryAnalysis *shared.RepositoryAnalysis `json:"RepositoryAnalysis,omitempty"`
 }
 
 type CreateCodeReviewRequestBody struct {
-	ClientRequestToken       *string                         `json:"ClientRequestToken"`
+	ClientRequestToken       *string                         `json:"ClientRequestToken,omitempty"`
 	Name                     string                          `json:"Name"`
 	RepositoryAssociationArn string                          `json:"RepositoryAssociationArn"`
 	Type                     CreateCodeReviewRequestBodyType `json:"Type"`

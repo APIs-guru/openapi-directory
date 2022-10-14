@@ -1,7 +1,7 @@
 package shared
 
 type AdvertiserInvoicesListResponse struct {
-	Invoices      []Invoice `json:"invoices"`
-	Kind          *string   `json:"kind"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Invoices      []Invoice `json:"invoices,omitempty"`
+	Kind          *string   `json:"kind,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
 }

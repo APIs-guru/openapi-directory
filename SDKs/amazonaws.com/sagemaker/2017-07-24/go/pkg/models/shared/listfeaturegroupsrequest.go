@@ -5,13 +5,13 @@ import (
 )
 
 type ListFeatureGroupsRequest struct {
-	CreationTimeAfter        *time.Time                   `json:"CreationTimeAfter"`
-	CreationTimeBefore       *time.Time                   `json:"CreationTimeBefore"`
-	FeatureGroupStatusEquals *FeatureGroupStatusEnum      `json:"FeatureGroupStatusEquals"`
-	MaxResults               *int64                       `json:"MaxResults"`
-	NameContains             *string                      `json:"NameContains"`
-	NextToken                *string                      `json:"NextToken"`
-	OfflineStoreStatusEquals *OfflineStoreStatusValueEnum `json:"OfflineStoreStatusEquals"`
-	SortBy                   *FeatureGroupSortByEnum      `json:"SortBy"`
-	SortOrder                *FeatureGroupSortOrderEnum   `json:"SortOrder"`
+	CreationTimeAfter        *time.Time                   `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore       *time.Time                   `json:"CreationTimeBefore,omitempty"`
+	FeatureGroupStatusEquals *FeatureGroupStatusEnum      `json:"FeatureGroupStatusEquals,omitempty"`
+	MaxResults               *int64                       `json:"MaxResults,omitempty"`
+	NameContains             *string                      `json:"NameContains,omitempty"`
+	NextToken                *string                      `json:"NextToken,omitempty"`
+	OfflineStoreStatusEquals *OfflineStoreStatusValueEnum `json:"OfflineStoreStatusEquals,omitempty"`
+	SortBy                   *FeatureGroupSortByEnum      `json:"SortBy,omitempty"`
+	SortOrder                *FeatureGroupSortOrderEnum   `json:"SortOrder,omitempty"`
 }

@@ -20,7 +20,7 @@ type PutTIDChangeTimestampJSONRequest struct {
 }
 
 type PutTIDChangeTimestampJSON200ApplicationJSON struct {
-	Success *string `json:"success"`
+	Success *string `json:"success,omitempty"`
 }
 
 type PutTIDChangeTimestampJSONResponse struct {

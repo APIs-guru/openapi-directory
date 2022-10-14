@@ -1,11 +1,11 @@
 package shared
 
 type IosInfo struct {
-	IosAppStoreID       *string `json:"iosAppStoreId"`
-	IosBundleID         *string `json:"iosBundleId"`
-	IosCustomScheme     *string `json:"iosCustomScheme"`
-	IosFallbackLink     *string `json:"iosFallbackLink"`
-	IosIpadBundleID     *string `json:"iosIpadBundleId"`
-	IosIpadFallbackLink *string `json:"iosIpadFallbackLink"`
-	IosMinimumVersion   *string `json:"iosMinimumVersion"`
+	IosAppStoreID       *string `json:"iosAppStoreId,omitempty"`
+	IosBundleID         *string `json:"iosBundleId,omitempty"`
+	IosCustomScheme     *string `json:"iosCustomScheme,omitempty"`
+	IosFallbackLink     *string `json:"iosFallbackLink,omitempty"`
+	IosIpadBundleID     *string `json:"iosIpadBundleId,omitempty"`
+	IosIpadFallbackLink *string `json:"iosIpadFallbackLink,omitempty"`
+	IosMinimumVersion   *string `json:"iosMinimumVersion,omitempty"`
 }

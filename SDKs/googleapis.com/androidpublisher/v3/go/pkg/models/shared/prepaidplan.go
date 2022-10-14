@@ -1,5 +1,5 @@
 package shared
 
 type PrepaidPlan struct {
-	AllowExtendAfterTime *string `json:"allowExtendAfterTime"`
+	AllowExtendAfterTime *string `json:"allowExtendAfterTime,omitempty"`
 }

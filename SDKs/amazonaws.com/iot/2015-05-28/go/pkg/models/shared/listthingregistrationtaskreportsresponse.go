@@ -1,7 +1,7 @@
 package shared
 
 type ListThingRegistrationTaskReportsResponse struct {
-	NextToken     *string         `json:"nextToken"`
-	ReportType    *ReportTypeEnum `json:"reportType"`
-	ResourceLinks []string        `json:"resourceLinks"`
+	NextToken     *string         `json:"nextToken,omitempty"`
+	ReportType    *ReportTypeEnum `json:"reportType,omitempty"`
+	ResourceLinks []string        `json:"resourceLinks,omitempty"`
 }

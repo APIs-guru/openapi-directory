@@ -5,9 +5,9 @@ type CreateOrganizationConfigTemplatePathParams struct {
 }
 
 type CreateOrganizationConfigTemplateRequestBody struct {
-	CopyFromNetworkID *string `json:"copyFromNetworkId"`
+	CopyFromNetworkID *string `json:"copyFromNetworkId,omitempty"`
 	Name              string  `json:"name"`
-	TimeZone          *string `json:"timeZone"`
+	TimeZone          *string `json:"timeZone,omitempty"`
 }
 
 type CreateOrganizationConfigTemplateRequest struct {

@@ -5,13 +5,13 @@ type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsPathParams st
 }
 
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBodyDestinations struct {
-	Default     *bool   `json:"default"`
-	Description *string `json:"description"`
+	Default     *bool   `json:"default,omitempty"`
+	Description *string `json:"description,omitempty"`
 	IP          string  `json:"ip"`
 }
 
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBody struct {
-	Destinations []UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBodyDestinations `json:"destinations"`
+	Destinations []UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBodyDestinations `json:"destinations,omitempty"`
 }
 
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequest struct {

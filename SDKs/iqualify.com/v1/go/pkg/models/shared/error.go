@@ -1,10 +1,10 @@
 package shared
 
 type ErrorError struct {
-	Details *string `json:"details"`
-	Name    *string `json:"name"`
+	Details *string `json:"details,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type Error struct {
-	Error *ErrorError `json:"error"`
+	Error *ErrorError `json:"error,omitempty"`
 }

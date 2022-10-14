@@ -15,14 +15,14 @@ type ListInputRoutingsHeaders struct {
 }
 
 type ListInputRoutingsRequestBodyInputIdentifier struct {
-	IotEventsInputIdentifier   *shared.IotEventsInputIdentifier   `json:"iotEventsInputIdentifier"`
-	IotSiteWiseInputIdentifier *shared.IotSiteWiseInputIdentifier `json:"iotSiteWiseInputIdentifier"`
+	IotEventsInputIdentifier   *shared.IotEventsInputIdentifier   `json:"iotEventsInputIdentifier,omitempty"`
+	IotSiteWiseInputIdentifier *shared.IotSiteWiseInputIdentifier `json:"iotSiteWiseInputIdentifier,omitempty"`
 }
 
 type ListInputRoutingsRequestBody struct {
 	InputIdentifier ListInputRoutingsRequestBodyInputIdentifier `json:"inputIdentifier"`
-	MaxResults      *int64                                      `json:"maxResults"`
-	NextToken       *string                                     `json:"nextToken"`
+	MaxResults      *int64                                      `json:"maxResults,omitempty"`
+	NextToken       *string                                     `json:"nextToken,omitempty"`
 }
 
 type ListInputRoutingsRequest struct {

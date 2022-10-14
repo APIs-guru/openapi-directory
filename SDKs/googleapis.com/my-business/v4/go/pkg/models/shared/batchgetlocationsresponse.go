@@ -1,5 +1,5 @@
 package shared
 
 type BatchGetLocationsResponse struct {
-	Locations []Location `json:"locations"`
+	Locations []Location `json:"locations,omitempty"`
 }

@@ -5,10 +5,10 @@ type UpdatereservationPathParams struct {
 }
 
 type UpdatereservationRequestBody struct {
-	Connector *int64  `json:"connector"`
-	Driver    *string `json:"driver"`
-	EndDate   *string `json:"endDate"`
-	Evse      *int64  `json:"evse"`
+	Connector *int64  `json:"connector,omitempty"`
+	Driver    *string `json:"driver,omitempty"`
+	EndDate   *string `json:"endDate,omitempty"`
+	Evse      *int64  `json:"evse,omitempty"`
 }
 
 type UpdatereservationRequest struct {
@@ -17,9 +17,9 @@ type UpdatereservationRequest struct {
 }
 
 type Updatereservation201ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type UpdatereservationResponse struct {

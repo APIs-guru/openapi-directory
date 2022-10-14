@@ -1,5 +1,5 @@
 package shared
 
 type WatchVariableRequest struct {
-	NewerThan *string `json:"newerThan"`
+	NewerThan *string `json:"newerThan,omitempty"`
 }

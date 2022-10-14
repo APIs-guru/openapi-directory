@@ -9,14 +9,14 @@ const (
 )
 
 type ExecuteSQLRequest struct {
-	ParamTypes     map[string]Type                 `json:"paramTypes"`
-	Params         map[string]interface{}          `json:"params"`
-	PartitionToken *string                         `json:"partitionToken"`
-	QueryMode      *ExecuteSQLRequestQueryModeEnum `json:"queryMode"`
-	QueryOptions   *QueryOptions                   `json:"queryOptions"`
-	RequestOptions *RequestOptions                 `json:"requestOptions"`
-	ResumeToken    *string                         `json:"resumeToken"`
-	Seqno          *string                         `json:"seqno"`
-	SQL            *string                         `json:"sql"`
-	Transaction    *TransactionSelector            `json:"transaction"`
+	ParamTypes     map[string]Type                 `json:"paramTypes,omitempty"`
+	Params         map[string]interface{}          `json:"params,omitempty"`
+	PartitionToken *string                         `json:"partitionToken,omitempty"`
+	QueryMode      *ExecuteSQLRequestQueryModeEnum `json:"queryMode,omitempty"`
+	QueryOptions   *QueryOptions                   `json:"queryOptions,omitempty"`
+	RequestOptions *RequestOptions                 `json:"requestOptions,omitempty"`
+	ResumeToken    *string                         `json:"resumeToken,omitempty"`
+	Seqno          *string                         `json:"seqno,omitempty"`
+	SQL            *string                         `json:"sql,omitempty"`
+	Transaction    *TransactionSelector            `json:"transaction,omitempty"`
 }

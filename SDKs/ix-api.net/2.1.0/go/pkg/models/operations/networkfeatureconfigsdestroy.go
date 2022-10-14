@@ -15,10 +15,10 @@ const (
 )
 
 type NetworkFeatureConfigsDestroy400ApplicationJSON struct {
-	Detail   *string                                                `json:"detail"`
-	Instance *string                                                `json:"instance"`
-	Status   *interface{}                                           `json:"status"`
-	Title    *interface{}                                           `json:"title"`
+	Detail   *string                                                `json:"detail,omitempty"`
+	Instance *string                                                `json:"instance,omitempty"`
+	Status   *interface{}                                           `json:"status,omitempty"`
+	Title    *interface{}                                           `json:"title,omitempty"`
 	Type     NetworkFeatureConfigsDestroy400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -30,10 +30,10 @@ const (
 )
 
 type NetworkFeatureConfigsDestroy401ApplicationJSON struct {
-	Detail   *string                                                `json:"detail"`
-	Instance *string                                                `json:"instance"`
-	Status   *interface{}                                           `json:"status"`
-	Title    *interface{}                                           `json:"title"`
+	Detail   *string                                                `json:"detail,omitempty"`
+	Instance *string                                                `json:"instance,omitempty"`
+	Status   *interface{}                                           `json:"status,omitempty"`
+	Title    *interface{}                                           `json:"title,omitempty"`
 	Type     NetworkFeatureConfigsDestroy401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -44,10 +44,10 @@ const (
 )
 
 type NetworkFeatureConfigsDestroy403ApplicationJSON struct {
-	Detail   *string                                                `json:"detail"`
-	Instance *string                                                `json:"instance"`
-	Status   *interface{}                                           `json:"status"`
-	Title    *interface{}                                           `json:"title"`
+	Detail   *string                                                `json:"detail,omitempty"`
+	Instance *string                                                `json:"instance,omitempty"`
+	Status   *interface{}                                           `json:"status,omitempty"`
+	Title    *interface{}                                           `json:"title,omitempty"`
 	Type     NetworkFeatureConfigsDestroy403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -58,10 +58,10 @@ const (
 )
 
 type NetworkFeatureConfigsDestroy404ApplicationJSON struct {
-	Detail   *string                                                `json:"detail"`
-	Instance *string                                                `json:"instance"`
-	Status   *interface{}                                           `json:"status"`
-	Title    *interface{}                                           `json:"title"`
+	Detail   *string                                                `json:"detail,omitempty"`
+	Instance *string                                                `json:"instance,omitempty"`
+	Status   *interface{}                                           `json:"status,omitempty"`
+	Title    *interface{}                                           `json:"title,omitempty"`
 	Type     NetworkFeatureConfigsDestroy404ApplicationJSONTypeEnum `json:"type"`
 }
 

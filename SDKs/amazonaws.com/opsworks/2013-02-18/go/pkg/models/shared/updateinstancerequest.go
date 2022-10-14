@@ -1,16 +1,16 @@
 package shared
 
 type UpdateInstanceRequest struct {
-	AgentVersion         *string              `json:"AgentVersion"`
-	AmiID                *string              `json:"AmiId"`
-	Architecture         *ArchitectureEnum    `json:"Architecture"`
-	AutoScalingType      *AutoScalingTypeEnum `json:"AutoScalingType"`
-	EbsOptimized         *bool                `json:"EbsOptimized"`
-	Hostname             *string              `json:"Hostname"`
-	InstallUpdatesOnBoot *bool                `json:"InstallUpdatesOnBoot"`
+	AgentVersion         *string              `json:"AgentVersion,omitempty"`
+	AmiID                *string              `json:"AmiId,omitempty"`
+	Architecture         *ArchitectureEnum    `json:"Architecture,omitempty"`
+	AutoScalingType      *AutoScalingTypeEnum `json:"AutoScalingType,omitempty"`
+	EbsOptimized         *bool                `json:"EbsOptimized,omitempty"`
+	Hostname             *string              `json:"Hostname,omitempty"`
+	InstallUpdatesOnBoot *bool                `json:"InstallUpdatesOnBoot,omitempty"`
 	InstanceID           string               `json:"InstanceId"`
-	InstanceType         *string              `json:"InstanceType"`
-	LayerIds             []string             `json:"LayerIds"`
-	Os                   *string              `json:"Os"`
-	SSHKeyName           *string              `json:"SshKeyName"`
+	InstanceType         *string              `json:"InstanceType,omitempty"`
+	LayerIds             []string             `json:"LayerIds,omitempty"`
+	Os                   *string              `json:"Os,omitempty"`
+	SSHKeyName           *string              `json:"SshKeyName,omitempty"`
 }

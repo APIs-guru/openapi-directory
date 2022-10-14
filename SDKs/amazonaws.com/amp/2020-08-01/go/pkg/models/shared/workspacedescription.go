@@ -5,11 +5,11 @@ import (
 )
 
 type WorkspaceDescription struct {
-	Alias              *string           `json:"alias"`
+	Alias              *string           `json:"alias,omitempty"`
 	Arn                string            `json:"arn"`
 	CreatedAt          time.Time         `json:"createdAt"`
-	PrometheusEndpoint *string           `json:"prometheusEndpoint"`
+	PrometheusEndpoint *string           `json:"prometheusEndpoint,omitempty"`
 	Status             WorkspaceStatus   `json:"status"`
-	Tags               map[string]string `json:"tags"`
+	Tags               map[string]string `json:"tags,omitempty"`
 	WorkspaceID        string            `json:"workspaceId"`
 }

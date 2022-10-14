@@ -1,6 +1,6 @@
 package shared
 
 type EntityType struct {
-	Fields []Field `json:"fields"`
-	Name   *string `json:"name"`
+	Fields []Field `json:"fields,omitempty"`
+	Name   *string `json:"name,omitempty"`
 }

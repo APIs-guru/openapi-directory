@@ -5,12 +5,12 @@ import (
 )
 
 type StreamingSessionStream struct {
-	CreatedAt  *time.Time                            `json:"createdAt"`
-	CreatedBy  *string                               `json:"createdBy"`
-	ExpiresAt  *time.Time                            `json:"expiresAt"`
-	OwnedBy    *string                               `json:"ownedBy"`
-	State      *StreamingSessionStreamStateEnum      `json:"state"`
-	StatusCode *StreamingSessionStreamStatusCodeEnum `json:"statusCode"`
-	StreamID   *string                               `json:"streamId"`
-	URL        *string                               `json:"url"`
+	CreatedAt  *time.Time                            `json:"createdAt,omitempty"`
+	CreatedBy  *string                               `json:"createdBy,omitempty"`
+	ExpiresAt  *time.Time                            `json:"expiresAt,omitempty"`
+	OwnedBy    *string                               `json:"ownedBy,omitempty"`
+	State      *StreamingSessionStreamStateEnum      `json:"state,omitempty"`
+	StatusCode *StreamingSessionStreamStatusCodeEnum `json:"statusCode,omitempty"`
+	StreamID   *string                               `json:"streamId,omitempty"`
+	URL        *string                               `json:"url,omitempty"`
 }

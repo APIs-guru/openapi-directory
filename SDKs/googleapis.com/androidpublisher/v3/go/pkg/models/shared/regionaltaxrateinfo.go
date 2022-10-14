@@ -12,6 +12,6 @@ const (
 )
 
 type RegionalTaxRateInfo struct {
-	EligibleForStreamingServiceTaxRate *bool                           `json:"eligibleForStreamingServiceTaxRate"`
-	TaxTier                            *RegionalTaxRateInfoTaxTierEnum `json:"taxTier"`
+	EligibleForStreamingServiceTaxRate *bool                           `json:"eligibleForStreamingServiceTaxRate,omitempty"`
+	TaxTier                            *RegionalTaxRateInfoTaxTierEnum `json:"taxTier,omitempty"`
 }

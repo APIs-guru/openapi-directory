@@ -5,7 +5,7 @@ import (
 )
 
 type SamplingRuleRecord struct {
-	CreatedAt    *time.Time    `json:"CreatedAt"`
-	ModifiedAt   *time.Time    `json:"ModifiedAt"`
-	SamplingRule *SamplingRule `json:"SamplingRule"`
+	CreatedAt    *time.Time    `json:"CreatedAt,omitempty"`
+	ModifiedAt   *time.Time    `json:"ModifiedAt,omitempty"`
+	SamplingRule *SamplingRule `json:"SamplingRule,omitempty"`
 }

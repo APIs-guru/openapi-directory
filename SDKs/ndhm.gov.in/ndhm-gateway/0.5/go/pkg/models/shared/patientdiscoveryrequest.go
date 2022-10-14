@@ -8,7 +8,7 @@ type PatientDiscoveryRequestPatient struct {
 	Gender                PatientGenderEnum `json:"gender"`
 	ID                    string            `json:"id"`
 	Name                  string            `json:"name"`
-	UnverifiedIdentifiers []Identifier      `json:"unverifiedIdentifiers"`
+	UnverifiedIdentifiers []Identifier      `json:"unverifiedIdentifiers,omitempty"`
 	VerifiedIdentifiers   []Identifier      `json:"verifiedIdentifiers"`
 	YearOfBirth           int64             `json:"yearOfBirth"`
 }

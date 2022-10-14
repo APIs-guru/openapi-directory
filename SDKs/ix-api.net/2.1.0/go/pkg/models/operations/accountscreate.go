@@ -15,10 +15,10 @@ const (
 )
 
 type AccountsCreate400ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     AccountsCreate400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -30,10 +30,10 @@ const (
 )
 
 type AccountsCreate401ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     AccountsCreate401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -44,10 +44,10 @@ const (
 )
 
 type AccountsCreate403ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     AccountsCreate403ApplicationJSONTypeEnum `json:"type"`
 }
 

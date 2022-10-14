@@ -13,24 +13,24 @@ const (
 )
 
 type EstimationFullDetailsAPIModel struct {
-	AccessToken     *string                                  `json:"AccessToken"`
-	Activities      []EstimationActivityAPIModel             `json:"Activities"`
-	Attachments     []EstimationAttachmentAPIModel           `json:"Attachments"`
-	Client          *ClientDetailsAPIModel                   `json:"Client"`
-	ClonedFromID    *int32                                   `json:"ClonedFromId"`
-	Currency        *CurrencyDetailsAPIModel                 `json:"Currency"`
-	DiscountAmount  *float64                                 `json:"DiscountAmount"`
-	ExpiresOn       *time.Time                               `json:"ExpiresOn"`
-	ID              *int32                                   `json:"Id"`
-	IssuedOn        *time.Time                               `json:"IssuedOn"`
-	Items           []EstimationItemAPIModel                 `json:"Items"`
-	Notes           *string                                  `json:"Notes"`
-	Number          *string                                  `json:"Number"`
-	PaymentGateways []EstimationGatewayAPIModel              `json:"PaymentGateways"`
-	PoNumber        *string                                  `json:"PoNumber"`
-	Status          *EstimationFullDetailsAPIModelStatusEnum `json:"Status"`
-	SubTotalAmount  *float64                                 `json:"SubTotalAmount"`
-	TaxAmount       *float64                                 `json:"TaxAmount"`
-	Terms           *string                                  `json:"Terms"`
-	TotalAmount     *float64                                 `json:"TotalAmount"`
+	AccessToken     *string                                  `json:"AccessToken,omitempty"`
+	Activities      []EstimationActivityAPIModel             `json:"Activities,omitempty"`
+	Attachments     []EstimationAttachmentAPIModel           `json:"Attachments,omitempty"`
+	Client          *ClientDetailsAPIModel                   `json:"Client,omitempty"`
+	ClonedFromID    *int32                                   `json:"ClonedFromId,omitempty"`
+	Currency        *CurrencyDetailsAPIModel                 `json:"Currency,omitempty"`
+	DiscountAmount  *float64                                 `json:"DiscountAmount,omitempty"`
+	ExpiresOn       *time.Time                               `json:"ExpiresOn,omitempty"`
+	ID              *int32                                   `json:"Id,omitempty"`
+	IssuedOn        *time.Time                               `json:"IssuedOn,omitempty"`
+	Items           []EstimationItemAPIModel                 `json:"Items,omitempty"`
+	Notes           *string                                  `json:"Notes,omitempty"`
+	Number          *string                                  `json:"Number,omitempty"`
+	PaymentGateways []EstimationGatewayAPIModel              `json:"PaymentGateways,omitempty"`
+	PoNumber        *string                                  `json:"PoNumber,omitempty"`
+	Status          *EstimationFullDetailsAPIModelStatusEnum `json:"Status,omitempty"`
+	SubTotalAmount  *float64                                 `json:"SubTotalAmount,omitempty"`
+	TaxAmount       *float64                                 `json:"TaxAmount,omitempty"`
+	Terms           *string                                  `json:"Terms,omitempty"`
+	TotalAmount     *float64                                 `json:"TotalAmount,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type MovePlaylistItemRequestDto struct {
-	NewIndex       *int32  `json:"NewIndex"`
-	PlaylistItemID *string `json:"PlaylistItemId"`
+	NewIndex       *int32  `json:"NewIndex,omitempty"`
+	PlaylistItemID *string `json:"PlaylistItemId,omitempty"`
 }

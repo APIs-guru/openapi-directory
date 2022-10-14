@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleCloudChannelV1Period struct {
-	Duration   *int32                                    `json:"duration"`
-	PeriodType *GoogleCloudChannelV1PeriodPeriodTypeEnum `json:"periodType"`
+	Duration   *int32                                    `json:"duration,omitempty"`
+	PeriodType *GoogleCloudChannelV1PeriodPeriodTypeEnum `json:"periodType,omitempty"`
 }

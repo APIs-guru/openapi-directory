@@ -1,5 +1,5 @@
 package shared
 
 type ImportKeyPairResult struct {
-	Operation *Operation `json:"operation"`
+	Operation *Operation `json:"operation,omitempty"`
 }

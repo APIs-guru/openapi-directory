@@ -17,11 +17,11 @@ const (
 )
 
 type GoogleCloudRetailV2betaControl struct {
-	AssociatedServingConfigIds []string                                                  `json:"associatedServingConfigIds"`
-	DisplayName                *string                                                   `json:"displayName"`
-	FacetSpec                  *GoogleCloudRetailV2betaSearchRequestFacetSpec            `json:"facetSpec"`
-	Name                       *string                                                   `json:"name"`
-	Rule                       *GoogleCloudRetailV2betaRule                              `json:"rule"`
-	SearchSolutionUseCase      []GoogleCloudRetailV2betaControlSearchSolutionUseCaseEnum `json:"searchSolutionUseCase"`
-	SolutionTypes              []GoogleCloudRetailV2betaControlSolutionTypesEnum         `json:"solutionTypes"`
+	AssociatedServingConfigIds []string                                                  `json:"associatedServingConfigIds,omitempty"`
+	DisplayName                *string                                                   `json:"displayName,omitempty"`
+	FacetSpec                  *GoogleCloudRetailV2betaSearchRequestFacetSpec            `json:"facetSpec,omitempty"`
+	Name                       *string                                                   `json:"name,omitempty"`
+	Rule                       *GoogleCloudRetailV2betaRule                              `json:"rule,omitempty"`
+	SearchSolutionUseCase      []GoogleCloudRetailV2betaControlSearchSolutionUseCaseEnum `json:"searchSolutionUseCase,omitempty"`
+	SolutionTypes              []GoogleCloudRetailV2betaControlSolutionTypesEnum         `json:"solutionTypes,omitempty"`
 }

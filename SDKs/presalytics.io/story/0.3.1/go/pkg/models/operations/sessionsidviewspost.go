@@ -10,8 +10,8 @@ type SessionsIDViewsPostPathParams struct {
 }
 
 type SessionsIDViewsPostRequestBodyRequiredParametersToCreateAView struct {
-	ActiveMSecs *int64    `json:"activeMSecs"`
-	Additional  *string   `json:"additional"`
+	ActiveMSecs *int64    `json:"activeMSecs,omitempty"`
+	Additional  *string   `json:"additional,omitempty"`
 	EndTime     time.Time `json:"endTime"`
 	PageNumber  int64     `json:"pageNumber"`
 	StartTime   time.Time `json:"startTime"`

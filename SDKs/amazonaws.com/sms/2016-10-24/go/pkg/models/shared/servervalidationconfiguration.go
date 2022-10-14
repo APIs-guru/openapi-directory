@@ -1,9 +1,9 @@
 package shared
 
 type ServerValidationConfiguration struct {
-	Name                         *string                       `json:"name"`
-	Server                       *Server                       `json:"server"`
-	ServerValidationStrategy     *ServerValidationStrategyEnum `json:"serverValidationStrategy"`
-	UserDataValidationParameters *UserDataValidationParameters `json:"userDataValidationParameters"`
-	ValidationID                 *string                       `json:"validationId"`
+	Name                         *string                       `json:"name,omitempty"`
+	Server                       *Server                       `json:"server,omitempty"`
+	ServerValidationStrategy     *ServerValidationStrategyEnum `json:"serverValidationStrategy,omitempty"`
+	UserDataValidationParameters *UserDataValidationParameters `json:"userDataValidationParameters,omitempty"`
+	ValidationID                 *string                       `json:"validationId,omitempty"`
 }

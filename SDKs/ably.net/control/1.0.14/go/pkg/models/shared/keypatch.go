@@ -14,7 +14,7 @@ const (
 )
 
 type KeyPatch struct {
-	Capabilities []KeyPatchCapabilitiesEnum `json:"capabilities"`
-	Channels     *string                    `json:"channels"`
-	Name         *string                    `json:"name"`
+	Capabilities []KeyPatchCapabilitiesEnum `json:"capabilities,omitempty"`
+	Channels     *string                    `json:"channels,omitempty"`
+	Name         *string                    `json:"name,omitempty"`
 }

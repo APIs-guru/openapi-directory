@@ -25,10 +25,10 @@ const (
 )
 
 type NetworkServiceConfigCancellationPolicyRead401ApplicationJSON struct {
-	Detail   *string                                                              `json:"detail"`
-	Instance *string                                                              `json:"instance"`
-	Status   *interface{}                                                         `json:"status"`
-	Title    *interface{}                                                         `json:"title"`
+	Detail   *string                                                              `json:"detail,omitempty"`
+	Instance *string                                                              `json:"instance,omitempty"`
+	Status   *interface{}                                                         `json:"status,omitempty"`
+	Title    *interface{}                                                         `json:"title,omitempty"`
 	Type     NetworkServiceConfigCancellationPolicyRead401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -39,10 +39,10 @@ const (
 )
 
 type NetworkServiceConfigCancellationPolicyRead403ApplicationJSON struct {
-	Detail   *string                                                              `json:"detail"`
-	Instance *string                                                              `json:"instance"`
-	Status   *interface{}                                                         `json:"status"`
-	Title    *interface{}                                                         `json:"title"`
+	Detail   *string                                                              `json:"detail,omitempty"`
+	Instance *string                                                              `json:"instance,omitempty"`
+	Status   *interface{}                                                         `json:"status,omitempty"`
+	Title    *interface{}                                                         `json:"title,omitempty"`
 	Type     NetworkServiceConfigCancellationPolicyRead403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -53,10 +53,10 @@ const (
 )
 
 type NetworkServiceConfigCancellationPolicyRead404ApplicationJSON struct {
-	Detail   *string                                                              `json:"detail"`
-	Instance *string                                                              `json:"instance"`
-	Status   *interface{}                                                         `json:"status"`
-	Title    *interface{}                                                         `json:"title"`
+	Detail   *string                                                              `json:"detail,omitempty"`
+	Instance *string                                                              `json:"instance,omitempty"`
+	Status   *interface{}                                                         `json:"status,omitempty"`
+	Title    *interface{}                                                         `json:"title,omitempty"`
 	Type     NetworkServiceConfigCancellationPolicyRead404ApplicationJSONTypeEnum `json:"type"`
 }
 

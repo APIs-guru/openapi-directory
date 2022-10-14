@@ -14,9 +14,9 @@ const (
 )
 
 type GoogleCloudDocumentaiV1DocumentPageAnchorPageRef struct {
-	BoundingPoly *GoogleCloudDocumentaiV1BoundingPoly                            `json:"boundingPoly"`
-	Confidence   *float32                                                        `json:"confidence"`
-	LayoutID     *string                                                         `json:"layoutId"`
-	LayoutType   *GoogleCloudDocumentaiV1DocumentPageAnchorPageRefLayoutTypeEnum `json:"layoutType"`
-	Page         *string                                                         `json:"page"`
+	BoundingPoly *GoogleCloudDocumentaiV1BoundingPoly                            `json:"boundingPoly,omitempty"`
+	Confidence   *float32                                                        `json:"confidence,omitempty"`
+	LayoutID     *string                                                         `json:"layoutId,omitempty"`
+	LayoutType   *GoogleCloudDocumentaiV1DocumentPageAnchorPageRefLayoutTypeEnum `json:"layoutType,omitempty"`
+	Page         *string                                                         `json:"page,omitempty"`
 }

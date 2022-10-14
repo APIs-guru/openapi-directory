@@ -1,6 +1,6 @@
 package shared
 
 type GoogleChromePolicyVersionsV1AdditionalTargetKeyName struct {
-	Key            *string `json:"key"`
-	KeyDescription *string `json:"keyDescription"`
+	Key            *string `json:"key,omitempty"`
+	KeyDescription *string `json:"keyDescription,omitempty"`
 }

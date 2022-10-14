@@ -1,5 +1,5 @@
 package shared
 
 type GetResolverDnssecConfigResponse struct {
-	ResolverDnssecConfig *ResolverDnssecConfig `json:"ResolverDNSSECConfig"`
+	ResolverDnssecConfig *ResolverDnssecConfig `json:"ResolverDNSSECConfig,omitempty"`
 }

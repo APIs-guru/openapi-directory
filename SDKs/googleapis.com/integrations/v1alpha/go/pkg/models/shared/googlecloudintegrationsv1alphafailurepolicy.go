@@ -14,7 +14,7 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaFailurePolicy struct {
-	IntervalTime  *string                                                       `json:"intervalTime"`
-	MaxRetries    *int32                                                        `json:"maxRetries"`
-	RetryStrategy *GoogleCloudIntegrationsV1alphaFailurePolicyRetryStrategyEnum `json:"retryStrategy"`
+	IntervalTime  *string                                                       `json:"intervalTime,omitempty"`
+	MaxRetries    *int32                                                        `json:"maxRetries,omitempty"`
+	RetryStrategy *GoogleCloudIntegrationsV1alphaFailurePolicyRetryStrategyEnum `json:"retryStrategy,omitempty"`
 }

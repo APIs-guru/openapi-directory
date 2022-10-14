@@ -9,10 +9,10 @@ var CreatePaymentMethodServers = []string{
 }
 
 type CreatePaymentMethodRequestBodyData struct {
-	CardNumber  *string `json:"card_number"`
-	Cvv         *string `json:"cvv"`
-	ExpiryMonth *int64  `json:"expiry_month"`
-	ExpiryYear  *int64  `json:"expiry_year"`
+	CardNumber  *string `json:"card_number,omitempty"`
+	Cvv         *string `json:"cvv,omitempty"`
+	ExpiryMonth *int64  `json:"expiry_month,omitempty"`
+	ExpiryYear  *int64  `json:"expiry_year,omitempty"`
 }
 
 type CreatePaymentMethodRequestBody struct {
@@ -41,7 +41,7 @@ type CreatePaymentMethodRequest struct {
 }
 
 type CreatePaymentMethodDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreatePaymentMethodResponse struct {

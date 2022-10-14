@@ -1,8 +1,8 @@
 package shared
 
 type CreatePolicyResponse struct {
-	PolicyArn       *string `json:"policyArn"`
-	PolicyDocument  *string `json:"policyDocument"`
-	PolicyName      *string `json:"policyName"`
-	PolicyVersionID *string `json:"policyVersionId"`
+	PolicyArn       *string `json:"policyArn,omitempty"`
+	PolicyDocument  *string `json:"policyDocument,omitempty"`
+	PolicyName      *string `json:"policyName,omitempty"`
+	PolicyVersionID *string `json:"policyVersionId,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type VersionInfo struct {
-	VersionNumber  *Version `json:"VersionNumber"`
-	Changelog      *string  `json:"changelog"`
-	Checksum       *string  `json:"checksum"`
-	RepositoryName *string  `json:"repositoryName"`
-	RepositoryURL  *string  `json:"repositoryUrl"`
-	SourceURL      *string  `json:"sourceUrl"`
-	TargetAbi      *string  `json:"targetAbi"`
-	Timestamp      *string  `json:"timestamp"`
-	Version        *string  `json:"version"`
+	VersionNumber  *Version `json:"VersionNumber,omitempty"`
+	Changelog      *string  `json:"changelog,omitempty"`
+	Checksum       *string  `json:"checksum,omitempty"`
+	RepositoryName *string  `json:"repositoryName,omitempty"`
+	RepositoryURL  *string  `json:"repositoryUrl,omitempty"`
+	SourceURL      *string  `json:"sourceUrl,omitempty"`
+	TargetAbi      *string  `json:"targetAbi,omitempty"`
+	Timestamp      *string  `json:"timestamp,omitempty"`
+	Version        *string  `json:"version,omitempty"`
 }

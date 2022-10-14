@@ -17,23 +17,23 @@ const (
 )
 
 type GoogleCloudRetailV2alphaServingConfig struct {
-	BoostControlIds           []string                                                  `json:"boostControlIds"`
-	DisplayName               *string                                                   `json:"displayName"`
-	DiversityLevel            *string                                                   `json:"diversityLevel"`
-	DiversityType             *GoogleCloudRetailV2alphaServingConfigDiversityTypeEnum   `json:"diversityType"`
-	DoNotAssociateControlIds  []string                                                  `json:"doNotAssociateControlIds"`
-	DynamicFacetSpec          *GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec    `json:"dynamicFacetSpec"`
-	EnableCategoryFilterLevel *string                                                   `json:"enableCategoryFilterLevel"`
-	FacetControlIds           []string                                                  `json:"facetControlIds"`
-	FilterControlIds          []string                                                  `json:"filterControlIds"`
-	IgnoreControlIds          []string                                                  `json:"ignoreControlIds"`
-	ModelID                   *string                                                   `json:"modelId"`
-	Name                      *string                                                   `json:"name"`
-	OnewaySynonymsControlIds  []string                                                  `json:"onewaySynonymsControlIds"`
-	PersonalizationSpec       *GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec `json:"personalizationSpec"`
-	PriceRerankingLevel       *string                                                   `json:"priceRerankingLevel"`
-	RedirectControlIds        []string                                                  `json:"redirectControlIds"`
-	ReplacementControlIds     []string                                                  `json:"replacementControlIds"`
-	SolutionTypes             []GoogleCloudRetailV2alphaServingConfigSolutionTypesEnum  `json:"solutionTypes"`
-	TwowaySynonymsControlIds  []string                                                  `json:"twowaySynonymsControlIds"`
+	BoostControlIds           []string                                                  `json:"boostControlIds,omitempty"`
+	DisplayName               *string                                                   `json:"displayName,omitempty"`
+	DiversityLevel            *string                                                   `json:"diversityLevel,omitempty"`
+	DiversityType             *GoogleCloudRetailV2alphaServingConfigDiversityTypeEnum   `json:"diversityType,omitempty"`
+	DoNotAssociateControlIds  []string                                                  `json:"doNotAssociateControlIds,omitempty"`
+	DynamicFacetSpec          *GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec    `json:"dynamicFacetSpec,omitempty"`
+	EnableCategoryFilterLevel *string                                                   `json:"enableCategoryFilterLevel,omitempty"`
+	FacetControlIds           []string                                                  `json:"facetControlIds,omitempty"`
+	FilterControlIds          []string                                                  `json:"filterControlIds,omitempty"`
+	IgnoreControlIds          []string                                                  `json:"ignoreControlIds,omitempty"`
+	ModelID                   *string                                                   `json:"modelId,omitempty"`
+	Name                      *string                                                   `json:"name,omitempty"`
+	OnewaySynonymsControlIds  []string                                                  `json:"onewaySynonymsControlIds,omitempty"`
+	PersonalizationSpec       *GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec `json:"personalizationSpec,omitempty"`
+	PriceRerankingLevel       *string                                                   `json:"priceRerankingLevel,omitempty"`
+	RedirectControlIds        []string                                                  `json:"redirectControlIds,omitempty"`
+	ReplacementControlIds     []string                                                  `json:"replacementControlIds,omitempty"`
+	SolutionTypes             []GoogleCloudRetailV2alphaServingConfigSolutionTypesEnum  `json:"solutionTypes,omitempty"`
+	TwowaySynonymsControlIds  []string                                                  `json:"twowaySynonymsControlIds,omitempty"`
 }

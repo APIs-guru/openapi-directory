@@ -5,9 +5,9 @@ import (
 )
 
 type Repository struct {
-	CreatedAt      *time.Time `json:"createdAt"`
-	RegistryID     *string    `json:"registryId"`
-	RepositoryArn  *string    `json:"repositoryArn"`
-	RepositoryName *string    `json:"repositoryName"`
-	RepositoryURI  *string    `json:"repositoryUri"`
+	CreatedAt      *time.Time `json:"createdAt,omitempty"`
+	RegistryID     *string    `json:"registryId,omitempty"`
+	RepositoryArn  *string    `json:"repositoryArn,omitempty"`
+	RepositoryName *string    `json:"repositoryName,omitempty"`
+	RepositoryURI  *string    `json:"repositoryUri,omitempty"`
 }

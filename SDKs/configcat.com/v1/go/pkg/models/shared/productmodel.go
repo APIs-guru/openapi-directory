@@ -1,7 +1,7 @@
 package shared
 
 type ProductModel struct {
-	Name         *string            `json:"name"`
-	Organization *OrganizationModel `json:"organization"`
-	ProductID    *string            `json:"productId"`
+	Name         *string            `json:"name,omitempty"`
+	Organization *OrganizationModel `json:"organization,omitempty"`
+	ProductID    *string            `json:"productId,omitempty"`
 }

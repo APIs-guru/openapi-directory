@@ -14,21 +14,21 @@ const (
 )
 
 type CustomerSupportCustomer struct {
-	Addresses    []Address                                `json:"addresses"`
-	BankAccounts *BankAccount                             `json:"bank_accounts"`
-	CompanyName  *string                                  `json:"company_name"`
-	CreatedAt    *time.Time                               `json:"created_at"`
-	CreatedBy    *string                                  `json:"created_by"`
-	Currency     *CurrencyEnum                            `json:"currency"`
-	Emails       []Email                                  `json:"emails"`
-	FirstName    *string                                  `json:"first_name"`
-	ID           *string                                  `json:"id"`
-	Individual   *bool                                    `json:"individual"`
-	LastName     *string                                  `json:"last_name"`
-	Notes        *string                                  `json:"notes"`
-	PhoneNumbers []PhoneNumber                            `json:"phone_numbers"`
-	Status       *CustomerSupportCustomerStatusStatusEnum `json:"status"`
-	TaxNumber    *string                                  `json:"tax_number"`
-	UpdatedAt    *time.Time                               `json:"updated_at"`
-	UpdatedBy    *string                                  `json:"updated_by"`
+	Addresses    []Address                                `json:"addresses,omitempty"`
+	BankAccounts *BankAccount                             `json:"bank_accounts,omitempty"`
+	CompanyName  *string                                  `json:"company_name,omitempty"`
+	CreatedAt    *time.Time                               `json:"created_at,omitempty"`
+	CreatedBy    *string                                  `json:"created_by,omitempty"`
+	Currency     *CurrencyEnum                            `json:"currency,omitempty"`
+	Emails       []Email                                  `json:"emails,omitempty"`
+	FirstName    *string                                  `json:"first_name,omitempty"`
+	ID           *string                                  `json:"id,omitempty"`
+	Individual   *bool                                    `json:"individual,omitempty"`
+	LastName     *string                                  `json:"last_name,omitempty"`
+	Notes        *string                                  `json:"notes,omitempty"`
+	PhoneNumbers []PhoneNumber                            `json:"phone_numbers,omitempty"`
+	Status       *CustomerSupportCustomerStatusStatusEnum `json:"status,omitempty"`
+	TaxNumber    *string                                  `json:"tax_number,omitempty"`
+	UpdatedAt    *time.Time                               `json:"updated_at,omitempty"`
+	UpdatedBy    *string                                  `json:"updated_by,omitempty"`
 }

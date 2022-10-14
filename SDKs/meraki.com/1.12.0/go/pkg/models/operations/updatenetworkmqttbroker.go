@@ -6,9 +6,9 @@ type UpdateNetworkMqttBrokerPathParams struct {
 }
 
 type UpdateNetworkMqttBrokerRequestBody struct {
-	Host *string `json:"host"`
-	Name *string `json:"name"`
-	Port *int64  `json:"port"`
+	Host *string `json:"host,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Port *int64  `json:"port,omitempty"`
 }
 
 type UpdateNetworkMqttBrokerRequest struct {

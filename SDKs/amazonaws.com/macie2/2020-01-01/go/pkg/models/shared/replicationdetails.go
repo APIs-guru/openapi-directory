@@ -1,7 +1,7 @@
 package shared
 
 type ReplicationDetails struct {
-	Replicated           *bool    `json:"replicated"`
-	ReplicatedExternally *bool    `json:"replicatedExternally"`
-	ReplicationAccounts  []string `json:"replicationAccounts"`
+	Replicated           *bool    `json:"replicated,omitempty"`
+	ReplicatedExternally *bool    `json:"replicatedExternally,omitempty"`
+	ReplicationAccounts  []string `json:"replicationAccounts,omitempty"`
 }

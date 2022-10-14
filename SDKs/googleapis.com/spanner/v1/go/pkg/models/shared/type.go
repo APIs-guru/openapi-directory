@@ -26,8 +26,8 @@ const (
 )
 
 type Type struct {
-	ArrayElementType *Type                   `json:"arrayElementType"`
-	Code             *TypeCodeEnum           `json:"code"`
-	StructType       *StructType             `json:"structType"`
-	TypeAnnotation   *TypeTypeAnnotationEnum `json:"typeAnnotation"`
+	ArrayElementType *Type                   `json:"arrayElementType,omitempty"`
+	Code             *TypeCodeEnum           `json:"code,omitempty"`
+	StructType       *StructType             `json:"structType,omitempty"`
+	TypeAnnotation   *TypeTypeAnnotationEnum `json:"typeAnnotation,omitempty"`
 }

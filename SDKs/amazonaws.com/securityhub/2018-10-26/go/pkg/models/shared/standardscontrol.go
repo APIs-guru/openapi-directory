@@ -5,14 +5,14 @@ import (
 )
 
 type StandardsControl struct {
-	ControlID              *string             `json:"ControlId"`
-	ControlStatus          *ControlStatusEnum  `json:"ControlStatus"`
-	ControlStatusUpdatedAt *time.Time          `json:"ControlStatusUpdatedAt"`
-	Description            *string             `json:"Description"`
-	DisabledReason         *string             `json:"DisabledReason"`
-	RelatedRequirements    []string            `json:"RelatedRequirements"`
-	RemediationURL         *string             `json:"RemediationUrl"`
-	SeverityRating         *SeverityRatingEnum `json:"SeverityRating"`
-	StandardsControlArn    *string             `json:"StandardsControlArn"`
-	Title                  *string             `json:"Title"`
+	ControlID              *string             `json:"ControlId,omitempty"`
+	ControlStatus          *ControlStatusEnum  `json:"ControlStatus,omitempty"`
+	ControlStatusUpdatedAt *time.Time          `json:"ControlStatusUpdatedAt,omitempty"`
+	Description            *string             `json:"Description,omitempty"`
+	DisabledReason         *string             `json:"DisabledReason,omitempty"`
+	RelatedRequirements    []string            `json:"RelatedRequirements,omitempty"`
+	RemediationURL         *string             `json:"RemediationUrl,omitempty"`
+	SeverityRating         *SeverityRatingEnum `json:"SeverityRating,omitempty"`
+	StandardsControlArn    *string             `json:"StandardsControlArn,omitempty"`
+	Title                  *string             `json:"Title,omitempty"`
 }

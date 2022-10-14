@@ -19,8 +19,8 @@ type PutEmailIdentityDkimSigningAttributesHeaders struct {
 }
 
 type PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes struct {
-	DomainSigningPrivateKey *string `json:"DomainSigningPrivateKey"`
-	DomainSigningSelector   *string `json:"DomainSigningSelector"`
+	DomainSigningPrivateKey *string `json:"DomainSigningPrivateKey,omitempty"`
+	DomainSigningSelector   *string `json:"DomainSigningSelector,omitempty"`
 }
 
 type PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnum string
@@ -31,7 +31,7 @@ const (
 )
 
 type PutEmailIdentityDkimSigningAttributesRequestBody struct {
-	SigningAttributes       *PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes          `json:"SigningAttributes"`
+	SigningAttributes       *PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes          `json:"SigningAttributes,omitempty"`
 	SigningAttributesOrigin PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributesOriginEnum `json:"SigningAttributesOrigin"`
 }
 

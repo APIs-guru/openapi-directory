@@ -1,18 +1,18 @@
 package shared
 
 type GoogleCloudDialogflowCxV3beta1Agent struct {
-	AdvancedSettings         *GoogleCloudDialogflowCxV3beta1AdvancedSettings     `json:"advancedSettings"`
-	AvatarURI                *string                                             `json:"avatarUri"`
-	DefaultLanguageCode      *string                                             `json:"defaultLanguageCode"`
-	Description              *string                                             `json:"description"`
-	DisplayName              *string                                             `json:"displayName"`
-	EnableSpellCorrection    *bool                                               `json:"enableSpellCorrection"`
-	EnableStackdriverLogging *bool                                               `json:"enableStackdriverLogging"`
-	Locked                   *bool                                               `json:"locked"`
-	Name                     *string                                             `json:"name"`
-	SecuritySettings         *string                                             `json:"securitySettings"`
-	SpeechToTextSettings     *GoogleCloudDialogflowCxV3beta1SpeechToTextSettings `json:"speechToTextSettings"`
-	StartFlow                *string                                             `json:"startFlow"`
-	SupportedLanguageCodes   []string                                            `json:"supportedLanguageCodes"`
-	TimeZone                 *string                                             `json:"timeZone"`
+	AdvancedSettings         *GoogleCloudDialogflowCxV3beta1AdvancedSettings     `json:"advancedSettings,omitempty"`
+	AvatarURI                *string                                             `json:"avatarUri,omitempty"`
+	DefaultLanguageCode      *string                                             `json:"defaultLanguageCode,omitempty"`
+	Description              *string                                             `json:"description,omitempty"`
+	DisplayName              *string                                             `json:"displayName,omitempty"`
+	EnableSpellCorrection    *bool                                               `json:"enableSpellCorrection,omitempty"`
+	EnableStackdriverLogging *bool                                               `json:"enableStackdriverLogging,omitempty"`
+	Locked                   *bool                                               `json:"locked,omitempty"`
+	Name                     *string                                             `json:"name,omitempty"`
+	SecuritySettings         *string                                             `json:"securitySettings,omitempty"`
+	SpeechToTextSettings     *GoogleCloudDialogflowCxV3beta1SpeechToTextSettings `json:"speechToTextSettings,omitempty"`
+	StartFlow                *string                                             `json:"startFlow,omitempty"`
+	SupportedLanguageCodes   []string                                            `json:"supportedLanguageCodes,omitempty"`
+	TimeZone                 *string                                             `json:"timeZone,omitempty"`
 }

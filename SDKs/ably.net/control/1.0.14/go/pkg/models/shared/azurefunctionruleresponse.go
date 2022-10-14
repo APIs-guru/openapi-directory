@@ -27,29 +27,29 @@ const (
 )
 
 type AzureFunctionRuleResponseTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AzureFunctionRuleResponseTarget struct {
 	AzureAppID        string                                     `json:"azureAppId"`
 	AzureFunctionName string                                     `json:"azureFunctionName"`
-	Enveloped         *bool                                      `json:"enveloped"`
-	Format            *AzureFunctionRuleResponseTargetFormatEnum `json:"format"`
-	Headers           []AzureFunctionRuleResponseTargetHeaders   `json:"headers"`
-	SigningKeyID      *string                                    `json:"signingKeyId"`
+	Enveloped         *bool                                      `json:"enveloped,omitempty"`
+	Format            *AzureFunctionRuleResponseTargetFormatEnum `json:"format,omitempty"`
+	Headers           []AzureFunctionRuleResponseTargetHeaders   `json:"headers,omitempty"`
+	SigningKeyID      *string                                    `json:"signingKeyId,omitempty"`
 }
 
 type AzureFunctionRuleResponse struct {
-	Links       map[string]interface{}                   `json:"_links"`
-	AppID       *string                                  `json:"appId"`
-	Created     *float64                                 `json:"created"`
-	ID          *string                                  `json:"id"`
-	Modified    *float64                                 `json:"modified"`
+	Links       map[string]interface{}                   `json:"_links,omitempty"`
+	AppID       *string                                  `json:"appId,omitempty"`
+	Created     *float64                                 `json:"created,omitempty"`
+	ID          *string                                  `json:"id,omitempty"`
+	Modified    *float64                                 `json:"modified,omitempty"`
 	RequestMode AzureFunctionRuleResponseRequestModeEnum `json:"requestMode"`
 	RuleType    AzureFunctionRuleResponseRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                               `json:"source"`
-	Status      *AzureFunctionRuleResponseStatusEnum     `json:"status"`
+	Status      *AzureFunctionRuleResponseStatusEnum     `json:"status,omitempty"`
 	Target      AzureFunctionRuleResponseTarget          `json:"target"`
-	Version     *string                                  `json:"version"`
+	Version     *string                                  `json:"version,omitempty"`
 }

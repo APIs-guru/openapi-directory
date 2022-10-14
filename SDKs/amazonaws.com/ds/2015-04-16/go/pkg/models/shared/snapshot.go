@@ -5,10 +5,10 @@ import (
 )
 
 type Snapshot struct {
-	DirectoryID *string             `json:"DirectoryId"`
-	Name        *string             `json:"Name"`
-	SnapshotID  *string             `json:"SnapshotId"`
-	StartTime   *time.Time          `json:"StartTime"`
-	Status      *SnapshotStatusEnum `json:"Status"`
-	Type        *SnapshotTypeEnum   `json:"Type"`
+	DirectoryID *string             `json:"DirectoryId,omitempty"`
+	Name        *string             `json:"Name,omitempty"`
+	SnapshotID  *string             `json:"SnapshotId,omitempty"`
+	StartTime   *time.Time          `json:"StartTime,omitempty"`
+	Status      *SnapshotStatusEnum `json:"Status,omitempty"`
+	Type        *SnapshotTypeEnum   `json:"Type,omitempty"`
 }

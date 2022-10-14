@@ -1,12 +1,12 @@
 package shared
 
 type HierarchicalInterviewLevel struct {
-	Ident *string `json:"ident"`
+	Ident *string `json:"ident,omitempty"`
 }
 
 type HierarchicalInterview struct {
-	DataItems              []DataItem                  `json:"dataItems"`
-	HierarchicalInterviews []HierarchicalInterview     `json:"hierarchicalInterviews"`
-	Ident                  *string                     `json:"ident"`
-	Level                  *HierarchicalInterviewLevel `json:"level"`
+	DataItems              []DataItem                  `json:"dataItems,omitempty"`
+	HierarchicalInterviews []HierarchicalInterview     `json:"hierarchicalInterviews,omitempty"`
+	Ident                  *string                     `json:"ident,omitempty"`
+	Level                  *HierarchicalInterviewLevel `json:"level,omitempty"`
 }

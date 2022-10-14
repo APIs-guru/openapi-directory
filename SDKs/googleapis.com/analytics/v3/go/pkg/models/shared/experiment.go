@@ -5,45 +5,45 @@ import (
 )
 
 type ExperimentParentLink struct {
-	Href *string `json:"href"`
-	Type *string `json:"type"`
+	Href *string `json:"href,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type ExperimentVariations struct {
-	Name   *string  `json:"name"`
-	Status *string  `json:"status"`
-	URL    *string  `json:"url"`
-	Weight *float64 `json:"weight"`
-	Won    *bool    `json:"won"`
+	Name   *string  `json:"name,omitempty"`
+	Status *string  `json:"status,omitempty"`
+	URL    *string  `json:"url,omitempty"`
+	Weight *float64 `json:"weight,omitempty"`
+	Won    *bool    `json:"won,omitempty"`
 }
 
 type Experiment struct {
-	AccountID                      *string                `json:"accountId"`
-	Created                        *time.Time             `json:"created"`
-	Description                    *string                `json:"description"`
-	EditableInGaUI                 *bool                  `json:"editableInGaUi"`
-	EndTime                        *time.Time             `json:"endTime"`
-	EqualWeighting                 *bool                  `json:"equalWeighting"`
-	ID                             *string                `json:"id"`
-	InternalWebPropertyID          *string                `json:"internalWebPropertyId"`
-	Kind                           *string                `json:"kind"`
-	MinimumExperimentLengthInDays  *int32                 `json:"minimumExperimentLengthInDays"`
-	Name                           *string                `json:"name"`
-	ObjectiveMetric                *string                `json:"objectiveMetric"`
-	OptimizationType               *string                `json:"optimizationType"`
-	ParentLink                     *ExperimentParentLink  `json:"parentLink"`
-	ProfileID                      *string                `json:"profileId"`
-	ReasonExperimentEnded          *string                `json:"reasonExperimentEnded"`
-	RewriteVariationUrlsAsOriginal *bool                  `json:"rewriteVariationUrlsAsOriginal"`
-	SelfLink                       *string                `json:"selfLink"`
-	ServingFramework               *string                `json:"servingFramework"`
-	Snippet                        *string                `json:"snippet"`
-	StartTime                      *time.Time             `json:"startTime"`
-	Status                         *string                `json:"status"`
-	TrafficCoverage                *float64               `json:"trafficCoverage"`
-	Updated                        *time.Time             `json:"updated"`
-	Variations                     []ExperimentVariations `json:"variations"`
-	WebPropertyID                  *string                `json:"webPropertyId"`
-	WinnerConfidenceLevel          *float64               `json:"winnerConfidenceLevel"`
-	WinnerFound                    *bool                  `json:"winnerFound"`
+	AccountID                      *string                `json:"accountId,omitempty"`
+	Created                        *time.Time             `json:"created,omitempty"`
+	Description                    *string                `json:"description,omitempty"`
+	EditableInGaUI                 *bool                  `json:"editableInGaUi,omitempty"`
+	EndTime                        *time.Time             `json:"endTime,omitempty"`
+	EqualWeighting                 *bool                  `json:"equalWeighting,omitempty"`
+	ID                             *string                `json:"id,omitempty"`
+	InternalWebPropertyID          *string                `json:"internalWebPropertyId,omitempty"`
+	Kind                           *string                `json:"kind,omitempty"`
+	MinimumExperimentLengthInDays  *int32                 `json:"minimumExperimentLengthInDays,omitempty"`
+	Name                           *string                `json:"name,omitempty"`
+	ObjectiveMetric                *string                `json:"objectiveMetric,omitempty"`
+	OptimizationType               *string                `json:"optimizationType,omitempty"`
+	ParentLink                     *ExperimentParentLink  `json:"parentLink,omitempty"`
+	ProfileID                      *string                `json:"profileId,omitempty"`
+	ReasonExperimentEnded          *string                `json:"reasonExperimentEnded,omitempty"`
+	RewriteVariationUrlsAsOriginal *bool                  `json:"rewriteVariationUrlsAsOriginal,omitempty"`
+	SelfLink                       *string                `json:"selfLink,omitempty"`
+	ServingFramework               *string                `json:"servingFramework,omitempty"`
+	Snippet                        *string                `json:"snippet,omitempty"`
+	StartTime                      *time.Time             `json:"startTime,omitempty"`
+	Status                         *string                `json:"status,omitempty"`
+	TrafficCoverage                *float64               `json:"trafficCoverage,omitempty"`
+	Updated                        *time.Time             `json:"updated,omitempty"`
+	Variations                     []ExperimentVariations `json:"variations,omitempty"`
+	WebPropertyID                  *string                `json:"webPropertyId,omitempty"`
+	WinnerConfidenceLevel          *float64               `json:"winnerConfidenceLevel,omitempty"`
+	WinnerFound                    *bool                  `json:"winnerFound,omitempty"`
 }

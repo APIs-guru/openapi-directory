@@ -15,7 +15,7 @@ type PrivateUser struct {
 	AvatarURL               string           `json:"avatar_url"`
 	Bio                     string           `json:"bio"`
 	Blog                    string           `json:"blog"`
-	BusinessPlus            *bool            `json:"business_plus"`
+	BusinessPlus            *bool            `json:"business_plus,omitempty"`
 	Collaborators           int64            `json:"collaborators"`
 	Company                 string           `json:"company"`
 	CreatedAt               time.Time        `json:"created_at"`
@@ -31,14 +31,14 @@ type PrivateUser struct {
 	Hireable                bool             `json:"hireable"`
 	HTMLURL                 string           `json:"html_url"`
 	ID                      int64            `json:"id"`
-	LdapDn                  *string          `json:"ldap_dn"`
+	LdapDn                  *string          `json:"ldap_dn,omitempty"`
 	Location                string           `json:"location"`
 	Login                   string           `json:"login"`
 	Name                    string           `json:"name"`
 	NodeID                  string           `json:"node_id"`
 	OrganizationsURL        string           `json:"organizations_url"`
 	OwnedPrivateRepos       int64            `json:"owned_private_repos"`
-	Plan                    *PrivateUserPlan `json:"plan"`
+	Plan                    *PrivateUserPlan `json:"plan,omitempty"`
 	PrivateGists            int64            `json:"private_gists"`
 	PublicGists             int64            `json:"public_gists"`
 	PublicRepos             int64            `json:"public_repos"`
@@ -47,9 +47,9 @@ type PrivateUser struct {
 	SiteAdmin               bool             `json:"site_admin"`
 	StarredURL              string           `json:"starred_url"`
 	SubscriptionsURL        string           `json:"subscriptions_url"`
-	SuspendedAt             *time.Time       `json:"suspended_at"`
+	SuspendedAt             *time.Time       `json:"suspended_at,omitempty"`
 	TotalPrivateRepos       int64            `json:"total_private_repos"`
-	TwitterUsername         *string          `json:"twitter_username"`
+	TwitterUsername         *string          `json:"twitter_username,omitempty"`
 	TwoFactorAuthentication bool             `json:"two_factor_authentication"`
 	Type                    string           `json:"type"`
 	UpdatedAt               time.Time        `json:"updated_at"`

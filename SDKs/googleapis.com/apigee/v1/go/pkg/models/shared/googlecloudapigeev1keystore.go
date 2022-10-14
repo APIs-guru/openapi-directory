@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudApigeeV1Keystore struct {
-	Aliases []string `json:"aliases"`
-	Name    *string  `json:"name"`
+	Aliases []string `json:"aliases,omitempty"`
+	Name    *string  `json:"name,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetJobDetailsOutput struct {
-	JobDetails *JobDetails `json:"jobDetails"`
+	JobDetails *JobDetails `json:"jobDetails,omitempty"`
 }

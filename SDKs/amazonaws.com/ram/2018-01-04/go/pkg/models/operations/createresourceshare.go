@@ -15,13 +15,13 @@ type CreateResourceShareHeaders struct {
 }
 
 type CreateResourceShareRequestBody struct {
-	AllowExternalPrincipals *bool        `json:"allowExternalPrincipals"`
-	ClientToken             *string      `json:"clientToken"`
+	AllowExternalPrincipals *bool        `json:"allowExternalPrincipals,omitempty"`
+	ClientToken             *string      `json:"clientToken,omitempty"`
 	Name                    string       `json:"name"`
-	PermissionArns          []string     `json:"permissionArns"`
-	Principals              []string     `json:"principals"`
-	ResourceArns            []string     `json:"resourceArns"`
-	Tags                    []shared.Tag `json:"tags"`
+	PermissionArns          []string     `json:"permissionArns,omitempty"`
+	Principals              []string     `json:"principals,omitempty"`
+	ResourceArns            []string     `json:"resourceArns,omitempty"`
+	Tags                    []shared.Tag `json:"tags,omitempty"`
 }
 
 type CreateResourceShareRequest struct {

@@ -1,11 +1,11 @@
 package shared
 
 type AlertMetadata struct {
-	AlertID    *string `json:"alertId"`
-	Assignee   *string `json:"assignee"`
-	CustomerID *string `json:"customerId"`
-	Etag       *string `json:"etag"`
-	Severity   *string `json:"severity"`
-	Status     *string `json:"status"`
-	UpdateTime *string `json:"updateTime"`
+	AlertID    *string `json:"alertId,omitempty"`
+	Assignee   *string `json:"assignee,omitempty"`
+	CustomerID *string `json:"customerId,omitempty"`
+	Etag       *string `json:"etag,omitempty"`
+	Severity   *string `json:"severity,omitempty"`
+	Status     *string `json:"status,omitempty"`
+	UpdateTime *string `json:"updateTime,omitempty"`
 }

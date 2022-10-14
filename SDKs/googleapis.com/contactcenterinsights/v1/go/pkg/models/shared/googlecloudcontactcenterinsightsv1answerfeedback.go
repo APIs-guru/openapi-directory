@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1AnswerFeedback struct {
-	Clicked          *bool                                                                 `json:"clicked"`
-	CorrectnessLevel *GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnum `json:"correctnessLevel"`
-	Displayed        *bool                                                                 `json:"displayed"`
+	Clicked          *bool                                                                 `json:"clicked,omitempty"`
+	CorrectnessLevel *GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnum `json:"correctnessLevel,omitempty"`
+	Displayed        *bool                                                                 `json:"displayed,omitempty"`
 }

@@ -10,12 +10,12 @@ const (
 )
 
 type OrgChartSpec struct {
-	Labels                 *ChartData                `json:"labels"`
-	NodeColor              *Color                    `json:"nodeColor"`
-	NodeColorStyle         *ColorStyle               `json:"nodeColorStyle"`
-	NodeSize               *OrgChartSpecNodeSizeEnum `json:"nodeSize"`
-	ParentLabels           *ChartData                `json:"parentLabels"`
-	SelectedNodeColor      *Color                    `json:"selectedNodeColor"`
-	SelectedNodeColorStyle *ColorStyle               `json:"selectedNodeColorStyle"`
-	Tooltips               *ChartData                `json:"tooltips"`
+	Labels                 *ChartData                `json:"labels,omitempty"`
+	NodeColor              *Color                    `json:"nodeColor,omitempty"`
+	NodeColorStyle         *ColorStyle               `json:"nodeColorStyle,omitempty"`
+	NodeSize               *OrgChartSpecNodeSizeEnum `json:"nodeSize,omitempty"`
+	ParentLabels           *ChartData                `json:"parentLabels,omitempty"`
+	SelectedNodeColor      *Color                    `json:"selectedNodeColor,omitempty"`
+	SelectedNodeColorStyle *ColorStyle               `json:"selectedNodeColorStyle,omitempty"`
+	Tooltips               *ChartData                `json:"tooltips,omitempty"`
 }

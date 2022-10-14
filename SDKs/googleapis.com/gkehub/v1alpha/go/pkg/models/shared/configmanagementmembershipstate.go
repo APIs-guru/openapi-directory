@@ -1,11 +1,11 @@
 package shared
 
 type ConfigManagementMembershipState struct {
-	BinauthzState            *ConfigManagementBinauthzState            `json:"binauthzState"`
-	ClusterName              *string                                   `json:"clusterName"`
-	ConfigSyncState          *ConfigManagementConfigSyncState          `json:"configSyncState"`
-	HierarchyControllerState *ConfigManagementHierarchyControllerState `json:"hierarchyControllerState"`
-	MembershipSpec           *ConfigManagementMembershipSpec           `json:"membershipSpec"`
-	OperatorState            *ConfigManagementOperatorState            `json:"operatorState"`
-	PolicyControllerState    *ConfigManagementPolicyControllerState    `json:"policyControllerState"`
+	BinauthzState            *ConfigManagementBinauthzState            `json:"binauthzState,omitempty"`
+	ClusterName              *string                                   `json:"clusterName,omitempty"`
+	ConfigSyncState          *ConfigManagementConfigSyncState          `json:"configSyncState,omitempty"`
+	HierarchyControllerState *ConfigManagementHierarchyControllerState `json:"hierarchyControllerState,omitempty"`
+	MembershipSpec           *ConfigManagementMembershipSpec           `json:"membershipSpec,omitempty"`
+	OperatorState            *ConfigManagementOperatorState            `json:"operatorState,omitempty"`
+	PolicyControllerState    *ConfigManagementPolicyControllerState    `json:"policyControllerState,omitempty"`
 }

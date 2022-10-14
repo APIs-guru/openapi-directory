@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3ExportTestCasesRequest struct {
-	DataFormat *GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnum `json:"dataFormat"`
-	Filter     *string                                                        `json:"filter"`
-	GcsURI     *string                                                        `json:"gcsUri"`
+	DataFormat *GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnum `json:"dataFormat,omitempty"`
+	Filter     *string                                                        `json:"filter,omitempty"`
+	GcsURI     *string                                                        `json:"gcsUri,omitempty"`
 }

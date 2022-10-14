@@ -2,6 +2,6 @@ package shared
 
 type ParameterStringFilter struct {
 	Key    string   `json:"Key"`
-	Option *string  `json:"Option"`
-	Values []string `json:"Values"`
+	Option *string  `json:"Option,omitempty"`
+	Values []string `json:"Values,omitempty"`
 }

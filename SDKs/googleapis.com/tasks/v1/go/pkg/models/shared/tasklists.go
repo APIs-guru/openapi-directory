@@ -1,8 +1,8 @@
 package shared
 
 type TaskLists struct {
-	Etag          *string    `json:"etag"`
-	Items         []TaskList `json:"items"`
-	Kind          *string    `json:"kind"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Etag          *string    `json:"etag,omitempty"`
+	Items         []TaskList `json:"items,omitempty"`
+	Kind          *string    `json:"kind,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
 }

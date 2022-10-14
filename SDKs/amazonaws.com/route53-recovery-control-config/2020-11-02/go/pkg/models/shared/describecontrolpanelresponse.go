@@ -1,5 +1,5 @@
 package shared
 
 type DescribeControlPanelResponse struct {
-	ControlPanel *ControlPanel `json:"ControlPanel"`
+	ControlPanel *ControlPanel `json:"ControlPanel,omitempty"`
 }

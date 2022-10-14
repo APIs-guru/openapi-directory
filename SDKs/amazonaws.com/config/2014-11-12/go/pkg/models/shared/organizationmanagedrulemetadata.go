@@ -1,12 +1,12 @@
 package shared
 
 type OrganizationManagedRuleMetadata struct {
-	Description               *string                        `json:"Description"`
-	InputParameters           *string                        `json:"InputParameters"`
-	MaximumExecutionFrequency *MaximumExecutionFrequencyEnum `json:"MaximumExecutionFrequency"`
-	ResourceIDScope           *string                        `json:"ResourceIdScope"`
-	ResourceTypesScope        []string                       `json:"ResourceTypesScope"`
+	Description               *string                        `json:"Description,omitempty"`
+	InputParameters           *string                        `json:"InputParameters,omitempty"`
+	MaximumExecutionFrequency *MaximumExecutionFrequencyEnum `json:"MaximumExecutionFrequency,omitempty"`
+	ResourceIDScope           *string                        `json:"ResourceIdScope,omitempty"`
+	ResourceTypesScope        []string                       `json:"ResourceTypesScope,omitempty"`
 	RuleIdentifier            string                         `json:"RuleIdentifier"`
-	TagKeyScope               *string                        `json:"TagKeyScope"`
-	TagValueScope             *string                        `json:"TagValueScope"`
+	TagKeyScope               *string                        `json:"TagKeyScope,omitempty"`
+	TagValueScope             *string                        `json:"TagValueScope,omitempty"`
 }

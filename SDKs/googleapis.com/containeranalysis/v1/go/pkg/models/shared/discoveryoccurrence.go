@@ -21,12 +21,12 @@ const (
 )
 
 type DiscoveryOccurrence struct {
-	AnalysisCompleted   *AnalysisCompleted                         `json:"analysisCompleted"`
-	AnalysisError       []Status                                   `json:"analysisError"`
-	AnalysisStatus      *DiscoveryOccurrenceAnalysisStatusEnum     `json:"analysisStatus"`
-	AnalysisStatusError *Status                                    `json:"analysisStatusError"`
-	ArchiveTime         *string                                    `json:"archiveTime"`
-	ContinuousAnalysis  *DiscoveryOccurrenceContinuousAnalysisEnum `json:"continuousAnalysis"`
-	Cpe                 *string                                    `json:"cpe"`
-	LastScanTime        *string                                    `json:"lastScanTime"`
+	AnalysisCompleted   *AnalysisCompleted                         `json:"analysisCompleted,omitempty"`
+	AnalysisError       []Status                                   `json:"analysisError,omitempty"`
+	AnalysisStatus      *DiscoveryOccurrenceAnalysisStatusEnum     `json:"analysisStatus,omitempty"`
+	AnalysisStatusError *Status                                    `json:"analysisStatusError,omitempty"`
+	ArchiveTime         *string                                    `json:"archiveTime,omitempty"`
+	ContinuousAnalysis  *DiscoveryOccurrenceContinuousAnalysisEnum `json:"continuousAnalysis,omitempty"`
+	Cpe                 *string                                    `json:"cpe,omitempty"`
+	LastScanTime        *string                                    `json:"lastScanTime,omitempty"`
 }

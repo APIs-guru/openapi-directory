@@ -2,8 +2,8 @@ package shared
 
 type Tool struct {
 	Command                  string            `json:"command"`
-	ExitBehavior             *ExitBehaviorEnum `json:"exitBehavior"`
+	ExitBehavior             *ExitBehaviorEnum `json:"exitBehavior,omitempty"`
 	Name                     string            `json:"name"`
-	StreamOutputToCloudWatch *bool             `json:"streamOutputToCloudWatch"`
-	StreamUI                 *bool             `json:"streamUI"`
+	StreamOutputToCloudWatch *bool             `json:"streamOutputToCloudWatch,omitempty"`
+	StreamUI                 *bool             `json:"streamUI,omitempty"`
 }

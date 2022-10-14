@@ -11,6 +11,6 @@ const (
 )
 
 type CampaignGoal struct {
-	CampaignGoalType *CampaignGoalCampaignGoalTypeEnum `json:"campaignGoalType"`
-	PerformanceGoal  *PerformanceGoal                  `json:"performanceGoal"`
+	CampaignGoalType *CampaignGoalCampaignGoalTypeEnum `json:"campaignGoalType,omitempty"`
+	PerformanceGoal  *PerformanceGoal                  `json:"performanceGoal,omitempty"`
 }

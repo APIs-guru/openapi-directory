@@ -1,5 +1,5 @@
 package shared
 
 type ListAlertsResponse struct {
-	Alerts []Alert `json:"alerts"`
+	Alerts []Alert `json:"alerts,omitempty"`
 }

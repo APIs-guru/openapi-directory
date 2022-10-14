@@ -55,12 +55,12 @@ const (
 )
 
 type AmpInspectionResult struct {
-	AmpIndexStatusVerdict *AmpInspectionResultAmpIndexStatusVerdictEnum `json:"ampIndexStatusVerdict"`
-	AmpURL                *string                                       `json:"ampUrl"`
-	IndexingState         *AmpInspectionResultIndexingStateEnum         `json:"indexingState"`
-	Issues                []AmpIssue                                    `json:"issues"`
-	LastCrawlTime         *string                                       `json:"lastCrawlTime"`
-	PageFetchState        *AmpInspectionResultPageFetchStateEnum        `json:"pageFetchState"`
-	RobotsTxtState        *AmpInspectionResultRobotsTxtStateEnum        `json:"robotsTxtState"`
-	Verdict               *AmpInspectionResultVerdictEnum               `json:"verdict"`
+	AmpIndexStatusVerdict *AmpInspectionResultAmpIndexStatusVerdictEnum `json:"ampIndexStatusVerdict,omitempty"`
+	AmpURL                *string                                       `json:"ampUrl,omitempty"`
+	IndexingState         *AmpInspectionResultIndexingStateEnum         `json:"indexingState,omitempty"`
+	Issues                []AmpIssue                                    `json:"issues,omitempty"`
+	LastCrawlTime         *string                                       `json:"lastCrawlTime,omitempty"`
+	PageFetchState        *AmpInspectionResultPageFetchStateEnum        `json:"pageFetchState,omitempty"`
+	RobotsTxtState        *AmpInspectionResultRobotsTxtStateEnum        `json:"robotsTxtState,omitempty"`
+	Verdict               *AmpInspectionResultVerdictEnum               `json:"verdict,omitempty"`
 }

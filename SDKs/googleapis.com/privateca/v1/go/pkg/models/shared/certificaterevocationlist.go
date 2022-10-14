@@ -9,14 +9,14 @@ const (
 )
 
 type CertificateRevocationList struct {
-	AccessURL           *string                             `json:"accessUrl"`
-	CreateTime          *string                             `json:"createTime"`
-	Labels              map[string]string                   `json:"labels"`
-	Name                *string                             `json:"name"`
-	PemCrl              *string                             `json:"pemCrl"`
-	RevisionID          *string                             `json:"revisionId"`
-	RevokedCertificates []RevokedCertificate                `json:"revokedCertificates"`
-	SequenceNumber      *string                             `json:"sequenceNumber"`
-	State               *CertificateRevocationListStateEnum `json:"state"`
-	UpdateTime          *string                             `json:"updateTime"`
+	AccessURL           *string                             `json:"accessUrl,omitempty"`
+	CreateTime          *string                             `json:"createTime,omitempty"`
+	Labels              map[string]string                   `json:"labels,omitempty"`
+	Name                *string                             `json:"name,omitempty"`
+	PemCrl              *string                             `json:"pemCrl,omitempty"`
+	RevisionID          *string                             `json:"revisionId,omitempty"`
+	RevokedCertificates []RevokedCertificate                `json:"revokedCertificates,omitempty"`
+	SequenceNumber      *string                             `json:"sequenceNumber,omitempty"`
+	State               *CertificateRevocationListStateEnum `json:"state,omitempty"`
+	UpdateTime          *string                             `json:"updateTime,omitempty"`
 }

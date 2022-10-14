@@ -1,5 +1,5 @@
 package shared
 
 type EnvironmentPropertyDescriptions struct {
-	PropertyGroupDescriptions []PropertyGroup `json:"PropertyGroupDescriptions"`
+	PropertyGroupDescriptions []PropertyGroup `json:"PropertyGroupDescriptions,omitempty"`
 }

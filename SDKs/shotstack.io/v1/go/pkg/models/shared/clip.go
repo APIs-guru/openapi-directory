@@ -48,14 +48,14 @@ const (
 
 type Clip struct {
 	Asset      interface{}       `json:"asset"`
-	Effect     *ClipEffectEnum   `json:"effect"`
-	Filter     *ClipFilterEnum   `json:"filter"`
-	Fit        *ClipFitEnum      `json:"fit"`
+	Effect     *ClipEffectEnum   `json:"effect,omitempty"`
+	Filter     *ClipFilterEnum   `json:"filter,omitempty"`
+	Fit        *ClipFitEnum      `json:"fit,omitempty"`
 	Length     float64           `json:"length"`
-	Offset     *Offset           `json:"offset"`
-	Opacity    *float64          `json:"opacity"`
-	Position   *ClipPositionEnum `json:"position"`
-	Scale      *float64          `json:"scale"`
+	Offset     *Offset           `json:"offset,omitempty"`
+	Opacity    *float64          `json:"opacity,omitempty"`
+	Position   *ClipPositionEnum `json:"position,omitempty"`
+	Scale      *float64          `json:"scale,omitempty"`
 	Start      float64           `json:"start"`
-	Transition *Transition       `json:"transition"`
+	Transition *Transition       `json:"transition,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type AdClient struct {
-	ArcOptIn          *bool   `json:"arcOptIn"`
-	ID                *string `json:"id"`
-	Kind              *string `json:"kind"`
-	ProductCode       *string `json:"productCode"`
-	SupportsReporting *bool   `json:"supportsReporting"`
+	ArcOptIn          *bool   `json:"arcOptIn,omitempty"`
+	ID                *string `json:"id,omitempty"`
+	Kind              *string `json:"kind,omitempty"`
+	ProductCode       *string `json:"productCode,omitempty"`
+	SupportsReporting *bool   `json:"supportsReporting,omitempty"`
 }

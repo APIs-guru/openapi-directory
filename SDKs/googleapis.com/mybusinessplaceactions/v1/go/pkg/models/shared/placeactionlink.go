@@ -22,12 +22,12 @@ const (
 )
 
 type PlaceActionLink struct {
-	CreateTime      *string                             `json:"createTime"`
-	IsEditable      *bool                               `json:"isEditable"`
-	IsPreferred     *bool                               `json:"isPreferred"`
-	Name            *string                             `json:"name"`
-	PlaceActionType *PlaceActionLinkPlaceActionTypeEnum `json:"placeActionType"`
-	ProviderType    *PlaceActionLinkProviderTypeEnum    `json:"providerType"`
-	UpdateTime      *string                             `json:"updateTime"`
-	URI             *string                             `json:"uri"`
+	CreateTime      *string                             `json:"createTime,omitempty"`
+	IsEditable      *bool                               `json:"isEditable,omitempty"`
+	IsPreferred     *bool                               `json:"isPreferred,omitempty"`
+	Name            *string                             `json:"name,omitempty"`
+	PlaceActionType *PlaceActionLinkPlaceActionTypeEnum `json:"placeActionType,omitempty"`
+	ProviderType    *PlaceActionLinkProviderTypeEnum    `json:"providerType,omitempty"`
+	UpdateTime      *string                             `json:"updateTime,omitempty"`
+	URI             *string                             `json:"uri,omitempty"`
 }

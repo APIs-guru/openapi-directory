@@ -11,7 +11,7 @@ type ReposTransferPathParams struct {
 
 type ReposTransferRequestBody struct {
 	NewOwner string  `json:"new_owner"`
-	TeamIds  []int64 `json:"team_ids"`
+	TeamIds  []int64 `json:"team_ids,omitempty"`
 }
 
 type ReposTransferRequest struct {

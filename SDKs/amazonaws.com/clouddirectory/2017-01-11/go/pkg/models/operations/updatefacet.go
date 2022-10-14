@@ -25,9 +25,9 @@ const (
 )
 
 type UpdateFacetRequestBody struct {
-	AttributeUpdates []shared.FacetAttributeUpdate         `json:"AttributeUpdates"`
+	AttributeUpdates []shared.FacetAttributeUpdate         `json:"AttributeUpdates,omitempty"`
 	Name             string                                `json:"Name"`
-	ObjectType       *UpdateFacetRequestBodyObjectTypeEnum `json:"ObjectType"`
+	ObjectType       *UpdateFacetRequestBodyObjectTypeEnum `json:"ObjectType,omitempty"`
 }
 
 type UpdateFacetRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type ListOnPremisesInstancesInput struct {
-	NextToken          *string                 `json:"nextToken"`
-	RegistrationStatus *RegistrationStatusEnum `json:"registrationStatus"`
-	TagFilters         []TagFilter             `json:"tagFilters"`
+	NextToken          *string                 `json:"nextToken,omitempty"`
+	RegistrationStatus *RegistrationStatusEnum `json:"registrationStatus,omitempty"`
+	TagFilters         []TagFilter             `json:"tagFilters,omitempty"`
 }

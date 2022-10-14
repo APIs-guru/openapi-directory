@@ -20,9 +20,9 @@ const (
 )
 
 type PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToFirewallApplyToResources struct {
-	LabelSelector *PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToLabelSelector `json:"label_selector"`
-	Server        *PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToServer        `json:"server"`
-	Type          *PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToTypeEnum      `json:"type"`
+	LabelSelector *PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToLabelSelector `json:"label_selector,omitempty"`
+	Server        *PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToServer        `json:"server,omitempty"`
+	Type          *PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToTypeEnum      `json:"type,omitempty"`
 }
 
 type PostFirewallsIDActionsApplyToResourcesRequestBodyApplyToResourcesRequest struct {
@@ -78,7 +78,7 @@ type PostFirewallsIDActionsApplyToResources201ApplicationJSONMeta struct {
 
 type PostFirewallsIDActionsApplyToResources201ApplicationJSONActionsResponse struct {
 	Actions []PostFirewallsIDActionsApplyToResources201ApplicationJSONActionsAction `json:"actions"`
-	Meta    *PostFirewallsIDActionsApplyToResources201ApplicationJSONMeta           `json:"meta"`
+	Meta    *PostFirewallsIDActionsApplyToResources201ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type PostFirewallsIDActionsApplyToResourcesResponse struct {

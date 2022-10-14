@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetAmpUrlsResponse struct {
-	AmpUrls   []AmpURL      `json:"ampUrls"`
-	URLErrors []AmpURLError `json:"urlErrors"`
+	AmpUrls   []AmpURL      `json:"ampUrls,omitempty"`
+	URLErrors []AmpURLError `json:"urlErrors,omitempty"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type EventSourceConfiguration struct {
-	BatchSize    *int64            `json:"BatchSize"`
-	EventSource  *string           `json:"EventSource"`
-	FunctionName *string           `json:"FunctionName"`
-	IsActive     *bool             `json:"IsActive"`
-	LastModified *time.Time        `json:"LastModified"`
-	Parameters   map[string]string `json:"Parameters"`
-	Role         *string           `json:"Role"`
-	Status       *string           `json:"Status"`
-	UUID         *string           `json:"UUID"`
+	BatchSize    *int64            `json:"BatchSize,omitempty"`
+	EventSource  *string           `json:"EventSource,omitempty"`
+	FunctionName *string           `json:"FunctionName,omitempty"`
+	IsActive     *bool             `json:"IsActive,omitempty"`
+	LastModified *time.Time        `json:"LastModified,omitempty"`
+	Parameters   map[string]string `json:"Parameters,omitempty"`
+	Role         *string           `json:"Role,omitempty"`
+	Status       *string           `json:"Status,omitempty"`
+	UUID         *string           `json:"UUID,omitempty"`
 }

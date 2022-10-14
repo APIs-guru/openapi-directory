@@ -1,8 +1,8 @@
 package shared
 
 type Inventory struct {
-	Items      map[string]Item `json:"items"`
-	Name       *string         `json:"name"`
-	OsInfo     *OsInfo         `json:"osInfo"`
-	UpdateTime *string         `json:"updateTime"`
+	Items      map[string]Item `json:"items,omitempty"`
+	Name       *string         `json:"name,omitempty"`
+	OsInfo     *OsInfo         `json:"osInfo,omitempty"`
+	UpdateTime *string         `json:"updateTime,omitempty"`
 }

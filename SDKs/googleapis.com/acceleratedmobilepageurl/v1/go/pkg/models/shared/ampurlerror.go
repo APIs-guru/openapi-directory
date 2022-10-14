@@ -12,7 +12,7 @@ const (
 )
 
 type AmpURLError struct {
-	ErrorCode    *AmpURLErrorErrorCodeEnum `json:"errorCode"`
-	ErrorMessage *string                   `json:"errorMessage"`
-	OriginalURL  *string                   `json:"originalUrl"`
+	ErrorCode    *AmpURLErrorErrorCodeEnum `json:"errorCode,omitempty"`
+	ErrorMessage *string                   `json:"errorMessage,omitempty"`
+	OriginalURL  *string                   `json:"originalUrl,omitempty"`
 }

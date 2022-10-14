@@ -31,6 +31,6 @@ const (
 )
 
 type Recolor struct {
-	Name         *RecolorNameEnum `json:"name"`
-	RecolorStops []ColorStop      `json:"recolorStops"`
+	Name         *RecolorNameEnum `json:"name,omitempty"`
+	RecolorStops []ColorStop      `json:"recolorStops,omitempty"`
 }

@@ -5,16 +5,16 @@ import (
 )
 
 type S3Object struct {
-	BucketArn            *string               `json:"bucketArn"`
-	ETag                 *string               `json:"eTag"`
-	Extension            *string               `json:"extension"`
-	Key                  *string               `json:"key"`
-	LastModified         *time.Time            `json:"lastModified"`
-	Path                 *string               `json:"path"`
-	PublicAccess         *bool                 `json:"publicAccess"`
-	ServerSideEncryption *ServerSideEncryption `json:"serverSideEncryption"`
-	Size                 *int64                `json:"size"`
-	StorageClass         *StorageClassEnum     `json:"storageClass"`
-	Tags                 []KeyValuePair        `json:"tags"`
-	VersionID            *string               `json:"versionId"`
+	BucketArn            *string               `json:"bucketArn,omitempty"`
+	ETag                 *string               `json:"eTag,omitempty"`
+	Extension            *string               `json:"extension,omitempty"`
+	Key                  *string               `json:"key,omitempty"`
+	LastModified         *time.Time            `json:"lastModified,omitempty"`
+	Path                 *string               `json:"path,omitempty"`
+	PublicAccess         *bool                 `json:"publicAccess,omitempty"`
+	ServerSideEncryption *ServerSideEncryption `json:"serverSideEncryption,omitempty"`
+	Size                 *int64                `json:"size,omitempty"`
+	StorageClass         *StorageClassEnum     `json:"storageClass,omitempty"`
+	Tags                 []KeyValuePair        `json:"tags,omitempty"`
+	VersionID            *string               `json:"versionId,omitempty"`
 }

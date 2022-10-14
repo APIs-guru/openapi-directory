@@ -10,7 +10,7 @@ const (
 )
 
 type ChoiceQuestion struct {
-	Options []Option                `json:"options"`
-	Shuffle *bool                   `json:"shuffle"`
-	Type    *ChoiceQuestionTypeEnum `json:"type"`
+	Options []Option                `json:"options,omitempty"`
+	Shuffle *bool                   `json:"shuffle,omitempty"`
+	Type    *ChoiceQuestionTypeEnum `json:"type,omitempty"`
 }

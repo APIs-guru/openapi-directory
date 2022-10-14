@@ -1,7 +1,7 @@
 package shared
 
 type District struct {
-	ID        *string `json:"id"`
-	MdrNumber *string `json:"mdr_number"`
-	Name      *string `json:"name"`
+	ID        *string `json:"id,omitempty"`
+	MdrNumber *string `json:"mdr_number,omitempty"`
+	Name      *string `json:"name,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type DatastoreSummary struct {
-	CreationTime           *time.Time               `json:"creationTime"`
-	DatastoreName          *string                  `json:"datastoreName"`
-	DatastorePartitions    *DatastorePartitions     `json:"datastorePartitions"`
-	DatastoreStorage       *DatastoreStorageSummary `json:"datastoreStorage"`
-	FileFormatType         *FileFormatTypeEnum      `json:"fileFormatType"`
-	LastMessageArrivalTime *time.Time               `json:"lastMessageArrivalTime"`
-	LastUpdateTime         *time.Time               `json:"lastUpdateTime"`
-	Status                 *DatastoreStatusEnum     `json:"status"`
+	CreationTime           *time.Time               `json:"creationTime,omitempty"`
+	DatastoreName          *string                  `json:"datastoreName,omitempty"`
+	DatastorePartitions    *DatastorePartitions     `json:"datastorePartitions,omitempty"`
+	DatastoreStorage       *DatastoreStorageSummary `json:"datastoreStorage,omitempty"`
+	FileFormatType         *FileFormatTypeEnum      `json:"fileFormatType,omitempty"`
+	LastMessageArrivalTime *time.Time               `json:"lastMessageArrivalTime,omitempty"`
+	LastUpdateTime         *time.Time               `json:"lastUpdateTime,omitempty"`
+	Status                 *DatastoreStatusEnum     `json:"status,omitempty"`
 }

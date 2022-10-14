@@ -15,14 +15,14 @@ type CreateImagePipelineHeaders struct {
 }
 
 type CreateImagePipelineRequestBodyImageTestsConfiguration struct {
-	ImageTestsEnabled *bool  `json:"imageTestsEnabled"`
-	TimeoutMinutes    *int64 `json:"timeoutMinutes"`
+	ImageTestsEnabled *bool  `json:"imageTestsEnabled,omitempty"`
+	TimeoutMinutes    *int64 `json:"timeoutMinutes,omitempty"`
 }
 
 type CreateImagePipelineRequestBodySchedule struct {
-	PipelineExecutionStartCondition *shared.PipelineExecutionStartConditionEnum `json:"pipelineExecutionStartCondition"`
-	ScheduleExpression              *string                                     `json:"scheduleExpression"`
-	Timezone                        *string                                     `json:"timezone"`
+	PipelineExecutionStartCondition *shared.PipelineExecutionStartConditionEnum `json:"pipelineExecutionStartCondition,omitempty"`
+	ScheduleExpression              *string                                     `json:"scheduleExpression,omitempty"`
+	Timezone                        *string                                     `json:"timezone,omitempty"`
 }
 
 type CreateImagePipelineRequestBodyStatusEnum string
@@ -34,17 +34,17 @@ const (
 
 type CreateImagePipelineRequestBody struct {
 	ClientToken                    string                                                 `json:"clientToken"`
-	ContainerRecipeArn             *string                                                `json:"containerRecipeArn"`
-	Description                    *string                                                `json:"description"`
-	DistributionConfigurationArn   *string                                                `json:"distributionConfigurationArn"`
-	EnhancedImageMetadataEnabled   *bool                                                  `json:"enhancedImageMetadataEnabled"`
-	ImageRecipeArn                 *string                                                `json:"imageRecipeArn"`
-	ImageTestsConfiguration        *CreateImagePipelineRequestBodyImageTestsConfiguration `json:"imageTestsConfiguration"`
+	ContainerRecipeArn             *string                                                `json:"containerRecipeArn,omitempty"`
+	Description                    *string                                                `json:"description,omitempty"`
+	DistributionConfigurationArn   *string                                                `json:"distributionConfigurationArn,omitempty"`
+	EnhancedImageMetadataEnabled   *bool                                                  `json:"enhancedImageMetadataEnabled,omitempty"`
+	ImageRecipeArn                 *string                                                `json:"imageRecipeArn,omitempty"`
+	ImageTestsConfiguration        *CreateImagePipelineRequestBodyImageTestsConfiguration `json:"imageTestsConfiguration,omitempty"`
 	InfrastructureConfigurationArn string                                                 `json:"infrastructureConfigurationArn"`
 	Name                           string                                                 `json:"name"`
-	Schedule                       *CreateImagePipelineRequestBodySchedule                `json:"schedule"`
-	Status                         *CreateImagePipelineRequestBodyStatusEnum              `json:"status"`
-	Tags                           map[string]string                                      `json:"tags"`
+	Schedule                       *CreateImagePipelineRequestBodySchedule                `json:"schedule,omitempty"`
+	Status                         *CreateImagePipelineRequestBodyStatusEnum              `json:"status,omitempty"`
+	Tags                           map[string]string                                      `json:"tags,omitempty"`
 }
 
 type CreateImagePipelineRequest struct {

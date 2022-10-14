@@ -5,5 +5,5 @@ type CreateLanguageModelRequest struct {
 	InputDataConfig InputDataConfig     `json:"InputDataConfig"`
 	LanguageCode    ClmLanguageCodeEnum `json:"LanguageCode"`
 	ModelName       string              `json:"ModelName"`
-	Tags            []Tag               `json:"Tags"`
+	Tags            []Tag               `json:"Tags,omitempty"`
 }

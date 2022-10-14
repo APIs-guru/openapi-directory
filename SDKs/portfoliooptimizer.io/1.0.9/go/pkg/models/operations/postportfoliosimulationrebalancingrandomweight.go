@@ -6,7 +6,7 @@ type PostPortfolioSimulationRebalancingRandomWeightRequestBodyAssets struct {
 
 type PostPortfolioSimulationRebalancingRandomWeightRequestBody struct {
 	Assets     []PostPortfolioSimulationRebalancingRandomWeightRequestBodyAssets `json:"assets"`
-	Portfolios *int64                                                            `json:"portfolios"`
+	Portfolios *int64                                                            `json:"portfolios,omitempty"`
 }
 
 type PostPortfolioSimulationRebalancingRandomWeightRequest struct {

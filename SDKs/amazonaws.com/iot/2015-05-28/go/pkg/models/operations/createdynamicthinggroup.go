@@ -19,16 +19,16 @@ type CreateDynamicThingGroupHeaders struct {
 }
 
 type CreateDynamicThingGroupRequestBodyThingGroupProperties struct {
-	AttributePayload      *shared.AttributePayload `json:"attributePayload"`
-	ThingGroupDescription *string                  `json:"thingGroupDescription"`
+	AttributePayload      *shared.AttributePayload `json:"attributePayload,omitempty"`
+	ThingGroupDescription *string                  `json:"thingGroupDescription,omitempty"`
 }
 
 type CreateDynamicThingGroupRequestBody struct {
-	IndexName            *string                                                 `json:"indexName"`
+	IndexName            *string                                                 `json:"indexName,omitempty"`
 	QueryString          string                                                  `json:"queryString"`
-	QueryVersion         *string                                                 `json:"queryVersion"`
-	Tags                 []shared.Tag                                            `json:"tags"`
-	ThingGroupProperties *CreateDynamicThingGroupRequestBodyThingGroupProperties `json:"thingGroupProperties"`
+	QueryVersion         *string                                                 `json:"queryVersion,omitempty"`
+	Tags                 []shared.Tag                                            `json:"tags,omitempty"`
+	ThingGroupProperties *CreateDynamicThingGroupRequestBodyThingGroupProperties `json:"thingGroupProperties,omitempty"`
 }
 
 type CreateDynamicThingGroupRequest struct {

@@ -1,10 +1,10 @@
 package shared
 
 type GalleryReference struct {
-	Host       *string `json:"host"`
-	IsModified *bool   `json:"isModified"`
-	Owner      *string `json:"owner"`
-	Repository *string `json:"repository"`
-	Signature  *string `json:"signature"`
-	Version    *string `json:"version"`
+	Host       *string `json:"host,omitempty"`
+	IsModified *bool   `json:"isModified,omitempty"`
+	Owner      *string `json:"owner,omitempty"`
+	Repository *string `json:"repository,omitempty"`
+	Signature  *string `json:"signature,omitempty"`
+	Version    *string `json:"version,omitempty"`
 }

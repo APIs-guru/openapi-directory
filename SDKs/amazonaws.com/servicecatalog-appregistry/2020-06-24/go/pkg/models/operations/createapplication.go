@@ -16,9 +16,9 @@ type CreateApplicationHeaders struct {
 
 type CreateApplicationRequestBody struct {
 	ClientToken string            `json:"clientToken"`
-	Description *string           `json:"description"`
+	Description *string           `json:"description,omitempty"`
 	Name        string            `json:"name"`
-	Tags        map[string]string `json:"tags"`
+	Tags        map[string]string `json:"tags,omitempty"`
 }
 
 type CreateApplicationRequest struct {

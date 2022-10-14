@@ -15,6 +15,6 @@ const (
 )
 
 type RevokeCertificateRequest struct {
-	Reason    *RevokeCertificateRequestReasonEnum `json:"reason"`
-	RequestID *string                             `json:"requestId"`
+	Reason    *RevokeCertificateRequestReasonEnum `json:"reason,omitempty"`
+	RequestID *string                             `json:"requestId,omitempty"`
 }

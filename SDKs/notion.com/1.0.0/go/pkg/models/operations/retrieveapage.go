@@ -9,157 +9,157 @@ type RetrieveAPageRequest struct {
 }
 
 type RetrieveAPage200ApplicationJSONParent struct {
-	DatabaseID *string `json:"database_id"`
-	Type       *string `json:"type"`
+	DatabaseID *string `json:"database_id,omitempty"`
+	Type       *string `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesAuthorMultiSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesAuthor struct {
-	ID          *string                                                      `json:"id"`
-	MultiSelect []RetrieveAPage200ApplicationJSONPropertiesAuthorMultiSelect `json:"multi_select"`
-	Type        *string                                                      `json:"type"`
+	ID          *string                                                      `json:"id,omitempty"`
+	MultiSelect []RetrieveAPage200ApplicationJSONPropertiesAuthorMultiSelect `json:"multi_select,omitempty"`
+	Type        *string                                                      `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesLink struct {
-	ID   *string `json:"id"`
-	Type *string `json:"type"`
-	URL  *string `json:"url"`
+	ID   *string `json:"id,omitempty"`
+	Type *string `json:"type,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesNameTitleAnnotations struct {
-	Bold          *bool   `json:"bold"`
-	Code          *bool   `json:"code"`
-	Color         *string `json:"color"`
-	Italic        *bool   `json:"italic"`
-	Strikethrough *bool   `json:"strikethrough"`
-	Underline     *bool   `json:"underline"`
+	Bold          *bool   `json:"bold,omitempty"`
+	Code          *bool   `json:"code,omitempty"`
+	Color         *string `json:"color,omitempty"`
+	Italic        *bool   `json:"italic,omitempty"`
+	Strikethrough *bool   `json:"strikethrough,omitempty"`
+	Underline     *bool   `json:"underline,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesNameTitleText struct {
-	Content *string      `json:"content"`
-	Link    *interface{} `json:"link"`
+	Content *string      `json:"content,omitempty"`
+	Link    *interface{} `json:"link,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesNameTitle struct {
-	Annotations *RetrieveAPage200ApplicationJSONPropertiesNameTitleAnnotations `json:"annotations"`
-	Href        *interface{}                                                   `json:"href"`
-	PlainText   *string                                                        `json:"plain_text"`
-	Text        *RetrieveAPage200ApplicationJSONPropertiesNameTitleText        `json:"text"`
-	Type        *string                                                        `json:"type"`
+	Annotations *RetrieveAPage200ApplicationJSONPropertiesNameTitleAnnotations `json:"annotations,omitempty"`
+	Href        *interface{}                                                   `json:"href,omitempty"`
+	PlainText   *string                                                        `json:"plain_text,omitempty"`
+	Text        *RetrieveAPage200ApplicationJSONPropertiesNameTitleText        `json:"text,omitempty"`
+	Type        *string                                                        `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesName struct {
-	ID    *string                                              `json:"id"`
-	Title []RetrieveAPage200ApplicationJSONPropertiesNameTitle `json:"title"`
-	Type  *string                                              `json:"type"`
+	ID    *string                                              `json:"id,omitempty"`
+	Title []RetrieveAPage200ApplicationJSONPropertiesNameTitle `json:"title,omitempty"`
+	Type  *string                                              `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesPublisherSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesPublisher struct {
-	ID     *string                                                   `json:"id"`
-	Select *RetrieveAPage200ApplicationJSONPropertiesPublisherSelect `json:"select"`
-	Type   *string                                                   `json:"type"`
+	ID     *string                                                   `json:"id,omitempty"`
+	Select *RetrieveAPage200ApplicationJSONPropertiesPublisherSelect `json:"select,omitempty"`
+	Type   *string                                                   `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesPublishingReleaseDateDate struct {
-	End   *interface{} `json:"end"`
-	Start *string      `json:"start"`
+	End   *interface{} `json:"end,omitempty"`
+	Start *string      `json:"start,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesPublishingReleaseDate struct {
-	Date *RetrieveAPage200ApplicationJSONPropertiesPublishingReleaseDateDate `json:"date"`
-	ID   *string                                                             `json:"id"`
-	Type *string                                                             `json:"type"`
+	Date *RetrieveAPage200ApplicationJSONPropertiesPublishingReleaseDateDate `json:"date,omitempty"`
+	ID   *string                                                             `json:"id,omitempty"`
+	Type *string                                                             `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesRead struct {
-	Checkbox *bool   `json:"checkbox"`
-	ID       *string `json:"id"`
-	Type     *string `json:"type"`
+	Checkbox *bool   `json:"checkbox,omitempty"`
+	ID       *string `json:"id,omitempty"`
+	Type     *string `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesStatusSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesStatus struct {
-	ID     *string                                                `json:"id"`
-	Select *RetrieveAPage200ApplicationJSONPropertiesStatusSelect `json:"select"`
-	Type   *string                                                `json:"type"`
+	ID     *string                                                `json:"id,omitempty"`
+	Select *RetrieveAPage200ApplicationJSONPropertiesStatusSelect `json:"select,omitempty"`
+	Type   *string                                                `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesSummaryTextAnnotations struct {
-	Bold          *bool   `json:"bold"`
-	Code          *bool   `json:"code"`
-	Color         *string `json:"color"`
-	Italic        *bool   `json:"italic"`
-	Strikethrough *bool   `json:"strikethrough"`
-	Underline     *bool   `json:"underline"`
+	Bold          *bool   `json:"bold,omitempty"`
+	Code          *bool   `json:"code,omitempty"`
+	Color         *string `json:"color,omitempty"`
+	Italic        *bool   `json:"italic,omitempty"`
+	Strikethrough *bool   `json:"strikethrough,omitempty"`
+	Underline     *bool   `json:"underline,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesSummaryTextText struct {
-	Content *string      `json:"content"`
-	Link    *interface{} `json:"link"`
+	Content *string      `json:"content,omitempty"`
+	Link    *interface{} `json:"link,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesSummaryText struct {
-	Annotations *RetrieveAPage200ApplicationJSONPropertiesSummaryTextAnnotations `json:"annotations"`
-	Href        *interface{}                                                     `json:"href"`
-	PlainText   *string                                                          `json:"plain_text"`
-	Text        *RetrieveAPage200ApplicationJSONPropertiesSummaryTextText        `json:"text"`
-	Type        *string                                                          `json:"type"`
+	Annotations *RetrieveAPage200ApplicationJSONPropertiesSummaryTextAnnotations `json:"annotations,omitempty"`
+	Href        *interface{}                                                     `json:"href,omitempty"`
+	PlainText   *string                                                          `json:"plain_text,omitempty"`
+	Text        *RetrieveAPage200ApplicationJSONPropertiesSummaryTextText        `json:"text,omitempty"`
+	Type        *string                                                          `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesSummary struct {
-	ID   *string                                                `json:"id"`
-	Text []RetrieveAPage200ApplicationJSONPropertiesSummaryText `json:"text"`
-	Type *string                                                `json:"type"`
+	ID   *string                                                `json:"id,omitempty"`
+	Text []RetrieveAPage200ApplicationJSONPropertiesSummaryText `json:"text,omitempty"`
+	Type *string                                                `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesTypeSelect struct {
-	Color *string `json:"color"`
-	ID    *string `json:"id"`
-	Name  *string `json:"name"`
+	Color *string `json:"color,omitempty"`
+	ID    *string `json:"id,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONPropertiesType struct {
-	ID     *string                                              `json:"id"`
-	Select *RetrieveAPage200ApplicationJSONPropertiesTypeSelect `json:"select"`
-	Type   *string                                              `json:"type"`
+	ID     *string                                              `json:"id,omitempty"`
+	Select *RetrieveAPage200ApplicationJSONPropertiesTypeSelect `json:"select,omitempty"`
+	Type   *string                                              `json:"type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSONProperties struct {
-	Author                *RetrieveAPage200ApplicationJSONPropertiesAuthor                `json:"Author"`
-	Link                  *RetrieveAPage200ApplicationJSONPropertiesLink                  `json:"Link"`
-	Name                  *RetrieveAPage200ApplicationJSONPropertiesName                  `json:"Name"`
-	Publisher             *RetrieveAPage200ApplicationJSONPropertiesPublisher             `json:"Publisher"`
-	PublishingReleaseDate *RetrieveAPage200ApplicationJSONPropertiesPublishingReleaseDate `json:"Publishing/Release Date"`
-	Read                  *RetrieveAPage200ApplicationJSONPropertiesRead                  `json:"Read"`
-	Status                *RetrieveAPage200ApplicationJSONPropertiesStatus                `json:"Status"`
-	Summary               *RetrieveAPage200ApplicationJSONPropertiesSummary               `json:"Summary"`
-	Type                  *RetrieveAPage200ApplicationJSONPropertiesType                  `json:"Type"`
+	Author                *RetrieveAPage200ApplicationJSONPropertiesAuthor                `json:"Author,omitempty"`
+	Link                  *RetrieveAPage200ApplicationJSONPropertiesLink                  `json:"Link,omitempty"`
+	Name                  *RetrieveAPage200ApplicationJSONPropertiesName                  `json:"Name,omitempty"`
+	Publisher             *RetrieveAPage200ApplicationJSONPropertiesPublisher             `json:"Publisher,omitempty"`
+	PublishingReleaseDate *RetrieveAPage200ApplicationJSONPropertiesPublishingReleaseDate `json:"Publishing/Release Date,omitempty"`
+	Read                  *RetrieveAPage200ApplicationJSONPropertiesRead                  `json:"Read,omitempty"`
+	Status                *RetrieveAPage200ApplicationJSONPropertiesStatus                `json:"Status,omitempty"`
+	Summary               *RetrieveAPage200ApplicationJSONPropertiesSummary               `json:"Summary,omitempty"`
+	Type                  *RetrieveAPage200ApplicationJSONPropertiesType                  `json:"Type,omitempty"`
 }
 
 type RetrieveAPage200ApplicationJSON struct {
-	Archived       *bool                                      `json:"archived"`
-	CreatedTime    *string                                    `json:"created_time"`
-	ID             *string                                    `json:"id"`
-	LastEditedTime *string                                    `json:"last_edited_time"`
-	Object         *string                                    `json:"object"`
-	Parent         *RetrieveAPage200ApplicationJSONParent     `json:"parent"`
-	Properties     *RetrieveAPage200ApplicationJSONProperties `json:"properties"`
+	Archived       *bool                                      `json:"archived,omitempty"`
+	CreatedTime    *string                                    `json:"created_time,omitempty"`
+	ID             *string                                    `json:"id,omitempty"`
+	LastEditedTime *string                                    `json:"last_edited_time,omitempty"`
+	Object         *string                                    `json:"object,omitempty"`
+	Parent         *RetrieveAPage200ApplicationJSONParent     `json:"parent,omitempty"`
+	Properties     *RetrieveAPage200ApplicationJSONProperties `json:"properties,omitempty"`
 }
 
 type RetrieveAPageResponse struct {

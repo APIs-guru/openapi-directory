@@ -11,10 +11,10 @@ const (
 )
 
 type GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig struct {
-	CommonAlphabet    *GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabetEnum `json:"commonAlphabet"`
-	Context           *GooglePrivacyDlpV2FieldID                                     `json:"context"`
-	CryptoKey         *GooglePrivacyDlpV2CryptoKey                                   `json:"cryptoKey"`
-	CustomAlphabet    *string                                                        `json:"customAlphabet"`
-	Radix             *int32                                                         `json:"radix"`
-	SurrogateInfoType *GooglePrivacyDlpV2InfoType                                    `json:"surrogateInfoType"`
+	CommonAlphabet    *GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabetEnum `json:"commonAlphabet,omitempty"`
+	Context           *GooglePrivacyDlpV2FieldID                                     `json:"context,omitempty"`
+	CryptoKey         *GooglePrivacyDlpV2CryptoKey                                   `json:"cryptoKey,omitempty"`
+	CustomAlphabet    *string                                                        `json:"customAlphabet,omitempty"`
+	Radix             *int32                                                         `json:"radix,omitempty"`
+	SurrogateInfoType *GooglePrivacyDlpV2InfoType                                    `json:"surrogateInfoType,omitempty"`
 }

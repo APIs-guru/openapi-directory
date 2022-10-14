@@ -1,6 +1,6 @@
 package shared
 
 type Principal struct {
-	Arn     *string `json:"arn"`
-	Service *string `json:"service"`
+	Arn     *string `json:"arn,omitempty"`
+	Service *string `json:"service,omitempty"`
 }

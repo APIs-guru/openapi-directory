@@ -1,6 +1,6 @@
 package shared
 
 type Rotation struct {
-	NextRotationTime *string `json:"nextRotationTime"`
-	RotationPeriod   *string `json:"rotationPeriod"`
+	NextRotationTime *string `json:"nextRotationTime,omitempty"`
+	RotationPeriod   *string `json:"rotationPeriod,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type BigOvenModelAPIUserInfoTiny struct {
-	FirstName *string `json:"FirstName"`
-	LastName  *string `json:"LastName"`
-	PhotoURL  *string `json:"PhotoUrl"`
-	UserID    *int32  `json:"UserID"`
-	UserName  *string `json:"UserName"`
+	FirstName *string `json:"FirstName,omitempty"`
+	LastName  *string `json:"LastName,omitempty"`
+	PhotoURL  *string `json:"PhotoUrl,omitempty"`
+	UserID    *int32  `json:"UserID,omitempty"`
+	UserName  *string `json:"UserName,omitempty"`
 }

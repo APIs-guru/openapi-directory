@@ -23,19 +23,19 @@ type GetDashboardRelatedColumnNameRequest struct {
 }
 
 type GetDashboardRelatedColumnName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardRelatedColumnName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardRelatedColumnName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardRelatedColumnName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardRelatedColumnNameResponse struct {

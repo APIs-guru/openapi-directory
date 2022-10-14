@@ -16,8 +16,8 @@ const (
 )
 
 type VrwmiRequestBody struct {
-	CertificateParameters *VrwmiRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *VrwmiRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                VrwmiRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Vrwmi400ApplicationJSON struct {
-	Error            *Vrwmi400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vrwmi400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vrwmi400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vrwmi400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vrwmi401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Vrwmi401ApplicationJSON struct {
-	Error            *Vrwmi401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vrwmi401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vrwmi401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vrwmi401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vrwmi404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Vrwmi404ApplicationJSON struct {
-	Error            *Vrwmi404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vrwmi404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vrwmi404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vrwmi404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vrwmi500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Vrwmi500ApplicationJSON struct {
-	Error            *Vrwmi500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vrwmi500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vrwmi500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vrwmi500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vrwmi502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Vrwmi502ApplicationJSON struct {
-	Error            *Vrwmi502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vrwmi502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vrwmi502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vrwmi502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vrwmi503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Vrwmi503ApplicationJSON struct {
-	Error            *Vrwmi503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vrwmi503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vrwmi503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vrwmi503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vrwmi504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Vrwmi504ApplicationJSON struct {
-	Error            *Vrwmi504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vrwmi504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vrwmi504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vrwmi504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type VrwmiResponse struct {

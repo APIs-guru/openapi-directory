@@ -1,8 +1,8 @@
 package shared
 
 type DiscountRule struct {
-	DiscountBenefit       *DiscountBenefit       `json:"discountBenefit"`
-	DiscountSpecification *DiscountSpecification `json:"discountSpecification"`
-	MaxDiscountAmount     *Amount                `json:"maxDiscountAmount"`
-	RuleOrder             *int32                 `json:"ruleOrder"`
+	DiscountBenefit       *DiscountBenefit       `json:"discountBenefit,omitempty"`
+	DiscountSpecification *DiscountSpecification `json:"discountSpecification,omitempty"`
+	MaxDiscountAmount     *Amount                `json:"maxDiscountAmount,omitempty"`
+	RuleOrder             *int32                 `json:"ruleOrder,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1FaqAnswerData struct {
-	Answer          *string           `json:"answer"`
-	ConfidenceScore *float32          `json:"confidenceScore"`
-	Metadata        map[string]string `json:"metadata"`
-	QueryRecord     *string           `json:"queryRecord"`
-	Question        *string           `json:"question"`
-	Source          *string           `json:"source"`
+	Answer          *string           `json:"answer,omitempty"`
+	ConfidenceScore *float32          `json:"confidenceScore,omitempty"`
+	Metadata        map[string]string `json:"metadata,omitempty"`
+	QueryRecord     *string           `json:"queryRecord,omitempty"`
+	Question        *string           `json:"question,omitempty"`
+	Source          *string           `json:"source,omitempty"`
 }

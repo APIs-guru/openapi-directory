@@ -17,21 +17,21 @@ const (
 )
 
 type ExchangeLanNetworkProductOfferingPartial struct {
-	BandwidthMax              *int64                                                     `json:"bandwidth_max"`
-	BandwidthMin              *int64                                                     `json:"bandwidth_min"`
-	DisplayName               *string                                                    `json:"display_name"`
-	DowngradeAllowed          *bool                                                      `json:"downgrade_allowed"`
-	ExchangeLanNetworkService *string                                                    `json:"exchange_lan_network_service"`
-	HandoverMetroArea         *string                                                    `json:"handover_metro_area"`
-	HandoverMetroAreaNetwork  *string                                                    `json:"handover_metro_area_network"`
-	ID                        *string                                                    `json:"id"`
-	Name                      *string                                                    `json:"name"`
-	PhysicalPortSpeed         *int64                                                     `json:"physical_port_speed"`
-	ProviderVlans             *ExchangeLanNetworkProductOfferingPartialProviderVlansEnum `json:"provider_vlans"`
-	ResourceType              *ExchangeLanNetworkProductOfferingPartialResourceTypeEnum  `json:"resource_type"`
-	ServiceMetroArea          *string                                                    `json:"service_metro_area"`
-	ServiceMetroAreaNetwork   *string                                                    `json:"service_metro_area_network"`
-	ServiceProvider           *string                                                    `json:"service_provider"`
+	BandwidthMax              *int64                                                     `json:"bandwidth_max,omitempty"`
+	BandwidthMin              *int64                                                     `json:"bandwidth_min,omitempty"`
+	DisplayName               *string                                                    `json:"display_name,omitempty"`
+	DowngradeAllowed          *bool                                                      `json:"downgrade_allowed,omitempty"`
+	ExchangeLanNetworkService *string                                                    `json:"exchange_lan_network_service,omitempty"`
+	HandoverMetroArea         *string                                                    `json:"handover_metro_area,omitempty"`
+	HandoverMetroAreaNetwork  *string                                                    `json:"handover_metro_area_network,omitempty"`
+	ID                        *string                                                    `json:"id,omitempty"`
+	Name                      *string                                                    `json:"name,omitempty"`
+	PhysicalPortSpeed         *int64                                                     `json:"physical_port_speed,omitempty"`
+	ProviderVlans             *ExchangeLanNetworkProductOfferingPartialProviderVlansEnum `json:"provider_vlans,omitempty"`
+	ResourceType              *ExchangeLanNetworkProductOfferingPartialResourceTypeEnum  `json:"resource_type,omitempty"`
+	ServiceMetroArea          *string                                                    `json:"service_metro_area,omitempty"`
+	ServiceMetroAreaNetwork   *string                                                    `json:"service_metro_area_network,omitempty"`
+	ServiceProvider           *string                                                    `json:"service_provider,omitempty"`
 	Type                      string                                                     `json:"type"`
-	UpgradeAllowed            *bool                                                      `json:"upgrade_allowed"`
+	UpgradeAllowed            *bool                                                      `json:"upgrade_allowed,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListMetricDescriptorsResponse struct {
-	MetricDescriptors []MetricDescriptor `json:"metricDescriptors"`
-	NextPageToken     *string            `json:"nextPageToken"`
+	MetricDescriptors []MetricDescriptor `json:"metricDescriptors,omitempty"`
+	NextPageToken     *string            `json:"nextPageToken,omitempty"`
 }

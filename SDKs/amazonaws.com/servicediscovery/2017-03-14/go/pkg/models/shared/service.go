@@ -5,16 +5,16 @@ import (
 )
 
 type Service struct {
-	Arn                     *string                  `json:"Arn"`
-	CreateDate              *time.Time               `json:"CreateDate"`
-	CreatorRequestID        *string                  `json:"CreatorRequestId"`
-	Description             *string                  `json:"Description"`
-	DNSConfig               *DNSConfig               `json:"DnsConfig"`
-	HealthCheckConfig       *HealthCheckConfig       `json:"HealthCheckConfig"`
-	HealthCheckCustomConfig *HealthCheckCustomConfig `json:"HealthCheckCustomConfig"`
-	ID                      *string                  `json:"Id"`
-	InstanceCount           *int64                   `json:"InstanceCount"`
-	Name                    *string                  `json:"Name"`
-	NamespaceID             *string                  `json:"NamespaceId"`
-	Type                    *ServiceTypeEnum         `json:"Type"`
+	Arn                     *string                  `json:"Arn,omitempty"`
+	CreateDate              *time.Time               `json:"CreateDate,omitempty"`
+	CreatorRequestID        *string                  `json:"CreatorRequestId,omitempty"`
+	Description             *string                  `json:"Description,omitempty"`
+	DNSConfig               *DNSConfig               `json:"DnsConfig,omitempty"`
+	HealthCheckConfig       *HealthCheckConfig       `json:"HealthCheckConfig,omitempty"`
+	HealthCheckCustomConfig *HealthCheckCustomConfig `json:"HealthCheckCustomConfig,omitempty"`
+	ID                      *string                  `json:"Id,omitempty"`
+	InstanceCount           *int64                   `json:"InstanceCount,omitempty"`
+	Name                    *string                  `json:"Name,omitempty"`
+	NamespaceID             *string                  `json:"NamespaceId,omitempty"`
+	Type                    *ServiceTypeEnum         `json:"Type,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeRdsDbInstancesResult struct {
-	RdsDbInstances []RdsDbInstance `json:"RdsDbInstances"`
+	RdsDbInstances []RdsDbInstance `json:"RdsDbInstances,omitempty"`
 }

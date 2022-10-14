@@ -9,9 +9,9 @@ const (
 )
 
 type ClusterAutoscaling struct {
-	AutoprovisioningLocations        []string                                  `json:"autoprovisioningLocations"`
-	AutoprovisioningNodePoolDefaults *AutoprovisioningNodePoolDefaults         `json:"autoprovisioningNodePoolDefaults"`
-	AutoscalingProfile               *ClusterAutoscalingAutoscalingProfileEnum `json:"autoscalingProfile"`
-	EnableNodeAutoprovisioning       *bool                                     `json:"enableNodeAutoprovisioning"`
-	ResourceLimits                   []ResourceLimit                           `json:"resourceLimits"`
+	AutoprovisioningLocations        []string                                  `json:"autoprovisioningLocations,omitempty"`
+	AutoprovisioningNodePoolDefaults *AutoprovisioningNodePoolDefaults         `json:"autoprovisioningNodePoolDefaults,omitempty"`
+	AutoscalingProfile               *ClusterAutoscalingAutoscalingProfileEnum `json:"autoscalingProfile,omitempty"`
+	EnableNodeAutoprovisioning       *bool                                     `json:"enableNodeAutoprovisioning,omitempty"`
+	ResourceLimits                   []ResourceLimit                           `json:"resourceLimits,omitempty"`
 }

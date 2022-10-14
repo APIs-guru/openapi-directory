@@ -2,11 +2,11 @@ package shared
 
 type UpdatePsuIdenticationResponse struct {
 	Links                              map[string]HrefType    `json:"_links"`
-	CurrencyConversionFees             *Amount                `json:"currencyConversionFees"`
-	EstimatedInterbankSettlementAmount *Amount                `json:"estimatedInterbankSettlementAmount"`
-	EstimatedTotalAmount               *Amount                `json:"estimatedTotalAmount"`
-	PsuMessage                         *string                `json:"psuMessage"`
-	ScaMethods                         []AuthenticationObject `json:"scaMethods"`
+	CurrencyConversionFees             *Amount                `json:"currencyConversionFees,omitempty"`
+	EstimatedInterbankSettlementAmount *Amount                `json:"estimatedInterbankSettlementAmount,omitempty"`
+	EstimatedTotalAmount               *Amount                `json:"estimatedTotalAmount,omitempty"`
+	PsuMessage                         *string                `json:"psuMessage,omitempty"`
+	ScaMethods                         []AuthenticationObject `json:"scaMethods,omitempty"`
 	ScaStatus                          ScaStatusEnum          `json:"scaStatus"`
-	TransactionFees                    *Amount                `json:"transactionFees"`
+	TransactionFees                    *Amount                `json:"transactionFees,omitempty"`
 }

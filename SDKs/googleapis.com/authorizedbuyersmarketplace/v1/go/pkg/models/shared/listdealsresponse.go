@@ -1,6 +1,6 @@
 package shared
 
 type ListDealsResponse struct {
-	Deals         []Deal  `json:"deals"`
-	NextPageToken *string `json:"nextPageToken"`
+	Deals         []Deal  `json:"deals,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 }

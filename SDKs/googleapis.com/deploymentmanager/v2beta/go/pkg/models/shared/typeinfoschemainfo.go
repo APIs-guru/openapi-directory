@@ -1,6 +1,6 @@
 package shared
 
 type TypeInfoSchemaInfo struct {
-	Input  *string `json:"input"`
-	Output *string `json:"output"`
+	Input  *string `json:"input,omitempty"`
+	Output *string `json:"output,omitempty"`
 }

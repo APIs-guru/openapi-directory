@@ -10,5 +10,5 @@ const (
 )
 
 type TextPosition struct {
-	HorizontalAlignment *TextPositionHorizontalAlignmentEnum `json:"horizontalAlignment"`
+	HorizontalAlignment *TextPositionHorizontalAlignmentEnum `json:"horizontalAlignment,omitempty"`
 }

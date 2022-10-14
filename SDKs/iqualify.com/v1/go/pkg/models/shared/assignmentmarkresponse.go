@@ -5,20 +5,20 @@ import (
 )
 
 type AssignmentMarkResponse struct {
-	AssessmentID          *string    `json:"assessmentId"`
-	AssessmentItemDetails *string    `json:"assessmentItemDetails"`
-	AssessmentItemName    *string    `json:"assessmentItemName"`
-	CourseName            *string    `json:"courseName"`
-	LearnerEmail          *string    `json:"learnerEmail"`
-	LearnerFirstName      *string    `json:"learnerFirstName"`
-	LearnerLastName       *string    `json:"learnerLastName"`
-	LearnerPersonID       *string    `json:"learnerPersonId"`
-	Mark                  *string    `json:"mark"`
-	MarkFeedback          *string    `json:"markFeedback"`
-	MarkedBy              *string    `json:"markedBy"`
-	MarkedByEvaluator     *bool      `json:"markedByEvaluator"`
-	MarkedByFacilitator   *bool      `json:"markedByFacilitator"`
-	MarkedByMarker        *bool      `json:"markedByMarker"`
-	MarkedDateTime        *time.Time `json:"markedDateTime"`
-	SubmissionDateTime    *time.Time `json:"submissionDateTime"`
+	AssessmentID          *string    `json:"assessmentId,omitempty"`
+	AssessmentItemDetails *string    `json:"assessmentItemDetails,omitempty"`
+	AssessmentItemName    *string    `json:"assessmentItemName,omitempty"`
+	CourseName            *string    `json:"courseName,omitempty"`
+	LearnerEmail          *string    `json:"learnerEmail,omitempty"`
+	LearnerFirstName      *string    `json:"learnerFirstName,omitempty"`
+	LearnerLastName       *string    `json:"learnerLastName,omitempty"`
+	LearnerPersonID       *string    `json:"learnerPersonId,omitempty"`
+	Mark                  *string    `json:"mark,omitempty"`
+	MarkFeedback          *string    `json:"markFeedback,omitempty"`
+	MarkedBy              *string    `json:"markedBy,omitempty"`
+	MarkedByEvaluator     *bool      `json:"markedByEvaluator,omitempty"`
+	MarkedByFacilitator   *bool      `json:"markedByFacilitator,omitempty"`
+	MarkedByMarker        *bool      `json:"markedByMarker,omitempty"`
+	MarkedDateTime        *time.Time `json:"markedDateTime,omitempty"`
+	SubmissionDateTime    *time.Time `json:"submissionDateTime,omitempty"`
 }

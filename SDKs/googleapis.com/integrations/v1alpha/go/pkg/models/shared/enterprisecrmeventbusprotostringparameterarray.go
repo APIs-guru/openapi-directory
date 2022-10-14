@@ -1,5 +1,5 @@
 package shared
 
 type EnterpriseCrmEventbusProtoStringParameterArray struct {
-	StringValues []string `json:"stringValues"`
+	StringValues []string `json:"stringValues,omitempty"`
 }

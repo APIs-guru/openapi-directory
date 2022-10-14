@@ -18,11 +18,11 @@ type GetFavoritesByPersonIDRequest struct {
 }
 
 type GetFavoritesByPersonID200ApplicationJSON struct {
-	Page    *float64       `json:"page"`
-	Pages   *float64       `json:"pages"`
-	Perpage *float64       `json:"perpage"`
-	Photos  []shared.Photo `json:"photos"`
-	Total   *float64       `json:"total"`
+	Page    *float64       `json:"page,omitempty"`
+	Pages   *float64       `json:"pages,omitempty"`
+	Perpage *float64       `json:"perpage,omitempty"`
+	Photos  []shared.Photo `json:"photos,omitempty"`
+	Total   *float64       `json:"total,omitempty"`
 }
 
 type GetFavoritesByPersonIDResponse struct {

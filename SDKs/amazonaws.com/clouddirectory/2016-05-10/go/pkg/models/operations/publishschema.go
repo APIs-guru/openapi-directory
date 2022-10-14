@@ -16,8 +16,8 @@ type PublishSchemaHeaders struct {
 }
 
 type PublishSchemaRequestBody struct {
-	MinorVersion *string `json:"MinorVersion"`
-	Name         *string `json:"Name"`
+	MinorVersion *string `json:"MinorVersion,omitempty"`
+	Name         *string `json:"Name,omitempty"`
 	Version      string  `json:"Version"`
 }
 

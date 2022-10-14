@@ -8,7 +8,7 @@ const (
 
 type IFrameActionBody struct {
 	Height                int32                    `json:"height"`
-	Label                 *string                  `json:"label"`
+	Label                 *string                  `json:"label,omitempty"`
 	PropertyNamesIncluded []string                 `json:"propertyNamesIncluded"`
 	Type                  IFrameActionBodyTypeEnum `json:"type"`
 	URL                   string                   `json:"url"`

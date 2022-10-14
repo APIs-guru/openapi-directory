@@ -26,13 +26,13 @@ const (
 )
 
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsMobileApplication struct {
-	Os                  *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsOsEnum         `json:"OS"`
-	BusinessUserID      *int64                                                                                           `json:"businessUserId"`
-	ClientID            *string                                                                                          `json:"clientID"`
-	DeviceName          *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsDeviceNameEnum `json:"deviceName"`
-	DeviceOsVersion     *string                                                                                          `json:"deviceOSVersion"`
-	MobileApplicationID *int64                                                                                           `json:"mobileApplicationId"`
-	Status              *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsStatusEnum     `json:"status"`
+	Os                  *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsOsEnum         `json:"OS,omitempty"`
+	BusinessUserID      *int64                                                                                           `json:"businessUserId,omitempty"`
+	ClientID            *string                                                                                          `json:"clientID,omitempty"`
+	DeviceName          *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsDeviceNameEnum `json:"deviceName,omitempty"`
+	DeviceOsVersion     *string                                                                                          `json:"deviceOSVersion,omitempty"`
+	MobileApplicationID *int64                                                                                           `json:"mobileApplicationId,omitempty"`
+	Status              *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsStatusEnum     `json:"status,omitempty"`
 }
 
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum string
@@ -55,14 +55,14 @@ const (
 )
 
 type OneusersGetResponses200ContentApplication1jsonSchemaItems struct {
-	EmailAddress             *string                                                                                             `json:"emailAddress"`
-	FirstName                *string                                                                                             `json:"firstName"`
-	ID                       *int64                                                                                              `json:"id"`
-	LastName                 *string                                                                                             `json:"lastName"`
-	Lastlogin                *string                                                                                             `json:"lastlogin"`
-	MobileApplicationDetails *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsMobileApplication `json:"mobileApplicationDetails"`
-	MobileNumber             *string                                                                                             `json:"mobileNumber"`
-	Role                     *OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum                                  `json:"role"`
-	Status                   *OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum                                `json:"status"`
-	UserCvl                  *string                                                                                             `json:"userCvl"`
+	EmailAddress             *string                                                                                             `json:"emailAddress,omitempty"`
+	FirstName                *string                                                                                             `json:"firstName,omitempty"`
+	ID                       *int64                                                                                              `json:"id,omitempty"`
+	LastName                 *string                                                                                             `json:"lastName,omitempty"`
+	Lastlogin                *string                                                                                             `json:"lastlogin,omitempty"`
+	MobileApplicationDetails *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDetailsMobileApplication `json:"mobileApplicationDetails,omitempty"`
+	MobileNumber             *string                                                                                             `json:"mobileNumber,omitempty"`
+	Role                     *OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum                                  `json:"role,omitempty"`
+	Status                   *OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum                                `json:"status,omitempty"`
+	UserCvl                  *string                                                                                             `json:"userCvl,omitempty"`
 }

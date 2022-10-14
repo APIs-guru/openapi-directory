@@ -56,14 +56,14 @@ const (
 )
 
 type VideoStatus struct {
-	Embeddable              *bool                           `json:"embeddable"`
-	FailureReason           *VideoStatusFailureReasonEnum   `json:"failureReason"`
-	License                 *VideoStatusLicenseEnum         `json:"license"`
-	MadeForKids             *bool                           `json:"madeForKids"`
-	PrivacyStatus           *VideoStatusPrivacyStatusEnum   `json:"privacyStatus"`
-	PublicStatsViewable     *bool                           `json:"publicStatsViewable"`
-	PublishAt               *time.Time                      `json:"publishAt"`
-	RejectionReason         *VideoStatusRejectionReasonEnum `json:"rejectionReason"`
-	SelfDeclaredMadeForKids *bool                           `json:"selfDeclaredMadeForKids"`
-	UploadStatus            *VideoStatusUploadStatusEnum    `json:"uploadStatus"`
+	Embeddable              *bool                           `json:"embeddable,omitempty"`
+	FailureReason           *VideoStatusFailureReasonEnum   `json:"failureReason,omitempty"`
+	License                 *VideoStatusLicenseEnum         `json:"license,omitempty"`
+	MadeForKids             *bool                           `json:"madeForKids,omitempty"`
+	PrivacyStatus           *VideoStatusPrivacyStatusEnum   `json:"privacyStatus,omitempty"`
+	PublicStatsViewable     *bool                           `json:"publicStatsViewable,omitempty"`
+	PublishAt               *time.Time                      `json:"publishAt,omitempty"`
+	RejectionReason         *VideoStatusRejectionReasonEnum `json:"rejectionReason,omitempty"`
+	SelfDeclaredMadeForKids *bool                           `json:"selfDeclaredMadeForKids,omitempty"`
+	UploadStatus            *VideoStatusUploadStatusEnum    `json:"uploadStatus,omitempty"`
 }

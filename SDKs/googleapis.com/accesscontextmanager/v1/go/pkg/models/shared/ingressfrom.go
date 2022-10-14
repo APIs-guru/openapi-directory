@@ -10,7 +10,7 @@ const (
 )
 
 type IngressFrom struct {
-	Identities   []string                     `json:"identities"`
-	IdentityType *IngressFromIdentityTypeEnum `json:"identityType"`
-	Sources      []IngressSource              `json:"sources"`
+	Identities   []string                     `json:"identities,omitempty"`
+	IdentityType *IngressFromIdentityTypeEnum `json:"identityType,omitempty"`
+	Sources      []IngressSource              `json:"sources,omitempty"`
 }

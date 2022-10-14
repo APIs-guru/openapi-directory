@@ -17,11 +17,11 @@ const (
 )
 
 type Instance struct {
-	CreateTime   *string            `json:"createTime"`
-	DisplayName  *string            `json:"displayName"`
-	Labels       map[string]string  `json:"labels"`
-	Name         *string            `json:"name"`
-	SatisfiesPzs *bool              `json:"satisfiesPzs"`
-	State        *InstanceStateEnum `json:"state"`
-	Type         *InstanceTypeEnum  `json:"type"`
+	CreateTime   *string            `json:"createTime,omitempty"`
+	DisplayName  *string            `json:"displayName,omitempty"`
+	Labels       map[string]string  `json:"labels,omitempty"`
+	Name         *string            `json:"name,omitempty"`
+	SatisfiesPzs *bool              `json:"satisfiesPzs,omitempty"`
+	State        *InstanceStateEnum `json:"state,omitempty"`
+	Type         *InstanceTypeEnum  `json:"type,omitempty"`
 }

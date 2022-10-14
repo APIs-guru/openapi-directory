@@ -1,5 +1,5 @@
 package shared
 
 type CreatePredictorResponse struct {
-	PredictorArn *string `json:"PredictorArn"`
+	PredictorArn *string `json:"PredictorArn,omitempty"`
 }

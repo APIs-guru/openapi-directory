@@ -1,9 +1,9 @@
 package shared
 
 type CertificateSummary struct {
-	CertificateArn    *string      `json:"certificateArn"`
-	CertificateDetail *Certificate `json:"certificateDetail"`
-	CertificateName   *string      `json:"certificateName"`
-	DomainName        *string      `json:"domainName"`
-	Tags              []Tag        `json:"tags"`
+	CertificateArn    *string      `json:"certificateArn,omitempty"`
+	CertificateDetail *Certificate `json:"certificateDetail,omitempty"`
+	CertificateName   *string      `json:"certificateName,omitempty"`
+	DomainName        *string      `json:"domainName,omitempty"`
+	Tags              []Tag        `json:"tags,omitempty"`
 }

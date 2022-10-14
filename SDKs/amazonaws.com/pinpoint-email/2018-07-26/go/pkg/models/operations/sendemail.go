@@ -15,25 +15,25 @@ type SendEmailHeaders struct {
 }
 
 type SendEmailRequestBodyContent struct {
-	Raw      *shared.RawMessage `json:"Raw"`
-	Simple   *shared.Message    `json:"Simple"`
-	Template *shared.Template   `json:"Template"`
+	Raw      *shared.RawMessage `json:"Raw,omitempty"`
+	Simple   *shared.Message    `json:"Simple,omitempty"`
+	Template *shared.Template   `json:"Template,omitempty"`
 }
 
 type SendEmailRequestBodyDestination struct {
-	BccAddresses []string `json:"BccAddresses"`
-	CcAddresses  []string `json:"CcAddresses"`
-	ToAddresses  []string `json:"ToAddresses"`
+	BccAddresses []string `json:"BccAddresses,omitempty"`
+	CcAddresses  []string `json:"CcAddresses,omitempty"`
+	ToAddresses  []string `json:"ToAddresses,omitempty"`
 }
 
 type SendEmailRequestBody struct {
-	ConfigurationSetName           *string                         `json:"ConfigurationSetName"`
+	ConfigurationSetName           *string                         `json:"ConfigurationSetName,omitempty"`
 	Content                        SendEmailRequestBodyContent     `json:"Content"`
 	Destination                    SendEmailRequestBodyDestination `json:"Destination"`
-	EmailTags                      []shared.MessageTag             `json:"EmailTags"`
-	FeedbackForwardingEmailAddress *string                         `json:"FeedbackForwardingEmailAddress"`
-	FromEmailAddress               *string                         `json:"FromEmailAddress"`
-	ReplyToAddresses               []string                        `json:"ReplyToAddresses"`
+	EmailTags                      []shared.MessageTag             `json:"EmailTags,omitempty"`
+	FeedbackForwardingEmailAddress *string                         `json:"FeedbackForwardingEmailAddress,omitempty"`
+	FromEmailAddress               *string                         `json:"FromEmailAddress,omitempty"`
+	ReplyToAddresses               []string                        `json:"ReplyToAddresses,omitempty"`
 }
 
 type SendEmailRequest struct {

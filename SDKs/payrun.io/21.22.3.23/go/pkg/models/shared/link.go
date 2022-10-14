@@ -1,11 +1,11 @@
 package shared
 
 type LinkLinkLink struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type Link struct {
-	Link *LinkLinkLink `json:"Link"`
+	Link *LinkLinkLink `json:"Link,omitempty"`
 }

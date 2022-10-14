@@ -5,11 +5,11 @@ import (
 )
 
 type PolicyComplianceDetail struct {
-	EvaluationLimitExceeded *bool                `json:"EvaluationLimitExceeded"`
-	ExpiredAt               *time.Time           `json:"ExpiredAt"`
-	IssueInfoMap            map[string]string    `json:"IssueInfoMap"`
-	MemberAccount           *string              `json:"MemberAccount"`
-	PolicyID                *string              `json:"PolicyId"`
-	PolicyOwner             *string              `json:"PolicyOwner"`
-	Violators               []ComplianceViolator `json:"Violators"`
+	EvaluationLimitExceeded *bool                `json:"EvaluationLimitExceeded,omitempty"`
+	ExpiredAt               *time.Time           `json:"ExpiredAt,omitempty"`
+	IssueInfoMap            map[string]string    `json:"IssueInfoMap,omitempty"`
+	MemberAccount           *string              `json:"MemberAccount,omitempty"`
+	PolicyID                *string              `json:"PolicyId,omitempty"`
+	PolicyOwner             *string              `json:"PolicyOwner,omitempty"`
+	Violators               []ComplianceViolator `json:"Violators,omitempty"`
 }

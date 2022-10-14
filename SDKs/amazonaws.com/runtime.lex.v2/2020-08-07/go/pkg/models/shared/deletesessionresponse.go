@@ -1,8 +1,8 @@
 package shared
 
 type DeleteSessionResponse struct {
-	BotAliasID *string `json:"botAliasId"`
-	BotID      *string `json:"botId"`
-	LocaleID   *string `json:"localeId"`
-	SessionID  *string `json:"sessionId"`
+	BotAliasID *string `json:"botAliasId,omitempty"`
+	BotID      *string `json:"botId,omitempty"`
+	LocaleID   *string `json:"localeId,omitempty"`
+	SessionID  *string `json:"sessionId,omitempty"`
 }

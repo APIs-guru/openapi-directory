@@ -5,13 +5,13 @@ import (
 )
 
 type Namespace struct {
-	Arn              *string              `json:"Arn"`
-	CreateDate       *time.Time           `json:"CreateDate"`
-	CreatorRequestID *string              `json:"CreatorRequestId"`
-	Description      *string              `json:"Description"`
-	ID               *string              `json:"Id"`
-	Name             *string              `json:"Name"`
-	Properties       *NamespaceProperties `json:"Properties"`
-	ServiceCount     *int64               `json:"ServiceCount"`
-	Type             *NamespaceTypeEnum   `json:"Type"`
+	Arn              *string              `json:"Arn,omitempty"`
+	CreateDate       *time.Time           `json:"CreateDate,omitempty"`
+	CreatorRequestID *string              `json:"CreatorRequestId,omitempty"`
+	Description      *string              `json:"Description,omitempty"`
+	ID               *string              `json:"Id,omitempty"`
+	Name             *string              `json:"Name,omitempty"`
+	Properties       *NamespaceProperties `json:"Properties,omitempty"`
+	ServiceCount     *int64               `json:"ServiceCount,omitempty"`
+	Type             *NamespaceTypeEnum   `json:"Type,omitempty"`
 }

@@ -1,12 +1,12 @@
 package shared
 
 type ConsumerRequestCountsInDateRangeResponseData struct {
-	AggregatedRequestCount *float64                `json:"aggregated_request_count"`
-	ApplicationID          *string                 `json:"application_id"`
-	ConsumerID             *string                 `json:"consumer_id"`
-	EndDatetime            *string                 `json:"end_datetime"`
-	RequestCounts          *RequestCountAllocation `json:"request_counts"`
-	StartDatetime          *string                 `json:"start_datetime"`
+	AggregatedRequestCount *float64                `json:"aggregated_request_count,omitempty"`
+	ApplicationID          *string                 `json:"application_id,omitempty"`
+	ConsumerID             *string                 `json:"consumer_id,omitempty"`
+	EndDatetime            *string                 `json:"end_datetime,omitempty"`
+	RequestCounts          *RequestCountAllocation `json:"request_counts,omitempty"`
+	StartDatetime          *string                 `json:"start_datetime,omitempty"`
 }
 
 type ConsumerRequestCountsInDateRangeResponse struct {

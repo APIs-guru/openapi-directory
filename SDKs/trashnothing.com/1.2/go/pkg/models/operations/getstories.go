@@ -37,7 +37,7 @@ type GetStoriesRequest struct {
 }
 
 type GetStories200ApplicationJSON struct {
-	Stories []shared.Story `json:"stories"`
+	Stories []shared.Story `json:"stories,omitempty"`
 }
 
 type GetStoriesResponse struct {

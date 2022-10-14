@@ -1,9 +1,9 @@
 package shared
 
 type SdkConfigurationProperty struct {
-	DefaultValue *string `json:"defaultValue"`
-	Description  *string `json:"description"`
-	FriendlyName *string `json:"friendlyName"`
-	Name         *string `json:"name"`
-	Required     *bool   `json:"required"`
+	DefaultValue *string `json:"defaultValue,omitempty"`
+	Description  *string `json:"description,omitempty"`
+	FriendlyName *string `json:"friendlyName,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	Required     *bool   `json:"required,omitempty"`
 }

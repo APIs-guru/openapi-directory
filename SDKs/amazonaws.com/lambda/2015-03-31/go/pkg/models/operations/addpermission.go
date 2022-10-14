@@ -24,11 +24,11 @@ type AddPermissionHeaders struct {
 
 type AddPermissionRequestBody struct {
 	Action           string  `json:"Action"`
-	EventSourceToken *string `json:"EventSourceToken"`
+	EventSourceToken *string `json:"EventSourceToken,omitempty"`
 	Principal        string  `json:"Principal"`
-	RevisionID       *string `json:"RevisionId"`
-	SourceAccount    *string `json:"SourceAccount"`
-	SourceArn        *string `json:"SourceArn"`
+	RevisionID       *string `json:"RevisionId,omitempty"`
+	SourceAccount    *string `json:"SourceAccount,omitempty"`
+	SourceArn        *string `json:"SourceArn,omitempty"`
 	StatementID      string  `json:"StatementId"`
 }
 

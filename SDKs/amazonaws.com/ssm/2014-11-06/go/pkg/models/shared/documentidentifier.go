@@ -5,19 +5,19 @@ import (
 )
 
 type DocumentIdentifier struct {
-	Author          *string             `json:"Author"`
-	CreatedDate     *time.Time          `json:"CreatedDate"`
-	DisplayName     *string             `json:"DisplayName"`
-	DocumentFormat  *DocumentFormatEnum `json:"DocumentFormat"`
-	DocumentType    *DocumentTypeEnum   `json:"DocumentType"`
-	DocumentVersion *string             `json:"DocumentVersion"`
-	Name            *string             `json:"Name"`
-	Owner           *string             `json:"Owner"`
-	PlatformTypes   []PlatformTypeEnum  `json:"PlatformTypes"`
-	Requires        []DocumentRequires  `json:"Requires"`
-	ReviewStatus    *ReviewStatusEnum   `json:"ReviewStatus"`
-	SchemaVersion   *string             `json:"SchemaVersion"`
-	Tags            []Tag               `json:"Tags"`
-	TargetType      *string             `json:"TargetType"`
-	VersionName     *string             `json:"VersionName"`
+	Author          *string             `json:"Author,omitempty"`
+	CreatedDate     *time.Time          `json:"CreatedDate,omitempty"`
+	DisplayName     *string             `json:"DisplayName,omitempty"`
+	DocumentFormat  *DocumentFormatEnum `json:"DocumentFormat,omitempty"`
+	DocumentType    *DocumentTypeEnum   `json:"DocumentType,omitempty"`
+	DocumentVersion *string             `json:"DocumentVersion,omitempty"`
+	Name            *string             `json:"Name,omitempty"`
+	Owner           *string             `json:"Owner,omitempty"`
+	PlatformTypes   []PlatformTypeEnum  `json:"PlatformTypes,omitempty"`
+	Requires        []DocumentRequires  `json:"Requires,omitempty"`
+	ReviewStatus    *ReviewStatusEnum   `json:"ReviewStatus,omitempty"`
+	SchemaVersion   *string             `json:"SchemaVersion,omitempty"`
+	Tags            []Tag               `json:"Tags,omitempty"`
+	TargetType      *string             `json:"TargetType,omitempty"`
+	VersionName     *string             `json:"VersionName,omitempty"`
 }

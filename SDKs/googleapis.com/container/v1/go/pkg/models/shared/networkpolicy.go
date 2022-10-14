@@ -8,6 +8,6 @@ const (
 )
 
 type NetworkPolicy struct {
-	Enabled  *bool                      `json:"enabled"`
-	Provider *NetworkPolicyProviderEnum `json:"provider"`
+	Enabled  *bool                      `json:"enabled,omitempty"`
+	Provider *NetworkPolicyProviderEnum `json:"provider,omitempty"`
 }

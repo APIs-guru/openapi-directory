@@ -1,5 +1,5 @@
 package shared
 
 type StringItemsWrapper struct {
-	Items []string `json:"items"`
+	Items []string `json:"items,omitempty"`
 }

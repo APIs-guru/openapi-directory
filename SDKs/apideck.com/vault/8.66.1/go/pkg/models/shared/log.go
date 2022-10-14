@@ -31,7 +31,7 @@ type Log struct {
 	ChildRequest bool              `json:"child_request"`
 	ConsumerID   string            `json:"consumer_id"`
 	Duration     float64           `json:"duration"`
-	ErrorMessage *string           `json:"error_message"`
+	ErrorMessage *string           `json:"error_message,omitempty"`
 	Execution    int64             `json:"execution"`
 	HasChildren  bool              `json:"has_children"`
 	HTTPMethod   string            `json:"http_method"`
@@ -42,7 +42,7 @@ type Log struct {
 	Path         string            `json:"path"`
 	Sandbox      bool              `json:"sandbox"`
 	Service      LogService        `json:"service"`
-	SourceIP     *string           `json:"source_ip"`
+	SourceIP     *string           `json:"source_ip,omitempty"`
 	StatusCode   int64             `json:"status_code"`
 	Success      bool              `json:"success"`
 	Timestamp    string            `json:"timestamp"`

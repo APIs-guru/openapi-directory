@@ -1,6 +1,6 @@
 package shared
 
 type ListIdentityAwareProxyClientsResponse struct {
-	IdentityAwareProxyClients []IdentityAwareProxyClient `json:"identityAwareProxyClients"`
-	NextPageToken             *string                    `json:"nextPageToken"`
+	IdentityAwareProxyClients []IdentityAwareProxyClient `json:"identityAwareProxyClients,omitempty"`
+	NextPageToken             *string                    `json:"nextPageToken,omitempty"`
 }

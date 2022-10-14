@@ -13,10 +13,10 @@ const (
 )
 
 type ArimaForecastingMetrics struct {
-	ArimaFittingMetrics                []ArimaFittingMetrics                        `json:"arimaFittingMetrics"`
-	ArimaSingleModelForecastingMetrics []ArimaSingleModelForecastingMetrics         `json:"arimaSingleModelForecastingMetrics"`
-	HasDrift                           []bool                                       `json:"hasDrift"`
-	NonSeasonalOrder                   []ArimaOrder                                 `json:"nonSeasonalOrder"`
-	SeasonalPeriods                    []ArimaForecastingMetricsSeasonalPeriodsEnum `json:"seasonalPeriods"`
-	TimeSeriesID                       []string                                     `json:"timeSeriesId"`
+	ArimaFittingMetrics                []ArimaFittingMetrics                        `json:"arimaFittingMetrics,omitempty"`
+	ArimaSingleModelForecastingMetrics []ArimaSingleModelForecastingMetrics         `json:"arimaSingleModelForecastingMetrics,omitempty"`
+	HasDrift                           []bool                                       `json:"hasDrift,omitempty"`
+	NonSeasonalOrder                   []ArimaOrder                                 `json:"nonSeasonalOrder,omitempty"`
+	SeasonalPeriods                    []ArimaForecastingMetricsSeasonalPeriodsEnum `json:"seasonalPeriods,omitempty"`
+	TimeSeriesID                       []string                                     `json:"timeSeriesId,omitempty"`
 }

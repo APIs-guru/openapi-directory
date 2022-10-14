@@ -1,7 +1,7 @@
 package operations
 
 type GetAuthValidate200ApplicationJSON struct {
-	Premium *int64 `json:"premium"`
+	Premium *int64 `json:"premium,omitempty"`
 }
 
 type GetAuthValidateResponse struct {

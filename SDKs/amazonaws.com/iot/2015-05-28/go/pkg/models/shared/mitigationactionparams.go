@@ -1,10 +1,10 @@
 package shared
 
 type MitigationActionParams struct {
-	AddThingsToThingGroupParams       *AddThingsToThingGroupParams       `json:"addThingsToThingGroupParams"`
-	EnableIoTLoggingParams            *EnableIoTLoggingParams            `json:"enableIoTLoggingParams"`
-	PublishFindingToSnsParams         *PublishFindingToSnsParams         `json:"publishFindingToSnsParams"`
-	ReplaceDefaultPolicyVersionParams *ReplaceDefaultPolicyVersionParams `json:"replaceDefaultPolicyVersionParams"`
-	UpdateCaCertificateParams         *UpdateCaCertificateParams         `json:"updateCACertificateParams"`
-	UpdateDeviceCertificateParams     *UpdateDeviceCertificateParams     `json:"updateDeviceCertificateParams"`
+	AddThingsToThingGroupParams       *AddThingsToThingGroupParams       `json:"addThingsToThingGroupParams,omitempty"`
+	EnableIoTLoggingParams            *EnableIoTLoggingParams            `json:"enableIoTLoggingParams,omitempty"`
+	PublishFindingToSnsParams         *PublishFindingToSnsParams         `json:"publishFindingToSnsParams,omitempty"`
+	ReplaceDefaultPolicyVersionParams *ReplaceDefaultPolicyVersionParams `json:"replaceDefaultPolicyVersionParams,omitempty"`
+	UpdateCaCertificateParams         *UpdateCaCertificateParams         `json:"updateCACertificateParams,omitempty"`
+	UpdateDeviceCertificateParams     *UpdateDeviceCertificateParams     `json:"updateDeviceCertificateParams,omitempty"`
 }

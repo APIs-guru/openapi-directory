@@ -1,9 +1,9 @@
 package shared
 
 type TimeSeriesHistoryAndForecastResponse struct {
-	Error        *float64                          `json:"error"`
-	ForecastData []PlanningLevelForecastResultData `json:"forecastData"`
-	HistoryData  []PlanningLevelForecastResultData `json:"historyData"`
-	Method       *string                           `json:"method"`
-	TimeSeriesID *string                           `json:"timeSeriesId"`
+	Error        *float64                          `json:"error,omitempty"`
+	ForecastData []PlanningLevelForecastResultData `json:"forecastData,omitempty"`
+	HistoryData  []PlanningLevelForecastResultData `json:"historyData,omitempty"`
+	Method       *string                           `json:"method,omitempty"`
+	TimeSeriesID *string                           `json:"timeSeriesId,omitempty"`
 }

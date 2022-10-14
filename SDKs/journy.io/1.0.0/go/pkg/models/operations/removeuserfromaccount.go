@@ -24,14 +24,14 @@ type RemoveUserFromAccount201ApplicationJSON struct {
 }
 
 type RemoveUserFromAccount400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header"`
-	Path   map[string]string `json:"path"`
-	Query  map[string]string `json:"query"`
+	Header map[string]string `json:"header,omitempty"`
+	Path   map[string]string `json:"path,omitempty"`
+	Query  map[string]string `json:"query,omitempty"`
 }
 
 type RemoveUserFromAccount400ApplicationJSONErrors struct {
-	Fields     map[string]string                                        `json:"fields"`
-	Parameters *RemoveUserFromAccount400ApplicationJSONErrorsParameters `json:"parameters"`
+	Fields     map[string]string                                        `json:"fields,omitempty"`
+	Parameters *RemoveUserFromAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
 }
 
 type RemoveUserFromAccount400ApplicationJSONMeta struct {

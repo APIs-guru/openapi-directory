@@ -1,7 +1,7 @@
 package shared
 
 type ApprovalRuleEventMetadata struct {
-	ApprovalRuleContent *string `json:"approvalRuleContent"`
-	ApprovalRuleID      *string `json:"approvalRuleId"`
-	ApprovalRuleName    *string `json:"approvalRuleName"`
+	ApprovalRuleContent *string `json:"approvalRuleContent,omitempty"`
+	ApprovalRuleID      *string `json:"approvalRuleId,omitempty"`
+	ApprovalRuleName    *string `json:"approvalRuleName,omitempty"`
 }

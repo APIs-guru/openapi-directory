@@ -10,7 +10,7 @@ const (
 )
 
 type ManageEvent struct {
-	Action       *ManageEventActionEnum `json:"action"`
-	ActionParams map[string]interface{} `json:"action_params"`
-	Name         *string                `json:"name"`
+	Action       *ManageEventActionEnum `json:"action,omitempty"`
+	ActionParams map[string]interface{} `json:"action_params,omitempty"`
+	Name         *string                `json:"name,omitempty"`
 }

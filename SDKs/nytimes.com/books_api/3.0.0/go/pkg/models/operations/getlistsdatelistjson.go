@@ -40,52 +40,52 @@ type GetListsDateListJSONRequest struct {
 }
 
 type GetListsDateListJSON200ApplicationJSONResultsBooksIsbns struct {
-	Isbn10 *string `json:"isbn10"`
-	Isbn13 *string `json:"isbn13"`
+	Isbn10 *string `json:"isbn10,omitempty"`
+	Isbn13 *string `json:"isbn13,omitempty"`
 }
 
 type GetListsDateListJSON200ApplicationJSONResultsBooks struct {
-	AgeGroup           *string                                                   `json:"age_group"`
-	AmazonProductURL   *string                                                   `json:"amazon_product_url"`
-	ArticleChapterLink *string                                                   `json:"article_chapter_link"`
-	Asterisk           *int64                                                    `json:"asterisk"`
-	Author             *string                                                   `json:"author"`
-	BookImage          *string                                                   `json:"book_image"`
-	BookReviewLink     *string                                                   `json:"book_review_link"`
-	Contributor        *string                                                   `json:"contributor"`
-	ContributorNote    *string                                                   `json:"contributor_note"`
-	Dagger             *int64                                                    `json:"dagger"`
-	Description        *string                                                   `json:"description"`
-	FirstChapterLink   *string                                                   `json:"first_chapter_link"`
-	Isbns              []GetListsDateListJSON200ApplicationJSONResultsBooksIsbns `json:"isbns"`
-	Price              *int64                                                    `json:"price"`
-	PrimaryIsbn10      *string                                                   `json:"primary_isbn10"`
-	PrimaryIsbn13      *string                                                   `json:"primary_isbn13"`
-	Publisher          *string                                                   `json:"publisher"`
-	Rank               *int64                                                    `json:"rank"`
-	RankLastWeek       *int64                                                    `json:"rank_last_week"`
-	SundayReviewLink   *string                                                   `json:"sunday_review_link"`
-	Title              *string                                                   `json:"title"`
-	WeeksOnList        *int64                                                    `json:"weeks_on_list"`
+	AgeGroup           *string                                                   `json:"age_group,omitempty"`
+	AmazonProductURL   *string                                                   `json:"amazon_product_url,omitempty"`
+	ArticleChapterLink *string                                                   `json:"article_chapter_link,omitempty"`
+	Asterisk           *int64                                                    `json:"asterisk,omitempty"`
+	Author             *string                                                   `json:"author,omitempty"`
+	BookImage          *string                                                   `json:"book_image,omitempty"`
+	BookReviewLink     *string                                                   `json:"book_review_link,omitempty"`
+	Contributor        *string                                                   `json:"contributor,omitempty"`
+	ContributorNote    *string                                                   `json:"contributor_note,omitempty"`
+	Dagger             *int64                                                    `json:"dagger,omitempty"`
+	Description        *string                                                   `json:"description,omitempty"`
+	FirstChapterLink   *string                                                   `json:"first_chapter_link,omitempty"`
+	Isbns              []GetListsDateListJSON200ApplicationJSONResultsBooksIsbns `json:"isbns,omitempty"`
+	Price              *int64                                                    `json:"price,omitempty"`
+	PrimaryIsbn10      *string                                                   `json:"primary_isbn10,omitempty"`
+	PrimaryIsbn13      *string                                                   `json:"primary_isbn13,omitempty"`
+	Publisher          *string                                                   `json:"publisher,omitempty"`
+	Rank               *int64                                                    `json:"rank,omitempty"`
+	RankLastWeek       *int64                                                    `json:"rank_last_week,omitempty"`
+	SundayReviewLink   *string                                                   `json:"sunday_review_link,omitempty"`
+	Title              *string                                                   `json:"title,omitempty"`
+	WeeksOnList        *int64                                                    `json:"weeks_on_list,omitempty"`
 }
 
 type GetListsDateListJSON200ApplicationJSONResults struct {
-	BestsellersDate  *string                                              `json:"bestsellers_date"`
-	Books            []GetListsDateListJSON200ApplicationJSONResultsBooks `json:"books"`
-	Corrections      []map[string]interface{}                             `json:"corrections"`
-	DisplayName      *string                                              `json:"display_name"`
-	ListName         *string                                              `json:"list_name"`
-	NormalListEndsAt *int64                                               `json:"normal_list_ends_at"`
-	PublishedDate    *string                                              `json:"published_date"`
-	Updated          *string                                              `json:"updated"`
+	BestsellersDate  *string                                              `json:"bestsellers_date,omitempty"`
+	Books            []GetListsDateListJSON200ApplicationJSONResultsBooks `json:"books,omitempty"`
+	Corrections      []map[string]interface{}                             `json:"corrections,omitempty"`
+	DisplayName      *string                                              `json:"display_name,omitempty"`
+	ListName         *string                                              `json:"list_name,omitempty"`
+	NormalListEndsAt *int64                                               `json:"normal_list_ends_at,omitempty"`
+	PublishedDate    *string                                              `json:"published_date,omitempty"`
+	Updated          *string                                              `json:"updated,omitempty"`
 }
 
 type GetListsDateListJSON200ApplicationJSON struct {
-	Copyright    *string                                        `json:"copyright"`
-	LastModified *string                                        `json:"last_modified"`
-	NumResults   *int64                                         `json:"num_results"`
-	Results      *GetListsDateListJSON200ApplicationJSONResults `json:"results"`
-	Status       *string                                        `json:"status"`
+	Copyright    *string                                        `json:"copyright,omitempty"`
+	LastModified *string                                        `json:"last_modified,omitempty"`
+	NumResults   *int64                                         `json:"num_results,omitempty"`
+	Results      *GetListsDateListJSON200ApplicationJSONResults `json:"results,omitempty"`
+	Status       *string                                        `json:"status,omitempty"`
 }
 
 type GetListsDateListJSONResponse struct {

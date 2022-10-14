@@ -1,9 +1,9 @@
 package shared
 
 type CreateApplicationRequest struct {
-	CweMonitorEnabled  *bool   `json:"CWEMonitorEnabled"`
-	OpsCenterEnabled   *bool   `json:"OpsCenterEnabled"`
-	OpsItemSnsTopicArn *string `json:"OpsItemSNSTopicArn"`
+	CweMonitorEnabled  *bool   `json:"CWEMonitorEnabled,omitempty"`
+	OpsCenterEnabled   *bool   `json:"OpsCenterEnabled,omitempty"`
+	OpsItemSnsTopicArn *string `json:"OpsItemSNSTopicArn,omitempty"`
 	ResourceGroupName  string  `json:"ResourceGroupName"`
-	Tags               []Tag   `json:"Tags"`
+	Tags               []Tag   `json:"Tags,omitempty"`
 }

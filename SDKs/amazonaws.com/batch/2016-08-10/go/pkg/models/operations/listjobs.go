@@ -32,13 +32,13 @@ const (
 )
 
 type ListJobsRequestBody struct {
-	ArrayJobID     *string                           `json:"arrayJobId"`
-	Filters        []shared.KeyValuesPair            `json:"filters"`
-	JobQueue       *string                           `json:"jobQueue"`
-	JobStatus      *ListJobsRequestBodyJobStatusEnum `json:"jobStatus"`
-	MaxResults     *int64                            `json:"maxResults"`
-	MultiNodeJobID *string                           `json:"multiNodeJobId"`
-	NextToken      *string                           `json:"nextToken"`
+	ArrayJobID     *string                           `json:"arrayJobId,omitempty"`
+	Filters        []shared.KeyValuesPair            `json:"filters,omitempty"`
+	JobQueue       *string                           `json:"jobQueue,omitempty"`
+	JobStatus      *ListJobsRequestBodyJobStatusEnum `json:"jobStatus,omitempty"`
+	MaxResults     *int64                            `json:"maxResults,omitempty"`
+	MultiNodeJobID *string                           `json:"multiNodeJobId,omitempty"`
+	NextToken      *string                           `json:"nextToken,omitempty"`
 }
 
 type ListJobsRequest struct {

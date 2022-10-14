@@ -27,7 +27,7 @@ type HipConsentNotificationNotificationConsentDetail struct {
 	Patient        ConsentManagerPatientID                                       `json:"patient"`
 	Permission     Permission                                                    `json:"permission"`
 	Purpose        UsePurpose                                                    `json:"purpose"`
-	SchemaVersion  *string                                                       `json:"schemaVersion"`
+	SchemaVersion  *string                                                       `json:"schemaVersion,omitempty"`
 }
 
 type HipConsentNotificationNotification struct {

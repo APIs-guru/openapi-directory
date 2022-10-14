@@ -2,5 +2,5 @@ package shared
 
 type GetStatementResultRequest struct {
 	ID        string  `json:"Id"`
-	NextToken *string `json:"NextToken"`
+	NextToken *string `json:"NextToken,omitempty"`
 }

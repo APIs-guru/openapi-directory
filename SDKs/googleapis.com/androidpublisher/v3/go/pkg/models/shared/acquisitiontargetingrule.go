@@ -1,5 +1,5 @@
 package shared
 
 type AcquisitionTargetingRule struct {
-	Scope *TargetingRuleScope `json:"scope"`
+	Scope *TargetingRuleScope `json:"scope,omitempty"`
 }

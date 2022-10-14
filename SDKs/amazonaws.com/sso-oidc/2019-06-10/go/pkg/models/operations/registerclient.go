@@ -17,7 +17,7 @@ type RegisterClientHeaders struct {
 type RegisterClientRequestBody struct {
 	ClientName string   `json:"clientName"`
 	ClientType string   `json:"clientType"`
-	Scopes     []string `json:"scopes"`
+	Scopes     []string `json:"scopes,omitempty"`
 }
 
 type RegisterClientRequest struct {

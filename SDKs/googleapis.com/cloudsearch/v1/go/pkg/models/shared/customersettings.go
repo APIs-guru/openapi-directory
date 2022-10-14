@@ -1,6 +1,6 @@
 package shared
 
 type CustomerSettings struct {
-	AuditLoggingSettings *AuditLoggingSettings `json:"auditLoggingSettings"`
-	VpcSettings          *VpcSettings          `json:"vpcSettings"`
+	AuditLoggingSettings *AuditLoggingSettings `json:"auditLoggingSettings,omitempty"`
+	VpcSettings          *VpcSettings          `json:"vpcSettings,omitempty"`
 }

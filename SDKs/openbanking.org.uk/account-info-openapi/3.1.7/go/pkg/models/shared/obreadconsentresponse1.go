@@ -42,17 +42,17 @@ const (
 type ObReadConsentResponse1Data struct {
 	ConsentID               string                                      `json:"ConsentId"`
 	CreationDateTime        time.Time                                   `json:"CreationDateTime"`
-	ExpirationDateTime      *time.Time                                  `json:"ExpirationDateTime"`
+	ExpirationDateTime      *time.Time                                  `json:"ExpirationDateTime,omitempty"`
 	Permissions             []ObReadConsentResponse1DataPermissionsEnum `json:"Permissions"`
 	Status                  ObReadConsentResponse1DataStatusEnum        `json:"Status"`
 	StatusUpdateDateTime    time.Time                                   `json:"StatusUpdateDateTime"`
-	TransactionFromDateTime *time.Time                                  `json:"TransactionFromDateTime"`
-	TransactionToDateTime   *time.Time                                  `json:"TransactionToDateTime"`
+	TransactionFromDateTime *time.Time                                  `json:"TransactionFromDateTime,omitempty"`
+	TransactionToDateTime   *time.Time                                  `json:"TransactionToDateTime,omitempty"`
 }
 
 type ObReadConsentResponse1 struct {
 	Data  ObReadConsentResponse1Data `json:"Data"`
-	Links *Links                     `json:"Links"`
-	Meta  *Meta                      `json:"Meta"`
+	Links *Links                     `json:"Links,omitempty"`
+	Meta  *Meta                      `json:"Meta,omitempty"`
 	Risk  map[string]interface{}     `json:"Risk"`
 }

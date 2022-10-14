@@ -1,7 +1,7 @@
 package shared
 
 type DescribeProvisionedProductPlanOutput struct {
-	NextPageToken                 *string                        `json:"NextPageToken"`
-	ProvisionedProductPlanDetails *ProvisionedProductPlanDetails `json:"ProvisionedProductPlanDetails"`
-	ResourceChanges               []ResourceChange               `json:"ResourceChanges"`
+	NextPageToken                 *string                        `json:"NextPageToken,omitempty"`
+	ProvisionedProductPlanDetails *ProvisionedProductPlanDetails `json:"ProvisionedProductPlanDetails,omitempty"`
+	ResourceChanges               []ResourceChange               `json:"ResourceChanges,omitempty"`
 }

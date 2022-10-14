@@ -15,10 +15,10 @@ const (
 )
 
 type AuthTokenCreate400ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     AuthTokenCreate400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -31,10 +31,10 @@ const (
 )
 
 type AuthTokenCreate401ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     AuthTokenCreate401ApplicationJSONTypeEnum `json:"type"`
 }
 

@@ -14,10 +14,10 @@ type EndpointChangePlaylistDetailsHeaders struct {
 }
 
 type EndpointChangePlaylistDetailsRequestBody struct {
-	Collaborative *bool   `json:"collaborative"`
-	Description   *string `json:"description"`
-	Name          *string `json:"name"`
-	Public        *bool   `json:"public"`
+	Collaborative *bool   `json:"collaborative,omitempty"`
+	Description   *string `json:"description,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	Public        *bool   `json:"public,omitempty"`
 }
 
 type EndpointChangePlaylistDetailsSecurity struct {

@@ -10,5 +10,5 @@ const (
 )
 
 type ChartOptions struct {
-	Mode *ChartOptionsModeEnum `json:"mode"`
+	Mode *ChartOptionsModeEnum `json:"mode,omitempty"`
 }

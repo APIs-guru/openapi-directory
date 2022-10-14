@@ -10,16 +10,16 @@ const (
 )
 
 type AlertPolicy struct {
-	AlertStrategy        *AlertStrategy           `json:"alertStrategy"`
-	Combiner             *AlertPolicyCombinerEnum `json:"combiner"`
-	Conditions           []Condition              `json:"conditions"`
-	CreationRecord       *MutationRecord          `json:"creationRecord"`
-	DisplayName          *string                  `json:"displayName"`
-	Documentation        *Documentation           `json:"documentation"`
-	Enabled              *bool                    `json:"enabled"`
-	MutationRecord       *MutationRecord          `json:"mutationRecord"`
-	Name                 *string                  `json:"name"`
-	NotificationChannels []string                 `json:"notificationChannels"`
-	UserLabels           map[string]string        `json:"userLabels"`
-	Validity             *Status                  `json:"validity"`
+	AlertStrategy        *AlertStrategy           `json:"alertStrategy,omitempty"`
+	Combiner             *AlertPolicyCombinerEnum `json:"combiner,omitempty"`
+	Conditions           []Condition              `json:"conditions,omitempty"`
+	CreationRecord       *MutationRecord          `json:"creationRecord,omitempty"`
+	DisplayName          *string                  `json:"displayName,omitempty"`
+	Documentation        *Documentation           `json:"documentation,omitempty"`
+	Enabled              *bool                    `json:"enabled,omitempty"`
+	MutationRecord       *MutationRecord          `json:"mutationRecord,omitempty"`
+	Name                 *string                  `json:"name,omitempty"`
+	NotificationChannels []string                 `json:"notificationChannels,omitempty"`
+	UserLabels           map[string]string        `json:"userLabels,omitempty"`
+	Validity             *Status                  `json:"validity,omitempty"`
 }

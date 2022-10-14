@@ -1,13 +1,13 @@
 package shared
 
 type AssessmentControl struct {
-	AssessmentReportEvidenceCount *int64               `json:"assessmentReportEvidenceCount"`
-	Comments                      []ControlComment     `json:"comments"`
-	Description                   *string              `json:"description"`
-	EvidenceCount                 *int64               `json:"evidenceCount"`
-	EvidenceSources               []string             `json:"evidenceSources"`
-	ID                            *string              `json:"id"`
-	Name                          *string              `json:"name"`
-	Response                      *ControlResponseEnum `json:"response"`
-	Status                        *ControlStatusEnum   `json:"status"`
+	AssessmentReportEvidenceCount *int64               `json:"assessmentReportEvidenceCount,omitempty"`
+	Comments                      []ControlComment     `json:"comments,omitempty"`
+	Description                   *string              `json:"description,omitempty"`
+	EvidenceCount                 *int64               `json:"evidenceCount,omitempty"`
+	EvidenceSources               []string             `json:"evidenceSources,omitempty"`
+	ID                            *string              `json:"id,omitempty"`
+	Name                          *string              `json:"name,omitempty"`
+	Response                      *ControlResponseEnum `json:"response,omitempty"`
+	Status                        *ControlStatusEnum   `json:"status,omitempty"`
 }

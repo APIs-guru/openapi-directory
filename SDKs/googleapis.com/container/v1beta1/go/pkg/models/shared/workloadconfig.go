@@ -11,5 +11,5 @@ const (
 )
 
 type WorkloadConfig struct {
-	AuditMode *WorkloadConfigAuditModeEnum `json:"auditMode"`
+	AuditMode *WorkloadConfigAuditModeEnum `json:"auditMode,omitempty"`
 }

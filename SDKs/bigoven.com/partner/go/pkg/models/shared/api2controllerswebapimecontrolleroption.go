@@ -1,6 +1,6 @@
 package shared
 
 type Api2ControllersWebAPIMeControllerOption struct {
-	Description *string `json:"Description"`
-	Key         *string `json:"Key"`
+	Description *string `json:"Description,omitempty"`
+	Key         *string `json:"Key,omitempty"`
 }

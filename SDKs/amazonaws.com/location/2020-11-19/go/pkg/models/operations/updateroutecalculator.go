@@ -27,8 +27,8 @@ const (
 )
 
 type UpdateRouteCalculatorRequestBody struct {
-	Description *string                                          `json:"Description"`
-	PricingPlan *UpdateRouteCalculatorRequestBodyPricingPlanEnum `json:"PricingPlan"`
+	Description *string                                          `json:"Description,omitempty"`
+	PricingPlan *UpdateRouteCalculatorRequestBodyPricingPlanEnum `json:"PricingPlan,omitempty"`
 }
 
 type UpdateRouteCalculatorRequest struct {

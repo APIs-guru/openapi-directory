@@ -5,11 +5,11 @@ import (
 )
 
 type ReplicationTaskAssessmentResult struct {
-	AssessmentResults                 *string    `json:"AssessmentResults"`
-	AssessmentResultsFile             *string    `json:"AssessmentResultsFile"`
-	AssessmentStatus                  *string    `json:"AssessmentStatus"`
-	ReplicationTaskArn                *string    `json:"ReplicationTaskArn"`
-	ReplicationTaskIdentifier         *string    `json:"ReplicationTaskIdentifier"`
-	ReplicationTaskLastAssessmentDate *time.Time `json:"ReplicationTaskLastAssessmentDate"`
-	S3ObjectURL                       *string    `json:"S3ObjectUrl"`
+	AssessmentResults                 *string    `json:"AssessmentResults,omitempty"`
+	AssessmentResultsFile             *string    `json:"AssessmentResultsFile,omitempty"`
+	AssessmentStatus                  *string    `json:"AssessmentStatus,omitempty"`
+	ReplicationTaskArn                *string    `json:"ReplicationTaskArn,omitempty"`
+	ReplicationTaskIdentifier         *string    `json:"ReplicationTaskIdentifier,omitempty"`
+	ReplicationTaskLastAssessmentDate *time.Time `json:"ReplicationTaskLastAssessmentDate,omitempty"`
+	S3ObjectURL                       *string    `json:"S3ObjectUrl,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type StartPipelineReprocessingResponse struct {
-	ReprocessingID *string `json:"reprocessingId"`
+	ReprocessingID *string `json:"reprocessingId,omitempty"`
 }

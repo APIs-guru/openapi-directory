@@ -1,6 +1,6 @@
 package shared
 
 type ListEntitiesResponse struct {
-	EntitySummaryList []EntitySummary `json:"EntitySummaryList"`
-	NextToken         *string         `json:"NextToken"`
+	EntitySummaryList []EntitySummary `json:"EntitySummaryList,omitempty"`
+	NextToken         *string         `json:"NextToken,omitempty"`
 }

@@ -2,19 +2,19 @@ package shared
 
 type HyperParameterTrainingJobDefinition struct {
 	AlgorithmSpecification                HyperParameterAlgorithmSpecification `json:"AlgorithmSpecification"`
-	CheckpointConfig                      *CheckpointConfig                    `json:"CheckpointConfig"`
-	DefinitionName                        *string                              `json:"DefinitionName"`
-	EnableInterContainerTrafficEncryption *bool                                `json:"EnableInterContainerTrafficEncryption"`
-	EnableManagedSpotTraining             *bool                                `json:"EnableManagedSpotTraining"`
-	EnableNetworkIsolation                *bool                                `json:"EnableNetworkIsolation"`
-	HyperParameterRanges                  *ParameterRanges                     `json:"HyperParameterRanges"`
-	InputDataConfig                       []Channel                            `json:"InputDataConfig"`
+	CheckpointConfig                      *CheckpointConfig                    `json:"CheckpointConfig,omitempty"`
+	DefinitionName                        *string                              `json:"DefinitionName,omitempty"`
+	EnableInterContainerTrafficEncryption *bool                                `json:"EnableInterContainerTrafficEncryption,omitempty"`
+	EnableManagedSpotTraining             *bool                                `json:"EnableManagedSpotTraining,omitempty"`
+	EnableNetworkIsolation                *bool                                `json:"EnableNetworkIsolation,omitempty"`
+	HyperParameterRanges                  *ParameterRanges                     `json:"HyperParameterRanges,omitempty"`
+	InputDataConfig                       []Channel                            `json:"InputDataConfig,omitempty"`
 	OutputDataConfig                      OutputDataConfig                     `json:"OutputDataConfig"`
 	ResourceConfig                        ResourceConfig                       `json:"ResourceConfig"`
-	RetryStrategy                         *RetryStrategy                       `json:"RetryStrategy"`
+	RetryStrategy                         *RetryStrategy                       `json:"RetryStrategy,omitempty"`
 	RoleArn                               string                               `json:"RoleArn"`
-	StaticHyperParameters                 map[string]string                    `json:"StaticHyperParameters"`
+	StaticHyperParameters                 map[string]string                    `json:"StaticHyperParameters,omitempty"`
 	StoppingCondition                     StoppingCondition                    `json:"StoppingCondition"`
-	TuningObjective                       *HyperParameterTuningJobObjective    `json:"TuningObjective"`
-	VpcConfig                             *VpcConfig                           `json:"VpcConfig"`
+	TuningObjective                       *HyperParameterTuningJobObjective    `json:"TuningObjective,omitempty"`
+	VpcConfig                             *VpcConfig                           `json:"VpcConfig,omitempty"`
 }

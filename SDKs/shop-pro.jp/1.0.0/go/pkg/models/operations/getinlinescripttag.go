@@ -32,18 +32,18 @@ const (
 )
 
 type GetInlineScriptTag200ApplicationJSONInlineScriptTag struct {
-	AccountID          *string                                                              `json:"account_id"`
-	DisplayScope       *GetInlineScriptTag200ApplicationJSONInlineScriptTagDisplayScopeEnum `json:"display_scope"`
-	ID                 *int64                                                               `json:"id"`
-	MakeDate           *int64                                                               `json:"make_date"`
-	OauthApplicationID *int64                                                               `json:"oauth_application_id"`
-	Script             *string                                                              `json:"script"`
-	TriggerEvent       *GetInlineScriptTag200ApplicationJSONInlineScriptTagTriggerEventEnum `json:"trigger_event"`
-	UpdateDate         *int64                                                               `json:"update_date"`
+	AccountID          *string                                                              `json:"account_id,omitempty"`
+	DisplayScope       *GetInlineScriptTag200ApplicationJSONInlineScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID                 *int64                                                               `json:"id,omitempty"`
+	MakeDate           *int64                                                               `json:"make_date,omitempty"`
+	OauthApplicationID *int64                                                               `json:"oauth_application_id,omitempty"`
+	Script             *string                                                              `json:"script,omitempty"`
+	TriggerEvent       *GetInlineScriptTag200ApplicationJSONInlineScriptTagTriggerEventEnum `json:"trigger_event,omitempty"`
+	UpdateDate         *int64                                                               `json:"update_date,omitempty"`
 }
 
 type GetInlineScriptTag200ApplicationJSON struct {
-	InlineScriptTag *GetInlineScriptTag200ApplicationJSONInlineScriptTag `json:"inline_script_tag"`
+	InlineScriptTag *GetInlineScriptTag200ApplicationJSONInlineScriptTag `json:"inline_script_tag,omitempty"`
 }
 
 type GetInlineScriptTagResponse struct {

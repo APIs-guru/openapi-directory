@@ -1,7 +1,7 @@
 package shared
 
 type SimpleScopeTerm struct {
-	Comparator *JobComparatorEnum  `json:"comparator"`
-	Key        *ScopeFilterKeyEnum `json:"key"`
-	Values     []string            `json:"values"`
+	Comparator *JobComparatorEnum  `json:"comparator,omitempty"`
+	Key        *ScopeFilterKeyEnum `json:"key,omitempty"`
+	Values     []string            `json:"values,omitempty"`
 }

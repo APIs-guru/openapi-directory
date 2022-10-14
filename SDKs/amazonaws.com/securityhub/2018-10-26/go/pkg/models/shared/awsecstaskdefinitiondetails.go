@@ -1,18 +1,18 @@
 package shared
 
 type AwsEcsTaskDefinitionDetails struct {
-	ContainerDefinitions    []AwsEcsTaskDefinitionContainerDefinitionsDetails  `json:"ContainerDefinitions"`
-	CPU                     *string                                            `json:"Cpu"`
-	ExecutionRoleArn        *string                                            `json:"ExecutionRoleArn"`
-	Family                  *string                                            `json:"Family"`
-	InferenceAccelerators   []AwsEcsTaskDefinitionInferenceAcceleratorsDetails `json:"InferenceAccelerators"`
-	IpcMode                 *string                                            `json:"IpcMode"`
-	Memory                  *string                                            `json:"Memory"`
-	NetworkMode             *string                                            `json:"NetworkMode"`
-	PidMode                 *string                                            `json:"PidMode"`
-	PlacementConstraints    []AwsEcsTaskDefinitionPlacementConstraintsDetails  `json:"PlacementConstraints"`
-	ProxyConfiguration      *AwsEcsTaskDefinitionProxyConfigurationDetails     `json:"ProxyConfiguration"`
-	RequiresCompatibilities []string                                           `json:"RequiresCompatibilities"`
-	TaskRoleArn             *string                                            `json:"TaskRoleArn"`
-	Volumes                 []AwsEcsTaskDefinitionVolumesDetails               `json:"Volumes"`
+	ContainerDefinitions    []AwsEcsTaskDefinitionContainerDefinitionsDetails  `json:"ContainerDefinitions,omitempty"`
+	CPU                     *string                                            `json:"Cpu,omitempty"`
+	ExecutionRoleArn        *string                                            `json:"ExecutionRoleArn,omitempty"`
+	Family                  *string                                            `json:"Family,omitempty"`
+	InferenceAccelerators   []AwsEcsTaskDefinitionInferenceAcceleratorsDetails `json:"InferenceAccelerators,omitempty"`
+	IpcMode                 *string                                            `json:"IpcMode,omitempty"`
+	Memory                  *string                                            `json:"Memory,omitempty"`
+	NetworkMode             *string                                            `json:"NetworkMode,omitempty"`
+	PidMode                 *string                                            `json:"PidMode,omitempty"`
+	PlacementConstraints    []AwsEcsTaskDefinitionPlacementConstraintsDetails  `json:"PlacementConstraints,omitempty"`
+	ProxyConfiguration      *AwsEcsTaskDefinitionProxyConfigurationDetails     `json:"ProxyConfiguration,omitempty"`
+	RequiresCompatibilities []string                                           `json:"RequiresCompatibilities,omitempty"`
+	TaskRoleArn             *string                                            `json:"TaskRoleArn,omitempty"`
+	Volumes                 []AwsEcsTaskDefinitionVolumesDetails               `json:"Volumes,omitempty"`
 }

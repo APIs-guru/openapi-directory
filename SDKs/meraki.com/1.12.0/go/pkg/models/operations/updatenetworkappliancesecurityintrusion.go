@@ -21,15 +21,15 @@ const (
 )
 
 type UpdateNetworkApplianceSecurityIntrusionRequestBodyProtectedNetworks struct {
-	ExcludedCidr []string `json:"excludedCidr"`
-	IncludedCidr []string `json:"includedCidr"`
-	UseDefault   *bool    `json:"useDefault"`
+	ExcludedCidr []string `json:"excludedCidr,omitempty"`
+	IncludedCidr []string `json:"includedCidr,omitempty"`
+	UseDefault   *bool    `json:"useDefault,omitempty"`
 }
 
 type UpdateNetworkApplianceSecurityIntrusionRequestBody struct {
-	IdsRulesets       *UpdateNetworkApplianceSecurityIntrusionRequestBodyIdsRulesetsEnum   `json:"idsRulesets"`
-	Mode              *UpdateNetworkApplianceSecurityIntrusionRequestBodyModeEnum          `json:"mode"`
-	ProtectedNetworks *UpdateNetworkApplianceSecurityIntrusionRequestBodyProtectedNetworks `json:"protectedNetworks"`
+	IdsRulesets       *UpdateNetworkApplianceSecurityIntrusionRequestBodyIdsRulesetsEnum   `json:"idsRulesets,omitempty"`
+	Mode              *UpdateNetworkApplianceSecurityIntrusionRequestBodyModeEnum          `json:"mode,omitempty"`
+	ProtectedNetworks *UpdateNetworkApplianceSecurityIntrusionRequestBodyProtectedNetworks `json:"protectedNetworks,omitempty"`
 }
 
 type UpdateNetworkApplianceSecurityIntrusionRequest struct {

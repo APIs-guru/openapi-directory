@@ -23,19 +23,19 @@ type GetAnnotationLayerRelatedColumnNameRequest struct {
 }
 
 type GetAnnotationLayerRelatedColumnName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerRelatedColumnName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerRelatedColumnName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerRelatedColumnName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerRelatedColumnNameResponse struct {

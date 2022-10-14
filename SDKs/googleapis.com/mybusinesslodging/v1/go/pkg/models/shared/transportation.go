@@ -64,18 +64,18 @@ const (
 )
 
 type Transportation struct {
-	AirportShuttle                 *bool                                             `json:"airportShuttle"`
-	AirportShuttleException        *TransportationAirportShuttleExceptionEnum        `json:"airportShuttleException"`
-	CarRentalOnProperty            *bool                                             `json:"carRentalOnProperty"`
-	CarRentalOnPropertyException   *TransportationCarRentalOnPropertyExceptionEnum   `json:"carRentalOnPropertyException"`
-	FreeAirportShuttle             *bool                                             `json:"freeAirportShuttle"`
-	FreeAirportShuttleException    *TransportationFreeAirportShuttleExceptionEnum    `json:"freeAirportShuttleException"`
-	FreePrivateCarService          *bool                                             `json:"freePrivateCarService"`
-	FreePrivateCarServiceException *TransportationFreePrivateCarServiceExceptionEnum `json:"freePrivateCarServiceException"`
-	LocalShuttle                   *bool                                             `json:"localShuttle"`
-	LocalShuttleException          *TransportationLocalShuttleExceptionEnum          `json:"localShuttleException"`
-	PrivateCarService              *bool                                             `json:"privateCarService"`
-	PrivateCarServiceException     *TransportationPrivateCarServiceExceptionEnum     `json:"privateCarServiceException"`
-	Transfer                       *bool                                             `json:"transfer"`
-	TransferException              *TransportationTransferExceptionEnum              `json:"transferException"`
+	AirportShuttle                 *bool                                             `json:"airportShuttle,omitempty"`
+	AirportShuttleException        *TransportationAirportShuttleExceptionEnum        `json:"airportShuttleException,omitempty"`
+	CarRentalOnProperty            *bool                                             `json:"carRentalOnProperty,omitempty"`
+	CarRentalOnPropertyException   *TransportationCarRentalOnPropertyExceptionEnum   `json:"carRentalOnPropertyException,omitempty"`
+	FreeAirportShuttle             *bool                                             `json:"freeAirportShuttle,omitempty"`
+	FreeAirportShuttleException    *TransportationFreeAirportShuttleExceptionEnum    `json:"freeAirportShuttleException,omitempty"`
+	FreePrivateCarService          *bool                                             `json:"freePrivateCarService,omitempty"`
+	FreePrivateCarServiceException *TransportationFreePrivateCarServiceExceptionEnum `json:"freePrivateCarServiceException,omitempty"`
+	LocalShuttle                   *bool                                             `json:"localShuttle,omitempty"`
+	LocalShuttleException          *TransportationLocalShuttleExceptionEnum          `json:"localShuttleException,omitempty"`
+	PrivateCarService              *bool                                             `json:"privateCarService,omitempty"`
+	PrivateCarServiceException     *TransportationPrivateCarServiceExceptionEnum     `json:"privateCarServiceException,omitempty"`
+	Transfer                       *bool                                             `json:"transfer,omitempty"`
+	TransferException              *TransportationTransferExceptionEnum              `json:"transferException,omitempty"`
 }

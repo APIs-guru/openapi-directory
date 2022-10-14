@@ -1,8 +1,8 @@
 package shared
 
 type CreateClusterRequest struct {
-	Cluster   *Cluster `json:"cluster"`
-	Parent    *string  `json:"parent"`
-	ProjectID *string  `json:"projectId"`
-	Zone      *string  `json:"zone"`
+	Cluster   *Cluster `json:"cluster,omitempty"`
+	Parent    *string  `json:"parent,omitempty"`
+	ProjectID *string  `json:"projectId,omitempty"`
+	Zone      *string  `json:"zone,omitempty"`
 }

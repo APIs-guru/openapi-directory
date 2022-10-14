@@ -14,13 +14,13 @@ const (
 )
 
 type UpdateNetworkSwitchQosRuleRequestBody struct {
-	Dscp         *int64                                             `json:"dscp"`
-	DstPort      *int64                                             `json:"dstPort"`
-	DstPortRange *string                                            `json:"dstPortRange"`
-	Protocol     *UpdateNetworkSwitchQosRuleRequestBodyProtocolEnum `json:"protocol"`
-	SrcPort      *int64                                             `json:"srcPort"`
-	SrcPortRange *string                                            `json:"srcPortRange"`
-	Vlan         *int64                                             `json:"vlan"`
+	Dscp         *int64                                             `json:"dscp,omitempty"`
+	DstPort      *int64                                             `json:"dstPort,omitempty"`
+	DstPortRange *string                                            `json:"dstPortRange,omitempty"`
+	Protocol     *UpdateNetworkSwitchQosRuleRequestBodyProtocolEnum `json:"protocol,omitempty"`
+	SrcPort      *int64                                             `json:"srcPort,omitempty"`
+	SrcPortRange *string                                            `json:"srcPortRange,omitempty"`
+	Vlan         *int64                                             `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkSwitchQosRuleRequest struct {

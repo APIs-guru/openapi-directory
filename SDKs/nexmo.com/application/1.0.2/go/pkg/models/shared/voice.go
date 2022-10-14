@@ -21,5 +21,5 @@ type VoiceWebhooks struct {
 }
 
 type Voice struct {
-	Webhooks []VoiceWebhooks `json:"webhooks"`
+	Webhooks []VoiceWebhooks `json:"webhooks,omitempty"`
 }

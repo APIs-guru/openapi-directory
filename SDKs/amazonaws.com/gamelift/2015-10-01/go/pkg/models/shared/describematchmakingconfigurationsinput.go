@@ -1,8 +1,8 @@
 package shared
 
 type DescribeMatchmakingConfigurationsInput struct {
-	Limit       *int64   `json:"Limit"`
-	Names       []string `json:"Names"`
-	NextToken   *string  `json:"NextToken"`
-	RuleSetName *string  `json:"RuleSetName"`
+	Limit       *int64   `json:"Limit,omitempty"`
+	Names       []string `json:"Names,omitempty"`
+	NextToken   *string  `json:"NextToken,omitempty"`
+	RuleSetName *string  `json:"RuleSetName,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type AcceptSharedDirectoryResult struct {
-	SharedDirectory *SharedDirectory `json:"SharedDirectory"`
+	SharedDirectory *SharedDirectory `json:"SharedDirectory,omitempty"`
 }

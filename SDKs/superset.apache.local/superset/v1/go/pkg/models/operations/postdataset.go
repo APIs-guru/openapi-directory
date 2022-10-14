@@ -14,24 +14,24 @@ type PostDatasetRequest struct {
 }
 
 type PostDataset201ApplicationJSON struct {
-	ID     *float64                   `json:"id"`
-	Result *shared.DatasetRestAPIPost `json:"result"`
+	ID     *float64                   `json:"id,omitempty"`
+	Result *shared.DatasetRestAPIPost `json:"result,omitempty"`
 }
 
 type PostDataset400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDataset401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDataset422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDataset500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatasetResponse struct {

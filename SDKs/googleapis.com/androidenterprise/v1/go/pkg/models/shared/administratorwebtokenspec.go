@@ -9,12 +9,12 @@ const (
 )
 
 type AdministratorWebTokenSpec struct {
-	ManagedConfigurations *AdministratorWebTokenSpecManagedConfigurations `json:"managedConfigurations"`
-	Parent                *string                                         `json:"parent"`
-	Permission            []AdministratorWebTokenSpecPermissionEnum       `json:"permission"`
-	PlaySearch            *AdministratorWebTokenSpecPlaySearch            `json:"playSearch"`
-	PrivateApps           *AdministratorWebTokenSpecPrivateApps           `json:"privateApps"`
-	StoreBuilder          *AdministratorWebTokenSpecStoreBuilder          `json:"storeBuilder"`
-	WebApps               *AdministratorWebTokenSpecWebApps               `json:"webApps"`
-	ZeroTouch             *AdministratorWebTokenSpecZeroTouch             `json:"zeroTouch"`
+	ManagedConfigurations *AdministratorWebTokenSpecManagedConfigurations `json:"managedConfigurations,omitempty"`
+	Parent                *string                                         `json:"parent,omitempty"`
+	Permission            []AdministratorWebTokenSpecPermissionEnum       `json:"permission,omitempty"`
+	PlaySearch            *AdministratorWebTokenSpecPlaySearch            `json:"playSearch,omitempty"`
+	PrivateApps           *AdministratorWebTokenSpecPrivateApps           `json:"privateApps,omitempty"`
+	StoreBuilder          *AdministratorWebTokenSpecStoreBuilder          `json:"storeBuilder,omitempty"`
+	WebApps               *AdministratorWebTokenSpecWebApps               `json:"webApps,omitempty"`
+	ZeroTouch             *AdministratorWebTokenSpecZeroTouch             `json:"zeroTouch,omitempty"`
 }

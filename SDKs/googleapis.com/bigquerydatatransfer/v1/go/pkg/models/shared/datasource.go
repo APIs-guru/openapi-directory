@@ -26,22 +26,22 @@ const (
 )
 
 type DataSource struct {
-	AuthorizationType            *DataSourceAuthorizationTypeEnum `json:"authorizationType"`
-	ClientID                     *string                          `json:"clientId"`
-	DataRefreshType              *DataSourceDataRefreshTypeEnum   `json:"dataRefreshType"`
-	DataSourceID                 *string                          `json:"dataSourceId"`
-	DefaultDataRefreshWindowDays *int32                           `json:"defaultDataRefreshWindowDays"`
-	DefaultSchedule              *string                          `json:"defaultSchedule"`
-	Description                  *string                          `json:"description"`
-	DisplayName                  *string                          `json:"displayName"`
-	HelpURL                      *string                          `json:"helpUrl"`
-	ManualRunsDisabled           *bool                            `json:"manualRunsDisabled"`
-	MinimumScheduleInterval      *string                          `json:"minimumScheduleInterval"`
-	Name                         *string                          `json:"name"`
-	Parameters                   []DataSourceParameter            `json:"parameters"`
-	Scopes                       []string                         `json:"scopes"`
-	SupportsCustomSchedule       *bool                            `json:"supportsCustomSchedule"`
-	SupportsMultipleTransfers    *bool                            `json:"supportsMultipleTransfers"`
-	TransferType                 *DataSourceTransferTypeEnum      `json:"transferType"`
-	UpdateDeadlineSeconds        *int32                           `json:"updateDeadlineSeconds"`
+	AuthorizationType            *DataSourceAuthorizationTypeEnum `json:"authorizationType,omitempty"`
+	ClientID                     *string                          `json:"clientId,omitempty"`
+	DataRefreshType              *DataSourceDataRefreshTypeEnum   `json:"dataRefreshType,omitempty"`
+	DataSourceID                 *string                          `json:"dataSourceId,omitempty"`
+	DefaultDataRefreshWindowDays *int32                           `json:"defaultDataRefreshWindowDays,omitempty"`
+	DefaultSchedule              *string                          `json:"defaultSchedule,omitempty"`
+	Description                  *string                          `json:"description,omitempty"`
+	DisplayName                  *string                          `json:"displayName,omitempty"`
+	HelpURL                      *string                          `json:"helpUrl,omitempty"`
+	ManualRunsDisabled           *bool                            `json:"manualRunsDisabled,omitempty"`
+	MinimumScheduleInterval      *string                          `json:"minimumScheduleInterval,omitempty"`
+	Name                         *string                          `json:"name,omitempty"`
+	Parameters                   []DataSourceParameter            `json:"parameters,omitempty"`
+	Scopes                       []string                         `json:"scopes,omitempty"`
+	SupportsCustomSchedule       *bool                            `json:"supportsCustomSchedule,omitempty"`
+	SupportsMultipleTransfers    *bool                            `json:"supportsMultipleTransfers,omitempty"`
+	TransferType                 *DataSourceTransferTypeEnum      `json:"transferType,omitempty"`
+	UpdateDeadlineSeconds        *int32                           `json:"updateDeadlineSeconds,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type MavenRepositoryConfig struct {
-	AllowSnapshotOverwrites *bool                                   `json:"allowSnapshotOverwrites"`
-	VersionPolicy           *MavenRepositoryConfigVersionPolicyEnum `json:"versionPolicy"`
+	AllowSnapshotOverwrites *bool                                   `json:"allowSnapshotOverwrites,omitempty"`
+	VersionPolicy           *MavenRepositoryConfigVersionPolicyEnum `json:"versionPolicy,omitempty"`
 }

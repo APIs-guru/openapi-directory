@@ -2,5 +2,5 @@ package shared
 
 type ListAssessmentTemplatesResponse struct {
 	AssessmentTemplateArns []string `json:"assessmentTemplateArns"`
-	NextToken              *string  `json:"nextToken"`
+	NextToken              *string  `json:"nextToken,omitempty"`
 }

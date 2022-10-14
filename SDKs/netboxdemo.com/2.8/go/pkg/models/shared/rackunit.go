@@ -20,8 +20,8 @@ type RackUnitFaceFace struct {
 }
 
 type RackUnit struct {
-	Device *NestedDevice     `json:"device"`
-	Face   *RackUnitFaceFace `json:"face"`
-	ID     *int64            `json:"id"`
-	Name   *string           `json:"name"`
+	Device *NestedDevice     `json:"device,omitempty"`
+	Face   *RackUnitFaceFace `json:"face,omitempty"`
+	ID     *int64            `json:"id,omitempty"`
+	Name   *string           `json:"name,omitempty"`
 }

@@ -34,13 +34,13 @@ type UpdateCaCertificateHeaders struct {
 }
 
 type UpdateCaCertificateRequestBodyRegistrationConfig struct {
-	RoleArn      *string `json:"roleArn"`
-	TemplateBody *string `json:"templateBody"`
+	RoleArn      *string `json:"roleArn,omitempty"`
+	TemplateBody *string `json:"templateBody,omitempty"`
 }
 
 type UpdateCaCertificateRequestBody struct {
-	RegistrationConfig     *UpdateCaCertificateRequestBodyRegistrationConfig `json:"registrationConfig"`
-	RemoveAutoRegistration *bool                                             `json:"removeAutoRegistration"`
+	RegistrationConfig     *UpdateCaCertificateRequestBodyRegistrationConfig `json:"registrationConfig,omitempty"`
+	RemoveAutoRegistration *bool                                             `json:"removeAutoRegistration,omitempty"`
 }
 
 type UpdateCaCertificateRequest struct {

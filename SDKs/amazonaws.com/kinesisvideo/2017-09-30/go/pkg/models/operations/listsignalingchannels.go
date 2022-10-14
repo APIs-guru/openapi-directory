@@ -20,14 +20,14 @@ type ListSignalingChannelsHeaders struct {
 }
 
 type ListSignalingChannelsRequestBodyChannelNameCondition struct {
-	ComparisonOperator *shared.ComparisonOperatorEnum `json:"ComparisonOperator"`
-	ComparisonValue    *string                        `json:"ComparisonValue"`
+	ComparisonOperator *shared.ComparisonOperatorEnum `json:"ComparisonOperator,omitempty"`
+	ComparisonValue    *string                        `json:"ComparisonValue,omitempty"`
 }
 
 type ListSignalingChannelsRequestBody struct {
-	ChannelNameCondition *ListSignalingChannelsRequestBodyChannelNameCondition `json:"ChannelNameCondition"`
-	MaxResults           *int64                                                `json:"MaxResults"`
-	NextToken            *string                                               `json:"NextToken"`
+	ChannelNameCondition *ListSignalingChannelsRequestBodyChannelNameCondition `json:"ChannelNameCondition,omitempty"`
+	MaxResults           *int64                                                `json:"MaxResults,omitempty"`
+	NextToken            *string                                               `json:"NextToken,omitempty"`
 }
 
 type ListSignalingChannelsRequest struct {

@@ -5,13 +5,13 @@ import (
 )
 
 type TflAPIPresentationEntitiesLineStatus struct {
-	Created                   *time.Time                                 `json:"created"`
-	Disruption                *TflAPIPresentationEntitiesDisruption      `json:"disruption"`
-	ID                        *int32                                     `json:"id"`
-	LineID                    *string                                    `json:"lineId"`
-	Modified                  *time.Time                                 `json:"modified"`
-	Reason                    *string                                    `json:"reason"`
-	StatusSeverity            *int32                                     `json:"statusSeverity"`
-	StatusSeverityDescription *string                                    `json:"statusSeverityDescription"`
-	ValidityPeriods           []TflAPIPresentationEntitiesValidityPeriod `json:"validityPeriods"`
+	Created                   *time.Time                                 `json:"created,omitempty"`
+	Disruption                *TflAPIPresentationEntitiesDisruption      `json:"disruption,omitempty"`
+	ID                        *int32                                     `json:"id,omitempty"`
+	LineID                    *string                                    `json:"lineId,omitempty"`
+	Modified                  *time.Time                                 `json:"modified,omitempty"`
+	Reason                    *string                                    `json:"reason,omitempty"`
+	StatusSeverity            *int32                                     `json:"statusSeverity,omitempty"`
+	StatusSeverityDescription *string                                    `json:"statusSeverityDescription,omitempty"`
+	ValidityPeriods           []TflAPIPresentationEntitiesValidityPeriod `json:"validityPeriods,omitempty"`
 }

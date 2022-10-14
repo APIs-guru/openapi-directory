@@ -2,9 +2,9 @@ package shared
 
 type InstanceFleetConfig struct {
 	InstanceFleetType      InstanceFleetTypeEnum                    `json:"InstanceFleetType"`
-	InstanceTypeConfigs    []InstanceTypeConfig                     `json:"InstanceTypeConfigs"`
-	LaunchSpecifications   *InstanceFleetProvisioningSpecifications `json:"LaunchSpecifications"`
-	Name                   *string                                  `json:"Name"`
-	TargetOnDemandCapacity *int64                                   `json:"TargetOnDemandCapacity"`
-	TargetSpotCapacity     *int64                                   `json:"TargetSpotCapacity"`
+	InstanceTypeConfigs    []InstanceTypeConfig                     `json:"InstanceTypeConfigs,omitempty"`
+	LaunchSpecifications   *InstanceFleetProvisioningSpecifications `json:"LaunchSpecifications,omitempty"`
+	Name                   *string                                  `json:"Name,omitempty"`
+	TargetOnDemandCapacity *int64                                   `json:"TargetOnDemandCapacity,omitempty"`
+	TargetSpotCapacity     *int64                                   `json:"TargetSpotCapacity,omitempty"`
 }

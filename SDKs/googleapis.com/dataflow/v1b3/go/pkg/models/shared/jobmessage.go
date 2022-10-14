@@ -12,8 +12,8 @@ const (
 )
 
 type JobMessage struct {
-	ID                *string                          `json:"id"`
-	MessageImportance *JobMessageMessageImportanceEnum `json:"messageImportance"`
-	MessageText       *string                          `json:"messageText"`
-	Time              *string                          `json:"time"`
+	ID                *string                          `json:"id,omitempty"`
+	MessageImportance *JobMessageMessageImportanceEnum `json:"messageImportance,omitempty"`
+	MessageText       *string                          `json:"messageText,omitempty"`
+	Time              *string                          `json:"time,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type IntegrationDetails struct {
-	Details         *string `json:"details"`
-	IntegrationCode *string `json:"integrationCode"`
+	Details         *string `json:"details,omitempty"`
+	IntegrationCode *string `json:"integrationCode,omitempty"`
 }

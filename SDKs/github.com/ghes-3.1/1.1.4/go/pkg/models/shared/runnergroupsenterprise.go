@@ -6,6 +6,6 @@ type RunnerGroupsEnterprise struct {
 	ID                       float64 `json:"id"`
 	Name                     string  `json:"name"`
 	RunnersURL               string  `json:"runners_url"`
-	SelectedOrganizationsURL *string `json:"selected_organizations_url"`
+	SelectedOrganizationsURL *string `json:"selected_organizations_url,omitempty"`
 	Visibility               string  `json:"visibility"`
 }

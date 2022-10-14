@@ -1,6 +1,6 @@
 package shared
 
 type GetServiceRoleForAccountResponse struct {
-	AssociatedAt *string `json:"AssociatedAt"`
-	RoleArn      *string `json:"RoleArn"`
+	AssociatedAt *string `json:"AssociatedAt,omitempty"`
+	RoleArn      *string `json:"RoleArn,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListTopicsDetectionJobsResponse struct {
-	NextToken                        *string                        `json:"NextToken"`
-	TopicsDetectionJobPropertiesList []TopicsDetectionJobProperties `json:"TopicsDetectionJobPropertiesList"`
+	NextToken                        *string                        `json:"NextToken,omitempty"`
+	TopicsDetectionJobPropertiesList []TopicsDetectionJobProperties `json:"TopicsDetectionJobPropertiesList,omitempty"`
 }

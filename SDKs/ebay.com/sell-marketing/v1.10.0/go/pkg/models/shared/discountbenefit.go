@@ -1,8 +1,8 @@
 package shared
 
 type DiscountBenefit struct {
-	AmountOffItem      *Amount `json:"amountOffItem"`
-	AmountOffOrder     *Amount `json:"amountOffOrder"`
-	PercentageOffItem  *string `json:"percentageOffItem"`
-	PercentageOffOrder *string `json:"percentageOffOrder"`
+	AmountOffItem      *Amount `json:"amountOffItem,omitempty"`
+	AmountOffOrder     *Amount `json:"amountOffOrder,omitempty"`
+	PercentageOffItem  *string `json:"percentageOffItem,omitempty"`
+	PercentageOffOrder *string `json:"percentageOffOrder,omitempty"`
 }

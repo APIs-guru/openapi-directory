@@ -1,5 +1,5 @@
 package shared
 
 type AutoMlPartialFailureReason struct {
-	PartialFailureMessage *string `json:"PartialFailureMessage"`
+	PartialFailureMessage *string `json:"PartialFailureMessage,omitempty"`
 }

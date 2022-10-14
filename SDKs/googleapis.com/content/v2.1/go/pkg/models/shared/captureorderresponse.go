@@ -9,5 +9,5 @@ const (
 )
 
 type CaptureOrderResponse struct {
-	ExecutionStatus *CaptureOrderResponseExecutionStatusEnum `json:"executionStatus"`
+	ExecutionStatus *CaptureOrderResponseExecutionStatusEnum `json:"executionStatus,omitempty"`
 }

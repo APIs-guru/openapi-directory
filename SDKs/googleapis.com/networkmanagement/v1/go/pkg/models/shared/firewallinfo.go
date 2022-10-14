@@ -12,14 +12,14 @@ const (
 )
 
 type FirewallInfo struct {
-	Action                *string                           `json:"action"`
-	Direction             *string                           `json:"direction"`
-	DisplayName           *string                           `json:"displayName"`
-	FirewallRuleType      *FirewallInfoFirewallRuleTypeEnum `json:"firewallRuleType"`
-	NetworkURI            *string                           `json:"networkUri"`
-	Policy                *string                           `json:"policy"`
-	Priority              *int32                            `json:"priority"`
-	TargetServiceAccounts []string                          `json:"targetServiceAccounts"`
-	TargetTags            []string                          `json:"targetTags"`
-	URI                   *string                           `json:"uri"`
+	Action                *string                           `json:"action,omitempty"`
+	Direction             *string                           `json:"direction,omitempty"`
+	DisplayName           *string                           `json:"displayName,omitempty"`
+	FirewallRuleType      *FirewallInfoFirewallRuleTypeEnum `json:"firewallRuleType,omitempty"`
+	NetworkURI            *string                           `json:"networkUri,omitempty"`
+	Policy                *string                           `json:"policy,omitempty"`
+	Priority              *int32                            `json:"priority,omitempty"`
+	TargetServiceAccounts []string                          `json:"targetServiceAccounts,omitempty"`
+	TargetTags            []string                          `json:"targetTags,omitempty"`
+	URI                   *string                           `json:"uri,omitempty"`
 }

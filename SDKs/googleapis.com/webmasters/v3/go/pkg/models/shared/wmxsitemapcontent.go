@@ -1,7 +1,7 @@
 package shared
 
 type WmxSitemapContent struct {
-	Indexed   *string `json:"indexed"`
-	Submitted *string `json:"submitted"`
-	Type      *string `json:"type"`
+	Indexed   *string `json:"indexed,omitempty"`
+	Submitted *string `json:"submitted,omitempty"`
+	Type      *string `json:"type,omitempty"`
 }

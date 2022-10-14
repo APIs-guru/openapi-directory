@@ -1,9 +1,9 @@
 package shared
 
 type Links struct {
-	First *FirstHref `json:"first"`
-	Last  *LastHref  `json:"last"`
-	Next  *NextHref  `json:"next"`
-	Prev  *PrevHref  `json:"prev"`
-	Self  *SelfHref  `json:"self"`
+	First *FirstHref `json:"first,omitempty"`
+	Last  *LastHref  `json:"last,omitempty"`
+	Next  *NextHref  `json:"next,omitempty"`
+	Prev  *PrevHref  `json:"prev,omitempty"`
+	Self  *SelfHref  `json:"self,omitempty"`
 }

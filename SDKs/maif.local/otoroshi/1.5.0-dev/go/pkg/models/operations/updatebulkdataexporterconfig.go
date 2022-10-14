@@ -20,9 +20,9 @@ const (
 )
 
 type UpdateBulkDataExporterConfig200ApplicationJSON struct {
-	ID      *bool                                                     `json:"id"`
-	Status  *UpdateBulkDataExporterConfig200ApplicationJSONStatusEnum `json:"status"`
-	Updated *bool                                                     `json:"updated"`
+	ID      *bool                                                     `json:"id,omitempty"`
+	Status  *UpdateBulkDataExporterConfig200ApplicationJSONStatusEnum `json:"status,omitempty"`
+	Updated *bool                                                     `json:"updated,omitempty"`
 }
 
 type UpdateBulkDataExporterConfigResponse struct {

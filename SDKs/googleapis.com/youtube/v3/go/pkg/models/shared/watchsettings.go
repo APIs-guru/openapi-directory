@@ -1,7 +1,7 @@
 package shared
 
 type WatchSettings struct {
-	BackgroundColor    *string `json:"backgroundColor"`
-	FeaturedPlaylistID *string `json:"featuredPlaylistId"`
-	TextColor          *string `json:"textColor"`
+	BackgroundColor    *string `json:"backgroundColor,omitempty"`
+	FeaturedPlaylistID *string `json:"featuredPlaylistId,omitempty"`
+	TextColor          *string `json:"textColor,omitempty"`
 }

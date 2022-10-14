@@ -92,7 +92,7 @@ type SearchTasksForWorkspaceRequest struct {
 }
 
 type SearchTasksForWorkspace200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data"`
+	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type SearchTasksForWorkspaceResponse struct {

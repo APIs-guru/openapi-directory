@@ -1,7 +1,7 @@
 package shared
 
 type PushItemRequest struct {
-	ConnectorName *string       `json:"connectorName"`
-	DebugOptions  *DebugOptions `json:"debugOptions"`
-	Item          *PushItem     `json:"item"`
+	ConnectorName *string       `json:"connectorName,omitempty"`
+	DebugOptions  *DebugOptions `json:"debugOptions,omitempty"`
+	Item          *PushItem     `json:"item,omitempty"`
 }

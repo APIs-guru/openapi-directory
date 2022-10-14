@@ -8,6 +8,6 @@ const (
 )
 
 type DynamicGroupQuery struct {
-	Query        *string                            `json:"query"`
-	ResourceType *DynamicGroupQueryResourceTypeEnum `json:"resourceType"`
+	Query        *string                            `json:"query,omitempty"`
+	ResourceType *DynamicGroupQueryResourceTypeEnum `json:"resourceType,omitempty"`
 }

@@ -13,8 +13,8 @@ const (
 )
 
 type FourHundredAndOneUnauthorized struct {
-	Code       *FourHundredAndOneUnauthorizedCodeEnum    `json:"code"`
-	Message    *FourHundredAndOneUnauthorizedMessageEnum `json:"message"`
-	Timestamp  *string                                   `json:"timestamp"`
-	TrackingID *string                                   `json:"trackingId"`
+	Code       *FourHundredAndOneUnauthorizedCodeEnum    `json:"code,omitempty"`
+	Message    *FourHundredAndOneUnauthorizedMessageEnum `json:"message,omitempty"`
+	Timestamp  *string                                   `json:"timestamp,omitempty"`
+	TrackingID *string                                   `json:"trackingId,omitempty"`
 }

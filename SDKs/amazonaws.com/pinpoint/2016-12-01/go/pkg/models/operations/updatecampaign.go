@@ -20,23 +20,23 @@ type UpdateCampaignHeaders struct {
 }
 
 type UpdateCampaignRequestBodyWriteCampaignRequest struct {
-	AdditionalTreatments        []shared.WriteTreatmentResource     `json:"AdditionalTreatments"`
-	CustomDeliveryConfiguration *shared.CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration"`
-	Description                 *string                             `json:"Description"`
-	HoldoutPercent              *int64                              `json:"HoldoutPercent"`
-	Hook                        *shared.CampaignHook                `json:"Hook"`
-	IsPaused                    *bool                               `json:"IsPaused"`
-	Limits                      *shared.CampaignLimits              `json:"Limits"`
-	MessageConfiguration        *shared.MessageConfiguration        `json:"MessageConfiguration"`
-	Name                        *string                             `json:"Name"`
-	Priority                    *int64                              `json:"Priority"`
-	Schedule                    *shared.Schedule                    `json:"Schedule"`
-	SegmentID                   *string                             `json:"SegmentId"`
-	SegmentVersion              *int64                              `json:"SegmentVersion"`
-	TemplateConfiguration       *shared.TemplateConfiguration       `json:"TemplateConfiguration"`
-	TreatmentDescription        *string                             `json:"TreatmentDescription"`
-	TreatmentName               *string                             `json:"TreatmentName"`
-	Tags                        map[string]string                   `json:"tags"`
+	AdditionalTreatments        []shared.WriteTreatmentResource     `json:"AdditionalTreatments,omitempty"`
+	CustomDeliveryConfiguration *shared.CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration,omitempty"`
+	Description                 *string                             `json:"Description,omitempty"`
+	HoldoutPercent              *int64                              `json:"HoldoutPercent,omitempty"`
+	Hook                        *shared.CampaignHook                `json:"Hook,omitempty"`
+	IsPaused                    *bool                               `json:"IsPaused,omitempty"`
+	Limits                      *shared.CampaignLimits              `json:"Limits,omitempty"`
+	MessageConfiguration        *shared.MessageConfiguration        `json:"MessageConfiguration,omitempty"`
+	Name                        *string                             `json:"Name,omitempty"`
+	Priority                    *int64                              `json:"Priority,omitempty"`
+	Schedule                    *shared.Schedule                    `json:"Schedule,omitempty"`
+	SegmentID                   *string                             `json:"SegmentId,omitempty"`
+	SegmentVersion              *int64                              `json:"SegmentVersion,omitempty"`
+	TemplateConfiguration       *shared.TemplateConfiguration       `json:"TemplateConfiguration,omitempty"`
+	TreatmentDescription        *string                             `json:"TreatmentDescription,omitempty"`
+	TreatmentName               *string                             `json:"TreatmentName,omitempty"`
+	Tags                        map[string]string                   `json:"tags,omitempty"`
 }
 
 type UpdateCampaignRequestBody struct {

@@ -1,7 +1,7 @@
 package shared
 
 type OrderShipmentLineItemShipment struct {
-	LineItemID *string `json:"lineItemId"`
-	ProductID  *string `json:"productId"`
-	Quantity   *int64  `json:"quantity"`
+	LineItemID *string `json:"lineItemId,omitempty"`
+	ProductID  *string `json:"productId,omitempty"`
+	Quantity   *int64  `json:"quantity,omitempty"`
 }

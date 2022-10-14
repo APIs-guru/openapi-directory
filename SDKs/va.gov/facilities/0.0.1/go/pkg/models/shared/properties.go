@@ -17,22 +17,22 @@ const (
 )
 
 type Properties struct {
-	ActiveStatus                        *PropertiesActiveStatusEnum `json:"active_status"`
-	Address                             *Addresses                  `json:"address"`
-	Classification                      *string                     `json:"classification"`
-	DetailedServices                    []DetailedService           `json:"detailed_services"`
+	ActiveStatus                        *PropertiesActiveStatusEnum `json:"active_status,omitempty"`
+	Address                             *Addresses                  `json:"address,omitempty"`
+	Classification                      *string                     `json:"classification,omitempty"`
+	DetailedServices                    []DetailedService           `json:"detailed_services,omitempty"`
 	FacilityType                        PropertiesFacilityTypeEnum  `json:"facility_type"`
-	Hours                               *Hours                      `json:"hours"`
+	Hours                               *Hours                      `json:"hours,omitempty"`
 	ID                                  string                      `json:"id"`
-	Mobile                              *bool                       `json:"mobile"`
-	Name                                *string                     `json:"name"`
+	Mobile                              *bool                       `json:"mobile,omitempty"`
+	Name                                *string                     `json:"name,omitempty"`
 	OperatingStatus                     OperatingStatus             `json:"operating_status"`
-	OperationalHoursSpecialInstructions *string                     `json:"operational_hours_special_instructions"`
-	Phone                               *Phone                      `json:"phone"`
-	Satisfaction                        *Satisfaction               `json:"satisfaction"`
-	Services                            *Services                   `json:"services"`
-	TimeZone                            *string                     `json:"time_zone"`
-	Visn                                *string                     `json:"visn"`
-	WaitTimes                           *WaitTimes                  `json:"wait_times"`
-	Website                             *string                     `json:"website"`
+	OperationalHoursSpecialInstructions *string                     `json:"operational_hours_special_instructions,omitempty"`
+	Phone                               *Phone                      `json:"phone,omitempty"`
+	Satisfaction                        *Satisfaction               `json:"satisfaction,omitempty"`
+	Services                            *Services                   `json:"services,omitempty"`
+	TimeZone                            *string                     `json:"time_zone,omitempty"`
+	Visn                                *string                     `json:"visn,omitempty"`
+	WaitTimes                           *WaitTimes                  `json:"wait_times,omitempty"`
+	Website                             *string                     `json:"website,omitempty"`
 }

@@ -37,13 +37,13 @@ const (
 )
 
 type GetResourceShareAssociationsRequestBody struct {
-	AssociationStatus *GetResourceShareAssociationsRequestBodyAssociationStatusEnum `json:"associationStatus"`
+	AssociationStatus *GetResourceShareAssociationsRequestBodyAssociationStatusEnum `json:"associationStatus,omitempty"`
 	AssociationType   GetResourceShareAssociationsRequestBodyAssociationTypeEnum    `json:"associationType"`
-	MaxResults        *int64                                                        `json:"maxResults"`
-	NextToken         *string                                                       `json:"nextToken"`
-	Principal         *string                                                       `json:"principal"`
-	ResourceArn       *string                                                       `json:"resourceArn"`
-	ResourceShareArns []string                                                      `json:"resourceShareArns"`
+	MaxResults        *int64                                                        `json:"maxResults,omitempty"`
+	NextToken         *string                                                       `json:"nextToken,omitempty"`
+	Principal         *string                                                       `json:"principal,omitempty"`
+	ResourceArn       *string                                                       `json:"resourceArn,omitempty"`
+	ResourceShareArns []string                                                      `json:"resourceShareArns,omitempty"`
 }
 
 type GetResourceShareAssociationsRequest struct {

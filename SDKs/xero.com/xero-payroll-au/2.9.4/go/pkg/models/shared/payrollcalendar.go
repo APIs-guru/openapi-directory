@@ -1,11 +1,11 @@
 package shared
 
 type PayrollCalendar struct {
-	CalendarType      *CalendarTypeEnum `json:"CalendarType"`
-	Name              *string           `json:"Name"`
-	PaymentDate       *string           `json:"PaymentDate"`
-	PayrollCalendarID *string           `json:"PayrollCalendarID"`
-	StartDate         *string           `json:"StartDate"`
-	UpdatedDateUtc    *string           `json:"UpdatedDateUTC"`
-	ValidationErrors  []ValidationError `json:"ValidationErrors"`
+	CalendarType      *CalendarTypeEnum `json:"CalendarType,omitempty"`
+	Name              *string           `json:"Name,omitempty"`
+	PaymentDate       *string           `json:"PaymentDate,omitempty"`
+	PayrollCalendarID *string           `json:"PayrollCalendarID,omitempty"`
+	StartDate         *string           `json:"StartDate,omitempty"`
+	UpdatedDateUtc    *string           `json:"UpdatedDateUTC,omitempty"`
+	ValidationErrors  []ValidationError `json:"ValidationErrors,omitempty"`
 }

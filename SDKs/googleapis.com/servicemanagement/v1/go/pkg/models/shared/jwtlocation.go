@@ -1,8 +1,8 @@
 package shared
 
 type JwtLocation struct {
-	Cookie      *string `json:"cookie"`
-	Header      *string `json:"header"`
-	Query       *string `json:"query"`
-	ValuePrefix *string `json:"valuePrefix"`
+	Cookie      *string `json:"cookie,omitempty"`
+	Header      *string `json:"header,omitempty"`
+	Query       *string `json:"query,omitempty"`
+	ValuePrefix *string `json:"valuePrefix,omitempty"`
 }

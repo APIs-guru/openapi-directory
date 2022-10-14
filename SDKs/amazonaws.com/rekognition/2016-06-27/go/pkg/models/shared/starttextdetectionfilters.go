@@ -1,6 +1,6 @@
 package shared
 
 type StartTextDetectionFilters struct {
-	RegionsOfInterest []RegionOfInterest `json:"RegionsOfInterest"`
-	WordFilter        *DetectionFilter   `json:"WordFilter"`
+	RegionsOfInterest []RegionOfInterest `json:"RegionsOfInterest,omitempty"`
+	WordFilter        *DetectionFilter   `json:"WordFilter,omitempty"`
 }

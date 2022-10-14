@@ -10,11 +10,11 @@ type EchoRequest struct {
 }
 
 type Echo200ApplicationJSONEcho struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type Echo200ApplicationJSON struct {
-	Echo *Echo200ApplicationJSONEcho `json:"echo"`
+	Echo *Echo200ApplicationJSONEcho `json:"echo,omitempty"`
 }
 
 type EchoResponse struct {

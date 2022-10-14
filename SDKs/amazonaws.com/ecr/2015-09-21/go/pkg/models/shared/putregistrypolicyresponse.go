@@ -1,6 +1,6 @@
 package shared
 
 type PutRegistryPolicyResponse struct {
-	PolicyText *string `json:"policyText"`
-	RegistryID *string `json:"registryId"`
+	PolicyText *string `json:"policyText,omitempty"`
+	RegistryID *string `json:"registryId,omitempty"`
 }

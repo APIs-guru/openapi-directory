@@ -37,8 +37,8 @@ const (
 )
 
 type GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector struct {
-	FragmentSelectorType *shared.HlsFragmentSelectorTypeEnum `json:"FragmentSelectorType"`
-	TimestampRange       *shared.HlsTimestampRange           `json:"TimestampRange"`
+	FragmentSelectorType *shared.HlsFragmentSelectorTypeEnum `json:"FragmentSelectorType,omitempty"`
+	TimestampRange       *shared.HlsTimestampRange           `json:"TimestampRange,omitempty"`
 }
 
 type GetHlsStreamingSessionURLRequestBodyPlaybackModeEnum string
@@ -50,15 +50,15 @@ const (
 )
 
 type GetHlsStreamingSessionURLRequestBody struct {
-	ContainerFormat                 *GetHlsStreamingSessionURLRequestBodyContainerFormatEnum          `json:"ContainerFormat"`
-	DiscontinuityMode               *GetHlsStreamingSessionURLRequestBodyDiscontinuityModeEnum        `json:"DiscontinuityMode"`
-	DisplayFragmentTimestamp        *GetHlsStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum `json:"DisplayFragmentTimestamp"`
-	Expires                         *int64                                                            `json:"Expires"`
-	HlsFragmentSelector             *GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector          `json:"HLSFragmentSelector"`
-	MaxMediaPlaylistFragmentResults *int64                                                            `json:"MaxMediaPlaylistFragmentResults"`
-	PlaybackMode                    *GetHlsStreamingSessionURLRequestBodyPlaybackModeEnum             `json:"PlaybackMode"`
-	StreamArn                       *string                                                           `json:"StreamARN"`
-	StreamName                      *string                                                           `json:"StreamName"`
+	ContainerFormat                 *GetHlsStreamingSessionURLRequestBodyContainerFormatEnum          `json:"ContainerFormat,omitempty"`
+	DiscontinuityMode               *GetHlsStreamingSessionURLRequestBodyDiscontinuityModeEnum        `json:"DiscontinuityMode,omitempty"`
+	DisplayFragmentTimestamp        *GetHlsStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum `json:"DisplayFragmentTimestamp,omitempty"`
+	Expires                         *int64                                                            `json:"Expires,omitempty"`
+	HlsFragmentSelector             *GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector          `json:"HLSFragmentSelector,omitempty"`
+	MaxMediaPlaylistFragmentResults *int64                                                            `json:"MaxMediaPlaylistFragmentResults,omitempty"`
+	PlaybackMode                    *GetHlsStreamingSessionURLRequestBodyPlaybackModeEnum             `json:"PlaybackMode,omitempty"`
+	StreamArn                       *string                                                           `json:"StreamARN,omitempty"`
+	StreamName                      *string                                                           `json:"StreamName,omitempty"`
 }
 
 type GetHlsStreamingSessionURLRequest struct {

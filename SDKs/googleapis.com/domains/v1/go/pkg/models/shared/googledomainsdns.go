@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleDomainsDNS struct {
-	DsRecords   []DsRecord                   `json:"dsRecords"`
-	DsState     *GoogleDomainsDNSDsStateEnum `json:"dsState"`
-	NameServers []string                     `json:"nameServers"`
+	DsRecords   []DsRecord                   `json:"dsRecords,omitempty"`
+	DsState     *GoogleDomainsDNSDsStateEnum `json:"dsState,omitempty"`
+	NameServers []string                     `json:"nameServers,omitempty"`
 }

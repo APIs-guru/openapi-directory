@@ -30,18 +30,18 @@ type ListEventRequest struct {
 }
 
 type ListEvent200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListEvent200ApplicationJSONListEventResponse struct {
-	Events []shared.MonitorV1Event          `json:"events"`
-	Meta   *ListEvent200ApplicationJSONMeta `json:"meta"`
+	Events []shared.MonitorV1Event          `json:"events,omitempty"`
+	Meta   *ListEvent200ApplicationJSONMeta `json:"meta,omitempty"`
 }
 
 type ListEventResponse struct {

@@ -8,6 +8,6 @@ const (
 )
 
 type CreateFooterRequest struct {
-	SectionBreakLocation *Location                    `json:"sectionBreakLocation"`
-	Type                 *CreateFooterRequestTypeEnum `json:"type"`
+	SectionBreakLocation *Location                    `json:"sectionBreakLocation,omitempty"`
+	Type                 *CreateFooterRequestTypeEnum `json:"type,omitempty"`
 }

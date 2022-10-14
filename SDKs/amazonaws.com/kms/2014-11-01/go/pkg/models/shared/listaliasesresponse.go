@@ -1,7 +1,7 @@
 package shared
 
 type ListAliasesResponse struct {
-	Aliases    []AliasListEntry `json:"Aliases"`
-	NextMarker *string          `json:"NextMarker"`
-	Truncated  *bool            `json:"Truncated"`
+	Aliases    []AliasListEntry `json:"Aliases,omitempty"`
+	NextMarker *string          `json:"NextMarker,omitempty"`
+	Truncated  *bool            `json:"Truncated,omitempty"`
 }

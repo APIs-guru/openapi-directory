@@ -9,6 +9,6 @@ const (
 )
 
 type ChannelConversionPing struct {
-	Context       *ChannelConversionPingContextEnum `json:"context"`
-	ConversionURL *string                           `json:"conversionUrl"`
+	Context       *ChannelConversionPingContextEnum `json:"context,omitempty"`
+	ConversionURL *string                           `json:"conversionUrl,omitempty"`
 }

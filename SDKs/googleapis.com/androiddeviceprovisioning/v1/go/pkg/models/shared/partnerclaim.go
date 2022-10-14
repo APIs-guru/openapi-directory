@@ -9,8 +9,8 @@ const (
 )
 
 type PartnerClaim struct {
-	CustomerID       *string                      `json:"customerId"`
-	DeviceIdentifier *DeviceIdentifier            `json:"deviceIdentifier"`
-	DeviceMetadata   *DeviceMetadata              `json:"deviceMetadata"`
-	SectionType      *PartnerClaimSectionTypeEnum `json:"sectionType"`
+	CustomerID       *string                      `json:"customerId,omitempty"`
+	DeviceIdentifier *DeviceIdentifier            `json:"deviceIdentifier,omitempty"`
+	DeviceMetadata   *DeviceMetadata              `json:"deviceMetadata,omitempty"`
+	SectionType      *PartnerClaimSectionTypeEnum `json:"sectionType,omitempty"`
 }

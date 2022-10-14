@@ -5,6 +5,6 @@ import (
 )
 
 type Qualities struct {
-	Date    *time.Time `json:"Date"`
-	Quality *int32     `json:"Quality"`
+	Date    *time.Time `json:"Date,omitempty"`
+	Quality *int32     `json:"Quality,omitempty"`
 }

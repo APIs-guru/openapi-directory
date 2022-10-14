@@ -5,7 +5,7 @@ import (
 )
 
 type ControlComment struct {
-	AuthorName  *string    `json:"authorName"`
-	CommentBody *string    `json:"commentBody"`
-	PostedDate  *time.Time `json:"postedDate"`
+	AuthorName  *string    `json:"authorName,omitempty"`
+	CommentBody *string    `json:"commentBody,omitempty"`
+	PostedDate  *time.Time `json:"postedDate,omitempty"`
 }

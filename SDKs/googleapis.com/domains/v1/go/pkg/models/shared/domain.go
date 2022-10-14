@@ -12,7 +12,7 @@ const (
 )
 
 type Domain struct {
-	DomainName    *string                  `json:"domainName"`
-	ResourceState *DomainResourceStateEnum `json:"resourceState"`
-	YearlyPrice   *Money                   `json:"yearlyPrice"`
+	DomainName    *string                  `json:"domainName,omitempty"`
+	ResourceState *DomainResourceStateEnum `json:"resourceState,omitempty"`
+	YearlyPrice   *Money                   `json:"yearlyPrice,omitempty"`
 }

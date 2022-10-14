@@ -1,7 +1,7 @@
 package shared
 
 type PricePerBuyer struct {
-	AdvertiserIds []string `json:"advertiserIds"`
-	Buyer         *Buyer   `json:"buyer"`
-	Price         *Price   `json:"price"`
+	AdvertiserIds []string `json:"advertiserIds,omitempty"`
+	Buyer         *Buyer   `json:"buyer,omitempty"`
+	Price         *Price   `json:"price,omitempty"`
 }

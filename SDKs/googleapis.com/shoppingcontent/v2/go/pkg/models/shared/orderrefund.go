@@ -1,9 +1,9 @@
 package shared
 
 type OrderRefund struct {
-	Actor        *string `json:"actor"`
-	Amount       *Price  `json:"amount"`
-	CreationDate *string `json:"creationDate"`
-	Reason       *string `json:"reason"`
-	ReasonText   *string `json:"reasonText"`
+	Actor        *string `json:"actor,omitempty"`
+	Amount       *Price  `json:"amount,omitempty"`
+	CreationDate *string `json:"creationDate,omitempty"`
+	Reason       *string `json:"reason,omitempty"`
+	ReasonText   *string `json:"reasonText,omitempty"`
 }

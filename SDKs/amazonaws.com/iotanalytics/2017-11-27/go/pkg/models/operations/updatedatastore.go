@@ -19,25 +19,25 @@ type UpdateDatastoreHeaders struct {
 }
 
 type UpdateDatastoreRequestBodyDatastoreStorage struct {
-	CustomerManagedS3            *shared.CustomerManagedDatastoreS3Storage     `json:"customerManagedS3"`
-	IotSiteWiseMultiLayerStorage *shared.DatastoreIotSiteWiseMultiLayerStorage `json:"iotSiteWiseMultiLayerStorage"`
-	ServiceManagedS3             map[string]interface{}                        `json:"serviceManagedS3"`
+	CustomerManagedS3            *shared.CustomerManagedDatastoreS3Storage     `json:"customerManagedS3,omitempty"`
+	IotSiteWiseMultiLayerStorage *shared.DatastoreIotSiteWiseMultiLayerStorage `json:"iotSiteWiseMultiLayerStorage,omitempty"`
+	ServiceManagedS3             map[string]interface{}                        `json:"serviceManagedS3,omitempty"`
 }
 
 type UpdateDatastoreRequestBodyFileFormatConfiguration struct {
-	JSONConfiguration    map[string]interface{}       `json:"jsonConfiguration"`
-	ParquetConfiguration *shared.ParquetConfiguration `json:"parquetConfiguration"`
+	JSONConfiguration    map[string]interface{}       `json:"jsonConfiguration,omitempty"`
+	ParquetConfiguration *shared.ParquetConfiguration `json:"parquetConfiguration,omitempty"`
 }
 
 type UpdateDatastoreRequestBodyRetentionPeriod struct {
-	NumberOfDays *int64 `json:"numberOfDays"`
-	Unlimited    *bool  `json:"unlimited"`
+	NumberOfDays *int64 `json:"numberOfDays,omitempty"`
+	Unlimited    *bool  `json:"unlimited,omitempty"`
 }
 
 type UpdateDatastoreRequestBody struct {
-	DatastoreStorage        *UpdateDatastoreRequestBodyDatastoreStorage        `json:"datastoreStorage"`
-	FileFormatConfiguration *UpdateDatastoreRequestBodyFileFormatConfiguration `json:"fileFormatConfiguration"`
-	RetentionPeriod         *UpdateDatastoreRequestBodyRetentionPeriod         `json:"retentionPeriod"`
+	DatastoreStorage        *UpdateDatastoreRequestBodyDatastoreStorage        `json:"datastoreStorage,omitempty"`
+	FileFormatConfiguration *UpdateDatastoreRequestBodyFileFormatConfiguration `json:"fileFormatConfiguration,omitempty"`
+	RetentionPeriod         *UpdateDatastoreRequestBodyRetentionPeriod         `json:"retentionPeriod,omitempty"`
 }
 
 type UpdateDatastoreRequest struct {

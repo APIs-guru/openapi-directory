@@ -1,10 +1,10 @@
 package shared
 
 type ResourceInventory struct {
-	Platform                *string           `json:"Platform"`
-	PlatformVersion         *string           `json:"PlatformVersion"`
-	ResourceArn             *string           `json:"ResourceArn"`
-	ResourceID              *string           `json:"ResourceId"`
-	ResourceOwningAccountID *string           `json:"ResourceOwningAccountId"`
-	ResourceType            *ResourceTypeEnum `json:"ResourceType"`
+	Platform                *string           `json:"Platform,omitempty"`
+	PlatformVersion         *string           `json:"PlatformVersion,omitempty"`
+	ResourceArn             *string           `json:"ResourceArn,omitempty"`
+	ResourceID              *string           `json:"ResourceId,omitempty"`
+	ResourceOwningAccountID *string           `json:"ResourceOwningAccountId,omitempty"`
+	ResourceType            *ResourceTypeEnum `json:"ResourceType,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ObReadDataAccount5 struct {
-	Account []ObAccount6 `json:"Account"`
+	Account []ObAccount6 `json:"Account,omitempty"`
 }

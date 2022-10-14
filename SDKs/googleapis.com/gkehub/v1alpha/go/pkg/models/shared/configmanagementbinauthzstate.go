@@ -10,6 +10,6 @@ const (
 )
 
 type ConfigManagementBinauthzState struct {
-	Version *ConfigManagementBinauthzVersion          `json:"version"`
-	Webhook *ConfigManagementBinauthzStateWebhookEnum `json:"webhook"`
+	Version *ConfigManagementBinauthzVersion          `json:"version,omitempty"`
+	Webhook *ConfigManagementBinauthzStateWebhookEnum `json:"webhook,omitempty"`
 }

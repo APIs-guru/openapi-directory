@@ -1,9 +1,9 @@
 package shared
 
 type AccessLevel struct {
-	Basic       *BasicLevel  `json:"basic"`
-	Custom      *CustomLevel `json:"custom"`
-	Description *string      `json:"description"`
-	Name        *string      `json:"name"`
-	Title       *string      `json:"title"`
+	Basic       *BasicLevel  `json:"basic,omitempty"`
+	Custom      *CustomLevel `json:"custom,omitempty"`
+	Description *string      `json:"description,omitempty"`
+	Name        *string      `json:"name,omitempty"`
+	Title       *string      `json:"title,omitempty"`
 }

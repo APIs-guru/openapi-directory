@@ -13,7 +13,7 @@ type GetLongviewSubscriptionRequest struct {
 }
 
 type GetLongviewSubscriptionDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLongviewSubscriptionResponse struct {

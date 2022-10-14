@@ -1,9 +1,9 @@
 package shared
 
 type UpdatePortfolioShareInput struct {
-	AcceptLanguage   *string           `json:"AcceptLanguage"`
-	AccountID        *string           `json:"AccountId"`
-	OrganizationNode *OrganizationNode `json:"OrganizationNode"`
+	AcceptLanguage   *string           `json:"AcceptLanguage,omitempty"`
+	AccountID        *string           `json:"AccountId,omitempty"`
+	OrganizationNode *OrganizationNode `json:"OrganizationNode,omitempty"`
 	PortfolioID      string            `json:"PortfolioId"`
-	ShareTagOptions  *bool             `json:"ShareTagOptions"`
+	ShareTagOptions  *bool             `json:"ShareTagOptions,omitempty"`
 }

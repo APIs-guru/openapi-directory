@@ -148,10 +148,10 @@ type PowerPortTemplateTypeType struct {
 }
 
 type PowerPortTemplate struct {
-	AllocatedDraw *int64                     `json:"allocated_draw"`
+	AllocatedDraw *int64                     `json:"allocated_draw,omitempty"`
 	DeviceType    NestedDeviceType           `json:"device_type"`
-	ID            *int64                     `json:"id"`
-	MaximumDraw   *int64                     `json:"maximum_draw"`
+	ID            *int64                     `json:"id,omitempty"`
+	MaximumDraw   *int64                     `json:"maximum_draw,omitempty"`
 	Name          string                     `json:"name"`
-	Type          *PowerPortTemplateTypeType `json:"type"`
+	Type          *PowerPortTemplateTypeType `json:"type,omitempty"`
 }

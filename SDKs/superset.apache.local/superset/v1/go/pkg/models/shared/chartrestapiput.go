@@ -9,14 +9,14 @@ const (
 )
 
 type ChartRestAPIPut struct {
-	CacheTimeout   *int32                             `json:"cache_timeout"`
-	Dashboards     []int32                            `json:"dashboards"`
-	DatasourceID   *int32                             `json:"datasource_id"`
-	DatasourceType *ChartRestAPIPutDatasourceTypeEnum `json:"datasource_type"`
-	Description    *string                            `json:"description"`
-	Owners         []int32                            `json:"owners"`
-	Params         *string                            `json:"params"`
-	QueryContext   *string                            `json:"query_context"`
-	SliceName      *string                            `json:"slice_name"`
-	VizType        *string                            `json:"viz_type"`
+	CacheTimeout   *int32                             `json:"cache_timeout,omitempty"`
+	Dashboards     []int32                            `json:"dashboards,omitempty"`
+	DatasourceID   *int32                             `json:"datasource_id,omitempty"`
+	DatasourceType *ChartRestAPIPutDatasourceTypeEnum `json:"datasource_type,omitempty"`
+	Description    *string                            `json:"description,omitempty"`
+	Owners         []int32                            `json:"owners,omitempty"`
+	Params         *string                            `json:"params,omitempty"`
+	QueryContext   *string                            `json:"query_context,omitempty"`
+	SliceName      *string                            `json:"slice_name,omitempty"`
+	VizType        *string                            `json:"viz_type,omitempty"`
 }

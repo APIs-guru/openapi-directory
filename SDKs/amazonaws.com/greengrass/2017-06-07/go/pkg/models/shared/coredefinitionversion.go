@@ -1,5 +1,5 @@
 package shared
 
 type CoreDefinitionVersion struct {
-	Cores []Core `json:"Cores"`
+	Cores []Core `json:"Cores,omitempty"`
 }

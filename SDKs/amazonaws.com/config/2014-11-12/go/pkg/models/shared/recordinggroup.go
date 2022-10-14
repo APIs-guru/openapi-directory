@@ -1,7 +1,7 @@
 package shared
 
 type RecordingGroup struct {
-	AllSupported               *bool              `json:"allSupported"`
-	IncludeGlobalResourceTypes *bool              `json:"includeGlobalResourceTypes"`
-	ResourceTypes              []ResourceTypeEnum `json:"resourceTypes"`
+	AllSupported               *bool              `json:"allSupported,omitempty"`
+	IncludeGlobalResourceTypes *bool              `json:"includeGlobalResourceTypes,omitempty"`
+	ResourceTypes              []ResourceTypeEnum `json:"resourceTypes,omitempty"`
 }

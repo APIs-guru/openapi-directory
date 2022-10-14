@@ -19,7 +19,7 @@ const (
 )
 
 type EnterpriseAdminUpdatePreReceiveHookEnforcementForRepoRequestBody struct {
-	Enforcement *EnterpriseAdminUpdatePreReceiveHookEnforcementForRepoRequestBodyEnforcementEnum `json:"enforcement"`
+	Enforcement *EnterpriseAdminUpdatePreReceiveHookEnforcementForRepoRequestBodyEnforcementEnum `json:"enforcement,omitempty"`
 }
 
 type EnterpriseAdminUpdatePreReceiveHookEnforcementForRepoRequest struct {

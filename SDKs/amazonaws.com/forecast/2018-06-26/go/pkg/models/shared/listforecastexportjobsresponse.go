@@ -1,6 +1,6 @@
 package shared
 
 type ListForecastExportJobsResponse struct {
-	ForecastExportJobs []ForecastExportJobSummary `json:"ForecastExportJobs"`
-	NextToken          *string                    `json:"NextToken"`
+	ForecastExportJobs []ForecastExportJobSummary `json:"ForecastExportJobs,omitempty"`
+	NextToken          *string                    `json:"NextToken,omitempty"`
 }

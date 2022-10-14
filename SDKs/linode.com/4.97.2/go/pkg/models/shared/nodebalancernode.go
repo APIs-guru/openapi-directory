@@ -18,12 +18,12 @@ const (
 )
 
 type NodeBalancerNode struct {
-	Address        *string                     `json:"address"`
-	ConfigID       *int64                      `json:"config_id"`
-	ID             *int64                      `json:"id"`
-	Label          *string                     `json:"label"`
-	Mode           *NodeBalancerNodeModeEnum   `json:"mode"`
-	NodebalancerID *int64                      `json:"nodebalancer_id"`
-	Status         *NodeBalancerNodeStatusEnum `json:"status"`
-	Weight         *int64                      `json:"weight"`
+	Address        *string                     `json:"address,omitempty"`
+	ConfigID       *int64                      `json:"config_id,omitempty"`
+	ID             *int64                      `json:"id,omitempty"`
+	Label          *string                     `json:"label,omitempty"`
+	Mode           *NodeBalancerNodeModeEnum   `json:"mode,omitempty"`
+	NodebalancerID *int64                      `json:"nodebalancer_id,omitempty"`
+	Status         *NodeBalancerNodeStatusEnum `json:"status,omitempty"`
+	Weight         *int64                      `json:"weight,omitempty"`
 }

@@ -11,10 +11,10 @@ const (
 )
 
 type GoogleChromeManagementV1BootPerformanceReport struct {
-	BootUpDuration   *string                                                          `json:"bootUpDuration"`
-	BootUpTime       *string                                                          `json:"bootUpTime"`
-	ReportTime       *string                                                          `json:"reportTime"`
-	ShutdownDuration *string                                                          `json:"shutdownDuration"`
-	ShutdownReason   *GoogleChromeManagementV1BootPerformanceReportShutdownReasonEnum `json:"shutdownReason"`
-	ShutdownTime     *string                                                          `json:"shutdownTime"`
+	BootUpDuration   *string                                                          `json:"bootUpDuration,omitempty"`
+	BootUpTime       *string                                                          `json:"bootUpTime,omitempty"`
+	ReportTime       *string                                                          `json:"reportTime,omitempty"`
+	ShutdownDuration *string                                                          `json:"shutdownDuration,omitempty"`
+	ShutdownReason   *GoogleChromeManagementV1BootPerformanceReportShutdownReasonEnum `json:"shutdownReason,omitempty"`
+	ShutdownTime     *string                                                          `json:"shutdownTime,omitempty"`
 }

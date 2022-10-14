@@ -10,12 +10,12 @@ const (
 )
 
 type Company struct {
-	AdminEmails      []string                `json:"adminEmails"`
-	CompanyID        *string                 `json:"companyId"`
-	CompanyName      *string                 `json:"companyName"`
-	LanguageCode     *string                 `json:"languageCode"`
-	Name             *string                 `json:"name"`
-	OwnerEmails      []string                `json:"ownerEmails"`
-	SkipWelcomeEmail *bool                   `json:"skipWelcomeEmail"`
-	TermsStatus      *CompanyTermsStatusEnum `json:"termsStatus"`
+	AdminEmails      []string                `json:"adminEmails,omitempty"`
+	CompanyID        *string                 `json:"companyId,omitempty"`
+	CompanyName      *string                 `json:"companyName,omitempty"`
+	LanguageCode     *string                 `json:"languageCode,omitempty"`
+	Name             *string                 `json:"name,omitempty"`
+	OwnerEmails      []string                `json:"ownerEmails,omitempty"`
+	SkipWelcomeEmail *bool                   `json:"skipWelcomeEmail,omitempty"`
+	TermsStatus      *CompanyTermsStatusEnum `json:"termsStatus,omitempty"`
 }

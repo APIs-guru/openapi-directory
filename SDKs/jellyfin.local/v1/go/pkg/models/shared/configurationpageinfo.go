@@ -1,11 +1,11 @@
 package shared
 
 type ConfigurationPageInfo struct {
-	ConfigurationPageType *ConfigurationPageTypeEnum `json:"ConfigurationPageType"`
-	DisplayName           *string                    `json:"DisplayName"`
-	EnableInMainMenu      *bool                      `json:"EnableInMainMenu"`
-	MenuIcon              *string                    `json:"MenuIcon"`
-	MenuSection           *string                    `json:"MenuSection"`
-	Name                  *string                    `json:"Name"`
-	PluginID              *string                    `json:"PluginId"`
+	ConfigurationPageType *ConfigurationPageTypeEnum `json:"ConfigurationPageType,omitempty"`
+	DisplayName           *string                    `json:"DisplayName,omitempty"`
+	EnableInMainMenu      *bool                      `json:"EnableInMainMenu,omitempty"`
+	MenuIcon              *string                    `json:"MenuIcon,omitempty"`
+	MenuSection           *string                    `json:"MenuSection,omitempty"`
+	Name                  *string                    `json:"Name,omitempty"`
+	PluginID              *string                    `json:"PluginId,omitempty"`
 }

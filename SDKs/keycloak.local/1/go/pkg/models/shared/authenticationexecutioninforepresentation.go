@@ -1,16 +1,16 @@
 package shared
 
 type AuthenticationExecutionInfoRepresentation struct {
-	Alias                *string  `json:"alias"`
-	AuthenticationConfig *string  `json:"authenticationConfig"`
-	AuthenticationFlow   *bool    `json:"authenticationFlow"`
-	Configurable         *bool    `json:"configurable"`
-	DisplayName          *string  `json:"displayName"`
-	FlowID               *string  `json:"flowId"`
-	ID                   *string  `json:"id"`
-	Index                *int32   `json:"index"`
-	Level                *int32   `json:"level"`
-	ProviderID           *string  `json:"providerId"`
-	Requirement          *string  `json:"requirement"`
-	RequirementChoices   []string `json:"requirementChoices"`
+	Alias                *string  `json:"alias,omitempty"`
+	AuthenticationConfig *string  `json:"authenticationConfig,omitempty"`
+	AuthenticationFlow   *bool    `json:"authenticationFlow,omitempty"`
+	Configurable         *bool    `json:"configurable,omitempty"`
+	DisplayName          *string  `json:"displayName,omitempty"`
+	FlowID               *string  `json:"flowId,omitempty"`
+	ID                   *string  `json:"id,omitempty"`
+	Index                *int32   `json:"index,omitempty"`
+	Level                *int32   `json:"level,omitempty"`
+	ProviderID           *string  `json:"providerId,omitempty"`
+	Requirement          *string  `json:"requirement,omitempty"`
+	RequirementChoices   []string `json:"requirementChoices,omitempty"`
 }

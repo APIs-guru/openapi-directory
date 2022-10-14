@@ -1,7 +1,7 @@
 package shared
 
 type VirtualNodeSpec struct {
-	Backends         []string          `json:"backends"`
-	Listeners        []Listener        `json:"listeners"`
-	ServiceDiscovery *ServiceDiscovery `json:"serviceDiscovery"`
+	Backends         []string          `json:"backends,omitempty"`
+	Listeners        []Listener        `json:"listeners,omitempty"`
+	ServiceDiscovery *ServiceDiscovery `json:"serviceDiscovery,omitempty"`
 }

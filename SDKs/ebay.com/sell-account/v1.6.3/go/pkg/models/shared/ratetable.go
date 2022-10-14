@@ -1,8 +1,8 @@
 package shared
 
 type RateTable struct {
-	CountryCode *string `json:"countryCode"`
-	Locality    *string `json:"locality"`
-	Name        *string `json:"name"`
-	RateTableID *string `json:"rateTableId"`
+	CountryCode *string `json:"countryCode,omitempty"`
+	Locality    *string `json:"locality,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	RateTableID *string `json:"rateTableId,omitempty"`
 }

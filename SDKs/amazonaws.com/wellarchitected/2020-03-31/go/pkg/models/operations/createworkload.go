@@ -22,20 +22,20 @@ const (
 )
 
 type CreateWorkloadRequestBody struct {
-	AccountIds          []string                                 `json:"AccountIds"`
-	ArchitecturalDesign *string                                  `json:"ArchitecturalDesign"`
-	AwsRegions          []string                                 `json:"AwsRegions"`
+	AccountIds          []string                                 `json:"AccountIds,omitempty"`
+	ArchitecturalDesign *string                                  `json:"ArchitecturalDesign,omitempty"`
+	AwsRegions          []string                                 `json:"AwsRegions,omitempty"`
 	ClientRequestToken  string                                   `json:"ClientRequestToken"`
 	Description         string                                   `json:"Description"`
 	Environment         CreateWorkloadRequestBodyEnvironmentEnum `json:"Environment"`
-	Industry            *string                                  `json:"Industry"`
-	IndustryType        *string                                  `json:"IndustryType"`
+	Industry            *string                                  `json:"Industry,omitempty"`
+	IndustryType        *string                                  `json:"IndustryType,omitempty"`
 	Lenses              []string                                 `json:"Lenses"`
-	NonAwsRegions       []string                                 `json:"NonAwsRegions"`
-	Notes               *string                                  `json:"Notes"`
-	PillarPriorities    []string                                 `json:"PillarPriorities"`
+	NonAwsRegions       []string                                 `json:"NonAwsRegions,omitempty"`
+	Notes               *string                                  `json:"Notes,omitempty"`
+	PillarPriorities    []string                                 `json:"PillarPriorities,omitempty"`
 	ReviewOwner         string                                   `json:"ReviewOwner"`
-	Tags                map[string]string                        `json:"Tags"`
+	Tags                map[string]string                        `json:"Tags,omitempty"`
 	WorkloadName        string                                   `json:"WorkloadName"`
 }
 

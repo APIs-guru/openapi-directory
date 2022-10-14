@@ -15,17 +15,17 @@ type UpdateProvisioningTemplateHeaders struct {
 }
 
 type UpdateProvisioningTemplateRequestBodyPreProvisioningHook struct {
-	PayloadVersion *string `json:"payloadVersion"`
-	TargetArn      *string `json:"targetArn"`
+	PayloadVersion *string `json:"payloadVersion,omitempty"`
+	TargetArn      *string `json:"targetArn,omitempty"`
 }
 
 type UpdateProvisioningTemplateRequestBody struct {
-	DefaultVersionID          *int64                                                    `json:"defaultVersionId"`
-	Description               *string                                                   `json:"description"`
-	Enabled                   *bool                                                     `json:"enabled"`
-	PreProvisioningHook       *UpdateProvisioningTemplateRequestBodyPreProvisioningHook `json:"preProvisioningHook"`
-	ProvisioningRoleArn       *string                                                   `json:"provisioningRoleArn"`
-	RemovePreProvisioningHook *bool                                                     `json:"removePreProvisioningHook"`
+	DefaultVersionID          *int64                                                    `json:"defaultVersionId,omitempty"`
+	Description               *string                                                   `json:"description,omitempty"`
+	Enabled                   *bool                                                     `json:"enabled,omitempty"`
+	PreProvisioningHook       *UpdateProvisioningTemplateRequestBodyPreProvisioningHook `json:"preProvisioningHook,omitempty"`
+	ProvisioningRoleArn       *string                                                   `json:"provisioningRoleArn,omitempty"`
+	RemovePreProvisioningHook *bool                                                     `json:"removePreProvisioningHook,omitempty"`
 }
 
 type UpdateProvisioningTemplateRequest struct {

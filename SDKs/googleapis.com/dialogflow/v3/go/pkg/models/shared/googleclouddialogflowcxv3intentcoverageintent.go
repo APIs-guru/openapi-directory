@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowCxV3IntentCoverageIntent struct {
-	Covered *bool   `json:"covered"`
-	Intent  *string `json:"intent"`
+	Covered *bool   `json:"covered,omitempty"`
+	Intent  *string `json:"intent,omitempty"`
 }

@@ -20,9 +20,9 @@ type ListWorldGenerationJobsHeaders struct {
 }
 
 type ListWorldGenerationJobsRequestBody struct {
-	Filters    []shared.Filter `json:"filters"`
-	MaxResults *int64          `json:"maxResults"`
-	NextToken  *string         `json:"nextToken"`
+	Filters    []shared.Filter `json:"filters,omitempty"`
+	MaxResults *int64          `json:"maxResults,omitempty"`
+	NextToken  *string         `json:"nextToken,omitempty"`
 }
 
 type ListWorldGenerationJobsRequest struct {

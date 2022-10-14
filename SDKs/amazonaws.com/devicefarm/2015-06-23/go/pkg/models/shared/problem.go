@@ -1,11 +1,11 @@
 package shared
 
 type Problem struct {
-	Device  *Device              `json:"device"`
-	Job     *ProblemDetail       `json:"job"`
-	Message *string              `json:"message"`
-	Result  *ExecutionResultEnum `json:"result"`
-	Run     *ProblemDetail       `json:"run"`
-	Suite   *ProblemDetail       `json:"suite"`
-	Test    *ProblemDetail       `json:"test"`
+	Device  *Device              `json:"device,omitempty"`
+	Job     *ProblemDetail       `json:"job,omitempty"`
+	Message *string              `json:"message,omitempty"`
+	Result  *ExecutionResultEnum `json:"result,omitempty"`
+	Run     *ProblemDetail       `json:"run,omitempty"`
+	Suite   *ProblemDetail       `json:"suite,omitempty"`
+	Test    *ProblemDetail       `json:"test,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type InsertDimensionRequest struct {
-	InheritFromBefore *bool           `json:"inheritFromBefore"`
-	Range             *DimensionRange `json:"range"`
+	InheritFromBefore *bool           `json:"inheritFromBefore,omitempty"`
+	Range             *DimensionRange `json:"range,omitempty"`
 }

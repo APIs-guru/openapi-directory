@@ -17,8 +17,8 @@ const (
 )
 
 type ListResponse struct {
-	DebugString *string                     `json:"debugString"`
-	ErrorCode   []ListResponseErrorCodeEnum `json:"errorCode"`
-	MaxAge      *string                     `json:"maxAge"`
-	Statements  []Statement                 `json:"statements"`
+	DebugString *string                     `json:"debugString,omitempty"`
+	ErrorCode   []ListResponseErrorCodeEnum `json:"errorCode,omitempty"`
+	MaxAge      *string                     `json:"maxAge,omitempty"`
+	Statements  []Statement                 `json:"statements,omitempty"`
 }

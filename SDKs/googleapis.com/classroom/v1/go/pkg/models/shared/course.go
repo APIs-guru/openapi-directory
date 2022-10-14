@@ -12,23 +12,23 @@ const (
 )
 
 type Course struct {
-	AlternateLink      *string                `json:"alternateLink"`
-	CalendarID         *string                `json:"calendarId"`
-	CourseGroupEmail   *string                `json:"courseGroupEmail"`
-	CourseMaterialSets []CourseMaterialSet    `json:"courseMaterialSets"`
-	CourseState        *CourseCourseStateEnum `json:"courseState"`
-	CreationTime       *string                `json:"creationTime"`
-	Description        *string                `json:"description"`
-	DescriptionHeading *string                `json:"descriptionHeading"`
-	EnrollmentCode     *string                `json:"enrollmentCode"`
-	GradebookSettings  *GradebookSettings     `json:"gradebookSettings"`
-	GuardiansEnabled   *bool                  `json:"guardiansEnabled"`
-	ID                 *string                `json:"id"`
-	Name               *string                `json:"name"`
-	OwnerID            *string                `json:"ownerId"`
-	Room               *string                `json:"room"`
-	Section            *string                `json:"section"`
-	TeacherFolder      *DriveFolder           `json:"teacherFolder"`
-	TeacherGroupEmail  *string                `json:"teacherGroupEmail"`
-	UpdateTime         *string                `json:"updateTime"`
+	AlternateLink      *string                `json:"alternateLink,omitempty"`
+	CalendarID         *string                `json:"calendarId,omitempty"`
+	CourseGroupEmail   *string                `json:"courseGroupEmail,omitempty"`
+	CourseMaterialSets []CourseMaterialSet    `json:"courseMaterialSets,omitempty"`
+	CourseState        *CourseCourseStateEnum `json:"courseState,omitempty"`
+	CreationTime       *string                `json:"creationTime,omitempty"`
+	Description        *string                `json:"description,omitempty"`
+	DescriptionHeading *string                `json:"descriptionHeading,omitempty"`
+	EnrollmentCode     *string                `json:"enrollmentCode,omitempty"`
+	GradebookSettings  *GradebookSettings     `json:"gradebookSettings,omitempty"`
+	GuardiansEnabled   *bool                  `json:"guardiansEnabled,omitempty"`
+	ID                 *string                `json:"id,omitempty"`
+	Name               *string                `json:"name,omitempty"`
+	OwnerID            *string                `json:"ownerId,omitempty"`
+	Room               *string                `json:"room,omitempty"`
+	Section            *string                `json:"section,omitempty"`
+	TeacherFolder      *DriveFolder           `json:"teacherFolder,omitempty"`
+	TeacherGroupEmail  *string                `json:"teacherGroupEmail,omitempty"`
+	UpdateTime         *string                `json:"updateTime,omitempty"`
 }

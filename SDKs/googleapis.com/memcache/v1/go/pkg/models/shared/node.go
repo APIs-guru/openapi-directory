@@ -11,10 +11,10 @@ const (
 )
 
 type Node struct {
-	Host       *string             `json:"host"`
-	NodeID     *string             `json:"nodeId"`
-	Parameters *MemcacheParameters `json:"parameters"`
-	Port       *int32              `json:"port"`
-	State      *NodeStateEnum      `json:"state"`
-	Zone       *string             `json:"zone"`
+	Host       *string             `json:"host,omitempty"`
+	NodeID     *string             `json:"nodeId,omitempty"`
+	Parameters *MemcacheParameters `json:"parameters,omitempty"`
+	Port       *int32              `json:"port,omitempty"`
+	State      *NodeStateEnum      `json:"state,omitempty"`
+	Zone       *string             `json:"zone,omitempty"`
 }

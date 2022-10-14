@@ -54,14 +54,14 @@ type ConsolePortTypeType struct {
 }
 
 type ConsolePort struct {
-	Cable                 *NestedCable                                 `json:"cable"`
-	ConnectedEndpoint     map[string]string                            `json:"connected_endpoint"`
-	ConnectedEndpointType *string                                      `json:"connected_endpoint_type"`
-	ConnectionStatus      *ConsolePortConnectionStatusConnectionStatus `json:"connection_status"`
-	Description           *string                                      `json:"description"`
+	Cable                 *NestedCable                                 `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                            `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                                      `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *ConsolePortConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
+	Description           *string                                      `json:"description,omitempty"`
 	Device                NestedDevice                                 `json:"device"`
-	ID                    *int64                                       `json:"id"`
+	ID                    *int64                                       `json:"id,omitempty"`
 	Name                  string                                       `json:"name"`
-	Tags                  []string                                     `json:"tags"`
-	Type                  *ConsolePortTypeType                         `json:"type"`
+	Tags                  []string                                     `json:"tags,omitempty"`
+	Type                  *ConsolePortTypeType                         `json:"type,omitempty"`
 }

@@ -38,7 +38,7 @@ const (
 )
 
 type DoubleVerifyVideoViewability struct {
-	PlayerImpressionRate *DoubleVerifyVideoViewabilityPlayerImpressionRateEnum `json:"playerImpressionRate"`
-	VideoIab             *DoubleVerifyVideoViewabilityVideoIabEnum             `json:"videoIab"`
-	VideoViewableRate    *DoubleVerifyVideoViewabilityVideoViewableRateEnum    `json:"videoViewableRate"`
+	PlayerImpressionRate *DoubleVerifyVideoViewabilityPlayerImpressionRateEnum `json:"playerImpressionRate,omitempty"`
+	VideoIab             *DoubleVerifyVideoViewabilityVideoIabEnum             `json:"videoIab,omitempty"`
+	VideoViewableRate    *DoubleVerifyVideoViewabilityVideoViewableRateEnum    `json:"videoViewableRate,omitempty"`
 }

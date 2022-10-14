@@ -5,11 +5,11 @@ import (
 )
 
 type PayeePayorRefV3 struct {
-	InvitationStatus          *InvitationStatus2Enum `json:"invitationStatus"`
-	InvitationStatusTimestamp *time.Time             `json:"invitationStatusTimestamp"`
-	PayableIssues             []PayableIssue         `json:"payableIssues"`
-	PayableStatus             *bool                  `json:"payableStatus"`
-	PaymentChannelID          *string                `json:"paymentChannelId"`
-	PayorID                   *string                `json:"payorId"`
-	RemoteID                  *string                `json:"remoteId"`
+	InvitationStatus          *InvitationStatus2Enum `json:"invitationStatus,omitempty"`
+	InvitationStatusTimestamp *time.Time             `json:"invitationStatusTimestamp,omitempty"`
+	PayableIssues             []PayableIssue         `json:"payableIssues,omitempty"`
+	PayableStatus             *bool                  `json:"payableStatus,omitempty"`
+	PaymentChannelID          *string                `json:"paymentChannelId,omitempty"`
+	PayorID                   *string                `json:"payorId,omitempty"`
+	RemoteID                  *string                `json:"remoteId,omitempty"`
 }

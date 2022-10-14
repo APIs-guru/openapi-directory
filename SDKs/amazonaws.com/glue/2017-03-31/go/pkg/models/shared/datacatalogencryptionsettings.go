@@ -1,6 +1,6 @@
 package shared
 
 type DataCatalogEncryptionSettings struct {
-	ConnectionPasswordEncryption *ConnectionPasswordEncryption `json:"ConnectionPasswordEncryption"`
-	EncryptionAtRest             *EncryptionAtRest             `json:"EncryptionAtRest"`
+	ConnectionPasswordEncryption *ConnectionPasswordEncryption `json:"ConnectionPasswordEncryption,omitempty"`
+	EncryptionAtRest             *EncryptionAtRest             `json:"EncryptionAtRest,omitempty"`
 }

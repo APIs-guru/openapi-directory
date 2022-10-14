@@ -1,9 +1,9 @@
 package shared
 
 type UpdateStateMachineInput struct {
-	Definition           *string               `json:"definition"`
-	LoggingConfiguration *LoggingConfiguration `json:"loggingConfiguration"`
-	RoleArn              *string               `json:"roleArn"`
+	Definition           *string               `json:"definition,omitempty"`
+	LoggingConfiguration *LoggingConfiguration `json:"loggingConfiguration,omitempty"`
+	RoleArn              *string               `json:"roleArn,omitempty"`
 	StateMachineArn      string                `json:"stateMachineArn"`
-	TracingConfiguration *TracingConfiguration `json:"tracingConfiguration"`
+	TracingConfiguration *TracingConfiguration `json:"tracingConfiguration,omitempty"`
 }

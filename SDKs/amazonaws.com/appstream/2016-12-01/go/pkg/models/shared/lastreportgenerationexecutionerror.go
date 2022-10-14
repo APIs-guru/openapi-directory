@@ -1,6 +1,6 @@
 package shared
 
 type LastReportGenerationExecutionError struct {
-	ErrorCode    *UsageReportExecutionErrorCodeEnum `json:"ErrorCode"`
-	ErrorMessage *string                            `json:"ErrorMessage"`
+	ErrorCode    *UsageReportExecutionErrorCodeEnum `json:"ErrorCode,omitempty"`
+	ErrorMessage *string                            `json:"ErrorMessage,omitempty"`
 }

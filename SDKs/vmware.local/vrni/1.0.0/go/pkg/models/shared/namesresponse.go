@@ -1,5 +1,5 @@
 package shared
 
 type NamesResponse struct {
-	Entities []EntityName `json:"entities"`
+	Entities []EntityName `json:"entities,omitempty"`
 }

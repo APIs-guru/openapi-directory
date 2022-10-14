@@ -1,6 +1,6 @@
 package shared
 
 type LiveStreamContentDetails struct {
-	ClosedCaptionsIngestionURL *string `json:"closedCaptionsIngestionUrl"`
-	IsReusable                 *bool   `json:"isReusable"`
+	ClosedCaptionsIngestionURL *string `json:"closedCaptionsIngestionUrl,omitempty"`
+	IsReusable                 *bool   `json:"isReusable,omitempty"`
 }

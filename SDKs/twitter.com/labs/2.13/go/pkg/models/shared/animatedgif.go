@@ -7,9 +7,9 @@ const (
 )
 
 type AnimatedGif struct {
-	Height          *int64               `json:"height"`
-	MediaKey        *string              `json:"media_key"`
-	PreviewImageURL *string              `json:"preview_image_url"`
-	Type            *AnimatedGifTypeEnum `json:"type"`
-	Width           *int64               `json:"width"`
+	Height          *int64               `json:"height,omitempty"`
+	MediaKey        *string              `json:"media_key,omitempty"`
+	PreviewImageURL *string              `json:"preview_image_url,omitempty"`
+	Type            *AnimatedGifTypeEnum `json:"type,omitempty"`
+	Width           *int64               `json:"width,omitempty"`
 }

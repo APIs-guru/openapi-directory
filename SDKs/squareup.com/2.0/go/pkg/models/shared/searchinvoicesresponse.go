@@ -1,7 +1,7 @@
 package shared
 
 type SearchInvoicesResponse struct {
-	Cursor   *string   `json:"cursor"`
-	Errors   []Error   `json:"errors"`
-	Invoices []Invoice `json:"invoices"`
+	Cursor   *string   `json:"cursor,omitempty"`
+	Errors   []Error   `json:"errors,omitempty"`
+	Invoices []Invoice `json:"invoices,omitempty"`
 }

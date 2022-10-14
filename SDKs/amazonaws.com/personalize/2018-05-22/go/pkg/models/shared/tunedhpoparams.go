@@ -1,5 +1,5 @@
 package shared
 
 type TunedHpoParams struct {
-	AlgorithmHyperParameters map[string]string `json:"algorithmHyperParameters"`
+	AlgorithmHyperParameters map[string]string `json:"algorithmHyperParameters,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type Connection struct {
-	ConnectionArn    *string               `json:"ConnectionArn"`
-	ConnectionName   *string               `json:"ConnectionName"`
-	ConnectionStatus *ConnectionStatusEnum `json:"ConnectionStatus"`
-	HostArn          *string               `json:"HostArn"`
-	OwnerAccountID   *string               `json:"OwnerAccountId"`
-	ProviderType     *ProviderTypeEnum     `json:"ProviderType"`
+	ConnectionArn    *string               `json:"ConnectionArn,omitempty"`
+	ConnectionName   *string               `json:"ConnectionName,omitempty"`
+	ConnectionStatus *ConnectionStatusEnum `json:"ConnectionStatus,omitempty"`
+	HostArn          *string               `json:"HostArn,omitempty"`
+	OwnerAccountID   *string               `json:"OwnerAccountId,omitempty"`
+	ProviderType     *ProviderTypeEnum     `json:"ProviderType,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ConversionsBatchUpdateResponse struct {
-	HasFailures *bool              `json:"hasFailures"`
-	Kind        *string            `json:"kind"`
-	Status      []ConversionStatus `json:"status"`
+	HasFailures *bool              `json:"hasFailures,omitempty"`
+	Kind        *string            `json:"kind,omitempty"`
+	Status      []ConversionStatus `json:"status,omitempty"`
 }

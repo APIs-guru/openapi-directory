@@ -5,9 +5,9 @@ import (
 )
 
 type UpdateSystemModelsUpdateGroupClientRelationship struct {
-	Active         *bool      `json:"Active" form:"name=Active"`
+	Active         *bool      `json:"Active,omitempty" form:"name=Active"`
 	ClientID       string     `json:"ClientID" form:"name=ClientID"`
-	LastCheckin    *time.Time `json:"LastCheckin" form:"name=LastCheckin"`
-	RelationshipID *string    `json:"RelationshipID" form:"name=RelationshipID"`
+	LastCheckin    *time.Time `json:"LastCheckin,omitempty" form:"name=LastCheckin"`
+	RelationshipID *string    `json:"RelationshipID,omitempty" form:"name=RelationshipID"`
 	UpdateGroupID  string     `json:"UpdateGroupID" form:"name=UpdateGroupID"`
 }

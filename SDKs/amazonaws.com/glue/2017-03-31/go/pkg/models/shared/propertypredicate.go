@@ -1,7 +1,7 @@
 package shared
 
 type PropertyPredicate struct {
-	Comparator *ComparatorEnum `json:"Comparator"`
-	Key        *string         `json:"Key"`
-	Value      *string         `json:"Value"`
+	Comparator *ComparatorEnum `json:"Comparator,omitempty"`
+	Key        *string         `json:"Key,omitempty"`
+	Value      *string         `json:"Value,omitempty"`
 }

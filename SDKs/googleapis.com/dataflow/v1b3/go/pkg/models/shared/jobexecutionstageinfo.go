@@ -1,5 +1,5 @@
 package shared
 
 type JobExecutionStageInfo struct {
-	StepName []string `json:"stepName"`
+	StepName []string `json:"stepName,omitempty"`
 }

@@ -16,8 +16,8 @@ const (
 )
 
 type IticrRequestBody struct {
-	CertificateParameters *IticrRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *IticrRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                IticrRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Iticr400ApplicationJSON struct {
-	Error            *Iticr400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Iticr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Iticr400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Iticr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Iticr401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Iticr401ApplicationJSON struct {
-	Error            *Iticr401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Iticr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Iticr401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Iticr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Iticr404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Iticr404ApplicationJSON struct {
-	Error            *Iticr404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Iticr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Iticr404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Iticr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Iticr500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Iticr500ApplicationJSON struct {
-	Error            *Iticr500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Iticr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Iticr500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Iticr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Iticr502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Iticr502ApplicationJSON struct {
-	Error            *Iticr502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Iticr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Iticr502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Iticr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Iticr503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Iticr503ApplicationJSON struct {
-	Error            *Iticr503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Iticr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Iticr503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Iticr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Iticr504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Iticr504ApplicationJSON struct {
-	Error            *Iticr504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Iticr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Iticr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Iticr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type IticrResponse struct {

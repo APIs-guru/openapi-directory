@@ -5,19 +5,19 @@ import (
 )
 
 type RelationalDatabaseSnapshot struct {
-	Arn                               *string           `json:"arn"`
-	CreatedAt                         *time.Time        `json:"createdAt"`
-	Engine                            *string           `json:"engine"`
-	EngineVersion                     *string           `json:"engineVersion"`
-	FromRelationalDatabaseArn         *string           `json:"fromRelationalDatabaseArn"`
-	FromRelationalDatabaseBlueprintID *string           `json:"fromRelationalDatabaseBlueprintId"`
-	FromRelationalDatabaseBundleID    *string           `json:"fromRelationalDatabaseBundleId"`
-	FromRelationalDatabaseName        *string           `json:"fromRelationalDatabaseName"`
-	Location                          *ResourceLocation `json:"location"`
-	Name                              *string           `json:"name"`
-	ResourceType                      *ResourceTypeEnum `json:"resourceType"`
-	SizeInGb                          *int64            `json:"sizeInGb"`
-	State                             *string           `json:"state"`
-	SupportCode                       *string           `json:"supportCode"`
-	Tags                              []Tag             `json:"tags"`
+	Arn                               *string           `json:"arn,omitempty"`
+	CreatedAt                         *time.Time        `json:"createdAt,omitempty"`
+	Engine                            *string           `json:"engine,omitempty"`
+	EngineVersion                     *string           `json:"engineVersion,omitempty"`
+	FromRelationalDatabaseArn         *string           `json:"fromRelationalDatabaseArn,omitempty"`
+	FromRelationalDatabaseBlueprintID *string           `json:"fromRelationalDatabaseBlueprintId,omitempty"`
+	FromRelationalDatabaseBundleID    *string           `json:"fromRelationalDatabaseBundleId,omitempty"`
+	FromRelationalDatabaseName        *string           `json:"fromRelationalDatabaseName,omitempty"`
+	Location                          *ResourceLocation `json:"location,omitempty"`
+	Name                              *string           `json:"name,omitempty"`
+	ResourceType                      *ResourceTypeEnum `json:"resourceType,omitempty"`
+	SizeInGb                          *int64            `json:"sizeInGb,omitempty"`
+	State                             *string           `json:"state,omitempty"`
+	SupportCode                       *string           `json:"supportCode,omitempty"`
+	Tags                              []Tag             `json:"tags,omitempty"`
 }

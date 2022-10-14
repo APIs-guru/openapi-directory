@@ -1,12 +1,12 @@
 package shared
 
 type HTTPRouteHeaderMatch struct {
-	ExactMatch   *string                           `json:"exactMatch"`
-	Header       *string                           `json:"header"`
-	InvertMatch  *bool                             `json:"invertMatch"`
-	PrefixMatch  *string                           `json:"prefixMatch"`
-	PresentMatch *bool                             `json:"presentMatch"`
-	RangeMatch   *HTTPRouteHeaderMatchIntegerRange `json:"rangeMatch"`
-	RegexMatch   *string                           `json:"regexMatch"`
-	SuffixMatch  *string                           `json:"suffixMatch"`
+	ExactMatch   *string                           `json:"exactMatch,omitempty"`
+	Header       *string                           `json:"header,omitempty"`
+	InvertMatch  *bool                             `json:"invertMatch,omitempty"`
+	PrefixMatch  *string                           `json:"prefixMatch,omitempty"`
+	PresentMatch *bool                             `json:"presentMatch,omitempty"`
+	RangeMatch   *HTTPRouteHeaderMatchIntegerRange `json:"rangeMatch,omitempty"`
+	RegexMatch   *string                           `json:"regexMatch,omitempty"`
+	SuffixMatch  *string                           `json:"suffixMatch,omitempty"`
 }

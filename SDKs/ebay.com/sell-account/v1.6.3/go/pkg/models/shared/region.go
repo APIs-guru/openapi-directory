@@ -1,6 +1,6 @@
 package shared
 
 type Region struct {
-	RegionName *string `json:"regionName"`
-	RegionType *string `json:"regionType"`
+	RegionName *string `json:"regionName,omitempty"`
+	RegionType *string `json:"regionType,omitempty"`
 }

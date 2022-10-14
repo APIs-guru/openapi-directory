@@ -1,5 +1,5 @@
 package shared
 
 type DeleteLicenseeResponseSchema struct {
-	Result *DeleteLicenseeResult `json:"result"`
+	Result *DeleteLicenseeResult `json:"result,omitempty"`
 }

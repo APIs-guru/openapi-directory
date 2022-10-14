@@ -19,8 +19,8 @@ const (
 )
 
 type HpcerRequestBody struct {
-	CertificateParameters *HpcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *HpcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                HpcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -56,8 +56,8 @@ const (
 )
 
 type Hpcer400ApplicationJSON struct {
-	Error            *Hpcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hpcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hpcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hpcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hpcer401ApplicationJSONErrorEnum string
@@ -75,8 +75,8 @@ const (
 )
 
 type Hpcer401ApplicationJSON struct {
-	Error            *Hpcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hpcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hpcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hpcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hpcer404ApplicationJSONErrorEnum string
@@ -94,8 +94,8 @@ const (
 )
 
 type Hpcer404ApplicationJSON struct {
-	Error            *Hpcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hpcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hpcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hpcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hpcer500ApplicationJSONErrorEnum string
@@ -111,8 +111,8 @@ const (
 )
 
 type Hpcer500ApplicationJSON struct {
-	Error            *Hpcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hpcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hpcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hpcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hpcer502ApplicationJSONErrorEnum string
@@ -128,8 +128,8 @@ const (
 )
 
 type Hpcer502ApplicationJSON struct {
-	Error            *Hpcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hpcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hpcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hpcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hpcer503ApplicationJSONErrorEnum string
@@ -145,8 +145,8 @@ const (
 )
 
 type Hpcer503ApplicationJSON struct {
-	Error            *Hpcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hpcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hpcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hpcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Hpcer504ApplicationJSONErrorEnum string
@@ -162,8 +162,8 @@ const (
 )
 
 type Hpcer504ApplicationJSON struct {
-	Error            *Hpcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Hpcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Hpcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Hpcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type HpcerResponse struct {

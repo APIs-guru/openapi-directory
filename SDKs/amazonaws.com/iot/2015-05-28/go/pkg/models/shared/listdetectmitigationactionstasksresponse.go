@@ -1,6 +1,6 @@
 package shared
 
 type ListDetectMitigationActionsTasksResponse struct {
-	NextToken *string                              `json:"nextToken"`
-	Tasks     []DetectMitigationActionsTaskSummary `json:"tasks"`
+	NextToken *string                              `json:"nextToken,omitempty"`
+	Tasks     []DetectMitigationActionsTaskSummary `json:"tasks,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type CreateVolumeRequest struct {
-	ClientRequestToken *string                         `json:"ClientRequestToken"`
+	ClientRequestToken *string                         `json:"ClientRequestToken,omitempty"`
 	Name               string                          `json:"Name"`
-	OntapConfiguration *CreateOntapVolumeConfiguration `json:"OntapConfiguration"`
-	Tags               []Tag                           `json:"Tags"`
+	OntapConfiguration *CreateOntapVolumeConfiguration `json:"OntapConfiguration,omitempty"`
+	Tags               []Tag                           `json:"Tags,omitempty"`
 	VolumeType         VolumeTypeEnum                  `json:"VolumeType"`
 }

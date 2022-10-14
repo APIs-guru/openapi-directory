@@ -5,13 +5,13 @@ import (
 )
 
 type ResourceSharePermissionDetail struct {
-	Arn                   *string    `json:"arn"`
-	CreationTime          *time.Time `json:"creationTime"`
-	DefaultVersion        *bool      `json:"defaultVersion"`
-	IsResourceTypeDefault *bool      `json:"isResourceTypeDefault"`
-	LastUpdatedTime       *time.Time `json:"lastUpdatedTime"`
-	Name                  *string    `json:"name"`
-	Permission            *string    `json:"permission"`
-	ResourceType          *string    `json:"resourceType"`
-	Version               *string    `json:"version"`
+	Arn                   *string    `json:"arn,omitempty"`
+	CreationTime          *time.Time `json:"creationTime,omitempty"`
+	DefaultVersion        *bool      `json:"defaultVersion,omitempty"`
+	IsResourceTypeDefault *bool      `json:"isResourceTypeDefault,omitempty"`
+	LastUpdatedTime       *time.Time `json:"lastUpdatedTime,omitempty"`
+	Name                  *string    `json:"name,omitempty"`
+	Permission            *string    `json:"permission,omitempty"`
+	ResourceType          *string    `json:"resourceType,omitempty"`
+	Version               *string    `json:"version,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type StudioMembership struct {
-	IdentityStoreID *string            `json:"identityStoreId"`
-	Persona         *StudioPersonaEnum `json:"persona"`
-	PrincipalID     *string            `json:"principalId"`
+	IdentityStoreID *string            `json:"identityStoreId,omitempty"`
+	Persona         *StudioPersonaEnum `json:"persona,omitempty"`
+	PrincipalID     *string            `json:"principalId,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type CreateCapacityProviderResponse struct {
-	CapacityProvider *CapacityProvider `json:"capacityProvider"`
+	CapacityProvider *CapacityProvider `json:"capacityProvider,omitempty"`
 }

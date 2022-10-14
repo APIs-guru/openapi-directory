@@ -23,16 +23,16 @@ const (
 )
 
 type GoogleCloudRecommenderV1Insight struct {
-	AssociatedRecommendations []GoogleCloudRecommenderV1InsightRecommendationReference `json:"associatedRecommendations"`
-	Category                  *GoogleCloudRecommenderV1InsightCategoryEnum             `json:"category"`
-	Content                   map[string]interface{}                                   `json:"content"`
-	Description               *string                                                  `json:"description"`
-	Etag                      *string                                                  `json:"etag"`
-	InsightSubtype            *string                                                  `json:"insightSubtype"`
-	LastRefreshTime           *string                                                  `json:"lastRefreshTime"`
-	Name                      *string                                                  `json:"name"`
-	ObservationPeriod         *string                                                  `json:"observationPeriod"`
-	Severity                  *GoogleCloudRecommenderV1InsightSeverityEnum             `json:"severity"`
-	StateInfo                 *GoogleCloudRecommenderV1InsightStateInfo                `json:"stateInfo"`
-	TargetResources           []string                                                 `json:"targetResources"`
+	AssociatedRecommendations []GoogleCloudRecommenderV1InsightRecommendationReference `json:"associatedRecommendations,omitempty"`
+	Category                  *GoogleCloudRecommenderV1InsightCategoryEnum             `json:"category,omitempty"`
+	Content                   map[string]interface{}                                   `json:"content,omitempty"`
+	Description               *string                                                  `json:"description,omitempty"`
+	Etag                      *string                                                  `json:"etag,omitempty"`
+	InsightSubtype            *string                                                  `json:"insightSubtype,omitempty"`
+	LastRefreshTime           *string                                                  `json:"lastRefreshTime,omitempty"`
+	Name                      *string                                                  `json:"name,omitempty"`
+	ObservationPeriod         *string                                                  `json:"observationPeriod,omitempty"`
+	Severity                  *GoogleCloudRecommenderV1InsightSeverityEnum             `json:"severity,omitempty"`
+	StateInfo                 *GoogleCloudRecommenderV1InsightStateInfo                `json:"stateInfo,omitempty"`
+	TargetResources           []string                                                 `json:"targetResources,omitempty"`
 }

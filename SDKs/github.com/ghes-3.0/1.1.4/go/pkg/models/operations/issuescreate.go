@@ -10,18 +10,18 @@ type IssuesCreatePathParams struct {
 }
 
 type IssuesCreateRequestBodyLabels2 struct {
-	Color       *string `json:"color"`
-	Description *string `json:"description"`
-	ID          *int64  `json:"id"`
-	Name        *string `json:"name"`
+	Color       *string `json:"color,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 type IssuesCreateRequestBody struct {
-	Assignee  *string       `json:"assignee"`
-	Assignees []string      `json:"assignees"`
-	Body      *string       `json:"body"`
-	Labels    []interface{} `json:"labels"`
-	Milestone *interface{}  `json:"milestone"`
+	Assignee  *string       `json:"assignee,omitempty"`
+	Assignees []string      `json:"assignees,omitempty"`
+	Body      *string       `json:"body,omitempty"`
+	Labels    []interface{} `json:"labels,omitempty"`
+	Milestone *interface{}  `json:"milestone,omitempty"`
 	Title     interface{}   `json:"title"`
 }
 
@@ -31,9 +31,9 @@ type IssuesCreateRequest struct {
 }
 
 type IssuesCreate503ApplicationJSON struct {
-	Code             *string `json:"code"`
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	Code             *string `json:"code,omitempty"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type IssuesCreateResponse struct {

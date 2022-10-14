@@ -5,12 +5,12 @@ type CreateWebhookQueryParams struct {
 }
 
 type CreateWebhookRequestBodyWebhook struct {
-	Collection *string `json:"collection"`
-	Name       *string `json:"name"`
+	Collection *string `json:"collection,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }
 
 type CreateWebhookRequestBody struct {
-	Webhook *CreateWebhookRequestBodyWebhook `json:"webhook"`
+	Webhook *CreateWebhookRequestBodyWebhook `json:"webhook,omitempty"`
 }
 
 type CreateWebhookRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type AllowedConfigList struct {
-	AllowedConfigValues []ReusableConfigWrapper `json:"allowedConfigValues"`
+	AllowedConfigValues []ReusableConfigWrapper `json:"allowedConfigValues,omitempty"`
 }

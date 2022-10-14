@@ -25,9 +25,9 @@ const (
 )
 
 type Threshold struct {
-	Color      *ThresholdColorEnum      `json:"color"`
-	Direction  *ThresholdDirectionEnum  `json:"direction"`
-	Label      *string                  `json:"label"`
-	TargetAxis *ThresholdTargetAxisEnum `json:"targetAxis"`
-	Value      *float64                 `json:"value"`
+	Color      *ThresholdColorEnum      `json:"color,omitempty"`
+	Direction  *ThresholdDirectionEnum  `json:"direction,omitempty"`
+	Label      *string                  `json:"label,omitempty"`
+	TargetAxis *ThresholdTargetAxisEnum `json:"targetAxis,omitempty"`
+	Value      *float64                 `json:"value,omitempty"`
 }

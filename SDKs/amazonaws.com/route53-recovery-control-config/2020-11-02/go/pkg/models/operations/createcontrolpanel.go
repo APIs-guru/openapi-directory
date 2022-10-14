@@ -15,7 +15,7 @@ type CreateControlPanelHeaders struct {
 }
 
 type CreateControlPanelRequestBody struct {
-	ClientToken      *string `json:"ClientToken"`
+	ClientToken      *string `json:"ClientToken,omitempty"`
 	ClusterArn       string  `json:"ClusterArn"`
 	ControlPanelName string  `json:"ControlPanelName"`
 }

@@ -5,14 +5,14 @@ import (
 )
 
 type InstanceAccessDetails struct {
-	CertKey      *string                     `json:"certKey"`
-	ExpiresAt    *time.Time                  `json:"expiresAt"`
-	HostKeys     []HostKeyAttributes         `json:"hostKeys"`
-	InstanceName *string                     `json:"instanceName"`
-	IPAddress    *string                     `json:"ipAddress"`
-	Password     *string                     `json:"password"`
-	PasswordData *PasswordData               `json:"passwordData"`
-	PrivateKey   *string                     `json:"privateKey"`
-	Protocol     *InstanceAccessProtocolEnum `json:"protocol"`
-	Username     *string                     `json:"username"`
+	CertKey      *string                     `json:"certKey,omitempty"`
+	ExpiresAt    *time.Time                  `json:"expiresAt,omitempty"`
+	HostKeys     []HostKeyAttributes         `json:"hostKeys,omitempty"`
+	InstanceName *string                     `json:"instanceName,omitempty"`
+	IPAddress    *string                     `json:"ipAddress,omitempty"`
+	Password     *string                     `json:"password,omitempty"`
+	PasswordData *PasswordData               `json:"passwordData,omitempty"`
+	PrivateKey   *string                     `json:"privateKey,omitempty"`
+	Protocol     *InstanceAccessProtocolEnum `json:"protocol,omitempty"`
+	Username     *string                     `json:"username,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ApksListResponse struct {
-	Apks []Apk   `json:"apks"`
-	Kind *string `json:"kind"`
+	Apks []Apk   `json:"apks,omitempty"`
+	Kind *string `json:"kind,omitempty"`
 }

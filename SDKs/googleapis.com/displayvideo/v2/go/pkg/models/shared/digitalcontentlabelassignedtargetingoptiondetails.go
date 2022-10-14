@@ -13,5 +13,5 @@ const (
 )
 
 type DigitalContentLabelAssignedTargetingOptionDetails struct {
-	ExcludedContentRatingTier *DigitalContentLabelAssignedTargetingOptionDetailsExcludedContentRatingTierEnum `json:"excludedContentRatingTier"`
+	ExcludedContentRatingTier *DigitalContentLabelAssignedTargetingOptionDetailsExcludedContentRatingTierEnum `json:"excludedContentRatingTier,omitempty"`
 }

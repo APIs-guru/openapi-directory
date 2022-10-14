@@ -1,7 +1,7 @@
 package shared
 
 type Configuration struct {
-	Classification *string           `json:"Classification"`
-	Configurations []Configuration   `json:"Configurations"`
-	Properties     map[string]string `json:"Properties"`
+	Classification *string           `json:"Classification,omitempty"`
+	Configurations []Configuration   `json:"Configurations,omitempty"`
+	Properties     map[string]string `json:"Properties,omitempty"`
 }

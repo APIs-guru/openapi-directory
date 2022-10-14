@@ -20,8 +20,8 @@ const (
 )
 
 type FitcerRequestBody struct {
-	CertificateParameters *FitcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                            `json:"consentArtifact"`
+	CertificateParameters *FitcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                            `json:"consentArtifact,omitempty"`
 	Format                FitcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                  `json:"txnId"`
 }
@@ -57,8 +57,8 @@ const (
 )
 
 type Fitcer400ApplicationJSON struct {
-	Error            *Fitcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Fitcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Fitcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Fitcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Fitcer401ApplicationJSONErrorEnum string
@@ -76,8 +76,8 @@ const (
 )
 
 type Fitcer401ApplicationJSON struct {
-	Error            *Fitcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Fitcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Fitcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Fitcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Fitcer404ApplicationJSONErrorEnum string
@@ -95,8 +95,8 @@ const (
 )
 
 type Fitcer404ApplicationJSON struct {
-	Error            *Fitcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Fitcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Fitcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Fitcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Fitcer500ApplicationJSONErrorEnum string
@@ -112,8 +112,8 @@ const (
 )
 
 type Fitcer500ApplicationJSON struct {
-	Error            *Fitcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Fitcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Fitcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Fitcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Fitcer502ApplicationJSONErrorEnum string
@@ -129,8 +129,8 @@ const (
 )
 
 type Fitcer502ApplicationJSON struct {
-	Error            *Fitcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Fitcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Fitcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Fitcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Fitcer503ApplicationJSONErrorEnum string
@@ -146,8 +146,8 @@ const (
 )
 
 type Fitcer503ApplicationJSON struct {
-	Error            *Fitcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Fitcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Fitcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Fitcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Fitcer504ApplicationJSONErrorEnum string
@@ -163,8 +163,8 @@ const (
 )
 
 type Fitcer504ApplicationJSON struct {
-	Error            *Fitcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Fitcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Fitcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Fitcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type FitcerResponse struct {

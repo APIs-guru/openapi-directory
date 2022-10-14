@@ -1,5 +1,5 @@
 package shared
 
 type NotificationConfiguration struct {
-	Channels []Channel `json:"channels"`
+	Channels []Channel `json:"channels,omitempty"`
 }

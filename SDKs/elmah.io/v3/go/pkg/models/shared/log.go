@@ -1,9 +1,9 @@
 package shared
 
 type Log struct {
-	Color           *string `json:"color"`
-	Disabled        *bool   `json:"disabled"`
-	EnvironmentName *string `json:"environmentName"`
-	ID              *string `json:"id"`
-	Name            *string `json:"name"`
+	Color           *string `json:"color,omitempty"`
+	Disabled        *bool   `json:"disabled,omitempty"`
+	EnvironmentName *string `json:"environmentName,omitempty"`
+	ID              *string `json:"id,omitempty"`
+	Name            *string `json:"name,omitempty"`
 }

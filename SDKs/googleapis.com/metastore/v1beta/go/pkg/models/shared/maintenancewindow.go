@@ -14,6 +14,6 @@ const (
 )
 
 type MaintenanceWindow struct {
-	DayOfWeek *MaintenanceWindowDayOfWeekEnum `json:"dayOfWeek"`
-	HourOfDay *int32                          `json:"hourOfDay"`
+	DayOfWeek *MaintenanceWindowDayOfWeekEnum `json:"dayOfWeek,omitempty"`
+	HourOfDay *int32                          `json:"hourOfDay,omitempty"`
 }

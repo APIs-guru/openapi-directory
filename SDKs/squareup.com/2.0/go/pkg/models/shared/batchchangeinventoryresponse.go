@@ -1,7 +1,7 @@
 package shared
 
 type BatchChangeInventoryResponse struct {
-	Changes []InventoryChange `json:"changes"`
-	Counts  []InventoryCount  `json:"counts"`
-	Errors  []Error           `json:"errors"`
+	Changes []InventoryChange `json:"changes,omitempty"`
+	Counts  []InventoryCount  `json:"counts,omitempty"`
+	Errors  []Error           `json:"errors,omitempty"`
 }

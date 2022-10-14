@@ -15,9 +15,9 @@ type UpdateApplicationHeaders struct {
 }
 
 type UpdateApplicationRequestBody struct {
-	ApplicationDescription *string `json:"applicationDescription"`
-	ApplicationName        *string `json:"applicationName"`
-	ClientToken            *string `json:"clientToken"`
+	ApplicationDescription *string `json:"applicationDescription,omitempty"`
+	ApplicationName        *string `json:"applicationName,omitempty"`
+	ClientToken            *string `json:"clientToken,omitempty"`
 }
 
 type UpdateApplicationRequest struct {

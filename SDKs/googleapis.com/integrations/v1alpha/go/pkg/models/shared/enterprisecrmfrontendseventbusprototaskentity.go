@@ -9,10 +9,10 @@ const (
 )
 
 type EnterpriseCrmFrontendsEventbusProtoTaskEntity struct {
-	DisabledForVpcSc *bool                                                      `json:"disabledForVpcSc"`
-	Metadata         *EnterpriseCrmEventbusProtoTaskMetadata                    `json:"metadata"`
-	ParamSpecs       *EnterpriseCrmFrontendsEventbusProtoParamSpecsMessage      `json:"paramSpecs"`
-	Stats            *EnterpriseCrmEventbusStats                                `json:"stats"`
-	TaskType         *EnterpriseCrmFrontendsEventbusProtoTaskEntityTaskTypeEnum `json:"taskType"`
-	UIConfig         *EnterpriseCrmEventbusProtoTaskUIConfig                    `json:"uiConfig"`
+	DisabledForVpcSc *bool                                                      `json:"disabledForVpcSc,omitempty"`
+	Metadata         *EnterpriseCrmEventbusProtoTaskMetadata                    `json:"metadata,omitempty"`
+	ParamSpecs       *EnterpriseCrmFrontendsEventbusProtoParamSpecsMessage      `json:"paramSpecs,omitempty"`
+	Stats            *EnterpriseCrmEventbusStats                                `json:"stats,omitempty"`
+	TaskType         *EnterpriseCrmFrontendsEventbusProtoTaskEntityTaskTypeEnum `json:"taskType,omitempty"`
+	UIConfig         *EnterpriseCrmEventbusProtoTaskUIConfig                    `json:"uiConfig,omitempty"`
 }

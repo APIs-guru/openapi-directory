@@ -1,5 +1,5 @@
 package shared
 
 type DeleteDimensionGroupResponse struct {
-	DimensionGroups []DimensionGroup `json:"dimensionGroups"`
+	DimensionGroups []DimensionGroup `json:"dimensionGroups,omitempty"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleCloudDialogflowV2Participant struct {
-	DocumentsMetadataFilters map[string]string                           `json:"documentsMetadataFilters"`
-	Name                     *string                                     `json:"name"`
-	Role                     *GoogleCloudDialogflowV2ParticipantRoleEnum `json:"role"`
-	SipRecordingMediaLabel   *string                                     `json:"sipRecordingMediaLabel"`
+	DocumentsMetadataFilters map[string]string                           `json:"documentsMetadataFilters,omitempty"`
+	Name                     *string                                     `json:"name,omitempty"`
+	Role                     *GoogleCloudDialogflowV2ParticipantRoleEnum `json:"role,omitempty"`
+	SipRecordingMediaLabel   *string                                     `json:"sipRecordingMediaLabel,omitempty"`
 }

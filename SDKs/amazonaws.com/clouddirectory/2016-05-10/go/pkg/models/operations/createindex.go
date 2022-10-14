@@ -16,14 +16,14 @@ type CreateIndexHeaders struct {
 }
 
 type CreateIndexRequestBodyParentReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type CreateIndexRequestBody struct {
 	IsUnique                    bool                                   `json:"IsUnique"`
-	LinkName                    *string                                `json:"LinkName"`
+	LinkName                    *string                                `json:"LinkName,omitempty"`
 	OrderedIndexedAttributeList []shared.AttributeKey                  `json:"OrderedIndexedAttributeList"`
-	ParentReference             *CreateIndexRequestBodyParentReference `json:"ParentReference"`
+	ParentReference             *CreateIndexRequestBodyParentReference `json:"ParentReference,omitempty"`
 }
 
 type CreateIndexRequest struct {

@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1SmartReplyData struct {
-	ConfidenceScore *float64          `json:"confidenceScore"`
-	Metadata        map[string]string `json:"metadata"`
-	QueryRecord     *string           `json:"queryRecord"`
-	Reply           *string           `json:"reply"`
+	ConfidenceScore *float64          `json:"confidenceScore,omitempty"`
+	Metadata        map[string]string `json:"metadata,omitempty"`
+	QueryRecord     *string           `json:"queryRecord,omitempty"`
+	Reply           *string           `json:"reply,omitempty"`
 }

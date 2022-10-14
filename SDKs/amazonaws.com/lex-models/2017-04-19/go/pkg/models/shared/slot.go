@@ -1,15 +1,15 @@
 package shared
 
 type Slot struct {
-	DefaultValueSpec       *SlotDefaultValueSpec   `json:"defaultValueSpec"`
-	Description            *string                 `json:"description"`
+	DefaultValueSpec       *SlotDefaultValueSpec   `json:"defaultValueSpec,omitempty"`
+	Description            *string                 `json:"description,omitempty"`
 	Name                   string                  `json:"name"`
-	ObfuscationSetting     *ObfuscationSettingEnum `json:"obfuscationSetting"`
-	Priority               *int64                  `json:"priority"`
-	ResponseCard           *string                 `json:"responseCard"`
-	SampleUtterances       []string                `json:"sampleUtterances"`
+	ObfuscationSetting     *ObfuscationSettingEnum `json:"obfuscationSetting,omitempty"`
+	Priority               *int64                  `json:"priority,omitempty"`
+	ResponseCard           *string                 `json:"responseCard,omitempty"`
+	SampleUtterances       []string                `json:"sampleUtterances,omitempty"`
 	SlotConstraint         SlotConstraintEnum      `json:"slotConstraint"`
-	SlotType               *string                 `json:"slotType"`
-	SlotTypeVersion        *string                 `json:"slotTypeVersion"`
-	ValueElicitationPrompt *Prompt                 `json:"valueElicitationPrompt"`
+	SlotType               *string                 `json:"slotType,omitempty"`
+	SlotTypeVersion        *string                 `json:"slotTypeVersion,omitempty"`
+	ValueElicitationPrompt *Prompt                 `json:"valueElicitationPrompt,omitempty"`
 }

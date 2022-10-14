@@ -1,7 +1,7 @@
 package shared
 
 type ScheduledWindowExecution struct {
-	ExecutionTime *string `json:"ExecutionTime"`
-	Name          *string `json:"Name"`
-	WindowID      *string `json:"WindowId"`
+	ExecutionTime *string `json:"ExecutionTime,omitempty"`
+	Name          *string `json:"Name,omitempty"`
+	WindowID      *string `json:"WindowId,omitempty"`
 }

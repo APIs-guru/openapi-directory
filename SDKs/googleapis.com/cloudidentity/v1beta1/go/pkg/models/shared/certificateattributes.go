@@ -9,13 +9,13 @@ const (
 )
 
 type CertificateAttributes struct {
-	CertificateTemplate    *CertificateTemplate                      `json:"certificateTemplate"`
-	Fingerprint            *string                                   `json:"fingerprint"`
-	Issuer                 *string                                   `json:"issuer"`
-	SerialNumber           *string                                   `json:"serialNumber"`
-	Subject                *string                                   `json:"subject"`
-	Thumbprint             *string                                   `json:"thumbprint"`
-	ValidationState        *CertificateAttributesValidationStateEnum `json:"validationState"`
-	ValidityExpirationTime *string                                   `json:"validityExpirationTime"`
-	ValidityStartTime      *string                                   `json:"validityStartTime"`
+	CertificateTemplate    *CertificateTemplate                      `json:"certificateTemplate,omitempty"`
+	Fingerprint            *string                                   `json:"fingerprint,omitempty"`
+	Issuer                 *string                                   `json:"issuer,omitempty"`
+	SerialNumber           *string                                   `json:"serialNumber,omitempty"`
+	Subject                *string                                   `json:"subject,omitempty"`
+	Thumbprint             *string                                   `json:"thumbprint,omitempty"`
+	ValidationState        *CertificateAttributesValidationStateEnum `json:"validationState,omitempty"`
+	ValidityExpirationTime *string                                   `json:"validityExpirationTime,omitempty"`
+	ValidityStartTime      *string                                   `json:"validityStartTime,omitempty"`
 }

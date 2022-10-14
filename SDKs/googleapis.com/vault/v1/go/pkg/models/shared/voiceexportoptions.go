@@ -9,5 +9,5 @@ const (
 )
 
 type VoiceExportOptions struct {
-	ExportFormat *VoiceExportOptionsExportFormatEnum `json:"exportFormat"`
+	ExportFormat *VoiceExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
 }

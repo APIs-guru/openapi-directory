@@ -1,5 +1,5 @@
 package shared
 
 type ClientStatusResponse struct {
-	Config []ClientConfig `json:"config"`
+	Config []ClientConfig `json:"config,omitempty"`
 }

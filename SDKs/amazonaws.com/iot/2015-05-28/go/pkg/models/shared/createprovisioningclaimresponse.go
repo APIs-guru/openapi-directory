@@ -5,8 +5,8 @@ import (
 )
 
 type CreateProvisioningClaimResponse struct {
-	CertificateID  *string    `json:"certificateId"`
-	CertificatePem *string    `json:"certificatePem"`
-	Expiration     *time.Time `json:"expiration"`
-	KeyPair        *KeyPair   `json:"keyPair"`
+	CertificateID  *string    `json:"certificateId,omitempty"`
+	CertificatePem *string    `json:"certificatePem,omitempty"`
+	Expiration     *time.Time `json:"expiration,omitempty"`
+	KeyPair        *KeyPair   `json:"keyPair,omitempty"`
 }

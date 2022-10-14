@@ -1,10 +1,10 @@
 package shared
 
 type SimplifiedArtistObject struct {
-	ExternalUrls *ExternalURLObject `json:"external_urls"`
-	Href         *string            `json:"href"`
-	ID           *string            `json:"id"`
-	Name         *string            `json:"name"`
-	Type         *string            `json:"type"`
-	URI          *string            `json:"uri"`
+	ExternalUrls *ExternalURLObject `json:"external_urls,omitempty"`
+	Href         *string            `json:"href,omitempty"`
+	ID           *string            `json:"id,omitempty"`
+	Name         *string            `json:"name,omitempty"`
+	Type         *string            `json:"type,omitempty"`
+	URI          *string            `json:"uri,omitempty"`
 }

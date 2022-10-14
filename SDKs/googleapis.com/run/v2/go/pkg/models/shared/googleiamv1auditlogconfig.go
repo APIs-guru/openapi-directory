@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleIamV1AuditLogConfig struct {
-	ExemptedMembers []string                              `json:"exemptedMembers"`
-	LogType         *GoogleIamV1AuditLogConfigLogTypeEnum `json:"logType"`
+	ExemptedMembers []string                              `json:"exemptedMembers,omitempty"`
+	LogType         *GoogleIamV1AuditLogConfigLogTypeEnum `json:"logType,omitempty"`
 }

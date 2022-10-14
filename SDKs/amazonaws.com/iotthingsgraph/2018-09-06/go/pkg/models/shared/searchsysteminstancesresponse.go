@@ -1,6 +1,6 @@
 package shared
 
 type SearchSystemInstancesResponse struct {
-	NextToken *string                 `json:"nextToken"`
-	Summaries []SystemInstanceSummary `json:"summaries"`
+	NextToken *string                 `json:"nextToken,omitempty"`
+	Summaries []SystemInstanceSummary `json:"summaries,omitempty"`
 }

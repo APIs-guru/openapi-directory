@@ -9,12 +9,12 @@ const (
 )
 
 type GoogleCloudRunV2TaskTemplate struct {
-	Containers           []GoogleCloudRunV2Container                           `json:"containers"`
-	EncryptionKey        *string                                               `json:"encryptionKey"`
-	ExecutionEnvironment *GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnum `json:"executionEnvironment"`
-	MaxRetries           *int32                                                `json:"maxRetries"`
-	ServiceAccount       *string                                               `json:"serviceAccount"`
-	Timeout              *string                                               `json:"timeout"`
-	Volumes              []GoogleCloudRunV2Volume                              `json:"volumes"`
-	VpcAccess            *GoogleCloudRunV2VpcAccess                            `json:"vpcAccess"`
+	Containers           []GoogleCloudRunV2Container                           `json:"containers,omitempty"`
+	EncryptionKey        *string                                               `json:"encryptionKey,omitempty"`
+	ExecutionEnvironment *GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnum `json:"executionEnvironment,omitempty"`
+	MaxRetries           *int32                                                `json:"maxRetries,omitempty"`
+	ServiceAccount       *string                                               `json:"serviceAccount,omitempty"`
+	Timeout              *string                                               `json:"timeout,omitempty"`
+	Volumes              []GoogleCloudRunV2Volume                              `json:"volumes,omitempty"`
+	VpcAccess            *GoogleCloudRunV2VpcAccess                            `json:"vpcAccess,omitempty"`
 }

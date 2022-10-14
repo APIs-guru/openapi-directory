@@ -1,5 +1,5 @@
 package shared
 
 type CallInstructionsMessageType struct {
-	Text *string `json:"Text"`
+	Text *string `json:"Text,omitempty"`
 }

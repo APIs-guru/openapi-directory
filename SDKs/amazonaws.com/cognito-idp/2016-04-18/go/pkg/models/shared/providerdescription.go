@@ -5,8 +5,8 @@ import (
 )
 
 type ProviderDescription struct {
-	CreationDate     *time.Time                    `json:"CreationDate"`
-	LastModifiedDate *time.Time                    `json:"LastModifiedDate"`
-	ProviderName     *string                       `json:"ProviderName"`
-	ProviderType     *IdentityProviderTypeTypeEnum `json:"ProviderType"`
+	CreationDate     *time.Time                    `json:"CreationDate,omitempty"`
+	LastModifiedDate *time.Time                    `json:"LastModifiedDate,omitempty"`
+	ProviderName     *string                       `json:"ProviderName,omitempty"`
+	ProviderType     *IdentityProviderTypeTypeEnum `json:"ProviderType,omitempty"`
 }

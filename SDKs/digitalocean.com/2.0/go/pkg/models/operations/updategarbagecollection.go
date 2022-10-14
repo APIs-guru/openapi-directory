@@ -11,7 +11,7 @@ type UpdateGarbageCollectionPathParams struct {
 }
 
 type UpdateGarbageCollectionRequestBody struct {
-	Cancel *bool `json:"cancel"`
+	Cancel *bool `json:"cancel,omitempty"`
 }
 
 type UpdateGarbageCollectionRequest struct {
@@ -33,23 +33,23 @@ const (
 )
 
 type UpdateGarbageCollection200ApplicationJSONGarbageCollection struct {
-	BlobsDeleted *int64                                                                `json:"blobs_deleted"`
-	CreatedAt    *time.Time                                                            `json:"created_at"`
-	FreedBytes   *int64                                                                `json:"freed_bytes"`
-	RegistryName *string                                                               `json:"registry_name"`
-	Status       *UpdateGarbageCollection200ApplicationJSONGarbageCollectionStatusEnum `json:"status"`
-	UpdatedAt    *time.Time                                                            `json:"updated_at"`
-	UUID         *string                                                               `json:"uuid"`
+	BlobsDeleted *int64                                                                `json:"blobs_deleted,omitempty"`
+	CreatedAt    *time.Time                                                            `json:"created_at,omitempty"`
+	FreedBytes   *int64                                                                `json:"freed_bytes,omitempty"`
+	RegistryName *string                                                               `json:"registry_name,omitempty"`
+	Status       *UpdateGarbageCollection200ApplicationJSONGarbageCollectionStatusEnum `json:"status,omitempty"`
+	UpdatedAt    *time.Time                                                            `json:"updated_at,omitempty"`
+	UUID         *string                                                               `json:"uuid,omitempty"`
 }
 
 type UpdateGarbageCollection200ApplicationJSON struct {
-	GarbageCollection *UpdateGarbageCollection200ApplicationJSONGarbageCollection `json:"garbage_collection"`
+	GarbageCollection *UpdateGarbageCollection200ApplicationJSONGarbageCollection `json:"garbage_collection,omitempty"`
 }
 
 type UpdateGarbageCollection401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateGarbageCollectionResponse struct {

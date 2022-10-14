@@ -1,5 +1,5 @@
 package shared
 
 type CreateGraphResponse struct {
-	GraphArn *string `json:"GraphArn"`
+	GraphArn *string `json:"GraphArn,omitempty"`
 }

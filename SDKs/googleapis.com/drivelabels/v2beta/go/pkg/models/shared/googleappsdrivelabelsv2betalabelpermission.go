@@ -11,10 +11,10 @@ const (
 )
 
 type GoogleAppsDriveLabelsV2betaLabelPermission struct {
-	Audience *string                                             `json:"audience"`
-	Email    *string                                             `json:"email"`
-	Group    *string                                             `json:"group"`
-	Name     *string                                             `json:"name"`
-	Person   *string                                             `json:"person"`
-	Role     *GoogleAppsDriveLabelsV2betaLabelPermissionRoleEnum `json:"role"`
+	Audience *string                                             `json:"audience,omitempty"`
+	Email    *string                                             `json:"email,omitempty"`
+	Group    *string                                             `json:"group,omitempty"`
+	Name     *string                                             `json:"name,omitempty"`
+	Person   *string                                             `json:"person,omitempty"`
+	Role     *GoogleAppsDriveLabelsV2betaLabelPermissionRoleEnum `json:"role,omitempty"`
 }

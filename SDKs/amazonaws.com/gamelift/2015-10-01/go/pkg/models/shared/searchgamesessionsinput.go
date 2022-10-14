@@ -1,11 +1,11 @@
 package shared
 
 type SearchGameSessionsInput struct {
-	AliasID          *string `json:"AliasId"`
-	FilterExpression *string `json:"FilterExpression"`
-	FleetID          *string `json:"FleetId"`
-	Limit            *int64  `json:"Limit"`
-	Location         *string `json:"Location"`
-	NextToken        *string `json:"NextToken"`
-	SortExpression   *string `json:"SortExpression"`
+	AliasID          *string `json:"AliasId,omitempty"`
+	FilterExpression *string `json:"FilterExpression,omitempty"`
+	FleetID          *string `json:"FleetId,omitempty"`
+	Limit            *int64  `json:"Limit,omitempty"`
+	Location         *string `json:"Location,omitempty"`
+	NextToken        *string `json:"NextToken,omitempty"`
+	SortExpression   *string `json:"SortExpression,omitempty"`
 }

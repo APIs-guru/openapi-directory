@@ -1,5 +1,5 @@
 package shared
 
 type DebugInstanceRequest struct {
-	SSHKey *string `json:"sshKey"`
+	SSHKey *string `json:"sshKey,omitempty"`
 }

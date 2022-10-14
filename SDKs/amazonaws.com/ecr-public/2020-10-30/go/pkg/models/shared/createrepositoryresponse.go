@@ -1,6 +1,6 @@
 package shared
 
 type CreateRepositoryResponse struct {
-	CatalogData *RepositoryCatalogData `json:"catalogData"`
-	Repository  *Repository            `json:"repository"`
+	CatalogData *RepositoryCatalogData `json:"catalogData,omitempty"`
+	Repository  *Repository            `json:"repository,omitempty"`
 }

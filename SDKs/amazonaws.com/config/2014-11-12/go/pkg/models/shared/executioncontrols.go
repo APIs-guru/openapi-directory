@@ -1,5 +1,5 @@
 package shared
 
 type ExecutionControls struct {
-	SsmControls *SsmControls `json:"SsmControls"`
+	SsmControls *SsmControls `json:"SsmControls,omitempty"`
 }

@@ -16,8 +16,8 @@ const (
 )
 
 type PatchChargeStationVariableRequestBody struct {
-	Value    *string                                            `json:"value"`
-	Variable *PatchChargeStationVariableRequestBodyVariableEnum `json:"variable"`
+	Value    *string                                            `json:"value,omitempty"`
+	Variable *PatchChargeStationVariableRequestBodyVariableEnum `json:"variable,omitempty"`
 }
 
 type PatchChargeStationVariableRequest struct {
@@ -26,9 +26,9 @@ type PatchChargeStationVariableRequest struct {
 }
 
 type PatchChargeStationVariable201ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type PatchChargeStationVariableResponse struct {

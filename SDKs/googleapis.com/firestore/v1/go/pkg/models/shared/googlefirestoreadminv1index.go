@@ -18,8 +18,8 @@ const (
 )
 
 type GoogleFirestoreAdminV1Index struct {
-	Fields     []GoogleFirestoreAdminV1IndexField         `json:"fields"`
-	Name       *string                                    `json:"name"`
-	QueryScope *GoogleFirestoreAdminV1IndexQueryScopeEnum `json:"queryScope"`
-	State      *GoogleFirestoreAdminV1IndexStateEnum      `json:"state"`
+	Fields     []GoogleFirestoreAdminV1IndexField         `json:"fields,omitempty"`
+	Name       *string                                    `json:"name,omitempty"`
+	QueryScope *GoogleFirestoreAdminV1IndexQueryScopeEnum `json:"queryScope,omitempty"`
+	State      *GoogleFirestoreAdminV1IndexStateEnum      `json:"state,omitempty"`
 }

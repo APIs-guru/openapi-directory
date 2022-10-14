@@ -11,9 +11,9 @@ type UpdateFleetMetadataHeaders struct {
 }
 
 type UpdateFleetMetadataRequestBody struct {
-	DisplayName                *string `json:"DisplayName"`
+	DisplayName                *string `json:"DisplayName,omitempty"`
 	FleetArn                   string  `json:"FleetArn"`
-	OptimizeForEndUserLocation *bool   `json:"OptimizeForEndUserLocation"`
+	OptimizeForEndUserLocation *bool   `json:"OptimizeForEndUserLocation,omitempty"`
 }
 
 type UpdateFleetMetadataRequest struct {

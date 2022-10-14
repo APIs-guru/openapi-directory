@@ -8,8 +8,8 @@ const (
 )
 
 type GoogleCloudAssetV1BigQueryDestination struct {
-	Dataset          *string                                                `json:"dataset"`
-	PartitionKey     *GoogleCloudAssetV1BigQueryDestinationPartitionKeyEnum `json:"partitionKey"`
-	TablePrefix      *string                                                `json:"tablePrefix"`
-	WriteDisposition *string                                                `json:"writeDisposition"`
+	Dataset          *string                                                `json:"dataset,omitempty"`
+	PartitionKey     *GoogleCloudAssetV1BigQueryDestinationPartitionKeyEnum `json:"partitionKey,omitempty"`
+	TablePrefix      *string                                                `json:"tablePrefix,omitempty"`
+	WriteDisposition *string                                                `json:"writeDisposition,omitempty"`
 }

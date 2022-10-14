@@ -1,6 +1,6 @@
 package shared
 
 type AdditionalInstanceConfiguration struct {
-	SystemsManagerAgent *SystemsManagerAgent `json:"systemsManagerAgent"`
-	UserDataOverride    *string              `json:"userDataOverride"`
+	SystemsManagerAgent *SystemsManagerAgent `json:"systemsManagerAgent,omitempty"`
+	UserDataOverride    *string              `json:"userDataOverride,omitempty"`
 }

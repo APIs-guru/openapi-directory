@@ -63,19 +63,19 @@ const (
 )
 
 type ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequencyOtherApplicationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestTypeOtherBankInterestType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequencyOtherCalculationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -83,17 +83,17 @@ type ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequencyOtherCa
 type ObbcaData1CreditInterestTierBandSetTierBand struct {
 	Aer                            string                                                                                                       `json:"AER"`
 	ApplicationFrequency           ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyApplicationFrequencyEnum                      `json:"ApplicationFrequency"`
-	BankInterestRate               *string                                                                                                      `json:"BankInterestRate"`
-	BankInterestRateType           *ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeBankInterestRateTypeEnum                     `json:"BankInterestRateType"`
-	CalculationFrequency           *ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyCalculationFrequencyEnum                     `json:"CalculationFrequency"`
-	DepositInterestAppliedCoverage *ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageDepositInterestAppliedCoverageEnum `json:"DepositInterestAppliedCoverage"`
+	BankInterestRate               *string                                                                                                      `json:"BankInterestRate,omitempty"`
+	BankInterestRateType           *ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeBankInterestRateTypeEnum                     `json:"BankInterestRateType,omitempty"`
+	CalculationFrequency           *ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyCalculationFrequencyEnum                     `json:"CalculationFrequency,omitempty"`
+	DepositInterestAppliedCoverage *ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageDepositInterestAppliedCoverageEnum `json:"DepositInterestAppliedCoverage,omitempty"`
 	FixedVariableInterestRateType  ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeFixedVariableInterestRateTypeEnum    `json:"FixedVariableInterestRateType"`
-	Identification                 *string                                                                                                      `json:"Identification"`
-	Notes                          []string                                                                                                     `json:"Notes"`
-	OtherApplicationFrequency      *ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequencyOtherApplicationFrequency               `json:"OtherApplicationFrequency"`
-	OtherBankInterestType          *ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestTypeOtherBankInterestType                       `json:"OtherBankInterestType"`
-	OtherCalculationFrequency      *ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequencyOtherCalculationFrequency               `json:"OtherCalculationFrequency"`
-	TierValueMaximum               *string                                                                                                      `json:"TierValueMaximum"`
+	Identification                 *string                                                                                                      `json:"Identification,omitempty"`
+	Notes                          []string                                                                                                     `json:"Notes,omitempty"`
+	OtherApplicationFrequency      *ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequencyOtherApplicationFrequency               `json:"OtherApplicationFrequency,omitempty"`
+	OtherBankInterestType          *ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestTypeOtherBankInterestType                       `json:"OtherBankInterestType,omitempty"`
+	OtherCalculationFrequency      *ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequencyOtherCalculationFrequency               `json:"OtherCalculationFrequency,omitempty"`
+	TierValueMaximum               *string                                                                                                      `json:"TierValueMaximum,omitempty"`
 	TierValueMinimum               string                                                                                                       `json:"TierValueMinimum"`
 }
 
@@ -106,9 +106,9 @@ const (
 )
 
 type ObbcaData1CreditInterestTierBandSet struct {
-	CalculationMethod *ObbcaData1CreditInterestTierBandSetCalculationMethodCalculationMethodEnum `json:"CalculationMethod"`
+	CalculationMethod *ObbcaData1CreditInterestTierBandSetCalculationMethodCalculationMethodEnum `json:"CalculationMethod,omitempty"`
 	Destination       ObbcaData1CreditInterestTierBandSetDestinationDestinationEnum              `json:"Destination"`
-	Notes             []string                                                                   `json:"Notes"`
+	Notes             []string                                                                   `json:"Notes,omitempty"`
 	TierBand          []ObbcaData1CreditInterestTierBandSetTierBand                              `json:"TierBand"`
 	TierBandMethod    ObbcaData1CreditInterestTierBandSetTierBandMethodTierBandMethodEnum        `json:"TierBandMethod"`
 }
@@ -149,19 +149,19 @@ const (
 )
 
 type ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                               `json:"FeeCapAmount"`
-	FeeCapOccurrence *float32                                                              `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                               `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *float32                                                              `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum                   `json:"FeeType"`
 	MinMaxType       ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeMinMaxTypeEnum        `json:"MinMaxType"`
-	Notes            []string                                                              `json:"Notes"`
-	OtherFeeType     []ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType                  `json:"OtherFeeType"`
+	Notes            []string                                                              `json:"Notes,omitempty"`
+	OtherFeeType     []ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType                  `json:"OtherFeeType,omitempty"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum string
@@ -215,10 +215,10 @@ const (
 )
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRangeFeeApplicableRange struct {
-	MaximumAmount *string `json:"MaximumAmount"`
-	MaximumRate   *string `json:"MaximumRate"`
-	MinimumAmount *string `json:"MinimumAmount"`
-	MinimumRate   *string `json:"MinimumRate"`
+	MaximumAmount *string `json:"MaximumAmount,omitempty"`
+	MaximumRate   *string `json:"MaximumRate,omitempty"`
+	MinimumAmount *string `json:"MinimumAmount,omitempty"`
+	MinimumRate   *string `json:"MinimumRate,omitempty"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryFeeCategoryEnum string
@@ -260,19 +260,19 @@ const (
 )
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                              `json:"FeeCapAmount"`
-	FeeCapOccurrence *float32                                                                             `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                              `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *float32                                                                             `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum                   `json:"FeeType"`
 	MinMaxType       ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeMinMaxTypeEnum        `json:"MinMaxType"`
-	Notes            []string                                                                             `json:"Notes"`
-	OtherFeeType     []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType                  `json:"OtherFeeType"`
+	Notes            []string                                                                             `json:"Notes,omitempty"`
+	OtherFeeType     []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType                  `json:"OtherFeeType,omitempty"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeFeeRateTypeEnum string
@@ -296,25 +296,25 @@ const (
 )
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryTypeOtherFeeCategoryType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateTypeOtherFeeRateType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -327,7 +327,7 @@ const (
 )
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeOtherFeeType struct {
-	Code        *string                                                                         `json:"Code"`
+	Code        *string                                                                         `json:"Code,omitempty"`
 	Description string                                                                          `json:"Description"`
 	FeeCategory ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryFeeCategoryEnum `json:"FeeCategory"`
 	Name        string                                                                          `json:"Name"`
@@ -335,25 +335,25 @@ type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeOtherFeeType struct {
 
 type ObbcaData1OtherFeesChargesFeeChargeDetail struct {
 	ApplicationFrequency      ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum        `json:"ApplicationFrequency"`
-	CalculationFrequency      *ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum       `json:"CalculationFrequency"`
-	FeeAmount                 *string                                                                                      `json:"FeeAmount"`
-	FeeApplicableRange        *ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRangeFeeApplicableRange               `json:"FeeApplicableRange"`
+	CalculationFrequency      *ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum       `json:"CalculationFrequency,omitempty"`
+	FeeAmount                 *string                                                                                      `json:"FeeAmount,omitempty"`
+	FeeApplicableRange        *ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRangeFeeApplicableRange               `json:"FeeApplicableRange,omitempty"`
 	FeeCategory               ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryFeeCategoryEnum                          `json:"FeeCategory"`
-	FeeChargeCap              []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap                                      `json:"FeeChargeCap"`
-	FeeRate                   *string                                                                                      `json:"FeeRate"`
-	FeeRateType               *ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeFeeRateTypeEnum                         `json:"FeeRateType"`
+	FeeChargeCap              []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap                                      `json:"FeeChargeCap,omitempty"`
+	FeeRate                   *string                                                                                      `json:"FeeRate,omitempty"`
+	FeeRateType               *ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeFeeRateTypeEnum                         `json:"FeeRateType,omitempty"`
 	FeeType                   ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeFeeTypeEnum                                  `json:"FeeType"`
-	NegotiableIndicator       *bool                                                                                        `json:"NegotiableIndicator"`
-	Notes                     []string                                                                                     `json:"Notes"`
-	OtherApplicationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency `json:"OtherCalculationFrequency"`
-	OtherFeeCategoryType      *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryTypeOtherFeeCategoryType           `json:"OtherFeeCategoryType"`
-	OtherFeeRateType          *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateTypeOtherFeeRateType                   `json:"OtherFeeRateType"`
-	OtherFeeType              *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeOtherFeeType                           `json:"OtherFeeType"`
+	NegotiableIndicator       *bool                                                                                        `json:"NegotiableIndicator,omitempty"`
+	Notes                     []string                                                                                     `json:"Notes,omitempty"`
+	OtherApplicationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeCategoryType      *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryTypeOtherFeeCategoryType           `json:"OtherFeeCategoryType,omitempty"`
+	OtherFeeRateType          *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateTypeOtherFeeRateType                   `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType              *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeOtherFeeType                           `json:"OtherFeeType,omitempty"`
 }
 
 type ObbcaData1OtherFeesChargesOtherTariffTypeOtherTariffType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -367,11 +367,11 @@ const (
 )
 
 type ObbcaData1OtherFeesCharges struct {
-	FeeChargeCap    []ObbcaData1OtherFeesChargesFeeChargeCap                  `json:"FeeChargeCap"`
+	FeeChargeCap    []ObbcaData1OtherFeesChargesFeeChargeCap                  `json:"FeeChargeCap,omitempty"`
 	FeeChargeDetail []ObbcaData1OtherFeesChargesFeeChargeDetail               `json:"FeeChargeDetail"`
-	OtherTariffType *ObbcaData1OtherFeesChargesOtherTariffTypeOtherTariffType `json:"OtherTariffType"`
-	TariffName      *string                                                   `json:"TariffName"`
-	TariffType      *ObbcaData1OtherFeesChargesTariffTypeTariffTypeEnum       `json:"TariffType"`
+	OtherTariffType *ObbcaData1OtherFeesChargesOtherTariffTypeOtherTariffType `json:"OtherTariffType,omitempty"`
+	TariffName      *string                                                   `json:"TariffName,omitempty"`
+	TariffType      *ObbcaData1OtherFeesChargesTariffTypeTariffTypeEnum       `json:"TariffType,omitempty"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum string
@@ -410,19 +410,19 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                         `json:"FeeCapAmount"`
-	FeeCapOccurrence *float32                                                                                                        `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                         `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *float32                                                                                                        `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum                   `json:"FeeType"`
 	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum        `json:"MinMaxType"`
-	Notes            []string                                                                                                        `json:"Notes"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType"`
+	Notes            []string                                                                                                        `json:"Notes,omitempty"`
+	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType,omitempty"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum string
@@ -500,25 +500,25 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -559,41 +559,41 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                                 `json:"FeeCapAmount"`
-	FeeCapOccurrence *float32                                                                                                                                `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                                 `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *float32                                                                                                                                `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum                   `json:"FeeType"`
 	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum        `json:"MinMaxType"`
-	Notes            []string                                                                                                                                `json:"Notes"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType"`
+	Notes            []string                                                                                                                                `json:"Notes,omitempty"`
+	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType,omitempty"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum        `json:"ApplicationFrequency"`
-	CalculationFrequency       *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum       `json:"CalculationFrequency"`
-	FeeAmount                  *string                                                                                                                                `json:"FeeAmount"`
-	FeeRate                    *string                                                                                                                                `json:"FeeRate"`
-	FeeRateType                *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum                         `json:"FeeRateType"`
+	CalculationFrequency       *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum       `json:"CalculationFrequency,omitempty"`
+	FeeAmount                  *string                                                                                                                                `json:"FeeAmount,omitempty"`
+	FeeRate                    *string                                                                                                                                `json:"FeeRate,omitempty"`
+	FeeRateType                *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum                         `json:"FeeRateType,omitempty"`
 	FeeType                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeFeeTypeEnum                                  `json:"FeeType"`
-	IncrementalBorrowingAmount *string                                                                                                                                `json:"IncrementalBorrowingAmount"`
-	NegotiableIndicator        *bool                                                                                                                                  `json:"NegotiableIndicator"`
-	Notes                      []string                                                                                                                               `json:"Notes"`
-	OtherApplicationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency `json:"OtherCalculationFrequency"`
-	OtherFeeRateType           *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType                   `json:"OtherFeeRateType"`
-	OtherFeeType               *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType                           `json:"OtherFeeType"`
-	OverdraftControlIndicator  *bool                                                                                                                                  `json:"OverdraftControlIndicator"`
-	OverdraftFeeChargeCap      []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap                             `json:"OverdraftFeeChargeCap"`
+	IncrementalBorrowingAmount *string                                                                                                                                `json:"IncrementalBorrowingAmount,omitempty"`
+	NegotiableIndicator        *bool                                                                                                                                  `json:"NegotiableIndicator,omitempty"`
+	Notes                      []string                                                                                                                               `json:"Notes,omitempty"`
+	OtherApplicationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeRateType           *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType                   `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType               *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType                           `json:"OtherFeeType,omitempty"`
+	OverdraftControlIndicator  *bool                                                                                                                                  `json:"OverdraftControlIndicator,omitempty"`
+	OverdraftFeeChargeCap      []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap                             `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges struct {
-	OverdraftFeeChargeCap    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap"`
+	OverdraftFeeChargeCap    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
 }
 
@@ -644,19 +644,19 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                          `json:"FeeCapAmount"`
-	FeeCapOccurrence *float32                                                                                                                         `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                          `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *float32                                                                                                                         `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum                   `json:"FeeType"`
 	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum        `json:"MinMaxType"`
-	Notes            []string                                                                                                                         `json:"Notes"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType"`
+	Notes            []string                                                                                                                         `json:"Notes,omitempty"`
+	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType,omitempty"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum string
@@ -734,25 +734,25 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -793,41 +793,41 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                                                  `json:"FeeCapAmount"`
-	FeeCapOccurrence *float32                                                                                                                                                 `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                                                  `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *float32                                                                                                                                                 `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum                   `json:"FeeType"`
 	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum        `json:"MinMaxType"`
-	Notes            []string                                                                                                                                                 `json:"Notes"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType"`
+	Notes            []string                                                                                                                                                 `json:"Notes,omitempty"`
+	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType                  `json:"OtherFeeType,omitempty"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum        `json:"ApplicationFrequency"`
-	CalculationFrequency       *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum       `json:"CalculationFrequency"`
-	FeeAmount                  *string                                                                                                                                                 `json:"FeeAmount"`
-	FeeRate                    *string                                                                                                                                                 `json:"FeeRate"`
-	FeeRateType                *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum                         `json:"FeeRateType"`
+	CalculationFrequency       *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum       `json:"CalculationFrequency,omitempty"`
+	FeeAmount                  *string                                                                                                                                                 `json:"FeeAmount,omitempty"`
+	FeeRate                    *string                                                                                                                                                 `json:"FeeRate,omitempty"`
+	FeeRateType                *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum                         `json:"FeeRateType,omitempty"`
 	FeeType                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeFeeTypeEnum                                  `json:"FeeType"`
-	IncrementalBorrowingAmount *string                                                                                                                                                 `json:"IncrementalBorrowingAmount"`
-	NegotiableIndicator        *bool                                                                                                                                                   `json:"NegotiableIndicator"`
-	Notes                      []string                                                                                                                                                `json:"Notes"`
-	OtherApplicationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency `json:"OtherCalculationFrequency"`
-	OtherFeeRateType           *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType                   `json:"OtherFeeRateType"`
-	OtherFeeType               *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType                           `json:"OtherFeeType"`
-	OverdraftControlIndicator  *bool                                                                                                                                                   `json:"OverdraftControlIndicator"`
-	OverdraftFeeChargeCap      []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap                             `json:"OverdraftFeeChargeCap"`
+	IncrementalBorrowingAmount *string                                                                                                                                                 `json:"IncrementalBorrowingAmount,omitempty"`
+	NegotiableIndicator        *bool                                                                                                                                                   `json:"NegotiableIndicator,omitempty"`
+	Notes                      []string                                                                                                                                                `json:"Notes,omitempty"`
+	OtherApplicationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeRateType           *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType                   `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType               *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType                           `json:"OtherFeeType,omitempty"`
+	OverdraftControlIndicator  *bool                                                                                                                                                   `json:"OverdraftControlIndicator,omitempty"`
+	OverdraftFeeChargeCap      []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap                             `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges struct {
-	OverdraftFeeChargeCap    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap"`
+	OverdraftFeeChargeCap    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
 }
 
@@ -840,17 +840,17 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBand struct {
-	AgreementLengthMax                *float32                                                                                                                        `json:"AgreementLengthMax"`
-	AgreementLengthMin                *float32                                                                                                                        `json:"AgreementLengthMin"`
-	AgreementPeriod                   *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodAgreementPeriodEnum                                     `json:"AgreementPeriod"`
-	BankGuaranteedIndicator           *bool                                                                                                                           `json:"BankGuaranteedIndicator"`
-	Ear                               *string                                                                                                                         `json:"EAR"`
-	Identification                    *string                                                                                                                         `json:"Identification"`
-	Notes                             []string                                                                                                                        `json:"Notes"`
-	OverdraftFeesCharges              []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges                                                  `json:"OverdraftFeesCharges"`
-	OverdraftInterestChargingCoverage *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageOverdraftInterestChargingCoverageEnum `json:"OverdraftInterestChargingCoverage"`
-	RepresentativeApr                 *string                                                                                                                         `json:"RepresentativeAPR"`
-	TierValueMax                      *string                                                                                                                         `json:"TierValueMax"`
+	AgreementLengthMax                *float32                                                                                                                        `json:"AgreementLengthMax,omitempty"`
+	AgreementLengthMin                *float32                                                                                                                        `json:"AgreementLengthMin,omitempty"`
+	AgreementPeriod                   *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodAgreementPeriodEnum                                     `json:"AgreementPeriod,omitempty"`
+	BankGuaranteedIndicator           *bool                                                                                                                           `json:"BankGuaranteedIndicator,omitempty"`
+	Ear                               *string                                                                                                                         `json:"EAR,omitempty"`
+	Identification                    *string                                                                                                                         `json:"Identification,omitempty"`
+	Notes                             []string                                                                                                                        `json:"Notes,omitempty"`
+	OverdraftFeesCharges              []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges                                                  `json:"OverdraftFeesCharges,omitempty"`
+	OverdraftInterestChargingCoverage *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageOverdraftInterestChargingCoverageEnum `json:"OverdraftInterestChargingCoverage,omitempty"`
+	RepresentativeApr                 *string                                                                                                                         `json:"RepresentativeAPR,omitempty"`
+	TierValueMax                      *string                                                                                                                         `json:"TierValueMax,omitempty"`
 	TierValueMin                      string                                                                                                                          `json:"TierValueMin"`
 }
 
@@ -870,18 +870,18 @@ const (
 )
 
 type ObbcaData1OverdraftOverdraftTierBandSet struct {
-	AuthorisedIndicator  *bool                                                                   `json:"AuthorisedIndicator"`
-	BufferAmount         *string                                                                 `json:"BufferAmount"`
-	Identification       *string                                                                 `json:"Identification"`
-	Notes                []string                                                                `json:"Notes"`
-	OverdraftFeesCharges []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges           `json:"OverdraftFeesCharges"`
+	AuthorisedIndicator  *bool                                                                   `json:"AuthorisedIndicator,omitempty"`
+	BufferAmount         *string                                                                 `json:"BufferAmount,omitempty"`
+	Identification       *string                                                                 `json:"Identification,omitempty"`
+	Notes                []string                                                                `json:"Notes,omitempty"`
+	OverdraftFeesCharges []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges           `json:"OverdraftFeesCharges,omitempty"`
 	OverdraftTierBand    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBand              `json:"OverdraftTierBand"`
-	OverdraftType        *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeOverdraftTypeEnum  `json:"OverdraftType"`
+	OverdraftType        *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeOverdraftTypeEnum  `json:"OverdraftType,omitempty"`
 	TierBandMethod       ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodTierBandMethodEnum `json:"TierBandMethod"`
 }
 
 type ObbcaData1OverdraftOverdraft struct {
-	Notes                []string                                  `json:"Notes"`
+	Notes                []string                                  `json:"Notes,omitempty"`
 	OverdraftTierBandSet []ObbcaData1OverdraftOverdraftTierBandSet `json:"OverdraftTierBandSet"`
 }
 
@@ -910,15 +910,15 @@ const (
 )
 
 type ObbcaData1ProductDetailsProductDetails struct {
-	FeeFreeLength       *float32                                                            `json:"FeeFreeLength"`
-	FeeFreeLengthPeriod *ObbcaData1ProductDetailsFeeFreeLengthPeriodFeeFreeLengthPeriodEnum `json:"FeeFreeLengthPeriod"`
-	Notes               []string                                                            `json:"Notes"`
-	Segment             []ObbcaData1ProductDetailsSegmentEnum                               `json:"Segment"`
+	FeeFreeLength       *float32                                                            `json:"FeeFreeLength,omitempty"`
+	FeeFreeLengthPeriod *ObbcaData1ProductDetailsFeeFreeLengthPeriodFeeFreeLengthPeriodEnum `json:"FeeFreeLengthPeriod,omitempty"`
+	Notes               []string                                                            `json:"Notes,omitempty"`
+	Segment             []ObbcaData1ProductDetailsSegmentEnum                               `json:"Segment,omitempty"`
 }
 
 type ObbcaData1 struct {
-	CreditInterest   *ObbcaData1CreditInterestCreditInterest `json:"CreditInterest"`
-	OtherFeesCharges []ObbcaData1OtherFeesCharges            `json:"OtherFeesCharges"`
-	Overdraft        *ObbcaData1OverdraftOverdraft           `json:"Overdraft"`
-	ProductDetails   *ObbcaData1ProductDetailsProductDetails `json:"ProductDetails"`
+	CreditInterest   *ObbcaData1CreditInterestCreditInterest `json:"CreditInterest,omitempty"`
+	OtherFeesCharges []ObbcaData1OtherFeesCharges            `json:"OtherFeesCharges,omitempty"`
+	Overdraft        *ObbcaData1OverdraftOverdraft           `json:"Overdraft,omitempty"`
+	ProductDetails   *ObbcaData1ProductDetailsProductDetails `json:"ProductDetails,omitempty"`
 }

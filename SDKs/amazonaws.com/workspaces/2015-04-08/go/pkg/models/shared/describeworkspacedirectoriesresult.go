@@ -1,6 +1,6 @@
 package shared
 
 type DescribeWorkspaceDirectoriesResult struct {
-	Directories []WorkspaceDirectory `json:"Directories"`
-	NextToken   *string              `json:"NextToken"`
+	Directories []WorkspaceDirectory `json:"Directories,omitempty"`
+	NextToken   *string              `json:"NextToken,omitempty"`
 }

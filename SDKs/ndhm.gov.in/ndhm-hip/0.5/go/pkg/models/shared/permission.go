@@ -29,9 +29,9 @@ const (
 )
 
 type PermissionFrequency struct {
-	Repeats *int64                       `json:"repeats"`
-	Unit    *PermissionFrequencyUnitEnum `json:"unit"`
-	Value   *int64                       `json:"value"`
+	Repeats *int64                       `json:"repeats,omitempty"`
+	Unit    *PermissionFrequencyUnitEnum `json:"unit,omitempty"`
+	Value   *int64                       `json:"value,omitempty"`
 }
 
 type Permission struct {

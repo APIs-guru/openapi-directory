@@ -1,12 +1,12 @@
 package shared
 
 type SavingsPlanOfferingRate struct {
-	Operation           *string                         `json:"operation"`
-	ProductType         *SavingsPlanProductTypeEnum     `json:"productType"`
-	Properties          *interface{}                    `json:"properties"`
-	Rate                *string                         `json:"rate"`
-	SavingsPlanOffering *ParentSavingsPlanOffering      `json:"savingsPlanOffering"`
-	ServiceCode         *SavingsPlanRateServiceCodeEnum `json:"serviceCode"`
-	Unit                *SavingsPlanRateUnitEnum        `json:"unit"`
-	UsageType           *string                         `json:"usageType"`
+	Operation           *string                         `json:"operation,omitempty"`
+	ProductType         *SavingsPlanProductTypeEnum     `json:"productType,omitempty"`
+	Properties          *interface{}                    `json:"properties,omitempty"`
+	Rate                *string                         `json:"rate,omitempty"`
+	SavingsPlanOffering *ParentSavingsPlanOffering      `json:"savingsPlanOffering,omitempty"`
+	ServiceCode         *SavingsPlanRateServiceCodeEnum `json:"serviceCode,omitempty"`
+	Unit                *SavingsPlanRateUnitEnum        `json:"unit,omitempty"`
+	UsageType           *string                         `json:"usageType,omitempty"`
 }

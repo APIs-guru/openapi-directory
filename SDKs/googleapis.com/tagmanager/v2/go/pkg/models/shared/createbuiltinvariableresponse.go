@@ -1,5 +1,5 @@
 package shared
 
 type CreateBuiltInVariableResponse struct {
-	BuiltInVariable []BuiltInVariable `json:"builtInVariable"`
+	BuiltInVariable []BuiltInVariable `json:"builtInVariable,omitempty"`
 }

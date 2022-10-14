@@ -1,6 +1,6 @@
 package shared
 
 type Exfiltration struct {
-	Sources []ExfilResource `json:"sources"`
-	Targets []ExfilResource `json:"targets"`
+	Sources []ExfilResource `json:"sources,omitempty"`
+	Targets []ExfilResource `json:"targets,omitempty"`
 }

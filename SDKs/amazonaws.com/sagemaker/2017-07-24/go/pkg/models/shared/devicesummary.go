@@ -5,12 +5,12 @@ import (
 )
 
 type DeviceSummary struct {
-	Description      *string            `json:"Description"`
+	Description      *string            `json:"Description,omitempty"`
 	DeviceArn        string             `json:"DeviceArn"`
-	DeviceFleetName  *string            `json:"DeviceFleetName"`
+	DeviceFleetName  *string            `json:"DeviceFleetName,omitempty"`
 	DeviceName       string             `json:"DeviceName"`
-	IotThingName     *string            `json:"IotThingName"`
-	LatestHeartbeat  *time.Time         `json:"LatestHeartbeat"`
-	Models           []EdgeModelSummary `json:"Models"`
-	RegistrationTime *time.Time         `json:"RegistrationTime"`
+	IotThingName     *string            `json:"IotThingName,omitempty"`
+	LatestHeartbeat  *time.Time         `json:"LatestHeartbeat,omitempty"`
+	Models           []EdgeModelSummary `json:"Models,omitempty"`
+	RegistrationTime *time.Time         `json:"RegistrationTime,omitempty"`
 }

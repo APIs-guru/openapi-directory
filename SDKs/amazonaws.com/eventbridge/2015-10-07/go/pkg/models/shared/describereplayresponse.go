@@ -5,16 +5,16 @@ import (
 )
 
 type DescribeReplayResponse struct {
-	Description           *string            `json:"Description"`
-	Destination           *ReplayDestination `json:"Destination"`
-	EventEndTime          *time.Time         `json:"EventEndTime"`
-	EventLastReplayedTime *time.Time         `json:"EventLastReplayedTime"`
-	EventSourceArn        *string            `json:"EventSourceArn"`
-	EventStartTime        *time.Time         `json:"EventStartTime"`
-	ReplayArn             *string            `json:"ReplayArn"`
-	ReplayEndTime         *time.Time         `json:"ReplayEndTime"`
-	ReplayName            *string            `json:"ReplayName"`
-	ReplayStartTime       *time.Time         `json:"ReplayStartTime"`
-	State                 *ReplayStateEnum   `json:"State"`
-	StateReason           *string            `json:"StateReason"`
+	Description           *string            `json:"Description,omitempty"`
+	Destination           *ReplayDestination `json:"Destination,omitempty"`
+	EventEndTime          *time.Time         `json:"EventEndTime,omitempty"`
+	EventLastReplayedTime *time.Time         `json:"EventLastReplayedTime,omitempty"`
+	EventSourceArn        *string            `json:"EventSourceArn,omitempty"`
+	EventStartTime        *time.Time         `json:"EventStartTime,omitempty"`
+	ReplayArn             *string            `json:"ReplayArn,omitempty"`
+	ReplayEndTime         *time.Time         `json:"ReplayEndTime,omitempty"`
+	ReplayName            *string            `json:"ReplayName,omitempty"`
+	ReplayStartTime       *time.Time         `json:"ReplayStartTime,omitempty"`
+	State                 *ReplayStateEnum   `json:"State,omitempty"`
+	StateReason           *string            `json:"StateReason,omitempty"`
 }

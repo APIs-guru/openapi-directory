@@ -1,13 +1,13 @@
 package shared
 
 type TreatmentResource struct {
-	CustomDeliveryConfiguration *CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration"`
+	CustomDeliveryConfiguration *CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration,omitempty"`
 	ID                          string                       `json:"Id"`
-	MessageConfiguration        *MessageConfiguration        `json:"MessageConfiguration"`
-	Schedule                    *Schedule                    `json:"Schedule"`
+	MessageConfiguration        *MessageConfiguration        `json:"MessageConfiguration,omitempty"`
+	Schedule                    *Schedule                    `json:"Schedule,omitempty"`
 	SizePercent                 int64                        `json:"SizePercent"`
-	State                       *CampaignState               `json:"State"`
-	TemplateConfiguration       *TemplateConfiguration       `json:"TemplateConfiguration"`
-	TreatmentDescription        *string                      `json:"TreatmentDescription"`
-	TreatmentName               *string                      `json:"TreatmentName"`
+	State                       *CampaignState               `json:"State,omitempty"`
+	TemplateConfiguration       *TemplateConfiguration       `json:"TemplateConfiguration,omitempty"`
+	TreatmentDescription        *string                      `json:"TreatmentDescription,omitempty"`
+	TreatmentName               *string                      `json:"TreatmentName,omitempty"`
 }

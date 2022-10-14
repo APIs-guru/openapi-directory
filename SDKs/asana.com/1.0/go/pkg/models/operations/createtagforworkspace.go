@@ -14,7 +14,7 @@ type CreateTagForWorkspaceQueryParams struct {
 }
 
 type CreateTagForWorkspaceRequestBody struct {
-	Data *shared.TagResponse `json:"data"`
+	Data *shared.TagResponse `json:"data,omitempty"`
 }
 
 type CreateTagForWorkspaceRequest struct {
@@ -24,7 +24,7 @@ type CreateTagForWorkspaceRequest struct {
 }
 
 type CreateTagForWorkspace201ApplicationJSON struct {
-	Data *shared.TagResponse `json:"data"`
+	Data *shared.TagResponse `json:"data,omitempty"`
 }
 
 type CreateTagForWorkspaceResponse struct {

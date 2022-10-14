@@ -10,7 +10,7 @@ const (
 )
 
 type MergedResult struct {
-	Outcome            *Outcome               `json:"outcome"`
-	State              *MergedResultStateEnum `json:"state"`
-	TestSuiteOverviews []TestSuiteOverview    `json:"testSuiteOverviews"`
+	Outcome            *Outcome               `json:"outcome,omitempty"`
+	State              *MergedResultStateEnum `json:"state,omitempty"`
+	TestSuiteOverviews []TestSuiteOverview    `json:"testSuiteOverviews,omitempty"`
 }

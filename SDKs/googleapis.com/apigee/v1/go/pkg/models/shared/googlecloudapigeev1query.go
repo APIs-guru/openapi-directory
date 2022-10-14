@@ -1,15 +1,15 @@
 package shared
 
 type GoogleCloudApigeeV1Query struct {
-	CsvDelimiter       *string                          `json:"csvDelimiter"`
-	Dimensions         []string                         `json:"dimensions"`
-	EnvgroupHostname   *string                          `json:"envgroupHostname"`
-	Filter             *string                          `json:"filter"`
-	GroupByTimeUnit    *string                          `json:"groupByTimeUnit"`
-	Limit              *int32                           `json:"limit"`
-	Metrics            []GoogleCloudApigeeV1QueryMetric `json:"metrics"`
-	Name               *string                          `json:"name"`
-	OutputFormat       *string                          `json:"outputFormat"`
-	ReportDefinitionID *string                          `json:"reportDefinitionId"`
-	TimeRange          *interface{}                     `json:"timeRange"`
+	CsvDelimiter       *string                          `json:"csvDelimiter,omitempty"`
+	Dimensions         []string                         `json:"dimensions,omitempty"`
+	EnvgroupHostname   *string                          `json:"envgroupHostname,omitempty"`
+	Filter             *string                          `json:"filter,omitempty"`
+	GroupByTimeUnit    *string                          `json:"groupByTimeUnit,omitempty"`
+	Limit              *int32                           `json:"limit,omitempty"`
+	Metrics            []GoogleCloudApigeeV1QueryMetric `json:"metrics,omitempty"`
+	Name               *string                          `json:"name,omitempty"`
+	OutputFormat       *string                          `json:"outputFormat,omitempty"`
+	ReportDefinitionID *string                          `json:"reportDefinitionId,omitempty"`
+	TimeRange          *interface{}                     `json:"timeRange,omitempty"`
 }

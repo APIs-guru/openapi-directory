@@ -5,15 +5,15 @@ import (
 )
 
 type UpdateSystemModelsPackageStatus struct {
-	ClientID         *string    `json:"ClientID"`
-	ClientKey        *string    `json:"ClientKey"`
-	DownloadTime     *string    `json:"DownloadTime"`
-	Downloaded       *string    `json:"Downloaded"`
-	InstallCompleted *string    `json:"InstallCompleted"`
-	InstallResult    *string    `json:"InstallResult"`
-	InstallStarted   *string    `json:"InstallStarted"`
-	InstallTime      *string    `json:"InstallTime"`
-	Percentage       *string    `json:"Percentage"`
-	Size             *string    `json:"Size"`
-	Timestamp        *time.Time `json:"Timestamp"`
+	ClientID         *string    `json:"ClientID,omitempty"`
+	ClientKey        *string    `json:"ClientKey,omitempty"`
+	DownloadTime     *string    `json:"DownloadTime,omitempty"`
+	Downloaded       *string    `json:"Downloaded,omitempty"`
+	InstallCompleted *string    `json:"InstallCompleted,omitempty"`
+	InstallResult    *string    `json:"InstallResult,omitempty"`
+	InstallStarted   *string    `json:"InstallStarted,omitempty"`
+	InstallTime      *string    `json:"InstallTime,omitempty"`
+	Percentage       *string    `json:"Percentage,omitempty"`
+	Size             *string    `json:"Size,omitempty"`
+	Timestamp        *time.Time `json:"Timestamp,omitempty"`
 }

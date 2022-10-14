@@ -1,10 +1,10 @@
 package shared
 
 type NamespacePost struct {
-	Authenticated *bool  `json:"authenticated"`
+	Authenticated *bool  `json:"authenticated,omitempty"`
 	ID            string `json:"id"`
-	PersistLast   *bool  `json:"persistLast"`
-	Persisted     *bool  `json:"persisted"`
-	PushEnabled   *bool  `json:"pushEnabled"`
-	TLSOnly       *bool  `json:"tlsOnly"`
+	PersistLast   *bool  `json:"persistLast,omitempty"`
+	Persisted     *bool  `json:"persisted,omitempty"`
+	PushEnabled   *bool  `json:"pushEnabled,omitempty"`
+	TLSOnly       *bool  `json:"tlsOnly,omitempty"`
 }

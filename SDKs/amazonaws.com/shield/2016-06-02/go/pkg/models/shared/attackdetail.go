@@ -5,12 +5,12 @@ import (
 )
 
 type AttackDetail struct {
-	AttackCounters   []SummarizedCounter  `json:"AttackCounters"`
-	AttackID         *string              `json:"AttackId"`
-	AttackProperties []AttackProperty     `json:"AttackProperties"`
-	EndTime          *time.Time           `json:"EndTime"`
-	Mitigations      []Mitigation         `json:"Mitigations"`
-	ResourceArn      *string              `json:"ResourceArn"`
-	StartTime        *time.Time           `json:"StartTime"`
-	SubResources     []SubResourceSummary `json:"SubResources"`
+	AttackCounters   []SummarizedCounter  `json:"AttackCounters,omitempty"`
+	AttackID         *string              `json:"AttackId,omitempty"`
+	AttackProperties []AttackProperty     `json:"AttackProperties,omitempty"`
+	EndTime          *time.Time           `json:"EndTime,omitempty"`
+	Mitigations      []Mitigation         `json:"Mitigations,omitempty"`
+	ResourceArn      *string              `json:"ResourceArn,omitempty"`
+	StartTime        *time.Time           `json:"StartTime,omitempty"`
+	SubResources     []SubResourceSummary `json:"SubResources,omitempty"`
 }

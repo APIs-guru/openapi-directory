@@ -11,7 +11,7 @@ type IssuesAddLabelsPathParams struct {
 }
 
 type IssuesAddLabelsRequestBody1 struct {
-	Labels []string `json:"labels"`
+	Labels []string `json:"labels,omitempty"`
 }
 
 type IssuesAddLabelsRequestBody3Labels struct {
@@ -19,7 +19,7 @@ type IssuesAddLabelsRequestBody3Labels struct {
 }
 
 type IssuesAddLabelsRequestBody3 struct {
-	Labels []IssuesAddLabelsRequestBody3Labels `json:"labels"`
+	Labels []IssuesAddLabelsRequestBody3Labels `json:"labels,omitempty"`
 }
 
 type IssuesAddLabelsRequestBody4 struct {

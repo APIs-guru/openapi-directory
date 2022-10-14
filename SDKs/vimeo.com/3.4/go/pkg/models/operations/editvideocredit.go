@@ -10,8 +10,8 @@ type EditVideoCreditPathParams struct {
 }
 
 type EditVideoCreditRequestBody struct {
-	Name *string `json:"name"`
-	Role *string `json:"role"`
+	Name *string `json:"name,omitempty"`
+	Role *string `json:"role,omitempty"`
 }
 
 type EditVideoCreditSecurity struct {

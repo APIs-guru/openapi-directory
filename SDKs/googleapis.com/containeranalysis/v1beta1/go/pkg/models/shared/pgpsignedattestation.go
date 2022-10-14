@@ -8,7 +8,7 @@ const (
 )
 
 type PgpSignedAttestation struct {
-	ContentType *PgpSignedAttestationContentTypeEnum `json:"contentType"`
-	PgpKeyID    *string                              `json:"pgpKeyId"`
-	Signature   *string                              `json:"signature"`
+	ContentType *PgpSignedAttestationContentTypeEnum `json:"contentType,omitempty"`
+	PgpKeyID    *string                              `json:"pgpKeyId,omitempty"`
+	Signature   *string                              `json:"signature,omitempty"`
 }

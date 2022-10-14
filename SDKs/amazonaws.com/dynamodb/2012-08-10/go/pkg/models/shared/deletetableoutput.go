@@ -1,5 +1,5 @@
 package shared
 
 type DeleteTableOutput struct {
-	TableDescription *TableDescription `json:"TableDescription"`
+	TableDescription *TableDescription `json:"TableDescription,omitempty"`
 }

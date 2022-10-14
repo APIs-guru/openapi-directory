@@ -1,5 +1,5 @@
 package shared
 
 type SmsSettings struct {
-	SmsMessage *string `json:"SmsMessage"`
+	SmsMessage *string `json:"SmsMessage,omitempty"`
 }

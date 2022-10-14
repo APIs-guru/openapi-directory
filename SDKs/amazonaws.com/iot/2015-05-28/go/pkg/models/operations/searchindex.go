@@ -15,11 +15,11 @@ type SearchIndexHeaders struct {
 }
 
 type SearchIndexRequestBody struct {
-	IndexName    *string `json:"indexName"`
-	MaxResults   *int64  `json:"maxResults"`
-	NextToken    *string `json:"nextToken"`
+	IndexName    *string `json:"indexName,omitempty"`
+	MaxResults   *int64  `json:"maxResults,omitempty"`
+	NextToken    *string `json:"nextToken,omitempty"`
 	QueryString  string  `json:"queryString"`
-	QueryVersion *string `json:"queryVersion"`
+	QueryVersion *string `json:"queryVersion,omitempty"`
 }
 
 type SearchIndexRequest struct {

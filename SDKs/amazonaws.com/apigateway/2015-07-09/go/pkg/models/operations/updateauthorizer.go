@@ -20,7 +20,7 @@ type UpdateAuthorizerHeaders struct {
 }
 
 type UpdateAuthorizerRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateAuthorizerRequest struct {

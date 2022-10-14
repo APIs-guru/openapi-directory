@@ -1,8 +1,8 @@
 package shared
 
 type APIOverview struct {
-	Dependabot                       []string `json:"dependabot"`
-	InstalledVersion                 *string  `json:"installed_version"`
-	Packages                         []string `json:"packages"`
+	Dependabot                       []string `json:"dependabot,omitempty"`
+	InstalledVersion                 *string  `json:"installed_version,omitempty"`
+	Packages                         []string `json:"packages,omitempty"`
 	VerifiablePasswordAuthentication bool     `json:"verifiable_password_authentication"`
 }

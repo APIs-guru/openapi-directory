@@ -1,7 +1,7 @@
 package shared
 
 type FloodlightActivityDynamicTag struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	Tag  *string `json:"tag"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Tag  *string `json:"tag,omitempty"`
 }

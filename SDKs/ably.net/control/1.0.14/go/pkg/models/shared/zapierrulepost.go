@@ -21,13 +21,13 @@ const (
 )
 
 type ZapierRulePostTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ZapierRulePostTarget struct {
-	Headers      []ZapierRulePostTargetHeaders `json:"headers"`
-	SigningKeyID *string                       `json:"signingKeyId"`
+	Headers      []ZapierRulePostTargetHeaders `json:"headers,omitempty"`
+	SigningKeyID *string                       `json:"signingKeyId,omitempty"`
 	URL          string                        `json:"url"`
 }
 
@@ -35,6 +35,6 @@ type ZapierRulePost struct {
 	RequestMode ZapierRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    ZapierRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                    `json:"source"`
-	Status      *ZapierRulePostStatusEnum     `json:"status"`
+	Status      *ZapierRulePostStatusEnum     `json:"status,omitempty"`
 	Target      ZapierRulePostTarget          `json:"target"`
 }

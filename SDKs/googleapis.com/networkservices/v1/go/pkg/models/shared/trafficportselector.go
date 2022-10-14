@@ -1,5 +1,5 @@
 package shared
 
 type TrafficPortSelector struct {
-	Ports []string `json:"ports"`
+	Ports []string `json:"ports,omitempty"`
 }

@@ -9,12 +9,12 @@ type OauthAuthorizationsUpdateAuthorizationPathParams struct {
 }
 
 type OauthAuthorizationsUpdateAuthorizationRequestBody struct {
-	AddScopes    []string `json:"add_scopes"`
-	Fingerprint  *string  `json:"fingerprint"`
-	Note         *string  `json:"note"`
-	NoteURL      *string  `json:"note_url"`
-	RemoveScopes []string `json:"remove_scopes"`
-	Scopes       []string `json:"scopes"`
+	AddScopes    []string `json:"add_scopes,omitempty"`
+	Fingerprint  *string  `json:"fingerprint,omitempty"`
+	Note         *string  `json:"note,omitempty"`
+	NoteURL      *string  `json:"note_url,omitempty"`
+	RemoveScopes []string `json:"remove_scopes,omitempty"`
+	Scopes       []string `json:"scopes,omitempty"`
 }
 
 type OauthAuthorizationsUpdateAuthorizationRequest struct {

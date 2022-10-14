@@ -1,8 +1,8 @@
 package shared
 
 type ITunesConnectAnalytics struct {
-	At *string `json:"at"`
-	Ct *string `json:"ct"`
-	Mt *string `json:"mt"`
-	Pt *string `json:"pt"`
+	At *string `json:"at,omitempty"`
+	Ct *string `json:"ct,omitempty"`
+	Mt *string `json:"mt,omitempty"`
+	Pt *string `json:"pt,omitempty"`
 }

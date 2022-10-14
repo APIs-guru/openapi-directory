@@ -23,6 +23,6 @@ const (
 )
 
 type AssetAssociation struct {
-	Asset *Asset                    `json:"asset"`
-	Role  *AssetAssociationRoleEnum `json:"role"`
+	Asset *Asset                    `json:"asset,omitempty"`
+	Role  *AssetAssociationRoleEnum `json:"role,omitempty"`
 }

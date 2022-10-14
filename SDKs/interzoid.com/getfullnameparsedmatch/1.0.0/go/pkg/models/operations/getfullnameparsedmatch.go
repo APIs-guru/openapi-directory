@@ -11,9 +11,9 @@ type GetfullnameparsedmatchRequest struct {
 }
 
 type Getfullnameparsedmatch200ApplicationJSON struct {
-	Code    *string `json:"Code"`
-	Credits *string `json:"Credits"`
-	Simkey  *string `json:"Simkey"`
+	Code    *string `json:"Code,omitempty"`
+	Credits *string `json:"Credits,omitempty"`
+	Simkey  *string `json:"Simkey,omitempty"`
 }
 
 type GetfullnameparsedmatchResponse struct {

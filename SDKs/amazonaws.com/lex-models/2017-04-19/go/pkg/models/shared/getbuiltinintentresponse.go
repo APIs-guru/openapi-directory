@@ -1,7 +1,7 @@
 package shared
 
 type GetBuiltinIntentResponse struct {
-	Signature        *string             `json:"signature"`
-	Slots            []BuiltinIntentSlot `json:"slots"`
-	SupportedLocales []LocaleEnum        `json:"supportedLocales"`
+	Signature        *string             `json:"signature,omitempty"`
+	Slots            []BuiltinIntentSlot `json:"slots,omitempty"`
+	SupportedLocales []LocaleEnum        `json:"supportedLocales,omitempty"`
 }

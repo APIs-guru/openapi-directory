@@ -5,6 +5,6 @@ import (
 )
 
 type GetDistributionLatestCacheResetResult struct {
-	CreateTime *time.Time `json:"createTime"`
-	Status     *string    `json:"status"`
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	Status     *string    `json:"status,omitempty"`
 }

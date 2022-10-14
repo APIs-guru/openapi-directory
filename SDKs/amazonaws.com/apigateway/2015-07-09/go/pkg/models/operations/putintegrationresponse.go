@@ -29,10 +29,10 @@ const (
 )
 
 type PutIntegrationResponseRequestBody struct {
-	ContentHandling    *PutIntegrationResponseRequestBodyContentHandlingEnum `json:"contentHandling"`
-	ResponseParameters map[string]string                                     `json:"responseParameters"`
-	ResponseTemplates  map[string]string                                     `json:"responseTemplates"`
-	SelectionPattern   *string                                               `json:"selectionPattern"`
+	ContentHandling    *PutIntegrationResponseRequestBodyContentHandlingEnum `json:"contentHandling,omitempty"`
+	ResponseParameters map[string]string                                     `json:"responseParameters,omitempty"`
+	ResponseTemplates  map[string]string                                     `json:"responseTemplates,omitempty"`
+	SelectionPattern   *string                                               `json:"selectionPattern,omitempty"`
 }
 
 type PutIntegrationResponseRequest struct {

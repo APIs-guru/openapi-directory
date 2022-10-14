@@ -28,13 +28,13 @@ const (
 )
 
 type Client struct {
-	ClientAccountID *string               `json:"clientAccountId"`
-	ClientName      *string               `json:"clientName"`
-	EntityID        *string               `json:"entityId"`
-	EntityName      *string               `json:"entityName"`
-	EntityType      *ClientEntityTypeEnum `json:"entityType"`
-	PartnerClientID *string               `json:"partnerClientId"`
-	Role            *ClientRoleEnum       `json:"role"`
-	Status          *ClientStatusEnum     `json:"status"`
-	VisibleToSeller *bool                 `json:"visibleToSeller"`
+	ClientAccountID *string               `json:"clientAccountId,omitempty"`
+	ClientName      *string               `json:"clientName,omitempty"`
+	EntityID        *string               `json:"entityId,omitempty"`
+	EntityName      *string               `json:"entityName,omitempty"`
+	EntityType      *ClientEntityTypeEnum `json:"entityType,omitempty"`
+	PartnerClientID *string               `json:"partnerClientId,omitempty"`
+	Role            *ClientRoleEnum       `json:"role,omitempty"`
+	Status          *ClientStatusEnum     `json:"status,omitempty"`
+	VisibleToSeller *bool                 `json:"visibleToSeller,omitempty"`
 }

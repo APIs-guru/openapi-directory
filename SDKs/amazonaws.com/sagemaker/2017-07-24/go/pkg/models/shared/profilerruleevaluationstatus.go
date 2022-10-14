@@ -5,9 +5,9 @@ import (
 )
 
 type ProfilerRuleEvaluationStatus struct {
-	LastModifiedTime      *time.Time                `json:"LastModifiedTime"`
-	RuleConfigurationName *string                   `json:"RuleConfigurationName"`
-	RuleEvaluationJobArn  *string                   `json:"RuleEvaluationJobArn"`
-	RuleEvaluationStatus  *RuleEvaluationStatusEnum `json:"RuleEvaluationStatus"`
-	StatusDetails         *string                   `json:"StatusDetails"`
+	LastModifiedTime      *time.Time                `json:"LastModifiedTime,omitempty"`
+	RuleConfigurationName *string                   `json:"RuleConfigurationName,omitempty"`
+	RuleEvaluationJobArn  *string                   `json:"RuleEvaluationJobArn,omitempty"`
+	RuleEvaluationStatus  *RuleEvaluationStatusEnum `json:"RuleEvaluationStatus,omitempty"`
+	StatusDetails         *string                   `json:"StatusDetails,omitempty"`
 }

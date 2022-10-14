@@ -8,11 +8,11 @@ const (
 )
 
 type ServiceCharge struct {
-	Active     *bool                  `json:"active"`
-	Amount     *float64               `json:"amount"`
-	Currency   *CurrencyEnum          `json:"currency"`
-	ID         *string                `json:"id"`
-	Name       *string                `json:"name"`
-	Percentage *float64               `json:"percentage"`
-	Type       *ServiceChargeTypeEnum `json:"type"`
+	Active     *bool                  `json:"active,omitempty"`
+	Amount     *float64               `json:"amount,omitempty"`
+	Currency   *CurrencyEnum          `json:"currency,omitempty"`
+	ID         *string                `json:"id,omitempty"`
+	Name       *string                `json:"name,omitempty"`
+	Percentage *float64               `json:"percentage,omitempty"`
+	Type       *ServiceChargeTypeEnum `json:"type,omitempty"`
 }

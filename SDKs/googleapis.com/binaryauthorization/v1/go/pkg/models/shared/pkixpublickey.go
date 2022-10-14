@@ -25,6 +25,6 @@ const (
 )
 
 type PkixPublicKey struct {
-	PublicKeyPem       *string                              `json:"publicKeyPem"`
-	SignatureAlgorithm *PkixPublicKeySignatureAlgorithmEnum `json:"signatureAlgorithm"`
+	PublicKeyPem       *string                              `json:"publicKeyPem,omitempty"`
+	SignatureAlgorithm *PkixPublicKeySignatureAlgorithmEnum `json:"signatureAlgorithm,omitempty"`
 }

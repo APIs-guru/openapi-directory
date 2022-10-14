@@ -5,10 +5,10 @@ import (
 )
 
 type TflAPIPresentationEntitiesJourneyPlannerFareTapDetails struct {
-	BusRouteID           *string    `json:"busRouteId"`
-	HostDeviceType       *string    `json:"hostDeviceType"`
-	ModeType             *string    `json:"modeType"`
-	NationalLocationCode *int32     `json:"nationalLocationCode"`
-	TapTimestamp         *time.Time `json:"tapTimestamp"`
-	ValidationType       *string    `json:"validationType"`
+	BusRouteID           *string    `json:"busRouteId,omitempty"`
+	HostDeviceType       *string    `json:"hostDeviceType,omitempty"`
+	ModeType             *string    `json:"modeType,omitempty"`
+	NationalLocationCode *int32     `json:"nationalLocationCode,omitempty"`
+	TapTimestamp         *time.Time `json:"tapTimestamp,omitempty"`
+	ValidationType       *string    `json:"validationType,omitempty"`
 }

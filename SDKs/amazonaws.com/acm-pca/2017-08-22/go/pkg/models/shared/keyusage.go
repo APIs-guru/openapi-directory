@@ -1,13 +1,13 @@
 package shared
 
 type KeyUsage struct {
-	CrlSign          *bool `json:"CRLSign"`
-	DataEncipherment *bool `json:"DataEncipherment"`
-	DecipherOnly     *bool `json:"DecipherOnly"`
-	DigitalSignature *bool `json:"DigitalSignature"`
-	EncipherOnly     *bool `json:"EncipherOnly"`
-	KeyAgreement     *bool `json:"KeyAgreement"`
-	KeyCertSign      *bool `json:"KeyCertSign"`
-	KeyEncipherment  *bool `json:"KeyEncipherment"`
-	NonRepudiation   *bool `json:"NonRepudiation"`
+	CrlSign          *bool `json:"CRLSign,omitempty"`
+	DataEncipherment *bool `json:"DataEncipherment,omitempty"`
+	DecipherOnly     *bool `json:"DecipherOnly,omitempty"`
+	DigitalSignature *bool `json:"DigitalSignature,omitempty"`
+	EncipherOnly     *bool `json:"EncipherOnly,omitempty"`
+	KeyAgreement     *bool `json:"KeyAgreement,omitempty"`
+	KeyCertSign      *bool `json:"KeyCertSign,omitempty"`
+	KeyEncipherment  *bool `json:"KeyEncipherment,omitempty"`
+	NonRepudiation   *bool `json:"NonRepudiation,omitempty"`
 }

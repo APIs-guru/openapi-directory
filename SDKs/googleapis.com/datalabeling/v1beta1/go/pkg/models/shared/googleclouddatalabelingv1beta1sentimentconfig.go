@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDatalabelingV1beta1SentimentConfig struct {
-	EnableLabelSentimentSelection *bool `json:"enableLabelSentimentSelection"`
+	EnableLabelSentimentSelection *bool `json:"enableLabelSentimentSelection,omitempty"`
 }

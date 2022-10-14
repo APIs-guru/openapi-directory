@@ -1,6 +1,6 @@
 package shared
 
 type LambdaResource struct {
-	EventTriggers []EventTriggerDefinition `json:"EventTriggers"`
-	LambdaArn     *string                  `json:"LambdaArn"`
+	EventTriggers []EventTriggerDefinition `json:"EventTriggers,omitempty"`
+	LambdaArn     *string                  `json:"LambdaArn,omitempty"`
 }

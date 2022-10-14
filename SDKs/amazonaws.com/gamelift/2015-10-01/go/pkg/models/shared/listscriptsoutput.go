@@ -1,6 +1,6 @@
 package shared
 
 type ListScriptsOutput struct {
-	NextToken *string  `json:"NextToken"`
-	Scripts   []Script `json:"Scripts"`
+	NextToken *string  `json:"NextToken,omitempty"`
+	Scripts   []Script `json:"Scripts,omitempty"`
 }

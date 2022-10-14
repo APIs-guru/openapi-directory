@@ -27,7 +27,7 @@ const (
 )
 
 type UpdateTypeRequestBody struct {
-	Definition *string                         `json:"definition"`
+	Definition *string                         `json:"definition,omitempty"`
 	Format     UpdateTypeRequestBodyFormatEnum `json:"format"`
 }
 

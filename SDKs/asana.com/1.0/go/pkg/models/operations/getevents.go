@@ -16,8 +16,8 @@ type GetEventsRequest struct {
 }
 
 type GetEvents200ApplicationJSON struct {
-	Data []shared.EventResponse `json:"data"`
-	Sync *string                `json:"sync"`
+	Data []shared.EventResponse `json:"data,omitempty"`
+	Sync *string                `json:"sync,omitempty"`
 }
 
 type GetEventsResponse struct {

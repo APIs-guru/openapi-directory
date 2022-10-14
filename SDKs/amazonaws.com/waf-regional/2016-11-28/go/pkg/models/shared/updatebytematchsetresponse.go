@@ -1,5 +1,5 @@
 package shared
 
 type UpdateByteMatchSetResponse struct {
-	ChangeToken *string `json:"ChangeToken"`
+	ChangeToken *string `json:"ChangeToken,omitempty"`
 }

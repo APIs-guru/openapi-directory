@@ -1,7 +1,7 @@
 package shared
 
 type TranslationModelMetadata struct {
-	BaseModel          *string `json:"baseModel"`
-	SourceLanguageCode *string `json:"sourceLanguageCode"`
-	TargetLanguageCode *string `json:"targetLanguageCode"`
+	BaseModel          *string `json:"baseModel,omitempty"`
+	SourceLanguageCode *string `json:"sourceLanguageCode,omitempty"`
+	TargetLanguageCode *string `json:"targetLanguageCode,omitempty"`
 }

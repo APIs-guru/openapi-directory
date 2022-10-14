@@ -14,17 +14,17 @@ type ListAllLoadBalancersRequest struct {
 }
 
 type ListAllLoadBalancers200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllLoadBalancers200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllLoadBalancers200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllLoadBalancers200ApplicationJSONMeta struct {
@@ -32,15 +32,15 @@ type ListAllLoadBalancers200ApplicationJSONMeta struct {
 }
 
 type ListAllLoadBalancers200ApplicationJSON struct {
-	Links         *ListAllLoadBalancers200ApplicationJSONLinks                                                    `json:"links"`
-	LoadBalancers []shared.Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancer `json:"load_balancers"`
+	Links         *ListAllLoadBalancers200ApplicationJSONLinks                                                    `json:"links,omitempty"`
+	LoadBalancers []shared.Onev21loadBalancersPostResponses202ContentApplication1jsonSchemaPropertiesLoadBalancer `json:"load_balancers,omitempty"`
 	Meta          ListAllLoadBalancers200ApplicationJSONMeta                                                      `json:"meta"`
 }
 
 type ListAllLoadBalancers401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllLoadBalancersResponse struct {

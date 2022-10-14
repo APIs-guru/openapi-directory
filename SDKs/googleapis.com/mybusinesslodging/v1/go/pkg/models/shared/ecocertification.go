@@ -43,7 +43,7 @@ const (
 )
 
 type EcoCertification struct {
-	Awarded          *bool                                 `json:"awarded"`
-	AwardedException *EcoCertificationAwardedExceptionEnum `json:"awardedException"`
-	EcoCertificate   *EcoCertificationEcoCertificateEnum   `json:"ecoCertificate"`
+	Awarded          *bool                                 `json:"awarded,omitempty"`
+	AwardedException *EcoCertificationAwardedExceptionEnum `json:"awardedException,omitempty"`
+	EcoCertificate   *EcoCertificationEcoCertificateEnum   `json:"ecoCertificate,omitempty"`
 }

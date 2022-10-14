@@ -1,5 +1,5 @@
 package shared
 
 type StartSchemaCreationResponse struct {
-	Status *SchemaStatusEnum `json:"status"`
+	Status *SchemaStatusEnum `json:"status,omitempty"`
 }

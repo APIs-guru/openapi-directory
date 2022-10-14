@@ -1,8 +1,8 @@
 package shared
 
 type ListServiceTemplateVersionsInput struct {
-	MajorVersion *string `json:"majorVersion"`
-	MaxResults   *int64  `json:"maxResults"`
-	NextToken    *string `json:"nextToken"`
+	MajorVersion *string `json:"majorVersion,omitempty"`
+	MaxResults   *int64  `json:"maxResults,omitempty"`
+	NextToken    *string `json:"nextToken,omitempty"`
 	TemplateName string  `json:"templateName"`
 }

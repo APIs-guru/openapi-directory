@@ -16,17 +16,17 @@ const (
 )
 
 type Model struct {
-	Algorithm        *string         `json:"algorithm"`
-	CreatedAt        *time.Time      `json:"createdAt"`
+	Algorithm        *string         `json:"algorithm,omitempty"`
+	CreatedAt        *time.Time      `json:"createdAt,omitempty"`
 	DatasetID        int64           `json:"datasetId"`
 	DatasetVersionID int64           `json:"datasetVersionId"`
-	FailureMsg       *string         `json:"failureMsg"`
-	Language         *string         `json:"language"`
+	FailureMsg       *string         `json:"failureMsg,omitempty"`
+	Language         *string         `json:"language,omitempty"`
 	ModelID          string          `json:"modelId"`
-	ModelType        *string         `json:"modelType"`
+	ModelType        *string         `json:"modelType,omitempty"`
 	Name             string          `json:"name"`
-	Object           *string         `json:"object"`
+	Object           *string         `json:"object,omitempty"`
 	Progress         float64         `json:"progress"`
 	Status           ModelStatusEnum `json:"status"`
-	UpdatedAt        *time.Time      `json:"updatedAt"`
+	UpdatedAt        *time.Time      `json:"updatedAt,omitempty"`
 }

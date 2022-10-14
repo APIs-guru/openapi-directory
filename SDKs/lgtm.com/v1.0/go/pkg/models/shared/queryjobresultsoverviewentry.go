@@ -8,10 +8,10 @@ const (
 )
 
 type QueryjobResultsOverviewEntry struct {
-	Error    *string                                 `json:"error"`
-	External *int32                                  `json:"external"`
-	Internal *int32                                  `json:"internal"`
-	Project  *Project                                `json:"project"`
-	Status   *QueryjobResultsOverviewEntryStatusEnum `json:"status"`
-	Total    *int32                                  `json:"total"`
+	Error    *string                                 `json:"error,omitempty"`
+	External *int32                                  `json:"external,omitempty"`
+	Internal *int32                                  `json:"internal,omitempty"`
+	Project  *Project                                `json:"project,omitempty"`
+	Status   *QueryjobResultsOverviewEntryStatusEnum `json:"status,omitempty"`
+	Total    *int32                                  `json:"total,omitempty"`
 }

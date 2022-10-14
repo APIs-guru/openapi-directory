@@ -5,8 +5,8 @@ type KeyRegisterRequest struct {
 }
 
 type KeyRegister201ApplicationJSON struct {
-	Secret *string `json:"secret"`
-	Status *string `json:"status"`
+	Secret *string `json:"secret,omitempty"`
+	Status *string `json:"status,omitempty"`
 }
 
 type KeyRegisterResponse struct {

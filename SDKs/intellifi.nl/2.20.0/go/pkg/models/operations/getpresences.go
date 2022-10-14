@@ -35,13 +35,13 @@ type GetPresencesRequest struct {
 }
 
 type GetPresences200ApplicationJSON struct {
-	Count           *int64            `json:"count"`
-	CountCurrent    *int64            `json:"count_current"`
-	IsLimited       *bool             `json:"is_limited"`
-	NextURL         *string           `json:"next_url"`
-	QueryDurationMs *int64            `json:"query_duration_ms"`
-	Results         []shared.Presence `json:"results"`
-	URL             *string           `json:"url"`
+	Count           *int64            `json:"count,omitempty"`
+	CountCurrent    *int64            `json:"count_current,omitempty"`
+	IsLimited       *bool             `json:"is_limited,omitempty"`
+	NextURL         *string           `json:"next_url,omitempty"`
+	QueryDurationMs *int64            `json:"query_duration_ms,omitempty"`
+	Results         []shared.Presence `json:"results,omitempty"`
+	URL             *string           `json:"url,omitempty"`
 }
 
 type GetPresencesResponse struct {

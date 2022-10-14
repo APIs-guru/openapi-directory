@@ -5,12 +5,12 @@ import (
 )
 
 type Image struct {
-	Created      *time.Time    `json:"created"`
-	Height       *int32        `json:"height"`
-	ID           *string       `json:"id"`
-	ImageURI     *string       `json:"imageUri"`
-	Regions      []ImageRegion `json:"regions"`
-	Tags         []ImageTag    `json:"tags"`
-	ThumbnailURI *string       `json:"thumbnailUri"`
-	Width        *int32        `json:"width"`
+	Created      *time.Time    `json:"created,omitempty"`
+	Height       *int32        `json:"height,omitempty"`
+	ID           *string       `json:"id,omitempty"`
+	ImageURI     *string       `json:"imageUri,omitempty"`
+	Regions      []ImageRegion `json:"regions,omitempty"`
+	Tags         []ImageTag    `json:"tags,omitempty"`
+	ThumbnailURI *string       `json:"thumbnailUri,omitempty"`
+	Width        *int32        `json:"width,omitempty"`
 }

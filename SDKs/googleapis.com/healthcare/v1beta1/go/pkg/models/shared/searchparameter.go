@@ -1,6 +1,6 @@
 package shared
 
 type SearchParameter struct {
-	CanonicalURL *string `json:"canonicalUrl"`
-	Parameter    *string `json:"parameter"`
+	CanonicalURL *string `json:"canonicalUrl,omitempty"`
+	Parameter    *string `json:"parameter,omitempty"`
 }

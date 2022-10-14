@@ -1,6 +1,6 @@
 package shared
 
 type CelebrityRecognition struct {
-	Celebrity *CelebrityDetail `json:"Celebrity"`
-	Timestamp *int64           `json:"Timestamp"`
+	Celebrity *CelebrityDetail `json:"Celebrity,omitempty"`
+	Timestamp *int64           `json:"Timestamp,omitempty"`
 }

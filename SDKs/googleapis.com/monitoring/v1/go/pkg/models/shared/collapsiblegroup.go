@@ -1,5 +1,5 @@
 package shared
 
 type CollapsibleGroup struct {
-	Collapsed *bool `json:"collapsed"`
+	Collapsed *bool `json:"collapsed,omitempty"`
 }

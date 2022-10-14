@@ -1,7 +1,7 @@
 package shared
 
 type KeyRangeDataDiskAssignment struct {
-	DataDisk *string `json:"dataDisk"`
-	End      *string `json:"end"`
-	Start    *string `json:"start"`
+	DataDisk *string `json:"dataDisk,omitempty"`
+	End      *string `json:"end,omitempty"`
+	Start    *string `json:"start,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type SimulateMaintenanceEventRequest struct {
-	WorkerIds []string `json:"workerIds"`
+	WorkerIds []string `json:"workerIds,omitempty"`
 }

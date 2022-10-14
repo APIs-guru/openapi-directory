@@ -1,5 +1,5 @@
 package shared
 
 type MobileApplicationTargeting struct {
-	FirstPartyTargeting *FirstPartyMobileApplicationTargeting `json:"firstPartyTargeting"`
+	FirstPartyTargeting *FirstPartyMobileApplicationTargeting `json:"firstPartyTargeting,omitempty"`
 }

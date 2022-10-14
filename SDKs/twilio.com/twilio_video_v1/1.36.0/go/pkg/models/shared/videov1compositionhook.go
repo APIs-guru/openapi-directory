@@ -16,19 +16,19 @@ const (
 )
 
 type VideoV1CompositionHook struct {
-	AccountSid           *string                                         `json:"account_sid"`
-	AudioSources         []string                                        `json:"audio_sources"`
-	AudioSourcesExcluded []string                                        `json:"audio_sources_excluded"`
-	DateCreated          *time.Time                                      `json:"date_created"`
-	DateUpdated          *time.Time                                      `json:"date_updated"`
-	Enabled              *bool                                           `json:"enabled"`
-	Format               *CompositionHookEnumFormatEnum                  `json:"format"`
-	FriendlyName         *string                                         `json:"friendly_name"`
-	Resolution           *string                                         `json:"resolution"`
-	Sid                  *string                                         `json:"sid"`
-	StatusCallback       *string                                         `json:"status_callback"`
-	StatusCallbackMethod *VideoV1CompositionHookStatusCallbackMethodEnum `json:"status_callback_method"`
-	Trim                 *bool                                           `json:"trim"`
-	URL                  *string                                         `json:"url"`
-	VideoLayout          *interface{}                                    `json:"video_layout"`
+	AccountSid           *string                                         `json:"account_sid,omitempty"`
+	AudioSources         []string                                        `json:"audio_sources,omitempty"`
+	AudioSourcesExcluded []string                                        `json:"audio_sources_excluded,omitempty"`
+	DateCreated          *time.Time                                      `json:"date_created,omitempty"`
+	DateUpdated          *time.Time                                      `json:"date_updated,omitempty"`
+	Enabled              *bool                                           `json:"enabled,omitempty"`
+	Format               *CompositionHookEnumFormatEnum                  `json:"format,omitempty"`
+	FriendlyName         *string                                         `json:"friendly_name,omitempty"`
+	Resolution           *string                                         `json:"resolution,omitempty"`
+	Sid                  *string                                         `json:"sid,omitempty"`
+	StatusCallback       *string                                         `json:"status_callback,omitempty"`
+	StatusCallbackMethod *VideoV1CompositionHookStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	Trim                 *bool                                           `json:"trim,omitempty"`
+	URL                  *string                                         `json:"url,omitempty"`
+	VideoLayout          *interface{}                                    `json:"video_layout,omitempty"`
 }

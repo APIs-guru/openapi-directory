@@ -15,32 +15,32 @@ type UpdateSimulationApplicationHeaders struct {
 }
 
 type UpdateSimulationApplicationRequestBodyEnvironment struct {
-	URI *string `json:"uri"`
+	URI *string `json:"uri,omitempty"`
 }
 
 type UpdateSimulationApplicationRequestBodyRenderingEngine struct {
-	Name    *shared.RenderingEngineTypeEnum `json:"name"`
-	Version *string                         `json:"version"`
+	Name    *shared.RenderingEngineTypeEnum `json:"name,omitempty"`
+	Version *string                         `json:"version,omitempty"`
 }
 
 type UpdateSimulationApplicationRequestBodyRobotSoftwareSuite struct {
-	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name"`
-	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version"`
+	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name,omitempty"`
+	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version,omitempty"`
 }
 
 type UpdateSimulationApplicationRequestBodySimulationSoftwareSuite struct {
-	Name    *shared.SimulationSoftwareSuiteTypeEnum `json:"name"`
-	Version *string                                 `json:"version"`
+	Name    *shared.SimulationSoftwareSuiteTypeEnum `json:"name,omitempty"`
+	Version *string                                 `json:"version,omitempty"`
 }
 
 type UpdateSimulationApplicationRequestBody struct {
 	Application             string                                                        `json:"application"`
-	CurrentRevisionID       *string                                                       `json:"currentRevisionId"`
-	Environment             *UpdateSimulationApplicationRequestBodyEnvironment            `json:"environment"`
-	RenderingEngine         *UpdateSimulationApplicationRequestBodyRenderingEngine        `json:"renderingEngine"`
+	CurrentRevisionID       *string                                                       `json:"currentRevisionId,omitempty"`
+	Environment             *UpdateSimulationApplicationRequestBodyEnvironment            `json:"environment,omitempty"`
+	RenderingEngine         *UpdateSimulationApplicationRequestBodyRenderingEngine        `json:"renderingEngine,omitempty"`
 	RobotSoftwareSuite      UpdateSimulationApplicationRequestBodyRobotSoftwareSuite      `json:"robotSoftwareSuite"`
 	SimulationSoftwareSuite UpdateSimulationApplicationRequestBodySimulationSoftwareSuite `json:"simulationSoftwareSuite"`
-	Sources                 []shared.SourceConfig                                         `json:"sources"`
+	Sources                 []shared.SourceConfig                                         `json:"sources,omitempty"`
 }
 
 type UpdateSimulationApplicationRequest struct {

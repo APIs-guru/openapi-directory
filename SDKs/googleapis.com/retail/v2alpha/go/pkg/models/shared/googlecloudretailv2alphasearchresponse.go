@@ -1,14 +1,14 @@
 package shared
 
 type GoogleCloudRetailV2alphaSearchResponse struct {
-	AppliedControls            []string                                                           `json:"appliedControls"`
-	AttributionToken           *string                                                            `json:"attributionToken"`
-	CorrectedQuery             *string                                                            `json:"correctedQuery"`
-	Facets                     []GoogleCloudRetailV2alphaSearchResponseFacet                      `json:"facets"`
-	InvalidConditionBoostSpecs []GoogleCloudRetailV2alphaSearchRequestBoostSpecConditionBoostSpec `json:"invalidConditionBoostSpecs"`
-	NextPageToken              *string                                                            `json:"nextPageToken"`
-	QueryExpansionInfo         *GoogleCloudRetailV2alphaSearchResponseQueryExpansionInfo          `json:"queryExpansionInfo"`
-	RedirectURI                *string                                                            `json:"redirectUri"`
-	Results                    []GoogleCloudRetailV2alphaSearchResponseSearchResult               `json:"results"`
-	TotalSize                  *int32                                                             `json:"totalSize"`
+	AppliedControls            []string                                                           `json:"appliedControls,omitempty"`
+	AttributionToken           *string                                                            `json:"attributionToken,omitempty"`
+	CorrectedQuery             *string                                                            `json:"correctedQuery,omitempty"`
+	Facets                     []GoogleCloudRetailV2alphaSearchResponseFacet                      `json:"facets,omitempty"`
+	InvalidConditionBoostSpecs []GoogleCloudRetailV2alphaSearchRequestBoostSpecConditionBoostSpec `json:"invalidConditionBoostSpecs,omitempty"`
+	NextPageToken              *string                                                            `json:"nextPageToken,omitempty"`
+	QueryExpansionInfo         *GoogleCloudRetailV2alphaSearchResponseQueryExpansionInfo          `json:"queryExpansionInfo,omitempty"`
+	RedirectURI                *string                                                            `json:"redirectUri,omitempty"`
+	Results                    []GoogleCloudRetailV2alphaSearchResponseSearchResult               `json:"results,omitempty"`
+	TotalSize                  *int32                                                             `json:"totalSize,omitempty"`
 }

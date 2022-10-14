@@ -11,19 +11,19 @@ const (
 )
 
 type Product struct {
-	AvailableEndTime    *string                        `json:"availableEndTime"`
-	AvailableStartTime  *string                        `json:"availableStartTime"`
-	CreateTime          *string                        `json:"createTime"`
-	CreatorContacts     []ContactInformation           `json:"creatorContacts"`
-	DisplayName         *string                        `json:"displayName"`
-	HasCreatorSignedOff *bool                          `json:"hasCreatorSignedOff"`
-	ProductID           *string                        `json:"productId"`
-	ProductRevision     *string                        `json:"productRevision"`
-	PublisherProfileID  *string                        `json:"publisherProfileId"`
-	Seller              *Seller                        `json:"seller"`
-	SyndicationProduct  *ProductSyndicationProductEnum `json:"syndicationProduct"`
-	TargetingCriterion  []TargetingCriteria            `json:"targetingCriterion"`
-	Terms               *DealTerms                     `json:"terms"`
-	UpdateTime          *string                        `json:"updateTime"`
-	WebPropertyCode     *string                        `json:"webPropertyCode"`
+	AvailableEndTime    *string                        `json:"availableEndTime,omitempty"`
+	AvailableStartTime  *string                        `json:"availableStartTime,omitempty"`
+	CreateTime          *string                        `json:"createTime,omitempty"`
+	CreatorContacts     []ContactInformation           `json:"creatorContacts,omitempty"`
+	DisplayName         *string                        `json:"displayName,omitempty"`
+	HasCreatorSignedOff *bool                          `json:"hasCreatorSignedOff,omitempty"`
+	ProductID           *string                        `json:"productId,omitempty"`
+	ProductRevision     *string                        `json:"productRevision,omitempty"`
+	PublisherProfileID  *string                        `json:"publisherProfileId,omitempty"`
+	Seller              *Seller                        `json:"seller,omitempty"`
+	SyndicationProduct  *ProductSyndicationProductEnum `json:"syndicationProduct,omitempty"`
+	TargetingCriterion  []TargetingCriteria            `json:"targetingCriterion,omitempty"`
+	Terms               *DealTerms                     `json:"terms,omitempty"`
+	UpdateTime          *string                        `json:"updateTime,omitempty"`
+	WebPropertyCode     *string                        `json:"webPropertyCode,omitempty"`
 }

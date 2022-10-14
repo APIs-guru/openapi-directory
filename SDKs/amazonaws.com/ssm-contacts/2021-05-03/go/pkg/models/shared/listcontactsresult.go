@@ -1,6 +1,6 @@
 package shared
 
 type ListContactsResult struct {
-	Contacts  []Contact `json:"Contacts"`
-	NextToken *string   `json:"NextToken"`
+	Contacts  []Contact `json:"Contacts,omitempty"`
+	NextToken *string   `json:"NextToken,omitempty"`
 }

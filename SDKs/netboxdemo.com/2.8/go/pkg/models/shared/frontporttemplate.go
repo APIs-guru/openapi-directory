@@ -45,9 +45,9 @@ type FrontPortTemplateTypeType struct {
 
 type FrontPortTemplate struct {
 	DeviceType       NestedDeviceType          `json:"device_type"`
-	ID               *int64                    `json:"id"`
+	ID               *int64                    `json:"id,omitempty"`
 	Name             string                    `json:"name"`
 	RearPort         NestedRearPortTemplate    `json:"rear_port"`
-	RearPortPosition *int64                    `json:"rear_port_position"`
+	RearPortPosition *int64                    `json:"rear_port_position,omitempty"`
 	Type             FrontPortTemplateTypeType `json:"type"`
 }

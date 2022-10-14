@@ -1,9 +1,9 @@
 package shared
 
 type DeploymentTarget struct {
-	CloudFormationTarget *CloudFormationTarget     `json:"cloudFormationTarget"`
-	DeploymentTargetType *DeploymentTargetTypeEnum `json:"deploymentTargetType"`
-	EcsTarget            *EcsTarget                `json:"ecsTarget"`
-	InstanceTarget       *InstanceTarget           `json:"instanceTarget"`
-	LambdaTarget         *LambdaTarget             `json:"lambdaTarget"`
+	CloudFormationTarget *CloudFormationTarget     `json:"cloudFormationTarget,omitempty"`
+	DeploymentTargetType *DeploymentTargetTypeEnum `json:"deploymentTargetType,omitempty"`
+	EcsTarget            *EcsTarget                `json:"ecsTarget,omitempty"`
+	InstanceTarget       *InstanceTarget           `json:"instanceTarget,omitempty"`
+	LambdaTarget         *LambdaTarget             `json:"lambdaTarget,omitempty"`
 }

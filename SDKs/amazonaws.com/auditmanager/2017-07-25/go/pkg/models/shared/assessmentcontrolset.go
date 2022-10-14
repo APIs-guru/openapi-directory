@@ -1,12 +1,12 @@
 package shared
 
 type AssessmentControlSet struct {
-	Controls            []AssessmentControl   `json:"controls"`
-	Delegations         []Delegation          `json:"delegations"`
-	Description         *string               `json:"description"`
-	ID                  *string               `json:"id"`
-	ManualEvidenceCount *int64                `json:"manualEvidenceCount"`
-	Roles               []Role                `json:"roles"`
-	Status              *ControlSetStatusEnum `json:"status"`
-	SystemEvidenceCount *int64                `json:"systemEvidenceCount"`
+	Controls            []AssessmentControl   `json:"controls,omitempty"`
+	Delegations         []Delegation          `json:"delegations,omitempty"`
+	Description         *string               `json:"description,omitempty"`
+	ID                  *string               `json:"id,omitempty"`
+	ManualEvidenceCount *int64                `json:"manualEvidenceCount,omitempty"`
+	Roles               []Role                `json:"roles,omitempty"`
+	Status              *ControlSetStatusEnum `json:"status,omitempty"`
+	SystemEvidenceCount *int64                `json:"systemEvidenceCount,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AwsElasticsearchDomainEncryptionAtRestOptions struct {
-	Enabled  *bool   `json:"Enabled"`
-	KmsKeyID *string `json:"KmsKeyId"`
+	Enabled  *bool   `json:"Enabled,omitempty"`
+	KmsKeyID *string `json:"KmsKeyId,omitempty"`
 }

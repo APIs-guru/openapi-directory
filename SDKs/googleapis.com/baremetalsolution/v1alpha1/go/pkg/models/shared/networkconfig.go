@@ -29,12 +29,12 @@ const (
 )
 
 type NetworkConfig struct {
-	Bandwidth       *NetworkConfigBandwidthEnum   `json:"bandwidth"`
-	Cidr            *string                       `json:"cidr"`
-	ID              *string                       `json:"id"`
-	Location        *string                       `json:"location"`
-	ServiceCidr     *NetworkConfigServiceCidrEnum `json:"serviceCidr"`
-	Type            *NetworkConfigTypeEnum        `json:"type"`
-	UserNote        *string                       `json:"userNote"`
-	VlanAttachments []VlanAttachment              `json:"vlanAttachments"`
+	Bandwidth       *NetworkConfigBandwidthEnum   `json:"bandwidth,omitempty"`
+	Cidr            *string                       `json:"cidr,omitempty"`
+	ID              *string                       `json:"id,omitempty"`
+	Location        *string                       `json:"location,omitempty"`
+	ServiceCidr     *NetworkConfigServiceCidrEnum `json:"serviceCidr,omitempty"`
+	Type            *NetworkConfigTypeEnum        `json:"type,omitempty"`
+	UserNote        *string                       `json:"userNote,omitempty"`
+	VlanAttachments []VlanAttachment              `json:"vlanAttachments,omitempty"`
 }

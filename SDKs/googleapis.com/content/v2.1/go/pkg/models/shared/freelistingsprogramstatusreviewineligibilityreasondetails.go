@@ -1,5 +1,5 @@
 package shared
 
 type FreeListingsProgramStatusReviewIneligibilityReasonDetails struct {
-	CooldownTime *string `json:"cooldownTime"`
+	CooldownTime *string `json:"cooldownTime,omitempty"`
 }

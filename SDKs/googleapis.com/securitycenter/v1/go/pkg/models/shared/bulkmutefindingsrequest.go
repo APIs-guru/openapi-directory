@@ -1,6 +1,6 @@
 package shared
 
 type BulkMuteFindingsRequest struct {
-	Filter         *string `json:"filter"`
-	MuteAnnotation *string `json:"muteAnnotation"`
+	Filter         *string `json:"filter,omitempty"`
+	MuteAnnotation *string `json:"muteAnnotation,omitempty"`
 }

@@ -1,14 +1,14 @@
 package shared
 
 type CreateReportTask struct {
-	CampaignIds         []string             `json:"campaignIds"`
-	DateFrom            *string              `json:"dateFrom"`
-	DateTo              *string              `json:"dateTo"`
-	Dimensions          []Dimension          `json:"dimensions"`
-	InventoryReferences []InventoryReference `json:"inventoryReferences"`
-	ListingIds          []string             `json:"listingIds"`
-	MarketplaceID       *string              `json:"marketplaceId"`
-	MetricKeys          []string             `json:"metricKeys"`
-	ReportFormat        *string              `json:"reportFormat"`
-	ReportType          *string              `json:"reportType"`
+	CampaignIds         []string             `json:"campaignIds,omitempty"`
+	DateFrom            *string              `json:"dateFrom,omitempty"`
+	DateTo              *string              `json:"dateTo,omitempty"`
+	Dimensions          []Dimension          `json:"dimensions,omitempty"`
+	InventoryReferences []InventoryReference `json:"inventoryReferences,omitempty"`
+	ListingIds          []string             `json:"listingIds,omitempty"`
+	MarketplaceID       *string              `json:"marketplaceId,omitempty"`
+	MetricKeys          []string             `json:"metricKeys,omitempty"`
+	ReportFormat        *string              `json:"reportFormat,omitempty"`
+	ReportType          *string              `json:"reportType,omitempty"`
 }

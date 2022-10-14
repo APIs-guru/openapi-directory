@@ -31,9 +31,9 @@ const (
 )
 
 type ImportCryptoKeyVersionRequest struct {
-	Algorithm        *ImportCryptoKeyVersionRequestAlgorithmEnum `json:"algorithm"`
-	CryptoKeyVersion *string                                     `json:"cryptoKeyVersion"`
-	ImportJob        *string                                     `json:"importJob"`
-	RsaAesWrappedKey *string                                     `json:"rsaAesWrappedKey"`
-	WrappedKey       *string                                     `json:"wrappedKey"`
+	Algorithm        *ImportCryptoKeyVersionRequestAlgorithmEnum `json:"algorithm,omitempty"`
+	CryptoKeyVersion *string                                     `json:"cryptoKeyVersion,omitempty"`
+	ImportJob        *string                                     `json:"importJob,omitempty"`
+	RsaAesWrappedKey *string                                     `json:"rsaAesWrappedKey,omitempty"`
+	WrappedKey       *string                                     `json:"wrappedKey,omitempty"`
 }

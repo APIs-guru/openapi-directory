@@ -1,9 +1,9 @@
 package shared
 
 type DescribeComplianceByResourceRequest struct {
-	ComplianceTypes []ComplianceTypeEnum `json:"ComplianceTypes"`
-	Limit           *int64               `json:"Limit"`
-	NextToken       *string              `json:"NextToken"`
-	ResourceID      *string              `json:"ResourceId"`
-	ResourceType    *string              `json:"ResourceType"`
+	ComplianceTypes []ComplianceTypeEnum `json:"ComplianceTypes,omitempty"`
+	Limit           *int64               `json:"Limit,omitempty"`
+	NextToken       *string              `json:"NextToken,omitempty"`
+	ResourceID      *string              `json:"ResourceId,omitempty"`
+	ResourceType    *string              `json:"ResourceType,omitempty"`
 }

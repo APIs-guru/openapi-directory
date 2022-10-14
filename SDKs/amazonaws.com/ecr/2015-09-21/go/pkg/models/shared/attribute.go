@@ -2,5 +2,5 @@ package shared
 
 type Attribute struct {
 	Key   string  `json:"key"`
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }

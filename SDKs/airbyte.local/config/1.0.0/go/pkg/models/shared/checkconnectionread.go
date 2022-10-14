@@ -9,6 +9,6 @@ const (
 
 type CheckConnectionRead struct {
 	JobInfo SynchronousJobRead            `json:"jobInfo"`
-	Message *string                       `json:"message"`
+	Message *string                       `json:"message,omitempty"`
 	Status  CheckConnectionReadStatusEnum `json:"status"`
 }

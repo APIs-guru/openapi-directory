@@ -10,16 +10,16 @@ const (
 )
 
 type TextStyle struct {
-	BackgroundColor    *OptionalColor               `json:"backgroundColor"`
-	BaselineOffset     *TextStyleBaselineOffsetEnum `json:"baselineOffset"`
-	Bold               *bool                        `json:"bold"`
-	FontFamily         *string                      `json:"fontFamily"`
-	FontSize           *Dimension                   `json:"fontSize"`
-	ForegroundColor    *OptionalColor               `json:"foregroundColor"`
-	Italic             *bool                        `json:"italic"`
-	Link               *Link                        `json:"link"`
-	SmallCaps          *bool                        `json:"smallCaps"`
-	Strikethrough      *bool                        `json:"strikethrough"`
-	Underline          *bool                        `json:"underline"`
-	WeightedFontFamily *WeightedFontFamily          `json:"weightedFontFamily"`
+	BackgroundColor    *OptionalColor               `json:"backgroundColor,omitempty"`
+	BaselineOffset     *TextStyleBaselineOffsetEnum `json:"baselineOffset,omitempty"`
+	Bold               *bool                        `json:"bold,omitempty"`
+	FontFamily         *string                      `json:"fontFamily,omitempty"`
+	FontSize           *Dimension                   `json:"fontSize,omitempty"`
+	ForegroundColor    *OptionalColor               `json:"foregroundColor,omitempty"`
+	Italic             *bool                        `json:"italic,omitempty"`
+	Link               *Link                        `json:"link,omitempty"`
+	SmallCaps          *bool                        `json:"smallCaps,omitempty"`
+	Strikethrough      *bool                        `json:"strikethrough,omitempty"`
+	Underline          *bool                        `json:"underline,omitempty"`
+	WeightedFontFamily *WeightedFontFamily          `json:"weightedFontFamily,omitempty"`
 }

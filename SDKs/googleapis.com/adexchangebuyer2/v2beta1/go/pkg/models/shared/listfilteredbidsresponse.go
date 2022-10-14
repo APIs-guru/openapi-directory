@@ -1,6 +1,6 @@
 package shared
 
 type ListFilteredBidsResponse struct {
-	CreativeStatusRows []CreativeStatusRow `json:"creativeStatusRows"`
-	NextPageToken      *string             `json:"nextPageToken"`
+	CreativeStatusRows []CreativeStatusRow `json:"creativeStatusRows,omitempty"`
+	NextPageToken      *string             `json:"nextPageToken,omitempty"`
 }

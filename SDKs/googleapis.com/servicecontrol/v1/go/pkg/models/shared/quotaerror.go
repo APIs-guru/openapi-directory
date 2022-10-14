@@ -20,8 +20,8 @@ const (
 )
 
 type QuotaError struct {
-	Code        *QuotaErrorCodeEnum `json:"code"`
-	Description *string             `json:"description"`
-	Status      *Status             `json:"status"`
-	Subject     *string             `json:"subject"`
+	Code        *QuotaErrorCodeEnum `json:"code,omitempty"`
+	Description *string             `json:"description,omitempty"`
+	Status      *Status             `json:"status,omitempty"`
+	Subject     *string             `json:"subject,omitempty"`
 }

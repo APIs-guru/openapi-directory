@@ -19,14 +19,14 @@ type UpdateBackendConfigHeaders struct {
 }
 
 type UpdateBackendConfigRequestBodyLoginAuthConfig struct {
-	AwsCognitoIdentityPoolID *string `json:"AwsCognitoIdentityPoolId"`
-	AwsCognitoRegion         *string `json:"AwsCognitoRegion"`
-	AwsUserPoolsID           *string `json:"AwsUserPoolsId"`
-	AwsUserPoolsWebClientID  *string `json:"AwsUserPoolsWebClientId"`
+	AwsCognitoIdentityPoolID *string `json:"AwsCognitoIdentityPoolId,omitempty"`
+	AwsCognitoRegion         *string `json:"AwsCognitoRegion,omitempty"`
+	AwsUserPoolsID           *string `json:"AwsUserPoolsId,omitempty"`
+	AwsUserPoolsWebClientID  *string `json:"AwsUserPoolsWebClientId,omitempty"`
 }
 
 type UpdateBackendConfigRequestBody struct {
-	LoginAuthConfig *UpdateBackendConfigRequestBodyLoginAuthConfig `json:"loginAuthConfig"`
+	LoginAuthConfig *UpdateBackendConfigRequestBodyLoginAuthConfig `json:"loginAuthConfig,omitempty"`
 }
 
 type UpdateBackendConfigRequest struct {

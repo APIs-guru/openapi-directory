@@ -1,5 +1,5 @@
 package shared
 
 type ReturnpolicyCustomBatchRequest struct {
-	Entries []ReturnpolicyCustomBatchRequestEntry `json:"entries"`
+	Entries []ReturnpolicyCustomBatchRequestEntry `json:"entries,omitempty"`
 }

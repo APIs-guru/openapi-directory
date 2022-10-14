@@ -1,7 +1,7 @@
 package shared
 
 type GetV2LoggingOptionsResponse struct {
-	DefaultLogLevel *LogLevelEnum `json:"defaultLogLevel"`
-	DisableAllLogs  *bool         `json:"disableAllLogs"`
-	RoleArn         *string       `json:"roleArn"`
+	DefaultLogLevel *LogLevelEnum `json:"defaultLogLevel,omitempty"`
+	DisableAllLogs  *bool         `json:"disableAllLogs,omitempty"`
+	RoleArn         *string       `json:"roleArn,omitempty"`
 }

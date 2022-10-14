@@ -5,10 +5,10 @@ import (
 )
 
 type MaintenanceEntity struct {
-	ID    *float64 `json:"id"`
-	Label *string  `json:"label"`
-	Type  *string  `json:"type"`
-	URL   *string  `json:"url"`
+	ID    *float64 `json:"id,omitempty"`
+	Label *string  `json:"label,omitempty"`
+	Type  *string  `json:"type,omitempty"`
+	URL   *string  `json:"url,omitempty"`
 }
 
 type MaintenanceStatusEnum string
@@ -27,9 +27,9 @@ const (
 )
 
 type Maintenance struct {
-	Entity *MaintenanceEntity     `json:"entity"`
-	Reason *string                `json:"reason"`
-	Status *MaintenanceStatusEnum `json:"status"`
-	Type   *MaintenanceTypeEnum   `json:"type"`
-	When   *time.Time             `json:"when"`
+	Entity *MaintenanceEntity     `json:"entity,omitempty"`
+	Reason *string                `json:"reason,omitempty"`
+	Status *MaintenanceStatusEnum `json:"status,omitempty"`
+	Type   *MaintenanceTypeEnum   `json:"type,omitempty"`
+	When   *time.Time             `json:"when,omitempty"`
 }

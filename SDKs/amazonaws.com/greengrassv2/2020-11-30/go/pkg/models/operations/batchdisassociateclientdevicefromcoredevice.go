@@ -19,7 +19,7 @@ type BatchDisassociateClientDeviceFromCoreDeviceHeaders struct {
 }
 
 type BatchDisassociateClientDeviceFromCoreDeviceRequestBody struct {
-	Entries []shared.DisassociateClientDeviceFromCoreDeviceEntry `json:"entries"`
+	Entries []shared.DisassociateClientDeviceFromCoreDeviceEntry `json:"entries,omitempty"`
 }
 
 type BatchDisassociateClientDeviceFromCoreDeviceRequest struct {

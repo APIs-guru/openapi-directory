@@ -1,7 +1,7 @@
 package shared
 
 type ServerGroup struct {
-	Name          *string  `json:"name"`
-	ServerGroupID *string  `json:"serverGroupId"`
-	ServerList    []Server `json:"serverList"`
+	Name          *string  `json:"name,omitempty"`
+	ServerGroupID *string  `json:"serverGroupId,omitempty"`
+	ServerList    []Server `json:"serverList,omitempty"`
 }

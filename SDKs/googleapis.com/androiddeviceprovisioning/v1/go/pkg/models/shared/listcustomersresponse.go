@@ -1,7 +1,7 @@
 package shared
 
 type ListCustomersResponse struct {
-	Customers     []Company `json:"customers"`
-	NextPageToken *string   `json:"nextPageToken"`
-	TotalSize     *int32    `json:"totalSize"`
+	Customers     []Company `json:"customers,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	TotalSize     *int32    `json:"totalSize,omitempty"`
 }

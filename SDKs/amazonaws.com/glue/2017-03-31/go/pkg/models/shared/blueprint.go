@@ -5,14 +5,14 @@ import (
 )
 
 type Blueprint struct {
-	BlueprintLocation        *string               `json:"BlueprintLocation"`
-	BlueprintServiceLocation *string               `json:"BlueprintServiceLocation"`
-	CreatedOn                *time.Time            `json:"CreatedOn"`
-	Description              *string               `json:"Description"`
-	ErrorMessage             *string               `json:"ErrorMessage"`
-	LastActiveDefinition     *LastActiveDefinition `json:"LastActiveDefinition"`
-	LastModifiedOn           *time.Time            `json:"LastModifiedOn"`
-	Name                     *string               `json:"Name"`
-	ParameterSpec            *string               `json:"ParameterSpec"`
-	Status                   *BlueprintStatusEnum  `json:"Status"`
+	BlueprintLocation        *string               `json:"BlueprintLocation,omitempty"`
+	BlueprintServiceLocation *string               `json:"BlueprintServiceLocation,omitempty"`
+	CreatedOn                *time.Time            `json:"CreatedOn,omitempty"`
+	Description              *string               `json:"Description,omitempty"`
+	ErrorMessage             *string               `json:"ErrorMessage,omitempty"`
+	LastActiveDefinition     *LastActiveDefinition `json:"LastActiveDefinition,omitempty"`
+	LastModifiedOn           *time.Time            `json:"LastModifiedOn,omitempty"`
+	Name                     *string               `json:"Name,omitempty"`
+	ParameterSpec            *string               `json:"ParameterSpec,omitempty"`
+	Status                   *BlueprintStatusEnum  `json:"Status,omitempty"`
 }

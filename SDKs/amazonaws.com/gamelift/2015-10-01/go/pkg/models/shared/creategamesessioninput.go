@@ -1,14 +1,14 @@
 package shared
 
 type CreateGameSessionInput struct {
-	AliasID                   *string        `json:"AliasId"`
-	CreatorID                 *string        `json:"CreatorId"`
-	FleetID                   *string        `json:"FleetId"`
-	GameProperties            []GameProperty `json:"GameProperties"`
-	GameSessionData           *string        `json:"GameSessionData"`
-	GameSessionID             *string        `json:"GameSessionId"`
-	IdempotencyToken          *string        `json:"IdempotencyToken"`
-	Location                  *string        `json:"Location"`
+	AliasID                   *string        `json:"AliasId,omitempty"`
+	CreatorID                 *string        `json:"CreatorId,omitempty"`
+	FleetID                   *string        `json:"FleetId,omitempty"`
+	GameProperties            []GameProperty `json:"GameProperties,omitempty"`
+	GameSessionData           *string        `json:"GameSessionData,omitempty"`
+	GameSessionID             *string        `json:"GameSessionId,omitempty"`
+	IdempotencyToken          *string        `json:"IdempotencyToken,omitempty"`
+	Location                  *string        `json:"Location,omitempty"`
 	MaximumPlayerSessionCount int64          `json:"MaximumPlayerSessionCount"`
-	Name                      *string        `json:"Name"`
+	Name                      *string        `json:"Name,omitempty"`
 }

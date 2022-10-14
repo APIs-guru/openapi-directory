@@ -1,7 +1,7 @@
 package shared
 
 type UserRolesListResponse struct {
-	Kind          *string    `json:"kind"`
-	NextPageToken *string    `json:"nextPageToken"`
-	UserRoles     []UserRole `json:"userRoles"`
+	Kind          *string    `json:"kind,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	UserRoles     []UserRole `json:"userRoles,omitempty"`
 }

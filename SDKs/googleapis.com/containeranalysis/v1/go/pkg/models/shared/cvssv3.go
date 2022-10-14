@@ -71,15 +71,15 @@ const (
 )
 
 type CvsSv3 struct {
-	AttackComplexity      *CvsSv3AttackComplexityEnum      `json:"attackComplexity"`
-	AttackVector          *CvsSv3AttackVectorEnum          `json:"attackVector"`
-	AvailabilityImpact    *CvsSv3AvailabilityImpactEnum    `json:"availabilityImpact"`
-	BaseScore             *float32                         `json:"baseScore"`
-	ConfidentialityImpact *CvsSv3ConfidentialityImpactEnum `json:"confidentialityImpact"`
-	ExploitabilityScore   *float32                         `json:"exploitabilityScore"`
-	ImpactScore           *float32                         `json:"impactScore"`
-	IntegrityImpact       *CvsSv3IntegrityImpactEnum       `json:"integrityImpact"`
-	PrivilegesRequired    *CvsSv3PrivilegesRequiredEnum    `json:"privilegesRequired"`
-	Scope                 *CvsSv3ScopeEnum                 `json:"scope"`
-	UserInteraction       *CvsSv3UserInteractionEnum       `json:"userInteraction"`
+	AttackComplexity      *CvsSv3AttackComplexityEnum      `json:"attackComplexity,omitempty"`
+	AttackVector          *CvsSv3AttackVectorEnum          `json:"attackVector,omitempty"`
+	AvailabilityImpact    *CvsSv3AvailabilityImpactEnum    `json:"availabilityImpact,omitempty"`
+	BaseScore             *float32                         `json:"baseScore,omitempty"`
+	ConfidentialityImpact *CvsSv3ConfidentialityImpactEnum `json:"confidentialityImpact,omitempty"`
+	ExploitabilityScore   *float32                         `json:"exploitabilityScore,omitempty"`
+	ImpactScore           *float32                         `json:"impactScore,omitempty"`
+	IntegrityImpact       *CvsSv3IntegrityImpactEnum       `json:"integrityImpact,omitempty"`
+	PrivilegesRequired    *CvsSv3PrivilegesRequiredEnum    `json:"privilegesRequired,omitempty"`
+	Scope                 *CvsSv3ScopeEnum                 `json:"scope,omitempty"`
+	UserInteraction       *CvsSv3UserInteractionEnum       `json:"userInteraction,omitempty"`
 }

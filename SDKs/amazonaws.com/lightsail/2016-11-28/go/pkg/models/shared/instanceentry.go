@@ -5,5 +5,5 @@ type InstanceEntry struct {
 	InstanceType     string                 `json:"instanceType"`
 	PortInfoSource   PortInfoSourceTypeEnum `json:"portInfoSource"`
 	SourceName       string                 `json:"sourceName"`
-	UserData         *string                `json:"userData"`
+	UserData         *string                `json:"userData,omitempty"`
 }

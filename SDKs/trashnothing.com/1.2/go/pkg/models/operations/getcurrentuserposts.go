@@ -27,15 +27,15 @@ type GetCurrentUserPostsRequest struct {
 }
 
 type GetCurrentUserPosts200ApplicationJSON struct {
-	EndIndex         *int64        `json:"end_index"`
-	GroupIds         []string      `json:"group_ids"`
-	LastListingsView *time.Time    `json:"last_listings_view"`
-	NumPages         *int64        `json:"num_pages"`
-	NumPosts         *int64        `json:"num_posts"`
-	Page             *int64        `json:"page"`
-	PerPage          *int64        `json:"per_page"`
-	Posts            []shared.Post `json:"posts"`
-	StartIndex       *int64        `json:"start_index"`
+	EndIndex         *int64        `json:"end_index,omitempty"`
+	GroupIds         []string      `json:"group_ids,omitempty"`
+	LastListingsView *time.Time    `json:"last_listings_view,omitempty"`
+	NumPages         *int64        `json:"num_pages,omitempty"`
+	NumPosts         *int64        `json:"num_posts,omitempty"`
+	Page             *int64        `json:"page,omitempty"`
+	PerPage          *int64        `json:"per_page,omitempty"`
+	Posts            []shared.Post `json:"posts,omitempty"`
+	StartIndex       *int64        `json:"start_index,omitempty"`
 }
 
 type GetCurrentUserPostsResponse struct {

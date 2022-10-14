@@ -1,13 +1,13 @@
 package shared
 
 type ComponentVersion struct {
-	Arn                 *string            `json:"arn"`
-	DateCreated         *string            `json:"dateCreated"`
-	Description         *string            `json:"description"`
-	Name                *string            `json:"name"`
-	Owner               *string            `json:"owner"`
-	Platform            *PlatformEnum      `json:"platform"`
-	SupportedOsVersions []string           `json:"supportedOsVersions"`
-	Type                *ComponentTypeEnum `json:"type"`
-	Version             *string            `json:"version"`
+	Arn                 *string            `json:"arn,omitempty"`
+	DateCreated         *string            `json:"dateCreated,omitempty"`
+	Description         *string            `json:"description,omitempty"`
+	Name                *string            `json:"name,omitempty"`
+	Owner               *string            `json:"owner,omitempty"`
+	Platform            *PlatformEnum      `json:"platform,omitempty"`
+	SupportedOsVersions []string           `json:"supportedOsVersions,omitempty"`
+	Type                *ComponentTypeEnum `json:"type,omitempty"`
+	Version             *string            `json:"version,omitempty"`
 }

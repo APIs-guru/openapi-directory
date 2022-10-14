@@ -10,11 +10,11 @@ type AppsScopeTokenPathParams struct {
 
 type AppsScopeTokenRequestBody struct {
 	AccessToken   string                 `json:"access_token"`
-	Permissions   *shared.AppPermissions `json:"permissions"`
-	Repositories  []string               `json:"repositories"`
-	RepositoryIds []int64                `json:"repository_ids"`
-	Target        *string                `json:"target"`
-	TargetID      *int64                 `json:"target_id"`
+	Permissions   *shared.AppPermissions `json:"permissions,omitempty"`
+	Repositories  []string               `json:"repositories,omitempty"`
+	RepositoryIds []int64                `json:"repository_ids,omitempty"`
+	Target        *string                `json:"target,omitempty"`
+	TargetID      *int64                 `json:"target_id,omitempty"`
 }
 
 type AppsScopeTokenRequest struct {

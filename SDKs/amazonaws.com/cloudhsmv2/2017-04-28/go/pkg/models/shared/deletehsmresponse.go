@@ -1,5 +1,5 @@
 package shared
 
 type DeleteHsmResponse struct {
-	HsmID *string `json:"HsmId"`
+	HsmID *string `json:"HsmId,omitempty"`
 }

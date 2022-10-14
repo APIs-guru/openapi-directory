@@ -50,8 +50,8 @@ const (
 )
 
 type RelationshipOccurrence struct {
-	Comment *string                         `json:"comment"`
-	Source  *string                         `json:"source"`
-	Target  *string                         `json:"target"`
-	Type    *RelationshipOccurrenceTypeEnum `json:"type"`
+	Comment *string                         `json:"comment,omitempty"`
+	Source  *string                         `json:"source,omitempty"`
+	Target  *string                         `json:"target,omitempty"`
+	Type    *RelationshipOccurrenceTypeEnum `json:"type,omitempty"`
 }

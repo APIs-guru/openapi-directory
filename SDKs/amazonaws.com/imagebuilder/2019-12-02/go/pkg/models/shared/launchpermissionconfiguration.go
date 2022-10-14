@@ -1,6 +1,6 @@
 package shared
 
 type LaunchPermissionConfiguration struct {
-	UserGroups []string `json:"userGroups"`
-	UserIds    []string `json:"userIds"`
+	UserGroups []string `json:"userGroups,omitempty"`
+	UserIds    []string `json:"userIds,omitempty"`
 }

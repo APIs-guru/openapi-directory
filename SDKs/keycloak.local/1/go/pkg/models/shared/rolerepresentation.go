@@ -1,12 +1,12 @@
 package shared
 
 type RoleRepresentation struct {
-	Attributes  map[string]interface{}        `json:"attributes"`
-	ClientRole  *bool                         `json:"clientRole"`
-	Composite   *bool                         `json:"composite"`
-	Composites  *RoleRepresentationComposites `json:"composites"`
-	ContainerID *string                       `json:"containerId"`
-	Description *string                       `json:"description"`
-	ID          *string                       `json:"id"`
-	Name        *string                       `json:"name"`
+	Attributes  map[string]interface{}        `json:"attributes,omitempty"`
+	ClientRole  *bool                         `json:"clientRole,omitempty"`
+	Composite   *bool                         `json:"composite,omitempty"`
+	Composites  *RoleRepresentationComposites `json:"composites,omitempty"`
+	ContainerID *string                       `json:"containerId,omitempty"`
+	Description *string                       `json:"description,omitempty"`
+	ID          *string                       `json:"id,omitempty"`
+	Name        *string                       `json:"name,omitempty"`
 }

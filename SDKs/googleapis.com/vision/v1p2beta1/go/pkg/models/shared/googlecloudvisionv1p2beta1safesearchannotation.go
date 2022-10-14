@@ -56,9 +56,9 @@ const (
 )
 
 type GoogleCloudVisionV1p2beta1SafeSearchAnnotation struct {
-	Adult    *GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum    `json:"adult"`
-	Medical  *GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum  `json:"medical"`
-	Racy     *GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum     `json:"racy"`
-	Spoof    *GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum    `json:"spoof"`
-	Violence *GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum `json:"violence"`
+	Adult    *GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum    `json:"adult,omitempty"`
+	Medical  *GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum  `json:"medical,omitempty"`
+	Racy     *GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum     `json:"racy,omitempty"`
+	Spoof    *GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum    `json:"spoof,omitempty"`
+	Violence *GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum `json:"violence,omitempty"`
 }

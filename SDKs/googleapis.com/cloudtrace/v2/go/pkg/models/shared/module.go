@@ -1,6 +1,6 @@
 package shared
 
 type Module struct {
-	BuildID *TruncatableString `json:"buildId"`
-	Module  *TruncatableString `json:"module"`
+	BuildID *TruncatableString `json:"buildId,omitempty"`
+	Module  *TruncatableString `json:"module,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ExchangeAssignedTargetingOptionDetails struct {
-	TargetingOptionID *string `json:"targetingOptionId"`
+	TargetingOptionID *string `json:"targetingOptionId,omitempty"`
 }

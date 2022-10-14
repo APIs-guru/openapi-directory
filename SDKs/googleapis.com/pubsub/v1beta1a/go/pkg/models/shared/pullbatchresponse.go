@@ -1,5 +1,5 @@
 package shared
 
 type PullBatchResponse struct {
-	PullResponses []PullResponse `json:"pullResponses"`
+	PullResponses []PullResponse `json:"pullResponses,omitempty"`
 }

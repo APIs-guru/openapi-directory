@@ -11,5 +11,5 @@ const (
 )
 
 type GoogleAppsScriptTypeExecutionAPIConfig struct {
-	Access *GoogleAppsScriptTypeExecutionAPIConfigAccessEnum `json:"access"`
+	Access *GoogleAppsScriptTypeExecutionAPIConfigAccessEnum `json:"access,omitempty"`
 }

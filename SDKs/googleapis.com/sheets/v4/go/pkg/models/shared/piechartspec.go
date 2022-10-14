@@ -13,9 +13,9 @@ const (
 )
 
 type PieChartSpec struct {
-	Domain           *ChartData                      `json:"domain"`
-	LegendPosition   *PieChartSpecLegendPositionEnum `json:"legendPosition"`
-	PieHole          *float64                        `json:"pieHole"`
-	Series           *ChartData                      `json:"series"`
-	ThreeDimensional *bool                           `json:"threeDimensional"`
+	Domain           *ChartData                      `json:"domain,omitempty"`
+	LegendPosition   *PieChartSpecLegendPositionEnum `json:"legendPosition,omitempty"`
+	PieHole          *float64                        `json:"pieHole,omitempty"`
+	Series           *ChartData                      `json:"series,omitempty"`
+	ThreeDimensional *bool                           `json:"threeDimensional,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type UpdateRepoRequest struct {
-	Repo       *Repo   `json:"repo"`
-	UpdateMask *string `json:"updateMask"`
+	Repo       *Repo   `json:"repo,omitempty"`
+	UpdateMask *string `json:"updateMask,omitempty"`
 }

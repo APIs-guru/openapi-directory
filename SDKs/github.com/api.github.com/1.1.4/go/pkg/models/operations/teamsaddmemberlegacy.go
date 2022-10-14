@@ -14,15 +14,15 @@ type TeamsAddMemberLegacyRequest struct {
 }
 
 type TeamsAddMemberLegacy422ApplicationJSONErrors struct {
-	Code     *string `json:"code"`
-	Field    *string `json:"field"`
-	Resource *string `json:"resource"`
+	Code     *string `json:"code,omitempty"`
+	Field    *string `json:"field,omitempty"`
+	Resource *string `json:"resource,omitempty"`
 }
 
 type TeamsAddMemberLegacy422ApplicationJSON struct {
-	DocumentationURL *string                                        `json:"documentation_url"`
-	Errors           []TeamsAddMemberLegacy422ApplicationJSONErrors `json:"errors"`
-	Message          *string                                        `json:"message"`
+	DocumentationURL *string                                        `json:"documentation_url,omitempty"`
+	Errors           []TeamsAddMemberLegacy422ApplicationJSONErrors `json:"errors,omitempty"`
+	Message          *string                                        `json:"message,omitempty"`
 }
 
 type TeamsAddMemberLegacyResponse struct {

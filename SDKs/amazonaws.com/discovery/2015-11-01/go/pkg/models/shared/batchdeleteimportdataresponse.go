@@ -1,5 +1,5 @@
 package shared
 
 type BatchDeleteImportDataResponse struct {
-	Errors []BatchDeleteImportDataError `json:"errors"`
+	Errors []BatchDeleteImportDataError `json:"errors,omitempty"`
 }

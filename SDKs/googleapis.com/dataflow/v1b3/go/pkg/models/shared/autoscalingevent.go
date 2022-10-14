@@ -11,10 +11,10 @@ const (
 )
 
 type AutoscalingEvent struct {
-	CurrentNumWorkers *string                        `json:"currentNumWorkers"`
-	Description       *StructuredMessage             `json:"description"`
-	EventType         *AutoscalingEventEventTypeEnum `json:"eventType"`
-	TargetNumWorkers  *string                        `json:"targetNumWorkers"`
-	Time              *string                        `json:"time"`
-	WorkerPool        *string                        `json:"workerPool"`
+	CurrentNumWorkers *string                        `json:"currentNumWorkers,omitempty"`
+	Description       *StructuredMessage             `json:"description,omitempty"`
+	EventType         *AutoscalingEventEventTypeEnum `json:"eventType,omitempty"`
+	TargetNumWorkers  *string                        `json:"targetNumWorkers,omitempty"`
+	Time              *string                        `json:"time,omitempty"`
+	WorkerPool        *string                        `json:"workerPool,omitempty"`
 }

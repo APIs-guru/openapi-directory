@@ -9,31 +9,31 @@ type ListAuthorsOfPadUsingGetRequest struct {
 }
 
 type ListAuthorsOfPadUsingGet200ApplicationJSONData struct {
-	AuthorIDs []string `json:"authorIDs"`
+	AuthorIDs []string `json:"authorIDs,omitempty"`
 }
 
 type ListAuthorsOfPadUsingGet200ApplicationJSON struct {
-	Code    *int64                                          `json:"code"`
-	Data    *ListAuthorsOfPadUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                         `json:"message"`
+	Code    *int64                                          `json:"code,omitempty"`
+	Data    *ListAuthorsOfPadUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                         `json:"message,omitempty"`
 }
 
 type ListAuthorsOfPadUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListAuthorsOfPadUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListAuthorsOfPadUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListAuthorsOfPadUsingGetResponse struct {

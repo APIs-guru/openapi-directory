@@ -5,8 +5,8 @@ import (
 )
 
 type SandboxScheduledPayment struct {
-	Amount          *float64   `json:"amount"`
-	Description     *string    `json:"description"`
-	ExecutionDate   *time.Time `json:"executionDate"`
-	SenderReference *string    `json:"senderReference"`
+	Amount          *float64   `json:"amount,omitempty"`
+	Description     *string    `json:"description,omitempty"`
+	ExecutionDate   *time.Time `json:"executionDate,omitempty"`
+	SenderReference *string    `json:"senderReference,omitempty"`
 }

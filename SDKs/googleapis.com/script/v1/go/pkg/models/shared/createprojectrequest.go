@@ -1,6 +1,6 @@
 package shared
 
 type CreateProjectRequest struct {
-	ParentID *string `json:"parentId"`
-	Title    *string `json:"title"`
+	ParentID *string `json:"parentId,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }

@@ -5,17 +5,17 @@ import (
 )
 
 type ProjectVersionDescription struct {
-	BillableTrainingTimeInSeconds *int64                    `json:"BillableTrainingTimeInSeconds"`
-	CreationTimestamp             *time.Time                `json:"CreationTimestamp"`
-	EvaluationResult              *EvaluationResult         `json:"EvaluationResult"`
-	KmsKeyID                      *string                   `json:"KmsKeyId"`
-	ManifestSummary               *GroundTruthManifest      `json:"ManifestSummary"`
-	MinInferenceUnits             *int64                    `json:"MinInferenceUnits"`
-	OutputConfig                  *OutputConfig             `json:"OutputConfig"`
-	ProjectVersionArn             *string                   `json:"ProjectVersionArn"`
-	Status                        *ProjectVersionStatusEnum `json:"Status"`
-	StatusMessage                 *string                   `json:"StatusMessage"`
-	TestingDataResult             *TestingDataResult        `json:"TestingDataResult"`
-	TrainingDataResult            *TrainingDataResult       `json:"TrainingDataResult"`
-	TrainingEndTimestamp          *time.Time                `json:"TrainingEndTimestamp"`
+	BillableTrainingTimeInSeconds *int64                    `json:"BillableTrainingTimeInSeconds,omitempty"`
+	CreationTimestamp             *time.Time                `json:"CreationTimestamp,omitempty"`
+	EvaluationResult              *EvaluationResult         `json:"EvaluationResult,omitempty"`
+	KmsKeyID                      *string                   `json:"KmsKeyId,omitempty"`
+	ManifestSummary               *GroundTruthManifest      `json:"ManifestSummary,omitempty"`
+	MinInferenceUnits             *int64                    `json:"MinInferenceUnits,omitempty"`
+	OutputConfig                  *OutputConfig             `json:"OutputConfig,omitempty"`
+	ProjectVersionArn             *string                   `json:"ProjectVersionArn,omitempty"`
+	Status                        *ProjectVersionStatusEnum `json:"Status,omitempty"`
+	StatusMessage                 *string                   `json:"StatusMessage,omitempty"`
+	TestingDataResult             *TestingDataResult        `json:"TestingDataResult,omitempty"`
+	TrainingDataResult            *TrainingDataResult       `json:"TrainingDataResult,omitempty"`
+	TrainingEndTimestamp          *time.Time                `json:"TrainingEndTimestamp,omitempty"`
 }

@@ -20,13 +20,13 @@ type StartPipelineReprocessingHeaders struct {
 }
 
 type StartPipelineReprocessingRequestBodyChannelMessages struct {
-	S3Paths []string `json:"s3Paths"`
+	S3Paths []string `json:"s3Paths,omitempty"`
 }
 
 type StartPipelineReprocessingRequestBody struct {
-	ChannelMessages *StartPipelineReprocessingRequestBodyChannelMessages `json:"channelMessages"`
-	EndTime         *time.Time                                           `json:"endTime"`
-	StartTime       *time.Time                                           `json:"startTime"`
+	ChannelMessages *StartPipelineReprocessingRequestBodyChannelMessages `json:"channelMessages,omitempty"`
+	EndTime         *time.Time                                           `json:"endTime,omitempty"`
+	StartTime       *time.Time                                           `json:"startTime,omitempty"`
 }
 
 type StartPipelineReprocessingRequest struct {

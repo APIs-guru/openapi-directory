@@ -1,5 +1,5 @@
 package shared
 
 type CrawlerNodeDetails struct {
-	Crawls []Crawl `json:"Crawls"`
+	Crawls []Crawl `json:"Crawls,omitempty"`
 }

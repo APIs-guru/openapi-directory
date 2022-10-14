@@ -1,5 +1,5 @@
 package shared
 
 type RawEmail struct {
-	Data *string `json:"Data"`
+	Data *string `json:"Data,omitempty"`
 }

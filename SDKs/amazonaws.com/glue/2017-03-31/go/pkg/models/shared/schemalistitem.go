@@ -1,11 +1,11 @@
 package shared
 
 type SchemaListItem struct {
-	CreatedTime  *string           `json:"CreatedTime"`
-	Description  *string           `json:"Description"`
-	RegistryName *string           `json:"RegistryName"`
-	SchemaArn    *string           `json:"SchemaArn"`
-	SchemaName   *string           `json:"SchemaName"`
-	SchemaStatus *SchemaStatusEnum `json:"SchemaStatus"`
-	UpdatedTime  *string           `json:"UpdatedTime"`
+	CreatedTime  *string           `json:"CreatedTime,omitempty"`
+	Description  *string           `json:"Description,omitempty"`
+	RegistryName *string           `json:"RegistryName,omitempty"`
+	SchemaArn    *string           `json:"SchemaArn,omitempty"`
+	SchemaName   *string           `json:"SchemaName,omitempty"`
+	SchemaStatus *SchemaStatusEnum `json:"SchemaStatus,omitempty"`
+	UpdatedTime  *string           `json:"UpdatedTime,omitempty"`
 }

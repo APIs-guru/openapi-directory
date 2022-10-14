@@ -1,6 +1,6 @@
 package shared
 
 type ListConfigsResponse struct {
-	Configs       []RuntimeConfig `json:"configs"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Configs       []RuntimeConfig `json:"configs,omitempty"`
+	NextPageToken *string         `json:"nextPageToken,omitempty"`
 }

@@ -10,7 +10,7 @@ const (
 )
 
 type Feed struct {
-	CourseRosterChangesInfo *CourseRosterChangesInfo `json:"courseRosterChangesInfo"`
-	CourseWorkChangesInfo   *CourseWorkChangesInfo   `json:"courseWorkChangesInfo"`
-	FeedType                *FeedFeedTypeEnum        `json:"feedType"`
+	CourseRosterChangesInfo *CourseRosterChangesInfo `json:"courseRosterChangesInfo,omitempty"`
+	CourseWorkChangesInfo   *CourseWorkChangesInfo   `json:"courseWorkChangesInfo,omitempty"`
+	FeedType                *FeedFeedTypeEnum        `json:"feedType,omitempty"`
 }

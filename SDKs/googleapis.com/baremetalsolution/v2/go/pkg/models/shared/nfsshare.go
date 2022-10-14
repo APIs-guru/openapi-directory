@@ -19,13 +19,13 @@ const (
 )
 
 type NfsShare struct {
-	AllowedClients   []AllowedClient          `json:"allowedClients"`
-	ID               *string                  `json:"id"`
-	Labels           map[string]string        `json:"labels"`
-	Name             *string                  `json:"name"`
-	NfsShareID       *string                  `json:"nfsShareId"`
-	RequestedSizeGib *string                  `json:"requestedSizeGib"`
-	State            *NfsShareStateEnum       `json:"state"`
-	StorageType      *NfsShareStorageTypeEnum `json:"storageType"`
-	Volume           *string                  `json:"volume"`
+	AllowedClients   []AllowedClient          `json:"allowedClients,omitempty"`
+	ID               *string                  `json:"id,omitempty"`
+	Labels           map[string]string        `json:"labels,omitempty"`
+	Name             *string                  `json:"name,omitempty"`
+	NfsShareID       *string                  `json:"nfsShareId,omitempty"`
+	RequestedSizeGib *string                  `json:"requestedSizeGib,omitempty"`
+	State            *NfsShareStateEnum       `json:"state,omitempty"`
+	StorageType      *NfsShareStorageTypeEnum `json:"storageType,omitempty"`
+	Volume           *string                  `json:"volume,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type APIDimensionFilter struct {
-	Dimension  *string `json:"dimension"`
-	Expression *string `json:"expression"`
-	Operator   *string `json:"operator"`
+	Dimension  *string `json:"dimension,omitempty"`
+	Expression *string `json:"expression,omitempty"`
+	Operator   *string `json:"operator,omitempty"`
 }

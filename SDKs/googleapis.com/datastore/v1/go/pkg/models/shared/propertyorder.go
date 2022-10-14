@@ -9,6 +9,6 @@ const (
 )
 
 type PropertyOrder struct {
-	Direction *PropertyOrderDirectionEnum `json:"direction"`
-	Property  *PropertyReference          `json:"property"`
+	Direction *PropertyOrderDirectionEnum `json:"direction,omitempty"`
+	Property  *PropertyReference          `json:"property,omitempty"`
 }

@@ -25,7 +25,7 @@ const (
 )
 
 type AutoInstallConstraint struct {
-	ChargingStateConstraint   *AutoInstallConstraintChargingStateConstraintEnum   `json:"chargingStateConstraint"`
-	DeviceIdleStateConstraint *AutoInstallConstraintDeviceIdleStateConstraintEnum `json:"deviceIdleStateConstraint"`
-	NetworkTypeConstraint     *AutoInstallConstraintNetworkTypeConstraintEnum     `json:"networkTypeConstraint"`
+	ChargingStateConstraint   *AutoInstallConstraintChargingStateConstraintEnum   `json:"chargingStateConstraint,omitempty"`
+	DeviceIdleStateConstraint *AutoInstallConstraintDeviceIdleStateConstraintEnum `json:"deviceIdleStateConstraint,omitempty"`
+	NetworkTypeConstraint     *AutoInstallConstraintNetworkTypeConstraintEnum     `json:"networkTypeConstraint,omitempty"`
 }

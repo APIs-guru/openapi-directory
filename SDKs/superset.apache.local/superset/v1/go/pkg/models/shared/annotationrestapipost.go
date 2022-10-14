@@ -5,9 +5,9 @@ import (
 )
 
 type AnnotationRestAPIPost struct {
-	EndDttm      *time.Time `json:"end_dttm"`
-	JSONMetadata *string    `json:"json_metadata"`
-	LongDescr    *string    `json:"long_descr"`
-	ShortDescr   *string    `json:"short_descr"`
-	StartDttm    *time.Time `json:"start_dttm"`
+	EndDttm      *time.Time `json:"end_dttm,omitempty"`
+	JSONMetadata *string    `json:"json_metadata,omitempty"`
+	LongDescr    *string    `json:"long_descr,omitempty"`
+	ShortDescr   *string    `json:"short_descr,omitempty"`
+	StartDttm    *time.Time `json:"start_dttm,omitempty"`
 }

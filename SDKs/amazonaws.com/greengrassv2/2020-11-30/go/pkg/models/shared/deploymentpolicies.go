@@ -1,7 +1,7 @@
 package shared
 
 type DeploymentPolicies struct {
-	ComponentUpdatePolicy         *DeploymentComponentUpdatePolicy         `json:"componentUpdatePolicy"`
-	ConfigurationValidationPolicy *DeploymentConfigurationValidationPolicy `json:"configurationValidationPolicy"`
-	FailureHandlingPolicy         *DeploymentFailureHandlingPolicyEnum     `json:"failureHandlingPolicy"`
+	ComponentUpdatePolicy         *DeploymentComponentUpdatePolicy         `json:"componentUpdatePolicy,omitempty"`
+	ConfigurationValidationPolicy *DeploymentConfigurationValidationPolicy `json:"configurationValidationPolicy,omitempty"`
+	FailureHandlingPolicy         *DeploymentFailureHandlingPolicyEnum     `json:"failureHandlingPolicy,omitempty"`
 }

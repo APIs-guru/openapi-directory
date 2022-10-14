@@ -34,18 +34,18 @@ const (
 )
 
 type Case struct {
-	Classification           *CaseClassification `json:"classification"`
-	CreateTime               *string             `json:"createTime"`
-	Creator                  *Actor              `json:"creator"`
-	Description              *string             `json:"description"`
-	DisplayName              *string             `json:"displayName"`
-	Escalated                *bool               `json:"escalated"`
-	Name                     *string             `json:"name"`
-	Priority                 *CasePriorityEnum   `json:"priority"`
-	Severity                 *CaseSeverityEnum   `json:"severity"`
-	State                    *CaseStateEnum      `json:"state"`
-	SubscriberEmailAddresses []string            `json:"subscriberEmailAddresses"`
-	TestCase                 *bool               `json:"testCase"`
-	TimeZone                 *string             `json:"timeZone"`
-	UpdateTime               *string             `json:"updateTime"`
+	Classification           *CaseClassification `json:"classification,omitempty"`
+	CreateTime               *string             `json:"createTime,omitempty"`
+	Creator                  *Actor              `json:"creator,omitempty"`
+	Description              *string             `json:"description,omitempty"`
+	DisplayName              *string             `json:"displayName,omitempty"`
+	Escalated                *bool               `json:"escalated,omitempty"`
+	Name                     *string             `json:"name,omitempty"`
+	Priority                 *CasePriorityEnum   `json:"priority,omitempty"`
+	Severity                 *CaseSeverityEnum   `json:"severity,omitempty"`
+	State                    *CaseStateEnum      `json:"state,omitempty"`
+	SubscriberEmailAddresses []string            `json:"subscriberEmailAddresses,omitempty"`
+	TestCase                 *bool               `json:"testCase,omitempty"`
+	TimeZone                 *string             `json:"timeZone,omitempty"`
+	UpdateTime               *string             `json:"updateTime,omitempty"`
 }

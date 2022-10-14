@@ -1,6 +1,6 @@
 package shared
 
 type ExfilResource struct {
-	Components []string `json:"components"`
-	Name       *string  `json:"name"`
+	Components []string `json:"components,omitempty"`
+	Name       *string  `json:"name,omitempty"`
 }

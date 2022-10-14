@@ -1,5 +1,5 @@
 package shared
 
 type CloudWatchLogsLogGroup struct {
-	LogGroupArn *string `json:"logGroupArn"`
+	LogGroupArn *string `json:"logGroupArn,omitempty"`
 }

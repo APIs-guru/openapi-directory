@@ -1,5 +1,5 @@
 package shared
 
 type GetDiskResult struct {
-	Disk *Disk `json:"disk"`
+	Disk *Disk `json:"disk,omitempty"`
 }

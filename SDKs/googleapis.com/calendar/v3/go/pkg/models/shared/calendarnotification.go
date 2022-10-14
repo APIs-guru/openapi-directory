@@ -1,6 +1,6 @@
 package shared
 
 type CalendarNotification struct {
-	Method *string `json:"method"`
-	Type   *string `json:"type"`
+	Method *string `json:"method,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }

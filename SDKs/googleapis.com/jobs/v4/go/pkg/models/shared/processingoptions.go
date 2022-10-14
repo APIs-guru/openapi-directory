@@ -9,6 +9,6 @@ const (
 )
 
 type ProcessingOptions struct {
-	DisableStreetAddressResolution *bool                                  `json:"disableStreetAddressResolution"`
-	HTMLSanitization               *ProcessingOptionsHTMLSanitizationEnum `json:"htmlSanitization"`
+	DisableStreetAddressResolution *bool                                  `json:"disableStreetAddressResolution,omitempty"`
+	HTMLSanitization               *ProcessingOptionsHTMLSanitizationEnum `json:"htmlSanitization,omitempty"`
 }

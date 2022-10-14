@@ -1,7 +1,7 @@
 package shared
 
 type Residence struct {
-	Current  *bool          `json:"current"`
-	Metadata *FieldMetadata `json:"metadata"`
-	Value    *string        `json:"value"`
+	Current  *bool          `json:"current,omitempty"`
+	Metadata *FieldMetadata `json:"metadata,omitempty"`
+	Value    *string        `json:"value,omitempty"`
 }

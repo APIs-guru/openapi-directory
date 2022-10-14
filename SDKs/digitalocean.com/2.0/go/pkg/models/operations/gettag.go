@@ -13,13 +13,13 @@ type GetTagRequest struct {
 }
 
 type GetTag200ApplicationJSON struct {
-	Tag *shared.Onev21tagsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesTagsItems `json:"tag"`
+	Tag *shared.Onev21tagsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesTagsItems `json:"tag,omitempty"`
 }
 
 type GetTag401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetTagResponse struct {

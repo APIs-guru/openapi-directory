@@ -9,6 +9,6 @@ const (
 )
 
 type GooglePlayDeveloperReportingV1beta1FreshnessInfoFreshness struct {
-	AggregationPeriod *GooglePlayDeveloperReportingV1beta1FreshnessInfoFreshnessAggregationPeriodEnum `json:"aggregationPeriod"`
-	LatestEndTime     *GoogleTypeDateTime                                                             `json:"latestEndTime"`
+	AggregationPeriod *GooglePlayDeveloperReportingV1beta1FreshnessInfoFreshnessAggregationPeriodEnum `json:"aggregationPeriod,omitempty"`
+	LatestEndTime     *GoogleTypeDateTime                                                             `json:"latestEndTime,omitempty"`
 }

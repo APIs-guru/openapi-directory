@@ -1,17 +1,17 @@
 package shared
 
 type AmendmentSearchItem struct {
-	AmendmentID        *int32                 `json:"amendmentId"`
-	AmendmentPosition  *string                `json:"amendmentPosition"`
-	AmendmentType      *AmendmentTypeEnum     `json:"amendmentType"`
-	BillID             *int32                 `json:"billId"`
-	BillStageID        *int32                 `json:"billStageId"`
-	Clause             *int32                 `json:"clause"`
-	Decision           *AmendmentDecisionEnum `json:"decision"`
-	LineNumber         *int32                 `json:"lineNumber"`
-	MarshalledListText *string                `json:"marshalledListText"`
-	PageNumber         *int32                 `json:"pageNumber"`
-	Schedule           *int32                 `json:"schedule"`
-	Sponsors           []AmendmentMember      `json:"sponsors"`
-	SummaryText        []string               `json:"summaryText"`
+	AmendmentID        *int32                 `json:"amendmentId,omitempty"`
+	AmendmentPosition  *string                `json:"amendmentPosition,omitempty"`
+	AmendmentType      *AmendmentTypeEnum     `json:"amendmentType,omitempty"`
+	BillID             *int32                 `json:"billId,omitempty"`
+	BillStageID        *int32                 `json:"billStageId,omitempty"`
+	Clause             *int32                 `json:"clause,omitempty"`
+	Decision           *AmendmentDecisionEnum `json:"decision,omitempty"`
+	LineNumber         *int32                 `json:"lineNumber,omitempty"`
+	MarshalledListText *string                `json:"marshalledListText,omitempty"`
+	PageNumber         *int32                 `json:"pageNumber,omitempty"`
+	Schedule           *int32                 `json:"schedule,omitempty"`
+	Sponsors           []AmendmentMember      `json:"sponsors,omitempty"`
+	SummaryText        []string               `json:"summaryText,omitempty"`
 }

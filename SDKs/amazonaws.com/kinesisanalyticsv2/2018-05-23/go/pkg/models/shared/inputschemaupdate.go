@@ -1,7 +1,7 @@
 package shared
 
 type InputSchemaUpdate struct {
-	RecordColumnUpdates  []RecordColumn `json:"RecordColumnUpdates"`
-	RecordEncodingUpdate *string        `json:"RecordEncodingUpdate"`
-	RecordFormatUpdate   *RecordFormat  `json:"RecordFormatUpdate"`
+	RecordColumnUpdates  []RecordColumn `json:"RecordColumnUpdates,omitempty"`
+	RecordEncodingUpdate *string        `json:"RecordEncodingUpdate,omitempty"`
+	RecordFormatUpdate   *RecordFormat  `json:"RecordFormatUpdate,omitempty"`
 }

@@ -1,176 +1,176 @@
 package shared
 
 type EnterpriseSettingsEnterpriseAvatar struct {
-	Enabled *bool   `json:"enabled"`
-	URI     *string `json:"uri"`
+	Enabled *bool   `json:"enabled,omitempty"`
+	URI     *string `json:"uri,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseCas struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseCollectd struct {
-	Enabled    *bool   `json:"enabled"`
-	Encryption *string `json:"encryption"`
-	Password   *string `json:"password"`
-	Port       *int64  `json:"port"`
-	Server     *string `json:"server"`
-	Username   *string `json:"username"`
+	Enabled    *bool   `json:"enabled,omitempty"`
+	Encryption *string `json:"encryption,omitempty"`
+	Password   *string `json:"password,omitempty"`
+	Port       *int64  `json:"port,omitempty"`
+	Server     *string `json:"server,omitempty"`
+	Username   *string `json:"username,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseCustomer struct {
-	Email         *string `json:"email"`
-	Name          *string `json:"name"`
-	PublicKeyData *string `json:"public_key_data"`
-	SecretKeyData *string `json:"secret_key_data"`
-	UUID          *string `json:"uuid"`
+	Email         *string `json:"email,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	PublicKeyData *string `json:"public_key_data,omitempty"`
+	SecretKeyData *string `json:"secret_key_data,omitempty"`
+	UUID          *string `json:"uuid,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseGithubOauth struct {
-	ClientID         *string `json:"client_id"`
-	ClientSecret     *string `json:"client_secret"`
-	OrganizationName *string `json:"organization_name"`
-	OrganizationTeam *string `json:"organization_team"`
+	ClientID         *string `json:"client_id,omitempty"`
+	ClientSecret     *string `json:"client_secret,omitempty"`
+	OrganizationName *string `json:"organization_name,omitempty"`
+	OrganizationTeam *string `json:"organization_team,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseGithubSsl struct {
-	Cert    *string `json:"cert"`
-	Enabled *bool   `json:"enabled"`
-	Key     *string `json:"key"`
+	Cert    *string `json:"cert,omitempty"`
+	Enabled *bool   `json:"enabled,omitempty"`
+	Key     *string `json:"key,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseLdapProfile struct {
-	Key  *string `json:"key"`
-	Mail *string `json:"mail"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	Key  *string `json:"key,omitempty"`
+	Mail *string `json:"mail,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseLdapReconciliation struct {
-	Org  *string `json:"org"`
-	User *string `json:"user"`
+	Org  *string `json:"org,omitempty"`
+	User *string `json:"user,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseLdap struct {
-	AdminGroup              *string                                         `json:"admin_group"`
-	Base                    []interface{}                                   `json:"base"`
-	BindDn                  *string                                         `json:"bind_dn"`
-	Host                    *string                                         `json:"host"`
-	Method                  *string                                         `json:"method"`
-	Password                *string                                         `json:"password"`
-	Port                    *int64                                          `json:"port"`
-	PosixSupport            *bool                                           `json:"posix_support"`
-	Profile                 *EnterpriseSettingsEnterpriseLdapProfile        `json:"profile"`
-	Reconciliation          *EnterpriseSettingsEnterpriseLdapReconciliation `json:"reconciliation"`
-	RecursiveGroupSearch    *bool                                           `json:"recursive_group_search"`
-	SearchStrategy          *string                                         `json:"search_strategy"`
-	SyncEnabled             *bool                                           `json:"sync_enabled"`
-	TeamSyncInterval        *int64                                          `json:"team_sync_interval"`
-	UID                     *string                                         `json:"uid"`
-	UserGroups              []interface{}                                   `json:"user_groups"`
-	UserSyncEmails          *bool                                           `json:"user_sync_emails"`
-	UserSyncInterval        *int64                                          `json:"user_sync_interval"`
-	UserSyncKeys            *bool                                           `json:"user_sync_keys"`
-	VirtualAttributeEnabled *bool                                           `json:"virtual_attribute_enabled"`
+	AdminGroup              *string                                         `json:"admin_group,omitempty"`
+	Base                    []interface{}                                   `json:"base,omitempty"`
+	BindDn                  *string                                         `json:"bind_dn,omitempty"`
+	Host                    *string                                         `json:"host,omitempty"`
+	Method                  *string                                         `json:"method,omitempty"`
+	Password                *string                                         `json:"password,omitempty"`
+	Port                    *int64                                          `json:"port,omitempty"`
+	PosixSupport            *bool                                           `json:"posix_support,omitempty"`
+	Profile                 *EnterpriseSettingsEnterpriseLdapProfile        `json:"profile,omitempty"`
+	Reconciliation          *EnterpriseSettingsEnterpriseLdapReconciliation `json:"reconciliation,omitempty"`
+	RecursiveGroupSearch    *bool                                           `json:"recursive_group_search,omitempty"`
+	SearchStrategy          *string                                         `json:"search_strategy,omitempty"`
+	SyncEnabled             *bool                                           `json:"sync_enabled,omitempty"`
+	TeamSyncInterval        *int64                                          `json:"team_sync_interval,omitempty"`
+	UID                     *string                                         `json:"uid,omitempty"`
+	UserGroups              []interface{}                                   `json:"user_groups,omitempty"`
+	UserSyncEmails          *bool                                           `json:"user_sync_emails,omitempty"`
+	UserSyncInterval        *int64                                          `json:"user_sync_interval,omitempty"`
+	UserSyncKeys            *bool                                           `json:"user_sync_keys,omitempty"`
+	VirtualAttributeEnabled *bool                                           `json:"virtual_attribute_enabled,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseLicense struct {
-	ClusterSupport   *bool   `json:"cluster_support"`
-	Evaluation       *bool   `json:"evaluation"`
-	ExpireAt         *string `json:"expire_at"`
-	Perpetual        *bool   `json:"perpetual"`
-	Seats            *int64  `json:"seats"`
-	SSHAllowed       *bool   `json:"ssh_allowed"`
-	SupportKey       *string `json:"support_key"`
-	UnlimitedSeating *bool   `json:"unlimited_seating"`
+	ClusterSupport   *bool   `json:"cluster_support,omitempty"`
+	Evaluation       *bool   `json:"evaluation,omitempty"`
+	ExpireAt         *string `json:"expire_at,omitempty"`
+	Perpetual        *bool   `json:"perpetual,omitempty"`
+	Seats            *int64  `json:"seats,omitempty"`
+	SSHAllowed       *bool   `json:"ssh_allowed,omitempty"`
+	SupportKey       *string `json:"support_key,omitempty"`
+	UnlimitedSeating *bool   `json:"unlimited_seating,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseMapping struct {
-	Basemap    *string `json:"basemap"`
-	Enabled    *bool   `json:"enabled"`
-	Tileserver *string `json:"tileserver"`
-	Token      *string `json:"token"`
+	Basemap    *string `json:"basemap,omitempty"`
+	Enabled    *bool   `json:"enabled,omitempty"`
+	Tileserver *string `json:"tileserver,omitempty"`
+	Token      *string `json:"token,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseNtp struct {
-	PrimaryServer   *string `json:"primary_server"`
-	SecondaryServer *string `json:"secondary_server"`
+	PrimaryServer   *string `json:"primary_server,omitempty"`
+	SecondaryServer *string `json:"secondary_server,omitempty"`
 }
 
 type EnterpriseSettingsEnterprisePages struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseSaml struct {
-	Certificate        *string `json:"certificate"`
-	CertificatePath    *string `json:"certificate_path"`
-	DisableAdminDemote *bool   `json:"disable_admin_demote"`
-	IdpInitiatedSso    *bool   `json:"idp_initiated_sso"`
-	Issuer             *string `json:"issuer"`
-	SsoURL             *string `json:"sso_url"`
+	Certificate        *string `json:"certificate,omitempty"`
+	CertificatePath    *string `json:"certificate_path,omitempty"`
+	DisableAdminDemote *bool   `json:"disable_admin_demote,omitempty"`
+	IdpInitiatedSso    *bool   `json:"idp_initiated_sso,omitempty"`
+	Issuer             *string `json:"issuer,omitempty"`
+	SsoURL             *string `json:"sso_url,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseSMTP struct {
-	Address                 *string `json:"address"`
-	Authentication          *string `json:"authentication"`
-	DiscardToNoreplyAddress *bool   `json:"discard-to-noreply-address"`
-	Domain                  *string `json:"domain"`
-	EnableStarttlsAuto      *bool   `json:"enable_starttls_auto"`
-	Enabled                 *bool   `json:"enabled"`
-	NoreplyAddress          *string `json:"noreply_address"`
-	Password                *string `json:"password"`
-	Port                    *string `json:"port"`
-	SupportAddress          *string `json:"support_address"`
-	SupportAddressType      *string `json:"support_address_type"`
-	UserName                *string `json:"user_name"`
-	Username                *string `json:"username"`
+	Address                 *string `json:"address,omitempty"`
+	Authentication          *string `json:"authentication,omitempty"`
+	DiscardToNoreplyAddress *bool   `json:"discard-to-noreply-address,omitempty"`
+	Domain                  *string `json:"domain,omitempty"`
+	EnableStarttlsAuto      *bool   `json:"enable_starttls_auto,omitempty"`
+	Enabled                 *bool   `json:"enabled,omitempty"`
+	NoreplyAddress          *string `json:"noreply_address,omitempty"`
+	Password                *string `json:"password,omitempty"`
+	Port                    *string `json:"port,omitempty"`
+	SupportAddress          *string `json:"support_address,omitempty"`
+	SupportAddressType      *string `json:"support_address_type,omitempty"`
+	UserName                *string `json:"user_name,omitempty"`
+	Username                *string `json:"username,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseSnmp struct {
-	Community *string `json:"community"`
-	Enabled   *bool   `json:"enabled"`
+	Community *string `json:"community,omitempty"`
+	Enabled   *bool   `json:"enabled,omitempty"`
 }
 
 type EnterpriseSettingsEnterpriseSyslog struct {
-	Enabled      *bool   `json:"enabled"`
-	ProtocolName *string `json:"protocol_name"`
-	Server       *string `json:"server"`
+	Enabled      *bool   `json:"enabled,omitempty"`
+	ProtocolName *string `json:"protocol_name,omitempty"`
+	Server       *string `json:"server,omitempty"`
 }
 
 type EnterpriseSettingsEnterprise struct {
-	AdminPassword         *string                                  `json:"admin_password"`
-	Assets                *string                                  `json:"assets"`
-	AuthMode              *string                                  `json:"auth_mode"`
-	Avatar                *EnterpriseSettingsEnterpriseAvatar      `json:"avatar"`
-	Cas                   *EnterpriseSettingsEnterpriseCas         `json:"cas"`
-	Collectd              *EnterpriseSettingsEnterpriseCollectd    `json:"collectd"`
-	ConfigurationID       *int64                                   `json:"configuration_id"`
-	ConfigurationRunCount *int64                                   `json:"configuration_run_count"`
-	Customer              *EnterpriseSettingsEnterpriseCustomer    `json:"customer"`
-	ExpireSessions        *bool                                    `json:"expire_sessions"`
-	GithubHostname        *string                                  `json:"github_hostname"`
-	GithubOauth           *EnterpriseSettingsEnterpriseGithubOauth `json:"github_oauth"`
-	GithubSsl             *EnterpriseSettingsEnterpriseGithubSsl   `json:"github_ssl"`
-	HTTPProxy             *string                                  `json:"http_proxy"`
-	IdenticonsHost        *string                                  `json:"identicons_host"`
-	Ldap                  *EnterpriseSettingsEnterpriseLdap        `json:"ldap"`
-	License               *EnterpriseSettingsEnterpriseLicense     `json:"license"`
-	LoadBalancer          *string                                  `json:"load_balancer"`
-	Mapping               *EnterpriseSettingsEnterpriseMapping     `json:"mapping"`
-	Ntp                   *EnterpriseSettingsEnterpriseNtp         `json:"ntp"`
-	Pages                 *EnterpriseSettingsEnterprisePages       `json:"pages"`
-	PrivateMode           *bool                                    `json:"private_mode"`
-	PublicPages           *bool                                    `json:"public_pages"`
-	Saml                  *EnterpriseSettingsEnterpriseSaml        `json:"saml"`
-	SignupEnabled         *bool                                    `json:"signup_enabled"`
-	SMTP                  *EnterpriseSettingsEnterpriseSMTP        `json:"smtp"`
-	Snmp                  *EnterpriseSettingsEnterpriseSnmp        `json:"snmp"`
-	SubdomainIsolation    *bool                                    `json:"subdomain_isolation"`
-	Syslog                *EnterpriseSettingsEnterpriseSyslog      `json:"syslog"`
-	Timezone              *string                                  `json:"timezone"`
+	AdminPassword         *string                                  `json:"admin_password,omitempty"`
+	Assets                *string                                  `json:"assets,omitempty"`
+	AuthMode              *string                                  `json:"auth_mode,omitempty"`
+	Avatar                *EnterpriseSettingsEnterpriseAvatar      `json:"avatar,omitempty"`
+	Cas                   *EnterpriseSettingsEnterpriseCas         `json:"cas,omitempty"`
+	Collectd              *EnterpriseSettingsEnterpriseCollectd    `json:"collectd,omitempty"`
+	ConfigurationID       *int64                                   `json:"configuration_id,omitempty"`
+	ConfigurationRunCount *int64                                   `json:"configuration_run_count,omitempty"`
+	Customer              *EnterpriseSettingsEnterpriseCustomer    `json:"customer,omitempty"`
+	ExpireSessions        *bool                                    `json:"expire_sessions,omitempty"`
+	GithubHostname        *string                                  `json:"github_hostname,omitempty"`
+	GithubOauth           *EnterpriseSettingsEnterpriseGithubOauth `json:"github_oauth,omitempty"`
+	GithubSsl             *EnterpriseSettingsEnterpriseGithubSsl   `json:"github_ssl,omitempty"`
+	HTTPProxy             *string                                  `json:"http_proxy,omitempty"`
+	IdenticonsHost        *string                                  `json:"identicons_host,omitempty"`
+	Ldap                  *EnterpriseSettingsEnterpriseLdap        `json:"ldap,omitempty"`
+	License               *EnterpriseSettingsEnterpriseLicense     `json:"license,omitempty"`
+	LoadBalancer          *string                                  `json:"load_balancer,omitempty"`
+	Mapping               *EnterpriseSettingsEnterpriseMapping     `json:"mapping,omitempty"`
+	Ntp                   *EnterpriseSettingsEnterpriseNtp         `json:"ntp,omitempty"`
+	Pages                 *EnterpriseSettingsEnterprisePages       `json:"pages,omitempty"`
+	PrivateMode           *bool                                    `json:"private_mode,omitempty"`
+	PublicPages           *bool                                    `json:"public_pages,omitempty"`
+	Saml                  *EnterpriseSettingsEnterpriseSaml        `json:"saml,omitempty"`
+	SignupEnabled         *bool                                    `json:"signup_enabled,omitempty"`
+	SMTP                  *EnterpriseSettingsEnterpriseSMTP        `json:"smtp,omitempty"`
+	Snmp                  *EnterpriseSettingsEnterpriseSnmp        `json:"snmp,omitempty"`
+	SubdomainIsolation    *bool                                    `json:"subdomain_isolation,omitempty"`
+	Syslog                *EnterpriseSettingsEnterpriseSyslog      `json:"syslog,omitempty"`
+	Timezone              *string                                  `json:"timezone,omitempty"`
 }
 
 type EnterpriseSettings struct {
-	Enterprise *EnterpriseSettingsEnterprise `json:"enterprise"`
-	RunList    []string                      `json:"run_list"`
+	Enterprise *EnterpriseSettingsEnterprise `json:"enterprise,omitempty"`
+	RunList    []string                      `json:"run_list,omitempty"`
 }

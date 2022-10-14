@@ -9,37 +9,37 @@ type SingleWorkspaceRequest struct {
 }
 
 type SingleWorkspace200ApplicationJSONWorkspaceCollections struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type SingleWorkspace200ApplicationJSONWorkspaceEnvironments struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type SingleWorkspace200ApplicationJSONWorkspace struct {
-	Collections  []SingleWorkspace200ApplicationJSONWorkspaceCollections  `json:"collections"`
-	Description  *string                                                  `json:"description"`
-	Environments []SingleWorkspace200ApplicationJSONWorkspaceEnvironments `json:"environments"`
-	ID           *string                                                  `json:"id"`
-	Name         *string                                                  `json:"name"`
-	Type         *string                                                  `json:"type"`
+	Collections  []SingleWorkspace200ApplicationJSONWorkspaceCollections  `json:"collections,omitempty"`
+	Description  *string                                                  `json:"description,omitempty"`
+	Environments []SingleWorkspace200ApplicationJSONWorkspaceEnvironments `json:"environments,omitempty"`
+	ID           *string                                                  `json:"id,omitempty"`
+	Name         *string                                                  `json:"name,omitempty"`
+	Type         *string                                                  `json:"type,omitempty"`
 }
 
 type SingleWorkspace200ApplicationJSON struct {
-	Workspace *SingleWorkspace200ApplicationJSONWorkspace `json:"workspace"`
+	Workspace *SingleWorkspace200ApplicationJSONWorkspace `json:"workspace,omitempty"`
 }
 
 type SingleWorkspace404ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type SingleWorkspace404ApplicationJSON struct {
-	Error *SingleWorkspace404ApplicationJSONError `json:"error"`
+	Error *SingleWorkspace404ApplicationJSONError `json:"error,omitempty"`
 }
 
 type SingleWorkspaceResponse struct {

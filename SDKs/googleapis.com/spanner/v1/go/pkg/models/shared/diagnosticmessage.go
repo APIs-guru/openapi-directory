@@ -11,9 +11,9 @@ const (
 )
 
 type DiagnosticMessage struct {
-	Info           *LocalizedString               `json:"info"`
-	Metric         *LocalizedString               `json:"metric"`
-	MetricSpecific *bool                          `json:"metricSpecific"`
-	Severity       *DiagnosticMessageSeverityEnum `json:"severity"`
-	ShortMessage   *LocalizedString               `json:"shortMessage"`
+	Info           *LocalizedString               `json:"info,omitempty"`
+	Metric         *LocalizedString               `json:"metric,omitempty"`
+	MetricSpecific *bool                          `json:"metricSpecific,omitempty"`
+	Severity       *DiagnosticMessageSeverityEnum `json:"severity,omitempty"`
+	ShortMessage   *LocalizedString               `json:"shortMessage,omitempty"`
 }

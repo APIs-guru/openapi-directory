@@ -1,7 +1,7 @@
 package shared
 
 type DeviceTierConfig struct {
-	DeviceGroups       []DeviceGroup  `json:"deviceGroups"`
-	DeviceTierConfigID *string        `json:"deviceTierConfigId"`
-	DeviceTierSet      *DeviceTierSet `json:"deviceTierSet"`
+	DeviceGroups       []DeviceGroup  `json:"deviceGroups,omitempty"`
+	DeviceTierConfigID *string        `json:"deviceTierConfigId,omitempty"`
+	DeviceTierSet      *DeviceTierSet `json:"deviceTierSet,omitempty"`
 }

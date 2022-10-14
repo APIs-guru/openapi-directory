@@ -20,9 +20,9 @@ type CreateRouteResponseHeaders struct {
 }
 
 type CreateRouteResponseRequestBody struct {
-	ModelSelectionExpression *string                                `json:"modelSelectionExpression"`
-	ResponseModels           map[string]string                      `json:"responseModels"`
-	ResponseParameters       map[string]shared.ParameterConstraints `json:"responseParameters"`
+	ModelSelectionExpression *string                                `json:"modelSelectionExpression,omitempty"`
+	ResponseModels           map[string]string                      `json:"responseModels,omitempty"`
+	ResponseParameters       map[string]shared.ParameterConstraints `json:"responseParameters,omitempty"`
 	RouteResponseKey         string                                 `json:"routeResponseKey"`
 }
 

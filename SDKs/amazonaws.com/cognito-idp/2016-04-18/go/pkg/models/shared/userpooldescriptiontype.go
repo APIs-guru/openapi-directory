@@ -5,10 +5,10 @@ import (
 )
 
 type UserPoolDescriptionType struct {
-	CreationDate     *time.Time        `json:"CreationDate"`
-	ID               *string           `json:"Id"`
-	LambdaConfig     *LambdaConfigType `json:"LambdaConfig"`
-	LastModifiedDate *time.Time        `json:"LastModifiedDate"`
-	Name             *string           `json:"Name"`
-	Status           *StatusTypeEnum   `json:"Status"`
+	CreationDate     *time.Time        `json:"CreationDate,omitempty"`
+	ID               *string           `json:"Id,omitempty"`
+	LambdaConfig     *LambdaConfigType `json:"LambdaConfig,omitempty"`
+	LastModifiedDate *time.Time        `json:"LastModifiedDate,omitempty"`
+	Name             *string           `json:"Name,omitempty"`
+	Status           *StatusTypeEnum   `json:"Status,omitempty"`
 }

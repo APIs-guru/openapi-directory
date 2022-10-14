@@ -12,7 +12,7 @@ type DeleteConnectorProfileHeaders struct {
 
 type DeleteConnectorProfileRequestBody struct {
 	ConnectorProfileName string `json:"connectorProfileName"`
-	ForceDelete          *bool  `json:"forceDelete"`
+	ForceDelete          *bool  `json:"forceDelete,omitempty"`
 }
 
 type DeleteConnectorProfileRequest struct {

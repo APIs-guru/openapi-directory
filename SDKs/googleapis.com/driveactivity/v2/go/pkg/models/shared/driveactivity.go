@@ -1,10 +1,10 @@
 package shared
 
 type DriveActivity struct {
-	Actions             []Action      `json:"actions"`
-	Actors              []Actor       `json:"actors"`
-	PrimaryActionDetail *ActionDetail `json:"primaryActionDetail"`
-	Targets             []Target      `json:"targets"`
-	TimeRange           *TimeRange    `json:"timeRange"`
-	Timestamp           *string       `json:"timestamp"`
+	Actions             []Action      `json:"actions,omitempty"`
+	Actors              []Actor       `json:"actors,omitempty"`
+	PrimaryActionDetail *ActionDetail `json:"primaryActionDetail,omitempty"`
+	Targets             []Target      `json:"targets,omitempty"`
+	TimeRange           *TimeRange    `json:"timeRange,omitempty"`
+	Timestamp           *string       `json:"timestamp,omitempty"`
 }

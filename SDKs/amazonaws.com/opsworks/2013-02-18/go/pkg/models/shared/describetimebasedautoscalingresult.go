@@ -1,5 +1,5 @@
 package shared
 
 type DescribeTimeBasedAutoScalingResult struct {
-	TimeBasedAutoScalingConfigurations []TimeBasedAutoScalingConfiguration `json:"TimeBasedAutoScalingConfigurations"`
+	TimeBasedAutoScalingConfigurations []TimeBasedAutoScalingConfiguration `json:"TimeBasedAutoScalingConfigurations,omitempty"`
 }

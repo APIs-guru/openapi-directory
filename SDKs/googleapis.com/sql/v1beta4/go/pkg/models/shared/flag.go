@@ -45,14 +45,14 @@ const (
 )
 
 type Flag struct {
-	AllowedIntValues    []string            `json:"allowedIntValues"`
-	AllowedStringValues []string            `json:"allowedStringValues"`
-	AppliesTo           []FlagAppliesToEnum `json:"appliesTo"`
-	InBeta              *bool               `json:"inBeta"`
-	Kind                *string             `json:"kind"`
-	MaxValue            *string             `json:"maxValue"`
-	MinValue            *string             `json:"minValue"`
-	Name                *string             `json:"name"`
-	RequiresRestart     *bool               `json:"requiresRestart"`
-	Type                *FlagTypeEnum       `json:"type"`
+	AllowedIntValues    []string            `json:"allowedIntValues,omitempty"`
+	AllowedStringValues []string            `json:"allowedStringValues,omitempty"`
+	AppliesTo           []FlagAppliesToEnum `json:"appliesTo,omitempty"`
+	InBeta              *bool               `json:"inBeta,omitempty"`
+	Kind                *string             `json:"kind,omitempty"`
+	MaxValue            *string             `json:"maxValue,omitempty"`
+	MinValue            *string             `json:"minValue,omitempty"`
+	Name                *string             `json:"name,omitempty"`
+	RequiresRestart     *bool               `json:"requiresRestart,omitempty"`
+	Type                *FlagTypeEnum       `json:"type,omitempty"`
 }

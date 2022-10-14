@@ -1,12 +1,12 @@
 package shared
 
 type RangePartitioningRange struct {
-	End      *string `json:"end"`
-	Interval *string `json:"interval"`
-	Start    *string `json:"start"`
+	End      *string `json:"end,omitempty"`
+	Interval *string `json:"interval,omitempty"`
+	Start    *string `json:"start,omitempty"`
 }
 
 type RangePartitioning struct {
-	Field *string                 `json:"field"`
-	Range *RangePartitioningRange `json:"range"`
+	Field *string                 `json:"field,omitempty"`
+	Range *RangePartitioningRange `json:"range,omitempty"`
 }

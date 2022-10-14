@@ -1,5 +1,5 @@
 package shared
 
 type ListPaymentsResponse struct {
-	Payments []Payment `json:"payments"`
+	Payments []Payment `json:"payments,omitempty"`
 }

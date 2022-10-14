@@ -1,9 +1,9 @@
 package shared
 
 type VaccineResponse struct {
-	Age          *float64  `json:"age"`
-	Country      *string   `json:"country"`
-	Gender       *string   `json:"gender"`
-	Name         *string   `json:"name"`
-	Vaccinations []Vaccine `json:"vaccinations"`
+	Age          *float64  `json:"age,omitempty"`
+	Country      *string   `json:"country,omitempty"`
+	Gender       *string   `json:"gender,omitempty"`
+	Name         *string   `json:"name,omitempty"`
+	Vaccinations []Vaccine `json:"vaccinations,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type Account struct {
-	AccountID   *string `json:"accountId"`
-	Fingerprint *string `json:"fingerprint"`
-	Name        *string `json:"name"`
-	ShareData   *bool   `json:"shareData"`
+	AccountID   *string `json:"accountId,omitempty"`
+	Fingerprint *string `json:"fingerprint,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	ShareData   *bool   `json:"shareData,omitempty"`
 }

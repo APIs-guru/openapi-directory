@@ -19,7 +19,7 @@ type GetCustomFieldRequest struct {
 }
 
 type GetCustomField200ApplicationJSON struct {
-	Data *shared.CustomFieldResponse `json:"data"`
+	Data *shared.CustomFieldResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldResponse struct {

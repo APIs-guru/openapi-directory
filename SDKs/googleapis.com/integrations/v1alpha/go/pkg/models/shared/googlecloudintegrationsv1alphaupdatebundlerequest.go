@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaUpdateBundleRequest struct {
-	Config *GoogleCloudIntegrationsV1alphaIntegrationBundleConfig `json:"config"`
+	Config *GoogleCloudIntegrationsV1alphaIntegrationBundleConfig `json:"config,omitempty"`
 }

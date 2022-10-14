@@ -10,11 +10,11 @@ const (
 )
 
 type Queue struct {
-	AppEngineRoutingOverride *AppEngineRouting         `json:"appEngineRoutingOverride"`
-	Name                     *string                   `json:"name"`
-	PurgeTime                *string                   `json:"purgeTime"`
-	RateLimits               *RateLimits               `json:"rateLimits"`
-	RetryConfig              *RetryConfig              `json:"retryConfig"`
-	StackdriverLoggingConfig *StackdriverLoggingConfig `json:"stackdriverLoggingConfig"`
-	State                    *QueueStateEnum           `json:"state"`
+	AppEngineRoutingOverride *AppEngineRouting         `json:"appEngineRoutingOverride,omitempty"`
+	Name                     *string                   `json:"name,omitempty"`
+	PurgeTime                *string                   `json:"purgeTime,omitempty"`
+	RateLimits               *RateLimits               `json:"rateLimits,omitempty"`
+	RetryConfig              *RetryConfig              `json:"retryConfig,omitempty"`
+	StackdriverLoggingConfig *StackdriverLoggingConfig `json:"stackdriverLoggingConfig,omitempty"`
+	State                    *QueueStateEnum           `json:"state,omitempty"`
 }

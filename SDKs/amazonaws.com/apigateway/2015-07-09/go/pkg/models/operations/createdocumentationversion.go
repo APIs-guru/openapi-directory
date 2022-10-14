@@ -19,9 +19,9 @@ type CreateDocumentationVersionHeaders struct {
 }
 
 type CreateDocumentationVersionRequestBody struct {
-	Description          *string `json:"description"`
+	Description          *string `json:"description,omitempty"`
 	DocumentationVersion string  `json:"documentationVersion"`
-	StageName            *string `json:"stageName"`
+	StageName            *string `json:"stageName,omitempty"`
 }
 
 type CreateDocumentationVersionRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListRuleGroupsResponse struct {
-	NextToken  *string             `json:"NextToken"`
-	RuleGroups []RuleGroupMetadata `json:"RuleGroups"`
+	NextToken  *string             `json:"NextToken,omitempty"`
+	RuleGroups []RuleGroupMetadata `json:"RuleGroups,omitempty"`
 }

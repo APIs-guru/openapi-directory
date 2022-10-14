@@ -16,18 +16,18 @@ type IPAddressStatusStatus struct {
 
 type IPAddress struct {
 	Address      string                 `json:"address"`
-	Created      *time.Time             `json:"created"`
-	CustomFields map[string]interface{} `json:"custom_fields"`
-	Description  *string                `json:"description"`
-	Family       *int64                 `json:"family"`
-	ID           *int64                 `json:"id"`
-	Interface    *IPAddressInterface    `json:"interface"`
-	LastUpdated  *time.Time             `json:"last_updated"`
-	NatInside    *NestedIPAddress       `json:"nat_inside"`
-	NatOutside   *NestedIPAddress       `json:"nat_outside"`
-	Role         *IPAddressRoleRole     `json:"role"`
-	Status       *IPAddressStatusStatus `json:"status"`
-	Tags         []string               `json:"tags"`
-	Tenant       *NestedTenant          `json:"tenant"`
-	Vrf          *NestedVrf             `json:"vrf"`
+	Created      *time.Time             `json:"created,omitempty"`
+	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
+	Description  *string                `json:"description,omitempty"`
+	Family       *int64                 `json:"family,omitempty"`
+	ID           *int64                 `json:"id,omitempty"`
+	Interface    *IPAddressInterface    `json:"interface,omitempty"`
+	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
+	NatInside    *NestedIPAddress       `json:"nat_inside,omitempty"`
+	NatOutside   *NestedIPAddress       `json:"nat_outside,omitempty"`
+	Role         *IPAddressRoleRole     `json:"role,omitempty"`
+	Status       *IPAddressStatusStatus `json:"status,omitempty"`
+	Tags         []string               `json:"tags,omitempty"`
+	Tenant       *NestedTenant          `json:"tenant,omitempty"`
+	Vrf          *NestedVrf             `json:"vrf,omitempty"`
 }

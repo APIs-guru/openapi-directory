@@ -1,5 +1,5 @@
 package shared
 
 type CreateDataSourceFromRdsOutput struct {
-	DataSourceID *string `json:"DataSourceId"`
+	DataSourceID *string `json:"DataSourceId,omitempty"`
 }

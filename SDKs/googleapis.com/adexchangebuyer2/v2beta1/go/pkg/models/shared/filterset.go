@@ -53,18 +53,18 @@ const (
 )
 
 type FilterSet struct {
-	AbsoluteDateRange     *AbsoluteDateRange                  `json:"absoluteDateRange"`
-	BreakdownDimensions   []FilterSetBreakdownDimensionsEnum  `json:"breakdownDimensions"`
-	CreativeID            *string                             `json:"creativeId"`
-	DealID                *string                             `json:"dealId"`
-	Environment           *FilterSetEnvironmentEnum           `json:"environment"`
-	Format                *FilterSetFormatEnum                `json:"format"`
-	Formats               []FilterSetFormatsEnum              `json:"formats"`
-	Name                  *string                             `json:"name"`
-	Platforms             []FilterSetPlatformsEnum            `json:"platforms"`
-	PublisherIdentifiers  []string                            `json:"publisherIdentifiers"`
-	RealtimeTimeRange     *RealtimeTimeRange                  `json:"realtimeTimeRange"`
-	RelativeDateRange     *RelativeDateRange                  `json:"relativeDateRange"`
-	SellerNetworkIds      []int32                             `json:"sellerNetworkIds"`
-	TimeSeriesGranularity *FilterSetTimeSeriesGranularityEnum `json:"timeSeriesGranularity"`
+	AbsoluteDateRange     *AbsoluteDateRange                  `json:"absoluteDateRange,omitempty"`
+	BreakdownDimensions   []FilterSetBreakdownDimensionsEnum  `json:"breakdownDimensions,omitempty"`
+	CreativeID            *string                             `json:"creativeId,omitempty"`
+	DealID                *string                             `json:"dealId,omitempty"`
+	Environment           *FilterSetEnvironmentEnum           `json:"environment,omitempty"`
+	Format                *FilterSetFormatEnum                `json:"format,omitempty"`
+	Formats               []FilterSetFormatsEnum              `json:"formats,omitempty"`
+	Name                  *string                             `json:"name,omitempty"`
+	Platforms             []FilterSetPlatformsEnum            `json:"platforms,omitempty"`
+	PublisherIdentifiers  []string                            `json:"publisherIdentifiers,omitempty"`
+	RealtimeTimeRange     *RealtimeTimeRange                  `json:"realtimeTimeRange,omitempty"`
+	RelativeDateRange     *RelativeDateRange                  `json:"relativeDateRange,omitempty"`
+	SellerNetworkIds      []int32                             `json:"sellerNetworkIds,omitempty"`
+	TimeSeriesGranularity *FilterSetTimeSeriesGranularityEnum `json:"timeSeriesGranularity,omitempty"`
 }

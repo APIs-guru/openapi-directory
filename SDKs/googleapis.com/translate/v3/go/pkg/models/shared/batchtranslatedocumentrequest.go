@@ -1,11 +1,11 @@
 package shared
 
 type BatchTranslateDocumentRequest struct {
-	FormatConversions   map[string]string                      `json:"formatConversions"`
-	Glossaries          map[string]TranslateTextGlossaryConfig `json:"glossaries"`
-	InputConfigs        []BatchDocumentInputConfig             `json:"inputConfigs"`
-	Models              map[string]string                      `json:"models"`
-	OutputConfig        *BatchDocumentOutputConfig             `json:"outputConfig"`
-	SourceLanguageCode  *string                                `json:"sourceLanguageCode"`
-	TargetLanguageCodes []string                               `json:"targetLanguageCodes"`
+	FormatConversions   map[string]string                      `json:"formatConversions,omitempty"`
+	Glossaries          map[string]TranslateTextGlossaryConfig `json:"glossaries,omitempty"`
+	InputConfigs        []BatchDocumentInputConfig             `json:"inputConfigs,omitempty"`
+	Models              map[string]string                      `json:"models,omitempty"`
+	OutputConfig        *BatchDocumentOutputConfig             `json:"outputConfig,omitempty"`
+	SourceLanguageCode  *string                                `json:"sourceLanguageCode,omitempty"`
+	TargetLanguageCodes []string                               `json:"targetLanguageCodes,omitempty"`
 }

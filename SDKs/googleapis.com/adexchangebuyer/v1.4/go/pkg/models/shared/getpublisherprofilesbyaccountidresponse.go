@@ -1,5 +1,5 @@
 package shared
 
 type GetPublisherProfilesByAccountIDResponse struct {
-	Profiles []PublisherProfileAPIProto `json:"profiles"`
+	Profiles []PublisherProfileAPIProto `json:"profiles,omitempty"`
 }

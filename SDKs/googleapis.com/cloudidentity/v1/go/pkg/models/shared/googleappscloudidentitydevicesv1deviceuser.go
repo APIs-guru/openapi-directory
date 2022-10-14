@@ -29,14 +29,14 @@ const (
 )
 
 type GoogleAppsCloudidentityDevicesV1DeviceUser struct {
-	CompromisedState *GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedStateEnum `json:"compromisedState"`
-	CreateTime       *string                                                         `json:"createTime"`
-	FirstSyncTime    *string                                                         `json:"firstSyncTime"`
-	LanguageCode     *string                                                         `json:"languageCode"`
-	LastSyncTime     *string                                                         `json:"lastSyncTime"`
-	ManagementState  *GoogleAppsCloudidentityDevicesV1DeviceUserManagementStateEnum  `json:"managementState"`
-	Name             *string                                                         `json:"name"`
-	PasswordState    *GoogleAppsCloudidentityDevicesV1DeviceUserPasswordStateEnum    `json:"passwordState"`
-	UserAgent        *string                                                         `json:"userAgent"`
-	UserEmail        *string                                                         `json:"userEmail"`
+	CompromisedState *GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedStateEnum `json:"compromisedState,omitempty"`
+	CreateTime       *string                                                         `json:"createTime,omitempty"`
+	FirstSyncTime    *string                                                         `json:"firstSyncTime,omitempty"`
+	LanguageCode     *string                                                         `json:"languageCode,omitempty"`
+	LastSyncTime     *string                                                         `json:"lastSyncTime,omitempty"`
+	ManagementState  *GoogleAppsCloudidentityDevicesV1DeviceUserManagementStateEnum  `json:"managementState,omitempty"`
+	Name             *string                                                         `json:"name,omitempty"`
+	PasswordState    *GoogleAppsCloudidentityDevicesV1DeviceUserPasswordStateEnum    `json:"passwordState,omitempty"`
+	UserAgent        *string                                                         `json:"userAgent,omitempty"`
+	UserEmail        *string                                                         `json:"userEmail,omitempty"`
 }

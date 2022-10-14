@@ -8,12 +8,12 @@ const (
 )
 
 type APICoreDtoConversionsConversion struct {
-	Code         *string                                      `json:"code" form:"name=code"`
-	CreationDate *string                                      `json:"creationDate" form:"name=creationDate"`
-	Deleted      *bool                                        `json:"deleted" form:"name=deleted"`
-	Description  *string                                      `json:"description" form:"name=description"`
-	ID           *int64                                       `json:"id" form:"name=id"`
-	Name         *string                                      `json:"name" form:"name=name"`
-	Protocol     *APICoreDtoConversionsConversionProtocolEnum `json:"protocol" form:"name=protocol"`
-	Value        *float64                                     `json:"value" form:"name=value"`
+	Code         *string                                      `json:"code,omitempty" form:"name=code"`
+	CreationDate *string                                      `json:"creationDate,omitempty" form:"name=creationDate"`
+	Deleted      *bool                                        `json:"deleted,omitempty" form:"name=deleted"`
+	Description  *string                                      `json:"description,omitempty" form:"name=description"`
+	ID           *int64                                       `json:"id,omitempty" form:"name=id"`
+	Name         *string                                      `json:"name,omitempty" form:"name=name"`
+	Protocol     *APICoreDtoConversionsConversionProtocolEnum `json:"protocol,omitempty" form:"name=protocol"`
+	Value        *float64                                     `json:"value,omitempty" form:"name=value"`
 }

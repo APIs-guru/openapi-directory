@@ -1,8 +1,8 @@
 package shared
 
 type QueryjobProjectResults struct {
-	Columns []string             `json:"columns"`
-	Data    [][]QueryResultEntry `json:"data"`
-	Next    *string              `json:"next"`
-	Project *Project             `json:"project"`
+	Columns []string             `json:"columns,omitempty"`
+	Data    [][]QueryResultEntry `json:"data,omitempty"`
+	Next    *string              `json:"next,omitempty"`
+	Project *Project             `json:"project,omitempty"`
 }

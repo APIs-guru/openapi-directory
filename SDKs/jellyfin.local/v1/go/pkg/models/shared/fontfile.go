@@ -5,8 +5,8 @@ import (
 )
 
 type FontFile struct {
-	DateCreated  *time.Time `json:"DateCreated"`
-	DateModified *time.Time `json:"DateModified"`
-	Name         *string    `json:"Name"`
-	Size         *int64     `json:"Size"`
+	DateCreated  *time.Time `json:"DateCreated,omitempty"`
+	DateModified *time.Time `json:"DateModified,omitempty"`
+	Name         *string    `json:"Name,omitempty"`
+	Size         *int64     `json:"Size,omitempty"`
 }

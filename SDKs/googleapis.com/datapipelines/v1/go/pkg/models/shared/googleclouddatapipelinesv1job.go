@@ -12,11 +12,11 @@ const (
 )
 
 type GoogleCloudDatapipelinesV1Job struct {
-	CreateTime         *string                                       `json:"createTime"`
-	DataflowJobDetails *GoogleCloudDatapipelinesV1DataflowJobDetails `json:"dataflowJobDetails"`
-	EndTime            *string                                       `json:"endTime"`
-	ID                 *string                                       `json:"id"`
-	Name               *string                                       `json:"name"`
-	State              *GoogleCloudDatapipelinesV1JobStateEnum       `json:"state"`
-	Status             *GoogleRPCStatus                              `json:"status"`
+	CreateTime         *string                                       `json:"createTime,omitempty"`
+	DataflowJobDetails *GoogleCloudDatapipelinesV1DataflowJobDetails `json:"dataflowJobDetails,omitempty"`
+	EndTime            *string                                       `json:"endTime,omitempty"`
+	ID                 *string                                       `json:"id,omitempty"`
+	Name               *string                                       `json:"name,omitempty"`
+	State              *GoogleCloudDatapipelinesV1JobStateEnum       `json:"state,omitempty"`
+	Status             *GoogleRPCStatus                              `json:"status,omitempty"`
 }

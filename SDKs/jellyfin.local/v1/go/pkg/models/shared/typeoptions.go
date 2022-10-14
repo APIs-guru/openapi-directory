@@ -1,10 +1,10 @@
 package shared
 
 type TypeOptions struct {
-	ImageFetcherOrder    []string      `json:"ImageFetcherOrder"`
-	ImageFetchers        []string      `json:"ImageFetchers"`
-	ImageOptions         []ImageOption `json:"ImageOptions"`
-	MetadataFetcherOrder []string      `json:"MetadataFetcherOrder"`
-	MetadataFetchers     []string      `json:"MetadataFetchers"`
-	Type                 *string       `json:"Type"`
+	ImageFetcherOrder    []string      `json:"ImageFetcherOrder,omitempty"`
+	ImageFetchers        []string      `json:"ImageFetchers,omitempty"`
+	ImageOptions         []ImageOption `json:"ImageOptions,omitempty"`
+	MetadataFetcherOrder []string      `json:"MetadataFetcherOrder,omitempty"`
+	MetadataFetchers     []string      `json:"MetadataFetchers,omitempty"`
+	Type                 *string       `json:"Type,omitempty"`
 }

@@ -5,7 +5,7 @@ type ModifySettingPathParams struct {
 }
 
 type ModifySettingRequestBody struct {
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }
 
 type ModifySettingRequest struct {
@@ -20,7 +20,7 @@ const (
 )
 
 type ModifySetting200ApplicationJSONData struct {
-	SettingID *string `json:"settingId"`
+	SettingID *string `json:"settingId,omitempty"`
 }
 
 type ModifySetting200ApplicationJSONResultEnum string

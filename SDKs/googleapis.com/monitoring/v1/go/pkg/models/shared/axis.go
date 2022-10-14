@@ -9,6 +9,6 @@ const (
 )
 
 type Axis struct {
-	Label *string        `json:"label"`
-	Scale *AxisScaleEnum `json:"scale"`
+	Label *string        `json:"label,omitempty"`
+	Scale *AxisScaleEnum `json:"scale,omitempty"`
 }

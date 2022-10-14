@@ -1,5 +1,5 @@
 package shared
 
 type CreateConnectionAliasResult struct {
-	AliasID *string `json:"AliasId"`
+	AliasID *string `json:"AliasId,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type CorpusQuery struct {
-	DriveQuery        *HeldDriveQuery        `json:"driveQuery"`
-	GroupsQuery       *HeldGroupsQuery       `json:"groupsQuery"`
-	HangoutsChatQuery *HeldHangoutsChatQuery `json:"hangoutsChatQuery"`
-	MailQuery         *HeldMailQuery         `json:"mailQuery"`
-	VoiceQuery        *HeldVoiceQuery        `json:"voiceQuery"`
+	DriveQuery        *HeldDriveQuery        `json:"driveQuery,omitempty"`
+	GroupsQuery       *HeldGroupsQuery       `json:"groupsQuery,omitempty"`
+	HangoutsChatQuery *HeldHangoutsChatQuery `json:"hangoutsChatQuery,omitempty"`
+	MailQuery         *HeldMailQuery         `json:"mailQuery,omitempty"`
+	VoiceQuery        *HeldVoiceQuery        `json:"voiceQuery,omitempty"`
 }

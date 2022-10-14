@@ -1,12 +1,12 @@
 package shared
 
 type ChangeSetSummaryListItem struct {
-	ChangeSetArn  *string           `json:"ChangeSetArn"`
-	ChangeSetID   *string           `json:"ChangeSetId"`
-	ChangeSetName *string           `json:"ChangeSetName"`
-	EndTime       *string           `json:"EndTime"`
-	EntityIDList  []string          `json:"EntityIdList"`
-	FailureCode   *FailureCodeEnum  `json:"FailureCode"`
-	StartTime     *string           `json:"StartTime"`
-	Status        *ChangeStatusEnum `json:"Status"`
+	ChangeSetArn  *string           `json:"ChangeSetArn,omitempty"`
+	ChangeSetID   *string           `json:"ChangeSetId,omitempty"`
+	ChangeSetName *string           `json:"ChangeSetName,omitempty"`
+	EndTime       *string           `json:"EndTime,omitempty"`
+	EntityIDList  []string          `json:"EntityIdList,omitempty"`
+	FailureCode   *FailureCodeEnum  `json:"FailureCode,omitempty"`
+	StartTime     *string           `json:"StartTime,omitempty"`
+	Status        *ChangeStatusEnum `json:"Status,omitempty"`
 }

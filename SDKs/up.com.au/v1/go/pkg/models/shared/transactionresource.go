@@ -66,7 +66,7 @@ type TransactionResourceRelationshipsAccountLinks struct {
 
 type TransactionResourceRelationshipsAccount struct {
 	Data  TransactionResourceRelationshipsAccountData   `json:"data"`
-	Links *TransactionResourceRelationshipsAccountLinks `json:"links"`
+	Links *TransactionResourceRelationshipsAccountLinks `json:"links,omitempty"`
 }
 
 type TransactionResourceRelationshipsCategoryData struct {
@@ -80,7 +80,7 @@ type TransactionResourceRelationshipsCategoryLinks struct {
 
 type TransactionResourceRelationshipsCategory struct {
 	Data  TransactionResourceRelationshipsCategoryData   `json:"data"`
-	Links *TransactionResourceRelationshipsCategoryLinks `json:"links"`
+	Links *TransactionResourceRelationshipsCategoryLinks `json:"links,omitempty"`
 }
 
 type TransactionResourceRelationshipsParentCategoryData struct {
@@ -94,7 +94,7 @@ type TransactionResourceRelationshipsParentCategoryLinks struct {
 
 type TransactionResourceRelationshipsParentCategory struct {
 	Data  TransactionResourceRelationshipsParentCategoryData   `json:"data"`
-	Links *TransactionResourceRelationshipsParentCategoryLinks `json:"links"`
+	Links *TransactionResourceRelationshipsParentCategoryLinks `json:"links,omitempty"`
 }
 
 type TransactionResourceRelationshipsTagsData struct {
@@ -108,7 +108,7 @@ type TransactionResourceRelationshipsTagsLinks struct {
 
 type TransactionResourceRelationshipsTags struct {
 	Data  []TransactionResourceRelationshipsTagsData `json:"data"`
-	Links *TransactionResourceRelationshipsTagsLinks `json:"links"`
+	Links *TransactionResourceRelationshipsTagsLinks `json:"links,omitempty"`
 }
 
 type TransactionResourceRelationships struct {
@@ -121,7 +121,7 @@ type TransactionResourceRelationships struct {
 type TransactionResource struct {
 	Attributes    TransactionResourceAttributes    `json:"attributes"`
 	ID            string                           `json:"id"`
-	Links         *TransactionResourceLinks        `json:"links"`
+	Links         *TransactionResourceLinks        `json:"links,omitempty"`
 	Relationships TransactionResourceRelationships `json:"relationships"`
 	Type          string                           `json:"type"`
 }

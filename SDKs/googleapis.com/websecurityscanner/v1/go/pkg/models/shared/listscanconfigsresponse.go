@@ -1,6 +1,6 @@
 package shared
 
 type ListScanConfigsResponse struct {
-	NextPageToken *string      `json:"nextPageToken"`
-	ScanConfigs   []ScanConfig `json:"scanConfigs"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
+	ScanConfigs   []ScanConfig `json:"scanConfigs,omitempty"`
 }

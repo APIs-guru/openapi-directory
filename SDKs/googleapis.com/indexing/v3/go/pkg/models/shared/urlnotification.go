@@ -9,7 +9,7 @@ const (
 )
 
 type URLNotification struct {
-	NotifyTime *string                  `json:"notifyTime"`
-	Type       *URLNotificationTypeEnum `json:"type"`
-	URL        *string                  `json:"url"`
+	NotifyTime *string                  `json:"notifyTime,omitempty"`
+	Type       *URLNotificationTypeEnum `json:"type,omitempty"`
+	URL        *string                  `json:"url,omitempty"`
 }

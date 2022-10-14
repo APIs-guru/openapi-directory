@@ -1,5 +1,5 @@
 package shared
 
 type KeyUsabilityResult struct {
-	Available *bool `json:"available"`
+	Available *bool `json:"available,omitempty"`
 }

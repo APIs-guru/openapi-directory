@@ -1,6 +1,6 @@
 package shared
 
 type BuiltInSlotTypeSummary struct {
-	Description       *string `json:"description"`
-	SlotTypeSignature *string `json:"slotTypeSignature"`
+	Description       *string `json:"description,omitempty"`
+	SlotTypeSignature *string `json:"slotTypeSignature,omitempty"`
 }

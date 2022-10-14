@@ -1,5 +1,5 @@
 package shared
 
 type ComplexBetRequestBody struct {
-	Bets []Bet `json:"bets"`
+	Bets []Bet `json:"bets,omitempty"`
 }

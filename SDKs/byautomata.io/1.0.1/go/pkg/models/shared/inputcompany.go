@@ -1,11 +1,11 @@
 package shared
 
 type InputCompany struct {
-	CompanyName *string `json:"companyName"`
-	Country     *string `json:"country"`
-	Employee    *string `json:"employee"`
-	Industry    *string `json:"industry"`
-	Linkedin    *string `json:"linkedin"`
-	Twitter     *string `json:"twitter"`
-	Website     *string `json:"website"`
+	CompanyName *string `json:"companyName,omitempty"`
+	Country     *string `json:"country,omitempty"`
+	Employee    *string `json:"employee,omitempty"`
+	Industry    *string `json:"industry,omitempty"`
+	Linkedin    *string `json:"linkedin,omitempty"`
+	Twitter     *string `json:"twitter,omitempty"`
+	Website     *string `json:"website,omitempty"`
 }

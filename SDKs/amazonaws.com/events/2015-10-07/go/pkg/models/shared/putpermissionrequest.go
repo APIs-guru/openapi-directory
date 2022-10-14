@@ -1,10 +1,10 @@
 package shared
 
 type PutPermissionRequest struct {
-	Action       *string    `json:"Action"`
-	Condition    *Condition `json:"Condition"`
-	EventBusName *string    `json:"EventBusName"`
-	Policy       *string    `json:"Policy"`
-	Principal    *string    `json:"Principal"`
-	StatementID  *string    `json:"StatementId"`
+	Action       *string    `json:"Action,omitempty"`
+	Condition    *Condition `json:"Condition,omitempty"`
+	EventBusName *string    `json:"EventBusName,omitempty"`
+	Policy       *string    `json:"Policy,omitempty"`
+	Principal    *string    `json:"Principal,omitempty"`
+	StatementID  *string    `json:"StatementId,omitempty"`
 }

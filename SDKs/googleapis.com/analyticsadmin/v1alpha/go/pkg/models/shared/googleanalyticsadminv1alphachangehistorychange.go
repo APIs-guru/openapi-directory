@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaChangeHistoryChange struct {
-	Action               *GoogleAnalyticsAdminV1alphaChangeHistoryChangeActionEnum            `json:"action"`
-	Resource             *string                                                              `json:"resource"`
-	ResourceAfterChange  *GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource `json:"resourceAfterChange"`
-	ResourceBeforeChange *GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource `json:"resourceBeforeChange"`
+	Action               *GoogleAnalyticsAdminV1alphaChangeHistoryChangeActionEnum            `json:"action,omitempty"`
+	Resource             *string                                                              `json:"resource,omitempty"`
+	ResourceAfterChange  *GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource `json:"resourceAfterChange,omitempty"`
+	ResourceBeforeChange *GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource `json:"resourceBeforeChange,omitempty"`
 }

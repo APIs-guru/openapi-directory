@@ -8,13 +8,13 @@ const (
 )
 
 type PivotTable struct {
-	Columns             []PivotGroup                   `json:"columns"`
-	Criteria            map[string]PivotFilterCriteria `json:"criteria"`
-	DataExecutionStatus *DataExecutionStatus           `json:"dataExecutionStatus"`
-	DataSourceID        *string                        `json:"dataSourceId"`
-	FilterSpecs         []PivotFilterSpec              `json:"filterSpecs"`
-	Rows                []PivotGroup                   `json:"rows"`
-	Source              *GridRange                     `json:"source"`
-	ValueLayout         *PivotTableValueLayoutEnum     `json:"valueLayout"`
-	Values              []PivotValue                   `json:"values"`
+	Columns             []PivotGroup                   `json:"columns,omitempty"`
+	Criteria            map[string]PivotFilterCriteria `json:"criteria,omitempty"`
+	DataExecutionStatus *DataExecutionStatus           `json:"dataExecutionStatus,omitempty"`
+	DataSourceID        *string                        `json:"dataSourceId,omitempty"`
+	FilterSpecs         []PivotFilterSpec              `json:"filterSpecs,omitempty"`
+	Rows                []PivotGroup                   `json:"rows,omitempty"`
+	Source              *GridRange                     `json:"source,omitempty"`
+	ValueLayout         *PivotTableValueLayoutEnum     `json:"valueLayout,omitempty"`
+	Values              []PivotValue                   `json:"values,omitempty"`
 }

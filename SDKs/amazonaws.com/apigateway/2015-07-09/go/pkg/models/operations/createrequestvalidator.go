@@ -19,9 +19,9 @@ type CreateRequestValidatorHeaders struct {
 }
 
 type CreateRequestValidatorRequestBody struct {
-	Name                      *string `json:"name"`
-	ValidateRequestBody       *bool   `json:"validateRequestBody"`
-	ValidateRequestParameters *bool   `json:"validateRequestParameters"`
+	Name                      *string `json:"name,omitempty"`
+	ValidateRequestBody       *bool   `json:"validateRequestBody,omitempty"`
+	ValidateRequestParameters *bool   `json:"validateRequestParameters,omitempty"`
 }
 
 type CreateRequestValidatorRequest struct {

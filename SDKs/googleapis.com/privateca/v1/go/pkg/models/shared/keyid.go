@@ -1,5 +1,5 @@
 package shared
 
 type KeyID struct {
-	KeyID *string `json:"keyId"`
+	KeyID *string `json:"keyId,omitempty"`
 }

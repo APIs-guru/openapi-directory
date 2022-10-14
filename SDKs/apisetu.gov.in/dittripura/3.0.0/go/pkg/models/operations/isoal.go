@@ -16,8 +16,8 @@ const (
 )
 
 type IsoalRequestBody struct {
-	CertificateParameters *IsoalRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *IsoalRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                IsoalRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Isoal400ApplicationJSON struct {
-	Error            *Isoal400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Isoal400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Isoal400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Isoal400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Isoal401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Isoal401ApplicationJSON struct {
-	Error            *Isoal401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Isoal401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Isoal401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Isoal401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Isoal404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Isoal404ApplicationJSON struct {
-	Error            *Isoal404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Isoal404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Isoal404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Isoal404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Isoal500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Isoal500ApplicationJSON struct {
-	Error            *Isoal500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Isoal500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Isoal500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Isoal500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Isoal502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Isoal502ApplicationJSON struct {
-	Error            *Isoal502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Isoal502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Isoal502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Isoal502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Isoal503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Isoal503ApplicationJSON struct {
-	Error            *Isoal503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Isoal503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Isoal503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Isoal503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Isoal504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Isoal504ApplicationJSON struct {
-	Error            *Isoal504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Isoal504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Isoal504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Isoal504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type IsoalResponse struct {

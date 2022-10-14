@@ -1,6 +1,6 @@
 package shared
 
 type GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse struct {
-	Challenge *string `json:"challenge"`
-	TTL       *string `json:"ttl"`
+	Challenge *string `json:"challenge,omitempty"`
+	TTL       *string `json:"ttl,omitempty"`
 }

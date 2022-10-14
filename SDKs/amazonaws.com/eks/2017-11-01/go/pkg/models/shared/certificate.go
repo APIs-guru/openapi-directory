@@ -1,5 +1,5 @@
 package shared
 
 type Certificate struct {
-	Data *string `json:"data"`
+	Data *string `json:"data,omitempty"`
 }

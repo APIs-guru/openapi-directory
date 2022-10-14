@@ -11,5 +11,5 @@ const (
 )
 
 type RestrictionEvaluation struct {
-	State *RestrictionEvaluationStateEnum `json:"state"`
+	State *RestrictionEvaluationStateEnum `json:"state,omitempty"`
 }

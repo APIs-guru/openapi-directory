@@ -16,8 +16,8 @@ const (
 )
 
 type PodocRequestBody struct {
-	CertificateParameters *PodocRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *PodocRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                PodocRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Podoc400ApplicationJSON struct {
-	Error            *Podoc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Podoc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Podoc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Podoc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Podoc401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Podoc401ApplicationJSON struct {
-	Error            *Podoc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Podoc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Podoc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Podoc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Podoc404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Podoc404ApplicationJSON struct {
-	Error            *Podoc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Podoc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Podoc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Podoc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Podoc500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Podoc500ApplicationJSON struct {
-	Error            *Podoc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Podoc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Podoc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Podoc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Podoc502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Podoc502ApplicationJSON struct {
-	Error            *Podoc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Podoc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Podoc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Podoc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Podoc503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Podoc503ApplicationJSON struct {
-	Error            *Podoc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Podoc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Podoc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Podoc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Podoc504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Podoc504ApplicationJSON struct {
-	Error            *Podoc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Podoc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Podoc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Podoc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type PodocResponse struct {

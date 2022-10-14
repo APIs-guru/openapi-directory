@@ -18,9 +18,9 @@ const (
 )
 
 type DatabaseInstance struct {
-	DatabaseURL *string                    `json:"databaseUrl"`
-	Name        *string                    `json:"name"`
-	Project     *string                    `json:"project"`
-	State       *DatabaseInstanceStateEnum `json:"state"`
-	Type        *DatabaseInstanceTypeEnum  `json:"type"`
+	DatabaseURL *string                    `json:"databaseUrl,omitempty"`
+	Name        *string                    `json:"name,omitempty"`
+	Project     *string                    `json:"project,omitempty"`
+	State       *DatabaseInstanceStateEnum `json:"state,omitempty"`
+	Type        *DatabaseInstanceTypeEnum  `json:"type,omitempty"`
 }

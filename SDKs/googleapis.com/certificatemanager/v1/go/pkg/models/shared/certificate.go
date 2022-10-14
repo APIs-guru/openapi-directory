@@ -8,15 +8,15 @@ const (
 )
 
 type Certificate struct {
-	CreateTime     *string                 `json:"createTime"`
-	Description    *string                 `json:"description"`
-	ExpireTime     *string                 `json:"expireTime"`
-	Labels         map[string]string       `json:"labels"`
-	Managed        *ManagedCertificate     `json:"managed"`
-	Name           *string                 `json:"name"`
-	PemCertificate *string                 `json:"pemCertificate"`
-	SanDnsnames    []string                `json:"sanDnsnames"`
-	Scope          *CertificateScopeEnum   `json:"scope"`
-	SelfManaged    *SelfManagedCertificate `json:"selfManaged"`
-	UpdateTime     *string                 `json:"updateTime"`
+	CreateTime     *string                 `json:"createTime,omitempty"`
+	Description    *string                 `json:"description,omitempty"`
+	ExpireTime     *string                 `json:"expireTime,omitempty"`
+	Labels         map[string]string       `json:"labels,omitempty"`
+	Managed        *ManagedCertificate     `json:"managed,omitempty"`
+	Name           *string                 `json:"name,omitempty"`
+	PemCertificate *string                 `json:"pemCertificate,omitempty"`
+	SanDnsnames    []string                `json:"sanDnsnames,omitempty"`
+	Scope          *CertificateScopeEnum   `json:"scope,omitempty"`
+	SelfManaged    *SelfManagedCertificate `json:"selfManaged,omitempty"`
+	UpdateTime     *string                 `json:"updateTime,omitempty"`
 }

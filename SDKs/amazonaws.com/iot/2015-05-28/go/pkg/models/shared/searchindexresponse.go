@@ -1,7 +1,7 @@
 package shared
 
 type SearchIndexResponse struct {
-	NextToken   *string              `json:"nextToken"`
-	ThingGroups []ThingGroupDocument `json:"thingGroups"`
-	Things      []ThingDocument      `json:"things"`
+	NextToken   *string              `json:"nextToken,omitempty"`
+	ThingGroups []ThingGroupDocument `json:"thingGroups,omitempty"`
+	Things      []ThingDocument      `json:"things,omitempty"`
 }

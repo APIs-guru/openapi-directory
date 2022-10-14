@@ -1,10 +1,10 @@
 package shared
 
 type LighthouseCategoryV5 struct {
-	AuditRefs         []AuditRefs  `json:"auditRefs"`
-	Description       *string      `json:"description"`
-	ID                *string      `json:"id"`
-	ManualDescription *string      `json:"manualDescription"`
-	Score             *interface{} `json:"score"`
-	Title             *string      `json:"title"`
+	AuditRefs         []AuditRefs  `json:"auditRefs,omitempty"`
+	Description       *string      `json:"description,omitempty"`
+	ID                *string      `json:"id,omitempty"`
+	ManualDescription *string      `json:"manualDescription,omitempty"`
+	Score             *interface{} `json:"score,omitempty"`
+	Title             *string      `json:"title,omitempty"`
 }

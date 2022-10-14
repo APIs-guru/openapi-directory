@@ -1,6 +1,6 @@
 package shared
 
 type OtherRegionsSubscriptionOfferPhasePrices struct {
-	EurPrice *Money `json:"eurPrice"`
-	UsdPrice *Money `json:"usdPrice"`
+	EurPrice *Money `json:"eurPrice,omitempty"`
+	UsdPrice *Money `json:"usdPrice,omitempty"`
 }

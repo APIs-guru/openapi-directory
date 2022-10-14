@@ -1,5 +1,5 @@
 package shared
 
 type UserEmbeddedObject struct {
-	Data *User `json:"data"`
+	Data *User `json:"data,omitempty"`
 }

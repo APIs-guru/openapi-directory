@@ -1,7 +1,7 @@
 package shared
 
 type PrivatePool struct {
-	ArtifactStorage *string `json:"artifactStorage"`
-	ServiceAccount  *string `json:"serviceAccount"`
-	WorkerPool      *string `json:"workerPool"`
+	ArtifactStorage *string `json:"artifactStorage,omitempty"`
+	ServiceAccount  *string `json:"serviceAccount,omitempty"`
+	WorkerPool      *string `json:"workerPool,omitempty"`
 }

@@ -11,8 +11,8 @@ const (
 )
 
 type AppliedLabelChangeDetail struct {
-	FieldChanges []FieldValueChange                  `json:"fieldChanges"`
-	Label        *string                             `json:"label"`
-	Title        *string                             `json:"title"`
-	Types        []AppliedLabelChangeDetailTypesEnum `json:"types"`
+	FieldChanges []FieldValueChange                  `json:"fieldChanges,omitempty"`
+	Label        *string                             `json:"label,omitempty"`
+	Title        *string                             `json:"title,omitempty"`
+	Types        []AppliedLabelChangeDetailTypesEnum `json:"types,omitempty"`
 }

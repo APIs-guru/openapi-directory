@@ -1,8 +1,8 @@
 package shared
 
 type AzureBlobStorageData struct {
-	AzureCredentials *AzureCredentials `json:"azureCredentials"`
-	Container        *string           `json:"container"`
-	Path             *string           `json:"path"`
-	StorageAccount   *string           `json:"storageAccount"`
+	AzureCredentials *AzureCredentials `json:"azureCredentials,omitempty"`
+	Container        *string           `json:"container,omitempty"`
+	Path             *string           `json:"path,omitempty"`
+	StorageAccount   *string           `json:"storageAccount,omitempty"`
 }

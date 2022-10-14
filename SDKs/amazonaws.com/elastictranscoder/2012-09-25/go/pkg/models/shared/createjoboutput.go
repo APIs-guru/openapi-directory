@@ -1,15 +1,15 @@
 package shared
 
 type CreateJobOutput struct {
-	AlbumArt            *JobAlbumArt   `json:"AlbumArt"`
-	Captions            *Captions      `json:"Captions"`
-	Composition         []Clip         `json:"Composition"`
-	Encryption          *Encryption    `json:"Encryption"`
-	Key                 *string        `json:"Key"`
-	PresetID            *string        `json:"PresetId"`
-	Rotate              *string        `json:"Rotate"`
-	SegmentDuration     *string        `json:"SegmentDuration"`
-	ThumbnailEncryption *Encryption    `json:"ThumbnailEncryption"`
-	ThumbnailPattern    *string        `json:"ThumbnailPattern"`
-	Watermarks          []JobWatermark `json:"Watermarks"`
+	AlbumArt            *JobAlbumArt   `json:"AlbumArt,omitempty"`
+	Captions            *Captions      `json:"Captions,omitempty"`
+	Composition         []Clip         `json:"Composition,omitempty"`
+	Encryption          *Encryption    `json:"Encryption,omitempty"`
+	Key                 *string        `json:"Key,omitempty"`
+	PresetID            *string        `json:"PresetId,omitempty"`
+	Rotate              *string        `json:"Rotate,omitempty"`
+	SegmentDuration     *string        `json:"SegmentDuration,omitempty"`
+	ThumbnailEncryption *Encryption    `json:"ThumbnailEncryption,omitempty"`
+	ThumbnailPattern    *string        `json:"ThumbnailPattern,omitempty"`
+	Watermarks          []JobWatermark `json:"Watermarks,omitempty"`
 }

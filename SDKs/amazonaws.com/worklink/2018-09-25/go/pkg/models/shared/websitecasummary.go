@@ -5,7 +5,7 @@ import (
 )
 
 type WebsiteCaSummary struct {
-	CreatedTime *time.Time `json:"CreatedTime"`
-	DisplayName *string    `json:"DisplayName"`
-	WebsiteCaID *string    `json:"WebsiteCaId"`
+	CreatedTime *time.Time `json:"CreatedTime,omitempty"`
+	DisplayName *string    `json:"DisplayName,omitempty"`
+	WebsiteCaID *string    `json:"WebsiteCaId,omitempty"`
 }

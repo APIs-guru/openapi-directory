@@ -23,15 +23,15 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1Document struct {
-	Content            *string                                                  `json:"content"`
-	ContentURI         *string                                                  `json:"contentUri"`
-	DisplayName        *string                                                  `json:"displayName"`
-	EnableAutoReload   *bool                                                    `json:"enableAutoReload"`
-	KnowledgeTypes     []GoogleCloudDialogflowV2beta1DocumentKnowledgeTypesEnum `json:"knowledgeTypes"`
-	LatestReloadStatus *GoogleCloudDialogflowV2beta1DocumentReloadStatus        `json:"latestReloadStatus"`
-	Metadata           map[string]string                                        `json:"metadata"`
-	MimeType           *string                                                  `json:"mimeType"`
-	Name               *string                                                  `json:"name"`
-	RawContent         *string                                                  `json:"rawContent"`
-	State              *GoogleCloudDialogflowV2beta1DocumentStateEnum           `json:"state"`
+	Content            *string                                                  `json:"content,omitempty"`
+	ContentURI         *string                                                  `json:"contentUri,omitempty"`
+	DisplayName        *string                                                  `json:"displayName,omitempty"`
+	EnableAutoReload   *bool                                                    `json:"enableAutoReload,omitempty"`
+	KnowledgeTypes     []GoogleCloudDialogflowV2beta1DocumentKnowledgeTypesEnum `json:"knowledgeTypes,omitempty"`
+	LatestReloadStatus *GoogleCloudDialogflowV2beta1DocumentReloadStatus        `json:"latestReloadStatus,omitempty"`
+	Metadata           map[string]string                                        `json:"metadata,omitempty"`
+	MimeType           *string                                                  `json:"mimeType,omitempty"`
+	Name               *string                                                  `json:"name,omitempty"`
+	RawContent         *string                                                  `json:"rawContent,omitempty"`
+	State              *GoogleCloudDialogflowV2beta1DocumentStateEnum           `json:"state,omitempty"`
 }

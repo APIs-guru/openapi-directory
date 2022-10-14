@@ -1,7 +1,7 @@
 package shared
 
 type ListDatasetExportJobsRequest struct {
-	DatasetArn *string `json:"datasetArn"`
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
+	DatasetArn *string `json:"datasetArn,omitempty"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
 }

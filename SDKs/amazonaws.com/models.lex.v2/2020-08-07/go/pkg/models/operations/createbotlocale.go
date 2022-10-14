@@ -20,14 +20,14 @@ type CreateBotLocaleHeaders struct {
 }
 
 type CreateBotLocaleRequestBodyVoiceSettings struct {
-	VoiceID *string `json:"voiceId"`
+	VoiceID *string `json:"voiceId,omitempty"`
 }
 
 type CreateBotLocaleRequestBody struct {
-	Description                  *string                                  `json:"description"`
+	Description                  *string                                  `json:"description,omitempty"`
 	LocaleID                     string                                   `json:"localeId"`
 	NluIntentConfidenceThreshold float64                                  `json:"nluIntentConfidenceThreshold"`
-	VoiceSettings                *CreateBotLocaleRequestBodyVoiceSettings `json:"voiceSettings"`
+	VoiceSettings                *CreateBotLocaleRequestBodyVoiceSettings `json:"voiceSettings,omitempty"`
 }
 
 type CreateBotLocaleRequest struct {

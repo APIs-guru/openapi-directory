@@ -8,9 +8,9 @@ const (
 )
 
 type GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGateway struct {
-	AppGateway  *string                                                            `json:"appGateway"`
-	IngressPort *int32                                                             `json:"ingressPort"`
-	L7psc       *string                                                            `json:"l7psc"`
-	Type        *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGatewayTypeEnum `json:"type"`
-	URI         *string                                                            `json:"uri"`
+	AppGateway  *string                                                            `json:"appGateway,omitempty"`
+	IngressPort *int32                                                             `json:"ingressPort,omitempty"`
+	L7psc       *string                                                            `json:"l7psc,omitempty"`
+	Type        *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGatewayTypeEnum `json:"type,omitempty"`
+	URI         *string                                                            `json:"uri,omitempty"`
 }

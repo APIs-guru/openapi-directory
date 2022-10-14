@@ -1,5 +1,5 @@
 package shared
 
 type GetSuiteRunReportResponse struct {
-	QualificationReportDownloadURL *string `json:"qualificationReportDownloadUrl"`
+	QualificationReportDownloadURL *string `json:"qualificationReportDownloadUrl,omitempty"`
 }

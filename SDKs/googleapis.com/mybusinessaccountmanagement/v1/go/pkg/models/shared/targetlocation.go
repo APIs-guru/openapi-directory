@@ -1,6 +1,6 @@
 package shared
 
 type TargetLocation struct {
-	Address      *string `json:"address"`
-	LocationName *string `json:"locationName"`
+	Address      *string `json:"address,omitempty"`
+	LocationName *string `json:"locationName,omitempty"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleFirestoreAdminV1beta1Index struct {
-	CollectionID *string                                    `json:"collectionId"`
-	Fields       []GoogleFirestoreAdminV1beta1IndexField    `json:"fields"`
-	Name         *string                                    `json:"name"`
-	State        *GoogleFirestoreAdminV1beta1IndexStateEnum `json:"state"`
+	CollectionID *string                                    `json:"collectionId,omitempty"`
+	Fields       []GoogleFirestoreAdminV1beta1IndexField    `json:"fields,omitempty"`
+	Name         *string                                    `json:"name,omitempty"`
+	State        *GoogleFirestoreAdminV1beta1IndexStateEnum `json:"state,omitempty"`
 }

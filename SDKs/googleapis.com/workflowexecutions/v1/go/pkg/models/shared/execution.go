@@ -19,14 +19,14 @@ const (
 )
 
 type Execution struct {
-	Argument           *string                    `json:"argument"`
-	CallLogLevel       *ExecutionCallLogLevelEnum `json:"callLogLevel"`
-	EndTime            *string                    `json:"endTime"`
-	Error              *Error                     `json:"error"`
-	Name               *string                    `json:"name"`
-	Result             *string                    `json:"result"`
-	StartTime          *string                    `json:"startTime"`
-	State              *ExecutionStateEnum        `json:"state"`
-	Status             *Status                    `json:"status"`
-	WorkflowRevisionID *string                    `json:"workflowRevisionId"`
+	Argument           *string                    `json:"argument,omitempty"`
+	CallLogLevel       *ExecutionCallLogLevelEnum `json:"callLogLevel,omitempty"`
+	EndTime            *string                    `json:"endTime,omitempty"`
+	Error              *Error                     `json:"error,omitempty"`
+	Name               *string                    `json:"name,omitempty"`
+	Result             *string                    `json:"result,omitempty"`
+	StartTime          *string                    `json:"startTime,omitempty"`
+	State              *ExecutionStateEnum        `json:"state,omitempty"`
+	Status             *Status                    `json:"status,omitempty"`
+	WorkflowRevisionID *string                    `json:"workflowRevisionId,omitempty"`
 }

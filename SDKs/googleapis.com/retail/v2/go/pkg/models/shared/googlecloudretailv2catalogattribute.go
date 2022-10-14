@@ -33,10 +33,10 @@ const (
 )
 
 type GoogleCloudRetailV2CatalogAttribute struct {
-	DynamicFacetableOption *GoogleCloudRetailV2CatalogAttributeDynamicFacetableOptionEnum `json:"dynamicFacetableOption"`
-	InUse                  *bool                                                          `json:"inUse"`
-	IndexableOption        *GoogleCloudRetailV2CatalogAttributeIndexableOptionEnum        `json:"indexableOption"`
-	Key                    *string                                                        `json:"key"`
-	SearchableOption       *GoogleCloudRetailV2CatalogAttributeSearchableOptionEnum       `json:"searchableOption"`
-	Type                   *GoogleCloudRetailV2CatalogAttributeTypeEnum                   `json:"type"`
+	DynamicFacetableOption *GoogleCloudRetailV2CatalogAttributeDynamicFacetableOptionEnum `json:"dynamicFacetableOption,omitempty"`
+	InUse                  *bool                                                          `json:"inUse,omitempty"`
+	IndexableOption        *GoogleCloudRetailV2CatalogAttributeIndexableOptionEnum        `json:"indexableOption,omitempty"`
+	Key                    *string                                                        `json:"key,omitempty"`
+	SearchableOption       *GoogleCloudRetailV2CatalogAttributeSearchableOptionEnum       `json:"searchableOption,omitempty"`
+	Type                   *GoogleCloudRetailV2CatalogAttributeTypeEnum                   `json:"type,omitempty"`
 }

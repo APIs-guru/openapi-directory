@@ -19,16 +19,16 @@ const (
 )
 
 type VolumeRestore struct {
-	CompleteTime *string                      `json:"completeTime"`
-	CreateTime   *string                      `json:"createTime"`
-	Etag         *string                      `json:"etag"`
-	Name         *string                      `json:"name"`
-	State        *VolumeRestoreStateEnum      `json:"state"`
-	StateMessage *string                      `json:"stateMessage"`
-	TargetPvc    *NamespacedName              `json:"targetPvc"`
-	UID          *string                      `json:"uid"`
-	UpdateTime   *string                      `json:"updateTime"`
-	VolumeBackup *string                      `json:"volumeBackup"`
-	VolumeHandle *string                      `json:"volumeHandle"`
-	VolumeType   *VolumeRestoreVolumeTypeEnum `json:"volumeType"`
+	CompleteTime *string                      `json:"completeTime,omitempty"`
+	CreateTime   *string                      `json:"createTime,omitempty"`
+	Etag         *string                      `json:"etag,omitempty"`
+	Name         *string                      `json:"name,omitempty"`
+	State        *VolumeRestoreStateEnum      `json:"state,omitempty"`
+	StateMessage *string                      `json:"stateMessage,omitempty"`
+	TargetPvc    *NamespacedName              `json:"targetPvc,omitempty"`
+	UID          *string                      `json:"uid,omitempty"`
+	UpdateTime   *string                      `json:"updateTime,omitempty"`
+	VolumeBackup *string                      `json:"volumeBackup,omitempty"`
+	VolumeHandle *string                      `json:"volumeHandle,omitempty"`
+	VolumeType   *VolumeRestoreVolumeTypeEnum `json:"volumeType,omitempty"`
 }

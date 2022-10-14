@@ -7,6 +7,6 @@ const (
 )
 
 type APIDimensionFilterGroup struct {
-	Filters   []APIDimensionFilter                  `json:"filters"`
-	GroupType *APIDimensionFilterGroupGroupTypeEnum `json:"groupType"`
+	Filters   []APIDimensionFilter                  `json:"filters,omitempty"`
+	GroupType *APIDimensionFilterGroupGroupTypeEnum `json:"groupType,omitempty"`
 }

@@ -20,9 +20,9 @@ type UpdateStudioHeaders struct {
 }
 
 type UpdateStudioRequestBody struct {
-	AdminRoleArn *string `json:"adminRoleArn"`
-	DisplayName  *string `json:"displayName"`
-	UserRoleArn  *string `json:"userRoleArn"`
+	AdminRoleArn *string `json:"adminRoleArn,omitempty"`
+	DisplayName  *string `json:"displayName,omitempty"`
+	UserRoleArn  *string `json:"userRoleArn,omitempty"`
 }
 
 type UpdateStudioRequest struct {

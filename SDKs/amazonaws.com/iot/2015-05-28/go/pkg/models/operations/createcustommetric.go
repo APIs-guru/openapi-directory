@@ -29,9 +29,9 @@ const (
 
 type CreateCustomMetricRequestBody struct {
 	ClientRequestToken string                                      `json:"clientRequestToken"`
-	DisplayName        *string                                     `json:"displayName"`
+	DisplayName        *string                                     `json:"displayName,omitempty"`
 	MetricType         CreateCustomMetricRequestBodyMetricTypeEnum `json:"metricType"`
-	Tags               []shared.Tag                                `json:"tags"`
+	Tags               []shared.Tag                                `json:"tags,omitempty"`
 }
 
 type CreateCustomMetricRequest struct {

@@ -10,31 +10,31 @@ type CreateAuthorIfNotExistsForUsingPostRequest struct {
 }
 
 type CreateAuthorIfNotExistsForUsingPost200ApplicationJSONData struct {
-	AuthorID *string `json:"authorID"`
+	AuthorID *string `json:"authorID,omitempty"`
 }
 
 type CreateAuthorIfNotExistsForUsingPost200ApplicationJSON struct {
-	Code    *int64                                                     `json:"code"`
-	Data    *CreateAuthorIfNotExistsForUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                                    `json:"message"`
+	Code    *int64                                                     `json:"code,omitempty"`
+	Data    *CreateAuthorIfNotExistsForUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                                    `json:"message,omitempty"`
 }
 
 type CreateAuthorIfNotExistsForUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateAuthorIfNotExistsForUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateAuthorIfNotExistsForUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateAuthorIfNotExistsForUsingPostResponse struct {

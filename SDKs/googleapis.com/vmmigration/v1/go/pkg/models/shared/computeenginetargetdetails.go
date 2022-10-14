@@ -26,22 +26,22 @@ const (
 )
 
 type ComputeEngineTargetDetails struct {
-	AdditionalLicenses []string                                   `json:"additionalLicenses"`
-	AppliedLicense     *AppliedLicense                            `json:"appliedLicense"`
-	BootOption         *ComputeEngineTargetDetailsBootOptionEnum  `json:"bootOption"`
-	ComputeScheduling  *ComputeScheduling                         `json:"computeScheduling"`
-	DiskType           *ComputeEngineTargetDetailsDiskTypeEnum    `json:"diskType"`
-	Hostname           *string                                    `json:"hostname"`
-	Labels             map[string]string                          `json:"labels"`
-	LicenseType        *ComputeEngineTargetDetailsLicenseTypeEnum `json:"licenseType"`
-	MachineType        *string                                    `json:"machineType"`
-	MachineTypeSeries  *string                                    `json:"machineTypeSeries"`
-	Metadata           map[string]string                          `json:"metadata"`
-	NetworkInterfaces  []NetworkInterface                         `json:"networkInterfaces"`
-	NetworkTags        []string                                   `json:"networkTags"`
-	Project            *string                                    `json:"project"`
-	SecureBoot         *bool                                      `json:"secureBoot"`
-	ServiceAccount     *string                                    `json:"serviceAccount"`
-	VMName             *string                                    `json:"vmName"`
-	Zone               *string                                    `json:"zone"`
+	AdditionalLicenses []string                                   `json:"additionalLicenses,omitempty"`
+	AppliedLicense     *AppliedLicense                            `json:"appliedLicense,omitempty"`
+	BootOption         *ComputeEngineTargetDetailsBootOptionEnum  `json:"bootOption,omitempty"`
+	ComputeScheduling  *ComputeScheduling                         `json:"computeScheduling,omitempty"`
+	DiskType           *ComputeEngineTargetDetailsDiskTypeEnum    `json:"diskType,omitempty"`
+	Hostname           *string                                    `json:"hostname,omitempty"`
+	Labels             map[string]string                          `json:"labels,omitempty"`
+	LicenseType        *ComputeEngineTargetDetailsLicenseTypeEnum `json:"licenseType,omitempty"`
+	MachineType        *string                                    `json:"machineType,omitempty"`
+	MachineTypeSeries  *string                                    `json:"machineTypeSeries,omitempty"`
+	Metadata           map[string]string                          `json:"metadata,omitempty"`
+	NetworkInterfaces  []NetworkInterface                         `json:"networkInterfaces,omitempty"`
+	NetworkTags        []string                                   `json:"networkTags,omitempty"`
+	Project            *string                                    `json:"project,omitempty"`
+	SecureBoot         *bool                                      `json:"secureBoot,omitempty"`
+	ServiceAccount     *string                                    `json:"serviceAccount,omitempty"`
+	VMName             *string                                    `json:"vmName,omitempty"`
+	Zone               *string                                    `json:"zone,omitempty"`
 }

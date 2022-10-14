@@ -20,8 +20,8 @@ type UpdateAPIKeyHeaders struct {
 }
 
 type UpdateAPIKeyRequestBody struct {
-	Description *string `json:"description"`
-	Expires     *int64  `json:"expires"`
+	Description *string `json:"description,omitempty"`
+	Expires     *int64  `json:"expires,omitempty"`
 }
 
 type UpdateAPIKeyRequest struct {

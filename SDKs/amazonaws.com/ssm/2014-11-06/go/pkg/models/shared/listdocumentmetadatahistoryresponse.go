@@ -1,9 +1,9 @@
 package shared
 
 type ListDocumentMetadataHistoryResponse struct {
-	Author          *string                       `json:"Author"`
-	DocumentVersion *string                       `json:"DocumentVersion"`
-	Metadata        *DocumentMetadataResponseInfo `json:"Metadata"`
-	Name            *string                       `json:"Name"`
-	NextToken       *string                       `json:"NextToken"`
+	Author          *string                       `json:"Author,omitempty"`
+	DocumentVersion *string                       `json:"DocumentVersion,omitempty"`
+	Metadata        *DocumentMetadataResponseInfo `json:"Metadata,omitempty"`
+	Name            *string                       `json:"Name,omitempty"`
+	NextToken       *string                       `json:"NextToken,omitempty"`
 }

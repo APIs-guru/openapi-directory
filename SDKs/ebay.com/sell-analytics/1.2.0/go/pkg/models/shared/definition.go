@@ -1,7 +1,7 @@
 package shared
 
 type Definition struct {
-	DataType      *string `json:"dataType"`
-	Key           *string `json:"key"`
-	LocalizedName *string `json:"localizedName"`
+	DataType      *string `json:"dataType,omitempty"`
+	Key           *string `json:"key,omitempty"`
+	LocalizedName *string `json:"localizedName,omitempty"`
 }

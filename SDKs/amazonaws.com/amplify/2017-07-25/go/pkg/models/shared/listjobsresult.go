@@ -2,5 +2,5 @@ package shared
 
 type ListJobsResult struct {
 	JobSummaries []JobSummary `json:"jobSummaries"`
-	NextToken    *string      `json:"nextToken"`
+	NextToken    *string      `json:"nextToken,omitempty"`
 }

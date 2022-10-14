@@ -1,5 +1,5 @@
 package shared
 
 type ApksAddExternallyHostedRequest struct {
-	ExternallyHostedApk *ExternallyHostedApk `json:"externallyHostedApk"`
+	ExternallyHostedApk *ExternallyHostedApk `json:"externallyHostedApk,omitempty"`
 }

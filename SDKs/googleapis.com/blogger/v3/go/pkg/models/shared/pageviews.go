@@ -9,12 +9,12 @@ const (
 )
 
 type PageviewsCounts struct {
-	Count     *string                       `json:"count"`
-	TimeRange *PageviewsCountsTimeRangeEnum `json:"timeRange"`
+	Count     *string                       `json:"count,omitempty"`
+	TimeRange *PageviewsCountsTimeRangeEnum `json:"timeRange,omitempty"`
 }
 
 type Pageviews struct {
-	BlogID *string           `json:"blogId"`
-	Counts []PageviewsCounts `json:"counts"`
-	Kind   *string           `json:"kind"`
+	BlogID *string           `json:"blogId,omitempty"`
+	Counts []PageviewsCounts `json:"counts,omitempty"`
+	Kind   *string           `json:"kind,omitempty"`
 }

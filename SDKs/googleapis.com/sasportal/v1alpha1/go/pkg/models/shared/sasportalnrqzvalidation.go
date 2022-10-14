@@ -9,9 +9,9 @@ const (
 )
 
 type SasPortalNrqzValidation struct {
-	CaseID    *string                           `json:"caseId"`
-	CpiID     *string                           `json:"cpiId"`
-	Latitude  *float64                          `json:"latitude"`
-	Longitude *float64                          `json:"longitude"`
-	State     *SasPortalNrqzValidationStateEnum `json:"state"`
+	CaseID    *string                           `json:"caseId,omitempty"`
+	CpiID     *string                           `json:"cpiId,omitempty"`
+	Latitude  *float64                          `json:"latitude,omitempty"`
+	Longitude *float64                          `json:"longitude,omitempty"`
+	State     *SasPortalNrqzValidationStateEnum `json:"state,omitempty"`
 }

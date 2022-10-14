@@ -1,7 +1,7 @@
 package shared
 
 type HivePartitioningOptions struct {
-	Mode                   *string `json:"mode"`
-	RequirePartitionFilter *bool   `json:"requirePartitionFilter"`
-	SourceURIPrefix        *string `json:"sourceUriPrefix"`
+	Mode                   *string `json:"mode,omitempty"`
+	RequirePartitionFilter *bool   `json:"requirePartitionFilter,omitempty"`
+	SourceURIPrefix        *string `json:"sourceUriPrefix,omitempty"`
 }

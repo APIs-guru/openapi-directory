@@ -1,5 +1,5 @@
 package shared
 
 type Image struct {
-	Image *ImageFields `json:"image"`
+	Image *ImageFields `json:"image,omitempty"`
 }

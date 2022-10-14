@@ -1,7 +1,7 @@
 package shared
 
 type CollectionOverride struct {
-	Collection *string    `json:"collection"`
-	MethodMap  *MethodMap `json:"methodMap"`
-	Options    *Options   `json:"options"`
+	Collection *string    `json:"collection,omitempty"`
+	MethodMap  *MethodMap `json:"methodMap,omitempty"`
+	Options    *Options   `json:"options,omitempty"`
 }

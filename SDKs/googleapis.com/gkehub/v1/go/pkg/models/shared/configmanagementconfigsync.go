@@ -1,10 +1,10 @@
 package shared
 
 type ConfigManagementConfigSync struct {
-	AllowVerticalScale *bool                      `json:"allowVerticalScale"`
-	Enabled            *bool                      `json:"enabled"`
-	Git                *ConfigManagementGitConfig `json:"git"`
-	Oci                *ConfigManagementOciConfig `json:"oci"`
-	PreventDrift       *bool                      `json:"preventDrift"`
-	SourceFormat       *string                    `json:"sourceFormat"`
+	AllowVerticalScale *bool                      `json:"allowVerticalScale,omitempty"`
+	Enabled            *bool                      `json:"enabled,omitempty"`
+	Git                *ConfigManagementGitConfig `json:"git,omitempty"`
+	Oci                *ConfigManagementOciConfig `json:"oci,omitempty"`
+	PreventDrift       *bool                      `json:"preventDrift,omitempty"`
+	SourceFormat       *string                    `json:"sourceFormat,omitempty"`
 }

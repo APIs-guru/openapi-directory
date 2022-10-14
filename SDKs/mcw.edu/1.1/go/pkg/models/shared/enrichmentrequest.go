@@ -1,7 +1,7 @@
 package shared
 
 type EnrichmentRequest struct {
-	Aspect  *string  `json:"aspect"`
-	Genes   []string `json:"genes"`
-	Species *string  `json:"species"`
+	Aspect  *string  `json:"aspect,omitempty"`
+	Genes   []string `json:"genes,omitempty"`
+	Species *string  `json:"species,omitempty"`
 }

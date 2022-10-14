@@ -1,8 +1,8 @@
 package shared
 
 type Connection struct {
-	Network               *string  `json:"network"`
-	Peering               *string  `json:"peering"`
-	ReservedPeeringRanges []string `json:"reservedPeeringRanges"`
-	Service               *string  `json:"service"`
+	Network               *string  `json:"network,omitempty"`
+	Peering               *string  `json:"peering,omitempty"`
+	ReservedPeeringRanges []string `json:"reservedPeeringRanges,omitempty"`
+	Service               *string  `json:"service,omitempty"`
 }

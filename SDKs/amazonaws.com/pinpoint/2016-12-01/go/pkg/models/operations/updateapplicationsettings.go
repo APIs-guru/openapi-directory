@@ -19,11 +19,11 @@ type UpdateApplicationSettingsHeaders struct {
 }
 
 type UpdateApplicationSettingsRequestBodyWriteApplicationSettingsRequest struct {
-	CampaignHook             *shared.CampaignHook   `json:"CampaignHook"`
-	CloudWatchMetricsEnabled *bool                  `json:"CloudWatchMetricsEnabled"`
-	EventTaggingEnabled      *bool                  `json:"EventTaggingEnabled"`
-	Limits                   *shared.CampaignLimits `json:"Limits"`
-	QuietTime                *shared.QuietTime      `json:"QuietTime"`
+	CampaignHook             *shared.CampaignHook   `json:"CampaignHook,omitempty"`
+	CloudWatchMetricsEnabled *bool                  `json:"CloudWatchMetricsEnabled,omitempty"`
+	EventTaggingEnabled      *bool                  `json:"EventTaggingEnabled,omitempty"`
+	Limits                   *shared.CampaignLimits `json:"Limits,omitempty"`
+	QuietTime                *shared.QuietTime      `json:"QuietTime,omitempty"`
 }
 
 type UpdateApplicationSettingsRequestBody struct {

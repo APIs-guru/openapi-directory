@@ -1,6 +1,6 @@
 package shared
 
 type GetUtterancesViewResponse struct {
-	BotName    *string         `json:"botName"`
-	Utterances []UtteranceList `json:"utterances"`
+	BotName    *string         `json:"botName,omitempty"`
+	Utterances []UtteranceList `json:"utterances,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ListTriggersResponse struct {
-	Triggers []Trigger `json:"triggers"`
+	Triggers []Trigger `json:"triggers,omitempty"`
 }

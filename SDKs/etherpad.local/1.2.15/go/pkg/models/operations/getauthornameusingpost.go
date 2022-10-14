@@ -9,38 +9,38 @@ type GetAuthorNameUsingPostRequest struct {
 }
 
 type GetAuthorNameUsingPost200ApplicationJSONDataInfo struct {
-	ColorID   *string `json:"colorId"`
-	ID        *string `json:"id"`
-	Name      *string `json:"name"`
-	Timestamp *int64  `json:"timestamp"`
+	ColorID   *string `json:"colorId,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Timestamp *int64  `json:"timestamp,omitempty"`
 }
 
 type GetAuthorNameUsingPost200ApplicationJSONData struct {
-	Info *GetAuthorNameUsingPost200ApplicationJSONDataInfo `json:"info"`
+	Info *GetAuthorNameUsingPost200ApplicationJSONDataInfo `json:"info,omitempty"`
 }
 
 type GetAuthorNameUsingPost200ApplicationJSON struct {
-	Code    *int64                                        `json:"code"`
-	Data    *GetAuthorNameUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                       `json:"message"`
+	Code    *int64                                        `json:"code,omitempty"`
+	Data    *GetAuthorNameUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                       `json:"message,omitempty"`
 }
 
 type GetAuthorNameUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetAuthorNameUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetAuthorNameUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetAuthorNameUsingPostResponse struct {

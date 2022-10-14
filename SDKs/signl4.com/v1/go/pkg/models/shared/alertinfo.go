@@ -5,22 +5,22 @@ import (
 )
 
 type AlertInfo struct {
-	Annotations     []AlertAnnotationInfo     `json:"annotations"`
-	Attachments     []AlertAttachment         `json:"attachments"`
-	Category        *string                   `json:"category"`
-	CategoryID      *string                   `json:"categoryId"`
-	EventID         *string                   `json:"eventId"`
-	EventSourceID   *string                   `json:"eventSourceId"`
-	EventSourceType *int32                    `json:"eventSourceType"`
-	Flags           *int32                    `json:"flags"`
-	History         *AlertHistoryInfoDetailed `json:"history"`
-	ID              *string                   `json:"id"`
-	LastModified    *time.Time                `json:"lastModified"`
-	Parameters      []EventParameterInfo      `json:"parameters"`
-	Severity        *int32                    `json:"severity"`
-	Status          *int32                    `json:"status"`
-	SubscriptionID  *string                   `json:"subscriptionId"`
-	TeamID          *string                   `json:"teamId"`
-	Text            *string                   `json:"text"`
-	Title           *string                   `json:"title"`
+	Annotations     []AlertAnnotationInfo     `json:"annotations,omitempty"`
+	Attachments     []AlertAttachment         `json:"attachments,omitempty"`
+	Category        *string                   `json:"category,omitempty"`
+	CategoryID      *string                   `json:"categoryId,omitempty"`
+	EventID         *string                   `json:"eventId,omitempty"`
+	EventSourceID   *string                   `json:"eventSourceId,omitempty"`
+	EventSourceType *int32                    `json:"eventSourceType,omitempty"`
+	Flags           *int32                    `json:"flags,omitempty"`
+	History         *AlertHistoryInfoDetailed `json:"history,omitempty"`
+	ID              *string                   `json:"id,omitempty"`
+	LastModified    *time.Time                `json:"lastModified,omitempty"`
+	Parameters      []EventParameterInfo      `json:"parameters,omitempty"`
+	Severity        *int32                    `json:"severity,omitempty"`
+	Status          *int32                    `json:"status,omitempty"`
+	SubscriptionID  *string                   `json:"subscriptionId,omitempty"`
+	TeamID          *string                   `json:"teamId,omitempty"`
+	Text            *string                   `json:"text,omitempty"`
+	Title           *string                   `json:"title,omitempty"`
 }

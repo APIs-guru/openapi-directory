@@ -1,10 +1,10 @@
 package shared
 
 type WorkGroupConfiguration struct {
-	BytesScannedCutoffPerQuery      *int64               `json:"BytesScannedCutoffPerQuery"`
-	EnforceWorkGroupConfiguration   *bool                `json:"EnforceWorkGroupConfiguration"`
-	EngineVersion                   *EngineVersion       `json:"EngineVersion"`
-	PublishCloudWatchMetricsEnabled *bool                `json:"PublishCloudWatchMetricsEnabled"`
-	RequesterPaysEnabled            *bool                `json:"RequesterPaysEnabled"`
-	ResultConfiguration             *ResultConfiguration `json:"ResultConfiguration"`
+	BytesScannedCutoffPerQuery      *int64               `json:"BytesScannedCutoffPerQuery,omitempty"`
+	EnforceWorkGroupConfiguration   *bool                `json:"EnforceWorkGroupConfiguration,omitempty"`
+	EngineVersion                   *EngineVersion       `json:"EngineVersion,omitempty"`
+	PublishCloudWatchMetricsEnabled *bool                `json:"PublishCloudWatchMetricsEnabled,omitempty"`
+	RequesterPaysEnabled            *bool                `json:"RequesterPaysEnabled,omitempty"`
+	ResultConfiguration             *ResultConfiguration `json:"ResultConfiguration,omitempty"`
 }

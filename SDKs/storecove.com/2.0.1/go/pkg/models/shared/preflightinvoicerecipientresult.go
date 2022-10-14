@@ -8,5 +8,5 @@ const (
 )
 
 type PreflightInvoiceRecipientResult struct {
-	Code *PreflightInvoiceRecipientResultCodeResultCodeEnum `json:"code"`
+	Code *PreflightInvoiceRecipientResultCodeResultCodeEnum `json:"code,omitempty"`
 }

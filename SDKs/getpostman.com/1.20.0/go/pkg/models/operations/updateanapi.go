@@ -5,12 +5,12 @@ type UpdateAnAPIPathParams struct {
 }
 
 type UpdateAnAPIRequestBodyAPI struct {
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 type UpdateAnAPIRequestBody struct {
-	API *UpdateAnAPIRequestBodyAPI `json:"api"`
+	API *UpdateAnAPIRequestBodyAPI `json:"api,omitempty"`
 }
 
 type UpdateAnAPIRequest struct {
@@ -19,17 +19,17 @@ type UpdateAnAPIRequest struct {
 }
 
 type UpdateAnAPI200ApplicationJSONAPI struct {
-	CreatedAt   *string `json:"createdAt"`
-	CreatedBy   *string `json:"createdBy"`
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
-	Summary     *string `json:"summary"`
-	UpdatedAt   *string `json:"updatedAt"`
+	CreatedAt   *string `json:"createdAt,omitempty"`
+	CreatedBy   *string `json:"createdBy,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Summary     *string `json:"summary,omitempty"`
+	UpdatedAt   *string `json:"updatedAt,omitempty"`
 }
 
 type UpdateAnAPI200ApplicationJSON struct {
-	API *UpdateAnAPI200ApplicationJSONAPI `json:"api"`
+	API *UpdateAnAPI200ApplicationJSONAPI `json:"api,omitempty"`
 }
 
 type UpdateAnAPIResponse struct {

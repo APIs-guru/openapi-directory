@@ -1,6 +1,6 @@
 package shared
 
 type CloudWatchLogsLogDeliveryDescription struct {
-	Enabled  *bool   `json:"enabled"`
-	LogGroup *string `json:"logGroup"`
+	Enabled  *bool   `json:"enabled,omitempty"`
+	LogGroup *string `json:"logGroup,omitempty"`
 }

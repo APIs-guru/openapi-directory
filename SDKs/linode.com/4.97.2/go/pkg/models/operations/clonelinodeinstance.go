@@ -9,12 +9,12 @@ type CloneLinodeInstancePathParams struct {
 }
 
 type CloneLinodeInstanceRequestBody struct {
-	BackupsEnabled *bool   `json:"backups_enabled"`
-	Configs        []int64 `json:"configs"`
-	Disks          []int64 `json:"disks"`
-	Group          *string `json:"group"`
-	Label          *string `json:"label"`
-	LinodeID       *int64  `json:"linode_id"`
+	BackupsEnabled *bool   `json:"backups_enabled,omitempty"`
+	Configs        []int64 `json:"configs,omitempty"`
+	Disks          []int64 `json:"disks,omitempty"`
+	Group          *string `json:"group,omitempty"`
+	Label          *string `json:"label,omitempty"`
+	LinodeID       *int64  `json:"linode_id,omitempty"`
 	Region         string  `json:"region"`
 	Type           string  `json:"type"`
 }
@@ -39,7 +39,7 @@ type CloneLinodeInstanceRequest struct {
 }
 
 type CloneLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CloneLinodeInstanceResponse struct {

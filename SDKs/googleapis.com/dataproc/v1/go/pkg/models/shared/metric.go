@@ -13,6 +13,6 @@ const (
 )
 
 type Metric struct {
-	MetricOverrides []string                `json:"metricOverrides"`
-	MetricSource    *MetricMetricSourceEnum `json:"metricSource"`
+	MetricOverrides []string                `json:"metricOverrides,omitempty"`
+	MetricSource    *MetricMetricSourceEnum `json:"metricSource,omitempty"`
 }

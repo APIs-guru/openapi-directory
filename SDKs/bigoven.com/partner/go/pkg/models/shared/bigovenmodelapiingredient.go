@@ -1,18 +1,18 @@
 package shared
 
 type BigOvenModelAPIIngredient struct {
-	DisplayIndex          *int32                         `json:"DisplayIndex"`
-	DisplayQuantity       *string                        `json:"DisplayQuantity"`
-	HTMLName              *string                        `json:"HTMLName"`
-	IngredientID          *int64                         `json:"IngredientID"`
-	IngredientInfo        *BigOvenModelAPIIngredientInfo `json:"IngredientInfo"`
-	IsHeading             *bool                          `json:"IsHeading"`
-	IsLinked              *bool                          `json:"IsLinked"`
-	MetricDisplayQuantity *string                        `json:"MetricDisplayQuantity"`
-	MetricQuantity        *float64                       `json:"MetricQuantity"`
-	MetricUnit            *string                        `json:"MetricUnit"`
-	Name                  *string                        `json:"Name"`
-	PreparationNotes      *string                        `json:"PreparationNotes"`
-	Quantity              *float64                       `json:"Quantity"`
-	Unit                  *string                        `json:"Unit"`
+	DisplayIndex          *int32                         `json:"DisplayIndex,omitempty"`
+	DisplayQuantity       *string                        `json:"DisplayQuantity,omitempty"`
+	HTMLName              *string                        `json:"HTMLName,omitempty"`
+	IngredientID          *int64                         `json:"IngredientID,omitempty"`
+	IngredientInfo        *BigOvenModelAPIIngredientInfo `json:"IngredientInfo,omitempty"`
+	IsHeading             *bool                          `json:"IsHeading,omitempty"`
+	IsLinked              *bool                          `json:"IsLinked,omitempty"`
+	MetricDisplayQuantity *string                        `json:"MetricDisplayQuantity,omitempty"`
+	MetricQuantity        *float64                       `json:"MetricQuantity,omitempty"`
+	MetricUnit            *string                        `json:"MetricUnit,omitempty"`
+	Name                  *string                        `json:"Name,omitempty"`
+	PreparationNotes      *string                        `json:"PreparationNotes,omitempty"`
+	Quantity              *float64                       `json:"Quantity,omitempty"`
+	Unit                  *string                        `json:"Unit,omitempty"`
 }

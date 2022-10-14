@@ -1,10 +1,10 @@
 package shared
 
 type BusinessDefaultsInputModel struct {
-	AutoUpdateCustomer   *bool `json:"autoUpdateCustomer"`
-	BusinessNotification *bool `json:"businessNotification"`
-	CustomerCity         *bool `json:"customerCity"`
-	CustomerState        *bool `json:"customerState"`
-	EmailInfo            *bool `json:"emailInfo"`
-	EnableUtcTimezone    *bool `json:"enableUtcTimezone"`
+	AutoUpdateCustomer   *bool `json:"autoUpdateCustomer,omitempty"`
+	BusinessNotification *bool `json:"businessNotification,omitempty"`
+	CustomerCity         *bool `json:"customerCity,omitempty"`
+	CustomerState        *bool `json:"customerState,omitempty"`
+	EmailInfo            *bool `json:"emailInfo,omitempty"`
+	EnableUtcTimezone    *bool `json:"enableUtcTimezone,omitempty"`
 }

@@ -1,14 +1,14 @@
 package shared
 
 type Command struct {
-	AcknowledgedAt *string `json:"AcknowledgedAt"`
-	CommandID      *string `json:"CommandId"`
-	CompletedAt    *string `json:"CompletedAt"`
-	CreatedAt      *string `json:"CreatedAt"`
-	DeploymentID   *string `json:"DeploymentId"`
-	ExitCode       *int64  `json:"ExitCode"`
-	InstanceID     *string `json:"InstanceId"`
-	LogURL         *string `json:"LogUrl"`
-	Status         *string `json:"Status"`
-	Type           *string `json:"Type"`
+	AcknowledgedAt *string `json:"AcknowledgedAt,omitempty"`
+	CommandID      *string `json:"CommandId,omitempty"`
+	CompletedAt    *string `json:"CompletedAt,omitempty"`
+	CreatedAt      *string `json:"CreatedAt,omitempty"`
+	DeploymentID   *string `json:"DeploymentId,omitempty"`
+	ExitCode       *int64  `json:"ExitCode,omitempty"`
+	InstanceID     *string `json:"InstanceId,omitempty"`
+	LogURL         *string `json:"LogUrl,omitempty"`
+	Status         *string `json:"Status,omitempty"`
+	Type           *string `json:"Type,omitempty"`
 }

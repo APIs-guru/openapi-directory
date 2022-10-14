@@ -19,7 +19,7 @@ const (
 )
 
 type ReportStatus struct {
-	FinishTime *string                 `json:"finishTime"`
-	Format     *ReportStatusFormatEnum `json:"format"`
-	State      *ReportStatusStateEnum  `json:"state"`
+	FinishTime *string                 `json:"finishTime,omitempty"`
+	Format     *ReportStatusFormatEnum `json:"format,omitempty"`
+	State      *ReportStatusStateEnum  `json:"state,omitempty"`
 }

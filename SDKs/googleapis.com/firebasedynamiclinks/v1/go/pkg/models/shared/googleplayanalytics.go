@@ -1,10 +1,10 @@
 package shared
 
 type GooglePlayAnalytics struct {
-	Gclid       *string `json:"gclid"`
-	UtmCampaign *string `json:"utmCampaign"`
-	UtmContent  *string `json:"utmContent"`
-	UtmMedium   *string `json:"utmMedium"`
-	UtmSource   *string `json:"utmSource"`
-	UtmTerm     *string `json:"utmTerm"`
+	Gclid       *string `json:"gclid,omitempty"`
+	UtmCampaign *string `json:"utmCampaign,omitempty"`
+	UtmContent  *string `json:"utmContent,omitempty"`
+	UtmMedium   *string `json:"utmMedium,omitempty"`
+	UtmSource   *string `json:"utmSource,omitempty"`
+	UtmTerm     *string `json:"utmTerm,omitempty"`
 }

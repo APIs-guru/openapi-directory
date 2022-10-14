@@ -1,10 +1,10 @@
 package shared
 
 type AwsEc2SecurityGroupUserIDGroupPair struct {
-	GroupID                *string `json:"GroupId"`
-	GroupName              *string `json:"GroupName"`
-	PeeringStatus          *string `json:"PeeringStatus"`
-	UserID                 *string `json:"UserId"`
-	VpcID                  *string `json:"VpcId"`
-	VpcPeeringConnectionID *string `json:"VpcPeeringConnectionId"`
+	GroupID                *string `json:"GroupId,omitempty"`
+	GroupName              *string `json:"GroupName,omitempty"`
+	PeeringStatus          *string `json:"PeeringStatus,omitempty"`
+	UserID                 *string `json:"UserId,omitempty"`
+	VpcID                  *string `json:"VpcId,omitempty"`
+	VpcPeeringConnectionID *string `json:"VpcPeeringConnectionId,omitempty"`
 }

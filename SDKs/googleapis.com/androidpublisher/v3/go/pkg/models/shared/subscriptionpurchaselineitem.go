@@ -1,8 +1,8 @@
 package shared
 
 type SubscriptionPurchaseLineItem struct {
-	AutoRenewingPlan *AutoRenewingPlan `json:"autoRenewingPlan"`
-	ExpiryTime       *string           `json:"expiryTime"`
-	PrepaidPlan      *PrepaidPlan      `json:"prepaidPlan"`
-	ProductID        *string           `json:"productId"`
+	AutoRenewingPlan *AutoRenewingPlan `json:"autoRenewingPlan,omitempty"`
+	ExpiryTime       *string           `json:"expiryTime,omitempty"`
+	PrepaidPlan      *PrepaidPlan      `json:"prepaidPlan,omitempty"`
+	ProductID        *string           `json:"productId,omitempty"`
 }

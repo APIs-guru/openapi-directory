@@ -1,6 +1,6 @@
 package shared
 
 type DescribeJobResult struct {
-	JobMetadata    *JobMetadata  `json:"JobMetadata"`
-	SubJobMetadata []JobMetadata `json:"SubJobMetadata"`
+	JobMetadata    *JobMetadata  `json:"JobMetadata,omitempty"`
+	SubJobMetadata []JobMetadata `json:"SubJobMetadata,omitempty"`
 }

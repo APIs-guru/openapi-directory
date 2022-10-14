@@ -1,12 +1,12 @@
 package shared
 
 type WarehouseBasedDeliveryTime struct {
-	Carrier                  *string `json:"carrier"`
-	CarrierService           *string `json:"carrierService"`
-	OriginAdministrativeArea *string `json:"originAdministrativeArea"`
-	OriginCity               *string `json:"originCity"`
-	OriginCountry            *string `json:"originCountry"`
-	OriginPostalCode         *string `json:"originPostalCode"`
-	OriginStreetAddress      *string `json:"originStreetAddress"`
-	WarehouseName            *string `json:"warehouseName"`
+	Carrier                  *string `json:"carrier,omitempty"`
+	CarrierService           *string `json:"carrierService,omitempty"`
+	OriginAdministrativeArea *string `json:"originAdministrativeArea,omitempty"`
+	OriginCity               *string `json:"originCity,omitempty"`
+	OriginCountry            *string `json:"originCountry,omitempty"`
+	OriginPostalCode         *string `json:"originPostalCode,omitempty"`
+	OriginStreetAddress      *string `json:"originStreetAddress,omitempty"`
+	WarehouseName            *string `json:"warehouseName,omitempty"`
 }

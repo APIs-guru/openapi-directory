@@ -8,7 +8,7 @@ const (
 )
 
 type Diagnostic struct {
-	Kind     *DiagnosticKindEnum `json:"kind"`
-	Location *string             `json:"location"`
-	Message  *string             `json:"message"`
+	Kind     *DiagnosticKindEnum `json:"kind,omitempty"`
+	Location *string             `json:"location,omitempty"`
+	Message  *string             `json:"message,omitempty"`
 }

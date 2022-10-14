@@ -1,10 +1,10 @@
 package shared
 
 type NpmPackage struct {
-	CreateTime  *string  `json:"createTime"`
-	Name        *string  `json:"name"`
-	PackageName *string  `json:"packageName"`
-	Tags        []string `json:"tags"`
-	UpdateTime  *string  `json:"updateTime"`
-	Version     *string  `json:"version"`
+	CreateTime  *string  `json:"createTime,omitempty"`
+	Name        *string  `json:"name,omitempty"`
+	PackageName *string  `json:"packageName,omitempty"`
+	Tags        []string `json:"tags,omitempty"`
+	UpdateTime  *string  `json:"updateTime,omitempty"`
+	Version     *string  `json:"version,omitempty"`
 }

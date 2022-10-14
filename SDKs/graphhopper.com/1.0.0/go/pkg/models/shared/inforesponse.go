@@ -1,7 +1,7 @@
 package shared
 
 type InfoResponse struct {
-	Bbox     *string                `json:"bbox"`
-	Features map[string]interface{} `json:"features"`
-	Version  *string                `json:"version"`
+	Bbox     *string                `json:"bbox,omitempty"`
+	Features map[string]interface{} `json:"features,omitempty"`
+	Version  *string                `json:"version,omitempty"`
 }

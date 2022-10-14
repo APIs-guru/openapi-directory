@@ -5,8 +5,8 @@ import (
 )
 
 type RealtimeEndpointInfo struct {
-	CreatedAt             *time.Time                  `json:"CreatedAt"`
-	EndpointStatus        *RealtimeEndpointStatusEnum `json:"EndpointStatus"`
-	EndpointURL           *string                     `json:"EndpointUrl"`
-	PeakRequestsPerSecond *int64                      `json:"PeakRequestsPerSecond"`
+	CreatedAt             *time.Time                  `json:"CreatedAt,omitempty"`
+	EndpointStatus        *RealtimeEndpointStatusEnum `json:"EndpointStatus,omitempty"`
+	EndpointURL           *string                     `json:"EndpointUrl,omitempty"`
+	PeakRequestsPerSecond *int64                      `json:"PeakRequestsPerSecond,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DeveloperComment struct {
-	LastModified *Timestamp `json:"lastModified"`
-	Text         *string    `json:"text"`
+	LastModified *Timestamp `json:"lastModified,omitempty"`
+	Text         *string    `json:"text,omitempty"`
 }

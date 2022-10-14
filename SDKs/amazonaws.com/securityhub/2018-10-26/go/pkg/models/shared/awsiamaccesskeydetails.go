@@ -1,13 +1,13 @@
 package shared
 
 type AwsIamAccessKeyDetails struct {
-	AccessKeyID    *string                        `json:"AccessKeyId"`
-	AccountID      *string                        `json:"AccountId"`
-	CreatedAt      *string                        `json:"CreatedAt"`
-	PrincipalID    *string                        `json:"PrincipalId"`
-	PrincipalName  *string                        `json:"PrincipalName"`
-	PrincipalType  *string                        `json:"PrincipalType"`
-	SessionContext *AwsIamAccessKeySessionContext `json:"SessionContext"`
-	Status         *AwsIamAccessKeyStatusEnum     `json:"Status"`
-	UserName       *string                        `json:"UserName"`
+	AccessKeyID    *string                        `json:"AccessKeyId,omitempty"`
+	AccountID      *string                        `json:"AccountId,omitempty"`
+	CreatedAt      *string                        `json:"CreatedAt,omitempty"`
+	PrincipalID    *string                        `json:"PrincipalId,omitempty"`
+	PrincipalName  *string                        `json:"PrincipalName,omitempty"`
+	PrincipalType  *string                        `json:"PrincipalType,omitempty"`
+	SessionContext *AwsIamAccessKeySessionContext `json:"SessionContext,omitempty"`
+	Status         *AwsIamAccessKeyStatusEnum     `json:"Status,omitempty"`
+	UserName       *string                        `json:"UserName,omitempty"`
 }

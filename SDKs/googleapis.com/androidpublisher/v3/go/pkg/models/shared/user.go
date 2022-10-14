@@ -31,11 +31,11 @@ const (
 )
 
 type User struct {
-	AccessState                 *UserAccessStateEnum                  `json:"accessState"`
-	DeveloperAccountPermissions []UserDeveloperAccountPermissionsEnum `json:"developerAccountPermissions"`
-	Email                       *string                               `json:"email"`
-	ExpirationTime              *string                               `json:"expirationTime"`
-	Grants                      []Grant                               `json:"grants"`
-	Name                        *string                               `json:"name"`
-	Partial                     *bool                                 `json:"partial"`
+	AccessState                 *UserAccessStateEnum                  `json:"accessState,omitempty"`
+	DeveloperAccountPermissions []UserDeveloperAccountPermissionsEnum `json:"developerAccountPermissions,omitempty"`
+	Email                       *string                               `json:"email,omitempty"`
+	ExpirationTime              *string                               `json:"expirationTime,omitempty"`
+	Grants                      []Grant                               `json:"grants,omitempty"`
+	Name                        *string                               `json:"name,omitempty"`
+	Partial                     *bool                                 `json:"partial,omitempty"`
 }

@@ -8,6 +8,6 @@ const (
 )
 
 type ThirdPartyLinkSnippet struct {
-	ChannelToStoreLink *ChannelToStoreLinkDetails     `json:"channelToStoreLink"`
-	Type               *ThirdPartyLinkSnippetTypeEnum `json:"type"`
+	ChannelToStoreLink *ChannelToStoreLinkDetails     `json:"channelToStoreLink,omitempty"`
+	Type               *ThirdPartyLinkSnippetTypeEnum `json:"type,omitempty"`
 }

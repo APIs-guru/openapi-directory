@@ -89,7 +89,7 @@ type GetImagesIDActions200ApplicationJSONMeta struct {
 
 type GetImagesIDActions200ApplicationJSONActionsResponse struct {
 	Actions []GetImagesIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetImagesIDActions200ApplicationJSONMeta           `json:"meta"`
+	Meta    *GetImagesIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type GetImagesIDActionsResponse struct {

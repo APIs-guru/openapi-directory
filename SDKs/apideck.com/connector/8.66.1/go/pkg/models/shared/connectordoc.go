@@ -14,9 +14,9 @@ const (
 )
 
 type ConnectorDoc struct {
-	Audience *ConnectorDocAudienceEnum `json:"audience"`
-	Format   *ConnectorDocFormatEnum   `json:"format"`
-	ID       *string                   `json:"id"`
-	Name     *string                   `json:"name"`
-	URL      *string                   `json:"url"`
+	Audience *ConnectorDocAudienceEnum `json:"audience,omitempty"`
+	Format   *ConnectorDocFormatEnum   `json:"format,omitempty"`
+	ID       *string                   `json:"id,omitempty"`
+	Name     *string                   `json:"name,omitempty"`
+	URL      *string                   `json:"url,omitempty"`
 }

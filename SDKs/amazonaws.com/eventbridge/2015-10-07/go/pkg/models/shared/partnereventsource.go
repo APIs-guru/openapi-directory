@@ -1,6 +1,6 @@
 package shared
 
 type PartnerEventSource struct {
-	Arn  *string `json:"Arn"`
-	Name *string `json:"Name"`
+	Arn  *string `json:"Arn,omitempty"`
+	Name *string `json:"Name,omitempty"`
 }

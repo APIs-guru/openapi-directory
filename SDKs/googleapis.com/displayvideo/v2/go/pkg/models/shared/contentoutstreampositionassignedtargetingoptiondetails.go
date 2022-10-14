@@ -21,6 +21,6 @@ const (
 )
 
 type ContentOutstreamPositionAssignedTargetingOptionDetails struct {
-	AdType                   *ContentOutstreamPositionAssignedTargetingOptionDetailsAdTypeEnum                   `json:"adType"`
-	ContentOutstreamPosition *ContentOutstreamPositionAssignedTargetingOptionDetailsContentOutstreamPositionEnum `json:"contentOutstreamPosition"`
+	AdType                   *ContentOutstreamPositionAssignedTargetingOptionDetailsAdTypeEnum                   `json:"adType,omitempty"`
+	ContentOutstreamPosition *ContentOutstreamPositionAssignedTargetingOptionDetailsContentOutstreamPositionEnum `json:"contentOutstreamPosition,omitempty"`
 }

@@ -11,6 +11,6 @@ const (
 )
 
 type UserKnownLanguageContract struct {
-	CultureCode *string                                   `json:"cultureCode"`
-	Proficiency *UserKnownLanguageContractProficiencyEnum `json:"proficiency"`
+	CultureCode *string                                   `json:"cultureCode,omitempty"`
+	Proficiency *UserKnownLanguageContractProficiencyEnum `json:"proficiency,omitempty"`
 }

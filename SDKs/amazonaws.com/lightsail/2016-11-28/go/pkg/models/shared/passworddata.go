@@ -1,6 +1,6 @@
 package shared
 
 type PasswordData struct {
-	Ciphertext  *string `json:"ciphertext"`
-	KeyPairName *string `json:"keyPairName"`
+	Ciphertext  *string `json:"ciphertext,omitempty"`
+	KeyPairName *string `json:"keyPairName,omitempty"`
 }

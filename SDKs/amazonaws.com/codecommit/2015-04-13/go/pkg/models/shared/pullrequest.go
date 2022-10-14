@@ -5,15 +5,15 @@ import (
 )
 
 type PullRequest struct {
-	ApprovalRules      []ApprovalRule             `json:"approvalRules"`
-	AuthorArn          *string                    `json:"authorArn"`
-	ClientRequestToken *string                    `json:"clientRequestToken"`
-	CreationDate       *time.Time                 `json:"creationDate"`
-	Description        *string                    `json:"description"`
-	LastActivityDate   *time.Time                 `json:"lastActivityDate"`
-	PullRequestID      *string                    `json:"pullRequestId"`
-	PullRequestStatus  *PullRequestStatusEnumEnum `json:"pullRequestStatus"`
-	PullRequestTargets []PullRequestTarget        `json:"pullRequestTargets"`
-	RevisionID         *string                    `json:"revisionId"`
-	Title              *string                    `json:"title"`
+	ApprovalRules      []ApprovalRule             `json:"approvalRules,omitempty"`
+	AuthorArn          *string                    `json:"authorArn,omitempty"`
+	ClientRequestToken *string                    `json:"clientRequestToken,omitempty"`
+	CreationDate       *time.Time                 `json:"creationDate,omitempty"`
+	Description        *string                    `json:"description,omitempty"`
+	LastActivityDate   *time.Time                 `json:"lastActivityDate,omitempty"`
+	PullRequestID      *string                    `json:"pullRequestId,omitempty"`
+	PullRequestStatus  *PullRequestStatusEnumEnum `json:"pullRequestStatus,omitempty"`
+	PullRequestTargets []PullRequestTarget        `json:"pullRequestTargets,omitempty"`
+	RevisionID         *string                    `json:"revisionId,omitempty"`
+	Title              *string                    `json:"title,omitempty"`
 }

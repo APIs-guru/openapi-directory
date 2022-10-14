@@ -1,25 +1,25 @@
 package shared
 
 type CreateDownloadShareRequest struct {
-	CreatorLanguage       *string               `json:"creatorLanguage"`
-	Expiration            *ObjectExpiration     `json:"expiration"`
-	FileKey               *FileKey              `json:"fileKey"`
-	InternalNotes         *string               `json:"internalNotes"`
-	KeyPair               *UserKeyPairContainer `json:"keyPair"`
-	MailBody              *string               `json:"mailBody"`
-	MailRecipients        *string               `json:"mailRecipients"`
-	MailSubject           *string               `json:"mailSubject"`
-	MaxDownloads          *int32                `json:"maxDownloads"`
-	Name                  *string               `json:"name"`
+	CreatorLanguage       *string               `json:"creatorLanguage,omitempty"`
+	Expiration            *ObjectExpiration     `json:"expiration,omitempty"`
+	FileKey               *FileKey              `json:"fileKey,omitempty"`
+	InternalNotes         *string               `json:"internalNotes,omitempty"`
+	KeyPair               *UserKeyPairContainer `json:"keyPair,omitempty"`
+	MailBody              *string               `json:"mailBody,omitempty"`
+	MailRecipients        *string               `json:"mailRecipients,omitempty"`
+	MailSubject           *string               `json:"mailSubject,omitempty"`
+	MaxDownloads          *int32                `json:"maxDownloads,omitempty"`
+	Name                  *string               `json:"name,omitempty"`
 	NodeID                int64                 `json:"nodeId"`
-	Notes                 *string               `json:"notes"`
-	NotifyCreator         *bool                 `json:"notifyCreator"`
-	Password              *string               `json:"password"`
-	ReceiverLanguage      *string               `json:"receiverLanguage"`
-	SendMail              *bool                 `json:"sendMail"`
-	SendSms               *bool                 `json:"sendSms"`
-	ShowCreatorName       *bool                 `json:"showCreatorName"`
-	ShowCreatorUsername   *bool                 `json:"showCreatorUsername"`
-	SmsRecipients         *string               `json:"smsRecipients"`
-	TextMessageRecipients []string              `json:"textMessageRecipients"`
+	Notes                 *string               `json:"notes,omitempty"`
+	NotifyCreator         *bool                 `json:"notifyCreator,omitempty"`
+	Password              *string               `json:"password,omitempty"`
+	ReceiverLanguage      *string               `json:"receiverLanguage,omitempty"`
+	SendMail              *bool                 `json:"sendMail,omitempty"`
+	SendSms               *bool                 `json:"sendSms,omitempty"`
+	ShowCreatorName       *bool                 `json:"showCreatorName,omitempty"`
+	ShowCreatorUsername   *bool                 `json:"showCreatorUsername,omitempty"`
+	SmsRecipients         *string               `json:"smsRecipients,omitempty"`
+	TextMessageRecipients []string              `json:"textMessageRecipients,omitempty"`
 }

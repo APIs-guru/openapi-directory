@@ -10,13 +10,13 @@ const (
 )
 
 type GoogleCloudDialogflowV2Message struct {
-	Content           *string                                            `json:"content"`
-	CreateTime        *string                                            `json:"createTime"`
-	LanguageCode      *string                                            `json:"languageCode"`
-	MessageAnnotation *GoogleCloudDialogflowV2MessageAnnotation          `json:"messageAnnotation"`
-	Name              *string                                            `json:"name"`
-	Participant       *string                                            `json:"participant"`
-	ParticipantRole   *GoogleCloudDialogflowV2MessageParticipantRoleEnum `json:"participantRole"`
-	SendTime          *string                                            `json:"sendTime"`
-	SentimentAnalysis *GoogleCloudDialogflowV2SentimentAnalysisResult    `json:"sentimentAnalysis"`
+	Content           *string                                            `json:"content,omitempty"`
+	CreateTime        *string                                            `json:"createTime,omitempty"`
+	LanguageCode      *string                                            `json:"languageCode,omitempty"`
+	MessageAnnotation *GoogleCloudDialogflowV2MessageAnnotation          `json:"messageAnnotation,omitempty"`
+	Name              *string                                            `json:"name,omitempty"`
+	Participant       *string                                            `json:"participant,omitempty"`
+	ParticipantRole   *GoogleCloudDialogflowV2MessageParticipantRoleEnum `json:"participantRole,omitempty"`
+	SendTime          *string                                            `json:"sendTime,omitempty"`
+	SentimentAnalysis *GoogleCloudDialogflowV2SentimentAnalysisResult    `json:"sentimentAnalysis,omitempty"`
 }

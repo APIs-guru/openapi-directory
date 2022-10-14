@@ -1,16 +1,16 @@
 package shared
 
 type UpdatePatchBaselineRequest struct {
-	ApprovalRules                    *PatchRuleGroup           `json:"ApprovalRules"`
-	ApprovedPatches                  []string                  `json:"ApprovedPatches"`
-	ApprovedPatchesComplianceLevel   *PatchComplianceLevelEnum `json:"ApprovedPatchesComplianceLevel"`
-	ApprovedPatchesEnableNonSecurity *bool                     `json:"ApprovedPatchesEnableNonSecurity"`
+	ApprovalRules                    *PatchRuleGroup           `json:"ApprovalRules,omitempty"`
+	ApprovedPatches                  []string                  `json:"ApprovedPatches,omitempty"`
+	ApprovedPatchesComplianceLevel   *PatchComplianceLevelEnum `json:"ApprovedPatchesComplianceLevel,omitempty"`
+	ApprovedPatchesEnableNonSecurity *bool                     `json:"ApprovedPatchesEnableNonSecurity,omitempty"`
 	BaselineID                       string                    `json:"BaselineId"`
-	Description                      *string                   `json:"Description"`
-	GlobalFilters                    *PatchFilterGroup         `json:"GlobalFilters"`
-	Name                             *string                   `json:"Name"`
-	RejectedPatches                  []string                  `json:"RejectedPatches"`
-	RejectedPatchesAction            *PatchActionEnum          `json:"RejectedPatchesAction"`
-	Replace                          *bool                     `json:"Replace"`
-	Sources                          []PatchSource             `json:"Sources"`
+	Description                      *string                   `json:"Description,omitempty"`
+	GlobalFilters                    *PatchFilterGroup         `json:"GlobalFilters,omitempty"`
+	Name                             *string                   `json:"Name,omitempty"`
+	RejectedPatches                  []string                  `json:"RejectedPatches,omitempty"`
+	RejectedPatchesAction            *PatchActionEnum          `json:"RejectedPatchesAction,omitempty"`
+	Replace                          *bool                     `json:"Replace,omitempty"`
+	Sources                          []PatchSource             `json:"Sources,omitempty"`
 }

@@ -26,10 +26,10 @@ const (
 )
 
 type UpdateAuthorizerRequestBody struct {
-	AuthorizerFunctionArn  *string                                `json:"authorizerFunctionArn"`
-	Status                 *UpdateAuthorizerRequestBodyStatusEnum `json:"status"`
-	TokenKeyName           *string                                `json:"tokenKeyName"`
-	TokenSigningPublicKeys map[string]string                      `json:"tokenSigningPublicKeys"`
+	AuthorizerFunctionArn  *string                                `json:"authorizerFunctionArn,omitempty"`
+	Status                 *UpdateAuthorizerRequestBodyStatusEnum `json:"status,omitempty"`
+	TokenKeyName           *string                                `json:"tokenKeyName,omitempty"`
+	TokenSigningPublicKeys map[string]string                      `json:"tokenSigningPublicKeys,omitempty"`
 }
 
 type UpdateAuthorizerRequest struct {

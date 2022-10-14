@@ -13,17 +13,17 @@ type GetListofApproversForBatchRequest struct {
 }
 
 type GetListofApproversForBatch200ApplicationJSONApprovals struct {
-	EmailAddress *string    `json:"emailAddress"`
-	FirstName    *string    `json:"firstName"`
-	LastName     *string    `json:"lastName"`
-	LastUpdated  *time.Time `json:"lastUpdated"`
-	MobileNumber *string    `json:"mobileNumber"`
-	Status       *string    `json:"status"`
-	UserID       *int64     `json:"userId"`
+	EmailAddress *string    `json:"emailAddress,omitempty"`
+	FirstName    *string    `json:"firstName,omitempty"`
+	LastName     *string    `json:"lastName,omitempty"`
+	LastUpdated  *time.Time `json:"lastUpdated,omitempty"`
+	MobileNumber *string    `json:"mobileNumber,omitempty"`
+	Status       *string    `json:"status,omitempty"`
+	UserID       *int64     `json:"userId,omitempty"`
 }
 
 type GetListofApproversForBatch200ApplicationJSONBatchApprovers struct {
-	Approvals []GetListofApproversForBatch200ApplicationJSONApprovals `json:"approvals"`
+	Approvals []GetListofApproversForBatch200ApplicationJSONApprovals `json:"approvals,omitempty"`
 }
 
 type GetListofApproversForBatchResponse struct {

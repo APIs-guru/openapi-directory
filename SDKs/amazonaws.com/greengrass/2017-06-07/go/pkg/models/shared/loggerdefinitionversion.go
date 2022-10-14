@@ -1,5 +1,5 @@
 package shared
 
 type LoggerDefinitionVersion struct {
-	Loggers []Logger `json:"Loggers"`
+	Loggers []Logger `json:"Loggers,omitempty"`
 }

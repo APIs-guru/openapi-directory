@@ -11,12 +11,12 @@ type ReposUpdateReleasePathParams struct {
 }
 
 type ReposUpdateReleaseRequestBody struct {
-	Body            *string `json:"body"`
-	Draft           *bool   `json:"draft"`
-	Name            *string `json:"name"`
-	Prerelease      *bool   `json:"prerelease"`
-	TagName         *string `json:"tag_name"`
-	TargetCommitish *string `json:"target_commitish"`
+	Body            *string `json:"body,omitempty"`
+	Draft           *bool   `json:"draft,omitempty"`
+	Name            *string `json:"name,omitempty"`
+	Prerelease      *bool   `json:"prerelease,omitempty"`
+	TagName         *string `json:"tag_name,omitempty"`
+	TargetCommitish *string `json:"target_commitish,omitempty"`
 }
 
 type ReposUpdateReleaseRequest struct {

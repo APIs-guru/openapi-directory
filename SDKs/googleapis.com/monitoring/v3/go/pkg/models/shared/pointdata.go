@@ -1,6 +1,6 @@
 package shared
 
 type PointData struct {
-	TimeInterval *TimeInterval `json:"timeInterval"`
-	Values       []TypedValue  `json:"values"`
+	TimeInterval *TimeInterval `json:"timeInterval,omitempty"`
+	Values       []TypedValue  `json:"values,omitempty"`
 }

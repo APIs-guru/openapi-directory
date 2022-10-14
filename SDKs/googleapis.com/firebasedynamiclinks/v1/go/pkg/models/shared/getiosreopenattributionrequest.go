@@ -1,7 +1,7 @@
 package shared
 
 type GetIosReopenAttributionRequest struct {
-	BundleID      *string `json:"bundleId"`
-	RequestedLink *string `json:"requestedLink"`
-	SdkVersion    *string `json:"sdkVersion"`
+	BundleID      *string `json:"bundleId,omitempty"`
+	RequestedLink *string `json:"requestedLink,omitempty"`
+	SdkVersion    *string `json:"sdkVersion,omitempty"`
 }

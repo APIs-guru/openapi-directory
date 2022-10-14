@@ -9,12 +9,12 @@ const (
 )
 
 type Attachment struct {
-	AttachmentDataRef *AttachmentDataRef    `json:"attachmentDataRef"`
-	ContentName       *string               `json:"contentName"`
-	ContentType       *string               `json:"contentType"`
-	DownloadURI       *string               `json:"downloadUri"`
-	DriveDataRef      *DriveDataRef         `json:"driveDataRef"`
-	Name              *string               `json:"name"`
-	Source            *AttachmentSourceEnum `json:"source"`
-	ThumbnailURI      *string               `json:"thumbnailUri"`
+	AttachmentDataRef *AttachmentDataRef    `json:"attachmentDataRef,omitempty"`
+	ContentName       *string               `json:"contentName,omitempty"`
+	ContentType       *string               `json:"contentType,omitempty"`
+	DownloadURI       *string               `json:"downloadUri,omitempty"`
+	DriveDataRef      *DriveDataRef         `json:"driveDataRef,omitempty"`
+	Name              *string               `json:"name,omitempty"`
+	Source            *AttachmentSourceEnum `json:"source,omitempty"`
+	ThumbnailURI      *string               `json:"thumbnailUri,omitempty"`
 }

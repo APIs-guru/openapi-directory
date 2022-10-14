@@ -37,20 +37,20 @@ const (
 )
 
 type AnnotationLayer struct {
-	AnnotationType     *AnnotationLayerAnnotationTypeEnum `json:"annotationType"`
-	Color              *string                            `json:"color"`
-	DescriptionColumns []string                           `json:"descriptionColumns"`
-	HideLine           *bool                              `json:"hideLine"`
-	IntervalEndColumn  *string                            `json:"intervalEndColumn"`
+	AnnotationType     *AnnotationLayerAnnotationTypeEnum `json:"annotationType,omitempty"`
+	Color              *string                            `json:"color,omitempty"`
+	DescriptionColumns []string                           `json:"descriptionColumns,omitempty"`
+	HideLine           *bool                              `json:"hideLine,omitempty"`
+	IntervalEndColumn  *string                            `json:"intervalEndColumn,omitempty"`
 	Name               string                             `json:"name"`
-	Opacity            *AnnotationLayerOpacityEnum        `json:"opacity"`
-	Overrides          map[string]interface{}             `json:"overrides"`
+	Opacity            *AnnotationLayerOpacityEnum        `json:"opacity,omitempty"`
+	Overrides          map[string]interface{}             `json:"overrides,omitempty"`
 	Show               bool                               `json:"show"`
 	ShowMarkers        bool                               `json:"showMarkers"`
-	SourceType         *AnnotationLayerSourceTypeEnum     `json:"sourceType"`
-	Style              *AnnotationLayerStyleEnum          `json:"style"`
-	TimeColumn         *string                            `json:"timeColumn"`
-	TitleColumn        *string                            `json:"titleColumn"`
+	SourceType         *AnnotationLayerSourceTypeEnum     `json:"sourceType,omitempty"`
+	Style              *AnnotationLayerStyleEnum          `json:"style,omitempty"`
+	TimeColumn         *string                            `json:"timeColumn,omitempty"`
+	TitleColumn        *string                            `json:"titleColumn,omitempty"`
 	Value              interface{}                        `json:"value"`
-	Width              *float32                           `json:"width"`
+	Width              *float32                           `json:"width,omitempty"`
 }

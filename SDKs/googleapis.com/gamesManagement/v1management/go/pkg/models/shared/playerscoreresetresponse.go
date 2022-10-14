@@ -1,7 +1,7 @@
 package shared
 
 type PlayerScoreResetResponse struct {
-	DefinitionID        *string  `json:"definitionId"`
-	Kind                *string  `json:"kind"`
-	ResetScoreTimeSpans []string `json:"resetScoreTimeSpans"`
+	DefinitionID        *string  `json:"definitionId,omitempty"`
+	Kind                *string  `json:"kind,omitempty"`
+	ResetScoreTimeSpans []string `json:"resetScoreTimeSpans,omitempty"`
 }

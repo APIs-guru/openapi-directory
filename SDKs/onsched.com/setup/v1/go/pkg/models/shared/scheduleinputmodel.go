@@ -1,11 +1,11 @@
 package shared
 
 type ScheduleInputModel struct {
-	Availability    *AvailabilityInputModel `json:"availability"`
-	BookingsPerSlot *int32                  `json:"bookingsPerSlot"`
-	Interval        *int32                  `json:"interval"`
-	LocationID      *string                 `json:"locationId"`
-	Name            *string                 `json:"name"`
-	ResourceGroupID *string                 `json:"resourceGroupId"`
-	Type            *string                 `json:"type"`
+	Availability    *AvailabilityInputModel `json:"availability,omitempty"`
+	BookingsPerSlot *int32                  `json:"bookingsPerSlot,omitempty"`
+	Interval        *int32                  `json:"interval,omitempty"`
+	LocationID      *string                 `json:"locationId,omitempty"`
+	Name            *string                 `json:"name,omitempty"`
+	ResourceGroupID *string                 `json:"resourceGroupId,omitempty"`
+	Type            *string                 `json:"type,omitempty"`
 }

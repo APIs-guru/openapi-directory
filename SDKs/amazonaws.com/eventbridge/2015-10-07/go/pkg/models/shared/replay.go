@@ -5,13 +5,13 @@ import (
 )
 
 type Replay struct {
-	EventEndTime          *time.Time       `json:"EventEndTime"`
-	EventLastReplayedTime *time.Time       `json:"EventLastReplayedTime"`
-	EventSourceArn        *string          `json:"EventSourceArn"`
-	EventStartTime        *time.Time       `json:"EventStartTime"`
-	ReplayEndTime         *time.Time       `json:"ReplayEndTime"`
-	ReplayName            *string          `json:"ReplayName"`
-	ReplayStartTime       *time.Time       `json:"ReplayStartTime"`
-	State                 *ReplayStateEnum `json:"State"`
-	StateReason           *string          `json:"StateReason"`
+	EventEndTime          *time.Time       `json:"EventEndTime,omitempty"`
+	EventLastReplayedTime *time.Time       `json:"EventLastReplayedTime,omitempty"`
+	EventSourceArn        *string          `json:"EventSourceArn,omitempty"`
+	EventStartTime        *time.Time       `json:"EventStartTime,omitempty"`
+	ReplayEndTime         *time.Time       `json:"ReplayEndTime,omitempty"`
+	ReplayName            *string          `json:"ReplayName,omitempty"`
+	ReplayStartTime       *time.Time       `json:"ReplayStartTime,omitempty"`
+	State                 *ReplayStateEnum `json:"State,omitempty"`
+	StateReason           *string          `json:"StateReason,omitempty"`
 }

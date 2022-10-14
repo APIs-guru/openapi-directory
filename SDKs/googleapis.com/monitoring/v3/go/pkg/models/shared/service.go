@@ -1,19 +1,19 @@
 package shared
 
 type Service struct {
-	AppEngine             *AppEngine             `json:"appEngine"`
-	BasicService          *BasicService          `json:"basicService"`
-	CloudEndpoints        *CloudEndpoints        `json:"cloudEndpoints"`
-	CloudRun              *CloudRun              `json:"cloudRun"`
-	ClusterIstio          *ClusterIstio          `json:"clusterIstio"`
-	Custom                map[string]interface{} `json:"custom"`
-	DisplayName           *string                `json:"displayName"`
-	GkeNamespace          *GkeNamespace          `json:"gkeNamespace"`
-	GkeService            *GkeService            `json:"gkeService"`
-	GkeWorkload           *GkeWorkload           `json:"gkeWorkload"`
-	IstioCanonicalService *IstioCanonicalService `json:"istioCanonicalService"`
-	MeshIstio             *MeshIstio             `json:"meshIstio"`
-	Name                  *string                `json:"name"`
-	Telemetry             *Telemetry             `json:"telemetry"`
-	UserLabels            map[string]string      `json:"userLabels"`
+	AppEngine             *AppEngine             `json:"appEngine,omitempty"`
+	BasicService          *BasicService          `json:"basicService,omitempty"`
+	CloudEndpoints        *CloudEndpoints        `json:"cloudEndpoints,omitempty"`
+	CloudRun              *CloudRun              `json:"cloudRun,omitempty"`
+	ClusterIstio          *ClusterIstio          `json:"clusterIstio,omitempty"`
+	Custom                map[string]interface{} `json:"custom,omitempty"`
+	DisplayName           *string                `json:"displayName,omitempty"`
+	GkeNamespace          *GkeNamespace          `json:"gkeNamespace,omitempty"`
+	GkeService            *GkeService            `json:"gkeService,omitempty"`
+	GkeWorkload           *GkeWorkload           `json:"gkeWorkload,omitempty"`
+	IstioCanonicalService *IstioCanonicalService `json:"istioCanonicalService,omitempty"`
+	MeshIstio             *MeshIstio             `json:"meshIstio,omitempty"`
+	Name                  *string                `json:"name,omitempty"`
+	Telemetry             *Telemetry             `json:"telemetry,omitempty"`
+	UserLabels            map[string]string      `json:"userLabels,omitempty"`
 }

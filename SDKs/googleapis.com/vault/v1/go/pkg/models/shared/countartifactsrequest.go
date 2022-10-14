@@ -9,6 +9,6 @@ const (
 )
 
 type CountArtifactsRequest struct {
-	Query *Query                         `json:"query"`
-	View  *CountArtifactsRequestViewEnum `json:"view"`
+	Query *Query                         `json:"query,omitempty"`
+	View  *CountArtifactsRequestViewEnum `json:"view,omitempty"`
 }

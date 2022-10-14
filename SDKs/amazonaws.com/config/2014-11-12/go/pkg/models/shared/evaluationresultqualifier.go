@@ -1,7 +1,7 @@
 package shared
 
 type EvaluationResultQualifier struct {
-	ConfigRuleName *string `json:"ConfigRuleName"`
-	ResourceID     *string `json:"ResourceId"`
-	ResourceType   *string `json:"ResourceType"`
+	ConfigRuleName *string `json:"ConfigRuleName,omitempty"`
+	ResourceID     *string `json:"ResourceId,omitempty"`
+	ResourceType   *string `json:"ResourceType,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetAttachmentResponse struct {
-	URL       *string `json:"Url"`
-	URLExpiry *string `json:"UrlExpiry"`
+	URL       *string `json:"Url,omitempty"`
+	URLExpiry *string `json:"UrlExpiry,omitempty"`
 }

@@ -57,9 +57,9 @@ const (
 )
 
 type ActiveViewVideoViewabilityMetricConfig struct {
-	DisplayName        *string                                                       `json:"displayName"`
-	MinimumDuration    *ActiveViewVideoViewabilityMetricConfigMinimumDurationEnum    `json:"minimumDuration"`
-	MinimumQuartile    *ActiveViewVideoViewabilityMetricConfigMinimumQuartileEnum    `json:"minimumQuartile"`
-	MinimumViewability *ActiveViewVideoViewabilityMetricConfigMinimumViewabilityEnum `json:"minimumViewability"`
-	MinimumVolume      *ActiveViewVideoViewabilityMetricConfigMinimumVolumeEnum      `json:"minimumVolume"`
+	DisplayName        *string                                                       `json:"displayName,omitempty"`
+	MinimumDuration    *ActiveViewVideoViewabilityMetricConfigMinimumDurationEnum    `json:"minimumDuration,omitempty"`
+	MinimumQuartile    *ActiveViewVideoViewabilityMetricConfigMinimumQuartileEnum    `json:"minimumQuartile,omitempty"`
+	MinimumViewability *ActiveViewVideoViewabilityMetricConfigMinimumViewabilityEnum `json:"minimumViewability,omitempty"`
+	MinimumVolume      *ActiveViewVideoViewabilityMetricConfigMinimumVolumeEnum      `json:"minimumVolume,omitempty"`
 }

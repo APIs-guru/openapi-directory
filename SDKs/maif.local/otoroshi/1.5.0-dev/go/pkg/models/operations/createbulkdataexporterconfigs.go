@@ -20,9 +20,9 @@ const (
 )
 
 type CreateBulkDataExporterConfigs200ApplicationJSON struct {
-	Created *bool                                                      `json:"created"`
-	ID      *bool                                                      `json:"id"`
-	Status  *CreateBulkDataExporterConfigs200ApplicationJSONStatusEnum `json:"status"`
+	Created *bool                                                      `json:"created,omitempty"`
+	ID      *bool                                                      `json:"id,omitempty"`
+	Status  *CreateBulkDataExporterConfigs200ApplicationJSONStatusEnum `json:"status,omitempty"`
 }
 
 type CreateBulkDataExporterConfigsResponse struct {

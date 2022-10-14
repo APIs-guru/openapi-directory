@@ -11,16 +11,16 @@ const (
 )
 
 type GoogleCloudDataplexV1Lake struct {
-	AssetStatus     *GoogleCloudDataplexV1AssetStatus         `json:"assetStatus"`
-	CreateTime      *string                                   `json:"createTime"`
-	Description     *string                                   `json:"description"`
-	DisplayName     *string                                   `json:"displayName"`
-	Labels          map[string]string                         `json:"labels"`
-	Metastore       *GoogleCloudDataplexV1LakeMetastore       `json:"metastore"`
-	MetastoreStatus *GoogleCloudDataplexV1LakeMetastoreStatus `json:"metastoreStatus"`
-	Name            *string                                   `json:"name"`
-	ServiceAccount  *string                                   `json:"serviceAccount"`
-	State           *GoogleCloudDataplexV1LakeStateEnum       `json:"state"`
-	UID             *string                                   `json:"uid"`
-	UpdateTime      *string                                   `json:"updateTime"`
+	AssetStatus     *GoogleCloudDataplexV1AssetStatus         `json:"assetStatus,omitempty"`
+	CreateTime      *string                                   `json:"createTime,omitempty"`
+	Description     *string                                   `json:"description,omitempty"`
+	DisplayName     *string                                   `json:"displayName,omitempty"`
+	Labels          map[string]string                         `json:"labels,omitempty"`
+	Metastore       *GoogleCloudDataplexV1LakeMetastore       `json:"metastore,omitempty"`
+	MetastoreStatus *GoogleCloudDataplexV1LakeMetastoreStatus `json:"metastoreStatus,omitempty"`
+	Name            *string                                   `json:"name,omitempty"`
+	ServiceAccount  *string                                   `json:"serviceAccount,omitempty"`
+	State           *GoogleCloudDataplexV1LakeStateEnum       `json:"state,omitempty"`
+	UID             *string                                   `json:"uid,omitempty"`
+	UpdateTime      *string                                   `json:"updateTime,omitempty"`
 }

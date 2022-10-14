@@ -30,10 +30,10 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1InputConfig struct {
-	AnnotationType         *GoogleCloudDatalabelingV1beta1InputConfigAnnotationTypeEnum `json:"annotationType"`
-	BigquerySource         *GoogleCloudDatalabelingV1beta1BigQuerySource                `json:"bigquerySource"`
-	ClassificationMetadata *GoogleCloudDatalabelingV1beta1ClassificationMetadata        `json:"classificationMetadata"`
-	DataType               *GoogleCloudDatalabelingV1beta1InputConfigDataTypeEnum       `json:"dataType"`
-	GcsSource              *GoogleCloudDatalabelingV1beta1GcsSource                     `json:"gcsSource"`
-	TextMetadata           *GoogleCloudDatalabelingV1beta1TextMetadata                  `json:"textMetadata"`
+	AnnotationType         *GoogleCloudDatalabelingV1beta1InputConfigAnnotationTypeEnum `json:"annotationType,omitempty"`
+	BigquerySource         *GoogleCloudDatalabelingV1beta1BigQuerySource                `json:"bigquerySource,omitempty"`
+	ClassificationMetadata *GoogleCloudDatalabelingV1beta1ClassificationMetadata        `json:"classificationMetadata,omitempty"`
+	DataType               *GoogleCloudDatalabelingV1beta1InputConfigDataTypeEnum       `json:"dataType,omitempty"`
+	GcsSource              *GoogleCloudDatalabelingV1beta1GcsSource                     `json:"gcsSource,omitempty"`
+	TextMetadata           *GoogleCloudDatalabelingV1beta1TextMetadata                  `json:"textMetadata,omitempty"`
 }

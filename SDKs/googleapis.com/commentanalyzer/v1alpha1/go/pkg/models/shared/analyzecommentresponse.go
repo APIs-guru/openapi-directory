@@ -1,8 +1,8 @@
 package shared
 
 type AnalyzeCommentResponse struct {
-	AttributeScores   map[string]AttributeScores `json:"attributeScores"`
-	ClientToken       *string                    `json:"clientToken"`
-	DetectedLanguages []string                   `json:"detectedLanguages"`
-	Languages         []string                   `json:"languages"`
+	AttributeScores   map[string]AttributeScores `json:"attributeScores,omitempty"`
+	ClientToken       *string                    `json:"clientToken,omitempty"`
+	DetectedLanguages []string                   `json:"detectedLanguages,omitempty"`
+	Languages         []string                   `json:"languages,omitempty"`
 }

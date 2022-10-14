@@ -14,7 +14,7 @@ type RemoveFollowerForTaskQueryParams struct {
 }
 
 type RemoveFollowerForTaskRequestBody struct {
-	Data *shared.TaskRemoveFollowersRequest `json:"data"`
+	Data *shared.TaskRemoveFollowersRequest `json:"data,omitempty"`
 }
 
 type RemoveFollowerForTaskRequest struct {
@@ -24,7 +24,7 @@ type RemoveFollowerForTaskRequest struct {
 }
 
 type RemoveFollowerForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveFollowerForTaskResponse struct {

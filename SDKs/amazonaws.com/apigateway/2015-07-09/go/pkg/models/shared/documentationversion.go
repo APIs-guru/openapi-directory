@@ -5,7 +5,7 @@ import (
 )
 
 type DocumentationVersion struct {
-	CreatedDate *time.Time `json:"createdDate"`
-	Description *string    `json:"description"`
-	Version     *string    `json:"version"`
+	CreatedDate *time.Time `json:"createdDate,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	Version     *string    `json:"version,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeIdentityProviderConfigResponse struct {
-	IdentityProviderConfig *IdentityProviderConfigResponse `json:"identityProviderConfig"`
+	IdentityProviderConfig *IdentityProviderConfigResponse `json:"identityProviderConfig,omitempty"`
 }

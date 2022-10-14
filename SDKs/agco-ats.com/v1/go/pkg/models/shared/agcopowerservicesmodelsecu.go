@@ -9,10 +9,10 @@ const (
 )
 
 type AgcoPowerServicesModelsEcu struct {
-	ActivationCode          *string                             `json:"ActivationCode" form:"name=ActivationCode"`
-	DamagedDescription      *string                             `json:"DamagedDescription" form:"name=DamagedDescription"`
+	ActivationCode          *string                             `json:"ActivationCode,omitempty" form:"name=ActivationCode"`
+	DamagedDescription      *string                             `json:"DamagedDescription,omitempty" form:"name=DamagedDescription"`
 	EngineSerialNumber      string                              `json:"EngineSerialNumber" form:"name=EngineSerialNumber"`
-	ReplacesEcuSerialNumber *string                             `json:"ReplacesECUSerialNumber" form:"name=ReplacesECUSerialNumber"`
+	ReplacesEcuSerialNumber *string                             `json:"ReplacesECUSerialNumber,omitempty" form:"name=ReplacesECUSerialNumber"`
 	SerialNumber            string                              `json:"SerialNumber" form:"name=SerialNumber"`
 	State                   AgcoPowerServicesModelsEcuStateEnum `json:"State" form:"name=State"`
 }

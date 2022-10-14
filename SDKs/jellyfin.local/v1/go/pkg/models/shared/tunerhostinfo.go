@@ -1,15 +1,15 @@
 package shared
 
 type TunerHostInfo struct {
-	AllowHwTranscoding  *bool   `json:"AllowHWTranscoding"`
-	DeviceID            *string `json:"DeviceId"`
-	EnableStreamLooping *bool   `json:"EnableStreamLooping"`
-	FriendlyName        *string `json:"FriendlyName"`
-	ID                  *string `json:"Id"`
-	ImportFavoritesOnly *bool   `json:"ImportFavoritesOnly"`
-	Source              *string `json:"Source"`
-	TunerCount          *int32  `json:"TunerCount"`
-	Type                *string `json:"Type"`
-	URL                 *string `json:"Url"`
-	UserAgent           *string `json:"UserAgent"`
+	AllowHwTranscoding  *bool   `json:"AllowHWTranscoding,omitempty"`
+	DeviceID            *string `json:"DeviceId,omitempty"`
+	EnableStreamLooping *bool   `json:"EnableStreamLooping,omitempty"`
+	FriendlyName        *string `json:"FriendlyName,omitempty"`
+	ID                  *string `json:"Id,omitempty"`
+	ImportFavoritesOnly *bool   `json:"ImportFavoritesOnly,omitempty"`
+	Source              *string `json:"Source,omitempty"`
+	TunerCount          *int32  `json:"TunerCount,omitempty"`
+	Type                *string `json:"Type,omitempty"`
+	URL                 *string `json:"Url,omitempty"`
+	UserAgent           *string `json:"UserAgent,omitempty"`
 }

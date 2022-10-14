@@ -1,12 +1,12 @@
 package shared
 
 type BulkDeploymentResult struct {
-	CreatedAt        *string             `json:"CreatedAt"`
-	DeploymentArn    *string             `json:"DeploymentArn"`
-	DeploymentID     *string             `json:"DeploymentId"`
-	DeploymentStatus *string             `json:"DeploymentStatus"`
-	DeploymentType   *DeploymentTypeEnum `json:"DeploymentType"`
-	ErrorDetails     []ErrorDetail       `json:"ErrorDetails"`
-	ErrorMessage     *string             `json:"ErrorMessage"`
-	GroupArn         *string             `json:"GroupArn"`
+	CreatedAt        *string             `json:"CreatedAt,omitempty"`
+	DeploymentArn    *string             `json:"DeploymentArn,omitempty"`
+	DeploymentID     *string             `json:"DeploymentId,omitempty"`
+	DeploymentStatus *string             `json:"DeploymentStatus,omitempty"`
+	DeploymentType   *DeploymentTypeEnum `json:"DeploymentType,omitempty"`
+	ErrorDetails     []ErrorDetail       `json:"ErrorDetails,omitempty"`
+	ErrorMessage     *string             `json:"ErrorMessage,omitempty"`
+	GroupArn         *string             `json:"GroupArn,omitempty"`
 }

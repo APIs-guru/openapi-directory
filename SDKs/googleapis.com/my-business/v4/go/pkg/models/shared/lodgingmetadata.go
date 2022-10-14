@@ -1,5 +1,5 @@
 package shared
 
 type LodgingMetadata struct {
-	UpdateTime *string `json:"updateTime"`
+	UpdateTime *string `json:"updateTime,omitempty"`
 }

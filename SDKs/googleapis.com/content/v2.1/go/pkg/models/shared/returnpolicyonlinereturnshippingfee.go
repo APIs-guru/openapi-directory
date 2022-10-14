@@ -9,6 +9,6 @@ const (
 )
 
 type ReturnPolicyOnlineReturnShippingFee struct {
-	FixedFee *PriceAmount                                 `json:"fixedFee"`
-	Type     *ReturnPolicyOnlineReturnShippingFeeTypeEnum `json:"type"`
+	FixedFee *PriceAmount                                 `json:"fixedFee,omitempty"`
+	Type     *ReturnPolicyOnlineReturnShippingFeeTypeEnum `json:"type,omitempty"`
 }

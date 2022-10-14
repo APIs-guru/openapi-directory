@@ -5,7 +5,7 @@ import (
 )
 
 type LaunchDetails struct {
-	LatestLaunchTime *time.Time `json:"latestLaunchTime"`
-	StackID          *string    `json:"stackId"`
-	StackName        *string    `json:"stackName"`
+	LatestLaunchTime *time.Time `json:"latestLaunchTime,omitempty"`
+	StackID          *string    `json:"stackId,omitempty"`
+	StackName        *string    `json:"stackName,omitempty"`
 }

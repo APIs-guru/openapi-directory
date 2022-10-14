@@ -11,10 +11,10 @@ type ThreeGetEstimatedPriceRequest struct {
 }
 
 type ThreeGetEstimatedPrice200ApplicationJSON struct {
-	AmountFrom      *float64 `json:"amount_from"`
-	CurrencyFrom    *string  `json:"currency_from"`
-	CurrencyTo      *string  `json:"currency_to"`
-	EstimatedAmount *float64 `json:"estimated_amount"`
+	AmountFrom      *float64 `json:"amount_from,omitempty"`
+	CurrencyFrom    *string  `json:"currency_from,omitempty"`
+	CurrencyTo      *string  `json:"currency_to,omitempty"`
+	EstimatedAmount *float64 `json:"estimated_amount,omitempty"`
 }
 
 type ThreeGetEstimatedPriceResponse struct {

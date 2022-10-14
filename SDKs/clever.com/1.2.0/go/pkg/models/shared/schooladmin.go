@@ -1,12 +1,12 @@
 package shared
 
 type SchoolAdmin struct {
-	Credentials *Credentials `json:"credentials"`
-	District    *string      `json:"district"`
-	Email       *string      `json:"email"`
-	ID          *string      `json:"id"`
-	Name        *Name        `json:"name"`
-	Schools     []string     `json:"schools"`
-	StaffID     *string      `json:"staff_id"`
-	Title       *string      `json:"title"`
+	Credentials *Credentials `json:"credentials,omitempty"`
+	District    *string      `json:"district,omitempty"`
+	Email       *string      `json:"email,omitempty"`
+	ID          *string      `json:"id,omitempty"`
+	Name        *Name        `json:"name,omitempty"`
+	Schools     []string     `json:"schools,omitempty"`
+	StaffID     *string      `json:"staff_id,omitempty"`
+	Title       *string      `json:"title,omitempty"`
 }

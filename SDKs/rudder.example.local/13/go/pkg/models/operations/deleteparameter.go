@@ -50,7 +50,7 @@ const (
 
 type DeleteParameter500ApplicationJSON struct {
 	Action       DeleteParameter500ApplicationJSONActionEnum `json:"action"`
-	ErrorDetails *string                                     `json:"errorDetails"`
+	ErrorDetails *string                                     `json:"errorDetails,omitempty"`
 	ID           string                                      `json:"id"`
 	Result       DeleteParameter500ApplicationJSONResultEnum `json:"result"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type ListAllDropletNeighborsIds200ApplicationJSON struct {
-	NeighborIds [][]int64 `json:"neighbor_ids"`
+	NeighborIds [][]int64 `json:"neighbor_ids,omitempty"`
 }
 
 type ListAllDropletNeighborsIds401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllDropletNeighborsIdsResponse struct {

@@ -5,11 +5,11 @@ import (
 )
 
 type GetSecretValueResponse struct {
-	Arn           *string    `json:"ARN"`
-	CreatedDate   *time.Time `json:"CreatedDate"`
-	Name          *string    `json:"Name"`
-	SecretBinary  *string    `json:"SecretBinary"`
-	SecretString  *string    `json:"SecretString"`
-	VersionID     *string    `json:"VersionId"`
-	VersionStages []string   `json:"VersionStages"`
+	Arn           *string    `json:"ARN,omitempty"`
+	CreatedDate   *time.Time `json:"CreatedDate,omitempty"`
+	Name          *string    `json:"Name,omitempty"`
+	SecretBinary  *string    `json:"SecretBinary,omitempty"`
+	SecretString  *string    `json:"SecretString,omitempty"`
+	VersionID     *string    `json:"VersionId,omitempty"`
+	VersionStages []string   `json:"VersionStages,omitempty"`
 }

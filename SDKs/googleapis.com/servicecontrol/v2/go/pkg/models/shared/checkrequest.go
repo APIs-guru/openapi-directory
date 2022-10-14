@@ -1,8 +1,8 @@
 package shared
 
 type CheckRequest struct {
-	Attributes      *AttributeContext `json:"attributes"`
-	Flags           *string           `json:"flags"`
-	Resources       []ResourceInfo    `json:"resources"`
-	ServiceConfigID *string           `json:"serviceConfigId"`
+	Attributes      *AttributeContext `json:"attributes,omitempty"`
+	Flags           *string           `json:"flags,omitempty"`
+	Resources       []ResourceInfo    `json:"resources,omitempty"`
+	ServiceConfigID *string           `json:"serviceConfigId,omitempty"`
 }

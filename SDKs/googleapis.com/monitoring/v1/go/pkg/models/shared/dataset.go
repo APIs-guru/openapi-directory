@@ -19,9 +19,9 @@ const (
 )
 
 type DataSet struct {
-	LegendTemplate     *string                `json:"legendTemplate"`
-	MinAlignmentPeriod *string                `json:"minAlignmentPeriod"`
-	PlotType           *DataSetPlotTypeEnum   `json:"plotType"`
-	TargetAxis         *DataSetTargetAxisEnum `json:"targetAxis"`
-	TimeSeriesQuery    *TimeSeriesQuery       `json:"timeSeriesQuery"`
+	LegendTemplate     *string                `json:"legendTemplate,omitempty"`
+	MinAlignmentPeriod *string                `json:"minAlignmentPeriod,omitempty"`
+	PlotType           *DataSetPlotTypeEnum   `json:"plotType,omitempty"`
+	TargetAxis         *DataSetTargetAxisEnum `json:"targetAxis,omitempty"`
+	TimeSeriesQuery    *TimeSeriesQuery       `json:"timeSeriesQuery,omitempty"`
 }

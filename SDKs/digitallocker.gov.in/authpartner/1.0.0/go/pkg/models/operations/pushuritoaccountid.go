@@ -14,23 +14,23 @@ type PushURIToAccountIDRequest struct {
 }
 
 type PushURIToAccountID400ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type PushURIToAccountID401ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type PushURIToAccountID404ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type PushURIToAccountID500ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type PushURIToAccountIDResponse struct {

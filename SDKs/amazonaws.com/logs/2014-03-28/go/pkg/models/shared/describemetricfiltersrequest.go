@@ -1,10 +1,10 @@
 package shared
 
 type DescribeMetricFiltersRequest struct {
-	FilterNamePrefix *string `json:"filterNamePrefix"`
-	Limit            *int64  `json:"limit"`
-	LogGroupName     *string `json:"logGroupName"`
-	MetricName       *string `json:"metricName"`
-	MetricNamespace  *string `json:"metricNamespace"`
-	NextToken        *string `json:"nextToken"`
+	FilterNamePrefix *string `json:"filterNamePrefix,omitempty"`
+	Limit            *int64  `json:"limit,omitempty"`
+	LogGroupName     *string `json:"logGroupName,omitempty"`
+	MetricName       *string `json:"metricName,omitempty"`
+	MetricNamespace  *string `json:"metricNamespace,omitempty"`
+	NextToken        *string `json:"nextToken,omitempty"`
 }

@@ -16,8 +16,8 @@ const (
 )
 
 type DncerRequestBody struct {
-	CertificateParameters *DncerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *DncerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                DncerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Dncer400ApplicationJSON struct {
-	Error            *Dncer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dncer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dncer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dncer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dncer401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Dncer401ApplicationJSON struct {
-	Error            *Dncer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dncer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dncer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dncer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dncer404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Dncer404ApplicationJSON struct {
-	Error            *Dncer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dncer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dncer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dncer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dncer500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Dncer500ApplicationJSON struct {
-	Error            *Dncer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dncer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dncer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dncer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dncer502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Dncer502ApplicationJSON struct {
-	Error            *Dncer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dncer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dncer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dncer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dncer503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Dncer503ApplicationJSON struct {
-	Error            *Dncer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dncer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dncer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dncer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Dncer504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Dncer504ApplicationJSON struct {
-	Error            *Dncer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Dncer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Dncer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Dncer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type DncerResponse struct {

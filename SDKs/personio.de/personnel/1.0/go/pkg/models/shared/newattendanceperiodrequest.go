@@ -14,5 +14,5 @@ type NewAttendancePeriodRequestAttendances struct {
 }
 
 type NewAttendancePeriodRequest struct {
-	Attendances []NewAttendancePeriodRequestAttendances `json:"attendances"`
+	Attendances []NewAttendancePeriodRequestAttendances `json:"attendances,omitempty"`
 }

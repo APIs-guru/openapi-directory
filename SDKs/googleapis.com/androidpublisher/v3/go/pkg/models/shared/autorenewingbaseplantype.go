@@ -17,10 +17,10 @@ const (
 )
 
 type AutoRenewingBasePlanType struct {
-	BillingPeriodDuration               *string                                       `json:"billingPeriodDuration"`
-	GracePeriodDuration                 *string                                       `json:"gracePeriodDuration"`
-	LegacyCompatible                    *bool                                         `json:"legacyCompatible"`
-	LegacyCompatibleSubscriptionOfferID *string                                       `json:"legacyCompatibleSubscriptionOfferId"`
-	ProrationMode                       *AutoRenewingBasePlanTypeProrationModeEnum    `json:"prorationMode"`
-	ResubscribeState                    *AutoRenewingBasePlanTypeResubscribeStateEnum `json:"resubscribeState"`
+	BillingPeriodDuration               *string                                       `json:"billingPeriodDuration,omitempty"`
+	GracePeriodDuration                 *string                                       `json:"gracePeriodDuration,omitempty"`
+	LegacyCompatible                    *bool                                         `json:"legacyCompatible,omitempty"`
+	LegacyCompatibleSubscriptionOfferID *string                                       `json:"legacyCompatibleSubscriptionOfferId,omitempty"`
+	ProrationMode                       *AutoRenewingBasePlanTypeProrationModeEnum    `json:"prorationMode,omitempty"`
+	ResubscribeState                    *AutoRenewingBasePlanTypeResubscribeStateEnum `json:"resubscribeState,omitempty"`
 }

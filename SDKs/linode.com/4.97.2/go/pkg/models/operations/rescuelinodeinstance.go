@@ -9,7 +9,7 @@ type RescueLinodeInstancePathParams struct {
 }
 
 type RescueLinodeInstanceRequestBody struct {
-	Devices *shared.RescueDevices `json:"devices"`
+	Devices *shared.RescueDevices `json:"devices,omitempty"`
 }
 
 type RescueLinodeInstanceSecurityOption1 struct {
@@ -32,7 +32,7 @@ type RescueLinodeInstanceRequest struct {
 }
 
 type RescueLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RescueLinodeInstanceResponse struct {

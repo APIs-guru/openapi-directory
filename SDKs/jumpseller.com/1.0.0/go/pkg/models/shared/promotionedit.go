@@ -1,5 +1,5 @@
 package shared
 
 type PromotionEdit struct {
-	Promotion *PromotionEditFields `json:"promotion"`
+	Promotion *PromotionEditFields `json:"promotion,omitempty"`
 }

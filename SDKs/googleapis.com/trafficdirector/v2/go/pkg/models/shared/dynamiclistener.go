@@ -1,9 +1,9 @@
 package shared
 
 type DynamicListener struct {
-	ActiveState   *DynamicListenerState `json:"activeState"`
-	DrainingState *DynamicListenerState `json:"drainingState"`
-	ErrorState    *UpdateFailureState   `json:"errorState"`
-	Name          *string               `json:"name"`
-	WarmingState  *DynamicListenerState `json:"warmingState"`
+	ActiveState   *DynamicListenerState `json:"activeState,omitempty"`
+	DrainingState *DynamicListenerState `json:"drainingState,omitempty"`
+	ErrorState    *UpdateFailureState   `json:"errorState,omitempty"`
+	Name          *string               `json:"name,omitempty"`
+	WarmingState  *DynamicListenerState `json:"warmingState,omitempty"`
 }

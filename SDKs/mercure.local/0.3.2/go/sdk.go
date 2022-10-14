@@ -210,3 +210,41 @@ func (s *SDK) GetWellKnownMercureSubscriptionsTopicSubscriber(ctx context.Contex
 
 	return res, nil
 }
+
+func (s *SDK) PostWellKnownMercure(ctx context.Context, request operations.PostWellKnownMercureRequest) (*operations.PostWellKnownMercureResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/.well-known/mercure"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.PostWellKnownMercureResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode == 400:
+	case httpRes.StatusCode == 401:
+	}
+
+	return res, nil
+}

@@ -1,7 +1,7 @@
 package shared
 
 type ListRoutesResponse struct {
-	NextPageToken *string  `json:"nextPageToken"`
-	Routes        []Route  `json:"routes"`
-	Unreachable   []string `json:"unreachable"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Routes        []Route  `json:"routes,omitempty"`
+	Unreachable   []string `json:"unreachable,omitempty"`
 }

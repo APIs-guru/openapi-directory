@@ -5,8 +5,8 @@ import (
 )
 
 type IssueDelegatePlanAccessTokenBody struct {
-	EnvironmentIds []string          `json:"environmentIds"`
-	Expiration     *time.Time        `json:"expiration"`
-	Identity       *DelegateIdentity `json:"identity"`
-	Scope          *string           `json:"scope"`
+	EnvironmentIds []string          `json:"environmentIds,omitempty"`
+	Expiration     *time.Time        `json:"expiration,omitempty"`
+	Identity       *DelegateIdentity `json:"identity,omitempty"`
+	Scope          *string           `json:"scope,omitempty"`
 }

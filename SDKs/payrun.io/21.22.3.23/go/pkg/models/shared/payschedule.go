@@ -11,11 +11,11 @@ const (
 )
 
 type PaySchedulePaySchedulePaySchedule struct {
-	MetaData     map[string]interface{}                              `json:"MetaData"`
-	Name         *string                                             `json:"Name"`
-	PayFrequency *PaySchedulePaySchedulePayFrequencyPayFrequencyEnum `json:"PayFrequency"`
+	MetaData     map[string]interface{}                              `json:"MetaData,omitempty"`
+	Name         *string                                             `json:"Name,omitempty"`
+	PayFrequency *PaySchedulePaySchedulePayFrequencyPayFrequencyEnum `json:"PayFrequency,omitempty"`
 }
 
 type PaySchedule struct {
-	PaySchedule *PaySchedulePaySchedulePaySchedule `json:"PaySchedule"`
+	PaySchedule *PaySchedulePaySchedulePaySchedule `json:"PaySchedule,omitempty"`
 }

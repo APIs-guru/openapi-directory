@@ -1,6 +1,6 @@
 package shared
 
 type AuthenticationConfiguration struct {
-	AccessRoleArn *string `json:"AccessRoleArn"`
-	ConnectionArn *string `json:"ConnectionArn"`
+	AccessRoleArn *string `json:"AccessRoleArn,omitempty"`
+	ConnectionArn *string `json:"ConnectionArn,omitempty"`
 }

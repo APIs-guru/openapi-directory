@@ -9,8 +9,8 @@ const (
 )
 
 type Logo struct {
-	ContentType *string       `json:"content_type"`
-	ID          *string       `json:"id"`
-	Type        *LogoTypeEnum `json:"type"`
+	ContentType *string       `json:"content_type,omitempty"`
+	ID          *string       `json:"id,omitempty"`
+	Type        *LogoTypeEnum `json:"type,omitempty"`
 	URL         string        `json:"url"`
 }

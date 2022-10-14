@@ -5,33 +5,33 @@ import (
 )
 
 type PlayerAssets struct {
-	Link *string `json:"link"`
-	Logo *string `json:"logo"`
+	Link *string `json:"link,omitempty"`
+	Logo *string `json:"logo,omitempty"`
 }
 
 type Player struct {
-	Assets                *PlayerAssets `json:"assets"`
-	BackgroundBottom      *string       `json:"backgroundBottom"`
-	BackgroundText        *string       `json:"backgroundText"`
-	BackgroundTop         *string       `json:"backgroundTop"`
-	CreatedAt             *time.Time    `json:"createdAt"`
-	EnableAPI             *bool         `json:"enableApi"`
-	EnableControls        *bool         `json:"enableControls"`
-	ForceAutoplay         *bool         `json:"forceAutoplay"`
-	ForceLoop             *bool         `json:"forceLoop"`
-	HideTitle             *bool         `json:"hideTitle"`
-	Link                  *string       `json:"link"`
-	LinkActive            *string       `json:"linkActive"`
-	LinkHover             *string       `json:"linkHover"`
-	PlayerID              *string       `json:"playerId"`
-	ShapeAspect           *string       `json:"shapeAspect"`
-	ShapeBackgroundBottom *string       `json:"shapeBackgroundBottom"`
-	ShapeBackgroundTop    *string       `json:"shapeBackgroundTop"`
-	ShapeMargin           *int64        `json:"shapeMargin"`
-	ShapeRadius           *int64        `json:"shapeRadius"`
-	Text                  *string       `json:"text"`
-	TrackBackground       *string       `json:"trackBackground"`
-	TrackPlayed           *string       `json:"trackPlayed"`
-	TrackUnplayed         *string       `json:"trackUnplayed"`
-	UpdatedAt             *time.Time    `json:"updatedAt"`
+	Assets                *PlayerAssets `json:"assets,omitempty"`
+	BackgroundBottom      *string       `json:"backgroundBottom,omitempty"`
+	BackgroundText        *string       `json:"backgroundText,omitempty"`
+	BackgroundTop         *string       `json:"backgroundTop,omitempty"`
+	CreatedAt             *time.Time    `json:"createdAt,omitempty"`
+	EnableAPI             *bool         `json:"enableApi,omitempty"`
+	EnableControls        *bool         `json:"enableControls,omitempty"`
+	ForceAutoplay         *bool         `json:"forceAutoplay,omitempty"`
+	ForceLoop             *bool         `json:"forceLoop,omitempty"`
+	HideTitle             *bool         `json:"hideTitle,omitempty"`
+	Link                  *string       `json:"link,omitempty"`
+	LinkActive            *string       `json:"linkActive,omitempty"`
+	LinkHover             *string       `json:"linkHover,omitempty"`
+	PlayerID              *string       `json:"playerId,omitempty"`
+	ShapeAspect           *string       `json:"shapeAspect,omitempty"`
+	ShapeBackgroundBottom *string       `json:"shapeBackgroundBottom,omitempty"`
+	ShapeBackgroundTop    *string       `json:"shapeBackgroundTop,omitempty"`
+	ShapeMargin           *int64        `json:"shapeMargin,omitempty"`
+	ShapeRadius           *int64        `json:"shapeRadius,omitempty"`
+	Text                  *string       `json:"text,omitempty"`
+	TrackBackground       *string       `json:"trackBackground,omitempty"`
+	TrackPlayed           *string       `json:"trackPlayed,omitempty"`
+	TrackUnplayed         *string       `json:"trackUnplayed,omitempty"`
+	UpdatedAt             *time.Time    `json:"updatedAt,omitempty"`
 }

@@ -10,7 +10,7 @@ type CodeScanningAlert struct {
 	DismissedBy     SimpleUser                           `json:"dismissed_by"`
 	DismissedReason CodeScanningAlertDismissedReasonEnum `json:"dismissed_reason"`
 	HTMLURL         string                               `json:"html_url"`
-	Instances       *interface{}                         `json:"instances"`
+	Instances       *interface{}                         `json:"instances,omitempty"`
 	Number          int64                                `json:"number"`
 	Rule            CodeScanningAlertRule                `json:"rule"`
 	State           CodeScanningAlertStateEnum           `json:"state"`

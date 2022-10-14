@@ -1,10 +1,10 @@
 package shared
 
 type AdUnit struct {
-	AdFormat    *string  `json:"adFormat"`
-	AdTypes     []string `json:"adTypes"`
-	AdUnitID    *string  `json:"adUnitId"`
-	AppID       *string  `json:"appId"`
-	DisplayName *string  `json:"displayName"`
-	Name        *string  `json:"name"`
+	AdFormat    *string  `json:"adFormat,omitempty"`
+	AdTypes     []string `json:"adTypes,omitempty"`
+	AdUnitID    *string  `json:"adUnitId,omitempty"`
+	AppID       *string  `json:"appId,omitempty"`
+	DisplayName *string  `json:"displayName,omitempty"`
+	Name        *string  `json:"name,omitempty"`
 }

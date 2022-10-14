@@ -10,6 +10,6 @@ const (
 )
 
 type AliasContext struct {
-	Kind *AliasContextKindEnum `json:"kind"`
-	Name *string               `json:"name"`
+	Kind *AliasContextKindEnum `json:"kind,omitempty"`
+	Name *string               `json:"name,omitempty"`
 }

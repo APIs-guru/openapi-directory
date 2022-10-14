@@ -1,7 +1,7 @@
 package shared
 
 type BitbucketServerSecrets struct {
-	AdminAccessTokenVersionName *string `json:"adminAccessTokenVersionName"`
-	ReadAccessTokenVersionName  *string `json:"readAccessTokenVersionName"`
-	WebhookSecretVersionName    *string `json:"webhookSecretVersionName"`
+	AdminAccessTokenVersionName *string `json:"adminAccessTokenVersionName,omitempty"`
+	ReadAccessTokenVersionName  *string `json:"readAccessTokenVersionName,omitempty"`
+	WebhookSecretVersionName    *string `json:"webhookSecretVersionName,omitempty"`
 }

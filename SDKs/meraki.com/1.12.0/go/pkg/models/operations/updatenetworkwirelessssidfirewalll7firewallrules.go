@@ -22,13 +22,13 @@ const (
 )
 
 type UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBodyRules struct {
-	Policy *UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBodyRulesPolicyEnum `json:"policy"`
-	Type   *UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBodyRulesTypeEnum   `json:"type"`
-	Value  *string                                                                     `json:"value"`
+	Policy *UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBodyRulesPolicyEnum `json:"policy,omitempty"`
+	Type   *UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBodyRulesTypeEnum   `json:"type,omitempty"`
+	Value  *string                                                                     `json:"value,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBody struct {
-	Rules []UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBodyRules `json:"rules"`
+	Rules []UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequestBodyRules `json:"rules,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidFirewallL7FirewallRulesRequest struct {

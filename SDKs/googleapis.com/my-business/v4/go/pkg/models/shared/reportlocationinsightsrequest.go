@@ -1,7 +1,7 @@
 package shared
 
 type ReportLocationInsightsRequest struct {
-	BasicRequest             *BasicMetricsRequest            `json:"basicRequest"`
-	DrivingDirectionsRequest *DrivingDirectionMetricsRequest `json:"drivingDirectionsRequest"`
-	LocationNames            []string                        `json:"locationNames"`
+	BasicRequest             *BasicMetricsRequest            `json:"basicRequest,omitempty"`
+	DrivingDirectionsRequest *DrivingDirectionMetricsRequest `json:"drivingDirectionsRequest,omitempty"`
+	LocationNames            []string                        `json:"locationNames,omitempty"`
 }

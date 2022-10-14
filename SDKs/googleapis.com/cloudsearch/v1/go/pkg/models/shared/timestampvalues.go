@@ -1,5 +1,5 @@
 package shared
 
 type TimestampValues struct {
-	Values []string `json:"values"`
+	Values []string `json:"values,omitempty"`
 }

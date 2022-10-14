@@ -46,19 +46,19 @@ const (
 )
 
 type PhotoSequence struct {
-	CaptureTimeOverride *string                           `json:"captureTimeOverride"`
-	DistanceMeters      *float64                          `json:"distanceMeters"`
-	FailureDetails      *ProcessingFailureDetails         `json:"failureDetails"`
-	FailureReason       *PhotoSequenceFailureReasonEnum   `json:"failureReason"`
-	Filename            *string                           `json:"filename"`
-	GpsSource           *PhotoSequenceGpsSourceEnum       `json:"gpsSource"`
-	ID                  *string                           `json:"id"`
-	Imu                 *Imu                              `json:"imu"`
-	Photos              []Photo                           `json:"photos"`
-	ProcessingState     *PhotoSequenceProcessingStateEnum `json:"processingState"`
-	RawGpsTimeline      []Pose                            `json:"rawGpsTimeline"`
-	SequenceBounds      *LatLngBounds                     `json:"sequenceBounds"`
-	UploadReference     *UploadRef                        `json:"uploadReference"`
-	UploadTime          *string                           `json:"uploadTime"`
-	ViewCount           *string                           `json:"viewCount"`
+	CaptureTimeOverride *string                           `json:"captureTimeOverride,omitempty"`
+	DistanceMeters      *float64                          `json:"distanceMeters,omitempty"`
+	FailureDetails      *ProcessingFailureDetails         `json:"failureDetails,omitempty"`
+	FailureReason       *PhotoSequenceFailureReasonEnum   `json:"failureReason,omitempty"`
+	Filename            *string                           `json:"filename,omitempty"`
+	GpsSource           *PhotoSequenceGpsSourceEnum       `json:"gpsSource,omitempty"`
+	ID                  *string                           `json:"id,omitempty"`
+	Imu                 *Imu                              `json:"imu,omitempty"`
+	Photos              []Photo                           `json:"photos,omitempty"`
+	ProcessingState     *PhotoSequenceProcessingStateEnum `json:"processingState,omitempty"`
+	RawGpsTimeline      []Pose                            `json:"rawGpsTimeline,omitempty"`
+	SequenceBounds      *LatLngBounds                     `json:"sequenceBounds,omitempty"`
+	UploadReference     *UploadRef                        `json:"uploadReference,omitempty"`
+	UploadTime          *string                           `json:"uploadTime,omitempty"`
+	ViewCount           *string                           `json:"viewCount,omitempty"`
 }

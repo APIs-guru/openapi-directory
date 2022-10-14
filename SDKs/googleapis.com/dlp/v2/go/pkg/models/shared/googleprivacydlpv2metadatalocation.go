@@ -8,6 +8,6 @@ const (
 )
 
 type GooglePrivacyDlpV2MetadataLocation struct {
-	StorageLabel *GooglePrivacyDlpV2StorageMetadataLabel     `json:"storageLabel"`
-	Type         *GooglePrivacyDlpV2MetadataLocationTypeEnum `json:"type"`
+	StorageLabel *GooglePrivacyDlpV2StorageMetadataLabel     `json:"storageLabel,omitempty"`
+	Type         *GooglePrivacyDlpV2MetadataLocationTypeEnum `json:"type,omitempty"`
 }

@@ -5,22 +5,22 @@ import (
 )
 
 type ThirdPartyJobInstructionThirdPartyJobInstructionEmployerEmployer struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type ThirdPartyJobInstructionThirdPartyJobInstructionThirdPartyJobInstruction struct {
-	ClientIDUniqueKey     *string                                                           `json:"ClientIdUniqueKey"`
-	ClientSecretUniqueKey *string                                                           `json:"ClientSecretUniqueKey"`
-	Employer              *ThirdPartyJobInstructionThirdPartyJobInstructionEmployerEmployer `json:"Employer"`
-	HoldingDate           *time.Time                                                        `json:"HoldingDate"`
-	InstructionTypeName   *string                                                           `json:"InstructionTypeName"`
-	PayScheduleUniqueKey  *string                                                           `json:"PayScheduleUniqueKey"`
-	PaymentDate           *time.Time                                                        `json:"PaymentDate"`
-	RemoteEndpoint        *string                                                           `json:"RemoteEndpoint"`
+	ClientIDUniqueKey     *string                                                           `json:"ClientIdUniqueKey,omitempty"`
+	ClientSecretUniqueKey *string                                                           `json:"ClientSecretUniqueKey,omitempty"`
+	Employer              *ThirdPartyJobInstructionThirdPartyJobInstructionEmployerEmployer `json:"Employer,omitempty"`
+	HoldingDate           *time.Time                                                        `json:"HoldingDate,omitempty"`
+	InstructionTypeName   *string                                                           `json:"InstructionTypeName,omitempty"`
+	PayScheduleUniqueKey  *string                                                           `json:"PayScheduleUniqueKey,omitempty"`
+	PaymentDate           *time.Time                                                        `json:"PaymentDate,omitempty"`
+	RemoteEndpoint        *string                                                           `json:"RemoteEndpoint,omitempty"`
 }
 
 type ThirdPartyJobInstruction struct {
-	ThirdPartyJobInstruction *ThirdPartyJobInstructionThirdPartyJobInstructionThirdPartyJobInstruction `json:"ThirdPartyJobInstruction"`
+	ThirdPartyJobInstruction *ThirdPartyJobInstructionThirdPartyJobInstructionThirdPartyJobInstruction `json:"ThirdPartyJobInstruction,omitempty"`
 }

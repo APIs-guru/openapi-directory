@@ -8,8 +8,8 @@ const (
 )
 
 type FirewallRuleConfigAddresses struct {
-	Ipv4 []string `json:"ipv4"`
-	Ipv6 []string `json:"ipv6"`
+	Ipv4 []string `json:"ipv4,omitempty"`
+	Ipv6 []string `json:"ipv6,omitempty"`
 }
 
 type FirewallRuleConfigProtocolEnum string
@@ -21,10 +21,10 @@ const (
 )
 
 type FirewallRuleConfig struct {
-	Action      *FirewallRuleConfigActionEnum  `json:"action"`
-	Addresses   *FirewallRuleConfigAddresses   `json:"addresses"`
-	Description *string                        `json:"description"`
-	Label       *string                        `json:"label"`
-	Ports       *string                        `json:"ports"`
+	Action      *FirewallRuleConfigActionEnum  `json:"action,omitempty"`
+	Addresses   *FirewallRuleConfigAddresses   `json:"addresses,omitempty"`
+	Description *string                        `json:"description,omitempty"`
+	Label       *string                        `json:"label,omitempty"`
+	Ports       *string                        `json:"ports,omitempty"`
 	Protocol    FirewallRuleConfigProtocolEnum `json:"protocol"`
 }

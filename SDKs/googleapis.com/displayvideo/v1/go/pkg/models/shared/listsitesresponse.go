@@ -1,6 +1,6 @@
 package shared
 
 type ListSitesResponse struct {
-	NextPageToken *string `json:"nextPageToken"`
-	Sites         []Site  `json:"sites"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Sites         []Site  `json:"sites,omitempty"`
 }

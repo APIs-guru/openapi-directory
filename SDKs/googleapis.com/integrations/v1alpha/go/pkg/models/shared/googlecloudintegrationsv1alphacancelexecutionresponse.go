@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaCancelExecutionResponse struct {
-	IsCanceled *bool `json:"isCanceled"`
+	IsCanceled *bool `json:"isCanceled,omitempty"`
 }

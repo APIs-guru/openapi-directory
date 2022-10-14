@@ -1,6 +1,6 @@
 package shared
 
 type GetDomainNamesResponse struct {
-	Items     []DomainName `json:"Items"`
-	NextToken *string      `json:"NextToken"`
+	Items     []DomainName `json:"Items,omitempty"`
+	NextToken *string      `json:"NextToken,omitempty"`
 }

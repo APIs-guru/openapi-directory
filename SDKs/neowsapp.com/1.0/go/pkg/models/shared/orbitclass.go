@@ -27,7 +27,7 @@ const (
 )
 
 type OrbitClass struct {
-	OrbitClassDescription *string                       `json:"orbit_class_description"`
-	OrbitClassRange       *string                       `json:"orbit_class_range"`
-	OrbitClassType        *OrbitClassOrbitClassTypeEnum `json:"orbit_class_type"`
+	OrbitClassDescription *string                       `json:"orbit_class_description,omitempty"`
+	OrbitClassRange       *string                       `json:"orbit_class_range,omitempty"`
+	OrbitClassType        *OrbitClassOrbitClassTypeEnum `json:"orbit_class_type,omitempty"`
 }

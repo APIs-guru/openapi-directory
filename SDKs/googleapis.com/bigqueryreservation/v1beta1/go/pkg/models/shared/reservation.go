@@ -1,11 +1,11 @@
 package shared
 
 type Reservation struct {
-	Concurrency          *string `json:"concurrency"`
-	CreationTime         *string `json:"creationTime"`
-	IgnoreIdleSlots      *bool   `json:"ignoreIdleSlots"`
-	MultiRegionAuxiliary *bool   `json:"multiRegionAuxiliary"`
-	Name                 *string `json:"name"`
-	SlotCapacity         *string `json:"slotCapacity"`
-	UpdateTime           *string `json:"updateTime"`
+	Concurrency          *string `json:"concurrency,omitempty"`
+	CreationTime         *string `json:"creationTime,omitempty"`
+	IgnoreIdleSlots      *bool   `json:"ignoreIdleSlots,omitempty"`
+	MultiRegionAuxiliary *bool   `json:"multiRegionAuxiliary,omitempty"`
+	Name                 *string `json:"name,omitempty"`
+	SlotCapacity         *string `json:"slotCapacity,omitempty"`
+	UpdateTime           *string `json:"updateTime,omitempty"`
 }

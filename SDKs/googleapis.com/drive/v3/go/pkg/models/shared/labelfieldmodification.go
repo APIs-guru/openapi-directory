@@ -5,12 +5,12 @@ import (
 )
 
 type LabelFieldModification struct {
-	FieldID            *string     `json:"fieldId"`
-	Kind               *string     `json:"kind"`
-	SetDateValues      []time.Time `json:"setDateValues"`
-	SetIntegerValues   []string    `json:"setIntegerValues"`
-	SetSelectionValues []string    `json:"setSelectionValues"`
-	SetTextValues      []string    `json:"setTextValues"`
-	SetUserValues      []string    `json:"setUserValues"`
-	UnsetValues        *bool       `json:"unsetValues"`
+	FieldID            *string     `json:"fieldId,omitempty"`
+	Kind               *string     `json:"kind,omitempty"`
+	SetDateValues      []time.Time `json:"setDateValues,omitempty"`
+	SetIntegerValues   []string    `json:"setIntegerValues,omitempty"`
+	SetSelectionValues []string    `json:"setSelectionValues,omitempty"`
+	SetTextValues      []string    `json:"setTextValues,omitempty"`
+	SetUserValues      []string    `json:"setUserValues,omitempty"`
+	UnsetValues        *bool       `json:"unsetValues,omitempty"`
 }

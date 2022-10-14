@@ -21,20 +21,20 @@ const (
 )
 
 type CloudflareWorkerRulePatchTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type CloudflareWorkerRulePatchTarget struct {
-	Headers      []CloudflareWorkerRulePatchTargetHeaders `json:"headers"`
-	SigningKeyID *string                                  `json:"signingKeyId"`
-	URL          *string                                  `json:"url"`
+	Headers      []CloudflareWorkerRulePatchTargetHeaders `json:"headers,omitempty"`
+	SigningKeyID *string                                  `json:"signingKeyId,omitempty"`
+	URL          *string                                  `json:"url,omitempty"`
 }
 
 type CloudflareWorkerRulePatch struct {
-	RequestMode *CloudflareWorkerRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *CloudflareWorkerRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                               `json:"source"`
-	Status      *CloudflareWorkerRulePatchStatusEnum      `json:"status"`
-	Target      *CloudflareWorkerRulePatchTarget          `json:"target"`
+	RequestMode *CloudflareWorkerRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *CloudflareWorkerRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                               `json:"source,omitempty"`
+	Status      *CloudflareWorkerRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *CloudflareWorkerRulePatchTarget          `json:"target,omitempty"`
 }

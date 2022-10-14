@@ -9,57 +9,57 @@ type SingleCollectionRequest struct {
 }
 
 type SingleCollection200ApplicationJSONCollectionInfo struct {
-	PostmanID   *string `json:"_postman_id"`
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
-	Schema      *string `json:"schema"`
+	PostmanID   *string `json:"_postman_id,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Schema      *string `json:"schema,omitempty"`
 }
 
 type SingleCollection200ApplicationJSONCollectionItemEventScript struct {
-	Exec *string `json:"exec"`
-	Type *string `json:"type"`
+	Exec *string `json:"exec,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type SingleCollection200ApplicationJSONCollectionItemEvent struct {
-	Listen *string                                                      `json:"listen"`
-	Script *SingleCollection200ApplicationJSONCollectionItemEventScript `json:"script"`
+	Listen *string                                                      `json:"listen,omitempty"`
+	Script *SingleCollection200ApplicationJSONCollectionItemEventScript `json:"script,omitempty"`
 }
 
 type SingleCollection200ApplicationJSONCollectionItemRequestBody struct {
-	Formdata []interface{} `json:"formdata"`
-	Mode     *string       `json:"mode"`
+	Formdata []interface{} `json:"formdata,omitempty"`
+	Mode     *string       `json:"mode,omitempty"`
 }
 
 type SingleCollection200ApplicationJSONCollectionItemRequestHeader struct {
-	Description *string `json:"description"`
-	Key         *string `json:"key"`
-	Value       *string `json:"value"`
+	Description *string `json:"description,omitempty"`
+	Key         *string `json:"key,omitempty"`
+	Value       *string `json:"value,omitempty"`
 }
 
 type SingleCollection200ApplicationJSONCollectionItemRequest struct {
-	Body        *SingleCollection200ApplicationJSONCollectionItemRequestBody    `json:"body"`
-	Description *string                                                         `json:"description"`
-	Header      []SingleCollection200ApplicationJSONCollectionItemRequestHeader `json:"header"`
-	Method      *string                                                         `json:"method"`
-	URL         *string                                                         `json:"url"`
+	Body        *SingleCollection200ApplicationJSONCollectionItemRequestBody    `json:"body,omitempty"`
+	Description *string                                                         `json:"description,omitempty"`
+	Header      []SingleCollection200ApplicationJSONCollectionItemRequestHeader `json:"header,omitempty"`
+	Method      *string                                                         `json:"method,omitempty"`
+	URL         *string                                                         `json:"url,omitempty"`
 }
 
 type SingleCollection200ApplicationJSONCollectionItem struct {
-	Event    []SingleCollection200ApplicationJSONCollectionItemEvent  `json:"event"`
-	ID       *string                                                  `json:"id"`
-	Name     *string                                                  `json:"name"`
-	Request  *SingleCollection200ApplicationJSONCollectionItemRequest `json:"request"`
-	Response []interface{}                                            `json:"response"`
+	Event    []SingleCollection200ApplicationJSONCollectionItemEvent  `json:"event,omitempty"`
+	ID       *string                                                  `json:"id,omitempty"`
+	Name     *string                                                  `json:"name,omitempty"`
+	Request  *SingleCollection200ApplicationJSONCollectionItemRequest `json:"request,omitempty"`
+	Response []interface{}                                            `json:"response,omitempty"`
 }
 
 type SingleCollection200ApplicationJSONCollection struct {
-	Info      *SingleCollection200ApplicationJSONCollectionInfo  `json:"info"`
-	Item      []SingleCollection200ApplicationJSONCollectionItem `json:"item"`
-	Variables []interface{}                                      `json:"variables"`
+	Info      *SingleCollection200ApplicationJSONCollectionInfo  `json:"info,omitempty"`
+	Item      []SingleCollection200ApplicationJSONCollectionItem `json:"item,omitempty"`
+	Variables []interface{}                                      `json:"variables,omitempty"`
 }
 
 type SingleCollection200ApplicationJSON struct {
-	Collection *SingleCollection200ApplicationJSONCollection `json:"collection"`
+	Collection *SingleCollection200ApplicationJSONCollection `json:"collection,omitempty"`
 }
 
 type SingleCollectionResponse struct {

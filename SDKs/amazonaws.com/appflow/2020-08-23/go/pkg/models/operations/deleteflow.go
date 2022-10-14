@@ -12,7 +12,7 @@ type DeleteFlowHeaders struct {
 
 type DeleteFlowRequestBody struct {
 	FlowName    string `json:"flowName"`
-	ForceDelete *bool  `json:"forceDelete"`
+	ForceDelete *bool  `json:"forceDelete,omitempty"`
 }
 
 type DeleteFlowRequest struct {

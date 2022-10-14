@@ -1,6 +1,6 @@
 package shared
 
 type TflAPIPresentationEntitiesTimetablesDisambiguationOption struct {
-	Description *string `json:"description"`
-	URI         *string `json:"uri"`
+	Description *string `json:"description,omitempty"`
+	URI         *string `json:"uri,omitempty"`
 }

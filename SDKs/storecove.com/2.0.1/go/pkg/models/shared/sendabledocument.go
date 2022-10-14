@@ -9,7 +9,7 @@ const (
 
 type SendableDocument struct {
 	DocumentType    SendableDocumentDocumentTypeDocumentTypeEnum `json:"documentType"`
-	Invoice         *Invoice                                     `json:"invoice"`
-	InvoiceResponse *DocumentInvoiceResponse                     `json:"invoiceResponse"`
-	RawDocumentData *RawDocumentData                             `json:"rawDocumentData"`
+	Invoice         *Invoice                                     `json:"invoice,omitempty"`
+	InvoiceResponse *DocumentInvoiceResponse                     `json:"invoiceResponse,omitempty"`
+	RawDocumentData *RawDocumentData                             `json:"rawDocumentData,omitempty"`
 }

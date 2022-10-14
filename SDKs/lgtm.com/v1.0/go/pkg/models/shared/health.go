@@ -9,7 +9,7 @@ const (
 )
 
 type Health struct {
-	Description *string           `json:"description"`
-	Details     map[string]Health `json:"details"`
-	Status      *HealthStatusEnum `json:"status"`
+	Description *string           `json:"description,omitempty"`
+	Details     map[string]Health `json:"details,omitempty"`
+	Status      *HealthStatusEnum `json:"status,omitempty"`
 }

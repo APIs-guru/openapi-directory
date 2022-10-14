@@ -5,11 +5,11 @@ import (
 )
 
 type ExecutionRecord struct {
-	DataPullEndTime   *time.Time           `json:"dataPullEndTime"`
-	DataPullStartTime *time.Time           `json:"dataPullStartTime"`
-	ExecutionID       *string              `json:"executionId"`
-	ExecutionResult   *ExecutionResult     `json:"executionResult"`
-	ExecutionStatus   *ExecutionStatusEnum `json:"executionStatus"`
-	LastUpdatedAt     *time.Time           `json:"lastUpdatedAt"`
-	StartedAt         *time.Time           `json:"startedAt"`
+	DataPullEndTime   *time.Time           `json:"dataPullEndTime,omitempty"`
+	DataPullStartTime *time.Time           `json:"dataPullStartTime,omitempty"`
+	ExecutionID       *string              `json:"executionId,omitempty"`
+	ExecutionResult   *ExecutionResult     `json:"executionResult,omitempty"`
+	ExecutionStatus   *ExecutionStatusEnum `json:"executionStatus,omitempty"`
+	LastUpdatedAt     *time.Time           `json:"lastUpdatedAt,omitempty"`
+	StartedAt         *time.Time           `json:"startedAt,omitempty"`
 }

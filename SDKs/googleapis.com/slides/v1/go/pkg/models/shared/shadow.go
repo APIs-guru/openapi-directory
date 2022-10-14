@@ -31,12 +31,12 @@ const (
 )
 
 type Shadow struct {
-	Alignment       *ShadowAlignmentEnum     `json:"alignment"`
-	Alpha           *float32                 `json:"alpha"`
-	BlurRadius      *Dimension               `json:"blurRadius"`
-	Color           *OpaqueColor             `json:"color"`
-	PropertyState   *ShadowPropertyStateEnum `json:"propertyState"`
-	RotateWithShape *bool                    `json:"rotateWithShape"`
-	Transform       *AffineTransform         `json:"transform"`
-	Type            *ShadowTypeEnum          `json:"type"`
+	Alignment       *ShadowAlignmentEnum     `json:"alignment,omitempty"`
+	Alpha           *float32                 `json:"alpha,omitempty"`
+	BlurRadius      *Dimension               `json:"blurRadius,omitempty"`
+	Color           *OpaqueColor             `json:"color,omitempty"`
+	PropertyState   *ShadowPropertyStateEnum `json:"propertyState,omitempty"`
+	RotateWithShape *bool                    `json:"rotateWithShape,omitempty"`
+	Transform       *AffineTransform         `json:"transform,omitempty"`
+	Type            *ShadowTypeEnum          `json:"type,omitempty"`
 }

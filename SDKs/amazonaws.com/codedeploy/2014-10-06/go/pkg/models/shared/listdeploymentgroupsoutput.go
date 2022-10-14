@@ -1,7 +1,7 @@
 package shared
 
 type ListDeploymentGroupsOutput struct {
-	ApplicationName  *string  `json:"applicationName"`
-	DeploymentGroups []string `json:"deploymentGroups"`
-	NextToken        *string  `json:"nextToken"`
+	ApplicationName  *string  `json:"applicationName,omitempty"`
+	DeploymentGroups []string `json:"deploymentGroups,omitempty"`
+	NextToken        *string  `json:"nextToken,omitempty"`
 }

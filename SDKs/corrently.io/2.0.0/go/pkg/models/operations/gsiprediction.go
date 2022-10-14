@@ -14,24 +14,24 @@ type GsiPredictionRequest struct {
 }
 
 type GsiPrediction200ApplicationJSONLocation struct {
-	City *string `json:"city"`
-	Zip  *string `json:"zip"`
+	City *string `json:"city,omitempty"`
+	Zip  *string `json:"zip,omitempty"`
 }
 
 type GsiPrediction200ApplicationJSONMatrixH0 struct {
-	Avg1 *string `json:"avg_1"`
-	Avg2 *string `json:"avg_2"`
-	Avg3 *string `json:"avg_3"`
+	Avg1 *string `json:"avg_1,omitempty"`
+	Avg2 *string `json:"avg_2,omitempty"`
+	Avg3 *string `json:"avg_3,omitempty"`
 }
 
 type GsiPrediction200ApplicationJSONMatrix struct {
-	H0 *GsiPrediction200ApplicationJSONMatrixH0 `json:"h0"`
+	H0 *GsiPrediction200ApplicationJSONMatrixH0 `json:"h0,omitempty"`
 }
 
 type GsiPrediction200ApplicationJSON struct {
-	Forecast []shared.ForecastItem                    `json:"forecast"`
-	Location *GsiPrediction200ApplicationJSONLocation `json:"location"`
-	Matrix   *GsiPrediction200ApplicationJSONMatrix   `json:"matrix"`
+	Forecast []shared.ForecastItem                    `json:"forecast,omitempty"`
+	Location *GsiPrediction200ApplicationJSONLocation `json:"location,omitempty"`
+	Matrix   *GsiPrediction200ApplicationJSONMatrix   `json:"matrix,omitempty"`
 }
 
 type GsiPredictionResponse struct {

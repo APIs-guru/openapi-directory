@@ -1,6 +1,6 @@
 package shared
 
 type CcTotalsByCandidatePage struct {
-	Pagination *OffsetInfo           `json:"pagination"`
-	Results    []CcTotalsByCandidate `json:"results"`
+	Pagination *OffsetInfo           `json:"pagination,omitempty"`
+	Results    []CcTotalsByCandidate `json:"results,omitempty"`
 }

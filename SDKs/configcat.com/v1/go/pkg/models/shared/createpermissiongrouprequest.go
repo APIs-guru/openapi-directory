@@ -1,26 +1,26 @@
 package shared
 
 type CreatePermissionGroupRequest struct {
-	AccessType                   *AccessTypeEnum            `json:"accessType"`
-	CanCreateOrUpdateConfig      *bool                      `json:"canCreateOrUpdateConfig"`
-	CanCreateOrUpdateEnvironment *bool                      `json:"canCreateOrUpdateEnvironment"`
-	CanCreateOrUpdateSetting     *bool                      `json:"canCreateOrUpdateSetting"`
-	CanCreateOrUpdateTag         *bool                      `json:"canCreateOrUpdateTag"`
-	CanDeleteConfig              *bool                      `json:"canDeleteConfig"`
-	CanDeleteEnvironment         *bool                      `json:"canDeleteEnvironment"`
-	CanDeleteSetting             *bool                      `json:"canDeleteSetting"`
-	CanDeleteTag                 *bool                      `json:"canDeleteTag"`
-	CanManageIntegrations        *bool                      `json:"canManageIntegrations"`
-	CanManageMembers             *bool                      `json:"canManageMembers"`
-	CanManageProductPreferences  *bool                      `json:"canManageProductPreferences"`
-	CanManageWebhook             *bool                      `json:"canManageWebhook"`
-	CanRotateSdkKey              *bool                      `json:"canRotateSdkKey"`
-	CanTagSetting                *bool                      `json:"canTagSetting"`
-	CanUseExportImport           *bool                      `json:"canUseExportImport"`
-	CanViewProductAuditLog       *bool                      `json:"canViewProductAuditLog"`
-	CanViewProductStatistics     *bool                      `json:"canViewProductStatistics"`
-	CanViewSdkKey                *bool                      `json:"canViewSdkKey"`
-	EnvironmentAccesses          []EnvironmentAccessModel   `json:"environmentAccesses"`
+	AccessType                   *AccessTypeEnum            `json:"accessType,omitempty"`
+	CanCreateOrUpdateConfig      *bool                      `json:"canCreateOrUpdateConfig,omitempty"`
+	CanCreateOrUpdateEnvironment *bool                      `json:"canCreateOrUpdateEnvironment,omitempty"`
+	CanCreateOrUpdateSetting     *bool                      `json:"canCreateOrUpdateSetting,omitempty"`
+	CanCreateOrUpdateTag         *bool                      `json:"canCreateOrUpdateTag,omitempty"`
+	CanDeleteConfig              *bool                      `json:"canDeleteConfig,omitempty"`
+	CanDeleteEnvironment         *bool                      `json:"canDeleteEnvironment,omitempty"`
+	CanDeleteSetting             *bool                      `json:"canDeleteSetting,omitempty"`
+	CanDeleteTag                 *bool                      `json:"canDeleteTag,omitempty"`
+	CanManageIntegrations        *bool                      `json:"canManageIntegrations,omitempty"`
+	CanManageMembers             *bool                      `json:"canManageMembers,omitempty"`
+	CanManageProductPreferences  *bool                      `json:"canManageProductPreferences,omitempty"`
+	CanManageWebhook             *bool                      `json:"canManageWebhook,omitempty"`
+	CanRotateSdkKey              *bool                      `json:"canRotateSdkKey,omitempty"`
+	CanTagSetting                *bool                      `json:"canTagSetting,omitempty"`
+	CanUseExportImport           *bool                      `json:"canUseExportImport,omitempty"`
+	CanViewProductAuditLog       *bool                      `json:"canViewProductAuditLog,omitempty"`
+	CanViewProductStatistics     *bool                      `json:"canViewProductStatistics,omitempty"`
+	CanViewSdkKey                *bool                      `json:"canViewSdkKey,omitempty"`
+	EnvironmentAccesses          []EnvironmentAccessModel   `json:"environmentAccesses,omitempty"`
 	Name                         string                     `json:"name"`
-	NewEnvironmentAccessType     *EnvironmentAccessTypeEnum `json:"newEnvironmentAccessType"`
+	NewEnvironmentAccessType     *EnvironmentAccessTypeEnum `json:"newEnvironmentAccessType,omitempty"`
 }

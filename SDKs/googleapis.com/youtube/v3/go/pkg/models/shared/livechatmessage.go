@@ -1,9 +1,9 @@
 package shared
 
 type LiveChatMessage struct {
-	AuthorDetails *LiveChatMessageAuthorDetails `json:"authorDetails"`
-	Etag          *string                       `json:"etag"`
-	ID            *string                       `json:"id"`
-	Kind          *string                       `json:"kind"`
-	Snippet       *LiveChatMessageSnippet       `json:"snippet"`
+	AuthorDetails *LiveChatMessageAuthorDetails `json:"authorDetails,omitempty"`
+	Etag          *string                       `json:"etag,omitempty"`
+	ID            *string                       `json:"id,omitempty"`
+	Kind          *string                       `json:"kind,omitempty"`
+	Snippet       *LiveChatMessageSnippet       `json:"snippet,omitempty"`
 }

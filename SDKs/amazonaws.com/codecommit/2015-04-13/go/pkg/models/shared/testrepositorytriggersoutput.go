@@ -1,6 +1,6 @@
 package shared
 
 type TestRepositoryTriggersOutput struct {
-	FailedExecutions     []RepositoryTriggerExecutionFailure `json:"failedExecutions"`
-	SuccessfulExecutions []string                            `json:"successfulExecutions"`
+	FailedExecutions     []RepositoryTriggerExecutionFailure `json:"failedExecutions,omitempty"`
+	SuccessfulExecutions []string                            `json:"successfulExecutions,omitempty"`
 }

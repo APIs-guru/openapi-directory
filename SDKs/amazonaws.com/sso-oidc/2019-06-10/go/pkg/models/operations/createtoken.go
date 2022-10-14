@@ -17,12 +17,12 @@ type CreateTokenHeaders struct {
 type CreateTokenRequestBody struct {
 	ClientID     string   `json:"clientId"`
 	ClientSecret string   `json:"clientSecret"`
-	Code         *string  `json:"code"`
+	Code         *string  `json:"code,omitempty"`
 	DeviceCode   string   `json:"deviceCode"`
 	GrantType    string   `json:"grantType"`
-	RedirectURI  *string  `json:"redirectUri"`
-	RefreshToken *string  `json:"refreshToken"`
-	Scope        []string `json:"scope"`
+	RedirectURI  *string  `json:"redirectUri,omitempty"`
+	RefreshToken *string  `json:"refreshToken,omitempty"`
+	Scope        []string `json:"scope,omitempty"`
 }
 
 type CreateTokenRequest struct {

@@ -15,7 +15,7 @@ type EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyEmails struct {
 }
 
 type EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyGroups struct {
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }
 
 type EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyName struct {
@@ -25,7 +25,7 @@ type EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyName struct {
 
 type EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBody struct {
 	Emails   []EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyEmails `json:"emails"`
-	Groups   []EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyGroups `json:"groups"`
+	Groups   []EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyGroups `json:"groups,omitempty"`
 	Name     EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyName     `json:"name"`
 	Schemas  []string                                                           `json:"schemas"`
 	UserName string                                                             `json:"userName"`

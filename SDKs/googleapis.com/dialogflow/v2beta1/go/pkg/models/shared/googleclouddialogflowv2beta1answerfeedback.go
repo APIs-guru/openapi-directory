@@ -10,10 +10,10 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1AnswerFeedback struct {
-	AgentAssistantDetailFeedback *GoogleCloudDialogflowV2beta1AgentAssistantFeedback             `json:"agentAssistantDetailFeedback"`
-	ClickTime                    *string                                                         `json:"clickTime"`
-	Clicked                      *bool                                                           `json:"clicked"`
-	CorrectnessLevel             *GoogleCloudDialogflowV2beta1AnswerFeedbackCorrectnessLevelEnum `json:"correctnessLevel"`
-	DisplayTime                  *string                                                         `json:"displayTime"`
-	Displayed                    *bool                                                           `json:"displayed"`
+	AgentAssistantDetailFeedback *GoogleCloudDialogflowV2beta1AgentAssistantFeedback             `json:"agentAssistantDetailFeedback,omitempty"`
+	ClickTime                    *string                                                         `json:"clickTime,omitempty"`
+	Clicked                      *bool                                                           `json:"clicked,omitempty"`
+	CorrectnessLevel             *GoogleCloudDialogflowV2beta1AnswerFeedbackCorrectnessLevelEnum `json:"correctnessLevel,omitempty"`
+	DisplayTime                  *string                                                         `json:"displayTime,omitempty"`
+	Displayed                    *bool                                                           `json:"displayed,omitempty"`
 }

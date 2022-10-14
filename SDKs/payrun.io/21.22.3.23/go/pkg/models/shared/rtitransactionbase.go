@@ -5,9 +5,9 @@ import (
 )
 
 type RtiTransactionBaseRtiTransactionBaseEmployerCoreEmployerCore struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type RtiTransactionBaseRtiTransactionBaseTransactionStatusTransactionStatusEnum string
@@ -21,16 +21,16 @@ const (
 )
 
 type RtiTransactionBaseRtiTransactionBaseRtiTransactionBase struct {
-	EmployerCore      *RtiTransactionBaseRtiTransactionBaseEmployerCoreEmployerCore               `json:"EmployerCore"`
-	RequestData       *string                                                                     `json:"RequestData"`
-	ResponseData      *string                                                                     `json:"ResponseData"`
-	RtiType           *string                                                                     `json:"RtiType"`
-	TaxYear           *int32                                                                      `json:"TaxYear"`
-	Timestamp         *time.Time                                                                  `json:"Timestamp"`
-	TransactionStatus *RtiTransactionBaseRtiTransactionBaseTransactionStatusTransactionStatusEnum `json:"TransactionStatus"`
-	TransmissionDate  *time.Time                                                                  `json:"TransmissionDate"`
+	EmployerCore      *RtiTransactionBaseRtiTransactionBaseEmployerCoreEmployerCore               `json:"EmployerCore,omitempty"`
+	RequestData       *string                                                                     `json:"RequestData,omitempty"`
+	ResponseData      *string                                                                     `json:"ResponseData,omitempty"`
+	RtiType           *string                                                                     `json:"RtiType,omitempty"`
+	TaxYear           *int32                                                                      `json:"TaxYear,omitempty"`
+	Timestamp         *time.Time                                                                  `json:"Timestamp,omitempty"`
+	TransactionStatus *RtiTransactionBaseRtiTransactionBaseTransactionStatusTransactionStatusEnum `json:"TransactionStatus,omitempty"`
+	TransmissionDate  *time.Time                                                                  `json:"TransmissionDate,omitempty"`
 }
 
 type RtiTransactionBase struct {
-	RtiTransactionBase *RtiTransactionBaseRtiTransactionBaseRtiTransactionBase `json:"RtiTransactionBase"`
+	RtiTransactionBase *RtiTransactionBaseRtiTransactionBaseRtiTransactionBase `json:"RtiTransactionBase,omitempty"`
 }

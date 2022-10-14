@@ -27,23 +27,23 @@ const (
 )
 
 type RunGarbageCollection201ApplicationJSONGarbageCollection struct {
-	BlobsDeleted *int64                                                             `json:"blobs_deleted"`
-	CreatedAt    *time.Time                                                         `json:"created_at"`
-	FreedBytes   *int64                                                             `json:"freed_bytes"`
-	RegistryName *string                                                            `json:"registry_name"`
-	Status       *RunGarbageCollection201ApplicationJSONGarbageCollectionStatusEnum `json:"status"`
-	UpdatedAt    *time.Time                                                         `json:"updated_at"`
-	UUID         *string                                                            `json:"uuid"`
+	BlobsDeleted *int64                                                             `json:"blobs_deleted,omitempty"`
+	CreatedAt    *time.Time                                                         `json:"created_at,omitempty"`
+	FreedBytes   *int64                                                             `json:"freed_bytes,omitempty"`
+	RegistryName *string                                                            `json:"registry_name,omitempty"`
+	Status       *RunGarbageCollection201ApplicationJSONGarbageCollectionStatusEnum `json:"status,omitempty"`
+	UpdatedAt    *time.Time                                                         `json:"updated_at,omitempty"`
+	UUID         *string                                                            `json:"uuid,omitempty"`
 }
 
 type RunGarbageCollection201ApplicationJSON struct {
-	GarbageCollection *RunGarbageCollection201ApplicationJSONGarbageCollection `json:"garbage_collection"`
+	GarbageCollection *RunGarbageCollection201ApplicationJSONGarbageCollection `json:"garbage_collection,omitempty"`
 }
 
 type RunGarbageCollection401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type RunGarbageCollectionResponse struct {

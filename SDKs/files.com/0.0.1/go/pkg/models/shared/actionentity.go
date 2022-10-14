@@ -73,17 +73,17 @@ const (
 )
 
 type ActionEntity struct {
-	Action      *ActionEntityActionEnum      `json:"action"`
-	Destination *string                      `json:"destination"`
-	Display     *string                      `json:"display"`
-	FailureType *ActionEntityFailureTypeEnum `json:"failure_type"`
-	ID          *int32                       `json:"id"`
-	Interface   *ActionEntityInterfaceEnum   `json:"interface"`
-	IP          *string                      `json:"ip"`
-	Path        *string                      `json:"path"`
-	Source      *string                      `json:"source"`
-	Targets     []string                     `json:"targets"`
-	UserID      *int32                       `json:"user_id"`
-	Username    *string                      `json:"username"`
-	When        *time.Time                   `json:"when"`
+	Action      *ActionEntityActionEnum      `json:"action,omitempty"`
+	Destination *string                      `json:"destination,omitempty"`
+	Display     *string                      `json:"display,omitempty"`
+	FailureType *ActionEntityFailureTypeEnum `json:"failure_type,omitempty"`
+	ID          *int32                       `json:"id,omitempty"`
+	Interface   *ActionEntityInterfaceEnum   `json:"interface,omitempty"`
+	IP          *string                      `json:"ip,omitempty"`
+	Path        *string                      `json:"path,omitempty"`
+	Source      *string                      `json:"source,omitempty"`
+	Targets     []string                     `json:"targets,omitempty"`
+	UserID      *int32                       `json:"user_id,omitempty"`
+	Username    *string                      `json:"username,omitempty"`
+	When        *time.Time                   `json:"when,omitempty"`
 }

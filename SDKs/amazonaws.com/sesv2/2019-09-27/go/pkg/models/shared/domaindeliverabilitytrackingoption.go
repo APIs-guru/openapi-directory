@@ -5,7 +5,7 @@ import (
 )
 
 type DomainDeliverabilityTrackingOption struct {
-	Domain                       *string                       `json:"Domain"`
-	InboxPlacementTrackingOption *InboxPlacementTrackingOption `json:"InboxPlacementTrackingOption"`
-	SubscriptionStartDate        *time.Time                    `json:"SubscriptionStartDate"`
+	Domain                       *string                       `json:"Domain,omitempty"`
+	InboxPlacementTrackingOption *InboxPlacementTrackingOption `json:"InboxPlacementTrackingOption,omitempty"`
+	SubscriptionStartDate        *time.Time                    `json:"SubscriptionStartDate,omitempty"`
 }

@@ -17,8 +17,8 @@ const (
 )
 
 type CheckResponse struct {
-	DebugString *string                      `json:"debugString"`
-	ErrorCode   []CheckResponseErrorCodeEnum `json:"errorCode"`
-	Linked      *bool                        `json:"linked"`
-	MaxAge      *string                      `json:"maxAge"`
+	DebugString *string                      `json:"debugString,omitempty"`
+	ErrorCode   []CheckResponseErrorCodeEnum `json:"errorCode,omitempty"`
+	Linked      *bool                        `json:"linked,omitempty"`
+	MaxAge      *string                      `json:"maxAge,omitempty"`
 }

@@ -30,14 +30,14 @@ const (
 )
 
 type CustomBiddingAlgorithm struct {
-	AdvertiserID                *string                                                `json:"advertiserId"`
-	CustomBiddingAlgorithmID    *string                                                `json:"customBiddingAlgorithmId"`
-	CustomBiddingAlgorithmState *CustomBiddingAlgorithmCustomBiddingAlgorithmStateEnum `json:"customBiddingAlgorithmState"`
-	CustomBiddingAlgorithmType  *CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum  `json:"customBiddingAlgorithmType"`
-	DisplayName                 *string                                                `json:"displayName"`
-	EntityStatus                *CustomBiddingAlgorithmEntityStatusEnum                `json:"entityStatus"`
-	ModelReadiness              []CustomBiddingModelReadinessState                     `json:"modelReadiness"`
-	Name                        *string                                                `json:"name"`
-	PartnerID                   *string                                                `json:"partnerId"`
-	SharedAdvertiserIds         []string                                               `json:"sharedAdvertiserIds"`
+	AdvertiserID                *string                                                `json:"advertiserId,omitempty"`
+	CustomBiddingAlgorithmID    *string                                                `json:"customBiddingAlgorithmId,omitempty"`
+	CustomBiddingAlgorithmState *CustomBiddingAlgorithmCustomBiddingAlgorithmStateEnum `json:"customBiddingAlgorithmState,omitempty"`
+	CustomBiddingAlgorithmType  *CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum  `json:"customBiddingAlgorithmType,omitempty"`
+	DisplayName                 *string                                                `json:"displayName,omitempty"`
+	EntityStatus                *CustomBiddingAlgorithmEntityStatusEnum                `json:"entityStatus,omitempty"`
+	ModelReadiness              []CustomBiddingModelReadinessState                     `json:"modelReadiness,omitempty"`
+	Name                        *string                                                `json:"name,omitempty"`
+	PartnerID                   *string                                                `json:"partnerId,omitempty"`
+	SharedAdvertiserIds         []string                                               `json:"sharedAdvertiserIds,omitempty"`
 }

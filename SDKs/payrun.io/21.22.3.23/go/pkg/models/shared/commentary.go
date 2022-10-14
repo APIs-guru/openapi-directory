@@ -5,24 +5,24 @@ import (
 )
 
 type CommentaryCommentaryEmployeeEmployee struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type CommentaryCommentaryPayRunPayRun struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type CommentaryCommentaryCommentary struct {
-	Created  *time.Time                            `json:"Created"`
-	Detail   *string                               `json:"Detail"`
-	Employee *CommentaryCommentaryEmployeeEmployee `json:"Employee"`
-	PayRun   *CommentaryCommentaryPayRunPayRun     `json:"PayRun"`
+	Created  *time.Time                            `json:"Created,omitempty"`
+	Detail   *string                               `json:"Detail,omitempty"`
+	Employee *CommentaryCommentaryEmployeeEmployee `json:"Employee,omitempty"`
+	PayRun   *CommentaryCommentaryPayRunPayRun     `json:"PayRun,omitempty"`
 }
 
 type Commentary struct {
-	Commentary *CommentaryCommentaryCommentary `json:"Commentary"`
+	Commentary *CommentaryCommentaryCommentary `json:"Commentary,omitempty"`
 }

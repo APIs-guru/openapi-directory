@@ -1,5 +1,5 @@
 package shared
 
 type SingleMasterConfiguration struct {
-	MessageTTLSeconds *int64 `json:"MessageTtlSeconds"`
+	MessageTTLSeconds *int64 `json:"MessageTtlSeconds,omitempty"`
 }

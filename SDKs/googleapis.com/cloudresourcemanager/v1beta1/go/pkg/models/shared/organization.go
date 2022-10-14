@@ -9,10 +9,10 @@ const (
 )
 
 type Organization struct {
-	CreationTime   *string                         `json:"creationTime"`
-	DisplayName    *string                         `json:"displayName"`
-	LifecycleState *OrganizationLifecycleStateEnum `json:"lifecycleState"`
-	Name           *string                         `json:"name"`
-	OrganizationID *string                         `json:"organizationId"`
-	Owner          *OrganizationOwner              `json:"owner"`
+	CreationTime   *string                         `json:"creationTime,omitempty"`
+	DisplayName    *string                         `json:"displayName,omitempty"`
+	LifecycleState *OrganizationLifecycleStateEnum `json:"lifecycleState,omitempty"`
+	Name           *string                         `json:"name,omitempty"`
+	OrganizationID *string                         `json:"organizationId,omitempty"`
+	Owner          *OrganizationOwner              `json:"owner,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeExportOutput struct {
-	ExportDescription *ExportDescription `json:"ExportDescription"`
+	ExportDescription *ExportDescription `json:"ExportDescription,omitempty"`
 }

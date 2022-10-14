@@ -18,18 +18,18 @@ type GetFileFromURIIDRequest struct {
 }
 
 type GetFileFromURIID400ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetFileFromURIID401ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetFileFromURIID404ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetFileFromURIIDResponse struct {

@@ -14,6 +14,6 @@ const (
 )
 
 type ContentDurationAssignedTargetingOptionDetails struct {
-	ContentDuration   *ContentDurationAssignedTargetingOptionDetailsContentDurationEnum `json:"contentDuration"`
-	TargetingOptionID *string                                                           `json:"targetingOptionId"`
+	ContentDuration   *ContentDurationAssignedTargetingOptionDetailsContentDurationEnum `json:"contentDuration,omitempty"`
+	TargetingOptionID *string                                                           `json:"targetingOptionId,omitempty"`
 }

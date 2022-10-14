@@ -1,5 +1,5 @@
 package shared
 
 type InstancesExportRequest struct {
-	ExportContext *ExportContext `json:"exportContext"`
+	ExportContext *ExportContext `json:"exportContext,omitempty"`
 }

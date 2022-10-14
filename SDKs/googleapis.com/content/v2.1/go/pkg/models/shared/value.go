@@ -1,9 +1,9 @@
 package shared
 
 type Value struct {
-	CarrierRateName *string `json:"carrierRateName"`
-	FlatRate        *Price  `json:"flatRate"`
-	NoShipping      *bool   `json:"noShipping"`
-	PricePercentage *string `json:"pricePercentage"`
-	SubtableName    *string `json:"subtableName"`
+	CarrierRateName *string `json:"carrierRateName,omitempty"`
+	FlatRate        *Price  `json:"flatRate,omitempty"`
+	NoShipping      *bool   `json:"noShipping,omitempty"`
+	PricePercentage *string `json:"pricePercentage,omitempty"`
+	SubtableName    *string `json:"subtableName,omitempty"`
 }

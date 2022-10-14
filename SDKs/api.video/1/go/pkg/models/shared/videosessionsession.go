@@ -5,7 +5,7 @@ import (
 )
 
 type VideoSessionSession struct {
-	EndedAt   *time.Time `json:"endedAt"`
-	LoadedAt  *time.Time `json:"loadedAt"`
-	SessionID *string    `json:"sessionId"`
+	EndedAt   *time.Time `json:"endedAt,omitempty"`
+	LoadedAt  *time.Time `json:"loadedAt,omitempty"`
+	SessionID *string    `json:"sessionId,omitempty"`
 }

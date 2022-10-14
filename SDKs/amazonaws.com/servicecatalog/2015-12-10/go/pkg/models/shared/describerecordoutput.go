@@ -1,7 +1,7 @@
 package shared
 
 type DescribeRecordOutput struct {
-	NextPageToken *string        `json:"NextPageToken"`
-	RecordDetail  *RecordDetail  `json:"RecordDetail"`
-	RecordOutputs []RecordOutput `json:"RecordOutputs"`
+	NextPageToken *string        `json:"NextPageToken,omitempty"`
+	RecordDetail  *RecordDetail  `json:"RecordDetail,omitempty"`
+	RecordOutputs []RecordOutput `json:"RecordOutputs,omitempty"`
 }

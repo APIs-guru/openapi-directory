@@ -1,5 +1,5 @@
 package shared
 
 type UpdateMailboxPasswordRequest struct {
-	Password *string `json:"password"`
+	Password *string `json:"password,omitempty"`
 }

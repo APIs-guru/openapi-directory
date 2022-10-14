@@ -1,10 +1,10 @@
 package shared
 
 type ResetPasswordTokenValidateResponse struct {
-	AllowSystemGlobalWeakPassword *bool                  `json:"allowSystemGlobalWeakPassword"`
+	AllowSystemGlobalWeakPassword *bool                  `json:"allowSystemGlobalWeakPassword,omitempty"`
 	FirstName                     string                 `json:"firstName"`
-	Gender                        *string                `json:"gender"`
+	Gender                        *string                `json:"gender,omitempty"`
 	LastName                      string                 `json:"lastName"`
-	LoginPasswordPolicies         *LoginPasswordPolicies `json:"loginPasswordPolicies"`
-	Title                         *string                `json:"title"`
+	LoginPasswordPolicies         *LoginPasswordPolicies `json:"loginPasswordPolicies,omitempty"`
+	Title                         *string                `json:"title,omitempty"`
 }

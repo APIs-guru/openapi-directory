@@ -26,11 +26,11 @@ const (
 )
 
 type GoogleFirestoreAdminV1Database struct {
-	AppEngineIntegrationMode *GoogleFirestoreAdminV1DatabaseAppEngineIntegrationModeEnum `json:"appEngineIntegrationMode"`
-	ConcurrencyMode          *GoogleFirestoreAdminV1DatabaseConcurrencyModeEnum          `json:"concurrencyMode"`
-	Etag                     *string                                                     `json:"etag"`
-	KeyPrefix                *string                                                     `json:"keyPrefix"`
-	LocationID               *string                                                     `json:"locationId"`
-	Name                     *string                                                     `json:"name"`
-	Type                     *GoogleFirestoreAdminV1DatabaseTypeEnum                     `json:"type"`
+	AppEngineIntegrationMode *GoogleFirestoreAdminV1DatabaseAppEngineIntegrationModeEnum `json:"appEngineIntegrationMode,omitempty"`
+	ConcurrencyMode          *GoogleFirestoreAdminV1DatabaseConcurrencyModeEnum          `json:"concurrencyMode,omitempty"`
+	Etag                     *string                                                     `json:"etag,omitempty"`
+	KeyPrefix                *string                                                     `json:"keyPrefix,omitempty"`
+	LocationID               *string                                                     `json:"locationId,omitempty"`
+	Name                     *string                                                     `json:"name,omitempty"`
+	Type                     *GoogleFirestoreAdminV1DatabaseTypeEnum                     `json:"type,omitempty"`
 }

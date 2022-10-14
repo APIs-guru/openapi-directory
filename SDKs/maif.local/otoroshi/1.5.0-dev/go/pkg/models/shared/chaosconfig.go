@@ -1,9 +1,9 @@
 package shared
 
 type ChaosConfig struct {
-	BadResponsesFaultConfig     *BadResponsesFaultConfig     `json:"badResponsesFaultConfig"`
+	BadResponsesFaultConfig     *BadResponsesFaultConfig     `json:"badResponsesFaultConfig,omitempty"`
 	Enabled                     bool                         `json:"enabled"`
-	LargeRequestFaultConfig     *LargeRequestFaultConfig     `json:"largeRequestFaultConfig"`
-	LargeResponseFaultConfig    *LargeResponseFaultConfig    `json:"largeResponseFaultConfig"`
-	LatencyInjectionFaultConfig *LatencyInjectionFaultConfig `json:"latencyInjectionFaultConfig"`
+	LargeRequestFaultConfig     *LargeRequestFaultConfig     `json:"largeRequestFaultConfig,omitempty"`
+	LargeResponseFaultConfig    *LargeResponseFaultConfig    `json:"largeResponseFaultConfig,omitempty"`
+	LatencyInjectionFaultConfig *LatencyInjectionFaultConfig `json:"latencyInjectionFaultConfig,omitempty"`
 }

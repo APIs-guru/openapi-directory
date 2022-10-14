@@ -8,7 +8,7 @@ type Facility struct {
 	MetroArea           string   `json:"metro_area"`
 	Name                string   `json:"name"`
 	OrganisationName    string   `json:"organisation_name"`
-	PeeringdbFacilityID *int32   `json:"peeringdb_facility_id"`
+	PeeringdbFacilityID *int32   `json:"peeringdb_facility_id,omitempty"`
 	Pops                []string `json:"pops"`
 	PostalCode          string   `json:"postal_code"`
 	StreetAddress       string   `json:"street_address"`

@@ -8,7 +8,7 @@ const (
 )
 
 type Gateway struct {
-	Type     *GatewayTypeEnum `json:"type"`
-	URI      *string          `json:"uri"`
-	UserPort *int32           `json:"userPort"`
+	Type     *GatewayTypeEnum `json:"type,omitempty"`
+	URI      *string          `json:"uri,omitempty"`
+	UserPort *int32           `json:"userPort,omitempty"`
 }

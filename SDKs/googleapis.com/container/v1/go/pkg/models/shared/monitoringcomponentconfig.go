@@ -11,5 +11,5 @@ const (
 )
 
 type MonitoringComponentConfig struct {
-	EnableComponents []MonitoringComponentConfigEnableComponentsEnum `json:"enableComponents"`
+	EnableComponents []MonitoringComponentConfigEnableComponentsEnum `json:"enableComponents,omitempty"`
 }

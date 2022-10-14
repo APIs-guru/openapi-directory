@@ -1,6 +1,6 @@
 package shared
 
 type SyncResponse struct {
-	Payload   *SyncResponsePayload `json:"payload"`
-	RequestID *string              `json:"requestId"`
+	Payload   *SyncResponsePayload `json:"payload,omitempty"`
+	RequestID *string              `json:"requestId,omitempty"`
 }

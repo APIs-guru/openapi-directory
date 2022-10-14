@@ -1,5 +1,5 @@
 package shared
 
 type NetworkTags struct {
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags,omitempty"`
 }

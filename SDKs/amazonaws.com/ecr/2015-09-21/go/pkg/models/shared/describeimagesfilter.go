@@ -1,5 +1,5 @@
 package shared
 
 type DescribeImagesFilter struct {
-	TagStatus *TagStatusEnum `json:"tagStatus"`
+	TagStatus *TagStatusEnum `json:"tagStatus,omitempty"`
 }

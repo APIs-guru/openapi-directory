@@ -17,9 +17,9 @@ const (
 )
 
 type ComputeScheduling struct {
-	AutomaticRestart  *bool                                   `json:"automaticRestart"`
-	MinNodeCpus       *int32                                  `json:"minNodeCpus"`
-	NodeAffinities    []SchedulingNodeAffinity                `json:"nodeAffinities"`
-	OnHostMaintenance *ComputeSchedulingOnHostMaintenanceEnum `json:"onHostMaintenance"`
-	RestartType       *ComputeSchedulingRestartTypeEnum       `json:"restartType"`
+	AutomaticRestart  *bool                                   `json:"automaticRestart,omitempty"`
+	MinNodeCpus       *int32                                  `json:"minNodeCpus,omitempty"`
+	NodeAffinities    []SchedulingNodeAffinity                `json:"nodeAffinities,omitempty"`
+	OnHostMaintenance *ComputeSchedulingOnHostMaintenanceEnum `json:"onHostMaintenance,omitempty"`
+	RestartType       *ComputeSchedulingRestartTypeEnum       `json:"restartType,omitempty"`
 }

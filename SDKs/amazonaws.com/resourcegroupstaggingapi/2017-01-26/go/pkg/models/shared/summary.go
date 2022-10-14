@@ -1,10 +1,10 @@
 package shared
 
 type Summary struct {
-	LastUpdated           *string           `json:"LastUpdated"`
-	NonCompliantResources *int64            `json:"NonCompliantResources"`
-	Region                *string           `json:"Region"`
-	ResourceType          *string           `json:"ResourceType"`
-	TargetID              *string           `json:"TargetId"`
-	TargetIDType          *TargetIDTypeEnum `json:"TargetIdType"`
+	LastUpdated           *string           `json:"LastUpdated,omitempty"`
+	NonCompliantResources *int64            `json:"NonCompliantResources,omitempty"`
+	Region                *string           `json:"Region,omitempty"`
+	ResourceType          *string           `json:"ResourceType,omitempty"`
+	TargetID              *string           `json:"TargetId,omitempty"`
+	TargetIDType          *TargetIDTypeEnum `json:"TargetIdType,omitempty"`
 }

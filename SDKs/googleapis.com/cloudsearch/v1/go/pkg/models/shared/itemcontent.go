@@ -10,8 +10,8 @@ const (
 )
 
 type ItemContent struct {
-	ContentDataRef *UploadItemRef                `json:"contentDataRef"`
-	ContentFormat  *ItemContentContentFormatEnum `json:"contentFormat"`
-	Hash           *string                       `json:"hash"`
-	InlineContent  *string                       `json:"inlineContent"`
+	ContentDataRef *UploadItemRef                `json:"contentDataRef,omitempty"`
+	ContentFormat  *ItemContentContentFormatEnum `json:"contentFormat,omitempty"`
+	Hash           *string                       `json:"hash,omitempty"`
+	InlineContent  *string                       `json:"inlineContent,omitempty"`
 }

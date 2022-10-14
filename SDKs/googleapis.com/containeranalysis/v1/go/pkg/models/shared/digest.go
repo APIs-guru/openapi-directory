@@ -1,6 +1,6 @@
 package shared
 
 type Digest struct {
-	Algo        *string `json:"algo"`
-	DigestBytes *string `json:"digestBytes"`
+	Algo        *string `json:"algo,omitempty"`
+	DigestBytes *string `json:"digestBytes,omitempty"`
 }

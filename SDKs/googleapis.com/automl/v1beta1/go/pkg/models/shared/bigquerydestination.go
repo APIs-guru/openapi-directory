@@ -1,5 +1,5 @@
 package shared
 
 type BigQueryDestination struct {
-	OutputURI *string `json:"outputUri"`
+	OutputURI *string `json:"outputUri,omitempty"`
 }

@@ -8,9 +8,9 @@ const (
 )
 
 type ReplaceAllShapesWithSheetsChartRequest struct {
-	ChartID       *int32                                                 `json:"chartId"`
-	ContainsText  *SubstringMatchCriteria                                `json:"containsText"`
-	LinkingMode   *ReplaceAllShapesWithSheetsChartRequestLinkingModeEnum `json:"linkingMode"`
-	PageObjectIds []string                                               `json:"pageObjectIds"`
-	SpreadsheetID *string                                                `json:"spreadsheetId"`
+	ChartID       *int32                                                 `json:"chartId,omitempty"`
+	ContainsText  *SubstringMatchCriteria                                `json:"containsText,omitempty"`
+	LinkingMode   *ReplaceAllShapesWithSheetsChartRequestLinkingModeEnum `json:"linkingMode,omitempty"`
+	PageObjectIds []string                                               `json:"pageObjectIds,omitempty"`
+	SpreadsheetID *string                                                `json:"spreadsheetId,omitempty"`
 }

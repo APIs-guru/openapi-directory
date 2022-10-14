@@ -1,5 +1,5 @@
 package shared
 
 type Standard struct {
-	Verify *bool `json:"verify"`
+	Verify *bool `json:"verify,omitempty"`
 }

@@ -5,15 +5,15 @@ import (
 )
 
 type Events struct {
-	AccessRole       *string         `json:"accessRole"`
-	DefaultReminders []EventReminder `json:"defaultReminders"`
-	Description      *string         `json:"description"`
-	Etag             *string         `json:"etag"`
-	Items            []Event         `json:"items"`
-	Kind             *string         `json:"kind"`
-	NextPageToken    *string         `json:"nextPageToken"`
-	NextSyncToken    *string         `json:"nextSyncToken"`
-	Summary          *string         `json:"summary"`
-	TimeZone         *string         `json:"timeZone"`
-	Updated          *time.Time      `json:"updated"`
+	AccessRole       *string         `json:"accessRole,omitempty"`
+	DefaultReminders []EventReminder `json:"defaultReminders,omitempty"`
+	Description      *string         `json:"description,omitempty"`
+	Etag             *string         `json:"etag,omitempty"`
+	Items            []Event         `json:"items,omitempty"`
+	Kind             *string         `json:"kind,omitempty"`
+	NextPageToken    *string         `json:"nextPageToken,omitempty"`
+	NextSyncToken    *string         `json:"nextSyncToken,omitempty"`
+	Summary          *string         `json:"summary,omitempty"`
+	TimeZone         *string         `json:"timeZone,omitempty"`
+	Updated          *time.Time      `json:"updated,omitempty"`
 }

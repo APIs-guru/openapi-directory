@@ -18,16 +18,16 @@ const (
 )
 
 type Announcement struct {
-	AlternateLink             *string                       `json:"alternateLink"`
-	AssigneeMode              *AnnouncementAssigneeModeEnum `json:"assigneeMode"`
-	CourseID                  *string                       `json:"courseId"`
-	CreationTime              *string                       `json:"creationTime"`
-	CreatorUserID             *string                       `json:"creatorUserId"`
-	ID                        *string                       `json:"id"`
-	IndividualStudentsOptions *IndividualStudentsOptions    `json:"individualStudentsOptions"`
-	Materials                 []Material                    `json:"materials"`
-	ScheduledTime             *string                       `json:"scheduledTime"`
-	State                     *AnnouncementStateEnum        `json:"state"`
-	Text                      *string                       `json:"text"`
-	UpdateTime                *string                       `json:"updateTime"`
+	AlternateLink             *string                       `json:"alternateLink,omitempty"`
+	AssigneeMode              *AnnouncementAssigneeModeEnum `json:"assigneeMode,omitempty"`
+	CourseID                  *string                       `json:"courseId,omitempty"`
+	CreationTime              *string                       `json:"creationTime,omitempty"`
+	CreatorUserID             *string                       `json:"creatorUserId,omitempty"`
+	ID                        *string                       `json:"id,omitempty"`
+	IndividualStudentsOptions *IndividualStudentsOptions    `json:"individualStudentsOptions,omitempty"`
+	Materials                 []Material                    `json:"materials,omitempty"`
+	ScheduledTime             *string                       `json:"scheduledTime,omitempty"`
+	State                     *AnnouncementStateEnum        `json:"state,omitempty"`
+	Text                      *string                       `json:"text,omitempty"`
+	UpdateTime                *string                       `json:"updateTime,omitempty"`
 }

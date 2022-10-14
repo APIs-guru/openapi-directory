@@ -1,9 +1,9 @@
 package shared
 
 type Distribution struct {
-	AmiDistributionConfiguration       *AmiDistributionConfiguration       `json:"amiDistributionConfiguration"`
-	ContainerDistributionConfiguration *ContainerDistributionConfiguration `json:"containerDistributionConfiguration"`
-	LaunchTemplateConfigurations       []LaunchTemplateConfiguration       `json:"launchTemplateConfigurations"`
-	LicenseConfigurationArns           []string                            `json:"licenseConfigurationArns"`
+	AmiDistributionConfiguration       *AmiDistributionConfiguration       `json:"amiDistributionConfiguration,omitempty"`
+	ContainerDistributionConfiguration *ContainerDistributionConfiguration `json:"containerDistributionConfiguration,omitempty"`
+	LaunchTemplateConfigurations       []LaunchTemplateConfiguration       `json:"launchTemplateConfigurations,omitempty"`
+	LicenseConfigurationArns           []string                            `json:"licenseConfigurationArns,omitempty"`
 	Region                             string                              `json:"region"`
 }

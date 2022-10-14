@@ -24,14 +24,14 @@ type GetTrackingSnippet200ApplicationJSON struct {
 }
 
 type GetTrackingSnippet400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header"`
-	Path   map[string]string `json:"path"`
-	Query  map[string]string `json:"query"`
+	Header map[string]string `json:"header,omitempty"`
+	Path   map[string]string `json:"path,omitempty"`
+	Query  map[string]string `json:"query,omitempty"`
 }
 
 type GetTrackingSnippet400ApplicationJSONErrors struct {
-	Fields     map[string]string                                     `json:"fields"`
-	Parameters *GetTrackingSnippet400ApplicationJSONErrorsParameters `json:"parameters"`
+	Fields     map[string]string                                     `json:"fields,omitempty"`
+	Parameters *GetTrackingSnippet400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
 }
 
 type GetTrackingSnippet400ApplicationJSONMeta struct {

@@ -9,16 +9,16 @@ const (
 )
 
 type GoogleCloudRunV2RevisionTemplate struct {
-	Annotations                   map[string]string                                         `json:"annotations"`
-	Containers                    []GoogleCloudRunV2Container                               `json:"containers"`
-	EncryptionKey                 *string                                                   `json:"encryptionKey"`
-	ExecutionEnvironment          *GoogleCloudRunV2RevisionTemplateExecutionEnvironmentEnum `json:"executionEnvironment"`
-	Labels                        map[string]string                                         `json:"labels"`
-	MaxInstanceRequestConcurrency *int32                                                    `json:"maxInstanceRequestConcurrency"`
-	Revision                      *string                                                   `json:"revision"`
-	Scaling                       *GoogleCloudRunV2RevisionScaling                          `json:"scaling"`
-	ServiceAccount                *string                                                   `json:"serviceAccount"`
-	Timeout                       *string                                                   `json:"timeout"`
-	Volumes                       []GoogleCloudRunV2Volume                                  `json:"volumes"`
-	VpcAccess                     *GoogleCloudRunV2VpcAccess                                `json:"vpcAccess"`
+	Annotations                   map[string]string                                         `json:"annotations,omitempty"`
+	Containers                    []GoogleCloudRunV2Container                               `json:"containers,omitempty"`
+	EncryptionKey                 *string                                                   `json:"encryptionKey,omitempty"`
+	ExecutionEnvironment          *GoogleCloudRunV2RevisionTemplateExecutionEnvironmentEnum `json:"executionEnvironment,omitempty"`
+	Labels                        map[string]string                                         `json:"labels,omitempty"`
+	MaxInstanceRequestConcurrency *int32                                                    `json:"maxInstanceRequestConcurrency,omitempty"`
+	Revision                      *string                                                   `json:"revision,omitempty"`
+	Scaling                       *GoogleCloudRunV2RevisionScaling                          `json:"scaling,omitempty"`
+	ServiceAccount                *string                                                   `json:"serviceAccount,omitempty"`
+	Timeout                       *string                                                   `json:"timeout,omitempty"`
+	Volumes                       []GoogleCloudRunV2Volume                                  `json:"volumes,omitempty"`
+	VpcAccess                     *GoogleCloudRunV2VpcAccess                                `json:"vpcAccess,omitempty"`
 }

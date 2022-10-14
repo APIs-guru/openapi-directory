@@ -1,6 +1,6 @@
 package shared
 
 type ProductDestination struct {
-	DestinationName *string `json:"destinationName"`
-	Intention       *string `json:"intention"`
+	DestinationName *string `json:"destinationName,omitempty"`
+	Intention       *string `json:"intention,omitempty"`
 }

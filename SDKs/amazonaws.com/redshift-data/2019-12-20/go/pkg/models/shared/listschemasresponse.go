@@ -1,6 +1,6 @@
 package shared
 
 type ListSchemasResponse struct {
-	NextToken *string  `json:"NextToken"`
-	Schemas   []string `json:"Schemas"`
+	NextToken *string  `json:"NextToken,omitempty"`
+	Schemas   []string `json:"Schemas,omitempty"`
 }

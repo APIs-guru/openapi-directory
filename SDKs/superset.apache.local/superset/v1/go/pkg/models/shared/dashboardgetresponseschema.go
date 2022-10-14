@@ -5,22 +5,22 @@ import (
 )
 
 type DashboardGetResponseSchema struct {
-	ChangedBy               *User      `json:"changed_by"`
-	ChangedByName           *string    `json:"changed_by_name"`
-	ChangedByURL            *string    `json:"changed_by_url"`
-	ChangedOn               *time.Time `json:"changed_on"`
-	ChangedOnDeltaHumanized *string    `json:"changed_on_delta_humanized"`
-	Charts                  []string   `json:"charts"`
-	CSS                     *string    `json:"css"`
-	DashboardTitle          *string    `json:"dashboard_title"`
-	ID                      *int32     `json:"id"`
-	JSONMetadata            *string    `json:"json_metadata"`
-	Owners                  []User     `json:"owners"`
-	PositionJSON            *string    `json:"position_json"`
-	Published               *bool      `json:"published"`
-	Roles                   []Roles    `json:"roles"`
-	Slug                    *string    `json:"slug"`
-	TableNames              *string    `json:"table_names"`
-	ThumbnailURL            *string    `json:"thumbnail_url"`
-	URL                     *string    `json:"url"`
+	ChangedBy               *User      `json:"changed_by,omitempty"`
+	ChangedByName           *string    `json:"changed_by_name,omitempty"`
+	ChangedByURL            *string    `json:"changed_by_url,omitempty"`
+	ChangedOn               *time.Time `json:"changed_on,omitempty"`
+	ChangedOnDeltaHumanized *string    `json:"changed_on_delta_humanized,omitempty"`
+	Charts                  []string   `json:"charts,omitempty"`
+	CSS                     *string    `json:"css,omitempty"`
+	DashboardTitle          *string    `json:"dashboard_title,omitempty"`
+	ID                      *int32     `json:"id,omitempty"`
+	JSONMetadata            *string    `json:"json_metadata,omitempty"`
+	Owners                  []User     `json:"owners,omitempty"`
+	PositionJSON            *string    `json:"position_json,omitempty"`
+	Published               *bool      `json:"published,omitempty"`
+	Roles                   []Roles    `json:"roles,omitempty"`
+	Slug                    *string    `json:"slug,omitempty"`
+	TableNames              *string    `json:"table_names,omitempty"`
+	ThumbnailURL            *string    `json:"thumbnail_url,omitempty"`
+	URL                     *string    `json:"url,omitempty"`
 }

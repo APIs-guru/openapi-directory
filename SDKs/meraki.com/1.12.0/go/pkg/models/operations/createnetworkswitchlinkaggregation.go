@@ -15,8 +15,8 @@ type CreateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts struct {
 }
 
 type CreateNetworkSwitchLinkAggregationRequestBody struct {
-	SwitchPorts        []CreateNetworkSwitchLinkAggregationRequestBodySwitchPorts        `json:"switchPorts"`
-	SwitchProfilePorts []CreateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts `json:"switchProfilePorts"`
+	SwitchPorts        []CreateNetworkSwitchLinkAggregationRequestBodySwitchPorts        `json:"switchPorts,omitempty"`
+	SwitchProfilePorts []CreateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts `json:"switchProfilePorts,omitempty"`
 }
 
 type CreateNetworkSwitchLinkAggregationRequest struct {

@@ -1,14 +1,14 @@
 package shared
 
 type OrcSerDe struct {
-	BlockSizeBytes                      *int64                `json:"BlockSizeBytes"`
-	BloomFilterColumns                  []string              `json:"BloomFilterColumns"`
-	BloomFilterFalsePositiveProbability *float64              `json:"BloomFilterFalsePositiveProbability"`
-	Compression                         *OrcCompressionEnum   `json:"Compression"`
-	DictionaryKeyThreshold              *float64              `json:"DictionaryKeyThreshold"`
-	EnablePadding                       *bool                 `json:"EnablePadding"`
-	FormatVersion                       *OrcFormatVersionEnum `json:"FormatVersion"`
-	PaddingTolerance                    *float64              `json:"PaddingTolerance"`
-	RowIndexStride                      *int64                `json:"RowIndexStride"`
-	StripeSizeBytes                     *int64                `json:"StripeSizeBytes"`
+	BlockSizeBytes                      *int64                `json:"BlockSizeBytes,omitempty"`
+	BloomFilterColumns                  []string              `json:"BloomFilterColumns,omitempty"`
+	BloomFilterFalsePositiveProbability *float64              `json:"BloomFilterFalsePositiveProbability,omitempty"`
+	Compression                         *OrcCompressionEnum   `json:"Compression,omitempty"`
+	DictionaryKeyThreshold              *float64              `json:"DictionaryKeyThreshold,omitempty"`
+	EnablePadding                       *bool                 `json:"EnablePadding,omitempty"`
+	FormatVersion                       *OrcFormatVersionEnum `json:"FormatVersion,omitempty"`
+	PaddingTolerance                    *float64              `json:"PaddingTolerance,omitempty"`
+	RowIndexStride                      *int64                `json:"RowIndexStride,omitempty"`
+	StripeSizeBytes                     *int64                `json:"StripeSizeBytes,omitempty"`
 }

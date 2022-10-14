@@ -1,8 +1,8 @@
 package shared
 
 type ReplicationConfigurationReplicatedDisk struct {
-	DeviceName      *string                                                    `json:"deviceName"`
-	Iops            *int64                                                     `json:"iops"`
-	IsBootDisk      *bool                                                      `json:"isBootDisk"`
-	StagingDiskType *ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum `json:"stagingDiskType"`
+	DeviceName      *string                                                    `json:"deviceName,omitempty"`
+	Iops            *int64                                                     `json:"iops,omitempty"`
+	IsBootDisk      *bool                                                      `json:"isBootDisk,omitempty"`
+	StagingDiskType *ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum `json:"stagingDiskType,omitempty"`
 }

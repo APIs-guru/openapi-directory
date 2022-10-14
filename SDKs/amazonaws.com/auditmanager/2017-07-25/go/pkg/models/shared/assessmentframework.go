@@ -1,8 +1,8 @@
 package shared
 
 type AssessmentFramework struct {
-	Arn         *string                `json:"arn"`
-	ControlSets []AssessmentControlSet `json:"controlSets"`
-	ID          *string                `json:"id"`
-	Metadata    *FrameworkMetadata     `json:"metadata"`
+	Arn         *string                `json:"arn,omitempty"`
+	ControlSets []AssessmentControlSet `json:"controlSets,omitempty"`
+	ID          *string                `json:"id,omitempty"`
+	Metadata    *FrameworkMetadata     `json:"metadata,omitempty"`
 }

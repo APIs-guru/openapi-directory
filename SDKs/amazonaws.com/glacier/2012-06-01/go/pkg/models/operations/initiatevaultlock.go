@@ -16,11 +16,11 @@ type InitiateVaultLockHeaders struct {
 }
 
 type InitiateVaultLockRequestBodyPolicy struct {
-	Policy *string `json:"Policy"`
+	Policy *string `json:"Policy,omitempty"`
 }
 
 type InitiateVaultLockRequestBody struct {
-	Policy *InitiateVaultLockRequestBodyPolicy `json:"policy"`
+	Policy *InitiateVaultLockRequestBodyPolicy `json:"policy,omitempty"`
 }
 
 type InitiateVaultLockRequest struct {

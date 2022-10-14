@@ -9,9 +9,9 @@ const (
 )
 
 type PersonMetadata struct {
-	Deleted                   *bool                         `json:"deleted"`
-	LinkedPeopleResourceNames []string                      `json:"linkedPeopleResourceNames"`
-	ObjectType                *PersonMetadataObjectTypeEnum `json:"objectType"`
-	PreviousResourceNames     []string                      `json:"previousResourceNames"`
-	Sources                   []Source                      `json:"sources"`
+	Deleted                   *bool                         `json:"deleted,omitempty"`
+	LinkedPeopleResourceNames []string                      `json:"linkedPeopleResourceNames,omitempty"`
+	ObjectType                *PersonMetadataObjectTypeEnum `json:"objectType,omitempty"`
+	PreviousResourceNames     []string                      `json:"previousResourceNames,omitempty"`
+	Sources                   []Source                      `json:"sources,omitempty"`
 }

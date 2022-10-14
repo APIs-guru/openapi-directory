@@ -1,8 +1,8 @@
 package shared
 
 type S3FileLocation struct {
-	Bucket    *string `json:"Bucket"`
-	Etag      *string `json:"Etag"`
-	Key       *string `json:"Key"`
-	VersionID *string `json:"VersionId"`
+	Bucket    *string `json:"Bucket,omitempty"`
+	Etag      *string `json:"Etag,omitempty"`
+	Key       *string `json:"Key,omitempty"`
+	VersionID *string `json:"VersionId,omitempty"`
 }

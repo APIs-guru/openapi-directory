@@ -1,7 +1,7 @@
 package shared
 
 type CloudRunService struct {
-	Path    *string `json:"path"`
-	Region  *string `json:"region"`
-	Service *string `json:"service"`
+	Path    *string `json:"path,omitempty"`
+	Region  *string `json:"region,omitempty"`
+	Service *string `json:"service,omitempty"`
 }

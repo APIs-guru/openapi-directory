@@ -1,5 +1,5 @@
 package shared
 
 type DescribeManagedEndpointResponse struct {
-	Endpoint *Endpoint `json:"endpoint"`
+	Endpoint *Endpoint `json:"endpoint,omitempty"`
 }

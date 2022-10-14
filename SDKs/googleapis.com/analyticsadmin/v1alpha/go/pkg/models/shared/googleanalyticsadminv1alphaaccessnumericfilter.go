@@ -12,6 +12,6 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAccessNumericFilter struct {
-	Operation *GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum `json:"operation"`
-	Value     *GoogleAnalyticsAdminV1alphaNumericValue                     `json:"value"`
+	Operation *GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum `json:"operation,omitempty"`
+	Value     *GoogleAnalyticsAdminV1alphaNumericValue                     `json:"value,omitempty"`
 }

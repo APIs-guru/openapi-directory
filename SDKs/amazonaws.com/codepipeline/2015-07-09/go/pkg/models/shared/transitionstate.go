@@ -5,8 +5,8 @@ import (
 )
 
 type TransitionState struct {
-	DisabledReason *string    `json:"disabledReason"`
-	Enabled        *bool      `json:"enabled"`
-	LastChangedAt  *time.Time `json:"lastChangedAt"`
-	LastChangedBy  *string    `json:"lastChangedBy"`
+	DisabledReason *string    `json:"disabledReason,omitempty"`
+	Enabled        *bool      `json:"enabled,omitempty"`
+	LastChangedAt  *time.Time `json:"lastChangedAt,omitempty"`
+	LastChangedBy  *string    `json:"lastChangedBy,omitempty"`
 }

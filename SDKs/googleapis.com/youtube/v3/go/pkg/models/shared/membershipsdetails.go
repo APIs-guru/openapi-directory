@@ -1,9 +1,9 @@
 package shared
 
 type MembershipsDetails struct {
-	AccessibleLevels                  []string                     `json:"accessibleLevels"`
-	HighestAccessibleLevel            *string                      `json:"highestAccessibleLevel"`
-	HighestAccessibleLevelDisplayName *string                      `json:"highestAccessibleLevelDisplayName"`
-	MembershipsDuration               *MembershipsDuration         `json:"membershipsDuration"`
-	MembershipsDurationAtLevels       []MembershipsDurationAtLevel `json:"membershipsDurationAtLevels"`
+	AccessibleLevels                  []string                     `json:"accessibleLevels,omitempty"`
+	HighestAccessibleLevel            *string                      `json:"highestAccessibleLevel,omitempty"`
+	HighestAccessibleLevelDisplayName *string                      `json:"highestAccessibleLevelDisplayName,omitempty"`
+	MembershipsDuration               *MembershipsDuration         `json:"membershipsDuration,omitempty"`
+	MembershipsDurationAtLevels       []MembershipsDurationAtLevel `json:"membershipsDurationAtLevels,omitempty"`
 }

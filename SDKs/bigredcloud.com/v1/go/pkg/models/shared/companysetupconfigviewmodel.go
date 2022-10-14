@@ -1,8 +1,8 @@
 package shared
 
 type CompanySetupConfigViewModel struct {
-	FinancialYear     *CompanyFinancialYearViewModel    `json:"financialYear"`
-	GeneralDetails    *CompanyGeneralDetaisViewModel    `json:"generalDetails"`
-	Options           *CompanyOptionViewModel           `json:"options"`
-	ReferenceSettings *CompanyReferenceSettingViewModel `json:"referenceSettings"`
+	FinancialYear     *CompanyFinancialYearViewModel    `json:"financialYear,omitempty"`
+	GeneralDetails    *CompanyGeneralDetaisViewModel    `json:"generalDetails,omitempty"`
+	Options           *CompanyOptionViewModel           `json:"options,omitempty"`
+	ReferenceSettings *CompanyReferenceSettingViewModel `json:"referenceSettings,omitempty"`
 }

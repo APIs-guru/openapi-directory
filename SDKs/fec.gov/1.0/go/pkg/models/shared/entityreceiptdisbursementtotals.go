@@ -5,12 +5,12 @@ import (
 )
 
 type EntityReceiptDisbursementTotals struct {
-	CumulativeCandidateDisbursements *float32   `json:"cumulative_candidate_disbursements"`
-	CumulativeCandidateReceipts      *float32   `json:"cumulative_candidate_receipts"`
-	CumulativePacDisbursements       *float32   `json:"cumulative_pac_disbursements"`
-	CumulativePacReceipts            *float32   `json:"cumulative_pac_receipts"`
-	CumulativePartyDisbursements     *float32   `json:"cumulative_party_disbursements"`
-	CumulativePartyReceipts          *float32   `json:"cumulative_party_receipts"`
-	Cycle                            *int32     `json:"cycle"`
-	EndDate                          *time.Time `json:"end_date"`
+	CumulativeCandidateDisbursements *float32   `json:"cumulative_candidate_disbursements,omitempty"`
+	CumulativeCandidateReceipts      *float32   `json:"cumulative_candidate_receipts,omitempty"`
+	CumulativePacDisbursements       *float32   `json:"cumulative_pac_disbursements,omitempty"`
+	CumulativePacReceipts            *float32   `json:"cumulative_pac_receipts,omitempty"`
+	CumulativePartyDisbursements     *float32   `json:"cumulative_party_disbursements,omitempty"`
+	CumulativePartyReceipts          *float32   `json:"cumulative_party_receipts,omitempty"`
+	Cycle                            *int32     `json:"cycle,omitempty"`
+	EndDate                          *time.Time `json:"end_date,omitempty"`
 }

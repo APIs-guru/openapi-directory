@@ -1,19 +1,19 @@
 package shared
 
 type DirectDeal struct {
-	AccountID                *int32  `json:"accountId"`
-	Advertiser               *string `json:"advertiser"`
-	AllowsAlcohol            *bool   `json:"allowsAlcohol"`
-	BuyerAccountID           *string `json:"buyerAccountId"`
-	CurrencyCode             *string `json:"currencyCode"`
-	DealTier                 *string `json:"dealTier"`
-	EndTime                  *string `json:"endTime"`
-	FixedCpm                 *string `json:"fixedCpm"`
-	ID                       *string `json:"id"`
-	Kind                     *string `json:"kind"`
-	Name                     *string `json:"name"`
-	PrivateExchangeMinCpm    *string `json:"privateExchangeMinCpm"`
-	PublisherBlocksOverriden *bool   `json:"publisherBlocksOverriden"`
-	SellerNetwork            *string `json:"sellerNetwork"`
-	StartTime                *string `json:"startTime"`
+	AccountID                *int32  `json:"accountId,omitempty"`
+	Advertiser               *string `json:"advertiser,omitempty"`
+	AllowsAlcohol            *bool   `json:"allowsAlcohol,omitempty"`
+	BuyerAccountID           *string `json:"buyerAccountId,omitempty"`
+	CurrencyCode             *string `json:"currencyCode,omitempty"`
+	DealTier                 *string `json:"dealTier,omitempty"`
+	EndTime                  *string `json:"endTime,omitempty"`
+	FixedCpm                 *string `json:"fixedCpm,omitempty"`
+	ID                       *string `json:"id,omitempty"`
+	Kind                     *string `json:"kind,omitempty"`
+	Name                     *string `json:"name,omitempty"`
+	PrivateExchangeMinCpm    *string `json:"privateExchangeMinCpm,omitempty"`
+	PublisherBlocksOverriden *bool   `json:"publisherBlocksOverriden,omitempty"`
+	SellerNetwork            *string `json:"sellerNetwork,omitempty"`
+	StartTime                *string `json:"startTime,omitempty"`
 }

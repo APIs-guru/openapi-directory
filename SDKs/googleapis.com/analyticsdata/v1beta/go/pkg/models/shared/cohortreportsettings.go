@@ -1,5 +1,5 @@
 package shared
 
 type CohortReportSettings struct {
-	Accumulate *bool `json:"accumulate"`
+	Accumulate *bool `json:"accumulate,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type Location struct {
-	AvailableMacSecPortSpeeds []string `json:"availableMacSecPortSpeeds"`
-	AvailablePortSpeeds       []string `json:"availablePortSpeeds"`
-	AvailableProviders        []string `json:"availableProviders"`
-	LocationCode              *string  `json:"locationCode"`
-	LocationName              *string  `json:"locationName"`
-	Region                    *string  `json:"region"`
+	AvailableMacSecPortSpeeds []string `json:"availableMacSecPortSpeeds,omitempty"`
+	AvailablePortSpeeds       []string `json:"availablePortSpeeds,omitempty"`
+	AvailableProviders        []string `json:"availableProviders,omitempty"`
+	LocationCode              *string  `json:"locationCode,omitempty"`
+	LocationName              *string  `json:"locationName,omitempty"`
+	Region                    *string  `json:"region,omitempty"`
 }

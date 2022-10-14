@@ -1,6 +1,6 @@
 package shared
 
 type ListMattersResponse struct {
-	Matters       []Matter `json:"matters"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Matters       []Matter `json:"matters,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

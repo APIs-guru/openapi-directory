@@ -1,7 +1,7 @@
 package shared
 
 type AddApplicationReferenceDataSourceResponse struct {
-	ApplicationArn                  *string                          `json:"ApplicationARN"`
-	ApplicationVersionID            *int64                           `json:"ApplicationVersionId"`
-	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription `json:"ReferenceDataSourceDescriptions"`
+	ApplicationArn                  *string                          `json:"ApplicationARN,omitempty"`
+	ApplicationVersionID            *int64                           `json:"ApplicationVersionId,omitempty"`
+	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription `json:"ReferenceDataSourceDescriptions,omitempty"`
 }

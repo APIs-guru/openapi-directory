@@ -11,16 +11,16 @@ const (
 )
 
 type Debuggee struct {
-	AgentVersion      *string                 `json:"agentVersion"`
-	CanaryMode        *DebuggeeCanaryModeEnum `json:"canaryMode"`
-	Description       *string                 `json:"description"`
-	ExtSourceContexts []ExtendedSourceContext `json:"extSourceContexts"`
-	ID                *string                 `json:"id"`
-	IsDisabled        *bool                   `json:"isDisabled"`
-	IsInactive        *bool                   `json:"isInactive"`
-	Labels            map[string]string       `json:"labels"`
-	Project           *string                 `json:"project"`
-	SourceContexts    []SourceContext         `json:"sourceContexts"`
-	Status            *StatusMessage          `json:"status"`
-	Uniquifier        *string                 `json:"uniquifier"`
+	AgentVersion      *string                 `json:"agentVersion,omitempty"`
+	CanaryMode        *DebuggeeCanaryModeEnum `json:"canaryMode,omitempty"`
+	Description       *string                 `json:"description,omitempty"`
+	ExtSourceContexts []ExtendedSourceContext `json:"extSourceContexts,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
+	IsDisabled        *bool                   `json:"isDisabled,omitempty"`
+	IsInactive        *bool                   `json:"isInactive,omitempty"`
+	Labels            map[string]string       `json:"labels,omitempty"`
+	Project           *string                 `json:"project,omitempty"`
+	SourceContexts    []SourceContext         `json:"sourceContexts,omitempty"`
+	Status            *StatusMessage          `json:"status,omitempty"`
+	Uniquifier        *string                 `json:"uniquifier,omitempty"`
 }

@@ -9,5 +9,5 @@ const (
 )
 
 type MembershipSpec struct {
-	CertificateManagement *MembershipSpecCertificateManagementEnum `json:"certificateManagement"`
+	CertificateManagement *MembershipSpecCertificateManagementEnum `json:"certificateManagement,omitempty"`
 }

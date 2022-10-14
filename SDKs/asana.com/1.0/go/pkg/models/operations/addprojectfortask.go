@@ -14,7 +14,7 @@ type AddProjectForTaskQueryParams struct {
 }
 
 type AddProjectForTaskRequestBody struct {
-	Data *shared.TaskAddProjectRequest `json:"data"`
+	Data *shared.TaskAddProjectRequest `json:"data,omitempty"`
 }
 
 type AddProjectForTaskRequest struct {
@@ -24,7 +24,7 @@ type AddProjectForTaskRequest struct {
 }
 
 type AddProjectForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddProjectForTaskResponse struct {

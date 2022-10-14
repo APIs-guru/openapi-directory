@@ -15,14 +15,14 @@ type GetClipHeaders struct {
 }
 
 type GetClipRequestBodyClipFragmentSelector struct {
-	FragmentSelectorType *shared.ClipFragmentSelectorTypeEnum `json:"FragmentSelectorType"`
-	TimestampRange       *shared.ClipTimestampRange           `json:"TimestampRange"`
+	FragmentSelectorType *shared.ClipFragmentSelectorTypeEnum `json:"FragmentSelectorType,omitempty"`
+	TimestampRange       *shared.ClipTimestampRange           `json:"TimestampRange,omitempty"`
 }
 
 type GetClipRequestBody struct {
 	ClipFragmentSelector GetClipRequestBodyClipFragmentSelector `json:"ClipFragmentSelector"`
-	StreamArn            *string                                `json:"StreamARN"`
-	StreamName           *string                                `json:"StreamName"`
+	StreamArn            *string                                `json:"StreamARN,omitempty"`
+	StreamName           *string                                `json:"StreamName,omitempty"`
 }
 
 type GetClipRequest struct {

@@ -5,14 +5,14 @@ import (
 )
 
 type RestoreTableToPointInTimeInput struct {
-	BillingModeOverride           *BillingModeEnum       `json:"BillingModeOverride"`
-	GlobalSecondaryIndexOverride  []GlobalSecondaryIndex `json:"GlobalSecondaryIndexOverride"`
-	LocalSecondaryIndexOverride   []LocalSecondaryIndex  `json:"LocalSecondaryIndexOverride"`
-	ProvisionedThroughputOverride *ProvisionedThroughput `json:"ProvisionedThroughputOverride"`
-	RestoreDateTime               *time.Time             `json:"RestoreDateTime"`
-	SseSpecificationOverride      *SseSpecification      `json:"SSESpecificationOverride"`
-	SourceTableArn                *string                `json:"SourceTableArn"`
-	SourceTableName               *string                `json:"SourceTableName"`
+	BillingModeOverride           *BillingModeEnum       `json:"BillingModeOverride,omitempty"`
+	GlobalSecondaryIndexOverride  []GlobalSecondaryIndex `json:"GlobalSecondaryIndexOverride,omitempty"`
+	LocalSecondaryIndexOverride   []LocalSecondaryIndex  `json:"LocalSecondaryIndexOverride,omitempty"`
+	ProvisionedThroughputOverride *ProvisionedThroughput `json:"ProvisionedThroughputOverride,omitempty"`
+	RestoreDateTime               *time.Time             `json:"RestoreDateTime,omitempty"`
+	SseSpecificationOverride      *SseSpecification      `json:"SSESpecificationOverride,omitempty"`
+	SourceTableArn                *string                `json:"SourceTableArn,omitempty"`
+	SourceTableName               *string                `json:"SourceTableName,omitempty"`
 	TargetTableName               string                 `json:"TargetTableName"`
-	UseLatestRestorableTime       *bool                  `json:"UseLatestRestorableTime"`
+	UseLatestRestorableTime       *bool                  `json:"UseLatestRestorableTime,omitempty"`
 }

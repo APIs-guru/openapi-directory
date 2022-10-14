@@ -1,9 +1,9 @@
 package shared
 
 type VeevaSourceProperties struct {
-	DocumentType       *string `json:"documentType"`
-	IncludeAllVersions *bool   `json:"includeAllVersions"`
-	IncludeRenditions  *bool   `json:"includeRenditions"`
-	IncludeSourceFiles *bool   `json:"includeSourceFiles"`
+	DocumentType       *string `json:"documentType,omitempty"`
+	IncludeAllVersions *bool   `json:"includeAllVersions,omitempty"`
+	IncludeRenditions  *bool   `json:"includeRenditions,omitempty"`
+	IncludeSourceFiles *bool   `json:"includeSourceFiles,omitempty"`
 	Object             string  `json:"object"`
 }

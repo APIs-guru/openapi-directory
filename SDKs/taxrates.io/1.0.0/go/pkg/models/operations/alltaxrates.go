@@ -12,24 +12,24 @@ type AllTaxRatesRequest struct {
 }
 
 type AllTaxRates200ApplicationJSONRates struct {
-	DataName    *string `json:"data_name"`
-	DataValue   *string `json:"data_value"`
-	ProductCode *string `json:"product_code"`
-	Type        *string `json:"type"`
+	DataName    *string `json:"data_name,omitempty"`
+	DataValue   *string `json:"data_value,omitempty"`
+	ProductCode *string `json:"product_code,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }
 
 type AllTaxRates200ApplicationJSON struct {
-	ID    *string                              `json:"id"`
-	Name  *string                              `json:"name"`
-	Rates []AllTaxRates200ApplicationJSONRates `json:"rates"`
-	State *string                              `json:"state"`
-	Zip   *string                              `json:"zip"`
+	ID    *string                              `json:"id,omitempty"`
+	Name  *string                              `json:"name,omitempty"`
+	Rates []AllTaxRates200ApplicationJSONRates `json:"rates,omitempty"`
+	State *string                              `json:"state,omitempty"`
+	Zip   *string                              `json:"zip,omitempty"`
 }
 
 type AllTaxRates500ApplicationJSON struct {
-	Code    *string `json:"code"`
-	Fields  *string `json:"fields"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Fields  *string `json:"fields,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type AllTaxRatesResponse struct {

@@ -61,19 +61,19 @@ const (
 )
 
 type ApplicationPolicy struct {
-	AccessibleTrackIds           []string                                           `json:"accessibleTrackIds"`
-	AlwaysOnVpnLockdownExemption *ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum `json:"alwaysOnVpnLockdownExemption"`
-	AutoUpdateMode               *ApplicationPolicyAutoUpdateModeEnum               `json:"autoUpdateMode"`
-	ConnectedWorkAndPersonalApp  *ApplicationPolicyConnectedWorkAndPersonalAppEnum  `json:"connectedWorkAndPersonalApp"`
-	DefaultPermissionPolicy      *ApplicationPolicyDefaultPermissionPolicyEnum      `json:"defaultPermissionPolicy"`
-	DelegatedScopes              []ApplicationPolicyDelegatedScopesEnum             `json:"delegatedScopes"`
-	Disabled                     *bool                                              `json:"disabled"`
-	ExtensionConfig              *ExtensionConfig                                   `json:"extensionConfig"`
-	InstallType                  *ApplicationPolicyInstallTypeEnum                  `json:"installType"`
-	LockTaskAllowed              *bool                                              `json:"lockTaskAllowed"`
-	ManagedConfiguration         map[string]interface{}                             `json:"managedConfiguration"`
-	ManagedConfigurationTemplate *ManagedConfigurationTemplate                      `json:"managedConfigurationTemplate"`
-	MinimumVersionCode           *int32                                             `json:"minimumVersionCode"`
-	PackageName                  *string                                            `json:"packageName"`
-	PermissionGrants             []PermissionGrant                                  `json:"permissionGrants"`
+	AccessibleTrackIds           []string                                           `json:"accessibleTrackIds,omitempty"`
+	AlwaysOnVpnLockdownExemption *ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum `json:"alwaysOnVpnLockdownExemption,omitempty"`
+	AutoUpdateMode               *ApplicationPolicyAutoUpdateModeEnum               `json:"autoUpdateMode,omitempty"`
+	ConnectedWorkAndPersonalApp  *ApplicationPolicyConnectedWorkAndPersonalAppEnum  `json:"connectedWorkAndPersonalApp,omitempty"`
+	DefaultPermissionPolicy      *ApplicationPolicyDefaultPermissionPolicyEnum      `json:"defaultPermissionPolicy,omitempty"`
+	DelegatedScopes              []ApplicationPolicyDelegatedScopesEnum             `json:"delegatedScopes,omitempty"`
+	Disabled                     *bool                                              `json:"disabled,omitempty"`
+	ExtensionConfig              *ExtensionConfig                                   `json:"extensionConfig,omitempty"`
+	InstallType                  *ApplicationPolicyInstallTypeEnum                  `json:"installType,omitempty"`
+	LockTaskAllowed              *bool                                              `json:"lockTaskAllowed,omitempty"`
+	ManagedConfiguration         map[string]interface{}                             `json:"managedConfiguration,omitempty"`
+	ManagedConfigurationTemplate *ManagedConfigurationTemplate                      `json:"managedConfigurationTemplate,omitempty"`
+	MinimumVersionCode           *int32                                             `json:"minimumVersionCode,omitempty"`
+	PackageName                  *string                                            `json:"packageName,omitempty"`
+	PermissionGrants             []PermissionGrant                                  `json:"permissionGrants,omitempty"`
 }

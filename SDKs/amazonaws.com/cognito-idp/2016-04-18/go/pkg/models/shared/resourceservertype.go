@@ -1,8 +1,8 @@
 package shared
 
 type ResourceServerType struct {
-	Identifier *string                   `json:"Identifier"`
-	Name       *string                   `json:"Name"`
-	Scopes     []ResourceServerScopeType `json:"Scopes"`
-	UserPoolID *string                   `json:"UserPoolId"`
+	Identifier *string                   `json:"Identifier,omitempty"`
+	Name       *string                   `json:"Name,omitempty"`
+	Scopes     []ResourceServerScopeType `json:"Scopes,omitempty"`
+	UserPoolID *string                   `json:"UserPoolId,omitempty"`
 }

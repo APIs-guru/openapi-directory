@@ -24,13 +24,13 @@ const (
 )
 
 type PricingSchedule struct {
-	CapCostOption         *PricingScheduleCapCostOptionEnum `json:"capCostOption"`
-	DisregardOverdelivery *bool                             `json:"disregardOverdelivery"`
-	EndDate               *time.Time                        `json:"endDate"`
-	Flighted              *bool                             `json:"flighted"`
-	FloodlightActivityID  *string                           `json:"floodlightActivityId"`
-	PricingPeriods        []PricingSchedulePricingPeriod    `json:"pricingPeriods"`
-	PricingType           *PricingSchedulePricingTypeEnum   `json:"pricingType"`
-	StartDate             *time.Time                        `json:"startDate"`
-	TestingStartDate      *time.Time                        `json:"testingStartDate"`
+	CapCostOption         *PricingScheduleCapCostOptionEnum `json:"capCostOption,omitempty"`
+	DisregardOverdelivery *bool                             `json:"disregardOverdelivery,omitempty"`
+	EndDate               *time.Time                        `json:"endDate,omitempty"`
+	Flighted              *bool                             `json:"flighted,omitempty"`
+	FloodlightActivityID  *string                           `json:"floodlightActivityId,omitempty"`
+	PricingPeriods        []PricingSchedulePricingPeriod    `json:"pricingPeriods,omitempty"`
+	PricingType           *PricingSchedulePricingTypeEnum   `json:"pricingType,omitempty"`
+	StartDate             *time.Time                        `json:"startDate,omitempty"`
+	TestingStartDate      *time.Time                        `json:"testingStartDate,omitempty"`
 }

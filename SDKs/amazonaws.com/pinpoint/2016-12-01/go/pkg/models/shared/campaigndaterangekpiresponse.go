@@ -10,6 +10,6 @@ type CampaignDateRangeKpiResponse struct {
 	EndTime       time.Time     `json:"EndTime"`
 	KpiName       string        `json:"KpiName"`
 	KpiResult     BaseKpiResult `json:"KpiResult"`
-	NextToken     *string       `json:"NextToken"`
+	NextToken     *string       `json:"NextToken,omitempty"`
 	StartTime     time.Time     `json:"StartTime"`
 }

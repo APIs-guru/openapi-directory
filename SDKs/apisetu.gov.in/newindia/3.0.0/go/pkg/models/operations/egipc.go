@@ -18,8 +18,8 @@ const (
 )
 
 type EgipcRequestBody struct {
-	CertificateParameters *EgipcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *EgipcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                EgipcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Egipc400ApplicationJSON struct {
-	Error            *Egipc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Egipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Egipc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Egipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Egipc401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Egipc401ApplicationJSON struct {
-	Error            *Egipc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Egipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Egipc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Egipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Egipc404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Egipc404ApplicationJSON struct {
-	Error            *Egipc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Egipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Egipc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Egipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Egipc500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Egipc500ApplicationJSON struct {
-	Error            *Egipc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Egipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Egipc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Egipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Egipc502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Egipc502ApplicationJSON struct {
-	Error            *Egipc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Egipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Egipc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Egipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Egipc503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Egipc503ApplicationJSON struct {
-	Error            *Egipc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Egipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Egipc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Egipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Egipc504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Egipc504ApplicationJSON struct {
-	Error            *Egipc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Egipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Egipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Egipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type EgipcResponse struct {

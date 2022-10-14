@@ -1,6 +1,6 @@
 package shared
 
 type ReviewReport struct {
-	ReviewActions []ReviewActionDetail `json:"ReviewActions"`
-	ReviewResults []ReviewResultDetail `json:"ReviewResults"`
+	ReviewActions []ReviewActionDetail `json:"ReviewActions,omitempty"`
+	ReviewResults []ReviewResultDetail `json:"ReviewResults,omitempty"`
 }

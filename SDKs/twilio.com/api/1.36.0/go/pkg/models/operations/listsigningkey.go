@@ -28,15 +28,15 @@ type ListSigningKeyRequest struct {
 }
 
 type ListSigningKey200ApplicationJSONListSigningKeyResponse struct {
-	End             *int64                             `json:"end"`
-	FirstPageURI    *string                            `json:"first_page_uri"`
-	NextPageURI     *string                            `json:"next_page_uri"`
-	Page            *int64                             `json:"page"`
-	PageSize        *int64                             `json:"page_size"`
-	PreviousPageURI *string                            `json:"previous_page_uri"`
-	SigningKeys     []shared.APIV2010AccountSigningKey `json:"signing_keys"`
-	Start           *int64                             `json:"start"`
-	URI             *string                            `json:"uri"`
+	End             *int64                             `json:"end,omitempty"`
+	FirstPageURI    *string                            `json:"first_page_uri,omitempty"`
+	NextPageURI     *string                            `json:"next_page_uri,omitempty"`
+	Page            *int64                             `json:"page,omitempty"`
+	PageSize        *int64                             `json:"page_size,omitempty"`
+	PreviousPageURI *string                            `json:"previous_page_uri,omitempty"`
+	SigningKeys     []shared.APIV2010AccountSigningKey `json:"signing_keys,omitempty"`
+	Start           *int64                             `json:"start,omitempty"`
+	URI             *string                            `json:"uri,omitempty"`
 }
 
 type ListSigningKeyResponse struct {

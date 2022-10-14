@@ -1,9 +1,9 @@
 package shared
 
 type VideoGetRatingResponse struct {
-	Etag      *string       `json:"etag"`
-	EventID   *string       `json:"eventId"`
-	Items     []VideoRating `json:"items"`
-	Kind      *string       `json:"kind"`
-	VisitorID *string       `json:"visitorId"`
+	Etag      *string       `json:"etag,omitempty"`
+	EventID   *string       `json:"eventId,omitempty"`
+	Items     []VideoRating `json:"items,omitempty"`
+	Kind      *string       `json:"kind,omitempty"`
+	VisitorID *string       `json:"visitorId,omitempty"`
 }

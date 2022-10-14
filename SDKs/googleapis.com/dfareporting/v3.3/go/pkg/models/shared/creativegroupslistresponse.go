@@ -1,7 +1,7 @@
 package shared
 
 type CreativeGroupsListResponse struct {
-	CreativeGroups []CreativeGroup `json:"creativeGroups"`
-	Kind           *string         `json:"kind"`
-	NextPageToken  *string         `json:"nextPageToken"`
+	CreativeGroups []CreativeGroup `json:"creativeGroups,omitempty"`
+	Kind           *string         `json:"kind,omitempty"`
+	NextPageToken  *string         `json:"nextPageToken,omitempty"`
 }

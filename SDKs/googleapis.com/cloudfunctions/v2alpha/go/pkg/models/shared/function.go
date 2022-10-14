@@ -20,14 +20,14 @@ const (
 )
 
 type Function struct {
-	BuildConfig   *BuildConfig                              `json:"buildConfig"`
-	Description   *string                                   `json:"description"`
-	Environment   *FunctionEnvironmentEnum                  `json:"environment"`
-	EventTrigger  *EventTrigger                             `json:"eventTrigger"`
-	Labels        map[string]string                         `json:"labels"`
-	Name          *string                                   `json:"name"`
-	ServiceConfig *ServiceConfig                            `json:"serviceConfig"`
-	State         *FunctionStateEnum                        `json:"state"`
-	StateMessages []GoogleCloudFunctionsV2alphaStateMessage `json:"stateMessages"`
-	UpdateTime    *string                                   `json:"updateTime"`
+	BuildConfig   *BuildConfig                              `json:"buildConfig,omitempty"`
+	Description   *string                                   `json:"description,omitempty"`
+	Environment   *FunctionEnvironmentEnum                  `json:"environment,omitempty"`
+	EventTrigger  *EventTrigger                             `json:"eventTrigger,omitempty"`
+	Labels        map[string]string                         `json:"labels,omitempty"`
+	Name          *string                                   `json:"name,omitempty"`
+	ServiceConfig *ServiceConfig                            `json:"serviceConfig,omitempty"`
+	State         *FunctionStateEnum                        `json:"state,omitempty"`
+	StateMessages []GoogleCloudFunctionsV2alphaStateMessage `json:"stateMessages,omitempty"`
+	UpdateTime    *string                                   `json:"updateTime,omitempty"`
 }

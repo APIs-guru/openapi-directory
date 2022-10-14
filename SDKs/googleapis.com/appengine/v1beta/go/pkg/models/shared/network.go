@@ -9,10 +9,10 @@ const (
 )
 
 type Network struct {
-	ForwardedPorts  []string                   `json:"forwardedPorts"`
-	InstanceIPMode  *NetworkInstanceIPModeEnum `json:"instanceIpMode"`
-	InstanceTag     *string                    `json:"instanceTag"`
-	Name            *string                    `json:"name"`
-	SessionAffinity *bool                      `json:"sessionAffinity"`
-	SubnetworkName  *string                    `json:"subnetworkName"`
+	ForwardedPorts  []string                   `json:"forwardedPorts,omitempty"`
+	InstanceIPMode  *NetworkInstanceIPModeEnum `json:"instanceIpMode,omitempty"`
+	InstanceTag     *string                    `json:"instanceTag,omitempty"`
+	Name            *string                    `json:"name,omitempty"`
+	SessionAffinity *bool                      `json:"sessionAffinity,omitempty"`
+	SubnetworkName  *string                    `json:"subnetworkName,omitempty"`
 }

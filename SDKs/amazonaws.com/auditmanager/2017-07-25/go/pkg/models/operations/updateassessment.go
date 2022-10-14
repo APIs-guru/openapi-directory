@@ -19,20 +19,20 @@ type UpdateAssessmentHeaders struct {
 }
 
 type UpdateAssessmentRequestBodyAssessmentReportsDestination struct {
-	Destination     *string                                     `json:"destination"`
-	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType"`
+	Destination     *string                                     `json:"destination,omitempty"`
+	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType,omitempty"`
 }
 
 type UpdateAssessmentRequestBodyScope struct {
-	AwsAccounts []shared.AwsAccount `json:"awsAccounts"`
-	AwsServices []shared.AwsService `json:"awsServices"`
+	AwsAccounts []shared.AwsAccount `json:"awsAccounts,omitempty"`
+	AwsServices []shared.AwsService `json:"awsServices,omitempty"`
 }
 
 type UpdateAssessmentRequestBody struct {
-	AssessmentDescription        *string                                                  `json:"assessmentDescription"`
-	AssessmentName               *string                                                  `json:"assessmentName"`
-	AssessmentReportsDestination *UpdateAssessmentRequestBodyAssessmentReportsDestination `json:"assessmentReportsDestination"`
-	Roles                        []shared.Role                                            `json:"roles"`
+	AssessmentDescription        *string                                                  `json:"assessmentDescription,omitempty"`
+	AssessmentName               *string                                                  `json:"assessmentName,omitempty"`
+	AssessmentReportsDestination *UpdateAssessmentRequestBodyAssessmentReportsDestination `json:"assessmentReportsDestination,omitempty"`
+	Roles                        []shared.Role                                            `json:"roles,omitempty"`
 	Scope                        UpdateAssessmentRequestBodyScope                         `json:"scope"`
 }
 

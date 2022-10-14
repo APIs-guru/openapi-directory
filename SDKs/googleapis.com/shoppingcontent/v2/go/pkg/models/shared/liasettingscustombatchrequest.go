@@ -1,5 +1,5 @@
 package shared
 
 type LiasettingsCustomBatchRequest struct {
-	Entries []LiasettingsCustomBatchRequestEntry `json:"entries"`
+	Entries []LiasettingsCustomBatchRequestEntry `json:"entries,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type SetNodePoolManagementRequest struct {
-	ClusterID  *string         `json:"clusterId"`
-	Management *NodeManagement `json:"management"`
-	Name       *string         `json:"name"`
-	NodePoolID *string         `json:"nodePoolId"`
-	ProjectID  *string         `json:"projectId"`
-	Zone       *string         `json:"zone"`
+	ClusterID  *string         `json:"clusterId,omitempty"`
+	Management *NodeManagement `json:"management,omitempty"`
+	Name       *string         `json:"name,omitempty"`
+	NodePoolID *string         `json:"nodePoolId,omitempty"`
+	ProjectID  *string         `json:"projectId,omitempty"`
+	Zone       *string         `json:"zone,omitempty"`
 }

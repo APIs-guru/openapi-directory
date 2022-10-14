@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaIntegration struct {
-	Active      *bool   `json:"active"`
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
-	UpdateTime  *string `json:"updateTime"`
+	Active      *bool   `json:"active,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	UpdateTime  *string `json:"updateTime,omitempty"`
 }

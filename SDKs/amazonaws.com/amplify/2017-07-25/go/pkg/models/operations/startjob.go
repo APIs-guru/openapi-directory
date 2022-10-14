@@ -30,11 +30,11 @@ const (
 )
 
 type StartJobRequestBody struct {
-	CommitID      *string                        `json:"commitId"`
-	CommitMessage *string                        `json:"commitMessage"`
-	CommitTime    *time.Time                     `json:"commitTime"`
-	JobID         *string                        `json:"jobId"`
-	JobReason     *string                        `json:"jobReason"`
+	CommitID      *string                        `json:"commitId,omitempty"`
+	CommitMessage *string                        `json:"commitMessage,omitempty"`
+	CommitTime    *time.Time                     `json:"commitTime,omitempty"`
+	JobID         *string                        `json:"jobId,omitempty"`
+	JobReason     *string                        `json:"jobReason,omitempty"`
 	JobType       StartJobRequestBodyJobTypeEnum `json:"jobType"`
 }
 

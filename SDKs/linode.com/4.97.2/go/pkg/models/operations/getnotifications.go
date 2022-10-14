@@ -22,14 +22,14 @@ type GetNotificationsRequest struct {
 }
 
 type GetNotifications200ApplicationJSON struct {
-	Data    []shared.Notification `json:"data"`
-	Page    *int64                `json:"page"`
-	Pages   *int64                `json:"pages"`
-	Results *int64                `json:"results"`
+	Data    []shared.Notification `json:"data,omitempty"`
+	Page    *int64                `json:"page,omitempty"`
+	Pages   *int64                `json:"pages,omitempty"`
+	Results *int64                `json:"results,omitempty"`
 }
 
 type GetNotificationsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetNotificationsResponse struct {

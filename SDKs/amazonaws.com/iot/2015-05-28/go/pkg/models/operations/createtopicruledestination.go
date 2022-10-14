@@ -15,8 +15,8 @@ type CreateTopicRuleDestinationHeaders struct {
 }
 
 type CreateTopicRuleDestinationRequestBodyDestinationConfiguration struct {
-	HTTPURLConfiguration *shared.HTTPURLDestinationConfiguration `json:"httpUrlConfiguration"`
-	VpcConfiguration     *shared.VpcDestinationConfiguration     `json:"vpcConfiguration"`
+	HTTPURLConfiguration *shared.HTTPURLDestinationConfiguration `json:"httpUrlConfiguration,omitempty"`
+	VpcConfiguration     *shared.VpcDestinationConfiguration     `json:"vpcConfiguration,omitempty"`
 }
 
 type CreateTopicRuleDestinationRequestBody struct {

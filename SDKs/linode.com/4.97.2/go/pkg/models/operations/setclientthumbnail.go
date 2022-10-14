@@ -28,7 +28,7 @@ type SetClientThumbnailRequest struct {
 }
 
 type SetClientThumbnailDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type SetClientThumbnailResponse struct {

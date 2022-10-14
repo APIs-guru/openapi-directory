@@ -1,14 +1,14 @@
 package shared
 
 type ObPostalAddress6 struct {
-	AddressLine        []string               `json:"AddressLine"`
-	AddressType        *ObAddressTypeCodeEnum `json:"AddressType"`
-	BuildingNumber     *string                `json:"BuildingNumber"`
-	Country            *string                `json:"Country"`
-	CountrySubDivision *string                `json:"CountrySubDivision"`
-	Department         *string                `json:"Department"`
-	PostCode           *string                `json:"PostCode"`
-	StreetName         *string                `json:"StreetName"`
-	SubDepartment      *string                `json:"SubDepartment"`
-	TownName           *string                `json:"TownName"`
+	AddressLine        []string               `json:"AddressLine,omitempty"`
+	AddressType        *ObAddressTypeCodeEnum `json:"AddressType,omitempty"`
+	BuildingNumber     *string                `json:"BuildingNumber,omitempty"`
+	Country            *string                `json:"Country,omitempty"`
+	CountrySubDivision *string                `json:"CountrySubDivision,omitempty"`
+	Department         *string                `json:"Department,omitempty"`
+	PostCode           *string                `json:"PostCode,omitempty"`
+	StreetName         *string                `json:"StreetName,omitempty"`
+	SubDepartment      *string                `json:"SubDepartment,omitempty"`
+	TownName           *string                `json:"TownName,omitempty"`
 }

@@ -3,11 +3,11 @@ package shared
 type UpdateBudgetActionRequest struct {
 	AccountID        string                `json:"AccountId"`
 	ActionID         string                `json:"ActionId"`
-	ActionThreshold  *ActionThreshold      `json:"ActionThreshold"`
-	ApprovalModel    *ApprovalModelEnum    `json:"ApprovalModel"`
+	ActionThreshold  *ActionThreshold      `json:"ActionThreshold,omitempty"`
+	ApprovalModel    *ApprovalModelEnum    `json:"ApprovalModel,omitempty"`
 	BudgetName       string                `json:"BudgetName"`
-	Definition       *Definition           `json:"Definition"`
-	ExecutionRoleArn *string               `json:"ExecutionRoleArn"`
-	NotificationType *NotificationTypeEnum `json:"NotificationType"`
-	Subscribers      []Subscriber          `json:"Subscribers"`
+	Definition       *Definition           `json:"Definition,omitempty"`
+	ExecutionRoleArn *string               `json:"ExecutionRoleArn,omitempty"`
+	NotificationType *NotificationTypeEnum `json:"NotificationType,omitempty"`
+	Subscribers      []Subscriber          `json:"Subscribers,omitempty"`
 }

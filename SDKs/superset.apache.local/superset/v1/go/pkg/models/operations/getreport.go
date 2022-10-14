@@ -18,38 +18,38 @@ type GetReportRequest struct {
 }
 
 type GetReport200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetReport200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetReport200ApplicationJSON struct {
-	Count              *float64                                       `json:"count"`
-	DescriptionColumns *GetReport200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	Ids                []string                                       `json:"ids"`
-	LabelColumns       *GetReport200ApplicationJSONLabelColumns       `json:"label_columns"`
-	ListColumns        []string                                       `json:"list_columns"`
-	ListTitle          *string                                        `json:"list_title"`
-	OrderColumns       []string                                       `json:"order_columns"`
-	Result             []shared.ReportScheduleRestAPIGetList          `json:"result"`
+	Count              *float64                                       `json:"count,omitempty"`
+	DescriptionColumns *GetReport200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	Ids                []string                                       `json:"ids,omitempty"`
+	LabelColumns       *GetReport200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	ListColumns        []string                                       `json:"list_columns,omitempty"`
+	ListTitle          *string                                        `json:"list_title,omitempty"`
+	OrderColumns       []string                                       `json:"order_columns,omitempty"`
+	Result             []shared.ReportScheduleRestAPIGetList          `json:"result,omitempty"`
 }
 
 type GetReport400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReport401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReport422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReport500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportResponse struct {

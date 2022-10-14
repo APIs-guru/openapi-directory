@@ -6,11 +6,11 @@ import (
 )
 
 type CreateManagedCredentialRequestBody struct {
-	ID            *int64     `json:"id"`
+	ID            *int64     `json:"id,omitempty"`
 	Label         string     `json:"label"`
-	LastDecrypted *time.Time `json:"last_decrypted"`
+	LastDecrypted *time.Time `json:"last_decrypted,omitempty"`
 	Password      string     `json:"password"`
-	Username      *string    `json:"username"`
+	Username      *string    `json:"username,omitempty"`
 }
 
 type CreateManagedCredentialSecurityOption1 struct {
@@ -32,7 +32,7 @@ type CreateManagedCredentialRequest struct {
 }
 
 type CreateManagedCredentialDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateManagedCredentialResponse struct {

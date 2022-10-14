@@ -5,11 +5,11 @@ type CreateNetworkApplianceVlanPathParams struct {
 }
 
 type CreateNetworkApplianceVlanRequestBody struct {
-	ApplianceIP   *string `json:"applianceIp"`
-	GroupPolicyID *string `json:"groupPolicyId"`
+	ApplianceIP   *string `json:"applianceIp,omitempty"`
+	GroupPolicyID *string `json:"groupPolicyId,omitempty"`
 	ID            string  `json:"id"`
 	Name          string  `json:"name"`
-	Subnet        *string `json:"subnet"`
+	Subnet        *string `json:"subnet,omitempty"`
 }
 
 type CreateNetworkApplianceVlanRequest struct {

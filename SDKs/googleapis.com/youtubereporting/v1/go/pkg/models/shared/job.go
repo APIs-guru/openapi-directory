@@ -1,10 +1,10 @@
 package shared
 
 type Job struct {
-	CreateTime    *string `json:"createTime"`
-	ExpireTime    *string `json:"expireTime"`
-	ID            *string `json:"id"`
-	Name          *string `json:"name"`
-	ReportTypeID  *string `json:"reportTypeId"`
-	SystemManaged *bool   `json:"systemManaged"`
+	CreateTime    *string `json:"createTime,omitempty"`
+	ExpireTime    *string `json:"expireTime,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	ReportTypeID  *string `json:"reportTypeId,omitempty"`
+	SystemManaged *bool   `json:"systemManaged,omitempty"`
 }

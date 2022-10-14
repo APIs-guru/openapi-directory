@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleCloudMlV1StudyConfig struct {
-	Algorithm               *GoogleCloudMlV1StudyConfigAlgorithmEnum  `json:"algorithm"`
-	AutomatedStoppingConfig *GoogleCloudMlV1AutomatedStoppingConfig   `json:"automatedStoppingConfig"`
-	Metrics                 []GoogleCloudMlV1StudyConfigMetricSpec    `json:"metrics"`
-	Parameters              []GoogleCloudMlV1StudyConfigParameterSpec `json:"parameters"`
+	Algorithm               *GoogleCloudMlV1StudyConfigAlgorithmEnum  `json:"algorithm,omitempty"`
+	AutomatedStoppingConfig *GoogleCloudMlV1AutomatedStoppingConfig   `json:"automatedStoppingConfig,omitempty"`
+	Metrics                 []GoogleCloudMlV1StudyConfigMetricSpec    `json:"metrics,omitempty"`
+	Parameters              []GoogleCloudMlV1StudyConfigParameterSpec `json:"parameters,omitempty"`
 }

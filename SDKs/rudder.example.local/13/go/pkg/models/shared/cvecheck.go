@@ -1,12 +1,12 @@
 package shared
 
 type CveCheckPackages struct {
-	Name    *string `json:"name"`
-	Version *string `json:"version"`
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 type CveCheck struct {
-	CveID    *string            `json:"cveId"`
-	Nodes    []string           `json:"nodes"`
-	Packages []CveCheckPackages `json:"packages"`
+	CveID    *string            `json:"cveId,omitempty"`
+	Nodes    []string           `json:"nodes,omitempty"`
+	Packages []CveCheckPackages `json:"packages,omitempty"`
 }

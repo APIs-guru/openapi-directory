@@ -9,9 +9,9 @@ type UpdateMessengerAccountPathParams struct {
 }
 
 type UpdateMessengerAccountRequestBody struct {
-	AccessToken  *string  `json:"access_token"`
-	Applications []string `json:"applications"`
-	Name         *string  `json:"name"`
+	AccessToken  *string  `json:"access_token,omitempty"`
+	Applications []string `json:"applications,omitempty"`
+	Name         *string  `json:"name,omitempty"`
 }
 
 type UpdateMessengerAccountSecurityOption1 struct {
@@ -36,23 +36,23 @@ type UpdateMessengerAccountRequest struct {
 type UpdateMessengerAccount200ApplicationJSON struct {
 	AccessToken  string   `json:"access_token"`
 	APIKey       string   `json:"api_key"`
-	Applications []string `json:"applications"`
+	Applications []string `json:"applications,omitempty"`
 	ExternalID   string   `json:"external_id"`
-	Name         *string  `json:"name"`
+	Name         *string  `json:"name,omitempty"`
 	Provider     string   `json:"provider"`
 }
 
 type UpdateMessengerAccount400ApplicationJSONInvalidParams struct {
-	Name   *string `json:"name"`
-	Reason *string `json:"reason"`
+	Name   *string `json:"name,omitempty"`
+	Reason *string `json:"reason,omitempty"`
 }
 
 type UpdateMessengerAccount400ApplicationJSON struct {
-	Detail        *string                                                 `json:"detail"`
-	Instance      *string                                                 `json:"instance"`
-	InvalidParams []UpdateMessengerAccount400ApplicationJSONInvalidParams `json:"invalid_params"`
-	Title         *string                                                 `json:"title"`
-	Type          *string                                                 `json:"type"`
+	Detail        *string                                                 `json:"detail,omitempty"`
+	Instance      *string                                                 `json:"instance,omitempty"`
+	InvalidParams []UpdateMessengerAccount400ApplicationJSONInvalidParams `json:"invalid_params,omitempty"`
+	Title         *string                                                 `json:"title,omitempty"`
+	Type          *string                                                 `json:"type,omitempty"`
 }
 
 type UpdateMessengerAccountResponse struct {

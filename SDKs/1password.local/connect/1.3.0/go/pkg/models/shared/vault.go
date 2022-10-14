@@ -14,13 +14,13 @@ const (
 )
 
 type Vault struct {
-	AttributeVersion *int64         `json:"attributeVersion"`
-	ContentVersion   *int64         `json:"contentVersion"`
-	CreatedAt        *time.Time     `json:"createdAt"`
-	Description      *string        `json:"description"`
-	ID               *string        `json:"id"`
-	Items            *int64         `json:"items"`
-	Name             *string        `json:"name"`
-	Type             *VaultTypeEnum `json:"type"`
-	UpdatedAt        *time.Time     `json:"updatedAt"`
+	AttributeVersion *int64         `json:"attributeVersion,omitempty"`
+	ContentVersion   *int64         `json:"contentVersion,omitempty"`
+	CreatedAt        *time.Time     `json:"createdAt,omitempty"`
+	Description      *string        `json:"description,omitempty"`
+	ID               *string        `json:"id,omitempty"`
+	Items            *int64         `json:"items,omitempty"`
+	Name             *string        `json:"name,omitempty"`
+	Type             *VaultTypeEnum `json:"type,omitempty"`
+	UpdatedAt        *time.Time     `json:"updatedAt,omitempty"`
 }

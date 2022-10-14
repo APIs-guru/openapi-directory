@@ -1,5 +1,5 @@
 package shared
 
 type StopBuildOutput struct {
-	Build *Build `json:"build"`
+	Build *Build `json:"build,omitempty"`
 }

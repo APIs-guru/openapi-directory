@@ -5,7 +5,7 @@ import (
 )
 
 type ManagedCredential struct {
-	ID            *int64     `json:"id"`
-	Label         *string    `json:"label"`
-	LastDecrypted *time.Time `json:"last_decrypted"`
+	ID            *int64     `json:"id,omitempty"`
+	Label         *string    `json:"label,omitempty"`
+	LastDecrypted *time.Time `json:"last_decrypted,omitempty"`
 }

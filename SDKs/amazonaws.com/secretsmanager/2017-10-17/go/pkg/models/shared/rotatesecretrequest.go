@@ -1,8 +1,8 @@
 package shared
 
 type RotateSecretRequest struct {
-	ClientRequestToken *string            `json:"ClientRequestToken"`
-	RotationLambdaArn  *string            `json:"RotationLambdaARN"`
-	RotationRules      *RotationRulesType `json:"RotationRules"`
+	ClientRequestToken *string            `json:"ClientRequestToken,omitempty"`
+	RotationLambdaArn  *string            `json:"RotationLambdaARN,omitempty"`
+	RotationRules      *RotationRulesType `json:"RotationRules,omitempty"`
 	SecretID           string             `json:"SecretId"`
 }

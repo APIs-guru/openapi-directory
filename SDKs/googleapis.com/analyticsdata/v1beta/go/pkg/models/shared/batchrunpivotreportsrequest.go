@@ -1,5 +1,5 @@
 package shared
 
 type BatchRunPivotReportsRequest struct {
-	Requests []RunPivotReportRequest `json:"requests"`
+	Requests []RunPivotReportRequest `json:"requests,omitempty"`
 }

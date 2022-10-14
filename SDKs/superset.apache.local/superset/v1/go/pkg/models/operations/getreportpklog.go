@@ -23,25 +23,25 @@ type GetReportPkLogRequest struct {
 }
 
 type GetReportPkLog200ApplicationJSON struct {
-	Count  *float64                                  `json:"count"`
-	Ids    []string                                  `json:"ids"`
-	Result []shared.ReportExecutionLogRestAPIGetList `json:"result"`
+	Count  *float64                                  `json:"count,omitempty"`
+	Ids    []string                                  `json:"ids,omitempty"`
+	Result []shared.ReportExecutionLogRestAPIGetList `json:"result,omitempty"`
 }
 
 type GetReportPkLog400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLog401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLog422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLog500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLogResponse struct {

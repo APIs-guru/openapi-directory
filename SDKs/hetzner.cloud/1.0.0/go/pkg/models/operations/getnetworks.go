@@ -41,7 +41,7 @@ const (
 
 type GetNetworks200ApplicationJSONNetworksSubnets struct {
 	Gateway     string                                               `json:"gateway"`
-	IPRange     *string                                              `json:"ip_range"`
+	IPRange     *string                                              `json:"ip_range,omitempty"`
 	NetworkZone string                                               `json:"network_zone"`
 	Type        GetNetworks200ApplicationJSONNetworksSubnetsTypeEnum `json:"type"`
 }
@@ -51,7 +51,7 @@ type GetNetworks200ApplicationJSONNetworks struct {
 	ID            int64                                           `json:"id"`
 	IPRange       string                                          `json:"ip_range"`
 	Labels        map[string]interface{}                          `json:"labels"`
-	LoadBalancers []int64                                         `json:"load_balancers"`
+	LoadBalancers []int64                                         `json:"load_balancers,omitempty"`
 	Name          string                                          `json:"name"`
 	Protection    GetNetworks200ApplicationJSONNetworksProtection `json:"protection"`
 	Routes        []GetNetworks200ApplicationJSONNetworksRoutes   `json:"routes"`
@@ -60,7 +60,7 @@ type GetNetworks200ApplicationJSONNetworks struct {
 }
 
 type GetNetworks200ApplicationJSON struct {
-	Meta     *GetNetworks200ApplicationJSONMeta      `json:"meta"`
+	Meta     *GetNetworks200ApplicationJSONMeta      `json:"meta,omitempty"`
 	Networks []GetNetworks200ApplicationJSONNetworks `json:"networks"`
 }
 

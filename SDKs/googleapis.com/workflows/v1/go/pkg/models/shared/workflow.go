@@ -8,14 +8,14 @@ const (
 )
 
 type Workflow struct {
-	CreateTime         *string            `json:"createTime"`
-	Description        *string            `json:"description"`
-	Labels             map[string]string  `json:"labels"`
-	Name               *string            `json:"name"`
-	RevisionCreateTime *string            `json:"revisionCreateTime"`
-	RevisionID         *string            `json:"revisionId"`
-	ServiceAccount     *string            `json:"serviceAccount"`
-	SourceContents     *string            `json:"sourceContents"`
-	State              *WorkflowStateEnum `json:"state"`
-	UpdateTime         *string            `json:"updateTime"`
+	CreateTime         *string            `json:"createTime,omitempty"`
+	Description        *string            `json:"description,omitempty"`
+	Labels             map[string]string  `json:"labels,omitempty"`
+	Name               *string            `json:"name,omitempty"`
+	RevisionCreateTime *string            `json:"revisionCreateTime,omitempty"`
+	RevisionID         *string            `json:"revisionId,omitempty"`
+	ServiceAccount     *string            `json:"serviceAccount,omitempty"`
+	SourceContents     *string            `json:"sourceContents,omitempty"`
+	State              *WorkflowStateEnum `json:"state,omitempty"`
+	UpdateTime         *string            `json:"updateTime,omitempty"`
 }

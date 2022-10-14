@@ -1,12 +1,12 @@
 package shared
 
 type OAuth2Permission struct {
-	AdminConsentDescription *string `json:"adminConsentDescription"`
-	AdminConsentDisplayName *string `json:"adminConsentDisplayName"`
-	ID                      *string `json:"id"`
-	IsEnabled               *bool   `json:"isEnabled"`
-	Type                    *string `json:"type"`
-	UserConsentDescription  *string `json:"userConsentDescription"`
-	UserConsentDisplayName  *string `json:"userConsentDisplayName"`
-	Value                   *string `json:"value"`
+	AdminConsentDescription *string `json:"adminConsentDescription,omitempty"`
+	AdminConsentDisplayName *string `json:"adminConsentDisplayName,omitempty"`
+	ID                      *string `json:"id,omitempty"`
+	IsEnabled               *bool   `json:"isEnabled,omitempty"`
+	Type                    *string `json:"type,omitempty"`
+	UserConsentDescription  *string `json:"userConsentDescription,omitempty"`
+	UserConsentDisplayName  *string `json:"userConsentDisplayName,omitempty"`
+	Value                   *string `json:"value,omitempty"`
 }

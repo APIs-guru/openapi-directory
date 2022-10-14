@@ -1,7 +1,7 @@
 package shared
 
 type PutItemOutput struct {
-	Attributes            map[string]AttributeValue `json:"Attributes"`
-	ConsumedCapacity      *ConsumedCapacity         `json:"ConsumedCapacity"`
-	ItemCollectionMetrics *ItemCollectionMetrics    `json:"ItemCollectionMetrics"`
+	Attributes            map[string]AttributeValue `json:"Attributes,omitempty"`
+	ConsumedCapacity      *ConsumedCapacity         `json:"ConsumedCapacity,omitempty"`
+	ItemCollectionMetrics *ItemCollectionMetrics    `json:"ItemCollectionMetrics,omitempty"`
 }

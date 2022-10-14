@@ -1,6 +1,6 @@
 package shared
 
 type GetCustomerIndexStatsResponse struct {
-	AverageIndexedItemCount *string              `json:"averageIndexedItemCount"`
-	Stats                   []CustomerIndexStats `json:"stats"`
+	AverageIndexedItemCount *string              `json:"averageIndexedItemCount,omitempty"`
+	Stats                   []CustomerIndexStats `json:"stats,omitempty"`
 }

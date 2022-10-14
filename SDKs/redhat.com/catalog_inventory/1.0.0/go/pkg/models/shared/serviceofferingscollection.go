@@ -1,7 +1,7 @@
 package shared
 
 type ServiceOfferingsCollection struct {
-	Data  []ServiceOffering   `json:"data"`
-	Links *CollectionLinks    `json:"links"`
-	Meta  *CollectionMetadata `json:"meta"`
+	Data  []ServiceOffering   `json:"data,omitempty"`
+	Links *CollectionLinks    `json:"links,omitempty"`
+	Meta  *CollectionMetadata `json:"meta,omitempty"`
 }

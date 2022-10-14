@@ -46,14 +46,14 @@ const (
 )
 
 type PhysicalDistancing struct {
-	CommonAreasPhysicalDistancingArranged          *bool                                                                 `json:"commonAreasPhysicalDistancingArranged"`
-	CommonAreasPhysicalDistancingArrangedException *PhysicalDistancingCommonAreasPhysicalDistancingArrangedExceptionEnum `json:"commonAreasPhysicalDistancingArrangedException"`
-	PhysicalDistancingRequired                     *bool                                                                 `json:"physicalDistancingRequired"`
-	PhysicalDistancingRequiredException            *PhysicalDistancingPhysicalDistancingRequiredExceptionEnum            `json:"physicalDistancingRequiredException"`
-	SafetyDividers                                 *bool                                                                 `json:"safetyDividers"`
-	SafetyDividersException                        *PhysicalDistancingSafetyDividersExceptionEnum                        `json:"safetyDividersException"`
-	SharedAreasLimitedOccupancy                    *bool                                                                 `json:"sharedAreasLimitedOccupancy"`
-	SharedAreasLimitedOccupancyException           *PhysicalDistancingSharedAreasLimitedOccupancyExceptionEnum           `json:"sharedAreasLimitedOccupancyException"`
-	WellnessAreasHavePrivateSpaces                 *bool                                                                 `json:"wellnessAreasHavePrivateSpaces"`
-	WellnessAreasHavePrivateSpacesException        *PhysicalDistancingWellnessAreasHavePrivateSpacesExceptionEnum        `json:"wellnessAreasHavePrivateSpacesException"`
+	CommonAreasPhysicalDistancingArranged          *bool                                                                 `json:"commonAreasPhysicalDistancingArranged,omitempty"`
+	CommonAreasPhysicalDistancingArrangedException *PhysicalDistancingCommonAreasPhysicalDistancingArrangedExceptionEnum `json:"commonAreasPhysicalDistancingArrangedException,omitempty"`
+	PhysicalDistancingRequired                     *bool                                                                 `json:"physicalDistancingRequired,omitempty"`
+	PhysicalDistancingRequiredException            *PhysicalDistancingPhysicalDistancingRequiredExceptionEnum            `json:"physicalDistancingRequiredException,omitempty"`
+	SafetyDividers                                 *bool                                                                 `json:"safetyDividers,omitempty"`
+	SafetyDividersException                        *PhysicalDistancingSafetyDividersExceptionEnum                        `json:"safetyDividersException,omitempty"`
+	SharedAreasLimitedOccupancy                    *bool                                                                 `json:"sharedAreasLimitedOccupancy,omitempty"`
+	SharedAreasLimitedOccupancyException           *PhysicalDistancingSharedAreasLimitedOccupancyExceptionEnum           `json:"sharedAreasLimitedOccupancyException,omitempty"`
+	WellnessAreasHavePrivateSpaces                 *bool                                                                 `json:"wellnessAreasHavePrivateSpaces,omitempty"`
+	WellnessAreasHavePrivateSpacesException        *PhysicalDistancingWellnessAreasHavePrivateSpacesExceptionEnum        `json:"wellnessAreasHavePrivateSpacesException,omitempty"`
 }

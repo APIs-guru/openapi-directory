@@ -1,5 +1,5 @@
 package shared
 
 type OperatingSystem struct {
-	Type *OperatingSystemTypeEnum `json:"Type"`
+	Type *OperatingSystemTypeEnum `json:"Type,omitempty"`
 }

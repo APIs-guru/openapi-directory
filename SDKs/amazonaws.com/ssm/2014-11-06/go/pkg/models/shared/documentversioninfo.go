@@ -5,14 +5,14 @@ import (
 )
 
 type DocumentVersionInfo struct {
-	CreatedDate       *time.Time          `json:"CreatedDate"`
-	DisplayName       *string             `json:"DisplayName"`
-	DocumentFormat    *DocumentFormatEnum `json:"DocumentFormat"`
-	DocumentVersion   *string             `json:"DocumentVersion"`
-	IsDefaultVersion  *bool               `json:"IsDefaultVersion"`
-	Name              *string             `json:"Name"`
-	ReviewStatus      *ReviewStatusEnum   `json:"ReviewStatus"`
-	Status            *DocumentStatusEnum `json:"Status"`
-	StatusInformation *string             `json:"StatusInformation"`
-	VersionName       *string             `json:"VersionName"`
+	CreatedDate       *time.Time          `json:"CreatedDate,omitempty"`
+	DisplayName       *string             `json:"DisplayName,omitempty"`
+	DocumentFormat    *DocumentFormatEnum `json:"DocumentFormat,omitempty"`
+	DocumentVersion   *string             `json:"DocumentVersion,omitempty"`
+	IsDefaultVersion  *bool               `json:"IsDefaultVersion,omitempty"`
+	Name              *string             `json:"Name,omitempty"`
+	ReviewStatus      *ReviewStatusEnum   `json:"ReviewStatus,omitempty"`
+	Status            *DocumentStatusEnum `json:"Status,omitempty"`
+	StatusInformation *string             `json:"StatusInformation,omitempty"`
+	VersionName       *string             `json:"VersionName,omitempty"`
 }

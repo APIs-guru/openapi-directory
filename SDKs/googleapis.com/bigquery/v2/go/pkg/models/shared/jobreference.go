@@ -1,7 +1,7 @@
 package shared
 
 type JobReference struct {
-	JobID     *string `json:"jobId"`
-	Location  *string `json:"location"`
-	ProjectID *string `json:"projectId"`
+	JobID     *string `json:"jobId,omitempty"`
+	Location  *string `json:"location,omitempty"`
+	ProjectID *string `json:"projectId,omitempty"`
 }

@@ -16,16 +16,16 @@ type GetMediaHeaders struct {
 }
 
 type GetMediaRequestBodyStartSelector struct {
-	AfterFragmentNumber *string                       `json:"AfterFragmentNumber"`
-	ContinuationToken   *string                       `json:"ContinuationToken"`
-	StartSelectorType   *shared.StartSelectorTypeEnum `json:"StartSelectorType"`
-	StartTimestamp      *time.Time                    `json:"StartTimestamp"`
+	AfterFragmentNumber *string                       `json:"AfterFragmentNumber,omitempty"`
+	ContinuationToken   *string                       `json:"ContinuationToken,omitempty"`
+	StartSelectorType   *shared.StartSelectorTypeEnum `json:"StartSelectorType,omitempty"`
+	StartTimestamp      *time.Time                    `json:"StartTimestamp,omitempty"`
 }
 
 type GetMediaRequestBody struct {
 	StartSelector GetMediaRequestBodyStartSelector `json:"StartSelector"`
-	StreamArn     *string                          `json:"StreamARN"`
-	StreamName    *string                          `json:"StreamName"`
+	StreamArn     *string                          `json:"StreamARN,omitempty"`
+	StreamName    *string                          `json:"StreamName,omitempty"`
 }
 
 type GetMediaRequest struct {

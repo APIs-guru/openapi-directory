@@ -15,7 +15,7 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoCondition struct {
-	EventPropertyKey *string                                          `json:"eventPropertyKey"`
-	Operator         *EnterpriseCrmEventbusProtoConditionOperatorEnum `json:"operator"`
-	Value            *EnterpriseCrmEventbusProtoValueType             `json:"value"`
+	EventPropertyKey *string                                          `json:"eventPropertyKey,omitempty"`
+	Operator         *EnterpriseCrmEventbusProtoConditionOperatorEnum `json:"operator,omitempty"`
+	Value            *EnterpriseCrmEventbusProtoValueType             `json:"value,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type PushMessageActivity struct {
-	MessageConfig   *JourneyPushMessage `json:"MessageConfig"`
-	NextActivity    *string             `json:"NextActivity"`
-	TemplateName    *string             `json:"TemplateName"`
-	TemplateVersion *string             `json:"TemplateVersion"`
+	MessageConfig   *JourneyPushMessage `json:"MessageConfig,omitempty"`
+	NextActivity    *string             `json:"NextActivity,omitempty"`
+	TemplateName    *string             `json:"TemplateName,omitempty"`
+	TemplateVersion *string             `json:"TemplateVersion,omitempty"`
 }

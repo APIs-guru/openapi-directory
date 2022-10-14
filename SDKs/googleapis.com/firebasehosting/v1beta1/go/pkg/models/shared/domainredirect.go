@@ -8,6 +8,6 @@ const (
 )
 
 type DomainRedirect struct {
-	DomainName *string                 `json:"domainName"`
-	Type       *DomainRedirectTypeEnum `json:"type"`
+	DomainName *string                 `json:"domainName,omitempty"`
+	Type       *DomainRedirectTypeEnum `json:"type,omitempty"`
 }

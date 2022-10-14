@@ -9,8 +9,8 @@ const (
 )
 
 type UpgradeSettings struct {
-	BlueGreenSettings *BlueGreenSettings           `json:"blueGreenSettings"`
-	MaxSurge          *int32                       `json:"maxSurge"`
-	MaxUnavailable    *int32                       `json:"maxUnavailable"`
-	Strategy          *UpgradeSettingsStrategyEnum `json:"strategy"`
+	BlueGreenSettings *BlueGreenSettings           `json:"blueGreenSettings,omitempty"`
+	MaxSurge          *int32                       `json:"maxSurge,omitempty"`
+	MaxUnavailable    *int32                       `json:"maxUnavailable,omitempty"`
+	Strategy          *UpgradeSettingsStrategyEnum `json:"strategy,omitempty"`
 }

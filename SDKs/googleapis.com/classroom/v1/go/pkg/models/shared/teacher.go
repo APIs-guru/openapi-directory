@@ -1,7 +1,7 @@
 package shared
 
 type Teacher struct {
-	CourseID *string      `json:"courseId"`
-	Profile  *UserProfile `json:"profile"`
-	UserID   *string      `json:"userId"`
+	CourseID *string      `json:"courseId,omitempty"`
+	Profile  *UserProfile `json:"profile,omitempty"`
+	UserID   *string      `json:"userId,omitempty"`
 }

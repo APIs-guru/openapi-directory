@@ -8,7 +8,7 @@ type DescribeDashboardResponse struct {
 	DashboardArn            string    `json:"dashboardArn"`
 	DashboardCreationDate   time.Time `json:"dashboardCreationDate"`
 	DashboardDefinition     string    `json:"dashboardDefinition"`
-	DashboardDescription    *string   `json:"dashboardDescription"`
+	DashboardDescription    *string   `json:"dashboardDescription,omitempty"`
 	DashboardID             string    `json:"dashboardId"`
 	DashboardLastUpdateDate time.Time `json:"dashboardLastUpdateDate"`
 	DashboardName           string    `json:"dashboardName"`

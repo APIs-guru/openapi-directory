@@ -17,7 +17,7 @@ const (
 )
 
 type DNSConfig struct {
-	ClusterDNS       *DNSConfigClusterDNSEnum      `json:"clusterDns"`
-	ClusterDNSDomain *string                       `json:"clusterDnsDomain"`
-	ClusterDNSScope  *DNSConfigClusterDNSScopeEnum `json:"clusterDnsScope"`
+	ClusterDNS       *DNSConfigClusterDNSEnum      `json:"clusterDns,omitempty"`
+	ClusterDNSDomain *string                       `json:"clusterDnsDomain,omitempty"`
+	ClusterDNSScope  *DNSConfigClusterDNSScopeEnum `json:"clusterDnsScope,omitempty"`
 }

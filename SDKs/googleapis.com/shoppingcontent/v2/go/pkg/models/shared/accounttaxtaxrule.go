@@ -1,9 +1,9 @@
 package shared
 
 type AccountTaxTaxRule struct {
-	Country       *string `json:"country"`
-	LocationID    *string `json:"locationId"`
-	RatePercent   *string `json:"ratePercent"`
-	ShippingTaxed *bool   `json:"shippingTaxed"`
-	UseGlobalRate *bool   `json:"useGlobalRate"`
+	Country       *string `json:"country,omitempty"`
+	LocationID    *string `json:"locationId,omitempty"`
+	RatePercent   *string `json:"ratePercent,omitempty"`
+	ShippingTaxed *bool   `json:"shippingTaxed,omitempty"`
+	UseGlobalRate *bool   `json:"useGlobalRate,omitempty"`
 }

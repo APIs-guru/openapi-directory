@@ -1,6 +1,6 @@
 package shared
 
 type ListApplicationSnapshotsResponse struct {
-	NextToken         *string           `json:"NextToken"`
-	SnapshotSummaries []SnapshotDetails `json:"SnapshotSummaries"`
+	NextToken         *string           `json:"NextToken,omitempty"`
+	SnapshotSummaries []SnapshotDetails `json:"SnapshotSummaries,omitempty"`
 }

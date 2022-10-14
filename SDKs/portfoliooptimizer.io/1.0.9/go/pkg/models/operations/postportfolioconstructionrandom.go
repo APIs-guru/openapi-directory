@@ -1,16 +1,16 @@
 package operations
 
 type PostPortfolioConstructionRandomRequestBodyConstraints struct {
-	MaximumAssetsWeights     []float64 `json:"maximumAssetsWeights"`
-	MaximumPortfolioExposure *float64  `json:"maximumPortfolioExposure"`
-	MinimumAssetsWeights     []float64 `json:"minimumAssetsWeights"`
-	MinimumPortfolioExposure *float64  `json:"minimumPortfolioExposure"`
+	MaximumAssetsWeights     []float64 `json:"maximumAssetsWeights,omitempty"`
+	MaximumPortfolioExposure *float64  `json:"maximumPortfolioExposure,omitempty"`
+	MinimumAssetsWeights     []float64 `json:"minimumAssetsWeights,omitempty"`
+	MinimumPortfolioExposure *float64  `json:"minimumPortfolioExposure,omitempty"`
 }
 
 type PostPortfolioConstructionRandomRequestBody struct {
 	Assets      int64                                                  `json:"assets"`
-	Constraints *PostPortfolioConstructionRandomRequestBodyConstraints `json:"constraints"`
-	Portfolios  *int64                                                 `json:"portfolios"`
+	Constraints *PostPortfolioConstructionRandomRequestBodyConstraints `json:"constraints,omitempty"`
+	Portfolios  *int64                                                 `json:"portfolios,omitempty"`
 }
 
 type PostPortfolioConstructionRandomRequest struct {

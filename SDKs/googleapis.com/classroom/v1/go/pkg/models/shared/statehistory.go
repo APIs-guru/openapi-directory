@@ -12,7 +12,7 @@ const (
 )
 
 type StateHistory struct {
-	ActorUserID    *string                `json:"actorUserId"`
-	State          *StateHistoryStateEnum `json:"state"`
-	StateTimestamp *string                `json:"stateTimestamp"`
+	ActorUserID    *string                `json:"actorUserId,omitempty"`
+	State          *StateHistoryStateEnum `json:"state,omitempty"`
+	StateTimestamp *string                `json:"stateTimestamp,omitempty"`
 }

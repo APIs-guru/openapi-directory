@@ -1,10 +1,10 @@
 package shared
 
 type ClientScopeRepresentation struct {
-	Attributes      map[string]interface{}         `json:"attributes"`
-	Description     *string                        `json:"description"`
-	ID              *string                        `json:"id"`
-	Name            *string                        `json:"name"`
-	Protocol        *string                        `json:"protocol"`
-	ProtocolMappers []ProtocolMapperRepresentation `json:"protocolMappers"`
+	Attributes      map[string]interface{}         `json:"attributes,omitempty"`
+	Description     *string                        `json:"description,omitempty"`
+	ID              *string                        `json:"id,omitempty"`
+	Name            *string                        `json:"name,omitempty"`
+	Protocol        *string                        `json:"protocol,omitempty"`
+	ProtocolMappers []ProtocolMapperRepresentation `json:"protocolMappers,omitempty"`
 }

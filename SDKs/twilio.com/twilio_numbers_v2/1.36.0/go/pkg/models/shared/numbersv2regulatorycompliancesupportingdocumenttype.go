@@ -1,9 +1,9 @@
 package shared
 
 type NumbersV2RegulatoryComplianceSupportingDocumentType struct {
-	Fields       []interface{} `json:"fields"`
-	FriendlyName *string       `json:"friendly_name"`
-	MachineName  *string       `json:"machine_name"`
-	Sid          *string       `json:"sid"`
-	URL          *string       `json:"url"`
+	Fields       []interface{} `json:"fields,omitempty"`
+	FriendlyName *string       `json:"friendly_name,omitempty"`
+	MachineName  *string       `json:"machine_name,omitempty"`
+	Sid          *string       `json:"sid,omitempty"`
+	URL          *string       `json:"url,omitempty"`
 }

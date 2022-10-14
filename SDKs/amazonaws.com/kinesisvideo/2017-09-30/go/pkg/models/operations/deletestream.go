@@ -11,7 +11,7 @@ type DeleteStreamHeaders struct {
 }
 
 type DeleteStreamRequestBody struct {
-	CurrentVersion *string `json:"CurrentVersion"`
+	CurrentVersion *string `json:"CurrentVersion,omitempty"`
 	StreamArn      string  `json:"StreamARN"`
 }
 

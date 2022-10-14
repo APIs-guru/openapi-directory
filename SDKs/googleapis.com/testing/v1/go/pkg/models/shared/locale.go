@@ -1,8 +1,8 @@
 package shared
 
 type Locale struct {
-	ID     *string  `json:"id"`
-	Name   *string  `json:"name"`
-	Region *string  `json:"region"`
-	Tags   []string `json:"tags"`
+	ID     *string  `json:"id,omitempty"`
+	Name   *string  `json:"name,omitempty"`
+	Region *string  `json:"region,omitempty"`
+	Tags   []string `json:"tags,omitempty"`
 }

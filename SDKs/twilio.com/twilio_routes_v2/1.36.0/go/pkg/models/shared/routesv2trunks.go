@@ -5,12 +5,12 @@ import (
 )
 
 type RoutesV2Trunks struct {
-	AccountSid     *string    `json:"account_sid"`
-	DateCreated    *time.Time `json:"date_created"`
-	DateUpdated    *time.Time `json:"date_updated"`
-	FriendlyName   *string    `json:"friendly_name"`
-	Sid            *string    `json:"sid"`
-	SipTrunkDomain *string    `json:"sip_trunk_domain"`
-	URL            *string    `json:"url"`
-	VoiceRegion    *string    `json:"voice_region"`
+	AccountSid     *string    `json:"account_sid,omitempty"`
+	DateCreated    *time.Time `json:"date_created,omitempty"`
+	DateUpdated    *time.Time `json:"date_updated,omitempty"`
+	FriendlyName   *string    `json:"friendly_name,omitempty"`
+	Sid            *string    `json:"sid,omitempty"`
+	SipTrunkDomain *string    `json:"sip_trunk_domain,omitempty"`
+	URL            *string    `json:"url,omitempty"`
+	VoiceRegion    *string    `json:"voice_region,omitempty"`
 }

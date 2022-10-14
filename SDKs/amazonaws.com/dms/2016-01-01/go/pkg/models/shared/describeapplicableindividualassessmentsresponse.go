@@ -1,6 +1,6 @@
 package shared
 
 type DescribeApplicableIndividualAssessmentsResponse struct {
-	IndividualAssessmentNames []string `json:"IndividualAssessmentNames"`
-	Marker                    *string  `json:"Marker"`
+	IndividualAssessmentNames []string `json:"IndividualAssessmentNames,omitempty"`
+	Marker                    *string  `json:"Marker,omitempty"`
 }

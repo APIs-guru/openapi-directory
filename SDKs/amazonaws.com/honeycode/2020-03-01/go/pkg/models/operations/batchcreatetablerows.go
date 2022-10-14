@@ -20,7 +20,7 @@ type BatchCreateTableRowsHeaders struct {
 }
 
 type BatchCreateTableRowsRequestBody struct {
-	ClientRequestToken *string                `json:"clientRequestToken"`
+	ClientRequestToken *string                `json:"clientRequestToken,omitempty"`
 	RowsToCreate       []shared.CreateRowData `json:"rowsToCreate"`
 }
 

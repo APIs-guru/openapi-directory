@@ -18,12 +18,12 @@ const (
 )
 
 type DirectorySite struct {
-	ID                     *string                                   `json:"id"`
-	IDDimensionValue       *DimensionValue                           `json:"idDimensionValue"`
-	InpageTagFormats       []DirectorySiteInpageTagFormatsEnum       `json:"inpageTagFormats"`
-	InterstitialTagFormats []DirectorySiteInterstitialTagFormatsEnum `json:"interstitialTagFormats"`
-	Kind                   *string                                   `json:"kind"`
-	Name                   *string                                   `json:"name"`
-	Settings               *DirectorySiteSettings                    `json:"settings"`
-	URL                    *string                                   `json:"url"`
+	ID                     *string                                   `json:"id,omitempty"`
+	IDDimensionValue       *DimensionValue                           `json:"idDimensionValue,omitempty"`
+	InpageTagFormats       []DirectorySiteInpageTagFormatsEnum       `json:"inpageTagFormats,omitempty"`
+	InterstitialTagFormats []DirectorySiteInterstitialTagFormatsEnum `json:"interstitialTagFormats,omitempty"`
+	Kind                   *string                                   `json:"kind,omitempty"`
+	Name                   *string                                   `json:"name,omitempty"`
+	Settings               *DirectorySiteSettings                    `json:"settings,omitempty"`
+	URL                    *string                                   `json:"url,omitempty"`
 }

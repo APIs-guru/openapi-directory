@@ -1,5 +1,5 @@
 package shared
 
 type Logging struct {
-	ClusterLogging []LogSetup `json:"clusterLogging"`
+	ClusterLogging []LogSetup `json:"clusterLogging,omitempty"`
 }

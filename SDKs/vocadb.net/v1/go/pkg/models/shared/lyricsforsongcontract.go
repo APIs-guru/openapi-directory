@@ -9,10 +9,10 @@ const (
 )
 
 type LyricsForSongContract struct {
-	CultureCode     *string                                   `json:"cultureCode"`
-	ID              *int32                                    `json:"id"`
-	Source          *string                                   `json:"source"`
-	TranslationType *LyricsForSongContractTranslationTypeEnum `json:"translationType"`
-	URL             *string                                   `json:"url"`
-	Value           *string                                   `json:"value"`
+	CultureCode     *string                                   `json:"cultureCode,omitempty"`
+	ID              *int32                                    `json:"id,omitempty"`
+	Source          *string                                   `json:"source,omitempty"`
+	TranslationType *LyricsForSongContractTranslationTypeEnum `json:"translationType,omitempty"`
+	URL             *string                                   `json:"url,omitempty"`
+	Value           *string                                   `json:"value,omitempty"`
 }

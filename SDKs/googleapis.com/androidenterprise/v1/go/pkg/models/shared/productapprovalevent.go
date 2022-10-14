@@ -9,6 +9,6 @@ const (
 )
 
 type ProductApprovalEvent struct {
-	Approved  *ProductApprovalEventApprovedEnum `json:"approved"`
-	ProductID *string                           `json:"productId"`
+	Approved  *ProductApprovalEventApprovedEnum `json:"approved,omitempty"`
+	ProductID *string                           `json:"productId,omitempty"`
 }

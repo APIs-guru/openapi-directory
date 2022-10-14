@@ -1,7 +1,7 @@
 package shared
 
 type MoveAnalysis struct {
-	Analysis    *MoveAnalysisResult `json:"analysis"`
-	DisplayName *string             `json:"displayName"`
-	Error       *Status             `json:"error"`
+	Analysis    *MoveAnalysisResult `json:"analysis,omitempty"`
+	DisplayName *string             `json:"displayName,omitempty"`
+	Error       *Status             `json:"error,omitempty"`
 }

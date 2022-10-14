@@ -12,16 +12,16 @@ const (
 )
 
 type WritableService struct {
-	Created        *time.Time                          `json:"created"`
-	CustomFields   map[string]interface{}              `json:"custom_fields"`
-	Description    *string                             `json:"description"`
-	Device         *int64                              `json:"device"`
-	ID             *int64                              `json:"id"`
-	Ipaddresses    []int64                             `json:"ipaddresses"`
-	LastUpdated    *time.Time                          `json:"last_updated"`
+	Created        *time.Time                          `json:"created,omitempty"`
+	CustomFields   map[string]interface{}              `json:"custom_fields,omitempty"`
+	Description    *string                             `json:"description,omitempty"`
+	Device         *int64                              `json:"device,omitempty"`
+	ID             *int64                              `json:"id,omitempty"`
+	Ipaddresses    []int64                             `json:"ipaddresses,omitempty"`
+	LastUpdated    *time.Time                          `json:"last_updated,omitempty"`
 	Name           string                              `json:"name"`
 	Port           int64                               `json:"port"`
 	Protocol       WritableServiceProtocolProtocolEnum `json:"protocol"`
-	Tags           []string                            `json:"tags"`
-	VirtualMachine *int64                              `json:"virtual_machine"`
+	Tags           []string                            `json:"tags,omitempty"`
+	VirtualMachine *int64                              `json:"virtual_machine,omitempty"`
 }

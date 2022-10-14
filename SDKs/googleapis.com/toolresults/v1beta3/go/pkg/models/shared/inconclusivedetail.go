@@ -1,7 +1,7 @@
 package shared
 
 type InconclusiveDetail struct {
-	AbortedByUser         *bool `json:"abortedByUser"`
-	HasErrorLogs          *bool `json:"hasErrorLogs"`
-	InfrastructureFailure *bool `json:"infrastructureFailure"`
+	AbortedByUser         *bool `json:"abortedByUser,omitempty"`
+	HasErrorLogs          *bool `json:"hasErrorLogs,omitempty"`
+	InfrastructureFailure *bool `json:"infrastructureFailure,omitempty"`
 }

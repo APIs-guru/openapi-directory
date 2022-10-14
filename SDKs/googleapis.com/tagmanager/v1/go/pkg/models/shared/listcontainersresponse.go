@@ -1,5 +1,5 @@
 package shared
 
 type ListContainersResponse struct {
-	Containers []Container `json:"containers"`
+	Containers []Container `json:"containers,omitempty"`
 }

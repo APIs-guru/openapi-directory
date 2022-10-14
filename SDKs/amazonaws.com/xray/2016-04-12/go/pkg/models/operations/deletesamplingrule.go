@@ -15,8 +15,8 @@ type DeleteSamplingRuleHeaders struct {
 }
 
 type DeleteSamplingRuleRequestBody struct {
-	RuleArn  *string `json:"RuleARN"`
-	RuleName *string `json:"RuleName"`
+	RuleArn  *string `json:"RuleARN,omitempty"`
+	RuleName *string `json:"RuleName,omitempty"`
 }
 
 type DeleteSamplingRuleRequest struct {

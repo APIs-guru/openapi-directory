@@ -5,21 +5,21 @@ import (
 )
 
 type DescribeDomainResponse struct {
-	AppNetworkAccessType                     *AppNetworkAccessTypeEnum `json:"AppNetworkAccessType"`
-	AuthMode                                 *AuthModeEnum             `json:"AuthMode"`
-	CreationTime                             *time.Time                `json:"CreationTime"`
-	DefaultUserSettings                      *UserSettings             `json:"DefaultUserSettings"`
-	DomainArn                                *string                   `json:"DomainArn"`
-	DomainID                                 *string                   `json:"DomainId"`
-	DomainName                               *string                   `json:"DomainName"`
-	FailureReason                            *string                   `json:"FailureReason"`
-	HomeEfsFileSystemID                      *string                   `json:"HomeEfsFileSystemId"`
-	HomeEfsFileSystemKmsKeyID                *string                   `json:"HomeEfsFileSystemKmsKeyId"`
-	KmsKeyID                                 *string                   `json:"KmsKeyId"`
-	LastModifiedTime                         *time.Time                `json:"LastModifiedTime"`
-	SingleSignOnManagedApplicationInstanceID *string                   `json:"SingleSignOnManagedApplicationInstanceId"`
-	Status                                   *DomainStatusEnum         `json:"Status"`
-	SubnetIds                                []string                  `json:"SubnetIds"`
-	URL                                      *string                   `json:"Url"`
-	VpcID                                    *string                   `json:"VpcId"`
+	AppNetworkAccessType                     *AppNetworkAccessTypeEnum `json:"AppNetworkAccessType,omitempty"`
+	AuthMode                                 *AuthModeEnum             `json:"AuthMode,omitempty"`
+	CreationTime                             *time.Time                `json:"CreationTime,omitempty"`
+	DefaultUserSettings                      *UserSettings             `json:"DefaultUserSettings,omitempty"`
+	DomainArn                                *string                   `json:"DomainArn,omitempty"`
+	DomainID                                 *string                   `json:"DomainId,omitempty"`
+	DomainName                               *string                   `json:"DomainName,omitempty"`
+	FailureReason                            *string                   `json:"FailureReason,omitempty"`
+	HomeEfsFileSystemID                      *string                   `json:"HomeEfsFileSystemId,omitempty"`
+	HomeEfsFileSystemKmsKeyID                *string                   `json:"HomeEfsFileSystemKmsKeyId,omitempty"`
+	KmsKeyID                                 *string                   `json:"KmsKeyId,omitempty"`
+	LastModifiedTime                         *time.Time                `json:"LastModifiedTime,omitempty"`
+	SingleSignOnManagedApplicationInstanceID *string                   `json:"SingleSignOnManagedApplicationInstanceId,omitempty"`
+	Status                                   *DomainStatusEnum         `json:"Status,omitempty"`
+	SubnetIds                                []string                  `json:"SubnetIds,omitempty"`
+	URL                                      *string                   `json:"Url,omitempty"`
+	VpcID                                    *string                   `json:"VpcId,omitempty"`
 }

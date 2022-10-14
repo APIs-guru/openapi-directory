@@ -19,7 +19,7 @@ type UpdateVoiceChannelHeaders struct {
 }
 
 type UpdateVoiceChannelRequestBodyVoiceChannelRequest struct {
-	Enabled *bool `json:"Enabled"`
+	Enabled *bool `json:"Enabled,omitempty"`
 }
 
 type UpdateVoiceChannelRequestBody struct {

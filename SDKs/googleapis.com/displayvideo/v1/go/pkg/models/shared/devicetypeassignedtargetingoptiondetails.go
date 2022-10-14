@@ -11,6 +11,6 @@ const (
 )
 
 type DeviceTypeAssignedTargetingOptionDetails struct {
-	DeviceType        *DeviceTypeAssignedTargetingOptionDetailsDeviceTypeEnum `json:"deviceType"`
-	TargetingOptionID *string                                                 `json:"targetingOptionId"`
+	DeviceType        *DeviceTypeAssignedTargetingOptionDetailsDeviceTypeEnum `json:"deviceType,omitempty"`
+	TargetingOptionID *string                                                 `json:"targetingOptionId,omitempty"`
 }

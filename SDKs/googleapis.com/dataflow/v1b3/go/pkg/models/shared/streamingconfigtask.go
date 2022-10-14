@@ -1,11 +1,11 @@
 package shared
 
 type StreamingConfigTask struct {
-	CommitStreamChunkSizeBytes   *string                      `json:"commitStreamChunkSizeBytes"`
-	GetDataStreamChunkSizeBytes  *string                      `json:"getDataStreamChunkSizeBytes"`
-	MaxWorkItemCommitBytes       *string                      `json:"maxWorkItemCommitBytes"`
-	StreamingComputationConfigs  []StreamingComputationConfig `json:"streamingComputationConfigs"`
-	UserStepToStateFamilyNameMap map[string]string            `json:"userStepToStateFamilyNameMap"`
-	WindmillServiceEndpoint      *string                      `json:"windmillServiceEndpoint"`
-	WindmillServicePort          *string                      `json:"windmillServicePort"`
+	CommitStreamChunkSizeBytes   *string                      `json:"commitStreamChunkSizeBytes,omitempty"`
+	GetDataStreamChunkSizeBytes  *string                      `json:"getDataStreamChunkSizeBytes,omitempty"`
+	MaxWorkItemCommitBytes       *string                      `json:"maxWorkItemCommitBytes,omitempty"`
+	StreamingComputationConfigs  []StreamingComputationConfig `json:"streamingComputationConfigs,omitempty"`
+	UserStepToStateFamilyNameMap map[string]string            `json:"userStepToStateFamilyNameMap,omitempty"`
+	WindmillServiceEndpoint      *string                      `json:"windmillServiceEndpoint,omitempty"`
+	WindmillServicePort          *string                      `json:"windmillServicePort,omitempty"`
 }

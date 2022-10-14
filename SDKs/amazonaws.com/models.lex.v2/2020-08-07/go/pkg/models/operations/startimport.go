@@ -22,12 +22,12 @@ const (
 )
 
 type StartImportRequestBodyResourceSpecification struct {
-	BotImportSpecification       *shared.BotImportSpecification       `json:"botImportSpecification"`
-	BotLocaleImportSpecification *shared.BotLocaleImportSpecification `json:"botLocaleImportSpecification"`
+	BotImportSpecification       *shared.BotImportSpecification       `json:"botImportSpecification,omitempty"`
+	BotLocaleImportSpecification *shared.BotLocaleImportSpecification `json:"botLocaleImportSpecification,omitempty"`
 }
 
 type StartImportRequestBody struct {
-	FilePassword          *string                                     `json:"filePassword"`
+	FilePassword          *string                                     `json:"filePassword,omitempty"`
 	ImportID              string                                      `json:"importId"`
 	MergeStrategy         StartImportRequestBodyMergeStrategyEnum     `json:"mergeStrategy"`
 	ResourceSpecification StartImportRequestBodyResourceSpecification `json:"resourceSpecification"`

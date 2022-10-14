@@ -15,7 +15,7 @@ const (
 )
 
 type RevokedCertificate struct {
-	Certificate      *string                                 `json:"certificate"`
-	HexSerialNumber  *string                                 `json:"hexSerialNumber"`
-	RevocationReason *RevokedCertificateRevocationReasonEnum `json:"revocationReason"`
+	Certificate      *string                                 `json:"certificate,omitempty"`
+	HexSerialNumber  *string                                 `json:"hexSerialNumber,omitempty"`
+	RevocationReason *RevokedCertificateRevocationReasonEnum `json:"revocationReason,omitempty"`
 }

@@ -5,14 +5,14 @@ import (
 )
 
 type DescribeJobTemplateResponse struct {
-	AbortConfig                *AbortConfig                `json:"abortConfig"`
-	CreatedAt                  *time.Time                  `json:"createdAt"`
-	Description                *string                     `json:"description"`
-	Document                   *string                     `json:"document"`
-	DocumentSource             *string                     `json:"documentSource"`
-	JobExecutionsRolloutConfig *JobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig"`
-	JobTemplateArn             *string                     `json:"jobTemplateArn"`
-	JobTemplateID              *string                     `json:"jobTemplateId"`
-	PresignedURLConfig         *PresignedURLConfig         `json:"presignedUrlConfig"`
-	TimeoutConfig              *TimeoutConfig              `json:"timeoutConfig"`
+	AbortConfig                *AbortConfig                `json:"abortConfig,omitempty"`
+	CreatedAt                  *time.Time                  `json:"createdAt,omitempty"`
+	Description                *string                     `json:"description,omitempty"`
+	Document                   *string                     `json:"document,omitempty"`
+	DocumentSource             *string                     `json:"documentSource,omitempty"`
+	JobExecutionsRolloutConfig *JobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig,omitempty"`
+	JobTemplateArn             *string                     `json:"jobTemplateArn,omitempty"`
+	JobTemplateID              *string                     `json:"jobTemplateId,omitempty"`
+	PresignedURLConfig         *PresignedURLConfig         `json:"presignedUrlConfig,omitempty"`
+	TimeoutConfig              *TimeoutConfig              `json:"timeoutConfig,omitempty"`
 }

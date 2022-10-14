@@ -1,8 +1,8 @@
 package shared
 
 type DescribeAssociationRequest struct {
-	AssociationID      *string `json:"AssociationId"`
-	AssociationVersion *string `json:"AssociationVersion"`
-	InstanceID         *string `json:"InstanceId"`
-	Name               *string `json:"Name"`
+	AssociationID      *string `json:"AssociationId,omitempty"`
+	AssociationVersion *string `json:"AssociationVersion,omitempty"`
+	InstanceID         *string `json:"InstanceId,omitempty"`
+	Name               *string `json:"Name,omitempty"`
 }

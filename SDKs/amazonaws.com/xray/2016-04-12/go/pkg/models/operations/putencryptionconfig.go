@@ -22,7 +22,7 @@ const (
 )
 
 type PutEncryptionConfigRequestBody struct {
-	KeyID *string                                `json:"KeyId"`
+	KeyID *string                                `json:"KeyId,omitempty"`
 	Type  PutEncryptionConfigRequestBodyTypeEnum `json:"Type"`
 }
 

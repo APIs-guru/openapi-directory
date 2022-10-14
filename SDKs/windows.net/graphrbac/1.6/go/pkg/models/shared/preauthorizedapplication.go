@@ -1,7 +1,7 @@
 package shared
 
 type PreAuthorizedApplication struct {
-	AppID       *string                              `json:"appId"`
-	Extensions  []PreAuthorizedApplicationExtension  `json:"extensions"`
-	Permissions []PreAuthorizedApplicationPermission `json:"permissions"`
+	AppID       *string                              `json:"appId,omitempty"`
+	Extensions  []PreAuthorizedApplicationExtension  `json:"extensions,omitempty"`
+	Permissions []PreAuthorizedApplicationPermission `json:"permissions,omitempty"`
 }

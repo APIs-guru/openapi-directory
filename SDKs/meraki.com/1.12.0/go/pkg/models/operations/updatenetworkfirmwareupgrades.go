@@ -5,119 +5,119 @@ type UpdateNetworkFirmwareUpgradesPathParams struct {
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade struct {
-	Time      *string                                                                        `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                        `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance struct {
-	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade `json:"nextUpgrade"`
+	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade struct {
-	Time      *string                                                                     `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                     `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera struct {
-	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade `json:"nextUpgrade"`
+	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade struct {
-	Time      *string                                                                              `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                              `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway struct {
-	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade `json:"nextUpgrade"`
+	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade struct {
-	Time      *string                                                                            `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                            `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental struct {
-	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade `json:"nextUpgrade"`
+	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade struct {
-	Time      *string                                                                     `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                     `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor struct {
-	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade `json:"nextUpgrade"`
+	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade struct {
-	Time      *string                                                                     `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                     `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch struct {
-	NextUpgrade                  *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade `json:"nextUpgrade"`
-	ParticipateInNextBetaRelease *bool                                                              `json:"participateInNextBetaRelease"`
+	NextUpgrade                  *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade `json:"nextUpgrade,omitempty"`
+	ParticipateInNextBetaRelease *bool                                                              `json:"participateInNextBetaRelease,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade struct {
-	Time      *string                                                                      `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                      `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost struct {
-	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade `json:"nextUpgrade"`
+	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade struct {
-	Time      *string                                                                       `json:"time"`
-	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion `json:"toVersion"`
+	Time      *string                                                                       `json:"time,omitempty"`
+	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless struct {
-	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade `json:"nextUpgrade"`
+	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyProducts struct {
-	Appliance       *UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance       `json:"appliance"`
-	Camera          *UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera          `json:"camera"`
-	CellularGateway *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway `json:"cellularGateway"`
-	Environmental   *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental   `json:"environmental"`
-	Sensor          *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor          `json:"sensor"`
-	Switch          *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch          `json:"switch"`
-	VmxHost         *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost         `json:"vmxHost"`
-	Wireless        *UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless        `json:"wireless"`
+	Appliance       *UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance       `json:"appliance,omitempty"`
+	Camera          *UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera          `json:"camera,omitempty"`
+	CellularGateway *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway `json:"cellularGateway,omitempty"`
+	Environmental   *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental   `json:"environmental,omitempty"`
+	Sensor          *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor          `json:"sensor,omitempty"`
+	Switch          *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch          `json:"switch,omitempty"`
+	VmxHost         *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost         `json:"vmxHost,omitempty"`
+	Wireless        *UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless        `json:"wireless,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowDayOfWeekEnum string
@@ -169,14 +169,14 @@ const (
 )
 
 type UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow struct {
-	DayOfWeek *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowDayOfWeekEnum `json:"dayOfWeek"`
-	HourOfDay *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnum `json:"hourOfDay"`
+	DayOfWeek *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowDayOfWeekEnum `json:"dayOfWeek,omitempty"`
+	HourOfDay *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnum `json:"hourOfDay,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequestBody struct {
-	Products      *UpdateNetworkFirmwareUpgradesRequestBodyProducts      `json:"products"`
-	Timezone      *string                                                `json:"timezone"`
-	UpgradeWindow *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow `json:"upgradeWindow"`
+	Products      *UpdateNetworkFirmwareUpgradesRequestBodyProducts      `json:"products,omitempty"`
+	Timezone      *string                                                `json:"timezone,omitempty"`
+	UpgradeWindow *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow `json:"upgradeWindow,omitempty"`
 }
 
 type UpdateNetworkFirmwareUpgradesRequest struct {

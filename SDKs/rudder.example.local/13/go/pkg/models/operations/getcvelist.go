@@ -5,7 +5,7 @@ import (
 )
 
 type GetCveListRequestBody struct {
-	CveIds []string `json:"cveIds"`
+	CveIds []string `json:"cveIds,omitempty"`
 }
 
 type GetCveListRequest struct {

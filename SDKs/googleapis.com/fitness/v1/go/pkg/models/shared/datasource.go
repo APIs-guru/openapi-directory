@@ -23,12 +23,12 @@ const (
 )
 
 type DataSource struct {
-	Application         *Application                        `json:"application"`
-	DataQualityStandard []DataSourceDataQualityStandardEnum `json:"dataQualityStandard"`
-	DataStreamID        *string                             `json:"dataStreamId"`
-	DataStreamName      *string                             `json:"dataStreamName"`
-	DataType            *DataType                           `json:"dataType"`
-	Device              *Device                             `json:"device"`
-	Name                *string                             `json:"name"`
-	Type                *DataSourceTypeEnum                 `json:"type"`
+	Application         *Application                        `json:"application,omitempty"`
+	DataQualityStandard []DataSourceDataQualityStandardEnum `json:"dataQualityStandard,omitempty"`
+	DataStreamID        *string                             `json:"dataStreamId,omitempty"`
+	DataStreamName      *string                             `json:"dataStreamName,omitempty"`
+	DataType            *DataType                           `json:"dataType,omitempty"`
+	Device              *Device                             `json:"device,omitempty"`
+	Name                *string                             `json:"name,omitempty"`
+	Type                *DataSourceTypeEnum                 `json:"type,omitempty"`
 }

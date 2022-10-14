@@ -1,9 +1,9 @@
 package shared
 
 type Schedule struct {
-	EndTimeOfDay      *TimeOfDay `json:"endTimeOfDay"`
-	RepeatInterval    *string    `json:"repeatInterval"`
-	ScheduleEndDate   *Date      `json:"scheduleEndDate"`
-	ScheduleStartDate *Date      `json:"scheduleStartDate"`
-	StartTimeOfDay    *TimeOfDay `json:"startTimeOfDay"`
+	EndTimeOfDay      *TimeOfDay `json:"endTimeOfDay,omitempty"`
+	RepeatInterval    *string    `json:"repeatInterval,omitempty"`
+	ScheduleEndDate   *Date      `json:"scheduleEndDate,omitempty"`
+	ScheduleStartDate *Date      `json:"scheduleStartDate,omitempty"`
+	StartTimeOfDay    *TimeOfDay `json:"startTimeOfDay,omitempty"`
 }

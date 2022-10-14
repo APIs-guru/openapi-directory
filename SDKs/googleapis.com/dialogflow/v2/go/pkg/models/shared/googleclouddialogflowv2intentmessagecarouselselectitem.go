@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDialogflowV2IntentMessageCarouselSelectItem struct {
-	Description *string                                             `json:"description"`
-	Image       *GoogleCloudDialogflowV2IntentMessageImage          `json:"image"`
-	Info        *GoogleCloudDialogflowV2IntentMessageSelectItemInfo `json:"info"`
-	Title       *string                                             `json:"title"`
+	Description *string                                             `json:"description,omitempty"`
+	Image       *GoogleCloudDialogflowV2IntentMessageImage          `json:"image,omitempty"`
+	Info        *GoogleCloudDialogflowV2IntentMessageSelectItemInfo `json:"info,omitempty"`
+	Title       *string                                             `json:"title,omitempty"`
 }

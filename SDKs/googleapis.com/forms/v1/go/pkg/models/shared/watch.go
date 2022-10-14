@@ -26,11 +26,11 @@ const (
 )
 
 type Watch struct {
-	CreateTime *string             `json:"createTime"`
-	ErrorType  *WatchErrorTypeEnum `json:"errorType"`
-	EventType  *WatchEventTypeEnum `json:"eventType"`
-	ExpireTime *string             `json:"expireTime"`
-	ID         *string             `json:"id"`
-	State      *WatchStateEnum     `json:"state"`
-	Target     *WatchTarget        `json:"target"`
+	CreateTime *string             `json:"createTime,omitempty"`
+	ErrorType  *WatchErrorTypeEnum `json:"errorType,omitempty"`
+	EventType  *WatchEventTypeEnum `json:"eventType,omitempty"`
+	ExpireTime *string             `json:"expireTime,omitempty"`
+	ID         *string             `json:"id,omitempty"`
+	State      *WatchStateEnum     `json:"state,omitempty"`
+	Target     *WatchTarget        `json:"target,omitempty"`
 }

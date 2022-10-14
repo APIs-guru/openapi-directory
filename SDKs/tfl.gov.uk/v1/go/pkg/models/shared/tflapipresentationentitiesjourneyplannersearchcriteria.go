@@ -12,7 +12,7 @@ const (
 )
 
 type TflAPIPresentationEntitiesJourneyPlannerSearchCriteria struct {
-	DateTime        *time.Time                                                              `json:"dateTime"`
-	DateTimeType    *TflAPIPresentationEntitiesJourneyPlannerSearchCriteriaDateTimeTypeEnum `json:"dateTimeType"`
-	TimeAdjustments *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustments                `json:"timeAdjustments"`
+	DateTime        *time.Time                                                              `json:"dateTime,omitempty"`
+	DateTimeType    *TflAPIPresentationEntitiesJourneyPlannerSearchCriteriaDateTimeTypeEnum `json:"dateTimeType,omitempty"`
+	TimeAdjustments *TflAPIPresentationEntitiesJourneyPlannerTimeAdjustments                `json:"timeAdjustments,omitempty"`
 }

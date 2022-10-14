@@ -1,6 +1,6 @@
 package shared
 
 type GetInstancesHealthStatusResponse struct {
-	NextToken *string                     `json:"NextToken"`
-	Status    map[string]HealthStatusEnum `json:"Status"`
+	NextToken *string                     `json:"NextToken,omitempty"`
+	Status    map[string]HealthStatusEnum `json:"Status,omitempty"`
 }

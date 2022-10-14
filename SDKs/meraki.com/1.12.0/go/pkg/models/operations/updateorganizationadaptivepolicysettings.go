@@ -5,7 +5,7 @@ type UpdateOrganizationAdaptivePolicySettingsPathParams struct {
 }
 
 type UpdateOrganizationAdaptivePolicySettingsRequestBody struct {
-	EnabledNetworks []string `json:"enabledNetworks"`
+	EnabledNetworks []string `json:"enabledNetworks,omitempty"`
 }
 
 type UpdateOrganizationAdaptivePolicySettingsRequest struct {

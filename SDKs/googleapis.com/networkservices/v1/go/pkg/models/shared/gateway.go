@@ -9,14 +9,14 @@ const (
 )
 
 type Gateway struct {
-	CreateTime      *string           `json:"createTime"`
-	Description     *string           `json:"description"`
-	Labels          map[string]string `json:"labels"`
-	Name            *string           `json:"name"`
-	Ports           []int32           `json:"ports"`
-	Scope           *string           `json:"scope"`
-	SelfLink        *string           `json:"selfLink"`
-	ServerTLSPolicy *string           `json:"serverTlsPolicy"`
-	Type            *GatewayTypeEnum  `json:"type"`
-	UpdateTime      *string           `json:"updateTime"`
+	CreateTime      *string           `json:"createTime,omitempty"`
+	Description     *string           `json:"description,omitempty"`
+	Labels          map[string]string `json:"labels,omitempty"`
+	Name            *string           `json:"name,omitempty"`
+	Ports           []int32           `json:"ports,omitempty"`
+	Scope           *string           `json:"scope,omitempty"`
+	SelfLink        *string           `json:"selfLink,omitempty"`
+	ServerTLSPolicy *string           `json:"serverTlsPolicy,omitempty"`
+	Type            *GatewayTypeEnum  `json:"type,omitempty"`
+	UpdateTime      *string           `json:"updateTime,omitempty"`
 }

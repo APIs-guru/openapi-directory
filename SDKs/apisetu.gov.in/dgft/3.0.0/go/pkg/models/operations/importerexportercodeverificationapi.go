@@ -61,8 +61,8 @@ const (
 )
 
 type ImporterExporterCodeVerificationAPI400ApplicationJSON struct {
-	Error            *ImporterExporterCodeVerificationAPI400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *ImporterExporterCodeVerificationAPI400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *ImporterExporterCodeVerificationAPI400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *ImporterExporterCodeVerificationAPI400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImporterExporterCodeVerificationAPI401ApplicationJSONErrorEnum string
@@ -80,8 +80,8 @@ const (
 )
 
 type ImporterExporterCodeVerificationAPI401ApplicationJSON struct {
-	Error            *ImporterExporterCodeVerificationAPI401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *ImporterExporterCodeVerificationAPI401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *ImporterExporterCodeVerificationAPI401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *ImporterExporterCodeVerificationAPI401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImporterExporterCodeVerificationAPI404ApplicationJSONErrorEnum string
@@ -99,8 +99,8 @@ const (
 )
 
 type ImporterExporterCodeVerificationAPI404ApplicationJSON struct {
-	Error            *ImporterExporterCodeVerificationAPI404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *ImporterExporterCodeVerificationAPI404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *ImporterExporterCodeVerificationAPI404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *ImporterExporterCodeVerificationAPI404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImporterExporterCodeVerificationAPI500ApplicationJSONErrorEnum string
@@ -116,8 +116,8 @@ const (
 )
 
 type ImporterExporterCodeVerificationAPI500ApplicationJSON struct {
-	Error            *ImporterExporterCodeVerificationAPI500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *ImporterExporterCodeVerificationAPI500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *ImporterExporterCodeVerificationAPI500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *ImporterExporterCodeVerificationAPI500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImporterExporterCodeVerificationAPI502ApplicationJSONErrorEnum string
@@ -133,8 +133,8 @@ const (
 )
 
 type ImporterExporterCodeVerificationAPI502ApplicationJSON struct {
-	Error            *ImporterExporterCodeVerificationAPI502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *ImporterExporterCodeVerificationAPI502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *ImporterExporterCodeVerificationAPI502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *ImporterExporterCodeVerificationAPI502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImporterExporterCodeVerificationAPI503ApplicationJSONErrorEnum string
@@ -150,8 +150,8 @@ const (
 )
 
 type ImporterExporterCodeVerificationAPI503ApplicationJSON struct {
-	Error            *ImporterExporterCodeVerificationAPI503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *ImporterExporterCodeVerificationAPI503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *ImporterExporterCodeVerificationAPI503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *ImporterExporterCodeVerificationAPI503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImporterExporterCodeVerificationAPI504ApplicationJSONErrorEnum string
@@ -167,8 +167,8 @@ const (
 )
 
 type ImporterExporterCodeVerificationAPI504ApplicationJSON struct {
-	Error            *ImporterExporterCodeVerificationAPI504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *ImporterExporterCodeVerificationAPI504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *ImporterExporterCodeVerificationAPI504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *ImporterExporterCodeVerificationAPI504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImporterExporterCodeVerificationAPIResponse struct {

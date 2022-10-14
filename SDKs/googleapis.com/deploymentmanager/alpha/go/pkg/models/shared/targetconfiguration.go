@@ -1,6 +1,6 @@
 package shared
 
 type TargetConfiguration struct {
-	Config  *ConfigFile  `json:"config"`
-	Imports []ImportFile `json:"imports"`
+	Config  *ConfigFile  `json:"config,omitempty"`
+	Imports []ImportFile `json:"imports,omitempty"`
 }

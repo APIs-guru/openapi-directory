@@ -9,6 +9,6 @@ const (
 )
 
 type User struct {
-	Type   *UserTypeEnum `json:"type"`
-	UserID *string       `json:"userId"`
+	Type   *UserTypeEnum `json:"type,omitempty"`
+	UserID *string       `json:"userId,omitempty"`
 }

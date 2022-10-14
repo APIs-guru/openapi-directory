@@ -10,6 +10,6 @@ const (
 )
 
 type MediaProperties struct {
-	Alignment *MediaPropertiesAlignmentEnum `json:"alignment"`
-	Width     *int32                        `json:"width"`
+	Alignment *MediaPropertiesAlignmentEnum `json:"alignment,omitempty"`
+	Width     *int32                        `json:"width,omitempty"`
 }

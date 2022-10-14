@@ -1,7 +1,7 @@
 package shared
 
 type LambdaFunctionMemoryRecommendationOption struct {
-	MemorySize                  *int64                                `json:"memorySize"`
-	ProjectedUtilizationMetrics []LambdaFunctionMemoryProjectedMetric `json:"projectedUtilizationMetrics"`
-	Rank                        *int64                                `json:"rank"`
+	MemorySize                  *int64                                `json:"memorySize,omitempty"`
+	ProjectedUtilizationMetrics []LambdaFunctionMemoryProjectedMetric `json:"projectedUtilizationMetrics,omitempty"`
+	Rank                        *int64                                `json:"rank,omitempty"`
 }

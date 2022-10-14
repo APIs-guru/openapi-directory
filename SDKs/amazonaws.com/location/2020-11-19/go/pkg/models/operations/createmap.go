@@ -15,7 +15,7 @@ type CreateMapHeaders struct {
 }
 
 type CreateMapRequestBodyConfiguration struct {
-	Style *string `json:"Style"`
+	Style *string `json:"Style,omitempty"`
 }
 
 type CreateMapRequestBodyPricingPlanEnum string
@@ -28,10 +28,10 @@ const (
 
 type CreateMapRequestBody struct {
 	Configuration CreateMapRequestBodyConfiguration   `json:"Configuration"`
-	Description   *string                             `json:"Description"`
+	Description   *string                             `json:"Description,omitempty"`
 	MapName       string                              `json:"MapName"`
 	PricingPlan   CreateMapRequestBodyPricingPlanEnum `json:"PricingPlan"`
-	Tags          map[string]string                   `json:"Tags"`
+	Tags          map[string]string                   `json:"Tags,omitempty"`
 }
 
 type CreateMapRequest struct {

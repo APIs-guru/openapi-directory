@@ -1,8 +1,8 @@
 package shared
 
 type GiftCardActivityRefund struct {
-	AmountMoney      *Money  `json:"amount_money"`
-	PaymentID        *string `json:"payment_id"`
+	AmountMoney      *Money  `json:"amount_money,omitempty"`
+	PaymentID        *string `json:"payment_id,omitempty"`
 	RedeemActivityID string  `json:"redeem_activity_id"`
-	ReferenceID      *string `json:"reference_id"`
+	ReferenceID      *string `json:"reference_id,omitempty"`
 }

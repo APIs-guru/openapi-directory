@@ -9,5 +9,5 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoSuccessPolicy struct {
-	FinalState *EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum `json:"finalState"`
+	FinalState *EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum `json:"finalState,omitempty"`
 }

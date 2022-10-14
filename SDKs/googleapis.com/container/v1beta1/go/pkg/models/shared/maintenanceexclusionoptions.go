@@ -9,5 +9,5 @@ const (
 )
 
 type MaintenanceExclusionOptions struct {
-	Scope *MaintenanceExclusionOptionsScopeEnum `json:"scope"`
+	Scope *MaintenanceExclusionOptionsScopeEnum `json:"scope,omitempty"`
 }

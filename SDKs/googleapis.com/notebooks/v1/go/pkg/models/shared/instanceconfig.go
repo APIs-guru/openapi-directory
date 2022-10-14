@@ -1,6 +1,6 @@
 package shared
 
 type InstanceConfig struct {
-	EnableHealthMonitoring  *bool   `json:"enableHealthMonitoring"`
-	NotebookUpgradeSchedule *string `json:"notebookUpgradeSchedule"`
+	EnableHealthMonitoring  *bool   `json:"enableHealthMonitoring,omitempty"`
+	NotebookUpgradeSchedule *string `json:"notebookUpgradeSchedule,omitempty"`
 }

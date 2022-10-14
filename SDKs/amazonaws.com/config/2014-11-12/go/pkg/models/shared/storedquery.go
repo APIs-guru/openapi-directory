@@ -1,9 +1,9 @@
 package shared
 
 type StoredQuery struct {
-	Description *string `json:"Description"`
-	Expression  *string `json:"Expression"`
-	QueryArn    *string `json:"QueryArn"`
-	QueryID     *string `json:"QueryId"`
+	Description *string `json:"Description,omitempty"`
+	Expression  *string `json:"Expression,omitempty"`
+	QueryArn    *string `json:"QueryArn,omitempty"`
+	QueryID     *string `json:"QueryId,omitempty"`
 	QueryName   string  `json:"QueryName"`
 }

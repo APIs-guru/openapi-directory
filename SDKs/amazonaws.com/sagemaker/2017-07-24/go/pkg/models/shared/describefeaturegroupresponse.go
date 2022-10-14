@@ -6,17 +6,17 @@ import (
 
 type DescribeFeatureGroupResponse struct {
 	CreationTime                time.Time               `json:"CreationTime"`
-	Description                 *string                 `json:"Description"`
+	Description                 *string                 `json:"Description,omitempty"`
 	EventTimeFeatureName        string                  `json:"EventTimeFeatureName"`
-	FailureReason               *string                 `json:"FailureReason"`
+	FailureReason               *string                 `json:"FailureReason,omitempty"`
 	FeatureDefinitions          []FeatureDefinition     `json:"FeatureDefinitions"`
 	FeatureGroupArn             string                  `json:"FeatureGroupArn"`
 	FeatureGroupName            string                  `json:"FeatureGroupName"`
-	FeatureGroupStatus          *FeatureGroupStatusEnum `json:"FeatureGroupStatus"`
+	FeatureGroupStatus          *FeatureGroupStatusEnum `json:"FeatureGroupStatus,omitempty"`
 	NextToken                   string                  `json:"NextToken"`
-	OfflineStoreConfig          *OfflineStoreConfig     `json:"OfflineStoreConfig"`
-	OfflineStoreStatus          *OfflineStoreStatus     `json:"OfflineStoreStatus"`
-	OnlineStoreConfig           *OnlineStoreConfig      `json:"OnlineStoreConfig"`
+	OfflineStoreConfig          *OfflineStoreConfig     `json:"OfflineStoreConfig,omitempty"`
+	OfflineStoreStatus          *OfflineStoreStatus     `json:"OfflineStoreStatus,omitempty"`
+	OnlineStoreConfig           *OnlineStoreConfig      `json:"OnlineStoreConfig,omitempty"`
 	RecordIdentifierFeatureName string                  `json:"RecordIdentifierFeatureName"`
-	RoleArn                     *string                 `json:"RoleArn"`
+	RoleArn                     *string                 `json:"RoleArn,omitempty"`
 }

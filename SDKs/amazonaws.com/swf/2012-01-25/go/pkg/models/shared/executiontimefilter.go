@@ -5,6 +5,6 @@ import (
 )
 
 type ExecutionTimeFilter struct {
-	LatestDate *time.Time `json:"latestDate"`
+	LatestDate *time.Time `json:"latestDate,omitempty"`
 	OldestDate time.Time  `json:"oldestDate"`
 }

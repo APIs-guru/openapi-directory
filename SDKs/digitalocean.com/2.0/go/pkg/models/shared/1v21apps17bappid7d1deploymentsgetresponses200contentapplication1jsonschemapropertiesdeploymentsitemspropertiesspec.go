@@ -10,13 +10,13 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDatabases struct {
-	ClusterName *string                                                                                                                                                `json:"cluster_name"`
-	DbName      *string                                                                                                                                                `json:"db_name"`
-	DbUser      *string                                                                                                                                                `json:"db_user"`
-	Engine      *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDatabasesEngineEnum `json:"engine"`
+	ClusterName *string                                                                                                                                                `json:"cluster_name,omitempty"`
+	DbName      *string                                                                                                                                                `json:"db_name,omitempty"`
+	DbUser      *string                                                                                                                                                `json:"db_user,omitempty"`
+	Engine      *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDatabasesEngineEnum `json:"engine,omitempty"`
 	Name        string                                                                                                                                                 `json:"name"`
-	Production  *bool                                                                                                                                                  `json:"production"`
-	Version     *string                                                                                                                                                `json:"version"`
+	Production  *bool                                                                                                                                                  `json:"production,omitempty"`
+	Version     *string                                                                                                                                                `json:"version,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDomainsTypeEnum string
@@ -30,9 +30,9 @@ const (
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDomains struct {
 	Domain   string                                                                                                                                             `json:"domain"`
-	Type     *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDomainsTypeEnum `json:"type"`
-	Wildcard *bool                                                                                                                                              `json:"wildcard"`
-	Zone     *string                                                                                                                                            `json:"zone"`
+	Type     *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDomainsTypeEnum `json:"type,omitempty"`
+	Wildcard *bool                                                                                                                                              `json:"wildcard,omitempty"`
+	Zone     *string                                                                                                                                            `json:"zone,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvsScopeEnum string
@@ -53,26 +53,26 @@ const (
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvs struct {
 	Key   string                                                                                                                                               `json:"key"`
-	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvsScopeEnum `json:"scope"`
-	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvsTypeEnum  `json:"type"`
-	Value *string                                                                                                                                              `json:"value"`
+	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                                                                                              `json:"value,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGit struct {
-	Branch       *string `json:"branch"`
-	RepoCloneURL *string `json:"repo_clone_url"`
+	Branch       *string `json:"branch,omitempty"`
+	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGithub struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGitlab struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsImageRegistryTypeEnum string
@@ -83,10 +83,10 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsImage struct {
-	Registry     *string                                                                                                                                                      `json:"registry"`
-	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsImageRegistryTypeEnum `json:"registry_type"`
-	Repository   *string                                                                                                                                                      `json:"repository"`
-	Tag          *string                                                                                                                                                      `json:"tag"`
+	Registry     *string                                                                                                                                                      `json:"registry,omitempty"`
+	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                                                                                                      `json:"repository,omitempty"`
+	Tag          *string                                                                                                                                                      `json:"tag,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsInstanceSizeSlugEnum string
@@ -114,20 +114,20 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobs struct {
-	BuildCommand     *string                                                                                                                                                     `json:"build_command"`
-	DockerfilePath   *string                                                                                                                                                     `json:"dockerfile_path"`
-	EnvironmentSlug  *string                                                                                                                                                     `json:"environment_slug"`
-	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvs                `json:"envs"`
-	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGit                  `json:"git"`
-	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGithub               `json:"github"`
-	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGitlab               `json:"gitlab"`
-	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsImage                `json:"image"`
-	InstanceCount    *int64                                                                                                                                                      `json:"instance_count"`
-	InstanceSizeSlug *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsInstanceSizeSlugEnum `json:"instance_size_slug"`
-	Kind             *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsKindEnum             `json:"kind"`
+	BuildCommand     *string                                                                                                                                                     `json:"build_command,omitempty"`
+	DockerfilePath   *string                                                                                                                                                     `json:"dockerfile_path,omitempty"`
+	EnvironmentSlug  *string                                                                                                                                                     `json:"environment_slug,omitempty"`
+	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsEnvs                `json:"envs,omitempty"`
+	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGit                  `json:"git,omitempty"`
+	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGithub               `json:"github,omitempty"`
+	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsGitlab               `json:"gitlab,omitempty"`
+	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsImage                `json:"image,omitempty"`
+	InstanceCount    *int64                                                                                                                                                      `json:"instance_count,omitempty"`
+	InstanceSizeSlug *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsInstanceSizeSlugEnum `json:"instance_size_slug,omitempty"`
+	Kind             *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobsKindEnum             `json:"kind,omitempty"`
 	Name             string                                                                                                                                                      `json:"name"`
-	RunCommand       *string                                                                                                                                                     `json:"run_command"`
-	SourceDir        *string                                                                                                                                                     `json:"source_dir"`
+	RunCommand       *string                                                                                                                                                     `json:"run_command,omitempty"`
+	SourceDir        *string                                                                                                                                                     `json:"source_dir,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecRegionEnum string
@@ -139,18 +139,18 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesCorsAllowOrigins struct {
-	Exact  *string `json:"exact"`
-	Prefix *string `json:"prefix"`
-	Regex  *string `json:"regex"`
+	Exact  *string `json:"exact,omitempty"`
+	Prefix *string `json:"prefix,omitempty"`
+	Regex  *string `json:"regex,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesCors struct {
-	AllowCredentials *bool                                                                                                                                                        `json:"allow_credentials"`
-	AllowHeaders     []string                                                                                                                                                     `json:"allow_headers"`
-	AllowMethods     []string                                                                                                                                                     `json:"allow_methods"`
-	AllowOrigins     []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesCorsAllowOrigins `json:"allow_origins"`
-	ExposeHeaders    []string                                                                                                                                                     `json:"expose_headers"`
-	MaxAge           *string                                                                                                                                                      `json:"max_age"`
+	AllowCredentials *bool                                                                                                                                                        `json:"allow_credentials,omitempty"`
+	AllowHeaders     []string                                                                                                                                                     `json:"allow_headers,omitempty"`
+	AllowMethods     []string                                                                                                                                                     `json:"allow_methods,omitempty"`
+	AllowOrigins     []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesCorsAllowOrigins `json:"allow_origins,omitempty"`
+	ExposeHeaders    []string                                                                                                                                                     `json:"expose_headers,omitempty"`
+	MaxAge           *string                                                                                                                                                      `json:"max_age,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvsScopeEnum string
@@ -171,35 +171,35 @@ const (
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvs struct {
 	Key   string                                                                                                                                                   `json:"key"`
-	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvsScopeEnum `json:"scope"`
-	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvsTypeEnum  `json:"type"`
-	Value *string                                                                                                                                                  `json:"value"`
+	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                                                                                                  `json:"value,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGit struct {
-	Branch       *string `json:"branch"`
-	RepoCloneURL *string `json:"repo_clone_url"`
+	Branch       *string `json:"branch,omitempty"`
+	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGithub struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGitlab struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesHealthCheck struct {
-	FailureThreshold    *int32  `json:"failure_threshold"`
-	HTTPPath            *string `json:"http_path"`
-	InitialDelaySeconds *int32  `json:"initial_delay_seconds"`
-	PeriodSeconds       *int32  `json:"period_seconds"`
-	SuccessThreshold    *int32  `json:"success_threshold"`
-	TimeoutSeconds      *int32  `json:"timeout_seconds"`
+	FailureThreshold    *int32  `json:"failure_threshold,omitempty"`
+	HTTPPath            *string `json:"http_path,omitempty"`
+	InitialDelaySeconds *int32  `json:"initial_delay_seconds,omitempty"`
+	PeriodSeconds       *int32  `json:"period_seconds,omitempty"`
+	SuccessThreshold    *int32  `json:"success_threshold,omitempty"`
+	TimeoutSeconds      *int32  `json:"timeout_seconds,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesImageRegistryTypeEnum string
@@ -210,10 +210,10 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesImage struct {
-	Registry     *string                                                                                                                                                          `json:"registry"`
-	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesImageRegistryTypeEnum `json:"registry_type"`
-	Repository   *string                                                                                                                                                          `json:"repository"`
-	Tag          *string                                                                                                                                                          `json:"tag"`
+	Registry     *string                                                                                                                                                          `json:"registry,omitempty"`
+	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                                                                                                          `json:"repository,omitempty"`
+	Tag          *string                                                                                                                                                          `json:"tag,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesInstanceSizeSlugEnum string
@@ -232,28 +232,28 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent struct {
-	Path *string `json:"path"`
+	Path *string `json:"path,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServices struct {
-	BuildCommand     *string                                                                                                                                                                                       `json:"build_command"`
-	Cors             *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesCors                                               `json:"cors"`
-	DockerfilePath   *string                                                                                                                                                                                       `json:"dockerfile_path"`
-	EnvironmentSlug  *string                                                                                                                                                                                       `json:"environment_slug"`
-	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvs                                              `json:"envs"`
-	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGit                                                `json:"git"`
-	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGithub                                             `json:"github"`
-	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGitlab                                             `json:"gitlab"`
-	HealthCheck      *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesHealthCheck                                        `json:"health_check"`
-	HTTPPort         *int64                                                                                                                                                                                        `json:"http_port"`
-	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesImage                                              `json:"image"`
-	InstanceCount    *int64                                                                                                                                                                                        `json:"instance_count"`
-	InstanceSizeSlug *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesInstanceSizeSlugEnum                               `json:"instance_size_slug"`
-	InternalPorts    []int64                                                                                                                                                                                       `json:"internal_ports"`
+	BuildCommand     *string                                                                                                                                                                                       `json:"build_command,omitempty"`
+	Cors             *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesCors                                               `json:"cors,omitempty"`
+	DockerfilePath   *string                                                                                                                                                                                       `json:"dockerfile_path,omitempty"`
+	EnvironmentSlug  *string                                                                                                                                                                                       `json:"environment_slug,omitempty"`
+	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesEnvs                                              `json:"envs,omitempty"`
+	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGit                                                `json:"git,omitempty"`
+	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGithub                                             `json:"github,omitempty"`
+	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesGitlab                                             `json:"gitlab,omitempty"`
+	HealthCheck      *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesHealthCheck                                        `json:"health_check,omitempty"`
+	HTTPPort         *int64                                                                                                                                                                                        `json:"http_port,omitempty"`
+	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesImage                                              `json:"image,omitempty"`
+	InstanceCount    *int64                                                                                                                                                                                        `json:"instance_count,omitempty"`
+	InstanceSizeSlug *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesInstanceSizeSlugEnum                               `json:"instance_size_slug,omitempty"`
+	InternalPorts    []int64                                                                                                                                                                                       `json:"internal_ports,omitempty"`
 	Name             string                                                                                                                                                                                        `json:"name"`
-	Routes           []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent `json:"routes"`
-	RunCommand       *string                                                                                                                                                                                       `json:"run_command"`
-	SourceDir        *string                                                                                                                                                                                       `json:"source_dir"`
+	Routes           []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent `json:"routes,omitempty"`
+	RunCommand       *string                                                                                                                                                                                       `json:"run_command,omitempty"`
+	SourceDir        *string                                                                                                                                                                                       `json:"source_dir,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvsScopeEnum string
@@ -274,26 +274,26 @@ const (
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvs struct {
 	Key   string                                                                                                                                                      `json:"key"`
-	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvsScopeEnum `json:"scope"`
-	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvsTypeEnum  `json:"type"`
-	Value *string                                                                                                                                                     `json:"value"`
+	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                                                                                                     `json:"value,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGit struct {
-	Branch       *string `json:"branch"`
-	RepoCloneURL *string `json:"repo_clone_url"`
+	Branch       *string `json:"branch,omitempty"`
+	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGithub struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGitlab struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesImageRegistryTypeEnum string
@@ -304,30 +304,30 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesImage struct {
-	Registry     *string                                                                                                                                                             `json:"registry"`
-	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesImageRegistryTypeEnum `json:"registry_type"`
-	Repository   *string                                                                                                                                                             `json:"repository"`
-	Tag          *string                                                                                                                                                             `json:"tag"`
+	Registry     *string                                                                                                                                                             `json:"registry,omitempty"`
+	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                                                                                                             `json:"repository,omitempty"`
+	Tag          *string                                                                                                                                                             `json:"tag,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSites struct {
-	BuildCommand     *string                                                                                                                                                                                `json:"build_command"`
-	CatchallDocument *string                                                                                                                                                                                `json:"catchall_document"`
-	Cors             *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesServicesItemsAllOf2PropertiesCors         `json:"cors"`
-	DockerfilePath   *string                                                                                                                                                                                `json:"dockerfile_path"`
-	EnvironmentSlug  *string                                                                                                                                                                                `json:"environment_slug"`
-	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvs                                    `json:"envs"`
-	ErrorDocument    *string                                                                                                                                                                                `json:"error_document"`
-	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGit                                      `json:"git"`
-	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGithub                                   `json:"github"`
-	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGitlab                                   `json:"gitlab"`
-	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesImage                                    `json:"image"`
-	IndexDocument    *string                                                                                                                                                                                `json:"index_document"`
+	BuildCommand     *string                                                                                                                                                                                `json:"build_command,omitempty"`
+	CatchallDocument *string                                                                                                                                                                                `json:"catchall_document,omitempty"`
+	Cors             *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesServicesItemsAllOf2PropertiesCors         `json:"cors,omitempty"`
+	DockerfilePath   *string                                                                                                                                                                                `json:"dockerfile_path,omitempty"`
+	EnvironmentSlug  *string                                                                                                                                                                                `json:"environment_slug,omitempty"`
+	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesEnvs                                    `json:"envs,omitempty"`
+	ErrorDocument    *string                                                                                                                                                                                `json:"error_document,omitempty"`
+	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGit                                      `json:"git,omitempty"`
+	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGithub                                   `json:"github,omitempty"`
+	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesGitlab                                   `json:"gitlab,omitempty"`
+	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSitesImage                                    `json:"image,omitempty"`
+	IndexDocument    *string                                                                                                                                                                                `json:"index_document,omitempty"`
 	Name             string                                                                                                                                                                                 `json:"name"`
-	OutputDir        *string                                                                                                                                                                                `json:"output_dir"`
-	Routes           []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesServicesItemsAllOf2PropertiesRoutesItems `json:"routes"`
-	RunCommand       *string                                                                                                                                                                                `json:"run_command"`
-	SourceDir        *string                                                                                                                                                                                `json:"source_dir"`
+	OutputDir        *string                                                                                                                                                                                `json:"output_dir,omitempty"`
+	Routes           []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesServicesItemsAllOf2PropertiesRoutesItems `json:"routes,omitempty"`
+	RunCommand       *string                                                                                                                                                                                `json:"run_command,omitempty"`
+	SourceDir        *string                                                                                                                                                                                `json:"source_dir,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvsScopeEnum string
@@ -348,26 +348,26 @@ const (
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvs struct {
 	Key   string                                                                                                                                                  `json:"key"`
-	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvsScopeEnum `json:"scope"`
-	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvsTypeEnum  `json:"type"`
-	Value *string                                                                                                                                                 `json:"value"`
+	Scope *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                                                                                                 `json:"value,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGit struct {
-	Branch       *string `json:"branch"`
-	RepoCloneURL *string `json:"repo_clone_url"`
+	Branch       *string `json:"branch,omitempty"`
+	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGithub struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGitlab struct {
-	Branch       *string `json:"branch"`
-	DeployOnPush *bool   `json:"deploy_on_push"`
-	Repo         *string `json:"repo"`
+	Branch       *string `json:"branch,omitempty"`
+	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
+	Repo         *string `json:"repo,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersImageRegistryTypeEnum string
@@ -378,10 +378,10 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersImage struct {
-	Registry     *string                                                                                                                                                         `json:"registry"`
-	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersImageRegistryTypeEnum `json:"registry_type"`
-	Repository   *string                                                                                                                                                         `json:"repository"`
-	Tag          *string                                                                                                                                                         `json:"tag"`
+	Registry     *string                                                                                                                                                         `json:"registry,omitempty"`
+	RegistryType *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                                                                                                         `json:"repository,omitempty"`
+	Tag          *string                                                                                                                                                         `json:"tag,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersInstanceSizeSlugEnum string
@@ -400,28 +400,28 @@ const (
 )
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkers struct {
-	BuildCommand     *string                                                                                                                                                        `json:"build_command"`
-	DockerfilePath   *string                                                                                                                                                        `json:"dockerfile_path"`
-	EnvironmentSlug  *string                                                                                                                                                        `json:"environment_slug"`
-	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvs                `json:"envs"`
-	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGit                  `json:"git"`
-	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGithub               `json:"github"`
-	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGitlab               `json:"gitlab"`
-	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersImage                `json:"image"`
-	InstanceCount    *int64                                                                                                                                                         `json:"instance_count"`
-	InstanceSizeSlug *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersInstanceSizeSlugEnum `json:"instance_size_slug"`
+	BuildCommand     *string                                                                                                                                                        `json:"build_command,omitempty"`
+	DockerfilePath   *string                                                                                                                                                        `json:"dockerfile_path,omitempty"`
+	EnvironmentSlug  *string                                                                                                                                                        `json:"environment_slug,omitempty"`
+	Envs             []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersEnvs                `json:"envs,omitempty"`
+	Git              *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGit                  `json:"git,omitempty"`
+	Github           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGithub               `json:"github,omitempty"`
+	Gitlab           *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersGitlab               `json:"gitlab,omitempty"`
+	Image            *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersImage                `json:"image,omitempty"`
+	InstanceCount    *int64                                                                                                                                                         `json:"instance_count,omitempty"`
+	InstanceSizeSlug *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkersInstanceSizeSlugEnum `json:"instance_size_slug,omitempty"`
 	Name             string                                                                                                                                                         `json:"name"`
-	RunCommand       *string                                                                                                                                                        `json:"run_command"`
-	SourceDir        *string                                                                                                                                                        `json:"source_dir"`
+	RunCommand       *string                                                                                                                                                        `json:"run_command,omitempty"`
+	SourceDir        *string                                                                                                                                                        `json:"source_dir,omitempty"`
 }
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpec struct {
-	Databases   []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDatabases   `json:"databases"`
-	Domains     []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDomains     `json:"domains"`
-	Jobs        []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobs        `json:"jobs"`
+	Databases   []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDatabases   `json:"databases,omitempty"`
+	Domains     []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecDomains     `json:"domains,omitempty"`
+	Jobs        []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecJobs        `json:"jobs,omitempty"`
 	Name        string                                                                                                                                          `json:"name"`
-	Region      *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecRegionEnum   `json:"region"`
-	Services    []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServices    `json:"services"`
-	StaticSites []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSites `json:"static_sites"`
-	Workers     []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkers     `json:"workers"`
+	Region      *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecRegionEnum   `json:"region,omitempty"`
+	Services    []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServices    `json:"services,omitempty"`
+	StaticSites []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecStaticSites `json:"static_sites,omitempty"`
+	Workers     []Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecWorkers     `json:"workers,omitempty"`
 }

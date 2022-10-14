@@ -8,21 +8,21 @@ const (
 )
 
 type ManagedZone struct {
-	CloudLoggingConfig      *ManagedZoneCloudLoggingConfig      `json:"cloudLoggingConfig"`
-	CreationTime            *string                             `json:"creationTime"`
-	Description             *string                             `json:"description"`
-	DNSName                 *string                             `json:"dnsName"`
-	DnssecConfig            *ManagedZoneDNSSecConfig            `json:"dnssecConfig"`
-	ForwardingConfig        *ManagedZoneForwardingConfig        `json:"forwardingConfig"`
-	ID                      *string                             `json:"id"`
-	Kind                    *string                             `json:"kind"`
-	Labels                  map[string]string                   `json:"labels"`
-	Name                    *string                             `json:"name"`
-	NameServerSet           *string                             `json:"nameServerSet"`
-	NameServers             []string                            `json:"nameServers"`
-	PeeringConfig           *ManagedZonePeeringConfig           `json:"peeringConfig"`
-	PrivateVisibilityConfig *ManagedZonePrivateVisibilityConfig `json:"privateVisibilityConfig"`
-	ReverseLookupConfig     *ManagedZoneReverseLookupConfig     `json:"reverseLookupConfig"`
-	ServiceDirectoryConfig  *ManagedZoneServiceDirectoryConfig  `json:"serviceDirectoryConfig"`
-	Visibility              *ManagedZoneVisibilityEnum          `json:"visibility"`
+	CloudLoggingConfig      *ManagedZoneCloudLoggingConfig      `json:"cloudLoggingConfig,omitempty"`
+	CreationTime            *string                             `json:"creationTime,omitempty"`
+	Description             *string                             `json:"description,omitempty"`
+	DNSName                 *string                             `json:"dnsName,omitempty"`
+	DnssecConfig            *ManagedZoneDNSSecConfig            `json:"dnssecConfig,omitempty"`
+	ForwardingConfig        *ManagedZoneForwardingConfig        `json:"forwardingConfig,omitempty"`
+	ID                      *string                             `json:"id,omitempty"`
+	Kind                    *string                             `json:"kind,omitempty"`
+	Labels                  map[string]string                   `json:"labels,omitempty"`
+	Name                    *string                             `json:"name,omitempty"`
+	NameServerSet           *string                             `json:"nameServerSet,omitempty"`
+	NameServers             []string                            `json:"nameServers,omitempty"`
+	PeeringConfig           *ManagedZonePeeringConfig           `json:"peeringConfig,omitempty"`
+	PrivateVisibilityConfig *ManagedZonePrivateVisibilityConfig `json:"privateVisibilityConfig,omitempty"`
+	ReverseLookupConfig     *ManagedZoneReverseLookupConfig     `json:"reverseLookupConfig,omitempty"`
+	ServiceDirectoryConfig  *ManagedZoneServiceDirectoryConfig  `json:"serviceDirectoryConfig,omitempty"`
+	Visibility              *ManagedZoneVisibilityEnum          `json:"visibility,omitempty"`
 }

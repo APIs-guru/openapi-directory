@@ -19,8 +19,8 @@ type CreateDeploymentHeaders struct {
 }
 
 type CreateDeploymentRequestBody struct {
-	Description *string `json:"description"`
-	StageName   *string `json:"stageName"`
+	Description *string `json:"description,omitempty"`
+	StageName   *string `json:"stageName,omitempty"`
 }
 
 type CreateDeploymentRequest struct {

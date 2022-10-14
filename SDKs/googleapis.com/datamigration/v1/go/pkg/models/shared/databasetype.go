@@ -19,6 +19,6 @@ const (
 )
 
 type DatabaseType struct {
-	Engine   *DatabaseTypeEngineEnum   `json:"engine"`
-	Provider *DatabaseTypeProviderEnum `json:"provider"`
+	Engine   *DatabaseTypeEngineEnum   `json:"engine,omitempty"`
+	Provider *DatabaseTypeProviderEnum `json:"provider,omitempty"`
 }

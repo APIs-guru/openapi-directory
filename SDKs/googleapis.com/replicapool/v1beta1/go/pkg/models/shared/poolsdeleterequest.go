@@ -1,5 +1,5 @@
 package shared
 
 type PoolsDeleteRequest struct {
-	AbandonInstances []string `json:"abandonInstances"`
+	AbandonInstances []string `json:"abandonInstances,omitempty"`
 }

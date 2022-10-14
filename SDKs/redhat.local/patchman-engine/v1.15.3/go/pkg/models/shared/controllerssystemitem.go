@@ -1,7 +1,7 @@
 package shared
 
 type ControllersSystemItem struct {
-	Attributes *ControllersSystemItemAttributes `json:"attributes"`
-	ID         *string                          `json:"id"`
-	Type       *string                          `json:"type"`
+	Attributes *ControllersSystemItemAttributes `json:"attributes,omitempty"`
+	ID         *string                          `json:"id,omitempty"`
+	Type       *string                          `json:"type,omitempty"`
 }

@@ -35,6 +35,6 @@ const (
 )
 
 type GeoRegionTargetingOptionDetails struct {
-	DisplayName   *string                                           `json:"displayName"`
-	GeoRegionType *GeoRegionTargetingOptionDetailsGeoRegionTypeEnum `json:"geoRegionType"`
+	DisplayName   *string                                           `json:"displayName,omitempty"`
+	GeoRegionType *GeoRegionTargetingOptionDetailsGeoRegionTypeEnum `json:"geoRegionType,omitempty"`
 }

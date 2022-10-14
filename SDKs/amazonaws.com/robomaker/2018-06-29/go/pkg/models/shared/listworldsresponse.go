@@ -1,6 +1,6 @@
 package shared
 
 type ListWorldsResponse struct {
-	NextToken      *string        `json:"nextToken"`
-	WorldSummaries []WorldSummary `json:"worldSummaries"`
+	NextToken      *string        `json:"nextToken,omitempty"`
+	WorldSummaries []WorldSummary `json:"worldSummaries,omitempty"`
 }

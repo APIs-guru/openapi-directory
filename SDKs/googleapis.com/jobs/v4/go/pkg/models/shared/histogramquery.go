@@ -1,5 +1,5 @@
 package shared
 
 type HistogramQuery struct {
-	HistogramQuery *string `json:"histogramQuery"`
+	HistogramQuery *string `json:"histogramQuery,omitempty"`
 }

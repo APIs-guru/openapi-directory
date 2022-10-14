@@ -9,7 +9,7 @@ const (
 )
 
 type ProductViewItemIssue struct {
-	IssueType  *ProductViewItemIssueItemIssueType     `json:"issueType"`
-	Resolution *ProductViewItemIssueResolutionEnum    `json:"resolution"`
-	Severity   *ProductViewItemIssueItemIssueSeverity `json:"severity"`
+	IssueType  *ProductViewItemIssueItemIssueType     `json:"issueType,omitempty"`
+	Resolution *ProductViewItemIssueResolutionEnum    `json:"resolution,omitempty"`
+	Severity   *ProductViewItemIssueItemIssueSeverity `json:"severity,omitempty"`
 }

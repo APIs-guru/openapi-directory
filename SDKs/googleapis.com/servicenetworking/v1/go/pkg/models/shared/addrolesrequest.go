@@ -1,6 +1,6 @@
 package shared
 
 type AddRolesRequest struct {
-	ConsumerNetwork *string         `json:"consumerNetwork"`
-	PolicyBinding   []PolicyBinding `json:"policyBinding"`
+	ConsumerNetwork *string         `json:"consumerNetwork,omitempty"`
+	PolicyBinding   []PolicyBinding `json:"policyBinding,omitempty"`
 }

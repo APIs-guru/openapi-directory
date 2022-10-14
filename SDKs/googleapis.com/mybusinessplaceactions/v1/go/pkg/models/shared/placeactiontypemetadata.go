@@ -14,6 +14,6 @@ const (
 )
 
 type PlaceActionTypeMetadata struct {
-	DisplayName     *string                                     `json:"displayName"`
-	PlaceActionType *PlaceActionTypeMetadataPlaceActionTypeEnum `json:"placeActionType"`
+	DisplayName     *string                                     `json:"displayName,omitempty"`
+	PlaceActionType *PlaceActionTypeMetadataPlaceActionTypeEnum `json:"placeActionType,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type FlowTemplateSummary struct {
-	Arn            *string    `json:"arn"`
-	CreatedAt      *time.Time `json:"createdAt"`
-	ID             *string    `json:"id"`
-	RevisionNumber *int64     `json:"revisionNumber"`
+	Arn            *string    `json:"arn,omitempty"`
+	CreatedAt      *time.Time `json:"createdAt,omitempty"`
+	ID             *string    `json:"id,omitempty"`
+	RevisionNumber *int64     `json:"revisionNumber,omitempty"`
 }

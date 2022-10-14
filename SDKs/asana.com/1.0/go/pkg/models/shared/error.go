@@ -1,7 +1,7 @@
 package shared
 
 type Error struct {
-	Help    *string `json:"help"`
-	Message *string `json:"message"`
-	Phrase  *string `json:"phrase"`
+	Help    *string `json:"help,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Phrase  *string `json:"phrase,omitempty"`
 }

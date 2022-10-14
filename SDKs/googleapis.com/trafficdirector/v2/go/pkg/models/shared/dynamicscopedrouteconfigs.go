@@ -1,8 +1,8 @@
 package shared
 
 type DynamicScopedRouteConfigs struct {
-	LastUpdated        *string                  `json:"lastUpdated"`
-	Name               *string                  `json:"name"`
-	ScopedRouteConfigs []map[string]interface{} `json:"scopedRouteConfigs"`
-	VersionInfo        *string                  `json:"versionInfo"`
+	LastUpdated        *string                  `json:"lastUpdated,omitempty"`
+	Name               *string                  `json:"name,omitempty"`
+	ScopedRouteConfigs []map[string]interface{} `json:"scopedRouteConfigs,omitempty"`
+	VersionInfo        *string                  `json:"versionInfo,omitempty"`
 }

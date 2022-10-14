@@ -1,7 +1,7 @@
 package shared
 
 type NetworkConfiguration struct {
-	DownRule *TrafficRule `json:"downRule"`
-	ID       *string      `json:"id"`
-	UpRule   *TrafficRule `json:"upRule"`
+	DownRule *TrafficRule `json:"downRule,omitempty"`
+	ID       *string      `json:"id,omitempty"`
+	UpRule   *TrafficRule `json:"upRule,omitempty"`
 }

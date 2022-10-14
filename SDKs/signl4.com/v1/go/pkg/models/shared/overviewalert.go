@@ -5,18 +5,18 @@ import (
 )
 
 type OverviewAlert struct {
-	AlertDeliveryStatus      *AlertDeliveryStatusInfo  `json:"alertDeliveryStatus"`
-	Annotations              []AlertAnnotationInfo     `json:"annotations"`
-	CategoryID               *string                   `json:"categoryId"`
-	EventID                  *string                   `json:"eventId"`
-	Flags                    *int32                    `json:"flags"`
-	HistoryDetailed          *AlertHistoryInfoDetailed `json:"historyDetailed"`
-	ID                       *string                   `json:"id"`
-	LastModified             *time.Time                `json:"lastModified"`
-	RequiredAcknowledgements *int32                    `json:"requiredAcknowledgements"`
-	Status                   *int32                    `json:"status"`
-	SubscriptionID           *string                   `json:"subscriptionId"`
-	TeamID                   *string                   `json:"teamId"`
-	Text                     *string                   `json:"text"`
-	Title                    *string                   `json:"title"`
+	AlertDeliveryStatus      *AlertDeliveryStatusInfo  `json:"alertDeliveryStatus,omitempty"`
+	Annotations              []AlertAnnotationInfo     `json:"annotations,omitempty"`
+	CategoryID               *string                   `json:"categoryId,omitempty"`
+	EventID                  *string                   `json:"eventId,omitempty"`
+	Flags                    *int32                    `json:"flags,omitempty"`
+	HistoryDetailed          *AlertHistoryInfoDetailed `json:"historyDetailed,omitempty"`
+	ID                       *string                   `json:"id,omitempty"`
+	LastModified             *time.Time                `json:"lastModified,omitempty"`
+	RequiredAcknowledgements *int32                    `json:"requiredAcknowledgements,omitempty"`
+	Status                   *int32                    `json:"status,omitempty"`
+	SubscriptionID           *string                   `json:"subscriptionId,omitempty"`
+	TeamID                   *string                   `json:"teamId,omitempty"`
+	Text                     *string                   `json:"text,omitempty"`
+	Title                    *string                   `json:"title,omitempty"`
 }

@@ -20,8 +20,8 @@ const (
 )
 
 type UpdatePriceRequestBodyPricingComparisonPrice struct {
-	Amount   *float64                                                  `json:"amount"`
-	Currency *UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnum `json:"currency"`
+	Amount   *float64                                                  `json:"amount,omitempty"`
+	Currency *UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnum `json:"currency,omitempty"`
 }
 
 type UpdatePriceRequestBodyPricingComparisonPriceTypeEnum string
@@ -38,8 +38,8 @@ const (
 )
 
 type UpdatePriceRequestBodyPricingCurrentPrice struct {
-	Amount   *float64                                               `json:"amount"`
-	Currency *UpdatePriceRequestBodyPricingCurrentPriceCurrencyEnum `json:"currency"`
+	Amount   *float64                                               `json:"amount,omitempty"`
+	Currency *UpdatePriceRequestBodyPricingCurrentPriceCurrencyEnum `json:"currency,omitempty"`
 }
 
 type UpdatePriceRequestBodyPricingCurrentPriceTypeEnum string
@@ -65,15 +65,15 @@ const (
 )
 
 type UpdatePriceRequestBodyPricing struct {
-	ComparisonPrice     *UpdatePriceRequestBodyPricingComparisonPrice         `json:"comparisonPrice"`
-	ComparisonPriceType *UpdatePriceRequestBodyPricingComparisonPriceTypeEnum `json:"comparisonPriceType"`
+	ComparisonPrice     *UpdatePriceRequestBodyPricingComparisonPrice         `json:"comparisonPrice,omitempty"`
+	ComparisonPriceType *UpdatePriceRequestBodyPricingComparisonPriceTypeEnum `json:"comparisonPriceType,omitempty"`
 	CurrentPrice        UpdatePriceRequestBodyPricingCurrentPrice             `json:"currentPrice"`
 	CurrentPriceType    UpdatePriceRequestBodyPricingCurrentPriceTypeEnum     `json:"currentPriceType"`
-	EffectiveDate       *time.Time                                            `json:"effectiveDate"`
-	ExpirationDate      *time.Time                                            `json:"expirationDate"`
-	PriceDisplayCodes   *UpdatePriceRequestBodyPricingPriceDisplayCodesEnum   `json:"priceDisplayCodes"`
-	ProcessMode         *UpdatePriceRequestBodyPricingProcessModeEnum         `json:"processMode"`
-	PromoID             *string                                               `json:"promoId"`
+	EffectiveDate       *time.Time                                            `json:"effectiveDate,omitempty"`
+	ExpirationDate      *time.Time                                            `json:"expirationDate,omitempty"`
+	PriceDisplayCodes   *UpdatePriceRequestBodyPricingPriceDisplayCodesEnum   `json:"priceDisplayCodes,omitempty"`
+	ProcessMode         *UpdatePriceRequestBodyPricingProcessModeEnum         `json:"processMode,omitempty"`
+	PromoID             *string                                               `json:"promoId,omitempty"`
 }
 
 type UpdatePriceRequestBodyReplaceAllEnum string
@@ -84,10 +84,10 @@ const (
 )
 
 type UpdatePriceRequestBody struct {
-	Definitions map[string]interface{}                `json:"definitions"`
-	OfferID     *string                               `json:"offerId"`
+	Definitions map[string]interface{}                `json:"definitions,omitempty"`
+	OfferID     *string                               `json:"offerId,omitempty"`
 	Pricing     []UpdatePriceRequestBodyPricing       `json:"pricing"`
-	ReplaceAll  *UpdatePriceRequestBodyReplaceAllEnum `json:"replaceAll"`
+	ReplaceAll  *UpdatePriceRequestBodyReplaceAllEnum `json:"replaceAll,omitempty"`
 	Sku         string                                `json:"sku"`
 }
 
@@ -106,10 +106,10 @@ const (
 )
 
 type UpdatePrice200ApplicationJSONErrorsCauses struct {
-	Code        *string `json:"code"`
-	Description *string `json:"description"`
-	Field       *string `json:"field"`
-	Type        *string `json:"type"`
+	Code        *string `json:"code,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Field       *string `json:"field,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }
 
 type UpdatePrice200ApplicationJSONErrorsGatewayErrorCategoryEnum string
@@ -129,26 +129,26 @@ const (
 )
 
 type UpdatePrice200ApplicationJSONErrors struct {
-	Category             *UpdatePrice200ApplicationJSONErrorsCategoryEnum             `json:"category"`
-	Causes               []UpdatePrice200ApplicationJSONErrorsCauses                  `json:"causes"`
+	Category             *UpdatePrice200ApplicationJSONErrorsCategoryEnum             `json:"category,omitempty"`
+	Causes               []UpdatePrice200ApplicationJSONErrorsCauses                  `json:"causes,omitempty"`
 	Code                 string                                                       `json:"code"`
-	Component            *string                                                      `json:"component"`
-	Description          *string                                                      `json:"description"`
-	ErrorIdentifiers     map[string]map[string]interface{}                            `json:"errorIdentifiers"`
-	Field                *string                                                      `json:"field"`
-	GatewayErrorCategory *UpdatePrice200ApplicationJSONErrorsGatewayErrorCategoryEnum `json:"gatewayErrorCategory"`
-	Info                 *string                                                      `json:"info"`
-	ServiceName          *string                                                      `json:"serviceName"`
-	Severity             *UpdatePrice200ApplicationJSONErrorsSeverityEnum             `json:"severity"`
-	Type                 *string                                                      `json:"type"`
+	Component            *string                                                      `json:"component,omitempty"`
+	Description          *string                                                      `json:"description,omitempty"`
+	ErrorIdentifiers     map[string]map[string]interface{}                            `json:"errorIdentifiers,omitempty"`
+	Field                *string                                                      `json:"field,omitempty"`
+	GatewayErrorCategory *UpdatePrice200ApplicationJSONErrorsGatewayErrorCategoryEnum `json:"gatewayErrorCategory,omitempty"`
+	Info                 *string                                                      `json:"info,omitempty"`
+	ServiceName          *string                                                      `json:"serviceName,omitempty"`
+	Severity             *UpdatePrice200ApplicationJSONErrorsSeverityEnum             `json:"severity,omitempty"`
+	Type                 *string                                                      `json:"type,omitempty"`
 }
 
 type UpdatePrice200ApplicationJSON struct {
-	Errors     []UpdatePrice200ApplicationJSONErrors `json:"errors"`
-	Mart       *string                               `json:"mart"`
-	Message    *string                               `json:"message"`
-	Sku        *string                               `json:"sku"`
-	StatusCode *int32                                `json:"statusCode"`
+	Errors     []UpdatePrice200ApplicationJSONErrors `json:"errors,omitempty"`
+	Mart       *string                               `json:"mart,omitempty"`
+	Message    *string                               `json:"message,omitempty"`
+	Sku        *string                               `json:"sku,omitempty"`
+	StatusCode *int32                                `json:"statusCode,omitempty"`
 }
 
 type UpdatePriceResponse struct {

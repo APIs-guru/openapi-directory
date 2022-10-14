@@ -21,9 +21,9 @@ type GetServiceGraphHeaders struct {
 
 type GetServiceGraphRequestBody struct {
 	EndTime   time.Time `json:"EndTime"`
-	GroupArn  *string   `json:"GroupARN"`
-	GroupName *string   `json:"GroupName"`
-	NextToken *string   `json:"NextToken"`
+	GroupArn  *string   `json:"GroupARN,omitempty"`
+	GroupName *string   `json:"GroupName,omitempty"`
+	NextToken *string   `json:"NextToken,omitempty"`
 	StartTime time.Time `json:"StartTime"`
 }
 

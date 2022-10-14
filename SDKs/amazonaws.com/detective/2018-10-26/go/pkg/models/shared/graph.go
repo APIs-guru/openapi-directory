@@ -5,6 +5,6 @@ import (
 )
 
 type Graph struct {
-	Arn         *string    `json:"Arn"`
-	CreatedTime *time.Time `json:"CreatedTime"`
+	Arn         *string    `json:"Arn,omitempty"`
+	CreatedTime *time.Time `json:"CreatedTime,omitempty"`
 }

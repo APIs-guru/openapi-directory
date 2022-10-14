@@ -1,5 +1,5 @@
 package shared
 
 type QueryAuditableServicesRequest struct {
-	FullResourceName *string `json:"fullResourceName"`
+	FullResourceName *string `json:"fullResourceName,omitempty"`
 }

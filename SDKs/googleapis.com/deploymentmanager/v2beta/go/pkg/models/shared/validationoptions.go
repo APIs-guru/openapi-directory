@@ -21,6 +21,6 @@ const (
 )
 
 type ValidationOptions struct {
-	SchemaValidation     *ValidationOptionsSchemaValidationEnum     `json:"schemaValidation"`
-	UndeclaredProperties *ValidationOptionsUndeclaredPropertiesEnum `json:"undeclaredProperties"`
+	SchemaValidation     *ValidationOptionsSchemaValidationEnum     `json:"schemaValidation,omitempty"`
+	UndeclaredProperties *ValidationOptionsUndeclaredPropertiesEnum `json:"undeclaredProperties,omitempty"`
 }

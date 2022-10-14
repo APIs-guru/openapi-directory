@@ -35,15 +35,15 @@ const (
 )
 
 type MetricDescriptor struct {
-	Description            *string                          `json:"description"`
-	DisplayName            *string                          `json:"displayName"`
-	Labels                 []LabelDescriptor                `json:"labels"`
-	LaunchStage            *MetricDescriptorLaunchStageEnum `json:"launchStage"`
-	Metadata               *MetricDescriptorMetadata        `json:"metadata"`
-	MetricKind             *MetricDescriptorMetricKindEnum  `json:"metricKind"`
-	MonitoredResourceTypes []string                         `json:"monitoredResourceTypes"`
-	Name                   *string                          `json:"name"`
-	Type                   *string                          `json:"type"`
-	Unit                   *string                          `json:"unit"`
-	ValueType              *MetricDescriptorValueTypeEnum   `json:"valueType"`
+	Description            *string                          `json:"description,omitempty"`
+	DisplayName            *string                          `json:"displayName,omitempty"`
+	Labels                 []LabelDescriptor                `json:"labels,omitempty"`
+	LaunchStage            *MetricDescriptorLaunchStageEnum `json:"launchStage,omitempty"`
+	Metadata               *MetricDescriptorMetadata        `json:"metadata,omitempty"`
+	MetricKind             *MetricDescriptorMetricKindEnum  `json:"metricKind,omitempty"`
+	MonitoredResourceTypes []string                         `json:"monitoredResourceTypes,omitempty"`
+	Name                   *string                          `json:"name,omitempty"`
+	Type                   *string                          `json:"type,omitempty"`
+	Unit                   *string                          `json:"unit,omitempty"`
+	ValueType              *MetricDescriptorValueTypeEnum   `json:"valueType,omitempty"`
 }

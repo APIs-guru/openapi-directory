@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDocumentaiV1beta3DocumentSchemaMetadata struct {
-	DocumentAllowMultipleLabels *bool `json:"documentAllowMultipleLabels"`
-	DocumentSplitter            *bool `json:"documentSplitter"`
-	PrefixedNamingOnProperties  *bool `json:"prefixedNamingOnProperties"`
-	SkipNamingValidation        *bool `json:"skipNamingValidation"`
+	DocumentAllowMultipleLabels *bool `json:"documentAllowMultipleLabels,omitempty"`
+	DocumentSplitter            *bool `json:"documentSplitter,omitempty"`
+	PrefixedNamingOnProperties  *bool `json:"prefixedNamingOnProperties,omitempty"`
+	SkipNamingValidation        *bool `json:"skipNamingValidation,omitempty"`
 }

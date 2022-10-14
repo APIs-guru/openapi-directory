@@ -5,16 +5,16 @@ import (
 )
 
 type PreviewDeployedDevicesFleetDevice struct {
-	AccountSid        *string    `json:"account_sid"`
-	DateAuthenticated *time.Time `json:"date_authenticated"`
-	DateCreated       *time.Time `json:"date_created"`
-	DateUpdated       *time.Time `json:"date_updated"`
-	DeploymentSid     *string    `json:"deployment_sid"`
-	Enabled           *bool      `json:"enabled"`
-	FleetSid          *string    `json:"fleet_sid"`
-	FriendlyName      *string    `json:"friendly_name"`
-	Identity          *string    `json:"identity"`
-	Sid               *string    `json:"sid"`
-	UniqueName        *string    `json:"unique_name"`
-	URL               *string    `json:"url"`
+	AccountSid        *string    `json:"account_sid,omitempty"`
+	DateAuthenticated *time.Time `json:"date_authenticated,omitempty"`
+	DateCreated       *time.Time `json:"date_created,omitempty"`
+	DateUpdated       *time.Time `json:"date_updated,omitempty"`
+	DeploymentSid     *string    `json:"deployment_sid,omitempty"`
+	Enabled           *bool      `json:"enabled,omitempty"`
+	FleetSid          *string    `json:"fleet_sid,omitempty"`
+	FriendlyName      *string    `json:"friendly_name,omitempty"`
+	Identity          *string    `json:"identity,omitempty"`
+	Sid               *string    `json:"sid,omitempty"`
+	UniqueName        *string    `json:"unique_name,omitempty"`
+	URL               *string    `json:"url,omitempty"`
 }

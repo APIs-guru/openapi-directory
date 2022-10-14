@@ -11,9 +11,9 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1ConversationParticipant struct {
-	DialogflowParticipant     *string                                                            `json:"dialogflowParticipant"`
-	DialogflowParticipantName *string                                                            `json:"dialogflowParticipantName"`
-	ObfuscatedExternalUserID  *string                                                            `json:"obfuscatedExternalUserId"`
-	Role                      *GoogleCloudContactcenterinsightsV1ConversationParticipantRoleEnum `json:"role"`
-	UserID                    *string                                                            `json:"userId"`
+	DialogflowParticipant     *string                                                            `json:"dialogflowParticipant,omitempty"`
+	DialogflowParticipantName *string                                                            `json:"dialogflowParticipantName,omitempty"`
+	ObfuscatedExternalUserID  *string                                                            `json:"obfuscatedExternalUserId,omitempty"`
+	Role                      *GoogleCloudContactcenterinsightsV1ConversationParticipantRoleEnum `json:"role,omitempty"`
+	UserID                    *string                                                            `json:"userId,omitempty"`
 }

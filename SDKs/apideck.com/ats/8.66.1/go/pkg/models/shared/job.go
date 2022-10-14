@@ -5,8 +5,8 @@ import (
 )
 
 type JobBranchBranch struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type JobEmploymentTermsEnum string
@@ -25,9 +25,9 @@ const (
 )
 
 type JobSalary struct {
-	Currency *CurrencyEnum `json:"currency"`
-	Max      *int64        `json:"max"`
-	Min      *int64        `json:"min"`
+	Currency *CurrencyEnum `json:"currency,omitempty"`
+	Max      *int64        `json:"max,omitempty"`
+	Min      *int64        `json:"min,omitempty"`
 }
 
 type JobVisibilityEnum string
@@ -38,42 +38,42 @@ const (
 )
 
 type Job struct {
-	Addresses            []Address               `json:"addresses"`
-	AvailableToEmployees *bool                   `json:"available_to_employees"`
-	Blocks               []interface{}           `json:"blocks"`
-	Branch               *JobBranchBranch        `json:"branch"`
-	Closing              *string                 `json:"closing"`
-	ClosingDate          *time.Time              `json:"closing_date"`
-	ClosingHTML          *string                 `json:"closing_html"`
-	Code                 *string                 `json:"code"`
-	Confidential         *bool                   `json:"confidential"`
-	CreatedAt            *time.Time              `json:"created_at"`
-	CreatedBy            *string                 `json:"created_by"`
-	Deleted              *bool                   `json:"deleted"`
-	Department           *Department             `json:"department"`
-	Description          *string                 `json:"description"`
-	DescriptionHTML      *string                 `json:"description_html"`
-	EmploymentTerms      *JobEmploymentTermsEnum `json:"employment_terms"`
-	Experience           *string                 `json:"experience"`
-	Followers            []string                `json:"followers"`
-	HiringManagers       []interface{}           `json:"hiring_managers"`
-	ID                   *string                 `json:"id"`
-	JobPortalURL         *string                 `json:"job_portal_url"`
-	Language             *string                 `json:"language"`
-	OwnerID              *string                 `json:"owner_id"`
-	PublishedAt          *time.Time              `json:"published_at"`
-	RecordURL            *string                 `json:"record_url"`
-	Recruiters           []string                `json:"recruiters"`
-	Remote               *bool                   `json:"remote"`
-	RequisitionID        *string                 `json:"requisition_id"`
-	Salary               *JobSalary              `json:"salary"`
-	Sequence             *int64                  `json:"sequence"`
-	Slug                 *string                 `json:"slug"`
-	Status               *JobStatusEnum          `json:"status"`
-	Tags                 []string                `json:"tags"`
-	Title                *string                 `json:"title"`
-	UpdatedAt            *time.Time              `json:"updated_at"`
-	UpdatedBy            *string                 `json:"updated_by"`
-	URL                  *string                 `json:"url"`
-	Visibility           []JobVisibilityEnum     `json:"visibility"`
+	Addresses            []Address               `json:"addresses,omitempty"`
+	AvailableToEmployees *bool                   `json:"available_to_employees,omitempty"`
+	Blocks               []interface{}           `json:"blocks,omitempty"`
+	Branch               *JobBranchBranch        `json:"branch,omitempty"`
+	Closing              *string                 `json:"closing,omitempty"`
+	ClosingDate          *time.Time              `json:"closing_date,omitempty"`
+	ClosingHTML          *string                 `json:"closing_html,omitempty"`
+	Code                 *string                 `json:"code,omitempty"`
+	Confidential         *bool                   `json:"confidential,omitempty"`
+	CreatedAt            *time.Time              `json:"created_at,omitempty"`
+	CreatedBy            *string                 `json:"created_by,omitempty"`
+	Deleted              *bool                   `json:"deleted,omitempty"`
+	Department           *Department             `json:"department,omitempty"`
+	Description          *string                 `json:"description,omitempty"`
+	DescriptionHTML      *string                 `json:"description_html,omitempty"`
+	EmploymentTerms      *JobEmploymentTermsEnum `json:"employment_terms,omitempty"`
+	Experience           *string                 `json:"experience,omitempty"`
+	Followers            []string                `json:"followers,omitempty"`
+	HiringManagers       []interface{}           `json:"hiring_managers,omitempty"`
+	ID                   *string                 `json:"id,omitempty"`
+	JobPortalURL         *string                 `json:"job_portal_url,omitempty"`
+	Language             *string                 `json:"language,omitempty"`
+	OwnerID              *string                 `json:"owner_id,omitempty"`
+	PublishedAt          *time.Time              `json:"published_at,omitempty"`
+	RecordURL            *string                 `json:"record_url,omitempty"`
+	Recruiters           []string                `json:"recruiters,omitempty"`
+	Remote               *bool                   `json:"remote,omitempty"`
+	RequisitionID        *string                 `json:"requisition_id,omitempty"`
+	Salary               *JobSalary              `json:"salary,omitempty"`
+	Sequence             *int64                  `json:"sequence,omitempty"`
+	Slug                 *string                 `json:"slug,omitempty"`
+	Status               *JobStatusEnum          `json:"status,omitempty"`
+	Tags                 []string                `json:"tags,omitempty"`
+	Title                *string                 `json:"title,omitempty"`
+	UpdatedAt            *time.Time              `json:"updated_at,omitempty"`
+	UpdatedBy            *string                 `json:"updated_by,omitempty"`
+	URL                  *string                 `json:"url,omitempty"`
+	Visibility           []JobVisibilityEnum     `json:"visibility,omitempty"`
 }

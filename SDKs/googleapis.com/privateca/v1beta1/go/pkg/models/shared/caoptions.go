@@ -1,6 +1,6 @@
 package shared
 
 type CaOptions struct {
-	IsCa                *bool  `json:"isCa"`
-	MaxIssuerPathLength *int32 `json:"maxIssuerPathLength"`
+	IsCa                *bool  `json:"isCa,omitempty"`
+	MaxIssuerPathLength *int32 `json:"maxIssuerPathLength,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ValueWithServiceIds struct {
-	AnnotationValue *AnnotationValue `json:"AnnotationValue"`
-	ServiceIds      []ServiceID      `json:"ServiceIds"`
+	AnnotationValue *AnnotationValue `json:"AnnotationValue,omitempty"`
+	ServiceIds      []ServiceID      `json:"ServiceIds,omitempty"`
 }

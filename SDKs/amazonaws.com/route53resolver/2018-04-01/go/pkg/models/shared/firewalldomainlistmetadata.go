@@ -1,9 +1,9 @@
 package shared
 
 type FirewallDomainListMetadata struct {
-	Arn              *string `json:"Arn"`
-	CreatorRequestID *string `json:"CreatorRequestId"`
-	ID               *string `json:"Id"`
-	ManagedOwnerName *string `json:"ManagedOwnerName"`
-	Name             *string `json:"Name"`
+	Arn              *string `json:"Arn,omitempty"`
+	CreatorRequestID *string `json:"CreatorRequestId,omitempty"`
+	ID               *string `json:"Id,omitempty"`
+	ManagedOwnerName *string `json:"ManagedOwnerName,omitempty"`
+	Name             *string `json:"Name,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type RadAnalystPage struct {
-	Pagination *OffsetInfo  `json:"pagination"`
-	Results    []RadAnalyst `json:"results"`
+	Pagination *OffsetInfo  `json:"pagination,omitempty"`
+	Results    []RadAnalyst `json:"results,omitempty"`
 }

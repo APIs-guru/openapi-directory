@@ -20,15 +20,15 @@ type GetFeedbackHeaders struct {
 }
 
 type GetFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback struct {
-	AnomalyGroupID *string `json:"AnomalyGroupId"`
-	TimeSeriesID   *string `json:"TimeSeriesId"`
+	AnomalyGroupID *string `json:"AnomalyGroupId,omitempty"`
+	TimeSeriesID   *string `json:"TimeSeriesId,omitempty"`
 }
 
 type GetFeedbackRequestBody struct {
 	AnomalyDetectorArn             string                                               `json:"AnomalyDetectorArn"`
 	AnomalyGroupTimeSeriesFeedback GetFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback `json:"AnomalyGroupTimeSeriesFeedback"`
-	MaxResults                     *int64                                               `json:"MaxResults"`
-	NextToken                      *string                                              `json:"NextToken"`
+	MaxResults                     *int64                                               `json:"MaxResults,omitempty"`
+	NextToken                      *string                                              `json:"NextToken,omitempty"`
 }
 
 type GetFeedbackRequest struct {

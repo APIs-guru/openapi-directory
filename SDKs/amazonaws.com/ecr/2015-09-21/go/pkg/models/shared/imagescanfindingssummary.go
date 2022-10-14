@@ -5,7 +5,7 @@ import (
 )
 
 type ImageScanFindingsSummary struct {
-	FindingSeverityCounts        map[string]int64 `json:"findingSeverityCounts"`
-	ImageScanCompletedAt         *time.Time       `json:"imageScanCompletedAt"`
-	VulnerabilitySourceUpdatedAt *time.Time       `json:"vulnerabilitySourceUpdatedAt"`
+	FindingSeverityCounts        map[string]int64 `json:"findingSeverityCounts,omitempty"`
+	ImageScanCompletedAt         *time.Time       `json:"imageScanCompletedAt,omitempty"`
+	VulnerabilitySourceUpdatedAt *time.Time       `json:"vulnerabilitySourceUpdatedAt,omitempty"`
 }

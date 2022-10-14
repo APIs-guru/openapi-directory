@@ -1,8 +1,8 @@
 package shared
 
 type OrderBy struct {
-	Desc      *bool             `json:"desc"`
-	Dimension *DimensionOrderBy `json:"dimension"`
-	Metric    *MetricOrderBy    `json:"metric"`
-	Pivot     *PivotOrderBy     `json:"pivot"`
+	Desc      *bool             `json:"desc,omitempty"`
+	Dimension *DimensionOrderBy `json:"dimension,omitempty"`
+	Metric    *MetricOrderBy    `json:"metric,omitempty"`
+	Pivot     *PivotOrderBy     `json:"pivot,omitempty"`
 }

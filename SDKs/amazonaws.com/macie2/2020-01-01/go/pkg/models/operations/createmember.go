@@ -15,13 +15,13 @@ type CreateMemberHeaders struct {
 }
 
 type CreateMemberRequestBodyAccount struct {
-	AccountID *string `json:"accountId"`
-	Email     *string `json:"email"`
+	AccountID *string `json:"accountId,omitempty"`
+	Email     *string `json:"email,omitempty"`
 }
 
 type CreateMemberRequestBody struct {
 	Account CreateMemberRequestBodyAccount `json:"account"`
-	Tags    map[string]string              `json:"tags"`
+	Tags    map[string]string              `json:"tags,omitempty"`
 }
 
 type CreateMemberRequest struct {

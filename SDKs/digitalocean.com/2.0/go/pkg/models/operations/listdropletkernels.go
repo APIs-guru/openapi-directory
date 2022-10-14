@@ -19,17 +19,17 @@ type ListDropletKernelsRequest struct {
 }
 
 type ListDropletKernels200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListDropletKernels200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListDropletKernels200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListDropletKernels200ApplicationJSONMeta struct {
@@ -37,15 +37,15 @@ type ListDropletKernels200ApplicationJSONMeta struct {
 }
 
 type ListDropletKernels200ApplicationJSON struct {
-	Kernels []shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesKernel `json:"kernels"`
-	Links   *ListDropletKernels200ApplicationJSONLinks                                                                       `json:"links"`
+	Kernels []shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesKernel `json:"kernels,omitempty"`
+	Links   *ListDropletKernels200ApplicationJSONLinks                                                                       `json:"links,omitempty"`
 	Meta    ListDropletKernels200ApplicationJSONMeta                                                                         `json:"meta"`
 }
 
 type ListDropletKernels401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListDropletKernelsResponse struct {

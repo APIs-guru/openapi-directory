@@ -5,12 +5,12 @@ import (
 )
 
 type Resource struct {
-	Arn              *string             `json:"arn"`
-	CreationTime     *time.Time          `json:"creationTime"`
-	LastUpdatedTime  *time.Time          `json:"lastUpdatedTime"`
-	ResourceGroupArn *string             `json:"resourceGroupArn"`
-	ResourceShareArn *string             `json:"resourceShareArn"`
-	Status           *ResourceStatusEnum `json:"status"`
-	StatusMessage    *string             `json:"statusMessage"`
-	Type             *string             `json:"type"`
+	Arn              *string             `json:"arn,omitempty"`
+	CreationTime     *time.Time          `json:"creationTime,omitempty"`
+	LastUpdatedTime  *time.Time          `json:"lastUpdatedTime,omitempty"`
+	ResourceGroupArn *string             `json:"resourceGroupArn,omitempty"`
+	ResourceShareArn *string             `json:"resourceShareArn,omitempty"`
+	Status           *ResourceStatusEnum `json:"status,omitempty"`
+	StatusMessage    *string             `json:"statusMessage,omitempty"`
+	Type             *string             `json:"type,omitempty"`
 }

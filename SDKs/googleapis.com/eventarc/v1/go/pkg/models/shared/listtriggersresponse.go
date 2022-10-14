@@ -1,7 +1,7 @@
 package shared
 
 type ListTriggersResponse struct {
-	NextPageToken *string   `json:"nextPageToken"`
-	Triggers      []Trigger `json:"triggers"`
-	Unreachable   []string  `json:"unreachable"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	Triggers      []Trigger `json:"triggers,omitempty"`
+	Unreachable   []string  `json:"unreachable,omitempty"`
 }

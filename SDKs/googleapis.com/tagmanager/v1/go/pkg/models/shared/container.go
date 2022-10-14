@@ -122,15 +122,15 @@ const (
 )
 
 type Container struct {
-	AccountID              *string                               `json:"accountId"`
-	ContainerID            *string                               `json:"containerId"`
-	DomainName             []string                              `json:"domainName"`
-	EnabledBuiltInVariable []ContainerEnabledBuiltInVariableEnum `json:"enabledBuiltInVariable"`
-	Fingerprint            *string                               `json:"fingerprint"`
-	Name                   *string                               `json:"name"`
-	Notes                  *string                               `json:"notes"`
-	PublicID               *string                               `json:"publicId"`
-	TimeZoneCountryID      *string                               `json:"timeZoneCountryId"`
-	TimeZoneID             *string                               `json:"timeZoneId"`
-	UsageContext           []ContainerUsageContextEnum           `json:"usageContext"`
+	AccountID              *string                               `json:"accountId,omitempty"`
+	ContainerID            *string                               `json:"containerId,omitempty"`
+	DomainName             []string                              `json:"domainName,omitempty"`
+	EnabledBuiltInVariable []ContainerEnabledBuiltInVariableEnum `json:"enabledBuiltInVariable,omitempty"`
+	Fingerprint            *string                               `json:"fingerprint,omitempty"`
+	Name                   *string                               `json:"name,omitempty"`
+	Notes                  *string                               `json:"notes,omitempty"`
+	PublicID               *string                               `json:"publicId,omitempty"`
+	TimeZoneCountryID      *string                               `json:"timeZoneCountryId,omitempty"`
+	TimeZoneID             *string                               `json:"timeZoneId,omitempty"`
+	UsageContext           []ContainerUsageContextEnum           `json:"usageContext,omitempty"`
 }

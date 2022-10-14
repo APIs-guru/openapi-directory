@@ -1,5 +1,5 @@
 package shared
 
 type ManagedConfigurationsForUserListResponse struct {
-	ManagedConfigurationForUser []ManagedConfiguration `json:"managedConfigurationForUser"`
+	ManagedConfigurationForUser []ManagedConfiguration `json:"managedConfigurationForUser,omitempty"`
 }

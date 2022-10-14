@@ -1,6 +1,6 @@
 package shared
 
 type CustomEventsBatchInsertRequest struct {
-	CustomEvents []CustomEvent `json:"customEvents"`
-	Kind         *string       `json:"kind"`
+	CustomEvents []CustomEvent `json:"customEvents,omitempty"`
+	Kind         *string       `json:"kind,omitempty"`
 }

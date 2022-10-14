@@ -1,8 +1,8 @@
 package shared
 
 type AccountsCustomBatchRequestEntryLinkRequest struct {
-	Action          *string  `json:"action"`
-	LinkType        *string  `json:"linkType"`
-	LinkedAccountID *string  `json:"linkedAccountId"`
-	Services        []string `json:"services"`
+	Action          *string  `json:"action,omitempty"`
+	LinkType        *string  `json:"linkType,omitempty"`
+	LinkedAccountID *string  `json:"linkedAccountId,omitempty"`
+	Services        []string `json:"services,omitempty"`
 }

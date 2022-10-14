@@ -1,5 +1,5 @@
 package shared
 
 type CreateClusterResponse struct {
-	Cluster *Cluster `json:"cluster"`
+	Cluster *Cluster `json:"cluster,omitempty"`
 }

@@ -20,8 +20,8 @@ const (
 )
 
 type CvipcRequestBody struct {
-	CertificateParameters *CvipcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *CvipcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                CvipcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -57,8 +57,8 @@ const (
 )
 
 type Cvipc400ApplicationJSON struct {
-	Error            *Cvipc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cvipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cvipc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cvipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cvipc401ApplicationJSONErrorEnum string
@@ -76,8 +76,8 @@ const (
 )
 
 type Cvipc401ApplicationJSON struct {
-	Error            *Cvipc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cvipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cvipc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cvipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cvipc404ApplicationJSONErrorEnum string
@@ -95,8 +95,8 @@ const (
 )
 
 type Cvipc404ApplicationJSON struct {
-	Error            *Cvipc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cvipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cvipc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cvipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cvipc500ApplicationJSONErrorEnum string
@@ -112,8 +112,8 @@ const (
 )
 
 type Cvipc500ApplicationJSON struct {
-	Error            *Cvipc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cvipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cvipc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cvipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cvipc502ApplicationJSONErrorEnum string
@@ -129,8 +129,8 @@ const (
 )
 
 type Cvipc502ApplicationJSON struct {
-	Error            *Cvipc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cvipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cvipc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cvipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cvipc503ApplicationJSONErrorEnum string
@@ -146,8 +146,8 @@ const (
 )
 
 type Cvipc503ApplicationJSON struct {
-	Error            *Cvipc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cvipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cvipc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cvipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cvipc504ApplicationJSONErrorEnum string
@@ -163,8 +163,8 @@ const (
 )
 
 type Cvipc504ApplicationJSON struct {
-	Error            *Cvipc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cvipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cvipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cvipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type CvipcResponse struct {

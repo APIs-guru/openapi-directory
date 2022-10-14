@@ -1,6 +1,6 @@
 package shared
 
 type DescribeHomeRegionControlsResult struct {
-	HomeRegionControls []HomeRegionControl `json:"HomeRegionControls"`
-	NextToken          *string             `json:"NextToken"`
+	HomeRegionControls []HomeRegionControl `json:"HomeRegionControls,omitempty"`
+	NextToken          *string             `json:"NextToken,omitempty"`
 }

@@ -1,14 +1,14 @@
 package shared
 
 type AwsEc2InstanceDetails struct {
-	IamInstanceProfileArn *string                                  `json:"IamInstanceProfileArn"`
-	ImageID               *string                                  `json:"ImageId"`
-	IPV4Addresses         []string                                 `json:"IpV4Addresses"`
-	IPV6Addresses         []string                                 `json:"IpV6Addresses"`
-	KeyName               *string                                  `json:"KeyName"`
-	LaunchedAt            *string                                  `json:"LaunchedAt"`
-	NetworkInterfaces     []AwsEc2InstanceNetworkInterfacesDetails `json:"NetworkInterfaces"`
-	SubnetID              *string                                  `json:"SubnetId"`
-	Type                  *string                                  `json:"Type"`
-	VpcID                 *string                                  `json:"VpcId"`
+	IamInstanceProfileArn *string                                  `json:"IamInstanceProfileArn,omitempty"`
+	ImageID               *string                                  `json:"ImageId,omitempty"`
+	IPV4Addresses         []string                                 `json:"IpV4Addresses,omitempty"`
+	IPV6Addresses         []string                                 `json:"IpV6Addresses,omitempty"`
+	KeyName               *string                                  `json:"KeyName,omitempty"`
+	LaunchedAt            *string                                  `json:"LaunchedAt,omitempty"`
+	NetworkInterfaces     []AwsEc2InstanceNetworkInterfacesDetails `json:"NetworkInterfaces,omitempty"`
+	SubnetID              *string                                  `json:"SubnetId,omitempty"`
+	Type                  *string                                  `json:"Type,omitempty"`
+	VpcID                 *string                                  `json:"VpcId,omitempty"`
 }

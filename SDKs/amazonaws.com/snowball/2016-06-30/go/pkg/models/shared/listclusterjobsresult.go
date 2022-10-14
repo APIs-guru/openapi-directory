@@ -1,6 +1,6 @@
 package shared
 
 type ListClusterJobsResult struct {
-	JobListEntries []JobListEntry `json:"JobListEntries"`
-	NextToken      *string        `json:"NextToken"`
+	JobListEntries []JobListEntry `json:"JobListEntries,omitempty"`
+	NextToken      *string        `json:"NextToken,omitempty"`
 }

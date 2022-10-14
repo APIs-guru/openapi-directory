@@ -1,6 +1,6 @@
 package shared
 
 type SearchSubscriptionsFilter struct {
-	CustomerIds []string `json:"customer_ids"`
-	LocationIds []string `json:"location_ids"`
+	CustomerIds []string `json:"customer_ids,omitempty"`
+	LocationIds []string `json:"location_ids,omitempty"`
 }

@@ -11,7 +11,7 @@ const (
 )
 
 type AutoForwarding struct {
-	Disposition  *AutoForwardingDispositionEnum `json:"disposition"`
-	EmailAddress *string                        `json:"emailAddress"`
-	Enabled      *bool                          `json:"enabled"`
+	Disposition  *AutoForwardingDispositionEnum `json:"disposition,omitempty"`
+	EmailAddress *string                        `json:"emailAddress,omitempty"`
+	Enabled      *bool                          `json:"enabled,omitempty"`
 }

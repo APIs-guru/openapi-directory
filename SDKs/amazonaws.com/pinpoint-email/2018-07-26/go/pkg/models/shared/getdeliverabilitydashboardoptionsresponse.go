@@ -5,9 +5,9 @@ import (
 )
 
 type GetDeliverabilityDashboardOptionsResponse struct {
-	AccountStatus                      *DeliverabilityDashboardAccountStatusEnum `json:"AccountStatus"`
-	ActiveSubscribedDomains            []DomainDeliverabilityTrackingOption      `json:"ActiveSubscribedDomains"`
+	AccountStatus                      *DeliverabilityDashboardAccountStatusEnum `json:"AccountStatus,omitempty"`
+	ActiveSubscribedDomains            []DomainDeliverabilityTrackingOption      `json:"ActiveSubscribedDomains,omitempty"`
 	DashboardEnabled                   bool                                      `json:"DashboardEnabled"`
-	PendingExpirationSubscribedDomains []DomainDeliverabilityTrackingOption      `json:"PendingExpirationSubscribedDomains"`
-	SubscriptionExpiryDate             *time.Time                                `json:"SubscriptionExpiryDate"`
+	PendingExpirationSubscribedDomains []DomainDeliverabilityTrackingOption      `json:"PendingExpirationSubscribedDomains,omitempty"`
+	SubscriptionExpiryDate             *time.Time                                `json:"SubscriptionExpiryDate,omitempty"`
 }

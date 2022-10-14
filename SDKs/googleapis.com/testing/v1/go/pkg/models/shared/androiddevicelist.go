@@ -1,5 +1,5 @@
 package shared
 
 type AndroidDeviceList struct {
-	AndroidDevices []AndroidDevice `json:"androidDevices"`
+	AndroidDevices []AndroidDevice `json:"androidDevices,omitempty"`
 }

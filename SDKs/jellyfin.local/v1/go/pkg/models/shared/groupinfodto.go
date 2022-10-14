@@ -5,9 +5,9 @@ import (
 )
 
 type GroupInfoDto struct {
-	GroupID       *string             `json:"GroupId"`
-	GroupName     *string             `json:"GroupName"`
-	LastUpdatedAt *time.Time          `json:"LastUpdatedAt"`
-	Participants  []string            `json:"Participants"`
-	State         *GroupStateTypeEnum `json:"State"`
+	GroupID       *string             `json:"GroupId,omitempty"`
+	GroupName     *string             `json:"GroupName,omitempty"`
+	LastUpdatedAt *time.Time          `json:"LastUpdatedAt,omitempty"`
+	Participants  []string            `json:"Participants,omitempty"`
+	State         *GroupStateTypeEnum `json:"State,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListClientDevicesAssociatedWithCoreDeviceResponse struct {
-	AssociatedClientDevices []AssociatedClientDevice `json:"associatedClientDevices"`
-	NextToken               *string                  `json:"nextToken"`
+	AssociatedClientDevices []AssociatedClientDevice `json:"associatedClientDevices,omitempty"`
+	NextToken               *string                  `json:"nextToken,omitempty"`
 }

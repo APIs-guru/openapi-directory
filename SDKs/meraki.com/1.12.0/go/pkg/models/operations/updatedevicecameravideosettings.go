@@ -5,7 +5,7 @@ type UpdateDeviceCameraVideoSettingsPathParams struct {
 }
 
 type UpdateDeviceCameraVideoSettingsRequestBody struct {
-	ExternalRtspEnabled *bool `json:"externalRtspEnabled"`
+	ExternalRtspEnabled *bool `json:"externalRtspEnabled,omitempty"`
 }
 
 type UpdateDeviceCameraVideoSettingsRequest struct {

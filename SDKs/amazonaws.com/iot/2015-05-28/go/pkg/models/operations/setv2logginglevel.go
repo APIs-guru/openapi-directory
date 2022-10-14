@@ -25,8 +25,8 @@ const (
 )
 
 type SetV2LoggingLevelRequestBodyLogTarget struct {
-	TargetName *string                   `json:"targetName"`
-	TargetType *shared.LogTargetTypeEnum `json:"targetType"`
+	TargetName *string                   `json:"targetName,omitempty"`
+	TargetType *shared.LogTargetTypeEnum `json:"targetType,omitempty"`
 }
 
 type SetV2LoggingLevelRequestBody struct {

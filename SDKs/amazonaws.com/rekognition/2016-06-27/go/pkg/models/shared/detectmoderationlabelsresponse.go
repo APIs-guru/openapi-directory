@@ -1,7 +1,7 @@
 package shared
 
 type DetectModerationLabelsResponse struct {
-	HumanLoopActivationOutput *HumanLoopActivationOutput `json:"HumanLoopActivationOutput"`
-	ModerationLabels          []ModerationLabel          `json:"ModerationLabels"`
-	ModerationModelVersion    *string                    `json:"ModerationModelVersion"`
+	HumanLoopActivationOutput *HumanLoopActivationOutput `json:"HumanLoopActivationOutput,omitempty"`
+	ModerationLabels          []ModerationLabel          `json:"ModerationLabels,omitempty"`
+	ModerationModelVersion    *string                    `json:"ModerationModelVersion,omitempty"`
 }

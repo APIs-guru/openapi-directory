@@ -19,8 +19,8 @@ const (
 )
 
 type Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPropertiesUsersItems struct {
-	MysqlSettings *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPropertiesUsersItemsMysqlSettings `json:"mysql_settings"`
+	MysqlSettings *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPropertiesUsersItemsMysqlSettings `json:"mysql_settings,omitempty"`
 	Name          string                                                                                                                `json:"name"`
-	Password      *string                                                                                                               `json:"password"`
-	Role          *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPropertiesUsersItemsRoleEnum      `json:"role"`
+	Password      *string                                                                                                               `json:"password,omitempty"`
+	Role          *Onev21databasesGetResponses200ContentApplication1jsonSchemaPropertiesDatabasesItemsPropertiesUsersItemsRoleEnum      `json:"role,omitempty"`
 }

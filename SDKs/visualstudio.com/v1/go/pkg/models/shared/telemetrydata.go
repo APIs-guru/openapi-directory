@@ -1,8 +1,8 @@
 package shared
 
 type TelemetryData struct {
-	Level          *string           `json:"level"`
-	Message        *string           `json:"message"`
-	OptionalValues map[string]string `json:"optionalValues"`
-	Time           *string           `json:"time"`
+	Level          *string           `json:"level,omitempty"`
+	Message        *string           `json:"message,omitempty"`
+	OptionalValues map[string]string `json:"optionalValues,omitempty"`
+	Time           *string           `json:"time,omitempty"`
 }

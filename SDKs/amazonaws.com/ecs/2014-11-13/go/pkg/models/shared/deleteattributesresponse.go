@@ -1,5 +1,5 @@
 package shared
 
 type DeleteAttributesResponse struct {
-	Attributes []Attribute `json:"attributes"`
+	Attributes []Attribute `json:"attributes,omitempty"`
 }

@@ -1,16 +1,16 @@
 package shared
 
 type ApnsVoipChannelResponse struct {
-	ApplicationID               *string `json:"ApplicationId"`
-	CreationDate                *string `json:"CreationDate"`
-	DefaultAuthenticationMethod *string `json:"DefaultAuthenticationMethod"`
-	Enabled                     *bool   `json:"Enabled"`
-	HasCredential               *bool   `json:"HasCredential"`
-	HasTokenKey                 *bool   `json:"HasTokenKey"`
-	ID                          *string `json:"Id"`
-	IsArchived                  *bool   `json:"IsArchived"`
-	LastModifiedBy              *string `json:"LastModifiedBy"`
-	LastModifiedDate            *string `json:"LastModifiedDate"`
+	ApplicationID               *string `json:"ApplicationId,omitempty"`
+	CreationDate                *string `json:"CreationDate,omitempty"`
+	DefaultAuthenticationMethod *string `json:"DefaultAuthenticationMethod,omitempty"`
+	Enabled                     *bool   `json:"Enabled,omitempty"`
+	HasCredential               *bool   `json:"HasCredential,omitempty"`
+	HasTokenKey                 *bool   `json:"HasTokenKey,omitempty"`
+	ID                          *string `json:"Id,omitempty"`
+	IsArchived                  *bool   `json:"IsArchived,omitempty"`
+	LastModifiedBy              *string `json:"LastModifiedBy,omitempty"`
+	LastModifiedDate            *string `json:"LastModifiedDate,omitempty"`
 	Platform                    string  `json:"Platform"`
-	Version                     *int64  `json:"Version"`
+	Version                     *int64  `json:"Version,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ListEkmConnectionsResponse struct {
-	EkmConnections []EkmConnection `json:"ekmConnections"`
-	NextPageToken  *string         `json:"nextPageToken"`
-	TotalSize      *int32          `json:"totalSize"`
+	EkmConnections []EkmConnection `json:"ekmConnections,omitempty"`
+	NextPageToken  *string         `json:"nextPageToken,omitempty"`
+	TotalSize      *int32          `json:"totalSize,omitempty"`
 }

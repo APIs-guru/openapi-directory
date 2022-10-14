@@ -1,8 +1,8 @@
 package shared
 
 type Finding struct {
-	End      *string `json:"end"`
-	InfoType *string `json:"infoType"`
-	Quote    *string `json:"quote"`
-	Start    *string `json:"start"`
+	End      *string `json:"end,omitempty"`
+	InfoType *string `json:"infoType,omitempty"`
+	Quote    *string `json:"quote,omitempty"`
+	Start    *string `json:"start,omitempty"`
 }

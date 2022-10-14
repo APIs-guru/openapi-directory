@@ -10,11 +10,11 @@ const (
 )
 
 type ExecutionConfig struct {
-	ArtifactStorage  *string                     `json:"artifactStorage"`
-	DefaultPool      *DefaultPool                `json:"defaultPool"`
-	ExecutionTimeout *string                     `json:"executionTimeout"`
-	PrivatePool      *PrivatePool                `json:"privatePool"`
-	ServiceAccount   *string                     `json:"serviceAccount"`
-	Usages           []ExecutionConfigUsagesEnum `json:"usages"`
-	WorkerPool       *string                     `json:"workerPool"`
+	ArtifactStorage  *string                     `json:"artifactStorage,omitempty"`
+	DefaultPool      *DefaultPool                `json:"defaultPool,omitempty"`
+	ExecutionTimeout *string                     `json:"executionTimeout,omitempty"`
+	PrivatePool      *PrivatePool                `json:"privatePool,omitempty"`
+	ServiceAccount   *string                     `json:"serviceAccount,omitempty"`
+	Usages           []ExecutionConfigUsagesEnum `json:"usages,omitempty"`
+	WorkerPool       *string                     `json:"workerPool,omitempty"`
 }

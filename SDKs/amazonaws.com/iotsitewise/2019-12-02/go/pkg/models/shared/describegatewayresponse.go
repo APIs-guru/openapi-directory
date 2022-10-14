@@ -10,6 +10,6 @@ type DescribeGatewayResponse struct {
 	GatewayCapabilitySummaries []GatewayCapabilitySummary `json:"gatewayCapabilitySummaries"`
 	GatewayID                  string                     `json:"gatewayId"`
 	GatewayName                string                     `json:"gatewayName"`
-	GatewayPlatform            *GatewayPlatform           `json:"gatewayPlatform"`
+	GatewayPlatform            *GatewayPlatform           `json:"gatewayPlatform,omitempty"`
 	LastUpdateDate             time.Time                  `json:"lastUpdateDate"`
 }

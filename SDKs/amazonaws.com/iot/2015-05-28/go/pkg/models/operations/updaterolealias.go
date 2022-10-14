@@ -19,8 +19,8 @@ type UpdateRoleAliasHeaders struct {
 }
 
 type UpdateRoleAliasRequestBody struct {
-	CredentialDurationSeconds *int64  `json:"credentialDurationSeconds"`
-	RoleArn                   *string `json:"roleArn"`
+	CredentialDurationSeconds *int64  `json:"credentialDurationSeconds,omitempty"`
+	RoleArn                   *string `json:"roleArn,omitempty"`
 }
 
 type UpdateRoleAliasRequest struct {

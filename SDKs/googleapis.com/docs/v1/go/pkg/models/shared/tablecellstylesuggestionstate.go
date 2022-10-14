@@ -1,16 +1,16 @@
 package shared
 
 type TableCellStyleSuggestionState struct {
-	BackgroundColorSuggested  *bool `json:"backgroundColorSuggested"`
-	BorderBottomSuggested     *bool `json:"borderBottomSuggested"`
-	BorderLeftSuggested       *bool `json:"borderLeftSuggested"`
-	BorderRightSuggested      *bool `json:"borderRightSuggested"`
-	BorderTopSuggested        *bool `json:"borderTopSuggested"`
-	ColumnSpanSuggested       *bool `json:"columnSpanSuggested"`
-	ContentAlignmentSuggested *bool `json:"contentAlignmentSuggested"`
-	PaddingBottomSuggested    *bool `json:"paddingBottomSuggested"`
-	PaddingLeftSuggested      *bool `json:"paddingLeftSuggested"`
-	PaddingRightSuggested     *bool `json:"paddingRightSuggested"`
-	PaddingTopSuggested       *bool `json:"paddingTopSuggested"`
-	RowSpanSuggested          *bool `json:"rowSpanSuggested"`
+	BackgroundColorSuggested  *bool `json:"backgroundColorSuggested,omitempty"`
+	BorderBottomSuggested     *bool `json:"borderBottomSuggested,omitempty"`
+	BorderLeftSuggested       *bool `json:"borderLeftSuggested,omitempty"`
+	BorderRightSuggested      *bool `json:"borderRightSuggested,omitempty"`
+	BorderTopSuggested        *bool `json:"borderTopSuggested,omitempty"`
+	ColumnSpanSuggested       *bool `json:"columnSpanSuggested,omitempty"`
+	ContentAlignmentSuggested *bool `json:"contentAlignmentSuggested,omitempty"`
+	PaddingBottomSuggested    *bool `json:"paddingBottomSuggested,omitempty"`
+	PaddingLeftSuggested      *bool `json:"paddingLeftSuggested,omitempty"`
+	PaddingRightSuggested     *bool `json:"paddingRightSuggested,omitempty"`
+	PaddingTopSuggested       *bool `json:"paddingTopSuggested,omitempty"`
+	RowSpanSuggested          *bool `json:"rowSpanSuggested,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type ListResultInvoiceDetailsAPIModel struct {
-	Count         *int32                   `json:"Count"`
-	ErrorMessages []IErrorInfo             `json:"ErrorMessages"`
-	IsFaulted     *bool                    `json:"IsFaulted"`
-	Result        []InvoiceDetailsAPIModel `json:"Result"`
-	TotalCount    *int32                   `json:"TotalCount"`
+	Count         *int32                   `json:"Count,omitempty"`
+	ErrorMessages []IErrorInfo             `json:"ErrorMessages,omitempty"`
+	IsFaulted     *bool                    `json:"IsFaulted,omitempty"`
+	Result        []InvoiceDetailsAPIModel `json:"Result,omitempty"`
+	TotalCount    *int32                   `json:"TotalCount,omitempty"`
 }

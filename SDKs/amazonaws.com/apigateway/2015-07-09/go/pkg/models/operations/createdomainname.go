@@ -15,13 +15,13 @@ type CreateDomainNameHeaders struct {
 }
 
 type CreateDomainNameRequestBodyEndpointConfiguration struct {
-	Types          []shared.EndpointTypeEnum `json:"types"`
-	VpcEndpointIds []string                  `json:"vpcEndpointIds"`
+	Types          []shared.EndpointTypeEnum `json:"types,omitempty"`
+	VpcEndpointIds []string                  `json:"vpcEndpointIds,omitempty"`
 }
 
 type CreateDomainNameRequestBodyMutualTLSAuthentication struct {
-	TruststoreURI     *string `json:"truststoreUri"`
-	TruststoreVersion *string `json:"truststoreVersion"`
+	TruststoreURI     *string `json:"truststoreUri,omitempty"`
+	TruststoreVersion *string `json:"truststoreVersion,omitempty"`
 }
 
 type CreateDomainNameRequestBodySecurityPolicyEnum string
@@ -32,19 +32,19 @@ const (
 )
 
 type CreateDomainNameRequestBody struct {
-	CertificateArn                      *string                                             `json:"certificateArn"`
-	CertificateBody                     *string                                             `json:"certificateBody"`
-	CertificateChain                    *string                                             `json:"certificateChain"`
-	CertificateName                     *string                                             `json:"certificateName"`
-	CertificatePrivateKey               *string                                             `json:"certificatePrivateKey"`
+	CertificateArn                      *string                                             `json:"certificateArn,omitempty"`
+	CertificateBody                     *string                                             `json:"certificateBody,omitempty"`
+	CertificateChain                    *string                                             `json:"certificateChain,omitempty"`
+	CertificateName                     *string                                             `json:"certificateName,omitempty"`
+	CertificatePrivateKey               *string                                             `json:"certificatePrivateKey,omitempty"`
 	DomainName                          string                                              `json:"domainName"`
-	EndpointConfiguration               *CreateDomainNameRequestBodyEndpointConfiguration   `json:"endpointConfiguration"`
-	MutualTLSAuthentication             *CreateDomainNameRequestBodyMutualTLSAuthentication `json:"mutualTlsAuthentication"`
-	OwnershipVerificationCertificateArn *string                                             `json:"ownershipVerificationCertificateArn"`
-	RegionalCertificateArn              *string                                             `json:"regionalCertificateArn"`
-	RegionalCertificateName             *string                                             `json:"regionalCertificateName"`
-	SecurityPolicy                      *CreateDomainNameRequestBodySecurityPolicyEnum      `json:"securityPolicy"`
-	Tags                                map[string]string                                   `json:"tags"`
+	EndpointConfiguration               *CreateDomainNameRequestBodyEndpointConfiguration   `json:"endpointConfiguration,omitempty"`
+	MutualTLSAuthentication             *CreateDomainNameRequestBodyMutualTLSAuthentication `json:"mutualTlsAuthentication,omitempty"`
+	OwnershipVerificationCertificateArn *string                                             `json:"ownershipVerificationCertificateArn,omitempty"`
+	RegionalCertificateArn              *string                                             `json:"regionalCertificateArn,omitempty"`
+	RegionalCertificateName             *string                                             `json:"regionalCertificateName,omitempty"`
+	SecurityPolicy                      *CreateDomainNameRequestBodySecurityPolicyEnum      `json:"securityPolicy,omitempty"`
+	Tags                                map[string]string                                   `json:"tags,omitempty"`
 }
 
 type CreateDomainNameRequest struct {

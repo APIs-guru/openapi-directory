@@ -5,11 +5,11 @@ import (
 )
 
 type Script struct {
-	CreationTime    *time.Time  `json:"CreationTime"`
-	Name            *string     `json:"Name"`
-	ScriptArn       *string     `json:"ScriptArn"`
-	ScriptID        *string     `json:"ScriptId"`
-	SizeOnDisk      *int64      `json:"SizeOnDisk"`
-	StorageLocation *S3Location `json:"StorageLocation"`
-	Version         *string     `json:"Version"`
+	CreationTime    *time.Time  `json:"CreationTime,omitempty"`
+	Name            *string     `json:"Name,omitempty"`
+	ScriptArn       *string     `json:"ScriptArn,omitempty"`
+	ScriptID        *string     `json:"ScriptId,omitempty"`
+	SizeOnDisk      *int64      `json:"SizeOnDisk,omitempty"`
+	StorageLocation *S3Location `json:"StorageLocation,omitempty"`
+	Version         *string     `json:"Version,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetLoadBalancerResult struct {
-	LoadBalancer *LoadBalancer `json:"loadBalancer"`
+	LoadBalancer *LoadBalancer `json:"loadBalancer,omitempty"`
 }

@@ -15,7 +15,7 @@ type PutLoggingOptionsHeaders struct {
 }
 
 type PutLoggingOptionsRequestBodyLoggingOptions struct {
-	Level *shared.LoggingLevelEnum `json:"level"`
+	Level *shared.LoggingLevelEnum `json:"level,omitempty"`
 }
 
 type PutLoggingOptionsRequestBody struct {

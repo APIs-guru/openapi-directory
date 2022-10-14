@@ -11,11 +11,11 @@ type PostScrobbleShowsQueryParams struct {
 }
 
 type PostScrobbleShowsRequestBody struct {
-	Airdate  *time.Time   `json:"airdate"`
-	Episode  *int64       `json:"episode"`
-	MarkedAt *int64       `json:"marked_at"`
-	Season   *int64       `json:"season"`
-	Type     *interface{} `json:"type"`
+	Airdate  *time.Time   `json:"airdate,omitempty"`
+	Episode  *int64       `json:"episode,omitempty"`
+	MarkedAt *int64       `json:"marked_at,omitempty"`
+	Season   *int64       `json:"season,omitempty"`
+	Type     *interface{} `json:"type,omitempty"`
 }
 
 type PostScrobbleShowsRequest struct {

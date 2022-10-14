@@ -11,10 +11,10 @@ const (
 )
 
 type QuotaOperation struct {
-	ConsumerID   *string                      `json:"consumerId"`
-	Labels       map[string]string            `json:"labels"`
-	MethodName   *string                      `json:"methodName"`
-	OperationID  *string                      `json:"operationId"`
-	QuotaMetrics []MetricValueSet             `json:"quotaMetrics"`
-	QuotaMode    *QuotaOperationQuotaModeEnum `json:"quotaMode"`
+	ConsumerID   *string                      `json:"consumerId,omitempty"`
+	Labels       map[string]string            `json:"labels,omitempty"`
+	MethodName   *string                      `json:"methodName,omitempty"`
+	OperationID  *string                      `json:"operationId,omitempty"`
+	QuotaMetrics []MetricValueSet             `json:"quotaMetrics,omitempty"`
+	QuotaMode    *QuotaOperationQuotaModeEnum `json:"quotaMode,omitempty"`
 }

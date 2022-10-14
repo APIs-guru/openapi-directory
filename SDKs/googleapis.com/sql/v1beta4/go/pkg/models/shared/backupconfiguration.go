@@ -1,13 +1,13 @@
 package shared
 
 type BackupConfiguration struct {
-	BackupRetentionSettings        *BackupRetentionSettings `json:"backupRetentionSettings"`
-	BinaryLogEnabled               *bool                    `json:"binaryLogEnabled"`
-	Enabled                        *bool                    `json:"enabled"`
-	Kind                           *string                  `json:"kind"`
-	Location                       *string                  `json:"location"`
-	PointInTimeRecoveryEnabled     *bool                    `json:"pointInTimeRecoveryEnabled"`
-	ReplicationLogArchivingEnabled *bool                    `json:"replicationLogArchivingEnabled"`
-	StartTime                      *string                  `json:"startTime"`
-	TransactionLogRetentionDays    *int32                   `json:"transactionLogRetentionDays"`
+	BackupRetentionSettings        *BackupRetentionSettings `json:"backupRetentionSettings,omitempty"`
+	BinaryLogEnabled               *bool                    `json:"binaryLogEnabled,omitempty"`
+	Enabled                        *bool                    `json:"enabled,omitempty"`
+	Kind                           *string                  `json:"kind,omitempty"`
+	Location                       *string                  `json:"location,omitempty"`
+	PointInTimeRecoveryEnabled     *bool                    `json:"pointInTimeRecoveryEnabled,omitempty"`
+	ReplicationLogArchivingEnabled *bool                    `json:"replicationLogArchivingEnabled,omitempty"`
+	StartTime                      *string                  `json:"startTime,omitempty"`
+	TransactionLogRetentionDays    *int32                   `json:"transactionLogRetentionDays,omitempty"`
 }

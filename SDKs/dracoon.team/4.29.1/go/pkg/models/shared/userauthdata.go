@@ -1,10 +1,10 @@
 package shared
 
 type UserAuthData struct {
-	AdConfigID         *int32  `json:"adConfigId"`
-	Login              *string `json:"login"`
+	AdConfigID         *int32  `json:"adConfigId,omitempty"`
+	Login              *string `json:"login,omitempty"`
 	Method             string  `json:"method"`
-	MustChangePassword *bool   `json:"mustChangePassword"`
-	OidConfigID        *int32  `json:"oidConfigId"`
-	Password           *string `json:"password"`
+	MustChangePassword *bool   `json:"mustChangePassword,omitempty"`
+	OidConfigID        *int32  `json:"oidConfigId,omitempty"`
+	Password           *string `json:"password,omitempty"`
 }

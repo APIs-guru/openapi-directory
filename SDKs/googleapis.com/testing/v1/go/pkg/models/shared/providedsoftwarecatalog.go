@@ -1,6 +1,6 @@
 package shared
 
 type ProvidedSoftwareCatalog struct {
-	AndroidxOrchestratorVersion *string `json:"androidxOrchestratorVersion"`
-	OrchestratorVersion         *string `json:"orchestratorVersion"`
+	AndroidxOrchestratorVersion *string `json:"androidxOrchestratorVersion,omitempty"`
+	OrchestratorVersion         *string `json:"orchestratorVersion,omitempty"`
 }

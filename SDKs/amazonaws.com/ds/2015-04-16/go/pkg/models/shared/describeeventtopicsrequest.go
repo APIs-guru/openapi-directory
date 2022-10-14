@@ -1,6 +1,6 @@
 package shared
 
 type DescribeEventTopicsRequest struct {
-	DirectoryID *string  `json:"DirectoryId"`
-	TopicNames  []string `json:"TopicNames"`
+	DirectoryID *string  `json:"DirectoryId,omitempty"`
+	TopicNames  []string `json:"TopicNames,omitempty"`
 }

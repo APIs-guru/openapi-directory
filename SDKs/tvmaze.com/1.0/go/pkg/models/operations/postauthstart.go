@@ -1,8 +1,8 @@
 package operations
 
 type PostAuthStartRequestBody struct {
-	Email             *string `json:"email"`
-	EmailConfirmation *bool   `json:"email_confirmation"`
+	Email             *string `json:"email,omitempty"`
+	EmailConfirmation *bool   `json:"email_confirmation,omitempty"`
 }
 
 type PostAuthStartRequest struct {
@@ -10,8 +10,8 @@ type PostAuthStartRequest struct {
 }
 
 type PostAuthStart200ApplicationJSON struct {
-	ConfirmURL *string `json:"confirm_url"`
-	Token      *string `json:"token"`
+	ConfirmURL *string `json:"confirm_url,omitempty"`
+	Token      *string `json:"token,omitempty"`
 }
 
 type PostAuthStartResponse struct {

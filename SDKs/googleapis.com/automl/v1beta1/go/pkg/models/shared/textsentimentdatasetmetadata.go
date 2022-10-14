@@ -1,5 +1,5 @@
 package shared
 
 type TextSentimentDatasetMetadata struct {
-	SentimentMax *int32 `json:"sentimentMax"`
+	SentimentMax *int32 `json:"sentimentMax,omitempty"`
 }

@@ -13,7 +13,7 @@ const (
 )
 
 type StateHistory struct {
-	State          *StateHistoryStateEnum `json:"state"`
-	StateMessage   *string                `json:"stateMessage"`
-	StateStartTime *string                `json:"stateStartTime"`
+	State          *StateHistoryStateEnum `json:"state,omitempty"`
+	StateMessage   *string                `json:"stateMessage,omitempty"`
+	StateStartTime *string                `json:"stateStartTime,omitempty"`
 }

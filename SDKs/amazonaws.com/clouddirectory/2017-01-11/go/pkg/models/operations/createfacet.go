@@ -32,10 +32,10 @@ const (
 )
 
 type CreateFacetRequestBody struct {
-	Attributes []shared.FacetAttribute               `json:"Attributes"`
-	FacetStyle *CreateFacetRequestBodyFacetStyleEnum `json:"FacetStyle"`
+	Attributes []shared.FacetAttribute               `json:"Attributes,omitempty"`
+	FacetStyle *CreateFacetRequestBodyFacetStyleEnum `json:"FacetStyle,omitempty"`
 	Name       string                                `json:"Name"`
-	ObjectType *CreateFacetRequestBodyObjectTypeEnum `json:"ObjectType"`
+	ObjectType *CreateFacetRequestBodyObjectTypeEnum `json:"ObjectType,omitempty"`
 }
 
 type CreateFacetRequest struct {

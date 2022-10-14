@@ -1,6 +1,6 @@
 package shared
 
 type UpdateDistributionBundleRequest struct {
-	BundleID         *string `json:"bundleId"`
-	DistributionName *string `json:"distributionName"`
+	BundleID         *string `json:"bundleId,omitempty"`
+	DistributionName *string `json:"distributionName,omitempty"`
 }

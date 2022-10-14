@@ -1,6 +1,6 @@
 package shared
 
 type ListEventSourcesResponse struct {
-	EventSources []EventSourceConfiguration `json:"EventSources"`
-	NextMarker   *string                    `json:"NextMarker"`
+	EventSources []EventSourceConfiguration `json:"EventSources,omitempty"`
+	NextMarker   *string                    `json:"NextMarker,omitempty"`
 }

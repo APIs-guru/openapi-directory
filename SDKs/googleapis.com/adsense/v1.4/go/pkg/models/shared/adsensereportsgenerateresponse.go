@@ -1,19 +1,19 @@
 package shared
 
 type AdsenseReportsGenerateResponseHeaders struct {
-	Currency *string `json:"currency"`
-	Name     *string `json:"name"`
-	Type     *string `json:"type"`
+	Currency *string `json:"currency,omitempty"`
+	Name     *string `json:"name,omitempty"`
+	Type     *string `json:"type,omitempty"`
 }
 
 type AdsenseReportsGenerateResponse struct {
-	Averages         []string                                `json:"averages"`
-	EndDate          *string                                 `json:"endDate"`
-	Headers          []AdsenseReportsGenerateResponseHeaders `json:"headers"`
-	Kind             *string                                 `json:"kind"`
-	Rows             [][]string                              `json:"rows"`
-	StartDate        *string                                 `json:"startDate"`
-	TotalMatchedRows *string                                 `json:"totalMatchedRows"`
-	Totals           []string                                `json:"totals"`
-	Warnings         []string                                `json:"warnings"`
+	Averages         []string                                `json:"averages,omitempty"`
+	EndDate          *string                                 `json:"endDate,omitempty"`
+	Headers          []AdsenseReportsGenerateResponseHeaders `json:"headers,omitempty"`
+	Kind             *string                                 `json:"kind,omitempty"`
+	Rows             [][]string                              `json:"rows,omitempty"`
+	StartDate        *string                                 `json:"startDate,omitempty"`
+	TotalMatchedRows *string                                 `json:"totalMatchedRows,omitempty"`
+	Totals           []string                                `json:"totals,omitempty"`
+	Warnings         []string                                `json:"warnings,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SubmitConfigSourceRequest struct {
-	ConfigSource *ConfigSource `json:"configSource"`
-	ValidateOnly *bool         `json:"validateOnly"`
+	ConfigSource *ConfigSource `json:"configSource,omitempty"`
+	ValidateOnly *bool         `json:"validateOnly,omitempty"`
 }

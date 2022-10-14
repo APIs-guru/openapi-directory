@@ -1,9 +1,9 @@
 package shared
 
 type ListSlotTypesResponse struct {
-	BotID             *string           `json:"botId"`
-	BotVersion        *string           `json:"botVersion"`
-	LocaleID          *string           `json:"localeId"`
-	NextToken         *string           `json:"nextToken"`
-	SlotTypeSummaries []SlotTypeSummary `json:"slotTypeSummaries"`
+	BotID             *string           `json:"botId,omitempty"`
+	BotVersion        *string           `json:"botVersion,omitempty"`
+	LocaleID          *string           `json:"localeId,omitempty"`
+	NextToken         *string           `json:"nextToken,omitempty"`
+	SlotTypeSummaries []SlotTypeSummary `json:"slotTypeSummaries,omitempty"`
 }

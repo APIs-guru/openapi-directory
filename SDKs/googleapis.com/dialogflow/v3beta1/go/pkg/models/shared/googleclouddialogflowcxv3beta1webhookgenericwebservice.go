@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudDialogflowCxV3beta1WebhookGenericWebService struct {
-	AllowedCaCerts []string          `json:"allowedCaCerts"`
-	Password       *string           `json:"password"`
-	RequestHeaders map[string]string `json:"requestHeaders"`
-	URI            *string           `json:"uri"`
-	Username       *string           `json:"username"`
+	AllowedCaCerts []string          `json:"allowedCaCerts,omitempty"`
+	Password       *string           `json:"password,omitempty"`
+	RequestHeaders map[string]string `json:"requestHeaders,omitempty"`
+	URI            *string           `json:"uri,omitempty"`
+	Username       *string           `json:"username,omitempty"`
 }

@@ -24,11 +24,11 @@ const (
 )
 
 type TagResponse struct {
-	Color        *TagResponseColorEnum `json:"color"`
-	Followers    []UserCompact         `json:"followers"`
-	Gid          *string               `json:"gid"`
-	Name         *string               `json:"name"`
-	PermalinkURL *string               `json:"permalink_url"`
-	ResourceType *string               `json:"resource_type"`
-	Workspace    *WorkspaceCompact     `json:"workspace"`
+	Color        *TagResponseColorEnum `json:"color,omitempty"`
+	Followers    []UserCompact         `json:"followers,omitempty"`
+	Gid          *string               `json:"gid,omitempty"`
+	Name         *string               `json:"name,omitempty"`
+	PermalinkURL *string               `json:"permalink_url,omitempty"`
+	ResourceType *string               `json:"resource_type,omitempty"`
+	Workspace    *WorkspaceCompact     `json:"workspace,omitempty"`
 }

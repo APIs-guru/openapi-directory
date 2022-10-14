@@ -10,8 +10,8 @@ const (
 )
 
 type DeployJobRun struct {
-	Build          *string                       `json:"build"`
-	FailureCause   *DeployJobRunFailureCauseEnum `json:"failureCause"`
-	FailureMessage *string                       `json:"failureMessage"`
-	Metadata       *DeployJobRunMetadata         `json:"metadata"`
+	Build          *string                       `json:"build,omitempty"`
+	FailureCause   *DeployJobRunFailureCauseEnum `json:"failureCause,omitempty"`
+	FailureMessage *string                       `json:"failureMessage,omitempty"`
+	Metadata       *DeployJobRunMetadata         `json:"metadata,omitempty"`
 }

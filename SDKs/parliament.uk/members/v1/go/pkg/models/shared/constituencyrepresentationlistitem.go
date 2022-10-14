@@ -1,6 +1,6 @@
 package shared
 
 type ConstituencyRepresentationListItem struct {
-	Links []Link                       `json:"links"`
-	Value []ConstituencyRepresentation `json:"value"`
+	Links []Link                       `json:"links,omitempty"`
+	Value []ConstituencyRepresentation `json:"value,omitempty"`
 }

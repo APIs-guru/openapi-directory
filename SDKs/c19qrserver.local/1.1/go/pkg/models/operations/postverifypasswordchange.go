@@ -5,8 +5,8 @@ import (
 )
 
 type PostVerifyPasswordChangeRequestBodySample struct {
-	GUID     *string `json:"guid"`
-	Password *string `json:"password"`
+	GUID     *string `json:"guid,omitempty"`
+	Password *string `json:"password,omitempty"`
 }
 
 type PostVerifyPasswordChangeRequest struct {

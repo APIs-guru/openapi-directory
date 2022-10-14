@@ -1,10 +1,10 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaAccount struct {
-	CreateTime  *string `json:"createTime"`
-	Deleted     *bool   `json:"deleted"`
-	DisplayName *string `json:"displayName"`
-	Name        *string `json:"name"`
-	RegionCode  *string `json:"regionCode"`
-	UpdateTime  *string `json:"updateTime"`
+	CreateTime  *string `json:"createTime,omitempty"`
+	Deleted     *bool   `json:"deleted,omitempty"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	RegionCode  *string `json:"regionCode,omitempty"`
+	UpdateTime  *string `json:"updateTime,omitempty"`
 }

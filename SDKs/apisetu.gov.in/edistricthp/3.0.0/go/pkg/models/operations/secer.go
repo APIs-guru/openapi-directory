@@ -15,8 +15,8 @@ const (
 )
 
 type SecerRequestBody struct {
-	CertificateParameters *SecerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *SecerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                SecerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Secer400ApplicationJSON struct {
-	Error            *Secer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Secer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Secer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Secer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Secer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Secer401ApplicationJSON struct {
-	Error            *Secer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Secer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Secer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Secer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Secer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Secer404ApplicationJSON struct {
-	Error            *Secer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Secer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Secer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Secer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Secer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Secer500ApplicationJSON struct {
-	Error            *Secer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Secer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Secer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Secer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Secer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Secer502ApplicationJSON struct {
-	Error            *Secer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Secer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Secer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Secer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Secer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Secer503ApplicationJSON struct {
-	Error            *Secer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Secer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Secer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Secer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Secer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Secer504ApplicationJSON struct {
-	Error            *Secer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Secer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Secer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Secer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SecerResponse struct {

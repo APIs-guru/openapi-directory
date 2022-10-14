@@ -11,8 +11,8 @@ const (
 )
 
 type InputMapping struct {
-	FieldName   *string                   `json:"fieldName"`
-	Location    *InputMappingLocationEnum `json:"location"`
-	MethodMatch *string                   `json:"methodMatch"`
-	Value       *string                   `json:"value"`
+	FieldName   *string                   `json:"fieldName,omitempty"`
+	Location    *InputMappingLocationEnum `json:"location,omitempty"`
+	MethodMatch *string                   `json:"methodMatch,omitempty"`
+	Value       *string                   `json:"value,omitempty"`
 }

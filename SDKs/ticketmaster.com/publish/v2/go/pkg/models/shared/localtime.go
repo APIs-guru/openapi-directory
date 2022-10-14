@@ -1,13 +1,13 @@
 package shared
 
 type LocalTime struct {
-	Chronology     *Chronology         `json:"chronology"`
-	FieldTypes     []DateTimeFieldType `json:"fieldTypes"`
-	Fields         []DateTimeField     `json:"fields"`
-	HourOfDay      *int32              `json:"hourOfDay"`
-	MillisOfDay    *int32              `json:"millisOfDay"`
-	MillisOfSecond *int32              `json:"millisOfSecond"`
-	MinuteOfHour   *int32              `json:"minuteOfHour"`
-	SecondOfMinute *int32              `json:"secondOfMinute"`
-	Values         []int32             `json:"values"`
+	Chronology     *Chronology         `json:"chronology,omitempty"`
+	FieldTypes     []DateTimeFieldType `json:"fieldTypes,omitempty"`
+	Fields         []DateTimeField     `json:"fields,omitempty"`
+	HourOfDay      *int32              `json:"hourOfDay,omitempty"`
+	MillisOfDay    *int32              `json:"millisOfDay,omitempty"`
+	MillisOfSecond *int32              `json:"millisOfSecond,omitempty"`
+	MinuteOfHour   *int32              `json:"minuteOfHour,omitempty"`
+	SecondOfMinute *int32              `json:"secondOfMinute,omitempty"`
+	Values         []int32             `json:"values,omitempty"`
 }

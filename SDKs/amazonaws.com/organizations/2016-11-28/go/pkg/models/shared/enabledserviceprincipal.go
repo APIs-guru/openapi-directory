@@ -5,6 +5,6 @@ import (
 )
 
 type EnabledServicePrincipal struct {
-	DateEnabled      *time.Time `json:"DateEnabled"`
-	ServicePrincipal *string    `json:"ServicePrincipal"`
+	DateEnabled      *time.Time `json:"DateEnabled,omitempty"`
+	ServicePrincipal *string    `json:"ServicePrincipal,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type UpdateSchemaResponse struct {
-	SchemaArn *string `json:"SchemaArn"`
+	SchemaArn *string `json:"SchemaArn,omitempty"`
 }

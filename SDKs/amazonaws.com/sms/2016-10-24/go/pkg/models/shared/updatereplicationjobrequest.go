@@ -5,13 +5,13 @@ import (
 )
 
 type UpdateReplicationJobRequest struct {
-	Description                 *string          `json:"description"`
-	Encrypted                   *bool            `json:"encrypted"`
-	Frequency                   *int64           `json:"frequency"`
-	KmsKeyID                    *string          `json:"kmsKeyId"`
-	LicenseType                 *LicenseTypeEnum `json:"licenseType"`
-	NextReplicationRunStartTime *time.Time       `json:"nextReplicationRunStartTime"`
-	NumberOfRecentAmisToKeep    *int64           `json:"numberOfRecentAmisToKeep"`
+	Description                 *string          `json:"description,omitempty"`
+	Encrypted                   *bool            `json:"encrypted,omitempty"`
+	Frequency                   *int64           `json:"frequency,omitempty"`
+	KmsKeyID                    *string          `json:"kmsKeyId,omitempty"`
+	LicenseType                 *LicenseTypeEnum `json:"licenseType,omitempty"`
+	NextReplicationRunStartTime *time.Time       `json:"nextReplicationRunStartTime,omitempty"`
+	NumberOfRecentAmisToKeep    *int64           `json:"numberOfRecentAmisToKeep,omitempty"`
 	ReplicationJobID            string           `json:"replicationJobId"`
-	RoleName                    *string          `json:"roleName"`
+	RoleName                    *string          `json:"roleName,omitempty"`
 }

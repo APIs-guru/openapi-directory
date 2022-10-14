@@ -1,5 +1,5 @@
 package shared
 
 type OnDeviceServiceConfiguration struct {
-	NfsOnDeviceService *NfsOnDeviceServiceConfiguration `json:"NFSOnDeviceService"`
+	NfsOnDeviceService *NfsOnDeviceServiceConfiguration `json:"NFSOnDeviceService,omitempty"`
 }

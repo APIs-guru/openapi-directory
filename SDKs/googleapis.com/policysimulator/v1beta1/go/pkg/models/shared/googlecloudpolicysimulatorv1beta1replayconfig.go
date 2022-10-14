@@ -8,6 +8,6 @@ const (
 )
 
 type GoogleCloudPolicysimulatorV1beta1ReplayConfig struct {
-	LogSource     *GoogleCloudPolicysimulatorV1beta1ReplayConfigLogSourceEnum `json:"logSource"`
-	PolicyOverlay map[string]GoogleIamV1Policy                                `json:"policyOverlay"`
+	LogSource     *GoogleCloudPolicysimulatorV1beta1ReplayConfigLogSourceEnum `json:"logSource,omitempty"`
+	PolicyOverlay map[string]GoogleIamV1Policy                                `json:"policyOverlay,omitempty"`
 }

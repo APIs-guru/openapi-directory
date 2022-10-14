@@ -1,5 +1,5 @@
 package shared
 
 type GetWorkloadOutput struct {
-	Workload *Workload `json:"Workload"`
+	Workload *Workload `json:"Workload,omitempty"`
 }

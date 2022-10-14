@@ -13,7 +13,7 @@ type GetLinodeTypeRequest struct {
 }
 
 type GetLinodeTypeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeTypeResponse struct {

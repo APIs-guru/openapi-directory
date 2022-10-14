@@ -1,6 +1,6 @@
 package shared
 
 type GetCommentsForComparedCommitOutput struct {
-	CommentsForComparedCommitData []CommentsForComparedCommit `json:"commentsForComparedCommitData"`
-	NextToken                     *string                     `json:"nextToken"`
+	CommentsForComparedCommitData []CommentsForComparedCommit `json:"commentsForComparedCommitData,omitempty"`
+	NextToken                     *string                     `json:"nextToken,omitempty"`
 }

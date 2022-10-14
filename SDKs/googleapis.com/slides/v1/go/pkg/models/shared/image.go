@@ -1,8 +1,8 @@
 package shared
 
 type Image struct {
-	ContentURL      *string          `json:"contentUrl"`
-	ImageProperties *ImageProperties `json:"imageProperties"`
-	Placeholder     *Placeholder     `json:"placeholder"`
-	SourceURL       *string          `json:"sourceUrl"`
+	ContentURL      *string          `json:"contentUrl,omitempty"`
+	ImageProperties *ImageProperties `json:"imageProperties,omitempty"`
+	Placeholder     *Placeholder     `json:"placeholder,omitempty"`
+	SourceURL       *string          `json:"sourceUrl,omitempty"`
 }

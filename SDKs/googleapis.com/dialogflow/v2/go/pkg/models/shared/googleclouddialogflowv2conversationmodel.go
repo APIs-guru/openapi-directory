@@ -15,12 +15,12 @@ const (
 )
 
 type GoogleCloudDialogflowV2ConversationModel struct {
-	ArticleSuggestionModelMetadata *GoogleCloudDialogflowV2ArticleSuggestionModelMetadata `json:"articleSuggestionModelMetadata"`
-	CreateTime                     *string                                                `json:"createTime"`
-	Datasets                       []GoogleCloudDialogflowV2InputDataset                  `json:"datasets"`
-	DisplayName                    *string                                                `json:"displayName"`
-	LanguageCode                   *string                                                `json:"languageCode"`
-	Name                           *string                                                `json:"name"`
-	SmartReplyModelMetadata        *GoogleCloudDialogflowV2SmartReplyModelMetadata        `json:"smartReplyModelMetadata"`
-	State                          *GoogleCloudDialogflowV2ConversationModelStateEnum     `json:"state"`
+	ArticleSuggestionModelMetadata *GoogleCloudDialogflowV2ArticleSuggestionModelMetadata `json:"articleSuggestionModelMetadata,omitempty"`
+	CreateTime                     *string                                                `json:"createTime,omitempty"`
+	Datasets                       []GoogleCloudDialogflowV2InputDataset                  `json:"datasets,omitempty"`
+	DisplayName                    *string                                                `json:"displayName,omitempty"`
+	LanguageCode                   *string                                                `json:"languageCode,omitempty"`
+	Name                           *string                                                `json:"name,omitempty"`
+	SmartReplyModelMetadata        *GoogleCloudDialogflowV2SmartReplyModelMetadata        `json:"smartReplyModelMetadata,omitempty"`
+	State                          *GoogleCloudDialogflowV2ConversationModelStateEnum     `json:"state,omitempty"`
 }

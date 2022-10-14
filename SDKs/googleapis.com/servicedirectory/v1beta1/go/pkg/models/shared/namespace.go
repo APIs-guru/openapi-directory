@@ -1,8 +1,8 @@
 package shared
 
 type Namespace struct {
-	CreateTime *string           `json:"createTime"`
-	Labels     map[string]string `json:"labels"`
-	Name       *string           `json:"name"`
-	UpdateTime *string           `json:"updateTime"`
+	CreateTime *string           `json:"createTime,omitempty"`
+	Labels     map[string]string `json:"labels,omitempty"`
+	Name       *string           `json:"name,omitempty"`
+	UpdateTime *string           `json:"updateTime,omitempty"`
 }

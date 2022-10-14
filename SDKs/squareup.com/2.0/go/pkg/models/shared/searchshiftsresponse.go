@@ -1,7 +1,7 @@
 package shared
 
 type SearchShiftsResponse struct {
-	Cursor *string `json:"cursor"`
-	Errors []Error `json:"errors"`
-	Shifts []Shift `json:"shifts"`
+	Cursor *string `json:"cursor,omitempty"`
+	Errors []Error `json:"errors,omitempty"`
+	Shifts []Shift `json:"shifts,omitempty"`
 }

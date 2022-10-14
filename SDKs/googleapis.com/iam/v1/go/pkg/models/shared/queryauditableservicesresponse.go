@@ -1,5 +1,5 @@
 package shared
 
 type QueryAuditableServicesResponse struct {
-	Services []AuditableService `json:"services"`
+	Services []AuditableService `json:"services,omitempty"`
 }

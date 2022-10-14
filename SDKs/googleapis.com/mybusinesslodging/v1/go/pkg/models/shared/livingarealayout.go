@@ -55,16 +55,16 @@ const (
 )
 
 type LivingAreaLayout struct {
-	Balcony                     *bool                                            `json:"balcony"`
-	BalconyException            *LivingAreaLayoutBalconyExceptionEnum            `json:"balconyException"`
-	LivingAreaSqMeters          *float32                                         `json:"livingAreaSqMeters"`
-	LivingAreaSqMetersException *LivingAreaLayoutLivingAreaSqMetersExceptionEnum `json:"livingAreaSqMetersException"`
-	Loft                        *bool                                            `json:"loft"`
-	LoftException               *LivingAreaLayoutLoftExceptionEnum               `json:"loftException"`
-	NonSmoking                  *bool                                            `json:"nonSmoking"`
-	NonSmokingException         *LivingAreaLayoutNonSmokingExceptionEnum         `json:"nonSmokingException"`
-	Patio                       *bool                                            `json:"patio"`
-	PatioException              *LivingAreaLayoutPatioExceptionEnum              `json:"patioException"`
-	Stairs                      *bool                                            `json:"stairs"`
-	StairsException             *LivingAreaLayoutStairsExceptionEnum             `json:"stairsException"`
+	Balcony                     *bool                                            `json:"balcony,omitempty"`
+	BalconyException            *LivingAreaLayoutBalconyExceptionEnum            `json:"balconyException,omitempty"`
+	LivingAreaSqMeters          *float32                                         `json:"livingAreaSqMeters,omitempty"`
+	LivingAreaSqMetersException *LivingAreaLayoutLivingAreaSqMetersExceptionEnum `json:"livingAreaSqMetersException,omitempty"`
+	Loft                        *bool                                            `json:"loft,omitempty"`
+	LoftException               *LivingAreaLayoutLoftExceptionEnum               `json:"loftException,omitempty"`
+	NonSmoking                  *bool                                            `json:"nonSmoking,omitempty"`
+	NonSmokingException         *LivingAreaLayoutNonSmokingExceptionEnum         `json:"nonSmokingException,omitempty"`
+	Patio                       *bool                                            `json:"patio,omitempty"`
+	PatioException              *LivingAreaLayoutPatioExceptionEnum              `json:"patioException,omitempty"`
+	Stairs                      *bool                                            `json:"stairs,omitempty"`
+	StairsException             *LivingAreaLayoutStairsExceptionEnum             `json:"stairsException,omitempty"`
 }

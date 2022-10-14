@@ -5,8 +5,8 @@ import (
 )
 
 type AggregationAuthorization struct {
-	AggregationAuthorizationArn *string    `json:"AggregationAuthorizationArn"`
-	AuthorizedAccountID         *string    `json:"AuthorizedAccountId"`
-	AuthorizedAwsRegion         *string    `json:"AuthorizedAwsRegion"`
-	CreationTime                *time.Time `json:"CreationTime"`
+	AggregationAuthorizationArn *string    `json:"AggregationAuthorizationArn,omitempty"`
+	AuthorizedAccountID         *string    `json:"AuthorizedAccountId,omitempty"`
+	AuthorizedAwsRegion         *string    `json:"AuthorizedAwsRegion,omitempty"`
+	CreationTime                *time.Time `json:"CreationTime,omitempty"`
 }

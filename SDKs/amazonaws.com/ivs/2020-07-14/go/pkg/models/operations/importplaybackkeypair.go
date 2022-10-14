@@ -15,9 +15,9 @@ type ImportPlaybackKeyPairHeaders struct {
 }
 
 type ImportPlaybackKeyPairRequestBody struct {
-	Name              *string           `json:"name"`
+	Name              *string           `json:"name,omitempty"`
 	PublicKeyMaterial string            `json:"publicKeyMaterial"`
-	Tags              map[string]string `json:"tags"`
+	Tags              map[string]string `json:"tags,omitempty"`
 }
 
 type ImportPlaybackKeyPairRequest struct {

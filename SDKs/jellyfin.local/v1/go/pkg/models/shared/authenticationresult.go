@@ -1,8 +1,8 @@
 package shared
 
 type AuthenticationResult struct {
-	AccessToken *string      `json:"AccessToken"`
-	ServerID    *string      `json:"ServerId"`
-	SessionInfo *SessionInfo `json:"SessionInfo"`
-	User        *UserDto     `json:"User"`
+	AccessToken *string      `json:"AccessToken,omitempty"`
+	ServerID    *string      `json:"ServerId,omitempty"`
+	SessionInfo *SessionInfo `json:"SessionInfo,omitempty"`
+	User        *UserDto     `json:"User,omitempty"`
 }

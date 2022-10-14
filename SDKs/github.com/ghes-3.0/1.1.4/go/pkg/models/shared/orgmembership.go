@@ -34,7 +34,7 @@ type OrgMembershipUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -44,7 +44,7 @@ type OrgMembershipUserSimpleUser struct {
 type OrgMembership struct {
 	Organization    OrganizationSimple          `json:"organization"`
 	OrganizationURL string                      `json:"organization_url"`
-	Permissions     *OrgMembershipPermissions   `json:"permissions"`
+	Permissions     *OrgMembershipPermissions   `json:"permissions,omitempty"`
 	Role            OrgMembershipRoleEnum       `json:"role"`
 	State           OrgMembershipStateEnum      `json:"state"`
 	URL             string                      `json:"url"`

@@ -15,9 +15,9 @@ type PutLoggingOptionsHeaders struct {
 }
 
 type PutLoggingOptionsRequestBodyLoggingOptions struct {
-	Enabled *bool                    `json:"enabled"`
-	Level   *shared.LoggingLevelEnum `json:"level"`
-	RoleArn *string                  `json:"roleArn"`
+	Enabled *bool                    `json:"enabled,omitempty"`
+	Level   *shared.LoggingLevelEnum `json:"level,omitempty"`
+	RoleArn *string                  `json:"roleArn,omitempty"`
 }
 
 type PutLoggingOptionsRequestBody struct {

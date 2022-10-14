@@ -1,5 +1,5 @@
 package shared
 
 type UpdateSettingsResponse struct {
-	Settings *Settings `json:"settings"`
+	Settings *Settings `json:"settings,omitempty"`
 }

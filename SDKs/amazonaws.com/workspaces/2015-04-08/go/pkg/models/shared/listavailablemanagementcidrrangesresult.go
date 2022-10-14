@@ -1,6 +1,6 @@
 package shared
 
 type ListAvailableManagementCidrRangesResult struct {
-	ManagementCidrRanges []string `json:"ManagementCidrRanges"`
-	NextToken            *string  `json:"NextToken"`
+	ManagementCidrRanges []string `json:"ManagementCidrRanges,omitempty"`
+	NextToken            *string  `json:"NextToken,omitempty"`
 }

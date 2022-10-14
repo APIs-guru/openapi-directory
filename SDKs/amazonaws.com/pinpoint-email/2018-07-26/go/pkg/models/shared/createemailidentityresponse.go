@@ -1,7 +1,7 @@
 package shared
 
 type CreateEmailIdentityResponse struct {
-	DkimAttributes           *DkimAttributes   `json:"DkimAttributes"`
-	IdentityType             *IdentityTypeEnum `json:"IdentityType"`
-	VerifiedForSendingStatus *bool             `json:"VerifiedForSendingStatus"`
+	DkimAttributes           *DkimAttributes   `json:"DkimAttributes,omitempty"`
+	IdentityType             *IdentityTypeEnum `json:"IdentityType,omitempty"`
+	VerifiedForSendingStatus *bool             `json:"VerifiedForSendingStatus,omitempty"`
 }

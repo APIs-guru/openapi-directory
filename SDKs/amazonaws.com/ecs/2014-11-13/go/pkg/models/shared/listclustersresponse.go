@@ -1,6 +1,6 @@
 package shared
 
 type ListClustersResponse struct {
-	ClusterArns []string `json:"clusterArns"`
-	NextToken   *string  `json:"nextToken"`
+	ClusterArns []string `json:"clusterArns,omitempty"`
+	NextToken   *string  `json:"nextToken,omitempty"`
 }

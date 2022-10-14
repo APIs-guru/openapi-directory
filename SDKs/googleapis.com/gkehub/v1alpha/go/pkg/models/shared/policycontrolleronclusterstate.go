@@ -15,6 +15,6 @@ const (
 )
 
 type PolicyControllerOnClusterState struct {
-	Details *string                                  `json:"details"`
-	State   *PolicyControllerOnClusterStateStateEnum `json:"state"`
+	Details *string                                  `json:"details,omitempty"`
+	State   *PolicyControllerOnClusterStateStateEnum `json:"state,omitempty"`
 }

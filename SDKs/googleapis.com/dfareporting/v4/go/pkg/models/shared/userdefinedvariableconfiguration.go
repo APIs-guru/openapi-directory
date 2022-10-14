@@ -113,7 +113,7 @@ const (
 )
 
 type UserDefinedVariableConfiguration struct {
-	DataType     *UserDefinedVariableConfigurationDataTypeEnum     `json:"dataType"`
-	ReportName   *string                                           `json:"reportName"`
-	VariableType *UserDefinedVariableConfigurationVariableTypeEnum `json:"variableType"`
+	DataType     *UserDefinedVariableConfigurationDataTypeEnum     `json:"dataType,omitempty"`
+	ReportName   *string                                           `json:"reportName,omitempty"`
+	VariableType *UserDefinedVariableConfigurationVariableTypeEnum `json:"variableType,omitempty"`
 }

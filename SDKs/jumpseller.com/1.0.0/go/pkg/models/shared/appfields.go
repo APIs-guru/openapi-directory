@@ -1,10 +1,10 @@
 package shared
 
 type AppFields struct {
-	Author      *string `json:"author"`
-	Code        *string `json:"code"`
-	Description *string `json:"description"`
-	Js          *bool   `json:"js"`
-	Name        *string `json:"name"`
-	Page        *string `json:"page"`
+	Author      *string `json:"author,omitempty"`
+	Code        *string `json:"code,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Js          *bool   `json:"js,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Page        *string `json:"page,omitempty"`
 }

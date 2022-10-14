@@ -9,9 +9,9 @@ const (
 )
 
 type HiveMetastoreConfig struct {
-	AuxiliaryVersions map[string]AuxiliaryVersionConfig        `json:"auxiliaryVersions"`
-	ConfigOverrides   map[string]string                        `json:"configOverrides"`
-	EndpointProtocol  *HiveMetastoreConfigEndpointProtocolEnum `json:"endpointProtocol"`
-	KerberosConfig    *KerberosConfig                          `json:"kerberosConfig"`
-	Version           *string                                  `json:"version"`
+	AuxiliaryVersions map[string]AuxiliaryVersionConfig        `json:"auxiliaryVersions,omitempty"`
+	ConfigOverrides   map[string]string                        `json:"configOverrides,omitempty"`
+	EndpointProtocol  *HiveMetastoreConfigEndpointProtocolEnum `json:"endpointProtocol,omitempty"`
+	KerberosConfig    *KerberosConfig                          `json:"kerberosConfig,omitempty"`
+	Version           *string                                  `json:"version,omitempty"`
 }

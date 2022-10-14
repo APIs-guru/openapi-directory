@@ -38,19 +38,19 @@ const (
 )
 
 type VoiceV1ByocTrunk struct {
-	AccountSid           *string                                   `json:"account_sid"`
-	CnamLookupEnabled    *bool                                     `json:"cnam_lookup_enabled"`
-	ConnectionPolicySid  *string                                   `json:"connection_policy_sid"`
-	DateCreated          *time.Time                                `json:"date_created"`
-	DateUpdated          *time.Time                                `json:"date_updated"`
-	FriendlyName         *string                                   `json:"friendly_name"`
-	FromDomainSid        *string                                   `json:"from_domain_sid"`
-	Sid                  *string                                   `json:"sid"`
-	StatusCallbackMethod *VoiceV1ByocTrunkStatusCallbackMethodEnum `json:"status_callback_method"`
-	StatusCallbackURL    *string                                   `json:"status_callback_url"`
-	URL                  *string                                   `json:"url"`
-	VoiceFallbackMethod  *VoiceV1ByocTrunkVoiceFallbackMethodEnum  `json:"voice_fallback_method"`
-	VoiceFallbackURL     *string                                   `json:"voice_fallback_url"`
-	VoiceMethod          *VoiceV1ByocTrunkVoiceMethodEnum          `json:"voice_method"`
-	VoiceURL             *string                                   `json:"voice_url"`
+	AccountSid           *string                                   `json:"account_sid,omitempty"`
+	CnamLookupEnabled    *bool                                     `json:"cnam_lookup_enabled,omitempty"`
+	ConnectionPolicySid  *string                                   `json:"connection_policy_sid,omitempty"`
+	DateCreated          *time.Time                                `json:"date_created,omitempty"`
+	DateUpdated          *time.Time                                `json:"date_updated,omitempty"`
+	FriendlyName         *string                                   `json:"friendly_name,omitempty"`
+	FromDomainSid        *string                                   `json:"from_domain_sid,omitempty"`
+	Sid                  *string                                   `json:"sid,omitempty"`
+	StatusCallbackMethod *VoiceV1ByocTrunkStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	StatusCallbackURL    *string                                   `json:"status_callback_url,omitempty"`
+	URL                  *string                                   `json:"url,omitempty"`
+	VoiceFallbackMethod  *VoiceV1ByocTrunkVoiceFallbackMethodEnum  `json:"voice_fallback_method,omitempty"`
+	VoiceFallbackURL     *string                                   `json:"voice_fallback_url,omitempty"`
+	VoiceMethod          *VoiceV1ByocTrunkVoiceMethodEnum          `json:"voice_method,omitempty"`
+	VoiceURL             *string                                   `json:"voice_url,omitempty"`
 }

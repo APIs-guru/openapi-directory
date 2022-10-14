@@ -27,11 +27,11 @@ const (
 )
 
 type Routing struct {
-	CalcPoints             *bool                           `json:"calc_points"`
-	ConsiderTraffic        *bool                           `json:"consider_traffic"`
-	CurbsideStrictness     *RoutingCurbsideStrictnessEnum  `json:"curbside_strictness"`
-	FailFast               *bool                           `json:"fail_fast"`
-	NetworkDataProvider    *RoutingNetworkDataProviderEnum `json:"network_data_provider"`
-	ReturnSnappedWaypoints *bool                           `json:"return_snapped_waypoints"`
-	SnapPreventions        []RoutingSnapPreventionsEnum    `json:"snap_preventions"`
+	CalcPoints             *bool                           `json:"calc_points,omitempty"`
+	ConsiderTraffic        *bool                           `json:"consider_traffic,omitempty"`
+	CurbsideStrictness     *RoutingCurbsideStrictnessEnum  `json:"curbside_strictness,omitempty"`
+	FailFast               *bool                           `json:"fail_fast,omitempty"`
+	NetworkDataProvider    *RoutingNetworkDataProviderEnum `json:"network_data_provider,omitempty"`
+	ReturnSnappedWaypoints *bool                           `json:"return_snapped_waypoints,omitempty"`
+	SnapPreventions        []RoutingSnapPreventionsEnum    `json:"snap_preventions,omitempty"`
 }

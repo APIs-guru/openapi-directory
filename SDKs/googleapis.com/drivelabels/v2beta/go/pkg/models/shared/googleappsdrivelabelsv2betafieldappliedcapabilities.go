@@ -1,7 +1,7 @@
 package shared
 
 type GoogleAppsDriveLabelsV2betaFieldAppliedCapabilities struct {
-	CanRead   *bool `json:"canRead"`
-	CanSearch *bool `json:"canSearch"`
-	CanWrite  *bool `json:"canWrite"`
+	CanRead   *bool `json:"canRead,omitempty"`
+	CanSearch *bool `json:"canSearch,omitempty"`
+	CanWrite  *bool `json:"canWrite,omitempty"`
 }

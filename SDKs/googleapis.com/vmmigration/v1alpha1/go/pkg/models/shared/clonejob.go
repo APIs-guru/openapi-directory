@@ -14,14 +14,14 @@ const (
 )
 
 type CloneJob struct {
-	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails"`
-	ComputeEngineVMDetails     *TargetVMDetails            `json:"computeEngineVmDetails"`
-	CreateTime                 *string                     `json:"createTime"`
-	EndTime                    *string                     `json:"endTime"`
-	Error                      *Status                     `json:"error"`
-	Name                       *string                     `json:"name"`
-	State                      *CloneJobStateEnum          `json:"state"`
-	StateTime                  *string                     `json:"stateTime"`
-	Steps                      []CloneStep                 `json:"steps"`
-	TargetDetails              *TargetVMDetails            `json:"targetDetails"`
+	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails,omitempty"`
+	ComputeEngineVMDetails     *TargetVMDetails            `json:"computeEngineVmDetails,omitempty"`
+	CreateTime                 *string                     `json:"createTime,omitempty"`
+	EndTime                    *string                     `json:"endTime,omitempty"`
+	Error                      *Status                     `json:"error,omitempty"`
+	Name                       *string                     `json:"name,omitempty"`
+	State                      *CloneJobStateEnum          `json:"state,omitempty"`
+	StateTime                  *string                     `json:"stateTime,omitempty"`
+	Steps                      []CloneStep                 `json:"steps,omitempty"`
+	TargetDetails              *TargetVMDetails            `json:"targetDetails,omitempty"`
 }

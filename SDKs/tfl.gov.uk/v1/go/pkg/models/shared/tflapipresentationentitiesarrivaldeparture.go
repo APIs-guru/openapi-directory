@@ -14,18 +14,18 @@ const (
 )
 
 type TflAPIPresentationEntitiesArrivalDeparture struct {
-	Cause                        *string                                                        `json:"cause"`
-	DepartureStatus              *TflAPIPresentationEntitiesArrivalDepartureDepartureStatusEnum `json:"departureStatus"`
-	DestinationName              *string                                                        `json:"destinationName"`
-	DestinationNaptanID          *string                                                        `json:"destinationNaptanId"`
-	EstimatedTimeOfArrival       *time.Time                                                     `json:"estimatedTimeOfArrival"`
-	EstimatedTimeOfDeparture     *time.Time                                                     `json:"estimatedTimeOfDeparture"`
-	MinutesAndSecondsToArrival   *string                                                        `json:"minutesAndSecondsToArrival"`
-	MinutesAndSecondsToDeparture *string                                                        `json:"minutesAndSecondsToDeparture"`
-	NaptanID                     *string                                                        `json:"naptanId"`
-	PlatformName                 *string                                                        `json:"platformName"`
-	ScheduledTimeOfArrival       *time.Time                                                     `json:"scheduledTimeOfArrival"`
-	ScheduledTimeOfDeparture     *time.Time                                                     `json:"scheduledTimeOfDeparture"`
-	StationName                  *string                                                        `json:"stationName"`
-	Timing                       *TflAPIPresentationEntitiesPredictionTiming                    `json:"timing"`
+	Cause                        *string                                                        `json:"cause,omitempty"`
+	DepartureStatus              *TflAPIPresentationEntitiesArrivalDepartureDepartureStatusEnum `json:"departureStatus,omitempty"`
+	DestinationName              *string                                                        `json:"destinationName,omitempty"`
+	DestinationNaptanID          *string                                                        `json:"destinationNaptanId,omitempty"`
+	EstimatedTimeOfArrival       *time.Time                                                     `json:"estimatedTimeOfArrival,omitempty"`
+	EstimatedTimeOfDeparture     *time.Time                                                     `json:"estimatedTimeOfDeparture,omitempty"`
+	MinutesAndSecondsToArrival   *string                                                        `json:"minutesAndSecondsToArrival,omitempty"`
+	MinutesAndSecondsToDeparture *string                                                        `json:"minutesAndSecondsToDeparture,omitempty"`
+	NaptanID                     *string                                                        `json:"naptanId,omitempty"`
+	PlatformName                 *string                                                        `json:"platformName,omitempty"`
+	ScheduledTimeOfArrival       *time.Time                                                     `json:"scheduledTimeOfArrival,omitempty"`
+	ScheduledTimeOfDeparture     *time.Time                                                     `json:"scheduledTimeOfDeparture,omitempty"`
+	StationName                  *string                                                        `json:"stationName,omitempty"`
+	Timing                       *TflAPIPresentationEntitiesPredictionTiming                    `json:"timing,omitempty"`
 }

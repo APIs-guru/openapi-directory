@@ -1,7 +1,7 @@
 package shared
 
 type ListOperationsRequest struct {
-	Filters    []OperationFilter `json:"Filters"`
-	MaxResults *int64            `json:"MaxResults"`
-	NextToken  *string           `json:"NextToken"`
+	Filters    []OperationFilter `json:"Filters,omitempty"`
+	MaxResults *int64            `json:"MaxResults,omitempty"`
+	NextToken  *string           `json:"NextToken,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ActionConfiguration struct {
-	Configuration map[string]string `json:"configuration"`
+	Configuration map[string]string `json:"configuration,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeInstancesResult struct {
-	Instances []Instance `json:"Instances"`
+	Instances []Instance `json:"Instances,omitempty"`
 }

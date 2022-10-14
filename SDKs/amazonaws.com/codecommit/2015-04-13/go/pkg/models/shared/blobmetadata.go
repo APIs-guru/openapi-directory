@@ -1,7 +1,7 @@
 package shared
 
 type BlobMetadata struct {
-	BlobID *string `json:"blobId"`
-	Mode   *string `json:"mode"`
-	Path   *string `json:"path"`
+	BlobID *string `json:"blobId,omitempty"`
+	Mode   *string `json:"mode,omitempty"`
+	Path   *string `json:"path,omitempty"`
 }

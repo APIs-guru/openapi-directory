@@ -14,7 +14,7 @@ type UpdateGoalMetricQueryParams struct {
 }
 
 type UpdateGoalMetricRequestBody struct {
-	Data *shared.GoalMetricCurrentValueRequest `json:"data"`
+	Data *shared.GoalMetricCurrentValueRequest `json:"data,omitempty"`
 }
 
 type UpdateGoalMetricRequest struct {
@@ -24,7 +24,7 @@ type UpdateGoalMetricRequest struct {
 }
 
 type UpdateGoalMetric200ApplicationJSON struct {
-	Data *shared.GoalResponse `json:"data"`
+	Data *shared.GoalResponse `json:"data,omitempty"`
 }
 
 type UpdateGoalMetricResponse struct {

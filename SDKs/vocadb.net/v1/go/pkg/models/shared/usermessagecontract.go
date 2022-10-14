@@ -10,13 +10,13 @@ const (
 )
 
 type UserMessageContract struct {
-	Body             *string                       `json:"body"`
-	CreatedFormatted *string                       `json:"createdFormatted"`
-	HighPriority     *bool                         `json:"highPriority"`
-	ID               *int32                        `json:"id"`
-	Inbox            *UserMessageContractInboxEnum `json:"inbox"`
-	Read             *bool                         `json:"read"`
-	Receiver         *UserForAPIContract           `json:"receiver"`
-	Sender           *UserForAPIContract           `json:"sender"`
-	Subject          *string                       `json:"subject"`
+	Body             *string                       `json:"body,omitempty"`
+	CreatedFormatted *string                       `json:"createdFormatted,omitempty"`
+	HighPriority     *bool                         `json:"highPriority,omitempty"`
+	ID               *int32                        `json:"id,omitempty"`
+	Inbox            *UserMessageContractInboxEnum `json:"inbox,omitempty"`
+	Read             *bool                         `json:"read,omitempty"`
+	Receiver         *UserForAPIContract           `json:"receiver,omitempty"`
+	Sender           *UserForAPIContract           `json:"sender,omitempty"`
+	Subject          *string                       `json:"subject,omitempty"`
 }

@@ -10,10 +10,10 @@ const (
 )
 
 type GoogleChromeManagementV1BatteryStatusReport struct {
-	BatteryHealth      *GoogleChromeManagementV1BatteryStatusReportBatteryHealthEnum `json:"batteryHealth"`
-	CycleCount         *int32                                                        `json:"cycleCount"`
-	FullChargeCapacity *string                                                       `json:"fullChargeCapacity"`
-	ReportTime         *string                                                       `json:"reportTime"`
-	Sample             []GoogleChromeManagementV1BatterySampleReport                 `json:"sample"`
-	SerialNumber       *string                                                       `json:"serialNumber"`
+	BatteryHealth      *GoogleChromeManagementV1BatteryStatusReportBatteryHealthEnum `json:"batteryHealth,omitempty"`
+	CycleCount         *int32                                                        `json:"cycleCount,omitempty"`
+	FullChargeCapacity *string                                                       `json:"fullChargeCapacity,omitempty"`
+	ReportTime         *string                                                       `json:"reportTime,omitempty"`
+	Sample             []GoogleChromeManagementV1BatterySampleReport                 `json:"sample,omitempty"`
+	SerialNumber       *string                                                       `json:"serialNumber,omitempty"`
 }

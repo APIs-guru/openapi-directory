@@ -5,9 +5,9 @@ import (
 )
 
 type Connection struct {
-	ConnectionArn  *string               `json:"ConnectionArn"`
-	ConnectionName *string               `json:"ConnectionName"`
-	CreatedAt      *time.Time            `json:"CreatedAt"`
-	ProviderType   *ProviderTypeEnum     `json:"ProviderType"`
-	Status         *ConnectionStatusEnum `json:"Status"`
+	ConnectionArn  *string               `json:"ConnectionArn,omitempty"`
+	ConnectionName *string               `json:"ConnectionName,omitempty"`
+	CreatedAt      *time.Time            `json:"CreatedAt,omitempty"`
+	ProviderType   *ProviderTypeEnum     `json:"ProviderType,omitempty"`
+	Status         *ConnectionStatusEnum `json:"Status,omitempty"`
 }

@@ -11,12 +11,12 @@ type CreateCollectionFromSchemaQueryParams struct {
 }
 
 type CreateCollectionFromSchemaRequestBodyRelations struct {
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }
 
 type CreateCollectionFromSchemaRequestBody struct {
-	Name      *string                                          `json:"name"`
-	Relations []CreateCollectionFromSchemaRequestBodyRelations `json:"relations"`
+	Name      *string                                          `json:"name,omitempty"`
+	Relations []CreateCollectionFromSchemaRequestBodyRelations `json:"relations,omitempty"`
 }
 
 type CreateCollectionFromSchemaRequest struct {
@@ -26,18 +26,18 @@ type CreateCollectionFromSchemaRequest struct {
 }
 
 type CreateCollectionFromSchema200ApplicationJSONCollection struct {
-	ID  *string `json:"id"`
-	UID *string `json:"uid"`
+	ID  *string `json:"id,omitempty"`
+	UID *string `json:"uid,omitempty"`
 }
 
 type CreateCollectionFromSchema200ApplicationJSONRelations struct {
-	ID   *string `json:"id"`
-	Type *string `json:"type"`
+	ID   *string `json:"id,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type CreateCollectionFromSchema200ApplicationJSON struct {
-	Collection *CreateCollectionFromSchema200ApplicationJSONCollection `json:"collection"`
-	Relations  []CreateCollectionFromSchema200ApplicationJSONRelations `json:"relations"`
+	Collection *CreateCollectionFromSchema200ApplicationJSONCollection `json:"collection,omitempty"`
+	Relations  []CreateCollectionFromSchema200ApplicationJSONRelations `json:"relations,omitempty"`
 }
 
 type CreateCollectionFromSchemaResponse struct {

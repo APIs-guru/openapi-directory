@@ -1,16 +1,16 @@
 package shared
 
 type JobSummary struct {
-	ArrayProperties *ArrayPropertiesSummary `json:"arrayProperties"`
-	Container       *ContainerSummary       `json:"container"`
-	CreatedAt       *int64                  `json:"createdAt"`
-	JobArn          *string                 `json:"jobArn"`
-	JobDefinition   *string                 `json:"jobDefinition"`
+	ArrayProperties *ArrayPropertiesSummary `json:"arrayProperties,omitempty"`
+	Container       *ContainerSummary       `json:"container,omitempty"`
+	CreatedAt       *int64                  `json:"createdAt,omitempty"`
+	JobArn          *string                 `json:"jobArn,omitempty"`
+	JobDefinition   *string                 `json:"jobDefinition,omitempty"`
 	JobID           string                  `json:"jobId"`
 	JobName         string                  `json:"jobName"`
-	NodeProperties  *NodePropertiesSummary  `json:"nodeProperties"`
-	StartedAt       *int64                  `json:"startedAt"`
-	Status          *JobStatusEnum          `json:"status"`
-	StatusReason    *string                 `json:"statusReason"`
-	StoppedAt       *int64                  `json:"stoppedAt"`
+	NodeProperties  *NodePropertiesSummary  `json:"nodeProperties,omitempty"`
+	StartedAt       *int64                  `json:"startedAt,omitempty"`
+	Status          *JobStatusEnum          `json:"status,omitempty"`
+	StatusReason    *string                 `json:"statusReason,omitempty"`
+	StoppedAt       *int64                  `json:"stoppedAt,omitempty"`
 }

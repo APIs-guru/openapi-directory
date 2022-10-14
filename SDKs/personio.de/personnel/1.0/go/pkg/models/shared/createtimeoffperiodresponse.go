@@ -7,8 +7,8 @@ const (
 )
 
 type CreateTimeOffPeriodResponseData struct {
-	Attributes *interface{}                             `json:"attributes"`
-	Type       *CreateTimeOffPeriodResponseDataTypeEnum `json:"type"`
+	Attributes *interface{}                             `json:"attributes,omitempty"`
+	Type       *CreateTimeOffPeriodResponseDataTypeEnum `json:"type,omitempty"`
 }
 
 type CreateTimeOffPeriodResponse struct {

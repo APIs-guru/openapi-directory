@@ -1,5 +1,5 @@
 package shared
 
 type RuleEvaluation struct {
-	SimpleRuleEvaluation *SimpleRuleEvaluation `json:"simpleRuleEvaluation"`
+	SimpleRuleEvaluation *SimpleRuleEvaluation `json:"simpleRuleEvaluation,omitempty"`
 }

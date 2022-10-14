@@ -1,8 +1,8 @@
 package shared
 
 type UpdateWorkteamRequest struct {
-	Description               *string                    `json:"Description"`
-	MemberDefinitions         []MemberDefinition         `json:"MemberDefinitions"`
-	NotificationConfiguration *NotificationConfiguration `json:"NotificationConfiguration"`
+	Description               *string                    `json:"Description,omitempty"`
+	MemberDefinitions         []MemberDefinition         `json:"MemberDefinitions,omitempty"`
+	NotificationConfiguration *NotificationConfiguration `json:"NotificationConfiguration,omitempty"`
 	WorkteamName              string                     `json:"WorkteamName"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ManifestsListResponse struct {
-	Manifests     []Manifest `json:"manifests"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Manifests     []Manifest `json:"manifests,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
 }

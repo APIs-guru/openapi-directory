@@ -1,10 +1,10 @@
 package shared
 
 type Request struct {
-	CreateItem     *CreateItemRequest     `json:"createItem"`
-	DeleteItem     *DeleteItemRequest     `json:"deleteItem"`
-	MoveItem       *MoveItemRequest       `json:"moveItem"`
-	UpdateFormInfo *UpdateFormInfoRequest `json:"updateFormInfo"`
-	UpdateItem     *UpdateItemRequest     `json:"updateItem"`
-	UpdateSettings *UpdateSettingsRequest `json:"updateSettings"`
+	CreateItem     *CreateItemRequest     `json:"createItem,omitempty"`
+	DeleteItem     *DeleteItemRequest     `json:"deleteItem,omitempty"`
+	MoveItem       *MoveItemRequest       `json:"moveItem,omitempty"`
+	UpdateFormInfo *UpdateFormInfoRequest `json:"updateFormInfo,omitempty"`
+	UpdateItem     *UpdateItemRequest     `json:"updateItem,omitempty"`
+	UpdateSettings *UpdateSettingsRequest `json:"updateSettings,omitempty"`
 }

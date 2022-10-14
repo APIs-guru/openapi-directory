@@ -1,6 +1,6 @@
 package shared
 
 type GetTagValuesOutput struct {
-	PaginationToken *string  `json:"PaginationToken"`
-	TagValues       []string `json:"TagValues"`
+	PaginationToken *string  `json:"PaginationToken,omitempty"`
+	TagValues       []string `json:"TagValues,omitempty"`
 }

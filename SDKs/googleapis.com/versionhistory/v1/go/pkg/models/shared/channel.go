@@ -14,6 +14,6 @@ const (
 )
 
 type Channel struct {
-	ChannelType *ChannelChannelTypeEnum `json:"channelType"`
-	Name        *string                 `json:"name"`
+	ChannelType *ChannelChannelTypeEnum `json:"channelType,omitempty"`
+	Name        *string                 `json:"name,omitempty"`
 }

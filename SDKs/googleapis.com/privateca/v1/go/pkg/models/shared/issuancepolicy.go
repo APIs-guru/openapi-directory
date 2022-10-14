@@ -1,10 +1,10 @@
 package shared
 
 type IssuancePolicy struct {
-	AllowedIssuanceModes  *IssuanceModes                   `json:"allowedIssuanceModes"`
-	AllowedKeyTypes       []AllowedKeyType                 `json:"allowedKeyTypes"`
-	BaselineValues        *X509Parameters                  `json:"baselineValues"`
-	IdentityConstraints   *CertificateIdentityConstraints  `json:"identityConstraints"`
-	MaximumLifetime       *string                          `json:"maximumLifetime"`
-	PassthroughExtensions *CertificateExtensionConstraints `json:"passthroughExtensions"`
+	AllowedIssuanceModes  *IssuanceModes                   `json:"allowedIssuanceModes,omitempty"`
+	AllowedKeyTypes       []AllowedKeyType                 `json:"allowedKeyTypes,omitempty"`
+	BaselineValues        *X509Parameters                  `json:"baselineValues,omitempty"`
+	IdentityConstraints   *CertificateIdentityConstraints  `json:"identityConstraints,omitempty"`
+	MaximumLifetime       *string                          `json:"maximumLifetime,omitempty"`
+	PassthroughExtensions *CertificateExtensionConstraints `json:"passthroughExtensions,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type RrSetRoutingPolicy struct {
-	Geo           *RrSetRoutingPolicyGeoPolicy           `json:"geo"`
-	GeoPolicy     *RrSetRoutingPolicyGeoPolicy           `json:"geoPolicy"`
-	Kind          *string                                `json:"kind"`
-	PrimaryBackup *RrSetRoutingPolicyPrimaryBackupPolicy `json:"primaryBackup"`
-	Wrr           *RrSetRoutingPolicyWrrPolicy           `json:"wrr"`
-	WrrPolicy     *RrSetRoutingPolicyWrrPolicy           `json:"wrrPolicy"`
+	Geo           *RrSetRoutingPolicyGeoPolicy           `json:"geo,omitempty"`
+	GeoPolicy     *RrSetRoutingPolicyGeoPolicy           `json:"geoPolicy,omitempty"`
+	Kind          *string                                `json:"kind,omitempty"`
+	PrimaryBackup *RrSetRoutingPolicyPrimaryBackupPolicy `json:"primaryBackup,omitempty"`
+	Wrr           *RrSetRoutingPolicyWrrPolicy           `json:"wrr,omitempty"`
+	WrrPolicy     *RrSetRoutingPolicyWrrPolicy           `json:"wrrPolicy,omitempty"`
 }

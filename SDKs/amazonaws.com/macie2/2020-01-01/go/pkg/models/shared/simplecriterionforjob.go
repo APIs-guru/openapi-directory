@@ -1,7 +1,7 @@
 package shared
 
 type SimpleCriterionForJob struct {
-	Comparator *JobComparatorEnum            `json:"comparator"`
-	Key        *SimpleCriterionKeyForJobEnum `json:"key"`
-	Values     []string                      `json:"values"`
+	Comparator *JobComparatorEnum            `json:"comparator,omitempty"`
+	Key        *SimpleCriterionKeyForJobEnum `json:"key,omitempty"`
+	Values     []string                      `json:"values,omitempty"`
 }

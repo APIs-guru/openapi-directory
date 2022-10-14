@@ -1,7 +1,7 @@
 package shared
 
 type ContextSource struct {
-	SourceID   *string `json:"SourceId"`
-	SourceType *string `json:"SourceType"`
+	SourceID   *string `json:"SourceId,omitempty"`
+	SourceType *string `json:"SourceType,omitempty"`
 	SourceURI  string  `json:"SourceUri"`
 }

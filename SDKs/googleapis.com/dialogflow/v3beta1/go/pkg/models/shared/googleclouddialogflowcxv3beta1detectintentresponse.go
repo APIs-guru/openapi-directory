@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1DetectIntentResponse struct {
-	AllowCancellation *bool                                                               `json:"allowCancellation"`
-	OutputAudio       *string                                                             `json:"outputAudio"`
-	OutputAudioConfig *GoogleCloudDialogflowCxV3beta1OutputAudioConfig                    `json:"outputAudioConfig"`
-	QueryResult       *GoogleCloudDialogflowCxV3beta1QueryResult                          `json:"queryResult"`
-	ResponseID        *string                                                             `json:"responseId"`
-	ResponseType      *GoogleCloudDialogflowCxV3beta1DetectIntentResponseResponseTypeEnum `json:"responseType"`
+	AllowCancellation *bool                                                               `json:"allowCancellation,omitempty"`
+	OutputAudio       *string                                                             `json:"outputAudio,omitempty"`
+	OutputAudioConfig *GoogleCloudDialogflowCxV3beta1OutputAudioConfig                    `json:"outputAudioConfig,omitempty"`
+	QueryResult       *GoogleCloudDialogflowCxV3beta1QueryResult                          `json:"queryResult,omitempty"`
+	ResponseID        *string                                                             `json:"responseId,omitempty"`
+	ResponseType      *GoogleCloudDialogflowCxV3beta1DetectIntentResponseResponseTypeEnum `json:"responseType,omitempty"`
 }

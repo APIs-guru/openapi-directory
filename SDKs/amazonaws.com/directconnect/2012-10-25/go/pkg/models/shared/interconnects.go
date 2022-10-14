@@ -1,5 +1,5 @@
 package shared
 
 type Interconnects struct {
-	Interconnects []Interconnect `json:"interconnects"`
+	Interconnects []Interconnect `json:"interconnects,omitempty"`
 }

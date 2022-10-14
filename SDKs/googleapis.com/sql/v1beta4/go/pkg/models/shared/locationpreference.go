@@ -1,8 +1,8 @@
 package shared
 
 type LocationPreference struct {
-	FollowGaeApplication *string `json:"followGaeApplication"`
-	Kind                 *string `json:"kind"`
-	SecondaryZone        *string `json:"secondaryZone"`
-	Zone                 *string `json:"zone"`
+	FollowGaeApplication *string `json:"followGaeApplication,omitempty"`
+	Kind                 *string `json:"kind,omitempty"`
+	SecondaryZone        *string `json:"secondaryZone,omitempty"`
+	Zone                 *string `json:"zone,omitempty"`
 }

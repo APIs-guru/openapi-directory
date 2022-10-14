@@ -1,7 +1,7 @@
 package shared
 
 type EventFilter struct {
-	Attribute *string `json:"attribute"`
-	Operator  *string `json:"operator"`
-	Value     *string `json:"value"`
+	Attribute *string `json:"attribute,omitempty"`
+	Operator  *string `json:"operator,omitempty"`
+	Value     *string `json:"value,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AudioAtom struct {
-	Channels []AudioChannel `json:"channels"`
-	Key      *string        `json:"key"`
+	Channels []AudioChannel `json:"channels,omitempty"`
+	Key      *string        `json:"key,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type ParallelInstruction struct {
-	Flatten           *FlattenInstruction           `json:"flatten"`
-	Name              *string                       `json:"name"`
-	OriginalName      *string                       `json:"originalName"`
-	Outputs           []InstructionOutput           `json:"outputs"`
-	ParDo             *ParDoInstruction             `json:"parDo"`
-	PartialGroupByKey *PartialGroupByKeyInstruction `json:"partialGroupByKey"`
-	Read              *ReadInstruction              `json:"read"`
-	SystemName        *string                       `json:"systemName"`
-	Write             *WriteInstruction             `json:"write"`
+	Flatten           *FlattenInstruction           `json:"flatten,omitempty"`
+	Name              *string                       `json:"name,omitempty"`
+	OriginalName      *string                       `json:"originalName,omitempty"`
+	Outputs           []InstructionOutput           `json:"outputs,omitempty"`
+	ParDo             *ParDoInstruction             `json:"parDo,omitempty"`
+	PartialGroupByKey *PartialGroupByKeyInstruction `json:"partialGroupByKey,omitempty"`
+	Read              *ReadInstruction              `json:"read,omitempty"`
+	SystemName        *string                       `json:"systemName,omitempty"`
+	Write             *WriteInstruction             `json:"write,omitempty"`
 }

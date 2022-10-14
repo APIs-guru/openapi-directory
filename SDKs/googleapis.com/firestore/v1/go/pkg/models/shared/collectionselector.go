@@ -1,6 +1,6 @@
 package shared
 
 type CollectionSelector struct {
-	AllDescendants *bool   `json:"allDescendants"`
-	CollectionID   *string `json:"collectionId"`
+	AllDescendants *bool   `json:"allDescendants,omitempty"`
+	CollectionID   *string `json:"collectionId,omitempty"`
 }

@@ -5,15 +5,15 @@ type UpdateNetworkSmDevicesFieldsPathParams struct {
 }
 
 type UpdateNetworkSmDevicesFieldsRequestBodyDeviceFields struct {
-	Name  *string `json:"name"`
-	Notes *string `json:"notes"`
+	Name  *string `json:"name,omitempty"`
+	Notes *string `json:"notes,omitempty"`
 }
 
 type UpdateNetworkSmDevicesFieldsRequestBody struct {
 	DeviceFields UpdateNetworkSmDevicesFieldsRequestBodyDeviceFields `json:"deviceFields"`
-	ID           *string                                             `json:"id"`
-	Serial       *string                                             `json:"serial"`
-	WifiMac      *string                                             `json:"wifiMac"`
+	ID           *string                                             `json:"id,omitempty"`
+	Serial       *string                                             `json:"serial,omitempty"`
+	WifiMac      *string                                             `json:"wifiMac,omitempty"`
 }
 
 type UpdateNetworkSmDevicesFieldsRequest struct {

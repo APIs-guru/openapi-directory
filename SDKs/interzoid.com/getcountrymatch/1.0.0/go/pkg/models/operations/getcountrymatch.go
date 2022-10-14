@@ -10,9 +10,9 @@ type GetcountrymatchRequest struct {
 }
 
 type Getcountrymatch200ApplicationJSON struct {
-	Code    *string `json:"Code"`
-	Credits *string `json:"Credits"`
-	Simkey  *string `json:"Simkey"`
+	Code    *string `json:"Code,omitempty"`
+	Credits *string `json:"Credits,omitempty"`
+	Simkey  *string `json:"Simkey,omitempty"`
 }
 
 type GetcountrymatchResponse struct {

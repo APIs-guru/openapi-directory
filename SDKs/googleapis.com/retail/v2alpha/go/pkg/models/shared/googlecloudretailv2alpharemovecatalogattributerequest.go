@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudRetailV2alphaRemoveCatalogAttributeRequest struct {
-	Key *string `json:"key"`
+	Key *string `json:"key,omitempty"`
 }

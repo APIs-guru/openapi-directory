@@ -1,9 +1,9 @@
 package operations
 
 type MergeAForkRequestBody struct {
-	Destination *string `json:"destination"`
-	Source      *string `json:"source"`
-	Strategy    *string `json:"strategy"`
+	Destination *string `json:"destination,omitempty"`
+	Source      *string `json:"source,omitempty"`
+	Strategy    *string `json:"strategy,omitempty"`
 }
 
 type MergeAForkRequest struct {

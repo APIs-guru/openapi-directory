@@ -1,11 +1,11 @@
 package shared
 
 type DiscountRequest struct {
-	Amount            *Price   `json:"amount"`
-	Description       *string  `json:"description"`
-	ExternalReference *string  `json:"externalReference"`
-	ImageLookupKeys   []string `json:"imageLookupKeys"`
-	Name              *string  `json:"name"`
-	Percentage        *float64 `json:"percentage"`
+	Amount            *Price   `json:"amount,omitempty"`
+	Description       *string  `json:"description,omitempty"`
+	ExternalReference *string  `json:"externalReference,omitempty"`
+	ImageLookupKeys   []string `json:"imageLookupKeys,omitempty"`
+	Name              *string  `json:"name,omitempty"`
+	Percentage        *float64 `json:"percentage,omitempty"`
 	UUID              string   `json:"uuid"`
 }

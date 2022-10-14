@@ -15,16 +15,16 @@ type CreateWorldGenerationJobHeaders struct {
 }
 
 type CreateWorldGenerationJobRequestBodyWorldCount struct {
-	FloorplanCount            *int64 `json:"floorplanCount"`
-	InteriorCountPerFloorplan *int64 `json:"interiorCountPerFloorplan"`
+	FloorplanCount            *int64 `json:"floorplanCount,omitempty"`
+	InteriorCountPerFloorplan *int64 `json:"interiorCountPerFloorplan,omitempty"`
 }
 
 type CreateWorldGenerationJobRequestBody struct {
-	ClientRequestToken *string                                       `json:"clientRequestToken"`
-	Tags               map[string]string                             `json:"tags"`
+	ClientRequestToken *string                                       `json:"clientRequestToken,omitempty"`
+	Tags               map[string]string                             `json:"tags,omitempty"`
 	Template           string                                        `json:"template"`
 	WorldCount         CreateWorldGenerationJobRequestBodyWorldCount `json:"worldCount"`
-	WorldTags          map[string]string                             `json:"worldTags"`
+	WorldTags          map[string]string                             `json:"worldTags,omitempty"`
 }
 
 type CreateWorldGenerationJobRequest struct {

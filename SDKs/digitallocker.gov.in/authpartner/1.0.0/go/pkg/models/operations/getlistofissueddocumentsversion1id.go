@@ -13,8 +13,8 @@ type GetListOfIssuedDocumentsVersion1IDRequest struct {
 }
 
 type GetListOfIssuedDocumentsVersion1ID401ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetListOfIssuedDocumentsVersion1IDResponse struct {

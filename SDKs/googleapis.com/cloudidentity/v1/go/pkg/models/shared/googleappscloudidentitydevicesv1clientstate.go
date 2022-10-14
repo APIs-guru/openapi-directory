@@ -36,16 +36,16 @@ const (
 )
 
 type GoogleAppsCloudidentityDevicesV1ClientState struct {
-	AssetTags       []string                                                        `json:"assetTags"`
-	ComplianceState *GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum `json:"complianceState"`
-	CreateTime      *string                                                         `json:"createTime"`
-	CustomID        *string                                                         `json:"customId"`
-	Etag            *string                                                         `json:"etag"`
-	HealthScore     *GoogleAppsCloudidentityDevicesV1ClientStateHealthScoreEnum     `json:"healthScore"`
-	KeyValuePairs   map[string]GoogleAppsCloudidentityDevicesV1CustomAttributeValue `json:"keyValuePairs"`
-	LastUpdateTime  *string                                                         `json:"lastUpdateTime"`
-	Managed         *GoogleAppsCloudidentityDevicesV1ClientStateManagedEnum         `json:"managed"`
-	Name            *string                                                         `json:"name"`
-	OwnerType       *GoogleAppsCloudidentityDevicesV1ClientStateOwnerTypeEnum       `json:"ownerType"`
-	ScoreReason     *string                                                         `json:"scoreReason"`
+	AssetTags       []string                                                        `json:"assetTags,omitempty"`
+	ComplianceState *GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum `json:"complianceState,omitempty"`
+	CreateTime      *string                                                         `json:"createTime,omitempty"`
+	CustomID        *string                                                         `json:"customId,omitempty"`
+	Etag            *string                                                         `json:"etag,omitempty"`
+	HealthScore     *GoogleAppsCloudidentityDevicesV1ClientStateHealthScoreEnum     `json:"healthScore,omitempty"`
+	KeyValuePairs   map[string]GoogleAppsCloudidentityDevicesV1CustomAttributeValue `json:"keyValuePairs,omitempty"`
+	LastUpdateTime  *string                                                         `json:"lastUpdateTime,omitempty"`
+	Managed         *GoogleAppsCloudidentityDevicesV1ClientStateManagedEnum         `json:"managed,omitempty"`
+	Name            *string                                                         `json:"name,omitempty"`
+	OwnerType       *GoogleAppsCloudidentityDevicesV1ClientStateOwnerTypeEnum       `json:"ownerType,omitempty"`
+	ScoreReason     *string                                                         `json:"scoreReason,omitempty"`
 }

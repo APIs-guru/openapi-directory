@@ -5,10 +5,10 @@ import (
 )
 
 type Statistics struct {
-	ActiveDevices    *int64     `json:"activeDevices"`
-	ActiveUsers      *int64     `json:"activeUsers"`
-	CaptureTime      *time.Time `json:"captureTime"`
-	MessagesReceived *int64     `json:"messagesReceived"`
-	MessagesStored   *int64     `json:"messagesStored"`
-	Requests         *int64     `json:"requests"`
+	ActiveDevices    *int64     `json:"activeDevices,omitempty"`
+	ActiveUsers      *int64     `json:"activeUsers,omitempty"`
+	CaptureTime      *time.Time `json:"captureTime,omitempty"`
+	MessagesReceived *int64     `json:"messagesReceived,omitempty"`
+	MessagesStored   *int64     `json:"messagesStored,omitempty"`
+	Requests         *int64     `json:"requests,omitempty"`
 }

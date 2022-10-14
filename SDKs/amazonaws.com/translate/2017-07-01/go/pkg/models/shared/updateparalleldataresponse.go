@@ -5,8 +5,8 @@ import (
 )
 
 type UpdateParallelDataResponse struct {
-	LatestUpdateAttemptAt     *time.Time              `json:"LatestUpdateAttemptAt"`
-	LatestUpdateAttemptStatus *ParallelDataStatusEnum `json:"LatestUpdateAttemptStatus"`
-	Name                      *string                 `json:"Name"`
-	Status                    *ParallelDataStatusEnum `json:"Status"`
+	LatestUpdateAttemptAt     *time.Time              `json:"LatestUpdateAttemptAt,omitempty"`
+	LatestUpdateAttemptStatus *ParallelDataStatusEnum `json:"LatestUpdateAttemptStatus,omitempty"`
+	Name                      *string                 `json:"Name,omitempty"`
+	Status                    *ParallelDataStatusEnum `json:"Status,omitempty"`
 }

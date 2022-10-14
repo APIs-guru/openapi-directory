@@ -9,9 +9,9 @@ type UpdateCdnEndpointPathParams struct {
 }
 
 type UpdateCdnEndpointRequestBody struct {
-	CertificateID *string `json:"certificate_id"`
-	CustomDomain  *string `json:"custom_domain"`
-	TTL           *int64  `json:"ttl"`
+	CertificateID *string `json:"certificate_id,omitempty"`
+	CustomDomain  *string `json:"custom_domain,omitempty"`
+	TTL           *int64  `json:"ttl,omitempty"`
 }
 
 type UpdateCdnEndpointRequest struct {
@@ -22,7 +22,7 @@ type UpdateCdnEndpointRequest struct {
 type UpdateCdnEndpoint401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateCdnEndpointResponse struct {

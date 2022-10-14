@@ -1,6 +1,6 @@
 package shared
 
 type AddressAutocompleteHitUrls struct {
-	Udprn *string `json:"udprn"`
-	Umprn *string `json:"umprn"`
+	Udprn *string `json:"udprn,omitempty"`
+	Umprn *string `json:"umprn,omitempty"`
 }

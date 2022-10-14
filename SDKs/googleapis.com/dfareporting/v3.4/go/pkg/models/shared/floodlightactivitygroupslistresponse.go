@@ -1,7 +1,7 @@
 package shared
 
 type FloodlightActivityGroupsListResponse struct {
-	FloodlightActivityGroups []FloodlightActivityGroup `json:"floodlightActivityGroups"`
-	Kind                     *string                   `json:"kind"`
-	NextPageToken            *string                   `json:"nextPageToken"`
+	FloodlightActivityGroups []FloodlightActivityGroup `json:"floodlightActivityGroups,omitempty"`
+	Kind                     *string                   `json:"kind,omitempty"`
+	NextPageToken            *string                   `json:"nextPageToken,omitempty"`
 }

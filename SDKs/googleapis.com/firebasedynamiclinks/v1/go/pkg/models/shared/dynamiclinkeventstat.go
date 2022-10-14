@@ -22,7 +22,7 @@ const (
 )
 
 type DynamicLinkEventStat struct {
-	Count    *string                           `json:"count"`
-	Event    *DynamicLinkEventStatEventEnum    `json:"event"`
-	Platform *DynamicLinkEventStatPlatformEnum `json:"platform"`
+	Count    *string                           `json:"count,omitempty"`
+	Event    *DynamicLinkEventStatEventEnum    `json:"event,omitempty"`
+	Platform *DynamicLinkEventStatPlatformEnum `json:"platform,omitempty"`
 }

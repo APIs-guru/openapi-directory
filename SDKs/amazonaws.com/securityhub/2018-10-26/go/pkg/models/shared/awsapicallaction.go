@@ -1,12 +1,12 @@
 package shared
 
 type AwsAPICallAction struct {
-	AffectedResources map[string]string              `json:"AffectedResources"`
-	API               *string                        `json:"Api"`
-	CallerType        *string                        `json:"CallerType"`
-	DomainDetails     *AwsAPICallActionDomainDetails `json:"DomainDetails"`
-	FirstSeen         *string                        `json:"FirstSeen"`
-	LastSeen          *string                        `json:"LastSeen"`
-	RemoteIPDetails   *ActionRemoteIPDetails         `json:"RemoteIpDetails"`
-	ServiceName       *string                        `json:"ServiceName"`
+	AffectedResources map[string]string              `json:"AffectedResources,omitempty"`
+	API               *string                        `json:"Api,omitempty"`
+	CallerType        *string                        `json:"CallerType,omitempty"`
+	DomainDetails     *AwsAPICallActionDomainDetails `json:"DomainDetails,omitempty"`
+	FirstSeen         *string                        `json:"FirstSeen,omitempty"`
+	LastSeen          *string                        `json:"LastSeen,omitempty"`
+	RemoteIPDetails   *ActionRemoteIPDetails         `json:"RemoteIpDetails,omitempty"`
+	ServiceName       *string                        `json:"ServiceName,omitempty"`
 }

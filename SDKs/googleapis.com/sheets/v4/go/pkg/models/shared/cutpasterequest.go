@@ -13,7 +13,7 @@ const (
 )
 
 type CutPasteRequest struct {
-	Destination *GridCoordinate               `json:"destination"`
-	PasteType   *CutPasteRequestPasteTypeEnum `json:"pasteType"`
-	Source      *GridRange                    `json:"source"`
+	Destination *GridCoordinate               `json:"destination,omitempty"`
+	PasteType   *CutPasteRequestPasteTypeEnum `json:"pasteType,omitempty"`
+	Source      *GridRange                    `json:"source,omitempty"`
 }

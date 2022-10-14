@@ -1,6 +1,6 @@
 package shared
 
 type ListLocationsResponse struct {
-	Errors    []Error    `json:"errors"`
-	Locations []Location `json:"locations"`
+	Errors    []Error    `json:"errors,omitempty"`
+	Locations []Location `json:"locations,omitempty"`
 }

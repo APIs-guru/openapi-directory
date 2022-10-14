@@ -1,5 +1,5 @@
 package shared
 
 type TrimWhitespaceRequest struct {
-	Range *GridRange `json:"range"`
+	Range *GridRange `json:"range,omitempty"`
 }

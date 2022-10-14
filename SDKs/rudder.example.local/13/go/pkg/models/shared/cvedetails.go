@@ -5,8 +5,8 @@ import (
 )
 
 type CveDetailsCvssv2 struct {
-	BaseScore *int64  `json:"baseScore"`
-	Vector    *string `json:"vector"`
+	BaseScore *int64  `json:"baseScore,omitempty"`
+	Vector    *string `json:"vector,omitempty"`
 }
 
 type CveDetailsCvssv3BaseSeverityEnum string
@@ -20,17 +20,17 @@ const (
 )
 
 type CveDetailsCvssv3 struct {
-	BaseScore    *float64                          `json:"baseScore"`
-	BaseSeverity *CveDetailsCvssv3BaseSeverityEnum `json:"baseSeverity"`
-	Vector       *string                           `json:"vector"`
+	BaseScore    *float64                          `json:"baseScore,omitempty"`
+	BaseSeverity *CveDetailsCvssv3BaseSeverityEnum `json:"baseSeverity,omitempty"`
+	Vector       *string                           `json:"vector,omitempty"`
 }
 
 type CveDetails struct {
-	Cvssv2           *CveDetailsCvssv2 `json:"cvssv2"`
-	Cvssv3           *CveDetailsCvssv3 `json:"cvssv3"`
-	CweIds           []string          `json:"cweIds"`
-	Description      *time.Time        `json:"description"`
-	ID               *string           `json:"id"`
-	LastModifiedDate *time.Time        `json:"lastModifiedDate"`
-	PublishedDate    *time.Time        `json:"publishedDate"`
+	Cvssv2           *CveDetailsCvssv2 `json:"cvssv2,omitempty"`
+	Cvssv3           *CveDetailsCvssv3 `json:"cvssv3,omitempty"`
+	CweIds           []string          `json:"cweIds,omitempty"`
+	Description      *time.Time        `json:"description,omitempty"`
+	ID               *string           `json:"id,omitempty"`
+	LastModifiedDate *time.Time        `json:"lastModifiedDate,omitempty"`
+	PublishedDate    *time.Time        `json:"publishedDate,omitempty"`
 }

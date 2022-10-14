@@ -1,6 +1,6 @@
 package shared
 
 type MetricMetadata struct {
-	DataType  *string `json:"dataType"`
-	MetricKey *string `json:"metricKey"`
+	DataType  *string `json:"dataType,omitempty"`
+	MetricKey *string `json:"metricKey,omitempty"`
 }

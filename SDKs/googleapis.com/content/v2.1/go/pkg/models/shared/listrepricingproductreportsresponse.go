@@ -1,6 +1,6 @@
 package shared
 
 type ListRepricingProductReportsResponse struct {
-	NextPageToken           *string                  `json:"nextPageToken"`
-	RepricingProductReports []RepricingProductReport `json:"repricingProductReports"`
+	NextPageToken           *string                  `json:"nextPageToken,omitempty"`
+	RepricingProductReports []RepricingProductReport `json:"repricingProductReports,omitempty"`
 }

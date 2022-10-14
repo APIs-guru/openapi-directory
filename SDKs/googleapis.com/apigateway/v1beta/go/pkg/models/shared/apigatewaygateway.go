@@ -12,12 +12,12 @@ const (
 )
 
 type ApigatewayGateway struct {
-	APIConfig       *string                     `json:"apiConfig"`
-	CreateTime      *string                     `json:"createTime"`
-	DefaultHostname *string                     `json:"defaultHostname"`
-	DisplayName     *string                     `json:"displayName"`
-	Labels          map[string]string           `json:"labels"`
-	Name            *string                     `json:"name"`
-	State           *ApigatewayGatewayStateEnum `json:"state"`
-	UpdateTime      *string                     `json:"updateTime"`
+	APIConfig       *string                     `json:"apiConfig,omitempty"`
+	CreateTime      *string                     `json:"createTime,omitempty"`
+	DefaultHostname *string                     `json:"defaultHostname,omitempty"`
+	DisplayName     *string                     `json:"displayName,omitempty"`
+	Labels          map[string]string           `json:"labels,omitempty"`
+	Name            *string                     `json:"name,omitempty"`
+	State           *ApigatewayGatewayStateEnum `json:"state,omitempty"`
+	UpdateTime      *string                     `json:"updateTime,omitempty"`
 }

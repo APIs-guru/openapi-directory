@@ -36,6 +36,6 @@ const (
 )
 
 type FirstAndThirdPartyAudienceTargetingSetting struct {
-	FirstAndThirdPartyAudienceID *string                                                `json:"firstAndThirdPartyAudienceId"`
-	Recency                      *FirstAndThirdPartyAudienceTargetingSettingRecencyEnum `json:"recency"`
+	FirstAndThirdPartyAudienceID *string                                                `json:"firstAndThirdPartyAudienceId,omitempty"`
+	Recency                      *FirstAndThirdPartyAudienceTargetingSettingRecencyEnum `json:"recency,omitempty"`
 }

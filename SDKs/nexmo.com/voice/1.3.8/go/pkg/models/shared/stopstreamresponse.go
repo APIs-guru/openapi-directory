@@ -1,6 +1,6 @@
 package shared
 
 type StopStreamResponse struct {
-	Message *string `json:"message"`
-	UUID    *string `json:"uuid"`
+	Message *string `json:"message,omitempty"`
+	UUID    *string `json:"uuid,omitempty"`
 }

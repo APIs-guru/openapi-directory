@@ -31,25 +31,25 @@ const (
 )
 
 type CloudNetworkProductOfferingPartial struct {
-	BandwidthMax             *int64                                                         `json:"bandwidth_max"`
-	BandwidthMin             *int64                                                         `json:"bandwidth_min"`
-	DeliveryMethod           *CloudNetworkProductOfferingPartialDeliveryMethodEnum          `json:"delivery_method"`
-	DisplayName              *string                                                        `json:"display_name"`
-	Diversity                *int64                                                         `json:"diversity"`
-	DowngradeAllowed         *bool                                                          `json:"downgrade_allowed"`
-	HandoverMetroArea        *string                                                        `json:"handover_metro_area"`
-	HandoverMetroAreaNetwork *string                                                        `json:"handover_metro_area_network"`
-	ID                       *string                                                        `json:"id"`
-	Name                     *string                                                        `json:"name"`
-	PhysicalPortSpeed        *int64                                                         `json:"physical_port_speed"`
-	ProviderVlans            *CloudNetworkProductOfferingPartialProviderVlansEnum           `json:"provider_vlans"`
-	ResourceType             *CloudNetworkProductOfferingPartialResourceTypeEnum            `json:"resource_type"`
-	ServiceMetroArea         *string                                                        `json:"service_metro_area"`
-	ServiceMetroAreaNetwork  *string                                                        `json:"service_metro_area_network"`
-	ServiceProvider          *string                                                        `json:"service_provider"`
-	ServiceProviderPop       *string                                                        `json:"service_provider_pop"`
-	ServiceProviderRegion    *string                                                        `json:"service_provider_region"`
-	ServiceProviderWorkflow  *CloudNetworkProductOfferingPartialServiceProviderWorkflowEnum `json:"service_provider_workflow"`
+	BandwidthMax             *int64                                                         `json:"bandwidth_max,omitempty"`
+	BandwidthMin             *int64                                                         `json:"bandwidth_min,omitempty"`
+	DeliveryMethod           *CloudNetworkProductOfferingPartialDeliveryMethodEnum          `json:"delivery_method,omitempty"`
+	DisplayName              *string                                                        `json:"display_name,omitempty"`
+	Diversity                *int64                                                         `json:"diversity,omitempty"`
+	DowngradeAllowed         *bool                                                          `json:"downgrade_allowed,omitempty"`
+	HandoverMetroArea        *string                                                        `json:"handover_metro_area,omitempty"`
+	HandoverMetroAreaNetwork *string                                                        `json:"handover_metro_area_network,omitempty"`
+	ID                       *string                                                        `json:"id,omitempty"`
+	Name                     *string                                                        `json:"name,omitempty"`
+	PhysicalPortSpeed        *int64                                                         `json:"physical_port_speed,omitempty"`
+	ProviderVlans            *CloudNetworkProductOfferingPartialProviderVlansEnum           `json:"provider_vlans,omitempty"`
+	ResourceType             *CloudNetworkProductOfferingPartialResourceTypeEnum            `json:"resource_type,omitempty"`
+	ServiceMetroArea         *string                                                        `json:"service_metro_area,omitempty"`
+	ServiceMetroAreaNetwork  *string                                                        `json:"service_metro_area_network,omitempty"`
+	ServiceProvider          *string                                                        `json:"service_provider,omitempty"`
+	ServiceProviderPop       *string                                                        `json:"service_provider_pop,omitempty"`
+	ServiceProviderRegion    *string                                                        `json:"service_provider_region,omitempty"`
+	ServiceProviderWorkflow  *CloudNetworkProductOfferingPartialServiceProviderWorkflowEnum `json:"service_provider_workflow,omitempty"`
 	Type                     string                                                         `json:"type"`
-	UpgradeAllowed           *bool                                                          `json:"upgrade_allowed"`
+	UpgradeAllowed           *bool                                                          `json:"upgrade_allowed,omitempty"`
 }

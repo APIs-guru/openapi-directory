@@ -23,5 +23,5 @@ const (
 type ChartDataFilter struct {
 	Col string                `json:"col"`
 	Op  ChartDataFilterOpEnum `json:"op"`
-	Val *interface{}          `json:"val"`
+	Val *interface{}          `json:"val,omitempty"`
 }

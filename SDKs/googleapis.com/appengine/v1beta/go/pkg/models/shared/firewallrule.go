@@ -9,8 +9,8 @@ const (
 )
 
 type FirewallRule struct {
-	Action      *FirewallRuleActionEnum `json:"action"`
-	Description *string                 `json:"description"`
-	Priority    *int32                  `json:"priority"`
-	SourceRange *string                 `json:"sourceRange"`
+	Action      *FirewallRuleActionEnum `json:"action,omitempty"`
+	Description *string                 `json:"description,omitempty"`
+	Priority    *int32                  `json:"priority,omitempty"`
+	SourceRange *string                 `json:"sourceRange,omitempty"`
 }

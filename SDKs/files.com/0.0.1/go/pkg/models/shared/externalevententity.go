@@ -25,15 +25,15 @@ const (
 )
 
 type ExternalEventEntity struct {
-	Body             *string                           `json:"body"`
-	BodyURL          *string                           `json:"body_url"`
-	BytesSynced      *int32                            `json:"bytes_synced"`
-	CreatedAt        *time.Time                        `json:"created_at"`
-	ErroredFiles     *int32                            `json:"errored_files"`
-	EventType        *ExternalEventEntityEventTypeEnum `json:"event_type"`
-	FolderBehaviorID *int32                            `json:"folder_behavior_id"`
-	ID               *int32                            `json:"id"`
-	RemoteServerType *string                           `json:"remote_server_type"`
-	Status           *ExternalEventEntityStatusEnum    `json:"status"`
-	SuccessfulFiles  *int32                            `json:"successful_files"`
+	Body             *string                           `json:"body,omitempty"`
+	BodyURL          *string                           `json:"body_url,omitempty"`
+	BytesSynced      *int32                            `json:"bytes_synced,omitempty"`
+	CreatedAt        *time.Time                        `json:"created_at,omitempty"`
+	ErroredFiles     *int32                            `json:"errored_files,omitempty"`
+	EventType        *ExternalEventEntityEventTypeEnum `json:"event_type,omitempty"`
+	FolderBehaviorID *int32                            `json:"folder_behavior_id,omitempty"`
+	ID               *int32                            `json:"id,omitempty"`
+	RemoteServerType *string                           `json:"remote_server_type,omitempty"`
+	Status           *ExternalEventEntityStatusEnum    `json:"status,omitempty"`
+	SuccessfulFiles  *int32                            `json:"successful_files,omitempty"`
 }

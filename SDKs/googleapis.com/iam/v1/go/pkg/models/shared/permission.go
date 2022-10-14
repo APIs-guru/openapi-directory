@@ -18,12 +18,12 @@ const (
 )
 
 type Permission struct {
-	APIDisabled             *bool                                  `json:"apiDisabled"`
-	CustomRolesSupportLevel *PermissionCustomRolesSupportLevelEnum `json:"customRolesSupportLevel"`
-	Description             *string                                `json:"description"`
-	Name                    *string                                `json:"name"`
-	OnlyInPredefinedRoles   *bool                                  `json:"onlyInPredefinedRoles"`
-	PrimaryPermission       *string                                `json:"primaryPermission"`
-	Stage                   *PermissionStageEnum                   `json:"stage"`
-	Title                   *string                                `json:"title"`
+	APIDisabled             *bool                                  `json:"apiDisabled,omitempty"`
+	CustomRolesSupportLevel *PermissionCustomRolesSupportLevelEnum `json:"customRolesSupportLevel,omitempty"`
+	Description             *string                                `json:"description,omitempty"`
+	Name                    *string                                `json:"name,omitempty"`
+	OnlyInPredefinedRoles   *bool                                  `json:"onlyInPredefinedRoles,omitempty"`
+	PrimaryPermission       *string                                `json:"primaryPermission,omitempty"`
+	Stage                   *PermissionStageEnum                   `json:"stage,omitempty"`
+	Title                   *string                                `json:"title,omitempty"`
 }

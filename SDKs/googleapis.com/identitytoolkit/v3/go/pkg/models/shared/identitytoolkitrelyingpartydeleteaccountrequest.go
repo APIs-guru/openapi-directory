@@ -1,7 +1,7 @@
 package shared
 
 type IdentitytoolkitRelyingpartyDeleteAccountRequest struct {
-	DelegatedProjectNumber *string `json:"delegatedProjectNumber"`
-	IDToken                *string `json:"idToken"`
-	LocalID                *string `json:"localId"`
+	DelegatedProjectNumber *string `json:"delegatedProjectNumber,omitempty"`
+	IDToken                *string `json:"idToken,omitempty"`
+	LocalID                *string `json:"localId,omitempty"`
 }

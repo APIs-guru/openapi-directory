@@ -171,8 +171,8 @@ type OnDemandSeasonUserMetadataConnections struct {
 }
 
 type OnDemandSeasonUserMetadataInteractionsAddPrivacyUser struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type OnDemandSeasonUserMetadataInteractionsBlock struct {
@@ -195,7 +195,7 @@ type OnDemandSeasonUserMetadataInteractionsReport struct {
 }
 
 type OnDemandSeasonUserMetadataInteractions struct {
-	AddPrivacyUser *OnDemandSeasonUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user"`
+	AddPrivacyUser *OnDemandSeasonUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
 	Block          OnDemandSeasonUserMetadataInteractionsBlock           `json:"block"`
 	Follow         OnDemandSeasonUserMetadataInteractionsFollow          `json:"follow"`
 	Report         OnDemandSeasonUserMetadataInteractionsReport          `json:"report"`
@@ -235,19 +235,19 @@ const (
 )
 
 type OnDemandSeasonUserPreferencesVideosPrivacy struct {
-	Add      *bool                                                   `json:"add"`
-	Comments *OnDemandSeasonUserPreferencesVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                                   `json:"download"`
-	Embed    *OnDemandSeasonUserPreferencesVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *OnDemandSeasonUserPreferencesVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                                   `json:"add,omitempty"`
+	Comments *OnDemandSeasonUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                                   `json:"download,omitempty"`
+	Embed    *OnDemandSeasonUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *OnDemandSeasonUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type OnDemandSeasonUserPreferencesVideos struct {
-	Privacy *OnDemandSeasonUserPreferencesVideosPrivacy `json:"privacy"`
+	Privacy *OnDemandSeasonUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type OnDemandSeasonUserPreferences struct {
-	Videos *OnDemandSeasonUserPreferencesVideos `json:"videos"`
+	Videos *OnDemandSeasonUserPreferencesVideos `json:"videos,omitempty"`
 }
 
 type OnDemandSeasonUserUploadQuotaLifetime struct {
@@ -292,15 +292,15 @@ type OnDemandSeasonUserWebsites struct {
 type OnDemandSeasonUserUser struct {
 	Account       OnDemandSeasonUserAccountEnum  `json:"account"`
 	Bio           string                         `json:"bio"`
-	ContentFilter []string                       `json:"content_filter"`
+	ContentFilter []string                       `json:"content_filter,omitempty"`
 	CreatedTime   string                         `json:"created_time"`
-	Email         *string                        `json:"email"`
+	Email         *string                        `json:"email,omitempty"`
 	Link          string                         `json:"link"`
 	Location      string                         `json:"location"`
 	Metadata      OnDemandSeasonUserMetadata     `json:"metadata"`
 	Name          string                         `json:"name"`
 	Pictures      Picture                        `json:"pictures"`
-	Preferences   *OnDemandSeasonUserPreferences `json:"preferences"`
+	Preferences   *OnDemandSeasonUserPreferences `json:"preferences,omitempty"`
 	ResourceKey   string                         `json:"resource_key"`
 	UploadQuota   OnDemandSeasonUserUploadQuota  `json:"upload_quota"`
 	URI           string                         `json:"uri"`

@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetProjectsOutput struct {
-	Projects         []Project `json:"projects"`
-	ProjectsNotFound []string  `json:"projectsNotFound"`
+	Projects         []Project `json:"projects,omitempty"`
+	ProjectsNotFound []string  `json:"projectsNotFound,omitempty"`
 }

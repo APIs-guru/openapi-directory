@@ -1,5 +1,5 @@
 package shared
 
 type CreateLifecyclePolicyResponse struct {
-	PolicyID *string `json:"PolicyId"`
+	PolicyID *string `json:"PolicyId,omitempty"`
 }

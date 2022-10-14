@@ -102,11 +102,11 @@ const (
 )
 
 type CreativeAssetMetadata struct {
-	AssetIdentifier       *CreativeAssetID                                 `json:"assetIdentifier"`
-	ClickTags             []ClickTag                                       `json:"clickTags"`
-	DetectedFeatures      []CreativeAssetMetadataDetectedFeaturesEnum      `json:"detectedFeatures"`
-	ID                    *string                                          `json:"id"`
-	IDDimensionValue      *DimensionValue                                  `json:"idDimensionValue"`
-	Kind                  *string                                          `json:"kind"`
-	WarnedValidationRules []CreativeAssetMetadataWarnedValidationRulesEnum `json:"warnedValidationRules"`
+	AssetIdentifier       *CreativeAssetID                                 `json:"assetIdentifier,omitempty"`
+	ClickTags             []ClickTag                                       `json:"clickTags,omitempty"`
+	DetectedFeatures      []CreativeAssetMetadataDetectedFeaturesEnum      `json:"detectedFeatures,omitempty"`
+	ID                    *string                                          `json:"id,omitempty"`
+	IDDimensionValue      *DimensionValue                                  `json:"idDimensionValue,omitempty"`
+	Kind                  *string                                          `json:"kind,omitempty"`
+	WarnedValidationRules []CreativeAssetMetadataWarnedValidationRulesEnum `json:"warnedValidationRules,omitempty"`
 }

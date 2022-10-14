@@ -9,38 +9,38 @@ type PadUsersUsingGetRequest struct {
 }
 
 type PadUsersUsingGet200ApplicationJSONDataPadUsers struct {
-	ColorID   *string `json:"colorId"`
-	ID        *string `json:"id"`
-	Name      *string `json:"name"`
-	Timestamp *int64  `json:"timestamp"`
+	ColorID   *string `json:"colorId,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Timestamp *int64  `json:"timestamp,omitempty"`
 }
 
 type PadUsersUsingGet200ApplicationJSONData struct {
-	PadUsers []PadUsersUsingGet200ApplicationJSONDataPadUsers `json:"padUsers"`
+	PadUsers []PadUsersUsingGet200ApplicationJSONDataPadUsers `json:"padUsers,omitempty"`
 }
 
 type PadUsersUsingGet200ApplicationJSON struct {
-	Code    *int64                                  `json:"code"`
-	Data    *PadUsersUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                 `json:"message"`
+	Code    *int64                                  `json:"code,omitempty"`
+	Data    *PadUsersUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                 `json:"message,omitempty"`
 }
 
 type PadUsersUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersUsingGetResponse struct {

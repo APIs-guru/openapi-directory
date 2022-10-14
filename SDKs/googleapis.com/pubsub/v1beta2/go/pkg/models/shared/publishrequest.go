@@ -1,5 +1,5 @@
 package shared
 
 type PublishRequest struct {
-	Messages []PubsubMessage `json:"messages"`
+	Messages []PubsubMessage `json:"messages,omitempty"`
 }

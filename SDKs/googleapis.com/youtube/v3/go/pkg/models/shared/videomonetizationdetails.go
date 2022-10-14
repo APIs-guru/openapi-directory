@@ -1,5 +1,5 @@
 package shared
 
 type VideoMonetizationDetails struct {
-	Access *AccessPolicy `json:"access"`
+	Access *AccessPolicy `json:"access,omitempty"`
 }

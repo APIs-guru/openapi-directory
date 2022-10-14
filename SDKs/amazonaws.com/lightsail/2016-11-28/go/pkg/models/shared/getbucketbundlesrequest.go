@@ -1,5 +1,5 @@
 package shared
 
 type GetBucketBundlesRequest struct {
-	IncludeInactive *bool `json:"includeInactive"`
+	IncludeInactive *bool `json:"includeInactive,omitempty"`
 }

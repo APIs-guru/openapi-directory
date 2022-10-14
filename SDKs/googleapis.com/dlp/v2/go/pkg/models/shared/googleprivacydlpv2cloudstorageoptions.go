@@ -25,10 +25,10 @@ const (
 )
 
 type GooglePrivacyDlpV2CloudStorageOptions struct {
-	BytesLimitPerFile        *string                                                `json:"bytesLimitPerFile"`
-	BytesLimitPerFilePercent *int32                                                 `json:"bytesLimitPerFilePercent"`
-	FileSet                  *GooglePrivacyDlpV2FileSet                             `json:"fileSet"`
-	FileTypes                []GooglePrivacyDlpV2CloudStorageOptionsFileTypesEnum   `json:"fileTypes"`
-	FilesLimitPercent        *int32                                                 `json:"filesLimitPercent"`
-	SampleMethod             *GooglePrivacyDlpV2CloudStorageOptionsSampleMethodEnum `json:"sampleMethod"`
+	BytesLimitPerFile        *string                                                `json:"bytesLimitPerFile,omitempty"`
+	BytesLimitPerFilePercent *int32                                                 `json:"bytesLimitPerFilePercent,omitempty"`
+	FileSet                  *GooglePrivacyDlpV2FileSet                             `json:"fileSet,omitempty"`
+	FileTypes                []GooglePrivacyDlpV2CloudStorageOptionsFileTypesEnum   `json:"fileTypes,omitempty"`
+	FilesLimitPercent        *int32                                                 `json:"filesLimitPercent,omitempty"`
+	SampleMethod             *GooglePrivacyDlpV2CloudStorageOptionsSampleMethodEnum `json:"sampleMethod,omitempty"`
 }

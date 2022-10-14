@@ -1,9 +1,9 @@
 package shared
 
 type HealthAndSafety struct {
-	EnhancedCleaning    *EnhancedCleaning    `json:"enhancedCleaning"`
-	IncreasedFoodSafety *IncreasedFoodSafety `json:"increasedFoodSafety"`
-	MinimizedContact    *MinimizedContact    `json:"minimizedContact"`
-	PersonalProtection  *PersonalProtection  `json:"personalProtection"`
-	PhysicalDistancing  *PhysicalDistancing  `json:"physicalDistancing"`
+	EnhancedCleaning    *EnhancedCleaning    `json:"enhancedCleaning,omitempty"`
+	IncreasedFoodSafety *IncreasedFoodSafety `json:"increasedFoodSafety,omitempty"`
+	MinimizedContact    *MinimizedContact    `json:"minimizedContact,omitempty"`
+	PersonalProtection  *PersonalProtection  `json:"personalProtection,omitempty"`
+	PhysicalDistancing  *PhysicalDistancing  `json:"physicalDistancing,omitempty"`
 }

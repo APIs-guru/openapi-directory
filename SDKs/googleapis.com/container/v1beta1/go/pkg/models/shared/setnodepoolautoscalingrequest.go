@@ -1,10 +1,10 @@
 package shared
 
 type SetNodePoolAutoscalingRequest struct {
-	Autoscaling *NodePoolAutoscaling `json:"autoscaling"`
-	ClusterID   *string              `json:"clusterId"`
-	Name        *string              `json:"name"`
-	NodePoolID  *string              `json:"nodePoolId"`
-	ProjectID   *string              `json:"projectId"`
-	Zone        *string              `json:"zone"`
+	Autoscaling *NodePoolAutoscaling `json:"autoscaling,omitempty"`
+	ClusterID   *string              `json:"clusterId,omitempty"`
+	Name        *string              `json:"name,omitempty"`
+	NodePoolID  *string              `json:"nodePoolId,omitempty"`
+	ProjectID   *string              `json:"projectId,omitempty"`
+	Zone        *string              `json:"zone,omitempty"`
 }

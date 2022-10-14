@@ -41,10 +41,10 @@ type CreateOrganizationSamlRoleRequestBodyTags struct {
 }
 
 type CreateOrganizationSamlRoleRequestBody struct {
-	Networks  []CreateOrganizationSamlRoleRequestBodyNetworks    `json:"networks"`
+	Networks  []CreateOrganizationSamlRoleRequestBodyNetworks    `json:"networks,omitempty"`
 	OrgAccess CreateOrganizationSamlRoleRequestBodyOrgAccessEnum `json:"orgAccess"`
 	Role      string                                             `json:"role"`
-	Tags      []CreateOrganizationSamlRoleRequestBodyTags        `json:"tags"`
+	Tags      []CreateOrganizationSamlRoleRequestBodyTags        `json:"tags,omitempty"`
 }
 
 type CreateOrganizationSamlRoleRequest struct {

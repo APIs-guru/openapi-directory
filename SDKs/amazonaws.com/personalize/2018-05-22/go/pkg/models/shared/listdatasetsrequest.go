@@ -1,7 +1,7 @@
 package shared
 
 type ListDatasetsRequest struct {
-	DatasetGroupArn *string `json:"datasetGroupArn"`
-	MaxResults      *int64  `json:"maxResults"`
-	NextToken       *string `json:"nextToken"`
+	DatasetGroupArn *string `json:"datasetGroupArn,omitempty"`
+	MaxResults      *int64  `json:"maxResults,omitempty"`
+	NextToken       *string `json:"nextToken,omitempty"`
 }

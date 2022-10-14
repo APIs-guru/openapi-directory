@@ -10,7 +10,7 @@ const (
 )
 
 type ReservationAffinity struct {
-	ConsumeReservationType *ReservationAffinityConsumeReservationTypeEnum `json:"consumeReservationType"`
-	Key                    *string                                        `json:"key"`
-	Values                 []string                                       `json:"values"`
+	ConsumeReservationType *ReservationAffinityConsumeReservationTypeEnum `json:"consumeReservationType,omitempty"`
+	Key                    *string                                        `json:"key,omitempty"`
+	Values                 []string                                       `json:"values,omitempty"`
 }

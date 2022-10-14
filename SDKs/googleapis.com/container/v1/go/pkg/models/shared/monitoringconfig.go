@@ -1,6 +1,6 @@
 package shared
 
 type MonitoringConfig struct {
-	ComponentConfig         *MonitoringComponentConfig `json:"componentConfig"`
-	ManagedPrometheusConfig *ManagedPrometheusConfig   `json:"managedPrometheusConfig"`
+	ComponentConfig         *MonitoringComponentConfig `json:"componentConfig,omitempty"`
+	ManagedPrometheusConfig *ManagedPrometheusConfig   `json:"managedPrometheusConfig,omitempty"`
 }

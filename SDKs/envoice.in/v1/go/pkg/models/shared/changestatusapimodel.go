@@ -11,6 +11,6 @@ const (
 )
 
 type ChangeStatusAPIModel struct {
-	ID     *int32                          `json:"Id" form:"name=Id"`
-	Status *ChangeStatusAPIModelStatusEnum `json:"Status" form:"name=Status"`
+	ID     *int32                          `json:"Id,omitempty" form:"name=Id"`
+	Status *ChangeStatusAPIModelStatusEnum `json:"Status,omitempty" form:"name=Status"`
 }

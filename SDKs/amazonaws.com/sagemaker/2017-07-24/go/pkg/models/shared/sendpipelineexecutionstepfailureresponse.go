@@ -1,5 +1,5 @@
 package shared
 
 type SendPipelineExecutionStepFailureResponse struct {
-	PipelineExecutionArn *string `json:"PipelineExecutionArn"`
+	PipelineExecutionArn *string `json:"PipelineExecutionArn,omitempty"`
 }

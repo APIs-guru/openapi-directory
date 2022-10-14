@@ -6,11 +6,11 @@ type UpdateNetworkWirelessAlternateManagementInterfacePathParams struct {
 
 type UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyAccessPoints struct {
 	AlternateManagementIP string  `json:"alternateManagementIp"`
-	Dns1                  *string `json:"dns1"`
-	Dns2                  *string `json:"dns2"`
-	Gateway               *string `json:"gateway"`
+	Dns1                  *string `json:"dns1,omitempty"`
+	Dns2                  *string `json:"dns2,omitempty"`
+	Gateway               *string `json:"gateway,omitempty"`
 	Serial                string  `json:"serial"`
-	SubnetMask            *string `json:"subnetMask"`
+	SubnetMask            *string `json:"subnetMask,omitempty"`
 }
 
 type UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyProtocolsEnum string
@@ -23,10 +23,10 @@ const (
 )
 
 type UpdateNetworkWirelessAlternateManagementInterfaceRequestBody struct {
-	AccessPoints []UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyAccessPoints  `json:"accessPoints"`
-	Enabled      *bool                                                                       `json:"enabled"`
-	Protocols    []UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyProtocolsEnum `json:"protocols"`
-	VlanID       *int64                                                                      `json:"vlanId"`
+	AccessPoints []UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyAccessPoints  `json:"accessPoints,omitempty"`
+	Enabled      *bool                                                                       `json:"enabled,omitempty"`
+	Protocols    []UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyProtocolsEnum `json:"protocols,omitempty"`
+	VlanID       *int64                                                                      `json:"vlanId,omitempty"`
 }
 
 type UpdateNetworkWirelessAlternateManagementInterfaceRequest struct {

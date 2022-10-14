@@ -1,5 +1,5 @@
 package shared
 
 type GraphError struct {
-	OdataError *OdataError `json:"odata.error"`
+	OdataError *OdataError `json:"odata.error,omitempty"`
 }

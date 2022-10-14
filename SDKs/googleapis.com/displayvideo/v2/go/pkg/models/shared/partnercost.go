@@ -52,9 +52,9 @@ const (
 )
 
 type PartnerCost struct {
-	CostType            *PartnerCostCostTypeEnum    `json:"costType"`
-	FeeAmount           *string                     `json:"feeAmount"`
-	FeePercentageMillis *string                     `json:"feePercentageMillis"`
-	FeeType             *PartnerCostFeeTypeEnum     `json:"feeType"`
-	InvoiceType         *PartnerCostInvoiceTypeEnum `json:"invoiceType"`
+	CostType            *PartnerCostCostTypeEnum    `json:"costType,omitempty"`
+	FeeAmount           *string                     `json:"feeAmount,omitempty"`
+	FeePercentageMillis *string                     `json:"feePercentageMillis,omitempty"`
+	FeeType             *PartnerCostFeeTypeEnum     `json:"feeType,omitempty"`
+	InvoiceType         *PartnerCostInvoiceTypeEnum `json:"invoiceType,omitempty"`
 }

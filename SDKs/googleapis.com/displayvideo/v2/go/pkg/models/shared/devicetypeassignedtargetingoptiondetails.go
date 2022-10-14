@@ -11,6 +11,6 @@ const (
 )
 
 type DeviceTypeAssignedTargetingOptionDetails struct {
-	DeviceType                      *DeviceTypeAssignedTargetingOptionDetailsDeviceTypeEnum `json:"deviceType"`
-	YoutubeAndPartnersBidMultiplier *float64                                                `json:"youtubeAndPartnersBidMultiplier"`
+	DeviceType                      *DeviceTypeAssignedTargetingOptionDetailsDeviceTypeEnum `json:"deviceType,omitempty"`
+	YoutubeAndPartnersBidMultiplier *float64                                                `json:"youtubeAndPartnersBidMultiplier,omitempty"`
 }

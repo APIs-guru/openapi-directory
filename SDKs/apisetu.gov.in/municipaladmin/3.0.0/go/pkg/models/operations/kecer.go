@@ -15,8 +15,8 @@ const (
 )
 
 type KecerRequestBody struct {
-	CertificateParameters *KecerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *KecerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                KecerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Kecer400ApplicationJSON struct {
-	Error            *Kecer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Kecer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Kecer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Kecer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Kecer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Kecer401ApplicationJSON struct {
-	Error            *Kecer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Kecer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Kecer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Kecer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Kecer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Kecer404ApplicationJSON struct {
-	Error            *Kecer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Kecer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Kecer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Kecer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Kecer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Kecer500ApplicationJSON struct {
-	Error            *Kecer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Kecer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Kecer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Kecer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Kecer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Kecer502ApplicationJSON struct {
-	Error            *Kecer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Kecer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Kecer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Kecer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Kecer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Kecer503ApplicationJSON struct {
-	Error            *Kecer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Kecer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Kecer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Kecer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Kecer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Kecer504ApplicationJSON struct {
-	Error            *Kecer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Kecer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Kecer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Kecer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type KecerResponse struct {

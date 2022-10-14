@@ -1,6 +1,6 @@
 package shared
 
 type CustomerIndexStats struct {
-	Date              *Date               `json:"date"`
-	ItemCountByStatus []ItemCountByStatus `json:"itemCountByStatus"`
+	Date              *Date               `json:"date,omitempty"`
+	ItemCountByStatus []ItemCountByStatus `json:"itemCountByStatus,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type OmnitureSettings struct {
-	OmnitureCostDataEnabled    *bool `json:"omnitureCostDataEnabled"`
-	OmnitureIntegrationEnabled *bool `json:"omnitureIntegrationEnabled"`
+	OmnitureCostDataEnabled    *bool `json:"omnitureCostDataEnabled,omitempty"`
+	OmnitureIntegrationEnabled *bool `json:"omnitureIntegrationEnabled,omitempty"`
 }

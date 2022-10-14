@@ -1,6 +1,6 @@
 package shared
 
 type RecommendationRelatedAnomaly struct {
-	Resources     []RecommendationRelatedAnomalyResource     `json:"Resources"`
-	SourceDetails []RecommendationRelatedAnomalySourceDetail `json:"SourceDetails"`
+	Resources     []RecommendationRelatedAnomalyResource     `json:"Resources,omitempty"`
+	SourceDetails []RecommendationRelatedAnomalySourceDetail `json:"SourceDetails,omitempty"`
 }

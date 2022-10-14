@@ -28,14 +28,14 @@ type GetProfileAppsRequest struct {
 }
 
 type GetProfileApps200ApplicationJSON struct {
-	Data    []shared.AuthorizedApp `json:"data"`
-	Page    *int64                 `json:"page"`
-	Pages   *int64                 `json:"pages"`
-	Results *int64                 `json:"results"`
+	Data    []shared.AuthorizedApp `json:"data,omitempty"`
+	Page    *int64                 `json:"page,omitempty"`
+	Pages   *int64                 `json:"pages,omitempty"`
+	Results *int64                 `json:"results,omitempty"`
 }
 
 type GetProfileAppsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetProfileAppsResponse struct {

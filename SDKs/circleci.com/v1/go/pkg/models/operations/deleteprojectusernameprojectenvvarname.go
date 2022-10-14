@@ -17,7 +17,7 @@ const (
 )
 
 type DeleteProjectUsernameProjectEnvvarName200ApplicationJSON struct {
-	Message *DeleteProjectUsernameProjectEnvvarName200ApplicationJSONMessageEnum `json:"message"`
+	Message *DeleteProjectUsernameProjectEnvvarName200ApplicationJSONMessageEnum `json:"message,omitempty"`
 }
 
 type DeleteProjectUsernameProjectEnvvarNameResponse struct {

@@ -10,10 +10,10 @@ type PostTIDTimerJSONHeaders struct {
 }
 
 type PostTIDTimerJSONRequestBody struct {
-	BasedOnLastPost *bool   `json:"based_on_last_post"`
-	CategoryID      *int64  `json:"category_id"`
-	StatusType      *string `json:"status_type"`
-	Time            *string `json:"time"`
+	BasedOnLastPost *bool   `json:"based_on_last_post,omitempty"`
+	CategoryID      *int64  `json:"category_id,omitempty"`
+	StatusType      *string `json:"status_type,omitempty"`
+	Time            *string `json:"time,omitempty"`
 }
 
 type PostTIDTimerJSONRequest struct {
@@ -23,12 +23,12 @@ type PostTIDTimerJSONRequest struct {
 }
 
 type PostTIDTimerJSON200ApplicationJSON struct {
-	BasedOnLastPost *bool   `json:"based_on_last_post"`
-	CategoryID      *string `json:"category_id"`
-	Closed          *bool   `json:"closed"`
-	Duration        *string `json:"duration"`
-	ExecuteAt       *string `json:"execute_at"`
-	Success         *string `json:"success"`
+	BasedOnLastPost *bool   `json:"based_on_last_post,omitempty"`
+	CategoryID      *string `json:"category_id,omitempty"`
+	Closed          *bool   `json:"closed,omitempty"`
+	Duration        *string `json:"duration,omitempty"`
+	ExecuteAt       *string `json:"execute_at,omitempty"`
+	Success         *string `json:"success,omitempty"`
 }
 
 type PostTIDTimerJSONResponse struct {

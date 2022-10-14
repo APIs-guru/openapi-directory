@@ -44,12 +44,12 @@ const (
 )
 
 type DestinationNotWorkingEvidence struct {
-	DNSError         *DestinationNotWorkingEvidenceDNSErrorEnum         `json:"dnsError"`
-	ExpandedURL      *string                                            `json:"expandedUrl"`
-	HTTPError        *int32                                             `json:"httpError"`
-	InvalidPage      *DestinationNotWorkingEvidenceInvalidPageEnum      `json:"invalidPage"`
-	LastCheckTime    *string                                            `json:"lastCheckTime"`
-	Platform         *DestinationNotWorkingEvidencePlatformEnum         `json:"platform"`
-	RedirectionError *DestinationNotWorkingEvidenceRedirectionErrorEnum `json:"redirectionError"`
-	URLRejected      *DestinationNotWorkingEvidenceURLRejectedEnum      `json:"urlRejected"`
+	DNSError         *DestinationNotWorkingEvidenceDNSErrorEnum         `json:"dnsError,omitempty"`
+	ExpandedURL      *string                                            `json:"expandedUrl,omitempty"`
+	HTTPError        *int32                                             `json:"httpError,omitempty"`
+	InvalidPage      *DestinationNotWorkingEvidenceInvalidPageEnum      `json:"invalidPage,omitempty"`
+	LastCheckTime    *string                                            `json:"lastCheckTime,omitempty"`
+	Platform         *DestinationNotWorkingEvidencePlatformEnum         `json:"platform,omitempty"`
+	RedirectionError *DestinationNotWorkingEvidenceRedirectionErrorEnum `json:"redirectionError,omitempty"`
+	URLRejected      *DestinationNotWorkingEvidenceURLRejectedEnum      `json:"urlRejected,omitempty"`
 }

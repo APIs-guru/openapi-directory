@@ -12,7 +12,7 @@ const (
 )
 
 type TenantResource struct {
-	Resource *string                   `json:"resource"`
-	Status   *TenantResourceStatusEnum `json:"status"`
-	Tag      *string                   `json:"tag"`
+	Resource *string                   `json:"resource,omitempty"`
+	Status   *TenantResourceStatusEnum `json:"status,omitempty"`
+	Tag      *string                   `json:"tag,omitempty"`
 }

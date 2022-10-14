@@ -19,10 +19,10 @@ const (
 )
 
 type Media struct {
-	Details    map[string]interface{} `json:"details"`
-	DirectURL  *string                `json:"direct_url"`
+	Details    map[string]interface{} `json:"details,omitempty"`
+	DirectURL  *string                `json:"direct_url,omitempty"`
 	ForeignKey string                 `json:"foreign_key"`
-	Preferred  *bool                  `json:"preferred"`
+	Preferred  *bool                  `json:"preferred,omitempty"`
 	Type       MediaTypeEnum          `json:"type"`
-	ViewURL    *string                `json:"view_url"`
+	ViewURL    *string                `json:"view_url,omitempty"`
 }

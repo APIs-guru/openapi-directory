@@ -1,5 +1,5 @@
 package shared
 
 type AdvertiserDataAccessConfig struct {
-	SdfConfig *AdvertiserSdfConfig `json:"sdfConfig"`
+	SdfConfig *AdvertiserSdfConfig `json:"sdfConfig,omitempty"`
 }

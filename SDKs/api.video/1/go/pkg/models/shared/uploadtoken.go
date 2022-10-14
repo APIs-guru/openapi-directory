@@ -5,8 +5,8 @@ import (
 )
 
 type UploadToken struct {
-	CreatedAt *time.Time `json:"createdAt"`
-	ExpiresAt *time.Time `json:"expiresAt"`
-	Token     *string    `json:"token"`
-	TTL       *int64     `json:"ttl"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
+	Token     *string    `json:"token,omitempty"`
+	TTL       *int64     `json:"ttl,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListExportsOutput struct {
-	ExportSummaries []ExportSummary `json:"ExportSummaries"`
-	NextToken       *string         `json:"NextToken"`
+	ExportSummaries []ExportSummary `json:"ExportSummaries,omitempty"`
+	NextToken       *string         `json:"NextToken,omitempty"`
 }

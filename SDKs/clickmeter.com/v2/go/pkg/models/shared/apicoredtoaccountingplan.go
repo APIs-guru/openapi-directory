@@ -1,19 +1,19 @@
 package shared
 
 type APICoreDtoAccountingPlan struct {
-	AllowedPersonalDomains *int32   `json:"allowedPersonalDomains"`
-	AllowedPersonalUrls    *int32   `json:"allowedPersonalUrls"`
-	BillingPeriodEnd       *string  `json:"billingPeriodEnd"`
-	BillingPeriodStart     *string  `json:"billingPeriodStart"`
-	BonusMonthlyEvents     *int64   `json:"bonusMonthlyEvents"`
-	MaximumDatapoints      *int64   `json:"maximumDatapoints"`
-	MaximumGuests          *int64   `json:"maximumGuests"`
-	MonthlyEvents          *int64   `json:"monthlyEvents"`
-	Name                   *string  `json:"name"`
-	Price                  *float64 `json:"price"`
-	ProfileID              *int64   `json:"profileId"`
-	Recurring              *bool    `json:"recurring"`
-	RecurringPeriod        *int32   `json:"recurringPeriod"`
-	UsedDatapoints         *int64   `json:"usedDatapoints"`
-	UsedMonthlyEvents      *int64   `json:"usedMonthlyEvents"`
+	AllowedPersonalDomains *int32   `json:"allowedPersonalDomains,omitempty"`
+	AllowedPersonalUrls    *int32   `json:"allowedPersonalUrls,omitempty"`
+	BillingPeriodEnd       *string  `json:"billingPeriodEnd,omitempty"`
+	BillingPeriodStart     *string  `json:"billingPeriodStart,omitempty"`
+	BonusMonthlyEvents     *int64   `json:"bonusMonthlyEvents,omitempty"`
+	MaximumDatapoints      *int64   `json:"maximumDatapoints,omitempty"`
+	MaximumGuests          *int64   `json:"maximumGuests,omitempty"`
+	MonthlyEvents          *int64   `json:"monthlyEvents,omitempty"`
+	Name                   *string  `json:"name,omitempty"`
+	Price                  *float64 `json:"price,omitempty"`
+	ProfileID              *int64   `json:"profileId,omitempty"`
+	Recurring              *bool    `json:"recurring,omitempty"`
+	RecurringPeriod        *int32   `json:"recurringPeriod,omitempty"`
+	UsedDatapoints         *int64   `json:"usedDatapoints,omitempty"`
+	UsedMonthlyEvents      *int64   `json:"usedMonthlyEvents,omitempty"`
 }

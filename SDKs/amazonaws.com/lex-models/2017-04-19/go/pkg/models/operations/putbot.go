@@ -19,14 +19,14 @@ type PutBotHeaders struct {
 }
 
 type PutBotRequestBodyAbortStatement struct {
-	Messages     []shared.Message `json:"messages"`
-	ResponseCard *string          `json:"responseCard"`
+	Messages     []shared.Message `json:"messages,omitempty"`
+	ResponseCard *string          `json:"responseCard,omitempty"`
 }
 
 type PutBotRequestBodyClarificationPrompt struct {
-	MaxAttempts  *int64           `json:"maxAttempts"`
-	Messages     []shared.Message `json:"messages"`
-	ResponseCard *string          `json:"responseCard"`
+	MaxAttempts  *int64           `json:"maxAttempts,omitempty"`
+	Messages     []shared.Message `json:"messages,omitempty"`
+	ResponseCard *string          `json:"responseCard,omitempty"`
 }
 
 type PutBotRequestBodyLocaleEnum string
@@ -55,21 +55,21 @@ const (
 )
 
 type PutBotRequestBody struct {
-	AbortStatement               *PutBotRequestBodyAbortStatement      `json:"abortStatement"`
-	Checksum                     *string                               `json:"checksum"`
+	AbortStatement               *PutBotRequestBodyAbortStatement      `json:"abortStatement,omitempty"`
+	Checksum                     *string                               `json:"checksum,omitempty"`
 	ChildDirected                bool                                  `json:"childDirected"`
-	ClarificationPrompt          *PutBotRequestBodyClarificationPrompt `json:"clarificationPrompt"`
-	CreateVersion                *bool                                 `json:"createVersion"`
-	Description                  *string                               `json:"description"`
-	DetectSentiment              *bool                                 `json:"detectSentiment"`
-	EnableModelImprovements      *bool                                 `json:"enableModelImprovements"`
-	IdleSessionTTLInSeconds      *int64                                `json:"idleSessionTTLInSeconds"`
-	Intents                      []shared.Intent                       `json:"intents"`
+	ClarificationPrompt          *PutBotRequestBodyClarificationPrompt `json:"clarificationPrompt,omitempty"`
+	CreateVersion                *bool                                 `json:"createVersion,omitempty"`
+	Description                  *string                               `json:"description,omitempty"`
+	DetectSentiment              *bool                                 `json:"detectSentiment,omitempty"`
+	EnableModelImprovements      *bool                                 `json:"enableModelImprovements,omitempty"`
+	IdleSessionTTLInSeconds      *int64                                `json:"idleSessionTTLInSeconds,omitempty"`
+	Intents                      []shared.Intent                       `json:"intents,omitempty"`
 	Locale                       PutBotRequestBodyLocaleEnum           `json:"locale"`
-	NluIntentConfidenceThreshold *float64                              `json:"nluIntentConfidenceThreshold"`
-	ProcessBehavior              *PutBotRequestBodyProcessBehaviorEnum `json:"processBehavior"`
-	Tags                         []shared.Tag                          `json:"tags"`
-	VoiceID                      *string                               `json:"voiceId"`
+	NluIntentConfidenceThreshold *float64                              `json:"nluIntentConfidenceThreshold,omitempty"`
+	ProcessBehavior              *PutBotRequestBodyProcessBehaviorEnum `json:"processBehavior,omitempty"`
+	Tags                         []shared.Tag                          `json:"tags,omitempty"`
+	VoiceID                      *string                               `json:"voiceId,omitempty"`
 }
 
 type PutBotRequest struct {

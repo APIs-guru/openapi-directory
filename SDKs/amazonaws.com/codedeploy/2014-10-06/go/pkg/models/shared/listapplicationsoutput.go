@@ -1,6 +1,6 @@
 package shared
 
 type ListApplicationsOutput struct {
-	Applications []string `json:"applications"`
-	NextToken    *string  `json:"nextToken"`
+	Applications []string `json:"applications,omitempty"`
+	NextToken    *string  `json:"nextToken,omitempty"`
 }

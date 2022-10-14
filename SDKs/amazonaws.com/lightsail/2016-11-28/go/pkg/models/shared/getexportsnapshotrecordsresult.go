@@ -1,6 +1,6 @@
 package shared
 
 type GetExportSnapshotRecordsResult struct {
-	ExportSnapshotRecords []ExportSnapshotRecord `json:"exportSnapshotRecords"`
-	NextPageToken         *string                `json:"nextPageToken"`
+	ExportSnapshotRecords []ExportSnapshotRecord `json:"exportSnapshotRecords,omitempty"`
+	NextPageToken         *string                `json:"nextPageToken,omitempty"`
 }

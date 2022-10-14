@@ -13,11 +13,11 @@ type GetUserAndRelatedDataRequest struct {
 }
 
 type GetUserAndRelatedData200ApplicationJSON struct {
-	Feedback    []shared.Feedback `json:"feedback"`
-	OfferCount  *int64            `json:"offer_count"`
-	Posts       []shared.Post     `json:"posts"`
-	User        *shared.User      `json:"user"`
-	WantedCount *int64            `json:"wanted_count"`
+	Feedback    []shared.Feedback `json:"feedback,omitempty"`
+	OfferCount  *int64            `json:"offer_count,omitempty"`
+	Posts       []shared.Post     `json:"posts,omitempty"`
+	User        *shared.User      `json:"user,omitempty"`
+	WantedCount *int64            `json:"wanted_count,omitempty"`
 }
 
 type GetUserAndRelatedDataResponse struct {

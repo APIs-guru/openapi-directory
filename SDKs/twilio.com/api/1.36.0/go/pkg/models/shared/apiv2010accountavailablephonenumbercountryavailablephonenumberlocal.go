@@ -1,24 +1,24 @@
 package shared
 
 type APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberLocalCapabilities struct {
-	Fax   *bool `json:"fax"`
-	Mms   *bool `json:"mms"`
-	Sms   *bool `json:"sms"`
-	Voice *bool `json:"voice"`
+	Fax   *bool `json:"fax,omitempty"`
+	Mms   *bool `json:"mms,omitempty"`
+	Sms   *bool `json:"sms,omitempty"`
+	Voice *bool `json:"voice,omitempty"`
 }
 
 type APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberLocal struct {
-	AddressRequirements *string                                                                          `json:"address_requirements"`
-	Beta                *bool                                                                            `json:"beta"`
-	Capabilities        *APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberLocalCapabilities `json:"capabilities"`
-	FriendlyName        *string                                                                          `json:"friendly_name"`
-	IsoCountry          *string                                                                          `json:"iso_country"`
-	Lata                *string                                                                          `json:"lata"`
-	Latitude            *string                                                                          `json:"latitude"`
-	Locality            *string                                                                          `json:"locality"`
-	Longitude           *string                                                                          `json:"longitude"`
-	PhoneNumber         *string                                                                          `json:"phone_number"`
-	PostalCode          *string                                                                          `json:"postal_code"`
-	RateCenter          *string                                                                          `json:"rate_center"`
-	Region              *string                                                                          `json:"region"`
+	AddressRequirements *string                                                                          `json:"address_requirements,omitempty"`
+	Beta                *bool                                                                            `json:"beta,omitempty"`
+	Capabilities        *APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberLocalCapabilities `json:"capabilities,omitempty"`
+	FriendlyName        *string                                                                          `json:"friendly_name,omitempty"`
+	IsoCountry          *string                                                                          `json:"iso_country,omitempty"`
+	Lata                *string                                                                          `json:"lata,omitempty"`
+	Latitude            *string                                                                          `json:"latitude,omitempty"`
+	Locality            *string                                                                          `json:"locality,omitempty"`
+	Longitude           *string                                                                          `json:"longitude,omitempty"`
+	PhoneNumber         *string                                                                          `json:"phone_number,omitempty"`
+	PostalCode          *string                                                                          `json:"postal_code,omitempty"`
+	RateCenter          *string                                                                          `json:"rate_center,omitempty"`
+	Region              *string                                                                          `json:"region,omitempty"`
 }

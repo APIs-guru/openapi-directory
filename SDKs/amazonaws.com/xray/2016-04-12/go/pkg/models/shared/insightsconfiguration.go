@@ -1,6 +1,6 @@
 package shared
 
 type InsightsConfiguration struct {
-	InsightsEnabled      *bool `json:"InsightsEnabled"`
-	NotificationsEnabled *bool `json:"NotificationsEnabled"`
+	InsightsEnabled      *bool `json:"InsightsEnabled,omitempty"`
+	NotificationsEnabled *bool `json:"NotificationsEnabled,omitempty"`
 }

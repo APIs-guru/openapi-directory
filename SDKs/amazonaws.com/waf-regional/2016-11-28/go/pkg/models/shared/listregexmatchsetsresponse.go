@@ -1,6 +1,6 @@
 package shared
 
 type ListRegexMatchSetsResponse struct {
-	NextMarker     *string                `json:"NextMarker"`
-	RegexMatchSets []RegexMatchSetSummary `json:"RegexMatchSets"`
+	NextMarker     *string                `json:"NextMarker,omitempty"`
+	RegexMatchSets []RegexMatchSetSummary `json:"RegexMatchSets,omitempty"`
 }

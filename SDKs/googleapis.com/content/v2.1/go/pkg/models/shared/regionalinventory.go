@@ -1,11 +1,11 @@
 package shared
 
 type RegionalInventory struct {
-	Availability           *string           `json:"availability"`
-	CustomAttributes       []CustomAttribute `json:"customAttributes"`
-	Kind                   *string           `json:"kind"`
-	Price                  *Price            `json:"price"`
-	RegionID               *string           `json:"regionId"`
-	SalePrice              *Price            `json:"salePrice"`
-	SalePriceEffectiveDate *string           `json:"salePriceEffectiveDate"`
+	Availability           *string           `json:"availability,omitempty"`
+	CustomAttributes       []CustomAttribute `json:"customAttributes,omitempty"`
+	Kind                   *string           `json:"kind,omitempty"`
+	Price                  *Price            `json:"price,omitempty"`
+	RegionID               *string           `json:"regionId,omitempty"`
+	SalePrice              *Price            `json:"salePrice,omitempty"`
+	SalePriceEffectiveDate *string           `json:"salePriceEffectiveDate,omitempty"`
 }

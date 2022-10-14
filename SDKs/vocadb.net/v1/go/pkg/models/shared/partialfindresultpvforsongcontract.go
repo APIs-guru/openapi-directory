@@ -1,7 +1,7 @@
 package shared
 
 type PartialFindResultPvForSongContract struct {
-	Items      []PvForSongContract `json:"items"`
-	Term       *string             `json:"term"`
-	TotalCount *int32              `json:"totalCount"`
+	Items      []PvForSongContract `json:"items,omitempty"`
+	Term       *string             `json:"term,omitempty"`
+	TotalCount *int32              `json:"totalCount,omitempty"`
 }

@@ -21,13 +21,13 @@ const (
 )
 
 type CloudflareWorkerRulePostTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type CloudflareWorkerRulePostTarget struct {
-	Headers      []CloudflareWorkerRulePostTargetHeaders `json:"headers"`
-	SigningKeyID *string                                 `json:"signingKeyId"`
+	Headers      []CloudflareWorkerRulePostTargetHeaders `json:"headers,omitempty"`
+	SigningKeyID *string                                 `json:"signingKeyId,omitempty"`
 	URL          string                                  `json:"url"`
 }
 
@@ -35,6 +35,6 @@ type CloudflareWorkerRulePost struct {
 	RequestMode CloudflareWorkerRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    CloudflareWorkerRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                              `json:"source"`
-	Status      *CloudflareWorkerRulePostStatusEnum     `json:"status"`
+	Status      *CloudflareWorkerRulePostStatusEnum     `json:"status,omitempty"`
 	Target      CloudflareWorkerRulePostTarget          `json:"target"`
 }

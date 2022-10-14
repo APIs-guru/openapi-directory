@@ -23,6 +23,6 @@ const (
 )
 
 type AccountRiskVerdict struct {
-	Risk      *AccountRiskVerdictRiskEnum      `json:"risk"`
-	RiskLevel *AccountRiskVerdictRiskLevelEnum `json:"riskLevel"`
+	Risk      *AccountRiskVerdictRiskEnum      `json:"risk,omitempty"`
+	RiskLevel *AccountRiskVerdictRiskLevelEnum `json:"riskLevel,omitempty"`
 }

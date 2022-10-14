@@ -5,10 +5,10 @@ import (
 )
 
 type Event struct {
-	EventCode       *EventCodeEnum `json:"EventCode"`
-	EventID         *string        `json:"EventId"`
-	EventTime       *time.Time     `json:"EventTime"`
-	Message         *string        `json:"Message"`
-	PreSignedLogURL *string        `json:"PreSignedLogUrl"`
-	ResourceID      *string        `json:"ResourceId"`
+	EventCode       *EventCodeEnum `json:"EventCode,omitempty"`
+	EventID         *string        `json:"EventId,omitempty"`
+	EventTime       *time.Time     `json:"EventTime,omitempty"`
+	Message         *string        `json:"Message,omitempty"`
+	PreSignedLogURL *string        `json:"PreSignedLogUrl,omitempty"`
+	ResourceID      *string        `json:"ResourceId,omitempty"`
 }

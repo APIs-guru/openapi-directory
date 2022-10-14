@@ -1,10 +1,10 @@
 package shared
 
 type GetLifecyclePolicyPreviewRequest struct {
-	Filter         *LifecyclePolicyPreviewFilter `json:"filter"`
-	ImageIds       []ImageIdentifier             `json:"imageIds"`
-	MaxResults     *int64                        `json:"maxResults"`
-	NextToken      *string                       `json:"nextToken"`
-	RegistryID     *string                       `json:"registryId"`
+	Filter         *LifecyclePolicyPreviewFilter `json:"filter,omitempty"`
+	ImageIds       []ImageIdentifier             `json:"imageIds,omitempty"`
+	MaxResults     *int64                        `json:"maxResults,omitempty"`
+	NextToken      *string                       `json:"nextToken,omitempty"`
+	RegistryID     *string                       `json:"registryId,omitempty"`
 	RepositoryName string                        `json:"repositoryName"`
 }

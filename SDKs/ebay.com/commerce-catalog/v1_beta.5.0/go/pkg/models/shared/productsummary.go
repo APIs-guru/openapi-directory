@@ -1,17 +1,17 @@
 package shared
 
 type ProductSummary struct {
-	AdditionalImages []Image  `json:"additionalImages"`
-	Aspects          []Aspect `json:"aspects"`
-	Brand            *string  `json:"brand"`
-	Ean              []string `json:"ean"`
-	Epid             *string  `json:"epid"`
-	Gtin             []string `json:"gtin"`
-	Image            *Image   `json:"image"`
-	Isbn             []string `json:"isbn"`
-	Mpn              []string `json:"mpn"`
-	ProductHref      *string  `json:"productHref"`
-	ProductWebURL    *string  `json:"productWebUrl"`
-	Title            *string  `json:"title"`
-	Upc              []string `json:"upc"`
+	AdditionalImages []Image  `json:"additionalImages,omitempty"`
+	Aspects          []Aspect `json:"aspects,omitempty"`
+	Brand            *string  `json:"brand,omitempty"`
+	Ean              []string `json:"ean,omitempty"`
+	Epid             *string  `json:"epid,omitempty"`
+	Gtin             []string `json:"gtin,omitempty"`
+	Image            *Image   `json:"image,omitempty"`
+	Isbn             []string `json:"isbn,omitempty"`
+	Mpn              []string `json:"mpn,omitempty"`
+	ProductHref      *string  `json:"productHref,omitempty"`
+	ProductWebURL    *string  `json:"productWebUrl,omitempty"`
+	Title            *string  `json:"title,omitempty"`
+	Upc              []string `json:"upc,omitempty"`
 }

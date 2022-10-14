@@ -1,16 +1,16 @@
 package shared
 
 type Presence struct {
-	ID          *string         `json:"id"`
-	Item        *Item           `json:"item"`
-	ItemID      *string         `json:"item_id"`
-	ItemURL     *string         `json:"item_url"`
-	Location    *Location       `json:"location"`
-	LocationID  *string         `json:"location_id"`
-	LocationURL *string         `json:"location_url"`
-	Proximity   *ProximityEnum  `json:"proximity"`
-	Technology  *TechnologyEnum `json:"technology"`
-	TimeCreated *string         `json:"time_created"`
-	TimeUpdated *string         `json:"time_updated"`
-	URL         *string         `json:"url"`
+	ID          *string         `json:"id,omitempty"`
+	Item        *Item           `json:"item,omitempty"`
+	ItemID      *string         `json:"item_id,omitempty"`
+	ItemURL     *string         `json:"item_url,omitempty"`
+	Location    *Location       `json:"location,omitempty"`
+	LocationID  *string         `json:"location_id,omitempty"`
+	LocationURL *string         `json:"location_url,omitempty"`
+	Proximity   *ProximityEnum  `json:"proximity,omitempty"`
+	Technology  *TechnologyEnum `json:"technology,omitempty"`
+	TimeCreated *string         `json:"time_created,omitempty"`
+	TimeUpdated *string         `json:"time_updated,omitempty"`
+	URL         *string         `json:"url,omitempty"`
 }

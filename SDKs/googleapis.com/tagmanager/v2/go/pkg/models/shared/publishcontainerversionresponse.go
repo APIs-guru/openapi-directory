@@ -1,6 +1,6 @@
 package shared
 
 type PublishContainerVersionResponse struct {
-	CompilerError    *bool             `json:"compilerError"`
-	ContainerVersion *ContainerVersion `json:"containerVersion"`
+	CompilerError    *bool             `json:"compilerError,omitempty"`
+	ContainerVersion *ContainerVersion `json:"containerVersion,omitempty"`
 }

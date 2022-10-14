@@ -16,25 +16,25 @@ const (
 )
 
 type VideoV1Composition struct {
-	AccountSid            *string                                     `json:"account_sid"`
-	AudioSources          []string                                    `json:"audio_sources"`
-	AudioSourcesExcluded  []string                                    `json:"audio_sources_excluded"`
-	Bitrate               *int64                                      `json:"bitrate"`
-	DateCompleted         *time.Time                                  `json:"date_completed"`
-	DateCreated           *time.Time                                  `json:"date_created"`
-	DateDeleted           *time.Time                                  `json:"date_deleted"`
-	Duration              *int64                                      `json:"duration"`
-	Format                *CompositionEnumFormatEnum                  `json:"format"`
-	Links                 map[string]interface{}                      `json:"links"`
-	MediaExternalLocation *string                                     `json:"media_external_location"`
-	Resolution            *string                                     `json:"resolution"`
-	RoomSid               *string                                     `json:"room_sid"`
-	Sid                   *string                                     `json:"sid"`
-	Size                  *int64                                      `json:"size"`
-	Status                *CompositionEnumStatusEnum                  `json:"status"`
-	StatusCallback        *string                                     `json:"status_callback"`
-	StatusCallbackMethod  *VideoV1CompositionStatusCallbackMethodEnum `json:"status_callback_method"`
-	Trim                  *bool                                       `json:"trim"`
-	URL                   *string                                     `json:"url"`
-	VideoLayout           *interface{}                                `json:"video_layout"`
+	AccountSid            *string                                     `json:"account_sid,omitempty"`
+	AudioSources          []string                                    `json:"audio_sources,omitempty"`
+	AudioSourcesExcluded  []string                                    `json:"audio_sources_excluded,omitempty"`
+	Bitrate               *int64                                      `json:"bitrate,omitempty"`
+	DateCompleted         *time.Time                                  `json:"date_completed,omitempty"`
+	DateCreated           *time.Time                                  `json:"date_created,omitempty"`
+	DateDeleted           *time.Time                                  `json:"date_deleted,omitempty"`
+	Duration              *int64                                      `json:"duration,omitempty"`
+	Format                *CompositionEnumFormatEnum                  `json:"format,omitempty"`
+	Links                 map[string]interface{}                      `json:"links,omitempty"`
+	MediaExternalLocation *string                                     `json:"media_external_location,omitempty"`
+	Resolution            *string                                     `json:"resolution,omitempty"`
+	RoomSid               *string                                     `json:"room_sid,omitempty"`
+	Sid                   *string                                     `json:"sid,omitempty"`
+	Size                  *int64                                      `json:"size,omitempty"`
+	Status                *CompositionEnumStatusEnum                  `json:"status,omitempty"`
+	StatusCallback        *string                                     `json:"status_callback,omitempty"`
+	StatusCallbackMethod  *VideoV1CompositionStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	Trim                  *bool                                       `json:"trim,omitempty"`
+	URL                   *string                                     `json:"url,omitempty"`
+	VideoLayout           *interface{}                                `json:"video_layout,omitempty"`
 }

@@ -2,10 +2,10 @@ package shared
 
 type RestoreTableFromBackupInput struct {
 	BackupArn                     string                 `json:"BackupArn"`
-	BillingModeOverride           *BillingModeEnum       `json:"BillingModeOverride"`
-	GlobalSecondaryIndexOverride  []GlobalSecondaryIndex `json:"GlobalSecondaryIndexOverride"`
-	LocalSecondaryIndexOverride   []LocalSecondaryIndex  `json:"LocalSecondaryIndexOverride"`
-	ProvisionedThroughputOverride *ProvisionedThroughput `json:"ProvisionedThroughputOverride"`
-	SseSpecificationOverride      *SseSpecification      `json:"SSESpecificationOverride"`
+	BillingModeOverride           *BillingModeEnum       `json:"BillingModeOverride,omitempty"`
+	GlobalSecondaryIndexOverride  []GlobalSecondaryIndex `json:"GlobalSecondaryIndexOverride,omitempty"`
+	LocalSecondaryIndexOverride   []LocalSecondaryIndex  `json:"LocalSecondaryIndexOverride,omitempty"`
+	ProvisionedThroughputOverride *ProvisionedThroughput `json:"ProvisionedThroughputOverride,omitempty"`
+	SseSpecificationOverride      *SseSpecification      `json:"SSESpecificationOverride,omitempty"`
 	TargetTableName               string                 `json:"TargetTableName"`
 }

@@ -43,16 +43,16 @@ const (
 )
 
 type PaymentEventResponse struct {
-	AccountName     *string                           `json:"accountName"`
-	AccountNumber   *string                           `json:"accountNumber"`
+	AccountName     *string                           `json:"accountName,omitempty"`
+	AccountNumber   *string                           `json:"accountNumber,omitempty"`
 	EventDateTime   time.Time                         `json:"eventDateTime"`
 	EventID         string                            `json:"eventId"`
 	EventType       PaymentEventResponseEventTypeEnum `json:"eventType"`
-	Iban            *string                           `json:"iban"`
-	PaymentAmount   *int64                            `json:"paymentAmount"`
-	PaymentCurrency *PaymentAuditCurrencyEnum         `json:"paymentCurrency"`
-	Principal       *string                           `json:"principal"`
-	RoutingNumber   *string                           `json:"routingNumber"`
-	SourceAmount    *int64                            `json:"sourceAmount"`
-	SourceCurrency  *PaymentAuditCurrencyEnum         `json:"sourceCurrency"`
+	Iban            *string                           `json:"iban,omitempty"`
+	PaymentAmount   *int64                            `json:"paymentAmount,omitempty"`
+	PaymentCurrency *PaymentAuditCurrencyEnum         `json:"paymentCurrency,omitempty"`
+	Principal       *string                           `json:"principal,omitempty"`
+	RoutingNumber   *string                           `json:"routingNumber,omitempty"`
+	SourceAmount    *int64                            `json:"sourceAmount,omitempty"`
+	SourceCurrency  *PaymentAuditCurrencyEnum         `json:"sourceCurrency,omitempty"`
 }

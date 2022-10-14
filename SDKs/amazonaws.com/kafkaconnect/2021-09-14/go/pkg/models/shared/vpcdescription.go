@@ -1,6 +1,6 @@
 package shared
 
 type VpcDescription struct {
-	SecurityGroups []string `json:"securityGroups"`
-	Subnets        []string `json:"subnets"`
+	SecurityGroups []string `json:"securityGroups,omitempty"`
+	Subnets        []string `json:"subnets,omitempty"`
 }

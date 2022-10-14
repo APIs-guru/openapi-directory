@@ -9,9 +9,9 @@ const (
 )
 
 type TemplateContents struct {
-	Imports      []ImportFile                     `json:"imports"`
-	Interpreter  *TemplateContentsInterpreterEnum `json:"interpreter"`
-	MainTemplate *string                          `json:"mainTemplate"`
-	Schema       *string                          `json:"schema"`
-	Template     *string                          `json:"template"`
+	Imports      []ImportFile                     `json:"imports,omitempty"`
+	Interpreter  *TemplateContentsInterpreterEnum `json:"interpreter,omitempty"`
+	MainTemplate *string                          `json:"mainTemplate,omitempty"`
+	Schema       *string                          `json:"schema,omitempty"`
+	Template     *string                          `json:"template,omitempty"`
 }

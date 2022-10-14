@@ -20,22 +20,22 @@ type ListAuditSuppressionsHeaders struct {
 }
 
 type ListAuditSuppressionsRequestBodyResourceIdentifier struct {
-	Account                 *string                         `json:"account"`
-	CaCertificateID         *string                         `json:"caCertificateId"`
-	ClientID                *string                         `json:"clientId"`
-	CognitoIdentityPoolID   *string                         `json:"cognitoIdentityPoolId"`
-	DeviceCertificateID     *string                         `json:"deviceCertificateId"`
-	IamRoleArn              *string                         `json:"iamRoleArn"`
-	PolicyVersionIdentifier *shared.PolicyVersionIdentifier `json:"policyVersionIdentifier"`
-	RoleAliasArn            *string                         `json:"roleAliasArn"`
+	Account                 *string                         `json:"account,omitempty"`
+	CaCertificateID         *string                         `json:"caCertificateId,omitempty"`
+	ClientID                *string                         `json:"clientId,omitempty"`
+	CognitoIdentityPoolID   *string                         `json:"cognitoIdentityPoolId,omitempty"`
+	DeviceCertificateID     *string                         `json:"deviceCertificateId,omitempty"`
+	IamRoleArn              *string                         `json:"iamRoleArn,omitempty"`
+	PolicyVersionIdentifier *shared.PolicyVersionIdentifier `json:"policyVersionIdentifier,omitempty"`
+	RoleAliasArn            *string                         `json:"roleAliasArn,omitempty"`
 }
 
 type ListAuditSuppressionsRequestBody struct {
-	AscendingOrder     *bool                                               `json:"ascendingOrder"`
-	CheckName          *string                                             `json:"checkName"`
-	MaxResults         *int64                                              `json:"maxResults"`
-	NextToken          *string                                             `json:"nextToken"`
-	ResourceIdentifier *ListAuditSuppressionsRequestBodyResourceIdentifier `json:"resourceIdentifier"`
+	AscendingOrder     *bool                                               `json:"ascendingOrder,omitempty"`
+	CheckName          *string                                             `json:"checkName,omitempty"`
+	MaxResults         *int64                                              `json:"maxResults,omitempty"`
+	NextToken          *string                                             `json:"nextToken,omitempty"`
+	ResourceIdentifier *ListAuditSuppressionsRequestBodyResourceIdentifier `json:"resourceIdentifier,omitempty"`
 }
 
 type ListAuditSuppressionsRequest struct {

@@ -1,10 +1,10 @@
 package shared
 
 type CSS struct {
-	CSSDomainID *string  `json:"cssDomainId"`
-	CSSGroupID  *string  `json:"cssGroupId"`
-	DisplayName *string  `json:"displayName"`
-	FullName    *string  `json:"fullName"`
-	HomepageURI *string  `json:"homepageUri"`
-	LabelIds    []string `json:"labelIds"`
+	CSSDomainID *string  `json:"cssDomainId,omitempty"`
+	CSSGroupID  *string  `json:"cssGroupId,omitempty"`
+	DisplayName *string  `json:"displayName,omitempty"`
+	FullName    *string  `json:"fullName,omitempty"`
+	HomepageURI *string  `json:"homepageUri,omitempty"`
+	LabelIds    []string `json:"labelIds,omitempty"`
 }

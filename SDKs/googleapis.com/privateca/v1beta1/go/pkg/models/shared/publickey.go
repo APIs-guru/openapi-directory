@@ -9,6 +9,6 @@ const (
 )
 
 type PublicKey struct {
-	Key  *string            `json:"key"`
-	Type *PublicKeyTypeEnum `json:"type"`
+	Key  *string            `json:"key,omitempty"`
+	Type *PublicKeyTypeEnum `json:"type,omitempty"`
 }

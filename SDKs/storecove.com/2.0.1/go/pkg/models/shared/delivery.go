@@ -1,14 +1,14 @@
 package shared
 
 type DeliveryLocation struct {
-	Address        *Address `json:"address"`
-	ID             *string  `json:"id"`
-	SchemeAgencyID *string  `json:"schemeAgencyId"`
-	SchemeID       *string  `json:"schemeId"`
+	Address        *Address `json:"address,omitempty"`
+	ID             *string  `json:"id,omitempty"`
+	SchemeAgencyID *string  `json:"schemeAgencyId,omitempty"`
+	SchemeID       *string  `json:"schemeId,omitempty"`
 }
 
 type Delivery struct {
-	ActualDate *string           `json:"actualDate"`
-	Location   *DeliveryLocation `json:"location"`
-	Quantity   *float64          `json:"quantity"`
+	ActualDate *string           `json:"actualDate,omitempty"`
+	Location   *DeliveryLocation `json:"location,omitempty"`
+	Quantity   *float64          `json:"quantity,omitempty"`
 }

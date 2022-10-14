@@ -1,9 +1,9 @@
 package shared
 
 type Group struct {
-	CreateTime  *string `json:"createTime"`
-	Description *string `json:"description"`
-	DisplayName *string `json:"displayName"`
-	Name        *string `json:"name"`
-	UpdateTime  *string `json:"updateTime"`
+	CreateTime  *string `json:"createTime,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	UpdateTime  *string `json:"updateTime,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type Asset struct {
-	GroundTruthManifest *GroundTruthManifest `json:"GroundTruthManifest"`
+	GroundTruthManifest *GroundTruthManifest `json:"GroundTruthManifest,omitempty"`
 }

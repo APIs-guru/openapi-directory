@@ -1,5 +1,5 @@
 package shared
 
 type CreatePresignedNotebookInstanceURLOutput struct {
-	AuthorizedURL *string `json:"AuthorizedUrl"`
+	AuthorizedURL *string `json:"AuthorizedUrl,omitempty"`
 }

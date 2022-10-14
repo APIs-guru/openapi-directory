@@ -14,7 +14,7 @@ type RemoveSupportingWorkForGoalQueryParams struct {
 }
 
 type RemoveSupportingWorkForGoalRequestBody struct {
-	Data *shared.GoalAddSupportingWorkRequest `json:"data"`
+	Data *shared.GoalAddSupportingWorkRequest `json:"data,omitempty"`
 }
 
 type RemoveSupportingWorkForGoalRequest struct {
@@ -24,7 +24,7 @@ type RemoveSupportingWorkForGoalRequest struct {
 }
 
 type RemoveSupportingWorkForGoal200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveSupportingWorkForGoalResponse struct {

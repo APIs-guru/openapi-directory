@@ -1,5 +1,5 @@
 package shared
 
 type GetDeploymentGroupOutput struct {
-	DeploymentGroupInfo *DeploymentGroupInfo `json:"deploymentGroupInfo"`
+	DeploymentGroupInfo *DeploymentGroupInfo `json:"deploymentGroupInfo,omitempty"`
 }

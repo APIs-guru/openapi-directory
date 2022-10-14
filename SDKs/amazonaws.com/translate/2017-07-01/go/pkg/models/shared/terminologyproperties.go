@@ -5,14 +5,14 @@ import (
 )
 
 type TerminologyProperties struct {
-	Arn                 *string        `json:"Arn"`
-	CreatedAt           *time.Time     `json:"CreatedAt"`
-	Description         *string        `json:"Description"`
-	EncryptionKey       *EncryptionKey `json:"EncryptionKey"`
-	LastUpdatedAt       *time.Time     `json:"LastUpdatedAt"`
-	Name                *string        `json:"Name"`
-	SizeBytes           *int64         `json:"SizeBytes"`
-	SourceLanguageCode  *string        `json:"SourceLanguageCode"`
-	TargetLanguageCodes []string       `json:"TargetLanguageCodes"`
-	TermCount           *int64         `json:"TermCount"`
+	Arn                 *string        `json:"Arn,omitempty"`
+	CreatedAt           *time.Time     `json:"CreatedAt,omitempty"`
+	Description         *string        `json:"Description,omitempty"`
+	EncryptionKey       *EncryptionKey `json:"EncryptionKey,omitempty"`
+	LastUpdatedAt       *time.Time     `json:"LastUpdatedAt,omitempty"`
+	Name                *string        `json:"Name,omitempty"`
+	SizeBytes           *int64         `json:"SizeBytes,omitempty"`
+	SourceLanguageCode  *string        `json:"SourceLanguageCode,omitempty"`
+	TargetLanguageCodes []string       `json:"TargetLanguageCodes,omitempty"`
+	TermCount           *int64         `json:"TermCount,omitempty"`
 }

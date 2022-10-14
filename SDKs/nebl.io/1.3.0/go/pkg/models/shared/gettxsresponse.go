@@ -1,6 +1,6 @@
 package shared
 
 type GetTxsResponse struct {
-	PagesTotal *float64        `json:"pagesTotal"`
-	Txs        []GetTxResponse `json:"txs"`
+	PagesTotal *float64        `json:"pagesTotal,omitempty"`
+	Txs        []GetTxResponse `json:"txs,omitempty"`
 }

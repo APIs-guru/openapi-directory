@@ -1,5 +1,5 @@
 package shared
 
 type MailOptions struct {
-	ExcludeDrafts *bool `json:"excludeDrafts"`
+	ExcludeDrafts *bool `json:"excludeDrafts,omitempty"`
 }

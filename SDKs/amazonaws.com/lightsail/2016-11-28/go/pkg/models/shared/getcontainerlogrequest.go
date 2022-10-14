@@ -6,9 +6,9 @@ import (
 
 type GetContainerLogRequest struct {
 	ContainerName string     `json:"containerName"`
-	EndTime       *time.Time `json:"endTime"`
-	FilterPattern *string    `json:"filterPattern"`
-	PageToken     *string    `json:"pageToken"`
+	EndTime       *time.Time `json:"endTime,omitempty"`
+	FilterPattern *string    `json:"filterPattern,omitempty"`
+	PageToken     *string    `json:"pageToken,omitempty"`
 	ServiceName   string     `json:"serviceName"`
-	StartTime     *time.Time `json:"startTime"`
+	StartTime     *time.Time `json:"startTime,omitempty"`
 }

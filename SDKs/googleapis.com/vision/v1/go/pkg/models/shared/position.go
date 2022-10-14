@@ -1,7 +1,7 @@
 package shared
 
 type Position struct {
-	X *float32 `json:"x"`
-	Y *float32 `json:"y"`
-	Z *float32 `json:"z"`
+	X *float32 `json:"x,omitempty"`
+	Y *float32 `json:"y,omitempty"`
+	Z *float32 `json:"z,omitempty"`
 }

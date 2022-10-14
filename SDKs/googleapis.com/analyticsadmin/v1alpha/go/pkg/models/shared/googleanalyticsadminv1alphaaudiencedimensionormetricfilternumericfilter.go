@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter struct {
-	Operation *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum `json:"operation"`
-	Value     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue               `json:"value"`
+	Operation *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum `json:"operation,omitempty"`
+	Value     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue               `json:"value,omitempty"`
 }

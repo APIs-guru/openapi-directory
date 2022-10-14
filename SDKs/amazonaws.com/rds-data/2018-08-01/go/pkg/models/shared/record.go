@@ -1,5 +1,5 @@
 package shared
 
 type Record struct {
-	Values []Value `json:"values"`
+	Values []Value `json:"values,omitempty"`
 }

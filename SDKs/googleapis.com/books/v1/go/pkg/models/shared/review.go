@@ -1,24 +1,24 @@
 package shared
 
 type ReviewAuthor struct {
-	DisplayName *string `json:"displayName"`
+	DisplayName *string `json:"displayName,omitempty"`
 }
 
 type ReviewSource struct {
-	Description      *string `json:"description"`
-	ExtraDescription *string `json:"extraDescription"`
-	URL              *string `json:"url"`
+	Description      *string `json:"description,omitempty"`
+	ExtraDescription *string `json:"extraDescription,omitempty"`
+	URL              *string `json:"url,omitempty"`
 }
 
 type Review struct {
-	Author      *ReviewAuthor `json:"author"`
-	Content     *string       `json:"content"`
-	Date        *string       `json:"date"`
-	FullTextURL *string       `json:"fullTextUrl"`
-	Kind        *string       `json:"kind"`
-	Rating      *string       `json:"rating"`
-	Source      *ReviewSource `json:"source"`
-	Title       *string       `json:"title"`
-	Type        *string       `json:"type"`
-	VolumeID    *string       `json:"volumeId"`
+	Author      *ReviewAuthor `json:"author,omitempty"`
+	Content     *string       `json:"content,omitempty"`
+	Date        *string       `json:"date,omitempty"`
+	FullTextURL *string       `json:"fullTextUrl,omitempty"`
+	Kind        *string       `json:"kind,omitempty"`
+	Rating      *string       `json:"rating,omitempty"`
+	Source      *ReviewSource `json:"source,omitempty"`
+	Title       *string       `json:"title,omitempty"`
+	Type        *string       `json:"type,omitempty"`
+	VolumeID    *string       `json:"volumeId,omitempty"`
 }

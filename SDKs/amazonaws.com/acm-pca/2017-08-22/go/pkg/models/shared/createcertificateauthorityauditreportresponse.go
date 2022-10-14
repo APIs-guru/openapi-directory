@@ -1,6 +1,6 @@
 package shared
 
 type CreateCertificateAuthorityAuditReportResponse struct {
-	AuditReportID *string `json:"AuditReportId"`
-	S3Key         *string `json:"S3Key"`
+	AuditReportID *string `json:"AuditReportId,omitempty"`
+	S3Key         *string `json:"S3Key,omitempty"`
 }

@@ -14,7 +14,7 @@ type RemoveTagForTaskQueryParams struct {
 }
 
 type RemoveTagForTaskRequestBody struct {
-	Data *shared.TaskRemoveTagRequest `json:"data"`
+	Data *shared.TaskRemoveTagRequest `json:"data,omitempty"`
 }
 
 type RemoveTagForTaskRequest struct {
@@ -24,7 +24,7 @@ type RemoveTagForTaskRequest struct {
 }
 
 type RemoveTagForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveTagForTaskResponse struct {

@@ -12,11 +12,11 @@ const (
 )
 
 type Role struct {
-	Deleted             *bool          `json:"deleted"`
-	Description         *string        `json:"description"`
-	Etag                *string        `json:"etag"`
-	IncludedPermissions []string       `json:"includedPermissions"`
-	Name                *string        `json:"name"`
-	Stage               *RoleStageEnum `json:"stage"`
-	Title               *string        `json:"title"`
+	Deleted             *bool          `json:"deleted,omitempty"`
+	Description         *string        `json:"description,omitempty"`
+	Etag                *string        `json:"etag,omitempty"`
+	IncludedPermissions []string       `json:"includedPermissions,omitempty"`
+	Name                *string        `json:"name,omitempty"`
+	Stage               *RoleStageEnum `json:"stage,omitempty"`
+	Title               *string        `json:"title,omitempty"`
 }

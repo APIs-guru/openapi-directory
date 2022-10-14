@@ -1,20 +1,20 @@
 package shared
 
 type BucketAccessControlProjectTeam struct {
-	ProjectNumber *string `json:"projectNumber"`
-	Team          *string `json:"team"`
+	ProjectNumber *string `json:"projectNumber,omitempty"`
+	Team          *string `json:"team,omitempty"`
 }
 
 type BucketAccessControl struct {
-	Bucket      *string                         `json:"bucket"`
-	Domain      *string                         `json:"domain"`
-	Email       *string                         `json:"email"`
-	Entity      *string                         `json:"entity"`
-	EntityID    *string                         `json:"entityId"`
-	Etag        *string                         `json:"etag"`
-	ID          *string                         `json:"id"`
-	Kind        *string                         `json:"kind"`
-	ProjectTeam *BucketAccessControlProjectTeam `json:"projectTeam"`
-	Role        *string                         `json:"role"`
-	SelfLink    *string                         `json:"selfLink"`
+	Bucket      *string                         `json:"bucket,omitempty"`
+	Domain      *string                         `json:"domain,omitempty"`
+	Email       *string                         `json:"email,omitempty"`
+	Entity      *string                         `json:"entity,omitempty"`
+	EntityID    *string                         `json:"entityId,omitempty"`
+	Etag        *string                         `json:"etag,omitempty"`
+	ID          *string                         `json:"id,omitempty"`
+	Kind        *string                         `json:"kind,omitempty"`
+	ProjectTeam *BucketAccessControlProjectTeam `json:"projectTeam,omitempty"`
+	Role        *string                         `json:"role,omitempty"`
+	SelfLink    *string                         `json:"selfLink,omitempty"`
 }

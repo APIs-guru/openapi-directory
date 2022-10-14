@@ -5,13 +5,13 @@ import (
 )
 
 type SystemInstanceSummary struct {
-	Arn                      *string                             `json:"arn"`
-	CreatedAt                *time.Time                          `json:"createdAt"`
-	GreengrassGroupID        *string                             `json:"greengrassGroupId"`
-	GreengrassGroupName      *string                             `json:"greengrassGroupName"`
-	GreengrassGroupVersionID *string                             `json:"greengrassGroupVersionId"`
-	ID                       *string                             `json:"id"`
-	Status                   *SystemInstanceDeploymentStatusEnum `json:"status"`
-	Target                   *DeploymentTargetEnum               `json:"target"`
-	UpdatedAt                *time.Time                          `json:"updatedAt"`
+	Arn                      *string                             `json:"arn,omitempty"`
+	CreatedAt                *time.Time                          `json:"createdAt,omitempty"`
+	GreengrassGroupID        *string                             `json:"greengrassGroupId,omitempty"`
+	GreengrassGroupName      *string                             `json:"greengrassGroupName,omitempty"`
+	GreengrassGroupVersionID *string                             `json:"greengrassGroupVersionId,omitempty"`
+	ID                       *string                             `json:"id,omitempty"`
+	Status                   *SystemInstanceDeploymentStatusEnum `json:"status,omitempty"`
+	Target                   *DeploymentTargetEnum               `json:"target,omitempty"`
+	UpdatedAt                *time.Time                          `json:"updatedAt,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type BackendAuthAppleProviderConfig struct {
-	ClientID   *string `json:"ClientId"`
-	KeyID      *string `json:"KeyId"`
-	PrivateKey *string `json:"PrivateKey"`
-	TeamID     *string `json:"TeamId"`
+	ClientID   *string `json:"ClientId,omitempty"`
+	KeyID      *string `json:"KeyId,omitempty"`
+	PrivateKey *string `json:"PrivateKey,omitempty"`
+	TeamID     *string `json:"TeamId,omitempty"`
 }

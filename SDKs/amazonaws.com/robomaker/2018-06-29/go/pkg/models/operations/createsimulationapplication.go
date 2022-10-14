@@ -15,32 +15,32 @@ type CreateSimulationApplicationHeaders struct {
 }
 
 type CreateSimulationApplicationRequestBodyEnvironment struct {
-	URI *string `json:"uri"`
+	URI *string `json:"uri,omitempty"`
 }
 
 type CreateSimulationApplicationRequestBodyRenderingEngine struct {
-	Name    *shared.RenderingEngineTypeEnum `json:"name"`
-	Version *string                         `json:"version"`
+	Name    *shared.RenderingEngineTypeEnum `json:"name,omitempty"`
+	Version *string                         `json:"version,omitempty"`
 }
 
 type CreateSimulationApplicationRequestBodyRobotSoftwareSuite struct {
-	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name"`
-	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version"`
+	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name,omitempty"`
+	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version,omitempty"`
 }
 
 type CreateSimulationApplicationRequestBodySimulationSoftwareSuite struct {
-	Name    *shared.SimulationSoftwareSuiteTypeEnum `json:"name"`
-	Version *string                                 `json:"version"`
+	Name    *shared.SimulationSoftwareSuiteTypeEnum `json:"name,omitempty"`
+	Version *string                                 `json:"version,omitempty"`
 }
 
 type CreateSimulationApplicationRequestBody struct {
-	Environment             *CreateSimulationApplicationRequestBodyEnvironment            `json:"environment"`
+	Environment             *CreateSimulationApplicationRequestBodyEnvironment            `json:"environment,omitempty"`
 	Name                    string                                                        `json:"name"`
-	RenderingEngine         *CreateSimulationApplicationRequestBodyRenderingEngine        `json:"renderingEngine"`
+	RenderingEngine         *CreateSimulationApplicationRequestBodyRenderingEngine        `json:"renderingEngine,omitempty"`
 	RobotSoftwareSuite      CreateSimulationApplicationRequestBodyRobotSoftwareSuite      `json:"robotSoftwareSuite"`
 	SimulationSoftwareSuite CreateSimulationApplicationRequestBodySimulationSoftwareSuite `json:"simulationSoftwareSuite"`
-	Sources                 []shared.SourceConfig                                         `json:"sources"`
-	Tags                    map[string]string                                             `json:"tags"`
+	Sources                 []shared.SourceConfig                                         `json:"sources,omitempty"`
+	Tags                    map[string]string                                             `json:"tags,omitempty"`
 }
 
 type CreateSimulationApplicationRequest struct {

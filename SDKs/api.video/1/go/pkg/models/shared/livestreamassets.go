@@ -1,8 +1,8 @@
 package shared
 
 type LiveStreamAssets struct {
-	Hls       *string `json:"hls"`
-	Iframe    *string `json:"iframe"`
-	Player    *string `json:"player"`
-	Thumbnail *string `json:"thumbnail"`
+	Hls       *string `json:"hls,omitempty"`
+	Iframe    *string `json:"iframe,omitempty"`
+	Player    *string `json:"player,omitempty"`
+	Thumbnail *string `json:"thumbnail,omitempty"`
 }

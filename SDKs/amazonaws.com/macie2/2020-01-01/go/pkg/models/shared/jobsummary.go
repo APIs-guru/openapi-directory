@@ -5,13 +5,13 @@ import (
 )
 
 type JobSummary struct {
-	BucketCriteria     *S3BucketCriteriaForJob    `json:"bucketCriteria"`
-	BucketDefinitions  []S3BucketDefinitionForJob `json:"bucketDefinitions"`
-	CreatedAt          *time.Time                 `json:"createdAt"`
-	JobID              *string                    `json:"jobId"`
-	JobStatus          *JobStatusEnum             `json:"jobStatus"`
-	JobType            *JobTypeEnum               `json:"jobType"`
-	LastRunErrorStatus *LastRunErrorStatus        `json:"lastRunErrorStatus"`
-	Name               *string                    `json:"name"`
-	UserPausedDetails  *UserPausedDetails         `json:"userPausedDetails"`
+	BucketCriteria     *S3BucketCriteriaForJob    `json:"bucketCriteria,omitempty"`
+	BucketDefinitions  []S3BucketDefinitionForJob `json:"bucketDefinitions,omitempty"`
+	CreatedAt          *time.Time                 `json:"createdAt,omitempty"`
+	JobID              *string                    `json:"jobId,omitempty"`
+	JobStatus          *JobStatusEnum             `json:"jobStatus,omitempty"`
+	JobType            *JobTypeEnum               `json:"jobType,omitempty"`
+	LastRunErrorStatus *LastRunErrorStatus        `json:"lastRunErrorStatus,omitempty"`
+	Name               *string                    `json:"name,omitempty"`
+	UserPausedDetails  *UserPausedDetails         `json:"userPausedDetails,omitempty"`
 }

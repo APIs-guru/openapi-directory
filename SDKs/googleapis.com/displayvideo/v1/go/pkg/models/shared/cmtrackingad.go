@@ -1,7 +1,7 @@
 package shared
 
 type CmTrackingAd struct {
-	CmAdID        *string `json:"cmAdId"`
-	CmCreativeID  *string `json:"cmCreativeId"`
-	CmPlacementID *string `json:"cmPlacementId"`
+	CmAdID        *string `json:"cmAdId,omitempty"`
+	CmCreativeID  *string `json:"cmCreativeId,omitempty"`
+	CmPlacementID *string `json:"cmPlacementId,omitempty"`
 }

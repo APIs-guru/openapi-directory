@@ -1,5 +1,5 @@
 package shared
 
 type DeleteGeoMatchSetResponse struct {
-	ChangeToken *string `json:"ChangeToken"`
+	ChangeToken *string `json:"ChangeToken,omitempty"`
 }

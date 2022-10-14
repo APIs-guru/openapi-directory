@@ -20,8 +20,8 @@ type DescribeReplicationConfigurationTemplatesHeaders struct {
 }
 
 type DescribeReplicationConfigurationTemplatesRequestBody struct {
-	MaxResults                          *int64   `json:"maxResults"`
-	NextToken                           *string  `json:"nextToken"`
+	MaxResults                          *int64   `json:"maxResults,omitempty"`
+	NextToken                           *string  `json:"nextToken,omitempty"`
 	ReplicationConfigurationTemplateIDs []string `json:"replicationConfigurationTemplateIDs"`
 }
 

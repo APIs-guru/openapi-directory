@@ -5,15 +5,15 @@ type UpdateMockPathParams struct {
 }
 
 type UpdateMockRequestBodyMock struct {
-	Description *string `json:"description"`
-	Environment *string `json:"environment"`
-	Name        *string `json:"name"`
-	Private     *bool   `json:"private"`
-	VersionTag  *string `json:"versionTag"`
+	Description *string `json:"description,omitempty"`
+	Environment *string `json:"environment,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Private     *bool   `json:"private,omitempty"`
+	VersionTag  *string `json:"versionTag,omitempty"`
 }
 
 type UpdateMockRequestBody struct {
-	Mock *UpdateMockRequestBodyMock `json:"mock"`
+	Mock *UpdateMockRequestBodyMock `json:"mock,omitempty"`
 }
 
 type UpdateMockRequest struct {
@@ -22,25 +22,25 @@ type UpdateMockRequest struct {
 }
 
 type UpdateMock200ApplicationJSONMockConfig struct {
-	Headers          []interface{} `json:"headers"`
-	MatchBody        *bool         `json:"matchBody"`
-	MatchQueryParams *bool         `json:"matchQueryParams"`
-	MatchWildcards   *bool         `json:"matchWildcards"`
+	Headers          []interface{} `json:"headers,omitempty"`
+	MatchBody        *bool         `json:"matchBody,omitempty"`
+	MatchQueryParams *bool         `json:"matchQueryParams,omitempty"`
+	MatchWildcards   *bool         `json:"matchWildcards,omitempty"`
 }
 
 type UpdateMock200ApplicationJSONMock struct {
-	Collection  *string                                 `json:"collection"`
-	Config      *UpdateMock200ApplicationJSONMockConfig `json:"config"`
-	Environment *string                                 `json:"environment"`
-	ID          *string                                 `json:"id"`
-	MockURL     *string                                 `json:"mockUrl"`
-	Name        *string                                 `json:"name"`
-	Owner       *string                                 `json:"owner"`
-	UID         *string                                 `json:"uid"`
+	Collection  *string                                 `json:"collection,omitempty"`
+	Config      *UpdateMock200ApplicationJSONMockConfig `json:"config,omitempty"`
+	Environment *string                                 `json:"environment,omitempty"`
+	ID          *string                                 `json:"id,omitempty"`
+	MockURL     *string                                 `json:"mockUrl,omitempty"`
+	Name        *string                                 `json:"name,omitempty"`
+	Owner       *string                                 `json:"owner,omitempty"`
+	UID         *string                                 `json:"uid,omitempty"`
 }
 
 type UpdateMock200ApplicationJSON struct {
-	Mock *UpdateMock200ApplicationJSONMock `json:"mock"`
+	Mock *UpdateMock200ApplicationJSONMock `json:"mock,omitempty"`
 }
 
 type UpdateMockResponse struct {

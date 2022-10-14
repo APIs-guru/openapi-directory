@@ -1,9 +1,9 @@
 package shared
 
 type GetNamespaceDeletionStatusResponse struct {
-	ErrorCode     *NamespaceDeletionStatusErrorCodesEnum `json:"errorCode"`
-	ErrorMessage  *string                                `json:"errorMessage"`
-	NamespaceArn  *string                                `json:"namespaceArn"`
-	NamespaceName *string                                `json:"namespaceName"`
-	Status        *NamespaceDeletionStatusEnum           `json:"status"`
+	ErrorCode     *NamespaceDeletionStatusErrorCodesEnum `json:"errorCode,omitempty"`
+	ErrorMessage  *string                                `json:"errorMessage,omitempty"`
+	NamespaceArn  *string                                `json:"namespaceArn,omitempty"`
+	NamespaceName *string                                `json:"namespaceName,omitempty"`
+	Status        *NamespaceDeletionStatusEnum           `json:"status,omitempty"`
 }

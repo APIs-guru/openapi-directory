@@ -11,6 +11,6 @@ const (
 )
 
 type ArtistForArtistForAPIContract struct {
-	Artist   *ArtistContract                            `json:"artist"`
-	LinkType *ArtistForArtistForAPIContractLinkTypeEnum `json:"linkType"`
+	Artist   *ArtistContract                            `json:"artist,omitempty"`
+	LinkType *ArtistForArtistForAPIContractLinkTypeEnum `json:"linkType,omitempty"`
 }

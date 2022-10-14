@@ -1,8 +1,8 @@
 package shared
 
 type ShippingStep struct {
-	ShipTo              *ExtendedContact `json:"shipTo"`
-	ShipToReferenceID   *string          `json:"shipToReferenceId"`
-	ShippingCarrierCode *string          `json:"shippingCarrierCode"`
-	ShippingServiceCode *string          `json:"shippingServiceCode"`
+	ShipTo              *ExtendedContact `json:"shipTo,omitempty"`
+	ShipToReferenceID   *string          `json:"shipToReferenceId,omitempty"`
+	ShippingCarrierCode *string          `json:"shippingCarrierCode,omitempty"`
+	ShippingServiceCode *string          `json:"shippingServiceCode,omitempty"`
 }

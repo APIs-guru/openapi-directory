@@ -26,7 +26,7 @@ const (
 )
 
 type Line struct {
-	LineCategory   *LineLineCategoryEnum `json:"lineCategory"`
-	LineProperties *LineProperties       `json:"lineProperties"`
-	LineType       *LineLineTypeEnum     `json:"lineType"`
+	LineCategory   *LineLineCategoryEnum `json:"lineCategory,omitempty"`
+	LineProperties *LineProperties       `json:"lineProperties,omitempty"`
+	LineType       *LineLineTypeEnum     `json:"lineType,omitempty"`
 }

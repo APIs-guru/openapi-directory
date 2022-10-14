@@ -1,7 +1,7 @@
 package shared
 
 type ExecutionStatus struct {
-	FailureReason *string                         `json:"FailureReason"`
-	Status        *AnomalyDetectionTaskStatusEnum `json:"Status"`
-	Timestamp     *string                         `json:"Timestamp"`
+	FailureReason *string                         `json:"FailureReason,omitempty"`
+	Status        *AnomalyDetectionTaskStatusEnum `json:"Status,omitempty"`
+	Timestamp     *string                         `json:"Timestamp,omitempty"`
 }

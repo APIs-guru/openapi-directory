@@ -5,6 +5,6 @@ import (
 )
 
 type AssociatedClientDevice struct {
-	AssociationTimestamp *time.Time `json:"associationTimestamp"`
-	ThingName            *string    `json:"thingName"`
+	AssociationTimestamp *time.Time `json:"associationTimestamp,omitempty"`
+	ThingName            *string    `json:"thingName,omitempty"`
 }

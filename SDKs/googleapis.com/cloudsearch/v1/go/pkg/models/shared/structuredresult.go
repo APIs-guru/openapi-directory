@@ -1,5 +1,5 @@
 package shared
 
 type StructuredResult struct {
-	Person *Person `json:"person"`
+	Person *Person `json:"person,omitempty"`
 }

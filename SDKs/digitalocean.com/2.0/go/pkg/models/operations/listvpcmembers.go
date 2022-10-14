@@ -20,23 +20,23 @@ type ListVpcMembersRequest struct {
 }
 
 type ListVpcMembers200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListVpcMembers200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListVpcMembers200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListVpcMembers200ApplicationJSONMembers struct {
-	CreatedAt *string `json:"created_at"`
-	Name      *string `json:"name"`
-	Urn       *string `json:"urn"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Urn       *string `json:"urn,omitempty"`
 }
 
 type ListVpcMembers200ApplicationJSONMeta struct {
@@ -44,15 +44,15 @@ type ListVpcMembers200ApplicationJSONMeta struct {
 }
 
 type ListVpcMembers200ApplicationJSON struct {
-	Links   *ListVpcMembers200ApplicationJSONLinks    `json:"links"`
-	Members []ListVpcMembers200ApplicationJSONMembers `json:"members"`
+	Links   *ListVpcMembers200ApplicationJSONLinks    `json:"links,omitempty"`
+	Members []ListVpcMembers200ApplicationJSONMembers `json:"members,omitempty"`
 	Meta    ListVpcMembers200ApplicationJSONMeta      `json:"meta"`
 }
 
 type ListVpcMembers401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListVpcMembersResponse struct {

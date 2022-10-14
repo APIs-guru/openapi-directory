@@ -9,6 +9,6 @@ const (
 )
 
 type Namespace struct {
-	NamespaceName     *string                         `json:"namespaceName"`
-	ServingVisibility *NamespaceServingVisibilityEnum `json:"servingVisibility"`
+	NamespaceName     *string                         `json:"namespaceName,omitempty"`
+	ServingVisibility *NamespaceServingVisibilityEnum `json:"servingVisibility,omitempty"`
 }

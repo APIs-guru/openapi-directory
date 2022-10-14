@@ -11,11 +11,11 @@ const (
 )
 
 type MetadataImport struct {
-	CreateTime   *string                  `json:"createTime"`
-	DatabaseDump *DatabaseDump            `json:"databaseDump"`
-	Description  *string                  `json:"description"`
-	EndTime      *string                  `json:"endTime"`
-	Name         *string                  `json:"name"`
-	State        *MetadataImportStateEnum `json:"state"`
-	UpdateTime   *string                  `json:"updateTime"`
+	CreateTime   *string                  `json:"createTime,omitempty"`
+	DatabaseDump *DatabaseDump            `json:"databaseDump,omitempty"`
+	Description  *string                  `json:"description,omitempty"`
+	EndTime      *string                  `json:"endTime,omitempty"`
+	Name         *string                  `json:"name,omitempty"`
+	State        *MetadataImportStateEnum `json:"state,omitempty"`
+	UpdateTime   *string                  `json:"updateTime,omitempty"`
 }

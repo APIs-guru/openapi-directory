@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDatacatalogV1FieldTypeEnumTypeEnumValue struct {
-	DisplayName *string `json:"displayName"`
+	DisplayName *string `json:"displayName,omitempty"`
 }

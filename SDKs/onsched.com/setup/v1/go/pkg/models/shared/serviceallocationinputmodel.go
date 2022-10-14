@@ -5,14 +5,14 @@ import (
 )
 
 type ServiceAllocationInputModel struct {
-	AllDay       *bool      `json:"allDay"`
-	BookingLimit *int32     `json:"bookingLimit"`
-	EndDate      *time.Time `json:"endDate"`
-	EndTime      *int32     `json:"endTime"`
-	LocationID   *string    `json:"locationId"`
-	Reason       *string    `json:"reason"`
-	Repeats      *bool      `json:"repeats"`
-	ResourceID   *string    `json:"resourceId"`
-	StartDate    *time.Time `json:"startDate"`
-	StartTime    *int32     `json:"startTime"`
+	AllDay       *bool      `json:"allDay,omitempty"`
+	BookingLimit *int32     `json:"bookingLimit,omitempty"`
+	EndDate      *time.Time `json:"endDate,omitempty"`
+	EndTime      *int32     `json:"endTime,omitempty"`
+	LocationID   *string    `json:"locationId,omitempty"`
+	Reason       *string    `json:"reason,omitempty"`
+	Repeats      *bool      `json:"repeats,omitempty"`
+	ResourceID   *string    `json:"resourceId,omitempty"`
+	StartDate    *time.Time `json:"startDate,omitempty"`
+	StartTime    *int32     `json:"startTime,omitempty"`
 }

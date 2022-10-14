@@ -1,7 +1,7 @@
 package shared
 
 type Subscription struct {
-	DeliveryConfig *DeliveryConfig `json:"deliveryConfig"`
-	Name           *string         `json:"name"`
-	Topic          *string         `json:"topic"`
+	DeliveryConfig *DeliveryConfig `json:"deliveryConfig,omitempty"`
+	Name           *string         `json:"name,omitempty"`
+	Topic          *string         `json:"topic,omitempty"`
 }

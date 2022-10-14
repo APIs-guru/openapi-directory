@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudOrgpolicyV2PolicySpecPolicyRuleStringValues struct {
-	AllowedValues []string `json:"allowedValues"`
-	DeniedValues  []string `json:"deniedValues"`
+	AllowedValues []string `json:"allowedValues,omitempty"`
+	DeniedValues  []string `json:"deniedValues,omitempty"`
 }

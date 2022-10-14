@@ -14,7 +14,7 @@ type CreateSectionForProjectQueryParams struct {
 }
 
 type CreateSectionForProjectRequestBody struct {
-	Data *shared.SectionRequest `json:"data"`
+	Data *shared.SectionRequest `json:"data,omitempty"`
 }
 
 type CreateSectionForProjectRequest struct {
@@ -24,7 +24,7 @@ type CreateSectionForProjectRequest struct {
 }
 
 type CreateSectionForProject201ApplicationJSON struct {
-	Data *shared.SectionResponse `json:"data"`
+	Data *shared.SectionResponse `json:"data,omitempty"`
 }
 
 type CreateSectionForProjectResponse struct {

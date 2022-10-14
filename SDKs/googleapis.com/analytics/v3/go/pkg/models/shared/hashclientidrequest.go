@@ -1,7 +1,7 @@
 package shared
 
 type HashClientIDRequest struct {
-	ClientID      *string `json:"clientId"`
-	Kind          *string `json:"kind"`
-	WebPropertyID *string `json:"webPropertyId"`
+	ClientID      *string `json:"clientId,omitempty"`
+	Kind          *string `json:"kind,omitempty"`
+	WebPropertyID *string `json:"webPropertyId,omitempty"`
 }

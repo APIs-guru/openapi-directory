@@ -1,7 +1,7 @@
 package shared
 
 type ListTenantsResponse struct {
-	Metadata      *ResponseMetadata `json:"metadata"`
-	NextPageToken *string           `json:"nextPageToken"`
-	Tenants       []Tenant          `json:"tenants"`
+	Metadata      *ResponseMetadata `json:"metadata,omitempty"`
+	NextPageToken *string           `json:"nextPageToken,omitempty"`
+	Tenants       []Tenant          `json:"tenants,omitempty"`
 }

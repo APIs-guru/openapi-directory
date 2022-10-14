@@ -1,7 +1,7 @@
 package shared
 
 type TimerScript struct {
-	Arg      *string `json:"arg"`
-	Interval *int32  `json:"interval"`
-	Script   *string `json:"script"`
+	Arg      *string `json:"arg,omitempty"`
+	Interval *int32  `json:"interval,omitempty"`
+	Script   *string `json:"script,omitempty"`
 }

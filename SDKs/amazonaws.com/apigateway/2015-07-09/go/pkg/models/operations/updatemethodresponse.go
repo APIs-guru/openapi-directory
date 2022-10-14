@@ -22,7 +22,7 @@ type UpdateMethodResponseHeaders struct {
 }
 
 type UpdateMethodResponseRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateMethodResponseRequest struct {

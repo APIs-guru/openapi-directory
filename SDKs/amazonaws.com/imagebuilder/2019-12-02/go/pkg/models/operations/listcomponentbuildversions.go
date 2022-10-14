@@ -21,8 +21,8 @@ type ListComponentBuildVersionsHeaders struct {
 
 type ListComponentBuildVersionsRequestBody struct {
 	ComponentVersionArn string  `json:"componentVersionArn"`
-	MaxResults          *int64  `json:"maxResults"`
-	NextToken           *string `json:"nextToken"`
+	MaxResults          *int64  `json:"maxResults,omitempty"`
+	NextToken           *string `json:"nextToken,omitempty"`
 }
 
 type ListComponentBuildVersionsRequest struct {

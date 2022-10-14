@@ -18,10 +18,10 @@ const (
 )
 
 type UserCipherUseEntity struct {
-	CreatedAt      *time.Time                        `json:"created_at"`
-	ID             *int32                            `json:"id"`
-	Interface      *UserCipherUseEntityInterfaceEnum `json:"interface"`
-	ProtocolCipher *string                           `json:"protocol_cipher"`
-	UpdatedAt      *time.Time                        `json:"updated_at"`
-	UserID         *int32                            `json:"user_id"`
+	CreatedAt      *time.Time                        `json:"created_at,omitempty"`
+	ID             *int32                            `json:"id,omitempty"`
+	Interface      *UserCipherUseEntityInterfaceEnum `json:"interface,omitempty"`
+	ProtocolCipher *string                           `json:"protocol_cipher,omitempty"`
+	UpdatedAt      *time.Time                        `json:"updated_at,omitempty"`
+	UserID         *int32                            `json:"user_id,omitempty"`
 }

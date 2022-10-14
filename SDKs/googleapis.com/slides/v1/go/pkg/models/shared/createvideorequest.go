@@ -9,8 +9,8 @@ const (
 )
 
 type CreateVideoRequest struct {
-	ElementProperties *PageElementProperties        `json:"elementProperties"`
-	ID                *string                       `json:"id"`
-	ObjectID          *string                       `json:"objectId"`
-	Source            *CreateVideoRequestSourceEnum `json:"source"`
+	ElementProperties *PageElementProperties        `json:"elementProperties,omitempty"`
+	ID                *string                       `json:"id,omitempty"`
+	ObjectID          *string                       `json:"objectId,omitempty"`
+	Source            *CreateVideoRequestSourceEnum `json:"source,omitempty"`
 }

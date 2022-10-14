@@ -9,9 +9,9 @@ const (
 )
 
 type CaPool struct {
-	IssuancePolicy    *IssuancePolicy    `json:"issuancePolicy"`
-	Labels            map[string]string  `json:"labels"`
-	Name              *string            `json:"name"`
-	PublishingOptions *PublishingOptions `json:"publishingOptions"`
-	Tier              *CaPoolTierEnum    `json:"tier"`
+	IssuancePolicy    *IssuancePolicy    `json:"issuancePolicy,omitempty"`
+	Labels            map[string]string  `json:"labels,omitempty"`
+	Name              *string            `json:"name,omitempty"`
+	PublishingOptions *PublishingOptions `json:"publishingOptions,omitempty"`
+	Tier              *CaPoolTierEnum    `json:"tier,omitempty"`
 }

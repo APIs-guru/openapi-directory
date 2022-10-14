@@ -1,6 +1,6 @@
 package shared
 
 type LiasettingsListPosDataProvidersResponse struct {
-	Kind             *string            `json:"kind"`
-	PosDataProviders []PosDataProviders `json:"posDataProviders"`
+	Kind             *string            `json:"kind,omitempty"`
+	PosDataProviders []PosDataProviders `json:"posDataProviders,omitempty"`
 }

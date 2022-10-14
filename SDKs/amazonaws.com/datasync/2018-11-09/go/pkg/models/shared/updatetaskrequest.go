@@ -1,11 +1,11 @@
 package shared
 
 type UpdateTaskRequest struct {
-	CloudWatchLogGroupArn *string       `json:"CloudWatchLogGroupArn"`
-	Excludes              []FilterRule  `json:"Excludes"`
-	Includes              []FilterRule  `json:"Includes"`
-	Name                  *string       `json:"Name"`
-	Options               *Options      `json:"Options"`
-	Schedule              *TaskSchedule `json:"Schedule"`
+	CloudWatchLogGroupArn *string       `json:"CloudWatchLogGroupArn,omitempty"`
+	Excludes              []FilterRule  `json:"Excludes,omitempty"`
+	Includes              []FilterRule  `json:"Includes,omitempty"`
+	Name                  *string       `json:"Name,omitempty"`
+	Options               *Options      `json:"Options,omitempty"`
+	Schedule              *TaskSchedule `json:"Schedule,omitempty"`
 	TaskArn               string        `json:"TaskArn"`
 }

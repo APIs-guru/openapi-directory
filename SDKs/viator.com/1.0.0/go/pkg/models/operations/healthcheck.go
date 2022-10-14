@@ -9,11 +9,11 @@ type HealthCheckRequest struct {
 }
 
 type HealthCheck200ApplicationJSON struct {
-	AllGood     *bool   `json:"allGood"`
-	CapiOk      *bool   `json:"capiOk"`
-	DbOk        *bool   `json:"dbOk"`
-	MemcachedOk *bool   `json:"memcachedOk"`
-	Message     *string `json:"message"`
+	AllGood     *bool   `json:"allGood,omitempty"`
+	CapiOk      *bool   `json:"capiOk,omitempty"`
+	DbOk        *bool   `json:"dbOk,omitempty"`
+	MemcachedOk *bool   `json:"memcachedOk,omitempty"`
+	Message     *string `json:"message,omitempty"`
 }
 
 type HealthCheckResponse struct {

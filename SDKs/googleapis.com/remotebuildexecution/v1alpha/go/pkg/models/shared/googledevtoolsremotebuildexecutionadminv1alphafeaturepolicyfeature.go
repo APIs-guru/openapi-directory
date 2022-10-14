@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature struct {
-	AllowedValues []string                                                                      `json:"allowedValues"`
-	Policy        *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicyEnum `json:"policy"`
+	AllowedValues []string                                                                      `json:"allowedValues,omitempty"`
+	Policy        *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicyEnum `json:"policy,omitempty"`
 }

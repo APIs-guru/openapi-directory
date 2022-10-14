@@ -9,11 +9,11 @@ type DeleteWorkspaceRequest struct {
 }
 
 type DeleteWorkspace200ApplicationJSONResponse struct {
-	Success *bool `json:"success"`
+	Success *bool `json:"success,omitempty"`
 }
 
 type DeleteWorkspace200ApplicationJSON struct {
-	Response *DeleteWorkspace200ApplicationJSONResponse `json:"response"`
+	Response *DeleteWorkspace200ApplicationJSONResponse `json:"response,omitempty"`
 }
 
 type DeleteWorkspace401ApplicationJSONErrorEnum string
@@ -32,8 +32,8 @@ const (
 )
 
 type DeleteWorkspace401ApplicationJSON struct {
-	Error  *DeleteWorkspace401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                      `json:"status"`
+	Error  *DeleteWorkspace401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                      `json:"status,omitempty"`
 }
 
 type DeleteWorkspace403ApplicationJSONErrorEnum string
@@ -43,8 +43,8 @@ const (
 )
 
 type DeleteWorkspace403ApplicationJSON struct {
-	Error  *DeleteWorkspace403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                      `json:"status"`
+	Error  *DeleteWorkspace403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                      `json:"status,omitempty"`
 }
 
 type DeleteWorkspace404ApplicationJSONErrorEnum string
@@ -56,8 +56,8 @@ const (
 )
 
 type DeleteWorkspace404ApplicationJSON struct {
-	Error  *DeleteWorkspace404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                      `json:"status"`
+	Error  *DeleteWorkspace404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                      `json:"status,omitempty"`
 }
 
 type DeleteWorkspace422ApplicationJSONErrorEnum string
@@ -70,13 +70,13 @@ const (
 )
 
 type DeleteWorkspace422ApplicationJSON struct {
-	Error  *DeleteWorkspace422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                      `json:"status"`
+	Error  *DeleteWorkspace422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                      `json:"status,omitempty"`
 }
 
 type DeleteWorkspace500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type DeleteWorkspaceResponse struct {

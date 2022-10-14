@@ -5,9 +5,9 @@ import (
 )
 
 type GroupNotice struct {
-	Content  *string    `json:"content"`
-	Date     *time.Time `json:"date"`
-	GroupID  *string    `json:"group_id"`
-	NoticeID *string    `json:"notice_id"`
-	Title    *string    `json:"title"`
+	Content  *string    `json:"content,omitempty"`
+	Date     *time.Time `json:"date,omitempty"`
+	GroupID  *string    `json:"group_id,omitempty"`
+	NoticeID *string    `json:"notice_id,omitempty"`
+	Title    *string    `json:"title,omitempty"`
 }

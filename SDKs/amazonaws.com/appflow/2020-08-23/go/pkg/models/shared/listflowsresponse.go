@@ -1,6 +1,6 @@
 package shared
 
 type ListFlowsResponse struct {
-	Flows     []FlowDefinition `json:"flows"`
-	NextToken *string          `json:"nextToken"`
+	Flows     []FlowDefinition `json:"flows,omitempty"`
+	NextToken *string          `json:"nextToken,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type SearchCodeSearchResult struct {
-	ContentMatchCount *int64                 `json:"content_match_count"`
-	ContentMatches    []SearchContentMatch   `json:"content_matches"`
-	File              map[string]interface{} `json:"file"`
-	PathMatches       []SearchSegment        `json:"path_matches"`
-	Type              *string                `json:"type"`
+	ContentMatchCount *int64                 `json:"content_match_count,omitempty"`
+	ContentMatches    []SearchContentMatch   `json:"content_matches,omitempty"`
+	File              map[string]interface{} `json:"file,omitempty"`
+	PathMatches       []SearchSegment        `json:"path_matches,omitempty"`
+	Type              *string                `json:"type,omitempty"`
 }

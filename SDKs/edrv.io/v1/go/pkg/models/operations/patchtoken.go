@@ -14,11 +14,11 @@ const (
 )
 
 type PatchTokenRequestBody struct {
-	Active     *bool                             `json:"active"`
-	Channel    *PatchTokenRequestBodyChannelEnum `json:"channel"`
-	Driver     *string                           `json:"driver"`
-	PhysicalID *string                           `json:"physicalId"`
-	Type       *string                           `json:"type"`
+	Active     *bool                             `json:"active,omitempty"`
+	Channel    *PatchTokenRequestBodyChannelEnum `json:"channel,omitempty"`
+	Driver     *string                           `json:"driver,omitempty"`
+	PhysicalID *string                           `json:"physicalId,omitempty"`
+	Type       *string                           `json:"type,omitempty"`
 }
 
 type PatchTokenRequest struct {
@@ -27,9 +27,9 @@ type PatchTokenRequest struct {
 }
 
 type PatchToken201ApplicationJSON struct {
-	Message *string       `json:"message"`
-	Ok      *bool         `json:"ok"`
-	Result  []interface{} `json:"result"`
+	Message *string       `json:"message,omitempty"`
+	Ok      *bool         `json:"ok,omitempty"`
+	Result  []interface{} `json:"result,omitempty"`
 }
 
 type PatchTokenResponse struct {

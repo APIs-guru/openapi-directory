@@ -1,6 +1,6 @@
 package shared
 
 type Refinement struct {
-	AspectDistributions []AspectDistribution `json:"aspectDistributions"`
-	DominantCategoryID  *string              `json:"dominantCategoryId"`
+	AspectDistributions []AspectDistribution `json:"aspectDistributions,omitempty"`
+	DominantCategoryID  *string              `json:"dominantCategoryId,omitempty"`
 }

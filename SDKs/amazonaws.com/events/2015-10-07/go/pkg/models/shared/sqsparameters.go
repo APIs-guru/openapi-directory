@@ -1,5 +1,5 @@
 package shared
 
 type SqsParameters struct {
-	MessageGroupID *string `json:"MessageGroupId"`
+	MessageGroupID *string `json:"MessageGroupId,omitempty"`
 }

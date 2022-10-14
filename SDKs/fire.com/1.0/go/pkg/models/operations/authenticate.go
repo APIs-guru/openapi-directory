@@ -11,11 +11,11 @@ const (
 )
 
 type AuthenticateRequestBodyAuthentication struct {
-	ClientID     *string                               `json:"clientId"`
-	ClientSecret *string                               `json:"clientSecret"`
-	GrantType    *AuthenticateRequestBodyGrantTypeEnum `json:"grantType"`
-	Nonce        *int64                                `json:"nonce"`
-	RefreshToken *string                               `json:"refreshToken"`
+	ClientID     *string                               `json:"clientId,omitempty"`
+	ClientSecret *string                               `json:"clientSecret,omitempty"`
+	GrantType    *AuthenticateRequestBodyGrantTypeEnum `json:"grantType,omitempty"`
+	Nonce        *int64                                `json:"nonce,omitempty"`
+	RefreshToken *string                               `json:"refreshToken,omitempty"`
 }
 
 type AuthenticateRequest struct {
@@ -23,11 +23,11 @@ type AuthenticateRequest struct {
 }
 
 type Authenticate200ApplicationJSONAccessToken struct {
-	AccessToken      *string    `json:"accessToken"`
-	APIApplicationID *int64     `json:"apiApplicationId"`
-	BusinessID       *int64     `json:"businessId"`
-	Expiry           *time.Time `json:"expiry"`
-	Permissions      []string   `json:"permissions"`
+	AccessToken      *string    `json:"accessToken,omitempty"`
+	APIApplicationID *int64     `json:"apiApplicationId,omitempty"`
+	BusinessID       *int64     `json:"businessId,omitempty"`
+	Expiry           *time.Time `json:"expiry,omitempty"`
+	Permissions      []string   `json:"permissions,omitempty"`
 }
 
 type AuthenticateResponse struct {

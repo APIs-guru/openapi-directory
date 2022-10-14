@@ -5,12 +5,12 @@ import (
 )
 
 type DescribeFleetMetadataResponse struct {
-	CompanyCode                *string           `json:"CompanyCode"`
-	CreatedTime                *time.Time        `json:"CreatedTime"`
-	DisplayName                *string           `json:"DisplayName"`
-	FleetName                  *string           `json:"FleetName"`
-	FleetStatus                *FleetStatusEnum  `json:"FleetStatus"`
-	LastUpdatedTime            *time.Time        `json:"LastUpdatedTime"`
-	OptimizeForEndUserLocation *bool             `json:"OptimizeForEndUserLocation"`
-	Tags                       map[string]string `json:"Tags"`
+	CompanyCode                *string           `json:"CompanyCode,omitempty"`
+	CreatedTime                *time.Time        `json:"CreatedTime,omitempty"`
+	DisplayName                *string           `json:"DisplayName,omitempty"`
+	FleetName                  *string           `json:"FleetName,omitempty"`
+	FleetStatus                *FleetStatusEnum  `json:"FleetStatus,omitempty"`
+	LastUpdatedTime            *time.Time        `json:"LastUpdatedTime,omitempty"`
+	OptimizeForEndUserLocation *bool             `json:"OptimizeForEndUserLocation,omitempty"`
+	Tags                       map[string]string `json:"Tags,omitempty"`
 }

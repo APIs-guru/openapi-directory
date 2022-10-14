@@ -21,8 +21,8 @@ const (
 )
 
 type PancrRequestBody struct {
-	CertificateParameters *PancrRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *PancrRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                PancrRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -58,8 +58,8 @@ const (
 )
 
 type Pancr400ApplicationJSON struct {
-	Error            *Pancr400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pancr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pancr400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pancr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pancr401ApplicationJSONErrorEnum string
@@ -77,8 +77,8 @@ const (
 )
 
 type Pancr401ApplicationJSON struct {
-	Error            *Pancr401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pancr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pancr401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pancr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pancr404ApplicationJSONErrorEnum string
@@ -96,8 +96,8 @@ const (
 )
 
 type Pancr404ApplicationJSON struct {
-	Error            *Pancr404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pancr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pancr404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pancr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pancr500ApplicationJSONErrorEnum string
@@ -113,8 +113,8 @@ const (
 )
 
 type Pancr500ApplicationJSON struct {
-	Error            *Pancr500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pancr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pancr500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pancr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pancr502ApplicationJSONErrorEnum string
@@ -130,8 +130,8 @@ const (
 )
 
 type Pancr502ApplicationJSON struct {
-	Error            *Pancr502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pancr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pancr502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pancr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pancr503ApplicationJSONErrorEnum string
@@ -147,8 +147,8 @@ const (
 )
 
 type Pancr503ApplicationJSON struct {
-	Error            *Pancr503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pancr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pancr503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pancr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pancr504ApplicationJSONErrorEnum string
@@ -164,8 +164,8 @@ const (
 )
 
 type Pancr504ApplicationJSON struct {
-	Error            *Pancr504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pancr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pancr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pancr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type PancrResponse struct {

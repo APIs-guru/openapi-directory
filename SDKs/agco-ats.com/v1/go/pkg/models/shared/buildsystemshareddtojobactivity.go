@@ -1,9 +1,9 @@
 package shared
 
 type BuildSystemSharedDtoJobActivity struct {
-	ActivityID        *int32                                 `json:"ActivityID"`
-	JobActivityID     *int32                                 `json:"JobActivityID"`
-	JobID             *int32                                 `json:"JobID"`
-	ParameterMappings []BuildSystemSharedDtoParameterMapping `json:"ParameterMappings"`
-	RunOrder          *int32                                 `json:"RunOrder"`
+	ActivityID        *int32                                 `json:"ActivityID,omitempty"`
+	JobActivityID     *int32                                 `json:"JobActivityID,omitempty"`
+	JobID             *int32                                 `json:"JobID,omitempty"`
+	ParameterMappings []BuildSystemSharedDtoParameterMapping `json:"ParameterMappings,omitempty"`
+	RunOrder          *int32                                 `json:"RunOrder,omitempty"`
 }

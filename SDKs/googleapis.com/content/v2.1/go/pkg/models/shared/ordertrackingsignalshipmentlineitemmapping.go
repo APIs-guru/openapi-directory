@@ -1,7 +1,7 @@
 package shared
 
 type OrderTrackingSignalShipmentLineItemMapping struct {
-	LineItemID *string `json:"lineItemId"`
-	Quantity   *string `json:"quantity"`
-	ShipmentID *string `json:"shipmentId"`
+	LineItemID *string `json:"lineItemId,omitempty"`
+	Quantity   *string `json:"quantity,omitempty"`
+	ShipmentID *string `json:"shipmentId,omitempty"`
 }

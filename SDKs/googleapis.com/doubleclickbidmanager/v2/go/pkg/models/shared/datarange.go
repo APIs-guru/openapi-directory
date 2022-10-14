@@ -25,7 +25,7 @@ const (
 )
 
 type DataRange struct {
-	CustomEndDate   *Date               `json:"customEndDate"`
-	CustomStartDate *Date               `json:"customStartDate"`
-	Range           *DataRangeRangeEnum `json:"range"`
+	CustomEndDate   *Date               `json:"customEndDate,omitempty"`
+	CustomStartDate *Date               `json:"customStartDate,omitempty"`
+	Range           *DataRangeRangeEnum `json:"range,omitempty"`
 }

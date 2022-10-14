@@ -9,7 +9,7 @@ type CreateLkeClusterRequestBody struct {
 	Label      string                          `json:"label"`
 	NodePools  []shared.LkeNodePoolRequestBody `json:"node_pools"`
 	Region     string                          `json:"region"`
-	Tags       []string                        `json:"tags"`
+	Tags       []string                        `json:"tags,omitempty"`
 }
 
 type CreateLkeClusterSecurityOption1 struct {
@@ -31,7 +31,7 @@ type CreateLkeClusterRequest struct {
 }
 
 type CreateLkeClusterDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateLkeClusterResponse struct {

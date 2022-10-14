@@ -8,7 +8,7 @@ const (
 )
 
 type WatchRequest struct {
-	LabelFilterAction *WatchRequestLabelFilterActionEnum `json:"labelFilterAction"`
-	LabelIds          []string                           `json:"labelIds"`
-	TopicName         *string                            `json:"topicName"`
+	LabelFilterAction *WatchRequestLabelFilterActionEnum `json:"labelFilterAction,omitempty"`
+	LabelIds          []string                           `json:"labelIds,omitempty"`
+	TopicName         *string                            `json:"topicName,omitempty"`
 }

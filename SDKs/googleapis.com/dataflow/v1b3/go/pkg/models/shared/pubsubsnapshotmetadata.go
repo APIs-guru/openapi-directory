@@ -1,7 +1,7 @@
 package shared
 
 type PubsubSnapshotMetadata struct {
-	ExpireTime   *string `json:"expireTime"`
-	SnapshotName *string `json:"snapshotName"`
-	TopicName    *string `json:"topicName"`
+	ExpireTime   *string `json:"expireTime,omitempty"`
+	SnapshotName *string `json:"snapshotName,omitempty"`
+	TopicName    *string `json:"topicName,omitempty"`
 }

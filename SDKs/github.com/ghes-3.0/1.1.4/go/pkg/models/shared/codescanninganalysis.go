@@ -6,7 +6,7 @@ import (
 
 type CodeScanningAnalysis struct {
 	AnalysisKey  string                   `json:"analysis_key"`
-	Category     *string                  `json:"category"`
+	Category     *string                  `json:"category,omitempty"`
 	CommitSha    string                   `json:"commit_sha"`
 	CreatedAt    time.Time                `json:"created_at"`
 	Deletable    bool                     `json:"deletable"`

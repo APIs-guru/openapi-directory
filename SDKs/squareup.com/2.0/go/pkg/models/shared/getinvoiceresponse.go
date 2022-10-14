@@ -1,6 +1,6 @@
 package shared
 
 type GetInvoiceResponse struct {
-	Errors  []Error  `json:"errors"`
-	Invoice *Invoice `json:"invoice"`
+	Errors  []Error  `json:"errors,omitempty"`
+	Invoice *Invoice `json:"invoice,omitempty"`
 }

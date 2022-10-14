@@ -12,6 +12,6 @@ const (
 )
 
 type NumericFilter struct {
-	Operation *NumericFilterOperationEnum `json:"operation"`
-	Value     *NumericValue               `json:"value"`
+	Operation *NumericFilterOperationEnum `json:"operation,omitempty"`
+	Value     *NumericValue               `json:"value,omitempty"`
 }

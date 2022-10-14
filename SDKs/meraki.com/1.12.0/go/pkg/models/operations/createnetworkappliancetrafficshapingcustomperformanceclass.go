@@ -5,9 +5,9 @@ type CreateNetworkApplianceTrafficShapingCustomPerformanceClassPathParams struct
 }
 
 type CreateNetworkApplianceTrafficShapingCustomPerformanceClassRequestBody struct {
-	MaxJitter         *int64 `json:"maxJitter"`
-	MaxLatency        *int64 `json:"maxLatency"`
-	MaxLossPercentage *int64 `json:"maxLossPercentage"`
+	MaxJitter         *int64 `json:"maxJitter,omitempty"`
+	MaxLatency        *int64 `json:"maxLatency,omitempty"`
+	MaxLossPercentage *int64 `json:"maxLossPercentage,omitempty"`
 	Name              string `json:"name"`
 }
 

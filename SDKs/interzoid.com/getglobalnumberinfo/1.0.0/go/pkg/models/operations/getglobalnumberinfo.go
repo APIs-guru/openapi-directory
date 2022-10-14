@@ -10,16 +10,16 @@ type GetglobalnumberinfoRequest struct {
 }
 
 type Getglobalnumberinfo200ApplicationJSON struct {
-	Code            *string `json:"Code"`
-	Country         *string `json:"Country"`
-	Credits         *string `json:"Credits"`
-	Language2       *string `json:"Language2"`
-	Language3       *string `json:"Language3"`
-	Mobile          *string `json:"Mobile"`
-	PrimaryCity     *string `json:"PrimaryCity"`
-	PrimaryLanguage *string `json:"PrimaryLanguage"`
-	Region          *string `json:"Region"`
-	Wealth          *string `json:"Wealth"`
+	Code            *string `json:"Code,omitempty"`
+	Country         *string `json:"Country,omitempty"`
+	Credits         *string `json:"Credits,omitempty"`
+	Language2       *string `json:"Language2,omitempty"`
+	Language3       *string `json:"Language3,omitempty"`
+	Mobile          *string `json:"Mobile,omitempty"`
+	PrimaryCity     *string `json:"PrimaryCity,omitempty"`
+	PrimaryLanguage *string `json:"PrimaryLanguage,omitempty"`
+	Region          *string `json:"Region,omitempty"`
+	Wealth          *string `json:"Wealth,omitempty"`
 }
 
 type GetglobalnumberinfoResponse struct {

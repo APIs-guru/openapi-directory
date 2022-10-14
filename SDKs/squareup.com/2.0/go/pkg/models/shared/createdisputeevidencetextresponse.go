@@ -1,6 +1,6 @@
 package shared
 
 type CreateDisputeEvidenceTextResponse struct {
-	Errors   []Error          `json:"errors"`
-	Evidence *DisputeEvidence `json:"evidence"`
+	Errors   []Error          `json:"errors,omitempty"`
+	Evidence *DisputeEvidence `json:"evidence,omitempty"`
 }

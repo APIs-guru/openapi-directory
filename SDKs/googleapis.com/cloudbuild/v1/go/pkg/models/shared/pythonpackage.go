@@ -1,6 +1,6 @@
 package shared
 
 type PythonPackage struct {
-	Paths      []string `json:"paths"`
-	Repository *string  `json:"repository"`
+	Paths      []string `json:"paths,omitempty"`
+	Repository *string  `json:"repository,omitempty"`
 }

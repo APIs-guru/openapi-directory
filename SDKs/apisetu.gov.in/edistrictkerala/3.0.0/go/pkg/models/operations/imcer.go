@@ -17,8 +17,8 @@ const (
 )
 
 type ImcerRequestBody struct {
-	CertificateParameters *ImcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *ImcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                ImcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Imcer400ApplicationJSON struct {
-	Error            *Imcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Imcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Imcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Imcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Imcer401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Imcer401ApplicationJSON struct {
-	Error            *Imcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Imcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Imcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Imcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Imcer404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Imcer404ApplicationJSON struct {
-	Error            *Imcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Imcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Imcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Imcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Imcer500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Imcer500ApplicationJSON struct {
-	Error            *Imcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Imcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Imcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Imcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Imcer502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Imcer502ApplicationJSON struct {
-	Error            *Imcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Imcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Imcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Imcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Imcer503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Imcer503ApplicationJSON struct {
-	Error            *Imcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Imcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Imcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Imcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Imcer504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Imcer504ApplicationJSON struct {
-	Error            *Imcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Imcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Imcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Imcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ImcerResponse struct {

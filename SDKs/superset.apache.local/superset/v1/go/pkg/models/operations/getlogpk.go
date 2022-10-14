@@ -23,40 +23,40 @@ type GetLogPkRequest struct {
 }
 
 type GetLogPk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetLogPk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetLogPk200ApplicationJSON struct {
-	DescriptionColumns *GetLogPk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                       `json:"id"`
-	LabelColumns       *GetLogPk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.LogRestAPIGet                         `json:"result"`
-	ShowColumns        []string                                      `json:"show_columns"`
-	ShowTitle          *string                                       `json:"show_title"`
+	DescriptionColumns *GetLogPk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                       `json:"id,omitempty"`
+	LabelColumns       *GetLogPk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.LogRestAPIGet                         `json:"result,omitempty"`
+	ShowColumns        []string                                      `json:"show_columns,omitempty"`
+	ShowTitle          *string                                       `json:"show_title,omitempty"`
 }
 
 type GetLogPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetLogPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetLogPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetLogPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetLogPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetLogPkResponse struct {

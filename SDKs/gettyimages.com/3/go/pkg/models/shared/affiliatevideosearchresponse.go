@@ -1,6 +1,6 @@
 package shared
 
 type AffiliateVideoSearchResponse struct {
-	AutoCorrections *AutoCorrections `json:"auto_corrections"`
-	Videos          []AffiliateVideo `json:"videos"`
+	AutoCorrections *AutoCorrections `json:"auto_corrections,omitempty"`
+	Videos          []AffiliateVideo `json:"videos,omitempty"`
 }

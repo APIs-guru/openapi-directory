@@ -1,6 +1,6 @@
 package shared
 
 type AccessRules struct {
-	AllowPublicOverrides *bool           `json:"allowPublicOverrides"`
-	GetObject            *AccessTypeEnum `json:"getObject"`
+	AllowPublicOverrides *bool           `json:"allowPublicOverrides,omitempty"`
+	GetObject            *AccessTypeEnum `json:"getObject,omitempty"`
 }

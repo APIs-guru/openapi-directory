@@ -1,12 +1,12 @@
 package shared
 
 type ModelDefinitionModelOptions struct {
-	Labels    []string `json:"labels"`
-	LossType  *string  `json:"lossType"`
-	ModelType *string  `json:"modelType"`
+	Labels    []string `json:"labels,omitempty"`
+	LossType  *string  `json:"lossType,omitempty"`
+	ModelType *string  `json:"modelType,omitempty"`
 }
 
 type ModelDefinition struct {
-	ModelOptions *ModelDefinitionModelOptions `json:"modelOptions"`
-	TrainingRuns []BqmlTrainingRun            `json:"trainingRuns"`
+	ModelOptions *ModelDefinitionModelOptions `json:"modelOptions,omitempty"`
+	TrainingRuns []BqmlTrainingRun            `json:"trainingRuns,omitempty"`
 }

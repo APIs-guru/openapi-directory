@@ -16,7 +16,7 @@ type CreateFleetHeaders struct {
 
 type CreateFleetRequestBody struct {
 	Name string            `json:"name"`
-	Tags map[string]string `json:"tags"`
+	Tags map[string]string `json:"tags,omitempty"`
 }
 
 type CreateFleetRequest struct {

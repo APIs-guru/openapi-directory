@@ -1,5 +1,5 @@
 package shared
 
 type AddSlicerRequest struct {
-	Slicer *Slicer `json:"slicer"`
+	Slicer *Slicer `json:"slicer,omitempty"`
 }

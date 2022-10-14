@@ -1,8 +1,8 @@
 package shared
 
 type Itinerary struct {
-	BaseFareUsd      *float64  `json:"baseFareUSD"`
-	ID               *string   `json:"id"`
+	BaseFareUsd      *float64  `json:"baseFareUSD,omitempty"`
+	ID               *string   `json:"id,omitempty"`
 	Segments         []Segment `json:"segments"`
-	TicketingCarrier *string   `json:"ticketingCarrier"`
+	TicketingCarrier *string   `json:"ticketingCarrier,omitempty"`
 }

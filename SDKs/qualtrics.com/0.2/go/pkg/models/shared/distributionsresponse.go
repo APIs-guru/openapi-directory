@@ -1,45 +1,45 @@
 package shared
 
 type DistributionsResponseMeta struct {
-	HTTPStatus *string `json:"httpStatus"`
-	RequestID  *string `json:"requestId"`
+	HTTPStatus *string `json:"httpStatus,omitempty"`
+	RequestID  *string `json:"requestId,omitempty"`
 }
 
 type DistributionsResponseResultElementsHeaders struct {
-	FromEmail    *interface{} `json:"fromEmail"`
-	FromName     *interface{} `json:"fromName"`
-	ReplyToEmail *interface{} `json:"replyToEmail"`
+	FromEmail    *interface{} `json:"fromEmail,omitempty"`
+	FromName     *interface{} `json:"fromName,omitempty"`
+	ReplyToEmail *interface{} `json:"replyToEmail,omitempty"`
 }
 
 type DistributionsResponseResultElementsMessage struct {
-	LibraryID   *interface{} `json:"libraryId"`
-	MessageID   *interface{} `json:"messageId"`
-	MessageText *interface{} `json:"messageText"`
+	LibraryID   *interface{} `json:"libraryId,omitempty"`
+	MessageID   *interface{} `json:"messageId,omitempty"`
+	MessageText *interface{} `json:"messageText,omitempty"`
 }
 
 type DistributionsResponseResultElementsRecipients struct {
-	ContactID     *interface{} `json:"contactId"`
-	LibraryID     *string      `json:"libraryId"`
-	MailingListID *string      `json:"mailingListId"`
-	SampleID      *interface{} `json:"sampleId"`
+	ContactID     *interface{} `json:"contactId,omitempty"`
+	LibraryID     *string      `json:"libraryId,omitempty"`
+	MailingListID *string      `json:"mailingListId,omitempty"`
+	SampleID      *interface{} `json:"sampleId,omitempty"`
 }
 
 type DistributionsResponseResultElementsStats struct {
-	Blocked    *int64 `json:"blocked"`
-	Bounced    *int64 `json:"bounced"`
-	Complaints *int64 `json:"complaints"`
-	Failed     *int64 `json:"failed"`
-	Finished   *int64 `json:"finished"`
-	Opened     *int64 `json:"opened"`
-	Sent       *int64 `json:"sent"`
-	Skipped    *int64 `json:"skipped"`
-	Started    *int64 `json:"started"`
+	Blocked    *int64 `json:"blocked,omitempty"`
+	Bounced    *int64 `json:"bounced,omitempty"`
+	Complaints *int64 `json:"complaints,omitempty"`
+	Failed     *int64 `json:"failed,omitempty"`
+	Finished   *int64 `json:"finished,omitempty"`
+	Opened     *int64 `json:"opened,omitempty"`
+	Sent       *int64 `json:"sent,omitempty"`
+	Skipped    *int64 `json:"skipped,omitempty"`
+	Started    *int64 `json:"started,omitempty"`
 }
 
 type DistributionsResponseResultElementsSurveyLink struct {
-	ExpirationDate *string `json:"expirationDate"`
-	LinkType       *string `json:"linkType"`
-	SurveyID       *string `json:"surveyId"`
+	ExpirationDate *string `json:"expirationDate,omitempty"`
+	LinkType       *string `json:"linkType,omitempty"`
+	SurveyID       *string `json:"surveyId,omitempty"`
 }
 
 type DistributionsResponseResultElements struct {
@@ -62,11 +62,11 @@ type DistributionsResponseResultElements struct {
 }
 
 type DistributionsResponseResult struct {
-	Elements []DistributionsResponseResultElements `json:"elements"`
-	NextPage *interface{}                          `json:"nextPage"`
+	Elements []DistributionsResponseResultElements `json:"elements,omitempty"`
+	NextPage *interface{}                          `json:"nextPage,omitempty"`
 }
 
 type DistributionsResponse struct {
-	Meta   *DistributionsResponseMeta   `json:"meta"`
-	Result *DistributionsResponseResult `json:"result"`
+	Meta   *DistributionsResponseMeta   `json:"meta,omitempty"`
+	Result *DistributionsResponseResult `json:"result,omitempty"`
 }

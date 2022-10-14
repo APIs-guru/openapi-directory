@@ -1,6 +1,6 @@
 package shared
 
 type GroupResult struct {
-	Count      *string                `json:"count"`
-	Properties map[string]interface{} `json:"properties"`
+	Count      *string                `json:"count,omitempty"`
+	Properties map[string]interface{} `json:"properties,omitempty"`
 }

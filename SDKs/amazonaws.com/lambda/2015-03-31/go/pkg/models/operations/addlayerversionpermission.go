@@ -25,7 +25,7 @@ type AddLayerVersionPermissionHeaders struct {
 
 type AddLayerVersionPermissionRequestBody struct {
 	Action         string  `json:"Action"`
-	OrganizationID *string `json:"OrganizationId"`
+	OrganizationID *string `json:"OrganizationId,omitempty"`
 	Principal      string  `json:"Principal"`
 	StatementID    string  `json:"StatementId"`
 }

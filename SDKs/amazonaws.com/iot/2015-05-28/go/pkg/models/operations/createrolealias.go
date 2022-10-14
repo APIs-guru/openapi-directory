@@ -19,9 +19,9 @@ type CreateRoleAliasHeaders struct {
 }
 
 type CreateRoleAliasRequestBody struct {
-	CredentialDurationSeconds *int64       `json:"credentialDurationSeconds"`
+	CredentialDurationSeconds *int64       `json:"credentialDurationSeconds,omitempty"`
 	RoleArn                   string       `json:"roleArn"`
-	Tags                      []shared.Tag `json:"tags"`
+	Tags                      []shared.Tag `json:"tags,omitempty"`
 }
 
 type CreateRoleAliasRequest struct {

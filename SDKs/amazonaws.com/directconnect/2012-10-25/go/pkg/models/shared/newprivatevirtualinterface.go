@@ -1,15 +1,15 @@
 package shared
 
 type NewPrivateVirtualInterface struct {
-	AddressFamily          *AddressFamilyEnum `json:"addressFamily"`
-	AmazonAddress          *string            `json:"amazonAddress"`
+	AddressFamily          *AddressFamilyEnum `json:"addressFamily,omitempty"`
+	AmazonAddress          *string            `json:"amazonAddress,omitempty"`
 	Asn                    int64              `json:"asn"`
-	AuthKey                *string            `json:"authKey"`
-	CustomerAddress        *string            `json:"customerAddress"`
-	DirectConnectGatewayID *string            `json:"directConnectGatewayId"`
-	Mtu                    *int64             `json:"mtu"`
-	Tags                   []Tag              `json:"tags"`
-	VirtualGatewayID       *string            `json:"virtualGatewayId"`
+	AuthKey                *string            `json:"authKey,omitempty"`
+	CustomerAddress        *string            `json:"customerAddress,omitempty"`
+	DirectConnectGatewayID *string            `json:"directConnectGatewayId,omitempty"`
+	Mtu                    *int64             `json:"mtu,omitempty"`
+	Tags                   []Tag              `json:"tags,omitempty"`
+	VirtualGatewayID       *string            `json:"virtualGatewayId,omitempty"`
 	VirtualInterfaceName   string             `json:"virtualInterfaceName"`
 	Vlan                   int64              `json:"vlan"`
 }

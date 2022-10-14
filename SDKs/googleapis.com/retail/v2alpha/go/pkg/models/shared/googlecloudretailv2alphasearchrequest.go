@@ -19,25 +19,25 @@ const (
 )
 
 type GoogleCloudRetailV2alphaSearchRequest struct {
-	BoostSpec           *GoogleCloudRetailV2alphaSearchRequestBoostSpec              `json:"boostSpec"`
-	Branch              *string                                                      `json:"branch"`
-	CanonicalFilter     *string                                                      `json:"canonicalFilter"`
-	DynamicFacetSpec    *GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec       `json:"dynamicFacetSpec"`
-	FacetSpecs          []GoogleCloudRetailV2alphaSearchRequestFacetSpec             `json:"facetSpecs"`
-	Filter              *string                                                      `json:"filter"`
-	Labels              map[string]string                                            `json:"labels"`
-	Offset              *int32                                                       `json:"offset"`
-	OrderBy             *string                                                      `json:"orderBy"`
-	PageCategories      []string                                                     `json:"pageCategories"`
-	PageSize            *int32                                                       `json:"pageSize"`
-	PageToken           *string                                                      `json:"pageToken"`
-	PersonalizationSpec *GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec    `json:"personalizationSpec"`
-	Query               *string                                                      `json:"query"`
-	QueryExpansionSpec  *GoogleCloudRetailV2alphaSearchRequestQueryExpansionSpec     `json:"queryExpansionSpec"`
-	RelevanceThreshold  *GoogleCloudRetailV2alphaSearchRequestRelevanceThresholdEnum `json:"relevanceThreshold"`
-	SearchMode          *GoogleCloudRetailV2alphaSearchRequestSearchModeEnum         `json:"searchMode"`
-	SpellCorrectionSpec *GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpec    `json:"spellCorrectionSpec"`
-	UserInfo            *GoogleCloudRetailV2alphaUserInfo                            `json:"userInfo"`
-	VariantRollupKeys   []string                                                     `json:"variantRollupKeys"`
-	VisitorID           *string                                                      `json:"visitorId"`
+	BoostSpec           *GoogleCloudRetailV2alphaSearchRequestBoostSpec              `json:"boostSpec,omitempty"`
+	Branch              *string                                                      `json:"branch,omitempty"`
+	CanonicalFilter     *string                                                      `json:"canonicalFilter,omitempty"`
+	DynamicFacetSpec    *GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec       `json:"dynamicFacetSpec,omitempty"`
+	FacetSpecs          []GoogleCloudRetailV2alphaSearchRequestFacetSpec             `json:"facetSpecs,omitempty"`
+	Filter              *string                                                      `json:"filter,omitempty"`
+	Labels              map[string]string                                            `json:"labels,omitempty"`
+	Offset              *int32                                                       `json:"offset,omitempty"`
+	OrderBy             *string                                                      `json:"orderBy,omitempty"`
+	PageCategories      []string                                                     `json:"pageCategories,omitempty"`
+	PageSize            *int32                                                       `json:"pageSize,omitempty"`
+	PageToken           *string                                                      `json:"pageToken,omitempty"`
+	PersonalizationSpec *GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec    `json:"personalizationSpec,omitempty"`
+	Query               *string                                                      `json:"query,omitempty"`
+	QueryExpansionSpec  *GoogleCloudRetailV2alphaSearchRequestQueryExpansionSpec     `json:"queryExpansionSpec,omitempty"`
+	RelevanceThreshold  *GoogleCloudRetailV2alphaSearchRequestRelevanceThresholdEnum `json:"relevanceThreshold,omitempty"`
+	SearchMode          *GoogleCloudRetailV2alphaSearchRequestSearchModeEnum         `json:"searchMode,omitempty"`
+	SpellCorrectionSpec *GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpec    `json:"spellCorrectionSpec,omitempty"`
+	UserInfo            *GoogleCloudRetailV2alphaUserInfo                            `json:"userInfo,omitempty"`
+	VariantRollupKeys   []string                                                     `json:"variantRollupKeys,omitempty"`
+	VisitorID           *string                                                      `json:"visitorId,omitempty"`
 }

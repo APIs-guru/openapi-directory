@@ -11,6 +11,6 @@ const (
 )
 
 type OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceOsPolicyResourceConfigStep struct {
-	ErrorMessage *string                                                                                                 `json:"errorMessage"`
-	Type         *OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceOsPolicyResourceConfigStepTypeEnum `json:"type"`
+	ErrorMessage *string                                                                                                 `json:"errorMessage,omitempty"`
+	Type         *OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceOsPolicyResourceConfigStepTypeEnum `json:"type,omitempty"`
 }

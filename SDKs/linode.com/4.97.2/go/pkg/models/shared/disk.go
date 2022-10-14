@@ -23,11 +23,11 @@ const (
 )
 
 type Disk struct {
-	Created    *time.Time          `json:"created"`
-	Filesystem *DiskFilesystemEnum `json:"filesystem"`
-	ID         *int64              `json:"id"`
-	Label      *string             `json:"label"`
-	Size       *int64              `json:"size"`
-	Status     *DiskStatusEnum     `json:"status"`
-	Updated    *time.Time          `json:"updated"`
+	Created    *time.Time          `json:"created,omitempty"`
+	Filesystem *DiskFilesystemEnum `json:"filesystem,omitempty"`
+	ID         *int64              `json:"id,omitempty"`
+	Label      *string             `json:"label,omitempty"`
+	Size       *int64              `json:"size,omitempty"`
+	Status     *DiskStatusEnum     `json:"status,omitempty"`
+	Updated    *time.Time          `json:"updated,omitempty"`
 }

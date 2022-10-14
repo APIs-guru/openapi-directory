@@ -1,6 +1,6 @@
 package shared
 
 type GetSampleDataResponse struct {
-	HeaderValues []string   `json:"HeaderValues"`
-	SampleRows   [][]string `json:"SampleRows"`
+	HeaderValues []string   `json:"HeaderValues,omitempty"`
+	SampleRows   [][]string `json:"SampleRows,omitempty"`
 }

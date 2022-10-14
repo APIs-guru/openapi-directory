@@ -5,12 +5,12 @@ type PatchConnectorPathParams struct {
 }
 
 type PatchConnectorRequestBody struct {
-	Chargestation *string `json:"chargestation"`
-	Format        *string `json:"format"`
-	Power         *int64  `json:"power"`
-	PowerType     *string `json:"power_type"`
-	Rate          *string `json:"rate"`
-	Type          *string `json:"type"`
+	Chargestation *string `json:"chargestation,omitempty"`
+	Format        *string `json:"format,omitempty"`
+	Power         *int64  `json:"power,omitempty"`
+	PowerType     *string `json:"power_type,omitempty"`
+	Rate          *string `json:"rate,omitempty"`
+	Type          *string `json:"type,omitempty"`
 }
 
 type PatchConnectorRequest struct {
@@ -19,9 +19,9 @@ type PatchConnectorRequest struct {
 }
 
 type PatchConnector201ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type PatchConnectorResponse struct {

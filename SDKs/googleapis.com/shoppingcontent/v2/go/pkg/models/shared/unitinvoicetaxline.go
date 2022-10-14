@@ -1,7 +1,7 @@
 package shared
 
 type UnitInvoiceTaxLine struct {
-	TaxAmount *Price  `json:"taxAmount"`
-	TaxName   *string `json:"taxName"`
-	TaxType   *string `json:"taxType"`
+	TaxAmount *Price  `json:"taxAmount,omitempty"`
+	TaxName   *string `json:"taxName,omitempty"`
+	TaxType   *string `json:"taxType,omitempty"`
 }

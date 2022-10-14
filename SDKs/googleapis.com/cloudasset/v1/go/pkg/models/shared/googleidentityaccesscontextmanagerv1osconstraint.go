@@ -13,7 +13,7 @@ const (
 )
 
 type GoogleIdentityAccesscontextmanagerV1OsConstraint struct {
-	MinimumVersion          *string                                                     `json:"minimumVersion"`
-	OsType                  *GoogleIdentityAccesscontextmanagerV1OsConstraintOsTypeEnum `json:"osType"`
-	RequireVerifiedChromeOs *bool                                                       `json:"requireVerifiedChromeOs"`
+	MinimumVersion          *string                                                     `json:"minimumVersion,omitempty"`
+	OsType                  *GoogleIdentityAccesscontextmanagerV1OsConstraintOsTypeEnum `json:"osType,omitempty"`
+	RequireVerifiedChromeOs *bool                                                       `json:"requireVerifiedChromeOs,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type PublishResponse struct {
-	MessageIds []string `json:"messageIds"`
+	MessageIds []string `json:"messageIds,omitempty"`
 }

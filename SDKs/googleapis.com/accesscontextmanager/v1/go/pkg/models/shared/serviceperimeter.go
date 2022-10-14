@@ -8,11 +8,11 @@ const (
 )
 
 type ServicePerimeter struct {
-	Description           *string                            `json:"description"`
-	Name                  *string                            `json:"name"`
-	PerimeterType         *ServicePerimeterPerimeterTypeEnum `json:"perimeterType"`
-	Spec                  *ServicePerimeterConfig            `json:"spec"`
-	Status                *ServicePerimeterConfig            `json:"status"`
-	Title                 *string                            `json:"title"`
-	UseExplicitDryRunSpec *bool                              `json:"useExplicitDryRunSpec"`
+	Description           *string                            `json:"description,omitempty"`
+	Name                  *string                            `json:"name,omitempty"`
+	PerimeterType         *ServicePerimeterPerimeterTypeEnum `json:"perimeterType,omitempty"`
+	Spec                  *ServicePerimeterConfig            `json:"spec,omitempty"`
+	Status                *ServicePerimeterConfig            `json:"status,omitempty"`
+	Title                 *string                            `json:"title,omitempty"`
+	UseExplicitDryRunSpec *bool                              `json:"useExplicitDryRunSpec,omitempty"`
 }

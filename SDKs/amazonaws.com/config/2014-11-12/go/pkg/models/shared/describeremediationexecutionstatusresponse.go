@@ -1,6 +1,6 @@
 package shared
 
 type DescribeRemediationExecutionStatusResponse struct {
-	NextToken                    *string                      `json:"NextToken"`
-	RemediationExecutionStatuses []RemediationExecutionStatus `json:"RemediationExecutionStatuses"`
+	NextToken                    *string                      `json:"NextToken,omitempty"`
+	RemediationExecutionStatuses []RemediationExecutionStatus `json:"RemediationExecutionStatuses,omitempty"`
 }

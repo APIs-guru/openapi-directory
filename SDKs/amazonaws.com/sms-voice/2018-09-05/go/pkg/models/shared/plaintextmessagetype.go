@@ -1,7 +1,7 @@
 package shared
 
 type PlainTextMessageType struct {
-	LanguageCode *string `json:"LanguageCode"`
-	Text         *string `json:"Text"`
-	VoiceID      *string `json:"VoiceId"`
+	LanguageCode *string `json:"LanguageCode,omitempty"`
+	Text         *string `json:"Text,omitempty"`
+	VoiceID      *string `json:"VoiceId,omitempty"`
 }

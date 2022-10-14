@@ -1,5 +1,5 @@
 package shared
 
 type StudentContactsForStudentResponse struct {
-	Data []StudentContact `json:"data"`
+	Data []StudentContact `json:"data,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type QueryFilter struct {
-	DeltaTime *DeltaTime `json:"deltaTime"`
+	DeltaTime *DeltaTime `json:"deltaTime,omitempty"`
 }

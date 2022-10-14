@@ -5,15 +5,15 @@ import (
 )
 
 type ListEdgePackagingJobsRequest struct {
-	CreationTimeAfter      *time.Time                       `json:"CreationTimeAfter"`
-	CreationTimeBefore     *time.Time                       `json:"CreationTimeBefore"`
-	LastModifiedTimeAfter  *time.Time                       `json:"LastModifiedTimeAfter"`
-	LastModifiedTimeBefore *time.Time                       `json:"LastModifiedTimeBefore"`
-	MaxResults             *int64                           `json:"MaxResults"`
-	ModelNameContains      *string                          `json:"ModelNameContains"`
-	NameContains           *string                          `json:"NameContains"`
-	NextToken              *string                          `json:"NextToken"`
-	SortBy                 *ListEdgePackagingJobsSortByEnum `json:"SortBy"`
-	SortOrder              *SortOrderEnum                   `json:"SortOrder"`
-	StatusEquals           *EdgePackagingJobStatusEnum      `json:"StatusEquals"`
+	CreationTimeAfter      *time.Time                       `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore     *time.Time                       `json:"CreationTimeBefore,omitempty"`
+	LastModifiedTimeAfter  *time.Time                       `json:"LastModifiedTimeAfter,omitempty"`
+	LastModifiedTimeBefore *time.Time                       `json:"LastModifiedTimeBefore,omitempty"`
+	MaxResults             *int64                           `json:"MaxResults,omitempty"`
+	ModelNameContains      *string                          `json:"ModelNameContains,omitempty"`
+	NameContains           *string                          `json:"NameContains,omitempty"`
+	NextToken              *string                          `json:"NextToken,omitempty"`
+	SortBy                 *ListEdgePackagingJobsSortByEnum `json:"SortBy,omitempty"`
+	SortOrder              *SortOrderEnum                   `json:"SortOrder,omitempty"`
+	StatusEquals           *EdgePackagingJobStatusEnum      `json:"StatusEquals,omitempty"`
 }

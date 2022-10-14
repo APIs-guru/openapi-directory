@@ -78,7 +78,7 @@ type GetFloatingIps200ApplicationJSONMeta struct {
 
 type GetFloatingIps200ApplicationJSON struct {
 	FloatingIps []GetFloatingIps200ApplicationJSONFloatingIps `json:"floating_ips"`
-	Meta        *GetFloatingIps200ApplicationJSONMeta         `json:"meta"`
+	Meta        *GetFloatingIps200ApplicationJSONMeta         `json:"meta,omitempty"`
 }
 
 type GetFloatingIpsResponse struct {

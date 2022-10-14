@@ -6,13 +6,13 @@ type CreateSchemaPathParams struct {
 }
 
 type CreateSchemaRequestBodySchema struct {
-	Language *string `json:"language"`
-	Schema   *string `json:"schema"`
-	Type     *string `json:"type"`
+	Language *string `json:"language,omitempty"`
+	Schema   *string `json:"schema,omitempty"`
+	Type     *string `json:"type,omitempty"`
 }
 
 type CreateSchemaRequestBody struct {
-	Schema *CreateSchemaRequestBodySchema `json:"schema"`
+	Schema *CreateSchemaRequestBodySchema `json:"schema,omitempty"`
 }
 
 type CreateSchemaRequest struct {
@@ -21,18 +21,18 @@ type CreateSchemaRequest struct {
 }
 
 type CreateSchema200ApplicationJSONSchema struct {
-	APIVersion *string `json:"apiVersion"`
-	CreatedAt  *string `json:"createdAt"`
-	CreatedBy  *string `json:"createdBy"`
-	ID         *string `json:"id"`
-	Language   *string `json:"language"`
-	Type       *string `json:"type"`
-	UpdateBy   *string `json:"updateBy"`
-	UpdatedAt  *string `json:"updatedAt"`
+	APIVersion *string `json:"apiVersion,omitempty"`
+	CreatedAt  *string `json:"createdAt,omitempty"`
+	CreatedBy  *string `json:"createdBy,omitempty"`
+	ID         *string `json:"id,omitempty"`
+	Language   *string `json:"language,omitempty"`
+	Type       *string `json:"type,omitempty"`
+	UpdateBy   *string `json:"updateBy,omitempty"`
+	UpdatedAt  *string `json:"updatedAt,omitempty"`
 }
 
 type CreateSchema200ApplicationJSON struct {
-	Schema *CreateSchema200ApplicationJSONSchema `json:"schema"`
+	Schema *CreateSchema200ApplicationJSONSchema `json:"schema,omitempty"`
 }
 
 type CreateSchemaResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type SuggestedTableRowStyle struct {
-	TableRowStyle                *TableRowStyle                `json:"tableRowStyle"`
-	TableRowStyleSuggestionState *TableRowStyleSuggestionState `json:"tableRowStyleSuggestionState"`
+	TableRowStyle                *TableRowStyle                `json:"tableRowStyle,omitempty"`
+	TableRowStyleSuggestionState *TableRowStyleSuggestionState `json:"tableRowStyleSuggestionState,omitempty"`
 }

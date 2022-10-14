@@ -1,6 +1,6 @@
 package shared
 
 type ListScansResponse struct {
-	NextPageToken *string `json:"nextPageToken"`
-	Scans         []Scan  `json:"scans"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Scans         []Scan  `json:"scans,omitempty"`
 }

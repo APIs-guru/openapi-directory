@@ -8,9 +8,9 @@ const (
 )
 
 type Enum struct {
-	Enumvalue     []EnumValue     `json:"enumvalue"`
-	Name          *string         `json:"name"`
-	Options       []Option        `json:"options"`
-	SourceContext *SourceContext  `json:"sourceContext"`
-	Syntax        *EnumSyntaxEnum `json:"syntax"`
+	Enumvalue     []EnumValue     `json:"enumvalue,omitempty"`
+	Name          *string         `json:"name,omitempty"`
+	Options       []Option        `json:"options,omitempty"`
+	SourceContext *SourceContext  `json:"sourceContext,omitempty"`
+	Syntax        *EnumSyntaxEnum `json:"syntax,omitempty"`
 }

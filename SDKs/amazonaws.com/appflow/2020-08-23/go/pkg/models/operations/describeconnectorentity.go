@@ -43,8 +43,8 @@ const (
 
 type DescribeConnectorEntityRequestBody struct {
 	ConnectorEntityName  string                                               `json:"connectorEntityName"`
-	ConnectorProfileName *string                                              `json:"connectorProfileName"`
-	ConnectorType        *DescribeConnectorEntityRequestBodyConnectorTypeEnum `json:"connectorType"`
+	ConnectorProfileName *string                                              `json:"connectorProfileName,omitempty"`
+	ConnectorType        *DescribeConnectorEntityRequestBodyConnectorTypeEnum `json:"connectorType,omitempty"`
 }
 
 type DescribeConnectorEntityRequest struct {

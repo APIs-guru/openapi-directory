@@ -22,12 +22,12 @@ type OptionsProxyRequest struct {
 }
 
 type OptionsProxy401ApplicationJSON struct {
-	Detail     *string  `json:"detail"`
-	Error      *string  `json:"error"`
-	Message    *string  `json:"message"`
-	Ref        *string  `json:"ref"`
-	StatusCode *float64 `json:"status_code"`
-	TypeName   *string  `json:"type_name"`
+	Detail     *string  `json:"detail,omitempty"`
+	Error      *string  `json:"error,omitempty"`
+	Message    *string  `json:"message,omitempty"`
+	Ref        *string  `json:"ref,omitempty"`
+	StatusCode *float64 `json:"status_code,omitempty"`
+	TypeName   *string  `json:"type_name,omitempty"`
 }
 
 type OptionsProxyResponse struct {

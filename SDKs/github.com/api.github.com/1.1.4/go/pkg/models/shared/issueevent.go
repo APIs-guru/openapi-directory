@@ -19,7 +19,7 @@ type IssueEventActorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -41,7 +41,7 @@ type IssueEventAssigneeSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -63,7 +63,7 @@ type IssueEventAssignerSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -85,7 +85,7 @@ type IssueEventRequestedReviewerSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -107,7 +107,7 @@ type IssueEventReviewRequesterSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -116,24 +116,24 @@ type IssueEventReviewRequesterSimpleUser struct {
 
 type IssueEvent struct {
 	Actor             IssueEventActorSimpleUser              `json:"actor"`
-	Assignee          *IssueEventAssigneeSimpleUser          `json:"assignee"`
-	Assigner          *IssueEventAssignerSimpleUser          `json:"assigner"`
-	AuthorAssociation *AuthorAssociationEnum                 `json:"author_association"`
+	Assignee          *IssueEventAssigneeSimpleUser          `json:"assignee,omitempty"`
+	Assigner          *IssueEventAssignerSimpleUser          `json:"assigner,omitempty"`
+	AuthorAssociation *AuthorAssociationEnum                 `json:"author_association,omitempty"`
 	CommitID          string                                 `json:"commit_id"`
 	CommitURL         string                                 `json:"commit_url"`
 	CreatedAt         time.Time                              `json:"created_at"`
-	DismissedReview   *IssueEventDismissedReview             `json:"dismissed_review"`
+	DismissedReview   *IssueEventDismissedReview             `json:"dismissed_review,omitempty"`
 	Event             string                                 `json:"event"`
 	ID                int64                                  `json:"id"`
-	Issue             *IssueSimple                           `json:"issue"`
-	Label             *IssueEventLabel                       `json:"label"`
-	LockReason        *string                                `json:"lock_reason"`
-	Milestone         *IssueEventMilestone                   `json:"milestone"`
+	Issue             *IssueSimple                           `json:"issue,omitempty"`
+	Label             *IssueEventLabel                       `json:"label,omitempty"`
+	LockReason        *string                                `json:"lock_reason,omitempty"`
+	Milestone         *IssueEventMilestone                   `json:"milestone,omitempty"`
 	NodeID            string                                 `json:"node_id"`
-	ProjectCard       *IssueEventProjectCard                 `json:"project_card"`
-	Rename            *IssueEventRename                      `json:"rename"`
-	RequestedReviewer *IssueEventRequestedReviewerSimpleUser `json:"requested_reviewer"`
-	RequestedTeam     *Team                                  `json:"requested_team"`
-	ReviewRequester   *IssueEventReviewRequesterSimpleUser   `json:"review_requester"`
+	ProjectCard       *IssueEventProjectCard                 `json:"project_card,omitempty"`
+	Rename            *IssueEventRename                      `json:"rename,omitempty"`
+	RequestedReviewer *IssueEventRequestedReviewerSimpleUser `json:"requested_reviewer,omitempty"`
+	RequestedTeam     *Team                                  `json:"requested_team,omitempty"`
+	ReviewRequester   *IssueEventReviewRequesterSimpleUser   `json:"review_requester,omitempty"`
 	URL               string                                 `json:"url"`
 }

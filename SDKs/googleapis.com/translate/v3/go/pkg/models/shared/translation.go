@@ -1,8 +1,8 @@
 package shared
 
 type Translation struct {
-	DetectedLanguageCode *string                      `json:"detectedLanguageCode"`
-	GlossaryConfig       *TranslateTextGlossaryConfig `json:"glossaryConfig"`
-	Model                *string                      `json:"model"`
-	TranslatedText       *string                      `json:"translatedText"`
+	DetectedLanguageCode *string                      `json:"detectedLanguageCode,omitempty"`
+	GlossaryConfig       *TranslateTextGlossaryConfig `json:"glossaryConfig,omitempty"`
+	Model                *string                      `json:"model,omitempty"`
+	TranslatedText       *string                      `json:"translatedText,omitempty"`
 }

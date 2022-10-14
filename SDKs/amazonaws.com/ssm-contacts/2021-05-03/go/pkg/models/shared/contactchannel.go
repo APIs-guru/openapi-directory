@@ -6,5 +6,5 @@ type ContactChannel struct {
 	ContactChannelArn string                `json:"ContactChannelArn"`
 	DeliveryAddress   ContactChannelAddress `json:"DeliveryAddress"`
 	Name              string                `json:"Name"`
-	Type              *ChannelTypeEnum      `json:"Type"`
+	Type              *ChannelTypeEnum      `json:"Type,omitempty"`
 }

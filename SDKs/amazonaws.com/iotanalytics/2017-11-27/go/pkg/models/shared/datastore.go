@@ -5,14 +5,14 @@ import (
 )
 
 type Datastore struct {
-	Arn                     *string                  `json:"arn"`
-	CreationTime            *time.Time               `json:"creationTime"`
-	DatastorePartitions     *DatastorePartitions     `json:"datastorePartitions"`
-	FileFormatConfiguration *FileFormatConfiguration `json:"fileFormatConfiguration"`
-	LastMessageArrivalTime  *time.Time               `json:"lastMessageArrivalTime"`
-	LastUpdateTime          *time.Time               `json:"lastUpdateTime"`
-	Name                    *string                  `json:"name"`
-	RetentionPeriod         *RetentionPeriod         `json:"retentionPeriod"`
-	Status                  *DatastoreStatusEnum     `json:"status"`
-	Storage                 *DatastoreStorage        `json:"storage"`
+	Arn                     *string                  `json:"arn,omitempty"`
+	CreationTime            *time.Time               `json:"creationTime,omitempty"`
+	DatastorePartitions     *DatastorePartitions     `json:"datastorePartitions,omitempty"`
+	FileFormatConfiguration *FileFormatConfiguration `json:"fileFormatConfiguration,omitempty"`
+	LastMessageArrivalTime  *time.Time               `json:"lastMessageArrivalTime,omitempty"`
+	LastUpdateTime          *time.Time               `json:"lastUpdateTime,omitempty"`
+	Name                    *string                  `json:"name,omitempty"`
+	RetentionPeriod         *RetentionPeriod         `json:"retentionPeriod,omitempty"`
+	Status                  *DatastoreStatusEnum     `json:"status,omitempty"`
+	Storage                 *DatastoreStorage        `json:"storage,omitempty"`
 }

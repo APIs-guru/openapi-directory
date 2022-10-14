@@ -28,18 +28,18 @@ type ListUsAppToPersonRequest struct {
 }
 
 type ListUsAppToPerson200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListUsAppToPerson200ApplicationJSONListUsAppToPersonResponse struct {
-	Compliance []shared.MessagingV1ServiceUsAppToPerson `json:"compliance"`
-	Meta       *ListUsAppToPerson200ApplicationJSONMeta `json:"meta"`
+	Compliance []shared.MessagingV1ServiceUsAppToPerson `json:"compliance,omitempty"`
+	Meta       *ListUsAppToPerson200ApplicationJSONMeta `json:"meta,omitempty"`
 }
 
 type ListUsAppToPersonResponse struct {

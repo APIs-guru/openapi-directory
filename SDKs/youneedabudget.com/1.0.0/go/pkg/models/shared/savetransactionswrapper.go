@@ -1,6 +1,6 @@
 package shared
 
 type SaveTransactionsWrapper struct {
-	Transaction  *SaveTransaction  `json:"transaction"`
-	Transactions []SaveTransaction `json:"transactions"`
+	Transaction  *SaveTransaction  `json:"transaction,omitempty"`
+	Transactions []SaveTransaction `json:"transactions,omitempty"`
 }

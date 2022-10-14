@@ -5,9 +5,9 @@ import (
 )
 
 type ContentRestriction struct {
-	ReadOnly        *bool      `json:"readOnly"`
-	Reason          *string    `json:"reason"`
-	RestrictingUser *User      `json:"restrictingUser"`
-	RestrictionTime *time.Time `json:"restrictionTime"`
-	Type            *string    `json:"type"`
+	ReadOnly        *bool      `json:"readOnly,omitempty"`
+	Reason          *string    `json:"reason,omitempty"`
+	RestrictingUser *User      `json:"restrictingUser,omitempty"`
+	RestrictionTime *time.Time `json:"restrictionTime,omitempty"`
+	Type            *string    `json:"type,omitempty"`
 }

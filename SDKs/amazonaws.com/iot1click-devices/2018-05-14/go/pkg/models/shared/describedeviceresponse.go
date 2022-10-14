@@ -1,5 +1,5 @@
 package shared
 
 type DescribeDeviceResponse struct {
-	DeviceDescription *DeviceDescription `json:"DeviceDescription"`
+	DeviceDescription *DeviceDescription `json:"DeviceDescription,omitempty"`
 }

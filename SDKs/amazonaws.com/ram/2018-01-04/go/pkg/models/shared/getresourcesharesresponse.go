@@ -1,6 +1,6 @@
 package shared
 
 type GetResourceSharesResponse struct {
-	NextToken      *string         `json:"nextToken"`
-	ResourceShares []ResourceShare `json:"resourceShares"`
+	NextToken      *string         `json:"nextToken,omitempty"`
+	ResourceShares []ResourceShare `json:"resourceShares,omitempty"`
 }

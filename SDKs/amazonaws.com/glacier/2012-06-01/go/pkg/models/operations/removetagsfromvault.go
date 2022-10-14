@@ -26,7 +26,7 @@ type RemoveTagsFromVaultHeaders struct {
 }
 
 type RemoveTagsFromVaultRequestBody struct {
-	TagKeys []string `json:"TagKeys"`
+	TagKeys []string `json:"TagKeys,omitempty"`
 }
 
 type RemoveTagsFromVaultRequest struct {

@@ -27,7 +27,7 @@ type DeleteLkeClusterRequest struct {
 }
 
 type DeleteLkeClusterDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteLkeClusterResponse struct {

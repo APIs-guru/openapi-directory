@@ -21,9 +21,9 @@ const (
 )
 
 type WebhookCreate struct {
-	Events         []WebhookCreateEventsEnum        `json:"events"`
-	MetadataPolicy *WebhookCreateMetadataPolicyEnum `json:"metadataPolicy"`
-	SigningAlgo    *WebhookCreateSigningAlgoEnum    `json:"signingAlgo"`
-	SigningKey     *string                          `json:"signingKey"`
-	URL            *string                          `json:"url"`
+	Events         []WebhookCreateEventsEnum        `json:"events,omitempty"`
+	MetadataPolicy *WebhookCreateMetadataPolicyEnum `json:"metadataPolicy,omitempty"`
+	SigningAlgo    *WebhookCreateSigningAlgoEnum    `json:"signingAlgo,omitempty"`
+	SigningKey     *string                          `json:"signingKey,omitempty"`
+	URL            *string                          `json:"url,omitempty"`
 }

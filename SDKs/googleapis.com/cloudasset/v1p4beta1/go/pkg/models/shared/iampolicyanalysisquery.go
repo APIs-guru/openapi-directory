@@ -1,8 +1,8 @@
 package shared
 
 type IamPolicyAnalysisQuery struct {
-	AccessSelector   *AccessSelector   `json:"accessSelector"`
-	IdentitySelector *IdentitySelector `json:"identitySelector"`
-	Parent           *string           `json:"parent"`
-	ResourceSelector *ResourceSelector `json:"resourceSelector"`
+	AccessSelector   *AccessSelector   `json:"accessSelector,omitempty"`
+	IdentitySelector *IdentitySelector `json:"identitySelector,omitempty"`
+	Parent           *string           `json:"parent,omitempty"`
+	ResourceSelector *ResourceSelector `json:"resourceSelector,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type CreatePermissionSetResponse struct {
-	PermissionSet *PermissionSet `json:"PermissionSet"`
+	PermissionSet *PermissionSet `json:"PermissionSet,omitempty"`
 }

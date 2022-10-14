@@ -5,156 +5,156 @@ import (
 )
 
 type ActivityActorClientSpecificActorInfoYoutubeActorInfo struct {
-	ChannelID *string `json:"channelId"`
+	ChannelID *string `json:"channelId,omitempty"`
 }
 
 type ActivityActorClientSpecificActorInfo struct {
-	YoutubeActorInfo *ActivityActorClientSpecificActorInfoYoutubeActorInfo `json:"youtubeActorInfo"`
+	YoutubeActorInfo *ActivityActorClientSpecificActorInfoYoutubeActorInfo `json:"youtubeActorInfo,omitempty"`
 }
 
 type ActivityActorImage struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type ActivityActorName struct {
-	FamilyName *string `json:"familyName"`
-	GivenName  *string `json:"givenName"`
+	FamilyName *string `json:"familyName,omitempty"`
+	GivenName  *string `json:"givenName,omitempty"`
 }
 
 type ActivityActorVerification struct {
-	AdHocVerified *string `json:"adHocVerified"`
+	AdHocVerified *string `json:"adHocVerified,omitempty"`
 }
 
 type ActivityActor struct {
-	ClientSpecificActorInfo *ActivityActorClientSpecificActorInfo `json:"clientSpecificActorInfo"`
-	DisplayName             *string                               `json:"displayName"`
-	ID                      *string                               `json:"id"`
-	Image                   *ActivityActorImage                   `json:"image"`
-	Name                    *ActivityActorName                    `json:"name"`
-	URL                     *string                               `json:"url"`
-	Verification            *ActivityActorVerification            `json:"verification"`
+	ClientSpecificActorInfo *ActivityActorClientSpecificActorInfo `json:"clientSpecificActorInfo,omitempty"`
+	DisplayName             *string                               `json:"displayName,omitempty"`
+	ID                      *string                               `json:"id,omitempty"`
+	Image                   *ActivityActorImage                   `json:"image,omitempty"`
+	Name                    *ActivityActorName                    `json:"name,omitempty"`
+	URL                     *string                               `json:"url,omitempty"`
+	Verification            *ActivityActorVerification            `json:"verification,omitempty"`
 }
 
 type ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo struct {
-	ChannelID *string `json:"channelId"`
+	ChannelID *string `json:"channelId,omitempty"`
 }
 
 type ActivityObjectActorClientSpecificActorInfo struct {
-	YoutubeActorInfo *ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo `json:"youtubeActorInfo"`
+	YoutubeActorInfo *ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo `json:"youtubeActorInfo,omitempty"`
 }
 
 type ActivityObjectActorImage struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type ActivityObjectActorVerification struct {
-	AdHocVerified *string `json:"adHocVerified"`
+	AdHocVerified *string `json:"adHocVerified,omitempty"`
 }
 
 type ActivityObjectActor struct {
-	ClientSpecificActorInfo *ActivityObjectActorClientSpecificActorInfo `json:"clientSpecificActorInfo"`
-	DisplayName             *string                                     `json:"displayName"`
-	ID                      *string                                     `json:"id"`
-	Image                   *ActivityObjectActorImage                   `json:"image"`
-	URL                     *string                                     `json:"url"`
-	Verification            *ActivityObjectActorVerification            `json:"verification"`
+	ClientSpecificActorInfo *ActivityObjectActorClientSpecificActorInfo `json:"clientSpecificActorInfo,omitempty"`
+	DisplayName             *string                                     `json:"displayName,omitempty"`
+	ID                      *string                                     `json:"id,omitempty"`
+	Image                   *ActivityObjectActorImage                   `json:"image,omitempty"`
+	URL                     *string                                     `json:"url,omitempty"`
+	Verification            *ActivityObjectActorVerification            `json:"verification,omitempty"`
 }
 
 type ActivityObjectAttachmentsEmbed struct {
-	Type *string `json:"type"`
-	URL  *string `json:"url"`
+	Type *string `json:"type,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type ActivityObjectAttachmentsFullImage struct {
-	Height *int64  `json:"height"`
-	Type   *string `json:"type"`
-	URL    *string `json:"url"`
-	Width  *int64  `json:"width"`
+	Height *int64  `json:"height,omitempty"`
+	Type   *string `json:"type,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int64  `json:"width,omitempty"`
 }
 
 type ActivityObjectAttachmentsImage struct {
-	Height *int64  `json:"height"`
-	Type   *string `json:"type"`
-	URL    *string `json:"url"`
-	Width  *int64  `json:"width"`
+	Height *int64  `json:"height,omitempty"`
+	Type   *string `json:"type,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int64  `json:"width,omitempty"`
 }
 
 type ActivityObjectAttachmentsThumbnailsImage struct {
-	Height *int64  `json:"height"`
-	Type   *string `json:"type"`
-	URL    *string `json:"url"`
-	Width  *int64  `json:"width"`
+	Height *int64  `json:"height,omitempty"`
+	Type   *string `json:"type,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int64  `json:"width,omitempty"`
 }
 
 type ActivityObjectAttachmentsThumbnails struct {
-	Description *string                                   `json:"description"`
-	Image       *ActivityObjectAttachmentsThumbnailsImage `json:"image"`
-	URL         *string                                   `json:"url"`
+	Description *string                                   `json:"description,omitempty"`
+	Image       *ActivityObjectAttachmentsThumbnailsImage `json:"image,omitempty"`
+	URL         *string                                   `json:"url,omitempty"`
 }
 
 type ActivityObjectAttachments struct {
-	Content     *string                               `json:"content"`
-	DisplayName *string                               `json:"displayName"`
-	Embed       *ActivityObjectAttachmentsEmbed       `json:"embed"`
-	FullImage   *ActivityObjectAttachmentsFullImage   `json:"fullImage"`
-	ID          *string                               `json:"id"`
-	Image       *ActivityObjectAttachmentsImage       `json:"image"`
-	ObjectType  *string                               `json:"objectType"`
-	Thumbnails  []ActivityObjectAttachmentsThumbnails `json:"thumbnails"`
-	URL         *string                               `json:"url"`
+	Content     *string                               `json:"content,omitempty"`
+	DisplayName *string                               `json:"displayName,omitempty"`
+	Embed       *ActivityObjectAttachmentsEmbed       `json:"embed,omitempty"`
+	FullImage   *ActivityObjectAttachmentsFullImage   `json:"fullImage,omitempty"`
+	ID          *string                               `json:"id,omitempty"`
+	Image       *ActivityObjectAttachmentsImage       `json:"image,omitempty"`
+	ObjectType  *string                               `json:"objectType,omitempty"`
+	Thumbnails  []ActivityObjectAttachmentsThumbnails `json:"thumbnails,omitempty"`
+	URL         *string                               `json:"url,omitempty"`
 }
 
 type ActivityObjectPlusoners struct {
-	SelfLink   *string `json:"selfLink"`
-	TotalItems *int64  `json:"totalItems"`
+	SelfLink   *string `json:"selfLink,omitempty"`
+	TotalItems *int64  `json:"totalItems,omitempty"`
 }
 
 type ActivityObjectReplies struct {
-	SelfLink   *string `json:"selfLink"`
-	TotalItems *int64  `json:"totalItems"`
+	SelfLink   *string `json:"selfLink,omitempty"`
+	TotalItems *int64  `json:"totalItems,omitempty"`
 }
 
 type ActivityObjectResharers struct {
-	SelfLink   *string `json:"selfLink"`
-	TotalItems *int64  `json:"totalItems"`
+	SelfLink   *string `json:"selfLink,omitempty"`
+	TotalItems *int64  `json:"totalItems,omitempty"`
 }
 
 type ActivityObject struct {
-	Actor           *ActivityObjectActor        `json:"actor"`
-	Attachments     []ActivityObjectAttachments `json:"attachments"`
-	Content         *string                     `json:"content"`
-	ID              *string                     `json:"id"`
-	ObjectType      *string                     `json:"objectType"`
-	OriginalContent *string                     `json:"originalContent"`
-	Plusoners       *ActivityObjectPlusoners    `json:"plusoners"`
-	Replies         *ActivityObjectReplies      `json:"replies"`
-	Resharers       *ActivityObjectResharers    `json:"resharers"`
-	URL             *string                     `json:"url"`
+	Actor           *ActivityObjectActor        `json:"actor,omitempty"`
+	Attachments     []ActivityObjectAttachments `json:"attachments,omitempty"`
+	Content         *string                     `json:"content,omitempty"`
+	ID              *string                     `json:"id,omitempty"`
+	ObjectType      *string                     `json:"objectType,omitempty"`
+	OriginalContent *string                     `json:"originalContent,omitempty"`
+	Plusoners       *ActivityObjectPlusoners    `json:"plusoners,omitempty"`
+	Replies         *ActivityObjectReplies      `json:"replies,omitempty"`
+	Resharers       *ActivityObjectResharers    `json:"resharers,omitempty"`
+	URL             *string                     `json:"url,omitempty"`
 }
 
 type ActivityProvider struct {
-	Title *string `json:"title"`
+	Title *string `json:"title,omitempty"`
 }
 
 type Activity struct {
-	Access          *ACL              `json:"access"`
-	Actor           *ActivityActor    `json:"actor"`
-	Address         *string           `json:"address"`
-	Annotation      *string           `json:"annotation"`
-	CrosspostSource *string           `json:"crosspostSource"`
-	Etag            *string           `json:"etag"`
-	Geocode         *string           `json:"geocode"`
-	ID              *string           `json:"id"`
-	Kind            *string           `json:"kind"`
-	Location        *Place            `json:"location"`
-	Object          *ActivityObject   `json:"object"`
-	PlaceID         *string           `json:"placeId"`
-	PlaceName       *string           `json:"placeName"`
-	Provider        *ActivityProvider `json:"provider"`
-	Published       *time.Time        `json:"published"`
-	Radius          *string           `json:"radius"`
-	Title           *string           `json:"title"`
-	Updated         *time.Time        `json:"updated"`
-	URL             *string           `json:"url"`
-	Verb            *string           `json:"verb"`
+	Access          *ACL              `json:"access,omitempty"`
+	Actor           *ActivityActor    `json:"actor,omitempty"`
+	Address         *string           `json:"address,omitempty"`
+	Annotation      *string           `json:"annotation,omitempty"`
+	CrosspostSource *string           `json:"crosspostSource,omitempty"`
+	Etag            *string           `json:"etag,omitempty"`
+	Geocode         *string           `json:"geocode,omitempty"`
+	ID              *string           `json:"id,omitempty"`
+	Kind            *string           `json:"kind,omitempty"`
+	Location        *Place            `json:"location,omitempty"`
+	Object          *ActivityObject   `json:"object,omitempty"`
+	PlaceID         *string           `json:"placeId,omitempty"`
+	PlaceName       *string           `json:"placeName,omitempty"`
+	Provider        *ActivityProvider `json:"provider,omitempty"`
+	Published       *time.Time        `json:"published,omitempty"`
+	Radius          *string           `json:"radius,omitempty"`
+	Title           *string           `json:"title,omitempty"`
+	Updated         *time.Time        `json:"updated,omitempty"`
+	URL             *string           `json:"url,omitempty"`
+	Verb            *string           `json:"verb,omitempty"`
 }

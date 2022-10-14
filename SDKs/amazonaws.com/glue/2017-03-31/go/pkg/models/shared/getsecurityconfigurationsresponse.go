@@ -1,6 +1,6 @@
 package shared
 
 type GetSecurityConfigurationsResponse struct {
-	NextToken              *string                 `json:"NextToken"`
-	SecurityConfigurations []SecurityConfiguration `json:"SecurityConfigurations"`
+	NextToken              *string                 `json:"NextToken,omitempty"`
+	SecurityConfigurations []SecurityConfiguration `json:"SecurityConfigurations,omitempty"`
 }

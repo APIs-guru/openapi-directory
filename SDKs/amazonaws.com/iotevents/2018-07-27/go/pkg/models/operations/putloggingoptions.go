@@ -15,10 +15,10 @@ type PutLoggingOptionsHeaders struct {
 }
 
 type PutLoggingOptionsRequestBodyLoggingOptions struct {
-	DetectorDebugOptions []shared.DetectorDebugOption `json:"detectorDebugOptions"`
-	Enabled              *bool                        `json:"enabled"`
-	Level                *shared.LoggingLevelEnum     `json:"level"`
-	RoleArn              *string                      `json:"roleArn"`
+	DetectorDebugOptions []shared.DetectorDebugOption `json:"detectorDebugOptions,omitempty"`
+	Enabled              *bool                        `json:"enabled,omitempty"`
+	Level                *shared.LoggingLevelEnum     `json:"level,omitempty"`
+	RoleArn              *string                      `json:"roleArn,omitempty"`
 }
 
 type PutLoggingOptionsRequestBody struct {

@@ -1,9 +1,9 @@
 package shared
 
 type PostgresqlProfile struct {
-	Database *string `json:"database"`
-	Hostname *string `json:"hostname"`
-	Password *string `json:"password"`
-	Port     *int32  `json:"port"`
-	Username *string `json:"username"`
+	Database *string `json:"database,omitempty"`
+	Hostname *string `json:"hostname,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int32  `json:"port,omitempty"`
+	Username *string `json:"username,omitempty"`
 }

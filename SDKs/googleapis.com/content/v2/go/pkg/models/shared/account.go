@@ -1,16 +1,16 @@
 package shared
 
 type Account struct {
-	AdultContent         *bool                        `json:"adultContent"`
-	AdwordsLinks         []AccountAdwordsLink         `json:"adwordsLinks"`
-	BusinessInformation  *AccountBusinessInformation  `json:"businessInformation"`
-	GoogleMyBusinessLink *AccountGoogleMyBusinessLink `json:"googleMyBusinessLink"`
-	ID                   *string                      `json:"id"`
-	Kind                 *string                      `json:"kind"`
-	Name                 *string                      `json:"name"`
-	ReviewsURL           *string                      `json:"reviewsUrl"`
-	SellerID             *string                      `json:"sellerId"`
-	Users                []AccountUser                `json:"users"`
-	WebsiteURL           *string                      `json:"websiteUrl"`
-	YoutubeChannelLinks  []AccountYouTubeChannelLink  `json:"youtubeChannelLinks"`
+	AdultContent         *bool                        `json:"adultContent,omitempty"`
+	AdwordsLinks         []AccountAdwordsLink         `json:"adwordsLinks,omitempty"`
+	BusinessInformation  *AccountBusinessInformation  `json:"businessInformation,omitempty"`
+	GoogleMyBusinessLink *AccountGoogleMyBusinessLink `json:"googleMyBusinessLink,omitempty"`
+	ID                   *string                      `json:"id,omitempty"`
+	Kind                 *string                      `json:"kind,omitempty"`
+	Name                 *string                      `json:"name,omitempty"`
+	ReviewsURL           *string                      `json:"reviewsUrl,omitempty"`
+	SellerID             *string                      `json:"sellerId,omitempty"`
+	Users                []AccountUser                `json:"users,omitempty"`
+	WebsiteURL           *string                      `json:"websiteUrl,omitempty"`
+	YoutubeChannelLinks  []AccountYouTubeChannelLink  `json:"youtubeChannelLinks,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type APIKey struct {
-	Deletes     *int64  `json:"deletes"`
-	Description *string `json:"description"`
-	Expires     *int64  `json:"expires"`
-	ID          *string `json:"id"`
+	Deletes     *int64  `json:"deletes,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Expires     *int64  `json:"expires,omitempty"`
+	ID          *string `json:"id,omitempty"`
 }

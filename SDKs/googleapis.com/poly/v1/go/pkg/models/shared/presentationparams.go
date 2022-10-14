@@ -9,7 +9,7 @@ const (
 )
 
 type PresentationParams struct {
-	BackgroundColor   *string                           `json:"backgroundColor"`
-	ColorSpace        *PresentationParamsColorSpaceEnum `json:"colorSpace"`
-	OrientingRotation *Quaternion                       `json:"orientingRotation"`
+	BackgroundColor   *string                           `json:"backgroundColor,omitempty"`
+	ColorSpace        *PresentationParamsColorSpaceEnum `json:"colorSpace,omitempty"`
+	OrientingRotation *Quaternion                       `json:"orientingRotation,omitempty"`
 }

@@ -1,17 +1,17 @@
 package shared
 
 type ReportGenerator struct {
-	CreateTime                       *string          `json:"CreateTime"`
-	Description                      *string          `json:"Description"`
-	LastReportGenerationTime         *string          `json:"LastReportGenerationTime"`
-	LastRunFailureReason             *string          `json:"LastRunFailureReason"`
-	LastRunStatus                    *string          `json:"LastRunStatus"`
-	LicenseManagerReportGeneratorArn *string          `json:"LicenseManagerReportGeneratorArn"`
-	ReportContext                    *ReportContext   `json:"ReportContext"`
-	ReportCreatorAccount             *string          `json:"ReportCreatorAccount"`
-	ReportFrequency                  *ReportFrequency `json:"ReportFrequency"`
-	ReportGeneratorName              *string          `json:"ReportGeneratorName"`
-	ReportType                       []ReportTypeEnum `json:"ReportType"`
-	S3Location                       *S3Location      `json:"S3Location"`
-	Tags                             []Tag            `json:"Tags"`
+	CreateTime                       *string          `json:"CreateTime,omitempty"`
+	Description                      *string          `json:"Description,omitempty"`
+	LastReportGenerationTime         *string          `json:"LastReportGenerationTime,omitempty"`
+	LastRunFailureReason             *string          `json:"LastRunFailureReason,omitempty"`
+	LastRunStatus                    *string          `json:"LastRunStatus,omitempty"`
+	LicenseManagerReportGeneratorArn *string          `json:"LicenseManagerReportGeneratorArn,omitempty"`
+	ReportContext                    *ReportContext   `json:"ReportContext,omitempty"`
+	ReportCreatorAccount             *string          `json:"ReportCreatorAccount,omitempty"`
+	ReportFrequency                  *ReportFrequency `json:"ReportFrequency,omitempty"`
+	ReportGeneratorName              *string          `json:"ReportGeneratorName,omitempty"`
+	ReportType                       []ReportTypeEnum `json:"ReportType,omitempty"`
+	S3Location                       *S3Location      `json:"S3Location,omitempty"`
+	Tags                             []Tag            `json:"Tags,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ComplianceByResource struct {
-	Compliance   *Compliance `json:"Compliance"`
-	ResourceID   *string     `json:"ResourceId"`
-	ResourceType *string     `json:"ResourceType"`
+	Compliance   *Compliance `json:"Compliance,omitempty"`
+	ResourceID   *string     `json:"ResourceId,omitempty"`
+	ResourceType *string     `json:"ResourceType,omitempty"`
 }

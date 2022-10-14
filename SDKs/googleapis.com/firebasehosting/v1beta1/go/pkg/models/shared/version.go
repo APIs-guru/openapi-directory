@@ -13,16 +13,16 @@ const (
 )
 
 type Version struct {
-	Config       *ServingConfig     `json:"config"`
-	CreateTime   *string            `json:"createTime"`
-	CreateUser   *ActingUser        `json:"createUser"`
-	DeleteTime   *string            `json:"deleteTime"`
-	DeleteUser   *ActingUser        `json:"deleteUser"`
-	FileCount    *string            `json:"fileCount"`
-	FinalizeTime *string            `json:"finalizeTime"`
-	FinalizeUser *ActingUser        `json:"finalizeUser"`
-	Labels       map[string]string  `json:"labels"`
-	Name         *string            `json:"name"`
-	Status       *VersionStatusEnum `json:"status"`
-	VersionBytes *string            `json:"versionBytes"`
+	Config       *ServingConfig     `json:"config,omitempty"`
+	CreateTime   *string            `json:"createTime,omitempty"`
+	CreateUser   *ActingUser        `json:"createUser,omitempty"`
+	DeleteTime   *string            `json:"deleteTime,omitempty"`
+	DeleteUser   *ActingUser        `json:"deleteUser,omitempty"`
+	FileCount    *string            `json:"fileCount,omitempty"`
+	FinalizeTime *string            `json:"finalizeTime,omitempty"`
+	FinalizeUser *ActingUser        `json:"finalizeUser,omitempty"`
+	Labels       map[string]string  `json:"labels,omitempty"`
+	Name         *string            `json:"name,omitempty"`
+	Status       *VersionStatusEnum `json:"status,omitempty"`
+	VersionBytes *string            `json:"versionBytes,omitempty"`
 }

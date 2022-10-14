@@ -9,10 +9,10 @@ type QuittungTseRequest struct {
 }
 
 type QuittungTse200ApplicationJSON struct {
-	Data      *interface{} `json:"data"`
-	Publickey *string      `json:"publickey"`
-	Raw       *string      `json:"raw"`
-	Signature *string      `json:"signature"`
+	Data      *interface{} `json:"data,omitempty"`
+	Publickey *string      `json:"publickey,omitempty"`
+	Raw       *string      `json:"raw,omitempty"`
+	Signature *string      `json:"signature,omitempty"`
 }
 
 type QuittungTseResponse struct {

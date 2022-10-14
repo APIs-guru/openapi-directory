@@ -1,9 +1,9 @@
 package shared
 
 type Error struct {
-	Details   map[string]string `json:"details"`
-	ErrorTime *string           `json:"errorTime"`
-	ErrorUUID *string           `json:"errorUuid"`
-	Message   *string           `json:"message"`
-	Reason    *string           `json:"reason"`
+	Details   map[string]string `json:"details,omitempty"`
+	ErrorTime *string           `json:"errorTime,omitempty"`
+	ErrorUUID *string           `json:"errorUuid,omitempty"`
+	Message   *string           `json:"message,omitempty"`
+	Reason    *string           `json:"reason,omitempty"`
 }

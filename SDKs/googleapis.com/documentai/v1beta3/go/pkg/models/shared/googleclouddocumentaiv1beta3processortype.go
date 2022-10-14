@@ -14,10 +14,10 @@ const (
 )
 
 type GoogleCloudDocumentaiV1beta3ProcessorType struct {
-	AllowCreation      *bool                                                     `json:"allowCreation"`
-	AvailableLocations []GoogleCloudDocumentaiV1beta3ProcessorTypeLocationInfo   `json:"availableLocations"`
-	Category           *string                                                   `json:"category"`
-	LaunchStage        *GoogleCloudDocumentaiV1beta3ProcessorTypeLaunchStageEnum `json:"launchStage"`
-	Name               *string                                                   `json:"name"`
-	Type               *string                                                   `json:"type"`
+	AllowCreation      *bool                                                     `json:"allowCreation,omitempty"`
+	AvailableLocations []GoogleCloudDocumentaiV1beta3ProcessorTypeLocationInfo   `json:"availableLocations,omitempty"`
+	Category           *string                                                   `json:"category,omitempty"`
+	LaunchStage        *GoogleCloudDocumentaiV1beta3ProcessorTypeLaunchStageEnum `json:"launchStage,omitempty"`
+	Name               *string                                                   `json:"name,omitempty"`
+	Type               *string                                                   `json:"type,omitempty"`
 }

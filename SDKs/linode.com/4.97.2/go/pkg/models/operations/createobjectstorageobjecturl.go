@@ -34,7 +34,7 @@ type CreateObjectStorageObjectURLRequest struct {
 }
 
 type CreateObjectStorageObjectURLDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateObjectStorageObjectURLResponse struct {

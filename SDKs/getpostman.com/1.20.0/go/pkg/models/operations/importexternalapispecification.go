@@ -1,93 +1,93 @@
 package operations
 
 type ImportExternalAPISpecificationRequestBodyInputInfoLicense struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputInfo struct {
-	License *ImportExternalAPISpecificationRequestBodyInputInfoLicense `json:"license"`
-	Title   *string                                                    `json:"title"`
-	Version *string                                                    `json:"version"`
+	License *ImportExternalAPISpecificationRequestBodyInputInfoLicense `json:"license,omitempty"`
+	Title   *string                                                    `json:"title,omitempty"`
+	Version *string                                                    `json:"version,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetParametersSchema struct {
-	Format *string `json:"format"`
-	Type   *string `json:"type"`
+	Format *string `json:"format,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetParameters struct {
-	Description *string                                                                     `json:"description"`
-	In          *string                                                                     `json:"in"`
-	Name        *string                                                                     `json:"name"`
-	Required    *bool                                                                       `json:"required"`
-	Schema      *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetParametersSchema `json:"schema"`
+	Description *string                                                                     `json:"description,omitempty"`
+	In          *string                                                                     `json:"in,omitempty"`
+	Name        *string                                                                     `json:"name,omitempty"`
+	Required    *bool                                                                       `json:"required,omitempty"`
+	Schema      *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetParametersSchema `json:"schema,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaPropertiesCode struct {
-	Format *string `json:"format"`
-	Type   *string `json:"type"`
+	Format *string `json:"format,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaPropertiesMessage struct {
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaProperties struct {
-	Code    *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaPropertiesCode    `json:"code"`
-	Message *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaPropertiesMessage `json:"message"`
+	Code    *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaPropertiesCode    `json:"code,omitempty"`
+	Message *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaPropertiesMessage `json:"message,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchema struct {
-	Properties *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaProperties `json:"properties"`
-	Required   []string                                                                                                          `json:"required"`
+	Properties *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchemaProperties `json:"properties,omitempty"`
+	Required   []string                                                                                                          `json:"required,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSON struct {
-	Schema *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchema `json:"schema"`
+	Schema *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSONSchema `json:"schema,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContent struct {
-	ApplicationJSON *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSON `json:"application/json"`
+	ApplicationJSON *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContentApplicationJSON `json:"application/json,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefault struct {
-	Content     *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContent `json:"content"`
-	Description *string                                                                            `json:"description"`
+	Content     *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefaultContent `json:"content,omitempty"`
+	Description *string                                                                            `json:"description,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponses struct {
-	Default *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefault `json:"default"`
+	Default *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponsesDefault `json:"default,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPetsGet struct {
-	OperationID *string                                                                `json:"operationId"`
-	Parameters  []ImportExternalAPISpecificationRequestBodyInputPathsPetsGetParameters `json:"parameters"`
-	Responses   *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponses   `json:"responses"`
-	Summary     *string                                                                `json:"summary"`
+	OperationID *string                                                                `json:"operationId,omitempty"`
+	Parameters  []ImportExternalAPISpecificationRequestBodyInputPathsPetsGetParameters `json:"parameters,omitempty"`
+	Responses   *ImportExternalAPISpecificationRequestBodyInputPathsPetsGetResponses   `json:"responses,omitempty"`
+	Summary     *string                                                                `json:"summary,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPathsPets struct {
-	Get *ImportExternalAPISpecificationRequestBodyInputPathsPetsGet `json:"get"`
+	Get *ImportExternalAPISpecificationRequestBodyInputPathsPetsGet `json:"get,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputPaths struct {
-	RootPets *ImportExternalAPISpecificationRequestBodyInputPathsPets `json:"/pets"`
+	RootPets *ImportExternalAPISpecificationRequestBodyInputPathsPets `json:"/pets,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInputServers struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBodyInput struct {
-	Info    *ImportExternalAPISpecificationRequestBodyInputInfo     `json:"info"`
-	Openapi *string                                                 `json:"openapi"`
-	Paths   *ImportExternalAPISpecificationRequestBodyInputPaths    `json:"paths"`
-	Servers []ImportExternalAPISpecificationRequestBodyInputServers `json:"servers"`
+	Info    *ImportExternalAPISpecificationRequestBodyInputInfo     `json:"info,omitempty"`
+	Openapi *string                                                 `json:"openapi,omitempty"`
+	Paths   *ImportExternalAPISpecificationRequestBodyInputPaths    `json:"paths,omitempty"`
+	Servers []ImportExternalAPISpecificationRequestBodyInputServers `json:"servers,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequestBody struct {
-	Input *ImportExternalAPISpecificationRequestBodyInput `json:"input"`
-	Type  *string                                         `json:"type"`
+	Input *ImportExternalAPISpecificationRequestBodyInput `json:"input,omitempty"`
+	Type  *string                                         `json:"type,omitempty"`
 }
 
 type ImportExternalAPISpecificationRequest struct {
@@ -95,27 +95,27 @@ type ImportExternalAPISpecificationRequest struct {
 }
 
 type ImportExternalAPISpecification200ApplicationJSONCollections struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type ImportExternalAPISpecification200ApplicationJSON struct {
-	Collections []ImportExternalAPISpecification200ApplicationJSONCollections `json:"collections"`
+	Collections []ImportExternalAPISpecification200ApplicationJSONCollections `json:"collections,omitempty"`
 }
 
 type ImportExternalAPISpecification400ApplicationJSONErrorDetails struct {
-	Param *string `json:"param"`
+	Param *string `json:"param,omitempty"`
 }
 
 type ImportExternalAPISpecification400ApplicationJSONError struct {
-	Details *ImportExternalAPISpecification400ApplicationJSONErrorDetails `json:"details"`
-	Message *string                                                       `json:"message"`
-	Name    *string                                                       `json:"name"`
+	Details *ImportExternalAPISpecification400ApplicationJSONErrorDetails `json:"details,omitempty"`
+	Message *string                                                       `json:"message,omitempty"`
+	Name    *string                                                       `json:"name,omitempty"`
 }
 
 type ImportExternalAPISpecification400ApplicationJSON struct {
-	Error *ImportExternalAPISpecification400ApplicationJSONError `json:"error"`
+	Error *ImportExternalAPISpecification400ApplicationJSONError `json:"error,omitempty"`
 }
 
 type ImportExternalAPISpecificationResponse struct {

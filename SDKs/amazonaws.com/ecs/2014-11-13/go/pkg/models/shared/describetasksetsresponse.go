@@ -1,6 +1,6 @@
 package shared
 
 type DescribeTaskSetsResponse struct {
-	Failures []Failure `json:"failures"`
-	TaskSets []TaskSet `json:"taskSets"`
+	Failures []Failure `json:"failures,omitempty"`
+	TaskSets []TaskSet `json:"taskSets,omitempty"`
 }

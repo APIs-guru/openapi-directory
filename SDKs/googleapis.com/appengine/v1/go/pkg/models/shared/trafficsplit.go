@@ -10,6 +10,6 @@ const (
 )
 
 type TrafficSplit struct {
-	Allocations map[string]float64       `json:"allocations"`
-	ShardBy     *TrafficSplitShardByEnum `json:"shardBy"`
+	Allocations map[string]float64       `json:"allocations,omitempty"`
+	ShardBy     *TrafficSplitShardByEnum `json:"shardBy,omitempty"`
 }

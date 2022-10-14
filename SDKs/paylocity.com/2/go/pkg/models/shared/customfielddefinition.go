@@ -1,15 +1,15 @@
 package shared
 
 type CustomFieldDefinitionValues struct {
-	Code        *string `json:"code"`
-	Description *string `json:"description"`
+	Code        *string `json:"code,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 type CustomFieldDefinition struct {
-	Category     *string                       `json:"category"`
-	DefaultValue *string                       `json:"defaultValue"`
-	IsRequired   *bool                         `json:"isRequired"`
-	Label        *string                       `json:"label"`
-	Type         *string                       `json:"type"`
-	Values       []CustomFieldDefinitionValues `json:"values"`
+	Category     *string                       `json:"category,omitempty"`
+	DefaultValue *string                       `json:"defaultValue,omitempty"`
+	IsRequired   *bool                         `json:"isRequired,omitempty"`
+	Label        *string                       `json:"label,omitempty"`
+	Type         *string                       `json:"type,omitempty"`
+	Values       []CustomFieldDefinitionValues `json:"values,omitempty"`
 }

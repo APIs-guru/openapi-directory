@@ -8,7 +8,7 @@ const (
 )
 
 type SortedDimension struct {
-	Kind      *string                       `json:"kind"`
-	Name      *string                       `json:"name"`
-	SortOrder *SortedDimensionSortOrderEnum `json:"sortOrder"`
+	Kind      *string                       `json:"kind,omitempty"`
+	Name      *string                       `json:"name,omitempty"`
+	SortOrder *SortedDimensionSortOrderEnum `json:"sortOrder,omitempty"`
 }

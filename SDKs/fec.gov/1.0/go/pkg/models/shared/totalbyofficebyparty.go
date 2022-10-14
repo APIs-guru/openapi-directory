@@ -1,9 +1,9 @@
 package shared
 
 type TotalByOfficeByParty struct {
-	ElectionYear       *int32   `json:"election_year"`
-	Office             *string  `json:"office"`
-	Party              *string  `json:"party"`
-	TotalDisbursements *float64 `json:"total_disbursements"`
-	TotalReceipts      *float64 `json:"total_receipts"`
+	ElectionYear       *int32   `json:"election_year,omitempty"`
+	Office             *string  `json:"office,omitempty"`
+	Party              *string  `json:"party,omitempty"`
+	TotalDisbursements *float64 `json:"total_disbursements,omitempty"`
+	TotalReceipts      *float64 `json:"total_receipts,omitempty"`
 }

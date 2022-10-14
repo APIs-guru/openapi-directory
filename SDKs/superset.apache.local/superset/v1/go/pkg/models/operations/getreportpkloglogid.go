@@ -24,28 +24,28 @@ type GetReportPkLogLogIDRequest struct {
 }
 
 type GetReportPkLogLogID200ApplicationJSON struct {
-	ID     *string                              `json:"id"`
-	Result *shared.ReportExecutionLogRestAPIGet `json:"result"`
+	ID     *string                              `json:"id,omitempty"`
+	Result *shared.ReportExecutionLogRestAPIGet `json:"result,omitempty"`
 }
 
 type GetReportPkLogLogID400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLogLogID401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLogLogID404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLogLogID422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLogLogID500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkLogLogIDResponse struct {

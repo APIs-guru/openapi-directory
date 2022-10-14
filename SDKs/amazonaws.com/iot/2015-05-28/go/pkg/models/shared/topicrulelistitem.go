@@ -5,9 +5,9 @@ import (
 )
 
 type TopicRuleListItem struct {
-	CreatedAt    *time.Time `json:"createdAt"`
-	RuleArn      *string    `json:"ruleArn"`
-	RuleDisabled *bool      `json:"ruleDisabled"`
-	RuleName     *string    `json:"ruleName"`
-	TopicPattern *string    `json:"topicPattern"`
+	CreatedAt    *time.Time `json:"createdAt,omitempty"`
+	RuleArn      *string    `json:"ruleArn,omitempty"`
+	RuleDisabled *bool      `json:"ruleDisabled,omitempty"`
+	RuleName     *string    `json:"ruleName,omitempty"`
+	TopicPattern *string    `json:"topicPattern,omitempty"`
 }

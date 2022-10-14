@@ -27,18 +27,18 @@ type ListIPCommandRequest struct {
 }
 
 type ListIPCommand200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListIPCommand200ApplicationJSONListIPCommandResponse struct {
-	IPCommands []shared.SupersimV1IPCommand         `json:"ip_commands"`
-	Meta       *ListIPCommand200ApplicationJSONMeta `json:"meta"`
+	IPCommands []shared.SupersimV1IPCommand         `json:"ip_commands,omitempty"`
+	Meta       *ListIPCommand200ApplicationJSONMeta `json:"meta,omitempty"`
 }
 
 type ListIPCommandResponse struct {

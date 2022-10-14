@@ -1,7 +1,7 @@
 package shared
 
 type CutoffTime struct {
-	Hour     *int64  `json:"hour"`
-	Minute   *int64  `json:"minute"`
-	Timezone *string `json:"timezone"`
+	Hour     *int64  `json:"hour,omitempty"`
+	Minute   *int64  `json:"minute,omitempty"`
+	Timezone *string `json:"timezone,omitempty"`
 }

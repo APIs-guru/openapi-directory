@@ -18,8 +18,8 @@ type GetAbusesAbuseIDMessagesRequest struct {
 }
 
 type GetAbusesAbuseIDMessages200ApplicationJSON struct {
-	Data  []interface{} `json:"data"`
-	Total *int64        `json:"total"`
+	Data  []interface{} `json:"data,omitempty"`
+	Total *int64        `json:"total,omitempty"`
 }
 
 type GetAbusesAbuseIDMessagesResponse struct {

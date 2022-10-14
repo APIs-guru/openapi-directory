@@ -9,17 +9,17 @@ type GetAllAPIVersionsRequest struct {
 }
 
 type GetAllAPIVersions200ApplicationJSONVersions struct {
-	CreatedAt   *string `json:"createdAt"`
-	CreatedBy   *string `json:"createdBy"`
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
-	Summary     *string `json:"summary"`
-	UpdatedAt   *string `json:"updatedAt"`
+	CreatedAt   *string `json:"createdAt,omitempty"`
+	CreatedBy   *string `json:"createdBy,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Summary     *string `json:"summary,omitempty"`
+	UpdatedAt   *string `json:"updatedAt,omitempty"`
 }
 
 type GetAllAPIVersions200ApplicationJSON struct {
-	Versions []GetAllAPIVersions200ApplicationJSONVersions `json:"versions"`
+	Versions []GetAllAPIVersions200ApplicationJSONVersions `json:"versions,omitempty"`
 }
 
 type GetAllAPIVersionsResponse struct {

@@ -5,11 +5,11 @@ import (
 )
 
 type SessionMappingDetail struct {
-	CreationTime     *time.Time        `json:"CreationTime"`
-	IdentityID       *string           `json:"IdentityId"`
-	IdentityName     *string           `json:"IdentityName"`
-	IdentityType     *IdentityTypeEnum `json:"IdentityType"`
-	LastModifiedTime *time.Time        `json:"LastModifiedTime"`
-	SessionPolicyArn *string           `json:"SessionPolicyArn"`
-	StudioID         *string           `json:"StudioId"`
+	CreationTime     *time.Time        `json:"CreationTime,omitempty"`
+	IdentityID       *string           `json:"IdentityId,omitempty"`
+	IdentityName     *string           `json:"IdentityName,omitempty"`
+	IdentityType     *IdentityTypeEnum `json:"IdentityType,omitempty"`
+	LastModifiedTime *time.Time        `json:"LastModifiedTime,omitempty"`
+	SessionPolicyArn *string           `json:"SessionPolicyArn,omitempty"`
+	StudioID         *string           `json:"StudioId,omitempty"`
 }

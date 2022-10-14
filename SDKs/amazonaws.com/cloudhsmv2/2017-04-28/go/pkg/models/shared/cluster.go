@@ -5,19 +5,19 @@ import (
 )
 
 type Cluster struct {
-	BackupPolicy          *BackupPolicyEnum      `json:"BackupPolicy"`
-	BackupRetentionPolicy *BackupRetentionPolicy `json:"BackupRetentionPolicy"`
-	Certificates          *Certificates          `json:"Certificates"`
-	ClusterID             *string                `json:"ClusterId"`
-	CreateTimestamp       *time.Time             `json:"CreateTimestamp"`
-	HsmType               *string                `json:"HsmType"`
-	Hsms                  []Hsm                  `json:"Hsms"`
-	PreCoPassword         *string                `json:"PreCoPassword"`
-	SecurityGroup         *string                `json:"SecurityGroup"`
-	SourceBackupID        *string                `json:"SourceBackupId"`
-	State                 *ClusterStateEnum      `json:"State"`
-	StateMessage          *string                `json:"StateMessage"`
-	SubnetMapping         map[string]string      `json:"SubnetMapping"`
-	TagList               []Tag                  `json:"TagList"`
-	VpcID                 *string                `json:"VpcId"`
+	BackupPolicy          *BackupPolicyEnum      `json:"BackupPolicy,omitempty"`
+	BackupRetentionPolicy *BackupRetentionPolicy `json:"BackupRetentionPolicy,omitempty"`
+	Certificates          *Certificates          `json:"Certificates,omitempty"`
+	ClusterID             *string                `json:"ClusterId,omitempty"`
+	CreateTimestamp       *time.Time             `json:"CreateTimestamp,omitempty"`
+	HsmType               *string                `json:"HsmType,omitempty"`
+	Hsms                  []Hsm                  `json:"Hsms,omitempty"`
+	PreCoPassword         *string                `json:"PreCoPassword,omitempty"`
+	SecurityGroup         *string                `json:"SecurityGroup,omitempty"`
+	SourceBackupID        *string                `json:"SourceBackupId,omitempty"`
+	State                 *ClusterStateEnum      `json:"State,omitempty"`
+	StateMessage          *string                `json:"StateMessage,omitempty"`
+	SubnetMapping         map[string]string      `json:"SubnetMapping,omitempty"`
+	TagList               []Tag                  `json:"TagList,omitempty"`
+	VpcID                 *string                `json:"VpcId,omitempty"`
 }

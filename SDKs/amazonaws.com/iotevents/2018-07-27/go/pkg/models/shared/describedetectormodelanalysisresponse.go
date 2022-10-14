@@ -1,5 +1,5 @@
 package shared
 
 type DescribeDetectorModelAnalysisResponse struct {
-	Status *AnalysisStatusEnum `json:"status"`
+	Status *AnalysisStatusEnum `json:"status,omitempty"`
 }

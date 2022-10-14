@@ -1,8 +1,8 @@
 package shared
 
 type GoogleAppsDriveLabelsV2FieldSchemaCapabilities struct {
-	CanDelete  *bool `json:"canDelete"`
-	CanDisable *bool `json:"canDisable"`
-	CanEnable  *bool `json:"canEnable"`
-	CanUpdate  *bool `json:"canUpdate"`
+	CanDelete  *bool `json:"canDelete,omitempty"`
+	CanDisable *bool `json:"canDisable,omitempty"`
+	CanEnable  *bool `json:"canEnable,omitempty"`
+	CanUpdate  *bool `json:"canUpdate,omitempty"`
 }

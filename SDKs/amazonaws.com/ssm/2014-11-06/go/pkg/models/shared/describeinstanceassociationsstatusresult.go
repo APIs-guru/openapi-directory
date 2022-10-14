@@ -1,6 +1,6 @@
 package shared
 
 type DescribeInstanceAssociationsStatusResult struct {
-	InstanceAssociationStatusInfos []InstanceAssociationStatusInfo `json:"InstanceAssociationStatusInfos"`
-	NextToken                      *string                         `json:"NextToken"`
+	InstanceAssociationStatusInfos []InstanceAssociationStatusInfo `json:"InstanceAssociationStatusInfos,omitempty"`
+	NextToken                      *string                         `json:"NextToken,omitempty"`
 }

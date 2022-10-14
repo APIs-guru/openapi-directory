@@ -1,7 +1,7 @@
 package shared
 
 type RegionViewModel struct {
-	ID         *string `json:"id"`
-	Name       *string `json:"name"`
-	ObjectName *string `json:"objectName"`
+	ID         *string `json:"id,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	ObjectName *string `json:"objectName,omitempty"`
 }

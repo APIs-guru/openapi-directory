@@ -8,7 +8,7 @@ const (
 )
 
 type TemplateRequest struct {
-	Name     *string                  `json:"name"`
-	Template *string                  `json:"template"`
-	Type     *TemplateRequestTypeEnum `json:"type"`
+	Name     *string                  `json:"name,omitempty"`
+	Template *string                  `json:"template,omitempty"`
+	Type     *TemplateRequestTypeEnum `json:"type,omitempty"`
 }

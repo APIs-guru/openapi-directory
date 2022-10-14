@@ -21,8 +21,8 @@ const (
 )
 
 type CreateContainerRecipeRequestBodyInstanceConfiguration struct {
-	BlockDeviceMappings []shared.InstanceBlockDeviceMapping `json:"blockDeviceMappings"`
-	Image               *string                             `json:"image"`
+	BlockDeviceMappings []shared.InstanceBlockDeviceMapping `json:"blockDeviceMappings,omitempty"`
+	Image               *string                             `json:"image,omitempty"`
 }
 
 type CreateContainerRecipeRequestBodyPlatformOverrideEnum string
@@ -33,27 +33,27 @@ const (
 )
 
 type CreateContainerRecipeRequestBodyTargetRepository struct {
-	RepositoryName *string                                `json:"repositoryName"`
-	Service        *shared.ContainerRepositoryServiceEnum `json:"service"`
+	RepositoryName *string                                `json:"repositoryName,omitempty"`
+	Service        *shared.ContainerRepositoryServiceEnum `json:"service,omitempty"`
 }
 
 type CreateContainerRecipeRequestBody struct {
 	ClientToken            string                                                 `json:"clientToken"`
 	Components             []shared.ComponentConfiguration                        `json:"components"`
 	ContainerType          CreateContainerRecipeRequestBodyContainerTypeEnum      `json:"containerType"`
-	Description            *string                                                `json:"description"`
-	DockerfileTemplateData *string                                                `json:"dockerfileTemplateData"`
-	DockerfileTemplateURI  *string                                                `json:"dockerfileTemplateUri"`
-	ImageOsVersionOverride *string                                                `json:"imageOsVersionOverride"`
-	InstanceConfiguration  *CreateContainerRecipeRequestBodyInstanceConfiguration `json:"instanceConfiguration"`
-	KmsKeyID               *string                                                `json:"kmsKeyId"`
+	Description            *string                                                `json:"description,omitempty"`
+	DockerfileTemplateData *string                                                `json:"dockerfileTemplateData,omitempty"`
+	DockerfileTemplateURI  *string                                                `json:"dockerfileTemplateUri,omitempty"`
+	ImageOsVersionOverride *string                                                `json:"imageOsVersionOverride,omitempty"`
+	InstanceConfiguration  *CreateContainerRecipeRequestBodyInstanceConfiguration `json:"instanceConfiguration,omitempty"`
+	KmsKeyID               *string                                                `json:"kmsKeyId,omitempty"`
 	Name                   string                                                 `json:"name"`
 	ParentImage            string                                                 `json:"parentImage"`
-	PlatformOverride       *CreateContainerRecipeRequestBodyPlatformOverrideEnum  `json:"platformOverride"`
+	PlatformOverride       *CreateContainerRecipeRequestBodyPlatformOverrideEnum  `json:"platformOverride,omitempty"`
 	SemanticVersion        string                                                 `json:"semanticVersion"`
-	Tags                   map[string]string                                      `json:"tags"`
+	Tags                   map[string]string                                      `json:"tags,omitempty"`
 	TargetRepository       CreateContainerRecipeRequestBodyTargetRepository       `json:"targetRepository"`
-	WorkingDirectory       *string                                                `json:"workingDirectory"`
+	WorkingDirectory       *string                                                `json:"workingDirectory,omitempty"`
 }
 
 type CreateContainerRecipeRequest struct {

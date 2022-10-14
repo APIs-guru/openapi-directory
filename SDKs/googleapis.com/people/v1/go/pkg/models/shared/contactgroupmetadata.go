@@ -1,6 +1,6 @@
 package shared
 
 type ContactGroupMetadata struct {
-	Deleted    *bool   `json:"deleted"`
-	UpdateTime *string `json:"updateTime"`
+	Deleted    *bool   `json:"deleted,omitempty"`
+	UpdateTime *string `json:"updateTime,omitempty"`
 }

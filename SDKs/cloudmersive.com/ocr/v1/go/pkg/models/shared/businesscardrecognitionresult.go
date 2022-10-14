@@ -5,12 +5,12 @@ import (
 )
 
 type BusinessCardRecognitionResult struct {
-	AddressString *string    `json:"AddressString"`
-	BusinessName  *string    `json:"BusinessName"`
-	EmailAddress  *string    `json:"EmailAddress"`
-	PersonName    *string    `json:"PersonName"`
-	PersonTitle   *string    `json:"PersonTitle"`
-	PhoneNumber   *string    `json:"PhoneNumber"`
-	Successful    *bool      `json:"Successful"`
-	Timestamp     *time.Time `json:"Timestamp"`
+	AddressString *string    `json:"AddressString,omitempty"`
+	BusinessName  *string    `json:"BusinessName,omitempty"`
+	EmailAddress  *string    `json:"EmailAddress,omitempty"`
+	PersonName    *string    `json:"PersonName,omitempty"`
+	PersonTitle   *string    `json:"PersonTitle,omitempty"`
+	PhoneNumber   *string    `json:"PhoneNumber,omitempty"`
+	Successful    *bool      `json:"Successful,omitempty"`
+	Timestamp     *time.Time `json:"Timestamp,omitempty"`
 }

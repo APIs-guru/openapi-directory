@@ -34,14 +34,14 @@ const (
 )
 
 type Field struct {
-	Cardinality  *FieldCardinalityEnum `json:"cardinality"`
-	DefaultValue *string               `json:"defaultValue"`
-	JSONName     *string               `json:"jsonName"`
-	Kind         *FieldKindEnum        `json:"kind"`
-	Name         *string               `json:"name"`
-	Number       *int32                `json:"number"`
-	OneofIndex   *int32                `json:"oneofIndex"`
-	Options      []Option              `json:"options"`
-	Packed       *bool                 `json:"packed"`
-	TypeURL      *string               `json:"typeUrl"`
+	Cardinality  *FieldCardinalityEnum `json:"cardinality,omitempty"`
+	DefaultValue *string               `json:"defaultValue,omitempty"`
+	JSONName     *string               `json:"jsonName,omitempty"`
+	Kind         *FieldKindEnum        `json:"kind,omitempty"`
+	Name         *string               `json:"name,omitempty"`
+	Number       *int32                `json:"number,omitempty"`
+	OneofIndex   *int32                `json:"oneofIndex,omitempty"`
+	Options      []Option              `json:"options,omitempty"`
+	Packed       *bool                 `json:"packed,omitempty"`
+	TypeURL      *string               `json:"typeUrl,omitempty"`
 }

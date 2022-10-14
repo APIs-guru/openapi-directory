@@ -14,7 +14,7 @@ type AddUserForTeamQueryParams struct {
 }
 
 type AddUserForTeamRequestBody struct {
-	Data *shared.TeamAddUserRequest `json:"data"`
+	Data *shared.TeamAddUserRequest `json:"data,omitempty"`
 }
 
 type AddUserForTeamRequest struct {
@@ -24,7 +24,7 @@ type AddUserForTeamRequest struct {
 }
 
 type AddUserForTeam200ApplicationJSON struct {
-	Data *shared.UserResponse `json:"data"`
+	Data *shared.UserResponse `json:"data,omitempty"`
 }
 
 type AddUserForTeamResponse struct {

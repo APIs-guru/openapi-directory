@@ -1,6 +1,6 @@
 package shared
 
 type WorkerDetails struct {
-	WorkItems  []WorkItemDetails `json:"workItems"`
-	WorkerName *string           `json:"workerName"`
+	WorkItems  []WorkItemDetails `json:"workItems,omitempty"`
+	WorkerName *string           `json:"workerName,omitempty"`
 }

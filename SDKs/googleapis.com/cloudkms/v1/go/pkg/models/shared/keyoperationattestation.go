@@ -9,7 +9,7 @@ const (
 )
 
 type KeyOperationAttestation struct {
-	CertChains *CertificateChains                 `json:"certChains"`
-	Content    *string                            `json:"content"`
-	Format     *KeyOperationAttestationFormatEnum `json:"format"`
+	CertChains *CertificateChains                 `json:"certChains,omitempty"`
+	Content    *string                            `json:"content,omitempty"`
+	Format     *KeyOperationAttestationFormatEnum `json:"format,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type FunctionCall struct {
-	Args     []interface{} `json:"args"`
-	Function *string       `json:"function"`
+	Args     []interface{} `json:"args,omitempty"`
+	Function *string       `json:"function,omitempty"`
 }

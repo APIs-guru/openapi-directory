@@ -1,18 +1,18 @@
 package shared
 
 type MySQLSettings struct {
-	AfterConnectScript            *string           `json:"AfterConnectScript"`
-	CleanSourceMetadataOnMismatch *bool             `json:"CleanSourceMetadataOnMismatch"`
-	DatabaseName                  *string           `json:"DatabaseName"`
-	EventsPollInterval            *int64            `json:"EventsPollInterval"`
-	MaxFileSize                   *int64            `json:"MaxFileSize"`
-	ParallelLoadThreads           *int64            `json:"ParallelLoadThreads"`
-	Password                      *string           `json:"Password"`
-	Port                          *int64            `json:"Port"`
-	SecretsManagerAccessRoleArn   *string           `json:"SecretsManagerAccessRoleArn"`
-	SecretsManagerSecretID        *string           `json:"SecretsManagerSecretId"`
-	ServerName                    *string           `json:"ServerName"`
-	ServerTimezone                *string           `json:"ServerTimezone"`
-	TargetDbType                  *TargetDbTypeEnum `json:"TargetDbType"`
-	Username                      *string           `json:"Username"`
+	AfterConnectScript            *string           `json:"AfterConnectScript,omitempty"`
+	CleanSourceMetadataOnMismatch *bool             `json:"CleanSourceMetadataOnMismatch,omitempty"`
+	DatabaseName                  *string           `json:"DatabaseName,omitempty"`
+	EventsPollInterval            *int64            `json:"EventsPollInterval,omitempty"`
+	MaxFileSize                   *int64            `json:"MaxFileSize,omitempty"`
+	ParallelLoadThreads           *int64            `json:"ParallelLoadThreads,omitempty"`
+	Password                      *string           `json:"Password,omitempty"`
+	Port                          *int64            `json:"Port,omitempty"`
+	SecretsManagerAccessRoleArn   *string           `json:"SecretsManagerAccessRoleArn,omitempty"`
+	SecretsManagerSecretID        *string           `json:"SecretsManagerSecretId,omitempty"`
+	ServerName                    *string           `json:"ServerName,omitempty"`
+	ServerTimezone                *string           `json:"ServerTimezone,omitempty"`
+	TargetDbType                  *TargetDbTypeEnum `json:"TargetDbType,omitempty"`
+	Username                      *string           `json:"Username,omitempty"`
 }

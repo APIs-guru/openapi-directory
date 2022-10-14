@@ -1,6 +1,6 @@
 package shared
 
 type OperationDNSKeyContext struct {
-	NewValue *DNSKey `json:"newValue"`
-	OldValue *DNSKey `json:"oldValue"`
+	NewValue *DNSKey `json:"newValue,omitempty"`
+	OldValue *DNSKey `json:"oldValue,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ClassifyTextRequest struct {
-	ClassificationModelOptions *ClassificationModelOptions `json:"classificationModelOptions"`
-	Document                   *Document                   `json:"document"`
+	ClassificationModelOptions *ClassificationModelOptions `json:"classificationModelOptions,omitempty"`
+	Document                   *Document                   `json:"document,omitempty"`
 }

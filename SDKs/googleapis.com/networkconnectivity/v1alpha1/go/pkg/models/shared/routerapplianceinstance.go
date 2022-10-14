@@ -1,7 +1,7 @@
 package shared
 
 type RouterApplianceInstance struct {
-	IPAddress        *string `json:"ipAddress"`
-	NetworkInterface *string `json:"networkInterface"`
-	VirtualMachine   *string `json:"virtualMachine"`
+	IPAddress        *string `json:"ipAddress,omitempty"`
+	NetworkInterface *string `json:"networkInterface,omitempty"`
+	VirtualMachine   *string `json:"virtualMachine,omitempty"`
 }

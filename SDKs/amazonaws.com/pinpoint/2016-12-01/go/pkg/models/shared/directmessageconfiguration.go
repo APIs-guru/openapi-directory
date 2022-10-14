@@ -1,13 +1,13 @@
 package shared
 
 type DirectMessageConfiguration struct {
-	AdmMessage                     *AdmMessage                     `json:"ADMMessage"`
-	ApnsMessage                    *ApnsMessage                    `json:"APNSMessage"`
-	BaiduMessage                   *BaiduMessage                   `json:"BaiduMessage"`
-	DefaultMessage                 *DefaultMessage                 `json:"DefaultMessage"`
-	DefaultPushNotificationMessage *DefaultPushNotificationMessage `json:"DefaultPushNotificationMessage"`
-	EmailMessage                   *EmailMessage                   `json:"EmailMessage"`
-	GcmMessage                     *GcmMessage                     `json:"GCMMessage"`
-	SmsMessage                     *SmsMessage                     `json:"SMSMessage"`
-	VoiceMessage                   *VoiceMessage                   `json:"VoiceMessage"`
+	AdmMessage                     *AdmMessage                     `json:"ADMMessage,omitempty"`
+	ApnsMessage                    *ApnsMessage                    `json:"APNSMessage,omitempty"`
+	BaiduMessage                   *BaiduMessage                   `json:"BaiduMessage,omitempty"`
+	DefaultMessage                 *DefaultMessage                 `json:"DefaultMessage,omitempty"`
+	DefaultPushNotificationMessage *DefaultPushNotificationMessage `json:"DefaultPushNotificationMessage,omitempty"`
+	EmailMessage                   *EmailMessage                   `json:"EmailMessage,omitempty"`
+	GcmMessage                     *GcmMessage                     `json:"GCMMessage,omitempty"`
+	SmsMessage                     *SmsMessage                     `json:"SMSMessage,omitempty"`
+	VoiceMessage                   *VoiceMessage                   `json:"VoiceMessage,omitempty"`
 }

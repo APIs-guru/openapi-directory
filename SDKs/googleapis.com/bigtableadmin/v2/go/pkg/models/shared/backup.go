@@ -9,12 +9,12 @@ const (
 )
 
 type Backup struct {
-	EncryptionInfo *EncryptionInfo  `json:"encryptionInfo"`
-	EndTime        *string          `json:"endTime"`
-	ExpireTime     *string          `json:"expireTime"`
-	Name           *string          `json:"name"`
-	SizeBytes      *string          `json:"sizeBytes"`
-	SourceTable    *string          `json:"sourceTable"`
-	StartTime      *string          `json:"startTime"`
-	State          *BackupStateEnum `json:"state"`
+	EncryptionInfo *EncryptionInfo  `json:"encryptionInfo,omitempty"`
+	EndTime        *string          `json:"endTime,omitempty"`
+	ExpireTime     *string          `json:"expireTime,omitempty"`
+	Name           *string          `json:"name,omitempty"`
+	SizeBytes      *string          `json:"sizeBytes,omitempty"`
+	SourceTable    *string          `json:"sourceTable,omitempty"`
+	StartTime      *string          `json:"startTime,omitempty"`
+	State          *BackupStateEnum `json:"state,omitempty"`
 }

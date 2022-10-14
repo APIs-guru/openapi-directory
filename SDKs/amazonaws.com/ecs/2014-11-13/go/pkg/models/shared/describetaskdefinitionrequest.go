@@ -1,6 +1,6 @@
 package shared
 
 type DescribeTaskDefinitionRequest struct {
-	Include        []TaskDefinitionFieldEnum `json:"include"`
+	Include        []TaskDefinitionFieldEnum `json:"include,omitempty"`
 	TaskDefinition string                    `json:"taskDefinition"`
 }

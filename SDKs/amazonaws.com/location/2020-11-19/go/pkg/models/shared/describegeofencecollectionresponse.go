@@ -9,9 +9,9 @@ type DescribeGeofenceCollectionResponse struct {
 	CollectionName        string            `json:"CollectionName"`
 	CreateTime            time.Time         `json:"CreateTime"`
 	Description           string            `json:"Description"`
-	KmsKeyID              *string           `json:"KmsKeyId"`
+	KmsKeyID              *string           `json:"KmsKeyId,omitempty"`
 	PricingPlan           PricingPlanEnum   `json:"PricingPlan"`
-	PricingPlanDataSource *string           `json:"PricingPlanDataSource"`
-	Tags                  map[string]string `json:"Tags"`
+	PricingPlanDataSource *string           `json:"PricingPlanDataSource,omitempty"`
+	Tags                  map[string]string `json:"Tags,omitempty"`
 	UpdateTime            time.Time         `json:"UpdateTime"`
 }

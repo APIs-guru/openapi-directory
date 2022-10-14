@@ -1,5 +1,5 @@
 package shared
 
 type DescribeDeliveryChannelStatusResponse struct {
-	DeliveryChannelsStatus []DeliveryChannelStatus `json:"DeliveryChannelsStatus"`
+	DeliveryChannelsStatus []DeliveryChannelStatus `json:"DeliveryChannelsStatus,omitempty"`
 }

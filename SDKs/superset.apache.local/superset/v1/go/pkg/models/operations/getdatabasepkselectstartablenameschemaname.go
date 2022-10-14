@@ -20,23 +20,23 @@ type GetDatabasePkSelectStarTableNameSchemaNameRequest struct {
 }
 
 type GetDatabasePkSelectStarTableNameSchemaName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkSelectStarTableNameSchemaName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkSelectStarTableNameSchemaName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkSelectStarTableNameSchemaName422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkSelectStarTableNameSchemaName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkSelectStarTableNameSchemaNameResponse struct {

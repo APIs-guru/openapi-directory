@@ -55,16 +55,16 @@ const (
 )
 
 type EnhancedCleaning struct {
-	CommercialGradeDisinfectantCleaning          *bool                                                             `json:"commercialGradeDisinfectantCleaning"`
-	CommercialGradeDisinfectantCleaningException *EnhancedCleaningCommercialGradeDisinfectantCleaningExceptionEnum `json:"commercialGradeDisinfectantCleaningException"`
-	CommonAreasEnhancedCleaning                  *bool                                                             `json:"commonAreasEnhancedCleaning"`
-	CommonAreasEnhancedCleaningException         *EnhancedCleaningCommonAreasEnhancedCleaningExceptionEnum         `json:"commonAreasEnhancedCleaningException"`
-	EmployeesTrainedCleaningProcedures           *bool                                                             `json:"employeesTrainedCleaningProcedures"`
-	EmployeesTrainedCleaningProceduresException  *EnhancedCleaningEmployeesTrainedCleaningProceduresExceptionEnum  `json:"employeesTrainedCleaningProceduresException"`
-	EmployeesTrainedThoroughHandWashing          *bool                                                             `json:"employeesTrainedThoroughHandWashing"`
-	EmployeesTrainedThoroughHandWashingException *EnhancedCleaningEmployeesTrainedThoroughHandWashingExceptionEnum `json:"employeesTrainedThoroughHandWashingException"`
-	EmployeesWearProtectiveEquipment             *bool                                                             `json:"employeesWearProtectiveEquipment"`
-	EmployeesWearProtectiveEquipmentException    *EnhancedCleaningEmployeesWearProtectiveEquipmentExceptionEnum    `json:"employeesWearProtectiveEquipmentException"`
-	GuestRoomsEnhancedCleaning                   *bool                                                             `json:"guestRoomsEnhancedCleaning"`
-	GuestRoomsEnhancedCleaningException          *EnhancedCleaningGuestRoomsEnhancedCleaningExceptionEnum          `json:"guestRoomsEnhancedCleaningException"`
+	CommercialGradeDisinfectantCleaning          *bool                                                             `json:"commercialGradeDisinfectantCleaning,omitempty"`
+	CommercialGradeDisinfectantCleaningException *EnhancedCleaningCommercialGradeDisinfectantCleaningExceptionEnum `json:"commercialGradeDisinfectantCleaningException,omitempty"`
+	CommonAreasEnhancedCleaning                  *bool                                                             `json:"commonAreasEnhancedCleaning,omitempty"`
+	CommonAreasEnhancedCleaningException         *EnhancedCleaningCommonAreasEnhancedCleaningExceptionEnum         `json:"commonAreasEnhancedCleaningException,omitempty"`
+	EmployeesTrainedCleaningProcedures           *bool                                                             `json:"employeesTrainedCleaningProcedures,omitempty"`
+	EmployeesTrainedCleaningProceduresException  *EnhancedCleaningEmployeesTrainedCleaningProceduresExceptionEnum  `json:"employeesTrainedCleaningProceduresException,omitempty"`
+	EmployeesTrainedThoroughHandWashing          *bool                                                             `json:"employeesTrainedThoroughHandWashing,omitempty"`
+	EmployeesTrainedThoroughHandWashingException *EnhancedCleaningEmployeesTrainedThoroughHandWashingExceptionEnum `json:"employeesTrainedThoroughHandWashingException,omitempty"`
+	EmployeesWearProtectiveEquipment             *bool                                                             `json:"employeesWearProtectiveEquipment,omitempty"`
+	EmployeesWearProtectiveEquipmentException    *EnhancedCleaningEmployeesWearProtectiveEquipmentExceptionEnum    `json:"employeesWearProtectiveEquipmentException,omitempty"`
+	GuestRoomsEnhancedCleaning                   *bool                                                             `json:"guestRoomsEnhancedCleaning,omitempty"`
+	GuestRoomsEnhancedCleaningException          *EnhancedCleaningGuestRoomsEnhancedCleaningExceptionEnum          `json:"guestRoomsEnhancedCleaningException,omitempty"`
 }

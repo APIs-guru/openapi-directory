@@ -1,6 +1,6 @@
 package shared
 
 type SubscriptionDeferralInfo struct {
-	DesiredExpiryTimeMillis  *string `json:"desiredExpiryTimeMillis"`
-	ExpectedExpiryTimeMillis *string `json:"expectedExpiryTimeMillis"`
+	DesiredExpiryTimeMillis  *string `json:"desiredExpiryTimeMillis,omitempty"`
+	ExpectedExpiryTimeMillis *string `json:"expectedExpiryTimeMillis,omitempty"`
 }

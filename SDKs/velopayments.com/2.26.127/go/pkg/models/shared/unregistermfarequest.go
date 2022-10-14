@@ -9,5 +9,5 @@ const (
 
 type UnregisterMfaRequest struct {
 	MfaType          UnregisterMfaRequestMfaTypeEnum `json:"mfaType"`
-	VerificationCode *string                         `json:"verificationCode"`
+	VerificationCode *string                         `json:"verificationCode,omitempty"`
 }

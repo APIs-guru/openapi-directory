@@ -9,5 +9,5 @@ const (
 )
 
 type GroupsExportOptions struct {
-	ExportFormat *GroupsExportOptionsExportFormatEnum `json:"exportFormat"`
+	ExportFormat *GroupsExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
 }

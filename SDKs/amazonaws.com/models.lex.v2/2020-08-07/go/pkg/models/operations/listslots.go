@@ -27,15 +27,15 @@ type ListSlotsHeaders struct {
 }
 
 type ListSlotsRequestBodySortBy struct {
-	Attribute *shared.SlotSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum         `json:"order"`
+	Attribute *shared.SlotSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum         `json:"order,omitempty"`
 }
 
 type ListSlotsRequestBody struct {
-	Filters    []shared.SlotFilter         `json:"filters"`
-	MaxResults *int64                      `json:"maxResults"`
-	NextToken  *string                     `json:"nextToken"`
-	SortBy     *ListSlotsRequestBodySortBy `json:"sortBy"`
+	Filters    []shared.SlotFilter         `json:"filters,omitempty"`
+	MaxResults *int64                      `json:"maxResults,omitempty"`
+	NextToken  *string                     `json:"nextToken,omitempty"`
+	SortBy     *ListSlotsRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListSlotsRequest struct {

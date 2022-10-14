@@ -1,5 +1,5 @@
 package shared
 
 type MoveProjectRequest struct {
-	DestinationParent *string `json:"destinationParent"`
+	DestinationParent *string `json:"destinationParent,omitempty"`
 }

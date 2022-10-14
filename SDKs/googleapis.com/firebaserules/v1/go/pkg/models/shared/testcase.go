@@ -26,10 +26,10 @@ const (
 )
 
 type TestCase struct {
-	Expectation           *TestCaseExpectationEnum           `json:"expectation"`
-	ExpressionReportLevel *TestCaseExpressionReportLevelEnum `json:"expressionReportLevel"`
-	FunctionMocks         []FunctionMock                     `json:"functionMocks"`
-	PathEncoding          *TestCasePathEncodingEnum          `json:"pathEncoding"`
-	Request               *interface{}                       `json:"request"`
-	Resource              *interface{}                       `json:"resource"`
+	Expectation           *TestCaseExpectationEnum           `json:"expectation,omitempty"`
+	ExpressionReportLevel *TestCaseExpressionReportLevelEnum `json:"expressionReportLevel,omitempty"`
+	FunctionMocks         []FunctionMock                     `json:"functionMocks,omitempty"`
+	PathEncoding          *TestCasePathEncodingEnum          `json:"pathEncoding,omitempty"`
+	Request               *interface{}                       `json:"request,omitempty"`
+	Resource              *interface{}                       `json:"resource,omitempty"`
 }

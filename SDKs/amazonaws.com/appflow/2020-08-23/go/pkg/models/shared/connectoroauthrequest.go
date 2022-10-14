@@ -1,6 +1,6 @@
 package shared
 
 type ConnectorOAuthRequest struct {
-	AuthCode    *string `json:"authCode"`
-	RedirectURI *string `json:"redirectUri"`
+	AuthCode    *string `json:"authCode,omitempty"`
+	RedirectURI *string `json:"redirectUri,omitempty"`
 }

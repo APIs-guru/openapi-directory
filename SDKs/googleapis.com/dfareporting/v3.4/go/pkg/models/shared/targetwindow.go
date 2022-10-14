@@ -9,6 +9,6 @@ const (
 )
 
 type TargetWindow struct {
-	CustomHTML         *string                             `json:"customHtml"`
-	TargetWindowOption *TargetWindowTargetWindowOptionEnum `json:"targetWindowOption"`
+	CustomHTML         *string                             `json:"customHtml,omitempty"`
+	TargetWindowOption *TargetWindowTargetWindowOptionEnum `json:"targetWindowOption,omitempty"`
 }

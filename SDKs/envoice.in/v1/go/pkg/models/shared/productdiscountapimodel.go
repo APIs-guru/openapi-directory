@@ -5,10 +5,10 @@ import (
 )
 
 type ProductDiscountAPIModel struct {
-	DiscountAmount     *float64   `json:"DiscountAmount"`
-	DiscountPercentage *float64   `json:"DiscountPercentage"`
-	ID                 *int32     `json:"Id"`
-	Name               *string    `json:"Name"`
-	ValidFrom          *time.Time `json:"ValidFrom"`
-	ValidTo            *time.Time `json:"ValidTo"`
+	DiscountAmount     *float64   `json:"DiscountAmount,omitempty"`
+	DiscountPercentage *float64   `json:"DiscountPercentage,omitempty"`
+	ID                 *int32     `json:"Id,omitempty"`
+	Name               *string    `json:"Name,omitempty"`
+	ValidFrom          *time.Time `json:"ValidFrom,omitempty"`
+	ValidTo            *time.Time `json:"ValidTo,omitempty"`
 }

@@ -23,40 +23,40 @@ type GetAnnotationLayerPkRequest struct {
 }
 
 type GetAnnotationLayerPk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetAnnotationLayerPk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetAnnotationLayerPk200ApplicationJSON struct {
-	DescriptionColumns *GetAnnotationLayerPk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                                   `json:"id"`
-	LabelColumns       *GetAnnotationLayerPk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.AnnotationLayerRestAPIGet                         `json:"result"`
-	ShowColumns        []string                                                  `json:"show_columns"`
-	ShowTitle          *string                                                   `json:"show_title"`
+	DescriptionColumns *GetAnnotationLayerPk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                                   `json:"id,omitempty"`
+	LabelColumns       *GetAnnotationLayerPk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.AnnotationLayerRestAPIGet                         `json:"result,omitempty"`
+	ShowColumns        []string                                                  `json:"show_columns,omitempty"`
+	ShowTitle          *string                                                   `json:"show_title,omitempty"`
 }
 
 type GetAnnotationLayerPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPkResponse struct {

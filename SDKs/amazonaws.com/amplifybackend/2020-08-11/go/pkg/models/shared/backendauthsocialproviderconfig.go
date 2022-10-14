@@ -1,6 +1,6 @@
 package shared
 
 type BackendAuthSocialProviderConfig struct {
-	ClientID     *string `json:"ClientId"`
-	ClientSecret *string `json:"ClientSecret"`
+	ClientID     *string `json:"ClientId,omitempty"`
+	ClientSecret *string `json:"ClientSecret,omitempty"`
 }

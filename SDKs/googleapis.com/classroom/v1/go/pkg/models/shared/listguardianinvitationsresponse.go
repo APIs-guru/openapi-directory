@@ -1,6 +1,6 @@
 package shared
 
 type ListGuardianInvitationsResponse struct {
-	GuardianInvitations []GuardianInvitation `json:"guardianInvitations"`
-	NextPageToken       *string              `json:"nextPageToken"`
+	GuardianInvitations []GuardianInvitation `json:"guardianInvitations,omitempty"`
+	NextPageToken       *string              `json:"nextPageToken,omitempty"`
 }

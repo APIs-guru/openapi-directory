@@ -1,5 +1,5 @@
 package shared
 
 type DeleteParameterGroupResponse struct {
-	ParameterGroup *ParameterGroup `json:"ParameterGroup"`
+	ParameterGroup *ParameterGroup `json:"ParameterGroup,omitempty"`
 }

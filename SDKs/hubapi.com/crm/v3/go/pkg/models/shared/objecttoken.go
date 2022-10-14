@@ -15,8 +15,8 @@ const (
 )
 
 type ObjectToken struct {
-	DataType *ObjectTokenDataTypeEnum `json:"dataType"`
-	Label    *string                  `json:"label"`
-	Name     *string                  `json:"name"`
+	DataType *ObjectTokenDataTypeEnum `json:"dataType,omitempty"`
+	Label    *string                  `json:"label,omitempty"`
+	Name     *string                  `json:"name,omitempty"`
 	Value    string                   `json:"value"`
 }

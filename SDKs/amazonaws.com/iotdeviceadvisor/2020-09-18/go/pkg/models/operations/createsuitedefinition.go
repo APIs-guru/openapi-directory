@@ -15,16 +15,16 @@ type CreateSuiteDefinitionHeaders struct {
 }
 
 type CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration struct {
-	DevicePermissionRoleArn  *string                  `json:"devicePermissionRoleArn"`
-	Devices                  []shared.DeviceUnderTest `json:"devices"`
-	IntendedForQualification *bool                    `json:"intendedForQualification"`
-	RootGroup                *string                  `json:"rootGroup"`
-	SuiteDefinitionName      *string                  `json:"suiteDefinitionName"`
+	DevicePermissionRoleArn  *string                  `json:"devicePermissionRoleArn,omitempty"`
+	Devices                  []shared.DeviceUnderTest `json:"devices,omitempty"`
+	IntendedForQualification *bool                    `json:"intendedForQualification,omitempty"`
+	RootGroup                *string                  `json:"rootGroup,omitempty"`
+	SuiteDefinitionName      *string                  `json:"suiteDefinitionName,omitempty"`
 }
 
 type CreateSuiteDefinitionRequestBody struct {
-	SuiteDefinitionConfiguration *CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration `json:"suiteDefinitionConfiguration"`
-	Tags                         map[string]string                                             `json:"tags"`
+	SuiteDefinitionConfiguration *CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration `json:"suiteDefinitionConfiguration,omitempty"`
+	Tags                         map[string]string                                             `json:"tags,omitempty"`
 }
 
 type CreateSuiteDefinitionRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type ExpressionReport struct {
-	Children       []ExpressionReport `json:"children"`
-	SourcePosition *SourcePosition    `json:"sourcePosition"`
-	Values         []ValueCount       `json:"values"`
+	Children       []ExpressionReport `json:"children,omitempty"`
+	SourcePosition *SourcePosition    `json:"sourcePosition,omitempty"`
+	Values         []ValueCount       `json:"values,omitempty"`
 }

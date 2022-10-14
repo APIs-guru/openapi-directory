@@ -1,6 +1,6 @@
 package shared
 
 type Secret struct {
-	KmsKeyName *string           `json:"kmsKeyName"`
-	SecretEnv  map[string]string `json:"secretEnv"`
+	KmsKeyName *string           `json:"kmsKeyName,omitempty"`
+	SecretEnv  map[string]string `json:"secretEnv,omitempty"`
 }

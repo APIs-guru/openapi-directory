@@ -20,20 +20,20 @@ type InitiateJobHeaders struct {
 }
 
 type InitiateJobRequestBodyJobParameters struct {
-	ArchiveID                    *string                            `json:"ArchiveId"`
-	Description                  *string                            `json:"Description"`
-	Format                       *string                            `json:"Format"`
-	InventoryRetrievalParameters *shared.InventoryRetrievalJobInput `json:"InventoryRetrievalParameters"`
-	OutputLocation               *shared.OutputLocation             `json:"OutputLocation"`
-	RetrievalByteRange           *string                            `json:"RetrievalByteRange"`
-	SnsTopic                     *string                            `json:"SNSTopic"`
-	SelectParameters             *shared.SelectParameters           `json:"SelectParameters"`
-	Tier                         *string                            `json:"Tier"`
-	Type                         *string                            `json:"Type"`
+	ArchiveID                    *string                            `json:"ArchiveId,omitempty"`
+	Description                  *string                            `json:"Description,omitempty"`
+	Format                       *string                            `json:"Format,omitempty"`
+	InventoryRetrievalParameters *shared.InventoryRetrievalJobInput `json:"InventoryRetrievalParameters,omitempty"`
+	OutputLocation               *shared.OutputLocation             `json:"OutputLocation,omitempty"`
+	RetrievalByteRange           *string                            `json:"RetrievalByteRange,omitempty"`
+	SnsTopic                     *string                            `json:"SNSTopic,omitempty"`
+	SelectParameters             *shared.SelectParameters           `json:"SelectParameters,omitempty"`
+	Tier                         *string                            `json:"Tier,omitempty"`
+	Type                         *string                            `json:"Type,omitempty"`
 }
 
 type InitiateJobRequestBody struct {
-	JobParameters *InitiateJobRequestBodyJobParameters `json:"jobParameters"`
+	JobParameters *InitiateJobRequestBodyJobParameters `json:"jobParameters,omitempty"`
 }
 
 type InitiateJobRequest struct {

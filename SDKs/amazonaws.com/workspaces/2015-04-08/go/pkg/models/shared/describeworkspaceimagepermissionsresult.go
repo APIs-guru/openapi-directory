@@ -1,7 +1,7 @@
 package shared
 
 type DescribeWorkspaceImagePermissionsResult struct {
-	ImageID          *string           `json:"ImageId"`
-	ImagePermissions []ImagePermission `json:"ImagePermissions"`
-	NextToken        *string           `json:"NextToken"`
+	ImageID          *string           `json:"ImageId,omitempty"`
+	ImagePermissions []ImagePermission `json:"ImagePermissions,omitempty"`
+	NextToken        *string           `json:"NextToken,omitempty"`
 }

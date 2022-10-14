@@ -5,7 +5,7 @@ import (
 )
 
 type ClientAuthenticationSettingInfo struct {
-	LastUpdatedDateTime *time.Time                      `json:"LastUpdatedDateTime"`
-	Status              *ClientAuthenticationStatusEnum `json:"Status"`
-	Type                *ClientAuthenticationTypeEnum   `json:"Type"`
+	LastUpdatedDateTime *time.Time                      `json:"LastUpdatedDateTime,omitempty"`
+	Status              *ClientAuthenticationStatusEnum `json:"Status,omitempty"`
+	Type                *ClientAuthenticationTypeEnum   `json:"Type,omitempty"`
 }

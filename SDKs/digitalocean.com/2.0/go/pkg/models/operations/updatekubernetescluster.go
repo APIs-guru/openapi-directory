@@ -9,11 +9,11 @@ type UpdateKubernetesClusterPathParams struct {
 }
 
 type UpdateKubernetesClusterRequestBody struct {
-	AutoUpgrade       *bool                                                                                                                                           `json:"auto_upgrade"`
-	MaintenancePolicy *shared.Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesMaintenancePolicy `json:"maintenance_policy"`
+	AutoUpgrade       *bool                                                                                                                                           `json:"auto_upgrade,omitempty"`
+	MaintenancePolicy *shared.Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesMaintenancePolicy `json:"maintenance_policy,omitempty"`
 	Name              string                                                                                                                                          `json:"name"`
-	SurgeUpgrade      *bool                                                                                                                                           `json:"surge_upgrade"`
-	Tags              []string                                                                                                                                        `json:"tags"`
+	SurgeUpgrade      *bool                                                                                                                                           `json:"surge_upgrade,omitempty"`
+	Tags              []string                                                                                                                                        `json:"tags,omitempty"`
 }
 
 type UpdateKubernetesClusterRequest struct {
@@ -24,7 +24,7 @@ type UpdateKubernetesClusterRequest struct {
 type UpdateKubernetesCluster401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateKubernetesClusterResponse struct {

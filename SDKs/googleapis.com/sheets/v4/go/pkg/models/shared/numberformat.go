@@ -15,6 +15,6 @@ const (
 )
 
 type NumberFormat struct {
-	Pattern *string               `json:"pattern"`
-	Type    *NumberFormatTypeEnum `json:"type"`
+	Pattern *string               `json:"pattern,omitempty"`
+	Type    *NumberFormatTypeEnum `json:"type,omitempty"`
 }

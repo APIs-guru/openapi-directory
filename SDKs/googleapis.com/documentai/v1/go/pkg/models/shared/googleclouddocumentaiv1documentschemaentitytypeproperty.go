@@ -11,8 +11,8 @@ const (
 )
 
 type GoogleCloudDocumentaiV1DocumentSchemaEntityTypeProperty struct {
-	Name             *string                                                                    `json:"name"`
-	OccurrenceType   *GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum `json:"occurrenceType"`
-	PropertyMetadata *GoogleCloudDocumentaiV1PropertyMetadata                                   `json:"propertyMetadata"`
-	ValueType        *string                                                                    `json:"valueType"`
+	Name             *string                                                                    `json:"name,omitempty"`
+	OccurrenceType   *GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum `json:"occurrenceType,omitempty"`
+	PropertyMetadata *GoogleCloudDocumentaiV1PropertyMetadata                                   `json:"propertyMetadata,omitempty"`
+	ValueType        *string                                                                    `json:"valueType,omitempty"`
 }

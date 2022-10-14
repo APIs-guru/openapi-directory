@@ -6,8 +6,8 @@ type UpdateNetworkSmTargetGroupPathParams struct {
 }
 
 type UpdateNetworkSmTargetGroupRequestBody struct {
-	Name  *string `json:"name"`
-	Scope *string `json:"scope"`
+	Name  *string `json:"name,omitempty"`
+	Scope *string `json:"scope,omitempty"`
 }
 
 type UpdateNetworkSmTargetGroupRequest struct {

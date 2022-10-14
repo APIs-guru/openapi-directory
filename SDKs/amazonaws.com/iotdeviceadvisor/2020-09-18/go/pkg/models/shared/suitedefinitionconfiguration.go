@@ -1,9 +1,9 @@
 package shared
 
 type SuiteDefinitionConfiguration struct {
-	DevicePermissionRoleArn  *string           `json:"devicePermissionRoleArn"`
-	Devices                  []DeviceUnderTest `json:"devices"`
-	IntendedForQualification *bool             `json:"intendedForQualification"`
-	RootGroup                *string           `json:"rootGroup"`
-	SuiteDefinitionName      *string           `json:"suiteDefinitionName"`
+	DevicePermissionRoleArn  *string           `json:"devicePermissionRoleArn,omitempty"`
+	Devices                  []DeviceUnderTest `json:"devices,omitempty"`
+	IntendedForQualification *bool             `json:"intendedForQualification,omitempty"`
+	RootGroup                *string           `json:"rootGroup,omitempty"`
+	SuiteDefinitionName      *string           `json:"suiteDefinitionName,omitempty"`
 }

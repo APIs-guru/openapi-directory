@@ -15,11 +15,11 @@ type CreateProjectHeaders struct {
 }
 
 type CreateProjectRequestBody struct {
-	ClientToken        *string           `json:"clientToken"`
+	ClientToken        *string           `json:"clientToken,omitempty"`
 	PortalID           string            `json:"portalId"`
-	ProjectDescription *string           `json:"projectDescription"`
+	ProjectDescription *string           `json:"projectDescription,omitempty"`
 	ProjectName        string            `json:"projectName"`
-	Tags               map[string]string `json:"tags"`
+	Tags               map[string]string `json:"tags,omitempty"`
 }
 
 type CreateProjectRequest struct {

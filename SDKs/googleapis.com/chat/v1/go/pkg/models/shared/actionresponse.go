@@ -12,7 +12,7 @@ const (
 )
 
 type ActionResponse struct {
-	DialogAction *DialogAction           `json:"dialogAction"`
-	Type         *ActionResponseTypeEnum `json:"type"`
-	URL          *string                 `json:"url"`
+	DialogAction *DialogAction           `json:"dialogAction,omitempty"`
+	Type         *ActionResponseTypeEnum `json:"type,omitempty"`
+	URL          *string                 `json:"url,omitempty"`
 }

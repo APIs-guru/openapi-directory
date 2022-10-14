@@ -1,7 +1,7 @@
 package shared
 
 type NetworkAddress struct {
-	Address           *string `json:"address"`
-	ExistingNetworkID *string `json:"existingNetworkId"`
-	NetworkID         *string `json:"networkId"`
+	Address           *string `json:"address,omitempty"`
+	ExistingNetworkID *string `json:"existingNetworkId,omitempty"`
+	NetworkID         *string `json:"networkId,omitempty"`
 }

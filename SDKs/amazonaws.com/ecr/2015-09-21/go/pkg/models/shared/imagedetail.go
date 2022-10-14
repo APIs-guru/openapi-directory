@@ -5,14 +5,14 @@ import (
 )
 
 type ImageDetail struct {
-	ArtifactMediaType        *string                   `json:"artifactMediaType"`
-	ImageDigest              *string                   `json:"imageDigest"`
-	ImageManifestMediaType   *string                   `json:"imageManifestMediaType"`
-	ImagePushedAt            *time.Time                `json:"imagePushedAt"`
-	ImageScanFindingsSummary *ImageScanFindingsSummary `json:"imageScanFindingsSummary"`
-	ImageScanStatus          *ImageScanStatus          `json:"imageScanStatus"`
-	ImageSizeInBytes         *int64                    `json:"imageSizeInBytes"`
-	ImageTags                []string                  `json:"imageTags"`
-	RegistryID               *string                   `json:"registryId"`
-	RepositoryName           *string                   `json:"repositoryName"`
+	ArtifactMediaType        *string                   `json:"artifactMediaType,omitempty"`
+	ImageDigest              *string                   `json:"imageDigest,omitempty"`
+	ImageManifestMediaType   *string                   `json:"imageManifestMediaType,omitempty"`
+	ImagePushedAt            *time.Time                `json:"imagePushedAt,omitempty"`
+	ImageScanFindingsSummary *ImageScanFindingsSummary `json:"imageScanFindingsSummary,omitempty"`
+	ImageScanStatus          *ImageScanStatus          `json:"imageScanStatus,omitempty"`
+	ImageSizeInBytes         *int64                    `json:"imageSizeInBytes,omitempty"`
+	ImageTags                []string                  `json:"imageTags,omitempty"`
+	RegistryID               *string                   `json:"registryId,omitempty"`
+	RepositoryName           *string                   `json:"repositoryName,omitempty"`
 }

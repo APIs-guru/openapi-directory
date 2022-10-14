@@ -9,9 +9,9 @@ const (
 )
 
 type GuardianInvitation struct {
-	CreationTime        *string                      `json:"creationTime"`
-	InvitationID        *string                      `json:"invitationId"`
-	InvitedEmailAddress *string                      `json:"invitedEmailAddress"`
-	State               *GuardianInvitationStateEnum `json:"state"`
-	StudentID           *string                      `json:"studentId"`
+	CreationTime        *string                      `json:"creationTime,omitempty"`
+	InvitationID        *string                      `json:"invitationId,omitempty"`
+	InvitedEmailAddress *string                      `json:"invitedEmailAddress,omitempty"`
+	State               *GuardianInvitationStateEnum `json:"state,omitempty"`
+	StudentID           *string                      `json:"studentId,omitempty"`
 }

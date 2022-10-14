@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaPropertySummary struct {
-	DisplayName  *string                                                     `json:"displayName"`
-	Parent       *string                                                     `json:"parent"`
-	Property     *string                                                     `json:"property"`
-	PropertyType *GoogleAnalyticsAdminV1alphaPropertySummaryPropertyTypeEnum `json:"propertyType"`
+	DisplayName  *string                                                     `json:"displayName,omitempty"`
+	Parent       *string                                                     `json:"parent,omitempty"`
+	Property     *string                                                     `json:"property,omitempty"`
+	PropertyType *GoogleAnalyticsAdminV1alphaPropertySummaryPropertyTypeEnum `json:"propertyType,omitempty"`
 }

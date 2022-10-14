@@ -1,11 +1,11 @@
 package shared
 
 type GooglePrivacyDlpV2Action struct {
-	Deidentify                        *GooglePrivacyDlpV2Deidentify      `json:"deidentify"`
-	JobNotificationEmails             map[string]interface{}             `json:"jobNotificationEmails"`
-	PubSub                            *GooglePrivacyDlpV2PublishToPubSub `json:"pubSub"`
-	PublishFindingsToCloudDataCatalog map[string]interface{}             `json:"publishFindingsToCloudDataCatalog"`
-	PublishSummaryToCscc              map[string]interface{}             `json:"publishSummaryToCscc"`
-	PublishToStackdriver              map[string]interface{}             `json:"publishToStackdriver"`
-	SaveFindings                      *GooglePrivacyDlpV2SaveFindings    `json:"saveFindings"`
+	Deidentify                        *GooglePrivacyDlpV2Deidentify      `json:"deidentify,omitempty"`
+	JobNotificationEmails             map[string]interface{}             `json:"jobNotificationEmails,omitempty"`
+	PubSub                            *GooglePrivacyDlpV2PublishToPubSub `json:"pubSub,omitempty"`
+	PublishFindingsToCloudDataCatalog map[string]interface{}             `json:"publishFindingsToCloudDataCatalog,omitempty"`
+	PublishSummaryToCscc              map[string]interface{}             `json:"publishSummaryToCscc,omitempty"`
+	PublishToStackdriver              map[string]interface{}             `json:"publishToStackdriver,omitempty"`
+	SaveFindings                      *GooglePrivacyDlpV2SaveFindings    `json:"saveFindings,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type CustomEventStatus struct {
-	CustomEvent *CustomEvent       `json:"customEvent"`
-	Errors      []CustomEventError `json:"errors"`
-	Kind        *string            `json:"kind"`
+	CustomEvent *CustomEvent       `json:"customEvent,omitempty"`
+	Errors      []CustomEventError `json:"errors,omitempty"`
+	Kind        *string            `json:"kind,omitempty"`
 }

@@ -18,7 +18,7 @@ type GetInsightImpactGraphHeaders struct {
 type GetInsightImpactGraphRequestBody struct {
 	EndTime   time.Time `json:"EndTime"`
 	InsightID string    `json:"InsightId"`
-	NextToken *string   `json:"NextToken"`
+	NextToken *string   `json:"NextToken,omitempty"`
 	StartTime time.Time `json:"StartTime"`
 }
 

@@ -5,9 +5,9 @@ import (
 )
 
 type GlobalTableDescription struct {
-	CreationDateTime  *time.Time             `json:"CreationDateTime"`
-	GlobalTableArn    *string                `json:"GlobalTableArn"`
-	GlobalTableName   *string                `json:"GlobalTableName"`
-	GlobalTableStatus *GlobalTableStatusEnum `json:"GlobalTableStatus"`
-	ReplicationGroup  []ReplicaDescription   `json:"ReplicationGroup"`
+	CreationDateTime  *time.Time             `json:"CreationDateTime,omitempty"`
+	GlobalTableArn    *string                `json:"GlobalTableArn,omitempty"`
+	GlobalTableName   *string                `json:"GlobalTableName,omitempty"`
+	GlobalTableStatus *GlobalTableStatusEnum `json:"GlobalTableStatus,omitempty"`
+	ReplicationGroup  []ReplicaDescription   `json:"ReplicationGroup,omitempty"`
 }

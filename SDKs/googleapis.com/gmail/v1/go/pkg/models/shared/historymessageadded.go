@@ -1,5 +1,5 @@
 package shared
 
 type HistoryMessageAdded struct {
-	Message *Message `json:"message"`
+	Message *Message `json:"message,omitempty"`
 }

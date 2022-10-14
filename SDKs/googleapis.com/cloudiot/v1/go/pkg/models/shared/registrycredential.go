@@ -1,5 +1,5 @@
 package shared
 
 type RegistryCredential struct {
-	PublicKeyCertificate *PublicKeyCertificate `json:"publicKeyCertificate"`
+	PublicKeyCertificate *PublicKeyCertificate `json:"publicKeyCertificate,omitempty"`
 }

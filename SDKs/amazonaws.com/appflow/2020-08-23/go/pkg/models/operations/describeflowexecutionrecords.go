@@ -21,8 +21,8 @@ type DescribeFlowExecutionRecordsHeaders struct {
 
 type DescribeFlowExecutionRecordsRequestBody struct {
 	FlowName   string  `json:"flowName"`
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
 }
 
 type DescribeFlowExecutionRecordsRequest struct {

@@ -9,11 +9,11 @@ type PublishMockRequest struct {
 }
 
 type PublishMock200ApplicationJSONMock struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type PublishMock200ApplicationJSON struct {
-	Mock *PublishMock200ApplicationJSONMock `json:"mock"`
+	Mock *PublishMock200ApplicationJSONMock `json:"mock,omitempty"`
 }
 
 type PublishMockResponse struct {

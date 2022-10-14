@@ -18,35 +18,35 @@ type GetReportInfoRequest struct {
 }
 
 type GetReportInfo200ApplicationJSONFiltersColumnName struct {
-	Name     *string `json:"name"`
-	Operator *string `json:"operator"`
+	Name     *string `json:"name,omitempty"`
+	Operator *string `json:"operator,omitempty"`
 }
 
 type GetReportInfo200ApplicationJSONFilters struct {
-	ColumnName []GetReportInfo200ApplicationJSONFiltersColumnName `json:"column_name"`
+	ColumnName []GetReportInfo200ApplicationJSONFiltersColumnName `json:"column_name,omitempty"`
 }
 
 type GetReportInfo200ApplicationJSON struct {
-	AddColumns  map[string]interface{}                  `json:"add_columns"`
-	EditColumns map[string]interface{}                  `json:"edit_columns"`
-	Filters     *GetReportInfo200ApplicationJSONFilters `json:"filters"`
-	Permissions []string                                `json:"permissions"`
+	AddColumns  map[string]interface{}                  `json:"add_columns,omitempty"`
+	EditColumns map[string]interface{}                  `json:"edit_columns,omitempty"`
+	Filters     *GetReportInfo200ApplicationJSONFilters `json:"filters,omitempty"`
+	Permissions []string                                `json:"permissions,omitempty"`
 }
 
 type GetReportInfo400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportInfo401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportInfo422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportInfo500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportInfoResponse struct {

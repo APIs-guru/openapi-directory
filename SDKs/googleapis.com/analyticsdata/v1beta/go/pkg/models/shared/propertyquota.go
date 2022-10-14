@@ -1,10 +1,10 @@
 package shared
 
 type PropertyQuota struct {
-	ConcurrentRequests                    *QuotaStatus `json:"concurrentRequests"`
-	PotentiallyThresholdedRequestsPerHour *QuotaStatus `json:"potentiallyThresholdedRequestsPerHour"`
-	ServerErrorsPerProjectPerHour         *QuotaStatus `json:"serverErrorsPerProjectPerHour"`
-	TokensPerDay                          *QuotaStatus `json:"tokensPerDay"`
-	TokensPerHour                         *QuotaStatus `json:"tokensPerHour"`
-	TokensPerProjectPerHour               *QuotaStatus `json:"tokensPerProjectPerHour"`
+	ConcurrentRequests                    *QuotaStatus `json:"concurrentRequests,omitempty"`
+	PotentiallyThresholdedRequestsPerHour *QuotaStatus `json:"potentiallyThresholdedRequestsPerHour,omitempty"`
+	ServerErrorsPerProjectPerHour         *QuotaStatus `json:"serverErrorsPerProjectPerHour,omitempty"`
+	TokensPerDay                          *QuotaStatus `json:"tokensPerDay,omitempty"`
+	TokensPerHour                         *QuotaStatus `json:"tokensPerHour,omitempty"`
+	TokensPerProjectPerHour               *QuotaStatus `json:"tokensPerProjectPerHour,omitempty"`
 }

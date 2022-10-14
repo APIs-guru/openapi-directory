@@ -11,8 +11,8 @@ const (
 )
 
 type GoogleCloudDocumentaiV1beta2DocumentPageLayout struct {
-	BoundingPoly *GoogleCloudDocumentaiV1beta2BoundingPoly                      `json:"boundingPoly"`
-	Confidence   *float32                                                       `json:"confidence"`
-	Orientation  *GoogleCloudDocumentaiV1beta2DocumentPageLayoutOrientationEnum `json:"orientation"`
-	TextAnchor   *GoogleCloudDocumentaiV1beta2DocumentTextAnchor                `json:"textAnchor"`
+	BoundingPoly *GoogleCloudDocumentaiV1beta2BoundingPoly                      `json:"boundingPoly,omitempty"`
+	Confidence   *float32                                                       `json:"confidence,omitempty"`
+	Orientation  *GoogleCloudDocumentaiV1beta2DocumentPageLayoutOrientationEnum `json:"orientation,omitempty"`
+	TextAnchor   *GoogleCloudDocumentaiV1beta2DocumentTextAnchor                `json:"textAnchor,omitempty"`
 }

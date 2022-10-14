@@ -1,12 +1,12 @@
 package shared
 
 type AwsSecretsManagerSecretDetails struct {
-	Deleted                         *bool                                 `json:"Deleted"`
-	Description                     *string                               `json:"Description"`
-	KmsKeyID                        *string                               `json:"KmsKeyId"`
-	Name                            *string                               `json:"Name"`
-	RotationEnabled                 *bool                                 `json:"RotationEnabled"`
-	RotationLambdaArn               *string                               `json:"RotationLambdaArn"`
-	RotationOccurredWithinFrequency *bool                                 `json:"RotationOccurredWithinFrequency"`
-	RotationRules                   *AwsSecretsManagerSecretRotationRules `json:"RotationRules"`
+	Deleted                         *bool                                 `json:"Deleted,omitempty"`
+	Description                     *string                               `json:"Description,omitempty"`
+	KmsKeyID                        *string                               `json:"KmsKeyId,omitempty"`
+	Name                            *string                               `json:"Name,omitempty"`
+	RotationEnabled                 *bool                                 `json:"RotationEnabled,omitempty"`
+	RotationLambdaArn               *string                               `json:"RotationLambdaArn,omitempty"`
+	RotationOccurredWithinFrequency *bool                                 `json:"RotationOccurredWithinFrequency,omitempty"`
+	RotationRules                   *AwsSecretsManagerSecretRotationRules `json:"RotationRules,omitempty"`
 }

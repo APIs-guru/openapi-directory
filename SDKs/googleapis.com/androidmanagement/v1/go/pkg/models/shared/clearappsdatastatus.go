@@ -1,5 +1,5 @@
 package shared
 
 type ClearAppsDataStatus struct {
-	Results map[string]PerAppResult `json:"results"`
+	Results map[string]PerAppResult `json:"results,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetMapGlyphsResponse struct {
-	Blob *string `json:"Blob"`
+	Blob *string `json:"Blob,omitempty"`
 }

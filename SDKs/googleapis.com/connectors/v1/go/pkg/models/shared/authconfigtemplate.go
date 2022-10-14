@@ -12,6 +12,6 @@ const (
 )
 
 type AuthConfigTemplate struct {
-	AuthType                *AuthConfigTemplateAuthTypeEnum `json:"authType"`
-	ConfigVariableTemplates []ConfigVariableTemplate        `json:"configVariableTemplates"`
+	AuthType                *AuthConfigTemplateAuthTypeEnum `json:"authType,omitempty"`
+	ConfigVariableTemplates []ConfigVariableTemplate        `json:"configVariableTemplates,omitempty"`
 }

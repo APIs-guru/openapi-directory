@@ -2,6 +2,6 @@ package shared
 
 type SendPipelineExecutionStepSuccessRequest struct {
 	CallbackToken      string            `json:"CallbackToken"`
-	ClientRequestToken *string           `json:"ClientRequestToken"`
-	OutputParameters   []OutputParameter `json:"OutputParameters"`
+	ClientRequestToken *string           `json:"ClientRequestToken,omitempty"`
+	OutputParameters   []OutputParameter `json:"OutputParameters,omitempty"`
 }

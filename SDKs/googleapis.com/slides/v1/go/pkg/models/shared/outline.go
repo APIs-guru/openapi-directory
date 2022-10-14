@@ -21,8 +21,8 @@ const (
 )
 
 type Outline struct {
-	DashStyle     *OutlineDashStyleEnum     `json:"dashStyle"`
-	OutlineFill   *OutlineFill              `json:"outlineFill"`
-	PropertyState *OutlinePropertyStateEnum `json:"propertyState"`
-	Weight        *Dimension                `json:"weight"`
+	DashStyle     *OutlineDashStyleEnum     `json:"dashStyle,omitempty"`
+	OutlineFill   *OutlineFill              `json:"outlineFill,omitempty"`
+	PropertyState *OutlinePropertyStateEnum `json:"propertyState,omitempty"`
+	Weight        *Dimension                `json:"weight,omitempty"`
 }

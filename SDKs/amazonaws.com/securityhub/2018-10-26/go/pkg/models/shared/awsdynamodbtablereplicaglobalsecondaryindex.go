@@ -1,6 +1,6 @@
 package shared
 
 type AwsDynamoDbTableReplicaGlobalSecondaryIndex struct {
-	IndexName                     *string                                        `json:"IndexName"`
-	ProvisionedThroughputOverride *AwsDynamoDbTableProvisionedThroughputOverride `json:"ProvisionedThroughputOverride"`
+	IndexName                     *string                                        `json:"IndexName,omitempty"`
+	ProvisionedThroughputOverride *AwsDynamoDbTableProvisionedThroughputOverride `json:"ProvisionedThroughputOverride,omitempty"`
 }

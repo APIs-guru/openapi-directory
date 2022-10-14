@@ -27,22 +27,22 @@ const (
 )
 
 type CertificateAuthority struct {
-	AccessUrls                *AccessUrls                    `json:"accessUrls"`
-	CaCertificateDescriptions []CertificateDescription       `json:"caCertificateDescriptions"`
-	CertificatePolicy         *CertificateAuthorityPolicy    `json:"certificatePolicy"`
-	Config                    *CertificateConfig             `json:"config"`
-	CreateTime                *string                        `json:"createTime"`
-	DeleteTime                *string                        `json:"deleteTime"`
-	GcsBucket                 *string                        `json:"gcsBucket"`
-	IssuingOptions            *IssuingOptions                `json:"issuingOptions"`
-	KeySpec                   *KeyVersionSpec                `json:"keySpec"`
-	Labels                    map[string]string              `json:"labels"`
-	Lifetime                  *string                        `json:"lifetime"`
-	Name                      *string                        `json:"name"`
-	PemCaCertificates         []string                       `json:"pemCaCertificates"`
-	State                     *CertificateAuthorityStateEnum `json:"state"`
-	SubordinateConfig         *SubordinateConfig             `json:"subordinateConfig"`
-	Tier                      *CertificateAuthorityTierEnum  `json:"tier"`
-	Type                      *CertificateAuthorityTypeEnum  `json:"type"`
-	UpdateTime                *string                        `json:"updateTime"`
+	AccessUrls                *AccessUrls                    `json:"accessUrls,omitempty"`
+	CaCertificateDescriptions []CertificateDescription       `json:"caCertificateDescriptions,omitempty"`
+	CertificatePolicy         *CertificateAuthorityPolicy    `json:"certificatePolicy,omitempty"`
+	Config                    *CertificateConfig             `json:"config,omitempty"`
+	CreateTime                *string                        `json:"createTime,omitempty"`
+	DeleteTime                *string                        `json:"deleteTime,omitempty"`
+	GcsBucket                 *string                        `json:"gcsBucket,omitempty"`
+	IssuingOptions            *IssuingOptions                `json:"issuingOptions,omitempty"`
+	KeySpec                   *KeyVersionSpec                `json:"keySpec,omitempty"`
+	Labels                    map[string]string              `json:"labels,omitempty"`
+	Lifetime                  *string                        `json:"lifetime,omitempty"`
+	Name                      *string                        `json:"name,omitempty"`
+	PemCaCertificates         []string                       `json:"pemCaCertificates,omitempty"`
+	State                     *CertificateAuthorityStateEnum `json:"state,omitempty"`
+	SubordinateConfig         *SubordinateConfig             `json:"subordinateConfig,omitempty"`
+	Tier                      *CertificateAuthorityTierEnum  `json:"tier,omitempty"`
+	Type                      *CertificateAuthorityTypeEnum  `json:"type,omitempty"`
+	UpdateTime                *string                        `json:"updateTime,omitempty"`
 }

@@ -13,7 +13,7 @@ const (
 )
 
 type PostRegistrySubscriptionRequestBody struct {
-	TierSlug *PostRegistrySubscriptionRequestBodyTierSlugEnum `json:"tier_slug"`
+	TierSlug *PostRegistrySubscriptionRequestBodyTierSlugEnum `json:"tier_slug,omitempty"`
 }
 
 type PostRegistrySubscriptionRequest struct {
@@ -23,7 +23,7 @@ type PostRegistrySubscriptionRequest struct {
 type PostRegistrySubscription401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type PostRegistrySubscriptionResponse struct {

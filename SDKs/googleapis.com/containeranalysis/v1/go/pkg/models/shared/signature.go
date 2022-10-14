@@ -1,6 +1,6 @@
 package shared
 
 type Signature struct {
-	PublicKeyID *string `json:"publicKeyId"`
-	Signature   *string `json:"signature"`
+	PublicKeyID *string `json:"publicKeyId,omitempty"`
+	Signature   *string `json:"signature,omitempty"`
 }

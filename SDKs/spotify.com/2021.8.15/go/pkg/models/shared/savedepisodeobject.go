@@ -5,6 +5,6 @@ import (
 )
 
 type SavedEpisodeObject struct {
-	AddedAt *time.Time     `json:"added_at"`
-	Episode *EpisodeObject `json:"episode"`
+	AddedAt *time.Time     `json:"added_at,omitempty"`
+	Episode *EpisodeObject `json:"episode,omitempty"`
 }

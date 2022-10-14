@@ -5,11 +5,11 @@ import (
 )
 
 type BulkPaymentInitiationWithStatusResponse struct {
-	AcceptorTransactionDateTime *time.Time                         `json:"acceptorTransactionDateTime"`
-	BatchBookingPreferred       *bool                              `json:"batchBookingPreferred"`
+	AcceptorTransactionDateTime *time.Time                         `json:"acceptorTransactionDateTime,omitempty"`
+	BatchBookingPreferred       *bool                              `json:"batchBookingPreferred,omitempty"`
 	DebtorAccount               AccountReference16Ch               `json:"debtorAccount"`
-	PaymentInformationID        *string                            `json:"paymentInformationId"`
+	PaymentInformationID        *string                            `json:"paymentInformationId,omitempty"`
 	Payments                    []PaymentInitiationBulkElementJSON `json:"payments"`
-	RequestedExecutionDate      *time.Time                         `json:"requestedExecutionDate"`
-	TransactionStatus           *TransactionStatusEnum             `json:"transactionStatus"`
+	RequestedExecutionDate      *time.Time                         `json:"requestedExecutionDate,omitempty"`
+	TransactionStatus           *TransactionStatusEnum             `json:"transactionStatus,omitempty"`
 }

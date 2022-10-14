@@ -1,7 +1,7 @@
 package shared
 
 type StatusCause struct {
-	Field   *string `json:"field"`
-	Message *string `json:"message"`
-	Reason  *string `json:"reason"`
+	Field   *string `json:"field,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Reason  *string `json:"reason,omitempty"`
 }

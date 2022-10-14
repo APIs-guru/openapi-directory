@@ -32,8 +32,8 @@ const (
 )
 
 type Tax struct {
-	Amount     *float64                    `json:"amount"`
-	Category   *TaxCategoryTaxCategoryEnum `json:"category"`
+	Amount     *float64                    `json:"amount,omitempty"`
+	Category   *TaxCategoryTaxCategoryEnum `json:"category,omitempty"`
 	Country    CountryEnum                 `json:"country"`
-	Percentage *float64                    `json:"percentage"`
+	Percentage *float64                    `json:"percentage,omitempty"`
 }

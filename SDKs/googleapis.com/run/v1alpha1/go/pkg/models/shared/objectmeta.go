@@ -1,19 +1,19 @@
 package shared
 
 type ObjectMeta struct {
-	Annotations                map[string]string `json:"annotations"`
-	ClusterName                *string           `json:"clusterName"`
-	CreationTimestamp          *string           `json:"creationTimestamp"`
-	DeletionGracePeriodSeconds *int32            `json:"deletionGracePeriodSeconds"`
-	DeletionTimestamp          *string           `json:"deletionTimestamp"`
-	Finalizers                 []string          `json:"finalizers"`
-	GenerateName               *string           `json:"generateName"`
-	Generation                 *int32            `json:"generation"`
-	Labels                     map[string]string `json:"labels"`
-	Name                       *string           `json:"name"`
-	Namespace                  *string           `json:"namespace"`
-	OwnerReferences            []OwnerReference  `json:"ownerReferences"`
-	ResourceVersion            *string           `json:"resourceVersion"`
-	SelfLink                   *string           `json:"selfLink"`
-	UID                        *string           `json:"uid"`
+	Annotations                map[string]string `json:"annotations,omitempty"`
+	ClusterName                *string           `json:"clusterName,omitempty"`
+	CreationTimestamp          *string           `json:"creationTimestamp,omitempty"`
+	DeletionGracePeriodSeconds *int32            `json:"deletionGracePeriodSeconds,omitempty"`
+	DeletionTimestamp          *string           `json:"deletionTimestamp,omitempty"`
+	Finalizers                 []string          `json:"finalizers,omitempty"`
+	GenerateName               *string           `json:"generateName,omitempty"`
+	Generation                 *int32            `json:"generation,omitempty"`
+	Labels                     map[string]string `json:"labels,omitempty"`
+	Name                       *string           `json:"name,omitempty"`
+	Namespace                  *string           `json:"namespace,omitempty"`
+	OwnerReferences            []OwnerReference  `json:"ownerReferences,omitempty"`
+	ResourceVersion            *string           `json:"resourceVersion,omitempty"`
+	SelfLink                   *string           `json:"selfLink,omitempty"`
+	UID                        *string           `json:"uid,omitempty"`
 }

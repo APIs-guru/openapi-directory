@@ -1,7 +1,7 @@
 package shared
 
 type CompanyDomainViewModel struct {
-	Domain     *string `json:"domain"`
-	ID         *string `json:"id"`
-	ObjectName *string `json:"objectName"`
+	Domain     *string `json:"domain,omitempty"`
+	ID         *string `json:"id,omitempty"`
+	ObjectName *string `json:"objectName,omitempty"`
 }

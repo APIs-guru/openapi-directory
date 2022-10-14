@@ -56,7 +56,7 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandOtherBankInterestType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -64,17 +64,17 @@ type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandO
 type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBand struct {
 	Aer                            string                                                                                                        `json:"AER"`
 	ApplicationFrequency           ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandApplicationFrequencyEnum            `json:"ApplicationFrequency"`
-	BankInterestRate               *string                                                                                                       `json:"BankInterestRate"`
-	BankInterestRateType           *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandBankInterestRateTypeEnum           `json:"BankInterestRateType"`
-	CalculationFrequency           *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandCalculationFrequencyEnum           `json:"CalculationFrequency"`
-	DepositInterestAppliedCoverage *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum `json:"DepositInterestAppliedCoverage"`
+	BankInterestRate               *string                                                                                                       `json:"BankInterestRate,omitempty"`
+	BankInterestRateType           *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandBankInterestRateTypeEnum           `json:"BankInterestRateType,omitempty"`
+	CalculationFrequency           *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandCalculationFrequencyEnum           `json:"CalculationFrequency,omitempty"`
+	DepositInterestAppliedCoverage *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum `json:"DepositInterestAppliedCoverage,omitempty"`
 	FixedVariableInterestRateType  ObInterestFixedVariableType1CodeEnum                                                                          `json:"FixedVariableInterestRateType"`
-	Identification                 *string                                                                                                       `json:"Identification"`
-	Notes                          []string                                                                                                      `json:"Notes"`
-	OtherApplicationFrequency      *ObOtherCodeType11                                                                                            `json:"OtherApplicationFrequency"`
-	OtherBankInterestType          *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandOtherBankInterestType              `json:"OtherBankInterestType"`
-	OtherCalculationFrequency      *ObOtherCodeType12                                                                                            `json:"OtherCalculationFrequency"`
-	TierValueMaximum               *string                                                                                                       `json:"TierValueMaximum"`
+	Identification                 *string                                                                                                       `json:"Identification,omitempty"`
+	Notes                          []string                                                                                                      `json:"Notes,omitempty"`
+	OtherApplicationFrequency      *ObOtherCodeType11                                                                                            `json:"OtherApplicationFrequency,omitempty"`
+	OtherBankInterestType          *ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandOtherBankInterestType              `json:"OtherBankInterestType,omitempty"`
+	OtherCalculationFrequency      *ObOtherCodeType12                                                                                            `json:"OtherCalculationFrequency,omitempty"`
+	TierValueMaximum               *string                                                                                                       `json:"TierValueMaximum,omitempty"`
 	TierValueMinimum               string                                                                                                        `json:"TierValueMinimum"`
 }
 
@@ -87,11 +87,11 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSet struct {
-	CalculationMethod      *ObInterestCalculationMethod1CodeEnum                                                `json:"CalculationMethod"`
+	CalculationMethod      *ObInterestCalculationMethod1CodeEnum                                                `json:"CalculationMethod,omitempty"`
 	Destination            ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetDestinationEnum    `json:"Destination"`
-	Notes                  []string                                                                             `json:"Notes"`
-	OtherCalculationMethod *ObOtherCodeType10                                                                   `json:"OtherCalculationMethod"`
-	OtherDestination       *ObOtherCodeType10                                                                   `json:"OtherDestination"`
+	Notes                  []string                                                                             `json:"Notes,omitempty"`
+	OtherCalculationMethod *ObOtherCodeType10                                                                   `json:"OtherCalculationMethod,omitempty"`
+	OtherDestination       *ObOtherCodeType10                                                                   `json:"OtherDestination,omitempty"`
 	TierBand               []ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBand         `json:"TierBand"`
 	TierBandMethod         ObReadProduct2DataProductOtherProductTypeCreditInterestTierBandSetTierBandMethodEnum `json:"TierBandMethod"`
 }
@@ -115,38 +115,38 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCap struct {
-	CappingPeriod    *ObFeeFrequency1Code4Enum                                                                                                                 `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                                   `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                                                                    `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObFeeFrequency1Code4Enum                                                                                                                 `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                                   `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                                                                    `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                                                                     `json:"MinMaxType"`
-	Notes            []string                                                                                                                                  `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                                                                  `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum      `json:"ApplicationFrequency"`
 	CalculationFrequency      ObFeeFrequency1Code3Enum      `json:"CalculationFrequency"`
-	FeeAmount                 *string                       `json:"FeeAmount"`
-	FeeRate                   *string                       `json:"FeeRate"`
-	FeeRateType               *ObInterestRateType1Code1Enum `json:"FeeRateType"`
+	FeeAmount                 *string                       `json:"FeeAmount,omitempty"`
+	FeeRate                   *string                       `json:"FeeRate,omitempty"`
+	FeeRateType               *ObInterestRateType1Code1Enum `json:"FeeRateType,omitempty"`
 	FeeType                   ObFeeType1CodeEnum            `json:"FeeType"`
-	NegotiableIndicator       *bool                         `json:"NegotiableIndicator"`
-	Notes                     []string                      `json:"Notes"`
-	OtherApplicationFrequency *ObOtherCodeType16            `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency *ObOtherCodeType17            `json:"OtherCalculationFrequency"`
-	OtherFeeRateType          *ObOtherCodeType15            `json:"OtherFeeRateType"`
-	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType"`
+	NegotiableIndicator       *bool                         `json:"NegotiableIndicator,omitempty"`
+	Notes                     []string                      `json:"Notes,omitempty"`
+	OtherApplicationFrequency *ObOtherCodeType16            `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency *ObOtherCodeType17            `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeRateType          *ObOtherCodeType15            `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesCharges struct {
-	LoanInterestFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCap    `json:"LoanInterestFeeChargeCap"`
+	LoanInterestFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeCap    `json:"LoanInterestFeeChargeCap,omitempty"`
 	LoanInterestFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesChargesLoanInterestFeeChargeDetail `json:"LoanInterestFeeChargeDetail"`
 }
 
@@ -165,38 +165,38 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCap struct {
-	CappingPeriod    *ObFeeFrequency1Code4Enum                                                                                                                                     `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                                                       `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                                                                                        `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObFeeFrequency1Code4Enum                                                                                                                                     `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                                                       `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                                                                                        `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                                                                                         `json:"MinMaxType"`
-	Notes            []string                                                                                                                                                      `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                                                                                      `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum      `json:"ApplicationFrequency"`
 	CalculationFrequency      ObFeeFrequency1Code3Enum      `json:"CalculationFrequency"`
-	FeeAmount                 *string                       `json:"FeeAmount"`
-	FeeRate                   *string                       `json:"FeeRate"`
-	FeeRateType               *ObInterestRateType1Code1Enum `json:"FeeRateType"`
+	FeeAmount                 *string                       `json:"FeeAmount,omitempty"`
+	FeeRate                   *string                       `json:"FeeRate,omitempty"`
+	FeeRateType               *ObInterestRateType1Code1Enum `json:"FeeRateType,omitempty"`
 	FeeType                   ObFeeType1CodeEnum            `json:"FeeType"`
-	NegotiableIndicator       *bool                         `json:"NegotiableIndicator"`
-	Notes                     []string                      `json:"Notes"`
-	OtherApplicationFrequency *ObOtherCodeType16            `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency *ObOtherCodeType17            `json:"OtherCalculationFrequency"`
-	OtherFeeRateType          *ObOtherCodeType15            `json:"OtherFeeRateType"`
-	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType"`
+	NegotiableIndicator       *bool                         `json:"NegotiableIndicator,omitempty"`
+	Notes                     []string                      `json:"Notes,omitempty"`
+	OtherApplicationFrequency *ObOtherCodeType16            `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency *ObOtherCodeType17            `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeRateType          *ObOtherCodeType15            `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesCharges struct {
-	LoanInterestFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCap    `json:"LoanInterestFeeChargeCap"`
+	LoanInterestFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeCap    `json:"LoanInterestFeeChargeCap,omitempty"`
 	LoanInterestFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesChargesLoanInterestFeeChargeDetail `json:"LoanInterestFeeChargeDetail"`
 }
 
@@ -236,24 +236,24 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandOtherLoanProviderInterestRateType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBand struct {
 	FixedVariableInterestRateType     ObInterestFixedVariableType1CodeEnum                                                                                               `json:"FixedVariableInterestRateType"`
-	Identification                    *string                                                                                                                            `json:"Identification"`
-	LoanInterestFeesCharges           []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesCharges          `json:"LoanInterestFeesCharges"`
-	LoanProviderInterestRate          *string                                                                                                                            `json:"LoanProviderInterestRate"`
-	LoanProviderInterestRateType      *ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanProviderInterestRateTypeEnum  `json:"LoanProviderInterestRateType"`
-	MaxTermPeriod                     *ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandMaxTermPeriodEnum                 `json:"MaxTermPeriod"`
+	Identification                    *string                                                                                                                            `json:"Identification,omitempty"`
+	LoanInterestFeesCharges           []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanInterestFeesCharges          `json:"LoanInterestFeesCharges,omitempty"`
+	LoanProviderInterestRate          *string                                                                                                                            `json:"LoanProviderInterestRate,omitempty"`
+	LoanProviderInterestRateType      *ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandLoanProviderInterestRateTypeEnum  `json:"LoanProviderInterestRateType,omitempty"`
+	MaxTermPeriod                     *ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandMaxTermPeriodEnum                 `json:"MaxTermPeriod,omitempty"`
 	MinTermPeriod                     ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandMinTermPeriodEnum                  `json:"MinTermPeriod"`
-	Notes                             []string                                                                                                                           `json:"Notes"`
-	OtherLoanProviderInterestRateType *ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandOtherLoanProviderInterestRateType `json:"OtherLoanProviderInterestRateType"`
+	Notes                             []string                                                                                                                           `json:"Notes,omitempty"`
+	OtherLoanProviderInterestRateType *ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBandOtherLoanProviderInterestRateType `json:"OtherLoanProviderInterestRateType,omitempty"`
 	RepApr                            string                                                                                                                             `json:"RepAPR"`
-	TierValueMaxTerm                  *int64                                                                                                                             `json:"TierValueMaxTerm"`
-	TierValueMaximum                  *string                                                                                                                            `json:"TierValueMaximum"`
+	TierValueMaxTerm                  *int64                                                                                                                             `json:"TierValueMaxTerm,omitempty"`
+	TierValueMaximum                  *string                                                                                                                            `json:"TierValueMaximum,omitempty"`
 	TierValueMinTerm                  int64                                                                                                                              `json:"TierValueMinTerm"`
 	TierValueMinimum                  string                                                                                                                             `json:"TierValueMinimum"`
 }
@@ -268,17 +268,17 @@ const (
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSet struct {
 	CalculationMethod       ObInterestCalculationMethod1CodeEnum                                                                  `json:"CalculationMethod"`
-	Identification          *string                                                                                               `json:"Identification"`
-	LoanInterestFeesCharges []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesCharges `json:"LoanInterestFeesCharges"`
+	Identification          *string                                                                                               `json:"Identification,omitempty"`
+	LoanInterestFeesCharges []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestFeesCharges `json:"LoanInterestFeesCharges,omitempty"`
 	LoanInterestTierBand    []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetLoanInterestTierBand    `json:"LoanInterestTierBand"`
-	Notes                   []string                                                                                              `json:"Notes"`
-	OtherCalculationMethod  *ObOtherCodeType10                                                                                    `json:"OtherCalculationMethod"`
+	Notes                   []string                                                                                              `json:"Notes,omitempty"`
+	OtherCalculationMethod  *ObOtherCodeType10                                                                                    `json:"OtherCalculationMethod,omitempty"`
 	TierBandMethod          ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSetTierBandMethodEnum        `json:"TierBandMethod"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeLoanInterest struct {
 	LoanInterestTierBandSet []ObReadProduct2DataProductOtherProductTypeLoanInterestLoanInterestTierBandSet `json:"LoanInterestTierBandSet"`
-	Notes                   []string                                                                       `json:"Notes"`
+	Notes                   []string                                                                       `json:"Notes,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapFeeTypeEnum string
@@ -296,26 +296,26 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCap struct {
-	CappingPeriod    *ObPeriod1CodeEnum                                                                  `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                             `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                              `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObPeriod1CodeEnum                                                                  `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                             `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                              `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                               `json:"MinMaxType"`
-	Notes            []string                                                                            `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                            `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeApplicableRange struct {
-	MaximumAmount *string `json:"MaximumAmount"`
-	MaximumRate   *string `json:"MaximumRate"`
-	MinimumAmount *string `json:"MinimumAmount"`
-	MinimumRate   *string `json:"MinimumRate"`
+	MaximumAmount *string `json:"MaximumAmount,omitempty"`
+	MaximumRate   *string `json:"MaximumRate,omitempty"`
+	MinimumAmount *string `json:"MinimumAmount,omitempty"`
+	MinimumRate   *string `json:"MinimumRate,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum string
@@ -333,42 +333,42 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCap struct {
-	CappingPeriod    *ObPeriod1CodeEnum                                                                                 `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                            `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                             `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObPeriod1CodeEnum                                                                                 `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                            `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                             `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                              `json:"MinMaxType"`
-	Notes            []string                                                                                           `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                           `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum                                                                    `json:"ApplicationFrequency"`
-	CalculationFrequency      *ObFeeFrequency1Code3Enum                                                                   `json:"CalculationFrequency"`
-	FeeAmount                 *string                                                                                     `json:"FeeAmount"`
-	FeeApplicableRange        *ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeApplicableRange `json:"FeeApplicableRange"`
+	CalculationFrequency      *ObFeeFrequency1Code3Enum                                                                   `json:"CalculationFrequency,omitempty"`
+	FeeAmount                 *string                                                                                     `json:"FeeAmount,omitempty"`
+	FeeApplicableRange        *ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeApplicableRange `json:"FeeApplicableRange,omitempty"`
 	FeeCategory               ObFeeCategory1CodeEnum                                                                      `json:"FeeCategory"`
-	FeeChargeCap              []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCap      `json:"FeeChargeCap"`
-	FeeRate                   *string                                                                                     `json:"FeeRate"`
-	FeeRateType               *ObInterestRateType1Code1Enum                                                               `json:"FeeRateType"`
+	FeeChargeCap              []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetailFeeChargeCap      `json:"FeeChargeCap,omitempty"`
+	FeeRate                   *string                                                                                     `json:"FeeRate,omitempty"`
+	FeeRateType               *ObInterestRateType1Code1Enum                                                               `json:"FeeRateType,omitempty"`
 	FeeType                   ObFeeType1CodeEnum                                                                          `json:"FeeType"`
-	NegotiableIndicator       *bool                                                                                       `json:"NegotiableIndicator"`
-	Notes                     []string                                                                                    `json:"Notes"`
-	OtherApplicationFrequency *ObOtherCodeType16                                                                          `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency *ObOtherCodeType17                                                                          `json:"OtherCalculationFrequency"`
-	OtherFeeCategoryType      *ObOtherCodeType10                                                                          `json:"OtherFeeCategoryType"`
-	OtherFeeRateType          *ObOtherCodeType18                                                                          `json:"OtherFeeRateType"`
-	OtherFeeType              *ObOtherFeeChargeDetailType                                                                 `json:"OtherFeeType"`
+	NegotiableIndicator       *bool                                                                                       `json:"NegotiableIndicator,omitempty"`
+	Notes                     []string                                                                                    `json:"Notes,omitempty"`
+	OtherApplicationFrequency *ObOtherCodeType16                                                                          `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency *ObOtherCodeType17                                                                          `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeCategoryType      *ObOtherCodeType10                                                                          `json:"OtherFeeCategoryType,omitempty"`
+	OtherFeeRateType          *ObOtherCodeType18                                                                          `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType              *ObOtherFeeChargeDetailType                                                                 `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesChargesOtherTariffType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -382,11 +382,11 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOtherFeesCharges struct {
-	FeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCap    `json:"FeeChargeCap"`
+	FeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeCap    `json:"FeeChargeCap,omitempty"`
 	FeeChargeDetail []ObReadProduct2DataProductOtherProductTypeOtherFeesChargesFeeChargeDetail `json:"FeeChargeDetail"`
-	OtherTariffType *ObReadProduct2DataProductOtherProductTypeOtherFeesChargesOtherTariffType  `json:"OtherTariffType"`
-	TariffName      *string                                                                    `json:"TariffName"`
-	TariffType      *ObReadProduct2DataProductOtherProductTypeOtherFeesChargesTariffTypeEnum   `json:"TariffType"`
+	OtherTariffType *ObReadProduct2DataProductOtherProductTypeOtherFeesChargesOtherTariffType  `json:"OtherTariffType,omitempty"`
+	TariffName      *string                                                                    `json:"TariffName,omitempty"`
+	TariffType      *ObReadProduct2DataProductOtherProductTypeOtherFeesChargesTariffTypeEnum   `json:"TariffType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum string
@@ -407,19 +407,19 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObPeriod1CodeEnum                                                                                                            `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                       `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                                                        `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObPeriod1CodeEnum                                                                                                            `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                       `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                                                        `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                                                         `json:"MinMaxType"`
-	Notes            []string                                                                                                                      `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                                                      `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum string
@@ -440,41 +440,41 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                                    `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                                               `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                                                                                `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                                    `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                                               `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                                                                                `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                                                                                 `json:"MinMaxType"`
-	Notes            []string                                                                                                                                              `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                                                                              `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObFeeFrequency1Code0Enum                                                                                                                  `json:"ApplicationFrequency"`
-	CalculationFrequency       *ObFeeFrequency1Code1Enum                                                                                                                 `json:"CalculationFrequency"`
-	FeeAmount                  *string                                                                                                                                   `json:"FeeAmount"`
-	FeeRate                    *string                                                                                                                                   `json:"FeeRate"`
-	FeeRateType                *ObInterestRateType1Code0Enum                                                                                                             `json:"FeeRateType"`
+	CalculationFrequency       *ObFeeFrequency1Code1Enum                                                                                                                 `json:"CalculationFrequency,omitempty"`
+	FeeAmount                  *string                                                                                                                                   `json:"FeeAmount,omitempty"`
+	FeeRate                    *string                                                                                                                                   `json:"FeeRate,omitempty"`
+	FeeRateType                *ObInterestRateType1Code0Enum                                                                                                             `json:"FeeRateType,omitempty"`
 	FeeType                    ObOverdraftFeeType1CodeEnum                                                                                                               `json:"FeeType"`
-	IncrementalBorrowingAmount *string                                                                                                                                   `json:"IncrementalBorrowingAmount"`
-	NegotiableIndicator        *bool                                                                                                                                     `json:"NegotiableIndicator"`
-	Notes                      []string                                                                                                                                  `json:"Notes"`
-	OtherApplicationFrequency  *ObOtherCodeType11                                                                                                                        `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency  *ObOtherCodeType12                                                                                                                        `json:"OtherCalculationFrequency"`
-	OtherFeeRateType           *ObOtherCodeType14                                                                                                                        `json:"OtherFeeRateType"`
-	OtherFeeType               *ObOtherCodeType13                                                                                                                        `json:"OtherFeeType"`
-	OverdraftControlIndicator  *bool                                                                                                                                     `json:"OverdraftControlIndicator"`
-	OverdraftFeeChargeCap      []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap"`
+	IncrementalBorrowingAmount *string                                                                                                                                   `json:"IncrementalBorrowingAmount,omitempty"`
+	NegotiableIndicator        *bool                                                                                                                                     `json:"NegotiableIndicator,omitempty"`
+	Notes                      []string                                                                                                                                  `json:"Notes,omitempty"`
+	OtherApplicationFrequency  *ObOtherCodeType11                                                                                                                        `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency  *ObOtherCodeType12                                                                                                                        `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeRateType           *ObOtherCodeType14                                                                                                                        `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType               *ObOtherCodeType13                                                                                                                        `json:"OtherFeeType,omitempty"`
+	OverdraftControlIndicator  *bool                                                                                                                                     `json:"OverdraftControlIndicator,omitempty"`
+	OverdraftFeeChargeCap      []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesCharges struct {
-	OverdraftFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap"`
+	OverdraftFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
 }
 
@@ -508,19 +508,19 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                             `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                                        `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                                                                         `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                             `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                                        `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                                                                         `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                                                                          `json:"MinMaxType"`
-	Notes            []string                                                                                                                                       `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                                                                       `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum string
@@ -541,41 +541,41 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                                                     `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                                                                                `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                                                                                                 `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObPeriod1CodeEnum                                                                                                                                                     `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                                                                                `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                                                                                                 `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                                                                                                  `json:"MinMaxType"`
-	Notes            []string                                                                                                                                                               `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                                                                                               `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObFeeFrequency1Code0Enum                                                                                                                                   `json:"ApplicationFrequency"`
-	CalculationFrequency       *ObFeeFrequency1Code1Enum                                                                                                                                  `json:"CalculationFrequency"`
-	FeeAmount                  *string                                                                                                                                                    `json:"FeeAmount"`
-	FeeRate                    *string                                                                                                                                                    `json:"FeeRate"`
-	FeeRateType                *ObInterestRateType1Code0Enum                                                                                                                              `json:"FeeRateType"`
+	CalculationFrequency       *ObFeeFrequency1Code1Enum                                                                                                                                  `json:"CalculationFrequency,omitempty"`
+	FeeAmount                  *string                                                                                                                                                    `json:"FeeAmount,omitempty"`
+	FeeRate                    *string                                                                                                                                                    `json:"FeeRate,omitempty"`
+	FeeRateType                *ObInterestRateType1Code0Enum                                                                                                                              `json:"FeeRateType,omitempty"`
 	FeeType                    ObOverdraftFeeType1CodeEnum                                                                                                                                `json:"FeeType"`
-	IncrementalBorrowingAmount *string                                                                                                                                                    `json:"IncrementalBorrowingAmount"`
-	NegotiableIndicator        *bool                                                                                                                                                      `json:"NegotiableIndicator"`
-	Notes                      []string                                                                                                                                                   `json:"Notes"`
-	OtherApplicationFrequency  *ObOtherCodeType11                                                                                                                                         `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency  *ObOtherCodeType12                                                                                                                                         `json:"OtherCalculationFrequency"`
-	OtherFeeRateType           *ObOtherCodeType14                                                                                                                                         `json:"OtherFeeRateType"`
-	OtherFeeType               *ObOtherCodeType13                                                                                                                                         `json:"OtherFeeType"`
-	OverdraftControlIndicator  *bool                                                                                                                                                      `json:"OverdraftControlIndicator"`
-	OverdraftFeeChargeCap      []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap"`
+	IncrementalBorrowingAmount *string                                                                                                                                                    `json:"IncrementalBorrowingAmount,omitempty"`
+	NegotiableIndicator        *bool                                                                                                                                                      `json:"NegotiableIndicator,omitempty"`
+	Notes                      []string                                                                                                                                                   `json:"Notes,omitempty"`
+	OtherApplicationFrequency  *ObOtherCodeType11                                                                                                                                         `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency  *ObOtherCodeType12                                                                                                                                         `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeRateType           *ObOtherCodeType14                                                                                                                                         `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType               *ObOtherCodeType13                                                                                                                                         `json:"OtherFeeType,omitempty"`
+	OverdraftControlIndicator  *bool                                                                                                                                                      `json:"OverdraftControlIndicator,omitempty"`
+	OverdraftFeeChargeCap      []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges struct {
-	OverdraftFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap"`
+	OverdraftFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
 }
 
@@ -588,16 +588,16 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBand struct {
-	AgreementLengthMax                *int64                                                                                                                        `json:"AgreementLengthMax"`
-	AgreementLengthMin                *int64                                                                                                                        `json:"AgreementLengthMin"`
-	AgreementPeriod                   *ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum                   `json:"AgreementPeriod"`
-	BankGuaranteedIndicator           *bool                                                                                                                         `json:"BankGuaranteedIndicator"`
-	Ear                               *string                                                                                                                       `json:"EAR"`
-	Identification                    *string                                                                                                                       `json:"Identification"`
-	Notes                             []string                                                                                                                      `json:"Notes"`
-	OverdraftFeesCharges              []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges                 `json:"OverdraftFeesCharges"`
-	OverdraftInterestChargingCoverage *ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum `json:"OverdraftInterestChargingCoverage"`
-	TierValueMax                      *string                                                                                                                       `json:"TierValueMax"`
+	AgreementLengthMax                *int64                                                                                                                        `json:"AgreementLengthMax,omitempty"`
+	AgreementLengthMin                *int64                                                                                                                        `json:"AgreementLengthMin,omitempty"`
+	AgreementPeriod                   *ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum                   `json:"AgreementPeriod,omitempty"`
+	BankGuaranteedIndicator           *bool                                                                                                                         `json:"BankGuaranteedIndicator,omitempty"`
+	Ear                               *string                                                                                                                       `json:"EAR,omitempty"`
+	Identification                    *string                                                                                                                       `json:"Identification,omitempty"`
+	Notes                             []string                                                                                                                      `json:"Notes,omitempty"`
+	OverdraftFeesCharges              []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges                 `json:"OverdraftFeesCharges,omitempty"`
+	OverdraftInterestChargingCoverage *ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum `json:"OverdraftInterestChargingCoverage,omitempty"`
+	TierValueMax                      *string                                                                                                                       `json:"TierValueMax,omitempty"`
 	TierValueMin                      string                                                                                                                        `json:"TierValueMin"`
 }
 
@@ -618,18 +618,18 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSet struct {
-	AuthorisedIndicator  *bool                                                                                        `json:"AuthorisedIndicator"`
-	BufferAmount         *string                                                                                      `json:"BufferAmount"`
-	Identification       *string                                                                                      `json:"Identification"`
-	Notes                []string                                                                                     `json:"Notes"`
-	OverdraftFeesCharges []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesCharges `json:"OverdraftFeesCharges"`
+	AuthorisedIndicator  *bool                                                                                        `json:"AuthorisedIndicator,omitempty"`
+	BufferAmount         *string                                                                                      `json:"BufferAmount,omitempty"`
+	Identification       *string                                                                                      `json:"Identification,omitempty"`
+	Notes                []string                                                                                     `json:"Notes,omitempty"`
+	OverdraftFeesCharges []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftFeesCharges `json:"OverdraftFeesCharges,omitempty"`
 	OverdraftTierBand    []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTierBand    `json:"OverdraftTierBand"`
-	OverdraftType        *ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTypeEnum     `json:"OverdraftType"`
+	OverdraftType        *ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetOverdraftTypeEnum     `json:"OverdraftType,omitempty"`
 	TierBandMethod       ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSetTierBandMethodEnum     `json:"TierBandMethod"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeOverdraft struct {
-	Notes                []string                                                                 `json:"Notes"`
+	Notes                []string                                                                 `json:"Notes,omitempty"`
 	OverdraftTierBandSet []ObReadProduct2DataProductOtherProductTypeOverdraftOverdraftTierBandSet `json:"OverdraftTierBandSet"`
 }
 
@@ -678,12 +678,12 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeProductDetails struct {
-	FeeFreeLength        *int64                                                                          `json:"FeeFreeLength"`
-	FeeFreeLengthPeriod  *ObReadProduct2DataProductOtherProductTypeProductDetailsFeeFreeLengthPeriodEnum `json:"FeeFreeLengthPeriod"`
-	MonthlyMaximumCharge *string                                                                         `json:"MonthlyMaximumCharge"`
-	Notes                []string                                                                        `json:"Notes"`
-	OtherSegment         *ObOtherCodeType10                                                              `json:"OtherSegment"`
-	Segment              []ObReadProduct2DataProductOtherProductTypeProductDetailsSegmentEnum            `json:"Segment"`
+	FeeFreeLength        *int64                                                                          `json:"FeeFreeLength,omitempty"`
+	FeeFreeLengthPeriod  *ObReadProduct2DataProductOtherProductTypeProductDetailsFeeFreeLengthPeriodEnum `json:"FeeFreeLengthPeriod,omitempty"`
+	MonthlyMaximumCharge *string                                                                         `json:"MonthlyMaximumCharge,omitempty"`
+	Notes                []string                                                                        `json:"Notes,omitempty"`
+	OtherSegment         *ObOtherCodeType10                                                              `json:"OtherSegment,omitempty"`
+	Segment              []ObReadProduct2DataProductOtherProductTypeProductDetailsSegmentEnum            `json:"Segment,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentAmountTypeEnum string
@@ -699,19 +699,19 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentOtherAmountType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentFrequency struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
@@ -731,38 +731,38 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code"`
+	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCap struct {
-	CappingPeriod    *ObPeriod1CodeEnum                                                                                       `json:"CappingPeriod"`
-	FeeCapAmount     *string                                                                                                  `json:"FeeCapAmount"`
-	FeeCapOccurrence *int64                                                                                                   `json:"FeeCapOccurrence"`
+	CappingPeriod    *ObPeriod1CodeEnum                                                                                       `json:"CappingPeriod,omitempty"`
+	FeeCapAmount     *string                                                                                                  `json:"FeeCapAmount,omitempty"`
+	FeeCapOccurrence *int64                                                                                                   `json:"FeeCapOccurrence,omitempty"`
 	FeeType          []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapFeeTypeEnum  `json:"FeeType"`
 	MinMaxType       ObMinMaxType1CodeEnum                                                                                    `json:"MinMaxType"`
-	Notes            []string                                                                                                 `json:"Notes"`
-	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapOtherFeeType `json:"OtherFeeType"`
+	Notes            []string                                                                                                 `json:"Notes,omitempty"`
+	OtherFeeType     []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeDetail struct {
 	ApplicationFrequency      ObFeeFrequency1Code2Enum      `json:"ApplicationFrequency"`
 	CalculationFrequency      ObFeeFrequency1Code3Enum      `json:"CalculationFrequency"`
-	FeeAmount                 *string                       `json:"FeeAmount"`
-	FeeRate                   *string                       `json:"FeeRate"`
-	FeeRateType               *ObInterestRateType1Code1Enum `json:"FeeRateType"`
+	FeeAmount                 *string                       `json:"FeeAmount,omitempty"`
+	FeeRate                   *string                       `json:"FeeRate,omitempty"`
+	FeeRateType               *ObInterestRateType1Code1Enum `json:"FeeRateType,omitempty"`
 	FeeType                   ObFeeType1CodeEnum            `json:"FeeType"`
-	NegotiableIndicator       *bool                         `json:"NegotiableIndicator"`
-	Notes                     []string                      `json:"Notes"`
-	OtherApplicationFrequency *ObOtherCodeType16            `json:"OtherApplicationFrequency"`
-	OtherCalculationFrequency *ObOtherCodeType17            `json:"OtherCalculationFrequency"`
-	OtherFeeRateType          *ObOtherCodeType18            `json:"OtherFeeRateType"`
-	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType"`
+	NegotiableIndicator       *bool                         `json:"NegotiableIndicator,omitempty"`
+	Notes                     []string                      `json:"Notes,omitempty"`
+	OtherApplicationFrequency *ObOtherCodeType16            `json:"OtherApplicationFrequency,omitempty"`
+	OtherCalculationFrequency *ObOtherCodeType17            `json:"OtherCalculationFrequency,omitempty"`
+	OtherFeeRateType          *ObOtherCodeType18            `json:"OtherFeeRateType,omitempty"`
+	OtherFeeType              *ObOtherFeeChargeDetailType   `json:"OtherFeeType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeCharges struct {
-	RepaymentFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCap    `json:"RepaymentFeeChargeCap"`
+	RepaymentFeeChargeCap    []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeCap    `json:"RepaymentFeeChargeCap,omitempty"`
 	RepaymentFeeChargeDetail []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeChargesRepaymentFeeChargeDetail `json:"RepaymentFeeChargeDetail"`
 }
 
@@ -793,9 +793,9 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHoliday struct {
-	MaxHolidayLength *int64                                                                                  `json:"MaxHolidayLength"`
-	MaxHolidayPeriod *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHolidayMaxHolidayPeriodEnum `json:"MaxHolidayPeriod"`
-	Notes            []string                                                                                `json:"Notes"`
+	MaxHolidayLength *int64                                                                                  `json:"MaxHolidayLength,omitempty"`
+	MaxHolidayPeriod *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHolidayMaxHolidayPeriodEnum `json:"MaxHolidayPeriod,omitempty"`
+	Notes            []string                                                                                `json:"Notes,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentTypeEnum string
@@ -817,27 +817,27 @@ const (
 )
 
 type ObReadProduct2DataProductOtherProductTypeRepayment struct {
-	AmountType              *ObReadProduct2DataProductOtherProductTypeRepaymentAmountTypeEnum          `json:"AmountType"`
-	Notes                   []string                                                                   `json:"Notes"`
-	OtherAmountType         *ObReadProduct2DataProductOtherProductTypeRepaymentOtherAmountType         `json:"OtherAmountType"`
-	OtherRepaymentFrequency *ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentFrequency `json:"OtherRepaymentFrequency"`
-	OtherRepaymentType      *ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentType      `json:"OtherRepaymentType"`
-	RepaymentFeeCharges     *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeCharges     `json:"RepaymentFeeCharges"`
-	RepaymentFrequency      *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFrequencyEnum  `json:"RepaymentFrequency"`
-	RepaymentHoliday        []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHoliday       `json:"RepaymentHoliday"`
-	RepaymentType           *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentTypeEnum       `json:"RepaymentType"`
+	AmountType              *ObReadProduct2DataProductOtherProductTypeRepaymentAmountTypeEnum          `json:"AmountType,omitempty"`
+	Notes                   []string                                                                   `json:"Notes,omitempty"`
+	OtherAmountType         *ObReadProduct2DataProductOtherProductTypeRepaymentOtherAmountType         `json:"OtherAmountType,omitempty"`
+	OtherRepaymentFrequency *ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentFrequency `json:"OtherRepaymentFrequency,omitempty"`
+	OtherRepaymentType      *ObReadProduct2DataProductOtherProductTypeRepaymentOtherRepaymentType      `json:"OtherRepaymentType,omitempty"`
+	RepaymentFeeCharges     *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFeeCharges     `json:"RepaymentFeeCharges,omitempty"`
+	RepaymentFrequency      *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentFrequencyEnum  `json:"RepaymentFrequency,omitempty"`
+	RepaymentHoliday        []ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentHoliday       `json:"RepaymentHoliday,omitempty"`
+	RepaymentType           *ObReadProduct2DataProductOtherProductTypeRepaymentRepaymentTypeEnum       `json:"RepaymentType,omitempty"`
 }
 
 type ObReadProduct2DataProductOtherProductType struct {
-	CreditInterest    *ObReadProduct2DataProductOtherProductTypeCreditInterest    `json:"CreditInterest"`
+	CreditInterest    *ObReadProduct2DataProductOtherProductTypeCreditInterest    `json:"CreditInterest,omitempty"`
 	Description       string                                                      `json:"Description"`
-	LoanInterest      *ObReadProduct2DataProductOtherProductTypeLoanInterest      `json:"LoanInterest"`
+	LoanInterest      *ObReadProduct2DataProductOtherProductTypeLoanInterest      `json:"LoanInterest,omitempty"`
 	Name              string                                                      `json:"Name"`
-	OtherFeesCharges  []ObReadProduct2DataProductOtherProductTypeOtherFeesCharges `json:"OtherFeesCharges"`
-	Overdraft         *ObReadProduct2DataProductOtherProductTypeOverdraft         `json:"Overdraft"`
-	ProductDetails    *ObReadProduct2DataProductOtherProductTypeProductDetails    `json:"ProductDetails"`
-	Repayment         *ObReadProduct2DataProductOtherProductTypeRepayment         `json:"Repayment"`
-	SupplementaryData map[string]interface{}                                      `json:"SupplementaryData"`
+	OtherFeesCharges  []ObReadProduct2DataProductOtherProductTypeOtherFeesCharges `json:"OtherFeesCharges,omitempty"`
+	Overdraft         *ObReadProduct2DataProductOtherProductTypeOverdraft         `json:"Overdraft,omitempty"`
+	ProductDetails    *ObReadProduct2DataProductOtherProductTypeProductDetails    `json:"ProductDetails,omitempty"`
+	Repayment         *ObReadProduct2DataProductOtherProductTypeRepayment         `json:"Repayment,omitempty"`
+	SupplementaryData map[string]interface{}                                      `json:"SupplementaryData,omitempty"`
 }
 
 type ObReadProduct2DataProductProductTypeEnum string
@@ -852,22 +852,22 @@ const (
 
 type ObReadProduct2DataProduct struct {
 	AccountID          string                                     `json:"AccountId"`
-	Bca                *ObbcaData1                                `json:"BCA"`
-	MarketingStateID   *string                                    `json:"MarketingStateId"`
-	OtherProductType   *ObReadProduct2DataProductOtherProductType `json:"OtherProductType"`
-	Pca                *ObpcaData1                                `json:"PCA"`
-	ProductID          *string                                    `json:"ProductId"`
-	ProductName        *string                                    `json:"ProductName"`
+	Bca                *ObbcaData1                                `json:"BCA,omitempty"`
+	MarketingStateID   *string                                    `json:"MarketingStateId,omitempty"`
+	OtherProductType   *ObReadProduct2DataProductOtherProductType `json:"OtherProductType,omitempty"`
+	Pca                *ObpcaData1                                `json:"PCA,omitempty"`
+	ProductID          *string                                    `json:"ProductId,omitempty"`
+	ProductName        *string                                    `json:"ProductName,omitempty"`
 	ProductType        ObReadProduct2DataProductProductTypeEnum   `json:"ProductType"`
-	SecondaryProductID *string                                    `json:"SecondaryProductId"`
+	SecondaryProductID *string                                    `json:"SecondaryProductId,omitempty"`
 }
 
 type ObReadProduct2Data struct {
-	Product []ObReadProduct2DataProduct `json:"Product"`
+	Product []ObReadProduct2DataProduct `json:"Product,omitempty"`
 }
 
 type ObReadProduct2 struct {
 	Data  ObReadProduct2Data `json:"Data"`
-	Links *Links             `json:"Links"`
-	Meta  *Meta              `json:"Meta"`
+	Links *Links             `json:"Links,omitempty"`
+	Meta  *Meta              `json:"Meta,omitempty"`
 }

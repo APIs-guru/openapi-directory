@@ -9,11 +9,11 @@ const (
 )
 
 type ManualTrigger struct {
-	ActivationDurationMinutes *string                 `json:"activationDurationMinutes"`
-	AdvertiserID              *string                 `json:"advertiserId"`
-	DisplayName               *string                 `json:"displayName"`
-	LatestActivationTime      *string                 `json:"latestActivationTime"`
-	Name                      *string                 `json:"name"`
-	State                     *ManualTriggerStateEnum `json:"state"`
-	TriggerID                 *string                 `json:"triggerId"`
+	ActivationDurationMinutes *string                 `json:"activationDurationMinutes,omitempty"`
+	AdvertiserID              *string                 `json:"advertiserId,omitempty"`
+	DisplayName               *string                 `json:"displayName,omitempty"`
+	LatestActivationTime      *string                 `json:"latestActivationTime,omitempty"`
+	Name                      *string                 `json:"name,omitempty"`
+	State                     *ManualTriggerStateEnum `json:"state,omitempty"`
+	TriggerID                 *string                 `json:"triggerId,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Grid struct {
-	Columns          *ChoiceQuestion `json:"columns"`
-	ShuffleQuestions *bool           `json:"shuffleQuestions"`
+	Columns          *ChoiceQuestion `json:"columns,omitempty"`
+	ShuffleQuestions *bool           `json:"shuffleQuestions,omitempty"`
 }

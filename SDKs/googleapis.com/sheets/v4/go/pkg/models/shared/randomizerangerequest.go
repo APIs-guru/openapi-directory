@@ -1,5 +1,5 @@
 package shared
 
 type RandomizeRangeRequest struct {
-	Range *GridRange `json:"range"`
+	Range *GridRange `json:"range,omitempty"`
 }

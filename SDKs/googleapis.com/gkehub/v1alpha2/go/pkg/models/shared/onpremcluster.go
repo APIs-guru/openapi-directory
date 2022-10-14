@@ -11,8 +11,8 @@ const (
 )
 
 type OnPremCluster struct {
-	AdminCluster   *bool                         `json:"adminCluster"`
-	ClusterMissing *bool                         `json:"clusterMissing"`
-	ClusterType    *OnPremClusterClusterTypeEnum `json:"clusterType"`
-	ResourceLink   *string                       `json:"resourceLink"`
+	AdminCluster   *bool                         `json:"adminCluster,omitempty"`
+	ClusterMissing *bool                         `json:"clusterMissing,omitempty"`
+	ClusterType    *OnPremClusterClusterTypeEnum `json:"clusterType,omitempty"`
+	ResourceLink   *string                       `json:"resourceLink,omitempty"`
 }

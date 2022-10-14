@@ -2,5 +2,5 @@ package shared
 
 type EncryptionConfiguration struct {
 	EncryptionType EncryptionTypeEnum `json:"encryptionType"`
-	KmsKey         *string            `json:"kmsKey"`
+	KmsKey         *string            `json:"kmsKey,omitempty"`
 }

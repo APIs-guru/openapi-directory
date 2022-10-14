@@ -1,6 +1,6 @@
 package shared
 
 type TextInput struct {
-	Key   *string `json:"key"`
-	Track *int32  `json:"track"`
+	Key   *string `json:"key,omitempty"`
+	Track *int32  `json:"track,omitempty"`
 }

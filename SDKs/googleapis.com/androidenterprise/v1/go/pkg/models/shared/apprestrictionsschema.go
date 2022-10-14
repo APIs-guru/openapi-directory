@@ -1,6 +1,6 @@
 package shared
 
 type AppRestrictionsSchema struct {
-	Kind         *string                            `json:"kind"`
-	Restrictions []AppRestrictionsSchemaRestriction `json:"restrictions"`
+	Kind         *string                            `json:"kind,omitempty"`
+	Restrictions []AppRestrictionsSchemaRestriction `json:"restrictions,omitempty"`
 }

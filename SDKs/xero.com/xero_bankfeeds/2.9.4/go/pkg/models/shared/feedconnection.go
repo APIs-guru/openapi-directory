@@ -8,14 +8,14 @@ const (
 )
 
 type FeedConnection struct {
-	AccountID     *string                   `json:"accountId"`
-	AccountName   *string                   `json:"accountName"`
-	AccountNumber *string                   `json:"accountNumber"`
-	AccountToken  *string                   `json:"accountToken"`
-	AccountType   *interface{}              `json:"accountType"`
-	Country       *CountryCodeEnum          `json:"country"`
-	Currency      *CurrencyCodeEnum         `json:"currency"`
-	Error         *Error                    `json:"error"`
-	ID            *string                   `json:"id"`
-	Status        *FeedConnectionStatusEnum `json:"status"`
+	AccountID     *string                   `json:"accountId,omitempty"`
+	AccountName   *string                   `json:"accountName,omitempty"`
+	AccountNumber *string                   `json:"accountNumber,omitempty"`
+	AccountToken  *string                   `json:"accountToken,omitempty"`
+	AccountType   *interface{}              `json:"accountType,omitempty"`
+	Country       *CountryCodeEnum          `json:"country,omitempty"`
+	Currency      *CurrencyCodeEnum         `json:"currency,omitempty"`
+	Error         *Error                    `json:"error,omitempty"`
+	ID            *string                   `json:"id,omitempty"`
+	Status        *FeedConnectionStatusEnum `json:"status,omitempty"`
 }

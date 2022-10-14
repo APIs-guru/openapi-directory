@@ -1,10 +1,10 @@
 package shared
 
 type CreateAppRequest struct {
-	ClientToken  *string       `json:"clientToken"`
-	Description  *string       `json:"description"`
-	Name         *string       `json:"name"`
-	RoleName     *string       `json:"roleName"`
-	ServerGroups []ServerGroup `json:"serverGroups"`
-	Tags         []Tag         `json:"tags"`
+	ClientToken  *string       `json:"clientToken,omitempty"`
+	Description  *string       `json:"description,omitempty"`
+	Name         *string       `json:"name,omitempty"`
+	RoleName     *string       `json:"roleName,omitempty"`
+	ServerGroups []ServerGroup `json:"serverGroups,omitempty"`
+	Tags         []Tag         `json:"tags,omitempty"`
 }

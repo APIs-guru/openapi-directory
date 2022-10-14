@@ -1,6 +1,6 @@
 package shared
 
 type TokenResponse struct {
-	AccessToken *string `json:"access_token"`
-	TokenType   *string `json:"token_type"`
+	AccessToken *string `json:"access_token,omitempty"`
+	TokenType   *string `json:"token_type,omitempty"`
 }

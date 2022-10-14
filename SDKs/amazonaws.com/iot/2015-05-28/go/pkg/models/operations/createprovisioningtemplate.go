@@ -15,16 +15,16 @@ type CreateProvisioningTemplateHeaders struct {
 }
 
 type CreateProvisioningTemplateRequestBodyPreProvisioningHook struct {
-	PayloadVersion *string `json:"payloadVersion"`
-	TargetArn      *string `json:"targetArn"`
+	PayloadVersion *string `json:"payloadVersion,omitempty"`
+	TargetArn      *string `json:"targetArn,omitempty"`
 }
 
 type CreateProvisioningTemplateRequestBody struct {
-	Description         *string                                                   `json:"description"`
-	Enabled             *bool                                                     `json:"enabled"`
-	PreProvisioningHook *CreateProvisioningTemplateRequestBodyPreProvisioningHook `json:"preProvisioningHook"`
+	Description         *string                                                   `json:"description,omitempty"`
+	Enabled             *bool                                                     `json:"enabled,omitempty"`
+	PreProvisioningHook *CreateProvisioningTemplateRequestBodyPreProvisioningHook `json:"preProvisioningHook,omitempty"`
 	ProvisioningRoleArn string                                                    `json:"provisioningRoleArn"`
-	Tags                []shared.Tag                                              `json:"tags"`
+	Tags                []shared.Tag                                              `json:"tags,omitempty"`
 	TemplateBody        string                                                    `json:"templateBody"`
 	TemplateName        string                                                    `json:"templateName"`
 }

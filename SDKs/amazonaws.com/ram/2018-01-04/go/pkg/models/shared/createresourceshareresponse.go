@@ -1,6 +1,6 @@
 package shared
 
 type CreateResourceShareResponse struct {
-	ClientToken   *string        `json:"clientToken"`
-	ResourceShare *ResourceShare `json:"resourceShare"`
+	ClientToken   *string        `json:"clientToken,omitempty"`
+	ResourceShare *ResourceShare `json:"resourceShare,omitempty"`
 }

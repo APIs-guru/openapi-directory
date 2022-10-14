@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleFirebaseAppcheckV1betaService struct {
-	EnforcementMode *GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnum `json:"enforcementMode"`
-	Name            *string                                                 `json:"name"`
+	EnforcementMode *GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnum `json:"enforcementMode,omitempty"`
+	Name            *string                                                 `json:"name,omitempty"`
 }

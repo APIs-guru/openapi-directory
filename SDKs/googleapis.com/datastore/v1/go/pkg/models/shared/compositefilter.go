@@ -8,6 +8,6 @@ const (
 )
 
 type CompositeFilter struct {
-	Filters []Filter               `json:"filters"`
-	Op      *CompositeFilterOpEnum `json:"op"`
+	Filters []Filter               `json:"filters,omitempty"`
+	Op      *CompositeFilterOpEnum `json:"op,omitempty"`
 }

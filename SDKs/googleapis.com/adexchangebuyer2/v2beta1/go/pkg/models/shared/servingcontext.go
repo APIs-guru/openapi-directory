@@ -7,10 +7,10 @@ const (
 )
 
 type ServingContext struct {
-	All          *ServingContextAllEnum `json:"all"`
-	AppType      *AppContext            `json:"appType"`
-	AuctionType  *AuctionContext        `json:"auctionType"`
-	Location     *LocationContext       `json:"location"`
-	Platform     *PlatformContext       `json:"platform"`
-	SecurityType *SecurityContext       `json:"securityType"`
+	All          *ServingContextAllEnum `json:"all,omitempty"`
+	AppType      *AppContext            `json:"appType,omitempty"`
+	AuctionType  *AuctionContext        `json:"auctionType,omitempty"`
+	Location     *LocationContext       `json:"location,omitempty"`
+	Platform     *PlatformContext       `json:"platform,omitempty"`
+	SecurityType *SecurityContext       `json:"securityType,omitempty"`
 }

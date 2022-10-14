@@ -1,7 +1,7 @@
 package shared
 
 type CheckInResponse struct {
-	Deadline *string                `json:"deadline"`
-	Features map[string]interface{} `json:"features"`
-	Metadata map[string]interface{} `json:"metadata"`
+	Deadline *string                `json:"deadline,omitempty"`
+	Features map[string]interface{} `json:"features,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 }

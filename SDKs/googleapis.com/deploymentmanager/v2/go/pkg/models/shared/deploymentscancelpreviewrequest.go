@@ -1,5 +1,5 @@
 package shared
 
 type DeploymentsCancelPreviewRequest struct {
-	Fingerprint *string `json:"fingerprint"`
+	Fingerprint *string `json:"fingerprint,omitempty"`
 }

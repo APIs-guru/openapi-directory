@@ -1,16 +1,16 @@
 package shared
 
 type TypeProvider struct {
-	CollectionOverrides             []CollectionOverride     `json:"collectionOverrides"`
-	Credential                      *Credential              `json:"credential"`
-	CustomCertificateAuthorityRoots []string                 `json:"customCertificateAuthorityRoots"`
-	Description                     *string                  `json:"description"`
-	DescriptorURL                   *string                  `json:"descriptorUrl"`
-	ID                              *string                  `json:"id"`
-	InsertTime                      *string                  `json:"insertTime"`
-	Labels                          []TypeProviderLabelEntry `json:"labels"`
-	Name                            *string                  `json:"name"`
-	Operation                       *Operation               `json:"operation"`
-	Options                         *Options                 `json:"options"`
-	SelfLink                        *string                  `json:"selfLink"`
+	CollectionOverrides             []CollectionOverride     `json:"collectionOverrides,omitempty"`
+	Credential                      *Credential              `json:"credential,omitempty"`
+	CustomCertificateAuthorityRoots []string                 `json:"customCertificateAuthorityRoots,omitempty"`
+	Description                     *string                  `json:"description,omitempty"`
+	DescriptorURL                   *string                  `json:"descriptorUrl,omitempty"`
+	ID                              *string                  `json:"id,omitempty"`
+	InsertTime                      *string                  `json:"insertTime,omitempty"`
+	Labels                          []TypeProviderLabelEntry `json:"labels,omitempty"`
+	Name                            *string                  `json:"name,omitempty"`
+	Operation                       *Operation               `json:"operation,omitempty"`
+	Options                         *Options                 `json:"options,omitempty"`
+	SelfLink                        *string                  `json:"selfLink,omitempty"`
 }

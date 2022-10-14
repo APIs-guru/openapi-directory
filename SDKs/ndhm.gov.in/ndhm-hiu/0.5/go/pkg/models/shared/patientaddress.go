@@ -1,8 +1,8 @@
 package shared
 
 type PatientAddress struct {
-	District *string `json:"district"`
-	Line     *string `json:"line"`
-	Pincode  *string `json:"pincode"`
-	State    *string `json:"state"`
+	District *string `json:"district,omitempty"`
+	Line     *string `json:"line,omitempty"`
+	Pincode  *string `json:"pincode,omitempty"`
+	State    *string `json:"state,omitempty"`
 }

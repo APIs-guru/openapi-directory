@@ -19,7 +19,7 @@ type CreateSlotTypeVersionHeaders struct {
 }
 
 type CreateSlotTypeVersionRequestBody struct {
-	Checksum *string `json:"checksum"`
+	Checksum *string `json:"checksum,omitempty"`
 }
 
 type CreateSlotTypeVersionRequest struct {

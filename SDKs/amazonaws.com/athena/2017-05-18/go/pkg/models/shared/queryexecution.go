@@ -1,13 +1,13 @@
 package shared
 
 type QueryExecution struct {
-	EngineVersion         *EngineVersion            `json:"EngineVersion"`
-	Query                 *string                   `json:"Query"`
-	QueryExecutionContext *QueryExecutionContext    `json:"QueryExecutionContext"`
-	QueryExecutionID      *string                   `json:"QueryExecutionId"`
-	ResultConfiguration   *ResultConfiguration      `json:"ResultConfiguration"`
-	StatementType         *StatementTypeEnum        `json:"StatementType"`
-	Statistics            *QueryExecutionStatistics `json:"Statistics"`
-	Status                *QueryExecutionStatus     `json:"Status"`
-	WorkGroup             *string                   `json:"WorkGroup"`
+	EngineVersion         *EngineVersion            `json:"EngineVersion,omitempty"`
+	Query                 *string                   `json:"Query,omitempty"`
+	QueryExecutionContext *QueryExecutionContext    `json:"QueryExecutionContext,omitempty"`
+	QueryExecutionID      *string                   `json:"QueryExecutionId,omitempty"`
+	ResultConfiguration   *ResultConfiguration      `json:"ResultConfiguration,omitempty"`
+	StatementType         *StatementTypeEnum        `json:"StatementType,omitempty"`
+	Statistics            *QueryExecutionStatistics `json:"Statistics,omitempty"`
+	Status                *QueryExecutionStatus     `json:"Status,omitempty"`
+	WorkGroup             *string                   `json:"WorkGroup,omitempty"`
 }

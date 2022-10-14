@@ -1,5 +1,5 @@
 package shared
 
 type DomainMembership struct {
-	InViewerDomain *bool `json:"inViewerDomain"`
+	InViewerDomain *bool `json:"inViewerDomain,omitempty"`
 }

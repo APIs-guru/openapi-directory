@@ -15,21 +15,21 @@ type UpdateIndexingConfigurationHeaders struct {
 }
 
 type UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration struct {
-	CustomFields           []shared.Field                     `json:"customFields"`
-	ManagedFields          []shared.Field                     `json:"managedFields"`
-	ThingGroupIndexingMode *shared.ThingGroupIndexingModeEnum `json:"thingGroupIndexingMode"`
+	CustomFields           []shared.Field                     `json:"customFields,omitempty"`
+	ManagedFields          []shared.Field                     `json:"managedFields,omitempty"`
+	ThingGroupIndexingMode *shared.ThingGroupIndexingModeEnum `json:"thingGroupIndexingMode,omitempty"`
 }
 
 type UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration struct {
-	CustomFields                  []shared.Field                            `json:"customFields"`
-	ManagedFields                 []shared.Field                            `json:"managedFields"`
-	ThingConnectivityIndexingMode *shared.ThingConnectivityIndexingModeEnum `json:"thingConnectivityIndexingMode"`
-	ThingIndexingMode             *shared.ThingIndexingModeEnum             `json:"thingIndexingMode"`
+	CustomFields                  []shared.Field                            `json:"customFields,omitempty"`
+	ManagedFields                 []shared.Field                            `json:"managedFields,omitempty"`
+	ThingConnectivityIndexingMode *shared.ThingConnectivityIndexingModeEnum `json:"thingConnectivityIndexingMode,omitempty"`
+	ThingIndexingMode             *shared.ThingIndexingModeEnum             `json:"thingIndexingMode,omitempty"`
 }
 
 type UpdateIndexingConfigurationRequestBody struct {
-	ThingGroupIndexingConfiguration *UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration `json:"thingGroupIndexingConfiguration"`
-	ThingIndexingConfiguration      *UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration      `json:"thingIndexingConfiguration"`
+	ThingGroupIndexingConfiguration *UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration `json:"thingGroupIndexingConfiguration,omitempty"`
+	ThingIndexingConfiguration      *UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration      `json:"thingIndexingConfiguration,omitempty"`
 }
 
 type UpdateIndexingConfigurationRequest struct {

@@ -41,8 +41,8 @@ const (
 )
 
 type MeasurementPartnerWrappingData struct {
-	LinkStatus         *MeasurementPartnerWrappingDataLinkStatusEnum         `json:"linkStatus"`
-	MeasurementPartner *MeasurementPartnerWrappingDataMeasurementPartnerEnum `json:"measurementPartner"`
-	TagWrappingMode    *MeasurementPartnerWrappingDataTagWrappingModeEnum    `json:"tagWrappingMode"`
-	WrappedTag         *string                                               `json:"wrappedTag"`
+	LinkStatus         *MeasurementPartnerWrappingDataLinkStatusEnum         `json:"linkStatus,omitempty"`
+	MeasurementPartner *MeasurementPartnerWrappingDataMeasurementPartnerEnum `json:"measurementPartner,omitempty"`
+	TagWrappingMode    *MeasurementPartnerWrappingDataTagWrappingModeEnum    `json:"tagWrappingMode,omitempty"`
+	WrappedTag         *string                                               `json:"wrappedTag,omitempty"`
 }

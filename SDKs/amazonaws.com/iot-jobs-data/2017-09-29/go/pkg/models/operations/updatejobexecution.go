@@ -33,13 +33,13 @@ const (
 )
 
 type UpdateJobExecutionRequestBody struct {
-	ExecutionNumber          *int64                                  `json:"executionNumber"`
-	ExpectedVersion          *int64                                  `json:"expectedVersion"`
-	IncludeJobDocument       *bool                                   `json:"includeJobDocument"`
-	IncludeJobExecutionState *bool                                   `json:"includeJobExecutionState"`
+	ExecutionNumber          *int64                                  `json:"executionNumber,omitempty"`
+	ExpectedVersion          *int64                                  `json:"expectedVersion,omitempty"`
+	IncludeJobDocument       *bool                                   `json:"includeJobDocument,omitempty"`
+	IncludeJobExecutionState *bool                                   `json:"includeJobExecutionState,omitempty"`
 	Status                   UpdateJobExecutionRequestBodyStatusEnum `json:"status"`
-	StatusDetails            map[string]string                       `json:"statusDetails"`
-	StepTimeoutInMinutes     *int64                                  `json:"stepTimeoutInMinutes"`
+	StatusDetails            map[string]string                       `json:"statusDetails,omitempty"`
+	StepTimeoutInMinutes     *int64                                  `json:"stepTimeoutInMinutes,omitempty"`
 }
 
 type UpdateJobExecutionRequest struct {

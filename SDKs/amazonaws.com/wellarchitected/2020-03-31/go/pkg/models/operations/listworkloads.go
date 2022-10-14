@@ -20,9 +20,9 @@ type ListWorkloadsHeaders struct {
 }
 
 type ListWorkloadsRequestBody struct {
-	MaxResults         *int64  `json:"MaxResults"`
-	NextToken          *string `json:"NextToken"`
-	WorkloadNamePrefix *string `json:"WorkloadNamePrefix"`
+	MaxResults         *int64  `json:"MaxResults,omitempty"`
+	NextToken          *string `json:"NextToken,omitempty"`
+	WorkloadNamePrefix *string `json:"WorkloadNamePrefix,omitempty"`
 }
 
 type ListWorkloadsRequest struct {

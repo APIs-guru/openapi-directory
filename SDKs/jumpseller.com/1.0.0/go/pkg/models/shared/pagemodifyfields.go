@@ -1,8 +1,8 @@
 package shared
 
 type PageModifyFieldsImage struct {
-	ID  *int64  `json:"id"`
-	URL *string `json:"url"`
+	ID  *int64  `json:"id,omitempty"`
+	URL *string `json:"url,omitempty"`
 }
 
 type PageModifyFieldsStatusEnum string
@@ -14,13 +14,13 @@ const (
 )
 
 type PageModifyFields struct {
-	Body            *string                     `json:"body"`
-	Categories      []PageCategory              `json:"categories"`
-	Image           *PageModifyFieldsImage      `json:"image"`
-	MetaDescription *string                     `json:"meta_description"`
-	PageTitle       *string                     `json:"page_title"`
-	Permalink       *string                     `json:"permalink"`
-	Status          *PageModifyFieldsStatusEnum `json:"status"`
-	Template        *int64                      `json:"template"`
-	Title           *string                     `json:"title"`
+	Body            *string                     `json:"body,omitempty"`
+	Categories      []PageCategory              `json:"categories,omitempty"`
+	Image           *PageModifyFieldsImage      `json:"image,omitempty"`
+	MetaDescription *string                     `json:"meta_description,omitempty"`
+	PageTitle       *string                     `json:"page_title,omitempty"`
+	Permalink       *string                     `json:"permalink,omitempty"`
+	Status          *PageModifyFieldsStatusEnum `json:"status,omitempty"`
+	Template        *int64                      `json:"template,omitempty"`
+	Title           *string                     `json:"title,omitempty"`
 }

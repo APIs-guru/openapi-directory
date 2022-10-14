@@ -21,15 +21,15 @@ type SearchInsightsHeaders struct {
 }
 
 type SearchInsightsRequestBodyFilters struct {
-	ResourceCollection *shared.ResourceCollection   `json:"ResourceCollection"`
-	ServiceCollection  *shared.ServiceCollection    `json:"ServiceCollection"`
-	Severities         []shared.InsightSeverityEnum `json:"Severities"`
-	Statuses           []shared.InsightStatusEnum   `json:"Statuses"`
+	ResourceCollection *shared.ResourceCollection   `json:"ResourceCollection,omitempty"`
+	ServiceCollection  *shared.ServiceCollection    `json:"ServiceCollection,omitempty"`
+	Severities         []shared.InsightSeverityEnum `json:"Severities,omitempty"`
+	Statuses           []shared.InsightStatusEnum   `json:"Statuses,omitempty"`
 }
 
 type SearchInsightsRequestBodyStartTimeRange struct {
-	FromTime *time.Time `json:"FromTime"`
-	ToTime   *time.Time `json:"ToTime"`
+	FromTime *time.Time `json:"FromTime,omitempty"`
+	ToTime   *time.Time `json:"ToTime,omitempty"`
 }
 
 type SearchInsightsRequestBodyTypeEnum string
@@ -40,9 +40,9 @@ const (
 )
 
 type SearchInsightsRequestBody struct {
-	Filters        *SearchInsightsRequestBodyFilters       `json:"Filters"`
-	MaxResults     *int64                                  `json:"MaxResults"`
-	NextToken      *string                                 `json:"NextToken"`
+	Filters        *SearchInsightsRequestBodyFilters       `json:"Filters,omitempty"`
+	MaxResults     *int64                                  `json:"MaxResults,omitempty"`
+	NextToken      *string                                 `json:"NextToken,omitempty"`
 	StartTimeRange SearchInsightsRequestBodyStartTimeRange `json:"StartTimeRange"`
 	Type           SearchInsightsRequestBodyTypeEnum       `json:"Type"`
 }

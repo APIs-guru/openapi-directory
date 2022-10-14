@@ -1,6 +1,6 @@
 package shared
 
 type ReportFooter struct {
-	MatchingRowCount *string         `json:"matchingRowCount"`
-	Warnings         []ReportWarning `json:"warnings"`
+	MatchingRowCount *string         `json:"matchingRowCount,omitempty"`
+	Warnings         []ReportWarning `json:"warnings,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowV2IntentMessageSimpleResponse struct {
-	DisplayText  *string `json:"displayText"`
-	Ssml         *string `json:"ssml"`
-	TextToSpeech *string `json:"textToSpeech"`
+	DisplayText  *string `json:"displayText,omitempty"`
+	Ssml         *string `json:"ssml,omitempty"`
+	TextToSpeech *string `json:"textToSpeech,omitempty"`
 }

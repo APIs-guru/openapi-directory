@@ -9,6 +9,6 @@ const (
 )
 
 type FeatureSpec struct {
-	DefaultConfig     *MembershipSpec                   `json:"defaultConfig"`
-	ProvisionGoogleCa *FeatureSpecProvisionGoogleCaEnum `json:"provisionGoogleCa"`
+	DefaultConfig     *MembershipSpec                   `json:"defaultConfig,omitempty"`
+	ProvisionGoogleCa *FeatureSpecProvisionGoogleCaEnum `json:"provisionGoogleCa,omitempty"`
 }

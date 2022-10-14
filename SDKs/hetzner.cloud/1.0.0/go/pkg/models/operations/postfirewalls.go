@@ -16,8 +16,8 @@ const (
 )
 
 type PostFirewallsRequestBodyApplyTo struct {
-	LabelSelector *PostFirewallsRequestBodyApplyToLabelSelector `json:"label_selector"`
-	Server        *PostFirewallsRequestBodyApplyToServer        `json:"server"`
+	LabelSelector *PostFirewallsRequestBodyApplyToLabelSelector `json:"label_selector,omitempty"`
+	Server        *PostFirewallsRequestBodyApplyToServer        `json:"server,omitempty"`
 	Type          PostFirewallsRequestBodyApplyToTypeEnum       `json:"type"`
 }
 
@@ -39,19 +39,19 @@ const (
 )
 
 type PostFirewallsRequestBodyRulesRule struct {
-	Description    *string                                    `json:"description"`
-	DestinationIps []string                                   `json:"destination_ips"`
+	Description    *string                                    `json:"description,omitempty"`
+	DestinationIps []string                                   `json:"destination_ips,omitempty"`
 	Direction      PostFirewallsRequestBodyRulesDirectionEnum `json:"direction"`
-	Port           *string                                    `json:"port"`
+	Port           *string                                    `json:"port,omitempty"`
 	Protocol       PostFirewallsRequestBodyRulesProtocolEnum  `json:"protocol"`
-	SourceIps      []string                                   `json:"source_ips"`
+	SourceIps      []string                                   `json:"source_ips,omitempty"`
 }
 
 type PostFirewallsRequestBodyCreateFirewallRequest struct {
-	ApplyTo []PostFirewallsRequestBodyApplyTo   `json:"apply_to"`
-	Labels  map[string]interface{}              `json:"labels"`
+	ApplyTo []PostFirewallsRequestBodyApplyTo   `json:"apply_to,omitempty"`
+	Labels  map[string]interface{}              `json:"labels,omitempty"`
 	Name    string                              `json:"name"`
-	Rules   []PostFirewallsRequestBodyRulesRule `json:"rules"`
+	Rules   []PostFirewallsRequestBodyRulesRule `json:"rules,omitempty"`
 }
 
 type PostFirewallsRequest struct {
@@ -98,8 +98,8 @@ const (
 )
 
 type PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResources struct {
-	Server *PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesServer   `json:"server"`
-	Type   *PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum `json:"type"`
+	Server *PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesServer   `json:"server,omitempty"`
+	Type   *PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum `json:"type,omitempty"`
 }
 
 type PostFirewalls201ApplicationJSONFirewallAppliedToLabelSelector struct {
@@ -118,9 +118,9 @@ const (
 )
 
 type PostFirewalls201ApplicationJSONFirewallAppliedTo struct {
-	AppliedToResources []PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResources `json:"applied_to_resources"`
-	LabelSelector      *PostFirewalls201ApplicationJSONFirewallAppliedToLabelSelector       `json:"label_selector"`
-	Server             *PostFirewalls201ApplicationJSONFirewallAppliedToServer              `json:"server"`
+	AppliedToResources []PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResources `json:"applied_to_resources,omitempty"`
+	LabelSelector      *PostFirewalls201ApplicationJSONFirewallAppliedToLabelSelector       `json:"label_selector,omitempty"`
+	Server             *PostFirewalls201ApplicationJSONFirewallAppliedToServer              `json:"server,omitempty"`
 	Type               PostFirewalls201ApplicationJSONFirewallAppliedToTypeEnum             `json:"type"`
 }
 
@@ -142,26 +142,26 @@ const (
 )
 
 type PostFirewalls201ApplicationJSONFirewallRulesRule struct {
-	Description    *string                                                   `json:"description"`
-	DestinationIps []string                                                  `json:"destination_ips"`
+	Description    *string                                                   `json:"description,omitempty"`
+	DestinationIps []string                                                  `json:"destination_ips,omitempty"`
 	Direction      PostFirewalls201ApplicationJSONFirewallRulesDirectionEnum `json:"direction"`
-	Port           *string                                                   `json:"port"`
+	Port           *string                                                   `json:"port,omitempty"`
 	Protocol       PostFirewalls201ApplicationJSONFirewallRulesProtocolEnum  `json:"protocol"`
-	SourceIps      []string                                                  `json:"source_ips"`
+	SourceIps      []string                                                  `json:"source_ips,omitempty"`
 }
 
 type PostFirewalls201ApplicationJSONFirewallFirewall struct {
 	AppliedTo []PostFirewalls201ApplicationJSONFirewallAppliedTo `json:"applied_to"`
 	Created   string                                             `json:"created"`
 	ID        int64                                              `json:"id"`
-	Labels    map[string]string                                  `json:"labels"`
+	Labels    map[string]string                                  `json:"labels,omitempty"`
 	Name      string                                             `json:"name"`
 	Rules     []PostFirewalls201ApplicationJSONFirewallRulesRule `json:"rules"`
 }
 
 type PostFirewalls201ApplicationJSONCreateFirewallResponse struct {
-	Actions  []PostFirewalls201ApplicationJSONActionsAction   `json:"actions"`
-	Firewall *PostFirewalls201ApplicationJSONFirewallFirewall `json:"firewall"`
+	Actions  []PostFirewalls201ApplicationJSONActionsAction   `json:"actions,omitempty"`
+	Firewall *PostFirewalls201ApplicationJSONFirewallFirewall `json:"firewall,omitempty"`
 }
 
 type PostFirewallsResponse struct {

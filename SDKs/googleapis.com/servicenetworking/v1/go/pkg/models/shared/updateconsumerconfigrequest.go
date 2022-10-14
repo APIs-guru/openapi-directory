@@ -1,5 +1,5 @@
 package shared
 
 type UpdateConsumerConfigRequest struct {
-	ConsumerConfig *ConsumerConfig `json:"consumerConfig"`
+	ConsumerConfig *ConsumerConfig `json:"consumerConfig,omitempty"`
 }

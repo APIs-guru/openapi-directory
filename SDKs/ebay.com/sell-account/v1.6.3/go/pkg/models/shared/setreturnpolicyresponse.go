@@ -1,19 +1,19 @@
 package shared
 
 type SetReturnPolicyResponse struct {
-	CategoryTypes                 []CategoryType                   `json:"categoryTypes"`
-	Description                   *string                          `json:"description"`
-	ExtendedHolidayReturnsOffered *bool                            `json:"extendedHolidayReturnsOffered"`
-	InternationalOverride         *InternationalReturnOverrideType `json:"internationalOverride"`
-	MarketplaceID                 *string                          `json:"marketplaceId"`
-	Name                          *string                          `json:"name"`
-	RefundMethod                  *string                          `json:"refundMethod"`
-	RestockingFeePercentage       *string                          `json:"restockingFeePercentage"`
-	ReturnInstructions            *string                          `json:"returnInstructions"`
-	ReturnMethod                  *string                          `json:"returnMethod"`
-	ReturnPeriod                  *TimeDuration                    `json:"returnPeriod"`
-	ReturnPolicyID                *string                          `json:"returnPolicyId"`
-	ReturnShippingCostPayer       *string                          `json:"returnShippingCostPayer"`
-	ReturnsAccepted               *bool                            `json:"returnsAccepted"`
-	Warnings                      []Error                          `json:"warnings"`
+	CategoryTypes                 []CategoryType                   `json:"categoryTypes,omitempty"`
+	Description                   *string                          `json:"description,omitempty"`
+	ExtendedHolidayReturnsOffered *bool                            `json:"extendedHolidayReturnsOffered,omitempty"`
+	InternationalOverride         *InternationalReturnOverrideType `json:"internationalOverride,omitempty"`
+	MarketplaceID                 *string                          `json:"marketplaceId,omitempty"`
+	Name                          *string                          `json:"name,omitempty"`
+	RefundMethod                  *string                          `json:"refundMethod,omitempty"`
+	RestockingFeePercentage       *string                          `json:"restockingFeePercentage,omitempty"`
+	ReturnInstructions            *string                          `json:"returnInstructions,omitempty"`
+	ReturnMethod                  *string                          `json:"returnMethod,omitempty"`
+	ReturnPeriod                  *TimeDuration                    `json:"returnPeriod,omitempty"`
+	ReturnPolicyID                *string                          `json:"returnPolicyId,omitempty"`
+	ReturnShippingCostPayer       *string                          `json:"returnShippingCostPayer,omitempty"`
+	ReturnsAccepted               *bool                            `json:"returnsAccepted,omitempty"`
+	Warnings                      []Error                          `json:"warnings,omitempty"`
 }

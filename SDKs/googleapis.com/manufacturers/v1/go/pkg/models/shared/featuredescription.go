@@ -1,7 +1,7 @@
 package shared
 
 type FeatureDescription struct {
-	Headline *string `json:"headline"`
-	Image    *Image  `json:"image"`
-	Text     *string `json:"text"`
+	Headline *string `json:"headline,omitempty"`
+	Image    *Image  `json:"image,omitempty"`
+	Text     *string `json:"text,omitempty"`
 }

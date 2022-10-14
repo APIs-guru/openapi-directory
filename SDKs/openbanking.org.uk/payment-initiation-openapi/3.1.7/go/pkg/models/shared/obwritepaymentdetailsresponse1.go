@@ -42,25 +42,25 @@ const (
 )
 
 type ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetail struct {
-	LocalInstrument         *string                                                                      `json:"LocalInstrument"`
+	LocalInstrument         *string                                                                      `json:"LocalInstrument,omitempty"`
 	Status                  string                                                                       `json:"Status"`
-	StatusReason            *ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetailStatusReasonEnum `json:"StatusReason"`
-	StatusReasonDescription *string                                                                      `json:"StatusReasonDescription"`
+	StatusReason            *ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetailStatusReasonEnum `json:"StatusReason,omitempty"`
+	StatusReasonDescription *string                                                                      `json:"StatusReasonDescription,omitempty"`
 }
 
 type ObWritePaymentDetailsResponse1DataPaymentStatus struct {
 	PaymentTransactionID string                                                       `json:"PaymentTransactionId"`
 	Status               ObWritePaymentDetailsResponse1DataPaymentStatusStatusEnum    `json:"Status"`
-	StatusDetail         *ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetail `json:"StatusDetail"`
+	StatusDetail         *ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetail `json:"StatusDetail,omitempty"`
 	StatusUpdateDateTime time.Time                                                    `json:"StatusUpdateDateTime"`
 }
 
 type ObWritePaymentDetailsResponse1Data struct {
-	PaymentStatus []ObWritePaymentDetailsResponse1DataPaymentStatus `json:"PaymentStatus"`
+	PaymentStatus []ObWritePaymentDetailsResponse1DataPaymentStatus `json:"PaymentStatus,omitempty"`
 }
 
 type ObWritePaymentDetailsResponse1 struct {
 	Data  ObWritePaymentDetailsResponse1Data `json:"Data"`
-	Links *Links                             `json:"Links"`
-	Meta  *Meta                              `json:"Meta"`
+	Links *Links                             `json:"Links,omitempty"`
+	Meta  *Meta                              `json:"Meta,omitempty"`
 }

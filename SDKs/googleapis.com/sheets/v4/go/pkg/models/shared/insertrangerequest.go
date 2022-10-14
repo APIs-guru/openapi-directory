@@ -9,6 +9,6 @@ const (
 )
 
 type InsertRangeRequest struct {
-	Range          *GridRange                            `json:"range"`
-	ShiftDimension *InsertRangeRequestShiftDimensionEnum `json:"shiftDimension"`
+	Range          *GridRange                            `json:"range,omitempty"`
+	ShiftDimension *InsertRangeRequestShiftDimensionEnum `json:"shiftDimension,omitempty"`
 }

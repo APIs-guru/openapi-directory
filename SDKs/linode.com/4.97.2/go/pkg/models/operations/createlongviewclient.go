@@ -23,7 +23,7 @@ type CreateLongviewClientRequest struct {
 }
 
 type CreateLongviewClientDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateLongviewClientResponse struct {

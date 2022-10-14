@@ -1,6 +1,6 @@
 package shared
 
 type BusinessChainSearchTerms struct {
-	BusinessChainQuery *string `json:"businessChainQuery"`
-	RegionQuery        *string `json:"regionQuery"`
+	BusinessChainQuery *string `json:"businessChainQuery,omitempty"`
+	RegionQuery        *string `json:"regionQuery,omitempty"`
 }

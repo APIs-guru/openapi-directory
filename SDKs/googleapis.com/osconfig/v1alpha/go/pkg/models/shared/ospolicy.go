@@ -9,9 +9,9 @@ const (
 )
 
 type OsPolicy struct {
-	AllowNoResourceGroupMatch *bool                   `json:"allowNoResourceGroupMatch"`
-	Description               *string                 `json:"description"`
-	ID                        *string                 `json:"id"`
-	Mode                      *OsPolicyModeEnum       `json:"mode"`
-	ResourceGroups            []OsPolicyResourceGroup `json:"resourceGroups"`
+	AllowNoResourceGroupMatch *bool                   `json:"allowNoResourceGroupMatch,omitempty"`
+	Description               *string                 `json:"description,omitempty"`
+	ID                        *string                 `json:"id,omitempty"`
+	Mode                      *OsPolicyModeEnum       `json:"mode,omitempty"`
+	ResourceGroups            []OsPolicyResourceGroup `json:"resourceGroups,omitempty"`
 }

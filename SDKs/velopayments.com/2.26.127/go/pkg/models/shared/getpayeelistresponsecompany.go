@@ -1,6 +1,6 @@
 package shared
 
 type GetPayeeListResponseCompany struct {
-	Name          *string `json:"name"`
-	OperatingName *string `json:"operatingName"`
+	Name          *string `json:"name,omitempty"`
+	OperatingName *string `json:"operatingName,omitempty"`
 }

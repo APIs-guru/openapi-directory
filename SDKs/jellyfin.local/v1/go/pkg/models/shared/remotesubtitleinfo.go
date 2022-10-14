@@ -5,15 +5,15 @@ import (
 )
 
 type RemoteSubtitleInfo struct {
-	Author                     *string    `json:"Author"`
-	Comment                    *string    `json:"Comment"`
-	CommunityRating            *float32   `json:"CommunityRating"`
-	DateCreated                *time.Time `json:"DateCreated"`
-	DownloadCount              *int32     `json:"DownloadCount"`
-	Format                     *string    `json:"Format"`
-	ID                         *string    `json:"Id"`
-	IsHashMatch                *bool      `json:"IsHashMatch"`
-	Name                       *string    `json:"Name"`
-	ProviderName               *string    `json:"ProviderName"`
-	ThreeLetterIsoLanguageName *string    `json:"ThreeLetterISOLanguageName"`
+	Author                     *string    `json:"Author,omitempty"`
+	Comment                    *string    `json:"Comment,omitempty"`
+	CommunityRating            *float32   `json:"CommunityRating,omitempty"`
+	DateCreated                *time.Time `json:"DateCreated,omitempty"`
+	DownloadCount              *int32     `json:"DownloadCount,omitempty"`
+	Format                     *string    `json:"Format,omitempty"`
+	ID                         *string    `json:"Id,omitempty"`
+	IsHashMatch                *bool      `json:"IsHashMatch,omitempty"`
+	Name                       *string    `json:"Name,omitempty"`
+	ProviderName               *string    `json:"ProviderName,omitempty"`
+	ThreeLetterIsoLanguageName *string    `json:"ThreeLetterISOLanguageName,omitempty"`
 }

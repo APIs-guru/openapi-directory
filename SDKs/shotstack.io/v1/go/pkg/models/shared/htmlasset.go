@@ -15,11 +15,11 @@ const (
 )
 
 type HTMLAsset struct {
-	Background *string                `json:"background"`
-	CSS        *string                `json:"css"`
-	Height     *int64                 `json:"height"`
+	Background *string                `json:"background,omitempty"`
+	CSS        *string                `json:"css,omitempty"`
+	Height     *int64                 `json:"height,omitempty"`
 	HTML       string                 `json:"html"`
-	Position   *HTMLAssetPositionEnum `json:"position"`
+	Position   *HTMLAssetPositionEnum `json:"position,omitempty"`
 	Type       string                 `json:"type"`
-	Width      *int64                 `json:"width"`
+	Width      *int64                 `json:"width,omitempty"`
 }

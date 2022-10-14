@@ -18,7 +18,7 @@ const (
 )
 
 type GradebookSettings struct {
-	CalculationType *GradebookSettingsCalculationTypeEnum `json:"calculationType"`
-	DisplaySetting  *GradebookSettingsDisplaySettingEnum  `json:"displaySetting"`
-	GradeCategories []GradeCategory                       `json:"gradeCategories"`
+	CalculationType *GradebookSettingsCalculationTypeEnum `json:"calculationType,omitempty"`
+	DisplaySetting  *GradebookSettingsDisplaySettingEnum  `json:"displaySetting,omitempty"`
+	GradeCategories []GradeCategory                       `json:"gradeCategories,omitempty"`
 }

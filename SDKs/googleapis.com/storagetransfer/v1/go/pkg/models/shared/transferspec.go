@@ -1,18 +1,18 @@
 package shared
 
 type TransferSpec struct {
-	AwsS3CompatibleDataSource   *AwsS3CompatibleData  `json:"awsS3CompatibleDataSource"`
-	AwsS3DataSource             *AwsS3Data            `json:"awsS3DataSource"`
-	AzureBlobStorageDataSource  *AzureBlobStorageData `json:"azureBlobStorageDataSource"`
-	GcsDataSink                 *GcsData              `json:"gcsDataSink"`
-	GcsDataSource               *GcsData              `json:"gcsDataSource"`
-	GcsIntermediateDataLocation *GcsData              `json:"gcsIntermediateDataLocation"`
-	HTTPDataSource              *HTTPData             `json:"httpDataSource"`
-	ObjectConditions            *ObjectConditions     `json:"objectConditions"`
-	PosixDataSink               *PosixFilesystem      `json:"posixDataSink"`
-	PosixDataSource             *PosixFilesystem      `json:"posixDataSource"`
-	SinkAgentPoolName           *string               `json:"sinkAgentPoolName"`
-	SourceAgentPoolName         *string               `json:"sourceAgentPoolName"`
-	TransferManifest            *TransferManifest     `json:"transferManifest"`
-	TransferOptions             *TransferOptions      `json:"transferOptions"`
+	AwsS3CompatibleDataSource   *AwsS3CompatibleData  `json:"awsS3CompatibleDataSource,omitempty"`
+	AwsS3DataSource             *AwsS3Data            `json:"awsS3DataSource,omitempty"`
+	AzureBlobStorageDataSource  *AzureBlobStorageData `json:"azureBlobStorageDataSource,omitempty"`
+	GcsDataSink                 *GcsData              `json:"gcsDataSink,omitempty"`
+	GcsDataSource               *GcsData              `json:"gcsDataSource,omitempty"`
+	GcsIntermediateDataLocation *GcsData              `json:"gcsIntermediateDataLocation,omitempty"`
+	HTTPDataSource              *HTTPData             `json:"httpDataSource,omitempty"`
+	ObjectConditions            *ObjectConditions     `json:"objectConditions,omitempty"`
+	PosixDataSink               *PosixFilesystem      `json:"posixDataSink,omitempty"`
+	PosixDataSource             *PosixFilesystem      `json:"posixDataSource,omitempty"`
+	SinkAgentPoolName           *string               `json:"sinkAgentPoolName,omitempty"`
+	SourceAgentPoolName         *string               `json:"sourceAgentPoolName,omitempty"`
+	TransferManifest            *TransferManifest     `json:"transferManifest,omitempty"`
+	TransferOptions             *TransferOptions      `json:"transferOptions,omitempty"`
 }

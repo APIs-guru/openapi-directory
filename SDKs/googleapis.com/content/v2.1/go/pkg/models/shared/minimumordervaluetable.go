@@ -1,5 +1,5 @@
 package shared
 
 type MinimumOrderValueTable struct {
-	StoreCodeSetWithMovs []MinimumOrderValueTableStoreCodeSetWithMov `json:"storeCodeSetWithMovs"`
+	StoreCodeSetWithMovs []MinimumOrderValueTableStoreCodeSetWithMov `json:"storeCodeSetWithMovs,omitempty"`
 }

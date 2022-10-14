@@ -18,38 +18,38 @@ type GetQueryRequest struct {
 }
 
 type GetQuery200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetQuery200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetQuery200ApplicationJSON struct {
-	Count              *float64                                      `json:"count"`
-	DescriptionColumns *GetQuery200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	Ids                []string                                      `json:"ids"`
-	LabelColumns       *GetQuery200ApplicationJSONLabelColumns       `json:"label_columns"`
-	ListColumns        []string                                      `json:"list_columns"`
-	ListTitle          *string                                       `json:"list_title"`
-	OrderColumns       []string                                      `json:"order_columns"`
-	Result             []shared.QueryRestAPIGetList                  `json:"result"`
+	Count              *float64                                      `json:"count,omitempty"`
+	DescriptionColumns *GetQuery200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	Ids                []string                                      `json:"ids,omitempty"`
+	LabelColumns       *GetQuery200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	ListColumns        []string                                      `json:"list_columns,omitempty"`
+	ListTitle          *string                                       `json:"list_title,omitempty"`
+	OrderColumns       []string                                      `json:"order_columns,omitempty"`
+	Result             []shared.QueryRestAPIGetList                  `json:"result,omitempty"`
 }
 
 type GetQuery400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQuery401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQuery422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQuery500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQueryResponse struct {

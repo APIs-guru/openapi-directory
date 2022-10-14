@@ -9,9 +9,9 @@ type AttachVolumePathParams struct {
 }
 
 type AttachVolumeRequestBody struct {
-	ConfigID           *int64 `json:"config_id"`
+	ConfigID           *int64 `json:"config_id,omitempty"`
 	LinodeID           int64  `json:"linode_id"`
-	PersistAcrossBoots *bool  `json:"persist_across_boots"`
+	PersistAcrossBoots *bool  `json:"persist_across_boots,omitempty"`
 }
 
 type AttachVolumeSecurityOption1 struct {
@@ -34,7 +34,7 @@ type AttachVolumeRequest struct {
 }
 
 type AttachVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type AttachVolumeResponse struct {

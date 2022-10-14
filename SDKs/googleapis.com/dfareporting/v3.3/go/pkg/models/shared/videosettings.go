@@ -9,9 +9,9 @@ const (
 )
 
 type VideoSettings struct {
-	CompanionSettings *CompanionSetting             `json:"companionSettings"`
-	Kind              *string                       `json:"kind"`
-	Orientation       *VideoSettingsOrientationEnum `json:"orientation"`
-	SkippableSettings *SkippableSetting             `json:"skippableSettings"`
-	TranscodeSettings *TranscodeSetting             `json:"transcodeSettings"`
+	CompanionSettings *CompanionSetting             `json:"companionSettings,omitempty"`
+	Kind              *string                       `json:"kind,omitempty"`
+	Orientation       *VideoSettingsOrientationEnum `json:"orientation,omitempty"`
+	SkippableSettings *SkippableSetting             `json:"skippableSettings,omitempty"`
+	TranscodeSettings *TranscodeSetting             `json:"transcodeSettings,omitempty"`
 }

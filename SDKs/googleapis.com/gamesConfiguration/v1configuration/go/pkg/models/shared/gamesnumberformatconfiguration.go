@@ -10,8 +10,8 @@ const (
 )
 
 type GamesNumberFormatConfiguration struct {
-	CurrencyCode     *string                                             `json:"currencyCode"`
-	NumDecimalPlaces *int32                                              `json:"numDecimalPlaces"`
-	NumberFormatType *GamesNumberFormatConfigurationNumberFormatTypeEnum `json:"numberFormatType"`
-	Suffix           *GamesNumberAffixConfiguration                      `json:"suffix"`
+	CurrencyCode     *string                                             `json:"currencyCode,omitempty"`
+	NumDecimalPlaces *int32                                              `json:"numDecimalPlaces,omitempty"`
+	NumberFormatType *GamesNumberFormatConfigurationNumberFormatTypeEnum `json:"numberFormatType,omitempty"`
+	Suffix           *GamesNumberAffixConfiguration                      `json:"suffix,omitempty"`
 }

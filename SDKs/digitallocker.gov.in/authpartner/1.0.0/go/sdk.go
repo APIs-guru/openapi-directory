@@ -427,6 +427,156 @@ func (s *SDK) GetFileFromURIID(ctx context.Context, request operations.GetFileFr
 	return res, nil
 }
 
+func (s *SDK) GetListOfDocumentsProvidedByAnIssuerID(ctx context.Context, request operations.GetListOfDocumentsProvidedByAnIssuerIDRequest) (*operations.GetListOfDocumentsProvidedByAnIssuerIDResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/oauth2/1/pull/doctype"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetListOfDocumentsProvidedByAnIssuerIDResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.DocTypeResponse
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.DocTypeResponse = out
+		}
+	case httpRes.StatusCode == 400:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetListOfDocumentsProvidedByAnIssuerID400ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetListOfDocumentsProvidedByAnIssuerID400ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 401:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetListOfDocumentsProvidedByAnIssuerID401ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetListOfDocumentsProvidedByAnIssuerID401ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 500:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetListOfDocumentsProvidedByAnIssuerID500ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetListOfDocumentsProvidedByAnIssuerID500ApplicationJSONObject = out
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetListOfIssuersID(ctx context.Context, request operations.GetListOfIssuersIDRequest) (*operations.GetListOfIssuersIDResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/oauth2/1/pull/issuers"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetListOfIssuersIDResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.IssuerResponse
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.IssuerResponse = out
+		}
+	case httpRes.StatusCode == 400:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetListOfIssuersID400ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetListOfIssuersID400ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 401:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetListOfIssuersID401ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetListOfIssuersID401ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 500:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetListOfIssuersID500ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetListOfIssuersID500ApplicationJSONObject = out
+		}
+	}
+
+	return res, nil
+}
+
 func (s *SDK) GetListOfSelfUploadedDocuments(ctx context.Context, request operations.GetListOfSelfUploadedDocumentsRequest) (*operations.GetListOfSelfUploadedDocumentsResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/oauth2/1/files/"
@@ -683,6 +833,81 @@ func (s *SDK) GetListOfIssuedDocumentsID(ctx context.Context) (*operations.GetLi
 	return res, nil
 }
 
+func (s *SDK) GetSearchParametersForADocumentID(ctx context.Context, request operations.GetSearchParametersForADocumentIDRequest) (*operations.GetSearchParametersForADocumentIDResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/oauth2/1/pull/parameters"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetSearchParametersForADocumentIDResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []shared.SearchParametersResponse
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.SearchParametersResponse = out
+		}
+	case httpRes.StatusCode == 400:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetSearchParametersForADocumentID400ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetSearchParametersForADocumentID400ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 401:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetSearchParametersForADocumentID401ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetSearchParametersForADocumentID401ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 500:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetSearchParametersForADocumentID500ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetSearchParametersForADocumentID500ApplicationJSONObject = out
+		}
+	}
+
+	return res, nil
+}
+
 func (s *SDK) GetStatisticsID(ctx context.Context, request operations.GetStatisticsIDRequest) (*operations.GetStatisticsIDResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/statistics/1/counts"
@@ -831,6 +1056,91 @@ func (s *SDK) GetEAadhaarDataInXMLFormatID(ctx context.Context, request operatio
 			}
 
 			res.GetEAadhaarDataInXMLFormatID503ApplicationJSONOneOf = out
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) PullDocumentID(ctx context.Context, request operations.PullDocumentIDRequest) (*operations.PullDocumentIDResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/oauth2/1/pull/pulldocument"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.PullDocumentIDResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Sample = out
+		}
+	case httpRes.StatusCode == 400:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.PullDocumentID400ApplicationJSONOneOf = out
+		}
+	case httpRes.StatusCode == 401:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.PullDocumentID401ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.PullDocumentID401ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.PullDocumentID404ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.PullDocumentID404ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 500:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.PullDocumentID500ApplicationJSONOneOf = out
 		}
 	}
 

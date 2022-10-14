@@ -1,6 +1,6 @@
 package shared
 
 type CreateTaskRequest struct {
-	FeedType      *string `json:"feedType"`
-	SchemaVersion *string `json:"schemaVersion"`
+	FeedType      *string `json:"feedType,omitempty"`
+	SchemaVersion *string `json:"schemaVersion,omitempty"`
 }

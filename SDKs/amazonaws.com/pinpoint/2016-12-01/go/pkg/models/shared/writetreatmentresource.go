@@ -1,11 +1,11 @@
 package shared
 
 type WriteTreatmentResource struct {
-	CustomDeliveryConfiguration *CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration"`
-	MessageConfiguration        *MessageConfiguration        `json:"MessageConfiguration"`
-	Schedule                    *Schedule                    `json:"Schedule"`
+	CustomDeliveryConfiguration *CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration,omitempty"`
+	MessageConfiguration        *MessageConfiguration        `json:"MessageConfiguration,omitempty"`
+	Schedule                    *Schedule                    `json:"Schedule,omitempty"`
 	SizePercent                 int64                        `json:"SizePercent"`
-	TemplateConfiguration       *TemplateConfiguration       `json:"TemplateConfiguration"`
-	TreatmentDescription        *string                      `json:"TreatmentDescription"`
-	TreatmentName               *string                      `json:"TreatmentName"`
+	TemplateConfiguration       *TemplateConfiguration       `json:"TemplateConfiguration,omitempty"`
+	TreatmentDescription        *string                      `json:"TreatmentDescription,omitempty"`
+	TreatmentName               *string                      `json:"TreatmentName,omitempty"`
 }

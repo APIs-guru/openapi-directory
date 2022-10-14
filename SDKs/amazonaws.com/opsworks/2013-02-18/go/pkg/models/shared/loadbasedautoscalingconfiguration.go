@@ -1,8 +1,8 @@
 package shared
 
 type LoadBasedAutoScalingConfiguration struct {
-	DownScaling *AutoScalingThresholds `json:"DownScaling"`
-	Enable      *bool                  `json:"Enable"`
-	LayerID     *string                `json:"LayerId"`
-	UpScaling   *AutoScalingThresholds `json:"UpScaling"`
+	DownScaling *AutoScalingThresholds `json:"DownScaling,omitempty"`
+	Enable      *bool                  `json:"Enable,omitempty"`
+	LayerID     *string                `json:"LayerId,omitempty"`
+	UpScaling   *AutoScalingThresholds `json:"UpScaling,omitempty"`
 }

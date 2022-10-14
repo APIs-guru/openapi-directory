@@ -19,32 +19,32 @@ type UpdatePipelineHeaders struct {
 }
 
 type UpdatePipelineRequestBodyContentConfig struct {
-	Bucket       *string             `json:"Bucket"`
-	Permissions  []shared.Permission `json:"Permissions"`
-	StorageClass *string             `json:"StorageClass"`
+	Bucket       *string             `json:"Bucket,omitempty"`
+	Permissions  []shared.Permission `json:"Permissions,omitempty"`
+	StorageClass *string             `json:"StorageClass,omitempty"`
 }
 
 type UpdatePipelineRequestBodyNotifications struct {
-	Completed   *string `json:"Completed"`
-	Error       *string `json:"Error"`
-	Progressing *string `json:"Progressing"`
-	Warning     *string `json:"Warning"`
+	Completed   *string `json:"Completed,omitempty"`
+	Error       *string `json:"Error,omitempty"`
+	Progressing *string `json:"Progressing,omitempty"`
+	Warning     *string `json:"Warning,omitempty"`
 }
 
 type UpdatePipelineRequestBodyThumbnailConfig struct {
-	Bucket       *string             `json:"Bucket"`
-	Permissions  []shared.Permission `json:"Permissions"`
-	StorageClass *string             `json:"StorageClass"`
+	Bucket       *string             `json:"Bucket,omitempty"`
+	Permissions  []shared.Permission `json:"Permissions,omitempty"`
+	StorageClass *string             `json:"StorageClass,omitempty"`
 }
 
 type UpdatePipelineRequestBody struct {
-	AwsKmsKeyArn    *string                                   `json:"AwsKmsKeyArn"`
-	ContentConfig   *UpdatePipelineRequestBodyContentConfig   `json:"ContentConfig"`
-	InputBucket     *string                                   `json:"InputBucket"`
-	Name            *string                                   `json:"Name"`
-	Notifications   *UpdatePipelineRequestBodyNotifications   `json:"Notifications"`
-	Role            *string                                   `json:"Role"`
-	ThumbnailConfig *UpdatePipelineRequestBodyThumbnailConfig `json:"ThumbnailConfig"`
+	AwsKmsKeyArn    *string                                   `json:"AwsKmsKeyArn,omitempty"`
+	ContentConfig   *UpdatePipelineRequestBodyContentConfig   `json:"ContentConfig,omitempty"`
+	InputBucket     *string                                   `json:"InputBucket,omitempty"`
+	Name            *string                                   `json:"Name,omitempty"`
+	Notifications   *UpdatePipelineRequestBodyNotifications   `json:"Notifications,omitempty"`
+	Role            *string                                   `json:"Role,omitempty"`
+	ThumbnailConfig *UpdatePipelineRequestBodyThumbnailConfig `json:"ThumbnailConfig,omitempty"`
 }
 
 type UpdatePipelineRequest struct {

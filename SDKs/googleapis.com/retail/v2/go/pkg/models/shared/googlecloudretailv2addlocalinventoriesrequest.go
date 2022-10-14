@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudRetailV2AddLocalInventoriesRequest struct {
-	AddMask          *string                             `json:"addMask"`
-	AddTime          *string                             `json:"addTime"`
-	AllowMissing     *bool                               `json:"allowMissing"`
-	LocalInventories []GoogleCloudRetailV2LocalInventory `json:"localInventories"`
+	AddMask          *string                             `json:"addMask,omitempty"`
+	AddTime          *string                             `json:"addTime,omitempty"`
+	AllowMissing     *bool                               `json:"allowMissing,omitempty"`
+	LocalInventories []GoogleCloudRetailV2LocalInventory `json:"localInventories,omitempty"`
 }

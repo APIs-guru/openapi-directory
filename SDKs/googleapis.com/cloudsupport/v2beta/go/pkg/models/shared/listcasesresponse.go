@@ -1,6 +1,6 @@
 package shared
 
 type ListCasesResponse struct {
-	Cases         []Case  `json:"cases"`
-	NextPageToken *string `json:"nextPageToken"`
+	Cases         []Case  `json:"cases,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 }

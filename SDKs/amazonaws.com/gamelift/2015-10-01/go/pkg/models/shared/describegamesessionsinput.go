@@ -1,11 +1,11 @@
 package shared
 
 type DescribeGameSessionsInput struct {
-	AliasID       *string `json:"AliasId"`
-	FleetID       *string `json:"FleetId"`
-	GameSessionID *string `json:"GameSessionId"`
-	Limit         *int64  `json:"Limit"`
-	Location      *string `json:"Location"`
-	NextToken     *string `json:"NextToken"`
-	StatusFilter  *string `json:"StatusFilter"`
+	AliasID       *string `json:"AliasId,omitempty"`
+	FleetID       *string `json:"FleetId,omitempty"`
+	GameSessionID *string `json:"GameSessionId,omitempty"`
+	Limit         *int64  `json:"Limit,omitempty"`
+	Location      *string `json:"Location,omitempty"`
+	NextToken     *string `json:"NextToken,omitempty"`
+	StatusFilter  *string `json:"StatusFilter,omitempty"`
 }

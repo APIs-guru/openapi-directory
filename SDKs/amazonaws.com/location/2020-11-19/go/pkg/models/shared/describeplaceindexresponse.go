@@ -12,6 +12,6 @@ type DescribePlaceIndexResponse struct {
 	IndexArn                string                  `json:"IndexArn"`
 	IndexName               string                  `json:"IndexName"`
 	PricingPlan             PricingPlanEnum         `json:"PricingPlan"`
-	Tags                    map[string]string       `json:"Tags"`
+	Tags                    map[string]string       `json:"Tags,omitempty"`
 	UpdateTime              time.Time               `json:"UpdateTime"`
 }

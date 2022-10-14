@@ -12,9 +12,9 @@ const (
 )
 
 type GoogleCloudVisionV1p1beta1Block struct {
-	BlockType   *GoogleCloudVisionV1p1beta1BlockBlockTypeEnum         `json:"blockType"`
-	BoundingBox *GoogleCloudVisionV1p1beta1BoundingPoly               `json:"boundingBox"`
-	Confidence  *float32                                              `json:"confidence"`
-	Paragraphs  []GoogleCloudVisionV1p1beta1Paragraph                 `json:"paragraphs"`
-	Property    *GoogleCloudVisionV1p1beta1TextAnnotationTextProperty `json:"property"`
+	BlockType   *GoogleCloudVisionV1p1beta1BlockBlockTypeEnum         `json:"blockType,omitempty"`
+	BoundingBox *GoogleCloudVisionV1p1beta1BoundingPoly               `json:"boundingBox,omitempty"`
+	Confidence  *float32                                              `json:"confidence,omitempty"`
+	Paragraphs  []GoogleCloudVisionV1p1beta1Paragraph                 `json:"paragraphs,omitempty"`
+	Property    *GoogleCloudVisionV1p1beta1TextAnnotationTextProperty `json:"property,omitempty"`
 }

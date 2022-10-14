@@ -16,12 +16,12 @@ type CreateEventSourceMappingHeaders struct {
 }
 
 type CreateEventSourceMappingRequestBodyDestinationConfig struct {
-	OnFailure *shared.OnFailure `json:"OnFailure"`
-	OnSuccess *shared.OnSuccess `json:"OnSuccess"`
+	OnFailure *shared.OnFailure `json:"OnFailure,omitempty"`
+	OnSuccess *shared.OnSuccess `json:"OnSuccess,omitempty"`
 }
 
 type CreateEventSourceMappingRequestBodySelfManagedEventSource struct {
-	Endpoints map[string][]string `json:"Endpoints"`
+	Endpoints map[string][]string `json:"Endpoints,omitempty"`
 }
 
 type CreateEventSourceMappingRequestBodyStartingPositionEnum string
@@ -33,24 +33,24 @@ const (
 )
 
 type CreateEventSourceMappingRequestBody struct {
-	BatchSize                      *int64                                                     `json:"BatchSize"`
-	BisectBatchOnFunctionError     *bool                                                      `json:"BisectBatchOnFunctionError"`
-	DestinationConfig              *CreateEventSourceMappingRequestBodyDestinationConfig      `json:"DestinationConfig"`
-	Enabled                        *bool                                                      `json:"Enabled"`
-	EventSourceArn                 *string                                                    `json:"EventSourceArn"`
+	BatchSize                      *int64                                                     `json:"BatchSize,omitempty"`
+	BisectBatchOnFunctionError     *bool                                                      `json:"BisectBatchOnFunctionError,omitempty"`
+	DestinationConfig              *CreateEventSourceMappingRequestBodyDestinationConfig      `json:"DestinationConfig,omitempty"`
+	Enabled                        *bool                                                      `json:"Enabled,omitempty"`
+	EventSourceArn                 *string                                                    `json:"EventSourceArn,omitempty"`
 	FunctionName                   string                                                     `json:"FunctionName"`
-	FunctionResponseTypes          []shared.FunctionResponseTypeEnum                          `json:"FunctionResponseTypes"`
-	MaximumBatchingWindowInSeconds *int64                                                     `json:"MaximumBatchingWindowInSeconds"`
-	MaximumRecordAgeInSeconds      *int64                                                     `json:"MaximumRecordAgeInSeconds"`
-	MaximumRetryAttempts           *int64                                                     `json:"MaximumRetryAttempts"`
-	ParallelizationFactor          *int64                                                     `json:"ParallelizationFactor"`
-	Queues                         []string                                                   `json:"Queues"`
-	SelfManagedEventSource         *CreateEventSourceMappingRequestBodySelfManagedEventSource `json:"SelfManagedEventSource"`
-	SourceAccessConfigurations     []shared.SourceAccessConfiguration                         `json:"SourceAccessConfigurations"`
-	StartingPosition               *CreateEventSourceMappingRequestBodyStartingPositionEnum   `json:"StartingPosition"`
-	StartingPositionTimestamp      *time.Time                                                 `json:"StartingPositionTimestamp"`
-	Topics                         []string                                                   `json:"Topics"`
-	TumblingWindowInSeconds        *int64                                                     `json:"TumblingWindowInSeconds"`
+	FunctionResponseTypes          []shared.FunctionResponseTypeEnum                          `json:"FunctionResponseTypes,omitempty"`
+	MaximumBatchingWindowInSeconds *int64                                                     `json:"MaximumBatchingWindowInSeconds,omitempty"`
+	MaximumRecordAgeInSeconds      *int64                                                     `json:"MaximumRecordAgeInSeconds,omitempty"`
+	MaximumRetryAttempts           *int64                                                     `json:"MaximumRetryAttempts,omitempty"`
+	ParallelizationFactor          *int64                                                     `json:"ParallelizationFactor,omitempty"`
+	Queues                         []string                                                   `json:"Queues,omitempty"`
+	SelfManagedEventSource         *CreateEventSourceMappingRequestBodySelfManagedEventSource `json:"SelfManagedEventSource,omitempty"`
+	SourceAccessConfigurations     []shared.SourceAccessConfiguration                         `json:"SourceAccessConfigurations,omitempty"`
+	StartingPosition               *CreateEventSourceMappingRequestBodyStartingPositionEnum   `json:"StartingPosition,omitempty"`
+	StartingPositionTimestamp      *time.Time                                                 `json:"StartingPositionTimestamp,omitempty"`
+	Topics                         []string                                                   `json:"Topics,omitempty"`
+	TumblingWindowInSeconds        *int64                                                     `json:"TumblingWindowInSeconds,omitempty"`
 }
 
 type CreateEventSourceMappingRequest struct {

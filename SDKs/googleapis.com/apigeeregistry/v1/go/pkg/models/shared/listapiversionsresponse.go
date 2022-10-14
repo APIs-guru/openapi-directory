@@ -1,6 +1,6 @@
 package shared
 
 type ListAPIVersionsResponse struct {
-	APIVersions   []APIVersion `json:"apiVersions"`
-	NextPageToken *string      `json:"nextPageToken"`
+	APIVersions   []APIVersion `json:"apiVersions,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

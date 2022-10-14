@@ -73,20 +73,20 @@ const (
 )
 
 type ViewsFromUnit struct {
-	BeachView             *bool                                   `json:"beachView"`
-	BeachViewException    *ViewsFromUnitBeachViewExceptionEnum    `json:"beachViewException"`
-	CityView              *bool                                   `json:"cityView"`
-	CityViewException     *ViewsFromUnitCityViewExceptionEnum     `json:"cityViewException"`
-	GardenView            *bool                                   `json:"gardenView"`
-	GardenViewException   *ViewsFromUnitGardenViewExceptionEnum   `json:"gardenViewException"`
-	LakeView              *bool                                   `json:"lakeView"`
-	LakeViewException     *ViewsFromUnitLakeViewExceptionEnum     `json:"lakeViewException"`
-	LandmarkView          *bool                                   `json:"landmarkView"`
-	LandmarkViewException *ViewsFromUnitLandmarkViewExceptionEnum `json:"landmarkViewException"`
-	OceanView             *bool                                   `json:"oceanView"`
-	OceanViewException    *ViewsFromUnitOceanViewExceptionEnum    `json:"oceanViewException"`
-	PoolView              *bool                                   `json:"poolView"`
-	PoolViewException     *ViewsFromUnitPoolViewExceptionEnum     `json:"poolViewException"`
-	ValleyView            *bool                                   `json:"valleyView"`
-	ValleyViewException   *ViewsFromUnitValleyViewExceptionEnum   `json:"valleyViewException"`
+	BeachView             *bool                                   `json:"beachView,omitempty"`
+	BeachViewException    *ViewsFromUnitBeachViewExceptionEnum    `json:"beachViewException,omitempty"`
+	CityView              *bool                                   `json:"cityView,omitempty"`
+	CityViewException     *ViewsFromUnitCityViewExceptionEnum     `json:"cityViewException,omitempty"`
+	GardenView            *bool                                   `json:"gardenView,omitempty"`
+	GardenViewException   *ViewsFromUnitGardenViewExceptionEnum   `json:"gardenViewException,omitempty"`
+	LakeView              *bool                                   `json:"lakeView,omitempty"`
+	LakeViewException     *ViewsFromUnitLakeViewExceptionEnum     `json:"lakeViewException,omitempty"`
+	LandmarkView          *bool                                   `json:"landmarkView,omitempty"`
+	LandmarkViewException *ViewsFromUnitLandmarkViewExceptionEnum `json:"landmarkViewException,omitempty"`
+	OceanView             *bool                                   `json:"oceanView,omitempty"`
+	OceanViewException    *ViewsFromUnitOceanViewExceptionEnum    `json:"oceanViewException,omitempty"`
+	PoolView              *bool                                   `json:"poolView,omitempty"`
+	PoolViewException     *ViewsFromUnitPoolViewExceptionEnum     `json:"poolViewException,omitempty"`
+	ValleyView            *bool                                   `json:"valleyView,omitempty"`
+	ValleyViewException   *ViewsFromUnitValleyViewExceptionEnum   `json:"valleyViewException,omitempty"`
 }

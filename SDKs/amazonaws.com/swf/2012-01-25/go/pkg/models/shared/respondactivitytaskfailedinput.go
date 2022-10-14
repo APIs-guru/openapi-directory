@@ -1,7 +1,7 @@
 package shared
 
 type RespondActivityTaskFailedInput struct {
-	Details   *string `json:"details"`
-	Reason    *string `json:"reason"`
+	Details   *string `json:"details,omitempty"`
+	Reason    *string `json:"reason,omitempty"`
 	TaskToken string  `json:"taskToken"`
 }

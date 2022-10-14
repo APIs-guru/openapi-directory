@@ -17,17 +17,17 @@ const (
 )
 
 type RemarketingList struct {
-	AccountID                  *string                        `json:"accountId"`
-	Active                     *bool                          `json:"active"`
-	AdvertiserID               *string                        `json:"advertiserId"`
-	AdvertiserIDDimensionValue *DimensionValue                `json:"advertiserIdDimensionValue"`
-	Description                *string                        `json:"description"`
-	ID                         *string                        `json:"id"`
-	Kind                       *string                        `json:"kind"`
-	LifeSpan                   *string                        `json:"lifeSpan"`
-	ListPopulationRule         *ListPopulationRule            `json:"listPopulationRule"`
-	ListSize                   *string                        `json:"listSize"`
-	ListSource                 *RemarketingListListSourceEnum `json:"listSource"`
-	Name                       *string                        `json:"name"`
-	SubaccountID               *string                        `json:"subaccountId"`
+	AccountID                  *string                        `json:"accountId,omitempty"`
+	Active                     *bool                          `json:"active,omitempty"`
+	AdvertiserID               *string                        `json:"advertiserId,omitempty"`
+	AdvertiserIDDimensionValue *DimensionValue                `json:"advertiserIdDimensionValue,omitempty"`
+	Description                *string                        `json:"description,omitempty"`
+	ID                         *string                        `json:"id,omitempty"`
+	Kind                       *string                        `json:"kind,omitempty"`
+	LifeSpan                   *string                        `json:"lifeSpan,omitempty"`
+	ListPopulationRule         *ListPopulationRule            `json:"listPopulationRule,omitempty"`
+	ListSize                   *string                        `json:"listSize,omitempty"`
+	ListSource                 *RemarketingListListSourceEnum `json:"listSource,omitempty"`
+	Name                       *string                        `json:"name,omitempty"`
+	SubaccountID               *string                        `json:"subaccountId,omitempty"`
 }

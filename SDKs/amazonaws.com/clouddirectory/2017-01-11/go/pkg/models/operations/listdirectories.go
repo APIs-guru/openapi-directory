@@ -28,9 +28,9 @@ const (
 )
 
 type ListDirectoriesRequestBody struct {
-	MaxResults *int64                               `json:"MaxResults"`
-	NextToken  *string                              `json:"NextToken"`
-	State      *ListDirectoriesRequestBodyStateEnum `json:"state"`
+	MaxResults *int64                               `json:"MaxResults,omitempty"`
+	NextToken  *string                              `json:"NextToken,omitempty"`
+	State      *ListDirectoriesRequestBodyStateEnum `json:"state,omitempty"`
 }
 
 type ListDirectoriesRequest struct {

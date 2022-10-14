@@ -19,12 +19,12 @@ type CreateBillingGroupHeaders struct {
 }
 
 type CreateBillingGroupRequestBodyBillingGroupProperties struct {
-	BillingGroupDescription *string `json:"billingGroupDescription"`
+	BillingGroupDescription *string `json:"billingGroupDescription,omitempty"`
 }
 
 type CreateBillingGroupRequestBody struct {
-	BillingGroupProperties *CreateBillingGroupRequestBodyBillingGroupProperties `json:"billingGroupProperties"`
-	Tags                   []shared.Tag                                         `json:"tags"`
+	BillingGroupProperties *CreateBillingGroupRequestBodyBillingGroupProperties `json:"billingGroupProperties,omitempty"`
+	Tags                   []shared.Tag                                         `json:"tags,omitempty"`
 }
 
 type CreateBillingGroupRequest struct {

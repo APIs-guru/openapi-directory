@@ -1,7 +1,7 @@
 package shared
 
 type ListImportJobsResponse struct {
-	ImportJobs    []ImportJob `json:"importJobs"`
-	NextPageToken *string     `json:"nextPageToken"`
-	TotalSize     *int32      `json:"totalSize"`
+	ImportJobs    []ImportJob `json:"importJobs,omitempty"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
+	TotalSize     *int32      `json:"totalSize,omitempty"`
 }

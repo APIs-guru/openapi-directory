@@ -17,6 +17,6 @@ const (
 )
 
 type SdfConfig struct {
-	AdminEmail *string               `json:"adminEmail"`
-	Version    *SdfConfigVersionEnum `json:"version"`
+	AdminEmail *string               `json:"adminEmail,omitempty"`
+	Version    *SdfConfigVersionEnum `json:"version,omitempty"`
 }

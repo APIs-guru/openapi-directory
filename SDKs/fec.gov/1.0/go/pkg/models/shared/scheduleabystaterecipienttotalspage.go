@@ -1,6 +1,6 @@
 package shared
 
 type ScheduleAByStateRecipientTotalsPage struct {
-	Pagination *OffsetInfo                       `json:"pagination"`
-	Results    []ScheduleAByStateRecipientTotals `json:"results"`
+	Pagination *OffsetInfo                       `json:"pagination,omitempty"`
+	Results    []ScheduleAByStateRecipientTotals `json:"results,omitempty"`
 }

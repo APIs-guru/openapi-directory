@@ -12,11 +12,11 @@ const (
 )
 
 type StageSummary struct {
-	EndTime          *string                `json:"endTime"`
-	Metrics          []MetricUpdate         `json:"metrics"`
-	Progress         *ProgressTimeseries    `json:"progress"`
-	StageID          *string                `json:"stageId"`
-	StartTime        *string                `json:"startTime"`
-	State            *StageSummaryStateEnum `json:"state"`
-	StragglerSummary *StragglerSummary      `json:"stragglerSummary"`
+	EndTime          *string                `json:"endTime,omitempty"`
+	Metrics          []MetricUpdate         `json:"metrics,omitempty"`
+	Progress         *ProgressTimeseries    `json:"progress,omitempty"`
+	StageID          *string                `json:"stageId,omitempty"`
+	StartTime        *string                `json:"startTime,omitempty"`
+	State            *StageSummaryStateEnum `json:"state,omitempty"`
+	StragglerSummary *StragglerSummary      `json:"stragglerSummary,omitempty"`
 }

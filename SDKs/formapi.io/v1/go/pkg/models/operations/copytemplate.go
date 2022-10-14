@@ -9,7 +9,7 @@ type CopyTemplatePathParams struct {
 }
 
 type CopyTemplateRequestBodyCopyTemplateData struct {
-	Name           *string `json:"name"`
+	Name           *string `json:"name,omitempty"`
 	ParentFolderID string  `json:"parent_folder_id"`
 }
 
@@ -34,18 +34,18 @@ const (
 type CopyTemplate200ApplicationJSONTemplate struct {
 	AllowAdditionalProperties bool                                                  `json:"allow_additional_properties"`
 	Description               string                                                `json:"description"`
-	DocumentURL               *string                                               `json:"document_url"`
+	DocumentURL               *string                                               `json:"document_url,omitempty"`
 	EditableSubmissions       bool                                                  `json:"editable_submissions"`
-	ExpirationInterval        *CopyTemplate200ApplicationJSONExpirationIntervalEnum `json:"expiration_interval"`
-	ExpireAfter               *float64                                              `json:"expire_after"`
+	ExpirationInterval        *CopyTemplate200ApplicationJSONExpirationIntervalEnum `json:"expiration_interval,omitempty"`
+	ExpireAfter               *float64                                              `json:"expire_after,omitempty"`
 	ExpireSubmissions         bool                                                  `json:"expire_submissions"`
 	ID                        string                                                `json:"id"`
 	Locked                    bool                                                  `json:"locked"`
 	Name                      string                                                `json:"name"`
-	PageDimensions            [][]float64                                           `json:"page_dimensions"`
-	ParentFolderID            *string                                               `json:"parent_folder_id"`
-	Path                      *string                                               `json:"path"`
-	PermanentDocumentURL      *string                                               `json:"permanent_document_url"`
+	PageDimensions            [][]float64                                           `json:"page_dimensions,omitempty"`
+	ParentFolderID            *string                                               `json:"parent_folder_id,omitempty"`
+	Path                      *string                                               `json:"path,omitempty"`
+	PermanentDocumentURL      *string                                               `json:"permanent_document_url,omitempty"`
 	PublicSubmissions         bool                                                  `json:"public_submissions"`
 	PublicWebForm             bool                                                  `json:"public_web_form"`
 	RedirectURL               string                                                `json:"redirect_url"`

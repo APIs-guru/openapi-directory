@@ -9,13 +9,13 @@ const (
 )
 
 type BankAccount struct {
-	AccountName      *string                                `json:"account_name"`
-	AccountNumber    *string                                `json:"account_number"`
-	AccountType      *BankAccountAccountTypeAccountTypeEnum `json:"account_type"`
-	BankCode         *string                                `json:"bank_code"`
-	Bic              *string                                `json:"bic"`
-	BranchIdentifier *string                                `json:"branch_identifier"`
-	BsbNumber        *string                                `json:"bsb_number"`
-	Currency         *CurrencyEnum                          `json:"currency"`
-	Iban             *string                                `json:"iban"`
+	AccountName      *string                                `json:"account_name,omitempty"`
+	AccountNumber    *string                                `json:"account_number,omitempty"`
+	AccountType      *BankAccountAccountTypeAccountTypeEnum `json:"account_type,omitempty"`
+	BankCode         *string                                `json:"bank_code,omitempty"`
+	Bic              *string                                `json:"bic,omitempty"`
+	BranchIdentifier *string                                `json:"branch_identifier,omitempty"`
+	BsbNumber        *string                                `json:"bsb_number,omitempty"`
+	Currency         *CurrencyEnum                          `json:"currency,omitempty"`
+	Iban             *string                                `json:"iban,omitempty"`
 }

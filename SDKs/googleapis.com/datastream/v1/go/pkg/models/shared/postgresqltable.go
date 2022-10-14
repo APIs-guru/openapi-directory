@@ -1,6 +1,6 @@
 package shared
 
 type PostgresqlTable struct {
-	PostgresqlColumns []PostgresqlColumn `json:"postgresqlColumns"`
-	Table             *string            `json:"table"`
+	PostgresqlColumns []PostgresqlColumn `json:"postgresqlColumns,omitempty"`
+	Table             *string            `json:"table,omitempty"`
 }

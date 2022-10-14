@@ -10,9 +10,9 @@ const (
 )
 
 type ContainerThreatDetectionSettings struct {
-	Modules                map[string]Config                                           `json:"modules"`
-	Name                   *string                                                     `json:"name"`
-	ServiceAccount         *string                                                     `json:"serviceAccount"`
-	ServiceEnablementState *ContainerThreatDetectionSettingsServiceEnablementStateEnum `json:"serviceEnablementState"`
-	UpdateTime             *string                                                     `json:"updateTime"`
+	Modules                map[string]Config                                           `json:"modules,omitempty"`
+	Name                   *string                                                     `json:"name,omitempty"`
+	ServiceAccount         *string                                                     `json:"serviceAccount,omitempty"`
+	ServiceEnablementState *ContainerThreatDetectionSettingsServiceEnablementStateEnum `json:"serviceEnablementState,omitempty"`
+	UpdateTime             *string                                                     `json:"updateTime,omitempty"`
 }

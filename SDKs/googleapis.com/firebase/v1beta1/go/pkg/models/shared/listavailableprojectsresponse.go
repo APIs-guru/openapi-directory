@@ -1,6 +1,6 @@
 package shared
 
 type ListAvailableProjectsResponse struct {
-	NextPageToken *string       `json:"nextPageToken"`
-	ProjectInfo   []ProjectInfo `json:"projectInfo"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	ProjectInfo   []ProjectInfo `json:"projectInfo,omitempty"`
 }

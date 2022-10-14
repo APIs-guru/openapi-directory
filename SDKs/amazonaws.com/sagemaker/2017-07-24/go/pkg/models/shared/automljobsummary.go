@@ -10,8 +10,8 @@ type AutoMlJobSummary struct {
 	AutoMlJobSecondaryStatus AutoMlJobSecondaryStatusEnum `json:"AutoMLJobSecondaryStatus"`
 	AutoMlJobStatus          AutoMlJobStatusEnum          `json:"AutoMLJobStatus"`
 	CreationTime             time.Time                    `json:"CreationTime"`
-	EndTime                  *time.Time                   `json:"EndTime"`
-	FailureReason            *string                      `json:"FailureReason"`
+	EndTime                  *time.Time                   `json:"EndTime,omitempty"`
+	FailureReason            *string                      `json:"FailureReason,omitempty"`
 	LastModifiedTime         time.Time                    `json:"LastModifiedTime"`
-	PartialFailureReasons    []AutoMlPartialFailureReason `json:"PartialFailureReasons"`
+	PartialFailureReasons    []AutoMlPartialFailureReason `json:"PartialFailureReasons,omitempty"`
 }

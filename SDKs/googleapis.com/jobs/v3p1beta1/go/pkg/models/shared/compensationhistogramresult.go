@@ -10,6 +10,6 @@ const (
 )
 
 type CompensationHistogramResult struct {
-	Result *NumericBucketingResult              `json:"result"`
-	Type   *CompensationHistogramResultTypeEnum `json:"type"`
+	Result *NumericBucketingResult              `json:"result,omitempty"`
+	Type   *CompensationHistogramResultTypeEnum `json:"type,omitempty"`
 }

@@ -17,5 +17,5 @@ const (
 )
 
 type DiscoveryNote struct {
-	AnalysisKind *DiscoveryNoteAnalysisKindEnum `json:"analysisKind"`
+	AnalysisKind *DiscoveryNoteAnalysisKindEnum `json:"analysisKind,omitempty"`
 }

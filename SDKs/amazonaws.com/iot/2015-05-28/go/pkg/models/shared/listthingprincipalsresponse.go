@@ -1,6 +1,6 @@
 package shared
 
 type ListThingPrincipalsResponse struct {
-	NextToken  *string  `json:"nextToken"`
-	Principals []string `json:"principals"`
+	NextToken  *string  `json:"nextToken,omitempty"`
+	Principals []string `json:"principals,omitempty"`
 }

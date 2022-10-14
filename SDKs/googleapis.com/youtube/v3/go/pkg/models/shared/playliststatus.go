@@ -9,5 +9,5 @@ const (
 )
 
 type PlaylistStatus struct {
-	PrivacyStatus *PlaylistStatusPrivacyStatusEnum `json:"privacyStatus"`
+	PrivacyStatus *PlaylistStatusPrivacyStatusEnum `json:"privacyStatus,omitempty"`
 }

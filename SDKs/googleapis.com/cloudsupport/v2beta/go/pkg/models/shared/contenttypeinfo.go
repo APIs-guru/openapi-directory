@@ -1,9 +1,9 @@
 package shared
 
 type ContentTypeInfo struct {
-	BestGuess    *string `json:"bestGuess"`
-	FromBytes    *string `json:"fromBytes"`
-	FromFileName *string `json:"fromFileName"`
-	FromHeader   *string `json:"fromHeader"`
-	FromURLPath  *string `json:"fromUrlPath"`
+	BestGuess    *string `json:"bestGuess,omitempty"`
+	FromBytes    *string `json:"fromBytes,omitempty"`
+	FromFileName *string `json:"fromFileName,omitempty"`
+	FromHeader   *string `json:"fromHeader,omitempty"`
+	FromURLPath  *string `json:"fromUrlPath,omitempty"`
 }

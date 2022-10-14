@@ -1,7 +1,7 @@
 package shared
 
 type CreateTableRequest struct {
-	InitialSplits []Split `json:"initialSplits"`
-	Table         *Table  `json:"table"`
-	TableID       *string `json:"tableId"`
+	InitialSplits []Split `json:"initialSplits,omitempty"`
+	Table         *Table  `json:"table,omitempty"`
+	TableID       *string `json:"tableId,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type Diagnostic struct {
-	Field *string              `json:"field"`
-	Level *DiagnosticLevelEnum `json:"level"`
+	Field *string              `json:"field,omitempty"`
+	Level *DiagnosticLevelEnum `json:"level,omitempty"`
 }

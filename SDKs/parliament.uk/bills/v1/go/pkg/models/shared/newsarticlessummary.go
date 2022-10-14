@@ -5,8 +5,8 @@ import (
 )
 
 type NewsArticlesSummary struct {
-	Content     *string    `json:"content"`
-	DisplayDate *time.Time `json:"displayDate"`
-	ID          *int32     `json:"id"`
-	Title       *string    `json:"title"`
+	Content     *string    `json:"content,omitempty"`
+	DisplayDate *time.Time `json:"displayDate,omitempty"`
+	ID          *int32     `json:"id,omitempty"`
+	Title       *string    `json:"title,omitempty"`
 }

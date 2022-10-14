@@ -22,7 +22,7 @@ type GetWorkspaceMembershipsForWorkspaceRequest struct {
 }
 
 type GetWorkspaceMembershipsForWorkspace200ApplicationJSON struct {
-	Data []shared.WorkspaceMembershipCompact `json:"data"`
+	Data []shared.WorkspaceMembershipCompact `json:"data,omitempty"`
 }
 
 type GetWorkspaceMembershipsForWorkspaceResponse struct {

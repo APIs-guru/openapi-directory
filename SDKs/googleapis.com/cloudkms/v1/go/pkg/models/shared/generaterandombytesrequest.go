@@ -11,6 +11,6 @@ const (
 )
 
 type GenerateRandomBytesRequest struct {
-	LengthBytes     *int32                                         `json:"lengthBytes"`
-	ProtectionLevel *GenerateRandomBytesRequestProtectionLevelEnum `json:"protectionLevel"`
+	LengthBytes     *int32                                         `json:"lengthBytes,omitempty"`
+	ProtectionLevel *GenerateRandomBytesRequestProtectionLevelEnum `json:"protectionLevel,omitempty"`
 }

@@ -25,6 +25,6 @@ const (
 )
 
 type DoubleVerifyDisplayViewability struct {
-	Iab            *DoubleVerifyDisplayViewabilityIabEnum            `json:"iab"`
-	ViewableDuring *DoubleVerifyDisplayViewabilityViewableDuringEnum `json:"viewableDuring"`
+	Iab            *DoubleVerifyDisplayViewabilityIabEnum            `json:"iab,omitempty"`
+	ViewableDuring *DoubleVerifyDisplayViewabilityViewableDuringEnum `json:"viewableDuring,omitempty"`
 }

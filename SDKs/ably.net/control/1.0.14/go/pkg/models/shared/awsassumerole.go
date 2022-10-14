@@ -8,5 +8,5 @@ const (
 
 type AwsAssumeRole struct {
 	AssumeRoleArn      string                               `json:"assumeRoleArn"`
-	AuthenticationMode *AwsAssumeRoleAuthenticationModeEnum `json:"authenticationMode"`
+	AuthenticationMode *AwsAssumeRoleAuthenticationModeEnum `json:"authenticationMode,omitempty"`
 }

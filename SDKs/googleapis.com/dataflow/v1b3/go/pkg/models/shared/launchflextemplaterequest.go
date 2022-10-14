@@ -1,6 +1,6 @@
 package shared
 
 type LaunchFlexTemplateRequest struct {
-	LaunchParameter *LaunchFlexTemplateParameter `json:"launchParameter"`
-	ValidateOnly    *bool                        `json:"validateOnly"`
+	LaunchParameter *LaunchFlexTemplateParameter `json:"launchParameter,omitempty"`
+	ValidateOnly    *bool                        `json:"validateOnly,omitempty"`
 }

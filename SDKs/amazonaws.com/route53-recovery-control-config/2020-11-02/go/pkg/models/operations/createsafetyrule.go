@@ -15,26 +15,26 @@ type CreateSafetyRuleHeaders struct {
 }
 
 type CreateSafetyRuleRequestBodyAssertionRule struct {
-	AssertedControls []string           `json:"AssertedControls"`
-	ControlPanelArn  *string            `json:"ControlPanelArn"`
-	Name             *string            `json:"Name"`
-	RuleConfig       *shared.RuleConfig `json:"RuleConfig"`
-	WaitPeriodMs     *int64             `json:"WaitPeriodMs"`
+	AssertedControls []string           `json:"AssertedControls,omitempty"`
+	ControlPanelArn  *string            `json:"ControlPanelArn,omitempty"`
+	Name             *string            `json:"Name,omitempty"`
+	RuleConfig       *shared.RuleConfig `json:"RuleConfig,omitempty"`
+	WaitPeriodMs     *int64             `json:"WaitPeriodMs,omitempty"`
 }
 
 type CreateSafetyRuleRequestBodyGatingRule struct {
-	ControlPanelArn *string            `json:"ControlPanelArn"`
-	GatingControls  []string           `json:"GatingControls"`
-	Name            *string            `json:"Name"`
-	RuleConfig      *shared.RuleConfig `json:"RuleConfig"`
-	TargetControls  []string           `json:"TargetControls"`
-	WaitPeriodMs    *int64             `json:"WaitPeriodMs"`
+	ControlPanelArn *string            `json:"ControlPanelArn,omitempty"`
+	GatingControls  []string           `json:"GatingControls,omitempty"`
+	Name            *string            `json:"Name,omitempty"`
+	RuleConfig      *shared.RuleConfig `json:"RuleConfig,omitempty"`
+	TargetControls  []string           `json:"TargetControls,omitempty"`
+	WaitPeriodMs    *int64             `json:"WaitPeriodMs,omitempty"`
 }
 
 type CreateSafetyRuleRequestBody struct {
-	AssertionRule *CreateSafetyRuleRequestBodyAssertionRule `json:"AssertionRule"`
-	ClientToken   *string                                   `json:"ClientToken"`
-	GatingRule    *CreateSafetyRuleRequestBodyGatingRule    `json:"GatingRule"`
+	AssertionRule *CreateSafetyRuleRequestBodyAssertionRule `json:"AssertionRule,omitempty"`
+	ClientToken   *string                                   `json:"ClientToken,omitempty"`
+	GatingRule    *CreateSafetyRuleRequestBodyGatingRule    `json:"GatingRule,omitempty"`
 }
 
 type CreateSafetyRuleRequest struct {

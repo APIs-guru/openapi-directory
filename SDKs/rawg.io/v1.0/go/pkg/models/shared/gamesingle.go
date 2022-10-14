@@ -27,69 +27,69 @@ const (
 )
 
 type GameSingleEsrbRating struct {
-	ID   *int64                        `json:"id"`
-	Name *GameSingleEsrbRatingNameEnum `json:"name"`
-	Slug *GameSingleEsrbRatingSlugEnum `json:"slug"`
+	ID   *int64                        `json:"id,omitempty"`
+	Name *GameSingleEsrbRatingNameEnum `json:"name,omitempty"`
+	Slug *GameSingleEsrbRatingSlugEnum `json:"slug,omitempty"`
 }
 
 type GameSinglePlatformsPlatform struct {
-	ID   *int64  `json:"id"`
-	Name *string `json:"name"`
-	Slug *string `json:"slug"`
+	ID   *int64  `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Slug *string `json:"slug,omitempty"`
 }
 
 type GameSinglePlatformsRequirements struct {
-	Minimum     *string `json:"minimum"`
-	Recommended *string `json:"recommended"`
+	Minimum     *string `json:"minimum,omitempty"`
+	Recommended *string `json:"recommended,omitempty"`
 }
 
 type GameSinglePlatforms struct {
-	Platform     *GameSinglePlatformsPlatform     `json:"platform"`
-	ReleasedAt   *string                          `json:"released_at"`
-	Requirements *GameSinglePlatformsRequirements `json:"requirements"`
+	Platform     *GameSinglePlatformsPlatform     `json:"platform,omitempty"`
+	ReleasedAt   *string                          `json:"released_at,omitempty"`
+	Requirements *GameSinglePlatformsRequirements `json:"requirements,omitempty"`
 }
 
 type GameSingle struct {
-	AchievementsCount         *int64                   `json:"achievements_count"`
-	Added                     *int64                   `json:"added"`
-	AddedByStatus             map[string]interface{}   `json:"added_by_status"`
-	AdditionsCount            *int64                   `json:"additions_count"`
-	AlternativeNames          []string                 `json:"alternative_names"`
-	BackgroundImage           *string                  `json:"background_image"`
-	BackgroundImageAdditional *string                  `json:"background_image_additional"`
-	CreatorsCount             *int64                   `json:"creators_count"`
-	Description               *string                  `json:"description"`
-	EsrbRating                *GameSingleEsrbRating    `json:"esrb_rating"`
-	GameSeriesCount           *int64                   `json:"game_series_count"`
-	ID                        *int64                   `json:"id"`
-	Metacritic                *int64                   `json:"metacritic"`
-	MetacriticPlatforms       []GamePlatformMetacritic `json:"metacritic_platforms"`
-	MetacriticURL             *string                  `json:"metacritic_url"`
-	MoviesCount               *int64                   `json:"movies_count"`
-	Name                      *string                  `json:"name"`
-	NameOriginal              *string                  `json:"name_original"`
-	ParentAchievementsCount   *string                  `json:"parent_achievements_count"`
-	ParentsCount              *int64                   `json:"parents_count"`
-	Platforms                 []GameSinglePlatforms    `json:"platforms"`
-	Playtime                  *int64                   `json:"playtime"`
+	AchievementsCount         *int64                   `json:"achievements_count,omitempty"`
+	Added                     *int64                   `json:"added,omitempty"`
+	AddedByStatus             map[string]interface{}   `json:"added_by_status,omitempty"`
+	AdditionsCount            *int64                   `json:"additions_count,omitempty"`
+	AlternativeNames          []string                 `json:"alternative_names,omitempty"`
+	BackgroundImage           *string                  `json:"background_image,omitempty"`
+	BackgroundImageAdditional *string                  `json:"background_image_additional,omitempty"`
+	CreatorsCount             *int64                   `json:"creators_count,omitempty"`
+	Description               *string                  `json:"description,omitempty"`
+	EsrbRating                *GameSingleEsrbRating    `json:"esrb_rating,omitempty"`
+	GameSeriesCount           *int64                   `json:"game_series_count,omitempty"`
+	ID                        *int64                   `json:"id,omitempty"`
+	Metacritic                *int64                   `json:"metacritic,omitempty"`
+	MetacriticPlatforms       []GamePlatformMetacritic `json:"metacritic_platforms,omitempty"`
+	MetacriticURL             *string                  `json:"metacritic_url,omitempty"`
+	MoviesCount               *int64                   `json:"movies_count,omitempty"`
+	Name                      *string                  `json:"name,omitempty"`
+	NameOriginal              *string                  `json:"name_original,omitempty"`
+	ParentAchievementsCount   *string                  `json:"parent_achievements_count,omitempty"`
+	ParentsCount              *int64                   `json:"parents_count,omitempty"`
+	Platforms                 []GameSinglePlatforms    `json:"platforms,omitempty"`
+	Playtime                  *int64                   `json:"playtime,omitempty"`
 	Rating                    float64                  `json:"rating"`
-	RatingTop                 *int64                   `json:"rating_top"`
-	Ratings                   map[string]interface{}   `json:"ratings"`
-	RatingsCount              *int64                   `json:"ratings_count"`
-	Reactions                 map[string]interface{}   `json:"reactions"`
-	RedditCount               *int64                   `json:"reddit_count"`
-	RedditDescription         *string                  `json:"reddit_description"`
-	RedditLogo                *string                  `json:"reddit_logo"`
-	RedditName                *string                  `json:"reddit_name"`
-	RedditURL                 *string                  `json:"reddit_url"`
-	Released                  *time.Time               `json:"released"`
-	ReviewsTextCount          *string                  `json:"reviews_text_count"`
-	ScreenshotsCount          *int64                   `json:"screenshots_count"`
-	Slug                      *string                  `json:"slug"`
-	SuggestionsCount          *int64                   `json:"suggestions_count"`
-	Tba                       *bool                    `json:"tba"`
-	TwitchCount               *string                  `json:"twitch_count"`
-	Updated                   *time.Time               `json:"updated"`
-	Website                   *string                  `json:"website"`
-	YoutubeCount              *string                  `json:"youtube_count"`
+	RatingTop                 *int64                   `json:"rating_top,omitempty"`
+	Ratings                   map[string]interface{}   `json:"ratings,omitempty"`
+	RatingsCount              *int64                   `json:"ratings_count,omitempty"`
+	Reactions                 map[string]interface{}   `json:"reactions,omitempty"`
+	RedditCount               *int64                   `json:"reddit_count,omitempty"`
+	RedditDescription         *string                  `json:"reddit_description,omitempty"`
+	RedditLogo                *string                  `json:"reddit_logo,omitempty"`
+	RedditName                *string                  `json:"reddit_name,omitempty"`
+	RedditURL                 *string                  `json:"reddit_url,omitempty"`
+	Released                  *time.Time               `json:"released,omitempty"`
+	ReviewsTextCount          *string                  `json:"reviews_text_count,omitempty"`
+	ScreenshotsCount          *int64                   `json:"screenshots_count,omitempty"`
+	Slug                      *string                  `json:"slug,omitempty"`
+	SuggestionsCount          *int64                   `json:"suggestions_count,omitempty"`
+	Tba                       *bool                    `json:"tba,omitempty"`
+	TwitchCount               *string                  `json:"twitch_count,omitempty"`
+	Updated                   *time.Time               `json:"updated,omitempty"`
+	Website                   *string                  `json:"website,omitempty"`
+	YoutubeCount              *string                  `json:"youtube_count,omitempty"`
 }

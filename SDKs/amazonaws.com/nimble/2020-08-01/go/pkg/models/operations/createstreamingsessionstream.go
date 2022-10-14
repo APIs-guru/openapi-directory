@@ -21,7 +21,7 @@ type CreateStreamingSessionStreamHeaders struct {
 }
 
 type CreateStreamingSessionStreamRequestBody struct {
-	ExpirationInSeconds *int64 `json:"expirationInSeconds"`
+	ExpirationInSeconds *int64 `json:"expirationInSeconds,omitempty"`
 }
 
 type CreateStreamingSessionStreamRequest struct {

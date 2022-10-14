@@ -1,6 +1,6 @@
 package shared
 
 type ListUploadsResult struct {
-	NextToken *string  `json:"nextToken"`
-	Uploads   []Upload `json:"uploads"`
+	NextToken *string  `json:"nextToken,omitempty"`
+	Uploads   []Upload `json:"uploads,omitempty"`
 }

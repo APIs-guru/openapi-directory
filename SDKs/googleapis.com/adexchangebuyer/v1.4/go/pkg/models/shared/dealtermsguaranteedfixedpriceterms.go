@@ -1,9 +1,9 @@
 package shared
 
 type DealTermsGuaranteedFixedPriceTerms struct {
-	BillingInfo           *DealTermsGuaranteedFixedPriceTermsBillingInfo `json:"billingInfo"`
-	FixedPrices           []PricePerBuyer                                `json:"fixedPrices"`
-	GuaranteedImpressions *string                                        `json:"guaranteedImpressions"`
-	GuaranteedLooks       *string                                        `json:"guaranteedLooks"`
-	MinimumDailyLooks     *string                                        `json:"minimumDailyLooks"`
+	BillingInfo           *DealTermsGuaranteedFixedPriceTermsBillingInfo `json:"billingInfo,omitempty"`
+	FixedPrices           []PricePerBuyer                                `json:"fixedPrices,omitempty"`
+	GuaranteedImpressions *string                                        `json:"guaranteedImpressions,omitempty"`
+	GuaranteedLooks       *string                                        `json:"guaranteedLooks,omitempty"`
+	MinimumDailyLooks     *string                                        `json:"minimumDailyLooks,omitempty"`
 }

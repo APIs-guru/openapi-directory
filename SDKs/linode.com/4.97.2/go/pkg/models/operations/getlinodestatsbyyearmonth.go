@@ -29,7 +29,7 @@ type GetLinodeStatsByYearMonthRequest struct {
 }
 
 type GetLinodeStatsByYearMonthDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeStatsByYearMonthResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type TranslateResponse struct {
-	Translations []Translation `json:"translations"`
+	Translations []Translation `json:"translations,omitempty"`
 }

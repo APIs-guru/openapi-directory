@@ -18,9 +18,9 @@ const (
 )
 
 type Membership struct {
-	CreateTime *string              `json:"createTime"`
-	Member     *User                `json:"member"`
-	Name       *string              `json:"name"`
-	Role       *MembershipRoleEnum  `json:"role"`
-	State      *MembershipStateEnum `json:"state"`
+	CreateTime *string              `json:"createTime,omitempty"`
+	Member     *User                `json:"member,omitempty"`
+	Name       *string              `json:"name,omitempty"`
+	Role       *MembershipRoleEnum  `json:"role,omitempty"`
+	State      *MembershipStateEnum `json:"state,omitempty"`
 }

@@ -106,7 +106,7 @@ const (
 )
 
 type CustomFloodlightVariable struct {
-	Kind  *string                           `json:"kind"`
-	Type  *CustomFloodlightVariableTypeEnum `json:"type"`
-	Value *string                           `json:"value"`
+	Kind  *string                           `json:"kind,omitempty"`
+	Type  *CustomFloodlightVariableTypeEnum `json:"type,omitempty"`
+	Value *string                           `json:"value,omitempty"`
 }

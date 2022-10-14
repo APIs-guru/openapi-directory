@@ -1,5 +1,5 @@
 package shared
 
 type CertificateOptions struct {
-	CertificateTransparencyLoggingPreference *CertificateTransparencyLoggingPreferenceEnum `json:"CertificateTransparencyLoggingPreference"`
+	CertificateTransparencyLoggingPreference *CertificateTransparencyLoggingPreferenceEnum `json:"CertificateTransparencyLoggingPreference,omitempty"`
 }

@@ -9,24 +9,24 @@ type EditVideoPathParams struct {
 }
 
 type EditVideoRequestBodyEmbedButtons struct {
-	Embed      *bool `json:"embed"`
-	Fullscreen *bool `json:"fullscreen"`
-	Hd         *bool `json:"hd"`
-	Like       *bool `json:"like"`
-	Scaling    *bool `json:"scaling"`
-	Share      *bool `json:"share"`
-	Watchlater *bool `json:"watchlater"`
+	Embed      *bool `json:"embed,omitempty"`
+	Fullscreen *bool `json:"fullscreen,omitempty"`
+	Hd         *bool `json:"hd,omitempty"`
+	Like       *bool `json:"like,omitempty"`
+	Scaling    *bool `json:"scaling,omitempty"`
+	Share      *bool `json:"share,omitempty"`
+	Watchlater *bool `json:"watchlater,omitempty"`
 }
 
 type EditVideoRequestBodyEmbedLogosCustom struct {
-	Active *bool   `json:"active"`
-	Link   *string `json:"link"`
-	Sticky *bool   `json:"sticky"`
+	Active *bool   `json:"active,omitempty"`
+	Link   *string `json:"link,omitempty"`
+	Sticky *bool   `json:"sticky,omitempty"`
 }
 
 type EditVideoRequestBodyEmbedLogos struct {
-	Custom *EditVideoRequestBodyEmbedLogosCustom `json:"custom"`
-	Vimeo  *bool                                 `json:"vimeo"`
+	Custom *EditVideoRequestBodyEmbedLogosCustom `json:"custom,omitempty"`
+	Vimeo  *bool                                 `json:"vimeo,omitempty"`
 }
 
 type EditVideoRequestBodyEmbedTitleNameEnum string
@@ -54,18 +54,18 @@ const (
 )
 
 type EditVideoRequestBodyEmbedTitle struct {
-	Name     *EditVideoRequestBodyEmbedTitleNameEnum     `json:"name"`
-	Owner    *EditVideoRequestBodyEmbedTitleOwnerEnum    `json:"owner"`
-	Portrait *EditVideoRequestBodyEmbedTitlePortraitEnum `json:"portrait"`
+	Name     *EditVideoRequestBodyEmbedTitleNameEnum     `json:"name,omitempty"`
+	Owner    *EditVideoRequestBodyEmbedTitleOwnerEnum    `json:"owner,omitempty"`
+	Portrait *EditVideoRequestBodyEmbedTitlePortraitEnum `json:"portrait,omitempty"`
 }
 
 type EditVideoRequestBodyEmbed struct {
-	Buttons *EditVideoRequestBodyEmbedButtons `json:"buttons"`
-	Color   *string                           `json:"color"`
-	Logos   *EditVideoRequestBodyEmbedLogos   `json:"logos"`
-	Playbar *bool                             `json:"playbar"`
-	Title   *EditVideoRequestBodyEmbedTitle   `json:"title"`
-	Volume  *bool                             `json:"volume"`
+	Buttons *EditVideoRequestBodyEmbedButtons `json:"buttons,omitempty"`
+	Color   *string                           `json:"color,omitempty"`
+	Logos   *EditVideoRequestBodyEmbedLogos   `json:"logos,omitempty"`
+	Playbar *bool                             `json:"playbar,omitempty"`
+	Title   *EditVideoRequestBodyEmbedTitle   `json:"title,omitempty"`
+	Volume  *bool                             `json:"volume,omitempty"`
 }
 
 type EditVideoRequestBodyLicenseEnum string
@@ -109,11 +109,11 @@ const (
 )
 
 type EditVideoRequestBodyPrivacy struct {
-	Add      *bool                                    `json:"add"`
-	Comments *EditVideoRequestBodyPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                    `json:"download"`
-	Embed    *EditVideoRequestBodyPrivacyEmbedEnum    `json:"embed"`
-	View     *EditVideoRequestBodyPrivacyViewEnum     `json:"view"`
+	Add      *bool                                    `json:"add,omitempty"`
+	Comments *EditVideoRequestBodyPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                    `json:"download,omitempty"`
+	Embed    *EditVideoRequestBodyPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *EditVideoRequestBodyPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type EditVideoRequestBodyRatingsMpaaReasonEnum string
@@ -128,7 +128,7 @@ const (
 )
 
 type EditVideoRequestBodyRatingsMpaa struct {
-	Reason *EditVideoRequestBodyRatingsMpaaReasonEnum `json:"reason"`
+	Reason *EditVideoRequestBodyRatingsMpaaReasonEnum `json:"reason,omitempty"`
 }
 
 type EditVideoRequestBodyRatingsTvReasonEnum string
@@ -142,21 +142,21 @@ const (
 )
 
 type EditVideoRequestBodyRatingsTv struct {
-	Reason *EditVideoRequestBodyRatingsTvReasonEnum `json:"reason"`
+	Reason *EditVideoRequestBodyRatingsTvReasonEnum `json:"reason,omitempty"`
 }
 
 type EditVideoRequestBodyRatings struct {
-	Mpaa *EditVideoRequestBodyRatingsMpaa `json:"mpaa"`
-	Tv   *EditVideoRequestBodyRatingsTv   `json:"tv"`
+	Mpaa *EditVideoRequestBodyRatingsMpaa `json:"mpaa,omitempty"`
+	Tv   *EditVideoRequestBodyRatingsTv   `json:"tv,omitempty"`
 }
 
 type EditVideoRequestBodyReviewPage struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type EditVideoRequestBodySpatialDirectorTimeline struct {
 	Pitch    float64  `json:"pitch"`
-	Roll     *float64 `json:"roll"`
+	Roll     *float64 `json:"roll,omitempty"`
 	TimeCode float64  `json:"time_code"`
 	Yaw      float64  `json:"yaw"`
 }
@@ -180,24 +180,24 @@ const (
 )
 
 type EditVideoRequestBodySpatial struct {
-	DirectorTimeline []EditVideoRequestBodySpatialDirectorTimeline `json:"director_timeline"`
-	FieldOfView      *float64                                      `json:"field_of_view"`
-	Projection       *EditVideoRequestBodySpatialProjectionEnum    `json:"projection"`
-	StereoFormat     *EditVideoRequestBodySpatialStereoFormatEnum  `json:"stereo_format"`
+	DirectorTimeline []EditVideoRequestBodySpatialDirectorTimeline `json:"director_timeline,omitempty"`
+	FieldOfView      *float64                                      `json:"field_of_view,omitempty"`
+	Projection       *EditVideoRequestBodySpatialProjectionEnum    `json:"projection,omitempty"`
+	StereoFormat     *EditVideoRequestBodySpatialStereoFormatEnum  `json:"stereo_format,omitempty"`
 }
 
 type EditVideoRequestBody struct {
-	ContentRating []string                         `json:"content_rating"`
-	Description   *string                          `json:"description"`
-	Embed         *EditVideoRequestBodyEmbed       `json:"embed"`
-	License       *EditVideoRequestBodyLicenseEnum `json:"license"`
-	Locale        *string                          `json:"locale"`
-	Name          *string                          `json:"name"`
-	Password      *string                          `json:"password"`
-	Privacy       *EditVideoRequestBodyPrivacy     `json:"privacy"`
-	Ratings       *EditVideoRequestBodyRatings     `json:"ratings"`
-	ReviewPage    *EditVideoRequestBodyReviewPage  `json:"review_page"`
-	Spatial       *EditVideoRequestBodySpatial     `json:"spatial"`
+	ContentRating []string                         `json:"content_rating,omitempty"`
+	Description   *string                          `json:"description,omitempty"`
+	Embed         *EditVideoRequestBodyEmbed       `json:"embed,omitempty"`
+	License       *EditVideoRequestBodyLicenseEnum `json:"license,omitempty"`
+	Locale        *string                          `json:"locale,omitempty"`
+	Name          *string                          `json:"name,omitempty"`
+	Password      *string                          `json:"password,omitempty"`
+	Privacy       *EditVideoRequestBodyPrivacy     `json:"privacy,omitempty"`
+	Ratings       *EditVideoRequestBodyRatings     `json:"ratings,omitempty"`
+	ReviewPage    *EditVideoRequestBodyReviewPage  `json:"review_page,omitempty"`
+	Spatial       *EditVideoRequestBodySpatial     `json:"spatial,omitempty"`
 }
 
 type EditVideoSecurity struct {

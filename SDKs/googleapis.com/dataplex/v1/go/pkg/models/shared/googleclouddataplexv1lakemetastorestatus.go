@@ -11,8 +11,8 @@ const (
 )
 
 type GoogleCloudDataplexV1LakeMetastoreStatus struct {
-	Endpoint   *string                                            `json:"endpoint"`
-	Message    *string                                            `json:"message"`
-	State      *GoogleCloudDataplexV1LakeMetastoreStatusStateEnum `json:"state"`
-	UpdateTime *string                                            `json:"updateTime"`
+	Endpoint   *string                                            `json:"endpoint,omitempty"`
+	Message    *string                                            `json:"message,omitempty"`
+	State      *GoogleCloudDataplexV1LakeMetastoreStatusStateEnum `json:"state,omitempty"`
+	UpdateTime *string                                            `json:"updateTime,omitempty"`
 }

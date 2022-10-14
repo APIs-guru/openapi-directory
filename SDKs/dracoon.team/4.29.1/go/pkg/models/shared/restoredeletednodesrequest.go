@@ -10,7 +10,7 @@ const (
 
 type RestoreDeletedNodesRequest struct {
 	DeletedNodeIds     []int64                                           `json:"deletedNodeIds"`
-	KeepShareLinks     *bool                                             `json:"keepShareLinks"`
-	ParentID           *int64                                            `json:"parentId"`
-	ResolutionStrategy *RestoreDeletedNodesRequestResolutionStrategyEnum `json:"resolutionStrategy"`
+	KeepShareLinks     *bool                                             `json:"keepShareLinks,omitempty"`
+	ParentID           *int64                                            `json:"parentId,omitempty"`
+	ResolutionStrategy *RestoreDeletedNodesRequestResolutionStrategyEnum `json:"resolutionStrategy,omitempty"`
 }

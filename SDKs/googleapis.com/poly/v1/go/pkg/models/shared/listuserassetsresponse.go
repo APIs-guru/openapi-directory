@@ -1,7 +1,7 @@
 package shared
 
 type ListUserAssetsResponse struct {
-	NextPageToken *string     `json:"nextPageToken"`
-	TotalSize     *int32      `json:"totalSize"`
-	UserAssets    []UserAsset `json:"userAssets"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
+	TotalSize     *int32      `json:"totalSize,omitempty"`
+	UserAssets    []UserAsset `json:"userAssets,omitempty"`
 }

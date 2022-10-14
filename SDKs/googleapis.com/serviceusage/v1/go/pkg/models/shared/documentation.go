@@ -1,10 +1,10 @@
 package shared
 
 type Documentation struct {
-	DocumentationRootURL *string             `json:"documentationRootUrl"`
-	Overview             *string             `json:"overview"`
-	Pages                []Page              `json:"pages"`
-	Rules                []DocumentationRule `json:"rules"`
-	ServiceRootURL       *string             `json:"serviceRootUrl"`
-	Summary              *string             `json:"summary"`
+	DocumentationRootURL *string             `json:"documentationRootUrl,omitempty"`
+	Overview             *string             `json:"overview,omitempty"`
+	Pages                []Page              `json:"pages,omitempty"`
+	Rules                []DocumentationRule `json:"rules,omitempty"`
+	ServiceRootURL       *string             `json:"serviceRootUrl,omitempty"`
+	Summary              *string             `json:"summary,omitempty"`
 }

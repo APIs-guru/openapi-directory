@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudRecommendationengineV1beta1PredictRequest struct {
-	DryRun    *bool                                            `json:"dryRun"`
-	Filter    *string                                          `json:"filter"`
-	Labels    map[string]string                                `json:"labels"`
-	PageSize  *int32                                           `json:"pageSize"`
-	PageToken *string                                          `json:"pageToken"`
-	Params    map[string]interface{}                           `json:"params"`
-	UserEvent *GoogleCloudRecommendationengineV1beta1UserEvent `json:"userEvent"`
+	DryRun    *bool                                            `json:"dryRun,omitempty"`
+	Filter    *string                                          `json:"filter,omitempty"`
+	Labels    map[string]string                                `json:"labels,omitempty"`
+	PageSize  *int32                                           `json:"pageSize,omitempty"`
+	PageToken *string                                          `json:"pageToken,omitempty"`
+	Params    map[string]interface{}                           `json:"params,omitempty"`
+	UserEvent *GoogleCloudRecommendationengineV1beta1UserEvent `json:"userEvent,omitempty"`
 }

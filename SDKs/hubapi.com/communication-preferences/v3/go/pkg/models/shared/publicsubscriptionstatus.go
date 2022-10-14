@@ -28,13 +28,13 @@ const (
 )
 
 type PublicSubscriptionStatus struct {
-	BrandID               *int64                                     `json:"brandId"`
+	BrandID               *int64                                     `json:"brandId,omitempty"`
 	Description           string                                     `json:"description"`
 	ID                    string                                     `json:"id"`
-	LegalBasis            *PublicSubscriptionStatusLegalBasisEnum    `json:"legalBasis"`
-	LegalBasisExplanation *string                                    `json:"legalBasisExplanation"`
+	LegalBasis            *PublicSubscriptionStatusLegalBasisEnum    `json:"legalBasis,omitempty"`
+	LegalBasisExplanation *string                                    `json:"legalBasisExplanation,omitempty"`
 	Name                  string                                     `json:"name"`
-	PreferenceGroupName   *string                                    `json:"preferenceGroupName"`
+	PreferenceGroupName   *string                                    `json:"preferenceGroupName,omitempty"`
 	SourceOfStatus        PublicSubscriptionStatusSourceOfStatusEnum `json:"sourceOfStatus"`
 	Status                PublicSubscriptionStatusStatusEnum         `json:"status"`
 }

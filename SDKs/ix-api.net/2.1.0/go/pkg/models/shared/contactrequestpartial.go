@@ -1,10 +1,10 @@
 package shared
 
 type ContactRequestPartial struct {
-	ConsumingAccount *string `json:"consuming_account"`
-	Email            *string `json:"email"`
-	ExternalRef      *string `json:"external_ref"`
-	ManagingAccount  *string `json:"managing_account"`
-	Name             *string `json:"name"`
-	Telephone        *string `json:"telephone"`
+	ConsumingAccount *string `json:"consuming_account,omitempty"`
+	Email            *string `json:"email,omitempty"`
+	ExternalRef      *string `json:"external_ref,omitempty"`
+	ManagingAccount  *string `json:"managing_account,omitempty"`
+	Name             *string `json:"name,omitempty"`
+	Telephone        *string `json:"telephone,omitempty"`
 }

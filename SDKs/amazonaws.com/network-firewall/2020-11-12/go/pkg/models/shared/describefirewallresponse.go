@@ -1,7 +1,7 @@
 package shared
 
 type DescribeFirewallResponse struct {
-	Firewall       *Firewall       `json:"Firewall"`
-	FirewallStatus *FirewallStatus `json:"FirewallStatus"`
-	UpdateToken    *string         `json:"UpdateToken"`
+	Firewall       *Firewall       `json:"Firewall,omitempty"`
+	FirewallStatus *FirewallStatus `json:"FirewallStatus,omitempty"`
+	UpdateToken    *string         `json:"UpdateToken,omitempty"`
 }

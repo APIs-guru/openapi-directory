@@ -1,8 +1,8 @@
 package shared
 
 type MaintenanceWindowTaskInvocationParameters struct {
-	Automation    *MaintenanceWindowAutomationParameters    `json:"Automation"`
-	Lambda        *MaintenanceWindowLambdaParameters        `json:"Lambda"`
-	RunCommand    *MaintenanceWindowRunCommandParameters    `json:"RunCommand"`
-	StepFunctions *MaintenanceWindowStepFunctionsParameters `json:"StepFunctions"`
+	Automation    *MaintenanceWindowAutomationParameters    `json:"Automation,omitempty"`
+	Lambda        *MaintenanceWindowLambdaParameters        `json:"Lambda,omitempty"`
+	RunCommand    *MaintenanceWindowRunCommandParameters    `json:"RunCommand,omitempty"`
+	StepFunctions *MaintenanceWindowStepFunctionsParameters `json:"StepFunctions,omitempty"`
 }

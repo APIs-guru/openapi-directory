@@ -10,12 +10,12 @@ const (
 )
 
 type Execution struct {
-	CompletionTime        *Timestamp               `json:"completionTime"`
-	CreationTime          *Timestamp               `json:"creationTime"`
-	DimensionDefinitions  []map[string]interface{} `json:"dimensionDefinitions"`
-	ExecutionID           *string                  `json:"executionId"`
-	Outcome               *Outcome                 `json:"outcome"`
-	Specification         *Specification           `json:"specification"`
-	State                 *ExecutionStateEnum      `json:"state"`
-	TestExecutionMatrixID *string                  `json:"testExecutionMatrixId"`
+	CompletionTime        *Timestamp               `json:"completionTime,omitempty"`
+	CreationTime          *Timestamp               `json:"creationTime,omitempty"`
+	DimensionDefinitions  []map[string]interface{} `json:"dimensionDefinitions,omitempty"`
+	ExecutionID           *string                  `json:"executionId,omitempty"`
+	Outcome               *Outcome                 `json:"outcome,omitempty"`
+	Specification         *Specification           `json:"specification,omitempty"`
+	State                 *ExecutionStateEnum      `json:"state,omitempty"`
+	TestExecutionMatrixID *string                  `json:"testExecutionMatrixId,omitempty"`
 }

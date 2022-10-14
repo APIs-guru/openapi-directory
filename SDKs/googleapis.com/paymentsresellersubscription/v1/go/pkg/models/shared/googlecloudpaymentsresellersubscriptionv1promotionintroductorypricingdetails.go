@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails struct {
-	IntroductoryPricingSpecs []GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec `json:"introductoryPricingSpecs"`
+	IntroductoryPricingSpecs []GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec `json:"introductoryPricingSpecs,omitempty"`
 }

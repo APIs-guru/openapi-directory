@@ -5,13 +5,13 @@ import (
 )
 
 type ListImageVersionsRequest struct {
-	CreationTimeAfter      *time.Time                 `json:"CreationTimeAfter"`
-	CreationTimeBefore     *time.Time                 `json:"CreationTimeBefore"`
+	CreationTimeAfter      *time.Time                 `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore     *time.Time                 `json:"CreationTimeBefore,omitempty"`
 	ImageName              string                     `json:"ImageName"`
-	LastModifiedTimeAfter  *time.Time                 `json:"LastModifiedTimeAfter"`
-	LastModifiedTimeBefore *time.Time                 `json:"LastModifiedTimeBefore"`
-	MaxResults             *int64                     `json:"MaxResults"`
-	NextToken              *string                    `json:"NextToken"`
-	SortBy                 *ImageVersionSortByEnum    `json:"SortBy"`
-	SortOrder              *ImageVersionSortOrderEnum `json:"SortOrder"`
+	LastModifiedTimeAfter  *time.Time                 `json:"LastModifiedTimeAfter,omitempty"`
+	LastModifiedTimeBefore *time.Time                 `json:"LastModifiedTimeBefore,omitempty"`
+	MaxResults             *int64                     `json:"MaxResults,omitempty"`
+	NextToken              *string                    `json:"NextToken,omitempty"`
+	SortBy                 *ImageVersionSortByEnum    `json:"SortBy,omitempty"`
+	SortOrder              *ImageVersionSortOrderEnum `json:"SortOrder,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type TabStop struct {
-	Alignment *TabStopAlignmentEnum `json:"alignment"`
-	Offset    *Dimension            `json:"offset"`
+	Alignment *TabStopAlignmentEnum `json:"alignment,omitempty"`
+	Offset    *Dimension            `json:"offset,omitempty"`
 }

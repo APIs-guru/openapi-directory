@@ -1,5 +1,5 @@
 package shared
 
 type SetBreakpointResponse struct {
-	Breakpoint *Breakpoint `json:"breakpoint"`
+	Breakpoint *Breakpoint `json:"breakpoint,omitempty"`
 }

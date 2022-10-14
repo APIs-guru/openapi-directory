@@ -40,23 +40,23 @@ const (
 )
 
 type ReleaseEventContract struct {
-	AdditionalNames     *string                                    `json:"additionalNames"`
-	Category            *ReleaseEventContractCategoryEnum          `json:"category"`
-	CustomName          *bool                                      `json:"customName"`
-	Date                *time.Time                                 `json:"date"`
-	Deleted             *bool                                      `json:"deleted"`
-	Description         *string                                    `json:"description"`
-	EndDate             *time.Time                                 `json:"endDate"`
-	HasVenueOrVenueName *bool                                      `json:"hasVenueOrVenueName"`
-	ID                  *int32                                     `json:"id"`
-	InheritedCategory   *ReleaseEventContractInheritedCategoryEnum `json:"inheritedCategory"`
-	Name                *string                                    `json:"name"`
-	PictureMime         *string                                    `json:"pictureMime"`
-	Series              *ReleaseEventSeriesContract                `json:"series"`
-	SongList            *SongListBaseContract                      `json:"songList"`
-	Status              *ReleaseEventContractStatusEnum            `json:"status"`
-	URLSlug             *string                                    `json:"urlSlug"`
-	Venue               *VenueContract                             `json:"venue"`
-	VenueName           *string                                    `json:"venueName"`
-	Version             *int32                                     `json:"version"`
+	AdditionalNames     *string                                    `json:"additionalNames,omitempty"`
+	Category            *ReleaseEventContractCategoryEnum          `json:"category,omitempty"`
+	CustomName          *bool                                      `json:"customName,omitempty"`
+	Date                *time.Time                                 `json:"date,omitempty"`
+	Deleted             *bool                                      `json:"deleted,omitempty"`
+	Description         *string                                    `json:"description,omitempty"`
+	EndDate             *time.Time                                 `json:"endDate,omitempty"`
+	HasVenueOrVenueName *bool                                      `json:"hasVenueOrVenueName,omitempty"`
+	ID                  *int32                                     `json:"id,omitempty"`
+	InheritedCategory   *ReleaseEventContractInheritedCategoryEnum `json:"inheritedCategory,omitempty"`
+	Name                *string                                    `json:"name,omitempty"`
+	PictureMime         *string                                    `json:"pictureMime,omitempty"`
+	Series              *ReleaseEventSeriesContract                `json:"series,omitempty"`
+	SongList            *SongListBaseContract                      `json:"songList,omitempty"`
+	Status              *ReleaseEventContractStatusEnum            `json:"status,omitempty"`
+	URLSlug             *string                                    `json:"urlSlug,omitempty"`
+	Venue               *VenueContract                             `json:"venue,omitempty"`
+	VenueName           *string                                    `json:"venueName,omitempty"`
+	Version             *int32                                     `json:"version,omitempty"`
 }

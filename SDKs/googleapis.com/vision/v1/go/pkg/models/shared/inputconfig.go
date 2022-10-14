@@ -1,7 +1,7 @@
 package shared
 
 type InputConfig struct {
-	Content   *string    `json:"content"`
-	GcsSource *GcsSource `json:"gcsSource"`
-	MimeType  *string    `json:"mimeType"`
+	Content   *string    `json:"content,omitempty"`
+	GcsSource *GcsSource `json:"gcsSource,omitempty"`
+	MimeType  *string    `json:"mimeType,omitempty"`
 }

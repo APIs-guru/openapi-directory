@@ -1,10 +1,10 @@
 package shared
 
 type TerminateProvisionedProductInput struct {
-	AcceptLanguage          *string `json:"AcceptLanguage"`
-	IgnoreErrors            *bool   `json:"IgnoreErrors"`
-	ProvisionedProductID    *string `json:"ProvisionedProductId"`
-	ProvisionedProductName  *string `json:"ProvisionedProductName"`
-	RetainPhysicalResources *bool   `json:"RetainPhysicalResources"`
+	AcceptLanguage          *string `json:"AcceptLanguage,omitempty"`
+	IgnoreErrors            *bool   `json:"IgnoreErrors,omitempty"`
+	ProvisionedProductID    *string `json:"ProvisionedProductId,omitempty"`
+	ProvisionedProductName  *string `json:"ProvisionedProductName,omitempty"`
+	RetainPhysicalResources *bool   `json:"RetainPhysicalResources,omitempty"`
 	TerminateToken          string  `json:"TerminateToken"`
 }

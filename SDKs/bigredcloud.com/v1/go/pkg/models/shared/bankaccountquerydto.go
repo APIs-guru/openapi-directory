@@ -1,20 +1,20 @@
 package shared
 
 type BankAccountQueryDto struct {
-	AcCode                         *string  `json:"acCode"`
-	AccountName                    *string  `json:"accountName"`
-	AccountNumber                  *string  `json:"accountNumber"`
-	Address                        []string `json:"address"`
-	BankFeedSource                 *int32   `json:"bankFeedSource"`
-	BusinessIdentifierCodes        *string  `json:"businessIdentifierCodes"`
-	CategoryID                     *int64   `json:"categoryId"`
-	CreditorScheme                 *string  `json:"creditorScheme"`
-	Details                        *string  `json:"details"`
-	ID                             *int64   `json:"id"`
-	InternationalBankAccountNumber *string  `json:"internationalBankAccountNumber"`
-	IsDefaultBank                  *bool    `json:"isDefaultBank"`
-	LastChq                        *string  `json:"lastChq"`
-	NominalAcCode                  *string  `json:"nominalAcCode"`
-	SortCode                       *string  `json:"sortCode"`
-	Timestamp                      *string  `json:"timestamp"`
+	AcCode                         *string  `json:"acCode,omitempty"`
+	AccountName                    *string  `json:"accountName,omitempty"`
+	AccountNumber                  *string  `json:"accountNumber,omitempty"`
+	Address                        []string `json:"address,omitempty"`
+	BankFeedSource                 *int32   `json:"bankFeedSource,omitempty"`
+	BusinessIdentifierCodes        *string  `json:"businessIdentifierCodes,omitempty"`
+	CategoryID                     *int64   `json:"categoryId,omitempty"`
+	CreditorScheme                 *string  `json:"creditorScheme,omitempty"`
+	Details                        *string  `json:"details,omitempty"`
+	ID                             *int64   `json:"id,omitempty"`
+	InternationalBankAccountNumber *string  `json:"internationalBankAccountNumber,omitempty"`
+	IsDefaultBank                  *bool    `json:"isDefaultBank,omitempty"`
+	LastChq                        *string  `json:"lastChq,omitempty"`
+	NominalAcCode                  *string  `json:"nominalAcCode,omitempty"`
+	SortCode                       *string  `json:"sortCode,omitempty"`
+	Timestamp                      *string  `json:"timestamp,omitempty"`
 }

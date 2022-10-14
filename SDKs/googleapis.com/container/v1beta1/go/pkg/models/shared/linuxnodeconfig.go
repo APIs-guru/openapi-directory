@@ -9,6 +9,6 @@ const (
 )
 
 type LinuxNodeConfig struct {
-	CgroupMode *LinuxNodeConfigCgroupModeEnum `json:"cgroupMode"`
-	Sysctls    map[string]string              `json:"sysctls"`
+	CgroupMode *LinuxNodeConfigCgroupModeEnum `json:"cgroupMode,omitempty"`
+	Sysctls    map[string]string              `json:"sysctls,omitempty"`
 }

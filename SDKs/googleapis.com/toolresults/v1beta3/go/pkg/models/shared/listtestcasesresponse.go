@@ -1,6 +1,6 @@
 package shared
 
 type ListTestCasesResponse struct {
-	NextPageToken *string    `json:"nextPageToken"`
-	TestCases     []TestCase `json:"testCases"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	TestCases     []TestCase `json:"testCases,omitempty"`
 }

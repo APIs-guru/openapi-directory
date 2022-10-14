@@ -1,15 +1,15 @@
 package shared
 
 type CreateEndpointGroupRequest struct {
-	EndpointConfigurations     []EndpointConfiguration  `json:"EndpointConfigurations"`
+	EndpointConfigurations     []EndpointConfiguration  `json:"EndpointConfigurations,omitempty"`
 	EndpointGroupRegion        string                   `json:"EndpointGroupRegion"`
-	HealthCheckIntervalSeconds *int64                   `json:"HealthCheckIntervalSeconds"`
-	HealthCheckPath            *string                  `json:"HealthCheckPath"`
-	HealthCheckPort            *int64                   `json:"HealthCheckPort"`
-	HealthCheckProtocol        *HealthCheckProtocolEnum `json:"HealthCheckProtocol"`
+	HealthCheckIntervalSeconds *int64                   `json:"HealthCheckIntervalSeconds,omitempty"`
+	HealthCheckPath            *string                  `json:"HealthCheckPath,omitempty"`
+	HealthCheckPort            *int64                   `json:"HealthCheckPort,omitempty"`
+	HealthCheckProtocol        *HealthCheckProtocolEnum `json:"HealthCheckProtocol,omitempty"`
 	IdempotencyToken           string                   `json:"IdempotencyToken"`
 	ListenerArn                string                   `json:"ListenerArn"`
-	PortOverrides              []PortOverride           `json:"PortOverrides"`
-	ThresholdCount             *int64                   `json:"ThresholdCount"`
-	TrafficDialPercentage      *float32                 `json:"TrafficDialPercentage"`
+	PortOverrides              []PortOverride           `json:"PortOverrides,omitempty"`
+	ThresholdCount             *int64                   `json:"ThresholdCount,omitempty"`
+	TrafficDialPercentage      *float32                 `json:"TrafficDialPercentage,omitempty"`
 }

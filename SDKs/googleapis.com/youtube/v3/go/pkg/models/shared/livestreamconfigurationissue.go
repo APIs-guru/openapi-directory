@@ -48,8 +48,8 @@ const (
 )
 
 type LiveStreamConfigurationIssue struct {
-	Description *string                                   `json:"description"`
-	Reason      *string                                   `json:"reason"`
-	Severity    *LiveStreamConfigurationIssueSeverityEnum `json:"severity"`
-	Type        *LiveStreamConfigurationIssueTypeEnum     `json:"type"`
+	Description *string                                   `json:"description,omitempty"`
+	Reason      *string                                   `json:"reason,omitempty"`
+	Severity    *LiveStreamConfigurationIssueSeverityEnum `json:"severity,omitempty"`
+	Type        *LiveStreamConfigurationIssueTypeEnum     `json:"type,omitempty"`
 }

@@ -41,23 +41,23 @@ const (
 )
 
 type Node struct {
-	AcceleratorType      *string             `json:"acceleratorType"`
-	APIVersion           *NodeAPIVersionEnum `json:"apiVersion"`
-	CidrBlock            *string             `json:"cidrBlock"`
-	CreateTime           *string             `json:"createTime"`
-	Description          *string             `json:"description"`
-	Health               *NodeHealthEnum     `json:"health"`
-	HealthDescription    *string             `json:"healthDescription"`
-	IPAddress            *string             `json:"ipAddress"`
-	Labels               map[string]string   `json:"labels"`
-	Name                 *string             `json:"name"`
-	Network              *string             `json:"network"`
-	NetworkEndpoints     []NetworkEndpoint   `json:"networkEndpoints"`
-	Port                 *string             `json:"port"`
-	SchedulingConfig     *SchedulingConfig   `json:"schedulingConfig"`
-	ServiceAccount       *string             `json:"serviceAccount"`
-	State                *NodeStateEnum      `json:"state"`
-	Symptoms             []Symptom           `json:"symptoms"`
-	TensorflowVersion    *string             `json:"tensorflowVersion"`
-	UseServiceNetworking *bool               `json:"useServiceNetworking"`
+	AcceleratorType      *string             `json:"acceleratorType,omitempty"`
+	APIVersion           *NodeAPIVersionEnum `json:"apiVersion,omitempty"`
+	CidrBlock            *string             `json:"cidrBlock,omitempty"`
+	CreateTime           *string             `json:"createTime,omitempty"`
+	Description          *string             `json:"description,omitempty"`
+	Health               *NodeHealthEnum     `json:"health,omitempty"`
+	HealthDescription    *string             `json:"healthDescription,omitempty"`
+	IPAddress            *string             `json:"ipAddress,omitempty"`
+	Labels               map[string]string   `json:"labels,omitempty"`
+	Name                 *string             `json:"name,omitempty"`
+	Network              *string             `json:"network,omitempty"`
+	NetworkEndpoints     []NetworkEndpoint   `json:"networkEndpoints,omitempty"`
+	Port                 *string             `json:"port,omitempty"`
+	SchedulingConfig     *SchedulingConfig   `json:"schedulingConfig,omitempty"`
+	ServiceAccount       *string             `json:"serviceAccount,omitempty"`
+	State                *NodeStateEnum      `json:"state,omitempty"`
+	Symptoms             []Symptom           `json:"symptoms,omitempty"`
+	TensorflowVersion    *string             `json:"tensorflowVersion,omitempty"`
+	UseServiceNetworking *bool               `json:"useServiceNetworking,omitempty"`
 }

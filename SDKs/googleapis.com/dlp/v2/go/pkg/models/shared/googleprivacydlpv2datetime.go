@@ -14,8 +14,8 @@ const (
 )
 
 type GooglePrivacyDlpV2DateTime struct {
-	Date      *GoogleTypeDate                          `json:"date"`
-	DayOfWeek *GooglePrivacyDlpV2DateTimeDayOfWeekEnum `json:"dayOfWeek"`
-	Time      *GoogleTypeTimeOfDay                     `json:"time"`
-	TimeZone  *GooglePrivacyDlpV2TimeZone              `json:"timeZone"`
+	Date      *GoogleTypeDate                          `json:"date,omitempty"`
+	DayOfWeek *GooglePrivacyDlpV2DateTimeDayOfWeekEnum `json:"dayOfWeek,omitempty"`
+	Time      *GoogleTypeTimeOfDay                     `json:"time,omitempty"`
+	TimeZone  *GooglePrivacyDlpV2TimeZone              `json:"timeZone,omitempty"`
 }

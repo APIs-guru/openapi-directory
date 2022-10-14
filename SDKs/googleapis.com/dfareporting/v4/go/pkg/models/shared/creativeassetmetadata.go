@@ -103,15 +103,15 @@ const (
 )
 
 type CreativeAssetMetadata struct {
-	AssetIdentifier       *CreativeAssetID                                 `json:"assetIdentifier"`
-	ClickTags             []ClickTag                                       `json:"clickTags"`
-	CounterCustomEvents   []CreativeCustomEvent                            `json:"counterCustomEvents"`
-	DetectedFeatures      []CreativeAssetMetadataDetectedFeaturesEnum      `json:"detectedFeatures"`
-	ExitCustomEvents      []CreativeCustomEvent                            `json:"exitCustomEvents"`
-	ID                    *string                                          `json:"id"`
-	IDDimensionValue      *DimensionValue                                  `json:"idDimensionValue"`
-	Kind                  *string                                          `json:"kind"`
-	RichMedia             *bool                                            `json:"richMedia"`
-	TimerCustomEvents     []CreativeCustomEvent                            `json:"timerCustomEvents"`
-	WarnedValidationRules []CreativeAssetMetadataWarnedValidationRulesEnum `json:"warnedValidationRules"`
+	AssetIdentifier       *CreativeAssetID                                 `json:"assetIdentifier,omitempty"`
+	ClickTags             []ClickTag                                       `json:"clickTags,omitempty"`
+	CounterCustomEvents   []CreativeCustomEvent                            `json:"counterCustomEvents,omitempty"`
+	DetectedFeatures      []CreativeAssetMetadataDetectedFeaturesEnum      `json:"detectedFeatures,omitempty"`
+	ExitCustomEvents      []CreativeCustomEvent                            `json:"exitCustomEvents,omitempty"`
+	ID                    *string                                          `json:"id,omitempty"`
+	IDDimensionValue      *DimensionValue                                  `json:"idDimensionValue,omitempty"`
+	Kind                  *string                                          `json:"kind,omitempty"`
+	RichMedia             *bool                                            `json:"richMedia,omitempty"`
+	TimerCustomEvents     []CreativeCustomEvent                            `json:"timerCustomEvents,omitempty"`
+	WarnedValidationRules []CreativeAssetMetadataWarnedValidationRulesEnum `json:"warnedValidationRules,omitempty"`
 }

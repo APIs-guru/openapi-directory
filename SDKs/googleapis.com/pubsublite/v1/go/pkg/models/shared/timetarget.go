@@ -1,6 +1,6 @@
 package shared
 
 type TimeTarget struct {
-	EventTime   *string `json:"eventTime"`
-	PublishTime *string `json:"publishTime"`
+	EventTime   *string `json:"eventTime,omitempty"`
+	PublishTime *string `json:"publishTime,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type PaymentsProgramResponse struct {
-	MarketplaceID        *string `json:"marketplaceId"`
-	PaymentsProgramType  *string `json:"paymentsProgramType"`
-	Status               *string `json:"status"`
-	WasPreviouslyOptedIn *bool   `json:"wasPreviouslyOptedIn"`
+	MarketplaceID        *string `json:"marketplaceId,omitempty"`
+	PaymentsProgramType  *string `json:"paymentsProgramType,omitempty"`
+	Status               *string `json:"status,omitempty"`
+	WasPreviouslyOptedIn *bool   `json:"wasPreviouslyOptedIn,omitempty"`
 }

@@ -5,128 +5,128 @@ import (
 )
 
 type ChromeOsDeviceActiveTimeRanges struct {
-	ActiveTime *int32     `json:"activeTime"`
-	Date       *time.Time `json:"date"`
+	ActiveTime *int32     `json:"activeTime,omitempty"`
+	Date       *time.Time `json:"date,omitempty"`
 }
 
 type ChromeOsDeviceCPUInfoLogicalCpusCStates struct {
-	DisplayName     *string `json:"displayName"`
-	SessionDuration *string `json:"sessionDuration"`
+	DisplayName     *string `json:"displayName,omitempty"`
+	SessionDuration *string `json:"sessionDuration,omitempty"`
 }
 
 type ChromeOsDeviceCPUInfoLogicalCpus struct {
-	CStates                    []ChromeOsDeviceCPUInfoLogicalCpusCStates `json:"cStates"`
-	CurrentScalingFrequencyKhz *int32                                    `json:"currentScalingFrequencyKhz"`
-	IdleDuration               *string                                   `json:"idleDuration"`
-	MaxScalingFrequencyKhz     *int32                                    `json:"maxScalingFrequencyKhz"`
+	CStates                    []ChromeOsDeviceCPUInfoLogicalCpusCStates `json:"cStates,omitempty"`
+	CurrentScalingFrequencyKhz *int32                                    `json:"currentScalingFrequencyKhz,omitempty"`
+	IdleDuration               *string                                   `json:"idleDuration,omitempty"`
+	MaxScalingFrequencyKhz     *int32                                    `json:"maxScalingFrequencyKhz,omitempty"`
 }
 
 type ChromeOsDeviceCPUInfo struct {
-	Architecture     *string                            `json:"architecture"`
-	LogicalCpus      []ChromeOsDeviceCPUInfoLogicalCpus `json:"logicalCpus"`
-	MaxClockSpeedKhz *int32                             `json:"maxClockSpeedKhz"`
-	Model            *string                            `json:"model"`
+	Architecture     *string                            `json:"architecture,omitempty"`
+	LogicalCpus      []ChromeOsDeviceCPUInfoLogicalCpus `json:"logicalCpus,omitempty"`
+	MaxClockSpeedKhz *int32                             `json:"maxClockSpeedKhz,omitempty"`
+	Model            *string                            `json:"model,omitempty"`
 }
 
 type ChromeOsDeviceCPUStatusReportsCPUTemperatureInfo struct {
-	Label       *string `json:"label"`
-	Temperature *int32  `json:"temperature"`
+	Label       *string `json:"label,omitempty"`
+	Temperature *int32  `json:"temperature,omitempty"`
 }
 
 type ChromeOsDeviceCPUStatusReports struct {
-	CPUTemperatureInfo           []ChromeOsDeviceCPUStatusReportsCPUTemperatureInfo `json:"cpuTemperatureInfo"`
-	CPUUtilizationPercentageInfo []int32                                            `json:"cpuUtilizationPercentageInfo"`
-	ReportTime                   *time.Time                                         `json:"reportTime"`
+	CPUTemperatureInfo           []ChromeOsDeviceCPUStatusReportsCPUTemperatureInfo `json:"cpuTemperatureInfo,omitempty"`
+	CPUUtilizationPercentageInfo []int32                                            `json:"cpuUtilizationPercentageInfo,omitempty"`
+	ReportTime                   *time.Time                                         `json:"reportTime,omitempty"`
 }
 
 type ChromeOsDeviceDeviceFiles struct {
-	CreateTime  *time.Time `json:"createTime"`
-	DownloadURL *string    `json:"downloadUrl"`
-	Name        *string    `json:"name"`
-	Type        *string    `json:"type"`
+	CreateTime  *time.Time `json:"createTime,omitempty"`
+	DownloadURL *string    `json:"downloadUrl,omitempty"`
+	Name        *string    `json:"name,omitempty"`
+	Type        *string    `json:"type,omitempty"`
 }
 
 type ChromeOsDeviceDiskVolumeReportsVolumeInfo struct {
-	StorageFree  *string `json:"storageFree"`
-	StorageTotal *string `json:"storageTotal"`
-	VolumeID     *string `json:"volumeId"`
+	StorageFree  *string `json:"storageFree,omitempty"`
+	StorageTotal *string `json:"storageTotal,omitempty"`
+	VolumeID     *string `json:"volumeId,omitempty"`
 }
 
 type ChromeOsDeviceDiskVolumeReports struct {
-	VolumeInfo []ChromeOsDeviceDiskVolumeReportsVolumeInfo `json:"volumeInfo"`
+	VolumeInfo []ChromeOsDeviceDiskVolumeReportsVolumeInfo `json:"volumeInfo,omitempty"`
 }
 
 type ChromeOsDeviceLastKnownNetwork struct {
-	IPAddress    *string `json:"ipAddress"`
-	WanIPAddress *string `json:"wanIpAddress"`
+	IPAddress    *string `json:"ipAddress,omitempty"`
+	WanIPAddress *string `json:"wanIpAddress,omitempty"`
 }
 
 type ChromeOsDeviceRecentUsers struct {
-	Email *string `json:"email"`
-	Type  *string `json:"type"`
+	Email *string `json:"email,omitempty"`
+	Type  *string `json:"type,omitempty"`
 }
 
 type ChromeOsDeviceScreenshotFiles struct {
-	CreateTime  *time.Time `json:"createTime"`
-	DownloadURL *string    `json:"downloadUrl"`
-	Name        *string    `json:"name"`
-	Type        *string    `json:"type"`
+	CreateTime  *time.Time `json:"createTime,omitempty"`
+	DownloadURL *string    `json:"downloadUrl,omitempty"`
+	Name        *string    `json:"name,omitempty"`
+	Type        *string    `json:"type,omitempty"`
 }
 
 type ChromeOsDeviceSystemRAMFreeReports struct {
-	ReportTime        *time.Time `json:"reportTime"`
-	SystemRAMFreeInfo []string   `json:"systemRamFreeInfo"`
+	ReportTime        *time.Time `json:"reportTime,omitempty"`
+	SystemRAMFreeInfo []string   `json:"systemRamFreeInfo,omitempty"`
 }
 
 type ChromeOsDeviceTpmVersionInfo struct {
-	Family          *string `json:"family"`
-	FirmwareVersion *string `json:"firmwareVersion"`
-	Manufacturer    *string `json:"manufacturer"`
-	SpecLevel       *string `json:"specLevel"`
-	TpmModel        *string `json:"tpmModel"`
-	VendorSpecific  *string `json:"vendorSpecific"`
+	Family          *string `json:"family,omitempty"`
+	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
+	Manufacturer    *string `json:"manufacturer,omitempty"`
+	SpecLevel       *string `json:"specLevel,omitempty"`
+	TpmModel        *string `json:"tpmModel,omitempty"`
+	VendorSpecific  *string `json:"vendorSpecific,omitempty"`
 }
 
 type ChromeOsDevice struct {
-	ActiveTimeRanges     []ChromeOsDeviceActiveTimeRanges     `json:"activeTimeRanges"`
-	AnnotatedAssetID     *string                              `json:"annotatedAssetId"`
-	AnnotatedLocation    *string                              `json:"annotatedLocation"`
-	AnnotatedUser        *string                              `json:"annotatedUser"`
-	AutoUpdateExpiration *string                              `json:"autoUpdateExpiration"`
-	BootMode             *string                              `json:"bootMode"`
-	CPUInfo              []ChromeOsDeviceCPUInfo              `json:"cpuInfo"`
-	CPUStatusReports     []ChromeOsDeviceCPUStatusReports     `json:"cpuStatusReports"`
-	DeviceFiles          []ChromeOsDeviceDeviceFiles          `json:"deviceFiles"`
-	DeviceID             *string                              `json:"deviceId"`
-	DiskVolumeReports    []ChromeOsDeviceDiskVolumeReports    `json:"diskVolumeReports"`
-	DockMacAddress       *string                              `json:"dockMacAddress"`
-	Etag                 *string                              `json:"etag"`
-	EthernetMacAddress   *string                              `json:"ethernetMacAddress"`
-	EthernetMacAddress0  *string                              `json:"ethernetMacAddress0"`
-	FirmwareVersion      *string                              `json:"firmwareVersion"`
-	FirstEnrollmentTime  *string                              `json:"firstEnrollmentTime"`
-	Kind                 *string                              `json:"kind"`
-	LastEnrollmentTime   *time.Time                           `json:"lastEnrollmentTime"`
-	LastKnownNetwork     []ChromeOsDeviceLastKnownNetwork     `json:"lastKnownNetwork"`
-	LastSync             *time.Time                           `json:"lastSync"`
-	MacAddress           *string                              `json:"macAddress"`
-	ManufactureDate      *string                              `json:"manufactureDate"`
-	Meid                 *string                              `json:"meid"`
-	Model                *string                              `json:"model"`
-	Notes                *string                              `json:"notes"`
-	OrderNumber          *string                              `json:"orderNumber"`
-	OrgUnitID            *string                              `json:"orgUnitId"`
-	OrgUnitPath          *string                              `json:"orgUnitPath"`
-	OsUpdateStatus       *OsUpdateStatus                      `json:"osUpdateStatus"`
-	OsVersion            *string                              `json:"osVersion"`
-	PlatformVersion      *string                              `json:"platformVersion"`
-	RecentUsers          []ChromeOsDeviceRecentUsers          `json:"recentUsers"`
-	ScreenshotFiles      []ChromeOsDeviceScreenshotFiles      `json:"screenshotFiles"`
-	SerialNumber         *string                              `json:"serialNumber"`
-	Status               *string                              `json:"status"`
-	SupportEndDate       *time.Time                           `json:"supportEndDate"`
-	SystemRAMFreeReports []ChromeOsDeviceSystemRAMFreeReports `json:"systemRamFreeReports"`
-	SystemRAMTotal       *string                              `json:"systemRamTotal"`
-	TpmVersionInfo       *ChromeOsDeviceTpmVersionInfo        `json:"tpmVersionInfo"`
-	WillAutoRenew        *bool                                `json:"willAutoRenew"`
+	ActiveTimeRanges     []ChromeOsDeviceActiveTimeRanges     `json:"activeTimeRanges,omitempty"`
+	AnnotatedAssetID     *string                              `json:"annotatedAssetId,omitempty"`
+	AnnotatedLocation    *string                              `json:"annotatedLocation,omitempty"`
+	AnnotatedUser        *string                              `json:"annotatedUser,omitempty"`
+	AutoUpdateExpiration *string                              `json:"autoUpdateExpiration,omitempty"`
+	BootMode             *string                              `json:"bootMode,omitempty"`
+	CPUInfo              []ChromeOsDeviceCPUInfo              `json:"cpuInfo,omitempty"`
+	CPUStatusReports     []ChromeOsDeviceCPUStatusReports     `json:"cpuStatusReports,omitempty"`
+	DeviceFiles          []ChromeOsDeviceDeviceFiles          `json:"deviceFiles,omitempty"`
+	DeviceID             *string                              `json:"deviceId,omitempty"`
+	DiskVolumeReports    []ChromeOsDeviceDiskVolumeReports    `json:"diskVolumeReports,omitempty"`
+	DockMacAddress       *string                              `json:"dockMacAddress,omitempty"`
+	Etag                 *string                              `json:"etag,omitempty"`
+	EthernetMacAddress   *string                              `json:"ethernetMacAddress,omitempty"`
+	EthernetMacAddress0  *string                              `json:"ethernetMacAddress0,omitempty"`
+	FirmwareVersion      *string                              `json:"firmwareVersion,omitempty"`
+	FirstEnrollmentTime  *string                              `json:"firstEnrollmentTime,omitempty"`
+	Kind                 *string                              `json:"kind,omitempty"`
+	LastEnrollmentTime   *time.Time                           `json:"lastEnrollmentTime,omitempty"`
+	LastKnownNetwork     []ChromeOsDeviceLastKnownNetwork     `json:"lastKnownNetwork,omitempty"`
+	LastSync             *time.Time                           `json:"lastSync,omitempty"`
+	MacAddress           *string                              `json:"macAddress,omitempty"`
+	ManufactureDate      *string                              `json:"manufactureDate,omitempty"`
+	Meid                 *string                              `json:"meid,omitempty"`
+	Model                *string                              `json:"model,omitempty"`
+	Notes                *string                              `json:"notes,omitempty"`
+	OrderNumber          *string                              `json:"orderNumber,omitempty"`
+	OrgUnitID            *string                              `json:"orgUnitId,omitempty"`
+	OrgUnitPath          *string                              `json:"orgUnitPath,omitempty"`
+	OsUpdateStatus       *OsUpdateStatus                      `json:"osUpdateStatus,omitempty"`
+	OsVersion            *string                              `json:"osVersion,omitempty"`
+	PlatformVersion      *string                              `json:"platformVersion,omitempty"`
+	RecentUsers          []ChromeOsDeviceRecentUsers          `json:"recentUsers,omitempty"`
+	ScreenshotFiles      []ChromeOsDeviceScreenshotFiles      `json:"screenshotFiles,omitempty"`
+	SerialNumber         *string                              `json:"serialNumber,omitempty"`
+	Status               *string                              `json:"status,omitempty"`
+	SupportEndDate       *time.Time                           `json:"supportEndDate,omitempty"`
+	SystemRAMFreeReports []ChromeOsDeviceSystemRAMFreeReports `json:"systemRamFreeReports,omitempty"`
+	SystemRAMTotal       *string                              `json:"systemRamTotal,omitempty"`
+	TpmVersionInfo       *ChromeOsDeviceTpmVersionInfo        `json:"tpmVersionInfo,omitempty"`
+	WillAutoRenew        *bool                                `json:"willAutoRenew,omitempty"`
 }

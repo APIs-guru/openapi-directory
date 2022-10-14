@@ -17,6 +17,6 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1WafSettings struct {
-	WafFeature *GoogleCloudRecaptchaenterpriseV1WafSettingsWafFeatureEnum `json:"wafFeature"`
-	WafService *GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnum `json:"wafService"`
+	WafFeature *GoogleCloudRecaptchaenterpriseV1WafSettingsWafFeatureEnum `json:"wafFeature,omitempty"`
+	WafService *GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnum `json:"wafService,omitempty"`
 }

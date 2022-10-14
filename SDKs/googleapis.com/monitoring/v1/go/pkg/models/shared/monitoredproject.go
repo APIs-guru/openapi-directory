@@ -1,6 +1,6 @@
 package shared
 
 type MonitoredProject struct {
-	CreateTime *string `json:"createTime"`
-	Name       *string `json:"name"`
+	CreateTime *string `json:"createTime,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }

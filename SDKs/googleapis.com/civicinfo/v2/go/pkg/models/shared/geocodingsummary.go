@@ -376,9 +376,9 @@ const (
 )
 
 type GeocodingSummary struct {
-	AddressUnderstood       *bool                            `json:"addressUnderstood"`
-	FeatureID               *FeatureIDProto                  `json:"featureId"`
-	FeatureType             *GeocodingSummaryFeatureTypeEnum `json:"featureType"`
-	PositionPrecisionMeters *float64                         `json:"positionPrecisionMeters"`
-	QueryString             *string                          `json:"queryString"`
+	AddressUnderstood       *bool                            `json:"addressUnderstood,omitempty"`
+	FeatureID               *FeatureIDProto                  `json:"featureId,omitempty"`
+	FeatureType             *GeocodingSummaryFeatureTypeEnum `json:"featureType,omitempty"`
+	PositionPrecisionMeters *float64                         `json:"positionPrecisionMeters,omitempty"`
+	QueryString             *string                          `json:"queryString,omitempty"`
 }

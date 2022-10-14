@@ -5,35 +5,35 @@ import (
 )
 
 type CreateDropletRequestBody1 struct {
-	Backups           *bool         `json:"backups"`
+	Backups           *bool         `json:"backups,omitempty"`
 	Image             interface{}   `json:"image"`
-	Ipv6              *bool         `json:"ipv6"`
-	Monitoring        *bool         `json:"monitoring"`
+	Ipv6              *bool         `json:"ipv6,omitempty"`
+	Monitoring        *bool         `json:"monitoring,omitempty"`
 	Name              string        `json:"name"`
-	PrivateNetworking *bool         `json:"private_networking"`
+	PrivateNetworking *bool         `json:"private_networking,omitempty"`
 	Region            string        `json:"region"`
 	Size              string        `json:"size"`
-	SSHKeys           []interface{} `json:"ssh_keys"`
-	Tags              []string      `json:"tags"`
-	UserData          *string       `json:"user_data"`
-	VpcUUID           *string       `json:"vpc_uuid"`
-	WithDropletAgent  *bool         `json:"with_droplet_agent"`
+	SSHKeys           []interface{} `json:"ssh_keys,omitempty"`
+	Tags              []string      `json:"tags,omitempty"`
+	UserData          *string       `json:"user_data,omitempty"`
+	VpcUUID           *string       `json:"vpc_uuid,omitempty"`
+	WithDropletAgent  *bool         `json:"with_droplet_agent,omitempty"`
 }
 
 type CreateDropletRequestBody2 struct {
-	Backups           *bool         `json:"backups"`
+	Backups           *bool         `json:"backups,omitempty"`
 	Image             interface{}   `json:"image"`
-	Ipv6              *bool         `json:"ipv6"`
-	Monitoring        *bool         `json:"monitoring"`
+	Ipv6              *bool         `json:"ipv6,omitempty"`
+	Monitoring        *bool         `json:"monitoring,omitempty"`
 	Names             []string      `json:"names"`
-	PrivateNetworking *bool         `json:"private_networking"`
+	PrivateNetworking *bool         `json:"private_networking,omitempty"`
 	Region            string        `json:"region"`
 	Size              string        `json:"size"`
-	SSHKeys           []interface{} `json:"ssh_keys"`
-	Tags              []string      `json:"tags"`
-	UserData          *string       `json:"user_data"`
-	VpcUUID           *string       `json:"vpc_uuid"`
-	WithDropletAgent  *bool         `json:"with_droplet_agent"`
+	SSHKeys           []interface{} `json:"ssh_keys,omitempty"`
+	Tags              []string      `json:"tags,omitempty"`
+	UserData          *string       `json:"user_data,omitempty"`
+	VpcUUID           *string       `json:"vpc_uuid,omitempty"`
+	WithDropletAgent  *bool         `json:"with_droplet_agent,omitempty"`
 }
 
 type CreateDropletRequest struct {
@@ -43,7 +43,7 @@ type CreateDropletRequest struct {
 type CreateDroplet401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateDropletResponse struct {

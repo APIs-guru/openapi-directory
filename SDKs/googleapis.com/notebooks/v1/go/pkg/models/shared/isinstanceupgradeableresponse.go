@@ -1,8 +1,8 @@
 package shared
 
 type IsInstanceUpgradeableResponse struct {
-	UpgradeImage   *string `json:"upgradeImage"`
-	UpgradeInfo    *string `json:"upgradeInfo"`
-	UpgradeVersion *string `json:"upgradeVersion"`
-	Upgradeable    *bool   `json:"upgradeable"`
+	UpgradeImage   *string `json:"upgradeImage,omitempty"`
+	UpgradeInfo    *string `json:"upgradeInfo,omitempty"`
+	UpgradeVersion *string `json:"upgradeVersion,omitempty"`
+	Upgradeable    *bool   `json:"upgradeable,omitempty"`
 }

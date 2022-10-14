@@ -10,7 +10,7 @@ type ReposCreateDispatchEventPathParams struct {
 }
 
 type ReposCreateDispatchEventRequestBody struct {
-	ClientPayload map[string]interface{} `json:"client_payload"`
+	ClientPayload map[string]interface{} `json:"client_payload,omitempty"`
 	EventType     string                 `json:"event_type"`
 }
 

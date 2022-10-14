@@ -1,6 +1,6 @@
 package shared
 
 type ListCodeReviewsResponse struct {
-	CodeReviewSummaries []CodeReviewSummary `json:"CodeReviewSummaries"`
-	NextToken           *string             `json:"NextToken"`
+	CodeReviewSummaries []CodeReviewSummary `json:"CodeReviewSummaries,omitempty"`
+	NextToken           *string             `json:"NextToken,omitempty"`
 }

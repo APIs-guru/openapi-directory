@@ -9,6 +9,6 @@ const (
 )
 
 type DimensionFilterClause struct {
-	Filters  []DimensionFilter                  `json:"filters"`
-	Operator *DimensionFilterClauseOperatorEnum `json:"operator"`
+	Filters  []DimensionFilter                  `json:"filters,omitempty"`
+	Operator *DimensionFilterClauseOperatorEnum `json:"operator,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CloudWatchLogsDestination struct {
-	IamRoleArn  *string `json:"IamRoleArn"`
-	LogGroupArn *string `json:"LogGroupArn"`
+	IamRoleArn  *string `json:"IamRoleArn,omitempty"`
+	LogGroupArn *string `json:"LogGroupArn,omitempty"`
 }

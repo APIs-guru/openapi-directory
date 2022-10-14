@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1Version struct {
-	CreateTime    *string                                        `json:"createTime"`
-	Description   *string                                        `json:"description"`
-	Name          *string                                        `json:"name"`
-	Status        *GoogleCloudDialogflowV2beta1VersionStatusEnum `json:"status"`
-	VersionNumber *int32                                         `json:"versionNumber"`
+	CreateTime    *string                                        `json:"createTime,omitempty"`
+	Description   *string                                        `json:"description,omitempty"`
+	Name          *string                                        `json:"name,omitempty"`
+	Status        *GoogleCloudDialogflowV2beta1VersionStatusEnum `json:"status,omitempty"`
+	VersionNumber *int32                                         `json:"versionNumber,omitempty"`
 }

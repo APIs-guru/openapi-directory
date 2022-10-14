@@ -5,15 +5,15 @@ import (
 )
 
 type InstanceRecommendation struct {
-	AccountID             *string                                       `json:"accountId"`
-	CurrentInstanceType   *string                                       `json:"currentInstanceType"`
-	Finding               *FindingEnum                                  `json:"finding"`
-	FindingReasonCodes    []InstanceRecommendationFindingReasonCodeEnum `json:"findingReasonCodes"`
-	InstanceArn           *string                                       `json:"instanceArn"`
-	InstanceName          *string                                       `json:"instanceName"`
-	LastRefreshTimestamp  *time.Time                                    `json:"lastRefreshTimestamp"`
-	LookBackPeriodInDays  *float64                                      `json:"lookBackPeriodInDays"`
-	RecommendationOptions []InstanceRecommendationOption                `json:"recommendationOptions"`
-	RecommendationSources []RecommendationSource                        `json:"recommendationSources"`
-	UtilizationMetrics    []UtilizationMetric                           `json:"utilizationMetrics"`
+	AccountID             *string                                       `json:"accountId,omitempty"`
+	CurrentInstanceType   *string                                       `json:"currentInstanceType,omitempty"`
+	Finding               *FindingEnum                                  `json:"finding,omitempty"`
+	FindingReasonCodes    []InstanceRecommendationFindingReasonCodeEnum `json:"findingReasonCodes,omitempty"`
+	InstanceArn           *string                                       `json:"instanceArn,omitempty"`
+	InstanceName          *string                                       `json:"instanceName,omitempty"`
+	LastRefreshTimestamp  *time.Time                                    `json:"lastRefreshTimestamp,omitempty"`
+	LookBackPeriodInDays  *float64                                      `json:"lookBackPeriodInDays,omitempty"`
+	RecommendationOptions []InstanceRecommendationOption                `json:"recommendationOptions,omitempty"`
+	RecommendationSources []RecommendationSource                        `json:"recommendationSources,omitempty"`
+	UtilizationMetrics    []UtilizationMetric                           `json:"utilizationMetrics,omitempty"`
 }

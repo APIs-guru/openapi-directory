@@ -1,10 +1,10 @@
 package shared
 
 type InfoTypeTransformation struct {
-	CharacterMaskConfig       *CharacterMaskConfig   `json:"characterMaskConfig"`
-	CryptoHashConfig          *CryptoHashConfig      `json:"cryptoHashConfig"`
-	DateShiftConfig           *DateShiftConfig       `json:"dateShiftConfig"`
-	InfoTypes                 []string               `json:"infoTypes"`
-	RedactConfig              map[string]interface{} `json:"redactConfig"`
-	ReplaceWithInfoTypeConfig map[string]interface{} `json:"replaceWithInfoTypeConfig"`
+	CharacterMaskConfig       *CharacterMaskConfig   `json:"characterMaskConfig,omitempty"`
+	CryptoHashConfig          *CryptoHashConfig      `json:"cryptoHashConfig,omitempty"`
+	DateShiftConfig           *DateShiftConfig       `json:"dateShiftConfig,omitempty"`
+	InfoTypes                 []string               `json:"infoTypes,omitempty"`
+	RedactConfig              map[string]interface{} `json:"redactConfig,omitempty"`
+	ReplaceWithInfoTypeConfig map[string]interface{} `json:"replaceWithInfoTypeConfig,omitempty"`
 }

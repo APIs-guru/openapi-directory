@@ -181,16 +181,16 @@ type PowerOutletTypeType struct {
 }
 
 type PowerOutlet struct {
-	Cable                 *NestedCable                                 `json:"cable"`
-	ConnectedEndpoint     map[string]string                            `json:"connected_endpoint"`
-	ConnectedEndpointType *string                                      `json:"connected_endpoint_type"`
-	ConnectionStatus      *PowerOutletConnectionStatusConnectionStatus `json:"connection_status"`
-	Description           *string                                      `json:"description"`
+	Cable                 *NestedCable                                 `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                            `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                                      `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *PowerOutletConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
+	Description           *string                                      `json:"description,omitempty"`
 	Device                NestedDevice                                 `json:"device"`
-	FeedLeg               *PowerOutletFeedLegFeedLeg                   `json:"feed_leg"`
-	ID                    *int64                                       `json:"id"`
+	FeedLeg               *PowerOutletFeedLegFeedLeg                   `json:"feed_leg,omitempty"`
+	ID                    *int64                                       `json:"id,omitempty"`
 	Name                  string                                       `json:"name"`
-	PowerPort             *NestedPowerPort                             `json:"power_port"`
-	Tags                  []string                                     `json:"tags"`
-	Type                  *PowerOutletTypeType                         `json:"type"`
+	PowerPort             *NestedPowerPort                             `json:"power_port,omitempty"`
+	Tags                  []string                                     `json:"tags,omitempty"`
+	Type                  *PowerOutletTypeType                         `json:"type,omitempty"`
 }

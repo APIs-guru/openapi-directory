@@ -1,11 +1,11 @@
 package shared
 
 type ContactUpdateModel struct {
-	BusinessPhone      *string `json:"businessPhone"`
-	BusinessPhoneExt   *string `json:"businessPhoneExt"`
-	ConferenceInfo     *string `json:"conferenceInfo"`
-	HomePhone          *string `json:"homePhone"`
-	MobilePhone        *string `json:"mobilePhone"`
-	PreferredPhoneType *string `json:"preferredPhoneType"`
-	SkypeUsername      *string `json:"skypeUsername"`
+	BusinessPhone      *string `json:"businessPhone,omitempty"`
+	BusinessPhoneExt   *string `json:"businessPhoneExt,omitempty"`
+	ConferenceInfo     *string `json:"conferenceInfo,omitempty"`
+	HomePhone          *string `json:"homePhone,omitempty"`
+	MobilePhone        *string `json:"mobilePhone,omitempty"`
+	PreferredPhoneType *string `json:"preferredPhoneType,omitempty"`
+	SkypeUsername      *string `json:"skypeUsername,omitempty"`
 }

@@ -43,17 +43,17 @@ const (
 )
 
 type WritableCable struct {
-	Color            *string                                `json:"color"`
-	ID               *int64                                 `json:"id"`
-	Label            *string                                `json:"label"`
-	Length           *int64                                 `json:"length"`
-	LengthUnit       *WritableCableLengthUnitLengthUnitEnum `json:"length_unit"`
-	Status           *WritableCableStatusStatusEnum         `json:"status"`
-	TerminationA     map[string]string                      `json:"termination_a"`
+	Color            *string                                `json:"color,omitempty"`
+	ID               *int64                                 `json:"id,omitempty"`
+	Label            *string                                `json:"label,omitempty"`
+	Length           *int64                                 `json:"length,omitempty"`
+	LengthUnit       *WritableCableLengthUnitLengthUnitEnum `json:"length_unit,omitempty"`
+	Status           *WritableCableStatusStatusEnum         `json:"status,omitempty"`
+	TerminationA     map[string]string                      `json:"termination_a,omitempty"`
 	TerminationAID   int64                                  `json:"termination_a_id"`
 	TerminationAType string                                 `json:"termination_a_type"`
-	TerminationB     map[string]string                      `json:"termination_b"`
+	TerminationB     map[string]string                      `json:"termination_b,omitempty"`
 	TerminationBID   int64                                  `json:"termination_b_id"`
 	TerminationBType string                                 `json:"termination_b_type"`
-	Type             *WritableCableTypeTypeEnum             `json:"type"`
+	Type             *WritableCableTypeTypeEnum             `json:"type,omitempty"`
 }

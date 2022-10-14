@@ -1,7 +1,7 @@
 package shared
 
 type CloudWatchLoggingOptions struct {
-	Enabled       *bool   `json:"Enabled"`
-	LogGroupName  *string `json:"LogGroupName"`
-	LogStreamName *string `json:"LogStreamName"`
+	Enabled       *bool   `json:"Enabled,omitempty"`
+	LogGroupName  *string `json:"LogGroupName,omitempty"`
+	LogStreamName *string `json:"LogStreamName,omitempty"`
 }

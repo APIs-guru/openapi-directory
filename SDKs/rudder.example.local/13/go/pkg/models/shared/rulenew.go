@@ -1,19 +1,19 @@
 package shared
 
 type RuleNewTags struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type RuleNew struct {
-	Category         *string       `json:"category"`
-	Directives       []string      `json:"directives"`
-	DisplayName      *string       `json:"displayName"`
-	Enabled          *bool         `json:"enabled"`
-	ID               *string       `json:"id"`
-	LongDescription  *string       `json:"longDescription"`
-	ShortDescription *string       `json:"shortDescription"`
-	Source           *string       `json:"source"`
-	System           *bool         `json:"system"`
-	Tags             []RuleNewTags `json:"tags"`
-	Targets          []string      `json:"targets"`
+	Category         *string       `json:"category,omitempty"`
+	Directives       []string      `json:"directives,omitempty"`
+	DisplayName      *string       `json:"displayName,omitempty"`
+	Enabled          *bool         `json:"enabled,omitempty"`
+	ID               *string       `json:"id,omitempty"`
+	LongDescription  *string       `json:"longDescription,omitempty"`
+	ShortDescription *string       `json:"shortDescription,omitempty"`
+	Source           *string       `json:"source,omitempty"`
+	System           *bool         `json:"system,omitempty"`
+	Tags             []RuleNewTags `json:"tags,omitempty"`
+	Targets          []string      `json:"targets,omitempty"`
 }

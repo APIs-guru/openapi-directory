@@ -1,6 +1,6 @@
 package shared
 
 type GetAccountInfoResponse struct {
-	Kind  *string    `json:"kind"`
-	Users []UserInfo `json:"users"`
+	Kind  *string    `json:"kind,omitempty"`
+	Users []UserInfo `json:"users,omitempty"`
 }

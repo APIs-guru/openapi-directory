@@ -51,8 +51,8 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4ThreatInfo struct {
-	PlatformTypes    []GoogleSecuritySafebrowsingV4ThreatInfoPlatformTypesEnum    `json:"platformTypes"`
-	ThreatEntries    []GoogleSecuritySafebrowsingV4ThreatEntry                    `json:"threatEntries"`
-	ThreatEntryTypes []GoogleSecuritySafebrowsingV4ThreatInfoThreatEntryTypesEnum `json:"threatEntryTypes"`
-	ThreatTypes      []GoogleSecuritySafebrowsingV4ThreatInfoThreatTypesEnum      `json:"threatTypes"`
+	PlatformTypes    []GoogleSecuritySafebrowsingV4ThreatInfoPlatformTypesEnum    `json:"platformTypes,omitempty"`
+	ThreatEntries    []GoogleSecuritySafebrowsingV4ThreatEntry                    `json:"threatEntries,omitempty"`
+	ThreatEntryTypes []GoogleSecuritySafebrowsingV4ThreatInfoThreatEntryTypesEnum `json:"threatEntryTypes,omitempty"`
+	ThreatTypes      []GoogleSecuritySafebrowsingV4ThreatInfoThreatTypesEnum      `json:"threatTypes,omitempty"`
 }

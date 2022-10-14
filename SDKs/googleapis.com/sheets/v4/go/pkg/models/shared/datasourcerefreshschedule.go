@@ -8,10 +8,10 @@ const (
 )
 
 type DataSourceRefreshSchedule struct {
-	DailySchedule   *DataSourceRefreshDailySchedule            `json:"dailySchedule"`
-	Enabled         *bool                                      `json:"enabled"`
-	MonthlySchedule *DataSourceRefreshMonthlySchedule          `json:"monthlySchedule"`
-	NextRun         *Interval                                  `json:"nextRun"`
-	RefreshScope    *DataSourceRefreshScheduleRefreshScopeEnum `json:"refreshScope"`
-	WeeklySchedule  *DataSourceRefreshWeeklySchedule           `json:"weeklySchedule"`
+	DailySchedule   *DataSourceRefreshDailySchedule            `json:"dailySchedule,omitempty"`
+	Enabled         *bool                                      `json:"enabled,omitempty"`
+	MonthlySchedule *DataSourceRefreshMonthlySchedule          `json:"monthlySchedule,omitempty"`
+	NextRun         *Interval                                  `json:"nextRun,omitempty"`
+	RefreshScope    *DataSourceRefreshScheduleRefreshScopeEnum `json:"refreshScope,omitempty"`
+	WeeklySchedule  *DataSourceRefreshWeeklySchedule           `json:"weeklySchedule,omitempty"`
 }

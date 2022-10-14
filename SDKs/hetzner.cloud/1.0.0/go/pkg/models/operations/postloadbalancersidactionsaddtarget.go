@@ -25,11 +25,11 @@ const (
 )
 
 type PostLoadBalancersIDActionsAddTargetRequestBodyAddTargetRequest struct {
-	IP            *PostLoadBalancersIDActionsAddTargetRequestBodyIP            `json:"ip"`
-	LabelSelector *PostLoadBalancersIDActionsAddTargetRequestBodyLabelSelector `json:"label_selector"`
-	Server        *PostLoadBalancersIDActionsAddTargetRequestBodyServer        `json:"server"`
+	IP            *PostLoadBalancersIDActionsAddTargetRequestBodyIP            `json:"ip,omitempty"`
+	LabelSelector *PostLoadBalancersIDActionsAddTargetRequestBodyLabelSelector `json:"label_selector,omitempty"`
+	Server        *PostLoadBalancersIDActionsAddTargetRequestBodyServer        `json:"server,omitempty"`
 	Type          PostLoadBalancersIDActionsAddTargetRequestBodyTypeEnum       `json:"type"`
-	UsePrivateIP  *bool                                                        `json:"use_private_ip"`
+	UsePrivateIP  *bool                                                        `json:"use_private_ip,omitempty"`
 }
 
 type PostLoadBalancersIDActionsAddTargetRequest struct {

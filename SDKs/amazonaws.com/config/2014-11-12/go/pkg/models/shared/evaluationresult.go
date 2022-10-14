@@ -5,10 +5,10 @@ import (
 )
 
 type EvaluationResult struct {
-	Annotation                 *string                     `json:"Annotation"`
-	ComplianceType             *ComplianceTypeEnum         `json:"ComplianceType"`
-	ConfigRuleInvokedTime      *time.Time                  `json:"ConfigRuleInvokedTime"`
-	EvaluationResultIdentifier *EvaluationResultIdentifier `json:"EvaluationResultIdentifier"`
-	ResultRecordedTime         *time.Time                  `json:"ResultRecordedTime"`
-	ResultToken                *string                     `json:"ResultToken"`
+	Annotation                 *string                     `json:"Annotation,omitempty"`
+	ComplianceType             *ComplianceTypeEnum         `json:"ComplianceType,omitempty"`
+	ConfigRuleInvokedTime      *time.Time                  `json:"ConfigRuleInvokedTime,omitempty"`
+	EvaluationResultIdentifier *EvaluationResultIdentifier `json:"EvaluationResultIdentifier,omitempty"`
+	ResultRecordedTime         *time.Time                  `json:"ResultRecordedTime,omitempty"`
+	ResultToken                *string                     `json:"ResultToken,omitempty"`
 }

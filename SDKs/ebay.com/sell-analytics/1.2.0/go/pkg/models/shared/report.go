@@ -1,11 +1,11 @@
 package shared
 
 type Report struct {
-	DimensionMetadata []Metadata `json:"dimensionMetadata"`
-	EndDate           *string    `json:"endDate"`
-	Header            *Header    `json:"header"`
-	LastUpdatedDate   *string    `json:"lastUpdatedDate"`
-	Records           []Record   `json:"records"`
-	StartDate         *string    `json:"startDate"`
-	Warnings          []Error    `json:"warnings"`
+	DimensionMetadata []Metadata `json:"dimensionMetadata,omitempty"`
+	EndDate           *string    `json:"endDate,omitempty"`
+	Header            *Header    `json:"header,omitempty"`
+	LastUpdatedDate   *string    `json:"lastUpdatedDate,omitempty"`
+	Records           []Record   `json:"records,omitempty"`
+	StartDate         *string    `json:"startDate,omitempty"`
+	Warnings          []Error    `json:"warnings,omitempty"`
 }

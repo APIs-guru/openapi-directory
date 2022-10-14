@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1ImageClassificationConfig struct {
-	AllowMultiLabel       *bool                                                                             `json:"allowMultiLabel"`
-	AnnotationSpecSet     *string                                                                           `json:"annotationSpecSet"`
-	AnswerAggregationType *GoogleCloudDatalabelingV1beta1ImageClassificationConfigAnswerAggregationTypeEnum `json:"answerAggregationType"`
+	AllowMultiLabel       *bool                                                                             `json:"allowMultiLabel,omitempty"`
+	AnnotationSpecSet     *string                                                                           `json:"annotationSpecSet,omitempty"`
+	AnswerAggregationType *GoogleCloudDatalabelingV1beta1ImageClassificationConfigAnswerAggregationTypeEnum `json:"answerAggregationType,omitempty"`
 }

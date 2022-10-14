@@ -1,9 +1,9 @@
 package shared
 
 type IosXcTest struct {
-	AppBundleID             *string        `json:"appBundleId"`
-	TestSpecialEntitlements *bool          `json:"testSpecialEntitlements"`
-	TestsZip                *FileReference `json:"testsZip"`
-	XcodeVersion            *string        `json:"xcodeVersion"`
-	Xctestrun               *FileReference `json:"xctestrun"`
+	AppBundleID             *string        `json:"appBundleId,omitempty"`
+	TestSpecialEntitlements *bool          `json:"testSpecialEntitlements,omitempty"`
+	TestsZip                *FileReference `json:"testsZip,omitempty"`
+	XcodeVersion            *string        `json:"xcodeVersion,omitempty"`
+	Xctestrun               *FileReference `json:"xctestrun,omitempty"`
 }

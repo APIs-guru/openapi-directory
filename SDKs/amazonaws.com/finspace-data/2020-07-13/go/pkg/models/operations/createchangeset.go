@@ -43,11 +43,11 @@ const (
 
 type CreateChangesetRequestBody struct {
 	ChangeType   CreateChangesetRequestBodyChangeTypeEnum  `json:"changeType"`
-	FormatParams map[string]string                         `json:"formatParams"`
-	FormatType   *CreateChangesetRequestBodyFormatTypeEnum `json:"formatType"`
+	FormatParams map[string]string                         `json:"formatParams,omitempty"`
+	FormatType   *CreateChangesetRequestBodyFormatTypeEnum `json:"formatType,omitempty"`
 	SourceParams map[string]string                         `json:"sourceParams"`
 	SourceType   CreateChangesetRequestBodySourceTypeEnum  `json:"sourceType"`
-	Tags         map[string]string                         `json:"tags"`
+	Tags         map[string]string                         `json:"tags,omitempty"`
 }
 
 type CreateChangesetRequest struct {

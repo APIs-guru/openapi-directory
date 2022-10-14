@@ -1,8 +1,8 @@
 package shared
 
 type PreReceiveEnvironmentDownloadStatus struct {
-	DownloadedAt *string `json:"downloaded_at"`
-	Message      *string `json:"message"`
-	State        *string `json:"state"`
-	URL          *string `json:"url"`
+	DownloadedAt *string `json:"downloaded_at,omitempty"`
+	Message      *string `json:"message,omitempty"`
+	State        *string `json:"state,omitempty"`
+	URL          *string `json:"url,omitempty"`
 }

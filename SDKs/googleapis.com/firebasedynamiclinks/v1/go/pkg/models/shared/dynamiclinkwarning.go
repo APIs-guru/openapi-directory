@@ -35,7 +35,7 @@ const (
 )
 
 type DynamicLinkWarning struct {
-	WarningCode         *DynamicLinkWarningWarningCodeEnum `json:"warningCode"`
-	WarningDocumentLink *string                            `json:"warningDocumentLink"`
-	WarningMessage      *string                            `json:"warningMessage"`
+	WarningCode         *DynamicLinkWarningWarningCodeEnum `json:"warningCode,omitempty"`
+	WarningDocumentLink *string                            `json:"warningDocumentLink,omitempty"`
+	WarningMessage      *string                            `json:"warningMessage,omitempty"`
 }

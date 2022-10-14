@@ -1,6 +1,6 @@
 package shared
 
 type MigrateWorkspaceResult struct {
-	SourceWorkspaceID *string `json:"SourceWorkspaceId"`
-	TargetWorkspaceID *string `json:"TargetWorkspaceId"`
+	SourceWorkspaceID *string `json:"SourceWorkspaceId,omitempty"`
+	TargetWorkspaceID *string `json:"TargetWorkspaceId,omitempty"`
 }

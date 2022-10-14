@@ -10,9 +10,9 @@ const (
 )
 
 type OsPolicyResourceExecResourceExec struct {
-	Args           []string                                         `json:"args"`
-	File           *OsPolicyResourceFile                            `json:"file"`
-	Interpreter    *OsPolicyResourceExecResourceExecInterpreterEnum `json:"interpreter"`
-	OutputFilePath *string                                          `json:"outputFilePath"`
-	Script         *string                                          `json:"script"`
+	Args           []string                                         `json:"args,omitempty"`
+	File           *OsPolicyResourceFile                            `json:"file,omitempty"`
+	Interpreter    *OsPolicyResourceExecResourceExecInterpreterEnum `json:"interpreter,omitempty"`
+	OutputFilePath *string                                          `json:"outputFilePath,omitempty"`
+	Script         *string                                          `json:"script,omitempty"`
 }

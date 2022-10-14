@@ -16,7 +16,7 @@ type SendMessageHeaders struct {
 }
 
 type SendMessageRequestBody struct {
-	ClientToken *string `json:"ClientToken"`
+	ClientToken *string `json:"ClientToken,omitempty"`
 	Content     string  `json:"Content"`
 	ContentType string  `json:"ContentType"`
 }

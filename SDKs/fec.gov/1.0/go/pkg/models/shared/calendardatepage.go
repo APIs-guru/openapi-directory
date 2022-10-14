@@ -1,6 +1,6 @@
 package shared
 
 type CalendarDatePage struct {
-	Pagination *OffsetInfo    `json:"pagination"`
-	Results    []CalendarDate `json:"results"`
+	Pagination *OffsetInfo    `json:"pagination,omitempty"`
+	Results    []CalendarDate `json:"results,omitempty"`
 }

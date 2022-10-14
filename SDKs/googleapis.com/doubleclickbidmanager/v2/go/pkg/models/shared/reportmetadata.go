@@ -1,8 +1,8 @@
 package shared
 
 type ReportMetadata struct {
-	GoogleCloudStoragePath *string       `json:"googleCloudStoragePath"`
-	ReportDataEndDate      *Date         `json:"reportDataEndDate"`
-	ReportDataStartDate    *Date         `json:"reportDataStartDate"`
-	Status                 *ReportStatus `json:"status"`
+	GoogleCloudStoragePath *string       `json:"googleCloudStoragePath,omitempty"`
+	ReportDataEndDate      *Date         `json:"reportDataEndDate,omitempty"`
+	ReportDataStartDate    *Date         `json:"reportDataStartDate,omitempty"`
+	Status                 *ReportStatus `json:"status,omitempty"`
 }

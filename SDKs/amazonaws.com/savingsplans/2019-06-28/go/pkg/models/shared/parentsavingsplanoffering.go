@@ -1,10 +1,10 @@
 package shared
 
 type ParentSavingsPlanOffering struct {
-	Currency        *CurrencyCodeEnum             `json:"currency"`
-	DurationSeconds *int64                        `json:"durationSeconds"`
-	OfferingID      *string                       `json:"offeringId"`
-	PaymentOption   *SavingsPlanPaymentOptionEnum `json:"paymentOption"`
-	PlanDescription *string                       `json:"planDescription"`
-	PlanType        *SavingsPlanTypeEnum          `json:"planType"`
+	Currency        *CurrencyCodeEnum             `json:"currency,omitempty"`
+	DurationSeconds *int64                        `json:"durationSeconds,omitempty"`
+	OfferingID      *string                       `json:"offeringId,omitempty"`
+	PaymentOption   *SavingsPlanPaymentOptionEnum `json:"paymentOption,omitempty"`
+	PlanDescription *string                       `json:"planDescription,omitempty"`
+	PlanType        *SavingsPlanTypeEnum          `json:"planType,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListenerTLSValidationContextTrust struct {
-	File *TLSValidationContextFileTrust `json:"file"`
-	Sds  *TLSValidationContextSdsTrust  `json:"sds"`
+	File *TLSValidationContextFileTrust `json:"file,omitempty"`
+	Sds  *TLSValidationContextSdsTrust  `json:"sds,omitempty"`
 }

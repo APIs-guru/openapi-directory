@@ -1,9 +1,9 @@
 package shared
 
 type PartitionQueryRequest struct {
-	PageSize        *int32           `json:"pageSize"`
-	PageToken       *string          `json:"pageToken"`
-	PartitionCount  *string          `json:"partitionCount"`
-	ReadTime        *string          `json:"readTime"`
-	StructuredQuery *StructuredQuery `json:"structuredQuery"`
+	PageSize        *int32           `json:"pageSize,omitempty"`
+	PageToken       *string          `json:"pageToken,omitempty"`
+	PartitionCount  *string          `json:"partitionCount,omitempty"`
+	ReadTime        *string          `json:"readTime,omitempty"`
+	StructuredQuery *StructuredQuery `json:"structuredQuery,omitempty"`
 }

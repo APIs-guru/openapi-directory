@@ -29,7 +29,7 @@ const (
 type ProcessorTokenCreateRequest struct {
 	AccessToken string                                   `json:"access_token"`
 	AccountID   string                                   `json:"account_id"`
-	ClientID    *string                                  `json:"client_id"`
+	ClientID    *string                                  `json:"client_id,omitempty"`
 	Processor   ProcessorTokenCreateRequestProcessorEnum `json:"processor"`
-	Secret      *string                                  `json:"secret"`
+	Secret      *string                                  `json:"secret,omitempty"`
 }

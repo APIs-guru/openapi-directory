@@ -1,10 +1,10 @@
 package shared
 
 type Connection struct {
-	EndpointArn                   *string `json:"EndpointArn"`
-	EndpointIdentifier            *string `json:"EndpointIdentifier"`
-	LastFailureMessage            *string `json:"LastFailureMessage"`
-	ReplicationInstanceArn        *string `json:"ReplicationInstanceArn"`
-	ReplicationInstanceIdentifier *string `json:"ReplicationInstanceIdentifier"`
-	Status                        *string `json:"Status"`
+	EndpointArn                   *string `json:"EndpointArn,omitempty"`
+	EndpointIdentifier            *string `json:"EndpointIdentifier,omitempty"`
+	LastFailureMessage            *string `json:"LastFailureMessage,omitempty"`
+	ReplicationInstanceArn        *string `json:"ReplicationInstanceArn,omitempty"`
+	ReplicationInstanceIdentifier *string `json:"ReplicationInstanceIdentifier,omitempty"`
+	Status                        *string `json:"Status,omitempty"`
 }

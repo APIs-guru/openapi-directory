@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetTriggersResponse struct {
-	Triggers         []Trigger `json:"Triggers"`
-	TriggersNotFound []string  `json:"TriggersNotFound"`
+	Triggers         []Trigger `json:"Triggers,omitempty"`
+	TriggersNotFound []string  `json:"TriggersNotFound,omitempty"`
 }

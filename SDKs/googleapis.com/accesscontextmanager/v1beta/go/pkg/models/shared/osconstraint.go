@@ -13,7 +13,7 @@ const (
 )
 
 type OsConstraint struct {
-	MinimumVersion          *string                 `json:"minimumVersion"`
-	OsType                  *OsConstraintOsTypeEnum `json:"osType"`
-	RequireVerifiedChromeOs *bool                   `json:"requireVerifiedChromeOs"`
+	MinimumVersion          *string                 `json:"minimumVersion,omitempty"`
+	OsType                  *OsConstraintOsTypeEnum `json:"osType,omitempty"`
+	RequireVerifiedChromeOs *bool                   `json:"requireVerifiedChromeOs,omitempty"`
 }

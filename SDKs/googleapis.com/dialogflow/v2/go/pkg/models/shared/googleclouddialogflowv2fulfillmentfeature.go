@@ -8,5 +8,5 @@ const (
 )
 
 type GoogleCloudDialogflowV2FulfillmentFeature struct {
-	Type *GoogleCloudDialogflowV2FulfillmentFeatureTypeEnum `json:"type"`
+	Type *GoogleCloudDialogflowV2FulfillmentFeatureTypeEnum `json:"type,omitempty"`
 }

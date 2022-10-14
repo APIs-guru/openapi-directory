@@ -5,46 +5,46 @@ import (
 )
 
 type ObjectCustomerEncryption struct {
-	EncryptionAlgorithm *string `json:"encryptionAlgorithm"`
-	KeySha256           *string `json:"keySha256"`
+	EncryptionAlgorithm *string `json:"encryptionAlgorithm,omitempty"`
+	KeySha256           *string `json:"keySha256,omitempty"`
 }
 
 type ObjectOwner struct {
-	Entity   *string `json:"entity"`
-	EntityID *string `json:"entityId"`
+	Entity   *string `json:"entity,omitempty"`
+	EntityID *string `json:"entityId,omitempty"`
 }
 
 type Object struct {
-	ACL                     []ObjectAccessControl     `json:"acl"`
-	Bucket                  *string                   `json:"bucket"`
-	CacheControl            *string                   `json:"cacheControl"`
-	ComponentCount          *int32                    `json:"componentCount"`
-	ContentDisposition      *string                   `json:"contentDisposition"`
-	ContentEncoding         *string                   `json:"contentEncoding"`
-	ContentLanguage         *string                   `json:"contentLanguage"`
-	ContentType             *string                   `json:"contentType"`
-	Crc32c                  *string                   `json:"crc32c"`
-	CustomTime              *time.Time                `json:"customTime"`
-	CustomerEncryption      *ObjectCustomerEncryption `json:"customerEncryption"`
-	Etag                    *string                   `json:"etag"`
-	EventBasedHold          *bool                     `json:"eventBasedHold"`
-	Generation              *string                   `json:"generation"`
-	ID                      *string                   `json:"id"`
-	Kind                    *string                   `json:"kind"`
-	KmsKeyName              *string                   `json:"kmsKeyName"`
-	Md5Hash                 *string                   `json:"md5Hash"`
-	MediaLink               *string                   `json:"mediaLink"`
-	Metadata                map[string]string         `json:"metadata"`
-	Metageneration          *string                   `json:"metageneration"`
-	Name                    *string                   `json:"name"`
-	Owner                   *ObjectOwner              `json:"owner"`
-	RetentionExpirationTime *time.Time                `json:"retentionExpirationTime"`
-	SelfLink                *string                   `json:"selfLink"`
-	Size                    *string                   `json:"size"`
-	StorageClass            *string                   `json:"storageClass"`
-	TemporaryHold           *bool                     `json:"temporaryHold"`
-	TimeCreated             *time.Time                `json:"timeCreated"`
-	TimeDeleted             *time.Time                `json:"timeDeleted"`
-	TimeStorageClassUpdated *time.Time                `json:"timeStorageClassUpdated"`
-	Updated                 *time.Time                `json:"updated"`
+	ACL                     []ObjectAccessControl     `json:"acl,omitempty"`
+	Bucket                  *string                   `json:"bucket,omitempty"`
+	CacheControl            *string                   `json:"cacheControl,omitempty"`
+	ComponentCount          *int32                    `json:"componentCount,omitempty"`
+	ContentDisposition      *string                   `json:"contentDisposition,omitempty"`
+	ContentEncoding         *string                   `json:"contentEncoding,omitempty"`
+	ContentLanguage         *string                   `json:"contentLanguage,omitempty"`
+	ContentType             *string                   `json:"contentType,omitempty"`
+	Crc32c                  *string                   `json:"crc32c,omitempty"`
+	CustomTime              *time.Time                `json:"customTime,omitempty"`
+	CustomerEncryption      *ObjectCustomerEncryption `json:"customerEncryption,omitempty"`
+	Etag                    *string                   `json:"etag,omitempty"`
+	EventBasedHold          *bool                     `json:"eventBasedHold,omitempty"`
+	Generation              *string                   `json:"generation,omitempty"`
+	ID                      *string                   `json:"id,omitempty"`
+	Kind                    *string                   `json:"kind,omitempty"`
+	KmsKeyName              *string                   `json:"kmsKeyName,omitempty"`
+	Md5Hash                 *string                   `json:"md5Hash,omitempty"`
+	MediaLink               *string                   `json:"mediaLink,omitempty"`
+	Metadata                map[string]string         `json:"metadata,omitempty"`
+	Metageneration          *string                   `json:"metageneration,omitempty"`
+	Name                    *string                   `json:"name,omitempty"`
+	Owner                   *ObjectOwner              `json:"owner,omitempty"`
+	RetentionExpirationTime *time.Time                `json:"retentionExpirationTime,omitempty"`
+	SelfLink                *string                   `json:"selfLink,omitempty"`
+	Size                    *string                   `json:"size,omitempty"`
+	StorageClass            *string                   `json:"storageClass,omitempty"`
+	TemporaryHold           *bool                     `json:"temporaryHold,omitempty"`
+	TimeCreated             *time.Time                `json:"timeCreated,omitempty"`
+	TimeDeleted             *time.Time                `json:"timeDeleted,omitempty"`
+	TimeStorageClassUpdated *time.Time                `json:"timeStorageClassUpdated,omitempty"`
+	Updated                 *time.Time                `json:"updated,omitempty"`
 }

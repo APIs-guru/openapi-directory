@@ -1,5 +1,5 @@
 package shared
 
 type BaseResponse struct {
-	Warnings []Error `json:"warnings"`
+	Warnings []Error `json:"warnings,omitempty"`
 }

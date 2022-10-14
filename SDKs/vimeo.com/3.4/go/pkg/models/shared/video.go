@@ -34,9 +34,9 @@ type VideoMetadataConnectionsComments struct {
 }
 
 type VideoMetadataConnectionsCredits struct {
-	Options []string `json:"options"`
-	Total   *float64 `json:"total"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	Total   *float64 `json:"total,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type VideoMetadataConnectionsLikes struct {
@@ -63,13 +63,13 @@ type VideoMetadataConnectionsPlayback struct {
 }
 
 type VideoMetadataConnectionsRecommendations struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type VideoMetadataConnectionsRelated struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type VideoMetadataConnectionsSeason struct {
@@ -97,7 +97,7 @@ type VideoMetadataConnectionsUsersWithAccess struct {
 }
 
 type VideoMetadataConnectionsVersions struct {
-	CurrentURI *string  `json:"current_uri"`
+	CurrentURI *string  `json:"current_uri,omitempty"`
 	Options    []string `json:"options"`
 	Total      float64  `json:"total"`
 	URI        string   `json:"uri"`
@@ -189,10 +189,10 @@ type VideoMetadataInteractionsReport struct {
 }
 
 type VideoMetadataInteractionsSubscribe struct {
-	Drm          *bool   `json:"drm"`
-	ExpiresTime  *string `json:"expires_time"`
-	PurchaseTime *string `json:"purchase_time"`
-	Stream       *string `json:"stream"`
+	Drm          *bool   `json:"drm,omitempty"`
+	ExpiresTime  *string `json:"expires_time,omitempty"`
+	PurchaseTime *string `json:"purchase_time,omitempty"`
+	Stream       *string `json:"stream,omitempty"`
 }
 
 type VideoMetadataInteractionsWatched struct {
@@ -215,7 +215,7 @@ type VideoMetadataInteractions struct {
 	Like       VideoMetadataInteractionsLike       `json:"like"`
 	Rent       VideoMetadataInteractionsRent       `json:"rent"`
 	Report     VideoMetadataInteractionsReport     `json:"report"`
-	Subscribe  *VideoMetadataInteractionsSubscribe `json:"subscribe"`
+	Subscribe  *VideoMetadataInteractionsSubscribe `json:"subscribe,omitempty"`
 	Watched    VideoMetadataInteractionsWatched    `json:"watched"`
 	Watchlater VideoMetadataInteractionsWatchlater `json:"watchlater"`
 }
@@ -285,10 +285,10 @@ type VideoPrivacy struct {
 }
 
 type VideoSpatialDirectorTimeline struct {
-	Pitch    *float64 `json:"pitch"`
-	Roll     *float64 `json:"roll"`
-	TimeCode *float64 `json:"time_code"`
-	Yaw      *float64 `json:"yaw"`
+	Pitch    *float64 `json:"pitch,omitempty"`
+	Roll     *float64 `json:"roll,omitempty"`
+	TimeCode *float64 `json:"time_code,omitempty"`
+	Yaw      *float64 `json:"yaw,omitempty"`
 }
 
 type VideoSpatialProjectionEnum string
@@ -343,7 +343,7 @@ const (
 )
 
 type VideoTranscode struct {
-	Status *VideoTranscodeStatusEnum `json:"status"`
+	Status *VideoTranscodeStatusEnum `json:"status,omitempty"`
 }
 
 type VideoUploadApproachEnum string
@@ -364,14 +364,14 @@ const (
 )
 
 type VideoUpload struct {
-	Approach    *VideoUploadApproachEnum `json:"approach"`
-	CompleteURI *string                  `json:"complete_uri"`
-	Form        *string                  `json:"form"`
-	Link        *string                  `json:"link"`
-	RedirectURL *string                  `json:"redirect_url"`
-	Size        *float64                 `json:"size"`
+	Approach    *VideoUploadApproachEnum `json:"approach,omitempty"`
+	CompleteURI *string                  `json:"complete_uri,omitempty"`
+	Form        *string                  `json:"form,omitempty"`
+	Link        *string                  `json:"link,omitempty"`
+	RedirectURL *string                  `json:"redirect_url,omitempty"`
+	Size        *float64                 `json:"size,omitempty"`
 	Status      VideoUploadStatusEnum    `json:"status"`
-	UploadLink  *string                  `json:"upload_link"`
+	UploadLink  *string                  `json:"upload_link,omitempty"`
 }
 
 type VideoUserAccountEnum string
@@ -531,8 +531,8 @@ type VideoUserMetadataConnections struct {
 }
 
 type VideoUserMetadataInteractionsAddPrivacyUser struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type VideoUserMetadataInteractionsBlock struct {
@@ -555,7 +555,7 @@ type VideoUserMetadataInteractionsReport struct {
 }
 
 type VideoUserMetadataInteractions struct {
-	AddPrivacyUser *VideoUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user"`
+	AddPrivacyUser *VideoUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
 	Block          VideoUserMetadataInteractionsBlock           `json:"block"`
 	Follow         VideoUserMetadataInteractionsFollow          `json:"follow"`
 	Report         VideoUserMetadataInteractionsReport          `json:"report"`
@@ -595,19 +595,19 @@ const (
 )
 
 type VideoUserPreferencesVideosPrivacy struct {
-	Add      *bool                                          `json:"add"`
-	Comments *VideoUserPreferencesVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                          `json:"download"`
-	Embed    *VideoUserPreferencesVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *VideoUserPreferencesVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                          `json:"add,omitempty"`
+	Comments *VideoUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                          `json:"download,omitempty"`
+	Embed    *VideoUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *VideoUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type VideoUserPreferencesVideos struct {
-	Privacy *VideoUserPreferencesVideosPrivacy `json:"privacy"`
+	Privacy *VideoUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type VideoUserPreferences struct {
-	Videos *VideoUserPreferencesVideos `json:"videos"`
+	Videos *VideoUserPreferencesVideos `json:"videos,omitempty"`
 }
 
 type VideoUserUploadQuotaLifetime struct {
@@ -652,15 +652,15 @@ type VideoUserWebsites struct {
 type VideoUserUser struct {
 	Account       VideoUserAccountEnum  `json:"account"`
 	Bio           string                `json:"bio"`
-	ContentFilter []string              `json:"content_filter"`
+	ContentFilter []string              `json:"content_filter,omitempty"`
 	CreatedTime   string                `json:"created_time"`
-	Email         *string               `json:"email"`
+	Email         *string               `json:"email,omitempty"`
 	Link          string                `json:"link"`
 	Location      string                `json:"location"`
 	Metadata      VideoUserMetadata     `json:"metadata"`
 	Name          string                `json:"name"`
 	Pictures      Picture               `json:"pictures"`
-	Preferences   *VideoUserPreferences `json:"preferences"`
+	Preferences   *VideoUserPreferences `json:"preferences,omitempty"`
 	ResourceKey   string                `json:"resource_key"`
 	UploadQuota   VideoUserUploadQuota  `json:"upload_quota"`
 	URI           string                `json:"uri"`
@@ -677,14 +677,14 @@ type Video struct {
 	Embed                   EmbedSettings             `json:"embed"`
 	Height                  float64                   `json:"height"`
 	Language                string                    `json:"language"`
-	LastUserActionEventDate *string                   `json:"last_user_action_event_date"`
+	LastUserActionEventDate *string                   `json:"last_user_action_event_date,omitempty"`
 	License                 VideoLicenseEnum          `json:"license"`
 	Link                    string                    `json:"link"`
 	Metadata                VideoMetadata             `json:"metadata"`
 	ModifiedTime            string                    `json:"modified_time"`
 	Name                    string                    `json:"name"`
-	ParentFolder            *VideoParentFolderProject `json:"parent_folder"`
-	Password                *string                   `json:"password"`
+	ParentFolder            *VideoParentFolderProject `json:"parent_folder,omitempty"`
+	Password                *string                   `json:"password,omitempty"`
 	Pictures                Picture                   `json:"pictures"`
 	Privacy                 VideoPrivacy              `json:"privacy"`
 	ReleaseTime             string                    `json:"release_time"`

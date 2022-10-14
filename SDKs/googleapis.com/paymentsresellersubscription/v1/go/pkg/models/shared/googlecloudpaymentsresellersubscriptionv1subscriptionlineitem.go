@@ -20,11 +20,11 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem struct {
-	Description              *string                                                                                `json:"description"`
-	LineItemFreeTrialEndTime *string                                                                                `json:"lineItemFreeTrialEndTime"`
-	LineItemPromotionSpecs   []GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec                   `json:"lineItemPromotionSpecs"`
-	OneTimeRecurrenceDetails *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails `json:"oneTimeRecurrenceDetails"`
-	Product                  *string                                                                                `json:"product"`
-	RecurrenceType           *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemRecurrenceTypeEnum       `json:"recurrenceType"`
-	State                    *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemStateEnum                `json:"state"`
+	Description              *string                                                                                `json:"description,omitempty"`
+	LineItemFreeTrialEndTime *string                                                                                `json:"lineItemFreeTrialEndTime,omitempty"`
+	LineItemPromotionSpecs   []GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec                   `json:"lineItemPromotionSpecs,omitempty"`
+	OneTimeRecurrenceDetails *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails `json:"oneTimeRecurrenceDetails,omitempty"`
+	Product                  *string                                                                                `json:"product,omitempty"`
+	RecurrenceType           *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemRecurrenceTypeEnum       `json:"recurrenceType,omitempty"`
+	State                    *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemStateEnum                `json:"state,omitempty"`
 }

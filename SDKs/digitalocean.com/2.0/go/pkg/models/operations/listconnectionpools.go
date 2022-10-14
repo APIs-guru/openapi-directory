@@ -13,43 +13,43 @@ type ListConnectionPoolsRequest struct {
 }
 
 type ListConnectionPools200ApplicationJSONPoolsConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type ListConnectionPools200ApplicationJSONPoolsPrivateConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type ListConnectionPools200ApplicationJSONPools struct {
-	Connection        *ListConnectionPools200ApplicationJSONPoolsConnection        `json:"connection"`
+	Connection        *ListConnectionPools200ApplicationJSONPoolsConnection        `json:"connection,omitempty"`
 	Db                string                                                       `json:"db"`
 	Mode              string                                                       `json:"mode"`
 	Name              string                                                       `json:"name"`
-	PrivateConnection *ListConnectionPools200ApplicationJSONPoolsPrivateConnection `json:"private_connection"`
+	PrivateConnection *ListConnectionPools200ApplicationJSONPoolsPrivateConnection `json:"private_connection,omitempty"`
 	Size              int32                                                        `json:"size"`
 	User              string                                                       `json:"user"`
 }
 
 type ListConnectionPools200ApplicationJSON struct {
-	Pools []ListConnectionPools200ApplicationJSONPools `json:"pools"`
+	Pools []ListConnectionPools200ApplicationJSONPools `json:"pools,omitempty"`
 }
 
 type ListConnectionPools401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListConnectionPoolsResponse struct {

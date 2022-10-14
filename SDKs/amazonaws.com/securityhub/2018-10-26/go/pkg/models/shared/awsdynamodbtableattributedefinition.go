@@ -1,6 +1,6 @@
 package shared
 
 type AwsDynamoDbTableAttributeDefinition struct {
-	AttributeName *string `json:"AttributeName"`
-	AttributeType *string `json:"AttributeType"`
+	AttributeName *string `json:"AttributeName,omitempty"`
+	AttributeType *string `json:"AttributeType,omitempty"`
 }

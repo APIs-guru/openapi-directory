@@ -1,7 +1,7 @@
 package operations
 
 type PostNetworksRequestBodyLabels struct {
-	Labelkey *string `json:"labelkey"`
+	Labelkey *string `json:"labelkey,omitempty"`
 }
 
 type PostNetworksRequestBodyRoutes struct {
@@ -18,17 +18,17 @@ const (
 )
 
 type PostNetworksRequestBodySubnets struct {
-	IPRange     *string                                `json:"ip_range"`
+	IPRange     *string                                `json:"ip_range,omitempty"`
 	NetworkZone string                                 `json:"network_zone"`
 	Type        PostNetworksRequestBodySubnetsTypeEnum `json:"type"`
 }
 
 type PostNetworksRequestBodyCreateNetworkRequest struct {
 	IPRange string                           `json:"ip_range"`
-	Labels  *PostNetworksRequestBodyLabels   `json:"labels"`
+	Labels  *PostNetworksRequestBodyLabels   `json:"labels,omitempty"`
 	Name    string                           `json:"name"`
-	Routes  []PostNetworksRequestBodyRoutes  `json:"routes"`
-	Subnets []PostNetworksRequestBodySubnets `json:"subnets"`
+	Routes  []PostNetworksRequestBodyRoutes  `json:"routes,omitempty"`
+	Subnets []PostNetworksRequestBodySubnets `json:"subnets,omitempty"`
 }
 
 type PostNetworksRequest struct {
@@ -54,7 +54,7 @@ const (
 
 type PostNetworks201ApplicationJSONNetworkSubnets struct {
 	Gateway     string                                               `json:"gateway"`
-	IPRange     *string                                              `json:"ip_range"`
+	IPRange     *string                                              `json:"ip_range,omitempty"`
 	NetworkZone string                                               `json:"network_zone"`
 	Type        PostNetworks201ApplicationJSONNetworkSubnetsTypeEnum `json:"type"`
 }
@@ -64,7 +64,7 @@ type PostNetworks201ApplicationJSONNetwork struct {
 	ID            int64                                           `json:"id"`
 	IPRange       string                                          `json:"ip_range"`
 	Labels        map[string]interface{}                          `json:"labels"`
-	LoadBalancers []int64                                         `json:"load_balancers"`
+	LoadBalancers []int64                                         `json:"load_balancers,omitempty"`
 	Name          string                                          `json:"name"`
 	Protection    PostNetworks201ApplicationJSONNetworkProtection `json:"protection"`
 	Routes        []PostNetworks201ApplicationJSONNetworkRoutes   `json:"routes"`
@@ -73,7 +73,7 @@ type PostNetworks201ApplicationJSONNetwork struct {
 }
 
 type PostNetworks201ApplicationJSON struct {
-	Network *PostNetworks201ApplicationJSONNetwork `json:"network"`
+	Network *PostNetworks201ApplicationJSONNetwork `json:"network,omitempty"`
 }
 
 type PostNetworksResponse struct {

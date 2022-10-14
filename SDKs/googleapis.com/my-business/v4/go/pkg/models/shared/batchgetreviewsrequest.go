@@ -1,9 +1,9 @@
 package shared
 
 type BatchGetReviewsRequest struct {
-	IgnoreRatingOnlyReviews *bool    `json:"ignoreRatingOnlyReviews"`
-	LocationNames           []string `json:"locationNames"`
-	OrderBy                 *string  `json:"orderBy"`
-	PageSize                *int32   `json:"pageSize"`
-	PageToken               *string  `json:"pageToken"`
+	IgnoreRatingOnlyReviews *bool    `json:"ignoreRatingOnlyReviews,omitempty"`
+	LocationNames           []string `json:"locationNames,omitempty"`
+	OrderBy                 *string  `json:"orderBy,omitempty"`
+	PageSize                *int32   `json:"pageSize,omitempty"`
+	PageToken               *string  `json:"pageToken,omitempty"`
 }

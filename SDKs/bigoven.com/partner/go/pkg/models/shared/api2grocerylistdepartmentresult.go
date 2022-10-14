@@ -1,6 +1,6 @@
 package shared
 
 type Api2GroceryListDepartmentResult struct {
-	Dept *string `json:"dept"`
-	Item *string `json:"item"`
+	Dept *string `json:"dept,omitempty"`
+	Item *string `json:"item,omitempty"`
 }

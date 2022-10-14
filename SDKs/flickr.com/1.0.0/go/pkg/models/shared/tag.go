@@ -1,10 +1,10 @@
 package shared
 
 type Tag struct {
-	Content    *string `json:"_content"`
-	Author     *string `json:"author"`
-	Authorname *string `json:"authorname"`
-	ID         *string `json:"id"`
-	MachineTag *bool   `json:"machine_tag"`
-	Raw        *string `json:"raw"`
+	Content    *string `json:"_content,omitempty"`
+	Author     *string `json:"author,omitempty"`
+	Authorname *string `json:"authorname,omitempty"`
+	ID         *string `json:"id,omitempty"`
+	MachineTag *bool   `json:"machine_tag,omitempty"`
+	Raw        *string `json:"raw,omitempty"`
 }

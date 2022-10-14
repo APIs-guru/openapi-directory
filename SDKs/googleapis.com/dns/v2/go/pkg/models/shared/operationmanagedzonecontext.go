@@ -1,6 +1,6 @@
 package shared
 
 type OperationManagedZoneContext struct {
-	NewValue *ManagedZone `json:"newValue"`
-	OldValue *ManagedZone `json:"oldValue"`
+	NewValue *ManagedZone `json:"newValue,omitempty"`
+	OldValue *ManagedZone `json:"oldValue,omitempty"`
 }

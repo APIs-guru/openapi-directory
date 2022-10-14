@@ -1,8 +1,8 @@
 package shared
 
 type SandboxUser struct {
-	Accounts          []SandboxBankAccount     `json:"accounts"`
-	Cards             []SandboxCard            `json:"cards"`
-	RetryCacheEntries []SandboxRetryCacheEntry `json:"retryCacheEntries"`
-	UserID            *string                  `json:"userId"`
+	Accounts          []SandboxBankAccount     `json:"accounts,omitempty"`
+	Cards             []SandboxCard            `json:"cards,omitempty"`
+	RetryCacheEntries []SandboxRetryCacheEntry `json:"retryCacheEntries,omitempty"`
+	UserID            *string                  `json:"userId,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetAppValidationOutputResponse struct {
-	ValidationOutputList []ValidationOutput `json:"validationOutputList"`
+	ValidationOutputList []ValidationOutput `json:"validationOutputList,omitempty"`
 }

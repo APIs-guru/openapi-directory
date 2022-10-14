@@ -1,7 +1,7 @@
 package shared
 
 type Network struct {
-	Network           *string `json:"network"`
-	Subnetwork        *string `json:"subnetwork"`
-	UsePrivateAddress *bool   `json:"usePrivateAddress"`
+	Network           *string `json:"network,omitempty"`
+	Subnetwork        *string `json:"subnetwork,omitempty"`
+	UsePrivateAddress *bool   `json:"usePrivateAddress,omitempty"`
 }

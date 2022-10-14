@@ -1,6 +1,6 @@
 package shared
 
 type BuildNotDeleted struct {
-	ID         *string `json:"id"`
-	StatusCode *string `json:"statusCode"`
+	ID         *string `json:"id,omitempty"`
+	StatusCode *string `json:"statusCode,omitempty"`
 }

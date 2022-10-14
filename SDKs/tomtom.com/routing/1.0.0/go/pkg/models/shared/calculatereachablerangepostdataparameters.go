@@ -1,26 +1,26 @@
 package shared
 
 type CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner struct {
-	Latitude  *string `json:"latitude"`
-	Longitude *string `json:"longitude"`
+	Latitude  *string `json:"latitude,omitempty"`
+	Longitude *string `json:"longitude,omitempty"`
 }
 
 type CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner struct {
-	Latitude  *string `json:"latitude"`
-	Longitude *string `json:"longitude"`
+	Latitude  *string `json:"latitude,omitempty"`
+	Longitude *string `json:"longitude,omitempty"`
 }
 
 type CalculateReachableRangePostDataParametersAvoidAreasRectangles struct {
-	NorthEastCorner *CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner `json:"northEastCorner"`
-	SouthWestCorner *CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner `json:"southWestCorner"`
+	NorthEastCorner *CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner `json:"northEastCorner,omitempty"`
+	SouthWestCorner *CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner `json:"southWestCorner,omitempty"`
 }
 
 type CalculateReachableRangePostDataParametersAvoidAreas struct {
-	Rectangles []CalculateReachableRangePostDataParametersAvoidAreasRectangles `json:"rectangles"`
+	Rectangles []CalculateReachableRangePostDataParametersAvoidAreasRectangles `json:"rectangles,omitempty"`
 }
 
 type CalculateReachableRangePostDataParameters struct {
-	AllowVignette []string                                             `json:"allowVignette"`
-	AvoidAreas    *CalculateReachableRangePostDataParametersAvoidAreas `json:"avoidAreas"`
-	AvoidVignette []string                                             `json:"avoidVignette"`
+	AllowVignette []string                                             `json:"allowVignette,omitempty"`
+	AvoidAreas    *CalculateReachableRangePostDataParametersAvoidAreas `json:"avoidAreas,omitempty"`
+	AvoidVignette []string                                             `json:"avoidVignette,omitempty"`
 }

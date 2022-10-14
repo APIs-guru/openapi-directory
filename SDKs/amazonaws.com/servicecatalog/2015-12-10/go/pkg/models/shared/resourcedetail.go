@@ -5,9 +5,9 @@ import (
 )
 
 type ResourceDetail struct {
-	Arn         *string    `json:"ARN"`
-	CreatedTime *time.Time `json:"CreatedTime"`
-	Description *string    `json:"Description"`
-	ID          *string    `json:"Id"`
-	Name        *string    `json:"Name"`
+	Arn         *string    `json:"ARN,omitempty"`
+	CreatedTime *time.Time `json:"CreatedTime,omitempty"`
+	Description *string    `json:"Description,omitempty"`
+	ID          *string    `json:"Id,omitempty"`
+	Name        *string    `json:"Name,omitempty"`
 }

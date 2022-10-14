@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleCloudDatacatalogV1DataSource struct {
-	Resource          *string                                        `json:"resource"`
-	Service           *GoogleCloudDatacatalogV1DataSourceServiceEnum `json:"service"`
-	SourceEntry       *string                                        `json:"sourceEntry"`
-	StorageProperties *GoogleCloudDatacatalogV1StorageProperties     `json:"storageProperties"`
+	Resource          *string                                        `json:"resource,omitempty"`
+	Service           *GoogleCloudDatacatalogV1DataSourceServiceEnum `json:"service,omitempty"`
+	SourceEntry       *string                                        `json:"sourceEntry,omitempty"`
+	StorageProperties *GoogleCloudDatacatalogV1StorageProperties     `json:"storageProperties,omitempty"`
 }

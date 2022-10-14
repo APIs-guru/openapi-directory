@@ -1,6 +1,6 @@
 package shared
 
 type DescribeLayersRequest struct {
-	LayerIds []string `json:"LayerIds"`
-	StackID  *string  `json:"StackId"`
+	LayerIds []string `json:"LayerIds,omitempty"`
+	StackID  *string  `json:"StackId,omitempty"`
 }

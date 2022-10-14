@@ -25,7 +25,7 @@ const (
 )
 
 type CreateFacetRequestBody struct {
-	Attributes []shared.FacetAttribute              `json:"Attributes"`
+	Attributes []shared.FacetAttribute              `json:"Attributes,omitempty"`
 	Name       string                               `json:"Name"`
 	ObjectType CreateFacetRequestBodyObjectTypeEnum `json:"ObjectType"`
 }

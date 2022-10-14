@@ -1,5 +1,5 @@
 package shared
 
 type OneTimeSchedule struct {
-	ExecuteTime *string `json:"executeTime"`
+	ExecuteTime *string `json:"executeTime,omitempty"`
 }

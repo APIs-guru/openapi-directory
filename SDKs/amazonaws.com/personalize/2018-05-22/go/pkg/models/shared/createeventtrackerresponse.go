@@ -1,6 +1,6 @@
 package shared
 
 type CreateEventTrackerResponse struct {
-	EventTrackerArn *string `json:"eventTrackerArn"`
-	TrackingID      *string `json:"trackingId"`
+	EventTrackerArn *string `json:"eventTrackerArn,omitempty"`
+	TrackingID      *string `json:"trackingId,omitempty"`
 }

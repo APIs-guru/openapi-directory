@@ -1,5 +1,5 @@
 package shared
 
 type DeleteFhirDatastoreRequest struct {
-	DatastoreID *string `json:"DatastoreId"`
+	DatastoreID *string `json:"DatastoreId,omitempty"`
 }

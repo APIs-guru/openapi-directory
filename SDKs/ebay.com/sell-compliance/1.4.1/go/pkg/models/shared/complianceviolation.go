@@ -1,9 +1,9 @@
 package shared
 
 type ComplianceViolation struct {
-	ComplianceType *string            `json:"complianceType"`
-	ListingID      *string            `json:"listingId"`
-	OfferID        *string            `json:"offerId"`
-	Sku            *string            `json:"sku"`
-	Violations     []ComplianceDetail `json:"violations"`
+	ComplianceType *string            `json:"complianceType,omitempty"`
+	ListingID      *string            `json:"listingId,omitempty"`
+	OfferID        *string            `json:"offerId,omitempty"`
+	Sku            *string            `json:"sku,omitempty"`
+	Violations     []ComplianceDetail `json:"violations,omitempty"`
 }

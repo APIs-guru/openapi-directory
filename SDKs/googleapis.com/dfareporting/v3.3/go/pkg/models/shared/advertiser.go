@@ -8,19 +8,19 @@ const (
 )
 
 type Advertiser struct {
-	AccountID                               *string               `json:"accountId"`
-	AdvertiserGroupID                       *string               `json:"advertiserGroupId"`
-	ClickThroughURLSuffix                   *string               `json:"clickThroughUrlSuffix"`
-	DefaultClickThroughEventTagID           *string               `json:"defaultClickThroughEventTagId"`
-	DefaultEmail                            *string               `json:"defaultEmail"`
-	FloodlightConfigurationID               *string               `json:"floodlightConfigurationId"`
-	FloodlightConfigurationIDDimensionValue *DimensionValue       `json:"floodlightConfigurationIdDimensionValue"`
-	ID                                      *string               `json:"id"`
-	IDDimensionValue                        *DimensionValue       `json:"idDimensionValue"`
-	Kind                                    *string               `json:"kind"`
-	Name                                    *string               `json:"name"`
-	OriginalFloodlightConfigurationID       *string               `json:"originalFloodlightConfigurationId"`
-	Status                                  *AdvertiserStatusEnum `json:"status"`
-	SubaccountID                            *string               `json:"subaccountId"`
-	Suspended                               *bool                 `json:"suspended"`
+	AccountID                               *string               `json:"accountId,omitempty"`
+	AdvertiserGroupID                       *string               `json:"advertiserGroupId,omitempty"`
+	ClickThroughURLSuffix                   *string               `json:"clickThroughUrlSuffix,omitempty"`
+	DefaultClickThroughEventTagID           *string               `json:"defaultClickThroughEventTagId,omitempty"`
+	DefaultEmail                            *string               `json:"defaultEmail,omitempty"`
+	FloodlightConfigurationID               *string               `json:"floodlightConfigurationId,omitempty"`
+	FloodlightConfigurationIDDimensionValue *DimensionValue       `json:"floodlightConfigurationIdDimensionValue,omitempty"`
+	ID                                      *string               `json:"id,omitempty"`
+	IDDimensionValue                        *DimensionValue       `json:"idDimensionValue,omitempty"`
+	Kind                                    *string               `json:"kind,omitempty"`
+	Name                                    *string               `json:"name,omitempty"`
+	OriginalFloodlightConfigurationID       *string               `json:"originalFloodlightConfigurationId,omitempty"`
+	Status                                  *AdvertiserStatusEnum `json:"status,omitempty"`
+	SubaccountID                            *string               `json:"subaccountId,omitempty"`
+	Suspended                               *bool                 `json:"suspended,omitempty"`
 }

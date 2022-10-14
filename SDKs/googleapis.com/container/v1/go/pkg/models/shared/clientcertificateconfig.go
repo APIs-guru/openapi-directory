@@ -1,5 +1,5 @@
 package shared
 
 type ClientCertificateConfig struct {
-	IssueClientCertificate *bool `json:"issueClientCertificate"`
+	IssueClientCertificate *bool `json:"issueClientCertificate,omitempty"`
 }

@@ -808,10 +808,10 @@ const (
 )
 
 type Parameters struct {
-	Filters           []FilterPair             `json:"filters"`
-	GroupBys          []ParametersGroupBysEnum `json:"groupBys"`
-	IncludeInviteData *bool                    `json:"includeInviteData"`
-	Metrics           []ParametersMetricsEnum  `json:"metrics"`
-	Options           *Options                 `json:"options"`
-	Type              *ParametersTypeEnum      `json:"type"`
+	Filters           []FilterPair             `json:"filters,omitempty"`
+	GroupBys          []ParametersGroupBysEnum `json:"groupBys,omitempty"`
+	IncludeInviteData *bool                    `json:"includeInviteData,omitempty"`
+	Metrics           []ParametersMetricsEnum  `json:"metrics,omitempty"`
+	Options           *Options                 `json:"options,omitempty"`
+	Type              *ParametersTypeEnum      `json:"type,omitempty"`
 }

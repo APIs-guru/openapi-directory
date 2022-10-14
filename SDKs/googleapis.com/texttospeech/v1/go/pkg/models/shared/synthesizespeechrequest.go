@@ -1,7 +1,7 @@
 package shared
 
 type SynthesizeSpeechRequest struct {
-	AudioConfig *AudioConfig          `json:"audioConfig"`
-	Input       *SynthesisInput       `json:"input"`
-	Voice       *VoiceSelectionParams `json:"voice"`
+	AudioConfig *AudioConfig          `json:"audioConfig,omitempty"`
+	Input       *SynthesisInput       `json:"input,omitempty"`
+	Voice       *VoiceSelectionParams `json:"voice,omitempty"`
 }

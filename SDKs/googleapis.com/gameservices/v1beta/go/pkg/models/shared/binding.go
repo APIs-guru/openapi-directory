@@ -1,8 +1,8 @@
 package shared
 
 type Binding struct {
-	BindingID *string  `json:"bindingId"`
-	Condition *Expr    `json:"condition"`
-	Members   []string `json:"members"`
-	Role      *string  `json:"role"`
+	BindingID *string  `json:"bindingId,omitempty"`
+	Condition *Expr    `json:"condition,omitempty"`
+	Members   []string `json:"members,omitempty"`
+	Role      *string  `json:"role,omitempty"`
 }

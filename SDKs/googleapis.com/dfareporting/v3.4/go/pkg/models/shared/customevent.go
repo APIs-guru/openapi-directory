@@ -9,13 +9,13 @@ const (
 )
 
 type CustomEvent struct {
-	AnnotateClickEvent        *CustomEventClickAnnotation      `json:"annotateClickEvent"`
-	AnnotateImpressionEvent   *CustomEventImpressionAnnotation `json:"annotateImpressionEvent"`
-	CustomVariables           []CustomVariable                 `json:"customVariables"`
-	EventType                 *CustomEventEventTypeEnum        `json:"eventType"`
-	FloodlightConfigurationID *string                          `json:"floodlightConfigurationId"`
-	InsertEvent               *CustomEventInsert               `json:"insertEvent"`
-	Kind                      *string                          `json:"kind"`
-	Ordinal                   *string                          `json:"ordinal"`
-	TimestampMicros           *string                          `json:"timestampMicros"`
+	AnnotateClickEvent        *CustomEventClickAnnotation      `json:"annotateClickEvent,omitempty"`
+	AnnotateImpressionEvent   *CustomEventImpressionAnnotation `json:"annotateImpressionEvent,omitempty"`
+	CustomVariables           []CustomVariable                 `json:"customVariables,omitempty"`
+	EventType                 *CustomEventEventTypeEnum        `json:"eventType,omitempty"`
+	FloodlightConfigurationID *string                          `json:"floodlightConfigurationId,omitempty"`
+	InsertEvent               *CustomEventInsert               `json:"insertEvent,omitempty"`
+	Kind                      *string                          `json:"kind,omitempty"`
+	Ordinal                   *string                          `json:"ordinal,omitempty"`
+	TimestampMicros           *string                          `json:"timestampMicros,omitempty"`
 }

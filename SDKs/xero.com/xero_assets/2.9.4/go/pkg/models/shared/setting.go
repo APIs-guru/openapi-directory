@@ -5,12 +5,12 @@ import (
 )
 
 type Setting struct {
-	AssetNumberPrefix                     *string    `json:"assetNumberPrefix"`
-	AssetNumberSequence                   *string    `json:"assetNumberSequence"`
-	AssetStartDate                        *time.Time `json:"assetStartDate"`
-	DefaultCapitalGainOnDisposalAccountID *string    `json:"defaultCapitalGainOnDisposalAccountId"`
-	DefaultGainOnDisposalAccountID        *string    `json:"defaultGainOnDisposalAccountId"`
-	DefaultLossOnDisposalAccountID        *string    `json:"defaultLossOnDisposalAccountId"`
-	LastDepreciationDate                  *time.Time `json:"lastDepreciationDate"`
-	OptInForTax                           *bool      `json:"optInForTax"`
+	AssetNumberPrefix                     *string    `json:"assetNumberPrefix,omitempty"`
+	AssetNumberSequence                   *string    `json:"assetNumberSequence,omitempty"`
+	AssetStartDate                        *time.Time `json:"assetStartDate,omitempty"`
+	DefaultCapitalGainOnDisposalAccountID *string    `json:"defaultCapitalGainOnDisposalAccountId,omitempty"`
+	DefaultGainOnDisposalAccountID        *string    `json:"defaultGainOnDisposalAccountId,omitempty"`
+	DefaultLossOnDisposalAccountID        *string    `json:"defaultLossOnDisposalAccountId,omitempty"`
+	LastDepreciationDate                  *time.Time `json:"lastDepreciationDate,omitempty"`
+	OptInForTax                           *bool      `json:"optInForTax,omitempty"`
 }

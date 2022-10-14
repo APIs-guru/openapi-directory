@@ -8,7 +8,7 @@ const (
 )
 
 type Cohort struct {
-	DateRange *DateRange      `json:"dateRange"`
-	Name      *string         `json:"name"`
-	Type      *CohortTypeEnum `json:"type"`
+	DateRange *DateRange      `json:"dateRange,omitempty"`
+	Name      *string         `json:"name,omitempty"`
+	Type      *CohortTypeEnum `json:"type,omitempty"`
 }

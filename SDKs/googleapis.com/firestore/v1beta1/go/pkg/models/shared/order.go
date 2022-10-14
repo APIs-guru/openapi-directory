@@ -9,6 +9,6 @@ const (
 )
 
 type Order struct {
-	Direction *OrderDirectionEnum `json:"direction"`
-	Field     *FieldReference     `json:"field"`
+	Direction *OrderDirectionEnum `json:"direction,omitempty"`
+	Field     *FieldReference     `json:"field,omitempty"`
 }

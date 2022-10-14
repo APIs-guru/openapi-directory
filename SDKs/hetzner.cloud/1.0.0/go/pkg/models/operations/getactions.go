@@ -85,7 +85,7 @@ type GetActions200ApplicationJSONMeta struct {
 
 type GetActions200ApplicationJSONActionsResponse struct {
 	Actions []GetActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetActions200ApplicationJSONMeta           `json:"meta"`
+	Meta    *GetActions200ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type GetActionsResponse struct {

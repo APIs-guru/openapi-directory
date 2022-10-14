@@ -28,7 +28,7 @@ type AddLinodeDiskRequest struct {
 }
 
 type AddLinodeDiskDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type AddLinodeDiskResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListAPIDestinationsResponse struct {
-	APIDestinations []APIDestination `json:"ApiDestinations"`
-	NextToken       *string          `json:"NextToken"`
+	APIDestinations []APIDestination `json:"ApiDestinations,omitempty"`
+	NextToken       *string          `json:"NextToken,omitempty"`
 }

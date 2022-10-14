@@ -1,5 +1,5 @@
 package shared
 
 type KeyFailure struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }

@@ -24,6 +24,6 @@ const (
 )
 
 type SensitiveCategoryAssignedTargetingOptionDetails struct {
-	ExcludedTargetingOptionID *string                                                               `json:"excludedTargetingOptionId"`
-	SensitiveCategory         *SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum `json:"sensitiveCategory"`
+	ExcludedTargetingOptionID *string                                                               `json:"excludedTargetingOptionId,omitempty"`
+	SensitiveCategory         *SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum `json:"sensitiveCategory,omitempty"`
 }

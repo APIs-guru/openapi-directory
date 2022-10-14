@@ -23,6 +23,6 @@ const (
 )
 
 type StateCondition struct {
-	Code    *StateConditionCodeEnum `json:"code"`
-	Message *string                 `json:"message"`
+	Code    *StateConditionCodeEnum `json:"code,omitempty"`
+	Message *string                 `json:"message,omitempty"`
 }

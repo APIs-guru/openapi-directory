@@ -8,11 +8,11 @@ const (
 )
 
 type CreateBatchPaymentRequestBodyNewBatch struct {
-	BatchName   *string                                `json:"batchName"`
-	CallBackURL *string                                `json:"callBackUrl"`
-	Currency    *string                                `json:"currency"`
-	JobNumber   *string                                `json:"jobNumber"`
-	Type        *CreateBatchPaymentRequestBodyTypeEnum `json:"type"`
+	BatchName   *string                                `json:"batchName,omitempty"`
+	CallBackURL *string                                `json:"callBackUrl,omitempty"`
+	Currency    *string                                `json:"currency,omitempty"`
+	JobNumber   *string                                `json:"jobNumber,omitempty"`
+	Type        *CreateBatchPaymentRequestBodyTypeEnum `json:"type,omitempty"`
 }
 
 type CreateBatchPaymentRequest struct {
@@ -20,7 +20,7 @@ type CreateBatchPaymentRequest struct {
 }
 
 type CreateBatchPayment200ApplicationJSONNewBatchResponse struct {
-	BatchUUID *string `json:"batchUuid"`
+	BatchUUID *string `json:"batchUuid,omitempty"`
 }
 
 type CreateBatchPaymentResponse struct {

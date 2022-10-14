@@ -1,5 +1,5 @@
 package shared
 
 type InventorySourceFilter struct {
-	InventorySourceIds []string `json:"inventorySourceIds"`
+	InventorySourceIds []string `json:"inventorySourceIds,omitempty"`
 }

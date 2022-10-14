@@ -5,13 +5,13 @@ import (
 )
 
 type ContactMethod struct {
-	Arn             *string                  `json:"arn"`
-	ContactEndpoint *string                  `json:"contactEndpoint"`
-	CreatedAt       *time.Time               `json:"createdAt"`
-	Location        *ResourceLocation        `json:"location"`
-	Name            *string                  `json:"name"`
-	Protocol        *ContactProtocolEnum     `json:"protocol"`
-	ResourceType    *ResourceTypeEnum        `json:"resourceType"`
-	Status          *ContactMethodStatusEnum `json:"status"`
-	SupportCode     *string                  `json:"supportCode"`
+	Arn             *string                  `json:"arn,omitempty"`
+	ContactEndpoint *string                  `json:"contactEndpoint,omitempty"`
+	CreatedAt       *time.Time               `json:"createdAt,omitempty"`
+	Location        *ResourceLocation        `json:"location,omitempty"`
+	Name            *string                  `json:"name,omitempty"`
+	Protocol        *ContactProtocolEnum     `json:"protocol,omitempty"`
+	ResourceType    *ResourceTypeEnum        `json:"resourceType,omitempty"`
+	Status          *ContactMethodStatusEnum `json:"status,omitempty"`
+	SupportCode     *string                  `json:"supportCode,omitempty"`
 }

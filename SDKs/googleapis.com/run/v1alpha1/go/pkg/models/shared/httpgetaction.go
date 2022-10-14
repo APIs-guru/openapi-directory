@@ -1,8 +1,8 @@
 package shared
 
 type HTTPGetAction struct {
-	Host        *string      `json:"host"`
-	HTTPHeaders []HTTPHeader `json:"httpHeaders"`
-	Path        *string      `json:"path"`
-	Scheme      *string      `json:"scheme"`
+	Host        *string      `json:"host,omitempty"`
+	HTTPHeaders []HTTPHeader `json:"httpHeaders,omitempty"`
+	Path        *string      `json:"path,omitempty"`
+	Scheme      *string      `json:"scheme,omitempty"`
 }

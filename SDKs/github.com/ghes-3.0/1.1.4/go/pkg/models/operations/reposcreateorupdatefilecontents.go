@@ -11,24 +11,24 @@ type ReposCreateOrUpdateFileContentsPathParams struct {
 }
 
 type ReposCreateOrUpdateFileContentsRequestBodyAuthor struct {
-	Date  *string `json:"date"`
+	Date  *string `json:"date,omitempty"`
 	Email string  `json:"email"`
 	Name  string  `json:"name"`
 }
 
 type ReposCreateOrUpdateFileContentsRequestBodyCommitter struct {
-	Date  *string `json:"date"`
+	Date  *string `json:"date,omitempty"`
 	Email string  `json:"email"`
 	Name  string  `json:"name"`
 }
 
 type ReposCreateOrUpdateFileContentsRequestBody struct {
-	Author    *ReposCreateOrUpdateFileContentsRequestBodyAuthor    `json:"author"`
-	Branch    *string                                              `json:"branch"`
-	Committer *ReposCreateOrUpdateFileContentsRequestBodyCommitter `json:"committer"`
+	Author    *ReposCreateOrUpdateFileContentsRequestBodyAuthor    `json:"author,omitempty"`
+	Branch    *string                                              `json:"branch,omitempty"`
+	Committer *ReposCreateOrUpdateFileContentsRequestBodyCommitter `json:"committer,omitempty"`
 	Content   string                                               `json:"content"`
 	Message   string                                               `json:"message"`
-	Sha       *string                                              `json:"sha"`
+	Sha       *string                                              `json:"sha,omitempty"`
 }
 
 type ReposCreateOrUpdateFileContentsRequest struct {

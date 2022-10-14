@@ -1,6 +1,6 @@
 package shared
 
 type GetDataSourceIndexStatsResponse struct {
-	AverageIndexedItemCount *string                `json:"averageIndexedItemCount"`
-	Stats                   []DataSourceIndexStats `json:"stats"`
+	AverageIndexedItemCount *string                `json:"averageIndexedItemCount,omitempty"`
+	Stats                   []DataSourceIndexStats `json:"stats,omitempty"`
 }

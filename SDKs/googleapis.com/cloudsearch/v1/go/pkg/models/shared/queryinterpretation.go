@@ -17,7 +17,7 @@ const (
 )
 
 type QueryInterpretation struct {
-	InterpretationType *QueryInterpretationInterpretationTypeEnum `json:"interpretationType"`
-	InterpretedQuery   *string                                    `json:"interpretedQuery"`
-	Reason             *QueryInterpretationReasonEnum             `json:"reason"`
+	InterpretationType *QueryInterpretationInterpretationTypeEnum `json:"interpretationType,omitempty"`
+	InterpretedQuery   *string                                    `json:"interpretedQuery,omitempty"`
+	Reason             *QueryInterpretationReasonEnum             `json:"reason,omitempty"`
 }

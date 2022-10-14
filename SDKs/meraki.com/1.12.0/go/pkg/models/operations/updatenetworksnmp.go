@@ -18,9 +18,9 @@ type UpdateNetworkSnmpRequestBodyUsers struct {
 }
 
 type UpdateNetworkSnmpRequestBody struct {
-	Access          *UpdateNetworkSnmpRequestBodyAccessEnum `json:"access"`
-	CommunityString *string                                 `json:"communityString"`
-	Users           []UpdateNetworkSnmpRequestBodyUsers     `json:"users"`
+	Access          *UpdateNetworkSnmpRequestBodyAccessEnum `json:"access,omitempty"`
+	CommunityString *string                                 `json:"communityString,omitempty"`
+	Users           []UpdateNetworkSnmpRequestBodyUsers     `json:"users,omitempty"`
 }
 
 type UpdateNetworkSnmpRequest struct {

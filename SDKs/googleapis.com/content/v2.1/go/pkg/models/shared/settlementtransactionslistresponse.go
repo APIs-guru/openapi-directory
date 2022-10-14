@@ -1,7 +1,7 @@
 package shared
 
 type SettlementtransactionsListResponse struct {
-	Kind          *string                 `json:"kind"`
-	NextPageToken *string                 `json:"nextPageToken"`
-	Resources     []SettlementTransaction `json:"resources"`
+	Kind          *string                 `json:"kind,omitempty"`
+	NextPageToken *string                 `json:"nextPageToken,omitempty"`
+	Resources     []SettlementTransaction `json:"resources,omitempty"`
 }

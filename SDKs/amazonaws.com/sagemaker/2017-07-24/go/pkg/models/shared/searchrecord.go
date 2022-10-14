@@ -1,15 +1,15 @@
 package shared
 
 type SearchRecord struct {
-	Endpoint          *Endpoint          `json:"Endpoint"`
-	Experiment        *Experiment        `json:"Experiment"`
-	FeatureGroup      *FeatureGroup      `json:"FeatureGroup"`
-	ModelPackage      *ModelPackage      `json:"ModelPackage"`
-	ModelPackageGroup *ModelPackageGroup `json:"ModelPackageGroup"`
-	Pipeline          *Pipeline          `json:"Pipeline"`
-	PipelineExecution *PipelineExecution `json:"PipelineExecution"`
-	Project           *Project           `json:"Project"`
-	TrainingJob       *TrainingJob       `json:"TrainingJob"`
-	Trial             *Trial             `json:"Trial"`
-	TrialComponent    *TrialComponent    `json:"TrialComponent"`
+	Endpoint          *Endpoint          `json:"Endpoint,omitempty"`
+	Experiment        *Experiment        `json:"Experiment,omitempty"`
+	FeatureGroup      *FeatureGroup      `json:"FeatureGroup,omitempty"`
+	ModelPackage      *ModelPackage      `json:"ModelPackage,omitempty"`
+	ModelPackageGroup *ModelPackageGroup `json:"ModelPackageGroup,omitempty"`
+	Pipeline          *Pipeline          `json:"Pipeline,omitempty"`
+	PipelineExecution *PipelineExecution `json:"PipelineExecution,omitempty"`
+	Project           *Project           `json:"Project,omitempty"`
+	TrainingJob       *TrainingJob       `json:"TrainingJob,omitempty"`
+	Trial             *Trial             `json:"Trial,omitempty"`
+	TrialComponent    *TrialComponent    `json:"TrialComponent,omitempty"`
 }

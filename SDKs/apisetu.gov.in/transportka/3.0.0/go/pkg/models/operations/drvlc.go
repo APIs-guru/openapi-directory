@@ -18,8 +18,8 @@ const (
 )
 
 type DrvlcRequestBody struct {
-	CertificateParameters *DrvlcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *DrvlcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                DrvlcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Drvlc400ApplicationJSON struct {
-	Error            *Drvlc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Drvlc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Drvlc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Drvlc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Drvlc401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Drvlc401ApplicationJSON struct {
-	Error            *Drvlc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Drvlc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Drvlc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Drvlc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Drvlc404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Drvlc404ApplicationJSON struct {
-	Error            *Drvlc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Drvlc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Drvlc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Drvlc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Drvlc500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Drvlc500ApplicationJSON struct {
-	Error            *Drvlc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Drvlc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Drvlc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Drvlc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Drvlc502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Drvlc502ApplicationJSON struct {
-	Error            *Drvlc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Drvlc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Drvlc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Drvlc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Drvlc503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Drvlc503ApplicationJSON struct {
-	Error            *Drvlc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Drvlc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Drvlc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Drvlc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Drvlc504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Drvlc504ApplicationJSON struct {
-	Error            *Drvlc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Drvlc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Drvlc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Drvlc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type DrvlcResponse struct {

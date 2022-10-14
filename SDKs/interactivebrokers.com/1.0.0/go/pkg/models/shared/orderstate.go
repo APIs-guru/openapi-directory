@@ -8,18 +8,18 @@ const (
 )
 
 type OrderState struct {
-	ContractID        *float64            `json:"ContractId"`
-	CustomerOrderID   *float64            `json:"CustomerOrderId"`
-	FilledQuantity    *float64            `json:"FilledQuantity"`
-	ListingExchange   *string             `json:"ListingExchange"`
-	OrderType         *float64            `json:"OrderType"`
-	OutsideRth        *string             `json:"OutsideRTH"`
-	Price             *float64            `json:"Price"`
-	RemainingQuantity *float64            `json:"RemainingQuantity"`
-	Side              *OrderStateSideEnum `json:"Side"`
-	Status            *OrderStatusEnum    `json:"Status"`
-	Ticker            *string             `json:"Ticker"`
-	TimeInForce       *float64            `json:"TimeInForce"`
-	TransactionTime   *string             `json:"TransactionTime"`
-	Warning           *string             `json:"Warning"`
+	ContractID        *float64            `json:"ContractId,omitempty"`
+	CustomerOrderID   *float64            `json:"CustomerOrderId,omitempty"`
+	FilledQuantity    *float64            `json:"FilledQuantity,omitempty"`
+	ListingExchange   *string             `json:"ListingExchange,omitempty"`
+	OrderType         *float64            `json:"OrderType,omitempty"`
+	OutsideRth        *string             `json:"OutsideRTH,omitempty"`
+	Price             *float64            `json:"Price,omitempty"`
+	RemainingQuantity *float64            `json:"RemainingQuantity,omitempty"`
+	Side              *OrderStateSideEnum `json:"Side,omitempty"`
+	Status            *OrderStatusEnum    `json:"Status,omitempty"`
+	Ticker            *string             `json:"Ticker,omitempty"`
+	TimeInForce       *float64            `json:"TimeInForce,omitempty"`
+	TransactionTime   *string             `json:"TransactionTime,omitempty"`
+	Warning           *string             `json:"Warning,omitempty"`
 }

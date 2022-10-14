@@ -18,38 +18,38 @@ type GetAnnotationLayerRequest struct {
 }
 
 type GetAnnotationLayer200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetAnnotationLayer200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetAnnotationLayer200ApplicationJSON struct {
-	Count              *float64                                                `json:"count"`
-	DescriptionColumns *GetAnnotationLayer200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	Ids                []string                                                `json:"ids"`
-	LabelColumns       *GetAnnotationLayer200ApplicationJSONLabelColumns       `json:"label_columns"`
-	ListColumns        []string                                                `json:"list_columns"`
-	ListTitle          *string                                                 `json:"list_title"`
-	OrderColumns       []string                                                `json:"order_columns"`
-	Result             []shared.AnnotationLayerRestAPIGetList                  `json:"result"`
+	Count              *float64                                                `json:"count,omitempty"`
+	DescriptionColumns *GetAnnotationLayer200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	Ids                []string                                                `json:"ids,omitempty"`
+	LabelColumns       *GetAnnotationLayer200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	ListColumns        []string                                                `json:"list_columns,omitempty"`
+	ListTitle          *string                                                 `json:"list_title,omitempty"`
+	OrderColumns       []string                                                `json:"order_columns,omitempty"`
+	Result             []shared.AnnotationLayerRestAPIGetList                  `json:"result,omitempty"`
 }
 
 type GetAnnotationLayer400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayer401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayer422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayer500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerResponse struct {

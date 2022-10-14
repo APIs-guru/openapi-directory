@@ -12,7 +12,7 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1OutputAudioConfig struct {
-	AudioEncoding          *GoogleCloudDialogflowV2beta1OutputAudioConfigAudioEncodingEnum `json:"audioEncoding"`
-	SampleRateHertz        *int32                                                          `json:"sampleRateHertz"`
-	SynthesizeSpeechConfig *GoogleCloudDialogflowV2beta1SynthesizeSpeechConfig             `json:"synthesizeSpeechConfig"`
+	AudioEncoding          *GoogleCloudDialogflowV2beta1OutputAudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
+	SampleRateHertz        *int32                                                          `json:"sampleRateHertz,omitempty"`
+	SynthesizeSpeechConfig *GoogleCloudDialogflowV2beta1SynthesizeSpeechConfig             `json:"synthesizeSpeechConfig,omitempty"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type ArchivedWebLinkContract struct {
-	Category    *ArchivedWebLinkContractCategoryEnum `json:"category"`
-	Description *string                              `json:"description"`
-	Disabled    *bool                                `json:"disabled"`
-	URL         *string                              `json:"url"`
+	Category    *ArchivedWebLinkContractCategoryEnum `json:"category,omitempty"`
+	Description *string                              `json:"description,omitempty"`
+	Disabled    *bool                                `json:"disabled,omitempty"`
+	URL         *string                              `json:"url,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ReportGroup struct {
-	Arn          *string                    `json:"arn"`
-	Created      *time.Time                 `json:"created"`
-	ExportConfig *ReportExportConfig        `json:"exportConfig"`
-	LastModified *time.Time                 `json:"lastModified"`
-	Name         *string                    `json:"name"`
-	Status       *ReportGroupStatusTypeEnum `json:"status"`
-	Tags         []Tag                      `json:"tags"`
-	Type         *ReportTypeEnum            `json:"type"`
+	Arn          *string                    `json:"arn,omitempty"`
+	Created      *time.Time                 `json:"created,omitempty"`
+	ExportConfig *ReportExportConfig        `json:"exportConfig,omitempty"`
+	LastModified *time.Time                 `json:"lastModified,omitempty"`
+	Name         *string                    `json:"name,omitempty"`
+	Status       *ReportGroupStatusTypeEnum `json:"status,omitempty"`
+	Tags         []Tag                      `json:"tags,omitempty"`
+	Type         *ReportTypeEnum            `json:"type,omitempty"`
 }

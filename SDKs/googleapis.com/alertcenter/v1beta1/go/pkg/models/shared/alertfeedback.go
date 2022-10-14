@@ -10,10 +10,10 @@ const (
 )
 
 type AlertFeedback struct {
-	AlertID    *string                `json:"alertId"`
-	CreateTime *string                `json:"createTime"`
-	CustomerID *string                `json:"customerId"`
-	Email      *string                `json:"email"`
-	FeedbackID *string                `json:"feedbackId"`
-	Type       *AlertFeedbackTypeEnum `json:"type"`
+	AlertID    *string                `json:"alertId,omitempty"`
+	CreateTime *string                `json:"createTime,omitempty"`
+	CustomerID *string                `json:"customerId,omitempty"`
+	Email      *string                `json:"email,omitempty"`
+	FeedbackID *string                `json:"feedbackId,omitempty"`
+	Type       *AlertFeedbackTypeEnum `json:"type,omitempty"`
 }

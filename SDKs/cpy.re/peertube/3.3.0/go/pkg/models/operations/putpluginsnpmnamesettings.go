@@ -9,7 +9,7 @@ type PutPluginsNpmNameSettingsPathParams struct {
 }
 
 type PutPluginsNpmNameSettingsRequestBody struct {
-	Settings map[string]interface{} `json:"settings"`
+	Settings map[string]interface{} `json:"settings,omitempty"`
 }
 
 type PutPluginsNpmNameSettingsSecurity struct {

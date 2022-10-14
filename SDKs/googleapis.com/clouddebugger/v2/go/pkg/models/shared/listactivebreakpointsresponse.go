@@ -1,7 +1,7 @@
 package shared
 
 type ListActiveBreakpointsResponse struct {
-	Breakpoints   []Breakpoint `json:"breakpoints"`
-	NextWaitToken *string      `json:"nextWaitToken"`
-	WaitExpired   *bool        `json:"waitExpired"`
+	Breakpoints   []Breakpoint `json:"breakpoints,omitempty"`
+	NextWaitToken *string      `json:"nextWaitToken,omitempty"`
+	WaitExpired   *bool        `json:"waitExpired,omitempty"`
 }

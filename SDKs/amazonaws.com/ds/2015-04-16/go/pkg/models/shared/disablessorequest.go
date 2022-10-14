@@ -2,6 +2,6 @@ package shared
 
 type DisableSsoRequest struct {
 	DirectoryID string  `json:"DirectoryId"`
-	Password    *string `json:"Password"`
-	UserName    *string `json:"UserName"`
+	Password    *string `json:"Password,omitempty"`
+	UserName    *string `json:"UserName,omitempty"`
 }

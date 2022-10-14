@@ -5,21 +5,21 @@ import (
 )
 
 type LoadBalancer struct {
-	Arn                     *string                             `json:"arn"`
-	ConfigurationOptions    map[string]string                   `json:"configurationOptions"`
-	CreatedAt               *time.Time                          `json:"createdAt"`
-	DNSName                 *string                             `json:"dnsName"`
-	HealthCheckPath         *string                             `json:"healthCheckPath"`
-	InstanceHealthSummary   []InstanceHealthSummary             `json:"instanceHealthSummary"`
-	InstancePort            *int64                              `json:"instancePort"`
-	IPAddressType           *IPAddressTypeEnum                  `json:"ipAddressType"`
-	Location                *ResourceLocation                   `json:"location"`
-	Name                    *string                             `json:"name"`
-	Protocol                *LoadBalancerProtocolEnum           `json:"protocol"`
-	PublicPorts             []int64                             `json:"publicPorts"`
-	ResourceType            *ResourceTypeEnum                   `json:"resourceType"`
-	State                   *LoadBalancerStateEnum              `json:"state"`
-	SupportCode             *string                             `json:"supportCode"`
-	Tags                    []Tag                               `json:"tags"`
-	TLSCertificateSummaries []LoadBalancerTLSCertificateSummary `json:"tlsCertificateSummaries"`
+	Arn                     *string                             `json:"arn,omitempty"`
+	ConfigurationOptions    map[string]string                   `json:"configurationOptions,omitempty"`
+	CreatedAt               *time.Time                          `json:"createdAt,omitempty"`
+	DNSName                 *string                             `json:"dnsName,omitempty"`
+	HealthCheckPath         *string                             `json:"healthCheckPath,omitempty"`
+	InstanceHealthSummary   []InstanceHealthSummary             `json:"instanceHealthSummary,omitempty"`
+	InstancePort            *int64                              `json:"instancePort,omitempty"`
+	IPAddressType           *IPAddressTypeEnum                  `json:"ipAddressType,omitempty"`
+	Location                *ResourceLocation                   `json:"location,omitempty"`
+	Name                    *string                             `json:"name,omitempty"`
+	Protocol                *LoadBalancerProtocolEnum           `json:"protocol,omitempty"`
+	PublicPorts             []int64                             `json:"publicPorts,omitempty"`
+	ResourceType            *ResourceTypeEnum                   `json:"resourceType,omitempty"`
+	State                   *LoadBalancerStateEnum              `json:"state,omitempty"`
+	SupportCode             *string                             `json:"supportCode,omitempty"`
+	Tags                    []Tag                               `json:"tags,omitempty"`
+	TLSCertificateSummaries []LoadBalancerTLSCertificateSummary `json:"tlsCertificateSummaries,omitempty"`
 }

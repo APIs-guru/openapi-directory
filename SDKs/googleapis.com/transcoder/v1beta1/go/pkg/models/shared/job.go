@@ -11,19 +11,19 @@ const (
 )
 
 type Job struct {
-	Config                 *JobConfig      `json:"config"`
-	CreateTime             *string         `json:"createTime"`
-	EndTime                *string         `json:"endTime"`
-	FailureDetails         []FailureDetail `json:"failureDetails"`
-	FailureReason          *string         `json:"failureReason"`
-	InputURI               *string         `json:"inputUri"`
-	Name                   *string         `json:"name"`
-	OriginURI              *OriginURI      `json:"originUri"`
-	OutputURI              *string         `json:"outputUri"`
-	Priority               *int32          `json:"priority"`
-	Progress               *Progress       `json:"progress"`
-	StartTime              *string         `json:"startTime"`
-	State                  *JobStateEnum   `json:"state"`
-	TemplateID             *string         `json:"templateId"`
-	TTLAfterCompletionDays *int32          `json:"ttlAfterCompletionDays"`
+	Config                 *JobConfig      `json:"config,omitempty"`
+	CreateTime             *string         `json:"createTime,omitempty"`
+	EndTime                *string         `json:"endTime,omitempty"`
+	FailureDetails         []FailureDetail `json:"failureDetails,omitempty"`
+	FailureReason          *string         `json:"failureReason,omitempty"`
+	InputURI               *string         `json:"inputUri,omitempty"`
+	Name                   *string         `json:"name,omitempty"`
+	OriginURI              *OriginURI      `json:"originUri,omitempty"`
+	OutputURI              *string         `json:"outputUri,omitempty"`
+	Priority               *int32          `json:"priority,omitempty"`
+	Progress               *Progress       `json:"progress,omitempty"`
+	StartTime              *string         `json:"startTime,omitempty"`
+	State                  *JobStateEnum   `json:"state,omitempty"`
+	TemplateID             *string         `json:"templateId,omitempty"`
+	TTLAfterCompletionDays *int32          `json:"ttlAfterCompletionDays,omitempty"`
 }

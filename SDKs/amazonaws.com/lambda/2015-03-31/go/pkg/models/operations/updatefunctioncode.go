@@ -19,14 +19,14 @@ type UpdateFunctionCodeHeaders struct {
 }
 
 type UpdateFunctionCodeRequestBody struct {
-	DryRun          *bool   `json:"DryRun"`
-	ImageURI        *string `json:"ImageUri"`
-	Publish         *bool   `json:"Publish"`
-	RevisionID      *string `json:"RevisionId"`
-	S3Bucket        *string `json:"S3Bucket"`
-	S3Key           *string `json:"S3Key"`
-	S3ObjectVersion *string `json:"S3ObjectVersion"`
-	ZipFile         *string `json:"ZipFile"`
+	DryRun          *bool   `json:"DryRun,omitempty"`
+	ImageURI        *string `json:"ImageUri,omitempty"`
+	Publish         *bool   `json:"Publish,omitempty"`
+	RevisionID      *string `json:"RevisionId,omitempty"`
+	S3Bucket        *string `json:"S3Bucket,omitempty"`
+	S3Key           *string `json:"S3Key,omitempty"`
+	S3ObjectVersion *string `json:"S3ObjectVersion,omitempty"`
+	ZipFile         *string `json:"ZipFile,omitempty"`
 }
 
 type UpdateFunctionCodeRequest struct {

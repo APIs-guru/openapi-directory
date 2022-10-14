@@ -1,5 +1,5 @@
 package shared
 
 type IntegerValues struct {
-	Values []string `json:"values"`
+	Values []string `json:"values,omitempty"`
 }

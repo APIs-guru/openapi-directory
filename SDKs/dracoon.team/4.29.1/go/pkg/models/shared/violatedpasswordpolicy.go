@@ -1,6 +1,6 @@
 package shared
 
 type ViolatedPasswordPolicy struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }

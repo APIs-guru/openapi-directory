@@ -1,7 +1,7 @@
 package shared
 
 type PushFilter struct {
-	Branch      *string `json:"branch"`
-	InvertRegex *bool   `json:"invertRegex"`
-	Tag         *string `json:"tag"`
+	Branch      *string `json:"branch,omitempty"`
+	InvertRegex *bool   `json:"invertRegex,omitempty"`
+	Tag         *string `json:"tag,omitempty"`
 }

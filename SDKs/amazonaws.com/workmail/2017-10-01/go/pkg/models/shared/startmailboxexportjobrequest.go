@@ -2,7 +2,7 @@ package shared
 
 type StartMailboxExportJobRequest struct {
 	ClientToken    string  `json:"ClientToken"`
-	Description    *string `json:"Description"`
+	Description    *string `json:"Description,omitempty"`
 	EntityID       string  `json:"EntityId"`
 	KmsKeyArn      string  `json:"KmsKeyArn"`
 	OrganizationID string  `json:"OrganizationId"`

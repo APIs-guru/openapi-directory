@@ -16,7 +16,7 @@ type DisassociateAssetsHeaders struct {
 
 type DisassociateAssetsRequestBody struct {
 	ChildAssetID string  `json:"childAssetId"`
-	ClientToken  *string `json:"clientToken"`
+	ClientToken  *string `json:"clientToken,omitempty"`
 	HierarchyID  string  `json:"hierarchyId"`
 }
 

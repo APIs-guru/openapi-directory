@@ -1,24 +1,24 @@
 package shared
 
 type ScimGroupListEnterpriseResourcesMembers struct {
-	DollarRef *string `json:"$ref"`
-	Display   *string `json:"display"`
-	Value     *string `json:"value"`
+	DollarRef *string `json:"$ref,omitempty"`
+	Display   *string `json:"display,omitempty"`
+	Value     *string `json:"value,omitempty"`
 }
 
 type ScimGroupListEnterpriseResourcesMeta struct {
-	Created      *string `json:"created"`
-	LastModified *string `json:"lastModified"`
-	Location     *string `json:"location"`
-	ResourceType *string `json:"resourceType"`
+	Created      *string `json:"created,omitempty"`
+	LastModified *string `json:"lastModified,omitempty"`
+	Location     *string `json:"location,omitempty"`
+	ResourceType *string `json:"resourceType,omitempty"`
 }
 
 type ScimGroupListEnterpriseResources struct {
-	DisplayName *string                                   `json:"displayName"`
-	ExternalID  *string                                   `json:"externalId"`
+	DisplayName *string                                   `json:"displayName,omitempty"`
+	ExternalID  *string                                   `json:"externalId,omitempty"`
 	ID          string                                    `json:"id"`
-	Members     []ScimGroupListEnterpriseResourcesMembers `json:"members"`
-	Meta        *ScimGroupListEnterpriseResourcesMeta     `json:"meta"`
+	Members     []ScimGroupListEnterpriseResourcesMembers `json:"members,omitempty"`
+	Meta        *ScimGroupListEnterpriseResourcesMeta     `json:"meta,omitempty"`
 	Schemas     []string                                  `json:"schemas"`
 }
 

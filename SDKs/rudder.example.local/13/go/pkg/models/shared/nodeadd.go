@@ -29,14 +29,14 @@ const (
 )
 
 type NodeAddPropertiesVars struct {
-	Var1  *string `json:"var1"`
-	Vars2 *string `json:"vars2"`
+	Var1  *string `json:"var1,omitempty"`
+	Vars2 *string `json:"vars2,omitempty"`
 }
 
 type NodeAddProperties struct {
-	Env  *string                     `json:"env"`
-	Tags []NodeAddPropertiesTagsEnum `json:"tags"`
-	Vars *NodeAddPropertiesVars      `json:"vars"`
+	Env  *string                     `json:"env,omitempty"`
+	Tags []NodeAddPropertiesTagsEnum `json:"tags,omitempty"`
+	Vars *NodeAddPropertiesVars      `json:"vars,omitempty"`
 }
 
 type NodeAddStateEnum string
@@ -57,16 +57,16 @@ const (
 )
 
 type NodeAdd struct {
-	AgentKey       *AgentKey              `json:"agentKey"`
+	AgentKey       *AgentKey              `json:"agentKey,omitempty"`
 	Hostname       string                 `json:"hostname"`
 	ID             string                 `json:"id"`
 	IPAddresses    []string               `json:"ipAddresses"`
 	MachineType    NodeAddMachineTypeEnum `json:"machineType"`
 	Os             Os                     `json:"os"`
-	PolicyMode     *NodeAddPolicyModeEnum `json:"policyMode"`
-	PolicyServerID *string                `json:"policyServerId"`
+	PolicyMode     *NodeAddPolicyModeEnum `json:"policyMode,omitempty"`
+	PolicyServerID *string                `json:"policyServerId,omitempty"`
 	Properties     NodeAddProperties      `json:"properties"`
-	State          *NodeAddStateEnum      `json:"state"`
+	State          *NodeAddStateEnum      `json:"state,omitempty"`
 	Status         NodeAddStatusEnum      `json:"status"`
-	Timezone       *Timezone              `json:"timezone"`
+	Timezone       *Timezone              `json:"timezone,omitempty"`
 }

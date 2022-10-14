@@ -33,20 +33,20 @@ type GetReviewsFormatRequest struct {
 }
 
 type GetReviewsFormat200ApplicationJSONResults struct {
-	BookAuthor    *string  `json:"book_author"`
-	BookTitle     *string  `json:"book_title"`
-	Byline        *string  `json:"byline"`
-	Isbn13        []string `json:"isbn13"`
-	PublicationDt *string  `json:"publication_dt"`
-	Summary       *string  `json:"summary"`
-	URL           *string  `json:"url"`
+	BookAuthor    *string  `json:"book_author,omitempty"`
+	BookTitle     *string  `json:"book_title,omitempty"`
+	Byline        *string  `json:"byline,omitempty"`
+	Isbn13        []string `json:"isbn13,omitempty"`
+	PublicationDt *string  `json:"publication_dt,omitempty"`
+	Summary       *string  `json:"summary,omitempty"`
+	URL           *string  `json:"url,omitempty"`
 }
 
 type GetReviewsFormat200ApplicationJSON struct {
-	Copyright  *string                                     `json:"copyright"`
-	NumResults *int64                                      `json:"num_results"`
-	Results    []GetReviewsFormat200ApplicationJSONResults `json:"results"`
-	Status     *string                                     `json:"status"`
+	Copyright  *string                                     `json:"copyright,omitempty"`
+	NumResults *int64                                      `json:"num_results,omitempty"`
+	Results    []GetReviewsFormat200ApplicationJSONResults `json:"results,omitempty"`
+	Status     *string                                     `json:"status,omitempty"`
 }
 
 type GetReviewsFormatResponse struct {

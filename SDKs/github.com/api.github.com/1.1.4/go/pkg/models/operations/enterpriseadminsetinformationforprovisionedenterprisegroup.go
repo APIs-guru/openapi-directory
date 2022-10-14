@@ -15,7 +15,7 @@ type EnterpriseAdminSetInformationForProvisionedEnterpriseGroupRequestBodyMember
 
 type EnterpriseAdminSetInformationForProvisionedEnterpriseGroupRequestBody struct {
 	DisplayName string                                                                         `json:"displayName"`
-	Members     []EnterpriseAdminSetInformationForProvisionedEnterpriseGroupRequestBodyMembers `json:"members"`
+	Members     []EnterpriseAdminSetInformationForProvisionedEnterpriseGroupRequestBodyMembers `json:"members,omitempty"`
 	Schemas     []string                                                                       `json:"schemas"`
 }
 

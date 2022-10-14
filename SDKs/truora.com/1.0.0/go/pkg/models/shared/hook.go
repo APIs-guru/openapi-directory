@@ -15,10 +15,10 @@ const (
 )
 
 type Hook struct {
-	Actions        []string           `json:"actions"`
-	EventType      *HookEventTypeEnum `json:"event_type"`
-	SigningKey     *string            `json:"signing_key"`
-	Status         *HookStatusEnum    `json:"status"`
-	SubscriberType *string            `json:"subscriber_type"`
-	SubscriberURL  *string            `json:"subscriber_url"`
+	Actions        []string           `json:"actions,omitempty"`
+	EventType      *HookEventTypeEnum `json:"event_type,omitempty"`
+	SigningKey     *string            `json:"signing_key,omitempty"`
+	Status         *HookStatusEnum    `json:"status,omitempty"`
+	SubscriberType *string            `json:"subscriber_type,omitempty"`
+	SubscriberURL  *string            `json:"subscriber_url,omitempty"`
 }

@@ -10,10 +10,10 @@ const (
 )
 
 type PlayerScoreResponse struct {
-	BeatenScoreTimeSpans []PlayerScoreResponseBeatenScoreTimeSpansEnum `json:"beatenScoreTimeSpans"`
-	FormattedScore       *string                                       `json:"formattedScore"`
-	Kind                 *string                                       `json:"kind"`
-	LeaderboardID        *string                                       `json:"leaderboardId"`
-	ScoreTag             *string                                       `json:"scoreTag"`
-	UnbeatenScores       []PlayerScore                                 `json:"unbeatenScores"`
+	BeatenScoreTimeSpans []PlayerScoreResponseBeatenScoreTimeSpansEnum `json:"beatenScoreTimeSpans,omitempty"`
+	FormattedScore       *string                                       `json:"formattedScore,omitempty"`
+	Kind                 *string                                       `json:"kind,omitempty"`
+	LeaderboardID        *string                                       `json:"leaderboardId,omitempty"`
+	ScoreTag             *string                                       `json:"scoreTag,omitempty"`
+	UnbeatenScores       []PlayerScore                                 `json:"unbeatenScores,omitempty"`
 }

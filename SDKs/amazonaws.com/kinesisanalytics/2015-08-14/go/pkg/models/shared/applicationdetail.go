@@ -6,15 +6,15 @@ import (
 
 type ApplicationDetail struct {
 	ApplicationArn                      string                               `json:"ApplicationARN"`
-	ApplicationCode                     *string                              `json:"ApplicationCode"`
-	ApplicationDescription              *string                              `json:"ApplicationDescription"`
+	ApplicationCode                     *string                              `json:"ApplicationCode,omitempty"`
+	ApplicationDescription              *string                              `json:"ApplicationDescription,omitempty"`
 	ApplicationName                     string                               `json:"ApplicationName"`
 	ApplicationStatus                   ApplicationStatusEnum                `json:"ApplicationStatus"`
 	ApplicationVersionID                int64                                `json:"ApplicationVersionId"`
-	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription `json:"CloudWatchLoggingOptionDescriptions"`
-	CreateTimestamp                     *time.Time                           `json:"CreateTimestamp"`
-	InputDescriptions                   []InputDescription                   `json:"InputDescriptions"`
-	LastUpdateTimestamp                 *time.Time                           `json:"LastUpdateTimestamp"`
-	OutputDescriptions                  []OutputDescription                  `json:"OutputDescriptions"`
-	ReferenceDataSourceDescriptions     []ReferenceDataSourceDescription     `json:"ReferenceDataSourceDescriptions"`
+	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription `json:"CloudWatchLoggingOptionDescriptions,omitempty"`
+	CreateTimestamp                     *time.Time                           `json:"CreateTimestamp,omitempty"`
+	InputDescriptions                   []InputDescription                   `json:"InputDescriptions,omitempty"`
+	LastUpdateTimestamp                 *time.Time                           `json:"LastUpdateTimestamp,omitempty"`
+	OutputDescriptions                  []OutputDescription                  `json:"OutputDescriptions,omitempty"`
+	ReferenceDataSourceDescriptions     []ReferenceDataSourceDescription     `json:"ReferenceDataSourceDescriptions,omitempty"`
 }

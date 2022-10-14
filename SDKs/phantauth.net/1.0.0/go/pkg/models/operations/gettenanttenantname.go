@@ -9,27 +9,27 @@ type GetTenantTenantnameRequest struct {
 }
 
 type GetTenantTenantname200ApplicationJSON struct {
-	AtID        *string       `json:"@id"`
-	About       *string       `json:"about"`
-	Attribution *string       `json:"attribution"`
-	Depot       *string       `json:"depot"`
-	Depots      []interface{} `json:"depots"`
-	Domain      *bool         `json:"domain"`
-	Factories   []interface{} `json:"factories"`
-	Factory     *string       `json:"factory"`
-	Favicon     *string       `json:"favicon"`
+	AtID        *string       `json:"@id,omitempty"`
+	About       *string       `json:"about,omitempty"`
+	Attribution *string       `json:"attribution,omitempty"`
+	Depot       *string       `json:"depot,omitempty"`
+	Depots      []interface{} `json:"depots,omitempty"`
+	Domain      *bool         `json:"domain,omitempty"`
+	Factories   []interface{} `json:"factories,omitempty"`
+	Factory     *string       `json:"factory,omitempty"`
+	Favicon     *string       `json:"favicon,omitempty"`
 	Issuer      string        `json:"issuer"`
-	Logo        *string       `json:"logo"`
-	Name        *string       `json:"name"`
-	Script      *string       `json:"script"`
-	Sheet       *string       `json:"sheet"`
+	Logo        *string       `json:"logo,omitempty"`
+	Name        *string       `json:"name,omitempty"`
+	Script      *string       `json:"script,omitempty"`
+	Sheet       *string       `json:"sheet,omitempty"`
 	Sub         string        `json:"sub"`
-	Subtenant   *bool         `json:"subtenant"`
-	Summary     *string       `json:"summary"`
-	Template    *string       `json:"template"`
-	Theme       *string       `json:"theme"`
-	Userinfo    *string       `json:"userinfo"`
-	Website     *string       `json:"website"`
+	Subtenant   *bool         `json:"subtenant,omitempty"`
+	Summary     *string       `json:"summary,omitempty"`
+	Template    *string       `json:"template,omitempty"`
+	Theme       *string       `json:"theme,omitempty"`
+	Userinfo    *string       `json:"userinfo,omitempty"`
+	Website     *string       `json:"website,omitempty"`
 }
 
 type GetTenantTenantnameResponse struct {

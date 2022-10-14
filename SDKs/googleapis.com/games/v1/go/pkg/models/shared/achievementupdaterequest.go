@@ -11,9 +11,9 @@ const (
 )
 
 type AchievementUpdateRequest struct {
-	AchievementID          *string                                 `json:"achievementId"`
-	IncrementPayload       *GamesAchievementIncrement              `json:"incrementPayload"`
-	Kind                   *string                                 `json:"kind"`
-	SetStepsAtLeastPayload *GamesAchievementSetStepsAtLeast        `json:"setStepsAtLeastPayload"`
-	UpdateType             *AchievementUpdateRequestUpdateTypeEnum `json:"updateType"`
+	AchievementID          *string                                 `json:"achievementId,omitempty"`
+	IncrementPayload       *GamesAchievementIncrement              `json:"incrementPayload,omitempty"`
+	Kind                   *string                                 `json:"kind,omitempty"`
+	SetStepsAtLeastPayload *GamesAchievementSetStepsAtLeast        `json:"setStepsAtLeastPayload,omitempty"`
+	UpdateType             *AchievementUpdateRequestUpdateTypeEnum `json:"updateType,omitempty"`
 }

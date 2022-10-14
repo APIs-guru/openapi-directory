@@ -10,6 +10,6 @@ const (
 )
 
 type CreateReportModel struct {
-	Reason     *string                          `json:"reason" form:"name=reason"`
-	ReportType *CreateReportModelReportTypeEnum `json:"reportType" form:"name=reportType"`
+	Reason     *string                          `json:"reason,omitempty" form:"name=reason"`
+	ReportType *CreateReportModelReportTypeEnum `json:"reportType,omitempty" form:"name=reportType"`
 }

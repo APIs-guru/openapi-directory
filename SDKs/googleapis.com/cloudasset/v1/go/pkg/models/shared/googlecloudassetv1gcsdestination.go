@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudAssetV1GcsDestination struct {
-	URI *string `json:"uri"`
+	URI *string `json:"uri,omitempty"`
 }

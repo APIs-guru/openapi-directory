@@ -22,14 +22,14 @@ const (
 )
 
 type GoogleCloudDialogflowV2Document struct {
-	ContentURI         *string                                             `json:"contentUri"`
-	DisplayName        *string                                             `json:"displayName"`
-	EnableAutoReload   *bool                                               `json:"enableAutoReload"`
-	KnowledgeTypes     []GoogleCloudDialogflowV2DocumentKnowledgeTypesEnum `json:"knowledgeTypes"`
-	LatestReloadStatus *GoogleCloudDialogflowV2DocumentReloadStatus        `json:"latestReloadStatus"`
-	Metadata           map[string]string                                   `json:"metadata"`
-	MimeType           *string                                             `json:"mimeType"`
-	Name               *string                                             `json:"name"`
-	RawContent         *string                                             `json:"rawContent"`
-	State              *GoogleCloudDialogflowV2DocumentStateEnum           `json:"state"`
+	ContentURI         *string                                             `json:"contentUri,omitempty"`
+	DisplayName        *string                                             `json:"displayName,omitempty"`
+	EnableAutoReload   *bool                                               `json:"enableAutoReload,omitempty"`
+	KnowledgeTypes     []GoogleCloudDialogflowV2DocumentKnowledgeTypesEnum `json:"knowledgeTypes,omitempty"`
+	LatestReloadStatus *GoogleCloudDialogflowV2DocumentReloadStatus        `json:"latestReloadStatus,omitempty"`
+	Metadata           map[string]string                                   `json:"metadata,omitempty"`
+	MimeType           *string                                             `json:"mimeType,omitempty"`
+	Name               *string                                             `json:"name,omitempty"`
+	RawContent         *string                                             `json:"rawContent,omitempty"`
+	State              *GoogleCloudDialogflowV2DocumentStateEnum           `json:"state,omitempty"`
 }

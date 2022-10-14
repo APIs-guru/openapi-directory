@@ -1,5 +1,5 @@
 package shared
 
 type CreateLongTermPricingResult struct {
-	LongTermPricingID *string `json:"LongTermPricingId"`
+	LongTermPricingID *string `json:"LongTermPricingId,omitempty"`
 }

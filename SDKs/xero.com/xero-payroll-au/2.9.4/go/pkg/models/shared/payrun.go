@@ -1,20 +1,20 @@
 package shared
 
 type PayRun struct {
-	Deductions            *float64          `json:"Deductions"`
-	NetPay                *float64          `json:"NetPay"`
-	PayRunID              *string           `json:"PayRunID"`
-	PayRunPeriodEndDate   *string           `json:"PayRunPeriodEndDate"`
-	PayRunPeriodStartDate *string           `json:"PayRunPeriodStartDate"`
-	PayRunStatus          *PayRunStatusEnum `json:"PayRunStatus"`
-	PaymentDate           *string           `json:"PaymentDate"`
+	Deductions            *float64          `json:"Deductions,omitempty"`
+	NetPay                *float64          `json:"NetPay,omitempty"`
+	PayRunID              *string           `json:"PayRunID,omitempty"`
+	PayRunPeriodEndDate   *string           `json:"PayRunPeriodEndDate,omitempty"`
+	PayRunPeriodStartDate *string           `json:"PayRunPeriodStartDate,omitempty"`
+	PayRunStatus          *PayRunStatusEnum `json:"PayRunStatus,omitempty"`
+	PaymentDate           *string           `json:"PaymentDate,omitempty"`
 	PayrollCalendarID     string            `json:"PayrollCalendarID"`
-	PayslipMessage        *string           `json:"PayslipMessage"`
-	Payslips              []PayslipSummary  `json:"Payslips"`
-	Reimbursement         *float64          `json:"Reimbursement"`
-	Super                 *float64          `json:"Super"`
-	Tax                   *float64          `json:"Tax"`
-	UpdatedDateUtc        *string           `json:"UpdatedDateUTC"`
-	ValidationErrors      []ValidationError `json:"ValidationErrors"`
-	Wages                 *float64          `json:"Wages"`
+	PayslipMessage        *string           `json:"PayslipMessage,omitempty"`
+	Payslips              []PayslipSummary  `json:"Payslips,omitempty"`
+	Reimbursement         *float64          `json:"Reimbursement,omitempty"`
+	Super                 *float64          `json:"Super,omitempty"`
+	Tax                   *float64          `json:"Tax,omitempty"`
+	UpdatedDateUtc        *string           `json:"UpdatedDateUTC,omitempty"`
+	ValidationErrors      []ValidationError `json:"ValidationErrors,omitempty"`
+	Wages                 *float64          `json:"Wages,omitempty"`
 }

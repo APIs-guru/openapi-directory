@@ -1,5 +1,5 @@
 package shared
 
 type ManualRule struct {
-	Groups []ManualRuleGroup `json:"groups"`
+	Groups []ManualRuleGroup `json:"groups,omitempty"`
 }

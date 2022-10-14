@@ -16,7 +16,7 @@ type UpgradeLensReviewHeaders struct {
 }
 
 type UpgradeLensReviewRequestBody struct {
-	ClientRequestToken *string `json:"ClientRequestToken"`
+	ClientRequestToken *string `json:"ClientRequestToken,omitempty"`
 	MilestoneName      string  `json:"MilestoneName"`
 }
 

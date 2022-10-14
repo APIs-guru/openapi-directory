@@ -19,8 +19,8 @@ type ConfigureAgentHeaders struct {
 }
 
 type ConfigureAgentRequestBody struct {
-	FleetInstanceID *string           `json:"fleetInstanceId"`
-	Metadata        map[string]string `json:"metadata"`
+	FleetInstanceID *string           `json:"fleetInstanceId,omitempty"`
+	Metadata        map[string]string `json:"metadata,omitempty"`
 }
 
 type ConfigureAgentRequest struct {

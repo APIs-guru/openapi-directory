@@ -1,9 +1,9 @@
 package shared
 
 type Assignment struct {
-	GroupLabels          []AssignmentGroupLabel `json:"groupLabels"`
-	InstanceNamePrefixes []string               `json:"instanceNamePrefixes"`
-	Instances            []string               `json:"instances"`
-	OsTypes              []AssignmentOsType     `json:"osTypes"`
-	Zones                []string               `json:"zones"`
+	GroupLabels          []AssignmentGroupLabel `json:"groupLabels,omitempty"`
+	InstanceNamePrefixes []string               `json:"instanceNamePrefixes,omitempty"`
+	Instances            []string               `json:"instances,omitempty"`
+	OsTypes              []AssignmentOsType     `json:"osTypes,omitempty"`
+	Zones                []string               `json:"zones,omitempty"`
 }

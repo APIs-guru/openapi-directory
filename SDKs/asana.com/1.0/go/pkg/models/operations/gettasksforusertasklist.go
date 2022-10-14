@@ -22,7 +22,7 @@ type GetTasksForUserTaskListRequest struct {
 }
 
 type GetTasksForUserTaskList200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data"`
+	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type GetTasksForUserTaskListResponse struct {

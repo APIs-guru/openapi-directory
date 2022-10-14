@@ -7,7 +7,7 @@ type PostPhoneEnrichHeaders struct {
 }
 
 type PostPhoneEnrichRequestBody struct {
-	Phone *string `json:"Phone"`
+	Phone *string `json:"Phone,omitempty"`
 }
 
 type PostPhoneEnrichRequest struct {

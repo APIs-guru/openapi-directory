@@ -1,8 +1,8 @@
 package shared
 
 type InAppMessageButton struct {
-	Android       *OverrideButtonConfiguration `json:"Android"`
-	DefaultConfig *DefaultButtonConfiguration  `json:"DefaultConfig"`
-	Ios           *OverrideButtonConfiguration `json:"IOS"`
-	Web           *OverrideButtonConfiguration `json:"Web"`
+	Android       *OverrideButtonConfiguration `json:"Android,omitempty"`
+	DefaultConfig *DefaultButtonConfiguration  `json:"DefaultConfig,omitempty"`
+	Ios           *OverrideButtonConfiguration `json:"IOS,omitempty"`
+	Web           *OverrideButtonConfiguration `json:"Web,omitempty"`
 }

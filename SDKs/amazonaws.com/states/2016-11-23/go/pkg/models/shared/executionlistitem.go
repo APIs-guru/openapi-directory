@@ -10,5 +10,5 @@ type ExecutionListItem struct {
 	StartDate       time.Time           `json:"startDate"`
 	StateMachineArn string              `json:"stateMachineArn"`
 	Status          ExecutionStatusEnum `json:"status"`
-	StopDate        *time.Time          `json:"stopDate"`
+	StopDate        *time.Time          `json:"stopDate,omitempty"`
 }

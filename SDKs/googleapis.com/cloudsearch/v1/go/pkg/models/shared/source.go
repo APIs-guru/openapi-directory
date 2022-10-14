@@ -15,6 +15,6 @@ const (
 )
 
 type Source struct {
-	Name             *string                     `json:"name"`
-	PredefinedSource *SourcePredefinedSourceEnum `json:"predefinedSource"`
+	Name             *string                     `json:"name,omitempty"`
+	PredefinedSource *SourcePredefinedSourceEnum `json:"predefinedSource,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ReviewActionDetail struct {
-	ActionID     *string                 `json:"ActionId"`
-	ActionName   *string                 `json:"ActionName"`
-	CompleteTime *time.Time              `json:"CompleteTime"`
-	ErrorCode    *string                 `json:"ErrorCode"`
-	Result       *string                 `json:"Result"`
-	Status       *ReviewActionStatusEnum `json:"Status"`
-	TargetID     *string                 `json:"TargetId"`
-	TargetType   *string                 `json:"TargetType"`
+	ActionID     *string                 `json:"ActionId,omitempty"`
+	ActionName   *string                 `json:"ActionName,omitempty"`
+	CompleteTime *time.Time              `json:"CompleteTime,omitempty"`
+	ErrorCode    *string                 `json:"ErrorCode,omitempty"`
+	Result       *string                 `json:"Result,omitempty"`
+	Status       *ReviewActionStatusEnum `json:"Status,omitempty"`
+	TargetID     *string                 `json:"TargetId,omitempty"`
+	TargetType   *string                 `json:"TargetType,omitempty"`
 }

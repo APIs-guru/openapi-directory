@@ -38,6 +38,6 @@ type SubscriptionResponse struct {
 	CreatedAt    time.Time                         `json:"createdAt"`
 	EventType    SubscriptionResponseEventTypeEnum `json:"eventType"`
 	ID           string                            `json:"id"`
-	PropertyName *string                           `json:"propertyName"`
-	UpdatedAt    *time.Time                        `json:"updatedAt"`
+	PropertyName *string                           `json:"propertyName,omitempty"`
+	UpdatedAt    *time.Time                        `json:"updatedAt,omitempty"`
 }

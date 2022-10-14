@@ -5,14 +5,14 @@ import (
 )
 
 type TflAPIPresentationEntitiesMatchedRoute struct {
-	Destination     *string    `json:"destination"`
-	DestinationName *string    `json:"destinationName"`
-	Direction       *string    `json:"direction"`
-	Name            *string    `json:"name"`
-	OriginationName *string    `json:"originationName"`
-	Originator      *string    `json:"originator"`
-	RouteCode       *string    `json:"routeCode"`
-	ServiceType     *string    `json:"serviceType"`
-	ValidFrom       *time.Time `json:"validFrom"`
-	ValidTo         *time.Time `json:"validTo"`
+	Destination     *string    `json:"destination,omitempty"`
+	DestinationName *string    `json:"destinationName,omitempty"`
+	Direction       *string    `json:"direction,omitempty"`
+	Name            *string    `json:"name,omitempty"`
+	OriginationName *string    `json:"originationName,omitempty"`
+	Originator      *string    `json:"originator,omitempty"`
+	RouteCode       *string    `json:"routeCode,omitempty"`
+	ServiceType     *string    `json:"serviceType,omitempty"`
+	ValidFrom       *time.Time `json:"validFrom,omitempty"`
+	ValidTo         *time.Time `json:"validTo,omitempty"`
 }

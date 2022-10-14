@@ -1,6 +1,6 @@
 package shared
 
 type SearchResponse struct {
-	NextToken *string        `json:"NextToken"`
-	Results   []SearchRecord `json:"Results"`
+	NextToken *string        `json:"NextToken,omitempty"`
+	Results   []SearchRecord `json:"Results,omitempty"`
 }

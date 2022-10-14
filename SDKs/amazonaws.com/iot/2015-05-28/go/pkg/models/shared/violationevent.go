@@ -5,12 +5,12 @@ import (
 )
 
 type ViolationEvent struct {
-	Behavior                     *Behavior                     `json:"behavior"`
-	MetricValue                  *MetricValue                  `json:"metricValue"`
-	SecurityProfileName          *string                       `json:"securityProfileName"`
-	ThingName                    *string                       `json:"thingName"`
-	ViolationEventAdditionalInfo *ViolationEventAdditionalInfo `json:"violationEventAdditionalInfo"`
-	ViolationEventTime           *time.Time                    `json:"violationEventTime"`
-	ViolationEventType           *ViolationEventTypeEnum       `json:"violationEventType"`
-	ViolationID                  *string                       `json:"violationId"`
+	Behavior                     *Behavior                     `json:"behavior,omitempty"`
+	MetricValue                  *MetricValue                  `json:"metricValue,omitempty"`
+	SecurityProfileName          *string                       `json:"securityProfileName,omitempty"`
+	ThingName                    *string                       `json:"thingName,omitempty"`
+	ViolationEventAdditionalInfo *ViolationEventAdditionalInfo `json:"violationEventAdditionalInfo,omitempty"`
+	ViolationEventTime           *time.Time                    `json:"violationEventTime,omitempty"`
+	ViolationEventType           *ViolationEventTypeEnum       `json:"violationEventType,omitempty"`
+	ViolationID                  *string                       `json:"violationId,omitempty"`
 }

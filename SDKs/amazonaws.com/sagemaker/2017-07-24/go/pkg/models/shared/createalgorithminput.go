@@ -1,11 +1,11 @@
 package shared
 
 type CreateAlgorithmInput struct {
-	AlgorithmDescription    *string                           `json:"AlgorithmDescription"`
+	AlgorithmDescription    *string                           `json:"AlgorithmDescription,omitempty"`
 	AlgorithmName           string                            `json:"AlgorithmName"`
-	CertifyForMarketplace   *bool                             `json:"CertifyForMarketplace"`
-	InferenceSpecification  *InferenceSpecification           `json:"InferenceSpecification"`
-	Tags                    []Tag                             `json:"Tags"`
+	CertifyForMarketplace   *bool                             `json:"CertifyForMarketplace,omitempty"`
+	InferenceSpecification  *InferenceSpecification           `json:"InferenceSpecification,omitempty"`
+	Tags                    []Tag                             `json:"Tags,omitempty"`
 	TrainingSpecification   TrainingSpecification             `json:"TrainingSpecification"`
-	ValidationSpecification *AlgorithmValidationSpecification `json:"ValidationSpecification"`
+	ValidationSpecification *AlgorithmValidationSpecification `json:"ValidationSpecification,omitempty"`
 }

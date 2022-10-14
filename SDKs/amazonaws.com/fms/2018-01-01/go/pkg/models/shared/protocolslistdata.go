@@ -5,11 +5,11 @@ import (
 )
 
 type ProtocolsListData struct {
-	CreateTime            *time.Time          `json:"CreateTime"`
-	LastUpdateTime        *time.Time          `json:"LastUpdateTime"`
-	ListID                *string             `json:"ListId"`
+	CreateTime            *time.Time          `json:"CreateTime,omitempty"`
+	LastUpdateTime        *time.Time          `json:"LastUpdateTime,omitempty"`
+	ListID                *string             `json:"ListId,omitempty"`
 	ListName              string              `json:"ListName"`
-	ListUpdateToken       *string             `json:"ListUpdateToken"`
-	PreviousProtocolsList map[string][]string `json:"PreviousProtocolsList"`
+	ListUpdateToken       *string             `json:"ListUpdateToken,omitempty"`
+	PreviousProtocolsList map[string][]string `json:"PreviousProtocolsList,omitempty"`
 	ProtocolsList         []string            `json:"ProtocolsList"`
 }

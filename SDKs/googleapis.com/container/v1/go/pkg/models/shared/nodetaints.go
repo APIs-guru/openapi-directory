@@ -1,5 +1,5 @@
 package shared
 
 type NodeTaints struct {
-	Taints []NodeTaint `json:"taints"`
+	Taints []NodeTaint `json:"taints,omitempty"`
 }

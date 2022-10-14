@@ -1,5 +1,5 @@
 package shared
 
 type CustomSourceLocation struct {
-	Stateful *bool `json:"stateful"`
+	Stateful *bool `json:"stateful,omitempty"`
 }

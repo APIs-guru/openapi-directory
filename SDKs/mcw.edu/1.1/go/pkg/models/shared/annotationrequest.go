@@ -1,8 +1,8 @@
 package shared
 
 type AnnotationRequest struct {
-	EvidenceCodes   []string `json:"evidenceCodes"`
-	Ids             []string `json:"ids"`
-	SpeciesTypeKeys []int32  `json:"speciesTypeKeys"`
-	TermAcc         *string  `json:"termAcc"`
+	EvidenceCodes   []string `json:"evidenceCodes,omitempty"`
+	Ids             []string `json:"ids,omitempty"`
+	SpeciesTypeKeys []int32  `json:"speciesTypeKeys,omitempty"`
+	TermAcc         *string  `json:"termAcc,omitempty"`
 }

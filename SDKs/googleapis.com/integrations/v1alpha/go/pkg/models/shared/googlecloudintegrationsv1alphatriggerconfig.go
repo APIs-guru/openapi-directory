@@ -20,13 +20,13 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaTriggerConfig struct {
-	AlertConfig              []GoogleCloudIntegrationsV1alphaIntegrationAlertConfig                   `json:"alertConfig"`
-	Description              *string                                                                  `json:"description"`
-	Label                    *string                                                                  `json:"label"`
-	NextTasksExecutionPolicy *GoogleCloudIntegrationsV1alphaTriggerConfigNextTasksExecutionPolicyEnum `json:"nextTasksExecutionPolicy"`
-	Properties               map[string]string                                                        `json:"properties"`
-	StartTasks               []GoogleCloudIntegrationsV1alphaNextTask                                 `json:"startTasks"`
-	TriggerID                *string                                                                  `json:"triggerId"`
-	TriggerNumber            *string                                                                  `json:"triggerNumber"`
-	TriggerType              *GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnum              `json:"triggerType"`
+	AlertConfig              []GoogleCloudIntegrationsV1alphaIntegrationAlertConfig                   `json:"alertConfig,omitempty"`
+	Description              *string                                                                  `json:"description,omitempty"`
+	Label                    *string                                                                  `json:"label,omitempty"`
+	NextTasksExecutionPolicy *GoogleCloudIntegrationsV1alphaTriggerConfigNextTasksExecutionPolicyEnum `json:"nextTasksExecutionPolicy,omitempty"`
+	Properties               map[string]string                                                        `json:"properties,omitempty"`
+	StartTasks               []GoogleCloudIntegrationsV1alphaNextTask                                 `json:"startTasks,omitempty"`
+	TriggerID                *string                                                                  `json:"triggerId,omitempty"`
+	TriggerNumber            *string                                                                  `json:"triggerNumber,omitempty"`
+	TriggerType              *GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnum              `json:"triggerType,omitempty"`
 }

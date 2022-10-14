@@ -21,14 +21,14 @@ const (
 )
 
 type WorkerPool struct {
-	CreateTime          *string                 `json:"createTime"`
-	DeleteTime          *string                 `json:"deleteTime"`
-	Name                *string                 `json:"name"`
-	ProjectID           *string                 `json:"projectId"`
-	Regions             []WorkerPoolRegionsEnum `json:"regions"`
-	ServiceAccountEmail *string                 `json:"serviceAccountEmail"`
-	Status              *WorkerPoolStatusEnum   `json:"status"`
-	UpdateTime          *string                 `json:"updateTime"`
-	WorkerConfig        *WorkerConfig           `json:"workerConfig"`
-	WorkerCount         *string                 `json:"workerCount"`
+	CreateTime          *string                 `json:"createTime,omitempty"`
+	DeleteTime          *string                 `json:"deleteTime,omitempty"`
+	Name                *string                 `json:"name,omitempty"`
+	ProjectID           *string                 `json:"projectId,omitempty"`
+	Regions             []WorkerPoolRegionsEnum `json:"regions,omitempty"`
+	ServiceAccountEmail *string                 `json:"serviceAccountEmail,omitempty"`
+	Status              *WorkerPoolStatusEnum   `json:"status,omitempty"`
+	UpdateTime          *string                 `json:"updateTime,omitempty"`
+	WorkerConfig        *WorkerConfig           `json:"workerConfig,omitempty"`
+	WorkerCount         *string                 `json:"workerCount,omitempty"`
 }

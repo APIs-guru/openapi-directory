@@ -1,5 +1,5 @@
 package shared
 
 type BatchGetContactGroupsResponse struct {
-	Responses []ContactGroupResponse `json:"responses"`
+	Responses []ContactGroupResponse `json:"responses,omitempty"`
 }

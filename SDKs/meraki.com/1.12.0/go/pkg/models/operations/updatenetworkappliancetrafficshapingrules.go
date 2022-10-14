@@ -21,25 +21,25 @@ type UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitions struct
 }
 
 type UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits struct {
-	LimitDown *int64 `json:"limitDown"`
-	LimitUp   *int64 `json:"limitUp"`
+	LimitDown *int64 `json:"limitDown,omitempty"`
+	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits struct {
-	BandwidthLimits *UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits"`
-	Settings        *string                                                                                           `json:"settings"`
+	BandwidthLimits *UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits,omitempty"`
+	Settings        *string                                                                                           `json:"settings,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingRulesRequestBodyRules struct {
 	Definitions              []UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitions             `json:"definitions"`
-	DscpTagValue             *int64                                                                             `json:"dscpTagValue"`
-	PerClientBandwidthLimits *UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits `json:"perClientBandwidthLimits"`
-	Priority                 *string                                                                            `json:"priority"`
+	DscpTagValue             *int64                                                                             `json:"dscpTagValue,omitempty"`
+	PerClientBandwidthLimits *UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits `json:"perClientBandwidthLimits,omitempty"`
+	Priority                 *string                                                                            `json:"priority,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingRulesRequestBody struct {
-	DefaultRulesEnabled *bool                                                       `json:"defaultRulesEnabled"`
-	Rules               []UpdateNetworkApplianceTrafficShapingRulesRequestBodyRules `json:"rules"`
+	DefaultRulesEnabled *bool                                                       `json:"defaultRulesEnabled,omitempty"`
+	Rules               []UpdateNetworkApplianceTrafficShapingRulesRequestBodyRules `json:"rules,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingRulesRequest struct {

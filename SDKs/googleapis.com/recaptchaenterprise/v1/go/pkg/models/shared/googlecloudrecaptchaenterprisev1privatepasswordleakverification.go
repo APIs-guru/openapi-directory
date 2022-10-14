@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudRecaptchaenterpriseV1PrivatePasswordLeakVerification struct {
-	EncryptedLeakMatchPrefixes     []string `json:"encryptedLeakMatchPrefixes"`
-	EncryptedUserCredentialsHash   *string  `json:"encryptedUserCredentialsHash"`
-	LookupHashPrefix               *string  `json:"lookupHashPrefix"`
-	ReencryptedUserCredentialsHash *string  `json:"reencryptedUserCredentialsHash"`
+	EncryptedLeakMatchPrefixes     []string `json:"encryptedLeakMatchPrefixes,omitempty"`
+	EncryptedUserCredentialsHash   *string  `json:"encryptedUserCredentialsHash,omitempty"`
+	LookupHashPrefix               *string  `json:"lookupHashPrefix,omitempty"`
+	ReencryptedUserCredentialsHash *string  `json:"reencryptedUserCredentialsHash,omitempty"`
 }

@@ -22,10 +22,10 @@ const (
 )
 
 type NiResponseJSONStandardCurrentCarrier struct {
-	Country     *string                                              `json:"country"`
-	Name        *string                                              `json:"name"`
-	NetworkCode *string                                              `json:"network_code"`
-	NetworkType *NiResponseJSONStandardCurrentCarrierNetworkTypeEnum `json:"network_type"`
+	Country     *string                                              `json:"country,omitempty"`
+	Name        *string                                              `json:"name,omitempty"`
+	NetworkCode *string                                              `json:"network_code,omitempty"`
+	NetworkType *NiResponseJSONStandardCurrentCarrierNetworkTypeEnum `json:"network_type,omitempty"`
 }
 
 type NiResponseJSONStandardPortedEnum string
@@ -40,24 +40,24 @@ const (
 )
 
 type NiResponseJSONStandard struct {
-	CallerIdentity            *NiCallerIdentity                     `json:"caller_identity"`
-	CallerName                *string                               `json:"caller_name"`
-	CallerType                *NiResponseJSONStandardCallerTypeEnum `json:"caller_type"`
-	CountryCode               *string                               `json:"country_code"`
-	CountryCodeIso3           *string                               `json:"country_code_iso3"`
-	CountryName               *string                               `json:"country_name"`
-	CountryPrefix             *string                               `json:"country_prefix"`
-	CurrentCarrier            *NiResponseJSONStandardCurrentCarrier `json:"current_carrier"`
-	FirstName                 *string                               `json:"first_name"`
-	InternationalFormatNumber *string                               `json:"international_format_number"`
-	LastName                  *string                               `json:"last_name"`
-	NationalFormatNumber      *string                               `json:"national_format_number"`
-	OriginalCarrier           *NiInitialCarrierProperties           `json:"original_carrier"`
-	Ported                    *NiResponseJSONStandardPortedEnum     `json:"ported"`
-	RefundPrice               *string                               `json:"refund_price"`
-	RemainingBalance          *string                               `json:"remaining_balance"`
-	RequestID                 *string                               `json:"request_id"`
-	RequestPrice              *string                               `json:"request_price"`
-	Status                    *int64                                `json:"status"`
-	StatusMessage             *string                               `json:"status_message"`
+	CallerIdentity            *NiCallerIdentity                     `json:"caller_identity,omitempty"`
+	CallerName                *string                               `json:"caller_name,omitempty"`
+	CallerType                *NiResponseJSONStandardCallerTypeEnum `json:"caller_type,omitempty"`
+	CountryCode               *string                               `json:"country_code,omitempty"`
+	CountryCodeIso3           *string                               `json:"country_code_iso3,omitempty"`
+	CountryName               *string                               `json:"country_name,omitempty"`
+	CountryPrefix             *string                               `json:"country_prefix,omitempty"`
+	CurrentCarrier            *NiResponseJSONStandardCurrentCarrier `json:"current_carrier,omitempty"`
+	FirstName                 *string                               `json:"first_name,omitempty"`
+	InternationalFormatNumber *string                               `json:"international_format_number,omitempty"`
+	LastName                  *string                               `json:"last_name,omitempty"`
+	NationalFormatNumber      *string                               `json:"national_format_number,omitempty"`
+	OriginalCarrier           *NiInitialCarrierProperties           `json:"original_carrier,omitempty"`
+	Ported                    *NiResponseJSONStandardPortedEnum     `json:"ported,omitempty"`
+	RefundPrice               *string                               `json:"refund_price,omitempty"`
+	RemainingBalance          *string                               `json:"remaining_balance,omitempty"`
+	RequestID                 *string                               `json:"request_id,omitempty"`
+	RequestPrice              *string                               `json:"request_price,omitempty"`
+	Status                    *int64                                `json:"status,omitempty"`
+	StatusMessage             *string                               `json:"status_message,omitempty"`
 }

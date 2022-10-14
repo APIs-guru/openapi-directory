@@ -9,5 +9,5 @@ const (
 )
 
 type HangoutsChatExportOptions struct {
-	ExportFormat *HangoutsChatExportOptionsExportFormatEnum `json:"exportFormat"`
+	ExportFormat *HangoutsChatExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
 }

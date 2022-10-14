@@ -16,8 +16,8 @@ const (
 )
 
 type SicerRequestBody struct {
-	CertificateParameters *SicerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *SicerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                SicerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Sicer400ApplicationJSON struct {
-	Error            *Sicer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicer401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Sicer401ApplicationJSON struct {
-	Error            *Sicer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicer404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Sicer404ApplicationJSON struct {
-	Error            *Sicer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicer500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Sicer500ApplicationJSON struct {
-	Error            *Sicer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicer502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Sicer502ApplicationJSON struct {
-	Error            *Sicer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicer503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Sicer503ApplicationJSON struct {
-	Error            *Sicer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicer504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Sicer504ApplicationJSON struct {
-	Error            *Sicer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SicerResponse struct {

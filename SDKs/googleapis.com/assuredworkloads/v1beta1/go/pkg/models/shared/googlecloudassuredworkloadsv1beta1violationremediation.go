@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleCloudAssuredworkloadsV1beta1ViolationRemediation struct {
-	CompliantValues []string                                                                   `json:"compliantValues"`
-	Instructions    *GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructions        `json:"instructions"`
-	RemediationType *GoogleCloudAssuredworkloadsV1beta1ViolationRemediationRemediationTypeEnum `json:"remediationType"`
+	CompliantValues []string                                                                   `json:"compliantValues,omitempty"`
+	Instructions    *GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructions        `json:"instructions,omitempty"`
+	RemediationType *GoogleCloudAssuredworkloadsV1beta1ViolationRemediationRemediationTypeEnum `json:"remediationType,omitempty"`
 }

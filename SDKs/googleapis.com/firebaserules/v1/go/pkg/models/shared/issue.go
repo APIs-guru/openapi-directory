@@ -10,7 +10,7 @@ const (
 )
 
 type Issue struct {
-	Description    *string            `json:"description"`
-	Severity       *IssueSeverityEnum `json:"severity"`
-	SourcePosition *SourcePosition    `json:"sourcePosition"`
+	Description    *string            `json:"description,omitempty"`
+	Severity       *IssueSeverityEnum `json:"severity,omitempty"`
+	SourcePosition *SourcePosition    `json:"sourcePosition,omitempty"`
 }

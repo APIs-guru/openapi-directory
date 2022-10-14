@@ -2,5 +2,5 @@ package shared
 
 type BatchUpdateClusterRequest struct {
 	ClusterNames  []string              `json:"ClusterNames"`
-	ServiceUpdate *ServiceUpdateRequest `json:"ServiceUpdate"`
+	ServiceUpdate *ServiceUpdateRequest `json:"ServiceUpdate,omitempty"`
 }

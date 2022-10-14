@@ -5,15 +5,15 @@ import (
 )
 
 type Trust struct {
-	CreatedDateTime          *time.Time          `json:"CreatedDateTime"`
-	DirectoryID              *string             `json:"DirectoryId"`
-	LastUpdatedDateTime      *time.Time          `json:"LastUpdatedDateTime"`
-	RemoteDomainName         *string             `json:"RemoteDomainName"`
-	SelectiveAuth            *SelectiveAuthEnum  `json:"SelectiveAuth"`
-	StateLastUpdatedDateTime *time.Time          `json:"StateLastUpdatedDateTime"`
-	TrustDirection           *TrustDirectionEnum `json:"TrustDirection"`
-	TrustID                  *string             `json:"TrustId"`
-	TrustState               *TrustStateEnum     `json:"TrustState"`
-	TrustStateReason         *string             `json:"TrustStateReason"`
-	TrustType                *TrustTypeEnum      `json:"TrustType"`
+	CreatedDateTime          *time.Time          `json:"CreatedDateTime,omitempty"`
+	DirectoryID              *string             `json:"DirectoryId,omitempty"`
+	LastUpdatedDateTime      *time.Time          `json:"LastUpdatedDateTime,omitempty"`
+	RemoteDomainName         *string             `json:"RemoteDomainName,omitempty"`
+	SelectiveAuth            *SelectiveAuthEnum  `json:"SelectiveAuth,omitempty"`
+	StateLastUpdatedDateTime *time.Time          `json:"StateLastUpdatedDateTime,omitempty"`
+	TrustDirection           *TrustDirectionEnum `json:"TrustDirection,omitempty"`
+	TrustID                  *string             `json:"TrustId,omitempty"`
+	TrustState               *TrustStateEnum     `json:"TrustState,omitempty"`
+	TrustStateReason         *string             `json:"TrustStateReason,omitempty"`
+	TrustType                *TrustTypeEnum      `json:"TrustType,omitempty"`
 }

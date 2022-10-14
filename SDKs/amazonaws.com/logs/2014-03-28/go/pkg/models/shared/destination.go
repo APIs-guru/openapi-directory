@@ -1,10 +1,10 @@
 package shared
 
 type Destination struct {
-	AccessPolicy    *string `json:"accessPolicy"`
-	Arn             *string `json:"arn"`
-	CreationTime    *int64  `json:"creationTime"`
-	DestinationName *string `json:"destinationName"`
-	RoleArn         *string `json:"roleArn"`
-	TargetArn       *string `json:"targetArn"`
+	AccessPolicy    *string `json:"accessPolicy,omitempty"`
+	Arn             *string `json:"arn,omitempty"`
+	CreationTime    *int64  `json:"creationTime,omitempty"`
+	DestinationName *string `json:"destinationName,omitempty"`
+	RoleArn         *string `json:"roleArn,omitempty"`
+	TargetArn       *string `json:"targetArn,omitempty"`
 }

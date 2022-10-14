@@ -1,7 +1,7 @@
 package shared
 
 type BuiltImage struct {
-	Digest     *string   `json:"digest"`
-	Name       *string   `json:"name"`
-	PushTiming *TimeSpan `json:"pushTiming"`
+	Digest     *string   `json:"digest,omitempty"`
+	Name       *string   `json:"name,omitempty"`
+	PushTiming *TimeSpan `json:"pushTiming,omitempty"`
 }

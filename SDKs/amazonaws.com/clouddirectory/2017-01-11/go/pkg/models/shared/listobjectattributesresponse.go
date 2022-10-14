@@ -1,6 +1,6 @@
 package shared
 
 type ListObjectAttributesResponse struct {
-	Attributes []AttributeKeyAndValue `json:"Attributes"`
-	NextToken  *string                `json:"NextToken"`
+	Attributes []AttributeKeyAndValue `json:"Attributes,omitempty"`
+	NextToken  *string                `json:"NextToken,omitempty"`
 }

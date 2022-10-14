@@ -1,7 +1,7 @@
 package shared
 
 type SupportedConfiguration struct {
-	DefaultValue *string `json:"defaultValue"`
-	Property     *string `json:"property"`
-	Usage        *string `json:"usage"`
+	DefaultValue *string `json:"defaultValue,omitempty"`
+	Property     *string `json:"property,omitempty"`
+	Usage        *string `json:"usage,omitempty"`
 }

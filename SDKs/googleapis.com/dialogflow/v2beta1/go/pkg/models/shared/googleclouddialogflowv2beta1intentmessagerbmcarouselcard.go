@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCard struct {
-	CardContents []GoogleCloudDialogflowV2beta1IntentMessageRbmCardContent              `json:"cardContents"`
-	CardWidth    *GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCardCardWidthEnum `json:"cardWidth"`
+	CardContents []GoogleCloudDialogflowV2beta1IntentMessageRbmCardContent              `json:"cardContents,omitempty"`
+	CardWidth    *GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCardCardWidthEnum `json:"cardWidth,omitempty"`
 }

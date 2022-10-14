@@ -10,11 +10,11 @@ const (
 )
 
 type Project struct {
-	CreateTime     *string                    `json:"createTime"`
-	Labels         map[string]string          `json:"labels"`
-	LifecycleState *ProjectLifecycleStateEnum `json:"lifecycleState"`
-	Name           *string                    `json:"name"`
-	Parent         *ResourceID                `json:"parent"`
-	ProjectID      *string                    `json:"projectId"`
-	ProjectNumber  *string                    `json:"projectNumber"`
+	CreateTime     *string                    `json:"createTime,omitempty"`
+	Labels         map[string]string          `json:"labels,omitempty"`
+	LifecycleState *ProjectLifecycleStateEnum `json:"lifecycleState,omitempty"`
+	Name           *string                    `json:"name,omitempty"`
+	Parent         *ResourceID                `json:"parent,omitempty"`
+	ProjectID      *string                    `json:"projectId,omitempty"`
+	ProjectNumber  *string                    `json:"projectNumber,omitempty"`
 }

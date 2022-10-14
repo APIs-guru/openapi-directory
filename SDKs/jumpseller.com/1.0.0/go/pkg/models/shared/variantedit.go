@@ -1,5 +1,5 @@
 package shared
 
 type VariantEdit struct {
-	Variant *VariantEditFields `json:"variant"`
+	Variant *VariantEditFields `json:"variant,omitempty"`
 }

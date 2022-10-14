@@ -5,11 +5,11 @@ import (
 )
 
 type AdministrativeAction struct {
-	AdministrativeActionType *AdministrativeActionTypeEnum       `json:"AdministrativeActionType"`
-	FailureDetails           *AdministrativeActionFailureDetails `json:"FailureDetails"`
-	ProgressPercent          *int64                              `json:"ProgressPercent"`
-	RequestTime              *time.Time                          `json:"RequestTime"`
-	Status                   *StatusEnum                         `json:"Status"`
-	TargetFileSystemValues   *FileSystem                         `json:"TargetFileSystemValues"`
-	TargetVolumeValues       *Volume                             `json:"TargetVolumeValues"`
+	AdministrativeActionType *AdministrativeActionTypeEnum       `json:"AdministrativeActionType,omitempty"`
+	FailureDetails           *AdministrativeActionFailureDetails `json:"FailureDetails,omitempty"`
+	ProgressPercent          *int64                              `json:"ProgressPercent,omitempty"`
+	RequestTime              *time.Time                          `json:"RequestTime,omitempty"`
+	Status                   *StatusEnum                         `json:"Status,omitempty"`
+	TargetFileSystemValues   *FileSystem                         `json:"TargetFileSystemValues,omitempty"`
+	TargetVolumeValues       *Volume                             `json:"TargetVolumeValues,omitempty"`
 }

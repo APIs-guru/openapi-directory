@@ -1,7 +1,7 @@
 package shared
 
 type UploadedMavenArtifact struct {
-	FileHashes *FileHashes `json:"fileHashes"`
-	PushTiming *TimeSpan   `json:"pushTiming"`
-	URI        *string     `json:"uri"`
+	FileHashes *FileHashes `json:"fileHashes,omitempty"`
+	PushTiming *TimeSpan   `json:"pushTiming,omitempty"`
+	URI        *string     `json:"uri,omitempty"`
 }

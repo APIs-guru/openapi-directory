@@ -1,12 +1,12 @@
 package shared
 
 type Vaccine struct {
-	Dose              *string `json:"dose"`
-	IdentityType      *string `json:"identityType"`
-	IdentityValue     *string `json:"identityValue"`
-	VaccinatedBy      *string `json:"vaccinatedBy"`
-	VaccinationDate   *string `json:"vaccinationDate"`
-	VaccinationPlace  *string `json:"vaccinationPlace"`
-	VaccinationStatus *string `json:"vaccinationStatus"`
-	VaccineName       *string `json:"vaccineName"`
+	Dose              *string `json:"dose,omitempty"`
+	IdentityType      *string `json:"identityType,omitempty"`
+	IdentityValue     *string `json:"identityValue,omitempty"`
+	VaccinatedBy      *string `json:"vaccinatedBy,omitempty"`
+	VaccinationDate   *string `json:"vaccinationDate,omitempty"`
+	VaccinationPlace  *string `json:"vaccinationPlace,omitempty"`
+	VaccinationStatus *string `json:"vaccinationStatus,omitempty"`
+	VaccineName       *string `json:"vaccineName,omitempty"`
 }

@@ -14,7 +14,7 @@ type EndpointRemoveShowsUserHeaders struct {
 }
 
 type EndpointRemoveShowsUserRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type EndpointRemoveShowsUserSecurity struct {

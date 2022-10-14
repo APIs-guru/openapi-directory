@@ -1,6 +1,6 @@
 package shared
 
 type PluginSecurityInfo struct {
-	IsMbSupporter *bool   `json:"IsMbSupporter"`
-	SupporterKey  *string `json:"SupporterKey"`
+	IsMbSupporter *bool   `json:"IsMbSupporter,omitempty"`
+	SupporterKey  *string `json:"SupporterKey,omitempty"`
 }

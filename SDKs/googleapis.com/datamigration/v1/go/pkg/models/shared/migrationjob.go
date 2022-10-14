@@ -41,24 +41,24 @@ const (
 )
 
 type MigrationJob struct {
-	CreateTime             *string                 `json:"createTime"`
-	Destination            *string                 `json:"destination"`
-	DestinationDatabase    *DatabaseType           `json:"destinationDatabase"`
-	DisplayName            *string                 `json:"displayName"`
-	DumpFlags              *DumpFlags              `json:"dumpFlags"`
-	DumpPath               *string                 `json:"dumpPath"`
-	Duration               *string                 `json:"duration"`
-	EndTime                *string                 `json:"endTime"`
-	Error                  *Status                 `json:"error"`
-	Labels                 map[string]string       `json:"labels"`
-	Name                   *string                 `json:"name"`
-	Phase                  *MigrationJobPhaseEnum  `json:"phase"`
-	ReverseSSHConnectivity *ReverseSSHConnectivity `json:"reverseSshConnectivity"`
-	Source                 *string                 `json:"source"`
-	SourceDatabase         *DatabaseType           `json:"sourceDatabase"`
-	State                  *MigrationJobStateEnum  `json:"state"`
-	StaticIPConnectivity   map[string]interface{}  `json:"staticIpConnectivity"`
-	Type                   *MigrationJobTypeEnum   `json:"type"`
-	UpdateTime             *string                 `json:"updateTime"`
-	VpcPeeringConnectivity *VpcPeeringConnectivity `json:"vpcPeeringConnectivity"`
+	CreateTime             *string                 `json:"createTime,omitempty"`
+	Destination            *string                 `json:"destination,omitempty"`
+	DestinationDatabase    *DatabaseType           `json:"destinationDatabase,omitempty"`
+	DisplayName            *string                 `json:"displayName,omitempty"`
+	DumpFlags              *DumpFlags              `json:"dumpFlags,omitempty"`
+	DumpPath               *string                 `json:"dumpPath,omitempty"`
+	Duration               *string                 `json:"duration,omitempty"`
+	EndTime                *string                 `json:"endTime,omitempty"`
+	Error                  *Status                 `json:"error,omitempty"`
+	Labels                 map[string]string       `json:"labels,omitempty"`
+	Name                   *string                 `json:"name,omitempty"`
+	Phase                  *MigrationJobPhaseEnum  `json:"phase,omitempty"`
+	ReverseSSHConnectivity *ReverseSSHConnectivity `json:"reverseSshConnectivity,omitempty"`
+	Source                 *string                 `json:"source,omitempty"`
+	SourceDatabase         *DatabaseType           `json:"sourceDatabase,omitempty"`
+	State                  *MigrationJobStateEnum  `json:"state,omitempty"`
+	StaticIPConnectivity   map[string]interface{}  `json:"staticIpConnectivity,omitempty"`
+	Type                   *MigrationJobTypeEnum   `json:"type,omitempty"`
+	UpdateTime             *string                 `json:"updateTime,omitempty"`
+	VpcPeeringConnectivity *VpcPeeringConnectivity `json:"vpcPeeringConnectivity,omitempty"`
 }

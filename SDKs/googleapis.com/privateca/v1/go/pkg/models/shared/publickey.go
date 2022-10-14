@@ -8,6 +8,6 @@ const (
 )
 
 type PublicKey struct {
-	Format *PublicKeyFormatEnum `json:"format"`
-	Key    *string              `json:"key"`
+	Format *PublicKeyFormatEnum `json:"format,omitempty"`
+	Key    *string              `json:"key,omitempty"`
 }

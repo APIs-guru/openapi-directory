@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequest struct {
-	Duration         *string                                                                         `json:"duration"`
-	EndTime          *string                                                                         `json:"endTime"`
-	MashQuery        *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQuery            `json:"mashQuery"`
-	MetricFieldTable *bool                                                                           `json:"metricFieldTable"`
-	OutputPeriod     *string                                                                         `json:"outputPeriod"`
-	ResponseTemplate *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestResponseTemplateEnum `json:"responseTemplate"`
+	Duration         *string                                                                         `json:"duration,omitempty"`
+	EndTime          *string                                                                         `json:"endTime,omitempty"`
+	MashQuery        *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQuery            `json:"mashQuery,omitempty"`
+	MetricFieldTable *bool                                                                           `json:"metricFieldTable,omitempty"`
+	OutputPeriod     *string                                                                         `json:"outputPeriod,omitempty"`
+	ResponseTemplate *GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestResponseTemplateEnum `json:"responseTemplate,omitempty"`
 }

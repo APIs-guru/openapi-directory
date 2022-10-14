@@ -12,7 +12,7 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1ImportDocumentTemplate struct {
-	KnowledgeTypes []GoogleCloudDialogflowV2beta1ImportDocumentTemplateKnowledgeTypesEnum `json:"knowledgeTypes"`
-	Metadata       map[string]string                                                      `json:"metadata"`
-	MimeType       *string                                                                `json:"mimeType"`
+	KnowledgeTypes []GoogleCloudDialogflowV2beta1ImportDocumentTemplateKnowledgeTypesEnum `json:"knowledgeTypes,omitempty"`
+	Metadata       map[string]string                                                      `json:"metadata,omitempty"`
+	MimeType       *string                                                                `json:"mimeType,omitempty"`
 }

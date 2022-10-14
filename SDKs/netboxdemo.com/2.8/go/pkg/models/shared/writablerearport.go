@@ -20,12 +20,12 @@ const (
 )
 
 type WritableRearPort struct {
-	Cable       *NestedCable                 `json:"cable"`
-	Description *string                      `json:"description"`
+	Cable       *NestedCable                 `json:"cable,omitempty"`
+	Description *string                      `json:"description,omitempty"`
 	Device      int64                        `json:"device"`
-	ID          *int64                       `json:"id"`
+	ID          *int64                       `json:"id,omitempty"`
 	Name        string                       `json:"name"`
-	Positions   *int64                       `json:"positions"`
-	Tags        []string                     `json:"tags"`
+	Positions   *int64                       `json:"positions,omitempty"`
+	Tags        []string                     `json:"tags,omitempty"`
 	Type        WritableRearPortTypeTypeEnum `json:"type"`
 }

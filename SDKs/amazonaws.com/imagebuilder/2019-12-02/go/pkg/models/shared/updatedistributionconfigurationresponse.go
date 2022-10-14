@@ -1,7 +1,7 @@
 package shared
 
 type UpdateDistributionConfigurationResponse struct {
-	ClientToken                  *string `json:"clientToken"`
-	DistributionConfigurationArn *string `json:"distributionConfigurationArn"`
-	RequestID                    *string `json:"requestId"`
+	ClientToken                  *string `json:"clientToken,omitempty"`
+	DistributionConfigurationArn *string `json:"distributionConfigurationArn,omitempty"`
+	RequestID                    *string `json:"requestId,omitempty"`
 }

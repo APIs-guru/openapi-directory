@@ -1,8 +1,8 @@
 package shared
 
 type ConfigDhcp struct {
-	AddOptions *string `json:"add_options"`
-	Classid    *string `json:"classid"`
-	Hwaddr     *string `json:"hwaddr"`
-	Script     *string `json:"script"`
+	AddOptions *string `json:"add_options,omitempty"`
+	Classid    *string `json:"classid,omitempty"`
+	Hwaddr     *string `json:"hwaddr,omitempty"`
+	Script     *string `json:"script,omitempty"`
 }

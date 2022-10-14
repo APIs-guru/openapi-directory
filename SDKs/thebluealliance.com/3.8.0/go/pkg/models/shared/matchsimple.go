@@ -1,8 +1,8 @@
 package shared
 
 type MatchSimpleAlliances struct {
-	Blue *MatchAlliance `json:"blue"`
-	Red  *MatchAlliance `json:"red"`
+	Blue *MatchAlliance `json:"blue,omitempty"`
+	Red  *MatchAlliance `json:"red,omitempty"`
 }
 
 type MatchSimpleCompLevelEnum string
@@ -24,14 +24,14 @@ const (
 )
 
 type MatchSimple struct {
-	ActualTime      *int64                          `json:"actual_time"`
-	Alliances       *MatchSimpleAlliances           `json:"alliances"`
+	ActualTime      *int64                          `json:"actual_time,omitempty"`
+	Alliances       *MatchSimpleAlliances           `json:"alliances,omitempty"`
 	CompLevel       MatchSimpleCompLevelEnum        `json:"comp_level"`
 	EventKey        string                          `json:"event_key"`
 	Key             string                          `json:"key"`
 	MatchNumber     int64                           `json:"match_number"`
-	PredictedTime   *int64                          `json:"predicted_time"`
+	PredictedTime   *int64                          `json:"predicted_time,omitempty"`
 	SetNumber       int64                           `json:"set_number"`
-	Time            *int64                          `json:"time"`
-	WinningAlliance *MatchSimpleWinningAllianceEnum `json:"winning_alliance"`
+	Time            *int64                          `json:"time,omitempty"`
+	WinningAlliance *MatchSimpleWinningAllianceEnum `json:"winning_alliance,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type Screenshot struct {
-	Caption      *string       `json:"caption"`
-	File         *File         `json:"file"`
-	ID           *string       `json:"id"`
-	Translations []Translation `json:"translations"`
+	Caption      *string       `json:"caption,omitempty"`
+	File         *File         `json:"file,omitempty"`
+	ID           *string       `json:"id,omitempty"`
+	Translations []Translation `json:"translations,omitempty"`
 }

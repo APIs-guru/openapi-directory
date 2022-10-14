@@ -17,20 +17,20 @@ const (
 )
 
 type GoogleCloudDataplexV1Entity struct {
-	Asset           *string                                         `json:"asset"`
-	CatalogEntry    *string                                         `json:"catalogEntry"`
-	Compatibility   *GoogleCloudDataplexV1EntityCompatibilityStatus `json:"compatibility"`
-	CreateTime      *string                                         `json:"createTime"`
-	DataPath        *string                                         `json:"dataPath"`
-	DataPathPattern *string                                         `json:"dataPathPattern"`
-	Description     *string                                         `json:"description"`
-	DisplayName     *string                                         `json:"displayName"`
-	Etag            *string                                         `json:"etag"`
-	Format          *GoogleCloudDataplexV1StorageFormat             `json:"format"`
-	ID              *string                                         `json:"id"`
-	Name            *string                                         `json:"name"`
-	Schema          *GoogleCloudDataplexV1Schema                    `json:"schema"`
-	System          *GoogleCloudDataplexV1EntitySystemEnum          `json:"system"`
-	Type            *GoogleCloudDataplexV1EntityTypeEnum            `json:"type"`
-	UpdateTime      *string                                         `json:"updateTime"`
+	Asset           *string                                         `json:"asset,omitempty"`
+	CatalogEntry    *string                                         `json:"catalogEntry,omitempty"`
+	Compatibility   *GoogleCloudDataplexV1EntityCompatibilityStatus `json:"compatibility,omitempty"`
+	CreateTime      *string                                         `json:"createTime,omitempty"`
+	DataPath        *string                                         `json:"dataPath,omitempty"`
+	DataPathPattern *string                                         `json:"dataPathPattern,omitempty"`
+	Description     *string                                         `json:"description,omitempty"`
+	DisplayName     *string                                         `json:"displayName,omitempty"`
+	Etag            *string                                         `json:"etag,omitempty"`
+	Format          *GoogleCloudDataplexV1StorageFormat             `json:"format,omitempty"`
+	ID              *string                                         `json:"id,omitempty"`
+	Name            *string                                         `json:"name,omitempty"`
+	Schema          *GoogleCloudDataplexV1Schema                    `json:"schema,omitempty"`
+	System          *GoogleCloudDataplexV1EntitySystemEnum          `json:"system,omitempty"`
+	Type            *GoogleCloudDataplexV1EntityTypeEnum            `json:"type,omitempty"`
+	UpdateTime      *string                                         `json:"updateTime,omitempty"`
 }

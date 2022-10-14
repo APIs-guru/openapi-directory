@@ -10,7 +10,7 @@ const (
 )
 
 type FieldSection struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type FieldTypeEnum string
@@ -27,13 +27,13 @@ const (
 )
 
 type Field struct {
-	Entropy  *float64          `json:"entropy"`
-	Generate *bool             `json:"generate"`
+	Entropy  *float64          `json:"entropy,omitempty"`
+	Generate *bool             `json:"generate,omitempty"`
 	ID       string            `json:"id"`
-	Label    *string           `json:"label"`
-	Purpose  *FieldPurposeEnum `json:"purpose"`
-	Recipe   *GeneratorRecipe  `json:"recipe"`
-	Section  *FieldSection     `json:"section"`
+	Label    *string           `json:"label,omitempty"`
+	Purpose  *FieldPurposeEnum `json:"purpose,omitempty"`
+	Recipe   *GeneratorRecipe  `json:"recipe,omitempty"`
+	Section  *FieldSection     `json:"section,omitempty"`
 	Type     FieldTypeEnum     `json:"type"`
-	Value    *string           `json:"value"`
+	Value    *string           `json:"value,omitempty"`
 }

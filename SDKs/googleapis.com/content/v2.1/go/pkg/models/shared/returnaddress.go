@@ -1,10 +1,10 @@
 package shared
 
 type ReturnAddress struct {
-	Address         *ReturnAddressAddress `json:"address"`
-	Country         *string               `json:"country"`
-	Kind            *string               `json:"kind"`
-	Label           *string               `json:"label"`
-	PhoneNumber     *string               `json:"phoneNumber"`
-	ReturnAddressID *string               `json:"returnAddressId"`
+	Address         *ReturnAddressAddress `json:"address,omitempty"`
+	Country         *string               `json:"country,omitempty"`
+	Kind            *string               `json:"kind,omitempty"`
+	Label           *string               `json:"label,omitempty"`
+	PhoneNumber     *string               `json:"phoneNumber,omitempty"`
+	ReturnAddressID *string               `json:"returnAddressId,omitempty"`
 }

@@ -12,14 +12,14 @@ const (
 )
 
 type GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnection struct {
-	Connectors       []string                                                          `json:"connectors"`
-	CreateTime       *string                                                           `json:"createTime"`
-	DestinationCidrs []string                                                          `json:"destinationCidrs"`
-	DisplayName      *string                                                           `json:"displayName"`
-	Labels           map[string]string                                                 `json:"labels"`
-	Name             *string                                                           `json:"name"`
-	NetworkVpc       *string                                                           `json:"networkVpc"`
-	State            *GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnectionStateEnum `json:"state"`
-	UID              *string                                                           `json:"uid"`
-	UpdateTime       *string                                                           `json:"updateTime"`
+	Connectors       []string                                                          `json:"connectors,omitempty"`
+	CreateTime       *string                                                           `json:"createTime,omitempty"`
+	DestinationCidrs []string                                                          `json:"destinationCidrs,omitempty"`
+	DisplayName      *string                                                           `json:"displayName,omitempty"`
+	Labels           map[string]string                                                 `json:"labels,omitempty"`
+	Name             *string                                                           `json:"name,omitempty"`
+	NetworkVpc       *string                                                           `json:"networkVpc,omitempty"`
+	State            *GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnectionStateEnum `json:"state,omitempty"`
+	UID              *string                                                           `json:"uid,omitempty"`
+	UpdateTime       *string                                                           `json:"updateTime,omitempty"`
 }

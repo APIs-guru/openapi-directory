@@ -1,7 +1,7 @@
 package shared
 
 type ExecutionParameter struct {
-	DefaultValues []string `json:"DefaultValues"`
-	Name          *string  `json:"Name"`
-	Type          *string  `json:"Type"`
+	DefaultValues []string `json:"DefaultValues,omitempty"`
+	Name          *string  `json:"Name,omitempty"`
+	Type          *string  `json:"Type,omitempty"`
 }

@@ -9,7 +9,7 @@ type PutOfferingsOfferingIDMetadataLevelPathParams struct {
 }
 
 type PutOfferingsOfferingIDMetadataLevelRequestBody struct {
-	Level *string `json:"level"`
+	Level *string `json:"level,omitempty"`
 }
 
 type PutOfferingsOfferingIDMetadataLevelRequest struct {

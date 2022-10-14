@@ -20,6 +20,6 @@ const (
 )
 
 type Platform struct {
-	Name         *string                   `json:"name"`
-	PlatformType *PlatformPlatformTypeEnum `json:"platformType"`
+	Name         *string                   `json:"name,omitempty"`
+	PlatformType *PlatformPlatformTypeEnum `json:"platformType,omitempty"`
 }

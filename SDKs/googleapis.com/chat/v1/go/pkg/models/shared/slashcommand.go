@@ -1,5 +1,5 @@
 package shared
 
 type SlashCommand struct {
-	CommandID *string `json:"commandId"`
+	CommandID *string `json:"commandId,omitempty"`
 }

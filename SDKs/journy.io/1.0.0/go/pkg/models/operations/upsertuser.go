@@ -1,13 +1,13 @@
 package operations
 
 type UpsertUserRequestBodyIdentification struct {
-	Email  *string `json:"email"`
-	UserID *string `json:"userId"`
+	Email  *string `json:"email,omitempty"`
+	UserID *string `json:"userId,omitempty"`
 }
 
 type UpsertUserRequestBody struct {
 	Identification UpsertUserRequestBodyIdentification `json:"identification"`
-	Properties     map[string]interface{}              `json:"properties"`
+	Properties     map[string]interface{}              `json:"properties,omitempty"`
 }
 
 type UpsertUserRequest struct {
@@ -25,14 +25,14 @@ type UpsertUser201ApplicationJSON struct {
 }
 
 type UpsertUser400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header"`
-	Path   map[string]string `json:"path"`
-	Query  map[string]string `json:"query"`
+	Header map[string]string `json:"header,omitempty"`
+	Path   map[string]string `json:"path,omitempty"`
+	Query  map[string]string `json:"query,omitempty"`
 }
 
 type UpsertUser400ApplicationJSONErrors struct {
-	Fields     map[string]string                             `json:"fields"`
-	Parameters *UpsertUser400ApplicationJSONErrorsParameters `json:"parameters"`
+	Fields     map[string]string                             `json:"fields,omitempty"`
+	Parameters *UpsertUser400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
 }
 
 type UpsertUser400ApplicationJSONMeta struct {

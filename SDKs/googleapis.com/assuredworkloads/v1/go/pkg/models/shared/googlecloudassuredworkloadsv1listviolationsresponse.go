@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudAssuredworkloadsV1ListViolationsResponse struct {
-	NextPageToken *string                                  `json:"nextPageToken"`
-	Violations    []GoogleCloudAssuredworkloadsV1Violation `json:"violations"`
+	NextPageToken *string                                  `json:"nextPageToken,omitempty"`
+	Violations    []GoogleCloudAssuredworkloadsV1Violation `json:"violations,omitempty"`
 }

@@ -6,11 +6,11 @@ import (
 
 type Page struct {
 	ContactArn    string     `json:"ContactArn"`
-	DeliveryTime  *time.Time `json:"DeliveryTime"`
+	DeliveryTime  *time.Time `json:"DeliveryTime,omitempty"`
 	EngagementArn string     `json:"EngagementArn"`
-	IncidentID    *string    `json:"IncidentId"`
+	IncidentID    *string    `json:"IncidentId,omitempty"`
 	PageArn       string     `json:"PageArn"`
-	ReadTime      *time.Time `json:"ReadTime"`
+	ReadTime      *time.Time `json:"ReadTime,omitempty"`
 	Sender        string     `json:"Sender"`
-	SentTime      *time.Time `json:"SentTime"`
+	SentTime      *time.Time `json:"SentTime,omitempty"`
 }

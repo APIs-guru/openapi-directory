@@ -21,7 +21,7 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaLinkProposalStatusDetails struct {
-	LinkProposalInitiatingProduct *GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum `json:"linkProposalInitiatingProduct"`
-	LinkProposalState             *GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum             `json:"linkProposalState"`
-	RequestorEmail                *string                                                                                `json:"requestorEmail"`
+	LinkProposalInitiatingProduct *GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum `json:"linkProposalInitiatingProduct,omitempty"`
+	LinkProposalState             *GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum             `json:"linkProposalState,omitempty"`
+	RequestorEmail                *string                                                                                `json:"requestorEmail,omitempty"`
 }

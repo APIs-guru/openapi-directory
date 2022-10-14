@@ -8,10 +8,10 @@ const (
 )
 
 type Type struct {
-	Fields        []Field         `json:"fields"`
-	Name          *string         `json:"name"`
-	Oneofs        []string        `json:"oneofs"`
-	Options       []Option        `json:"options"`
-	SourceContext *SourceContext  `json:"sourceContext"`
-	Syntax        *TypeSyntaxEnum `json:"syntax"`
+	Fields        []Field         `json:"fields,omitempty"`
+	Name          *string         `json:"name,omitempty"`
+	Oneofs        []string        `json:"oneofs,omitempty"`
+	Options       []Option        `json:"options,omitempty"`
+	SourceContext *SourceContext  `json:"sourceContext,omitempty"`
+	Syntax        *TypeSyntaxEnum `json:"syntax,omitempty"`
 }

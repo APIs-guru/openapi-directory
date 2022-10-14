@@ -5,7 +5,7 @@ import (
 )
 
 type VideoRecordingDetails struct {
-	Location            *GeoPoint  `json:"location"`
-	LocationDescription *string    `json:"locationDescription"`
-	RecordingDate       *time.Time `json:"recordingDate"`
+	Location            *GeoPoint  `json:"location,omitempty"`
+	LocationDescription *string    `json:"locationDescription,omitempty"`
+	RecordingDate       *time.Time `json:"recordingDate,omitempty"`
 }

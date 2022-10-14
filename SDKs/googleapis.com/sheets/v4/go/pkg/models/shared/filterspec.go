@@ -1,7 +1,7 @@
 package shared
 
 type FilterSpec struct {
-	ColumnIndex               *int32                     `json:"columnIndex"`
-	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference"`
-	FilterCriteria            *FilterCriteria            `json:"filterCriteria"`
+	ColumnIndex               *int32                     `json:"columnIndex,omitempty"`
+	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference,omitempty"`
+	FilterCriteria            *FilterCriteria            `json:"filterCriteria,omitempty"`
 }

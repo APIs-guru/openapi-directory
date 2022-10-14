@@ -1,9 +1,9 @@
 package shared
 
 type LiveChatSuperStickerDetails struct {
-	AmountDisplayString  *string               `json:"amountDisplayString"`
-	AmountMicros         *string               `json:"amountMicros"`
-	Currency             *string               `json:"currency"`
-	SuperStickerMetadata *SuperStickerMetadata `json:"superStickerMetadata"`
-	Tier                 *int64                `json:"tier"`
+	AmountDisplayString  *string               `json:"amountDisplayString,omitempty"`
+	AmountMicros         *string               `json:"amountMicros,omitempty"`
+	Currency             *string               `json:"currency,omitempty"`
+	SuperStickerMetadata *SuperStickerMetadata `json:"superStickerMetadata,omitempty"`
+	Tier                 *int64                `json:"tier,omitempty"`
 }

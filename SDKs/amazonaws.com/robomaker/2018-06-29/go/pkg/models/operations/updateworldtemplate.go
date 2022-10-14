@@ -15,15 +15,15 @@ type UpdateWorldTemplateHeaders struct {
 }
 
 type UpdateWorldTemplateRequestBodyTemplateLocation struct {
-	S3Bucket *string `json:"s3Bucket"`
-	S3Key    *string `json:"s3Key"`
+	S3Bucket *string `json:"s3Bucket,omitempty"`
+	S3Key    *string `json:"s3Key,omitempty"`
 }
 
 type UpdateWorldTemplateRequestBody struct {
-	Name             *string                                         `json:"name"`
+	Name             *string                                         `json:"name,omitempty"`
 	Template         string                                          `json:"template"`
-	TemplateBody     *string                                         `json:"templateBody"`
-	TemplateLocation *UpdateWorldTemplateRequestBodyTemplateLocation `json:"templateLocation"`
+	TemplateBody     *string                                         `json:"templateBody,omitempty"`
+	TemplateLocation *UpdateWorldTemplateRequestBodyTemplateLocation `json:"templateLocation,omitempty"`
 }
 
 type UpdateWorldTemplateRequest struct {

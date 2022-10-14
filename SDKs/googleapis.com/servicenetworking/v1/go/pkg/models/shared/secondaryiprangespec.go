@@ -1,8 +1,8 @@
 package shared
 
 type SecondaryIPRangeSpec struct {
-	IPPrefixLength                 *int32  `json:"ipPrefixLength"`
-	OutsideAllocationPublicIPRange *string `json:"outsideAllocationPublicIpRange"`
-	RangeName                      *string `json:"rangeName"`
-	RequestedAddress               *string `json:"requestedAddress"`
+	IPPrefixLength                 *int32  `json:"ipPrefixLength,omitempty"`
+	OutsideAllocationPublicIPRange *string `json:"outsideAllocationPublicIpRange,omitempty"`
+	RangeName                      *string `json:"rangeName,omitempty"`
+	RequestedAddress               *string `json:"requestedAddress,omitempty"`
 }

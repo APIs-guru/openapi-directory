@@ -5,13 +5,13 @@ import (
 )
 
 type DetectMitigationActionExecution struct {
-	ActionName         *string                                    `json:"actionName"`
-	ErrorCode          *string                                    `json:"errorCode"`
-	ExecutionEndDate   *time.Time                                 `json:"executionEndDate"`
-	ExecutionStartDate *time.Time                                 `json:"executionStartDate"`
-	Message            *string                                    `json:"message"`
-	Status             *DetectMitigationActionExecutionStatusEnum `json:"status"`
-	TaskID             *string                                    `json:"taskId"`
-	ThingName          *string                                    `json:"thingName"`
-	ViolationID        *string                                    `json:"violationId"`
+	ActionName         *string                                    `json:"actionName,omitempty"`
+	ErrorCode          *string                                    `json:"errorCode,omitempty"`
+	ExecutionEndDate   *time.Time                                 `json:"executionEndDate,omitempty"`
+	ExecutionStartDate *time.Time                                 `json:"executionStartDate,omitempty"`
+	Message            *string                                    `json:"message,omitempty"`
+	Status             *DetectMitigationActionExecutionStatusEnum `json:"status,omitempty"`
+	TaskID             *string                                    `json:"taskId,omitempty"`
+	ThingName          *string                                    `json:"thingName,omitempty"`
+	ViolationID        *string                                    `json:"violationId,omitempty"`
 }

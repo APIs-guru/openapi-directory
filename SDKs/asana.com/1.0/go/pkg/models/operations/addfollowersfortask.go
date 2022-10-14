@@ -14,7 +14,7 @@ type AddFollowersForTaskQueryParams struct {
 }
 
 type AddFollowersForTaskRequestBody struct {
-	Data *shared.TaskAddFollowersRequest `json:"data"`
+	Data *shared.TaskAddFollowersRequest `json:"data,omitempty"`
 }
 
 type AddFollowersForTaskRequest struct {
@@ -24,7 +24,7 @@ type AddFollowersForTaskRequest struct {
 }
 
 type AddFollowersForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddFollowersForTaskResponse struct {

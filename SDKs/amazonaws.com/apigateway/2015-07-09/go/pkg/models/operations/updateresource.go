@@ -20,7 +20,7 @@ type UpdateResourceHeaders struct {
 }
 
 type UpdateResourceRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateResourceRequest struct {

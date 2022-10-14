@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleCloudMlV1Study struct {
-	CreateTime     *string                        `json:"createTime"`
-	InactiveReason *string                        `json:"inactiveReason"`
-	Name           *string                        `json:"name"`
-	State          *GoogleCloudMlV1StudyStateEnum `json:"state"`
-	StudyConfig    *GoogleCloudMlV1StudyConfig    `json:"studyConfig"`
+	CreateTime     *string                        `json:"createTime,omitempty"`
+	InactiveReason *string                        `json:"inactiveReason,omitempty"`
+	Name           *string                        `json:"name,omitempty"`
+	State          *GoogleCloudMlV1StudyStateEnum `json:"state,omitempty"`
+	StudyConfig    *GoogleCloudMlV1StudyConfig    `json:"studyConfig,omitempty"`
 }

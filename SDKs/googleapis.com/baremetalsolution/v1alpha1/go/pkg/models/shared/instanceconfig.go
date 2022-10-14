@@ -1,12 +1,12 @@
 package shared
 
 type InstanceConfig struct {
-	ClientNetwork  *NetworkAddress `json:"clientNetwork"`
-	Hyperthreading *bool           `json:"hyperthreading"`
-	ID             *string         `json:"id"`
-	InstanceType   *string         `json:"instanceType"`
-	Location       *string         `json:"location"`
-	OsImage        *string         `json:"osImage"`
-	PrivateNetwork *NetworkAddress `json:"privateNetwork"`
-	UserNote       *string         `json:"userNote"`
+	ClientNetwork  *NetworkAddress `json:"clientNetwork,omitempty"`
+	Hyperthreading *bool           `json:"hyperthreading,omitempty"`
+	ID             *string         `json:"id,omitempty"`
+	InstanceType   *string         `json:"instanceType,omitempty"`
+	Location       *string         `json:"location,omitempty"`
+	OsImage        *string         `json:"osImage,omitempty"`
+	PrivateNetwork *NetworkAddress `json:"privateNetwork,omitempty"`
+	UserNote       *string         `json:"userNote,omitempty"`
 }

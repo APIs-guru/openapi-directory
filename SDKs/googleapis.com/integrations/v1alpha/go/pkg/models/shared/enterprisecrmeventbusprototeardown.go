@@ -1,5 +1,5 @@
 package shared
 
 type EnterpriseCrmEventbusProtoTeardown struct {
-	TeardownTaskConfigs []EnterpriseCrmEventbusProtoTeardownTaskConfig `json:"teardownTaskConfigs"`
+	TeardownTaskConfigs []EnterpriseCrmEventbusProtoTeardownTaskConfig `json:"teardownTaskConfigs,omitempty"`
 }

@@ -9,10 +9,10 @@ const (
 )
 
 type ProgrammaticGuaranteedTerms struct {
-	FixedPrice          *Price                                          `json:"fixedPrice"`
-	GuaranteedLooks     *string                                         `json:"guaranteedLooks"`
-	ImpressionCap       *string                                         `json:"impressionCap"`
-	MinimumDailyLooks   *string                                         `json:"minimumDailyLooks"`
-	PercentShareOfVoice *string                                         `json:"percentShareOfVoice"`
-	ReservationType     *ProgrammaticGuaranteedTermsReservationTypeEnum `json:"reservationType"`
+	FixedPrice          *Price                                          `json:"fixedPrice,omitempty"`
+	GuaranteedLooks     *string                                         `json:"guaranteedLooks,omitempty"`
+	ImpressionCap       *string                                         `json:"impressionCap,omitempty"`
+	MinimumDailyLooks   *string                                         `json:"minimumDailyLooks,omitempty"`
+	PercentShareOfVoice *string                                         `json:"percentShareOfVoice,omitempty"`
+	ReservationType     *ProgrammaticGuaranteedTermsReservationTypeEnum `json:"reservationType,omitempty"`
 }

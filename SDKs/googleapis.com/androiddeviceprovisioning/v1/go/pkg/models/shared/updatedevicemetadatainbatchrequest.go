@@ -1,5 +1,5 @@
 package shared
 
 type UpdateDeviceMetadataInBatchRequest struct {
-	Updates []UpdateMetadataArguments `json:"updates"`
+	Updates []UpdateMetadataArguments `json:"updates,omitempty"`
 }

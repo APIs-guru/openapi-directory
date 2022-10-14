@@ -13,10 +13,10 @@ const (
 )
 
 type Instance struct {
-	Config       *Config            `json:"config"`
-	CreateTime   *string            `json:"createTime"`
-	Name         *string            `json:"name"`
-	State        *InstanceStateEnum `json:"state"`
-	StateMessage *string            `json:"stateMessage"`
-	UpdateTime   *string            `json:"updateTime"`
+	Config       *Config            `json:"config,omitempty"`
+	CreateTime   *string            `json:"createTime,omitempty"`
+	Name         *string            `json:"name,omitempty"`
+	State        *InstanceStateEnum `json:"state,omitempty"`
+	StateMessage *string            `json:"stateMessage,omitempty"`
+	UpdateTime   *string            `json:"updateTime,omitempty"`
 }

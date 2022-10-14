@@ -1,6 +1,6 @@
 package shared
 
 type HTTPTimeout struct {
-	Idle       *Duration `json:"idle"`
-	PerRequest *Duration `json:"perRequest"`
+	Idle       *Duration `json:"idle,omitempty"`
+	PerRequest *Duration `json:"perRequest,omitempty"`
 }

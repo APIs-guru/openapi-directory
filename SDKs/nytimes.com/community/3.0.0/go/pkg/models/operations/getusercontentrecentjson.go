@@ -13,88 +13,88 @@ type GetUserContentRecentJSONRequest struct {
 }
 
 type GetUserContentRecentJSON200ApplicationJSONDebug struct {
-	Version *float64 `json:"version"`
+	Version *float64 `json:"version,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetAllProperties struct {
-	Description *string                  `json:"description"`
-	Name        *string                  `json:"name"`
-	Properties  []map[string]interface{} `json:"properties"`
+	Description *string                  `json:"description,omitempty"`
+	Name        *string                  `json:"name,omitempty"`
+	Properties  []map[string]interface{} `json:"properties,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesAutomoderationOn struct {
-	GroupID    *int64 `json:"groupID"`
-	TaxonomyID *int64 `json:"taxonomyID"`
+	GroupID    *int64 `json:"groupID,omitempty"`
+	TaxonomyID *int64 `json:"taxonomyID,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesCommentListSortEditors struct {
-	GroupID    *int64 `json:"groupID"`
-	TaxonomyID *int64 `json:"taxonomyID"`
+	GroupID    *int64 `json:"groupID,omitempty"`
+	TaxonomyID *int64 `json:"taxonomyID,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesReachedMaxComOff struct {
-	GroupID    *int64 `json:"groupID"`
-	TaxonomyID *int64 `json:"taxonomyID"`
+	GroupID    *int64 `json:"groupID,omitempty"`
+	TaxonomyID *int64 `json:"taxonomyID,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetProperties struct {
-	AutomoderationOn       *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesAutomoderationOn       `json:"automoderation-on"`
-	CommentListSortEditors *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesCommentListSortEditors `json:"comment-list-sort-editors"`
-	ReachedMaxComOff       *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesReachedMaxComOff       `json:"reached-max-com-off"`
+	AutomoderationOn       *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesAutomoderationOn       `json:"automoderation-on,omitempty"`
+	CommentListSortEditors *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesCommentListSortEditors `json:"comment-list-sort-editors,omitempty"`
+	ReachedMaxComOff       *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetPropertiesReachedMaxComOff       `json:"reached-max-com-off,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResultsCommentsAsset struct {
-	AllProperties []GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetAllProperties `json:"all-properties"`
-	AssetID       *int64                                                                        `json:"assetID"`
-	AssetTitle    *string                                                                       `json:"assetTitle"`
-	AssetURL      *string                                                                       `json:"assetURL"`
-	CreateDate    *string                                                                       `json:"createDate"`
-	Labels        []map[string]interface{}                                                      `json:"labels"`
-	Properties    *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetProperties     `json:"properties"`
-	Source        *string                                                                       `json:"source"`
-	Taxonomy      *string                                                                       `json:"taxonomy"`
-	Text          []map[string]interface{}                                                      `json:"text"`
-	UpdateDate    *string                                                                       `json:"updateDate"`
-	VendorID      *string                                                                       `json:"vendorID"`
+	AllProperties []GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetAllProperties `json:"all-properties,omitempty"`
+	AssetID       *int64                                                                        `json:"assetID,omitempty"`
+	AssetTitle    *string                                                                       `json:"assetTitle,omitempty"`
+	AssetURL      *string                                                                       `json:"assetURL,omitempty"`
+	CreateDate    *string                                                                       `json:"createDate,omitempty"`
+	Labels        []map[string]interface{}                                                      `json:"labels,omitempty"`
+	Properties    *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAssetProperties     `json:"properties,omitempty"`
+	Source        *string                                                                       `json:"source,omitempty"`
+	Taxonomy      *string                                                                       `json:"taxonomy,omitempty"`
+	Text          []map[string]interface{}                                                      `json:"text,omitempty"`
+	UpdateDate    *string                                                                       `json:"updateDate,omitempty"`
+	VendorID      *string                                                                       `json:"vendorID,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResultsComments struct {
-	ApproveDate         *string                                                         `json:"approveDate"`
-	Asset               *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAsset `json:"asset"`
-	AssetID             *int64                                                          `json:"assetID"`
-	CommentBody         *string                                                         `json:"commentBody"`
-	CommentID           *int64                                                          `json:"commentID"`
-	CommentSequence     *int64                                                          `json:"commentSequence"`
-	CommentTitle        *string                                                         `json:"commentTitle"`
-	CommentType         *string                                                         `json:"commentType"`
-	CreateDate          *string                                                         `json:"createDate"`
-	DisplayName         *string                                                         `json:"display_name"`
-	EditorsSelection    *int64                                                          `json:"editorsSelection"`
-	Location            *string                                                         `json:"location"`
-	ParentID            *interface{}                                                    `json:"parentID"`
-	RecommendationCount *int64                                                          `json:"recommendationCount"`
-	Replies             []map[string]interface{}                                        `json:"replies"`
-	Status              *string                                                         `json:"status"`
-	StatusID            *int64                                                          `json:"statusID"`
-	UpdateDate          *string                                                         `json:"updateDate"`
-	UserDisplayName     *string                                                         `json:"userDisplayName"`
-	UserID              *int64                                                          `json:"userID"`
-	UserLocation        *string                                                         `json:"userLocation"`
-	UserTitle           *string                                                         `json:"userTitle"`
-	UserURL             *string                                                         `json:"userURL"`
+	ApproveDate         *string                                                         `json:"approveDate,omitempty"`
+	Asset               *GetUserContentRecentJSON200ApplicationJSONResultsCommentsAsset `json:"asset,omitempty"`
+	AssetID             *int64                                                          `json:"assetID,omitempty"`
+	CommentBody         *string                                                         `json:"commentBody,omitempty"`
+	CommentID           *int64                                                          `json:"commentID,omitempty"`
+	CommentSequence     *int64                                                          `json:"commentSequence,omitempty"`
+	CommentTitle        *string                                                         `json:"commentTitle,omitempty"`
+	CommentType         *string                                                         `json:"commentType,omitempty"`
+	CreateDate          *string                                                         `json:"createDate,omitempty"`
+	DisplayName         *string                                                         `json:"display_name,omitempty"`
+	EditorsSelection    *int64                                                          `json:"editorsSelection,omitempty"`
+	Location            *string                                                         `json:"location,omitempty"`
+	ParentID            *interface{}                                                    `json:"parentID,omitempty"`
+	RecommendationCount *int64                                                          `json:"recommendationCount,omitempty"`
+	Replies             []map[string]interface{}                                        `json:"replies,omitempty"`
+	Status              *string                                                         `json:"status,omitempty"`
+	StatusID            *int64                                                          `json:"statusID,omitempty"`
+	UpdateDate          *string                                                         `json:"updateDate,omitempty"`
+	UserDisplayName     *string                                                         `json:"userDisplayName,omitempty"`
+	UserID              *int64                                                          `json:"userID,omitempty"`
+	UserLocation        *string                                                         `json:"userLocation,omitempty"`
+	UserTitle           *string                                                         `json:"userTitle,omitempty"`
+	UserURL             *string                                                         `json:"userURL,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSONResults struct {
-	APITimestamp          *string                                                     `json:"api_timestamp"`
-	Comments              []GetUserContentRecentJSON200ApplicationJSONResultsComments `json:"comments"`
-	TotalCommentsReturned *int64                                                      `json:"totalCommentsReturned"`
+	APITimestamp          *string                                                     `json:"api_timestamp,omitempty"`
+	Comments              []GetUserContentRecentJSON200ApplicationJSONResultsComments `json:"comments,omitempty"`
+	TotalCommentsReturned *int64                                                      `json:"totalCommentsReturned,omitempty"`
 }
 
 type GetUserContentRecentJSON200ApplicationJSON struct {
-	Copyright *string                                            `json:"copyright"`
-	Debug     *GetUserContentRecentJSON200ApplicationJSONDebug   `json:"debug"`
-	Results   *GetUserContentRecentJSON200ApplicationJSONResults `json:"results"`
-	Status    *string                                            `json:"status"`
+	Copyright *string                                            `json:"copyright,omitempty"`
+	Debug     *GetUserContentRecentJSON200ApplicationJSONDebug   `json:"debug,omitempty"`
+	Results   *GetUserContentRecentJSON200ApplicationJSONResults `json:"results,omitempty"`
+	Status    *string                                            `json:"status,omitempty"`
 }
 
 type GetUserContentRecentJSONResponse struct {

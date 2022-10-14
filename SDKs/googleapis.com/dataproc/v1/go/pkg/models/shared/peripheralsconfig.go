@@ -1,6 +1,6 @@
 package shared
 
 type PeripheralsConfig struct {
-	MetastoreService         *string                   `json:"metastoreService"`
-	SparkHistoryServerConfig *SparkHistoryServerConfig `json:"sparkHistoryServerConfig"`
+	MetastoreService         *string                   `json:"metastoreService,omitempty"`
+	SparkHistoryServerConfig *SparkHistoryServerConfig `json:"sparkHistoryServerConfig,omitempty"`
 }

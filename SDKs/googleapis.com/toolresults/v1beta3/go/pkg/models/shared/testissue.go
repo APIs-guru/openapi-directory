@@ -56,10 +56,10 @@ const (
 )
 
 type TestIssue struct {
-	Category     *TestIssueCategoryEnum `json:"category"`
-	ErrorMessage *string                `json:"errorMessage"`
-	Severity     *TestIssueSeverityEnum `json:"severity"`
-	StackTrace   *StackTrace            `json:"stackTrace"`
-	Type         *TestIssueTypeEnum     `json:"type"`
-	Warning      *Any                   `json:"warning"`
+	Category     *TestIssueCategoryEnum `json:"category,omitempty"`
+	ErrorMessage *string                `json:"errorMessage,omitempty"`
+	Severity     *TestIssueSeverityEnum `json:"severity,omitempty"`
+	StackTrace   *StackTrace            `json:"stackTrace,omitempty"`
+	Type         *TestIssueTypeEnum     `json:"type,omitempty"`
+	Warning      *Any                   `json:"warning,omitempty"`
 }

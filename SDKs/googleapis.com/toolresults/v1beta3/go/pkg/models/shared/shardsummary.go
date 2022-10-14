@@ -1,6 +1,6 @@
 package shared
 
 type ShardSummary struct {
-	Runs        []map[string]interface{} `json:"runs"`
-	ShardResult *MergedResult            `json:"shardResult"`
+	Runs        []map[string]interface{} `json:"runs,omitempty"`
+	ShardResult *MergedResult            `json:"shardResult,omitempty"`
 }

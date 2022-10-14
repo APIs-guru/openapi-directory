@@ -1,5 +1,5 @@
 package shared
 
 type LineItemFields struct {
-	LineItemExpenseFields []ExpenseField `json:"LineItemExpenseFields"`
+	LineItemExpenseFields []ExpenseField `json:"LineItemExpenseFields,omitempty"`
 }

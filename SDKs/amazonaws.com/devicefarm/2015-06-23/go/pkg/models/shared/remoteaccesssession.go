@@ -5,25 +5,25 @@ import (
 )
 
 type RemoteAccessSession struct {
-	Arn                 *string              `json:"arn"`
-	BillingMethod       *BillingMethodEnum   `json:"billingMethod"`
-	ClientID            *string              `json:"clientId"`
-	Created             *time.Time           `json:"created"`
-	Device              *Device              `json:"device"`
-	DeviceMinutes       *DeviceMinutes       `json:"deviceMinutes"`
-	DeviceUdid          *string              `json:"deviceUdid"`
-	Endpoint            *string              `json:"endpoint"`
-	HostAddress         *string              `json:"hostAddress"`
-	InstanceArn         *string              `json:"instanceArn"`
-	InteractionMode     *InteractionModeEnum `json:"interactionMode"`
-	Message             *string              `json:"message"`
-	Name                *string              `json:"name"`
-	RemoteDebugEnabled  *bool                `json:"remoteDebugEnabled"`
-	RemoteRecordAppArn  *string              `json:"remoteRecordAppArn"`
-	RemoteRecordEnabled *bool                `json:"remoteRecordEnabled"`
-	Result              *ExecutionResultEnum `json:"result"`
-	SkipAppResign       *bool                `json:"skipAppResign"`
-	Started             *time.Time           `json:"started"`
-	Status              *ExecutionStatusEnum `json:"status"`
-	Stopped             *time.Time           `json:"stopped"`
+	Arn                 *string              `json:"arn,omitempty"`
+	BillingMethod       *BillingMethodEnum   `json:"billingMethod,omitempty"`
+	ClientID            *string              `json:"clientId,omitempty"`
+	Created             *time.Time           `json:"created,omitempty"`
+	Device              *Device              `json:"device,omitempty"`
+	DeviceMinutes       *DeviceMinutes       `json:"deviceMinutes,omitempty"`
+	DeviceUdid          *string              `json:"deviceUdid,omitempty"`
+	Endpoint            *string              `json:"endpoint,omitempty"`
+	HostAddress         *string              `json:"hostAddress,omitempty"`
+	InstanceArn         *string              `json:"instanceArn,omitempty"`
+	InteractionMode     *InteractionModeEnum `json:"interactionMode,omitempty"`
+	Message             *string              `json:"message,omitempty"`
+	Name                *string              `json:"name,omitempty"`
+	RemoteDebugEnabled  *bool                `json:"remoteDebugEnabled,omitempty"`
+	RemoteRecordAppArn  *string              `json:"remoteRecordAppArn,omitempty"`
+	RemoteRecordEnabled *bool                `json:"remoteRecordEnabled,omitempty"`
+	Result              *ExecutionResultEnum `json:"result,omitempty"`
+	SkipAppResign       *bool                `json:"skipAppResign,omitempty"`
+	Started             *time.Time           `json:"started,omitempty"`
+	Status              *ExecutionStatusEnum `json:"status,omitempty"`
+	Stopped             *time.Time           `json:"stopped,omitempty"`
 }

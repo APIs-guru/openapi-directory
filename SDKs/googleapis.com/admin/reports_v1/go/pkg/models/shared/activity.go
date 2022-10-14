@@ -5,50 +5,50 @@ import (
 )
 
 type ActivityActor struct {
-	CallerType *string `json:"callerType"`
-	Email      *string `json:"email"`
-	Key        *string `json:"key"`
-	ProfileID  *string `json:"profileId"`
+	CallerType *string `json:"callerType,omitempty"`
+	Email      *string `json:"email,omitempty"`
+	Key        *string `json:"key,omitempty"`
+	ProfileID  *string `json:"profileId,omitempty"`
 }
 
 type ActivityEventsParametersMessageValue struct {
-	Parameter []NestedParameter `json:"parameter"`
+	Parameter []NestedParameter `json:"parameter,omitempty"`
 }
 
 type ActivityEventsParametersMultiMessageValue struct {
-	Parameter []NestedParameter `json:"parameter"`
+	Parameter []NestedParameter `json:"parameter,omitempty"`
 }
 
 type ActivityEventsParameters struct {
-	BoolValue         *bool                                       `json:"boolValue"`
-	IntValue          *string                                     `json:"intValue"`
-	MessageValue      *ActivityEventsParametersMessageValue       `json:"messageValue"`
-	MultiIntValue     []string                                    `json:"multiIntValue"`
-	MultiMessageValue []ActivityEventsParametersMultiMessageValue `json:"multiMessageValue"`
-	MultiValue        []string                                    `json:"multiValue"`
-	Name              *string                                     `json:"name"`
-	Value             *string                                     `json:"value"`
+	BoolValue         *bool                                       `json:"boolValue,omitempty"`
+	IntValue          *string                                     `json:"intValue,omitempty"`
+	MessageValue      *ActivityEventsParametersMessageValue       `json:"messageValue,omitempty"`
+	MultiIntValue     []string                                    `json:"multiIntValue,omitempty"`
+	MultiMessageValue []ActivityEventsParametersMultiMessageValue `json:"multiMessageValue,omitempty"`
+	MultiValue        []string                                    `json:"multiValue,omitempty"`
+	Name              *string                                     `json:"name,omitempty"`
+	Value             *string                                     `json:"value,omitempty"`
 }
 
 type ActivityEvents struct {
-	Name       *string                    `json:"name"`
-	Parameters []ActivityEventsParameters `json:"parameters"`
-	Type       *string                    `json:"type"`
+	Name       *string                    `json:"name,omitempty"`
+	Parameters []ActivityEventsParameters `json:"parameters,omitempty"`
+	Type       *string                    `json:"type,omitempty"`
 }
 
 type ActivityID struct {
-	ApplicationName *string    `json:"applicationName"`
-	CustomerID      *string    `json:"customerId"`
-	Time            *time.Time `json:"time"`
-	UniqueQualifier *string    `json:"uniqueQualifier"`
+	ApplicationName *string    `json:"applicationName,omitempty"`
+	CustomerID      *string    `json:"customerId,omitempty"`
+	Time            *time.Time `json:"time,omitempty"`
+	UniqueQualifier *string    `json:"uniqueQualifier,omitempty"`
 }
 
 type Activity struct {
-	Actor       *ActivityActor   `json:"actor"`
-	Etag        *string          `json:"etag"`
-	Events      []ActivityEvents `json:"events"`
-	ID          *ActivityID      `json:"id"`
-	IPAddress   *string          `json:"ipAddress"`
-	Kind        *string          `json:"kind"`
-	OwnerDomain *string          `json:"ownerDomain"`
+	Actor       *ActivityActor   `json:"actor,omitempty"`
+	Etag        *string          `json:"etag,omitempty"`
+	Events      []ActivityEvents `json:"events,omitempty"`
+	ID          *ActivityID      `json:"id,omitempty"`
+	IPAddress   *string          `json:"ipAddress,omitempty"`
+	Kind        *string          `json:"kind,omitempty"`
+	OwnerDomain *string          `json:"ownerDomain,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type TypedAttributeValue struct {
-	BinaryValue   *string    `json:"BinaryValue"`
-	BooleanValue  *bool      `json:"BooleanValue"`
-	DatetimeValue *time.Time `json:"DatetimeValue"`
-	NumberValue   *string    `json:"NumberValue"`
-	StringValue   *string    `json:"StringValue"`
+	BinaryValue   *string    `json:"BinaryValue,omitempty"`
+	BooleanValue  *bool      `json:"BooleanValue,omitempty"`
+	DatetimeValue *time.Time `json:"DatetimeValue,omitempty"`
+	NumberValue   *string    `json:"NumberValue,omitempty"`
+	StringValue   *string    `json:"StringValue,omitempty"`
 }

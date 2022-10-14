@@ -11,6 +11,6 @@ const (
 )
 
 type RichResultsInspectionResult struct {
-	DetectedItems []DetectedItems                         `json:"detectedItems"`
-	Verdict       *RichResultsInspectionResultVerdictEnum `json:"verdict"`
+	DetectedItems []DetectedItems                         `json:"detectedItems,omitempty"`
+	Verdict       *RichResultsInspectionResultVerdictEnum `json:"verdict,omitempty"`
 }

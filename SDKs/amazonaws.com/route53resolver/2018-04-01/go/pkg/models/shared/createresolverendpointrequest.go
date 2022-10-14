@@ -4,7 +4,7 @@ type CreateResolverEndpointRequest struct {
 	CreatorRequestID string                        `json:"CreatorRequestId"`
 	Direction        ResolverEndpointDirectionEnum `json:"Direction"`
 	IPAddresses      []IPAddressRequest            `json:"IpAddresses"`
-	Name             *string                       `json:"Name"`
+	Name             *string                       `json:"Name,omitempty"`
 	SecurityGroupIds []string                      `json:"SecurityGroupIds"`
-	Tags             []Tag                         `json:"Tags"`
+	Tags             []Tag                         `json:"Tags,omitempty"`
 }

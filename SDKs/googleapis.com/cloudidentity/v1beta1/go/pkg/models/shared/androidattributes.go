@@ -10,8 +10,8 @@ const (
 )
 
 type AndroidAttributes struct {
-	EnabledUnknownSources *bool                                    `json:"enabledUnknownSources"`
-	OwnerProfileAccount   *bool                                    `json:"ownerProfileAccount"`
-	OwnershipPrivilege    *AndroidAttributesOwnershipPrivilegeEnum `json:"ownershipPrivilege"`
-	SupportsWorkProfile   *bool                                    `json:"supportsWorkProfile"`
+	EnabledUnknownSources *bool                                    `json:"enabledUnknownSources,omitempty"`
+	OwnerProfileAccount   *bool                                    `json:"ownerProfileAccount,omitempty"`
+	OwnershipPrivilege    *AndroidAttributesOwnershipPrivilegeEnum `json:"ownershipPrivilege,omitempty"`
+	SupportsWorkProfile   *bool                                    `json:"supportsWorkProfile,omitempty"`
 }

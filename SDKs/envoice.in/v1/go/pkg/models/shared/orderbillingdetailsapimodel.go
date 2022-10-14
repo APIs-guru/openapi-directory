@@ -1,9 +1,9 @@
 package shared
 
 type OrderBillingDetailsAPIModel struct {
-	Address     *string `json:"Address"`
-	CountryID   *int32  `json:"CountryId"`
-	Email       *string `json:"Email"`
-	Name        *string `json:"Name"`
-	PhoneNumber *string `json:"PhoneNumber"`
+	Address     *string `json:"Address,omitempty"`
+	CountryID   *int32  `json:"CountryId,omitempty"`
+	Email       *string `json:"Email,omitempty"`
+	Name        *string `json:"Name,omitempty"`
+	PhoneNumber *string `json:"PhoneNumber,omitempty"`
 }

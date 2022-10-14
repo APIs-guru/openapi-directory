@@ -9,11 +9,11 @@ const (
 )
 
 type NodePoolAutoscaling struct {
-	Autoprovisioned   *bool                                  `json:"autoprovisioned"`
-	Enabled           *bool                                  `json:"enabled"`
-	LocationPolicy    *NodePoolAutoscalingLocationPolicyEnum `json:"locationPolicy"`
-	MaxNodeCount      *int32                                 `json:"maxNodeCount"`
-	MinNodeCount      *int32                                 `json:"minNodeCount"`
-	TotalMaxNodeCount *int32                                 `json:"totalMaxNodeCount"`
-	TotalMinNodeCount *int32                                 `json:"totalMinNodeCount"`
+	Autoprovisioned   *bool                                  `json:"autoprovisioned,omitempty"`
+	Enabled           *bool                                  `json:"enabled,omitempty"`
+	LocationPolicy    *NodePoolAutoscalingLocationPolicyEnum `json:"locationPolicy,omitempty"`
+	MaxNodeCount      *int32                                 `json:"maxNodeCount,omitempty"`
+	MinNodeCount      *int32                                 `json:"minNodeCount,omitempty"`
+	TotalMaxNodeCount *int32                                 `json:"totalMaxNodeCount,omitempty"`
+	TotalMinNodeCount *int32                                 `json:"totalMinNodeCount,omitempty"`
 }

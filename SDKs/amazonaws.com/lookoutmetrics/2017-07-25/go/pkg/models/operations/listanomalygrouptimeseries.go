@@ -22,9 +22,9 @@ type ListAnomalyGroupTimeSeriesHeaders struct {
 type ListAnomalyGroupTimeSeriesRequestBody struct {
 	AnomalyDetectorArn string  `json:"AnomalyDetectorArn"`
 	AnomalyGroupID     string  `json:"AnomalyGroupId"`
-	MaxResults         *int64  `json:"MaxResults"`
+	MaxResults         *int64  `json:"MaxResults,omitempty"`
 	MetricName         string  `json:"MetricName"`
-	NextToken          *string `json:"NextToken"`
+	NextToken          *string `json:"NextToken,omitempty"`
 }
 
 type ListAnomalyGroupTimeSeriesRequest struct {

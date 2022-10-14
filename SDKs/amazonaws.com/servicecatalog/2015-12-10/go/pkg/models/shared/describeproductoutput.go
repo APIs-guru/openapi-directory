@@ -1,8 +1,8 @@
 package shared
 
 type DescribeProductOutput struct {
-	Budgets               []BudgetDetail         `json:"Budgets"`
-	LaunchPaths           []LaunchPath           `json:"LaunchPaths"`
-	ProductViewSummary    *ProductViewSummary    `json:"ProductViewSummary"`
-	ProvisioningArtifacts []ProvisioningArtifact `json:"ProvisioningArtifacts"`
+	Budgets               []BudgetDetail         `json:"Budgets,omitempty"`
+	LaunchPaths           []LaunchPath           `json:"LaunchPaths,omitempty"`
+	ProductViewSummary    *ProductViewSummary    `json:"ProductViewSummary,omitempty"`
+	ProvisioningArtifacts []ProvisioningArtifact `json:"ProvisioningArtifacts,omitempty"`
 }

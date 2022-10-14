@@ -5,13 +5,13 @@ import (
 )
 
 type GetVpcLinkResponse struct {
-	CreatedDate          *time.Time          `json:"CreatedDate"`
-	Name                 *string             `json:"Name"`
-	SecurityGroupIds     []string            `json:"SecurityGroupIds"`
-	SubnetIds            []string            `json:"SubnetIds"`
-	Tags                 map[string]string   `json:"Tags"`
-	VpcLinkID            *string             `json:"VpcLinkId"`
-	VpcLinkStatus        *VpcLinkStatusEnum  `json:"VpcLinkStatus"`
-	VpcLinkStatusMessage *string             `json:"VpcLinkStatusMessage"`
-	VpcLinkVersion       *VpcLinkVersionEnum `json:"VpcLinkVersion"`
+	CreatedDate          *time.Time          `json:"CreatedDate,omitempty"`
+	Name                 *string             `json:"Name,omitempty"`
+	SecurityGroupIds     []string            `json:"SecurityGroupIds,omitempty"`
+	SubnetIds            []string            `json:"SubnetIds,omitempty"`
+	Tags                 map[string]string   `json:"Tags,omitempty"`
+	VpcLinkID            *string             `json:"VpcLinkId,omitempty"`
+	VpcLinkStatus        *VpcLinkStatusEnum  `json:"VpcLinkStatus,omitempty"`
+	VpcLinkStatusMessage *string             `json:"VpcLinkStatusMessage,omitempty"`
+	VpcLinkVersion       *VpcLinkVersionEnum `json:"VpcLinkVersion,omitempty"`
 }

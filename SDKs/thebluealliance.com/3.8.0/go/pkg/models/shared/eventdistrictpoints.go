@@ -9,11 +9,11 @@ type EventDistrictPointsPoints struct {
 }
 
 type EventDistrictPointsTiebreakers struct {
-	HighestQualScores []int64 `json:"highest_qual_scores"`
-	QualWins          *int64  `json:"qual_wins"`
+	HighestQualScores []int64 `json:"highest_qual_scores,omitempty"`
+	QualWins          *int64  `json:"qual_wins,omitempty"`
 }
 
 type EventDistrictPoints struct {
 	Points      map[string]EventDistrictPointsPoints      `json:"points"`
-	Tiebreakers map[string]EventDistrictPointsTiebreakers `json:"tiebreakers"`
+	Tiebreakers map[string]EventDistrictPointsTiebreakers `json:"tiebreakers,omitempty"`
 }

@@ -16,11 +16,11 @@ type SetVaultAccessPolicyHeaders struct {
 }
 
 type SetVaultAccessPolicyRequestBodyPolicy struct {
-	Policy *string `json:"Policy"`
+	Policy *string `json:"Policy,omitempty"`
 }
 
 type SetVaultAccessPolicyRequestBody struct {
-	Policy *SetVaultAccessPolicyRequestBodyPolicy `json:"policy"`
+	Policy *SetVaultAccessPolicyRequestBodyPolicy `json:"policy,omitempty"`
 }
 
 type SetVaultAccessPolicyRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type RoutineReference struct {
-	DatasetID *string `json:"datasetId"`
-	ProjectID *string `json:"projectId"`
-	RoutineID *string `json:"routineId"`
+	DatasetID *string `json:"datasetId,omitempty"`
+	ProjectID *string `json:"projectId,omitempty"`
+	RoutineID *string `json:"routineId,omitempty"`
 }

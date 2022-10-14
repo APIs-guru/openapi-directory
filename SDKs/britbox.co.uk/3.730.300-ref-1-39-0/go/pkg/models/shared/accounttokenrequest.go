@@ -17,7 +17,7 @@ const (
 )
 
 type AccountTokenRequest struct {
-	CookieType *AccountTokenRequestCookieTypeEnum `json:"cookieType"`
+	CookieType *AccountTokenRequestCookieTypeEnum `json:"cookieType,omitempty"`
 	Email      string                             `json:"email"`
 	Password   string                             `json:"password"`
 	Scopes     []AccountTokenRequestScopesEnum    `json:"scopes"`

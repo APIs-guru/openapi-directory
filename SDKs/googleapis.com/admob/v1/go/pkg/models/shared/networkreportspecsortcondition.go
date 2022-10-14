@@ -43,7 +43,7 @@ const (
 )
 
 type NetworkReportSpecSortCondition struct {
-	Dimension *NetworkReportSpecSortConditionDimensionEnum `json:"dimension"`
-	Metric    *NetworkReportSpecSortConditionMetricEnum    `json:"metric"`
-	Order     *NetworkReportSpecSortConditionOrderEnum     `json:"order"`
+	Dimension *NetworkReportSpecSortConditionDimensionEnum `json:"dimension,omitempty"`
+	Metric    *NetworkReportSpecSortConditionMetricEnum    `json:"metric,omitempty"`
+	Order     *NetworkReportSpecSortConditionOrderEnum     `json:"order,omitempty"`
 }

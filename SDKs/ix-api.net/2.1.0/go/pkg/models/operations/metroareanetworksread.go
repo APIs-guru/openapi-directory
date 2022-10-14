@@ -20,10 +20,10 @@ const (
 )
 
 type MetroAreaNetworksRead401ApplicationJSON struct {
-	Detail   *string                                         `json:"detail"`
-	Instance *string                                         `json:"instance"`
-	Status   *interface{}                                    `json:"status"`
-	Title    *interface{}                                    `json:"title"`
+	Detail   *string                                         `json:"detail,omitempty"`
+	Instance *string                                         `json:"instance,omitempty"`
+	Status   *interface{}                                    `json:"status,omitempty"`
+	Title    *interface{}                                    `json:"title,omitempty"`
 	Type     MetroAreaNetworksRead401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -34,10 +34,10 @@ const (
 )
 
 type MetroAreaNetworksRead403ApplicationJSON struct {
-	Detail   *string                                         `json:"detail"`
-	Instance *string                                         `json:"instance"`
-	Status   *interface{}                                    `json:"status"`
-	Title    *interface{}                                    `json:"title"`
+	Detail   *string                                         `json:"detail,omitempty"`
+	Instance *string                                         `json:"instance,omitempty"`
+	Status   *interface{}                                    `json:"status,omitempty"`
+	Title    *interface{}                                    `json:"title,omitempty"`
 	Type     MetroAreaNetworksRead403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -48,10 +48,10 @@ const (
 )
 
 type MetroAreaNetworksRead404ApplicationJSON struct {
-	Detail   *string                                         `json:"detail"`
-	Instance *string                                         `json:"instance"`
-	Status   *interface{}                                    `json:"status"`
-	Title    *interface{}                                    `json:"title"`
+	Detail   *string                                         `json:"detail,omitempty"`
+	Instance *string                                         `json:"instance,omitempty"`
+	Status   *interface{}                                    `json:"status,omitempty"`
+	Title    *interface{}                                    `json:"title,omitempty"`
 	Type     MetroAreaNetworksRead404ApplicationJSONTypeEnum `json:"type"`
 }
 

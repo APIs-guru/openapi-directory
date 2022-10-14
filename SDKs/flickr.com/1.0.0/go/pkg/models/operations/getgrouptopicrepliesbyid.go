@@ -16,8 +16,8 @@ type GetGroupTopicRepliesByIDRequest struct {
 }
 
 type GetGroupTopicRepliesByID200ApplicationJSON struct {
-	Reply *shared.TopicReply `json:"reply"`
-	Stat  *string            `json:"stat"`
+	Reply *shared.TopicReply `json:"reply,omitempty"`
+	Stat  *string            `json:"stat,omitempty"`
 }
 
 type GetGroupTopicRepliesByIDResponse struct {

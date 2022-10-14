@@ -19,7 +19,7 @@ type UpdateConnectivityInfoHeaders struct {
 }
 
 type UpdateConnectivityInfoRequestBody struct {
-	ConnectivityInfo []shared.ConnectivityInfo `json:"ConnectivityInfo"`
+	ConnectivityInfo []shared.ConnectivityInfo `json:"ConnectivityInfo,omitempty"`
 }
 
 type UpdateConnectivityInfoRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type InstanceState struct {
-	Code *int64  `json:"code"`
-	Name *string `json:"name"`
+	Code *int64  `json:"code,omitempty"`
+	Name *string `json:"name,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type Datasource struct {
-	DatabaseName   *string                      `json:"database_name"`
-	DatasourceName *string                      `json:"datasource_name"`
+	DatabaseName   *string                      `json:"database_name,omitempty"`
+	DatasourceName *string                      `json:"datasource_name,omitempty"`
 	DatasourceType DatasourceDatasourceTypeEnum `json:"datasource_type"`
-	Schema         *string                      `json:"schema"`
+	Schema         *string                      `json:"schema,omitempty"`
 }

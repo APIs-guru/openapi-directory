@@ -1,6 +1,6 @@
 package shared
 
 type ListCustomListsResponse struct {
-	CustomLists   []CustomList `json:"customLists"`
-	NextPageToken *string      `json:"nextPageToken"`
+	CustomLists   []CustomList `json:"customLists,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

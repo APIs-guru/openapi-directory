@@ -1,7 +1,7 @@
 package operations
 
 type DeletechargingscheduleRequestBody struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type DeletechargingscheduleRequest struct {
@@ -9,9 +9,9 @@ type DeletechargingscheduleRequest struct {
 }
 
 type Deletechargingschedule201ApplicationJSON struct {
-	Command map[string]interface{} `json:"command"`
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
+	Command map[string]interface{} `json:"command,omitempty"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
 }
 
 type DeletechargingscheduleResponse struct {

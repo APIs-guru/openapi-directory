@@ -5,8 +5,8 @@ import (
 )
 
 type CaCertificate struct {
-	CertificateArn *string                  `json:"certificateArn"`
-	CertificateID  *string                  `json:"certificateId"`
-	CreationDate   *time.Time               `json:"creationDate"`
-	Status         *CaCertificateStatusEnum `json:"status"`
+	CertificateArn *string                  `json:"certificateArn,omitempty"`
+	CertificateID  *string                  `json:"certificateId,omitempty"`
+	CreationDate   *time.Time               `json:"creationDate,omitempty"`
+	Status         *CaCertificateStatusEnum `json:"status,omitempty"`
 }

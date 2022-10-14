@@ -12,13 +12,13 @@ const (
 )
 
 type InvoiceItem struct {
-	Amount    *float64             `json:"amount"`
-	From      *time.Time           `json:"from"`
-	Label     *string              `json:"label"`
-	Quantity  *int64               `json:"quantity"`
-	Tax       *float64             `json:"tax"`
-	To        *time.Time           `json:"to"`
-	Total     *float64             `json:"total"`
-	Type      *InvoiceItemTypeEnum `json:"type"`
-	UnitPrice *string              `json:"unit_price"`
+	Amount    *float64             `json:"amount,omitempty"`
+	From      *time.Time           `json:"from,omitempty"`
+	Label     *string              `json:"label,omitempty"`
+	Quantity  *int64               `json:"quantity,omitempty"`
+	Tax       *float64             `json:"tax,omitempty"`
+	To        *time.Time           `json:"to,omitempty"`
+	Total     *float64             `json:"total,omitempty"`
+	Type      *InvoiceItemTypeEnum `json:"type,omitempty"`
+	UnitPrice *string              `json:"unit_price,omitempty"`
 }

@@ -13,7 +13,7 @@ const (
 
 type Changelog struct {
 	Body   string             `json:"body"`
-	Hidden *bool              `json:"hidden"`
+	Hidden *bool              `json:"hidden,omitempty"`
 	Title  string             `json:"title"`
-	Type   *ChangelogTypeEnum `json:"type"`
+	Type   *ChangelogTypeEnum `json:"type,omitempty"`
 }

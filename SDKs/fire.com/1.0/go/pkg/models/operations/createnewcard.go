@@ -12,12 +12,12 @@ const (
 )
 
 type CreateNewCardRequestBodyNewCard struct {
-	AcceptFeesAndCharges *bool                                    `json:"acceptFeesAndCharges"`
-	AddressType          *CreateNewCardRequestBodyAddressTypeEnum `json:"addressType"`
-	CardPin              *string                                  `json:"cardPin"`
-	EurIcan              *int64                                   `json:"eurIcan"`
-	GbpIcan              *int64                                   `json:"gbpIcan"`
-	UserID               *float64                                 `json:"userId"`
+	AcceptFeesAndCharges *bool                                    `json:"acceptFeesAndCharges,omitempty"`
+	AddressType          *CreateNewCardRequestBodyAddressTypeEnum `json:"addressType,omitempty"`
+	CardPin              *string                                  `json:"cardPin,omitempty"`
+	EurIcan              *int64                                   `json:"eurIcan,omitempty"`
+	GbpIcan              *int64                                   `json:"gbpIcan,omitempty"`
+	UserID               *float64                                 `json:"userId,omitempty"`
 }
 
 type CreateNewCardRequest struct {
@@ -32,10 +32,10 @@ const (
 )
 
 type CreateNewCard200ApplicationJSONNewCardResponse struct {
-	CardID     *int64                                     `json:"cardId"`
-	ExpiryDate *time.Time                                 `json:"expiryDate"`
-	MaskedPan  *string                                    `json:"maskedPan"`
-	Status     *CreateNewCard200ApplicationJSONStatusEnum `json:"status"`
+	CardID     *int64                                     `json:"cardId,omitempty"`
+	ExpiryDate *time.Time                                 `json:"expiryDate,omitempty"`
+	MaskedPan  *string                                    `json:"maskedPan,omitempty"`
+	Status     *CreateNewCard200ApplicationJSONStatusEnum `json:"status,omitempty"`
 }
 
 type CreateNewCardResponse struct {

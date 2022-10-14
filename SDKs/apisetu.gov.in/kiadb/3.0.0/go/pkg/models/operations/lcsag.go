@@ -18,8 +18,8 @@ const (
 )
 
 type LcsagRequestBody struct {
-	CertificateParameters *LcsagRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *LcsagRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                LcsagRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Lcsag400ApplicationJSON struct {
-	Error            *Lcsag400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lcsag400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lcsag400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lcsag400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lcsag401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Lcsag401ApplicationJSON struct {
-	Error            *Lcsag401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lcsag401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lcsag401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lcsag401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lcsag404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Lcsag404ApplicationJSON struct {
-	Error            *Lcsag404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lcsag404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lcsag404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lcsag404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lcsag500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Lcsag500ApplicationJSON struct {
-	Error            *Lcsag500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lcsag500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lcsag500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lcsag500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lcsag502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Lcsag502ApplicationJSON struct {
-	Error            *Lcsag502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lcsag502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lcsag502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lcsag502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lcsag503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Lcsag503ApplicationJSON struct {
-	Error            *Lcsag503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lcsag503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lcsag503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lcsag503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lcsag504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Lcsag504ApplicationJSON struct {
-	Error            *Lcsag504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lcsag504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lcsag504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lcsag504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type LcsagResponse struct {

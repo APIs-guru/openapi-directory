@@ -15,7 +15,7 @@ type UpdateCoreDefinitionHeaders struct {
 }
 
 type UpdateCoreDefinitionRequestBody struct {
-	Name *string `json:"Name"`
+	Name *string `json:"Name,omitempty"`
 }
 
 type UpdateCoreDefinitionRequest struct {

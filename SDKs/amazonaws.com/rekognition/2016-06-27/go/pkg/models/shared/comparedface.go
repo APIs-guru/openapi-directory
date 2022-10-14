@@ -1,11 +1,11 @@
 package shared
 
 type ComparedFace struct {
-	BoundingBox *BoundingBox  `json:"BoundingBox"`
-	Confidence  *float32      `json:"Confidence"`
-	Emotions    []Emotion     `json:"Emotions"`
-	Landmarks   []Landmark    `json:"Landmarks"`
-	Pose        *Pose         `json:"Pose"`
-	Quality     *ImageQuality `json:"Quality"`
-	Smile       *Smile        `json:"Smile"`
+	BoundingBox *BoundingBox  `json:"BoundingBox,omitempty"`
+	Confidence  *float32      `json:"Confidence,omitempty"`
+	Emotions    []Emotion     `json:"Emotions,omitempty"`
+	Landmarks   []Landmark    `json:"Landmarks,omitempty"`
+	Pose        *Pose         `json:"Pose,omitempty"`
+	Quality     *ImageQuality `json:"Quality,omitempty"`
+	Smile       *Smile        `json:"Smile,omitempty"`
 }

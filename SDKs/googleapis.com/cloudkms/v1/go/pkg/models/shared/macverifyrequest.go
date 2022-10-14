@@ -1,8 +1,8 @@
 package shared
 
 type MacVerifyRequest struct {
-	Data       *string `json:"data"`
-	DataCrc32c *string `json:"dataCrc32c"`
-	Mac        *string `json:"mac"`
-	MacCrc32c  *string `json:"macCrc32c"`
+	Data       *string `json:"data,omitempty"`
+	DataCrc32c *string `json:"dataCrc32c,omitempty"`
+	Mac        *string `json:"mac,omitempty"`
+	MacCrc32c  *string `json:"macCrc32c,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AcceptResourceShareInvitationResponse struct {
-	ClientToken             *string                  `json:"clientToken"`
-	ResourceShareInvitation *ResourceShareInvitation `json:"resourceShareInvitation"`
+	ClientToken             *string                  `json:"clientToken,omitempty"`
+	ResourceShareInvitation *ResourceShareInvitation `json:"resourceShareInvitation,omitempty"`
 }

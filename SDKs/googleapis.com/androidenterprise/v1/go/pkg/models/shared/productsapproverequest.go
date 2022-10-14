@@ -8,6 +8,6 @@ const (
 )
 
 type ProductsApproveRequest struct {
-	ApprovalURLInfo     *ApprovalURLInfo                               `json:"approvalUrlInfo"`
-	ApprovedPermissions *ProductsApproveRequestApprovedPermissionsEnum `json:"approvedPermissions"`
+	ApprovalURLInfo     *ApprovalURLInfo                               `json:"approvalUrlInfo,omitempty"`
+	ApprovedPermissions *ProductsApproveRequestApprovedPermissionsEnum `json:"approvedPermissions,omitempty"`
 }

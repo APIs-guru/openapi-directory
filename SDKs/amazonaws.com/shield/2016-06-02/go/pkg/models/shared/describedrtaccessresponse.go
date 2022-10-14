@@ -1,6 +1,6 @@
 package shared
 
 type DescribeDrtAccessResponse struct {
-	LogBucketList []string `json:"LogBucketList"`
-	RoleArn       *string  `json:"RoleArn"`
+	LogBucketList []string `json:"LogBucketList,omitempty"`
+	RoleArn       *string  `json:"RoleArn,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type DatasetDefinition struct {
-	AthenaDatasetDefinition   *AthenaDatasetDefinition   `json:"AthenaDatasetDefinition"`
-	DataDistributionType      *DataDistributionTypeEnum  `json:"DataDistributionType"`
-	InputMode                 *InputModeEnum             `json:"InputMode"`
-	LocalPath                 *string                    `json:"LocalPath"`
-	RedshiftDatasetDefinition *RedshiftDatasetDefinition `json:"RedshiftDatasetDefinition"`
+	AthenaDatasetDefinition   *AthenaDatasetDefinition   `json:"AthenaDatasetDefinition,omitempty"`
+	DataDistributionType      *DataDistributionTypeEnum  `json:"DataDistributionType,omitempty"`
+	InputMode                 *InputModeEnum             `json:"InputMode,omitempty"`
+	LocalPath                 *string                    `json:"LocalPath,omitempty"`
+	RedshiftDatasetDefinition *RedshiftDatasetDefinition `json:"RedshiftDatasetDefinition,omitempty"`
 }

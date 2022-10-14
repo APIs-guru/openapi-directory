@@ -1,11 +1,11 @@
 package shared
 
 type PatientManagement struct {
-	Condition     *FhirCondition     `json:"condition"`
-	Encounters    []FhirEncounter    `json:"encounters"`
-	GroupCode     *string            `json:"groupCode"`
-	Identifier    *string            `json:"identifier"`
-	Observations  []FhirObservation  `json:"observations"`
-	Patient       *FhirPatient       `json:"patient"`
-	Practitioners []FhirPractitioner `json:"practitioners"`
+	Condition     *FhirCondition     `json:"condition,omitempty"`
+	Encounters    []FhirEncounter    `json:"encounters,omitempty"`
+	GroupCode     *string            `json:"groupCode,omitempty"`
+	Identifier    *string            `json:"identifier,omitempty"`
+	Observations  []FhirObservation  `json:"observations,omitempty"`
+	Patient       *FhirPatient       `json:"patient,omitempty"`
+	Practitioners []FhirPractitioner `json:"practitioners,omitempty"`
 }

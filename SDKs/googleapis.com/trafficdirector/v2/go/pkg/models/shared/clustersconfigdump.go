@@ -1,8 +1,8 @@
 package shared
 
 type ClustersConfigDump struct {
-	DynamicActiveClusters  []DynamicCluster `json:"dynamicActiveClusters"`
-	DynamicWarmingClusters []DynamicCluster `json:"dynamicWarmingClusters"`
-	StaticClusters         []StaticCluster  `json:"staticClusters"`
-	VersionInfo            *string          `json:"versionInfo"`
+	DynamicActiveClusters  []DynamicCluster `json:"dynamicActiveClusters,omitempty"`
+	DynamicWarmingClusters []DynamicCluster `json:"dynamicWarmingClusters,omitempty"`
+	StaticClusters         []StaticCluster  `json:"staticClusters,omitempty"`
+	VersionInfo            *string          `json:"versionInfo,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ConfigureDNSSettingsRequest struct {
-	DNSSettings  *DNSSettings `json:"dnsSettings"`
-	UpdateMask   *string      `json:"updateMask"`
-	ValidateOnly *bool        `json:"validateOnly"`
+	DNSSettings  *DNSSettings `json:"dnsSettings,omitempty"`
+	UpdateMask   *string      `json:"updateMask,omitempty"`
+	ValidateOnly *bool        `json:"validateOnly,omitempty"`
 }

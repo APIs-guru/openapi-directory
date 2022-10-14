@@ -1,8 +1,8 @@
 package shared
 
 type ElectionsList struct {
-	Cycle    *int32  `json:"cycle"`
-	District *string `json:"district"`
-	Office   *string `json:"office"`
-	State    *string `json:"state"`
+	Cycle    *int32  `json:"cycle,omitempty"`
+	District *string `json:"district,omitempty"`
+	Office   *string `json:"office,omitempty"`
+	State    *string `json:"state,omitempty"`
 }

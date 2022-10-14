@@ -5,11 +5,11 @@ import (
 )
 
 type AggregatedSourceStatus struct {
-	AwsRegion        *string                         `json:"AwsRegion"`
-	LastErrorCode    *string                         `json:"LastErrorCode"`
-	LastErrorMessage *string                         `json:"LastErrorMessage"`
-	LastUpdateStatus *AggregatedSourceStatusTypeEnum `json:"LastUpdateStatus"`
-	LastUpdateTime   *time.Time                      `json:"LastUpdateTime"`
-	SourceID         *string                         `json:"SourceId"`
-	SourceType       *AggregatedSourceTypeEnum       `json:"SourceType"`
+	AwsRegion        *string                         `json:"AwsRegion,omitempty"`
+	LastErrorCode    *string                         `json:"LastErrorCode,omitempty"`
+	LastErrorMessage *string                         `json:"LastErrorMessage,omitempty"`
+	LastUpdateStatus *AggregatedSourceStatusTypeEnum `json:"LastUpdateStatus,omitempty"`
+	LastUpdateTime   *time.Time                      `json:"LastUpdateTime,omitempty"`
+	SourceID         *string                         `json:"SourceId,omitempty"`
+	SourceType       *AggregatedSourceTypeEnum       `json:"SourceType,omitempty"`
 }

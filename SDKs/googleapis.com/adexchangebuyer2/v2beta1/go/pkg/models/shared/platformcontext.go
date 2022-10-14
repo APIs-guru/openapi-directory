@@ -9,5 +9,5 @@ const (
 )
 
 type PlatformContext struct {
-	Platforms []PlatformContextPlatformsEnum `json:"platforms"`
+	Platforms []PlatformContextPlatformsEnum `json:"platforms,omitempty"`
 }

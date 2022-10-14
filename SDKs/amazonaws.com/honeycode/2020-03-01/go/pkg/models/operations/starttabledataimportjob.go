@@ -26,12 +26,12 @@ const (
 )
 
 type StartTableDataImportJobRequestBodyDataSource struct {
-	DataSourceConfig *shared.ImportDataSourceConfig `json:"dataSourceConfig"`
+	DataSourceConfig *shared.ImportDataSourceConfig `json:"dataSourceConfig,omitempty"`
 }
 
 type StartTableDataImportJobRequestBodyImportOptions struct {
-	DelimitedTextOptions *shared.DelimitedTextImportOptions `json:"delimitedTextOptions"`
-	DestinationOptions   *shared.DestinationOptions         `json:"destinationOptions"`
+	DelimitedTextOptions *shared.DelimitedTextImportOptions `json:"delimitedTextOptions,omitempty"`
+	DestinationOptions   *shared.DestinationOptions         `json:"destinationOptions,omitempty"`
 }
 
 type StartTableDataImportJobRequestBody struct {

@@ -8,6 +8,6 @@ const (
 )
 
 type ProductPermission struct {
-	PermissionID *string                     `json:"permissionId"`
-	State        *ProductPermissionStateEnum `json:"state"`
+	PermissionID *string                     `json:"permissionId,omitempty"`
+	State        *ProductPermissionStateEnum `json:"state,omitempty"`
 }

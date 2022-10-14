@@ -30,8 +30,8 @@ const (
 )
 
 type FullItemSections struct {
-	ID    *string `json:"id"`
-	Label *string `json:"label"`
+	ID    *string `json:"id,omitempty"`
+	Label *string `json:"label,omitempty"`
 }
 
 type FullItemStateEnum string
@@ -43,7 +43,7 @@ const (
 
 type FullItemUrls struct {
 	Href    string `json:"href"`
-	Primary *bool  `json:"primary"`
+	Primary *bool  `json:"primary,omitempty"`
 }
 
 type FullItemVault struct {
@@ -52,18 +52,18 @@ type FullItemVault struct {
 
 type FullItem struct {
 	Category     FullItemCategoryEnum `json:"category"`
-	CreatedAt    *time.Time           `json:"createdAt"`
-	Favorite     *bool                `json:"favorite"`
-	Fields       []Field              `json:"fields"`
-	Files        []File               `json:"files"`
-	ID           *string              `json:"id"`
-	LastEditedBy *string              `json:"lastEditedBy"`
-	Sections     []FullItemSections   `json:"sections"`
-	State        *FullItemStateEnum   `json:"state"`
-	Tags         []string             `json:"tags"`
-	Title        *string              `json:"title"`
-	UpdatedAt    *time.Time           `json:"updatedAt"`
-	Urls         []FullItemUrls       `json:"urls"`
+	CreatedAt    *time.Time           `json:"createdAt,omitempty"`
+	Favorite     *bool                `json:"favorite,omitempty"`
+	Fields       []Field              `json:"fields,omitempty"`
+	Files        []File               `json:"files,omitempty"`
+	ID           *string              `json:"id,omitempty"`
+	LastEditedBy *string              `json:"lastEditedBy,omitempty"`
+	Sections     []FullItemSections   `json:"sections,omitempty"`
+	State        *FullItemStateEnum   `json:"state,omitempty"`
+	Tags         []string             `json:"tags,omitempty"`
+	Title        *string              `json:"title,omitempty"`
+	UpdatedAt    *time.Time           `json:"updatedAt,omitempty"`
+	Urls         []FullItemUrls       `json:"urls,omitempty"`
 	Vault        FullItemVault        `json:"vault"`
-	Version      *int64               `json:"version"`
+	Version      *int64               `json:"version,omitempty"`
 }

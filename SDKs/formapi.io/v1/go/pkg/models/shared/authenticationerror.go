@@ -8,5 +8,5 @@ const (
 
 type AuthenticationError struct {
 	Error  string                         `json:"error"`
-	Status *AuthenticationErrorStatusEnum `json:"status"`
+	Status *AuthenticationErrorStatusEnum `json:"status,omitempty"`
 }

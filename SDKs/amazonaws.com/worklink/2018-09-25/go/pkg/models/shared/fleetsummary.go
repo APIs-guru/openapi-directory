@@ -5,12 +5,12 @@ import (
 )
 
 type FleetSummary struct {
-	CompanyCode     *string           `json:"CompanyCode"`
-	CreatedTime     *time.Time        `json:"CreatedTime"`
-	DisplayName     *string           `json:"DisplayName"`
-	FleetArn        *string           `json:"FleetArn"`
-	FleetName       *string           `json:"FleetName"`
-	FleetStatus     *FleetStatusEnum  `json:"FleetStatus"`
-	LastUpdatedTime *time.Time        `json:"LastUpdatedTime"`
-	Tags            map[string]string `json:"Tags"`
+	CompanyCode     *string           `json:"CompanyCode,omitempty"`
+	CreatedTime     *time.Time        `json:"CreatedTime,omitempty"`
+	DisplayName     *string           `json:"DisplayName,omitempty"`
+	FleetArn        *string           `json:"FleetArn,omitempty"`
+	FleetName       *string           `json:"FleetName,omitempty"`
+	FleetStatus     *FleetStatusEnum  `json:"FleetStatus,omitempty"`
+	LastUpdatedTime *time.Time        `json:"LastUpdatedTime,omitempty"`
+	Tags            map[string]string `json:"Tags,omitempty"`
 }

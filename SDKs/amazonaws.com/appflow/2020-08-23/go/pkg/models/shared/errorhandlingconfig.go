@@ -1,7 +1,7 @@
 package shared
 
 type ErrorHandlingConfig struct {
-	BucketName                  *string `json:"bucketName"`
-	BucketPrefix                *string `json:"bucketPrefix"`
-	FailOnFirstDestinationError *bool   `json:"failOnFirstDestinationError"`
+	BucketName                  *string `json:"bucketName,omitempty"`
+	BucketPrefix                *string `json:"bucketPrefix,omitempty"`
+	FailOnFirstDestinationError *bool   `json:"failOnFirstDestinationError,omitempty"`
 }

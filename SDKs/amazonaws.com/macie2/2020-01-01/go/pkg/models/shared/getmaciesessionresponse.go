@@ -5,9 +5,9 @@ import (
 )
 
 type GetMacieSessionResponse struct {
-	CreatedAt                  *time.Time                      `json:"createdAt"`
-	FindingPublishingFrequency *FindingPublishingFrequencyEnum `json:"findingPublishingFrequency"`
-	ServiceRole                *string                         `json:"serviceRole"`
-	Status                     *MacieStatusEnum                `json:"status"`
-	UpdatedAt                  *time.Time                      `json:"updatedAt"`
+	CreatedAt                  *time.Time                      `json:"createdAt,omitempty"`
+	FindingPublishingFrequency *FindingPublishingFrequencyEnum `json:"findingPublishingFrequency,omitempty"`
+	ServiceRole                *string                         `json:"serviceRole,omitempty"`
+	Status                     *MacieStatusEnum                `json:"status,omitempty"`
+	UpdatedAt                  *time.Time                      `json:"updatedAt,omitempty"`
 }

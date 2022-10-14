@@ -12,6 +12,6 @@ const (
 )
 
 type GooglePrivacyDlpV2LikelihoodAdjustment struct {
-	FixedLikelihood    *GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum `json:"fixedLikelihood"`
-	RelativeLikelihood *int32                                                     `json:"relativeLikelihood"`
+	FixedLikelihood    *GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum `json:"fixedLikelihood,omitempty"`
+	RelativeLikelihood *int32                                                     `json:"relativeLikelihood,omitempty"`
 }

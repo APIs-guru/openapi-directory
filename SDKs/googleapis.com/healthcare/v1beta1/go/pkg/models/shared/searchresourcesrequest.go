@@ -1,5 +1,5 @@
 package shared
 
 type SearchResourcesRequest struct {
-	ResourceType *string `json:"resourceType"`
+	ResourceType *string `json:"resourceType,omitempty"`
 }

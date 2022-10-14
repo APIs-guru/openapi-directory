@@ -1,6 +1,6 @@
 package shared
 
 type ListPendingInvitationResourcesResponse struct {
-	NextToken *string    `json:"nextToken"`
-	Resources []Resource `json:"resources"`
+	NextToken *string    `json:"nextToken,omitempty"`
+	Resources []Resource `json:"resources,omitempty"`
 }

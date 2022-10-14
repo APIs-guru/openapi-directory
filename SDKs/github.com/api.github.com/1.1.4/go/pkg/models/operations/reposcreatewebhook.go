@@ -10,19 +10,19 @@ type ReposCreateWebhookPathParams struct {
 }
 
 type ReposCreateWebhookRequestBodyConfig struct {
-	ContentType *string `json:"content_type"`
-	Digest      *string `json:"digest"`
-	InsecureSsl *string `json:"insecure_ssl"`
-	Secret      *string `json:"secret"`
-	Token       *string `json:"token"`
+	ContentType *string `json:"content_type,omitempty"`
+	Digest      *string `json:"digest,omitempty"`
+	InsecureSsl *string `json:"insecure_ssl,omitempty"`
+	Secret      *string `json:"secret,omitempty"`
+	Token       *string `json:"token,omitempty"`
 	URL         string  `json:"url"`
 }
 
 type ReposCreateWebhookRequestBody struct {
-	Active *bool                               `json:"active"`
+	Active *bool                               `json:"active,omitempty"`
 	Config ReposCreateWebhookRequestBodyConfig `json:"config"`
-	Events []string                            `json:"events"`
-	Name   *string                             `json:"name"`
+	Events []string                            `json:"events,omitempty"`
+	Name   *string                             `json:"name,omitempty"`
 }
 
 type ReposCreateWebhookRequest struct {

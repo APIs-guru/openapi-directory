@@ -8,16 +8,16 @@ const (
 )
 
 type LogMetric struct {
-	BucketName       *string               `json:"bucketName"`
-	BucketOptions    *BucketOptions        `json:"bucketOptions"`
-	CreateTime       *string               `json:"createTime"`
-	Description      *string               `json:"description"`
-	Disabled         *bool                 `json:"disabled"`
-	Filter           *string               `json:"filter"`
-	LabelExtractors  map[string]string     `json:"labelExtractors"`
-	MetricDescriptor *MetricDescriptor     `json:"metricDescriptor"`
-	Name             *string               `json:"name"`
-	UpdateTime       *string               `json:"updateTime"`
-	ValueExtractor   *string               `json:"valueExtractor"`
-	Version          *LogMetricVersionEnum `json:"version"`
+	BucketName       *string               `json:"bucketName,omitempty"`
+	BucketOptions    *BucketOptions        `json:"bucketOptions,omitempty"`
+	CreateTime       *string               `json:"createTime,omitempty"`
+	Description      *string               `json:"description,omitempty"`
+	Disabled         *bool                 `json:"disabled,omitempty"`
+	Filter           *string               `json:"filter,omitempty"`
+	LabelExtractors  map[string]string     `json:"labelExtractors,omitempty"`
+	MetricDescriptor *MetricDescriptor     `json:"metricDescriptor,omitempty"`
+	Name             *string               `json:"name,omitempty"`
+	UpdateTime       *string               `json:"updateTime,omitempty"`
+	ValueExtractor   *string               `json:"valueExtractor,omitempty"`
+	Version          *LogMetricVersionEnum `json:"version,omitempty"`
 }

@@ -19,7 +19,7 @@ const (
 )
 
 type GoogleCloudVisionV1p2beta1Feature struct {
-	MaxResults *int32                                     `json:"maxResults"`
-	Model      *string                                    `json:"model"`
-	Type       *GoogleCloudVisionV1p2beta1FeatureTypeEnum `json:"type"`
+	MaxResults *int32                                     `json:"maxResults,omitempty"`
+	Model      *string                                    `json:"model,omitempty"`
+	Type       *GoogleCloudVisionV1p2beta1FeatureTypeEnum `json:"type,omitempty"`
 }

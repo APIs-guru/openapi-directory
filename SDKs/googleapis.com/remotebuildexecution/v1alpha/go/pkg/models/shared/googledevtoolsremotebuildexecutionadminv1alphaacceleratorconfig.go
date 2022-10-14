@@ -1,6 +1,6 @@
 package shared
 
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig struct {
-	AcceleratorCount *string `json:"acceleratorCount"`
-	AcceleratorType  *string `json:"acceleratorType"`
+	AcceleratorCount *string `json:"acceleratorCount,omitempty"`
+	AcceleratorType  *string `json:"acceleratorType,omitempty"`
 }

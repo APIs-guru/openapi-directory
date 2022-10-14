@@ -12,15 +12,15 @@ const (
 )
 
 type PatientAuthNotificationAuth struct {
-	AccessToken   *string                               `json:"accessToken"`
-	Patient       *PatientDemographicResponse           `json:"patient"`
+	AccessToken   *string                               `json:"accessToken,omitempty"`
+	Patient       *PatientDemographicResponse           `json:"patient,omitempty"`
 	Status        PatientAuthNotificationAuthStatusEnum `json:"status"`
 	TransactionID string                                `json:"transactionId"`
-	Validity      *AccessTokenValidity                  `json:"validity"`
+	Validity      *AccessTokenValidity                  `json:"validity,omitempty"`
 }
 
 type PatientAuthNotification struct {
-	Auth      *PatientAuthNotificationAuth `json:"auth"`
+	Auth      *PatientAuthNotificationAuth `json:"auth,omitempty"`
 	RequestID string                       `json:"requestId"`
 	Timestamp time.Time                    `json:"timestamp"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type EncryptionInfo struct {
-	EncryptionStatus *Status                           `json:"encryptionStatus"`
-	EncryptionType   *EncryptionInfoEncryptionTypeEnum `json:"encryptionType"`
-	KmsKeyVersion    *string                           `json:"kmsKeyVersion"`
+	EncryptionStatus *Status                           `json:"encryptionStatus,omitempty"`
+	EncryptionType   *EncryptionInfoEncryptionTypeEnum `json:"encryptionType,omitempty"`
+	KmsKeyVersion    *string                           `json:"kmsKeyVersion,omitempty"`
 }

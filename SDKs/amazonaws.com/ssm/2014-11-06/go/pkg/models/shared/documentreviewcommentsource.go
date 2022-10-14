@@ -1,6 +1,6 @@
 package shared
 
 type DocumentReviewCommentSource struct {
-	Content *string                        `json:"Content"`
-	Type    *DocumentReviewCommentTypeEnum `json:"Type"`
+	Content *string                        `json:"Content,omitempty"`
+	Type    *DocumentReviewCommentTypeEnum `json:"Type,omitempty"`
 }

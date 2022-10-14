@@ -15,15 +15,15 @@ type UpdateGroupHeaders struct {
 }
 
 type UpdateGroupRequestBodyInsightsConfiguration struct {
-	InsightsEnabled      *bool `json:"InsightsEnabled"`
-	NotificationsEnabled *bool `json:"NotificationsEnabled"`
+	InsightsEnabled      *bool `json:"InsightsEnabled,omitempty"`
+	NotificationsEnabled *bool `json:"NotificationsEnabled,omitempty"`
 }
 
 type UpdateGroupRequestBody struct {
-	FilterExpression      *string                                      `json:"FilterExpression"`
-	GroupArn              *string                                      `json:"GroupARN"`
-	GroupName             *string                                      `json:"GroupName"`
-	InsightsConfiguration *UpdateGroupRequestBodyInsightsConfiguration `json:"InsightsConfiguration"`
+	FilterExpression      *string                                      `json:"FilterExpression,omitempty"`
+	GroupArn              *string                                      `json:"GroupARN,omitempty"`
+	GroupName             *string                                      `json:"GroupName,omitempty"`
+	InsightsConfiguration *UpdateGroupRequestBodyInsightsConfiguration `json:"InsightsConfiguration,omitempty"`
 }
 
 type UpdateGroupRequest struct {

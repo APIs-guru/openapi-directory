@@ -9,10 +9,10 @@ const (
 )
 
 type CustomEventInsert struct {
-	CmDimensions    *CampaignManagerIds                   `json:"cmDimensions"`
-	Dv3Dimensions   *Dv3Ids                               `json:"dv3Dimensions"`
-	InsertEventType *CustomEventInsertInsertEventTypeEnum `json:"insertEventType"`
-	Kind            *string                               `json:"kind"`
-	MatchID         *string                               `json:"matchId"`
-	MobileDeviceID  *string                               `json:"mobileDeviceId"`
+	CmDimensions    *CampaignManagerIds                   `json:"cmDimensions,omitempty"`
+	Dv3Dimensions   *Dv3Ids                               `json:"dv3Dimensions,omitempty"`
+	InsertEventType *CustomEventInsertInsertEventTypeEnum `json:"insertEventType,omitempty"`
+	Kind            *string                               `json:"kind,omitempty"`
+	MatchID         *string                               `json:"matchId,omitempty"`
+	MobileDeviceID  *string                               `json:"mobileDeviceId,omitempty"`
 }

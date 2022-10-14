@@ -23,19 +23,19 @@ type GetSavedQueryDistinctColumnNameRequest struct {
 }
 
 type GetSavedQueryDistinctColumnName400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryDistinctColumnName401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryDistinctColumnName404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryDistinctColumnName500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSavedQueryDistinctColumnNameResponse struct {

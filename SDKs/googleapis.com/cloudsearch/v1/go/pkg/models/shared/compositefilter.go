@@ -9,6 +9,6 @@ const (
 )
 
 type CompositeFilter struct {
-	LogicOperator *CompositeFilterLogicOperatorEnum `json:"logicOperator"`
-	SubFilters    []Filter                          `json:"subFilters"`
+	LogicOperator *CompositeFilterLogicOperatorEnum `json:"logicOperator,omitempty"`
+	SubFilters    []Filter                          `json:"subFilters,omitempty"`
 }

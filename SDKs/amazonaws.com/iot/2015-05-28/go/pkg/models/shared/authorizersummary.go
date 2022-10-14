@@ -1,6 +1,6 @@
 package shared
 
 type AuthorizerSummary struct {
-	AuthorizerArn  *string `json:"authorizerArn"`
-	AuthorizerName *string `json:"authorizerName"`
+	AuthorizerArn  *string `json:"authorizerArn,omitempty"`
+	AuthorizerName *string `json:"authorizerName,omitempty"`
 }

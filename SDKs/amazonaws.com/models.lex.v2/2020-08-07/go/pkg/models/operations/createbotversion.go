@@ -20,7 +20,7 @@ type CreateBotVersionHeaders struct {
 
 type CreateBotVersionRequestBody struct {
 	BotVersionLocaleSpecification map[string]shared.BotVersionLocaleDetails `json:"botVersionLocaleSpecification"`
-	Description                   *string                                   `json:"description"`
+	Description                   *string                                   `json:"description,omitempty"`
 }
 
 type CreateBotVersionRequest struct {

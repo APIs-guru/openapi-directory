@@ -1,7 +1,7 @@
 package shared
 
 type PresentationDto struct {
-	BackgroundColor *string `json:"backgroundColor"`
-	ImageURL        *string `json:"imageUrl"`
-	TextColor       *string `json:"textColor"`
+	BackgroundColor *string `json:"backgroundColor,omitempty"`
+	ImageURL        *string `json:"imageUrl,omitempty"`
+	TextColor       *string `json:"textColor,omitempty"`
 }

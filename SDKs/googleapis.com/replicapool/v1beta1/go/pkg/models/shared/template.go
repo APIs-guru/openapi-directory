@@ -1,8 +1,8 @@
 package shared
 
 type Template struct {
-	Action       *Action       `json:"action"`
-	HealthChecks []HealthCheck `json:"healthChecks"`
-	Version      *string       `json:"version"`
-	VMParams     *VMParams     `json:"vmParams"`
+	Action       *Action       `json:"action,omitempty"`
+	HealthChecks []HealthCheck `json:"healthChecks,omitempty"`
+	Version      *string       `json:"version,omitempty"`
+	VMParams     *VMParams     `json:"vmParams,omitempty"`
 }

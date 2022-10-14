@@ -1,5 +1,5 @@
 package shared
 
 type InventorySourceVideoCreativeConfig struct {
-	Duration *string `json:"duration"`
+	Duration *string `json:"duration,omitempty"`
 }

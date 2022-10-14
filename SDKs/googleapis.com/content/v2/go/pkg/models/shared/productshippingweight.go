@@ -1,6 +1,6 @@
 package shared
 
 type ProductShippingWeight struct {
-	Unit  *string  `json:"unit"`
-	Value *float64 `json:"value"`
+	Unit  *string  `json:"unit,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }

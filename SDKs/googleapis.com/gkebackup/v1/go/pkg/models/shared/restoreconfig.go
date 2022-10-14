@@ -26,12 +26,12 @@ const (
 )
 
 type RestoreConfig struct {
-	AllNamespaces                 *bool                                           `json:"allNamespaces"`
-	ClusterResourceConflictPolicy *RestoreConfigClusterResourceConflictPolicyEnum `json:"clusterResourceConflictPolicy"`
-	ClusterResourceRestoreScope   *ClusterResourceRestoreScope                    `json:"clusterResourceRestoreScope"`
-	NamespacedResourceRestoreMode *RestoreConfigNamespacedResourceRestoreModeEnum `json:"namespacedResourceRestoreMode"`
-	SelectedApplications          *NamespacedNames                                `json:"selectedApplications"`
-	SelectedNamespaces            *Namespaces                                     `json:"selectedNamespaces"`
-	SubstitutionRules             []SubstitutionRule                              `json:"substitutionRules"`
-	VolumeDataRestorePolicy       *RestoreConfigVolumeDataRestorePolicyEnum       `json:"volumeDataRestorePolicy"`
+	AllNamespaces                 *bool                                           `json:"allNamespaces,omitempty"`
+	ClusterResourceConflictPolicy *RestoreConfigClusterResourceConflictPolicyEnum `json:"clusterResourceConflictPolicy,omitempty"`
+	ClusterResourceRestoreScope   *ClusterResourceRestoreScope                    `json:"clusterResourceRestoreScope,omitempty"`
+	NamespacedResourceRestoreMode *RestoreConfigNamespacedResourceRestoreModeEnum `json:"namespacedResourceRestoreMode,omitempty"`
+	SelectedApplications          *NamespacedNames                                `json:"selectedApplications,omitempty"`
+	SelectedNamespaces            *Namespaces                                     `json:"selectedNamespaces,omitempty"`
+	SubstitutionRules             []SubstitutionRule                              `json:"substitutionRules,omitempty"`
+	VolumeDataRestorePolicy       *RestoreConfigVolumeDataRestorePolicyEnum       `json:"volumeDataRestorePolicy,omitempty"`
 }

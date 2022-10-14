@@ -1,8 +1,8 @@
 package shared
 
 type ListTaskDefinitionFamiliesRequest struct {
-	FamilyPrefix *string                         `json:"familyPrefix"`
-	MaxResults   *int64                          `json:"maxResults"`
-	NextToken    *string                         `json:"nextToken"`
-	Status       *TaskDefinitionFamilyStatusEnum `json:"status"`
+	FamilyPrefix *string                         `json:"familyPrefix,omitempty"`
+	MaxResults   *int64                          `json:"maxResults,omitempty"`
+	NextToken    *string                         `json:"nextToken,omitempty"`
+	Status       *TaskDefinitionFamilyStatusEnum `json:"status,omitempty"`
 }

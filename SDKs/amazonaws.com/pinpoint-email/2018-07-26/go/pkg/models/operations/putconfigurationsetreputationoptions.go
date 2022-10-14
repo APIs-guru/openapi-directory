@@ -15,7 +15,7 @@ type PutConfigurationSetReputationOptionsHeaders struct {
 }
 
 type PutConfigurationSetReputationOptionsRequestBody struct {
-	ReputationMetricsEnabled *bool `json:"ReputationMetricsEnabled"`
+	ReputationMetricsEnabled *bool `json:"ReputationMetricsEnabled,omitempty"`
 }
 
 type PutConfigurationSetReputationOptionsRequest struct {

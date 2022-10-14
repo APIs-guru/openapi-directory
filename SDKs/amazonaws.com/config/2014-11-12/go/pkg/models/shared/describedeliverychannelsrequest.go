@@ -1,5 +1,5 @@
 package shared
 
 type DescribeDeliveryChannelsRequest struct {
-	DeliveryChannelNames []string `json:"DeliveryChannelNames"`
+	DeliveryChannelNames []string `json:"DeliveryChannelNames,omitempty"`
 }

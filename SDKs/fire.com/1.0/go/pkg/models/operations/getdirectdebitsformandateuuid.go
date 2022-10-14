@@ -58,28 +58,28 @@ const (
 )
 
 type GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit struct {
-	Amount                 *int64                                                                                                   `json:"amount"`
-	Currency               *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency"`
-	DateCreated            *time.Time                                                                                               `json:"dateCreated"`
-	DirectDebitReference   *string                                                                                                  `json:"directDebitReference"`
-	DirectDebitUUID        *string                                                                                                  `json:"directDebitUuid"`
-	IsDdic                 *bool                                                                                                    `json:"isDDIC"`
-	LastUpdated            *time.Time                                                                                               `json:"lastUpdated"`
-	MandateUUID            *string                                                                                                  `json:"mandateUUid"`
-	OriginatorAlias        *string                                                                                                  `json:"originatorAlias"`
-	OriginatorName         *string                                                                                                  `json:"originatorName"`
-	OriginatorReference    *string                                                                                                  `json:"originatorReference"`
-	SchemeRejectReason     *string                                                                                                  `json:"schemeRejectReason"`
-	SchemeRejectReasonCode *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum                   `json:"schemeRejectReasonCode"`
-	Status                 *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum                                   `json:"status"`
-	TargetIcan             *int64                                                                                                   `json:"targetIcan"`
-	TargetPayeeID          *int64                                                                                                   `json:"targetPayeeId"`
-	Type                   *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum                                     `json:"type"`
+	Amount                 *int64                                                                                                   `json:"amount,omitempty"`
+	Currency               *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
+	DateCreated            *time.Time                                                                                               `json:"dateCreated,omitempty"`
+	DirectDebitReference   *string                                                                                                  `json:"directDebitReference,omitempty"`
+	DirectDebitUUID        *string                                                                                                  `json:"directDebitUuid,omitempty"`
+	IsDdic                 *bool                                                                                                    `json:"isDDIC,omitempty"`
+	LastUpdated            *time.Time                                                                                               `json:"lastUpdated,omitempty"`
+	MandateUUID            *string                                                                                                  `json:"mandateUUid,omitempty"`
+	OriginatorAlias        *string                                                                                                  `json:"originatorAlias,omitempty"`
+	OriginatorName         *string                                                                                                  `json:"originatorName,omitempty"`
+	OriginatorReference    *string                                                                                                  `json:"originatorReference,omitempty"`
+	SchemeRejectReason     *string                                                                                                  `json:"schemeRejectReason,omitempty"`
+	SchemeRejectReasonCode *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum                   `json:"schemeRejectReasonCode,omitempty"`
+	Status                 *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum                                   `json:"status,omitempty"`
+	TargetIcan             *int64                                                                                                   `json:"targetIcan,omitempty"`
+	TargetPayeeID          *int64                                                                                                   `json:"targetPayeeId,omitempty"`
+	Type                   *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum                                     `json:"type,omitempty"`
 }
 
 type GetDirectDebitsForMandateUUID200ApplicationJSONDirectDebits struct {
-	Directdebits []GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit `json:"directdebits"`
-	Total        *int64                                                                   `json:"total"`
+	Directdebits []GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit `json:"directdebits,omitempty"`
+	Total        *int64                                                                   `json:"total,omitempty"`
 }
 
 type GetDirectDebitsForMandateUUIDResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type LaunchProfileInitializationScript struct {
-	Script              *string `json:"script"`
-	StudioComponentID   *string `json:"studioComponentId"`
-	StudioComponentName *string `json:"studioComponentName"`
+	Script              *string `json:"script,omitempty"`
+	StudioComponentID   *string `json:"studioComponentId,omitempty"`
+	StudioComponentName *string `json:"studioComponentName,omitempty"`
 }

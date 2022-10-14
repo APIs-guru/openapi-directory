@@ -1,5 +1,5 @@
 package shared
 
 type Body struct {
-	Content []StructuralElement `json:"content"`
+	Content []StructuralElement `json:"content,omitempty"`
 }

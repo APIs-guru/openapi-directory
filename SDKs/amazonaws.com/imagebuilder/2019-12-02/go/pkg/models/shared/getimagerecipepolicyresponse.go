@@ -1,6 +1,6 @@
 package shared
 
 type GetImageRecipePolicyResponse struct {
-	Policy    *string `json:"policy"`
-	RequestID *string `json:"requestId"`
+	Policy    *string `json:"policy,omitempty"`
+	RequestID *string `json:"requestId,omitempty"`
 }

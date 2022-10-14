@@ -5,11 +5,11 @@ import (
 )
 
 type Deployment struct {
-	CreationTimestamp *time.Time            `json:"creationTimestamp"`
-	DeploymentID      *string               `json:"deploymentId"`
-	DeploymentName    *string               `json:"deploymentName"`
-	DeploymentStatus  *DeploymentStatusEnum `json:"deploymentStatus"`
-	IsLatestForTarget *bool                 `json:"isLatestForTarget"`
-	RevisionID        *string               `json:"revisionId"`
-	TargetArn         *string               `json:"targetArn"`
+	CreationTimestamp *time.Time            `json:"creationTimestamp,omitempty"`
+	DeploymentID      *string               `json:"deploymentId,omitempty"`
+	DeploymentName    *string               `json:"deploymentName,omitempty"`
+	DeploymentStatus  *DeploymentStatusEnum `json:"deploymentStatus,omitempty"`
+	IsLatestForTarget *bool                 `json:"isLatestForTarget,omitempty"`
+	RevisionID        *string               `json:"revisionId,omitempty"`
+	TargetArn         *string               `json:"targetArn,omitempty"`
 }

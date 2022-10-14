@@ -1,6 +1,6 @@
 package shared
 
 type ListPermissionsResponse struct {
-	NextToken   *string                          `json:"nextToken"`
-	Permissions []ResourceSharePermissionSummary `json:"permissions"`
+	NextToken   *string                          `json:"nextToken,omitempty"`
+	Permissions []ResourceSharePermissionSummary `json:"permissions,omitempty"`
 }

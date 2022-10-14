@@ -1,7 +1,7 @@
 package shared
 
 type KeySet struct {
-	All    *bool           `json:"all"`
-	Keys   [][]interface{} `json:"keys"`
-	Ranges []KeyRange      `json:"ranges"`
+	All    *bool           `json:"all,omitempty"`
+	Keys   [][]interface{} `json:"keys,omitempty"`
+	Ranges []KeyRange      `json:"ranges,omitempty"`
 }

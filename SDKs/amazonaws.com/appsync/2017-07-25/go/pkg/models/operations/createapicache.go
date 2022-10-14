@@ -47,8 +47,8 @@ const (
 
 type CreateAPICacheRequestBody struct {
 	APICachingBehavior       CreateAPICacheRequestBodyAPICachingBehaviorEnum `json:"apiCachingBehavior"`
-	AtRestEncryptionEnabled  *bool                                           `json:"atRestEncryptionEnabled"`
-	TransitEncryptionEnabled *bool                                           `json:"transitEncryptionEnabled"`
+	AtRestEncryptionEnabled  *bool                                           `json:"atRestEncryptionEnabled,omitempty"`
+	TransitEncryptionEnabled *bool                                           `json:"transitEncryptionEnabled,omitempty"`
 	TTL                      int64                                           `json:"ttl"`
 	Type                     CreateAPICacheRequestBodyTypeEnum               `json:"type"`
 }

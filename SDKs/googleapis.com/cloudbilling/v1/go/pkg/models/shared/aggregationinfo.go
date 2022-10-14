@@ -17,7 +17,7 @@ const (
 )
 
 type AggregationInfo struct {
-	AggregationCount    *int32                                  `json:"aggregationCount"`
-	AggregationInterval *AggregationInfoAggregationIntervalEnum `json:"aggregationInterval"`
-	AggregationLevel    *AggregationInfoAggregationLevelEnum    `json:"aggregationLevel"`
+	AggregationCount    *int32                                  `json:"aggregationCount,omitempty"`
+	AggregationInterval *AggregationInfoAggregationIntervalEnum `json:"aggregationInterval,omitempty"`
+	AggregationLevel    *AggregationInfoAggregationLevelEnum    `json:"aggregationLevel,omitempty"`
 }

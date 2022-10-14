@@ -1,8 +1,8 @@
 package shared
 
 type DocumentParameter struct {
-	DefaultValue *string                    `json:"DefaultValue"`
-	Description  *string                    `json:"Description"`
-	Name         *string                    `json:"Name"`
-	Type         *DocumentParameterTypeEnum `json:"Type"`
+	DefaultValue *string                    `json:"DefaultValue,omitempty"`
+	Description  *string                    `json:"Description,omitempty"`
+	Name         *string                    `json:"Name,omitempty"`
+	Type         *DocumentParameterTypeEnum `json:"Type,omitempty"`
 }

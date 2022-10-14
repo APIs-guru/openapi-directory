@@ -1,8 +1,8 @@
 package shared
 
 type ConfigMapKeySelector struct {
-	Key                  *string               `json:"key"`
-	LocalObjectReference *LocalObjectReference `json:"localObjectReference"`
-	Name                 *string               `json:"name"`
-	Optional             *bool                 `json:"optional"`
+	Key                  *string               `json:"key,omitempty"`
+	LocalObjectReference *LocalObjectReference `json:"localObjectReference,omitempty"`
+	Name                 *string               `json:"name,omitempty"`
+	Optional             *bool                 `json:"optional,omitempty"`
 }

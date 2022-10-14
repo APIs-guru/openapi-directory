@@ -1,5 +1,5 @@
 package shared
 
 type CreateCustomRoutingEndpointGroupResponse struct {
-	EndpointGroup *CustomRoutingEndpointGroup `json:"EndpointGroup"`
+	EndpointGroup *CustomRoutingEndpointGroup `json:"EndpointGroup,omitempty"`
 }

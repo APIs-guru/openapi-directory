@@ -18,8 +18,8 @@ const (
 )
 
 type CfltrRequestBody struct {
-	CertificateParameters *CfltrRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *CfltrRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                CfltrRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Cfltr400ApplicationJSON struct {
-	Error            *Cfltr400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cfltr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cfltr400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cfltr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cfltr401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Cfltr401ApplicationJSON struct {
-	Error            *Cfltr401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cfltr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cfltr401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cfltr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cfltr404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Cfltr404ApplicationJSON struct {
-	Error            *Cfltr404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cfltr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cfltr404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cfltr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cfltr500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Cfltr500ApplicationJSON struct {
-	Error            *Cfltr500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cfltr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cfltr500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cfltr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cfltr502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Cfltr502ApplicationJSON struct {
-	Error            *Cfltr502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cfltr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cfltr502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cfltr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cfltr503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Cfltr503ApplicationJSON struct {
-	Error            *Cfltr503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cfltr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cfltr503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cfltr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cfltr504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Cfltr504ApplicationJSON struct {
-	Error            *Cfltr504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cfltr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cfltr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cfltr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type CfltrResponse struct {

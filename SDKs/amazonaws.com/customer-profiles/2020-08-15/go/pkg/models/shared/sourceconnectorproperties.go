@@ -1,9 +1,9 @@
 package shared
 
 type SourceConnectorProperties struct {
-	Marketo    *MarketoSourceProperties    `json:"Marketo"`
-	S3         *S3SourceProperties         `json:"S3"`
-	Salesforce *SalesforceSourceProperties `json:"Salesforce"`
-	ServiceNow *ServiceNowSourceProperties `json:"ServiceNow"`
-	Zendesk    *ZendeskSourceProperties    `json:"Zendesk"`
+	Marketo    *MarketoSourceProperties    `json:"Marketo,omitempty"`
+	S3         *S3SourceProperties         `json:"S3,omitempty"`
+	Salesforce *SalesforceSourceProperties `json:"Salesforce,omitempty"`
+	ServiceNow *ServiceNowSourceProperties `json:"ServiceNow,omitempty"`
+	Zendesk    *ZendeskSourceProperties    `json:"Zendesk,omitempty"`
 }

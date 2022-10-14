@@ -9,6 +9,6 @@ type PutIntegrationResponse struct {
 	DomainName     string            `json:"DomainName"`
 	LastUpdatedAt  time.Time         `json:"LastUpdatedAt"`
 	ObjectTypeName string            `json:"ObjectTypeName"`
-	Tags           map[string]string `json:"Tags"`
+	Tags           map[string]string `json:"Tags,omitempty"`
 	URI            string            `json:"Uri"`
 }

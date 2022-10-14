@@ -1,7 +1,7 @@
 package shared
 
 type RequestDetails struct {
-	Nonce              *string `json:"nonce"`
-	RequestPackageName *string `json:"requestPackageName"`
-	TimestampMillis    *string `json:"timestampMillis"`
+	Nonce              *string `json:"nonce,omitempty"`
+	RequestPackageName *string `json:"requestPackageName,omitempty"`
+	TimestampMillis    *string `json:"timestampMillis,omitempty"`
 }

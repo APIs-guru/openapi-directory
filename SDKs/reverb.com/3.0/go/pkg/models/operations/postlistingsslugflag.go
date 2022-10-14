@@ -5,7 +5,7 @@ type PostListingsSlugFlagPathParams struct {
 }
 
 type PostListingsSlugFlagRequestBody struct {
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	Reason      string  `json:"reason"`
 }
 

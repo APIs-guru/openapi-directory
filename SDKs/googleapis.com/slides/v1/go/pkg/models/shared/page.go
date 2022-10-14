@@ -11,13 +11,13 @@ const (
 )
 
 type Page struct {
-	LayoutProperties *LayoutProperties `json:"layoutProperties"`
-	MasterProperties *MasterProperties `json:"masterProperties"`
-	NotesProperties  *NotesProperties  `json:"notesProperties"`
-	ObjectID         *string           `json:"objectId"`
-	PageElements     []PageElement     `json:"pageElements"`
-	PageProperties   *PageProperties   `json:"pageProperties"`
-	PageType         *PagePageTypeEnum `json:"pageType"`
-	RevisionID       *string           `json:"revisionId"`
-	SlideProperties  *SlideProperties  `json:"slideProperties"`
+	LayoutProperties *LayoutProperties `json:"layoutProperties,omitempty"`
+	MasterProperties *MasterProperties `json:"masterProperties,omitempty"`
+	NotesProperties  *NotesProperties  `json:"notesProperties,omitempty"`
+	ObjectID         *string           `json:"objectId,omitempty"`
+	PageElements     []PageElement     `json:"pageElements,omitempty"`
+	PageProperties   *PageProperties   `json:"pageProperties,omitempty"`
+	PageType         *PagePageTypeEnum `json:"pageType,omitempty"`
+	RevisionID       *string           `json:"revisionId,omitempty"`
+	SlideProperties  *SlideProperties  `json:"slideProperties,omitempty"`
 }

@@ -14,7 +14,7 @@ type RemoveProjectForTaskQueryParams struct {
 }
 
 type RemoveProjectForTaskRequestBody struct {
-	Data *shared.TaskRemoveProjectRequest `json:"data"`
+	Data *shared.TaskRemoveProjectRequest `json:"data,omitempty"`
 }
 
 type RemoveProjectForTaskRequest struct {
@@ -24,7 +24,7 @@ type RemoveProjectForTaskRequest struct {
 }
 
 type RemoveProjectForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveProjectForTaskResponse struct {

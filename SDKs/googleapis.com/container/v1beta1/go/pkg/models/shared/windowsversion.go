@@ -1,7 +1,7 @@
 package shared
 
 type WindowsVersion struct {
-	ImageType      *string `json:"imageType"`
-	OsVersion      *string `json:"osVersion"`
-	SupportEndDate *Date   `json:"supportEndDate"`
+	ImageType      *string `json:"imageType,omitempty"`
+	OsVersion      *string `json:"osVersion,omitempty"`
+	SupportEndDate *Date   `json:"supportEndDate,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SourceRepository struct {
-	DeployedURL *string `json:"deployedUrl"`
-	URL         *string `json:"url"`
+	DeployedURL *string `json:"deployedUrl,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }

@@ -5,19 +5,19 @@ import (
 )
 
 type TaskrouterV1Workspace struct {
-	AccountSid           *string                      `json:"account_sid"`
-	DateCreated          *time.Time                   `json:"date_created"`
-	DateUpdated          *time.Time                   `json:"date_updated"`
-	DefaultActivityName  *string                      `json:"default_activity_name"`
-	DefaultActivitySid   *string                      `json:"default_activity_sid"`
-	EventCallbackURL     *string                      `json:"event_callback_url"`
-	EventsFilter         *string                      `json:"events_filter"`
-	FriendlyName         *string                      `json:"friendly_name"`
-	Links                map[string]interface{}       `json:"links"`
-	MultiTaskEnabled     *bool                        `json:"multi_task_enabled"`
-	PrioritizeQueueOrder *WorkspaceEnumQueueOrderEnum `json:"prioritize_queue_order"`
-	Sid                  *string                      `json:"sid"`
-	TimeoutActivityName  *string                      `json:"timeout_activity_name"`
-	TimeoutActivitySid   *string                      `json:"timeout_activity_sid"`
-	URL                  *string                      `json:"url"`
+	AccountSid           *string                      `json:"account_sid,omitempty"`
+	DateCreated          *time.Time                   `json:"date_created,omitempty"`
+	DateUpdated          *time.Time                   `json:"date_updated,omitempty"`
+	DefaultActivityName  *string                      `json:"default_activity_name,omitempty"`
+	DefaultActivitySid   *string                      `json:"default_activity_sid,omitempty"`
+	EventCallbackURL     *string                      `json:"event_callback_url,omitempty"`
+	EventsFilter         *string                      `json:"events_filter,omitempty"`
+	FriendlyName         *string                      `json:"friendly_name,omitempty"`
+	Links                map[string]interface{}       `json:"links,omitempty"`
+	MultiTaskEnabled     *bool                        `json:"multi_task_enabled,omitempty"`
+	PrioritizeQueueOrder *WorkspaceEnumQueueOrderEnum `json:"prioritize_queue_order,omitempty"`
+	Sid                  *string                      `json:"sid,omitempty"`
+	TimeoutActivityName  *string                      `json:"timeout_activity_name,omitempty"`
+	TimeoutActivitySid   *string                      `json:"timeout_activity_sid,omitempty"`
+	URL                  *string                      `json:"url,omitempty"`
 }

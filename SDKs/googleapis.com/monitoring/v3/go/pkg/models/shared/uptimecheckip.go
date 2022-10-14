@@ -11,7 +11,7 @@ const (
 )
 
 type UptimeCheckIP struct {
-	IPAddress *string                  `json:"ipAddress"`
-	Location  *string                  `json:"location"`
-	Region    *UptimeCheckIPRegionEnum `json:"region"`
+	IPAddress *string                  `json:"ipAddress,omitempty"`
+	Location  *string                  `json:"location,omitempty"`
+	Region    *UptimeCheckIPRegionEnum `json:"region,omitempty"`
 }

@@ -14,6 +14,6 @@ const (
 )
 
 type DataSourceRefreshWeeklySchedule struct {
-	DaysOfWeek []DataSourceRefreshWeeklyScheduleDaysOfWeekEnum `json:"daysOfWeek"`
-	StartTime  *TimeOfDay                                      `json:"startTime"`
+	DaysOfWeek []DataSourceRefreshWeeklyScheduleDaysOfWeekEnum `json:"daysOfWeek,omitempty"`
+	StartTime  *TimeOfDay                                      `json:"startTime,omitempty"`
 }

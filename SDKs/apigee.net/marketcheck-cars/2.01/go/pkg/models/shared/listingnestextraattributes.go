@@ -1,14 +1,14 @@
 package shared
 
 type ListingNestExtraAttributes struct {
-	DealerAddedF   []string `json:"dealer_added_f"`
-	ElectronicsF   []string `json:"electronics_f"`
-	ExteriorF      []string `json:"exterior_f"`
-	Features       []string `json:"features"`
-	InteriorF      []string `json:"interior_f"`
-	Options        []string `json:"options"`
-	SafetyF        []string `json:"safety_f"`
-	SellerComments *string  `json:"seller_comments"`
-	StandardF      []string `json:"standard_f"`
-	TechnicalF     []string `json:"technical_f"`
+	DealerAddedF   []string `json:"dealer_added_f,omitempty"`
+	ElectronicsF   []string `json:"electronics_f,omitempty"`
+	ExteriorF      []string `json:"exterior_f,omitempty"`
+	Features       []string `json:"features,omitempty"`
+	InteriorF      []string `json:"interior_f,omitempty"`
+	Options        []string `json:"options,omitempty"`
+	SafetyF        []string `json:"safety_f,omitempty"`
+	SellerComments *string  `json:"seller_comments,omitempty"`
+	StandardF      []string `json:"standard_f,omitempty"`
+	TechnicalF     []string `json:"technical_f,omitempty"`
 }

@@ -20,11 +20,11 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1Evaluation struct {
-	AnnotationType       *GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum `json:"annotationType"`
-	Config               *GoogleCloudDatalabelingV1beta1EvaluationConfig             `json:"config"`
-	CreateTime           *string                                                     `json:"createTime"`
-	EvaluatedItemCount   *string                                                     `json:"evaluatedItemCount"`
-	EvaluationJobRunTime *string                                                     `json:"evaluationJobRunTime"`
-	EvaluationMetrics    *GoogleCloudDatalabelingV1beta1EvaluationMetrics            `json:"evaluationMetrics"`
-	Name                 *string                                                     `json:"name"`
+	AnnotationType       *GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum `json:"annotationType,omitempty"`
+	Config               *GoogleCloudDatalabelingV1beta1EvaluationConfig             `json:"config,omitempty"`
+	CreateTime           *string                                                     `json:"createTime,omitempty"`
+	EvaluatedItemCount   *string                                                     `json:"evaluatedItemCount,omitempty"`
+	EvaluationJobRunTime *string                                                     `json:"evaluationJobRunTime,omitempty"`
+	EvaluationMetrics    *GoogleCloudDatalabelingV1beta1EvaluationMetrics            `json:"evaluationMetrics,omitempty"`
+	Name                 *string                                                     `json:"name,omitempty"`
 }

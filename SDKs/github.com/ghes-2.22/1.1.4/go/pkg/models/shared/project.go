@@ -19,7 +19,7 @@ type ProjectCreatorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -45,9 +45,9 @@ type Project struct {
 	Name                   string                             `json:"name"`
 	NodeID                 string                             `json:"node_id"`
 	Number                 int64                              `json:"number"`
-	OrganizationPermission *ProjectOrganizationPermissionEnum `json:"organization_permission"`
+	OrganizationPermission *ProjectOrganizationPermissionEnum `json:"organization_permission,omitempty"`
 	OwnerURL               string                             `json:"owner_url"`
-	Private                *bool                              `json:"private"`
+	Private                *bool                              `json:"private,omitempty"`
 	State                  string                             `json:"state"`
 	UpdatedAt              time.Time                          `json:"updated_at"`
 	URL                    string                             `json:"url"`

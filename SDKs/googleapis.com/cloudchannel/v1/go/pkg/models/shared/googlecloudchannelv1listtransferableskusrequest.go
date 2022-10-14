@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudChannelV1ListTransferableSkusRequest struct {
-	AuthToken       *string `json:"authToken"`
-	CloudIdentityID *string `json:"cloudIdentityId"`
-	CustomerName    *string `json:"customerName"`
-	LanguageCode    *string `json:"languageCode"`
-	PageSize        *int32  `json:"pageSize"`
-	PageToken       *string `json:"pageToken"`
+	AuthToken       *string `json:"authToken,omitempty"`
+	CloudIdentityID *string `json:"cloudIdentityId,omitempty"`
+	CustomerName    *string `json:"customerName,omitempty"`
+	LanguageCode    *string `json:"languageCode,omitempty"`
+	PageSize        *int32  `json:"pageSize,omitempty"`
+	PageToken       *string `json:"pageToken,omitempty"`
 }

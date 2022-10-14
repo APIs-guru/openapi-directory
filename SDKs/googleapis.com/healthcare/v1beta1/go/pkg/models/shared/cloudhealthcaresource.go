@@ -1,5 +1,5 @@
 package shared
 
 type CloudHealthcareSource struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }

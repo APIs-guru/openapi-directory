@@ -1,5 +1,5 @@
 package shared
 
 type DetectPiiEntitiesResponse struct {
-	Entities []PiiEntity `json:"Entities"`
+	Entities []PiiEntity `json:"Entities,omitempty"`
 }

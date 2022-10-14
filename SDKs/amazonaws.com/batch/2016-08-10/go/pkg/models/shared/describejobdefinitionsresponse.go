@@ -1,6 +1,6 @@
 package shared
 
 type DescribeJobDefinitionsResponse struct {
-	JobDefinitions []JobDefinition `json:"jobDefinitions"`
-	NextToken      *string         `json:"nextToken"`
+	JobDefinitions []JobDefinition `json:"jobDefinitions,omitempty"`
+	NextToken      *string         `json:"nextToken,omitempty"`
 }

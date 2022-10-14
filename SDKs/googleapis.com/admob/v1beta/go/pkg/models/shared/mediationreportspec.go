@@ -36,12 +36,12 @@ const (
 )
 
 type MediationReportSpec struct {
-	DateRange            *DateRange                           `json:"dateRange"`
-	DimensionFilters     []MediationReportSpecDimensionFilter `json:"dimensionFilters"`
-	Dimensions           []MediationReportSpecDimensionsEnum  `json:"dimensions"`
-	LocalizationSettings *LocalizationSettings                `json:"localizationSettings"`
-	MaxReportRows        *int32                               `json:"maxReportRows"`
-	Metrics              []MediationReportSpecMetricsEnum     `json:"metrics"`
-	SortConditions       []MediationReportSpecSortCondition   `json:"sortConditions"`
-	TimeZone             *string                              `json:"timeZone"`
+	DateRange            *DateRange                           `json:"dateRange,omitempty"`
+	DimensionFilters     []MediationReportSpecDimensionFilter `json:"dimensionFilters,omitempty"`
+	Dimensions           []MediationReportSpecDimensionsEnum  `json:"dimensions,omitempty"`
+	LocalizationSettings *LocalizationSettings                `json:"localizationSettings,omitempty"`
+	MaxReportRows        *int32                               `json:"maxReportRows,omitempty"`
+	Metrics              []MediationReportSpecMetricsEnum     `json:"metrics,omitempty"`
+	SortConditions       []MediationReportSpecSortCondition   `json:"sortConditions,omitempty"`
+	TimeZone             *string                              `json:"timeZone,omitempty"`
 }

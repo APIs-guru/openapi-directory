@@ -1,7 +1,7 @@
 package shared
 
 type DimensionFilter struct {
-	DimensionName *string `json:"dimensionName"`
-	Kind          *string `json:"kind"`
-	Value         *string `json:"value"`
+	DimensionName *string `json:"dimensionName,omitempty"`
+	Kind          *string `json:"kind,omitempty"`
+	Value         *string `json:"value,omitempty"`
 }

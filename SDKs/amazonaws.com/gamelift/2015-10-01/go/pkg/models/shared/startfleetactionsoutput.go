@@ -1,6 +1,6 @@
 package shared
 
 type StartFleetActionsOutput struct {
-	FleetArn *string `json:"FleetArn"`
-	FleetID  *string `json:"FleetId"`
+	FleetArn *string `json:"FleetArn,omitempty"`
+	FleetID  *string `json:"FleetId,omitempty"`
 }

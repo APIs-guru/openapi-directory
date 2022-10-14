@@ -1,5 +1,5 @@
 package shared
 
 type UpdateFileSystemResponse struct {
-	FileSystem *FileSystem `json:"FileSystem"`
+	FileSystem *FileSystem `json:"FileSystem,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type Orientation struct {
-	ID   *string  `json:"id"`
-	Name *string  `json:"name"`
-	Tags []string `json:"tags"`
+	ID   *string  `json:"id,omitempty"`
+	Name *string  `json:"name,omitempty"`
+	Tags []string `json:"tags,omitempty"`
 }

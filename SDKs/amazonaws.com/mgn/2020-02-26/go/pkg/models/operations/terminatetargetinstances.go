@@ -16,7 +16,7 @@ type TerminateTargetInstancesHeaders struct {
 
 type TerminateTargetInstancesRequestBody struct {
 	SourceServerIDs []string          `json:"sourceServerIDs"`
-	Tags            map[string]string `json:"tags"`
+	Tags            map[string]string `json:"tags,omitempty"`
 }
 
 type TerminateTargetInstancesRequest struct {

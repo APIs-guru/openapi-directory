@@ -1,7 +1,7 @@
 package shared
 
 type NoContent struct {
-	Error   *string `json:"error"`
-	Message *string `json:"message"`
-	Status  *int64  `json:"status"`
+	Error   *string `json:"error,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Status  *int64  `json:"status,omitempty"`
 }

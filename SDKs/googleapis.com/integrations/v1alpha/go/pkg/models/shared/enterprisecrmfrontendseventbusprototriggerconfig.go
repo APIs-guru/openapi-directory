@@ -26,17 +26,17 @@ const (
 )
 
 type EnterpriseCrmFrontendsEventbusProtoTriggerConfig struct {
-	AlertConfig              []EnterpriseCrmEventbusProtoWorkflowAlertConfig                               `json:"alertConfig"`
-	Description              *string                                                                       `json:"description"`
-	EnabledClients           []string                                                                      `json:"enabledClients"`
-	Label                    *string                                                                       `json:"label"`
-	NextTasksExecutionPolicy *EnterpriseCrmFrontendsEventbusProtoTriggerConfigNextTasksExecutionPolicyEnum `json:"nextTasksExecutionPolicy"`
-	PauseWorkflowExecutions  *bool                                                                         `json:"pauseWorkflowExecutions"`
-	Position                 *EnterpriseCrmEventbusProtoCoordinate                                         `json:"position"`
-	Properties               map[string]string                                                             `json:"properties"`
-	StartTasks               []EnterpriseCrmEventbusProtoNextTask                                          `json:"startTasks"`
-	TriggerCriteria          *EnterpriseCrmEventbusProtoTriggerCriteria                                    `json:"triggerCriteria"`
-	TriggerID                *string                                                                       `json:"triggerId"`
-	TriggerNumber            *string                                                                       `json:"triggerNumber"`
-	TriggerType              *EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum              `json:"triggerType"`
+	AlertConfig              []EnterpriseCrmEventbusProtoWorkflowAlertConfig                               `json:"alertConfig,omitempty"`
+	Description              *string                                                                       `json:"description,omitempty"`
+	EnabledClients           []string                                                                      `json:"enabledClients,omitempty"`
+	Label                    *string                                                                       `json:"label,omitempty"`
+	NextTasksExecutionPolicy *EnterpriseCrmFrontendsEventbusProtoTriggerConfigNextTasksExecutionPolicyEnum `json:"nextTasksExecutionPolicy,omitempty"`
+	PauseWorkflowExecutions  *bool                                                                         `json:"pauseWorkflowExecutions,omitempty"`
+	Position                 *EnterpriseCrmEventbusProtoCoordinate                                         `json:"position,omitempty"`
+	Properties               map[string]string                                                             `json:"properties,omitempty"`
+	StartTasks               []EnterpriseCrmEventbusProtoNextTask                                          `json:"startTasks,omitempty"`
+	TriggerCriteria          *EnterpriseCrmEventbusProtoTriggerCriteria                                    `json:"triggerCriteria,omitempty"`
+	TriggerID                *string                                                                       `json:"triggerId,omitempty"`
+	TriggerNumber            *string                                                                       `json:"triggerNumber,omitempty"`
+	TriggerType              *EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum              `json:"triggerType,omitempty"`
 }

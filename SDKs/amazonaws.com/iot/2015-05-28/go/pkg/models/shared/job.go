@@ -5,23 +5,23 @@ import (
 )
 
 type Job struct {
-	AbortConfig                *AbortConfig                `json:"abortConfig"`
-	Comment                    *string                     `json:"comment"`
-	CompletedAt                *time.Time                  `json:"completedAt"`
-	CreatedAt                  *time.Time                  `json:"createdAt"`
-	Description                *string                     `json:"description"`
-	ForceCanceled              *bool                       `json:"forceCanceled"`
-	JobArn                     *string                     `json:"jobArn"`
-	JobExecutionsRolloutConfig *JobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig"`
-	JobID                      *string                     `json:"jobId"`
-	JobProcessDetails          *JobProcessDetails          `json:"jobProcessDetails"`
-	JobTemplateArn             *string                     `json:"jobTemplateArn"`
-	LastUpdatedAt              *time.Time                  `json:"lastUpdatedAt"`
-	NamespaceID                *string                     `json:"namespaceId"`
-	PresignedURLConfig         *PresignedURLConfig         `json:"presignedUrlConfig"`
-	ReasonCode                 *string                     `json:"reasonCode"`
-	Status                     *JobStatusEnum              `json:"status"`
-	TargetSelection            *TargetSelectionEnum        `json:"targetSelection"`
-	Targets                    []string                    `json:"targets"`
-	TimeoutConfig              *TimeoutConfig              `json:"timeoutConfig"`
+	AbortConfig                *AbortConfig                `json:"abortConfig,omitempty"`
+	Comment                    *string                     `json:"comment,omitempty"`
+	CompletedAt                *time.Time                  `json:"completedAt,omitempty"`
+	CreatedAt                  *time.Time                  `json:"createdAt,omitempty"`
+	Description                *string                     `json:"description,omitempty"`
+	ForceCanceled              *bool                       `json:"forceCanceled,omitempty"`
+	JobArn                     *string                     `json:"jobArn,omitempty"`
+	JobExecutionsRolloutConfig *JobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig,omitempty"`
+	JobID                      *string                     `json:"jobId,omitempty"`
+	JobProcessDetails          *JobProcessDetails          `json:"jobProcessDetails,omitempty"`
+	JobTemplateArn             *string                     `json:"jobTemplateArn,omitempty"`
+	LastUpdatedAt              *time.Time                  `json:"lastUpdatedAt,omitempty"`
+	NamespaceID                *string                     `json:"namespaceId,omitempty"`
+	PresignedURLConfig         *PresignedURLConfig         `json:"presignedUrlConfig,omitempty"`
+	ReasonCode                 *string                     `json:"reasonCode,omitempty"`
+	Status                     *JobStatusEnum              `json:"status,omitempty"`
+	TargetSelection            *TargetSelectionEnum        `json:"targetSelection,omitempty"`
+	Targets                    []string                    `json:"targets,omitempty"`
+	TimeoutConfig              *TimeoutConfig              `json:"timeoutConfig,omitempty"`
 }

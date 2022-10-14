@@ -17,10 +17,10 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1EntityType struct {
-	AutoExpansionMode     *GoogleCloudDialogflowV2beta1EntityTypeAutoExpansionModeEnum `json:"autoExpansionMode"`
-	DisplayName           *string                                                      `json:"displayName"`
-	EnableFuzzyExtraction *bool                                                        `json:"enableFuzzyExtraction"`
-	Entities              []GoogleCloudDialogflowV2beta1EntityTypeEntity               `json:"entities"`
-	Kind                  *GoogleCloudDialogflowV2beta1EntityTypeKindEnum              `json:"kind"`
-	Name                  *string                                                      `json:"name"`
+	AutoExpansionMode     *GoogleCloudDialogflowV2beta1EntityTypeAutoExpansionModeEnum `json:"autoExpansionMode,omitempty"`
+	DisplayName           *string                                                      `json:"displayName,omitempty"`
+	EnableFuzzyExtraction *bool                                                        `json:"enableFuzzyExtraction,omitempty"`
+	Entities              []GoogleCloudDialogflowV2beta1EntityTypeEntity               `json:"entities,omitempty"`
+	Kind                  *GoogleCloudDialogflowV2beta1EntityTypeKindEnum              `json:"kind,omitempty"`
+	Name                  *string                                                      `json:"name,omitempty"`
 }

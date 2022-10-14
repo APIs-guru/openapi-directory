@@ -1,6 +1,6 @@
 package shared
 
 type AwsIamPermissionsBoundary struct {
-	PermissionsBoundaryArn  *string `json:"PermissionsBoundaryArn"`
-	PermissionsBoundaryType *string `json:"PermissionsBoundaryType"`
+	PermissionsBoundaryArn  *string `json:"PermissionsBoundaryArn,omitempty"`
+	PermissionsBoundaryType *string `json:"PermissionsBoundaryType,omitempty"`
 }

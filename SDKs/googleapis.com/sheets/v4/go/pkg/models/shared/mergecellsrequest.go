@@ -9,6 +9,6 @@ const (
 )
 
 type MergeCellsRequest struct {
-	MergeType *MergeCellsRequestMergeTypeEnum `json:"mergeType"`
-	Range     *GridRange                      `json:"range"`
+	MergeType *MergeCellsRequestMergeTypeEnum `json:"mergeType,omitempty"`
+	Range     *GridRange                      `json:"range,omitempty"`
 }

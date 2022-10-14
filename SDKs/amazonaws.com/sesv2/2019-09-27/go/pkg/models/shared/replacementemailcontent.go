@@ -1,5 +1,5 @@
 package shared
 
 type ReplacementEmailContent struct {
-	ReplacementTemplate *ReplacementTemplate `json:"ReplacementTemplate"`
+	ReplacementTemplate *ReplacementTemplate `json:"ReplacementTemplate,omitempty"`
 }

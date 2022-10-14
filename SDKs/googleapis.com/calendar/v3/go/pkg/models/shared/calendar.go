@@ -1,12 +1,12 @@
 package shared
 
 type Calendar struct {
-	ConferenceProperties *ConferenceProperties `json:"conferenceProperties"`
-	Description          *string               `json:"description"`
-	Etag                 *string               `json:"etag"`
-	ID                   *string               `json:"id"`
-	Kind                 *string               `json:"kind"`
-	Location             *string               `json:"location"`
-	Summary              *string               `json:"summary"`
-	TimeZone             *string               `json:"timeZone"`
+	ConferenceProperties *ConferenceProperties `json:"conferenceProperties,omitempty"`
+	Description          *string               `json:"description,omitempty"`
+	Etag                 *string               `json:"etag,omitempty"`
+	ID                   *string               `json:"id,omitempty"`
+	Kind                 *string               `json:"kind,omitempty"`
+	Location             *string               `json:"location,omitempty"`
+	Summary              *string               `json:"summary,omitempty"`
+	TimeZone             *string               `json:"timeZone,omitempty"`
 }

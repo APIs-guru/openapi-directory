@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleAppsCardV1ImageCropStyle struct {
-	AspectRatio *float64                                `json:"aspectRatio"`
-	Type        *GoogleAppsCardV1ImageCropStyleTypeEnum `json:"type"`
+	AspectRatio *float64                                `json:"aspectRatio,omitempty"`
+	Type        *GoogleAppsCardV1ImageCropStyleTypeEnum `json:"type,omitempty"`
 }

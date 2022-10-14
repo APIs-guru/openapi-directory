@@ -23,6 +23,6 @@ const (
 )
 
 type IamPolicyAnalysisState struct {
-	Cause *string                         `json:"cause"`
-	Code  *IamPolicyAnalysisStateCodeEnum `json:"code"`
+	Cause *string                         `json:"cause,omitempty"`
+	Code  *IamPolicyAnalysisStateCodeEnum `json:"code,omitempty"`
 }

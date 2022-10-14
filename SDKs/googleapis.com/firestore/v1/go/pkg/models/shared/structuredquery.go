@@ -1,12 +1,12 @@
 package shared
 
 type StructuredQuery struct {
-	EndAt   *Cursor              `json:"endAt"`
-	From    []CollectionSelector `json:"from"`
-	Limit   *int32               `json:"limit"`
-	Offset  *int32               `json:"offset"`
-	OrderBy []Order              `json:"orderBy"`
-	Select  *Projection          `json:"select"`
-	StartAt *Cursor              `json:"startAt"`
-	Where   *Filter              `json:"where"`
+	EndAt   *Cursor              `json:"endAt,omitempty"`
+	From    []CollectionSelector `json:"from,omitempty"`
+	Limit   *int32               `json:"limit,omitempty"`
+	Offset  *int32               `json:"offset,omitempty"`
+	OrderBy []Order              `json:"orderBy,omitempty"`
+	Select  *Projection          `json:"select,omitempty"`
+	StartAt *Cursor              `json:"startAt,omitempty"`
+	Where   *Filter              `json:"where,omitempty"`
 }

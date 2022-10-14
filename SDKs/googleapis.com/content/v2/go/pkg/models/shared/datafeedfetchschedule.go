@@ -1,13 +1,13 @@
 package shared
 
 type DatafeedFetchSchedule struct {
-	DayOfMonth   *int64  `json:"dayOfMonth"`
-	FetchURL     *string `json:"fetchUrl"`
-	Hour         *int64  `json:"hour"`
-	MinuteOfHour *int64  `json:"minuteOfHour"`
-	Password     *string `json:"password"`
-	Paused       *bool   `json:"paused"`
-	TimeZone     *string `json:"timeZone"`
-	Username     *string `json:"username"`
-	Weekday      *string `json:"weekday"`
+	DayOfMonth   *int64  `json:"dayOfMonth,omitempty"`
+	FetchURL     *string `json:"fetchUrl,omitempty"`
+	Hour         *int64  `json:"hour,omitempty"`
+	MinuteOfHour *int64  `json:"minuteOfHour,omitempty"`
+	Password     *string `json:"password,omitempty"`
+	Paused       *bool   `json:"paused,omitempty"`
+	TimeZone     *string `json:"timeZone,omitempty"`
+	Username     *string `json:"username,omitempty"`
+	Weekday      *string `json:"weekday,omitempty"`
 }

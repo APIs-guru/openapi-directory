@@ -1,6 +1,6 @@
 package shared
 
 type ShiftQuery struct {
-	Filter *ShiftFilter `json:"filter"`
-	Sort   *ShiftSort   `json:"sort"`
+	Filter *ShiftFilter `json:"filter,omitempty"`
+	Sort   *ShiftSort   `json:"sort,omitempty"`
 }

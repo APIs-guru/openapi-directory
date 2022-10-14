@@ -12,11 +12,11 @@ const (
 )
 
 type Hold struct {
-	Accounts   []HeldAccount   `json:"accounts"`
-	Corpus     *HoldCorpusEnum `json:"corpus"`
-	HoldID     *string         `json:"holdId"`
-	Name       *string         `json:"name"`
-	OrgUnit    *HeldOrgUnit    `json:"orgUnit"`
-	Query      *CorpusQuery    `json:"query"`
-	UpdateTime *string         `json:"updateTime"`
+	Accounts   []HeldAccount   `json:"accounts,omitempty"`
+	Corpus     *HoldCorpusEnum `json:"corpus,omitempty"`
+	HoldID     *string         `json:"holdId,omitempty"`
+	Name       *string         `json:"name,omitempty"`
+	OrgUnit    *HeldOrgUnit    `json:"orgUnit,omitempty"`
+	Query      *CorpusQuery    `json:"query,omitempty"`
+	UpdateTime *string         `json:"updateTime,omitempty"`
 }

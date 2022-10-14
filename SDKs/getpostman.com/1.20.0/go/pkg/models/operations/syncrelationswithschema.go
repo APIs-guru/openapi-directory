@@ -12,16 +12,16 @@ type SyncRelationsWithSchemaRequest struct {
 }
 
 type SyncRelationsWithSchema200ApplicationJSON struct {
-	Success *bool `json:"success"`
+	Success *bool `json:"success,omitempty"`
 }
 
 type SyncRelationsWithSchema400ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type SyncRelationsWithSchema400ApplicationJSON struct {
-	Error *SyncRelationsWithSchema400ApplicationJSONError `json:"error"`
+	Error *SyncRelationsWithSchema400ApplicationJSONError `json:"error,omitempty"`
 }
 
 type SyncRelationsWithSchemaResponse struct {

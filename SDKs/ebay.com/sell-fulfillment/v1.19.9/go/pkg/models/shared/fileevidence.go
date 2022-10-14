@@ -1,5 +1,5 @@
 package shared
 
 type FileEvidence struct {
-	FileID *string `json:"fileId"`
+	FileID *string `json:"fileId,omitempty"`
 }

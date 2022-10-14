@@ -6,9 +6,9 @@ import (
 
 type CreateMessengerAccountRequestBody struct {
 	AccessToken  string   `json:"access_token"`
-	Applications []string `json:"applications"`
+	Applications []string `json:"applications,omitempty"`
 	ExternalID   string   `json:"external_id"`
-	Name         *string  `json:"name"`
+	Name         *string  `json:"name,omitempty"`
 }
 
 type CreateMessengerAccountSecurityOption1 struct {
@@ -30,16 +30,16 @@ type CreateMessengerAccountRequest struct {
 }
 
 type CreateMessengerAccount400ApplicationJSONInvalidParams struct {
-	Name   *string `json:"name"`
-	Reason *string `json:"reason"`
+	Name   *string `json:"name,omitempty"`
+	Reason *string `json:"reason,omitempty"`
 }
 
 type CreateMessengerAccount400ApplicationJSON struct {
-	Detail        *string                                                 `json:"detail"`
-	Instance      *string                                                 `json:"instance"`
-	InvalidParams []CreateMessengerAccount400ApplicationJSONInvalidParams `json:"invalid_params"`
-	Title         *string                                                 `json:"title"`
-	Type          *string                                                 `json:"type"`
+	Detail        *string                                                 `json:"detail,omitempty"`
+	Instance      *string                                                 `json:"instance,omitempty"`
+	InvalidParams []CreateMessengerAccount400ApplicationJSONInvalidParams `json:"invalid_params,omitempty"`
+	Title         *string                                                 `json:"title,omitempty"`
+	Type          *string                                                 `json:"type,omitempty"`
 }
 
 type CreateMessengerAccountResponse struct {

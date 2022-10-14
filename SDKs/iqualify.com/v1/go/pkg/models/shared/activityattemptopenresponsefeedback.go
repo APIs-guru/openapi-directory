@@ -1,6 +1,6 @@
 package shared
 
 type ActivityAttemptOpenResponseFeedback struct {
-	FacilitatorEmail *string `json:"facilitatorEmail"`
-	Text             *string `json:"text"`
+	FacilitatorEmail *string `json:"facilitatorEmail,omitempty"`
+	Text             *string `json:"text,omitempty"`
 }

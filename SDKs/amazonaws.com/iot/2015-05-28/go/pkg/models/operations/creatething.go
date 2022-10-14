@@ -19,14 +19,14 @@ type CreateThingHeaders struct {
 }
 
 type CreateThingRequestBodyAttributePayload struct {
-	Attributes map[string]string `json:"attributes"`
-	Merge      *bool             `json:"merge"`
+	Attributes map[string]string `json:"attributes,omitempty"`
+	Merge      *bool             `json:"merge,omitempty"`
 }
 
 type CreateThingRequestBody struct {
-	AttributePayload *CreateThingRequestBodyAttributePayload `json:"attributePayload"`
-	BillingGroupName *string                                 `json:"billingGroupName"`
-	ThingTypeName    *string                                 `json:"thingTypeName"`
+	AttributePayload *CreateThingRequestBodyAttributePayload `json:"attributePayload,omitempty"`
+	BillingGroupName *string                                 `json:"billingGroupName,omitempty"`
+	ThingTypeName    *string                                 `json:"thingTypeName,omitempty"`
 }
 
 type CreateThingRequest struct {

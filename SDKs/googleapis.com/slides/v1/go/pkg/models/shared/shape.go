@@ -149,8 +149,8 @@ const (
 )
 
 type Shape struct {
-	Placeholder     *Placeholder        `json:"placeholder"`
-	ShapeProperties *ShapeProperties    `json:"shapeProperties"`
-	ShapeType       *ShapeShapeTypeEnum `json:"shapeType"`
-	Text            *TextContent        `json:"text"`
+	Placeholder     *Placeholder        `json:"placeholder,omitempty"`
+	ShapeProperties *ShapeProperties    `json:"shapeProperties,omitempty"`
+	ShapeType       *ShapeShapeTypeEnum `json:"shapeType,omitempty"`
+	Text            *TextContent        `json:"text,omitempty"`
 }

@@ -16,13 +16,13 @@ const (
 )
 
 type Execution struct {
-	CreateTime         *string             `json:"createTime"`
-	Description        *string             `json:"description"`
-	DisplayName        *string             `json:"displayName"`
-	ExecutionTemplate  *ExecutionTemplate  `json:"executionTemplate"`
-	JobURI             *string             `json:"jobUri"`
-	Name               *string             `json:"name"`
-	OutputNotebookFile *string             `json:"outputNotebookFile"`
-	State              *ExecutionStateEnum `json:"state"`
-	UpdateTime         *string             `json:"updateTime"`
+	CreateTime         *string             `json:"createTime,omitempty"`
+	Description        *string             `json:"description,omitempty"`
+	DisplayName        *string             `json:"displayName,omitempty"`
+	ExecutionTemplate  *ExecutionTemplate  `json:"executionTemplate,omitempty"`
+	JobURI             *string             `json:"jobUri,omitempty"`
+	Name               *string             `json:"name,omitempty"`
+	OutputNotebookFile *string             `json:"outputNotebookFile,omitempty"`
+	State              *ExecutionStateEnum `json:"state,omitempty"`
+	UpdateTime         *string             `json:"updateTime,omitempty"`
 }

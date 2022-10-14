@@ -1,9 +1,9 @@
 package shared
 
 type CryptoKey struct {
-	Algorithm *string `json:"algorithm"`
-	Bits      *int64  `json:"bits"`
-	FileHash  *string `json:"file_hash"`
-	FileName  *string `json:"file_name"`
-	PemType   *string `json:"pem_type"`
+	Algorithm *string `json:"algorithm,omitempty"`
+	Bits      *int64  `json:"bits,omitempty"`
+	FileHash  *string `json:"file_hash,omitempty"`
+	FileName  *string `json:"file_name,omitempty"`
+	PemType   *string `json:"pem_type,omitempty"`
 }

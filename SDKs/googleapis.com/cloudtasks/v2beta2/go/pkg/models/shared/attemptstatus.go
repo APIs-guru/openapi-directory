@@ -1,8 +1,8 @@
 package shared
 
 type AttemptStatus struct {
-	DispatchTime   *string `json:"dispatchTime"`
-	ResponseStatus *Status `json:"responseStatus"`
-	ResponseTime   *string `json:"responseTime"`
-	ScheduleTime   *string `json:"scheduleTime"`
+	DispatchTime   *string `json:"dispatchTime,omitempty"`
+	ResponseStatus *Status `json:"responseStatus,omitempty"`
+	ResponseTime   *string `json:"responseTime,omitempty"`
+	ScheduleTime   *string `json:"scheduleTime,omitempty"`
 }

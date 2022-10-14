@@ -1,6 +1,6 @@
 package shared
 
 type ListBuildsOutput struct {
-	Builds    []Build `json:"Builds"`
-	NextToken *string `json:"NextToken"`
+	Builds    []Build `json:"Builds,omitempty"`
+	NextToken *string `json:"NextToken,omitempty"`
 }

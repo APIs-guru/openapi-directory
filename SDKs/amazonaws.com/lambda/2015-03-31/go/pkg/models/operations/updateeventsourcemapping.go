@@ -19,23 +19,23 @@ type UpdateEventSourceMappingHeaders struct {
 }
 
 type UpdateEventSourceMappingRequestBodyDestinationConfig struct {
-	OnFailure *shared.OnFailure `json:"OnFailure"`
-	OnSuccess *shared.OnSuccess `json:"OnSuccess"`
+	OnFailure *shared.OnFailure `json:"OnFailure,omitempty"`
+	OnSuccess *shared.OnSuccess `json:"OnSuccess,omitempty"`
 }
 
 type UpdateEventSourceMappingRequestBody struct {
-	BatchSize                      *int64                                                `json:"BatchSize"`
-	BisectBatchOnFunctionError     *bool                                                 `json:"BisectBatchOnFunctionError"`
-	DestinationConfig              *UpdateEventSourceMappingRequestBodyDestinationConfig `json:"DestinationConfig"`
-	Enabled                        *bool                                                 `json:"Enabled"`
-	FunctionName                   *string                                               `json:"FunctionName"`
-	FunctionResponseTypes          []shared.FunctionResponseTypeEnum                     `json:"FunctionResponseTypes"`
-	MaximumBatchingWindowInSeconds *int64                                                `json:"MaximumBatchingWindowInSeconds"`
-	MaximumRecordAgeInSeconds      *int64                                                `json:"MaximumRecordAgeInSeconds"`
-	MaximumRetryAttempts           *int64                                                `json:"MaximumRetryAttempts"`
-	ParallelizationFactor          *int64                                                `json:"ParallelizationFactor"`
-	SourceAccessConfigurations     []shared.SourceAccessConfiguration                    `json:"SourceAccessConfigurations"`
-	TumblingWindowInSeconds        *int64                                                `json:"TumblingWindowInSeconds"`
+	BatchSize                      *int64                                                `json:"BatchSize,omitempty"`
+	BisectBatchOnFunctionError     *bool                                                 `json:"BisectBatchOnFunctionError,omitempty"`
+	DestinationConfig              *UpdateEventSourceMappingRequestBodyDestinationConfig `json:"DestinationConfig,omitempty"`
+	Enabled                        *bool                                                 `json:"Enabled,omitempty"`
+	FunctionName                   *string                                               `json:"FunctionName,omitempty"`
+	FunctionResponseTypes          []shared.FunctionResponseTypeEnum                     `json:"FunctionResponseTypes,omitempty"`
+	MaximumBatchingWindowInSeconds *int64                                                `json:"MaximumBatchingWindowInSeconds,omitempty"`
+	MaximumRecordAgeInSeconds      *int64                                                `json:"MaximumRecordAgeInSeconds,omitempty"`
+	MaximumRetryAttempts           *int64                                                `json:"MaximumRetryAttempts,omitempty"`
+	ParallelizationFactor          *int64                                                `json:"ParallelizationFactor,omitempty"`
+	SourceAccessConfigurations     []shared.SourceAccessConfiguration                    `json:"SourceAccessConfigurations,omitempty"`
+	TumblingWindowInSeconds        *int64                                                `json:"TumblingWindowInSeconds,omitempty"`
 }
 
 type UpdateEventSourceMappingRequest struct {

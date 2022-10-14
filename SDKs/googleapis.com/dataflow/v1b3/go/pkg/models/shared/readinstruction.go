@@ -1,5 +1,5 @@
 package shared
 
 type ReadInstruction struct {
-	Source *Source `json:"source"`
+	Source *Source `json:"source,omitempty"`
 }

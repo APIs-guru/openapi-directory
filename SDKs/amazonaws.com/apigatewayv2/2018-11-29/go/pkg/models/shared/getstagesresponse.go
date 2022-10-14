@@ -1,6 +1,6 @@
 package shared
 
 type GetStagesResponse struct {
-	Items     []Stage `json:"Items"`
-	NextToken *string `json:"NextToken"`
+	Items     []Stage `json:"Items,omitempty"`
+	NextToken *string `json:"NextToken,omitempty"`
 }

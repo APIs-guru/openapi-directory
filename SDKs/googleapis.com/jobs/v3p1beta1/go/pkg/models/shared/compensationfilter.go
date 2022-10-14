@@ -24,8 +24,8 @@ const (
 )
 
 type CompensationFilter struct {
-	IncludeJobsWithUnspecifiedCompensationRange *bool                         `json:"includeJobsWithUnspecifiedCompensationRange"`
-	Range                                       *CompensationRange            `json:"range"`
-	Type                                        *CompensationFilterTypeEnum   `json:"type"`
-	Units                                       []CompensationFilterUnitsEnum `json:"units"`
+	IncludeJobsWithUnspecifiedCompensationRange *bool                         `json:"includeJobsWithUnspecifiedCompensationRange,omitempty"`
+	Range                                       *CompensationRange            `json:"range,omitempty"`
+	Type                                        *CompensationFilterTypeEnum   `json:"type,omitempty"`
+	Units                                       []CompensationFilterUnitsEnum `json:"units,omitempty"`
 }

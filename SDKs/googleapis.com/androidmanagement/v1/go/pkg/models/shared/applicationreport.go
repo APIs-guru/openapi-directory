@@ -18,15 +18,15 @@ const (
 )
 
 type ApplicationReport struct {
-	ApplicationSource          *ApplicationReportApplicationSourceEnum `json:"applicationSource"`
-	DisplayName                *string                                 `json:"displayName"`
-	Events                     []ApplicationEvent                      `json:"events"`
-	InstallerPackageName       *string                                 `json:"installerPackageName"`
-	KeyedAppStates             []KeyedAppState                         `json:"keyedAppStates"`
-	PackageName                *string                                 `json:"packageName"`
-	PackageSha256Hash          *string                                 `json:"packageSha256Hash"`
-	SigningKeyCertFingerprints []string                                `json:"signingKeyCertFingerprints"`
-	State                      *ApplicationReportStateEnum             `json:"state"`
-	VersionCode                *int32                                  `json:"versionCode"`
-	VersionName                *string                                 `json:"versionName"`
+	ApplicationSource          *ApplicationReportApplicationSourceEnum `json:"applicationSource,omitempty"`
+	DisplayName                *string                                 `json:"displayName,omitempty"`
+	Events                     []ApplicationEvent                      `json:"events,omitempty"`
+	InstallerPackageName       *string                                 `json:"installerPackageName,omitempty"`
+	KeyedAppStates             []KeyedAppState                         `json:"keyedAppStates,omitempty"`
+	PackageName                *string                                 `json:"packageName,omitempty"`
+	PackageSha256Hash          *string                                 `json:"packageSha256Hash,omitempty"`
+	SigningKeyCertFingerprints []string                                `json:"signingKeyCertFingerprints,omitempty"`
+	State                      *ApplicationReportStateEnum             `json:"state,omitempty"`
+	VersionCode                *int32                                  `json:"versionCode,omitempty"`
+	VersionName                *string                                 `json:"versionName,omitempty"`
 }

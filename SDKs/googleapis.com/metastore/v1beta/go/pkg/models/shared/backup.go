@@ -12,11 +12,11 @@ const (
 )
 
 type Backup struct {
-	CreateTime        *string          `json:"createTime"`
-	Description       *string          `json:"description"`
-	EndTime           *string          `json:"endTime"`
-	Name              *string          `json:"name"`
-	RestoringServices []string         `json:"restoringServices"`
-	ServiceRevision   *Service         `json:"serviceRevision"`
-	State             *BackupStateEnum `json:"state"`
+	CreateTime        *string          `json:"createTime,omitempty"`
+	Description       *string          `json:"description,omitempty"`
+	EndTime           *string          `json:"endTime,omitempty"`
+	Name              *string          `json:"name,omitempty"`
+	RestoringServices []string         `json:"restoringServices,omitempty"`
+	ServiceRevision   *Service         `json:"serviceRevision,omitempty"`
+	State             *BackupStateEnum `json:"state,omitempty"`
 }

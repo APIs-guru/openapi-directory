@@ -1,6 +1,6 @@
 package shared
 
 type CustomDataIdentifiers struct {
-	Detections []CustomDetection `json:"detections"`
-	TotalCount *int64            `json:"totalCount"`
+	Detections []CustomDetection `json:"detections,omitempty"`
+	TotalCount *int64            `json:"totalCount,omitempty"`
 }

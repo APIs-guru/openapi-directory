@@ -11,14 +11,14 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1EvaluationJob struct {
-	AnnotationSpecSet       *string                                               `json:"annotationSpecSet"`
-	Attempts                []GoogleCloudDatalabelingV1beta1Attempt               `json:"attempts"`
-	CreateTime              *string                                               `json:"createTime"`
-	Description             *string                                               `json:"description"`
-	EvaluationJobConfig     *GoogleCloudDatalabelingV1beta1EvaluationJobConfig    `json:"evaluationJobConfig"`
-	LabelMissingGroundTruth *bool                                                 `json:"labelMissingGroundTruth"`
-	ModelVersion            *string                                               `json:"modelVersion"`
-	Name                    *string                                               `json:"name"`
-	Schedule                *string                                               `json:"schedule"`
-	State                   *GoogleCloudDatalabelingV1beta1EvaluationJobStateEnum `json:"state"`
+	AnnotationSpecSet       *string                                               `json:"annotationSpecSet,omitempty"`
+	Attempts                []GoogleCloudDatalabelingV1beta1Attempt               `json:"attempts,omitempty"`
+	CreateTime              *string                                               `json:"createTime,omitempty"`
+	Description             *string                                               `json:"description,omitempty"`
+	EvaluationJobConfig     *GoogleCloudDatalabelingV1beta1EvaluationJobConfig    `json:"evaluationJobConfig,omitempty"`
+	LabelMissingGroundTruth *bool                                                 `json:"labelMissingGroundTruth,omitempty"`
+	ModelVersion            *string                                               `json:"modelVersion,omitempty"`
+	Name                    *string                                               `json:"name,omitempty"`
+	Schedule                *string                                               `json:"schedule,omitempty"`
+	State                   *GoogleCloudDatalabelingV1beta1EvaluationJobStateEnum `json:"state,omitempty"`
 }

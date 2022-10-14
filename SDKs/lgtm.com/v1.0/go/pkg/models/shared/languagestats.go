@@ -13,11 +13,11 @@ const (
 )
 
 type LanguageStats struct {
-	Alerts       *int32                   `json:"alerts"`
-	AnalysisDate *time.Time               `json:"analysis-date"`
-	CommitDate   *time.Time               `json:"commit-date"`
-	CommitID     *string                  `json:"commit-id"`
-	Language     *string                  `json:"language"`
-	Lines        *int32                   `json:"lines"`
-	Status       *LanguageStatsStatusEnum `json:"status"`
+	Alerts       *int32                   `json:"alerts,omitempty"`
+	AnalysisDate *time.Time               `json:"analysis-date,omitempty"`
+	CommitDate   *time.Time               `json:"commit-date,omitempty"`
+	CommitID     *string                  `json:"commit-id,omitempty"`
+	Language     *string                  `json:"language,omitempty"`
+	Lines        *int32                   `json:"lines,omitempty"`
+	Status       *LanguageStatsStatusEnum `json:"status,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type RegionsListResponse struct {
-	Kind    *string  `json:"kind"`
-	Regions []Region `json:"regions"`
+	Kind    *string  `json:"kind,omitempty"`
+	Regions []Region `json:"regions,omitempty"`
 }

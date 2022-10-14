@@ -1,6 +1,6 @@
 package shared
 
 type AuthResult struct {
-	AccessToken         *string `json:"accessToken"`
-	RegistrierkasseUUID *string `json:"registrierkasseUuid"`
+	AccessToken         *string `json:"accessToken,omitempty"`
+	RegistrierkasseUUID *string `json:"registrierkasseUuid,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListKeywordsForDataSourceResponse struct {
-	Keywords  []string `json:"keywords"`
-	NextToken *string  `json:"nextToken"`
+	Keywords  []string `json:"keywords,omitempty"`
+	NextToken *string  `json:"nextToken,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ServiceAccountConfig struct {
-	AccountID          *string  `json:"accountId"`
-	TenantProjectRoles []string `json:"tenantProjectRoles"`
+	AccountID          *string  `json:"accountId,omitempty"`
+	TenantProjectRoles []string `json:"tenantProjectRoles,omitempty"`
 }

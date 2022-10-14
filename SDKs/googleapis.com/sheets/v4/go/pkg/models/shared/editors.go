@@ -1,7 +1,7 @@
 package shared
 
 type Editors struct {
-	DomainUsersCanEdit *bool    `json:"domainUsersCanEdit"`
-	Groups             []string `json:"groups"`
-	Users              []string `json:"users"`
+	DomainUsersCanEdit *bool    `json:"domainUsersCanEdit,omitempty"`
+	Groups             []string `json:"groups,omitempty"`
+	Users              []string `json:"users,omitempty"`
 }

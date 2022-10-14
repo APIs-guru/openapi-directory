@@ -1,5 +1,5 @@
 package shared
 
 type Transport struct {
-	Pubsub *Pubsub `json:"pubsub"`
+	Pubsub *Pubsub `json:"pubsub,omitempty"`
 }

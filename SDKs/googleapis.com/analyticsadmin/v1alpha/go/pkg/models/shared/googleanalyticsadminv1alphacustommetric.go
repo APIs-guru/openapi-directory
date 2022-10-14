@@ -32,11 +32,11 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaCustomMetric struct {
-	Description          *string                                                           `json:"description"`
-	DisplayName          *string                                                           `json:"displayName"`
-	MeasurementUnit      *GoogleAnalyticsAdminV1alphaCustomMetricMeasurementUnitEnum       `json:"measurementUnit"`
-	Name                 *string                                                           `json:"name"`
-	ParameterName        *string                                                           `json:"parameterName"`
-	RestrictedMetricType []GoogleAnalyticsAdminV1alphaCustomMetricRestrictedMetricTypeEnum `json:"restrictedMetricType"`
-	Scope                *GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum                 `json:"scope"`
+	Description          *string                                                           `json:"description,omitempty"`
+	DisplayName          *string                                                           `json:"displayName,omitempty"`
+	MeasurementUnit      *GoogleAnalyticsAdminV1alphaCustomMetricMeasurementUnitEnum       `json:"measurementUnit,omitempty"`
+	Name                 *string                                                           `json:"name,omitempty"`
+	ParameterName        *string                                                           `json:"parameterName,omitempty"`
+	RestrictedMetricType []GoogleAnalyticsAdminV1alphaCustomMetricRestrictedMetricTypeEnum `json:"restrictedMetricType,omitempty"`
+	Scope                *GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum                 `json:"scope,omitempty"`
 }

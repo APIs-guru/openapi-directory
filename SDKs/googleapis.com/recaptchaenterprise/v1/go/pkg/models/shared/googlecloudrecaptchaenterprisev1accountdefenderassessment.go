@@ -11,5 +11,5 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment struct {
-	Labels []GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum `json:"labels"`
+	Labels []GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum `json:"labels,omitempty"`
 }

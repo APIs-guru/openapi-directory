@@ -1,5 +1,5 @@
 package shared
 
 type StartOnDemandAuditTaskResponse struct {
-	TaskID *string `json:"taskId"`
+	TaskID *string `json:"taskId,omitempty"`
 }

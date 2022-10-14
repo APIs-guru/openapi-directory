@@ -1,5 +1,5 @@
 package shared
 
 type DataprocMetricConfig struct {
-	Metrics []Metric `json:"metrics"`
+	Metrics []Metric `json:"metrics,omitempty"`
 }

@@ -12,6 +12,6 @@ const (
 )
 
 type ContentAdsSettings struct {
-	Size *string                     `json:"size"`
-	Type *ContentAdsSettingsTypeEnum `json:"type"`
+	Size *string                     `json:"size,omitempty"`
+	Type *ContentAdsSettingsTypeEnum `json:"type,omitempty"`
 }

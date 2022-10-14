@@ -16,19 +16,19 @@ const (
 )
 
 type GoogleCloudDialogflowV2IntentMessage struct {
-	BasicCard          *GoogleCloudDialogflowV2IntentMessageBasicCard          `json:"basicCard"`
-	BrowseCarouselCard *GoogleCloudDialogflowV2IntentMessageBrowseCarouselCard `json:"browseCarouselCard"`
-	Card               *GoogleCloudDialogflowV2IntentMessageCard               `json:"card"`
-	CarouselSelect     *GoogleCloudDialogflowV2IntentMessageCarouselSelect     `json:"carouselSelect"`
-	Image              *GoogleCloudDialogflowV2IntentMessageImage              `json:"image"`
-	LinkOutSuggestion  *GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion  `json:"linkOutSuggestion"`
-	ListSelect         *GoogleCloudDialogflowV2IntentMessageListSelect         `json:"listSelect"`
-	MediaContent       *GoogleCloudDialogflowV2IntentMessageMediaContent       `json:"mediaContent"`
-	Payload            map[string]interface{}                                  `json:"payload"`
-	Platform           *GoogleCloudDialogflowV2IntentMessagePlatformEnum       `json:"platform"`
-	QuickReplies       *GoogleCloudDialogflowV2IntentMessageQuickReplies       `json:"quickReplies"`
-	SimpleResponses    *GoogleCloudDialogflowV2IntentMessageSimpleResponses    `json:"simpleResponses"`
-	Suggestions        *GoogleCloudDialogflowV2IntentMessageSuggestions        `json:"suggestions"`
-	TableCard          *GoogleCloudDialogflowV2IntentMessageTableCard          `json:"tableCard"`
-	Text               *GoogleCloudDialogflowV2IntentMessageText               `json:"text"`
+	BasicCard          *GoogleCloudDialogflowV2IntentMessageBasicCard          `json:"basicCard,omitempty"`
+	BrowseCarouselCard *GoogleCloudDialogflowV2IntentMessageBrowseCarouselCard `json:"browseCarouselCard,omitempty"`
+	Card               *GoogleCloudDialogflowV2IntentMessageCard               `json:"card,omitempty"`
+	CarouselSelect     *GoogleCloudDialogflowV2IntentMessageCarouselSelect     `json:"carouselSelect,omitempty"`
+	Image              *GoogleCloudDialogflowV2IntentMessageImage              `json:"image,omitempty"`
+	LinkOutSuggestion  *GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion  `json:"linkOutSuggestion,omitempty"`
+	ListSelect         *GoogleCloudDialogflowV2IntentMessageListSelect         `json:"listSelect,omitempty"`
+	MediaContent       *GoogleCloudDialogflowV2IntentMessageMediaContent       `json:"mediaContent,omitempty"`
+	Payload            map[string]interface{}                                  `json:"payload,omitempty"`
+	Platform           *GoogleCloudDialogflowV2IntentMessagePlatformEnum       `json:"platform,omitempty"`
+	QuickReplies       *GoogleCloudDialogflowV2IntentMessageQuickReplies       `json:"quickReplies,omitempty"`
+	SimpleResponses    *GoogleCloudDialogflowV2IntentMessageSimpleResponses    `json:"simpleResponses,omitempty"`
+	Suggestions        *GoogleCloudDialogflowV2IntentMessageSuggestions        `json:"suggestions,omitempty"`
+	TableCard          *GoogleCloudDialogflowV2IntentMessageTableCard          `json:"tableCard,omitempty"`
+	Text               *GoogleCloudDialogflowV2IntentMessageText               `json:"text,omitempty"`
 }

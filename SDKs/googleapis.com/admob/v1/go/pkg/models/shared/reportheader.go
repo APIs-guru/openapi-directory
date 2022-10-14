@@ -1,7 +1,7 @@
 package shared
 
 type ReportHeader struct {
-	DateRange            *DateRange            `json:"dateRange"`
-	LocalizationSettings *LocalizationSettings `json:"localizationSettings"`
-	ReportingTimeZone    *string               `json:"reportingTimeZone"`
+	DateRange            *DateRange            `json:"dateRange,omitempty"`
+	LocalizationSettings *LocalizationSettings `json:"localizationSettings,omitempty"`
+	ReportingTimeZone    *string               `json:"reportingTimeZone,omitempty"`
 }

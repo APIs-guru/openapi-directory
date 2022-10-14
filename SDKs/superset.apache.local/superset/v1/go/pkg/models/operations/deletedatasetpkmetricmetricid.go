@@ -19,27 +19,27 @@ type DeleteDatasetPkMetricMetricIDRequest struct {
 }
 
 type DeleteDatasetPkMetricMetricID200ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID403ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricIDResponse struct {

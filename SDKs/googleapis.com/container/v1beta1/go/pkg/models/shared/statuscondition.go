@@ -35,7 +35,7 @@ const (
 )
 
 type StatusCondition struct {
-	CanonicalCode *StatusConditionCanonicalCodeEnum `json:"canonicalCode"`
-	Code          *StatusConditionCodeEnum          `json:"code"`
-	Message       *string                           `json:"message"`
+	CanonicalCode *StatusConditionCanonicalCodeEnum `json:"canonicalCode,omitempty"`
+	Code          *StatusConditionCodeEnum          `json:"code,omitempty"`
+	Message       *string                           `json:"message,omitempty"`
 }

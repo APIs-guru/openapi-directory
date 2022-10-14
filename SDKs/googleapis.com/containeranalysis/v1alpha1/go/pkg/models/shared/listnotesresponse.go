@@ -1,6 +1,6 @@
 package shared
 
 type ListNotesResponse struct {
-	NextPageToken *string `json:"nextPageToken"`
-	Notes         []Note  `json:"notes"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Notes         []Note  `json:"notes,omitempty"`
 }

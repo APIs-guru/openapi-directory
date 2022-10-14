@@ -5,9 +5,9 @@ import (
 )
 
 type DeviceType struct {
-	DeviceAttributes            []AttributeType `json:"DeviceAttributes"`
-	DeviceCreateDate            *time.Time      `json:"DeviceCreateDate"`
-	DeviceKey                   *string         `json:"DeviceKey"`
-	DeviceLastAuthenticatedDate *time.Time      `json:"DeviceLastAuthenticatedDate"`
-	DeviceLastModifiedDate      *time.Time      `json:"DeviceLastModifiedDate"`
+	DeviceAttributes            []AttributeType `json:"DeviceAttributes,omitempty"`
+	DeviceCreateDate            *time.Time      `json:"DeviceCreateDate,omitempty"`
+	DeviceKey                   *string         `json:"DeviceKey,omitempty"`
+	DeviceLastAuthenticatedDate *time.Time      `json:"DeviceLastAuthenticatedDate,omitempty"`
+	DeviceLastModifiedDate      *time.Time      `json:"DeviceLastModifiedDate,omitempty"`
 }

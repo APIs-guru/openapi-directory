@@ -72,16 +72,16 @@ const (
 )
 
 type OrderLineItemQuantities struct {
-	QuantityContext *OrderLineItemQuantitiesQuantityContextEnum `json:"quantityContext"`
-	QuantityType    *OrderLineItemQuantitiesQuantityTypeEnum    `json:"quantityType"`
-	QuantityUom     *OrderLineItemQuantitiesQuantityUomEnum     `json:"quantityUOM"`
-	QuantityValue   *float64                                    `json:"quantityValue"`
+	QuantityContext *OrderLineItemQuantitiesQuantityContextEnum `json:"quantityContext,omitempty"`
+	QuantityType    *OrderLineItemQuantitiesQuantityTypeEnum    `json:"quantityType,omitempty"`
+	QuantityUom     *OrderLineItemQuantitiesQuantityUomEnum     `json:"quantityUOM,omitempty"`
+	QuantityValue   *float64                                    `json:"quantityValue,omitempty"`
 }
 
 type OrderLineItem struct {
-	Changeable          *bool                                `json:"changeable"`
+	Changeable          *bool                                `json:"changeable,omitempty"`
 	ID                  string                               `json:"id"`
 	OrderLineItemNumber float64                              `json:"orderLineItemNumber"`
 	OrderLineItemStatus OrderLineItemOrderLineItemStatusEnum `json:"orderLineItemStatus"`
-	Quantities          []OrderLineItemQuantities            `json:"quantities"`
+	Quantities          []OrderLineItemQuantities            `json:"quantities,omitempty"`
 }

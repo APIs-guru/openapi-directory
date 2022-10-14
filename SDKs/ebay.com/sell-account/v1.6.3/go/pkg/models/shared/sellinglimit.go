@@ -1,6 +1,6 @@
 package shared
 
 type SellingLimit struct {
-	Amount   *Amount `json:"amount"`
-	Quantity *int32  `json:"quantity"`
+	Amount   *Amount `json:"amount,omitempty"`
+	Quantity *int32  `json:"quantity,omitempty"`
 }

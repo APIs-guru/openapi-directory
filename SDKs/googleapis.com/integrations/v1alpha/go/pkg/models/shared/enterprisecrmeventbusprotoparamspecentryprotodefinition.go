@@ -1,6 +1,6 @@
 package shared
 
 type EnterpriseCrmEventbusProtoParamSpecEntryProtoDefinition struct {
-	FullName *string `json:"fullName"`
-	Path     *string `json:"path"`
+	FullName *string `json:"fullName,omitempty"`
+	Path     *string `json:"path,omitempty"`
 }

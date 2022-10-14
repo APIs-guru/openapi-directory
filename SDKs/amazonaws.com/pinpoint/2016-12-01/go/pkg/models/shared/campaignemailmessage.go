@@ -1,8 +1,8 @@
 package shared
 
 type CampaignEmailMessage struct {
-	Body        *string `json:"Body"`
-	FromAddress *string `json:"FromAddress"`
-	HTMLBody    *string `json:"HtmlBody"`
-	Title       *string `json:"Title"`
+	Body        *string `json:"Body,omitempty"`
+	FromAddress *string `json:"FromAddress,omitempty"`
+	HTMLBody    *string `json:"HtmlBody,omitempty"`
+	Title       *string `json:"Title,omitempty"`
 }

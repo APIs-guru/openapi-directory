@@ -1,6 +1,6 @@
 package shared
 
 type ObjectAttributeRange struct {
-	AttributeKey *AttributeKey             `json:"AttributeKey"`
-	Range        *TypedAttributeValueRange `json:"Range"`
+	AttributeKey *AttributeKey             `json:"AttributeKey,omitempty"`
+	Range        *TypedAttributeValueRange `json:"Range,omitempty"`
 }

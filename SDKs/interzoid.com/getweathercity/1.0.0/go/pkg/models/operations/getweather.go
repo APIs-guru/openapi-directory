@@ -11,17 +11,17 @@ type GetweatherRequest struct {
 }
 
 type Getweather200ApplicationJSON struct {
-	City             *string `json:"City"`
-	Code             *string `json:"Code"`
-	Credits          *string `json:"Credits"`
-	RelativeHumidity *string `json:"RelativeHumidity"`
-	State            *string `json:"State"`
-	TempC            *string `json:"TempC"`
-	TempF            *string `json:"TempF"`
-	VisibilityMiles  *string `json:"VisibilityMiles"`
-	Weather          *string `json:"Weather"`
-	WindDir          *string `json:"WindDir"`
-	WindMph          *string `json:"WindMPH"`
+	City             *string `json:"City,omitempty"`
+	Code             *string `json:"Code,omitempty"`
+	Credits          *string `json:"Credits,omitempty"`
+	RelativeHumidity *string `json:"RelativeHumidity,omitempty"`
+	State            *string `json:"State,omitempty"`
+	TempC            *string `json:"TempC,omitempty"`
+	TempF            *string `json:"TempF,omitempty"`
+	VisibilityMiles  *string `json:"VisibilityMiles,omitempty"`
+	Weather          *string `json:"Weather,omitempty"`
+	WindDir          *string `json:"WindDir,omitempty"`
+	WindMph          *string `json:"WindMPH,omitempty"`
 }
 
 type GetweatherResponse struct {

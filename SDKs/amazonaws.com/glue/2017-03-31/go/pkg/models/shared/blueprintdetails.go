@@ -1,6 +1,6 @@
 package shared
 
 type BlueprintDetails struct {
-	BlueprintName *string `json:"BlueprintName"`
-	RunID         *string `json:"RunId"`
+	BlueprintName *string `json:"BlueprintName,omitempty"`
+	RunID         *string `json:"RunId,omitempty"`
 }

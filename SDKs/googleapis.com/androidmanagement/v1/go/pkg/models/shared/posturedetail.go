@@ -10,6 +10,6 @@ const (
 )
 
 type PostureDetail struct {
-	Advice       []UserFacingMessage            `json:"advice"`
-	SecurityRisk *PostureDetailSecurityRiskEnum `json:"securityRisk"`
+	Advice       []UserFacingMessage            `json:"advice,omitempty"`
+	SecurityRisk *PostureDetailSecurityRiskEnum `json:"securityRisk,omitempty"`
 }

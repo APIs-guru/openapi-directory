@@ -1,10 +1,10 @@
 package shared
 
 type JobSpec struct {
-	ActiveDeadlineSeconds   *string               `json:"activeDeadlineSeconds"`
-	BackoffLimit            *int32                `json:"backoffLimit"`
-	Completions             *int32                `json:"completions"`
-	Parallelism             *int32                `json:"parallelism"`
-	Template                *InstanceTemplateSpec `json:"template"`
-	TTLSecondsAfterFinished *int32                `json:"ttlSecondsAfterFinished"`
+	ActiveDeadlineSeconds   *string               `json:"activeDeadlineSeconds,omitempty"`
+	BackoffLimit            *int32                `json:"backoffLimit,omitempty"`
+	Completions             *int32                `json:"completions,omitempty"`
+	Parallelism             *int32                `json:"parallelism,omitempty"`
+	Template                *InstanceTemplateSpec `json:"template,omitempty"`
+	TTLSecondsAfterFinished *int32                `json:"ttlSecondsAfterFinished,omitempty"`
 }

@@ -19,18 +19,18 @@ type CreateManagedEndpointHeaders struct {
 }
 
 type CreateManagedEndpointRequestBodyConfigurationOverrides struct {
-	ApplicationConfiguration []shared.Configuration          `json:"applicationConfiguration"`
-	MonitoringConfiguration  *shared.MonitoringConfiguration `json:"monitoringConfiguration"`
+	ApplicationConfiguration []shared.Configuration          `json:"applicationConfiguration,omitempty"`
+	MonitoringConfiguration  *shared.MonitoringConfiguration `json:"monitoringConfiguration,omitempty"`
 }
 
 type CreateManagedEndpointRequestBody struct {
 	CertificateArn         string                                                  `json:"certificateArn"`
 	ClientToken            string                                                  `json:"clientToken"`
-	ConfigurationOverrides *CreateManagedEndpointRequestBodyConfigurationOverrides `json:"configurationOverrides"`
+	ConfigurationOverrides *CreateManagedEndpointRequestBodyConfigurationOverrides `json:"configurationOverrides,omitempty"`
 	ExecutionRoleArn       string                                                  `json:"executionRoleArn"`
 	Name                   string                                                  `json:"name"`
 	ReleaseLabel           string                                                  `json:"releaseLabel"`
-	Tags                   map[string]string                                       `json:"tags"`
+	Tags                   map[string]string                                       `json:"tags,omitempty"`
 	Type                   string                                                  `json:"type"`
 }
 

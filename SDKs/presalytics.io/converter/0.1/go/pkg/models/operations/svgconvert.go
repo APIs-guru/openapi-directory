@@ -14,8 +14,8 @@ type SvgconvertRequest struct {
 }
 
 type Svgconvert200ApplicationJSONFileURL struct {
-	BlobName *string `json:"blob_name"`
-	BlobURL  *string `json:"blob_url"`
+	BlobName *string `json:"blob_name,omitempty"`
+	BlobURL  *string `json:"blob_url,omitempty"`
 }
 
 type SvgconvertResponse struct {

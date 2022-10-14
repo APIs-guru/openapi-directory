@@ -24,14 +24,14 @@ type ListBotVersionsHeaders struct {
 }
 
 type ListBotVersionsRequestBodySortBy struct {
-	Attribute *shared.BotVersionSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum               `json:"order"`
+	Attribute *shared.BotVersionSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum               `json:"order,omitempty"`
 }
 
 type ListBotVersionsRequestBody struct {
-	MaxResults *int64                            `json:"maxResults"`
-	NextToken  *string                           `json:"nextToken"`
-	SortBy     *ListBotVersionsRequestBodySortBy `json:"sortBy"`
+	MaxResults *int64                            `json:"maxResults,omitempty"`
+	NextToken  *string                           `json:"nextToken,omitempty"`
+	SortBy     *ListBotVersionsRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListBotVersionsRequest struct {

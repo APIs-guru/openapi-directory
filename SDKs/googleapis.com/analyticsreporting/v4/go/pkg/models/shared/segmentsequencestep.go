@@ -9,6 +9,6 @@ const (
 )
 
 type SegmentSequenceStep struct {
-	MatchType           *SegmentSequenceStepMatchTypeEnum `json:"matchType"`
-	OrFiltersForSegment []OrFiltersForSegment             `json:"orFiltersForSegment"`
+	MatchType           *SegmentSequenceStepMatchTypeEnum `json:"matchType,omitempty"`
+	OrFiltersForSegment []OrFiltersForSegment             `json:"orFiltersForSegment,omitempty"`
 }

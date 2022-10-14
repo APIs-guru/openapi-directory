@@ -1,6 +1,6 @@
 package shared
 
 type Term struct {
-	SourceText *string `json:"SourceText"`
-	TargetText *string `json:"TargetText"`
+	SourceText *string `json:"SourceText,omitempty"`
+	TargetText *string `json:"TargetText,omitempty"`
 }

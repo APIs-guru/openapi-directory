@@ -19,7 +19,7 @@ type GetSamplingStatisticSummariesHeaders struct {
 }
 
 type GetSamplingStatisticSummariesRequestBody struct {
-	NextToken *string `json:"NextToken"`
+	NextToken *string `json:"NextToken,omitempty"`
 }
 
 type GetSamplingStatisticSummariesRequest struct {

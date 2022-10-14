@@ -1,12 +1,12 @@
 package shared
 
 type VirtualFolderInfo struct {
-	CollectionType     *string         `json:"CollectionType"`
-	ItemID             *string         `json:"ItemId"`
-	LibraryOptions     *LibraryOptions `json:"LibraryOptions"`
-	Locations          []string        `json:"Locations"`
-	Name               *string         `json:"Name"`
-	PrimaryImageItemID *string         `json:"PrimaryImageItemId"`
-	RefreshProgress    *float64        `json:"RefreshProgress"`
-	RefreshStatus      *string         `json:"RefreshStatus"`
+	CollectionType     *string         `json:"CollectionType,omitempty"`
+	ItemID             *string         `json:"ItemId,omitempty"`
+	LibraryOptions     *LibraryOptions `json:"LibraryOptions,omitempty"`
+	Locations          []string        `json:"Locations,omitempty"`
+	Name               *string         `json:"Name,omitempty"`
+	PrimaryImageItemID *string         `json:"PrimaryImageItemId,omitempty"`
+	RefreshProgress    *float64        `json:"RefreshProgress,omitempty"`
+	RefreshStatus      *string         `json:"RefreshStatus,omitempty"`
 }

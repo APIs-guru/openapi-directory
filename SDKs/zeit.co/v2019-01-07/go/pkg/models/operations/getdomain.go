@@ -26,10 +26,10 @@ type GetDomain200ApplicationJSONDomainCerts struct {
 }
 
 type GetDomain200ApplicationJSONDomainCreator struct {
-	CustomerID       *string `json:"customerId"`
+	CustomerID       *string `json:"customerId,omitempty"`
 	Email            string  `json:"email"`
 	ID               string  `json:"id"`
-	IsDomainReseller *bool   `json:"isDomainReseller"`
+	IsDomainReseller *bool   `json:"isDomainReseller,omitempty"`
 	Username         string  `json:"username"`
 }
 
@@ -54,10 +54,10 @@ type GetDomain200ApplicationJSONDomain struct {
 	Name                string                                           `json:"name"`
 	Nameservers         []string                                         `json:"nameservers"`
 	NsVerifiedAt        int64                                            `json:"nsVerifiedAt"`
-	OrderedAt           *int64                                           `json:"orderedAt"`
+	OrderedAt           *int64                                           `json:"orderedAt,omitempty"`
 	ServiceType         GetDomain200ApplicationJSONDomainServiceTypeEnum `json:"serviceType"`
 	Suffix              bool                                             `json:"suffix"`
-	TransferredAt       *int64                                           `json:"transferredAt"`
+	TransferredAt       *int64                                           `json:"transferredAt,omitempty"`
 	TxtVerifiedAt       int64                                            `json:"txtVerifiedAt"`
 	VerificationRecord  string                                           `json:"verificationRecord"`
 	Verified            bool                                             `json:"verified"`

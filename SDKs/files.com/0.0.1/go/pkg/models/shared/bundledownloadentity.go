@@ -12,8 +12,8 @@ const (
 )
 
 type BundleDownloadEntity struct {
-	BundleRegistration *BundleRegistrationEntity               `json:"bundle_registration"`
-	CreatedAt          *time.Time                              `json:"created_at"`
-	DownloadMethod     *BundleDownloadEntityDownloadMethodEnum `json:"download_method"`
-	Path               *string                                 `json:"path"`
+	BundleRegistration *BundleRegistrationEntity               `json:"bundle_registration,omitempty"`
+	CreatedAt          *time.Time                              `json:"created_at,omitempty"`
+	DownloadMethod     *BundleDownloadEntityDownloadMethodEnum `json:"download_method,omitempty"`
+	Path               *string                                 `json:"path,omitempty"`
 }

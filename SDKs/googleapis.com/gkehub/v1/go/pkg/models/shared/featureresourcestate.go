@@ -12,5 +12,5 @@ const (
 )
 
 type FeatureResourceState struct {
-	State *FeatureResourceStateStateEnum `json:"state"`
+	State *FeatureResourceStateStateEnum `json:"state,omitempty"`
 }

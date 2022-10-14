@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleCloudDialogflowV2IntentTrainingPhrase struct {
-	Name            *string                                              `json:"name"`
-	Parts           []GoogleCloudDialogflowV2IntentTrainingPhrasePart    `json:"parts"`
-	TimesAddedCount *int32                                               `json:"timesAddedCount"`
-	Type            *GoogleCloudDialogflowV2IntentTrainingPhraseTypeEnum `json:"type"`
+	Name            *string                                              `json:"name,omitempty"`
+	Parts           []GoogleCloudDialogflowV2IntentTrainingPhrasePart    `json:"parts,omitempty"`
+	TimesAddedCount *int32                                               `json:"timesAddedCount,omitempty"`
+	Type            *GoogleCloudDialogflowV2IntentTrainingPhraseTypeEnum `json:"type,omitempty"`
 }

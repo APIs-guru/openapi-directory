@@ -14,11 +14,11 @@ type AddVideoChannelRequest struct {
 }
 
 type AddVideoChannel204ApplicationJSONVideoChannel struct {
-	ID map[string]interface{} `json:"id"`
+	ID map[string]interface{} `json:"id,omitempty"`
 }
 
 type AddVideoChannel204ApplicationJSON struct {
-	VideoChannel *AddVideoChannel204ApplicationJSONVideoChannel `json:"videoChannel"`
+	VideoChannel *AddVideoChannel204ApplicationJSONVideoChannel `json:"videoChannel,omitempty"`
 }
 
 type AddVideoChannelResponse struct {

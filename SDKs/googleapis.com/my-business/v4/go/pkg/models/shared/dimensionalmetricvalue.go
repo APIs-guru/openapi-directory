@@ -11,7 +11,7 @@ const (
 )
 
 type DimensionalMetricValue struct {
-	MetricOption  *DimensionalMetricValueMetricOptionEnum `json:"metricOption"`
-	TimeDimension *TimeDimension                          `json:"timeDimension"`
-	Value         *string                                 `json:"value"`
+	MetricOption  *DimensionalMetricValueMetricOptionEnum `json:"metricOption,omitempty"`
+	TimeDimension *TimeDimension                          `json:"timeDimension,omitempty"`
+	Value         *string                                 `json:"value,omitempty"`
 }

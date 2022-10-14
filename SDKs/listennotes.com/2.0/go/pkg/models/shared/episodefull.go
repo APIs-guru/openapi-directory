@@ -1,19 +1,19 @@
 package shared
 
 type EpisodeFull struct {
-	Audio              *string        `json:"audio"`
-	AudioLengthSec     *int64         `json:"audio_length_sec"`
-	Description        *string        `json:"description"`
-	ExplicitContent    *bool          `json:"explicit_content"`
-	ID                 *string        `json:"id"`
-	Image              *string        `json:"image"`
-	Link               *string        `json:"link"`
-	ListennotesEditURL *string        `json:"listennotes_edit_url"`
-	ListennotesURL     *string        `json:"listennotes_url"`
-	MaybeAudioInvalid  *bool          `json:"maybe_audio_invalid"`
-	Podcast            *PodcastSimple `json:"podcast"`
-	PubDateMs          *int64         `json:"pub_date_ms"`
-	Thumbnail          *string        `json:"thumbnail"`
-	Title              *string        `json:"title"`
-	Transcript         *string        `json:"transcript"`
+	Audio              *string        `json:"audio,omitempty"`
+	AudioLengthSec     *int64         `json:"audio_length_sec,omitempty"`
+	Description        *string        `json:"description,omitempty"`
+	ExplicitContent    *bool          `json:"explicit_content,omitempty"`
+	ID                 *string        `json:"id,omitempty"`
+	Image              *string        `json:"image,omitempty"`
+	Link               *string        `json:"link,omitempty"`
+	ListennotesEditURL *string        `json:"listennotes_edit_url,omitempty"`
+	ListennotesURL     *string        `json:"listennotes_url,omitempty"`
+	MaybeAudioInvalid  *bool          `json:"maybe_audio_invalid,omitempty"`
+	Podcast            *PodcastSimple `json:"podcast,omitempty"`
+	PubDateMs          *int64         `json:"pub_date_ms,omitempty"`
+	Thumbnail          *string        `json:"thumbnail,omitempty"`
+	Title              *string        `json:"title,omitempty"`
+	Transcript         *string        `json:"transcript,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DeviceReport struct {
-	AppState                   []AppState `json:"appState"`
-	LastUpdatedTimestampMillis *string    `json:"lastUpdatedTimestampMillis"`
+	AppState                   []AppState `json:"appState,omitempty"`
+	LastUpdatedTimestampMillis *string    `json:"lastUpdatedTimestampMillis,omitempty"`
 }

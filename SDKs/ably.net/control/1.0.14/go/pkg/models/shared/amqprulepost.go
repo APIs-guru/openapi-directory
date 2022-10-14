@@ -20,14 +20,14 @@ const (
 )
 
 type AmqpRulePostTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AmqpRulePostTarget struct {
-	Enveloped *bool                       `json:"enveloped"`
-	Format    *string                     `json:"format"`
-	Headers   []AmqpRulePostTargetHeaders `json:"headers"`
+	Enveloped *bool                       `json:"enveloped,omitempty"`
+	Format    *string                     `json:"format,omitempty"`
+	Headers   []AmqpRulePostTargetHeaders `json:"headers,omitempty"`
 	QueueID   string                      `json:"queueId"`
 }
 
@@ -35,6 +35,6 @@ type AmqpRulePost struct {
 	RequestMode AmqpRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    AmqpRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                  `json:"source"`
-	Status      *AmqpRulePostStatusEnum     `json:"status"`
+	Status      *AmqpRulePostStatusEnum     `json:"status,omitempty"`
 	Target      AmqpRulePostTarget          `json:"target"`
 }

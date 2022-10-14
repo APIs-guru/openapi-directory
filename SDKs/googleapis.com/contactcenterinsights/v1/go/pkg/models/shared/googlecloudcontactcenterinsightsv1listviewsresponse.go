@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1ListViewsResponse struct {
-	NextPageToken *string                                  `json:"nextPageToken"`
-	Views         []GoogleCloudContactcenterinsightsV1View `json:"views"`
+	NextPageToken *string                                  `json:"nextPageToken,omitempty"`
+	Views         []GoogleCloudContactcenterinsightsV1View `json:"views,omitempty"`
 }

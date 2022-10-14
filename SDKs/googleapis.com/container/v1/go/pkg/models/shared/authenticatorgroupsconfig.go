@@ -1,6 +1,6 @@
 package shared
 
 type AuthenticatorGroupsConfig struct {
-	Enabled       *bool   `json:"enabled"`
-	SecurityGroup *string `json:"securityGroup"`
+	Enabled       *bool   `json:"enabled,omitempty"`
+	SecurityGroup *string `json:"securityGroup,omitempty"`
 }

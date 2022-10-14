@@ -1,6 +1,6 @@
 package shared
 
 type SuggestedParagraphStyle struct {
-	ParagraphStyle                *ParagraphStyle                `json:"paragraphStyle"`
-	ParagraphStyleSuggestionState *ParagraphStyleSuggestionState `json:"paragraphStyleSuggestionState"`
+	ParagraphStyle                *ParagraphStyle                `json:"paragraphStyle,omitempty"`
+	ParagraphStyleSuggestionState *ParagraphStyleSuggestionState `json:"paragraphStyleSuggestionState,omitempty"`
 }

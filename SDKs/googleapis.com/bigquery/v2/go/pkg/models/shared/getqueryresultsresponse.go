@@ -1,16 +1,16 @@
 package shared
 
 type GetQueryResultsResponse struct {
-	CacheHit            *bool         `json:"cacheHit"`
-	Errors              []ErrorProto  `json:"errors"`
-	Etag                *string       `json:"etag"`
-	JobComplete         *bool         `json:"jobComplete"`
-	JobReference        *JobReference `json:"jobReference"`
-	Kind                *string       `json:"kind"`
-	NumDmlAffectedRows  *string       `json:"numDmlAffectedRows"`
-	PageToken           *string       `json:"pageToken"`
-	Rows                []TableRow    `json:"rows"`
-	Schema              *TableSchema  `json:"schema"`
-	TotalBytesProcessed *string       `json:"totalBytesProcessed"`
-	TotalRows           *string       `json:"totalRows"`
+	CacheHit            *bool         `json:"cacheHit,omitempty"`
+	Errors              []ErrorProto  `json:"errors,omitempty"`
+	Etag                *string       `json:"etag,omitempty"`
+	JobComplete         *bool         `json:"jobComplete,omitempty"`
+	JobReference        *JobReference `json:"jobReference,omitempty"`
+	Kind                *string       `json:"kind,omitempty"`
+	NumDmlAffectedRows  *string       `json:"numDmlAffectedRows,omitempty"`
+	PageToken           *string       `json:"pageToken,omitempty"`
+	Rows                []TableRow    `json:"rows,omitempty"`
+	Schema              *TableSchema  `json:"schema,omitempty"`
+	TotalBytesProcessed *string       `json:"totalBytesProcessed,omitempty"`
+	TotalRows           *string       `json:"totalRows,omitempty"`
 }

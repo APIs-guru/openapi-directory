@@ -28,18 +28,18 @@ const (
 )
 
 type UserResponse struct {
-	Email                  *string                    `json:"email"`
-	EntityID               *string                    `json:"entityId"`
-	FirstName              *string                    `json:"firstName"`
-	ID                     *string                    `json:"id"`
-	LastName               *string                    `json:"lastName"`
-	LockedOut              *bool                      `json:"lockedOut"`
-	LockedOutTimestamp     *time.Time                 `json:"lockedOutTimestamp"`
-	MfaStatus              *UserResponseMfaStatusEnum `json:"mfaStatus"`
-	MfaType                *UserResponseMfaTypeEnum   `json:"mfaType"`
-	PrimaryContactNumber   *string                    `json:"primaryContactNumber"`
-	Roles                  []Role                     `json:"roles"`
-	SecondaryContactNumber *string                    `json:"secondaryContactNumber"`
-	SmsNumber              *string                    `json:"smsNumber"`
-	Status                 *UserResponseStatusEnum    `json:"status"`
+	Email                  *string                    `json:"email,omitempty"`
+	EntityID               *string                    `json:"entityId,omitempty"`
+	FirstName              *string                    `json:"firstName,omitempty"`
+	ID                     *string                    `json:"id,omitempty"`
+	LastName               *string                    `json:"lastName,omitempty"`
+	LockedOut              *bool                      `json:"lockedOut,omitempty"`
+	LockedOutTimestamp     *time.Time                 `json:"lockedOutTimestamp,omitempty"`
+	MfaStatus              *UserResponseMfaStatusEnum `json:"mfaStatus,omitempty"`
+	MfaType                *UserResponseMfaTypeEnum   `json:"mfaType,omitempty"`
+	PrimaryContactNumber   *string                    `json:"primaryContactNumber,omitempty"`
+	Roles                  []Role                     `json:"roles,omitempty"`
+	SecondaryContactNumber *string                    `json:"secondaryContactNumber,omitempty"`
+	SmsNumber              *string                    `json:"smsNumber,omitempty"`
+	Status                 *UserResponseStatusEnum    `json:"status,omitempty"`
 }

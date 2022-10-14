@@ -10,31 +10,31 @@ type GetTextUsingGetRequest struct {
 }
 
 type GetTextUsingGet200ApplicationJSONData struct {
-	Text *string `json:"text"`
+	Text *string `json:"text,omitempty"`
 }
 
 type GetTextUsingGet200ApplicationJSON struct {
-	Code    *int64                                 `json:"code"`
-	Data    *GetTextUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                `json:"message"`
+	Code    *int64                                 `json:"code,omitempty"`
+	Data    *GetTextUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                `json:"message,omitempty"`
 }
 
 type GetTextUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetTextUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetTextUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetTextUsingGetResponse struct {

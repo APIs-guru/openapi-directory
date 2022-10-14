@@ -1,6 +1,6 @@
 package shared
 
 type SchemaChangePolicy struct {
-	DeleteBehavior *DeleteBehaviorEnum `json:"DeleteBehavior"`
-	UpdateBehavior *UpdateBehaviorEnum `json:"UpdateBehavior"`
+	DeleteBehavior *DeleteBehaviorEnum `json:"DeleteBehavior,omitempty"`
+	UpdateBehavior *UpdateBehaviorEnum `json:"UpdateBehavior,omitempty"`
 }

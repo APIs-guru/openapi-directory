@@ -28,10 +28,10 @@ const (
 )
 
 type Housekeeping struct {
-	DailyHousekeeping              *bool                                           `json:"dailyHousekeeping"`
-	DailyHousekeepingException     *HousekeepingDailyHousekeepingExceptionEnum     `json:"dailyHousekeepingException"`
-	HousekeepingAvailable          *bool                                           `json:"housekeepingAvailable"`
-	HousekeepingAvailableException *HousekeepingHousekeepingAvailableExceptionEnum `json:"housekeepingAvailableException"`
-	TurndownService                *bool                                           `json:"turndownService"`
-	TurndownServiceException       *HousekeepingTurndownServiceExceptionEnum       `json:"turndownServiceException"`
+	DailyHousekeeping              *bool                                           `json:"dailyHousekeeping,omitempty"`
+	DailyHousekeepingException     *HousekeepingDailyHousekeepingExceptionEnum     `json:"dailyHousekeepingException,omitempty"`
+	HousekeepingAvailable          *bool                                           `json:"housekeepingAvailable,omitempty"`
+	HousekeepingAvailableException *HousekeepingHousekeepingAvailableExceptionEnum `json:"housekeepingAvailableException,omitempty"`
+	TurndownService                *bool                                           `json:"turndownService,omitempty"`
+	TurndownServiceException       *HousekeepingTurndownServiceExceptionEnum       `json:"turndownServiceException,omitempty"`
 }

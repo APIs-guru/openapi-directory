@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec struct {
-	FreeTrialDuration          *GoogleCloudPaymentsResellerSubscriptionV1Duration                            `json:"freeTrialDuration"`
-	IntroductoryPricingDetails *GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails `json:"introductoryPricingDetails"`
-	Promotion                  *string                                                                       `json:"promotion"`
-	Type                       *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecTypeEnum   `json:"type"`
+	FreeTrialDuration          *GoogleCloudPaymentsResellerSubscriptionV1Duration                            `json:"freeTrialDuration,omitempty"`
+	IntroductoryPricingDetails *GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails `json:"introductoryPricingDetails,omitempty"`
+	Promotion                  *string                                                                       `json:"promotion,omitempty"`
+	Type                       *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecTypeEnum   `json:"type,omitempty"`
 }

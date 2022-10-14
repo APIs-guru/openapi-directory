@@ -1,11 +1,11 @@
 package shared
 
 type MetadataOptions struct {
-	DisabledImageFetchers    []string `json:"DisabledImageFetchers"`
-	DisabledMetadataFetchers []string `json:"DisabledMetadataFetchers"`
-	DisabledMetadataSavers   []string `json:"DisabledMetadataSavers"`
-	ImageFetcherOrder        []string `json:"ImageFetcherOrder"`
-	ItemType                 *string  `json:"ItemType"`
-	LocalMetadataReaderOrder []string `json:"LocalMetadataReaderOrder"`
-	MetadataFetcherOrder     []string `json:"MetadataFetcherOrder"`
+	DisabledImageFetchers    []string `json:"DisabledImageFetchers,omitempty"`
+	DisabledMetadataFetchers []string `json:"DisabledMetadataFetchers,omitempty"`
+	DisabledMetadataSavers   []string `json:"DisabledMetadataSavers,omitempty"`
+	ImageFetcherOrder        []string `json:"ImageFetcherOrder,omitempty"`
+	ItemType                 *string  `json:"ItemType,omitempty"`
+	LocalMetadataReaderOrder []string `json:"LocalMetadataReaderOrder,omitempty"`
+	MetadataFetcherOrder     []string `json:"MetadataFetcherOrder,omitempty"`
 }

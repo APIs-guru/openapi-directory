@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1IntentMessageColumnProperties struct {
-	Header              *string                                                                           `json:"header"`
-	HorizontalAlignment *GoogleCloudDialogflowV2beta1IntentMessageColumnPropertiesHorizontalAlignmentEnum `json:"horizontalAlignment"`
+	Header              *string                                                                           `json:"header,omitempty"`
+	HorizontalAlignment *GoogleCloudDialogflowV2beta1IntentMessageColumnPropertiesHorizontalAlignmentEnum `json:"horizontalAlignment,omitempty"`
 }

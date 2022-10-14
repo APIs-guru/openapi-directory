@@ -1,7 +1,7 @@
 package shared
 
 type DelegateIdentity struct {
-	DisplayName *string `json:"displayName"`
-	ID          *string `json:"id"`
-	Username    *string `json:"username"`
+	DisplayName *string `json:"displayName,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Username    *string `json:"username,omitempty"`
 }

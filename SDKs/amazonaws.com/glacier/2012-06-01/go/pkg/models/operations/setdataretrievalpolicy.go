@@ -19,11 +19,11 @@ type SetDataRetrievalPolicyHeaders struct {
 }
 
 type SetDataRetrievalPolicyRequestBodyPolicy struct {
-	Rules []shared.DataRetrievalRule `json:"Rules"`
+	Rules []shared.DataRetrievalRule `json:"Rules,omitempty"`
 }
 
 type SetDataRetrievalPolicyRequestBody struct {
-	Policy *SetDataRetrievalPolicyRequestBodyPolicy `json:"Policy"`
+	Policy *SetDataRetrievalPolicyRequestBodyPolicy `json:"Policy,omitempty"`
 }
 
 type SetDataRetrievalPolicyRequest struct {

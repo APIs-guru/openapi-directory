@@ -1,5 +1,5 @@
 package shared
 
 type CustomerListDpcsResponse struct {
-	Dpcs []Dpc `json:"dpcs"`
+	Dpcs []Dpc `json:"dpcs,omitempty"`
 }

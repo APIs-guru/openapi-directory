@@ -1,5 +1,5 @@
 package shared
 
 type APICoreResponsesEntitiesResponseAPICoreDtoAccountingIPBlacklistEntry struct {
-	Entities []APICoreDtoAccountingIPBlacklistEntry `json:"entities"`
+	Entities []APICoreDtoAccountingIPBlacklistEntry `json:"entities,omitempty"`
 }

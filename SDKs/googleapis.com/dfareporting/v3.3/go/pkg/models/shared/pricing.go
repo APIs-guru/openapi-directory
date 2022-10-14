@@ -33,10 +33,10 @@ const (
 )
 
 type Pricing struct {
-	CapCostType *PricingCapCostTypeEnum `json:"capCostType"`
-	EndDate     *time.Time              `json:"endDate"`
-	Flights     []Flight                `json:"flights"`
-	GroupType   *PricingGroupTypeEnum   `json:"groupType"`
-	PricingType *PricingPricingTypeEnum `json:"pricingType"`
-	StartDate   *time.Time              `json:"startDate"`
+	CapCostType *PricingCapCostTypeEnum `json:"capCostType,omitempty"`
+	EndDate     *time.Time              `json:"endDate,omitempty"`
+	Flights     []Flight                `json:"flights,omitempty"`
+	GroupType   *PricingGroupTypeEnum   `json:"groupType,omitempty"`
+	PricingType *PricingPricingTypeEnum `json:"pricingType,omitempty"`
+	StartDate   *time.Time              `json:"startDate,omitempty"`
 }

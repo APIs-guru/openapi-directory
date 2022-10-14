@@ -5,9 +5,9 @@ import (
 )
 
 type BonusPayment struct {
-	AssignmentID *string    `json:"AssignmentId"`
-	BonusAmount  *string    `json:"BonusAmount"`
-	GrantTime    *time.Time `json:"GrantTime"`
-	Reason       *string    `json:"Reason"`
-	WorkerID     *string    `json:"WorkerId"`
+	AssignmentID *string    `json:"AssignmentId,omitempty"`
+	BonusAmount  *string    `json:"BonusAmount,omitempty"`
+	GrantTime    *time.Time `json:"GrantTime,omitempty"`
+	Reason       *string    `json:"Reason,omitempty"`
+	WorkerID     *string    `json:"WorkerId,omitempty"`
 }

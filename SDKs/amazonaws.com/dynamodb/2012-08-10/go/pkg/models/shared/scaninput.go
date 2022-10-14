@@ -1,20 +1,20 @@
 package shared
 
 type ScanInput struct {
-	AttributesToGet           []string                    `json:"AttributesToGet"`
-	ConditionalOperator       *ConditionalOperatorEnum    `json:"ConditionalOperator"`
-	ConsistentRead            *bool                       `json:"ConsistentRead"`
-	ExclusiveStartKey         map[string]AttributeValue   `json:"ExclusiveStartKey"`
-	ExpressionAttributeNames  map[string]string           `json:"ExpressionAttributeNames"`
-	ExpressionAttributeValues map[string]AttributeValue   `json:"ExpressionAttributeValues"`
-	FilterExpression          *string                     `json:"FilterExpression"`
-	IndexName                 *string                     `json:"IndexName"`
-	Limit                     *int64                      `json:"Limit"`
-	ProjectionExpression      *string                     `json:"ProjectionExpression"`
-	ReturnConsumedCapacity    *ReturnConsumedCapacityEnum `json:"ReturnConsumedCapacity"`
-	ScanFilter                map[string]Condition        `json:"ScanFilter"`
-	Segment                   *int64                      `json:"Segment"`
-	Select                    *SelectEnum                 `json:"Select"`
+	AttributesToGet           []string                    `json:"AttributesToGet,omitempty"`
+	ConditionalOperator       *ConditionalOperatorEnum    `json:"ConditionalOperator,omitempty"`
+	ConsistentRead            *bool                       `json:"ConsistentRead,omitempty"`
+	ExclusiveStartKey         map[string]AttributeValue   `json:"ExclusiveStartKey,omitempty"`
+	ExpressionAttributeNames  map[string]string           `json:"ExpressionAttributeNames,omitempty"`
+	ExpressionAttributeValues map[string]AttributeValue   `json:"ExpressionAttributeValues,omitempty"`
+	FilterExpression          *string                     `json:"FilterExpression,omitempty"`
+	IndexName                 *string                     `json:"IndexName,omitempty"`
+	Limit                     *int64                      `json:"Limit,omitempty"`
+	ProjectionExpression      *string                     `json:"ProjectionExpression,omitempty"`
+	ReturnConsumedCapacity    *ReturnConsumedCapacityEnum `json:"ReturnConsumedCapacity,omitempty"`
+	ScanFilter                map[string]Condition        `json:"ScanFilter,omitempty"`
+	Segment                   *int64                      `json:"Segment,omitempty"`
+	Select                    *SelectEnum                 `json:"Select,omitempty"`
 	TableName                 string                      `json:"TableName"`
-	TotalSegments             *int64                      `json:"TotalSegments"`
+	TotalSegments             *int64                      `json:"TotalSegments,omitempty"`
 }

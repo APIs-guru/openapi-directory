@@ -5,9 +5,9 @@ type UpdateDeviceWirelessBluetoothSettingsPathParams struct {
 }
 
 type UpdateDeviceWirelessBluetoothSettingsRequestBody struct {
-	Major *int64  `json:"major"`
-	Minor *int64  `json:"minor"`
-	UUID  *string `json:"uuid"`
+	Major *int64  `json:"major,omitempty"`
+	Minor *int64  `json:"minor,omitempty"`
+	UUID  *string `json:"uuid,omitempty"`
 }
 
 type UpdateDeviceWirelessBluetoothSettingsRequest struct {

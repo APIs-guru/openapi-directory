@@ -1,7 +1,7 @@
 package shared
 
 type EngineVersionInfo struct {
-	EnginePatchVersion   *string `json:"EnginePatchVersion"`
-	EngineVersion        *string `json:"EngineVersion"`
-	ParameterGroupFamily *string `json:"ParameterGroupFamily"`
+	EnginePatchVersion   *string `json:"EnginePatchVersion,omitempty"`
+	EngineVersion        *string `json:"EngineVersion,omitempty"`
+	ParameterGroupFamily *string `json:"ParameterGroupFamily,omitempty"`
 }

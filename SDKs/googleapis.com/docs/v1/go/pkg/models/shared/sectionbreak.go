@@ -1,7 +1,7 @@
 package shared
 
 type SectionBreak struct {
-	SectionStyle          *SectionStyle `json:"sectionStyle"`
-	SuggestedDeletionIds  []string      `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds []string      `json:"suggestedInsertionIds"`
+	SectionStyle          *SectionStyle `json:"sectionStyle,omitempty"`
+	SuggestedDeletionIds  []string      `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds []string      `json:"suggestedInsertionIds,omitempty"`
 }

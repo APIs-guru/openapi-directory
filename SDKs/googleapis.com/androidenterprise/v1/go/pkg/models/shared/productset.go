@@ -10,7 +10,7 @@ const (
 )
 
 type ProductSet struct {
-	ProductID          []string                          `json:"productId"`
-	ProductSetBehavior *ProductSetProductSetBehaviorEnum `json:"productSetBehavior"`
-	ProductVisibility  []ProductVisibility               `json:"productVisibility"`
+	ProductID          []string                          `json:"productId,omitempty"`
+	ProductSetBehavior *ProductSetProductSetBehaviorEnum `json:"productSetBehavior,omitempty"`
+	ProductVisibility  []ProductVisibility               `json:"productVisibility,omitempty"`
 }

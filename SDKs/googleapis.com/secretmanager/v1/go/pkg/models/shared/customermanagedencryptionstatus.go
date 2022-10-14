@@ -1,5 +1,5 @@
 package shared
 
 type CustomerManagedEncryptionStatus struct {
-	KmsKeyVersionName *string `json:"kmsKeyVersionName"`
+	KmsKeyVersionName *string `json:"kmsKeyVersionName,omitempty"`
 }

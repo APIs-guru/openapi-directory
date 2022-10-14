@@ -20,7 +20,7 @@ type UpdateDeploymentHeaders struct {
 }
 
 type UpdateDeploymentRequestBody struct {
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 }
 
 type UpdateDeploymentRequest struct {

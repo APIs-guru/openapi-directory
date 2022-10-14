@@ -1,6 +1,6 @@
 package shared
 
 type ListNotebookInstanceLifecycleConfigsOutput struct {
-	NextToken                        *string                                  `json:"NextToken"`
-	NotebookInstanceLifecycleConfigs []NotebookInstanceLifecycleConfigSummary `json:"NotebookInstanceLifecycleConfigs"`
+	NextToken                        *string                                  `json:"NextToken,omitempty"`
+	NotebookInstanceLifecycleConfigs []NotebookInstanceLifecycleConfigSummary `json:"NotebookInstanceLifecycleConfigs,omitempty"`
 }

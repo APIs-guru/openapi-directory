@@ -6,10 +6,10 @@ type GraphTypeType struct {
 }
 
 type Graph struct {
-	ID     *int64        `json:"id"`
-	Link   *string       `json:"link"`
+	ID     *int64        `json:"id,omitempty"`
+	Link   *string       `json:"link,omitempty"`
 	Name   string        `json:"name"`
 	Source string        `json:"source"`
 	Type   GraphTypeType `json:"type"`
-	Weight *int64        `json:"weight"`
+	Weight *int64        `json:"weight,omitempty"`
 }

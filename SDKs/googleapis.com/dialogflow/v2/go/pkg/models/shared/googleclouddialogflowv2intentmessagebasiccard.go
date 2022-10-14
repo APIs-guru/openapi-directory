@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudDialogflowV2IntentMessageBasicCard struct {
-	Buttons       []GoogleCloudDialogflowV2IntentMessageBasicCardButton `json:"buttons"`
-	FormattedText *string                                               `json:"formattedText"`
-	Image         *GoogleCloudDialogflowV2IntentMessageImage            `json:"image"`
-	Subtitle      *string                                               `json:"subtitle"`
-	Title         *string                                               `json:"title"`
+	Buttons       []GoogleCloudDialogflowV2IntentMessageBasicCardButton `json:"buttons,omitempty"`
+	FormattedText *string                                               `json:"formattedText,omitempty"`
+	Image         *GoogleCloudDialogflowV2IntentMessageImage            `json:"image,omitempty"`
+	Subtitle      *string                                               `json:"subtitle,omitempty"`
+	Title         *string                                               `json:"title,omitempty"`
 }

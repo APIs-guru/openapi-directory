@@ -8,8 +8,8 @@ const (
 )
 
 type Edit struct {
-	Callback *string       `json:"callback"`
-	Disk     *EditDiskEnum `json:"disk"`
+	Callback *string       `json:"callback,omitempty"`
+	Disk     *EditDiskEnum `json:"disk,omitempty"`
 	Output   Output        `json:"output"`
 	Timeline Timeline      `json:"timeline"`
 }

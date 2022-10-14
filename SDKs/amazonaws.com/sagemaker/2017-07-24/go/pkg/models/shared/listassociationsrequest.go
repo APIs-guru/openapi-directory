@@ -5,15 +5,15 @@ import (
 )
 
 type ListAssociationsRequest struct {
-	AssociationType *AssociationEdgeTypeEnum `json:"AssociationType"`
-	CreatedAfter    *time.Time               `json:"CreatedAfter"`
-	CreatedBefore   *time.Time               `json:"CreatedBefore"`
-	DestinationArn  *string                  `json:"DestinationArn"`
-	DestinationType *string                  `json:"DestinationType"`
-	MaxResults      *int64                   `json:"MaxResults"`
-	NextToken       *string                  `json:"NextToken"`
-	SortBy          *SortAssociationsByEnum  `json:"SortBy"`
-	SortOrder       *SortOrderEnum           `json:"SortOrder"`
-	SourceArn       *string                  `json:"SourceArn"`
-	SourceType      *string                  `json:"SourceType"`
+	AssociationType *AssociationEdgeTypeEnum `json:"AssociationType,omitempty"`
+	CreatedAfter    *time.Time               `json:"CreatedAfter,omitempty"`
+	CreatedBefore   *time.Time               `json:"CreatedBefore,omitempty"`
+	DestinationArn  *string                  `json:"DestinationArn,omitempty"`
+	DestinationType *string                  `json:"DestinationType,omitempty"`
+	MaxResults      *int64                   `json:"MaxResults,omitempty"`
+	NextToken       *string                  `json:"NextToken,omitempty"`
+	SortBy          *SortAssociationsByEnum  `json:"SortBy,omitempty"`
+	SortOrder       *SortOrderEnum           `json:"SortOrder,omitempty"`
+	SourceArn       *string                  `json:"SourceArn,omitempty"`
+	SourceType      *string                  `json:"SourceType,omitempty"`
 }

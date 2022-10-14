@@ -6,8 +6,8 @@ type UpdateOrganizationActionBatchPathParams struct {
 }
 
 type UpdateOrganizationActionBatchRequestBody struct {
-	Confirmed   *bool `json:"confirmed"`
-	Synchronous *bool `json:"synchronous"`
+	Confirmed   *bool `json:"confirmed,omitempty"`
+	Synchronous *bool `json:"synchronous,omitempty"`
 }
 
 type UpdateOrganizationActionBatchRequest struct {

@@ -1,8 +1,8 @@
 package shared
 
 type TransferNumberRequest struct {
-	Country *string  `json:"country"`
-	From    *string  `json:"from"`
-	Number  *float64 `json:"number"`
-	To      *string  `json:"to"`
+	Country *string  `json:"country,omitempty"`
+	From    *string  `json:"from,omitempty"`
+	Number  *float64 `json:"number,omitempty"`
+	To      *string  `json:"to,omitempty"`
 }

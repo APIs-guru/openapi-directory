@@ -1,5 +1,5 @@
 package shared
 
 type LanguageTag struct {
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }

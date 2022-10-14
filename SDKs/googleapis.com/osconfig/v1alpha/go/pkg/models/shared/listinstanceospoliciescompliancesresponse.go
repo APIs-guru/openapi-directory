@@ -1,6 +1,6 @@
 package shared
 
 type ListInstanceOsPoliciesCompliancesResponse struct {
-	InstanceOsPoliciesCompliances []InstanceOsPoliciesCompliance `json:"instanceOsPoliciesCompliances"`
-	NextPageToken                 *string                        `json:"nextPageToken"`
+	InstanceOsPoliciesCompliances []InstanceOsPoliciesCompliance `json:"instanceOsPoliciesCompliances,omitempty"`
+	NextPageToken                 *string                        `json:"nextPageToken,omitempty"`
 }

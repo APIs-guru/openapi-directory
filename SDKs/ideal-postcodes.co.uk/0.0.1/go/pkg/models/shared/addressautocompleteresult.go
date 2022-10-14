@@ -1,5 +1,5 @@
 package shared
 
 type AddressAutocompleteResult struct {
-	Hits []AddressAutocompleteHit `json:"hits"`
+	Hits []AddressAutocompleteHit `json:"hits,omitempty"`
 }

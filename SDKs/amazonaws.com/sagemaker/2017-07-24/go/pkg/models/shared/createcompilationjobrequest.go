@@ -6,6 +6,6 @@ type CreateCompilationJobRequest struct {
 	OutputConfig       OutputConfig      `json:"OutputConfig"`
 	RoleArn            string            `json:"RoleArn"`
 	StoppingCondition  StoppingCondition `json:"StoppingCondition"`
-	Tags               []Tag             `json:"Tags"`
-	VpcConfig          *NeoVpcConfig     `json:"VpcConfig"`
+	Tags               []Tag             `json:"Tags,omitempty"`
+	VpcConfig          *NeoVpcConfig     `json:"VpcConfig,omitempty"`
 }

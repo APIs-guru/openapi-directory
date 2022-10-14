@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaBooleanParameterArray struct {
-	BooleanValues []bool `json:"booleanValues"`
+	BooleanValues []bool `json:"booleanValues,omitempty"`
 }

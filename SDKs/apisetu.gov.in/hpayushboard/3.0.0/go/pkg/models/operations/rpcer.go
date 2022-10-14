@@ -16,8 +16,8 @@ const (
 )
 
 type RpcerRequestBody struct {
-	CertificateParameters *RpcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *RpcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                RpcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Rpcer400ApplicationJSON struct {
-	Error            *Rpcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Rpcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Rpcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Rpcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Rpcer401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Rpcer401ApplicationJSON struct {
-	Error            *Rpcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Rpcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Rpcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Rpcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Rpcer404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Rpcer404ApplicationJSON struct {
-	Error            *Rpcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Rpcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Rpcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Rpcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Rpcer500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Rpcer500ApplicationJSON struct {
-	Error            *Rpcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Rpcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Rpcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Rpcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Rpcer502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Rpcer502ApplicationJSON struct {
-	Error            *Rpcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Rpcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Rpcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Rpcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Rpcer503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Rpcer503ApplicationJSON struct {
-	Error            *Rpcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Rpcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Rpcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Rpcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Rpcer504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Rpcer504ApplicationJSON struct {
-	Error            *Rpcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Rpcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Rpcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Rpcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type RpcerResponse struct {

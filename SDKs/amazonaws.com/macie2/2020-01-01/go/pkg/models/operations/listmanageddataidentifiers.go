@@ -15,7 +15,7 @@ type ListManagedDataIdentifiersHeaders struct {
 }
 
 type ListManagedDataIdentifiersRequestBody struct {
-	NextToken *string `json:"nextToken"`
+	NextToken *string `json:"nextToken,omitempty"`
 }
 
 type ListManagedDataIdentifiersRequest struct {

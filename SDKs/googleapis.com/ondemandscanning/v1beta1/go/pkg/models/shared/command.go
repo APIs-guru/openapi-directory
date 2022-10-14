@@ -1,10 +1,10 @@
 package shared
 
 type Command struct {
-	Args    []string `json:"args"`
-	Dir     *string  `json:"dir"`
-	Env     []string `json:"env"`
-	ID      *string  `json:"id"`
-	Name    *string  `json:"name"`
-	WaitFor []string `json:"waitFor"`
+	Args    []string `json:"args,omitempty"`
+	Dir     *string  `json:"dir,omitempty"`
+	Env     []string `json:"env,omitempty"`
+	ID      *string  `json:"id,omitempty"`
+	Name    *string  `json:"name,omitempty"`
+	WaitFor []string `json:"waitFor,omitempty"`
 }

@@ -20,7 +20,7 @@ const (
 )
 
 type IssuesLockRequestBody struct {
-	LockReason *IssuesLockRequestBodyLockReasonEnum `json:"lock_reason"`
+	LockReason *IssuesLockRequestBodyLockReasonEnum `json:"lock_reason,omitempty"`
 }
 
 type IssuesLockRequest struct {

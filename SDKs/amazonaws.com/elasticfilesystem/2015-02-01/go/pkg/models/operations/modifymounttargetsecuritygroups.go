@@ -15,7 +15,7 @@ type ModifyMountTargetSecurityGroupsHeaders struct {
 }
 
 type ModifyMountTargetSecurityGroupsRequestBody struct {
-	SecurityGroups []string `json:"SecurityGroups"`
+	SecurityGroups []string `json:"SecurityGroups,omitempty"`
 }
 
 type ModifyMountTargetSecurityGroupsRequest struct {

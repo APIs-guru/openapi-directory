@@ -9,11 +9,11 @@ const (
 )
 
 type OAuthClient struct {
-	ID           *string                `json:"id"`
-	Label        *string                `json:"label"`
-	Public       *bool                  `json:"public"`
-	RedirectURI  *string                `json:"redirect_uri"`
-	Secret       *string                `json:"secret"`
-	Status       *OAuthClientStatusEnum `json:"status"`
-	ThumbnailURL *string                `json:"thumbnail_url"`
+	ID           *string                `json:"id,omitempty"`
+	Label        *string                `json:"label,omitempty"`
+	Public       *bool                  `json:"public,omitempty"`
+	RedirectURI  *string                `json:"redirect_uri,omitempty"`
+	Secret       *string                `json:"secret,omitempty"`
+	Status       *OAuthClientStatusEnum `json:"status,omitempty"`
+	ThumbnailURL *string                `json:"thumbnail_url,omitempty"`
 }

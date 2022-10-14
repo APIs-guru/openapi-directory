@@ -19,29 +19,29 @@ type CreateProfileHeaders struct {
 }
 
 type CreateProfileRequestBodyAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type CreateProfileRequestBodyBillingAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type CreateProfileRequestBodyGenderEnum string
@@ -53,16 +53,16 @@ const (
 )
 
 type CreateProfileRequestBodyMailingAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type CreateProfileRequestBodyPartyTypeEnum string
@@ -74,40 +74,40 @@ const (
 )
 
 type CreateProfileRequestBodyShippingAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type CreateProfileRequestBody struct {
-	AccountNumber         *string                                  `json:"AccountNumber"`
-	AdditionalInformation *string                                  `json:"AdditionalInformation"`
-	Address               *CreateProfileRequestBodyAddress         `json:"Address"`
-	Attributes            map[string]string                        `json:"Attributes"`
-	BillingAddress        *CreateProfileRequestBodyBillingAddress  `json:"BillingAddress"`
-	BirthDate             *string                                  `json:"BirthDate"`
-	BusinessEmailAddress  *string                                  `json:"BusinessEmailAddress"`
-	BusinessName          *string                                  `json:"BusinessName"`
-	BusinessPhoneNumber   *string                                  `json:"BusinessPhoneNumber"`
-	EmailAddress          *string                                  `json:"EmailAddress"`
-	FirstName             *string                                  `json:"FirstName"`
-	Gender                *CreateProfileRequestBodyGenderEnum      `json:"Gender"`
-	HomePhoneNumber       *string                                  `json:"HomePhoneNumber"`
-	LastName              *string                                  `json:"LastName"`
-	MailingAddress        *CreateProfileRequestBodyMailingAddress  `json:"MailingAddress"`
-	MiddleName            *string                                  `json:"MiddleName"`
-	MobilePhoneNumber     *string                                  `json:"MobilePhoneNumber"`
-	PartyType             *CreateProfileRequestBodyPartyTypeEnum   `json:"PartyType"`
-	PersonalEmailAddress  *string                                  `json:"PersonalEmailAddress"`
-	PhoneNumber           *string                                  `json:"PhoneNumber"`
-	ShippingAddress       *CreateProfileRequestBodyShippingAddress `json:"ShippingAddress"`
+	AccountNumber         *string                                  `json:"AccountNumber,omitempty"`
+	AdditionalInformation *string                                  `json:"AdditionalInformation,omitempty"`
+	Address               *CreateProfileRequestBodyAddress         `json:"Address,omitempty"`
+	Attributes            map[string]string                        `json:"Attributes,omitempty"`
+	BillingAddress        *CreateProfileRequestBodyBillingAddress  `json:"BillingAddress,omitempty"`
+	BirthDate             *string                                  `json:"BirthDate,omitempty"`
+	BusinessEmailAddress  *string                                  `json:"BusinessEmailAddress,omitempty"`
+	BusinessName          *string                                  `json:"BusinessName,omitempty"`
+	BusinessPhoneNumber   *string                                  `json:"BusinessPhoneNumber,omitempty"`
+	EmailAddress          *string                                  `json:"EmailAddress,omitempty"`
+	FirstName             *string                                  `json:"FirstName,omitempty"`
+	Gender                *CreateProfileRequestBodyGenderEnum      `json:"Gender,omitempty"`
+	HomePhoneNumber       *string                                  `json:"HomePhoneNumber,omitempty"`
+	LastName              *string                                  `json:"LastName,omitempty"`
+	MailingAddress        *CreateProfileRequestBodyMailingAddress  `json:"MailingAddress,omitempty"`
+	MiddleName            *string                                  `json:"MiddleName,omitempty"`
+	MobilePhoneNumber     *string                                  `json:"MobilePhoneNumber,omitempty"`
+	PartyType             *CreateProfileRequestBodyPartyTypeEnum   `json:"PartyType,omitempty"`
+	PersonalEmailAddress  *string                                  `json:"PersonalEmailAddress,omitempty"`
+	PhoneNumber           *string                                  `json:"PhoneNumber,omitempty"`
+	ShippingAddress       *CreateProfileRequestBodyShippingAddress `json:"ShippingAddress,omitempty"`
 }
 
 type CreateProfileRequest struct {

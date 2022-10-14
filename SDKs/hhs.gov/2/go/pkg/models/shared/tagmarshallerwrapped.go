@@ -1,7 +1,7 @@
 package shared
 
 type TagMarshallerWrapped struct {
-	Callback *string         `json:"callback"`
-	Meta     *Meta           `json:"meta"`
-	Results  []TagMarshaller `json:"results"`
+	Callback *string         `json:"callback,omitempty"`
+	Meta     *Meta           `json:"meta,omitempty"`
+	Results  []TagMarshaller `json:"results,omitempty"`
 }

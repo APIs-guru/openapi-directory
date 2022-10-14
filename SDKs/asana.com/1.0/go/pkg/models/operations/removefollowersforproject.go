@@ -14,7 +14,7 @@ type RemoveFollowersForProjectQueryParams struct {
 }
 
 type RemoveFollowersForProjectRequestBody struct {
-	Data *shared.RemoveFollowersRequest `json:"data"`
+	Data *shared.RemoveFollowersRequest `json:"data,omitempty"`
 }
 
 type RemoveFollowersForProjectRequest struct {
@@ -24,7 +24,7 @@ type RemoveFollowersForProjectRequest struct {
 }
 
 type RemoveFollowersForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveFollowersForProjectResponse struct {

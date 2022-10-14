@@ -5,10 +5,10 @@ import (
 )
 
 type Member struct {
-	DisabledDate *time.Time       `json:"DisabledDate"`
-	EnabledDate  *time.Time       `json:"EnabledDate"`
-	ID           *string          `json:"Id"`
-	Name         *string          `json:"Name"`
-	State        *EntityStateEnum `json:"State"`
-	Type         *MemberTypeEnum  `json:"Type"`
+	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
+	EnabledDate  *time.Time       `json:"EnabledDate,omitempty"`
+	ID           *string          `json:"Id,omitempty"`
+	Name         *string          `json:"Name,omitempty"`
+	State        *EntityStateEnum `json:"State,omitempty"`
+	Type         *MemberTypeEnum  `json:"Type,omitempty"`
 }

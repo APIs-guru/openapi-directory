@@ -1,15 +1,15 @@
 package shared
 
 type CalendarDate struct {
-	AllDay             *bool    `json:"all_day"`
-	CalendarCategoryID *int32   `json:"calendar_category_id"`
-	Category           *string  `json:"category"`
-	Description        *string  `json:"description"`
-	EndDate            *string  `json:"end_date"`
-	EventID            *int32   `json:"event_id"`
-	Location           *string  `json:"location"`
-	StartDate          *string  `json:"start_date"`
-	State              []string `json:"state"`
-	Summary            *string  `json:"summary"`
-	URL                *string  `json:"url"`
+	AllDay             *bool    `json:"all_day,omitempty"`
+	CalendarCategoryID *int32   `json:"calendar_category_id,omitempty"`
+	Category           *string  `json:"category,omitempty"`
+	Description        *string  `json:"description,omitempty"`
+	EndDate            *string  `json:"end_date,omitempty"`
+	EventID            *int32   `json:"event_id,omitempty"`
+	Location           *string  `json:"location,omitempty"`
+	StartDate          *string  `json:"start_date,omitempty"`
+	State              []string `json:"state,omitempty"`
+	Summary            *string  `json:"summary,omitempty"`
+	URL                *string  `json:"url,omitempty"`
 }

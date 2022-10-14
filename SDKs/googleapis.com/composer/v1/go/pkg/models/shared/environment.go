@@ -12,11 +12,11 @@ const (
 )
 
 type Environment struct {
-	Config     *EnvironmentConfig    `json:"config"`
-	CreateTime *string               `json:"createTime"`
-	Labels     map[string]string     `json:"labels"`
-	Name       *string               `json:"name"`
-	State      *EnvironmentStateEnum `json:"state"`
-	UpdateTime *string               `json:"updateTime"`
-	UUID       *string               `json:"uuid"`
+	Config     *EnvironmentConfig    `json:"config,omitempty"`
+	CreateTime *string               `json:"createTime,omitempty"`
+	Labels     map[string]string     `json:"labels,omitempty"`
+	Name       *string               `json:"name,omitempty"`
+	State      *EnvironmentStateEnum `json:"state,omitempty"`
+	UpdateTime *string               `json:"updateTime,omitempty"`
+	UUID       *string               `json:"uuid,omitempty"`
 }

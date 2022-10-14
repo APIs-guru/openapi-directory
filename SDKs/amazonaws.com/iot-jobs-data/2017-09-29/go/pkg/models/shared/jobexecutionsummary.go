@@ -1,10 +1,10 @@
 package shared
 
 type JobExecutionSummary struct {
-	ExecutionNumber *int64  `json:"executionNumber"`
-	JobID           *string `json:"jobId"`
-	LastUpdatedAt   *int64  `json:"lastUpdatedAt"`
-	QueuedAt        *int64  `json:"queuedAt"`
-	StartedAt       *int64  `json:"startedAt"`
-	VersionNumber   *int64  `json:"versionNumber"`
+	ExecutionNumber *int64  `json:"executionNumber,omitempty"`
+	JobID           *string `json:"jobId,omitempty"`
+	LastUpdatedAt   *int64  `json:"lastUpdatedAt,omitempty"`
+	QueuedAt        *int64  `json:"queuedAt,omitempty"`
+	StartedAt       *int64  `json:"startedAt,omitempty"`
+	VersionNumber   *int64  `json:"versionNumber,omitempty"`
 }

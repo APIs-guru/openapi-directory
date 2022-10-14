@@ -15,10 +15,10 @@ type CreateAccessPolicyHeaders struct {
 }
 
 type CreateAccessPolicyRequestBodyAccessPolicyIdentity struct {
-	Group   *shared.GroupIdentity   `json:"group"`
-	IamRole *shared.IamRoleIdentity `json:"iamRole"`
-	IamUser *shared.IamUserIdentity `json:"iamUser"`
-	User    *shared.UserIdentity    `json:"user"`
+	Group   *shared.GroupIdentity   `json:"group,omitempty"`
+	IamRole *shared.IamRoleIdentity `json:"iamRole,omitempty"`
+	IamUser *shared.IamUserIdentity `json:"iamUser,omitempty"`
+	User    *shared.UserIdentity    `json:"user,omitempty"`
 }
 
 type CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum string
@@ -29,16 +29,16 @@ const (
 )
 
 type CreateAccessPolicyRequestBodyAccessPolicyResource struct {
-	Portal  *shared.PortalResource  `json:"portal"`
-	Project *shared.ProjectResource `json:"project"`
+	Portal  *shared.PortalResource  `json:"portal,omitempty"`
+	Project *shared.ProjectResource `json:"project,omitempty"`
 }
 
 type CreateAccessPolicyRequestBody struct {
 	AccessPolicyIdentity   CreateAccessPolicyRequestBodyAccessPolicyIdentity       `json:"accessPolicyIdentity"`
 	AccessPolicyPermission CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum `json:"accessPolicyPermission"`
 	AccessPolicyResource   CreateAccessPolicyRequestBodyAccessPolicyResource       `json:"accessPolicyResource"`
-	ClientToken            *string                                                 `json:"clientToken"`
-	Tags                   map[string]string                                       `json:"tags"`
+	ClientToken            *string                                                 `json:"clientToken,omitempty"`
+	Tags                   map[string]string                                       `json:"tags,omitempty"`
 }
 
 type CreateAccessPolicyRequest struct {

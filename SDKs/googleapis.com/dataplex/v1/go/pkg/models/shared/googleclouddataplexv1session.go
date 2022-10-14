@@ -11,8 +11,8 @@ const (
 )
 
 type GoogleCloudDataplexV1Session struct {
-	CreateTime *string                                `json:"createTime"`
-	Name       *string                                `json:"name"`
-	State      *GoogleCloudDataplexV1SessionStateEnum `json:"state"`
-	UserID     *string                                `json:"userId"`
+	CreateTime *string                                `json:"createTime,omitempty"`
+	Name       *string                                `json:"name,omitempty"`
+	State      *GoogleCloudDataplexV1SessionStateEnum `json:"state,omitempty"`
+	UserID     *string                                `json:"userId,omitempty"`
 }

@@ -5,10 +5,10 @@ import (
 )
 
 type TrusthubV1CustomerProfileCustomerProfileEntityAssignment struct {
-	AccountSid         *string    `json:"account_sid"`
-	CustomerProfileSid *string    `json:"customer_profile_sid"`
-	DateCreated        *time.Time `json:"date_created"`
-	ObjectSid          *string    `json:"object_sid"`
-	Sid                *string    `json:"sid"`
-	URL                *string    `json:"url"`
+	AccountSid         *string    `json:"account_sid,omitempty"`
+	CustomerProfileSid *string    `json:"customer_profile_sid,omitempty"`
+	DateCreated        *time.Time `json:"date_created,omitempty"`
+	ObjectSid          *string    `json:"object_sid,omitempty"`
+	Sid                *string    `json:"sid,omitempty"`
+	URL                *string    `json:"url,omitempty"`
 }

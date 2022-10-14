@@ -9,9 +9,9 @@ const (
 )
 
 type ApprovalResult struct {
-	ApprovalTime    *string                     `json:"approvalTime"`
-	ApproverAccount *string                     `json:"approverAccount"`
-	Comment         *string                     `json:"comment"`
-	Decision        *ApprovalResultDecisionEnum `json:"decision"`
-	URL             *string                     `json:"url"`
+	ApprovalTime    *string                     `json:"approvalTime,omitempty"`
+	ApproverAccount *string                     `json:"approverAccount,omitempty"`
+	Comment         *string                     `json:"comment,omitempty"`
+	Decision        *ApprovalResultDecisionEnum `json:"decision,omitempty"`
+	URL             *string                     `json:"url,omitempty"`
 }

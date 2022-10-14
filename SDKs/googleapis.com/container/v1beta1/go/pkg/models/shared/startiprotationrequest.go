@@ -1,9 +1,9 @@
 package shared
 
 type StartIPRotationRequest struct {
-	ClusterID         *string `json:"clusterId"`
-	Name              *string `json:"name"`
-	ProjectID         *string `json:"projectId"`
-	RotateCredentials *bool   `json:"rotateCredentials"`
-	Zone              *string `json:"zone"`
+	ClusterID         *string `json:"clusterId,omitempty"`
+	Name              *string `json:"name,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty"`
+	RotateCredentials *bool   `json:"rotateCredentials,omitempty"`
+	Zone              *string `json:"zone,omitempty"`
 }

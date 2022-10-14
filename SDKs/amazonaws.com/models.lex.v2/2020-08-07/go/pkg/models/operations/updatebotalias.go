@@ -20,21 +20,21 @@ type UpdateBotAliasHeaders struct {
 }
 
 type UpdateBotAliasRequestBodyConversationLogSettings struct {
-	AudioLogSettings []shared.AudioLogSetting `json:"audioLogSettings"`
-	TextLogSettings  []shared.TextLogSetting  `json:"textLogSettings"`
+	AudioLogSettings []shared.AudioLogSetting `json:"audioLogSettings,omitempty"`
+	TextLogSettings  []shared.TextLogSetting  `json:"textLogSettings,omitempty"`
 }
 
 type UpdateBotAliasRequestBodySentimentAnalysisSettings struct {
-	DetectSentiment *bool `json:"detectSentiment"`
+	DetectSentiment *bool `json:"detectSentiment,omitempty"`
 }
 
 type UpdateBotAliasRequestBody struct {
-	BotAliasLocaleSettings    map[string]shared.BotAliasLocaleSettings            `json:"botAliasLocaleSettings"`
+	BotAliasLocaleSettings    map[string]shared.BotAliasLocaleSettings            `json:"botAliasLocaleSettings,omitempty"`
 	BotAliasName              string                                              `json:"botAliasName"`
-	BotVersion                *string                                             `json:"botVersion"`
-	ConversationLogSettings   *UpdateBotAliasRequestBodyConversationLogSettings   `json:"conversationLogSettings"`
-	Description               *string                                             `json:"description"`
-	SentimentAnalysisSettings *UpdateBotAliasRequestBodySentimentAnalysisSettings `json:"sentimentAnalysisSettings"`
+	BotVersion                *string                                             `json:"botVersion,omitempty"`
+	ConversationLogSettings   *UpdateBotAliasRequestBodyConversationLogSettings   `json:"conversationLogSettings,omitempty"`
+	Description               *string                                             `json:"description,omitempty"`
+	SentimentAnalysisSettings *UpdateBotAliasRequestBodySentimentAnalysisSettings `json:"sentimentAnalysisSettings,omitempty"`
 }
 
 type UpdateBotAliasRequest struct {

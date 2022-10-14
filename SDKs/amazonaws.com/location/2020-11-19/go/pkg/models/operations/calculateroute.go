@@ -20,8 +20,8 @@ type CalculateRouteHeaders struct {
 }
 
 type CalculateRouteRequestBodyCarModeOptions struct {
-	AvoidFerries *bool `json:"AvoidFerries"`
-	AvoidTolls   *bool `json:"AvoidTolls"`
+	AvoidFerries *bool `json:"AvoidFerries,omitempty"`
+	AvoidTolls   *bool `json:"AvoidTolls,omitempty"`
 }
 
 type CalculateRouteRequestBodyDistanceUnitEnum string
@@ -40,23 +40,23 @@ const (
 )
 
 type CalculateRouteRequestBodyTruckModeOptions struct {
-	AvoidFerries *bool                   `json:"AvoidFerries"`
-	AvoidTolls   *bool                   `json:"AvoidTolls"`
-	Dimensions   *shared.TruckDimensions `json:"Dimensions"`
-	Weight       *shared.TruckWeight     `json:"Weight"`
+	AvoidFerries *bool                   `json:"AvoidFerries,omitempty"`
+	AvoidTolls   *bool                   `json:"AvoidTolls,omitempty"`
+	Dimensions   *shared.TruckDimensions `json:"Dimensions,omitempty"`
+	Weight       *shared.TruckWeight     `json:"Weight,omitempty"`
 }
 
 type CalculateRouteRequestBody struct {
-	CarModeOptions      *CalculateRouteRequestBodyCarModeOptions   `json:"CarModeOptions"`
-	DepartNow           *bool                                      `json:"DepartNow"`
+	CarModeOptions      *CalculateRouteRequestBodyCarModeOptions   `json:"CarModeOptions,omitempty"`
+	DepartNow           *bool                                      `json:"DepartNow,omitempty"`
 	DeparturePosition   []float64                                  `json:"DeparturePosition"`
-	DepartureTime       *time.Time                                 `json:"DepartureTime"`
+	DepartureTime       *time.Time                                 `json:"DepartureTime,omitempty"`
 	DestinationPosition []float64                                  `json:"DestinationPosition"`
-	DistanceUnit        *CalculateRouteRequestBodyDistanceUnitEnum `json:"DistanceUnit"`
-	IncludeLegGeometry  *bool                                      `json:"IncludeLegGeometry"`
-	TravelMode          *CalculateRouteRequestBodyTravelModeEnum   `json:"TravelMode"`
-	TruckModeOptions    *CalculateRouteRequestBodyTruckModeOptions `json:"TruckModeOptions"`
-	WaypointPositions   [][]float64                                `json:"WaypointPositions"`
+	DistanceUnit        *CalculateRouteRequestBodyDistanceUnitEnum `json:"DistanceUnit,omitempty"`
+	IncludeLegGeometry  *bool                                      `json:"IncludeLegGeometry,omitempty"`
+	TravelMode          *CalculateRouteRequestBodyTravelModeEnum   `json:"TravelMode,omitempty"`
+	TruckModeOptions    *CalculateRouteRequestBodyTruckModeOptions `json:"TruckModeOptions,omitempty"`
+	WaypointPositions   [][]float64                                `json:"WaypointPositions,omitempty"`
 }
 
 type CalculateRouteRequest struct {

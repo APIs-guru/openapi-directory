@@ -8,6 +8,6 @@ const (
 )
 
 type CloudPubsubTopic struct {
-	PayloadFormat *CloudPubsubTopicPayloadFormatEnum `json:"payloadFormat"`
-	TopicName     *string                            `json:"topicName"`
+	PayloadFormat *CloudPubsubTopicPayloadFormatEnum `json:"payloadFormat,omitempty"`
+	TopicName     *string                            `json:"topicName,omitempty"`
 }

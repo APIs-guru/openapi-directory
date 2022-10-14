@@ -5,10 +5,10 @@ import (
 )
 
 type UpdateFileRequest struct {
-	Classification        *int32            `json:"classification"`
-	Expiration            *ObjectExpiration `json:"expiration"`
-	Name                  *string           `json:"name"`
-	Notes                 *string           `json:"notes"`
-	TimestampCreation     *time.Time        `json:"timestampCreation"`
-	TimestampModification *time.Time        `json:"timestampModification"`
+	Classification        *int32            `json:"classification,omitempty"`
+	Expiration            *ObjectExpiration `json:"expiration,omitempty"`
+	Name                  *string           `json:"name,omitempty"`
+	Notes                 *string           `json:"notes,omitempty"`
+	TimestampCreation     *time.Time        `json:"timestampCreation,omitempty"`
+	TimestampModification *time.Time        `json:"timestampModification,omitempty"`
 }

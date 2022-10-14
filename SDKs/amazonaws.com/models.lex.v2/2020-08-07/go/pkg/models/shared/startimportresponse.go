@@ -5,9 +5,9 @@ import (
 )
 
 type StartImportResponse struct {
-	CreationDateTime      *time.Time                   `json:"creationDateTime"`
-	ImportID              *string                      `json:"importId"`
-	ImportStatus          *ImportStatusEnum            `json:"importStatus"`
-	MergeStrategy         *MergeStrategyEnum           `json:"mergeStrategy"`
-	ResourceSpecification *ImportResourceSpecification `json:"resourceSpecification"`
+	CreationDateTime      *time.Time                   `json:"creationDateTime,omitempty"`
+	ImportID              *string                      `json:"importId,omitempty"`
+	ImportStatus          *ImportStatusEnum            `json:"importStatus,omitempty"`
+	MergeStrategy         *MergeStrategyEnum           `json:"mergeStrategy,omitempty"`
+	ResourceSpecification *ImportResourceSpecification `json:"resourceSpecification,omitempty"`
 }

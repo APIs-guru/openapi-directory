@@ -1,6 +1,6 @@
 package shared
 
 type DatabaseRelatedObjectsResponse struct {
-	Charts     *DatabaseRelatedCharts     `json:"charts"`
-	Dashboards *DatabaseRelatedDashboards `json:"dashboards"`
+	Charts     *DatabaseRelatedCharts     `json:"charts,omitempty"`
+	Dashboards *DatabaseRelatedDashboards `json:"dashboards,omitempty"`
 }

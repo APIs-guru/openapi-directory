@@ -5,7 +5,7 @@ import (
 )
 
 type CreateVocabularyFilterResponse struct {
-	LanguageCode         *LanguageCodeEnum `json:"LanguageCode"`
-	LastModifiedTime     *time.Time        `json:"LastModifiedTime"`
-	VocabularyFilterName *string           `json:"VocabularyFilterName"`
+	LanguageCode         *LanguageCodeEnum `json:"LanguageCode,omitempty"`
+	LastModifiedTime     *time.Time        `json:"LastModifiedTime,omitempty"`
+	VocabularyFilterName *string           `json:"VocabularyFilterName,omitempty"`
 }

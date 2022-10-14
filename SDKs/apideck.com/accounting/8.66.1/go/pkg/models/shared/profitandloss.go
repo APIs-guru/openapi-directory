@@ -27,14 +27,14 @@ type ProfitAndLossNetOperatingIncome struct {
 
 type ProfitAndLoss struct {
 	Currency           string                           `json:"currency"`
-	CustomerID         *string                          `json:"customer_id"`
-	EndDate            *string                          `json:"end_date"`
+	CustomerID         *string                          `json:"customer_id,omitempty"`
+	EndDate            *string                          `json:"end_date,omitempty"`
 	Expenses           ProfitAndLossExpenses            `json:"expenses"`
-	GrossProfit        *ProfitAndLossGrossProfit        `json:"gross_profit"`
-	ID                 *string                          `json:"id"`
+	GrossProfit        *ProfitAndLossGrossProfit        `json:"gross_profit,omitempty"`
+	ID                 *string                          `json:"id,omitempty"`
 	Income             ProfitAndLossIncome              `json:"income"`
-	NetIncome          *ProfitAndLossNetIncome          `json:"net_income"`
-	NetOperatingIncome *ProfitAndLossNetOperatingIncome `json:"net_operating_income"`
+	NetIncome          *ProfitAndLossNetIncome          `json:"net_income,omitempty"`
+	NetOperatingIncome *ProfitAndLossNetOperatingIncome `json:"net_operating_income,omitempty"`
 	ReportName         string                           `json:"report_name"`
-	StartDate          *string                          `json:"start_date"`
+	StartDate          *string                          `json:"start_date,omitempty"`
 }

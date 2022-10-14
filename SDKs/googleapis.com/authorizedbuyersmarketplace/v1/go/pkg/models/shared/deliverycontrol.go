@@ -40,9 +40,9 @@ const (
 )
 
 type DeliveryControl struct {
-	CompanionDeliveryType *DeliveryControlCompanionDeliveryTypeEnum `json:"companionDeliveryType"`
-	CreativeRotationType  *DeliveryControlCreativeRotationTypeEnum  `json:"creativeRotationType"`
-	DeliveryRateType      *DeliveryControlDeliveryRateTypeEnum      `json:"deliveryRateType"`
-	FrequencyCap          []FrequencyCap                            `json:"frequencyCap"`
-	RoadblockingType      *DeliveryControlRoadblockingTypeEnum      `json:"roadblockingType"`
+	CompanionDeliveryType *DeliveryControlCompanionDeliveryTypeEnum `json:"companionDeliveryType,omitempty"`
+	CreativeRotationType  *DeliveryControlCreativeRotationTypeEnum  `json:"creativeRotationType,omitempty"`
+	DeliveryRateType      *DeliveryControlDeliveryRateTypeEnum      `json:"deliveryRateType,omitempty"`
+	FrequencyCap          []FrequencyCap                            `json:"frequencyCap,omitempty"`
+	RoadblockingType      *DeliveryControlRoadblockingTypeEnum      `json:"roadblockingType,omitempty"`
 }

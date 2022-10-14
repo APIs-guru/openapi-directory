@@ -5,7 +5,7 @@ import (
 )
 
 type ValuesData struct {
-	Date     *time.Time  `json:"Date"`
-	DeviceID *string     `json:"DeviceId"`
-	Values   []ValueData `json:"Values"`
+	Date     *time.Time  `json:"Date,omitempty"`
+	DeviceID *string     `json:"DeviceId,omitempty"`
+	Values   []ValueData `json:"Values,omitempty"`
 }

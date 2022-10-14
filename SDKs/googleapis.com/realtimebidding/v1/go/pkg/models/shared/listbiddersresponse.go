@@ -1,6 +1,6 @@
 package shared
 
 type ListBiddersResponse struct {
-	Bidders       []Bidder `json:"bidders"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Bidders       []Bidder `json:"bidders,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

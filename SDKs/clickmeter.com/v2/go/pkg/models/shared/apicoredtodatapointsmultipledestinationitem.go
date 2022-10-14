@@ -1,5 +1,5 @@
 package shared
 
 type APICoreDtoDatapointsMultipleDestinationItem struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }

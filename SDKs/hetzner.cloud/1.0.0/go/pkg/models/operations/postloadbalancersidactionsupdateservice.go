@@ -7,9 +7,9 @@ type PostLoadBalancersIDActionsUpdateServicePathParams struct {
 type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
-	Response    *string  `json:"response"`
-	StatusCodes []string `json:"status_codes"`
-	TLS         *bool    `json:"tls"`
+	Response    *string  `json:"response,omitempty"`
+	StatusCodes []string `json:"status_codes,omitempty"`
+	TLS         *bool    `json:"tls,omitempty"`
 }
 
 type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnum string
@@ -20,7 +20,7 @@ const (
 )
 
 type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckLoadBalancerServiceHealthCheck struct {
-	HTTP     *PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckHTTP        `json:"http"`
+	HTTP     *PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckHTTP        `json:"http,omitempty"`
 	Interval int64                                                                     `json:"interval"`
 	Port     int64                                                                     `json:"port"`
 	Protocol PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnum `json:"protocol"`
@@ -29,11 +29,11 @@ type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckLoadBalancerSe
 }
 
 type PostLoadBalancersIDActionsUpdateServiceRequestBodyHTTP struct {
-	Certificates   []int64 `json:"certificates"`
+	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
 	CookieName     string  `json:"cookie_name"`
-	RedirectHTTP   *bool   `json:"redirect_http"`
-	StickySessions *bool   `json:"sticky_sessions"`
+	RedirectHTTP   *bool   `json:"redirect_http,omitempty"`
+	StickySessions *bool   `json:"sticky_sessions,omitempty"`
 }
 
 type PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnum string
@@ -47,7 +47,7 @@ const (
 type PostLoadBalancersIDActionsUpdateServiceRequestBodyLoadBalancerService struct {
 	DestinationPort int64                                                                                       `json:"destination_port"`
 	HealthCheck     PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckLoadBalancerServiceHealthCheck `json:"health_check"`
-	HTTP            *PostLoadBalancersIDActionsUpdateServiceRequestBodyHTTP                                     `json:"http"`
+	HTTP            *PostLoadBalancersIDActionsUpdateServiceRequestBodyHTTP                                     `json:"http,omitempty"`
 	ListenPort      int64                                                                                       `json:"listen_port"`
 	Protocol        PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnum                              `json:"protocol"`
 	Proxyprotocol   bool                                                                                        `json:"proxyprotocol"`

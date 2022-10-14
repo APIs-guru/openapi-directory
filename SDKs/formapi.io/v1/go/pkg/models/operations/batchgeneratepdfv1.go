@@ -26,7 +26,7 @@ const (
 )
 
 type BatchGeneratePdfV1201ApplicationJSONCreateSubmissionResponse struct {
-	Errors     []string                                       `json:"errors"`
+	Errors     []string                                       `json:"errors,omitempty"`
 	Status     BatchGeneratePdfV1201ApplicationJSONStatusEnum `json:"status"`
 	Submission shared.Submission                              `json:"submission"`
 }

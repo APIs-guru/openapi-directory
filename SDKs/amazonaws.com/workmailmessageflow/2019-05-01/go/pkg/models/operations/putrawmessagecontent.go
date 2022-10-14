@@ -19,7 +19,7 @@ type PutRawMessageContentHeaders struct {
 }
 
 type PutRawMessageContentRequestBodyContent struct {
-	S3Reference *shared.S3Reference `json:"s3Reference"`
+	S3Reference *shared.S3Reference `json:"s3Reference,omitempty"`
 }
 
 type PutRawMessageContentRequestBody struct {

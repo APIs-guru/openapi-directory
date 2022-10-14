@@ -1,14 +1,14 @@
 package shared
 
 type Event struct {
-	ApplicableCoupons    []Coupon `json:"applicableCoupons"`
-	Description          *string  `json:"description"`
-	EndDate              *string  `json:"endDate"`
-	EventAffiliateWebURL *string  `json:"eventAffiliateWebUrl"`
-	EventID              *string  `json:"eventId"`
-	EventWebURL          *string  `json:"eventWebUrl"`
-	Images               []Image  `json:"images"`
-	StartDate            *string  `json:"startDate"`
-	Terms                *Terms   `json:"terms"`
-	Title                *string  `json:"title"`
+	ApplicableCoupons    []Coupon `json:"applicableCoupons,omitempty"`
+	Description          *string  `json:"description,omitempty"`
+	EndDate              *string  `json:"endDate,omitempty"`
+	EventAffiliateWebURL *string  `json:"eventAffiliateWebUrl,omitempty"`
+	EventID              *string  `json:"eventId,omitempty"`
+	EventWebURL          *string  `json:"eventWebUrl,omitempty"`
+	Images               []Image  `json:"images,omitempty"`
+	StartDate            *string  `json:"startDate,omitempty"`
+	Terms                *Terms   `json:"terms,omitempty"`
+	Title                *string  `json:"title,omitempty"`
 }

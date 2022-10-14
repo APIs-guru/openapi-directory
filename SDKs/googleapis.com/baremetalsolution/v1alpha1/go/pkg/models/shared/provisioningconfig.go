@@ -1,8 +1,8 @@
 package shared
 
 type ProvisioningConfig struct {
-	Instances []InstanceConfig `json:"instances"`
-	Networks  []NetworkConfig  `json:"networks"`
-	TicketID  *string          `json:"ticketId"`
-	Volumes   []VolumeConfig   `json:"volumes"`
+	Instances []InstanceConfig `json:"instances,omitempty"`
+	Networks  []NetworkConfig  `json:"networks,omitempty"`
+	TicketID  *string          `json:"ticketId,omitempty"`
+	Volumes   []VolumeConfig   `json:"volumes,omitempty"`
 }

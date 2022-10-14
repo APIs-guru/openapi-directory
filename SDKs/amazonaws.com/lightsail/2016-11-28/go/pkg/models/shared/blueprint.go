@@ -1,16 +1,16 @@
 package shared
 
 type Blueprint struct {
-	BlueprintID *string               `json:"blueprintId"`
-	Description *string               `json:"description"`
-	Group       *string               `json:"group"`
-	IsActive    *bool                 `json:"isActive"`
-	LicenseURL  *string               `json:"licenseUrl"`
-	MinPower    *int64                `json:"minPower"`
-	Name        *string               `json:"name"`
-	Platform    *InstancePlatformEnum `json:"platform"`
-	ProductURL  *string               `json:"productUrl"`
-	Type        *BlueprintTypeEnum    `json:"type"`
-	Version     *string               `json:"version"`
-	VersionCode *string               `json:"versionCode"`
+	BlueprintID *string               `json:"blueprintId,omitempty"`
+	Description *string               `json:"description,omitempty"`
+	Group       *string               `json:"group,omitempty"`
+	IsActive    *bool                 `json:"isActive,omitempty"`
+	LicenseURL  *string               `json:"licenseUrl,omitempty"`
+	MinPower    *int64                `json:"minPower,omitempty"`
+	Name        *string               `json:"name,omitempty"`
+	Platform    *InstancePlatformEnum `json:"platform,omitempty"`
+	ProductURL  *string               `json:"productUrl,omitempty"`
+	Type        *BlueprintTypeEnum    `json:"type,omitempty"`
+	Version     *string               `json:"version,omitempty"`
+	VersionCode *string               `json:"versionCode,omitempty"`
 }

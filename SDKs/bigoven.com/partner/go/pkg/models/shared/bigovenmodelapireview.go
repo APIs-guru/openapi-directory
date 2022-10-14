@@ -5,18 +5,18 @@ import (
 )
 
 type BigOvenModelAPIReview struct {
-	ActiveMinutes *int32                   `json:"ActiveMinutes"`
-	Comment       *string                  `json:"Comment"`
-	CreationDate  *time.Time               `json:"CreationDate"`
-	FeaturedReply *BigOvenModelAPIReply    `json:"FeaturedReply"`
-	GUID          *string                  `json:"GUID"`
-	ID            *string                  `json:"ID"`
-	LastModified  *time.Time               `json:"LastModified"`
-	ParentID      *int64                   `json:"ParentID"`
-	Poster        *BigOvenModelAPIUserInfo `json:"Poster"`
-	Replies       []BigOvenModelAPIReview  `json:"Replies"`
-	ReplyCount    *int32                   `json:"ReplyCount"`
-	ReviewID      *int64                   `json:"ReviewID"`
-	StarRating    *float64                 `json:"StarRating"`
-	TotalMinutes  *int32                   `json:"TotalMinutes"`
+	ActiveMinutes *int32                   `json:"ActiveMinutes,omitempty"`
+	Comment       *string                  `json:"Comment,omitempty"`
+	CreationDate  *time.Time               `json:"CreationDate,omitempty"`
+	FeaturedReply *BigOvenModelAPIReply    `json:"FeaturedReply,omitempty"`
+	GUID          *string                  `json:"GUID,omitempty"`
+	ID            *string                  `json:"ID,omitempty"`
+	LastModified  *time.Time               `json:"LastModified,omitempty"`
+	ParentID      *int64                   `json:"ParentID,omitempty"`
+	Poster        *BigOvenModelAPIUserInfo `json:"Poster,omitempty"`
+	Replies       []BigOvenModelAPIReview  `json:"Replies,omitempty"`
+	ReplyCount    *int32                   `json:"ReplyCount,omitempty"`
+	ReviewID      *int64                   `json:"ReviewID,omitempty"`
+	StarRating    *float64                 `json:"StarRating,omitempty"`
+	TotalMinutes  *int32                   `json:"TotalMinutes,omitempty"`
 }

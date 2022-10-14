@@ -19,7 +19,7 @@ type SearchPlaceIndexForPositionHeaders struct {
 }
 
 type SearchPlaceIndexForPositionRequestBody struct {
-	MaxResults *int64    `json:"MaxResults"`
+	MaxResults *int64    `json:"MaxResults,omitempty"`
 	Position   []float64 `json:"Position"`
 }
 

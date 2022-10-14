@@ -1,11 +1,11 @@
 package shared
 
 type Artwork struct {
-	AlbumArtFormat *string     `json:"AlbumArtFormat"`
-	Encryption     *Encryption `json:"Encryption"`
-	InputKey       *string     `json:"InputKey"`
-	MaxHeight      *string     `json:"MaxHeight"`
-	MaxWidth       *string     `json:"MaxWidth"`
-	PaddingPolicy  *string     `json:"PaddingPolicy"`
-	SizingPolicy   *string     `json:"SizingPolicy"`
+	AlbumArtFormat *string     `json:"AlbumArtFormat,omitempty"`
+	Encryption     *Encryption `json:"Encryption,omitempty"`
+	InputKey       *string     `json:"InputKey,omitempty"`
+	MaxHeight      *string     `json:"MaxHeight,omitempty"`
+	MaxWidth       *string     `json:"MaxWidth,omitempty"`
+	PaddingPolicy  *string     `json:"PaddingPolicy,omitempty"`
+	SizingPolicy   *string     `json:"SizingPolicy,omitempty"`
 }

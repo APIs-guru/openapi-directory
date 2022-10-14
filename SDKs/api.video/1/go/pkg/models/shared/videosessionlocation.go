@@ -1,6 +1,6 @@
 package shared
 
 type VideoSessionLocation struct {
-	City    *string `json:"city"`
-	Country *string `json:"country"`
+	City    *string `json:"city,omitempty"`
+	Country *string `json:"country,omitempty"`
 }

@@ -11,7 +11,7 @@ const (
 )
 
 type NonBillableWinningBidStatusRow struct {
-	BidCount      *MetricValue                              `json:"bidCount"`
-	RowDimensions *RowDimensions                            `json:"rowDimensions"`
-	Status        *NonBillableWinningBidStatusRowStatusEnum `json:"status"`
+	BidCount      *MetricValue                              `json:"bidCount,omitempty"`
+	RowDimensions *RowDimensions                            `json:"rowDimensions,omitempty"`
+	Status        *NonBillableWinningBidStatusRowStatusEnum `json:"status,omitempty"`
 }

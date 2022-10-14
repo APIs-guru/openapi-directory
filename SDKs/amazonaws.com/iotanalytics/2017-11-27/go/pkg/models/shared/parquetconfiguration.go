@@ -1,5 +1,5 @@
 package shared
 
 type ParquetConfiguration struct {
-	SchemaDefinition *SchemaDefinition `json:"schemaDefinition"`
+	SchemaDefinition *SchemaDefinition `json:"schemaDefinition,omitempty"`
 }

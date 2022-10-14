@@ -5,7 +5,7 @@ import (
 )
 
 type PatientIdentificationRequestQueryPatient struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type PatientIdentificationRequestQueryRequesterTypeEnum string
@@ -16,8 +16,8 @@ const (
 )
 
 type PatientIdentificationRequestQueryRequester struct {
-	ID   *string                                             `json:"id"`
-	Type *PatientIdentificationRequestQueryRequesterTypeEnum `json:"type"`
+	ID   *string                                             `json:"id,omitempty"`
+	Type *PatientIdentificationRequestQueryRequesterTypeEnum `json:"type,omitempty"`
 }
 
 type PatientIdentificationRequestQuery struct {

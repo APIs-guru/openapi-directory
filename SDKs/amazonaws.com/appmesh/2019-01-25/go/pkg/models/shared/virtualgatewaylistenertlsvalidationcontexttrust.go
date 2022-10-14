@@ -1,6 +1,6 @@
 package shared
 
 type VirtualGatewayListenerTLSValidationContextTrust struct {
-	File *VirtualGatewayTLSValidationContextFileTrust `json:"file"`
-	Sds  *VirtualGatewayTLSValidationContextSdsTrust  `json:"sds"`
+	File *VirtualGatewayTLSValidationContextFileTrust `json:"file,omitempty"`
+	Sds  *VirtualGatewayTLSValidationContextSdsTrust  `json:"sds,omitempty"`
 }

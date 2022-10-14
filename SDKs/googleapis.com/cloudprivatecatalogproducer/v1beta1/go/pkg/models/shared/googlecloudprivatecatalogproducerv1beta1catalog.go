@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudPrivatecatalogproducerV1beta1Catalog struct {
-	CreateTime  *string `json:"createTime"`
-	Description *string `json:"description"`
-	DisplayName *string `json:"displayName"`
-	Name        *string `json:"name"`
-	Parent      *string `json:"parent"`
-	UpdateTime  *string `json:"updateTime"`
+	CreateTime  *string `json:"createTime,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Parent      *string `json:"parent,omitempty"`
+	UpdateTime  *string `json:"updateTime,omitempty"`
 }

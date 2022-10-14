@@ -1,5 +1,5 @@
 package shared
 
 type Query struct {
-	Selectors []Selector `json:"selectors"`
+	Selectors []Selector `json:"selectors,omitempty"`
 }

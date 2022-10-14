@@ -1,7 +1,7 @@
 package shared
 
 type AccountAutomaticImprovements struct {
-	ImageImprovements    *AccountImageImprovements    `json:"imageImprovements"`
-	ItemUpdates          *AccountItemUpdates          `json:"itemUpdates"`
-	ShippingImprovements *AccountShippingImprovements `json:"shippingImprovements"`
+	ImageImprovements    *AccountImageImprovements    `json:"imageImprovements,omitempty"`
+	ItemUpdates          *AccountItemUpdates          `json:"itemUpdates,omitempty"`
+	ShippingImprovements *AccountShippingImprovements `json:"shippingImprovements,omitempty"`
 }

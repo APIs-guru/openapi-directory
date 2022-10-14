@@ -5,8 +5,8 @@ import (
 )
 
 type DatasetSummary struct {
-	CreatedAt   *time.Time         `json:"CreatedAt"`
-	DatasetArn  *string            `json:"DatasetArn"`
-	DatasetName *string            `json:"DatasetName"`
-	Status      *DatasetStatusEnum `json:"Status"`
+	CreatedAt   *time.Time         `json:"CreatedAt,omitempty"`
+	DatasetArn  *string            `json:"DatasetArn,omitempty"`
+	DatasetName *string            `json:"DatasetName,omitempty"`
+	Status      *DatasetStatusEnum `json:"Status,omitempty"`
 }

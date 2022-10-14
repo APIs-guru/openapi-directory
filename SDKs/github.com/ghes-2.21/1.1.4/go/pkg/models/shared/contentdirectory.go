@@ -8,7 +8,7 @@ type ContentDirectoryLinks struct {
 
 type ContentDirectory struct {
 	Links       ContentDirectoryLinks `json:"_links"`
-	Content     *string               `json:"content"`
+	Content     *string               `json:"content,omitempty"`
 	DownloadURL string                `json:"download_url"`
 	GitURL      string                `json:"git_url"`
 	HTMLURL     string                `json:"html_url"`

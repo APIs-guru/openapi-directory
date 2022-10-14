@@ -5,7 +5,7 @@ import (
 )
 
 type UserSetupProgress struct {
-	CompletedSteps []string   `json:"completedSteps"`
-	Timestamp      *time.Time `json:"timestamp"`
-	UserID         *string    `json:"userId"`
+	CompletedSteps []string   `json:"completedSteps,omitempty"`
+	Timestamp      *time.Time `json:"timestamp,omitempty"`
+	UserID         *string    `json:"userId,omitempty"`
 }

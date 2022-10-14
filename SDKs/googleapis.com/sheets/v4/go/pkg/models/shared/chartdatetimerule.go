@@ -22,5 +22,5 @@ const (
 )
 
 type ChartDateTimeRule struct {
-	Type *ChartDateTimeRuleTypeEnum `json:"type"`
+	Type *ChartDateTimeRuleTypeEnum `json:"type,omitempty"`
 }

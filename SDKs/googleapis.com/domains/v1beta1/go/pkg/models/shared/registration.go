@@ -57,18 +57,18 @@ const (
 )
 
 type Registration struct {
-	ContactSettings        *ContactSettings                       `json:"contactSettings"`
-	CreateTime             *string                                `json:"createTime"`
-	DNSSettings            *DNSSettings                           `json:"dnsSettings"`
-	DomainName             *string                                `json:"domainName"`
-	ExpireTime             *string                                `json:"expireTime"`
-	Issues                 []RegistrationIssuesEnum               `json:"issues"`
-	Labels                 map[string]string                      `json:"labels"`
-	ManagementSettings     *ManagementSettings                    `json:"managementSettings"`
-	Name                   *string                                `json:"name"`
-	PendingContactSettings *ContactSettings                       `json:"pendingContactSettings"`
-	RegisterFailureReason  *RegistrationRegisterFailureReasonEnum `json:"registerFailureReason"`
-	State                  *RegistrationStateEnum                 `json:"state"`
-	SupportedPrivacy       []RegistrationSupportedPrivacyEnum     `json:"supportedPrivacy"`
-	TransferFailureReason  *RegistrationTransferFailureReasonEnum `json:"transferFailureReason"`
+	ContactSettings        *ContactSettings                       `json:"contactSettings,omitempty"`
+	CreateTime             *string                                `json:"createTime,omitempty"`
+	DNSSettings            *DNSSettings                           `json:"dnsSettings,omitempty"`
+	DomainName             *string                                `json:"domainName,omitempty"`
+	ExpireTime             *string                                `json:"expireTime,omitempty"`
+	Issues                 []RegistrationIssuesEnum               `json:"issues,omitempty"`
+	Labels                 map[string]string                      `json:"labels,omitempty"`
+	ManagementSettings     *ManagementSettings                    `json:"managementSettings,omitempty"`
+	Name                   *string                                `json:"name,omitempty"`
+	PendingContactSettings *ContactSettings                       `json:"pendingContactSettings,omitempty"`
+	RegisterFailureReason  *RegistrationRegisterFailureReasonEnum `json:"registerFailureReason,omitempty"`
+	State                  *RegistrationStateEnum                 `json:"state,omitempty"`
+	SupportedPrivacy       []RegistrationSupportedPrivacyEnum     `json:"supportedPrivacy,omitempty"`
+	TransferFailureReason  *RegistrationTransferFailureReasonEnum `json:"transferFailureReason,omitempty"`
 }

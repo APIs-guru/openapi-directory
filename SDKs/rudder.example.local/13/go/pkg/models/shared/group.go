@@ -13,26 +13,26 @@ const (
 )
 
 type GroupQueryWhere struct {
-	Attribute  *string `json:"attribute"`
-	Comparator *string `json:"comparator"`
-	ObjectType *string `json:"objectType"`
-	Value      *string `json:"value"`
+	Attribute  *string `json:"attribute,omitempty"`
+	Comparator *string `json:"comparator,omitempty"`
+	ObjectType *string `json:"objectType,omitempty"`
+	Value      *string `json:"value,omitempty"`
 }
 
 type GroupQuery struct {
-	Composition *GroupQueryCompositionEnum `json:"composition"`
-	Select      *string                    `json:"select"`
-	Where       []GroupQueryWhere          `json:"where"`
+	Composition *GroupQueryCompositionEnum `json:"composition,omitempty"`
+	Select      *string                    `json:"select,omitempty"`
+	Where       []GroupQueryWhere          `json:"where,omitempty"`
 }
 
 type Group struct {
-	Description *string           `json:"description"`
-	DisplayName *string           `json:"displayName"`
-	Dynamic     *bool             `json:"dynamic"`
-	Enabled     *bool             `json:"enabled"`
-	GroupClass  []string          `json:"groupClass"`
-	ID          *string           `json:"id"`
-	NodeIds     []string          `json:"nodeIds"`
-	Properties  []GroupProperties `json:"properties"`
-	Query       *GroupQuery       `json:"query"`
+	Description *string           `json:"description,omitempty"`
+	DisplayName *string           `json:"displayName,omitempty"`
+	Dynamic     *bool             `json:"dynamic,omitempty"`
+	Enabled     *bool             `json:"enabled,omitempty"`
+	GroupClass  []string          `json:"groupClass,omitempty"`
+	ID          *string           `json:"id,omitempty"`
+	NodeIds     []string          `json:"nodeIds,omitempty"`
+	Properties  []GroupProperties `json:"properties,omitempty"`
+	Query       *GroupQuery       `json:"query,omitempty"`
 }

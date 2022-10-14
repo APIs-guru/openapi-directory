@@ -1,7 +1,7 @@
 package shared
 
 type APIModelsUserEffectivePermission struct {
-	PermissionID   *int32  `json:"PermissionId"`
-	PermissionName *string `json:"PermissionName"`
-	UserID         *int32  `json:"UserID"`
+	PermissionID   *int32  `json:"PermissionId,omitempty"`
+	PermissionName *string `json:"PermissionName,omitempty"`
+	UserID         *int32  `json:"UserID,omitempty"`
 }

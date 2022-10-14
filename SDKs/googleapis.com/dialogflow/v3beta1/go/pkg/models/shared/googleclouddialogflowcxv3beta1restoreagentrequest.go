@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1RestoreAgentRequest struct {
-	AgentContent  *string                                                             `json:"agentContent"`
-	AgentURI      *string                                                             `json:"agentUri"`
-	RestoreOption *GoogleCloudDialogflowCxV3beta1RestoreAgentRequestRestoreOptionEnum `json:"restoreOption"`
+	AgentContent  *string                                                             `json:"agentContent,omitempty"`
+	AgentURI      *string                                                             `json:"agentUri,omitempty"`
+	RestoreOption *GoogleCloudDialogflowCxV3beta1RestoreAgentRequestRestoreOptionEnum `json:"restoreOption,omitempty"`
 }

@@ -8,5 +8,5 @@ const (
 )
 
 type Restore struct {
-	Type *RestoreTypeEnum `json:"type"`
+	Type *RestoreTypeEnum `json:"type,omitempty"`
 }

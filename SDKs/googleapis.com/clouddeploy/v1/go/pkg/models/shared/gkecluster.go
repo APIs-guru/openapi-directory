@@ -1,6 +1,6 @@
 package shared
 
 type GkeCluster struct {
-	Cluster    *string `json:"cluster"`
-	InternalIP *bool   `json:"internalIp"`
+	Cluster    *string `json:"cluster,omitempty"`
+	InternalIP *bool   `json:"internalIp,omitempty"`
 }

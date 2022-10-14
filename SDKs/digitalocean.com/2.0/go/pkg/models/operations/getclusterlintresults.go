@@ -19,29 +19,29 @@ type GetClusterlintResultsRequest struct {
 }
 
 type GetClusterlintResults200ApplicationJSONDiagnosticsObject struct {
-	Kind      *string `json:"kind"`
-	Name      *string `json:"name"`
-	Namespace *string `json:"namespace"`
+	Kind      *string `json:"kind,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Namespace *string `json:"namespace,omitempty"`
 }
 
 type GetClusterlintResults200ApplicationJSONDiagnostics struct {
-	CheckName *string                                                   `json:"check_name"`
-	Message   *string                                                   `json:"message"`
-	Object    *GetClusterlintResults200ApplicationJSONDiagnosticsObject `json:"object"`
-	Severity  *string                                                   `json:"severity"`
+	CheckName *string                                                   `json:"check_name,omitempty"`
+	Message   *string                                                   `json:"message,omitempty"`
+	Object    *GetClusterlintResults200ApplicationJSONDiagnosticsObject `json:"object,omitempty"`
+	Severity  *string                                                   `json:"severity,omitempty"`
 }
 
 type GetClusterlintResults200ApplicationJSON struct {
-	CompletedAt *time.Time                                           `json:"completed_at"`
-	Diagnostics []GetClusterlintResults200ApplicationJSONDiagnostics `json:"diagnostics"`
-	RequestedAt *time.Time                                           `json:"requested_at"`
-	RunID       *string                                              `json:"run_id"`
+	CompletedAt *time.Time                                           `json:"completed_at,omitempty"`
+	Diagnostics []GetClusterlintResults200ApplicationJSONDiagnostics `json:"diagnostics,omitempty"`
+	RequestedAt *time.Time                                           `json:"requested_at,omitempty"`
+	RunID       *string                                              `json:"run_id,omitempty"`
 }
 
 type GetClusterlintResults401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetClusterlintResultsResponse struct {

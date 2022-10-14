@@ -27,13 +27,13 @@ const (
 )
 
 type ListPrincipalsRequestBody struct {
-	MaxResults        *int64                                     `json:"maxResults"`
-	NextToken         *string                                    `json:"nextToken"`
-	Principals        []string                                   `json:"principals"`
-	ResourceArn       *string                                    `json:"resourceArn"`
+	MaxResults        *int64                                     `json:"maxResults,omitempty"`
+	NextToken         *string                                    `json:"nextToken,omitempty"`
+	Principals        []string                                   `json:"principals,omitempty"`
+	ResourceArn       *string                                    `json:"resourceArn,omitempty"`
 	ResourceOwner     ListPrincipalsRequestBodyResourceOwnerEnum `json:"resourceOwner"`
-	ResourceShareArns []string                                   `json:"resourceShareArns"`
-	ResourceType      *string                                    `json:"resourceType"`
+	ResourceShareArns []string                                   `json:"resourceShareArns,omitempty"`
+	ResourceType      *string                                    `json:"resourceType,omitempty"`
 }
 
 type ListPrincipalsRequest struct {

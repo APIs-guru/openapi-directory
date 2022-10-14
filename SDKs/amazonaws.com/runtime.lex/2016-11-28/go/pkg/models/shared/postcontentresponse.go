@@ -1,5 +1,5 @@
 package shared
 
 type PostContentResponse struct {
-	AudioStream *string `json:"audioStream"`
+	AudioStream *string `json:"audioStream,omitempty"`
 }

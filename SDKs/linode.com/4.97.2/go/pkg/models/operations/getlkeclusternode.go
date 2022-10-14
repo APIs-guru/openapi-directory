@@ -35,17 +35,17 @@ const (
 )
 
 type GetLkeClusterNode200ApplicationJSONData struct {
-	ID         *string                                            `json:"id"`
-	InstanceID *int64                                             `json:"instance_id"`
-	Status     *GetLkeClusterNode200ApplicationJSONDataStatusEnum `json:"status"`
+	ID         *string                                            `json:"id,omitempty"`
+	InstanceID *int64                                             `json:"instance_id,omitempty"`
+	Status     *GetLkeClusterNode200ApplicationJSONDataStatusEnum `json:"status,omitempty"`
 }
 
 type GetLkeClusterNode200ApplicationJSON struct {
-	Data *GetLkeClusterNode200ApplicationJSONData `json:"data"`
+	Data *GetLkeClusterNode200ApplicationJSONData `json:"data,omitempty"`
 }
 
 type GetLkeClusterNodeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLkeClusterNodeResponse struct {

@@ -64,18 +64,18 @@ const (
 )
 
 type MinimizedContact struct {
-	ContactlessCheckinCheckout                *bool                                                          `json:"contactlessCheckinCheckout"`
-	ContactlessCheckinCheckoutException       *MinimizedContactContactlessCheckinCheckoutExceptionEnum       `json:"contactlessCheckinCheckoutException"`
-	DigitalGuestRoomKeys                      *bool                                                          `json:"digitalGuestRoomKeys"`
-	DigitalGuestRoomKeysException             *MinimizedContactDigitalGuestRoomKeysExceptionEnum             `json:"digitalGuestRoomKeysException"`
-	HousekeepingScheduledRequestOnly          *bool                                                          `json:"housekeepingScheduledRequestOnly"`
-	HousekeepingScheduledRequestOnlyException *MinimizedContactHousekeepingScheduledRequestOnlyExceptionEnum `json:"housekeepingScheduledRequestOnlyException"`
-	NoHighTouchItemsCommonAreas               *bool                                                          `json:"noHighTouchItemsCommonAreas"`
-	NoHighTouchItemsCommonAreasException      *MinimizedContactNoHighTouchItemsCommonAreasExceptionEnum      `json:"noHighTouchItemsCommonAreasException"`
-	NoHighTouchItemsGuestRooms                *bool                                                          `json:"noHighTouchItemsGuestRooms"`
-	NoHighTouchItemsGuestRoomsException       *MinimizedContactNoHighTouchItemsGuestRoomsExceptionEnum       `json:"noHighTouchItemsGuestRoomsException"`
-	PlasticKeycardsDisinfected                *bool                                                          `json:"plasticKeycardsDisinfected"`
-	PlasticKeycardsDisinfectedException       *MinimizedContactPlasticKeycardsDisinfectedExceptionEnum       `json:"plasticKeycardsDisinfectedException"`
-	RoomBookingsBuffer                        *bool                                                          `json:"roomBookingsBuffer"`
-	RoomBookingsBufferException               *MinimizedContactRoomBookingsBufferExceptionEnum               `json:"roomBookingsBufferException"`
+	ContactlessCheckinCheckout                *bool                                                          `json:"contactlessCheckinCheckout,omitempty"`
+	ContactlessCheckinCheckoutException       *MinimizedContactContactlessCheckinCheckoutExceptionEnum       `json:"contactlessCheckinCheckoutException,omitempty"`
+	DigitalGuestRoomKeys                      *bool                                                          `json:"digitalGuestRoomKeys,omitempty"`
+	DigitalGuestRoomKeysException             *MinimizedContactDigitalGuestRoomKeysExceptionEnum             `json:"digitalGuestRoomKeysException,omitempty"`
+	HousekeepingScheduledRequestOnly          *bool                                                          `json:"housekeepingScheduledRequestOnly,omitempty"`
+	HousekeepingScheduledRequestOnlyException *MinimizedContactHousekeepingScheduledRequestOnlyExceptionEnum `json:"housekeepingScheduledRequestOnlyException,omitempty"`
+	NoHighTouchItemsCommonAreas               *bool                                                          `json:"noHighTouchItemsCommonAreas,omitempty"`
+	NoHighTouchItemsCommonAreasException      *MinimizedContactNoHighTouchItemsCommonAreasExceptionEnum      `json:"noHighTouchItemsCommonAreasException,omitempty"`
+	NoHighTouchItemsGuestRooms                *bool                                                          `json:"noHighTouchItemsGuestRooms,omitempty"`
+	NoHighTouchItemsGuestRoomsException       *MinimizedContactNoHighTouchItemsGuestRoomsExceptionEnum       `json:"noHighTouchItemsGuestRoomsException,omitempty"`
+	PlasticKeycardsDisinfected                *bool                                                          `json:"plasticKeycardsDisinfected,omitempty"`
+	PlasticKeycardsDisinfectedException       *MinimizedContactPlasticKeycardsDisinfectedExceptionEnum       `json:"plasticKeycardsDisinfectedException,omitempty"`
+	RoomBookingsBuffer                        *bool                                                          `json:"roomBookingsBuffer,omitempty"`
+	RoomBookingsBufferException               *MinimizedContactRoomBookingsBufferExceptionEnum               `json:"roomBookingsBufferException,omitempty"`
 }

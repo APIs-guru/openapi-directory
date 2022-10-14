@@ -32,7 +32,7 @@ type ResizeVolumeRequest struct {
 }
 
 type ResizeVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ResizeVolumeResponse struct {

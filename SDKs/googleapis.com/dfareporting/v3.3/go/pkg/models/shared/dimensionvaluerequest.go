@@ -5,9 +5,9 @@ import (
 )
 
 type DimensionValueRequest struct {
-	DimensionName *string           `json:"dimensionName"`
-	EndDate       *time.Time        `json:"endDate"`
-	Filters       []DimensionFilter `json:"filters"`
-	Kind          *string           `json:"kind"`
-	StartDate     *time.Time        `json:"startDate"`
+	DimensionName *string           `json:"dimensionName,omitempty"`
+	EndDate       *time.Time        `json:"endDate,omitempty"`
+	Filters       []DimensionFilter `json:"filters,omitempty"`
+	Kind          *string           `json:"kind,omitempty"`
+	StartDate     *time.Time        `json:"startDate,omitempty"`
 }

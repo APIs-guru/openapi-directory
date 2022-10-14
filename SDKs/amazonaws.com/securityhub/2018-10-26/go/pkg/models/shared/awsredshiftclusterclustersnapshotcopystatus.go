@@ -1,8 +1,8 @@
 package shared
 
 type AwsRedshiftClusterClusterSnapshotCopyStatus struct {
-	DestinationRegion             *string `json:"DestinationRegion"`
-	ManualSnapshotRetentionPeriod *int64  `json:"ManualSnapshotRetentionPeriod"`
-	RetentionPeriod               *int64  `json:"RetentionPeriod"`
-	SnapshotCopyGrantName         *string `json:"SnapshotCopyGrantName"`
+	DestinationRegion             *string `json:"DestinationRegion,omitempty"`
+	ManualSnapshotRetentionPeriod *int64  `json:"ManualSnapshotRetentionPeriod,omitempty"`
+	RetentionPeriod               *int64  `json:"RetentionPeriod,omitempty"`
+	SnapshotCopyGrantName         *string `json:"SnapshotCopyGrantName,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type GenerateDataKeyPairResponse struct {
-	KeyID                    *string              `json:"KeyId"`
-	KeyPairSpec              *DataKeyPairSpecEnum `json:"KeyPairSpec"`
-	PrivateKeyCiphertextBlob *string              `json:"PrivateKeyCiphertextBlob"`
-	PrivateKeyPlaintext      *string              `json:"PrivateKeyPlaintext"`
-	PublicKey                *string              `json:"PublicKey"`
+	KeyID                    *string              `json:"KeyId,omitempty"`
+	KeyPairSpec              *DataKeyPairSpecEnum `json:"KeyPairSpec,omitempty"`
+	PrivateKeyCiphertextBlob *string              `json:"PrivateKeyCiphertextBlob,omitempty"`
+	PrivateKeyPlaintext      *string              `json:"PrivateKeyPlaintext,omitempty"`
+	PublicKey                *string              `json:"PublicKey,omitempty"`
 }

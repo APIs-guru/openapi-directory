@@ -14,14 +14,14 @@ const (
 )
 
 type Container struct {
-	AccountID     *string                     `json:"accountId"`
-	ContainerID   *string                     `json:"containerId"`
-	DomainName    []string                    `json:"domainName"`
-	Fingerprint   *string                     `json:"fingerprint"`
-	Name          *string                     `json:"name"`
-	Notes         *string                     `json:"notes"`
-	Path          *string                     `json:"path"`
-	PublicID      *string                     `json:"publicId"`
-	TagManagerURL *string                     `json:"tagManagerUrl"`
-	UsageContext  []ContainerUsageContextEnum `json:"usageContext"`
+	AccountID     *string                     `json:"accountId,omitempty"`
+	ContainerID   *string                     `json:"containerId,omitempty"`
+	DomainName    []string                    `json:"domainName,omitempty"`
+	Fingerprint   *string                     `json:"fingerprint,omitempty"`
+	Name          *string                     `json:"name,omitempty"`
+	Notes         *string                     `json:"notes,omitempty"`
+	Path          *string                     `json:"path,omitempty"`
+	PublicID      *string                     `json:"publicId,omitempty"`
+	TagManagerURL *string                     `json:"tagManagerUrl,omitempty"`
+	UsageContext  []ContainerUsageContextEnum `json:"usageContext,omitempty"`
 }

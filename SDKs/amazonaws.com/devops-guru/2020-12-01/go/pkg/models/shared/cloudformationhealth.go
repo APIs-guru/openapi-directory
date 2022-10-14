@@ -1,6 +1,6 @@
 package shared
 
 type CloudFormationHealth struct {
-	Insight   *InsightHealth `json:"Insight"`
-	StackName *string        `json:"StackName"`
+	Insight   *InsightHealth `json:"Insight,omitempty"`
+	StackName *string        `json:"StackName,omitempty"`
 }

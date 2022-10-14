@@ -22,15 +22,15 @@ const (
 )
 
 type GetScriptTags200ApplicationJSONScriptTags struct {
-	DisplayScope *GetScriptTags200ApplicationJSONScriptTagsDisplayScopeEnum `json:"display_scope"`
-	ID           *int64                                                     `json:"id"`
-	MakeDate     *int64                                                     `json:"make_date"`
-	Src          *string                                                    `json:"src"`
-	UpdateDate   *int64                                                     `json:"update_date"`
+	DisplayScope *GetScriptTags200ApplicationJSONScriptTagsDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID           *int64                                                     `json:"id,omitempty"`
+	MakeDate     *int64                                                     `json:"make_date,omitempty"`
+	Src          *string                                                    `json:"src,omitempty"`
+	UpdateDate   *int64                                                     `json:"update_date,omitempty"`
 }
 
 type GetScriptTags200ApplicationJSON struct {
-	ScriptTags []GetScriptTags200ApplicationJSONScriptTags `json:"script_tags"`
+	ScriptTags []GetScriptTags200ApplicationJSONScriptTags `json:"script_tags,omitempty"`
 }
 
 type GetScriptTagsResponse struct {

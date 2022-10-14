@@ -1,11 +1,11 @@
 package shared
 
 type UpdateProvisioningArtifactInput struct {
-	AcceptLanguage         *string                           `json:"AcceptLanguage"`
-	Active                 *bool                             `json:"Active"`
-	Description            *string                           `json:"Description"`
-	Guidance               *ProvisioningArtifactGuidanceEnum `json:"Guidance"`
-	Name                   *string                           `json:"Name"`
+	AcceptLanguage         *string                           `json:"AcceptLanguage,omitempty"`
+	Active                 *bool                             `json:"Active,omitempty"`
+	Description            *string                           `json:"Description,omitempty"`
+	Guidance               *ProvisioningArtifactGuidanceEnum `json:"Guidance,omitempty"`
+	Name                   *string                           `json:"Name,omitempty"`
 	ProductID              string                            `json:"ProductId"`
 	ProvisioningArtifactID string                            `json:"ProvisioningArtifactId"`
 }

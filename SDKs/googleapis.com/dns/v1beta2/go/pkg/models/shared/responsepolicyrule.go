@@ -8,9 +8,9 @@ const (
 )
 
 type ResponsePolicyRule struct {
-	Behavior  *ResponsePolicyRuleBehaviorEnum `json:"behavior"`
-	DNSName   *string                         `json:"dnsName"`
-	Kind      *string                         `json:"kind"`
-	LocalData *ResponsePolicyRuleLocalData    `json:"localData"`
-	RuleName  *string                         `json:"ruleName"`
+	Behavior  *ResponsePolicyRuleBehaviorEnum `json:"behavior,omitempty"`
+	DNSName   *string                         `json:"dnsName,omitempty"`
+	Kind      *string                         `json:"kind,omitempty"`
+	LocalData *ResponsePolicyRuleLocalData    `json:"localData,omitempty"`
+	RuleName  *string                         `json:"ruleName,omitempty"`
 }

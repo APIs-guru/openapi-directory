@@ -1,7 +1,7 @@
 package shared
 
 type FileCommentEntity struct {
-	Body      *string                    `json:"body"`
-	ID        *int32                     `json:"id"`
-	Reactions *FileCommentReactionEntity `json:"reactions"`
+	Body      *string                    `json:"body,omitempty"`
+	ID        *int32                     `json:"id,omitempty"`
+	Reactions *FileCommentReactionEntity `json:"reactions,omitempty"`
 }

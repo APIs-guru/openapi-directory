@@ -20,19 +20,19 @@ type ListFindingsHeaders struct {
 }
 
 type ListFindingsRequestBodyFindingCriteria struct {
-	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion"`
+	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion,omitempty"`
 }
 
 type ListFindingsRequestBodySortCriteria struct {
-	AttributeName *string             `json:"attributeName"`
-	OrderBy       *shared.OrderByEnum `json:"orderBy"`
+	AttributeName *string             `json:"attributeName,omitempty"`
+	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`
 }
 
 type ListFindingsRequestBody struct {
-	FindingCriteria *ListFindingsRequestBodyFindingCriteria `json:"findingCriteria"`
-	MaxResults      *int64                                  `json:"maxResults"`
-	NextToken       *string                                 `json:"nextToken"`
-	SortCriteria    *ListFindingsRequestBodySortCriteria    `json:"sortCriteria"`
+	FindingCriteria *ListFindingsRequestBodyFindingCriteria `json:"findingCriteria,omitempty"`
+	MaxResults      *int64                                  `json:"maxResults,omitempty"`
+	NextToken       *string                                 `json:"nextToken,omitempty"`
+	SortCriteria    *ListFindingsRequestBodySortCriteria    `json:"sortCriteria,omitempty"`
 }
 
 type ListFindingsRequest struct {

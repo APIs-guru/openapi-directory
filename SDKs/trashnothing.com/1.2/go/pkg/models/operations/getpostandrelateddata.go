@@ -32,18 +32,18 @@ type GetPostAndRelatedDataRequest struct {
 }
 
 type GetPostAndRelatedData200ApplicationJSON struct {
-	Author            *shared.User            `json:"author"`
-	AuthorOfferCount  *int64                  `json:"author_offer_count"`
-	AuthorPosts       []shared.Post           `json:"author_posts"`
-	AuthorWantedCount *int64                  `json:"author_wanted_count"`
-	Bookmarked        *bool                   `json:"bookmarked"`
-	Feedback          []shared.Feedback       `json:"feedback"`
-	GeolocateBounds   *shared.GeolocateBounds `json:"geolocate_bounds"`
-	Groups            []shared.Group          `json:"groups"`
-	Post              *shared.Post            `json:"post"`
-	Replied           *bool                   `json:"replied"`
-	UserCanReply      *bool                   `json:"user_can_reply"`
-	Viewed            *bool                   `json:"viewed"`
+	Author            *shared.User            `json:"author,omitempty"`
+	AuthorOfferCount  *int64                  `json:"author_offer_count,omitempty"`
+	AuthorPosts       []shared.Post           `json:"author_posts,omitempty"`
+	AuthorWantedCount *int64                  `json:"author_wanted_count,omitempty"`
+	Bookmarked        *bool                   `json:"bookmarked,omitempty"`
+	Feedback          []shared.Feedback       `json:"feedback,omitempty"`
+	GeolocateBounds   *shared.GeolocateBounds `json:"geolocate_bounds,omitempty"`
+	Groups            []shared.Group          `json:"groups,omitempty"`
+	Post              *shared.Post            `json:"post,omitempty"`
+	Replied           *bool                   `json:"replied,omitempty"`
+	UserCanReply      *bool                   `json:"user_can_reply,omitempty"`
+	Viewed            *bool                   `json:"viewed,omitempty"`
 }
 
 type GetPostAndRelatedDataResponse struct {

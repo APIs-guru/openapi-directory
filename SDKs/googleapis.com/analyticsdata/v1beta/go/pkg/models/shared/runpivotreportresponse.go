@@ -1,12 +1,12 @@
 package shared
 
 type RunPivotReportResponse struct {
-	Aggregates       []Row             `json:"aggregates"`
-	DimensionHeaders []DimensionHeader `json:"dimensionHeaders"`
-	Kind             *string           `json:"kind"`
-	Metadata         *ResponseMetaData `json:"metadata"`
-	MetricHeaders    []MetricHeader    `json:"metricHeaders"`
-	PivotHeaders     []PivotHeader     `json:"pivotHeaders"`
-	PropertyQuota    *PropertyQuota    `json:"propertyQuota"`
-	Rows             []Row             `json:"rows"`
+	Aggregates       []Row             `json:"aggregates,omitempty"`
+	DimensionHeaders []DimensionHeader `json:"dimensionHeaders,omitempty"`
+	Kind             *string           `json:"kind,omitempty"`
+	Metadata         *ResponseMetaData `json:"metadata,omitempty"`
+	MetricHeaders    []MetricHeader    `json:"metricHeaders,omitempty"`
+	PivotHeaders     []PivotHeader     `json:"pivotHeaders,omitempty"`
+	PropertyQuota    *PropertyQuota    `json:"propertyQuota,omitempty"`
+	Rows             []Row             `json:"rows,omitempty"`
 }

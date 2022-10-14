@@ -1,6 +1,6 @@
 package shared
 
 type ReplaceAccessLevelsRequest struct {
-	AccessLevels []AccessLevel `json:"accessLevels"`
-	Etag         *string       `json:"etag"`
+	AccessLevels []AccessLevel `json:"accessLevels,omitempty"`
+	Etag         *string       `json:"etag,omitempty"`
 }

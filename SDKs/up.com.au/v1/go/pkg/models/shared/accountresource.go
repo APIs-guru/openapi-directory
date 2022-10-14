@@ -20,7 +20,7 @@ type AccountResourceRelationshipsTransactionsLinks struct {
 }
 
 type AccountResourceRelationshipsTransactions struct {
-	Links *AccountResourceRelationshipsTransactionsLinks `json:"links"`
+	Links *AccountResourceRelationshipsTransactionsLinks `json:"links,omitempty"`
 }
 
 type AccountResourceRelationships struct {
@@ -30,7 +30,7 @@ type AccountResourceRelationships struct {
 type AccountResource struct {
 	Attributes    AccountResourceAttributes    `json:"attributes"`
 	ID            string                       `json:"id"`
-	Links         *AccountResourceLinks        `json:"links"`
+	Links         *AccountResourceLinks        `json:"links,omitempty"`
 	Relationships AccountResourceRelationships `json:"relationships"`
 	Type          string                       `json:"type"`
 }

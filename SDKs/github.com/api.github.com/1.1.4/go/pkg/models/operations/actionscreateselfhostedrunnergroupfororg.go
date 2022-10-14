@@ -18,9 +18,9 @@ const (
 
 type ActionsCreateSelfHostedRunnerGroupForOrgRequestBody struct {
 	Name                  string                                                             `json:"name"`
-	Runners               []int64                                                            `json:"runners"`
-	SelectedRepositoryIds []int64                                                            `json:"selected_repository_ids"`
-	Visibility            *ActionsCreateSelfHostedRunnerGroupForOrgRequestBodyVisibilityEnum `json:"visibility"`
+	Runners               []int64                                                            `json:"runners,omitempty"`
+	SelectedRepositoryIds []int64                                                            `json:"selected_repository_ids,omitempty"`
+	Visibility            *ActionsCreateSelfHostedRunnerGroupForOrgRequestBodyVisibilityEnum `json:"visibility,omitempty"`
 }
 
 type ActionsCreateSelfHostedRunnerGroupForOrgRequest struct {

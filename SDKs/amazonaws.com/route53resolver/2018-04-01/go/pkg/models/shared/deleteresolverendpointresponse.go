@@ -1,5 +1,5 @@
 package shared
 
 type DeleteResolverEndpointResponse struct {
-	ResolverEndpoint *ResolverEndpoint `json:"ResolverEndpoint"`
+	ResolverEndpoint *ResolverEndpoint `json:"ResolverEndpoint,omitempty"`
 }

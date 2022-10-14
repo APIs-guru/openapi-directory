@@ -1,6 +1,6 @@
 package shared
 
 type ListBuildTriggersResponse struct {
-	NextPageToken *string        `json:"nextPageToken"`
-	Triggers      []BuildTrigger `json:"triggers"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
+	Triggers      []BuildTrigger `json:"triggers,omitempty"`
 }

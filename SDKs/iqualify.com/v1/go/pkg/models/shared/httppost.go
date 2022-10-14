@@ -5,12 +5,12 @@ import (
 )
 
 type HTTPPost struct {
-	Attachments       []DocumentResponse `json:"attachments"`
-	Content           *string            `json:"content"`
-	CreatedAt         *time.Time         `json:"createdAt"`
-	Email             *string            `json:"email"`
-	ID                *string            `json:"id"`
-	IsFacilitatorPost *bool              `json:"isFacilitatorPost"`
-	Moderation        *Moderation        `json:"moderation"`
-	Title             *string            `json:"title"`
+	Attachments       []DocumentResponse `json:"attachments,omitempty"`
+	Content           *string            `json:"content,omitempty"`
+	CreatedAt         *time.Time         `json:"createdAt,omitempty"`
+	Email             *string            `json:"email,omitempty"`
+	ID                *string            `json:"id,omitempty"`
+	IsFacilitatorPost *bool              `json:"isFacilitatorPost,omitempty"`
+	Moderation        *Moderation        `json:"moderation,omitempty"`
+	Title             *string            `json:"title,omitempty"`
 }

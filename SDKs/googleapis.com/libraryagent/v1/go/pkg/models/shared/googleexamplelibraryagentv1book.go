@@ -1,8 +1,8 @@
 package shared
 
 type GoogleExampleLibraryagentV1Book struct {
-	Author *string `json:"author"`
-	Name   *string `json:"name"`
-	Read   *bool   `json:"read"`
-	Title  *string `json:"title"`
+	Author *string `json:"author,omitempty"`
+	Name   *string `json:"name,omitempty"`
+	Read   *bool   `json:"read,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }

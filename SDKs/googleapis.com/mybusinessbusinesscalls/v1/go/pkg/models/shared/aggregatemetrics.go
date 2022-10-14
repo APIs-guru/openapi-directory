@@ -1,10 +1,10 @@
 package shared
 
 type AggregateMetrics struct {
-	AnsweredCallsCount *int32           `json:"answeredCallsCount"`
-	EndDate            *Date            `json:"endDate"`
-	HourlyMetrics      []HourlyMetrics  `json:"hourlyMetrics"`
-	MissedCallsCount   *int32           `json:"missedCallsCount"`
-	StartDate          *Date            `json:"startDate"`
-	WeekdayMetrics     []WeekDayMetrics `json:"weekdayMetrics"`
+	AnsweredCallsCount *int32           `json:"answeredCallsCount,omitempty"`
+	EndDate            *Date            `json:"endDate,omitempty"`
+	HourlyMetrics      []HourlyMetrics  `json:"hourlyMetrics,omitempty"`
+	MissedCallsCount   *int32           `json:"missedCallsCount,omitempty"`
+	StartDate          *Date            `json:"startDate,omitempty"`
+	WeekdayMetrics     []WeekDayMetrics `json:"weekdayMetrics,omitempty"`
 }

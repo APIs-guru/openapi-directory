@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleCloudDatacatalogV1RoutineSpec struct {
-	BigqueryRoutineSpec *GoogleCloudDatacatalogV1BigQueryRoutineSpec        `json:"bigqueryRoutineSpec"`
-	DefinitionBody      *string                                             `json:"definitionBody"`
-	Language            *string                                             `json:"language"`
-	ReturnType          *string                                             `json:"returnType"`
-	RoutineArguments    []GoogleCloudDatacatalogV1RoutineSpecArgument       `json:"routineArguments"`
-	RoutineType         *GoogleCloudDatacatalogV1RoutineSpecRoutineTypeEnum `json:"routineType"`
+	BigqueryRoutineSpec *GoogleCloudDatacatalogV1BigQueryRoutineSpec        `json:"bigqueryRoutineSpec,omitempty"`
+	DefinitionBody      *string                                             `json:"definitionBody,omitempty"`
+	Language            *string                                             `json:"language,omitempty"`
+	ReturnType          *string                                             `json:"returnType,omitempty"`
+	RoutineArguments    []GoogleCloudDatacatalogV1RoutineSpecArgument       `json:"routineArguments,omitempty"`
+	RoutineType         *GoogleCloudDatacatalogV1RoutineSpecRoutineTypeEnum `json:"routineType,omitempty"`
 }

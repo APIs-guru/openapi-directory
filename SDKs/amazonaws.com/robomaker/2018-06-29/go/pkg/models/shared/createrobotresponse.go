@@ -5,10 +5,10 @@ import (
 )
 
 type CreateRobotResponse struct {
-	Architecture      *ArchitectureEnum `json:"architecture"`
-	Arn               *string           `json:"arn"`
-	CreatedAt         *time.Time        `json:"createdAt"`
-	GreengrassGroupID *string           `json:"greengrassGroupId"`
-	Name              *string           `json:"name"`
-	Tags              map[string]string `json:"tags"`
+	Architecture      *ArchitectureEnum `json:"architecture,omitempty"`
+	Arn               *string           `json:"arn,omitempty"`
+	CreatedAt         *time.Time        `json:"createdAt,omitempty"`
+	GreengrassGroupID *string           `json:"greengrassGroupId,omitempty"`
+	Name              *string           `json:"name,omitempty"`
+	Tags              map[string]string `json:"tags,omitempty"`
 }

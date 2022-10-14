@@ -23,15 +23,15 @@ const (
 )
 
 type GetLinkAttributesRequestBodyTypedLinkSpecifier struct {
-	IdentityAttributeValues []shared.AttributeNameAndValue      `json:"IdentityAttributeValues"`
-	SourceObjectReference   *shared.ObjectReference             `json:"SourceObjectReference"`
-	TargetObjectReference   *shared.ObjectReference             `json:"TargetObjectReference"`
-	TypedLinkFacet          *shared.TypedLinkSchemaAndFacetName `json:"TypedLinkFacet"`
+	IdentityAttributeValues []shared.AttributeNameAndValue      `json:"IdentityAttributeValues,omitempty"`
+	SourceObjectReference   *shared.ObjectReference             `json:"SourceObjectReference,omitempty"`
+	TargetObjectReference   *shared.ObjectReference             `json:"TargetObjectReference,omitempty"`
+	TypedLinkFacet          *shared.TypedLinkSchemaAndFacetName `json:"TypedLinkFacet,omitempty"`
 }
 
 type GetLinkAttributesRequestBody struct {
 	AttributeNames     []string                                          `json:"AttributeNames"`
-	ConsistencyLevel   *GetLinkAttributesRequestBodyConsistencyLevelEnum `json:"ConsistencyLevel"`
+	ConsistencyLevel   *GetLinkAttributesRequestBodyConsistencyLevelEnum `json:"ConsistencyLevel,omitempty"`
 	TypedLinkSpecifier GetLinkAttributesRequestBodyTypedLinkSpecifier    `json:"TypedLinkSpecifier"`
 }
 

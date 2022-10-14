@@ -1,6 +1,6 @@
 package shared
 
 type GetCommentsForPullRequestOutput struct {
-	CommentsForPullRequestData []CommentsForPullRequest `json:"commentsForPullRequestData"`
-	NextToken                  *string                  `json:"nextToken"`
+	CommentsForPullRequestData []CommentsForPullRequest `json:"commentsForPullRequestData,omitempty"`
+	NextToken                  *string                  `json:"nextToken,omitempty"`
 }

@@ -8,6 +8,6 @@ const (
 )
 
 type NotificationRead struct {
-	Message *string                    `json:"message"`
+	Message *string                    `json:"message,omitempty"`
 	Status  NotificationReadStatusEnum `json:"status"`
 }

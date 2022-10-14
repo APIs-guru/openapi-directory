@@ -15,17 +15,17 @@ const (
 )
 
 type Action struct {
-	Commands             []string          `json:"commands"`
-	Credentials          *Secret           `json:"credentials"`
-	EncryptedEnvironment *Secret           `json:"encryptedEnvironment"`
-	Entrypoint           *string           `json:"entrypoint"`
-	Environment          map[string]string `json:"environment"`
-	Flags                []ActionFlagsEnum `json:"flags"`
-	ImageURI             *string           `json:"imageUri"`
-	Labels               map[string]string `json:"labels"`
-	Mounts               []Mount           `json:"mounts"`
-	Name                 *string           `json:"name"`
-	PidNamespace         *string           `json:"pidNamespace"`
-	PortMappings         map[string]int32  `json:"portMappings"`
-	Timeout              *string           `json:"timeout"`
+	Commands             []string          `json:"commands,omitempty"`
+	Credentials          *Secret           `json:"credentials,omitempty"`
+	EncryptedEnvironment *Secret           `json:"encryptedEnvironment,omitempty"`
+	Entrypoint           *string           `json:"entrypoint,omitempty"`
+	Environment          map[string]string `json:"environment,omitempty"`
+	Flags                []ActionFlagsEnum `json:"flags,omitempty"`
+	ImageURI             *string           `json:"imageUri,omitempty"`
+	Labels               map[string]string `json:"labels,omitempty"`
+	Mounts               []Mount           `json:"mounts,omitempty"`
+	Name                 *string           `json:"name,omitempty"`
+	PidNamespace         *string           `json:"pidNamespace,omitempty"`
+	PortMappings         map[string]int32  `json:"portMappings,omitempty"`
+	Timeout              *string           `json:"timeout,omitempty"`
 }

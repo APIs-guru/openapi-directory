@@ -1,6 +1,6 @@
 package shared
 
 type ListAnnouncementsResponse struct {
-	Announcements []Announcement `json:"announcements"`
-	NextPageToken *string        `json:"nextPageToken"`
+	Announcements []Announcement `json:"announcements,omitempty"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
 }

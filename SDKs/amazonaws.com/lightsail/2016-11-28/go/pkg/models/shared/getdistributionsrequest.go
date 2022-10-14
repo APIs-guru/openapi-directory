@@ -1,6 +1,6 @@
 package shared
 
 type GetDistributionsRequest struct {
-	DistributionName *string `json:"distributionName"`
-	PageToken        *string `json:"pageToken"`
+	DistributionName *string `json:"distributionName,omitempty"`
+	PageToken        *string `json:"pageToken,omitempty"`
 }

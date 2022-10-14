@@ -41,9 +41,9 @@ const (
 )
 
 type PublicKey struct {
-	Algorithm       *PublicKeyAlgorithmEnum       `json:"algorithm"`
-	Name            *string                       `json:"name"`
-	Pem             *string                       `json:"pem"`
-	PemCrc32c       *string                       `json:"pemCrc32c"`
-	ProtectionLevel *PublicKeyProtectionLevelEnum `json:"protectionLevel"`
+	Algorithm       *PublicKeyAlgorithmEnum       `json:"algorithm,omitempty"`
+	Name            *string                       `json:"name,omitempty"`
+	Pem             *string                       `json:"pem,omitempty"`
+	PemCrc32c       *string                       `json:"pemCrc32c,omitempty"`
+	ProtectionLevel *PublicKeyProtectionLevelEnum `json:"protectionLevel,omitempty"`
 }

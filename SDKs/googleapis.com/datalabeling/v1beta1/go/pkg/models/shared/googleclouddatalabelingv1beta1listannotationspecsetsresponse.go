@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDatalabelingV1beta1ListAnnotationSpecSetsResponse struct {
-	AnnotationSpecSets []GoogleCloudDatalabelingV1beta1AnnotationSpecSet `json:"annotationSpecSets"`
-	NextPageToken      *string                                           `json:"nextPageToken"`
+	AnnotationSpecSets []GoogleCloudDatalabelingV1beta1AnnotationSpecSet `json:"annotationSpecSets,omitempty"`
+	NextPageToken      *string                                           `json:"nextPageToken,omitempty"`
 }

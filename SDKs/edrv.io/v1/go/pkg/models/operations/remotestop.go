@@ -1,9 +1,9 @@
 package operations
 
 type RemotestopRequestBody struct {
-	Chargestation *string `json:"chargestation"`
-	Driver        *string `json:"driver"`
-	Transaction   *string `json:"transaction"`
+	Chargestation *string `json:"chargestation,omitempty"`
+	Driver        *string `json:"driver,omitempty"`
+	Transaction   *string `json:"transaction,omitempty"`
 }
 
 type RemotestopRequest struct {

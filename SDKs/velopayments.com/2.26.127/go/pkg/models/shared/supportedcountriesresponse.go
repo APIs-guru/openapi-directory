@@ -1,5 +1,5 @@
 package shared
 
 type SupportedCountriesResponse struct {
-	Countries []SupportedCountry `json:"countries"`
+	Countries []SupportedCountry `json:"countries,omitempty"`
 }

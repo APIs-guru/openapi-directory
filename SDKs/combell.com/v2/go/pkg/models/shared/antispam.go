@@ -1,6 +1,6 @@
 package shared
 
 type AntiSpam struct {
-	AllowedTypes []AntiSpamTypesEnum `json:"allowed_types"`
-	Type         *AntiSpamTypesEnum  `json:"type"`
+	AllowedTypes []AntiSpamTypesEnum `json:"allowed_types,omitempty"`
+	Type         *AntiSpamTypesEnum  `json:"type,omitempty"`
 }

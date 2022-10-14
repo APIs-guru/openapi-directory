@@ -1,5 +1,5 @@
 package shared
 
 type TransformJobStepMetadata struct {
-	Arn *string `json:"Arn"`
+	Arn *string `json:"Arn,omitempty"`
 }

@@ -15,7 +15,7 @@ type CreateMeshHeaders struct {
 }
 
 type CreateMeshRequestBody struct {
-	ClientToken *string `json:"clientToken"`
+	ClientToken *string `json:"clientToken,omitempty"`
 	MeshName    string  `json:"meshName"`
 }
 

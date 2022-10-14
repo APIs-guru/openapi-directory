@@ -19,12 +19,12 @@ const (
 )
 
 type Promotion struct {
-	CreditMonthlyCap         *string                   `json:"credit_monthly_cap"`
-	CreditRemaining          *string                   `json:"credit_remaining"`
-	Description              *string                   `json:"description"`
-	ExpireDt                 *string                   `json:"expire_dt"`
-	ImageURL                 *string                   `json:"image_url"`
-	ServiceType              *PromotionServiceTypeEnum `json:"service_type"`
-	Summary                  *string                   `json:"summary"`
-	ThisMonthCreditRemaining *string                   `json:"this_month_credit_remaining"`
+	CreditMonthlyCap         *string                   `json:"credit_monthly_cap,omitempty"`
+	CreditRemaining          *string                   `json:"credit_remaining,omitempty"`
+	Description              *string                   `json:"description,omitempty"`
+	ExpireDt                 *string                   `json:"expire_dt,omitempty"`
+	ImageURL                 *string                   `json:"image_url,omitempty"`
+	ServiceType              *PromotionServiceTypeEnum `json:"service_type,omitempty"`
+	Summary                  *string                   `json:"summary,omitempty"`
+	ThisMonthCreditRemaining *string                   `json:"this_month_credit_remaining,omitempty"`
 }

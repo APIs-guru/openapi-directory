@@ -1,8 +1,8 @@
 package shared
 
 type DescribeFleetLocationAttributesOutput struct {
-	FleetArn           *string              `json:"FleetArn"`
-	FleetID            *string              `json:"FleetId"`
-	LocationAttributes []LocationAttributes `json:"LocationAttributes"`
-	NextToken          *string              `json:"NextToken"`
+	FleetArn           *string              `json:"FleetArn,omitempty"`
+	FleetID            *string              `json:"FleetId,omitempty"`
+	LocationAttributes []LocationAttributes `json:"LocationAttributes,omitempty"`
+	NextToken          *string              `json:"NextToken,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type WkHTMLToPdfAdvancedOptions struct {
-	Orientation *string `json:"orientation"`
-	PageSize    *string `json:"pageSize"`
+	Orientation *string `json:"orientation,omitempty"`
+	PageSize    *string `json:"pageSize,omitempty"`
 }

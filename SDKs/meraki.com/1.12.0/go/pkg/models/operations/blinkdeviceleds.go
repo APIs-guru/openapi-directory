@@ -5,9 +5,9 @@ type BlinkDeviceLedsPathParams struct {
 }
 
 type BlinkDeviceLedsRequestBody struct {
-	Duration *int64 `json:"duration"`
-	Duty     *int64 `json:"duty"`
-	Period   *int64 `json:"period"`
+	Duration *int64 `json:"duration,omitempty"`
+	Duty     *int64 `json:"duty,omitempty"`
+	Period   *int64 `json:"period,omitempty"`
 }
 
 type BlinkDeviceLedsRequest struct {

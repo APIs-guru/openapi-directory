@@ -9,13 +9,13 @@ const (
 )
 
 type DeductionType struct {
-	AccountCode       *string                             `json:"AccountCode"`
-	CurrentRecord     *bool                               `json:"CurrentRecord"`
-	DeductionCategory *DeductionTypeDeductionCategoryEnum `json:"DeductionCategory"`
-	DeductionTypeID   *string                             `json:"DeductionTypeID"`
-	IsExemptFromW1    *bool                               `json:"IsExemptFromW1"`
-	Name              *string                             `json:"Name"`
-	ReducesSuper      *bool                               `json:"ReducesSuper"`
-	ReducesTax        *bool                               `json:"ReducesTax"`
-	UpdatedDateUtc    *string                             `json:"UpdatedDateUTC"`
+	AccountCode       *string                             `json:"AccountCode,omitempty"`
+	CurrentRecord     *bool                               `json:"CurrentRecord,omitempty"`
+	DeductionCategory *DeductionTypeDeductionCategoryEnum `json:"DeductionCategory,omitempty"`
+	DeductionTypeID   *string                             `json:"DeductionTypeID,omitempty"`
+	IsExemptFromW1    *bool                               `json:"IsExemptFromW1,omitempty"`
+	Name              *string                             `json:"Name,omitempty"`
+	ReducesSuper      *bool                               `json:"ReducesSuper,omitempty"`
+	ReducesTax        *bool                               `json:"ReducesTax,omitempty"`
+	UpdatedDateUtc    *string                             `json:"UpdatedDateUTC,omitempty"`
 }

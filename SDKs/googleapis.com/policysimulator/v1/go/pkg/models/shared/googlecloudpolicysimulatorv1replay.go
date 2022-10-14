@@ -11,8 +11,8 @@ const (
 )
 
 type GoogleCloudPolicysimulatorV1Replay struct {
-	Config         *GoogleCloudPolicysimulatorV1ReplayConfig         `json:"config"`
-	Name           *string                                           `json:"name"`
-	ResultsSummary *GoogleCloudPolicysimulatorV1ReplayResultsSummary `json:"resultsSummary"`
-	State          *GoogleCloudPolicysimulatorV1ReplayStateEnum      `json:"state"`
+	Config         *GoogleCloudPolicysimulatorV1ReplayConfig         `json:"config,omitempty"`
+	Name           *string                                           `json:"name,omitempty"`
+	ResultsSummary *GoogleCloudPolicysimulatorV1ReplayResultsSummary `json:"resultsSummary,omitempty"`
+	State          *GoogleCloudPolicysimulatorV1ReplayStateEnum      `json:"state,omitempty"`
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceCompliance struct {
-	ComplianceState       *OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceComplianceStateEnum         `json:"complianceState"`
-	ComplianceStateReason *string                                                                                          `json:"complianceStateReason"`
-	ConfigSteps           []OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceOsPolicyResourceConfigStep `json:"configSteps"`
-	ExecResourceOutput    *OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceExecResourceOutput          `json:"execResourceOutput"`
-	OsPolicyResourceID    *string                                                                                          `json:"osPolicyResourceId"`
+	ComplianceState       *OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceComplianceStateEnum         `json:"complianceState,omitempty"`
+	ComplianceStateReason *string                                                                                          `json:"complianceStateReason,omitempty"`
+	ConfigSteps           []OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceOsPolicyResourceConfigStep `json:"configSteps,omitempty"`
+	ExecResourceOutput    *OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceComplianceExecResourceOutput          `json:"execResourceOutput,omitempty"`
+	OsPolicyResourceID    *string                                                                                          `json:"osPolicyResourceId,omitempty"`
 }

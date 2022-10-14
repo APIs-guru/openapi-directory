@@ -15,10 +15,10 @@ type GetStatisticsHeaders struct {
 }
 
 type GetStatisticsRequestBody struct {
-	AggregationField *string `json:"aggregationField"`
-	IndexName        *string `json:"indexName"`
+	AggregationField *string `json:"aggregationField,omitempty"`
+	IndexName        *string `json:"indexName,omitempty"`
 	QueryString      string  `json:"queryString"`
-	QueryVersion     *string `json:"queryVersion"`
+	QueryVersion     *string `json:"queryVersion,omitempty"`
 }
 
 type GetStatisticsRequest struct {

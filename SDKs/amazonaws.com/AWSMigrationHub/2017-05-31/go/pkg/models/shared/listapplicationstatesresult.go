@@ -1,6 +1,6 @@
 package shared
 
 type ListApplicationStatesResult struct {
-	ApplicationStateList []ApplicationState `json:"ApplicationStateList"`
-	NextToken            *string            `json:"NextToken"`
+	ApplicationStateList []ApplicationState `json:"ApplicationStateList,omitempty"`
+	NextToken            *string            `json:"NextToken,omitempty"`
 }

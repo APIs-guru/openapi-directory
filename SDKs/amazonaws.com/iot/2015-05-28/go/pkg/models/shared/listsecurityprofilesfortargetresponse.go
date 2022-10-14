@@ -1,6 +1,6 @@
 package shared
 
 type ListSecurityProfilesForTargetResponse struct {
-	NextToken                     *string                        `json:"nextToken"`
-	SecurityProfileTargetMappings []SecurityProfileTargetMapping `json:"securityProfileTargetMappings"`
+	NextToken                     *string                        `json:"nextToken,omitempty"`
+	SecurityProfileTargetMappings []SecurityProfileTargetMapping `json:"securityProfileTargetMappings,omitempty"`
 }

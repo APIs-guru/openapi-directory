@@ -10,8 +10,8 @@ type IssuesCreateLabelPathParams struct {
 }
 
 type IssuesCreateLabelRequestBody struct {
-	Color       *string `json:"color"`
-	Description *string `json:"description"`
+	Color       *string `json:"color,omitempty"`
+	Description *string `json:"description,omitempty"`
 	Name        string  `json:"name"`
 }
 

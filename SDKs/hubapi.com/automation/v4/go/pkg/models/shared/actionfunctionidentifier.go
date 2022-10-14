@@ -10,5 +10,5 @@ const (
 
 type ActionFunctionIdentifier struct {
 	FunctionType ActionFunctionIdentifierFunctionTypeEnum `json:"functionType"`
-	ID           *string                                  `json:"id"`
+	ID           *string                                  `json:"id,omitempty"`
 }

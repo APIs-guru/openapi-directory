@@ -1,5 +1,5 @@
 package shared
 
 type ScaleInPolicyDescription struct {
-	CPUUtilizationPercentage *int64 `json:"cpuUtilizationPercentage"`
+	CPUUtilizationPercentage *int64 `json:"cpuUtilizationPercentage,omitempty"`
 }

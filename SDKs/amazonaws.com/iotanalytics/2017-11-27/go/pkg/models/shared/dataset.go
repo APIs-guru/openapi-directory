@@ -5,15 +5,15 @@ import (
 )
 
 type Dataset struct {
-	Actions                 []DatasetAction              `json:"actions"`
-	Arn                     *string                      `json:"arn"`
-	ContentDeliveryRules    []DatasetContentDeliveryRule `json:"contentDeliveryRules"`
-	CreationTime            *time.Time                   `json:"creationTime"`
-	LastUpdateTime          *time.Time                   `json:"lastUpdateTime"`
-	LateDataRules           []LateDataRule               `json:"lateDataRules"`
-	Name                    *string                      `json:"name"`
-	RetentionPeriod         *RetentionPeriod             `json:"retentionPeriod"`
-	Status                  *DatasetStatusEnum           `json:"status"`
-	Triggers                []DatasetTrigger             `json:"triggers"`
-	VersioningConfiguration *VersioningConfiguration     `json:"versioningConfiguration"`
+	Actions                 []DatasetAction              `json:"actions,omitempty"`
+	Arn                     *string                      `json:"arn,omitempty"`
+	ContentDeliveryRules    []DatasetContentDeliveryRule `json:"contentDeliveryRules,omitempty"`
+	CreationTime            *time.Time                   `json:"creationTime,omitempty"`
+	LastUpdateTime          *time.Time                   `json:"lastUpdateTime,omitempty"`
+	LateDataRules           []LateDataRule               `json:"lateDataRules,omitempty"`
+	Name                    *string                      `json:"name,omitempty"`
+	RetentionPeriod         *RetentionPeriod             `json:"retentionPeriod,omitempty"`
+	Status                  *DatasetStatusEnum           `json:"status,omitempty"`
+	Triggers                []DatasetTrigger             `json:"triggers,omitempty"`
+	VersioningConfiguration *VersioningConfiguration     `json:"versioningConfiguration,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SyncRequest struct {
-	AgentUserID *string `json:"agentUserId"`
-	RequestID   *string `json:"requestId"`
+	AgentUserID *string `json:"agentUserId,omitempty"`
+	RequestID   *string `json:"requestId,omitempty"`
 }

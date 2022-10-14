@@ -23,14 +23,14 @@ type UpdateFunctionEventInvokeConfigHeaders struct {
 }
 
 type UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig struct {
-	OnFailure *shared.OnFailure `json:"OnFailure"`
-	OnSuccess *shared.OnSuccess `json:"OnSuccess"`
+	OnFailure *shared.OnFailure `json:"OnFailure,omitempty"`
+	OnSuccess *shared.OnSuccess `json:"OnSuccess,omitempty"`
 }
 
 type UpdateFunctionEventInvokeConfigRequestBody struct {
-	DestinationConfig        *UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig `json:"DestinationConfig"`
-	MaximumEventAgeInSeconds *int64                                                       `json:"MaximumEventAgeInSeconds"`
-	MaximumRetryAttempts     *int64                                                       `json:"MaximumRetryAttempts"`
+	DestinationConfig        *UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig `json:"DestinationConfig,omitempty"`
+	MaximumEventAgeInSeconds *int64                                                       `json:"MaximumEventAgeInSeconds,omitempty"`
+	MaximumRetryAttempts     *int64                                                       `json:"MaximumRetryAttempts,omitempty"`
 }
 
 type UpdateFunctionEventInvokeConfigRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type TranslationsListResponse struct {
-	Translations []TranslationsResource `json:"translations"`
+	Translations []TranslationsResource `json:"translations,omitempty"`
 }

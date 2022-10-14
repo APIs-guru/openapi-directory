@@ -1,5 +1,5 @@
 package shared
 
 type AwsSsmPatchComplianceDetails struct {
-	Patch *AwsSsmPatch `json:"Patch"`
+	Patch *AwsSsmPatch `json:"Patch,omitempty"`
 }

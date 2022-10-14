@@ -10,10 +10,10 @@ const (
 )
 
 type GroupRelation struct {
-	DisplayName  *string                        `json:"displayName"`
-	Group        *string                        `json:"group"`
-	GroupKey     *EntityKey                     `json:"groupKey"`
-	Labels       map[string]string              `json:"labels"`
-	RelationType *GroupRelationRelationTypeEnum `json:"relationType"`
-	Roles        []TransitiveMembershipRole     `json:"roles"`
+	DisplayName  *string                        `json:"displayName,omitempty"`
+	Group        *string                        `json:"group,omitempty"`
+	GroupKey     *EntityKey                     `json:"groupKey,omitempty"`
+	Labels       map[string]string              `json:"labels,omitempty"`
+	RelationType *GroupRelationRelationTypeEnum `json:"relationType,omitempty"`
+	Roles        []TransitiveMembershipRole     `json:"roles,omitempty"`
 }

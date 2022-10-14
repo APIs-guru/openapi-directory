@@ -5,7 +5,7 @@ type UpdateOrganizationApplianceSecurityIntrusionPathParams struct {
 }
 
 type UpdateOrganizationApplianceSecurityIntrusionRequestBodyAllowedRules struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 	RuleID  string  `json:"ruleId"`
 }
 

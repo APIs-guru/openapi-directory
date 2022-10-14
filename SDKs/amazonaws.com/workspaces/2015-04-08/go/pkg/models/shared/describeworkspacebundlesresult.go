@@ -1,6 +1,6 @@
 package shared
 
 type DescribeWorkspaceBundlesResult struct {
-	Bundles   []WorkspaceBundle `json:"Bundles"`
-	NextToken *string           `json:"NextToken"`
+	Bundles   []WorkspaceBundle `json:"Bundles,omitempty"`
+	NextToken *string           `json:"NextToken,omitempty"`
 }

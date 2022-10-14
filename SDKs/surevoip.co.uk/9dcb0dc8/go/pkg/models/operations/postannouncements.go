@@ -14,24 +14,24 @@ type PostAnnouncementsRequest struct {
 }
 
 type PostAnnouncements201ApplicationJSONAnnouncementURL struct {
-	Download *string `json:"download"`
-	Href     *string `json:"href"`
-	Title    *string `json:"title"`
+	Download *string `json:"download,omitempty"`
+	Href     *string `json:"href,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }
 
 type PostAnnouncements201ApplicationJSONAnnouncement struct {
-	CreationDate *string                                             `json:"creation_date"`
-	Description  *string                                             `json:"description"`
-	FileInternal *string                                             `json:"file_internal"`
-	Filename     *string                                             `json:"filename"`
-	ID           *string                                             `json:"id"`
-	Size         *int64                                              `json:"size"`
-	SrcIPAddress *string                                             `json:"src_ip_address"`
-	URL          *PostAnnouncements201ApplicationJSONAnnouncementURL `json:"url"`
+	CreationDate *string                                             `json:"creation_date,omitempty"`
+	Description  *string                                             `json:"description,omitempty"`
+	FileInternal *string                                             `json:"file_internal,omitempty"`
+	Filename     *string                                             `json:"filename,omitempty"`
+	ID           *string                                             `json:"id,omitempty"`
+	Size         *int64                                              `json:"size,omitempty"`
+	SrcIPAddress *string                                             `json:"src_ip_address,omitempty"`
+	URL          *PostAnnouncements201ApplicationJSONAnnouncementURL `json:"url,omitempty"`
 }
 
 type PostAnnouncements201ApplicationJSON struct {
-	Announcement *PostAnnouncements201ApplicationJSONAnnouncement `json:"announcement"`
+	Announcement *PostAnnouncements201ApplicationJSONAnnouncement `json:"announcement,omitempty"`
 }
 
 type PostAnnouncements400ApplicationJSONErrors struct {
@@ -44,7 +44,7 @@ type PostAnnouncements400ApplicationJSON struct {
 }
 
 type PostAnnouncements403ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostAnnouncementsResponse struct {

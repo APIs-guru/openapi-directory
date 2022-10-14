@@ -1,9 +1,9 @@
 package shared
 
 type StageState struct {
-	ActionStates           []ActionState    `json:"actionStates"`
-	InboundExecution       *StageExecution  `json:"inboundExecution"`
-	InboundTransitionState *TransitionState `json:"inboundTransitionState"`
-	LatestExecution        *StageExecution  `json:"latestExecution"`
-	StageName              *string          `json:"stageName"`
+	ActionStates           []ActionState    `json:"actionStates,omitempty"`
+	InboundExecution       *StageExecution  `json:"inboundExecution,omitempty"`
+	InboundTransitionState *TransitionState `json:"inboundTransitionState,omitempty"`
+	LatestExecution        *StageExecution  `json:"latestExecution,omitempty"`
+	StageName              *string          `json:"stageName,omitempty"`
 }

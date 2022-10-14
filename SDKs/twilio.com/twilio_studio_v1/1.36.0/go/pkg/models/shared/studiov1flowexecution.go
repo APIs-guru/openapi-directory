@@ -5,15 +5,15 @@ import (
 )
 
 type StudioV1FlowExecution struct {
-	AccountSid            *string                  `json:"account_sid"`
-	ContactChannelAddress *string                  `json:"contact_channel_address"`
-	ContactSid            *string                  `json:"contact_sid"`
-	Context               *interface{}             `json:"context"`
-	DateCreated           *time.Time               `json:"date_created"`
-	DateUpdated           *time.Time               `json:"date_updated"`
-	FlowSid               *string                  `json:"flow_sid"`
-	Links                 map[string]interface{}   `json:"links"`
-	Sid                   *string                  `json:"sid"`
-	Status                *ExecutionEnumStatusEnum `json:"status"`
-	URL                   *string                  `json:"url"`
+	AccountSid            *string                  `json:"account_sid,omitempty"`
+	ContactChannelAddress *string                  `json:"contact_channel_address,omitempty"`
+	ContactSid            *string                  `json:"contact_sid,omitempty"`
+	Context               *interface{}             `json:"context,omitempty"`
+	DateCreated           *time.Time               `json:"date_created,omitempty"`
+	DateUpdated           *time.Time               `json:"date_updated,omitempty"`
+	FlowSid               *string                  `json:"flow_sid,omitempty"`
+	Links                 map[string]interface{}   `json:"links,omitempty"`
+	Sid                   *string                  `json:"sid,omitempty"`
+	Status                *ExecutionEnumStatusEnum `json:"status,omitempty"`
+	URL                   *string                  `json:"url,omitempty"`
 }

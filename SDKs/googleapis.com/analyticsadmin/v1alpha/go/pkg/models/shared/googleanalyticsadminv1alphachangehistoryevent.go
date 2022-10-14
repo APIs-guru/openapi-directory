@@ -10,10 +10,10 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaChangeHistoryEvent struct {
-	ActorType       *GoogleAnalyticsAdminV1alphaChangeHistoryEventActorTypeEnum `json:"actorType"`
-	ChangeTime      *string                                                     `json:"changeTime"`
-	Changes         []GoogleAnalyticsAdminV1alphaChangeHistoryChange            `json:"changes"`
-	ChangesFiltered *bool                                                       `json:"changesFiltered"`
-	ID              *string                                                     `json:"id"`
-	UserActorEmail  *string                                                     `json:"userActorEmail"`
+	ActorType       *GoogleAnalyticsAdminV1alphaChangeHistoryEventActorTypeEnum `json:"actorType,omitempty"`
+	ChangeTime      *string                                                     `json:"changeTime,omitempty"`
+	Changes         []GoogleAnalyticsAdminV1alphaChangeHistoryChange            `json:"changes,omitempty"`
+	ChangesFiltered *bool                                                       `json:"changesFiltered,omitempty"`
+	ID              *string                                                     `json:"id,omitempty"`
+	UserActorEmail  *string                                                     `json:"userActorEmail,omitempty"`
 }

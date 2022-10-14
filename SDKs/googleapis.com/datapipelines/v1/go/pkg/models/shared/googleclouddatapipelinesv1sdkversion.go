@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleCloudDatapipelinesV1SdkVersion struct {
-	SdkSupportStatus   *GoogleCloudDatapipelinesV1SdkVersionSdkSupportStatusEnum `json:"sdkSupportStatus"`
-	Version            *string                                                   `json:"version"`
-	VersionDisplayName *string                                                   `json:"versionDisplayName"`
+	SdkSupportStatus   *GoogleCloudDatapipelinesV1SdkVersionSdkSupportStatusEnum `json:"sdkSupportStatus,omitempty"`
+	Version            *string                                                   `json:"version,omitempty"`
+	VersionDisplayName *string                                                   `json:"versionDisplayName,omitempty"`
 }

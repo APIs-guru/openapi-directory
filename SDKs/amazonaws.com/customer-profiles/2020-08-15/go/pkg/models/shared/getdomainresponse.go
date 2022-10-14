@@ -6,12 +6,12 @@ import (
 
 type GetDomainResponse struct {
 	CreatedAt             time.Time         `json:"CreatedAt"`
-	DeadLetterQueueURL    *string           `json:"DeadLetterQueueUrl"`
-	DefaultEncryptionKey  *string           `json:"DefaultEncryptionKey"`
-	DefaultExpirationDays *int64            `json:"DefaultExpirationDays"`
+	DeadLetterQueueURL    *string           `json:"DeadLetterQueueUrl,omitempty"`
+	DefaultEncryptionKey  *string           `json:"DefaultEncryptionKey,omitempty"`
+	DefaultExpirationDays *int64            `json:"DefaultExpirationDays,omitempty"`
 	DomainName            string            `json:"DomainName"`
 	LastUpdatedAt         time.Time         `json:"LastUpdatedAt"`
-	Matching              *MatchingResponse `json:"Matching"`
-	Stats                 *DomainStats      `json:"Stats"`
-	Tags                  map[string]string `json:"Tags"`
+	Matching              *MatchingResponse `json:"Matching,omitempty"`
+	Stats                 *DomainStats      `json:"Stats,omitempty"`
+	Tags                  map[string]string `json:"Tags,omitempty"`
 }

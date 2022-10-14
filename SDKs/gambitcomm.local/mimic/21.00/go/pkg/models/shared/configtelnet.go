@@ -1,10 +1,10 @@
 package shared
 
 type ConfigTelnet struct {
-	Keymap       *string `json:"keymap"`
-	PagingPrompt *string `json:"paging_prompt"`
-	Port         *int32  `json:"port"`
-	Prompt       *string `json:"prompt"`
-	Rule         *string `json:"rule"`
-	Userdb       *string `json:"userdb"`
+	Keymap       *string `json:"keymap,omitempty"`
+	PagingPrompt *string `json:"paging_prompt,omitempty"`
+	Port         *int32  `json:"port,omitempty"`
+	Prompt       *string `json:"prompt,omitempty"`
+	Rule         *string `json:"rule,omitempty"`
+	Userdb       *string `json:"userdb,omitempty"`
 }

@@ -32,7 +32,7 @@ const (
 )
 
 type Get200ApplicationJSON struct {
-	Status *Get200ApplicationJSONStatusEnum `json:"status"`
+	Status *Get200ApplicationJSONStatusEnum `json:"status,omitempty"`
 }
 
 type GetResponse struct {

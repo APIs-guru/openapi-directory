@@ -1,6 +1,6 @@
 package shared
 
 type AwsElbLoadBalancerBackendServerDescription struct {
-	InstancePort *int64   `json:"InstancePort"`
-	PolicyNames  []string `json:"PolicyNames"`
+	InstancePort *int64   `json:"InstancePort,omitempty"`
+	PolicyNames  []string `json:"PolicyNames,omitempty"`
 }

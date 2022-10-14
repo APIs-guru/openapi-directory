@@ -5,10 +5,10 @@ import (
 )
 
 type EnvironmentStateChange struct {
-	Environment  *EnvironmentBillingInfo `json:"environment"`
-	ID           *string                 `json:"id"`
-	NewValue     *int32                  `json:"newValue"`
-	OldValue     *int32                  `json:"oldValue"`
-	PartitionKey *string                 `json:"partitionKey"`
-	Time         *time.Time              `json:"time"`
+	Environment  *EnvironmentBillingInfo `json:"environment,omitempty"`
+	ID           *string                 `json:"id,omitempty"`
+	NewValue     *int32                  `json:"newValue,omitempty"`
+	OldValue     *int32                  `json:"oldValue,omitempty"`
+	PartitionKey *string                 `json:"partitionKey,omitempty"`
+	Time         *time.Time              `json:"time,omitempty"`
 }

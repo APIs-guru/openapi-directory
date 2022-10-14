@@ -1,7 +1,7 @@
 package shared
 
 type ScaStatusResponse struct {
-	PsuMessage             *string       `json:"psuMessage"`
+	PsuMessage             *string       `json:"psuMessage,omitempty"`
 	ScaStatus              ScaStatusEnum `json:"scaStatus"`
-	TrustedBeneficiaryFlag *bool         `json:"trustedBeneficiaryFlag"`
+	TrustedBeneficiaryFlag *bool         `json:"trustedBeneficiaryFlag,omitempty"`
 }

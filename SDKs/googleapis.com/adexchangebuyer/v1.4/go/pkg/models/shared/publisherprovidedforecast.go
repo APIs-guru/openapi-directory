@@ -1,7 +1,7 @@
 package shared
 
 type PublisherProvidedForecast struct {
-	Dimensions        []Dimension `json:"dimensions"`
-	WeeklyImpressions *string     `json:"weeklyImpressions"`
-	WeeklyUniques     *string     `json:"weeklyUniques"`
+	Dimensions        []Dimension `json:"dimensions,omitempty"`
+	WeeklyImpressions *string     `json:"weeklyImpressions,omitempty"`
+	WeeklyUniques     *string     `json:"weeklyUniques,omitempty"`
 }

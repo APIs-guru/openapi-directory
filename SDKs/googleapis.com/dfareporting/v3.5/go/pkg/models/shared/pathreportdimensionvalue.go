@@ -10,9 +10,9 @@ const (
 )
 
 type PathReportDimensionValue struct {
-	DimensionName *string                                `json:"dimensionName"`
-	Ids           []string                               `json:"ids"`
-	Kind          *string                                `json:"kind"`
-	MatchType     *PathReportDimensionValueMatchTypeEnum `json:"matchType"`
-	Values        []string                               `json:"values"`
+	DimensionName *string                                `json:"dimensionName,omitempty"`
+	Ids           []string                               `json:"ids,omitempty"`
+	Kind          *string                                `json:"kind,omitempty"`
+	MatchType     *PathReportDimensionValueMatchTypeEnum `json:"matchType,omitempty"`
+	Values        []string                               `json:"values,omitempty"`
 }

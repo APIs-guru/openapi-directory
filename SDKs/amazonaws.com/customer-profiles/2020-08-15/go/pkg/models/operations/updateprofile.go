@@ -19,29 +19,29 @@ type UpdateProfileHeaders struct {
 }
 
 type UpdateProfileRequestBodyAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type UpdateProfileRequestBodyBillingAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type UpdateProfileRequestBodyGenderEnum string
@@ -53,16 +53,16 @@ const (
 )
 
 type UpdateProfileRequestBodyMailingAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type UpdateProfileRequestBodyPartyTypeEnum string
@@ -74,41 +74,41 @@ const (
 )
 
 type UpdateProfileRequestBodyShippingAddress struct {
-	Address1   *string `json:"Address1"`
-	Address2   *string `json:"Address2"`
-	Address3   *string `json:"Address3"`
-	Address4   *string `json:"Address4"`
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	County     *string `json:"County"`
-	PostalCode *string `json:"PostalCode"`
-	Province   *string `json:"Province"`
-	State      *string `json:"State"`
+	Address1   *string `json:"Address1,omitempty"`
+	Address2   *string `json:"Address2,omitempty"`
+	Address3   *string `json:"Address3,omitempty"`
+	Address4   *string `json:"Address4,omitempty"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	County     *string `json:"County,omitempty"`
+	PostalCode *string `json:"PostalCode,omitempty"`
+	Province   *string `json:"Province,omitempty"`
+	State      *string `json:"State,omitempty"`
 }
 
 type UpdateProfileRequestBody struct {
-	AccountNumber         *string                                  `json:"AccountNumber"`
-	AdditionalInformation *string                                  `json:"AdditionalInformation"`
-	Address               *UpdateProfileRequestBodyAddress         `json:"Address"`
-	Attributes            map[string]string                        `json:"Attributes"`
-	BillingAddress        *UpdateProfileRequestBodyBillingAddress  `json:"BillingAddress"`
-	BirthDate             *string                                  `json:"BirthDate"`
-	BusinessEmailAddress  *string                                  `json:"BusinessEmailAddress"`
-	BusinessName          *string                                  `json:"BusinessName"`
-	BusinessPhoneNumber   *string                                  `json:"BusinessPhoneNumber"`
-	EmailAddress          *string                                  `json:"EmailAddress"`
-	FirstName             *string                                  `json:"FirstName"`
-	Gender                *UpdateProfileRequestBodyGenderEnum      `json:"Gender"`
-	HomePhoneNumber       *string                                  `json:"HomePhoneNumber"`
-	LastName              *string                                  `json:"LastName"`
-	MailingAddress        *UpdateProfileRequestBodyMailingAddress  `json:"MailingAddress"`
-	MiddleName            *string                                  `json:"MiddleName"`
-	MobilePhoneNumber     *string                                  `json:"MobilePhoneNumber"`
-	PartyType             *UpdateProfileRequestBodyPartyTypeEnum   `json:"PartyType"`
-	PersonalEmailAddress  *string                                  `json:"PersonalEmailAddress"`
-	PhoneNumber           *string                                  `json:"PhoneNumber"`
+	AccountNumber         *string                                  `json:"AccountNumber,omitempty"`
+	AdditionalInformation *string                                  `json:"AdditionalInformation,omitempty"`
+	Address               *UpdateProfileRequestBodyAddress         `json:"Address,omitempty"`
+	Attributes            map[string]string                        `json:"Attributes,omitempty"`
+	BillingAddress        *UpdateProfileRequestBodyBillingAddress  `json:"BillingAddress,omitempty"`
+	BirthDate             *string                                  `json:"BirthDate,omitempty"`
+	BusinessEmailAddress  *string                                  `json:"BusinessEmailAddress,omitempty"`
+	BusinessName          *string                                  `json:"BusinessName,omitempty"`
+	BusinessPhoneNumber   *string                                  `json:"BusinessPhoneNumber,omitempty"`
+	EmailAddress          *string                                  `json:"EmailAddress,omitempty"`
+	FirstName             *string                                  `json:"FirstName,omitempty"`
+	Gender                *UpdateProfileRequestBodyGenderEnum      `json:"Gender,omitempty"`
+	HomePhoneNumber       *string                                  `json:"HomePhoneNumber,omitempty"`
+	LastName              *string                                  `json:"LastName,omitempty"`
+	MailingAddress        *UpdateProfileRequestBodyMailingAddress  `json:"MailingAddress,omitempty"`
+	MiddleName            *string                                  `json:"MiddleName,omitempty"`
+	MobilePhoneNumber     *string                                  `json:"MobilePhoneNumber,omitempty"`
+	PartyType             *UpdateProfileRequestBodyPartyTypeEnum   `json:"PartyType,omitempty"`
+	PersonalEmailAddress  *string                                  `json:"PersonalEmailAddress,omitempty"`
+	PhoneNumber           *string                                  `json:"PhoneNumber,omitempty"`
 	ProfileID             string                                   `json:"ProfileId"`
-	ShippingAddress       *UpdateProfileRequestBodyShippingAddress `json:"ShippingAddress"`
+	ShippingAddress       *UpdateProfileRequestBodyShippingAddress `json:"ShippingAddress,omitempty"`
 }
 
 type UpdateProfileRequest struct {

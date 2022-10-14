@@ -5,9 +5,9 @@ import (
 )
 
 type HeartBeatBody struct {
-	AgentVersion      *string         `json:"agentVersion"`
-	CollectedDataList []CollectedData `json:"collectedDataList"`
-	EnvironmentID     *string         `json:"environmentId"`
-	ResourceID        *string         `json:"resourceId"`
-	TimeStamp         *time.Time      `json:"timeStamp"`
+	AgentVersion      *string         `json:"agentVersion,omitempty"`
+	CollectedDataList []CollectedData `json:"collectedDataList,omitempty"`
+	EnvironmentID     *string         `json:"environmentId,omitempty"`
+	ResourceID        *string         `json:"resourceId,omitempty"`
+	TimeStamp         *time.Time      `json:"timeStamp,omitempty"`
 }

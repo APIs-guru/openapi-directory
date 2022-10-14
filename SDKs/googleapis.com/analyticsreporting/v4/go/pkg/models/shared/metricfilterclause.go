@@ -9,6 +9,6 @@ const (
 )
 
 type MetricFilterClause struct {
-	Filters  []MetricFilter                  `json:"filters"`
-	Operator *MetricFilterClauseOperatorEnum `json:"operator"`
+	Filters  []MetricFilter                  `json:"filters,omitempty"`
+	Operator *MetricFilterClauseOperatorEnum `json:"operator,omitempty"`
 }

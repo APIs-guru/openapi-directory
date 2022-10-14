@@ -9,6 +9,6 @@ const (
 )
 
 type CancelLeaseRequest struct {
-	ResponseView *CancelLeaseRequestResponseViewEnum `json:"responseView"`
-	ScheduleTime *string                             `json:"scheduleTime"`
+	ResponseView *CancelLeaseRequestResponseViewEnum `json:"responseView,omitempty"`
+	ScheduleTime *string                             `json:"scheduleTime,omitempty"`
 }

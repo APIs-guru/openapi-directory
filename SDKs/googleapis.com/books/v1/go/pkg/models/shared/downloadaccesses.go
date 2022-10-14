@@ -1,6 +1,6 @@
 package shared
 
 type DownloadAccesses struct {
-	DownloadAccessList []DownloadAccessRestriction `json:"downloadAccessList"`
-	Kind               *string                     `json:"kind"`
+	DownloadAccessList []DownloadAccessRestriction `json:"downloadAccessList,omitempty"`
+	Kind               *string                     `json:"kind,omitempty"`
 }

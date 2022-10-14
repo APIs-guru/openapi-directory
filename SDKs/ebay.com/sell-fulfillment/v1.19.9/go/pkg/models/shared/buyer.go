@@ -1,7 +1,7 @@
 package shared
 
 type Buyer struct {
-	TaxAddress    *TaxAddress    `json:"taxAddress"`
-	TaxIdentifier *TaxIdentifier `json:"taxIdentifier"`
-	Username      *string        `json:"username"`
+	TaxAddress    *TaxAddress    `json:"taxAddress,omitempty"`
+	TaxIdentifier *TaxIdentifier `json:"taxIdentifier,omitempty"`
+	Username      *string        `json:"username,omitempty"`
 }

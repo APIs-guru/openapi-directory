@@ -9,31 +9,31 @@ type PadUsersCountUsingPostRequest struct {
 }
 
 type PadUsersCountUsingPost200ApplicationJSONData struct {
-	PadUsersCount *int64 `json:"padUsersCount"`
+	PadUsersCount *int64 `json:"padUsersCount,omitempty"`
 }
 
 type PadUsersCountUsingPost200ApplicationJSON struct {
-	Code    *int64                                        `json:"code"`
-	Data    *PadUsersCountUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                       `json:"message"`
+	Code    *int64                                        `json:"code,omitempty"`
+	Data    *PadUsersCountUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                       `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersCountUsingPostResponse struct {

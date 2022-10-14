@@ -1,40 +1,40 @@
 package shared
 
 type SeriesSeriesSeriesSubscriptionReleaseInfoCurrentReleaseInfo struct {
-	AmountInMicros *float64 `json:"amountInMicros"`
-	CurrencyCode   *string  `json:"currencyCode"`
-	ReleaseNumber  *string  `json:"releaseNumber"`
-	ReleaseTime    *string  `json:"releaseTime"`
+	AmountInMicros *float64 `json:"amountInMicros,omitempty"`
+	CurrencyCode   *string  `json:"currencyCode,omitempty"`
+	ReleaseNumber  *string  `json:"releaseNumber,omitempty"`
+	ReleaseTime    *string  `json:"releaseTime,omitempty"`
 }
 
 type SeriesSeriesSeriesSubscriptionReleaseInfoNextReleaseInfo struct {
-	AmountInMicros *float64 `json:"amountInMicros"`
-	CurrencyCode   *string  `json:"currencyCode"`
-	ReleaseNumber  *string  `json:"releaseNumber"`
-	ReleaseTime    *string  `json:"releaseTime"`
+	AmountInMicros *float64 `json:"amountInMicros,omitempty"`
+	CurrencyCode   *string  `json:"currencyCode,omitempty"`
+	ReleaseNumber  *string  `json:"releaseNumber,omitempty"`
+	ReleaseTime    *string  `json:"releaseTime,omitempty"`
 }
 
 type SeriesSeriesSeriesSubscriptionReleaseInfo struct {
-	CancelTime             *string                                                      `json:"cancelTime"`
-	CurrentReleaseInfo     *SeriesSeriesSeriesSubscriptionReleaseInfoCurrentReleaseInfo `json:"currentReleaseInfo"`
-	NextReleaseInfo        *SeriesSeriesSeriesSubscriptionReleaseInfoNextReleaseInfo    `json:"nextReleaseInfo"`
-	SeriesSubscriptionType *string                                                      `json:"seriesSubscriptionType"`
+	CancelTime             *string                                                      `json:"cancelTime,omitempty"`
+	CurrentReleaseInfo     *SeriesSeriesSeriesSubscriptionReleaseInfoCurrentReleaseInfo `json:"currentReleaseInfo,omitempty"`
+	NextReleaseInfo        *SeriesSeriesSeriesSubscriptionReleaseInfoNextReleaseInfo    `json:"nextReleaseInfo,omitempty"`
+	SeriesSubscriptionType *string                                                      `json:"seriesSubscriptionType,omitempty"`
 }
 
 type SeriesSeries struct {
-	BannerImageURL                *string                                    `json:"bannerImageUrl"`
-	EligibleForSubscription       *bool                                      `json:"eligibleForSubscription"`
-	ImageURL                      *string                                    `json:"imageUrl"`
-	IsComplete                    *bool                                      `json:"isComplete"`
-	SeriesFormatType              *string                                    `json:"seriesFormatType"`
-	SeriesID                      *string                                    `json:"seriesId"`
-	SeriesSubscriptionReleaseInfo *SeriesSeriesSeriesSubscriptionReleaseInfo `json:"seriesSubscriptionReleaseInfo"`
-	SeriesType                    *string                                    `json:"seriesType"`
-	SubscriptionID                *string                                    `json:"subscriptionId"`
-	Title                         *string                                    `json:"title"`
+	BannerImageURL                *string                                    `json:"bannerImageUrl,omitempty"`
+	EligibleForSubscription       *bool                                      `json:"eligibleForSubscription,omitempty"`
+	ImageURL                      *string                                    `json:"imageUrl,omitempty"`
+	IsComplete                    *bool                                      `json:"isComplete,omitempty"`
+	SeriesFormatType              *string                                    `json:"seriesFormatType,omitempty"`
+	SeriesID                      *string                                    `json:"seriesId,omitempty"`
+	SeriesSubscriptionReleaseInfo *SeriesSeriesSeriesSubscriptionReleaseInfo `json:"seriesSubscriptionReleaseInfo,omitempty"`
+	SeriesType                    *string                                    `json:"seriesType,omitempty"`
+	SubscriptionID                *string                                    `json:"subscriptionId,omitempty"`
+	Title                         *string                                    `json:"title,omitempty"`
 }
 
 type Series struct {
-	Kind   *string        `json:"kind"`
-	Series []SeriesSeries `json:"series"`
+	Kind   *string        `json:"kind,omitempty"`
+	Series []SeriesSeries `json:"series,omitempty"`
 }

@@ -47,7 +47,7 @@ const (
 
 type GetImagesID200ApplicationJSONImage struct {
 	BoundTo     int64                                          `json:"bound_to"`
-	BuildID     *string                                        `json:"build_id"`
+	BuildID     *string                                        `json:"build_id,omitempty"`
 	Created     string                                         `json:"created"`
 	CreatedFrom GetImagesID200ApplicationJSONImageCreatedFrom  `json:"created_from"`
 	Deleted     string                                         `json:"deleted"`
@@ -61,13 +61,13 @@ type GetImagesID200ApplicationJSONImage struct {
 	OsFlavor    GetImagesID200ApplicationJSONImageOsFlavorEnum `json:"os_flavor"`
 	OsVersion   string                                         `json:"os_version"`
 	Protection  GetImagesID200ApplicationJSONImageProtection   `json:"protection"`
-	RapidDeploy *bool                                          `json:"rapid_deploy"`
+	RapidDeploy *bool                                          `json:"rapid_deploy,omitempty"`
 	Status      GetImagesID200ApplicationJSONImageStatusEnum   `json:"status"`
 	Type        GetImagesID200ApplicationJSONImageTypeEnum     `json:"type"`
 }
 
 type GetImagesID200ApplicationJSON struct {
-	Image *GetImagesID200ApplicationJSONImage `json:"image"`
+	Image *GetImagesID200ApplicationJSONImage `json:"image,omitempty"`
 }
 
 type GetImagesIDResponse struct {

@@ -11,9 +11,9 @@ const (
 )
 
 type Site struct {
-	AutoAdsEnabled       *bool          `json:"autoAdsEnabled"`
-	Domain               *string        `json:"domain"`
-	Name                 *string        `json:"name"`
-	ReportingDimensionID *string        `json:"reportingDimensionId"`
-	State                *SiteStateEnum `json:"state"`
+	AutoAdsEnabled       *bool          `json:"autoAdsEnabled,omitempty"`
+	Domain               *string        `json:"domain,omitempty"`
+	Name                 *string        `json:"name,omitempty"`
+	ReportingDimensionID *string        `json:"reportingDimensionId,omitempty"`
+	State                *SiteStateEnum `json:"state,omitempty"`
 }

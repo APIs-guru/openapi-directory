@@ -22,10 +22,10 @@ const (
 )
 
 type UpdateJobQueueRequestBody struct {
-	ComputeEnvironmentOrder []shared.ComputeEnvironmentOrder    `json:"computeEnvironmentOrder"`
+	ComputeEnvironmentOrder []shared.ComputeEnvironmentOrder    `json:"computeEnvironmentOrder,omitempty"`
 	JobQueue                string                              `json:"jobQueue"`
-	Priority                *int64                              `json:"priority"`
-	State                   *UpdateJobQueueRequestBodyStateEnum `json:"state"`
+	Priority                *int64                              `json:"priority,omitempty"`
+	State                   *UpdateJobQueueRequestBodyStateEnum `json:"state,omitempty"`
 }
 
 type UpdateJobQueueRequest struct {

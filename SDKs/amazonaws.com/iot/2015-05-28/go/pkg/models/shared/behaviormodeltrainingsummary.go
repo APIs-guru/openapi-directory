@@ -5,10 +5,10 @@ import (
 )
 
 type BehaviorModelTrainingSummary struct {
-	BehaviorName                    *string          `json:"behaviorName"`
-	DatapointsCollectionPercentage  *float64         `json:"datapointsCollectionPercentage"`
-	LastModelRefreshDate            *time.Time       `json:"lastModelRefreshDate"`
-	ModelStatus                     *ModelStatusEnum `json:"modelStatus"`
-	SecurityProfileName             *string          `json:"securityProfileName"`
-	TrainingDataCollectionStartDate *time.Time       `json:"trainingDataCollectionStartDate"`
+	BehaviorName                    *string          `json:"behaviorName,omitempty"`
+	DatapointsCollectionPercentage  *float64         `json:"datapointsCollectionPercentage,omitempty"`
+	LastModelRefreshDate            *time.Time       `json:"lastModelRefreshDate,omitempty"`
+	ModelStatus                     *ModelStatusEnum `json:"modelStatus,omitempty"`
+	SecurityProfileName             *string          `json:"securityProfileName,omitempty"`
+	TrainingDataCollectionStartDate *time.Time       `json:"trainingDataCollectionStartDate,omitempty"`
 }

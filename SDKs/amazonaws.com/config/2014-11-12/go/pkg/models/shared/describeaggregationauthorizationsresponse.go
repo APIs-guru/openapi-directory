@@ -1,6 +1,6 @@
 package shared
 
 type DescribeAggregationAuthorizationsResponse struct {
-	AggregationAuthorizations []AggregationAuthorization `json:"AggregationAuthorizations"`
-	NextToken                 *string                    `json:"NextToken"`
+	AggregationAuthorizations []AggregationAuthorization `json:"AggregationAuthorizations,omitempty"`
+	NextToken                 *string                    `json:"NextToken,omitempty"`
 }

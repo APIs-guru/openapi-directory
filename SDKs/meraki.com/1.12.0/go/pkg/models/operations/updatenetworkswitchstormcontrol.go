@@ -5,9 +5,9 @@ type UpdateNetworkSwitchStormControlPathParams struct {
 }
 
 type UpdateNetworkSwitchStormControlRequestBody struct {
-	BroadcastThreshold      *int64 `json:"broadcastThreshold"`
-	MulticastThreshold      *int64 `json:"multicastThreshold"`
-	UnknownUnicastThreshold *int64 `json:"unknownUnicastThreshold"`
+	BroadcastThreshold      *int64 `json:"broadcastThreshold,omitempty"`
+	MulticastThreshold      *int64 `json:"multicastThreshold,omitempty"`
+	UnknownUnicastThreshold *int64 `json:"unknownUnicastThreshold,omitempty"`
 }
 
 type UpdateNetworkSwitchStormControlRequest struct {

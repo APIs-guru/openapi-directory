@@ -5,17 +5,17 @@ import (
 )
 
 type ListNotebookInstancesInput struct {
-	AdditionalCodeRepositoryEquals              *string                        `json:"AdditionalCodeRepositoryEquals"`
-	CreationTimeAfter                           *time.Time                     `json:"CreationTimeAfter"`
-	CreationTimeBefore                          *time.Time                     `json:"CreationTimeBefore"`
-	DefaultCodeRepositoryContains               *string                        `json:"DefaultCodeRepositoryContains"`
-	LastModifiedTimeAfter                       *time.Time                     `json:"LastModifiedTimeAfter"`
-	LastModifiedTimeBefore                      *time.Time                     `json:"LastModifiedTimeBefore"`
-	MaxResults                                  *int64                         `json:"MaxResults"`
-	NameContains                                *string                        `json:"NameContains"`
-	NextToken                                   *string                        `json:"NextToken"`
-	NotebookInstanceLifecycleConfigNameContains *string                        `json:"NotebookInstanceLifecycleConfigNameContains"`
-	SortBy                                      *NotebookInstanceSortKeyEnum   `json:"SortBy"`
-	SortOrder                                   *NotebookInstanceSortOrderEnum `json:"SortOrder"`
-	StatusEquals                                *NotebookInstanceStatusEnum    `json:"StatusEquals"`
+	AdditionalCodeRepositoryEquals              *string                        `json:"AdditionalCodeRepositoryEquals,omitempty"`
+	CreationTimeAfter                           *time.Time                     `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore                          *time.Time                     `json:"CreationTimeBefore,omitempty"`
+	DefaultCodeRepositoryContains               *string                        `json:"DefaultCodeRepositoryContains,omitempty"`
+	LastModifiedTimeAfter                       *time.Time                     `json:"LastModifiedTimeAfter,omitempty"`
+	LastModifiedTimeBefore                      *time.Time                     `json:"LastModifiedTimeBefore,omitempty"`
+	MaxResults                                  *int64                         `json:"MaxResults,omitempty"`
+	NameContains                                *string                        `json:"NameContains,omitempty"`
+	NextToken                                   *string                        `json:"NextToken,omitempty"`
+	NotebookInstanceLifecycleConfigNameContains *string                        `json:"NotebookInstanceLifecycleConfigNameContains,omitempty"`
+	SortBy                                      *NotebookInstanceSortKeyEnum   `json:"SortBy,omitempty"`
+	SortOrder                                   *NotebookInstanceSortOrderEnum `json:"SortOrder,omitempty"`
+	StatusEquals                                *NotebookInstanceStatusEnum    `json:"StatusEquals,omitempty"`
 }

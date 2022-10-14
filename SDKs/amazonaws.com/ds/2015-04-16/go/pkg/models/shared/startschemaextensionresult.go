@@ -1,5 +1,5 @@
 package shared
 
 type StartSchemaExtensionResult struct {
-	SchemaExtensionID *string `json:"SchemaExtensionId"`
+	SchemaExtensionID *string `json:"SchemaExtensionId,omitempty"`
 }

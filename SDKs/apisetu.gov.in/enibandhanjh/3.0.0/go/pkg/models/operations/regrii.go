@@ -18,8 +18,8 @@ const (
 )
 
 type RegriiRequestBody struct {
-	CertificateParameters *RegriiRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                            `json:"consentArtifact"`
+	CertificateParameters *RegriiRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                            `json:"consentArtifact,omitempty"`
 	Format                RegriiRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                  `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Regrii400ApplicationJSON struct {
-	Error            *Regrii400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Regrii400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Regrii400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Regrii400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Regrii401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Regrii401ApplicationJSON struct {
-	Error            *Regrii401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Regrii401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Regrii401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Regrii401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Regrii404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Regrii404ApplicationJSON struct {
-	Error            *Regrii404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Regrii404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Regrii404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Regrii404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Regrii500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Regrii500ApplicationJSON struct {
-	Error            *Regrii500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Regrii500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Regrii500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Regrii500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Regrii502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Regrii502ApplicationJSON struct {
-	Error            *Regrii502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Regrii502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Regrii502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Regrii502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Regrii503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Regrii503ApplicationJSON struct {
-	Error            *Regrii503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Regrii503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Regrii503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Regrii503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Regrii504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Regrii504ApplicationJSON struct {
-	Error            *Regrii504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Regrii504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Regrii504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Regrii504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type RegriiResponse struct {

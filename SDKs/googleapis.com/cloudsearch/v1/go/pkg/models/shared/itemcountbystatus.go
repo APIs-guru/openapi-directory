@@ -11,7 +11,7 @@ const (
 )
 
 type ItemCountByStatus struct {
-	Count             *string                          `json:"count"`
-	IndexedItemsCount *string                          `json:"indexedItemsCount"`
-	StatusCode        *ItemCountByStatusStatusCodeEnum `json:"statusCode"`
+	Count             *string                          `json:"count,omitempty"`
+	IndexedItemsCount *string                          `json:"indexedItemsCount,omitempty"`
+	StatusCode        *ItemCountByStatusStatusCodeEnum `json:"statusCode,omitempty"`
 }

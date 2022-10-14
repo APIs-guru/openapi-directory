@@ -9,5 +9,5 @@ const (
 )
 
 type ApplicationReference struct {
-	Type *ApplicationReferenceTypeEnum `json:"type"`
+	Type *ApplicationReferenceTypeEnum `json:"type,omitempty"`
 }

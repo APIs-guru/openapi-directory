@@ -17,10 +17,10 @@ const (
 )
 
 type Document struct {
-	BoilerplateHandling *DocumentBoilerplateHandlingEnum `json:"boilerplateHandling"`
-	Content             *string                          `json:"content"`
-	GcsContentURI       *string                          `json:"gcsContentUri"`
-	Language            *string                          `json:"language"`
-	ReferenceWebURI     *string                          `json:"referenceWebUri"`
-	Type                *DocumentTypeEnum                `json:"type"`
+	BoilerplateHandling *DocumentBoilerplateHandlingEnum `json:"boilerplateHandling,omitempty"`
+	Content             *string                          `json:"content,omitempty"`
+	GcsContentURI       *string                          `json:"gcsContentUri,omitempty"`
+	Language            *string                          `json:"language,omitempty"`
+	ReferenceWebURI     *string                          `json:"referenceWebUri,omitempty"`
+	Type                *DocumentTypeEnum                `json:"type,omitempty"`
 }

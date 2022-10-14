@@ -5,7 +5,7 @@ import (
 )
 
 type Search struct {
-	From  *time.Time `json:"from"`
-	Query *string    `json:"query"`
-	To    *time.Time `json:"to"`
+	From  *time.Time `json:"from,omitempty"`
+	Query *string    `json:"query,omitempty"`
+	To    *time.Time `json:"to,omitempty"`
 }

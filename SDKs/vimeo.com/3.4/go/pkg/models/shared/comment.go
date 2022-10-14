@@ -177,8 +177,8 @@ type CommentUserMetadataConnections struct {
 }
 
 type CommentUserMetadataInteractionsAddPrivacyUser struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type CommentUserMetadataInteractionsBlock struct {
@@ -201,7 +201,7 @@ type CommentUserMetadataInteractionsReport struct {
 }
 
 type CommentUserMetadataInteractions struct {
-	AddPrivacyUser *CommentUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user"`
+	AddPrivacyUser *CommentUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
 	Block          CommentUserMetadataInteractionsBlock           `json:"block"`
 	Follow         CommentUserMetadataInteractionsFollow          `json:"follow"`
 	Report         CommentUserMetadataInteractionsReport          `json:"report"`
@@ -241,19 +241,19 @@ const (
 )
 
 type CommentUserPreferencesVideosPrivacy struct {
-	Add      *bool                                            `json:"add"`
-	Comments *CommentUserPreferencesVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                            `json:"download"`
-	Embed    *CommentUserPreferencesVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *CommentUserPreferencesVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                            `json:"add,omitempty"`
+	Comments *CommentUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                            `json:"download,omitempty"`
+	Embed    *CommentUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *CommentUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type CommentUserPreferencesVideos struct {
-	Privacy *CommentUserPreferencesVideosPrivacy `json:"privacy"`
+	Privacy *CommentUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type CommentUserPreferences struct {
-	Videos *CommentUserPreferencesVideos `json:"videos"`
+	Videos *CommentUserPreferencesVideos `json:"videos,omitempty"`
 }
 
 type CommentUserUploadQuotaLifetime struct {
@@ -298,15 +298,15 @@ type CommentUserWebsites struct {
 type CommentUserUser struct {
 	Account       CommentUserAccountEnum  `json:"account"`
 	Bio           string                  `json:"bio"`
-	ContentFilter []string                `json:"content_filter"`
+	ContentFilter []string                `json:"content_filter,omitempty"`
 	CreatedTime   string                  `json:"created_time"`
-	Email         *string                 `json:"email"`
+	Email         *string                 `json:"email,omitempty"`
 	Link          string                  `json:"link"`
 	Location      string                  `json:"location"`
 	Metadata      CommentUserMetadata     `json:"metadata"`
 	Name          string                  `json:"name"`
 	Pictures      Picture                 `json:"pictures"`
-	Preferences   *CommentUserPreferences `json:"preferences"`
+	Preferences   *CommentUserPreferences `json:"preferences,omitempty"`
 	ResourceKey   string                  `json:"resource_key"`
 	UploadQuota   CommentUserUploadQuota  `json:"upload_quota"`
 	URI           string                  `json:"uri"`

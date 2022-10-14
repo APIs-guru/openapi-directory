@@ -1,7 +1,7 @@
 package shared
 
 type ListResolverEndpointIPAddressesResponse struct {
-	IPAddresses []IPAddressResponse `json:"IpAddresses"`
-	MaxResults  *int64              `json:"MaxResults"`
-	NextToken   *string             `json:"NextToken"`
+	IPAddresses []IPAddressResponse `json:"IpAddresses,omitempty"`
+	MaxResults  *int64              `json:"MaxResults,omitempty"`
+	NextToken   *string             `json:"NextToken,omitempty"`
 }

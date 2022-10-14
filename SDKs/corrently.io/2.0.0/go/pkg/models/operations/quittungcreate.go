@@ -1,7 +1,7 @@
 package operations
 
 type QuittungCreateRequestBody struct {
-	Email *string `json:"email"`
+	Email *string `json:"email,omitempty"`
 }
 
 type QuittungCreateRequest struct {

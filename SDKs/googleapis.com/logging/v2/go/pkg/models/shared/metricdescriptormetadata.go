@@ -14,7 +14,7 @@ const (
 )
 
 type MetricDescriptorMetadata struct {
-	IngestDelay  *string                                  `json:"ingestDelay"`
-	LaunchStage  *MetricDescriptorMetadataLaunchStageEnum `json:"launchStage"`
-	SamplePeriod *string                                  `json:"samplePeriod"`
+	IngestDelay  *string                                  `json:"ingestDelay,omitempty"`
+	LaunchStage  *MetricDescriptorMetadataLaunchStageEnum `json:"launchStage,omitempty"`
+	SamplePeriod *string                                  `json:"samplePeriod,omitempty"`
 }

@@ -22,15 +22,15 @@ const (
 )
 
 type Endpoint struct {
-	CreateTime             *string               `json:"createTime"`
-	Description            *string               `json:"description"`
-	EndpointForwardingRule *string               `json:"endpointForwardingRule"`
-	EndpointIP             *string               `json:"endpointIp"`
-	Labels                 map[string]string     `json:"labels"`
-	Name                   *string               `json:"name"`
-	Network                *string               `json:"network"`
-	Severity               *EndpointSeverityEnum `json:"severity"`
-	State                  *EndpointStateEnum    `json:"state"`
-	TrafficLogs            *bool                 `json:"trafficLogs"`
-	UpdateTime             *string               `json:"updateTime"`
+	CreateTime             *string               `json:"createTime,omitempty"`
+	Description            *string               `json:"description,omitempty"`
+	EndpointForwardingRule *string               `json:"endpointForwardingRule,omitempty"`
+	EndpointIP             *string               `json:"endpointIp,omitempty"`
+	Labels                 map[string]string     `json:"labels,omitempty"`
+	Name                   *string               `json:"name,omitempty"`
+	Network                *string               `json:"network,omitempty"`
+	Severity               *EndpointSeverityEnum `json:"severity,omitempty"`
+	State                  *EndpointStateEnum    `json:"state,omitempty"`
+	TrafficLogs            *bool                 `json:"trafficLogs,omitempty"`
+	UpdateTime             *string               `json:"updateTime,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type ListPartsOutput struct {
-	ArchiveDescription *string           `json:"ArchiveDescription"`
-	CreationDate       *string           `json:"CreationDate"`
-	Marker             *string           `json:"Marker"`
-	MultipartUploadID  *string           `json:"MultipartUploadId"`
-	PartSizeInBytes    *int64            `json:"PartSizeInBytes"`
-	Parts              []PartListElement `json:"Parts"`
-	VaultArn           *string           `json:"VaultARN"`
+	ArchiveDescription *string           `json:"ArchiveDescription,omitempty"`
+	CreationDate       *string           `json:"CreationDate,omitempty"`
+	Marker             *string           `json:"Marker,omitempty"`
+	MultipartUploadID  *string           `json:"MultipartUploadId,omitempty"`
+	PartSizeInBytes    *int64            `json:"PartSizeInBytes,omitempty"`
+	Parts              []PartListElement `json:"Parts,omitempty"`
+	VaultArn           *string           `json:"VaultARN,omitempty"`
 }

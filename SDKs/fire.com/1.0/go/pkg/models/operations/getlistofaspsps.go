@@ -14,23 +14,23 @@ type GetListOfAspspsRequest struct {
 }
 
 type GetListOfAspsps200ApplicationJSONAspspsCountryCountry struct {
-	Code        *string `json:"code"`
-	Description *string `json:"description"`
+	Code        *string `json:"code,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 type GetListOfAspsps200ApplicationJSONAspspsAspsp struct {
-	Alias       *string                                                                                                  `json:"alias"`
-	AspspUUID   *string                                                                                                  `json:"aspspUuid"`
-	Country     *GetListOfAspsps200ApplicationJSONAspspsCountryCountry                                                   `json:"country"`
-	Currency    *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency"`
-	DateCreated *time.Time                                                                                               `json:"dateCreated"`
-	LastUpdated *time.Time                                                                                               `json:"lastUpdated"`
-	LogoURL     *string                                                                                                  `json:"logoUrl"`
+	Alias       *string                                                                                                  `json:"alias,omitempty"`
+	AspspUUID   *string                                                                                                  `json:"aspspUuid,omitempty"`
+	Country     *GetListOfAspsps200ApplicationJSONAspspsCountryCountry                                                   `json:"country,omitempty"`
+	Currency    *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
+	DateCreated *time.Time                                                                                               `json:"dateCreated,omitempty"`
+	LastUpdated *time.Time                                                                                               `json:"lastUpdated,omitempty"`
+	LogoURL     *string                                                                                                  `json:"logoUrl,omitempty"`
 }
 
 type GetListOfAspsps200ApplicationJSONAspsps struct {
-	Aspsps []GetListOfAspsps200ApplicationJSONAspspsAspsp `json:"aspsps"`
-	Total  *int64                                         `json:"total"`
+	Aspsps []GetListOfAspsps200ApplicationJSONAspspsAspsp `json:"aspsps,omitempty"`
+	Total  *int64                                         `json:"total,omitempty"`
 }
 
 type GetListOfAspspsResponse struct {

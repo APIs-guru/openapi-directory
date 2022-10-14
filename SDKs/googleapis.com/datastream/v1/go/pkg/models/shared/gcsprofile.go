@@ -1,6 +1,6 @@
 package shared
 
 type GcsProfile struct {
-	Bucket   *string `json:"bucket"`
-	RootPath *string `json:"rootPath"`
+	Bucket   *string `json:"bucket,omitempty"`
+	RootPath *string `json:"rootPath,omitempty"`
 }

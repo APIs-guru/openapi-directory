@@ -5,13 +5,13 @@ import (
 )
 
 type TestCaseRun struct {
-	EndTime                *time.Time  `json:"endTime"`
-	Failure                *string     `json:"failure"`
-	LogURL                 *string     `json:"logUrl"`
-	StartTime              *time.Time  `json:"startTime"`
-	Status                 *StatusEnum `json:"status"`
-	TestCaseDefinitionID   *string     `json:"testCaseDefinitionId"`
-	TestCaseDefinitionName *string     `json:"testCaseDefinitionName"`
-	TestCaseRunID          *string     `json:"testCaseRunId"`
-	Warnings               *string     `json:"warnings"`
+	EndTime                *time.Time  `json:"endTime,omitempty"`
+	Failure                *string     `json:"failure,omitempty"`
+	LogURL                 *string     `json:"logUrl,omitempty"`
+	StartTime              *time.Time  `json:"startTime,omitempty"`
+	Status                 *StatusEnum `json:"status,omitempty"`
+	TestCaseDefinitionID   *string     `json:"testCaseDefinitionId,omitempty"`
+	TestCaseDefinitionName *string     `json:"testCaseDefinitionName,omitempty"`
+	TestCaseRunID          *string     `json:"testCaseRunId,omitempty"`
+	Warnings               *string     `json:"warnings,omitempty"`
 }

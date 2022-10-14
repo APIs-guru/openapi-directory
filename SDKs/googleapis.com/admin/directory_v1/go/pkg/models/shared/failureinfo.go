@@ -23,8 +23,8 @@ const (
 )
 
 type FailureInfo struct {
-	ErrorCode    *FailureInfoErrorCodeEnum `json:"errorCode"`
-	ErrorMessage *string                   `json:"errorMessage"`
-	Printer      *Printer                  `json:"printer"`
-	PrinterID    *string                   `json:"printerId"`
+	ErrorCode    *FailureInfoErrorCodeEnum `json:"errorCode,omitempty"`
+	ErrorMessage *string                   `json:"errorMessage,omitempty"`
+	Printer      *Printer                  `json:"printer,omitempty"`
+	PrinterID    *string                   `json:"printerId,omitempty"`
 }

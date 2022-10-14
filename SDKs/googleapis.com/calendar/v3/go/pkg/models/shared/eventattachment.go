@@ -1,9 +1,9 @@
 package shared
 
 type EventAttachment struct {
-	FileID   *string `json:"fileId"`
-	FileURL  *string `json:"fileUrl"`
-	IconLink *string `json:"iconLink"`
-	MimeType *string `json:"mimeType"`
-	Title    *string `json:"title"`
+	FileID   *string `json:"fileId,omitempty"`
+	FileURL  *string `json:"fileUrl,omitempty"`
+	IconLink *string `json:"iconLink,omitempty"`
+	MimeType *string `json:"mimeType,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }

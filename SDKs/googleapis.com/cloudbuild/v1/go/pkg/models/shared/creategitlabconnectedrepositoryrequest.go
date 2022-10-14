@@ -1,6 +1,6 @@
 package shared
 
 type CreateGitLabConnectedRepositoryRequest struct {
-	GitlabConnectedRepository *GitLabConnectedRepository `json:"gitlabConnectedRepository"`
-	Parent                    *string                    `json:"parent"`
+	GitlabConnectedRepository *GitLabConnectedRepository `json:"gitlabConnectedRepository,omitempty"`
+	Parent                    *string                    `json:"parent,omitempty"`
 }

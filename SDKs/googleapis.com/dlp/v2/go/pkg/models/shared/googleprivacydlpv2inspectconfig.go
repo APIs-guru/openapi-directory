@@ -20,12 +20,12 @@ const (
 )
 
 type GooglePrivacyDlpV2InspectConfig struct {
-	ContentOptions   []GooglePrivacyDlpV2InspectConfigContentOptionsEnum `json:"contentOptions"`
-	CustomInfoTypes  []GooglePrivacyDlpV2CustomInfoType                  `json:"customInfoTypes"`
-	ExcludeInfoTypes *bool                                               `json:"excludeInfoTypes"`
-	IncludeQuote     *bool                                               `json:"includeQuote"`
-	InfoTypes        []GooglePrivacyDlpV2InfoType                        `json:"infoTypes"`
-	Limits           *GooglePrivacyDlpV2FindingLimits                    `json:"limits"`
-	MinLikelihood    *GooglePrivacyDlpV2InspectConfigMinLikelihoodEnum   `json:"minLikelihood"`
-	RuleSet          []GooglePrivacyDlpV2InspectionRuleSet               `json:"ruleSet"`
+	ContentOptions   []GooglePrivacyDlpV2InspectConfigContentOptionsEnum `json:"contentOptions,omitempty"`
+	CustomInfoTypes  []GooglePrivacyDlpV2CustomInfoType                  `json:"customInfoTypes,omitempty"`
+	ExcludeInfoTypes *bool                                               `json:"excludeInfoTypes,omitempty"`
+	IncludeQuote     *bool                                               `json:"includeQuote,omitempty"`
+	InfoTypes        []GooglePrivacyDlpV2InfoType                        `json:"infoTypes,omitempty"`
+	Limits           *GooglePrivacyDlpV2FindingLimits                    `json:"limits,omitempty"`
+	MinLikelihood    *GooglePrivacyDlpV2InspectConfigMinLikelihoodEnum   `json:"minLikelihood,omitempty"`
+	RuleSet          []GooglePrivacyDlpV2InspectionRuleSet               `json:"ruleSet,omitempty"`
 }

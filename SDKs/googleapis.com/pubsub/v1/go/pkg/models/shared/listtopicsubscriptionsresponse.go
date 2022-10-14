@@ -1,6 +1,6 @@
 package shared
 
 type ListTopicSubscriptionsResponse struct {
-	NextPageToken *string  `json:"nextPageToken"`
-	Subscriptions []string `json:"subscriptions"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	Subscriptions []string `json:"subscriptions,omitempty"`
 }

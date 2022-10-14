@@ -27,9 +27,9 @@ const (
 )
 
 type Policy struct {
-	AutoUpdatePolicy          *PolicyAutoUpdatePolicyEnum          `json:"autoUpdatePolicy"`
-	DeviceReportPolicy        *PolicyDeviceReportPolicyEnum        `json:"deviceReportPolicy"`
-	MaintenanceWindow         *MaintenanceWindow                   `json:"maintenanceWindow"`
-	ProductAvailabilityPolicy *PolicyProductAvailabilityPolicyEnum `json:"productAvailabilityPolicy"`
-	ProductPolicy             []ProductPolicy                      `json:"productPolicy"`
+	AutoUpdatePolicy          *PolicyAutoUpdatePolicyEnum          `json:"autoUpdatePolicy,omitempty"`
+	DeviceReportPolicy        *PolicyDeviceReportPolicyEnum        `json:"deviceReportPolicy,omitempty"`
+	MaintenanceWindow         *MaintenanceWindow                   `json:"maintenanceWindow,omitempty"`
+	ProductAvailabilityPolicy *PolicyProductAvailabilityPolicyEnum `json:"productAvailabilityPolicy,omitempty"`
+	ProductPolicy             []ProductPolicy                      `json:"productPolicy,omitempty"`
 }

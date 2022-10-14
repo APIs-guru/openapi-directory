@@ -1,6 +1,6 @@
 package shared
 
 type TflAPIPresentationEntitiesStationInterval struct {
-	ID        *string                              `json:"id"`
-	Intervals []TflAPIPresentationEntitiesInterval `json:"intervals"`
+	ID        *string                              `json:"id,omitempty"`
+	Intervals []TflAPIPresentationEntitiesInterval `json:"intervals,omitempty"`
 }

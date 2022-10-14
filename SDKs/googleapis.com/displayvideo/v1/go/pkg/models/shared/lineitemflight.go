@@ -10,7 +10,7 @@ const (
 )
 
 type LineItemFlight struct {
-	DateRange      *DateRange                        `json:"dateRange"`
-	FlightDateType *LineItemFlightFlightDateTypeEnum `json:"flightDateType"`
-	TriggerID      *string                           `json:"triggerId"`
+	DateRange      *DateRange                        `json:"dateRange,omitempty"`
+	FlightDateType *LineItemFlightFlightDateTypeEnum `json:"flightDateType,omitempty"`
+	TriggerID      *string                           `json:"triggerId,omitempty"`
 }

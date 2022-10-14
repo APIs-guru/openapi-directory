@@ -18,7 +18,7 @@ type StartBulkDeploymentHeaders struct {
 type StartBulkDeploymentRequestBody struct {
 	ExecutionRoleArn string            `json:"ExecutionRoleArn"`
 	InputFileURI     string            `json:"InputFileUri"`
-	Tags             map[string]string `json:"tags"`
+	Tags             map[string]string `json:"tags,omitempty"`
 }
 
 type StartBulkDeploymentRequest struct {

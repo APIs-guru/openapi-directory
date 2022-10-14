@@ -1,16 +1,16 @@
 package shared
 
 type TestOrder struct {
-	Customer                  *TestOrderCustomer      `json:"customer"`
-	EnableOrderinvoices       *bool                   `json:"enableOrderinvoices"`
-	Kind                      *string                 `json:"kind"`
-	LineItems                 []TestOrderLineItem     `json:"lineItems"`
-	NotificationMode          *string                 `json:"notificationMode"`
-	PaymentMethod             *TestOrderPaymentMethod `json:"paymentMethod"`
-	PredefinedDeliveryAddress *string                 `json:"predefinedDeliveryAddress"`
-	PredefinedPickupDetails   *string                 `json:"predefinedPickupDetails"`
-	Promotions                []OrderLegacyPromotion  `json:"promotions"`
-	ShippingCost              *Price                  `json:"shippingCost"`
-	ShippingCostTax           *Price                  `json:"shippingCostTax"`
-	ShippingOption            *string                 `json:"shippingOption"`
+	Customer                  *TestOrderCustomer      `json:"customer,omitempty"`
+	EnableOrderinvoices       *bool                   `json:"enableOrderinvoices,omitempty"`
+	Kind                      *string                 `json:"kind,omitempty"`
+	LineItems                 []TestOrderLineItem     `json:"lineItems,omitempty"`
+	NotificationMode          *string                 `json:"notificationMode,omitempty"`
+	PaymentMethod             *TestOrderPaymentMethod `json:"paymentMethod,omitempty"`
+	PredefinedDeliveryAddress *string                 `json:"predefinedDeliveryAddress,omitempty"`
+	PredefinedPickupDetails   *string                 `json:"predefinedPickupDetails,omitempty"`
+	Promotions                []OrderLegacyPromotion  `json:"promotions,omitempty"`
+	ShippingCost              *Price                  `json:"shippingCost,omitempty"`
+	ShippingCostTax           *Price                  `json:"shippingCostTax,omitempty"`
+	ShippingOption            *string                 `json:"shippingOption,omitempty"`
 }

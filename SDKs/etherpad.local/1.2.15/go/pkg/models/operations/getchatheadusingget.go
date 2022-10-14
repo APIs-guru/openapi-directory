@@ -9,38 +9,38 @@ type GetChatHeadUsingGetRequest struct {
 }
 
 type GetChatHeadUsingGet200ApplicationJSONDataChatHead struct {
-	Text     *string `json:"text"`
-	Time     *int64  `json:"time"`
-	UserID   *string `json:"userId"`
-	UserName *string `json:"userName"`
+	Text     *string `json:"text,omitempty"`
+	Time     *int64  `json:"time,omitempty"`
+	UserID   *string `json:"userId,omitempty"`
+	UserName *string `json:"userName,omitempty"`
 }
 
 type GetChatHeadUsingGet200ApplicationJSONData struct {
-	ChatHead *GetChatHeadUsingGet200ApplicationJSONDataChatHead `json:"chatHead"`
+	ChatHead *GetChatHeadUsingGet200ApplicationJSONDataChatHead `json:"chatHead,omitempty"`
 }
 
 type GetChatHeadUsingGet200ApplicationJSON struct {
-	Code    *int64                                     `json:"code"`
-	Data    *GetChatHeadUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                    `json:"message"`
+	Code    *int64                                     `json:"code,omitempty"`
+	Data    *GetChatHeadUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                    `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingGetResponse struct {

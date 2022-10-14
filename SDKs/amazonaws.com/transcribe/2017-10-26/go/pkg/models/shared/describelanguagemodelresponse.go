@@ -1,5 +1,5 @@
 package shared
 
 type DescribeLanguageModelResponse struct {
-	LanguageModel *LanguageModel `json:"LanguageModel"`
+	LanguageModel *LanguageModel `json:"LanguageModel,omitempty"`
 }

@@ -15,9 +15,9 @@ const (
 )
 
 type AddUser200ApplicationJSONDataAddedUser struct {
-	Password *string  `json:"password"`
-	Role     []string `json:"role"`
-	Username *string  `json:"username"`
+	Password *string  `json:"password,omitempty"`
+	Role     []string `json:"role,omitempty"`
+	Username *string  `json:"username,omitempty"`
 }
 
 type AddUser200ApplicationJSONData struct {

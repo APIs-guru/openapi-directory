@@ -5,12 +5,12 @@ import (
 )
 
 type ForecastSummary struct {
-	CreationTime         *time.Time `json:"CreationTime"`
-	DatasetGroupArn      *string    `json:"DatasetGroupArn"`
-	ForecastArn          *string    `json:"ForecastArn"`
-	ForecastName         *string    `json:"ForecastName"`
-	LastModificationTime *time.Time `json:"LastModificationTime"`
-	Message              *string    `json:"Message"`
-	PredictorArn         *string    `json:"PredictorArn"`
-	Status               *string    `json:"Status"`
+	CreationTime         *time.Time `json:"CreationTime,omitempty"`
+	DatasetGroupArn      *string    `json:"DatasetGroupArn,omitempty"`
+	ForecastArn          *string    `json:"ForecastArn,omitempty"`
+	ForecastName         *string    `json:"ForecastName,omitempty"`
+	LastModificationTime *time.Time `json:"LastModificationTime,omitempty"`
+	Message              *string    `json:"Message,omitempty"`
+	PredictorArn         *string    `json:"PredictorArn,omitempty"`
+	Status               *string    `json:"Status,omitempty"`
 }

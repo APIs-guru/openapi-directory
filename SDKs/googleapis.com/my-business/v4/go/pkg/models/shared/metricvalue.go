@@ -22,7 +22,7 @@ const (
 )
 
 type MetricValue struct {
-	DimensionalValues []DimensionalMetricValue `json:"dimensionalValues"`
-	Metric            *MetricValueMetricEnum   `json:"metric"`
-	TotalValue        *DimensionalMetricValue  `json:"totalValue"`
+	DimensionalValues []DimensionalMetricValue `json:"dimensionalValues,omitempty"`
+	Metric            *MetricValueMetricEnum   `json:"metric,omitempty"`
+	TotalValue        *DimensionalMetricValue  `json:"totalValue,omitempty"`
 }

@@ -19,7 +19,7 @@ type DeleteProjectRequest struct {
 }
 
 type DeleteProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteProjectResponse struct {

@@ -9,7 +9,7 @@ type GetAPIV2PredictionsRequest struct {
 }
 
 type GetAPIV2Predictions404ApplicationJSON struct {
-	Errors map[string]interface{} `json:"errors"`
+	Errors map[string]interface{} `json:"errors,omitempty"`
 }
 
 type GetAPIV2PredictionsResponse struct {

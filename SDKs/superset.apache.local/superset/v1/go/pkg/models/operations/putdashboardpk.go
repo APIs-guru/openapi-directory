@@ -19,32 +19,32 @@ type PutDashboardPkRequest struct {
 }
 
 type PutDashboardPk200ApplicationJSON struct {
-	ID     *float64                    `json:"id"`
-	Result *shared.DashboardRestAPIPut `json:"result"`
+	ID     *float64                    `json:"id,omitempty"`
+	Result *shared.DashboardRestAPIPut `json:"result,omitempty"`
 }
 
 type PutDashboardPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDashboardPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDashboardPk403ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDashboardPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDashboardPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDashboardPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutDashboardPkResponse struct {

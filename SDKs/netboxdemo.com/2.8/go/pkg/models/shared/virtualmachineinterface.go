@@ -39,16 +39,16 @@ type VirtualMachineInterfaceTypeType struct {
 }
 
 type VirtualMachineInterface struct {
-	Description    *string                          `json:"description"`
-	Enabled        *bool                            `json:"enabled"`
-	ID             *int64                           `json:"id"`
-	MacAddress     *string                          `json:"mac_address"`
-	Mode           *VirtualMachineInterfaceModeMode `json:"mode"`
-	Mtu            *int64                           `json:"mtu"`
+	Description    *string                          `json:"description,omitempty"`
+	Enabled        *bool                            `json:"enabled,omitempty"`
+	ID             *int64                           `json:"id,omitempty"`
+	MacAddress     *string                          `json:"mac_address,omitempty"`
+	Mode           *VirtualMachineInterfaceModeMode `json:"mode,omitempty"`
+	Mtu            *int64                           `json:"mtu,omitempty"`
 	Name           string                           `json:"name"`
-	TaggedVlans    []NestedVlan                     `json:"tagged_vlans"`
-	Tags           []string                         `json:"tags"`
-	Type           *VirtualMachineInterfaceTypeType `json:"type"`
-	UntaggedVlan   *NestedVlan                      `json:"untagged_vlan"`
+	TaggedVlans    []NestedVlan                     `json:"tagged_vlans,omitempty"`
+	Tags           []string                         `json:"tags,omitempty"`
+	Type           *VirtualMachineInterfaceTypeType `json:"type,omitempty"`
+	UntaggedVlan   *NestedVlan                      `json:"untagged_vlan,omitempty"`
 	VirtualMachine NestedVirtualMachine             `json:"virtual_machine"`
 }

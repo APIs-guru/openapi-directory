@@ -1,6 +1,6 @@
 package shared
 
 type MetricShortID struct {
-	MetricIndex *int32  `json:"metricIndex"`
-	ShortID     *string `json:"shortId"`
+	MetricIndex *int32  `json:"metricIndex,omitempty"`
+	ShortID     *string `json:"shortId,omitempty"`
 }

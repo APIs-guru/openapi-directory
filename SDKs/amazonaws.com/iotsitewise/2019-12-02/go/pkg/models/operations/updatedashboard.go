@@ -15,9 +15,9 @@ type UpdateDashboardHeaders struct {
 }
 
 type UpdateDashboardRequestBody struct {
-	ClientToken          *string `json:"clientToken"`
+	ClientToken          *string `json:"clientToken,omitempty"`
 	DashboardDefinition  string  `json:"dashboardDefinition"`
-	DashboardDescription *string `json:"dashboardDescription"`
+	DashboardDescription *string `json:"dashboardDescription,omitempty"`
 	DashboardName        string  `json:"dashboardName"`
 }
 

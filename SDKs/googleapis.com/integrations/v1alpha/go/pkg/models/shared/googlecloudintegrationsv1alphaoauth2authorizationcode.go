@@ -10,15 +10,15 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaOAuth2AuthorizationCode struct {
-	AccessToken       *GoogleCloudIntegrationsV1alphaAccessToken                            `json:"accessToken"`
-	ApplyReauthPolicy *bool                                                                 `json:"applyReauthPolicy"`
-	AuthCode          *string                                                               `json:"authCode"`
-	AuthEndpoint      *string                                                               `json:"authEndpoint"`
-	AuthParams        *GoogleCloudIntegrationsV1alphaParameterMap                           `json:"authParams"`
-	ClientID          *string                                                               `json:"clientId"`
-	ClientSecret      *string                                                               `json:"clientSecret"`
-	RequestType       *GoogleCloudIntegrationsV1alphaOAuth2AuthorizationCodeRequestTypeEnum `json:"requestType"`
-	Scope             *string                                                               `json:"scope"`
-	TokenEndpoint     *string                                                               `json:"tokenEndpoint"`
-	TokenParams       *GoogleCloudIntegrationsV1alphaParameterMap                           `json:"tokenParams"`
+	AccessToken       *GoogleCloudIntegrationsV1alphaAccessToken                            `json:"accessToken,omitempty"`
+	ApplyReauthPolicy *bool                                                                 `json:"applyReauthPolicy,omitempty"`
+	AuthCode          *string                                                               `json:"authCode,omitempty"`
+	AuthEndpoint      *string                                                               `json:"authEndpoint,omitempty"`
+	AuthParams        *GoogleCloudIntegrationsV1alphaParameterMap                           `json:"authParams,omitempty"`
+	ClientID          *string                                                               `json:"clientId,omitempty"`
+	ClientSecret      *string                                                               `json:"clientSecret,omitempty"`
+	RequestType       *GoogleCloudIntegrationsV1alphaOAuth2AuthorizationCodeRequestTypeEnum `json:"requestType,omitempty"`
+	Scope             *string                                                               `json:"scope,omitempty"`
+	TokenEndpoint     *string                                                               `json:"tokenEndpoint,omitempty"`
+	TokenParams       *GoogleCloudIntegrationsV1alphaParameterMap                           `json:"tokenParams,omitempty"`
 }

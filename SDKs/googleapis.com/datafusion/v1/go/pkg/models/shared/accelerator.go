@@ -19,6 +19,6 @@ const (
 )
 
 type Accelerator struct {
-	AcceleratorType *AcceleratorAcceleratorTypeEnum `json:"acceleratorType"`
-	State           *AcceleratorStateEnum           `json:"state"`
+	AcceleratorType *AcceleratorAcceleratorTypeEnum `json:"acceleratorType,omitempty"`
+	State           *AcceleratorStateEnum           `json:"state,omitempty"`
 }

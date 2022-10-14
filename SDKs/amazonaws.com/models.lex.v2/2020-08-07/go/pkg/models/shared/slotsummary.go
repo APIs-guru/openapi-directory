@@ -5,11 +5,11 @@ import (
 )
 
 type SlotSummary struct {
-	Description                         *string              `json:"description"`
-	LastUpdatedDateTime                 *time.Time           `json:"lastUpdatedDateTime"`
-	SlotConstraint                      *SlotConstraintEnum  `json:"slotConstraint"`
-	SlotID                              *string              `json:"slotId"`
-	SlotName                            *string              `json:"slotName"`
-	SlotTypeID                          *string              `json:"slotTypeId"`
-	ValueElicitationPromptSpecification *PromptSpecification `json:"valueElicitationPromptSpecification"`
+	Description                         *string              `json:"description,omitempty"`
+	LastUpdatedDateTime                 *time.Time           `json:"lastUpdatedDateTime,omitempty"`
+	SlotConstraint                      *SlotConstraintEnum  `json:"slotConstraint,omitempty"`
+	SlotID                              *string              `json:"slotId,omitempty"`
+	SlotName                            *string              `json:"slotName,omitempty"`
+	SlotTypeID                          *string              `json:"slotTypeId,omitempty"`
+	ValueElicitationPromptSpecification *PromptSpecification `json:"valueElicitationPromptSpecification,omitempty"`
 }

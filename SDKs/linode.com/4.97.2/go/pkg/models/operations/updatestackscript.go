@@ -28,7 +28,7 @@ type UpdateStackScriptRequest struct {
 }
 
 type UpdateStackScriptDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateStackScriptResponse struct {

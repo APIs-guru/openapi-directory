@@ -1,6 +1,6 @@
 package shared
 
 type UtteranceList struct {
-	BotVersion *string         `json:"botVersion"`
-	Utterances []UtteranceData `json:"utterances"`
+	BotVersion *string         `json:"botVersion,omitempty"`
+	Utterances []UtteranceData `json:"utterances,omitempty"`
 }

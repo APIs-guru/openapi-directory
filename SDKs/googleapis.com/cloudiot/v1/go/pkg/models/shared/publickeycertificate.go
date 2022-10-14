@@ -8,7 +8,7 @@ const (
 )
 
 type PublicKeyCertificate struct {
-	Certificate *string                         `json:"certificate"`
-	Format      *PublicKeyCertificateFormatEnum `json:"format"`
-	X509Details *X509CertificateDetails         `json:"x509Details"`
+	Certificate *string                         `json:"certificate,omitempty"`
+	Format      *PublicKeyCertificateFormatEnum `json:"format,omitempty"`
+	X509Details *X509CertificateDetails         `json:"x509Details,omitempty"`
 }

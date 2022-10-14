@@ -1,6 +1,6 @@
 package shared
 
 type ListReservationsResponse struct {
-	NextPageToken *string       `json:"nextPageToken"`
-	Reservations  []Reservation `json:"reservations"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	Reservations  []Reservation `json:"reservations,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type TransactionSelector struct {
-	Begin     *TransactionOptions `json:"begin"`
-	ID        *string             `json:"id"`
-	SingleUse *TransactionOptions `json:"singleUse"`
+	Begin     *TransactionOptions `json:"begin,omitempty"`
+	ID        *string             `json:"id,omitempty"`
+	SingleUse *TransactionOptions `json:"singleUse,omitempty"`
 }

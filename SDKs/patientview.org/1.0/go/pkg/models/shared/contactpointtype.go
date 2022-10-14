@@ -16,8 +16,8 @@ const (
 )
 
 type ContactPointType struct {
-	Description *string                    `json:"description"`
-	ID          *int64                     `json:"id"`
-	LookupType  *LookupType                `json:"lookupType"`
-	Value       *ContactPointTypeValueEnum `json:"value"`
+	Description *string                    `json:"description,omitempty"`
+	ID          *int64                     `json:"id,omitempty"`
+	LookupType  *LookupType                `json:"lookupType,omitempty"`
+	Value       *ContactPointTypeValueEnum `json:"value,omitempty"`
 }

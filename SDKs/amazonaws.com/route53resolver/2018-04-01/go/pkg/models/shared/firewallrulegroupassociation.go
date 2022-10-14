@@ -1,17 +1,17 @@
 package shared
 
 type FirewallRuleGroupAssociation struct {
-	Arn                 *string                                 `json:"Arn"`
-	CreationTime        *string                                 `json:"CreationTime"`
-	CreatorRequestID    *string                                 `json:"CreatorRequestId"`
-	FirewallRuleGroupID *string                                 `json:"FirewallRuleGroupId"`
-	ID                  *string                                 `json:"Id"`
-	ManagedOwnerName    *string                                 `json:"ManagedOwnerName"`
-	ModificationTime    *string                                 `json:"ModificationTime"`
-	MutationProtection  *MutationProtectionStatusEnum           `json:"MutationProtection"`
-	Name                *string                                 `json:"Name"`
-	Priority            *int64                                  `json:"Priority"`
-	Status              *FirewallRuleGroupAssociationStatusEnum `json:"Status"`
-	StatusMessage       *string                                 `json:"StatusMessage"`
-	VpcID               *string                                 `json:"VpcId"`
+	Arn                 *string                                 `json:"Arn,omitempty"`
+	CreationTime        *string                                 `json:"CreationTime,omitempty"`
+	CreatorRequestID    *string                                 `json:"CreatorRequestId,omitempty"`
+	FirewallRuleGroupID *string                                 `json:"FirewallRuleGroupId,omitempty"`
+	ID                  *string                                 `json:"Id,omitempty"`
+	ManagedOwnerName    *string                                 `json:"ManagedOwnerName,omitempty"`
+	ModificationTime    *string                                 `json:"ModificationTime,omitempty"`
+	MutationProtection  *MutationProtectionStatusEnum           `json:"MutationProtection,omitempty"`
+	Name                *string                                 `json:"Name,omitempty"`
+	Priority            *int64                                  `json:"Priority,omitempty"`
+	Status              *FirewallRuleGroupAssociationStatusEnum `json:"Status,omitempty"`
+	StatusMessage       *string                                 `json:"StatusMessage,omitempty"`
+	VpcID               *string                                 `json:"VpcId,omitempty"`
 }

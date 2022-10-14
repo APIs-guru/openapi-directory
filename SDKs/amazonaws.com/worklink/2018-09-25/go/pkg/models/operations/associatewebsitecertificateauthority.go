@@ -16,7 +16,7 @@ type AssociateWebsiteCertificateAuthorityHeaders struct {
 
 type AssociateWebsiteCertificateAuthorityRequestBody struct {
 	Certificate string  `json:"Certificate"`
-	DisplayName *string `json:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitempty"`
 	FleetArn    string  `json:"FleetArn"`
 }
 

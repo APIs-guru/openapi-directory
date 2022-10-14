@@ -17,12 +17,12 @@ const (
 )
 
 type AchievementConfiguration struct {
-	AchievementType *AchievementConfigurationAchievementTypeEnum `json:"achievementType"`
-	Draft           *AchievementConfigurationDetail              `json:"draft"`
-	ID              *string                                      `json:"id"`
-	InitialState    *AchievementConfigurationInitialStateEnum    `json:"initialState"`
-	Kind            *string                                      `json:"kind"`
-	Published       *AchievementConfigurationDetail              `json:"published"`
-	StepsToUnlock   *int32                                       `json:"stepsToUnlock"`
-	Token           *string                                      `json:"token"`
+	AchievementType *AchievementConfigurationAchievementTypeEnum `json:"achievementType,omitempty"`
+	Draft           *AchievementConfigurationDetail              `json:"draft,omitempty"`
+	ID              *string                                      `json:"id,omitempty"`
+	InitialState    *AchievementConfigurationInitialStateEnum    `json:"initialState,omitempty"`
+	Kind            *string                                      `json:"kind,omitempty"`
+	Published       *AchievementConfigurationDetail              `json:"published,omitempty"`
+	StepsToUnlock   *int32                                       `json:"stepsToUnlock,omitempty"`
+	Token           *string                                      `json:"token,omitempty"`
 }

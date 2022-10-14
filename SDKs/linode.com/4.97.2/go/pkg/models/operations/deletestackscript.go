@@ -27,7 +27,7 @@ type DeleteStackScriptRequest struct {
 }
 
 type DeleteStackScriptDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteStackScriptResponse struct {

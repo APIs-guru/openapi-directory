@@ -1,6 +1,6 @@
 package shared
 
 type HTTPEndpointDescription struct {
-	Name *string `json:"Name"`
-	URL  *string `json:"Url"`
+	Name *string `json:"Name,omitempty"`
+	URL  *string `json:"Url,omitempty"`
 }

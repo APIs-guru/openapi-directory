@@ -1,40 +1,40 @@
 package shared
 
 type UsersettingsNotesExport struct {
-	FolderName *string `json:"folderName"`
-	IsEnabled  *bool   `json:"isEnabled"`
+	FolderName *string `json:"folderName,omitempty"`
+	IsEnabled  *bool   `json:"isEnabled,omitempty"`
 }
 
 type UsersettingsNotificationMatchMyInterests struct {
-	OptedState *string `json:"opted_state"`
+	OptedState *string `json:"opted_state,omitempty"`
 }
 
 type UsersettingsNotificationMoreFromAuthors struct {
-	OptedState *string `json:"opted_state"`
+	OptedState *string `json:"opted_state,omitempty"`
 }
 
 type UsersettingsNotificationMoreFromSeries struct {
-	OptedState *string `json:"opted_state"`
+	OptedState *string `json:"opted_state,omitempty"`
 }
 
 type UsersettingsNotificationPriceDrop struct {
-	OptedState *string `json:"opted_state"`
+	OptedState *string `json:"opted_state,omitempty"`
 }
 
 type UsersettingsNotificationRewardExpirations struct {
-	OptedState *string `json:"opted_state"`
+	OptedState *string `json:"opted_state,omitempty"`
 }
 
 type UsersettingsNotification struct {
-	MatchMyInterests  *UsersettingsNotificationMatchMyInterests  `json:"matchMyInterests"`
-	MoreFromAuthors   *UsersettingsNotificationMoreFromAuthors   `json:"moreFromAuthors"`
-	MoreFromSeries    *UsersettingsNotificationMoreFromSeries    `json:"moreFromSeries"`
-	PriceDrop         *UsersettingsNotificationPriceDrop         `json:"priceDrop"`
-	RewardExpirations *UsersettingsNotificationRewardExpirations `json:"rewardExpirations"`
+	MatchMyInterests  *UsersettingsNotificationMatchMyInterests  `json:"matchMyInterests,omitempty"`
+	MoreFromAuthors   *UsersettingsNotificationMoreFromAuthors   `json:"moreFromAuthors,omitempty"`
+	MoreFromSeries    *UsersettingsNotificationMoreFromSeries    `json:"moreFromSeries,omitempty"`
+	PriceDrop         *UsersettingsNotificationPriceDrop         `json:"priceDrop,omitempty"`
+	RewardExpirations *UsersettingsNotificationRewardExpirations `json:"rewardExpirations,omitempty"`
 }
 
 type Usersettings struct {
-	Kind         *string                   `json:"kind"`
-	NotesExport  *UsersettingsNotesExport  `json:"notesExport"`
-	Notification *UsersettingsNotification `json:"notification"`
+	Kind         *string                   `json:"kind,omitempty"`
+	NotesExport  *UsersettingsNotesExport  `json:"notesExport,omitempty"`
+	Notification *UsersettingsNotification `json:"notification,omitempty"`
 }

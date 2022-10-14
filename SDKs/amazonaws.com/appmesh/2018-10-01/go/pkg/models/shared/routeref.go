@@ -1,8 +1,8 @@
 package shared
 
 type RouteRef struct {
-	Arn               *string `json:"arn"`
-	MeshName          *string `json:"meshName"`
-	RouteName         *string `json:"routeName"`
-	VirtualRouterName *string `json:"virtualRouterName"`
+	Arn               *string `json:"arn,omitempty"`
+	MeshName          *string `json:"meshName,omitempty"`
+	RouteName         *string `json:"routeName,omitempty"`
+	VirtualRouterName *string `json:"virtualRouterName,omitempty"`
 }

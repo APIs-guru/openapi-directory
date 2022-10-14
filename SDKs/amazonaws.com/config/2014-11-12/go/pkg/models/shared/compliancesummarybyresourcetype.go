@@ -1,6 +1,6 @@
 package shared
 
 type ComplianceSummaryByResourceType struct {
-	ComplianceSummary *ComplianceSummary `json:"ComplianceSummary"`
-	ResourceType      *string            `json:"ResourceType"`
+	ComplianceSummary *ComplianceSummary `json:"ComplianceSummary,omitempty"`
+	ResourceType      *string            `json:"ResourceType,omitempty"`
 }

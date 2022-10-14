@@ -19,11 +19,11 @@ const (
 )
 
 type ProductPolicy struct {
-	AutoInstallPolicy                      *AutoInstallPolicy                      `json:"autoInstallPolicy"`
-	AutoUpdateMode                         *ProductPolicyAutoUpdateModeEnum        `json:"autoUpdateMode"`
-	EnterpriseAuthenticationAppLinkConfigs []EnterpriseAuthenticationAppLinkConfig `json:"enterpriseAuthenticationAppLinkConfigs"`
-	ManagedConfiguration                   *ManagedConfiguration                   `json:"managedConfiguration"`
-	ProductID                              *string                                 `json:"productId"`
-	TrackIds                               []string                                `json:"trackIds"`
-	Tracks                                 []ProductPolicyTracksEnum               `json:"tracks"`
+	AutoInstallPolicy                      *AutoInstallPolicy                      `json:"autoInstallPolicy,omitempty"`
+	AutoUpdateMode                         *ProductPolicyAutoUpdateModeEnum        `json:"autoUpdateMode,omitempty"`
+	EnterpriseAuthenticationAppLinkConfigs []EnterpriseAuthenticationAppLinkConfig `json:"enterpriseAuthenticationAppLinkConfigs,omitempty"`
+	ManagedConfiguration                   *ManagedConfiguration                   `json:"managedConfiguration,omitempty"`
+	ProductID                              *string                                 `json:"productId,omitempty"`
+	TrackIds                               []string                                `json:"trackIds,omitempty"`
+	Tracks                                 []ProductPolicyTracksEnum               `json:"tracks,omitempty"`
 }

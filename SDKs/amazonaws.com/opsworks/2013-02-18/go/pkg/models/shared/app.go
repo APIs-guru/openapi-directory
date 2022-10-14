@@ -1,18 +1,18 @@
 package shared
 
 type App struct {
-	AppID            *string               `json:"AppId"`
-	AppSource        *Source               `json:"AppSource"`
-	Attributes       map[string]string     `json:"Attributes"`
-	CreatedAt        *string               `json:"CreatedAt"`
-	DataSources      []DataSource          `json:"DataSources"`
-	Description      *string               `json:"Description"`
-	Domains          []string              `json:"Domains"`
-	EnableSsl        *bool                 `json:"EnableSsl"`
-	Environment      []EnvironmentVariable `json:"Environment"`
-	Name             *string               `json:"Name"`
-	Shortname        *string               `json:"Shortname"`
-	SslConfiguration *SslConfiguration     `json:"SslConfiguration"`
-	StackID          *string               `json:"StackId"`
-	Type             *AppTypeEnum          `json:"Type"`
+	AppID            *string               `json:"AppId,omitempty"`
+	AppSource        *Source               `json:"AppSource,omitempty"`
+	Attributes       map[string]string     `json:"Attributes,omitempty"`
+	CreatedAt        *string               `json:"CreatedAt,omitempty"`
+	DataSources      []DataSource          `json:"DataSources,omitempty"`
+	Description      *string               `json:"Description,omitempty"`
+	Domains          []string              `json:"Domains,omitempty"`
+	EnableSsl        *bool                 `json:"EnableSsl,omitempty"`
+	Environment      []EnvironmentVariable `json:"Environment,omitempty"`
+	Name             *string               `json:"Name,omitempty"`
+	Shortname        *string               `json:"Shortname,omitempty"`
+	SslConfiguration *SslConfiguration     `json:"SslConfiguration,omitempty"`
+	StackID          *string               `json:"StackId,omitempty"`
+	Type             *AppTypeEnum          `json:"Type,omitempty"`
 }

@@ -9,11 +9,11 @@ const (
 )
 
 type PersonalNameGenderedOut struct {
-	GenderScale           *float64                                 `json:"genderScale"`
-	ID                    *string                                  `json:"id"`
-	LikelyGender          *PersonalNameGenderedOutLikelyGenderEnum `json:"likelyGender"`
-	Name                  *string                                  `json:"name"`
-	ProbabilityCalibrated *float64                                 `json:"probabilityCalibrated"`
-	Score                 *float64                                 `json:"score"`
-	Script                *string                                  `json:"script"`
+	GenderScale           *float64                                 `json:"genderScale,omitempty"`
+	ID                    *string                                  `json:"id,omitempty"`
+	LikelyGender          *PersonalNameGenderedOutLikelyGenderEnum `json:"likelyGender,omitempty"`
+	Name                  *string                                  `json:"name,omitempty"`
+	ProbabilityCalibrated *float64                                 `json:"probabilityCalibrated,omitempty"`
+	Score                 *float64                                 `json:"score,omitempty"`
+	Script                *string                                  `json:"script,omitempty"`
 }

@@ -13,9 +13,9 @@ const (
 )
 
 type PostLoginRequestBodySample struct {
-	Email    *string                         `json:"email"`
-	Password *string                         `json:"password"`
-	Source   *PostLoginRequestBodySourceEnum `json:"source"`
+	Email    *string                         `json:"email,omitempty"`
+	Password *string                         `json:"password,omitempty"`
+	Source   *PostLoginRequestBodySourceEnum `json:"source,omitempty"`
 }
 
 type PostLoginRequest struct {

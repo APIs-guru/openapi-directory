@@ -1,7 +1,7 @@
 package shared
 
 type AttachmentsSource struct {
-	Key    *AttachmentsSourceKeyEnum `json:"Key"`
-	Name   *string                   `json:"Name"`
-	Values []string                  `json:"Values"`
+	Key    *AttachmentsSourceKeyEnum `json:"Key,omitempty"`
+	Name   *string                   `json:"Name,omitempty"`
+	Values []string                  `json:"Values,omitempty"`
 }

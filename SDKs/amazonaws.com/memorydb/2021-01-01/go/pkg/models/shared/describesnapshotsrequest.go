@@ -1,10 +1,10 @@
 package shared
 
 type DescribeSnapshotsRequest struct {
-	ClusterName  *string `json:"ClusterName"`
-	MaxResults   *int64  `json:"MaxResults"`
-	NextToken    *string `json:"NextToken"`
-	ShowDetail   *bool   `json:"ShowDetail"`
-	SnapshotName *string `json:"SnapshotName"`
-	Source       *string `json:"Source"`
+	ClusterName  *string `json:"ClusterName,omitempty"`
+	MaxResults   *int64  `json:"MaxResults,omitempty"`
+	NextToken    *string `json:"NextToken,omitempty"`
+	ShowDetail   *bool   `json:"ShowDetail,omitempty"`
+	SnapshotName *string `json:"SnapshotName,omitempty"`
+	Source       *string `json:"Source,omitempty"`
 }

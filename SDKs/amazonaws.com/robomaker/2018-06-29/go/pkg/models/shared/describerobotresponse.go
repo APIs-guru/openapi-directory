@@ -5,14 +5,14 @@ import (
 )
 
 type DescribeRobotResponse struct {
-	Architecture       *ArchitectureEnum `json:"architecture"`
-	Arn                *string           `json:"arn"`
-	CreatedAt          *time.Time        `json:"createdAt"`
-	FleetArn           *string           `json:"fleetArn"`
-	GreengrassGroupID  *string           `json:"greengrassGroupId"`
-	LastDeploymentJob  *string           `json:"lastDeploymentJob"`
-	LastDeploymentTime *time.Time        `json:"lastDeploymentTime"`
-	Name               *string           `json:"name"`
-	Status             *RobotStatusEnum  `json:"status"`
-	Tags               map[string]string `json:"tags"`
+	Architecture       *ArchitectureEnum `json:"architecture,omitempty"`
+	Arn                *string           `json:"arn,omitempty"`
+	CreatedAt          *time.Time        `json:"createdAt,omitempty"`
+	FleetArn           *string           `json:"fleetArn,omitempty"`
+	GreengrassGroupID  *string           `json:"greengrassGroupId,omitempty"`
+	LastDeploymentJob  *string           `json:"lastDeploymentJob,omitempty"`
+	LastDeploymentTime *time.Time        `json:"lastDeploymentTime,omitempty"`
+	Name               *string           `json:"name,omitempty"`
+	Status             *RobotStatusEnum  `json:"status,omitempty"`
+	Tags               map[string]string `json:"tags,omitempty"`
 }

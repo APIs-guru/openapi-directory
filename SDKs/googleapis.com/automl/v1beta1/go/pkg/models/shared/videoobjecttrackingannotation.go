@@ -1,8 +1,8 @@
 package shared
 
 type VideoObjectTrackingAnnotation struct {
-	BoundingBox *BoundingPoly `json:"boundingBox"`
-	InstanceID  *string       `json:"instanceId"`
-	Score       *float32      `json:"score"`
-	TimeOffset  *string       `json:"timeOffset"`
+	BoundingBox *BoundingPoly `json:"boundingBox,omitempty"`
+	InstanceID  *string       `json:"instanceId,omitempty"`
+	Score       *float32      `json:"score,omitempty"`
+	TimeOffset  *string       `json:"timeOffset,omitempty"`
 }

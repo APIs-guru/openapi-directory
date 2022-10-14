@@ -1,6 +1,6 @@
 package shared
 
 type ListServiceTemplatesOutput struct {
-	NextToken *string                  `json:"nextToken"`
+	NextToken *string                  `json:"nextToken,omitempty"`
 	Templates []ServiceTemplateSummary `json:"templates"`
 }

@@ -10,5 +10,5 @@ const (
 )
 
 type Filter struct {
-	EventType []FilterEventTypeEnum `json:"eventType"`
+	EventType []FilterEventTypeEnum `json:"eventType,omitempty"`
 }

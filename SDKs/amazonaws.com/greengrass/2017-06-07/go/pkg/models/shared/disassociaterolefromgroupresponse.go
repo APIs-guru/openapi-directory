@@ -1,5 +1,5 @@
 package shared
 
 type DisassociateRoleFromGroupResponse struct {
-	DisassociatedAt *string `json:"DisassociatedAt"`
+	DisassociatedAt *string `json:"DisassociatedAt,omitempty"`
 }

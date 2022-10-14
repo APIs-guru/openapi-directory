@@ -19,12 +19,12 @@ type ReplaceTopicRuleHeaders struct {
 }
 
 type ReplaceTopicRuleRequestBodyTopicRulePayload struct {
-	Actions          []shared.Action `json:"actions"`
-	AwsIotSQLVersion *string         `json:"awsIotSqlVersion"`
-	Description      *string         `json:"description"`
-	ErrorAction      *shared.Action  `json:"errorAction"`
-	RuleDisabled     *bool           `json:"ruleDisabled"`
-	SQL              *string         `json:"sql"`
+	Actions          []shared.Action `json:"actions,omitempty"`
+	AwsIotSQLVersion *string         `json:"awsIotSqlVersion,omitempty"`
+	Description      *string         `json:"description,omitempty"`
+	ErrorAction      *shared.Action  `json:"errorAction,omitempty"`
+	RuleDisabled     *bool           `json:"ruleDisabled,omitempty"`
+	SQL              *string         `json:"sql,omitempty"`
 }
 
 type ReplaceTopicRuleRequestBody struct {

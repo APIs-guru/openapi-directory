@@ -22,14 +22,14 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1SecuritySettings struct {
-	AudioExportSettings    *GoogleCloudDialogflowCxV3beta1SecuritySettingsAudioExportSettings    `json:"audioExportSettings"`
-	DeidentifyTemplate     *string                                                               `json:"deidentifyTemplate"`
-	DisplayName            *string                                                               `json:"displayName"`
-	InsightsExportSettings *GoogleCloudDialogflowCxV3beta1SecuritySettingsInsightsExportSettings `json:"insightsExportSettings"`
-	InspectTemplate        *string                                                               `json:"inspectTemplate"`
-	Name                   *string                                                               `json:"name"`
-	PurgeDataTypes         []GoogleCloudDialogflowCxV3beta1SecuritySettingsPurgeDataTypesEnum    `json:"purgeDataTypes"`
-	RedactionScope         *GoogleCloudDialogflowCxV3beta1SecuritySettingsRedactionScopeEnum     `json:"redactionScope"`
-	RedactionStrategy      *GoogleCloudDialogflowCxV3beta1SecuritySettingsRedactionStrategyEnum  `json:"redactionStrategy"`
-	RetentionWindowDays    *int32                                                                `json:"retentionWindowDays"`
+	AudioExportSettings    *GoogleCloudDialogflowCxV3beta1SecuritySettingsAudioExportSettings    `json:"audioExportSettings,omitempty"`
+	DeidentifyTemplate     *string                                                               `json:"deidentifyTemplate,omitempty"`
+	DisplayName            *string                                                               `json:"displayName,omitempty"`
+	InsightsExportSettings *GoogleCloudDialogflowCxV3beta1SecuritySettingsInsightsExportSettings `json:"insightsExportSettings,omitempty"`
+	InspectTemplate        *string                                                               `json:"inspectTemplate,omitempty"`
+	Name                   *string                                                               `json:"name,omitempty"`
+	PurgeDataTypes         []GoogleCloudDialogflowCxV3beta1SecuritySettingsPurgeDataTypesEnum    `json:"purgeDataTypes,omitempty"`
+	RedactionScope         *GoogleCloudDialogflowCxV3beta1SecuritySettingsRedactionScopeEnum     `json:"redactionScope,omitempty"`
+	RedactionStrategy      *GoogleCloudDialogflowCxV3beta1SecuritySettingsRedactionStrategyEnum  `json:"redactionStrategy,omitempty"`
+	RetentionWindowDays    *int32                                                                `json:"retentionWindowDays,omitempty"`
 }

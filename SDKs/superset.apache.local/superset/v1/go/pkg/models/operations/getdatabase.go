@@ -18,38 +18,38 @@ type GetDatabaseRequest struct {
 }
 
 type GetDatabase200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDatabase200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDatabase200ApplicationJSON struct {
-	Count              *float64                                         `json:"count"`
-	DescriptionColumns *GetDatabase200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	Ids                []string                                         `json:"ids"`
-	LabelColumns       *GetDatabase200ApplicationJSONLabelColumns       `json:"label_columns"`
-	ListColumns        []string                                         `json:"list_columns"`
-	ListTitle          *string                                          `json:"list_title"`
-	OrderColumns       []string                                         `json:"order_columns"`
-	Result             []shared.DatabaseRestAPIGetList                  `json:"result"`
+	Count              *float64                                         `json:"count,omitempty"`
+	DescriptionColumns *GetDatabase200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	Ids                []string                                         `json:"ids,omitempty"`
+	LabelColumns       *GetDatabase200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	ListColumns        []string                                         `json:"list_columns,omitempty"`
+	ListTitle          *string                                          `json:"list_title,omitempty"`
+	OrderColumns       []string                                         `json:"order_columns,omitempty"`
+	Result             []shared.DatabaseRestAPIGetList                  `json:"result,omitempty"`
 }
 
 type GetDatabase400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabase401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabase422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabase500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabaseResponse struct {

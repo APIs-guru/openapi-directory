@@ -23,7 +23,7 @@ const (
 )
 
 type HistogramFacets struct {
-	CompensationHistogramFacets    []CompensationHistogramRequest             `json:"compensationHistogramFacets"`
-	CustomAttributeHistogramFacets []CustomAttributeHistogramRequest          `json:"customAttributeHistogramFacets"`
-	SimpleHistogramFacets          []HistogramFacetsSimpleHistogramFacetsEnum `json:"simpleHistogramFacets"`
+	CompensationHistogramFacets    []CompensationHistogramRequest             `json:"compensationHistogramFacets,omitempty"`
+	CustomAttributeHistogramFacets []CustomAttributeHistogramRequest          `json:"customAttributeHistogramFacets,omitempty"`
+	SimpleHistogramFacets          []HistogramFacetsSimpleHistogramFacetsEnum `json:"simpleHistogramFacets,omitempty"`
 }

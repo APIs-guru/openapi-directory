@@ -37,6 +37,6 @@ const (
 )
 
 type JobDerivedInfo struct {
-	JobCategories []JobDerivedInfoJobCategoriesEnum `json:"jobCategories"`
-	Locations     []Location                        `json:"locations"`
+	JobCategories []JobDerivedInfoJobCategoriesEnum `json:"jobCategories,omitempty"`
+	Locations     []Location                        `json:"locations,omitempty"`
 }

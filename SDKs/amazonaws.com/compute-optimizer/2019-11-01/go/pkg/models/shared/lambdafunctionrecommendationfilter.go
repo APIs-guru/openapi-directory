@@ -1,6 +1,6 @@
 package shared
 
 type LambdaFunctionRecommendationFilter struct {
-	Name   *LambdaFunctionRecommendationFilterNameEnum `json:"name"`
-	Values []string                                    `json:"values"`
+	Name   *LambdaFunctionRecommendationFilterNameEnum `json:"name,omitempty"`
+	Values []string                                    `json:"values,omitempty"`
 }

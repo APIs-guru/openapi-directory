@@ -1,5 +1,5 @@
 package shared
 
 type Response struct {
-	CreateItem *CreateItemResponse `json:"createItem"`
+	CreateItem *CreateItemResponse `json:"createItem,omitempty"`
 }

@@ -10,9 +10,9 @@ const (
 )
 
 type RepricingRuleEligibleOfferMatcher struct {
-	BrandMatcher        *RepricingRuleEligibleOfferMatcherStringMatcher     `json:"brandMatcher"`
-	ItemGroupIDMatcher  *RepricingRuleEligibleOfferMatcherStringMatcher     `json:"itemGroupIdMatcher"`
-	MatcherOption       *RepricingRuleEligibleOfferMatcherMatcherOptionEnum `json:"matcherOption"`
-	OfferIDMatcher      *RepricingRuleEligibleOfferMatcherStringMatcher     `json:"offerIdMatcher"`
-	SkipWhenOnPromotion *bool                                               `json:"skipWhenOnPromotion"`
+	BrandMatcher        *RepricingRuleEligibleOfferMatcherStringMatcher     `json:"brandMatcher,omitempty"`
+	ItemGroupIDMatcher  *RepricingRuleEligibleOfferMatcherStringMatcher     `json:"itemGroupIdMatcher,omitempty"`
+	MatcherOption       *RepricingRuleEligibleOfferMatcherMatcherOptionEnum `json:"matcherOption,omitempty"`
+	OfferIDMatcher      *RepricingRuleEligibleOfferMatcherStringMatcher     `json:"offerIdMatcher,omitempty"`
+	SkipWhenOnPromotion *bool                                               `json:"skipWhenOnPromotion,omitempty"`
 }

@@ -56,7 +56,7 @@ type GetAdminUsersListFlagJSON200ApplicationJSON struct {
 	CreatedAt              string        `json:"created_at"`
 	CreatedAtAge           interface{}   `json:"created_at_age"`
 	DaysVisited            int64         `json:"days_visited"`
-	Email                  *string       `json:"email"`
+	Email                  *string       `json:"email,omitempty"`
 	FlagLevel              int64         `json:"flag_level"`
 	ID                     int64         `json:"id"`
 	LastEmailedAge         interface{}   `json:"last_emailed_age"`
@@ -68,7 +68,7 @@ type GetAdminUsersListFlagJSON200ApplicationJSON struct {
 	Name                   string        `json:"name"`
 	PostCount              int64         `json:"post_count"`
 	PostsReadCount         int64         `json:"posts_read_count"`
-	SecondaryEmails        []interface{} `json:"secondary_emails"`
+	SecondaryEmails        []interface{} `json:"secondary_emails,omitempty"`
 	Staged                 bool          `json:"staged"`
 	TimeRead               int64         `json:"time_read"`
 	Title                  string        `json:"title"`

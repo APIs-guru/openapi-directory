@@ -1,14 +1,14 @@
 package shared
 
 type Trigger struct {
-	Actions                []Action                `json:"Actions"`
-	Description            *string                 `json:"Description"`
-	EventBatchingCondition *EventBatchingCondition `json:"EventBatchingCondition"`
-	ID                     *string                 `json:"Id"`
-	Name                   *string                 `json:"Name"`
-	Predicate              *Predicate              `json:"Predicate"`
-	Schedule               *string                 `json:"Schedule"`
-	State                  *TriggerStateEnum       `json:"State"`
-	Type                   *TriggerTypeEnum        `json:"Type"`
-	WorkflowName           *string                 `json:"WorkflowName"`
+	Actions                []Action                `json:"Actions,omitempty"`
+	Description            *string                 `json:"Description,omitempty"`
+	EventBatchingCondition *EventBatchingCondition `json:"EventBatchingCondition,omitempty"`
+	ID                     *string                 `json:"Id,omitempty"`
+	Name                   *string                 `json:"Name,omitempty"`
+	Predicate              *Predicate              `json:"Predicate,omitempty"`
+	Schedule               *string                 `json:"Schedule,omitempty"`
+	State                  *TriggerStateEnum       `json:"State,omitempty"`
+	Type                   *TriggerTypeEnum        `json:"Type,omitempty"`
+	WorkflowName           *string                 `json:"WorkflowName,omitempty"`
 }

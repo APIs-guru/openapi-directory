@@ -10,7 +10,7 @@ type ReorderVideoPlaylistPathParams struct {
 
 type ReorderVideoPlaylistRequestBody struct {
 	InsertAfterPosition int64  `json:"insertAfterPosition"`
-	ReorderLength       *int64 `json:"reorderLength"`
+	ReorderLength       *int64 `json:"reorderLength,omitempty"`
 	StartPosition       int64  `json:"startPosition"`
 }
 

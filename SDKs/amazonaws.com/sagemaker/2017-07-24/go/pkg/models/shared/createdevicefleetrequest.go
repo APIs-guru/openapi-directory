@@ -1,10 +1,10 @@
 package shared
 
 type CreateDeviceFleetRequest struct {
-	Description        *string          `json:"Description"`
+	Description        *string          `json:"Description,omitempty"`
 	DeviceFleetName    string           `json:"DeviceFleetName"`
-	EnableIotRoleAlias *bool            `json:"EnableIotRoleAlias"`
+	EnableIotRoleAlias *bool            `json:"EnableIotRoleAlias,omitempty"`
 	OutputConfig       EdgeOutputConfig `json:"OutputConfig"`
-	RoleArn            *string          `json:"RoleArn"`
-	Tags               []Tag            `json:"Tags"`
+	RoleArn            *string          `json:"RoleArn,omitempty"`
+	Tags               []Tag            `json:"Tags,omitempty"`
 }

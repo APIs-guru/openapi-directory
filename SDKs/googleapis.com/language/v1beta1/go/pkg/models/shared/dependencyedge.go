@@ -89,6 +89,6 @@ const (
 )
 
 type DependencyEdge struct {
-	HeadTokenIndex *int32                   `json:"headTokenIndex"`
-	Label          *DependencyEdgeLabelEnum `json:"label"`
+	HeadTokenIndex *int32                   `json:"headTokenIndex,omitempty"`
+	Label          *DependencyEdgeLabelEnum `json:"label,omitempty"`
 }

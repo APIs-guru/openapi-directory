@@ -1,10 +1,10 @@
 package shared
 
 type MappingEntry struct {
-	SourcePath  *string `json:"SourcePath"`
-	SourceTable *string `json:"SourceTable"`
-	SourceType  *string `json:"SourceType"`
-	TargetPath  *string `json:"TargetPath"`
-	TargetTable *string `json:"TargetTable"`
-	TargetType  *string `json:"TargetType"`
+	SourcePath  *string `json:"SourcePath,omitempty"`
+	SourceTable *string `json:"SourceTable,omitempty"`
+	SourceType  *string `json:"SourceType,omitempty"`
+	TargetPath  *string `json:"TargetPath,omitempty"`
+	TargetTable *string `json:"TargetTable,omitempty"`
+	TargetType  *string `json:"TargetType,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type AwsRedshiftClusterClusterParameterStatus struct {
-	ParameterApplyErrorDescription *string `json:"ParameterApplyErrorDescription"`
-	ParameterApplyStatus           *string `json:"ParameterApplyStatus"`
-	ParameterName                  *string `json:"ParameterName"`
+	ParameterApplyErrorDescription *string `json:"ParameterApplyErrorDescription,omitempty"`
+	ParameterApplyStatus           *string `json:"ParameterApplyStatus,omitempty"`
+	ParameterName                  *string `json:"ParameterName,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type GetProvisionedConcurrencyConfigResponse struct {
-	AllocatedProvisionedConcurrentExecutions *int64                                `json:"AllocatedProvisionedConcurrentExecutions"`
-	AvailableProvisionedConcurrentExecutions *int64                                `json:"AvailableProvisionedConcurrentExecutions"`
-	LastModified                             *string                               `json:"LastModified"`
-	RequestedProvisionedConcurrentExecutions *int64                                `json:"RequestedProvisionedConcurrentExecutions"`
-	Status                                   *ProvisionedConcurrencyStatusEnumEnum `json:"Status"`
-	StatusReason                             *string                               `json:"StatusReason"`
+	AllocatedProvisionedConcurrentExecutions *int64                                `json:"AllocatedProvisionedConcurrentExecutions,omitempty"`
+	AvailableProvisionedConcurrentExecutions *int64                                `json:"AvailableProvisionedConcurrentExecutions,omitempty"`
+	LastModified                             *string                               `json:"LastModified,omitempty"`
+	RequestedProvisionedConcurrentExecutions *int64                                `json:"RequestedProvisionedConcurrentExecutions,omitempty"`
+	Status                                   *ProvisionedConcurrencyStatusEnumEnum `json:"Status,omitempty"`
+	StatusReason                             *string                               `json:"StatusReason,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type RestoreServiceRequest struct {
-	Backup      *string                               `json:"backup"`
-	RequestID   *string                               `json:"requestId"`
-	RestoreType *RestoreServiceRequestRestoreTypeEnum `json:"restoreType"`
+	Backup      *string                               `json:"backup,omitempty"`
+	RequestID   *string                               `json:"requestId,omitempty"`
+	RestoreType *RestoreServiceRequestRestoreTypeEnum `json:"restoreType,omitempty"`
 }

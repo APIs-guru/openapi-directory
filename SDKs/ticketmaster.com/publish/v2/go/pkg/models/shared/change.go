@@ -12,8 +12,8 @@ const (
 )
 
 type Change struct {
-	From  *string                `json:"from"`
+	From  *string                `json:"from,omitempty"`
 	Op    ChangeOpEnum           `json:"op"`
 	Path  string                 `json:"path"`
-	Value map[string]interface{} `json:"value"`
+	Value map[string]interface{} `json:"value,omitempty"`
 }

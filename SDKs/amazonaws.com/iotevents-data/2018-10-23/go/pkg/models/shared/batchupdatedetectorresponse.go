@@ -1,5 +1,5 @@
 package shared
 
 type BatchUpdateDetectorResponse struct {
-	BatchUpdateDetectorErrorEntries []BatchUpdateDetectorErrorEntry `json:"batchUpdateDetectorErrorEntries"`
+	BatchUpdateDetectorErrorEntries []BatchUpdateDetectorErrorEntry `json:"batchUpdateDetectorErrorEntries,omitempty"`
 }

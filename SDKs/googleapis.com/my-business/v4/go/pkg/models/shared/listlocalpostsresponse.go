@@ -1,6 +1,6 @@
 package shared
 
 type ListLocalPostsResponse struct {
-	LocalPosts    []LocalPost `json:"localPosts"`
-	NextPageToken *string     `json:"nextPageToken"`
+	LocalPosts    []LocalPost `json:"localPosts,omitempty"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
 }

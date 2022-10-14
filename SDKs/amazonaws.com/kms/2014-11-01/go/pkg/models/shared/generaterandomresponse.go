@@ -1,5 +1,5 @@
 package shared
 
 type GenerateRandomResponse struct {
-	Plaintext *string `json:"Plaintext"`
+	Plaintext *string `json:"Plaintext,omitempty"`
 }

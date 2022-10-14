@@ -5,8 +5,8 @@ import (
 )
 
 type Event struct {
-	Date       *time.Time      `json:"Date"`
-	Message    *string         `json:"Message"`
-	SourceName *string         `json:"SourceName"`
-	SourceType *SourceTypeEnum `json:"SourceType"`
+	Date       *time.Time      `json:"Date,omitempty"`
+	Message    *string         `json:"Message,omitempty"`
+	SourceName *string         `json:"SourceName,omitempty"`
+	SourceType *SourceTypeEnum `json:"SourceType,omitempty"`
 }

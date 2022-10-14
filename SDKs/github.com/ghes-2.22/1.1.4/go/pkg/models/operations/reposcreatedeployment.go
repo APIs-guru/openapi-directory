@@ -10,15 +10,15 @@ type ReposCreateDeploymentPathParams struct {
 }
 
 type ReposCreateDeploymentRequestBody struct {
-	AutoMerge             *bool        `json:"auto_merge"`
-	Description           *string      `json:"description"`
-	Environment           *string      `json:"environment"`
-	Payload               *interface{} `json:"payload"`
-	ProductionEnvironment *bool        `json:"production_environment"`
+	AutoMerge             *bool        `json:"auto_merge,omitempty"`
+	Description           *string      `json:"description,omitempty"`
+	Environment           *string      `json:"environment,omitempty"`
+	Payload               *interface{} `json:"payload,omitempty"`
+	ProductionEnvironment *bool        `json:"production_environment,omitempty"`
 	Ref                   string       `json:"ref"`
-	RequiredContexts      []string     `json:"required_contexts"`
-	Task                  *string      `json:"task"`
-	TransientEnvironment  *bool        `json:"transient_environment"`
+	RequiredContexts      []string     `json:"required_contexts,omitempty"`
+	Task                  *string      `json:"task,omitempty"`
+	TransientEnvironment  *bool        `json:"transient_environment,omitempty"`
 }
 
 type ReposCreateDeploymentRequest struct {
@@ -27,7 +27,7 @@ type ReposCreateDeploymentRequest struct {
 }
 
 type ReposCreateDeployment202ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type ReposCreateDeploymentResponse struct {

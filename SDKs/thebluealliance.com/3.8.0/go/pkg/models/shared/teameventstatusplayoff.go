@@ -19,9 +19,9 @@ const (
 )
 
 type TeamEventStatusPlayoff struct {
-	CurrentLevelRecord *WltRecord                        `json:"current_level_record"`
-	Level              *TeamEventStatusPlayoffLevelEnum  `json:"level"`
-	PlayoffAverage     *int64                            `json:"playoff_average"`
-	Record             *WltRecord                        `json:"record"`
-	Status             *TeamEventStatusPlayoffStatusEnum `json:"status"`
+	CurrentLevelRecord *WltRecord                        `json:"current_level_record,omitempty"`
+	Level              *TeamEventStatusPlayoffLevelEnum  `json:"level,omitempty"`
+	PlayoffAverage     *int64                            `json:"playoff_average,omitempty"`
+	Record             *WltRecord                        `json:"record,omitempty"`
+	Status             *TeamEventStatusPlayoffStatusEnum `json:"status,omitempty"`
 }

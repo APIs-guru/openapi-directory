@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudVisionV1p1beta1WebDetectionWebPage struct {
-	FullMatchingImages    []GoogleCloudVisionV1p1beta1WebDetectionWebImage `json:"fullMatchingImages"`
-	PageTitle             *string                                          `json:"pageTitle"`
-	PartialMatchingImages []GoogleCloudVisionV1p1beta1WebDetectionWebImage `json:"partialMatchingImages"`
-	Score                 *float32                                         `json:"score"`
-	URL                   *string                                          `json:"url"`
+	FullMatchingImages    []GoogleCloudVisionV1p1beta1WebDetectionWebImage `json:"fullMatchingImages,omitempty"`
+	PageTitle             *string                                          `json:"pageTitle,omitempty"`
+	PartialMatchingImages []GoogleCloudVisionV1p1beta1WebDetectionWebImage `json:"partialMatchingImages,omitempty"`
+	Score                 *float32                                         `json:"score,omitempty"`
+	URL                   *string                                          `json:"url,omitempty"`
 }

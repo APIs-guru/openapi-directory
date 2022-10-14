@@ -5,6 +5,6 @@ import (
 )
 
 type StopContinuousExportResponse struct {
-	StartTime *time.Time `json:"startTime"`
-	StopTime  *time.Time `json:"stopTime"`
+	StartTime *time.Time `json:"startTime,omitempty"`
+	StopTime  *time.Time `json:"stopTime,omitempty"`
 }

@@ -37,10 +37,10 @@ const (
 )
 
 type CreativeSize struct {
-	AllowedFormats   []CreativeSizeAllowedFormatsEnum  `json:"allowedFormats"`
-	CompanionSizes   []Size                            `json:"companionSizes"`
-	CreativeSizeType *CreativeSizeCreativeSizeTypeEnum `json:"creativeSizeType"`
-	NativeTemplate   *CreativeSizeNativeTemplateEnum   `json:"nativeTemplate"`
-	Size             *Size                             `json:"size"`
-	SkippableAdType  *CreativeSizeSkippableAdTypeEnum  `json:"skippableAdType"`
+	AllowedFormats   []CreativeSizeAllowedFormatsEnum  `json:"allowedFormats,omitempty"`
+	CompanionSizes   []Size                            `json:"companionSizes,omitempty"`
+	CreativeSizeType *CreativeSizeCreativeSizeTypeEnum `json:"creativeSizeType,omitempty"`
+	NativeTemplate   *CreativeSizeNativeTemplateEnum   `json:"nativeTemplate,omitempty"`
+	Size             *Size                             `json:"size,omitempty"`
+	SkippableAdType  *CreativeSizeSkippableAdTypeEnum  `json:"skippableAdType,omitempty"`
 }

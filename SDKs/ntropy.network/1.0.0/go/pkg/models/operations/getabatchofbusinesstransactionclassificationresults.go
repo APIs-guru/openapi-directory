@@ -9,19 +9,19 @@ type GetABatchOfBusinessTransactionClassificationResultsRequest struct {
 }
 
 type GetABatchOfBusinessTransactionClassificationResults200ApplicationJSONResults struct {
-	Labels        []string `json:"labels"`
-	Logo          *string  `json:"logo"`
-	Merchant      *string  `json:"merchant"`
-	TransactionID *string  `json:"transaction_id"`
-	Website       *string  `json:"website"`
+	Labels        []string `json:"labels,omitempty"`
+	Logo          *string  `json:"logo,omitempty"`
+	Merchant      *string  `json:"merchant,omitempty"`
+	TransactionID *string  `json:"transaction_id,omitempty"`
+	Website       *string  `json:"website,omitempty"`
 }
 
 type GetABatchOfBusinessTransactionClassificationResults200ApplicationJSON struct {
-	ID        *string                                                                        `json:"id"`
-	Progress  *float64                                                                       `json:"progress"`
-	Results   []GetABatchOfBusinessTransactionClassificationResults200ApplicationJSONResults `json:"results"`
-	Status    *string                                                                        `json:"status"`
-	UpdatedAt *string                                                                        `json:"updated_at"`
+	ID        *string                                                                        `json:"id,omitempty"`
+	Progress  *float64                                                                       `json:"progress,omitempty"`
+	Results   []GetABatchOfBusinessTransactionClassificationResults200ApplicationJSONResults `json:"results,omitempty"`
+	Status    *string                                                                        `json:"status,omitempty"`
+	UpdatedAt *string                                                                        `json:"updated_at,omitempty"`
 }
 
 type GetABatchOfBusinessTransactionClassificationResultsResponse struct {

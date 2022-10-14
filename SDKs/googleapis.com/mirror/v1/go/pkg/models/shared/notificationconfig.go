@@ -5,6 +5,6 @@ import (
 )
 
 type NotificationConfig struct {
-	DeliveryTime *time.Time `json:"deliveryTime"`
-	Level        *string    `json:"level"`
+	DeliveryTime *time.Time `json:"deliveryTime,omitempty"`
+	Level        *string    `json:"level,omitempty"`
 }

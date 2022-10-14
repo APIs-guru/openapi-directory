@@ -15,20 +15,20 @@ type CreateRobotApplicationHeaders struct {
 }
 
 type CreateRobotApplicationRequestBodyEnvironment struct {
-	URI *string `json:"uri"`
+	URI *string `json:"uri,omitempty"`
 }
 
 type CreateRobotApplicationRequestBodyRobotSoftwareSuite struct {
-	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name"`
-	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version"`
+	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name,omitempty"`
+	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version,omitempty"`
 }
 
 type CreateRobotApplicationRequestBody struct {
-	Environment        *CreateRobotApplicationRequestBodyEnvironment       `json:"environment"`
+	Environment        *CreateRobotApplicationRequestBodyEnvironment       `json:"environment,omitempty"`
 	Name               string                                              `json:"name"`
 	RobotSoftwareSuite CreateRobotApplicationRequestBodyRobotSoftwareSuite `json:"robotSoftwareSuite"`
-	Sources            []shared.SourceConfig                               `json:"sources"`
-	Tags               map[string]string                                   `json:"tags"`
+	Sources            []shared.SourceConfig                               `json:"sources,omitempty"`
+	Tags               map[string]string                                   `json:"tags,omitempty"`
 }
 
 type CreateRobotApplicationRequest struct {

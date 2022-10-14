@@ -1,6 +1,6 @@
 package shared
 
 type ExecuteTransactionInput struct {
-	ClientRequestToken *string                  `json:"ClientRequestToken"`
+	ClientRequestToken *string                  `json:"ClientRequestToken,omitempty"`
 	TransactStatements []ParameterizedStatement `json:"TransactStatements"`
 }

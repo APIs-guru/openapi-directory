@@ -58,6 +58,6 @@ type EmbedSettings struct {
 	Playbar bool                 `json:"playbar"`
 	Speed   bool                 `json:"speed"`
 	Title   EmbedSettingsTitle   `json:"title"`
-	URI     *string              `json:"uri"`
+	URI     *string              `json:"uri,omitempty"`
 	Volume  bool                 `json:"volume"`
 }

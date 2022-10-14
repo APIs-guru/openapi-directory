@@ -152,26 +152,26 @@ const (
 )
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail struct {
-	BenefitDescription *string                                                                                                                                   `json:"BenefitDescription"`
-	BenefitID          *string                                                                                                                                   `json:"BenefitID"`
-	BenefitName        *string                                                                                                                                   `json:"BenefitName"`
-	BenefitType        *string                                                                                                                                   `json:"BenefitType"`
-	BenefitValue       *string                                                                                                                                   `json:"BenefitValue"`
-	Counter            *int64                                                                                                                                    `json:"Counter"`
-	CriteriaType       []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum `json:"CriteriaType"`
-	DefaultToAccounts  *bool                                                                                                                                     `json:"DefaultToAccounts"`
-	MaximumCriteria    *string                                                                                                                                   `json:"MaximumCriteria"`
-	MinimumCriteria    *string                                                                                                                                   `json:"MinimumCriteria"`
-	PromotionEndDate   *string                                                                                                                                   `json:"PromotionEndDate"`
-	PromotionStartDate *string                                                                                                                                   `json:"PromotionStartDate"`
+	BenefitDescription *string                                                                                                                                   `json:"BenefitDescription,omitempty"`
+	BenefitID          *string                                                                                                                                   `json:"BenefitID,omitempty"`
+	BenefitName        *string                                                                                                                                   `json:"BenefitName,omitempty"`
+	BenefitType        *string                                                                                                                                   `json:"BenefitType,omitempty"`
+	BenefitValue       *string                                                                                                                                   `json:"BenefitValue,omitempty"`
+	Counter            *int64                                                                                                                                    `json:"Counter,omitempty"`
+	CriteriaType       []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum `json:"CriteriaType,omitempty"`
+	DefaultToAccounts  *bool                                                                                                                                     `json:"DefaultToAccounts,omitempty"`
+	MaximumCriteria    *string                                                                                                                                   `json:"MaximumCriteria,omitempty"`
+	MinimumCriteria    *string                                                                                                                                   `json:"MinimumCriteria,omitempty"`
+	PromotionEndDate   *string                                                                                                                                   `json:"PromotionEndDate,omitempty"`
+	PromotionStartDate *string                                                                                                                                   `json:"PromotionStartDate,omitempty"`
 }
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem struct {
-	BenefitDetail               []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail `json:"BenefitDetail"`
-	DateOfChange                *string                                                                                                                   `json:"DateOfChange"`
-	LengthPromotionalInDays     *int64                                                                                                                    `json:"LengthPromotionalInDays"`
-	StartPromotionOrFutureTerms *string                                                                                                                   `json:"StartPromotionOrFutureTerms"`
-	StopPromotionOrFutureTerms  *string                                                                                                                   `json:"StopPromotionOrFutureTerms"`
+	BenefitDetail               []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail `json:"BenefitDetail,omitempty"`
+	DateOfChange                *string                                                                                                                   `json:"DateOfChange,omitempty"`
+	LengthPromotionalInDays     *int64                                                                                                                    `json:"LengthPromotionalInDays,omitempty"`
+	StartPromotionOrFutureTerms *string                                                                                                                   `json:"StartPromotionOrFutureTerms,omitempty"`
+	StopPromotionOrFutureTerms  *string                                                                                                                   `json:"StopPromotionOrFutureTerms,omitempty"`
 }
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum string
@@ -184,12 +184,12 @@ const (
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup struct {
 	BenefitItem    GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem         `json:"BenefitItem"`
-	BenefitSubType *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum `json:"BenefitSubType"`
+	BenefitSubType *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum `json:"BenefitSubType,omitempty"`
 }
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefits struct {
 	Benefit      bool                                                                                              `json:"Benefit"`
-	BenefitGroup []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup `json:"BenefitGroup"`
+	BenefitGroup []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup `json:"BenefitGroup,omitempty"`
 }
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataDetailsCcSubTypeEnum string
@@ -230,52 +230,52 @@ const (
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataDetailsCommercialCreditCardItem struct {
 	AprRate                             string                                                                                                                                           `json:"APRRate"`
-	AbilityToSetIndividualLimits        *bool                                                                                                                                            `json:"AbilityToSetIndividualLimits"`
+	AbilityToSetIndividualLimits        *bool                                                                                                                                            `json:"AbilityToSetIndividualLimits,omitempty"`
 	AccessToOnlineDataReportingTool     bool                                                                                                                                             `json:"AccessToOnlineDataReportingTool"`
-	AllocationofRepayment               *string                                                                                                                                          `json:"AllocationofRepayment"`
-	AnnualAccountFeeType                *string                                                                                                                                          `json:"AnnualAccountFeeType"`
+	AllocationofRepayment               *string                                                                                                                                          `json:"AllocationofRepayment,omitempty"`
+	AnnualAccountFeeType                *string                                                                                                                                          `json:"AnnualAccountFeeType,omitempty"`
 	AnnualFeeAmount                     string                                                                                                                                           `json:"AnnualFeeAmount"`
-	BalanceTransferInterestRatePeriod   *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataDetailsCommercialCreditCardItemBalanceTransferInterestRatePeriodEnum `json:"BalanceTransferInterestRatePeriod"`
-	BalanceTransferRate                 *string                                                                                                                                          `json:"BalanceTransferRate"`
+	BalanceTransferInterestRatePeriod   *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataDetailsCommercialCreditCardItemBalanceTransferInterestRatePeriodEnum `json:"BalanceTransferInterestRatePeriod,omitempty"`
+	BalanceTransferRate                 *string                                                                                                                                          `json:"BalanceTransferRate,omitempty"`
 	CardScheme                          GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataDetailsCommercialCreditCardItemCardSchemeEnum                         `json:"CardScheme"`
 	CashAdvanceRate                     string                                                                                                                                           `json:"CashAdvanceRate"`
 	CashWithdrawalsAllowed              bool                                                                                                                                             `json:"CashWithdrawalsAllowed"`
-	CashbackPercent                     *string                                                                                                                                          `json:"CashbackPercent"`
-	ChequeFeePercent                    *string                                                                                                                                          `json:"ChequeFeePercent"`
+	CashbackPercent                     *string                                                                                                                                          `json:"CashbackPercent,omitempty"`
+	ChequeFeePercent                    *string                                                                                                                                          `json:"ChequeFeePercent,omitempty"`
 	ConvenienceCheque                   bool                                                                                                                                             `json:"ConvenienceCheque"`
-	DateOfChange                        *string                                                                                                                                          `json:"DateOfChange"`
+	DateOfChange                        *string                                                                                                                                          `json:"DateOfChange,omitempty"`
 	DaysInterestFreeCreditIfPaymentFull int64                                                                                                                                            `json:"DaysInterestFreeCreditIfPaymentFull"`
 	ExchangeRateAdjustment              string                                                                                                                                           `json:"ExchangeRateAdjustment"`
-	FeesOnCheque                        *string                                                                                                                                          `json:"FeesOnCheque"`
-	ForeignCashFee                      *string                                                                                                                                          `json:"ForeignCashFee"`
-	ForeignCashFeeRate                  *string                                                                                                                                          `json:"ForeignCashFeeRate"`
-	ForeignPurchaseFee                  *string                                                                                                                                          `json:"ForeignPurchaseFee"`
-	ForeignPurchaseFeeRate              *string                                                                                                                                          `json:"ForeignPurchaseFeeRate"`
+	FeesOnCheque                        *string                                                                                                                                          `json:"FeesOnCheque,omitempty"`
+	ForeignCashFee                      *string                                                                                                                                          `json:"ForeignCashFee,omitempty"`
+	ForeignCashFeeRate                  *string                                                                                                                                          `json:"ForeignCashFeeRate,omitempty"`
+	ForeignPurchaseFee                  *string                                                                                                                                          `json:"ForeignPurchaseFee,omitempty"`
+	ForeignPurchaseFeeRate              *string                                                                                                                                          `json:"ForeignPurchaseFeeRate,omitempty"`
 	IssuingEmergencyCardsFees           string                                                                                                                                           `json:"IssuingEmergencyCardsFees"`
-	LengthPromotionalInDays             *int64                                                                                                                                           `json:"LengthPromotionalInDays"`
-	MaximumNumberOfCardsPermitted       *int64                                                                                                                                           `json:"MaximumNumberOfCardsPermitted"`
+	LengthPromotionalInDays             *int64                                                                                                                                           `json:"LengthPromotionalInDays,omitempty"`
+	MaximumNumberOfCardsPermitted       *int64                                                                                                                                           `json:"MaximumNumberOfCardsPermitted,omitempty"`
 	MinimumCreditLimit                  string                                                                                                                                           `json:"MinimumCreditLimit"`
-	MinimumLendingAmount                *string                                                                                                                                          `json:"MinimumLendingAmount"`
-	MinimumRepaymentAmount              *string                                                                                                                                          `json:"MinimumRepaymentAmount"`
-	MinimumRepaymentPercentage          *string                                                                                                                                          `json:"MinimumRepaymentPercentage"`
-	NonSterlingCashFee                  *string                                                                                                                                          `json:"NonSterlingCashFee"`
-	NonSterlingCashFeeRate              *string                                                                                                                                          `json:"NonSterlingCashFeeRate"`
-	NonSterlingPurchaseFee              *string                                                                                                                                          `json:"NonSterlingPurchaseFee"`
-	NonSterlingPurchaseFeeRate          *string                                                                                                                                          `json:"NonSterlingPurchaseFeeRate"`
-	NonSterlingTransactionFee           *string                                                                                                                                          `json:"NonSterlingTransactionFee"`
-	NonSterlingTransactionFeeRate       *string                                                                                                                                          `json:"NonSterlingTransactionFeeRate"`
-	OverLimitFee                        *string                                                                                                                                          `json:"OverLimitFee"`
+	MinimumLendingAmount                *string                                                                                                                                          `json:"MinimumLendingAmount,omitempty"`
+	MinimumRepaymentAmount              *string                                                                                                                                          `json:"MinimumRepaymentAmount,omitempty"`
+	MinimumRepaymentPercentage          *string                                                                                                                                          `json:"MinimumRepaymentPercentage,omitempty"`
+	NonSterlingCashFee                  *string                                                                                                                                          `json:"NonSterlingCashFee,omitempty"`
+	NonSterlingCashFeeRate              *string                                                                                                                                          `json:"NonSterlingCashFeeRate,omitempty"`
+	NonSterlingPurchaseFee              *string                                                                                                                                          `json:"NonSterlingPurchaseFee,omitempty"`
+	NonSterlingPurchaseFeeRate          *string                                                                                                                                          `json:"NonSterlingPurchaseFeeRate,omitempty"`
+	NonSterlingTransactionFee           *string                                                                                                                                          `json:"NonSterlingTransactionFee,omitempty"`
+	NonSterlingTransactionFeeRate       *string                                                                                                                                          `json:"NonSterlingTransactionFeeRate,omitempty"`
+	OverLimitFee                        *string                                                                                                                                          `json:"OverLimitFee,omitempty"`
 	PaymentDaysAfterStatement           int64                                                                                                                                            `json:"PaymentDaysAfterStatement"`
-	PaymentSchemeExchangeFee            *string                                                                                                                                          `json:"PaymentSchemeExchangeFee"`
-	PaymentSchemeExchangeFeeRate        *string                                                                                                                                          `json:"PaymentSchemeExchangeFeeRate"`
-	PaymentSchemeExchangeRate           *string                                                                                                                                          `json:"PaymentSchemeExchangeRate"`
+	PaymentSchemeExchangeFee            *string                                                                                                                                          `json:"PaymentSchemeExchangeFee,omitempty"`
+	PaymentSchemeExchangeFeeRate        *string                                                                                                                                          `json:"PaymentSchemeExchangeFeeRate,omitempty"`
+	PaymentSchemeExchangeRate           *string                                                                                                                                          `json:"PaymentSchemeExchangeRate,omitempty"`
 	PurchaseRate                        string                                                                                                                                           `json:"PurchaseRate"`
 	RepaymentFrequency                  GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataDetailsCommercialCreditCardItemRepaymentFrequencyEnum                 `json:"RepaymentFrequency"`
-	RepaymentNotes                      *string                                                                                                                                          `json:"RepaymentNotes"`
-	StartPromotionOrFutureTerms         *string                                                                                                                                          `json:"StartPromotionOrFutureTerms"`
+	RepaymentNotes                      *string                                                                                                                                          `json:"RepaymentNotes,omitempty"`
+	StartPromotionOrFutureTerms         *string                                                                                                                                          `json:"StartPromotionOrFutureTerms,omitempty"`
 	StatementAtAccountLevel             bool                                                                                                                                             `json:"StatementAtAccountLevel"`
 	StatementAtPersonalLevel            bool                                                                                                                                             `json:"StatementAtPersonalLevel"`
-	StopPromotionOrFutureTerms          *string                                                                                                                                          `json:"StopPromotionOrFutureTerms"`
+	StopPromotionOrFutureTerms          *string                                                                                                                                          `json:"StopPromotionOrFutureTerms,omitempty"`
 }
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataDetails struct {
@@ -352,37 +352,37 @@ const (
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibility struct {
 	AgeRestricted                    bool                                                                                                                 `json:"AgeRestricted"`
-	AnnualBusinessTurnover           *string                                                                                                              `json:"AnnualBusinessTurnover"`
-	AnnualBusinessTurnoverCurrency   *string                                                                                                              `json:"AnnualBusinessTurnoverCurrency"`
+	AnnualBusinessTurnover           *string                                                                                                              `json:"AnnualBusinessTurnover,omitempty"`
+	AnnualBusinessTurnoverCurrency   *string                                                                                                              `json:"AnnualBusinessTurnoverCurrency,omitempty"`
 	Description                      string                                                                                                               `json:"Description"`
-	EligibilityName                  *string                                                                                                              `json:"EligibilityName"`
-	EligibilityNotes                 *string                                                                                                              `json:"EligibilityNotes"`
-	EligibilityType                  *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum           `json:"EligibilityType"`
-	IncomeCondition                  *string                                                                                                              `json:"IncomeCondition"`
+	EligibilityName                  *string                                                                                                              `json:"EligibilityName,omitempty"`
+	EligibilityNotes                 *string                                                                                                              `json:"EligibilityNotes,omitempty"`
+	EligibilityType                  *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum           `json:"EligibilityType,omitempty"`
+	IncomeCondition                  *string                                                                                                              `json:"IncomeCondition,omitempty"`
 	IncomeTurnoverRelated            bool                                                                                                                 `json:"IncomeTurnoverRelated"`
-	MarketingEligibility             []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum     `json:"MarketingEligibility"`
-	MaxNumberOfAccounts              *string                                                                                                              `json:"MaxNumberOfAccounts"`
-	MaximumAge                       *int64                                                                                                               `json:"MaximumAge"`
-	MaximumAgeToOpen                 *int64                                                                                                               `json:"MaximumAgeToOpen"`
-	MaximumOpeningAmount             *bool                                                                                                                `json:"MaximumOpeningAmount"`
-	MinIncomeTurnoverPaidIntoAccount *int64                                                                                                               `json:"MinIncomeTurnoverPaidIntoAccount"`
-	MinimumAge                       *int64                                                                                                               `json:"MinimumAge"`
-	MinimumDeposit                   *bool                                                                                                                `json:"MinimumDeposit"`
-	MinimumIncomeFrequency           *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum    `json:"MinimumIncomeFrequency"`
-	MinimumIncomeTurnoverAmount      *string                                                                                                              `json:"MinimumIncomeTurnoverAmount"`
-	MinimumIncomeTurnoverCurrency    *string                                                                                                              `json:"MinimumIncomeTurnoverCurrency"`
-	MinimumOperatingBalance          *string                                                                                                              `json:"MinimumOperatingBalance"`
-	MinimumOperatingBalanceCurrency  *string                                                                                                              `json:"MinimumOperatingBalanceCurrency"`
-	MinimumOperatingBalanceExists    *bool                                                                                                                `json:"MinimumOperatingBalanceExists"`
-	OpeningDepositMaximumAmount      *string                                                                                                              `json:"OpeningDepositMaximumAmount"`
-	OpeningDepositMaximumCurrency    *string                                                                                                              `json:"OpeningDepositMaximumCurrency"`
-	OpeningDepositMinimum            *string                                                                                                              `json:"OpeningDepositMinimum"`
-	OpeningDepositMinimumCurrency    *string                                                                                                              `json:"OpeningDepositMinimumCurrency"`
+	MarketingEligibility             []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum     `json:"MarketingEligibility,omitempty"`
+	MaxNumberOfAccounts              *string                                                                                                              `json:"MaxNumberOfAccounts,omitempty"`
+	MaximumAge                       *int64                                                                                                               `json:"MaximumAge,omitempty"`
+	MaximumAgeToOpen                 *int64                                                                                                               `json:"MaximumAgeToOpen,omitempty"`
+	MaximumOpeningAmount             *bool                                                                                                                `json:"MaximumOpeningAmount,omitempty"`
+	MinIncomeTurnoverPaidIntoAccount *int64                                                                                                               `json:"MinIncomeTurnoverPaidIntoAccount,omitempty"`
+	MinimumAge                       *int64                                                                                                               `json:"MinimumAge,omitempty"`
+	MinimumDeposit                   *bool                                                                                                                `json:"MinimumDeposit,omitempty"`
+	MinimumIncomeFrequency           *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum    `json:"MinimumIncomeFrequency,omitempty"`
+	MinimumIncomeTurnoverAmount      *string                                                                                                              `json:"MinimumIncomeTurnoverAmount,omitempty"`
+	MinimumIncomeTurnoverCurrency    *string                                                                                                              `json:"MinimumIncomeTurnoverCurrency,omitempty"`
+	MinimumOperatingBalance          *string                                                                                                              `json:"MinimumOperatingBalance,omitempty"`
+	MinimumOperatingBalanceCurrency  *string                                                                                                              `json:"MinimumOperatingBalanceCurrency,omitempty"`
+	MinimumOperatingBalanceExists    *bool                                                                                                                `json:"MinimumOperatingBalanceExists,omitempty"`
+	OpeningDepositMaximumAmount      *string                                                                                                              `json:"OpeningDepositMaximumAmount,omitempty"`
+	OpeningDepositMaximumCurrency    *string                                                                                                              `json:"OpeningDepositMaximumCurrency,omitempty"`
+	OpeningDepositMinimum            *string                                                                                                              `json:"OpeningDepositMinimum,omitempty"`
+	OpeningDepositMinimumCurrency    *string                                                                                                              `json:"OpeningDepositMinimumCurrency,omitempty"`
 	OtherFinancialHoldingRequired    bool                                                                                                                 `json:"OtherFinancialHoldingRequired"`
 	PreviousBankruptcy               bool                                                                                                                 `json:"PreviousBankruptcy"`
 	ResidencyRestricted              bool                                                                                                                 `json:"ResidencyRestricted"`
-	ResidencyRestrictedRegion        *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum `json:"ResidencyRestrictedRegion"`
-	SingleJointIncome                *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum         `json:"SingleJointIncome"`
+	ResidencyRestrictedRegion        *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum `json:"ResidencyRestrictedRegion,omitempty"`
+	SingleJointIncome                *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum         `json:"SingleJointIncome,omitempty"`
 	ThirdSectorOrganisations         bool                                                                                                                 `json:"ThirdSectorOrganisations"`
 }
 
@@ -403,8 +403,8 @@ type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONData
 }
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation struct {
-	Bic              *string                                                                                                                   `json:"BIC"`
-	Lei              *string                                                                                                                   `json:"LEI"`
+	Bic              *string                                                                                                                   `json:"BIC,omitempty"`
+	Lei              *string                                                                                                                   `json:"LEI,omitempty"`
 	OrganisationName GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
@@ -436,12 +436,12 @@ type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONData
 	Eligibility               GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibility          `json:"Eligibility"`
 	KeyFeatures               string                                                                                          `json:"KeyFeatures"`
 	Organisation              GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation         `json:"Organisation"`
-	OtherKeyFeatures          *string                                                                                         `json:"OtherKeyFeatures"`
+	OtherKeyFeatures          *string                                                                                         `json:"OtherKeyFeatures,omitempty"`
 	PaymentHoliday            bool                                                                                            `json:"PaymentHoliday"`
-	PaymentHolidayDescription *string                                                                                         `json:"PaymentHolidayDescription"`
+	PaymentHolidayDescription *string                                                                                         `json:"PaymentHolidayDescription,omitempty"`
 	ProductIdentifier         string                                                                                          `json:"ProductIdentifier"`
 	ProductName               string                                                                                          `json:"ProductName"`
-	ProductSegment            []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum `json:"ProductSegment"`
+	ProductSegment            []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum `json:"ProductSegment,omitempty"`
 	ProductType               GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeEnum      `json:"ProductType"`
 	ProductURL                []string                                                                                        `json:"ProductURL"`
 	TsandCs                   []string                                                                                        `json:"TsandCs"`

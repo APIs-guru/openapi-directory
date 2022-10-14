@@ -19,24 +19,24 @@ const (
 )
 
 type Occurrence struct {
-	Attestation      *Details                            `json:"attestation"`
-	Build            *GrafeasV1beta1BuildDetails         `json:"build"`
-	CreateTime       *string                             `json:"createTime"`
-	Deployment       *GrafeasV1beta1DeploymentDetails    `json:"deployment"`
-	DerivedImage     *GrafeasV1beta1ImageDetails         `json:"derivedImage"`
-	Discovered       *GrafeasV1beta1DiscoveryDetails     `json:"discovered"`
-	Envelope         *Envelope                           `json:"envelope"`
-	Installation     *GrafeasV1beta1PackageDetails       `json:"installation"`
-	Intoto           *GrafeasV1beta1IntotoDetails        `json:"intoto"`
-	Kind             *OccurrenceKindEnum                 `json:"kind"`
-	Name             *string                             `json:"name"`
-	NoteName         *string                             `json:"noteName"`
-	Remediation      *string                             `json:"remediation"`
-	Resource         *Resource                           `json:"resource"`
-	Sbom             *DocumentOccurrence                 `json:"sbom"`
-	SpdxFile         *FileOccurrence                     `json:"spdxFile"`
-	SpdxPackage      *PackageInfoOccurrence              `json:"spdxPackage"`
-	SpdxRelationship *RelationshipOccurrence             `json:"spdxRelationship"`
-	UpdateTime       *string                             `json:"updateTime"`
-	Vulnerability    *GrafeasV1beta1VulnerabilityDetails `json:"vulnerability"`
+	Attestation      *Details                            `json:"attestation,omitempty"`
+	Build            *GrafeasV1beta1BuildDetails         `json:"build,omitempty"`
+	CreateTime       *string                             `json:"createTime,omitempty"`
+	Deployment       *GrafeasV1beta1DeploymentDetails    `json:"deployment,omitempty"`
+	DerivedImage     *GrafeasV1beta1ImageDetails         `json:"derivedImage,omitempty"`
+	Discovered       *GrafeasV1beta1DiscoveryDetails     `json:"discovered,omitempty"`
+	Envelope         *Envelope                           `json:"envelope,omitempty"`
+	Installation     *GrafeasV1beta1PackageDetails       `json:"installation,omitempty"`
+	Intoto           *GrafeasV1beta1IntotoDetails        `json:"intoto,omitempty"`
+	Kind             *OccurrenceKindEnum                 `json:"kind,omitempty"`
+	Name             *string                             `json:"name,omitempty"`
+	NoteName         *string                             `json:"noteName,omitempty"`
+	Remediation      *string                             `json:"remediation,omitempty"`
+	Resource         *Resource                           `json:"resource,omitempty"`
+	Sbom             *DocumentOccurrence                 `json:"sbom,omitempty"`
+	SpdxFile         *FileOccurrence                     `json:"spdxFile,omitempty"`
+	SpdxPackage      *PackageInfoOccurrence              `json:"spdxPackage,omitempty"`
+	SpdxRelationship *RelationshipOccurrence             `json:"spdxRelationship,omitempty"`
+	UpdateTime       *string                             `json:"updateTime,omitempty"`
+	Vulnerability    *GrafeasV1beta1VulnerabilityDetails `json:"vulnerability,omitempty"`
 }

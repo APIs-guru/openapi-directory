@@ -9,6 +9,6 @@ const (
 )
 
 type UpdateSystemModelsAvailableSubscription struct {
-	PackageType      *UpdateSystemModelsPackageType                               `json:"PackageType"`
-	SubscriptionType *UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum `json:"SubscriptionType"`
+	PackageType      *UpdateSystemModelsPackageType                               `json:"PackageType,omitempty"`
+	SubscriptionType *UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum `json:"SubscriptionType,omitempty"`
 }

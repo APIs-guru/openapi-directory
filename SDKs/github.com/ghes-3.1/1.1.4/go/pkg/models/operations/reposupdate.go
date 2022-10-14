@@ -19,21 +19,21 @@ const (
 )
 
 type ReposUpdateRequestBody struct {
-	AllowMergeCommit    *bool                                 `json:"allow_merge_commit"`
-	AllowRebaseMerge    *bool                                 `json:"allow_rebase_merge"`
-	AllowSquashMerge    *bool                                 `json:"allow_squash_merge"`
-	Archived            *bool                                 `json:"archived"`
-	DefaultBranch       *string                               `json:"default_branch"`
-	DeleteBranchOnMerge *bool                                 `json:"delete_branch_on_merge"`
-	Description         *string                               `json:"description"`
-	HasIssues           *bool                                 `json:"has_issues"`
-	HasProjects         *bool                                 `json:"has_projects"`
-	HasWiki             *bool                                 `json:"has_wiki"`
-	Homepage            *string                               `json:"homepage"`
-	IsTemplate          *bool                                 `json:"is_template"`
-	Name                *string                               `json:"name"`
-	Private             *bool                                 `json:"private"`
-	Visibility          *ReposUpdateRequestBodyVisibilityEnum `json:"visibility"`
+	AllowMergeCommit    *bool                                 `json:"allow_merge_commit,omitempty"`
+	AllowRebaseMerge    *bool                                 `json:"allow_rebase_merge,omitempty"`
+	AllowSquashMerge    *bool                                 `json:"allow_squash_merge,omitempty"`
+	Archived            *bool                                 `json:"archived,omitempty"`
+	DefaultBranch       *string                               `json:"default_branch,omitempty"`
+	DeleteBranchOnMerge *bool                                 `json:"delete_branch_on_merge,omitempty"`
+	Description         *string                               `json:"description,omitempty"`
+	HasIssues           *bool                                 `json:"has_issues,omitempty"`
+	HasProjects         *bool                                 `json:"has_projects,omitempty"`
+	HasWiki             *bool                                 `json:"has_wiki,omitempty"`
+	Homepage            *string                               `json:"homepage,omitempty"`
+	IsTemplate          *bool                                 `json:"is_template,omitempty"`
+	Name                *string                               `json:"name,omitempty"`
+	Private             *bool                                 `json:"private,omitempty"`
+	Visibility          *ReposUpdateRequestBodyVisibilityEnum `json:"visibility,omitempty"`
 }
 
 type ReposUpdateRequest struct {

@@ -15,11 +15,11 @@ type CreateAssessmentFrameworkHeaders struct {
 }
 
 type CreateAssessmentFrameworkRequestBody struct {
-	ComplianceType *string                                      `json:"complianceType"`
+	ComplianceType *string                                      `json:"complianceType,omitempty"`
 	ControlSets    []shared.CreateAssessmentFrameworkControlSet `json:"controlSets"`
-	Description    *string                                      `json:"description"`
+	Description    *string                                      `json:"description,omitempty"`
 	Name           string                                       `json:"name"`
-	Tags           map[string]string                            `json:"tags"`
+	Tags           map[string]string                            `json:"tags,omitempty"`
 }
 
 type CreateAssessmentFrameworkRequest struct {

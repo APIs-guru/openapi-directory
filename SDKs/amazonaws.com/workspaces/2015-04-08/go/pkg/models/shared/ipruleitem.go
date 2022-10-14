@@ -1,6 +1,6 @@
 package shared
 
 type IPRuleItem struct {
-	IPRule   *string `json:"ipRule"`
-	RuleDesc *string `json:"ruleDesc"`
+	IPRule   *string `json:"ipRule,omitempty"`
+	RuleDesc *string `json:"ruleDesc,omitempty"`
 }

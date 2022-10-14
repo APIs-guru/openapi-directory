@@ -1,6 +1,6 @@
 package shared
 
 type EmailSettings struct {
-	EmailMessage *string `json:"EmailMessage"`
-	EmailSubject *string `json:"EmailSubject"`
+	EmailMessage *string `json:"EmailMessage,omitempty"`
+	EmailSubject *string `json:"EmailSubject,omitempty"`
 }

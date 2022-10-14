@@ -1,7 +1,7 @@
 package shared
 
 type BatchRetrieveInventoryChangesResponse struct {
-	Changes []InventoryChange `json:"changes"`
-	Cursor  *string           `json:"cursor"`
-	Errors  []Error           `json:"errors"`
+	Changes []InventoryChange `json:"changes,omitempty"`
+	Cursor  *string           `json:"cursor,omitempty"`
+	Errors  []Error           `json:"errors,omitempty"`
 }

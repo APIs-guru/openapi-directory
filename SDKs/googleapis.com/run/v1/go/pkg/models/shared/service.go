@@ -1,9 +1,9 @@
 package shared
 
 type Service struct {
-	APIVersion *string        `json:"apiVersion"`
-	Kind       *string        `json:"kind"`
-	Metadata   *ObjectMeta    `json:"metadata"`
-	Spec       *ServiceSpec   `json:"spec"`
-	Status     *ServiceStatus `json:"status"`
+	APIVersion *string        `json:"apiVersion,omitempty"`
+	Kind       *string        `json:"kind,omitempty"`
+	Metadata   *ObjectMeta    `json:"metadata,omitempty"`
+	Spec       *ServiceSpec   `json:"spec,omitempty"`
+	Status     *ServiceStatus `json:"status,omitempty"`
 }

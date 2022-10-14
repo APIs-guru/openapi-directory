@@ -26,10 +26,10 @@ type ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions struct {
 }
 
 type ProtectedBranchRequiredPullRequestReviews struct {
-	DismissStaleReviews          *bool                                                           `json:"dismiss_stale_reviews"`
-	DismissalRestrictions        *ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions `json:"dismissal_restrictions"`
-	RequireCodeOwnerReviews      *bool                                                           `json:"require_code_owner_reviews"`
-	RequiredApprovingReviewCount *int64                                                          `json:"required_approving_review_count"`
+	DismissStaleReviews          *bool                                                           `json:"dismiss_stale_reviews,omitempty"`
+	DismissalRestrictions        *ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions `json:"dismissal_restrictions,omitempty"`
+	RequireCodeOwnerReviews      *bool                                                           `json:"require_code_owner_reviews,omitempty"`
+	RequiredApprovingReviewCount *int64                                                          `json:"required_approving_review_count,omitempty"`
 	URL                          string                                                          `json:"url"`
 }
 
@@ -39,13 +39,13 @@ type ProtectedBranchRequiredSignatures struct {
 }
 
 type ProtectedBranch struct {
-	AllowDeletions             *ProtectedBranchAllowDeletions             `json:"allow_deletions"`
-	AllowForcePushes           *ProtectedBranchAllowForcePushes           `json:"allow_force_pushes"`
-	EnforceAdmins              *ProtectedBranchEnforceAdmins              `json:"enforce_admins"`
-	RequiredLinearHistory      *ProtectedBranchRequiredLinearHistory      `json:"required_linear_history"`
-	RequiredPullRequestReviews *ProtectedBranchRequiredPullRequestReviews `json:"required_pull_request_reviews"`
-	RequiredSignatures         *ProtectedBranchRequiredSignatures         `json:"required_signatures"`
-	RequiredStatusChecks       *StatusCheckPolicy                         `json:"required_status_checks"`
-	Restrictions               *BranchRestrictionPolicy                   `json:"restrictions"`
+	AllowDeletions             *ProtectedBranchAllowDeletions             `json:"allow_deletions,omitempty"`
+	AllowForcePushes           *ProtectedBranchAllowForcePushes           `json:"allow_force_pushes,omitempty"`
+	EnforceAdmins              *ProtectedBranchEnforceAdmins              `json:"enforce_admins,omitempty"`
+	RequiredLinearHistory      *ProtectedBranchRequiredLinearHistory      `json:"required_linear_history,omitempty"`
+	RequiredPullRequestReviews *ProtectedBranchRequiredPullRequestReviews `json:"required_pull_request_reviews,omitempty"`
+	RequiredSignatures         *ProtectedBranchRequiredSignatures         `json:"required_signatures,omitempty"`
+	RequiredStatusChecks       *StatusCheckPolicy                         `json:"required_status_checks,omitempty"`
+	Restrictions               *BranchRestrictionPolicy                   `json:"restrictions,omitempty"`
 	URL                        string                                     `json:"url"`
 }

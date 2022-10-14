@@ -5,17 +5,17 @@ import (
 )
 
 type Change struct {
-	ChangeType       *string    `json:"changeType"`
-	Deleted          *bool      `json:"deleted"`
-	Drive            *Drive     `json:"drive"`
-	DriveID          *string    `json:"driveId"`
-	File             *File      `json:"file"`
-	FileID           *string    `json:"fileId"`
-	ID               *string    `json:"id"`
-	Kind             *string    `json:"kind"`
-	ModificationDate *time.Time `json:"modificationDate"`
-	SelfLink         *string    `json:"selfLink"`
-	TeamDrive        *TeamDrive `json:"teamDrive"`
-	TeamDriveID      *string    `json:"teamDriveId"`
-	Type             *string    `json:"type"`
+	ChangeType       *string    `json:"changeType,omitempty"`
+	Deleted          *bool      `json:"deleted,omitempty"`
+	Drive            *Drive     `json:"drive,omitempty"`
+	DriveID          *string    `json:"driveId,omitempty"`
+	File             *File      `json:"file,omitempty"`
+	FileID           *string    `json:"fileId,omitempty"`
+	ID               *string    `json:"id,omitempty"`
+	Kind             *string    `json:"kind,omitempty"`
+	ModificationDate *time.Time `json:"modificationDate,omitempty"`
+	SelfLink         *string    `json:"selfLink,omitempty"`
+	TeamDrive        *TeamDrive `json:"teamDrive,omitempty"`
+	TeamDriveID      *string    `json:"teamDriveId,omitempty"`
+	Type             *string    `json:"type,omitempty"`
 }

@@ -15,15 +15,15 @@ type CreateAnomalyDetectorHeaders struct {
 }
 
 type CreateAnomalyDetectorRequestBodyAnomalyDetectorConfig struct {
-	AnomalyDetectorFrequency *shared.FrequencyEnum `json:"AnomalyDetectorFrequency"`
+	AnomalyDetectorFrequency *shared.FrequencyEnum `json:"AnomalyDetectorFrequency,omitempty"`
 }
 
 type CreateAnomalyDetectorRequestBody struct {
 	AnomalyDetectorConfig      CreateAnomalyDetectorRequestBodyAnomalyDetectorConfig `json:"AnomalyDetectorConfig"`
-	AnomalyDetectorDescription *string                                               `json:"AnomalyDetectorDescription"`
+	AnomalyDetectorDescription *string                                               `json:"AnomalyDetectorDescription,omitempty"`
 	AnomalyDetectorName        string                                                `json:"AnomalyDetectorName"`
-	KmsKeyArn                  *string                                               `json:"KmsKeyArn"`
-	Tags                       map[string]string                                     `json:"Tags"`
+	KmsKeyArn                  *string                                               `json:"KmsKeyArn,omitempty"`
+	Tags                       map[string]string                                     `json:"Tags,omitempty"`
 }
 
 type CreateAnomalyDetectorRequest struct {

@@ -22,30 +22,30 @@ type GetWfsInventoryRequest struct {
 }
 
 type GetWfsInventory200ApplicationJSONHeaders struct {
-	Limit      *int32 `json:"limit"`
-	Offset     *int32 `json:"offset"`
-	TotalCount *int32 `json:"totalCount"`
+	Limit      *int32 `json:"limit,omitempty"`
+	Offset     *int32 `json:"offset,omitempty"`
+	TotalCount *int32 `json:"totalCount,omitempty"`
 }
 
 type GetWfsInventory200ApplicationJSONPayloadInventoryShipNodes struct {
-	AvailToSellQty *int32  `json:"availToSellQty"`
-	ModifiedDate   *string `json:"modifiedDate"`
-	OnHandQty      *int32  `json:"onHandQty"`
-	ShipNodeType   *string `json:"shipNodeType"`
+	AvailToSellQty *int32  `json:"availToSellQty,omitempty"`
+	ModifiedDate   *string `json:"modifiedDate,omitempty"`
+	OnHandQty      *int32  `json:"onHandQty,omitempty"`
+	ShipNodeType   *string `json:"shipNodeType,omitempty"`
 }
 
 type GetWfsInventory200ApplicationJSONPayloadInventory struct {
-	ShipNodes []GetWfsInventory200ApplicationJSONPayloadInventoryShipNodes `json:"shipNodes"`
-	Sku       *string                                                      `json:"sku"`
+	ShipNodes []GetWfsInventory200ApplicationJSONPayloadInventoryShipNodes `json:"shipNodes,omitempty"`
+	Sku       *string                                                      `json:"sku,omitempty"`
 }
 
 type GetWfsInventory200ApplicationJSONPayload struct {
-	Inventory []GetWfsInventory200ApplicationJSONPayloadInventory `json:"inventory"`
+	Inventory []GetWfsInventory200ApplicationJSONPayloadInventory `json:"inventory,omitempty"`
 }
 
 type GetWfsInventory200ApplicationJSON struct {
-	Headers *GetWfsInventory200ApplicationJSONHeaders `json:"headers"`
-	Payload *GetWfsInventory200ApplicationJSONPayload `json:"payload"`
+	Headers *GetWfsInventory200ApplicationJSONHeaders `json:"headers,omitempty"`
+	Payload *GetWfsInventory200ApplicationJSONPayload `json:"payload,omitempty"`
 }
 
 type GetWfsInventoryResponse struct {

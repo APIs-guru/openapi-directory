@@ -13,21 +13,21 @@ type TaxRatesByIPAddressRequest struct {
 }
 
 type TaxRatesByIPAddress200ApplicationJSONTaxes struct {
-	Country   *string `json:"Country"`
-	Type      *string `json:"Type"`
-	DataName  *string `json:"data_name"`
-	DataValue *string `json:"data_value"`
+	Country   *string `json:"Country,omitempty"`
+	Type      *string `json:"Type,omitempty"`
+	DataName  *string `json:"data_name,omitempty"`
+	DataValue *string `json:"data_value,omitempty"`
 }
 
 type TaxRatesByIPAddress200ApplicationJSON struct {
-	CountryName *string                                      `json:"country_name"`
-	Taxes       []TaxRatesByIPAddress200ApplicationJSONTaxes `json:"taxes"`
+	CountryName *string                                      `json:"country_name,omitempty"`
+	Taxes       []TaxRatesByIPAddress200ApplicationJSONTaxes `json:"taxes,omitempty"`
 }
 
 type TaxRatesByIPAddress500ApplicationJSON struct {
-	Code    *string `json:"code"`
-	Fields  *string `json:"fields"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Fields  *string `json:"fields,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type TaxRatesByIPAddressResponse struct {

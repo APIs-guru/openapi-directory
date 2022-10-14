@@ -17,8 +17,8 @@ type HiuHealthInformationRequestResponseHiRequest struct {
 }
 
 type HiuHealthInformationRequestResponse struct {
-	Error     *Error                                        `json:"error"`
-	HiRequest *HiuHealthInformationRequestResponseHiRequest `json:"hiRequest"`
+	Error     *Error                                        `json:"error,omitempty"`
+	HiRequest *HiuHealthInformationRequestResponseHiRequest `json:"hiRequest,omitempty"`
 	RequestID string                                        `json:"requestId"`
 	Resp      RequestReference                              `json:"resp"`
 	Timestamp time.Time                                     `json:"timestamp"`

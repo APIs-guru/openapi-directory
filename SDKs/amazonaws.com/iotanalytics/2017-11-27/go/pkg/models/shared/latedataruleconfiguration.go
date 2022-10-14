@@ -1,5 +1,5 @@
 package shared
 
 type LateDataRuleConfiguration struct {
-	DeltaTimeSessionWindowConfiguration *DeltaTimeSessionWindowConfiguration `json:"deltaTimeSessionWindowConfiguration"`
+	DeltaTimeSessionWindowConfiguration *DeltaTimeSessionWindowConfiguration `json:"deltaTimeSessionWindowConfiguration,omitempty"`
 }

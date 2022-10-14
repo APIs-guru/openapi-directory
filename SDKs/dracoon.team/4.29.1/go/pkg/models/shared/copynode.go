@@ -6,7 +6,7 @@ import (
 
 type CopyNode struct {
 	ID                    int64      `json:"id"`
-	Name                  *string    `json:"name"`
-	TimestampCreation     *time.Time `json:"timestampCreation"`
-	TimestampModification *time.Time `json:"timestampModification"`
+	Name                  *string    `json:"name,omitempty"`
+	TimestampCreation     *time.Time `json:"timestampCreation,omitempty"`
+	TimestampModification *time.Time `json:"timestampModification,omitempty"`
 }

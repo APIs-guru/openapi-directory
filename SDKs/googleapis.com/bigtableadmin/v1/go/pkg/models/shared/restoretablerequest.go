@@ -1,6 +1,6 @@
 package shared
 
 type RestoreTableRequest struct {
-	Backup  *string `json:"backup"`
-	TableID *string `json:"tableId"`
+	Backup  *string `json:"backup,omitempty"`
+	TableID *string `json:"tableId,omitempty"`
 }

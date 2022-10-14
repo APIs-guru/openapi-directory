@@ -16,8 +16,8 @@ type CreateInvitationsHeaders struct {
 
 type CreateInvitationsRequestBody struct {
 	AccountIds               []string `json:"accountIds"`
-	DisableEmailNotification *bool    `json:"disableEmailNotification"`
-	Message                  *string  `json:"message"`
+	DisableEmailNotification *bool    `json:"disableEmailNotification,omitempty"`
+	Message                  *string  `json:"message,omitempty"`
 }
 
 type CreateInvitationsRequest struct {

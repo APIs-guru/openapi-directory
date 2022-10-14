@@ -5,12 +5,12 @@ import (
 )
 
 type GetContactResponse struct {
-	AttributesData          *string           `json:"AttributesData"`
-	ContactListName         *string           `json:"ContactListName"`
-	CreatedTimestamp        *time.Time        `json:"CreatedTimestamp"`
-	EmailAddress            *string           `json:"EmailAddress"`
-	LastUpdatedTimestamp    *time.Time        `json:"LastUpdatedTimestamp"`
-	TopicDefaultPreferences []TopicPreference `json:"TopicDefaultPreferences"`
-	TopicPreferences        []TopicPreference `json:"TopicPreferences"`
-	UnsubscribeAll          *bool             `json:"UnsubscribeAll"`
+	AttributesData          *string           `json:"AttributesData,omitempty"`
+	ContactListName         *string           `json:"ContactListName,omitempty"`
+	CreatedTimestamp        *time.Time        `json:"CreatedTimestamp,omitempty"`
+	EmailAddress            *string           `json:"EmailAddress,omitempty"`
+	LastUpdatedTimestamp    *time.Time        `json:"LastUpdatedTimestamp,omitempty"`
+	TopicDefaultPreferences []TopicPreference `json:"TopicDefaultPreferences,omitempty"`
+	TopicPreferences        []TopicPreference `json:"TopicPreferences,omitempty"`
+	UnsubscribeAll          *bool             `json:"UnsubscribeAll,omitempty"`
 }

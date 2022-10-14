@@ -16,10 +16,10 @@ const (
 )
 
 type MemberJoiningRulesPartialUpdate400ApplicationJSON struct {
-	Detail   *string                                                   `json:"detail"`
-	Instance *string                                                   `json:"instance"`
-	Status   *interface{}                                              `json:"status"`
-	Title    *interface{}                                              `json:"title"`
+	Detail   *string                                                   `json:"detail,omitempty"`
+	Instance *string                                                   `json:"instance,omitempty"`
+	Status   *interface{}                                              `json:"status,omitempty"`
+	Title    *interface{}                                              `json:"title,omitempty"`
 	Type     MemberJoiningRulesPartialUpdate400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -31,10 +31,10 @@ const (
 )
 
 type MemberJoiningRulesPartialUpdate401ApplicationJSON struct {
-	Detail   *string                                                   `json:"detail"`
-	Instance *string                                                   `json:"instance"`
-	Status   *interface{}                                              `json:"status"`
-	Title    *interface{}                                              `json:"title"`
+	Detail   *string                                                   `json:"detail,omitempty"`
+	Instance *string                                                   `json:"instance,omitempty"`
+	Status   *interface{}                                              `json:"status,omitempty"`
+	Title    *interface{}                                              `json:"title,omitempty"`
 	Type     MemberJoiningRulesPartialUpdate401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -45,10 +45,10 @@ const (
 )
 
 type MemberJoiningRulesPartialUpdate403ApplicationJSON struct {
-	Detail   *string                                                   `json:"detail"`
-	Instance *string                                                   `json:"instance"`
-	Status   *interface{}                                              `json:"status"`
-	Title    *interface{}                                              `json:"title"`
+	Detail   *string                                                   `json:"detail,omitempty"`
+	Instance *string                                                   `json:"instance,omitempty"`
+	Status   *interface{}                                              `json:"status,omitempty"`
+	Title    *interface{}                                              `json:"title,omitempty"`
 	Type     MemberJoiningRulesPartialUpdate403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -59,10 +59,10 @@ const (
 )
 
 type MemberJoiningRulesPartialUpdate404ApplicationJSON struct {
-	Detail   *string                                                   `json:"detail"`
-	Instance *string                                                   `json:"instance"`
-	Status   *interface{}                                              `json:"status"`
-	Title    *interface{}                                              `json:"title"`
+	Detail   *string                                                   `json:"detail,omitempty"`
+	Instance *string                                                   `json:"instance,omitempty"`
+	Status   *interface{}                                              `json:"status,omitempty"`
+	Title    *interface{}                                              `json:"title,omitempty"`
 	Type     MemberJoiningRulesPartialUpdate404ApplicationJSONTypeEnum `json:"type"`
 }
 

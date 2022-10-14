@@ -5,11 +5,11 @@ import (
 )
 
 type ScheduledTriggerProperties struct {
-	DataPullMode       *DataPullModeEnum `json:"DataPullMode"`
-	FirstExecutionFrom *time.Time        `json:"FirstExecutionFrom"`
-	ScheduleEndTime    *time.Time        `json:"ScheduleEndTime"`
+	DataPullMode       *DataPullModeEnum `json:"DataPullMode,omitempty"`
+	FirstExecutionFrom *time.Time        `json:"FirstExecutionFrom,omitempty"`
+	ScheduleEndTime    *time.Time        `json:"ScheduleEndTime,omitempty"`
 	ScheduleExpression string            `json:"ScheduleExpression"`
-	ScheduleOffset     *int64            `json:"ScheduleOffset"`
-	ScheduleStartTime  *time.Time        `json:"ScheduleStartTime"`
-	Timezone           *string           `json:"Timezone"`
+	ScheduleOffset     *int64            `json:"ScheduleOffset,omitempty"`
+	ScheduleStartTime  *time.Time        `json:"ScheduleStartTime,omitempty"`
+	Timezone           *string           `json:"Timezone,omitempty"`
 }

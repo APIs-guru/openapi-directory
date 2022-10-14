@@ -9,6 +9,6 @@ const (
 )
 
 type ForwardingAddress struct {
-	ForwardingEmail    *string                                  `json:"forwardingEmail"`
-	VerificationStatus *ForwardingAddressVerificationStatusEnum `json:"verificationStatus"`
+	ForwardingEmail    *string                                  `json:"forwardingEmail,omitempty"`
+	VerificationStatus *ForwardingAddressVerificationStatusEnum `json:"verificationStatus,omitempty"`
 }

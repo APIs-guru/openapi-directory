@@ -1,6 +1,6 @@
 package shared
 
 type SessionContext struct {
-	Attributes    *SessionContextAttributes `json:"attributes"`
-	SessionIssuer *SessionIssuer            `json:"sessionIssuer"`
+	Attributes    *SessionContextAttributes `json:"attributes,omitempty"`
+	SessionIssuer *SessionIssuer            `json:"sessionIssuer,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type CreateTaskResponse struct {
-	TaskArn *string `json:"TaskArn"`
+	TaskArn *string `json:"TaskArn,omitempty"`
 }

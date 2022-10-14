@@ -1,6 +1,6 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaListMeasurementProtocolSecretsResponse struct {
-	MeasurementProtocolSecrets []GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret `json:"measurementProtocolSecrets"`
-	NextPageToken              *string                                                `json:"nextPageToken"`
+	MeasurementProtocolSecrets []GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret `json:"measurementProtocolSecrets,omitempty"`
+	NextPageToken              *string                                                `json:"nextPageToken,omitempty"`
 }

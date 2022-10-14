@@ -1,5 +1,5 @@
 package shared
 
 type APIHealthStatus struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }

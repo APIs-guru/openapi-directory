@@ -1,5 +1,5 @@
 package shared
 
 type GetLaunchProfileInitializationResponse struct {
-	LaunchProfileInitialization *LaunchProfileInitialization `json:"launchProfileInitialization"`
+	LaunchProfileInitialization *LaunchProfileInitialization `json:"launchProfileInitialization,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type PipelineDescription struct {
-	DisplayData               []DisplayData           `json:"displayData"`
-	ExecutionPipelineStage    []ExecutionStageSummary `json:"executionPipelineStage"`
-	OriginalPipelineTransform []TransformSummary      `json:"originalPipelineTransform"`
-	StepNamesHash             *string                 `json:"stepNamesHash"`
+	DisplayData               []DisplayData           `json:"displayData,omitempty"`
+	ExecutionPipelineStage    []ExecutionStageSummary `json:"executionPipelineStage,omitempty"`
+	OriginalPipelineTransform []TransformSummary      `json:"originalPipelineTransform,omitempty"`
+	StepNamesHash             *string                 `json:"stepNamesHash,omitempty"`
 }

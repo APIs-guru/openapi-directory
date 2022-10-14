@@ -10,7 +10,7 @@ const (
 )
 
 type OutlierResponse struct {
-	Index *int32                   `json:"index"`
-	Type  *OutlierResponseTypeEnum `json:"type"`
-	Value *float64                 `json:"value"`
+	Index *int32                   `json:"index,omitempty"`
+	Type  *OutlierResponseTypeEnum `json:"type,omitempty"`
+	Value *float64                 `json:"value,omitempty"`
 }

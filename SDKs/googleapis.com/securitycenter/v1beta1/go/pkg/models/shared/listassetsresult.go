@@ -11,6 +11,6 @@ const (
 )
 
 type ListAssetsResult struct {
-	Asset *Asset                     `json:"asset"`
-	State *ListAssetsResultStateEnum `json:"state"`
+	Asset *Asset                     `json:"asset,omitempty"`
+	State *ListAssetsResultStateEnum `json:"state,omitempty"`
 }

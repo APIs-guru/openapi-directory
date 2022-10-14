@@ -1,6 +1,6 @@
 package shared
 
 type From struct {
-	Number *string `json:"number"`
-	Type   *string `json:"type"`
+	Number *string `json:"number,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }

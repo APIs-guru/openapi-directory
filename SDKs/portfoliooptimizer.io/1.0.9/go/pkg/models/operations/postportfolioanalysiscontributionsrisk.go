@@ -7,7 +7,7 @@ type PostPortfolioAnalysisContributionsRiskRequestBodyPortfolios struct {
 type PostPortfolioAnalysisContributionsRiskRequestBody struct {
 	Assets                 int64                                                         `json:"assets"`
 	AssetsCovarianceMatrix [][]float64                                                   `json:"assetsCovarianceMatrix"`
-	AssetsGroups           [][]int64                                                     `json:"assetsGroups"`
+	AssetsGroups           [][]int64                                                     `json:"assetsGroups,omitempty"`
 	Portfolios             []PostPortfolioAnalysisContributionsRiskRequestBodyPortfolios `json:"portfolios"`
 }
 
@@ -16,7 +16,7 @@ type PostPortfolioAnalysisContributionsRiskRequest struct {
 }
 
 type PostPortfolioAnalysisContributionsRisk200ApplicationJSONPortfolios struct {
-	AssetsGroupsRiskContributions []float64 `json:"assetsGroupsRiskContributions"`
+	AssetsGroupsRiskContributions []float64 `json:"assetsGroupsRiskContributions,omitempty"`
 	AssetsRiskContributions       []float64 `json:"assetsRiskContributions"`
 }
 

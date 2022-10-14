@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute struct {
-	Basepath    *string `json:"basepath"`
-	Envgroup    *string `json:"envgroup"`
-	Environment *string `json:"environment"`
-	Percentage  *int32  `json:"percentage"`
+	Basepath    *string `json:"basepath,omitempty"`
+	Envgroup    *string `json:"envgroup,omitempty"`
+	Environment *string `json:"environment,omitempty"`
+	Percentage  *int32  `json:"percentage,omitempty"`
 }

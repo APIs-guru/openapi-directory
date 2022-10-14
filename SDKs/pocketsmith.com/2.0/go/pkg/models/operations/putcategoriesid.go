@@ -9,9 +9,9 @@ type PutCategoriesIDPathParams struct {
 }
 
 type PutCategoriesIDRequestBody struct {
-	Colour   *string `json:"colour"`
-	ParentID *int64  `json:"parent_id"`
-	Title    *string `json:"title"`
+	Colour   *string `json:"colour,omitempty"`
+	ParentID *int64  `json:"parent_id,omitempty"`
+	Title    *string `json:"title,omitempty"`
 }
 
 type PutCategoriesIDRequest struct {

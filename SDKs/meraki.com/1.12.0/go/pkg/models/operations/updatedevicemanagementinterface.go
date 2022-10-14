@@ -13,13 +13,13 @@ const (
 )
 
 type UpdateDeviceManagementInterfaceRequestBodyWan1 struct {
-	StaticDNS        []string                                                      `json:"staticDns"`
-	StaticGatewayIP  *string                                                       `json:"staticGatewayIp"`
-	StaticIP         *string                                                       `json:"staticIp"`
-	StaticSubnetMask *string                                                       `json:"staticSubnetMask"`
-	UsingStaticIP    *bool                                                         `json:"usingStaticIp"`
-	Vlan             *int64                                                        `json:"vlan"`
-	WanEnabled       *UpdateDeviceManagementInterfaceRequestBodyWan1WanEnabledEnum `json:"wanEnabled"`
+	StaticDNS        []string                                                      `json:"staticDns,omitempty"`
+	StaticGatewayIP  *string                                                       `json:"staticGatewayIp,omitempty"`
+	StaticIP         *string                                                       `json:"staticIp,omitempty"`
+	StaticSubnetMask *string                                                       `json:"staticSubnetMask,omitempty"`
+	UsingStaticIP    *bool                                                         `json:"usingStaticIp,omitempty"`
+	Vlan             *int64                                                        `json:"vlan,omitempty"`
+	WanEnabled       *UpdateDeviceManagementInterfaceRequestBodyWan1WanEnabledEnum `json:"wanEnabled,omitempty"`
 }
 
 type UpdateDeviceManagementInterfaceRequestBodyWan2WanEnabledEnum string
@@ -31,18 +31,18 @@ const (
 )
 
 type UpdateDeviceManagementInterfaceRequestBodyWan2 struct {
-	StaticDNS        []string                                                      `json:"staticDns"`
-	StaticGatewayIP  *string                                                       `json:"staticGatewayIp"`
-	StaticIP         *string                                                       `json:"staticIp"`
-	StaticSubnetMask *string                                                       `json:"staticSubnetMask"`
-	UsingStaticIP    *bool                                                         `json:"usingStaticIp"`
-	Vlan             *int64                                                        `json:"vlan"`
-	WanEnabled       *UpdateDeviceManagementInterfaceRequestBodyWan2WanEnabledEnum `json:"wanEnabled"`
+	StaticDNS        []string                                                      `json:"staticDns,omitempty"`
+	StaticGatewayIP  *string                                                       `json:"staticGatewayIp,omitempty"`
+	StaticIP         *string                                                       `json:"staticIp,omitempty"`
+	StaticSubnetMask *string                                                       `json:"staticSubnetMask,omitempty"`
+	UsingStaticIP    *bool                                                         `json:"usingStaticIp,omitempty"`
+	Vlan             *int64                                                        `json:"vlan,omitempty"`
+	WanEnabled       *UpdateDeviceManagementInterfaceRequestBodyWan2WanEnabledEnum `json:"wanEnabled,omitempty"`
 }
 
 type UpdateDeviceManagementInterfaceRequestBody struct {
-	Wan1 *UpdateDeviceManagementInterfaceRequestBodyWan1 `json:"wan1"`
-	Wan2 *UpdateDeviceManagementInterfaceRequestBodyWan2 `json:"wan2"`
+	Wan1 *UpdateDeviceManagementInterfaceRequestBodyWan1 `json:"wan1,omitempty"`
+	Wan2 *UpdateDeviceManagementInterfaceRequestBodyWan2 `json:"wan2,omitempty"`
 }
 
 type UpdateDeviceManagementInterfaceRequest struct {

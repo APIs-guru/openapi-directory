@@ -1,6 +1,6 @@
 package shared
 
 type ListApplicationsRequest struct {
-	Limit     *int64  `json:"Limit"`
-	NextToken *string `json:"NextToken"`
+	Limit     *int64  `json:"Limit,omitempty"`
+	NextToken *string `json:"NextToken,omitempty"`
 }

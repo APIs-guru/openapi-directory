@@ -12,6 +12,6 @@ const (
 )
 
 type DigitalContentLabelAssignedTargetingOptionDetails struct {
-	ContentRatingTier         *DigitalContentLabelAssignedTargetingOptionDetailsContentRatingTierEnum `json:"contentRatingTier"`
-	ExcludedTargetingOptionID *string                                                                 `json:"excludedTargetingOptionId"`
+	ContentRatingTier         *DigitalContentLabelAssignedTargetingOptionDetailsContentRatingTierEnum `json:"contentRatingTier,omitempty"`
+	ExcludedTargetingOptionID *string                                                                 `json:"excludedTargetingOptionId,omitempty"`
 }

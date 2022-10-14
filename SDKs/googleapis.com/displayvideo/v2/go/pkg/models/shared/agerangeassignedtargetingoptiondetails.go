@@ -24,5 +24,5 @@ const (
 )
 
 type AgeRangeAssignedTargetingOptionDetails struct {
-	AgeRange *AgeRangeAssignedTargetingOptionDetailsAgeRangeEnum `json:"ageRange"`
+	AgeRange *AgeRangeAssignedTargetingOptionDetailsAgeRangeEnum `json:"ageRange,omitempty"`
 }

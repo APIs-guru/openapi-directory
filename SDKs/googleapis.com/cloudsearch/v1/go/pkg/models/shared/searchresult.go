@@ -1,10 +1,10 @@
 package shared
 
 type SearchResult struct {
-	ClusteredResults []SearchResult   `json:"clusteredResults"`
-	DebugInfo        *ResultDebugInfo `json:"debugInfo"`
-	Metadata         *Metadata        `json:"metadata"`
-	Snippet          *Snippet         `json:"snippet"`
-	Title            *string          `json:"title"`
-	URL              *string          `json:"url"`
+	ClusteredResults []SearchResult   `json:"clusteredResults,omitempty"`
+	DebugInfo        *ResultDebugInfo `json:"debugInfo,omitempty"`
+	Metadata         *Metadata        `json:"metadata,omitempty"`
+	Snippet          *Snippet         `json:"snippet,omitempty"`
+	Title            *string          `json:"title,omitempty"`
+	URL              *string          `json:"url,omitempty"`
 }

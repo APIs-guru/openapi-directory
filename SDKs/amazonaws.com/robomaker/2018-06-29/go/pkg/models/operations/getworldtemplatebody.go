@@ -15,8 +15,8 @@ type GetWorldTemplateBodyHeaders struct {
 }
 
 type GetWorldTemplateBodyRequestBody struct {
-	GenerationJob *string `json:"generationJob"`
-	Template      *string `json:"template"`
+	GenerationJob *string `json:"generationJob,omitempty"`
+	Template      *string `json:"template,omitempty"`
 }
 
 type GetWorldTemplateBodyRequest struct {

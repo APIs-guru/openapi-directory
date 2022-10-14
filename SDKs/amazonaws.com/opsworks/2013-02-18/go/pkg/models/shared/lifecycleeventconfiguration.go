@@ -1,5 +1,5 @@
 package shared
 
 type LifecycleEventConfiguration struct {
-	Shutdown *ShutdownEventConfiguration `json:"Shutdown"`
+	Shutdown *ShutdownEventConfiguration `json:"Shutdown,omitempty"`
 }

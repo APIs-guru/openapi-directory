@@ -14,6 +14,6 @@ const (
 )
 
 type ServiceMeshDataPlaneManagement struct {
-	Details []ServiceMeshStatusDetails               `json:"details"`
-	State   *ServiceMeshDataPlaneManagementStateEnum `json:"state"`
+	Details []ServiceMeshStatusDetails               `json:"details,omitempty"`
+	State   *ServiceMeshDataPlaneManagementStateEnum `json:"state,omitempty"`
 }

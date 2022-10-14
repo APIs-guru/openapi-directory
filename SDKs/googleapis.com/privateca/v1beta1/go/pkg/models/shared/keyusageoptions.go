@@ -1,13 +1,13 @@
 package shared
 
 type KeyUsageOptions struct {
-	CertSign          *bool `json:"certSign"`
-	ContentCommitment *bool `json:"contentCommitment"`
-	CrlSign           *bool `json:"crlSign"`
-	DataEncipherment  *bool `json:"dataEncipherment"`
-	DecipherOnly      *bool `json:"decipherOnly"`
-	DigitalSignature  *bool `json:"digitalSignature"`
-	EncipherOnly      *bool `json:"encipherOnly"`
-	KeyAgreement      *bool `json:"keyAgreement"`
-	KeyEncipherment   *bool `json:"keyEncipherment"`
+	CertSign          *bool `json:"certSign,omitempty"`
+	ContentCommitment *bool `json:"contentCommitment,omitempty"`
+	CrlSign           *bool `json:"crlSign,omitempty"`
+	DataEncipherment  *bool `json:"dataEncipherment,omitempty"`
+	DecipherOnly      *bool `json:"decipherOnly,omitempty"`
+	DigitalSignature  *bool `json:"digitalSignature,omitempty"`
+	EncipherOnly      *bool `json:"encipherOnly,omitempty"`
+	KeyAgreement      *bool `json:"keyAgreement,omitempty"`
+	KeyEncipherment   *bool `json:"keyEncipherment,omitempty"`
 }

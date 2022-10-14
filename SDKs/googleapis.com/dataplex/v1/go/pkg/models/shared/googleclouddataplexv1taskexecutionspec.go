@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudDataplexV1TaskExecutionSpec struct {
-	Args                    map[string]string `json:"args"`
-	KmsKey                  *string           `json:"kmsKey"`
-	MaxJobExecutionLifetime *string           `json:"maxJobExecutionLifetime"`
-	Project                 *string           `json:"project"`
-	ServiceAccount          *string           `json:"serviceAccount"`
+	Args                    map[string]string `json:"args,omitempty"`
+	KmsKey                  *string           `json:"kmsKey,omitempty"`
+	MaxJobExecutionLifetime *string           `json:"maxJobExecutionLifetime,omitempty"`
+	Project                 *string           `json:"project,omitempty"`
+	ServiceAccount          *string           `json:"serviceAccount,omitempty"`
 }

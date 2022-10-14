@@ -1,5 +1,5 @@
 package shared
 
 type DescribeAuditStreamConfigurationResponse struct {
-	AuditStreamArn *string `json:"AuditStreamArn"`
+	AuditStreamArn *string `json:"AuditStreamArn,omitempty"`
 }

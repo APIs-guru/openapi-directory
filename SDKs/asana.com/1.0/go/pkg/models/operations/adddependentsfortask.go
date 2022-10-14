@@ -14,7 +14,7 @@ type AddDependentsForTaskQueryParams struct {
 }
 
 type AddDependentsForTaskRequestBody struct {
-	Data *shared.ModifyDependentsRequest `json:"data"`
+	Data *shared.ModifyDependentsRequest `json:"data,omitempty"`
 }
 
 type AddDependentsForTaskRequest struct {
@@ -24,7 +24,7 @@ type AddDependentsForTaskRequest struct {
 }
 
 type AddDependentsForTask200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data"`
+	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type AddDependentsForTaskResponse struct {

@@ -5,27 +5,27 @@ type ImportExportedDataRequest struct {
 }
 
 type ImportExportedData200ApplicationJSONCollections struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type ImportExportedData200ApplicationJSON struct {
-	Collections []ImportExportedData200ApplicationJSONCollections `json:"collections"`
+	Collections []ImportExportedData200ApplicationJSONCollections `json:"collections,omitempty"`
 }
 
 type ImportExportedData400ApplicationJSONErrorDetails struct {
-	Param *string `json:"param"`
+	Param *string `json:"param,omitempty"`
 }
 
 type ImportExportedData400ApplicationJSONError struct {
-	Details *ImportExportedData400ApplicationJSONErrorDetails `json:"details"`
-	Message *string                                           `json:"message"`
-	Name    *string                                           `json:"name"`
+	Details *ImportExportedData400ApplicationJSONErrorDetails `json:"details,omitempty"`
+	Message *string                                           `json:"message,omitempty"`
+	Name    *string                                           `json:"name,omitempty"`
 }
 
 type ImportExportedData400ApplicationJSON struct {
-	Error *ImportExportedData400ApplicationJSONError `json:"error"`
+	Error *ImportExportedData400ApplicationJSONError `json:"error,omitempty"`
 }
 
 type ImportExportedDataResponse struct {

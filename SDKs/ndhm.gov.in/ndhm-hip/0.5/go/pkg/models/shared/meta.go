@@ -8,7 +8,7 @@ const (
 )
 
 type Meta struct {
-	CommunicationExpiry *string                     `json:"communicationExpiry"`
-	CommunicationHint   *string                     `json:"communicationHint"`
+	CommunicationExpiry *string                     `json:"communicationExpiry,omitempty"`
+	CommunicationHint   *string                     `json:"communicationHint,omitempty"`
 	CommunicationMedium MetaCommunicationMediumEnum `json:"communicationMedium"`
 }

@@ -5,24 +5,24 @@ import (
 )
 
 type UploadVideoAlt1RequestBodyEmbedButtons struct {
-	Embed      *bool `json:"embed"`
-	Fullscreen *bool `json:"fullscreen"`
-	Hd         *bool `json:"hd"`
-	Like       *bool `json:"like"`
-	Scaling    *bool `json:"scaling"`
-	Share      *bool `json:"share"`
-	Watchlater *bool `json:"watchlater"`
+	Embed      *bool `json:"embed,omitempty"`
+	Fullscreen *bool `json:"fullscreen,omitempty"`
+	Hd         *bool `json:"hd,omitempty"`
+	Like       *bool `json:"like,omitempty"`
+	Scaling    *bool `json:"scaling,omitempty"`
+	Share      *bool `json:"share,omitempty"`
+	Watchlater *bool `json:"watchlater,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyEmbedLogosCustom struct {
-	Active *bool   `json:"active"`
-	Link   *string `json:"link"`
-	Sticky *bool   `json:"sticky"`
+	Active *bool   `json:"active,omitempty"`
+	Link   *string `json:"link,omitempty"`
+	Sticky *bool   `json:"sticky,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyEmbedLogos struct {
-	Custom *UploadVideoAlt1RequestBodyEmbedLogosCustom `json:"custom"`
-	Vimeo  *bool                                       `json:"vimeo"`
+	Custom *UploadVideoAlt1RequestBodyEmbedLogosCustom `json:"custom,omitempty"`
+	Vimeo  *bool                                       `json:"vimeo,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyEmbedTitleNameEnum string
@@ -50,18 +50,18 @@ const (
 )
 
 type UploadVideoAlt1RequestBodyEmbedTitle struct {
-	Name     *UploadVideoAlt1RequestBodyEmbedTitleNameEnum     `json:"name"`
-	Owner    *UploadVideoAlt1RequestBodyEmbedTitleOwnerEnum    `json:"owner"`
-	Portrait *UploadVideoAlt1RequestBodyEmbedTitlePortraitEnum `json:"portrait"`
+	Name     *UploadVideoAlt1RequestBodyEmbedTitleNameEnum     `json:"name,omitempty"`
+	Owner    *UploadVideoAlt1RequestBodyEmbedTitleOwnerEnum    `json:"owner,omitempty"`
+	Portrait *UploadVideoAlt1RequestBodyEmbedTitlePortraitEnum `json:"portrait,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyEmbed struct {
-	Buttons *UploadVideoAlt1RequestBodyEmbedButtons `json:"buttons"`
-	Color   *string                                 `json:"color"`
-	Logos   *UploadVideoAlt1RequestBodyEmbedLogos   `json:"logos"`
-	Playbar *bool                                   `json:"playbar"`
-	Title   *UploadVideoAlt1RequestBodyEmbedTitle   `json:"title"`
-	Volume  *bool                                   `json:"volume"`
+	Buttons *UploadVideoAlt1RequestBodyEmbedButtons `json:"buttons,omitempty"`
+	Color   *string                                 `json:"color,omitempty"`
+	Logos   *UploadVideoAlt1RequestBodyEmbedLogos   `json:"logos,omitempty"`
+	Playbar *bool                                   `json:"playbar,omitempty"`
+	Title   *UploadVideoAlt1RequestBodyEmbedTitle   `json:"title,omitempty"`
+	Volume  *bool                                   `json:"volume,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyLicenseEnum string
@@ -105,11 +105,11 @@ const (
 )
 
 type UploadVideoAlt1RequestBodyPrivacy struct {
-	Add      *bool                                          `json:"add"`
-	Comments *UploadVideoAlt1RequestBodyPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                          `json:"download"`
-	Embed    *UploadVideoAlt1RequestBodyPrivacyEmbedEnum    `json:"embed"`
-	View     *UploadVideoAlt1RequestBodyPrivacyViewEnum     `json:"view"`
+	Add      *bool                                          `json:"add,omitempty"`
+	Comments *UploadVideoAlt1RequestBodyPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                          `json:"download,omitempty"`
+	Embed    *UploadVideoAlt1RequestBodyPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *UploadVideoAlt1RequestBodyPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyRatingsMpaaReasonEnum string
@@ -124,7 +124,7 @@ const (
 )
 
 type UploadVideoAlt1RequestBodyRatingsMpaa struct {
-	Reason *UploadVideoAlt1RequestBodyRatingsMpaaReasonEnum `json:"reason"`
+	Reason *UploadVideoAlt1RequestBodyRatingsMpaaReasonEnum `json:"reason,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyRatingsTvReasonEnum string
@@ -138,21 +138,21 @@ const (
 )
 
 type UploadVideoAlt1RequestBodyRatingsTv struct {
-	Reason *UploadVideoAlt1RequestBodyRatingsTvReasonEnum `json:"reason"`
+	Reason *UploadVideoAlt1RequestBodyRatingsTvReasonEnum `json:"reason,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyRatings struct {
-	Mpaa *UploadVideoAlt1RequestBodyRatingsMpaa `json:"mpaa"`
-	Tv   *UploadVideoAlt1RequestBodyRatingsTv   `json:"tv"`
+	Mpaa *UploadVideoAlt1RequestBodyRatingsMpaa `json:"mpaa,omitempty"`
+	Tv   *UploadVideoAlt1RequestBodyRatingsTv   `json:"tv,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyReviewPage struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodySpatialDirectorTimeline struct {
 	Pitch    float64  `json:"pitch"`
-	Roll     *float64 `json:"roll"`
+	Roll     *float64 `json:"roll,omitempty"`
 	TimeCode float64  `json:"time_code"`
 	Yaw      float64  `json:"yaw"`
 }
@@ -176,10 +176,10 @@ const (
 )
 
 type UploadVideoAlt1RequestBodySpatial struct {
-	DirectorTimeline []UploadVideoAlt1RequestBodySpatialDirectorTimeline `json:"director_timeline"`
-	FieldOfView      *float64                                            `json:"field_of_view"`
-	Projection       *UploadVideoAlt1RequestBodySpatialProjectionEnum    `json:"projection"`
-	StereoFormat     *UploadVideoAlt1RequestBodySpatialStereoFormatEnum  `json:"stereo_format"`
+	DirectorTimeline []UploadVideoAlt1RequestBodySpatialDirectorTimeline `json:"director_timeline,omitempty"`
+	FieldOfView      *float64                                            `json:"field_of_view,omitempty"`
+	Projection       *UploadVideoAlt1RequestBodySpatialProjectionEnum    `json:"projection,omitempty"`
+	StereoFormat     *UploadVideoAlt1RequestBodySpatialStereoFormatEnum  `json:"stereo_format,omitempty"`
 }
 
 type UploadVideoAlt1RequestBodyUploadApproachEnum string
@@ -193,23 +193,23 @@ const (
 
 type UploadVideoAlt1RequestBodyUpload struct {
 	Approach    UploadVideoAlt1RequestBodyUploadApproachEnum `json:"approach"`
-	Link        *string                                      `json:"link"`
-	RedirectURL *string                                      `json:"redirect_url"`
-	Size        *string                                      `json:"size"`
+	Link        *string                                      `json:"link,omitempty"`
+	RedirectURL *string                                      `json:"redirect_url,omitempty"`
+	Size        *string                                      `json:"size,omitempty"`
 }
 
 type UploadVideoAlt1RequestBody struct {
-	ContentRating []string                               `json:"content_rating"`
-	Description   *string                                `json:"description"`
-	Embed         *UploadVideoAlt1RequestBodyEmbed       `json:"embed"`
-	License       *UploadVideoAlt1RequestBodyLicenseEnum `json:"license"`
-	Locale        *string                                `json:"locale"`
-	Name          *string                                `json:"name"`
-	Password      *string                                `json:"password"`
-	Privacy       *UploadVideoAlt1RequestBodyPrivacy     `json:"privacy"`
-	Ratings       *UploadVideoAlt1RequestBodyRatings     `json:"ratings"`
-	ReviewPage    *UploadVideoAlt1RequestBodyReviewPage  `json:"review_page"`
-	Spatial       *UploadVideoAlt1RequestBodySpatial     `json:"spatial"`
+	ContentRating []string                               `json:"content_rating,omitempty"`
+	Description   *string                                `json:"description,omitempty"`
+	Embed         *UploadVideoAlt1RequestBodyEmbed       `json:"embed,omitempty"`
+	License       *UploadVideoAlt1RequestBodyLicenseEnum `json:"license,omitempty"`
+	Locale        *string                                `json:"locale,omitempty"`
+	Name          *string                                `json:"name,omitempty"`
+	Password      *string                                `json:"password,omitempty"`
+	Privacy       *UploadVideoAlt1RequestBodyPrivacy     `json:"privacy,omitempty"`
+	Ratings       *UploadVideoAlt1RequestBodyRatings     `json:"ratings,omitempty"`
+	ReviewPage    *UploadVideoAlt1RequestBodyReviewPage  `json:"review_page,omitempty"`
+	Spatial       *UploadVideoAlt1RequestBodySpatial     `json:"spatial,omitempty"`
 	Upload        UploadVideoAlt1RequestBodyUpload       `json:"upload"`
 }
 

@@ -1,8 +1,8 @@
 package shared
 
 type ListTestGridSessionArtifactsRequest struct {
-	MaxResult  *int64                               `json:"maxResult"`
-	NextToken  *string                              `json:"nextToken"`
+	MaxResult  *int64                               `json:"maxResult,omitempty"`
+	NextToken  *string                              `json:"nextToken,omitempty"`
 	SessionArn string                               `json:"sessionArn"`
-	Type       *TestGridSessionArtifactCategoryEnum `json:"type"`
+	Type       *TestGridSessionArtifactCategoryEnum `json:"type,omitempty"`
 }

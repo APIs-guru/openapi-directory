@@ -10,7 +10,7 @@ const (
 )
 
 type RoboDirective struct {
-	ActionType   *RoboDirectiveActionTypeEnum `json:"actionType"`
-	InputText    *string                      `json:"inputText"`
-	ResourceName *string                      `json:"resourceName"`
+	ActionType   *RoboDirectiveActionTypeEnum `json:"actionType,omitempty"`
+	InputText    *string                      `json:"inputText,omitempty"`
+	ResourceName *string                      `json:"resourceName,omitempty"`
 }

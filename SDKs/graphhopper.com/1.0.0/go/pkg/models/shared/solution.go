@@ -1,24 +1,24 @@
 package shared
 
 type SolutionUnassigned struct {
-	Breaks    []string `json:"breaks"`
-	Details   []Detail `json:"details"`
-	Services  []string `json:"services"`
-	Shipments []string `json:"shipments"`
+	Breaks    []string `json:"breaks,omitempty"`
+	Details   []Detail `json:"details,omitempty"`
+	Services  []string `json:"services,omitempty"`
+	Shipments []string `json:"shipments,omitempty"`
 }
 
 type Solution struct {
-	CompletionTime   *int64              `json:"completion_time"`
-	Costs            *int32              `json:"costs"`
-	Distance         *int32              `json:"distance"`
-	MaxOperationTime *int64              `json:"max_operation_time"`
-	NoUnassigned     *int32              `json:"no_unassigned"`
-	NoVehicles       *int32              `json:"no_vehicles"`
-	PreparationTime  *int64              `json:"preparation_time"`
-	Routes           []Route             `json:"routes"`
-	ServiceDuration  *int64              `json:"service_duration"`
-	Time             *int64              `json:"time"`
-	TransportTime    *int64              `json:"transport_time"`
-	Unassigned       *SolutionUnassigned `json:"unassigned"`
-	WaitingTime      *int64              `json:"waiting_time"`
+	CompletionTime   *int64              `json:"completion_time,omitempty"`
+	Costs            *int32              `json:"costs,omitempty"`
+	Distance         *int32              `json:"distance,omitempty"`
+	MaxOperationTime *int64              `json:"max_operation_time,omitempty"`
+	NoUnassigned     *int32              `json:"no_unassigned,omitempty"`
+	NoVehicles       *int32              `json:"no_vehicles,omitempty"`
+	PreparationTime  *int64              `json:"preparation_time,omitempty"`
+	Routes           []Route             `json:"routes,omitempty"`
+	ServiceDuration  *int64              `json:"service_duration,omitempty"`
+	Time             *int64              `json:"time,omitempty"`
+	TransportTime    *int64              `json:"transport_time,omitempty"`
+	Unassigned       *SolutionUnassigned `json:"unassigned,omitempty"`
+	WaitingTime      *int64              `json:"waiting_time,omitempty"`
 }

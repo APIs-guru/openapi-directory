@@ -1,6 +1,6 @@
 package shared
 
 type ResetDeploymentsResponse struct {
-	DeploymentArn *string `json:"DeploymentArn"`
-	DeploymentID  *string `json:"DeploymentId"`
+	DeploymentArn *string `json:"DeploymentArn,omitempty"`
+	DeploymentID  *string `json:"DeploymentId,omitempty"`
 }

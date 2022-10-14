@@ -1,5 +1,5 @@
 package shared
 
 type SourceContext struct {
-	FileName *string `json:"fileName"`
+	FileName *string `json:"fileName,omitempty"`
 }

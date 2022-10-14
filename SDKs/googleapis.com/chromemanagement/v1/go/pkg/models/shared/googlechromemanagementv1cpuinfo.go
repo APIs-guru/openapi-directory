@@ -8,9 +8,9 @@ const (
 )
 
 type GoogleChromeManagementV1CPUInfo struct {
-	Architecture        *GoogleChromeManagementV1CPUInfoArchitectureEnum `json:"architecture"`
-	KeylockerConfigured *bool                                            `json:"keylockerConfigured"`
-	KeylockerSupported  *bool                                            `json:"keylockerSupported"`
-	MaxClockSpeed       *int32                                           `json:"maxClockSpeed"`
-	Model               *string                                          `json:"model"`
+	Architecture        *GoogleChromeManagementV1CPUInfoArchitectureEnum `json:"architecture,omitempty"`
+	KeylockerConfigured *bool                                            `json:"keylockerConfigured,omitempty"`
+	KeylockerSupported  *bool                                            `json:"keylockerSupported,omitempty"`
+	MaxClockSpeed       *int32                                           `json:"maxClockSpeed,omitempty"`
+	Model               *string                                          `json:"model,omitempty"`
 }

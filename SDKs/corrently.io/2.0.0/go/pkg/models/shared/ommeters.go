@@ -1,14 +1,14 @@
 package shared
 
 type Ommeters struct {
-	CurrentScalingFactor *int64  `json:"currentScalingFactor"`
-	LoadProfileType      *string `json:"loadProfileType"`
-	Location             *string `json:"location"`
-	ManufacturerID       *string `json:"manufacturerId"`
-	MeasurementType      *string `json:"measurementType"`
-	Meta                 *string `json:"meta"`
-	MeterID              *string `json:"meterId"`
-	ScalingFactor        *int64  `json:"scalingFactor"`
-	Type                 *string `json:"type"`
-	VoltageScalingFactor *int64  `json:"voltageScalingFactor"`
+	CurrentScalingFactor *int64  `json:"currentScalingFactor,omitempty"`
+	LoadProfileType      *string `json:"loadProfileType,omitempty"`
+	Location             *string `json:"location,omitempty"`
+	ManufacturerID       *string `json:"manufacturerId,omitempty"`
+	MeasurementType      *string `json:"measurementType,omitempty"`
+	Meta                 *string `json:"meta,omitempty"`
+	MeterID              *string `json:"meterId,omitempty"`
+	ScalingFactor        *int64  `json:"scalingFactor,omitempty"`
+	Type                 *string `json:"type,omitempty"`
+	VoltageScalingFactor *int64  `json:"voltageScalingFactor,omitempty"`
 }

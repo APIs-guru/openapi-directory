@@ -1,6 +1,6 @@
 package shared
 
 type RoutingIdentifier struct {
-	ID     *string `json:"id"`
-	Scheme *string `json:"scheme"`
+	ID     *string `json:"id,omitempty"`
+	Scheme *string `json:"scheme,omitempty"`
 }

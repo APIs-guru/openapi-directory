@@ -1,10 +1,10 @@
 package shared
 
 type Buyer struct {
-	ActiveCreativeCount        *string  `json:"activeCreativeCount"`
-	Bidder                     *string  `json:"bidder"`
-	BillingIds                 []string `json:"billingIds"`
-	DisplayName                *string  `json:"displayName"`
-	MaximumActiveCreativeCount *string  `json:"maximumActiveCreativeCount"`
-	Name                       *string  `json:"name"`
+	ActiveCreativeCount        *string  `json:"activeCreativeCount,omitempty"`
+	Bidder                     *string  `json:"bidder,omitempty"`
+	BillingIds                 []string `json:"billingIds,omitempty"`
+	DisplayName                *string  `json:"displayName,omitempty"`
+	MaximumActiveCreativeCount *string  `json:"maximumActiveCreativeCount,omitempty"`
+	Name                       *string  `json:"name,omitempty"`
 }

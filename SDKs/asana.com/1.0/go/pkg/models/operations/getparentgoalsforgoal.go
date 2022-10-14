@@ -19,7 +19,7 @@ type GetParentGoalsForGoalRequest struct {
 }
 
 type GetParentGoalsForGoal200ApplicationJSON struct {
-	Data []shared.GoalCompact `json:"data"`
+	Data []shared.GoalCompact `json:"data,omitempty"`
 }
 
 type GetParentGoalsForGoalResponse struct {

@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse struct {
-	Access            *GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum `json:"access"`
-	ExplainedPolicies []GoogleCloudPolicytroubleshooterV1betaExplainedPolicy                        `json:"explainedPolicies"`
+	Access            *GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum `json:"access,omitempty"`
+	ExplainedPolicies []GoogleCloudPolicytroubleshooterV1betaExplainedPolicy                        `json:"explainedPolicies,omitempty"`
 }

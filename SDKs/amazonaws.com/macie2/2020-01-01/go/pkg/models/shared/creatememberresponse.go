@@ -1,5 +1,5 @@
 package shared
 
 type CreateMemberResponse struct {
-	Arn *string `json:"arn"`
+	Arn *string `json:"arn,omitempty"`
 }

@@ -27,23 +27,23 @@ const (
 )
 
 type AzureFunctionRulePostTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AzureFunctionRulePostTarget struct {
 	AzureAppID        string                                 `json:"azureAppId"`
 	AzureFunctionName string                                 `json:"azureFunctionName"`
-	Enveloped         *bool                                  `json:"enveloped"`
-	Format            *AzureFunctionRulePostTargetFormatEnum `json:"format"`
-	Headers           []AzureFunctionRulePostTargetHeaders   `json:"headers"`
-	SigningKeyID      *string                                `json:"signingKeyId"`
+	Enveloped         *bool                                  `json:"enveloped,omitempty"`
+	Format            *AzureFunctionRulePostTargetFormatEnum `json:"format,omitempty"`
+	Headers           []AzureFunctionRulePostTargetHeaders   `json:"headers,omitempty"`
+	SigningKeyID      *string                                `json:"signingKeyId,omitempty"`
 }
 
 type AzureFunctionRulePost struct {
 	RequestMode AzureFunctionRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    AzureFunctionRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                           `json:"source"`
-	Status      *AzureFunctionRulePostStatusEnum     `json:"status"`
+	Status      *AzureFunctionRulePostStatusEnum     `json:"status,omitempty"`
 	Target      AzureFunctionRulePostTarget          `json:"target"`
 }

@@ -24,7 +24,7 @@ type GetQueryJSONRequest struct {
 }
 
 type GetQueryJSON200ApplicationJSON struct {
-	Results []shared.Event `json:"results"`
+	Results []shared.Event `json:"results,omitempty"`
 }
 
 type GetQueryJSONResponse struct {

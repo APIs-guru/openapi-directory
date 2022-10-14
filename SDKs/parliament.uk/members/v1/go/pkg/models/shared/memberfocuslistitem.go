@@ -1,6 +1,6 @@
 package shared
 
 type MemberFocusListItem struct {
-	Links []Link        `json:"links"`
-	Value []MemberFocus `json:"value"`
+	Links []Link        `json:"links,omitempty"`
+	Value []MemberFocus `json:"value,omitempty"`
 }

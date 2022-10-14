@@ -1,7 +1,7 @@
 package shared
 
 type EventPeriodUpdate struct {
-	Kind       *string              `json:"kind"`
-	TimePeriod *EventPeriodRange    `json:"timePeriod"`
-	Updates    []EventUpdateRequest `json:"updates"`
+	Kind       *string              `json:"kind,omitempty"`
+	TimePeriod *EventPeriodRange    `json:"timePeriod,omitempty"`
+	Updates    []EventUpdateRequest `json:"updates,omitempty"`
 }

@@ -15,33 +15,33 @@ type CreateAlarmModelHeaders struct {
 }
 
 type CreateAlarmModelRequestBodyAlarmCapabilities struct {
-	AcknowledgeFlow             *shared.AcknowledgeFlow             `json:"acknowledgeFlow"`
-	InitializationConfiguration *shared.InitializationConfiguration `json:"initializationConfiguration"`
+	AcknowledgeFlow             *shared.AcknowledgeFlow             `json:"acknowledgeFlow,omitempty"`
+	InitializationConfiguration *shared.InitializationConfiguration `json:"initializationConfiguration,omitempty"`
 }
 
 type CreateAlarmModelRequestBodyAlarmEventActions struct {
-	AlarmActions []shared.AlarmAction `json:"alarmActions"`
+	AlarmActions []shared.AlarmAction `json:"alarmActions,omitempty"`
 }
 
 type CreateAlarmModelRequestBodyAlarmNotification struct {
-	NotificationActions []shared.NotificationAction `json:"notificationActions"`
+	NotificationActions []shared.NotificationAction `json:"notificationActions,omitempty"`
 }
 
 type CreateAlarmModelRequestBodyAlarmRule struct {
-	SimpleRule *shared.SimpleRule `json:"simpleRule"`
+	SimpleRule *shared.SimpleRule `json:"simpleRule,omitempty"`
 }
 
 type CreateAlarmModelRequestBody struct {
-	AlarmCapabilities     *CreateAlarmModelRequestBodyAlarmCapabilities `json:"alarmCapabilities"`
-	AlarmEventActions     *CreateAlarmModelRequestBodyAlarmEventActions `json:"alarmEventActions"`
-	AlarmModelDescription *string                                       `json:"alarmModelDescription"`
+	AlarmCapabilities     *CreateAlarmModelRequestBodyAlarmCapabilities `json:"alarmCapabilities,omitempty"`
+	AlarmEventActions     *CreateAlarmModelRequestBodyAlarmEventActions `json:"alarmEventActions,omitempty"`
+	AlarmModelDescription *string                                       `json:"alarmModelDescription,omitempty"`
 	AlarmModelName        string                                        `json:"alarmModelName"`
-	AlarmNotification     *CreateAlarmModelRequestBodyAlarmNotification `json:"alarmNotification"`
+	AlarmNotification     *CreateAlarmModelRequestBodyAlarmNotification `json:"alarmNotification,omitempty"`
 	AlarmRule             CreateAlarmModelRequestBodyAlarmRule          `json:"alarmRule"`
-	Key                   *string                                       `json:"key"`
+	Key                   *string                                       `json:"key,omitempty"`
 	RoleArn               string                                        `json:"roleArn"`
-	Severity              *int64                                        `json:"severity"`
-	Tags                  []shared.Tag                                  `json:"tags"`
+	Severity              *int64                                        `json:"severity,omitempty"`
+	Tags                  []shared.Tag                                  `json:"tags,omitempty"`
 }
 
 type CreateAlarmModelRequest struct {

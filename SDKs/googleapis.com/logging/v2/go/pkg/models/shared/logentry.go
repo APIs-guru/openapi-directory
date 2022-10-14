@@ -15,22 +15,22 @@ const (
 )
 
 type LogEntry struct {
-	HTTPRequest      *HTTPRequest               `json:"httpRequest"`
-	InsertID         *string                    `json:"insertId"`
-	JSONPayload      map[string]interface{}     `json:"jsonPayload"`
-	Labels           map[string]string          `json:"labels"`
-	LogName          *string                    `json:"logName"`
-	Metadata         *MonitoredResourceMetadata `json:"metadata"`
-	Operation        *LogEntryOperation         `json:"operation"`
-	ProtoPayload     map[string]interface{}     `json:"protoPayload"`
-	ReceiveTimestamp *string                    `json:"receiveTimestamp"`
-	Resource         *MonitoredResource         `json:"resource"`
-	Severity         *LogEntrySeverityEnum      `json:"severity"`
-	SourceLocation   *LogEntrySourceLocation    `json:"sourceLocation"`
-	SpanID           *string                    `json:"spanId"`
-	Split            *LogSplit                  `json:"split"`
-	TextPayload      *string                    `json:"textPayload"`
-	Timestamp        *string                    `json:"timestamp"`
-	Trace            *string                    `json:"trace"`
-	TraceSampled     *bool                      `json:"traceSampled"`
+	HTTPRequest      *HTTPRequest               `json:"httpRequest,omitempty"`
+	InsertID         *string                    `json:"insertId,omitempty"`
+	JSONPayload      map[string]interface{}     `json:"jsonPayload,omitempty"`
+	Labels           map[string]string          `json:"labels,omitempty"`
+	LogName          *string                    `json:"logName,omitempty"`
+	Metadata         *MonitoredResourceMetadata `json:"metadata,omitempty"`
+	Operation        *LogEntryOperation         `json:"operation,omitempty"`
+	ProtoPayload     map[string]interface{}     `json:"protoPayload,omitempty"`
+	ReceiveTimestamp *string                    `json:"receiveTimestamp,omitempty"`
+	Resource         *MonitoredResource         `json:"resource,omitempty"`
+	Severity         *LogEntrySeverityEnum      `json:"severity,omitempty"`
+	SourceLocation   *LogEntrySourceLocation    `json:"sourceLocation,omitempty"`
+	SpanID           *string                    `json:"spanId,omitempty"`
+	Split            *LogSplit                  `json:"split,omitempty"`
+	TextPayload      *string                    `json:"textPayload,omitempty"`
+	Timestamp        *string                    `json:"timestamp,omitempty"`
+	Trace            *string                    `json:"trace,omitempty"`
+	TraceSampled     *bool                      `json:"traceSampled,omitempty"`
 }

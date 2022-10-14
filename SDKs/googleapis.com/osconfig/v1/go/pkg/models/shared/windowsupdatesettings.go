@@ -16,7 +16,7 @@ const (
 )
 
 type WindowsUpdateSettings struct {
-	Classifications  []WindowsUpdateSettingsClassificationsEnum `json:"classifications"`
-	Excludes         []string                                   `json:"excludes"`
-	ExclusivePatches []string                                   `json:"exclusivePatches"`
+	Classifications  []WindowsUpdateSettingsClassificationsEnum `json:"classifications,omitempty"`
+	Excludes         []string                                   `json:"excludes,omitempty"`
+	ExclusivePatches []string                                   `json:"exclusivePatches,omitempty"`
 }

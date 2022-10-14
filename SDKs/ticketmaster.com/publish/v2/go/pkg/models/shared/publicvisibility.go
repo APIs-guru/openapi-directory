@@ -5,7 +5,7 @@ import (
 )
 
 type PublicVisibility struct {
-	EndDateTime   *time.Time `json:"endDateTime"`
-	StartDateTime *time.Time `json:"startDateTime"`
-	Visible       *bool      `json:"visible"`
+	EndDateTime   *time.Time `json:"endDateTime,omitempty"`
+	StartDateTime *time.Time `json:"startDateTime,omitempty"`
+	Visible       *bool      `json:"visible,omitempty"`
 }

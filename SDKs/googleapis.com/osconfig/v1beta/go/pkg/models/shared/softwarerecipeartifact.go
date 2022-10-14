@@ -1,8 +1,8 @@
 package shared
 
 type SoftwareRecipeArtifact struct {
-	AllowInsecure *bool                         `json:"allowInsecure"`
-	Gcs           *SoftwareRecipeArtifactGcs    `json:"gcs"`
-	ID            *string                       `json:"id"`
-	Remote        *SoftwareRecipeArtifactRemote `json:"remote"`
+	AllowInsecure *bool                         `json:"allowInsecure,omitempty"`
+	Gcs           *SoftwareRecipeArtifactGcs    `json:"gcs,omitempty"`
+	ID            *string                       `json:"id,omitempty"`
+	Remote        *SoftwareRecipeArtifactRemote `json:"remote,omitempty"`
 }

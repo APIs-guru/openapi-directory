@@ -1,8 +1,8 @@
 package shared
 
 type WidgetMarkup struct {
-	Buttons       []Button       `json:"buttons"`
-	Image         *Image         `json:"image"`
-	KeyValue      *KeyValue      `json:"keyValue"`
-	TextParagraph *TextParagraph `json:"textParagraph"`
+	Buttons       []Button       `json:"buttons,omitempty"`
+	Image         *Image         `json:"image,omitempty"`
+	KeyValue      *KeyValue      `json:"keyValue,omitempty"`
+	TextParagraph *TextParagraph `json:"textParagraph,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetMilestoneOutput struct {
-	Milestone  *Milestone `json:"Milestone"`
-	WorkloadID *string    `json:"WorkloadId"`
+	Milestone  *Milestone `json:"Milestone,omitempty"`
+	WorkloadID *string    `json:"WorkloadId,omitempty"`
 }

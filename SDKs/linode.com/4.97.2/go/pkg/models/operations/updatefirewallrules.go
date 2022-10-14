@@ -33,7 +33,7 @@ type UpdateFirewallRulesRequest struct {
 }
 
 type UpdateFirewallRulesDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateFirewallRulesResponse struct {

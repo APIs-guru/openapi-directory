@@ -1,5 +1,5 @@
 package shared
 
 type EnterpriseCrmFrontendsEventbusProtoWorkflowParameters struct {
-	Parameters []EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry `json:"parameters"`
+	Parameters []EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry `json:"parameters,omitempty"`
 }

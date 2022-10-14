@@ -43,8 +43,8 @@ const (
 )
 
 type CheckError struct {
-	Code    *CheckErrorCodeEnum `json:"code"`
-	Detail  *string             `json:"detail"`
-	Status  *Status             `json:"status"`
-	Subject *string             `json:"subject"`
+	Code    *CheckErrorCodeEnum `json:"code,omitempty"`
+	Detail  *string             `json:"detail,omitempty"`
+	Status  *Status             `json:"status,omitempty"`
+	Subject *string             `json:"subject,omitempty"`
 }

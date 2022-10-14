@@ -11,9 +11,9 @@ const (
 )
 
 type PerXdsConfig struct {
-	ClusterConfig     *ClustersConfigDump     `json:"clusterConfig"`
-	ListenerConfig    *ListenersConfigDump    `json:"listenerConfig"`
-	RouteConfig       *RoutesConfigDump       `json:"routeConfig"`
-	ScopedRouteConfig *ScopedRoutesConfigDump `json:"scopedRouteConfig"`
-	Status            *PerXdsConfigStatusEnum `json:"status"`
+	ClusterConfig     *ClustersConfigDump     `json:"clusterConfig,omitempty"`
+	ListenerConfig    *ListenersConfigDump    `json:"listenerConfig,omitempty"`
+	RouteConfig       *RoutesConfigDump       `json:"routeConfig,omitempty"`
+	ScopedRouteConfig *ScopedRoutesConfigDump `json:"scopedRouteConfig,omitempty"`
+	Status            *PerXdsConfigStatusEnum `json:"status,omitempty"`
 }

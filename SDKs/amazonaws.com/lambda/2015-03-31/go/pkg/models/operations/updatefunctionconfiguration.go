@@ -19,17 +19,17 @@ type UpdateFunctionConfigurationHeaders struct {
 }
 
 type UpdateFunctionConfigurationRequestBodyDeadLetterConfig struct {
-	TargetArn *string `json:"TargetArn"`
+	TargetArn *string `json:"TargetArn,omitempty"`
 }
 
 type UpdateFunctionConfigurationRequestBodyEnvironment struct {
-	Variables map[string]string `json:"Variables"`
+	Variables map[string]string `json:"Variables,omitempty"`
 }
 
 type UpdateFunctionConfigurationRequestBodyImageConfig struct {
-	Command          []string `json:"Command"`
-	EntryPoint       []string `json:"EntryPoint"`
-	WorkingDirectory *string  `json:"WorkingDirectory"`
+	Command          []string `json:"Command,omitempty"`
+	EntryPoint       []string `json:"EntryPoint,omitempty"`
+	WorkingDirectory *string  `json:"WorkingDirectory,omitempty"`
 }
 
 type UpdateFunctionConfigurationRequestBodyRuntimeEnum string
@@ -63,30 +63,30 @@ const (
 )
 
 type UpdateFunctionConfigurationRequestBodyTracingConfig struct {
-	Mode *shared.TracingModeEnum `json:"Mode"`
+	Mode *shared.TracingModeEnum `json:"Mode,omitempty"`
 }
 
 type UpdateFunctionConfigurationRequestBodyVpcConfig struct {
-	SecurityGroupIds []string `json:"SecurityGroupIds"`
-	SubnetIds        []string `json:"SubnetIds"`
+	SecurityGroupIds []string `json:"SecurityGroupIds,omitempty"`
+	SubnetIds        []string `json:"SubnetIds,omitempty"`
 }
 
 type UpdateFunctionConfigurationRequestBody struct {
-	DeadLetterConfig  *UpdateFunctionConfigurationRequestBodyDeadLetterConfig `json:"DeadLetterConfig"`
-	Description       *string                                                 `json:"Description"`
-	Environment       *UpdateFunctionConfigurationRequestBodyEnvironment      `json:"Environment"`
-	FileSystemConfigs []shared.FileSystemConfig                               `json:"FileSystemConfigs"`
-	Handler           *string                                                 `json:"Handler"`
-	ImageConfig       *UpdateFunctionConfigurationRequestBodyImageConfig      `json:"ImageConfig"`
-	KmsKeyArn         *string                                                 `json:"KMSKeyArn"`
-	Layers            []string                                                `json:"Layers"`
-	MemorySize        *int64                                                  `json:"MemorySize"`
-	RevisionID        *string                                                 `json:"RevisionId"`
-	Role              *string                                                 `json:"Role"`
-	Runtime           *UpdateFunctionConfigurationRequestBodyRuntimeEnum      `json:"Runtime"`
-	Timeout           *int64                                                  `json:"Timeout"`
-	TracingConfig     *UpdateFunctionConfigurationRequestBodyTracingConfig    `json:"TracingConfig"`
-	VpcConfig         *UpdateFunctionConfigurationRequestBodyVpcConfig        `json:"VpcConfig"`
+	DeadLetterConfig  *UpdateFunctionConfigurationRequestBodyDeadLetterConfig `json:"DeadLetterConfig,omitempty"`
+	Description       *string                                                 `json:"Description,omitempty"`
+	Environment       *UpdateFunctionConfigurationRequestBodyEnvironment      `json:"Environment,omitempty"`
+	FileSystemConfigs []shared.FileSystemConfig                               `json:"FileSystemConfigs,omitempty"`
+	Handler           *string                                                 `json:"Handler,omitempty"`
+	ImageConfig       *UpdateFunctionConfigurationRequestBodyImageConfig      `json:"ImageConfig,omitempty"`
+	KmsKeyArn         *string                                                 `json:"KMSKeyArn,omitempty"`
+	Layers            []string                                                `json:"Layers,omitempty"`
+	MemorySize        *int64                                                  `json:"MemorySize,omitempty"`
+	RevisionID        *string                                                 `json:"RevisionId,omitempty"`
+	Role              *string                                                 `json:"Role,omitempty"`
+	Runtime           *UpdateFunctionConfigurationRequestBodyRuntimeEnum      `json:"Runtime,omitempty"`
+	Timeout           *int64                                                  `json:"Timeout,omitempty"`
+	TracingConfig     *UpdateFunctionConfigurationRequestBodyTracingConfig    `json:"TracingConfig,omitempty"`
+	VpcConfig         *UpdateFunctionConfigurationRequestBodyVpcConfig        `json:"VpcConfig,omitempty"`
 }
 
 type UpdateFunctionConfigurationRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type EnterpriseCrmCardsRow struct {
-	Cells []EnterpriseCrmCardsCellValue `json:"cells"`
+	Cells []EnterpriseCrmCardsCellValue `json:"cells,omitempty"`
 }

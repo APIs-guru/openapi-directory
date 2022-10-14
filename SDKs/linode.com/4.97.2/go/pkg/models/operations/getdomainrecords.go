@@ -33,10 +33,10 @@ type GetDomainRecordsRequest struct {
 }
 
 type GetDomainRecords200ApplicationJSON struct {
-	Data    []shared.DomainRecord `json:"data"`
-	Page    *int64                `json:"page"`
-	Pages   *int64                `json:"pages"`
-	Results *int64                `json:"results"`
+	Data    []shared.DomainRecord `json:"data,omitempty"`
+	Page    *int64                `json:"page,omitempty"`
+	Pages   *int64                `json:"pages,omitempty"`
+	Results *int64                `json:"results,omitempty"`
 }
 
 type GetDomainRecordsResponse struct {

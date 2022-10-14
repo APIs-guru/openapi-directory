@@ -1,5 +1,5 @@
 package shared
 
 type AnalysisCompleted struct {
-	AnalysisType []string `json:"analysisType"`
+	AnalysisType []string `json:"analysisType,omitempty"`
 }

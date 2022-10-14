@@ -20,9 +20,9 @@ type DescribeJobQueuesHeaders struct {
 }
 
 type DescribeJobQueuesRequestBody struct {
-	JobQueues  []string `json:"jobQueues"`
-	MaxResults *int64   `json:"maxResults"`
-	NextToken  *string  `json:"nextToken"`
+	JobQueues  []string `json:"jobQueues,omitempty"`
+	MaxResults *int64   `json:"maxResults,omitempty"`
+	NextToken  *string  `json:"nextToken,omitempty"`
 }
 
 type DescribeJobQueuesRequest struct {

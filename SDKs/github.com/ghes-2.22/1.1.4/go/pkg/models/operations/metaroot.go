@@ -29,7 +29,7 @@ type MetaRoot200ApplicationJSON struct {
 	RepositoryURL                    string  `json:"repository_url"`
 	StarredGistsURL                  string  `json:"starred_gists_url"`
 	StarredURL                       string  `json:"starred_url"`
-	TopicSearchURL                   *string `json:"topic_search_url"`
+	TopicSearchURL                   *string `json:"topic_search_url,omitempty"`
 	UserOrganizationsURL             string  `json:"user_organizations_url"`
 	UserRepositoriesURL              string  `json:"user_repositories_url"`
 	UserSearchURL                    string  `json:"user_search_url"`

@@ -20,7 +20,7 @@ type CreateConnectorDefinitionVersionHeaders struct {
 }
 
 type CreateConnectorDefinitionVersionRequestBody struct {
-	Connectors []shared.Connector `json:"Connectors"`
+	Connectors []shared.Connector `json:"Connectors,omitempty"`
 }
 
 type CreateConnectorDefinitionVersionRequest struct {

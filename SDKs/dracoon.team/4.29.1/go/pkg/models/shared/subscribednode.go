@@ -9,7 +9,7 @@ const (
 )
 
 type SubscribedNode struct {
-	AuthParentID *int64                  `json:"authParentId"`
+	AuthParentID *int64                  `json:"authParentId,omitempty"`
 	ID           int64                   `json:"id"`
-	Type         *SubscribedNodeTypeEnum `json:"type"`
+	Type         *SubscribedNodeTypeEnum `json:"type,omitempty"`
 }

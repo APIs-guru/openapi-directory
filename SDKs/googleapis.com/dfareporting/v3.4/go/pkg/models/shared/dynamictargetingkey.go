@@ -10,8 +10,8 @@ const (
 )
 
 type DynamicTargetingKey struct {
-	Kind       *string                            `json:"kind"`
-	Name       *string                            `json:"name"`
-	ObjectID   *string                            `json:"objectId"`
-	ObjectType *DynamicTargetingKeyObjectTypeEnum `json:"objectType"`
+	Kind       *string                            `json:"kind,omitempty"`
+	Name       *string                            `json:"name,omitempty"`
+	ObjectID   *string                            `json:"objectId,omitempty"`
+	ObjectType *DynamicTargetingKeyObjectTypeEnum `json:"objectType,omitempty"`
 }

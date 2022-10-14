@@ -1,7 +1,7 @@
 package shared
 
 type EventRiskType struct {
-	CompromisedCredentialsDetected *bool                 `json:"CompromisedCredentialsDetected"`
-	RiskDecision                   *RiskDecisionTypeEnum `json:"RiskDecision"`
-	RiskLevel                      *RiskLevelTypeEnum    `json:"RiskLevel"`
+	CompromisedCredentialsDetected *bool                 `json:"CompromisedCredentialsDetected,omitempty"`
+	RiskDecision                   *RiskDecisionTypeEnum `json:"RiskDecision,omitempty"`
+	RiskLevel                      *RiskLevelTypeEnum    `json:"RiskLevel,omitempty"`
 }

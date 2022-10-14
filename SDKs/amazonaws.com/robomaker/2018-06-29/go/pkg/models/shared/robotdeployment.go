@@ -5,11 +5,11 @@ import (
 )
 
 type RobotDeployment struct {
-	Arn                  *string                     `json:"arn"`
-	DeploymentFinishTime *time.Time                  `json:"deploymentFinishTime"`
-	DeploymentStartTime  *time.Time                  `json:"deploymentStartTime"`
-	FailureCode          *DeploymentJobErrorCodeEnum `json:"failureCode"`
-	FailureReason        *string                     `json:"failureReason"`
-	ProgressDetail       *ProgressDetail             `json:"progressDetail"`
-	Status               *RobotStatusEnum            `json:"status"`
+	Arn                  *string                     `json:"arn,omitempty"`
+	DeploymentFinishTime *time.Time                  `json:"deploymentFinishTime,omitempty"`
+	DeploymentStartTime  *time.Time                  `json:"deploymentStartTime,omitempty"`
+	FailureCode          *DeploymentJobErrorCodeEnum `json:"failureCode,omitempty"`
+	FailureReason        *string                     `json:"failureReason,omitempty"`
+	ProgressDetail       *ProgressDetail             `json:"progressDetail,omitempty"`
+	Status               *RobotStatusEnum            `json:"status,omitempty"`
 }

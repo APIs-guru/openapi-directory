@@ -17,20 +17,20 @@ const (
 )
 
 type GoogleCloudDatapipelinesV1FlexTemplateRuntimeEnvironment struct {
-	AdditionalExperiments []string                                                                     `json:"additionalExperiments"`
-	AdditionalUserLabels  map[string]string                                                            `json:"additionalUserLabels"`
-	EnableStreamingEngine *bool                                                                        `json:"enableStreamingEngine"`
-	FlexrsGoal            *GoogleCloudDatapipelinesV1FlexTemplateRuntimeEnvironmentFlexrsGoalEnum      `json:"flexrsGoal"`
-	IPConfiguration       *GoogleCloudDatapipelinesV1FlexTemplateRuntimeEnvironmentIPConfigurationEnum `json:"ipConfiguration"`
-	KmsKeyName            *string                                                                      `json:"kmsKeyName"`
-	MachineType           *string                                                                      `json:"machineType"`
-	MaxWorkers            *int32                                                                       `json:"maxWorkers"`
-	Network               *string                                                                      `json:"network"`
-	NumWorkers            *int32                                                                       `json:"numWorkers"`
-	ServiceAccountEmail   *string                                                                      `json:"serviceAccountEmail"`
-	Subnetwork            *string                                                                      `json:"subnetwork"`
-	TempLocation          *string                                                                      `json:"tempLocation"`
-	WorkerRegion          *string                                                                      `json:"workerRegion"`
-	WorkerZone            *string                                                                      `json:"workerZone"`
-	Zone                  *string                                                                      `json:"zone"`
+	AdditionalExperiments []string                                                                     `json:"additionalExperiments,omitempty"`
+	AdditionalUserLabels  map[string]string                                                            `json:"additionalUserLabels,omitempty"`
+	EnableStreamingEngine *bool                                                                        `json:"enableStreamingEngine,omitempty"`
+	FlexrsGoal            *GoogleCloudDatapipelinesV1FlexTemplateRuntimeEnvironmentFlexrsGoalEnum      `json:"flexrsGoal,omitempty"`
+	IPConfiguration       *GoogleCloudDatapipelinesV1FlexTemplateRuntimeEnvironmentIPConfigurationEnum `json:"ipConfiguration,omitempty"`
+	KmsKeyName            *string                                                                      `json:"kmsKeyName,omitempty"`
+	MachineType           *string                                                                      `json:"machineType,omitempty"`
+	MaxWorkers            *int32                                                                       `json:"maxWorkers,omitempty"`
+	Network               *string                                                                      `json:"network,omitempty"`
+	NumWorkers            *int32                                                                       `json:"numWorkers,omitempty"`
+	ServiceAccountEmail   *string                                                                      `json:"serviceAccountEmail,omitempty"`
+	Subnetwork            *string                                                                      `json:"subnetwork,omitempty"`
+	TempLocation          *string                                                                      `json:"tempLocation,omitempty"`
+	WorkerRegion          *string                                                                      `json:"workerRegion,omitempty"`
+	WorkerZone            *string                                                                      `json:"workerZone,omitempty"`
+	Zone                  *string                                                                      `json:"zone,omitempty"`
 }

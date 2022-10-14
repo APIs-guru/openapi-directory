@@ -30,7 +30,7 @@ type ChromepolicyCustomersPoliciesGroupsBatchDeleteSecurity struct {
 type ChromepolicyCustomersPoliciesGroupsBatchDeleteRequest struct {
 	PathParams  ChromepolicyCustomersPoliciesGroupsBatchDeletePathParams
 	QueryParams ChromepolicyCustomersPoliciesGroupsBatchDeleteQueryParams
-	Request     *shared.GoogleChromePolicyV1BatchDeleteGroupPoliciesRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleChromePolicyVersionsV1BatchDeleteGroupPoliciesRequest `request:"mediaType=application/json"`
 	Security    ChromepolicyCustomersPoliciesGroupsBatchDeleteSecurity
 }
 

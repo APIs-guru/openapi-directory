@@ -1,5 +1,5 @@
 package shared
 
 type BroadcastTxResponse struct {
-	Txid *string `json:"txid"`
+	Txid *string `json:"txid,omitempty"`
 }

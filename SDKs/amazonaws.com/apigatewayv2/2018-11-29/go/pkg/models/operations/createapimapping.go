@@ -20,7 +20,7 @@ type CreateAPIMappingHeaders struct {
 
 type CreateAPIMappingRequestBody struct {
 	APIID         string  `json:"apiId"`
-	APIMappingKey *string `json:"apiMappingKey"`
+	APIMappingKey *string `json:"apiMappingKey,omitempty"`
 	Stage         string  `json:"stage"`
 }
 

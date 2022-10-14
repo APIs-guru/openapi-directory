@@ -1,5 +1,5 @@
 package shared
 
 type NotesProperties struct {
-	SpeakerNotesObjectID *string `json:"speakerNotesObjectId"`
+	SpeakerNotesObjectID *string `json:"speakerNotesObjectId,omitempty"`
 }

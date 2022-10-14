@@ -9,17 +9,17 @@ type SingleAPIRequest struct {
 }
 
 type SingleAPI200ApplicationJSONAPI struct {
-	CreatedAt   *string `json:"createdAt"`
-	CreatedBy   *string `json:"createdBy"`
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
-	Summary     *string `json:"summary"`
-	UpdatedAt   *string `json:"updatedAt"`
+	CreatedAt   *string `json:"createdAt,omitempty"`
+	CreatedBy   *string `json:"createdBy,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Summary     *string `json:"summary,omitempty"`
+	UpdatedAt   *string `json:"updatedAt,omitempty"`
 }
 
 type SingleAPI200ApplicationJSON struct {
-	API *SingleAPI200ApplicationJSONAPI `json:"api"`
+	API *SingleAPI200ApplicationJSONAPI `json:"api,omitempty"`
 }
 
 type SingleAPIResponse struct {

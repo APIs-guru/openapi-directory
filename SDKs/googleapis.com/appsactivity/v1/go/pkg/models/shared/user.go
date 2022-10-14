@@ -1,9 +1,9 @@
 package shared
 
 type User struct {
-	IsDeleted    *bool   `json:"isDeleted"`
-	IsMe         *bool   `json:"isMe"`
-	Name         *string `json:"name"`
-	PermissionID *string `json:"permissionId"`
-	Photo        *Photo  `json:"photo"`
+	IsDeleted    *bool   `json:"isDeleted,omitempty"`
+	IsMe         *bool   `json:"isMe,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	PermissionID *string `json:"permissionId,omitempty"`
+	Photo        *Photo  `json:"photo,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetRegionsRequest struct {
-	IncludeAvailabilityZones                   *bool `json:"includeAvailabilityZones"`
-	IncludeRelationalDatabaseAvailabilityZones *bool `json:"includeRelationalDatabaseAvailabilityZones"`
+	IncludeAvailabilityZones                   *bool `json:"includeAvailabilityZones,omitempty"`
+	IncludeRelationalDatabaseAvailabilityZones *bool `json:"includeRelationalDatabaseAvailabilityZones,omitempty"`
 }

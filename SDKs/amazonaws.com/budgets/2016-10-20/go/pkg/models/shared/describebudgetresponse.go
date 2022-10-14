@@ -1,5 +1,5 @@
 package shared
 
 type DescribeBudgetResponse struct {
-	Budget *Budget `json:"Budget"`
+	Budget *Budget `json:"Budget,omitempty"`
 }

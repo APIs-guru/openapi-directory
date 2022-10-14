@@ -1,5 +1,5 @@
 package shared
 
 type DescribeEventCategoriesResponse struct {
-	EventCategoryGroupList []EventCategoryGroup `json:"EventCategoryGroupList"`
+	EventCategoryGroupList []EventCategoryGroup `json:"EventCategoryGroupList,omitempty"`
 }

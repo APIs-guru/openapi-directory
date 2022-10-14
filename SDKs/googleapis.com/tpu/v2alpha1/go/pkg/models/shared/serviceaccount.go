@@ -1,6 +1,6 @@
 package shared
 
 type ServiceAccount struct {
-	Email *string  `json:"email"`
-	Scope []string `json:"scope"`
+	Email *string  `json:"email,omitempty"`
+	Scope []string `json:"scope,omitempty"`
 }

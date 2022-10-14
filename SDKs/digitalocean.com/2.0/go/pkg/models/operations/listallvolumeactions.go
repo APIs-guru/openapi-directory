@@ -19,17 +19,17 @@ type ListAllVolumeActionsRequest struct {
 }
 
 type ListAllVolumeActions200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllVolumeActions200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllVolumeActions200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllVolumeActions200ApplicationJSONMeta struct {
@@ -37,15 +37,15 @@ type ListAllVolumeActions200ApplicationJSONMeta struct {
 }
 
 type ListAllVolumeActions200ApplicationJSON struct {
-	Actions []shared.Onev21volumes1actionsPostResponses202ContentApplication1jsonSchemaPropertiesAction `json:"actions"`
-	Links   *ListAllVolumeActions200ApplicationJSONLinks                                                `json:"links"`
+	Actions []shared.Onev21volumes1actionsPostResponses202ContentApplication1jsonSchemaPropertiesAction `json:"actions,omitempty"`
+	Links   *ListAllVolumeActions200ApplicationJSONLinks                                                `json:"links,omitempty"`
 	Meta    ListAllVolumeActions200ApplicationJSONMeta                                                  `json:"meta"`
 }
 
 type ListAllVolumeActions401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllVolumeActionsResponse struct {

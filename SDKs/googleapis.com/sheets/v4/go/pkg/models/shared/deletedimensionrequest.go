@@ -1,5 +1,5 @@
 package shared
 
 type DeleteDimensionRequest struct {
-	Range *DimensionRange `json:"range"`
+	Range *DimensionRange `json:"range,omitempty"`
 }

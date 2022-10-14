@@ -5,13 +5,13 @@ import (
 )
 
 type Connection struct {
-	ConnectionProperties           map[string]string               `json:"ConnectionProperties"`
-	ConnectionType                 *ConnectionTypeEnum             `json:"ConnectionType"`
-	CreationTime                   *time.Time                      `json:"CreationTime"`
-	Description                    *string                         `json:"Description"`
-	LastUpdatedBy                  *string                         `json:"LastUpdatedBy"`
-	LastUpdatedTime                *time.Time                      `json:"LastUpdatedTime"`
-	MatchCriteria                  []string                        `json:"MatchCriteria"`
-	Name                           *string                         `json:"Name"`
-	PhysicalConnectionRequirements *PhysicalConnectionRequirements `json:"PhysicalConnectionRequirements"`
+	ConnectionProperties           map[string]string               `json:"ConnectionProperties,omitempty"`
+	ConnectionType                 *ConnectionTypeEnum             `json:"ConnectionType,omitempty"`
+	CreationTime                   *time.Time                      `json:"CreationTime,omitempty"`
+	Description                    *string                         `json:"Description,omitempty"`
+	LastUpdatedBy                  *string                         `json:"LastUpdatedBy,omitempty"`
+	LastUpdatedTime                *time.Time                      `json:"LastUpdatedTime,omitempty"`
+	MatchCriteria                  []string                        `json:"MatchCriteria,omitempty"`
+	Name                           *string                         `json:"Name,omitempty"`
+	PhysicalConnectionRequirements *PhysicalConnectionRequirements `json:"PhysicalConnectionRequirements,omitempty"`
 }

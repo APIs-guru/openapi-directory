@@ -9,31 +9,31 @@ type GetReadOnlyIDUsingGetRequest struct {
 }
 
 type GetReadOnlyIDUsingGet200ApplicationJSONData struct {
-	ReadOnlyID *string `json:"readOnlyID"`
+	ReadOnlyID *string `json:"readOnlyID,omitempty"`
 }
 
 type GetReadOnlyIDUsingGet200ApplicationJSON struct {
-	Code    *int64                                       `json:"code"`
-	Data    *GetReadOnlyIDUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                      `json:"message"`
+	Code    *int64                                       `json:"code,omitempty"`
+	Data    *GetReadOnlyIDUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                      `json:"message,omitempty"`
 }
 
 type GetReadOnlyIDUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetReadOnlyIDUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetReadOnlyIDUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetReadOnlyIDUsingGetResponse struct {

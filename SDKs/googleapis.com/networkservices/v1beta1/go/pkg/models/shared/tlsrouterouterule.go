@@ -1,6 +1,6 @@
 package shared
 
 type TLSRouteRouteRule struct {
-	Action  *TLSRouteRouteAction `json:"action"`
-	Matches []TLSRouteRouteMatch `json:"matches"`
+	Action  *TLSRouteRouteAction `json:"action,omitempty"`
+	Matches []TLSRouteRouteMatch `json:"matches,omitempty"`
 }

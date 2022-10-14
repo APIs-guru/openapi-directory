@@ -1,7 +1,7 @@
 package shared
 
 type ListIdentitiesResponse struct {
-	Identities     []IdentityDescription `json:"Identities"`
-	IdentityPoolID *string               `json:"IdentityPoolId"`
-	NextToken      *string               `json:"NextToken"`
+	Identities     []IdentityDescription `json:"Identities,omitempty"`
+	IdentityPoolID *string               `json:"IdentityPoolId,omitempty"`
+	NextToken      *string               `json:"NextToken,omitempty"`
 }

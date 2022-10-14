@@ -5,12 +5,12 @@ import (
 )
 
 type ListDataQualityJobDefinitionsRequest struct {
-	CreationTimeAfter  *time.Time                          `json:"CreationTimeAfter"`
-	CreationTimeBefore *time.Time                          `json:"CreationTimeBefore"`
-	EndpointName       *string                             `json:"EndpointName"`
-	MaxResults         *int64                              `json:"MaxResults"`
-	NameContains       *string                             `json:"NameContains"`
-	NextToken          *string                             `json:"NextToken"`
-	SortBy             *MonitoringJobDefinitionSortKeyEnum `json:"SortBy"`
-	SortOrder          *SortOrderEnum                      `json:"SortOrder"`
+	CreationTimeAfter  *time.Time                          `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore *time.Time                          `json:"CreationTimeBefore,omitempty"`
+	EndpointName       *string                             `json:"EndpointName,omitempty"`
+	MaxResults         *int64                              `json:"MaxResults,omitempty"`
+	NameContains       *string                             `json:"NameContains,omitempty"`
+	NextToken          *string                             `json:"NextToken,omitempty"`
+	SortBy             *MonitoringJobDefinitionSortKeyEnum `json:"SortBy,omitempty"`
+	SortOrder          *SortOrderEnum                      `json:"SortOrder,omitempty"`
 }

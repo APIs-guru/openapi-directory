@@ -19,12 +19,12 @@ type UpdateMissionProfileHeaders struct {
 }
 
 type UpdateMissionProfileRequestBody struct {
-	ContactPostPassDurationSeconds      *int64     `json:"contactPostPassDurationSeconds"`
-	ContactPrePassDurationSeconds       *int64     `json:"contactPrePassDurationSeconds"`
-	DataflowEdges                       [][]string `json:"dataflowEdges"`
-	MinimumViableContactDurationSeconds *int64     `json:"minimumViableContactDurationSeconds"`
-	Name                                *string    `json:"name"`
-	TrackingConfigArn                   *string    `json:"trackingConfigArn"`
+	ContactPostPassDurationSeconds      *int64     `json:"contactPostPassDurationSeconds,omitempty"`
+	ContactPrePassDurationSeconds       *int64     `json:"contactPrePassDurationSeconds,omitempty"`
+	DataflowEdges                       [][]string `json:"dataflowEdges,omitempty"`
+	MinimumViableContactDurationSeconds *int64     `json:"minimumViableContactDurationSeconds,omitempty"`
+	Name                                *string    `json:"name,omitempty"`
+	TrackingConfigArn                   *string    `json:"trackingConfigArn,omitempty"`
 }
 
 type UpdateMissionProfileRequest struct {

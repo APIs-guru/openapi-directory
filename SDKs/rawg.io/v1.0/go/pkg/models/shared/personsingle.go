@@ -5,15 +5,15 @@ import (
 )
 
 type PersonSingle struct {
-	Description     *string    `json:"description"`
-	GamesCount      *int64     `json:"games_count"`
-	ID              *int64     `json:"id"`
-	Image           *string    `json:"image"`
-	ImageBackground *string    `json:"image_background"`
+	Description     *string    `json:"description,omitempty"`
+	GamesCount      *int64     `json:"games_count,omitempty"`
+	ID              *int64     `json:"id,omitempty"`
+	Image           *string    `json:"image,omitempty"`
+	ImageBackground *string    `json:"image_background,omitempty"`
 	Name            string     `json:"name"`
-	Rating          *string    `json:"rating"`
-	RatingTop       *int64     `json:"rating_top"`
-	ReviewsCount    *int64     `json:"reviews_count"`
-	Slug            *string    `json:"slug"`
-	Updated         *time.Time `json:"updated"`
+	Rating          *string    `json:"rating,omitempty"`
+	RatingTop       *int64     `json:"rating_top,omitempty"`
+	ReviewsCount    *int64     `json:"reviews_count,omitempty"`
+	Slug            *string    `json:"slug,omitempty"`
+	Updated         *time.Time `json:"updated,omitempty"`
 }

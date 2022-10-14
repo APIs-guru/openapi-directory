@@ -1,6 +1,6 @@
 package shared
 
 type StopDeploymentOutput struct {
-	Status        *StopStatusEnum `json:"status"`
-	StatusMessage *string         `json:"statusMessage"`
+	Status        *StopStatusEnum `json:"status,omitempty"`
+	StatusMessage *string         `json:"statusMessage,omitempty"`
 }

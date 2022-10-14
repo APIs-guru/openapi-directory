@@ -1,6 +1,6 @@
 package shared
 
 type ListFirebaseProjectsResponse struct {
-	NextPageToken *string           `json:"nextPageToken"`
-	Results       []FirebaseProject `json:"results"`
+	NextPageToken *string           `json:"nextPageToken,omitempty"`
+	Results       []FirebaseProject `json:"results,omitempty"`
 }

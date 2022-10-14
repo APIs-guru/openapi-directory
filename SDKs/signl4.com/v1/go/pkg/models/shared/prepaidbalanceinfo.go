@@ -5,7 +5,7 @@ import (
 )
 
 type PrepaidBalanceInfo struct {
-	Balance            *int32     `json:"balance"`
-	LatestTopUp        *time.Time `json:"latestTopUp"`
-	PendingTransaction *bool      `json:"pendingTransaction"`
+	Balance            *int32     `json:"balance,omitempty"`
+	LatestTopUp        *time.Time `json:"latestTopUp,omitempty"`
+	PendingTransaction *bool      `json:"pendingTransaction,omitempty"`
 }

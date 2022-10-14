@@ -9,15 +9,15 @@ type GetLatestBaseCurrencyRequest struct {
 }
 
 type GetLatestBaseCurrency200ApplicationJSON struct {
-	Base            *string            `json:"base"`
-	Date            *string            `json:"date"`
-	Rates           map[string]float64 `json:"rates"`
-	TimeLastUpdated *int64             `json:"time_last_updated"`
+	Base            *string            `json:"base,omitempty"`
+	Date            *string            `json:"date,omitempty"`
+	Rates           map[string]float64 `json:"rates,omitempty"`
+	TimeLastUpdated *int64             `json:"time_last_updated,omitempty"`
 }
 
 type GetLatestBaseCurrency404ApplicationJSON struct {
-	ErrorType *string `json:"error_type"`
-	Result    *string `json:"result"`
+	ErrorType *string `json:"error_type,omitempty"`
+	Result    *string `json:"result,omitempty"`
 }
 
 type GetLatestBaseCurrencyResponse struct {

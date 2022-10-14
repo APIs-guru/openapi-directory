@@ -14,10 +14,10 @@ const (
 )
 
 type MonitoredResourceDescriptor struct {
-	Description *string                                     `json:"description"`
-	DisplayName *string                                     `json:"displayName"`
-	Labels      []LabelDescriptor                           `json:"labels"`
-	LaunchStage *MonitoredResourceDescriptorLaunchStageEnum `json:"launchStage"`
-	Name        *string                                     `json:"name"`
-	Type        *string                                     `json:"type"`
+	Description *string                                     `json:"description,omitempty"`
+	DisplayName *string                                     `json:"displayName,omitempty"`
+	Labels      []LabelDescriptor                           `json:"labels,omitempty"`
+	LaunchStage *MonitoredResourceDescriptorLaunchStageEnum `json:"launchStage,omitempty"`
+	Name        *string                                     `json:"name,omitempty"`
+	Type        *string                                     `json:"type,omitempty"`
 }

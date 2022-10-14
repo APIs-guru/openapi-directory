@@ -1,5 +1,5 @@
 package shared
 
 type QueryRequestInput struct {
-	Payload *QueryRequestPayload `json:"payload"`
+	Payload *QueryRequestPayload `json:"payload,omitempty"`
 }

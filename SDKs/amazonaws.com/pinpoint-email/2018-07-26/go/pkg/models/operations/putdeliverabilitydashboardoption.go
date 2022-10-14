@@ -16,7 +16,7 @@ type PutDeliverabilityDashboardOptionHeaders struct {
 
 type PutDeliverabilityDashboardOptionRequestBody struct {
 	DashboardEnabled  bool                                        `json:"DashboardEnabled"`
-	SubscribedDomains []shared.DomainDeliverabilityTrackingOption `json:"SubscribedDomains"`
+	SubscribedDomains []shared.DomainDeliverabilityTrackingOption `json:"SubscribedDomains,omitempty"`
 }
 
 type PutDeliverabilityDashboardOptionRequest struct {

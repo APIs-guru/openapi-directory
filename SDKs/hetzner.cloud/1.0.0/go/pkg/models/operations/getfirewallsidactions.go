@@ -89,7 +89,7 @@ type GetFirewallsIDActions200ApplicationJSONMeta struct {
 
 type GetFirewallsIDActions200ApplicationJSONActionsResponse struct {
 	Actions []GetFirewallsIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetFirewallsIDActions200ApplicationJSONMeta           `json:"meta"`
+	Meta    *GetFirewallsIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type GetFirewallsIDActionsResponse struct {

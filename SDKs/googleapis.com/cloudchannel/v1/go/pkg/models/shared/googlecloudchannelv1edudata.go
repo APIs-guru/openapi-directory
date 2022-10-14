@@ -22,7 +22,7 @@ const (
 )
 
 type GoogleCloudChannelV1EduData struct {
-	InstituteSize *GoogleCloudChannelV1EduDataInstituteSizeEnum `json:"instituteSize"`
-	InstituteType *GoogleCloudChannelV1EduDataInstituteTypeEnum `json:"instituteType"`
-	Website       *string                                       `json:"website"`
+	InstituteSize *GoogleCloudChannelV1EduDataInstituteSizeEnum `json:"instituteSize,omitempty"`
+	InstituteType *GoogleCloudChannelV1EduDataInstituteTypeEnum `json:"instituteType,omitempty"`
+	Website       *string                                       `json:"website,omitempty"`
 }

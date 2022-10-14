@@ -1,9 +1,9 @@
 package shared
 
 type LeaderboardConfigurationDetail struct {
-	IconURL     *string                         `json:"iconUrl"`
-	Kind        *string                         `json:"kind"`
-	Name        *LocalizedStringBundle          `json:"name"`
-	ScoreFormat *GamesNumberFormatConfiguration `json:"scoreFormat"`
-	SortRank    *int32                          `json:"sortRank"`
+	IconURL     *string                         `json:"iconUrl,omitempty"`
+	Kind        *string                         `json:"kind,omitempty"`
+	Name        *LocalizedStringBundle          `json:"name,omitempty"`
+	ScoreFormat *GamesNumberFormatConfiguration `json:"scoreFormat,omitempty"`
+	SortRank    *int32                          `json:"sortRank,omitempty"`
 }

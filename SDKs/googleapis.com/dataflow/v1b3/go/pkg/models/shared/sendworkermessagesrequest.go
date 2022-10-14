@@ -1,6 +1,6 @@
 package shared
 
 type SendWorkerMessagesRequest struct {
-	Location       *string         `json:"location"`
-	WorkerMessages []WorkerMessage `json:"workerMessages"`
+	Location       *string         `json:"location,omitempty"`
+	WorkerMessages []WorkerMessage `json:"workerMessages,omitempty"`
 }

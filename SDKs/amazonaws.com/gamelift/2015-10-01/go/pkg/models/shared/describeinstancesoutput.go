@@ -1,6 +1,6 @@
 package shared
 
 type DescribeInstancesOutput struct {
-	Instances []Instance `json:"Instances"`
-	NextToken *string    `json:"NextToken"`
+	Instances []Instance `json:"Instances,omitempty"`
+	NextToken *string    `json:"NextToken,omitempty"`
 }

@@ -13,8 +13,8 @@ const (
 )
 
 type ChartData struct {
-	AggregateType   *ChartDataAggregateTypeEnum `json:"aggregateType"`
-	ColumnReference *DataSourceColumnReference  `json:"columnReference"`
-	GroupRule       *ChartGroupRule             `json:"groupRule"`
-	SourceRange     *ChartSourceRange           `json:"sourceRange"`
+	AggregateType   *ChartDataAggregateTypeEnum `json:"aggregateType,omitempty"`
+	ColumnReference *DataSourceColumnReference  `json:"columnReference,omitempty"`
+	GroupRule       *ChartGroupRule             `json:"groupRule,omitempty"`
+	SourceRange     *ChartSourceRange           `json:"sourceRange,omitempty"`
 }

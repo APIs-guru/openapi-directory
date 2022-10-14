@@ -10,7 +10,7 @@ type CreateProjectQueryParams struct {
 }
 
 type CreateProjectRequestBody struct {
-	Data *shared.ProjectRequest `json:"data"`
+	Data *shared.ProjectRequest `json:"data,omitempty"`
 }
 
 type CreateProjectRequest struct {
@@ -19,7 +19,7 @@ type CreateProjectRequest struct {
 }
 
 type CreateProject201ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data"`
+	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type CreateProjectResponse struct {

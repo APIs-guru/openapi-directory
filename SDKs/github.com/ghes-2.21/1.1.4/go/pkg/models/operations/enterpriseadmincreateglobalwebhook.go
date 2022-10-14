@@ -9,16 +9,16 @@ type EnterpriseAdminCreateGlobalWebhookHeaders struct {
 }
 
 type EnterpriseAdminCreateGlobalWebhookRequestBodyConfig struct {
-	ContentType *string `json:"content_type"`
-	InsecureSsl *string `json:"insecure_ssl"`
-	Secret      *string `json:"secret"`
+	ContentType *string `json:"content_type,omitempty"`
+	InsecureSsl *string `json:"insecure_ssl,omitempty"`
+	Secret      *string `json:"secret,omitempty"`
 	URL         string  `json:"url"`
 }
 
 type EnterpriseAdminCreateGlobalWebhookRequestBody struct {
-	Active *bool                                               `json:"active"`
+	Active *bool                                               `json:"active,omitempty"`
 	Config EnterpriseAdminCreateGlobalWebhookRequestBodyConfig `json:"config"`
-	Events []string                                            `json:"events"`
+	Events []string                                            `json:"events,omitempty"`
 	Name   string                                              `json:"name"`
 }
 

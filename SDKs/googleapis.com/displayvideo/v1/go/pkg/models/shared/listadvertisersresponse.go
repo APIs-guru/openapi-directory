@@ -1,6 +1,6 @@
 package shared
 
 type ListAdvertisersResponse struct {
-	Advertisers   []Advertiser `json:"advertisers"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Advertisers   []Advertiser `json:"advertisers,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

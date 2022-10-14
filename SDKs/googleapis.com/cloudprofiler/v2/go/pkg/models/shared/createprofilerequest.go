@@ -14,6 +14,6 @@ const (
 )
 
 type CreateProfileRequest struct {
-	Deployment  *Deployment                           `json:"deployment"`
-	ProfileType []CreateProfileRequestProfileTypeEnum `json:"profileType"`
+	Deployment  *Deployment                           `json:"deployment,omitempty"`
+	ProfileType []CreateProfileRequestProfileTypeEnum `json:"profileType,omitempty"`
 }

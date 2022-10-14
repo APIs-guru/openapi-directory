@@ -1,13 +1,13 @@
 package shared
 
 type WebAppConfig struct {
-	APIKey            *string `json:"apiKey"`
-	AppID             *string `json:"appId"`
-	AuthDomain        *string `json:"authDomain"`
-	DatabaseURL       *string `json:"databaseURL"`
-	LocationID        *string `json:"locationId"`
-	MeasurementID     *string `json:"measurementId"`
-	MessagingSenderID *string `json:"messagingSenderId"`
-	ProjectID         *string `json:"projectId"`
-	StorageBucket     *string `json:"storageBucket"`
+	APIKey            *string `json:"apiKey,omitempty"`
+	AppID             *string `json:"appId,omitempty"`
+	AuthDomain        *string `json:"authDomain,omitempty"`
+	DatabaseURL       *string `json:"databaseURL,omitempty"`
+	LocationID        *string `json:"locationId,omitempty"`
+	MeasurementID     *string `json:"measurementId,omitempty"`
+	MessagingSenderID *string `json:"messagingSenderId,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty"`
+	StorageBucket     *string `json:"storageBucket,omitempty"`
 }

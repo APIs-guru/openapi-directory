@@ -264,10 +264,10 @@ const (
 
 type CreatePaymentChannel struct {
 	AccountName        string                              `json:"accountName"`
-	AccountNumber      *string                             `json:"accountNumber"`
+	AccountNumber      *string                             `json:"accountNumber,omitempty"`
 	CountryCode        CreatePaymentChannelCountryCodeEnum `json:"countryCode"`
 	Currency           CreatePaymentChannelCurrencyEnum    `json:"currency"`
-	Iban               *string                             `json:"iban"`
-	PaymentChannelName *string                             `json:"paymentChannelName"`
-	RoutingNumber      *string                             `json:"routingNumber"`
+	Iban               *string                             `json:"iban,omitempty"`
+	PaymentChannelName *string                             `json:"paymentChannelName,omitempty"`
+	RoutingNumber      *string                             `json:"routingNumber,omitempty"`
 }

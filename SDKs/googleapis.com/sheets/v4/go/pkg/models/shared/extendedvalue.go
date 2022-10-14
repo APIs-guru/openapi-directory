@@ -1,9 +1,9 @@
 package shared
 
 type ExtendedValue struct {
-	BoolValue    *bool       `json:"boolValue"`
-	ErrorValue   *ErrorValue `json:"errorValue"`
-	FormulaValue *string     `json:"formulaValue"`
-	NumberValue  *float64    `json:"numberValue"`
-	StringValue  *string     `json:"stringValue"`
+	BoolValue    *bool       `json:"boolValue,omitempty"`
+	ErrorValue   *ErrorValue `json:"errorValue,omitempty"`
+	FormulaValue *string     `json:"formulaValue,omitempty"`
+	NumberValue  *float64    `json:"numberValue,omitempty"`
+	StringValue  *string     `json:"stringValue,omitempty"`
 }

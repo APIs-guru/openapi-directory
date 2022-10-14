@@ -11,9 +11,9 @@ const (
 )
 
 type PlanningLevelHyperparameterResponse struct {
-	DiscardData   *bool                                             `json:"discardData"`
-	ErrorType     *PlanningLevelHyperparameterResponseErrorTypeEnum `json:"errorType"`
-	HoldOutPeriod *int32                                            `json:"holdOutPeriod"`
-	NoFcst        *int32                                            `json:"noFcst"`
-	Periodicity   *int32                                            `json:"periodicity"`
+	DiscardData   *bool                                             `json:"discardData,omitempty"`
+	ErrorType     *PlanningLevelHyperparameterResponseErrorTypeEnum `json:"errorType,omitempty"`
+	HoldOutPeriod *int32                                            `json:"holdOutPeriod,omitempty"`
+	NoFcst        *int32                                            `json:"noFcst,omitempty"`
+	Periodicity   *int32                                            `json:"periodicity,omitempty"`
 }

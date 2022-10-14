@@ -1,20 +1,20 @@
 package shared
 
 type Canary struct {
-	ArtifactS3Location           *string                `json:"ArtifactS3Location"`
-	Code                         *CanaryCodeOutput      `json:"Code"`
-	EngineArn                    *string                `json:"EngineArn"`
-	ExecutionRoleArn             *string                `json:"ExecutionRoleArn"`
-	FailureRetentionPeriodInDays *int64                 `json:"FailureRetentionPeriodInDays"`
-	ID                           *string                `json:"Id"`
-	Name                         *string                `json:"Name"`
-	RunConfig                    *CanaryRunConfigOutput `json:"RunConfig"`
-	RuntimeVersion               *string                `json:"RuntimeVersion"`
-	Schedule                     *CanaryScheduleOutput  `json:"Schedule"`
-	Status                       *CanaryStatus          `json:"Status"`
-	SuccessRetentionPeriodInDays *int64                 `json:"SuccessRetentionPeriodInDays"`
-	Tags                         map[string]string      `json:"Tags"`
-	Timeline                     *CanaryTimeline        `json:"Timeline"`
-	VisualReference              *VisualReferenceOutput `json:"VisualReference"`
-	VpcConfig                    *VpcConfigOutput       `json:"VpcConfig"`
+	ArtifactS3Location           *string                `json:"ArtifactS3Location,omitempty"`
+	Code                         *CanaryCodeOutput      `json:"Code,omitempty"`
+	EngineArn                    *string                `json:"EngineArn,omitempty"`
+	ExecutionRoleArn             *string                `json:"ExecutionRoleArn,omitempty"`
+	FailureRetentionPeriodInDays *int64                 `json:"FailureRetentionPeriodInDays,omitempty"`
+	ID                           *string                `json:"Id,omitempty"`
+	Name                         *string                `json:"Name,omitempty"`
+	RunConfig                    *CanaryRunConfigOutput `json:"RunConfig,omitempty"`
+	RuntimeVersion               *string                `json:"RuntimeVersion,omitempty"`
+	Schedule                     *CanaryScheduleOutput  `json:"Schedule,omitempty"`
+	Status                       *CanaryStatus          `json:"Status,omitempty"`
+	SuccessRetentionPeriodInDays *int64                 `json:"SuccessRetentionPeriodInDays,omitempty"`
+	Tags                         map[string]string      `json:"Tags,omitempty"`
+	Timeline                     *CanaryTimeline        `json:"Timeline,omitempty"`
+	VisualReference              *VisualReferenceOutput `json:"VisualReference,omitempty"`
+	VpcConfig                    *VpcConfigOutput       `json:"VpcConfig,omitempty"`
 }

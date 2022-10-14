@@ -1,13 +1,13 @@
 package shared
 
 type ListTasksRequest struct {
-	Cluster           *string            `json:"cluster"`
-	ContainerInstance *string            `json:"containerInstance"`
-	DesiredStatus     *DesiredStatusEnum `json:"desiredStatus"`
-	Family            *string            `json:"family"`
-	LaunchType        *LaunchTypeEnum    `json:"launchType"`
-	MaxResults        *int64             `json:"maxResults"`
-	NextToken         *string            `json:"nextToken"`
-	ServiceName       *string            `json:"serviceName"`
-	StartedBy         *string            `json:"startedBy"`
+	Cluster           *string            `json:"cluster,omitempty"`
+	ContainerInstance *string            `json:"containerInstance,omitempty"`
+	DesiredStatus     *DesiredStatusEnum `json:"desiredStatus,omitempty"`
+	Family            *string            `json:"family,omitempty"`
+	LaunchType        *LaunchTypeEnum    `json:"launchType,omitempty"`
+	MaxResults        *int64             `json:"maxResults,omitempty"`
+	NextToken         *string            `json:"nextToken,omitempty"`
+	ServiceName       *string            `json:"serviceName,omitempty"`
+	StartedBy         *string            `json:"startedBy,omitempty"`
 }

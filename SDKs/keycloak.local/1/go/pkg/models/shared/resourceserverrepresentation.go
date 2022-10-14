@@ -17,13 +17,13 @@ const (
 )
 
 type ResourceServerRepresentation struct {
-	AllowRemoteResourceManagement *bool                                                  `json:"allowRemoteResourceManagement"`
-	ClientID                      *string                                                `json:"clientId"`
-	DecisionStrategy              *ResourceServerRepresentationDecisionStrategyEnum      `json:"decisionStrategy"`
-	ID                            *string                                                `json:"id"`
-	Name                          *string                                                `json:"name"`
-	Policies                      []PolicyRepresentation                                 `json:"policies"`
-	PolicyEnforcementMode         *ResourceServerRepresentationPolicyEnforcementModeEnum `json:"policyEnforcementMode"`
-	Resources                     []ResourceRepresentation                               `json:"resources"`
-	Scopes                        []ScopeRepresentation                                  `json:"scopes"`
+	AllowRemoteResourceManagement *bool                                                  `json:"allowRemoteResourceManagement,omitempty"`
+	ClientID                      *string                                                `json:"clientId,omitempty"`
+	DecisionStrategy              *ResourceServerRepresentationDecisionStrategyEnum      `json:"decisionStrategy,omitempty"`
+	ID                            *string                                                `json:"id,omitempty"`
+	Name                          *string                                                `json:"name,omitempty"`
+	Policies                      []PolicyRepresentation                                 `json:"policies,omitempty"`
+	PolicyEnforcementMode         *ResourceServerRepresentationPolicyEnforcementModeEnum `json:"policyEnforcementMode,omitempty"`
+	Resources                     []ResourceRepresentation                               `json:"resources,omitempty"`
+	Scopes                        []ScopeRepresentation                                  `json:"scopes,omitempty"`
 }

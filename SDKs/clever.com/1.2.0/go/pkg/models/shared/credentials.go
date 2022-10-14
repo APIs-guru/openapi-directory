@@ -1,5 +1,5 @@
 package shared
 
 type Credentials struct {
-	DistrictUsername *string `json:"district_username"`
+	DistrictUsername *string `json:"district_username,omitempty"`
 }

@@ -2,7 +2,7 @@ package shared
 
 type CreateBackendAuthResourceConfig struct {
 	AuthResources       AuthResourcesEnum                    `json:"AuthResources"`
-	IdentityPoolConfigs *CreateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs"`
+	IdentityPoolConfigs *CreateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs,omitempty"`
 	Service             ServiceEnum                          `json:"Service"`
 	UserPoolConfigs     CreateBackendAuthUserPoolConfig      `json:"UserPoolConfigs"`
 }

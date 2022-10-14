@@ -19,8 +19,8 @@ type UpdateFleetMetricHeaders struct {
 }
 
 type UpdateFleetMetricRequestBodyAggregationType struct {
-	Name   *shared.AggregationTypeNameEnum `json:"name"`
-	Values []string                        `json:"values"`
+	Name   *shared.AggregationTypeNameEnum `json:"name,omitempty"`
+	Values []string                        `json:"values,omitempty"`
 }
 
 type UpdateFleetMetricRequestBodyUnitEnum string
@@ -56,15 +56,15 @@ const (
 )
 
 type UpdateFleetMetricRequestBody struct {
-	AggregationField *string                                      `json:"aggregationField"`
-	AggregationType  *UpdateFleetMetricRequestBodyAggregationType `json:"aggregationType"`
-	Description      *string                                      `json:"description"`
-	ExpectedVersion  *int64                                       `json:"expectedVersion"`
+	AggregationField *string                                      `json:"aggregationField,omitempty"`
+	AggregationType  *UpdateFleetMetricRequestBodyAggregationType `json:"aggregationType,omitempty"`
+	Description      *string                                      `json:"description,omitempty"`
+	ExpectedVersion  *int64                                       `json:"expectedVersion,omitempty"`
 	IndexName        string                                       `json:"indexName"`
-	Period           *int64                                       `json:"period"`
-	QueryString      *string                                      `json:"queryString"`
-	QueryVersion     *string                                      `json:"queryVersion"`
-	Unit             *UpdateFleetMetricRequestBodyUnitEnum        `json:"unit"`
+	Period           *int64                                       `json:"period,omitempty"`
+	QueryString      *string                                      `json:"queryString,omitempty"`
+	QueryVersion     *string                                      `json:"queryVersion,omitempty"`
+	Unit             *UpdateFleetMetricRequestBodyUnitEnum        `json:"unit,omitempty"`
 }
 
 type UpdateFleetMetricRequest struct {

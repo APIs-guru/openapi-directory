@@ -1,6 +1,6 @@
 package shared
 
 type StringItem struct {
-	Links []Link  `json:"links"`
-	Value *string `json:"value"`
+	Links []Link  `json:"links,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

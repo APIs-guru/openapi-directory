@@ -1,6 +1,6 @@
 package shared
 
 type Metadata struct {
-	Items []ReportingMetadataEntry `json:"items"`
-	Kind  *string                  `json:"kind"`
+	Items []ReportingMetadataEntry `json:"items,omitempty"`
+	Kind  *string                  `json:"kind,omitempty"`
 }

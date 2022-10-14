@@ -9,6 +9,6 @@ const (
 )
 
 type SetFindingStateRequest struct {
-	StartTime *string                          `json:"startTime"`
-	State     *SetFindingStateRequestStateEnum `json:"state"`
+	StartTime *string                          `json:"startTime,omitempty"`
+	State     *SetFindingStateRequestStateEnum `json:"state,omitempty"`
 }

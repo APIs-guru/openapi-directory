@@ -15,13 +15,13 @@ type CreateAssetModelHeaders struct {
 }
 
 type CreateAssetModelRequestBody struct {
-	AssetModelCompositeModels []shared.AssetModelCompositeModelDefinition `json:"assetModelCompositeModels"`
-	AssetModelDescription     *string                                     `json:"assetModelDescription"`
-	AssetModelHierarchies     []shared.AssetModelHierarchyDefinition      `json:"assetModelHierarchies"`
+	AssetModelCompositeModels []shared.AssetModelCompositeModelDefinition `json:"assetModelCompositeModels,omitempty"`
+	AssetModelDescription     *string                                     `json:"assetModelDescription,omitempty"`
+	AssetModelHierarchies     []shared.AssetModelHierarchyDefinition      `json:"assetModelHierarchies,omitempty"`
 	AssetModelName            string                                      `json:"assetModelName"`
-	AssetModelProperties      []shared.AssetModelPropertyDefinition       `json:"assetModelProperties"`
-	ClientToken               *string                                     `json:"clientToken"`
-	Tags                      map[string]string                           `json:"tags"`
+	AssetModelProperties      []shared.AssetModelPropertyDefinition       `json:"assetModelProperties,omitempty"`
+	ClientToken               *string                                     `json:"clientToken,omitempty"`
+	Tags                      map[string]string                           `json:"tags,omitempty"`
 }
 
 type CreateAssetModelRequest struct {

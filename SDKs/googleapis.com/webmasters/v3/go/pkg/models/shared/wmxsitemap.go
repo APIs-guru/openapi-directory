@@ -5,13 +5,13 @@ import (
 )
 
 type WmxSitemap struct {
-	Contents        []WmxSitemapContent `json:"contents"`
-	Errors          *string             `json:"errors"`
-	IsPending       *bool               `json:"isPending"`
-	IsSitemapsIndex *bool               `json:"isSitemapsIndex"`
-	LastDownloaded  *time.Time          `json:"lastDownloaded"`
-	LastSubmitted   *time.Time          `json:"lastSubmitted"`
-	Path            *string             `json:"path"`
-	Type            *string             `json:"type"`
-	Warnings        *string             `json:"warnings"`
+	Contents        []WmxSitemapContent `json:"contents,omitempty"`
+	Errors          *string             `json:"errors,omitempty"`
+	IsPending       *bool               `json:"isPending,omitempty"`
+	IsSitemapsIndex *bool               `json:"isSitemapsIndex,omitempty"`
+	LastDownloaded  *time.Time          `json:"lastDownloaded,omitempty"`
+	LastSubmitted   *time.Time          `json:"lastSubmitted,omitempty"`
+	Path            *string             `json:"path,omitempty"`
+	Type            *string             `json:"type,omitempty"`
+	Warnings        *string             `json:"warnings,omitempty"`
 }

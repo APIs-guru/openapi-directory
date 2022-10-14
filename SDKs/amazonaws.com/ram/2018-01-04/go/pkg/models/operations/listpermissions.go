@@ -20,9 +20,9 @@ type ListPermissionsHeaders struct {
 }
 
 type ListPermissionsRequestBody struct {
-	MaxResults   *int64  `json:"maxResults"`
-	NextToken    *string `json:"nextToken"`
-	ResourceType *string `json:"resourceType"`
+	MaxResults   *int64  `json:"maxResults,omitempty"`
+	NextToken    *string `json:"nextToken,omitempty"`
+	ResourceType *string `json:"resourceType,omitempty"`
 }
 
 type ListPermissionsRequest struct {

@@ -15,6 +15,6 @@ const (
 )
 
 type LineStyle struct {
-	Type  *LineStyleTypeEnum `json:"type"`
-	Width *int32             `json:"width"`
+	Type  *LineStyleTypeEnum `json:"type,omitempty"`
+	Width *int32             `json:"width,omitempty"`
 }

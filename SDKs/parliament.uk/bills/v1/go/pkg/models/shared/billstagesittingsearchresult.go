@@ -1,7 +1,7 @@
 package shared
 
 type BillStageSittingSearchResult struct {
-	Items        []BillStageSitting `json:"items"`
-	ItemsPerPage *int32             `json:"itemsPerPage"`
-	TotalResults *int32             `json:"totalResults"`
+	Items        []BillStageSitting `json:"items,omitempty"`
+	ItemsPerPage *int32             `json:"itemsPerPage,omitempty"`
+	TotalResults *int32             `json:"totalResults,omitempty"`
 }

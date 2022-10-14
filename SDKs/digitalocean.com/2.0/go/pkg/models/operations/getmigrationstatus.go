@@ -13,15 +13,15 @@ type GetMigrationStatusRequest struct {
 }
 
 type GetMigrationStatus200ApplicationJSON struct {
-	CreatedAt *string `json:"created_at"`
-	ID        *string `json:"id"`
-	Status    *string `json:"status"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Status    *string `json:"status,omitempty"`
 }
 
 type GetMigrationStatus401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetMigrationStatusResponse struct {

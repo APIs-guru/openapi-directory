@@ -1,10 +1,10 @@
 package shared
 
 type ServicePerimeterConfig struct {
-	AccessLevels          []string               `json:"accessLevels"`
-	EgressPolicies        []EgressPolicy         `json:"egressPolicies"`
-	IngressPolicies       []IngressPolicy        `json:"ingressPolicies"`
-	Resources             []string               `json:"resources"`
-	RestrictedServices    []string               `json:"restrictedServices"`
-	VpcAccessibleServices *VpcAccessibleServices `json:"vpcAccessibleServices"`
+	AccessLevels          []string               `json:"accessLevels,omitempty"`
+	EgressPolicies        []EgressPolicy         `json:"egressPolicies,omitempty"`
+	IngressPolicies       []IngressPolicy        `json:"ingressPolicies,omitempty"`
+	Resources             []string               `json:"resources,omitempty"`
+	RestrictedServices    []string               `json:"restrictedServices,omitempty"`
+	VpcAccessibleServices *VpcAccessibleServices `json:"vpcAccessibleServices,omitempty"`
 }

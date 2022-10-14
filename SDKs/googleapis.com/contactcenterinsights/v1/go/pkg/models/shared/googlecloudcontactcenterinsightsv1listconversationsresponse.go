@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1ListConversationsResponse struct {
-	Conversations []GoogleCloudContactcenterinsightsV1Conversation `json:"conversations"`
-	NextPageToken *string                                          `json:"nextPageToken"`
+	Conversations []GoogleCloudContactcenterinsightsV1Conversation `json:"conversations,omitempty"`
+	NextPageToken *string                                          `json:"nextPageToken,omitempty"`
 }

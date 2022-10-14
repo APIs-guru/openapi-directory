@@ -1,14 +1,14 @@
 package shared
 
 type AttributeValue struct {
-	B    *string                   `json:"B"`
-	Bool *bool                     `json:"BOOL"`
-	Bs   []string                  `json:"BS"`
-	L    []AttributeValue          `json:"L"`
-	M    map[string]AttributeValue `json:"M"`
-	N    *string                   `json:"N"`
-	Ns   []string                  `json:"NS"`
-	Null *bool                     `json:"NULL"`
-	S    *string                   `json:"S"`
-	Ss   []string                  `json:"SS"`
+	B    *string                   `json:"B,omitempty"`
+	Bool *bool                     `json:"BOOL,omitempty"`
+	Bs   []string                  `json:"BS,omitempty"`
+	L    []AttributeValue          `json:"L,omitempty"`
+	M    map[string]AttributeValue `json:"M,omitempty"`
+	N    *string                   `json:"N,omitempty"`
+	Ns   []string                  `json:"NS,omitempty"`
+	Null *bool                     `json:"NULL,omitempty"`
+	S    *string                   `json:"S,omitempty"`
+	Ss   []string                  `json:"SS,omitempty"`
 }

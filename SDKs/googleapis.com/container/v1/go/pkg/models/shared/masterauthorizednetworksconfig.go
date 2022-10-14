@@ -1,6 +1,6 @@
 package shared
 
 type MasterAuthorizedNetworksConfig struct {
-	CidrBlocks []CidrBlock `json:"cidrBlocks"`
-	Enabled    *bool       `json:"enabled"`
+	CidrBlocks []CidrBlock `json:"cidrBlocks,omitempty"`
+	Enabled    *bool       `json:"enabled,omitempty"`
 }

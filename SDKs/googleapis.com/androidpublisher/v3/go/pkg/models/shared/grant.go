@@ -17,7 +17,7 @@ const (
 )
 
 type Grant struct {
-	AppLevelPermissions []GrantAppLevelPermissionsEnum `json:"appLevelPermissions"`
-	Name                *string                        `json:"name"`
-	PackageName         *string                        `json:"packageName"`
+	AppLevelPermissions []GrantAppLevelPermissionsEnum `json:"appLevelPermissions,omitempty"`
+	Name                *string                        `json:"name,omitempty"`
+	PackageName         *string                        `json:"packageName,omitempty"`
 }

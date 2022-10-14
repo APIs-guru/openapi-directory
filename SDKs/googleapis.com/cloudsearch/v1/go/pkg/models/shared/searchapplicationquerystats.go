@@ -1,6 +1,6 @@
 package shared
 
 type SearchApplicationQueryStats struct {
-	Date               *Date                `json:"date"`
-	QueryCountByStatus []QueryCountByStatus `json:"queryCountByStatus"`
+	Date               *Date                `json:"date,omitempty"`
+	QueryCountByStatus []QueryCountByStatus `json:"queryCountByStatus,omitempty"`
 }

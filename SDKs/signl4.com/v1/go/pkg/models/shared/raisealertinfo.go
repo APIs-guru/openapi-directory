@@ -1,12 +1,12 @@
 package shared
 
 type RaiseAlertInfo struct {
-	Attachments []AlertAttachment    `json:"attachments"`
-	Category    *string              `json:"category"`
-	ExternalID  *string              `json:"externalId"`
-	Flags       *int32               `json:"flags"`
-	Parameters  []EventParameterInfo `json:"parameters"`
-	Severity    *int32               `json:"severity"`
-	Text        *string              `json:"text"`
-	Title       *string              `json:"title"`
+	Attachments []AlertAttachment    `json:"attachments,omitempty"`
+	Category    *string              `json:"category,omitempty"`
+	ExternalID  *string              `json:"externalId,omitempty"`
+	Flags       *int32               `json:"flags,omitempty"`
+	Parameters  []EventParameterInfo `json:"parameters,omitempty"`
+	Severity    *int32               `json:"severity,omitempty"`
+	Text        *string              `json:"text,omitempty"`
+	Title       *string              `json:"title,omitempty"`
 }

@@ -11,23 +11,23 @@ type GitCreateCommitPathParams struct {
 }
 
 type GitCreateCommitRequestBodyAuthor struct {
-	Date  *time.Time `json:"date"`
+	Date  *time.Time `json:"date,omitempty"`
 	Email string     `json:"email"`
 	Name  string     `json:"name"`
 }
 
 type GitCreateCommitRequestBodyCommitter struct {
-	Date  *time.Time `json:"date"`
-	Email *string    `json:"email"`
-	Name  *string    `json:"name"`
+	Date  *time.Time `json:"date,omitempty"`
+	Email *string    `json:"email,omitempty"`
+	Name  *string    `json:"name,omitempty"`
 }
 
 type GitCreateCommitRequestBody struct {
-	Author    *GitCreateCommitRequestBodyAuthor    `json:"author"`
-	Committer *GitCreateCommitRequestBodyCommitter `json:"committer"`
+	Author    *GitCreateCommitRequestBodyAuthor    `json:"author,omitempty"`
+	Committer *GitCreateCommitRequestBodyCommitter `json:"committer,omitempty"`
 	Message   string                               `json:"message"`
-	Parents   []string                             `json:"parents"`
-	Signature *string                              `json:"signature"`
+	Parents   []string                             `json:"parents,omitempty"`
+	Signature *string                              `json:"signature,omitempty"`
 	Tree      string                               `json:"tree"`
 }
 

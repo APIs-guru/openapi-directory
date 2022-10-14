@@ -22,17 +22,17 @@ const (
 )
 
 type CreateComponentRequestBody struct {
-	ChangeDescription   *string                                `json:"changeDescription"`
+	ChangeDescription   *string                                `json:"changeDescription,omitempty"`
 	ClientToken         string                                 `json:"clientToken"`
-	Data                *string                                `json:"data"`
-	Description         *string                                `json:"description"`
-	KmsKeyID            *string                                `json:"kmsKeyId"`
+	Data                *string                                `json:"data,omitempty"`
+	Description         *string                                `json:"description,omitempty"`
+	KmsKeyID            *string                                `json:"kmsKeyId,omitempty"`
 	Name                string                                 `json:"name"`
 	Platform            CreateComponentRequestBodyPlatformEnum `json:"platform"`
 	SemanticVersion     string                                 `json:"semanticVersion"`
-	SupportedOsVersions []string                               `json:"supportedOsVersions"`
-	Tags                map[string]string                      `json:"tags"`
-	URI                 *string                                `json:"uri"`
+	SupportedOsVersions []string                               `json:"supportedOsVersions,omitempty"`
+	Tags                map[string]string                      `json:"tags,omitempty"`
+	URI                 *string                                `json:"uri,omitempty"`
 }
 
 type CreateComponentRequest struct {

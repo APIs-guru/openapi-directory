@@ -1,6 +1,6 @@
 package shared
 
 type BoundingPoly struct {
-	Label    *string  `json:"label"`
-	Vertices []Vertex `json:"vertices"`
+	Label    *string  `json:"label,omitempty"`
+	Vertices []Vertex `json:"vertices,omitempty"`
 }

@@ -20,7 +20,7 @@ type CreateDeploymentHeaders struct {
 }
 
 type CreateDeploymentRequestBody struct {
-	FileMap map[string]string `json:"fileMap"`
+	FileMap map[string]string `json:"fileMap,omitempty"`
 }
 
 type CreateDeploymentRequest struct {

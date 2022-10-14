@@ -1,6 +1,6 @@
 package shared
 
 type RelatedAssets struct {
-	Assets                 []RelatedAsset          `json:"assets"`
-	RelationshipAttributes *RelationshipAttributes `json:"relationshipAttributes"`
+	Assets                 []RelatedAsset          `json:"assets,omitempty"`
+	RelationshipAttributes *RelationshipAttributes `json:"relationshipAttributes,omitempty"`
 }

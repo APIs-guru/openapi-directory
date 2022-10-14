@@ -1,7 +1,7 @@
 package shared
 
 type GooglePrivacyDlpV2CryptoKey struct {
-	KmsWrapped *GooglePrivacyDlpV2KmsWrappedCryptoKey `json:"kmsWrapped"`
-	Transient  *GooglePrivacyDlpV2TransientCryptoKey  `json:"transient"`
-	Unwrapped  *GooglePrivacyDlpV2UnwrappedCryptoKey  `json:"unwrapped"`
+	KmsWrapped *GooglePrivacyDlpV2KmsWrappedCryptoKey `json:"kmsWrapped,omitempty"`
+	Transient  *GooglePrivacyDlpV2TransientCryptoKey  `json:"transient,omitempty"`
+	Unwrapped  *GooglePrivacyDlpV2UnwrappedCryptoKey  `json:"unwrapped,omitempty"`
 }

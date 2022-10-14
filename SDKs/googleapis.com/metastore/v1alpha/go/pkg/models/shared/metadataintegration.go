@@ -1,6 +1,6 @@
 package shared
 
 type MetadataIntegration struct {
-	DataCatalogConfig *DataCatalogConfig `json:"dataCatalogConfig"`
-	DataplexConfig    *DataplexConfig    `json:"dataplexConfig"`
+	DataCatalogConfig *DataCatalogConfig `json:"dataCatalogConfig,omitempty"`
+	DataplexConfig    *DataplexConfig    `json:"dataplexConfig,omitempty"`
 }

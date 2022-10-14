@@ -55,23 +55,23 @@ type UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyFixedIPAssignments s
 }
 
 type UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyReservedIPRanges struct {
-	Comment *string `json:"comment"`
+	Comment *string `json:"comment,omitempty"`
 	End     string  `json:"end"`
 	Start   string  `json:"start"`
 }
 
 type UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBody struct {
-	BootFileName         *string                                                                          `json:"bootFileName"`
-	BootNextServer       *string                                                                          `json:"bootNextServer"`
-	BootOptionsEnabled   *bool                                                                            `json:"bootOptionsEnabled"`
-	DhcpLeaseTime        *UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDhcpLeaseTimeEnum        `json:"dhcpLeaseTime"`
-	DhcpMode             *UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDhcpModeEnum             `json:"dhcpMode"`
-	DhcpOptions          []UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDhcpOptions             `json:"dhcpOptions"`
-	DhcpRelayServerIps   []string                                                                         `json:"dhcpRelayServerIps"`
-	DNSCustomNameservers []string                                                                         `json:"dnsCustomNameservers"`
-	DNSNameserversOption *UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDNSNameserversOptionEnum `json:"dnsNameserversOption"`
-	FixedIPAssignments   []UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyFixedIPAssignments      `json:"fixedIpAssignments"`
-	ReservedIPRanges     []UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyReservedIPRanges        `json:"reservedIpRanges"`
+	BootFileName         *string                                                                          `json:"bootFileName,omitempty"`
+	BootNextServer       *string                                                                          `json:"bootNextServer,omitempty"`
+	BootOptionsEnabled   *bool                                                                            `json:"bootOptionsEnabled,omitempty"`
+	DhcpLeaseTime        *UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDhcpLeaseTimeEnum        `json:"dhcpLeaseTime,omitempty"`
+	DhcpMode             *UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDhcpModeEnum             `json:"dhcpMode,omitempty"`
+	DhcpOptions          []UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDhcpOptions             `json:"dhcpOptions,omitempty"`
+	DhcpRelayServerIps   []string                                                                         `json:"dhcpRelayServerIps,omitempty"`
+	DNSCustomNameservers []string                                                                         `json:"dnsCustomNameservers,omitempty"`
+	DNSNameserversOption *UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyDNSNameserversOptionEnum `json:"dnsNameserversOption,omitempty"`
+	FixedIPAssignments   []UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyFixedIPAssignments      `json:"fixedIpAssignments,omitempty"`
+	ReservedIPRanges     []UpdateNetworkSwitchStackRoutingInterfaceDhcpRequestBodyReservedIPRanges        `json:"reservedIpRanges,omitempty"`
 }
 
 type UpdateNetworkSwitchStackRoutingInterfaceDhcpRequest struct {

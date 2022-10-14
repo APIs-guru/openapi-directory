@@ -1,8 +1,8 @@
 package shared
 
 type GetDeployablePatchSnapshotForInstanceResult struct {
-	InstanceID          *string `json:"InstanceId"`
-	Product             *string `json:"Product"`
-	SnapshotDownloadURL *string `json:"SnapshotDownloadUrl"`
-	SnapshotID          *string `json:"SnapshotId"`
+	InstanceID          *string `json:"InstanceId,omitempty"`
+	Product             *string `json:"Product,omitempty"`
+	SnapshotDownloadURL *string `json:"SnapshotDownloadUrl,omitempty"`
+	SnapshotID          *string `json:"SnapshotId,omitempty"`
 }

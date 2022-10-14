@@ -1,7 +1,7 @@
 package shared
 
 type ScriptLocalizationDetail struct {
-	ConfigMetadata *interface{}           `json:"configMetadata"`
-	Data           *ScriptDescriptionData `json:"data"`
-	Language       *string                `json:"language"`
+	ConfigMetadata *interface{}           `json:"configMetadata,omitempty"`
+	Data           *ScriptDescriptionData `json:"data,omitempty"`
+	Language       *string                `json:"language,omitempty"`
 }

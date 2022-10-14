@@ -9,11 +9,11 @@ const (
 )
 
 type DataSourceTable struct {
-	ColumnSelectionType *DataSourceTableColumnSelectionTypeEnum `json:"columnSelectionType"`
-	Columns             []DataSourceColumnReference             `json:"columns"`
-	DataExecutionStatus *DataExecutionStatus                    `json:"dataExecutionStatus"`
-	DataSourceID        *string                                 `json:"dataSourceId"`
-	FilterSpecs         []FilterSpec                            `json:"filterSpecs"`
-	RowLimit            *int32                                  `json:"rowLimit"`
-	SortSpecs           []SortSpec                              `json:"sortSpecs"`
+	ColumnSelectionType *DataSourceTableColumnSelectionTypeEnum `json:"columnSelectionType,omitempty"`
+	Columns             []DataSourceColumnReference             `json:"columns,omitempty"`
+	DataExecutionStatus *DataExecutionStatus                    `json:"dataExecutionStatus,omitempty"`
+	DataSourceID        *string                                 `json:"dataSourceId,omitempty"`
+	FilterSpecs         []FilterSpec                            `json:"filterSpecs,omitempty"`
+	RowLimit            *int32                                  `json:"rowLimit,omitempty"`
+	SortSpecs           []SortSpec                              `json:"sortSpecs,omitempty"`
 }

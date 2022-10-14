@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowCxV3RolloutConfig struct {
-	FailureCondition *string                                             `json:"failureCondition"`
-	RolloutCondition *string                                             `json:"rolloutCondition"`
-	RolloutSteps     []GoogleCloudDialogflowCxV3RolloutConfigRolloutStep `json:"rolloutSteps"`
+	FailureCondition *string                                             `json:"failureCondition,omitempty"`
+	RolloutCondition *string                                             `json:"rolloutCondition,omitempty"`
+	RolloutSteps     []GoogleCloudDialogflowCxV3RolloutConfigRolloutStep `json:"rolloutSteps,omitempty"`
 }

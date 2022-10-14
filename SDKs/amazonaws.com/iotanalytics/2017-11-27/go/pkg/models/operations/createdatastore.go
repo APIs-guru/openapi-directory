@@ -15,32 +15,32 @@ type CreateDatastoreHeaders struct {
 }
 
 type CreateDatastoreRequestBodyDatastorePartitions struct {
-	Partitions []shared.DatastorePartition `json:"partitions"`
+	Partitions []shared.DatastorePartition `json:"partitions,omitempty"`
 }
 
 type CreateDatastoreRequestBodyDatastoreStorage struct {
-	CustomerManagedS3            *shared.CustomerManagedDatastoreS3Storage     `json:"customerManagedS3"`
-	IotSiteWiseMultiLayerStorage *shared.DatastoreIotSiteWiseMultiLayerStorage `json:"iotSiteWiseMultiLayerStorage"`
-	ServiceManagedS3             map[string]interface{}                        `json:"serviceManagedS3"`
+	CustomerManagedS3            *shared.CustomerManagedDatastoreS3Storage     `json:"customerManagedS3,omitempty"`
+	IotSiteWiseMultiLayerStorage *shared.DatastoreIotSiteWiseMultiLayerStorage `json:"iotSiteWiseMultiLayerStorage,omitempty"`
+	ServiceManagedS3             map[string]interface{}                        `json:"serviceManagedS3,omitempty"`
 }
 
 type CreateDatastoreRequestBodyFileFormatConfiguration struct {
-	JSONConfiguration    map[string]interface{}       `json:"jsonConfiguration"`
-	ParquetConfiguration *shared.ParquetConfiguration `json:"parquetConfiguration"`
+	JSONConfiguration    map[string]interface{}       `json:"jsonConfiguration,omitempty"`
+	ParquetConfiguration *shared.ParquetConfiguration `json:"parquetConfiguration,omitempty"`
 }
 
 type CreateDatastoreRequestBodyRetentionPeriod struct {
-	NumberOfDays *int64 `json:"numberOfDays"`
-	Unlimited    *bool  `json:"unlimited"`
+	NumberOfDays *int64 `json:"numberOfDays,omitempty"`
+	Unlimited    *bool  `json:"unlimited,omitempty"`
 }
 
 type CreateDatastoreRequestBody struct {
 	DatastoreName           string                                             `json:"datastoreName"`
-	DatastorePartitions     *CreateDatastoreRequestBodyDatastorePartitions     `json:"datastorePartitions"`
-	DatastoreStorage        *CreateDatastoreRequestBodyDatastoreStorage        `json:"datastoreStorage"`
-	FileFormatConfiguration *CreateDatastoreRequestBodyFileFormatConfiguration `json:"fileFormatConfiguration"`
-	RetentionPeriod         *CreateDatastoreRequestBodyRetentionPeriod         `json:"retentionPeriod"`
-	Tags                    []shared.Tag                                       `json:"tags"`
+	DatastorePartitions     *CreateDatastoreRequestBodyDatastorePartitions     `json:"datastorePartitions,omitempty"`
+	DatastoreStorage        *CreateDatastoreRequestBodyDatastoreStorage        `json:"datastoreStorage,omitempty"`
+	FileFormatConfiguration *CreateDatastoreRequestBodyFileFormatConfiguration `json:"fileFormatConfiguration,omitempty"`
+	RetentionPeriod         *CreateDatastoreRequestBodyRetentionPeriod         `json:"retentionPeriod,omitempty"`
+	Tags                    []shared.Tag                                       `json:"tags,omitempty"`
 }
 
 type CreateDatastoreRequest struct {

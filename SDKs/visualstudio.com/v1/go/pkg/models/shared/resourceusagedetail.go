@@ -1,6 +1,6 @@
 package shared
 
 type ResourceUsageDetail struct {
-	Compute []ComputeUsageDetail `json:"compute"`
-	Storage []StorageUsageDetail `json:"storage"`
+	Compute []ComputeUsageDetail `json:"compute,omitempty"`
+	Storage []StorageUsageDetail `json:"storage,omitempty"`
 }

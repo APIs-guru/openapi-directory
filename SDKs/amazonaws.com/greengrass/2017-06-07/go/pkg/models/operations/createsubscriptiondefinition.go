@@ -16,13 +16,13 @@ type CreateSubscriptionDefinitionHeaders struct {
 }
 
 type CreateSubscriptionDefinitionRequestBodyInitialVersion struct {
-	Subscriptions []shared.Subscription `json:"Subscriptions"`
+	Subscriptions []shared.Subscription `json:"Subscriptions,omitempty"`
 }
 
 type CreateSubscriptionDefinitionRequestBody struct {
-	InitialVersion *CreateSubscriptionDefinitionRequestBodyInitialVersion `json:"InitialVersion"`
-	Name           *string                                                `json:"Name"`
-	Tags           map[string]string                                      `json:"tags"`
+	InitialVersion *CreateSubscriptionDefinitionRequestBodyInitialVersion `json:"InitialVersion,omitempty"`
+	Name           *string                                                `json:"Name,omitempty"`
+	Tags           map[string]string                                      `json:"tags,omitempty"`
 }
 
 type CreateSubscriptionDefinitionRequest struct {

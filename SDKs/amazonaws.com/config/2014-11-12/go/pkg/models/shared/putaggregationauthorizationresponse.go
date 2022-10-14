@@ -1,5 +1,5 @@
 package shared
 
 type PutAggregationAuthorizationResponse struct {
-	AggregationAuthorization *AggregationAuthorization `json:"AggregationAuthorization"`
+	AggregationAuthorization *AggregationAuthorization `json:"AggregationAuthorization,omitempty"`
 }

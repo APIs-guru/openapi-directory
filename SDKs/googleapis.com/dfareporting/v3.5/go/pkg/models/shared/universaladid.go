@@ -10,6 +10,6 @@ const (
 )
 
 type UniversalAdID struct {
-	Registry *UniversalAdIDRegistryEnum `json:"registry"`
-	Value    *string                    `json:"value"`
+	Registry *UniversalAdIDRegistryEnum `json:"registry,omitempty"`
+	Value    *string                    `json:"value,omitempty"`
 }

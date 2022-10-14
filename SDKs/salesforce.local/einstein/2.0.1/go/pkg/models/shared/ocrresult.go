@@ -1,8 +1,8 @@
 package shared
 
 type OcrResult struct {
-	Attributes  *Attributes  `json:"attributes"`
-	BoundingBox *BoundingBox `json:"boundingBox"`
-	Label       *string      `json:"label"`
-	Probability *float32     `json:"probability"`
+	Attributes  *Attributes  `json:"attributes,omitempty"`
+	BoundingBox *BoundingBox `json:"boundingBox,omitempty"`
+	Label       *string      `json:"label,omitempty"`
+	Probability *float32     `json:"probability,omitempty"`
 }

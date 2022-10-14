@@ -1,6 +1,6 @@
 package shared
 
 type ListMonitoredResourceDescriptorsResponse struct {
-	NextPageToken       *string                       `json:"nextPageToken"`
-	ResourceDescriptors []MonitoredResourceDescriptor `json:"resourceDescriptors"`
+	NextPageToken       *string                       `json:"nextPageToken,omitempty"`
+	ResourceDescriptors []MonitoredResourceDescriptor `json:"resourceDescriptors,omitempty"`
 }

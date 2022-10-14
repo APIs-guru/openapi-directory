@@ -23,40 +23,40 @@ type GetQueryPkRequest struct {
 }
 
 type GetQueryPk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetQueryPk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetQueryPk200ApplicationJSON struct {
-	DescriptionColumns *GetQueryPk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                         `json:"id"`
-	LabelColumns       *GetQueryPk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.QueryRestAPIGet                         `json:"result"`
-	ShowColumns        []string                                        `json:"show_columns"`
-	ShowTitle          *string                                         `json:"show_title"`
+	DescriptionColumns *GetQueryPk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                         `json:"id,omitempty"`
+	LabelColumns       *GetQueryPk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.QueryRestAPIGet                         `json:"result,omitempty"`
+	ShowColumns        []string                                        `json:"show_columns,omitempty"`
+	ShowTitle          *string                                         `json:"show_title,omitempty"`
 }
 
 type GetQueryPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQueryPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQueryPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQueryPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQueryPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetQueryPkResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type Entity struct {
-	EntityID        *string  `json:"entityId"`
-	PreferredTerm   *string  `json:"preferredTerm"`
-	VocabularyCodes []string `json:"vocabularyCodes"`
+	EntityID        *string  `json:"entityId,omitempty"`
+	PreferredTerm   *string  `json:"preferredTerm,omitempty"`
+	VocabularyCodes []string `json:"vocabularyCodes,omitempty"`
 }

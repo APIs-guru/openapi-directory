@@ -35,7 +35,7 @@ type BatchGetFrameMetricDataHeaders struct {
 }
 
 type BatchGetFrameMetricDataRequestBody struct {
-	FrameMetrics []shared.FrameMetric `json:"frameMetrics"`
+	FrameMetrics []shared.FrameMetric `json:"frameMetrics,omitempty"`
 }
 
 type BatchGetFrameMetricDataRequest struct {

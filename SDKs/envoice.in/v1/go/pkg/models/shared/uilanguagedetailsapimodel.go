@@ -1,7 +1,7 @@
 package shared
 
 type UILanguageDetailsAPIModel struct {
-	ID        *int32  `json:"Id"`
-	Name      *string `json:"Name"`
-	UICulture *string `json:"UiCulture"`
+	ID        *int32  `json:"Id,omitempty"`
+	Name      *string `json:"Name,omitempty"`
+	UICulture *string `json:"UiCulture,omitempty"`
 }

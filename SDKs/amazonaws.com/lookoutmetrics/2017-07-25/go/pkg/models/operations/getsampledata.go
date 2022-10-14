@@ -15,14 +15,14 @@ type GetSampleDataHeaders struct {
 }
 
 type GetSampleDataRequestBodyS3SourceConfig struct {
-	FileFormatDescriptor   *shared.FileFormatDescriptor `json:"FileFormatDescriptor"`
-	HistoricalDataPathList []string                     `json:"HistoricalDataPathList"`
-	RoleArn                *string                      `json:"RoleArn"`
-	TemplatedPathList      []string                     `json:"TemplatedPathList"`
+	FileFormatDescriptor   *shared.FileFormatDescriptor `json:"FileFormatDescriptor,omitempty"`
+	HistoricalDataPathList []string                     `json:"HistoricalDataPathList,omitempty"`
+	RoleArn                *string                      `json:"RoleArn,omitempty"`
+	TemplatedPathList      []string                     `json:"TemplatedPathList,omitempty"`
 }
 
 type GetSampleDataRequestBody struct {
-	S3SourceConfig *GetSampleDataRequestBodyS3SourceConfig `json:"S3SourceConfig"`
+	S3SourceConfig *GetSampleDataRequestBodyS3SourceConfig `json:"S3SourceConfig,omitempty"`
 }
 
 type GetSampleDataRequest struct {

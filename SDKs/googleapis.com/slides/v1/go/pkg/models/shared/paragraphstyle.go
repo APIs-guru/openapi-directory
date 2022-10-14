@@ -27,13 +27,13 @@ const (
 )
 
 type ParagraphStyle struct {
-	Alignment       *ParagraphStyleAlignmentEnum   `json:"alignment"`
-	Direction       *ParagraphStyleDirectionEnum   `json:"direction"`
-	IndentEnd       *Dimension                     `json:"indentEnd"`
-	IndentFirstLine *Dimension                     `json:"indentFirstLine"`
-	IndentStart     *Dimension                     `json:"indentStart"`
-	LineSpacing     *float32                       `json:"lineSpacing"`
-	SpaceAbove      *Dimension                     `json:"spaceAbove"`
-	SpaceBelow      *Dimension                     `json:"spaceBelow"`
-	SpacingMode     *ParagraphStyleSpacingModeEnum `json:"spacingMode"`
+	Alignment       *ParagraphStyleAlignmentEnum   `json:"alignment,omitempty"`
+	Direction       *ParagraphStyleDirectionEnum   `json:"direction,omitempty"`
+	IndentEnd       *Dimension                     `json:"indentEnd,omitempty"`
+	IndentFirstLine *Dimension                     `json:"indentFirstLine,omitempty"`
+	IndentStart     *Dimension                     `json:"indentStart,omitempty"`
+	LineSpacing     *float32                       `json:"lineSpacing,omitempty"`
+	SpaceAbove      *Dimension                     `json:"spaceAbove,omitempty"`
+	SpaceBelow      *Dimension                     `json:"spaceBelow,omitempty"`
+	SpacingMode     *ParagraphStyleSpacingModeEnum `json:"spacingMode,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type Alert struct {
-	ID            *string `json:"id"`
-	IsDismissible *bool   `json:"isDismissible"`
-	Kind          *string `json:"kind"`
-	Message       *string `json:"message"`
-	Severity      *string `json:"severity"`
-	Type          *string `json:"type"`
+	ID            *string `json:"id,omitempty"`
+	IsDismissible *bool   `json:"isDismissible,omitempty"`
+	Kind          *string `json:"kind,omitempty"`
+	Message       *string `json:"message,omitempty"`
+	Severity      *string `json:"severity,omitempty"`
+	Type          *string `json:"type,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudRetailV2betaRuleReplacementAction struct {
-	QueryTerms      []string `json:"queryTerms"`
-	ReplacementTerm *string  `json:"replacementTerm"`
-	Term            *string  `json:"term"`
+	QueryTerms      []string `json:"queryTerms,omitempty"`
+	ReplacementTerm *string  `json:"replacementTerm,omitempty"`
+	Term            *string  `json:"term,omitempty"`
 }

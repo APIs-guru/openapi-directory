@@ -1,9 +1,9 @@
 package shared
 
 type TLSCertificate struct {
-	Cert            *string `json:"cert"`
-	CreateTime      *string `json:"createTime"`
-	ExpireTime      *string `json:"expireTime"`
-	SerialNumber    *string `json:"serialNumber"`
-	Sha1Fingerprint *string `json:"sha1Fingerprint"`
+	Cert            *string `json:"cert,omitempty"`
+	CreateTime      *string `json:"createTime,omitempty"`
+	ExpireTime      *string `json:"expireTime,omitempty"`
+	SerialNumber    *string `json:"serialNumber,omitempty"`
+	Sha1Fingerprint *string `json:"sha1Fingerprint,omitempty"`
 }

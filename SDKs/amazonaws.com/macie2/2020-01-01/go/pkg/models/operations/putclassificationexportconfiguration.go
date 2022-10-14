@@ -15,7 +15,7 @@ type PutClassificationExportConfigurationHeaders struct {
 }
 
 type PutClassificationExportConfigurationRequestBodyConfiguration struct {
-	S3Destination *shared.S3Destination `json:"s3Destination"`
+	S3Destination *shared.S3Destination `json:"s3Destination,omitempty"`
 }
 
 type PutClassificationExportConfigurationRequestBody struct {

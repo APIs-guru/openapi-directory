@@ -5,9 +5,9 @@ import (
 )
 
 type EventTopic struct {
-	CreatedDateTime *time.Time       `json:"CreatedDateTime"`
-	DirectoryID     *string          `json:"DirectoryId"`
-	Status          *TopicStatusEnum `json:"Status"`
-	TopicArn        *string          `json:"TopicArn"`
-	TopicName       *string          `json:"TopicName"`
+	CreatedDateTime *time.Time       `json:"CreatedDateTime,omitempty"`
+	DirectoryID     *string          `json:"DirectoryId,omitempty"`
+	Status          *TopicStatusEnum `json:"Status,omitempty"`
+	TopicArn        *string          `json:"TopicArn,omitempty"`
+	TopicName       *string          `json:"TopicName,omitempty"`
 }

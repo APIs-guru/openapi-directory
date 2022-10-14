@@ -5,11 +5,11 @@ import (
 )
 
 type ProvisioningArtifactDetail struct {
-	Active      *bool                             `json:"Active"`
-	CreatedTime *time.Time                        `json:"CreatedTime"`
-	Description *string                           `json:"Description"`
-	Guidance    *ProvisioningArtifactGuidanceEnum `json:"Guidance"`
-	ID          *string                           `json:"Id"`
-	Name        *string                           `json:"Name"`
-	Type        *ProvisioningArtifactTypeEnum     `json:"Type"`
+	Active      *bool                             `json:"Active,omitempty"`
+	CreatedTime *time.Time                        `json:"CreatedTime,omitempty"`
+	Description *string                           `json:"Description,omitempty"`
+	Guidance    *ProvisioningArtifactGuidanceEnum `json:"Guidance,omitempty"`
+	ID          *string                           `json:"Id,omitempty"`
+	Name        *string                           `json:"Name,omitempty"`
+	Type        *ProvisioningArtifactTypeEnum     `json:"Type,omitempty"`
 }

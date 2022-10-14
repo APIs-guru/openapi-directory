@@ -1,17 +1,17 @@
 package shared
 
 type MotorcycleBuild struct {
-	BodyType     *string `json:"body_type"`
-	Cylinders    *int64  `json:"cylinders"`
-	Drivetrain   *string `json:"drivetrain"`
-	DryWeight    *string `json:"dry_weight"`
-	Engine       *string `json:"engine"`
-	FuelType     *string `json:"fuel_type"`
-	MadeIn       *string `json:"made_in"`
-	Make         *string `json:"make"`
-	Model        *string `json:"model"`
-	Transmission *string `json:"transmission"`
-	Trim         *string `json:"trim"`
-	VehicleType  *string `json:"vehicle_type"`
-	Year         *int64  `json:"year"`
+	BodyType     *string `json:"body_type,omitempty"`
+	Cylinders    *int64  `json:"cylinders,omitempty"`
+	Drivetrain   *string `json:"drivetrain,omitempty"`
+	DryWeight    *string `json:"dry_weight,omitempty"`
+	Engine       *string `json:"engine,omitempty"`
+	FuelType     *string `json:"fuel_type,omitempty"`
+	MadeIn       *string `json:"made_in,omitempty"`
+	Make         *string `json:"make,omitempty"`
+	Model        *string `json:"model,omitempty"`
+	Transmission *string `json:"transmission,omitempty"`
+	Trim         *string `json:"trim,omitempty"`
+	VehicleType  *string `json:"vehicle_type,omitempty"`
+	Year         *int64  `json:"year,omitempty"`
 }

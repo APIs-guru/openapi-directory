@@ -5,14 +5,14 @@ import (
 )
 
 type LongTermPricingListEntry struct {
-	CurrentActiveJob           *string                  `json:"CurrentActiveJob"`
-	IsLongTermPricingAutoRenew *bool                    `json:"IsLongTermPricingAutoRenew"`
-	JobIds                     []string                 `json:"JobIds"`
-	LongTermPricingEndDate     *time.Time               `json:"LongTermPricingEndDate"`
-	LongTermPricingID          *string                  `json:"LongTermPricingId"`
-	LongTermPricingStartDate   *time.Time               `json:"LongTermPricingStartDate"`
-	LongTermPricingStatus      *string                  `json:"LongTermPricingStatus"`
-	LongTermPricingType        *LongTermPricingTypeEnum `json:"LongTermPricingType"`
-	ReplacementJob             *string                  `json:"ReplacementJob"`
-	SnowballType               *SnowballTypeEnum        `json:"SnowballType"`
+	CurrentActiveJob           *string                  `json:"CurrentActiveJob,omitempty"`
+	IsLongTermPricingAutoRenew *bool                    `json:"IsLongTermPricingAutoRenew,omitempty"`
+	JobIds                     []string                 `json:"JobIds,omitempty"`
+	LongTermPricingEndDate     *time.Time               `json:"LongTermPricingEndDate,omitempty"`
+	LongTermPricingID          *string                  `json:"LongTermPricingId,omitempty"`
+	LongTermPricingStartDate   *time.Time               `json:"LongTermPricingStartDate,omitempty"`
+	LongTermPricingStatus      *string                  `json:"LongTermPricingStatus,omitempty"`
+	LongTermPricingType        *LongTermPricingTypeEnum `json:"LongTermPricingType,omitempty"`
+	ReplacementJob             *string                  `json:"ReplacementJob,omitempty"`
+	SnowballType               *SnowballTypeEnum        `json:"SnowballType,omitempty"`
 }

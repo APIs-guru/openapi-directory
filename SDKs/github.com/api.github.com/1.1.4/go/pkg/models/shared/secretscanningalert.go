@@ -5,14 +5,14 @@ import (
 )
 
 type SecretScanningAlert struct {
-	CreatedAt  *time.Time                    `json:"created_at"`
-	HTMLURL    *string                       `json:"html_url"`
-	Number     *int64                        `json:"number"`
-	Resolution *string                       `json:"resolution"`
-	ResolvedAt *time.Time                    `json:"resolved_at"`
-	ResolvedBy *SimpleUser                   `json:"resolved_by"`
-	Secret     *string                       `json:"secret"`
-	SecretType *string                       `json:"secret_type"`
-	State      *SecretScanningAlertStateEnum `json:"state"`
-	URL        *string                       `json:"url"`
+	CreatedAt  *time.Time                    `json:"created_at,omitempty"`
+	HTMLURL    *string                       `json:"html_url,omitempty"`
+	Number     *int64                        `json:"number,omitempty"`
+	Resolution *string                       `json:"resolution,omitempty"`
+	ResolvedAt *time.Time                    `json:"resolved_at,omitempty"`
+	ResolvedBy *SimpleUser                   `json:"resolved_by,omitempty"`
+	Secret     *string                       `json:"secret,omitempty"`
+	SecretType *string                       `json:"secret_type,omitempty"`
+	State      *SecretScanningAlertStateEnum `json:"state,omitempty"`
+	URL        *string                       `json:"url,omitempty"`
 }

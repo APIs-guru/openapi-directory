@@ -1,8 +1,8 @@
 package shared
 
 type DetectLanguageRequest struct {
-	Content  *string           `json:"content"`
-	Labels   map[string]string `json:"labels"`
-	MimeType *string           `json:"mimeType"`
-	Model    *string           `json:"model"`
+	Content  *string           `json:"content,omitempty"`
+	Labels   map[string]string `json:"labels,omitempty"`
+	MimeType *string           `json:"mimeType,omitempty"`
+	Model    *string           `json:"model,omitempty"`
 }

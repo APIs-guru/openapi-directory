@@ -1,5 +1,5 @@
 package shared
 
 type StartReplicationTaskAssessmentRunResponse struct {
-	ReplicationTaskAssessmentRun *ReplicationTaskAssessmentRun `json:"ReplicationTaskAssessmentRun"`
+	ReplicationTaskAssessmentRun *ReplicationTaskAssessmentRun `json:"ReplicationTaskAssessmentRun,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Roles struct {
-	ID   *int32  `json:"id"`
-	Name *string `json:"name"`
+	ID   *int32  `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }

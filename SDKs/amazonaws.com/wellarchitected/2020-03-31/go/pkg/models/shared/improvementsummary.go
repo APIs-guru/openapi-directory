@@ -1,9 +1,9 @@
 package shared
 
 type ImprovementSummary struct {
-	ImprovementPlanURL *string   `json:"ImprovementPlanUrl"`
-	PillarID           *string   `json:"PillarId"`
-	QuestionID         *string   `json:"QuestionId"`
-	QuestionTitle      *string   `json:"QuestionTitle"`
-	Risk               *RiskEnum `json:"Risk"`
+	ImprovementPlanURL *string   `json:"ImprovementPlanUrl,omitempty"`
+	PillarID           *string   `json:"PillarId,omitempty"`
+	QuestionID         *string   `json:"QuestionId,omitempty"`
+	QuestionTitle      *string   `json:"QuestionTitle,omitempty"`
+	Risk               *RiskEnum `json:"Risk,omitempty"`
 }

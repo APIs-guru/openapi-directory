@@ -1,7 +1,7 @@
 package shared
 
 type Ec2TagFilter struct {
-	Key   *string               `json:"Key"`
-	Type  *Ec2TagFilterTypeEnum `json:"Type"`
-	Value *string               `json:"Value"`
+	Key   *string               `json:"Key,omitempty"`
+	Type  *Ec2TagFilterTypeEnum `json:"Type,omitempty"`
+	Value *string               `json:"Value,omitempty"`
 }

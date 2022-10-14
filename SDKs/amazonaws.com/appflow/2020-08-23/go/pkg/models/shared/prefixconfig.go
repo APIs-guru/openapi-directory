@@ -1,6 +1,6 @@
 package shared
 
 type PrefixConfig struct {
-	PrefixFormat *PrefixFormatEnum `json:"prefixFormat"`
-	PrefixType   *PrefixTypeEnum   `json:"prefixType"`
+	PrefixFormat *PrefixFormatEnum `json:"prefixFormat,omitempty"`
+	PrefixType   *PrefixTypeEnum   `json:"prefixType,omitempty"`
 }

@@ -14,7 +14,7 @@ type UpdateSectionQueryParams struct {
 }
 
 type UpdateSectionRequestBody struct {
-	Data *shared.SectionRequest `json:"data"`
+	Data *shared.SectionRequest `json:"data,omitempty"`
 }
 
 type UpdateSectionRequest struct {
@@ -24,7 +24,7 @@ type UpdateSectionRequest struct {
 }
 
 type UpdateSection200ApplicationJSON struct {
-	Data *shared.SectionResponse `json:"data"`
+	Data *shared.SectionResponse `json:"data,omitempty"`
 }
 
 type UpdateSectionResponse struct {

@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowV2ListIntentsResponse struct {
-	Intents       []GoogleCloudDialogflowV2Intent `json:"intents"`
-	NextPageToken *string                         `json:"nextPageToken"`
+	Intents       []GoogleCloudDialogflowV2Intent `json:"intents,omitempty"`
+	NextPageToken *string                         `json:"nextPageToken,omitempty"`
 }

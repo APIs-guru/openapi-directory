@@ -1,8 +1,8 @@
 package shared
 
 type LandlordProfitLossRowModel struct {
-	MonthTotals []KeyValuePairStringString `json:"MonthTotals"`
-	NominalCode *string                    `json:"NominalCode"`
-	Title       *string                    `json:"Title"`
-	Total       *string                    `json:"Total"`
+	MonthTotals []KeyValuePairStringString `json:"MonthTotals,omitempty"`
+	NominalCode *string                    `json:"NominalCode,omitempty"`
+	Title       *string                    `json:"Title,omitempty"`
+	Total       *string                    `json:"Total,omitempty"`
 }

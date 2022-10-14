@@ -32,23 +32,23 @@ const (
 )
 
 type CreateStageRequestBodyCanarySettings struct {
-	DeploymentID           *string           `json:"deploymentId"`
-	PercentTraffic         *float64          `json:"percentTraffic"`
-	StageVariableOverrides map[string]string `json:"stageVariableOverrides"`
-	UseStageCache          *bool             `json:"useStageCache"`
+	DeploymentID           *string           `json:"deploymentId,omitempty"`
+	PercentTraffic         *float64          `json:"percentTraffic,omitempty"`
+	StageVariableOverrides map[string]string `json:"stageVariableOverrides,omitempty"`
+	UseStageCache          *bool             `json:"useStageCache,omitempty"`
 }
 
 type CreateStageRequestBody struct {
-	CacheClusterEnabled  *bool                                       `json:"cacheClusterEnabled"`
-	CacheClusterSize     *CreateStageRequestBodyCacheClusterSizeEnum `json:"cacheClusterSize"`
-	CanarySettings       *CreateStageRequestBodyCanarySettings       `json:"canarySettings"`
+	CacheClusterEnabled  *bool                                       `json:"cacheClusterEnabled,omitempty"`
+	CacheClusterSize     *CreateStageRequestBodyCacheClusterSizeEnum `json:"cacheClusterSize,omitempty"`
+	CanarySettings       *CreateStageRequestBodyCanarySettings       `json:"canarySettings,omitempty"`
 	DeploymentID         string                                      `json:"deploymentId"`
-	Description          *string                                     `json:"description"`
-	DocumentationVersion *string                                     `json:"documentationVersion"`
+	Description          *string                                     `json:"description,omitempty"`
+	DocumentationVersion *string                                     `json:"documentationVersion,omitempty"`
 	StageName            string                                      `json:"stageName"`
-	Tags                 map[string]string                           `json:"tags"`
-	TracingEnabled       *bool                                       `json:"tracingEnabled"`
-	Variables            map[string]string                           `json:"variables"`
+	Tags                 map[string]string                           `json:"tags,omitempty"`
+	TracingEnabled       *bool                                       `json:"tracingEnabled,omitempty"`
+	Variables            map[string]string                           `json:"variables,omitempty"`
 }
 
 type CreateStageRequest struct {

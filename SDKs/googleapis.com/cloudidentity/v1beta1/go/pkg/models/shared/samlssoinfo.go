@@ -1,5 +1,5 @@
 package shared
 
 type SamlSsoInfo struct {
-	InboundSamlSsoProfile *string `json:"inboundSamlSsoProfile"`
+	InboundSamlSsoProfile *string `json:"inboundSamlSsoProfile,omitempty"`
 }

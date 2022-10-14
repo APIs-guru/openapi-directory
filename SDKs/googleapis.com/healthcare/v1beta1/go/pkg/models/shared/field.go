@@ -1,9 +1,9 @@
 package shared
 
 type Field struct {
-	MaxOccurs *int32  `json:"maxOccurs"`
-	MinOccurs *int32  `json:"minOccurs"`
-	Name      *string `json:"name"`
-	Table     *string `json:"table"`
-	Type      *string `json:"type"`
+	MaxOccurs *int32  `json:"maxOccurs,omitempty"`
+	MinOccurs *int32  `json:"minOccurs,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Table     *string `json:"table,omitempty"`
+	Type      *string `json:"type,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type AnimationFade struct {
-	EndTimeOffset   *string                    `json:"endTimeOffset"`
-	FadeType        *AnimationFadeFadeTypeEnum `json:"fadeType"`
-	StartTimeOffset *string                    `json:"startTimeOffset"`
-	Xy              *NormalizedCoordinate      `json:"xy"`
+	EndTimeOffset   *string                    `json:"endTimeOffset,omitempty"`
+	FadeType        *AnimationFadeFadeTypeEnum `json:"fadeType,omitempty"`
+	StartTimeOffset *string                    `json:"startTimeOffset,omitempty"`
+	Xy              *NormalizedCoordinate      `json:"xy,omitempty"`
 }

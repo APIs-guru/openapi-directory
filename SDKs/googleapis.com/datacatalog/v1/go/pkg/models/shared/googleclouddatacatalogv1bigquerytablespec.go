@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudDatacatalogV1BigQueryTableSpec struct {
-	TableSourceType *GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum `json:"tableSourceType"`
-	TableSpec       *GoogleCloudDatacatalogV1TableSpec                            `json:"tableSpec"`
-	ViewSpec        *GoogleCloudDatacatalogV1ViewSpec                             `json:"viewSpec"`
+	TableSourceType *GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum `json:"tableSourceType,omitempty"`
+	TableSpec       *GoogleCloudDatacatalogV1TableSpec                            `json:"tableSpec,omitempty"`
+	ViewSpec        *GoogleCloudDatacatalogV1ViewSpec                             `json:"viewSpec,omitempty"`
 }

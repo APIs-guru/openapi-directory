@@ -1,7 +1,7 @@
 package shared
 
 type ReplyList struct {
-	Kind          *string `json:"kind"`
-	NextPageToken *string `json:"nextPageToken"`
-	Replies       []Reply `json:"replies"`
+	Kind          *string `json:"kind,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Replies       []Reply `json:"replies,omitempty"`
 }

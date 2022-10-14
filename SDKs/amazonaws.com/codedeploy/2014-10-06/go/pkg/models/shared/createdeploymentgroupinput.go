@@ -1,22 +1,22 @@
 package shared
 
 type CreateDeploymentGroupInput struct {
-	AlarmConfiguration               *AlarmConfiguration               `json:"alarmConfiguration"`
+	AlarmConfiguration               *AlarmConfiguration               `json:"alarmConfiguration,omitempty"`
 	ApplicationName                  string                            `json:"applicationName"`
-	AutoRollbackConfiguration        *AutoRollbackConfiguration        `json:"autoRollbackConfiguration"`
-	AutoScalingGroups                []string                          `json:"autoScalingGroups"`
-	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `json:"blueGreenDeploymentConfiguration"`
-	DeploymentConfigName             *string                           `json:"deploymentConfigName"`
+	AutoRollbackConfiguration        *AutoRollbackConfiguration        `json:"autoRollbackConfiguration,omitempty"`
+	AutoScalingGroups                []string                          `json:"autoScalingGroups,omitempty"`
+	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `json:"blueGreenDeploymentConfiguration,omitempty"`
+	DeploymentConfigName             *string                           `json:"deploymentConfigName,omitempty"`
 	DeploymentGroupName              string                            `json:"deploymentGroupName"`
-	DeploymentStyle                  *DeploymentStyle                  `json:"deploymentStyle"`
-	Ec2TagFilters                    []Ec2TagFilter                    `json:"ec2TagFilters"`
-	Ec2TagSet                        *Ec2TagSet                        `json:"ec2TagSet"`
-	EcsServices                      []EcsService                      `json:"ecsServices"`
-	LoadBalancerInfo                 *LoadBalancerInfo                 `json:"loadBalancerInfo"`
-	OnPremisesInstanceTagFilters     []TagFilter                       `json:"onPremisesInstanceTagFilters"`
-	OnPremisesTagSet                 *OnPremisesTagSet                 `json:"onPremisesTagSet"`
-	OutdatedInstancesStrategy        *OutdatedInstancesStrategyEnum    `json:"outdatedInstancesStrategy"`
+	DeploymentStyle                  *DeploymentStyle                  `json:"deploymentStyle,omitempty"`
+	Ec2TagFilters                    []Ec2TagFilter                    `json:"ec2TagFilters,omitempty"`
+	Ec2TagSet                        *Ec2TagSet                        `json:"ec2TagSet,omitempty"`
+	EcsServices                      []EcsService                      `json:"ecsServices,omitempty"`
+	LoadBalancerInfo                 *LoadBalancerInfo                 `json:"loadBalancerInfo,omitempty"`
+	OnPremisesInstanceTagFilters     []TagFilter                       `json:"onPremisesInstanceTagFilters,omitempty"`
+	OnPremisesTagSet                 *OnPremisesTagSet                 `json:"onPremisesTagSet,omitempty"`
+	OutdatedInstancesStrategy        *OutdatedInstancesStrategyEnum    `json:"outdatedInstancesStrategy,omitempty"`
 	ServiceRoleArn                   string                            `json:"serviceRoleArn"`
-	Tags                             []Tag                             `json:"tags"`
-	TriggerConfigurations            []TriggerConfig                   `json:"triggerConfigurations"`
+	Tags                             []Tag                             `json:"tags,omitempty"`
+	TriggerConfigurations            []TriggerConfig                   `json:"triggerConfigurations,omitempty"`
 }

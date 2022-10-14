@@ -5,9 +5,9 @@ import (
 )
 
 type ExperimentTemplateSummary struct {
-	CreationTime   *time.Time        `json:"creationTime"`
-	Description    *string           `json:"description"`
-	ID             *string           `json:"id"`
-	LastUpdateTime *time.Time        `json:"lastUpdateTime"`
-	Tags           map[string]string `json:"tags"`
+	CreationTime   *time.Time        `json:"creationTime,omitempty"`
+	Description    *string           `json:"description,omitempty"`
+	ID             *string           `json:"id,omitempty"`
+	LastUpdateTime *time.Time        `json:"lastUpdateTime,omitempty"`
+	Tags           map[string]string `json:"tags,omitempty"`
 }

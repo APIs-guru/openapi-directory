@@ -1,6 +1,6 @@
 package shared
 
 type GetIntegrationResponsesResponse struct {
-	Items     []IntegrationResponse `json:"Items"`
-	NextToken *string               `json:"NextToken"`
+	Items     []IntegrationResponse `json:"Items,omitempty"`
+	NextToken *string               `json:"NextToken,omitempty"`
 }

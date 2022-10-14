@@ -1,6 +1,6 @@
 package shared
 
 type ArticleAndParentComment struct {
-	Article       *TextEntry `json:"article"`
-	ParentComment *TextEntry `json:"parentComment"`
+	Article       *TextEntry `json:"article,omitempty"`
+	ParentComment *TextEntry `json:"parentComment,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type LineItemFlight struct {
-	DateRange      *DateRange                        `json:"dateRange"`
-	FlightDateType *LineItemFlightFlightDateTypeEnum `json:"flightDateType"`
+	DateRange      *DateRange                        `json:"dateRange,omitempty"`
+	FlightDateType *LineItemFlightFlightDateTypeEnum `json:"flightDateType,omitempty"`
 }

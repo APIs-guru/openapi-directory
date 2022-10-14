@@ -5,7 +5,7 @@ import (
 )
 
 type GetBooks200ApplicationJSON struct {
-	Data []shared.Book `json:"data"`
+	Data []shared.Book `json:"data,omitempty"`
 }
 
 type GetBooksResponse struct {

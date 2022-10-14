@@ -15,7 +15,7 @@ type GetFindingStatisticsHeaders struct {
 }
 
 type GetFindingStatisticsRequestBodyFindingCriteria struct {
-	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion"`
+	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion,omitempty"`
 }
 
 type GetFindingStatisticsRequestBodyGroupByEnum string
@@ -28,15 +28,15 @@ const (
 )
 
 type GetFindingStatisticsRequestBodySortCriteria struct {
-	AttributeName *shared.FindingStatisticsSortAttributeNameEnum `json:"attributeName"`
-	OrderBy       *shared.OrderByEnum                            `json:"orderBy"`
+	AttributeName *shared.FindingStatisticsSortAttributeNameEnum `json:"attributeName,omitempty"`
+	OrderBy       *shared.OrderByEnum                            `json:"orderBy,omitempty"`
 }
 
 type GetFindingStatisticsRequestBody struct {
-	FindingCriteria *GetFindingStatisticsRequestBodyFindingCriteria `json:"findingCriteria"`
+	FindingCriteria *GetFindingStatisticsRequestBodyFindingCriteria `json:"findingCriteria,omitempty"`
 	GroupBy         GetFindingStatisticsRequestBodyGroupByEnum      `json:"groupBy"`
-	Size            *int64                                          `json:"size"`
-	SortCriteria    *GetFindingStatisticsRequestBodySortCriteria    `json:"sortCriteria"`
+	Size            *int64                                          `json:"size,omitempty"`
+	SortCriteria    *GetFindingStatisticsRequestBodySortCriteria    `json:"sortCriteria,omitempty"`
 }
 
 type GetFindingStatisticsRequest struct {

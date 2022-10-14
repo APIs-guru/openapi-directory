@@ -14,10 +14,10 @@ type RecordConversationPathParams struct {
 
 type RecordConversationRequestBody struct {
 	Action      shared.ActionEnum  `json:"action"`
-	EventMethod *string            `json:"event_method"`
-	EventURL    []string           `json:"event_url"`
-	Format      *shared.FormatEnum `json:"format"`
-	Split       *string            `json:"split"`
+	EventMethod *string            `json:"event_method,omitempty"`
+	EventURL    []string           `json:"event_url,omitempty"`
+	Format      *shared.FormatEnum `json:"format,omitempty"`
+	Split       *string            `json:"split,omitempty"`
 }
 
 type RecordConversationRequest struct {

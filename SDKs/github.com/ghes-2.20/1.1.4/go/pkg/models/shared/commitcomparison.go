@@ -15,7 +15,7 @@ type CommitComparison struct {
 	BehindBy        int64                      `json:"behind_by"`
 	Commits         []Commit                   `json:"commits"`
 	DiffURL         string                     `json:"diff_url"`
-	Files           []DiffEntry                `json:"files"`
+	Files           []DiffEntry                `json:"files,omitempty"`
 	HTMLURL         string                     `json:"html_url"`
 	MergeBaseCommit Commit                     `json:"merge_base_commit"`
 	PatchURL        string                     `json:"patch_url"`

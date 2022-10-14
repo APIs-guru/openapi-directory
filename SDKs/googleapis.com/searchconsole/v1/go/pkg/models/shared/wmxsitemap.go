@@ -13,13 +13,13 @@ const (
 )
 
 type WmxSitemap struct {
-	Contents        []WmxSitemapContent `json:"contents"`
-	Errors          *string             `json:"errors"`
-	IsPending       *bool               `json:"isPending"`
-	IsSitemapsIndex *bool               `json:"isSitemapsIndex"`
-	LastDownloaded  *string             `json:"lastDownloaded"`
-	LastSubmitted   *string             `json:"lastSubmitted"`
-	Path            *string             `json:"path"`
-	Type            *WmxSitemapTypeEnum `json:"type"`
-	Warnings        *string             `json:"warnings"`
+	Contents        []WmxSitemapContent `json:"contents,omitempty"`
+	Errors          *string             `json:"errors,omitempty"`
+	IsPending       *bool               `json:"isPending,omitempty"`
+	IsSitemapsIndex *bool               `json:"isSitemapsIndex,omitempty"`
+	LastDownloaded  *string             `json:"lastDownloaded,omitempty"`
+	LastSubmitted   *string             `json:"lastSubmitted,omitempty"`
+	Path            *string             `json:"path,omitempty"`
+	Type            *WmxSitemapTypeEnum `json:"type,omitempty"`
+	Warnings        *string             `json:"warnings,omitempty"`
 }

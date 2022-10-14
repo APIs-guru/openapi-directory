@@ -1,6 +1,6 @@
 package shared
 
 type RequestBasedSli struct {
-	DistributionCut *DistributionCut `json:"distributionCut"`
-	GoodTotalRatio  *TimeSeriesRatio `json:"goodTotalRatio"`
+	DistributionCut *DistributionCut `json:"distributionCut,omitempty"`
+	GoodTotalRatio  *TimeSeriesRatio `json:"goodTotalRatio,omitempty"`
 }

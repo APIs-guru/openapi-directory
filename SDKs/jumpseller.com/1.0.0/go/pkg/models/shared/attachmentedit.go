@@ -1,5 +1,5 @@
 package shared
 
 type AttachmentEdit struct {
-	Attachment *AttachmentEditFields `json:"attachment"`
+	Attachment *AttachmentEditFields `json:"attachment,omitempty"`
 }

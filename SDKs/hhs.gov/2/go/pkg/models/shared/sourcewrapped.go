@@ -1,7 +1,7 @@
 package shared
 
 type SourceWrapped struct {
-	Callback *string  `json:"callback"`
-	Meta     *Meta    `json:"meta"`
-	Results  []Source `json:"results"`
+	Callback *string  `json:"callback,omitempty"`
+	Meta     *Meta    `json:"meta,omitempty"`
+	Results  []Source `json:"results,omitempty"`
 }

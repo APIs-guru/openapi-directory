@@ -1,7 +1,7 @@
 package shared
 
 type Usage struct {
-	ProducerNotificationChannel *string     `json:"producerNotificationChannel"`
-	Requirements                []string    `json:"requirements"`
-	Rules                       []UsageRule `json:"rules"`
+	ProducerNotificationChannel *string     `json:"producerNotificationChannel,omitempty"`
+	Requirements                []string    `json:"requirements,omitempty"`
+	Rules                       []UsageRule `json:"rules,omitempty"`
 }

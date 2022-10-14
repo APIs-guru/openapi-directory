@@ -1,5 +1,5 @@
 package shared
 
 type TestMetricFilterResponse struct {
-	Matches []MetricFilterMatchRecord `json:"matches"`
+	Matches []MetricFilterMatchRecord `json:"matches,omitempty"`
 }

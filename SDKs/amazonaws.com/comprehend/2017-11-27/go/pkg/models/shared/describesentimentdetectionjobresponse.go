@@ -1,5 +1,5 @@
 package shared
 
 type DescribeSentimentDetectionJobResponse struct {
-	SentimentDetectionJobProperties *SentimentDetectionJobProperties `json:"SentimentDetectionJobProperties"`
+	SentimentDetectionJobProperties *SentimentDetectionJobProperties `json:"SentimentDetectionJobProperties,omitempty"`
 }

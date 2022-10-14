@@ -15,6 +15,6 @@ const (
 )
 
 type ApplicationEvent struct {
-	CreateTime *string                        `json:"createTime"`
-	EventType  *ApplicationEventEventTypeEnum `json:"eventType"`
+	CreateTime *string                        `json:"createTime,omitempty"`
+	EventType  *ApplicationEventEventTypeEnum `json:"eventType,omitempty"`
 }

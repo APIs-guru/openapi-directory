@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudApigeeV1SecurityReportQueryMetric struct {
-	AggregationFunction *string `json:"aggregationFunction"`
-	Alias               *string `json:"alias"`
-	Name                *string `json:"name"`
-	Operator            *string `json:"operator"`
-	Value               *string `json:"value"`
+	AggregationFunction *string `json:"aggregationFunction,omitempty"`
+	Alias               *string `json:"alias,omitempty"`
+	Name                *string `json:"name,omitempty"`
+	Operator            *string `json:"operator,omitempty"`
+	Value               *string `json:"value,omitempty"`
 }

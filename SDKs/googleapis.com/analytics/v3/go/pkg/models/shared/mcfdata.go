@@ -1,58 +1,58 @@
 package shared
 
 type McfDataColumnHeaders struct {
-	ColumnType *string `json:"columnType"`
-	DataType   *string `json:"dataType"`
-	Name       *string `json:"name"`
+	ColumnType *string `json:"columnType,omitempty"`
+	DataType   *string `json:"dataType,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }
 
 type McfDataProfileInfo struct {
-	AccountID             *string `json:"accountId"`
-	InternalWebPropertyID *string `json:"internalWebPropertyId"`
-	ProfileID             *string `json:"profileId"`
-	ProfileName           *string `json:"profileName"`
-	TableID               *string `json:"tableId"`
-	WebPropertyID         *string `json:"webPropertyId"`
+	AccountID             *string `json:"accountId,omitempty"`
+	InternalWebPropertyID *string `json:"internalWebPropertyId,omitempty"`
+	ProfileID             *string `json:"profileId,omitempty"`
+	ProfileName           *string `json:"profileName,omitempty"`
+	TableID               *string `json:"tableId,omitempty"`
+	WebPropertyID         *string `json:"webPropertyId,omitempty"`
 }
 
 type McfDataQuery struct {
-	Dimensions    *string  `json:"dimensions"`
-	EndDate       *string  `json:"end-date"`
-	Filters       *string  `json:"filters"`
-	Ids           *string  `json:"ids"`
-	MaxResults    *int32   `json:"max-results"`
-	Metrics       []string `json:"metrics"`
-	SamplingLevel *string  `json:"samplingLevel"`
-	Segment       *string  `json:"segment"`
-	Sort          []string `json:"sort"`
-	StartDate     *string  `json:"start-date"`
-	StartIndex    *int32   `json:"start-index"`
+	Dimensions    *string  `json:"dimensions,omitempty"`
+	EndDate       *string  `json:"end-date,omitempty"`
+	Filters       *string  `json:"filters,omitempty"`
+	Ids           *string  `json:"ids,omitempty"`
+	MaxResults    *int32   `json:"max-results,omitempty"`
+	Metrics       []string `json:"metrics,omitempty"`
+	SamplingLevel *string  `json:"samplingLevel,omitempty"`
+	Segment       *string  `json:"segment,omitempty"`
+	Sort          []string `json:"sort,omitempty"`
+	StartDate     *string  `json:"start-date,omitempty"`
+	StartIndex    *int32   `json:"start-index,omitempty"`
 }
 
 type McfDataRowsConversionPathValue struct {
-	InteractionType *string `json:"interactionType"`
-	NodeValue       *string `json:"nodeValue"`
+	InteractionType *string `json:"interactionType,omitempty"`
+	NodeValue       *string `json:"nodeValue,omitempty"`
 }
 
 type McfDataRows struct {
-	ConversionPathValue []McfDataRowsConversionPathValue `json:"conversionPathValue"`
-	PrimitiveValue      *string                          `json:"primitiveValue"`
+	ConversionPathValue []McfDataRowsConversionPathValue `json:"conversionPathValue,omitempty"`
+	PrimitiveValue      *string                          `json:"primitiveValue,omitempty"`
 }
 
 type McfData struct {
-	ColumnHeaders       []McfDataColumnHeaders `json:"columnHeaders"`
-	ContainsSampledData *bool                  `json:"containsSampledData"`
-	ID                  *string                `json:"id"`
-	ItemsPerPage        *int32                 `json:"itemsPerPage"`
-	Kind                *string                `json:"kind"`
-	NextLink            *string                `json:"nextLink"`
-	PreviousLink        *string                `json:"previousLink"`
-	ProfileInfo         *McfDataProfileInfo    `json:"profileInfo"`
-	Query               *McfDataQuery          `json:"query"`
-	Rows                [][]McfDataRows        `json:"rows"`
-	SampleSize          *string                `json:"sampleSize"`
-	SampleSpace         *string                `json:"sampleSpace"`
-	SelfLink            *string                `json:"selfLink"`
-	TotalResults        *int32                 `json:"totalResults"`
-	TotalsForAllResults map[string]string      `json:"totalsForAllResults"`
+	ColumnHeaders       []McfDataColumnHeaders `json:"columnHeaders,omitempty"`
+	ContainsSampledData *bool                  `json:"containsSampledData,omitempty"`
+	ID                  *string                `json:"id,omitempty"`
+	ItemsPerPage        *int32                 `json:"itemsPerPage,omitempty"`
+	Kind                *string                `json:"kind,omitempty"`
+	NextLink            *string                `json:"nextLink,omitempty"`
+	PreviousLink        *string                `json:"previousLink,omitempty"`
+	ProfileInfo         *McfDataProfileInfo    `json:"profileInfo,omitempty"`
+	Query               *McfDataQuery          `json:"query,omitempty"`
+	Rows                [][]McfDataRows        `json:"rows,omitempty"`
+	SampleSize          *string                `json:"sampleSize,omitempty"`
+	SampleSpace         *string                `json:"sampleSpace,omitempty"`
+	SelfLink            *string                `json:"selfLink,omitempty"`
+	TotalResults        *int32                 `json:"totalResults,omitempty"`
+	TotalsForAllResults map[string]string      `json:"totalsForAllResults,omitempty"`
 }

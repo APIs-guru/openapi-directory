@@ -1,6 +1,6 @@
 package shared
 
 type CommunicationCostPage struct {
-	Pagination *OffsetInfo         `json:"pagination"`
-	Results    []CommunicationCost `json:"results"`
+	Pagination *OffsetInfo         `json:"pagination,omitempty"`
+	Results    []CommunicationCost `json:"results,omitempty"`
 }

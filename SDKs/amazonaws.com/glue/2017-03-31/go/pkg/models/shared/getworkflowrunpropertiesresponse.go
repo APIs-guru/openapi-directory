@@ -1,5 +1,5 @@
 package shared
 
 type GetWorkflowRunPropertiesResponse struct {
-	RunProperties map[string]string `json:"RunProperties"`
+	RunProperties map[string]string `json:"RunProperties,omitempty"`
 }

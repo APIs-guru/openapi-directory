@@ -1,5 +1,5 @@
 package shared
 
 type StartManualTransferRunsResponse struct {
-	Runs []TransferRun `json:"runs"`
+	Runs []TransferRun `json:"runs,omitempty"`
 }

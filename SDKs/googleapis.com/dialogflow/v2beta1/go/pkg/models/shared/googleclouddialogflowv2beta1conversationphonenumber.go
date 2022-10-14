@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDialogflowV2beta1ConversationPhoneNumber struct {
-	PhoneNumber *string `json:"phoneNumber"`
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
 }

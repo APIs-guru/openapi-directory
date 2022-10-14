@@ -5,9 +5,9 @@ import (
 )
 
 type RefreshSchemasStatus struct {
-	EndpointArn            *string                            `json:"EndpointArn"`
-	LastFailureMessage     *string                            `json:"LastFailureMessage"`
-	LastRefreshDate        *time.Time                         `json:"LastRefreshDate"`
-	ReplicationInstanceArn *string                            `json:"ReplicationInstanceArn"`
-	Status                 *RefreshSchemasStatusTypeValueEnum `json:"Status"`
+	EndpointArn            *string                            `json:"EndpointArn,omitempty"`
+	LastFailureMessage     *string                            `json:"LastFailureMessage,omitempty"`
+	LastRefreshDate        *time.Time                         `json:"LastRefreshDate,omitempty"`
+	ReplicationInstanceArn *string                            `json:"ReplicationInstanceArn,omitempty"`
+	Status                 *RefreshSchemasStatusTypeValueEnum `json:"Status,omitempty"`
 }

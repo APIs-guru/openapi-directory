@@ -1,7 +1,7 @@
 package shared
 
 type NetworkFirewallPolicyModifiedViolation struct {
-	CurrentPolicyDescription  *NetworkFirewallPolicyDescription `json:"CurrentPolicyDescription"`
-	ExpectedPolicyDescription *NetworkFirewallPolicyDescription `json:"ExpectedPolicyDescription"`
-	ViolationTarget           *string                           `json:"ViolationTarget"`
+	CurrentPolicyDescription  *NetworkFirewallPolicyDescription `json:"CurrentPolicyDescription,omitempty"`
+	ExpectedPolicyDescription *NetworkFirewallPolicyDescription `json:"ExpectedPolicyDescription,omitempty"`
+	ViolationTarget           *string                           `json:"ViolationTarget,omitempty"`
 }

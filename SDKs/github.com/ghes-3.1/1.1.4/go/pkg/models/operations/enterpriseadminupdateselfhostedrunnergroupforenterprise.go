@@ -17,8 +17,8 @@ const (
 )
 
 type EnterpriseAdminUpdateSelfHostedRunnerGroupForEnterpriseRequestBody struct {
-	Name       *string                                                                           `json:"name"`
-	Visibility *EnterpriseAdminUpdateSelfHostedRunnerGroupForEnterpriseRequestBodyVisibilityEnum `json:"visibility"`
+	Name       *string                                                                           `json:"name,omitempty"`
+	Visibility *EnterpriseAdminUpdateSelfHostedRunnerGroupForEnterpriseRequestBodyVisibilityEnum `json:"visibility,omitempty"`
 }
 
 type EnterpriseAdminUpdateSelfHostedRunnerGroupForEnterpriseRequest struct {

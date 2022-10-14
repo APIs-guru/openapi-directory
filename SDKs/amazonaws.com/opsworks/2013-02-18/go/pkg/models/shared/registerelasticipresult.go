@@ -1,5 +1,5 @@
 package shared
 
 type RegisterElasticIPResult struct {
-	ElasticIP *string `json:"ElasticIp"`
+	ElasticIP *string `json:"ElasticIp,omitempty"`
 }

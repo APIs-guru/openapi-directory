@@ -14,7 +14,7 @@ type CreateStoryForTaskQueryParams struct {
 }
 
 type CreateStoryForTaskRequestBody struct {
-	Data *shared.StoryRequest `json:"data"`
+	Data *shared.StoryRequest `json:"data,omitempty"`
 }
 
 type CreateStoryForTaskRequest struct {
@@ -24,7 +24,7 @@ type CreateStoryForTaskRequest struct {
 }
 
 type CreateStoryForTask201ApplicationJSON struct {
-	Data *shared.StoryResponse `json:"data"`
+	Data *shared.StoryResponse `json:"data,omitempty"`
 }
 
 type CreateStoryForTaskResponse struct {

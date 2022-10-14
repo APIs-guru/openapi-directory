@@ -5,9 +5,9 @@ import (
 )
 
 type DescribeWorkerConfigurationResponse struct {
-	CreationTime           *time.Time                              `json:"creationTime"`
-	Description            *string                                 `json:"description"`
-	LatestRevision         *WorkerConfigurationRevisionDescription `json:"latestRevision"`
-	Name                   *string                                 `json:"name"`
-	WorkerConfigurationArn *string                                 `json:"workerConfigurationArn"`
+	CreationTime           *time.Time                              `json:"creationTime,omitempty"`
+	Description            *string                                 `json:"description,omitempty"`
+	LatestRevision         *WorkerConfigurationRevisionDescription `json:"latestRevision,omitempty"`
+	Name                   *string                                 `json:"name,omitempty"`
+	WorkerConfigurationArn *string                                 `json:"workerConfigurationArn,omitempty"`
 }

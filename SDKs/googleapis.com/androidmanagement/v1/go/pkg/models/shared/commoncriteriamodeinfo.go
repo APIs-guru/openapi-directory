@@ -9,5 +9,5 @@ const (
 )
 
 type CommonCriteriaModeInfo struct {
-	CommonCriteriaModeStatus *CommonCriteriaModeInfoCommonCriteriaModeStatusEnum `json:"commonCriteriaModeStatus"`
+	CommonCriteriaModeStatus *CommonCriteriaModeInfoCommonCriteriaModeStatusEnum `json:"commonCriteriaModeStatus,omitempty"`
 }

@@ -16,10 +16,10 @@ type GetScreenDataHeaders struct {
 
 type GetScreenDataRequestBody struct {
 	AppID      string                          `json:"appId"`
-	MaxResults *int64                          `json:"maxResults"`
-	NextToken  *string                         `json:"nextToken"`
+	MaxResults *int64                          `json:"maxResults,omitempty"`
+	NextToken  *string                         `json:"nextToken,omitempty"`
 	ScreenID   string                          `json:"screenId"`
-	Variables  map[string]shared.VariableValue `json:"variables"`
+	Variables  map[string]shared.VariableValue `json:"variables,omitempty"`
 	WorkbookID string                          `json:"workbookId"`
 }
 

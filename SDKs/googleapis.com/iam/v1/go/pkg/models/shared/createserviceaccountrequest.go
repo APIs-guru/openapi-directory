@@ -1,6 +1,6 @@
 package shared
 
 type CreateServiceAccountRequest struct {
-	AccountID      *string         `json:"accountId"`
-	ServiceAccount *ServiceAccount `json:"serviceAccount"`
+	AccountID      *string         `json:"accountId,omitempty"`
+	ServiceAccount *ServiceAccount `json:"serviceAccount,omitempty"`
 }

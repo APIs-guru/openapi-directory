@@ -9,11 +9,11 @@ const (
 )
 
 type SortSpec struct {
-	BackgroundColor           *Color                     `json:"backgroundColor"`
-	BackgroundColorStyle      *ColorStyle                `json:"backgroundColorStyle"`
-	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference"`
-	DimensionIndex            *int32                     `json:"dimensionIndex"`
-	ForegroundColor           *Color                     `json:"foregroundColor"`
-	ForegroundColorStyle      *ColorStyle                `json:"foregroundColorStyle"`
-	SortOrder                 *SortSpecSortOrderEnum     `json:"sortOrder"`
+	BackgroundColor           *Color                     `json:"backgroundColor,omitempty"`
+	BackgroundColorStyle      *ColorStyle                `json:"backgroundColorStyle,omitempty"`
+	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference,omitempty"`
+	DimensionIndex            *int32                     `json:"dimensionIndex,omitempty"`
+	ForegroundColor           *Color                     `json:"foregroundColor,omitempty"`
+	ForegroundColorStyle      *ColorStyle                `json:"foregroundColorStyle,omitempty"`
+	SortOrder                 *SortSpecSortOrderEnum     `json:"sortOrder,omitempty"`
 }

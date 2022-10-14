@@ -1,13 +1,13 @@
 package shared
 
 type AwsAPIGatewayRestAPIDetails struct {
-	APIKeySource           *string                             `json:"ApiKeySource"`
-	BinaryMediaTypes       []string                            `json:"BinaryMediaTypes"`
-	CreatedDate            *string                             `json:"CreatedDate"`
-	Description            *string                             `json:"Description"`
-	EndpointConfiguration  *AwsAPIGatewayEndpointConfiguration `json:"EndpointConfiguration"`
-	ID                     *string                             `json:"Id"`
-	MinimumCompressionSize *int64                              `json:"MinimumCompressionSize"`
-	Name                   *string                             `json:"Name"`
-	Version                *string                             `json:"Version"`
+	APIKeySource           *string                             `json:"ApiKeySource,omitempty"`
+	BinaryMediaTypes       []string                            `json:"BinaryMediaTypes,omitempty"`
+	CreatedDate            *string                             `json:"CreatedDate,omitempty"`
+	Description            *string                             `json:"Description,omitempty"`
+	EndpointConfiguration  *AwsAPIGatewayEndpointConfiguration `json:"EndpointConfiguration,omitempty"`
+	ID                     *string                             `json:"Id,omitempty"`
+	MinimumCompressionSize *int64                              `json:"MinimumCompressionSize,omitempty"`
+	Name                   *string                             `json:"Name,omitempty"`
+	Version                *string                             `json:"Version,omitempty"`
 }

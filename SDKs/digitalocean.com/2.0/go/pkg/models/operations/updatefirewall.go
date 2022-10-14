@@ -18,11 +18,11 @@ const (
 )
 
 type UpdateFirewallRequestBodyInboundRulesSources struct {
-	Addresses        []string `json:"addresses"`
-	DropletIds       []int64  `json:"droplet_ids"`
-	KubernetesIds    []string `json:"kubernetes_ids"`
-	LoadBalancerUids []string `json:"load_balancer_uids"`
-	Tags             []string `json:"tags"`
+	Addresses        []string `json:"addresses,omitempty"`
+	DropletIds       []int64  `json:"droplet_ids,omitempty"`
+	KubernetesIds    []string `json:"kubernetes_ids,omitempty"`
+	LoadBalancerUids []string `json:"load_balancer_uids,omitempty"`
+	Tags             []string `json:"tags,omitempty"`
 }
 
 type UpdateFirewallRequestBodyInboundRules struct {
@@ -46,9 +46,9 @@ type UpdateFirewallRequestBodyOutboundRules struct {
 }
 
 type UpdateFirewallRequestBodyPendingChanges struct {
-	DropletID *int64  `json:"droplet_id"`
-	Removing  *bool   `json:"removing"`
-	Status    *string `json:"status"`
+	DropletID *int64  `json:"droplet_id,omitempty"`
+	Removing  *bool   `json:"removing,omitempty"`
+	Status    *string `json:"status,omitempty"`
 }
 
 type UpdateFirewallRequestBodyStatusEnum string
@@ -60,15 +60,15 @@ const (
 )
 
 type UpdateFirewallRequestBody struct {
-	CreatedAt      *time.Time                                `json:"created_at"`
-	DropletIds     []int64                                   `json:"droplet_ids"`
-	ID             *string                                   `json:"id"`
-	InboundRules   []UpdateFirewallRequestBodyInboundRules   `json:"inbound_rules"`
-	Name           *string                                   `json:"name"`
-	OutboundRules  []UpdateFirewallRequestBodyOutboundRules  `json:"outbound_rules"`
-	PendingChanges []UpdateFirewallRequestBodyPendingChanges `json:"pending_changes"`
-	Status         *UpdateFirewallRequestBodyStatusEnum      `json:"status"`
-	Tags           []string                                  `json:"tags"`
+	CreatedAt      *time.Time                                `json:"created_at,omitempty"`
+	DropletIds     []int64                                   `json:"droplet_ids,omitempty"`
+	ID             *string                                   `json:"id,omitempty"`
+	InboundRules   []UpdateFirewallRequestBodyInboundRules   `json:"inbound_rules,omitempty"`
+	Name           *string                                   `json:"name,omitempty"`
+	OutboundRules  []UpdateFirewallRequestBodyOutboundRules  `json:"outbound_rules,omitempty"`
+	PendingChanges []UpdateFirewallRequestBodyPendingChanges `json:"pending_changes,omitempty"`
+	Status         *UpdateFirewallRequestBodyStatusEnum      `json:"status,omitempty"`
+	Tags           []string                                  `json:"tags,omitempty"`
 }
 
 type UpdateFirewallRequest struct {
@@ -79,7 +79,7 @@ type UpdateFirewallRequest struct {
 type UpdateFirewall401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateFirewallResponse struct {

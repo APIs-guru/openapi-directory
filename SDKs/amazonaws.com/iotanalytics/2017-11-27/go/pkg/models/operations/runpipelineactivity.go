@@ -15,16 +15,16 @@ type RunPipelineActivityHeaders struct {
 }
 
 type RunPipelineActivityRequestBodyPipelineActivity struct {
-	AddAttributes        *shared.AddAttributesActivity        `json:"addAttributes"`
-	Channel              *shared.ChannelActivity              `json:"channel"`
-	Datastore            *shared.DatastoreActivity            `json:"datastore"`
-	DeviceRegistryEnrich *shared.DeviceRegistryEnrichActivity `json:"deviceRegistryEnrich"`
-	DeviceShadowEnrich   *shared.DeviceShadowEnrichActivity   `json:"deviceShadowEnrich"`
-	Filter               *shared.FilterActivity               `json:"filter"`
-	Lambda               *shared.LambdaActivity               `json:"lambda"`
-	Math                 *shared.MathActivity                 `json:"math"`
-	RemoveAttributes     *shared.RemoveAttributesActivity     `json:"removeAttributes"`
-	SelectAttributes     *shared.SelectAttributesActivity     `json:"selectAttributes"`
+	AddAttributes        *shared.AddAttributesActivity        `json:"addAttributes,omitempty"`
+	Channel              *shared.ChannelActivity              `json:"channel,omitempty"`
+	Datastore            *shared.DatastoreActivity            `json:"datastore,omitempty"`
+	DeviceRegistryEnrich *shared.DeviceRegistryEnrichActivity `json:"deviceRegistryEnrich,omitempty"`
+	DeviceShadowEnrich   *shared.DeviceShadowEnrichActivity   `json:"deviceShadowEnrich,omitempty"`
+	Filter               *shared.FilterActivity               `json:"filter,omitempty"`
+	Lambda               *shared.LambdaActivity               `json:"lambda,omitempty"`
+	Math                 *shared.MathActivity                 `json:"math,omitempty"`
+	RemoveAttributes     *shared.RemoveAttributesActivity     `json:"removeAttributes,omitempty"`
+	SelectAttributes     *shared.SelectAttributesActivity     `json:"selectAttributes,omitempty"`
 }
 
 type RunPipelineActivityRequestBody struct {

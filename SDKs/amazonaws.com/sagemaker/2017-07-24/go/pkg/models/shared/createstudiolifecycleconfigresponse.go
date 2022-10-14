@@ -1,5 +1,5 @@
 package shared
 
 type CreateStudioLifecycleConfigResponse struct {
-	StudioLifecycleConfigArn *string `json:"StudioLifecycleConfigArn"`
+	StudioLifecycleConfigArn *string `json:"StudioLifecycleConfigArn,omitempty"`
 }

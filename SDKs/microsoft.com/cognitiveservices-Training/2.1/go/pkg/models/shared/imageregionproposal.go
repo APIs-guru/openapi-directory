@@ -1,7 +1,7 @@
 package shared
 
 type ImageRegionProposal struct {
-	ImageID   *string          `json:"imageId"`
-	ProjectID *string          `json:"projectId"`
-	Proposals []RegionProposal `json:"proposals"`
+	ImageID   *string          `json:"imageId,omitempty"`
+	ProjectID *string          `json:"projectId,omitempty"`
+	Proposals []RegionProposal `json:"proposals,omitempty"`
 }

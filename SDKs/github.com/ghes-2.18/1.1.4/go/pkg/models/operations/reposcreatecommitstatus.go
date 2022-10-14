@@ -20,10 +20,10 @@ const (
 )
 
 type ReposCreateCommitStatusRequestBody struct {
-	Context     *string                                     `json:"context"`
-	Description *string                                     `json:"description"`
+	Context     *string                                     `json:"context,omitempty"`
+	Description *string                                     `json:"description,omitempty"`
 	State       ReposCreateCommitStatusRequestBodyStateEnum `json:"state"`
-	TargetURL   *string                                     `json:"target_url"`
+	TargetURL   *string                                     `json:"target_url,omitempty"`
 }
 
 type ReposCreateCommitStatusRequest struct {

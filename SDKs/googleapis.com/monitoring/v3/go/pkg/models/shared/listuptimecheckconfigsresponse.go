@@ -1,7 +1,7 @@
 package shared
 
 type ListUptimeCheckConfigsResponse struct {
-	NextPageToken      *string             `json:"nextPageToken"`
-	TotalSize          *int32              `json:"totalSize"`
-	UptimeCheckConfigs []UptimeCheckConfig `json:"uptimeCheckConfigs"`
+	NextPageToken      *string             `json:"nextPageToken,omitempty"`
+	TotalSize          *int32              `json:"totalSize,omitempty"`
+	UptimeCheckConfigs []UptimeCheckConfig `json:"uptimeCheckConfigs,omitempty"`
 }

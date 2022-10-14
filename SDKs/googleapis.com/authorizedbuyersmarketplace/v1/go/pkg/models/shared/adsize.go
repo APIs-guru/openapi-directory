@@ -11,7 +11,7 @@ const (
 )
 
 type AdSize struct {
-	Height *string         `json:"height"`
-	Type   *AdSizeTypeEnum `json:"type"`
-	Width  *string         `json:"width"`
+	Height *string         `json:"height,omitempty"`
+	Type   *AdSizeTypeEnum `json:"type,omitempty"`
+	Width  *string         `json:"width,omitempty"`
 }

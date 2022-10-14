@@ -1,7 +1,7 @@
 package shared
 
 type CandidateSearch struct {
-	ID           *string `json:"id"`
-	Name         *string `json:"name"`
-	OfficeSought *string `json:"office_sought"`
+	ID           *string `json:"id,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	OfficeSought *string `json:"office_sought,omitempty"`
 }

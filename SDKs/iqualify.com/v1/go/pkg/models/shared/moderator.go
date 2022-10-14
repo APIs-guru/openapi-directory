@@ -1,8 +1,8 @@
 package shared
 
 type Moderator struct {
-	AvatarURL *string `json:"avatarUrl"`
-	FirstName *string `json:"firstName"`
-	ID        *string `json:"id"`
-	LastName  *string `json:"lastName"`
+	AvatarURL *string `json:"avatarUrl,omitempty"`
+	FirstName *string `json:"firstName,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	LastName  *string `json:"lastName,omitempty"`
 }

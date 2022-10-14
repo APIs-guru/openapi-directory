@@ -15,15 +15,15 @@ type GetBucketsAggregationHeaders struct {
 }
 
 type GetBucketsAggregationRequestBodyBucketsAggregationType struct {
-	TermsAggregation *shared.TermsAggregation `json:"termsAggregation"`
+	TermsAggregation *shared.TermsAggregation `json:"termsAggregation,omitempty"`
 }
 
 type GetBucketsAggregationRequestBody struct {
 	AggregationField       string                                                 `json:"aggregationField"`
 	BucketsAggregationType GetBucketsAggregationRequestBodyBucketsAggregationType `json:"bucketsAggregationType"`
-	IndexName              *string                                                `json:"indexName"`
+	IndexName              *string                                                `json:"indexName,omitempty"`
 	QueryString            string                                                 `json:"queryString"`
-	QueryVersion           *string                                                `json:"queryVersion"`
+	QueryVersion           *string                                                `json:"queryVersion,omitempty"`
 }
 
 type GetBucketsAggregationRequest struct {

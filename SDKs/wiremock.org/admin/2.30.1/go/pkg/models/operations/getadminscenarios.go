@@ -1,14 +1,14 @@
 package operations
 
 type GetAdminScenarios200ApplicationJSONScenarios struct {
-	ID             *string  `json:"id"`
-	Name           *string  `json:"name"`
-	PossibleStates []string `json:"possibleStates"`
-	State          *string  `json:"state"`
+	ID             *string  `json:"id,omitempty"`
+	Name           *string  `json:"name,omitempty"`
+	PossibleStates []string `json:"possibleStates,omitempty"`
+	State          *string  `json:"state,omitempty"`
 }
 
 type GetAdminScenarios200ApplicationJSON struct {
-	Scenarios []GetAdminScenarios200ApplicationJSONScenarios `json:"scenarios"`
+	Scenarios []GetAdminScenarios200ApplicationJSONScenarios `json:"scenarios,omitempty"`
 }
 
 type GetAdminScenariosResponse struct {

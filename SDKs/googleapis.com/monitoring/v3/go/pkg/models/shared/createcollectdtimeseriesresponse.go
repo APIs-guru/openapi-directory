@@ -1,6 +1,6 @@
 package shared
 
 type CreateCollectdTimeSeriesResponse struct {
-	PayloadErrors []CollectdPayloadError   `json:"payloadErrors"`
-	Summary       *CreateTimeSeriesSummary `json:"summary"`
+	PayloadErrors []CollectdPayloadError   `json:"payloadErrors,omitempty"`
+	Summary       *CreateTimeSeriesSummary `json:"summary,omitempty"`
 }

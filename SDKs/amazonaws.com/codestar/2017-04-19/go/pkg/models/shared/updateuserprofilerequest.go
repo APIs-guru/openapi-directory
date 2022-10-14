@@ -1,8 +1,8 @@
 package shared
 
 type UpdateUserProfileRequest struct {
-	DisplayName  *string `json:"displayName"`
-	EmailAddress *string `json:"emailAddress"`
-	SSHPublicKey *string `json:"sshPublicKey"`
+	DisplayName  *string `json:"displayName,omitempty"`
+	EmailAddress *string `json:"emailAddress,omitempty"`
+	SSHPublicKey *string `json:"sshPublicKey,omitempty"`
 	UserArn      string  `json:"userArn"`
 }

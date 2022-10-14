@@ -19,12 +19,12 @@ const (
 )
 
 type GoogleCloudBillingBudgetsV1beta1Filter struct {
-	CalendarPeriod       *GoogleCloudBillingBudgetsV1beta1FilterCalendarPeriodEnum       `json:"calendarPeriod"`
-	CreditTypes          []string                                                        `json:"creditTypes"`
-	CreditTypesTreatment *GoogleCloudBillingBudgetsV1beta1FilterCreditTypesTreatmentEnum `json:"creditTypesTreatment"`
-	CustomPeriod         *GoogleCloudBillingBudgetsV1beta1CustomPeriod                   `json:"customPeriod"`
-	Labels               map[string][]interface{}                                        `json:"labels"`
-	Projects             []string                                                        `json:"projects"`
-	Services             []string                                                        `json:"services"`
-	Subaccounts          []string                                                        `json:"subaccounts"`
+	CalendarPeriod       *GoogleCloudBillingBudgetsV1beta1FilterCalendarPeriodEnum       `json:"calendarPeriod,omitempty"`
+	CreditTypes          []string                                                        `json:"creditTypes,omitempty"`
+	CreditTypesTreatment *GoogleCloudBillingBudgetsV1beta1FilterCreditTypesTreatmentEnum `json:"creditTypesTreatment,omitempty"`
+	CustomPeriod         *GoogleCloudBillingBudgetsV1beta1CustomPeriod                   `json:"customPeriod,omitempty"`
+	Labels               map[string][]interface{}                                        `json:"labels,omitempty"`
+	Projects             []string                                                        `json:"projects,omitempty"`
+	Services             []string                                                        `json:"services,omitempty"`
+	Subaccounts          []string                                                        `json:"subaccounts,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CloudWorkspaceSourceContext struct {
-	SnapshotID  *string           `json:"snapshotId"`
-	WorkspaceID *CloudWorkspaceID `json:"workspaceId"`
+	SnapshotID  *string           `json:"snapshotId,omitempty"`
+	WorkspaceID *CloudWorkspaceID `json:"workspaceId,omitempty"`
 }

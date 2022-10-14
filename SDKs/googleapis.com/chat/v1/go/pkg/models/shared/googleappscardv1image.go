@@ -1,7 +1,7 @@
 package shared
 
 type GoogleAppsCardV1Image struct {
-	AltText  *string                  `json:"altText"`
-	ImageURL *string                  `json:"imageUrl"`
-	OnClick  *GoogleAppsCardV1OnClick `json:"onClick"`
+	AltText  *string                  `json:"altText,omitempty"`
+	ImageURL *string                  `json:"imageUrl,omitempty"`
+	OnClick  *GoogleAppsCardV1OnClick `json:"onClick,omitempty"`
 }

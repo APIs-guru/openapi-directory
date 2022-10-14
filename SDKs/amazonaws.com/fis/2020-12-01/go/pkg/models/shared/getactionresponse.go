@@ -1,5 +1,5 @@
 package shared
 
 type GetActionResponse struct {
-	Action *Action `json:"action"`
+	Action *Action `json:"action,omitempty"`
 }

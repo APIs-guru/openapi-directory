@@ -1,16 +1,16 @@
 package operations
 
 type AllMocks200ApplicationJSONMocks struct {
-	Collection  *string `json:"collection"`
-	Environment *string `json:"environment"`
-	ID          *string `json:"id"`
-	MockURL     *string `json:"mockUrl"`
-	Owner       *string `json:"owner"`
-	UID         *string `json:"uid"`
+	Collection  *string `json:"collection,omitempty"`
+	Environment *string `json:"environment,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	MockURL     *string `json:"mockUrl,omitempty"`
+	Owner       *string `json:"owner,omitempty"`
+	UID         *string `json:"uid,omitempty"`
 }
 
 type AllMocks200ApplicationJSON struct {
-	Mocks []AllMocks200ApplicationJSONMocks `json:"mocks"`
+	Mocks []AllMocks200ApplicationJSONMocks `json:"mocks,omitempty"`
 }
 
 type AllMocksResponse struct {

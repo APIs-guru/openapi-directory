@@ -5,17 +5,17 @@ type UpdateMonitorPathParams struct {
 }
 
 type UpdateMonitorRequestBodyMonitorSchedule struct {
-	Cron     *string `json:"cron"`
-	Timezone *string `json:"timezone"`
+	Cron     *string `json:"cron,omitempty"`
+	Timezone *string `json:"timezone,omitempty"`
 }
 
 type UpdateMonitorRequestBodyMonitor struct {
-	Name     *string                                  `json:"name"`
-	Schedule *UpdateMonitorRequestBodyMonitorSchedule `json:"schedule"`
+	Name     *string                                  `json:"name,omitempty"`
+	Schedule *UpdateMonitorRequestBodyMonitorSchedule `json:"schedule,omitempty"`
 }
 
 type UpdateMonitorRequestBody struct {
-	Monitor *UpdateMonitorRequestBodyMonitor `json:"monitor"`
+	Monitor *UpdateMonitorRequestBodyMonitor `json:"monitor,omitempty"`
 }
 
 type UpdateMonitorRequest struct {
@@ -24,13 +24,13 @@ type UpdateMonitorRequest struct {
 }
 
 type UpdateMonitor200ApplicationJSONMonitor struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type UpdateMonitor200ApplicationJSON struct {
-	Monitor *UpdateMonitor200ApplicationJSONMonitor `json:"monitor"`
+	Monitor *UpdateMonitor200ApplicationJSONMonitor `json:"monitor,omitempty"`
 }
 
 type UpdateMonitorResponse struct {

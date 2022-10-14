@@ -23,13 +23,13 @@ const (
 )
 
 type Component struct {
-	Cls       *ComponentClsEnum `json:"cls"`
-	DataIndex *string           `json:"dataIndex"`
-	Height    *float64          `json:"height"`
-	ID        *string           `json:"id"`
-	Left      *float64          `json:"left"`
-	Top       *float64          `json:"top"`
-	Value     *string           `json:"value"`
-	Width     *float64          `json:"width"`
-	Zindex    *int64            `json:"zindex"`
+	Cls       *ComponentClsEnum `json:"cls,omitempty"`
+	DataIndex *string           `json:"dataIndex,omitempty"`
+	Height    *float64          `json:"height,omitempty"`
+	ID        *string           `json:"id,omitempty"`
+	Left      *float64          `json:"left,omitempty"`
+	Top       *float64          `json:"top,omitempty"`
+	Value     *string           `json:"value,omitempty"`
+	Width     *float64          `json:"width,omitempty"`
+	Zindex    *int64            `json:"zindex,omitempty"`
 }

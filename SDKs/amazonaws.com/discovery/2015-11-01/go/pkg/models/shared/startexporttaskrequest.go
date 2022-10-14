@@ -5,8 +5,8 @@ import (
 )
 
 type StartExportTaskRequest struct {
-	EndTime          *time.Time             `json:"endTime"`
-	ExportDataFormat []ExportDataFormatEnum `json:"exportDataFormat"`
-	Filters          []ExportFilter         `json:"filters"`
-	StartTime        *time.Time             `json:"startTime"`
+	EndTime          *time.Time             `json:"endTime,omitempty"`
+	ExportDataFormat []ExportDataFormatEnum `json:"exportDataFormat,omitempty"`
+	Filters          []ExportFilter         `json:"filters,omitempty"`
+	StartTime        *time.Time             `json:"startTime,omitempty"`
 }

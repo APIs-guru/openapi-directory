@@ -1,7 +1,7 @@
 package shared
 
 type UserProfileList struct {
-	Etag  *string       `json:"etag"`
-	Items []UserProfile `json:"items"`
-	Kind  *string       `json:"kind"`
+	Etag  *string       `json:"etag,omitempty"`
+	Items []UserProfile `json:"items,omitempty"`
+	Kind  *string       `json:"kind,omitempty"`
 }

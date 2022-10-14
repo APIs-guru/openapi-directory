@@ -1,9 +1,9 @@
 package shared
 
 type Endpoint struct {
-	Address     *string           `json:"address"`
-	Annotations map[string]string `json:"annotations"`
-	Name        *string           `json:"name"`
-	Network     *string           `json:"network"`
-	Port        *int32            `json:"port"`
+	Address     *string           `json:"address,omitempty"`
+	Annotations map[string]string `json:"annotations,omitempty"`
+	Name        *string           `json:"name,omitempty"`
+	Network     *string           `json:"network,omitempty"`
+	Port        *int32            `json:"port,omitempty"`
 }

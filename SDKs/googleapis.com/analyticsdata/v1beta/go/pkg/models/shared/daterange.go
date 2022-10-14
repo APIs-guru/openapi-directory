@@ -1,7 +1,7 @@
 package shared
 
 type DateRange struct {
-	EndDate   *string `json:"endDate"`
-	Name      *string `json:"name"`
-	StartDate *string `json:"startDate"`
+	EndDate   *string `json:"endDate,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	StartDate *string `json:"startDate,omitempty"`
 }

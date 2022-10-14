@@ -2,7 +2,7 @@ package shared
 
 type UpdateAcceleratorRequest struct {
 	AcceleratorArn string             `json:"AcceleratorArn"`
-	Enabled        *bool              `json:"Enabled"`
-	IPAddressType  *IPAddressTypeEnum `json:"IpAddressType"`
-	Name           *string            `json:"Name"`
+	Enabled        *bool              `json:"Enabled,omitempty"`
+	IPAddressType  *IPAddressTypeEnum `json:"IpAddressType,omitempty"`
+	Name           *string            `json:"Name,omitempty"`
 }

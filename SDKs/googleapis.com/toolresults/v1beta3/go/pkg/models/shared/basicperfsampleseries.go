@@ -40,7 +40,7 @@ const (
 )
 
 type BasicPerfSampleSeries struct {
-	PerfMetricType    *BasicPerfSampleSeriesPerfMetricTypeEnum    `json:"perfMetricType"`
-	PerfUnit          *BasicPerfSampleSeriesPerfUnitEnum          `json:"perfUnit"`
-	SampleSeriesLabel *BasicPerfSampleSeriesSampleSeriesLabelEnum `json:"sampleSeriesLabel"`
+	PerfMetricType    *BasicPerfSampleSeriesPerfMetricTypeEnum    `json:"perfMetricType,omitempty"`
+	PerfUnit          *BasicPerfSampleSeriesPerfUnitEnum          `json:"perfUnit,omitempty"`
+	SampleSeriesLabel *BasicPerfSampleSeriesSampleSeriesLabelEnum `json:"sampleSeriesLabel,omitempty"`
 }

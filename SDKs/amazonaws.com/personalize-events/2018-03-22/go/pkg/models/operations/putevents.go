@@ -18,7 +18,7 @@ type PutEventsRequestBody struct {
 	EventList  []shared.Event `json:"eventList"`
 	SessionID  string         `json:"sessionId"`
 	TrackingID string         `json:"trackingId"`
-	UserID     *string        `json:"userId"`
+	UserID     *string        `json:"userId,omitempty"`
 }
 
 type PutEventsRequest struct {

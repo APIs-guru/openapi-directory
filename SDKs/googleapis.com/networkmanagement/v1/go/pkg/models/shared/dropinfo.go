@@ -32,6 +32,6 @@ const (
 )
 
 type DropInfo struct {
-	Cause       *DropInfoCauseEnum `json:"cause"`
-	ResourceURI *string            `json:"resourceUri"`
+	Cause       *DropInfoCauseEnum `json:"cause,omitempty"`
+	ResourceURI *string            `json:"resourceUri,omitempty"`
 }

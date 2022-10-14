@@ -15,18 +15,18 @@ type UpdateSamplingRuleHeaders struct {
 }
 
 type UpdateSamplingRuleRequestBodySamplingRuleUpdate struct {
-	Attributes    map[string]string `json:"Attributes"`
-	FixedRate     *float64          `json:"FixedRate"`
-	HTTPMethod    *string           `json:"HTTPMethod"`
-	Host          *string           `json:"Host"`
-	Priority      *int64            `json:"Priority"`
-	ReservoirSize *int64            `json:"ReservoirSize"`
-	ResourceArn   *string           `json:"ResourceARN"`
-	RuleArn       *string           `json:"RuleARN"`
-	RuleName      *string           `json:"RuleName"`
-	ServiceName   *string           `json:"ServiceName"`
-	ServiceType   *string           `json:"ServiceType"`
-	URLPath       *string           `json:"URLPath"`
+	Attributes    map[string]string `json:"Attributes,omitempty"`
+	FixedRate     *float64          `json:"FixedRate,omitempty"`
+	HTTPMethod    *string           `json:"HTTPMethod,omitempty"`
+	Host          *string           `json:"Host,omitempty"`
+	Priority      *int64            `json:"Priority,omitempty"`
+	ReservoirSize *int64            `json:"ReservoirSize,omitempty"`
+	ResourceArn   *string           `json:"ResourceARN,omitempty"`
+	RuleArn       *string           `json:"RuleARN,omitempty"`
+	RuleName      *string           `json:"RuleName,omitempty"`
+	ServiceName   *string           `json:"ServiceName,omitempty"`
+	ServiceType   *string           `json:"ServiceType,omitempty"`
+	URLPath       *string           `json:"URLPath,omitempty"`
 }
 
 type UpdateSamplingRuleRequestBody struct {

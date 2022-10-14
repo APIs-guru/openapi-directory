@@ -19,7 +19,7 @@ type PutBackupPolicyHeaders struct {
 }
 
 type PutBackupPolicyRequestBodyBackupPolicy struct {
-	Status *shared.StatusEnum `json:"Status"`
+	Status *shared.StatusEnum `json:"Status,omitempty"`
 }
 
 type PutBackupPolicyRequestBody struct {

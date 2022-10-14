@@ -8,8 +8,8 @@ const (
 )
 
 type NewDeviceEvent struct {
-	DeviceID       *string                           `json:"deviceId"`
-	DpcPackageName *string                           `json:"dpcPackageName"`
-	ManagementType *NewDeviceEventManagementTypeEnum `json:"managementType"`
-	UserID         *string                           `json:"userId"`
+	DeviceID       *string                           `json:"deviceId,omitempty"`
+	DpcPackageName *string                           `json:"dpcPackageName,omitempty"`
+	ManagementType *NewDeviceEventManagementTypeEnum `json:"managementType,omitempty"`
+	UserID         *string                           `json:"userId,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ListPaymentsResponse struct {
-	Cursor   *string   `json:"cursor"`
-	Errors   []Error   `json:"errors"`
-	Payments []Payment `json:"payments"`
+	Cursor   *string   `json:"cursor,omitempty"`
+	Errors   []Error   `json:"errors,omitempty"`
+	Payments []Payment `json:"payments,omitempty"`
 }

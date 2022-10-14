@@ -24,9 +24,9 @@ const (
 
 type QuoteFxSummaryV3 struct {
 	CreationTime       time.Time                         `json:"creationTime"`
-	ExpiryTime         *time.Time                        `json:"expiryTime"`
+	ExpiryTime         *time.Time                        `json:"expiryTime,omitempty"`
 	FundingStatus      QuoteFxSummaryV3FundingStatusEnum `json:"fundingStatus"`
-	InvertedRate       *float32                          `json:"invertedRate"`
+	InvertedRate       *float32                          `json:"invertedRate,omitempty"`
 	PaymentCurrency    string                            `json:"paymentCurrency"`
 	QuoteID            string                            `json:"quoteId"`
 	Rate               float32                           `json:"rate"`

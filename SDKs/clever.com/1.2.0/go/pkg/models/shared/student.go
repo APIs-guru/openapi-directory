@@ -59,24 +59,24 @@ const (
 )
 
 type Student struct {
-	Created           *string                       `json:"created"`
-	Credentials       *Credentials                  `json:"credentials"`
-	District          *string                       `json:"district"`
-	Dob               *string                       `json:"dob"`
-	EllStatus         *StudentEllStatusEnum         `json:"ell_status"`
-	Email             *string                       `json:"email"`
-	Gender            *StudentGenderEnum            `json:"gender"`
-	Grade             *StudentGradeEnum             `json:"grade"`
-	GraduationYear    *string                       `json:"graduation_year"`
-	HispanicEthnicity *StudentHispanicEthnicityEnum `json:"hispanic_ethnicity"`
-	ID                *string                       `json:"id"`
-	LastModified      *string                       `json:"last_modified"`
-	Location          *Location                     `json:"location"`
-	Name              *Name                         `json:"name"`
-	Race              *StudentRaceEnum              `json:"race"`
-	School            *string                       `json:"school"`
-	Schools           []string                      `json:"schools"`
-	SisID             *string                       `json:"sis_id"`
-	StateID           *string                       `json:"state_id"`
-	StudentNumber     *string                       `json:"student_number"`
+	Created           *string                       `json:"created,omitempty"`
+	Credentials       *Credentials                  `json:"credentials,omitempty"`
+	District          *string                       `json:"district,omitempty"`
+	Dob               *string                       `json:"dob,omitempty"`
+	EllStatus         *StudentEllStatusEnum         `json:"ell_status,omitempty"`
+	Email             *string                       `json:"email,omitempty"`
+	Gender            *StudentGenderEnum            `json:"gender,omitempty"`
+	Grade             *StudentGradeEnum             `json:"grade,omitempty"`
+	GraduationYear    *string                       `json:"graduation_year,omitempty"`
+	HispanicEthnicity *StudentHispanicEthnicityEnum `json:"hispanic_ethnicity,omitempty"`
+	ID                *string                       `json:"id,omitempty"`
+	LastModified      *string                       `json:"last_modified,omitempty"`
+	Location          *Location                     `json:"location,omitempty"`
+	Name              *Name                         `json:"name,omitempty"`
+	Race              *StudentRaceEnum              `json:"race,omitempty"`
+	School            *string                       `json:"school,omitempty"`
+	Schools           []string                      `json:"schools,omitempty"`
+	SisID             *string                       `json:"sis_id,omitempty"`
+	StateID           *string                       `json:"state_id,omitempty"`
+	StudentNumber     *string                       `json:"student_number,omitempty"`
 }

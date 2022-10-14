@@ -1,7 +1,7 @@
 package shared
 
 type LiveTvInfo struct {
-	EnabledUsers []string            `json:"EnabledUsers"`
-	IsEnabled    *bool               `json:"IsEnabled"`
-	Services     []LiveTvServiceInfo `json:"Services"`
+	EnabledUsers []string            `json:"EnabledUsers,omitempty"`
+	IsEnabled    *bool               `json:"IsEnabled,omitempty"`
+	Services     []LiveTvServiceInfo `json:"Services,omitempty"`
 }

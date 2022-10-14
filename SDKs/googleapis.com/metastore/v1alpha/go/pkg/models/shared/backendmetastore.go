@@ -9,6 +9,6 @@ const (
 )
 
 type BackendMetastore struct {
-	MetastoreType *BackendMetastoreMetastoreTypeEnum `json:"metastoreType"`
-	Name          *string                            `json:"name"`
+	MetastoreType *BackendMetastoreMetastoreTypeEnum `json:"metastoreType,omitempty"`
+	Name          *string                            `json:"name,omitempty"`
 }

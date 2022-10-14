@@ -1,7 +1,7 @@
 package shared
 
 type DimensionKeyDetail struct {
-	Dimension *string           `json:"Dimension"`
-	Status    *DetailStatusEnum `json:"Status"`
-	Value     *string           `json:"Value"`
+	Dimension *string           `json:"Dimension,omitempty"`
+	Status    *DetailStatusEnum `json:"Status,omitempty"`
+	Value     *string           `json:"Value,omitempty"`
 }

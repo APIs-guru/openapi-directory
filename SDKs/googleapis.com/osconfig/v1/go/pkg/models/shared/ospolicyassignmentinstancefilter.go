@@ -1,8 +1,8 @@
 package shared
 
 type OsPolicyAssignmentInstanceFilter struct {
-	All             *bool                                       `json:"all"`
-	ExclusionLabels []OsPolicyAssignmentLabelSet                `json:"exclusionLabels"`
-	InclusionLabels []OsPolicyAssignmentLabelSet                `json:"inclusionLabels"`
-	Inventories     []OsPolicyAssignmentInstanceFilterInventory `json:"inventories"`
+	All             *bool                                       `json:"all,omitempty"`
+	ExclusionLabels []OsPolicyAssignmentLabelSet                `json:"exclusionLabels,omitempty"`
+	InclusionLabels []OsPolicyAssignmentLabelSet                `json:"inclusionLabels,omitempty"`
+	Inventories     []OsPolicyAssignmentInstanceFilterInventory `json:"inventories,omitempty"`
 }

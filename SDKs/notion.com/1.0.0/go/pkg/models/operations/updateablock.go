@@ -5,20 +5,20 @@ type UpdateABlockPathParams struct {
 }
 
 type UpdateABlockRequestBodyParagraphTextText struct {
-	Content *string `json:"content"`
+	Content *string `json:"content,omitempty"`
 }
 
 type UpdateABlockRequestBodyParagraphText struct {
-	Text *UpdateABlockRequestBodyParagraphTextText `json:"text"`
-	Type *string                                   `json:"type"`
+	Text *UpdateABlockRequestBodyParagraphTextText `json:"text,omitempty"`
+	Type *string                                   `json:"type,omitempty"`
 }
 
 type UpdateABlockRequestBodyParagraph struct {
-	Text []UpdateABlockRequestBodyParagraphText `json:"text"`
+	Text []UpdateABlockRequestBodyParagraphText `json:"text,omitempty"`
 }
 
 type UpdateABlockRequestBody struct {
-	Paragraph *UpdateABlockRequestBodyParagraph `json:"paragraph"`
+	Paragraph *UpdateABlockRequestBodyParagraph `json:"paragraph,omitempty"`
 }
 
 type UpdateABlockRequest struct {
@@ -27,39 +27,39 @@ type UpdateABlockRequest struct {
 }
 
 type UpdateABlock200ApplicationJSONParagraphTextAnnotations struct {
-	Bold          *bool   `json:"bold"`
-	Code          *bool   `json:"code"`
-	Color         *string `json:"color"`
-	Italic        *bool   `json:"italic"`
-	Strikethrough *bool   `json:"strikethrough"`
-	Underline     *bool   `json:"underline"`
+	Bold          *bool   `json:"bold,omitempty"`
+	Code          *bool   `json:"code,omitempty"`
+	Color         *string `json:"color,omitempty"`
+	Italic        *bool   `json:"italic,omitempty"`
+	Strikethrough *bool   `json:"strikethrough,omitempty"`
+	Underline     *bool   `json:"underline,omitempty"`
 }
 
 type UpdateABlock200ApplicationJSONParagraphTextText struct {
-	Content *string      `json:"content"`
-	Link    *interface{} `json:"link"`
+	Content *string      `json:"content,omitempty"`
+	Link    *interface{} `json:"link,omitempty"`
 }
 
 type UpdateABlock200ApplicationJSONParagraphText struct {
-	Annotations *UpdateABlock200ApplicationJSONParagraphTextAnnotations `json:"annotations"`
-	Href        *interface{}                                            `json:"href"`
-	PlainText   *string                                                 `json:"plain_text"`
-	Text        *UpdateABlock200ApplicationJSONParagraphTextText        `json:"text"`
-	Type        *string                                                 `json:"type"`
+	Annotations *UpdateABlock200ApplicationJSONParagraphTextAnnotations `json:"annotations,omitempty"`
+	Href        *interface{}                                            `json:"href,omitempty"`
+	PlainText   *string                                                 `json:"plain_text,omitempty"`
+	Text        *UpdateABlock200ApplicationJSONParagraphTextText        `json:"text,omitempty"`
+	Type        *string                                                 `json:"type,omitempty"`
 }
 
 type UpdateABlock200ApplicationJSONParagraph struct {
-	Text []UpdateABlock200ApplicationJSONParagraphText `json:"text"`
+	Text []UpdateABlock200ApplicationJSONParagraphText `json:"text,omitempty"`
 }
 
 type UpdateABlock200ApplicationJSON struct {
-	CreatedTime    *string                                  `json:"created_time"`
-	HasChildren    *bool                                    `json:"has_children"`
-	ID             *string                                  `json:"id"`
-	LastEditedTime *string                                  `json:"last_edited_time"`
-	Object         *string                                  `json:"object"`
-	Paragraph      *UpdateABlock200ApplicationJSONParagraph `json:"paragraph"`
-	Type           *string                                  `json:"type"`
+	CreatedTime    *string                                  `json:"created_time,omitempty"`
+	HasChildren    *bool                                    `json:"has_children,omitempty"`
+	ID             *string                                  `json:"id,omitempty"`
+	LastEditedTime *string                                  `json:"last_edited_time,omitempty"`
+	Object         *string                                  `json:"object,omitempty"`
+	Paragraph      *UpdateABlock200ApplicationJSONParagraph `json:"paragraph,omitempty"`
+	Type           *string                                  `json:"type,omitempty"`
 }
 
 type UpdateABlockResponse struct {

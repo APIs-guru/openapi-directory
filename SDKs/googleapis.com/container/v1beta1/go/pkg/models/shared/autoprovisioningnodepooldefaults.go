@@ -1,14 +1,14 @@
 package shared
 
 type AutoprovisioningNodePoolDefaults struct {
-	BootDiskKmsKey         *string                 `json:"bootDiskKmsKey"`
-	DiskSizeGb             *int32                  `json:"diskSizeGb"`
-	DiskType               *string                 `json:"diskType"`
-	ImageType              *string                 `json:"imageType"`
-	Management             *NodeManagement         `json:"management"`
-	MinCPUPlatform         *string                 `json:"minCpuPlatform"`
-	OauthScopes            []string                `json:"oauthScopes"`
-	ServiceAccount         *string                 `json:"serviceAccount"`
-	ShieldedInstanceConfig *ShieldedInstanceConfig `json:"shieldedInstanceConfig"`
-	UpgradeSettings        *UpgradeSettings        `json:"upgradeSettings"`
+	BootDiskKmsKey         *string                 `json:"bootDiskKmsKey,omitempty"`
+	DiskSizeGb             *int32                  `json:"diskSizeGb,omitempty"`
+	DiskType               *string                 `json:"diskType,omitempty"`
+	ImageType              *string                 `json:"imageType,omitempty"`
+	Management             *NodeManagement         `json:"management,omitempty"`
+	MinCPUPlatform         *string                 `json:"minCpuPlatform,omitempty"`
+	OauthScopes            []string                `json:"oauthScopes,omitempty"`
+	ServiceAccount         *string                 `json:"serviceAccount,omitempty"`
+	ShieldedInstanceConfig *ShieldedInstanceConfig `json:"shieldedInstanceConfig,omitempty"`
+	UpgradeSettings        *UpgradeSettings        `json:"upgradeSettings,omitempty"`
 }

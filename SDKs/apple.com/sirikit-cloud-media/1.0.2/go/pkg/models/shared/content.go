@@ -1,10 +1,10 @@
 package shared
 
 type Content struct {
-	Attributes *ContentAttributes `json:"attributes"`
-	Control    *string            `json:"control"`
+	Attributes *ContentAttributes `json:"attributes,omitempty"`
+	Control    *string            `json:"control,omitempty"`
 	Identifier string             `json:"identifier"`
-	IsLive     *bool              `json:"isLive"`
-	PlayIndex  *int64             `json:"playIndex"`
-	URL        *string            `json:"url"`
+	IsLive     *bool              `json:"isLive,omitempty"`
+	PlayIndex  *int64             `json:"playIndex,omitempty"`
+	URL        *string            `json:"url,omitempty"`
 }

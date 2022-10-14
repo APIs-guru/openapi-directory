@@ -19,7 +19,7 @@ type UpdateAPIKeyHeaders struct {
 }
 
 type UpdateAPIKeyRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateAPIKeyRequest struct {

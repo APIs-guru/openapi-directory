@@ -10,17 +10,17 @@ type OrgsUpdateWebhookPathParams struct {
 }
 
 type OrgsUpdateWebhookRequestBodyConfig struct {
-	ContentType *string      `json:"content_type"`
-	InsecureSsl *interface{} `json:"insecure_ssl"`
-	Secret      *string      `json:"secret"`
+	ContentType *string      `json:"content_type,omitempty"`
+	InsecureSsl *interface{} `json:"insecure_ssl,omitempty"`
+	Secret      *string      `json:"secret,omitempty"`
 	URL         string       `json:"url"`
 }
 
 type OrgsUpdateWebhookRequestBody struct {
-	Active *bool                               `json:"active"`
-	Config *OrgsUpdateWebhookRequestBodyConfig `json:"config"`
-	Events []string                            `json:"events"`
-	Name   *string                             `json:"name"`
+	Active *bool                               `json:"active,omitempty"`
+	Config *OrgsUpdateWebhookRequestBodyConfig `json:"config,omitempty"`
+	Events []string                            `json:"events,omitempty"`
+	Name   *string                             `json:"name,omitempty"`
 }
 
 type OrgsUpdateWebhookRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type AddressVerificationData struct {
-	Address      *PostalAddress `json:"address"`
-	BusinessName *string        `json:"businessName"`
+	Address      *PostalAddress `json:"address,omitempty"`
+	BusinessName *string        `json:"businessName,omitempty"`
 }

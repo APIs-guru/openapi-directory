@@ -1,6 +1,6 @@
 package shared
 
 type FailedSubmission struct {
-	FailedSubmission *FailedPayee `json:"failedSubmission"`
-	FailureMessage   *string      `json:"failureMessage"`
+	FailedSubmission *FailedPayee `json:"failedSubmission,omitempty"`
+	FailureMessage   *string      `json:"failureMessage,omitempty"`
 }

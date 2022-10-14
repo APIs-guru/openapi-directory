@@ -1,6 +1,6 @@
 package shared
 
 type DailyVisits struct {
-	Date   *string `json:"date"`
-	Visits *int64  `json:"visits"`
+	Date   *string `json:"date,omitempty"`
+	Visits *int64  `json:"visits,omitempty"`
 }

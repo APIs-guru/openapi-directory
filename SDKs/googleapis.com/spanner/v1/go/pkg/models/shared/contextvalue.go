@@ -11,8 +11,8 @@ const (
 )
 
 type ContextValue struct {
-	Label    *LocalizedString          `json:"label"`
-	Severity *ContextValueSeverityEnum `json:"severity"`
-	Unit     *string                   `json:"unit"`
-	Value    *float32                  `json:"value"`
+	Label    *LocalizedString          `json:"label,omitempty"`
+	Severity *ContextValueSeverityEnum `json:"severity,omitempty"`
+	Unit     *string                   `json:"unit,omitempty"`
+	Value    *float32                  `json:"value,omitempty"`
 }

@@ -24,18 +24,18 @@ type CreateRouteHeaders struct {
 }
 
 type CreateRouteRequestBodySpec struct {
-	GrpcRoute  *shared.GrpcRoute `json:"grpcRoute"`
-	Http2Route *shared.HTTPRoute `json:"http2Route"`
-	HTTPRoute  *shared.HTTPRoute `json:"httpRoute"`
-	Priority   *int64            `json:"priority"`
-	TCPRoute   *shared.TCPRoute  `json:"tcpRoute"`
+	GrpcRoute  *shared.GrpcRoute `json:"grpcRoute,omitempty"`
+	Http2Route *shared.HTTPRoute `json:"http2Route,omitempty"`
+	HTTPRoute  *shared.HTTPRoute `json:"httpRoute,omitempty"`
+	Priority   *int64            `json:"priority,omitempty"`
+	TCPRoute   *shared.TCPRoute  `json:"tcpRoute,omitempty"`
 }
 
 type CreateRouteRequestBody struct {
-	ClientToken *string                    `json:"clientToken"`
+	ClientToken *string                    `json:"clientToken,omitempty"`
 	RouteName   string                     `json:"routeName"`
 	Spec        CreateRouteRequestBodySpec `json:"spec"`
-	Tags        []shared.TagRef            `json:"tags"`
+	Tags        []shared.TagRef            `json:"tags,omitempty"`
 }
 
 type CreateRouteRequest struct {

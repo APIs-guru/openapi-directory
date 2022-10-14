@@ -7,7 +7,7 @@ type CreateLicenseRequest struct {
 	Entitlements             []Entitlement            `json:"Entitlements"`
 	HomeRegion               string                   `json:"HomeRegion"`
 	Issuer                   Issuer                   `json:"Issuer"`
-	LicenseMetadata          []Metadata               `json:"LicenseMetadata"`
+	LicenseMetadata          []Metadata               `json:"LicenseMetadata,omitempty"`
 	LicenseName              string                   `json:"LicenseName"`
 	ProductName              string                   `json:"ProductName"`
 	ProductSku               string                   `json:"ProductSKU"`

@@ -5,8 +5,8 @@ import (
 )
 
 type SentimentDetectionJobFilter struct {
-	JobName          *string        `json:"JobName"`
-	JobStatus        *JobStatusEnum `json:"JobStatus"`
-	SubmitTimeAfter  *time.Time     `json:"SubmitTimeAfter"`
-	SubmitTimeBefore *time.Time     `json:"SubmitTimeBefore"`
+	JobName          *string        `json:"JobName,omitempty"`
+	JobStatus        *JobStatusEnum `json:"JobStatus,omitempty"`
+	SubmitTimeAfter  *time.Time     `json:"SubmitTimeAfter,omitempty"`
+	SubmitTimeBefore *time.Time     `json:"SubmitTimeBefore,omitempty"`
 }

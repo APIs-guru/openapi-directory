@@ -35,14 +35,14 @@ const (
 )
 
 type InvoiceRecurringAPIModel struct {
-	DayOfMonth        *int32                                         `json:"DayOfMonth"`
-	DayOfWeek         *InvoiceRecurringAPIModelDayOfWeekEnum         `json:"DayOfWeek"`
-	DueDateInDays     *int32                                         `json:"DueDateInDays"`
-	EndOfRecurrance   *time.Time                                     `json:"EndOfRecurrance"`
-	Month             *int32                                         `json:"Month"`
-	RecurrancePattern *InvoiceRecurringAPIModelRecurrancePatternEnum `json:"RecurrancePattern"`
-	RecurranceValue   *int32                                         `json:"RecurranceValue"`
-	StartOfRecurrance *time.Time                                     `json:"StartOfRecurrance"`
-	Status            *InvoiceRecurringAPIModelStatusEnum            `json:"Status"`
-	Title             *string                                        `json:"Title"`
+	DayOfMonth        *int32                                         `json:"DayOfMonth,omitempty"`
+	DayOfWeek         *InvoiceRecurringAPIModelDayOfWeekEnum         `json:"DayOfWeek,omitempty"`
+	DueDateInDays     *int32                                         `json:"DueDateInDays,omitempty"`
+	EndOfRecurrance   *time.Time                                     `json:"EndOfRecurrance,omitempty"`
+	Month             *int32                                         `json:"Month,omitempty"`
+	RecurrancePattern *InvoiceRecurringAPIModelRecurrancePatternEnum `json:"RecurrancePattern,omitempty"`
+	RecurranceValue   *int32                                         `json:"RecurranceValue,omitempty"`
+	StartOfRecurrance *time.Time                                     `json:"StartOfRecurrance,omitempty"`
+	Status            *InvoiceRecurringAPIModelStatusEnum            `json:"Status,omitempty"`
+	Title             *string                                        `json:"Title,omitempty"`
 }

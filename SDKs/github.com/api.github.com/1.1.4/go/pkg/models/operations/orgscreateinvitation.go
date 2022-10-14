@@ -17,10 +17,10 @@ const (
 )
 
 type OrgsCreateInvitationRequestBody struct {
-	Email     *string                                  `json:"email"`
-	InviteeID *int64                                   `json:"invitee_id"`
-	Role      *OrgsCreateInvitationRequestBodyRoleEnum `json:"role"`
-	TeamIds   []int64                                  `json:"team_ids"`
+	Email     *string                                  `json:"email,omitempty"`
+	InviteeID *int64                                   `json:"invitee_id,omitempty"`
+	Role      *OrgsCreateInvitationRequestBodyRoleEnum `json:"role,omitempty"`
+	TeamIds   []int64                                  `json:"team_ids,omitempty"`
 }
 
 type OrgsCreateInvitationRequest struct {

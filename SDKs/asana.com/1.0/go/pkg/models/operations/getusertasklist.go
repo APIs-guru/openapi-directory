@@ -19,7 +19,7 @@ type GetUserTaskListRequest struct {
 }
 
 type GetUserTaskList200ApplicationJSON struct {
-	Data *shared.UserTaskListResponse `json:"data"`
+	Data *shared.UserTaskListResponse `json:"data,omitempty"`
 }
 
 type GetUserTaskListResponse struct {

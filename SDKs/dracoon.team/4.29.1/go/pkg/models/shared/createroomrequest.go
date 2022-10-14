@@ -12,18 +12,18 @@ const (
 )
 
 type CreateRoomRequest struct {
-	AdminGroupIds             []int64                                        `json:"adminGroupIds"`
-	AdminIds                  []int64                                        `json:"adminIds"`
-	Classification            *int32                                         `json:"classification"`
-	HasActivitiesLog          *bool                                          `json:"hasActivitiesLog"`
-	HasRecycleBin             *bool                                          `json:"hasRecycleBin"`
-	InheritPermissions        *bool                                          `json:"inheritPermissions"`
+	AdminGroupIds             []int64                                        `json:"adminGroupIds,omitempty"`
+	AdminIds                  []int64                                        `json:"adminIds,omitempty"`
+	Classification            *int32                                         `json:"classification,omitempty"`
+	HasActivitiesLog          *bool                                          `json:"hasActivitiesLog,omitempty"`
+	HasRecycleBin             *bool                                          `json:"hasRecycleBin,omitempty"`
+	InheritPermissions        *bool                                          `json:"inheritPermissions,omitempty"`
 	Name                      string                                         `json:"name"`
-	NewGroupMemberAcceptance  *CreateRoomRequestNewGroupMemberAcceptanceEnum `json:"newGroupMemberAcceptance"`
-	Notes                     *string                                        `json:"notes"`
-	ParentID                  *int64                                         `json:"parentId"`
-	Quota                     *int64                                         `json:"quota"`
-	RecycleBinRetentionPeriod *int32                                         `json:"recycleBinRetentionPeriod"`
-	TimestampCreation         *time.Time                                     `json:"timestampCreation"`
-	TimestampModification     *time.Time                                     `json:"timestampModification"`
+	NewGroupMemberAcceptance  *CreateRoomRequestNewGroupMemberAcceptanceEnum `json:"newGroupMemberAcceptance,omitempty"`
+	Notes                     *string                                        `json:"notes,omitempty"`
+	ParentID                  *int64                                         `json:"parentId,omitempty"`
+	Quota                     *int64                                         `json:"quota,omitempty"`
+	RecycleBinRetentionPeriod *int32                                         `json:"recycleBinRetentionPeriod,omitempty"`
+	TimestampCreation         *time.Time                                     `json:"timestampCreation,omitempty"`
+	TimestampModification     *time.Time                                     `json:"timestampModification,omitempty"`
 }

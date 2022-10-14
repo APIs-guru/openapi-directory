@@ -1,6 +1,6 @@
 package shared
 
 type ListConstraint struct {
-	SuggestedValue *string `json:"suggestedValue"`
-	SupportsUnder  *bool   `json:"supportsUnder"`
+	SuggestedValue *string `json:"suggestedValue,omitempty"`
+	SupportsUnder  *bool   `json:"supportsUnder,omitempty"`
 }

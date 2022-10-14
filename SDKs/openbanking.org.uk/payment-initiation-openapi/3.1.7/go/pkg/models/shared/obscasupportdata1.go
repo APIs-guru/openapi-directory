@@ -20,7 +20,7 @@ const (
 )
 
 type ObscaSupportData1 struct {
-	AppliedAuthenticationApproach *ObscaSupportData1AppliedAuthenticationApproachEnum `json:"AppliedAuthenticationApproach"`
-	ReferencePaymentOrderID       *string                                             `json:"ReferencePaymentOrderId"`
-	RequestedScaExemptionType     *ObscaSupportData1RequestedScaExemptionTypeEnum     `json:"RequestedSCAExemptionType"`
+	AppliedAuthenticationApproach *ObscaSupportData1AppliedAuthenticationApproachEnum `json:"AppliedAuthenticationApproach,omitempty"`
+	ReferencePaymentOrderID       *string                                             `json:"ReferencePaymentOrderId,omitempty"`
+	RequestedScaExemptionType     *ObscaSupportData1RequestedScaExemptionTypeEnum     `json:"RequestedSCAExemptionType,omitempty"`
 }

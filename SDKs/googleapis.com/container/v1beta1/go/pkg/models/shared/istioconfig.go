@@ -8,6 +8,6 @@ const (
 )
 
 type IstioConfig struct {
-	Auth     *IstioConfigAuthEnum `json:"auth"`
-	Disabled *bool                `json:"disabled"`
+	Auth     *IstioConfigAuthEnum `json:"auth,omitempty"`
+	Disabled *bool                `json:"disabled,omitempty"`
 }

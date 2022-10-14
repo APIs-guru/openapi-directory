@@ -1,9 +1,9 @@
 package shared
 
 type Page struct {
-	Blocks     []Block       `json:"blocks"`
-	Confidence *float32      `json:"confidence"`
-	Height     *int32        `json:"height"`
-	Property   *TextProperty `json:"property"`
-	Width      *int32        `json:"width"`
+	Blocks     []Block       `json:"blocks,omitempty"`
+	Confidence *float32      `json:"confidence,omitempty"`
+	Height     *int32        `json:"height,omitempty"`
+	Property   *TextProperty `json:"property,omitempty"`
+	Width      *int32        `json:"width,omitempty"`
 }

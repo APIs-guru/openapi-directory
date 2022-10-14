@@ -14,9 +14,9 @@ type PatchChargeStationRequest struct {
 }
 
 type PatchChargeStation200ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type PatchChargeStationResponse struct {

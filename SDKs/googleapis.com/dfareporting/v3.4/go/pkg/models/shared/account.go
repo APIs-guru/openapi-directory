@@ -21,23 +21,23 @@ const (
 )
 
 type Account struct {
-	AccountPermissionIds    []string                       `json:"accountPermissionIds"`
-	AccountProfile          *AccountAccountProfileEnum     `json:"accountProfile"`
-	Active                  *bool                          `json:"active"`
-	ActiveAdsLimitTier      *AccountActiveAdsLimitTierEnum `json:"activeAdsLimitTier"`
-	ActiveViewOptOut        *bool                          `json:"activeViewOptOut"`
-	AvailablePermissionIds  []string                       `json:"availablePermissionIds"`
-	CountryID               *string                        `json:"countryId"`
-	CurrencyID              *string                        `json:"currencyId"`
-	DefaultCreativeSizeID   *string                        `json:"defaultCreativeSizeId"`
-	Description             *string                        `json:"description"`
-	ID                      *string                        `json:"id"`
-	Kind                    *string                        `json:"kind"`
-	Locale                  *string                        `json:"locale"`
-	MaximumImageSize        *string                        `json:"maximumImageSize"`
-	Name                    *string                        `json:"name"`
-	NielsenOcrEnabled       *bool                          `json:"nielsenOcrEnabled"`
-	ReportsConfiguration    *ReportsConfiguration          `json:"reportsConfiguration"`
-	ShareReportsWithTwitter *bool                          `json:"shareReportsWithTwitter"`
-	TeaserSizeLimit         *string                        `json:"teaserSizeLimit"`
+	AccountPermissionIds    []string                       `json:"accountPermissionIds,omitempty"`
+	AccountProfile          *AccountAccountProfileEnum     `json:"accountProfile,omitempty"`
+	Active                  *bool                          `json:"active,omitempty"`
+	ActiveAdsLimitTier      *AccountActiveAdsLimitTierEnum `json:"activeAdsLimitTier,omitempty"`
+	ActiveViewOptOut        *bool                          `json:"activeViewOptOut,omitempty"`
+	AvailablePermissionIds  []string                       `json:"availablePermissionIds,omitempty"`
+	CountryID               *string                        `json:"countryId,omitempty"`
+	CurrencyID              *string                        `json:"currencyId,omitempty"`
+	DefaultCreativeSizeID   *string                        `json:"defaultCreativeSizeId,omitempty"`
+	Description             *string                        `json:"description,omitempty"`
+	ID                      *string                        `json:"id,omitempty"`
+	Kind                    *string                        `json:"kind,omitempty"`
+	Locale                  *string                        `json:"locale,omitempty"`
+	MaximumImageSize        *string                        `json:"maximumImageSize,omitempty"`
+	Name                    *string                        `json:"name,omitempty"`
+	NielsenOcrEnabled       *bool                          `json:"nielsenOcrEnabled,omitempty"`
+	ReportsConfiguration    *ReportsConfiguration          `json:"reportsConfiguration,omitempty"`
+	ShareReportsWithTwitter *bool                          `json:"shareReportsWithTwitter,omitempty"`
+	TeaserSizeLimit         *string                        `json:"teaserSizeLimit,omitempty"`
 }

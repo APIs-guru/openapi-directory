@@ -1,6 +1,6 @@
 package shared
 
 type RetrieveSnippetResponse struct {
-	Errors  []Error  `json:"errors"`
-	Snippet *Snippet `json:"snippet"`
+	Errors  []Error  `json:"errors,omitempty"`
+	Snippet *Snippet `json:"snippet,omitempty"`
 }

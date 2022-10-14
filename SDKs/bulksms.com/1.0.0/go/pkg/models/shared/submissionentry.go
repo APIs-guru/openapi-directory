@@ -26,7 +26,7 @@ const (
 )
 
 type SubmissionEntryFrom struct {
-	Address *string                     `json:"address"`
+	Address *string                     `json:"address,omitempty"`
 	Type    SubmissionEntryFromTypeEnum `json:"type"`
 }
 
@@ -73,22 +73,22 @@ const (
 )
 
 type SubmissionEntryTo struct {
-	Address *string                    `json:"address"`
-	Fields  []string                   `json:"fields"`
-	ID      *string                    `json:"id"`
-	Name    *string                    `json:"name"`
-	Type    *SubmissionEntryToTypeEnum `json:"type"`
+	Address *string                    `json:"address,omitempty"`
+	Fields  []string                   `json:"fields,omitempty"`
+	ID      *string                    `json:"id,omitempty"`
+	Name    *string                    `json:"name,omitempty"`
+	Type    *SubmissionEntryToTypeEnum `json:"type,omitempty"`
 }
 
 type SubmissionEntry struct {
 	Body                string                              `json:"body"`
-	DeliveryReports     *SubmissionEntryDeliveryReportsEnum `json:"deliveryReports"`
-	Encoding            *SubmissionEntryEncodingEnum        `json:"encoding"`
-	From                *SubmissionEntryFrom                `json:"from"`
-	LongMessageMaxParts *int32                              `json:"longMessageMaxParts"`
-	MessageClass        *SubmissionEntryMessageClassEnum    `json:"messageClass"`
-	ProtocolID          *SubmissionEntryProtocolIDEnum      `json:"protocolId"`
-	RoutingGroup        *SubmissionEntryRoutingGroupEnum    `json:"routingGroup"`
+	DeliveryReports     *SubmissionEntryDeliveryReportsEnum `json:"deliveryReports,omitempty"`
+	Encoding            *SubmissionEntryEncodingEnum        `json:"encoding,omitempty"`
+	From                *SubmissionEntryFrom                `json:"from,omitempty"`
+	LongMessageMaxParts *int32                              `json:"longMessageMaxParts,omitempty"`
+	MessageClass        *SubmissionEntryMessageClassEnum    `json:"messageClass,omitempty"`
+	ProtocolID          *SubmissionEntryProtocolIDEnum      `json:"protocolId,omitempty"`
+	RoutingGroup        *SubmissionEntryRoutingGroupEnum    `json:"routingGroup,omitempty"`
 	To                  []SubmissionEntryTo                 `json:"to"`
-	UserSuppliedID      *string                             `json:"userSuppliedId"`
+	UserSuppliedID      *string                             `json:"userSuppliedId,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type OwnerReference struct {
-	APIVersion         *string `json:"apiVersion"`
-	BlockOwnerDeletion *bool   `json:"blockOwnerDeletion"`
-	Controller         *bool   `json:"controller"`
-	Kind               *string `json:"kind"`
-	Name               *string `json:"name"`
-	UID                *string `json:"uid"`
+	APIVersion         *string `json:"apiVersion,omitempty"`
+	BlockOwnerDeletion *bool   `json:"blockOwnerDeletion,omitempty"`
+	Controller         *bool   `json:"controller,omitempty"`
+	Kind               *string `json:"kind,omitempty"`
+	Name               *string `json:"name,omitempty"`
+	UID                *string `json:"uid,omitempty"`
 }

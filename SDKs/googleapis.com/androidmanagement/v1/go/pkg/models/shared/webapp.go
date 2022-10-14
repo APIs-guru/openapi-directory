@@ -10,10 +10,10 @@ const (
 )
 
 type WebApp struct {
-	DisplayMode *WebAppDisplayModeEnum `json:"displayMode"`
-	Icons       []WebAppIcon           `json:"icons"`
-	Name        *string                `json:"name"`
-	StartURL    *string                `json:"startUrl"`
-	Title       *string                `json:"title"`
-	VersionCode *string                `json:"versionCode"`
+	DisplayMode *WebAppDisplayModeEnum `json:"displayMode,omitempty"`
+	Icons       []WebAppIcon           `json:"icons,omitempty"`
+	Name        *string                `json:"name,omitempty"`
+	StartURL    *string                `json:"startUrl,omitempty"`
+	Title       *string                `json:"title,omitempty"`
+	VersionCode *string                `json:"versionCode,omitempty"`
 }

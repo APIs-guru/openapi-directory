@@ -1,7 +1,7 @@
 package shared
 
 type KinesisDataStreamDestination struct {
-	DestinationStatus            *DestinationStatusEnum `json:"DestinationStatus"`
-	DestinationStatusDescription *string                `json:"DestinationStatusDescription"`
-	StreamArn                    *string                `json:"StreamArn"`
+	DestinationStatus            *DestinationStatusEnum `json:"DestinationStatus,omitempty"`
+	DestinationStatusDescription *string                `json:"DestinationStatusDescription,omitempty"`
+	StreamArn                    *string                `json:"StreamArn,omitempty"`
 }

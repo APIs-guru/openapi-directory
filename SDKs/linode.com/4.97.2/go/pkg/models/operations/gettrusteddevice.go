@@ -27,7 +27,7 @@ type GetTrustedDeviceRequest struct {
 }
 
 type GetTrustedDeviceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetTrustedDeviceResponse struct {

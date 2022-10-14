@@ -1,9 +1,9 @@
 package shared
 
 type BudgetSummary struct {
-	ExternalBudgetID   *string        `json:"externalBudgetId"`
-	PreTaxAmountMicros *string        `json:"preTaxAmountMicros"`
-	PrismaCpeCode      *PrismaCpeCode `json:"prismaCpeCode"`
-	TaxAmountMicros    *string        `json:"taxAmountMicros"`
-	TotalAmountMicros  *string        `json:"totalAmountMicros"`
+	ExternalBudgetID   *string        `json:"externalBudgetId,omitempty"`
+	PreTaxAmountMicros *string        `json:"preTaxAmountMicros,omitempty"`
+	PrismaCpeCode      *PrismaCpeCode `json:"prismaCpeCode,omitempty"`
+	TaxAmountMicros    *string        `json:"taxAmountMicros,omitempty"`
+	TotalAmountMicros  *string        `json:"totalAmountMicros,omitempty"`
 }

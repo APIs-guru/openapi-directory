@@ -15,10 +15,10 @@ type CreateFleetHeaders struct {
 }
 
 type CreateFleetRequestBody struct {
-	DisplayName                *string           `json:"DisplayName"`
+	DisplayName                *string           `json:"DisplayName,omitempty"`
 	FleetName                  string            `json:"FleetName"`
-	OptimizeForEndUserLocation *bool             `json:"OptimizeForEndUserLocation"`
-	Tags                       map[string]string `json:"Tags"`
+	OptimizeForEndUserLocation *bool             `json:"OptimizeForEndUserLocation,omitempty"`
+	Tags                       map[string]string `json:"Tags,omitempty"`
 }
 
 type CreateFleetRequest struct {

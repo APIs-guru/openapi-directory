@@ -1,6 +1,6 @@
 package shared
 
 type SearchOrdersQuery struct {
-	Filter *SearchOrdersFilter `json:"filter"`
-	Sort   *SearchOrdersSort   `json:"sort"`
+	Filter *SearchOrdersFilter `json:"filter,omitempty"`
+	Sort   *SearchOrdersSort   `json:"sort,omitempty"`
 }

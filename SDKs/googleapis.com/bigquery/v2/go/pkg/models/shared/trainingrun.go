@@ -1,14 +1,14 @@
 package shared
 
 type TrainingRun struct {
-	ClassLevelGlobalExplanations []GlobalExplanation `json:"classLevelGlobalExplanations"`
-	DataSplitResult              *DataSplitResult    `json:"dataSplitResult"`
-	EvaluationMetrics            *EvaluationMetrics  `json:"evaluationMetrics"`
-	ModelLevelGlobalExplanation  *GlobalExplanation  `json:"modelLevelGlobalExplanation"`
-	Results                      []IterationResult   `json:"results"`
-	StartTime                    *string             `json:"startTime"`
-	TrainingOptions              *TrainingOptions    `json:"trainingOptions"`
-	TrainingStartTime            *string             `json:"trainingStartTime"`
-	VertexAiModelID              *string             `json:"vertexAiModelId"`
-	VertexAiModelVersion         *string             `json:"vertexAiModelVersion"`
+	ClassLevelGlobalExplanations []GlobalExplanation `json:"classLevelGlobalExplanations,omitempty"`
+	DataSplitResult              *DataSplitResult    `json:"dataSplitResult,omitempty"`
+	EvaluationMetrics            *EvaluationMetrics  `json:"evaluationMetrics,omitempty"`
+	ModelLevelGlobalExplanation  *GlobalExplanation  `json:"modelLevelGlobalExplanation,omitempty"`
+	Results                      []IterationResult   `json:"results,omitempty"`
+	StartTime                    *string             `json:"startTime,omitempty"`
+	TrainingOptions              *TrainingOptions    `json:"trainingOptions,omitempty"`
+	TrainingStartTime            *string             `json:"trainingStartTime,omitempty"`
+	VertexAiModelID              *string             `json:"vertexAiModelId,omitempty"`
+	VertexAiModelVersion         *string             `json:"vertexAiModelVersion,omitempty"`
 }

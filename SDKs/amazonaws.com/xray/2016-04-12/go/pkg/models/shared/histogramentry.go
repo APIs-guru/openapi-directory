@@ -1,6 +1,6 @@
 package shared
 
 type HistogramEntry struct {
-	Count *int64   `json:"Count"`
-	Value *float64 `json:"Value"`
+	Count *int64   `json:"Count,omitempty"`
+	Value *float64 `json:"Value,omitempty"`
 }

@@ -37,17 +37,17 @@ type ListDropletBackups200ApplicationJSONBackups struct {
 }
 
 type ListDropletBackups200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListDropletBackups200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListDropletBackups200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListDropletBackups200ApplicationJSONMeta struct {
@@ -55,15 +55,15 @@ type ListDropletBackups200ApplicationJSONMeta struct {
 }
 
 type ListDropletBackups200ApplicationJSON struct {
-	Backups []ListDropletBackups200ApplicationJSONBackups `json:"backups"`
-	Links   *ListDropletBackups200ApplicationJSONLinks    `json:"links"`
+	Backups []ListDropletBackups200ApplicationJSONBackups `json:"backups,omitempty"`
+	Links   *ListDropletBackups200ApplicationJSONLinks    `json:"links,omitempty"`
 	Meta    ListDropletBackups200ApplicationJSONMeta      `json:"meta"`
 }
 
 type ListDropletBackups401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListDropletBackupsResponse struct {

@@ -11,7 +11,7 @@ type NodesDraftRegistrationsCreatePathParams struct {
 type NodesDraftRegistrationsCreateRequestBodyAttributesAttributes struct {
 	DatetimeInitiated      time.Time `json:"datetime_initiated"`
 	DatetimeUpdated        time.Time `json:"datetime_updated"`
-	RegistrationMetadata   *string   `json:"registration_metadata"`
+	RegistrationMetadata   *string   `json:"registration_metadata,omitempty"`
 	RegistrationSupplement string    `json:"registration_supplement"`
 }
 

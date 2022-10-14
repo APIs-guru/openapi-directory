@@ -32,13 +32,13 @@ const (
 )
 
 type Proto2FieldDescriptorProto struct {
-	DefaultValue   *string                              `json:"defaultValue"`
-	JSONName       *string                              `json:"jsonName"`
-	Label          *Proto2FieldDescriptorProtoLabelEnum `json:"label"`
-	Name           *string                              `json:"name"`
-	Number         *int32                               `json:"number"`
-	OneofIndex     *int32                               `json:"oneofIndex"`
-	Proto3Optional *bool                                `json:"proto3Optional"`
-	Type           *Proto2FieldDescriptorProtoTypeEnum  `json:"type"`
-	TypeName       *string                              `json:"typeName"`
+	DefaultValue   *string                              `json:"defaultValue,omitempty"`
+	JSONName       *string                              `json:"jsonName,omitempty"`
+	Label          *Proto2FieldDescriptorProtoLabelEnum `json:"label,omitempty"`
+	Name           *string                              `json:"name,omitempty"`
+	Number         *int32                               `json:"number,omitempty"`
+	OneofIndex     *int32                               `json:"oneofIndex,omitempty"`
+	Proto3Optional *bool                                `json:"proto3Optional,omitempty"`
+	Type           *Proto2FieldDescriptorProtoTypeEnum  `json:"type,omitempty"`
+	TypeName       *string                              `json:"typeName,omitempty"`
 }

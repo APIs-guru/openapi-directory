@@ -11,6 +11,6 @@ const (
 )
 
 type UpdatePageElementsZOrderRequest struct {
-	Operation            *UpdatePageElementsZOrderRequestOperationEnum `json:"operation"`
-	PageElementObjectIds []string                                      `json:"pageElementObjectIds"`
+	Operation            *UpdatePageElementsZOrderRequestOperationEnum `json:"operation,omitempty"`
+	PageElementObjectIds []string                                      `json:"pageElementObjectIds,omitempty"`
 }

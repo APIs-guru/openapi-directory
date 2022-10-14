@@ -1,8 +1,8 @@
 package shared
 
 type WorkflowExecutionTerminatedEventAttributes struct {
-	Cause       *WorkflowExecutionTerminatedCauseEnum `json:"cause"`
+	Cause       *WorkflowExecutionTerminatedCauseEnum `json:"cause,omitempty"`
 	ChildPolicy ChildPolicyEnum                       `json:"childPolicy"`
-	Details     *string                               `json:"details"`
-	Reason      *string                               `json:"reason"`
+	Details     *string                               `json:"details,omitempty"`
+	Reason      *string                               `json:"reason,omitempty"`
 }

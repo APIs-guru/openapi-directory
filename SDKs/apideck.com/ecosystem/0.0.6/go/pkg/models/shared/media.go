@@ -8,10 +8,10 @@ const (
 )
 
 type Media struct {
-	Caption      *string        `json:"caption"`
-	ID           *string        `json:"id"`
-	Sequence     *int64         `json:"sequence"`
-	Translations []Translation  `json:"translations"`
-	Type         *MediaTypeEnum `json:"type"`
+	Caption      *string        `json:"caption,omitempty"`
+	ID           *string        `json:"id,omitempty"`
+	Sequence     *int64         `json:"sequence,omitempty"`
+	Translations []Translation  `json:"translations,omitempty"`
+	Type         *MediaTypeEnum `json:"type,omitempty"`
 	URL          string         `json:"url"`
 }

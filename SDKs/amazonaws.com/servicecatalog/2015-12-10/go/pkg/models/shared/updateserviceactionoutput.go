@@ -1,5 +1,5 @@
 package shared
 
 type UpdateServiceActionOutput struct {
-	ServiceActionDetail *ServiceActionDetail `json:"ServiceActionDetail"`
+	ServiceActionDetail *ServiceActionDetail `json:"ServiceActionDetail,omitempty"`
 }

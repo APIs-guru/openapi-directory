@@ -1,5 +1,5 @@
 package shared
 
 type DocumentMetadata struct {
-	Pages *int64 `json:"Pages"`
+	Pages *int64 `json:"Pages,omitempty"`
 }

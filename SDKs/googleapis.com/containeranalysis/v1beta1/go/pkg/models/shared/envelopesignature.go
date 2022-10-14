@@ -1,6 +1,6 @@
 package shared
 
 type EnvelopeSignature struct {
-	Keyid *string `json:"keyid"`
-	Sig   *string `json:"sig"`
+	Keyid *string `json:"keyid,omitempty"`
+	Sig   *string `json:"sig,omitempty"`
 }

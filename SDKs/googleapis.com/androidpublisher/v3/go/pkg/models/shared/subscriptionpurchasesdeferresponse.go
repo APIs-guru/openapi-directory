@@ -1,5 +1,5 @@
 package shared
 
 type SubscriptionPurchasesDeferResponse struct {
-	NewExpiryTimeMillis *string `json:"newExpiryTimeMillis"`
+	NewExpiryTimeMillis *string `json:"newExpiryTimeMillis,omitempty"`
 }

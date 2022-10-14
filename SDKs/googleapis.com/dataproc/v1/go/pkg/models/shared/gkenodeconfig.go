@@ -1,11 +1,11 @@
 package shared
 
 type GkeNodeConfig struct {
-	Accelerators   []GkeNodePoolAcceleratorConfig `json:"accelerators"`
-	BootDiskKmsKey *string                        `json:"bootDiskKmsKey"`
-	LocalSsdCount  *int32                         `json:"localSsdCount"`
-	MachineType    *string                        `json:"machineType"`
-	MinCPUPlatform *string                        `json:"minCpuPlatform"`
-	Preemptible    *bool                          `json:"preemptible"`
-	Spot           *bool                          `json:"spot"`
+	Accelerators   []GkeNodePoolAcceleratorConfig `json:"accelerators,omitempty"`
+	BootDiskKmsKey *string                        `json:"bootDiskKmsKey,omitempty"`
+	LocalSsdCount  *int32                         `json:"localSsdCount,omitempty"`
+	MachineType    *string                        `json:"machineType,omitempty"`
+	MinCPUPlatform *string                        `json:"minCpuPlatform,omitempty"`
+	Preemptible    *bool                          `json:"preemptible,omitempty"`
+	Spot           *bool                          `json:"spot,omitempty"`
 }

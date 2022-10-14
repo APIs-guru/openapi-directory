@@ -9,7 +9,7 @@ const (
 )
 
 type SourceSplitResponse struct {
-	Bundles []DerivedSource                 `json:"bundles"`
-	Outcome *SourceSplitResponseOutcomeEnum `json:"outcome"`
-	Shards  []SourceSplitShard              `json:"shards"`
+	Bundles []DerivedSource                 `json:"bundles,omitempty"`
+	Outcome *SourceSplitResponseOutcomeEnum `json:"outcome,omitempty"`
+	Shards  []SourceSplitShard              `json:"shards,omitempty"`
 }

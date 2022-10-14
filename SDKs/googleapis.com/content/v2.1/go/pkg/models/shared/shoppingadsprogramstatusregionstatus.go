@@ -35,13 +35,13 @@ const (
 )
 
 type ShoppingAdsProgramStatusRegionStatus struct {
-	DisapprovalDate                      *string                                                            `json:"disapprovalDate"`
-	EligibilityStatus                    *ShoppingAdsProgramStatusRegionStatusEligibilityStatusEnum         `json:"eligibilityStatus"`
-	OnboardingIssues                     []string                                                           `json:"onboardingIssues"`
-	RegionCodes                          []string                                                           `json:"regionCodes"`
-	ReviewEligibilityStatus              *ShoppingAdsProgramStatusRegionStatusReviewEligibilityStatusEnum   `json:"reviewEligibilityStatus"`
-	ReviewIneligibilityReason            *ShoppingAdsProgramStatusRegionStatusReviewIneligibilityReasonEnum `json:"reviewIneligibilityReason"`
-	ReviewIneligibilityReasonDescription *string                                                            `json:"reviewIneligibilityReasonDescription"`
-	ReviewIneligibilityReasonDetails     *ShoppingAdsProgramStatusReviewIneligibilityReasonDetails          `json:"reviewIneligibilityReasonDetails"`
-	ReviewIssues                         []string                                                           `json:"reviewIssues"`
+	DisapprovalDate                      *string                                                            `json:"disapprovalDate,omitempty"`
+	EligibilityStatus                    *ShoppingAdsProgramStatusRegionStatusEligibilityStatusEnum         `json:"eligibilityStatus,omitempty"`
+	OnboardingIssues                     []string                                                           `json:"onboardingIssues,omitempty"`
+	RegionCodes                          []string                                                           `json:"regionCodes,omitempty"`
+	ReviewEligibilityStatus              *ShoppingAdsProgramStatusRegionStatusReviewEligibilityStatusEnum   `json:"reviewEligibilityStatus,omitempty"`
+	ReviewIneligibilityReason            *ShoppingAdsProgramStatusRegionStatusReviewIneligibilityReasonEnum `json:"reviewIneligibilityReason,omitempty"`
+	ReviewIneligibilityReasonDescription *string                                                            `json:"reviewIneligibilityReasonDescription,omitempty"`
+	ReviewIneligibilityReasonDetails     *ShoppingAdsProgramStatusReviewIneligibilityReasonDetails          `json:"reviewIneligibilityReasonDetails,omitempty"`
+	ReviewIssues                         []string                                                           `json:"reviewIssues,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type Comment struct {
-	CreatedBy   *Collaborator       `json:"created_by"`
-	DateCreated *time.Time          `json:"date_created"`
-	ID          *string             `json:"id"`
-	Permissions *CommentPermissions `json:"permissions"`
-	Text        *string             `json:"text"`
+	CreatedBy   *Collaborator       `json:"created_by,omitempty"`
+	DateCreated *time.Time          `json:"date_created,omitempty"`
+	ID          *string             `json:"id,omitempty"`
+	Permissions *CommentPermissions `json:"permissions,omitempty"`
+	Text        *string             `json:"text,omitempty"`
 }

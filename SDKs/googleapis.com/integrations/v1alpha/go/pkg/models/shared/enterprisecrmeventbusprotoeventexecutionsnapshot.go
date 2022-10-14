@@ -1,15 +1,15 @@
 package shared
 
 type EnterpriseCrmEventbusProtoEventExecutionSnapshot struct {
-	CheckpointTaskNumber           *string                                                                         `json:"checkpointTaskNumber"`
-	ConditionResults               []EnterpriseCrmEventbusProtoConditionResult                                     `json:"conditionResults"`
-	DiffParams                     *EnterpriseCrmEventbusProtoEventParameters                                      `json:"diffParams"`
-	EventExecutionInfoID           *string                                                                         `json:"eventExecutionInfoId"`
-	EventExecutionSnapshotID       *string                                                                         `json:"eventExecutionSnapshotId"`
-	EventExecutionSnapshotMetadata *EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMetadata `json:"eventExecutionSnapshotMetadata"`
-	EventParams                    *EnterpriseCrmEventbusProtoEventParameters                                      `json:"eventParams"`
-	ExceedMaxSize                  *bool                                                                           `json:"exceedMaxSize"`
-	SnapshotTime                   *string                                                                         `json:"snapshotTime"`
-	TaskExecutionDetails           []EnterpriseCrmEventbusProtoTaskExecutionDetails                                `json:"taskExecutionDetails"`
-	TaskName                       *string                                                                         `json:"taskName"`
+	CheckpointTaskNumber           *string                                                                         `json:"checkpointTaskNumber,omitempty"`
+	ConditionResults               []EnterpriseCrmEventbusProtoConditionResult                                     `json:"conditionResults,omitempty"`
+	DiffParams                     *EnterpriseCrmEventbusProtoEventParameters                                      `json:"diffParams,omitempty"`
+	EventExecutionInfoID           *string                                                                         `json:"eventExecutionInfoId,omitempty"`
+	EventExecutionSnapshotID       *string                                                                         `json:"eventExecutionSnapshotId,omitempty"`
+	EventExecutionSnapshotMetadata *EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMetadata `json:"eventExecutionSnapshotMetadata,omitempty"`
+	EventParams                    *EnterpriseCrmEventbusProtoEventParameters                                      `json:"eventParams,omitempty"`
+	ExceedMaxSize                  *bool                                                                           `json:"exceedMaxSize,omitempty"`
+	SnapshotTime                   *string                                                                         `json:"snapshotTime,omitempty"`
+	TaskExecutionDetails           []EnterpriseCrmEventbusProtoTaskExecutionDetails                                `json:"taskExecutionDetails,omitempty"`
+	TaskName                       *string                                                                         `json:"taskName,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDocumentaiV1beta2DocumentLabel struct {
-	AutomlModel *string  `json:"automlModel"`
-	Confidence  *float32 `json:"confidence"`
-	Name        *string  `json:"name"`
+	AutomlModel *string  `json:"automlModel,omitempty"`
+	Confidence  *float32 `json:"confidence,omitempty"`
+	Name        *string  `json:"name,omitempty"`
 }

@@ -21,10 +21,10 @@ const (
 )
 
 type Permission struct {
-	Name         *string             `json:"name"`
-	PermissionID *string             `json:"permissionId"`
-	Role         *PermissionRoleEnum `json:"role"`
-	Type         *PermissionTypeEnum `json:"type"`
-	User         *User               `json:"user"`
-	WithLink     *bool               `json:"withLink"`
+	Name         *string             `json:"name,omitempty"`
+	PermissionID *string             `json:"permissionId,omitempty"`
+	Role         *PermissionRoleEnum `json:"role,omitempty"`
+	Type         *PermissionTypeEnum `json:"type,omitempty"`
+	User         *User               `json:"user,omitempty"`
+	WithLink     *bool               `json:"withLink,omitempty"`
 }

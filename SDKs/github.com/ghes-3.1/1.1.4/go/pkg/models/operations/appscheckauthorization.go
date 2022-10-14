@@ -29,12 +29,12 @@ const (
 
 type AppsCheckAuthorization200ApplicationJSONInstallationScopedInstallation struct {
 	Account                shared.SimpleUser                                                           `json:"account"`
-	HasMultipleSingleFiles *bool                                                                       `json:"has_multiple_single_files"`
+	HasMultipleSingleFiles *bool                                                                       `json:"has_multiple_single_files,omitempty"`
 	Permissions            shared.AppPermissions                                                       `json:"permissions"`
 	RepositoriesURL        string                                                                      `json:"repositories_url"`
 	RepositorySelection    AppsCheckAuthorization200ApplicationJSONInstallationRepositorySelectionEnum `json:"repository_selection"`
 	SingleFileName         string                                                                      `json:"single_file_name"`
-	SingleFilePaths        []string                                                                    `json:"single_file_paths"`
+	SingleFilePaths        []string                                                                    `json:"single_file_paths,omitempty"`
 }
 
 type AppsCheckAuthorization200ApplicationJSONUserSimpleUser struct {
@@ -52,7 +52,7 @@ type AppsCheckAuthorization200ApplicationJSONUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -65,7 +65,7 @@ type AppsCheckAuthorization200ApplicationJSONAuthorization struct {
 	Fingerprint    string                                                                  `json:"fingerprint"`
 	HashedToken    string                                                                  `json:"hashed_token"`
 	ID             int64                                                                   `json:"id"`
-	Installation   *AppsCheckAuthorization200ApplicationJSONInstallationScopedInstallation `json:"installation"`
+	Installation   *AppsCheckAuthorization200ApplicationJSONInstallationScopedInstallation `json:"installation,omitempty"`
 	Note           string                                                                  `json:"note"`
 	NoteURL        string                                                                  `json:"note_url"`
 	Scopes         []string                                                                `json:"scopes"`
@@ -73,7 +73,7 @@ type AppsCheckAuthorization200ApplicationJSONAuthorization struct {
 	TokenLastEight string                                                                  `json:"token_last_eight"`
 	UpdatedAt      time.Time                                                               `json:"updated_at"`
 	URL            string                                                                  `json:"url"`
-	User           *AppsCheckAuthorization200ApplicationJSONUserSimpleUser                 `json:"user"`
+	User           *AppsCheckAuthorization200ApplicationJSONUserSimpleUser                 `json:"user,omitempty"`
 }
 
 type AppsCheckAuthorizationResponse struct {

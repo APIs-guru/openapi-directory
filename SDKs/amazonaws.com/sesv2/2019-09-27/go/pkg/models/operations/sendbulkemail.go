@@ -15,19 +15,19 @@ type SendBulkEmailHeaders struct {
 }
 
 type SendBulkEmailRequestBodyDefaultContent struct {
-	Template *shared.Template `json:"Template"`
+	Template *shared.Template `json:"Template,omitempty"`
 }
 
 type SendBulkEmailRequestBody struct {
 	BulkEmailEntries                          []shared.BulkEmailEntry                `json:"BulkEmailEntries"`
-	ConfigurationSetName                      *string                                `json:"ConfigurationSetName"`
+	ConfigurationSetName                      *string                                `json:"ConfigurationSetName,omitempty"`
 	DefaultContent                            SendBulkEmailRequestBodyDefaultContent `json:"DefaultContent"`
-	DefaultEmailTags                          []shared.MessageTag                    `json:"DefaultEmailTags"`
-	FeedbackForwardingEmailAddress            *string                                `json:"FeedbackForwardingEmailAddress"`
-	FeedbackForwardingEmailAddressIdentityArn *string                                `json:"FeedbackForwardingEmailAddressIdentityArn"`
-	FromEmailAddress                          *string                                `json:"FromEmailAddress"`
-	FromEmailAddressIdentityArn               *string                                `json:"FromEmailAddressIdentityArn"`
-	ReplyToAddresses                          []string                               `json:"ReplyToAddresses"`
+	DefaultEmailTags                          []shared.MessageTag                    `json:"DefaultEmailTags,omitempty"`
+	FeedbackForwardingEmailAddress            *string                                `json:"FeedbackForwardingEmailAddress,omitempty"`
+	FeedbackForwardingEmailAddressIdentityArn *string                                `json:"FeedbackForwardingEmailAddressIdentityArn,omitempty"`
+	FromEmailAddress                          *string                                `json:"FromEmailAddress,omitempty"`
+	FromEmailAddressIdentityArn               *string                                `json:"FromEmailAddressIdentityArn,omitempty"`
+	ReplyToAddresses                          []string                               `json:"ReplyToAddresses,omitempty"`
 }
 
 type SendBulkEmailRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListTransferJobsResponse struct {
-	NextPageToken *string       `json:"nextPageToken"`
-	TransferJobs  []TransferJob `json:"transferJobs"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	TransferJobs  []TransferJob `json:"transferJobs,omitempty"`
 }

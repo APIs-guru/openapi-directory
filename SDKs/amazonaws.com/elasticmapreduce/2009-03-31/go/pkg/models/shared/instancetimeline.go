@@ -5,7 +5,7 @@ import (
 )
 
 type InstanceTimeline struct {
-	CreationDateTime *time.Time `json:"CreationDateTime"`
-	EndDateTime      *time.Time `json:"EndDateTime"`
-	ReadyDateTime    *time.Time `json:"ReadyDateTime"`
+	CreationDateTime *time.Time `json:"CreationDateTime,omitempty"`
+	EndDateTime      *time.Time `json:"EndDateTime,omitempty"`
+	ReadyDateTime    *time.Time `json:"ReadyDateTime,omitempty"`
 }

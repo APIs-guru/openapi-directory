@@ -5,13 +5,13 @@ import (
 )
 
 type ListTrialComponentsRequest struct {
-	CreatedAfter   *time.Time                 `json:"CreatedAfter"`
-	CreatedBefore  *time.Time                 `json:"CreatedBefore"`
-	ExperimentName *string                    `json:"ExperimentName"`
-	MaxResults     *int64                     `json:"MaxResults"`
-	NextToken      *string                    `json:"NextToken"`
-	SortBy         *SortTrialComponentsByEnum `json:"SortBy"`
-	SortOrder      *SortOrderEnum             `json:"SortOrder"`
-	SourceArn      *string                    `json:"SourceArn"`
-	TrialName      *string                    `json:"TrialName"`
+	CreatedAfter   *time.Time                 `json:"CreatedAfter,omitempty"`
+	CreatedBefore  *time.Time                 `json:"CreatedBefore,omitempty"`
+	ExperimentName *string                    `json:"ExperimentName,omitempty"`
+	MaxResults     *int64                     `json:"MaxResults,omitempty"`
+	NextToken      *string                    `json:"NextToken,omitempty"`
+	SortBy         *SortTrialComponentsByEnum `json:"SortBy,omitempty"`
+	SortOrder      *SortOrderEnum             `json:"SortOrder,omitempty"`
+	SourceArn      *string                    `json:"SourceArn,omitempty"`
+	TrialName      *string                    `json:"TrialName,omitempty"`
 }

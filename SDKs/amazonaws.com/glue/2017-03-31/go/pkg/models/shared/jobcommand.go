@@ -1,7 +1,7 @@
 package shared
 
 type JobCommand struct {
-	Name           *string `json:"Name"`
-	PythonVersion  *string `json:"PythonVersion"`
-	ScriptLocation *string `json:"ScriptLocation"`
+	Name           *string `json:"Name,omitempty"`
+	PythonVersion  *string `json:"PythonVersion,omitempty"`
+	ScriptLocation *string `json:"ScriptLocation,omitempty"`
 }

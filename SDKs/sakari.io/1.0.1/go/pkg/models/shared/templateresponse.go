@@ -1,6 +1,6 @@
 package shared
 
 type TemplateResponse struct {
-	Data    *Template `json:"data"`
-	Success *bool     `json:"success"`
+	Data    *Template `json:"data,omitempty"`
+	Success *bool     `json:"success,omitempty"`
 }

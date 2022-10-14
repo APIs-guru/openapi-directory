@@ -10,7 +10,7 @@ type AssessmentTemplate struct {
 	AssessmentTargetArn       string      `json:"assessmentTargetArn"`
 	CreatedAt                 time.Time   `json:"createdAt"`
 	DurationInSeconds         int64       `json:"durationInSeconds"`
-	LastAssessmentRunArn      *string     `json:"lastAssessmentRunArn"`
+	LastAssessmentRunArn      *string     `json:"lastAssessmentRunArn,omitempty"`
 	Name                      string      `json:"name"`
 	RulesPackageArns          []string    `json:"rulesPackageArns"`
 	UserAttributesForFindings []Attribute `json:"userAttributesForFindings"`

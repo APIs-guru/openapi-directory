@@ -10,7 +10,7 @@ type KeyUpdateRequest struct {
 }
 
 type KeyUpdate200ApplicationJSON struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }
 
 type KeyUpdateResponse struct {

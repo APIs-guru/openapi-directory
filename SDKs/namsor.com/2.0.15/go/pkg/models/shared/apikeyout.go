@@ -1,14 +1,14 @@
 package shared
 
 type APIKeyOut struct {
-	Admin      *bool   `json:"admin"`
-	Anonymized *bool   `json:"anonymized"`
-	APIKey     *string `json:"apiKey"`
-	Corporate  *bool   `json:"corporate"`
-	Disabled   *bool   `json:"disabled"`
-	Learnable  *bool   `json:"learnable"`
-	Partner    *bool   `json:"partner"`
-	Striped    *bool   `json:"striped"`
-	UserID     *string `json:"userId"`
-	Vetted     *bool   `json:"vetted"`
+	Admin      *bool   `json:"admin,omitempty"`
+	Anonymized *bool   `json:"anonymized,omitempty"`
+	APIKey     *string `json:"apiKey,omitempty"`
+	Corporate  *bool   `json:"corporate,omitempty"`
+	Disabled   *bool   `json:"disabled,omitempty"`
+	Learnable  *bool   `json:"learnable,omitempty"`
+	Partner    *bool   `json:"partner,omitempty"`
+	Striped    *bool   `json:"striped,omitempty"`
+	UserID     *string `json:"userId,omitempty"`
+	Vetted     *bool   `json:"vetted,omitempty"`
 }

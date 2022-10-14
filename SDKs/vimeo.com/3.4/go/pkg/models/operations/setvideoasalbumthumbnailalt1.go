@@ -10,7 +10,7 @@ type SetVideoAsAlbumThumbnailAlt1PathParams struct {
 }
 
 type SetVideoAsAlbumThumbnailAlt1RequestBody struct {
-	TimeCode *float64 `json:"time_code"`
+	TimeCode *float64 `json:"time_code,omitempty"`
 }
 
 type SetVideoAsAlbumThumbnailAlt1Security struct {

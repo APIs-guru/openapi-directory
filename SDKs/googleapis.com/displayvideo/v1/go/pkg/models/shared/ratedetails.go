@@ -11,8 +11,8 @@ const (
 )
 
 type RateDetails struct {
-	InventorySourceRateType *RateDetailsInventorySourceRateTypeEnum `json:"inventorySourceRateType"`
-	MinimumSpend            *Money                                  `json:"minimumSpend"`
-	Rate                    *Money                                  `json:"rate"`
-	UnitsPurchased          *string                                 `json:"unitsPurchased"`
+	InventorySourceRateType *RateDetailsInventorySourceRateTypeEnum `json:"inventorySourceRateType,omitempty"`
+	MinimumSpend            *Money                                  `json:"minimumSpend,omitempty"`
+	Rate                    *Money                                  `json:"rate,omitempty"`
+	UnitsPurchased          *string                                 `json:"unitsPurchased,omitempty"`
 }

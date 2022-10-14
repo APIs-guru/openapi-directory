@@ -5,14 +5,14 @@ import (
 )
 
 type DomainController struct {
-	AvailabilityZone          *string                     `json:"AvailabilityZone"`
-	DirectoryID               *string                     `json:"DirectoryId"`
-	DNSIPAddr                 *string                     `json:"DnsIpAddr"`
-	DomainControllerID        *string                     `json:"DomainControllerId"`
-	LaunchTime                *time.Time                  `json:"LaunchTime"`
-	Status                    *DomainControllerStatusEnum `json:"Status"`
-	StatusLastUpdatedDateTime *time.Time                  `json:"StatusLastUpdatedDateTime"`
-	StatusReason              *string                     `json:"StatusReason"`
-	SubnetID                  *string                     `json:"SubnetId"`
-	VpcID                     *string                     `json:"VpcId"`
+	AvailabilityZone          *string                     `json:"AvailabilityZone,omitempty"`
+	DirectoryID               *string                     `json:"DirectoryId,omitempty"`
+	DNSIPAddr                 *string                     `json:"DnsIpAddr,omitempty"`
+	DomainControllerID        *string                     `json:"DomainControllerId,omitempty"`
+	LaunchTime                *time.Time                  `json:"LaunchTime,omitempty"`
+	Status                    *DomainControllerStatusEnum `json:"Status,omitempty"`
+	StatusLastUpdatedDateTime *time.Time                  `json:"StatusLastUpdatedDateTime,omitempty"`
+	StatusReason              *string                     `json:"StatusReason,omitempty"`
+	SubnetID                  *string                     `json:"SubnetId,omitempty"`
+	VpcID                     *string                     `json:"VpcId,omitempty"`
 }

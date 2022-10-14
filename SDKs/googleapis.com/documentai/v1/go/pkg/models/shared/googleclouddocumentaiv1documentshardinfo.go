@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDocumentaiV1DocumentShardInfo struct {
-	ShardCount *string `json:"shardCount"`
-	ShardIndex *string `json:"shardIndex"`
-	TextOffset *string `json:"textOffset"`
+	ShardCount *string `json:"shardCount,omitempty"`
+	ShardIndex *string `json:"shardIndex,omitempty"`
+	TextOffset *string `json:"textOffset,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type EbayCollectAndRemitTax struct {
-	Amount           *Amount           `json:"amount"`
-	CollectionMethod *string           `json:"collectionMethod"`
-	EbayReference    *EbayTaxReference `json:"ebayReference"`
-	TaxType          *string           `json:"taxType"`
+	Amount           *Amount           `json:"amount,omitempty"`
+	CollectionMethod *string           `json:"collectionMethod,omitempty"`
+	EbayReference    *EbayTaxReference `json:"ebayReference,omitempty"`
+	TaxType          *string           `json:"taxType,omitempty"`
 }

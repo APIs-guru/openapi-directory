@@ -27,10 +27,10 @@ const (
 )
 
 type UpdateAddonRequestBody struct {
-	AddonVersion          *string                                     `json:"addonVersion"`
-	ClientRequestToken    *string                                     `json:"clientRequestToken"`
-	ResolveConflicts      *UpdateAddonRequestBodyResolveConflictsEnum `json:"resolveConflicts"`
-	ServiceAccountRoleArn *string                                     `json:"serviceAccountRoleArn"`
+	AddonVersion          *string                                     `json:"addonVersion,omitempty"`
+	ClientRequestToken    *string                                     `json:"clientRequestToken,omitempty"`
+	ResolveConflicts      *UpdateAddonRequestBodyResolveConflictsEnum `json:"resolveConflicts,omitempty"`
+	ServiceAccountRoleArn *string                                     `json:"serviceAccountRoleArn,omitempty"`
 }
 
 type UpdateAddonRequest struct {

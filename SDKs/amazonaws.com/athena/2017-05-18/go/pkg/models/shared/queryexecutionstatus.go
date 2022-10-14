@@ -5,8 +5,8 @@ import (
 )
 
 type QueryExecutionStatus struct {
-	CompletionDateTime *time.Time               `json:"CompletionDateTime"`
-	State              *QueryExecutionStateEnum `json:"State"`
-	StateChangeReason  *string                  `json:"StateChangeReason"`
-	SubmissionDateTime *time.Time               `json:"SubmissionDateTime"`
+	CompletionDateTime *time.Time               `json:"CompletionDateTime,omitempty"`
+	State              *QueryExecutionStateEnum `json:"State,omitempty"`
+	StateChangeReason  *string                  `json:"StateChangeReason,omitempty"`
+	SubmissionDateTime *time.Time               `json:"SubmissionDateTime,omitempty"`
 }

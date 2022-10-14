@@ -1,6 +1,6 @@
 package shared
 
 type Links struct {
-	Invitation *string `json:"invitation"`
-	Share      *string `json:"share"`
+	Invitation *string `json:"invitation,omitempty"`
+	Share      *string `json:"share,omitempty"`
 }

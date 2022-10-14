@@ -1,10 +1,10 @@
 package shared
 
 type GetFaucetResponseData struct {
-	TxID *string `json:"txId"`
+	TxID *string `json:"txId,omitempty"`
 }
 
 type GetFaucetResponse struct {
-	Data   *GetFaucetResponseData `json:"data"`
-	Status *string                `json:"status"`
+	Data   *GetFaucetResponseData `json:"data,omitempty"`
+	Status *string                `json:"status,omitempty"`
 }

@@ -13,6 +13,6 @@ const (
 )
 
 type YoutubeAndPartnersBiddingStrategy struct {
-	Type  *YoutubeAndPartnersBiddingStrategyTypeEnum `json:"type"`
-	Value *string                                    `json:"value"`
+	Type  *YoutubeAndPartnersBiddingStrategyTypeEnum `json:"type,omitempty"`
+	Value *string                                    `json:"value,omitempty"`
 }

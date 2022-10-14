@@ -1,24 +1,24 @@
 package shared
 
 type DatasetRestAPIGet struct {
-	CacheTimeout         *int32       `json:"cache_timeout"`
+	CacheTimeout         *int32       `json:"cache_timeout,omitempty"`
 	Columns              Meta22       `json:"columns"`
 	Database             Meta23       `json:"database"`
-	DatasourceType       *interface{} `json:"datasource_type"`
-	DefaultEndpoint      *string      `json:"default_endpoint"`
-	Description          *string      `json:"description"`
-	Extra                *string      `json:"extra"`
-	FetchValuesPredicate *string      `json:"fetch_values_predicate"`
-	FilterSelectEnabled  *bool        `json:"filter_select_enabled"`
-	ID                   *int32       `json:"id"`
-	IsSqllabView         *bool        `json:"is_sqllab_view"`
-	MainDttmCol          *string      `json:"main_dttm_col"`
+	DatasourceType       *interface{} `json:"datasource_type,omitempty"`
+	DefaultEndpoint      *string      `json:"default_endpoint,omitempty"`
+	Description          *string      `json:"description,omitempty"`
+	Extra                *string      `json:"extra,omitempty"`
+	FetchValuesPredicate *string      `json:"fetch_values_predicate,omitempty"`
+	FilterSelectEnabled  *bool        `json:"filter_select_enabled,omitempty"`
+	ID                   *int32       `json:"id,omitempty"`
+	IsSqllabView         *bool        `json:"is_sqllab_view,omitempty"`
+	MainDttmCol          *string      `json:"main_dttm_col,omitempty"`
 	Metrics              Meta25       `json:"metrics"`
-	Offset               *int32       `json:"offset"`
-	Owners               *Meta24      `json:"owners"`
-	Schema               *string      `json:"schema"`
-	SQL                  *string      `json:"sql"`
+	Offset               *int32       `json:"offset,omitempty"`
+	Owners               *Meta24      `json:"owners,omitempty"`
+	Schema               *string      `json:"schema,omitempty"`
+	SQL                  *string      `json:"sql,omitempty"`
 	TableName            string       `json:"table_name"`
-	TemplateParams       *string      `json:"template_params"`
-	URL                  *interface{} `json:"url"`
+	TemplateParams       *string      `json:"template_params,omitempty"`
+	URL                  *interface{} `json:"url,omitempty"`
 }

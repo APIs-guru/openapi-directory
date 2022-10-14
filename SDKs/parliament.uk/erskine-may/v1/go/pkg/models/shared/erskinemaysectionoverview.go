@@ -1,8 +1,8 @@
 package shared
 
 type ErskineMaySectionOverview struct {
-	ID          *int32                      `json:"id"`
-	SubSections []ErskineMaySectionOverview `json:"subSections"`
-	Title       *string                     `json:"title"`
-	TitleChain  *string                     `json:"titleChain"`
+	ID          *int32                      `json:"id,omitempty"`
+	SubSections []ErskineMaySectionOverview `json:"subSections,omitempty"`
+	Title       *string                     `json:"title,omitempty"`
+	TitleChain  *string                     `json:"titleChain,omitempty"`
 }

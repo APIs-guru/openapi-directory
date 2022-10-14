@@ -1,8 +1,8 @@
 package operations
 
 type UpdateCveCheckConfigurationRequestBody struct {
-	APIKey *string `json:"apiKey"`
-	URL    *string `json:"url"`
+	APIKey *string `json:"apiKey,omitempty"`
+	URL    *string `json:"url,omitempty"`
 }
 
 type UpdateCveCheckConfigurationRequest struct {
@@ -16,8 +16,8 @@ const (
 )
 
 type UpdateCveCheckConfiguration200ApplicationJSONData struct {
-	APIKey *string `json:"apiKey"`
-	URL    *string `json:"url"`
+	APIKey *string `json:"apiKey,omitempty"`
+	URL    *string `json:"url,omitempty"`
 }
 
 type UpdateCveCheckConfiguration200ApplicationJSONResultEnum string

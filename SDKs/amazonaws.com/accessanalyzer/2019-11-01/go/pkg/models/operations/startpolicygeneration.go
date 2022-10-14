@@ -16,19 +16,19 @@ type StartPolicyGenerationHeaders struct {
 }
 
 type StartPolicyGenerationRequestBodyCloudTrailDetails struct {
-	AccessRole *string        `json:"accessRole"`
-	EndTime    *time.Time     `json:"endTime"`
-	StartTime  *time.Time     `json:"startTime"`
-	Trails     []shared.Trail `json:"trails"`
+	AccessRole *string        `json:"accessRole,omitempty"`
+	EndTime    *time.Time     `json:"endTime,omitempty"`
+	StartTime  *time.Time     `json:"startTime,omitempty"`
+	Trails     []shared.Trail `json:"trails,omitempty"`
 }
 
 type StartPolicyGenerationRequestBodyPolicyGenerationDetails struct {
-	PrincipalArn *string `json:"principalArn"`
+	PrincipalArn *string `json:"principalArn,omitempty"`
 }
 
 type StartPolicyGenerationRequestBody struct {
-	ClientToken             *string                                                 `json:"clientToken"`
-	CloudTrailDetails       *StartPolicyGenerationRequestBodyCloudTrailDetails      `json:"cloudTrailDetails"`
+	ClientToken             *string                                                 `json:"clientToken,omitempty"`
+	CloudTrailDetails       *StartPolicyGenerationRequestBodyCloudTrailDetails      `json:"cloudTrailDetails,omitempty"`
 	PolicyGenerationDetails StartPolicyGenerationRequestBodyPolicyGenerationDetails `json:"policyGenerationDetails"`
 }
 

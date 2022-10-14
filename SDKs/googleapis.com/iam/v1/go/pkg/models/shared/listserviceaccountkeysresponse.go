@@ -1,5 +1,5 @@
 package shared
 
 type ListServiceAccountKeysResponse struct {
-	Keys []ServiceAccountKey `json:"keys"`
+	Keys []ServiceAccountKey `json:"keys,omitempty"`
 }

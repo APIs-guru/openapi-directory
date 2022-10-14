@@ -1,7 +1,7 @@
 package shared
 
 type AgentListEntry struct {
-	AgentArn *string          `json:"AgentArn"`
-	Name     *string          `json:"Name"`
-	Status   *AgentStatusEnum `json:"Status"`
+	AgentArn *string          `json:"AgentArn,omitempty"`
+	Name     *string          `json:"Name,omitempty"`
+	Status   *AgentStatusEnum `json:"Status,omitempty"`
 }

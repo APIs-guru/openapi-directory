@@ -1,7 +1,7 @@
 package shared
 
 type ProjectCache struct {
-	Location *string         `json:"location"`
-	Modes    []CacheModeEnum `json:"modes"`
+	Location *string         `json:"location,omitempty"`
+	Modes    []CacheModeEnum `json:"modes,omitempty"`
 	Type     CacheTypeEnum   `json:"type"`
 }

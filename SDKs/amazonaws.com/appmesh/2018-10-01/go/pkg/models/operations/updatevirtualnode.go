@@ -20,13 +20,13 @@ type UpdateVirtualNodeHeaders struct {
 }
 
 type UpdateVirtualNodeRequestBodySpec struct {
-	Backends         []string                 `json:"backends"`
-	Listeners        []shared.Listener        `json:"listeners"`
-	ServiceDiscovery *shared.ServiceDiscovery `json:"serviceDiscovery"`
+	Backends         []string                 `json:"backends,omitempty"`
+	Listeners        []shared.Listener        `json:"listeners,omitempty"`
+	ServiceDiscovery *shared.ServiceDiscovery `json:"serviceDiscovery,omitempty"`
 }
 
 type UpdateVirtualNodeRequestBody struct {
-	ClientToken *string                          `json:"clientToken"`
+	ClientToken *string                          `json:"clientToken,omitempty"`
 	Spec        UpdateVirtualNodeRequestBodySpec `json:"spec"`
 }
 

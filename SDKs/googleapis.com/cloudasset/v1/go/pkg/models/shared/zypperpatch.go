@@ -1,8 +1,8 @@
 package shared
 
 type ZypperPatch struct {
-	Category  *string `json:"category"`
-	PatchName *string `json:"patchName"`
-	Severity  *string `json:"severity"`
-	Summary   *string `json:"summary"`
+	Category  *string `json:"category,omitempty"`
+	PatchName *string `json:"patchName,omitempty"`
+	Severity  *string `json:"severity,omitempty"`
+	Summary   *string `json:"summary,omitempty"`
 }

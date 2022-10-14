@@ -8,26 +8,26 @@ const (
 )
 
 type PayorV1 struct {
-	Address                           *PayorAddress        `json:"address"`
-	AllowsLanguageChoice              *bool                `json:"allowsLanguageChoice"`
-	CollectiveAlias                   *string              `json:"collectiveAlias"`
-	DbaName                           *string              `json:"dbaName"`
-	FundingAccountAccountName         *string              `json:"fundingAccountAccountName"`
-	FundingAccountAccountNumber       *string              `json:"fundingAccountAccountNumber"`
-	FundingAccountRoutingNumber       *string              `json:"fundingAccountRoutingNumber"`
-	IncludesReports                   *bool                `json:"includesReports"`
-	KycState                          *KycStateEnum        `json:"kycState"`
-	Language                          *PayorV1LanguageEnum `json:"language"`
-	ManualLockout                     *bool                `json:"manualLockout"`
-	MaxMasterPayorAdmins              *int64               `json:"maxMasterPayorAdmins"`
-	PayeeGracePeriodDays              *int64               `json:"payeeGracePeriodDays"`
-	PayeeGracePeriodProcessingEnabled *bool                `json:"payeeGracePeriodProcessingEnabled"`
-	PayorID                           *string              `json:"payorId"`
+	Address                           *PayorAddress        `json:"address,omitempty"`
+	AllowsLanguageChoice              *bool                `json:"allowsLanguageChoice,omitempty"`
+	CollectiveAlias                   *string              `json:"collectiveAlias,omitempty"`
+	DbaName                           *string              `json:"dbaName,omitempty"`
+	FundingAccountAccountName         *string              `json:"fundingAccountAccountName,omitempty"`
+	FundingAccountAccountNumber       *string              `json:"fundingAccountAccountNumber,omitempty"`
+	FundingAccountRoutingNumber       *string              `json:"fundingAccountRoutingNumber,omitempty"`
+	IncludesReports                   *bool                `json:"includesReports,omitempty"`
+	KycState                          *KycStateEnum        `json:"kycState,omitempty"`
+	Language                          *PayorV1LanguageEnum `json:"language,omitempty"`
+	ManualLockout                     *bool                `json:"manualLockout,omitempty"`
+	MaxMasterPayorAdmins              *int64               `json:"maxMasterPayorAdmins,omitempty"`
+	PayeeGracePeriodDays              *int64               `json:"payeeGracePeriodDays,omitempty"`
+	PayeeGracePeriodProcessingEnabled *bool                `json:"payeeGracePeriodProcessingEnabled,omitempty"`
+	PayorID                           *string              `json:"payorId,omitempty"`
 	PayorName                         string               `json:"payorName"`
-	PrimaryContactEmail               *string              `json:"primaryContactEmail"`
-	PrimaryContactName                *string              `json:"primaryContactName"`
-	PrimaryContactPhone               *string              `json:"primaryContactPhone"`
-	ReminderEmailsOptOut              *bool                `json:"reminderEmailsOptOut"`
-	SupportContact                    *string              `json:"supportContact"`
-	TransmissionTypes                 *TransmissionTypes   `json:"transmissionTypes"`
+	PrimaryContactEmail               *string              `json:"primaryContactEmail,omitempty"`
+	PrimaryContactName                *string              `json:"primaryContactName,omitempty"`
+	PrimaryContactPhone               *string              `json:"primaryContactPhone,omitempty"`
+	ReminderEmailsOptOut              *bool                `json:"reminderEmailsOptOut,omitempty"`
+	SupportContact                    *string              `json:"supportContact,omitempty"`
+	TransmissionTypes                 *TransmissionTypes   `json:"transmissionTypes,omitempty"`
 }

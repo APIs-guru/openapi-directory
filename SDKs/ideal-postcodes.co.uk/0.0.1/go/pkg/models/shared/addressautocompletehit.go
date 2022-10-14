@@ -1,8 +1,8 @@
 package shared
 
 type AddressAutocompleteHit struct {
-	Suggestion *string                     `json:"suggestion"`
-	Udprn      *string                     `json:"udprn"`
-	Umprn      *string                     `json:"umprn"`
-	Urls       *AddressAutocompleteHitUrls `json:"urls"`
+	Suggestion *string                     `json:"suggestion,omitempty"`
+	Udprn      *string                     `json:"udprn,omitempty"`
+	Umprn      *string                     `json:"umprn,omitempty"`
+	Urls       *AddressAutocompleteHitUrls `json:"urls,omitempty"`
 }

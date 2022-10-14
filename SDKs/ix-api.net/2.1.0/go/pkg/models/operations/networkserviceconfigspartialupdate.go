@@ -16,10 +16,10 @@ const (
 )
 
 type NetworkServiceConfigsPartialUpdate400ApplicationJSON struct {
-	Detail   *string                                                      `json:"detail"`
-	Instance *string                                                      `json:"instance"`
-	Status   *interface{}                                                 `json:"status"`
-	Title    *interface{}                                                 `json:"title"`
+	Detail   *string                                                      `json:"detail,omitempty"`
+	Instance *string                                                      `json:"instance,omitempty"`
+	Status   *interface{}                                                 `json:"status,omitempty"`
+	Title    *interface{}                                                 `json:"title,omitempty"`
 	Type     NetworkServiceConfigsPartialUpdate400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -31,10 +31,10 @@ const (
 )
 
 type NetworkServiceConfigsPartialUpdate401ApplicationJSON struct {
-	Detail   *string                                                      `json:"detail"`
-	Instance *string                                                      `json:"instance"`
-	Status   *interface{}                                                 `json:"status"`
-	Title    *interface{}                                                 `json:"title"`
+	Detail   *string                                                      `json:"detail,omitempty"`
+	Instance *string                                                      `json:"instance,omitempty"`
+	Status   *interface{}                                                 `json:"status,omitempty"`
+	Title    *interface{}                                                 `json:"title,omitempty"`
 	Type     NetworkServiceConfigsPartialUpdate401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -45,10 +45,10 @@ const (
 )
 
 type NetworkServiceConfigsPartialUpdate403ApplicationJSON struct {
-	Detail   *string                                                      `json:"detail"`
-	Instance *string                                                      `json:"instance"`
-	Status   *interface{}                                                 `json:"status"`
-	Title    *interface{}                                                 `json:"title"`
+	Detail   *string                                                      `json:"detail,omitempty"`
+	Instance *string                                                      `json:"instance,omitempty"`
+	Status   *interface{}                                                 `json:"status,omitempty"`
+	Title    *interface{}                                                 `json:"title,omitempty"`
 	Type     NetworkServiceConfigsPartialUpdate403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -59,10 +59,10 @@ const (
 )
 
 type NetworkServiceConfigsPartialUpdate404ApplicationJSON struct {
-	Detail   *string                                                      `json:"detail"`
-	Instance *string                                                      `json:"instance"`
-	Status   *interface{}                                                 `json:"status"`
-	Title    *interface{}                                                 `json:"title"`
+	Detail   *string                                                      `json:"detail,omitempty"`
+	Instance *string                                                      `json:"instance,omitempty"`
+	Status   *interface{}                                                 `json:"status,omitempty"`
+	Title    *interface{}                                                 `json:"title,omitempty"`
 	Type     NetworkServiceConfigsPartialUpdate404ApplicationJSONTypeEnum `json:"type"`
 }
 

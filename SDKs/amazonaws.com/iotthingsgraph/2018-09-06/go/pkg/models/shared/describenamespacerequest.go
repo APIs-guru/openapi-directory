@@ -1,5 +1,5 @@
 package shared
 
 type DescribeNamespaceRequest struct {
-	NamespaceName *string `json:"namespaceName"`
+	NamespaceName *string `json:"namespaceName,omitempty"`
 }

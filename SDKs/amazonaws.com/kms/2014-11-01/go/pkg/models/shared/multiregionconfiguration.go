@@ -1,7 +1,7 @@
 package shared
 
 type MultiRegionConfiguration struct {
-	MultiRegionKeyType *MultiRegionKeyTypeEnum `json:"MultiRegionKeyType"`
-	PrimaryKey         *MultiRegionKey         `json:"PrimaryKey"`
-	ReplicaKeys        []MultiRegionKey        `json:"ReplicaKeys"`
+	MultiRegionKeyType *MultiRegionKeyTypeEnum `json:"MultiRegionKeyType,omitempty"`
+	PrimaryKey         *MultiRegionKey         `json:"PrimaryKey,omitempty"`
+	ReplicaKeys        []MultiRegionKey        `json:"ReplicaKeys,omitempty"`
 }

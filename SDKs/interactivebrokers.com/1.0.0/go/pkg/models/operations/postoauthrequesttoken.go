@@ -1,12 +1,12 @@
 package operations
 
 type PostOauthRequestTokenRequestBody struct {
-	OauthCallback        *string `json:"oauth_callback"`
-	OauthConsumerKey     *string `json:"oauth_consumer_key"`
-	OauthNonce           *string `json:"oauth_nonce"`
-	OauthSignature       *string `json:"oauth_signature"`
-	OauthSignatureMethod *string `json:"oauth_signature_method"`
-	OauthTimestamp       *string `json:"oauth_timestamp"`
+	OauthCallback        *string `json:"oauth_callback,omitempty"`
+	OauthConsumerKey     *string `json:"oauth_consumer_key,omitempty"`
+	OauthNonce           *string `json:"oauth_nonce,omitempty"`
+	OauthSignature       *string `json:"oauth_signature,omitempty"`
+	OauthSignatureMethod *string `json:"oauth_signature_method,omitempty"`
+	OauthTimestamp       *string `json:"oauth_timestamp,omitempty"`
 }
 
 type PostOauthRequestTokenRequest struct {
@@ -14,7 +14,7 @@ type PostOauthRequestTokenRequest struct {
 }
 
 type PostOauthRequestToken200ApplicationJSON struct {
-	OauthToken *string `json:"oauth_token"`
+	OauthToken *string `json:"oauth_token,omitempty"`
 }
 
 type PostOauthRequestTokenResponse struct {

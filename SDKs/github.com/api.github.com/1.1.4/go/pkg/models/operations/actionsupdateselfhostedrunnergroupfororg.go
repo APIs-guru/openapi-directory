@@ -18,8 +18,8 @@ const (
 )
 
 type ActionsUpdateSelfHostedRunnerGroupForOrgRequestBody struct {
-	Name       *string                                                            `json:"name"`
-	Visibility *ActionsUpdateSelfHostedRunnerGroupForOrgRequestBodyVisibilityEnum `json:"visibility"`
+	Name       *string                                                            `json:"name,omitempty"`
+	Visibility *ActionsUpdateSelfHostedRunnerGroupForOrgRequestBodyVisibilityEnum `json:"visibility,omitempty"`
 }
 
 type ActionsUpdateSelfHostedRunnerGroupForOrgRequest struct {

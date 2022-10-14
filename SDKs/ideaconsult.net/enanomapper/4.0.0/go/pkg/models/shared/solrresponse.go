@@ -1,20 +1,20 @@
 package shared
 
 type SolrResponseResponse struct {
-	Docs     []map[string]interface{} `json:"docs"`
-	MaxScore *float64                 `json:"maxScore"`
-	NumFound *int64                   `json:"numFound"`
-	Start    *int64                   `json:"start"`
+	Docs     []map[string]interface{} `json:"docs,omitempty"`
+	MaxScore *float64                 `json:"maxScore,omitempty"`
+	NumFound *int64                   `json:"numFound,omitempty"`
+	Start    *int64                   `json:"start,omitempty"`
 }
 
 type SolrResponseResponseHeader struct {
-	QTime       *int64                 `json:"QTime"`
-	Params      map[string]interface{} `json:"params"`
-	Status      *int64                 `json:"status"`
-	ZkConnected *bool                  `json:"zkConnected"`
+	QTime       *int64                 `json:"QTime,omitempty"`
+	Params      map[string]interface{} `json:"params,omitempty"`
+	Status      *int64                 `json:"status,omitempty"`
+	ZkConnected *bool                  `json:"zkConnected,omitempty"`
 }
 
 type SolrResponse struct {
-	Response       *SolrResponseResponse       `json:"response"`
-	ResponseHeader *SolrResponseResponseHeader `json:"responseHeader"`
+	Response       *SolrResponseResponse       `json:"response,omitempty"`
+	ResponseHeader *SolrResponseResponseHeader `json:"responseHeader,omitempty"`
 }

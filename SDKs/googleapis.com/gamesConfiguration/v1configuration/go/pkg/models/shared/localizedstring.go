@@ -1,7 +1,7 @@
 package shared
 
 type LocalizedString struct {
-	Kind   *string `json:"kind"`
-	Locale *string `json:"locale"`
-	Value  *string `json:"value"`
+	Kind   *string `json:"kind,omitempty"`
+	Locale *string `json:"locale,omitempty"`
+	Value  *string `json:"value,omitempty"`
 }

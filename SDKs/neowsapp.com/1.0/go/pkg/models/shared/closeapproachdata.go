@@ -1,10 +1,10 @@
 package shared
 
 type CloseApproachData struct {
-	CloseApproachDate      *string       `json:"close_approach_date"`
-	CloseApproachDateFull  *string       `json:"close_approach_date_full"`
-	EpochDateCloseApproach *int64        `json:"epoch_date_close_approach"`
-	MissDistance           *MissDistance `json:"miss_distance"`
-	OrbitingBody           *string       `json:"orbiting_body"`
-	RelativeVelocity       *RelVelocity  `json:"relative_velocity"`
+	CloseApproachDate      *string       `json:"close_approach_date,omitempty"`
+	CloseApproachDateFull  *string       `json:"close_approach_date_full,omitempty"`
+	EpochDateCloseApproach *int64        `json:"epoch_date_close_approach,omitempty"`
+	MissDistance           *MissDistance `json:"miss_distance,omitempty"`
+	OrbitingBody           *string       `json:"orbiting_body,omitempty"`
+	RelativeVelocity       *RelVelocity  `json:"relative_velocity,omitempty"`
 }

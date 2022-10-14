@@ -9,6 +9,6 @@ const (
 )
 
 type AddTargetedPublishersRequest struct {
-	PublisherIds  []string                                       `json:"publisherIds"`
-	TargetingMode *AddTargetedPublishersRequestTargetingModeEnum `json:"targetingMode"`
+	PublisherIds  []string                                       `json:"publisherIds,omitempty"`
+	TargetingMode *AddTargetedPublishersRequestTargetingModeEnum `json:"targetingMode,omitempty"`
 }

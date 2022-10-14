@@ -7,18 +7,18 @@ const (
 )
 
 type GetGlobalCompliance200ApplicationJSONDataGlobalComplianceComplianceDetails struct {
-	Error                      *float32 `json:"error"`
-	NoReport                   *float32 `json:"noReport"`
-	SuccessAlreadyOk           *float32 `json:"successAlreadyOK"`
-	SuccessNotApplicable       *float32 `json:"successNotApplicable"`
-	SuccessRepaired            *float32 `json:"successRepaired"`
-	UnexpectedMissingComponent *float32 `json:"unexpectedMissingComponent"`
-	UnexpectedUnknownComponent *float32 `json:"unexpectedUnknownComponent"`
+	Error                      *float32 `json:"error,omitempty"`
+	NoReport                   *float32 `json:"noReport,omitempty"`
+	SuccessAlreadyOk           *float32 `json:"successAlreadyOK,omitempty"`
+	SuccessNotApplicable       *float32 `json:"successNotApplicable,omitempty"`
+	SuccessRepaired            *float32 `json:"successRepaired,omitempty"`
+	UnexpectedMissingComponent *float32 `json:"unexpectedMissingComponent,omitempty"`
+	UnexpectedUnknownComponent *float32 `json:"unexpectedUnknownComponent,omitempty"`
 }
 
 type GetGlobalCompliance200ApplicationJSONDataGlobalCompliance struct {
 	Compliance        float64                                                                     `json:"compliance"`
-	ComplianceDetails *GetGlobalCompliance200ApplicationJSONDataGlobalComplianceComplianceDetails `json:"complianceDetails"`
+	ComplianceDetails *GetGlobalCompliance200ApplicationJSONDataGlobalComplianceComplianceDetails `json:"complianceDetails,omitempty"`
 }
 
 type GetGlobalCompliance200ApplicationJSONData struct {

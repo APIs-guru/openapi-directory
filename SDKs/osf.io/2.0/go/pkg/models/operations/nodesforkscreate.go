@@ -25,57 +25,57 @@ const (
 
 type NodesForksCreateRequestBodyAttributesAttributes struct {
 	Category               NodesForksCreateRequestBodyAttributesCategoryEnum `json:"category"`
-	Collection             *bool                                             `json:"collection"`
-	CurrentUserCanComment  *bool                                             `json:"current_user_can_comment"`
-	CurrentUserPermissions []string                                          `json:"current_user_permissions"`
-	DateCreated            *time.Time                                        `json:"date_created"`
-	DateModified           *time.Time                                        `json:"date_modified"`
-	Description            *string                                           `json:"description"`
-	Fork                   *bool                                             `json:"fork"`
-	ForkedDate             *time.Time                                        `json:"forked_date"`
-	NodeLicense            *string                                           `json:"node_license"`
-	Preprint               *bool                                             `json:"preprint"`
-	Public                 *bool                                             `json:"public"`
-	Registration           *bool                                             `json:"registration"`
-	Tags                   []string                                          `json:"tags"`
-	TemplateFrom           *string                                           `json:"template_from"`
+	Collection             *bool                                             `json:"collection,omitempty"`
+	CurrentUserCanComment  *bool                                             `json:"current_user_can_comment,omitempty"`
+	CurrentUserPermissions []string                                          `json:"current_user_permissions,omitempty"`
+	DateCreated            *time.Time                                        `json:"date_created,omitempty"`
+	DateModified           *time.Time                                        `json:"date_modified,omitempty"`
+	Description            *string                                           `json:"description,omitempty"`
+	Fork                   *bool                                             `json:"fork,omitempty"`
+	ForkedDate             *time.Time                                        `json:"forked_date,omitempty"`
+	NodeLicense            *string                                           `json:"node_license,omitempty"`
+	Preprint               *bool                                             `json:"preprint,omitempty"`
+	Public                 *bool                                             `json:"public,omitempty"`
+	Registration           *bool                                             `json:"registration,omitempty"`
+	Tags                   []string                                          `json:"tags,omitempty"`
+	TemplateFrom           *string                                           `json:"template_from,omitempty"`
 	Title                  string                                            `json:"title"`
 }
 
 type NodesForksCreateRequestBodyLinksLinks struct {
-	HTML *string `json:"html"`
-	Self *string `json:"self"`
+	HTML *string `json:"html,omitempty"`
+	Self *string `json:"self,omitempty"`
 }
 
 type NodesForksCreateRequestBodyRelationshipsRelationships struct {
-	AffiliatedInstitutions *string `json:"affiliated_institutions"`
-	Children               *string `json:"children"`
-	Citation               *string `json:"citation"`
-	Comments               *string `json:"comments"`
-	Contributors           *string `json:"contributors"`
-	DraftRegistrations     *string `json:"draft_registrations"`
-	Files                  *string `json:"files"`
-	ForkedFrom             *string `json:"forked_from"`
-	Forks                  *string `json:"forks"`
-	Identifiers            *string `json:"identifiers"`
-	License                *string `json:"license"`
-	LinkedNodes            *string `json:"linked_nodes"`
-	Logs                   *string `json:"logs"`
-	NodeLinks              *string `json:"node_links"`
-	Parent                 *string `json:"parent"`
-	Preprints              *string `json:"preprints"`
-	Registrations          *string `json:"registrations"`
-	Root                   *string `json:"root"`
-	TemplateNode           *string `json:"template_node"`
-	ViewOnlyLinks          *string `json:"view_only_links"`
-	Wikis                  *string `json:"wikis"`
+	AffiliatedInstitutions *string `json:"affiliated_institutions,omitempty"`
+	Children               *string `json:"children,omitempty"`
+	Citation               *string `json:"citation,omitempty"`
+	Comments               *string `json:"comments,omitempty"`
+	Contributors           *string `json:"contributors,omitempty"`
+	DraftRegistrations     *string `json:"draft_registrations,omitempty"`
+	Files                  *string `json:"files,omitempty"`
+	ForkedFrom             *string `json:"forked_from,omitempty"`
+	Forks                  *string `json:"forks,omitempty"`
+	Identifiers            *string `json:"identifiers,omitempty"`
+	License                *string `json:"license,omitempty"`
+	LinkedNodes            *string `json:"linked_nodes,omitempty"`
+	Logs                   *string `json:"logs,omitempty"`
+	NodeLinks              *string `json:"node_links,omitempty"`
+	Parent                 *string `json:"parent,omitempty"`
+	Preprints              *string `json:"preprints,omitempty"`
+	Registrations          *string `json:"registrations,omitempty"`
+	Root                   *string `json:"root,omitempty"`
+	TemplateNode           *string `json:"template_node,omitempty"`
+	ViewOnlyLinks          *string `json:"view_only_links,omitempty"`
+	Wikis                  *string `json:"wikis,omitempty"`
 }
 
 type NodesForksCreateRequestBodyNode struct {
 	Attributes    NodesForksCreateRequestBodyAttributesAttributes        `json:"attributes"`
-	ID            *string                                                `json:"id"`
-	Links         *NodesForksCreateRequestBodyLinksLinks                 `json:"links"`
-	Relationships *NodesForksCreateRequestBodyRelationshipsRelationships `json:"relationships"`
+	ID            *string                                                `json:"id,omitempty"`
+	Links         *NodesForksCreateRequestBodyLinksLinks                 `json:"links,omitempty"`
+	Relationships *NodesForksCreateRequestBodyRelationshipsRelationships `json:"relationships,omitempty"`
 	Type          string                                                 `json:"type"`
 }
 

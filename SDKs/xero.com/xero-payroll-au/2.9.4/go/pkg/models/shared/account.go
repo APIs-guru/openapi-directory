@@ -1,8 +1,8 @@
 package shared
 
 type Account struct {
-	AccountID *string          `json:"AccountID"`
-	Code      *string          `json:"Code"`
-	Name      *string          `json:"Name"`
-	Type      *AccountTypeEnum `json:"Type"`
+	AccountID *string          `json:"AccountID,omitempty"`
+	Code      *string          `json:"Code,omitempty"`
+	Name      *string          `json:"Name,omitempty"`
+	Type      *AccountTypeEnum `json:"Type,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetOpenIDTokenForDeveloperIdentityResponse struct {
-	IdentityID *string `json:"IdentityId"`
-	Token      *string `json:"Token"`
+	IdentityID *string `json:"IdentityId,omitempty"`
+	Token      *string `json:"Token,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type PartialFindResultVenueForAPIContract struct {
-	Items      []VenueForAPIContract `json:"items"`
-	Term       *string               `json:"term"`
-	TotalCount *int32                `json:"totalCount"`
+	Items      []VenueForAPIContract `json:"items,omitempty"`
+	Term       *string               `json:"term,omitempty"`
+	TotalCount *int32                `json:"totalCount,omitempty"`
 }

@@ -19,8 +19,8 @@ type UpdateContactListHeaders struct {
 }
 
 type UpdateContactListRequestBody struct {
-	Description *string        `json:"Description"`
-	Topics      []shared.Topic `json:"Topics"`
+	Description *string        `json:"Description,omitempty"`
+	Topics      []shared.Topic `json:"Topics,omitempty"`
 }
 
 type UpdateContactListRequest struct {

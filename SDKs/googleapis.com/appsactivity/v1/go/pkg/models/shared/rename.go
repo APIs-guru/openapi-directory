@@ -1,6 +1,6 @@
 package shared
 
 type Rename struct {
-	NewTitle *string `json:"newTitle"`
-	OldTitle *string `json:"oldTitle"`
+	NewTitle *string `json:"newTitle,omitempty"`
+	OldTitle *string `json:"oldTitle,omitempty"`
 }

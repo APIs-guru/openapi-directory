@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleCloudAssuredworkloadsV1WorkloadResourceInfo struct {
-	ResourceID   *string                                                            `json:"resourceId"`
-	ResourceType *GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum `json:"resourceType"`
+	ResourceID   *string                                                            `json:"resourceId,omitempty"`
+	ResourceType *GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum `json:"resourceType,omitempty"`
 }

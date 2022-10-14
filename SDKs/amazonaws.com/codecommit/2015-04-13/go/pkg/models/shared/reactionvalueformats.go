@@ -1,7 +1,7 @@
 package shared
 
 type ReactionValueFormats struct {
-	Emoji     *string `json:"emoji"`
-	ShortCode *string `json:"shortCode"`
-	Unicode   *string `json:"unicode"`
+	Emoji     *string `json:"emoji,omitempty"`
+	ShortCode *string `json:"shortCode,omitempty"`
+	Unicode   *string `json:"unicode,omitempty"`
 }

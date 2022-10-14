@@ -10,11 +10,11 @@ type DeleteAnAPIVersionRequest struct {
 }
 
 type DeleteAnAPIVersion200ApplicationJSONVersion struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type DeleteAnAPIVersion200ApplicationJSON struct {
-	Version *DeleteAnAPIVersion200ApplicationJSONVersion `json:"version"`
+	Version *DeleteAnAPIVersion200ApplicationJSONVersion `json:"version,omitempty"`
 }
 
 type DeleteAnAPIVersionResponse struct {

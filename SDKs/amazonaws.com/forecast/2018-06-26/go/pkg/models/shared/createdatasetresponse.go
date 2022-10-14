@@ -1,5 +1,5 @@
 package shared
 
 type CreateDatasetResponse struct {
-	DatasetArn *string `json:"DatasetArn"`
+	DatasetArn *string `json:"DatasetArn,omitempty"`
 }

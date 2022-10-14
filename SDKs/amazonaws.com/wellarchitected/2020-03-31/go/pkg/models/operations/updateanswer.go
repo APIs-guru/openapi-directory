@@ -31,11 +31,11 @@ const (
 )
 
 type UpdateAnswerRequestBody struct {
-	ChoiceUpdates   map[string]shared.ChoiceUpdate     `json:"ChoiceUpdates"`
-	IsApplicable    *bool                              `json:"IsApplicable"`
-	Notes           *string                            `json:"Notes"`
-	Reason          *UpdateAnswerRequestBodyReasonEnum `json:"Reason"`
-	SelectedChoices []string                           `json:"SelectedChoices"`
+	ChoiceUpdates   map[string]shared.ChoiceUpdate     `json:"ChoiceUpdates,omitempty"`
+	IsApplicable    *bool                              `json:"IsApplicable,omitempty"`
+	Notes           *string                            `json:"Notes,omitempty"`
+	Reason          *UpdateAnswerRequestBodyReasonEnum `json:"Reason,omitempty"`
+	SelectedChoices []string                           `json:"SelectedChoices,omitempty"`
 }
 
 type UpdateAnswerRequest struct {

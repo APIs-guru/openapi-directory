@@ -12,8 +12,8 @@ const (
 )
 
 type HealthInformationNotificationNotificationNotifier struct {
-	ID   *string                                                    `json:"id"`
-	Type *HealthInformationNotificationNotificationNotifierTypeEnum `json:"type"`
+	ID   *string                                                    `json:"id,omitempty"`
+	Type *HealthInformationNotificationNotificationNotifierTypeEnum `json:"type,omitempty"`
 }
 
 type HealthInformationNotificationNotificationStatusNotificationSessionStatusEnum string
@@ -33,14 +33,14 @@ const (
 
 type HealthInformationNotificationNotificationStatusNotificationStatusResponses struct {
 	CareContextReference string                                                                                 `json:"careContextReference"`
-	Description          *string                                                                                `json:"description"`
+	Description          *string                                                                                `json:"description,omitempty"`
 	HiStatus             HealthInformationNotificationNotificationStatusNotificationStatusResponsesHiStatusEnum `json:"hiStatus"`
 }
 
 type HealthInformationNotificationNotificationStatusNotification struct {
 	HipID           string                                                                       `json:"hipId"`
 	SessionStatus   HealthInformationNotificationNotificationStatusNotificationSessionStatusEnum `json:"sessionStatus"`
-	StatusResponses []HealthInformationNotificationNotificationStatusNotificationStatusResponses `json:"statusResponses"`
+	StatusResponses []HealthInformationNotificationNotificationStatusNotificationStatusResponses `json:"statusResponses,omitempty"`
 }
 
 type HealthInformationNotificationNotification struct {

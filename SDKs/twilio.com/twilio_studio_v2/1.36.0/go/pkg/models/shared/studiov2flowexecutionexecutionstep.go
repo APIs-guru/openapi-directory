@@ -5,16 +5,16 @@ import (
 )
 
 type StudioV2FlowExecutionExecutionStep struct {
-	AccountSid       *string                `json:"account_sid"`
-	Context          *interface{}           `json:"context"`
-	DateCreated      *time.Time             `json:"date_created"`
-	DateUpdated      *time.Time             `json:"date_updated"`
-	ExecutionSid     *string                `json:"execution_sid"`
-	FlowSid          *string                `json:"flow_sid"`
-	Links            map[string]interface{} `json:"links"`
-	Name             *string                `json:"name"`
-	Sid              *string                `json:"sid"`
-	TransitionedFrom *string                `json:"transitioned_from"`
-	TransitionedTo   *string                `json:"transitioned_to"`
-	URL              *string                `json:"url"`
+	AccountSid       *string                `json:"account_sid,omitempty"`
+	Context          *interface{}           `json:"context,omitempty"`
+	DateCreated      *time.Time             `json:"date_created,omitempty"`
+	DateUpdated      *time.Time             `json:"date_updated,omitempty"`
+	ExecutionSid     *string                `json:"execution_sid,omitempty"`
+	FlowSid          *string                `json:"flow_sid,omitempty"`
+	Links            map[string]interface{} `json:"links,omitempty"`
+	Name             *string                `json:"name,omitempty"`
+	Sid              *string                `json:"sid,omitempty"`
+	TransitionedFrom *string                `json:"transitioned_from,omitempty"`
+	TransitionedTo   *string                `json:"transitioned_to,omitempty"`
+	URL              *string                `json:"url,omitempty"`
 }

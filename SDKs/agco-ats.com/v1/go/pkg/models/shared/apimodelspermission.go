@@ -9,9 +9,9 @@ const (
 )
 
 type APIModelsPermission struct {
-	DataDescription *string                             `json:"DataDescription" form:"name=DataDescription"`
+	DataDescription *string                             `json:"DataDescription,omitempty" form:"name=DataDescription"`
 	DataRequired    APIModelsPermissionDataRequiredEnum `json:"DataRequired" form:"name=DataRequired"`
-	Description     *string                             `json:"Description" form:"name=Description"`
-	ID              *int32                              `json:"Id" form:"name=Id"`
+	Description     *string                             `json:"Description,omitempty" form:"name=Description"`
+	ID              *int32                              `json:"Id,omitempty" form:"name=Id"`
 	Name            string                              `json:"Name" form:"name=Name"`
 }

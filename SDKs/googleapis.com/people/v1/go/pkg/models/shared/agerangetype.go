@@ -10,6 +10,6 @@ const (
 )
 
 type AgeRangeType struct {
-	AgeRange *AgeRangeTypeAgeRangeEnum `json:"ageRange"`
-	Metadata *FieldMetadata            `json:"metadata"`
+	AgeRange *AgeRangeTypeAgeRangeEnum `json:"ageRange,omitempty"`
+	Metadata *FieldMetadata            `json:"metadata,omitempty"`
 }

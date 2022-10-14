@@ -1,6 +1,6 @@
 package shared
 
 type IndexAttachment struct {
-	IndexedAttributes []AttributeKeyAndValue `json:"IndexedAttributes"`
-	ObjectIdentifier  *string                `json:"ObjectIdentifier"`
+	IndexedAttributes []AttributeKeyAndValue `json:"IndexedAttributes,omitempty"`
+	ObjectIdentifier  *string                `json:"ObjectIdentifier,omitempty"`
 }

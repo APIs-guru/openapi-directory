@@ -5,6 +5,6 @@ import (
 )
 
 type GroupedQuestionViewModel struct {
-	DateTabled  *time.Time `json:"dateTabled"`
-	QuestionUin *string    `json:"questionUin"`
+	DateTabled  *time.Time `json:"dateTabled,omitempty"`
+	QuestionUin *string    `json:"questionUin,omitempty"`
 }

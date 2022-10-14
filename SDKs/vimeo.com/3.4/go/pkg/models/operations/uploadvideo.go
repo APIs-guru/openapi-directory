@@ -9,24 +9,24 @@ type UploadVideoPathParams struct {
 }
 
 type UploadVideoRequestBodyEmbedButtons struct {
-	Embed      *bool `json:"embed"`
-	Fullscreen *bool `json:"fullscreen"`
-	Hd         *bool `json:"hd"`
-	Like       *bool `json:"like"`
-	Scaling    *bool `json:"scaling"`
-	Share      *bool `json:"share"`
-	Watchlater *bool `json:"watchlater"`
+	Embed      *bool `json:"embed,omitempty"`
+	Fullscreen *bool `json:"fullscreen,omitempty"`
+	Hd         *bool `json:"hd,omitempty"`
+	Like       *bool `json:"like,omitempty"`
+	Scaling    *bool `json:"scaling,omitempty"`
+	Share      *bool `json:"share,omitempty"`
+	Watchlater *bool `json:"watchlater,omitempty"`
 }
 
 type UploadVideoRequestBodyEmbedLogosCustom struct {
-	Active *bool   `json:"active"`
-	Link   *string `json:"link"`
-	Sticky *bool   `json:"sticky"`
+	Active *bool   `json:"active,omitempty"`
+	Link   *string `json:"link,omitempty"`
+	Sticky *bool   `json:"sticky,omitempty"`
 }
 
 type UploadVideoRequestBodyEmbedLogos struct {
-	Custom *UploadVideoRequestBodyEmbedLogosCustom `json:"custom"`
-	Vimeo  *bool                                   `json:"vimeo"`
+	Custom *UploadVideoRequestBodyEmbedLogosCustom `json:"custom,omitempty"`
+	Vimeo  *bool                                   `json:"vimeo,omitempty"`
 }
 
 type UploadVideoRequestBodyEmbedTitleNameEnum string
@@ -54,18 +54,18 @@ const (
 )
 
 type UploadVideoRequestBodyEmbedTitle struct {
-	Name     *UploadVideoRequestBodyEmbedTitleNameEnum     `json:"name"`
-	Owner    *UploadVideoRequestBodyEmbedTitleOwnerEnum    `json:"owner"`
-	Portrait *UploadVideoRequestBodyEmbedTitlePortraitEnum `json:"portrait"`
+	Name     *UploadVideoRequestBodyEmbedTitleNameEnum     `json:"name,omitempty"`
+	Owner    *UploadVideoRequestBodyEmbedTitleOwnerEnum    `json:"owner,omitempty"`
+	Portrait *UploadVideoRequestBodyEmbedTitlePortraitEnum `json:"portrait,omitempty"`
 }
 
 type UploadVideoRequestBodyEmbed struct {
-	Buttons *UploadVideoRequestBodyEmbedButtons `json:"buttons"`
-	Color   *string                             `json:"color"`
-	Logos   *UploadVideoRequestBodyEmbedLogos   `json:"logos"`
-	Playbar *bool                               `json:"playbar"`
-	Title   *UploadVideoRequestBodyEmbedTitle   `json:"title"`
-	Volume  *bool                               `json:"volume"`
+	Buttons *UploadVideoRequestBodyEmbedButtons `json:"buttons,omitempty"`
+	Color   *string                             `json:"color,omitempty"`
+	Logos   *UploadVideoRequestBodyEmbedLogos   `json:"logos,omitempty"`
+	Playbar *bool                               `json:"playbar,omitempty"`
+	Title   *UploadVideoRequestBodyEmbedTitle   `json:"title,omitempty"`
+	Volume  *bool                               `json:"volume,omitempty"`
 }
 
 type UploadVideoRequestBodyLicenseEnum string
@@ -109,11 +109,11 @@ const (
 )
 
 type UploadVideoRequestBodyPrivacy struct {
-	Add      *bool                                      `json:"add"`
-	Comments *UploadVideoRequestBodyPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                      `json:"download"`
-	Embed    *UploadVideoRequestBodyPrivacyEmbedEnum    `json:"embed"`
-	View     *UploadVideoRequestBodyPrivacyViewEnum     `json:"view"`
+	Add      *bool                                      `json:"add,omitempty"`
+	Comments *UploadVideoRequestBodyPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                      `json:"download,omitempty"`
+	Embed    *UploadVideoRequestBodyPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *UploadVideoRequestBodyPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type UploadVideoRequestBodyRatingsMpaaReasonEnum string
@@ -128,7 +128,7 @@ const (
 )
 
 type UploadVideoRequestBodyRatingsMpaa struct {
-	Reason *UploadVideoRequestBodyRatingsMpaaReasonEnum `json:"reason"`
+	Reason *UploadVideoRequestBodyRatingsMpaaReasonEnum `json:"reason,omitempty"`
 }
 
 type UploadVideoRequestBodyRatingsTvReasonEnum string
@@ -142,21 +142,21 @@ const (
 )
 
 type UploadVideoRequestBodyRatingsTv struct {
-	Reason *UploadVideoRequestBodyRatingsTvReasonEnum `json:"reason"`
+	Reason *UploadVideoRequestBodyRatingsTvReasonEnum `json:"reason,omitempty"`
 }
 
 type UploadVideoRequestBodyRatings struct {
-	Mpaa *UploadVideoRequestBodyRatingsMpaa `json:"mpaa"`
-	Tv   *UploadVideoRequestBodyRatingsTv   `json:"tv"`
+	Mpaa *UploadVideoRequestBodyRatingsMpaa `json:"mpaa,omitempty"`
+	Tv   *UploadVideoRequestBodyRatingsTv   `json:"tv,omitempty"`
 }
 
 type UploadVideoRequestBodyReviewPage struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type UploadVideoRequestBodySpatialDirectorTimeline struct {
 	Pitch    float64  `json:"pitch"`
-	Roll     *float64 `json:"roll"`
+	Roll     *float64 `json:"roll,omitempty"`
 	TimeCode float64  `json:"time_code"`
 	Yaw      float64  `json:"yaw"`
 }
@@ -180,10 +180,10 @@ const (
 )
 
 type UploadVideoRequestBodySpatial struct {
-	DirectorTimeline []UploadVideoRequestBodySpatialDirectorTimeline `json:"director_timeline"`
-	FieldOfView      *float64                                        `json:"field_of_view"`
-	Projection       *UploadVideoRequestBodySpatialProjectionEnum    `json:"projection"`
-	StereoFormat     *UploadVideoRequestBodySpatialStereoFormatEnum  `json:"stereo_format"`
+	DirectorTimeline []UploadVideoRequestBodySpatialDirectorTimeline `json:"director_timeline,omitempty"`
+	FieldOfView      *float64                                        `json:"field_of_view,omitempty"`
+	Projection       *UploadVideoRequestBodySpatialProjectionEnum    `json:"projection,omitempty"`
+	StereoFormat     *UploadVideoRequestBodySpatialStereoFormatEnum  `json:"stereo_format,omitempty"`
 }
 
 type UploadVideoRequestBodyUploadApproachEnum string
@@ -197,23 +197,23 @@ const (
 
 type UploadVideoRequestBodyUpload struct {
 	Approach    UploadVideoRequestBodyUploadApproachEnum `json:"approach"`
-	Link        *string                                  `json:"link"`
-	RedirectURL *string                                  `json:"redirect_url"`
-	Size        *string                                  `json:"size"`
+	Link        *string                                  `json:"link,omitempty"`
+	RedirectURL *string                                  `json:"redirect_url,omitempty"`
+	Size        *string                                  `json:"size,omitempty"`
 }
 
 type UploadVideoRequestBody struct {
-	ContentRating []string                           `json:"content_rating"`
-	Description   *string                            `json:"description"`
-	Embed         *UploadVideoRequestBodyEmbed       `json:"embed"`
-	License       *UploadVideoRequestBodyLicenseEnum `json:"license"`
-	Locale        *string                            `json:"locale"`
-	Name          *string                            `json:"name"`
-	Password      *string                            `json:"password"`
-	Privacy       *UploadVideoRequestBodyPrivacy     `json:"privacy"`
-	Ratings       *UploadVideoRequestBodyRatings     `json:"ratings"`
-	ReviewPage    *UploadVideoRequestBodyReviewPage  `json:"review_page"`
-	Spatial       *UploadVideoRequestBodySpatial     `json:"spatial"`
+	ContentRating []string                           `json:"content_rating,omitempty"`
+	Description   *string                            `json:"description,omitempty"`
+	Embed         *UploadVideoRequestBodyEmbed       `json:"embed,omitempty"`
+	License       *UploadVideoRequestBodyLicenseEnum `json:"license,omitempty"`
+	Locale        *string                            `json:"locale,omitempty"`
+	Name          *string                            `json:"name,omitempty"`
+	Password      *string                            `json:"password,omitempty"`
+	Privacy       *UploadVideoRequestBodyPrivacy     `json:"privacy,omitempty"`
+	Ratings       *UploadVideoRequestBodyRatings     `json:"ratings,omitempty"`
+	ReviewPage    *UploadVideoRequestBodyReviewPage  `json:"review_page,omitempty"`
+	Spatial       *UploadVideoRequestBodySpatial     `json:"spatial,omitempty"`
 	Upload        UploadVideoRequestBodyUpload       `json:"upload"`
 }
 

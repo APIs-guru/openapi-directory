@@ -1,7 +1,7 @@
 package shared
 
 type ContentCategoriesListResponse struct {
-	ContentCategories []ContentCategory `json:"contentCategories"`
-	Kind              *string           `json:"kind"`
-	NextPageToken     *string           `json:"nextPageToken"`
+	ContentCategories []ContentCategory `json:"contentCategories,omitempty"`
+	Kind              *string           `json:"kind,omitempty"`
+	NextPageToken     *string           `json:"nextPageToken,omitempty"`
 }

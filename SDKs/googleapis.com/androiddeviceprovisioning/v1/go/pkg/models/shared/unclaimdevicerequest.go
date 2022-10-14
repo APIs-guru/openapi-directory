@@ -9,9 +9,9 @@ const (
 )
 
 type UnclaimDeviceRequest struct {
-	DeviceID               *string                              `json:"deviceId"`
-	DeviceIdentifier       *DeviceIdentifier                    `json:"deviceIdentifier"`
-	SectionType            *UnclaimDeviceRequestSectionTypeEnum `json:"sectionType"`
-	VacationModeDays       *int32                               `json:"vacationModeDays"`
-	VacationModeExpireTime *string                              `json:"vacationModeExpireTime"`
+	DeviceID               *string                              `json:"deviceId,omitempty"`
+	DeviceIdentifier       *DeviceIdentifier                    `json:"deviceIdentifier,omitempty"`
+	SectionType            *UnclaimDeviceRequestSectionTypeEnum `json:"sectionType,omitempty"`
+	VacationModeDays       *int32                               `json:"vacationModeDays,omitempty"`
+	VacationModeExpireTime *string                              `json:"vacationModeExpireTime,omitempty"`
 }

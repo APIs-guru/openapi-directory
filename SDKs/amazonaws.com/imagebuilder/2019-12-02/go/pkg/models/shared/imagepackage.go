@@ -1,6 +1,6 @@
 package shared
 
 type ImagePackage struct {
-	PackageName    *string `json:"packageName"`
-	PackageVersion *string `json:"packageVersion"`
+	PackageName    *string `json:"packageName,omitempty"`
+	PackageVersion *string `json:"packageVersion,omitempty"`
 }

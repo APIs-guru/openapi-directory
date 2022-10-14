@@ -10,34 +10,34 @@ type PostSearchVersionNumberGeometryFilterExtPathParams struct {
 }
 
 type PostSearchVersionNumberGeometryFilterExtRequestBodyGeometryList struct {
-	Position *string  `json:"position"`
-	Radius   *int64   `json:"radius"`
-	Type     *string  `json:"type"`
-	Vertices []string `json:"vertices"`
+	Position *string  `json:"position,omitempty"`
+	Radius   *int64   `json:"radius,omitempty"`
+	Type     *string  `json:"type,omitempty"`
+	Vertices []string `json:"vertices,omitempty"`
 }
 
 type PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListAddress struct {
-	FreeformAddress *string `json:"freeformAddress"`
+	FreeformAddress *string `json:"freeformAddress,omitempty"`
 }
 
 type PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPoi struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPosition struct {
-	Lat *float32 `json:"lat"`
-	Lon *float32 `json:"lon"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lon *float32 `json:"lon,omitempty"`
 }
 
 type PostSearchVersionNumberGeometryFilterExtRequestBodyPoiList struct {
-	Address  *PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListAddress  `json:"address"`
-	Poi      *PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPoi      `json:"poi"`
-	Position *PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPosition `json:"position"`
+	Address  *PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListAddress  `json:"address,omitempty"`
+	Poi      *PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPoi      `json:"poi,omitempty"`
+	Position *PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPosition `json:"position,omitempty"`
 }
 
 type PostSearchVersionNumberGeometryFilterExtRequestBody struct {
-	GeometryList []PostSearchVersionNumberGeometryFilterExtRequestBodyGeometryList `json:"geometryList"`
-	PoiList      []PostSearchVersionNumberGeometryFilterExtRequestBodyPoiList      `json:"poiList"`
+	GeometryList []PostSearchVersionNumberGeometryFilterExtRequestBodyGeometryList `json:"geometryList,omitempty"`
+	PoiList      []PostSearchVersionNumberGeometryFilterExtRequestBodyPoiList      `json:"poiList,omitempty"`
 }
 
 type PostSearchVersionNumberGeometryFilterExtRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type StructuredAggregationQuery struct {
-	Aggregations    []Aggregation    `json:"aggregations"`
-	StructuredQuery *StructuredQuery `json:"structuredQuery"`
+	Aggregations    []Aggregation    `json:"aggregations,omitempty"`
+	StructuredQuery *StructuredQuery `json:"structuredQuery,omitempty"`
 }

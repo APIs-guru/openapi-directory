@@ -14,16 +14,16 @@ const (
 )
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatus struct {
-	State *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum `json:"state"`
+	State *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum `json:"state,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodes struct {
-	CreatedAt *time.Time                                                                                                                                       `json:"created_at"`
-	DropletID *string                                                                                                                                          `json:"droplet_id"`
-	ID        *string                                                                                                                                          `json:"id"`
-	Name      *string                                                                                                                                          `json:"name"`
-	Status    *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatus `json:"status"`
-	UpdatedAt *time.Time                                                                                                                                       `json:"updated_at"`
+	CreatedAt *time.Time                                                                                                                                       `json:"created_at,omitempty"`
+	DropletID *string                                                                                                                                          `json:"droplet_id,omitempty"`
+	ID        *string                                                                                                                                          `json:"id,omitempty"`
+	Name      *string                                                                                                                                          `json:"name,omitempty"`
+	Status    *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatus `json:"status,omitempty"`
+	UpdatedAt *time.Time                                                                                                                                       `json:"updated_at,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum string
@@ -35,21 +35,21 @@ const (
 )
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaints struct {
-	Effect *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum `json:"effect"`
-	Key    *string                                                                                                                                               `json:"key"`
-	Value  *string                                                                                                                                               `json:"value"`
+	Effect *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum `json:"effect,omitempty"`
+	Key    *string                                                                                                                                               `json:"key,omitempty"`
+	Value  *string                                                                                                                                               `json:"value,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItems struct {
-	AutoScale *bool                                                                                                                                        `json:"auto_scale"`
+	AutoScale *bool                                                                                                                                        `json:"auto_scale,omitempty"`
 	Count     int64                                                                                                                                        `json:"count"`
-	ID        *string                                                                                                                                      `json:"id"`
-	Labels    map[string]interface{}                                                                                                                       `json:"labels"`
-	MaxNodes  *int64                                                                                                                                       `json:"max_nodes"`
-	MinNodes  *int64                                                                                                                                       `json:"min_nodes"`
+	ID        *string                                                                                                                                      `json:"id,omitempty"`
+	Labels    map[string]interface{}                                                                                                                       `json:"labels,omitempty"`
+	MaxNodes  *int64                                                                                                                                       `json:"max_nodes,omitempty"`
+	MinNodes  *int64                                                                                                                                       `json:"min_nodes,omitempty"`
 	Name      string                                                                                                                                       `json:"name"`
-	Nodes     []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodes  `json:"nodes"`
+	Nodes     []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodes  `json:"nodes,omitempty"`
 	Size      string                                                                                                                                       `json:"size"`
-	Tags      []string                                                                                                                                     `json:"tags"`
-	Taints    []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaints `json:"taints"`
+	Tags      []string                                                                                                                                     `json:"tags,omitempty"`
+	Taints    []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaints `json:"taints,omitempty"`
 }

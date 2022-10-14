@@ -1,7 +1,7 @@
 package shared
 
 type Buckets struct {
-	Items         []Bucket `json:"items"`
-	Kind          *string  `json:"kind"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Bucket `json:"items,omitempty"`
+	Kind          *string  `json:"kind,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

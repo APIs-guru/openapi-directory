@@ -11,23 +11,23 @@ type UsersPartialUpdatePathParams struct {
 type UsersPartialUpdateRequestBodyAttributesAttributes struct {
 	Active         bool      `json:"active"`
 	DateRegistered time.Time `json:"date_registered"`
-	FamilyName     *string   `json:"family_name"`
+	FamilyName     *string   `json:"family_name,omitempty"`
 	FullName       string    `json:"full_name"`
-	GivenName      *string   `json:"given_name"`
-	Locale         *string   `json:"locale"`
-	MiddleNames    *string   `json:"middle_names"`
-	Suffix         *string   `json:"suffix"`
-	Timezone       *string   `json:"timezone"`
+	GivenName      *string   `json:"given_name,omitempty"`
+	Locale         *string   `json:"locale,omitempty"`
+	MiddleNames    *string   `json:"middle_names,omitempty"`
+	Suffix         *string   `json:"suffix,omitempty"`
+	Timezone       *string   `json:"timezone,omitempty"`
 }
 
 type UsersPartialUpdateRequestBodyLinksLinks struct {
-	HTML         *string `json:"html"`
-	ProfileImage *string `json:"profile_image"`
+	HTML         *string `json:"html,omitempty"`
+	ProfileImage *string `json:"profile_image,omitempty"`
 }
 
 type UsersPartialUpdateRequestBodyRelationshipsRelationships struct {
-	Institutions *string `json:"institutions"`
-	Nodes        *string `json:"nodes"`
+	Institutions *string `json:"institutions,omitempty"`
+	Nodes        *string `json:"nodes,omitempty"`
 }
 
 type UsersPartialUpdateRequestBodyUser struct {

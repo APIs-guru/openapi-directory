@@ -19,13 +19,13 @@ const (
 )
 
 type ScanRun struct {
-	EndTime            *string                    `json:"endTime"`
-	ExecutionState     *ScanRunExecutionStateEnum `json:"executionState"`
-	HasVulnerabilities *bool                      `json:"hasVulnerabilities"`
-	Name               *string                    `json:"name"`
-	ProgressPercent    *int32                     `json:"progressPercent"`
-	ResultState        *ScanRunResultStateEnum    `json:"resultState"`
-	StartTime          *string                    `json:"startTime"`
-	UrlsCrawledCount   *string                    `json:"urlsCrawledCount"`
-	UrlsTestedCount    *string                    `json:"urlsTestedCount"`
+	EndTime            *string                    `json:"endTime,omitempty"`
+	ExecutionState     *ScanRunExecutionStateEnum `json:"executionState,omitempty"`
+	HasVulnerabilities *bool                      `json:"hasVulnerabilities,omitempty"`
+	Name               *string                    `json:"name,omitempty"`
+	ProgressPercent    *int32                     `json:"progressPercent,omitempty"`
+	ResultState        *ScanRunResultStateEnum    `json:"resultState,omitempty"`
+	StartTime          *string                    `json:"startTime,omitempty"`
+	UrlsCrawledCount   *string                    `json:"urlsCrawledCount,omitempty"`
+	UrlsTestedCount    *string                    `json:"urlsTestedCount,omitempty"`
 }

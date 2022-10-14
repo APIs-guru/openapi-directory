@@ -1,11 +1,11 @@
 package shared
 
 type AccountStatusAccountLevelIssue struct {
-	Country       *string `json:"country"`
-	Destination   *string `json:"destination"`
-	Detail        *string `json:"detail"`
-	Documentation *string `json:"documentation"`
-	ID            *string `json:"id"`
-	Severity      *string `json:"severity"`
-	Title         *string `json:"title"`
+	Country       *string `json:"country,omitempty"`
+	Destination   *string `json:"destination,omitempty"`
+	Detail        *string `json:"detail,omitempty"`
+	Documentation *string `json:"documentation,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	Severity      *string `json:"severity,omitempty"`
+	Title         *string `json:"title,omitempty"`
 }

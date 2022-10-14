@@ -1,5 +1,5 @@
 package shared
 
 type DescribeServiceErrorsResult struct {
-	ServiceErrors []ServiceError `json:"ServiceErrors"`
+	ServiceErrors []ServiceError `json:"ServiceErrors,omitempty"`
 }

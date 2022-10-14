@@ -12,12 +12,12 @@ const (
 )
 
 type PrivateConnection struct {
-	CreateTime       *string                     `json:"createTime"`
-	DisplayName      *string                     `json:"displayName"`
-	Error            *Error                      `json:"error"`
-	Labels           map[string]string           `json:"labels"`
-	Name             *string                     `json:"name"`
-	State            *PrivateConnectionStateEnum `json:"state"`
-	UpdateTime       *string                     `json:"updateTime"`
-	VpcPeeringConfig *VpcPeeringConfig           `json:"vpcPeeringConfig"`
+	CreateTime       *string                     `json:"createTime,omitempty"`
+	DisplayName      *string                     `json:"displayName,omitempty"`
+	Error            *Error                      `json:"error,omitempty"`
+	Labels           map[string]string           `json:"labels,omitempty"`
+	Name             *string                     `json:"name,omitempty"`
+	State            *PrivateConnectionStateEnum `json:"state,omitempty"`
+	UpdateTime       *string                     `json:"updateTime,omitempty"`
+	VpcPeeringConfig *VpcPeeringConfig           `json:"vpcPeeringConfig,omitempty"`
 }

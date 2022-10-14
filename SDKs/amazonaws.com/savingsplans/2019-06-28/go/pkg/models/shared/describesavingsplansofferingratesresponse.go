@@ -1,6 +1,6 @@
 package shared
 
 type DescribeSavingsPlansOfferingRatesResponse struct {
-	NextToken     *string                   `json:"nextToken"`
-	SearchResults []SavingsPlanOfferingRate `json:"searchResults"`
+	NextToken     *string                   `json:"nextToken,omitempty"`
+	SearchResults []SavingsPlanOfferingRate `json:"searchResults,omitempty"`
 }

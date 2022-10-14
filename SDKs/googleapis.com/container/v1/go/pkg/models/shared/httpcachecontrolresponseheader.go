@@ -1,7 +1,7 @@
 package shared
 
 type HTTPCacheControlResponseHeader struct {
-	Age       *string `json:"age"`
-	Directive *string `json:"directive"`
-	Expires   *string `json:"expires"`
+	Age       *string `json:"age,omitempty"`
+	Directive *string `json:"directive,omitempty"`
+	Expires   *string `json:"expires,omitempty"`
 }

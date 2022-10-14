@@ -1,11 +1,11 @@
 package shared
 
 type EvaluationMetrics struct {
-	ArimaForecastingMetrics         *ArimaForecastingMetrics         `json:"arimaForecastingMetrics"`
-	BinaryClassificationMetrics     *BinaryClassificationMetrics     `json:"binaryClassificationMetrics"`
-	ClusteringMetrics               *ClusteringMetrics               `json:"clusteringMetrics"`
-	DimensionalityReductionMetrics  *DimensionalityReductionMetrics  `json:"dimensionalityReductionMetrics"`
-	MultiClassClassificationMetrics *MultiClassClassificationMetrics `json:"multiClassClassificationMetrics"`
-	RankingMetrics                  *RankingMetrics                  `json:"rankingMetrics"`
-	RegressionMetrics               *RegressionMetrics               `json:"regressionMetrics"`
+	ArimaForecastingMetrics         *ArimaForecastingMetrics         `json:"arimaForecastingMetrics,omitempty"`
+	BinaryClassificationMetrics     *BinaryClassificationMetrics     `json:"binaryClassificationMetrics,omitempty"`
+	ClusteringMetrics               *ClusteringMetrics               `json:"clusteringMetrics,omitempty"`
+	DimensionalityReductionMetrics  *DimensionalityReductionMetrics  `json:"dimensionalityReductionMetrics,omitempty"`
+	MultiClassClassificationMetrics *MultiClassClassificationMetrics `json:"multiClassClassificationMetrics,omitempty"`
+	RankingMetrics                  *RankingMetrics                  `json:"rankingMetrics,omitempty"`
+	RegressionMetrics               *RegressionMetrics               `json:"regressionMetrics,omitempty"`
 }

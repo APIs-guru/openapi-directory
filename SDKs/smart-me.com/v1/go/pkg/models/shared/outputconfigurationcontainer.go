@@ -29,9 +29,9 @@ const (
 )
 
 type OutputConfigurationContainer struct {
-	DigitalOutputNoConnectionAction *OutputConfigurationContainerDigitalOutputNoConnectionActionEnum `json:"DigitalOutputNoConnectionAction"`
-	Name                            *string                                                          `json:"Name"`
-	Number                          *int32                                                           `json:"Number"`
-	S0PulseValue                    *OutputConfigurationContainerS0PulseValueEnum                    `json:"S0PulseValue"`
-	Type                            *OutputConfigurationContainerTypeEnum                            `json:"Type"`
+	DigitalOutputNoConnectionAction *OutputConfigurationContainerDigitalOutputNoConnectionActionEnum `json:"DigitalOutputNoConnectionAction,omitempty"`
+	Name                            *string                                                          `json:"Name,omitempty"`
+	Number                          *int32                                                           `json:"Number,omitempty"`
+	S0PulseValue                    *OutputConfigurationContainerS0PulseValueEnum                    `json:"S0PulseValue,omitempty"`
+	Type                            *OutputConfigurationContainerTypeEnum                            `json:"Type,omitempty"`
 }

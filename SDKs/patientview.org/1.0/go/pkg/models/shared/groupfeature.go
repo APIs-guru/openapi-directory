@@ -5,8 +5,8 @@ import (
 )
 
 type GroupFeature struct {
-	Created    *time.Time `json:"created"`
-	Feature    *Feature   `json:"feature"`
-	ID         *int64     `json:"id"`
-	LastUpdate *time.Time `json:"lastUpdate"`
+	Created    *time.Time `json:"created,omitempty"`
+	Feature    *Feature   `json:"feature,omitempty"`
+	ID         *int64     `json:"id,omitempty"`
+	LastUpdate *time.Time `json:"lastUpdate,omitempty"`
 }

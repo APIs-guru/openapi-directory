@@ -1,98 +1,98 @@
 package shared
 
 type PersonAgeRange struct {
-	Max *int32 `json:"max"`
-	Min *int32 `json:"min"`
+	Max *int32 `json:"max,omitempty"`
+	Min *int32 `json:"min,omitempty"`
 }
 
 type PersonCoverCoverInfo struct {
-	LeftImageOffset *int32 `json:"leftImageOffset"`
-	TopImageOffset  *int32 `json:"topImageOffset"`
+	LeftImageOffset *int32 `json:"leftImageOffset,omitempty"`
+	TopImageOffset  *int32 `json:"topImageOffset,omitempty"`
 }
 
 type PersonCoverCoverPhoto struct {
-	Height *int32  `json:"height"`
-	URL    *string `json:"url"`
-	Width  *int32  `json:"width"`
+	Height *int32  `json:"height,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int32  `json:"width,omitempty"`
 }
 
 type PersonCover struct {
-	CoverInfo  *PersonCoverCoverInfo  `json:"coverInfo"`
-	CoverPhoto *PersonCoverCoverPhoto `json:"coverPhoto"`
-	Layout     *string                `json:"layout"`
+	CoverInfo  *PersonCoverCoverInfo  `json:"coverInfo,omitempty"`
+	CoverPhoto *PersonCoverCoverPhoto `json:"coverPhoto,omitempty"`
+	Layout     *string                `json:"layout,omitempty"`
 }
 
 type PersonEmails struct {
-	Type  *string `json:"type"`
-	Value *string `json:"value"`
+	Type  *string `json:"type,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type PersonImage struct {
-	IsDefault *bool   `json:"isDefault"`
-	URL       *string `json:"url"`
+	IsDefault *bool   `json:"isDefault,omitempty"`
+	URL       *string `json:"url,omitempty"`
 }
 
 type PersonName struct {
-	FamilyName      *string `json:"familyName"`
-	Formatted       *string `json:"formatted"`
-	GivenName       *string `json:"givenName"`
-	HonorificPrefix *string `json:"honorificPrefix"`
-	HonorificSuffix *string `json:"honorificSuffix"`
-	MiddleName      *string `json:"middleName"`
+	FamilyName      *string `json:"familyName,omitempty"`
+	Formatted       *string `json:"formatted,omitempty"`
+	GivenName       *string `json:"givenName,omitempty"`
+	HonorificPrefix *string `json:"honorificPrefix,omitempty"`
+	HonorificSuffix *string `json:"honorificSuffix,omitempty"`
+	MiddleName      *string `json:"middleName,omitempty"`
 }
 
 type PersonOrganizations struct {
-	Department  *string `json:"department"`
-	Description *string `json:"description"`
-	EndDate     *string `json:"endDate"`
-	Location    *string `json:"location"`
-	Name        *string `json:"name"`
-	Primary     *bool   `json:"primary"`
-	StartDate   *string `json:"startDate"`
-	Title       *string `json:"title"`
-	Type        *string `json:"type"`
+	Department  *string `json:"department,omitempty"`
+	Description *string `json:"description,omitempty"`
+	EndDate     *string `json:"endDate,omitempty"`
+	Location    *string `json:"location,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Primary     *bool   `json:"primary,omitempty"`
+	StartDate   *string `json:"startDate,omitempty"`
+	Title       *string `json:"title,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }
 
 type PersonPlacesLived struct {
-	Primary *bool   `json:"primary"`
-	Value   *string `json:"value"`
+	Primary *bool   `json:"primary,omitempty"`
+	Value   *string `json:"value,omitempty"`
 }
 
 type PersonUrls struct {
-	Label *string `json:"label"`
-	Type  *string `json:"type"`
-	Value *string `json:"value"`
+	Label *string `json:"label,omitempty"`
+	Type  *string `json:"type,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type Person struct {
-	AboutMe            *string               `json:"aboutMe"`
-	AgeRange           *PersonAgeRange       `json:"ageRange"`
-	Birthday           *string               `json:"birthday"`
-	BraggingRights     *string               `json:"braggingRights"`
-	CircledByCount     *int32                `json:"circledByCount"`
-	Cover              *PersonCover          `json:"cover"`
-	CurrentLocation    *string               `json:"currentLocation"`
-	DisplayName        *string               `json:"displayName"`
-	Domain             *string               `json:"domain"`
-	Emails             []PersonEmails        `json:"emails"`
-	Etag               *string               `json:"etag"`
-	Gender             *string               `json:"gender"`
-	ID                 *string               `json:"id"`
-	Image              *PersonImage          `json:"image"`
-	IsPlusUser         *bool                 `json:"isPlusUser"`
-	Kind               *string               `json:"kind"`
-	Language           *string               `json:"language"`
-	Name               *PersonName           `json:"name"`
-	Nickname           *string               `json:"nickname"`
-	ObjectType         *string               `json:"objectType"`
-	Occupation         *string               `json:"occupation"`
-	Organizations      []PersonOrganizations `json:"organizations"`
-	PlacesLived        []PersonPlacesLived   `json:"placesLived"`
-	PlusOneCount       *int32                `json:"plusOneCount"`
-	RelationshipStatus *string               `json:"relationshipStatus"`
-	Skills             *string               `json:"skills"`
-	Tagline            *string               `json:"tagline"`
-	URL                *string               `json:"url"`
-	Urls               []PersonUrls          `json:"urls"`
-	Verified           *bool                 `json:"verified"`
+	AboutMe            *string               `json:"aboutMe,omitempty"`
+	AgeRange           *PersonAgeRange       `json:"ageRange,omitempty"`
+	Birthday           *string               `json:"birthday,omitempty"`
+	BraggingRights     *string               `json:"braggingRights,omitempty"`
+	CircledByCount     *int32                `json:"circledByCount,omitempty"`
+	Cover              *PersonCover          `json:"cover,omitempty"`
+	CurrentLocation    *string               `json:"currentLocation,omitempty"`
+	DisplayName        *string               `json:"displayName,omitempty"`
+	Domain             *string               `json:"domain,omitempty"`
+	Emails             []PersonEmails        `json:"emails,omitempty"`
+	Etag               *string               `json:"etag,omitempty"`
+	Gender             *string               `json:"gender,omitempty"`
+	ID                 *string               `json:"id,omitempty"`
+	Image              *PersonImage          `json:"image,omitempty"`
+	IsPlusUser         *bool                 `json:"isPlusUser,omitempty"`
+	Kind               *string               `json:"kind,omitempty"`
+	Language           *string               `json:"language,omitempty"`
+	Name               *PersonName           `json:"name,omitempty"`
+	Nickname           *string               `json:"nickname,omitempty"`
+	ObjectType         *string               `json:"objectType,omitempty"`
+	Occupation         *string               `json:"occupation,omitempty"`
+	Organizations      []PersonOrganizations `json:"organizations,omitempty"`
+	PlacesLived        []PersonPlacesLived   `json:"placesLived,omitempty"`
+	PlusOneCount       *int32                `json:"plusOneCount,omitempty"`
+	RelationshipStatus *string               `json:"relationshipStatus,omitempty"`
+	Skills             *string               `json:"skills,omitempty"`
+	Tagline            *string               `json:"tagline,omitempty"`
+	URL                *string               `json:"url,omitempty"`
+	Urls               []PersonUrls          `json:"urls,omitempty"`
+	Verified           *bool                 `json:"verified,omitempty"`
 }

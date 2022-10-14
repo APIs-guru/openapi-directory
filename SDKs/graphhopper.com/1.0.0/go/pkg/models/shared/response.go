@@ -9,9 +9,9 @@ const (
 )
 
 type Response struct {
-	Copyrights         []string            `json:"copyrights"`
-	ProcessingTime     *int64              `json:"processing_time"`
-	Solution           *Solution           `json:"solution"`
-	Status             *ResponseStatusEnum `json:"status"`
-	WaitingTimeInQueue *int64              `json:"waiting_time_in_queue"`
+	Copyrights         []string            `json:"copyrights,omitempty"`
+	ProcessingTime     *int64              `json:"processing_time,omitempty"`
+	Solution           *Solution           `json:"solution,omitempty"`
+	Status             *ResponseStatusEnum `json:"status,omitempty"`
+	WaitingTimeInQueue *int64              `json:"waiting_time_in_queue,omitempty"`
 }

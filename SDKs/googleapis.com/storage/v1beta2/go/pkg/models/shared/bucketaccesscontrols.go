@@ -1,6 +1,6 @@
 package shared
 
 type BucketAccessControls struct {
-	Items []BucketAccessControl `json:"items"`
-	Kind  *string               `json:"kind"`
+	Items []BucketAccessControl `json:"items,omitempty"`
+	Kind  *string               `json:"kind,omitempty"`
 }

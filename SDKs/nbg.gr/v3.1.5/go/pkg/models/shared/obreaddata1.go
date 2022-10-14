@@ -5,8 +5,8 @@ import (
 )
 
 type ObReadData1 struct {
-	ExpirationDateTime      *time.Time                       `json:"ExpirationDateTime"`
+	ExpirationDateTime      *time.Time                       `json:"ExpirationDateTime,omitempty"`
 	Permissions             []ObExternalPermissions1CodeEnum `json:"Permissions"`
-	TransactionFromDateTime *time.Time                       `json:"TransactionFromDateTime"`
-	TransactionToDateTime   *time.Time                       `json:"TransactionToDateTime"`
+	TransactionFromDateTime *time.Time                       `json:"TransactionFromDateTime,omitempty"`
+	TransactionToDateTime   *time.Time                       `json:"TransactionToDateTime,omitempty"`
 }

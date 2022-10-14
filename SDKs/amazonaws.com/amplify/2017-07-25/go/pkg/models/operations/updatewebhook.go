@@ -19,8 +19,8 @@ type UpdateWebhookHeaders struct {
 }
 
 type UpdateWebhookRequestBody struct {
-	BranchName  *string `json:"branchName"`
-	Description *string `json:"description"`
+	BranchName  *string `json:"branchName,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 type UpdateWebhookRequest struct {

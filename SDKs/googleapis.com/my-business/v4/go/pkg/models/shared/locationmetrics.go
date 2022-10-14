@@ -1,7 +1,7 @@
 package shared
 
 type LocationMetrics struct {
-	LocationName *string       `json:"locationName"`
-	MetricValues []MetricValue `json:"metricValues"`
-	TimeZone     *string       `json:"timeZone"`
+	LocationName *string       `json:"locationName,omitempty"`
+	MetricValues []MetricValue `json:"metricValues,omitempty"`
+	TimeZone     *string       `json:"timeZone,omitempty"`
 }

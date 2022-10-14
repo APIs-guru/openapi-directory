@@ -1,6 +1,6 @@
 package shared
 
 type InstanceIdentity struct {
-	Document  *string `json:"document"`
-	Signature *string `json:"signature"`
+	Document  *string `json:"document,omitempty"`
+	Signature *string `json:"signature,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AvailableVersion struct {
-	Reason  *string `json:"reason"`
-	Version *string `json:"version"`
+	Reason  *string `json:"reason,omitempty"`
+	Version *string `json:"version,omitempty"`
 }

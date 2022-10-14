@@ -1,10 +1,10 @@
 package shared
 
 type InitiateAuthRequest struct {
-	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata"`
+	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	AuthFlow          AuthFlowTypeEnum       `json:"AuthFlow"`
-	AuthParameters    map[string]string      `json:"AuthParameters"`
+	AuthParameters    map[string]string      `json:"AuthParameters,omitempty"`
 	ClientID          string                 `json:"ClientId"`
-	ClientMetadata    map[string]string      `json:"ClientMetadata"`
-	UserContextData   *UserContextDataType   `json:"UserContextData"`
+	ClientMetadata    map[string]string      `json:"ClientMetadata,omitempty"`
+	UserContextData   *UserContextDataType   `json:"UserContextData,omitempty"`
 }

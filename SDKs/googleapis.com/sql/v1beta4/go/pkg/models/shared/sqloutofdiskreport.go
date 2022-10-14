@@ -9,6 +9,6 @@ const (
 )
 
 type SQLOutOfDiskReport struct {
-	SQLMinRecommendedIncreaseSizeGb *int32                                   `json:"sqlMinRecommendedIncreaseSizeGb"`
-	SQLOutOfDiskState               *SQLOutOfDiskReportSQLOutOfDiskStateEnum `json:"sqlOutOfDiskState"`
+	SQLMinRecommendedIncreaseSizeGb *int32                                   `json:"sqlMinRecommendedIncreaseSizeGb,omitempty"`
+	SQLOutOfDiskState               *SQLOutOfDiskReportSQLOutOfDiskStateEnum `json:"sqlOutOfDiskState,omitempty"`
 }

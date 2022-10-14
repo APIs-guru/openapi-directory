@@ -6,7 +6,7 @@ type CreateEdgePackagingJobRequest struct {
 	ModelName            string           `json:"ModelName"`
 	ModelVersion         string           `json:"ModelVersion"`
 	OutputConfig         EdgeOutputConfig `json:"OutputConfig"`
-	ResourceKey          *string          `json:"ResourceKey"`
+	ResourceKey          *string          `json:"ResourceKey,omitempty"`
 	RoleArn              string           `json:"RoleArn"`
-	Tags                 []Tag            `json:"Tags"`
+	Tags                 []Tag            `json:"Tags,omitempty"`
 }

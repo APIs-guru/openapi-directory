@@ -1,10 +1,10 @@
 package shared
 
 type SetNodePoolSizeRequest struct {
-	ClusterID  *string `json:"clusterId"`
-	Name       *string `json:"name"`
-	NodeCount  *int32  `json:"nodeCount"`
-	NodePoolID *string `json:"nodePoolId"`
-	ProjectID  *string `json:"projectId"`
-	Zone       *string `json:"zone"`
+	ClusterID  *string `json:"clusterId,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	NodeCount  *int32  `json:"nodeCount,omitempty"`
+	NodePoolID *string `json:"nodePoolId,omitempty"`
+	ProjectID  *string `json:"projectId,omitempty"`
+	Zone       *string `json:"zone,omitempty"`
 }

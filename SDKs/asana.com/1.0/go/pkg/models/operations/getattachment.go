@@ -19,7 +19,7 @@ type GetAttachmentRequest struct {
 }
 
 type GetAttachment200ApplicationJSON struct {
-	Data *shared.AttachmentResponse `json:"data"`
+	Data *shared.AttachmentResponse `json:"data,omitempty"`
 }
 
 type GetAttachmentResponse struct {

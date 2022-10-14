@@ -1,8 +1,8 @@
 package shared
 
 type RemoveWebAppRequest struct {
-	AllowMissing *bool   `json:"allowMissing"`
-	Etag         *string `json:"etag"`
-	Immediate    *bool   `json:"immediate"`
-	ValidateOnly *bool   `json:"validateOnly"`
+	AllowMissing *bool   `json:"allowMissing,omitempty"`
+	Etag         *string `json:"etag,omitempty"`
+	Immediate    *bool   `json:"immediate,omitempty"`
+	ValidateOnly *bool   `json:"validateOnly,omitempty"`
 }

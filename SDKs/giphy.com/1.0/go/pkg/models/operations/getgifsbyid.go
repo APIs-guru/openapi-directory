@@ -13,9 +13,9 @@ type GetGifsByIDRequest struct {
 }
 
 type GetGifsByID200ApplicationJSON struct {
-	Data       []shared.Gif       `json:"data"`
-	Meta       *shared.Meta       `json:"meta"`
-	Pagination *shared.Pagination `json:"pagination"`
+	Data       []shared.Gif       `json:"data,omitempty"`
+	Meta       *shared.Meta       `json:"meta,omitempty"`
+	Pagination *shared.Pagination `json:"pagination,omitempty"`
 }
 
 type GetGifsByIDResponse struct {

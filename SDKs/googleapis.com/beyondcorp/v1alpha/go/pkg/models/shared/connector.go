@@ -12,13 +12,13 @@ const (
 )
 
 type Connector struct {
-	CreateTime    *string             `json:"createTime"`
-	DisplayName   *string             `json:"displayName"`
-	Labels        map[string]string   `json:"labels"`
-	Name          *string             `json:"name"`
-	PrincipalInfo *PrincipalInfo      `json:"principalInfo"`
-	ResourceInfo  *ResourceInfo       `json:"resourceInfo"`
-	State         *ConnectorStateEnum `json:"state"`
-	UID           *string             `json:"uid"`
-	UpdateTime    *string             `json:"updateTime"`
+	CreateTime    *string             `json:"createTime,omitempty"`
+	DisplayName   *string             `json:"displayName,omitempty"`
+	Labels        map[string]string   `json:"labels,omitempty"`
+	Name          *string             `json:"name,omitempty"`
+	PrincipalInfo *PrincipalInfo      `json:"principalInfo,omitempty"`
+	ResourceInfo  *ResourceInfo       `json:"resourceInfo,omitempty"`
+	State         *ConnectorStateEnum `json:"state,omitempty"`
+	UID           *string             `json:"uid,omitempty"`
+	UpdateTime    *string             `json:"updateTime,omitempty"`
 }

@@ -5,9 +5,9 @@ type PutFloatingIpsIDPathParams struct {
 }
 
 type PutFloatingIpsIDRequestBodyUpdateFloatingIPRequest struct {
-	Description *string                `json:"description"`
-	Labels      map[string]interface{} `json:"labels"`
-	Name        *string                `json:"name"`
+	Description *string                `json:"description,omitempty"`
+	Labels      map[string]interface{} `json:"labels,omitempty"`
+	Name        *string                `json:"name,omitempty"`
 }
 
 type PutFloatingIpsIDRequest struct {

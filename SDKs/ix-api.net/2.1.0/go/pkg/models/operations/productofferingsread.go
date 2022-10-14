@@ -16,10 +16,10 @@ const (
 )
 
 type ProductOfferingsRead401ApplicationJSON struct {
-	Detail   *string                                        `json:"detail"`
-	Instance *string                                        `json:"instance"`
-	Status   *interface{}                                   `json:"status"`
-	Title    *interface{}                                   `json:"title"`
+	Detail   *string                                        `json:"detail,omitempty"`
+	Instance *string                                        `json:"instance,omitempty"`
+	Status   *interface{}                                   `json:"status,omitempty"`
+	Title    *interface{}                                   `json:"title,omitempty"`
 	Type     ProductOfferingsRead401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -30,10 +30,10 @@ const (
 )
 
 type ProductOfferingsRead403ApplicationJSON struct {
-	Detail   *string                                        `json:"detail"`
-	Instance *string                                        `json:"instance"`
-	Status   *interface{}                                   `json:"status"`
-	Title    *interface{}                                   `json:"title"`
+	Detail   *string                                        `json:"detail,omitempty"`
+	Instance *string                                        `json:"instance,omitempty"`
+	Status   *interface{}                                   `json:"status,omitempty"`
+	Title    *interface{}                                   `json:"title,omitempty"`
 	Type     ProductOfferingsRead403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -44,10 +44,10 @@ const (
 )
 
 type ProductOfferingsRead404ApplicationJSON struct {
-	Detail   *string                                        `json:"detail"`
-	Instance *string                                        `json:"instance"`
-	Status   *interface{}                                   `json:"status"`
-	Title    *interface{}                                   `json:"title"`
+	Detail   *string                                        `json:"detail,omitempty"`
+	Instance *string                                        `json:"instance,omitempty"`
+	Status   *interface{}                                   `json:"status,omitempty"`
+	Title    *interface{}                                   `json:"title,omitempty"`
 	Type     ProductOfferingsRead404ApplicationJSONTypeEnum `json:"type"`
 }
 

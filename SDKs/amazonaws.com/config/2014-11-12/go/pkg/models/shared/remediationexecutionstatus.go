@@ -5,9 +5,9 @@ import (
 )
 
 type RemediationExecutionStatus struct {
-	InvocationTime  *time.Time                     `json:"InvocationTime"`
-	LastUpdatedTime *time.Time                     `json:"LastUpdatedTime"`
-	ResourceKey     *ResourceKey                   `json:"ResourceKey"`
-	State           *RemediationExecutionStateEnum `json:"State"`
-	StepDetails     []RemediationExecutionStep     `json:"StepDetails"`
+	InvocationTime  *time.Time                     `json:"InvocationTime,omitempty"`
+	LastUpdatedTime *time.Time                     `json:"LastUpdatedTime,omitempty"`
+	ResourceKey     *ResourceKey                   `json:"ResourceKey,omitempty"`
+	State           *RemediationExecutionStateEnum `json:"State,omitempty"`
+	StepDetails     []RemediationExecutionStep     `json:"StepDetails,omitempty"`
 }

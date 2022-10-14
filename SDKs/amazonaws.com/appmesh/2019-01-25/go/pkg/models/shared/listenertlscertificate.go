@@ -1,7 +1,7 @@
 package shared
 
 type ListenerTLSCertificate struct {
-	Acm  *ListenerTLSAcmCertificate  `json:"acm"`
-	File *ListenerTLSFileCertificate `json:"file"`
-	Sds  *ListenerTLSSdsCertificate  `json:"sds"`
+	Acm  *ListenerTLSAcmCertificate  `json:"acm,omitempty"`
+	File *ListenerTLSFileCertificate `json:"file,omitempty"`
+	Sds  *ListenerTLSSdsCertificate  `json:"sds,omitempty"`
 }

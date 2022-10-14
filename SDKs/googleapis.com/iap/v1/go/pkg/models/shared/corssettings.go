@@ -1,5 +1,5 @@
 package shared
 
 type CorsSettings struct {
-	AllowHTTPOptions *bool `json:"allowHttpOptions"`
+	AllowHTTPOptions *bool `json:"allowHttpOptions,omitempty"`
 }

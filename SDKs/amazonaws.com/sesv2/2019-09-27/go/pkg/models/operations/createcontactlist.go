@@ -16,9 +16,9 @@ type CreateContactListHeaders struct {
 
 type CreateContactListRequestBody struct {
 	ContactListName string         `json:"ContactListName"`
-	Description     *string        `json:"Description"`
-	Tags            []shared.Tag   `json:"Tags"`
-	Topics          []shared.Topic `json:"Topics"`
+	Description     *string        `json:"Description,omitempty"`
+	Tags            []shared.Tag   `json:"Tags,omitempty"`
+	Topics          []shared.Topic `json:"Topics,omitempty"`
 }
 
 type CreateContactListRequest struct {

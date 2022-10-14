@@ -1,7 +1,7 @@
 package shared
 
 type ChannelSectionTargeting struct {
-	Countries []string `json:"countries"`
-	Languages []string `json:"languages"`
-	Regions   []string `json:"regions"`
+	Countries []string `json:"countries,omitempty"`
+	Languages []string `json:"languages,omitempty"`
+	Regions   []string `json:"regions,omitempty"`
 }

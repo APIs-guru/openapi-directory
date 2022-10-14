@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetValuesResponse struct {
-	SpreadsheetID *string      `json:"spreadsheetId"`
-	ValueRanges   []ValueRange `json:"valueRanges"`
+	SpreadsheetID *string      `json:"spreadsheetId,omitempty"`
+	ValueRanges   []ValueRange `json:"valueRanges,omitempty"`
 }

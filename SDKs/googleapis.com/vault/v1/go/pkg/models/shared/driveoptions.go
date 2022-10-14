@@ -10,8 +10,8 @@ const (
 )
 
 type DriveOptions struct {
-	ClientSideEncryptedOption *DriveOptionsClientSideEncryptedOptionEnum `json:"clientSideEncryptedOption"`
-	IncludeSharedDrives       *bool                                      `json:"includeSharedDrives"`
-	IncludeTeamDrives         *bool                                      `json:"includeTeamDrives"`
-	VersionDate               *string                                    `json:"versionDate"`
+	ClientSideEncryptedOption *DriveOptionsClientSideEncryptedOptionEnum `json:"clientSideEncryptedOption,omitempty"`
+	IncludeSharedDrives       *bool                                      `json:"includeSharedDrives,omitempty"`
+	IncludeTeamDrives         *bool                                      `json:"includeTeamDrives,omitempty"`
+	VersionDate               *string                                    `json:"versionDate,omitempty"`
 }

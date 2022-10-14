@@ -15,7 +15,7 @@ type PlayProgressive struct {
 	Height             float64                 `json:"height"`
 	Link               string                  `json:"link"`
 	LinkExpirationTime string                  `json:"link_expiration_time"`
-	Log                map[string]interface{}  `json:"log"`
+	Log                map[string]interface{}  `json:"log,omitempty"`
 	Md5                string                  `json:"md5"`
 	Size               float64                 `json:"size"`
 	Type               PlayProgressiveTypeEnum `json:"type"`
@@ -32,6 +32,6 @@ const (
 )
 
 type Play struct {
-	Progressive []PlayProgressive `json:"progressive"`
+	Progressive []PlayProgressive `json:"progressive,omitempty"`
 	Status      PlayStatusEnum    `json:"status"`
 }

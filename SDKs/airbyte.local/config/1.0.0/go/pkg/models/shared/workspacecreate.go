@@ -1,10 +1,10 @@
 package shared
 
 type WorkspaceCreate struct {
-	AnonymousDataCollection *bool          `json:"anonymousDataCollection"`
-	Email                   *string        `json:"email"`
+	AnonymousDataCollection *bool          `json:"anonymousDataCollection,omitempty"`
+	Email                   *string        `json:"email,omitempty"`
 	Name                    string         `json:"name"`
-	News                    *bool          `json:"news"`
-	Notifications           []Notification `json:"notifications"`
-	SecurityUpdates         *bool          `json:"securityUpdates"`
+	News                    *bool          `json:"news,omitempty"`
+	Notifications           []Notification `json:"notifications,omitempty"`
+	SecurityUpdates         *bool          `json:"securityUpdates,omitempty"`
 }

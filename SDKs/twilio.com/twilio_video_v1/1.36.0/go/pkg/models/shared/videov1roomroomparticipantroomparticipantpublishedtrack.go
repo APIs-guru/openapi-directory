@@ -5,13 +5,13 @@ import (
 )
 
 type VideoV1RoomRoomParticipantRoomParticipantPublishedTrack struct {
-	DateCreated    *time.Time                                 `json:"date_created"`
-	DateUpdated    *time.Time                                 `json:"date_updated"`
-	Enabled        *bool                                      `json:"enabled"`
-	Kind           *RoomParticipantPublishedTrackEnumKindEnum `json:"kind"`
-	Name           *string                                    `json:"name"`
-	ParticipantSid *string                                    `json:"participant_sid"`
-	RoomSid        *string                                    `json:"room_sid"`
-	Sid            *string                                    `json:"sid"`
-	URL            *string                                    `json:"url"`
+	DateCreated    *time.Time                                 `json:"date_created,omitempty"`
+	DateUpdated    *time.Time                                 `json:"date_updated,omitempty"`
+	Enabled        *bool                                      `json:"enabled,omitempty"`
+	Kind           *RoomParticipantPublishedTrackEnumKindEnum `json:"kind,omitempty"`
+	Name           *string                                    `json:"name,omitempty"`
+	ParticipantSid *string                                    `json:"participant_sid,omitempty"`
+	RoomSid        *string                                    `json:"room_sid,omitempty"`
+	Sid            *string                                    `json:"sid,omitempty"`
+	URL            *string                                    `json:"url,omitempty"`
 }

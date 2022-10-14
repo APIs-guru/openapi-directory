@@ -22,20 +22,20 @@ type PutSessionHeaders struct {
 }
 
 type PutSessionRequestBodyDialogAction struct {
-	FulfillmentState *shared.FulfillmentStateEnum  `json:"fulfillmentState"`
-	IntentName       *string                       `json:"intentName"`
-	Message          *string                       `json:"message"`
-	MessageFormat    *shared.MessageFormatTypeEnum `json:"messageFormat"`
-	SlotToElicit     *string                       `json:"slotToElicit"`
-	Slots            map[string]string             `json:"slots"`
-	Type             *shared.DialogActionTypeEnum  `json:"type"`
+	FulfillmentState *shared.FulfillmentStateEnum  `json:"fulfillmentState,omitempty"`
+	IntentName       *string                       `json:"intentName,omitempty"`
+	Message          *string                       `json:"message,omitempty"`
+	MessageFormat    *shared.MessageFormatTypeEnum `json:"messageFormat,omitempty"`
+	SlotToElicit     *string                       `json:"slotToElicit,omitempty"`
+	Slots            map[string]string             `json:"slots,omitempty"`
+	Type             *shared.DialogActionTypeEnum  `json:"type,omitempty"`
 }
 
 type PutSessionRequestBody struct {
-	ActiveContexts          []shared.ActiveContext             `json:"activeContexts"`
-	DialogAction            *PutSessionRequestBodyDialogAction `json:"dialogAction"`
-	RecentIntentSummaryView []shared.IntentSummary             `json:"recentIntentSummaryView"`
-	SessionAttributes       map[string]string                  `json:"sessionAttributes"`
+	ActiveContexts          []shared.ActiveContext             `json:"activeContexts,omitempty"`
+	DialogAction            *PutSessionRequestBodyDialogAction `json:"dialogAction,omitempty"`
+	RecentIntentSummaryView []shared.IntentSummary             `json:"recentIntentSummaryView,omitempty"`
+	SessionAttributes       map[string]string                  `json:"sessionAttributes,omitempty"`
 }
 
 type PutSessionRequest struct {

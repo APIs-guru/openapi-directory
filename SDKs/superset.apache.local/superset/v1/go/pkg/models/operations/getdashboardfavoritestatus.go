@@ -18,19 +18,19 @@ type GetDashboardFavoriteStatusRequest struct {
 }
 
 type GetDashboardFavoriteStatus400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardFavoriteStatus401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardFavoriteStatus404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardFavoriteStatus500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardFavoriteStatusResponse struct {

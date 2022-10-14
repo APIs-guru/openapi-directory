@@ -19,7 +19,7 @@ type IssueCommentUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -28,16 +28,16 @@ type IssueCommentUserSimpleUser struct {
 
 type IssueComment struct {
 	AuthorAssociation     AuthorAssociationEnum      `json:"author_association"`
-	Body                  *string                    `json:"body"`
-	BodyHTML              *string                    `json:"body_html"`
-	BodyText              *string                    `json:"body_text"`
+	Body                  *string                    `json:"body,omitempty"`
+	BodyHTML              *string                    `json:"body_html,omitempty"`
+	BodyText              *string                    `json:"body_text,omitempty"`
 	CreatedAt             time.Time                  `json:"created_at"`
 	HTMLURL               string                     `json:"html_url"`
 	ID                    int64                      `json:"id"`
 	IssueURL              string                     `json:"issue_url"`
 	NodeID                string                     `json:"node_id"`
-	PerformedViaGithubApp map[string]interface{}     `json:"performed_via_github_app"`
-	Reactions             *ReactionRollup            `json:"reactions"`
+	PerformedViaGithubApp map[string]interface{}     `json:"performed_via_github_app,omitempty"`
+	Reactions             *ReactionRollup            `json:"reactions,omitempty"`
 	UpdatedAt             time.Time                  `json:"updated_at"`
 	URL                   string                     `json:"url"`
 	User                  IssueCommentUserSimpleUser `json:"user"`

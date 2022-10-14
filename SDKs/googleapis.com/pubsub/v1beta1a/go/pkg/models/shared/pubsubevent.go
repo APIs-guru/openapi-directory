@@ -1,8 +1,8 @@
 package shared
 
 type PubsubEvent struct {
-	Deleted      *bool          `json:"deleted"`
-	Message      *PubsubMessage `json:"message"`
-	Subscription *string        `json:"subscription"`
-	Truncated    *bool          `json:"truncated"`
+	Deleted      *bool          `json:"deleted,omitempty"`
+	Message      *PubsubMessage `json:"message,omitempty"`
+	Subscription *string        `json:"subscription,omitempty"`
+	Truncated    *bool          `json:"truncated,omitempty"`
 }

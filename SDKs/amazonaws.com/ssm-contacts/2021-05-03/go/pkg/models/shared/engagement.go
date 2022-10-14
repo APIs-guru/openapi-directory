@@ -7,8 +7,8 @@ import (
 type Engagement struct {
 	ContactArn    string     `json:"ContactArn"`
 	EngagementArn string     `json:"EngagementArn"`
-	IncidentID    *string    `json:"IncidentId"`
+	IncidentID    *string    `json:"IncidentId,omitempty"`
 	Sender        string     `json:"Sender"`
-	StartTime     *time.Time `json:"StartTime"`
-	StopTime      *time.Time `json:"StopTime"`
+	StartTime     *time.Time `json:"StartTime,omitempty"`
+	StopTime      *time.Time `json:"StopTime,omitempty"`
 }

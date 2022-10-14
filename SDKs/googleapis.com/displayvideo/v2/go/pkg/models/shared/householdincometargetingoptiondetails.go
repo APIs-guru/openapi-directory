@@ -14,5 +14,5 @@ const (
 )
 
 type HouseholdIncomeTargetingOptionDetails struct {
-	HouseholdIncome *HouseholdIncomeTargetingOptionDetailsHouseholdIncomeEnum `json:"householdIncome"`
+	HouseholdIncome *HouseholdIncomeTargetingOptionDetailsHouseholdIncomeEnum `json:"householdIncome,omitempty"`
 }

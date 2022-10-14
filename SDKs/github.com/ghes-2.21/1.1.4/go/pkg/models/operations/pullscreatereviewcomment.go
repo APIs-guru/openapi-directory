@@ -27,14 +27,14 @@ const (
 
 type PullsCreateReviewCommentRequestBody struct {
 	Body      string                                            `json:"body"`
-	CommitID  *string                                           `json:"commit_id"`
-	InReplyTo *int64                                            `json:"in_reply_to"`
-	Line      *int64                                            `json:"line"`
-	Path      *string                                           `json:"path"`
-	Position  *int64                                            `json:"position"`
-	Side      *PullsCreateReviewCommentRequestBodySideEnum      `json:"side"`
-	StartLine *int64                                            `json:"start_line"`
-	StartSide *PullsCreateReviewCommentRequestBodyStartSideEnum `json:"start_side"`
+	CommitID  *string                                           `json:"commit_id,omitempty"`
+	InReplyTo *int64                                            `json:"in_reply_to,omitempty"`
+	Line      *int64                                            `json:"line,omitempty"`
+	Path      *string                                           `json:"path,omitempty"`
+	Position  *int64                                            `json:"position,omitempty"`
+	Side      *PullsCreateReviewCommentRequestBodySideEnum      `json:"side,omitempty"`
+	StartLine *int64                                            `json:"start_line,omitempty"`
+	StartSide *PullsCreateReviewCommentRequestBodyStartSideEnum `json:"start_side,omitempty"`
 }
 
 type PullsCreateReviewCommentRequest struct {

@@ -14,24 +14,24 @@ type PostChartRequest struct {
 }
 
 type PostChart201ApplicationJSON struct {
-	ID     *float64                 `json:"id"`
-	Result *shared.ChartRestAPIPost `json:"result"`
+	ID     *float64                 `json:"id,omitempty"`
+	Result *shared.ChartRestAPIPost `json:"result,omitempty"`
 }
 
 type PostChart400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostChart401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostChart422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostChart500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostChartResponse struct {

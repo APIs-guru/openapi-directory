@@ -12,11 +12,11 @@ const (
 )
 
 type HTTPRouteRedirect struct {
-	HostRedirect  *string                            `json:"hostRedirect"`
-	HTTPSRedirect *bool                              `json:"httpsRedirect"`
-	PathRedirect  *string                            `json:"pathRedirect"`
-	PortRedirect  *int32                             `json:"portRedirect"`
-	PrefixRewrite *string                            `json:"prefixRewrite"`
-	ResponseCode  *HTTPRouteRedirectResponseCodeEnum `json:"responseCode"`
-	StripQuery    *bool                              `json:"stripQuery"`
+	HostRedirect  *string                            `json:"hostRedirect,omitempty"`
+	HTTPSRedirect *bool                              `json:"httpsRedirect,omitempty"`
+	PathRedirect  *string                            `json:"pathRedirect,omitempty"`
+	PortRedirect  *int32                             `json:"portRedirect,omitempty"`
+	PrefixRewrite *string                            `json:"prefixRewrite,omitempty"`
+	ResponseCode  *HTTPRouteRedirectResponseCodeEnum `json:"responseCode,omitempty"`
+	StripQuery    *bool                              `json:"stripQuery,omitempty"`
 }

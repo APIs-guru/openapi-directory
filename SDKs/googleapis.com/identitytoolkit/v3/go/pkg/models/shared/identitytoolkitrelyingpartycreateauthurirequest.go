@@ -1,20 +1,20 @@
 package shared
 
 type IdentitytoolkitRelyingpartyCreateAuthURIRequest struct {
-	AppID               *string           `json:"appId"`
-	AuthFlowType        *string           `json:"authFlowType"`
-	ClientID            *string           `json:"clientId"`
-	Context             *string           `json:"context"`
-	ContinueURI         *string           `json:"continueUri"`
-	CustomParameter     map[string]string `json:"customParameter"`
-	HostedDomain        *string           `json:"hostedDomain"`
-	Identifier          *string           `json:"identifier"`
-	OauthConsumerKey    *string           `json:"oauthConsumerKey"`
-	OauthScope          *string           `json:"oauthScope"`
-	OpenidRealm         *string           `json:"openidRealm"`
-	OtaApp              *string           `json:"otaApp"`
-	ProviderID          *string           `json:"providerId"`
-	SessionID           *string           `json:"sessionId"`
-	TenantID            *string           `json:"tenantId"`
-	TenantProjectNumber *string           `json:"tenantProjectNumber"`
+	AppID               *string           `json:"appId,omitempty"`
+	AuthFlowType        *string           `json:"authFlowType,omitempty"`
+	ClientID            *string           `json:"clientId,omitempty"`
+	Context             *string           `json:"context,omitempty"`
+	ContinueURI         *string           `json:"continueUri,omitempty"`
+	CustomParameter     map[string]string `json:"customParameter,omitempty"`
+	HostedDomain        *string           `json:"hostedDomain,omitempty"`
+	Identifier          *string           `json:"identifier,omitempty"`
+	OauthConsumerKey    *string           `json:"oauthConsumerKey,omitempty"`
+	OauthScope          *string           `json:"oauthScope,omitempty"`
+	OpenidRealm         *string           `json:"openidRealm,omitempty"`
+	OtaApp              *string           `json:"otaApp,omitempty"`
+	ProviderID          *string           `json:"providerId,omitempty"`
+	SessionID           *string           `json:"sessionId,omitempty"`
+	TenantID            *string           `json:"tenantId,omitempty"`
+	TenantProjectNumber *string           `json:"tenantProjectNumber,omitempty"`
 }

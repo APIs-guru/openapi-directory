@@ -1,18 +1,18 @@
 package shared
 
 type PageAuthorImage struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type PageAuthor struct {
-	DisplayName *string          `json:"displayName"`
-	ID          *string          `json:"id"`
-	Image       *PageAuthorImage `json:"image"`
-	URL         *string          `json:"url"`
+	DisplayName *string          `json:"displayName,omitempty"`
+	ID          *string          `json:"id,omitempty"`
+	Image       *PageAuthorImage `json:"image,omitempty"`
+	URL         *string          `json:"url,omitempty"`
 }
 
 type PageBlog struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type PageStatusEnum string
@@ -24,17 +24,17 @@ const (
 )
 
 type Page struct {
-	Author    *PageAuthor     `json:"author"`
-	Blog      *PageBlog       `json:"blog"`
-	Content   *string         `json:"content"`
-	Etag      *string         `json:"etag"`
-	ID        *string         `json:"id"`
-	Kind      *string         `json:"kind"`
-	Published *string         `json:"published"`
-	SelfLink  *string         `json:"selfLink"`
-	Status    *PageStatusEnum `json:"status"`
-	Title     *string         `json:"title"`
-	Trashed   *string         `json:"trashed"`
-	Updated   *string         `json:"updated"`
-	URL       *string         `json:"url"`
+	Author    *PageAuthor     `json:"author,omitempty"`
+	Blog      *PageBlog       `json:"blog,omitempty"`
+	Content   *string         `json:"content,omitempty"`
+	Etag      *string         `json:"etag,omitempty"`
+	ID        *string         `json:"id,omitempty"`
+	Kind      *string         `json:"kind,omitempty"`
+	Published *string         `json:"published,omitempty"`
+	SelfLink  *string         `json:"selfLink,omitempty"`
+	Status    *PageStatusEnum `json:"status,omitempty"`
+	Title     *string         `json:"title,omitempty"`
+	Trashed   *string         `json:"trashed,omitempty"`
+	Updated   *string         `json:"updated,omitempty"`
+	URL       *string         `json:"url,omitempty"`
 }

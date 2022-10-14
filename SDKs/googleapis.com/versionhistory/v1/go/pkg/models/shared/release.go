@@ -1,9 +1,9 @@
 package shared
 
 type Release struct {
-	Fraction      *float64  `json:"fraction"`
-	FractionGroup *string   `json:"fractionGroup"`
-	Name          *string   `json:"name"`
-	Serving       *Interval `json:"serving"`
-	Version       *string   `json:"version"`
+	Fraction      *float64  `json:"fraction,omitempty"`
+	FractionGroup *string   `json:"fractionGroup,omitempty"`
+	Name          *string   `json:"name,omitempty"`
+	Serving       *Interval `json:"serving,omitempty"`
+	Version       *string   `json:"version,omitempty"`
 }

@@ -12,9 +12,9 @@ const (
 )
 
 type PackageIssue struct {
-	AffectedLocation  *VulnerabilityLocation             `json:"affectedLocation"`
-	EffectiveSeverity *PackageIssueEffectiveSeverityEnum `json:"effectiveSeverity"`
-	FixedLocation     *VulnerabilityLocation             `json:"fixedLocation"`
-	PackageType       *string                            `json:"packageType"`
-	SeverityName      *string                            `json:"severityName"`
+	AffectedLocation  *VulnerabilityLocation             `json:"affectedLocation,omitempty"`
+	EffectiveSeverity *PackageIssueEffectiveSeverityEnum `json:"effectiveSeverity,omitempty"`
+	FixedLocation     *VulnerabilityLocation             `json:"fixedLocation,omitempty"`
+	PackageType       *string                            `json:"packageType,omitempty"`
+	SeverityName      *string                            `json:"severityName,omitempty"`
 }

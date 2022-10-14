@@ -1,6 +1,6 @@
 package shared
 
 type ErrorResponseContentBase struct {
-	Details *string `json:"details"`
-	Message *string `json:"message"`
+	Details *string `json:"details,omitempty"`
+	Message *string `json:"message,omitempty"`
 }

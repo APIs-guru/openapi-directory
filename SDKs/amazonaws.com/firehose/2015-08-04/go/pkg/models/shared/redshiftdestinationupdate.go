@@ -1,15 +1,15 @@
 package shared
 
 type RedshiftDestinationUpdate struct {
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions"`
-	ClusterJdbcurl           *string                   `json:"ClusterJDBCURL"`
-	CopyCommand              *CopyCommand              `json:"CopyCommand"`
-	Password                 *string                   `json:"Password"`
-	ProcessingConfiguration  *ProcessingConfiguration  `json:"ProcessingConfiguration"`
-	RetryOptions             *RedshiftRetryOptions     `json:"RetryOptions"`
-	RoleArn                  *string                   `json:"RoleARN"`
-	S3BackupMode             *RedshiftS3BackupModeEnum `json:"S3BackupMode"`
-	S3BackupUpdate           *S3DestinationUpdate      `json:"S3BackupUpdate"`
-	S3Update                 *S3DestinationUpdate      `json:"S3Update"`
-	Username                 *string                   `json:"Username"`
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions,omitempty"`
+	ClusterJdbcurl           *string                   `json:"ClusterJDBCURL,omitempty"`
+	CopyCommand              *CopyCommand              `json:"CopyCommand,omitempty"`
+	Password                 *string                   `json:"Password,omitempty"`
+	ProcessingConfiguration  *ProcessingConfiguration  `json:"ProcessingConfiguration,omitempty"`
+	RetryOptions             *RedshiftRetryOptions     `json:"RetryOptions,omitempty"`
+	RoleArn                  *string                   `json:"RoleARN,omitempty"`
+	S3BackupMode             *RedshiftS3BackupModeEnum `json:"S3BackupMode,omitempty"`
+	S3BackupUpdate           *S3DestinationUpdate      `json:"S3BackupUpdate,omitempty"`
+	S3Update                 *S3DestinationUpdate      `json:"S3Update,omitempty"`
+	Username                 *string                   `json:"Username,omitempty"`
 }

@@ -14,7 +14,7 @@ type DuplicateProjectQueryParams struct {
 }
 
 type DuplicateProjectRequestBody struct {
-	Data *shared.ProjectDuplicateRequest `json:"data"`
+	Data *shared.ProjectDuplicateRequest `json:"data,omitempty"`
 }
 
 type DuplicateProjectRequest struct {
@@ -24,7 +24,7 @@ type DuplicateProjectRequest struct {
 }
 
 type DuplicateProject201ApplicationJSON struct {
-	Data *shared.JobResponse `json:"data"`
+	Data *shared.JobResponse `json:"data,omitempty"`
 }
 
 type DuplicateProjectResponse struct {

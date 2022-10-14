@@ -28,10 +28,10 @@ const (
 )
 
 type CompensationEntry struct {
-	Amount               *Money                     `json:"amount"`
-	Description          *string                    `json:"description"`
-	ExpectedUnitsPerYear *float64                   `json:"expectedUnitsPerYear"`
-	Range                *CompensationRange         `json:"range"`
-	Type                 *CompensationEntryTypeEnum `json:"type"`
-	Unit                 *CompensationEntryUnitEnum `json:"unit"`
+	Amount               *Money                     `json:"amount,omitempty"`
+	Description          *string                    `json:"description,omitempty"`
+	ExpectedUnitsPerYear *float64                   `json:"expectedUnitsPerYear,omitempty"`
+	Range                *CompensationRange         `json:"range,omitempty"`
+	Type                 *CompensationEntryTypeEnum `json:"type,omitempty"`
+	Unit                 *CompensationEntryUnitEnum `json:"unit,omitempty"`
 }

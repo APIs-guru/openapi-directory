@@ -1,6 +1,6 @@
 package shared
 
 type ListEntityRecognizersResponse struct {
-	EntityRecognizerPropertiesList []EntityRecognizerProperties `json:"EntityRecognizerPropertiesList"`
-	NextToken                      *string                      `json:"NextToken"`
+	EntityRecognizerPropertiesList []EntityRecognizerProperties `json:"EntityRecognizerPropertiesList,omitempty"`
+	NextToken                      *string                      `json:"NextToken,omitempty"`
 }

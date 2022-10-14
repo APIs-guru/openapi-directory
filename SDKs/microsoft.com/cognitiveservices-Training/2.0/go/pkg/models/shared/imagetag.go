@@ -5,7 +5,7 @@ import (
 )
 
 type ImageTag struct {
-	Created *time.Time `json:"created"`
-	TagID   *string    `json:"tagId"`
-	TagName *string    `json:"tagName"`
+	Created *time.Time `json:"created,omitempty"`
+	TagID   *string    `json:"tagId,omitempty"`
+	TagName *string    `json:"tagName,omitempty"`
 }

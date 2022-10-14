@@ -1,13 +1,13 @@
 package shared
 
 type Message struct {
-	HistoryID    *string      `json:"historyId"`
-	ID           *string      `json:"id"`
-	InternalDate *string      `json:"internalDate"`
-	LabelIds     []string     `json:"labelIds"`
-	Payload      *MessagePart `json:"payload"`
-	Raw          *string      `json:"raw"`
-	SizeEstimate *int32       `json:"sizeEstimate"`
-	Snippet      *string      `json:"snippet"`
-	ThreadID     *string      `json:"threadId"`
+	HistoryID    *string      `json:"historyId,omitempty"`
+	ID           *string      `json:"id,omitempty"`
+	InternalDate *string      `json:"internalDate,omitempty"`
+	LabelIds     []string     `json:"labelIds,omitempty"`
+	Payload      *MessagePart `json:"payload,omitempty"`
+	Raw          *string      `json:"raw,omitempty"`
+	SizeEstimate *int32       `json:"sizeEstimate,omitempty"`
+	Snippet      *string      `json:"snippet,omitempty"`
+	ThreadID     *string      `json:"threadId,omitempty"`
 }

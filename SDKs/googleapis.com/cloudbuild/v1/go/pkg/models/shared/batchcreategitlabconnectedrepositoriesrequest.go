@@ -1,5 +1,5 @@
 package shared
 
 type BatchCreateGitLabConnectedRepositoriesRequest struct {
-	Requests []CreateGitLabConnectedRepositoryRequest `json:"requests"`
+	Requests []CreateGitLabConnectedRepositoryRequest `json:"requests,omitempty"`
 }

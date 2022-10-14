@@ -6,7 +6,7 @@ type UpdateDeviceSwitchWarmSparePathParams struct {
 
 type UpdateDeviceSwitchWarmSpareRequestBody struct {
 	Enabled     bool    `json:"enabled"`
-	SpareSerial *string `json:"spareSerial"`
+	SpareSerial *string `json:"spareSerial,omitempty"`
 }
 
 type UpdateDeviceSwitchWarmSpareRequest struct {

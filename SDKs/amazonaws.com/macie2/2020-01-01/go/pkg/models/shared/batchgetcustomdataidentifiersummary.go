@@ -5,10 +5,10 @@ import (
 )
 
 type BatchGetCustomDataIdentifierSummary struct {
-	Arn         *string    `json:"arn"`
-	CreatedAt   *time.Time `json:"createdAt"`
-	Deleted     *bool      `json:"deleted"`
-	Description *string    `json:"description"`
-	ID          *string    `json:"id"`
-	Name        *string    `json:"name"`
+	Arn         *string    `json:"arn,omitempty"`
+	CreatedAt   *time.Time `json:"createdAt,omitempty"`
+	Deleted     *bool      `json:"deleted,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	ID          *string    `json:"id,omitempty"`
+	Name        *string    `json:"name,omitempty"`
 }

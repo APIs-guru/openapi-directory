@@ -53,18 +53,18 @@ const (
 )
 
 type JobQuery struct {
-	CommuteFilter         *CommuteFilter                `json:"commuteFilter"`
-	Companies             []string                      `json:"companies"`
-	CompanyDisplayNames   []string                      `json:"companyDisplayNames"`
-	CompensationFilter    *CompensationFilter           `json:"compensationFilter"`
-	CustomAttributeFilter *string                       `json:"customAttributeFilter"`
-	DisableSpellCheck     *bool                         `json:"disableSpellCheck"`
-	EmploymentTypes       []JobQueryEmploymentTypesEnum `json:"employmentTypes"`
-	ExcludedJobs          []string                      `json:"excludedJobs"`
-	JobCategories         []JobQueryJobCategoriesEnum   `json:"jobCategories"`
-	LanguageCodes         []string                      `json:"languageCodes"`
-	LocationFilters       []LocationFilter              `json:"locationFilters"`
-	PublishTimeRange      *TimestampRange               `json:"publishTimeRange"`
-	Query                 *string                       `json:"query"`
-	QueryLanguageCode     *string                       `json:"queryLanguageCode"`
+	CommuteFilter         *CommuteFilter                `json:"commuteFilter,omitempty"`
+	Companies             []string                      `json:"companies,omitempty"`
+	CompanyDisplayNames   []string                      `json:"companyDisplayNames,omitempty"`
+	CompensationFilter    *CompensationFilter           `json:"compensationFilter,omitempty"`
+	CustomAttributeFilter *string                       `json:"customAttributeFilter,omitempty"`
+	DisableSpellCheck     *bool                         `json:"disableSpellCheck,omitempty"`
+	EmploymentTypes       []JobQueryEmploymentTypesEnum `json:"employmentTypes,omitempty"`
+	ExcludedJobs          []string                      `json:"excludedJobs,omitempty"`
+	JobCategories         []JobQueryJobCategoriesEnum   `json:"jobCategories,omitempty"`
+	LanguageCodes         []string                      `json:"languageCodes,omitempty"`
+	LocationFilters       []LocationFilter              `json:"locationFilters,omitempty"`
+	PublishTimeRange      *TimestampRange               `json:"publishTimeRange,omitempty"`
+	Query                 *string                       `json:"query,omitempty"`
+	QueryLanguageCode     *string                       `json:"queryLanguageCode,omitempty"`
 }

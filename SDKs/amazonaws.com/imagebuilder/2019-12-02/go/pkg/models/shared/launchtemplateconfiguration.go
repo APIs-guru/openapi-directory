@@ -1,7 +1,7 @@
 package shared
 
 type LaunchTemplateConfiguration struct {
-	AccountID         *string `json:"accountId"`
+	AccountID         *string `json:"accountId,omitempty"`
 	LaunchTemplateID  string  `json:"launchTemplateId"`
-	SetDefaultVersion *bool   `json:"setDefaultVersion"`
+	SetDefaultVersion *bool   `json:"setDefaultVersion,omitempty"`
 }

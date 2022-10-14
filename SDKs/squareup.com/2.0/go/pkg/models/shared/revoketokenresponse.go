@@ -1,5 +1,5 @@
 package shared
 
 type RevokeTokenResponse struct {
-	Success *bool `json:"success"`
+	Success *bool `json:"success,omitempty"`
 }

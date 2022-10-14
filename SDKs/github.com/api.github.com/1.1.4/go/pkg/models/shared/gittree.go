@@ -1,12 +1,12 @@
 package shared
 
 type GitTreeTree struct {
-	Mode *string `json:"mode"`
-	Path *string `json:"path"`
-	Sha  *string `json:"sha"`
-	Size *int64  `json:"size"`
-	Type *string `json:"type"`
-	URL  *string `json:"url"`
+	Mode *string `json:"mode,omitempty"`
+	Path *string `json:"path,omitempty"`
+	Sha  *string `json:"sha,omitempty"`
+	Size *int64  `json:"size,omitempty"`
+	Type *string `json:"type,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type GitTree struct {

@@ -23,40 +23,40 @@ type GetDatabasePkRequest struct {
 }
 
 type GetDatabasePk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDatabasePk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDatabasePk200ApplicationJSON struct {
-	DescriptionColumns *GetDatabasePk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                            `json:"id"`
-	LabelColumns       *GetDatabasePk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.DatabaseRestAPIGet                         `json:"result"`
-	ShowColumns        []string                                           `json:"show_columns"`
-	ShowTitle          *string                                            `json:"show_title"`
+	DescriptionColumns *GetDatabasePk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                            `json:"id,omitempty"`
+	LabelColumns       *GetDatabasePk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.DatabaseRestAPIGet                         `json:"result,omitempty"`
+	ShowColumns        []string                                           `json:"show_columns,omitempty"`
+	ShowTitle          *string                                            `json:"show_title,omitempty"`
 }
 
 type GetDatabasePk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatabasePkResponse struct {

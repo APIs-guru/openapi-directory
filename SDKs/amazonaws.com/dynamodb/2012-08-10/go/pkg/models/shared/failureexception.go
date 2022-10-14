@@ -1,6 +1,6 @@
 package shared
 
 type FailureException struct {
-	ExceptionDescription *string `json:"ExceptionDescription"`
-	ExceptionName        *string `json:"ExceptionName"`
+	ExceptionDescription *string `json:"ExceptionDescription,omitempty"`
+	ExceptionName        *string `json:"ExceptionName,omitempty"`
 }

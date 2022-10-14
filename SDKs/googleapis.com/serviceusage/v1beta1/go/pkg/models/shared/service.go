@@ -9,8 +9,8 @@ const (
 )
 
 type Service struct {
-	Config *ServiceConfig    `json:"config"`
-	Name   *string           `json:"name"`
-	Parent *string           `json:"parent"`
-	State  *ServiceStateEnum `json:"state"`
+	Config *ServiceConfig    `json:"config,omitempty"`
+	Name   *string           `json:"name,omitempty"`
+	Parent *string           `json:"parent,omitempty"`
+	State  *ServiceStateEnum `json:"state,omitempty"`
 }

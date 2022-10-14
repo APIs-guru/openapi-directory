@@ -1,5 +1,5 @@
 package shared
 
 type HTTPCallEvidence struct {
-	Urls []string `json:"urls"`
+	Urls []string `json:"urls,omitempty"`
 }

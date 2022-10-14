@@ -14,17 +14,17 @@ type ListProjectResourcesRequest struct {
 }
 
 type ListProjectResources200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListProjectResources200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListProjectResources200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListProjectResources200ApplicationJSONMeta struct {
@@ -32,7 +32,7 @@ type ListProjectResources200ApplicationJSONMeta struct {
 }
 
 type ListProjectResources200ApplicationJSONResourcesLinks struct {
-	Self *string `json:"self"`
+	Self *string `json:"self,omitempty"`
 }
 
 type ListProjectResources200ApplicationJSONResourcesStatusEnum string
@@ -46,22 +46,22 @@ const (
 )
 
 type ListProjectResources200ApplicationJSONResources struct {
-	AssignedAt *time.Time                                                 `json:"assigned_at"`
-	Links      *ListProjectResources200ApplicationJSONResourcesLinks      `json:"links"`
-	Status     *ListProjectResources200ApplicationJSONResourcesStatusEnum `json:"status"`
-	Urn        *string                                                    `json:"urn"`
+	AssignedAt *time.Time                                                 `json:"assigned_at,omitempty"`
+	Links      *ListProjectResources200ApplicationJSONResourcesLinks      `json:"links,omitempty"`
+	Status     *ListProjectResources200ApplicationJSONResourcesStatusEnum `json:"status,omitempty"`
+	Urn        *string                                                    `json:"urn,omitempty"`
 }
 
 type ListProjectResources200ApplicationJSON struct {
-	Links     *ListProjectResources200ApplicationJSONLinks      `json:"links"`
+	Links     *ListProjectResources200ApplicationJSONLinks      `json:"links,omitempty"`
 	Meta      ListProjectResources200ApplicationJSONMeta        `json:"meta"`
-	Resources []ListProjectResources200ApplicationJSONResources `json:"resources"`
+	Resources []ListProjectResources200ApplicationJSONResources `json:"resources,omitempty"`
 }
 
 type ListProjectResources401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListProjectResourcesResponse struct {

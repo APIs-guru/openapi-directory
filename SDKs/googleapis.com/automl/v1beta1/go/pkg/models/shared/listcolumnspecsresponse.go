@@ -1,6 +1,6 @@
 package shared
 
 type ListColumnSpecsResponse struct {
-	ColumnSpecs   []ColumnSpec `json:"columnSpecs"`
-	NextPageToken *string      `json:"nextPageToken"`
+	ColumnSpecs   []ColumnSpec `json:"columnSpecs,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

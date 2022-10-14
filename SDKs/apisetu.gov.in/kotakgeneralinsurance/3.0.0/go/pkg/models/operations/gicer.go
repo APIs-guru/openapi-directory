@@ -17,8 +17,8 @@ const (
 )
 
 type GicerRequestBody struct {
-	CertificateParameters *GicerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *GicerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                GicerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Gicer400ApplicationJSON struct {
-	Error            *Gicer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Gicer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Gicer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Gicer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Gicer401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Gicer401ApplicationJSON struct {
-	Error            *Gicer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Gicer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Gicer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Gicer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Gicer404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Gicer404ApplicationJSON struct {
-	Error            *Gicer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Gicer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Gicer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Gicer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Gicer500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Gicer500ApplicationJSON struct {
-	Error            *Gicer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Gicer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Gicer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Gicer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Gicer502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Gicer502ApplicationJSON struct {
-	Error            *Gicer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Gicer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Gicer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Gicer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Gicer503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Gicer503ApplicationJSON struct {
-	Error            *Gicer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Gicer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Gicer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Gicer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Gicer504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Gicer504ApplicationJSON struct {
-	Error            *Gicer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Gicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Gicer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Gicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type GicerResponse struct {

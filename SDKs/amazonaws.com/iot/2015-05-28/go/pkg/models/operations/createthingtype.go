@@ -19,13 +19,13 @@ type CreateThingTypeHeaders struct {
 }
 
 type CreateThingTypeRequestBodyThingTypeProperties struct {
-	SearchableAttributes []string `json:"searchableAttributes"`
-	ThingTypeDescription *string  `json:"thingTypeDescription"`
+	SearchableAttributes []string `json:"searchableAttributes,omitempty"`
+	ThingTypeDescription *string  `json:"thingTypeDescription,omitempty"`
 }
 
 type CreateThingTypeRequestBody struct {
-	Tags                []shared.Tag                                   `json:"tags"`
-	ThingTypeProperties *CreateThingTypeRequestBodyThingTypeProperties `json:"thingTypeProperties"`
+	Tags                []shared.Tag                                   `json:"tags,omitempty"`
+	ThingTypeProperties *CreateThingTypeRequestBodyThingTypeProperties `json:"thingTypeProperties,omitempty"`
 }
 
 type CreateThingTypeRequest struct {

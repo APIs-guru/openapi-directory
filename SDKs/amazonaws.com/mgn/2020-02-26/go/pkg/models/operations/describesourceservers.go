@@ -20,14 +20,14 @@ type DescribeSourceServersHeaders struct {
 }
 
 type DescribeSourceServersRequestBodyFilters struct {
-	IsArchived      *bool    `json:"isArchived"`
-	SourceServerIDs []string `json:"sourceServerIDs"`
+	IsArchived      *bool    `json:"isArchived,omitempty"`
+	SourceServerIDs []string `json:"sourceServerIDs,omitempty"`
 }
 
 type DescribeSourceServersRequestBody struct {
 	Filters    DescribeSourceServersRequestBodyFilters `json:"filters"`
-	MaxResults *int64                                  `json:"maxResults"`
-	NextToken  *string                                 `json:"nextToken"`
+	MaxResults *int64                                  `json:"maxResults,omitempty"`
+	NextToken  *string                                 `json:"nextToken,omitempty"`
 }
 
 type DescribeSourceServersRequest struct {

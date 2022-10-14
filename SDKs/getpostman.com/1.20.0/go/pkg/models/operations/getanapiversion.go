@@ -10,18 +10,18 @@ type GetAnAPIVersionRequest struct {
 }
 
 type GetAnAPIVersion200ApplicationJSONVersion struct {
-	API       *string  `json:"api"`
-	CreatedAt *string  `json:"createdAt"`
-	CreatedBy *string  `json:"createdBy"`
-	ID        *string  `json:"id"`
-	Name      *string  `json:"name"`
-	Schema    []string `json:"schema"`
-	UpdatedAt *string  `json:"updatedAt"`
-	UpdatedBy *string  `json:"updatedBy"`
+	API       *string  `json:"api,omitempty"`
+	CreatedAt *string  `json:"createdAt,omitempty"`
+	CreatedBy *string  `json:"createdBy,omitempty"`
+	ID        *string  `json:"id,omitempty"`
+	Name      *string  `json:"name,omitempty"`
+	Schema    []string `json:"schema,omitempty"`
+	UpdatedAt *string  `json:"updatedAt,omitempty"`
+	UpdatedBy *string  `json:"updatedBy,omitempty"`
 }
 
 type GetAnAPIVersion200ApplicationJSON struct {
-	Version *GetAnAPIVersion200ApplicationJSONVersion `json:"version"`
+	Version *GetAnAPIVersion200ApplicationJSONVersion `json:"version,omitempty"`
 }
 
 type GetAnAPIVersionResponse struct {

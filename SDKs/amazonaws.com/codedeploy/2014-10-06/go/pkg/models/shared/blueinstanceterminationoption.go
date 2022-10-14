@@ -1,6 +1,6 @@
 package shared
 
 type BlueInstanceTerminationOption struct {
-	Action                       *InstanceActionEnum `json:"action"`
-	TerminationWaitTimeInMinutes *int64              `json:"terminationWaitTimeInMinutes"`
+	Action                       *InstanceActionEnum `json:"action,omitempty"`
+	TerminationWaitTimeInMinutes *int64              `json:"terminationWaitTimeInMinutes,omitempty"`
 }

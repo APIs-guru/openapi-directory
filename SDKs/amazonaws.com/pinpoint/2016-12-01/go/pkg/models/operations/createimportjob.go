@@ -19,14 +19,14 @@ type CreateImportJobHeaders struct {
 }
 
 type CreateImportJobRequestBodyImportJobRequest struct {
-	DefineSegment     *bool              `json:"DefineSegment"`
-	ExternalID        *string            `json:"ExternalId"`
-	Format            *shared.FormatEnum `json:"Format"`
-	RegisterEndpoints *bool              `json:"RegisterEndpoints"`
-	RoleArn           *string            `json:"RoleArn"`
-	S3URL             *string            `json:"S3Url"`
-	SegmentID         *string            `json:"SegmentId"`
-	SegmentName       *string            `json:"SegmentName"`
+	DefineSegment     *bool              `json:"DefineSegment,omitempty"`
+	ExternalID        *string            `json:"ExternalId,omitempty"`
+	Format            *shared.FormatEnum `json:"Format,omitempty"`
+	RegisterEndpoints *bool              `json:"RegisterEndpoints,omitempty"`
+	RoleArn           *string            `json:"RoleArn,omitempty"`
+	S3URL             *string            `json:"S3Url,omitempty"`
+	SegmentID         *string            `json:"SegmentId,omitempty"`
+	SegmentName       *string            `json:"SegmentName,omitempty"`
 }
 
 type CreateImportJobRequestBody struct {

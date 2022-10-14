@@ -5,7 +5,7 @@ import (
 )
 
 type PendingMaintenanceAction struct {
-	Action           *string    `json:"action"`
-	CurrentApplyDate *time.Time `json:"currentApplyDate"`
-	Description      *string    `json:"description"`
+	Action           *string    `json:"action,omitempty"`
+	CurrentApplyDate *time.Time `json:"currentApplyDate,omitempty"`
+	Description      *string    `json:"description,omitempty"`
 }

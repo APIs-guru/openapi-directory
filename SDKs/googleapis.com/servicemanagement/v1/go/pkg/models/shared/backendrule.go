@@ -9,12 +9,12 @@ const (
 )
 
 type BackendRule struct {
-	Address           *string                         `json:"address"`
-	Deadline          *float64                        `json:"deadline"`
-	DisableAuth       *bool                           `json:"disableAuth"`
-	JwtAudience       *string                         `json:"jwtAudience"`
-	OperationDeadline *float64                        `json:"operationDeadline"`
-	PathTranslation   *BackendRulePathTranslationEnum `json:"pathTranslation"`
-	Protocol          *string                         `json:"protocol"`
-	Selector          *string                         `json:"selector"`
+	Address           *string                         `json:"address,omitempty"`
+	Deadline          *float64                        `json:"deadline,omitempty"`
+	DisableAuth       *bool                           `json:"disableAuth,omitempty"`
+	JwtAudience       *string                         `json:"jwtAudience,omitempty"`
+	OperationDeadline *float64                        `json:"operationDeadline,omitempty"`
+	PathTranslation   *BackendRulePathTranslationEnum `json:"pathTranslation,omitempty"`
+	Protocol          *string                         `json:"protocol,omitempty"`
+	Selector          *string                         `json:"selector,omitempty"`
 }

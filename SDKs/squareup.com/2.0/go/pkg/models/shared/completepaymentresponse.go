@@ -1,6 +1,6 @@
 package shared
 
 type CompletePaymentResponse struct {
-	Errors  []Error  `json:"errors"`
-	Payment *Payment `json:"payment"`
+	Errors  []Error  `json:"errors,omitempty"`
+	Payment *Payment `json:"payment,omitempty"`
 }

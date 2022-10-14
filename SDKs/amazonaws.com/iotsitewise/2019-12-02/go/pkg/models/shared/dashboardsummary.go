@@ -5,9 +5,9 @@ import (
 )
 
 type DashboardSummary struct {
-	CreationDate   *time.Time `json:"creationDate"`
-	Description    *string    `json:"description"`
+	CreationDate   *time.Time `json:"creationDate,omitempty"`
+	Description    *string    `json:"description,omitempty"`
 	ID             string     `json:"id"`
-	LastUpdateDate *time.Time `json:"lastUpdateDate"`
+	LastUpdateDate *time.Time `json:"lastUpdateDate,omitempty"`
 	Name           string     `json:"name"`
 }

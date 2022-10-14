@@ -1,6 +1,6 @@
 package shared
 
 type ServiceHealth struct {
-	Insight     *ServiceInsightHealth `json:"Insight"`
-	ServiceName *ServiceNameEnum      `json:"ServiceName"`
+	Insight     *ServiceInsightHealth `json:"Insight,omitempty"`
+	ServiceName *ServiceNameEnum      `json:"ServiceName,omitempty"`
 }

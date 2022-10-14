@@ -1,8 +1,8 @@
 package shared
 
 type ThingTypeDefinition struct {
-	ThingTypeArn        *string              `json:"thingTypeArn"`
-	ThingTypeMetadata   *ThingTypeMetadata   `json:"thingTypeMetadata"`
-	ThingTypeName       *string              `json:"thingTypeName"`
-	ThingTypeProperties *ThingTypeProperties `json:"thingTypeProperties"`
+	ThingTypeArn        *string              `json:"thingTypeArn,omitempty"`
+	ThingTypeMetadata   *ThingTypeMetadata   `json:"thingTypeMetadata,omitempty"`
+	ThingTypeName       *string              `json:"thingTypeName,omitempty"`
+	ThingTypeProperties *ThingTypeProperties `json:"thingTypeProperties,omitempty"`
 }

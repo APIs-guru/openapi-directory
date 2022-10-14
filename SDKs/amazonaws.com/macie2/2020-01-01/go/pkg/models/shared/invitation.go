@@ -5,8 +5,8 @@ import (
 )
 
 type Invitation struct {
-	AccountID          *string                 `json:"accountId"`
-	InvitationID       *string                 `json:"invitationId"`
-	InvitedAt          *time.Time              `json:"invitedAt"`
-	RelationshipStatus *RelationshipStatusEnum `json:"relationshipStatus"`
+	AccountID          *string                 `json:"accountId,omitempty"`
+	InvitationID       *string                 `json:"invitationId,omitempty"`
+	InvitedAt          *time.Time              `json:"invitedAt,omitempty"`
+	RelationshipStatus *RelationshipStatusEnum `json:"relationshipStatus,omitempty"`
 }

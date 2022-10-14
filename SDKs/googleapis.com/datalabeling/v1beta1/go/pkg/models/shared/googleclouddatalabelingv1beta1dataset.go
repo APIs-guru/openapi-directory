@@ -1,12 +1,12 @@
 package shared
 
 type GoogleCloudDatalabelingV1beta1Dataset struct {
-	BlockingResources []string                                    `json:"blockingResources"`
-	CreateTime        *string                                     `json:"createTime"`
-	DataItemCount     *string                                     `json:"dataItemCount"`
-	Description       *string                                     `json:"description"`
-	DisplayName       *string                                     `json:"displayName"`
-	InputConfigs      []GoogleCloudDatalabelingV1beta1InputConfig `json:"inputConfigs"`
-	LastMigrateTime   *string                                     `json:"lastMigrateTime"`
-	Name              *string                                     `json:"name"`
+	BlockingResources []string                                    `json:"blockingResources,omitempty"`
+	CreateTime        *string                                     `json:"createTime,omitempty"`
+	DataItemCount     *string                                     `json:"dataItemCount,omitempty"`
+	Description       *string                                     `json:"description,omitempty"`
+	DisplayName       *string                                     `json:"displayName,omitempty"`
+	InputConfigs      []GoogleCloudDatalabelingV1beta1InputConfig `json:"inputConfigs,omitempty"`
+	LastMigrateTime   *string                                     `json:"lastMigrateTime,omitempty"`
+	Name              *string                                     `json:"name,omitempty"`
 }

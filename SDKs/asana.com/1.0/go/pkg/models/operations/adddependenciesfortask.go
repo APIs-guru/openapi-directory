@@ -14,7 +14,7 @@ type AddDependenciesForTaskQueryParams struct {
 }
 
 type AddDependenciesForTaskRequestBody struct {
-	Data *shared.ModifyDependenciesRequest `json:"data"`
+	Data *shared.ModifyDependenciesRequest `json:"data,omitempty"`
 }
 
 type AddDependenciesForTaskRequest struct {
@@ -24,7 +24,7 @@ type AddDependenciesForTaskRequest struct {
 }
 
 type AddDependenciesForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddDependenciesForTaskResponse struct {

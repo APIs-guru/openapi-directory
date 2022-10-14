@@ -1,10 +1,10 @@
 package shared
 
 type Target struct {
-	Documents   *DocumentsTarget `json:"documents"`
-	Once        *bool            `json:"once"`
-	Query       *QueryTarget     `json:"query"`
-	ReadTime    *string          `json:"readTime"`
-	ResumeToken *string          `json:"resumeToken"`
-	TargetID    *int32           `json:"targetId"`
+	Documents   *DocumentsTarget `json:"documents,omitempty"`
+	Once        *bool            `json:"once,omitempty"`
+	Query       *QueryTarget     `json:"query,omitempty"`
+	ReadTime    *string          `json:"readTime,omitempty"`
+	ResumeToken *string          `json:"resumeToken,omitempty"`
+	TargetID    *int32           `json:"targetId,omitempty"`
 }

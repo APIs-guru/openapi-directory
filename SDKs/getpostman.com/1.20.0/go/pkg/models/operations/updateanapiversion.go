@@ -6,11 +6,11 @@ type UpdateAnAPIVersionPathParams struct {
 }
 
 type UpdateAnAPIVersionRequestBodyVersion struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdateAnAPIVersionRequestBody struct {
-	Version *UpdateAnAPIVersionRequestBodyVersion `json:"version"`
+	Version *UpdateAnAPIVersionRequestBodyVersion `json:"version,omitempty"`
 }
 
 type UpdateAnAPIVersionRequest struct {
@@ -19,17 +19,17 @@ type UpdateAnAPIVersionRequest struct {
 }
 
 type UpdateAnAPIVersion200ApplicationJSONVersion struct {
-	API       *string `json:"api"`
-	CreatedAt *string `json:"createdAt"`
-	CreatedBy *string `json:"createdBy"`
-	ID        *string `json:"id"`
-	Name      *string `json:"name"`
-	UpdatedAt *string `json:"updatedAt"`
-	UpdatedBy *string `json:"updatedBy"`
+	API       *string `json:"api,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
+	CreatedBy *string `json:"createdBy,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
+	UpdatedBy *string `json:"updatedBy,omitempty"`
 }
 
 type UpdateAnAPIVersion200ApplicationJSON struct {
-	Version *UpdateAnAPIVersion200ApplicationJSONVersion `json:"version"`
+	Version *UpdateAnAPIVersion200ApplicationJSONVersion `json:"version,omitempty"`
 }
 
 type UpdateAnAPIVersionResponse struct {

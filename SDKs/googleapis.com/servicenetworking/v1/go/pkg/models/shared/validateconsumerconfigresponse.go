@@ -21,7 +21,7 @@ const (
 )
 
 type ValidateConsumerConfigResponse struct {
-	ExistingSubnetworkCandidates []Subnetwork                                       `json:"existingSubnetworkCandidates"`
-	IsValid                      *bool                                              `json:"isValid"`
-	ValidationError              *ValidateConsumerConfigResponseValidationErrorEnum `json:"validationError"`
+	ExistingSubnetworkCandidates []Subnetwork                                       `json:"existingSubnetworkCandidates,omitempty"`
+	IsValid                      *bool                                              `json:"isValid,omitempty"`
+	ValidationError              *ValidateConsumerConfigResponseValidationErrorEnum `json:"validationError,omitempty"`
 }

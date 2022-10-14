@@ -9,6 +9,6 @@ const (
 )
 
 type EndpointMatcherMetadataLabelMatcher struct {
-	MetadataLabelMatchCriteria *EndpointMatcherMetadataLabelMatcherMetadataLabelMatchCriteriaEnum `json:"metadataLabelMatchCriteria"`
-	MetadataLabels             []EndpointMatcherMetadataLabelMatcherMetadataLabels                `json:"metadataLabels"`
+	MetadataLabelMatchCriteria *EndpointMatcherMetadataLabelMatcherMetadataLabelMatchCriteriaEnum `json:"metadataLabelMatchCriteria,omitempty"`
+	MetadataLabels             []EndpointMatcherMetadataLabelMatcherMetadataLabels                `json:"metadataLabels,omitempty"`
 }

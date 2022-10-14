@@ -10,9 +10,9 @@ const (
 )
 
 type BasicChartAxis struct {
-	Format            *TextFormat                 `json:"format"`
-	Position          *BasicChartAxisPositionEnum `json:"position"`
-	Title             *string                     `json:"title"`
-	TitleTextPosition *TextPosition               `json:"titleTextPosition"`
-	ViewWindowOptions *ChartAxisViewWindowOptions `json:"viewWindowOptions"`
+	Format            *TextFormat                 `json:"format,omitempty"`
+	Position          *BasicChartAxisPositionEnum `json:"position,omitempty"`
+	Title             *string                     `json:"title,omitempty"`
+	TitleTextPosition *TextPosition               `json:"titleTextPosition,omitempty"`
+	ViewWindowOptions *ChartAxisViewWindowOptions `json:"viewWindowOptions,omitempty"`
 }

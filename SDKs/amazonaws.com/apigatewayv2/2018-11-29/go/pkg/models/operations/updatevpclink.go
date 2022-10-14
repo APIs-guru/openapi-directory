@@ -19,7 +19,7 @@ type UpdateVpcLinkHeaders struct {
 }
 
 type UpdateVpcLinkRequestBody struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdateVpcLinkRequest struct {

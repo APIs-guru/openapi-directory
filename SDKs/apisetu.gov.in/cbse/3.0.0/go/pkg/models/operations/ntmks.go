@@ -17,8 +17,8 @@ const (
 )
 
 type NtmksRequestBody struct {
-	CertificateParameters *NtmksRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *NtmksRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                NtmksRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Ntmks400ApplicationJSON struct {
-	Error            *Ntmks400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ntmks400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ntmks400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ntmks400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ntmks401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Ntmks401ApplicationJSON struct {
-	Error            *Ntmks401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ntmks401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ntmks401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ntmks401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ntmks404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Ntmks404ApplicationJSON struct {
-	Error            *Ntmks404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ntmks404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ntmks404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ntmks404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ntmks500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Ntmks500ApplicationJSON struct {
-	Error            *Ntmks500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ntmks500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ntmks500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ntmks500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ntmks502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Ntmks502ApplicationJSON struct {
-	Error            *Ntmks502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ntmks502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ntmks502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ntmks502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ntmks503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Ntmks503ApplicationJSON struct {
-	Error            *Ntmks503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ntmks503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ntmks503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ntmks503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ntmks504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Ntmks504ApplicationJSON struct {
-	Error            *Ntmks504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ntmks504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ntmks504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ntmks504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type NtmksResponse struct {

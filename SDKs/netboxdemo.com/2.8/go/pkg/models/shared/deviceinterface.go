@@ -193,23 +193,23 @@ type DeviceInterfaceTypeType struct {
 }
 
 type DeviceInterface struct {
-	Cable                 *NestedCable                                     `json:"cable"`
-	ConnectedEndpoint     map[string]string                                `json:"connected_endpoint"`
-	ConnectedEndpointType *string                                          `json:"connected_endpoint_type"`
-	ConnectionStatus      *DeviceInterfaceConnectionStatusConnectionStatus `json:"connection_status"`
-	CountIpaddresses      *int64                                           `json:"count_ipaddresses"`
-	Description           *string                                          `json:"description"`
+	Cable                 *NestedCable                                     `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                                `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                                          `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *DeviceInterfaceConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
+	CountIpaddresses      *int64                                           `json:"count_ipaddresses,omitempty"`
+	Description           *string                                          `json:"description,omitempty"`
 	Device                NestedDevice                                     `json:"device"`
-	Enabled               *bool                                            `json:"enabled"`
-	ID                    *int64                                           `json:"id"`
-	Lag                   *NestedInterface                                 `json:"lag"`
-	MacAddress            *string                                          `json:"mac_address"`
-	MgmtOnly              *bool                                            `json:"mgmt_only"`
-	Mode                  *DeviceInterfaceModeMode                         `json:"mode"`
-	Mtu                   *int64                                           `json:"mtu"`
+	Enabled               *bool                                            `json:"enabled,omitempty"`
+	ID                    *int64                                           `json:"id,omitempty"`
+	Lag                   *NestedInterface                                 `json:"lag,omitempty"`
+	MacAddress            *string                                          `json:"mac_address,omitempty"`
+	MgmtOnly              *bool                                            `json:"mgmt_only,omitempty"`
+	Mode                  *DeviceInterfaceModeMode                         `json:"mode,omitempty"`
+	Mtu                   *int64                                           `json:"mtu,omitempty"`
 	Name                  string                                           `json:"name"`
-	TaggedVlans           []NestedVlan                                     `json:"tagged_vlans"`
-	Tags                  []string                                         `json:"tags"`
+	TaggedVlans           []NestedVlan                                     `json:"tagged_vlans,omitempty"`
+	Tags                  []string                                         `json:"tags,omitempty"`
 	Type                  DeviceInterfaceTypeType                          `json:"type"`
-	UntaggedVlan          *NestedVlan                                      `json:"untagged_vlan"`
+	UntaggedVlan          *NestedVlan                                      `json:"untagged_vlan,omitempty"`
 }

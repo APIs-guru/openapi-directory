@@ -1,13 +1,13 @@
 package shared
 
 type Presentation struct {
-	Layouts        []Page  `json:"layouts"`
-	Locale         *string `json:"locale"`
-	Masters        []Page  `json:"masters"`
-	NotesMaster    *Page   `json:"notesMaster"`
-	PageSize       *Size   `json:"pageSize"`
-	PresentationID *string `json:"presentationId"`
-	RevisionID     *string `json:"revisionId"`
-	Slides         []Page  `json:"slides"`
-	Title          *string `json:"title"`
+	Layouts        []Page  `json:"layouts,omitempty"`
+	Locale         *string `json:"locale,omitempty"`
+	Masters        []Page  `json:"masters,omitempty"`
+	NotesMaster    *Page   `json:"notesMaster,omitempty"`
+	PageSize       *Size   `json:"pageSize,omitempty"`
+	PresentationID *string `json:"presentationId,omitempty"`
+	RevisionID     *string `json:"revisionId,omitempty"`
+	Slides         []Page  `json:"slides,omitempty"`
+	Title          *string `json:"title,omitempty"`
 }

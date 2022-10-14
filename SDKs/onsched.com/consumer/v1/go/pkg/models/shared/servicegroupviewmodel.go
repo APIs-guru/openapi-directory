@@ -1,12 +1,12 @@
 package shared
 
 type ServiceGroupViewModel struct {
-	CompanyID   *string `json:"companyId"`
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
-	ImageURL    *string `json:"imageUrl"`
-	Label       *string `json:"label"`
-	LocationID  *string `json:"locationId"`
-	Name        *string `json:"name"`
-	ObjectName  *string `json:"objectName"`
+	CompanyID   *string `json:"companyId,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	ImageURL    *string `json:"imageUrl,omitempty"`
+	Label       *string `json:"label,omitempty"`
+	LocationID  *string `json:"locationId,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	ObjectName  *string `json:"objectName,omitempty"`
 }

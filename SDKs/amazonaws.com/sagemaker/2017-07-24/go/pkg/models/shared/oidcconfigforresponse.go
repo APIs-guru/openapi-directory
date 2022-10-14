@@ -1,11 +1,11 @@
 package shared
 
 type OidcConfigForResponse struct {
-	AuthorizationEndpoint *string `json:"AuthorizationEndpoint"`
-	ClientID              *string `json:"ClientId"`
-	Issuer                *string `json:"Issuer"`
-	JwksURI               *string `json:"JwksUri"`
-	LogoutEndpoint        *string `json:"LogoutEndpoint"`
-	TokenEndpoint         *string `json:"TokenEndpoint"`
-	UserInfoEndpoint      *string `json:"UserInfoEndpoint"`
+	AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty"`
+	ClientID              *string `json:"ClientId,omitempty"`
+	Issuer                *string `json:"Issuer,omitempty"`
+	JwksURI               *string `json:"JwksUri,omitempty"`
+	LogoutEndpoint        *string `json:"LogoutEndpoint,omitempty"`
+	TokenEndpoint         *string `json:"TokenEndpoint,omitempty"`
+	UserInfoEndpoint      *string `json:"UserInfoEndpoint,omitempty"`
 }

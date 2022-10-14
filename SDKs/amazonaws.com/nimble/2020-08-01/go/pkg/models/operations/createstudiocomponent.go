@@ -20,10 +20,10 @@ type CreateStudioComponentHeaders struct {
 }
 
 type CreateStudioComponentRequestBodyConfiguration struct {
-	ActiveDirectoryConfiguration  *shared.ActiveDirectoryConfiguration  `json:"activeDirectoryConfiguration"`
-	ComputeFarmConfiguration      *shared.ComputeFarmConfiguration      `json:"computeFarmConfiguration"`
-	LicenseServiceConfiguration   *shared.LicenseServiceConfiguration   `json:"licenseServiceConfiguration"`
-	SharedFileSystemConfiguration *shared.SharedFileSystemConfiguration `json:"sharedFileSystemConfiguration"`
+	ActiveDirectoryConfiguration  *shared.ActiveDirectoryConfiguration  `json:"activeDirectoryConfiguration,omitempty"`
+	ComputeFarmConfiguration      *shared.ComputeFarmConfiguration      `json:"computeFarmConfiguration,omitempty"`
+	LicenseServiceConfiguration   *shared.LicenseServiceConfiguration   `json:"licenseServiceConfiguration,omitempty"`
+	SharedFileSystemConfiguration *shared.SharedFileSystemConfiguration `json:"sharedFileSystemConfiguration,omitempty"`
 }
 
 type CreateStudioComponentRequestBodySubtypeEnum string
@@ -46,14 +46,14 @@ const (
 )
 
 type CreateStudioComponentRequestBody struct {
-	Configuration         *CreateStudioComponentRequestBodyConfiguration `json:"configuration"`
-	Description           *string                                        `json:"description"`
-	Ec2SecurityGroupIds   []string                                       `json:"ec2SecurityGroupIds"`
-	InitializationScripts []shared.StudioComponentInitializationScript   `json:"initializationScripts"`
+	Configuration         *CreateStudioComponentRequestBodyConfiguration `json:"configuration,omitempty"`
+	Description           *string                                        `json:"description,omitempty"`
+	Ec2SecurityGroupIds   []string                                       `json:"ec2SecurityGroupIds,omitempty"`
+	InitializationScripts []shared.StudioComponentInitializationScript   `json:"initializationScripts,omitempty"`
 	Name                  string                                         `json:"name"`
-	ScriptParameters      []shared.ScriptParameterKeyValue               `json:"scriptParameters"`
-	Subtype               *CreateStudioComponentRequestBodySubtypeEnum   `json:"subtype"`
-	Tags                  map[string]string                              `json:"tags"`
+	ScriptParameters      []shared.ScriptParameterKeyValue               `json:"scriptParameters,omitempty"`
+	Subtype               *CreateStudioComponentRequestBodySubtypeEnum   `json:"subtype,omitempty"`
+	Tags                  map[string]string                              `json:"tags,omitempty"`
 	Type                  CreateStudioComponentRequestBodyTypeEnum       `json:"type"`
 }
 

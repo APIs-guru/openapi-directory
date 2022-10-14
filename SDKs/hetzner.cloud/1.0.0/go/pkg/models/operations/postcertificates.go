@@ -8,12 +8,12 @@ const (
 )
 
 type PostCertificatesRequestBodyCreateCertificateRequest struct {
-	Certificate *string                              `json:"certificate"`
-	DomainNames []string                             `json:"domain_names"`
-	Labels      map[string]interface{}               `json:"labels"`
+	Certificate *string                              `json:"certificate,omitempty"`
+	DomainNames []string                             `json:"domain_names,omitempty"`
+	Labels      map[string]interface{}               `json:"labels,omitempty"`
 	Name        string                               `json:"name"`
-	PrivateKey  *string                              `json:"private_key"`
-	Type        *PostCertificatesRequestBodyTypeEnum `json:"type"`
+	PrivateKey  *string                              `json:"private_key,omitempty"`
+	Type        *PostCertificatesRequestBodyTypeEnum `json:"type,omitempty"`
 }
 
 type PostCertificatesRequest struct {
@@ -50,8 +50,8 @@ type PostCertificates201ApplicationJSONActionNullableAction struct {
 }
 
 type PostCertificates201ApplicationJSONCertificateStatusError struct {
-	Code    *string `json:"code"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostCertificates201ApplicationJSONCertificateStatusIssuanceEnum string
@@ -72,9 +72,9 @@ const (
 )
 
 type PostCertificates201ApplicationJSONCertificateStatus struct {
-	Error    *PostCertificates201ApplicationJSONCertificateStatusError        `json:"error"`
-	Issuance *PostCertificates201ApplicationJSONCertificateStatusIssuanceEnum `json:"issuance"`
-	Renewal  *PostCertificates201ApplicationJSONCertificateStatusRenewalEnum  `json:"renewal"`
+	Error    *PostCertificates201ApplicationJSONCertificateStatusError        `json:"error,omitempty"`
+	Issuance *PostCertificates201ApplicationJSONCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
+	Renewal  *PostCertificates201ApplicationJSONCertificateStatusRenewalEnum  `json:"renewal,omitempty"`
 }
 
 type PostCertificates201ApplicationJSONCertificateTypeEnum string
@@ -99,13 +99,13 @@ type PostCertificates201ApplicationJSONCertificateCertificate struct {
 	Name           string                                                 `json:"name"`
 	NotValidAfter  string                                                 `json:"not_valid_after"`
 	NotValidBefore string                                                 `json:"not_valid_before"`
-	Status         *PostCertificates201ApplicationJSONCertificateStatus   `json:"status"`
-	Type           *PostCertificates201ApplicationJSONCertificateTypeEnum `json:"type"`
+	Status         *PostCertificates201ApplicationJSONCertificateStatus   `json:"status,omitempty"`
+	Type           *PostCertificates201ApplicationJSONCertificateTypeEnum `json:"type,omitempty"`
 	UsedBy         []PostCertificates201ApplicationJSONCertificateUsedBy  `json:"used_by"`
 }
 
 type PostCertificates201ApplicationJSONCreateCertificateResponse struct {
-	Action      *PostCertificates201ApplicationJSONActionNullableAction  `json:"action"`
+	Action      *PostCertificates201ApplicationJSONActionNullableAction  `json:"action,omitempty"`
 	Certificate PostCertificates201ApplicationJSONCertificateCertificate `json:"certificate"`
 }
 

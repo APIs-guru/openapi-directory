@@ -1,5 +1,5 @@
 package shared
 
 type EmployeeIDResponse struct {
-	EmployeeID *string `json:"employeeId"`
+	EmployeeID *string `json:"employeeId,omitempty"`
 }

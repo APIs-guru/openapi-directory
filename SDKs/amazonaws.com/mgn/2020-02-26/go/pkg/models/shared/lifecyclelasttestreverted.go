@@ -1,5 +1,5 @@
 package shared
 
 type LifeCycleLastTestReverted struct {
-	APICallDateTime *string `json:"apiCallDateTime"`
+	APICallDateTime *string `json:"apiCallDateTime,omitempty"`
 }

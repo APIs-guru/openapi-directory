@@ -1,6 +1,6 @@
 package shared
 
 type LocalPostEvent struct {
-	Schedule *TimeInterval `json:"schedule"`
-	Title    *string       `json:"title"`
+	Schedule *TimeInterval `json:"schedule,omitempty"`
+	Title    *string       `json:"title,omitempty"`
 }

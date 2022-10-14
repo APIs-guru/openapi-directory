@@ -20,9 +20,9 @@ const (
 )
 
 type GoogleCloudChannelV1Plan struct {
-	BillingAccount *string                                  `json:"billingAccount"`
-	PaymentCycle   *GoogleCloudChannelV1Period              `json:"paymentCycle"`
-	PaymentPlan    *GoogleCloudChannelV1PlanPaymentPlanEnum `json:"paymentPlan"`
-	PaymentType    *GoogleCloudChannelV1PlanPaymentTypeEnum `json:"paymentType"`
-	TrialPeriod    *GoogleCloudChannelV1Period              `json:"trialPeriod"`
+	BillingAccount *string                                  `json:"billingAccount,omitempty"`
+	PaymentCycle   *GoogleCloudChannelV1Period              `json:"paymentCycle,omitempty"`
+	PaymentPlan    *GoogleCloudChannelV1PlanPaymentPlanEnum `json:"paymentPlan,omitempty"`
+	PaymentType    *GoogleCloudChannelV1PlanPaymentTypeEnum `json:"paymentType,omitempty"`
+	TrialPeriod    *GoogleCloudChannelV1Period              `json:"trialPeriod,omitempty"`
 }

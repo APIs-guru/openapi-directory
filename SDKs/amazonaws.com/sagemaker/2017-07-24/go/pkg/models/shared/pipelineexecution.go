@@ -5,16 +5,16 @@ import (
 )
 
 type PipelineExecution struct {
-	CreatedBy                    *UserContext                 `json:"CreatedBy"`
-	CreationTime                 *time.Time                   `json:"CreationTime"`
-	FailureReason                *string                      `json:"FailureReason"`
-	LastModifiedBy               *UserContext                 `json:"LastModifiedBy"`
-	LastModifiedTime             *time.Time                   `json:"LastModifiedTime"`
-	PipelineArn                  *string                      `json:"PipelineArn"`
-	PipelineExecutionArn         *string                      `json:"PipelineExecutionArn"`
-	PipelineExecutionDescription *string                      `json:"PipelineExecutionDescription"`
-	PipelineExecutionDisplayName *string                      `json:"PipelineExecutionDisplayName"`
-	PipelineExecutionStatus      *PipelineExecutionStatusEnum `json:"PipelineExecutionStatus"`
-	PipelineExperimentConfig     *PipelineExperimentConfig    `json:"PipelineExperimentConfig"`
-	PipelineParameters           []Parameter                  `json:"PipelineParameters"`
+	CreatedBy                    *UserContext                 `json:"CreatedBy,omitempty"`
+	CreationTime                 *time.Time                   `json:"CreationTime,omitempty"`
+	FailureReason                *string                      `json:"FailureReason,omitempty"`
+	LastModifiedBy               *UserContext                 `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime             *time.Time                   `json:"LastModifiedTime,omitempty"`
+	PipelineArn                  *string                      `json:"PipelineArn,omitempty"`
+	PipelineExecutionArn         *string                      `json:"PipelineExecutionArn,omitempty"`
+	PipelineExecutionDescription *string                      `json:"PipelineExecutionDescription,omitempty"`
+	PipelineExecutionDisplayName *string                      `json:"PipelineExecutionDisplayName,omitempty"`
+	PipelineExecutionStatus      *PipelineExecutionStatusEnum `json:"PipelineExecutionStatus,omitempty"`
+	PipelineExperimentConfig     *PipelineExperimentConfig    `json:"PipelineExperimentConfig,omitempty"`
+	PipelineParameters           []Parameter                  `json:"PipelineParameters,omitempty"`
 }

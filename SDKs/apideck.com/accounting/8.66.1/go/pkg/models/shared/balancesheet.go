@@ -5,9 +5,9 @@ import (
 )
 
 type BalanceSheetAssetsCurrentAssetsAccounts struct {
-	ID    *string  `json:"id"`
-	Name  *string  `json:"name"`
-	Value *float64 `json:"value"`
+	ID    *string  `json:"id,omitempty"`
+	Name  *string  `json:"name,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type BalanceSheetAssetsCurrentAssets struct {
@@ -16,9 +16,9 @@ type BalanceSheetAssetsCurrentAssets struct {
 }
 
 type BalanceSheetAssetsFixedAssetsAccounts struct {
-	ID    *string  `json:"id"`
-	Name  *string  `json:"name"`
-	Value *float64 `json:"value"`
+	ID    *string  `json:"id,omitempty"`
+	Name  *string  `json:"name,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type BalanceSheetAssetsFixedAssets struct {
@@ -33,9 +33,9 @@ type BalanceSheetAssets struct {
 }
 
 type BalanceSheetEquityItems struct {
-	ID    *string  `json:"id"`
-	Name  *string  `json:"name"`
-	Value *float64 `json:"value"`
+	ID    *string  `json:"id,omitempty"`
+	Name  *string  `json:"name,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type BalanceSheetEquity struct {
@@ -44,9 +44,9 @@ type BalanceSheetEquity struct {
 }
 
 type BalanceSheetLiabilitiesAccounts struct {
-	ID    *string  `json:"id"`
-	Name  *string  `json:"name"`
-	Value *float64 `json:"value"`
+	ID    *string  `json:"id,omitempty"`
+	Name  *string  `json:"name,omitempty"`
+	Value *float64 `json:"value,omitempty"`
 }
 
 type BalanceSheetLiabilities struct {
@@ -56,14 +56,14 @@ type BalanceSheetLiabilities struct {
 
 type BalanceSheet struct {
 	Assets      BalanceSheetAssets      `json:"assets"`
-	CreatedAt   *time.Time              `json:"created_at"`
-	CreatedBy   *string                 `json:"created_by"`
-	EndDate     *string                 `json:"end_date"`
+	CreatedAt   *time.Time              `json:"created_at,omitempty"`
+	CreatedBy   *string                 `json:"created_by,omitempty"`
+	EndDate     *string                 `json:"end_date,omitempty"`
 	Equity      BalanceSheetEquity      `json:"equity"`
-	ID          *string                 `json:"id"`
+	ID          *string                 `json:"id,omitempty"`
 	Liabilities BalanceSheetLiabilities `json:"liabilities"`
 	ReportName  string                  `json:"report_name"`
 	StartDate   string                  `json:"start_date"`
-	UpdatedAt   *time.Time              `json:"updated_at"`
-	UpdatedBy   *string                 `json:"updated_by"`
+	UpdatedAt   *time.Time              `json:"updated_at,omitempty"`
+	UpdatedBy   *string                 `json:"updated_by,omitempty"`
 }

@@ -26,14 +26,14 @@ const (
 )
 
 type Lun struct {
-	BootLun           *bool                     `json:"bootLun"`
-	ID                *string                   `json:"id"`
-	MultiprotocolType *LunMultiprotocolTypeEnum `json:"multiprotocolType"`
-	Name              *string                   `json:"name"`
-	Shareable         *bool                     `json:"shareable"`
-	SizeGb            *string                   `json:"sizeGb"`
-	State             *LunStateEnum             `json:"state"`
-	StorageType       *LunStorageTypeEnum       `json:"storageType"`
-	StorageVolume     *string                   `json:"storageVolume"`
-	Wwid              *string                   `json:"wwid"`
+	BootLun           *bool                     `json:"bootLun,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
+	MultiprotocolType *LunMultiprotocolTypeEnum `json:"multiprotocolType,omitempty"`
+	Name              *string                   `json:"name,omitempty"`
+	Shareable         *bool                     `json:"shareable,omitempty"`
+	SizeGb            *string                   `json:"sizeGb,omitempty"`
+	State             *LunStateEnum             `json:"state,omitempty"`
+	StorageType       *LunStorageTypeEnum       `json:"storageType,omitempty"`
+	StorageVolume     *string                   `json:"storageVolume,omitempty"`
+	Wwid              *string                   `json:"wwid,omitempty"`
 }

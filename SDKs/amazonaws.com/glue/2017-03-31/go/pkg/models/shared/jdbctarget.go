@@ -1,7 +1,7 @@
 package shared
 
 type JdbcTarget struct {
-	ConnectionName *string  `json:"ConnectionName"`
-	Exclusions     []string `json:"Exclusions"`
-	Path           *string  `json:"Path"`
+	ConnectionName *string  `json:"ConnectionName,omitempty"`
+	Exclusions     []string `json:"Exclusions,omitempty"`
+	Path           *string  `json:"Path,omitempty"`
 }

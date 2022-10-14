@@ -1,7 +1,7 @@
 package shared
 
 type ListCustomerSegmentsResponse struct {
-	Cursor   *string           `json:"cursor"`
-	Errors   []Error           `json:"errors"`
-	Segments []CustomerSegment `json:"segments"`
+	Cursor   *string           `json:"cursor,omitempty"`
+	Errors   []Error           `json:"errors,omitempty"`
+	Segments []CustomerSegment `json:"segments,omitempty"`
 }

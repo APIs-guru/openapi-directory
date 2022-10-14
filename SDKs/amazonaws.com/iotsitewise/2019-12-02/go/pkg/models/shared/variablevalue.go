@@ -1,6 +1,6 @@
 package shared
 
 type VariableValue struct {
-	HierarchyID *string `json:"hierarchyId"`
+	HierarchyID *string `json:"hierarchyId,omitempty"`
 	PropertyID  string  `json:"propertyId"`
 }

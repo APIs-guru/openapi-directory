@@ -15,15 +15,15 @@ const (
 )
 
 type AddBankTransferBatchPaymentRequestBody1BatchItemBankTransferMode2 struct {
-	Amount                *int64                                                `json:"amount"`
-	DestAccountHolderName *string                                               `json:"destAccountHolderName"`
-	DestAccountNumber     *string                                               `json:"destAccountNumber"`
-	DestIban              *string                                               `json:"destIban"`
-	DestNsc               *string                                               `json:"destNsc"`
-	IcanFrom              *int64                                                `json:"icanFrom"`
-	MyRef                 *string                                               `json:"myRef"`
-	PayeeType             *AddBankTransferBatchPaymentRequestBody1PayeeTypeEnum `json:"payeeType"`
-	YourRef               *string                                               `json:"yourRef"`
+	Amount                *int64                                                `json:"amount,omitempty"`
+	DestAccountHolderName *string                                               `json:"destAccountHolderName,omitempty"`
+	DestAccountNumber     *string                                               `json:"destAccountNumber,omitempty"`
+	DestIban              *string                                               `json:"destIban,omitempty"`
+	DestNsc               *string                                               `json:"destNsc,omitempty"`
+	IcanFrom              *int64                                                `json:"icanFrom,omitempty"`
+	MyRef                 *string                                               `json:"myRef,omitempty"`
+	PayeeType             *AddBankTransferBatchPaymentRequestBody1PayeeTypeEnum `json:"payeeType,omitempty"`
+	YourRef               *string                                               `json:"yourRef,omitempty"`
 }
 
 type AddBankTransferBatchPaymentRequestBody2PayeeTypeEnum string
@@ -33,12 +33,12 @@ const (
 )
 
 type AddBankTransferBatchPaymentRequestBody2BatchItemBankTransferMode1 struct {
-	Amount    *int64                                                `json:"amount"`
-	IcanFrom  *int64                                                `json:"icanFrom"`
-	MyRef     *string                                               `json:"myRef"`
-	PayeeID   *int64                                                `json:"payeeId"`
-	PayeeType *AddBankTransferBatchPaymentRequestBody2PayeeTypeEnum `json:"payeeType"`
-	YourRef   *string                                               `json:"yourRef"`
+	Amount    *int64                                                `json:"amount,omitempty"`
+	IcanFrom  *int64                                                `json:"icanFrom,omitempty"`
+	MyRef     *string                                               `json:"myRef,omitempty"`
+	PayeeID   *int64                                                `json:"payeeId,omitempty"`
+	PayeeType *AddBankTransferBatchPaymentRequestBody2PayeeTypeEnum `json:"payeeType,omitempty"`
+	YourRef   *string                                               `json:"yourRef,omitempty"`
 }
 
 type AddBankTransferBatchPaymentRequest struct {

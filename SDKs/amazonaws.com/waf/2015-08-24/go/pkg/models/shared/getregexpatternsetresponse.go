@@ -1,5 +1,5 @@
 package shared
 
 type GetRegexPatternSetResponse struct {
-	RegexPatternSet *RegexPatternSet `json:"RegexPatternSet"`
+	RegexPatternSet *RegexPatternSet `json:"RegexPatternSet,omitempty"`
 }

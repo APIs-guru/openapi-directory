@@ -1,6 +1,6 @@
 package shared
 
 type GenerateTemplateRequest struct {
-	AppID          *string           `json:"appId"`
-	TemplateFormat *OutputFormatEnum `json:"templateFormat"`
+	AppID          *string           `json:"appId,omitempty"`
+	TemplateFormat *OutputFormatEnum `json:"templateFormat,omitempty"`
 }

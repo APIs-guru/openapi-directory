@@ -9,7 +9,7 @@ const (
 )
 
 type RenewLeaseRequest struct {
-	LeaseDuration *string                            `json:"leaseDuration"`
-	ResponseView  *RenewLeaseRequestResponseViewEnum `json:"responseView"`
-	ScheduleTime  *string                            `json:"scheduleTime"`
+	LeaseDuration *string                            `json:"leaseDuration,omitempty"`
+	ResponseView  *RenewLeaseRequestResponseViewEnum `json:"responseView,omitempty"`
+	ScheduleTime  *string                            `json:"scheduleTime,omitempty"`
 }

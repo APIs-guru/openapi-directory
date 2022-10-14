@@ -7,6 +7,6 @@ const (
 )
 
 type Twitter struct {
-	Handle   *TwitterHandleEnum `json:"handle"`
-	Hashtags []string           `json:"hashtags"`
+	Handle   *TwitterHandleEnum `json:"handle,omitempty"`
+	Hashtags []string           `json:"hashtags,omitempty"`
 }

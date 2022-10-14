@@ -1,9 +1,9 @@
 package shared
 
 type CultureDto struct {
-	DisplayName                 *string  `json:"DisplayName"`
-	Name                        *string  `json:"Name"`
-	ThreeLetterIsoLanguageName  *string  `json:"ThreeLetterISOLanguageName"`
-	ThreeLetterIsoLanguageNames []string `json:"ThreeLetterISOLanguageNames"`
-	TwoLetterIsoLanguageName    *string  `json:"TwoLetterISOLanguageName"`
+	DisplayName                 *string  `json:"DisplayName,omitempty"`
+	Name                        *string  `json:"Name,omitempty"`
+	ThreeLetterIsoLanguageName  *string  `json:"ThreeLetterISOLanguageName,omitempty"`
+	ThreeLetterIsoLanguageNames []string `json:"ThreeLetterISOLanguageNames,omitempty"`
+	TwoLetterIsoLanguageName    *string  `json:"TwoLetterISOLanguageName,omitempty"`
 }

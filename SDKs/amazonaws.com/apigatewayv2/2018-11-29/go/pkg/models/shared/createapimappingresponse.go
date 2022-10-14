@@ -1,8 +1,8 @@
 package shared
 
 type CreateAPIMappingResponse struct {
-	APIID         *string `json:"ApiId"`
-	APIMappingID  *string `json:"ApiMappingId"`
-	APIMappingKey *string `json:"ApiMappingKey"`
-	Stage         *string `json:"Stage"`
+	APIID         *string `json:"ApiId,omitempty"`
+	APIMappingID  *string `json:"ApiMappingId,omitempty"`
+	APIMappingKey *string `json:"ApiMappingKey,omitempty"`
+	Stage         *string `json:"Stage,omitempty"`
 }

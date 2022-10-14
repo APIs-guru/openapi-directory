@@ -14,7 +14,7 @@ type RemoveMembersForPortfolioQueryParams struct {
 }
 
 type RemoveMembersForPortfolioRequestBody struct {
-	Data *shared.RemoveMembersRequest `json:"data"`
+	Data *shared.RemoveMembersRequest `json:"data,omitempty"`
 }
 
 type RemoveMembersForPortfolioRequest struct {
@@ -24,7 +24,7 @@ type RemoveMembersForPortfolioRequest struct {
 }
 
 type RemoveMembersForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveMembersForPortfolioResponse struct {

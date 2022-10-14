@@ -1,9 +1,9 @@
 package shared
 
 type URLInspectionResult struct {
-	AmpResult             *AmpInspectionResult             `json:"ampResult"`
-	IndexStatusResult     *IndexStatusInspectionResult     `json:"indexStatusResult"`
-	InspectionResultLink  *string                          `json:"inspectionResultLink"`
-	MobileUsabilityResult *MobileUsabilityInspectionResult `json:"mobileUsabilityResult"`
-	RichResultsResult     *RichResultsInspectionResult     `json:"richResultsResult"`
+	AmpResult             *AmpInspectionResult             `json:"ampResult,omitempty"`
+	IndexStatusResult     *IndexStatusInspectionResult     `json:"indexStatusResult,omitempty"`
+	InspectionResultLink  *string                          `json:"inspectionResultLink,omitempty"`
+	MobileUsabilityResult *MobileUsabilityInspectionResult `json:"mobileUsabilityResult,omitempty"`
+	RichResultsResult     *RichResultsInspectionResult     `json:"richResultsResult,omitempty"`
 }

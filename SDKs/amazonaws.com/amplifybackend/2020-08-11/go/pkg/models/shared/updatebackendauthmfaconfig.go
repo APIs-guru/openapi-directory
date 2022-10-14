@@ -1,6 +1,6 @@
 package shared
 
 type UpdateBackendAuthMfaConfig struct {
-	MfaMode  *MfaModeEnum `json:"MFAMode"`
-	Settings *Settings    `json:"Settings"`
+	MfaMode  *MfaModeEnum `json:"MFAMode,omitempty"`
+	Settings *Settings    `json:"Settings,omitempty"`
 }

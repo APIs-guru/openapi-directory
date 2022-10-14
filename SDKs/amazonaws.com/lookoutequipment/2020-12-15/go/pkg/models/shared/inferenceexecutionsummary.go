@@ -5,16 +5,16 @@ import (
 )
 
 type InferenceExecutionSummary struct {
-	CustomerResultObject    *S3Object                     `json:"CustomerResultObject"`
-	DataEndTime             *time.Time                    `json:"DataEndTime"`
-	DataInputConfiguration  *InferenceInputConfiguration  `json:"DataInputConfiguration"`
-	DataOutputConfiguration *InferenceOutputConfiguration `json:"DataOutputConfiguration"`
-	DataStartTime           *time.Time                    `json:"DataStartTime"`
-	FailedReason            *string                       `json:"FailedReason"`
-	InferenceSchedulerArn   *string                       `json:"InferenceSchedulerArn"`
-	InferenceSchedulerName  *string                       `json:"InferenceSchedulerName"`
-	ModelArn                *string                       `json:"ModelArn"`
-	ModelName               *string                       `json:"ModelName"`
-	ScheduledStartTime      *time.Time                    `json:"ScheduledStartTime"`
-	Status                  *InferenceExecutionStatusEnum `json:"Status"`
+	CustomerResultObject    *S3Object                     `json:"CustomerResultObject,omitempty"`
+	DataEndTime             *time.Time                    `json:"DataEndTime,omitempty"`
+	DataInputConfiguration  *InferenceInputConfiguration  `json:"DataInputConfiguration,omitempty"`
+	DataOutputConfiguration *InferenceOutputConfiguration `json:"DataOutputConfiguration,omitempty"`
+	DataStartTime           *time.Time                    `json:"DataStartTime,omitempty"`
+	FailedReason            *string                       `json:"FailedReason,omitempty"`
+	InferenceSchedulerArn   *string                       `json:"InferenceSchedulerArn,omitempty"`
+	InferenceSchedulerName  *string                       `json:"InferenceSchedulerName,omitempty"`
+	ModelArn                *string                       `json:"ModelArn,omitempty"`
+	ModelName               *string                       `json:"ModelName,omitempty"`
+	ScheduledStartTime      *time.Time                    `json:"ScheduledStartTime,omitempty"`
+	Status                  *InferenceExecutionStatusEnum `json:"Status,omitempty"`
 }

@@ -11,9 +11,9 @@ const (
 )
 
 type ResourceInfo struct {
-	ID       *string                 `json:"id"`
-	Resource map[string]interface{}  `json:"resource"`
-	Status   *ResourceInfoStatusEnum `json:"status"`
-	Sub      []ResourceInfo          `json:"sub"`
-	Time     *string                 `json:"time"`
+	ID       *string                 `json:"id,omitempty"`
+	Resource map[string]interface{}  `json:"resource,omitempty"`
+	Status   *ResourceInfoStatusEnum `json:"status,omitempty"`
+	Sub      []ResourceInfo          `json:"sub,omitempty"`
+	Time     *string                 `json:"time,omitempty"`
 }

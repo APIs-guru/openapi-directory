@@ -23,7 +23,7 @@ type UpdateProfileRequest struct {
 }
 
 type UpdateProfileDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateProfileResponse struct {

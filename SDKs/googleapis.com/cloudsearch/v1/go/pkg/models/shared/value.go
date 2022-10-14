@@ -1,10 +1,10 @@
 package shared
 
 type Value struct {
-	BooleanValue   *bool    `json:"booleanValue"`
-	DateValue      *Date    `json:"dateValue"`
-	DoubleValue    *float64 `json:"doubleValue"`
-	IntegerValue   *string  `json:"integerValue"`
-	StringValue    *string  `json:"stringValue"`
-	TimestampValue *string  `json:"timestampValue"`
+	BooleanValue   *bool    `json:"booleanValue,omitempty"`
+	DateValue      *Date    `json:"dateValue,omitempty"`
+	DoubleValue    *float64 `json:"doubleValue,omitempty"`
+	IntegerValue   *string  `json:"integerValue,omitempty"`
+	StringValue    *string  `json:"stringValue,omitempty"`
+	TimestampValue *string  `json:"timestampValue,omitempty"`
 }

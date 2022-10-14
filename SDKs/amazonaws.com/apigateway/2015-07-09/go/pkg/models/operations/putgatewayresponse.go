@@ -46,9 +46,9 @@ type PutGatewayResponseHeaders struct {
 }
 
 type PutGatewayResponseRequestBody struct {
-	ResponseParameters map[string]string `json:"responseParameters"`
-	ResponseTemplates  map[string]string `json:"responseTemplates"`
-	StatusCode         *string           `json:"statusCode"`
+	ResponseParameters map[string]string `json:"responseParameters,omitempty"`
+	ResponseTemplates  map[string]string `json:"responseTemplates,omitempty"`
+	StatusCode         *string           `json:"statusCode,omitempty"`
 }
 
 type PutGatewayResponseRequest struct {

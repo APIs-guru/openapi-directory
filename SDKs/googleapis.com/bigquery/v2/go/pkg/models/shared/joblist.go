@@ -1,20 +1,20 @@
 package shared
 
 type JobListJobs struct {
-	Configuration *JobConfiguration `json:"configuration"`
-	ErrorResult   *ErrorProto       `json:"errorResult"`
-	ID            *string           `json:"id"`
-	JobReference  *JobReference     `json:"jobReference"`
-	Kind          *string           `json:"kind"`
-	State         *string           `json:"state"`
-	Statistics    *JobStatistics    `json:"statistics"`
-	Status        *JobStatus        `json:"status"`
-	UserEmail     *string           `json:"user_email"`
+	Configuration *JobConfiguration `json:"configuration,omitempty"`
+	ErrorResult   *ErrorProto       `json:"errorResult,omitempty"`
+	ID            *string           `json:"id,omitempty"`
+	JobReference  *JobReference     `json:"jobReference,omitempty"`
+	Kind          *string           `json:"kind,omitempty"`
+	State         *string           `json:"state,omitempty"`
+	Statistics    *JobStatistics    `json:"statistics,omitempty"`
+	Status        *JobStatus        `json:"status,omitempty"`
+	UserEmail     *string           `json:"user_email,omitempty"`
 }
 
 type JobList struct {
-	Etag          *string       `json:"etag"`
-	Jobs          []JobListJobs `json:"jobs"`
-	Kind          *string       `json:"kind"`
-	NextPageToken *string       `json:"nextPageToken"`
+	Etag          *string       `json:"etag,omitempty"`
+	Jobs          []JobListJobs `json:"jobs,omitempty"`
+	Kind          *string       `json:"kind,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
 }

@@ -18,8 +18,8 @@ const (
 )
 
 type Pacing struct {
-	DailyMaxImpressions *string                 `json:"dailyMaxImpressions"`
-	DailyMaxMicros      *string                 `json:"dailyMaxMicros"`
-	PacingPeriod        *PacingPacingPeriodEnum `json:"pacingPeriod"`
-	PacingType          *PacingPacingTypeEnum   `json:"pacingType"`
+	DailyMaxImpressions *string                 `json:"dailyMaxImpressions,omitempty"`
+	DailyMaxMicros      *string                 `json:"dailyMaxMicros,omitempty"`
+	PacingPeriod        *PacingPacingPeriodEnum `json:"pacingPeriod,omitempty"`
+	PacingType          *PacingPacingTypeEnum   `json:"pacingType,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type PurgeProductsRequest struct {
-	DeleteOrphanProducts  *bool                  `json:"deleteOrphanProducts"`
-	Force                 *bool                  `json:"force"`
-	ProductSetPurgeConfig *ProductSetPurgeConfig `json:"productSetPurgeConfig"`
+	DeleteOrphanProducts  *bool                  `json:"deleteOrphanProducts,omitempty"`
+	Force                 *bool                  `json:"force,omitempty"`
+	ProductSetPurgeConfig *ProductSetPurgeConfig `json:"productSetPurgeConfig,omitempty"`
 }

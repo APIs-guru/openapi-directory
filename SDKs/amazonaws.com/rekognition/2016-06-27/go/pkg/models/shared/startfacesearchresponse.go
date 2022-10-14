@@ -1,5 +1,5 @@
 package shared
 
 type StartFaceSearchResponse struct {
-	JobID *string `json:"JobId"`
+	JobID *string `json:"JobId,omitempty"`
 }

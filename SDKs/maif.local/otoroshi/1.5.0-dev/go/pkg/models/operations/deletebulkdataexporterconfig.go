@@ -20,9 +20,9 @@ const (
 )
 
 type DeletebulkDataExporterConfig200ApplicationJSON struct {
-	Deleted *bool                                                     `json:"deleted"`
-	ID      *bool                                                     `json:"id"`
-	Status  *DeletebulkDataExporterConfig200ApplicationJSONStatusEnum `json:"status"`
+	Deleted *bool                                                     `json:"deleted,omitempty"`
+	ID      *bool                                                     `json:"id,omitempty"`
+	Status  *DeletebulkDataExporterConfig200ApplicationJSONStatusEnum `json:"status,omitempty"`
 }
 
 type DeletebulkDataExporterConfigResponse struct {

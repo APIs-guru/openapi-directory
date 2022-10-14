@@ -52,17 +52,17 @@ const (
 )
 
 type BuildOptions struct {
-	DiskSizeGb            *string                                `json:"diskSizeGb"`
-	DynamicSubstitutions  *bool                                  `json:"dynamicSubstitutions"`
-	Env                   []string                               `json:"env"`
-	LogStreamingOption    *BuildOptionsLogStreamingOptionEnum    `json:"logStreamingOption"`
-	Logging               *BuildOptionsLoggingEnum               `json:"logging"`
-	MachineType           *BuildOptionsMachineTypeEnum           `json:"machineType"`
-	Pool                  *PoolOption                            `json:"pool"`
-	RequestedVerifyOption *BuildOptionsRequestedVerifyOptionEnum `json:"requestedVerifyOption"`
-	SecretEnv             []string                               `json:"secretEnv"`
-	SourceProvenanceHash  []BuildOptionsSourceProvenanceHashEnum `json:"sourceProvenanceHash"`
-	SubstitutionOption    *BuildOptionsSubstitutionOptionEnum    `json:"substitutionOption"`
-	Volumes               []Volume                               `json:"volumes"`
-	WorkerPool            *string                                `json:"workerPool"`
+	DiskSizeGb            *string                                `json:"diskSizeGb,omitempty"`
+	DynamicSubstitutions  *bool                                  `json:"dynamicSubstitutions,omitempty"`
+	Env                   []string                               `json:"env,omitempty"`
+	LogStreamingOption    *BuildOptionsLogStreamingOptionEnum    `json:"logStreamingOption,omitempty"`
+	Logging               *BuildOptionsLoggingEnum               `json:"logging,omitempty"`
+	MachineType           *BuildOptionsMachineTypeEnum           `json:"machineType,omitempty"`
+	Pool                  *PoolOption                            `json:"pool,omitempty"`
+	RequestedVerifyOption *BuildOptionsRequestedVerifyOptionEnum `json:"requestedVerifyOption,omitempty"`
+	SecretEnv             []string                               `json:"secretEnv,omitempty"`
+	SourceProvenanceHash  []BuildOptionsSourceProvenanceHashEnum `json:"sourceProvenanceHash,omitempty"`
+	SubstitutionOption    *BuildOptionsSubstitutionOptionEnum    `json:"substitutionOption,omitempty"`
+	Volumes               []Volume                               `json:"volumes,omitempty"`
+	WorkerPool            *string                                `json:"workerPool,omitempty"`
 }

@@ -28,7 +28,7 @@ const (
 )
 
 type ConfigManagementGatekeeperDeploymentState struct {
-	GatekeeperAudit                  *ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum                  `json:"gatekeeperAudit"`
-	GatekeeperControllerManagerState *ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum `json:"gatekeeperControllerManagerState"`
-	GatekeeperMutation               *ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum               `json:"gatekeeperMutation"`
+	GatekeeperAudit                  *ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum                  `json:"gatekeeperAudit,omitempty"`
+	GatekeeperControllerManagerState *ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum `json:"gatekeeperControllerManagerState,omitempty"`
+	GatekeeperMutation               *ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum               `json:"gatekeeperMutation,omitempty"`
 }

@@ -1,12 +1,12 @@
 package shared
 
 type Thumbnails struct {
-	AspectRatio   *string `json:"AspectRatio"`
-	Format        *string `json:"Format"`
-	Interval      *string `json:"Interval"`
-	MaxHeight     *string `json:"MaxHeight"`
-	MaxWidth      *string `json:"MaxWidth"`
-	PaddingPolicy *string `json:"PaddingPolicy"`
-	Resolution    *string `json:"Resolution"`
-	SizingPolicy  *string `json:"SizingPolicy"`
+	AspectRatio   *string `json:"AspectRatio,omitempty"`
+	Format        *string `json:"Format,omitempty"`
+	Interval      *string `json:"Interval,omitempty"`
+	MaxHeight     *string `json:"MaxHeight,omitempty"`
+	MaxWidth      *string `json:"MaxWidth,omitempty"`
+	PaddingPolicy *string `json:"PaddingPolicy,omitempty"`
+	Resolution    *string `json:"Resolution,omitempty"`
+	SizingPolicy  *string `json:"SizingPolicy,omitempty"`
 }

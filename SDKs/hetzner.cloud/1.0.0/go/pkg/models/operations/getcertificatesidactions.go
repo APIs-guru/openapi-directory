@@ -89,7 +89,7 @@ type GetCertificatesIDActions200ApplicationJSONMeta struct {
 
 type GetCertificatesIDActions200ApplicationJSONActionsResponse struct {
 	Actions []GetCertificatesIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetCertificatesIDActions200ApplicationJSONMeta           `json:"meta"`
+	Meta    *GetCertificatesIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type GetCertificatesIDActionsResponse struct {

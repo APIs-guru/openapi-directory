@@ -29,18 +29,18 @@ type GetArticlesearchJSONRequest struct {
 }
 
 type GetArticlesearchJSON200ApplicationJSONResponseMeta struct {
-	Hits   *int64 `json:"hits"`
-	Offset *int64 `json:"offset"`
-	Time   *int64 `json:"time"`
+	Hits   *int64 `json:"hits,omitempty"`
+	Offset *int64 `json:"offset,omitempty"`
+	Time   *int64 `json:"time,omitempty"`
 }
 
 type GetArticlesearchJSON200ApplicationJSONResponse struct {
-	Docs []shared.Doc                                        `json:"docs"`
-	Meta *GetArticlesearchJSON200ApplicationJSONResponseMeta `json:"meta"`
+	Docs []shared.Doc                                        `json:"docs,omitempty"`
+	Meta *GetArticlesearchJSON200ApplicationJSONResponseMeta `json:"meta,omitempty"`
 }
 
 type GetArticlesearchJSON200ApplicationJSON struct {
-	Response *GetArticlesearchJSON200ApplicationJSONResponse `json:"response"`
+	Response *GetArticlesearchJSON200ApplicationJSONResponse `json:"response,omitempty"`
 }
 
 type GetArticlesearchJSONResponse struct {

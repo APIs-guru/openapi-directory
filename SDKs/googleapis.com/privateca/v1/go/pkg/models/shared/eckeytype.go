@@ -10,5 +10,5 @@ const (
 )
 
 type EcKeyType struct {
-	SignatureAlgorithm *EcKeyTypeSignatureAlgorithmEnum `json:"signatureAlgorithm"`
+	SignatureAlgorithm *EcKeyTypeSignatureAlgorithmEnum `json:"signatureAlgorithm,omitempty"`
 }

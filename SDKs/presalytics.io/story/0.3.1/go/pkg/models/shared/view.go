@@ -5,16 +5,16 @@ import (
 )
 
 type View struct {
-	ActiveMsecs *int64     `json:"active_msecs"`
-	Additional  *string    `json:"additional"`
-	CreatedAt   *time.Time `json:"created_at"`
-	CreatedBy   *string    `json:"created_by"`
-	EndTime     *time.Time `json:"end_time"`
-	ID          *string    `json:"id"`
-	PageNumber  *int64     `json:"page_number"`
-	SessionID   *string    `json:"session_id"`
-	StartTime   *time.Time `json:"start_time"`
-	TotalMsecs  *int64     `json:"total_msecs"`
-	UpdatedAt   *time.Time `json:"updated_at"`
-	UpdatedBy   *string    `json:"updated_by"`
+	ActiveMsecs *int64     `json:"active_msecs,omitempty"`
+	Additional  *string    `json:"additional,omitempty"`
+	CreatedAt   *time.Time `json:"created_at,omitempty"`
+	CreatedBy   *string    `json:"created_by,omitempty"`
+	EndTime     *time.Time `json:"end_time,omitempty"`
+	ID          *string    `json:"id,omitempty"`
+	PageNumber  *int64     `json:"page_number,omitempty"`
+	SessionID   *string    `json:"session_id,omitempty"`
+	StartTime   *time.Time `json:"start_time,omitempty"`
+	TotalMsecs  *int64     `json:"total_msecs,omitempty"`
+	UpdatedAt   *time.Time `json:"updated_at,omitempty"`
+	UpdatedBy   *string    `json:"updated_by,omitempty"`
 }

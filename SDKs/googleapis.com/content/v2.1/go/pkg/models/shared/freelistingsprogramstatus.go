@@ -10,6 +10,6 @@ const (
 )
 
 type FreeListingsProgramStatus struct {
-	GlobalState    *FreeListingsProgramStatusGlobalStateEnum `json:"globalState"`
-	RegionStatuses []FreeListingsProgramStatusRegionStatus   `json:"regionStatuses"`
+	GlobalState    *FreeListingsProgramStatusGlobalStateEnum `json:"globalState,omitempty"`
+	RegionStatuses []FreeListingsProgramStatusRegionStatus   `json:"regionStatuses,omitempty"`
 }

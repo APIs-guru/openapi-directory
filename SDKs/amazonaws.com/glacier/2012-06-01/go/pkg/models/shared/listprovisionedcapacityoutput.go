@@ -1,5 +1,5 @@
 package shared
 
 type ListProvisionedCapacityOutput struct {
-	ProvisionedCapacityList []ProvisionedCapacityDescription `json:"ProvisionedCapacityList"`
+	ProvisionedCapacityList []ProvisionedCapacityDescription `json:"ProvisionedCapacityList,omitempty"`
 }

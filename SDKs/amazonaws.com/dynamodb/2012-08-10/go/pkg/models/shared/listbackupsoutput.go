@@ -1,6 +1,6 @@
 package shared
 
 type ListBackupsOutput struct {
-	BackupSummaries        []BackupSummary `json:"BackupSummaries"`
-	LastEvaluatedBackupArn *string         `json:"LastEvaluatedBackupArn"`
+	BackupSummaries        []BackupSummary `json:"BackupSummaries,omitempty"`
+	LastEvaluatedBackupArn *string         `json:"LastEvaluatedBackupArn,omitempty"`
 }

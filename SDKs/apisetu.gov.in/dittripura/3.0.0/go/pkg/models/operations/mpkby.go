@@ -16,8 +16,8 @@ const (
 )
 
 type MpkbyRequestBody struct {
-	CertificateParameters *MpkbyRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *MpkbyRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                MpkbyRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Mpkby400ApplicationJSON struct {
-	Error            *Mpkby400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mpkby400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mpkby400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mpkby400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mpkby401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Mpkby401ApplicationJSON struct {
-	Error            *Mpkby401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mpkby401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mpkby401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mpkby401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mpkby404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Mpkby404ApplicationJSON struct {
-	Error            *Mpkby404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mpkby404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mpkby404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mpkby404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mpkby500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Mpkby500ApplicationJSON struct {
-	Error            *Mpkby500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mpkby500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mpkby500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mpkby500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mpkby502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Mpkby502ApplicationJSON struct {
-	Error            *Mpkby502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mpkby502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mpkby502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mpkby502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mpkby503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Mpkby503ApplicationJSON struct {
-	Error            *Mpkby503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mpkby503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mpkby503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mpkby503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Mpkby504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Mpkby504ApplicationJSON struct {
-	Error            *Mpkby504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Mpkby504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Mpkby504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Mpkby504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type MpkbyResponse struct {

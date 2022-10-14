@@ -20,9 +20,9 @@ type DescribeActionTargetsHeaders struct {
 }
 
 type DescribeActionTargetsRequestBody struct {
-	ActionTargetArns []string `json:"ActionTargetArns"`
-	MaxResults       *int64   `json:"MaxResults"`
-	NextToken        *string  `json:"NextToken"`
+	ActionTargetArns []string `json:"ActionTargetArns,omitempty"`
+	MaxResults       *int64   `json:"MaxResults,omitempty"`
+	NextToken        *string  `json:"NextToken,omitempty"`
 }
 
 type DescribeActionTargetsRequest struct {

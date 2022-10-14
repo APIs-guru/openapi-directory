@@ -5,12 +5,12 @@ import (
 )
 
 type User struct {
-	Arn                *string                `json:"Arn"`
+	Arn                *string                `json:"Arn,omitempty"`
 	AuthenticationType AuthenticationTypeEnum `json:"AuthenticationType"`
-	CreatedTime        *time.Time             `json:"CreatedTime"`
-	Enabled            *bool                  `json:"Enabled"`
-	FirstName          *string                `json:"FirstName"`
-	LastName           *string                `json:"LastName"`
-	Status             *string                `json:"Status"`
-	UserName           *string                `json:"UserName"`
+	CreatedTime        *time.Time             `json:"CreatedTime,omitempty"`
+	Enabled            *bool                  `json:"Enabled,omitempty"`
+	FirstName          *string                `json:"FirstName,omitempty"`
+	LastName           *string                `json:"LastName,omitempty"`
+	Status             *string                `json:"Status,omitempty"`
+	UserName           *string                `json:"UserName,omitempty"`
 }

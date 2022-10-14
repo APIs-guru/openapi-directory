@@ -20,7 +20,7 @@ type PublishHeaders struct {
 }
 
 type PublishRequestBody struct {
-	Payload *string `json:"payload"`
+	Payload *string `json:"payload,omitempty"`
 }
 
 type PublishRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type StartStudioSsoConfigurationRepairResponse struct {
-	Studio *Studio `json:"studio"`
+	Studio *Studio `json:"studio,omitempty"`
 }

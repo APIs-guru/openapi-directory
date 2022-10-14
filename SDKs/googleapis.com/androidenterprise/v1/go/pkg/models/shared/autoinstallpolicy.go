@@ -10,8 +10,8 @@ const (
 )
 
 type AutoInstallPolicy struct {
-	AutoInstallConstraint []AutoInstallConstraint               `json:"autoInstallConstraint"`
-	AutoInstallMode       *AutoInstallPolicyAutoInstallModeEnum `json:"autoInstallMode"`
-	AutoInstallPriority   *int32                                `json:"autoInstallPriority"`
-	MinimumVersionCode    *int32                                `json:"minimumVersionCode"`
+	AutoInstallConstraint []AutoInstallConstraint               `json:"autoInstallConstraint,omitempty"`
+	AutoInstallMode       *AutoInstallPolicyAutoInstallModeEnum `json:"autoInstallMode,omitempty"`
+	AutoInstallPriority   *int32                                `json:"autoInstallPriority,omitempty"`
+	MinimumVersionCode    *int32                                `json:"minimumVersionCode,omitempty"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type CloudFormationTarget struct {
-	DeploymentID        *string           `json:"deploymentId"`
-	LastUpdatedAt       *time.Time        `json:"lastUpdatedAt"`
-	LifecycleEvents     []LifecycleEvent  `json:"lifecycleEvents"`
-	ResourceType        *string           `json:"resourceType"`
-	Status              *TargetStatusEnum `json:"status"`
-	TargetID            *string           `json:"targetId"`
-	TargetVersionWeight *float64          `json:"targetVersionWeight"`
+	DeploymentID        *string           `json:"deploymentId,omitempty"`
+	LastUpdatedAt       *time.Time        `json:"lastUpdatedAt,omitempty"`
+	LifecycleEvents     []LifecycleEvent  `json:"lifecycleEvents,omitempty"`
+	ResourceType        *string           `json:"resourceType,omitempty"`
+	Status              *TargetStatusEnum `json:"status,omitempty"`
+	TargetID            *string           `json:"targetId,omitempty"`
+	TargetVersionWeight *float64          `json:"targetVersionWeight,omitempty"`
 }

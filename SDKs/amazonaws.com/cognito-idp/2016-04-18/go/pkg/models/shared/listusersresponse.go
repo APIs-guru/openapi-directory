@@ -1,6 +1,6 @@
 package shared
 
 type ListUsersResponse struct {
-	PaginationToken *string    `json:"PaginationToken"`
-	Users           []UserType `json:"Users"`
+	PaginationToken *string    `json:"PaginationToken,omitempty"`
+	Users           []UserType `json:"Users,omitempty"`
 }

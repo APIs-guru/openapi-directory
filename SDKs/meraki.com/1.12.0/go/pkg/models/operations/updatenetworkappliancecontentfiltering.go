@@ -12,10 +12,10 @@ const (
 )
 
 type UpdateNetworkApplianceContentFilteringRequestBody struct {
-	AllowedURLPatterns   []string                                                                  `json:"allowedUrlPatterns"`
-	BlockedURLCategories []string                                                                  `json:"blockedUrlCategories"`
-	BlockedURLPatterns   []string                                                                  `json:"blockedUrlPatterns"`
-	URLCategoryListSize  *UpdateNetworkApplianceContentFilteringRequestBodyURLCategoryListSizeEnum `json:"urlCategoryListSize"`
+	AllowedURLPatterns   []string                                                                  `json:"allowedUrlPatterns,omitempty"`
+	BlockedURLCategories []string                                                                  `json:"blockedUrlCategories,omitempty"`
+	BlockedURLPatterns   []string                                                                  `json:"blockedUrlPatterns,omitempty"`
+	URLCategoryListSize  *UpdateNetworkApplianceContentFilteringRequestBodyURLCategoryListSizeEnum `json:"urlCategoryListSize,omitempty"`
 }
 
 type UpdateNetworkApplianceContentFilteringRequest struct {

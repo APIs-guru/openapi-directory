@@ -1,10 +1,10 @@
 package shared
 
 type DirectoryConnectSettingsDescription struct {
-	AvailabilityZones []string `json:"AvailabilityZones"`
-	ConnectIps        []string `json:"ConnectIps"`
-	CustomerUserName  *string  `json:"CustomerUserName"`
-	SecurityGroupID   *string  `json:"SecurityGroupId"`
-	SubnetIds         []string `json:"SubnetIds"`
-	VpcID             *string  `json:"VpcId"`
+	AvailabilityZones []string `json:"AvailabilityZones,omitempty"`
+	ConnectIps        []string `json:"ConnectIps,omitempty"`
+	CustomerUserName  *string  `json:"CustomerUserName,omitempty"`
+	SecurityGroupID   *string  `json:"SecurityGroupId,omitempty"`
+	SubnetIds         []string `json:"SubnetIds,omitempty"`
+	VpcID             *string  `json:"VpcId,omitempty"`
 }

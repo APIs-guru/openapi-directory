@@ -1,12 +1,12 @@
 package shared
 
 type ColumnStatisticsData struct {
-	BinaryColumnStatisticsData  *BinaryColumnStatisticsData  `json:"BinaryColumnStatisticsData"`
-	BooleanColumnStatisticsData *BooleanColumnStatisticsData `json:"BooleanColumnStatisticsData"`
-	DateColumnStatisticsData    *DateColumnStatisticsData    `json:"DateColumnStatisticsData"`
-	DecimalColumnStatisticsData *DecimalColumnStatisticsData `json:"DecimalColumnStatisticsData"`
-	DoubleColumnStatisticsData  *DoubleColumnStatisticsData  `json:"DoubleColumnStatisticsData"`
-	LongColumnStatisticsData    *LongColumnStatisticsData    `json:"LongColumnStatisticsData"`
-	StringColumnStatisticsData  *StringColumnStatisticsData  `json:"StringColumnStatisticsData"`
+	BinaryColumnStatisticsData  *BinaryColumnStatisticsData  `json:"BinaryColumnStatisticsData,omitempty"`
+	BooleanColumnStatisticsData *BooleanColumnStatisticsData `json:"BooleanColumnStatisticsData,omitempty"`
+	DateColumnStatisticsData    *DateColumnStatisticsData    `json:"DateColumnStatisticsData,omitempty"`
+	DecimalColumnStatisticsData *DecimalColumnStatisticsData `json:"DecimalColumnStatisticsData,omitempty"`
+	DoubleColumnStatisticsData  *DoubleColumnStatisticsData  `json:"DoubleColumnStatisticsData,omitempty"`
+	LongColumnStatisticsData    *LongColumnStatisticsData    `json:"LongColumnStatisticsData,omitempty"`
+	StringColumnStatisticsData  *StringColumnStatisticsData  `json:"StringColumnStatisticsData,omitempty"`
 	Type                        ColumnStatisticsTypeEnum     `json:"Type"`
 }

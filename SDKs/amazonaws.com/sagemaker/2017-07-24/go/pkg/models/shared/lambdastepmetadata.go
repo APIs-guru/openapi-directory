@@ -1,6 +1,6 @@
 package shared
 
 type LambdaStepMetadata struct {
-	Arn              *string           `json:"Arn"`
-	OutputParameters []OutputParameter `json:"OutputParameters"`
+	Arn              *string           `json:"Arn,omitempty"`
+	OutputParameters []OutputParameter `json:"OutputParameters,omitempty"`
 }

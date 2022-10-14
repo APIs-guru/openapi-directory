@@ -10,14 +10,14 @@ type GetIntegrationTestRelationsRequest struct {
 }
 
 type GetIntegrationTestRelations200ApplicationJSONIntegrationtest struct {
-	CollectionID *string `json:"collectionId"`
-	ID           *string `json:"id"`
-	Name         *string `json:"name"`
-	UpdatedAt    *string `json:"updatedAt"`
+	CollectionID *string `json:"collectionId,omitempty"`
+	ID           *string `json:"id,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	UpdatedAt    *string `json:"updatedAt,omitempty"`
 }
 
 type GetIntegrationTestRelations200ApplicationJSON struct {
-	Integrationtest []GetIntegrationTestRelations200ApplicationJSONIntegrationtest `json:"integrationtest"`
+	Integrationtest []GetIntegrationTestRelations200ApplicationJSONIntegrationtest `json:"integrationtest,omitempty"`
 }
 
 type GetIntegrationTestRelationsResponse struct {

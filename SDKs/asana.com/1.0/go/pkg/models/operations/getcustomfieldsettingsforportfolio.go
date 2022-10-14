@@ -21,7 +21,7 @@ type GetCustomFieldSettingsForPortfolioRequest struct {
 }
 
 type GetCustomFieldSettingsForPortfolio200ApplicationJSON struct {
-	Data []shared.CustomFieldSettingResponse `json:"data"`
+	Data []shared.CustomFieldSettingResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldSettingsForPortfolioResponse struct {

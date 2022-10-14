@@ -12,11 +12,11 @@ type DetachPolicyHeaders struct {
 }
 
 type DetachPolicyRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type DetachPolicyRequestBodyPolicyReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type DetachPolicyRequestBody struct {

@@ -1,5 +1,5 @@
 package shared
 
 type ValidateCreateMembershipResponse struct {
-	ValidationResults []ValidationResult `json:"validationResults"`
+	ValidationResults []ValidationResult `json:"validationResults,omitempty"`
 }

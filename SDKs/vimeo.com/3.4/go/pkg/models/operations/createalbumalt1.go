@@ -41,16 +41,16 @@ const (
 )
 
 type CreateAlbumAlt1RequestBody struct {
-	BrandColor  *string                                `json:"brand_color"`
-	Description *string                                `json:"description"`
-	HideNav     *bool                                  `json:"hide_nav"`
-	Layout      *CreateAlbumAlt1RequestBodyLayoutEnum  `json:"layout"`
+	BrandColor  *string                                `json:"brand_color,omitempty"`
+	Description *string                                `json:"description,omitempty"`
+	HideNav     *bool                                  `json:"hide_nav,omitempty"`
+	Layout      *CreateAlbumAlt1RequestBodyLayoutEnum  `json:"layout,omitempty"`
 	Name        string                                 `json:"name"`
-	Password    *string                                `json:"password"`
-	Privacy     *CreateAlbumAlt1RequestBodyPrivacyEnum `json:"privacy"`
-	ReviewMode  *bool                                  `json:"review_mode"`
-	Sort        *CreateAlbumAlt1RequestBodySortEnum    `json:"sort"`
-	Theme       *CreateAlbumAlt1RequestBodyThemeEnum   `json:"theme"`
+	Password    *string                                `json:"password,omitempty"`
+	Privacy     *CreateAlbumAlt1RequestBodyPrivacyEnum `json:"privacy,omitempty"`
+	ReviewMode  *bool                                  `json:"review_mode,omitempty"`
+	Sort        *CreateAlbumAlt1RequestBodySortEnum    `json:"sort,omitempty"`
+	Theme       *CreateAlbumAlt1RequestBodyThemeEnum   `json:"theme,omitempty"`
 }
 
 type CreateAlbumAlt1Security struct {

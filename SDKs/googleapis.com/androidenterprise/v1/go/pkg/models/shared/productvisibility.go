@@ -10,7 +10,7 @@ const (
 )
 
 type ProductVisibility struct {
-	ProductID *string                       `json:"productId"`
-	TrackIds  []string                      `json:"trackIds"`
-	Tracks    []ProductVisibilityTracksEnum `json:"tracks"`
+	ProductID *string                       `json:"productId,omitempty"`
+	TrackIds  []string                      `json:"trackIds,omitempty"`
+	Tracks    []ProductVisibilityTracksEnum `json:"tracks,omitempty"`
 }

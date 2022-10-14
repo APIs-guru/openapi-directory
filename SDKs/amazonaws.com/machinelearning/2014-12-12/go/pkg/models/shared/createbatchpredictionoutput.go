@@ -1,5 +1,5 @@
 package shared
 
 type CreateBatchPredictionOutput struct {
-	BatchPredictionID *string `json:"BatchPredictionId"`
+	BatchPredictionID *string `json:"BatchPredictionId,omitempty"`
 }

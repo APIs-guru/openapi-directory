@@ -19,7 +19,7 @@ type UpdateEndpointsBatchHeaders struct {
 }
 
 type UpdateEndpointsBatchRequestBodyEndpointBatchRequest struct {
-	Item []shared.EndpointBatchItem `json:"Item"`
+	Item []shared.EndpointBatchItem `json:"Item,omitempty"`
 }
 
 type UpdateEndpointsBatchRequestBody struct {

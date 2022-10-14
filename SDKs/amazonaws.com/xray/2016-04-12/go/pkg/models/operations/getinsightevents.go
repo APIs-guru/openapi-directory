@@ -21,8 +21,8 @@ type GetInsightEventsHeaders struct {
 
 type GetInsightEventsRequestBody struct {
 	InsightID  string  `json:"InsightId"`
-	MaxResults *int64  `json:"MaxResults"`
-	NextToken  *string `json:"NextToken"`
+	MaxResults *int64  `json:"MaxResults,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
 }
 
 type GetInsightEventsRequest struct {

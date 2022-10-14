@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleIdentityAccesscontextmanagerV1EgressFrom struct {
-	Identities   []string                                                        `json:"identities"`
-	IdentityType *GoogleIdentityAccesscontextmanagerV1EgressFromIdentityTypeEnum `json:"identityType"`
+	Identities   []string                                                        `json:"identities,omitempty"`
+	IdentityType *GoogleIdentityAccesscontextmanagerV1EgressFromIdentityTypeEnum `json:"identityType,omitempty"`
 }

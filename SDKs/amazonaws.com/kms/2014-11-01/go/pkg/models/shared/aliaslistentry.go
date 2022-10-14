@@ -5,9 +5,9 @@ import (
 )
 
 type AliasListEntry struct {
-	AliasArn        *string    `json:"AliasArn"`
-	AliasName       *string    `json:"AliasName"`
-	CreationDate    *time.Time `json:"CreationDate"`
-	LastUpdatedDate *time.Time `json:"LastUpdatedDate"`
-	TargetKeyID     *string    `json:"TargetKeyId"`
+	AliasArn        *string    `json:"AliasArn,omitempty"`
+	AliasName       *string    `json:"AliasName,omitempty"`
+	CreationDate    *time.Time `json:"CreationDate,omitempty"`
+	LastUpdatedDate *time.Time `json:"LastUpdatedDate,omitempty"`
+	TargetKeyID     *string    `json:"TargetKeyId,omitempty"`
 }

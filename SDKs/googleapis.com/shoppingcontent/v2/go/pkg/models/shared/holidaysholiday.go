@@ -1,10 +1,10 @@
 package shared
 
 type HolidaysHoliday struct {
-	CountryCode           *string `json:"countryCode"`
-	Date                  *string `json:"date"`
-	DeliveryGuaranteeDate *string `json:"deliveryGuaranteeDate"`
-	DeliveryGuaranteeHour *string `json:"deliveryGuaranteeHour"`
-	ID                    *string `json:"id"`
-	Type                  *string `json:"type"`
+	CountryCode           *string `json:"countryCode,omitempty"`
+	Date                  *string `json:"date,omitempty"`
+	DeliveryGuaranteeDate *string `json:"deliveryGuaranteeDate,omitempty"`
+	DeliveryGuaranteeHour *string `json:"deliveryGuaranteeHour,omitempty"`
+	ID                    *string `json:"id,omitempty"`
+	Type                  *string `json:"type,omitempty"`
 }

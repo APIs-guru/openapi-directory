@@ -10,6 +10,6 @@ const (
 )
 
 type AnalyzeEntitySentimentRequest struct {
-	Document     *Document                                      `json:"document"`
-	EncodingType *AnalyzeEntitySentimentRequestEncodingTypeEnum `json:"encodingType"`
+	Document     *Document                                      `json:"document,omitempty"`
+	EncodingType *AnalyzeEntitySentimentRequestEncodingTypeEnum `json:"encodingType,omitempty"`
 }

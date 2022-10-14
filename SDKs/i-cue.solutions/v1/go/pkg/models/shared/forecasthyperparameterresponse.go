@@ -11,9 +11,9 @@ const (
 )
 
 type ForecastHyperparameterResponse struct {
-	DiscardData   *bool                                        `json:"discardData"`
-	ErrorType     *ForecastHyperparameterResponseErrorTypeEnum `json:"errorType"`
-	HoldOutPeriod *int32                                       `json:"holdOutPeriod"`
-	NoFcst        *int32                                       `json:"noFcst"`
-	Periodicity   *int32                                       `json:"periodicity"`
+	DiscardData   *bool                                        `json:"discardData,omitempty"`
+	ErrorType     *ForecastHyperparameterResponseErrorTypeEnum `json:"errorType,omitempty"`
+	HoldOutPeriod *int32                                       `json:"holdOutPeriod,omitempty"`
+	NoFcst        *int32                                       `json:"noFcst,omitempty"`
+	Periodicity   *int32                                       `json:"periodicity,omitempty"`
 }

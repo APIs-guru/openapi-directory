@@ -1,11 +1,11 @@
 package shared
 
 type StaticFilesHandler struct {
-	ApplicationReadable *bool             `json:"applicationReadable"`
-	Expiration          *string           `json:"expiration"`
-	HTTPHeaders         map[string]string `json:"httpHeaders"`
-	MimeType            *string           `json:"mimeType"`
-	Path                *string           `json:"path"`
-	RequireMatchingFile *bool             `json:"requireMatchingFile"`
-	UploadPathRegex     *string           `json:"uploadPathRegex"`
+	ApplicationReadable *bool             `json:"applicationReadable,omitempty"`
+	Expiration          *string           `json:"expiration,omitempty"`
+	HTTPHeaders         map[string]string `json:"httpHeaders,omitempty"`
+	MimeType            *string           `json:"mimeType,omitempty"`
+	Path                *string           `json:"path,omitempty"`
+	RequireMatchingFile *bool             `json:"requireMatchingFile,omitempty"`
+	UploadPathRegex     *string           `json:"uploadPathRegex,omitempty"`
 }

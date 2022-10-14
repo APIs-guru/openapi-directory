@@ -14,7 +14,7 @@ const (
 )
 
 type Errors struct {
-	Code      *ErrorsCodeEnum `json:"code"`
-	Error     []ErrorProto    `json:"error"`
-	RequestID *string         `json:"requestId"`
+	Code      *ErrorsCodeEnum `json:"code,omitempty"`
+	Error     []ErrorProto    `json:"error,omitempty"`
+	RequestID *string         `json:"requestId,omitempty"`
 }

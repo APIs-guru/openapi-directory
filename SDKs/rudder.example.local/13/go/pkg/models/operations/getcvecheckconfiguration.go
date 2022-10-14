@@ -7,8 +7,8 @@ const (
 )
 
 type GetCveCheckConfiguration200ApplicationJSONData struct {
-	APIKey *string `json:"apiKey"`
-	URL    *string `json:"url"`
+	APIKey *string `json:"apiKey,omitempty"`
+	URL    *string `json:"url,omitempty"`
 }
 
 type GetCveCheckConfiguration200ApplicationJSONResultEnum string

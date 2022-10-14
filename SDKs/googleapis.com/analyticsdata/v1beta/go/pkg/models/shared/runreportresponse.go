@@ -1,14 +1,14 @@
 package shared
 
 type RunReportResponse struct {
-	DimensionHeaders []DimensionHeader `json:"dimensionHeaders"`
-	Kind             *string           `json:"kind"`
-	Maximums         []Row             `json:"maximums"`
-	Metadata         *ResponseMetaData `json:"metadata"`
-	MetricHeaders    []MetricHeader    `json:"metricHeaders"`
-	Minimums         []Row             `json:"minimums"`
-	PropertyQuota    *PropertyQuota    `json:"propertyQuota"`
-	RowCount         *int32            `json:"rowCount"`
-	Rows             []Row             `json:"rows"`
-	Totals           []Row             `json:"totals"`
+	DimensionHeaders []DimensionHeader `json:"dimensionHeaders,omitempty"`
+	Kind             *string           `json:"kind,omitempty"`
+	Maximums         []Row             `json:"maximums,omitempty"`
+	Metadata         *ResponseMetaData `json:"metadata,omitempty"`
+	MetricHeaders    []MetricHeader    `json:"metricHeaders,omitempty"`
+	Minimums         []Row             `json:"minimums,omitempty"`
+	PropertyQuota    *PropertyQuota    `json:"propertyQuota,omitempty"`
+	RowCount         *int32            `json:"rowCount,omitempty"`
+	Rows             []Row             `json:"rows,omitempty"`
+	Totals           []Row             `json:"totals,omitempty"`
 }

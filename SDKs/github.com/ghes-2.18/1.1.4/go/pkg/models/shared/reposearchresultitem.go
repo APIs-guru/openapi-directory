@@ -5,7 +5,7 @@ import (
 )
 
 type RepoSearchResultItemLicenseLicenseSimple struct {
-	HTMLURL *string `json:"html_url"`
+	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`
 	Name    string  `json:"name"`
 	NodeID  string  `json:"node_id"`
@@ -28,7 +28,7 @@ type RepoSearchResultItemOwnerSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -42,9 +42,9 @@ type RepoSearchResultItemPermissions struct {
 }
 
 type RepoSearchResultItem struct {
-	AllowMergeCommit    *bool                                    `json:"allow_merge_commit"`
-	AllowRebaseMerge    *bool                                    `json:"allow_rebase_merge"`
-	AllowSquashMerge    *bool                                    `json:"allow_squash_merge"`
+	AllowMergeCommit    *bool                                    `json:"allow_merge_commit,omitempty"`
+	AllowRebaseMerge    *bool                                    `json:"allow_rebase_merge,omitempty"`
+	AllowSquashMerge    *bool                                    `json:"allow_squash_merge,omitempty"`
 	ArchiveURL          string                                   `json:"archive_url"`
 	Archived            bool                                     `json:"archived"`
 	AssigneesURL        string                                   `json:"assignees_url"`
@@ -59,7 +59,7 @@ type RepoSearchResultItem struct {
 	ContributorsURL     string                                   `json:"contributors_url"`
 	CreatedAt           time.Time                                `json:"created_at"`
 	DefaultBranch       string                                   `json:"default_branch"`
-	DeleteBranchOnMerge *bool                                    `json:"delete_branch_on_merge"`
+	DeleteBranchOnMerge *bool                                    `json:"delete_branch_on_merge,omitempty"`
 	DeploymentsURL      string                                   `json:"deployments_url"`
 	Description         string                                   `json:"description"`
 	Disabled            bool                                     `json:"disabled"`
@@ -91,7 +91,7 @@ type RepoSearchResultItem struct {
 	Language            string                                   `json:"language"`
 	LanguagesURL        string                                   `json:"languages_url"`
 	License             RepoSearchResultItemLicenseLicenseSimple `json:"license"`
-	MasterBranch        *string                                  `json:"master_branch"`
+	MasterBranch        *string                                  `json:"master_branch,omitempty"`
 	MergesURL           string                                   `json:"merges_url"`
 	MilestonesURL       string                                   `json:"milestones_url"`
 	MirrorURL           string                                   `json:"mirror_url"`
@@ -101,7 +101,7 @@ type RepoSearchResultItem struct {
 	OpenIssues          int64                                    `json:"open_issues"`
 	OpenIssuesCount     int64                                    `json:"open_issues_count"`
 	Owner               RepoSearchResultItemOwnerSimpleUser      `json:"owner"`
-	Permissions         *RepoSearchResultItemPermissions         `json:"permissions"`
+	Permissions         *RepoSearchResultItemPermissions         `json:"permissions,omitempty"`
 	Private             bool                                     `json:"private"`
 	PullsURL            string                                   `json:"pulls_url"`
 	PushedAt            time.Time                                `json:"pushed_at"`
@@ -117,9 +117,9 @@ type RepoSearchResultItem struct {
 	SvnURL              string                                   `json:"svn_url"`
 	TagsURL             string                                   `json:"tags_url"`
 	TeamsURL            string                                   `json:"teams_url"`
-	TempCloneToken      *string                                  `json:"temp_clone_token"`
-	TextMatches         []SearchResultTextMatches                `json:"text_matches"`
-	Topics              []string                                 `json:"topics"`
+	TempCloneToken      *string                                  `json:"temp_clone_token,omitempty"`
+	TextMatches         []SearchResultTextMatches                `json:"text_matches,omitempty"`
+	Topics              []string                                 `json:"topics,omitempty"`
 	TreesURL            string                                   `json:"trees_url"`
 	UpdatedAt           time.Time                                `json:"updated_at"`
 	URL                 string                                   `json:"url"`

@@ -1,9 +1,9 @@
 package shared
 
 type CisLineTypeCisLineTypeNominalCodeNominalCode struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum string
@@ -16,12 +16,12 @@ const (
 )
 
 type CisLineTypeCisLineTypeCisLineType struct {
-	Description  *string                                             `json:"Description"`
-	LineType     *string                                             `json:"LineType"`
-	NominalCode  *CisLineTypeCisLineTypeNominalCodeNominalCode       `json:"NominalCode"`
-	TaxTreatment *CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum `json:"TaxTreatment"`
+	Description  *string                                             `json:"Description,omitempty"`
+	LineType     *string                                             `json:"LineType,omitempty"`
+	NominalCode  *CisLineTypeCisLineTypeNominalCodeNominalCode       `json:"NominalCode,omitempty"`
+	TaxTreatment *CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum `json:"TaxTreatment,omitempty"`
 }
 
 type CisLineType struct {
-	CisLineType *CisLineTypeCisLineTypeCisLineType `json:"CisLineType"`
+	CisLineType *CisLineTypeCisLineTypeCisLineType `json:"CisLineType,omitempty"`
 }

@@ -20,18 +20,18 @@ const (
 )
 
 type ImagePublic struct {
-	Created     *time.Time             `json:"created"`
-	CreatedBy   *string                `json:"created_by"`
-	Deprecated  *bool                  `json:"deprecated"`
-	Description *string                `json:"description"`
-	Eol         *time.Time             `json:"eol"`
-	Expiry      *time.Time             `json:"expiry"`
-	ID          *string                `json:"id"`
-	IsPublic    *bool                  `json:"is_public"`
-	Label       *string                `json:"label"`
-	Size        *int64                 `json:"size"`
-	Status      *ImagePublicStatusEnum `json:"status"`
-	Type        *ImagePublicTypeEnum   `json:"type"`
-	Updated     *time.Time             `json:"updated"`
-	Vendor      *string                `json:"vendor"`
+	Created     *time.Time             `json:"created,omitempty"`
+	CreatedBy   *string                `json:"created_by,omitempty"`
+	Deprecated  *bool                  `json:"deprecated,omitempty"`
+	Description *string                `json:"description,omitempty"`
+	Eol         *time.Time             `json:"eol,omitempty"`
+	Expiry      *time.Time             `json:"expiry,omitempty"`
+	ID          *string                `json:"id,omitempty"`
+	IsPublic    *bool                  `json:"is_public,omitempty"`
+	Label       *string                `json:"label,omitempty"`
+	Size        *int64                 `json:"size,omitempty"`
+	Status      *ImagePublicStatusEnum `json:"status,omitempty"`
+	Type        *ImagePublicTypeEnum   `json:"type,omitempty"`
+	Updated     *time.Time             `json:"updated,omitempty"`
+	Vendor      *string                `json:"vendor,omitempty"`
 }

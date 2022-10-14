@@ -44,12 +44,12 @@ const (
 )
 
 type NonComplianceDetail struct {
-	CurrentValue                 *interface{}                                        `json:"currentValue"`
-	FieldPath                    *string                                             `json:"fieldPath"`
-	InstallationFailureReason    *NonComplianceDetailInstallationFailureReasonEnum   `json:"installationFailureReason"`
-	NonComplianceReason          *NonComplianceDetailNonComplianceReasonEnum         `json:"nonComplianceReason"`
-	PackageName                  *string                                             `json:"packageName"`
-	SettingName                  *string                                             `json:"settingName"`
-	SpecificNonComplianceContext *SpecificNonComplianceContext                       `json:"specificNonComplianceContext"`
-	SpecificNonComplianceReason  *NonComplianceDetailSpecificNonComplianceReasonEnum `json:"specificNonComplianceReason"`
+	CurrentValue                 *interface{}                                        `json:"currentValue,omitempty"`
+	FieldPath                    *string                                             `json:"fieldPath,omitempty"`
+	InstallationFailureReason    *NonComplianceDetailInstallationFailureReasonEnum   `json:"installationFailureReason,omitempty"`
+	NonComplianceReason          *NonComplianceDetailNonComplianceReasonEnum         `json:"nonComplianceReason,omitempty"`
+	PackageName                  *string                                             `json:"packageName,omitempty"`
+	SettingName                  *string                                             `json:"settingName,omitempty"`
+	SpecificNonComplianceContext *SpecificNonComplianceContext                       `json:"specificNonComplianceContext,omitempty"`
+	SpecificNonComplianceReason  *NonComplianceDetailSpecificNonComplianceReasonEnum `json:"specificNonComplianceReason,omitempty"`
 }

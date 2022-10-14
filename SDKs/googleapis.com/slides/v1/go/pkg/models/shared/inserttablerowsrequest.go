@@ -1,8 +1,8 @@
 package shared
 
 type InsertTableRowsRequest struct {
-	CellLocation  *TableCellLocation `json:"cellLocation"`
-	InsertBelow   *bool              `json:"insertBelow"`
-	Number        *int32             `json:"number"`
-	TableObjectID *string            `json:"tableObjectId"`
+	CellLocation  *TableCellLocation `json:"cellLocation,omitempty"`
+	InsertBelow   *bool              `json:"insertBelow,omitempty"`
+	Number        *int32             `json:"number,omitempty"`
+	TableObjectID *string            `json:"tableObjectId,omitempty"`
 }

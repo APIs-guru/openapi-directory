@@ -23,8 +23,8 @@ type UpdateConnectorHeaders struct {
 }
 
 type UpdateConnectorRequestBodyCapacity struct {
-	AutoScaling         *shared.AutoScalingUpdate         `json:"autoScaling"`
-	ProvisionedCapacity *shared.ProvisionedCapacityUpdate `json:"provisionedCapacity"`
+	AutoScaling         *shared.AutoScalingUpdate         `json:"autoScaling,omitempty"`
+	ProvisionedCapacity *shared.ProvisionedCapacityUpdate `json:"provisionedCapacity,omitempty"`
 }
 
 type UpdateConnectorRequestBody struct {

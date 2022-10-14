@@ -1,5 +1,5 @@
 package shared
 
 type Api2ControllersWebAPIGroceryListControllerDepartmentModel struct {
-	Items *string `json:"items" form:"name=items"`
+	Items *string `json:"items,omitempty" form:"name=items"`
 }

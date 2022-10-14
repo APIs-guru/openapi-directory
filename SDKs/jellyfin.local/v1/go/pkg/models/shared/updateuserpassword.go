@@ -1,8 +1,8 @@
 package shared
 
 type UpdateUserPassword struct {
-	CurrentPassword *string `json:"CurrentPassword"`
-	CurrentPw       *string `json:"CurrentPw"`
-	NewPw           *string `json:"NewPw"`
-	ResetPassword   *bool   `json:"ResetPassword"`
+	CurrentPassword *string `json:"CurrentPassword,omitempty"`
+	CurrentPw       *string `json:"CurrentPw,omitempty"`
+	NewPw           *string `json:"NewPw,omitempty"`
+	ResetPassword   *bool   `json:"ResetPassword,omitempty"`
 }

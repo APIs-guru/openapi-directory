@@ -19,7 +19,7 @@ type DeploymentCreatorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -33,16 +33,16 @@ type Deployment struct {
 	Environment           string                      `json:"environment"`
 	ID                    int64                       `json:"id"`
 	NodeID                string                      `json:"node_id"`
-	OriginalEnvironment   *string                     `json:"original_environment"`
+	OriginalEnvironment   *string                     `json:"original_environment,omitempty"`
 	Payload               map[string]interface{}      `json:"payload"`
-	PerformedViaGithubApp map[string]interface{}      `json:"performed_via_github_app"`
-	ProductionEnvironment *bool                       `json:"production_environment"`
+	PerformedViaGithubApp map[string]interface{}      `json:"performed_via_github_app,omitempty"`
+	ProductionEnvironment *bool                       `json:"production_environment,omitempty"`
 	Ref                   string                      `json:"ref"`
 	RepositoryURL         string                      `json:"repository_url"`
 	Sha                   string                      `json:"sha"`
 	StatusesURL           string                      `json:"statuses_url"`
 	Task                  string                      `json:"task"`
-	TransientEnvironment  *bool                       `json:"transient_environment"`
+	TransientEnvironment  *bool                       `json:"transient_environment,omitempty"`
 	UpdatedAt             time.Time                   `json:"updated_at"`
 	URL                   string                      `json:"url"`
 }

@@ -15,16 +15,16 @@ type DescribeSavingsPlansOfferingRatesHeaders struct {
 }
 
 type DescribeSavingsPlansOfferingRatesRequestBody struct {
-	Filters                   []shared.SavingsPlanOfferingRateFilterElement `json:"filters"`
-	MaxResults                *int64                                        `json:"maxResults"`
-	NextToken                 *string                                       `json:"nextToken"`
-	Operations                []string                                      `json:"operations"`
-	Products                  []shared.SavingsPlanProductTypeEnum           `json:"products"`
-	SavingsPlanOfferingIds    []string                                      `json:"savingsPlanOfferingIds"`
-	SavingsPlanPaymentOptions []shared.SavingsPlanPaymentOptionEnum         `json:"savingsPlanPaymentOptions"`
-	SavingsPlanTypes          []shared.SavingsPlanTypeEnum                  `json:"savingsPlanTypes"`
-	ServiceCodes              []shared.SavingsPlanRateServiceCodeEnum       `json:"serviceCodes"`
-	UsageTypes                []string                                      `json:"usageTypes"`
+	Filters                   []shared.SavingsPlanOfferingRateFilterElement `json:"filters,omitempty"`
+	MaxResults                *int64                                        `json:"maxResults,omitempty"`
+	NextToken                 *string                                       `json:"nextToken,omitempty"`
+	Operations                []string                                      `json:"operations,omitempty"`
+	Products                  []shared.SavingsPlanProductTypeEnum           `json:"products,omitempty"`
+	SavingsPlanOfferingIds    []string                                      `json:"savingsPlanOfferingIds,omitempty"`
+	SavingsPlanPaymentOptions []shared.SavingsPlanPaymentOptionEnum         `json:"savingsPlanPaymentOptions,omitempty"`
+	SavingsPlanTypes          []shared.SavingsPlanTypeEnum                  `json:"savingsPlanTypes,omitempty"`
+	ServiceCodes              []shared.SavingsPlanRateServiceCodeEnum       `json:"serviceCodes,omitempty"`
+	UsageTypes                []string                                      `json:"usageTypes,omitempty"`
 }
 
 type DescribeSavingsPlansOfferingRatesRequest struct {

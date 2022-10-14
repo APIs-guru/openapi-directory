@@ -45,7 +45,7 @@ type TypeaheadForWorkspaceRequest struct {
 }
 
 type TypeaheadForWorkspace200ApplicationJSON struct {
-	Data []shared.AsanaNamedResource `json:"data"`
+	Data []shared.AsanaNamedResource `json:"data,omitempty"`
 }
 
 type TypeaheadForWorkspaceResponse struct {

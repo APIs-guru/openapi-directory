@@ -1,7 +1,7 @@
 package shared
 
 type PossibleRemediationAction struct {
-	Description               *string                      `json:"Description"`
-	IsDefaultAction           *bool                        `json:"IsDefaultAction"`
+	Description               *string                      `json:"Description,omitempty"`
+	IsDefaultAction           *bool                        `json:"IsDefaultAction,omitempty"`
 	OrderedRemediationActions []RemediationActionWithOrder `json:"OrderedRemediationActions"`
 }

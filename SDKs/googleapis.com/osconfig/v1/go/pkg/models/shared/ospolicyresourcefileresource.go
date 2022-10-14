@@ -10,9 +10,9 @@ const (
 )
 
 type OsPolicyResourceFileResource struct {
-	Content     *string                                `json:"content"`
-	File        *OsPolicyResourceFile                  `json:"file"`
-	Path        *string                                `json:"path"`
-	Permissions *string                                `json:"permissions"`
-	State       *OsPolicyResourceFileResourceStateEnum `json:"state"`
+	Content     *string                                `json:"content,omitempty"`
+	File        *OsPolicyResourceFile                  `json:"file,omitempty"`
+	Path        *string                                `json:"path,omitempty"`
+	Permissions *string                                `json:"permissions,omitempty"`
+	State       *OsPolicyResourceFileResourceStateEnum `json:"state,omitempty"`
 }

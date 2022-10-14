@@ -15,8 +15,8 @@ const (
 )
 
 type ArcmwRequestBody struct {
-	CertificateParameters *ArcmwRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *ArcmwRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                ArcmwRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Arcmw400ApplicationJSON struct {
-	Error            *Arcmw400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Arcmw400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Arcmw400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Arcmw400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Arcmw401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Arcmw401ApplicationJSON struct {
-	Error            *Arcmw401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Arcmw401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Arcmw401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Arcmw401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Arcmw404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Arcmw404ApplicationJSON struct {
-	Error            *Arcmw404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Arcmw404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Arcmw404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Arcmw404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Arcmw500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Arcmw500ApplicationJSON struct {
-	Error            *Arcmw500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Arcmw500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Arcmw500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Arcmw500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Arcmw502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Arcmw502ApplicationJSON struct {
-	Error            *Arcmw502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Arcmw502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Arcmw502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Arcmw502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Arcmw503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Arcmw503ApplicationJSON struct {
-	Error            *Arcmw503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Arcmw503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Arcmw503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Arcmw503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Arcmw504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Arcmw504ApplicationJSON struct {
-	Error            *Arcmw504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Arcmw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Arcmw504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Arcmw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type ArcmwResponse struct {

@@ -20,7 +20,7 @@ type CreateResourceDefinitionVersionHeaders struct {
 }
 
 type CreateResourceDefinitionVersionRequestBody struct {
-	Resources []shared.Resource `json:"Resources"`
+	Resources []shared.Resource `json:"Resources,omitempty"`
 }
 
 type CreateResourceDefinitionVersionRequest struct {

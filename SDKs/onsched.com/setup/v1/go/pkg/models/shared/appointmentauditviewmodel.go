@@ -5,13 +5,13 @@ import (
 )
 
 type AppointmentAuditViewModel struct {
-	AppointmentID    *string    `json:"appointmentId"`
-	ID               *string    `json:"id"`
-	ModificationType *string    `json:"modificationType"`
-	ModifiedBy       *string    `json:"modifiedBy"`
-	ModifiedOn       *time.Time `json:"modifiedOn"`
-	NotesAfter       *string    `json:"notesAfter"`
-	NotesBefore      *string    `json:"notesBefore"`
-	StatusAfter      *string    `json:"statusAfter"`
-	StatusBefore     *string    `json:"statusBefore"`
+	AppointmentID    *string    `json:"appointmentId,omitempty"`
+	ID               *string    `json:"id,omitempty"`
+	ModificationType *string    `json:"modificationType,omitempty"`
+	ModifiedBy       *string    `json:"modifiedBy,omitempty"`
+	ModifiedOn       *time.Time `json:"modifiedOn,omitempty"`
+	NotesAfter       *string    `json:"notesAfter,omitempty"`
+	NotesBefore      *string    `json:"notesBefore,omitempty"`
+	StatusAfter      *string    `json:"statusAfter,omitempty"`
+	StatusBefore     *string    `json:"statusBefore,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeStacksRequest struct {
-	StackIds []string `json:"StackIds"`
+	StackIds []string `json:"StackIds,omitempty"`
 }

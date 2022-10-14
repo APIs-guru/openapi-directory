@@ -8,5 +8,5 @@ const (
 )
 
 type SecurityContext struct {
-	Securities []SecurityContextSecuritiesEnum `json:"securities"`
+	Securities []SecurityContextSecuritiesEnum `json:"securities,omitempty"`
 }

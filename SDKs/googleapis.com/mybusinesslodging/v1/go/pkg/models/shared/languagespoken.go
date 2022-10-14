@@ -10,7 +10,7 @@ const (
 )
 
 type LanguageSpoken struct {
-	LanguageCode    *string                            `json:"languageCode"`
-	Spoken          *bool                              `json:"spoken"`
-	SpokenException *LanguageSpokenSpokenExceptionEnum `json:"spokenException"`
+	LanguageCode    *string                            `json:"languageCode,omitempty"`
+	Spoken          *bool                              `json:"spoken,omitempty"`
+	SpokenException *LanguageSpokenSpokenExceptionEnum `json:"spokenException,omitempty"`
 }

@@ -14,7 +14,7 @@ type UpdateTaskQueryParams struct {
 }
 
 type UpdateTaskRequestBody struct {
-	Data *shared.TaskRequest `json:"data"`
+	Data *shared.TaskRequest `json:"data,omitempty"`
 }
 
 type UpdateTaskRequest struct {
@@ -24,7 +24,7 @@ type UpdateTaskRequest struct {
 }
 
 type UpdateTask200ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data"`
+	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type UpdateTaskResponse struct {

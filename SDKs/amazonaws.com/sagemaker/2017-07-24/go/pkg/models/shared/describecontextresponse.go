@@ -5,14 +5,14 @@ import (
 )
 
 type DescribeContextResponse struct {
-	ContextArn       *string           `json:"ContextArn"`
-	ContextName      *string           `json:"ContextName"`
-	ContextType      *string           `json:"ContextType"`
-	CreatedBy        *UserContext      `json:"CreatedBy"`
-	CreationTime     *time.Time        `json:"CreationTime"`
-	Description      *string           `json:"Description"`
-	LastModifiedBy   *UserContext      `json:"LastModifiedBy"`
-	LastModifiedTime *time.Time        `json:"LastModifiedTime"`
-	Properties       map[string]string `json:"Properties"`
-	Source           *ContextSource    `json:"Source"`
+	ContextArn       *string           `json:"ContextArn,omitempty"`
+	ContextName      *string           `json:"ContextName,omitempty"`
+	ContextType      *string           `json:"ContextType,omitempty"`
+	CreatedBy        *UserContext      `json:"CreatedBy,omitempty"`
+	CreationTime     *time.Time        `json:"CreationTime,omitempty"`
+	Description      *string           `json:"Description,omitempty"`
+	LastModifiedBy   *UserContext      `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime *time.Time        `json:"LastModifiedTime,omitempty"`
+	Properties       map[string]string `json:"Properties,omitempty"`
+	Source           *ContextSource    `json:"Source,omitempty"`
 }

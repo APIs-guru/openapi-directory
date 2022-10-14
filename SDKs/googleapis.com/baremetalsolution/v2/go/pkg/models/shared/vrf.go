@@ -9,8 +9,8 @@ const (
 )
 
 type Vrf struct {
-	Name            *string          `json:"name"`
-	QosPolicy       *QosPolicy       `json:"qosPolicy"`
-	State           *VrfStateEnum    `json:"state"`
-	VlanAttachments []VlanAttachment `json:"vlanAttachments"`
+	Name            *string          `json:"name,omitempty"`
+	QosPolicy       *QosPolicy       `json:"qosPolicy,omitempty"`
+	State           *VrfStateEnum    `json:"state,omitempty"`
+	VlanAttachments []VlanAttachment `json:"vlanAttachments,omitempty"`
 }

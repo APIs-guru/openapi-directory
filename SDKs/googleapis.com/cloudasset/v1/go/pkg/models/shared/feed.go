@@ -13,11 +13,11 @@ const (
 )
 
 type Feed struct {
-	AssetNames        []string             `json:"assetNames"`
-	AssetTypes        []string             `json:"assetTypes"`
-	Condition         *Expr                `json:"condition"`
-	ContentType       *FeedContentTypeEnum `json:"contentType"`
-	FeedOutputConfig  *FeedOutputConfig    `json:"feedOutputConfig"`
-	Name              *string              `json:"name"`
-	RelationshipTypes []string             `json:"relationshipTypes"`
+	AssetNames        []string             `json:"assetNames,omitempty"`
+	AssetTypes        []string             `json:"assetTypes,omitempty"`
+	Condition         *Expr                `json:"condition,omitempty"`
+	ContentType       *FeedContentTypeEnum `json:"contentType,omitempty"`
+	FeedOutputConfig  *FeedOutputConfig    `json:"feedOutputConfig,omitempty"`
+	Name              *string              `json:"name,omitempty"`
+	RelationshipTypes []string             `json:"relationshipTypes,omitempty"`
 }

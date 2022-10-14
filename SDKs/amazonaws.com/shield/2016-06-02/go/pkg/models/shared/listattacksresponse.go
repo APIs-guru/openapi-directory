@@ -1,6 +1,6 @@
 package shared
 
 type ListAttacksResponse struct {
-	AttackSummaries []AttackSummary `json:"AttackSummaries"`
-	NextToken       *string         `json:"NextToken"`
+	AttackSummaries []AttackSummary `json:"AttackSummaries,omitempty"`
+	NextToken       *string         `json:"NextToken,omitempty"`
 }

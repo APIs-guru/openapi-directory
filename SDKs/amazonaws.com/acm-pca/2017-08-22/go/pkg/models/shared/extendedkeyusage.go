@@ -1,6 +1,6 @@
 package shared
 
 type ExtendedKeyUsage struct {
-	ExtendedKeyUsageObjectIdentifier *string                   `json:"ExtendedKeyUsageObjectIdentifier"`
-	ExtendedKeyUsageType             *ExtendedKeyUsageTypeEnum `json:"ExtendedKeyUsageType"`
+	ExtendedKeyUsageObjectIdentifier *string                   `json:"ExtendedKeyUsageObjectIdentifier,omitempty"`
+	ExtendedKeyUsageType             *ExtendedKeyUsageTypeEnum `json:"ExtendedKeyUsageType,omitempty"`
 }

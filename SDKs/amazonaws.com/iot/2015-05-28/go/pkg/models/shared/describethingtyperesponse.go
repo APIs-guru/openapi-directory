@@ -1,9 +1,9 @@
 package shared
 
 type DescribeThingTypeResponse struct {
-	ThingTypeArn        *string              `json:"thingTypeArn"`
-	ThingTypeID         *string              `json:"thingTypeId"`
-	ThingTypeMetadata   *ThingTypeMetadata   `json:"thingTypeMetadata"`
-	ThingTypeName       *string              `json:"thingTypeName"`
-	ThingTypeProperties *ThingTypeProperties `json:"thingTypeProperties"`
+	ThingTypeArn        *string              `json:"thingTypeArn,omitempty"`
+	ThingTypeID         *string              `json:"thingTypeId,omitempty"`
+	ThingTypeMetadata   *ThingTypeMetadata   `json:"thingTypeMetadata,omitempty"`
+	ThingTypeName       *string              `json:"thingTypeName,omitempty"`
+	ThingTypeProperties *ThingTypeProperties `json:"thingTypeProperties,omitempty"`
 }

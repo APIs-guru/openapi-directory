@@ -1,5 +1,5 @@
 package shared
 
 type DoublePropertyOptions struct {
-	OperatorOptions *DoubleOperatorOptions `json:"operatorOptions"`
+	OperatorOptions *DoubleOperatorOptions `json:"operatorOptions,omitempty"`
 }

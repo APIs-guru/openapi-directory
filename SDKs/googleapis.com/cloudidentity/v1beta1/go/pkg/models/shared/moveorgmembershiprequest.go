@@ -1,6 +1,6 @@
 package shared
 
 type MoveOrgMembershipRequest struct {
-	Customer           *string `json:"customer"`
-	DestinationOrgUnit *string `json:"destinationOrgUnit"`
+	Customer           *string `json:"customer,omitempty"`
+	DestinationOrgUnit *string `json:"destinationOrgUnit,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type StreamingSetupTask struct {
-	Drain                        *bool                             `json:"drain"`
-	ReceiveWorkPort              *int32                            `json:"receiveWorkPort"`
-	SnapshotConfig               *StreamingApplianceSnapshotConfig `json:"snapshotConfig"`
-	StreamingComputationTopology *TopologyConfig                   `json:"streamingComputationTopology"`
-	WorkerHarnessPort            *int32                            `json:"workerHarnessPort"`
+	Drain                        *bool                             `json:"drain,omitempty"`
+	ReceiveWorkPort              *int32                            `json:"receiveWorkPort,omitempty"`
+	SnapshotConfig               *StreamingApplianceSnapshotConfig `json:"snapshotConfig,omitempty"`
+	StreamingComputationTopology *TopologyConfig                   `json:"streamingComputationTopology,omitempty"`
+	WorkerHarnessPort            *int32                            `json:"workerHarnessPort,omitempty"`
 }

@@ -16,7 +16,7 @@ type DetachObjectHeaders struct {
 }
 
 type DetachObjectRequestBodyParentReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type DetachObjectRequestBody struct {

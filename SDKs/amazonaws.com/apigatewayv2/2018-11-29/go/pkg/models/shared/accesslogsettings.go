@@ -1,6 +1,6 @@
 package shared
 
 type AccessLogSettings struct {
-	DestinationArn *string `json:"DestinationArn"`
-	Format         *string `json:"Format"`
+	DestinationArn *string `json:"DestinationArn,omitempty"`
+	Format         *string `json:"Format,omitempty"`
 }

@@ -5,35 +5,35 @@ import (
 )
 
 type CandidateHistory struct {
-	ActiveThrough          *int32     `json:"active_through"`
-	AddressCity            *string    `json:"address_city"`
-	AddressState           *string    `json:"address_state"`
-	AddressStreet1         *string    `json:"address_street_1"`
-	AddressStreet2         *string    `json:"address_street_2"`
-	AddressZip             *string    `json:"address_zip"`
-	CandidateElectionYear  *int32     `json:"candidate_election_year"`
+	ActiveThrough          *int32     `json:"active_through,omitempty"`
+	AddressCity            *string    `json:"address_city,omitempty"`
+	AddressState           *string    `json:"address_state,omitempty"`
+	AddressStreet1         *string    `json:"address_street_1,omitempty"`
+	AddressStreet2         *string    `json:"address_street_2,omitempty"`
+	AddressZip             *string    `json:"address_zip,omitempty"`
+	CandidateElectionYear  *int32     `json:"candidate_election_year,omitempty"`
 	CandidateID            string     `json:"candidate_id"`
-	CandidateInactive      *bool      `json:"candidate_inactive"`
-	CandidateStatus        *string    `json:"candidate_status"`
-	Cycles                 []int32    `json:"cycles"`
-	District               *string    `json:"district"`
-	DistrictNumber         *int32     `json:"district_number"`
-	ElectionDistricts      []string   `json:"election_districts"`
-	ElectionYears          []int32    `json:"election_years"`
-	FecCyclesInElection    []int32    `json:"fec_cycles_in_election"`
-	FirstFileDate          *time.Time `json:"first_file_date"`
-	Flags                  *string    `json:"flags"`
-	IncumbentChallenge     *string    `json:"incumbent_challenge"`
-	IncumbentChallengeFull *string    `json:"incumbent_challenge_full"`
-	LastF2Date             *time.Time `json:"last_f2_date"`
-	LastFileDate           *time.Time `json:"last_file_date"`
-	LoadDate               *time.Time `json:"load_date"`
-	Name                   *string    `json:"name"`
-	Office                 *string    `json:"office"`
-	OfficeFull             *string    `json:"office_full"`
-	Party                  *string    `json:"party"`
-	PartyFull              *string    `json:"party_full"`
-	RoundedElectionYears   []int32    `json:"rounded_election_years"`
-	State                  *string    `json:"state"`
+	CandidateInactive      *bool      `json:"candidate_inactive,omitempty"`
+	CandidateStatus        *string    `json:"candidate_status,omitempty"`
+	Cycles                 []int32    `json:"cycles,omitempty"`
+	District               *string    `json:"district,omitempty"`
+	DistrictNumber         *int32     `json:"district_number,omitempty"`
+	ElectionDistricts      []string   `json:"election_districts,omitempty"`
+	ElectionYears          []int32    `json:"election_years,omitempty"`
+	FecCyclesInElection    []int32    `json:"fec_cycles_in_election,omitempty"`
+	FirstFileDate          *time.Time `json:"first_file_date,omitempty"`
+	Flags                  *string    `json:"flags,omitempty"`
+	IncumbentChallenge     *string    `json:"incumbent_challenge,omitempty"`
+	IncumbentChallengeFull *string    `json:"incumbent_challenge_full,omitempty"`
+	LastF2Date             *time.Time `json:"last_f2_date,omitempty"`
+	LastFileDate           *time.Time `json:"last_file_date,omitempty"`
+	LoadDate               *time.Time `json:"load_date,omitempty"`
+	Name                   *string    `json:"name,omitempty"`
+	Office                 *string    `json:"office,omitempty"`
+	OfficeFull             *string    `json:"office_full,omitempty"`
+	Party                  *string    `json:"party,omitempty"`
+	PartyFull              *string    `json:"party_full,omitempty"`
+	RoundedElectionYears   []int32    `json:"rounded_election_years,omitempty"`
+	State                  *string    `json:"state,omitempty"`
 	TwoYearPeriod          int32      `json:"two_year_period"`
 }

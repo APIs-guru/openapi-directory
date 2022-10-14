@@ -1,8 +1,8 @@
 package shared
 
 type ImageResponseCard struct {
-	Buttons  []Button `json:"buttons"`
-	ImageURL *string  `json:"imageUrl"`
-	Subtitle *string  `json:"subtitle"`
+	Buttons  []Button `json:"buttons,omitempty"`
+	ImageURL *string  `json:"imageUrl,omitempty"`
+	Subtitle *string  `json:"subtitle,omitempty"`
 	Title    string   `json:"title"`
 }

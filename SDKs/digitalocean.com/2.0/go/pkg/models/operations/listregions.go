@@ -5,13 +5,13 @@ import (
 )
 
 type ListRegions200ApplicationJSON struct {
-	Regions []shared.Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsPropertiesRegion `json:"regions"`
+	Regions []shared.Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsPropertiesRegion `json:"regions,omitempty"`
 }
 
 type ListRegions401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListRegionsResponse struct {

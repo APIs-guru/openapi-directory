@@ -15,23 +15,23 @@ const (
 )
 
 type RecognitionConfig struct {
-	Adaptation                          *SpeechAdaptation              `json:"adaptation"`
-	AlternativeLanguageCodes            []string                       `json:"alternativeLanguageCodes"`
-	AudioChannelCount                   *int32                         `json:"audioChannelCount"`
-	DiarizationConfig                   *SpeakerDiarizationConfig      `json:"diarizationConfig"`
-	EnableAutomaticPunctuation          *bool                          `json:"enableAutomaticPunctuation"`
-	EnableSeparateRecognitionPerChannel *bool                          `json:"enableSeparateRecognitionPerChannel"`
-	EnableSpokenEmojis                  *bool                          `json:"enableSpokenEmojis"`
-	EnableSpokenPunctuation             *bool                          `json:"enableSpokenPunctuation"`
-	EnableWordConfidence                *bool                          `json:"enableWordConfidence"`
-	EnableWordTimeOffsets               *bool                          `json:"enableWordTimeOffsets"`
-	Encoding                            *RecognitionConfigEncodingEnum `json:"encoding"`
-	LanguageCode                        *string                        `json:"languageCode"`
-	MaxAlternatives                     *int32                         `json:"maxAlternatives"`
-	Metadata                            *RecognitionMetadata           `json:"metadata"`
-	Model                               *string                        `json:"model"`
-	ProfanityFilter                     *bool                          `json:"profanityFilter"`
-	SampleRateHertz                     *int32                         `json:"sampleRateHertz"`
-	SpeechContexts                      []SpeechContext                `json:"speechContexts"`
-	UseEnhanced                         *bool                          `json:"useEnhanced"`
+	Adaptation                          *SpeechAdaptation              `json:"adaptation,omitempty"`
+	AlternativeLanguageCodes            []string                       `json:"alternativeLanguageCodes,omitempty"`
+	AudioChannelCount                   *int32                         `json:"audioChannelCount,omitempty"`
+	DiarizationConfig                   *SpeakerDiarizationConfig      `json:"diarizationConfig,omitempty"`
+	EnableAutomaticPunctuation          *bool                          `json:"enableAutomaticPunctuation,omitempty"`
+	EnableSeparateRecognitionPerChannel *bool                          `json:"enableSeparateRecognitionPerChannel,omitempty"`
+	EnableSpokenEmojis                  *bool                          `json:"enableSpokenEmojis,omitempty"`
+	EnableSpokenPunctuation             *bool                          `json:"enableSpokenPunctuation,omitempty"`
+	EnableWordConfidence                *bool                          `json:"enableWordConfidence,omitempty"`
+	EnableWordTimeOffsets               *bool                          `json:"enableWordTimeOffsets,omitempty"`
+	Encoding                            *RecognitionConfigEncodingEnum `json:"encoding,omitempty"`
+	LanguageCode                        *string                        `json:"languageCode,omitempty"`
+	MaxAlternatives                     *int32                         `json:"maxAlternatives,omitempty"`
+	Metadata                            *RecognitionMetadata           `json:"metadata,omitempty"`
+	Model                               *string                        `json:"model,omitempty"`
+	ProfanityFilter                     *bool                          `json:"profanityFilter,omitempty"`
+	SampleRateHertz                     *int32                         `json:"sampleRateHertz,omitempty"`
+	SpeechContexts                      []SpeechContext                `json:"speechContexts,omitempty"`
+	UseEnhanced                         *bool                          `json:"useEnhanced,omitempty"`
 }

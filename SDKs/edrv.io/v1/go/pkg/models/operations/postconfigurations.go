@@ -1,8 +1,8 @@
 package operations
 
 type PostConfigurationsRequestBody struct {
-	Key   *string `json:"key"`
-	Value *string `json:"value"`
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type PostConfigurationsRequest struct {
@@ -10,9 +10,9 @@ type PostConfigurationsRequest struct {
 }
 
 type PostConfigurations201ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type PostConfigurationsResponse struct {

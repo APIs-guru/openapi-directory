@@ -1,7 +1,7 @@
 package shared
 
 type TfLiteModel struct {
-	AutomlModel  *string `json:"automlModel"`
-	GcsTfliteURI *string `json:"gcsTfliteUri"`
-	SizeBytes    *string `json:"sizeBytes"`
+	AutomlModel  *string `json:"automlModel,omitempty"`
+	GcsTfliteURI *string `json:"gcsTfliteUri,omitempty"`
+	SizeBytes    *string `json:"sizeBytes,omitempty"`
 }

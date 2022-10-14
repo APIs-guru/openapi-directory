@@ -5,7 +5,7 @@ import (
 )
 
 type ExternalEvaluation struct {
-	Annotation             *string            `json:"Annotation"`
+	Annotation             *string            `json:"Annotation,omitempty"`
 	ComplianceResourceID   string             `json:"ComplianceResourceId"`
 	ComplianceResourceType string             `json:"ComplianceResourceType"`
 	ComplianceType         ComplianceTypeEnum `json:"ComplianceType"`

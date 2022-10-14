@@ -1,8 +1,8 @@
 package shared
 
 type InventoryFilterCriteria struct {
-	CreationDateRange *DateRange `json:"creationDateRange"`
-	ListingFormat     *string    `json:"listingFormat"`
-	ListingStatus     *string    `json:"listingStatus"`
-	ModifiedDateRange *DateRange `json:"modifiedDateRange"`
+	CreationDateRange *DateRange `json:"creationDateRange,omitempty"`
+	ListingFormat     *string    `json:"listingFormat,omitempty"`
+	ListingStatus     *string    `json:"listingStatus,omitempty"`
+	ModifiedDateRange *DateRange `json:"modifiedDateRange,omitempty"`
 }

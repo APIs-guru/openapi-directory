@@ -20,18 +20,18 @@ const (
 )
 
 type GoogleCloudFunctionRulePostTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type GoogleCloudFunctionRulePostTarget struct {
-	Enveloped    *bool                                        `json:"enveloped"`
-	Format       *GoogleCloudFunctionRulePostTargetFormatEnum `json:"format"`
+	Enveloped    *bool                                        `json:"enveloped,omitempty"`
+	Format       *GoogleCloudFunctionRulePostTargetFormatEnum `json:"format,omitempty"`
 	FunctionName string                                       `json:"functionName"`
-	Headers      []GoogleCloudFunctionRulePostTargetHeaders   `json:"headers"`
+	Headers      []GoogleCloudFunctionRulePostTargetHeaders   `json:"headers,omitempty"`
 	ProjectID    string                                       `json:"projectId"`
 	Region       string                                       `json:"region"`
-	SigningKeyID *string                                      `json:"signingKeyId"`
+	SigningKeyID *string                                      `json:"signingKeyId,omitempty"`
 }
 
 type GoogleCloudFunctionRulePost struct {

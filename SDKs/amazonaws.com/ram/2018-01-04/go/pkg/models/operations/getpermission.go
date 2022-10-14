@@ -16,7 +16,7 @@ type GetPermissionHeaders struct {
 
 type GetPermissionRequestBody struct {
 	PermissionArn     string `json:"permissionArn"`
-	PermissionVersion *int64 `json:"permissionVersion"`
+	PermissionVersion *int64 `json:"permissionVersion,omitempty"`
 }
 
 type GetPermissionRequest struct {

@@ -5,10 +5,10 @@ import (
 )
 
 type GetMaintenanceWindowExecutionResult struct {
-	EndTime           *time.Time                            `json:"EndTime"`
-	StartTime         *time.Time                            `json:"StartTime"`
-	Status            *MaintenanceWindowExecutionStatusEnum `json:"Status"`
-	StatusDetails     *string                               `json:"StatusDetails"`
-	TaskIds           []string                              `json:"TaskIds"`
-	WindowExecutionID *string                               `json:"WindowExecutionId"`
+	EndTime           *time.Time                            `json:"EndTime,omitempty"`
+	StartTime         *time.Time                            `json:"StartTime,omitempty"`
+	Status            *MaintenanceWindowExecutionStatusEnum `json:"Status,omitempty"`
+	StatusDetails     *string                               `json:"StatusDetails,omitempty"`
+	TaskIds           []string                              `json:"TaskIds,omitempty"`
+	WindowExecutionID *string                               `json:"WindowExecutionId,omitempty"`
 }

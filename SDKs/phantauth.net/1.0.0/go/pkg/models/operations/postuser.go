@@ -1,40 +1,40 @@
 package operations
 
 type PostUserRequestBodyAddress struct {
-	Country       *string `json:"country"`
-	Formatted     *string `json:"formatted"`
-	Locality      *string `json:"locality"`
-	PostalCode    *string `json:"postal_code"`
-	Region        *string `json:"region"`
-	StreetAddress *string `json:"street_address"`
+	Country       *string `json:"country,omitempty"`
+	Formatted     *string `json:"formatted,omitempty"`
+	Locality      *string `json:"locality,omitempty"`
+	PostalCode    *string `json:"postal_code,omitempty"`
+	Region        *string `json:"region,omitempty"`
+	StreetAddress *string `json:"street_address,omitempty"`
 }
 
 type PostUserRequestBody struct {
-	AtID                *string                     `json:"@id"`
-	Address             *PostUserRequestBodyAddress `json:"address"`
-	Birthdate           *string                     `json:"birthdate"`
-	Email               *string                     `json:"email"`
-	EmailVerified       *bool                       `json:"email_verified"`
-	FamilyName          *string                     `json:"family_name"`
-	Gender              *string                     `json:"gender"`
-	GivenName           *string                     `json:"given_name"`
-	Locale              *string                     `json:"locale"`
-	Me                  *string                     `json:"me"`
-	MiddleName          *string                     `json:"middle_name"`
-	Name                *string                     `json:"name"`
-	Nickname            *string                     `json:"nickname"`
-	Password            *string                     `json:"password"`
-	PhoneNumber         *string                     `json:"phone_number"`
-	PhoneNumberVerified *bool                       `json:"phone_number_verified"`
-	Picture             *string                     `json:"picture"`
-	PreferredUsername   *string                     `json:"preferred_username"`
-	Profile             *string                     `json:"profile"`
+	AtID                *string                     `json:"@id,omitempty"`
+	Address             *PostUserRequestBodyAddress `json:"address,omitempty"`
+	Birthdate           *string                     `json:"birthdate,omitempty"`
+	Email               *string                     `json:"email,omitempty"`
+	EmailVerified       *bool                       `json:"email_verified,omitempty"`
+	FamilyName          *string                     `json:"family_name,omitempty"`
+	Gender              *string                     `json:"gender,omitempty"`
+	GivenName           *string                     `json:"given_name,omitempty"`
+	Locale              *string                     `json:"locale,omitempty"`
+	Me                  *string                     `json:"me,omitempty"`
+	MiddleName          *string                     `json:"middle_name,omitempty"`
+	Name                *string                     `json:"name,omitempty"`
+	Nickname            *string                     `json:"nickname,omitempty"`
+	Password            *string                     `json:"password,omitempty"`
+	PhoneNumber         *string                     `json:"phone_number,omitempty"`
+	PhoneNumberVerified *bool                       `json:"phone_number_verified,omitempty"`
+	Picture             *string                     `json:"picture,omitempty"`
+	PreferredUsername   *string                     `json:"preferred_username,omitempty"`
+	Profile             *string                     `json:"profile,omitempty"`
 	Sub                 string                      `json:"sub"`
-	UID                 *string                     `json:"uid"`
-	UpdatedAt           *float64                    `json:"updated_at"`
-	Webmail             *string                     `json:"webmail"`
-	Website             *string                     `json:"website"`
-	Zoneinfo            *string                     `json:"zoneinfo"`
+	UID                 *string                     `json:"uid,omitempty"`
+	UpdatedAt           *float64                    `json:"updated_at,omitempty"`
+	Webmail             *string                     `json:"webmail,omitempty"`
+	Website             *string                     `json:"website,omitempty"`
+	Zoneinfo            *string                     `json:"zoneinfo,omitempty"`
 }
 
 type PostUserRequest struct {

@@ -5,22 +5,22 @@ import (
 )
 
 type CashPaymentDto struct {
-	AcCode             *string         `json:"acCode"`
-	AcEntries          []AcEntryDto    `json:"acEntries"`
-	BankAccountCode    *string         `json:"bankAccountCode"`
-	BankAccountID      *int64          `json:"bankAccountId"`
-	BookTranTypeID     *int64          `json:"bookTranTypeId"`
-	CustomFields       []AcudfValueDto `json:"customFields"`
-	DetailCollection   []string        `json:"detailCollection"`
-	Discount           *float64        `json:"discount"`
-	EntryDate          *time.Time      `json:"entryDate"`
-	ID                 *int64          `json:"id"`
-	Ledger             *float64        `json:"ledger"`
-	Lodgement          *float64        `json:"lodgement"`
-	Note               *string         `json:"note"`
-	PlaidTransactionID *string         `json:"plaidTransactionId"`
-	ProcDate           *time.Time      `json:"procDate"`
-	SupplierID         *int64          `json:"supplierId"`
-	Timestamp          *string         `json:"timestamp"`
-	Total              *float64        `json:"total"`
+	AcCode             *string         `json:"acCode,omitempty"`
+	AcEntries          []AcEntryDto    `json:"acEntries,omitempty"`
+	BankAccountCode    *string         `json:"bankAccountCode,omitempty"`
+	BankAccountID      *int64          `json:"bankAccountId,omitempty"`
+	BookTranTypeID     *int64          `json:"bookTranTypeId,omitempty"`
+	CustomFields       []AcudfValueDto `json:"customFields,omitempty"`
+	DetailCollection   []string        `json:"detailCollection,omitempty"`
+	Discount           *float64        `json:"discount,omitempty"`
+	EntryDate          *time.Time      `json:"entryDate,omitempty"`
+	ID                 *int64          `json:"id,omitempty"`
+	Ledger             *float64        `json:"ledger,omitempty"`
+	Lodgement          *float64        `json:"lodgement,omitempty"`
+	Note               *string         `json:"note,omitempty"`
+	PlaidTransactionID *string         `json:"plaidTransactionId,omitempty"`
+	ProcDate           *time.Time      `json:"procDate,omitempty"`
+	SupplierID         *int64          `json:"supplierId,omitempty"`
+	Timestamp          *string         `json:"timestamp,omitempty"`
+	Total              *float64        `json:"total,omitempty"`
 }

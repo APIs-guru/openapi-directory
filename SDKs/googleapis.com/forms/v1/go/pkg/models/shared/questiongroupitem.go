@@ -1,7 +1,7 @@
 package shared
 
 type QuestionGroupItem struct {
-	Grid      *Grid      `json:"grid"`
-	Image     *Image     `json:"image"`
-	Questions []Question `json:"questions"`
+	Grid      *Grid      `json:"grid,omitempty"`
+	Image     *Image     `json:"image,omitempty"`
+	Questions []Question `json:"questions,omitempty"`
 }

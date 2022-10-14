@@ -8,9 +8,9 @@ const (
 )
 
 type OrderAttachmentAPIModel struct {
-	Link               *string                          `json:"Link"`
-	ObfuscatedFileName *string                          `json:"ObfuscatedFileName"`
-	OriginalFileName   *string                          `json:"OriginalFileName"`
-	Size               *int64                           `json:"Size"`
-	Type               *OrderAttachmentAPIModelTypeEnum `json:"Type"`
+	Link               *string                          `json:"Link,omitempty"`
+	ObfuscatedFileName *string                          `json:"ObfuscatedFileName,omitempty"`
+	OriginalFileName   *string                          `json:"OriginalFileName,omitempty"`
+	Size               *int64                           `json:"Size,omitempty"`
+	Type               *OrderAttachmentAPIModelTypeEnum `json:"Type,omitempty"`
 }

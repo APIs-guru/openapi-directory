@@ -13,9 +13,9 @@ type GetResourcesMediaIDYoutubeMetaDataJSONRequest struct {
 }
 
 type GetResourcesMediaIDYoutubeMetaDataJSON200ApplicationJSON struct {
-	Callback *string                  `json:"callback"`
-	Meta     *shared.Meta             `json:"meta"`
-	Results  []map[string]interface{} `json:"results"`
+	Callback *string                  `json:"callback,omitempty"`
+	Meta     *shared.Meta             `json:"meta,omitempty"`
+	Results  []map[string]interface{} `json:"results,omitempty"`
 }
 
 type GetResourcesMediaIDYoutubeMetaDataJSONResponse struct {

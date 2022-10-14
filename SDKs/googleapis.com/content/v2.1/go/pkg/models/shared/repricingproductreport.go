@@ -11,14 +11,14 @@ const (
 )
 
 type RepricingProductReport struct {
-	ApplicationCount          *string                                          `json:"applicationCount"`
-	BuyboxWinningProductStats *RepricingProductReportBuyboxWinningProductStats `json:"buyboxWinningProductStats"`
-	Date                      *Date                                            `json:"date"`
-	HighWatermark             *PriceAmount                                     `json:"highWatermark"`
-	InapplicabilityDetails    []InapplicabilityDetails                         `json:"inapplicabilityDetails"`
-	LowWatermark              *PriceAmount                                     `json:"lowWatermark"`
-	OrderItemCount            *int32                                           `json:"orderItemCount"`
-	RuleIds                   []string                                         `json:"ruleIds"`
-	TotalGmv                  *PriceAmount                                     `json:"totalGmv"`
-	Type                      *RepricingProductReportTypeEnum                  `json:"type"`
+	ApplicationCount          *string                                          `json:"applicationCount,omitempty"`
+	BuyboxWinningProductStats *RepricingProductReportBuyboxWinningProductStats `json:"buyboxWinningProductStats,omitempty"`
+	Date                      *Date                                            `json:"date,omitempty"`
+	HighWatermark             *PriceAmount                                     `json:"highWatermark,omitempty"`
+	InapplicabilityDetails    []InapplicabilityDetails                         `json:"inapplicabilityDetails,omitempty"`
+	LowWatermark              *PriceAmount                                     `json:"lowWatermark,omitempty"`
+	OrderItemCount            *int32                                           `json:"orderItemCount,omitempty"`
+	RuleIds                   []string                                         `json:"ruleIds,omitempty"`
+	TotalGmv                  *PriceAmount                                     `json:"totalGmv,omitempty"`
+	Type                      *RepricingProductReportTypeEnum                  `json:"type,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudDatapipelinesV1LaunchTemplateRequest struct {
-	GcsPath          *string                                             `json:"gcsPath"`
-	LaunchParameters *GoogleCloudDatapipelinesV1LaunchTemplateParameters `json:"launchParameters"`
-	Location         *string                                             `json:"location"`
-	ProjectID        *string                                             `json:"projectId"`
-	ValidateOnly     *bool                                               `json:"validateOnly"`
+	GcsPath          *string                                             `json:"gcsPath,omitempty"`
+	LaunchParameters *GoogleCloudDatapipelinesV1LaunchTemplateParameters `json:"launchParameters,omitempty"`
+	Location         *string                                             `json:"location,omitempty"`
+	ProjectID        *string                                             `json:"projectId,omitempty"`
+	ValidateOnly     *bool                                               `json:"validateOnly,omitempty"`
 }

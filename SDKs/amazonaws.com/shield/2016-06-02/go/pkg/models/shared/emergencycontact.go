@@ -1,7 +1,7 @@
 package shared
 
 type EmergencyContact struct {
-	ContactNotes *string `json:"ContactNotes"`
+	ContactNotes *string `json:"ContactNotes,omitempty"`
 	EmailAddress string  `json:"EmailAddress"`
-	PhoneNumber  *string `json:"PhoneNumber"`
+	PhoneNumber  *string `json:"PhoneNumber,omitempty"`
 }

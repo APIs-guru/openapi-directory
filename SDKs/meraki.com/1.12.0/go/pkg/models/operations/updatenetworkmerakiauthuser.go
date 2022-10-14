@@ -6,15 +6,15 @@ type UpdateNetworkMerakiAuthUserPathParams struct {
 }
 
 type UpdateNetworkMerakiAuthUserRequestBodyAuthorizations struct {
-	ExpiresAt  *string `json:"expiresAt"`
+	ExpiresAt  *string `json:"expiresAt,omitempty"`
 	SsidNumber int64   `json:"ssidNumber"`
 }
 
 type UpdateNetworkMerakiAuthUserRequestBody struct {
-	Authorizations      []UpdateNetworkMerakiAuthUserRequestBodyAuthorizations `json:"authorizations"`
-	EmailPasswordToUser *bool                                                  `json:"emailPasswordToUser"`
-	Name                *string                                                `json:"name"`
-	Password            *string                                                `json:"password"`
+	Authorizations      []UpdateNetworkMerakiAuthUserRequestBodyAuthorizations `json:"authorizations,omitempty"`
+	EmailPasswordToUser *bool                                                  `json:"emailPasswordToUser,omitempty"`
+	Name                *string                                                `json:"name,omitempty"`
+	Password            *string                                                `json:"password,omitempty"`
 }
 
 type UpdateNetworkMerakiAuthUserRequest struct {

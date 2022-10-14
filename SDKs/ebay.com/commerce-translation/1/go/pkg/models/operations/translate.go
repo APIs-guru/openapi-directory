@@ -14,11 +14,11 @@ type TranslateRequest struct {
 }
 
 type Translate400ApplicationJSON struct {
-	Errors []shared.Error `json:"errors"`
+	Errors []shared.Error `json:"errors,omitempty"`
 }
 
 type Translate500ApplicationJSON struct {
-	Errors []shared.Error `json:"errors"`
+	Errors []shared.Error `json:"errors,omitempty"`
 }
 
 type TranslateResponse struct {

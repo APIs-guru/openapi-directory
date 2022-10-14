@@ -1,8 +1,8 @@
 package shared
 
 type UpdateTableCellPropertiesRequest struct {
-	Fields              *string              `json:"fields"`
-	ObjectID            *string              `json:"objectId"`
-	TableCellProperties *TableCellProperties `json:"tableCellProperties"`
-	TableRange          *TableRange          `json:"tableRange"`
+	Fields              *string              `json:"fields,omitempty"`
+	ObjectID            *string              `json:"objectId,omitempty"`
+	TableCellProperties *TableCellProperties `json:"tableCellProperties,omitempty"`
+	TableRange          *TableRange          `json:"tableRange,omitempty"`
 }

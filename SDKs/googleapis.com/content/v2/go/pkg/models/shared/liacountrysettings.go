@@ -1,11 +1,11 @@
 package shared
 
 type LiaCountrySettings struct {
-	About                       *LiaAboutPageSettings        `json:"about"`
-	Country                     *string                      `json:"country"`
-	HostedLocalStorefrontActive *bool                        `json:"hostedLocalStorefrontActive"`
-	Inventory                   *LiaInventorySettings        `json:"inventory"`
-	OnDisplayToOrder            *LiaOnDisplayToOrderSettings `json:"onDisplayToOrder"`
-	PosDataProvider             *LiaPosDataProvider          `json:"posDataProvider"`
-	StorePickupActive           *bool                        `json:"storePickupActive"`
+	About                       *LiaAboutPageSettings        `json:"about,omitempty"`
+	Country                     *string                      `json:"country,omitempty"`
+	HostedLocalStorefrontActive *bool                        `json:"hostedLocalStorefrontActive,omitempty"`
+	Inventory                   *LiaInventorySettings        `json:"inventory,omitempty"`
+	OnDisplayToOrder            *LiaOnDisplayToOrderSettings `json:"onDisplayToOrder,omitempty"`
+	PosDataProvider             *LiaPosDataProvider          `json:"posDataProvider,omitempty"`
+	StorePickupActive           *bool                        `json:"storePickupActive,omitempty"`
 }

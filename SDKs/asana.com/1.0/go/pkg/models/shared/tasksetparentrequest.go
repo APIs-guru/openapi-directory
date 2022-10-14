@@ -1,7 +1,7 @@
 package shared
 
 type TaskSetParentRequest struct {
-	InsertAfter  *string `json:"insert_after"`
-	InsertBefore *string `json:"insert_before"`
+	InsertAfter  *string `json:"insert_after,omitempty"`
+	InsertBefore *string `json:"insert_before,omitempty"`
 	Parent       string  `json:"parent"`
 }

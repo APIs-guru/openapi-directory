@@ -19,10 +19,10 @@ type GetMostviewedSectionTimePeriodJSONRequest struct {
 }
 
 type GetMostviewedSectionTimePeriodJSON200ApplicationJSON struct {
-	Copyright  *string          `json:"copyright"`
-	NumResults *int64           `json:"num_results"`
-	Results    []shared.Article `json:"results"`
-	Status     *string          `json:"status"`
+	Copyright  *string          `json:"copyright,omitempty"`
+	NumResults *int64           `json:"num_results,omitempty"`
+	Results    []shared.Article `json:"results,omitempty"`
+	Status     *string          `json:"status,omitempty"`
 }
 
 type GetMostviewedSectionTimePeriodJSONResponse struct {

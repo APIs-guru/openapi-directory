@@ -8,13 +8,13 @@ const (
 )
 
 type PopupWindowProperties struct {
-	Dimension      *Size                                  `json:"dimension"`
-	Offset         *OffsetPosition                        `json:"offset"`
-	PositionType   *PopupWindowPropertiesPositionTypeEnum `json:"positionType"`
-	ShowAddressBar *bool                                  `json:"showAddressBar"`
-	ShowMenuBar    *bool                                  `json:"showMenuBar"`
-	ShowScrollBar  *bool                                  `json:"showScrollBar"`
-	ShowStatusBar  *bool                                  `json:"showStatusBar"`
-	ShowToolBar    *bool                                  `json:"showToolBar"`
-	Title          *string                                `json:"title"`
+	Dimension      *Size                                  `json:"dimension,omitempty"`
+	Offset         *OffsetPosition                        `json:"offset,omitempty"`
+	PositionType   *PopupWindowPropertiesPositionTypeEnum `json:"positionType,omitempty"`
+	ShowAddressBar *bool                                  `json:"showAddressBar,omitempty"`
+	ShowMenuBar    *bool                                  `json:"showMenuBar,omitempty"`
+	ShowScrollBar  *bool                                  `json:"showScrollBar,omitempty"`
+	ShowStatusBar  *bool                                  `json:"showStatusBar,omitempty"`
+	ShowToolBar    *bool                                  `json:"showToolBar,omitempty"`
+	Title          *string                                `json:"title,omitempty"`
 }

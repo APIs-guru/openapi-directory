@@ -5,19 +5,19 @@ import (
 )
 
 type Post struct {
-	Content    *string    `json:"content"`
-	Date       *time.Time `json:"date"`
-	Expiration *time.Time `json:"expiration"`
-	Footer     *string    `json:"footer"`
-	GroupID    *string    `json:"group_id"`
-	Latitude   *float64   `json:"latitude"`
-	Longitude  *float64   `json:"longitude"`
-	Outcome    *string    `json:"outcome"`
-	Photos     []Photo    `json:"photos"`
-	PostID     *string    `json:"post_id"`
-	Source     *string    `json:"source"`
-	Title      *string    `json:"title"`
-	Type       *string    `json:"type"`
-	URL        *string    `json:"url"`
-	UserID     *string    `json:"user_id"`
+	Content    *string    `json:"content,omitempty"`
+	Date       *time.Time `json:"date,omitempty"`
+	Expiration *time.Time `json:"expiration,omitempty"`
+	Footer     *string    `json:"footer,omitempty"`
+	GroupID    *string    `json:"group_id,omitempty"`
+	Latitude   *float64   `json:"latitude,omitempty"`
+	Longitude  *float64   `json:"longitude,omitempty"`
+	Outcome    *string    `json:"outcome,omitempty"`
+	Photos     []Photo    `json:"photos,omitempty"`
+	PostID     *string    `json:"post_id,omitempty"`
+	Source     *string    `json:"source,omitempty"`
+	Title      *string    `json:"title,omitempty"`
+	Type       *string    `json:"type,omitempty"`
+	URL        *string    `json:"url,omitempty"`
+	UserID     *string    `json:"user_id,omitempty"`
 }

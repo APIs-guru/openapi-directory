@@ -6,18 +6,18 @@ import (
 )
 
 type CreateDatabaseClusterRequestBodyBackupRestore struct {
-	BackupCreatedAt *time.Time `json:"backup_created_at"`
+	BackupCreatedAt *time.Time `json:"backup_created_at,omitempty"`
 	DatabaseName    string     `json:"database_name"`
 }
 
 type CreateDatabaseClusterRequestBodyConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type CreateDatabaseClusterRequestBodyEngineEnum string
@@ -31,19 +31,19 @@ const (
 
 type CreateDatabaseClusterRequestBodyMaintenanceWindow struct {
 	Day         string   `json:"day"`
-	Description []string `json:"description"`
+	Description []string `json:"description,omitempty"`
 	Hour        string   `json:"hour"`
-	Pending     *bool    `json:"pending"`
+	Pending     *bool    `json:"pending,omitempty"`
 }
 
 type CreateDatabaseClusterRequestBodyPrivateConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type CreateDatabaseClusterRequestBodyStatusEnum string
@@ -75,30 +75,30 @@ const (
 )
 
 type CreateDatabaseClusterRequestBodyUsers struct {
-	MysqlSettings *CreateDatabaseClusterRequestBodyUsersMysqlSettings `json:"mysql_settings"`
+	MysqlSettings *CreateDatabaseClusterRequestBodyUsersMysqlSettings `json:"mysql_settings,omitempty"`
 	Name          string                                              `json:"name"`
-	Password      *string                                             `json:"password"`
-	Role          *CreateDatabaseClusterRequestBodyUsersRoleEnum      `json:"role"`
+	Password      *string                                             `json:"password,omitempty"`
+	Role          *CreateDatabaseClusterRequestBodyUsersRoleEnum      `json:"role,omitempty"`
 }
 
 type CreateDatabaseClusterRequestBody struct {
-	BackupRestore      *CreateDatabaseClusterRequestBodyBackupRestore     `json:"backup_restore"`
-	Connection         *CreateDatabaseClusterRequestBodyConnection        `json:"connection"`
-	CreatedAt          *time.Time                                         `json:"created_at"`
-	DbNames            []string                                           `json:"db_names"`
+	BackupRestore      *CreateDatabaseClusterRequestBodyBackupRestore     `json:"backup_restore,omitempty"`
+	Connection         *CreateDatabaseClusterRequestBodyConnection        `json:"connection,omitempty"`
+	CreatedAt          *time.Time                                         `json:"created_at,omitempty"`
+	DbNames            []string                                           `json:"db_names,omitempty"`
 	Engine             CreateDatabaseClusterRequestBodyEngineEnum         `json:"engine"`
-	ID                 *string                                            `json:"id"`
-	MaintenanceWindow  *CreateDatabaseClusterRequestBodyMaintenanceWindow `json:"maintenance_window"`
+	ID                 *string                                            `json:"id,omitempty"`
+	MaintenanceWindow  *CreateDatabaseClusterRequestBodyMaintenanceWindow `json:"maintenance_window,omitempty"`
 	Name               string                                             `json:"name"`
 	NumNodes           int64                                              `json:"num_nodes"`
-	PrivateConnection  *CreateDatabaseClusterRequestBodyPrivateConnection `json:"private_connection"`
-	PrivateNetworkUUID *string                                            `json:"private_network_uuid"`
+	PrivateConnection  *CreateDatabaseClusterRequestBodyPrivateConnection `json:"private_connection,omitempty"`
+	PrivateNetworkUUID *string                                            `json:"private_network_uuid,omitempty"`
 	Region             string                                             `json:"region"`
 	Size               string                                             `json:"size"`
-	Status             *CreateDatabaseClusterRequestBodyStatusEnum        `json:"status"`
-	Tags               []string                                           `json:"tags"`
-	Users              []CreateDatabaseClusterRequestBodyUsers            `json:"users"`
-	Version            *string                                            `json:"version"`
+	Status             *CreateDatabaseClusterRequestBodyStatusEnum        `json:"status,omitempty"`
+	Tags               []string                                           `json:"tags,omitempty"`
+	Users              []CreateDatabaseClusterRequestBodyUsers            `json:"users,omitempty"`
+	Version            *string                                            `json:"version,omitempty"`
 }
 
 type CreateDatabaseClusterRequest struct {
@@ -112,7 +112,7 @@ type CreateDatabaseCluster201ApplicationJSON struct {
 type CreateDatabaseCluster401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateDatabaseClusterResponse struct {

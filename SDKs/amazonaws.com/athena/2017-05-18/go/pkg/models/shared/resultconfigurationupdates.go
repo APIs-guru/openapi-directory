@@ -1,8 +1,8 @@
 package shared
 
 type ResultConfigurationUpdates struct {
-	EncryptionConfiguration       *EncryptionConfiguration `json:"EncryptionConfiguration"`
-	OutputLocation                *string                  `json:"OutputLocation"`
-	RemoveEncryptionConfiguration *bool                    `json:"RemoveEncryptionConfiguration"`
-	RemoveOutputLocation          *bool                    `json:"RemoveOutputLocation"`
+	EncryptionConfiguration       *EncryptionConfiguration `json:"EncryptionConfiguration,omitempty"`
+	OutputLocation                *string                  `json:"OutputLocation,omitempty"`
+	RemoveEncryptionConfiguration *bool                    `json:"RemoveEncryptionConfiguration,omitempty"`
+	RemoveOutputLocation          *bool                    `json:"RemoveOutputLocation,omitempty"`
 }

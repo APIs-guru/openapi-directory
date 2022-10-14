@@ -11,10 +11,10 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1LabelVideoRequest struct {
-	BasicConfig               *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig        `json:"basicConfig"`
-	EventConfig               *GoogleCloudDatalabelingV1beta1EventConfig                  `json:"eventConfig"`
-	Feature                   *GoogleCloudDatalabelingV1beta1LabelVideoRequestFeatureEnum `json:"feature"`
-	ObjectDetectionConfig     *GoogleCloudDatalabelingV1beta1ObjectDetectionConfig        `json:"objectDetectionConfig"`
-	ObjectTrackingConfig      *GoogleCloudDatalabelingV1beta1ObjectTrackingConfig         `json:"objectTrackingConfig"`
-	VideoClassificationConfig *GoogleCloudDatalabelingV1beta1VideoClassificationConfig    `json:"videoClassificationConfig"`
+	BasicConfig               *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig        `json:"basicConfig,omitempty"`
+	EventConfig               *GoogleCloudDatalabelingV1beta1EventConfig                  `json:"eventConfig,omitempty"`
+	Feature                   *GoogleCloudDatalabelingV1beta1LabelVideoRequestFeatureEnum `json:"feature,omitempty"`
+	ObjectDetectionConfig     *GoogleCloudDatalabelingV1beta1ObjectDetectionConfig        `json:"objectDetectionConfig,omitempty"`
+	ObjectTrackingConfig      *GoogleCloudDatalabelingV1beta1ObjectTrackingConfig         `json:"objectTrackingConfig,omitempty"`
+	VideoClassificationConfig *GoogleCloudDatalabelingV1beta1VideoClassificationConfig    `json:"videoClassificationConfig,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type SearchLoyaltyRewardsResponse struct {
-	Cursor  *string         `json:"cursor"`
-	Errors  []Error         `json:"errors"`
-	Rewards []LoyaltyReward `json:"rewards"`
+	Cursor  *string         `json:"cursor,omitempty"`
+	Errors  []Error         `json:"errors,omitempty"`
+	Rewards []LoyaltyReward `json:"rewards,omitempty"`
 }

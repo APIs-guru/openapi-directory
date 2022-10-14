@@ -5,7 +5,7 @@ import (
 )
 
 type UsageRecord struct {
-	AccountID          *string          `json:"accountId"`
-	FreeTrialStartDate *time.Time       `json:"freeTrialStartDate"`
-	Usage              []UsageByAccount `json:"usage"`
+	AccountID          *string          `json:"accountId,omitempty"`
+	FreeTrialStartDate *time.Time       `json:"freeTrialStartDate,omitempty"`
+	Usage              []UsageByAccount `json:"usage,omitempty"`
 }

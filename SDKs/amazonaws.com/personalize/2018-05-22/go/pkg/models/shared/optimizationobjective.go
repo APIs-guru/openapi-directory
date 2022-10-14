@@ -1,6 +1,6 @@
 package shared
 
 type OptimizationObjective struct {
-	ItemAttribute        *string                   `json:"itemAttribute"`
-	ObjectiveSensitivity *ObjectiveSensitivityEnum `json:"objectiveSensitivity"`
+	ItemAttribute        *string                   `json:"itemAttribute,omitempty"`
+	ObjectiveSensitivity *ObjectiveSensitivityEnum `json:"objectiveSensitivity,omitempty"`
 }

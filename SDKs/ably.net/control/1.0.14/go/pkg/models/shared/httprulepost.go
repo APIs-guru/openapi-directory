@@ -28,15 +28,15 @@ const (
 )
 
 type HTTPRulePostTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type HTTPRulePostTarget struct {
-	Enveloped    *bool                        `json:"enveloped"`
+	Enveloped    *bool                        `json:"enveloped,omitempty"`
 	Format       HTTPRulePostTargetFormatEnum `json:"format"`
-	Headers      []HTTPRulePostTargetHeaders  `json:"headers"`
-	SigningKeyID *string                      `json:"signingKeyId"`
+	Headers      []HTTPRulePostTargetHeaders  `json:"headers,omitempty"`
+	SigningKeyID *string                      `json:"signingKeyId,omitempty"`
 	URL          string                       `json:"url"`
 }
 
@@ -44,6 +44,6 @@ type HTTPRulePost struct {
 	RequestMode HTTPRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    HTTPRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                  `json:"source"`
-	Status      *HTTPRulePostStatusEnum     `json:"status"`
+	Status      *HTTPRulePostStatusEnum     `json:"status,omitempty"`
 	Target      HTTPRulePostTarget          `json:"target"`
 }

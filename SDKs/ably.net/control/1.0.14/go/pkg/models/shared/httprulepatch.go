@@ -28,22 +28,22 @@ const (
 )
 
 type HTTPRulePatchTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type HTTPRulePatchTarget struct {
-	Enveloped    *bool                          `json:"enveloped"`
-	Format       *HTTPRulePatchTargetFormatEnum `json:"format"`
-	Headers      []HTTPRulePatchTargetHeaders   `json:"headers"`
-	SigningKeyID *string                        `json:"signingKeyId"`
-	URL          *string                        `json:"url"`
+	Enveloped    *bool                          `json:"enveloped,omitempty"`
+	Format       *HTTPRulePatchTargetFormatEnum `json:"format,omitempty"`
+	Headers      []HTTPRulePatchTargetHeaders   `json:"headers,omitempty"`
+	SigningKeyID *string                        `json:"signingKeyId,omitempty"`
+	URL          *string                        `json:"url,omitempty"`
 }
 
 type HTTPRulePatch struct {
-	RequestMode *HTTPRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *HTTPRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                   `json:"source"`
-	Status      *HTTPRulePatchStatusEnum      `json:"status"`
-	Target      *HTTPRulePatchTarget          `json:"target"`
+	RequestMode *HTTPRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *HTTPRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                   `json:"source,omitempty"`
+	Status      *HTTPRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *HTTPRulePatchTarget          `json:"target,omitempty"`
 }

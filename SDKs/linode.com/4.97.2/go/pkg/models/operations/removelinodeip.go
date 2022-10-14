@@ -28,7 +28,7 @@ type RemoveLinodeIPRequest struct {
 }
 
 type RemoveLinodeIPDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RemoveLinodeIPResponse struct {

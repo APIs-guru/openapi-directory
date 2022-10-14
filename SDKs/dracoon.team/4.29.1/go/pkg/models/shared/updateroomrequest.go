@@ -5,9 +5,9 @@ import (
 )
 
 type UpdateRoomRequest struct {
-	Name                  *string    `json:"name"`
-	Notes                 *string    `json:"notes"`
-	Quota                 *int64     `json:"quota"`
-	TimestampCreation     *time.Time `json:"timestampCreation"`
-	TimestampModification *time.Time `json:"timestampModification"`
+	Name                  *string    `json:"name,omitempty"`
+	Notes                 *string    `json:"notes,omitempty"`
+	Quota                 *int64     `json:"quota,omitempty"`
+	TimestampCreation     *time.Time `json:"timestampCreation,omitempty"`
+	TimestampModification *time.Time `json:"timestampModification,omitempty"`
 }

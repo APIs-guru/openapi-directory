@@ -5,21 +5,21 @@ import (
 )
 
 type Endpoint struct {
-	Arn                    *string                 `json:"arn"`
-	CertificateArn         *string                 `json:"certificateArn"`
-	ConfigurationOverrides *ConfigurationOverrides `json:"configurationOverrides"`
-	CreatedAt              *time.Time              `json:"createdAt"`
-	ExecutionRoleArn       *string                 `json:"executionRoleArn"`
-	FailureReason          *FailureReasonEnum      `json:"failureReason"`
-	ID                     *string                 `json:"id"`
-	Name                   *string                 `json:"name"`
-	ReleaseLabel           *string                 `json:"releaseLabel"`
-	SecurityGroup          *string                 `json:"securityGroup"`
-	ServerURL              *string                 `json:"serverUrl"`
-	State                  *EndpointStateEnum      `json:"state"`
-	StateDetails           *string                 `json:"stateDetails"`
-	SubnetIds              []string                `json:"subnetIds"`
-	Tags                   map[string]string       `json:"tags"`
-	Type                   *string                 `json:"type"`
-	VirtualClusterID       *string                 `json:"virtualClusterId"`
+	Arn                    *string                 `json:"arn,omitempty"`
+	CertificateArn         *string                 `json:"certificateArn,omitempty"`
+	ConfigurationOverrides *ConfigurationOverrides `json:"configurationOverrides,omitempty"`
+	CreatedAt              *time.Time              `json:"createdAt,omitempty"`
+	ExecutionRoleArn       *string                 `json:"executionRoleArn,omitempty"`
+	FailureReason          *FailureReasonEnum      `json:"failureReason,omitempty"`
+	ID                     *string                 `json:"id,omitempty"`
+	Name                   *string                 `json:"name,omitempty"`
+	ReleaseLabel           *string                 `json:"releaseLabel,omitempty"`
+	SecurityGroup          *string                 `json:"securityGroup,omitempty"`
+	ServerURL              *string                 `json:"serverUrl,omitempty"`
+	State                  *EndpointStateEnum      `json:"state,omitempty"`
+	StateDetails           *string                 `json:"stateDetails,omitempty"`
+	SubnetIds              []string                `json:"subnetIds,omitempty"`
+	Tags                   map[string]string       `json:"tags,omitempty"`
+	Type                   *string                 `json:"type,omitempty"`
+	VirtualClusterID       *string                 `json:"virtualClusterId,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ProfileCondition struct {
-	Condition  *ProfileConditionTypeEnum  `json:"Condition"`
-	IsRequired *bool                      `json:"IsRequired"`
-	Property   *ProfileConditionValueEnum `json:"Property"`
-	Value      *string                    `json:"Value"`
+	Condition  *ProfileConditionTypeEnum  `json:"Condition,omitempty"`
+	IsRequired *bool                      `json:"IsRequired,omitempty"`
+	Property   *ProfileConditionValueEnum `json:"Property,omitempty"`
+	Value      *string                    `json:"Value,omitempty"`
 }

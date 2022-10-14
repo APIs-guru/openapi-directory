@@ -1,10 +1,10 @@
 package shared
 
 type GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceDisplayHints struct {
-	BadgeColors     *GoogleAppsDriveLabelsV2BadgeColors `json:"badgeColors"`
-	BadgePriority   *string                             `json:"badgePriority"`
-	DarkBadgeColors *GoogleAppsDriveLabelsV2BadgeColors `json:"darkBadgeColors"`
-	Disabled        *bool                               `json:"disabled"`
-	HiddenInSearch  *bool                               `json:"hiddenInSearch"`
-	ShownInApply    *bool                               `json:"shownInApply"`
+	BadgeColors     *GoogleAppsDriveLabelsV2BadgeColors `json:"badgeColors,omitempty"`
+	BadgePriority   *string                             `json:"badgePriority,omitempty"`
+	DarkBadgeColors *GoogleAppsDriveLabelsV2BadgeColors `json:"darkBadgeColors,omitempty"`
+	Disabled        *bool                               `json:"disabled,omitempty"`
+	HiddenInSearch  *bool                               `json:"hiddenInSearch,omitempty"`
+	ShownInApply    *bool                               `json:"shownInApply,omitempty"`
 }

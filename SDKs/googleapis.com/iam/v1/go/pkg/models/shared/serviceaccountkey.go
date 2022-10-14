@@ -33,14 +33,14 @@ const (
 )
 
 type ServiceAccountKey struct {
-	Disabled        *bool                                `json:"disabled"`
-	KeyAlgorithm    *ServiceAccountKeyKeyAlgorithmEnum   `json:"keyAlgorithm"`
-	KeyOrigin       *ServiceAccountKeyKeyOriginEnum      `json:"keyOrigin"`
-	KeyType         *ServiceAccountKeyKeyTypeEnum        `json:"keyType"`
-	Name            *string                              `json:"name"`
-	PrivateKeyData  *string                              `json:"privateKeyData"`
-	PrivateKeyType  *ServiceAccountKeyPrivateKeyTypeEnum `json:"privateKeyType"`
-	PublicKeyData   *string                              `json:"publicKeyData"`
-	ValidAfterTime  *string                              `json:"validAfterTime"`
-	ValidBeforeTime *string                              `json:"validBeforeTime"`
+	Disabled        *bool                                `json:"disabled,omitempty"`
+	KeyAlgorithm    *ServiceAccountKeyKeyAlgorithmEnum   `json:"keyAlgorithm,omitempty"`
+	KeyOrigin       *ServiceAccountKeyKeyOriginEnum      `json:"keyOrigin,omitempty"`
+	KeyType         *ServiceAccountKeyKeyTypeEnum        `json:"keyType,omitempty"`
+	Name            *string                              `json:"name,omitempty"`
+	PrivateKeyData  *string                              `json:"privateKeyData,omitempty"`
+	PrivateKeyType  *ServiceAccountKeyPrivateKeyTypeEnum `json:"privateKeyType,omitempty"`
+	PublicKeyData   *string                              `json:"publicKeyData,omitempty"`
+	ValidAfterTime  *string                              `json:"validAfterTime,omitempty"`
+	ValidBeforeTime *string                              `json:"validBeforeTime,omitempty"`
 }

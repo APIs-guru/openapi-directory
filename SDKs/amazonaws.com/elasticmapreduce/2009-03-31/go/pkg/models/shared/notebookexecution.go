@@ -5,17 +5,17 @@ import (
 )
 
 type NotebookExecution struct {
-	Arn                             *string                      `json:"Arn"`
-	EditorID                        *string                      `json:"EditorId"`
-	EndTime                         *time.Time                   `json:"EndTime"`
-	ExecutionEngine                 *ExecutionEngineConfig       `json:"ExecutionEngine"`
-	LastStateChangeReason           *string                      `json:"LastStateChangeReason"`
-	NotebookExecutionID             *string                      `json:"NotebookExecutionId"`
-	NotebookExecutionName           *string                      `json:"NotebookExecutionName"`
-	NotebookInstanceSecurityGroupID *string                      `json:"NotebookInstanceSecurityGroupId"`
-	NotebookParams                  *string                      `json:"NotebookParams"`
-	OutputNotebookURI               *string                      `json:"OutputNotebookURI"`
-	StartTime                       *time.Time                   `json:"StartTime"`
-	Status                          *NotebookExecutionStatusEnum `json:"Status"`
-	Tags                            []Tag                        `json:"Tags"`
+	Arn                             *string                      `json:"Arn,omitempty"`
+	EditorID                        *string                      `json:"EditorId,omitempty"`
+	EndTime                         *time.Time                   `json:"EndTime,omitempty"`
+	ExecutionEngine                 *ExecutionEngineConfig       `json:"ExecutionEngine,omitempty"`
+	LastStateChangeReason           *string                      `json:"LastStateChangeReason,omitempty"`
+	NotebookExecutionID             *string                      `json:"NotebookExecutionId,omitempty"`
+	NotebookExecutionName           *string                      `json:"NotebookExecutionName,omitempty"`
+	NotebookInstanceSecurityGroupID *string                      `json:"NotebookInstanceSecurityGroupId,omitempty"`
+	NotebookParams                  *string                      `json:"NotebookParams,omitempty"`
+	OutputNotebookURI               *string                      `json:"OutputNotebookURI,omitempty"`
+	StartTime                       *time.Time                   `json:"StartTime,omitempty"`
+	Status                          *NotebookExecutionStatusEnum `json:"Status,omitempty"`
+	Tags                            []Tag                        `json:"Tags,omitempty"`
 }

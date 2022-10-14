@@ -1,13 +1,13 @@
 package shared
 
 type QueryParameterTypeStructTypes struct {
-	Description *string             `json:"description"`
-	Name        *string             `json:"name"`
-	Type        *QueryParameterType `json:"type"`
+	Description *string             `json:"description,omitempty"`
+	Name        *string             `json:"name,omitempty"`
+	Type        *QueryParameterType `json:"type,omitempty"`
 }
 
 type QueryParameterType struct {
-	ArrayType   *QueryParameterType             `json:"arrayType"`
-	StructTypes []QueryParameterTypeStructTypes `json:"structTypes"`
-	Type        *string                         `json:"type"`
+	ArrayType   *QueryParameterType             `json:"arrayType,omitempty"`
+	StructTypes []QueryParameterTypeStructTypes `json:"structTypes,omitempty"`
+	Type        *string                         `json:"type,omitempty"`
 }

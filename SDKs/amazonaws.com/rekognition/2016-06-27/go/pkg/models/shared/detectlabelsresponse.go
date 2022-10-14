@@ -1,7 +1,7 @@
 package shared
 
 type DetectLabelsResponse struct {
-	LabelModelVersion     *string                    `json:"LabelModelVersion"`
-	Labels                []Label                    `json:"Labels"`
-	OrientationCorrection *OrientationCorrectionEnum `json:"OrientationCorrection"`
+	LabelModelVersion     *string                    `json:"LabelModelVersion,omitempty"`
+	Labels                []Label                    `json:"Labels,omitempty"`
+	OrientationCorrection *OrientationCorrectionEnum `json:"OrientationCorrection,omitempty"`
 }

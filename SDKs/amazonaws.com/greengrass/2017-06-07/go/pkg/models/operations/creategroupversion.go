@@ -20,13 +20,13 @@ type CreateGroupVersionHeaders struct {
 }
 
 type CreateGroupVersionRequestBody struct {
-	ConnectorDefinitionVersionArn    *string `json:"ConnectorDefinitionVersionArn"`
-	CoreDefinitionVersionArn         *string `json:"CoreDefinitionVersionArn"`
-	DeviceDefinitionVersionArn       *string `json:"DeviceDefinitionVersionArn"`
-	FunctionDefinitionVersionArn     *string `json:"FunctionDefinitionVersionArn"`
-	LoggerDefinitionVersionArn       *string `json:"LoggerDefinitionVersionArn"`
-	ResourceDefinitionVersionArn     *string `json:"ResourceDefinitionVersionArn"`
-	SubscriptionDefinitionVersionArn *string `json:"SubscriptionDefinitionVersionArn"`
+	ConnectorDefinitionVersionArn    *string `json:"ConnectorDefinitionVersionArn,omitempty"`
+	CoreDefinitionVersionArn         *string `json:"CoreDefinitionVersionArn,omitempty"`
+	DeviceDefinitionVersionArn       *string `json:"DeviceDefinitionVersionArn,omitempty"`
+	FunctionDefinitionVersionArn     *string `json:"FunctionDefinitionVersionArn,omitempty"`
+	LoggerDefinitionVersionArn       *string `json:"LoggerDefinitionVersionArn,omitempty"`
+	ResourceDefinitionVersionArn     *string `json:"ResourceDefinitionVersionArn,omitempty"`
+	SubscriptionDefinitionVersionArn *string `json:"SubscriptionDefinitionVersionArn,omitempty"`
 }
 
 type CreateGroupVersionRequest struct {

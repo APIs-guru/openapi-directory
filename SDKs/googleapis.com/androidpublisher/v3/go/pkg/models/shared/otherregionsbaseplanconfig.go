@@ -1,7 +1,7 @@
 package shared
 
 type OtherRegionsBasePlanConfig struct {
-	EurPrice                  *Money `json:"eurPrice"`
-	NewSubscriberAvailability *bool  `json:"newSubscriberAvailability"`
-	UsdPrice                  *Money `json:"usdPrice"`
+	EurPrice                  *Money `json:"eurPrice,omitempty"`
+	NewSubscriberAvailability *bool  `json:"newSubscriberAvailability,omitempty"`
+	UsdPrice                  *Money `json:"usdPrice,omitempty"`
 }

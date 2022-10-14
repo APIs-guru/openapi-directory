@@ -19,18 +19,18 @@ type CreateMitigationActionHeaders struct {
 }
 
 type CreateMitigationActionRequestBodyActionParams struct {
-	AddThingsToThingGroupParams       *shared.AddThingsToThingGroupParams       `json:"addThingsToThingGroupParams"`
-	EnableIoTLoggingParams            *shared.EnableIoTLoggingParams            `json:"enableIoTLoggingParams"`
-	PublishFindingToSnsParams         *shared.PublishFindingToSnsParams         `json:"publishFindingToSnsParams"`
-	ReplaceDefaultPolicyVersionParams *shared.ReplaceDefaultPolicyVersionParams `json:"replaceDefaultPolicyVersionParams"`
-	UpdateCaCertificateParams         *shared.UpdateCaCertificateParams         `json:"updateCACertificateParams"`
-	UpdateDeviceCertificateParams     *shared.UpdateDeviceCertificateParams     `json:"updateDeviceCertificateParams"`
+	AddThingsToThingGroupParams       *shared.AddThingsToThingGroupParams       `json:"addThingsToThingGroupParams,omitempty"`
+	EnableIoTLoggingParams            *shared.EnableIoTLoggingParams            `json:"enableIoTLoggingParams,omitempty"`
+	PublishFindingToSnsParams         *shared.PublishFindingToSnsParams         `json:"publishFindingToSnsParams,omitempty"`
+	ReplaceDefaultPolicyVersionParams *shared.ReplaceDefaultPolicyVersionParams `json:"replaceDefaultPolicyVersionParams,omitempty"`
+	UpdateCaCertificateParams         *shared.UpdateCaCertificateParams         `json:"updateCACertificateParams,omitempty"`
+	UpdateDeviceCertificateParams     *shared.UpdateDeviceCertificateParams     `json:"updateDeviceCertificateParams,omitempty"`
 }
 
 type CreateMitigationActionRequestBody struct {
 	ActionParams CreateMitigationActionRequestBodyActionParams `json:"actionParams"`
 	RoleArn      string                                        `json:"roleArn"`
-	Tags         []shared.Tag                                  `json:"tags"`
+	Tags         []shared.Tag                                  `json:"tags,omitempty"`
 }
 
 type CreateMitigationActionRequest struct {

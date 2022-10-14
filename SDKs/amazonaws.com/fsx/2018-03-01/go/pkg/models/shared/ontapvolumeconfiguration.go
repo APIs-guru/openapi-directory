@@ -1,14 +1,14 @@
 package shared
 
 type OntapVolumeConfiguration struct {
-	FlexCacheEndpointType     *FlexCacheEndpointTypeEnum `json:"FlexCacheEndpointType"`
-	JunctionPath              *string                    `json:"JunctionPath"`
-	OntapVolumeType           *OntapVolumeTypeEnum       `json:"OntapVolumeType"`
-	SecurityStyle             *SecurityStyleEnum         `json:"SecurityStyle"`
-	SizeInMegabytes           *int64                     `json:"SizeInMegabytes"`
-	StorageEfficiencyEnabled  *bool                      `json:"StorageEfficiencyEnabled"`
-	StorageVirtualMachineID   *string                    `json:"StorageVirtualMachineId"`
-	StorageVirtualMachineRoot *bool                      `json:"StorageVirtualMachineRoot"`
-	TieringPolicy             *TieringPolicy             `json:"TieringPolicy"`
-	UUID                      *string                    `json:"UUID"`
+	FlexCacheEndpointType     *FlexCacheEndpointTypeEnum `json:"FlexCacheEndpointType,omitempty"`
+	JunctionPath              *string                    `json:"JunctionPath,omitempty"`
+	OntapVolumeType           *OntapVolumeTypeEnum       `json:"OntapVolumeType,omitempty"`
+	SecurityStyle             *SecurityStyleEnum         `json:"SecurityStyle,omitempty"`
+	SizeInMegabytes           *int64                     `json:"SizeInMegabytes,omitempty"`
+	StorageEfficiencyEnabled  *bool                      `json:"StorageEfficiencyEnabled,omitempty"`
+	StorageVirtualMachineID   *string                    `json:"StorageVirtualMachineId,omitempty"`
+	StorageVirtualMachineRoot *bool                      `json:"StorageVirtualMachineRoot,omitempty"`
+	TieringPolicy             *TieringPolicy             `json:"TieringPolicy,omitempty"`
+	UUID                      *string                    `json:"UUID,omitempty"`
 }

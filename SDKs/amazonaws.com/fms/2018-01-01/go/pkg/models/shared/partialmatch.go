@@ -1,6 +1,6 @@
 package shared
 
 type PartialMatch struct {
-	Reference              *string  `json:"Reference"`
-	TargetViolationReasons []string `json:"TargetViolationReasons"`
+	Reference              *string  `json:"Reference,omitempty"`
+	TargetViolationReasons []string `json:"TargetViolationReasons,omitempty"`
 }

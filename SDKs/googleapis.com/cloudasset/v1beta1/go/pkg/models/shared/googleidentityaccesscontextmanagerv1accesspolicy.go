@@ -1,9 +1,9 @@
 package shared
 
 type GoogleIdentityAccesscontextmanagerV1AccessPolicy struct {
-	Etag   *string  `json:"etag"`
-	Name   *string  `json:"name"`
-	Parent *string  `json:"parent"`
-	Scopes []string `json:"scopes"`
-	Title  *string  `json:"title"`
+	Etag   *string  `json:"etag,omitempty"`
+	Name   *string  `json:"name,omitempty"`
+	Parent *string  `json:"parent,omitempty"`
+	Scopes []string `json:"scopes,omitempty"`
+	Title  *string  `json:"title,omitempty"`
 }

@@ -9,14 +9,14 @@ const (
 )
 
 type VisualizationData struct {
-	DataSourceEndToken       *string                       `json:"dataSourceEndToken"`
-	DataSourceSeparatorToken *string                       `json:"dataSourceSeparatorToken"`
-	DiagnosticMessages       []DiagnosticMessage           `json:"diagnosticMessages"`
-	EndKeyStrings            []string                      `json:"endKeyStrings"`
-	HasPii                   *bool                         `json:"hasPii"`
-	IndexedKeys              []string                      `json:"indexedKeys"`
-	KeySeparator             *string                       `json:"keySeparator"`
-	KeyUnit                  *VisualizationDataKeyUnitEnum `json:"keyUnit"`
-	Metrics                  []Metric                      `json:"metrics"`
-	PrefixNodes              []PrefixNode                  `json:"prefixNodes"`
+	DataSourceEndToken       *string                       `json:"dataSourceEndToken,omitempty"`
+	DataSourceSeparatorToken *string                       `json:"dataSourceSeparatorToken,omitempty"`
+	DiagnosticMessages       []DiagnosticMessage           `json:"diagnosticMessages,omitempty"`
+	EndKeyStrings            []string                      `json:"endKeyStrings,omitempty"`
+	HasPii                   *bool                         `json:"hasPii,omitempty"`
+	IndexedKeys              []string                      `json:"indexedKeys,omitempty"`
+	KeySeparator             *string                       `json:"keySeparator,omitempty"`
+	KeyUnit                  *VisualizationDataKeyUnitEnum `json:"keyUnit,omitempty"`
+	Metrics                  []Metric                      `json:"metrics,omitempty"`
+	PrefixNodes              []PrefixNode                  `json:"prefixNodes,omitempty"`
 }

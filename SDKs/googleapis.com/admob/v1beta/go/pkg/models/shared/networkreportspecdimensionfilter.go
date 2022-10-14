@@ -20,6 +20,6 @@ const (
 )
 
 type NetworkReportSpecDimensionFilter struct {
-	Dimension  *NetworkReportSpecDimensionFilterDimensionEnum `json:"dimension"`
-	MatchesAny *StringList                                    `json:"matchesAny"`
+	Dimension  *NetworkReportSpecDimensionFilterDimensionEnum `json:"dimension,omitempty"`
+	MatchesAny *StringList                                    `json:"matchesAny,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type NodeGroupAffinity struct {
-	NodeGroupURI *string `json:"nodeGroupUri"`
+	NodeGroupURI *string `json:"nodeGroupUri,omitempty"`
 }

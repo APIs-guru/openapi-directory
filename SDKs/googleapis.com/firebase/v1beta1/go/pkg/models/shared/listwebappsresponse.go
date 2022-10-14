@@ -1,6 +1,6 @@
 package shared
 
 type ListWebAppsResponse struct {
-	Apps          []WebApp `json:"apps"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Apps          []WebApp `json:"apps,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

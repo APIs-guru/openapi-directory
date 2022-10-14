@@ -9,38 +9,38 @@ type GetChatHeadUsingPostRequest struct {
 }
 
 type GetChatHeadUsingPost200ApplicationJSONDataChatHead struct {
-	Text     *string `json:"text"`
-	Time     *int64  `json:"time"`
-	UserID   *string `json:"userId"`
-	UserName *string `json:"userName"`
+	Text     *string `json:"text,omitempty"`
+	Time     *int64  `json:"time,omitempty"`
+	UserID   *string `json:"userId,omitempty"`
+	UserName *string `json:"userName,omitempty"`
 }
 
 type GetChatHeadUsingPost200ApplicationJSONData struct {
-	ChatHead *GetChatHeadUsingPost200ApplicationJSONDataChatHead `json:"chatHead"`
+	ChatHead *GetChatHeadUsingPost200ApplicationJSONDataChatHead `json:"chatHead,omitempty"`
 }
 
 type GetChatHeadUsingPost200ApplicationJSON struct {
-	Code    *int64                                      `json:"code"`
-	Data    *GetChatHeadUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                     `json:"message"`
+	Code    *int64                                      `json:"code,omitempty"`
+	Data    *GetChatHeadUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                     `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHeadUsingPostResponse struct {

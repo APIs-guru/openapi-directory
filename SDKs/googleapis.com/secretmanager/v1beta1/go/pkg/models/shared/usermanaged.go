@@ -1,5 +1,5 @@
 package shared
 
 type UserManaged struct {
-	Replicas []Replica `json:"replicas"`
+	Replicas []Replica `json:"replicas,omitempty"`
 }

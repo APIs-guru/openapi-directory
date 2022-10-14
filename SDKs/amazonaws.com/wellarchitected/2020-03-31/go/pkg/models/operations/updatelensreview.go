@@ -20,8 +20,8 @@ type UpdateLensReviewHeaders struct {
 }
 
 type UpdateLensReviewRequestBody struct {
-	LensNotes   *string           `json:"LensNotes"`
-	PillarNotes map[string]string `json:"PillarNotes"`
+	LensNotes   *string           `json:"LensNotes,omitempty"`
+	PillarNotes map[string]string `json:"PillarNotes,omitempty"`
 }
 
 type UpdateLensReviewRequest struct {

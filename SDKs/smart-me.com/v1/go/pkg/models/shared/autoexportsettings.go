@@ -14,8 +14,8 @@ const (
 )
 
 type AutoExportSettings struct {
-	ExportFormat   *string                               `json:"ExportFormat"`
-	ExportInterval *AutoExportSettingsExportIntervalEnum `json:"ExportInterval"`
-	MeterPointID   *string                               `json:"MeterPointId"`
-	UploadType     *string                               `json:"UploadType"`
+	ExportFormat   *string                               `json:"ExportFormat,omitempty"`
+	ExportInterval *AutoExportSettingsExportIntervalEnum `json:"ExportInterval,omitempty"`
+	MeterPointID   *string                               `json:"MeterPointId,omitempty"`
+	UploadType     *string                               `json:"UploadType,omitempty"`
 }

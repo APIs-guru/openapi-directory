@@ -17,11 +17,11 @@ type PostBenefitsDocumentUpload202ApplicationJSON struct {
 }
 
 type PostBenefitsDocumentUpload401ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type PostBenefitsDocumentUpload403ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type PostBenefitsDocumentUpload422ApplicationJSON struct {
@@ -29,14 +29,14 @@ type PostBenefitsDocumentUpload422ApplicationJSON struct {
 }
 
 type PostBenefitsDocumentUpload429ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type PostBenefitsDocumentUpload500ApplicationJSON struct {
-	Code   *string `json:"code"`
-	Detail *string `json:"detail"`
-	Status *string `json:"status"`
-	Title  *string `json:"title"`
+	Code   *string `json:"code,omitempty"`
+	Detail *string `json:"detail,omitempty"`
+	Status *string `json:"status,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }
 
 type PostBenefitsDocumentUploadResponse struct {

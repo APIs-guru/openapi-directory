@@ -1,11 +1,11 @@
 package shared
 
 type Waiter struct {
-	CreateTime *string       `json:"createTime"`
-	Done       *bool         `json:"done"`
-	Error      *Status       `json:"error"`
-	Failure    *EndCondition `json:"failure"`
-	Name       *string       `json:"name"`
-	Success    *EndCondition `json:"success"`
-	Timeout    *string       `json:"timeout"`
+	CreateTime *string       `json:"createTime,omitempty"`
+	Done       *bool         `json:"done,omitempty"`
+	Error      *Status       `json:"error,omitempty"`
+	Failure    *EndCondition `json:"failure,omitempty"`
+	Name       *string       `json:"name,omitempty"`
+	Success    *EndCondition `json:"success,omitempty"`
+	Timeout    *string       `json:"timeout,omitempty"`
 }

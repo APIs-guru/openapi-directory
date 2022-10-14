@@ -11,16 +11,16 @@ const (
 )
 
 type RepricingRule struct {
-	CogsBasedRule        *RepricingRuleCostOfGoodsSaleRule  `json:"cogsBasedRule"`
-	CountryCode          *string                            `json:"countryCode"`
-	EffectiveTimePeriod  *RepricingRuleEffectiveTime        `json:"effectiveTimePeriod"`
-	EligibleOfferMatcher *RepricingRuleEligibleOfferMatcher `json:"eligibleOfferMatcher"`
-	LanguageCode         *string                            `json:"languageCode"`
-	MerchantID           *string                            `json:"merchantId"`
-	Paused               *bool                              `json:"paused"`
-	Restriction          *RepricingRuleRestriction          `json:"restriction"`
-	RuleID               *string                            `json:"ruleId"`
-	StatsBasedRule       *RepricingRuleStatsBasedRule       `json:"statsBasedRule"`
-	Title                *string                            `json:"title"`
-	Type                 *RepricingRuleTypeEnum             `json:"type"`
+	CogsBasedRule        *RepricingRuleCostOfGoodsSaleRule  `json:"cogsBasedRule,omitempty"`
+	CountryCode          *string                            `json:"countryCode,omitempty"`
+	EffectiveTimePeriod  *RepricingRuleEffectiveTime        `json:"effectiveTimePeriod,omitempty"`
+	EligibleOfferMatcher *RepricingRuleEligibleOfferMatcher `json:"eligibleOfferMatcher,omitempty"`
+	LanguageCode         *string                            `json:"languageCode,omitempty"`
+	MerchantID           *string                            `json:"merchantId,omitempty"`
+	Paused               *bool                              `json:"paused,omitempty"`
+	Restriction          *RepricingRuleRestriction          `json:"restriction,omitempty"`
+	RuleID               *string                            `json:"ruleId,omitempty"`
+	StatsBasedRule       *RepricingRuleStatsBasedRule       `json:"statsBasedRule,omitempty"`
+	Title                *string                            `json:"title,omitempty"`
+	Type                 *RepricingRuleTypeEnum             `json:"type,omitempty"`
 }

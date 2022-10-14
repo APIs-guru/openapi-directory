@@ -1,10 +1,10 @@
 package shared
 
 type UpdateFileSystemRequest struct {
-	ClientRequestToken   *string                               `json:"ClientRequestToken"`
+	ClientRequestToken   *string                               `json:"ClientRequestToken,omitempty"`
 	FileSystemID         string                                `json:"FileSystemId"`
-	LustreConfiguration  *UpdateFileSystemLustreConfiguration  `json:"LustreConfiguration"`
-	OntapConfiguration   *UpdateFileSystemOntapConfiguration   `json:"OntapConfiguration"`
-	StorageCapacity      *int64                                `json:"StorageCapacity"`
-	WindowsConfiguration *UpdateFileSystemWindowsConfiguration `json:"WindowsConfiguration"`
+	LustreConfiguration  *UpdateFileSystemLustreConfiguration  `json:"LustreConfiguration,omitempty"`
+	OntapConfiguration   *UpdateFileSystemOntapConfiguration   `json:"OntapConfiguration,omitempty"`
+	StorageCapacity      *int64                                `json:"StorageCapacity,omitempty"`
+	WindowsConfiguration *UpdateFileSystemWindowsConfiguration `json:"WindowsConfiguration,omitempty"`
 }

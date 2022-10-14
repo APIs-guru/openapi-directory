@@ -1,6 +1,6 @@
 package shared
 
 type GetComponentResponse struct {
-	Component *Component `json:"component"`
-	RequestID *string    `json:"requestId"`
+	Component *Component `json:"component,omitempty"`
+	RequestID *string    `json:"requestId,omitempty"`
 }

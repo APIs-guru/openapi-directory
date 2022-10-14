@@ -12,10 +12,10 @@ type ConvertcurrencyRequest struct {
 }
 
 type Convertcurrency200ApplicationJSON struct {
-	Code      *string `json:"Code"`
-	Converted *string `json:"Converted"`
-	Credits   *string `json:"Credits"`
-	Currency  *string `json:"Currency"`
+	Code      *string `json:"Code,omitempty"`
+	Converted *string `json:"Converted,omitempty"`
+	Credits   *string `json:"Credits,omitempty"`
+	Currency  *string `json:"Currency,omitempty"`
 }
 
 type ConvertcurrencyResponse struct {

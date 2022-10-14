@@ -1,6 +1,6 @@
 package shared
 
 type GetDefaultPatchBaselineResult struct {
-	BaselineID      *string              `json:"BaselineId"`
-	OperatingSystem *OperatingSystemEnum `json:"OperatingSystem"`
+	BaselineID      *string              `json:"BaselineId,omitempty"`
+	OperatingSystem *OperatingSystemEnum `json:"OperatingSystem,omitempty"`
 }

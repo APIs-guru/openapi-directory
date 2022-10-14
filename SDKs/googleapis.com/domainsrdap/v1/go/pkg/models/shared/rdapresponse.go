@@ -1,11 +1,11 @@
 package shared
 
 type RdapResponse struct {
-	Description     []string  `json:"description"`
-	ErrorCode       *int32    `json:"errorCode"`
-	JSONResponse    *HTTPBody `json:"jsonResponse"`
-	Lang            *string   `json:"lang"`
-	Notices         []Notice  `json:"notices"`
-	RdapConformance []string  `json:"rdapConformance"`
-	Title           *string   `json:"title"`
+	Description     []string  `json:"description,omitempty"`
+	ErrorCode       *int32    `json:"errorCode,omitempty"`
+	JSONResponse    *HTTPBody `json:"jsonResponse,omitempty"`
+	Lang            *string   `json:"lang,omitempty"`
+	Notices         []Notice  `json:"notices,omitempty"`
+	RdapConformance []string  `json:"rdapConformance,omitempty"`
+	Title           *string   `json:"title,omitempty"`
 }

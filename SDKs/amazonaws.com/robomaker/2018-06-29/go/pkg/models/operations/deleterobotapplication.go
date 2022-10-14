@@ -12,7 +12,7 @@ type DeleteRobotApplicationHeaders struct {
 
 type DeleteRobotApplicationRequestBody struct {
 	Application        string  `json:"application"`
-	ApplicationVersion *string `json:"applicationVersion"`
+	ApplicationVersion *string `json:"applicationVersion,omitempty"`
 }
 
 type DeleteRobotApplicationRequest struct {

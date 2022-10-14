@@ -1,6 +1,6 @@
 package shared
 
 type ListApplicationsResponse struct {
-	ApplicationInfoList []ApplicationInfo `json:"ApplicationInfoList"`
-	NextToken           *string           `json:"NextToken"`
+	ApplicationInfoList []ApplicationInfo `json:"ApplicationInfoList,omitempty"`
+	NextToken           *string           `json:"NextToken,omitempty"`
 }

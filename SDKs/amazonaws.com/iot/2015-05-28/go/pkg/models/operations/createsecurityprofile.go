@@ -19,12 +19,12 @@ type CreateSecurityProfileHeaders struct {
 }
 
 type CreateSecurityProfileRequestBody struct {
-	AdditionalMetricsToRetain   []string                      `json:"additionalMetricsToRetain"`
-	AdditionalMetricsToRetainV2 []shared.MetricToRetain       `json:"additionalMetricsToRetainV2"`
-	AlertTargets                map[string]shared.AlertTarget `json:"alertTargets"`
-	Behaviors                   []shared.Behavior             `json:"behaviors"`
-	SecurityProfileDescription  *string                       `json:"securityProfileDescription"`
-	Tags                        []shared.Tag                  `json:"tags"`
+	AdditionalMetricsToRetain   []string                      `json:"additionalMetricsToRetain,omitempty"`
+	AdditionalMetricsToRetainV2 []shared.MetricToRetain       `json:"additionalMetricsToRetainV2,omitempty"`
+	AlertTargets                map[string]shared.AlertTarget `json:"alertTargets,omitempty"`
+	Behaviors                   []shared.Behavior             `json:"behaviors,omitempty"`
+	SecurityProfileDescription  *string                       `json:"securityProfileDescription,omitempty"`
+	Tags                        []shared.Tag                  `json:"tags,omitempty"`
 }
 
 type CreateSecurityProfileRequest struct {

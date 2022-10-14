@@ -51,10 +51,10 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4ThreatMatch struct {
-	CacheDuration       *string                                                     `json:"cacheDuration"`
-	PlatformType        *GoogleSecuritySafebrowsingV4ThreatMatchPlatformTypeEnum    `json:"platformType"`
-	Threat              *GoogleSecuritySafebrowsingV4ThreatEntry                    `json:"threat"`
-	ThreatEntryMetadata *GoogleSecuritySafebrowsingV4ThreatEntryMetadata            `json:"threatEntryMetadata"`
-	ThreatEntryType     *GoogleSecuritySafebrowsingV4ThreatMatchThreatEntryTypeEnum `json:"threatEntryType"`
-	ThreatType          *GoogleSecuritySafebrowsingV4ThreatMatchThreatTypeEnum      `json:"threatType"`
+	CacheDuration       *string                                                     `json:"cacheDuration,omitempty"`
+	PlatformType        *GoogleSecuritySafebrowsingV4ThreatMatchPlatformTypeEnum    `json:"platformType,omitempty"`
+	Threat              *GoogleSecuritySafebrowsingV4ThreatEntry                    `json:"threat,omitempty"`
+	ThreatEntryMetadata *GoogleSecuritySafebrowsingV4ThreatEntryMetadata            `json:"threatEntryMetadata,omitempty"`
+	ThreatEntryType     *GoogleSecuritySafebrowsingV4ThreatMatchThreatEntryTypeEnum `json:"threatEntryType,omitempty"`
+	ThreatType          *GoogleSecuritySafebrowsingV4ThreatMatchThreatTypeEnum      `json:"threatType,omitempty"`
 }

@@ -9,9 +9,9 @@ type PostConversationsIDOfferPathParams struct {
 }
 
 type PostConversationsIDOfferRequestBody struct {
-	Message       *string `json:"message"`
+	Message       *string `json:"message,omitempty"`
 	Price         string  `json:"price"`
-	ShippingPrice *string `json:"shipping_price"`
+	ShippingPrice *string `json:"shipping_price,omitempty"`
 }
 
 type PostConversationsIDOfferSecurity struct {

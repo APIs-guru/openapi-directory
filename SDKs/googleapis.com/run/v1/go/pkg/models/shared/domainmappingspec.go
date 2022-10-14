@@ -9,7 +9,7 @@ const (
 )
 
 type DomainMappingSpec struct {
-	CertificateMode *DomainMappingSpecCertificateModeEnum `json:"certificateMode"`
-	ForceOverride   *bool                                 `json:"forceOverride"`
-	RouteName       *string                               `json:"routeName"`
+	CertificateMode *DomainMappingSpecCertificateModeEnum `json:"certificateMode,omitempty"`
+	ForceOverride   *bool                                 `json:"forceOverride,omitempty"`
+	RouteName       *string                               `json:"routeName,omitempty"`
 }

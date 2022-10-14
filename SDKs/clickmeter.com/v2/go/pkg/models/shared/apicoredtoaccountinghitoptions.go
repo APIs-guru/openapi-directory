@@ -1,5 +1,5 @@
 package shared
 
 type APICoreDtoAccountingHitOptions struct {
-	HideReferrer *bool `json:"hideReferrer" form:"name=hideReferrer"`
+	HideReferrer *bool `json:"hideReferrer,omitempty" form:"name=hideReferrer"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetResourcePoliciesResponse struct {
-	NextToken *string  `json:"nextToken"`
-	Policies  []string `json:"policies"`
+	NextToken *string  `json:"nextToken,omitempty"`
+	Policies  []string `json:"policies,omitempty"`
 }

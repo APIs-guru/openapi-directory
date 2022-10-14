@@ -1,8 +1,8 @@
 package shared
 
 type ReturnPolicySeasonalOverride struct {
-	EndDate   *string             `json:"endDate"`
-	Name      *string             `json:"name"`
-	Policy    *ReturnPolicyPolicy `json:"policy"`
-	StartDate *string             `json:"startDate"`
+	EndDate   *string             `json:"endDate,omitempty"`
+	Name      *string             `json:"name,omitempty"`
+	Policy    *ReturnPolicyPolicy `json:"policy,omitempty"`
+	StartDate *string             `json:"startDate,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListCourseWorkResponse struct {
-	CourseWork    []CourseWork `json:"courseWork"`
-	NextPageToken *string      `json:"nextPageToken"`
+	CourseWork    []CourseWork `json:"courseWork,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

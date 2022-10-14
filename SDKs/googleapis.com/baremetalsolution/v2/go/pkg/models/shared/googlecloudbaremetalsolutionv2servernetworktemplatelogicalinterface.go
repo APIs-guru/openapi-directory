@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface struct {
-	Name     *string                                                                      `json:"name"`
-	Required *bool                                                                        `json:"required"`
-	Type     *GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterfaceTypeEnum `json:"type"`
+	Name     *string                                                                      `json:"name,omitempty"`
+	Required *bool                                                                        `json:"required,omitempty"`
+	Type     *GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterfaceTypeEnum `json:"type,omitempty"`
 }

@@ -1,7 +1,7 @@
 package operations
 
 type PostSSHKeysRequestBody struct {
-	Labels    map[string]interface{} `json:"labels"`
+	Labels    map[string]interface{} `json:"labels,omitempty"`
 	Name      string                 `json:"name"`
 	PublicKey string                 `json:"public_key"`
 }

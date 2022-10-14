@@ -9,8 +9,8 @@ const (
 )
 
 type MobileApp struct {
-	AppID       *string                `json:"appId"`
-	DisplayName *string                `json:"displayName"`
-	Platform    *MobileAppPlatformEnum `json:"platform"`
-	Publisher   *string                `json:"publisher"`
+	AppID       *string                `json:"appId,omitempty"`
+	DisplayName *string                `json:"displayName,omitempty"`
+	Platform    *MobileAppPlatformEnum `json:"platform,omitempty"`
+	Publisher   *string                `json:"publisher,omitempty"`
 }

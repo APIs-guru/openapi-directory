@@ -5,9 +5,9 @@ import (
 )
 
 type OfferingTransaction struct {
-	Cost                *MonetaryAmount `json:"cost"`
-	CreatedOn           *time.Time      `json:"createdOn"`
-	OfferingPromotionID *string         `json:"offeringPromotionId"`
-	OfferingStatus      *OfferingStatus `json:"offeringStatus"`
-	TransactionID       *string         `json:"transactionId"`
+	Cost                *MonetaryAmount `json:"cost,omitempty"`
+	CreatedOn           *time.Time      `json:"createdOn,omitempty"`
+	OfferingPromotionID *string         `json:"offeringPromotionId,omitempty"`
+	OfferingStatus      *OfferingStatus `json:"offeringStatus,omitempty"`
+	TransactionID       *string         `json:"transactionId,omitempty"`
 }

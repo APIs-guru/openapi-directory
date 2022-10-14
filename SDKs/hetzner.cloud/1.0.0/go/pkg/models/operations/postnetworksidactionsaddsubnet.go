@@ -13,10 +13,10 @@ const (
 )
 
 type PostNetworksIDActionsAddSubnetRequestBodyAddSubnetRequest struct {
-	IPRange     *string                                           `json:"ip_range"`
+	IPRange     *string                                           `json:"ip_range,omitempty"`
 	NetworkZone string                                            `json:"network_zone"`
 	Type        PostNetworksIDActionsAddSubnetRequestBodyTypeEnum `json:"type"`
-	VswitchID   *int64                                            `json:"vswitch_id"`
+	VswitchID   *int64                                            `json:"vswitch_id,omitempty"`
 }
 
 type PostNetworksIDActionsAddSubnetRequest struct {

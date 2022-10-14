@@ -1,6 +1,6 @@
 package shared
 
 type BatchStopJobRunSuccessfulSubmission struct {
-	JobName  *string `json:"JobName"`
-	JobRunID *string `json:"JobRunId"`
+	JobName  *string `json:"JobName,omitempty"`
+	JobRunID *string `json:"JobRunId,omitempty"`
 }

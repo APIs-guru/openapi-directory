@@ -1,5 +1,5 @@
 package shared
 
 type SendWorkerMessagesResponse struct {
-	WorkerMessageResponses []WorkerMessageResponse `json:"workerMessageResponses"`
+	WorkerMessageResponses []WorkerMessageResponse `json:"workerMessageResponses,omitempty"`
 }

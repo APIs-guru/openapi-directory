@@ -37,7 +37,7 @@ type GetLoadBalancerTypesID200ApplicationJSONLoadBalancerType struct {
 }
 
 type GetLoadBalancerTypesID200ApplicationJSON struct {
-	LoadBalancerType *GetLoadBalancerTypesID200ApplicationJSONLoadBalancerType `json:"load_balancer_type"`
+	LoadBalancerType *GetLoadBalancerTypesID200ApplicationJSONLoadBalancerType `json:"load_balancer_type,omitempty"`
 }
 
 type GetLoadBalancerTypesIDResponse struct {

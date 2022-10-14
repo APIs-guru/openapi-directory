@@ -40,21 +40,21 @@ const (
 )
 
 type InsertionOrder struct {
-	AdvertiserID       *string                               `json:"advertiserId"`
-	BidStrategy        *BiddingStrategy                      `json:"bidStrategy"`
-	BillableOutcome    *InsertionOrderBillableOutcomeEnum    `json:"billableOutcome"`
-	Budget             *InsertionOrderBudget                 `json:"budget"`
-	CampaignID         *string                               `json:"campaignId"`
-	DisplayName        *string                               `json:"displayName"`
-	EntityStatus       *InsertionOrderEntityStatusEnum       `json:"entityStatus"`
-	FrequencyCap       *FrequencyCap                         `json:"frequencyCap"`
-	InsertionOrderID   *string                               `json:"insertionOrderId"`
-	InsertionOrderType *InsertionOrderInsertionOrderTypeEnum `json:"insertionOrderType"`
-	IntegrationDetails *IntegrationDetails                   `json:"integrationDetails"`
-	Name               *string                               `json:"name"`
-	Pacing             *Pacing                               `json:"pacing"`
-	PartnerCosts       []PartnerCost                         `json:"partnerCosts"`
-	PerformanceGoal    *PerformanceGoal                      `json:"performanceGoal"`
-	ReservationType    *InsertionOrderReservationTypeEnum    `json:"reservationType"`
-	UpdateTime         *string                               `json:"updateTime"`
+	AdvertiserID       *string                               `json:"advertiserId,omitempty"`
+	BidStrategy        *BiddingStrategy                      `json:"bidStrategy,omitempty"`
+	BillableOutcome    *InsertionOrderBillableOutcomeEnum    `json:"billableOutcome,omitempty"`
+	Budget             *InsertionOrderBudget                 `json:"budget,omitempty"`
+	CampaignID         *string                               `json:"campaignId,omitempty"`
+	DisplayName        *string                               `json:"displayName,omitempty"`
+	EntityStatus       *InsertionOrderEntityStatusEnum       `json:"entityStatus,omitempty"`
+	FrequencyCap       *FrequencyCap                         `json:"frequencyCap,omitempty"`
+	InsertionOrderID   *string                               `json:"insertionOrderId,omitempty"`
+	InsertionOrderType *InsertionOrderInsertionOrderTypeEnum `json:"insertionOrderType,omitempty"`
+	IntegrationDetails *IntegrationDetails                   `json:"integrationDetails,omitempty"`
+	Name               *string                               `json:"name,omitempty"`
+	Pacing             *Pacing                               `json:"pacing,omitempty"`
+	PartnerCosts       []PartnerCost                         `json:"partnerCosts,omitempty"`
+	PerformanceGoal    *PerformanceGoal                      `json:"performanceGoal,omitempty"`
+	ReservationType    *InsertionOrderReservationTypeEnum    `json:"reservationType,omitempty"`
+	UpdateTime         *string                               `json:"updateTime,omitempty"`
 }

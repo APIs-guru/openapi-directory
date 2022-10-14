@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudRetailV2alphaRejoinUserEventsRequest struct {
-	UserEventRejoinScope *GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope"`
+	UserEventRejoinScope *GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope,omitempty"`
 }

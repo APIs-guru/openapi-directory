@@ -1,7 +1,7 @@
 package shared
 
 type SQLApplicationConfigurationDescription struct {
-	InputDescriptions               []InputDescription               `json:"InputDescriptions"`
-	OutputDescriptions              []OutputDescription              `json:"OutputDescriptions"`
-	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription `json:"ReferenceDataSourceDescriptions"`
+	InputDescriptions               []InputDescription               `json:"InputDescriptions,omitempty"`
+	OutputDescriptions              []OutputDescription              `json:"OutputDescriptions,omitempty"`
+	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription `json:"ReferenceDataSourceDescriptions,omitempty"`
 }

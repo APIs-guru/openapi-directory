@@ -1,6 +1,6 @@
 package shared
 
 type CancelChangeSetResponse struct {
-	ChangeSetArn *string `json:"ChangeSetArn"`
-	ChangeSetID  *string `json:"ChangeSetId"`
+	ChangeSetArn *string `json:"ChangeSetArn,omitempty"`
+	ChangeSetID  *string `json:"ChangeSetId,omitempty"`
 }

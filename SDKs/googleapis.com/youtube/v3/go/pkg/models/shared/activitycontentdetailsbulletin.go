@@ -1,5 +1,5 @@
 package shared
 
 type ActivityContentDetailsBulletin struct {
-	ResourceID *ResourceID `json:"resourceId"`
+	ResourceID *ResourceID `json:"resourceId,omitempty"`
 }

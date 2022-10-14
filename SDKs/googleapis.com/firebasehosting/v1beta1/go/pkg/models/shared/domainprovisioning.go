@@ -24,12 +24,12 @@ const (
 )
 
 type DomainProvisioning struct {
-	CertChallengeDiscoveredTxt []string                          `json:"certChallengeDiscoveredTxt"`
-	CertChallengeDNS           *CertDNSChallenge                 `json:"certChallengeDns"`
-	CertChallengeHTTP          *CertHTTPChallenge                `json:"certChallengeHttp"`
-	CertStatus                 *DomainProvisioningCertStatusEnum `json:"certStatus"`
-	DiscoveredIps              []string                          `json:"discoveredIps"`
-	DNSFetchTime               *string                           `json:"dnsFetchTime"`
-	DNSStatus                  *DomainProvisioningDNSStatusEnum  `json:"dnsStatus"`
-	ExpectedIps                []string                          `json:"expectedIps"`
+	CertChallengeDiscoveredTxt []string                          `json:"certChallengeDiscoveredTxt,omitempty"`
+	CertChallengeDNS           *CertDNSChallenge                 `json:"certChallengeDns,omitempty"`
+	CertChallengeHTTP          *CertHTTPChallenge                `json:"certChallengeHttp,omitempty"`
+	CertStatus                 *DomainProvisioningCertStatusEnum `json:"certStatus,omitempty"`
+	DiscoveredIps              []string                          `json:"discoveredIps,omitempty"`
+	DNSFetchTime               *string                           `json:"dnsFetchTime,omitempty"`
+	DNSStatus                  *DomainProvisioningDNSStatusEnum  `json:"dnsStatus,omitempty"`
+	ExpectedIps                []string                          `json:"expectedIps,omitempty"`
 }

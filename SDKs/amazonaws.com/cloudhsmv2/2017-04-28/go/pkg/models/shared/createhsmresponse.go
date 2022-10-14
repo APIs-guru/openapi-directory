@@ -1,5 +1,5 @@
 package shared
 
 type CreateHsmResponse struct {
-	Hsm *Hsm `json:"Hsm"`
+	Hsm *Hsm `json:"Hsm,omitempty"`
 }

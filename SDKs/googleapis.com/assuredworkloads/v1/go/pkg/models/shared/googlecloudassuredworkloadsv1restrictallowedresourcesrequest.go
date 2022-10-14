@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest struct {
-	RestrictionType *GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequestRestrictionTypeEnum `json:"restrictionType"`
+	RestrictionType *GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequestRestrictionTypeEnum `json:"restrictionType,omitempty"`
 }

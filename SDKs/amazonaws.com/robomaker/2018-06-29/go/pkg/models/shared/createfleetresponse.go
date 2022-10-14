@@ -5,8 +5,8 @@ import (
 )
 
 type CreateFleetResponse struct {
-	Arn       *string           `json:"arn"`
-	CreatedAt *time.Time        `json:"createdAt"`
-	Name      *string           `json:"name"`
-	Tags      map[string]string `json:"tags"`
+	Arn       *string           `json:"arn,omitempty"`
+	CreatedAt *time.Time        `json:"createdAt,omitempty"`
+	Name      *string           `json:"name,omitempty"`
+	Tags      map[string]string `json:"tags,omitempty"`
 }

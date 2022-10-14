@@ -18,9 +18,9 @@ const (
 )
 
 type SchemaPackage struct {
-	IgnoreMinOccurs           *bool                                       `json:"ignoreMinOccurs"`
-	Schemas                   []Hl7SchemaConfig                           `json:"schemas"`
-	SchematizedParsingType    *SchemaPackageSchematizedParsingTypeEnum    `json:"schematizedParsingType"`
-	Types                     []Hl7TypesConfig                            `json:"types"`
-	UnexpectedSegmentHandling *SchemaPackageUnexpectedSegmentHandlingEnum `json:"unexpectedSegmentHandling"`
+	IgnoreMinOccurs           *bool                                       `json:"ignoreMinOccurs,omitempty"`
+	Schemas                   []Hl7SchemaConfig                           `json:"schemas,omitempty"`
+	SchematizedParsingType    *SchemaPackageSchematizedParsingTypeEnum    `json:"schematizedParsingType,omitempty"`
+	Types                     []Hl7TypesConfig                            `json:"types,omitempty"`
+	UnexpectedSegmentHandling *SchemaPackageUnexpectedSegmentHandlingEnum `json:"unexpectedSegmentHandling,omitempty"`
 }

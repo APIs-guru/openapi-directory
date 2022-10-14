@@ -11,7 +11,7 @@ type IssuesAddAssigneesPathParams struct {
 }
 
 type IssuesAddAssigneesRequestBody struct {
-	Assignees []string `json:"assignees"`
+	Assignees []string `json:"assignees,omitempty"`
 }
 
 type IssuesAddAssigneesRequest struct {

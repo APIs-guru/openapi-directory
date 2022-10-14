@@ -1,7 +1,7 @@
 package shared
 
 type PolicyParameter struct {
-	Key        *string             `json:"Key"`
-	MapEntries []ParameterMapEntry `json:"MapEntries"`
-	Values     []string            `json:"Values"`
+	Key        *string             `json:"Key,omitempty"`
+	MapEntries []ParameterMapEntry `json:"MapEntries,omitempty"`
+	Values     []string            `json:"Values,omitempty"`
 }

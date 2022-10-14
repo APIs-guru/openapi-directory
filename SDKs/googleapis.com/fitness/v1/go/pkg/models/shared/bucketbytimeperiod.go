@@ -9,7 +9,7 @@ const (
 )
 
 type BucketByTimePeriod struct {
-	TimeZoneID *string                     `json:"timeZoneId"`
-	Type       *BucketByTimePeriodTypeEnum `json:"type"`
-	Value      *int32                      `json:"value"`
+	TimeZoneID *string                     `json:"timeZoneId,omitempty"`
+	Type       *BucketByTimePeriodTypeEnum `json:"type,omitempty"`
+	Value      *int32                      `json:"value,omitempty"`
 }

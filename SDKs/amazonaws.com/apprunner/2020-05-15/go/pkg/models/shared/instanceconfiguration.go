@@ -1,7 +1,7 @@
 package shared
 
 type InstanceConfiguration struct {
-	CPU             *string `json:"Cpu"`
-	InstanceRoleArn *string `json:"InstanceRoleArn"`
-	Memory          *string `json:"Memory"`
+	CPU             *string `json:"Cpu,omitempty"`
+	InstanceRoleArn *string `json:"InstanceRoleArn,omitempty"`
+	Memory          *string `json:"Memory,omitempty"`
 }

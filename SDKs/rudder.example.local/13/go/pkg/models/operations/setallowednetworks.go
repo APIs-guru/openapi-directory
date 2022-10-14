@@ -5,7 +5,7 @@ type SetAllowedNetworksPathParams struct {
 }
 
 type SetAllowedNetworksRequestBody struct {
-	Value map[string]interface{} `json:"value"`
+	Value map[string]interface{} `json:"value,omitempty"`
 }
 
 type SetAllowedNetworksRequest struct {
@@ -20,7 +20,7 @@ const (
 )
 
 type SetAllowedNetworks200ApplicationJSONData struct {
-	AllowedNetworks []interface{} `json:"allowed_networks"`
+	AllowedNetworks []interface{} `json:"allowed_networks,omitempty"`
 }
 
 type SetAllowedNetworks200ApplicationJSONResultEnum string
@@ -33,7 +33,7 @@ const (
 type SetAllowedNetworks200ApplicationJSON struct {
 	Action SetAllowedNetworks200ApplicationJSONActionEnum `json:"action"`
 	Data   SetAllowedNetworks200ApplicationJSONData       `json:"data"`
-	ID     *string                                        `json:"id"`
+	ID     *string                                        `json:"id,omitempty"`
 	Result SetAllowedNetworks200ApplicationJSONResultEnum `json:"result"`
 }
 

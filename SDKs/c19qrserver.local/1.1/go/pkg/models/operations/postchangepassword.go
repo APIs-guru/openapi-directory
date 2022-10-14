@@ -5,8 +5,8 @@ import (
 )
 
 type PostChangePasswordRequestBodySample struct {
-	OldPassword *string `json:"old_password"`
-	Password    *string `json:"password"`
+	OldPassword *string `json:"old_password,omitempty"`
+	Password    *string `json:"password,omitempty"`
 }
 
 type PostChangePasswordRequest struct {

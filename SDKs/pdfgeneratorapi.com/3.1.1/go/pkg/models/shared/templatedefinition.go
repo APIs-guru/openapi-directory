@@ -1,12 +1,12 @@
 package shared
 
 type TemplateDefinitionDataSettings struct {
-	FilterBy []map[string]interface{} `json:"filterBy"`
-	SortBy   []map[string]interface{} `json:"sortBy"`
+	FilterBy []map[string]interface{} `json:"filterBy,omitempty"`
+	SortBy   []map[string]interface{} `json:"sortBy,omitempty"`
 }
 
 type TemplateDefinitionEditor struct {
-	HeightMultiplier *float64 `json:"heightMultiplier"`
+	HeightMultiplier *float64 `json:"heightMultiplier,omitempty"`
 }
 
 type TemplateDefinitionLayoutFormatEnum string
@@ -18,10 +18,10 @@ const (
 )
 
 type TemplateDefinitionLayoutMargins struct {
-	Bottom *float64 `json:"bottom"`
-	Left   *float64 `json:"left"`
-	Right  *float64 `json:"right"`
-	Top    *float64 `json:"top"`
+	Bottom *float64 `json:"bottom,omitempty"`
+	Left   *float64 `json:"left,omitempty"`
+	Right  *float64 `json:"right,omitempty"`
+	Top    *float64 `json:"top,omitempty"`
 }
 
 type TemplateDefinitionLayoutOrientationEnum string
@@ -40,9 +40,9 @@ const (
 )
 
 type TemplateDefinitionLayoutRepeatLayout struct {
-	Format *TemplateDefinitionLayoutRepeatLayoutFormatEnum `json:"format"`
-	Height *float64                                        `json:"height"`
-	Width  *float64                                        `json:"width"`
+	Format *TemplateDefinitionLayoutRepeatLayoutFormatEnum `json:"format,omitempty"`
+	Height *float64                                        `json:"height,omitempty"`
+	Width  *float64                                        `json:"width,omitempty"`
 }
 
 type TemplateDefinitionLayoutUnitEnum string
@@ -53,36 +53,36 @@ const (
 )
 
 type TemplateDefinitionLayout struct {
-	EmptyLabels  *int64                                   `json:"emptyLabels"`
-	Format       *TemplateDefinitionLayoutFormatEnum      `json:"format"`
-	Height       *float64                                 `json:"height"`
-	Margins      *TemplateDefinitionLayoutMargins         `json:"margins"`
-	Orientation  *TemplateDefinitionLayoutOrientationEnum `json:"orientation"`
-	RepeatLayout *TemplateDefinitionLayoutRepeatLayout    `json:"repeatLayout"`
-	Rotation     *int64                                   `json:"rotation"`
-	Unit         *TemplateDefinitionLayoutUnitEnum        `json:"unit"`
-	Width        *float64                                 `json:"width"`
+	EmptyLabels  *int64                                   `json:"emptyLabels,omitempty"`
+	Format       *TemplateDefinitionLayoutFormatEnum      `json:"format,omitempty"`
+	Height       *float64                                 `json:"height,omitempty"`
+	Margins      *TemplateDefinitionLayoutMargins         `json:"margins,omitempty"`
+	Orientation  *TemplateDefinitionLayoutOrientationEnum `json:"orientation,omitempty"`
+	RepeatLayout *TemplateDefinitionLayoutRepeatLayout    `json:"repeatLayout,omitempty"`
+	Rotation     *int64                                   `json:"rotation,omitempty"`
+	Unit         *TemplateDefinitionLayoutUnitEnum        `json:"unit,omitempty"`
+	Width        *float64                                 `json:"width,omitempty"`
 }
 
 type TemplateDefinitionPagesMargins struct {
-	Bottom *float64 `json:"bottom"`
-	Right  *float64 `json:"right"`
+	Bottom *float64 `json:"bottom,omitempty"`
+	Right  *float64 `json:"right,omitempty"`
 }
 
 type TemplateDefinitionPages struct {
-	Components []Component                     `json:"components"`
-	Height     *float64                        `json:"height"`
-	Margins    *TemplateDefinitionPagesMargins `json:"margins"`
-	Width      *float64                        `json:"width"`
+	Components []Component                     `json:"components,omitempty"`
+	Height     *float64                        `json:"height,omitempty"`
+	Margins    *TemplateDefinitionPagesMargins `json:"margins,omitempty"`
+	Width      *float64                        `json:"width,omitempty"`
 }
 
 type TemplateDefinition struct {
-	DataSettings *TemplateDefinitionDataSettings `json:"dataSettings"`
-	Editor       *TemplateDefinitionEditor       `json:"editor"`
-	ID           *int64                          `json:"id"`
-	IsDraft      *bool                           `json:"isDraft"`
-	Layout       *TemplateDefinitionLayout       `json:"layout"`
-	Name         *string                         `json:"name"`
-	Pages        []TemplateDefinitionPages       `json:"pages"`
-	Tags         []string                        `json:"tags"`
+	DataSettings *TemplateDefinitionDataSettings `json:"dataSettings,omitempty"`
+	Editor       *TemplateDefinitionEditor       `json:"editor,omitempty"`
+	ID           *int64                          `json:"id,omitempty"`
+	IsDraft      *bool                           `json:"isDraft,omitempty"`
+	Layout       *TemplateDefinitionLayout       `json:"layout,omitempty"`
+	Name         *string                         `json:"name,omitempty"`
+	Pages        []TemplateDefinitionPages       `json:"pages,omitempty"`
+	Tags         []string                        `json:"tags,omitempty"`
 }

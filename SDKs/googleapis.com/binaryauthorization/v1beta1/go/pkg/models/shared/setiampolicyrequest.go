@@ -1,5 +1,5 @@
 package shared
 
 type SetIamPolicyRequest struct {
-	Policy *IamPolicy `json:"policy"`
+	Policy *IamPolicy `json:"policy,omitempty"`
 }

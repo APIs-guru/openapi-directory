@@ -59,12 +59,12 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse struct {
-	Additions       []GoogleSecuritySafebrowsingV4ThreatEntrySet                                                     `json:"additions"`
-	Checksum        *GoogleSecuritySafebrowsingV4Checksum                                                            `json:"checksum"`
-	NewClientState  *string                                                                                          `json:"newClientState"`
-	PlatformType    *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponsePlatformTypeEnum    `json:"platformType"`
-	Removals        []GoogleSecuritySafebrowsingV4ThreatEntrySet                                                     `json:"removals"`
-	ResponseType    *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseResponseTypeEnum    `json:"responseType"`
-	ThreatEntryType *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatEntryTypeEnum `json:"threatEntryType"`
-	ThreatType      *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatTypeEnum      `json:"threatType"`
+	Additions       []GoogleSecuritySafebrowsingV4ThreatEntrySet                                                     `json:"additions,omitempty"`
+	Checksum        *GoogleSecuritySafebrowsingV4Checksum                                                            `json:"checksum,omitempty"`
+	NewClientState  *string                                                                                          `json:"newClientState,omitempty"`
+	PlatformType    *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponsePlatformTypeEnum    `json:"platformType,omitempty"`
+	Removals        []GoogleSecuritySafebrowsingV4ThreatEntrySet                                                     `json:"removals,omitempty"`
+	ResponseType    *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseResponseTypeEnum    `json:"responseType,omitempty"`
+	ThreatEntryType *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatEntryTypeEnum `json:"threatEntryType,omitempty"`
+	ThreatType      *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatTypeEnum      `json:"threatType,omitempty"`
 }

@@ -19,19 +19,19 @@ const (
 )
 
 type AndroidModel struct {
-	Brand                *string                     `json:"brand"`
-	Codename             *string                     `json:"codename"`
-	Form                 *AndroidModelFormEnum       `json:"form"`
-	FormFactor           *AndroidModelFormFactorEnum `json:"formFactor"`
-	ID                   *string                     `json:"id"`
-	LowFpsVideoRecording *bool                       `json:"lowFpsVideoRecording"`
-	Manufacturer         *string                     `json:"manufacturer"`
-	Name                 *string                     `json:"name"`
-	ScreenDensity        *int32                      `json:"screenDensity"`
-	ScreenX              *int32                      `json:"screenX"`
-	ScreenY              *int32                      `json:"screenY"`
-	SupportedAbis        []string                    `json:"supportedAbis"`
-	SupportedVersionIds  []string                    `json:"supportedVersionIds"`
-	Tags                 []string                    `json:"tags"`
-	ThumbnailURL         *string                     `json:"thumbnailUrl"`
+	Brand                *string                     `json:"brand,omitempty"`
+	Codename             *string                     `json:"codename,omitempty"`
+	Form                 *AndroidModelFormEnum       `json:"form,omitempty"`
+	FormFactor           *AndroidModelFormFactorEnum `json:"formFactor,omitempty"`
+	ID                   *string                     `json:"id,omitempty"`
+	LowFpsVideoRecording *bool                       `json:"lowFpsVideoRecording,omitempty"`
+	Manufacturer         *string                     `json:"manufacturer,omitempty"`
+	Name                 *string                     `json:"name,omitempty"`
+	ScreenDensity        *int32                      `json:"screenDensity,omitempty"`
+	ScreenX              *int32                      `json:"screenX,omitempty"`
+	ScreenY              *int32                      `json:"screenY,omitempty"`
+	SupportedAbis        []string                    `json:"supportedAbis,omitempty"`
+	SupportedVersionIds  []string                    `json:"supportedVersionIds,omitempty"`
+	Tags                 []string                    `json:"tags,omitempty"`
+	ThumbnailURL         *string                     `json:"thumbnailUrl,omitempty"`
 }

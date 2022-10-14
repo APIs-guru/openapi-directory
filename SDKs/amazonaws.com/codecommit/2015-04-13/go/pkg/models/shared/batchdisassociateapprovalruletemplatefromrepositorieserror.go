@@ -1,7 +1,7 @@
 package shared
 
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesError struct {
-	ErrorCode      *string `json:"errorCode"`
-	ErrorMessage   *string `json:"errorMessage"`
-	RepositoryName *string `json:"repositoryName"`
+	ErrorCode      *string `json:"errorCode,omitempty"`
+	ErrorMessage   *string `json:"errorMessage,omitempty"`
+	RepositoryName *string `json:"repositoryName,omitempty"`
 }

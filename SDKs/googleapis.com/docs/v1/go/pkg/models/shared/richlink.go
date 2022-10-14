@@ -1,10 +1,10 @@
 package shared
 
 type RichLink struct {
-	RichLinkID                *string                       `json:"richLinkId"`
-	RichLinkProperties        *RichLinkProperties           `json:"richLinkProperties"`
-	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds"`
-	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds"`
-	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges"`
-	TextStyle                 *TextStyle                    `json:"textStyle"`
+	RichLinkID                *string                       `json:"richLinkId,omitempty"`
+	RichLinkProperties        *RichLinkProperties           `json:"richLinkProperties,omitempty"`
+	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds,omitempty"`
+	SuggestedInsertionIds     []string                      `json:"suggestedInsertionIds,omitempty"`
+	SuggestedTextStyleChanges map[string]SuggestedTextStyle `json:"suggestedTextStyleChanges,omitempty"`
+	TextStyle                 *TextStyle                    `json:"textStyle,omitempty"`
 }

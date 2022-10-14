@@ -1,5 +1,5 @@
 package shared
 
 type City struct {
-	CityName *string `json:"CityName"`
+	CityName *string `json:"CityName,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type LocalizedProperty struct {
-	DefaultLanguage *LanguageTag      `json:"defaultLanguage"`
-	Localized       []LocalizedString `json:"localized"`
+	DefaultLanguage *LanguageTag      `json:"defaultLanguage,omitempty"`
+	Localized       []LocalizedString `json:"localized,omitempty"`
 }

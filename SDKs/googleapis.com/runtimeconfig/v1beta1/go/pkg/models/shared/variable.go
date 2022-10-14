@@ -9,9 +9,9 @@ const (
 )
 
 type Variable struct {
-	Name       *string            `json:"name"`
-	State      *VariableStateEnum `json:"state"`
-	Text       *string            `json:"text"`
-	UpdateTime *string            `json:"updateTime"`
-	Value      *string            `json:"value"`
+	Name       *string            `json:"name,omitempty"`
+	State      *VariableStateEnum `json:"state,omitempty"`
+	Text       *string            `json:"text,omitempty"`
+	UpdateTime *string            `json:"updateTime,omitempty"`
+	Value      *string            `json:"value,omitempty"`
 }

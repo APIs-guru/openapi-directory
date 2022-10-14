@@ -1,15 +1,15 @@
 package shared
 
 type ComponentSummary struct {
-	Arn                 *string            `json:"arn"`
-	ChangeDescription   *string            `json:"changeDescription"`
-	DateCreated         *string            `json:"dateCreated"`
-	Description         *string            `json:"description"`
-	Name                *string            `json:"name"`
-	Owner               *string            `json:"owner"`
-	Platform            *PlatformEnum      `json:"platform"`
-	SupportedOsVersions []string           `json:"supportedOsVersions"`
-	Tags                map[string]string  `json:"tags"`
-	Type                *ComponentTypeEnum `json:"type"`
-	Version             *string            `json:"version"`
+	Arn                 *string            `json:"arn,omitempty"`
+	ChangeDescription   *string            `json:"changeDescription,omitempty"`
+	DateCreated         *string            `json:"dateCreated,omitempty"`
+	Description         *string            `json:"description,omitempty"`
+	Name                *string            `json:"name,omitempty"`
+	Owner               *string            `json:"owner,omitempty"`
+	Platform            *PlatformEnum      `json:"platform,omitempty"`
+	SupportedOsVersions []string           `json:"supportedOsVersions,omitempty"`
+	Tags                map[string]string  `json:"tags,omitempty"`
+	Type                *ComponentTypeEnum `json:"type,omitempty"`
+	Version             *string            `json:"version,omitempty"`
 }

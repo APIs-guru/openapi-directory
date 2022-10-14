@@ -1,6 +1,6 @@
 package shared
 
 type CommitteeTotalsPage struct {
-	Pagination *OffsetInfo       `json:"pagination"`
-	Results    []CommitteeTotals `json:"results"`
+	Pagination *OffsetInfo       `json:"pagination,omitempty"`
+	Results    []CommitteeTotals `json:"results,omitempty"`
 }

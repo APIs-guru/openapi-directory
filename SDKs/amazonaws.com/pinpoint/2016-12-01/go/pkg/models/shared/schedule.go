@@ -1,11 +1,11 @@
 package shared
 
 type Schedule struct {
-	EndTime     *string              `json:"EndTime"`
-	EventFilter *CampaignEventFilter `json:"EventFilter"`
-	Frequency   *FrequencyEnum       `json:"Frequency"`
-	IsLocalTime *bool                `json:"IsLocalTime"`
-	QuietTime   *QuietTime           `json:"QuietTime"`
+	EndTime     *string              `json:"EndTime,omitempty"`
+	EventFilter *CampaignEventFilter `json:"EventFilter,omitempty"`
+	Frequency   *FrequencyEnum       `json:"Frequency,omitempty"`
+	IsLocalTime *bool                `json:"IsLocalTime,omitempty"`
+	QuietTime   *QuietTime           `json:"QuietTime,omitempty"`
 	StartTime   string               `json:"StartTime"`
-	Timezone    *string              `json:"Timezone"`
+	Timezone    *string              `json:"Timezone,omitempty"`
 }

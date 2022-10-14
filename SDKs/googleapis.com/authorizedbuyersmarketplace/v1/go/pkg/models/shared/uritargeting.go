@@ -1,6 +1,6 @@
 package shared
 
 type URITargeting struct {
-	ExcludedUris []string `json:"excludedUris"`
-	TargetedUris []string `json:"targetedUris"`
+	ExcludedUris []string `json:"excludedUris,omitempty"`
+	TargetedUris []string `json:"targetedUris,omitempty"`
 }

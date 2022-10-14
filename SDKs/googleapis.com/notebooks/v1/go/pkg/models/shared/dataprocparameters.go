@@ -1,5 +1,5 @@
 package shared
 
 type DataprocParameters struct {
-	Cluster *string `json:"cluster"`
+	Cluster *string `json:"cluster,omitempty"`
 }

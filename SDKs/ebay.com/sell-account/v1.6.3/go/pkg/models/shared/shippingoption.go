@@ -1,11 +1,11 @@
 package shared
 
 type ShippingOption struct {
-	CostType            *string           `json:"costType"`
-	InsuranceFee        *Amount           `json:"insuranceFee"`
-	InsuranceOffered    *bool             `json:"insuranceOffered"`
-	OptionType          *string           `json:"optionType"`
-	PackageHandlingCost *Amount           `json:"packageHandlingCost"`
-	RateTableID         *string           `json:"rateTableId"`
-	ShippingServices    []ShippingService `json:"shippingServices"`
+	CostType            *string           `json:"costType,omitempty"`
+	InsuranceFee        *Amount           `json:"insuranceFee,omitempty"`
+	InsuranceOffered    *bool             `json:"insuranceOffered,omitempty"`
+	OptionType          *string           `json:"optionType,omitempty"`
+	PackageHandlingCost *Amount           `json:"packageHandlingCost,omitempty"`
+	RateTableID         *string           `json:"rateTableId,omitempty"`
+	ShippingServices    []ShippingService `json:"shippingServices,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type Attestor struct {
-	Description          *string               `json:"description"`
-	Etag                 *string               `json:"etag"`
-	Name                 *string               `json:"name"`
-	UpdateTime           *string               `json:"updateTime"`
-	UserOwnedGrafeasNote *UserOwnedGrafeasNote `json:"userOwnedGrafeasNote"`
+	Description          *string               `json:"description,omitempty"`
+	Etag                 *string               `json:"etag,omitempty"`
+	Name                 *string               `json:"name,omitempty"`
+	UpdateTime           *string               `json:"updateTime,omitempty"`
+	UserOwnedGrafeasNote *UserOwnedGrafeasNote `json:"userOwnedGrafeasNote,omitempty"`
 }

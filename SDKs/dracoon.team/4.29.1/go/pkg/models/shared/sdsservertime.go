@@ -5,5 +5,5 @@ import (
 )
 
 type SdsServerTime struct {
-	Time *time.Time `json:"time"`
+	Time *time.Time `json:"time,omitempty"`
 }

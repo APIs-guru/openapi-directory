@@ -10,7 +10,7 @@ const (
 )
 
 type CompletionResult struct {
-	ImageURI   *string                   `json:"imageUri"`
-	Suggestion *string                   `json:"suggestion"`
-	Type       *CompletionResultTypeEnum `json:"type"`
+	ImageURI   *string                   `json:"imageUri,omitempty"`
+	Suggestion *string                   `json:"suggestion,omitempty"`
+	Type       *CompletionResultTypeEnum `json:"type,omitempty"`
 }

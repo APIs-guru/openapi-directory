@@ -1,14 +1,14 @@
 package shared
 
 type FileSection struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type File struct {
-	Content     *string      `json:"content"`
-	ContentPath *string      `json:"content_path"`
-	ID          *string      `json:"id"`
-	Name        *string      `json:"name"`
-	Section     *FileSection `json:"section"`
-	Size        *int64       `json:"size"`
+	Content     *string      `json:"content,omitempty"`
+	ContentPath *string      `json:"content_path,omitempty"`
+	ID          *string      `json:"id,omitempty"`
+	Name        *string      `json:"name,omitempty"`
+	Section     *FileSection `json:"section,omitempty"`
+	Size        *int64       `json:"size,omitempty"`
 }

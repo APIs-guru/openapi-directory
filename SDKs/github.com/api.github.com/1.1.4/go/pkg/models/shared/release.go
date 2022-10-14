@@ -8,9 +8,9 @@ type Release struct {
 	Assets          []ReleaseAsset `json:"assets"`
 	AssetsURL       string         `json:"assets_url"`
 	Author          SimpleUser     `json:"author"`
-	Body            *string        `json:"body"`
-	BodyHTML        *string        `json:"body_html"`
-	BodyText        *string        `json:"body_text"`
+	Body            *string        `json:"body,omitempty"`
+	BodyHTML        *string        `json:"body_html,omitempty"`
+	BodyText        *string        `json:"body_text,omitempty"`
 	CreatedAt       time.Time      `json:"created_at"`
 	Draft           bool           `json:"draft"`
 	HTMLURL         string         `json:"html_url"`

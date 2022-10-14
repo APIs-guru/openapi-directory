@@ -11,9 +11,9 @@ const (
 )
 
 type PollItemsRequest struct {
-	ConnectorName *string                           `json:"connectorName"`
-	DebugOptions  *DebugOptions                     `json:"debugOptions"`
-	Limit         *int32                            `json:"limit"`
-	Queue         *string                           `json:"queue"`
-	StatusCodes   []PollItemsRequestStatusCodesEnum `json:"statusCodes"`
+	ConnectorName *string                           `json:"connectorName,omitempty"`
+	DebugOptions  *DebugOptions                     `json:"debugOptions,omitempty"`
+	Limit         *int32                            `json:"limit,omitempty"`
+	Queue         *string                           `json:"queue,omitempty"`
+	StatusCodes   []PollItemsRequestStatusCodesEnum `json:"statusCodes,omitempty"`
 }

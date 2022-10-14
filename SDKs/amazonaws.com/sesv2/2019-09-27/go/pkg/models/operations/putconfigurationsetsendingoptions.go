@@ -15,7 +15,7 @@ type PutConfigurationSetSendingOptionsHeaders struct {
 }
 
 type PutConfigurationSetSendingOptionsRequestBody struct {
-	SendingEnabled *bool `json:"SendingEnabled"`
+	SendingEnabled *bool `json:"SendingEnabled,omitempty"`
 }
 
 type PutConfigurationSetSendingOptionsRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type PredefinedMachineType struct {
-	MachineType *string `json:"machineType"`
+	MachineType *string `json:"machineType,omitempty"`
 }

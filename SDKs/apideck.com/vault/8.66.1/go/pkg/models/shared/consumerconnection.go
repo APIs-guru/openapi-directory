@@ -11,20 +11,20 @@ const (
 )
 
 type ConsumerConnection struct {
-	AuthType   *AuthTypeEnum                `json:"auth_type"`
-	ConsumerID *string                      `json:"consumer_id"`
-	CreatedAt  *string                      `json:"created_at"`
-	Enabled    *bool                        `json:"enabled"`
-	Icon       *string                      `json:"icon"`
-	ID         *string                      `json:"id"`
-	Logo       *string                      `json:"logo"`
-	Metadata   map[string]interface{}       `json:"metadata"`
-	Name       *string                      `json:"name"`
-	ServiceID  *string                      `json:"service_id"`
-	Settings   map[string]interface{}       `json:"settings"`
-	State      *ConsumerConnectionStateEnum `json:"state"`
-	TagLine    *string                      `json:"tag_line"`
-	UnifiedAPI *string                      `json:"unified_api"`
-	UpdatedAt  *string                      `json:"updated_at"`
-	Website    *string                      `json:"website"`
+	AuthType   *AuthTypeEnum                `json:"auth_type,omitempty"`
+	ConsumerID *string                      `json:"consumer_id,omitempty"`
+	CreatedAt  *string                      `json:"created_at,omitempty"`
+	Enabled    *bool                        `json:"enabled,omitempty"`
+	Icon       *string                      `json:"icon,omitempty"`
+	ID         *string                      `json:"id,omitempty"`
+	Logo       *string                      `json:"logo,omitempty"`
+	Metadata   map[string]interface{}       `json:"metadata,omitempty"`
+	Name       *string                      `json:"name,omitempty"`
+	ServiceID  *string                      `json:"service_id,omitempty"`
+	Settings   map[string]interface{}       `json:"settings,omitempty"`
+	State      *ConsumerConnectionStateEnum `json:"state,omitempty"`
+	TagLine    *string                      `json:"tag_line,omitempty"`
+	UnifiedAPI *string                      `json:"unified_api,omitempty"`
+	UpdatedAt  *string                      `json:"updated_at,omitempty"`
+	Website    *string                      `json:"website,omitempty"`
 }

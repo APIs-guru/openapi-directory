@@ -1,6 +1,6 @@
 package shared
 
 type Domain struct {
-	LegacyID *string `json:"legacyId"`
-	Name     *string `json:"name"`
+	LegacyID *string `json:"legacyId,omitempty"`
+	Name     *string `json:"name,omitempty"`
 }

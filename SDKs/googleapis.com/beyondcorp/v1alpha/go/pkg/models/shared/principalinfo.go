@@ -1,5 +1,5 @@
 package shared
 
 type PrincipalInfo struct {
-	ServiceAccount *ServiceAccount `json:"serviceAccount"`
+	ServiceAccount *ServiceAccount `json:"serviceAccount,omitempty"`
 }

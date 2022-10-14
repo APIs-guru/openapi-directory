@@ -1,6 +1,6 @@
 package shared
 
 type DeliveryOptions struct {
-	SendingPoolName *string        `json:"SendingPoolName"`
-	TLSPolicy       *TLSPolicyEnum `json:"TlsPolicy"`
+	SendingPoolName *string        `json:"SendingPoolName,omitempty"`
+	TLSPolicy       *TLSPolicyEnum `json:"TlsPolicy,omitempty"`
 }

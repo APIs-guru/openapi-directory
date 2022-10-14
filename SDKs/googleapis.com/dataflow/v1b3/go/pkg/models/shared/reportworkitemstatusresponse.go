@@ -1,6 +1,6 @@
 package shared
 
 type ReportWorkItemStatusResponse struct {
-	UnifiedWorkerResponse map[string]interface{} `json:"unifiedWorkerResponse"`
-	WorkItemServiceStates []WorkItemServiceState `json:"workItemServiceStates"`
+	UnifiedWorkerResponse map[string]interface{} `json:"unifiedWorkerResponse,omitempty"`
+	WorkItemServiceStates []WorkItemServiceState `json:"workItemServiceStates,omitempty"`
 }

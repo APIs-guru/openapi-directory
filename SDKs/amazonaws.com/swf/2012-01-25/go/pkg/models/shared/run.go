@@ -1,5 +1,5 @@
 package shared
 
 type Run struct {
-	RunID *string `json:"runId"`
+	RunID *string `json:"runId,omitempty"`
 }

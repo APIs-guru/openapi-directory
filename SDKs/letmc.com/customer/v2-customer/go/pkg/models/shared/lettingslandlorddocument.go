@@ -1,9 +1,9 @@
 package shared
 
 type LettingsLandlordDocument struct {
-	FileName *string `json:"FileName"`
-	FileSize *int32  `json:"FileSize"`
-	ID       *string `json:"ID"`
-	MimeType *string `json:"MIMEType"`
-	Note     *string `json:"Note"`
+	FileName *string `json:"FileName,omitempty"`
+	FileSize *int32  `json:"FileSize,omitempty"`
+	ID       *string `json:"ID,omitempty"`
+	MimeType *string `json:"MIMEType,omitempty"`
+	Note     *string `json:"Note,omitempty"`
 }

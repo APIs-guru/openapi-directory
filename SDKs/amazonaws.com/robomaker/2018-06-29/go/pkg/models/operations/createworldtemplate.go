@@ -15,16 +15,16 @@ type CreateWorldTemplateHeaders struct {
 }
 
 type CreateWorldTemplateRequestBodyTemplateLocation struct {
-	S3Bucket *string `json:"s3Bucket"`
-	S3Key    *string `json:"s3Key"`
+	S3Bucket *string `json:"s3Bucket,omitempty"`
+	S3Key    *string `json:"s3Key,omitempty"`
 }
 
 type CreateWorldTemplateRequestBody struct {
-	ClientRequestToken *string                                         `json:"clientRequestToken"`
-	Name               *string                                         `json:"name"`
-	Tags               map[string]string                               `json:"tags"`
-	TemplateBody       *string                                         `json:"templateBody"`
-	TemplateLocation   *CreateWorldTemplateRequestBodyTemplateLocation `json:"templateLocation"`
+	ClientRequestToken *string                                         `json:"clientRequestToken,omitempty"`
+	Name               *string                                         `json:"name,omitempty"`
+	Tags               map[string]string                               `json:"tags,omitempty"`
+	TemplateBody       *string                                         `json:"templateBody,omitempty"`
+	TemplateLocation   *CreateWorldTemplateRequestBodyTemplateLocation `json:"templateLocation,omitempty"`
 }
 
 type CreateWorldTemplateRequest struct {

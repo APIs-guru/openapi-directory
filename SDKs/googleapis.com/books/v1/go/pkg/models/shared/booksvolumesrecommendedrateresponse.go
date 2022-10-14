@@ -1,5 +1,5 @@
 package shared
 
 type BooksVolumesRecommendedRateResponse struct {
-	ConsistencyToken *string `json:"consistency_token"`
+	ConsistencyToken *string `json:"consistency_token,omitempty"`
 }

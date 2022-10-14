@@ -10,11 +10,11 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaOAuth2ClientCredentials struct {
-	AccessToken   *GoogleCloudIntegrationsV1alphaAccessToken                            `json:"accessToken"`
-	ClientID      *string                                                               `json:"clientId"`
-	ClientSecret  *string                                                               `json:"clientSecret"`
-	RequestType   *GoogleCloudIntegrationsV1alphaOAuth2ClientCredentialsRequestTypeEnum `json:"requestType"`
-	Scope         *string                                                               `json:"scope"`
-	TokenEndpoint *string                                                               `json:"tokenEndpoint"`
-	TokenParams   *GoogleCloudIntegrationsV1alphaParameterMap                           `json:"tokenParams"`
+	AccessToken   *GoogleCloudIntegrationsV1alphaAccessToken                            `json:"accessToken,omitempty"`
+	ClientID      *string                                                               `json:"clientId,omitempty"`
+	ClientSecret  *string                                                               `json:"clientSecret,omitempty"`
+	RequestType   *GoogleCloudIntegrationsV1alphaOAuth2ClientCredentialsRequestTypeEnum `json:"requestType,omitempty"`
+	Scope         *string                                                               `json:"scope,omitempty"`
+	TokenEndpoint *string                                                               `json:"tokenEndpoint,omitempty"`
+	TokenParams   *GoogleCloudIntegrationsV1alphaParameterMap                           `json:"tokenParams,omitempty"`
 }

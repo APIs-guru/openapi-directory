@@ -1,11 +1,11 @@
 package shared
 
 type CrossRegionCopyRule struct {
-	CmkArn        *string                       `json:"CmkArn"`
-	CopyTags      *bool                         `json:"CopyTags"`
-	DeprecateRule *CrossRegionCopyDeprecateRule `json:"DeprecateRule"`
+	CmkArn        *string                       `json:"CmkArn,omitempty"`
+	CopyTags      *bool                         `json:"CopyTags,omitempty"`
+	DeprecateRule *CrossRegionCopyDeprecateRule `json:"DeprecateRule,omitempty"`
 	Encrypted     bool                          `json:"Encrypted"`
-	RetainRule    *CrossRegionCopyRetainRule    `json:"RetainRule"`
-	Target        *string                       `json:"Target"`
-	TargetRegion  *string                       `json:"TargetRegion"`
+	RetainRule    *CrossRegionCopyRetainRule    `json:"RetainRule,omitempty"`
+	Target        *string                       `json:"Target,omitempty"`
+	TargetRegion  *string                       `json:"TargetRegion,omitempty"`
 }

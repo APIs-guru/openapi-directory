@@ -1,6 +1,6 @@
 package shared
 
 type UserPassword struct {
-	Password *Secret `json:"password"`
-	Username *string `json:"username"`
+	Password *Secret `json:"password,omitempty"`
+	Username *string `json:"username,omitempty"`
 }

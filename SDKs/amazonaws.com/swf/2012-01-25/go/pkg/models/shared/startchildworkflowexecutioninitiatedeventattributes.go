@@ -2,15 +2,15 @@ package shared
 
 type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	ChildPolicy                  ChildPolicyEnum `json:"childPolicy"`
-	Control                      *string         `json:"control"`
+	Control                      *string         `json:"control,omitempty"`
 	DecisionTaskCompletedEventID int64           `json:"decisionTaskCompletedEventId"`
-	ExecutionStartToCloseTimeout *string         `json:"executionStartToCloseTimeout"`
-	Input                        *string         `json:"input"`
-	LambdaRole                   *string         `json:"lambdaRole"`
-	TagList                      []string        `json:"tagList"`
+	ExecutionStartToCloseTimeout *string         `json:"executionStartToCloseTimeout,omitempty"`
+	Input                        *string         `json:"input,omitempty"`
+	LambdaRole                   *string         `json:"lambdaRole,omitempty"`
+	TagList                      []string        `json:"tagList,omitempty"`
 	TaskList                     TaskList        `json:"taskList"`
-	TaskPriority                 *string         `json:"taskPriority"`
-	TaskStartToCloseTimeout      *string         `json:"taskStartToCloseTimeout"`
+	TaskPriority                 *string         `json:"taskPriority,omitempty"`
+	TaskStartToCloseTimeout      *string         `json:"taskStartToCloseTimeout,omitempty"`
 	WorkflowID                   string          `json:"workflowId"`
 	WorkflowType                 WorkflowType    `json:"workflowType"`
 }

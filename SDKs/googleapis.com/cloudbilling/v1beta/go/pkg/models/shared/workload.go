@@ -1,7 +1,7 @@
 package shared
 
 type Workload struct {
-	CloudStorageWorkload *CloudStorageWorkload `json:"cloudStorageWorkload"`
-	ComputeVMWorkload    *ComputeVMWorkload    `json:"computeVmWorkload"`
-	Name                 *string               `json:"name"`
+	CloudStorageWorkload *CloudStorageWorkload `json:"cloudStorageWorkload,omitempty"`
+	ComputeVMWorkload    *ComputeVMWorkload    `json:"computeVmWorkload,omitempty"`
+	Name                 *string               `json:"name,omitempty"`
 }

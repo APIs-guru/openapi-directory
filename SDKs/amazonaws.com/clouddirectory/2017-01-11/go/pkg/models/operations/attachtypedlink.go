@@ -16,16 +16,16 @@ type AttachTypedLinkHeaders struct {
 }
 
 type AttachTypedLinkRequestBodySourceObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachTypedLinkRequestBodyTargetObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachTypedLinkRequestBodyTypedLinkFacet struct {
-	SchemaArn     *string `json:"SchemaArn"`
-	TypedLinkName *string `json:"TypedLinkName"`
+	SchemaArn     *string `json:"SchemaArn,omitempty"`
+	TypedLinkName *string `json:"TypedLinkName,omitempty"`
 }
 
 type AttachTypedLinkRequestBody struct {

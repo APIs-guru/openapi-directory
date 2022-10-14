@@ -1,13 +1,13 @@
 package shared
 
 type ProductStatusDataQualityIssue struct {
-	Destination        *string `json:"destination"`
-	Detail             *string `json:"detail"`
-	FetchStatus        *string `json:"fetchStatus"`
-	ID                 *string `json:"id"`
-	Location           *string `json:"location"`
-	Severity           *string `json:"severity"`
-	Timestamp          *string `json:"timestamp"`
-	ValueOnLandingPage *string `json:"valueOnLandingPage"`
-	ValueProvided      *string `json:"valueProvided"`
+	Destination        *string `json:"destination,omitempty"`
+	Detail             *string `json:"detail,omitempty"`
+	FetchStatus        *string `json:"fetchStatus,omitempty"`
+	ID                 *string `json:"id,omitempty"`
+	Location           *string `json:"location,omitempty"`
+	Severity           *string `json:"severity,omitempty"`
+	Timestamp          *string `json:"timestamp,omitempty"`
+	ValueOnLandingPage *string `json:"valueOnLandingPage,omitempty"`
+	ValueProvided      *string `json:"valueProvided,omitempty"`
 }

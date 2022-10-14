@@ -8,9 +8,9 @@ const (
 )
 
 type NodeInheritedPropertiesPropertiesHierarchy struct {
-	ID    *string                                            `json:"id"`
+	ID    *string                                            `json:"id,omitempty"`
 	Kind  NodeInheritedPropertiesPropertiesHierarchyKindEnum `json:"kind"`
-	Name  *string                                            `json:"name"`
+	Name  *string                                            `json:"name,omitempty"`
 	Value string                                             `json:"value"`
 }
 
@@ -23,10 +23,10 @@ const (
 )
 
 type NodeInheritedPropertiesProperties struct {
-	Hierarchy []NodeInheritedPropertiesPropertiesHierarchy   `json:"hierarchy"`
+	Hierarchy []NodeInheritedPropertiesPropertiesHierarchy   `json:"hierarchy,omitempty"`
 	Name      string                                         `json:"name"`
-	Origval   *interface{}                                   `json:"origval"`
-	Provider  *NodeInheritedPropertiesPropertiesProviderEnum `json:"provider"`
+	Origval   *interface{}                                   `json:"origval,omitempty"`
+	Provider  *NodeInheritedPropertiesPropertiesProviderEnum `json:"provider,omitempty"`
 	Value     interface{}                                    `json:"value"`
 }
 

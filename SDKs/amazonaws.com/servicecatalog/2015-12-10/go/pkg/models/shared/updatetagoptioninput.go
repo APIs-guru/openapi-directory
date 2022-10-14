@@ -1,7 +1,7 @@
 package shared
 
 type UpdateTagOptionInput struct {
-	Active *bool   `json:"Active"`
+	Active *bool   `json:"Active,omitempty"`
 	ID     string  `json:"Id"`
-	Value  *string `json:"Value"`
+	Value  *string `json:"Value,omitempty"`
 }

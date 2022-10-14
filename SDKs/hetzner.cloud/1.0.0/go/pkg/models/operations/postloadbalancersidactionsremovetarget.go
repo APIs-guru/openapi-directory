@@ -25,9 +25,9 @@ const (
 )
 
 type PostLoadBalancersIDActionsRemoveTargetRequestBodyRemoveTargetRequest struct {
-	IP            *PostLoadBalancersIDActionsRemoveTargetRequestBodyIP            `json:"ip"`
-	LabelSelector *PostLoadBalancersIDActionsRemoveTargetRequestBodyLabelSelector `json:"label_selector"`
-	Server        *PostLoadBalancersIDActionsRemoveTargetRequestBodyServer        `json:"server"`
+	IP            *PostLoadBalancersIDActionsRemoveTargetRequestBodyIP            `json:"ip,omitempty"`
+	LabelSelector *PostLoadBalancersIDActionsRemoveTargetRequestBodyLabelSelector `json:"label_selector,omitempty"`
+	Server        *PostLoadBalancersIDActionsRemoveTargetRequestBodyServer        `json:"server,omitempty"`
 	Type          PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum       `json:"type"`
 }
 

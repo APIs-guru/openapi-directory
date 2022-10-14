@@ -1,8 +1,8 @@
 package shared
 
 type Table struct {
-	ColumnHeaders *Headers `json:"columnHeaders"`
-	Name          *string  `json:"name"`
-	RowHeaders    *Headers `json:"rowHeaders"`
-	Rows          []Row    `json:"rows"`
+	ColumnHeaders *Headers `json:"columnHeaders,omitempty"`
+	Name          *string  `json:"name,omitempty"`
+	RowHeaders    *Headers `json:"rowHeaders,omitempty"`
+	Rows          []Row    `json:"rows,omitempty"`
 }

@@ -16,7 +16,7 @@ type UpdateDistributionConfigurationHeaders struct {
 
 type UpdateDistributionConfigurationRequestBody struct {
 	ClientToken                  string                `json:"clientToken"`
-	Description                  *string               `json:"description"`
+	Description                  *string               `json:"description,omitempty"`
 	DistributionConfigurationArn string                `json:"distributionConfigurationArn"`
 	Distributions                []shared.Distribution `json:"distributions"`
 }

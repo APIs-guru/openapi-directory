@@ -1,5 +1,5 @@
 package shared
 
 type GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest struct {
-	Customer *string `json:"customer"`
+	Customer *string `json:"customer,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GooglePrivacyDlpV2PartitionID struct {
-	NamespaceID *string `json:"namespaceId"`
-	ProjectID   *string `json:"projectId"`
+	NamespaceID *string `json:"namespaceId,omitempty"`
+	ProjectID   *string `json:"projectId,omitempty"`
 }

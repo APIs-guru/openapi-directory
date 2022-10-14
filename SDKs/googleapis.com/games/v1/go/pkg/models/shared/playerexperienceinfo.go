@@ -1,9 +1,9 @@
 package shared
 
 type PlayerExperienceInfo struct {
-	CurrentExperiencePoints    *string      `json:"currentExperiencePoints"`
-	CurrentLevel               *PlayerLevel `json:"currentLevel"`
-	Kind                       *string      `json:"kind"`
-	LastLevelUpTimestampMillis *string      `json:"lastLevelUpTimestampMillis"`
-	NextLevel                  *PlayerLevel `json:"nextLevel"`
+	CurrentExperiencePoints    *string      `json:"currentExperiencePoints,omitempty"`
+	CurrentLevel               *PlayerLevel `json:"currentLevel,omitempty"`
+	Kind                       *string      `json:"kind,omitempty"`
+	LastLevelUpTimestampMillis *string      `json:"lastLevelUpTimestampMillis,omitempty"`
+	NextLevel                  *PlayerLevel `json:"nextLevel,omitempty"`
 }

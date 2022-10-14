@@ -13,6 +13,6 @@ const (
 
 type Email struct {
 	Email string         `json:"email"`
-	ID    *string        `json:"id"`
-	Type  *EmailTypeEnum `json:"type"`
+	ID    *string        `json:"id,omitempty"`
+	Type  *EmailTypeEnum `json:"type,omitempty"`
 }

@@ -26,15 +26,15 @@ const (
 type UpdateTransaction struct {
 	AccountID       string                          `json:"account_id"`
 	Amount          int64                           `json:"amount"`
-	Approved        *bool                           `json:"approved"`
-	CategoryID      *string                         `json:"category_id"`
-	Cleared         *UpdateTransactionClearedEnum   `json:"cleared"`
+	Approved        *bool                           `json:"approved,omitempty"`
+	CategoryID      *string                         `json:"category_id,omitempty"`
+	Cleared         *UpdateTransactionClearedEnum   `json:"cleared,omitempty"`
 	Date            time.Time                       `json:"date"`
-	FlagColor       *UpdateTransactionFlagColorEnum `json:"flag_color"`
+	FlagColor       *UpdateTransactionFlagColorEnum `json:"flag_color,omitempty"`
 	ID              string                          `json:"id"`
-	ImportID        *string                         `json:"import_id"`
-	Memo            *string                         `json:"memo"`
-	PayeeID         *string                         `json:"payee_id"`
-	PayeeName       *string                         `json:"payee_name"`
-	Subtransactions []SaveSubTransaction            `json:"subtransactions"`
+	ImportID        *string                         `json:"import_id,omitempty"`
+	Memo            *string                         `json:"memo,omitempty"`
+	PayeeID         *string                         `json:"payee_id,omitempty"`
+	PayeeName       *string                         `json:"payee_name,omitempty"`
+	Subtransactions []SaveSubTransaction            `json:"subtransactions,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type CommonFeatureState struct {
-	Appdevexperience *AppDevExperienceFeatureState `json:"appdevexperience"`
-	Servicemesh      *ServiceMeshFeatureState      `json:"servicemesh"`
-	State            *FeatureState                 `json:"state"`
+	Appdevexperience *AppDevExperienceFeatureState `json:"appdevexperience,omitempty"`
+	Servicemesh      *ServiceMeshFeatureState      `json:"servicemesh,omitempty"`
+	State            *FeatureState                 `json:"state,omitempty"`
 }

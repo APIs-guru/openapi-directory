@@ -5,15 +5,15 @@ import (
 )
 
 type CaCertificateDescription struct {
-	AutoRegistrationStatus *AutoRegistrationStatusEnum `json:"autoRegistrationStatus"`
-	CertificateArn         *string                     `json:"certificateArn"`
-	CertificateID          *string                     `json:"certificateId"`
-	CertificatePem         *string                     `json:"certificatePem"`
-	CreationDate           *time.Time                  `json:"creationDate"`
-	CustomerVersion        *int64                      `json:"customerVersion"`
-	GenerationID           *string                     `json:"generationId"`
-	LastModifiedDate       *time.Time                  `json:"lastModifiedDate"`
-	OwnedBy                *string                     `json:"ownedBy"`
-	Status                 *CaCertificateStatusEnum    `json:"status"`
-	Validity               *CertificateValidity        `json:"validity"`
+	AutoRegistrationStatus *AutoRegistrationStatusEnum `json:"autoRegistrationStatus,omitempty"`
+	CertificateArn         *string                     `json:"certificateArn,omitempty"`
+	CertificateID          *string                     `json:"certificateId,omitempty"`
+	CertificatePem         *string                     `json:"certificatePem,omitempty"`
+	CreationDate           *time.Time                  `json:"creationDate,omitempty"`
+	CustomerVersion        *int64                      `json:"customerVersion,omitempty"`
+	GenerationID           *string                     `json:"generationId,omitempty"`
+	LastModifiedDate       *time.Time                  `json:"lastModifiedDate,omitempty"`
+	OwnedBy                *string                     `json:"ownedBy,omitempty"`
+	Status                 *CaCertificateStatusEnum    `json:"status,omitempty"`
+	Validity               *CertificateValidity        `json:"validity,omitempty"`
 }

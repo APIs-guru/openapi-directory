@@ -5,7 +5,7 @@ import (
 )
 
 type PicoChargingHistoryData struct {
-	Duration   *int32     `json:"Duration"`
-	EnergyUsed *float64   `json:"EnergyUsed"`
-	StartTime  *time.Time `json:"StartTime"`
+	Duration   *int32     `json:"Duration,omitempty"`
+	EnergyUsed *float64   `json:"EnergyUsed,omitempty"`
+	StartTime  *time.Time `json:"StartTime,omitempty"`
 }

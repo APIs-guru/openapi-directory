@@ -11,8 +11,8 @@ const (
 )
 
 type Invitation struct {
-	Name           *string             `json:"name"`
-	Role           *InvitationRoleEnum `json:"role"`
-	TargetAccount  *Account            `json:"targetAccount"`
-	TargetLocation *TargetLocation     `json:"targetLocation"`
+	Name           *string             `json:"name,omitempty"`
+	Role           *InvitationRoleEnum `json:"role,omitempty"`
+	TargetAccount  *Account            `json:"targetAccount,omitempty"`
+	TargetLocation *TargetLocation     `json:"targetLocation,omitempty"`
 }

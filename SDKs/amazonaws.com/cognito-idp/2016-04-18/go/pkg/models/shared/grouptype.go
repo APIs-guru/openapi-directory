@@ -5,11 +5,11 @@ import (
 )
 
 type GroupType struct {
-	CreationDate     *time.Time `json:"CreationDate"`
-	Description      *string    `json:"Description"`
-	GroupName        *string    `json:"GroupName"`
-	LastModifiedDate *time.Time `json:"LastModifiedDate"`
-	Precedence       *int64     `json:"Precedence"`
-	RoleArn          *string    `json:"RoleArn"`
-	UserPoolID       *string    `json:"UserPoolId"`
+	CreationDate     *time.Time `json:"CreationDate,omitempty"`
+	Description      *string    `json:"Description,omitempty"`
+	GroupName        *string    `json:"GroupName,omitempty"`
+	LastModifiedDate *time.Time `json:"LastModifiedDate,omitempty"`
+	Precedence       *int64     `json:"Precedence,omitempty"`
+	RoleArn          *string    `json:"RoleArn,omitempty"`
+	UserPoolID       *string    `json:"UserPoolId,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type ZypperSettings struct {
-	Categories       []string `json:"categories"`
-	Excludes         []string `json:"excludes"`
-	ExclusivePatches []string `json:"exclusivePatches"`
-	Severities       []string `json:"severities"`
-	WithOptional     *bool    `json:"withOptional"`
-	WithUpdate       *bool    `json:"withUpdate"`
+	Categories       []string `json:"categories,omitempty"`
+	Excludes         []string `json:"excludes,omitempty"`
+	ExclusivePatches []string `json:"exclusivePatches,omitempty"`
+	Severities       []string `json:"severities,omitempty"`
+	WithOptional     *bool    `json:"withOptional,omitempty"`
+	WithUpdate       *bool    `json:"withUpdate,omitempty"`
 }

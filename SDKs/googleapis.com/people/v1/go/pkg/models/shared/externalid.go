@@ -1,8 +1,8 @@
 package shared
 
 type ExternalID struct {
-	FormattedType *string        `json:"formattedType"`
-	Metadata      *FieldMetadata `json:"metadata"`
-	Type          *string        `json:"type"`
-	Value         *string        `json:"value"`
+	FormattedType *string        `json:"formattedType,omitempty"`
+	Metadata      *FieldMetadata `json:"metadata,omitempty"`
+	Type          *string        `json:"type,omitempty"`
+	Value         *string        `json:"value,omitempty"`
 }

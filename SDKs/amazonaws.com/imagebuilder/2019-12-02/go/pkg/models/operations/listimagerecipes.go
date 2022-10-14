@@ -28,10 +28,10 @@ const (
 )
 
 type ListImageRecipesRequestBody struct {
-	Filters    []shared.Filter                       `json:"filters"`
-	MaxResults *int64                                `json:"maxResults"`
-	NextToken  *string                               `json:"nextToken"`
-	Owner      *ListImageRecipesRequestBodyOwnerEnum `json:"owner"`
+	Filters    []shared.Filter                       `json:"filters,omitempty"`
+	MaxResults *int64                                `json:"maxResults,omitempty"`
+	NextToken  *string                               `json:"nextToken,omitempty"`
+	Owner      *ListImageRecipesRequestBodyOwnerEnum `json:"owner,omitempty"`
 }
 
 type ListImageRecipesRequest struct {

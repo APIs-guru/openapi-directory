@@ -1,8 +1,8 @@
 package shared
 
 type GetRetainedMessageResponse struct {
-	LastModifiedTime *int64  `json:"lastModifiedTime"`
-	Payload          *string `json:"payload"`
-	Qos              *int64  `json:"qos"`
-	Topic            *string `json:"topic"`
+	LastModifiedTime *int64  `json:"lastModifiedTime,omitempty"`
+	Payload          *string `json:"payload,omitempty"`
+	Qos              *int64  `json:"qos,omitempty"`
+	Topic            *string `json:"topic,omitempty"`
 }

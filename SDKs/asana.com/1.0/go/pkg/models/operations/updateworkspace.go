@@ -14,7 +14,7 @@ type UpdateWorkspaceQueryParams struct {
 }
 
 type UpdateWorkspaceRequestBody struct {
-	Data *shared.WorkspaceRequest `json:"data"`
+	Data *shared.WorkspaceRequest `json:"data,omitempty"`
 }
 
 type UpdateWorkspaceRequest struct {
@@ -24,7 +24,7 @@ type UpdateWorkspaceRequest struct {
 }
 
 type UpdateWorkspace200ApplicationJSON struct {
-	Data *shared.WorkspaceResponse `json:"data"`
+	Data *shared.WorkspaceResponse `json:"data,omitempty"`
 }
 
 type UpdateWorkspaceResponse struct {

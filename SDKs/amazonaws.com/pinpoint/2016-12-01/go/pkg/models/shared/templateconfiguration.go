@@ -1,8 +1,8 @@
 package shared
 
 type TemplateConfiguration struct {
-	EmailTemplate *Template `json:"EmailTemplate"`
-	PushTemplate  *Template `json:"PushTemplate"`
-	SmsTemplate   *Template `json:"SMSTemplate"`
-	VoiceTemplate *Template `json:"VoiceTemplate"`
+	EmailTemplate *Template `json:"EmailTemplate,omitempty"`
+	PushTemplate  *Template `json:"PushTemplate,omitempty"`
+	SmsTemplate   *Template `json:"SMSTemplate,omitempty"`
+	VoiceTemplate *Template `json:"VoiceTemplate,omitempty"`
 }

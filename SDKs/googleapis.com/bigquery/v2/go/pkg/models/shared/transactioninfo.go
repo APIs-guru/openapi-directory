@@ -1,5 +1,5 @@
 package shared
 
 type TransactionInfo struct {
-	TransactionID *string `json:"transactionId"`
+	TransactionID *string `json:"transactionId,omitempty"`
 }

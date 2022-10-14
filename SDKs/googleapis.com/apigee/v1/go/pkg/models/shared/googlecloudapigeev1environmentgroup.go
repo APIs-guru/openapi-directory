@@ -11,9 +11,9 @@ const (
 )
 
 type GoogleCloudApigeeV1EnvironmentGroup struct {
-	CreatedAt      *string                                       `json:"createdAt"`
-	Hostnames      []string                                      `json:"hostnames"`
-	LastModifiedAt *string                                       `json:"lastModifiedAt"`
-	Name           *string                                       `json:"name"`
-	State          *GoogleCloudApigeeV1EnvironmentGroupStateEnum `json:"state"`
+	CreatedAt      *string                                       `json:"createdAt,omitempty"`
+	Hostnames      []string                                      `json:"hostnames,omitempty"`
+	LastModifiedAt *string                                       `json:"lastModifiedAt,omitempty"`
+	Name           *string                                       `json:"name,omitempty"`
+	State          *GoogleCloudApigeeV1EnvironmentGroupStateEnum `json:"state,omitempty"`
 }

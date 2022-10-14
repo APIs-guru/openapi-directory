@@ -1,6 +1,6 @@
 package shared
 
 type PatchServiceAccountRequest struct {
-	ServiceAccount *ServiceAccount `json:"serviceAccount"`
-	UpdateMask     *string         `json:"updateMask"`
+	ServiceAccount *ServiceAccount `json:"serviceAccount,omitempty"`
+	UpdateMask     *string         `json:"updateMask,omitempty"`
 }

@@ -5,18 +5,18 @@ import (
 )
 
 type Provider struct {
-	Account      *string                `json:"account"`
-	AdminContact *string                `json:"admin_contact"`
-	Asn          *int64                 `json:"asn"`
-	CircuitCount *int64                 `json:"circuit_count"`
-	Comments     *string                `json:"comments"`
-	Created      *time.Time             `json:"created"`
-	CustomFields map[string]interface{} `json:"custom_fields"`
-	ID           *int64                 `json:"id"`
-	LastUpdated  *time.Time             `json:"last_updated"`
+	Account      *string                `json:"account,omitempty"`
+	AdminContact *string                `json:"admin_contact,omitempty"`
+	Asn          *int64                 `json:"asn,omitempty"`
+	CircuitCount *int64                 `json:"circuit_count,omitempty"`
+	Comments     *string                `json:"comments,omitempty"`
+	Created      *time.Time             `json:"created,omitempty"`
+	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
+	ID           *int64                 `json:"id,omitempty"`
+	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Name         string                 `json:"name"`
-	NocContact   *string                `json:"noc_contact"`
-	PortalURL    *string                `json:"portal_url"`
+	NocContact   *string                `json:"noc_contact,omitempty"`
+	PortalURL    *string                `json:"portal_url,omitempty"`
 	Slug         string                 `json:"slug"`
-	Tags         []string               `json:"tags"`
+	Tags         []string               `json:"tags,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GetLoadBalancersResult struct {
-	LoadBalancers []LoadBalancer `json:"loadBalancers"`
-	NextPageToken *string        `json:"nextPageToken"`
+	LoadBalancers []LoadBalancer `json:"loadBalancers,omitempty"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
 }

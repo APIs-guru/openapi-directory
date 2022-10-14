@@ -1,5 +1,5 @@
 package shared
 
 type CreateUserPoolResponse struct {
-	UserPool *UserPoolType `json:"UserPool"`
+	UserPool *UserPoolType `json:"UserPool,omitempty"`
 }

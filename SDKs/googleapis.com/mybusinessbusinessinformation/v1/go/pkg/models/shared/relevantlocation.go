@@ -9,6 +9,6 @@ const (
 )
 
 type RelevantLocation struct {
-	PlaceID      *string                           `json:"placeId"`
-	RelationType *RelevantLocationRelationTypeEnum `json:"relationType"`
+	PlaceID      *string                           `json:"placeId,omitempty"`
+	RelationType *RelevantLocationRelationTypeEnum `json:"relationType,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type CreateContainerServiceResult struct {
-	ContainerService *ContainerService `json:"containerService"`
+	ContainerService *ContainerService `json:"containerService,omitempty"`
 }

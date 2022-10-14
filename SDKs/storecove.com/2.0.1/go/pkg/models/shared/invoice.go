@@ -31,7 +31,7 @@ const (
 )
 
 type InvoicePaymentTermsThePaymentTerms struct {
-	Note *string `json:"note"`
+	Note *string `json:"note,omitempty"`
 }
 
 type InvoiceTaxExemptReasonEnum string
@@ -54,38 +54,38 @@ const (
 )
 
 type Invoice struct {
-	AccountingCost            *string                                      `json:"accountingCost"`
+	AccountingCost            *string                                      `json:"accountingCost,omitempty"`
 	AccountingCustomerParty   AccountingCustomerParty                      `json:"accountingCustomerParty"`
-	AccountingSupplierParty   *AccountingSupplierParty                     `json:"accountingSupplierParty"`
-	AllowanceCharges          []AllowanceCharge                            `json:"allowanceCharges"`
+	AccountingSupplierParty   *AccountingSupplierParty                     `json:"accountingSupplierParty,omitempty"`
+	AllowanceCharges          []AllowanceCharge                            `json:"allowanceCharges,omitempty"`
 	AmountIncludingVat        float64                                      `json:"amountIncludingVat"`
-	BillingReference          *string                                      `json:"billingReference"`
-	BuyerReference            *string                                      `json:"buyerReference"`
-	ConsumerTaxMode           *bool                                        `json:"consumerTaxMode"`
-	ContractDocumentReference *string                                      `json:"contractDocumentReference"`
-	Delivery                  *Delivery                                    `json:"delivery"`
-	DocumentCurrencyCode      *CurrencyCodeEnum                            `json:"documentCurrencyCode"`
-	DueDate                   *string                                      `json:"dueDate"`
+	BillingReference          *string                                      `json:"billingReference,omitempty"`
+	BuyerReference            *string                                      `json:"buyerReference,omitempty"`
+	ConsumerTaxMode           *bool                                        `json:"consumerTaxMode,omitempty"`
+	ContractDocumentReference *string                                      `json:"contractDocumentReference,omitempty"`
+	Delivery                  *Delivery                                    `json:"delivery,omitempty"`
+	DocumentCurrencyCode      *CurrencyCodeEnum                            `json:"documentCurrencyCode,omitempty"`
+	DueDate                   *string                                      `json:"dueDate,omitempty"`
 	InvoiceLines              []InvoiceLine                                `json:"invoiceLines"`
 	InvoiceNumber             string                                       `json:"invoiceNumber"`
-	InvoicePeriod             *string                                      `json:"invoicePeriod"`
-	InvoiceType               *InvoiceInvoiceTypeTypeOfInvoiceEnum         `json:"invoiceType"`
+	InvoicePeriod             *string                                      `json:"invoicePeriod,omitempty"`
+	InvoiceType               *InvoiceInvoiceTypeTypeOfInvoiceEnum         `json:"invoiceType,omitempty"`
 	IssueDate                 string                                       `json:"issueDate"`
-	Note                      *string                                      `json:"note"`
-	OrderReference            *string                                      `json:"orderReference"`
-	PaymentMeansArray         []PaymentMeans                               `json:"paymentMeansArray"`
-	PaymentMeansBic           *string                                      `json:"paymentMeansBic"`
-	PaymentMeansCode          *InvoicePaymentMeansCodePaymentMeansCodeEnum `json:"paymentMeansCode"`
-	PaymentMeansIban          *string                                      `json:"paymentMeansIban"`
-	PaymentMeansPaymentID     *string                                      `json:"paymentMeansPaymentId"`
-	PaymentTerms              *InvoicePaymentTermsThePaymentTerms          `json:"paymentTerms"`
-	PrepaidAmount             *float64                                     `json:"prepaidAmount"`
-	ProjectReference          *string                                      `json:"projectReference"`
-	SalesOrderID              *string                                      `json:"salesOrderId"`
-	TaxExemptReason           *InvoiceTaxExemptReasonEnum                  `json:"taxExemptReason"`
-	TaxPointDate              *string                                      `json:"taxPointDate"`
-	TaxSubtotals              []TaxSubtotal                                `json:"taxSubtotals"`
-	TaxSystem                 *InvoiceTaxSystemTaxSystemEnum               `json:"taxSystem"`
-	UblExtensions             []string                                     `json:"ublExtensions"`
-	VatReverseCharge          *bool                                        `json:"vatReverseCharge"`
+	Note                      *string                                      `json:"note,omitempty"`
+	OrderReference            *string                                      `json:"orderReference,omitempty"`
+	PaymentMeansArray         []PaymentMeans                               `json:"paymentMeansArray,omitempty"`
+	PaymentMeansBic           *string                                      `json:"paymentMeansBic,omitempty"`
+	PaymentMeansCode          *InvoicePaymentMeansCodePaymentMeansCodeEnum `json:"paymentMeansCode,omitempty"`
+	PaymentMeansIban          *string                                      `json:"paymentMeansIban,omitempty"`
+	PaymentMeansPaymentID     *string                                      `json:"paymentMeansPaymentId,omitempty"`
+	PaymentTerms              *InvoicePaymentTermsThePaymentTerms          `json:"paymentTerms,omitempty"`
+	PrepaidAmount             *float64                                     `json:"prepaidAmount,omitempty"`
+	ProjectReference          *string                                      `json:"projectReference,omitempty"`
+	SalesOrderID              *string                                      `json:"salesOrderId,omitempty"`
+	TaxExemptReason           *InvoiceTaxExemptReasonEnum                  `json:"taxExemptReason,omitempty"`
+	TaxPointDate              *string                                      `json:"taxPointDate,omitempty"`
+	TaxSubtotals              []TaxSubtotal                                `json:"taxSubtotals,omitempty"`
+	TaxSystem                 *InvoiceTaxSystemTaxSystemEnum               `json:"taxSystem,omitempty"`
+	UblExtensions             []string                                     `json:"ublExtensions,omitempty"`
+	VatReverseCharge          *bool                                        `json:"vatReverseCharge,omitempty"`
 }

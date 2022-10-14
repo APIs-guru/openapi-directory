@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig struct {
-	ClientID     *string                                             `json:"clientId"`
-	ClientSecret *string                                             `json:"clientSecret"`
-	DisplayName  *string                                             `json:"displayName"`
-	Enabled      *bool                                               `json:"enabled"`
-	Issuer       *string                                             `json:"issuer"`
-	Name         *string                                             `json:"name"`
-	ResponseType *GoogleCloudIdentitytoolkitAdminV2OAuthResponseType `json:"responseType"`
+	ClientID     *string                                             `json:"clientId,omitempty"`
+	ClientSecret *string                                             `json:"clientSecret,omitempty"`
+	DisplayName  *string                                             `json:"displayName,omitempty"`
+	Enabled      *bool                                               `json:"enabled,omitempty"`
+	Issuer       *string                                             `json:"issuer,omitempty"`
+	Name         *string                                             `json:"name,omitempty"`
+	ResponseType *GoogleCloudIdentitytoolkitAdminV2OAuthResponseType `json:"responseType,omitempty"`
 }

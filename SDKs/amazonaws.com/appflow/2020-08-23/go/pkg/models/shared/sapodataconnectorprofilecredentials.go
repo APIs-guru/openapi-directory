@@ -1,6 +1,6 @@
 package shared
 
 type SapoDataConnectorProfileCredentials struct {
-	BasicAuthCredentials *BasicAuthCredentials `json:"basicAuthCredentials"`
-	OAuthCredentials     *OAuthCredentials     `json:"oAuthCredentials"`
+	BasicAuthCredentials *BasicAuthCredentials `json:"basicAuthCredentials,omitempty"`
+	OAuthCredentials     *OAuthCredentials     `json:"oAuthCredentials,omitempty"`
 }

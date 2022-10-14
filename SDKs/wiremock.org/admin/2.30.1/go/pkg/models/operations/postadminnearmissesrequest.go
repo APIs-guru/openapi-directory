@@ -1,12 +1,12 @@
 package operations
 
 type PostAdminNearMissesRequestRequestBody struct {
-	AbsoluteURL *string                `json:"absoluteUrl"`
-	Body        *string                `json:"body"`
-	Cookies     map[string]interface{} `json:"cookies"`
-	Headers     map[string]interface{} `json:"headers"`
-	Method      *string                `json:"method"`
-	URL         *string                `json:"url"`
+	AbsoluteURL *string                `json:"absoluteUrl,omitempty"`
+	Body        *string                `json:"body,omitempty"`
+	Cookies     map[string]interface{} `json:"cookies,omitempty"`
+	Headers     map[string]interface{} `json:"headers,omitempty"`
+	Method      *string                `json:"method,omitempty"`
+	URL         *string                `json:"url,omitempty"`
 }
 
 type PostAdminNearMissesRequestRequest struct {
@@ -14,16 +14,16 @@ type PostAdminNearMissesRequestRequest struct {
 }
 
 type PostAdminNearMissesRequest200ApplicationJSONNearMisses struct {
-	AbsoluteURL *string                `json:"absoluteUrl"`
-	Body        *string                `json:"body"`
-	Cookies     map[string]interface{} `json:"cookies"`
-	Headers     map[string]interface{} `json:"headers"`
-	Method      *string                `json:"method"`
-	URL         *string                `json:"url"`
+	AbsoluteURL *string                `json:"absoluteUrl,omitempty"`
+	Body        *string                `json:"body,omitempty"`
+	Cookies     map[string]interface{} `json:"cookies,omitempty"`
+	Headers     map[string]interface{} `json:"headers,omitempty"`
+	Method      *string                `json:"method,omitempty"`
+	URL         *string                `json:"url,omitempty"`
 }
 
 type PostAdminNearMissesRequest200ApplicationJSON struct {
-	NearMisses []PostAdminNearMissesRequest200ApplicationJSONNearMisses `json:"nearMisses"`
+	NearMisses []PostAdminNearMissesRequest200ApplicationJSONNearMisses `json:"nearMisses,omitempty"`
 }
 
 type PostAdminNearMissesRequestResponse struct {

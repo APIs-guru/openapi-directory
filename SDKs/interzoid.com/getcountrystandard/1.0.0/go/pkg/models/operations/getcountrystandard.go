@@ -10,9 +10,9 @@ type GetcountrystandardRequest struct {
 }
 
 type Getcountrystandard200ApplicationJSON struct {
-	Code            *string `json:"Code"`
-	CountryStandard *string `json:"CountryStandard"`
-	Credits         *string `json:"Credits"`
+	Code            *string `json:"Code,omitempty"`
+	CountryStandard *string `json:"CountryStandard,omitempty"`
+	Credits         *string `json:"Credits,omitempty"`
 }
 
 type GetcountrystandardResponse struct {

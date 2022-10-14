@@ -9,9 +9,9 @@ const (
 )
 
 type PlaylistItem struct {
-	AddedAtMs *int64                `json:"added_at_ms"`
-	Data      *interface{}          `json:"data"`
-	ID        *int64                `json:"id"`
-	Notes     *string               `json:"notes"`
-	Type      *PlaylistItemTypeEnum `json:"type"`
+	AddedAtMs *int64                `json:"added_at_ms,omitempty"`
+	Data      *interface{}          `json:"data,omitempty"`
+	ID        *int64                `json:"id,omitempty"`
+	Notes     *string               `json:"notes,omitempty"`
+	Type      *PlaylistItemTypeEnum `json:"type,omitempty"`
 }

@@ -11,18 +11,18 @@ type GetSchemaRequest struct {
 }
 
 type GetSchema200ApplicationJSONSchema struct {
-	APIVersion *string `json:"apiVersion"`
-	CreatedAt  *string `json:"createdAt"`
-	CreatedBy  *string `json:"createdBy"`
-	ID         *string `json:"id"`
-	Language   *string `json:"language"`
-	Type       *string `json:"type"`
-	UpdateBy   *string `json:"updateBy"`
-	UpdatedAt  *string `json:"updatedAt"`
+	APIVersion *string `json:"apiVersion,omitempty"`
+	CreatedAt  *string `json:"createdAt,omitempty"`
+	CreatedBy  *string `json:"createdBy,omitempty"`
+	ID         *string `json:"id,omitempty"`
+	Language   *string `json:"language,omitempty"`
+	Type       *string `json:"type,omitempty"`
+	UpdateBy   *string `json:"updateBy,omitempty"`
+	UpdatedAt  *string `json:"updatedAt,omitempty"`
 }
 
 type GetSchema200ApplicationJSON struct {
-	Schema *GetSchema200ApplicationJSONSchema `json:"schema"`
+	Schema *GetSchema200ApplicationJSONSchema `json:"schema,omitempty"`
 }
 
 type GetSchemaResponse struct {

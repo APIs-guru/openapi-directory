@@ -1,9 +1,9 @@
 package shared
 
 type ListResultPaymentLink struct {
-	Count         *int32        `json:"Count"`
-	ErrorMessages []IErrorInfo  `json:"ErrorMessages"`
-	IsFaulted     *bool         `json:"IsFaulted"`
-	Result        []PaymentLink `json:"Result"`
-	TotalCount    *int32        `json:"TotalCount"`
+	Count         *int32        `json:"Count,omitempty"`
+	ErrorMessages []IErrorInfo  `json:"ErrorMessages,omitempty"`
+	IsFaulted     *bool         `json:"IsFaulted,omitempty"`
+	Result        []PaymentLink `json:"Result,omitempty"`
+	TotalCount    *int32        `json:"TotalCount,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListCoursesResponse struct {
-	Courses       []Course `json:"courses"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Courses       []Course `json:"courses,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

@@ -17,14 +17,14 @@ const (
 )
 
 type TestExecution struct {
-	Environment       *Environment            `json:"environment"`
-	ID                *string                 `json:"id"`
-	MatrixID          *string                 `json:"matrixId"`
-	ProjectID         *string                 `json:"projectId"`
-	Shard             *Shard                  `json:"shard"`
-	State             *TestExecutionStateEnum `json:"state"`
-	TestDetails       *TestDetails            `json:"testDetails"`
-	TestSpecification *TestSpecification      `json:"testSpecification"`
-	Timestamp         *string                 `json:"timestamp"`
-	ToolResultsStep   *ToolResultsStep        `json:"toolResultsStep"`
+	Environment       *Environment            `json:"environment,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
+	MatrixID          *string                 `json:"matrixId,omitempty"`
+	ProjectID         *string                 `json:"projectId,omitempty"`
+	Shard             *Shard                  `json:"shard,omitempty"`
+	State             *TestExecutionStateEnum `json:"state,omitempty"`
+	TestDetails       *TestDetails            `json:"testDetails,omitempty"`
+	TestSpecification *TestSpecification      `json:"testSpecification,omitempty"`
+	Timestamp         *string                 `json:"timestamp,omitempty"`
+	ToolResultsStep   *ToolResultsStep        `json:"toolResultsStep,omitempty"`
 }

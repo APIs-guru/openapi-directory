@@ -1,6 +1,6 @@
 package shared
 
 type CreateNamedRangeRequest struct {
-	Name  *string `json:"name"`
-	Range *Range  `json:"range"`
+	Name  *string `json:"name,omitempty"`
+	Range *Range  `json:"range,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ByoipCidr struct {
-	Cidr   *string             `json:"Cidr"`
-	Events []ByoipCidrEvent    `json:"Events"`
-	State  *ByoipCidrStateEnum `json:"State"`
+	Cidr   *string             `json:"Cidr,omitempty"`
+	Events []ByoipCidrEvent    `json:"Events,omitempty"`
+	State  *ByoipCidrStateEnum `json:"State,omitempty"`
 }

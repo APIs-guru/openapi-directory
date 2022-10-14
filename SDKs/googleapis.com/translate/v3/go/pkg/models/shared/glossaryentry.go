@@ -1,8 +1,8 @@
 package shared
 
 type GlossaryEntry struct {
-	Description *string            `json:"description"`
-	Name        *string            `json:"name"`
-	TermsPair   *GlossaryTermsPair `json:"termsPair"`
-	TermsSet    *GlossaryTermsSet  `json:"termsSet"`
+	Description *string            `json:"description,omitempty"`
+	Name        *string            `json:"name,omitempty"`
+	TermsPair   *GlossaryTermsPair `json:"termsPair,omitempty"`
+	TermsSet    *GlossaryTermsSet  `json:"termsSet,omitempty"`
 }

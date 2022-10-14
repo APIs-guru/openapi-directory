@@ -1,6 +1,6 @@
 package shared
 
 type AwsRedshiftClusterClusterSecurityGroup struct {
-	ClusterSecurityGroupName *string `json:"ClusterSecurityGroupName"`
-	Status                   *string `json:"Status"`
+	ClusterSecurityGroupName *string `json:"ClusterSecurityGroupName,omitempty"`
+	Status                   *string `json:"Status,omitempty"`
 }

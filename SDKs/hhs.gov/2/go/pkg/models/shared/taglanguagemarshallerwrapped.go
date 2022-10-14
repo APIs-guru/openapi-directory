@@ -1,7 +1,7 @@
 package shared
 
 type TagLanguageMarshallerWrapped struct {
-	Callback *string                 `json:"callback"`
-	Meta     *Meta                   `json:"meta"`
-	Results  []TagLanguageMarshaller `json:"results"`
+	Callback *string                 `json:"callback,omitempty"`
+	Meta     *Meta                   `json:"meta,omitempty"`
+	Results  []TagLanguageMarshaller `json:"results,omitempty"`
 }

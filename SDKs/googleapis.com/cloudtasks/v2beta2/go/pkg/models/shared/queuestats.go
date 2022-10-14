@@ -1,9 +1,9 @@
 package shared
 
 type QueueStats struct {
-	ConcurrentDispatchesCount  *string  `json:"concurrentDispatchesCount"`
-	EffectiveExecutionRate     *float64 `json:"effectiveExecutionRate"`
-	ExecutedLastMinuteCount    *string  `json:"executedLastMinuteCount"`
-	OldestEstimatedArrivalTime *string  `json:"oldestEstimatedArrivalTime"`
-	TasksCount                 *string  `json:"tasksCount"`
+	ConcurrentDispatchesCount  *string  `json:"concurrentDispatchesCount,omitempty"`
+	EffectiveExecutionRate     *float64 `json:"effectiveExecutionRate,omitempty"`
+	ExecutedLastMinuteCount    *string  `json:"executedLastMinuteCount,omitempty"`
+	OldestEstimatedArrivalTime *string  `json:"oldestEstimatedArrivalTime,omitempty"`
+	TasksCount                 *string  `json:"tasksCount,omitempty"`
 }

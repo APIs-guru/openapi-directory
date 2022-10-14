@@ -1,7 +1,7 @@
 package shared
 
 type DescribeWorkspaceBundlesRequest struct {
-	BundleIds []string `json:"BundleIds"`
-	NextToken *string  `json:"NextToken"`
-	Owner     *string  `json:"Owner"`
+	BundleIds []string `json:"BundleIds,omitempty"`
+	NextToken *string  `json:"NextToken,omitempty"`
+	Owner     *string  `json:"Owner,omitempty"`
 }

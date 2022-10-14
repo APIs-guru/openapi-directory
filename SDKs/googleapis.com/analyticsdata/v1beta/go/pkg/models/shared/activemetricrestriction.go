@@ -9,6 +9,6 @@ const (
 )
 
 type ActiveMetricRestriction struct {
-	MetricName            *string                                            `json:"metricName"`
-	RestrictedMetricTypes []ActiveMetricRestrictionRestrictedMetricTypesEnum `json:"restrictedMetricTypes"`
+	MetricName            *string                                            `json:"metricName,omitempty"`
+	RestrictedMetricTypes []ActiveMetricRestrictionRestrictedMetricTypesEnum `json:"restrictedMetricTypes,omitempty"`
 }

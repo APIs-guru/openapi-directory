@@ -1,9 +1,9 @@
 package shared
 
 type EmailConfigurationType struct {
-	ConfigurationSet    *string                      `json:"ConfigurationSet"`
-	EmailSendingAccount *EmailSendingAccountTypeEnum `json:"EmailSendingAccount"`
-	From                *string                      `json:"From"`
-	ReplyToEmailAddress *string                      `json:"ReplyToEmailAddress"`
-	SourceArn           *string                      `json:"SourceArn"`
+	ConfigurationSet    *string                      `json:"ConfigurationSet,omitempty"`
+	EmailSendingAccount *EmailSendingAccountTypeEnum `json:"EmailSendingAccount,omitempty"`
+	From                *string                      `json:"From,omitempty"`
+	ReplyToEmailAddress *string                      `json:"ReplyToEmailAddress,omitempty"`
+	SourceArn           *string                      `json:"SourceArn,omitempty"`
 }

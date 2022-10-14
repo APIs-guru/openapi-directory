@@ -1,6 +1,6 @@
 package shared
 
 type DescribeSourceServersResponse struct {
-	Items     []SourceServer `json:"items"`
-	NextToken *string        `json:"nextToken"`
+	Items     []SourceServer `json:"items,omitempty"`
+	NextToken *string        `json:"nextToken,omitempty"`
 }

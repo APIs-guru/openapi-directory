@@ -1,9 +1,9 @@
 package shared
 
 type AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails struct {
-	Command     []string `json:"Command"`
-	Interval    *int64   `json:"Interval"`
-	Retries     *int64   `json:"Retries"`
-	StartPeriod *int64   `json:"StartPeriod"`
-	Timeout     *int64   `json:"Timeout"`
+	Command     []string `json:"Command,omitempty"`
+	Interval    *int64   `json:"Interval,omitempty"`
+	Retries     *int64   `json:"Retries,omitempty"`
+	StartPeriod *int64   `json:"StartPeriod,omitempty"`
+	Timeout     *int64   `json:"Timeout,omitempty"`
 }

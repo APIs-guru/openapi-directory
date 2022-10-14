@@ -17,6 +17,6 @@ const (
 )
 
 type GoogleCloudMlV1AcceleratorConfig struct {
-	Count *string                                   `json:"count"`
-	Type  *GoogleCloudMlV1AcceleratorConfigTypeEnum `json:"type"`
+	Count *string                                   `json:"count,omitempty"`
+	Type  *GoogleCloudMlV1AcceleratorConfigTypeEnum `json:"type,omitempty"`
 }

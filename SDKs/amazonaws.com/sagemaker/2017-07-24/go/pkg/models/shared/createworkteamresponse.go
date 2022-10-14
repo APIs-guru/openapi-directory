@@ -1,5 +1,5 @@
 package shared
 
 type CreateWorkteamResponse struct {
-	WorkteamArn *string `json:"WorkteamArn"`
+	WorkteamArn *string `json:"WorkteamArn,omitempty"`
 }

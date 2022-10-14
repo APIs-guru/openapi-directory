@@ -1,5 +1,5 @@
 package shared
 
 type Configuration struct {
-	Enabled *bool `json:"Enabled"`
+	Enabled *bool `json:"Enabled,omitempty"`
 }

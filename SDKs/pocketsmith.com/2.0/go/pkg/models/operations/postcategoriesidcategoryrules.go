@@ -9,8 +9,8 @@ type PostCategoriesIDCategoryRulesPathParams struct {
 }
 
 type PostCategoriesIDCategoryRulesRequestBody struct {
-	ApplyToAll           *bool  `json:"apply_to_all"`
-	ApplyToUncategorised *bool  `json:"apply_to_uncategorised"`
+	ApplyToAll           *bool  `json:"apply_to_all,omitempty"`
+	ApplyToUncategorised *bool  `json:"apply_to_uncategorised,omitempty"`
 	PayeeMatches         string `json:"payee_matches"`
 }
 

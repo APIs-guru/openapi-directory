@@ -19,7 +19,7 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoTaskExecutionDetails struct {
-	TaskAttemptStats   []EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskAttemptStats      `json:"taskAttemptStats"`
-	TaskExecutionState *EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState"`
-	TaskNumber         *string                                                               `json:"taskNumber"`
+	TaskAttemptStats   []EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskAttemptStats      `json:"taskAttemptStats,omitempty"`
+	TaskExecutionState *EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState,omitempty"`
+	TaskNumber         *string                                                               `json:"taskNumber,omitempty"`
 }

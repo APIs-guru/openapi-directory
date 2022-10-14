@@ -1,5 +1,5 @@
 package shared
 
 type PushConfig struct {
-	PushEndpoint *string `json:"pushEndpoint"`
+	PushEndpoint *string `json:"pushEndpoint,omitempty"`
 }

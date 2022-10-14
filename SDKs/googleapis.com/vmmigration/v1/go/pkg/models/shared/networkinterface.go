@@ -1,8 +1,8 @@
 package shared
 
 type NetworkInterface struct {
-	ExternalIP *string `json:"externalIp"`
-	InternalIP *string `json:"internalIp"`
-	Network    *string `json:"network"`
-	Subnetwork *string `json:"subnetwork"`
+	ExternalIP *string `json:"externalIp,omitempty"`
+	InternalIP *string `json:"internalIp,omitempty"`
+	Network    *string `json:"network,omitempty"`
+	Subnetwork *string `json:"subnetwork,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudRetailV2alphaSearchRequestQueryExpansionSpec struct {
-	Condition            *GoogleCloudRetailV2alphaSearchRequestQueryExpansionSpecConditionEnum `json:"condition"`
-	PinUnexpandedResults *bool                                                                 `json:"pinUnexpandedResults"`
+	Condition            *GoogleCloudRetailV2alphaSearchRequestQueryExpansionSpecConditionEnum `json:"condition,omitempty"`
+	PinUnexpandedResults *bool                                                                 `json:"pinUnexpandedResults,omitempty"`
 }

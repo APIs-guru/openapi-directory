@@ -10,17 +10,17 @@ const (
 )
 
 type GceClusterConfig struct {
-	ConfidentialInstanceConfig *ConfidentialInstanceConfig                  `json:"confidentialInstanceConfig"`
-	InternalIPOnly             *bool                                        `json:"internalIpOnly"`
-	Metadata                   map[string]string                            `json:"metadata"`
-	NetworkURI                 *string                                      `json:"networkUri"`
-	NodeGroupAffinity          *NodeGroupAffinity                           `json:"nodeGroupAffinity"`
-	PrivateIpv6GoogleAccess    *GceClusterConfigPrivateIpv6GoogleAccessEnum `json:"privateIpv6GoogleAccess"`
-	ReservationAffinity        *ReservationAffinity                         `json:"reservationAffinity"`
-	ServiceAccount             *string                                      `json:"serviceAccount"`
-	ServiceAccountScopes       []string                                     `json:"serviceAccountScopes"`
-	ShieldedInstanceConfig     *ShieldedInstanceConfig                      `json:"shieldedInstanceConfig"`
-	SubnetworkURI              *string                                      `json:"subnetworkUri"`
-	Tags                       []string                                     `json:"tags"`
-	ZoneURI                    *string                                      `json:"zoneUri"`
+	ConfidentialInstanceConfig *ConfidentialInstanceConfig                  `json:"confidentialInstanceConfig,omitempty"`
+	InternalIPOnly             *bool                                        `json:"internalIpOnly,omitempty"`
+	Metadata                   map[string]string                            `json:"metadata,omitempty"`
+	NetworkURI                 *string                                      `json:"networkUri,omitempty"`
+	NodeGroupAffinity          *NodeGroupAffinity                           `json:"nodeGroupAffinity,omitempty"`
+	PrivateIpv6GoogleAccess    *GceClusterConfigPrivateIpv6GoogleAccessEnum `json:"privateIpv6GoogleAccess,omitempty"`
+	ReservationAffinity        *ReservationAffinity                         `json:"reservationAffinity,omitempty"`
+	ServiceAccount             *string                                      `json:"serviceAccount,omitempty"`
+	ServiceAccountScopes       []string                                     `json:"serviceAccountScopes,omitempty"`
+	ShieldedInstanceConfig     *ShieldedInstanceConfig                      `json:"shieldedInstanceConfig,omitempty"`
+	SubnetworkURI              *string                                      `json:"subnetworkUri,omitempty"`
+	Tags                       []string                                     `json:"tags,omitempty"`
+	ZoneURI                    *string                                      `json:"zoneUri,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type TimeSeriesServiceStatistics struct {
-	EdgeSummaryStatistics     *EdgeStatistics     `json:"EdgeSummaryStatistics"`
-	ResponseTimeHistogram     []HistogramEntry    `json:"ResponseTimeHistogram"`
-	ServiceForecastStatistics *ForecastStatistics `json:"ServiceForecastStatistics"`
-	ServiceSummaryStatistics  *ServiceStatistics  `json:"ServiceSummaryStatistics"`
-	Timestamp                 *time.Time          `json:"Timestamp"`
+	EdgeSummaryStatistics     *EdgeStatistics     `json:"EdgeSummaryStatistics,omitempty"`
+	ResponseTimeHistogram     []HistogramEntry    `json:"ResponseTimeHistogram,omitempty"`
+	ServiceForecastStatistics *ForecastStatistics `json:"ServiceForecastStatistics,omitempty"`
+	ServiceSummaryStatistics  *ServiceStatistics  `json:"ServiceSummaryStatistics,omitempty"`
+	Timestamp                 *time.Time          `json:"Timestamp,omitempty"`
 }

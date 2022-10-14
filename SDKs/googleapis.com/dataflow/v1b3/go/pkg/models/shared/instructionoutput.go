@@ -1,10 +1,10 @@
 package shared
 
 type InstructionOutput struct {
-	Codec               map[string]interface{} `json:"codec"`
-	Name                *string                `json:"name"`
-	OnlyCountKeyBytes   *bool                  `json:"onlyCountKeyBytes"`
-	OnlyCountValueBytes *bool                  `json:"onlyCountValueBytes"`
-	OriginalName        *string                `json:"originalName"`
-	SystemName          *string                `json:"systemName"`
+	Codec               map[string]interface{} `json:"codec,omitempty"`
+	Name                *string                `json:"name,omitempty"`
+	OnlyCountKeyBytes   *bool                  `json:"onlyCountKeyBytes,omitempty"`
+	OnlyCountValueBytes *bool                  `json:"onlyCountValueBytes,omitempty"`
+	OriginalName        *string                `json:"originalName,omitempty"`
+	SystemName          *string                `json:"systemName,omitempty"`
 }

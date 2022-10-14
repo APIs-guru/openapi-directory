@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudRetailV2alphaSearchResponseQueryExpansionInfo struct {
-	ExpandedQuery     *bool   `json:"expandedQuery"`
-	PinnedResultCount *string `json:"pinnedResultCount"`
+	ExpandedQuery     *bool   `json:"expandedQuery,omitempty"`
+	PinnedResultCount *string `json:"pinnedResultCount,omitempty"`
 }

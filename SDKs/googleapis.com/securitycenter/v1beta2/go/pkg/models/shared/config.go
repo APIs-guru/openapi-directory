@@ -10,6 +10,6 @@ const (
 )
 
 type Config struct {
-	ModuleEnablementState *ConfigModuleEnablementStateEnum `json:"moduleEnablementState"`
-	Value                 map[string]interface{}           `json:"value"`
+	ModuleEnablementState *ConfigModuleEnablementStateEnum `json:"moduleEnablementState,omitempty"`
+	Value                 map[string]interface{}           `json:"value,omitempty"`
 }

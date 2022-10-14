@@ -22,17 +22,17 @@ const (
 )
 
 type SubscriptionPurchaseV2 struct {
-	AcknowledgementState       *SubscriptionPurchaseV2AcknowledgementStateEnum `json:"acknowledgementState"`
-	CanceledStateContext       *CanceledStateContext                           `json:"canceledStateContext"`
-	ExternalAccountIdentifiers *ExternalAccountIdentifiers                     `json:"externalAccountIdentifiers"`
-	Kind                       *string                                         `json:"kind"`
-	LatestOrderID              *string                                         `json:"latestOrderId"`
-	LineItems                  []SubscriptionPurchaseLineItem                  `json:"lineItems"`
-	LinkedPurchaseToken        *string                                         `json:"linkedPurchaseToken"`
-	PausedStateContext         *PausedStateContext                             `json:"pausedStateContext"`
-	RegionCode                 *string                                         `json:"regionCode"`
-	StartTime                  *string                                         `json:"startTime"`
-	SubscribeWithGoogleInfo    *SubscribeWithGoogleInfo                        `json:"subscribeWithGoogleInfo"`
-	SubscriptionState          *SubscriptionPurchaseV2SubscriptionStateEnum    `json:"subscriptionState"`
-	TestPurchase               map[string]interface{}                          `json:"testPurchase"`
+	AcknowledgementState       *SubscriptionPurchaseV2AcknowledgementStateEnum `json:"acknowledgementState,omitempty"`
+	CanceledStateContext       *CanceledStateContext                           `json:"canceledStateContext,omitempty"`
+	ExternalAccountIdentifiers *ExternalAccountIdentifiers                     `json:"externalAccountIdentifiers,omitempty"`
+	Kind                       *string                                         `json:"kind,omitempty"`
+	LatestOrderID              *string                                         `json:"latestOrderId,omitempty"`
+	LineItems                  []SubscriptionPurchaseLineItem                  `json:"lineItems,omitempty"`
+	LinkedPurchaseToken        *string                                         `json:"linkedPurchaseToken,omitempty"`
+	PausedStateContext         *PausedStateContext                             `json:"pausedStateContext,omitempty"`
+	RegionCode                 *string                                         `json:"regionCode,omitempty"`
+	StartTime                  *string                                         `json:"startTime,omitempty"`
+	SubscribeWithGoogleInfo    *SubscribeWithGoogleInfo                        `json:"subscribeWithGoogleInfo,omitempty"`
+	SubscriptionState          *SubscriptionPurchaseV2SubscriptionStateEnum    `json:"subscriptionState,omitempty"`
+	TestPurchase               map[string]interface{}                          `json:"testPurchase,omitempty"`
 }

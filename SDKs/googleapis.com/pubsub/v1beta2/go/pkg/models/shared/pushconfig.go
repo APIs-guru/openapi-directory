@@ -1,7 +1,7 @@
 package shared
 
 type PushConfig struct {
-	Attributes   map[string]string `json:"attributes"`
-	OidcToken    *OidcToken        `json:"oidcToken"`
-	PushEndpoint *string           `json:"pushEndpoint"`
+	Attributes   map[string]string `json:"attributes,omitempty"`
+	OidcToken    *OidcToken        `json:"oidcToken,omitempty"`
+	PushEndpoint *string           `json:"pushEndpoint,omitempty"`
 }

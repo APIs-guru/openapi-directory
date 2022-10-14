@@ -16,14 +16,14 @@ type CreateFunctionDefinitionHeaders struct {
 }
 
 type CreateFunctionDefinitionRequestBodyInitialVersion struct {
-	DefaultConfig *shared.FunctionDefaultConfig `json:"DefaultConfig"`
-	Functions     []shared.Function             `json:"Functions"`
+	DefaultConfig *shared.FunctionDefaultConfig `json:"DefaultConfig,omitempty"`
+	Functions     []shared.Function             `json:"Functions,omitempty"`
 }
 
 type CreateFunctionDefinitionRequestBody struct {
-	InitialVersion *CreateFunctionDefinitionRequestBodyInitialVersion `json:"InitialVersion"`
-	Name           *string                                            `json:"Name"`
-	Tags           map[string]string                                  `json:"tags"`
+	InitialVersion *CreateFunctionDefinitionRequestBodyInitialVersion `json:"InitialVersion,omitempty"`
+	Name           *string                                            `json:"Name,omitempty"`
+	Tags           map[string]string                                  `json:"tags,omitempty"`
 }
 
 type CreateFunctionDefinitionRequest struct {

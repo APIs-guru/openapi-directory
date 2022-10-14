@@ -1,7 +1,7 @@
 package shared
 
 type ExportProjectResult struct {
-	DownloadURL *string `json:"downloadUrl"`
-	ShareURL    *string `json:"shareUrl"`
-	SnapshotID  *string `json:"snapshotId"`
+	DownloadURL *string `json:"downloadUrl,omitempty"`
+	ShareURL    *string `json:"shareUrl,omitempty"`
+	SnapshotID  *string `json:"snapshotId,omitempty"`
 }

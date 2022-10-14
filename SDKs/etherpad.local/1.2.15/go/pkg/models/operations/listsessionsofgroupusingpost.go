@@ -9,38 +9,38 @@ type ListSessionsOfGroupUsingPostRequest struct {
 }
 
 type ListSessionsOfGroupUsingPost200ApplicationJSONDataSessions struct {
-	AuthorID   *string `json:"authorID"`
-	GroupID    *string `json:"groupID"`
-	ID         *string `json:"id"`
-	ValidUntil *int64  `json:"validUntil"`
+	AuthorID   *string `json:"authorID,omitempty"`
+	GroupID    *string `json:"groupID,omitempty"`
+	ID         *string `json:"id,omitempty"`
+	ValidUntil *int64  `json:"validUntil,omitempty"`
 }
 
 type ListSessionsOfGroupUsingPost200ApplicationJSONData struct {
-	Sessions []ListSessionsOfGroupUsingPost200ApplicationJSONDataSessions `json:"sessions"`
+	Sessions []ListSessionsOfGroupUsingPost200ApplicationJSONDataSessions `json:"sessions,omitempty"`
 }
 
 type ListSessionsOfGroupUsingPost200ApplicationJSON struct {
-	Code    *int64                                              `json:"code"`
-	Data    *ListSessionsOfGroupUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                             `json:"message"`
+	Code    *int64                                              `json:"code,omitempty"`
+	Data    *ListSessionsOfGroupUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                             `json:"message,omitempty"`
 }
 
 type ListSessionsOfGroupUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListSessionsOfGroupUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListSessionsOfGroupUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type ListSessionsOfGroupUsingPostResponse struct {

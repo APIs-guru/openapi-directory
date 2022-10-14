@@ -8,12 +8,12 @@ const (
 )
 
 type Operation struct {
-	DNSKeyContext *OperationDNSKeyContext      `json:"dnsKeyContext"`
-	ID            *string                      `json:"id"`
-	Kind          *string                      `json:"kind"`
-	StartTime     *string                      `json:"startTime"`
-	Status        *OperationStatusEnum         `json:"status"`
-	Type          *string                      `json:"type"`
-	User          *string                      `json:"user"`
-	ZoneContext   *OperationManagedZoneContext `json:"zoneContext"`
+	DNSKeyContext *OperationDNSKeyContext      `json:"dnsKeyContext,omitempty"`
+	ID            *string                      `json:"id,omitempty"`
+	Kind          *string                      `json:"kind,omitempty"`
+	StartTime     *string                      `json:"startTime,omitempty"`
+	Status        *OperationStatusEnum         `json:"status,omitempty"`
+	Type          *string                      `json:"type,omitempty"`
+	User          *string                      `json:"user,omitempty"`
+	ZoneContext   *OperationManagedZoneContext `json:"zoneContext,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type OperationStatusFilter struct {
-	Status *StatusValuesEnum `json:"Status"`
+	Status *StatusValuesEnum `json:"Status,omitempty"`
 }

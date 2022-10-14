@@ -5,14 +5,14 @@ import (
 )
 
 type ResourceDataSyncItem struct {
-	LastStatus             *LastResourceDataSyncStatusEnum  `json:"LastStatus"`
-	LastSuccessfulSyncTime *time.Time                       `json:"LastSuccessfulSyncTime"`
-	LastSyncStatusMessage  *string                          `json:"LastSyncStatusMessage"`
-	LastSyncTime           *time.Time                       `json:"LastSyncTime"`
-	S3Destination          *ResourceDataSyncS3Destination   `json:"S3Destination"`
-	SyncCreatedTime        *time.Time                       `json:"SyncCreatedTime"`
-	SyncLastModifiedTime   *time.Time                       `json:"SyncLastModifiedTime"`
-	SyncName               *string                          `json:"SyncName"`
-	SyncSource             *ResourceDataSyncSourceWithState `json:"SyncSource"`
-	SyncType               *string                          `json:"SyncType"`
+	LastStatus             *LastResourceDataSyncStatusEnum  `json:"LastStatus,omitempty"`
+	LastSuccessfulSyncTime *time.Time                       `json:"LastSuccessfulSyncTime,omitempty"`
+	LastSyncStatusMessage  *string                          `json:"LastSyncStatusMessage,omitempty"`
+	LastSyncTime           *time.Time                       `json:"LastSyncTime,omitempty"`
+	S3Destination          *ResourceDataSyncS3Destination   `json:"S3Destination,omitempty"`
+	SyncCreatedTime        *time.Time                       `json:"SyncCreatedTime,omitempty"`
+	SyncLastModifiedTime   *time.Time                       `json:"SyncLastModifiedTime,omitempty"`
+	SyncName               *string                          `json:"SyncName,omitempty"`
+	SyncSource             *ResourceDataSyncSourceWithState `json:"SyncSource,omitempty"`
+	SyncType               *string                          `json:"SyncType,omitempty"`
 }

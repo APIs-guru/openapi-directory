@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1TestingOptions struct {
-	TestingChallenge *GoogleCloudRecaptchaenterpriseV1TestingOptionsTestingChallengeEnum `json:"testingChallenge"`
-	TestingScore     *float32                                                            `json:"testingScore"`
+	TestingChallenge *GoogleCloudRecaptchaenterpriseV1TestingOptionsTestingChallengeEnum `json:"testingChallenge,omitempty"`
+	TestingScore     *float32                                                            `json:"testingScore,omitempty"`
 }

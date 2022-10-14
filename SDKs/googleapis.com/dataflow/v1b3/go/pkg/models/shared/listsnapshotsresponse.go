@@ -1,5 +1,5 @@
 package shared
 
 type ListSnapshotsResponse struct {
-	Snapshots []Snapshot `json:"snapshots"`
+	Snapshots []Snapshot `json:"snapshots,omitempty"`
 }

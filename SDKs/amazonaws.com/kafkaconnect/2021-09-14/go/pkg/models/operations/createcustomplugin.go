@@ -22,12 +22,12 @@ const (
 )
 
 type CreateCustomPluginRequestBodyLocation struct {
-	S3Location *shared.S3Location `json:"s3Location"`
+	S3Location *shared.S3Location `json:"s3Location,omitempty"`
 }
 
 type CreateCustomPluginRequestBody struct {
 	ContentType CreateCustomPluginRequestBodyContentTypeEnum `json:"contentType"`
-	Description *string                                      `json:"description"`
+	Description *string                                      `json:"description,omitempty"`
 	Location    CreateCustomPluginRequestBodyLocation        `json:"location"`
 	Name        string                                       `json:"name"`
 }

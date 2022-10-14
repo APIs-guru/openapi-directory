@@ -9,7 +9,7 @@ type EnterpriseAdminCreateImpersonationOAuthTokenPathParams struct {
 }
 
 type EnterpriseAdminCreateImpersonationOAuthTokenRequestBody struct {
-	Scopes []string `json:"scopes"`
+	Scopes []string `json:"scopes,omitempty"`
 }
 
 type EnterpriseAdminCreateImpersonationOAuthTokenRequest struct {

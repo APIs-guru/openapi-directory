@@ -1,12 +1,12 @@
 package shared
 
 type Candidate struct {
-	CandidateURL  *string   `json:"candidateUrl"`
-	Channels      []Channel `json:"channels"`
-	Email         *string   `json:"email"`
-	Name          *string   `json:"name"`
-	OrderOnBallot *string   `json:"orderOnBallot"`
-	Party         *string   `json:"party"`
-	Phone         *string   `json:"phone"`
-	PhotoURL      *string   `json:"photoUrl"`
+	CandidateURL  *string   `json:"candidateUrl,omitempty"`
+	Channels      []Channel `json:"channels,omitempty"`
+	Email         *string   `json:"email,omitempty"`
+	Name          *string   `json:"name,omitempty"`
+	OrderOnBallot *string   `json:"orderOnBallot,omitempty"`
+	Party         *string   `json:"party,omitempty"`
+	Phone         *string   `json:"phone,omitempty"`
+	PhotoURL      *string   `json:"photoUrl,omitempty"`
 }

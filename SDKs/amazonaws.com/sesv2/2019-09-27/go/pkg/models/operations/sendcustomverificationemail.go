@@ -15,7 +15,7 @@ type SendCustomVerificationEmailHeaders struct {
 }
 
 type SendCustomVerificationEmailRequestBody struct {
-	ConfigurationSetName *string `json:"ConfigurationSetName"`
+	ConfigurationSetName *string `json:"ConfigurationSetName,omitempty"`
 	EmailAddress         string  `json:"EmailAddress"`
 	TemplateName         string  `json:"TemplateName"`
 }

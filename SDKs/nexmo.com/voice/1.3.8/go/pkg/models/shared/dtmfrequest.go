@@ -1,5 +1,5 @@
 package shared
 
 type DtmfRequest struct {
-	Digits *string `json:"digits"`
+	Digits *string `json:"digits,omitempty"`
 }

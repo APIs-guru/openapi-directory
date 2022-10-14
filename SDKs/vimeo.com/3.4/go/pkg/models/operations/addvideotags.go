@@ -10,8 +10,8 @@ type AddVideoTagsPathParams struct {
 
 type AddVideoTagsRequestBody struct {
 	Name    string   `json:"name"`
-	Page    *float64 `json:"page"`
-	PerPage *float64 `json:"per_page"`
+	Page    *float64 `json:"page,omitempty"`
+	PerPage *float64 `json:"per_page,omitempty"`
 }
 
 type AddVideoTagsSecurity struct {

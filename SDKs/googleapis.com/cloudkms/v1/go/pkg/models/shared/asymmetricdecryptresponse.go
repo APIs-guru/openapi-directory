@@ -11,8 +11,8 @@ const (
 )
 
 type AsymmetricDecryptResponse struct {
-	Plaintext                *string                                       `json:"plaintext"`
-	PlaintextCrc32c          *string                                       `json:"plaintextCrc32c"`
-	ProtectionLevel          *AsymmetricDecryptResponseProtectionLevelEnum `json:"protectionLevel"`
-	VerifiedCiphertextCrc32c *bool                                         `json:"verifiedCiphertextCrc32c"`
+	Plaintext                *string                                       `json:"plaintext,omitempty"`
+	PlaintextCrc32c          *string                                       `json:"plaintextCrc32c,omitempty"`
+	ProtectionLevel          *AsymmetricDecryptResponseProtectionLevelEnum `json:"protectionLevel,omitempty"`
+	VerifiedCiphertextCrc32c *bool                                         `json:"verifiedCiphertextCrc32c,omitempty"`
 }

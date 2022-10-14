@@ -5,7 +5,7 @@ type UpdateNetworkApplianceVlansSettingsPathParams struct {
 }
 
 type UpdateNetworkApplianceVlansSettingsRequestBody struct {
-	VlansEnabled *bool `json:"vlansEnabled"`
+	VlansEnabled *bool `json:"vlansEnabled,omitempty"`
 }
 
 type UpdateNetworkApplianceVlansSettingsRequest struct {

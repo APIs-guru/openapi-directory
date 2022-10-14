@@ -5,11 +5,11 @@ import (
 )
 
 type OperationSummary struct {
-	EndedAt   *time.Time           `json:"EndedAt"`
-	ID        *string              `json:"Id"`
-	StartedAt *time.Time           `json:"StartedAt"`
-	Status    *OperationStatusEnum `json:"Status"`
-	TargetArn *string              `json:"TargetArn"`
-	Type      *OperationTypeEnum   `json:"Type"`
-	UpdatedAt *time.Time           `json:"UpdatedAt"`
+	EndedAt   *time.Time           `json:"EndedAt,omitempty"`
+	ID        *string              `json:"Id,omitempty"`
+	StartedAt *time.Time           `json:"StartedAt,omitempty"`
+	Status    *OperationStatusEnum `json:"Status,omitempty"`
+	TargetArn *string              `json:"TargetArn,omitempty"`
+	Type      *OperationTypeEnum   `json:"Type,omitempty"`
+	UpdatedAt *time.Time           `json:"UpdatedAt,omitempty"`
 }

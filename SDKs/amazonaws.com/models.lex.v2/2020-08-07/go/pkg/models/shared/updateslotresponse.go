@@ -5,17 +5,17 @@ import (
 )
 
 type UpdateSlotResponse struct {
-	BotID                   *string                      `json:"botId"`
-	BotVersion              *string                      `json:"botVersion"`
-	CreationDateTime        *time.Time                   `json:"creationDateTime"`
-	Description             *string                      `json:"description"`
-	IntentID                *string                      `json:"intentId"`
-	LastUpdatedDateTime     *time.Time                   `json:"lastUpdatedDateTime"`
-	LocaleID                *string                      `json:"localeId"`
-	MultipleValuesSetting   *MultipleValuesSetting       `json:"multipleValuesSetting"`
-	ObfuscationSetting      *ObfuscationSetting          `json:"obfuscationSetting"`
-	SlotID                  *string                      `json:"slotId"`
-	SlotName                *string                      `json:"slotName"`
-	SlotTypeID              *string                      `json:"slotTypeId"`
-	ValueElicitationSetting *SlotValueElicitationSetting `json:"valueElicitationSetting"`
+	BotID                   *string                      `json:"botId,omitempty"`
+	BotVersion              *string                      `json:"botVersion,omitempty"`
+	CreationDateTime        *time.Time                   `json:"creationDateTime,omitempty"`
+	Description             *string                      `json:"description,omitempty"`
+	IntentID                *string                      `json:"intentId,omitempty"`
+	LastUpdatedDateTime     *time.Time                   `json:"lastUpdatedDateTime,omitempty"`
+	LocaleID                *string                      `json:"localeId,omitempty"`
+	MultipleValuesSetting   *MultipleValuesSetting       `json:"multipleValuesSetting,omitempty"`
+	ObfuscationSetting      *ObfuscationSetting          `json:"obfuscationSetting,omitempty"`
+	SlotID                  *string                      `json:"slotId,omitempty"`
+	SlotName                *string                      `json:"slotName,omitempty"`
+	SlotTypeID              *string                      `json:"slotTypeId,omitempty"`
+	ValueElicitationSetting *SlotValueElicitationSetting `json:"valueElicitationSetting,omitempty"`
 }

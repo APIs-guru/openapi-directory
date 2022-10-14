@@ -9,17 +9,17 @@ const (
 )
 
 type Operation struct {
-	ConsumerID      *string                  `json:"consumerId"`
-	EndTime         *string                  `json:"endTime"`
-	Importance      *OperationImportanceEnum `json:"importance"`
-	Labels          map[string]string        `json:"labels"`
-	LogEntries      []LogEntry               `json:"logEntries"`
-	MetricValueSets []MetricValueSet         `json:"metricValueSets"`
-	OperationID     *string                  `json:"operationId"`
-	OperationName   *string                  `json:"operationName"`
-	QuotaProperties *QuotaProperties         `json:"quotaProperties"`
-	Resources       []ResourceInfo           `json:"resources"`
-	StartTime       *string                  `json:"startTime"`
-	TraceSpans      []TraceSpan              `json:"traceSpans"`
-	UserLabels      map[string]string        `json:"userLabels"`
+	ConsumerID      *string                  `json:"consumerId,omitempty"`
+	EndTime         *string                  `json:"endTime,omitempty"`
+	Importance      *OperationImportanceEnum `json:"importance,omitempty"`
+	Labels          map[string]string        `json:"labels,omitempty"`
+	LogEntries      []LogEntry               `json:"logEntries,omitempty"`
+	MetricValueSets []MetricValueSet         `json:"metricValueSets,omitempty"`
+	OperationID     *string                  `json:"operationId,omitempty"`
+	OperationName   *string                  `json:"operationName,omitempty"`
+	QuotaProperties *QuotaProperties         `json:"quotaProperties,omitempty"`
+	Resources       []ResourceInfo           `json:"resources,omitempty"`
+	StartTime       *string                  `json:"startTime,omitempty"`
+	TraceSpans      []TraceSpan              `json:"traceSpans,omitempty"`
+	UserLabels      map[string]string        `json:"userLabels,omitempty"`
 }

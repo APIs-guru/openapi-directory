@@ -1,8 +1,8 @@
 package shared
 
 type InstanceBlockDeviceMapping struct {
-	DeviceName  *string                              `json:"deviceName"`
-	Ebs         *EbsInstanceBlockDeviceSpecification `json:"ebs"`
-	NoDevice    *string                              `json:"noDevice"`
-	VirtualName *string                              `json:"virtualName"`
+	DeviceName  *string                              `json:"deviceName,omitempty"`
+	Ebs         *EbsInstanceBlockDeviceSpecification `json:"ebs,omitempty"`
+	NoDevice    *string                              `json:"noDevice,omitempty"`
+	VirtualName *string                              `json:"virtualName,omitempty"`
 }

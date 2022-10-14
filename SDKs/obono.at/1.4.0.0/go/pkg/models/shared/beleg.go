@@ -13,14 +13,14 @@ const (
 )
 
 type Beleg struct {
-	BelegCodes                     []string              `json:"Beleg-Codes"`
-	BelegTypen                     []BelegBelegTypenEnum `json:"Beleg-Typen"`
-	Belegdaten                     *SignierteBelegdaten  `json:"Belegdaten"`
-	Jws                            *string               `json:"JWS"`
-	Qr                             *string               `json:"QR"`
-	QrLink                         *string               `json:"QR-Link"`
-	RegistrierkasseUUID            *string               `json:"Registrierkasse-UUID"`
-	SignaturerstellungseinheitUUID *string               `json:"Signaturerstellungseinheit-UUID"`
-	Href                           *string               `json:"_href"`
-	UUID                           *string               `json:"_uuid"`
+	BelegCodes                     []string              `json:"Beleg-Codes,omitempty"`
+	BelegTypen                     []BelegBelegTypenEnum `json:"Beleg-Typen,omitempty"`
+	Belegdaten                     *SignierteBelegdaten  `json:"Belegdaten,omitempty"`
+	Jws                            *string               `json:"JWS,omitempty"`
+	Qr                             *string               `json:"QR,omitempty"`
+	QrLink                         *string               `json:"QR-Link,omitempty"`
+	RegistrierkasseUUID            *string               `json:"Registrierkasse-UUID,omitempty"`
+	SignaturerstellungseinheitUUID *string               `json:"Signaturerstellungseinheit-UUID,omitempty"`
+	Href                           *string               `json:"_href,omitempty"`
+	UUID                           *string               `json:"_uuid,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type SessionState struct {
-	ActiveContexts       []ActiveContext   `json:"activeContexts"`
-	DialogAction         *DialogAction     `json:"dialogAction"`
-	Intent               *Intent           `json:"intent"`
-	OriginatingRequestID *string           `json:"originatingRequestId"`
-	SessionAttributes    map[string]string `json:"sessionAttributes"`
+	ActiveContexts       []ActiveContext   `json:"activeContexts,omitempty"`
+	DialogAction         *DialogAction     `json:"dialogAction,omitempty"`
+	Intent               *Intent           `json:"intent,omitempty"`
+	OriginatingRequestID *string           `json:"originatingRequestId,omitempty"`
+	SessionAttributes    map[string]string `json:"sessionAttributes,omitempty"`
 }

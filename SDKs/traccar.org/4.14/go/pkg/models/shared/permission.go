@@ -1,12 +1,12 @@
 package shared
 
 type Permission struct {
-	AttributeID   *int64 `json:"attributeId"`
-	CalendarID    *int64 `json:"calendarId"`
-	DeviceID      *int64 `json:"deviceId"`
-	DriverID      *int64 `json:"driverId"`
-	GeofenceID    *int64 `json:"geofenceId"`
-	GroupID       *int64 `json:"groupId"`
-	ManagedUserID *int64 `json:"managedUserId"`
-	UserID        *int64 `json:"userId"`
+	AttributeID   *int64 `json:"attributeId,omitempty"`
+	CalendarID    *int64 `json:"calendarId,omitempty"`
+	DeviceID      *int64 `json:"deviceId,omitempty"`
+	DriverID      *int64 `json:"driverId,omitempty"`
+	GeofenceID    *int64 `json:"geofenceId,omitempty"`
+	GroupID       *int64 `json:"groupId,omitempty"`
+	ManagedUserID *int64 `json:"managedUserId,omitempty"`
+	UserID        *int64 `json:"userId,omitempty"`
 }

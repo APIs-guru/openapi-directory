@@ -1,6 +1,6 @@
 package shared
 
 type ExistenceFilter struct {
-	Count    *int32 `json:"count"`
-	TargetID *int32 `json:"targetId"`
+	Count    *int32 `json:"count,omitempty"`
+	TargetID *int32 `json:"targetId,omitempty"`
 }

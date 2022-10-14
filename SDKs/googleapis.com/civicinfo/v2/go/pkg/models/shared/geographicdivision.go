@@ -1,7 +1,7 @@
 package shared
 
 type GeographicDivision struct {
-	AlsoKnownAs   []string `json:"alsoKnownAs"`
-	Name          *string  `json:"name"`
-	OfficeIndices []int64  `json:"officeIndices"`
+	AlsoKnownAs   []string `json:"alsoKnownAs,omitempty"`
+	Name          *string  `json:"name,omitempty"`
+	OfficeIndices []int64  `json:"officeIndices,omitempty"`
 }

@@ -15,12 +15,12 @@ const (
 )
 
 type ExecutionStageSummary struct {
-	ComponentSource    []ComponentSource              `json:"componentSource"`
-	ComponentTransform []ComponentTransform           `json:"componentTransform"`
-	ID                 *string                        `json:"id"`
-	InputSource        []StageSource                  `json:"inputSource"`
-	Kind               *ExecutionStageSummaryKindEnum `json:"kind"`
-	Name               *string                        `json:"name"`
-	OutputSource       []StageSource                  `json:"outputSource"`
-	PrerequisiteStage  []string                       `json:"prerequisiteStage"`
+	ComponentSource    []ComponentSource              `json:"componentSource,omitempty"`
+	ComponentTransform []ComponentTransform           `json:"componentTransform,omitempty"`
+	ID                 *string                        `json:"id,omitempty"`
+	InputSource        []StageSource                  `json:"inputSource,omitempty"`
+	Kind               *ExecutionStageSummaryKindEnum `json:"kind,omitempty"`
+	Name               *string                        `json:"name,omitempty"`
+	OutputSource       []StageSource                  `json:"outputSource,omitempty"`
+	PrerequisiteStage  []string                       `json:"prerequisiteStage,omitempty"`
 }

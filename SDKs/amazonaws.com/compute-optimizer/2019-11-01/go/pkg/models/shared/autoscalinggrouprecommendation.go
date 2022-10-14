@@ -5,13 +5,13 @@ import (
 )
 
 type AutoScalingGroupRecommendation struct {
-	AccountID             *string                                `json:"accountId"`
-	AutoScalingGroupArn   *string                                `json:"autoScalingGroupArn"`
-	AutoScalingGroupName  *string                                `json:"autoScalingGroupName"`
-	CurrentConfiguration  *AutoScalingGroupConfiguration         `json:"currentConfiguration"`
-	Finding               *FindingEnum                           `json:"finding"`
-	LastRefreshTimestamp  *time.Time                             `json:"lastRefreshTimestamp"`
-	LookBackPeriodInDays  *float64                               `json:"lookBackPeriodInDays"`
-	RecommendationOptions []AutoScalingGroupRecommendationOption `json:"recommendationOptions"`
-	UtilizationMetrics    []UtilizationMetric                    `json:"utilizationMetrics"`
+	AccountID             *string                                `json:"accountId,omitempty"`
+	AutoScalingGroupArn   *string                                `json:"autoScalingGroupArn,omitempty"`
+	AutoScalingGroupName  *string                                `json:"autoScalingGroupName,omitempty"`
+	CurrentConfiguration  *AutoScalingGroupConfiguration         `json:"currentConfiguration,omitempty"`
+	Finding               *FindingEnum                           `json:"finding,omitempty"`
+	LastRefreshTimestamp  *time.Time                             `json:"lastRefreshTimestamp,omitempty"`
+	LookBackPeriodInDays  *float64                               `json:"lookBackPeriodInDays,omitempty"`
+	RecommendationOptions []AutoScalingGroupRecommendationOption `json:"recommendationOptions,omitempty"`
+	UtilizationMetrics    []UtilizationMetric                    `json:"utilizationMetrics,omitempty"`
 }

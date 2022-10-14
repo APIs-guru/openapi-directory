@@ -1,6 +1,6 @@
 package shared
 
 type ListAutoscalingPoliciesResponse struct {
-	NextPageToken *string             `json:"nextPageToken"`
-	Policies      []AutoscalingPolicy `json:"policies"`
+	NextPageToken *string             `json:"nextPageToken,omitempty"`
+	Policies      []AutoscalingPolicy `json:"policies,omitempty"`
 }

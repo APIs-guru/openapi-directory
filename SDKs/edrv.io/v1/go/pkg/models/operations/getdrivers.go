@@ -26,9 +26,9 @@ type GetDriversRequest struct {
 }
 
 type GetDrivers200ApplicationJSON struct {
-	Message *string       `json:"message"`
-	Ok      *bool         `json:"ok"`
-	Result  []interface{} `json:"result"`
+	Message *string       `json:"message,omitempty"`
+	Ok      *bool         `json:"ok,omitempty"`
+	Result  []interface{} `json:"result,omitempty"`
 }
 
 type GetDriversResponse struct {

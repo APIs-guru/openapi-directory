@@ -1,7 +1,7 @@
 package shared
 
 type AttackVolume struct {
-	BitsPerSecond     *AttackVolumeStatistics `json:"BitsPerSecond"`
-	PacketsPerSecond  *AttackVolumeStatistics `json:"PacketsPerSecond"`
-	RequestsPerSecond *AttackVolumeStatistics `json:"RequestsPerSecond"`
+	BitsPerSecond     *AttackVolumeStatistics `json:"BitsPerSecond,omitempty"`
+	PacketsPerSecond  *AttackVolumeStatistics `json:"PacketsPerSecond,omitempty"`
+	RequestsPerSecond *AttackVolumeStatistics `json:"RequestsPerSecond,omitempty"`
 }

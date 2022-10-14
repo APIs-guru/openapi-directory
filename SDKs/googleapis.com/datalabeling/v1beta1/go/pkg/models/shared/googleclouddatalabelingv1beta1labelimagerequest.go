@@ -13,10 +13,10 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1LabelImageRequest struct {
-	BasicConfig               *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig        `json:"basicConfig"`
-	BoundingPolyConfig        *GoogleCloudDatalabelingV1beta1BoundingPolyConfig           `json:"boundingPolyConfig"`
-	Feature                   *GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum `json:"feature"`
-	ImageClassificationConfig *GoogleCloudDatalabelingV1beta1ImageClassificationConfig    `json:"imageClassificationConfig"`
-	PolylineConfig            *GoogleCloudDatalabelingV1beta1PolylineConfig               `json:"polylineConfig"`
-	SegmentationConfig        *GoogleCloudDatalabelingV1beta1SegmentationConfig           `json:"segmentationConfig"`
+	BasicConfig               *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig        `json:"basicConfig,omitempty"`
+	BoundingPolyConfig        *GoogleCloudDatalabelingV1beta1BoundingPolyConfig           `json:"boundingPolyConfig,omitempty"`
+	Feature                   *GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum `json:"feature,omitempty"`
+	ImageClassificationConfig *GoogleCloudDatalabelingV1beta1ImageClassificationConfig    `json:"imageClassificationConfig,omitempty"`
+	PolylineConfig            *GoogleCloudDatalabelingV1beta1PolylineConfig               `json:"polylineConfig,omitempty"`
+	SegmentationConfig        *GoogleCloudDatalabelingV1beta1SegmentationConfig           `json:"segmentationConfig,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type LeaderboardScores struct {
-	Items         []LeaderboardEntry `json:"items"`
-	Kind          *string            `json:"kind"`
-	NextPageToken *string            `json:"nextPageToken"`
-	NumScores     *string            `json:"numScores"`
-	PlayerScore   *LeaderboardEntry  `json:"playerScore"`
-	PrevPageToken *string            `json:"prevPageToken"`
+	Items         []LeaderboardEntry `json:"items,omitempty"`
+	Kind          *string            `json:"kind,omitempty"`
+	NextPageToken *string            `json:"nextPageToken,omitempty"`
+	NumScores     *string            `json:"numScores,omitempty"`
+	PlayerScore   *LeaderboardEntry  `json:"playerScore,omitempty"`
+	PrevPageToken *string            `json:"prevPageToken,omitempty"`
 }

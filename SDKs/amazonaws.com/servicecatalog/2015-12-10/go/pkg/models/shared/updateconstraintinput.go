@@ -1,8 +1,8 @@
 package shared
 
 type UpdateConstraintInput struct {
-	AcceptLanguage *string `json:"AcceptLanguage"`
-	Description    *string `json:"Description"`
+	AcceptLanguage *string `json:"AcceptLanguage,omitempty"`
+	Description    *string `json:"Description,omitempty"`
 	ID             string  `json:"Id"`
-	Parameters     *string `json:"Parameters"`
+	Parameters     *string `json:"Parameters,omitempty"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type LinodeAlerts struct {
-	CPU           *int64 `json:"cpu"`
-	Io            *int64 `json:"io"`
-	NetworkIn     *int64 `json:"network_in"`
-	NetworkOut    *int64 `json:"network_out"`
-	TransferQuota *int64 `json:"transfer_quota"`
+	CPU           *int64 `json:"cpu,omitempty"`
+	Io            *int64 `json:"io,omitempty"`
+	NetworkIn     *int64 `json:"network_in,omitempty"`
+	NetworkOut    *int64 `json:"network_out,omitempty"`
+	TransferQuota *int64 `json:"transfer_quota,omitempty"`
 }
 
 type LinodeBackupsScheduleDayEnum string
@@ -44,14 +44,14 @@ const (
 )
 
 type LinodeBackupsSchedule struct {
-	Day    *LinodeBackupsScheduleDayEnum    `json:"day"`
-	Window *LinodeBackupsScheduleWindowEnum `json:"window"`
+	Day    *LinodeBackupsScheduleDayEnum    `json:"day,omitempty"`
+	Window *LinodeBackupsScheduleWindowEnum `json:"window,omitempty"`
 }
 
 type LinodeBackups struct {
-	Enabled        *bool                  `json:"enabled"`
-	LastSuccessful *time.Time             `json:"last_successful"`
-	Schedule       *LinodeBackupsSchedule `json:"schedule"`
+	Enabled        *bool                  `json:"enabled,omitempty"`
+	LastSuccessful *time.Time             `json:"last_successful,omitempty"`
+	Schedule       *LinodeBackupsSchedule `json:"schedule,omitempty"`
 }
 
 type LinodeHypervisorEnum string
@@ -61,10 +61,10 @@ const (
 )
 
 type LinodeSpecs struct {
-	Disk     *int64 `json:"disk"`
-	Memory   *int64 `json:"memory"`
-	Transfer *int64 `json:"transfer"`
-	Vcpus    *int64 `json:"vcpus"`
+	Disk     *int64 `json:"disk,omitempty"`
+	Memory   *int64 `json:"memory,omitempty"`
+	Transfer *int64 `json:"transfer,omitempty"`
+	Vcpus    *int64 `json:"vcpus,omitempty"`
 }
 
 type LinodeStatusEnum string
@@ -85,21 +85,21 @@ const (
 )
 
 type Linode struct {
-	Alerts          *LinodeAlerts          `json:"alerts"`
-	Backups         *LinodeBackups         `json:"backups"`
-	Created         *time.Time             `json:"created"`
-	Group           *string                `json:"group"`
-	Hypervisor      *LinodeHypervisorEnum  `json:"hypervisor"`
-	ID              *int64                 `json:"id"`
-	Image           map[string]interface{} `json:"image"`
-	Ipv4            []string               `json:"ipv4"`
-	Ipv6            *string                `json:"ipv6"`
-	Label           *string                `json:"label"`
-	Region          *string                `json:"region"`
-	Specs           *LinodeSpecs           `json:"specs"`
-	Status          *LinodeStatusEnum      `json:"status"`
-	Tags            []string               `json:"tags"`
-	Type            *string                `json:"type"`
-	Updated         *time.Time             `json:"updated"`
-	WatchdogEnabled *bool                  `json:"watchdog_enabled"`
+	Alerts          *LinodeAlerts          `json:"alerts,omitempty"`
+	Backups         *LinodeBackups         `json:"backups,omitempty"`
+	Created         *time.Time             `json:"created,omitempty"`
+	Group           *string                `json:"group,omitempty"`
+	Hypervisor      *LinodeHypervisorEnum  `json:"hypervisor,omitempty"`
+	ID              *int64                 `json:"id,omitempty"`
+	Image           map[string]interface{} `json:"image,omitempty"`
+	Ipv4            []string               `json:"ipv4,omitempty"`
+	Ipv6            *string                `json:"ipv6,omitempty"`
+	Label           *string                `json:"label,omitempty"`
+	Region          *string                `json:"region,omitempty"`
+	Specs           *LinodeSpecs           `json:"specs,omitempty"`
+	Status          *LinodeStatusEnum      `json:"status,omitempty"`
+	Tags            []string               `json:"tags,omitempty"`
+	Type            *string                `json:"type,omitempty"`
+	Updated         *time.Time             `json:"updated,omitempty"`
+	WatchdogEnabled *bool                  `json:"watchdog_enabled,omitempty"`
 }

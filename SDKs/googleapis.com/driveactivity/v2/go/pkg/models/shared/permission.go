@@ -14,10 +14,10 @@ const (
 )
 
 type Permission struct {
-	AllowDiscovery *bool                  `json:"allowDiscovery"`
-	Anyone         map[string]interface{} `json:"anyone"`
-	Domain         *Domain                `json:"domain"`
-	Group          *Group                 `json:"group"`
-	Role           *PermissionRoleEnum    `json:"role"`
-	User           *User                  `json:"user"`
+	AllowDiscovery *bool                  `json:"allowDiscovery,omitempty"`
+	Anyone         map[string]interface{} `json:"anyone,omitempty"`
+	Domain         *Domain                `json:"domain,omitempty"`
+	Group          *Group                 `json:"group,omitempty"`
+	Role           *PermissionRoleEnum    `json:"role,omitempty"`
+	User           *User                  `json:"user,omitempty"`
 }

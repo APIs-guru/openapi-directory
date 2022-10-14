@@ -1,8 +1,8 @@
 package shared
 
 type BulkEditAssignedInventorySourcesRequest struct {
-	AdvertiserID                    *string                   `json:"advertiserId"`
-	CreatedAssignedInventorySources []AssignedInventorySource `json:"createdAssignedInventorySources"`
-	DeletedAssignedInventorySources []string                  `json:"deletedAssignedInventorySources"`
-	PartnerID                       *string                   `json:"partnerId"`
+	AdvertiserID                    *string                   `json:"advertiserId,omitempty"`
+	CreatedAssignedInventorySources []AssignedInventorySource `json:"createdAssignedInventorySources,omitempty"`
+	DeletedAssignedInventorySources []string                  `json:"deletedAssignedInventorySources,omitempty"`
+	PartnerID                       *string                   `json:"partnerId,omitempty"`
 }

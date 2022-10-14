@@ -1,6 +1,6 @@
 package shared
 
 type MediaUpdateInfoDto struct {
-	Path       *string `json:"Path"`
-	UpdateType *string `json:"UpdateType"`
+	Path       *string `json:"Path,omitempty"`
+	UpdateType *string `json:"UpdateType,omitempty"`
 }

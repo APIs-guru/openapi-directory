@@ -13,9 +13,9 @@ const (
 )
 
 type PasteDataRequest struct {
-	Coordinate *GridCoordinate           `json:"coordinate"`
-	Data       *string                   `json:"data"`
-	Delimiter  *string                   `json:"delimiter"`
-	HTML       *bool                     `json:"html"`
-	Type       *PasteDataRequestTypeEnum `json:"type"`
+	Coordinate *GridCoordinate           `json:"coordinate,omitempty"`
+	Data       *string                   `json:"data,omitempty"`
+	Delimiter  *string                   `json:"delimiter,omitempty"`
+	HTML       *bool                     `json:"html,omitempty"`
+	Type       *PasteDataRequestTypeEnum `json:"type,omitempty"`
 }

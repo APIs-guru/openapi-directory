@@ -9,38 +9,38 @@ type PadUsersUsingPostRequest struct {
 }
 
 type PadUsersUsingPost200ApplicationJSONDataPadUsers struct {
-	ColorID   *string `json:"colorId"`
-	ID        *string `json:"id"`
-	Name      *string `json:"name"`
-	Timestamp *int64  `json:"timestamp"`
+	ColorID   *string `json:"colorId,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Timestamp *int64  `json:"timestamp,omitempty"`
 }
 
 type PadUsersUsingPost200ApplicationJSONData struct {
-	PadUsers []PadUsersUsingPost200ApplicationJSONDataPadUsers `json:"padUsers"`
+	PadUsers []PadUsersUsingPost200ApplicationJSONDataPadUsers `json:"padUsers,omitempty"`
 }
 
 type PadUsersUsingPost200ApplicationJSON struct {
-	Code    *int64                                   `json:"code"`
-	Data    *PadUsersUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                  `json:"message"`
+	Code    *int64                                   `json:"code,omitempty"`
+	Data    *PadUsersUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                  `json:"message,omitempty"`
 }
 
 type PadUsersUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type PadUsersUsingPostResponse struct {

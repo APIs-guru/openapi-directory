@@ -1,14 +1,14 @@
 package shared
 
 type IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse struct {
-	ExpiresIn                  *string `json:"expiresIn"`
-	IDToken                    *string `json:"idToken"`
-	IsNewUser                  *bool   `json:"isNewUser"`
-	LocalID                    *string `json:"localId"`
-	PhoneNumber                *string `json:"phoneNumber"`
-	RefreshToken               *string `json:"refreshToken"`
-	TemporaryProof             *string `json:"temporaryProof"`
-	TemporaryProofExpiresIn    *string `json:"temporaryProofExpiresIn"`
-	VerificationProof          *string `json:"verificationProof"`
-	VerificationProofExpiresIn *string `json:"verificationProofExpiresIn"`
+	ExpiresIn                  *string `json:"expiresIn,omitempty"`
+	IDToken                    *string `json:"idToken,omitempty"`
+	IsNewUser                  *bool   `json:"isNewUser,omitempty"`
+	LocalID                    *string `json:"localId,omitempty"`
+	PhoneNumber                *string `json:"phoneNumber,omitempty"`
+	RefreshToken               *string `json:"refreshToken,omitempty"`
+	TemporaryProof             *string `json:"temporaryProof,omitempty"`
+	TemporaryProofExpiresIn    *string `json:"temporaryProofExpiresIn,omitempty"`
+	VerificationProof          *string `json:"verificationProof,omitempty"`
+	VerificationProofExpiresIn *string `json:"verificationProofExpiresIn,omitempty"`
 }

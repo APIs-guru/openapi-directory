@@ -32,14 +32,14 @@ const (
 )
 
 type ImportJob struct {
-	Attestation     *KeyOperationAttestation      `json:"attestation"`
-	CreateTime      *string                       `json:"createTime"`
-	ExpireEventTime *string                       `json:"expireEventTime"`
-	ExpireTime      *string                       `json:"expireTime"`
-	GenerateTime    *string                       `json:"generateTime"`
-	ImportMethod    *ImportJobImportMethodEnum    `json:"importMethod"`
-	Name            *string                       `json:"name"`
-	ProtectionLevel *ImportJobProtectionLevelEnum `json:"protectionLevel"`
-	PublicKey       *WrappingPublicKey            `json:"publicKey"`
-	State           *ImportJobStateEnum           `json:"state"`
+	Attestation     *KeyOperationAttestation      `json:"attestation,omitempty"`
+	CreateTime      *string                       `json:"createTime,omitempty"`
+	ExpireEventTime *string                       `json:"expireEventTime,omitempty"`
+	ExpireTime      *string                       `json:"expireTime,omitempty"`
+	GenerateTime    *string                       `json:"generateTime,omitempty"`
+	ImportMethod    *ImportJobImportMethodEnum    `json:"importMethod,omitempty"`
+	Name            *string                       `json:"name,omitempty"`
+	ProtectionLevel *ImportJobProtectionLevelEnum `json:"protectionLevel,omitempty"`
+	PublicKey       *WrappingPublicKey            `json:"publicKey,omitempty"`
+	State           *ImportJobStateEnum           `json:"state,omitempty"`
 }

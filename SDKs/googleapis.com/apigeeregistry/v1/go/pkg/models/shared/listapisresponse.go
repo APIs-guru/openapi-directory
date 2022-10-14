@@ -1,6 +1,6 @@
 package shared
 
 type ListApisResponse struct {
-	Apis          []API   `json:"apis"`
-	NextPageToken *string `json:"nextPageToken"`
+	Apis          []API   `json:"apis,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 }

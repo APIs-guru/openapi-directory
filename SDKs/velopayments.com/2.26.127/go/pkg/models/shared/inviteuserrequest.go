@@ -10,13 +10,13 @@ const (
 
 type InviteUserRequest struct {
 	Email                  string                       `json:"email"`
-	EntityID               *string                      `json:"entityId"`
-	FirstName              *string                      `json:"firstName"`
-	LastName               *string                      `json:"lastName"`
+	EntityID               *string                      `json:"entityId,omitempty"`
+	FirstName              *string                      `json:"firstName,omitempty"`
+	LastName               *string                      `json:"lastName,omitempty"`
 	MfaType                InviteUserRequestMfaTypeEnum `json:"mfaType"`
 	PrimaryContactNumber   string                       `json:"primaryContactNumber"`
 	Roles                  []string                     `json:"roles"`
-	SecondaryContactNumber *string                      `json:"secondaryContactNumber"`
+	SecondaryContactNumber *string                      `json:"secondaryContactNumber,omitempty"`
 	SmsNumber              string                       `json:"smsNumber"`
-	VerificationCode       *string                      `json:"verificationCode"`
+	VerificationCode       *string                      `json:"verificationCode,omitempty"`
 }

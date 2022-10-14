@@ -5,13 +5,13 @@ import (
 )
 
 type PreviewDeployedDevicesFleetCertificate struct {
-	AccountSid   *string    `json:"account_sid"`
-	DateCreated  *time.Time `json:"date_created"`
-	DateUpdated  *time.Time `json:"date_updated"`
-	DeviceSid    *string    `json:"device_sid"`
-	FleetSid     *string    `json:"fleet_sid"`
-	FriendlyName *string    `json:"friendly_name"`
-	Sid          *string    `json:"sid"`
-	Thumbprint   *string    `json:"thumbprint"`
-	URL          *string    `json:"url"`
+	AccountSid   *string    `json:"account_sid,omitempty"`
+	DateCreated  *time.Time `json:"date_created,omitempty"`
+	DateUpdated  *time.Time `json:"date_updated,omitempty"`
+	DeviceSid    *string    `json:"device_sid,omitempty"`
+	FleetSid     *string    `json:"fleet_sid,omitempty"`
+	FriendlyName *string    `json:"friendly_name,omitempty"`
+	Sid          *string    `json:"sid,omitempty"`
+	Thumbprint   *string    `json:"thumbprint,omitempty"`
+	URL          *string    `json:"url,omitempty"`
 }

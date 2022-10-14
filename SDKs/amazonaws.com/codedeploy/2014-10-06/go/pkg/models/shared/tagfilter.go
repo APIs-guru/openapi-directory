@@ -1,7 +1,7 @@
 package shared
 
 type TagFilter struct {
-	Key   *string            `json:"Key"`
-	Type  *TagFilterTypeEnum `json:"Type"`
-	Value *string            `json:"Value"`
+	Key   *string            `json:"Key,omitempty"`
+	Type  *TagFilterTypeEnum `json:"Type,omitempty"`
+	Value *string            `json:"Value,omitempty"`
 }

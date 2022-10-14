@@ -1,7 +1,7 @@
 package shared
 
 type ProductDetail struct {
-	AttributeName  *string `json:"attributeName"`
-	AttributeValue *string `json:"attributeValue"`
-	SectionName    *string `json:"sectionName"`
+	AttributeName  *string `json:"attributeName,omitempty"`
+	AttributeValue *string `json:"attributeValue,omitempty"`
+	SectionName    *string `json:"sectionName,omitempty"`
 }

@@ -6,21 +6,21 @@ import (
 )
 
 type AddStackScriptRequestBody struct {
-	Created           *time.Time                `json:"created"`
-	DeploymentsActive *int64                    `json:"deployments_active"`
-	DeploymentsTotal  *int64                    `json:"deployments_total"`
-	Description       *string                   `json:"description"`
-	ID                *int64                    `json:"id"`
+	Created           *time.Time                `json:"created,omitempty"`
+	DeploymentsActive *int64                    `json:"deployments_active,omitempty"`
+	DeploymentsTotal  *int64                    `json:"deployments_total,omitempty"`
+	Description       *string                   `json:"description,omitempty"`
+	ID                *int64                    `json:"id,omitempty"`
 	Images            []string                  `json:"images"`
-	IsPublic          *bool                     `json:"is_public"`
+	IsPublic          *bool                     `json:"is_public,omitempty"`
 	Label             string                    `json:"label"`
-	Mine              *bool                     `json:"mine"`
-	RevNote           *string                   `json:"rev_note"`
+	Mine              *bool                     `json:"mine,omitempty"`
+	RevNote           *string                   `json:"rev_note,omitempty"`
 	Script            string                    `json:"script"`
-	Updated           *time.Time                `json:"updated"`
-	UserDefinedFields []shared.UserDefinedField `json:"user_defined_fields"`
-	UserGravatarID    *string                   `json:"user_gravatar_id"`
-	Username          *string                   `json:"username"`
+	Updated           *time.Time                `json:"updated,omitempty"`
+	UserDefinedFields []shared.UserDefinedField `json:"user_defined_fields,omitempty"`
+	UserGravatarID    *string                   `json:"user_gravatar_id,omitempty"`
+	Username          *string                   `json:"username,omitempty"`
 }
 
 type AddStackScriptSecurityOption1 struct {
@@ -42,7 +42,7 @@ type AddStackScriptRequest struct {
 }
 
 type AddStackScriptDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type AddStackScriptResponse struct {

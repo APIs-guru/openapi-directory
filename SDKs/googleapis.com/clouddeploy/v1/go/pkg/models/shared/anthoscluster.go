@@ -1,5 +1,5 @@
 package shared
 
 type AnthosCluster struct {
-	Membership *string `json:"membership"`
+	Membership *string `json:"membership,omitempty"`
 }

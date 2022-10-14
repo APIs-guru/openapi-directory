@@ -1,6 +1,6 @@
 package shared
 
 type ListAndroidAppsResponse struct {
-	Apps          []AndroidApp `json:"apps"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Apps          []AndroidApp `json:"apps,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }

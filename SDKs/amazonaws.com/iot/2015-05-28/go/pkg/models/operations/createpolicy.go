@@ -20,7 +20,7 @@ type CreatePolicyHeaders struct {
 
 type CreatePolicyRequestBody struct {
 	PolicyDocument string       `json:"policyDocument"`
-	Tags           []shared.Tag `json:"tags"`
+	Tags           []shared.Tag `json:"tags,omitempty"`
 }
 
 type CreatePolicyRequest struct {

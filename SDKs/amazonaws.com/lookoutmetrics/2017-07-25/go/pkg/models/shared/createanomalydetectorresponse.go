@@ -1,5 +1,5 @@
 package shared
 
 type CreateAnomalyDetectorResponse struct {
-	AnomalyDetectorArn *string `json:"AnomalyDetectorArn"`
+	AnomalyDetectorArn *string `json:"AnomalyDetectorArn,omitempty"`
 }

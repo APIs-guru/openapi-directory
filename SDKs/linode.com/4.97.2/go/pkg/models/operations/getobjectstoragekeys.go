@@ -27,14 +27,14 @@ type GetObjectStorageKeysRequest struct {
 }
 
 type GetObjectStorageKeys200ApplicationJSON struct {
-	Data    []shared.ObjectStorageKey `json:"data"`
-	Page    *int64                    `json:"page"`
-	Pages   *int64                    `json:"pages"`
-	Results *int64                    `json:"results"`
+	Data    []shared.ObjectStorageKey `json:"data,omitempty"`
+	Page    *int64                    `json:"page,omitempty"`
+	Pages   *int64                    `json:"pages,omitempty"`
+	Results *int64                    `json:"results,omitempty"`
 }
 
 type GetObjectStorageKeysDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetObjectStorageKeysResponse struct {

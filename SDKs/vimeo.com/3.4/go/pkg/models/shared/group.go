@@ -241,8 +241,8 @@ type GroupUserMetadataConnections struct {
 }
 
 type GroupUserMetadataInteractionsAddPrivacyUser struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type GroupUserMetadataInteractionsBlock struct {
@@ -265,7 +265,7 @@ type GroupUserMetadataInteractionsReport struct {
 }
 
 type GroupUserMetadataInteractions struct {
-	AddPrivacyUser *GroupUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user"`
+	AddPrivacyUser *GroupUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
 	Block          GroupUserMetadataInteractionsBlock           `json:"block"`
 	Follow         GroupUserMetadataInteractionsFollow          `json:"follow"`
 	Report         GroupUserMetadataInteractionsReport          `json:"report"`
@@ -305,19 +305,19 @@ const (
 )
 
 type GroupUserPreferencesVideosPrivacy struct {
-	Add      *bool                                          `json:"add"`
-	Comments *GroupUserPreferencesVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                          `json:"download"`
-	Embed    *GroupUserPreferencesVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *GroupUserPreferencesVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                          `json:"add,omitempty"`
+	Comments *GroupUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                          `json:"download,omitempty"`
+	Embed    *GroupUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *GroupUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type GroupUserPreferencesVideos struct {
-	Privacy *GroupUserPreferencesVideosPrivacy `json:"privacy"`
+	Privacy *GroupUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type GroupUserPreferences struct {
-	Videos *GroupUserPreferencesVideos `json:"videos"`
+	Videos *GroupUserPreferencesVideos `json:"videos,omitempty"`
 }
 
 type GroupUserUploadQuotaLifetime struct {
@@ -362,15 +362,15 @@ type GroupUserWebsites struct {
 type GroupUserUser struct {
 	Account       GroupUserAccountEnum  `json:"account"`
 	Bio           string                `json:"bio"`
-	ContentFilter []string              `json:"content_filter"`
+	ContentFilter []string              `json:"content_filter,omitempty"`
 	CreatedTime   string                `json:"created_time"`
-	Email         *string               `json:"email"`
+	Email         *string               `json:"email,omitempty"`
 	Link          string                `json:"link"`
 	Location      string                `json:"location"`
 	Metadata      GroupUserMetadata     `json:"metadata"`
 	Name          string                `json:"name"`
 	Pictures      Picture               `json:"pictures"`
-	Preferences   *GroupUserPreferences `json:"preferences"`
+	Preferences   *GroupUserPreferences `json:"preferences,omitempty"`
 	ResourceKey   string                `json:"resource_key"`
 	UploadQuota   GroupUserUploadQuota  `json:"upload_quota"`
 	URI           string                `json:"uri"`
@@ -388,5 +388,5 @@ type Group struct {
 	Privacy      GroupPrivacy   `json:"privacy"`
 	ResourceKey  string         `json:"resource_key"`
 	URI          string         `json:"uri"`
-	User         *GroupUserUser `json:"user"`
+	User         *GroupUserUser `json:"user,omitempty"`
 }

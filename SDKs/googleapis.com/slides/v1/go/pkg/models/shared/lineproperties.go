@@ -45,12 +45,12 @@ const (
 )
 
 type LineProperties struct {
-	DashStyle       *LinePropertiesDashStyleEnum  `json:"dashStyle"`
-	EndArrow        *LinePropertiesEndArrowEnum   `json:"endArrow"`
-	EndConnection   *LineConnection               `json:"endConnection"`
-	LineFill        *LineFill                     `json:"lineFill"`
-	Link            *Link                         `json:"link"`
-	StartArrow      *LinePropertiesStartArrowEnum `json:"startArrow"`
-	StartConnection *LineConnection               `json:"startConnection"`
-	Weight          *Dimension                    `json:"weight"`
+	DashStyle       *LinePropertiesDashStyleEnum  `json:"dashStyle,omitempty"`
+	EndArrow        *LinePropertiesEndArrowEnum   `json:"endArrow,omitempty"`
+	EndConnection   *LineConnection               `json:"endConnection,omitempty"`
+	LineFill        *LineFill                     `json:"lineFill,omitempty"`
+	Link            *Link                         `json:"link,omitempty"`
+	StartArrow      *LinePropertiesStartArrowEnum `json:"startArrow,omitempty"`
+	StartConnection *LineConnection               `json:"startConnection,omitempty"`
+	Weight          *Dimension                    `json:"weight,omitempty"`
 }

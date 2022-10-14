@@ -14,13 +14,13 @@ type InstallKubernetesRequest struct {
 }
 
 type InstallKubernetes200ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type InstallKubernetes401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type InstallKubernetesResponse struct {

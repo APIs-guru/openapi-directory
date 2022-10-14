@@ -1,8 +1,8 @@
 package shared
 
 type LaunchPathSummary struct {
-	ConstraintSummaries []ConstraintSummary `json:"ConstraintSummaries"`
-	ID                  *string             `json:"Id"`
-	Name                *string             `json:"Name"`
-	Tags                []Tag               `json:"Tags"`
+	ConstraintSummaries []ConstraintSummary `json:"ConstraintSummaries,omitempty"`
+	ID                  *string             `json:"Id,omitempty"`
+	Name                *string             `json:"Name,omitempty"`
+	Tags                []Tag               `json:"Tags,omitempty"`
 }

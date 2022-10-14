@@ -22,6 +22,6 @@ const (
 )
 
 type ThirdPartyURL struct {
-	Type *ThirdPartyURLTypeEnum `json:"type"`
-	URL  *string                `json:"url"`
+	Type *ThirdPartyURLTypeEnum `json:"type,omitempty"`
+	URL  *string                `json:"url,omitempty"`
 }

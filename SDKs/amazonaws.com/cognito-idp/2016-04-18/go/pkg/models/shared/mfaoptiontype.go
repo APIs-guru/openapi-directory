@@ -1,6 +1,6 @@
 package shared
 
 type MfaOptionType struct {
-	AttributeName  *string                 `json:"AttributeName"`
-	DeliveryMedium *DeliveryMediumTypeEnum `json:"DeliveryMedium"`
+	AttributeName  *string                 `json:"AttributeName,omitempty"`
+	DeliveryMedium *DeliveryMediumTypeEnum `json:"DeliveryMedium,omitempty"`
 }

@@ -34,7 +34,7 @@ type Score struct {
 	ByID     ScoreDetail      `json:"by_id"`
 	ByName   ScoreDetail      `json:"by_name"`
 	DataSet  ScoreDataSetEnum `json:"data_set"`
-	Result   *ScoreResultEnum `json:"result"`
+	Result   *ScoreResultEnum `json:"result,omitempty"`
 	Score    float32          `json:"score"`
 	Severity interface{}      `json:"severity"`
 }

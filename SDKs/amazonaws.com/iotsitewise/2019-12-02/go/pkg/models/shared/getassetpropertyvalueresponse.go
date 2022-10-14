@@ -1,5 +1,5 @@
 package shared
 
 type GetAssetPropertyValueResponse struct {
-	PropertyValue *AssetPropertyValue `json:"propertyValue"`
+	PropertyValue *AssetPropertyValue `json:"propertyValue,omitempty"`
 }

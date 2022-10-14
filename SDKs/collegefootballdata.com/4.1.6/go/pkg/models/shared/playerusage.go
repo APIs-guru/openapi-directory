@@ -1,22 +1,22 @@
 package shared
 
 type PlayerUsageUsage struct {
-	FirstDown     *float64 `json:"firstDown"`
-	Overall       *float64 `json:"overall"`
-	Pass          *float64 `json:"pass"`
-	PassingDowns  *float64 `json:"passingDowns"`
-	Rush          *float64 `json:"rush"`
-	SecondDown    *float64 `json:"secondDown"`
-	StandardDowns *float64 `json:"standardDowns"`
-	ThirdDown     *float64 `json:"thirdDown"`
+	FirstDown     *float64 `json:"firstDown,omitempty"`
+	Overall       *float64 `json:"overall,omitempty"`
+	Pass          *float64 `json:"pass,omitempty"`
+	PassingDowns  *float64 `json:"passingDowns,omitempty"`
+	Rush          *float64 `json:"rush,omitempty"`
+	SecondDown    *float64 `json:"secondDown,omitempty"`
+	StandardDowns *float64 `json:"standardDowns,omitempty"`
+	ThirdDown     *float64 `json:"thirdDown,omitempty"`
 }
 
 type PlayerUsage struct {
-	Conference *string           `json:"conference"`
-	ID         *int64            `json:"id"`
-	Name       *string           `json:"name"`
-	Position   *string           `json:"position"`
-	Season     *int64            `json:"season"`
-	Team       *string           `json:"team"`
-	Usage      *PlayerUsageUsage `json:"usage"`
+	Conference *string           `json:"conference,omitempty"`
+	ID         *int64            `json:"id,omitempty"`
+	Name       *string           `json:"name,omitempty"`
+	Position   *string           `json:"position,omitempty"`
+	Season     *int64            `json:"season,omitempty"`
+	Team       *string           `json:"team,omitempty"`
+	Usage      *PlayerUsageUsage `json:"usage,omitempty"`
 }

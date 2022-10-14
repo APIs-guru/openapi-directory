@@ -1,6 +1,6 @@
 package shared
 
 type ProgressTimeseries struct {
-	CurrentProgress *float64 `json:"currentProgress"`
-	DataPoints      []Point  `json:"dataPoints"`
+	CurrentProgress *float64 `json:"currentProgress,omitempty"`
+	DataPoints      []Point  `json:"dataPoints,omitempty"`
 }

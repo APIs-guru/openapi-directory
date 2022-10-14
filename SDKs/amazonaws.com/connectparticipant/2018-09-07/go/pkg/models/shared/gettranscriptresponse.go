@@ -1,7 +1,7 @@
 package shared
 
 type GetTranscriptResponse struct {
-	InitialContactID *string `json:"InitialContactId"`
-	NextToken        *string `json:"NextToken"`
-	Transcript       []Item  `json:"Transcript"`
+	InitialContactID *string `json:"InitialContactId,omitempty"`
+	NextToken        *string `json:"NextToken,omitempty"`
+	Transcript       []Item  `json:"Transcript,omitempty"`
 }

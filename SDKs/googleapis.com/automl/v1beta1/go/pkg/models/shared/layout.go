@@ -16,8 +16,8 @@ const (
 )
 
 type Layout struct {
-	BoundingPoly    *BoundingPoly              `json:"boundingPoly"`
-	PageNumber      *int32                     `json:"pageNumber"`
-	TextSegment     *TextSegment               `json:"textSegment"`
-	TextSegmentType *LayoutTextSegmentTypeEnum `json:"textSegmentType"`
+	BoundingPoly    *BoundingPoly              `json:"boundingPoly,omitempty"`
+	PageNumber      *int32                     `json:"pageNumber,omitempty"`
+	TextSegment     *TextSegment               `json:"textSegment,omitempty"`
+	TextSegmentType *LayoutTextSegmentTypeEnum `json:"textSegmentType,omitempty"`
 }

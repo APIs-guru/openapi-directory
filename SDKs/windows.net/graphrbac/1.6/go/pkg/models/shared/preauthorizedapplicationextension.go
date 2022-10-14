@@ -1,5 +1,5 @@
 package shared
 
 type PreAuthorizedApplicationExtension struct {
-	Conditions []string `json:"conditions"`
+	Conditions []string `json:"conditions,omitempty"`
 }

@@ -32,6 +32,6 @@ const (
 )
 
 type MetricRequest struct {
-	Metric  *MetricRequestMetricEnum   `json:"metric"`
-	Options []MetricRequestOptionsEnum `json:"options"`
+	Metric  *MetricRequestMetricEnum   `json:"metric,omitempty"`
+	Options []MetricRequestOptionsEnum `json:"options,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type EndSessionResult struct {
-	TimingInformation *TimingInformation `json:"TimingInformation"`
+	TimingInformation *TimingInformation `json:"TimingInformation,omitempty"`
 }

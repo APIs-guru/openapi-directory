@@ -24,12 +24,12 @@ type ListContactsHeaders struct {
 }
 
 type ListContactsRequestBodyFilter struct {
-	FilteredStatus *shared.SubscriptionStatusEnum `json:"FilteredStatus"`
-	TopicFilter    *shared.TopicFilter            `json:"TopicFilter"`
+	FilteredStatus *shared.SubscriptionStatusEnum `json:"FilteredStatus,omitempty"`
+	TopicFilter    *shared.TopicFilter            `json:"TopicFilter,omitempty"`
 }
 
 type ListContactsRequestBody struct {
-	Filter *ListContactsRequestBodyFilter `json:"Filter"`
+	Filter *ListContactsRequestBodyFilter `json:"Filter,omitempty"`
 }
 
 type ListContactsRequest struct {

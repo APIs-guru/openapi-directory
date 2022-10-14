@@ -1,5 +1,5 @@
 package shared
 
 type UpdateFleetResult struct {
-	Fleet *Fleet `json:"Fleet"`
+	Fleet *Fleet `json:"Fleet,omitempty"`
 }

@@ -43,6 +43,6 @@ const (
 )
 
 type Landmark struct {
-	Position *Position         `json:"position"`
-	Type     *LandmarkTypeEnum `json:"type"`
+	Position *Position         `json:"position,omitempty"`
+	Type     *LandmarkTypeEnum `json:"type,omitempty"`
 }

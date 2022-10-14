@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleAPIServiceusageV1Service struct {
-	Config *GoogleAPIServiceusageV1ServiceConfig    `json:"config"`
-	Name   *string                                  `json:"name"`
-	Parent *string                                  `json:"parent"`
-	State  *GoogleAPIServiceusageV1ServiceStateEnum `json:"state"`
+	Config *GoogleAPIServiceusageV1ServiceConfig    `json:"config,omitempty"`
+	Name   *string                                  `json:"name,omitempty"`
+	Parent *string                                  `json:"parent,omitempty"`
+	State  *GoogleAPIServiceusageV1ServiceStateEnum `json:"state,omitempty"`
 }

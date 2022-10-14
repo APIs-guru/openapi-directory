@@ -1,11 +1,11 @@
 package shared
 
 type Project struct {
-	CreateTime     *string                   `json:"createTime"`
-	Creator        *GoogleAppsScriptTypeUser `json:"creator"`
-	LastModifyUser *GoogleAppsScriptTypeUser `json:"lastModifyUser"`
-	ParentID       *string                   `json:"parentId"`
-	ScriptID       *string                   `json:"scriptId"`
-	Title          *string                   `json:"title"`
-	UpdateTime     *string                   `json:"updateTime"`
+	CreateTime     *string                   `json:"createTime,omitempty"`
+	Creator        *GoogleAppsScriptTypeUser `json:"creator,omitempty"`
+	LastModifyUser *GoogleAppsScriptTypeUser `json:"lastModifyUser,omitempty"`
+	ParentID       *string                   `json:"parentId,omitempty"`
+	ScriptID       *string                   `json:"scriptId,omitempty"`
+	Title          *string                   `json:"title,omitempty"`
+	UpdateTime     *string                   `json:"updateTime,omitempty"`
 }

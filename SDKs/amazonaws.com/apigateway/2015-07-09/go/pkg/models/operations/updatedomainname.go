@@ -19,7 +19,7 @@ type UpdateDomainNameHeaders struct {
 }
 
 type UpdateDomainNameRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateDomainNameRequest struct {

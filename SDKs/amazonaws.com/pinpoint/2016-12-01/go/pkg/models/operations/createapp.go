@@ -15,8 +15,8 @@ type CreateAppHeaders struct {
 }
 
 type CreateAppRequestBodyCreateApplicationRequest struct {
-	Name *string           `json:"Name"`
-	Tags map[string]string `json:"tags"`
+	Name *string           `json:"Name,omitempty"`
+	Tags map[string]string `json:"tags,omitempty"`
 }
 
 type CreateAppRequestBody struct {

@@ -1,8 +1,8 @@
 package shared
 
 type PlacementAssignment struct {
-	Active                    *bool           `json:"active"`
-	PlacementID               *string         `json:"placementId"`
-	PlacementIDDimensionValue *DimensionValue `json:"placementIdDimensionValue"`
-	SslRequired               *bool           `json:"sslRequired"`
+	Active                    *bool           `json:"active,omitempty"`
+	PlacementID               *string         `json:"placementId,omitempty"`
+	PlacementIDDimensionValue *DimensionValue `json:"placementIdDimensionValue,omitempty"`
+	SslRequired               *bool           `json:"sslRequired,omitempty"`
 }

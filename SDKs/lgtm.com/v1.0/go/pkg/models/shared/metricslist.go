@@ -1,5 +1,5 @@
 package shared
 
 type MetricsList struct {
-	Data []MetricName `json:"data"`
+	Data []MetricName `json:"data,omitempty"`
 }

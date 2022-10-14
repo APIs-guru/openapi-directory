@@ -1,8 +1,8 @@
 package shared
 
 type PolicyDelegationSettings struct {
-	IamPermission  *string     `json:"iamPermission"`
-	IamServiceName *string     `json:"iamServiceName"`
-	PolicyName     *PolicyName `json:"policyName"`
-	Resource       *Resource   `json:"resource"`
+	IamPermission  *string     `json:"iamPermission,omitempty"`
+	IamServiceName *string     `json:"iamServiceName,omitempty"`
+	PolicyName     *PolicyName `json:"policyName,omitempty"`
+	Resource       *Resource   `json:"resource,omitempty"`
 }

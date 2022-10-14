@@ -10,8 +10,8 @@ const (
 )
 
 type Voice struct {
-	LanguageCodes          []string             `json:"languageCodes"`
-	Name                   *string              `json:"name"`
-	NaturalSampleRateHertz *int32               `json:"naturalSampleRateHertz"`
-	SsmlGender             *VoiceSsmlGenderEnum `json:"ssmlGender"`
+	LanguageCodes          []string             `json:"languageCodes,omitempty"`
+	Name                   *string              `json:"name,omitempty"`
+	NaturalSampleRateHertz *int32               `json:"naturalSampleRateHertz,omitempty"`
+	SsmlGender             *VoiceSsmlGenderEnum `json:"ssmlGender,omitempty"`
 }

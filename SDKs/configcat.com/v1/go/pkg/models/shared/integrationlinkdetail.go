@@ -1,10 +1,10 @@
 package shared
 
 type IntegrationLinkDetail struct {
-	Config      *ConfigModel      `json:"config"`
-	Environment *EnvironmentModel `json:"environment"`
-	Product     *ProductModel     `json:"product"`
-	ReadOnly    *bool             `json:"readOnly"`
-	Setting     *SettingDataModel `json:"setting"`
-	Status      *string           `json:"status"`
+	Config      *ConfigModel      `json:"config,omitempty"`
+	Environment *EnvironmentModel `json:"environment,omitempty"`
+	Product     *ProductModel     `json:"product,omitempty"`
+	ReadOnly    *bool             `json:"readOnly,omitempty"`
+	Setting     *SettingDataModel `json:"setting,omitempty"`
+	Status      *string           `json:"status,omitempty"`
 }

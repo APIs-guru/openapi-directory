@@ -1,7 +1,7 @@
 package shared
 
 type RoleMapping struct {
-	AmbiguousRoleResolution *AmbiguousRoleResolutionTypeEnum `json:"AmbiguousRoleResolution"`
-	RulesConfiguration      *RulesConfigurationType          `json:"RulesConfiguration"`
+	AmbiguousRoleResolution *AmbiguousRoleResolutionTypeEnum `json:"AmbiguousRoleResolution,omitempty"`
+	RulesConfiguration      *RulesConfigurationType          `json:"RulesConfiguration,omitempty"`
 	Type                    RoleMappingTypeEnum              `json:"Type"`
 }

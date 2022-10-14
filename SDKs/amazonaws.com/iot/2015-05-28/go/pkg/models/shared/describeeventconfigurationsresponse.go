@@ -5,7 +5,7 @@ import (
 )
 
 type DescribeEventConfigurationsResponse struct {
-	CreationDate        *time.Time               `json:"creationDate"`
-	EventConfigurations map[string]Configuration `json:"eventConfigurations"`
-	LastModifiedDate    *time.Time               `json:"lastModifiedDate"`
+	CreationDate        *time.Time               `json:"creationDate,omitempty"`
+	EventConfigurations map[string]Configuration `json:"eventConfigurations,omitempty"`
+	LastModifiedDate    *time.Time               `json:"lastModifiedDate,omitempty"`
 }

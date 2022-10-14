@@ -5,15 +5,15 @@ import (
 )
 
 type ResourceAllocationViewModel struct {
-	BusinessID *int32           `json:"businessId"`
-	EndDate    *time.Time       `json:"endDate"`
-	EndTime    *int32           `json:"endTime"`
-	ID         *int32           `json:"id"`
-	ObjectName *string          `json:"objectName"`
-	Reason     *string          `json:"reason"`
-	Repeat     *RepeatViewModel `json:"repeat"`
-	Repeats    *bool            `json:"repeats"`
-	ResourceID *int32           `json:"resourceId"`
-	StartDate  *time.Time       `json:"startDate"`
-	StartTime  *int32           `json:"startTime"`
+	BusinessID *int32           `json:"businessId,omitempty"`
+	EndDate    *time.Time       `json:"endDate,omitempty"`
+	EndTime    *int32           `json:"endTime,omitempty"`
+	ID         *int32           `json:"id,omitempty"`
+	ObjectName *string          `json:"objectName,omitempty"`
+	Reason     *string          `json:"reason,omitempty"`
+	Repeat     *RepeatViewModel `json:"repeat,omitempty"`
+	Repeats    *bool            `json:"repeats,omitempty"`
+	ResourceID *int32           `json:"resourceId,omitempty"`
+	StartDate  *time.Time       `json:"startDate,omitempty"`
+	StartTime  *int32           `json:"startTime,omitempty"`
 }

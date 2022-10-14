@@ -1,5 +1,5 @@
 package shared
 
 type GetWorkGroupOutput struct {
-	WorkGroup *WorkGroup `json:"WorkGroup"`
+	WorkGroup *WorkGroup `json:"WorkGroup,omitempty"`
 }

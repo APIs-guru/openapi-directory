@@ -1,5 +1,5 @@
 package shared
 
 type BigQueryDestination struct {
-	DatasetID *string `json:"datasetId"`
+	DatasetID *string `json:"datasetId,omitempty"`
 }

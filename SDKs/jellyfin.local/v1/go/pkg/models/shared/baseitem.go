@@ -5,15 +5,15 @@ import (
 )
 
 type BaseItem struct {
-	Container                *string    `json:"Container"`
-	DateLastSaved            *time.Time `json:"DateLastSaved"`
-	ExtraIds                 []string   `json:"ExtraIds"`
-	Height                   *int32     `json:"Height"`
-	IsHd                     *bool      `json:"IsHD"`
-	IsShortcut               *bool      `json:"IsShortcut"`
-	RemoteTrailers           []MediaURL `json:"RemoteTrailers"`
-	ShortcutPath             *string    `json:"ShortcutPath"`
-	Size                     *int64     `json:"Size"`
-	SupportsExternalTransfer *bool      `json:"SupportsExternalTransfer"`
-	Width                    *int32     `json:"Width"`
+	Container                *string    `json:"Container,omitempty"`
+	DateLastSaved            *time.Time `json:"DateLastSaved,omitempty"`
+	ExtraIds                 []string   `json:"ExtraIds,omitempty"`
+	Height                   *int32     `json:"Height,omitempty"`
+	IsHd                     *bool      `json:"IsHD,omitempty"`
+	IsShortcut               *bool      `json:"IsShortcut,omitempty"`
+	RemoteTrailers           []MediaURL `json:"RemoteTrailers,omitempty"`
+	ShortcutPath             *string    `json:"ShortcutPath,omitempty"`
+	Size                     *int64     `json:"Size,omitempty"`
+	SupportsExternalTransfer *bool      `json:"SupportsExternalTransfer,omitempty"`
+	Width                    *int32     `json:"Width,omitempty"`
 }

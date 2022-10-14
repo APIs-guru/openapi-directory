@@ -10,7 +10,7 @@ const (
 )
 
 type DeviceIPBlock struct {
-	AddedDate *Date                  `json:"addedDate"`
-	Block     *string                `json:"block"`
-	Form      *DeviceIPBlockFormEnum `json:"form"`
+	AddedDate *Date                  `json:"addedDate,omitempty"`
+	Block     *string                `json:"block,omitempty"`
+	Form      *DeviceIPBlockFormEnum `json:"form,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ListWorkerBlocksResponse struct {
-	NextToken    *string       `json:"NextToken"`
-	NumResults   *int64        `json:"NumResults"`
-	WorkerBlocks []WorkerBlock `json:"WorkerBlocks"`
+	NextToken    *string       `json:"NextToken,omitempty"`
+	NumResults   *int64        `json:"NumResults,omitempty"`
+	WorkerBlocks []WorkerBlock `json:"WorkerBlocks,omitempty"`
 }

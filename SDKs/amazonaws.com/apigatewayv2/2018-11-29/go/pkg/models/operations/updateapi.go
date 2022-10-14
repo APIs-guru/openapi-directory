@@ -19,26 +19,26 @@ type UpdateAPIHeaders struct {
 }
 
 type UpdateAPIRequestBodyCorsConfiguration struct {
-	AllowCredentials *bool    `json:"AllowCredentials"`
-	AllowHeaders     []string `json:"AllowHeaders"`
-	AllowMethods     []string `json:"AllowMethods"`
-	AllowOrigins     []string `json:"AllowOrigins"`
-	ExposeHeaders    []string `json:"ExposeHeaders"`
-	MaxAge           *int64   `json:"MaxAge"`
+	AllowCredentials *bool    `json:"AllowCredentials,omitempty"`
+	AllowHeaders     []string `json:"AllowHeaders,omitempty"`
+	AllowMethods     []string `json:"AllowMethods,omitempty"`
+	AllowOrigins     []string `json:"AllowOrigins,omitempty"`
+	ExposeHeaders    []string `json:"ExposeHeaders,omitempty"`
+	MaxAge           *int64   `json:"MaxAge,omitempty"`
 }
 
 type UpdateAPIRequestBody struct {
-	APIKeySelectionExpression *string                                `json:"apiKeySelectionExpression"`
-	CorsConfiguration         *UpdateAPIRequestBodyCorsConfiguration `json:"corsConfiguration"`
-	CredentialsArn            *string                                `json:"credentialsArn"`
-	Description               *string                                `json:"description"`
-	DisableExecuteAPIEndpoint *bool                                  `json:"disableExecuteApiEndpoint"`
-	DisableSchemaValidation   *bool                                  `json:"disableSchemaValidation"`
-	Name                      *string                                `json:"name"`
-	RouteKey                  *string                                `json:"routeKey"`
-	RouteSelectionExpression  *string                                `json:"routeSelectionExpression"`
-	Target                    *string                                `json:"target"`
-	Version                   *string                                `json:"version"`
+	APIKeySelectionExpression *string                                `json:"apiKeySelectionExpression,omitempty"`
+	CorsConfiguration         *UpdateAPIRequestBodyCorsConfiguration `json:"corsConfiguration,omitempty"`
+	CredentialsArn            *string                                `json:"credentialsArn,omitempty"`
+	Description               *string                                `json:"description,omitempty"`
+	DisableExecuteAPIEndpoint *bool                                  `json:"disableExecuteApiEndpoint,omitempty"`
+	DisableSchemaValidation   *bool                                  `json:"disableSchemaValidation,omitempty"`
+	Name                      *string                                `json:"name,omitempty"`
+	RouteKey                  *string                                `json:"routeKey,omitempty"`
+	RouteSelectionExpression  *string                                `json:"routeSelectionExpression,omitempty"`
+	Target                    *string                                `json:"target,omitempty"`
+	Version                   *string                                `json:"version,omitempty"`
 }
 
 type UpdateAPIRequest struct {

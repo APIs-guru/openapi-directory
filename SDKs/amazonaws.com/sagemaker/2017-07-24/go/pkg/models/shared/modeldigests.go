@@ -1,5 +1,5 @@
 package shared
 
 type ModelDigests struct {
-	ArtifactDigest *string `json:"ArtifactDigest"`
+	ArtifactDigest *string `json:"ArtifactDigest,omitempty"`
 }

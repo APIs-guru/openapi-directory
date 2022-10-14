@@ -5,10 +5,10 @@ import (
 )
 
 type SslCertificateDetail struct {
-	CommonName      *string                            `json:"common_name"`
-	ExpiresAfter    *time.Time                         `json:"expires_after"`
-	Sha1Fingerprint *string                            `json:"sha1_fingerprint"`
-	SubjectAltNames []SslSubjectAltName                `json:"subject_alt_names"`
-	Type            *SslCertificateTypeEnum            `json:"type"`
-	ValidationLevel *SslCertificateValidationLevelEnum `json:"validation_level"`
+	CommonName      *string                            `json:"common_name,omitempty"`
+	ExpiresAfter    *time.Time                         `json:"expires_after,omitempty"`
+	Sha1Fingerprint *string                            `json:"sha1_fingerprint,omitempty"`
+	SubjectAltNames []SslSubjectAltName                `json:"subject_alt_names,omitempty"`
+	Type            *SslCertificateTypeEnum            `json:"type,omitempty"`
+	ValidationLevel *SslCertificateValidationLevelEnum `json:"validation_level,omitempty"`
 }

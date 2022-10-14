@@ -5,11 +5,11 @@ import (
 )
 
 type DescribeDataIngestionJobResponse struct {
-	CreatedAt                   *time.Time                   `json:"CreatedAt"`
-	DatasetArn                  *string                      `json:"DatasetArn"`
-	FailedReason                *string                      `json:"FailedReason"`
-	IngestionInputConfiguration *IngestionInputConfiguration `json:"IngestionInputConfiguration"`
-	JobID                       *string                      `json:"JobId"`
-	RoleArn                     *string                      `json:"RoleArn"`
-	Status                      *IngestionJobStatusEnum      `json:"Status"`
+	CreatedAt                   *time.Time                   `json:"CreatedAt,omitempty"`
+	DatasetArn                  *string                      `json:"DatasetArn,omitempty"`
+	FailedReason                *string                      `json:"FailedReason,omitempty"`
+	IngestionInputConfiguration *IngestionInputConfiguration `json:"IngestionInputConfiguration,omitempty"`
+	JobID                       *string                      `json:"JobId,omitempty"`
+	RoleArn                     *string                      `json:"RoleArn,omitempty"`
+	Status                      *IngestionJobStatusEnum      `json:"Status,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type DimensionProperties struct {
-	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference"`
-	DeveloperMetadata         []DeveloperMetadata        `json:"developerMetadata"`
-	HiddenByFilter            *bool                      `json:"hiddenByFilter"`
-	HiddenByUser              *bool                      `json:"hiddenByUser"`
-	PixelSize                 *int32                     `json:"pixelSize"`
+	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference,omitempty"`
+	DeveloperMetadata         []DeveloperMetadata        `json:"developerMetadata,omitempty"`
+	HiddenByFilter            *bool                      `json:"hiddenByFilter,omitempty"`
+	HiddenByUser              *bool                      `json:"hiddenByUser,omitempty"`
+	PixelSize                 *int32                     `json:"pixelSize,omitempty"`
 }

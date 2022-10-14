@@ -1,6 +1,6 @@
 package shared
 
 type ValueHolder struct {
-	IonBinary *string `json:"IonBinary"`
-	IonText   *string `json:"IonText"`
+	IonBinary *string `json:"IonBinary,omitempty"`
+	IonText   *string `json:"IonText,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type SoftwareRecipeStep struct {
-	ArchiveExtraction *SoftwareRecipeStepExtractArchive `json:"archiveExtraction"`
-	DpkgInstallation  *SoftwareRecipeStepInstallDpkg    `json:"dpkgInstallation"`
-	FileCopy          *SoftwareRecipeStepCopyFile       `json:"fileCopy"`
-	FileExec          *SoftwareRecipeStepExecFile       `json:"fileExec"`
-	MsiInstallation   *SoftwareRecipeStepInstallMsi     `json:"msiInstallation"`
-	RpmInstallation   *SoftwareRecipeStepInstallRpm     `json:"rpmInstallation"`
-	ScriptRun         *SoftwareRecipeStepRunScript      `json:"scriptRun"`
+	ArchiveExtraction *SoftwareRecipeStepExtractArchive `json:"archiveExtraction,omitempty"`
+	DpkgInstallation  *SoftwareRecipeStepInstallDpkg    `json:"dpkgInstallation,omitempty"`
+	FileCopy          *SoftwareRecipeStepCopyFile       `json:"fileCopy,omitempty"`
+	FileExec          *SoftwareRecipeStepExecFile       `json:"fileExec,omitempty"`
+	MsiInstallation   *SoftwareRecipeStepInstallMsi     `json:"msiInstallation,omitempty"`
+	RpmInstallation   *SoftwareRecipeStepInstallRpm     `json:"rpmInstallation,omitempty"`
+	ScriptRun         *SoftwareRecipeStepRunScript      `json:"scriptRun,omitempty"`
 }

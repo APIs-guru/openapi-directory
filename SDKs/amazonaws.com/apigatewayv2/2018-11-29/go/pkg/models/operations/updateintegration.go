@@ -52,27 +52,27 @@ const (
 )
 
 type UpdateIntegrationRequestBodyTLSConfig struct {
-	ServerNameToVerify *string `json:"ServerNameToVerify"`
+	ServerNameToVerify *string `json:"ServerNameToVerify,omitempty"`
 }
 
 type UpdateIntegrationRequestBody struct {
-	ConnectionID                *string                                                  `json:"connectionId"`
-	ConnectionType              *UpdateIntegrationRequestBodyConnectionTypeEnum          `json:"connectionType"`
-	ContentHandlingStrategy     *UpdateIntegrationRequestBodyContentHandlingStrategyEnum `json:"contentHandlingStrategy"`
-	CredentialsArn              *string                                                  `json:"credentialsArn"`
-	Description                 *string                                                  `json:"description"`
-	IntegrationMethod           *string                                                  `json:"integrationMethod"`
-	IntegrationSubtype          *string                                                  `json:"integrationSubtype"`
-	IntegrationType             *UpdateIntegrationRequestBodyIntegrationTypeEnum         `json:"integrationType"`
-	IntegrationURI              *string                                                  `json:"integrationUri"`
-	PassthroughBehavior         *UpdateIntegrationRequestBodyPassthroughBehaviorEnum     `json:"passthroughBehavior"`
-	PayloadFormatVersion        *string                                                  `json:"payloadFormatVersion"`
-	RequestParameters           map[string]string                                        `json:"requestParameters"`
-	RequestTemplates            map[string]string                                        `json:"requestTemplates"`
-	ResponseParameters          map[string]map[string]string                             `json:"responseParameters"`
-	TemplateSelectionExpression *string                                                  `json:"templateSelectionExpression"`
-	TimeoutInMillis             *int64                                                   `json:"timeoutInMillis"`
-	TLSConfig                   *UpdateIntegrationRequestBodyTLSConfig                   `json:"tlsConfig"`
+	ConnectionID                *string                                                  `json:"connectionId,omitempty"`
+	ConnectionType              *UpdateIntegrationRequestBodyConnectionTypeEnum          `json:"connectionType,omitempty"`
+	ContentHandlingStrategy     *UpdateIntegrationRequestBodyContentHandlingStrategyEnum `json:"contentHandlingStrategy,omitempty"`
+	CredentialsArn              *string                                                  `json:"credentialsArn,omitempty"`
+	Description                 *string                                                  `json:"description,omitempty"`
+	IntegrationMethod           *string                                                  `json:"integrationMethod,omitempty"`
+	IntegrationSubtype          *string                                                  `json:"integrationSubtype,omitempty"`
+	IntegrationType             *UpdateIntegrationRequestBodyIntegrationTypeEnum         `json:"integrationType,omitempty"`
+	IntegrationURI              *string                                                  `json:"integrationUri,omitempty"`
+	PassthroughBehavior         *UpdateIntegrationRequestBodyPassthroughBehaviorEnum     `json:"passthroughBehavior,omitempty"`
+	PayloadFormatVersion        *string                                                  `json:"payloadFormatVersion,omitempty"`
+	RequestParameters           map[string]string                                        `json:"requestParameters,omitempty"`
+	RequestTemplates            map[string]string                                        `json:"requestTemplates,omitempty"`
+	ResponseParameters          map[string]map[string]string                             `json:"responseParameters,omitempty"`
+	TemplateSelectionExpression *string                                                  `json:"templateSelectionExpression,omitempty"`
+	TimeoutInMillis             *int64                                                   `json:"timeoutInMillis,omitempty"`
+	TLSConfig                   *UpdateIntegrationRequestBodyTLSConfig                   `json:"tlsConfig,omitempty"`
 }
 
 type UpdateIntegrationRequest struct {

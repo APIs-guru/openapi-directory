@@ -2,6 +2,6 @@ package shared
 
 type ListNetworkProfilesRequest struct {
 	Arn       string                  `json:"arn"`
-	NextToken *string                 `json:"nextToken"`
-	Type      *NetworkProfileTypeEnum `json:"type"`
+	NextToken *string                 `json:"nextToken,omitempty"`
+	Type      *NetworkProfileTypeEnum `json:"type,omitempty"`
 }

@@ -16,15 +16,15 @@ type MergeTemplatesRequest struct {
 }
 
 type MergeTemplates200ApplicationJSONMeta struct {
-	ContentType *string `json:"content-type"`
-	DisplayName *string `json:"display_name"`
-	Encoding    *string `json:"encoding"`
-	Name        *string `json:"name"`
+	ContentType *string `json:"content-type,omitempty"`
+	DisplayName *string `json:"display_name,omitempty"`
+	Encoding    *string `json:"encoding,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 type MergeTemplates200ApplicationJSON struct {
-	Meta     *MergeTemplates200ApplicationJSONMeta `json:"meta"`
-	Response *string                               `json:"response"`
+	Meta     *MergeTemplates200ApplicationJSONMeta `json:"meta,omitempty"`
+	Response *string                               `json:"response,omitempty"`
 }
 
 type MergeTemplates401ApplicationJSONErrorEnum string
@@ -43,8 +43,8 @@ const (
 )
 
 type MergeTemplates401ApplicationJSON struct {
-	Error  *MergeTemplates401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *MergeTemplates401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type MergeTemplates403ApplicationJSONErrorEnum string
@@ -54,8 +54,8 @@ const (
 )
 
 type MergeTemplates403ApplicationJSON struct {
-	Error  *MergeTemplates403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *MergeTemplates403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type MergeTemplates404ApplicationJSONErrorEnum string
@@ -67,8 +67,8 @@ const (
 )
 
 type MergeTemplates404ApplicationJSON struct {
-	Error  *MergeTemplates404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *MergeTemplates404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type MergeTemplates422ApplicationJSONErrorEnum string
@@ -81,13 +81,13 @@ const (
 )
 
 type MergeTemplates422ApplicationJSON struct {
-	Error  *MergeTemplates422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *MergeTemplates422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type MergeTemplates500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type MergeTemplatesResponse struct {

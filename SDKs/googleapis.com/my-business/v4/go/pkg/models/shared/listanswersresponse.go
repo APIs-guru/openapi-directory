@@ -1,7 +1,7 @@
 package shared
 
 type ListAnswersResponse struct {
-	Answers       []Answer `json:"answers"`
-	NextPageToken *string  `json:"nextPageToken"`
-	TotalSize     *int32   `json:"totalSize"`
+	Answers       []Answer `json:"answers,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	TotalSize     *int32   `json:"totalSize,omitempty"`
 }

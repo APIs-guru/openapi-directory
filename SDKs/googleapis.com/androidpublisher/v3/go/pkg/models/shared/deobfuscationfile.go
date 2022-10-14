@@ -9,5 +9,5 @@ const (
 )
 
 type DeobfuscationFile struct {
-	SymbolType *DeobfuscationFileSymbolTypeEnum `json:"symbolType"`
+	SymbolType *DeobfuscationFileSymbolTypeEnum `json:"symbolType,omitempty"`
 }

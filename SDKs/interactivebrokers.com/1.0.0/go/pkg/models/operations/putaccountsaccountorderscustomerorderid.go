@@ -10,20 +10,20 @@ type PutAccountsAccountOrdersCustomerOrderIDPathParams struct {
 }
 
 type PutAccountsAccountOrdersCustomerOrderIDRequestBody struct {
-	AuxPrice              *float64 `json:"Aux Price"`
-	CustomerOrderID       *string  `json:"CustomerOrderId"`
-	GermanHftAlgo         *bool    `json:"GermanHftAlgo"`
-	Mifid2Algo            *string  `json:"Mifid2Algo"`
-	Mifid2DecisionMaker   *string  `json:"Mifid2DecisionMaker"`
-	Mifid2ExecutionAlgo   *string  `json:"Mifid2ExecutionAlgo"`
-	Mifid2ExecutionTrader *string  `json:"Mifid2ExecutionTrader"`
-	OrderType             *float64 `json:"Order Type"`
-	OrigCustomerOrderID   *string  `json:"OrigCustomerOrderId"`
-	OutsideRth            *float64 `json:"Outside RTH"`
-	Price                 *float64 `json:"Price"`
-	Quantity              *float64 `json:"Quantity"`
-	Side                  *float64 `json:"Side"`
-	TimeInForce           *float64 `json:"Time in Force"`
+	AuxPrice              *float64 `json:"Aux Price,omitempty"`
+	CustomerOrderID       *string  `json:"CustomerOrderId,omitempty"`
+	GermanHftAlgo         *bool    `json:"GermanHftAlgo,omitempty"`
+	Mifid2Algo            *string  `json:"Mifid2Algo,omitempty"`
+	Mifid2DecisionMaker   *string  `json:"Mifid2DecisionMaker,omitempty"`
+	Mifid2ExecutionAlgo   *string  `json:"Mifid2ExecutionAlgo,omitempty"`
+	Mifid2ExecutionTrader *string  `json:"Mifid2ExecutionTrader,omitempty"`
+	OrderType             *float64 `json:"Order Type,omitempty"`
+	OrigCustomerOrderID   *string  `json:"OrigCustomerOrderId,omitempty"`
+	OutsideRth            *float64 `json:"Outside RTH,omitempty"`
+	Price                 *float64 `json:"Price,omitempty"`
+	Quantity              *float64 `json:"Quantity,omitempty"`
+	Side                  *float64 `json:"Side,omitempty"`
+	TimeInForce           *float64 `json:"Time in Force,omitempty"`
 }
 
 type PutAccountsAccountOrdersCustomerOrderIDRequest struct {
@@ -32,14 +32,14 @@ type PutAccountsAccountOrdersCustomerOrderIDRequest struct {
 }
 
 type PutAccountsAccountOrdersCustomerOrderID200ApplicationJSON struct {
-	CustomerOrderID *string                 `json:"CustomerOrderId"`
-	OrderQty        *float64                `json:"OrderQty"`
-	OrderType       *float64                `json:"OrderType"`
-	Price           *string                 `json:"Price"`
-	Side            *float64                `json:"Side"`
-	Status          *shared.OrderStatusEnum `json:"Status"`
-	Symbol          *float64                `json:"Symbol"`
-	Warning         *string                 `json:"Warning"`
+	CustomerOrderID *string                 `json:"CustomerOrderId,omitempty"`
+	OrderQty        *float64                `json:"OrderQty,omitempty"`
+	OrderType       *float64                `json:"OrderType,omitempty"`
+	Price           *string                 `json:"Price,omitempty"`
+	Side            *float64                `json:"Side,omitempty"`
+	Status          *shared.OrderStatusEnum `json:"Status,omitempty"`
+	Symbol          *float64                `json:"Symbol,omitempty"`
+	Warning         *string                 `json:"Warning,omitempty"`
 }
 
 type PutAccountsAccountOrdersCustomerOrderIDResponse struct {

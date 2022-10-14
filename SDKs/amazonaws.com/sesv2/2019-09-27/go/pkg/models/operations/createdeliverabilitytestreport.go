@@ -15,16 +15,16 @@ type CreateDeliverabilityTestReportHeaders struct {
 }
 
 type CreateDeliverabilityTestReportRequestBodyContent struct {
-	Raw      *shared.RawMessage `json:"Raw"`
-	Simple   *shared.Message    `json:"Simple"`
-	Template *shared.Template   `json:"Template"`
+	Raw      *shared.RawMessage `json:"Raw,omitempty"`
+	Simple   *shared.Message    `json:"Simple,omitempty"`
+	Template *shared.Template   `json:"Template,omitempty"`
 }
 
 type CreateDeliverabilityTestReportRequestBody struct {
 	Content          CreateDeliverabilityTestReportRequestBodyContent `json:"Content"`
 	FromEmailAddress string                                           `json:"FromEmailAddress"`
-	ReportName       *string                                          `json:"ReportName"`
-	Tags             []shared.Tag                                     `json:"Tags"`
+	ReportName       *string                                          `json:"ReportName,omitempty"`
+	Tags             []shared.Tag                                     `json:"Tags,omitempty"`
 }
 
 type CreateDeliverabilityTestReportRequest struct {

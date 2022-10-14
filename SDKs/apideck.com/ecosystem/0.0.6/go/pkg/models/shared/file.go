@@ -13,10 +13,10 @@ const (
 )
 
 type File struct {
-	ContentType *string       `json:"content_type"`
-	CreatedAt   *time.Time    `json:"created_at"`
-	ID          *string       `json:"id"`
-	Type        *FileTypeEnum `json:"type"`
-	UpdatedAt   *time.Time    `json:"updated_at"`
+	ContentType *string       `json:"content_type,omitempty"`
+	CreatedAt   *time.Time    `json:"created_at,omitempty"`
+	ID          *string       `json:"id,omitempty"`
+	Type        *FileTypeEnum `json:"type,omitempty"`
+	UpdatedAt   *time.Time    `json:"updated_at,omitempty"`
 	URL         string        `json:"url"`
 }

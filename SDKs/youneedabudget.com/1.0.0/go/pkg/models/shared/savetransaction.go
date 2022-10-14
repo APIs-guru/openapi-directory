@@ -26,14 +26,14 @@ const (
 type SaveTransaction struct {
 	AccountID       string                        `json:"account_id"`
 	Amount          int64                         `json:"amount"`
-	Approved        *bool                         `json:"approved"`
-	CategoryID      *string                       `json:"category_id"`
-	Cleared         *SaveTransactionClearedEnum   `json:"cleared"`
+	Approved        *bool                         `json:"approved,omitempty"`
+	CategoryID      *string                       `json:"category_id,omitempty"`
+	Cleared         *SaveTransactionClearedEnum   `json:"cleared,omitempty"`
 	Date            time.Time                     `json:"date"`
-	FlagColor       *SaveTransactionFlagColorEnum `json:"flag_color"`
-	ImportID        *string                       `json:"import_id"`
-	Memo            *string                       `json:"memo"`
-	PayeeID         *string                       `json:"payee_id"`
-	PayeeName       *string                       `json:"payee_name"`
-	Subtransactions []SaveSubTransaction          `json:"subtransactions"`
+	FlagColor       *SaveTransactionFlagColorEnum `json:"flag_color,omitempty"`
+	ImportID        *string                       `json:"import_id,omitempty"`
+	Memo            *string                       `json:"memo,omitempty"`
+	PayeeID         *string                       `json:"payee_id,omitempty"`
+	PayeeName       *string                       `json:"payee_name,omitempty"`
+	Subtransactions []SaveSubTransaction          `json:"subtransactions,omitempty"`
 }

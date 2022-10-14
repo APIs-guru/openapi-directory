@@ -1,5 +1,5 @@
 package shared
 
 type GetFileUploadURLResponse struct {
-	FileUploadURL *string `json:"FileUploadURL"`
+	FileUploadURL *string `json:"FileUploadURL,omitempty"`
 }

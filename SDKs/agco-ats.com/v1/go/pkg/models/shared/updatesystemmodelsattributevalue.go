@@ -6,6 +6,6 @@ import (
 
 type UpdateSystemModelsAttributeValue struct {
 	Key       string     `json:"Key"`
-	TimeStamp *time.Time `json:"TimeStamp"`
-	Value     *string    `json:"Value"`
+	TimeStamp *time.Time `json:"TimeStamp,omitempty"`
+	Value     *string    `json:"Value,omitempty"`
 }

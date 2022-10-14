@@ -19,7 +19,7 @@ type GetTaskRequest struct {
 }
 
 type GetTask200ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data"`
+	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type GetTaskResponse struct {

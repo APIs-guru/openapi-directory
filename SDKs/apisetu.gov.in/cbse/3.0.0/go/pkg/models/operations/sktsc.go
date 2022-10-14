@@ -17,8 +17,8 @@ const (
 )
 
 type SktscRequestBody struct {
-	CertificateParameters *SktscRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *SktscRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                SktscRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Sktsc400ApplicationJSON struct {
-	Error            *Sktsc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sktsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sktsc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sktsc401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Sktsc401ApplicationJSON struct {
-	Error            *Sktsc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sktsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sktsc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sktsc404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Sktsc404ApplicationJSON struct {
-	Error            *Sktsc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sktsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sktsc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sktsc500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Sktsc500ApplicationJSON struct {
-	Error            *Sktsc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sktsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sktsc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sktsc502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Sktsc502ApplicationJSON struct {
-	Error            *Sktsc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sktsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sktsc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sktsc503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Sktsc503ApplicationJSON struct {
-	Error            *Sktsc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sktsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sktsc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sktsc504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Sktsc504ApplicationJSON struct {
-	Error            *Sktsc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sktsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sktsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SktscResponse struct {

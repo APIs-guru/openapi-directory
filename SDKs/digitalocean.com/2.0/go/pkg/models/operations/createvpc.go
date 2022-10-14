@@ -5,8 +5,8 @@ import (
 )
 
 type CreateVpcRequestBody struct {
-	Description *string `json:"description"`
-	IPRange     *string `json:"ip_range"`
+	Description *string `json:"description,omitempty"`
+	IPRange     *string `json:"ip_range,omitempty"`
 	Name        string  `json:"name"`
 	Region      string  `json:"region"`
 }
@@ -16,13 +16,13 @@ type CreateVpcRequest struct {
 }
 
 type CreateVpc201ApplicationJSON struct {
-	Vpc *shared.Onev21vpcsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesVpcsItems `json:"vpc"`
+	Vpc *shared.Onev21vpcsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesVpcsItems `json:"vpc,omitempty"`
 }
 
 type CreateVpc401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateVpcResponse struct {

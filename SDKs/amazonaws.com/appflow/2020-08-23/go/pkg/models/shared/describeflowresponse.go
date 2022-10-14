@@ -5,20 +5,20 @@ import (
 )
 
 type DescribeFlowResponse struct {
-	CreatedAt                 *time.Time              `json:"createdAt"`
-	CreatedBy                 *string                 `json:"createdBy"`
-	Description               *string                 `json:"description"`
-	DestinationFlowConfigList []DestinationFlowConfig `json:"destinationFlowConfigList"`
-	FlowArn                   *string                 `json:"flowArn"`
-	FlowName                  *string                 `json:"flowName"`
-	FlowStatus                *FlowStatusEnum         `json:"flowStatus"`
-	FlowStatusMessage         *string                 `json:"flowStatusMessage"`
-	KmsArn                    *string                 `json:"kmsArn"`
-	LastRunExecutionDetails   *ExecutionDetails       `json:"lastRunExecutionDetails"`
-	LastUpdatedAt             *time.Time              `json:"lastUpdatedAt"`
-	LastUpdatedBy             *string                 `json:"lastUpdatedBy"`
-	SourceFlowConfig          *SourceFlowConfig       `json:"sourceFlowConfig"`
-	Tags                      map[string]string       `json:"tags"`
-	Tasks                     []Task                  `json:"tasks"`
-	TriggerConfig             *TriggerConfig          `json:"triggerConfig"`
+	CreatedAt                 *time.Time              `json:"createdAt,omitempty"`
+	CreatedBy                 *string                 `json:"createdBy,omitempty"`
+	Description               *string                 `json:"description,omitempty"`
+	DestinationFlowConfigList []DestinationFlowConfig `json:"destinationFlowConfigList,omitempty"`
+	FlowArn                   *string                 `json:"flowArn,omitempty"`
+	FlowName                  *string                 `json:"flowName,omitempty"`
+	FlowStatus                *FlowStatusEnum         `json:"flowStatus,omitempty"`
+	FlowStatusMessage         *string                 `json:"flowStatusMessage,omitempty"`
+	KmsArn                    *string                 `json:"kmsArn,omitempty"`
+	LastRunExecutionDetails   *ExecutionDetails       `json:"lastRunExecutionDetails,omitempty"`
+	LastUpdatedAt             *time.Time              `json:"lastUpdatedAt,omitempty"`
+	LastUpdatedBy             *string                 `json:"lastUpdatedBy,omitempty"`
+	SourceFlowConfig          *SourceFlowConfig       `json:"sourceFlowConfig,omitempty"`
+	Tags                      map[string]string       `json:"tags,omitempty"`
+	Tasks                     []Task                  `json:"tasks,omitempty"`
+	TriggerConfig             *TriggerConfig          `json:"triggerConfig,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type RepositoryCatalogDataInput struct {
-	AboutText        *string  `json:"aboutText"`
-	Architectures    []string `json:"architectures"`
-	Description      *string  `json:"description"`
-	LogoImageBlob    *string  `json:"logoImageBlob"`
-	OperatingSystems []string `json:"operatingSystems"`
-	UsageText        *string  `json:"usageText"`
+	AboutText        *string  `json:"aboutText,omitempty"`
+	Architectures    []string `json:"architectures,omitempty"`
+	Description      *string  `json:"description,omitempty"`
+	LogoImageBlob    *string  `json:"logoImageBlob,omitempty"`
+	OperatingSystems []string `json:"operatingSystems,omitempty"`
+	UsageText        *string  `json:"usageText,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type EvaluateAnnotationStoreRequest struct {
-	BigqueryDestination   *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestination `json:"bigqueryDestination"`
-	EvalInfoTypeMapping   map[string]string                                          `json:"evalInfoTypeMapping"`
-	GoldenInfoTypeMapping map[string]string                                          `json:"goldenInfoTypeMapping"`
-	GoldenStore           *string                                                    `json:"goldenStore"`
-	InfoTypeConfig        *InfoTypeConfig                                            `json:"infoTypeConfig"`
+	BigqueryDestination   *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestination `json:"bigqueryDestination,omitempty"`
+	EvalInfoTypeMapping   map[string]string                                          `json:"evalInfoTypeMapping,omitempty"`
+	GoldenInfoTypeMapping map[string]string                                          `json:"goldenInfoTypeMapping,omitempty"`
+	GoldenStore           *string                                                    `json:"goldenStore,omitempty"`
+	InfoTypeConfig        *InfoTypeConfig                                            `json:"infoTypeConfig,omitempty"`
 }

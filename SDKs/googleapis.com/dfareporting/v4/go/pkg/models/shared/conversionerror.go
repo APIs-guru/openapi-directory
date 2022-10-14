@@ -10,7 +10,7 @@ const (
 )
 
 type ConversionError struct {
-	Code    *ConversionErrorCodeEnum `json:"code"`
-	Kind    *string                  `json:"kind"`
-	Message *string                  `json:"message"`
+	Code    *ConversionErrorCodeEnum `json:"code,omitempty"`
+	Kind    *string                  `json:"kind,omitempty"`
+	Message *string                  `json:"message,omitempty"`
 }

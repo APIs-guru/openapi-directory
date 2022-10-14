@@ -1,5 +1,5 @@
 package shared
 
 type EndpointVerificationSpecificAttributes struct {
-	CertificateAttributes []CertificateAttributes `json:"certificateAttributes"`
+	CertificateAttributes []CertificateAttributes `json:"certificateAttributes,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type PolicyTypeSummary struct {
-	Status *PolicyTypeStatusEnum `json:"Status"`
-	Type   *PolicyTypeEnum       `json:"Type"`
+	Status *PolicyTypeStatusEnum `json:"Status,omitempty"`
+	Type   *PolicyTypeEnum       `json:"Type,omitempty"`
 }

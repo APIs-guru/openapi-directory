@@ -1,5 +1,5 @@
 package shared
 
 type MediaItemDataRef struct {
-	ResourceName *string `json:"resourceName"`
+	ResourceName *string `json:"resourceName,omitempty"`
 }

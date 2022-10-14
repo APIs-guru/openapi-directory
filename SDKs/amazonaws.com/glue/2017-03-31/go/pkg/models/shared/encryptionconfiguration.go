@@ -1,7 +1,7 @@
 package shared
 
 type EncryptionConfiguration struct {
-	CloudWatchEncryption   *CloudWatchEncryption   `json:"CloudWatchEncryption"`
-	JobBookmarksEncryption *JobBookmarksEncryption `json:"JobBookmarksEncryption"`
-	S3Encryption           []S3Encryption          `json:"S3Encryption"`
+	CloudWatchEncryption   *CloudWatchEncryption   `json:"CloudWatchEncryption,omitempty"`
+	JobBookmarksEncryption *JobBookmarksEncryption `json:"JobBookmarksEncryption,omitempty"`
+	S3Encryption           []S3Encryption          `json:"S3Encryption,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type DynamicGroupStatus struct {
-	Status     *DynamicGroupStatusStatusEnum `json:"status"`
-	StatusTime *string                       `json:"statusTime"`
+	Status     *DynamicGroupStatusStatusEnum `json:"status,omitempty"`
+	StatusTime *string                       `json:"statusTime,omitempty"`
 }

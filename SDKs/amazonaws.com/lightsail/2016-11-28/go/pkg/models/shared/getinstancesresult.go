@@ -1,6 +1,6 @@
 package shared
 
 type GetInstancesResult struct {
-	Instances     []Instance `json:"instances"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Instances     []Instance `json:"instances,omitempty"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
 }

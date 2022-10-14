@@ -1,7 +1,7 @@
 package shared
 
 type FileModes struct {
-	Base        *FileModeTypeEnumEnum `json:"base"`
-	Destination *FileModeTypeEnumEnum `json:"destination"`
-	Source      *FileModeTypeEnumEnum `json:"source"`
+	Base        *FileModeTypeEnumEnum `json:"base,omitempty"`
+	Destination *FileModeTypeEnumEnum `json:"destination,omitempty"`
+	Source      *FileModeTypeEnumEnum `json:"source,omitempty"`
 }

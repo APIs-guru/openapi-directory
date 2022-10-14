@@ -1,15 +1,15 @@
 package shared
 
 type ShippingService struct {
-	AdditionalShippingCost      *Amount    `json:"additionalShippingCost"`
-	BuyerResponsibleForPickup   *bool      `json:"buyerResponsibleForPickup"`
-	BuyerResponsibleForShipping *bool      `json:"buyerResponsibleForShipping"`
-	CashOnDeliveryFee           *Amount    `json:"cashOnDeliveryFee"`
-	FreeShipping                *bool      `json:"freeShipping"`
-	ShipToLocations             *RegionSet `json:"shipToLocations"`
-	ShippingCarrierCode         *string    `json:"shippingCarrierCode"`
-	ShippingCost                *Amount    `json:"shippingCost"`
-	ShippingServiceCode         *string    `json:"shippingServiceCode"`
-	SortOrder                   *int32     `json:"sortOrder"`
-	Surcharge                   *Amount    `json:"surcharge"`
+	AdditionalShippingCost      *Amount    `json:"additionalShippingCost,omitempty"`
+	BuyerResponsibleForPickup   *bool      `json:"buyerResponsibleForPickup,omitempty"`
+	BuyerResponsibleForShipping *bool      `json:"buyerResponsibleForShipping,omitempty"`
+	CashOnDeliveryFee           *Amount    `json:"cashOnDeliveryFee,omitempty"`
+	FreeShipping                *bool      `json:"freeShipping,omitempty"`
+	ShipToLocations             *RegionSet `json:"shipToLocations,omitempty"`
+	ShippingCarrierCode         *string    `json:"shippingCarrierCode,omitempty"`
+	ShippingCost                *Amount    `json:"shippingCost,omitempty"`
+	ShippingServiceCode         *string    `json:"shippingServiceCode,omitempty"`
+	SortOrder                   *int32     `json:"sortOrder,omitempty"`
+	Surcharge                   *Amount    `json:"surcharge,omitempty"`
 }

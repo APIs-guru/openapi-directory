@@ -5,13 +5,13 @@ import (
 )
 
 type SupersimV1SmsCommand struct {
-	AccountSid  *string                      `json:"account_sid"`
-	DateCreated *time.Time                   `json:"date_created"`
-	DateUpdated *time.Time                   `json:"date_updated"`
-	Direction   *SmsCommandEnumDirectionEnum `json:"direction"`
-	Payload     *string                      `json:"payload"`
-	Sid         *string                      `json:"sid"`
-	SimSid      *string                      `json:"sim_sid"`
-	Status      *SmsCommandEnumStatusEnum    `json:"status"`
-	URL         *string                      `json:"url"`
+	AccountSid  *string                      `json:"account_sid,omitempty"`
+	DateCreated *time.Time                   `json:"date_created,omitempty"`
+	DateUpdated *time.Time                   `json:"date_updated,omitempty"`
+	Direction   *SmsCommandEnumDirectionEnum `json:"direction,omitempty"`
+	Payload     *string                      `json:"payload,omitempty"`
+	Sid         *string                      `json:"sid,omitempty"`
+	SimSid      *string                      `json:"sim_sid,omitempty"`
+	Status      *SmsCommandEnumStatusEnum    `json:"status,omitempty"`
+	URL         *string                      `json:"url,omitempty"`
 }

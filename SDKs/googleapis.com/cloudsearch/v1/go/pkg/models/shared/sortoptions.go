@@ -8,6 +8,6 @@ const (
 )
 
 type SortOptions struct {
-	OperatorName *string                   `json:"operatorName"`
-	SortOrder    *SortOptionsSortOrderEnum `json:"sortOrder"`
+	OperatorName *string                   `json:"operatorName,omitempty"`
+	SortOrder    *SortOptionsSortOrderEnum `json:"sortOrder,omitempty"`
 }

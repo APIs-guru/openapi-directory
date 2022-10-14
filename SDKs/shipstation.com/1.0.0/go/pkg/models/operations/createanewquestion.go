@@ -1,8 +1,8 @@
 package operations
 
 type CreateANewQuestionRequestBody struct {
-	Choices  []string `json:"choices"`
-	Question *string  `json:"question"`
+	Choices  []string `json:"choices,omitempty"`
+	Question *string  `json:"question,omitempty"`
 }
 
 type CreateANewQuestionRequest struct {

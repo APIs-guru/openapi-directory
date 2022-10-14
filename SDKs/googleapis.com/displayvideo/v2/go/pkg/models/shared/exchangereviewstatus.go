@@ -84,6 +84,6 @@ const (
 )
 
 type ExchangeReviewStatus struct {
-	Exchange *ExchangeReviewStatusExchangeEnum `json:"exchange"`
-	Status   *ExchangeReviewStatusStatusEnum   `json:"status"`
+	Exchange *ExchangeReviewStatusExchangeEnum `json:"exchange,omitempty"`
+	Status   *ExchangeReviewStatusStatusEnum   `json:"status,omitempty"`
 }

@@ -1,16 +1,16 @@
 package shared
 
 type SubaccountResponseEtatEtat struct {
-	Code            *string `json:"code"`
-	Message         *string `json:"message"`
-	SubAccountID    *string `json:"subAccountId"`
-	SubAccountKeyid *string `json:"subAccountKeyid"`
+	Code            *string `json:"code,omitempty"`
+	Message         *string `json:"message,omitempty"`
+	SubAccountID    *string `json:"subAccountId,omitempty"`
+	SubAccountKeyid *string `json:"subAccountKeyid,omitempty"`
 }
 
 type SubaccountResponseEtat struct {
-	Etat []SubaccountResponseEtatEtat `json:"etat"`
+	Etat []SubaccountResponseEtatEtat `json:"etat,omitempty"`
 }
 
 type SubaccountResponse struct {
-	Etat *SubaccountResponseEtat `json:"etat"`
+	Etat *SubaccountResponseEtat `json:"etat,omitempty"`
 }

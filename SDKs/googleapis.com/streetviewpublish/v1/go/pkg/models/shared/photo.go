@@ -22,17 +22,17 @@ const (
 )
 
 type Photo struct {
-	CaptureTime       *string                     `json:"captureTime"`
-	Connections       []Connection                `json:"connections"`
-	DownloadURL       *string                     `json:"downloadUrl"`
-	MapsPublishStatus *PhotoMapsPublishStatusEnum `json:"mapsPublishStatus"`
-	PhotoID           *PhotoID                    `json:"photoId"`
-	Places            []Place                     `json:"places"`
-	Pose              *Pose                       `json:"pose"`
-	ShareLink         *string                     `json:"shareLink"`
-	ThumbnailURL      *string                     `json:"thumbnailUrl"`
-	TransferStatus    *PhotoTransferStatusEnum    `json:"transferStatus"`
-	UploadReference   *UploadRef                  `json:"uploadReference"`
-	UploadTime        *string                     `json:"uploadTime"`
-	ViewCount         *string                     `json:"viewCount"`
+	CaptureTime       *string                     `json:"captureTime,omitempty"`
+	Connections       []Connection                `json:"connections,omitempty"`
+	DownloadURL       *string                     `json:"downloadUrl,omitempty"`
+	MapsPublishStatus *PhotoMapsPublishStatusEnum `json:"mapsPublishStatus,omitempty"`
+	PhotoID           *PhotoID                    `json:"photoId,omitempty"`
+	Places            []Place                     `json:"places,omitempty"`
+	Pose              *Pose                       `json:"pose,omitempty"`
+	ShareLink         *string                     `json:"shareLink,omitempty"`
+	ThumbnailURL      *string                     `json:"thumbnailUrl,omitempty"`
+	TransferStatus    *PhotoTransferStatusEnum    `json:"transferStatus,omitempty"`
+	UploadReference   *UploadRef                  `json:"uploadReference,omitempty"`
+	UploadTime        *string                     `json:"uploadTime,omitempty"`
+	ViewCount         *string                     `json:"viewCount,omitempty"`
 }

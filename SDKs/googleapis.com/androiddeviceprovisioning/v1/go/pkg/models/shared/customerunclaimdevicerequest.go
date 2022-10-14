@@ -1,5 +1,5 @@
 package shared
 
 type CustomerUnclaimDeviceRequest struct {
-	Device *DeviceReference `json:"device"`
+	Device *DeviceReference `json:"device,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type PersonDetail struct {
-	BoundingBox *BoundingBox `json:"BoundingBox"`
-	Face        *FaceDetail  `json:"Face"`
-	Index       *int64       `json:"Index"`
+	BoundingBox *BoundingBox `json:"BoundingBox,omitempty"`
+	Face        *FaceDetail  `json:"Face,omitempty"`
+	Index       *int64       `json:"Index,omitempty"`
 }

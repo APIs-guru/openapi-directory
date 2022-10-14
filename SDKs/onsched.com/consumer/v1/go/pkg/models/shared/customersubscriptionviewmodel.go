@@ -5,12 +5,12 @@ import (
 )
 
 type CustomerSubscriptionViewModel struct {
-	CustomerID       *string    `json:"customerId"`
-	CustomerPlanID   *string    `json:"customerPlanId"`
-	CustomerPlanName *string    `json:"customerPlanName"`
-	ID               *string    `json:"id"`
-	ObjectName       *string    `json:"objectName"`
-	PlanStart        *time.Time `json:"planStart"`
-	TrialPeriodEnd   *time.Time `json:"trialPeriodEnd"`
-	TrialPeriodStart *time.Time `json:"trialPeriodStart"`
+	CustomerID       *string    `json:"customerId,omitempty"`
+	CustomerPlanID   *string    `json:"customerPlanId,omitempty"`
+	CustomerPlanName *string    `json:"customerPlanName,omitempty"`
+	ID               *string    `json:"id,omitempty"`
+	ObjectName       *string    `json:"objectName,omitempty"`
+	PlanStart        *time.Time `json:"planStart,omitempty"`
+	TrialPeriodEnd   *time.Time `json:"trialPeriodEnd,omitempty"`
+	TrialPeriodStart *time.Time `json:"trialPeriodStart,omitempty"`
 }

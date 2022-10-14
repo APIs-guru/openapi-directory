@@ -1,6 +1,6 @@
 package shared
 
 type GenerateRandomRequest struct {
-	CustomKeyStoreID *string `json:"CustomKeyStoreId"`
-	NumberOfBytes    *int64  `json:"NumberOfBytes"`
+	CustomKeyStoreID *string `json:"CustomKeyStoreId,omitempty"`
+	NumberOfBytes    *int64  `json:"NumberOfBytes,omitempty"`
 }

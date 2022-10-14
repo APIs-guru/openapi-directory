@@ -9,14 +9,14 @@ const (
 )
 
 type GoogleCloudSecuritycenterV1beta1Finding struct {
-	Category         *string                                           `json:"category"`
-	CreateTime       *string                                           `json:"createTime"`
-	EventTime        *string                                           `json:"eventTime"`
-	ExternalURI      *string                                           `json:"externalUri"`
-	Name             *string                                           `json:"name"`
-	Parent           *string                                           `json:"parent"`
-	ResourceName     *string                                           `json:"resourceName"`
-	SecurityMarks    *GoogleCloudSecuritycenterV1beta1SecurityMarks    `json:"securityMarks"`
-	SourceProperties map[string]interface{}                            `json:"sourceProperties"`
-	State            *GoogleCloudSecuritycenterV1beta1FindingStateEnum `json:"state"`
+	Category         *string                                           `json:"category,omitempty"`
+	CreateTime       *string                                           `json:"createTime,omitempty"`
+	EventTime        *string                                           `json:"eventTime,omitempty"`
+	ExternalURI      *string                                           `json:"externalUri,omitempty"`
+	Name             *string                                           `json:"name,omitempty"`
+	Parent           *string                                           `json:"parent,omitempty"`
+	ResourceName     *string                                           `json:"resourceName,omitempty"`
+	SecurityMarks    *GoogleCloudSecuritycenterV1beta1SecurityMarks    `json:"securityMarks,omitempty"`
+	SourceProperties map[string]interface{}                            `json:"sourceProperties,omitempty"`
+	State            *GoogleCloudSecuritycenterV1beta1FindingStateEnum `json:"state,omitempty"`
 }

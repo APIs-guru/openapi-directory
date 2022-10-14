@@ -1,7 +1,7 @@
 package shared
 
 type CrawledURL struct {
-	Body       *string `json:"body"`
-	HTTPMethod *string `json:"httpMethod"`
-	URL        *string `json:"url"`
+	Body       *string `json:"body,omitempty"`
+	HTTPMethod *string `json:"httpMethod,omitempty"`
+	URL        *string `json:"url,omitempty"`
 }

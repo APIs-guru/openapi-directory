@@ -1,5 +1,5 @@
 package shared
 
 type ShowsObject struct {
-	Shows []SimplifiedShowObject `json:"shows"`
+	Shows []SimplifiedShowObject `json:"shows,omitempty"`
 }

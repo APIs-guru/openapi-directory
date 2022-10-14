@@ -23,7 +23,7 @@ type TransferCertificateHeaders struct {
 }
 
 type TransferCertificateRequestBody struct {
-	TransferMessage *string `json:"transferMessage"`
+	TransferMessage *string `json:"transferMessage,omitempty"`
 }
 
 type TransferCertificateRequest struct {

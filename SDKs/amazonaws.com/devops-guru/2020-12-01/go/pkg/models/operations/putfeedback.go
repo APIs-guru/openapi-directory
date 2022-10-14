@@ -15,12 +15,12 @@ type PutFeedbackHeaders struct {
 }
 
 type PutFeedbackRequestBodyInsightFeedback struct {
-	Feedback *shared.InsightFeedbackOptionEnum `json:"Feedback"`
-	ID       *string                           `json:"Id"`
+	Feedback *shared.InsightFeedbackOptionEnum `json:"Feedback,omitempty"`
+	ID       *string                           `json:"Id,omitempty"`
 }
 
 type PutFeedbackRequestBody struct {
-	InsightFeedback *PutFeedbackRequestBodyInsightFeedback `json:"InsightFeedback"`
+	InsightFeedback *PutFeedbackRequestBodyInsightFeedback `json:"InsightFeedback,omitempty"`
 }
 
 type PutFeedbackRequest struct {

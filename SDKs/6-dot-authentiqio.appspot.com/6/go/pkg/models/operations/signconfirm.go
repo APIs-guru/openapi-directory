@@ -9,7 +9,7 @@ type SignConfirmRequest struct {
 }
 
 type SignConfirm202ApplicationJSON struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }
 
 type SignConfirmResponse struct {

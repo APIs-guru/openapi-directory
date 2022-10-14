@@ -1,6 +1,6 @@
 package shared
 
 type IspPlacement struct {
-	IspName             *string              `json:"IspName"`
-	PlacementStatistics *PlacementStatistics `json:"PlacementStatistics"`
+	IspName             *string              `json:"IspName,omitempty"`
+	PlacementStatistics *PlacementStatistics `json:"PlacementStatistics,omitempty"`
 }

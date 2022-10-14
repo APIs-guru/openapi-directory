@@ -1,12 +1,12 @@
 package shared
 
 type DataItemParentIdent struct {
-	ParentValueIdent    *string `json:"parentValueIdent"`
-	ParentVariableIdent *string `json:"parentVariableIdent"`
+	ParentValueIdent    *string `json:"parentValueIdent,omitempty"`
+	ParentVariableIdent *string `json:"parentVariableIdent,omitempty"`
 }
 
 type DataItem struct {
-	Ident       *string              `json:"ident"`
-	ParentIdent *DataItemParentIdent `json:"parentIdent"`
-	Values      []string             `json:"values"`
+	Ident       *string              `json:"ident,omitempty"`
+	ParentIdent *DataItemParentIdent `json:"parentIdent,omitempty"`
+	Values      []string             `json:"values,omitempty"`
 }

@@ -2,10 +2,10 @@ package shared
 
 type ListInstancesInput struct {
 	ClusterID          string                  `json:"ClusterId"`
-	InstanceFleetID    *string                 `json:"InstanceFleetId"`
-	InstanceFleetType  *InstanceFleetTypeEnum  `json:"InstanceFleetType"`
-	InstanceGroupID    *string                 `json:"InstanceGroupId"`
-	InstanceGroupTypes []InstanceGroupTypeEnum `json:"InstanceGroupTypes"`
-	InstanceStates     []InstanceStateEnum     `json:"InstanceStates"`
-	Marker             *string                 `json:"Marker"`
+	InstanceFleetID    *string                 `json:"InstanceFleetId,omitempty"`
+	InstanceFleetType  *InstanceFleetTypeEnum  `json:"InstanceFleetType,omitempty"`
+	InstanceGroupID    *string                 `json:"InstanceGroupId,omitempty"`
+	InstanceGroupTypes []InstanceGroupTypeEnum `json:"InstanceGroupTypes,omitempty"`
+	InstanceStates     []InstanceStateEnum     `json:"InstanceStates,omitempty"`
+	Marker             *string                 `json:"Marker,omitempty"`
 }

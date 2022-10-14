@@ -5,8 +5,8 @@ type PutCertificatesIDPathParams struct {
 }
 
 type PutCertificatesIDRequestBodyUpdateCertificateRequest struct {
-	Labels map[string]interface{} `json:"labels"`
-	Name   *string                `json:"name"`
+	Labels map[string]interface{} `json:"labels,omitempty"`
+	Name   *string                `json:"name,omitempty"`
 }
 
 type PutCertificatesIDRequest struct {
@@ -15,8 +15,8 @@ type PutCertificatesIDRequest struct {
 }
 
 type PutCertificatesID200ApplicationJSONCertificateStatusError struct {
-	Code    *string `json:"code"`
-	Message *string `json:"message"`
+	Code    *string `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum string
@@ -37,9 +37,9 @@ const (
 )
 
 type PutCertificatesID200ApplicationJSONCertificateStatus struct {
-	Error    *PutCertificatesID200ApplicationJSONCertificateStatusError        `json:"error"`
-	Issuance *PutCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum `json:"issuance"`
-	Renewal  *PutCertificatesID200ApplicationJSONCertificateStatusRenewalEnum  `json:"renewal"`
+	Error    *PutCertificatesID200ApplicationJSONCertificateStatusError        `json:"error,omitempty"`
+	Issuance *PutCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
+	Renewal  *PutCertificatesID200ApplicationJSONCertificateStatusRenewalEnum  `json:"renewal,omitempty"`
 }
 
 type PutCertificatesID200ApplicationJSONCertificateTypeEnum string
@@ -64,8 +64,8 @@ type PutCertificatesID200ApplicationJSONCertificateCertificate struct {
 	Name           string                                                  `json:"name"`
 	NotValidAfter  string                                                  `json:"not_valid_after"`
 	NotValidBefore string                                                  `json:"not_valid_before"`
-	Status         *PutCertificatesID200ApplicationJSONCertificateStatus   `json:"status"`
-	Type           *PutCertificatesID200ApplicationJSONCertificateTypeEnum `json:"type"`
+	Status         *PutCertificatesID200ApplicationJSONCertificateStatus   `json:"status,omitempty"`
+	Type           *PutCertificatesID200ApplicationJSONCertificateTypeEnum `json:"type,omitempty"`
 	UsedBy         []PutCertificatesID200ApplicationJSONCertificateUsedBy  `json:"used_by"`
 }
 

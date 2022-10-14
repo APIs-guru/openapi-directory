@@ -2,6 +2,6 @@ package shared
 
 type AccountAggregationSource struct {
 	AccountIds    []string `json:"AccountIds"`
-	AllAwsRegions *bool    `json:"AllAwsRegions"`
-	AwsRegions    []string `json:"AwsRegions"`
+	AllAwsRegions *bool    `json:"AllAwsRegions,omitempty"`
+	AwsRegions    []string `json:"AwsRegions,omitempty"`
 }

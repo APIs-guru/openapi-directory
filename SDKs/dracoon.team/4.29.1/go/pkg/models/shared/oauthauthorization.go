@@ -15,14 +15,14 @@ const (
 type OAuthAuthorization struct {
 	ClientID               string                                  `json:"clientId"`
 	ClientName             string                                  `json:"clientName"`
-	CreatedAt              *time.Time                              `json:"createdAt"`
-	ExpiresAt              *time.Time                              `json:"expiresAt"`
-	ID                     *int64                                  `json:"id"`
-	IsCurrentAuthorization *bool                                   `json:"isCurrentAuthorization"`
-	IsStandard             *bool                                   `json:"isStandard"`
-	UsedAt                 *time.Time                              `json:"usedAt"`
+	CreatedAt              *time.Time                              `json:"createdAt,omitempty"`
+	ExpiresAt              *time.Time                              `json:"expiresAt,omitempty"`
+	ID                     *int64                                  `json:"id,omitempty"`
+	IsCurrentAuthorization *bool                                   `json:"isCurrentAuthorization,omitempty"`
+	IsStandard             *bool                                   `json:"isStandard,omitempty"`
+	UsedAt                 *time.Time                              `json:"usedAt,omitempty"`
 	UserAgentCategory      OAuthAuthorizationUserAgentCategoryEnum `json:"userAgentCategory"`
-	UserAgentInfo          *string                                 `json:"userAgentInfo"`
-	UserAgentOs            *string                                 `json:"userAgentOs"`
-	UserAgentType          *string                                 `json:"userAgentType"`
+	UserAgentInfo          *string                                 `json:"userAgentInfo,omitempty"`
+	UserAgentOs            *string                                 `json:"userAgentOs,omitempty"`
+	UserAgentType          *string                                 `json:"userAgentType,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type PlayerSessionEvent struct {
-	At        *int64     `json:"at"`
-	EmittedAt *time.Time `json:"emittedAt"`
-	From      *int64     `json:"from"`
-	To        *int64     `json:"to"`
-	Type      *string    `json:"type"`
+	At        *int64     `json:"at,omitempty"`
+	EmittedAt *time.Time `json:"emittedAt,omitempty"`
+	From      *int64     `json:"from,omitempty"`
+	To        *int64     `json:"to,omitempty"`
+	Type      *string    `json:"type,omitempty"`
 }

@@ -5,14 +5,14 @@ import (
 )
 
 type CreateTrialComponentRequest struct {
-	DisplayName        *string                                 `json:"DisplayName"`
-	EndTime            *time.Time                              `json:"EndTime"`
-	InputArtifacts     map[string]TrialComponentArtifact       `json:"InputArtifacts"`
-	MetadataProperties *MetadataProperties                     `json:"MetadataProperties"`
-	OutputArtifacts    map[string]TrialComponentArtifact       `json:"OutputArtifacts"`
-	Parameters         map[string]TrialComponentParameterValue `json:"Parameters"`
-	StartTime          *time.Time                              `json:"StartTime"`
-	Status             *TrialComponentStatus                   `json:"Status"`
-	Tags               []Tag                                   `json:"Tags"`
+	DisplayName        *string                                 `json:"DisplayName,omitempty"`
+	EndTime            *time.Time                              `json:"EndTime,omitempty"`
+	InputArtifacts     map[string]TrialComponentArtifact       `json:"InputArtifacts,omitempty"`
+	MetadataProperties *MetadataProperties                     `json:"MetadataProperties,omitempty"`
+	OutputArtifacts    map[string]TrialComponentArtifact       `json:"OutputArtifacts,omitempty"`
+	Parameters         map[string]TrialComponentParameterValue `json:"Parameters,omitempty"`
+	StartTime          *time.Time                              `json:"StartTime,omitempty"`
+	Status             *TrialComponentStatus                   `json:"Status,omitempty"`
+	Tags               []Tag                                   `json:"Tags,omitempty"`
 	TrialComponentName string                                  `json:"TrialComponentName"`
 }

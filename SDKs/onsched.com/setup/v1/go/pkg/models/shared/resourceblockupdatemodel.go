@@ -5,11 +5,11 @@ import (
 )
 
 type ResourceBlockUpdateModel struct {
-	AllDay    *bool      `json:"allDay"`
-	EndDate   *time.Time `json:"endDate"`
-	EndTime   *int32     `json:"endTime"`
-	Reason    *string    `json:"reason"`
-	Repeats   *bool      `json:"repeats"`
-	StartDate *time.Time `json:"startDate"`
-	StartTime *int32     `json:"startTime"`
+	AllDay    *bool      `json:"allDay,omitempty"`
+	EndDate   *time.Time `json:"endDate,omitempty"`
+	EndTime   *int32     `json:"endTime,omitempty"`
+	Reason    *string    `json:"reason,omitempty"`
+	Repeats   *bool      `json:"repeats,omitempty"`
+	StartDate *time.Time `json:"startDate,omitempty"`
+	StartTime *int32     `json:"startTime,omitempty"`
 }

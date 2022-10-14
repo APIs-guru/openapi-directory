@@ -1,11 +1,11 @@
 package shared
 
 type LaunchProfileInitializationActiveDirectory struct {
-	ComputerAttributes                  []ActiveDirectoryComputerAttribute `json:"computerAttributes"`
-	DirectoryID                         *string                            `json:"directoryId"`
-	DirectoryName                       *string                            `json:"directoryName"`
-	DNSIPAddresses                      []string                           `json:"dnsIpAddresses"`
-	OrganizationalUnitDistinguishedName *string                            `json:"organizationalUnitDistinguishedName"`
-	StudioComponentID                   *string                            `json:"studioComponentId"`
-	StudioComponentName                 *string                            `json:"studioComponentName"`
+	ComputerAttributes                  []ActiveDirectoryComputerAttribute `json:"computerAttributes,omitempty"`
+	DirectoryID                         *string                            `json:"directoryId,omitempty"`
+	DirectoryName                       *string                            `json:"directoryName,omitempty"`
+	DNSIPAddresses                      []string                           `json:"dnsIpAddresses,omitempty"`
+	OrganizationalUnitDistinguishedName *string                            `json:"organizationalUnitDistinguishedName,omitempty"`
+	StudioComponentID                   *string                            `json:"studioComponentId,omitempty"`
+	StudioComponentName                 *string                            `json:"studioComponentName,omitempty"`
 }

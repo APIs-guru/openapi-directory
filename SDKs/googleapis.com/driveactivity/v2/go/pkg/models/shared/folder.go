@@ -10,5 +10,5 @@ const (
 )
 
 type Folder struct {
-	Type *FolderTypeEnum `json:"type"`
+	Type *FolderTypeEnum `json:"type,omitempty"`
 }

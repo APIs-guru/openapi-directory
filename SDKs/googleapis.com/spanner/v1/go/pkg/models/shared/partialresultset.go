@@ -1,9 +1,9 @@
 package shared
 
 type PartialResultSet struct {
-	ChunkedValue *bool              `json:"chunkedValue"`
-	Metadata     *ResultSetMetadata `json:"metadata"`
-	ResumeToken  *string            `json:"resumeToken"`
-	Stats        *ResultSetStats    `json:"stats"`
-	Values       []interface{}      `json:"values"`
+	ChunkedValue *bool              `json:"chunkedValue,omitempty"`
+	Metadata     *ResultSetMetadata `json:"metadata,omitempty"`
+	ResumeToken  *string            `json:"resumeToken,omitempty"`
+	Stats        *ResultSetStats    `json:"stats,omitempty"`
+	Values       []interface{}      `json:"values,omitempty"`
 }

@@ -42,8 +42,8 @@ type GetElectionDatesRequest struct {
 }
 
 type GetElectionDatesDefaultApplicationJSON struct {
-	Pagination *shared.OffsetInfo    `json:"pagination"`
-	Results    []shared.ElectionDate `json:"results"`
+	Pagination *shared.OffsetInfo    `json:"pagination,omitempty"`
+	Results    []shared.ElectionDate `json:"results,omitempty"`
 }
 
 type GetElectionDatesResponse struct {

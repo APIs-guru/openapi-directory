@@ -1,8 +1,8 @@
 package shared
 
 type ExecuteStatementInput struct {
-	ConsistentRead *bool            `json:"ConsistentRead"`
-	NextToken      *string          `json:"NextToken"`
-	Parameters     []AttributeValue `json:"Parameters"`
+	ConsistentRead *bool            `json:"ConsistentRead,omitempty"`
+	NextToken      *string          `json:"NextToken,omitempty"`
+	Parameters     []AttributeValue `json:"Parameters,omitempty"`
 	Statement      string           `json:"Statement"`
 }

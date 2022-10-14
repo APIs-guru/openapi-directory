@@ -13,7 +13,7 @@ type GetAPIV1ProvincesRequest struct {
 }
 
 type GetAPIV1Provinces200ApplicationJSON struct {
-	Provinces []shared.Province `json:"provinces"`
+	Provinces []shared.Province `json:"provinces,omitempty"`
 }
 
 type GetAPIV1ProvincesResponse struct {

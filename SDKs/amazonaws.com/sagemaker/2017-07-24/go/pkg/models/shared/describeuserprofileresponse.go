@@ -5,15 +5,15 @@ import (
 )
 
 type DescribeUserProfileResponse struct {
-	CreationTime               *time.Time             `json:"CreationTime"`
-	DomainID                   *string                `json:"DomainId"`
-	FailureReason              *string                `json:"FailureReason"`
-	HomeEfsFileSystemUID       *string                `json:"HomeEfsFileSystemUid"`
-	LastModifiedTime           *time.Time             `json:"LastModifiedTime"`
-	SingleSignOnUserIdentifier *string                `json:"SingleSignOnUserIdentifier"`
-	SingleSignOnUserValue      *string                `json:"SingleSignOnUserValue"`
-	Status                     *UserProfileStatusEnum `json:"Status"`
-	UserProfileArn             *string                `json:"UserProfileArn"`
-	UserProfileName            *string                `json:"UserProfileName"`
-	UserSettings               *UserSettings          `json:"UserSettings"`
+	CreationTime               *time.Time             `json:"CreationTime,omitempty"`
+	DomainID                   *string                `json:"DomainId,omitempty"`
+	FailureReason              *string                `json:"FailureReason,omitempty"`
+	HomeEfsFileSystemUID       *string                `json:"HomeEfsFileSystemUid,omitempty"`
+	LastModifiedTime           *time.Time             `json:"LastModifiedTime,omitempty"`
+	SingleSignOnUserIdentifier *string                `json:"SingleSignOnUserIdentifier,omitempty"`
+	SingleSignOnUserValue      *string                `json:"SingleSignOnUserValue,omitempty"`
+	Status                     *UserProfileStatusEnum `json:"Status,omitempty"`
+	UserProfileArn             *string                `json:"UserProfileArn,omitempty"`
+	UserProfileName            *string                `json:"UserProfileName,omitempty"`
+	UserSettings               *UserSettings          `json:"UserSettings,omitempty"`
 }

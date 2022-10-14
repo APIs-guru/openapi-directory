@@ -18,38 +18,38 @@ type GetDashboardRequest struct {
 }
 
 type GetDashboard200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDashboard200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDashboard200ApplicationJSON struct {
-	Count              *float64                                          `json:"count"`
-	DescriptionColumns *GetDashboard200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	Ids                []string                                          `json:"ids"`
-	LabelColumns       *GetDashboard200ApplicationJSONLabelColumns       `json:"label_columns"`
-	ListColumns        []string                                          `json:"list_columns"`
-	ListTitle          *string                                           `json:"list_title"`
-	OrderColumns       []string                                          `json:"order_columns"`
-	Result             []shared.DashboardRestAPIGetList                  `json:"result"`
+	Count              *float64                                          `json:"count,omitempty"`
+	DescriptionColumns *GetDashboard200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	Ids                []string                                          `json:"ids,omitempty"`
+	LabelColumns       *GetDashboard200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	ListColumns        []string                                          `json:"list_columns,omitempty"`
+	ListTitle          *string                                           `json:"list_title,omitempty"`
+	OrderColumns       []string                                          `json:"order_columns,omitempty"`
+	Result             []shared.DashboardRestAPIGetList                  `json:"result,omitempty"`
 }
 
 type GetDashboard400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboard401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboard422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboard500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardResponse struct {

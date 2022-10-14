@@ -8,6 +8,6 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList struct {
-	EnumStrings []string                                                              `json:"enumStrings"`
-	FilterType  *EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnum `json:"filterType"`
+	EnumStrings []string                                                              `json:"enumStrings,omitempty"`
+	FilterType  *EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnum `json:"filterType,omitempty"`
 }

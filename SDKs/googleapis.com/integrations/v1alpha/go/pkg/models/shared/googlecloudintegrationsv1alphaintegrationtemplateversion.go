@@ -18,18 +18,18 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaIntegrationTemplateVersion struct {
-	CreateTime                 *string                                                                                `json:"createTime"`
-	DatabasePersistencePolicy  *GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionDatabasePersistencePolicyEnum `json:"databasePersistencePolicy"`
-	Description                *string                                                                                `json:"description"`
-	LastModifierEmail          *string                                                                                `json:"lastModifierEmail"`
-	Name                       *string                                                                                `json:"name"`
-	ParentIntegrationVersionID *string                                                                                `json:"parentIntegrationVersionId"`
-	SnapshotNumber             *string                                                                                `json:"snapshotNumber"`
-	Status                     *GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionStatusEnum                    `json:"status"`
-	TaskConfigs                []EnterpriseCrmFrontendsEventbusProtoTaskConfig                                        `json:"taskConfigs"`
-	Teardown                   *EnterpriseCrmEventbusProtoTeardown                                                    `json:"teardown"`
-	TemplateParameters         *EnterpriseCrmFrontendsEventbusProtoWorkflowParameters                                 `json:"templateParameters"`
-	TriggerConfigs             []EnterpriseCrmFrontendsEventbusProtoTriggerConfig                                     `json:"triggerConfigs"`
-	UpdateTime                 *string                                                                                `json:"updateTime"`
-	UserLabel                  *string                                                                                `json:"userLabel"`
+	CreateTime                 *string                                                                                `json:"createTime,omitempty"`
+	DatabasePersistencePolicy  *GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionDatabasePersistencePolicyEnum `json:"databasePersistencePolicy,omitempty"`
+	Description                *string                                                                                `json:"description,omitempty"`
+	LastModifierEmail          *string                                                                                `json:"lastModifierEmail,omitempty"`
+	Name                       *string                                                                                `json:"name,omitempty"`
+	ParentIntegrationVersionID *string                                                                                `json:"parentIntegrationVersionId,omitempty"`
+	SnapshotNumber             *string                                                                                `json:"snapshotNumber,omitempty"`
+	Status                     *GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionStatusEnum                    `json:"status,omitempty"`
+	TaskConfigs                []EnterpriseCrmFrontendsEventbusProtoTaskConfig                                        `json:"taskConfigs,omitempty"`
+	Teardown                   *EnterpriseCrmEventbusProtoTeardown                                                    `json:"teardown,omitempty"`
+	TemplateParameters         *EnterpriseCrmFrontendsEventbusProtoWorkflowParameters                                 `json:"templateParameters,omitempty"`
+	TriggerConfigs             []EnterpriseCrmFrontendsEventbusProtoTriggerConfig                                     `json:"triggerConfigs,omitempty"`
+	UpdateTime                 *string                                                                                `json:"updateTime,omitempty"`
+	UserLabel                  *string                                                                                `json:"userLabel,omitempty"`
 }

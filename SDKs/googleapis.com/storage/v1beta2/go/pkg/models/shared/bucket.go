@@ -5,67 +5,67 @@ import (
 )
 
 type BucketCors struct {
-	MaxAgeSeconds  *int32   `json:"maxAgeSeconds"`
-	Method         []string `json:"method"`
-	Origin         []string `json:"origin"`
-	ResponseHeader []string `json:"responseHeader"`
+	MaxAgeSeconds  *int32   `json:"maxAgeSeconds,omitempty"`
+	Method         []string `json:"method,omitempty"`
+	Origin         []string `json:"origin,omitempty"`
+	ResponseHeader []string `json:"responseHeader,omitempty"`
 }
 
 type BucketLifecycleRuleAction struct {
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }
 
 type BucketLifecycleRuleCondition struct {
-	Age              *int32     `json:"age"`
-	CreatedBefore    *time.Time `json:"createdBefore"`
-	IsLive           *bool      `json:"isLive"`
-	NumNewerVersions *int32     `json:"numNewerVersions"`
+	Age              *int32     `json:"age,omitempty"`
+	CreatedBefore    *time.Time `json:"createdBefore,omitempty"`
+	IsLive           *bool      `json:"isLive,omitempty"`
+	NumNewerVersions *int32     `json:"numNewerVersions,omitempty"`
 }
 
 type BucketLifecycleRule struct {
-	Action    *BucketLifecycleRuleAction    `json:"action"`
-	Condition *BucketLifecycleRuleCondition `json:"condition"`
+	Action    *BucketLifecycleRuleAction    `json:"action,omitempty"`
+	Condition *BucketLifecycleRuleCondition `json:"condition,omitempty"`
 }
 
 type BucketLifecycle struct {
-	Rule []BucketLifecycleRule `json:"rule"`
+	Rule []BucketLifecycleRule `json:"rule,omitempty"`
 }
 
 type BucketLogging struct {
-	LogBucket       *string `json:"logBucket"`
-	LogObjectPrefix *string `json:"logObjectPrefix"`
+	LogBucket       *string `json:"logBucket,omitempty"`
+	LogObjectPrefix *string `json:"logObjectPrefix,omitempty"`
 }
 
 type BucketOwner struct {
-	Entity   *string `json:"entity"`
-	EntityID *string `json:"entityId"`
+	Entity   *string `json:"entity,omitempty"`
+	EntityID *string `json:"entityId,omitempty"`
 }
 
 type BucketVersioning struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type BucketWebsite struct {
-	MainPageSuffix *string `json:"mainPageSuffix"`
-	NotFoundPage   *string `json:"notFoundPage"`
+	MainPageSuffix *string `json:"mainPageSuffix,omitempty"`
+	NotFoundPage   *string `json:"notFoundPage,omitempty"`
 }
 
 type Bucket struct {
-	ACL              []BucketAccessControl `json:"acl"`
-	Cors             []BucketCors          `json:"cors"`
-	DefaultObjectACL []ObjectAccessControl `json:"defaultObjectAcl"`
-	Etag             *string               `json:"etag"`
-	ID               *string               `json:"id"`
-	Kind             *string               `json:"kind"`
-	Lifecycle        *BucketLifecycle      `json:"lifecycle"`
-	Location         *string               `json:"location"`
-	Logging          *BucketLogging        `json:"logging"`
-	Metageneration   *string               `json:"metageneration"`
-	Name             *string               `json:"name"`
-	Owner            *BucketOwner          `json:"owner"`
-	SelfLink         *string               `json:"selfLink"`
-	StorageClass     *string               `json:"storageClass"`
-	TimeCreated      *time.Time            `json:"timeCreated"`
-	Versioning       *BucketVersioning     `json:"versioning"`
-	Website          *BucketWebsite        `json:"website"`
+	ACL              []BucketAccessControl `json:"acl,omitempty"`
+	Cors             []BucketCors          `json:"cors,omitempty"`
+	DefaultObjectACL []ObjectAccessControl `json:"defaultObjectAcl,omitempty"`
+	Etag             *string               `json:"etag,omitempty"`
+	ID               *string               `json:"id,omitempty"`
+	Kind             *string               `json:"kind,omitempty"`
+	Lifecycle        *BucketLifecycle      `json:"lifecycle,omitempty"`
+	Location         *string               `json:"location,omitempty"`
+	Logging          *BucketLogging        `json:"logging,omitempty"`
+	Metageneration   *string               `json:"metageneration,omitempty"`
+	Name             *string               `json:"name,omitempty"`
+	Owner            *BucketOwner          `json:"owner,omitempty"`
+	SelfLink         *string               `json:"selfLink,omitempty"`
+	StorageClass     *string               `json:"storageClass,omitempty"`
+	TimeCreated      *time.Time            `json:"timeCreated,omitempty"`
+	Versioning       *BucketVersioning     `json:"versioning,omitempty"`
+	Website          *BucketWebsite        `json:"website,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type PostListingsRequestBodyCategories struct {
-	UUID *string `json:"uuid"`
+	UUID *string `json:"uuid,omitempty"`
 }
 
 type PostListingsRequestBodyConditionUUIDEnum string
@@ -36,9 +36,9 @@ const (
 )
 
 type PostListingsRequestBodyLocation struct {
-	CountryCode *string `json:"country_code"`
-	Locality    *string `json:"locality"`
-	Region      *string `json:"region"`
+	CountryCode *string `json:"country_code,omitempty"`
+	Locality    *string `json:"locality,omitempty"`
+	Region      *string `json:"region,omitempty"`
 }
 
 type PostListingsRequestBodyPreorderInfoLeadTimeUnitEnum string
@@ -49,9 +49,9 @@ const (
 )
 
 type PostListingsRequestBodyPreorderInfo struct {
-	LeadTime     *int64                                              `json:"lead_time"`
+	LeadTime     *int64                                              `json:"lead_time,omitempty"`
 	LeadTimeUnit PostListingsRequestBodyPreorderInfoLeadTimeUnitEnum `json:"lead_time_unit"`
-	ShipDate     *string                                             `json:"ship_date"`
+	ShipDate     *string                                             `json:"ship_date,omitempty"`
 }
 
 type PostListingsRequestBodyPriceCurrencyEnum string
@@ -73,7 +73,7 @@ type PostListingsRequestBodyPrice struct {
 }
 
 type PostListingsRequestBodySeller struct {
-	PaypalEmail *string `json:"paypal_email"`
+	PaypalEmail *string `json:"paypal_email,omitempty"`
 }
 
 type PostListingsRequestBodyShippingRatesRateCurrencyEnum string
@@ -95,13 +95,13 @@ type PostListingsRequestBodyShippingRatesRate struct {
 }
 
 type PostListingsRequestBodyShippingRates struct {
-	Rate       *PostListingsRequestBodyShippingRatesRate `json:"rate"`
-	RegionCode *string                                   `json:"region_code"`
+	Rate       *PostListingsRequestBodyShippingRatesRate `json:"rate,omitempty"`
+	RegionCode *string                                   `json:"region_code,omitempty"`
 }
 
 type PostListingsRequestBodyShipping struct {
-	Local *bool                                  `json:"local"`
-	Rates []PostListingsRequestBodyShippingRates `json:"rates"`
+	Local *bool                                  `json:"local,omitempty"`
+	Rates []PostListingsRequestBodyShippingRates `json:"rates,omitempty"`
 }
 
 type PostListingsRequestBodyVideos struct {
@@ -109,38 +109,38 @@ type PostListingsRequestBodyVideos struct {
 }
 
 type PostListingsRequestBody struct {
-	Categories          []PostListingsRequestBodyCategories          `json:"categories"`
-	Condition           *PostListingsRequestBodyCondition            `json:"condition"`
-	Description         *string                                      `json:"description"`
-	ExclusiveChannel    *PostListingsRequestBodyExclusiveChannelEnum `json:"exclusive_channel"`
-	Finish              *string                                      `json:"finish"`
-	HasInventory        *bool                                        `json:"has_inventory"`
-	Inventory           *int64                                       `json:"inventory"`
-	Location            *PostListingsRequestBodyLocation             `json:"location"`
-	Make                *string                                      `json:"make"`
-	Model               *string                                      `json:"model"`
-	MultiItem           *bool                                        `json:"multi_item"`
-	OffersEnabled       *bool                                        `json:"offers_enabled"`
-	OriginCountryCode   *string                                      `json:"origin_country_code"`
-	Photos              []string                                     `json:"photos"`
-	PreorderInfo        *PostListingsRequestBodyPreorderInfo         `json:"preorder_info"`
-	Price               *PostListingsRequestBodyPrice                `json:"price"`
-	Prop65Warning       *string                                      `json:"prop_65_warning"`
-	Publish             *bool                                        `json:"publish"`
-	Seller              *PostListingsRequestBodySeller               `json:"seller"`
-	SellerCost          *string                                      `json:"seller_cost"`
-	Shipping            *PostListingsRequestBodyShipping             `json:"shipping"`
-	ShippingProfileID   *string                                      `json:"shipping_profile_id"`
-	ShippingProfileName *string                                      `json:"shipping_profile_name"`
-	Sku                 *string                                      `json:"sku"`
-	SoldAsIs            *bool                                        `json:"sold_as_is"`
-	StorageLocation     *string                                      `json:"storage_location"`
-	TaxExempt           *bool                                        `json:"tax_exempt"`
-	Title               *string                                      `json:"title"`
-	Upc                 *string                                      `json:"upc"`
-	UpcDoesNotApply     *bool                                        `json:"upc_does_not_apply"`
-	Videos              []PostListingsRequestBodyVideos              `json:"videos"`
-	Year                *string                                      `json:"year"`
+	Categories          []PostListingsRequestBodyCategories          `json:"categories,omitempty"`
+	Condition           *PostListingsRequestBodyCondition            `json:"condition,omitempty"`
+	Description         *string                                      `json:"description,omitempty"`
+	ExclusiveChannel    *PostListingsRequestBodyExclusiveChannelEnum `json:"exclusive_channel,omitempty"`
+	Finish              *string                                      `json:"finish,omitempty"`
+	HasInventory        *bool                                        `json:"has_inventory,omitempty"`
+	Inventory           *int64                                       `json:"inventory,omitempty"`
+	Location            *PostListingsRequestBodyLocation             `json:"location,omitempty"`
+	Make                *string                                      `json:"make,omitempty"`
+	Model               *string                                      `json:"model,omitempty"`
+	MultiItem           *bool                                        `json:"multi_item,omitempty"`
+	OffersEnabled       *bool                                        `json:"offers_enabled,omitempty"`
+	OriginCountryCode   *string                                      `json:"origin_country_code,omitempty"`
+	Photos              []string                                     `json:"photos,omitempty"`
+	PreorderInfo        *PostListingsRequestBodyPreorderInfo         `json:"preorder_info,omitempty"`
+	Price               *PostListingsRequestBodyPrice                `json:"price,omitempty"`
+	Prop65Warning       *string                                      `json:"prop_65_warning,omitempty"`
+	Publish             *bool                                        `json:"publish,omitempty"`
+	Seller              *PostListingsRequestBodySeller               `json:"seller,omitempty"`
+	SellerCost          *string                                      `json:"seller_cost,omitempty"`
+	Shipping            *PostListingsRequestBodyShipping             `json:"shipping,omitempty"`
+	ShippingProfileID   *string                                      `json:"shipping_profile_id,omitempty"`
+	ShippingProfileName *string                                      `json:"shipping_profile_name,omitempty"`
+	Sku                 *string                                      `json:"sku,omitempty"`
+	SoldAsIs            *bool                                        `json:"sold_as_is,omitempty"`
+	StorageLocation     *string                                      `json:"storage_location,omitempty"`
+	TaxExempt           *bool                                        `json:"tax_exempt,omitempty"`
+	Title               *string                                      `json:"title,omitempty"`
+	Upc                 *string                                      `json:"upc,omitempty"`
+	UpcDoesNotApply     *bool                                        `json:"upc_does_not_apply,omitempty"`
+	Videos              []PostListingsRequestBodyVideos              `json:"videos,omitempty"`
+	Year                *string                                      `json:"year,omitempty"`
 }
 
 type PostListingsSecurity struct {

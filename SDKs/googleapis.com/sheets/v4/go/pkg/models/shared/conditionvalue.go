@@ -13,6 +13,6 @@ const (
 )
 
 type ConditionValue struct {
-	RelativeDate     *ConditionValueRelativeDateEnum `json:"relativeDate"`
-	UserEnteredValue *string                         `json:"userEnteredValue"`
+	RelativeDate     *ConditionValueRelativeDateEnum `json:"relativeDate,omitempty"`
+	UserEnteredValue *string                         `json:"userEnteredValue,omitempty"`
 }

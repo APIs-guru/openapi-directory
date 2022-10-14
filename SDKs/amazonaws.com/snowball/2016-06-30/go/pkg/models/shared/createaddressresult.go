@@ -1,5 +1,5 @@
 package shared
 
 type CreateAddressResult struct {
-	AddressID *string `json:"AddressId"`
+	AddressID *string `json:"AddressId,omitempty"`
 }

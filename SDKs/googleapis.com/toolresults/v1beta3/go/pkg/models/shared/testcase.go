@@ -11,13 +11,13 @@ const (
 )
 
 type TestCase struct {
-	ElapsedTime       *Duration             `json:"elapsedTime"`
-	EndTime           *Timestamp            `json:"endTime"`
-	SkippedMessage    *string               `json:"skippedMessage"`
-	StackTraces       []StackTrace          `json:"stackTraces"`
-	StartTime         *Timestamp            `json:"startTime"`
-	Status            *TestCaseStatusEnum   `json:"status"`
-	TestCaseID        *string               `json:"testCaseId"`
-	TestCaseReference *TestCaseReference    `json:"testCaseReference"`
-	ToolOutputs       []ToolOutputReference `json:"toolOutputs"`
+	ElapsedTime       *Duration             `json:"elapsedTime,omitempty"`
+	EndTime           *Timestamp            `json:"endTime,omitempty"`
+	SkippedMessage    *string               `json:"skippedMessage,omitempty"`
+	StackTraces       []StackTrace          `json:"stackTraces,omitempty"`
+	StartTime         *Timestamp            `json:"startTime,omitempty"`
+	Status            *TestCaseStatusEnum   `json:"status,omitempty"`
+	TestCaseID        *string               `json:"testCaseId,omitempty"`
+	TestCaseReference *TestCaseReference    `json:"testCaseReference,omitempty"`
+	ToolOutputs       []ToolOutputReference `json:"toolOutputs,omitempty"`
 }

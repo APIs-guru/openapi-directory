@@ -5,20 +5,20 @@ import (
 )
 
 type PipelineStages struct {
-	DisplayOrder   *int64  `json:"display_order"`
-	ID             *string `json:"id"`
-	Name           *string `json:"name"`
-	Value          *string `json:"value"`
-	WinProbability *int64  `json:"win_probability"`
+	DisplayOrder   *int64  `json:"display_order,omitempty"`
+	ID             *string `json:"id,omitempty"`
+	Name           *string `json:"name,omitempty"`
+	Value          *string `json:"value,omitempty"`
+	WinProbability *int64  `json:"win_probability,omitempty"`
 }
 
 type Pipeline struct {
-	Archived     *bool            `json:"archived"`
-	CreatedAt    *time.Time       `json:"created_at"`
-	Currency     *CurrencyEnum    `json:"currency"`
-	DisplayOrder *int64           `json:"display_order"`
-	ID           *string          `json:"id"`
+	Archived     *bool            `json:"archived,omitempty"`
+	CreatedAt    *time.Time       `json:"created_at,omitempty"`
+	Currency     *CurrencyEnum    `json:"currency,omitempty"`
+	DisplayOrder *int64           `json:"display_order,omitempty"`
+	ID           *string          `json:"id,omitempty"`
 	Name         string           `json:"name"`
-	Stages       []PipelineStages `json:"stages"`
-	UpdatedAt    *time.Time       `json:"updated_at"`
+	Stages       []PipelineStages `json:"stages,omitempty"`
+	UpdatedAt    *time.Time       `json:"updated_at,omitempty"`
 }

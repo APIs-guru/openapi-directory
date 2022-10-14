@@ -19,10 +19,10 @@ const (
 )
 
 type ContactsDestroy400ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     ContactsDestroy400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -34,10 +34,10 @@ const (
 )
 
 type ContactsDestroy401ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     ContactsDestroy401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -48,10 +48,10 @@ const (
 )
 
 type ContactsDestroy403ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     ContactsDestroy403ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -62,10 +62,10 @@ const (
 )
 
 type ContactsDestroy404ApplicationJSON struct {
-	Detail   *string                                   `json:"detail"`
-	Instance *string                                   `json:"instance"`
-	Status   *interface{}                              `json:"status"`
-	Title    *interface{}                              `json:"title"`
+	Detail   *string                                   `json:"detail,omitempty"`
+	Instance *string                                   `json:"instance,omitempty"`
+	Status   *interface{}                              `json:"status,omitempty"`
+	Title    *interface{}                              `json:"title,omitempty"`
 	Type     ContactsDestroy404ApplicationJSONTypeEnum `json:"type"`
 }
 

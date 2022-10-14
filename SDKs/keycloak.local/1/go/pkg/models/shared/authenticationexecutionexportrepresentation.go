@@ -1,12 +1,12 @@
 package shared
 
 type AuthenticationExecutionExportRepresentation struct {
-	Authenticator       *string `json:"authenticator"`
-	AuthenticatorConfig *string `json:"authenticatorConfig"`
-	AuthenticatorFlow   *bool   `json:"authenticatorFlow"`
-	AutheticatorFlow    *bool   `json:"autheticatorFlow"`
-	FlowAlias           *string `json:"flowAlias"`
-	Priority            *int32  `json:"priority"`
-	Requirement         *string `json:"requirement"`
-	UserSetupAllowed    *bool   `json:"userSetupAllowed"`
+	Authenticator       *string `json:"authenticator,omitempty"`
+	AuthenticatorConfig *string `json:"authenticatorConfig,omitempty"`
+	AuthenticatorFlow   *bool   `json:"authenticatorFlow,omitempty"`
+	AutheticatorFlow    *bool   `json:"autheticatorFlow,omitempty"`
+	FlowAlias           *string `json:"flowAlias,omitempty"`
+	Priority            *int32  `json:"priority,omitempty"`
+	Requirement         *string `json:"requirement,omitempty"`
+	UserSetupAllowed    *bool   `json:"userSetupAllowed,omitempty"`
 }

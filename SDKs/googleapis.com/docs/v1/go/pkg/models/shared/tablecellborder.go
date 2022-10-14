@@ -10,7 +10,7 @@ const (
 )
 
 type TableCellBorder struct {
-	Color     *OptionalColor                `json:"color"`
-	DashStyle *TableCellBorderDashStyleEnum `json:"dashStyle"`
-	Width     *Dimension                    `json:"width"`
+	Color     *OptionalColor                `json:"color,omitempty"`
+	DashStyle *TableCellBorderDashStyleEnum `json:"dashStyle,omitempty"`
+	Width     *Dimension                    `json:"width,omitempty"`
 }

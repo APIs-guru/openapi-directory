@@ -1,10 +1,10 @@
 package shared
 
 type ItemVariationLocationOverrides struct {
-	InventoryAlertThreshold *int64  `json:"inventory_alert_threshold"`
-	InventoryAlertType      *string `json:"inventory_alert_type"`
-	LocationID              *string `json:"location_id"`
-	PriceMoney              *Money  `json:"price_money"`
-	PricingType             *string `json:"pricing_type"`
-	TrackInventory          *bool   `json:"track_inventory"`
+	InventoryAlertThreshold *int64  `json:"inventory_alert_threshold,omitempty"`
+	InventoryAlertType      *string `json:"inventory_alert_type,omitempty"`
+	LocationID              *string `json:"location_id,omitempty"`
+	PriceMoney              *Money  `json:"price_money,omitempty"`
+	PricingType             *string `json:"pricing_type,omitempty"`
+	TrackInventory          *bool   `json:"track_inventory,omitempty"`
 }

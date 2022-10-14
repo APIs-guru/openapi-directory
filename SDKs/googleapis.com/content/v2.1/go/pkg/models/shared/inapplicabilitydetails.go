@@ -15,6 +15,6 @@ const (
 )
 
 type InapplicabilityDetails struct {
-	InapplicableCount  *string                                       `json:"inapplicableCount"`
-	InapplicableReason *InapplicabilityDetailsInapplicableReasonEnum `json:"inapplicableReason"`
+	InapplicableCount  *string                                       `json:"inapplicableCount,omitempty"`
+	InapplicableReason *InapplicabilityDetailsInapplicableReasonEnum `json:"inapplicableReason,omitempty"`
 }

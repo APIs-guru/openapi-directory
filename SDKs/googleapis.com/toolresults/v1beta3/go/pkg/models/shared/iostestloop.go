@@ -1,5 +1,5 @@
 package shared
 
 type IosTestLoop struct {
-	BundleID *string `json:"bundleId"`
+	BundleID *string `json:"bundleId,omitempty"`
 }

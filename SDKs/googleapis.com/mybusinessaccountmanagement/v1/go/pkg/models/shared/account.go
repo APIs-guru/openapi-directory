@@ -47,14 +47,14 @@ const (
 )
 
 type Account struct {
-	AccountName       *string                       `json:"accountName"`
-	AccountNumber     *string                       `json:"accountNumber"`
-	Name              *string                       `json:"name"`
-	OrganizationInfo  *OrganizationInfo             `json:"organizationInfo"`
-	PermissionLevel   *AccountPermissionLevelEnum   `json:"permissionLevel"`
-	PrimaryOwner      *string                       `json:"primaryOwner"`
-	Role              *AccountRoleEnum              `json:"role"`
-	Type              *AccountTypeEnum              `json:"type"`
-	VerificationState *AccountVerificationStateEnum `json:"verificationState"`
-	VettedState       *AccountVettedStateEnum       `json:"vettedState"`
+	AccountName       *string                       `json:"accountName,omitempty"`
+	AccountNumber     *string                       `json:"accountNumber,omitempty"`
+	Name              *string                       `json:"name,omitempty"`
+	OrganizationInfo  *OrganizationInfo             `json:"organizationInfo,omitempty"`
+	PermissionLevel   *AccountPermissionLevelEnum   `json:"permissionLevel,omitempty"`
+	PrimaryOwner      *string                       `json:"primaryOwner,omitempty"`
+	Role              *AccountRoleEnum              `json:"role,omitempty"`
+	Type              *AccountTypeEnum              `json:"type,omitempty"`
+	VerificationState *AccountVerificationStateEnum `json:"verificationState,omitempty"`
+	VettedState       *AccountVettedStateEnum       `json:"vettedState,omitempty"`
 }

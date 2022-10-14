@@ -1,6 +1,6 @@
 package shared
 
 type CrossRegionCopyDeprecateRule struct {
-	Interval     *int64                           `json:"Interval"`
-	IntervalUnit *RetentionIntervalUnitValuesEnum `json:"IntervalUnit"`
+	Interval     *int64                           `json:"Interval,omitempty"`
+	IntervalUnit *RetentionIntervalUnitValuesEnum `json:"IntervalUnit,omitempty"`
 }

@@ -20,9 +20,9 @@ type ListNotificationsHeaders struct {
 }
 
 type ListNotificationsRequestBody struct {
-	MaxResults *int64  `json:"MaxResults"`
-	NextToken  *string `json:"NextToken"`
-	WorkloadID *string `json:"WorkloadId"`
+	MaxResults *int64  `json:"MaxResults,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
+	WorkloadID *string `json:"WorkloadId,omitempty"`
 }
 
 type ListNotificationsRequest struct {

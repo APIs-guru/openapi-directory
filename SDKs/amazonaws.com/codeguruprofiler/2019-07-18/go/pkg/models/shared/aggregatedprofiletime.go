@@ -5,6 +5,6 @@ import (
 )
 
 type AggregatedProfileTime struct {
-	Period *AggregationPeriodEnum `json:"period"`
-	Start  *time.Time             `json:"start"`
+	Period *AggregationPeriodEnum `json:"period,omitempty"`
+	Start  *time.Time             `json:"start,omitempty"`
 }

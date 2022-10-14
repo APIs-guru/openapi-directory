@@ -26,22 +26,22 @@ const (
 )
 
 type OrgsUpdateRequestBody struct {
-	BillingEmail                         *string                                                        `json:"billing_email"`
-	Blog                                 *string                                                        `json:"blog"`
-	Company                              *string                                                        `json:"company"`
-	DefaultRepositoryPermission          *OrgsUpdateRequestBodyDefaultRepositoryPermissionEnum          `json:"default_repository_permission"`
-	Description                          *string                                                        `json:"description"`
-	Email                                *string                                                        `json:"email"`
-	HasOrganizationProjects              *bool                                                          `json:"has_organization_projects"`
-	HasRepositoryProjects                *bool                                                          `json:"has_repository_projects"`
-	Location                             *string                                                        `json:"location"`
-	MembersAllowedRepositoryCreationType *OrgsUpdateRequestBodyMembersAllowedRepositoryCreationTypeEnum `json:"members_allowed_repository_creation_type"`
-	MembersCanCreateInternalRepositories *bool                                                          `json:"members_can_create_internal_repositories"`
-	MembersCanCreatePrivateRepositories  *bool                                                          `json:"members_can_create_private_repositories"`
-	MembersCanCreatePublicRepositories   *bool                                                          `json:"members_can_create_public_repositories"`
-	MembersCanCreateRepositories         *bool                                                          `json:"members_can_create_repositories"`
-	Name                                 *string                                                        `json:"name"`
-	TwitterUsername                      *string                                                        `json:"twitter_username"`
+	BillingEmail                         *string                                                        `json:"billing_email,omitempty"`
+	Blog                                 *string                                                        `json:"blog,omitempty"`
+	Company                              *string                                                        `json:"company,omitempty"`
+	DefaultRepositoryPermission          *OrgsUpdateRequestBodyDefaultRepositoryPermissionEnum          `json:"default_repository_permission,omitempty"`
+	Description                          *string                                                        `json:"description,omitempty"`
+	Email                                *string                                                        `json:"email,omitempty"`
+	HasOrganizationProjects              *bool                                                          `json:"has_organization_projects,omitempty"`
+	HasRepositoryProjects                *bool                                                          `json:"has_repository_projects,omitempty"`
+	Location                             *string                                                        `json:"location,omitempty"`
+	MembersAllowedRepositoryCreationType *OrgsUpdateRequestBodyMembersAllowedRepositoryCreationTypeEnum `json:"members_allowed_repository_creation_type,omitempty"`
+	MembersCanCreateInternalRepositories *bool                                                          `json:"members_can_create_internal_repositories,omitempty"`
+	MembersCanCreatePrivateRepositories  *bool                                                          `json:"members_can_create_private_repositories,omitempty"`
+	MembersCanCreatePublicRepositories   *bool                                                          `json:"members_can_create_public_repositories,omitempty"`
+	MembersCanCreateRepositories         *bool                                                          `json:"members_can_create_repositories,omitempty"`
+	Name                                 *string                                                        `json:"name,omitempty"`
+	TwitterUsername                      *string                                                        `json:"twitter_username,omitempty"`
 }
 
 type OrgsUpdateRequest struct {

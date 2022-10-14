@@ -5,14 +5,14 @@ import (
 )
 
 type DomainNameConfiguration struct {
-	APIGatewayDomainName                *string               `json:"ApiGatewayDomainName"`
-	CertificateArn                      *string               `json:"CertificateArn"`
-	CertificateName                     *string               `json:"CertificateName"`
-	CertificateUploadDate               *time.Time            `json:"CertificateUploadDate"`
-	DomainNameStatus                    *DomainNameStatusEnum `json:"DomainNameStatus"`
-	DomainNameStatusMessage             *string               `json:"DomainNameStatusMessage"`
-	EndpointType                        *EndpointTypeEnum     `json:"EndpointType"`
-	HostedZoneID                        *string               `json:"HostedZoneId"`
-	OwnershipVerificationCertificateArn *string               `json:"OwnershipVerificationCertificateArn"`
-	SecurityPolicy                      *SecurityPolicyEnum   `json:"SecurityPolicy"`
+	APIGatewayDomainName                *string               `json:"ApiGatewayDomainName,omitempty"`
+	CertificateArn                      *string               `json:"CertificateArn,omitempty"`
+	CertificateName                     *string               `json:"CertificateName,omitempty"`
+	CertificateUploadDate               *time.Time            `json:"CertificateUploadDate,omitempty"`
+	DomainNameStatus                    *DomainNameStatusEnum `json:"DomainNameStatus,omitempty"`
+	DomainNameStatusMessage             *string               `json:"DomainNameStatusMessage,omitempty"`
+	EndpointType                        *EndpointTypeEnum     `json:"EndpointType,omitempty"`
+	HostedZoneID                        *string               `json:"HostedZoneId,omitempty"`
+	OwnershipVerificationCertificateArn *string               `json:"OwnershipVerificationCertificateArn,omitempty"`
+	SecurityPolicy                      *SecurityPolicyEnum   `json:"SecurityPolicy,omitempty"`
 }

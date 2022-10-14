@@ -1,6 +1,6 @@
 package shared
 
 type RetrieveInventoryAdjustmentResponse struct {
-	Adjustment *InventoryAdjustment `json:"adjustment"`
-	Errors     []Error              `json:"errors"`
+	Adjustment *InventoryAdjustment `json:"adjustment,omitempty"`
+	Errors     []Error              `json:"errors,omitempty"`
 }

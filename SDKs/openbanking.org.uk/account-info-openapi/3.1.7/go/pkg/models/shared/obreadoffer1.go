@@ -26,25 +26,25 @@ const (
 
 type ObReadOffer1DataOffer struct {
 	AccountID     string                              `json:"AccountId"`
-	Amount        *ObReadOffer1DataOfferAmount        `json:"Amount"`
-	Description   *string                             `json:"Description"`
-	EndDateTime   *time.Time                          `json:"EndDateTime"`
-	Fee           *ObReadOffer1DataOfferFee           `json:"Fee"`
-	OfferID       *string                             `json:"OfferId"`
-	OfferType     *ObReadOffer1DataOfferOfferTypeEnum `json:"OfferType"`
-	Rate          *string                             `json:"Rate"`
-	StartDateTime *time.Time                          `json:"StartDateTime"`
-	Term          *string                             `json:"Term"`
-	URL           *string                             `json:"URL"`
-	Value         *int64                              `json:"Value"`
+	Amount        *ObReadOffer1DataOfferAmount        `json:"Amount,omitempty"`
+	Description   *string                             `json:"Description,omitempty"`
+	EndDateTime   *time.Time                          `json:"EndDateTime,omitempty"`
+	Fee           *ObReadOffer1DataOfferFee           `json:"Fee,omitempty"`
+	OfferID       *string                             `json:"OfferId,omitempty"`
+	OfferType     *ObReadOffer1DataOfferOfferTypeEnum `json:"OfferType,omitempty"`
+	Rate          *string                             `json:"Rate,omitempty"`
+	StartDateTime *time.Time                          `json:"StartDateTime,omitempty"`
+	Term          *string                             `json:"Term,omitempty"`
+	URL           *string                             `json:"URL,omitempty"`
+	Value         *int64                              `json:"Value,omitempty"`
 }
 
 type ObReadOffer1Data struct {
-	Offer []ObReadOffer1DataOffer `json:"Offer"`
+	Offer []ObReadOffer1DataOffer `json:"Offer,omitempty"`
 }
 
 type ObReadOffer1 struct {
 	Data  ObReadOffer1Data `json:"Data"`
-	Links *Links           `json:"Links"`
-	Meta  *Meta            `json:"Meta"`
+	Links *Links           `json:"Links,omitempty"`
+	Meta  *Meta            `json:"Meta,omitempty"`
 }

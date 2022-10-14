@@ -21,7 +21,7 @@ type GetTagRequest struct {
 }
 
 type GetTag200ApplicationJSON struct {
-	Data *shared.TagResponse `json:"data"`
+	Data *shared.TagResponse `json:"data,omitempty"`
 }
 
 type GetTagResponse struct {

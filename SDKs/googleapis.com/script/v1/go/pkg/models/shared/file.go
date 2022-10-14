@@ -10,11 +10,11 @@ const (
 )
 
 type File struct {
-	CreateTime     *string                          `json:"createTime"`
-	FunctionSet    *GoogleAppsScriptTypeFunctionSet `json:"functionSet"`
-	LastModifyUser *GoogleAppsScriptTypeUser        `json:"lastModifyUser"`
-	Name           *string                          `json:"name"`
-	Source         *string                          `json:"source"`
-	Type           *FileTypeEnum                    `json:"type"`
-	UpdateTime     *string                          `json:"updateTime"`
+	CreateTime     *string                          `json:"createTime,omitempty"`
+	FunctionSet    *GoogleAppsScriptTypeFunctionSet `json:"functionSet,omitempty"`
+	LastModifyUser *GoogleAppsScriptTypeUser        `json:"lastModifyUser,omitempty"`
+	Name           *string                          `json:"name,omitempty"`
+	Source         *string                          `json:"source,omitempty"`
+	Type           *FileTypeEnum                    `json:"type,omitempty"`
+	UpdateTime     *string                          `json:"updateTime,omitempty"`
 }

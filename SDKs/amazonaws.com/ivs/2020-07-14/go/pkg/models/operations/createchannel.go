@@ -29,12 +29,12 @@ const (
 )
 
 type CreateChannelRequestBody struct {
-	Authorized                *bool                                    `json:"authorized"`
-	LatencyMode               *CreateChannelRequestBodyLatencyModeEnum `json:"latencyMode"`
-	Name                      *string                                  `json:"name"`
-	RecordingConfigurationArn *string                                  `json:"recordingConfigurationArn"`
-	Tags                      map[string]string                        `json:"tags"`
-	Type                      *CreateChannelRequestBodyTypeEnum        `json:"type"`
+	Authorized                *bool                                    `json:"authorized,omitempty"`
+	LatencyMode               *CreateChannelRequestBodyLatencyModeEnum `json:"latencyMode,omitempty"`
+	Name                      *string                                  `json:"name,omitempty"`
+	RecordingConfigurationArn *string                                  `json:"recordingConfigurationArn,omitempty"`
+	Tags                      map[string]string                        `json:"tags,omitempty"`
+	Type                      *CreateChannelRequestBodyTypeEnum        `json:"type,omitempty"`
 }
 
 type CreateChannelRequest struct {

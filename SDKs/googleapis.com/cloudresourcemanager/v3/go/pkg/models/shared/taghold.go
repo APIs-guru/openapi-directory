@@ -1,9 +1,9 @@
 package shared
 
 type TagHold struct {
-	CreateTime *string `json:"createTime"`
-	HelpLink   *string `json:"helpLink"`
-	Holder     *string `json:"holder"`
-	Name       *string `json:"name"`
-	Origin     *string `json:"origin"`
+	CreateTime *string `json:"createTime,omitempty"`
+	HelpLink   *string `json:"helpLink,omitempty"`
+	Holder     *string `json:"holder,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	Origin     *string `json:"origin,omitempty"`
 }

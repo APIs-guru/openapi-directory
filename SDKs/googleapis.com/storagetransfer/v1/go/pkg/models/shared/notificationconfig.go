@@ -18,7 +18,7 @@ const (
 )
 
 type NotificationConfig struct {
-	EventTypes    []NotificationConfigEventTypesEnum   `json:"eventTypes"`
-	PayloadFormat *NotificationConfigPayloadFormatEnum `json:"payloadFormat"`
-	PubsubTopic   *string                              `json:"pubsubTopic"`
+	EventTypes    []NotificationConfigEventTypesEnum   `json:"eventTypes,omitempty"`
+	PayloadFormat *NotificationConfigPayloadFormatEnum `json:"payloadFormat,omitempty"`
+	PubsubTopic   *string                              `json:"pubsubTopic,omitempty"`
 }

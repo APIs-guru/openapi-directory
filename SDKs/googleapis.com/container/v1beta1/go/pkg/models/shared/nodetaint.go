@@ -10,7 +10,7 @@ const (
 )
 
 type NodeTaint struct {
-	Effect *NodeTaintEffectEnum `json:"effect"`
-	Key    *string              `json:"key"`
-	Value  *string              `json:"value"`
+	Effect *NodeTaintEffectEnum `json:"effect,omitempty"`
+	Key    *string              `json:"key,omitempty"`
+	Value  *string              `json:"value,omitempty"`
 }

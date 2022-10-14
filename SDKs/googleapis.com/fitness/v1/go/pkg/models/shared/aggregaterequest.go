@@ -16,12 +16,12 @@ const (
 )
 
 type AggregateRequest struct {
-	AggregateBy                 []AggregateBy                                     `json:"aggregateBy"`
-	BucketByActivitySegment     *BucketByActivity                                 `json:"bucketByActivitySegment"`
-	BucketByActivityType        *BucketByActivity                                 `json:"bucketByActivityType"`
-	BucketBySession             *BucketBySession                                  `json:"bucketBySession"`
-	BucketByTime                *BucketByTime                                     `json:"bucketByTime"`
-	EndTimeMillis               *string                                           `json:"endTimeMillis"`
-	FilteredDataQualityStandard []AggregateRequestFilteredDataQualityStandardEnum `json:"filteredDataQualityStandard"`
-	StartTimeMillis             *string                                           `json:"startTimeMillis"`
+	AggregateBy                 []AggregateBy                                     `json:"aggregateBy,omitempty"`
+	BucketByActivitySegment     *BucketByActivity                                 `json:"bucketByActivitySegment,omitempty"`
+	BucketByActivityType        *BucketByActivity                                 `json:"bucketByActivityType,omitempty"`
+	BucketBySession             *BucketBySession                                  `json:"bucketBySession,omitempty"`
+	BucketByTime                *BucketByTime                                     `json:"bucketByTime,omitempty"`
+	EndTimeMillis               *string                                           `json:"endTimeMillis,omitempty"`
+	FilteredDataQualityStandard []AggregateRequestFilteredDataQualityStandardEnum `json:"filteredDataQualityStandard,omitempty"`
+	StartTimeMillis             *string                                           `json:"startTimeMillis,omitempty"`
 }

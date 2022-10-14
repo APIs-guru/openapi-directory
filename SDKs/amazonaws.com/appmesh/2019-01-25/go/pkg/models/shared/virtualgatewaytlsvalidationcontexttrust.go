@@ -1,7 +1,7 @@
 package shared
 
 type VirtualGatewayTLSValidationContextTrust struct {
-	Acm  *VirtualGatewayTLSValidationContextAcmTrust  `json:"acm"`
-	File *VirtualGatewayTLSValidationContextFileTrust `json:"file"`
-	Sds  *VirtualGatewayTLSValidationContextSdsTrust  `json:"sds"`
+	Acm  *VirtualGatewayTLSValidationContextAcmTrust  `json:"acm,omitempty"`
+	File *VirtualGatewayTLSValidationContextFileTrust `json:"file,omitempty"`
+	Sds  *VirtualGatewayTLSValidationContextSdsTrust  `json:"sds,omitempty"`
 }

@@ -19,14 +19,14 @@ type UpdateApnsSandboxChannelHeaders struct {
 }
 
 type UpdateApnsSandboxChannelRequestBodyApnsSandboxChannelRequest struct {
-	BundleID                    *string `json:"BundleId"`
-	Certificate                 *string `json:"Certificate"`
-	DefaultAuthenticationMethod *string `json:"DefaultAuthenticationMethod"`
-	Enabled                     *bool   `json:"Enabled"`
-	PrivateKey                  *string `json:"PrivateKey"`
-	TeamID                      *string `json:"TeamId"`
-	TokenKey                    *string `json:"TokenKey"`
-	TokenKeyID                  *string `json:"TokenKeyId"`
+	BundleID                    *string `json:"BundleId,omitempty"`
+	Certificate                 *string `json:"Certificate,omitempty"`
+	DefaultAuthenticationMethod *string `json:"DefaultAuthenticationMethod,omitempty"`
+	Enabled                     *bool   `json:"Enabled,omitempty"`
+	PrivateKey                  *string `json:"PrivateKey,omitempty"`
+	TeamID                      *string `json:"TeamId,omitempty"`
+	TokenKey                    *string `json:"TokenKey,omitempty"`
+	TokenKeyID                  *string `json:"TokenKeyId,omitempty"`
 }
 
 type UpdateApnsSandboxChannelRequestBody struct {

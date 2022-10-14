@@ -1,7 +1,7 @@
 package shared
 
 type UpdateFleetCapacityOutput struct {
-	FleetArn *string `json:"FleetArn"`
-	FleetID  *string `json:"FleetId"`
-	Location *string `json:"Location"`
+	FleetArn *string `json:"FleetArn,omitempty"`
+	FleetID  *string `json:"FleetId,omitempty"`
+	Location *string `json:"Location,omitempty"`
 }

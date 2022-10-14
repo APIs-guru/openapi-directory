@@ -2,5 +2,5 @@ package shared
 
 type TransformProcessingConfig struct {
 	ComputeLocation  ComputeLocationEnum `json:"computeLocation"`
-	ForwardingConfig *ForwardingConfig   `json:"forwardingConfig"`
+	ForwardingConfig *ForwardingConfig   `json:"forwardingConfig,omitempty"`
 }

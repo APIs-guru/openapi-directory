@@ -11,16 +11,16 @@ const (
 )
 
 type GoogleCloudDataplexV1Environment struct {
-	CreateTime         *string                                             `json:"createTime"`
-	Description        *string                                             `json:"description"`
-	DisplayName        *string                                             `json:"displayName"`
-	Endpoints          *GoogleCloudDataplexV1EnvironmentEndpoints          `json:"endpoints"`
-	InfrastructureSpec *GoogleCloudDataplexV1EnvironmentInfrastructureSpec `json:"infrastructureSpec"`
-	Labels             map[string]string                                   `json:"labels"`
-	Name               *string                                             `json:"name"`
-	SessionSpec        *GoogleCloudDataplexV1EnvironmentSessionSpec        `json:"sessionSpec"`
-	SessionStatus      *GoogleCloudDataplexV1EnvironmentSessionStatus      `json:"sessionStatus"`
-	State              *GoogleCloudDataplexV1EnvironmentStateEnum          `json:"state"`
-	UID                *string                                             `json:"uid"`
-	UpdateTime         *string                                             `json:"updateTime"`
+	CreateTime         *string                                             `json:"createTime,omitempty"`
+	Description        *string                                             `json:"description,omitempty"`
+	DisplayName        *string                                             `json:"displayName,omitempty"`
+	Endpoints          *GoogleCloudDataplexV1EnvironmentEndpoints          `json:"endpoints,omitempty"`
+	InfrastructureSpec *GoogleCloudDataplexV1EnvironmentInfrastructureSpec `json:"infrastructureSpec,omitempty"`
+	Labels             map[string]string                                   `json:"labels,omitempty"`
+	Name               *string                                             `json:"name,omitempty"`
+	SessionSpec        *GoogleCloudDataplexV1EnvironmentSessionSpec        `json:"sessionSpec,omitempty"`
+	SessionStatus      *GoogleCloudDataplexV1EnvironmentSessionStatus      `json:"sessionStatus,omitempty"`
+	State              *GoogleCloudDataplexV1EnvironmentStateEnum          `json:"state,omitempty"`
+	UID                *string                                             `json:"uid,omitempty"`
+	UpdateTime         *string                                             `json:"updateTime,omitempty"`
 }

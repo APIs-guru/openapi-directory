@@ -1,8 +1,8 @@
 package shared
 
 type File struct {
-	AbsolutePath *string               `json:"absolutePath"`
-	BlobID       *string               `json:"blobId"`
-	FileMode     *FileModeTypeEnumEnum `json:"fileMode"`
-	RelativePath *string               `json:"relativePath"`
+	AbsolutePath *string               `json:"absolutePath,omitempty"`
+	BlobID       *string               `json:"blobId,omitempty"`
+	FileMode     *FileModeTypeEnumEnum `json:"fileMode,omitempty"`
+	RelativePath *string               `json:"relativePath,omitempty"`
 }

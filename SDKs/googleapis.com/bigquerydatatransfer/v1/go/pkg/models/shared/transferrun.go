@@ -12,19 +12,19 @@ const (
 )
 
 type TransferRun struct {
-	DataSourceID            *string                `json:"dataSourceId"`
-	DestinationDatasetID    *string                `json:"destinationDatasetId"`
-	EmailPreferences        *EmailPreferences      `json:"emailPreferences"`
-	EndTime                 *string                `json:"endTime"`
-	ErrorStatus             *Status                `json:"errorStatus"`
-	Name                    *string                `json:"name"`
-	NotificationPubsubTopic *string                `json:"notificationPubsubTopic"`
-	Params                  map[string]interface{} `json:"params"`
-	RunTime                 *string                `json:"runTime"`
-	Schedule                *string                `json:"schedule"`
-	ScheduleTime            *string                `json:"scheduleTime"`
-	StartTime               *string                `json:"startTime"`
-	State                   *TransferRunStateEnum  `json:"state"`
-	UpdateTime              *string                `json:"updateTime"`
-	UserID                  *string                `json:"userId"`
+	DataSourceID            *string                `json:"dataSourceId,omitempty"`
+	DestinationDatasetID    *string                `json:"destinationDatasetId,omitempty"`
+	EmailPreferences        *EmailPreferences      `json:"emailPreferences,omitempty"`
+	EndTime                 *string                `json:"endTime,omitempty"`
+	ErrorStatus             *Status                `json:"errorStatus,omitempty"`
+	Name                    *string                `json:"name,omitempty"`
+	NotificationPubsubTopic *string                `json:"notificationPubsubTopic,omitempty"`
+	Params                  map[string]interface{} `json:"params,omitempty"`
+	RunTime                 *string                `json:"runTime,omitempty"`
+	Schedule                *string                `json:"schedule,omitempty"`
+	ScheduleTime            *string                `json:"scheduleTime,omitempty"`
+	StartTime               *string                `json:"startTime,omitempty"`
+	State                   *TransferRunStateEnum  `json:"state,omitempty"`
+	UpdateTime              *string                `json:"updateTime,omitempty"`
+	UserID                  *string                `json:"userId,omitempty"`
 }

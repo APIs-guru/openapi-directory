@@ -1,6 +1,6 @@
 package shared
 
 type EgressControlConfig struct {
-	Backends        *string          `json:"backends"`
-	ExtractionRules *ExtractionRules `json:"extractionRules"`
+	Backends        *string          `json:"backends,omitempty"`
+	ExtractionRules *ExtractionRules `json:"extractionRules,omitempty"`
 }

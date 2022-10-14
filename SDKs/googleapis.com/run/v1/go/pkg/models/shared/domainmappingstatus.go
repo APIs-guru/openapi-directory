@@ -1,9 +1,9 @@
 package shared
 
 type DomainMappingStatus struct {
-	Conditions         []GoogleCloudRunV1Condition `json:"conditions"`
-	MappedRouteName    *string                     `json:"mappedRouteName"`
-	ObservedGeneration *int32                      `json:"observedGeneration"`
-	ResourceRecords    []ResourceRecord            `json:"resourceRecords"`
-	URL                *string                     `json:"url"`
+	Conditions         []GoogleCloudRunV1Condition `json:"conditions,omitempty"`
+	MappedRouteName    *string                     `json:"mappedRouteName,omitempty"`
+	ObservedGeneration *int32                      `json:"observedGeneration,omitempty"`
+	ResourceRecords    []ResourceRecord            `json:"resourceRecords,omitempty"`
+	URL                *string                     `json:"url,omitempty"`
 }

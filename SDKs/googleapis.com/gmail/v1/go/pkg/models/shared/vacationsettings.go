@@ -1,12 +1,12 @@
 package shared
 
 type VacationSettings struct {
-	EnableAutoReply       *bool   `json:"enableAutoReply"`
-	EndTime               *string `json:"endTime"`
-	ResponseBodyHTML      *string `json:"responseBodyHtml"`
-	ResponseBodyPlainText *string `json:"responseBodyPlainText"`
-	ResponseSubject       *string `json:"responseSubject"`
-	RestrictToContacts    *bool   `json:"restrictToContacts"`
-	RestrictToDomain      *bool   `json:"restrictToDomain"`
-	StartTime             *string `json:"startTime"`
+	EnableAutoReply       *bool   `json:"enableAutoReply,omitempty"`
+	EndTime               *string `json:"endTime,omitempty"`
+	ResponseBodyHTML      *string `json:"responseBodyHtml,omitempty"`
+	ResponseBodyPlainText *string `json:"responseBodyPlainText,omitempty"`
+	ResponseSubject       *string `json:"responseSubject,omitempty"`
+	RestrictToContacts    *bool   `json:"restrictToContacts,omitempty"`
+	RestrictToDomain      *bool   `json:"restrictToDomain,omitempty"`
+	StartTime             *string `json:"startTime,omitempty"`
 }

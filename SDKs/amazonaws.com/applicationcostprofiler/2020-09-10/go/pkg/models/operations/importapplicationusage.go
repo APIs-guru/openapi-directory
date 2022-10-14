@@ -15,9 +15,9 @@ type ImportApplicationUsageHeaders struct {
 }
 
 type ImportApplicationUsageRequestBodySourceS3Location struct {
-	Bucket *string                    `json:"bucket"`
-	Key    *string                    `json:"key"`
-	Region *shared.S3BucketRegionEnum `json:"region"`
+	Bucket *string                    `json:"bucket,omitempty"`
+	Key    *string                    `json:"key,omitempty"`
+	Region *shared.S3BucketRegionEnum `json:"region,omitempty"`
 }
 
 type ImportApplicationUsageRequestBody struct {

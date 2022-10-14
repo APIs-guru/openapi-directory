@@ -13,6 +13,6 @@ const (
 )
 
 type ResponseStatusCode struct {
-	StatusClass *ResponseStatusCodeStatusClassEnum `json:"statusClass"`
-	StatusValue *int32                             `json:"statusValue"`
+	StatusClass *ResponseStatusCodeStatusClassEnum `json:"statusClass,omitempty"`
+	StatusValue *int32                             `json:"statusValue,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type AssociateOpsItemRelatedItemResponse struct {
-	AssociationID *string `json:"AssociationId"`
+	AssociationID *string `json:"AssociationId,omitempty"`
 }

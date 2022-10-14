@@ -1,5 +1,5 @@
 package shared
 
 type PaymentChannelRulesResponse struct {
-	Bank []PaymentChannelCountry `json:"bank"`
+	Bank []PaymentChannelCountry `json:"bank,omitempty"`
 }

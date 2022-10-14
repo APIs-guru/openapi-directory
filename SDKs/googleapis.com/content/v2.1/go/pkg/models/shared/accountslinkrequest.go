@@ -1,10 +1,10 @@
 package shared
 
 type AccountsLinkRequest struct {
-	Action                         *string                         `json:"action"`
-	ECommercePlatformLinkInfo      *ECommercePlatformLinkInfo      `json:"eCommercePlatformLinkInfo"`
-	LinkType                       *string                         `json:"linkType"`
-	LinkedAccountID                *string                         `json:"linkedAccountId"`
-	PaymentServiceProviderLinkInfo *PaymentServiceProviderLinkInfo `json:"paymentServiceProviderLinkInfo"`
-	Services                       []string                        `json:"services"`
+	Action                         *string                         `json:"action,omitempty"`
+	ECommercePlatformLinkInfo      *ECommercePlatformLinkInfo      `json:"eCommercePlatformLinkInfo,omitempty"`
+	LinkType                       *string                         `json:"linkType,omitempty"`
+	LinkedAccountID                *string                         `json:"linkedAccountId,omitempty"`
+	PaymentServiceProviderLinkInfo *PaymentServiceProviderLinkInfo `json:"paymentServiceProviderLinkInfo,omitempty"`
+	Services                       []string                        `json:"services,omitempty"`
 }

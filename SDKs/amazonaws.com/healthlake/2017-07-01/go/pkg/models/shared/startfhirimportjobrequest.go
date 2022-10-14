@@ -5,6 +5,6 @@ type StartFhirImportJobRequest struct {
 	DataAccessRoleArn   string           `json:"DataAccessRoleArn"`
 	DatastoreID         string           `json:"DatastoreId"`
 	InputDataConfig     InputDataConfig  `json:"InputDataConfig"`
-	JobName             *string          `json:"JobName"`
+	JobName             *string          `json:"JobName,omitempty"`
 	JobOutputDataConfig OutputDataConfig `json:"JobOutputDataConfig"`
 }

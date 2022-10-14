@@ -1,7 +1,7 @@
 package shared
 
 type CommitResponse struct {
-	CommitTime      *string          `json:"commitTime"`
-	IndexUpdates    *int32           `json:"indexUpdates"`
-	MutationResults []MutationResult `json:"mutationResults"`
+	CommitTime      *string          `json:"commitTime,omitempty"`
+	IndexUpdates    *int32           `json:"indexUpdates,omitempty"`
+	MutationResults []MutationResult `json:"mutationResults,omitempty"`
 }

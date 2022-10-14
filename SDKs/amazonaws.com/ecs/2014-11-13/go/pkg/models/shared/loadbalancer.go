@@ -1,8 +1,8 @@
 package shared
 
 type LoadBalancer struct {
-	ContainerName    *string `json:"containerName"`
-	ContainerPort    *int64  `json:"containerPort"`
-	LoadBalancerName *string `json:"loadBalancerName"`
-	TargetGroupArn   *string `json:"targetGroupArn"`
+	ContainerName    *string `json:"containerName,omitempty"`
+	ContainerPort    *int64  `json:"containerPort,omitempty"`
+	LoadBalancerName *string `json:"loadBalancerName,omitempty"`
+	TargetGroupArn   *string `json:"targetGroupArn,omitempty"`
 }

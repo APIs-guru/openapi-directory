@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1ArticleSuggestionData struct {
-	ConfidenceScore *float32          `json:"confidenceScore"`
-	Metadata        map[string]string `json:"metadata"`
-	QueryRecord     *string           `json:"queryRecord"`
-	Source          *string           `json:"source"`
-	Title           *string           `json:"title"`
-	URI             *string           `json:"uri"`
+	ConfidenceScore *float32          `json:"confidenceScore,omitempty"`
+	Metadata        map[string]string `json:"metadata,omitempty"`
+	QueryRecord     *string           `json:"queryRecord,omitempty"`
+	Source          *string           `json:"source,omitempty"`
+	Title           *string           `json:"title,omitempty"`
+	URI             *string           `json:"uri,omitempty"`
 }

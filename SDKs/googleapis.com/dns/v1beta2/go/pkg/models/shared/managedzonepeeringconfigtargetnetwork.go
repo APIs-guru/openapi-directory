@@ -1,7 +1,7 @@
 package shared
 
 type ManagedZonePeeringConfigTargetNetwork struct {
-	DeactivateTime *string `json:"deactivateTime"`
-	Kind           *string `json:"kind"`
-	NetworkURL     *string `json:"networkUrl"`
+	DeactivateTime *string `json:"deactivateTime,omitempty"`
+	Kind           *string `json:"kind,omitempty"`
+	NetworkURL     *string `json:"networkUrl,omitempty"`
 }

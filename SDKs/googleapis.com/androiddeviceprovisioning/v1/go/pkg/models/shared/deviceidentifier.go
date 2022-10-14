@@ -1,9 +1,9 @@
 package shared
 
 type DeviceIdentifier struct {
-	Imei         *string `json:"imei"`
-	Manufacturer *string `json:"manufacturer"`
-	Meid         *string `json:"meid"`
-	Model        *string `json:"model"`
-	SerialNumber *string `json:"serialNumber"`
+	Imei         *string `json:"imei,omitempty"`
+	Manufacturer *string `json:"manufacturer,omitempty"`
+	Meid         *string `json:"meid,omitempty"`
+	Model        *string `json:"model,omitempty"`
+	SerialNumber *string `json:"serialNumber,omitempty"`
 }

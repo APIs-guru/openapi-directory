@@ -1,18 +1,18 @@
 package shared
 
 type UserScheduleResponse struct {
-	CreationDate               *string `json:"creationDate"`
-	FeedType                   *string `json:"feedType"`
-	LastModifiedDate           *string `json:"lastModifiedDate"`
-	PreferredTriggerDayOfMonth *int32  `json:"preferredTriggerDayOfMonth"`
-	PreferredTriggerDayOfWeek  *string `json:"preferredTriggerDayOfWeek"`
-	PreferredTriggerHour       *string `json:"preferredTriggerHour"`
-	ScheduleEndDate            *string `json:"scheduleEndDate"`
-	ScheduleID                 *string `json:"scheduleId"`
-	ScheduleName               *string `json:"scheduleName"`
-	ScheduleStartDate          *string `json:"scheduleStartDate"`
-	ScheduleTemplateID         *string `json:"scheduleTemplateId"`
-	SchemaVersion              *string `json:"schemaVersion"`
-	Status                     *string `json:"status"`
-	StatusReason               *string `json:"statusReason"`
+	CreationDate               *string `json:"creationDate,omitempty"`
+	FeedType                   *string `json:"feedType,omitempty"`
+	LastModifiedDate           *string `json:"lastModifiedDate,omitempty"`
+	PreferredTriggerDayOfMonth *int32  `json:"preferredTriggerDayOfMonth,omitempty"`
+	PreferredTriggerDayOfWeek  *string `json:"preferredTriggerDayOfWeek,omitempty"`
+	PreferredTriggerHour       *string `json:"preferredTriggerHour,omitempty"`
+	ScheduleEndDate            *string `json:"scheduleEndDate,omitempty"`
+	ScheduleID                 *string `json:"scheduleId,omitempty"`
+	ScheduleName               *string `json:"scheduleName,omitempty"`
+	ScheduleStartDate          *string `json:"scheduleStartDate,omitempty"`
+	ScheduleTemplateID         *string `json:"scheduleTemplateId,omitempty"`
+	SchemaVersion              *string `json:"schemaVersion,omitempty"`
+	Status                     *string `json:"status,omitempty"`
+	StatusReason               *string `json:"statusReason,omitempty"`
 }

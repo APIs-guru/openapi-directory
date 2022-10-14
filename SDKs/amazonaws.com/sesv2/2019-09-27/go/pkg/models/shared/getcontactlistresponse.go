@@ -5,10 +5,10 @@ import (
 )
 
 type GetContactListResponse struct {
-	ContactListName      *string    `json:"ContactListName"`
-	CreatedTimestamp     *time.Time `json:"CreatedTimestamp"`
-	Description          *string    `json:"Description"`
-	LastUpdatedTimestamp *time.Time `json:"LastUpdatedTimestamp"`
-	Tags                 []Tag      `json:"Tags"`
-	Topics               []Topic    `json:"Topics"`
+	ContactListName      *string    `json:"ContactListName,omitempty"`
+	CreatedTimestamp     *time.Time `json:"CreatedTimestamp,omitempty"`
+	Description          *string    `json:"Description,omitempty"`
+	LastUpdatedTimestamp *time.Time `json:"LastUpdatedTimestamp,omitempty"`
+	Tags                 []Tag      `json:"Tags,omitempty"`
+	Topics               []Topic    `json:"Topics,omitempty"`
 }

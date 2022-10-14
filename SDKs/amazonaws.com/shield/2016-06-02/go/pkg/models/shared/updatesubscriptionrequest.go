@@ -1,5 +1,5 @@
 package shared
 
 type UpdateSubscriptionRequest struct {
-	AutoRenew *AutoRenewEnum `json:"AutoRenew"`
+	AutoRenew *AutoRenewEnum `json:"AutoRenew,omitempty"`
 }

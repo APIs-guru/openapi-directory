@@ -1,5 +1,5 @@
 package shared
 
 type GetRegistrationCodeResponse struct {
-	RegistrationCode *string `json:"registrationCode"`
+	RegistrationCode *string `json:"registrationCode,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AwsElbLoadBalancerSourceSecurityGroup struct {
-	GroupName  *string `json:"GroupName"`
-	OwnerAlias *string `json:"OwnerAlias"`
+	GroupName  *string `json:"GroupName,omitempty"`
+	OwnerAlias *string `json:"OwnerAlias,omitempty"`
 }

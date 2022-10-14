@@ -19,17 +19,17 @@ type ListDropletActionsRequest struct {
 }
 
 type ListDropletActions200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListDropletActions200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListDropletActions200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListDropletActions200ApplicationJSONMeta struct {
@@ -37,15 +37,15 @@ type ListDropletActions200ApplicationJSONMeta struct {
 }
 
 type ListDropletActions200ApplicationJSON struct {
-	Actions []shared.Onev21actionsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesActionsItems `json:"actions"`
-	Links   *ListDropletActions200ApplicationJSONLinks                                                     `json:"links"`
+	Actions []shared.Onev21actionsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesActionsItems `json:"actions,omitempty"`
+	Links   *ListDropletActions200ApplicationJSONLinks                                                     `json:"links,omitempty"`
 	Meta    ListDropletActions200ApplicationJSONMeta                                                       `json:"meta"`
 }
 
 type ListDropletActions401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListDropletActionsResponse struct {

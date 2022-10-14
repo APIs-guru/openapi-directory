@@ -1,5 +1,5 @@
 package shared
 
 type Measurement struct {
-	ProcessingConfig *MeasurementProcessingConfig `json:"processingConfig"`
+	ProcessingConfig *MeasurementProcessingConfig `json:"processingConfig,omitempty"`
 }

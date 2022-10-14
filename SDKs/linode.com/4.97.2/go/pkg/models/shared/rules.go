@@ -15,8 +15,8 @@ const (
 )
 
 type Rules struct {
-	Inbound        []FirewallRuleConfig     `json:"inbound"`
-	InboundPolicy  *RulesInboundPolicyEnum  `json:"inbound_policy"`
-	Outbound       []FirewallRuleConfig     `json:"outbound"`
-	OutboundPolicy *RulesOutboundPolicyEnum `json:"outbound_policy"`
+	Inbound        []FirewallRuleConfig     `json:"inbound,omitempty"`
+	InboundPolicy  *RulesInboundPolicyEnum  `json:"inbound_policy,omitempty"`
+	Outbound       []FirewallRuleConfig     `json:"outbound,omitempty"`
+	OutboundPolicy *RulesOutboundPolicyEnum `json:"outbound_policy,omitempty"`
 }

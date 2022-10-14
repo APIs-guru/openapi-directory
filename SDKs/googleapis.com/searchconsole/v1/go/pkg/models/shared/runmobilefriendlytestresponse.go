@@ -9,9 +9,9 @@ const (
 )
 
 type RunMobileFriendlyTestResponse struct {
-	MobileFriendliness   *RunMobileFriendlyTestResponseMobileFriendlinessEnum `json:"mobileFriendliness"`
-	MobileFriendlyIssues []MobileFriendlyIssue                                `json:"mobileFriendlyIssues"`
-	ResourceIssues       []ResourceIssue                                      `json:"resourceIssues"`
-	Screenshot           *Image                                               `json:"screenshot"`
-	TestStatus           *TestStatus                                          `json:"testStatus"`
+	MobileFriendliness   *RunMobileFriendlyTestResponseMobileFriendlinessEnum `json:"mobileFriendliness,omitempty"`
+	MobileFriendlyIssues []MobileFriendlyIssue                                `json:"mobileFriendlyIssues,omitempty"`
+	ResourceIssues       []ResourceIssue                                      `json:"resourceIssues,omitempty"`
+	Screenshot           *Image                                               `json:"screenshot,omitempty"`
+	TestStatus           *TestStatus                                          `json:"testStatus,omitempty"`
 }

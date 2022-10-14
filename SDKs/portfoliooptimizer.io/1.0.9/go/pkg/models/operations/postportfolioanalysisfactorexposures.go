@@ -9,7 +9,7 @@ type PostPortfolioAnalysisFactorExposuresRequestBodyPortfolios struct {
 }
 
 type PostPortfolioAnalysisFactorExposuresRequestBody struct {
-	Factors    []PostPortfolioAnalysisFactorExposuresRequestBodyFactors    `json:"factors"`
+	Factors    []PostPortfolioAnalysisFactorExposuresRequestBodyFactors    `json:"factors,omitempty"`
 	Portfolios []PostPortfolioAnalysisFactorExposuresRequestBodyPortfolios `json:"portfolios"`
 }
 

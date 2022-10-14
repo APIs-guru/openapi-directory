@@ -1,6 +1,6 @@
 package shared
 
 type ListContainerInstancesResponse struct {
-	ContainerInstanceArns []string `json:"containerInstanceArns"`
-	NextToken             *string  `json:"nextToken"`
+	ContainerInstanceArns []string `json:"containerInstanceArns,omitempty"`
+	NextToken             *string  `json:"nextToken,omitempty"`
 }

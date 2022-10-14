@@ -1,6 +1,6 @@
 package shared
 
 type PullResponse struct {
-	AckID       *string      `json:"ackId"`
-	PubsubEvent *PubsubEvent `json:"pubsubEvent"`
+	AckID       *string      `json:"ackId,omitempty"`
+	PubsubEvent *PubsubEvent `json:"pubsubEvent,omitempty"`
 }

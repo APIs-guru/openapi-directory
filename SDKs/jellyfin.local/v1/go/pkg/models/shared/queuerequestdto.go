@@ -1,6 +1,6 @@
 package shared
 
 type QueueRequestDto struct {
-	ItemIds []string            `json:"ItemIds"`
-	Mode    *GroupQueueModeEnum `json:"Mode"`
+	ItemIds []string            `json:"ItemIds,omitempty"`
+	Mode    *GroupQueueModeEnum `json:"Mode,omitempty"`
 }

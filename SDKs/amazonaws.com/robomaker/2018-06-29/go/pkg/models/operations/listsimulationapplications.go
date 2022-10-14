@@ -20,10 +20,10 @@ type ListSimulationApplicationsHeaders struct {
 }
 
 type ListSimulationApplicationsRequestBody struct {
-	Filters          []shared.Filter `json:"filters"`
-	MaxResults       *int64          `json:"maxResults"`
-	NextToken        *string         `json:"nextToken"`
-	VersionQualifier *string         `json:"versionQualifier"`
+	Filters          []shared.Filter `json:"filters,omitempty"`
+	MaxResults       *int64          `json:"maxResults,omitempty"`
+	NextToken        *string         `json:"nextToken,omitempty"`
+	VersionQualifier *string         `json:"versionQualifier,omitempty"`
 }
 
 type ListSimulationApplicationsRequest struct {

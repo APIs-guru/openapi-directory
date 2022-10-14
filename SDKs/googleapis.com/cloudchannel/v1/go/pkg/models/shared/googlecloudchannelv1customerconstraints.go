@@ -18,7 +18,7 @@ const (
 )
 
 type GoogleCloudChannelV1CustomerConstraints struct {
-	AllowedCustomerTypes  []GoogleCloudChannelV1CustomerConstraintsAllowedCustomerTypesEnum  `json:"allowedCustomerTypes"`
-	AllowedRegions        []string                                                           `json:"allowedRegions"`
-	PromotionalOrderTypes []GoogleCloudChannelV1CustomerConstraintsPromotionalOrderTypesEnum `json:"promotionalOrderTypes"`
+	AllowedCustomerTypes  []GoogleCloudChannelV1CustomerConstraintsAllowedCustomerTypesEnum  `json:"allowedCustomerTypes,omitempty"`
+	AllowedRegions        []string                                                           `json:"allowedRegions,omitempty"`
+	PromotionalOrderTypes []GoogleCloudChannelV1CustomerConstraintsPromotionalOrderTypesEnum `json:"promotionalOrderTypes,omitempty"`
 }

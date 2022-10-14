@@ -1,9 +1,9 @@
 package shared
 
 type CorridorOut struct {
-	FirstLastNameDiasporaedOut *FirstLastNameDiasporaedOut `json:"FirstLastNameDiasporaedOut"`
-	FirstLastNameGenderedOut   *FirstLastNameGenderedOut   `json:"FirstLastNameGenderedOut"`
-	FirstLastNameOriginedOut   *FirstLastNameOriginedOut   `json:"FirstLastNameOriginedOut"`
-	ID                         *string                     `json:"id"`
-	Script                     *string                     `json:"script"`
+	FirstLastNameDiasporaedOut *FirstLastNameDiasporaedOut `json:"FirstLastNameDiasporaedOut,omitempty"`
+	FirstLastNameGenderedOut   *FirstLastNameGenderedOut   `json:"FirstLastNameGenderedOut,omitempty"`
+	FirstLastNameOriginedOut   *FirstLastNameOriginedOut   `json:"FirstLastNameOriginedOut,omitempty"`
+	ID                         *string                     `json:"id,omitempty"`
+	Script                     *string                     `json:"script,omitempty"`
 }

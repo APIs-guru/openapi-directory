@@ -1,6 +1,6 @@
 package shared
 
 type OsPolicyAssignmentRollout struct {
-	DisruptionBudget *FixedOrPercent `json:"disruptionBudget"`
-	MinWaitDuration  *string         `json:"minWaitDuration"`
+	DisruptionBudget *FixedOrPercent `json:"disruptionBudget,omitempty"`
+	MinWaitDuration  *string         `json:"minWaitDuration,omitempty"`
 }

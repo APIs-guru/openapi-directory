@@ -9,5 +9,5 @@ const (
 )
 
 type AuthorizedSellerStatusTargetingOptionDetails struct {
-	AuthorizedSellerStatus *AuthorizedSellerStatusTargetingOptionDetailsAuthorizedSellerStatusEnum `json:"authorizedSellerStatus"`
+	AuthorizedSellerStatus *AuthorizedSellerStatusTargetingOptionDetailsAuthorizedSellerStatusEnum `json:"authorizedSellerStatus,omitempty"`
 }

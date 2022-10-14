@@ -13,7 +13,7 @@ const (
 )
 
 type StringFilter struct {
-	CaseSensitive *bool                      `json:"caseSensitive"`
-	MatchType     *StringFilterMatchTypeEnum `json:"matchType"`
-	Value         *string                    `json:"value"`
+	CaseSensitive *bool                      `json:"caseSensitive,omitempty"`
+	MatchType     *StringFilterMatchTypeEnum `json:"matchType,omitempty"`
+	Value         *string                    `json:"value,omitempty"`
 }

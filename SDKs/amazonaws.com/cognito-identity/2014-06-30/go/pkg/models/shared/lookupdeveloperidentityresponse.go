@@ -1,7 +1,7 @@
 package shared
 
 type LookupDeveloperIdentityResponse struct {
-	DeveloperUserIdentifierList []string `json:"DeveloperUserIdentifierList"`
-	IdentityID                  *string  `json:"IdentityId"`
-	NextToken                   *string  `json:"NextToken"`
+	DeveloperUserIdentifierList []string `json:"DeveloperUserIdentifierList,omitempty"`
+	IdentityID                  *string  `json:"IdentityId,omitempty"`
+	NextToken                   *string  `json:"NextToken,omitempty"`
 }

@@ -24,11 +24,11 @@ type UpdateVirtualServiceHeaders struct {
 }
 
 type UpdateVirtualServiceRequestBodySpec struct {
-	Provider *shared.VirtualServiceProvider `json:"provider"`
+	Provider *shared.VirtualServiceProvider `json:"provider,omitempty"`
 }
 
 type UpdateVirtualServiceRequestBody struct {
-	ClientToken *string                             `json:"clientToken"`
+	ClientToken *string                             `json:"clientToken,omitempty"`
 	Spec        UpdateVirtualServiceRequestBodySpec `json:"spec"`
 }
 

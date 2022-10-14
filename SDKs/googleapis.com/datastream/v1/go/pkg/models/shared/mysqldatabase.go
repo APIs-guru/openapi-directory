@@ -1,6 +1,6 @@
 package shared
 
 type MysqlDatabase struct {
-	Database    *string      `json:"database"`
-	MysqlTables []MysqlTable `json:"mysqlTables"`
+	Database    *string      `json:"database,omitempty"`
+	MysqlTables []MysqlTable `json:"mysqlTables,omitempty"`
 }

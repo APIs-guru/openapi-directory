@@ -1,6 +1,6 @@
 package shared
 
 type ListUserProfilesResponse struct {
-	NextToken    *string              `json:"NextToken"`
-	UserProfiles []UserProfileDetails `json:"UserProfiles"`
+	NextToken    *string              `json:"NextToken,omitempty"`
+	UserProfiles []UserProfileDetails `json:"UserProfiles,omitempty"`
 }

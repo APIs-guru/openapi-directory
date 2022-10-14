@@ -12,9 +12,9 @@ const (
 )
 
 type Connection struct {
-	DestinationIP   *string                 `json:"destinationIp"`
-	DestinationPort *int32                  `json:"destinationPort"`
-	Protocol        *ConnectionProtocolEnum `json:"protocol"`
-	SourceIP        *string                 `json:"sourceIp"`
-	SourcePort      *int32                  `json:"sourcePort"`
+	DestinationIP   *string                 `json:"destinationIp,omitempty"`
+	DestinationPort *int32                  `json:"destinationPort,omitempty"`
+	Protocol        *ConnectionProtocolEnum `json:"protocol,omitempty"`
+	SourceIP        *string                 `json:"sourceIp,omitempty"`
+	SourcePort      *int32                  `json:"sourcePort,omitempty"`
 }

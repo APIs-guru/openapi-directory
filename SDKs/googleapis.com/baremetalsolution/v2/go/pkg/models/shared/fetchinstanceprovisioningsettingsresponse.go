@@ -1,5 +1,5 @@
 package shared
 
 type FetchInstanceProvisioningSettingsResponse struct {
-	Images []OsImage `json:"images"`
+	Images []OsImage `json:"images,omitempty"`
 }

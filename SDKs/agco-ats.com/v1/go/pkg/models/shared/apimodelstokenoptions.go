@@ -17,6 +17,6 @@ const (
 )
 
 type APIModelsTokenOptions struct {
-	BearerAction *APIModelsTokenOptionsBearerActionEnum `json:"BearerAction" form:"name=BearerAction"`
-	MacAction    *APIModelsTokenOptionsMacActionEnum    `json:"MACAction" form:"name=MACAction"`
+	BearerAction *APIModelsTokenOptionsBearerActionEnum `json:"BearerAction,omitempty" form:"name=BearerAction"`
+	MacAction    *APIModelsTokenOptionsMacActionEnum    `json:"MACAction,omitempty" form:"name=MACAction"`
 }

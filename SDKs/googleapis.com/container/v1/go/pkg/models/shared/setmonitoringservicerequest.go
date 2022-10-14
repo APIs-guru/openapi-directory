@@ -1,9 +1,9 @@
 package shared
 
 type SetMonitoringServiceRequest struct {
-	ClusterID         *string `json:"clusterId"`
-	MonitoringService *string `json:"monitoringService"`
-	Name              *string `json:"name"`
-	ProjectID         *string `json:"projectId"`
-	Zone              *string `json:"zone"`
+	ClusterID         *string `json:"clusterId,omitempty"`
+	MonitoringService *string `json:"monitoringService,omitempty"`
+	Name              *string `json:"name,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty"`
+	Zone              *string `json:"zone,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type ImagePredictionResultModel struct {
-	Created     *time.Time                `json:"Created"`
-	ID          *string                   `json:"Id"`
-	Iteration   *string                   `json:"Iteration"`
-	Predictions []ImageTagPredictionModel `json:"Predictions"`
-	Project     *string                   `json:"Project"`
+	Created     *time.Time                `json:"Created,omitempty"`
+	ID          *string                   `json:"Id,omitempty"`
+	Iteration   *string                   `json:"Iteration,omitempty"`
+	Predictions []ImageTagPredictionModel `json:"Predictions,omitempty"`
+	Project     *string                   `json:"Project,omitempty"`
 }

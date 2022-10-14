@@ -9,8 +9,8 @@ const (
 )
 
 type GooglePlayDeveloperReportingV1beta1MetricsRow struct {
-	AggregationPeriod *GooglePlayDeveloperReportingV1beta1MetricsRowAggregationPeriodEnum `json:"aggregationPeriod"`
-	Dimensions        []GooglePlayDeveloperReportingV1beta1DimensionValue                 `json:"dimensions"`
-	Metrics           []GooglePlayDeveloperReportingV1beta1MetricValue                    `json:"metrics"`
-	StartTime         *GoogleTypeDateTime                                                 `json:"startTime"`
+	AggregationPeriod *GooglePlayDeveloperReportingV1beta1MetricsRowAggregationPeriodEnum `json:"aggregationPeriod,omitempty"`
+	Dimensions        []GooglePlayDeveloperReportingV1beta1DimensionValue                 `json:"dimensions,omitempty"`
+	Metrics           []GooglePlayDeveloperReportingV1beta1MetricValue                    `json:"metrics,omitempty"`
+	StartTime         *GoogleTypeDateTime                                                 `json:"startTime,omitempty"`
 }

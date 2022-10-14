@@ -1,12 +1,12 @@
 package shared
 
 type CloudStorageWorkload struct {
-	DataRetrieval *Usage         `json:"dataRetrieval"`
-	DataStored    *Usage         `json:"dataStored"`
-	DualRegion    *DualRegional  `json:"dualRegion"`
-	MultiRegion   *MultiRegional `json:"multiRegion"`
-	OperationA    *Usage         `json:"operationA"`
-	OperationB    *Usage         `json:"operationB"`
-	Region        *Regional      `json:"region"`
-	StorageClass  *string        `json:"storageClass"`
+	DataRetrieval *Usage         `json:"dataRetrieval,omitempty"`
+	DataStored    *Usage         `json:"dataStored,omitempty"`
+	DualRegion    *DualRegional  `json:"dualRegion,omitempty"`
+	MultiRegion   *MultiRegional `json:"multiRegion,omitempty"`
+	OperationA    *Usage         `json:"operationA,omitempty"`
+	OperationB    *Usage         `json:"operationB,omitempty"`
+	Region        *Regional      `json:"region,omitempty"`
+	StorageClass  *string        `json:"storageClass,omitempty"`
 }

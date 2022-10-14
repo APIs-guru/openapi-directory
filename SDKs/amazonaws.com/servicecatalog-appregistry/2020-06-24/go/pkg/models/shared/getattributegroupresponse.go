@@ -5,12 +5,12 @@ import (
 )
 
 type GetAttributeGroupResponse struct {
-	Arn            *string           `json:"arn"`
-	Attributes     *string           `json:"attributes"`
-	CreationTime   *time.Time        `json:"creationTime"`
-	Description    *string           `json:"description"`
-	ID             *string           `json:"id"`
-	LastUpdateTime *time.Time        `json:"lastUpdateTime"`
-	Name           *string           `json:"name"`
-	Tags           map[string]string `json:"tags"`
+	Arn            *string           `json:"arn,omitempty"`
+	Attributes     *string           `json:"attributes,omitempty"`
+	CreationTime   *time.Time        `json:"creationTime,omitempty"`
+	Description    *string           `json:"description,omitempty"`
+	ID             *string           `json:"id,omitempty"`
+	LastUpdateTime *time.Time        `json:"lastUpdateTime,omitempty"`
+	Name           *string           `json:"name,omitempty"`
+	Tags           map[string]string `json:"tags,omitempty"`
 }

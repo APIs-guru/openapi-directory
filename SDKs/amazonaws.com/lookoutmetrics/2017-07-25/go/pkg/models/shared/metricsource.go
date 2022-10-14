@@ -1,9 +1,9 @@
 package shared
 
 type MetricSource struct {
-	AppFlowConfig        *AppFlowConfig        `json:"AppFlowConfig"`
-	CloudWatchConfig     *CloudWatchConfig     `json:"CloudWatchConfig"`
-	RdsSourceConfig      *RdsSourceConfig      `json:"RDSSourceConfig"`
-	RedshiftSourceConfig *RedshiftSourceConfig `json:"RedshiftSourceConfig"`
-	S3SourceConfig       *S3SourceConfig       `json:"S3SourceConfig"`
+	AppFlowConfig        *AppFlowConfig        `json:"AppFlowConfig,omitempty"`
+	CloudWatchConfig     *CloudWatchConfig     `json:"CloudWatchConfig,omitempty"`
+	RdsSourceConfig      *RdsSourceConfig      `json:"RDSSourceConfig,omitempty"`
+	RedshiftSourceConfig *RedshiftSourceConfig `json:"RedshiftSourceConfig,omitempty"`
+	S3SourceConfig       *S3SourceConfig       `json:"S3SourceConfig,omitempty"`
 }

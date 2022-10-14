@@ -1,8 +1,8 @@
 package shared
 
 type SQLScheduledMaintenance struct {
-	CanDefer             *bool   `json:"canDefer"`
-	CanReschedule        *bool   `json:"canReschedule"`
-	ScheduleDeadlineTime *string `json:"scheduleDeadlineTime"`
-	StartTime            *string `json:"startTime"`
+	CanDefer             *bool   `json:"canDefer,omitempty"`
+	CanReschedule        *bool   `json:"canReschedule,omitempty"`
+	ScheduleDeadlineTime *string `json:"scheduleDeadlineTime,omitempty"`
+	StartTime            *string `json:"startTime,omitempty"`
 }

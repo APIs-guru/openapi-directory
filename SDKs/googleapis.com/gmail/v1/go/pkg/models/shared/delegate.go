@@ -11,6 +11,6 @@ const (
 )
 
 type Delegate struct {
-	DelegateEmail      *string                         `json:"delegateEmail"`
-	VerificationStatus *DelegateVerificationStatusEnum `json:"verificationStatus"`
+	DelegateEmail      *string                         `json:"delegateEmail,omitempty"`
+	VerificationStatus *DelegateVerificationStatusEnum `json:"verificationStatus,omitempty"`
 }

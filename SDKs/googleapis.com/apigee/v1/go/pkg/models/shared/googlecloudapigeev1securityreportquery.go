@@ -1,15 +1,15 @@
 package shared
 
 type GoogleCloudApigeeV1SecurityReportQuery struct {
-	CsvDelimiter       *string                                        `json:"csvDelimiter"`
-	Dimensions         []string                                       `json:"dimensions"`
-	DisplayName        *string                                        `json:"displayName"`
-	EnvgroupHostname   *string                                        `json:"envgroupHostname"`
-	Filter             *string                                        `json:"filter"`
-	GroupByTimeUnit    *string                                        `json:"groupByTimeUnit"`
-	Limit              *int32                                         `json:"limit"`
-	Metrics            []GoogleCloudApigeeV1SecurityReportQueryMetric `json:"metrics"`
-	MimeType           *string                                        `json:"mimeType"`
-	ReportDefinitionID *string                                        `json:"reportDefinitionId"`
-	TimeRange          *interface{}                                   `json:"timeRange"`
+	CsvDelimiter       *string                                        `json:"csvDelimiter,omitempty"`
+	Dimensions         []string                                       `json:"dimensions,omitempty"`
+	DisplayName        *string                                        `json:"displayName,omitempty"`
+	EnvgroupHostname   *string                                        `json:"envgroupHostname,omitempty"`
+	Filter             *string                                        `json:"filter,omitempty"`
+	GroupByTimeUnit    *string                                        `json:"groupByTimeUnit,omitempty"`
+	Limit              *int32                                         `json:"limit,omitempty"`
+	Metrics            []GoogleCloudApigeeV1SecurityReportQueryMetric `json:"metrics,omitempty"`
+	MimeType           *string                                        `json:"mimeType,omitempty"`
+	ReportDefinitionID *string                                        `json:"reportDefinitionId,omitempty"`
+	TimeRange          *interface{}                                   `json:"timeRange,omitempty"`
 }

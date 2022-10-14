@@ -1,5 +1,5 @@
 package shared
 
 type EnableMigrationRequest struct {
-	MigratingDomains []OnPremDomainDetails `json:"migratingDomains"`
+	MigratingDomains []OnPremDomainDetails `json:"migratingDomains,omitempty"`
 }

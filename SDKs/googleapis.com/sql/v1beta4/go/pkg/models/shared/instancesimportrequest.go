@@ -1,5 +1,5 @@
 package shared
 
 type InstancesImportRequest struct {
-	ImportContext *ImportContext `json:"importContext"`
+	ImportContext *ImportContext `json:"importContext,omitempty"`
 }

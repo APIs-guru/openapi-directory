@@ -9,8 +9,8 @@ const (
 )
 
 type DimensionRange struct {
-	Dimension  *DimensionRangeDimensionEnum `json:"dimension"`
-	EndIndex   *int32                       `json:"endIndex"`
-	SheetID    *int32                       `json:"sheetId"`
-	StartIndex *int32                       `json:"startIndex"`
+	Dimension  *DimensionRangeDimensionEnum `json:"dimension,omitempty"`
+	EndIndex   *int32                       `json:"endIndex,omitempty"`
+	SheetID    *int32                       `json:"sheetId,omitempty"`
+	StartIndex *int32                       `json:"startIndex,omitempty"`
 }

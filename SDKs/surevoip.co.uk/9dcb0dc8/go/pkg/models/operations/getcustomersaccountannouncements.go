@@ -13,7 +13,7 @@ type GetCustomersAccountAnnouncementsRequest struct {
 }
 
 type GetCustomersAccountAnnouncements200ApplicationJSON struct {
-	List []shared.OneannouncementsPostResponses201ContentApplication1jsonSchema `json:"list"`
+	List []shared.OneannouncementsPostResponses201ContentApplication1jsonSchema `json:"list,omitempty"`
 }
 
 type GetCustomersAccountAnnouncementsResponse struct {

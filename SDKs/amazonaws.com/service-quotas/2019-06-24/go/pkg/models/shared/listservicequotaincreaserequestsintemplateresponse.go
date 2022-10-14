@@ -1,6 +1,6 @@
 package shared
 
 type ListServiceQuotaIncreaseRequestsInTemplateResponse struct {
-	NextToken                                 *string                                 `json:"NextToken"`
-	ServiceQuotaIncreaseRequestInTemplateList []ServiceQuotaIncreaseRequestInTemplate `json:"ServiceQuotaIncreaseRequestInTemplateList"`
+	NextToken                                 *string                                 `json:"NextToken,omitempty"`
+	ServiceQuotaIncreaseRequestInTemplateList []ServiceQuotaIncreaseRequestInTemplate `json:"ServiceQuotaIncreaseRequestInTemplateList,omitempty"`
 }

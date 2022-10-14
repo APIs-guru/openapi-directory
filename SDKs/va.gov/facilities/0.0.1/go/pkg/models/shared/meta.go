@@ -1,5 +1,5 @@
 package shared
 
 type Meta struct {
-	BandVersion *string `json:"band_version"`
+	BandVersion *string `json:"band_version,omitempty"`
 }

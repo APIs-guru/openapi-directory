@@ -19,7 +19,7 @@ type UpdateGroupCertificateConfigurationHeaders struct {
 }
 
 type UpdateGroupCertificateConfigurationRequestBody struct {
-	CertificateExpiryInMilliseconds *string `json:"CertificateExpiryInMilliseconds"`
+	CertificateExpiryInMilliseconds *string `json:"CertificateExpiryInMilliseconds,omitempty"`
 }
 
 type UpdateGroupCertificateConfigurationRequest struct {

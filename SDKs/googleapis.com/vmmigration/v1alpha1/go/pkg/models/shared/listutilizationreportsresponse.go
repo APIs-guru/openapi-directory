@@ -1,7 +1,7 @@
 package shared
 
 type ListUtilizationReportsResponse struct {
-	NextPageToken      *string             `json:"nextPageToken"`
-	Unreachable        []string            `json:"unreachable"`
-	UtilizationReports []UtilizationReport `json:"utilizationReports"`
+	NextPageToken      *string             `json:"nextPageToken,omitempty"`
+	Unreachable        []string            `json:"unreachable,omitempty"`
+	UtilizationReports []UtilizationReport `json:"utilizationReports,omitempty"`
 }

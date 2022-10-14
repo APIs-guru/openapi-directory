@@ -1,8 +1,8 @@
 package shared
 
 type TflAPIPresentationEntitiesJourneyPlannerRouteOption struct {
-	Directions     []string                              `json:"directions"`
-	ID             *string                               `json:"id"`
-	LineIdentifier *TflAPIPresentationEntitiesIdentifier `json:"lineIdentifier"`
-	Name           *string                               `json:"name"`
+	Directions     []string                              `json:"directions,omitempty"`
+	ID             *string                               `json:"id,omitempty"`
+	LineIdentifier *TflAPIPresentationEntitiesIdentifier `json:"lineIdentifier,omitempty"`
+	Name           *string                               `json:"name,omitempty"`
 }

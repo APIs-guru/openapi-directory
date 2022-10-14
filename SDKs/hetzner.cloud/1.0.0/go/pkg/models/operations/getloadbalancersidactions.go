@@ -89,7 +89,7 @@ type GetLoadBalancersIDActions200ApplicationJSONMeta struct {
 
 type GetLoadBalancersIDActions200ApplicationJSONActionsResponse struct {
 	Actions []GetLoadBalancersIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetLoadBalancersIDActions200ApplicationJSONMeta           `json:"meta"`
+	Meta    *GetLoadBalancersIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type GetLoadBalancersIDActionsResponse struct {

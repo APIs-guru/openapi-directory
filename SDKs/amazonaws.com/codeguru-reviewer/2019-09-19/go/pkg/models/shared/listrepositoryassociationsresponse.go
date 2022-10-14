@@ -1,6 +1,6 @@
 package shared
 
 type ListRepositoryAssociationsResponse struct {
-	NextToken                      *string                        `json:"NextToken"`
-	RepositoryAssociationSummaries []RepositoryAssociationSummary `json:"RepositoryAssociationSummaries"`
+	NextToken                      *string                        `json:"NextToken,omitempty"`
+	RepositoryAssociationSummaries []RepositoryAssociationSummary `json:"RepositoryAssociationSummaries,omitempty"`
 }

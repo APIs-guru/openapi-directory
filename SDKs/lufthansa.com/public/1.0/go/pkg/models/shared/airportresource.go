@@ -1,16 +1,16 @@
 package shared
 
 type AirportResourceAirports struct {
-	Airport *Airport `json:"Airport"`
+	Airport *Airport `json:"Airport,omitempty"`
 }
 
 type AirportResourceMeta struct {
-	AtVersion  *string `json:"@Version"`
-	Link       []Link  `json:"Link"`
-	TotalCount *int32  `json:"TotalCount"`
+	AtVersion  *string `json:"@Version,omitempty"`
+	Link       []Link  `json:"Link,omitempty"`
+	TotalCount *int32  `json:"TotalCount,omitempty"`
 }
 
 type AirportResource struct {
-	Airports *AirportResourceAirports `json:"Airports"`
-	Meta     *AirportResourceMeta     `json:"Meta"`
+	Airports *AirportResourceAirports `json:"Airports,omitempty"`
+	Meta     *AirportResourceMeta     `json:"Meta,omitempty"`
 }

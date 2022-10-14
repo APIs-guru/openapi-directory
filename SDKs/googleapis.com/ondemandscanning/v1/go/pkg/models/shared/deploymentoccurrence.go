@@ -10,11 +10,11 @@ const (
 )
 
 type DeploymentOccurrence struct {
-	Address      *string                           `json:"address"`
-	Config       *string                           `json:"config"`
-	DeployTime   *string                           `json:"deployTime"`
-	Platform     *DeploymentOccurrencePlatformEnum `json:"platform"`
-	ResourceURI  []string                          `json:"resourceUri"`
-	UndeployTime *string                           `json:"undeployTime"`
-	UserEmail    *string                           `json:"userEmail"`
+	Address      *string                           `json:"address,omitempty"`
+	Config       *string                           `json:"config,omitempty"`
+	DeployTime   *string                           `json:"deployTime,omitempty"`
+	Platform     *DeploymentOccurrencePlatformEnum `json:"platform,omitempty"`
+	ResourceURI  []string                          `json:"resourceUri,omitempty"`
+	UndeployTime *string                           `json:"undeployTime,omitempty"`
+	UserEmail    *string                           `json:"userEmail,omitempty"`
 }

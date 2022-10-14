@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudienceFilterClause struct {
-	ClauseType     *GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnum `json:"clauseType"`
-	SequenceFilter *GoogleAnalyticsAdminV1alphaAudienceSequenceFilter             `json:"sequenceFilter"`
-	SimpleFilter   *GoogleAnalyticsAdminV1alphaAudienceSimpleFilter               `json:"simpleFilter"`
+	ClauseType     *GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnum `json:"clauseType,omitempty"`
+	SequenceFilter *GoogleAnalyticsAdminV1alphaAudienceSequenceFilter             `json:"sequenceFilter,omitempty"`
+	SimpleFilter   *GoogleAnalyticsAdminV1alphaAudienceSimpleFilter               `json:"simpleFilter,omitempty"`
 }

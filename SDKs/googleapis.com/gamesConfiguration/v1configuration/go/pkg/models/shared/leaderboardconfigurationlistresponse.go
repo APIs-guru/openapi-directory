@@ -1,7 +1,7 @@
 package shared
 
 type LeaderboardConfigurationListResponse struct {
-	Items         []LeaderboardConfiguration `json:"items"`
-	Kind          *string                    `json:"kind"`
-	NextPageToken *string                    `json:"nextPageToken"`
+	Items         []LeaderboardConfiguration `json:"items,omitempty"`
+	Kind          *string                    `json:"kind,omitempty"`
+	NextPageToken *string                    `json:"nextPageToken,omitempty"`
 }

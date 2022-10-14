@@ -1,13 +1,13 @@
 package operations
 
 type PostOauthAccessTokenRequestBody struct {
-	OauthConsumerKey     *string `json:"oauth_consumer_key"`
-	OauthNonce           *string `json:"oauth_nonce"`
-	OauthSignature       *string `json:"oauth_signature"`
-	OauthSignatureMethod *string `json:"oauth_signature_method"`
-	OauthTimestamp       *string `json:"oauth_timestamp"`
-	OauthToken           *string `json:"oauth_token"`
-	OauthVerifier        *string `json:"oauth_verifier"`
+	OauthConsumerKey     *string `json:"oauth_consumer_key,omitempty"`
+	OauthNonce           *string `json:"oauth_nonce,omitempty"`
+	OauthSignature       *string `json:"oauth_signature,omitempty"`
+	OauthSignatureMethod *string `json:"oauth_signature_method,omitempty"`
+	OauthTimestamp       *string `json:"oauth_timestamp,omitempty"`
+	OauthToken           *string `json:"oauth_token,omitempty"`
+	OauthVerifier        *string `json:"oauth_verifier,omitempty"`
 }
 
 type PostOauthAccessTokenRequest struct {
@@ -15,8 +15,8 @@ type PostOauthAccessTokenRequest struct {
 }
 
 type PostOauthAccessToken200ApplicationJSON struct {
-	OauthToken       *string `json:"oauth_token"`
-	OauthTokenSecret *string `json:"oauth_token_secret"`
+	OauthToken       *string `json:"oauth_token,omitempty"`
+	OauthTokenSecret *string `json:"oauth_token_secret,omitempty"`
 }
 
 type PostOauthAccessTokenResponse struct {

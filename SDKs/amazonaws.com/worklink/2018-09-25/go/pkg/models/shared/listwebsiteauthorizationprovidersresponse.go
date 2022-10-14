@@ -1,6 +1,6 @@
 package shared
 
 type ListWebsiteAuthorizationProvidersResponse struct {
-	NextToken                     *string                               `json:"NextToken"`
-	WebsiteAuthorizationProviders []WebsiteAuthorizationProviderSummary `json:"WebsiteAuthorizationProviders"`
+	NextToken                     *string                               `json:"NextToken,omitempty"`
+	WebsiteAuthorizationProviders []WebsiteAuthorizationProviderSummary `json:"WebsiteAuthorizationProviders,omitempty"`
 }

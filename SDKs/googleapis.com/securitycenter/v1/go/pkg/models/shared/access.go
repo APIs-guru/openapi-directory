@@ -1,14 +1,14 @@
 package shared
 
 type Access struct {
-	CallerIP                     *string                        `json:"callerIp"`
-	CallerIPGeo                  *Geolocation                   `json:"callerIpGeo"`
-	MethodName                   *string                        `json:"methodName"`
-	PrincipalEmail               *string                        `json:"principalEmail"`
-	PrincipalSubject             *string                        `json:"principalSubject"`
-	ServiceAccountDelegationInfo []ServiceAccountDelegationInfo `json:"serviceAccountDelegationInfo"`
-	ServiceAccountKeyName        *string                        `json:"serviceAccountKeyName"`
-	ServiceName                  *string                        `json:"serviceName"`
-	UserAgentFamily              *string                        `json:"userAgentFamily"`
-	Username                     *string                        `json:"username"`
+	CallerIP                     *string                        `json:"callerIp,omitempty"`
+	CallerIPGeo                  *Geolocation                   `json:"callerIpGeo,omitempty"`
+	MethodName                   *string                        `json:"methodName,omitempty"`
+	PrincipalEmail               *string                        `json:"principalEmail,omitempty"`
+	PrincipalSubject             *string                        `json:"principalSubject,omitempty"`
+	ServiceAccountDelegationInfo []ServiceAccountDelegationInfo `json:"serviceAccountDelegationInfo,omitempty"`
+	ServiceAccountKeyName        *string                        `json:"serviceAccountKeyName,omitempty"`
+	ServiceName                  *string                        `json:"serviceName,omitempty"`
+	UserAgentFamily              *string                        `json:"userAgentFamily,omitempty"`
+	Username                     *string                        `json:"username,omitempty"`
 }

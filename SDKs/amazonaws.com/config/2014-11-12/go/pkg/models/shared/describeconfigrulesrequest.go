@@ -1,6 +1,6 @@
 package shared
 
 type DescribeConfigRulesRequest struct {
-	ConfigRuleNames []string `json:"ConfigRuleNames"`
-	NextToken       *string  `json:"NextToken"`
+	ConfigRuleNames []string `json:"ConfigRuleNames,omitempty"`
+	NextToken       *string  `json:"NextToken,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ReportRowMetricValue struct {
-	DoubleValue  *float64 `json:"doubleValue"`
-	IntegerValue *string  `json:"integerValue"`
-	MicrosValue  *string  `json:"microsValue"`
+	DoubleValue  *float64 `json:"doubleValue,omitempty"`
+	IntegerValue *string  `json:"integerValue,omitempty"`
+	MicrosValue  *string  `json:"microsValue,omitempty"`
 }

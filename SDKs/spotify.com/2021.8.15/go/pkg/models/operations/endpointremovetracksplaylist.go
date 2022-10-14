@@ -14,7 +14,7 @@ type EndpointRemoveTracksPlaylistHeaders struct {
 }
 
 type EndpointRemoveTracksPlaylistRequestBody struct {
-	SnapshotID *string  `json:"snapshot_id"`
+	SnapshotID *string  `json:"snapshot_id,omitempty"`
 	Tracks     []string `json:"tracks"`
 }
 

@@ -12,13 +12,13 @@ const (
 )
 
 type Partner struct {
-	AdServerConfig   *PartnerAdServerConfig   `json:"adServerConfig"`
-	DataAccessConfig *PartnerDataAccessConfig `json:"dataAccessConfig"`
-	DisplayName      *string                  `json:"displayName"`
-	EntityStatus     *PartnerEntityStatusEnum `json:"entityStatus"`
-	ExchangeConfig   *ExchangeConfig          `json:"exchangeConfig"`
-	GeneralConfig    *PartnerGeneralConfig    `json:"generalConfig"`
-	Name             *string                  `json:"name"`
-	PartnerID        *string                  `json:"partnerId"`
-	UpdateTime       *string                  `json:"updateTime"`
+	AdServerConfig   *PartnerAdServerConfig   `json:"adServerConfig,omitempty"`
+	DataAccessConfig *PartnerDataAccessConfig `json:"dataAccessConfig,omitempty"`
+	DisplayName      *string                  `json:"displayName,omitempty"`
+	EntityStatus     *PartnerEntityStatusEnum `json:"entityStatus,omitempty"`
+	ExchangeConfig   *ExchangeConfig          `json:"exchangeConfig,omitempty"`
+	GeneralConfig    *PartnerGeneralConfig    `json:"generalConfig,omitempty"`
+	Name             *string                  `json:"name,omitempty"`
+	PartnerID        *string                  `json:"partnerId,omitempty"`
+	UpdateTime       *string                  `json:"updateTime,omitempty"`
 }

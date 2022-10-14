@@ -1,8 +1,8 @@
 package shared
 
 type SegmentCostEstimate struct {
-	CommitmentCostEstimates  []CommitmentCostEstimate `json:"commitmentCostEstimates"`
-	SegmentStartTime         *EstimationTimePoint     `json:"segmentStartTime"`
-	SegmentTotalCostEstimate *CostEstimate            `json:"segmentTotalCostEstimate"`
-	WorkloadCostEstimates    []WorkloadCostEstimate   `json:"workloadCostEstimates"`
+	CommitmentCostEstimates  []CommitmentCostEstimate `json:"commitmentCostEstimates,omitempty"`
+	SegmentStartTime         *EstimationTimePoint     `json:"segmentStartTime,omitempty"`
+	SegmentTotalCostEstimate *CostEstimate            `json:"segmentTotalCostEstimate,omitempty"`
+	WorkloadCostEstimates    []WorkloadCostEstimate   `json:"workloadCostEstimates,omitempty"`
 }

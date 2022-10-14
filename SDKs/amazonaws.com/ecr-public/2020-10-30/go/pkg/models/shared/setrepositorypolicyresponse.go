@@ -1,7 +1,7 @@
 package shared
 
 type SetRepositoryPolicyResponse struct {
-	PolicyText     *string `json:"policyText"`
-	RegistryID     *string `json:"registryId"`
-	RepositoryName *string `json:"repositoryName"`
+	PolicyText     *string `json:"policyText,omitempty"`
+	RegistryID     *string `json:"registryId,omitempty"`
+	RepositoryName *string `json:"repositoryName,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type MembershipSpec struct {
-	SecurityPolicy *MembershipSpecSecurityPolicyEnum `json:"securityPolicy"`
-	Version        *string                           `json:"version"`
+	SecurityPolicy *MembershipSpecSecurityPolicyEnum `json:"securityPolicy,omitempty"`
+	Version        *string                           `json:"version,omitempty"`
 }

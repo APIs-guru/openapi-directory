@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDatalabelingV1beta1VideoClassificationAnnotation struct {
-	AnnotationSpec *GoogleCloudDatalabelingV1beta1AnnotationSpec `json:"annotationSpec"`
-	TimeSegment    *GoogleCloudDatalabelingV1beta1TimeSegment    `json:"timeSegment"`
+	AnnotationSpec *GoogleCloudDatalabelingV1beta1AnnotationSpec `json:"annotationSpec,omitempty"`
+	TimeSegment    *GoogleCloudDatalabelingV1beta1TimeSegment    `json:"timeSegment,omitempty"`
 }

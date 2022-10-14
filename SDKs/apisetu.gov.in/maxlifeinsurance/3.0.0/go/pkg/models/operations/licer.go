@@ -18,8 +18,8 @@ const (
 )
 
 type LicerRequestBody struct {
-	CertificateParameters *LicerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *LicerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                LicerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Licer400ApplicationJSON struct {
-	Error            *Licer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Licer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Licer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Licer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Licer401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Licer401ApplicationJSON struct {
-	Error            *Licer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Licer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Licer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Licer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Licer404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Licer404ApplicationJSON struct {
-	Error            *Licer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Licer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Licer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Licer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Licer500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Licer500ApplicationJSON struct {
-	Error            *Licer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Licer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Licer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Licer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Licer502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Licer502ApplicationJSON struct {
-	Error            *Licer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Licer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Licer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Licer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Licer503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Licer503ApplicationJSON struct {
-	Error            *Licer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Licer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Licer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Licer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Licer504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Licer504ApplicationJSON struct {
-	Error            *Licer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Licer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Licer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Licer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type LicerResponse struct {

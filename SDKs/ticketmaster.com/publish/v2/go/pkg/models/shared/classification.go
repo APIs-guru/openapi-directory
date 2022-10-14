@@ -1,10 +1,10 @@
 package shared
 
 type Classification struct {
-	Genre    *Level   `json:"genre"`
-	Primary  *bool    `json:"primary"`
-	Segment  *Segment `json:"segment"`
-	SubGenre *Level   `json:"subGenre"`
-	SubType  *Level   `json:"subType"`
-	Type     *Level   `json:"type"`
+	Genre    *Level   `json:"genre,omitempty"`
+	Primary  *bool    `json:"primary,omitempty"`
+	Segment  *Segment `json:"segment,omitempty"`
+	SubGenre *Level   `json:"subGenre,omitempty"`
+	SubType  *Level   `json:"subType,omitempty"`
+	Type     *Level   `json:"type,omitempty"`
 }

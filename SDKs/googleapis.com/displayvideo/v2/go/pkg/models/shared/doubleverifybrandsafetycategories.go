@@ -40,7 +40,7 @@ const (
 )
 
 type DoubleVerifyBrandSafetyCategories struct {
-	AvoidUnknownBrandSafetyCategory *bool                                                                  `json:"avoidUnknownBrandSafetyCategory"`
-	AvoidedHighSeverityCategories   []DoubleVerifyBrandSafetyCategoriesAvoidedHighSeverityCategoriesEnum   `json:"avoidedHighSeverityCategories"`
-	AvoidedMediumSeverityCategories []DoubleVerifyBrandSafetyCategoriesAvoidedMediumSeverityCategoriesEnum `json:"avoidedMediumSeverityCategories"`
+	AvoidUnknownBrandSafetyCategory *bool                                                                  `json:"avoidUnknownBrandSafetyCategory,omitempty"`
+	AvoidedHighSeverityCategories   []DoubleVerifyBrandSafetyCategoriesAvoidedHighSeverityCategoriesEnum   `json:"avoidedHighSeverityCategories,omitempty"`
+	AvoidedMediumSeverityCategories []DoubleVerifyBrandSafetyCategoriesAvoidedMediumSeverityCategoriesEnum `json:"avoidedMediumSeverityCategories,omitempty"`
 }

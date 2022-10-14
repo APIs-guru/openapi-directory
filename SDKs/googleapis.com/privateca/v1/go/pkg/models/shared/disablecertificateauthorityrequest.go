@@ -1,5 +1,5 @@
 package shared
 
 type DisableCertificateAuthorityRequest struct {
-	RequestID *string `json:"requestId"`
+	RequestID *string `json:"requestId,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type GetWorldTemplateBodyResponse struct {
-	TemplateBody *string `json:"templateBody"`
+	TemplateBody *string `json:"templateBody,omitempty"`
 }

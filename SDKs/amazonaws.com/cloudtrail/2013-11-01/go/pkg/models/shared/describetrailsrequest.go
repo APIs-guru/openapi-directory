@@ -1,6 +1,6 @@
 package shared
 
 type DescribeTrailsRequest struct {
-	IncludeShadowTrails *bool    `json:"includeShadowTrails"`
-	TrailNameList       []string `json:"trailNameList"`
+	IncludeShadowTrails *bool    `json:"includeShadowTrails,omitempty"`
+	TrailNameList       []string `json:"trailNameList,omitempty"`
 }

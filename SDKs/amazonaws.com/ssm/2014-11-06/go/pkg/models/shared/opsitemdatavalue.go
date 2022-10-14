@@ -1,6 +1,6 @@
 package shared
 
 type OpsItemDataValue struct {
-	Type  *OpsItemDataTypeEnum `json:"Type"`
-	Value *string              `json:"Value"`
+	Type  *OpsItemDataTypeEnum `json:"Type,omitempty"`
+	Value *string              `json:"Value,omitempty"`
 }

@@ -5,21 +5,21 @@ import (
 )
 
 type WebhookResponseFilters struct {
-	Action          *string  `json:"action"`
-	Fields          []string `json:"fields"`
-	ResourceSubtype *string  `json:"resource_subtype"`
-	ResourceType    *string  `json:"resource_type"`
+	Action          *string  `json:"action,omitempty"`
+	Fields          []string `json:"fields,omitempty"`
+	ResourceSubtype *string  `json:"resource_subtype,omitempty"`
+	ResourceType    *string  `json:"resource_type,omitempty"`
 }
 
 type WebhookResponse struct {
-	Active             *bool                    `json:"active"`
-	CreatedAt          *time.Time               `json:"created_at"`
-	Filters            []WebhookResponseFilters `json:"filters"`
-	Gid                *string                  `json:"gid"`
-	LastFailureAt      *time.Time               `json:"last_failure_at"`
-	LastFailureContent *string                  `json:"last_failure_content"`
-	LastSuccessAt      *time.Time               `json:"last_success_at"`
-	Resource           *AsanaNamedResource      `json:"resource"`
-	ResourceType       *string                  `json:"resource_type"`
-	Target             *string                  `json:"target"`
+	Active             *bool                    `json:"active,omitempty"`
+	CreatedAt          *time.Time               `json:"created_at,omitempty"`
+	Filters            []WebhookResponseFilters `json:"filters,omitempty"`
+	Gid                *string                  `json:"gid,omitempty"`
+	LastFailureAt      *time.Time               `json:"last_failure_at,omitempty"`
+	LastFailureContent *string                  `json:"last_failure_content,omitempty"`
+	LastSuccessAt      *time.Time               `json:"last_success_at,omitempty"`
+	Resource           *AsanaNamedResource      `json:"resource,omitempty"`
+	ResourceType       *string                  `json:"resource_type,omitempty"`
+	Target             *string                  `json:"target,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ListEnvironmentsResponse struct {
-	Environments []Environment `json:"environments"`
+	Environments []Environment `json:"environments,omitempty"`
 }

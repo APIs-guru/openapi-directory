@@ -1,5 +1,5 @@
 package shared
 
 type RequestReviewFreeListingsRequest struct {
-	RegionCode *string `json:"regionCode"`
+	RegionCode *string `json:"regionCode,omitempty"`
 }

@@ -6,6 +6,6 @@ type ConfigurationStatusProgress struct {
 }
 
 type ConfigurationStatus struct {
-	Progress []ConfigurationStatusProgress `json:"progress"`
-	Status   *string                       `json:"status"`
+	Progress []ConfigurationStatusProgress `json:"progress,omitempty"`
+	Status   *string                       `json:"status,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SearchKeywordCount struct {
-	InsightsValue *InsightsValue `json:"insightsValue"`
-	SearchKeyword *string        `json:"searchKeyword"`
+	InsightsValue *InsightsValue `json:"insightsValue,omitempty"`
+	SearchKeyword *string        `json:"searchKeyword,omitempty"`
 }

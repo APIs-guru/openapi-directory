@@ -5,15 +5,15 @@ import (
 )
 
 type AccessControlRule struct {
-	Actions      []string                     `json:"Actions"`
-	DateCreated  *time.Time                   `json:"DateCreated"`
-	DateModified *time.Time                   `json:"DateModified"`
-	Description  *string                      `json:"Description"`
-	Effect       *AccessControlRuleEffectEnum `json:"Effect"`
-	IPRanges     []string                     `json:"IpRanges"`
-	Name         *string                      `json:"Name"`
-	NotActions   []string                     `json:"NotActions"`
-	NotIPRanges  []string                     `json:"NotIpRanges"`
-	NotUserIds   []string                     `json:"NotUserIds"`
-	UserIds      []string                     `json:"UserIds"`
+	Actions      []string                     `json:"Actions,omitempty"`
+	DateCreated  *time.Time                   `json:"DateCreated,omitempty"`
+	DateModified *time.Time                   `json:"DateModified,omitempty"`
+	Description  *string                      `json:"Description,omitempty"`
+	Effect       *AccessControlRuleEffectEnum `json:"Effect,omitempty"`
+	IPRanges     []string                     `json:"IpRanges,omitempty"`
+	Name         *string                      `json:"Name,omitempty"`
+	NotActions   []string                     `json:"NotActions,omitempty"`
+	NotIPRanges  []string                     `json:"NotIpRanges,omitempty"`
+	NotUserIds   []string                     `json:"NotUserIds,omitempty"`
+	UserIds      []string                     `json:"UserIds,omitempty"`
 }

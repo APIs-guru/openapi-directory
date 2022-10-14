@@ -16,26 +16,26 @@ type PostSearchVersionNumberRoutedFilterPositionHeadingExtQueryParams struct {
 }
 
 type PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListAddress struct {
-	FreeformAddress *string `json:"freeformAddress"`
+	FreeformAddress *string `json:"freeformAddress,omitempty"`
 }
 
 type PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPoi struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPosition struct {
-	Lat *float32 `json:"lat"`
-	Lon *float32 `json:"lon"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lon *float32 `json:"lon,omitempty"`
 }
 
 type PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiList struct {
-	Address  *PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListAddress  `json:"address"`
-	Poi      *PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPoi      `json:"poi"`
-	Position *PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPosition `json:"position"`
+	Address  *PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListAddress  `json:"address,omitempty"`
+	Poi      *PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPoi      `json:"poi,omitempty"`
+	Position *PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPosition `json:"position,omitempty"`
 }
 
 type PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBody struct {
-	PoiList []PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiList `json:"poiList"`
+	PoiList []PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiList `json:"poiList,omitempty"`
 }
 
 type PostSearchVersionNumberRoutedFilterPositionHeadingExtRequest struct {

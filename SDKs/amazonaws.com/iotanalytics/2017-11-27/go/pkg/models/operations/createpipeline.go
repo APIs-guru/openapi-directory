@@ -17,7 +17,7 @@ type CreatePipelineHeaders struct {
 type CreatePipelineRequestBody struct {
 	PipelineActivities []shared.PipelineActivity `json:"pipelineActivities"`
 	PipelineName       string                    `json:"pipelineName"`
-	Tags               []shared.Tag              `json:"tags"`
+	Tags               []shared.Tag              `json:"tags,omitempty"`
 }
 
 type CreatePipelineRequest struct {

@@ -1,11 +1,11 @@
 package shared
 
 type CapacityProvider struct {
-	AutoScalingGroupProvider *AutoScalingGroupProvider         `json:"autoScalingGroupProvider"`
-	CapacityProviderArn      *string                           `json:"capacityProviderArn"`
-	Name                     *string                           `json:"name"`
-	Status                   *CapacityProviderStatusEnum       `json:"status"`
-	Tags                     []Tag                             `json:"tags"`
-	UpdateStatus             *CapacityProviderUpdateStatusEnum `json:"updateStatus"`
-	UpdateStatusReason       *string                           `json:"updateStatusReason"`
+	AutoScalingGroupProvider *AutoScalingGroupProvider         `json:"autoScalingGroupProvider,omitempty"`
+	CapacityProviderArn      *string                           `json:"capacityProviderArn,omitempty"`
+	Name                     *string                           `json:"name,omitempty"`
+	Status                   *CapacityProviderStatusEnum       `json:"status,omitempty"`
+	Tags                     []Tag                             `json:"tags,omitempty"`
+	UpdateStatus             *CapacityProviderUpdateStatusEnum `json:"updateStatus,omitempty"`
+	UpdateStatusReason       *string                           `json:"updateStatusReason,omitempty"`
 }

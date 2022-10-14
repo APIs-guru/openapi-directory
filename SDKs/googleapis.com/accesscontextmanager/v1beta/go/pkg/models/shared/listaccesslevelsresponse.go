@@ -1,6 +1,6 @@
 package shared
 
 type ListAccessLevelsResponse struct {
-	AccessLevels  []AccessLevel `json:"accessLevels"`
-	NextPageToken *string       `json:"nextPageToken"`
+	AccessLevels  []AccessLevel `json:"accessLevels,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
 }

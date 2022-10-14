@@ -1,6 +1,6 @@
 package shared
 
 type Draft struct {
-	ID      *string  `json:"id"`
-	Message *Message `json:"message"`
+	ID      *string  `json:"id,omitempty"`
+	Message *Message `json:"message,omitempty"`
 }

@@ -16,25 +16,25 @@ const (
 )
 
 type ProductEditFields struct {
-	Barcode               *string                             `json:"barcode"`
-	Categories            []CategoryFields                    `json:"categories"`
-	Description           *string                             `json:"description"`
-	Diameter              *float32                            `json:"diameter"`
-	Featured              *bool                               `json:"featured"`
-	GoogleProductCategory *string                             `json:"google_product_category"`
-	Height                *float32                            `json:"height"`
-	Length                *float32                            `json:"length"`
-	MetaDescription       *string                             `json:"meta_description"`
+	Barcode               *string                             `json:"barcode,omitempty"`
+	Categories            []CategoryFields                    `json:"categories,omitempty"`
+	Description           *string                             `json:"description,omitempty"`
+	Diameter              *float32                            `json:"diameter,omitempty"`
+	Featured              *bool                               `json:"featured,omitempty"`
+	GoogleProductCategory *string                             `json:"google_product_category,omitempty"`
+	Height                *float32                            `json:"height,omitempty"`
+	Length                *float32                            `json:"length,omitempty"`
+	MetaDescription       *string                             `json:"meta_description,omitempty"`
 	Name                  string                              `json:"name"`
-	PackageFormat         *ProductEditFieldsPackageFormatEnum `json:"package_format"`
-	PageTitle             *string                             `json:"page_title"`
-	Permalink             *string                             `json:"permalink"`
+	PackageFormat         *ProductEditFieldsPackageFormatEnum `json:"package_format,omitempty"`
+	PageTitle             *string                             `json:"page_title,omitempty"`
+	Permalink             *string                             `json:"permalink,omitempty"`
 	Price                 float32                             `json:"price"`
-	ShippingRequired      *bool                               `json:"shipping_required"`
-	Sku                   *string                             `json:"sku"`
-	Status                *ProductEditFieldsStatusEnum        `json:"status"`
-	Stock                 *int32                              `json:"stock"`
-	StockUnlimited        *bool                               `json:"stock_unlimited"`
-	Weight                *float32                            `json:"weight"`
-	Width                 *float32                            `json:"width"`
+	ShippingRequired      *bool                               `json:"shipping_required,omitempty"`
+	Sku                   *string                             `json:"sku,omitempty"`
+	Status                *ProductEditFieldsStatusEnum        `json:"status,omitempty"`
+	Stock                 *int32                              `json:"stock,omitempty"`
+	StockUnlimited        *bool                               `json:"stock_unlimited,omitempty"`
+	Weight                *float32                            `json:"weight,omitempty"`
+	Width                 *float32                            `json:"width,omitempty"`
 }

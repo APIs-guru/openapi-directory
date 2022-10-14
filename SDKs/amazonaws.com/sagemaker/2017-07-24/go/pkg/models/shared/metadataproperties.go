@@ -1,8 +1,8 @@
 package shared
 
 type MetadataProperties struct {
-	CommitID    *string `json:"CommitId"`
-	GeneratedBy *string `json:"GeneratedBy"`
-	ProjectID   *string `json:"ProjectId"`
-	Repository  *string `json:"Repository"`
+	CommitID    *string `json:"CommitId,omitempty"`
+	GeneratedBy *string `json:"GeneratedBy,omitempty"`
+	ProjectID   *string `json:"ProjectId,omitempty"`
+	Repository  *string `json:"Repository,omitempty"`
 }

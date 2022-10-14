@@ -1,8 +1,8 @@
 package shared
 
 type ActionTypeSettings struct {
-	EntityURLTemplate          *string `json:"entityUrlTemplate"`
-	ExecutionURLTemplate       *string `json:"executionUrlTemplate"`
-	RevisionURLTemplate        *string `json:"revisionUrlTemplate"`
-	ThirdPartyConfigurationURL *string `json:"thirdPartyConfigurationUrl"`
+	EntityURLTemplate          *string `json:"entityUrlTemplate,omitempty"`
+	ExecutionURLTemplate       *string `json:"executionUrlTemplate,omitempty"`
+	RevisionURLTemplate        *string `json:"revisionUrlTemplate,omitempty"`
+	ThirdPartyConfigurationURL *string `json:"thirdPartyConfigurationUrl,omitempty"`
 }

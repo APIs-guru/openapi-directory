@@ -1,5 +1,5 @@
 package shared
 
 type LifecyclePolicyRuleAction struct {
-	Type *ImageActionTypeEnum `json:"type"`
+	Type *ImageActionTypeEnum `json:"type,omitempty"`
 }

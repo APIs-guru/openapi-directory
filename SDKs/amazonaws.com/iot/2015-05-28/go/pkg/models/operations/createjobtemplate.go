@@ -19,33 +19,33 @@ type CreateJobTemplateHeaders struct {
 }
 
 type CreateJobTemplateRequestBodyAbortConfig struct {
-	CriteriaList []shared.AbortCriteria `json:"criteriaList"`
+	CriteriaList []shared.AbortCriteria `json:"criteriaList,omitempty"`
 }
 
 type CreateJobTemplateRequestBodyJobExecutionsRolloutConfig struct {
-	ExponentialRate  *shared.ExponentialRolloutRate `json:"exponentialRate"`
-	MaximumPerMinute *int64                         `json:"maximumPerMinute"`
+	ExponentialRate  *shared.ExponentialRolloutRate `json:"exponentialRate,omitempty"`
+	MaximumPerMinute *int64                         `json:"maximumPerMinute,omitempty"`
 }
 
 type CreateJobTemplateRequestBodyPresignedURLConfig struct {
-	ExpiresInSec *int64  `json:"expiresInSec"`
-	RoleArn      *string `json:"roleArn"`
+	ExpiresInSec *int64  `json:"expiresInSec,omitempty"`
+	RoleArn      *string `json:"roleArn,omitempty"`
 }
 
 type CreateJobTemplateRequestBodyTimeoutConfig struct {
-	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes"`
+	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes,omitempty"`
 }
 
 type CreateJobTemplateRequestBody struct {
-	AbortConfig                *CreateJobTemplateRequestBodyAbortConfig                `json:"abortConfig"`
+	AbortConfig                *CreateJobTemplateRequestBodyAbortConfig                `json:"abortConfig,omitempty"`
 	Description                string                                                  `json:"description"`
-	Document                   *string                                                 `json:"document"`
-	DocumentSource             *string                                                 `json:"documentSource"`
-	JobArn                     *string                                                 `json:"jobArn"`
-	JobExecutionsRolloutConfig *CreateJobTemplateRequestBodyJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig"`
-	PresignedURLConfig         *CreateJobTemplateRequestBodyPresignedURLConfig         `json:"presignedUrlConfig"`
-	Tags                       []shared.Tag                                            `json:"tags"`
-	TimeoutConfig              *CreateJobTemplateRequestBodyTimeoutConfig              `json:"timeoutConfig"`
+	Document                   *string                                                 `json:"document,omitempty"`
+	DocumentSource             *string                                                 `json:"documentSource,omitempty"`
+	JobArn                     *string                                                 `json:"jobArn,omitempty"`
+	JobExecutionsRolloutConfig *CreateJobTemplateRequestBodyJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig,omitempty"`
+	PresignedURLConfig         *CreateJobTemplateRequestBodyPresignedURLConfig         `json:"presignedUrlConfig,omitempty"`
+	Tags                       []shared.Tag                                            `json:"tags,omitempty"`
+	TimeoutConfig              *CreateJobTemplateRequestBodyTimeoutConfig              `json:"timeoutConfig,omitempty"`
 }
 
 type CreateJobTemplateRequest struct {

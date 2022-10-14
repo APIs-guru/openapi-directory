@@ -1,12 +1,12 @@
 package shared
 
 type UpdateSystemModelsPackageStatusSummary struct {
-	AverageDownloadTime *string                           `json:"AverageDownloadTime"`
-	AverageInstallTime  *string                           `json:"AverageInstallTime"`
-	Downloaded          *int64                            `json:"Downloaded"`
-	Error               *int32                            `json:"Error"`
-	Installed           *int64                            `json:"Installed"`
-	Package             *string                           `json:"Package"`
-	PackageID           *string                           `json:"PackageID"`
-	PackageStatusItems  []UpdateSystemModelsPackageStatus `json:"PackageStatusItems"`
+	AverageDownloadTime *string                           `json:"AverageDownloadTime,omitempty"`
+	AverageInstallTime  *string                           `json:"AverageInstallTime,omitempty"`
+	Downloaded          *int64                            `json:"Downloaded,omitempty"`
+	Error               *int32                            `json:"Error,omitempty"`
+	Installed           *int64                            `json:"Installed,omitempty"`
+	Package             *string                           `json:"Package,omitempty"`
+	PackageID           *string                           `json:"PackageID,omitempty"`
+	PackageStatusItems  []UpdateSystemModelsPackageStatus `json:"PackageStatusItems,omitempty"`
 }

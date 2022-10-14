@@ -23,5 +23,5 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1TelephonyDtmfEvents struct {
-	DtmfEvents []GoogleCloudDialogflowV2beta1TelephonyDtmfEventsDtmfEventsEnum `json:"dtmfEvents"`
+	DtmfEvents []GoogleCloudDialogflowV2beta1TelephonyDtmfEventsDtmfEventsEnum `json:"dtmfEvents,omitempty"`
 }

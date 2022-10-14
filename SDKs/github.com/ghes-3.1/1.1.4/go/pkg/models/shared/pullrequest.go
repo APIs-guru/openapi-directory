@@ -30,7 +30,7 @@ type PullRequestAssigneeSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -38,7 +38,7 @@ type PullRequestAssigneeSimpleUser struct {
 }
 
 type PullRequestBaseRepoLicenseLicenseSimple struct {
-	HTMLURL *string `json:"html_url"`
+	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`
 	Name    string  `json:"name"`
 	NodeID  string  `json:"node_id"`
@@ -74,9 +74,9 @@ type PullRequestBaseRepoPermissions struct {
 }
 
 type PullRequestBaseRepo struct {
-	AllowMergeCommit *bool                                   `json:"allow_merge_commit"`
-	AllowRebaseMerge *bool                                   `json:"allow_rebase_merge"`
-	AllowSquashMerge *bool                                   `json:"allow_squash_merge"`
+	AllowMergeCommit *bool                                   `json:"allow_merge_commit,omitempty"`
+	AllowRebaseMerge *bool                                   `json:"allow_rebase_merge,omitempty"`
+	AllowSquashMerge *bool                                   `json:"allow_squash_merge,omitempty"`
 	ArchiveURL       string                                  `json:"archive_url"`
 	Archived         bool                                    `json:"archived"`
 	AssigneesURL     string                                  `json:"assignees_url"`
@@ -122,7 +122,7 @@ type PullRequestBaseRepo struct {
 	Language         string                                  `json:"language"`
 	LanguagesURL     string                                  `json:"languages_url"`
 	License          PullRequestBaseRepoLicenseLicenseSimple `json:"license"`
-	MasterBranch     *string                                 `json:"master_branch"`
+	MasterBranch     *string                                 `json:"master_branch,omitempty"`
 	MergesURL        string                                  `json:"merges_url"`
 	MilestonesURL    string                                  `json:"milestones_url"`
 	MirrorURL        string                                  `json:"mirror_url"`
@@ -132,7 +132,7 @@ type PullRequestBaseRepo struct {
 	OpenIssues       int64                                   `json:"open_issues"`
 	OpenIssuesCount  int64                                   `json:"open_issues_count"`
 	Owner            PullRequestBaseRepoOwner                `json:"owner"`
-	Permissions      *PullRequestBaseRepoPermissions         `json:"permissions"`
+	Permissions      *PullRequestBaseRepoPermissions         `json:"permissions,omitempty"`
 	Private          bool                                    `json:"private"`
 	PullsURL         string                                  `json:"pulls_url"`
 	PushedAt         time.Time                               `json:"pushed_at"`
@@ -147,8 +147,8 @@ type PullRequestBaseRepo struct {
 	SvnURL           string                                  `json:"svn_url"`
 	TagsURL          string                                  `json:"tags_url"`
 	TeamsURL         string                                  `json:"teams_url"`
-	TempCloneToken   *string                                 `json:"temp_clone_token"`
-	Topics           []string                                `json:"topics"`
+	TempCloneToken   *string                                 `json:"temp_clone_token,omitempty"`
+	Topics           []string                                `json:"topics,omitempty"`
 	TreesURL         string                                  `json:"trees_url"`
 	UpdatedAt        time.Time                               `json:"updated_at"`
 	URL              string                                  `json:"url"`
@@ -221,9 +221,9 @@ type PullRequestHeadRepoPermissions struct {
 }
 
 type PullRequestHeadRepo struct {
-	AllowMergeCommit *bool                           `json:"allow_merge_commit"`
-	AllowRebaseMerge *bool                           `json:"allow_rebase_merge"`
-	AllowSquashMerge *bool                           `json:"allow_squash_merge"`
+	AllowMergeCommit *bool                           `json:"allow_merge_commit,omitempty"`
+	AllowRebaseMerge *bool                           `json:"allow_rebase_merge,omitempty"`
+	AllowSquashMerge *bool                           `json:"allow_squash_merge,omitempty"`
 	ArchiveURL       string                          `json:"archive_url"`
 	Archived         bool                            `json:"archived"`
 	AssigneesURL     string                          `json:"assignees_url"`
@@ -269,7 +269,7 @@ type PullRequestHeadRepo struct {
 	Language         string                          `json:"language"`
 	LanguagesURL     string                          `json:"languages_url"`
 	License          PullRequestHeadRepoLicense      `json:"license"`
-	MasterBranch     *string                         `json:"master_branch"`
+	MasterBranch     *string                         `json:"master_branch,omitempty"`
 	MergesURL        string                          `json:"merges_url"`
 	MilestonesURL    string                          `json:"milestones_url"`
 	MirrorURL        string                          `json:"mirror_url"`
@@ -279,7 +279,7 @@ type PullRequestHeadRepo struct {
 	OpenIssues       int64                           `json:"open_issues"`
 	OpenIssuesCount  int64                           `json:"open_issues_count"`
 	Owner            PullRequestHeadRepoOwner        `json:"owner"`
-	Permissions      *PullRequestHeadRepoPermissions `json:"permissions"`
+	Permissions      *PullRequestHeadRepoPermissions `json:"permissions,omitempty"`
 	Private          bool                            `json:"private"`
 	PullsURL         string                          `json:"pulls_url"`
 	PushedAt         time.Time                       `json:"pushed_at"`
@@ -294,8 +294,8 @@ type PullRequestHeadRepo struct {
 	SvnURL           string                          `json:"svn_url"`
 	TagsURL          string                          `json:"tags_url"`
 	TeamsURL         string                          `json:"teams_url"`
-	TempCloneToken   *string                         `json:"temp_clone_token"`
-	Topics           []string                        `json:"topics"`
+	TempCloneToken   *string                         `json:"temp_clone_token,omitempty"`
+	Topics           []string                        `json:"topics,omitempty"`
 	TreesURL         string                          `json:"trees_url"`
 	UpdatedAt        time.Time                       `json:"updated_at"`
 	URL              string                          `json:"url"`
@@ -333,13 +333,13 @@ type PullRequestHead struct {
 }
 
 type PullRequestLabels struct {
-	Color       *string `json:"color"`
-	Default     *bool   `json:"default"`
-	Description *string `json:"description"`
-	ID          *int64  `json:"id"`
-	Name        *string `json:"name"`
-	NodeID      *string `json:"node_id"`
-	URL         *string `json:"url"`
+	Color       *string `json:"color,omitempty"`
+	Default     *bool   `json:"default,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	NodeID      *string `json:"node_id,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }
 
 type PullRequestMergedBySimpleUser struct {
@@ -357,7 +357,7 @@ type PullRequestMergedBySimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -379,7 +379,7 @@ type PullRequestMilestoneCreatorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -434,7 +434,7 @@ type PullRequestUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -443,10 +443,10 @@ type PullRequestUserSimpleUser struct {
 
 type PullRequest struct {
 	Links               PullRequestLinks              `json:"_links"`
-	ActiveLockReason    *string                       `json:"active_lock_reason"`
+	ActiveLockReason    *string                       `json:"active_lock_reason,omitempty"`
 	Additions           int64                         `json:"additions"`
 	Assignee            PullRequestAssigneeSimpleUser `json:"assignee"`
-	Assignees           []SimpleUser                  `json:"assignees"`
+	Assignees           []SimpleUser                  `json:"assignees,omitempty"`
 	AuthorAssociation   AuthorAssociationEnum         `json:"author_association"`
 	AutoMerge           AutoMerge                     `json:"auto_merge"`
 	Base                PullRequestBase               `json:"base"`
@@ -460,7 +460,7 @@ type PullRequest struct {
 	CreatedAt           time.Time                     `json:"created_at"`
 	Deletions           int64                         `json:"deletions"`
 	DiffURL             string                        `json:"diff_url"`
-	Draft               *bool                         `json:"draft"`
+	Draft               *bool                         `json:"draft,omitempty"`
 	Head                PullRequestHead               `json:"head"`
 	HTMLURL             string                        `json:"html_url"`
 	ID                  int64                         `json:"id"`
@@ -478,9 +478,9 @@ type PullRequest struct {
 	NodeID              string                        `json:"node_id"`
 	Number              int64                         `json:"number"`
 	PatchURL            string                        `json:"patch_url"`
-	Rebaseable          *bool                         `json:"rebaseable"`
-	RequestedReviewers  []SimpleUser                  `json:"requested_reviewers"`
-	RequestedTeams      []TeamSimple                  `json:"requested_teams"`
+	Rebaseable          *bool                         `json:"rebaseable,omitempty"`
+	RequestedReviewers  []SimpleUser                  `json:"requested_reviewers,omitempty"`
+	RequestedTeams      []TeamSimple                  `json:"requested_teams,omitempty"`
 	ReviewCommentURL    string                        `json:"review_comment_url"`
 	ReviewComments      int64                         `json:"review_comments"`
 	ReviewCommentsURL   string                        `json:"review_comments_url"`

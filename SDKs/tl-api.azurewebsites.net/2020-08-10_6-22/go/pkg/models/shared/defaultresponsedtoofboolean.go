@@ -1,8 +1,8 @@
 package shared
 
 type DefaultResponseDtoOfBoolean struct {
-	IsError           *bool        `json:"isError"`
-	Message           *string      `json:"message"`
-	ResponseException *interface{} `json:"responseException"`
-	Result            *bool        `json:"result"`
+	IsError           *bool        `json:"isError,omitempty"`
+	Message           *string      `json:"message,omitempty"`
+	ResponseException *interface{} `json:"responseException,omitempty"`
+	Result            *bool        `json:"result,omitempty"`
 }

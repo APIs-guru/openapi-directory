@@ -1,12 +1,12 @@
 package shared
 
 type DomainDescriptionType struct {
-	AwsAccountID           *string                 `json:"AWSAccountId"`
-	CloudFrontDistribution *string                 `json:"CloudFrontDistribution"`
-	CustomDomainConfig     *CustomDomainConfigType `json:"CustomDomainConfig"`
-	Domain                 *string                 `json:"Domain"`
-	S3Bucket               *string                 `json:"S3Bucket"`
-	Status                 *DomainStatusTypeEnum   `json:"Status"`
-	UserPoolID             *string                 `json:"UserPoolId"`
-	Version                *string                 `json:"Version"`
+	AwsAccountID           *string                 `json:"AWSAccountId,omitempty"`
+	CloudFrontDistribution *string                 `json:"CloudFrontDistribution,omitempty"`
+	CustomDomainConfig     *CustomDomainConfigType `json:"CustomDomainConfig,omitempty"`
+	Domain                 *string                 `json:"Domain,omitempty"`
+	S3Bucket               *string                 `json:"S3Bucket,omitempty"`
+	Status                 *DomainStatusTypeEnum   `json:"Status,omitempty"`
+	UserPoolID             *string                 `json:"UserPoolId,omitempty"`
+	Version                *string                 `json:"Version,omitempty"`
 }

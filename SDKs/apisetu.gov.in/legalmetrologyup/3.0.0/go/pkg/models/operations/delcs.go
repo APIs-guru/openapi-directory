@@ -16,8 +16,8 @@ const (
 )
 
 type DelcsRequestBody struct {
-	CertificateParameters *DelcsRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *DelcsRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                DelcsRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Delcs400ApplicationJSON struct {
-	Error            *Delcs400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Delcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Delcs400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Delcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Delcs401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Delcs401ApplicationJSON struct {
-	Error            *Delcs401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Delcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Delcs401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Delcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Delcs404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Delcs404ApplicationJSON struct {
-	Error            *Delcs404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Delcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Delcs404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Delcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Delcs500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Delcs500ApplicationJSON struct {
-	Error            *Delcs500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Delcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Delcs500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Delcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Delcs502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Delcs502ApplicationJSON struct {
-	Error            *Delcs502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Delcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Delcs502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Delcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Delcs503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Delcs503ApplicationJSON struct {
-	Error            *Delcs503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Delcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Delcs503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Delcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Delcs504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Delcs504ApplicationJSON struct {
-	Error            *Delcs504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Delcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Delcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Delcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type DelcsResponse struct {

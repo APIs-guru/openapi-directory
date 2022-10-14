@@ -1,5 +1,5 @@
 package shared
 
 type GetDataCatalogEncryptionSettingsRequest struct {
-	CatalogID *string `json:"CatalogId"`
+	CatalogID *string `json:"CatalogId,omitempty"`
 }

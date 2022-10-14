@@ -19,7 +19,7 @@ type GetWebhookRequest struct {
 }
 
 type GetWebhook200ApplicationJSON struct {
-	Data *shared.WebhookResponse `json:"data"`
+	Data *shared.WebhookResponse `json:"data,omitempty"`
 }
 
 type GetWebhookResponse struct {

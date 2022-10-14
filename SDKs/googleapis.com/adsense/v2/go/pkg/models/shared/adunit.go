@@ -9,9 +9,9 @@ const (
 )
 
 type AdUnit struct {
-	ContentAdsSettings   *ContentAdsSettings `json:"contentAdsSettings"`
-	DisplayName          *string             `json:"displayName"`
-	Name                 *string             `json:"name"`
-	ReportingDimensionID *string             `json:"reportingDimensionId"`
-	State                *AdUnitStateEnum    `json:"state"`
+	ContentAdsSettings   *ContentAdsSettings `json:"contentAdsSettings,omitempty"`
+	DisplayName          *string             `json:"displayName,omitempty"`
+	Name                 *string             `json:"name,omitempty"`
+	ReportingDimensionID *string             `json:"reportingDimensionId,omitempty"`
+	State                *AdUnitStateEnum    `json:"state,omitempty"`
 }

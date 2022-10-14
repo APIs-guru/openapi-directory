@@ -1,8 +1,8 @@
 package shared
 
 type Label struct {
-	Confidence *float32   `json:"Confidence"`
-	Instances  []Instance `json:"Instances"`
-	Name       *string    `json:"Name"`
-	Parents    []Parent   `json:"Parents"`
+	Confidence *float32   `json:"Confidence,omitempty"`
+	Instances  []Instance `json:"Instances,omitempty"`
+	Name       *string    `json:"Name,omitempty"`
+	Parents    []Parent   `json:"Parents,omitempty"`
 }

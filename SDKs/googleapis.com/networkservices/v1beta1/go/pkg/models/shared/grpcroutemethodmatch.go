@@ -9,8 +9,8 @@ const (
 )
 
 type GrpcRouteMethodMatch struct {
-	CaseSensitive *bool                         `json:"caseSensitive"`
-	GrpcMethod    *string                       `json:"grpcMethod"`
-	GrpcService   *string                       `json:"grpcService"`
-	Type          *GrpcRouteMethodMatchTypeEnum `json:"type"`
+	CaseSensitive *bool                         `json:"caseSensitive,omitempty"`
+	GrpcMethod    *string                       `json:"grpcMethod,omitempty"`
+	GrpcService   *string                       `json:"grpcService,omitempty"`
+	Type          *GrpcRouteMethodMatchTypeEnum `json:"type,omitempty"`
 }

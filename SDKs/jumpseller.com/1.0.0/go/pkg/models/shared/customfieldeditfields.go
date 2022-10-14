@@ -9,7 +9,7 @@ const (
 )
 
 type CustomFieldEditFields struct {
-	Label  *string                        `json:"label"`
-	Type   *CustomFieldEditFieldsTypeEnum `json:"type"`
-	Values []string                       `json:"values"`
+	Label  *string                        `json:"label,omitempty"`
+	Type   *CustomFieldEditFieldsTypeEnum `json:"type,omitempty"`
+	Values []string                       `json:"values,omitempty"`
 }

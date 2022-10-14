@@ -15,8 +15,8 @@ type ResolveComponentCandidatesHeaders struct {
 }
 
 type ResolveComponentCandidatesRequestBodyPlatform struct {
-	Attributes map[string]string `json:"attributes"`
-	Name       *string           `json:"name"`
+	Attributes map[string]string `json:"attributes,omitempty"`
+	Name       *string           `json:"name,omitempty"`
 }
 
 type ResolveComponentCandidatesRequestBody struct {

@@ -1,5 +1,5 @@
 package shared
 
 type EncryptionConfig struct {
-	GcePdKmsKeyName *string `json:"gcePdKmsKeyName"`
+	GcePdKmsKeyName *string `json:"gcePdKmsKeyName,omitempty"`
 }

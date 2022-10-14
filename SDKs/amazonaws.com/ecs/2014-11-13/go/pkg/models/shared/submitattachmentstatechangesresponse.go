@@ -1,5 +1,5 @@
 package shared
 
 type SubmitAttachmentStateChangesResponse struct {
-	Acknowledgment *string `json:"acknowledgment"`
+	Acknowledgment *string `json:"acknowledgment,omitempty"`
 }

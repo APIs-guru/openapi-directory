@@ -15,8 +15,8 @@ type UpdateProjectHeaders struct {
 }
 
 type UpdateProjectRequestBody struct {
-	ClientToken        *string `json:"clientToken"`
-	ProjectDescription *string `json:"projectDescription"`
+	ClientToken        *string `json:"clientToken,omitempty"`
+	ProjectDescription *string `json:"projectDescription,omitempty"`
 	ProjectName        string  `json:"projectName"`
 }
 

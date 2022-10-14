@@ -1,11 +1,11 @@
 package shared
 
 type PersonalNameParsedOut struct {
-	FirstLastName     *FirstLastNameOut `json:"firstLastName"`
-	ID                *string           `json:"id"`
-	Name              *string           `json:"name"`
-	NameParserType    *string           `json:"nameParserType"`
-	NameParserTypeAlt *string           `json:"nameParserTypeAlt"`
-	Score             *float64          `json:"score"`
-	Script            *string           `json:"script"`
+	FirstLastName     *FirstLastNameOut `json:"firstLastName,omitempty"`
+	ID                *string           `json:"id,omitempty"`
+	Name              *string           `json:"name,omitempty"`
+	NameParserType    *string           `json:"nameParserType,omitempty"`
+	NameParserTypeAlt *string           `json:"nameParserTypeAlt,omitempty"`
+	Score             *float64          `json:"score,omitempty"`
+	Script            *string           `json:"script,omitempty"`
 }

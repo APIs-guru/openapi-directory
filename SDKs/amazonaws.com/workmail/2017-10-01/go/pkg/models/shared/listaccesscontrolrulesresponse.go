@@ -1,5 +1,5 @@
 package shared
 
 type ListAccessControlRulesResponse struct {
-	Rules []AccessControlRule `json:"Rules"`
+	Rules []AccessControlRule `json:"Rules,omitempty"`
 }

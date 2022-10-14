@@ -1,11 +1,11 @@
 package shared
 
 type TrinoJob struct {
-	ClientTags        []string          `json:"clientTags"`
-	ContinueOnFailure *bool             `json:"continueOnFailure"`
-	LoggingConfig     *LoggingConfig    `json:"loggingConfig"`
-	OutputFormat      *string           `json:"outputFormat"`
-	Properties        map[string]string `json:"properties"`
-	QueryFileURI      *string           `json:"queryFileUri"`
-	QueryList         *QueryList        `json:"queryList"`
+	ClientTags        []string          `json:"clientTags,omitempty"`
+	ContinueOnFailure *bool             `json:"continueOnFailure,omitempty"`
+	LoggingConfig     *LoggingConfig    `json:"loggingConfig,omitempty"`
+	OutputFormat      *string           `json:"outputFormat,omitempty"`
+	Properties        map[string]string `json:"properties,omitempty"`
+	QueryFileURI      *string           `json:"queryFileUri,omitempty"`
+	QueryList         *QueryList        `json:"queryList,omitempty"`
 }

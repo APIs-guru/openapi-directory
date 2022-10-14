@@ -1,11 +1,11 @@
 package shared
 
 type ConnectionInfoBody struct {
-	ConnectionServiceURI  *string  `json:"connectionServiceUri"`
-	ConnectionSessionID   *string  `json:"connectionSessionId"`
-	ConnectionSessionPath *string  `json:"connectionSessionPath"`
-	HostPublicKeys        []string `json:"hostPublicKeys"`
-	RelayEndpoint         *string  `json:"relayEndpoint"`
-	RelaySasToken         *string  `json:"relaySasToken"`
-	SessionToken          *string  `json:"sessionToken"`
+	ConnectionServiceURI  *string  `json:"connectionServiceUri,omitempty"`
+	ConnectionSessionID   *string  `json:"connectionSessionId,omitempty"`
+	ConnectionSessionPath *string  `json:"connectionSessionPath,omitempty"`
+	HostPublicKeys        []string `json:"hostPublicKeys,omitempty"`
+	RelayEndpoint         *string  `json:"relayEndpoint,omitempty"`
+	RelaySasToken         *string  `json:"relaySasToken,omitempty"`
+	SessionToken          *string  `json:"sessionToken,omitempty"`
 }

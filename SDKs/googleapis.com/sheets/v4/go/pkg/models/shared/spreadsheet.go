@@ -1,12 +1,12 @@
 package shared
 
 type Spreadsheet struct {
-	DataSourceSchedules []DataSourceRefreshSchedule `json:"dataSourceSchedules"`
-	DataSources         []DataSource                `json:"dataSources"`
-	DeveloperMetadata   []DeveloperMetadata         `json:"developerMetadata"`
-	NamedRanges         []NamedRange                `json:"namedRanges"`
-	Properties          *SpreadsheetProperties      `json:"properties"`
-	Sheets              []Sheet                     `json:"sheets"`
-	SpreadsheetID       *string                     `json:"spreadsheetId"`
-	SpreadsheetURL      *string                     `json:"spreadsheetUrl"`
+	DataSourceSchedules []DataSourceRefreshSchedule `json:"dataSourceSchedules,omitempty"`
+	DataSources         []DataSource                `json:"dataSources,omitempty"`
+	DeveloperMetadata   []DeveloperMetadata         `json:"developerMetadata,omitempty"`
+	NamedRanges         []NamedRange                `json:"namedRanges,omitempty"`
+	Properties          *SpreadsheetProperties      `json:"properties,omitempty"`
+	Sheets              []Sheet                     `json:"sheets,omitempty"`
+	SpreadsheetID       *string                     `json:"spreadsheetId,omitempty"`
+	SpreadsheetURL      *string                     `json:"spreadsheetUrl,omitempty"`
 }

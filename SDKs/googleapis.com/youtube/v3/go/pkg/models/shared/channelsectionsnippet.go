@@ -31,11 +31,11 @@ const (
 )
 
 type ChannelSectionSnippet struct {
-	ChannelID       *string                         `json:"channelId"`
-	DefaultLanguage *string                         `json:"defaultLanguage"`
-	Localized       *ChannelSectionLocalization     `json:"localized"`
-	Position        *int64                          `json:"position"`
-	Style           *ChannelSectionSnippetStyleEnum `json:"style"`
-	Title           *string                         `json:"title"`
-	Type            *ChannelSectionSnippetTypeEnum  `json:"type"`
+	ChannelID       *string                         `json:"channelId,omitempty"`
+	DefaultLanguage *string                         `json:"defaultLanguage,omitempty"`
+	Localized       *ChannelSectionLocalization     `json:"localized,omitempty"`
+	Position        *int64                          `json:"position,omitempty"`
+	Style           *ChannelSectionSnippetStyleEnum `json:"style,omitempty"`
+	Title           *string                         `json:"title,omitempty"`
+	Type            *ChannelSectionSnippetTypeEnum  `json:"type,omitempty"`
 }

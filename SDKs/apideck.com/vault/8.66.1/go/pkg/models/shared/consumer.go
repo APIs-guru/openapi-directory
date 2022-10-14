@@ -1,14 +1,14 @@
 package shared
 
 type Consumer struct {
-	AggregatedRequestCount *float64                `json:"aggregated_request_count"`
-	ApplicationID          *string                 `json:"application_id"`
-	Connections            []ConsumerConnection    `json:"connections"`
-	ConsumerID             *string                 `json:"consumer_id"`
-	Created                *string                 `json:"created"`
-	Metadata               *ConsumerMetadata       `json:"metadata"`
-	Modified               *string                 `json:"modified"`
-	RequestCountUpdated    *string                 `json:"request_count_updated"`
-	RequestCounts          *RequestCountAllocation `json:"request_counts"`
-	Services               []string                `json:"services"`
+	AggregatedRequestCount *float64                `json:"aggregated_request_count,omitempty"`
+	ApplicationID          *string                 `json:"application_id,omitempty"`
+	Connections            []ConsumerConnection    `json:"connections,omitempty"`
+	ConsumerID             *string                 `json:"consumer_id,omitempty"`
+	Created                *string                 `json:"created,omitempty"`
+	Metadata               *ConsumerMetadata       `json:"metadata,omitempty"`
+	Modified               *string                 `json:"modified,omitempty"`
+	RequestCountUpdated    *string                 `json:"request_count_updated,omitempty"`
+	RequestCounts          *RequestCountAllocation `json:"request_counts,omitempty"`
+	Services               []string                `json:"services,omitempty"`
 }

@@ -18,8 +18,8 @@ type CreateBackendRequestBody struct {
 	AppID                  string                 `json:"appId"`
 	AppName                string                 `json:"appName"`
 	BackendEnvironmentName string                 `json:"backendEnvironmentName"`
-	ResourceConfig         map[string]interface{} `json:"resourceConfig"`
-	ResourceName           *string                `json:"resourceName"`
+	ResourceConfig         map[string]interface{} `json:"resourceConfig,omitempty"`
+	ResourceName           *string                `json:"resourceName,omitempty"`
 }
 
 type CreateBackendRequest struct {

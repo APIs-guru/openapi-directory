@@ -9,11 +9,11 @@ const (
 )
 
 type GoogleAppsCardV1Card struct {
-	CardActions    []GoogleAppsCardV1CardAction          `json:"cardActions"`
-	DisplayStyle   *GoogleAppsCardV1CardDisplayStyleEnum `json:"displayStyle"`
-	FixedFooter    *GoogleAppsCardV1CardFixedFooter      `json:"fixedFooter"`
-	Header         *GoogleAppsCardV1CardHeader           `json:"header"`
-	Name           *string                               `json:"name"`
-	PeekCardHeader *GoogleAppsCardV1CardHeader           `json:"peekCardHeader"`
-	Sections       []GoogleAppsCardV1Section             `json:"sections"`
+	CardActions    []GoogleAppsCardV1CardAction          `json:"cardActions,omitempty"`
+	DisplayStyle   *GoogleAppsCardV1CardDisplayStyleEnum `json:"displayStyle,omitempty"`
+	FixedFooter    *GoogleAppsCardV1CardFixedFooter      `json:"fixedFooter,omitempty"`
+	Header         *GoogleAppsCardV1CardHeader           `json:"header,omitempty"`
+	Name           *string                               `json:"name,omitempty"`
+	PeekCardHeader *GoogleAppsCardV1CardHeader           `json:"peekCardHeader,omitempty"`
+	Sections       []GoogleAppsCardV1Section             `json:"sections,omitempty"`
 }

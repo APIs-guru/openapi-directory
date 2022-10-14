@@ -188,20 +188,20 @@ const (
 )
 
 type MappingJob struct {
-	ContractSize            []float64                 `json:"contractSize"`
-	Coupon                  []float64                 `json:"coupon"`
-	Currency                *string                   `json:"currency"`
-	ExchCode                *string                   `json:"exchCode"`
-	Expiration              []time.Time               `json:"expiration"`
+	ContractSize            []float64                 `json:"contractSize,omitempty"`
+	Coupon                  []float64                 `json:"coupon,omitempty"`
+	Currency                *string                   `json:"currency,omitempty"`
+	ExchCode                *string                   `json:"exchCode,omitempty"`
+	Expiration              []time.Time               `json:"expiration,omitempty"`
 	IDType                  MappingJobIDTypeEnum      `json:"idType"`
 	IDValue                 interface{}               `json:"idValue"`
-	IncludeUnlistedEquities *bool                     `json:"includeUnlistedEquities"`
-	MarketSecDes            *string                   `json:"marketSecDes"`
-	Maturity                []time.Time               `json:"maturity"`
-	MicCode                 *string                   `json:"micCode"`
-	OptionType              *MappingJobOptionTypeEnum `json:"optionType"`
-	SecurityType            *string                   `json:"securityType"`
-	SecurityType2           *string                   `json:"securityType2"`
-	StateCode               *MappingJobStateCodeEnum  `json:"stateCode"`
-	Strike                  []float64                 `json:"strike"`
+	IncludeUnlistedEquities *bool                     `json:"includeUnlistedEquities,omitempty"`
+	MarketSecDes            *string                   `json:"marketSecDes,omitempty"`
+	Maturity                []time.Time               `json:"maturity,omitempty"`
+	MicCode                 *string                   `json:"micCode,omitempty"`
+	OptionType              *MappingJobOptionTypeEnum `json:"optionType,omitempty"`
+	SecurityType            *string                   `json:"securityType,omitempty"`
+	SecurityType2           *string                   `json:"securityType2,omitempty"`
+	StateCode               *MappingJobStateCodeEnum  `json:"stateCode,omitempty"`
+	Strike                  []float64                 `json:"strike,omitempty"`
 }

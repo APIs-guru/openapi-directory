@@ -11,12 +11,12 @@ const (
 )
 
 type ObaIcon struct {
-	ClickTrackingURL *string              `json:"clickTrackingUrl"`
-	Dimensions       *Dimensions          `json:"dimensions"`
-	LandingPageURL   *string              `json:"landingPageUrl"`
-	Position         *ObaIconPositionEnum `json:"position"`
-	Program          *string              `json:"program"`
-	ResourceMimeType *string              `json:"resourceMimeType"`
-	ResourceURL      *string              `json:"resourceUrl"`
-	ViewTrackingURL  *string              `json:"viewTrackingUrl"`
+	ClickTrackingURL *string              `json:"clickTrackingUrl,omitempty"`
+	Dimensions       *Dimensions          `json:"dimensions,omitempty"`
+	LandingPageURL   *string              `json:"landingPageUrl,omitempty"`
+	Position         *ObaIconPositionEnum `json:"position,omitempty"`
+	Program          *string              `json:"program,omitempty"`
+	ResourceMimeType *string              `json:"resourceMimeType,omitempty"`
+	ResourceURL      *string              `json:"resourceUrl,omitempty"`
+	ViewTrackingURL  *string              `json:"viewTrackingUrl,omitempty"`
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type LoadBalancerBackend struct {
-	DisplayName                      *string                                          `json:"displayName"`
-	HealthCheckAllowingFirewallRules []string                                         `json:"healthCheckAllowingFirewallRules"`
-	HealthCheckBlockingFirewallRules []string                                         `json:"healthCheckBlockingFirewallRules"`
-	HealthCheckFirewallState         *LoadBalancerBackendHealthCheckFirewallStateEnum `json:"healthCheckFirewallState"`
-	URI                              *string                                          `json:"uri"`
+	DisplayName                      *string                                          `json:"displayName,omitempty"`
+	HealthCheckAllowingFirewallRules []string                                         `json:"healthCheckAllowingFirewallRules,omitempty"`
+	HealthCheckBlockingFirewallRules []string                                         `json:"healthCheckBlockingFirewallRules,omitempty"`
+	HealthCheckFirewallState         *LoadBalancerBackendHealthCheckFirewallStateEnum `json:"healthCheckFirewallState,omitempty"`
+	URI                              *string                                          `json:"uri,omitempty"`
 }

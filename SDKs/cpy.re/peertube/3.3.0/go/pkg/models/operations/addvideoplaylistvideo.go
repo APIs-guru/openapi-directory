@@ -9,8 +9,8 @@ type AddVideoPlaylistVideoPathParams struct {
 }
 
 type AddVideoPlaylistVideoRequestBody struct {
-	StartTimestamp *int64      `json:"startTimestamp"`
-	StopTimestamp  *int64      `json:"stopTimestamp"`
+	StartTimestamp *int64      `json:"startTimestamp,omitempty"`
+	StopTimestamp  *int64      `json:"stopTimestamp,omitempty"`
 	VideoID        interface{} `json:"videoId"`
 }
 
@@ -25,11 +25,11 @@ type AddVideoPlaylistVideoRequest struct {
 }
 
 type AddVideoPlaylistVideo200ApplicationJSONVideoPlaylistElement struct {
-	ID *int64 `json:"id"`
+	ID *int64 `json:"id,omitempty"`
 }
 
 type AddVideoPlaylistVideo200ApplicationJSON struct {
-	VideoPlaylistElement *AddVideoPlaylistVideo200ApplicationJSONVideoPlaylistElement `json:"videoPlaylistElement"`
+	VideoPlaylistElement *AddVideoPlaylistVideo200ApplicationJSONVideoPlaylistElement `json:"videoPlaylistElement,omitempty"`
 }
 
 type AddVideoPlaylistVideoResponse struct {

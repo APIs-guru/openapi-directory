@@ -1,6 +1,6 @@
 package shared
 
 type DateRange struct {
-	From *string `json:"from"`
-	To   *string `json:"to"`
+	From *string `json:"from,omitempty"`
+	To   *string `json:"to,omitempty"`
 }

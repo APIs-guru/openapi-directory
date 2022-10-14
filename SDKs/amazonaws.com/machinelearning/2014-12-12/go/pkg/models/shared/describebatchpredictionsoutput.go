@@ -1,6 +1,6 @@
 package shared
 
 type DescribeBatchPredictionsOutput struct {
-	NextToken *string           `json:"NextToken"`
-	Results   []BatchPrediction `json:"Results"`
+	NextToken *string           `json:"NextToken,omitempty"`
+	Results   []BatchPrediction `json:"Results,omitempty"`
 }

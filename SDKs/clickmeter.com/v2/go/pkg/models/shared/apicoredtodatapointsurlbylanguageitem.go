@@ -1,6 +1,6 @@
 package shared
 
 type APICoreDtoDatapointsURLByLanguageItem struct {
-	LanguageCode *string `json:"languageCode"`
-	URL          *string `json:"url"`
+	LanguageCode *string `json:"languageCode,omitempty"`
+	URL          *string `json:"url,omitempty"`
 }

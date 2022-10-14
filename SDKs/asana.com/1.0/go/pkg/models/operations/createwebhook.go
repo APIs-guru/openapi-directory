@@ -10,7 +10,7 @@ type CreateWebhookQueryParams struct {
 }
 
 type CreateWebhookRequestBody struct {
-	Data *shared.WebhookRequest `json:"data"`
+	Data *shared.WebhookRequest `json:"data,omitempty"`
 }
 
 type CreateWebhookRequest struct {
@@ -19,7 +19,7 @@ type CreateWebhookRequest struct {
 }
 
 type CreateWebhook201ApplicationJSON struct {
-	Data *shared.WebhookResponse `json:"data"`
+	Data *shared.WebhookResponse `json:"data,omitempty"`
 }
 
 type CreateWebhookResponse struct {

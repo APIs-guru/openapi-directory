@@ -1,10 +1,10 @@
 package shared
 
 type Listener struct {
-	ConnectionPool   *VirtualNodeConnectionPool `json:"connectionPool"`
-	HealthCheck      *HealthCheckPolicy         `json:"healthCheck"`
-	OutlierDetection *OutlierDetection          `json:"outlierDetection"`
+	ConnectionPool   *VirtualNodeConnectionPool `json:"connectionPool,omitempty"`
+	HealthCheck      *HealthCheckPolicy         `json:"healthCheck,omitempty"`
+	OutlierDetection *OutlierDetection          `json:"outlierDetection,omitempty"`
 	PortMapping      PortMapping                `json:"portMapping"`
-	Timeout          *ListenerTimeout           `json:"timeout"`
-	TLS              *ListenerTLS               `json:"tls"`
+	Timeout          *ListenerTimeout           `json:"timeout,omitempty"`
+	TLS              *ListenerTLS               `json:"tls,omitempty"`
 }

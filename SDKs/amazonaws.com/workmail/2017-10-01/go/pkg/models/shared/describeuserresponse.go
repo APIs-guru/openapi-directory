@@ -5,12 +5,12 @@ import (
 )
 
 type DescribeUserResponse struct {
-	DisabledDate *time.Time       `json:"DisabledDate"`
-	DisplayName  *string          `json:"DisplayName"`
-	Email        *string          `json:"Email"`
-	EnabledDate  *time.Time       `json:"EnabledDate"`
-	Name         *string          `json:"Name"`
-	State        *EntityStateEnum `json:"State"`
-	UserID       *string          `json:"UserId"`
-	UserRole     *UserRoleEnum    `json:"UserRole"`
+	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
+	DisplayName  *string          `json:"DisplayName,omitempty"`
+	Email        *string          `json:"Email,omitempty"`
+	EnabledDate  *time.Time       `json:"EnabledDate,omitempty"`
+	Name         *string          `json:"Name,omitempty"`
+	State        *EntityStateEnum `json:"State,omitempty"`
+	UserID       *string          `json:"UserId,omitempty"`
+	UserRole     *UserRoleEnum    `json:"UserRole,omitempty"`
 }

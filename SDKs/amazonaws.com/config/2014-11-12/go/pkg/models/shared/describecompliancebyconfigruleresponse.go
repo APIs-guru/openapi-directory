@@ -1,6 +1,6 @@
 package shared
 
 type DescribeComplianceByConfigRuleResponse struct {
-	ComplianceByConfigRules []ComplianceByConfigRule `json:"ComplianceByConfigRules"`
-	NextToken               *string                  `json:"NextToken"`
+	ComplianceByConfigRules []ComplianceByConfigRule `json:"ComplianceByConfigRules,omitempty"`
+	NextToken               *string                  `json:"NextToken,omitempty"`
 }

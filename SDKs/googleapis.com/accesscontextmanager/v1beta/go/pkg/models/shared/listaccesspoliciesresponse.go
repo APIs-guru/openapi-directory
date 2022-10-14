@@ -1,6 +1,6 @@
 package shared
 
 type ListAccessPoliciesResponse struct {
-	AccessPolicies []AccessPolicy `json:"accessPolicies"`
-	NextPageToken  *string        `json:"nextPageToken"`
+	AccessPolicies []AccessPolicy `json:"accessPolicies,omitempty"`
+	NextPageToken  *string        `json:"nextPageToken,omitempty"`
 }

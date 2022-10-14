@@ -1,7 +1,7 @@
 package shared
 
 type CreateCollectdTimeSeriesRequest struct {
-	CollectdPayloads []CollectdPayload  `json:"collectdPayloads"`
-	CollectdVersion  *string            `json:"collectdVersion"`
-	Resource         *MonitoredResource `json:"resource"`
+	CollectdPayloads []CollectdPayload  `json:"collectdPayloads,omitempty"`
+	CollectdVersion  *string            `json:"collectdVersion,omitempty"`
+	Resource         *MonitoredResource `json:"resource,omitempty"`
 }

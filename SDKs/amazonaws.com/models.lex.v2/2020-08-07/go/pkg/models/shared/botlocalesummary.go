@@ -5,10 +5,10 @@ import (
 )
 
 type BotLocaleSummary struct {
-	BotLocaleStatus            *BotLocaleStatusEnum `json:"botLocaleStatus"`
-	Description                *string              `json:"description"`
-	LastBuildSubmittedDateTime *time.Time           `json:"lastBuildSubmittedDateTime"`
-	LastUpdatedDateTime        *time.Time           `json:"lastUpdatedDateTime"`
-	LocaleID                   *string              `json:"localeId"`
-	LocaleName                 *string              `json:"localeName"`
+	BotLocaleStatus            *BotLocaleStatusEnum `json:"botLocaleStatus,omitempty"`
+	Description                *string              `json:"description,omitempty"`
+	LastBuildSubmittedDateTime *time.Time           `json:"lastBuildSubmittedDateTime,omitempty"`
+	LastUpdatedDateTime        *time.Time           `json:"lastUpdatedDateTime,omitempty"`
+	LocaleID                   *string              `json:"localeId,omitempty"`
+	LocaleName                 *string              `json:"localeName,omitempty"`
 }

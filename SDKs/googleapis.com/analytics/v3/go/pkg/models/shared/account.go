@@ -5,22 +5,22 @@ import (
 )
 
 type AccountChildLink struct {
-	Href *string `json:"href"`
-	Type *string `json:"type"`
+	Href *string `json:"href,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type AccountPermissions struct {
-	Effective []string `json:"effective"`
+	Effective []string `json:"effective,omitempty"`
 }
 
 type Account struct {
-	ChildLink   *AccountChildLink   `json:"childLink"`
-	Created     *time.Time          `json:"created"`
-	ID          *string             `json:"id"`
-	Kind        *string             `json:"kind"`
-	Name        *string             `json:"name"`
-	Permissions *AccountPermissions `json:"permissions"`
-	SelfLink    *string             `json:"selfLink"`
-	Starred     *bool               `json:"starred"`
-	Updated     *time.Time          `json:"updated"`
+	ChildLink   *AccountChildLink   `json:"childLink,omitempty"`
+	Created     *time.Time          `json:"created,omitempty"`
+	ID          *string             `json:"id,omitempty"`
+	Kind        *string             `json:"kind,omitempty"`
+	Name        *string             `json:"name,omitempty"`
+	Permissions *AccountPermissions `json:"permissions,omitempty"`
+	SelfLink    *string             `json:"selfLink,omitempty"`
+	Starred     *bool               `json:"starred,omitempty"`
+	Updated     *time.Time          `json:"updated,omitempty"`
 }

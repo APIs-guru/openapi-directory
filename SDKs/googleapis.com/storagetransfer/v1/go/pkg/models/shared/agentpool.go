@@ -10,8 +10,8 @@ const (
 )
 
 type AgentPool struct {
-	BandwidthLimit *BandwidthLimit     `json:"bandwidthLimit"`
-	DisplayName    *string             `json:"displayName"`
-	Name           *string             `json:"name"`
-	State          *AgentPoolStateEnum `json:"state"`
+	BandwidthLimit *BandwidthLimit     `json:"bandwidthLimit,omitempty"`
+	DisplayName    *string             `json:"displayName,omitempty"`
+	Name           *string             `json:"name,omitempty"`
+	State          *AgentPoolStateEnum `json:"state,omitempty"`
 }

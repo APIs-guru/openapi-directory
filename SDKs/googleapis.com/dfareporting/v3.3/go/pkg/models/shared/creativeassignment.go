@@ -5,17 +5,17 @@ import (
 )
 
 type CreativeAssignment struct {
-	Active                     *bool                           `json:"active"`
-	ApplyEventTags             *bool                           `json:"applyEventTags"`
-	ClickThroughURL            *ClickThroughURL                `json:"clickThroughUrl"`
-	CompanionCreativeOverrides []CompanionClickThroughOverride `json:"companionCreativeOverrides"`
-	CreativeGroupAssignments   []CreativeGroupAssignment       `json:"creativeGroupAssignments"`
-	CreativeID                 *string                         `json:"creativeId"`
-	CreativeIDDimensionValue   *DimensionValue                 `json:"creativeIdDimensionValue"`
-	EndTime                    *time.Time                      `json:"endTime"`
-	RichMediaExitOverrides     []RichMediaExitOverride         `json:"richMediaExitOverrides"`
-	Sequence                   *int32                          `json:"sequence"`
-	SslCompliant               *bool                           `json:"sslCompliant"`
-	StartTime                  *time.Time                      `json:"startTime"`
-	Weight                     *int32                          `json:"weight"`
+	Active                     *bool                           `json:"active,omitempty"`
+	ApplyEventTags             *bool                           `json:"applyEventTags,omitempty"`
+	ClickThroughURL            *ClickThroughURL                `json:"clickThroughUrl,omitempty"`
+	CompanionCreativeOverrides []CompanionClickThroughOverride `json:"companionCreativeOverrides,omitempty"`
+	CreativeGroupAssignments   []CreativeGroupAssignment       `json:"creativeGroupAssignments,omitempty"`
+	CreativeID                 *string                         `json:"creativeId,omitempty"`
+	CreativeIDDimensionValue   *DimensionValue                 `json:"creativeIdDimensionValue,omitempty"`
+	EndTime                    *time.Time                      `json:"endTime,omitempty"`
+	RichMediaExitOverrides     []RichMediaExitOverride         `json:"richMediaExitOverrides,omitempty"`
+	Sequence                   *int32                          `json:"sequence,omitempty"`
+	SslCompliant               *bool                           `json:"sslCompliant,omitempty"`
+	StartTime                  *time.Time                      `json:"startTime,omitempty"`
+	Weight                     *int32                          `json:"weight,omitempty"`
 }

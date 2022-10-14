@@ -33,16 +33,16 @@ const (
 )
 
 type Listing struct {
-	BigqueryDataset *BigQueryDatasetSource  `json:"bigqueryDataset"`
-	Categories      []ListingCategoriesEnum `json:"categories"`
-	DataProvider    *DataProvider           `json:"dataProvider"`
-	Description     *string                 `json:"description"`
-	DisplayName     *string                 `json:"displayName"`
-	Documentation   *string                 `json:"documentation"`
-	Icon            *string                 `json:"icon"`
-	Name            *string                 `json:"name"`
-	PrimaryContact  *string                 `json:"primaryContact"`
-	Publisher       *Publisher              `json:"publisher"`
-	RequestAccess   *string                 `json:"requestAccess"`
-	State           *ListingStateEnum       `json:"state"`
+	BigqueryDataset *BigQueryDatasetSource  `json:"bigqueryDataset,omitempty"`
+	Categories      []ListingCategoriesEnum `json:"categories,omitempty"`
+	DataProvider    *DataProvider           `json:"dataProvider,omitempty"`
+	Description     *string                 `json:"description,omitempty"`
+	DisplayName     *string                 `json:"displayName,omitempty"`
+	Documentation   *string                 `json:"documentation,omitempty"`
+	Icon            *string                 `json:"icon,omitempty"`
+	Name            *string                 `json:"name,omitempty"`
+	PrimaryContact  *string                 `json:"primaryContact,omitempty"`
+	Publisher       *Publisher              `json:"publisher,omitempty"`
+	RequestAccess   *string                 `json:"requestAccess,omitempty"`
+	State           *ListingStateEnum       `json:"state,omitempty"`
 }

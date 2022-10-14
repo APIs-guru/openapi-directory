@@ -1,5 +1,5 @@
 package shared
 
 type MySQLSyncConfig struct {
-	InitialSyncFlags []SyncFlags `json:"initialSyncFlags"`
+	InitialSyncFlags []SyncFlags `json:"initialSyncFlags,omitempty"`
 }

@@ -1,12 +1,12 @@
 package shared
 
 type Glossary struct {
-	DisplayName      *string              `json:"displayName"`
-	EndTime          *string              `json:"endTime"`
-	EntryCount       *int32               `json:"entryCount"`
-	InputConfig      *GlossaryInputConfig `json:"inputConfig"`
-	LanguageCodesSet *LanguageCodesSet    `json:"languageCodesSet"`
-	LanguagePair     *LanguageCodePair    `json:"languagePair"`
-	Name             *string              `json:"name"`
-	SubmitTime       *string              `json:"submitTime"`
+	DisplayName      *string              `json:"displayName,omitempty"`
+	EndTime          *string              `json:"endTime,omitempty"`
+	EntryCount       *int32               `json:"entryCount,omitempty"`
+	InputConfig      *GlossaryInputConfig `json:"inputConfig,omitempty"`
+	LanguageCodesSet *LanguageCodesSet    `json:"languageCodesSet,omitempty"`
+	LanguagePair     *LanguageCodePair    `json:"languagePair,omitempty"`
+	Name             *string              `json:"name,omitempty"`
+	SubmitTime       *string              `json:"submitTime,omitempty"`
 }

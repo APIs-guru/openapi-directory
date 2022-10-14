@@ -15,13 +15,13 @@ type BatchExecuteStatementHeaders struct {
 }
 
 type BatchExecuteStatementRequestBody struct {
-	Database      *string                 `json:"database"`
-	ParameterSets [][]shared.SQLParameter `json:"parameterSets"`
+	Database      *string                 `json:"database,omitempty"`
+	ParameterSets [][]shared.SQLParameter `json:"parameterSets,omitempty"`
 	ResourceArn   string                  `json:"resourceArn"`
-	Schema        *string                 `json:"schema"`
+	Schema        *string                 `json:"schema,omitempty"`
 	SecretArn     string                  `json:"secretArn"`
 	SQL           string                  `json:"sql"`
-	TransactionID *string                 `json:"transactionId"`
+	TransactionID *string                 `json:"transactionId,omitempty"`
 }
 
 type BatchExecuteStatementRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type RetryJobRequest struct {
-	JobID   *string `json:"jobId"`
-	PhaseID *string `json:"phaseId"`
+	JobID   *string `json:"jobId,omitempty"`
+	PhaseID *string `json:"phaseId,omitempty"`
 }

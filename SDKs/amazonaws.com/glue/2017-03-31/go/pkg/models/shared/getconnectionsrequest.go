@@ -1,9 +1,9 @@
 package shared
 
 type GetConnectionsRequest struct {
-	CatalogID    *string               `json:"CatalogId"`
-	Filter       *GetConnectionsFilter `json:"Filter"`
-	HidePassword *bool                 `json:"HidePassword"`
-	MaxResults   *int64                `json:"MaxResults"`
-	NextToken    *string               `json:"NextToken"`
+	CatalogID    *string               `json:"CatalogId,omitempty"`
+	Filter       *GetConnectionsFilter `json:"Filter,omitempty"`
+	HidePassword *bool                 `json:"HidePassword,omitempty"`
+	MaxResults   *int64                `json:"MaxResults,omitempty"`
+	NextToken    *string               `json:"NextToken,omitempty"`
 }

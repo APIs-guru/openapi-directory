@@ -10,5 +10,5 @@ const (
 )
 
 type DriveFolder struct {
-	Type *DriveFolderTypeEnum `json:"type"`
+	Type *DriveFolderTypeEnum `json:"type,omitempty"`
 }

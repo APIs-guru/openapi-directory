@@ -1,10 +1,10 @@
 package shared
 
 type UpdateBackendAPIResponse struct {
-	AppID                  *string `json:"AppId"`
-	BackendEnvironmentName *string `json:"BackendEnvironmentName"`
-	Error                  *string `json:"Error"`
-	JobID                  *string `json:"JobId"`
-	Operation              *string `json:"Operation"`
-	Status                 *string `json:"Status"`
+	AppID                  *string `json:"AppId,omitempty"`
+	BackendEnvironmentName *string `json:"BackendEnvironmentName,omitempty"`
+	Error                  *string `json:"Error,omitempty"`
+	JobID                  *string `json:"JobId,omitempty"`
+	Operation              *string `json:"Operation,omitempty"`
+	Status                 *string `json:"Status,omitempty"`
 }

@@ -5,6 +5,6 @@ import (
 )
 
 type GetRelationalDatabaseMasterUserPasswordResult struct {
-	CreatedAt          *time.Time `json:"createdAt"`
-	MasterUserPassword *string    `json:"masterUserPassword"`
+	CreatedAt          *time.Time `json:"createdAt,omitempty"`
+	MasterUserPassword *string    `json:"masterUserPassword,omitempty"`
 }

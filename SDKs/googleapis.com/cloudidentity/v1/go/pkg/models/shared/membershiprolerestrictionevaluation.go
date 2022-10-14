@@ -11,5 +11,5 @@ const (
 )
 
 type MembershipRoleRestrictionEvaluation struct {
-	State *MembershipRoleRestrictionEvaluationStateEnum `json:"state"`
+	State *MembershipRoleRestrictionEvaluationStateEnum `json:"state,omitempty"`
 }

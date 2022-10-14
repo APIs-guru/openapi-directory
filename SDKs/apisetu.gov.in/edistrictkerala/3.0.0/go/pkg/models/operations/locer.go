@@ -17,8 +17,8 @@ const (
 )
 
 type LocerRequestBody struct {
-	CertificateParameters *LocerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *LocerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                LocerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Locer400ApplicationJSON struct {
-	Error            *Locer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Locer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Locer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Locer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Locer401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Locer401ApplicationJSON struct {
-	Error            *Locer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Locer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Locer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Locer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Locer404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Locer404ApplicationJSON struct {
-	Error            *Locer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Locer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Locer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Locer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Locer500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Locer500ApplicationJSON struct {
-	Error            *Locer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Locer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Locer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Locer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Locer502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Locer502ApplicationJSON struct {
-	Error            *Locer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Locer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Locer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Locer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Locer503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Locer503ApplicationJSON struct {
-	Error            *Locer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Locer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Locer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Locer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Locer504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Locer504ApplicationJSON struct {
-	Error            *Locer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Locer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Locer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Locer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type LocerResponse struct {

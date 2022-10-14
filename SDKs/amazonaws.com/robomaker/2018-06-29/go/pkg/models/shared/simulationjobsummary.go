@@ -5,11 +5,11 @@ import (
 )
 
 type SimulationJobSummary struct {
-	Arn                        *string                  `json:"arn"`
-	DataSourceNames            []string                 `json:"dataSourceNames"`
-	LastUpdatedAt              *time.Time               `json:"lastUpdatedAt"`
-	Name                       *string                  `json:"name"`
-	RobotApplicationNames      []string                 `json:"robotApplicationNames"`
-	SimulationApplicationNames []string                 `json:"simulationApplicationNames"`
-	Status                     *SimulationJobStatusEnum `json:"status"`
+	Arn                        *string                  `json:"arn,omitempty"`
+	DataSourceNames            []string                 `json:"dataSourceNames,omitempty"`
+	LastUpdatedAt              *time.Time               `json:"lastUpdatedAt,omitempty"`
+	Name                       *string                  `json:"name,omitempty"`
+	RobotApplicationNames      []string                 `json:"robotApplicationNames,omitempty"`
+	SimulationApplicationNames []string                 `json:"simulationApplicationNames,omitempty"`
+	Status                     *SimulationJobStatusEnum `json:"status,omitempty"`
 }

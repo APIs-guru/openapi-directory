@@ -1,8 +1,8 @@
 package shared
 
 type CreatePipelineInput struct {
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	Name        string  `json:"name"`
-	Tags        []Tag   `json:"tags"`
+	Tags        []Tag   `json:"tags,omitempty"`
 	UniqueID    string  `json:"uniqueId"`
 }

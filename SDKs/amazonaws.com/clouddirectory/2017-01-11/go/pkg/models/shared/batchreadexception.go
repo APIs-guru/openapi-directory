@@ -1,6 +1,6 @@
 package shared
 
 type BatchReadException struct {
-	Message *string                     `json:"Message"`
-	Type    *BatchReadExceptionTypeEnum `json:"Type"`
+	Message *string                     `json:"Message,omitempty"`
+	Type    *BatchReadExceptionTypeEnum `json:"Type,omitempty"`
 }

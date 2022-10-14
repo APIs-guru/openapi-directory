@@ -13,6 +13,6 @@ const (
 )
 
 type TargetingExpansionConfig struct {
-	ExcludeFirstPartyAudience *bool                                                `json:"excludeFirstPartyAudience"`
-	TargetingExpansionLevel   *TargetingExpansionConfigTargetingExpansionLevelEnum `json:"targetingExpansionLevel"`
+	ExcludeFirstPartyAudience *bool                                                `json:"excludeFirstPartyAudience,omitempty"`
+	TargetingExpansionLevel   *TargetingExpansionConfigTargetingExpansionLevelEnum `json:"targetingExpansionLevel,omitempty"`
 }

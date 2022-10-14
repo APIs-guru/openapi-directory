@@ -15,8 +15,8 @@ type GenerateClientCertificateHeaders struct {
 }
 
 type GenerateClientCertificateRequestBody struct {
-	Description *string           `json:"description"`
-	Tags        map[string]string `json:"tags"`
+	Description *string           `json:"description,omitempty"`
+	Tags        map[string]string `json:"tags,omitempty"`
 }
 
 type GenerateClientCertificateRequest struct {

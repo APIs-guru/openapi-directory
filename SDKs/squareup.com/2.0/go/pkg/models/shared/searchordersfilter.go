@@ -1,9 +1,9 @@
 package shared
 
 type SearchOrdersFilter struct {
-	CustomerFilter    *SearchOrdersCustomerFilter    `json:"customer_filter"`
-	DateTimeFilter    *SearchOrdersDateTimeFilter    `json:"date_time_filter"`
-	FulfillmentFilter *SearchOrdersFulfillmentFilter `json:"fulfillment_filter"`
-	SourceFilter      *SearchOrdersSourceFilter      `json:"source_filter"`
-	StateFilter       *SearchOrdersStateFilter       `json:"state_filter"`
+	CustomerFilter    *SearchOrdersCustomerFilter    `json:"customer_filter,omitempty"`
+	DateTimeFilter    *SearchOrdersDateTimeFilter    `json:"date_time_filter,omitempty"`
+	FulfillmentFilter *SearchOrdersFulfillmentFilter `json:"fulfillment_filter,omitempty"`
+	SourceFilter      *SearchOrdersSourceFilter      `json:"source_filter,omitempty"`
+	StateFilter       *SearchOrdersStateFilter       `json:"state_filter,omitempty"`
 }

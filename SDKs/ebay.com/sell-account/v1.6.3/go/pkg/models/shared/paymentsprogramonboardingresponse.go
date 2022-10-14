@@ -1,6 +1,6 @@
 package shared
 
 type PaymentsProgramOnboardingResponse struct {
-	OnboardingStatus *string                          `json:"onboardingStatus"`
-	Steps            []PaymentsProgramOnboardingSteps `json:"steps"`
+	OnboardingStatus *string                          `json:"onboardingStatus,omitempty"`
+	Steps            []PaymentsProgramOnboardingSteps `json:"steps,omitempty"`
 }

@@ -32,12 +32,12 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest struct {
-	Action             []GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestActionEnum       `json:"action"`
-	ActorEmail         []string                                                                      `json:"actorEmail"`
-	EarliestChangeTime *string                                                                       `json:"earliestChangeTime"`
-	LatestChangeTime   *string                                                                       `json:"latestChangeTime"`
-	PageSize           *int32                                                                        `json:"pageSize"`
-	PageToken          *string                                                                       `json:"pageToken"`
-	Property           *string                                                                       `json:"property"`
-	ResourceType       []GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum `json:"resourceType"`
+	Action             []GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestActionEnum       `json:"action,omitempty"`
+	ActorEmail         []string                                                                      `json:"actorEmail,omitempty"`
+	EarliestChangeTime *string                                                                       `json:"earliestChangeTime,omitempty"`
+	LatestChangeTime   *string                                                                       `json:"latestChangeTime,omitempty"`
+	PageSize           *int32                                                                        `json:"pageSize,omitempty"`
+	PageToken          *string                                                                       `json:"pageToken,omitempty"`
+	Property           *string                                                                       `json:"property,omitempty"`
+	ResourceType       []GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequestResourceTypeEnum `json:"resourceType,omitempty"`
 }

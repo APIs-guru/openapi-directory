@@ -5,16 +5,16 @@ import (
 )
 
 type Trial struct {
-	CreatedBy               *UserContext                  `json:"CreatedBy"`
-	CreationTime            *time.Time                    `json:"CreationTime"`
-	DisplayName             *string                       `json:"DisplayName"`
-	ExperimentName          *string                       `json:"ExperimentName"`
-	LastModifiedBy          *UserContext                  `json:"LastModifiedBy"`
-	LastModifiedTime        *time.Time                    `json:"LastModifiedTime"`
-	MetadataProperties      *MetadataProperties           `json:"MetadataProperties"`
-	Source                  *TrialSource                  `json:"Source"`
-	Tags                    []Tag                         `json:"Tags"`
-	TrialArn                *string                       `json:"TrialArn"`
-	TrialComponentSummaries []TrialComponentSimpleSummary `json:"TrialComponentSummaries"`
-	TrialName               *string                       `json:"TrialName"`
+	CreatedBy               *UserContext                  `json:"CreatedBy,omitempty"`
+	CreationTime            *time.Time                    `json:"CreationTime,omitempty"`
+	DisplayName             *string                       `json:"DisplayName,omitempty"`
+	ExperimentName          *string                       `json:"ExperimentName,omitempty"`
+	LastModifiedBy          *UserContext                  `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime        *time.Time                    `json:"LastModifiedTime,omitempty"`
+	MetadataProperties      *MetadataProperties           `json:"MetadataProperties,omitempty"`
+	Source                  *TrialSource                  `json:"Source,omitempty"`
+	Tags                    []Tag                         `json:"Tags,omitempty"`
+	TrialArn                *string                       `json:"TrialArn,omitempty"`
+	TrialComponentSummaries []TrialComponentSimpleSummary `json:"TrialComponentSummaries,omitempty"`
+	TrialName               *string                       `json:"TrialName,omitempty"`
 }

@@ -5,14 +5,14 @@ import (
 )
 
 type BigOvenModelAPIRecipeNote struct {
-	CreationDate *time.Time `json:"CreationDate"`
-	Date         *string    `json:"Date"`
-	DateDt       *time.Time `json:"DateDT"`
-	GUID         *string    `json:"GUID"`
-	ID           *int32     `json:"ID"`
-	Notes        *string    `json:"Notes"`
-	People       *string    `json:"People"`
-	RecipeID     *int32     `json:"RecipeID"`
-	UserID       *int32     `json:"UserID"`
-	Variations   *string    `json:"Variations"`
+	CreationDate *time.Time `json:"CreationDate,omitempty"`
+	Date         *string    `json:"Date,omitempty"`
+	DateDt       *time.Time `json:"DateDT,omitempty"`
+	GUID         *string    `json:"GUID,omitempty"`
+	ID           *int32     `json:"ID,omitempty"`
+	Notes        *string    `json:"Notes,omitempty"`
+	People       *string    `json:"People,omitempty"`
+	RecipeID     *int32     `json:"RecipeID,omitempty"`
+	UserID       *int32     `json:"UserID,omitempty"`
+	Variations   *string    `json:"Variations,omitempty"`
 }

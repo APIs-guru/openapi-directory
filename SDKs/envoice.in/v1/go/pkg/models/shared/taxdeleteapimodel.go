@@ -1,5 +1,5 @@
 package shared
 
 type TaxDeleteAPIModel struct {
-	ID *int32 `json:"Id" form:"name=Id"`
+	ID *int32 `json:"Id,omitempty" form:"name=Id"`
 }

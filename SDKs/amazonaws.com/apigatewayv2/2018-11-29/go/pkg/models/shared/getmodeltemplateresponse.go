@@ -1,5 +1,5 @@
 package shared
 
 type GetModelTemplateResponse struct {
-	Value *string `json:"Value"`
+	Value *string `json:"Value,omitempty"`
 }

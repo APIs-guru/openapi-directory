@@ -29,7 +29,7 @@ type UpdateNodeBalancerConfigRequest struct {
 }
 
 type UpdateNodeBalancerConfigDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateNodeBalancerConfigResponse struct {

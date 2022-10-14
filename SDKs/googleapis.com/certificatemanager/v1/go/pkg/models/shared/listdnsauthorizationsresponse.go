@@ -1,7 +1,7 @@
 package shared
 
 type ListDNSAuthorizationsResponse struct {
-	DNSAuthorizations []DNSAuthorization `json:"dnsAuthorizations"`
-	NextPageToken     *string            `json:"nextPageToken"`
-	Unreachable       []string           `json:"unreachable"`
+	DNSAuthorizations []DNSAuthorization `json:"dnsAuthorizations,omitempty"`
+	NextPageToken     *string            `json:"nextPageToken,omitempty"`
+	Unreachable       []string           `json:"unreachable,omitempty"`
 }

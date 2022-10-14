@@ -39,7 +39,7 @@ const (
 type Os struct {
 	FullName    string     `json:"fullName"`
 	Name        OsNameEnum `json:"name"`
-	ServicePack *string    `json:"servicePack"`
+	ServicePack *string    `json:"servicePack,omitempty"`
 	Type        OsTypeEnum `json:"type"`
 	Version     string     `json:"version"`
 }

@@ -10,10 +10,10 @@ type OauthAuthorizationsGetOrCreateAuthorizationForAppPathParams struct {
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppRequestBody struct {
 	ClientSecret string   `json:"client_secret"`
-	Fingerprint  *string  `json:"fingerprint"`
-	Note         *string  `json:"note"`
-	NoteURL      *string  `json:"note_url"`
-	Scopes       []string `json:"scopes"`
+	Fingerprint  *string  `json:"fingerprint,omitempty"`
+	Note         *string  `json:"note,omitempty"`
+	NoteURL      *string  `json:"note_url,omitempty"`
+	Scopes       []string `json:"scopes,omitempty"`
 }
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppRequest struct {

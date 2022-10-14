@@ -15,6 +15,6 @@ const (
 )
 
 type RevocationDetails struct {
-	RevocationState *RevocationDetailsRevocationStateEnum `json:"revocationState"`
-	RevocationTime  *string                               `json:"revocationTime"`
+	RevocationState *RevocationDetailsRevocationStateEnum `json:"revocationState,omitempty"`
+	RevocationTime  *string                               `json:"revocationTime,omitempty"`
 }

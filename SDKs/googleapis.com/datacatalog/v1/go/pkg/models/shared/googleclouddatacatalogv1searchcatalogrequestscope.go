@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudDatacatalogV1SearchCatalogRequestScope struct {
-	IncludeGcpPublicDatasets  *bool    `json:"includeGcpPublicDatasets"`
-	IncludeOrgIds             []string `json:"includeOrgIds"`
-	IncludeProjectIds         []string `json:"includeProjectIds"`
-	IncludePublicTagTemplates *bool    `json:"includePublicTagTemplates"`
-	RestrictedLocations       []string `json:"restrictedLocations"`
-	StarredOnly               *bool    `json:"starredOnly"`
+	IncludeGcpPublicDatasets  *bool    `json:"includeGcpPublicDatasets,omitempty"`
+	IncludeOrgIds             []string `json:"includeOrgIds,omitempty"`
+	IncludeProjectIds         []string `json:"includeProjectIds,omitempty"`
+	IncludePublicTagTemplates *bool    `json:"includePublicTagTemplates,omitempty"`
+	RestrictedLocations       []string `json:"restrictedLocations,omitempty"`
+	StarredOnly               *bool    `json:"starredOnly,omitempty"`
 }

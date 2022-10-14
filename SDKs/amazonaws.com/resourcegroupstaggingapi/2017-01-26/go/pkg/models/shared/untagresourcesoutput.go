@@ -1,5 +1,5 @@
 package shared
 
 type UntagResourcesOutput struct {
-	FailedResourcesMap map[string]FailureInfo `json:"FailedResourcesMap"`
+	FailedResourcesMap map[string]FailureInfo `json:"FailedResourcesMap,omitempty"`
 }

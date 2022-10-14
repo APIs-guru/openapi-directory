@@ -10,14 +10,14 @@ type GetMonitorRelationsRequest struct {
 }
 
 type GetMonitorRelations200ApplicationJSONMonitor struct {
-	ID        *string `json:"id"`
-	MonitorID *string `json:"monitorId"`
-	Name      *string `json:"name"`
-	UpdatedAt *string `json:"updatedAt"`
+	ID        *string `json:"id,omitempty"`
+	MonitorID *string `json:"monitorId,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 type GetMonitorRelations200ApplicationJSON struct {
-	Monitor []GetMonitorRelations200ApplicationJSONMonitor `json:"monitor"`
+	Monitor []GetMonitorRelations200ApplicationJSONMonitor `json:"monitor,omitempty"`
 }
 
 type GetMonitorRelationsResponse struct {

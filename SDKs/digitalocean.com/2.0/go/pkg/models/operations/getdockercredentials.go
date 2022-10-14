@@ -14,21 +14,21 @@ type GetDockerCredentialsRequest struct {
 }
 
 type GetDockerCredentials200ApplicationJSONAuthsRegistryDigitaloceanCom struct {
-	Auth *string `json:"auth"`
+	Auth *string `json:"auth,omitempty"`
 }
 
 type GetDockerCredentials200ApplicationJSONAuths struct {
-	RegistryDigitaloceanCom *GetDockerCredentials200ApplicationJSONAuthsRegistryDigitaloceanCom `json:"registry.digitalocean.com"`
+	RegistryDigitaloceanCom *GetDockerCredentials200ApplicationJSONAuthsRegistryDigitaloceanCom `json:"registry.digitalocean.com,omitempty"`
 }
 
 type GetDockerCredentials200ApplicationJSON struct {
-	Auths *GetDockerCredentials200ApplicationJSONAuths `json:"auths"`
+	Auths *GetDockerCredentials200ApplicationJSONAuths `json:"auths,omitempty"`
 }
 
 type GetDockerCredentials401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetDockerCredentialsResponse struct {

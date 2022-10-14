@@ -9,8 +9,8 @@ const (
 )
 
 type Version struct {
-	AvailableFeatures []string         `json:"availableFeatures"`
-	DefaultVersion    *bool            `json:"defaultVersion"`
-	Type              *VersionTypeEnum `json:"type"`
-	VersionNumber     *string          `json:"versionNumber"`
+	AvailableFeatures []string         `json:"availableFeatures,omitempty"`
+	DefaultVersion    *bool            `json:"defaultVersion,omitempty"`
+	Type              *VersionTypeEnum `json:"type,omitempty"`
+	VersionNumber     *string          `json:"versionNumber,omitempty"`
 }

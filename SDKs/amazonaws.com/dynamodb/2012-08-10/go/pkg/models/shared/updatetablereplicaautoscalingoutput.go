@@ -1,5 +1,5 @@
 package shared
 
 type UpdateTableReplicaAutoScalingOutput struct {
-	TableAutoScalingDescription *TableAutoScalingDescription `json:"TableAutoScalingDescription"`
+	TableAutoScalingDescription *TableAutoScalingDescription `json:"TableAutoScalingDescription,omitempty"`
 }

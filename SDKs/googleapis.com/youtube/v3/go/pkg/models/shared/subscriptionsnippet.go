@@ -5,11 +5,11 @@ import (
 )
 
 type SubscriptionSnippet struct {
-	ChannelID    *string           `json:"channelId"`
-	ChannelTitle *string           `json:"channelTitle"`
-	Description  *string           `json:"description"`
-	PublishedAt  *time.Time        `json:"publishedAt"`
-	ResourceID   *ResourceID       `json:"resourceId"`
-	Thumbnails   *ThumbnailDetails `json:"thumbnails"`
-	Title        *string           `json:"title"`
+	ChannelID    *string           `json:"channelId,omitempty"`
+	ChannelTitle *string           `json:"channelTitle,omitempty"`
+	Description  *string           `json:"description,omitempty"`
+	PublishedAt  *time.Time        `json:"publishedAt,omitempty"`
+	ResourceID   *ResourceID       `json:"resourceId,omitempty"`
+	Thumbnails   *ThumbnailDetails `json:"thumbnails,omitempty"`
+	Title        *string           `json:"title,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type AcceleratorConfig struct {
-	AcceleratorCount           *string           `json:"acceleratorCount"`
-	AcceleratorType            *string           `json:"acceleratorType"`
-	GpuPartitionSize           *string           `json:"gpuPartitionSize"`
-	GpuSharingConfig           *GpuSharingConfig `json:"gpuSharingConfig"`
-	MaxTimeSharedClientsPerGpu *string           `json:"maxTimeSharedClientsPerGpu"`
+	AcceleratorCount           *string           `json:"acceleratorCount,omitempty"`
+	AcceleratorType            *string           `json:"acceleratorType,omitempty"`
+	GpuPartitionSize           *string           `json:"gpuPartitionSize,omitempty"`
+	GpuSharingConfig           *GpuSharingConfig `json:"gpuSharingConfig,omitempty"`
+	MaxTimeSharedClientsPerGpu *string           `json:"maxTimeSharedClientsPerGpu,omitempty"`
 }

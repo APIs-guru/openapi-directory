@@ -13,9 +13,9 @@ const (
 )
 
 type Job struct {
-	DeployJob map[string]interface{} `json:"deployJob"`
-	ID        *string                `json:"id"`
-	JobRun    *string                `json:"jobRun"`
-	State     *JobStateEnum          `json:"state"`
-	VerifyJob map[string]interface{} `json:"verifyJob"`
+	DeployJob map[string]interface{} `json:"deployJob,omitempty"`
+	ID        *string                `json:"id,omitempty"`
+	JobRun    *string                `json:"jobRun,omitempty"`
+	State     *JobStateEnum          `json:"state,omitempty"`
+	VerifyJob map[string]interface{} `json:"verifyJob,omitempty"`
 }

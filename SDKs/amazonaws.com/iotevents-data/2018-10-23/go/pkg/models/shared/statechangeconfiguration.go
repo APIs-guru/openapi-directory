@@ -1,5 +1,5 @@
 package shared
 
 type StateChangeConfiguration struct {
-	TriggerType *TriggerTypeEnum `json:"triggerType"`
+	TriggerType *TriggerTypeEnum `json:"triggerType,omitempty"`
 }

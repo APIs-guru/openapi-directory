@@ -1,22 +1,22 @@
 package shared
 
 type ImportContextBakImportOptionsEncryptionOptions struct {
-	CertPath    *string `json:"certPath"`
-	PvkPassword *string `json:"pvkPassword"`
-	PvkPath     *string `json:"pvkPath"`
+	CertPath    *string `json:"certPath,omitempty"`
+	PvkPassword *string `json:"pvkPassword,omitempty"`
+	PvkPath     *string `json:"pvkPath,omitempty"`
 }
 
 type ImportContextBakImportOptions struct {
-	EncryptionOptions *ImportContextBakImportOptionsEncryptionOptions `json:"encryptionOptions"`
+	EncryptionOptions *ImportContextBakImportOptionsEncryptionOptions `json:"encryptionOptions,omitempty"`
 }
 
 type ImportContextCsvImportOptions struct {
-	Columns            []string `json:"columns"`
-	EscapeCharacter    *string  `json:"escapeCharacter"`
-	FieldsTerminatedBy *string  `json:"fieldsTerminatedBy"`
-	LinesTerminatedBy  *string  `json:"linesTerminatedBy"`
-	QuoteCharacter     *string  `json:"quoteCharacter"`
-	Table              *string  `json:"table"`
+	Columns            []string `json:"columns,omitempty"`
+	EscapeCharacter    *string  `json:"escapeCharacter,omitempty"`
+	FieldsTerminatedBy *string  `json:"fieldsTerminatedBy,omitempty"`
+	LinesTerminatedBy  *string  `json:"linesTerminatedBy,omitempty"`
+	QuoteCharacter     *string  `json:"quoteCharacter,omitempty"`
+	Table              *string  `json:"table,omitempty"`
 }
 
 type ImportContextFileTypeEnum string
@@ -29,11 +29,11 @@ const (
 )
 
 type ImportContext struct {
-	BakImportOptions *ImportContextBakImportOptions `json:"bakImportOptions"`
-	CsvImportOptions *ImportContextCsvImportOptions `json:"csvImportOptions"`
-	Database         *string                        `json:"database"`
-	FileType         *ImportContextFileTypeEnum     `json:"fileType"`
-	ImportUser       *string                        `json:"importUser"`
-	Kind             *string                        `json:"kind"`
-	URI              *string                        `json:"uri"`
+	BakImportOptions *ImportContextBakImportOptions `json:"bakImportOptions,omitempty"`
+	CsvImportOptions *ImportContextCsvImportOptions `json:"csvImportOptions,omitempty"`
+	Database         *string                        `json:"database,omitempty"`
+	FileType         *ImportContextFileTypeEnum     `json:"fileType,omitempty"`
+	ImportUser       *string                        `json:"importUser,omitempty"`
+	Kind             *string                        `json:"kind,omitempty"`
+	URI              *string                        `json:"uri,omitempty"`
 }

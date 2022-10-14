@@ -1,7 +1,7 @@
 package shared
 
 type NewDiskInitializeParams struct {
-	DiskSizeGb  *string `json:"diskSizeGb"`
-	DiskType    *string `json:"diskType"`
-	SourceImage *string `json:"sourceImage"`
+	DiskSizeGb  *string `json:"diskSizeGb,omitempty"`
+	DiskType    *string `json:"diskType,omitempty"`
+	SourceImage *string `json:"sourceImage,omitempty"`
 }

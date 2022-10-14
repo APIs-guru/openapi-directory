@@ -17,8 +17,8 @@ type StartChangeSetHeaders struct {
 type StartChangeSetRequestBody struct {
 	Catalog            string          `json:"Catalog"`
 	ChangeSet          []shared.Change `json:"ChangeSet"`
-	ChangeSetName      *string         `json:"ChangeSetName"`
-	ClientRequestToken *string         `json:"ClientRequestToken"`
+	ChangeSetName      *string         `json:"ChangeSetName,omitempty"`
+	ClientRequestToken *string         `json:"ClientRequestToken,omitempty"`
 }
 
 type StartChangeSetRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowV2beta1IntentMessageListSelect struct {
-	Items    []GoogleCloudDialogflowV2beta1IntentMessageListSelectItem `json:"items"`
-	Subtitle *string                                                   `json:"subtitle"`
-	Title    *string                                                   `json:"title"`
+	Items    []GoogleCloudDialogflowV2beta1IntentMessageListSelectItem `json:"items,omitempty"`
+	Subtitle *string                                                   `json:"subtitle,omitempty"`
+	Title    *string                                                   `json:"title,omitempty"`
 }

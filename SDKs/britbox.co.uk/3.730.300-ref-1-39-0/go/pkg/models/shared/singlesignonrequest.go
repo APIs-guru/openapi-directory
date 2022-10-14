@@ -23,9 +23,9 @@ const (
 )
 
 type SingleSignOnRequest struct {
-	CookieType   *SingleSignOnRequestCookieTypeEnum `json:"cookieType"`
-	LinkAccounts *bool                              `json:"linkAccounts"`
+	CookieType   *SingleSignOnRequestCookieTypeEnum `json:"cookieType,omitempty"`
+	LinkAccounts *bool                              `json:"linkAccounts,omitempty"`
 	Provider     SingleSignOnRequestProviderEnum    `json:"provider"`
-	Scopes       []SingleSignOnRequestScopesEnum    `json:"scopes"`
+	Scopes       []SingleSignOnRequestScopesEnum    `json:"scopes,omitempty"`
 	Token        string                             `json:"token"`
 }

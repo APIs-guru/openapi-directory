@@ -13,5 +13,5 @@ const (
 )
 
 type GooglePrivacyDlpV2TimePartConfig struct {
-	PartToExtract *GooglePrivacyDlpV2TimePartConfigPartToExtractEnum `json:"partToExtract"`
+	PartToExtract *GooglePrivacyDlpV2TimePartConfigPartToExtractEnum `json:"partToExtract,omitempty"`
 }

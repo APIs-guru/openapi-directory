@@ -1,8 +1,8 @@
 package shared
 
 type Comment struct {
-	Assignment     *Assignment `json:"assignment"`
-	MentionedUsers []User      `json:"mentionedUsers"`
-	Post           *Post       `json:"post"`
-	Suggestion     *Suggestion `json:"suggestion"`
+	Assignment     *Assignment `json:"assignment,omitempty"`
+	MentionedUsers []User      `json:"mentionedUsers,omitempty"`
+	Post           *Post       `json:"post,omitempty"`
+	Suggestion     *Suggestion `json:"suggestion,omitempty"`
 }

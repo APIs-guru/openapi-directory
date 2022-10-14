@@ -20,14 +20,14 @@ type ListInsightsHeaders struct {
 }
 
 type ListInsightsRequestBodyStatusFilter struct {
-	Any     *shared.ListInsightsAnyStatusFilter     `json:"Any"`
-	Closed  *shared.ListInsightsClosedStatusFilter  `json:"Closed"`
-	Ongoing *shared.ListInsightsOngoingStatusFilter `json:"Ongoing"`
+	Any     *shared.ListInsightsAnyStatusFilter     `json:"Any,omitempty"`
+	Closed  *shared.ListInsightsClosedStatusFilter  `json:"Closed,omitempty"`
+	Ongoing *shared.ListInsightsOngoingStatusFilter `json:"Ongoing,omitempty"`
 }
 
 type ListInsightsRequestBody struct {
-	MaxResults   *int64                              `json:"MaxResults"`
-	NextToken    *string                             `json:"NextToken"`
+	MaxResults   *int64                              `json:"MaxResults,omitempty"`
+	NextToken    *string                             `json:"NextToken,omitempty"`
 	StatusFilter ListInsightsRequestBodyStatusFilter `json:"StatusFilter"`
 }
 

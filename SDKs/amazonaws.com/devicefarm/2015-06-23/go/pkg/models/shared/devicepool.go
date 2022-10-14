@@ -1,10 +1,10 @@
 package shared
 
 type DevicePool struct {
-	Arn         *string             `json:"arn"`
-	Description *string             `json:"description"`
-	MaxDevices  *int64              `json:"maxDevices"`
-	Name        *string             `json:"name"`
-	Rules       []Rule              `json:"rules"`
-	Type        *DevicePoolTypeEnum `json:"type"`
+	Arn         *string             `json:"arn,omitempty"`
+	Description *string             `json:"description,omitempty"`
+	MaxDevices  *int64              `json:"maxDevices,omitempty"`
+	Name        *string             `json:"name,omitempty"`
+	Rules       []Rule              `json:"rules,omitempty"`
+	Type        *DevicePoolTypeEnum `json:"type,omitempty"`
 }

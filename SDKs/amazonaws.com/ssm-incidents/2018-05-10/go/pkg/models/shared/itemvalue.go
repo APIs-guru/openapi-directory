@@ -1,7 +1,7 @@
 package shared
 
 type ItemValue struct {
-	Arn              *string `json:"arn"`
-	MetricDefinition *string `json:"metricDefinition"`
-	URL              *string `json:"url"`
+	Arn              *string `json:"arn,omitempty"`
+	MetricDefinition *string `json:"metricDefinition,omitempty"`
+	URL              *string `json:"url,omitempty"`
 }

@@ -1,17 +1,17 @@
 package shared
 
 type IdentitytoolkitRelyingpartyVerifyAssertionRequest struct {
-	AutoCreate             *bool   `json:"autoCreate"`
-	DelegatedProjectNumber *string `json:"delegatedProjectNumber"`
-	IDToken                *string `json:"idToken"`
-	InstanceID             *string `json:"instanceId"`
-	PendingIDToken         *string `json:"pendingIdToken"`
-	PostBody               *string `json:"postBody"`
-	RequestURI             *string `json:"requestUri"`
-	ReturnIdpCredential    *bool   `json:"returnIdpCredential"`
-	ReturnRefreshToken     *bool   `json:"returnRefreshToken"`
-	ReturnSecureToken      *bool   `json:"returnSecureToken"`
-	SessionID              *string `json:"sessionId"`
-	TenantID               *string `json:"tenantId"`
-	TenantProjectNumber    *string `json:"tenantProjectNumber"`
+	AutoCreate             *bool   `json:"autoCreate,omitempty"`
+	DelegatedProjectNumber *string `json:"delegatedProjectNumber,omitempty"`
+	IDToken                *string `json:"idToken,omitempty"`
+	InstanceID             *string `json:"instanceId,omitempty"`
+	PendingIDToken         *string `json:"pendingIdToken,omitempty"`
+	PostBody               *string `json:"postBody,omitempty"`
+	RequestURI             *string `json:"requestUri,omitempty"`
+	ReturnIdpCredential    *bool   `json:"returnIdpCredential,omitempty"`
+	ReturnRefreshToken     *bool   `json:"returnRefreshToken,omitempty"`
+	ReturnSecureToken      *bool   `json:"returnSecureToken,omitempty"`
+	SessionID              *string `json:"sessionId,omitempty"`
+	TenantID               *string `json:"tenantId,omitempty"`
+	TenantProjectNumber    *string `json:"tenantProjectNumber,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type PutPartnerEventsResponse struct {
-	Entries          []PutPartnerEventsResultEntry `json:"Entries"`
-	FailedEntryCount *int64                        `json:"FailedEntryCount"`
+	Entries          []PutPartnerEventsResultEntry `json:"Entries,omitempty"`
+	FailedEntryCount *int64                        `json:"FailedEntryCount,omitempty"`
 }

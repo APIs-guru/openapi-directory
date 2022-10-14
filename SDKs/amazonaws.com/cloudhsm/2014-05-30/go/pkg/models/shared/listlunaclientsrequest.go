@@ -1,5 +1,5 @@
 package shared
 
 type ListLunaClientsRequest struct {
-	NextToken *string `json:"NextToken"`
+	NextToken *string `json:"NextToken,omitempty"`
 }

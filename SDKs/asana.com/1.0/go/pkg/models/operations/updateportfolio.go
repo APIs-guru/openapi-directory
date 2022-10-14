@@ -14,7 +14,7 @@ type UpdatePortfolioQueryParams struct {
 }
 
 type UpdatePortfolioRequestBody struct {
-	Data *shared.PortfolioRequest `json:"data"`
+	Data *shared.PortfolioRequest `json:"data,omitempty"`
 }
 
 type UpdatePortfolioRequest struct {
@@ -24,7 +24,7 @@ type UpdatePortfolioRequest struct {
 }
 
 type UpdatePortfolio200ApplicationJSON struct {
-	Data *shared.PortfolioResponse `json:"data"`
+	Data *shared.PortfolioResponse `json:"data,omitempty"`
 }
 
 type UpdatePortfolioResponse struct {

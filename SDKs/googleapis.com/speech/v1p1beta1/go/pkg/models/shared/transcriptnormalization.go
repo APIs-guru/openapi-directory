@@ -1,5 +1,5 @@
 package shared
 
 type TranscriptNormalization struct {
-	Entries []Entry `json:"entries"`
+	Entries []Entry `json:"entries,omitempty"`
 }

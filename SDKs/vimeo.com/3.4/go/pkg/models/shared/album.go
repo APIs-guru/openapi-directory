@@ -3,7 +3,7 @@ package shared
 type AlbumCustomLogoSizes struct {
 	Height             float64 `json:"height"`
 	Link               string  `json:"link"`
-	LinkWithPlayButton *string `json:"link_with_play_button"`
+	LinkWithPlayButton *string `json:"link_with_play_button,omitempty"`
 	Width              float64 `json:"width"`
 }
 
@@ -17,7 +17,7 @@ const (
 
 type AlbumCustomLogoPicture struct {
 	Active      bool                    `json:"active"`
-	Link        *string                 `json:"link"`
+	Link        *string                 `json:"link,omitempty"`
 	ResourceKey string                  `json:"resource_key"`
 	Sizes       []AlbumCustomLogoSizes  `json:"sizes"`
 	Type        AlbumCustomLogoTypeEnum `json:"type"`
@@ -80,7 +80,7 @@ const (
 )
 
 type AlbumPrivacy struct {
-	Password *string              `json:"password"`
+	Password *string              `json:"password,omitempty"`
 	View     AlbumPrivacyViewEnum `json:"view"`
 }
 

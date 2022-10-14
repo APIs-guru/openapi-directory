@@ -1,5 +1,5 @@
 package shared
 
 type VehicleRequest struct {
-	RegistrationNumber *string `json:"registrationNumber"`
+	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 }

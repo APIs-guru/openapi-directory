@@ -43,6 +43,6 @@ const (
 )
 
 type GoogleCloudVisionV1p2beta1FaceAnnotationLandmark struct {
-	Position *GoogleCloudVisionV1p2beta1Position                       `json:"position"`
-	Type     *GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkTypeEnum `json:"type"`
+	Position *GoogleCloudVisionV1p2beta1Position                       `json:"position,omitempty"`
+	Type     *GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkTypeEnum `json:"type,omitempty"`
 }

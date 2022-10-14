@@ -1,7 +1,7 @@
 package shared
 
 type StartActivityIntent struct {
-	Action     *string  `json:"action"`
-	Categories []string `json:"categories"`
-	URI        *string  `json:"uri"`
+	Action     *string  `json:"action,omitempty"`
+	Categories []string `json:"categories,omitempty"`
+	URI        *string  `json:"uri,omitempty"`
 }

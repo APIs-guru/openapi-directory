@@ -1,7 +1,7 @@
 package shared
 
 type UpdateTeamMemberResult struct {
-	ProjectRole         *string `json:"projectRole"`
-	RemoteAccessAllowed *bool   `json:"remoteAccessAllowed"`
-	UserArn             *string `json:"userArn"`
+	ProjectRole         *string `json:"projectRole,omitempty"`
+	RemoteAccessAllowed *bool   `json:"remoteAccessAllowed,omitempty"`
+	UserArn             *string `json:"userArn,omitempty"`
 }

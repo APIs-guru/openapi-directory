@@ -1,9 +1,9 @@
 package shared
 
 type Committee struct {
-	Category *string             `json:"category"`
-	House    *CommitteeHouseEnum `json:"house"`
-	ID       *int32              `json:"id"`
-	Name     *string             `json:"name"`
-	URL      *string             `json:"url"`
+	Category *string             `json:"category,omitempty"`
+	House    *CommitteeHouseEnum `json:"house,omitempty"`
+	ID       *int32              `json:"id,omitempty"`
+	Name     *string             `json:"name,omitempty"`
+	URL      *string             `json:"url,omitempty"`
 }

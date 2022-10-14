@@ -14,20 +14,20 @@ const (
 )
 
 type UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRules struct {
-	Comment  *string                                                              `json:"comment"`
+	Comment  *string                                                              `json:"comment,omitempty"`
 	DestCidr string                                                               `json:"destCidr"`
-	DestPort *string                                                              `json:"destPort"`
+	DestPort *string                                                              `json:"destPort,omitempty"`
 	Policy   string                                                               `json:"policy"`
-	Protocol *UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRulesProtocolEnum `json:"protocol"`
+	Protocol *UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRulesProtocolEnum `json:"protocol,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidVpnRequestBodySplitTunnel struct {
-	Enabled *bool                                                     `json:"enabled"`
-	Rules   []UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRules `json:"rules"`
+	Enabled *bool                                                     `json:"enabled,omitempty"`
+	Rules   []UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRules `json:"rules,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidVpnRequestBody struct {
-	SplitTunnel *UpdateNetworkWirelessSsidVpnRequestBodySplitTunnel `json:"splitTunnel"`
+	SplitTunnel *UpdateNetworkWirelessSsidVpnRequestBodySplitTunnel `json:"splitTunnel,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidVpnRequest struct {

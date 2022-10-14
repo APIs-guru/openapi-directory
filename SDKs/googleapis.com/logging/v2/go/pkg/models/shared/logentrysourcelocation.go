@@ -1,7 +1,7 @@
 package shared
 
 type LogEntrySourceLocation struct {
-	File     *string `json:"file"`
-	Function *string `json:"function"`
-	Line     *string `json:"line"`
+	File     *string `json:"file,omitempty"`
+	Function *string `json:"function,omitempty"`
+	Line     *string `json:"line,omitempty"`
 }

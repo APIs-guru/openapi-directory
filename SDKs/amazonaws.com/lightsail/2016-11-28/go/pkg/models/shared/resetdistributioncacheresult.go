@@ -5,7 +5,7 @@ import (
 )
 
 type ResetDistributionCacheResult struct {
-	CreateTime *time.Time `json:"createTime"`
-	Operation  *Operation `json:"operation"`
-	Status     *string    `json:"status"`
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	Operation  *Operation `json:"operation,omitempty"`
+	Status     *string    `json:"status,omitempty"`
 }

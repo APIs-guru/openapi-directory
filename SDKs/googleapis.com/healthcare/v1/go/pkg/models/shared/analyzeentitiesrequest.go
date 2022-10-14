@@ -9,6 +9,6 @@ const (
 )
 
 type AnalyzeEntitiesRequest struct {
-	DocumentContent      *string                                          `json:"documentContent"`
-	LicensedVocabularies []AnalyzeEntitiesRequestLicensedVocabulariesEnum `json:"licensedVocabularies"`
+	DocumentContent      *string                                          `json:"documentContent,omitempty"`
+	LicensedVocabularies []AnalyzeEntitiesRequestLicensedVocabulariesEnum `json:"licensedVocabularies,omitempty"`
 }

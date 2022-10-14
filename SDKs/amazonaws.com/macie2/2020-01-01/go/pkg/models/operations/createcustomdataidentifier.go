@@ -15,14 +15,14 @@ type CreateCustomDataIdentifierHeaders struct {
 }
 
 type CreateCustomDataIdentifierRequestBody struct {
-	ClientToken          *string           `json:"clientToken"`
-	Description          *string           `json:"description"`
-	IgnoreWords          []string          `json:"ignoreWords"`
-	Keywords             []string          `json:"keywords"`
-	MaximumMatchDistance *int64            `json:"maximumMatchDistance"`
-	Name                 *string           `json:"name"`
-	Regex                *string           `json:"regex"`
-	Tags                 map[string]string `json:"tags"`
+	ClientToken          *string           `json:"clientToken,omitempty"`
+	Description          *string           `json:"description,omitempty"`
+	IgnoreWords          []string          `json:"ignoreWords,omitempty"`
+	Keywords             []string          `json:"keywords,omitempty"`
+	MaximumMatchDistance *int64            `json:"maximumMatchDistance,omitempty"`
+	Name                 *string           `json:"name,omitempty"`
+	Regex                *string           `json:"regex,omitempty"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }
 
 type CreateCustomDataIdentifierRequest struct {

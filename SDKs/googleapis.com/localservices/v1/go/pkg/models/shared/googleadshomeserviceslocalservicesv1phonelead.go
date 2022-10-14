@@ -1,7 +1,7 @@
 package shared
 
 type GoogleAdsHomeservicesLocalservicesV1PhoneLead struct {
-	ChargedCallTimestamp                *string `json:"chargedCallTimestamp"`
-	ChargedConnectedCallDurationSeconds *string `json:"chargedConnectedCallDurationSeconds"`
-	ConsumerPhoneNumber                 *string `json:"consumerPhoneNumber"`
+	ChargedCallTimestamp                *string `json:"chargedCallTimestamp,omitempty"`
+	ChargedConnectedCallDurationSeconds *string `json:"chargedConnectedCallDurationSeconds,omitempty"`
+	ConsumerPhoneNumber                 *string `json:"consumerPhoneNumber,omitempty"`
 }

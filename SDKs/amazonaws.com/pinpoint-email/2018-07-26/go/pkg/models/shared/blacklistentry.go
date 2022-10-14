@@ -5,7 +5,7 @@ import (
 )
 
 type BlacklistEntry struct {
-	Description *string    `json:"Description"`
-	ListingTime *time.Time `json:"ListingTime"`
-	RblName     *string    `json:"RblName"`
+	Description *string    `json:"Description,omitempty"`
+	ListingTime *time.Time `json:"ListingTime,omitempty"`
+	RblName     *string    `json:"RblName,omitempty"`
 }

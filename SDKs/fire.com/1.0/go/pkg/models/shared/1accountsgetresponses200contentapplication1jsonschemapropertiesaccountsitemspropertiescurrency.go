@@ -8,6 +8,6 @@ const (
 )
 
 type OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency struct {
-	Code        *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrencyCodeEnum `json:"code"`
-	Description *string                                                                                                   `json:"description"`
+	Code        *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrencyCodeEnum `json:"code,omitempty"`
+	Description *string                                                                                                   `json:"description,omitempty"`
 }

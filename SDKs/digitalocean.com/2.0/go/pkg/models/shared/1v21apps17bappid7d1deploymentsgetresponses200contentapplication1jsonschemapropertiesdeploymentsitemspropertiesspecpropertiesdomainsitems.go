@@ -11,7 +11,7 @@ const (
 
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesDomainsItems struct {
 	Domain   string                                                                                                                                                            `json:"domain"`
-	Type     *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesDomainsItemsTypeEnum `json:"type"`
-	Wildcard *bool                                                                                                                                                             `json:"wildcard"`
-	Zone     *string                                                                                                                                                           `json:"zone"`
+	Type     *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesDomainsItemsTypeEnum `json:"type,omitempty"`
+	Wildcard *bool                                                                                                                                                             `json:"wildcard,omitempty"`
+	Zone     *string                                                                                                                                                           `json:"zone,omitempty"`
 }

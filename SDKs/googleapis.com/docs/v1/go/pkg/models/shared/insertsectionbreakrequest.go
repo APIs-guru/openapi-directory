@@ -9,7 +9,7 @@ const (
 )
 
 type InsertSectionBreakRequest struct {
-	EndOfSegmentLocation *EndOfSegmentLocation                     `json:"endOfSegmentLocation"`
-	Location             *Location                                 `json:"location"`
-	SectionType          *InsertSectionBreakRequestSectionTypeEnum `json:"sectionType"`
+	EndOfSegmentLocation *EndOfSegmentLocation                     `json:"endOfSegmentLocation,omitempty"`
+	Location             *Location                                 `json:"location,omitempty"`
+	SectionType          *InsertSectionBreakRequestSectionTypeEnum `json:"sectionType,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListTrialComponentsResponse struct {
-	NextToken               *string                 `json:"NextToken"`
-	TrialComponentSummaries []TrialComponentSummary `json:"TrialComponentSummaries"`
+	NextToken               *string                 `json:"NextToken,omitempty"`
+	TrialComponentSummaries []TrialComponentSummary `json:"TrialComponentSummaries,omitempty"`
 }

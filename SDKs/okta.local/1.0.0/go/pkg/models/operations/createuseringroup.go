@@ -5,15 +5,15 @@ type CreateUserInGroupQueryParams struct {
 }
 
 type CreateUserInGroupRequestBodyProfile struct {
-	Email     *string `json:"email"`
-	FirstName *string `json:"firstName"`
-	LastName  *string `json:"lastName"`
-	Login     *string `json:"login"`
+	Email     *string `json:"email,omitempty"`
+	FirstName *string `json:"firstName,omitempty"`
+	LastName  *string `json:"lastName,omitempty"`
+	Login     *string `json:"login,omitempty"`
 }
 
 type CreateUserInGroupRequestBody struct {
-	GroupIds []string                             `json:"groupIds"`
-	Profile  *CreateUserInGroupRequestBodyProfile `json:"profile"`
+	GroupIds []string                             `json:"groupIds,omitempty"`
+	Profile  *CreateUserInGroupRequestBodyProfile `json:"profile,omitempty"`
 }
 
 type CreateUserInGroupRequest struct {

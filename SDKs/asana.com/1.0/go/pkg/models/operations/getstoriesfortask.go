@@ -21,7 +21,7 @@ type GetStoriesForTaskRequest struct {
 }
 
 type GetStoriesForTask200ApplicationJSON struct {
-	Data *interface{} `json:"data"`
+	Data *interface{} `json:"data,omitempty"`
 }
 
 type GetStoriesForTaskResponse struct {

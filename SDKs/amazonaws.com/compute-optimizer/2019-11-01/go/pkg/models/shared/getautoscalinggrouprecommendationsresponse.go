@@ -1,7 +1,7 @@
 package shared
 
 type GetAutoScalingGroupRecommendationsResponse struct {
-	AutoScalingGroupRecommendations []AutoScalingGroupRecommendation `json:"autoScalingGroupRecommendations"`
-	Errors                          []GetRecommendationError         `json:"errors"`
-	NextToken                       *string                          `json:"nextToken"`
+	AutoScalingGroupRecommendations []AutoScalingGroupRecommendation `json:"autoScalingGroupRecommendations,omitempty"`
+	Errors                          []GetRecommendationError         `json:"errors,omitempty"`
+	NextToken                       *string                          `json:"nextToken,omitempty"`
 }

@@ -19,19 +19,19 @@ type DeleteAnnotationLayerPkAnnotationAnnotationIDRequest struct {
 }
 
 type DeleteAnnotationLayerPkAnnotationAnnotationID200ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotationAnnotationID404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotationAnnotationID422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotationAnnotationID500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteAnnotationLayerPkAnnotationAnnotationIDResponse struct {

@@ -1,14 +1,14 @@
 package shared
 
 type Process struct {
-	Args                  []string              `json:"args"`
-	ArgumentsTruncated    *bool                 `json:"argumentsTruncated"`
-	Binary                *File                 `json:"binary"`
-	EnvVariables          []EnvironmentVariable `json:"envVariables"`
-	EnvVariablesTruncated *bool                 `json:"envVariablesTruncated"`
-	Libraries             []File                `json:"libraries"`
-	Name                  *string               `json:"name"`
-	ParentPid             *string               `json:"parentPid"`
-	Pid                   *string               `json:"pid"`
-	Script                *File                 `json:"script"`
+	Args                  []string              `json:"args,omitempty"`
+	ArgumentsTruncated    *bool                 `json:"argumentsTruncated,omitempty"`
+	Binary                *File                 `json:"binary,omitempty"`
+	EnvVariables          []EnvironmentVariable `json:"envVariables,omitempty"`
+	EnvVariablesTruncated *bool                 `json:"envVariablesTruncated,omitempty"`
+	Libraries             []File                `json:"libraries,omitempty"`
+	Name                  *string               `json:"name,omitempty"`
+	ParentPid             *string               `json:"parentPid,omitempty"`
+	Pid                   *string               `json:"pid,omitempty"`
+	Script                *File                 `json:"script,omitempty"`
 }

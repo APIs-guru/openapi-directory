@@ -1,5 +1,5 @@
 package shared
 
 type DimensionalityReductionMetrics struct {
-	TotalExplainedVarianceRatio *float64 `json:"totalExplainedVarianceRatio"`
+	TotalExplainedVarianceRatio *float64 `json:"totalExplainedVarianceRatio,omitempty"`
 }

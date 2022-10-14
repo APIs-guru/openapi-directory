@@ -1,7 +1,7 @@
 package shared
 
 type ListStreamsInput struct {
-	ExclusiveStartStreamArn *string `json:"ExclusiveStartStreamArn"`
-	Limit                   *int64  `json:"Limit"`
-	TableName               *string `json:"TableName"`
+	ExclusiveStartStreamArn *string `json:"ExclusiveStartStreamArn,omitempty"`
+	Limit                   *int64  `json:"Limit,omitempty"`
+	TableName               *string `json:"TableName,omitempty"`
 }

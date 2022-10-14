@@ -1,7 +1,7 @@
 package shared
 
 type ListKeysResponse struct {
-	Keys       []KeyListEntry `json:"Keys"`
-	NextMarker *string        `json:"NextMarker"`
-	Truncated  *bool          `json:"Truncated"`
+	Keys       []KeyListEntry `json:"Keys,omitempty"`
+	NextMarker *string        `json:"NextMarker,omitempty"`
+	Truncated  *bool          `json:"Truncated,omitempty"`
 }

@@ -8,11 +8,11 @@ const (
 )
 
 type InvoiceAttachment struct {
-	ID                 *int32                     `json:"Id"`
-	InvoiceID          *int32                     `json:"InvoiceId"`
-	Link               *string                    `json:"Link"`
-	ObfuscatedFileName *string                    `json:"ObfuscatedFileName"`
-	OriginalFileName   *string                    `json:"OriginalFileName"`
-	Size               *int64                     `json:"Size"`
-	Type               *InvoiceAttachmentTypeEnum `json:"Type"`
+	ID                 *int32                     `json:"Id,omitempty"`
+	InvoiceID          *int32                     `json:"InvoiceId,omitempty"`
+	Link               *string                    `json:"Link,omitempty"`
+	ObfuscatedFileName *string                    `json:"ObfuscatedFileName,omitempty"`
+	OriginalFileName   *string                    `json:"OriginalFileName,omitempty"`
+	Size               *int64                     `json:"Size,omitempty"`
+	Type               *InvoiceAttachmentTypeEnum `json:"Type,omitempty"`
 }

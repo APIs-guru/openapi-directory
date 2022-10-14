@@ -5,12 +5,12 @@ import (
 )
 
 type AnnotationRestAPIGetList struct {
-	ChangedBy               *Meta1       `json:"changed_by"`
-	ChangedOnDeltaHumanized *interface{} `json:"changed_on_delta_humanized"`
-	CreatedBy               *Meta        `json:"created_by"`
-	EndDttm                 *time.Time   `json:"end_dttm"`
-	ID                      *int32       `json:"id"`
-	LongDescr               *string      `json:"long_descr"`
-	ShortDescr              *string      `json:"short_descr"`
-	StartDttm               *time.Time   `json:"start_dttm"`
+	ChangedBy               *Meta1       `json:"changed_by,omitempty"`
+	ChangedOnDeltaHumanized *interface{} `json:"changed_on_delta_humanized,omitempty"`
+	CreatedBy               *Meta        `json:"created_by,omitempty"`
+	EndDttm                 *time.Time   `json:"end_dttm,omitempty"`
+	ID                      *int32       `json:"id,omitempty"`
+	LongDescr               *string      `json:"long_descr,omitempty"`
+	ShortDescr              *string      `json:"short_descr,omitempty"`
+	StartDttm               *time.Time   `json:"start_dttm,omitempty"`
 }

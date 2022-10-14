@@ -5,5 +5,5 @@ import (
 )
 
 type BillingGroupMetadata struct {
-	CreationDate *time.Time `json:"creationDate"`
+	CreationDate *time.Time `json:"creationDate,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListAssessmentsResponse struct {
-	AssessmentMetadata []AssessmentMetadataItem `json:"assessmentMetadata"`
-	NextToken          *string                  `json:"nextToken"`
+	AssessmentMetadata []AssessmentMetadataItem `json:"assessmentMetadata,omitempty"`
+	NextToken          *string                  `json:"nextToken,omitempty"`
 }

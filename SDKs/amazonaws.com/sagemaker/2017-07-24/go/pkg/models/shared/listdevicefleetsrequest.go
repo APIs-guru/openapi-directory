@@ -5,13 +5,13 @@ import (
 )
 
 type ListDeviceFleetsRequest struct {
-	CreationTimeAfter      *time.Time                  `json:"CreationTimeAfter"`
-	CreationTimeBefore     *time.Time                  `json:"CreationTimeBefore"`
-	LastModifiedTimeAfter  *time.Time                  `json:"LastModifiedTimeAfter"`
-	LastModifiedTimeBefore *time.Time                  `json:"LastModifiedTimeBefore"`
-	MaxResults             *int64                      `json:"MaxResults"`
-	NameContains           *string                     `json:"NameContains"`
-	NextToken              *string                     `json:"NextToken"`
-	SortBy                 *ListDeviceFleetsSortByEnum `json:"SortBy"`
-	SortOrder              *SortOrderEnum              `json:"SortOrder"`
+	CreationTimeAfter      *time.Time                  `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore     *time.Time                  `json:"CreationTimeBefore,omitempty"`
+	LastModifiedTimeAfter  *time.Time                  `json:"LastModifiedTimeAfter,omitempty"`
+	LastModifiedTimeBefore *time.Time                  `json:"LastModifiedTimeBefore,omitempty"`
+	MaxResults             *int64                      `json:"MaxResults,omitempty"`
+	NameContains           *string                     `json:"NameContains,omitempty"`
+	NextToken              *string                     `json:"NextToken,omitempty"`
+	SortBy                 *ListDeviceFleetsSortByEnum `json:"SortBy,omitempty"`
+	SortOrder              *SortOrderEnum              `json:"SortOrder,omitempty"`
 }

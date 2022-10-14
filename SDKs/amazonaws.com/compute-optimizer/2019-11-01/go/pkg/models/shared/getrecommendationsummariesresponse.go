@@ -1,6 +1,6 @@
 package shared
 
 type GetRecommendationSummariesResponse struct {
-	NextToken               *string                 `json:"nextToken"`
-	RecommendationSummaries []RecommendationSummary `json:"recommendationSummaries"`
+	NextToken               *string                 `json:"nextToken,omitempty"`
+	RecommendationSummaries []RecommendationSummary `json:"recommendationSummaries,omitempty"`
 }

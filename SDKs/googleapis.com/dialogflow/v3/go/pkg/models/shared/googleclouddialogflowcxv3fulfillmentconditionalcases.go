@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDialogflowCxV3FulfillmentConditionalCases struct {
-	Cases []GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase `json:"cases"`
+	Cases []GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase `json:"cases,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type AuditRefs struct {
-	Acronym        *string  `json:"acronym"`
-	Group          *string  `json:"group"`
-	ID             *string  `json:"id"`
-	RelevantAudits []string `json:"relevantAudits"`
-	Weight         *float64 `json:"weight"`
+	Acronym        *string  `json:"acronym,omitempty"`
+	Group          *string  `json:"group,omitempty"`
+	ID             *string  `json:"id,omitempty"`
+	RelevantAudits []string `json:"relevantAudits,omitempty"`
+	Weight         *float64 `json:"weight,omitempty"`
 }

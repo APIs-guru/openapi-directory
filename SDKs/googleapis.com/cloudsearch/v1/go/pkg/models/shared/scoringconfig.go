@@ -1,6 +1,6 @@
 package shared
 
 type ScoringConfig struct {
-	DisableFreshness       *bool `json:"disableFreshness"`
-	DisablePersonalization *bool `json:"disablePersonalization"`
+	DisableFreshness       *bool `json:"disableFreshness,omitempty"`
+	DisablePersonalization *bool `json:"disablePersonalization,omitempty"`
 }

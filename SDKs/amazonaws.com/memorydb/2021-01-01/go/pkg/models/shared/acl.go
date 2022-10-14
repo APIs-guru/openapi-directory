@@ -1,11 +1,11 @@
 package shared
 
 type ACL struct {
-	Arn                  *string            `json:"ARN"`
-	Clusters             []string           `json:"Clusters"`
-	MinimumEngineVersion *string            `json:"MinimumEngineVersion"`
-	Name                 *string            `json:"Name"`
-	PendingChanges       *ACLPendingChanges `json:"PendingChanges"`
-	Status               *string            `json:"Status"`
-	UserNames            []string           `json:"UserNames"`
+	Arn                  *string            `json:"ARN,omitempty"`
+	Clusters             []string           `json:"Clusters,omitempty"`
+	MinimumEngineVersion *string            `json:"MinimumEngineVersion,omitempty"`
+	Name                 *string            `json:"Name,omitempty"`
+	PendingChanges       *ACLPendingChanges `json:"PendingChanges,omitempty"`
+	Status               *string            `json:"Status,omitempty"`
+	UserNames            []string           `json:"UserNames,omitempty"`
 }

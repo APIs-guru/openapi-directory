@@ -1,7 +1,7 @@
 package shared
 
 type LaunchedInstance struct {
-	Ec2InstanceID *string        `json:"ec2InstanceID"`
-	FirstBoot     *FirstBootEnum `json:"firstBoot"`
-	JobID         *string        `json:"jobID"`
+	Ec2InstanceID *string        `json:"ec2InstanceID,omitempty"`
+	FirstBoot     *FirstBootEnum `json:"firstBoot,omitempty"`
+	JobID         *string        `json:"jobID,omitempty"`
 }

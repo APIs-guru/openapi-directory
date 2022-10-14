@@ -22,7 +22,7 @@ const (
 )
 
 type UpdateResourceCollectionRequestBodyResourceCollection struct {
-	CloudFormation *shared.UpdateCloudFormationCollectionFilter `json:"CloudFormation"`
+	CloudFormation *shared.UpdateCloudFormationCollectionFilter `json:"CloudFormation,omitempty"`
 }
 
 type UpdateResourceCollectionRequestBody struct {

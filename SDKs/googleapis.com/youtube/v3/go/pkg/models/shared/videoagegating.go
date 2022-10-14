@@ -10,7 +10,7 @@ const (
 )
 
 type VideoAgeGating struct {
-	AlcoholContent  *bool                              `json:"alcoholContent"`
-	Restricted      *bool                              `json:"restricted"`
-	VideoGameRating *VideoAgeGatingVideoGameRatingEnum `json:"videoGameRating"`
+	AlcoholContent  *bool                              `json:"alcoholContent,omitempty"`
+	Restricted      *bool                              `json:"restricted,omitempty"`
+	VideoGameRating *VideoAgeGatingVideoGameRatingEnum `json:"videoGameRating,omitempty"`
 }

@@ -15,7 +15,7 @@ type DeprecateThingTypeHeaders struct {
 }
 
 type DeprecateThingTypeRequestBody struct {
-	UndoDeprecate *bool `json:"undoDeprecate"`
+	UndoDeprecate *bool `json:"undoDeprecate,omitempty"`
 }
 
 type DeprecateThingTypeRequest struct {

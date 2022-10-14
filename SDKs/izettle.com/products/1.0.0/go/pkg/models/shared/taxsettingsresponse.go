@@ -16,7 +16,7 @@ const (
 )
 
 type TaxSettingsResponse struct {
-	OrganizationUUID *string                              `json:"organizationUuid"`
-	TaxationMode     *TaxSettingsResponseTaxationModeEnum `json:"taxationMode"`
-	TaxationType     *TaxSettingsResponseTaxationTypeEnum `json:"taxationType"`
+	OrganizationUUID *string                              `json:"organizationUuid,omitempty"`
+	TaxationMode     *TaxSettingsResponseTaxationModeEnum `json:"taxationMode,omitempty"`
+	TaxationType     *TaxSettingsResponseTaxationTypeEnum `json:"taxationType,omitempty"`
 }

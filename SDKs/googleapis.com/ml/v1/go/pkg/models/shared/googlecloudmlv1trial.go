@@ -11,14 +11,14 @@ const (
 )
 
 type GoogleCloudMlV1Trial struct {
-	ClientID         *string                         `json:"clientId"`
-	EndTime          *string                         `json:"endTime"`
-	FinalMeasurement *GoogleCloudMlV1Measurement     `json:"finalMeasurement"`
-	InfeasibleReason *string                         `json:"infeasibleReason"`
-	Measurements     []GoogleCloudMlV1Measurement    `json:"measurements"`
-	Name             *string                         `json:"name"`
-	Parameters       []GoogleCloudMlV1TrialParameter `json:"parameters"`
-	StartTime        *string                         `json:"startTime"`
-	State            *GoogleCloudMlV1TrialStateEnum  `json:"state"`
-	TrialInfeasible  *bool                           `json:"trialInfeasible"`
+	ClientID         *string                         `json:"clientId,omitempty"`
+	EndTime          *string                         `json:"endTime,omitempty"`
+	FinalMeasurement *GoogleCloudMlV1Measurement     `json:"finalMeasurement,omitempty"`
+	InfeasibleReason *string                         `json:"infeasibleReason,omitempty"`
+	Measurements     []GoogleCloudMlV1Measurement    `json:"measurements,omitempty"`
+	Name             *string                         `json:"name,omitempty"`
+	Parameters       []GoogleCloudMlV1TrialParameter `json:"parameters,omitempty"`
+	StartTime        *string                         `json:"startTime,omitempty"`
+	State            *GoogleCloudMlV1TrialStateEnum  `json:"state,omitempty"`
+	TrialInfeasible  *bool                           `json:"trialInfeasible,omitempty"`
 }

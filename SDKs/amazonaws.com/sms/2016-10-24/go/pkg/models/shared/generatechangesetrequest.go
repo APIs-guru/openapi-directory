@@ -1,6 +1,6 @@
 package shared
 
 type GenerateChangeSetRequest struct {
-	AppID           *string           `json:"appId"`
-	ChangesetFormat *OutputFormatEnum `json:"changesetFormat"`
+	AppID           *string           `json:"appId,omitempty"`
+	ChangesetFormat *OutputFormatEnum `json:"changesetFormat,omitempty"`
 }

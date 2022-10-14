@@ -1,5 +1,5 @@
 package shared
 
 type CreateAssessmentReportResponse struct {
-	AssessmentReport *AssessmentReport `json:"assessmentReport"`
+	AssessmentReport *AssessmentReport `json:"assessmentReport,omitempty"`
 }

@@ -17,6 +17,6 @@ type ConnectedApplication struct {
 	Name             string                                     `json:"name"`
 	ProductDataTypes []ConnectedApplicationProductDataTypesEnum `json:"product_data_types"`
 	ReasonForAccess  string                                     `json:"reason_for_access"`
-	RequestedScopes  *RequestedScopes                           `json:"requested_scopes"`
-	Scopes           map[string]interface{}                     `json:"scopes"`
+	RequestedScopes  *RequestedScopes                           `json:"requested_scopes,omitempty"`
+	Scopes           map[string]interface{}                     `json:"scopes,omitempty"`
 }

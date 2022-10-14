@@ -27,11 +27,11 @@ type GetLkeClusterKubeconfigRequest struct {
 }
 
 type GetLkeClusterKubeconfig200ApplicationJSON struct {
-	Kubeconfig *string `json:"kubeconfig"`
+	Kubeconfig *string `json:"kubeconfig,omitempty"`
 }
 
 type GetLkeClusterKubeconfigDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLkeClusterKubeconfigResponse struct {

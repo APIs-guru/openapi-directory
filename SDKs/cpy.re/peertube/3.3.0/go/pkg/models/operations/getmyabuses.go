@@ -22,8 +22,8 @@ type GetMyAbusesRequest struct {
 }
 
 type GetMyAbuses200ApplicationJSON struct {
-	Data  []interface{} `json:"data"`
-	Total *int64        `json:"total"`
+	Data  []interface{} `json:"data,omitempty"`
+	Total *int64        `json:"total,omitempty"`
 }
 
 type GetMyAbusesResponse struct {

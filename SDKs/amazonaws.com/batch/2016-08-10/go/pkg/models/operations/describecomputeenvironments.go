@@ -20,9 +20,9 @@ type DescribeComputeEnvironmentsHeaders struct {
 }
 
 type DescribeComputeEnvironmentsRequestBody struct {
-	ComputeEnvironments []string `json:"computeEnvironments"`
-	MaxResults          *int64   `json:"maxResults"`
-	NextToken           *string  `json:"nextToken"`
+	ComputeEnvironments []string `json:"computeEnvironments,omitempty"`
+	MaxResults          *int64   `json:"maxResults,omitempty"`
+	NextToken           *string  `json:"nextToken,omitempty"`
 }
 
 type DescribeComputeEnvironmentsRequest struct {

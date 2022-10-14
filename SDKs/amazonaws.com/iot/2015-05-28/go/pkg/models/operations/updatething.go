@@ -15,15 +15,15 @@ type UpdateThingHeaders struct {
 }
 
 type UpdateThingRequestBodyAttributePayload struct {
-	Attributes map[string]string `json:"attributes"`
-	Merge      *bool             `json:"merge"`
+	Attributes map[string]string `json:"attributes,omitempty"`
+	Merge      *bool             `json:"merge,omitempty"`
 }
 
 type UpdateThingRequestBody struct {
-	AttributePayload *UpdateThingRequestBodyAttributePayload `json:"attributePayload"`
-	ExpectedVersion  *int64                                  `json:"expectedVersion"`
-	RemoveThingType  *bool                                   `json:"removeThingType"`
-	ThingTypeName    *string                                 `json:"thingTypeName"`
+	AttributePayload *UpdateThingRequestBodyAttributePayload `json:"attributePayload,omitempty"`
+	ExpectedVersion  *int64                                  `json:"expectedVersion,omitempty"`
+	RemoveThingType  *bool                                   `json:"removeThingType,omitempty"`
+	ThingTypeName    *string                                 `json:"thingTypeName,omitempty"`
 }
 
 type UpdateThingRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListStepThumbnailsResponse struct {
-	NextPageToken *string `json:"nextPageToken"`
-	Thumbnails    []Image `json:"thumbnails"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	Thumbnails    []Image `json:"thumbnails,omitempty"`
 }

@@ -1,12 +1,12 @@
 package shared
 
 type DescribedExecution struct {
-	ExecutionID          *string               `json:"ExecutionId"`
-	ExecutionRole        *string               `json:"ExecutionRole"`
-	InitialFileLocation  *FileLocation         `json:"InitialFileLocation"`
-	LoggingConfiguration *LoggingConfiguration `json:"LoggingConfiguration"`
-	PosixProfile         *PosixProfile         `json:"PosixProfile"`
-	Results              *ExecutionResults     `json:"Results"`
-	ServiceMetadata      *ServiceMetadata      `json:"ServiceMetadata"`
-	Status               *ExecutionStatusEnum  `json:"Status"`
+	ExecutionID          *string               `json:"ExecutionId,omitempty"`
+	ExecutionRole        *string               `json:"ExecutionRole,omitempty"`
+	InitialFileLocation  *FileLocation         `json:"InitialFileLocation,omitempty"`
+	LoggingConfiguration *LoggingConfiguration `json:"LoggingConfiguration,omitempty"`
+	PosixProfile         *PosixProfile         `json:"PosixProfile,omitempty"`
+	Results              *ExecutionResults     `json:"Results,omitempty"`
+	ServiceMetadata      *ServiceMetadata      `json:"ServiceMetadata,omitempty"`
+	Status               *ExecutionStatusEnum  `json:"Status,omitempty"`
 }

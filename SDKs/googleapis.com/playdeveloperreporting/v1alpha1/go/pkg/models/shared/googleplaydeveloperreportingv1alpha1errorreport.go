@@ -9,8 +9,8 @@ const (
 )
 
 type GooglePlayDeveloperReportingV1alpha1ErrorReport struct {
-	Issue      *string                                                  `json:"issue"`
-	Name       *string                                                  `json:"name"`
-	ReportText *string                                                  `json:"reportText"`
-	Type       *GooglePlayDeveloperReportingV1alpha1ErrorReportTypeEnum `json:"type"`
+	Issue      *string                                                  `json:"issue,omitempty"`
+	Name       *string                                                  `json:"name,omitempty"`
+	ReportText *string                                                  `json:"reportText,omitempty"`
+	Type       *GooglePlayDeveloperReportingV1alpha1ErrorReportTypeEnum `json:"type,omitempty"`
 }

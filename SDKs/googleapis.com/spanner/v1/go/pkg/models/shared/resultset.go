@@ -1,7 +1,7 @@
 package shared
 
 type ResultSet struct {
-	Metadata *ResultSetMetadata `json:"metadata"`
-	Rows     [][]interface{}    `json:"rows"`
-	Stats    *ResultSetStats    `json:"stats"`
+	Metadata *ResultSetMetadata `json:"metadata,omitempty"`
+	Rows     [][]interface{}    `json:"rows,omitempty"`
+	Stats    *ResultSetStats    `json:"stats,omitempty"`
 }

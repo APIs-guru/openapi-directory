@@ -1,7 +1,7 @@
 package shared
 
 type LicenseSimple struct {
-	HTMLURL *string `json:"html_url"`
+	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`
 	Name    string  `json:"name"`
 	NodeID  string  `json:"node_id"`

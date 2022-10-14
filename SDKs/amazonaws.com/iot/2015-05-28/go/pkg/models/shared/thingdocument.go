@@ -1,11 +1,11 @@
 package shared
 
 type ThingDocument struct {
-	Attributes      map[string]string  `json:"attributes"`
-	Connectivity    *ThingConnectivity `json:"connectivity"`
-	Shadow          *string            `json:"shadow"`
-	ThingGroupNames []string           `json:"thingGroupNames"`
-	ThingID         *string            `json:"thingId"`
-	ThingName       *string            `json:"thingName"`
-	ThingTypeName   *string            `json:"thingTypeName"`
+	Attributes      map[string]string  `json:"attributes,omitempty"`
+	Connectivity    *ThingConnectivity `json:"connectivity,omitempty"`
+	Shadow          *string            `json:"shadow,omitempty"`
+	ThingGroupNames []string           `json:"thingGroupNames,omitempty"`
+	ThingID         *string            `json:"thingId,omitempty"`
+	ThingName       *string            `json:"thingName,omitempty"`
+	ThingTypeName   *string            `json:"thingTypeName,omitempty"`
 }

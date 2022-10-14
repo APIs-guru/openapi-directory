@@ -16,7 +16,7 @@ type DeleteObjectHeaders struct {
 }
 
 type DeleteObjectRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type DeleteObjectRequestBody struct {

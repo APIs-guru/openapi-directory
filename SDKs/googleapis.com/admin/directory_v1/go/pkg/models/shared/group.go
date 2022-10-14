@@ -1,14 +1,14 @@
 package shared
 
 type Group struct {
-	AdminCreated       *bool    `json:"adminCreated"`
-	Aliases            []string `json:"aliases"`
-	Description        *string  `json:"description"`
-	DirectMembersCount *string  `json:"directMembersCount"`
-	Email              *string  `json:"email"`
-	Etag               *string  `json:"etag"`
-	ID                 *string  `json:"id"`
-	Kind               *string  `json:"kind"`
-	Name               *string  `json:"name"`
-	NonEditableAliases []string `json:"nonEditableAliases"`
+	AdminCreated       *bool    `json:"adminCreated,omitempty"`
+	Aliases            []string `json:"aliases,omitempty"`
+	Description        *string  `json:"description,omitempty"`
+	DirectMembersCount *string  `json:"directMembersCount,omitempty"`
+	Email              *string  `json:"email,omitempty"`
+	Etag               *string  `json:"etag,omitempty"`
+	ID                 *string  `json:"id,omitempty"`
+	Kind               *string  `json:"kind,omitempty"`
+	Name               *string  `json:"name,omitempty"`
+	NonEditableAliases []string `json:"nonEditableAliases,omitempty"`
 }

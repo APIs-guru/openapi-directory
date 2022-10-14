@@ -8,7 +8,7 @@ type CreateNetworkWirelessSsidIdentityPskPathParams struct {
 type CreateNetworkWirelessSsidIdentityPskRequestBody struct {
 	GroupPolicyID string  `json:"groupPolicyId"`
 	Name          string  `json:"name"`
-	Passphrase    *string `json:"passphrase"`
+	Passphrase    *string `json:"passphrase,omitempty"`
 }
 
 type CreateNetworkWirelessSsidIdentityPskRequest struct {

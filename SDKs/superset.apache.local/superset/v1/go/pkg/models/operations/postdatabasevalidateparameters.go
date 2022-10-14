@@ -14,19 +14,19 @@ type PostDatabaseValidateParametersRequest struct {
 }
 
 type PostDatabaseValidateParameters200ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseValidateParameters400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseValidateParameters422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseValidateParameters500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDatabaseValidateParametersResponse struct {

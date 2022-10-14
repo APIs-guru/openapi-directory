@@ -1,6 +1,6 @@
 package shared
 
 type ClientConfig struct {
-	Node      *Node          `json:"node"`
-	XdsConfig []PerXdsConfig `json:"xdsConfig"`
+	Node      *Node          `json:"node,omitempty"`
+	XdsConfig []PerXdsConfig `json:"xdsConfig,omitempty"`
 }

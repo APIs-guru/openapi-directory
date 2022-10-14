@@ -1,6 +1,6 @@
 package shared
 
 type ListJobRunsResponse struct {
-	JobRuns   []JobRun `json:"jobRuns"`
-	NextToken *string  `json:"nextToken"`
+	JobRuns   []JobRun `json:"jobRuns,omitempty"`
+	NextToken *string  `json:"nextToken,omitempty"`
 }

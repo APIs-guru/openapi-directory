@@ -17,7 +17,7 @@ type DescribeAccountOverviewHeaders struct {
 
 type DescribeAccountOverviewRequestBody struct {
 	FromTime time.Time  `json:"FromTime"`
-	ToTime   *time.Time `json:"ToTime"`
+	ToTime   *time.Time `json:"ToTime,omitempty"`
 }
 
 type DescribeAccountOverviewRequest struct {

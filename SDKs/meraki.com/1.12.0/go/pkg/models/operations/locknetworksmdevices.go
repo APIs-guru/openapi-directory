@@ -5,11 +5,11 @@ type LockNetworkSmDevicesPathParams struct {
 }
 
 type LockNetworkSmDevicesRequestBody struct {
-	Ids      []string `json:"ids"`
-	Pin      *int64   `json:"pin"`
-	Scope    []string `json:"scope"`
-	Serials  []string `json:"serials"`
-	WifiMacs []string `json:"wifiMacs"`
+	Ids      []string `json:"ids,omitempty"`
+	Pin      *int64   `json:"pin,omitempty"`
+	Scope    []string `json:"scope,omitempty"`
+	Serials  []string `json:"serials,omitempty"`
+	WifiMacs []string `json:"wifiMacs,omitempty"`
 }
 
 type LockNetworkSmDevicesRequest struct {

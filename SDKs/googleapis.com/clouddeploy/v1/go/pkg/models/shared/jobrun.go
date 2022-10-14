@@ -10,15 +10,15 @@ const (
 )
 
 type JobRun struct {
-	CreateTime   *string          `json:"createTime"`
-	DeployJobRun *DeployJobRun    `json:"deployJobRun"`
-	EndTime      *string          `json:"endTime"`
-	Etag         *string          `json:"etag"`
-	JobID        *string          `json:"jobId"`
-	Name         *string          `json:"name"`
-	PhaseID      *string          `json:"phaseId"`
-	StartTime    *string          `json:"startTime"`
-	State        *JobRunStateEnum `json:"state"`
-	UID          *string          `json:"uid"`
-	VerifyJobRun *VerifyJobRun    `json:"verifyJobRun"`
+	CreateTime   *string          `json:"createTime,omitempty"`
+	DeployJobRun *DeployJobRun    `json:"deployJobRun,omitempty"`
+	EndTime      *string          `json:"endTime,omitempty"`
+	Etag         *string          `json:"etag,omitempty"`
+	JobID        *string          `json:"jobId,omitempty"`
+	Name         *string          `json:"name,omitempty"`
+	PhaseID      *string          `json:"phaseId,omitempty"`
+	StartTime    *string          `json:"startTime,omitempty"`
+	State        *JobRunStateEnum `json:"state,omitempty"`
+	UID          *string          `json:"uid,omitempty"`
+	VerifyJobRun *VerifyJobRun    `json:"verifyJobRun,omitempty"`
 }

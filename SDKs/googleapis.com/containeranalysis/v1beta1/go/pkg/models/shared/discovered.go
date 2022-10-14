@@ -21,10 +21,10 @@ const (
 )
 
 type Discovered struct {
-	AnalysisCompleted   *AnalysisCompleted                `json:"analysisCompleted"`
-	AnalysisError       []Status                          `json:"analysisError"`
-	AnalysisStatus      *DiscoveredAnalysisStatusEnum     `json:"analysisStatus"`
-	AnalysisStatusError *Status                           `json:"analysisStatusError"`
-	ContinuousAnalysis  *DiscoveredContinuousAnalysisEnum `json:"continuousAnalysis"`
-	LastAnalysisTime    *string                           `json:"lastAnalysisTime"`
+	AnalysisCompleted   *AnalysisCompleted                `json:"analysisCompleted,omitempty"`
+	AnalysisError       []Status                          `json:"analysisError,omitempty"`
+	AnalysisStatus      *DiscoveredAnalysisStatusEnum     `json:"analysisStatus,omitempty"`
+	AnalysisStatusError *Status                           `json:"analysisStatusError,omitempty"`
+	ContinuousAnalysis  *DiscoveredContinuousAnalysisEnum `json:"continuousAnalysis,omitempty"`
+	LastAnalysisTime    *string                           `json:"lastAnalysisTime,omitempty"`
 }

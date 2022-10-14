@@ -15,16 +15,16 @@ const (
 )
 
 type LogEntry struct {
-	HTTPRequest    *HTTPRequest            `json:"httpRequest"`
-	InsertID       *string                 `json:"insertId"`
-	Labels         map[string]string       `json:"labels"`
-	Name           *string                 `json:"name"`
-	Operation      *LogEntryOperation      `json:"operation"`
-	ProtoPayload   map[string]interface{}  `json:"protoPayload"`
-	Severity       *LogEntrySeverityEnum   `json:"severity"`
-	SourceLocation *LogEntrySourceLocation `json:"sourceLocation"`
-	StructPayload  map[string]interface{}  `json:"structPayload"`
-	TextPayload    *string                 `json:"textPayload"`
-	Timestamp      *string                 `json:"timestamp"`
-	Trace          *string                 `json:"trace"`
+	HTTPRequest    *HTTPRequest            `json:"httpRequest,omitempty"`
+	InsertID       *string                 `json:"insertId,omitempty"`
+	Labels         map[string]string       `json:"labels,omitempty"`
+	Name           *string                 `json:"name,omitempty"`
+	Operation      *LogEntryOperation      `json:"operation,omitempty"`
+	ProtoPayload   map[string]interface{}  `json:"protoPayload,omitempty"`
+	Severity       *LogEntrySeverityEnum   `json:"severity,omitempty"`
+	SourceLocation *LogEntrySourceLocation `json:"sourceLocation,omitempty"`
+	StructPayload  map[string]interface{}  `json:"structPayload,omitempty"`
+	TextPayload    *string                 `json:"textPayload,omitempty"`
+	Timestamp      *string                 `json:"timestamp,omitempty"`
+	Trace          *string                 `json:"trace,omitempty"`
 }

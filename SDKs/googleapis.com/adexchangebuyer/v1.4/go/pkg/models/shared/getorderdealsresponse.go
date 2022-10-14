@@ -1,5 +1,5 @@
 package shared
 
 type GetOrderDealsResponse struct {
-	Deals []MarketplaceDeal `json:"deals"`
+	Deals []MarketplaceDeal `json:"deals,omitempty"`
 }

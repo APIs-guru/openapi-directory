@@ -26,22 +26,22 @@ const (
 )
 
 type Breakpoint struct {
-	Action               *BreakpointActionEnum   `json:"action"`
-	CanaryExpireTime     *string                 `json:"canaryExpireTime"`
-	Condition            *string                 `json:"condition"`
-	CreateTime           *string                 `json:"createTime"`
-	EvaluatedExpressions []Variable              `json:"evaluatedExpressions"`
-	Expressions          []string                `json:"expressions"`
-	FinalTime            *string                 `json:"finalTime"`
-	ID                   *string                 `json:"id"`
-	IsFinalState         *bool                   `json:"isFinalState"`
-	Labels               map[string]string       `json:"labels"`
-	Location             *SourceLocation         `json:"location"`
-	LogLevel             *BreakpointLogLevelEnum `json:"logLevel"`
-	LogMessageFormat     *string                 `json:"logMessageFormat"`
-	StackFrames          []StackFrame            `json:"stackFrames"`
-	State                *BreakpointStateEnum    `json:"state"`
-	Status               *StatusMessage          `json:"status"`
-	UserEmail            *string                 `json:"userEmail"`
-	VariableTable        []Variable              `json:"variableTable"`
+	Action               *BreakpointActionEnum   `json:"action,omitempty"`
+	CanaryExpireTime     *string                 `json:"canaryExpireTime,omitempty"`
+	Condition            *string                 `json:"condition,omitempty"`
+	CreateTime           *string                 `json:"createTime,omitempty"`
+	EvaluatedExpressions []Variable              `json:"evaluatedExpressions,omitempty"`
+	Expressions          []string                `json:"expressions,omitempty"`
+	FinalTime            *string                 `json:"finalTime,omitempty"`
+	ID                   *string                 `json:"id,omitempty"`
+	IsFinalState         *bool                   `json:"isFinalState,omitempty"`
+	Labels               map[string]string       `json:"labels,omitempty"`
+	Location             *SourceLocation         `json:"location,omitempty"`
+	LogLevel             *BreakpointLogLevelEnum `json:"logLevel,omitempty"`
+	LogMessageFormat     *string                 `json:"logMessageFormat,omitempty"`
+	StackFrames          []StackFrame            `json:"stackFrames,omitempty"`
+	State                *BreakpointStateEnum    `json:"state,omitempty"`
+	Status               *StatusMessage          `json:"status,omitempty"`
+	UserEmail            *string                 `json:"userEmail,omitempty"`
+	VariableTable        []Variable              `json:"variableTable,omitempty"`
 }

@@ -1,14 +1,14 @@
 package shared
 
 type ListClosedWorkflowExecutionsInput struct {
-	CloseStatusFilter *CloseStatusFilter       `json:"closeStatusFilter"`
-	CloseTimeFilter   *ExecutionTimeFilter     `json:"closeTimeFilter"`
+	CloseStatusFilter *CloseStatusFilter       `json:"closeStatusFilter,omitempty"`
+	CloseTimeFilter   *ExecutionTimeFilter     `json:"closeTimeFilter,omitempty"`
 	Domain            string                   `json:"domain"`
-	ExecutionFilter   *WorkflowExecutionFilter `json:"executionFilter"`
-	MaximumPageSize   *int64                   `json:"maximumPageSize"`
-	NextPageToken     *string                  `json:"nextPageToken"`
-	ReverseOrder      *bool                    `json:"reverseOrder"`
-	StartTimeFilter   *ExecutionTimeFilter     `json:"startTimeFilter"`
-	TagFilter         *TagFilter               `json:"tagFilter"`
-	TypeFilter        *WorkflowTypeFilter      `json:"typeFilter"`
+	ExecutionFilter   *WorkflowExecutionFilter `json:"executionFilter,omitempty"`
+	MaximumPageSize   *int64                   `json:"maximumPageSize,omitempty"`
+	NextPageToken     *string                  `json:"nextPageToken,omitempty"`
+	ReverseOrder      *bool                    `json:"reverseOrder,omitempty"`
+	StartTimeFilter   *ExecutionTimeFilter     `json:"startTimeFilter,omitempty"`
+	TagFilter         *TagFilter               `json:"tagFilter,omitempty"`
+	TypeFilter        *WorkflowTypeFilter      `json:"typeFilter,omitempty"`
 }

@@ -19,21 +19,21 @@ const (
 )
 
 type ProductView struct {
-	AggregatedDestinationStatus *ProductViewAggregatedDestinationStatusEnum `json:"aggregatedDestinationStatus"`
-	Availability                *string                                     `json:"availability"`
-	Brand                       *string                                     `json:"brand"`
-	Channel                     *ProductViewChannelEnum                     `json:"channel"`
-	Condition                   *string                                     `json:"condition"`
-	CreationTime                *string                                     `json:"creationTime"`
-	CurrencyCode                *string                                     `json:"currencyCode"`
-	ExpirationDate              *Date                                       `json:"expirationDate"`
-	Gtin                        []string                                    `json:"gtin"`
-	ID                          *string                                     `json:"id"`
-	ItemGroupID                 *string                                     `json:"itemGroupId"`
-	ItemIssues                  []ProductViewItemIssue                      `json:"itemIssues"`
-	LanguageCode                *string                                     `json:"languageCode"`
-	OfferID                     *string                                     `json:"offerId"`
-	PriceMicros                 *string                                     `json:"priceMicros"`
-	ShippingLabel               *string                                     `json:"shippingLabel"`
-	Title                       *string                                     `json:"title"`
+	AggregatedDestinationStatus *ProductViewAggregatedDestinationStatusEnum `json:"aggregatedDestinationStatus,omitempty"`
+	Availability                *string                                     `json:"availability,omitempty"`
+	Brand                       *string                                     `json:"brand,omitempty"`
+	Channel                     *ProductViewChannelEnum                     `json:"channel,omitempty"`
+	Condition                   *string                                     `json:"condition,omitempty"`
+	CreationTime                *string                                     `json:"creationTime,omitempty"`
+	CurrencyCode                *string                                     `json:"currencyCode,omitempty"`
+	ExpirationDate              *Date                                       `json:"expirationDate,omitempty"`
+	Gtin                        []string                                    `json:"gtin,omitempty"`
+	ID                          *string                                     `json:"id,omitempty"`
+	ItemGroupID                 *string                                     `json:"itemGroupId,omitempty"`
+	ItemIssues                  []ProductViewItemIssue                      `json:"itemIssues,omitempty"`
+	LanguageCode                *string                                     `json:"languageCode,omitempty"`
+	OfferID                     *string                                     `json:"offerId,omitempty"`
+	PriceMicros                 *string                                     `json:"priceMicros,omitempty"`
+	ShippingLabel               *string                                     `json:"shippingLabel,omitempty"`
+	Title                       *string                                     `json:"title,omitempty"`
 }

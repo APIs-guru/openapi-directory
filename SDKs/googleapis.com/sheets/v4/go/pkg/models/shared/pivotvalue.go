@@ -30,10 +30,10 @@ const (
 )
 
 type PivotValue struct {
-	CalculatedDisplayType     *PivotValueCalculatedDisplayTypeEnum `json:"calculatedDisplayType"`
-	DataSourceColumnReference *DataSourceColumnReference           `json:"dataSourceColumnReference"`
-	Formula                   *string                              `json:"formula"`
-	Name                      *string                              `json:"name"`
-	SourceColumnOffset        *int32                               `json:"sourceColumnOffset"`
-	SummarizeFunction         *PivotValueSummarizeFunctionEnum     `json:"summarizeFunction"`
+	CalculatedDisplayType     *PivotValueCalculatedDisplayTypeEnum `json:"calculatedDisplayType,omitempty"`
+	DataSourceColumnReference *DataSourceColumnReference           `json:"dataSourceColumnReference,omitempty"`
+	Formula                   *string                              `json:"formula,omitempty"`
+	Name                      *string                              `json:"name,omitempty"`
+	SourceColumnOffset        *int32                               `json:"sourceColumnOffset,omitempty"`
+	SummarizeFunction         *PivotValueSummarizeFunctionEnum     `json:"summarizeFunction,omitempty"`
 }

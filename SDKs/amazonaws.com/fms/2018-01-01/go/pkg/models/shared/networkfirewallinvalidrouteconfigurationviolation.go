@@ -1,20 +1,20 @@
 package shared
 
 type NetworkFirewallInvalidRouteConfigurationViolation struct {
-	ActualFirewallEndpoint           *string         `json:"ActualFirewallEndpoint"`
-	ActualFirewallSubnetID           *string         `json:"ActualFirewallSubnetId"`
-	ActualFirewallSubnetRoutes       []Route         `json:"ActualFirewallSubnetRoutes"`
-	ActualInternetGatewayRoutes      []Route         `json:"ActualInternetGatewayRoutes"`
-	AffectedSubnets                  []string        `json:"AffectedSubnets"`
-	CurrentFirewallSubnetRouteTable  *string         `json:"CurrentFirewallSubnetRouteTable"`
-	CurrentInternetGatewayRouteTable *string         `json:"CurrentInternetGatewayRouteTable"`
-	ExpectedFirewallEndpoint         *string         `json:"ExpectedFirewallEndpoint"`
-	ExpectedFirewallSubnetID         *string         `json:"ExpectedFirewallSubnetId"`
-	ExpectedFirewallSubnetRoutes     []ExpectedRoute `json:"ExpectedFirewallSubnetRoutes"`
-	ExpectedInternetGatewayRoutes    []ExpectedRoute `json:"ExpectedInternetGatewayRoutes"`
-	InternetGatewayID                *string         `json:"InternetGatewayId"`
-	IsRouteTableUsedInDifferentAz    *bool           `json:"IsRouteTableUsedInDifferentAZ"`
-	RouteTableID                     *string         `json:"RouteTableId"`
-	ViolatingRoute                   *Route          `json:"ViolatingRoute"`
-	VpcID                            *string         `json:"VpcId"`
+	ActualFirewallEndpoint           *string         `json:"ActualFirewallEndpoint,omitempty"`
+	ActualFirewallSubnetID           *string         `json:"ActualFirewallSubnetId,omitempty"`
+	ActualFirewallSubnetRoutes       []Route         `json:"ActualFirewallSubnetRoutes,omitempty"`
+	ActualInternetGatewayRoutes      []Route         `json:"ActualInternetGatewayRoutes,omitempty"`
+	AffectedSubnets                  []string        `json:"AffectedSubnets,omitempty"`
+	CurrentFirewallSubnetRouteTable  *string         `json:"CurrentFirewallSubnetRouteTable,omitempty"`
+	CurrentInternetGatewayRouteTable *string         `json:"CurrentInternetGatewayRouteTable,omitempty"`
+	ExpectedFirewallEndpoint         *string         `json:"ExpectedFirewallEndpoint,omitempty"`
+	ExpectedFirewallSubnetID         *string         `json:"ExpectedFirewallSubnetId,omitempty"`
+	ExpectedFirewallSubnetRoutes     []ExpectedRoute `json:"ExpectedFirewallSubnetRoutes,omitempty"`
+	ExpectedInternetGatewayRoutes    []ExpectedRoute `json:"ExpectedInternetGatewayRoutes,omitempty"`
+	InternetGatewayID                *string         `json:"InternetGatewayId,omitempty"`
+	IsRouteTableUsedInDifferentAz    *bool           `json:"IsRouteTableUsedInDifferentAZ,omitempty"`
+	RouteTableID                     *string         `json:"RouteTableId,omitempty"`
+	ViolatingRoute                   *Route          `json:"ViolatingRoute,omitempty"`
+	VpcID                            *string         `json:"VpcId,omitempty"`
 }

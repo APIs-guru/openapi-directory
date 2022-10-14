@@ -1,6 +1,6 @@
 package shared
 
 type ApigatewayAuditConfig struct {
-	AuditLogConfigs []ApigatewayAuditLogConfig `json:"auditLogConfigs"`
-	Service         *string                    `json:"service"`
+	AuditLogConfigs []ApigatewayAuditLogConfig `json:"auditLogConfigs,omitempty"`
+	Service         *string                    `json:"service,omitempty"`
 }

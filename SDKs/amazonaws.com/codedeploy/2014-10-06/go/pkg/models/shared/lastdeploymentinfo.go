@@ -5,8 +5,8 @@ import (
 )
 
 type LastDeploymentInfo struct {
-	CreateTime   *time.Time            `json:"createTime"`
-	DeploymentID *string               `json:"deploymentId"`
-	EndTime      *time.Time            `json:"endTime"`
-	Status       *DeploymentStatusEnum `json:"status"`
+	CreateTime   *time.Time            `json:"createTime,omitempty"`
+	DeploymentID *string               `json:"deploymentId,omitempty"`
+	EndTime      *time.Time            `json:"endTime,omitempty"`
+	Status       *DeploymentStatusEnum `json:"status,omitempty"`
 }

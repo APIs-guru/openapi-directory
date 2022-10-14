@@ -1,5 +1,5 @@
 package shared
 
 type StackTrace struct {
-	Elements []StackTraceElement `json:"elements"`
+	Elements []StackTraceElement `json:"elements,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type TestInvokeAuthorizerResponse struct {
-	DisconnectAfterInSeconds *int64   `json:"disconnectAfterInSeconds"`
-	IsAuthenticated          *bool    `json:"isAuthenticated"`
-	PolicyDocuments          []string `json:"policyDocuments"`
-	PrincipalID              *string  `json:"principalId"`
-	RefreshAfterInSeconds    *int64   `json:"refreshAfterInSeconds"`
+	DisconnectAfterInSeconds *int64   `json:"disconnectAfterInSeconds,omitempty"`
+	IsAuthenticated          *bool    `json:"isAuthenticated,omitempty"`
+	PolicyDocuments          []string `json:"policyDocuments,omitempty"`
+	PrincipalID              *string  `json:"principalId,omitempty"`
+	RefreshAfterInSeconds    *int64   `json:"refreshAfterInSeconds,omitempty"`
 }

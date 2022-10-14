@@ -5,6 +5,6 @@ import (
 )
 
 type AuthorizationCodesSharedModelsCodeValidationModel struct {
-	ExpirationDate *time.Time `json:"ExpirationDate"`
-	IsValid        *bool      `json:"IsValid"`
+	ExpirationDate *time.Time `json:"ExpirationDate,omitempty"`
+	IsValid        *bool      `json:"IsValid,omitempty"`
 }

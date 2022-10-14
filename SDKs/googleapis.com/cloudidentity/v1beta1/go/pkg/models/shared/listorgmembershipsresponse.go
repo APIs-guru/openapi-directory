@@ -1,6 +1,6 @@
 package shared
 
 type ListOrgMembershipsResponse struct {
-	NextPageToken  *string         `json:"nextPageToken"`
-	OrgMemberships []OrgMembership `json:"orgMemberships"`
+	NextPageToken  *string         `json:"nextPageToken,omitempty"`
+	OrgMemberships []OrgMembership `json:"orgMemberships,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type StreamingComputationTask struct {
-	ComputationRanges []StreamingComputationRanges          `json:"computationRanges"`
-	DataDisks         []MountedDataDisk                     `json:"dataDisks"`
-	TaskType          *StreamingComputationTaskTaskTypeEnum `json:"taskType"`
+	ComputationRanges []StreamingComputationRanges          `json:"computationRanges,omitempty"`
+	DataDisks         []MountedDataDisk                     `json:"dataDisks,omitempty"`
+	TaskType          *StreamingComputationTaskTaskTypeEnum `json:"taskType,omitempty"`
 }

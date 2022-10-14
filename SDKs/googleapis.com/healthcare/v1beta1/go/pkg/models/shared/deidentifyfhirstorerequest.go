@@ -1,9 +1,9 @@
 package shared
 
 type DeidentifyFhirStoreRequest struct {
-	Config                *DeidentifyConfig `json:"config"`
-	DestinationStore      *string           `json:"destinationStore"`
-	GcsConfigURI          *string           `json:"gcsConfigUri"`
-	ResourceFilter        *FhirFilter       `json:"resourceFilter"`
-	SkipModifiedResources *bool             `json:"skipModifiedResources"`
+	Config                *DeidentifyConfig `json:"config,omitempty"`
+	DestinationStore      *string           `json:"destinationStore,omitempty"`
+	GcsConfigURI          *string           `json:"gcsConfigUri,omitempty"`
+	ResourceFilter        *FhirFilter       `json:"resourceFilter,omitempty"`
+	SkipModifiedResources *bool             `json:"skipModifiedResources,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type UpdateContainerServiceRequest struct {
-	IsDisabled        *bool                          `json:"isDisabled"`
-	Power             *ContainerServicePowerNameEnum `json:"power"`
-	PublicDomainNames map[string][]string            `json:"publicDomainNames"`
-	Scale             *int64                         `json:"scale"`
+	IsDisabled        *bool                          `json:"isDisabled,omitempty"`
+	Power             *ContainerServicePowerNameEnum `json:"power,omitempty"`
+	PublicDomainNames map[string][]string            `json:"publicDomainNames,omitempty"`
+	Scale             *int64                         `json:"scale,omitempty"`
 	ServiceName       string                         `json:"serviceName"`
 }

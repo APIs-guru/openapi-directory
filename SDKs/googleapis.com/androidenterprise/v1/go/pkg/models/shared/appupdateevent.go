@@ -1,5 +1,5 @@
 package shared
 
 type AppUpdateEvent struct {
-	ProductID *string `json:"productId"`
+	ProductID *string `json:"productId,omitempty"`
 }

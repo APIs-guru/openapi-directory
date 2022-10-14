@@ -13,7 +13,7 @@ type AddCustomFieldSettingForPortfolioQueryParams struct {
 }
 
 type AddCustomFieldSettingForPortfolioRequestBody struct {
-	Data *shared.AddCustomFieldSettingRequest `json:"data"`
+	Data *shared.AddCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
 type AddCustomFieldSettingForPortfolioRequest struct {
@@ -23,7 +23,7 @@ type AddCustomFieldSettingForPortfolioRequest struct {
 }
 
 type AddCustomFieldSettingForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddCustomFieldSettingForPortfolioResponse struct {

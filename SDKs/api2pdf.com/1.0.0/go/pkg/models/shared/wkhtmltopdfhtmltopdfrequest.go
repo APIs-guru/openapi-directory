@@ -1,8 +1,8 @@
 package shared
 
 type WkHTMLToPdfHTMLToPdfRequest struct {
-	FileName  *string                     `json:"fileName"`
+	FileName  *string                     `json:"fileName,omitempty"`
 	HTML      string                      `json:"html"`
-	InlinePdf *bool                       `json:"inlinePdf"`
-	Options   *WkHTMLToPdfAdvancedOptions `json:"options"`
+	InlinePdf *bool                       `json:"inlinePdf,omitempty"`
+	Options   *WkHTMLToPdfAdvancedOptions `json:"options,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type UpdateContainerAgentResponse struct {
-	ContainerInstance *ContainerInstance `json:"containerInstance"`
+	ContainerInstance *ContainerInstance `json:"containerInstance,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type Contact struct {
-	EmailAddress            *string           `json:"EmailAddress"`
-	LastUpdatedTimestamp    *time.Time        `json:"LastUpdatedTimestamp"`
-	TopicDefaultPreferences []TopicPreference `json:"TopicDefaultPreferences"`
-	TopicPreferences        []TopicPreference `json:"TopicPreferences"`
-	UnsubscribeAll          *bool             `json:"UnsubscribeAll"`
+	EmailAddress            *string           `json:"EmailAddress,omitempty"`
+	LastUpdatedTimestamp    *time.Time        `json:"LastUpdatedTimestamp,omitempty"`
+	TopicDefaultPreferences []TopicPreference `json:"TopicDefaultPreferences,omitempty"`
+	TopicPreferences        []TopicPreference `json:"TopicPreferences,omitempty"`
+	UnsubscribeAll          *bool             `json:"UnsubscribeAll,omitempty"`
 }

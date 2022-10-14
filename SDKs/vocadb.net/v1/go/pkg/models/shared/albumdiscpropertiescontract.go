@@ -8,8 +8,8 @@ const (
 )
 
 type AlbumDiscPropertiesContract struct {
-	DiscNumber *int32                                    `json:"discNumber"`
-	ID         *int32                                    `json:"id"`
-	MediaType  *AlbumDiscPropertiesContractMediaTypeEnum `json:"mediaType"`
-	Name       *string                                   `json:"name"`
+	DiscNumber *int32                                    `json:"discNumber,omitempty"`
+	ID         *int32                                    `json:"id,omitempty"`
+	MediaType  *AlbumDiscPropertiesContractMediaTypeEnum `json:"mediaType,omitempty"`
+	Name       *string                                   `json:"name,omitempty"`
 }

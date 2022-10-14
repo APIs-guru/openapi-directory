@@ -10,8 +10,8 @@ type TeamsUpdateDiscussionLegacyPathParams struct {
 }
 
 type TeamsUpdateDiscussionLegacyRequestBody struct {
-	Body  *string `json:"body"`
-	Title *string `json:"title"`
+	Body  *string `json:"body,omitempty"`
+	Title *string `json:"title,omitempty"`
 }
 
 type TeamsUpdateDiscussionLegacyRequest struct {

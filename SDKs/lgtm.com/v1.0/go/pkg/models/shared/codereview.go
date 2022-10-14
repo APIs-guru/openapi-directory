@@ -9,9 +9,9 @@ const (
 )
 
 type CodeReview struct {
-	ID            *string               `json:"id"`
-	Languages     []CodereviewLanguages `json:"languages"`
-	ResultsURL    *string               `json:"results-url"`
-	Status        *CodeReviewStatusEnum `json:"status"`
-	StatusMessage *string               `json:"status-message"`
+	ID            *string               `json:"id,omitempty"`
+	Languages     []CodereviewLanguages `json:"languages,omitempty"`
+	ResultsURL    *string               `json:"results-url,omitempty"`
+	Status        *CodeReviewStatusEnum `json:"status,omitempty"`
+	StatusMessage *string               `json:"status-message,omitempty"`
 }

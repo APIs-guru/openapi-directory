@@ -1,7 +1,7 @@
 package shared
 
 type SystemParameter struct {
-	HTTPHeader        *string `json:"httpHeader"`
-	Name              *string `json:"name"`
-	URLQueryParameter *string `json:"urlQueryParameter"`
+	HTTPHeader        *string `json:"httpHeader,omitempty"`
+	Name              *string `json:"name,omitempty"`
+	URLQueryParameter *string `json:"urlQueryParameter,omitempty"`
 }

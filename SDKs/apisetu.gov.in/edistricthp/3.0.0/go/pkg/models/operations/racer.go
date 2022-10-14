@@ -15,8 +15,8 @@ const (
 )
 
 type RacerRequestBody struct {
-	CertificateParameters *RacerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *RacerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                RacerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Racer400ApplicationJSON struct {
-	Error            *Racer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Racer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Racer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Racer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Racer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Racer401ApplicationJSON struct {
-	Error            *Racer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Racer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Racer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Racer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Racer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Racer404ApplicationJSON struct {
-	Error            *Racer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Racer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Racer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Racer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Racer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Racer500ApplicationJSON struct {
-	Error            *Racer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Racer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Racer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Racer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Racer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Racer502ApplicationJSON struct {
-	Error            *Racer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Racer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Racer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Racer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Racer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Racer503ApplicationJSON struct {
-	Error            *Racer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Racer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Racer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Racer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Racer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Racer504ApplicationJSON struct {
-	Error            *Racer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Racer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Racer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Racer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type RacerResponse struct {

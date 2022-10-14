@@ -5,6 +5,6 @@ import (
 )
 
 type SnapshotDefinition struct {
-	BaseTableReference *TableReference `json:"baseTableReference"`
-	SnapshotTime       *time.Time      `json:"snapshotTime"`
+	BaseTableReference *TableReference `json:"baseTableReference,omitempty"`
+	SnapshotTime       *time.Time      `json:"snapshotTime,omitempty"`
 }

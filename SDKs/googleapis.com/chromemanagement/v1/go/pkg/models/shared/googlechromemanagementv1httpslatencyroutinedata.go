@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleChromeManagementV1HTTPSLatencyRoutineData struct {
-	Latency *string                                                     `json:"latency"`
-	Problem *GoogleChromeManagementV1HTTPSLatencyRoutineDataProblemEnum `json:"problem"`
+	Latency *string                                                     `json:"latency,omitempty"`
+	Problem *GoogleChromeManagementV1HTTPSLatencyRoutineDataProblemEnum `json:"problem,omitempty"`
 }

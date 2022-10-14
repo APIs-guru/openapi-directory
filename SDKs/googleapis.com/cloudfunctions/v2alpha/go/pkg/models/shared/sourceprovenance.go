@@ -1,6 +1,6 @@
 package shared
 
 type SourceProvenance struct {
-	ResolvedRepoSource    *RepoSource    `json:"resolvedRepoSource"`
-	ResolvedStorageSource *StorageSource `json:"resolvedStorageSource"`
+	ResolvedRepoSource    *RepoSource    `json:"resolvedRepoSource,omitempty"`
+	ResolvedStorageSource *StorageSource `json:"resolvedStorageSource,omitempty"`
 }

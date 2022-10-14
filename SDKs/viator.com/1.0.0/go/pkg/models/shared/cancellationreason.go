@@ -1,6 +1,6 @@
 package shared
 
 type CancellationReason struct {
-	CancellationReasonCode *string `json:"cancellationReasonCode"`
-	CancellationReasonText *string `json:"cancellationReasonText"`
+	CancellationReasonCode *string `json:"cancellationReasonCode,omitempty"`
+	CancellationReasonText *string `json:"cancellationReasonText,omitempty"`
 }

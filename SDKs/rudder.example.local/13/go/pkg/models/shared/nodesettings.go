@@ -24,8 +24,8 @@ const (
 )
 
 type NodeSettings struct {
-	AgentKey   *AgentKey                   `json:"agentKey"`
-	PolicyMode *NodeSettingsPolicyModeEnum `json:"policyMode"`
-	Properties []NodeSettingsProperties    `json:"properties"`
-	State      *NodeSettingsStateEnum      `json:"state"`
+	AgentKey   *AgentKey                   `json:"agentKey,omitempty"`
+	PolicyMode *NodeSettingsPolicyModeEnum `json:"policyMode,omitempty"`
+	Properties []NodeSettingsProperties    `json:"properties,omitempty"`
+	State      *NodeSettingsStateEnum      `json:"state,omitempty"`
 }

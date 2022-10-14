@@ -1,6 +1,6 @@
 package shared
 
 type StreamingSideInputLocation struct {
-	StateFamily *string `json:"stateFamily"`
-	Tag         *string `json:"tag"`
+	StateFamily *string `json:"stateFamily,omitempty"`
+	Tag         *string `json:"tag,omitempty"`
 }

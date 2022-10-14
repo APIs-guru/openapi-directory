@@ -26,17 +26,17 @@ const (
 )
 
 type GetPayees200ApplicationJSONPayee struct {
-	AccountHolderName *string                                                                                                  `json:"accountHolderName"`
-	AccountName       *string                                                                                                  `json:"accountName"`
-	AccountNumber     *string                                                                                                  `json:"accountNumber"`
-	Bic               *string                                                                                                  `json:"bic"`
-	CreatedBy         *GetPayees200ApplicationJSONCreatedByEnum                                                                `json:"createdBy"`
-	Currency          *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency"`
-	DateCreated       *time.Time                                                                                               `json:"dateCreated"`
-	Iban              *string                                                                                                  `json:"iban"`
-	ID                *int64                                                                                                   `json:"id"`
-	Nsc               *string                                                                                                  `json:"nsc"`
-	Status            *GetPayees200ApplicationJSONStatusEnum                                                                   `json:"status"`
+	AccountHolderName *string                                                                                                  `json:"accountHolderName,omitempty"`
+	AccountName       *string                                                                                                  `json:"accountName,omitempty"`
+	AccountNumber     *string                                                                                                  `json:"accountNumber,omitempty"`
+	Bic               *string                                                                                                  `json:"bic,omitempty"`
+	CreatedBy         *GetPayees200ApplicationJSONCreatedByEnum                                                                `json:"createdBy,omitempty"`
+	Currency          *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
+	DateCreated       *time.Time                                                                                               `json:"dateCreated,omitempty"`
+	Iban              *string                                                                                                  `json:"iban,omitempty"`
+	ID                *int64                                                                                                   `json:"id,omitempty"`
+	Nsc               *string                                                                                                  `json:"nsc,omitempty"`
+	Status            *GetPayees200ApplicationJSONStatusEnum                                                                   `json:"status,omitempty"`
 }
 
 type GetPayeesResponse struct {

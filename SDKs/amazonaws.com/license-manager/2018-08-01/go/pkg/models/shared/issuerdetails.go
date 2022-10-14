@@ -1,7 +1,7 @@
 package shared
 
 type IssuerDetails struct {
-	KeyFingerprint *string `json:"KeyFingerprint"`
-	Name           *string `json:"Name"`
-	SignKey        *string `json:"SignKey"`
+	KeyFingerprint *string `json:"KeyFingerprint,omitempty"`
+	Name           *string `json:"Name,omitempty"`
+	SignKey        *string `json:"SignKey,omitempty"`
 }

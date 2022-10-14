@@ -13,9 +13,9 @@ const (
 )
 
 type Source struct {
-	Etag            *string          `json:"etag"`
-	ID              *string          `json:"id"`
-	ProfileMetadata *ProfileMetadata `json:"profileMetadata"`
-	Type            *SourceTypeEnum  `json:"type"`
-	UpdateTime      *string          `json:"updateTime"`
+	Etag            *string          `json:"etag,omitempty"`
+	ID              *string          `json:"id,omitempty"`
+	ProfileMetadata *ProfileMetadata `json:"profileMetadata,omitempty"`
+	Type            *SourceTypeEnum  `json:"type,omitempty"`
+	UpdateTime      *string          `json:"updateTime,omitempty"`
 }

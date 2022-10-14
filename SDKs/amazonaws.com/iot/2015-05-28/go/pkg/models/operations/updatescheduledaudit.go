@@ -40,10 +40,10 @@ const (
 )
 
 type UpdateScheduledAuditRequestBody struct {
-	DayOfMonth       *string                                       `json:"dayOfMonth"`
-	DayOfWeek        *UpdateScheduledAuditRequestBodyDayOfWeekEnum `json:"dayOfWeek"`
-	Frequency        *UpdateScheduledAuditRequestBodyFrequencyEnum `json:"frequency"`
-	TargetCheckNames []string                                      `json:"targetCheckNames"`
+	DayOfMonth       *string                                       `json:"dayOfMonth,omitempty"`
+	DayOfWeek        *UpdateScheduledAuditRequestBodyDayOfWeekEnum `json:"dayOfWeek,omitempty"`
+	Frequency        *UpdateScheduledAuditRequestBodyFrequencyEnum `json:"frequency,omitempty"`
+	TargetCheckNames []string                                      `json:"targetCheckNames,omitempty"`
 }
 
 type UpdateScheduledAuditRequest struct {

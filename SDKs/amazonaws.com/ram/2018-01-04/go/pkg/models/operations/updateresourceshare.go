@@ -15,9 +15,9 @@ type UpdateResourceShareHeaders struct {
 }
 
 type UpdateResourceShareRequestBody struct {
-	AllowExternalPrincipals *bool   `json:"allowExternalPrincipals"`
-	ClientToken             *string `json:"clientToken"`
-	Name                    *string `json:"name"`
+	AllowExternalPrincipals *bool   `json:"allowExternalPrincipals,omitempty"`
+	ClientToken             *string `json:"clientToken,omitempty"`
+	Name                    *string `json:"name,omitempty"`
 	ResourceShareArn        string  `json:"resourceShareArn"`
 }
 

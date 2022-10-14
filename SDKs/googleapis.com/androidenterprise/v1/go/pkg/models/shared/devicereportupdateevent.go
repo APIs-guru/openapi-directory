@@ -1,7 +1,7 @@
 package shared
 
 type DeviceReportUpdateEvent struct {
-	DeviceID *string       `json:"deviceId"`
-	Report   *DeviceReport `json:"report"`
-	UserID   *string       `json:"userId"`
+	DeviceID *string       `json:"deviceId,omitempty"`
+	Report   *DeviceReport `json:"report,omitempty"`
+	UserID   *string       `json:"userId,omitempty"`
 }

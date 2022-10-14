@@ -15,9 +15,9 @@ type UpdateAccountAuditConfigurationHeaders struct {
 }
 
 type UpdateAccountAuditConfigurationRequestBody struct {
-	AuditCheckConfigurations              map[string]shared.AuditCheckConfiguration `json:"auditCheckConfigurations"`
-	AuditNotificationTargetConfigurations map[string]shared.AuditNotificationTarget `json:"auditNotificationTargetConfigurations"`
-	RoleArn                               *string                                   `json:"roleArn"`
+	AuditCheckConfigurations              map[string]shared.AuditCheckConfiguration `json:"auditCheckConfigurations,omitempty"`
+	AuditNotificationTargetConfigurations map[string]shared.AuditNotificationTarget `json:"auditNotificationTargetConfigurations,omitempty"`
+	RoleArn                               *string                                   `json:"roleArn,omitempty"`
 }
 
 type UpdateAccountAuditConfigurationRequest struct {

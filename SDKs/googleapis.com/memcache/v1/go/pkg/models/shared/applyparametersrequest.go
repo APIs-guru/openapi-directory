@@ -1,6 +1,6 @@
 package shared
 
 type ApplyParametersRequest struct {
-	ApplyAll *bool    `json:"applyAll"`
-	NodeIds  []string `json:"nodeIds"`
+	ApplyAll *bool    `json:"applyAll,omitempty"`
+	NodeIds  []string `json:"nodeIds,omitempty"`
 }

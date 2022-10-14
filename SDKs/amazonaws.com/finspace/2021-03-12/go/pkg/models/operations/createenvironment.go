@@ -22,21 +22,21 @@ const (
 )
 
 type CreateEnvironmentRequestBodyFederationParameters struct {
-	ApplicationCallBackURL *string           `json:"applicationCallBackURL"`
-	AttributeMap           map[string]string `json:"attributeMap"`
-	FederationProviderName *string           `json:"federationProviderName"`
-	FederationUrn          *string           `json:"federationURN"`
-	SamlMetadataDocument   *string           `json:"samlMetadataDocument"`
-	SamlMetadataURL        *string           `json:"samlMetadataURL"`
+	ApplicationCallBackURL *string           `json:"applicationCallBackURL,omitempty"`
+	AttributeMap           map[string]string `json:"attributeMap,omitempty"`
+	FederationProviderName *string           `json:"federationProviderName,omitempty"`
+	FederationUrn          *string           `json:"federationURN,omitempty"`
+	SamlMetadataDocument   *string           `json:"samlMetadataDocument,omitempty"`
+	SamlMetadataURL        *string           `json:"samlMetadataURL,omitempty"`
 }
 
 type CreateEnvironmentRequestBody struct {
-	Description          *string                                           `json:"description"`
-	FederationMode       *CreateEnvironmentRequestBodyFederationModeEnum   `json:"federationMode"`
-	FederationParameters *CreateEnvironmentRequestBodyFederationParameters `json:"federationParameters"`
-	KmsKeyID             *string                                           `json:"kmsKeyId"`
+	Description          *string                                           `json:"description,omitempty"`
+	FederationMode       *CreateEnvironmentRequestBodyFederationModeEnum   `json:"federationMode,omitempty"`
+	FederationParameters *CreateEnvironmentRequestBodyFederationParameters `json:"federationParameters,omitempty"`
+	KmsKeyID             *string                                           `json:"kmsKeyId,omitempty"`
 	Name                 string                                            `json:"name"`
-	Tags                 map[string]string                                 `json:"tags"`
+	Tags                 map[string]string                                 `json:"tags,omitempty"`
 }
 
 type CreateEnvironmentRequest struct {

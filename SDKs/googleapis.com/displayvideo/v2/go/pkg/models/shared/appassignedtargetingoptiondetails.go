@@ -17,8 +17,8 @@ const (
 )
 
 type AppAssignedTargetingOptionDetails struct {
-	AppID       *string                                           `json:"appId"`
-	AppPlatform *AppAssignedTargetingOptionDetailsAppPlatformEnum `json:"appPlatform"`
-	DisplayName *string                                           `json:"displayName"`
-	Negative    *bool                                             `json:"negative"`
+	AppID       *string                                           `json:"appId,omitempty"`
+	AppPlatform *AppAssignedTargetingOptionDetailsAppPlatformEnum `json:"appPlatform,omitempty"`
+	DisplayName *string                                           `json:"displayName,omitempty"`
+	Negative    *bool                                             `json:"negative,omitempty"`
 }

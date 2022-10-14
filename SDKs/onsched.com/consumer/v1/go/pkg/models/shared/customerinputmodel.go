@@ -1,16 +1,16 @@
 package shared
 
 type CustomerInputModel struct {
-	Address              *AddressInputModel     `json:"address"`
-	Contact              *ContactInputModel     `json:"contact"`
-	CustomFields         *CustomFieldInputModel `json:"customFields"`
-	Email                *string                `json:"email"`
-	Firstname            *string                `json:"firstname"`
-	Lastname             *string                `json:"lastname"`
-	LocationID           *string                `json:"locationId"`
-	Name                 *string                `json:"name"`
-	NotificationType     *string                `json:"notificationType"`
-	SendLeadNotification *bool                  `json:"sendLeadNotification"`
-	StripeCustomerID     *string                `json:"stripeCustomerId"`
-	Type                 *int32                 `json:"type"`
+	Address              *AddressInputModel     `json:"address,omitempty"`
+	Contact              *ContactInputModel     `json:"contact,omitempty"`
+	CustomFields         *CustomFieldInputModel `json:"customFields,omitempty"`
+	Email                *string                `json:"email,omitempty"`
+	Firstname            *string                `json:"firstname,omitempty"`
+	Lastname             *string                `json:"lastname,omitempty"`
+	LocationID           *string                `json:"locationId,omitempty"`
+	Name                 *string                `json:"name,omitempty"`
+	NotificationType     *string                `json:"notificationType,omitempty"`
+	SendLeadNotification *bool                  `json:"sendLeadNotification,omitempty"`
+	StripeCustomerID     *string                `json:"stripeCustomerId,omitempty"`
+	Type                 *int32                 `json:"type,omitempty"`
 }

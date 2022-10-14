@@ -5,8 +5,8 @@ import (
 )
 
 type UserDutyInfo struct {
-	LastStatusChange *time.Time `json:"lastStatusChange"`
-	OnDuty           *bool      `json:"onDuty"`
-	OnManagerDuty    *bool      `json:"onManagerDuty"`
-	Overdue          *bool      `json:"overdue"`
+	LastStatusChange *time.Time `json:"lastStatusChange,omitempty"`
+	OnDuty           *bool      `json:"onDuty,omitempty"`
+	OnManagerDuty    *bool      `json:"onManagerDuty,omitempty"`
+	Overdue          *bool      `json:"overdue,omitempty"`
 }

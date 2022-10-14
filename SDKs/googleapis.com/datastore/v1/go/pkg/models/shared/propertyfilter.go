@@ -16,7 +16,7 @@ const (
 )
 
 type PropertyFilter struct {
-	Op       *PropertyFilterOpEnum `json:"op"`
-	Property *PropertyReference    `json:"property"`
-	Value    *Value                `json:"value"`
+	Op       *PropertyFilterOpEnum `json:"op,omitempty"`
+	Property *PropertyReference    `json:"property,omitempty"`
+	Value    *Value                `json:"value,omitempty"`
 }

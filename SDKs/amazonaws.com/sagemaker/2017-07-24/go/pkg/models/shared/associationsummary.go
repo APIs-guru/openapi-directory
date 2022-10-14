@@ -5,13 +5,13 @@ import (
 )
 
 type AssociationSummary struct {
-	AssociationType *AssociationEdgeTypeEnum `json:"AssociationType"`
-	CreatedBy       *UserContext             `json:"CreatedBy"`
-	CreationTime    *time.Time               `json:"CreationTime"`
-	DestinationArn  *string                  `json:"DestinationArn"`
-	DestinationName *string                  `json:"DestinationName"`
-	DestinationType *string                  `json:"DestinationType"`
-	SourceArn       *string                  `json:"SourceArn"`
-	SourceName      *string                  `json:"SourceName"`
-	SourceType      *string                  `json:"SourceType"`
+	AssociationType *AssociationEdgeTypeEnum `json:"AssociationType,omitempty"`
+	CreatedBy       *UserContext             `json:"CreatedBy,omitempty"`
+	CreationTime    *time.Time               `json:"CreationTime,omitempty"`
+	DestinationArn  *string                  `json:"DestinationArn,omitempty"`
+	DestinationName *string                  `json:"DestinationName,omitempty"`
+	DestinationType *string                  `json:"DestinationType,omitempty"`
+	SourceArn       *string                  `json:"SourceArn,omitempty"`
+	SourceName      *string                  `json:"SourceName,omitempty"`
+	SourceType      *string                  `json:"SourceType,omitempty"`
 }

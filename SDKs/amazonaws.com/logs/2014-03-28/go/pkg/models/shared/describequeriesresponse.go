@@ -1,6 +1,6 @@
 package shared
 
 type DescribeQueriesResponse struct {
-	NextToken *string     `json:"nextToken"`
-	Queries   []QueryInfo `json:"queries"`
+	NextToken *string     `json:"nextToken,omitempty"`
+	Queries   []QueryInfo `json:"queries,omitempty"`
 }

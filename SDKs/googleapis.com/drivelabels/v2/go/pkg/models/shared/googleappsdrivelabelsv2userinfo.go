@@ -1,5 +1,5 @@
 package shared
 
 type GoogleAppsDriveLabelsV2UserInfo struct {
-	Person *string `json:"person"`
+	Person *string `json:"person,omitempty"`
 }

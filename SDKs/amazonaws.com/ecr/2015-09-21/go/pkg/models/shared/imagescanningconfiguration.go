@@ -1,5 +1,5 @@
 package shared
 
 type ImageScanningConfiguration struct {
-	ScanOnPush *bool `json:"scanOnPush"`
+	ScanOnPush *bool `json:"scanOnPush,omitempty"`
 }

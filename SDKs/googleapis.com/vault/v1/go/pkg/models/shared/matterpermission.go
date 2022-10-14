@@ -9,6 +9,6 @@ const (
 )
 
 type MatterPermission struct {
-	AccountID *string                   `json:"accountId"`
-	Role      *MatterPermissionRoleEnum `json:"role"`
+	AccountID *string                   `json:"accountId,omitempty"`
+	Role      *MatterPermissionRoleEnum `json:"role,omitempty"`
 }

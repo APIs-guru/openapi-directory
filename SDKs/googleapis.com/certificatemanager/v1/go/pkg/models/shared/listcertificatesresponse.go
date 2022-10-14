@@ -1,7 +1,7 @@
 package shared
 
 type ListCertificatesResponse struct {
-	Certificates  []Certificate `json:"certificates"`
-	NextPageToken *string       `json:"nextPageToken"`
-	Unreachable   []string      `json:"unreachable"`
+	Certificates  []Certificate `json:"certificates,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
+	Unreachable   []string      `json:"unreachable,omitempty"`
 }

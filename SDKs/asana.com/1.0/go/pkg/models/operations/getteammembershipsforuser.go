@@ -22,7 +22,7 @@ type GetTeamMembershipsForUserRequest struct {
 }
 
 type GetTeamMembershipsForUser200ApplicationJSON struct {
-	Data []shared.TeamMembershipCompact `json:"data"`
+	Data []shared.TeamMembershipCompact `json:"data,omitempty"`
 }
 
 type GetTeamMembershipsForUserResponse struct {

@@ -18,19 +18,19 @@ const (
 )
 
 type FileUrls struct {
-	APIURL     *string `json:"apiUrl"`
-	BrowserURL *string `json:"browserUrl"`
+	APIURL     *string `json:"apiUrl,omitempty"`
+	BrowserURL *string `json:"browserUrl,omitempty"`
 }
 
 type File struct {
-	DateRange        *DateRange      `json:"dateRange"`
-	Etag             *string         `json:"etag"`
-	FileName         *string         `json:"fileName"`
-	Format           *FileFormatEnum `json:"format"`
-	ID               *string         `json:"id"`
-	Kind             *string         `json:"kind"`
-	LastModifiedTime *string         `json:"lastModifiedTime"`
-	ReportID         *string         `json:"reportId"`
-	Status           *FileStatusEnum `json:"status"`
-	Urls             *FileUrls       `json:"urls"`
+	DateRange        *DateRange      `json:"dateRange,omitempty"`
+	Etag             *string         `json:"etag,omitempty"`
+	FileName         *string         `json:"fileName,omitempty"`
+	Format           *FileFormatEnum `json:"format,omitempty"`
+	ID               *string         `json:"id,omitempty"`
+	Kind             *string         `json:"kind,omitempty"`
+	LastModifiedTime *string         `json:"lastModifiedTime,omitempty"`
+	ReportID         *string         `json:"reportId,omitempty"`
+	Status           *FileStatusEnum `json:"status,omitempty"`
+	Urls             *FileUrls       `json:"urls,omitempty"`
 }

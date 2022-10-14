@@ -1,5 +1,5 @@
 package shared
 
 type Output struct {
-	URI *string `json:"uri"`
+	URI *string `json:"uri,omitempty"`
 }

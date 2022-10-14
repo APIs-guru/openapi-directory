@@ -1,18 +1,18 @@
 package shared
 
 type OfferingUserResponse struct {
-	AvatarURL     *string      `json:"avatarUrl"`
-	Email         *string      `json:"email"`
-	EvaluatedBy   []string     `json:"evaluatedBy"`
-	Evaluates     []string     `json:"evaluates"`
-	FirstName     *string      `json:"firstName"`
-	ID            *string      `json:"id"`
-	IsFacilitator *bool        `json:"isFacilitator"`
-	IsMarker      *bool        `json:"isMarker"`
-	IsReadonly    *bool        `json:"isReadonly"`
-	LastName      *string      `json:"lastName"`
-	MarkedBy      []string     `json:"markedBy"`
-	Marks         []string     `json:"marks"`
-	PersonID      *string      `json:"personId"`
-	Profile       *UserProfile `json:"profile"`
+	AvatarURL     *string      `json:"avatarUrl,omitempty"`
+	Email         *string      `json:"email,omitempty"`
+	EvaluatedBy   []string     `json:"evaluatedBy,omitempty"`
+	Evaluates     []string     `json:"evaluates,omitempty"`
+	FirstName     *string      `json:"firstName,omitempty"`
+	ID            *string      `json:"id,omitempty"`
+	IsFacilitator *bool        `json:"isFacilitator,omitempty"`
+	IsMarker      *bool        `json:"isMarker,omitempty"`
+	IsReadonly    *bool        `json:"isReadonly,omitempty"`
+	LastName      *string      `json:"lastName,omitempty"`
+	MarkedBy      []string     `json:"markedBy,omitempty"`
+	Marks         []string     `json:"marks,omitempty"`
+	PersonID      *string      `json:"personId,omitempty"`
+	Profile       *UserProfile `json:"profile,omitempty"`
 }

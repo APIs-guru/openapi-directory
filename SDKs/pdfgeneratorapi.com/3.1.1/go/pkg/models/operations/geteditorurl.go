@@ -21,7 +21,7 @@ type GetEditorURLRequest struct {
 }
 
 type GetEditorURL200ApplicationJSON struct {
-	Response *string `json:"response"`
+	Response *string `json:"response,omitempty"`
 }
 
 type GetEditorURL401ApplicationJSONErrorEnum string
@@ -40,8 +40,8 @@ const (
 )
 
 type GetEditorURL401ApplicationJSON struct {
-	Error  *GetEditorURL401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetEditorURL401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetEditorURL403ApplicationJSONErrorEnum string
@@ -51,8 +51,8 @@ const (
 )
 
 type GetEditorURL403ApplicationJSON struct {
-	Error  *GetEditorURL403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetEditorURL403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetEditorURL404ApplicationJSONErrorEnum string
@@ -64,8 +64,8 @@ const (
 )
 
 type GetEditorURL404ApplicationJSON struct {
-	Error  *GetEditorURL404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetEditorURL404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetEditorURL422ApplicationJSONErrorEnum string
@@ -78,13 +78,13 @@ const (
 )
 
 type GetEditorURL422ApplicationJSON struct {
-	Error  *GetEditorURL422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetEditorURL422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetEditorURL500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type GetEditorURLResponse struct {

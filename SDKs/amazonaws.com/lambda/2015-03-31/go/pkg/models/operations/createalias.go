@@ -19,14 +19,14 @@ type CreateAliasHeaders struct {
 }
 
 type CreateAliasRequestBodyRoutingConfig struct {
-	AdditionalVersionWeights map[string]float64 `json:"AdditionalVersionWeights"`
+	AdditionalVersionWeights map[string]float64 `json:"AdditionalVersionWeights,omitempty"`
 }
 
 type CreateAliasRequestBody struct {
-	Description     *string                              `json:"Description"`
+	Description     *string                              `json:"Description,omitempty"`
 	FunctionVersion string                               `json:"FunctionVersion"`
 	Name            string                               `json:"Name"`
-	RoutingConfig   *CreateAliasRequestBodyRoutingConfig `json:"RoutingConfig"`
+	RoutingConfig   *CreateAliasRequestBodyRoutingConfig `json:"RoutingConfig,omitempty"`
 }
 
 type CreateAliasRequest struct {

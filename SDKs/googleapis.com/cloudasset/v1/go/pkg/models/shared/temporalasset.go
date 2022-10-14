@@ -11,9 +11,9 @@ const (
 )
 
 type TemporalAsset struct {
-	Asset           *Asset                            `json:"asset"`
-	Deleted         *bool                             `json:"deleted"`
-	PriorAsset      *Asset                            `json:"priorAsset"`
-	PriorAssetState *TemporalAssetPriorAssetStateEnum `json:"priorAssetState"`
-	Window          *TimeWindow                       `json:"window"`
+	Asset           *Asset                            `json:"asset,omitempty"`
+	Deleted         *bool                             `json:"deleted,omitempty"`
+	PriorAsset      *Asset                            `json:"priorAsset,omitempty"`
+	PriorAssetState *TemporalAssetPriorAssetStateEnum `json:"priorAssetState,omitempty"`
+	Window          *TimeWindow                       `json:"window,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type InvoiceSummaryAdditionalChargeSummary struct {
-	TotalAmount *Amount `json:"totalAmount"`
-	Type        *string `json:"type"`
+	TotalAmount *Amount `json:"totalAmount,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }

@@ -2,12 +2,12 @@ package shared
 
 type DescribeTableRequest struct {
 	ClusterIdentifier string  `json:"ClusterIdentifier"`
-	ConnectedDatabase *string `json:"ConnectedDatabase"`
+	ConnectedDatabase *string `json:"ConnectedDatabase,omitempty"`
 	Database          string  `json:"Database"`
-	DbUser            *string `json:"DbUser"`
-	MaxResults        *int64  `json:"MaxResults"`
-	NextToken         *string `json:"NextToken"`
-	Schema            *string `json:"Schema"`
-	SecretArn         *string `json:"SecretArn"`
-	Table             *string `json:"Table"`
+	DbUser            *string `json:"DbUser,omitempty"`
+	MaxResults        *int64  `json:"MaxResults,omitempty"`
+	NextToken         *string `json:"NextToken,omitempty"`
+	Schema            *string `json:"Schema,omitempty"`
+	SecretArn         *string `json:"SecretArn,omitempty"`
+	Table             *string `json:"Table,omitempty"`
 }

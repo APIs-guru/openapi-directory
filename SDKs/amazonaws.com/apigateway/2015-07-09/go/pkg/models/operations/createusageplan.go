@@ -15,23 +15,23 @@ type CreateUsagePlanHeaders struct {
 }
 
 type CreateUsagePlanRequestBodyQuota struct {
-	Limit  *int64                      `json:"limit"`
-	Offset *int64                      `json:"offset"`
-	Period *shared.QuotaPeriodTypeEnum `json:"period"`
+	Limit  *int64                      `json:"limit,omitempty"`
+	Offset *int64                      `json:"offset,omitempty"`
+	Period *shared.QuotaPeriodTypeEnum `json:"period,omitempty"`
 }
 
 type CreateUsagePlanRequestBodyThrottle struct {
-	BurstLimit *int64   `json:"burstLimit"`
-	RateLimit  *float64 `json:"rateLimit"`
+	BurstLimit *int64   `json:"burstLimit,omitempty"`
+	RateLimit  *float64 `json:"rateLimit,omitempty"`
 }
 
 type CreateUsagePlanRequestBody struct {
-	APIStages   []shared.APIStage                   `json:"apiStages"`
-	Description *string                             `json:"description"`
+	APIStages   []shared.APIStage                   `json:"apiStages,omitempty"`
+	Description *string                             `json:"description,omitempty"`
 	Name        string                              `json:"name"`
-	Quota       *CreateUsagePlanRequestBodyQuota    `json:"quota"`
-	Tags        map[string]string                   `json:"tags"`
-	Throttle    *CreateUsagePlanRequestBodyThrottle `json:"throttle"`
+	Quota       *CreateUsagePlanRequestBodyQuota    `json:"quota,omitempty"`
+	Tags        map[string]string                   `json:"tags,omitempty"`
+	Throttle    *CreateUsagePlanRequestBodyThrottle `json:"throttle,omitempty"`
 }
 
 type CreateUsagePlanRequest struct {

@@ -10,9 +10,9 @@ const (
 )
 
 type ReceiverJurisdictionalFilters struct {
-	DoesNotMatch *bool                                         `json:"doesNotMatch"`
-	MatchFields  *ReceiverJurisdictionalFiltersMatchFieldsEnum `json:"matchFields"`
-	MatchValues  []string                                      `json:"matchValues"`
+	DoesNotMatch *bool                                         `json:"doesNotMatch,omitempty"`
+	MatchFields  *ReceiverJurisdictionalFiltersMatchFieldsEnum `json:"matchFields,omitempty"`
+	MatchValues  []string                                      `json:"matchValues,omitempty"`
 }
 
 type ReceiverTimingFrequencyEnum string
@@ -24,17 +24,17 @@ const (
 )
 
 type ReceiverTiming struct {
-	DailyAt   *float64                    `json:"dailyAt"`
+	DailyAt   *float64                    `json:"dailyAt,omitempty"`
 	Frequency ReceiverTimingFrequencyEnum `json:"frequency"`
 }
 
 type Receiver struct {
 	Description           string                          `json:"description"`
-	JurisdictionalFilters []ReceiverJurisdictionalFilters `json:"jurisdictionalFilters"`
-	Meta                  *SettingMetadata                `json:"meta"`
+	JurisdictionalFilters []ReceiverJurisdictionalFilters `json:"jurisdictionalFilters,omitempty"`
+	Meta                  *SettingMetadata                `json:"meta,omitempty"`
 	Name                  string                          `json:"name"`
-	OrganizationName      *string                         `json:"organizationName"`
+	OrganizationName      *string                         `json:"organizationName,omitempty"`
 	Timing                ReceiverTiming                  `json:"timing"`
 	Topic                 string                          `json:"topic"`
-	Translations          []interface{}                   `json:"translations"`
+	Translations          []interface{}                   `json:"translations,omitempty"`
 }

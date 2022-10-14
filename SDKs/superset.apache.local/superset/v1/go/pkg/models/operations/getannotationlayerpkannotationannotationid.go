@@ -24,28 +24,28 @@ type GetAnnotationLayerPkAnnotationAnnotationIDRequest struct {
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationID200ApplicationJSON struct {
-	ID     *string                      `json:"id"`
-	Result *shared.AnnotationRestAPIGet `json:"result"`
+	ID     *string                      `json:"id,omitempty"`
+	Result *shared.AnnotationRestAPIGet `json:"result,omitempty"`
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationID400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationID401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationID404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationID422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationID500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationIDResponse struct {

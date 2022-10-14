@@ -1,5 +1,5 @@
 package shared
 
 type CustomListGroup struct {
-	Settings []CustomListTargetingSetting `json:"settings"`
+	Settings []CustomListTargetingSetting `json:"settings,omitempty"`
 }

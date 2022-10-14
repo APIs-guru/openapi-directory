@@ -32,8 +32,8 @@ type ConsentArtefactResponseConsentConsentDetail struct {
 	Patient        ConsentManagerPatientID                                   `json:"patient"`
 	Permission     Permission                                                `json:"permission"`
 	Purpose        UsePurpose                                                `json:"purpose"`
-	Requester      *Requester                                                `json:"requester"`
-	SchemaVersion  *string                                                   `json:"schemaVersion"`
+	Requester      *Requester                                                `json:"requester,omitempty"`
+	SchemaVersion  *string                                                   `json:"schemaVersion,omitempty"`
 }
 
 type ConsentArtefactResponseConsent struct {
@@ -43,8 +43,8 @@ type ConsentArtefactResponseConsent struct {
 }
 
 type ConsentArtefactResponse struct {
-	Consent   *ConsentArtefactResponseConsent `json:"consent"`
-	Error     *Error                          `json:"error"`
+	Consent   *ConsentArtefactResponseConsent `json:"consent,omitempty"`
+	Error     *Error                          `json:"error,omitempty"`
 	RequestID string                          `json:"requestId"`
 	Resp      RequestReference                `json:"resp"`
 	Timestamp time.Time                       `json:"timestamp"`

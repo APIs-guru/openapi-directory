@@ -1,14 +1,14 @@
 package shared
 
 type AppConfigGeneral struct {
-	CurrencyCode    *string                `json:"currencyCode"`
-	CustomFields    map[string]interface{} `json:"customFields"`
-	DefaultTimeZone *string                `json:"defaultTimeZone"`
-	FacebookAppID   *string                `json:"facebookAppId"`
-	GaToken         *string                `json:"gaToken"`
-	ItemImageTypes  map[string]string      `json:"itemImageTypes"`
-	MandatorySignIn *bool                  `json:"mandatorySignIn"`
-	MaxUserRating   *int32                 `json:"maxUserRating"`
-	StripeKey       *string                `json:"stripeKey"`
-	WebsiteURL      *string                `json:"websiteUrl"`
+	CurrencyCode    *string                `json:"currencyCode,omitempty"`
+	CustomFields    map[string]interface{} `json:"customFields,omitempty"`
+	DefaultTimeZone *string                `json:"defaultTimeZone,omitempty"`
+	FacebookAppID   *string                `json:"facebookAppId,omitempty"`
+	GaToken         *string                `json:"gaToken,omitempty"`
+	ItemImageTypes  map[string]string      `json:"itemImageTypes,omitempty"`
+	MandatorySignIn *bool                  `json:"mandatorySignIn,omitempty"`
+	MaxUserRating   *int32                 `json:"maxUserRating,omitempty"`
+	StripeKey       *string                `json:"stripeKey,omitempty"`
+	WebsiteURL      *string                `json:"websiteUrl,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type TextLink struct {
-	DisplayText *string `json:"displayText"`
-	URI         *string `json:"uri"`
+	DisplayText *string `json:"displayText,omitempty"`
+	URI         *string `json:"uri,omitempty"`
 }

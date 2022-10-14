@@ -1,6 +1,6 @@
 package shared
 
 type Source struct {
-	Name     *string `json:"name"`
-	Official *bool   `json:"official"`
+	Name     *string `json:"name,omitempty"`
+	Official *bool   `json:"official,omitempty"`
 }

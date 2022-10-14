@@ -21,14 +21,14 @@ type PutMethodHeaders struct {
 }
 
 type PutMethodRequestBody struct {
-	APIKeyRequired      *bool             `json:"apiKeyRequired"`
-	AuthorizationScopes []string          `json:"authorizationScopes"`
+	APIKeyRequired      *bool             `json:"apiKeyRequired,omitempty"`
+	AuthorizationScopes []string          `json:"authorizationScopes,omitempty"`
 	AuthorizationType   string            `json:"authorizationType"`
-	AuthorizerID        *string           `json:"authorizerId"`
-	OperationName       *string           `json:"operationName"`
-	RequestModels       map[string]string `json:"requestModels"`
-	RequestParameters   map[string]bool   `json:"requestParameters"`
-	RequestValidatorID  *string           `json:"requestValidatorId"`
+	AuthorizerID        *string           `json:"authorizerId,omitempty"`
+	OperationName       *string           `json:"operationName,omitempty"`
+	RequestModels       map[string]string `json:"requestModels,omitempty"`
+	RequestParameters   map[string]bool   `json:"requestParameters,omitempty"`
+	RequestValidatorID  *string           `json:"requestValidatorId,omitempty"`
 }
 
 type PutMethodRequest struct {

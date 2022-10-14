@@ -26,12 +26,12 @@ const (
 )
 
 type TflAPIPresentationEntitiesIdentifier struct {
-	Crowding  *TflAPIPresentationEntitiesCrowding                `json:"crowding"`
-	FullName  *string                                            `json:"fullName"`
-	ID        *string                                            `json:"id"`
-	Name      *string                                            `json:"name"`
-	RouteType *TflAPIPresentationEntitiesIdentifierRouteTypeEnum `json:"routeType"`
-	Status    *TflAPIPresentationEntitiesIdentifierStatusEnum    `json:"status"`
-	Type      *string                                            `json:"type"`
-	URI       *string                                            `json:"uri"`
+	Crowding  *TflAPIPresentationEntitiesCrowding                `json:"crowding,omitempty"`
+	FullName  *string                                            `json:"fullName,omitempty"`
+	ID        *string                                            `json:"id,omitempty"`
+	Name      *string                                            `json:"name,omitempty"`
+	RouteType *TflAPIPresentationEntitiesIdentifierRouteTypeEnum `json:"routeType,omitempty"`
+	Status    *TflAPIPresentationEntitiesIdentifierStatusEnum    `json:"status,omitempty"`
+	Type      *string                                            `json:"type,omitempty"`
+	URI       *string                                            `json:"uri,omitempty"`
 }

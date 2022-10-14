@@ -1,6 +1,6 @@
 package shared
 
 type SourceOperationResponse struct {
-	GetMetadata *SourceGetMetadataResponse `json:"getMetadata"`
-	Split       *SourceSplitResponse       `json:"split"`
+	GetMetadata *SourceGetMetadataResponse `json:"getMetadata,omitempty"`
+	Split       *SourceSplitResponse       `json:"split,omitempty"`
 }

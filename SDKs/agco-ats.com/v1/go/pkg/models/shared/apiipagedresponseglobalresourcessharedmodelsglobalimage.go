@@ -1,6 +1,6 @@
 package shared
 
 type APIIPagedResponseGlobalResourcesSharedModelsGlobalImage struct {
-	Entities []GlobalResourcesSharedModelsGlobalImage `json:"Entities"`
-	Metadata *APIPagedResponseMetadata                `json:"Metadata"`
+	Entities []GlobalResourcesSharedModelsGlobalImage `json:"Entities,omitempty"`
+	Metadata *APIPagedResponseMetadata                `json:"Metadata,omitempty"`
 }

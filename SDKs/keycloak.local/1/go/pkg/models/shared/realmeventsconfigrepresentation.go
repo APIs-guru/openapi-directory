@@ -1,10 +1,10 @@
 package shared
 
 type RealmEventsConfigRepresentation struct {
-	AdminEventsDetailsEnabled *bool    `json:"adminEventsDetailsEnabled"`
-	AdminEventsEnabled        *bool    `json:"adminEventsEnabled"`
-	EnabledEventTypes         []string `json:"enabledEventTypes"`
-	EventsEnabled             *bool    `json:"eventsEnabled"`
-	EventsExpiration          *int64   `json:"eventsExpiration"`
-	EventsListeners           []string `json:"eventsListeners"`
+	AdminEventsDetailsEnabled *bool    `json:"adminEventsDetailsEnabled,omitempty"`
+	AdminEventsEnabled        *bool    `json:"adminEventsEnabled,omitempty"`
+	EnabledEventTypes         []string `json:"enabledEventTypes,omitempty"`
+	EventsEnabled             *bool    `json:"eventsEnabled,omitempty"`
+	EventsExpiration          *int64   `json:"eventsExpiration,omitempty"`
+	EventsListeners           []string `json:"eventsListeners,omitempty"`
 }

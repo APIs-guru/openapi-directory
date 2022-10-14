@@ -20,12 +20,12 @@ const (
 )
 
 type Onev21certificatesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesCertificatesItems struct {
-	CreatedAt       *time.Time                                                                                                `json:"created_at"`
-	DNSNames        []string                                                                                                  `json:"dns_names"`
-	ID              *string                                                                                                   `json:"id"`
-	Name            *string                                                                                                   `json:"name"`
-	NotAfter        *time.Time                                                                                                `json:"not_after"`
-	Sha1Fingerprint *string                                                                                                   `json:"sha1_fingerprint"`
-	State           *Onev21certificatesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesCertificatesItemsStateEnum `json:"state"`
-	Type            *Onev21certificatesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesCertificatesItemsTypeEnum  `json:"type"`
+	CreatedAt       *time.Time                                                                                                `json:"created_at,omitempty"`
+	DNSNames        []string                                                                                                  `json:"dns_names,omitempty"`
+	ID              *string                                                                                                   `json:"id,omitempty"`
+	Name            *string                                                                                                   `json:"name,omitempty"`
+	NotAfter        *time.Time                                                                                                `json:"not_after,omitempty"`
+	Sha1Fingerprint *string                                                                                                   `json:"sha1_fingerprint,omitempty"`
+	State           *Onev21certificatesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesCertificatesItemsStateEnum `json:"state,omitempty"`
+	Type            *Onev21certificatesGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesCertificatesItemsTypeEnum  `json:"type,omitempty"`
 }

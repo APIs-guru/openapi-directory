@@ -9,6 +9,6 @@ const (
 )
 
 type CloudAuditOptions struct {
-	AuthorizationLoggingOptions *AuthorizationLoggingOptions  `json:"authorizationLoggingOptions"`
-	LogName                     *CloudAuditOptionsLogNameEnum `json:"logName"`
+	AuthorizationLoggingOptions *AuthorizationLoggingOptions  `json:"authorizationLoggingOptions,omitempty"`
+	LogName                     *CloudAuditOptionsLogNameEnum `json:"logName,omitempty"`
 }

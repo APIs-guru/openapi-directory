@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudFunctionsV2alphaStateMessage struct {
-	Message  *string                                              `json:"message"`
-	Severity *GoogleCloudFunctionsV2alphaStateMessageSeverityEnum `json:"severity"`
-	Type     *string                                              `json:"type"`
+	Message  *string                                              `json:"message,omitempty"`
+	Severity *GoogleCloudFunctionsV2alphaStateMessageSeverityEnum `json:"severity,omitempty"`
+	Type     *string                                              `json:"type,omitempty"`
 }

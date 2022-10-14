@@ -9,42 +9,42 @@ type GetABatchOfConsumerTransactionClassificationResultsRequest struct {
 }
 
 type GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsContact struct {
-	Email *string `json:"email"`
-	Phone *string `json:"phone"`
+	Email *string `json:"email,omitempty"`
+	Phone *string `json:"phone,omitempty"`
 }
 
 type GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsLocation struct {
-	Address    *string  `json:"address"`
-	City       *string  `json:"city"`
-	Country    *string  `json:"country"`
-	Lat        *float64 `json:"lat"`
-	Lon        *float64 `json:"lon"`
-	PostalCode *string  `json:"postal_code"`
+	Address    *string  `json:"address,omitempty"`
+	City       *string  `json:"city,omitempty"`
+	Country    *string  `json:"country,omitempty"`
+	Lat        *float64 `json:"lat,omitempty"`
+	Lon        *float64 `json:"lon,omitempty"`
+	PostalCode *string  `json:"postal_code,omitempty"`
 }
 
 type GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsRating struct {
-	Reviews *float64 `json:"reviews"`
-	Value   *float64 `json:"value"`
+	Reviews *float64 `json:"reviews,omitempty"`
+	Value   *float64 `json:"value,omitempty"`
 }
 
 type GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResults struct {
-	Contact       *GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsContact  `json:"contact"`
-	Labels        []string                                                                              `json:"labels"`
-	Location      *GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsLocation `json:"location"`
-	Logo          *string                                                                               `json:"logo"`
-	Merchant      *string                                                                               `json:"merchant"`
-	Person        *string                                                                               `json:"person"`
-	Rating        *GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsRating   `json:"rating"`
-	TransactionID *string                                                                               `json:"transaction_id"`
-	Website       *string                                                                               `json:"website"`
+	Contact       *GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsContact  `json:"contact,omitempty"`
+	Labels        []string                                                                              `json:"labels,omitempty"`
+	Location      *GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsLocation `json:"location,omitempty"`
+	Logo          *string                                                                               `json:"logo,omitempty"`
+	Merchant      *string                                                                               `json:"merchant,omitempty"`
+	Person        *string                                                                               `json:"person,omitempty"`
+	Rating        *GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsRating   `json:"rating,omitempty"`
+	TransactionID *string                                                                               `json:"transaction_id,omitempty"`
+	Website       *string                                                                               `json:"website,omitempty"`
 }
 
 type GetABatchOfConsumerTransactionClassificationResults200ApplicationJSON struct {
-	ID        *string                                                                        `json:"id"`
-	Progress  *float64                                                                       `json:"progress"`
-	Results   []GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResults `json:"results"`
-	Status    *string                                                                        `json:"status"`
-	UpdatedAt *string                                                                        `json:"updated_at"`
+	ID        *string                                                                        `json:"id,omitempty"`
+	Progress  *float64                                                                       `json:"progress,omitempty"`
+	Results   []GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResults `json:"results,omitempty"`
+	Status    *string                                                                        `json:"status,omitempty"`
+	UpdatedAt *string                                                                        `json:"updated_at,omitempty"`
 }
 
 type GetABatchOfConsumerTransactionClassificationResultsResponse struct {

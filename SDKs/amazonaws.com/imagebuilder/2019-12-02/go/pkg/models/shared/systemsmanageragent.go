@@ -1,5 +1,5 @@
 package shared
 
 type SystemsManagerAgent struct {
-	UninstallAfterBuild *bool `json:"uninstallAfterBuild"`
+	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty"`
 }

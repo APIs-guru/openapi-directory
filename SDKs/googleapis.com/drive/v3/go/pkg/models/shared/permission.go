@@ -5,33 +5,33 @@ import (
 )
 
 type PermissionPermissionDetails struct {
-	Inherited      *bool   `json:"inherited"`
-	InheritedFrom  *string `json:"inheritedFrom"`
-	PermissionType *string `json:"permissionType"`
-	Role           *string `json:"role"`
+	Inherited      *bool   `json:"inherited,omitempty"`
+	InheritedFrom  *string `json:"inheritedFrom,omitempty"`
+	PermissionType *string `json:"permissionType,omitempty"`
+	Role           *string `json:"role,omitempty"`
 }
 
 type PermissionTeamDrivePermissionDetails struct {
-	Inherited               *bool   `json:"inherited"`
-	InheritedFrom           *string `json:"inheritedFrom"`
-	Role                    *string `json:"role"`
-	TeamDrivePermissionType *string `json:"teamDrivePermissionType"`
+	Inherited               *bool   `json:"inherited,omitempty"`
+	InheritedFrom           *string `json:"inheritedFrom,omitempty"`
+	Role                    *string `json:"role,omitempty"`
+	TeamDrivePermissionType *string `json:"teamDrivePermissionType,omitempty"`
 }
 
 type Permission struct {
-	AllowFileDiscovery         *bool                                  `json:"allowFileDiscovery"`
-	Deleted                    *bool                                  `json:"deleted"`
-	DisplayName                *string                                `json:"displayName"`
-	Domain                     *string                                `json:"domain"`
-	EmailAddress               *string                                `json:"emailAddress"`
-	ExpirationTime             *time.Time                             `json:"expirationTime"`
-	ID                         *string                                `json:"id"`
-	Kind                       *string                                `json:"kind"`
-	PendingOwner               *bool                                  `json:"pendingOwner"`
-	PermissionDetails          []PermissionPermissionDetails          `json:"permissionDetails"`
-	PhotoLink                  *string                                `json:"photoLink"`
-	Role                       *string                                `json:"role"`
-	TeamDrivePermissionDetails []PermissionTeamDrivePermissionDetails `json:"teamDrivePermissionDetails"`
-	Type                       *string                                `json:"type"`
-	View                       *string                                `json:"view"`
+	AllowFileDiscovery         *bool                                  `json:"allowFileDiscovery,omitempty"`
+	Deleted                    *bool                                  `json:"deleted,omitempty"`
+	DisplayName                *string                                `json:"displayName,omitempty"`
+	Domain                     *string                                `json:"domain,omitempty"`
+	EmailAddress               *string                                `json:"emailAddress,omitempty"`
+	ExpirationTime             *time.Time                             `json:"expirationTime,omitempty"`
+	ID                         *string                                `json:"id,omitempty"`
+	Kind                       *string                                `json:"kind,omitempty"`
+	PendingOwner               *bool                                  `json:"pendingOwner,omitempty"`
+	PermissionDetails          []PermissionPermissionDetails          `json:"permissionDetails,omitempty"`
+	PhotoLink                  *string                                `json:"photoLink,omitempty"`
+	Role                       *string                                `json:"role,omitempty"`
+	TeamDrivePermissionDetails []PermissionTeamDrivePermissionDetails `json:"teamDrivePermissionDetails,omitempty"`
+	Type                       *string                                `json:"type,omitempty"`
+	View                       *string                                `json:"view,omitempty"`
 }

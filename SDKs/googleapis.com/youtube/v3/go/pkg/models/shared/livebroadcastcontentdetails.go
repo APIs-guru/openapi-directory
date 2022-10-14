@@ -41,21 +41,21 @@ const (
 )
 
 type LiveBroadcastContentDetails struct {
-	BoundStreamID               *string                                            `json:"boundStreamId"`
-	BoundStreamLastUpdateTimeMs *time.Time                                         `json:"boundStreamLastUpdateTimeMs"`
-	ClosedCaptionsType          *LiveBroadcastContentDetailsClosedCaptionsTypeEnum `json:"closedCaptionsType"`
-	EnableAutoStart             *bool                                              `json:"enableAutoStart"`
-	EnableAutoStop              *bool                                              `json:"enableAutoStop"`
-	EnableClosedCaptions        *bool                                              `json:"enableClosedCaptions"`
-	EnableContentEncryption     *bool                                              `json:"enableContentEncryption"`
-	EnableDvr                   *bool                                              `json:"enableDvr"`
-	EnableEmbed                 *bool                                              `json:"enableEmbed"`
-	EnableLowLatency            *bool                                              `json:"enableLowLatency"`
-	LatencyPreference           *LiveBroadcastContentDetailsLatencyPreferenceEnum  `json:"latencyPreference"`
-	Mesh                        *string                                            `json:"mesh"`
-	MonitorStream               *MonitorStreamInfo                                 `json:"monitorStream"`
-	Projection                  *LiveBroadcastContentDetailsProjectionEnum         `json:"projection"`
-	RecordFromStart             *bool                                              `json:"recordFromStart"`
-	StartWithSlate              *bool                                              `json:"startWithSlate"`
-	StereoLayout                *LiveBroadcastContentDetailsStereoLayoutEnum       `json:"stereoLayout"`
+	BoundStreamID               *string                                            `json:"boundStreamId,omitempty"`
+	BoundStreamLastUpdateTimeMs *time.Time                                         `json:"boundStreamLastUpdateTimeMs,omitempty"`
+	ClosedCaptionsType          *LiveBroadcastContentDetailsClosedCaptionsTypeEnum `json:"closedCaptionsType,omitempty"`
+	EnableAutoStart             *bool                                              `json:"enableAutoStart,omitempty"`
+	EnableAutoStop              *bool                                              `json:"enableAutoStop,omitempty"`
+	EnableClosedCaptions        *bool                                              `json:"enableClosedCaptions,omitempty"`
+	EnableContentEncryption     *bool                                              `json:"enableContentEncryption,omitempty"`
+	EnableDvr                   *bool                                              `json:"enableDvr,omitempty"`
+	EnableEmbed                 *bool                                              `json:"enableEmbed,omitempty"`
+	EnableLowLatency            *bool                                              `json:"enableLowLatency,omitempty"`
+	LatencyPreference           *LiveBroadcastContentDetailsLatencyPreferenceEnum  `json:"latencyPreference,omitempty"`
+	Mesh                        *string                                            `json:"mesh,omitempty"`
+	MonitorStream               *MonitorStreamInfo                                 `json:"monitorStream,omitempty"`
+	Projection                  *LiveBroadcastContentDetailsProjectionEnum         `json:"projection,omitempty"`
+	RecordFromStart             *bool                                              `json:"recordFromStart,omitempty"`
+	StartWithSlate              *bool                                              `json:"startWithSlate,omitempty"`
+	StereoLayout                *LiveBroadcastContentDetailsStereoLayoutEnum       `json:"stereoLayout,omitempty"`
 }

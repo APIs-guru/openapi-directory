@@ -2,5 +2,5 @@ package shared
 
 type InstanceDefinition struct {
 	InstanceType     GameServerGroupInstanceTypeEnum `json:"InstanceType"`
-	WeightedCapacity *string                         `json:"WeightedCapacity"`
+	WeightedCapacity *string                         `json:"WeightedCapacity,omitempty"`
 }

@@ -11,7 +11,7 @@ type PutAccountDedicatedIPWarmupAttributesHeaders struct {
 }
 
 type PutAccountDedicatedIPWarmupAttributesRequestBody struct {
-	AutoWarmupEnabled *bool `json:"AutoWarmupEnabled"`
+	AutoWarmupEnabled *bool `json:"AutoWarmupEnabled,omitempty"`
 }
 
 type PutAccountDedicatedIPWarmupAttributesRequest struct {

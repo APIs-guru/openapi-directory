@@ -1,9 +1,9 @@
 package shared
 
 type InstanceQuota struct {
-	AvailableMachineCount *int32  `json:"availableMachineCount"`
-	GcpService            *string `json:"gcpService"`
-	InstanceType          *string `json:"instanceType"`
-	Location              *string `json:"location"`
-	Name                  *string `json:"name"`
+	AvailableMachineCount *int32  `json:"availableMachineCount,omitempty"`
+	GcpService            *string `json:"gcpService,omitempty"`
+	InstanceType          *string `json:"instanceType,omitempty"`
+	Location              *string `json:"location,omitempty"`
+	Name                  *string `json:"name,omitempty"`
 }

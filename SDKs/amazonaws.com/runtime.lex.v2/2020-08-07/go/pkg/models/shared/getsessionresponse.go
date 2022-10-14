@@ -1,8 +1,8 @@
 package shared
 
 type GetSessionResponse struct {
-	Interpretations []Interpretation `json:"interpretations"`
-	Messages        []Message        `json:"messages"`
-	SessionID       *string          `json:"sessionId"`
-	SessionState    *SessionState    `json:"sessionState"`
+	Interpretations []Interpretation `json:"interpretations,omitempty"`
+	Messages        []Message        `json:"messages,omitempty"`
+	SessionID       *string          `json:"sessionId,omitempty"`
+	SessionState    *SessionState    `json:"sessionState,omitempty"`
 }

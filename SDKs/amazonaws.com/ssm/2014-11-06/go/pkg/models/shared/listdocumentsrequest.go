@@ -1,8 +1,8 @@
 package shared
 
 type ListDocumentsRequest struct {
-	DocumentFilterList []DocumentFilter          `json:"DocumentFilterList"`
-	Filters            []DocumentKeyValuesFilter `json:"Filters"`
-	MaxResults         *int64                    `json:"MaxResults"`
-	NextToken          *string                   `json:"NextToken"`
+	DocumentFilterList []DocumentFilter          `json:"DocumentFilterList,omitempty"`
+	Filters            []DocumentKeyValuesFilter `json:"Filters,omitempty"`
+	MaxResults         *int64                    `json:"MaxResults,omitempty"`
+	NextToken          *string                   `json:"NextToken,omitempty"`
 }

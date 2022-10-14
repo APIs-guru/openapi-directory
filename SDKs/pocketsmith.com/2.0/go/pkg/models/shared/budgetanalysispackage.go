@@ -1,8 +1,8 @@
 package shared
 
 type BudgetAnalysisPackage struct {
-	Category   *Category       `json:"category"`
-	Expense    *BudgetAnalysis `json:"expense"`
-	Income     *BudgetAnalysis `json:"income"`
-	IsTransfer *bool           `json:"is_transfer"`
+	Category   *Category       `json:"category,omitempty"`
+	Expense    *BudgetAnalysis `json:"expense,omitempty"`
+	Income     *BudgetAnalysis `json:"income,omitempty"`
+	IsTransfer *bool           `json:"is_transfer,omitempty"`
 }

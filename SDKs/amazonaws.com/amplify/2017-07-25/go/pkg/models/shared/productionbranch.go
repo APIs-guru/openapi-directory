@@ -5,8 +5,8 @@ import (
 )
 
 type ProductionBranch struct {
-	BranchName     *string    `json:"branchName"`
-	LastDeployTime *time.Time `json:"lastDeployTime"`
-	Status         *string    `json:"status"`
-	ThumbnailURL   *string    `json:"thumbnailUrl"`
+	BranchName     *string    `json:"branchName,omitempty"`
+	LastDeployTime *time.Time `json:"lastDeployTime,omitempty"`
+	Status         *string    `json:"status,omitempty"`
+	ThumbnailURL   *string    `json:"thumbnailUrl,omitempty"`
 }

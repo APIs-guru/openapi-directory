@@ -1,6 +1,6 @@
 package shared
 
 type ShippingsettingsGetSupportedCarriersResponse struct {
-	Carriers []CarriersCarrier `json:"carriers"`
-	Kind     *string           `json:"kind"`
+	Carriers []CarriersCarrier `json:"carriers,omitempty"`
+	Kind     *string           `json:"kind,omitempty"`
 }

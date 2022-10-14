@@ -1,10 +1,10 @@
 package shared
 
 type GetEc2InstanceRecommendationsRequest struct {
-	AccountIds                []string                   `json:"accountIds"`
-	Filters                   []Filter                   `json:"filters"`
-	InstanceArns              []string                   `json:"instanceArns"`
-	MaxResults                *int64                     `json:"maxResults"`
-	NextToken                 *string                    `json:"nextToken"`
-	RecommendationPreferences *RecommendationPreferences `json:"recommendationPreferences"`
+	AccountIds                []string                   `json:"accountIds,omitempty"`
+	Filters                   []Filter                   `json:"filters,omitempty"`
+	InstanceArns              []string                   `json:"instanceArns,omitempty"`
+	MaxResults                *int64                     `json:"maxResults,omitempty"`
+	NextToken                 *string                    `json:"nextToken,omitempty"`
+	RecommendationPreferences *RecommendationPreferences `json:"recommendationPreferences,omitempty"`
 }

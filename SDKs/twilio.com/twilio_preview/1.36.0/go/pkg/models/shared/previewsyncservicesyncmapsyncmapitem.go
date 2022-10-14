@@ -5,14 +5,14 @@ import (
 )
 
 type PreviewSyncServiceSyncMapSyncMapItem struct {
-	AccountSid  *string      `json:"account_sid"`
-	CreatedBy   *string      `json:"created_by"`
-	Data        *interface{} `json:"data"`
-	DateCreated *time.Time   `json:"date_created"`
-	DateUpdated *time.Time   `json:"date_updated"`
-	Key         *string      `json:"key"`
-	MapSid      *string      `json:"map_sid"`
-	Revision    *string      `json:"revision"`
-	ServiceSid  *string      `json:"service_sid"`
-	URL         *string      `json:"url"`
+	AccountSid  *string      `json:"account_sid,omitempty"`
+	CreatedBy   *string      `json:"created_by,omitempty"`
+	Data        *interface{} `json:"data,omitempty"`
+	DateCreated *time.Time   `json:"date_created,omitempty"`
+	DateUpdated *time.Time   `json:"date_updated,omitempty"`
+	Key         *string      `json:"key,omitempty"`
+	MapSid      *string      `json:"map_sid,omitempty"`
+	Revision    *string      `json:"revision,omitempty"`
+	ServiceSid  *string      `json:"service_sid,omitempty"`
+	URL         *string      `json:"url,omitempty"`
 }

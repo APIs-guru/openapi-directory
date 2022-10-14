@@ -16,11 +16,11 @@ type GetListOfCountriesRequest struct {
 }
 
 type GetListOfCountries200ApplicationJSON struct {
-	Alpha2Code *string  `json:"alpha-2-code"`
-	Alpha3Code *string  `json:"alpha-3-code"`
-	Latitude   *float32 `json:"latitude"`
-	Longitude  *float32 `json:"longitude"`
-	Name       *string  `json:"name"`
+	Alpha2Code *string  `json:"alpha-2-code,omitempty"`
+	Alpha3Code *string  `json:"alpha-3-code,omitempty"`
+	Latitude   *float32 `json:"latitude,omitempty"`
+	Longitude  *float32 `json:"longitude,omitempty"`
+	Name       *string  `json:"name,omitempty"`
 }
 
 type GetListOfCountriesResponse struct {

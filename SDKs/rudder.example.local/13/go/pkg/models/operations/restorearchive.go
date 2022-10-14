@@ -42,11 +42,11 @@ const (
 )
 
 type RestoreArchive200ApplicationJSONData struct {
-	Directive  *string `json:"directive"`
-	Full       *string `json:"full"`
-	Groups     *string `json:"groups"`
-	Parameters *string `json:"parameters"`
-	Rules      *string `json:"rules"`
+	Directive  *string `json:"directive,omitempty"`
+	Full       *string `json:"full,omitempty"`
+	Groups     *string `json:"groups,omitempty"`
+	Parameters *string `json:"parameters,omitempty"`
+	Rules      *string `json:"rules,omitempty"`
 }
 
 type RestoreArchive200ApplicationJSONResultEnum string

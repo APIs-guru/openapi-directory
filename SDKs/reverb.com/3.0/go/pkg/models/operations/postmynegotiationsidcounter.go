@@ -51,15 +51,15 @@ type PostMyNegotiationsIDCounterRequestBodyShippingPrice struct {
 }
 
 type PostMyNegotiationsIDCounterRequestBody struct {
-	CountryCode      *string                                              `json:"country_code"`
-	LayawayTermsSlug *string                                              `json:"layaway_terms_slug"`
-	Message          *string                                              `json:"message"`
-	OfferItems       []PostMyNegotiationsIDCounterRequestBodyOfferItems   `json:"offer_items"`
-	Price            *PostMyNegotiationsIDCounterRequestBodyPrice         `json:"price"`
-	Quantity         *string                                              `json:"quantity"`
-	RecipientID      *string                                              `json:"recipient_id"`
-	RegionCode       *string                                              `json:"region_code"`
-	ShippingPrice    *PostMyNegotiationsIDCounterRequestBodyShippingPrice `json:"shipping_price"`
+	CountryCode      *string                                              `json:"country_code,omitempty"`
+	LayawayTermsSlug *string                                              `json:"layaway_terms_slug,omitempty"`
+	Message          *string                                              `json:"message,omitempty"`
+	OfferItems       []PostMyNegotiationsIDCounterRequestBodyOfferItems   `json:"offer_items,omitempty"`
+	Price            *PostMyNegotiationsIDCounterRequestBodyPrice         `json:"price,omitempty"`
+	Quantity         *string                                              `json:"quantity,omitempty"`
+	RecipientID      *string                                              `json:"recipient_id,omitempty"`
+	RegionCode       *string                                              `json:"region_code,omitempty"`
+	ShippingPrice    *PostMyNegotiationsIDCounterRequestBodyShippingPrice `json:"shipping_price,omitempty"`
 }
 
 type PostMyNegotiationsIDCounterSecurity struct {

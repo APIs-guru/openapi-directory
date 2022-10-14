@@ -8,6 +8,6 @@ const (
 )
 
 type GooglePrivacyDlpV2Expressions struct {
-	Conditions      *GooglePrivacyDlpV2Conditions                     `json:"conditions"`
-	LogicalOperator *GooglePrivacyDlpV2ExpressionsLogicalOperatorEnum `json:"logicalOperator"`
+	Conditions      *GooglePrivacyDlpV2Conditions                     `json:"conditions,omitempty"`
+	LogicalOperator *GooglePrivacyDlpV2ExpressionsLogicalOperatorEnum `json:"logicalOperator,omitempty"`
 }

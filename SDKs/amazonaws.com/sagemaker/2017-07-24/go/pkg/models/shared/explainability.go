@@ -1,5 +1,5 @@
 package shared
 
 type Explainability struct {
-	Report *MetricsSource `json:"Report"`
+	Report *MetricsSource `json:"Report,omitempty"`
 }

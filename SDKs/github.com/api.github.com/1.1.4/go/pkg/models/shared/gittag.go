@@ -20,5 +20,5 @@ type GitTag struct {
 	Tag          string        `json:"tag"`
 	Tagger       GitTagTagger  `json:"tagger"`
 	URL          string        `json:"url"`
-	Verification *Verification `json:"verification"`
+	Verification *Verification `json:"verification,omitempty"`
 }

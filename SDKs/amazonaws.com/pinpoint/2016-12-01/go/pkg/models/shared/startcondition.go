@@ -1,7 +1,7 @@
 package shared
 
 type StartCondition struct {
-	Description           *string              `json:"Description"`
-	EventStartCondition   *EventStartCondition `json:"EventStartCondition"`
-	SegmentStartCondition *SegmentCondition    `json:"SegmentStartCondition"`
+	Description           *string              `json:"Description,omitempty"`
+	EventStartCondition   *EventStartCondition `json:"EventStartCondition,omitempty"`
+	SegmentStartCondition *SegmentCondition    `json:"SegmentStartCondition,omitempty"`
 }

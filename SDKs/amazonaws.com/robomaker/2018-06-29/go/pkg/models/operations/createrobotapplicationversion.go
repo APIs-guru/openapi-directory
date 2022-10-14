@@ -16,9 +16,9 @@ type CreateRobotApplicationVersionHeaders struct {
 
 type CreateRobotApplicationVersionRequestBody struct {
 	Application       string   `json:"application"`
-	CurrentRevisionID *string  `json:"currentRevisionId"`
-	ImageDigest       *string  `json:"imageDigest"`
-	S3Etags           []string `json:"s3Etags"`
+	CurrentRevisionID *string  `json:"currentRevisionId,omitempty"`
+	ImageDigest       *string  `json:"imageDigest,omitempty"`
+	S3Etags           []string `json:"s3Etags,omitempty"`
 }
 
 type CreateRobotApplicationVersionRequest struct {

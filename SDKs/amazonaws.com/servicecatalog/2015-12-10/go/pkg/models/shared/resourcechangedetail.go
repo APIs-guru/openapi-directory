@@ -1,7 +1,7 @@
 package shared
 
 type ResourceChangeDetail struct {
-	CausingEntity *string                   `json:"CausingEntity"`
-	Evaluation    *EvaluationTypeEnum       `json:"Evaluation"`
-	Target        *ResourceTargetDefinition `json:"Target"`
+	CausingEntity *string                   `json:"CausingEntity,omitempty"`
+	Evaluation    *EvaluationTypeEnum       `json:"Evaluation,omitempty"`
+	Target        *ResourceTargetDefinition `json:"Target,omitempty"`
 }

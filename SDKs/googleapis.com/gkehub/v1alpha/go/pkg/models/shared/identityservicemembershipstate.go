@@ -9,8 +9,8 @@ const (
 )
 
 type IdentityServiceMembershipState struct {
-	FailureReason    *string                                  `json:"failureReason"`
-	InstalledVersion *string                                  `json:"installedVersion"`
-	MemberConfig     *IdentityServiceMembershipSpec           `json:"memberConfig"`
-	State            *IdentityServiceMembershipStateStateEnum `json:"state"`
+	FailureReason    *string                                  `json:"failureReason,omitempty"`
+	InstalledVersion *string                                  `json:"installedVersion,omitempty"`
+	MemberConfig     *IdentityServiceMembershipSpec           `json:"memberConfig,omitempty"`
+	State            *IdentityServiceMembershipStateStateEnum `json:"state,omitempty"`
 }

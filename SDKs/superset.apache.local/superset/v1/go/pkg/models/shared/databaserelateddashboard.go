@@ -1,8 +1,8 @@
 package shared
 
 type DatabaseRelatedDashboard struct {
-	ID           *int32                 `json:"id"`
-	JSONMetadata map[string]interface{} `json:"json_metadata"`
-	Slug         *string                `json:"slug"`
-	Title        *string                `json:"title"`
+	ID           *int32                 `json:"id,omitempty"`
+	JSONMetadata map[string]interface{} `json:"json_metadata,omitempty"`
+	Slug         *string                `json:"slug,omitempty"`
+	Title        *string                `json:"title,omitempty"`
 }

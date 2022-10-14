@@ -6,8 +6,8 @@ type UpdateOrganizationSamlIdpPathParams struct {
 }
 
 type UpdateOrganizationSamlIdpRequestBody struct {
-	SloLogoutURL            *string `json:"sloLogoutUrl"`
-	X509certSha1Fingerprint *string `json:"x509certSha1Fingerprint"`
+	SloLogoutURL            *string `json:"sloLogoutUrl,omitempty"`
+	X509certSha1Fingerprint *string `json:"x509certSha1Fingerprint,omitempty"`
 }
 
 type UpdateOrganizationSamlIdpRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type ListEmailTemplatesResponse struct {
-	NextToken         *string                 `json:"NextToken"`
-	TemplatesMetadata []EmailTemplateMetadata `json:"TemplatesMetadata"`
+	NextToken         *string                 `json:"NextToken,omitempty"`
+	TemplatesMetadata []EmailTemplateMetadata `json:"TemplatesMetadata,omitempty"`
 }

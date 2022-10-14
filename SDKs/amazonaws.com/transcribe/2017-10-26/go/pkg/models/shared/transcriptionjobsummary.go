@@ -5,16 +5,16 @@ import (
 )
 
 type TranscriptionJobSummary struct {
-	CompletionTime          *time.Time                  `json:"CompletionTime"`
-	ContentRedaction        *ContentRedaction           `json:"ContentRedaction"`
-	CreationTime            *time.Time                  `json:"CreationTime"`
-	FailureReason           *string                     `json:"FailureReason"`
-	IdentifiedLanguageScore *float32                    `json:"IdentifiedLanguageScore"`
-	IdentifyLanguage        *bool                       `json:"IdentifyLanguage"`
-	LanguageCode            *LanguageCodeEnum           `json:"LanguageCode"`
-	ModelSettings           *ModelSettings              `json:"ModelSettings"`
-	OutputLocationType      *OutputLocationTypeEnum     `json:"OutputLocationType"`
-	StartTime               *time.Time                  `json:"StartTime"`
-	TranscriptionJobName    *string                     `json:"TranscriptionJobName"`
-	TranscriptionJobStatus  *TranscriptionJobStatusEnum `json:"TranscriptionJobStatus"`
+	CompletionTime          *time.Time                  `json:"CompletionTime,omitempty"`
+	ContentRedaction        *ContentRedaction           `json:"ContentRedaction,omitempty"`
+	CreationTime            *time.Time                  `json:"CreationTime,omitempty"`
+	FailureReason           *string                     `json:"FailureReason,omitempty"`
+	IdentifiedLanguageScore *float32                    `json:"IdentifiedLanguageScore,omitempty"`
+	IdentifyLanguage        *bool                       `json:"IdentifyLanguage,omitempty"`
+	LanguageCode            *LanguageCodeEnum           `json:"LanguageCode,omitempty"`
+	ModelSettings           *ModelSettings              `json:"ModelSettings,omitempty"`
+	OutputLocationType      *OutputLocationTypeEnum     `json:"OutputLocationType,omitempty"`
+	StartTime               *time.Time                  `json:"StartTime,omitempty"`
+	TranscriptionJobName    *string                     `json:"TranscriptionJobName,omitempty"`
+	TranscriptionJobStatus  *TranscriptionJobStatusEnum `json:"TranscriptionJobStatus,omitempty"`
 }

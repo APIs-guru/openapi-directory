@@ -1,8 +1,8 @@
 package shared
 
 type AlloyDbSettings struct {
-	InitialUser             *UserPassword            `json:"initialUser"`
-	Labels                  map[string]string        `json:"labels"`
-	PrimaryInstanceSettings *PrimaryInstanceSettings `json:"primaryInstanceSettings"`
-	VpcNetwork              *string                  `json:"vpcNetwork"`
+	InitialUser             *UserPassword            `json:"initialUser,omitempty"`
+	Labels                  map[string]string        `json:"labels,omitempty"`
+	PrimaryInstanceSettings *PrimaryInstanceSettings `json:"primaryInstanceSettings,omitempty"`
+	VpcNetwork              *string                  `json:"vpcNetwork,omitempty"`
 }

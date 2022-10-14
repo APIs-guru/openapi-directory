@@ -1,7 +1,7 @@
 package shared
 
 type DescribeProvisioningArtifactOutput struct {
-	Info                       map[string]string           `json:"Info"`
-	ProvisioningArtifactDetail *ProvisioningArtifactDetail `json:"ProvisioningArtifactDetail"`
-	Status                     *StatusEnum                 `json:"Status"`
+	Info                       map[string]string           `json:"Info,omitempty"`
+	ProvisioningArtifactDetail *ProvisioningArtifactDetail `json:"ProvisioningArtifactDetail,omitempty"`
+	Status                     *StatusEnum                 `json:"Status,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type RuntimeVersion struct {
-	DeprecationDate *time.Time `json:"DeprecationDate"`
-	Description     *string    `json:"Description"`
-	ReleaseDate     *time.Time `json:"ReleaseDate"`
-	VersionName     *string    `json:"VersionName"`
+	DeprecationDate *time.Time `json:"DeprecationDate,omitempty"`
+	Description     *string    `json:"Description,omitempty"`
+	ReleaseDate     *time.Time `json:"ReleaseDate,omitempty"`
+	VersionName     *string    `json:"VersionName,omitempty"`
 }

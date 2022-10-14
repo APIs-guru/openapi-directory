@@ -10,6 +10,6 @@ const (
 
 type AgcoPowerServicesModelsUserStatus struct {
 	DealerCode  string                                      `json:"DealerCode" form:"name=DealerCode"`
-	State       *AgcoPowerServicesModelsUserStatusStateEnum `json:"State" form:"name=State"`
+	State       *AgcoPowerServicesModelsUserStatusStateEnum `json:"State,omitempty" form:"name=State"`
 	VoucherCode string                                      `json:"VoucherCode" form:"name=VoucherCode"`
 }

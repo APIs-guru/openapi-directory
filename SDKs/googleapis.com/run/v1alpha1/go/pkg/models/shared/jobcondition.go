@@ -1,10 +1,10 @@
 package shared
 
 type JobCondition struct {
-	LastTransitionTime *string `json:"lastTransitionTime"`
-	Message            *string `json:"message"`
-	Reason             *string `json:"reason"`
-	Severity           *string `json:"severity"`
-	Status             *string `json:"status"`
-	Type               *string `json:"type"`
+	LastTransitionTime *string `json:"lastTransitionTime,omitempty"`
+	Message            *string `json:"message,omitempty"`
+	Reason             *string `json:"reason,omitempty"`
+	Severity           *string `json:"severity,omitempty"`
+	Status             *string `json:"status,omitempty"`
+	Type               *string `json:"type,omitempty"`
 }

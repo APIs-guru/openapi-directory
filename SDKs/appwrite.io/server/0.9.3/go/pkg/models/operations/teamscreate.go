@@ -6,7 +6,7 @@ import (
 
 type TeamsCreateRequestBody struct {
 	Name  string   `json:"name"`
-	Roles []string `json:"roles"`
+	Roles []string `json:"roles,omitempty"`
 }
 
 type TeamsCreateSecurity struct {

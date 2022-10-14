@@ -22,11 +22,11 @@ const (
 )
 
 type TimeSeries struct {
-	Metadata   *MonitoredResourceMetadata `json:"metadata"`
-	Metric     *Metric                    `json:"metric"`
-	MetricKind *TimeSeriesMetricKindEnum  `json:"metricKind"`
-	Points     []Point                    `json:"points"`
-	Resource   *MonitoredResource         `json:"resource"`
-	Unit       *string                    `json:"unit"`
-	ValueType  *TimeSeriesValueTypeEnum   `json:"valueType"`
+	Metadata   *MonitoredResourceMetadata `json:"metadata,omitempty"`
+	Metric     *Metric                    `json:"metric,omitempty"`
+	MetricKind *TimeSeriesMetricKindEnum  `json:"metricKind,omitempty"`
+	Points     []Point                    `json:"points,omitempty"`
+	Resource   *MonitoredResource         `json:"resource,omitempty"`
+	Unit       *string                    `json:"unit,omitempty"`
+	ValueType  *TimeSeriesValueTypeEnum   `json:"valueType,omitempty"`
 }

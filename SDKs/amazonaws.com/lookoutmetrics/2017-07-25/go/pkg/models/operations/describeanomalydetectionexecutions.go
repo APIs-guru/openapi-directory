@@ -21,9 +21,9 @@ type DescribeAnomalyDetectionExecutionsHeaders struct {
 
 type DescribeAnomalyDetectionExecutionsRequestBody struct {
 	AnomalyDetectorArn string  `json:"AnomalyDetectorArn"`
-	MaxResults         *int64  `json:"MaxResults"`
-	NextToken          *string `json:"NextToken"`
-	Timestamp          *string `json:"Timestamp"`
+	MaxResults         *int64  `json:"MaxResults,omitempty"`
+	NextToken          *string `json:"NextToken,omitempty"`
+	Timestamp          *string `json:"Timestamp,omitempty"`
 }
 
 type DescribeAnomalyDetectionExecutionsRequest struct {

@@ -5,7 +5,7 @@ import (
 )
 
 type PatchStatus struct {
-	ApprovalDate     *time.Time                 `json:"ApprovalDate"`
-	ComplianceLevel  *PatchComplianceLevelEnum  `json:"ComplianceLevel"`
-	DeploymentStatus *PatchDeploymentStatusEnum `json:"DeploymentStatus"`
+	ApprovalDate     *time.Time                 `json:"ApprovalDate,omitempty"`
+	ComplianceLevel  *PatchComplianceLevelEnum  `json:"ComplianceLevel,omitempty"`
+	DeploymentStatus *PatchDeploymentStatusEnum `json:"DeploymentStatus,omitempty"`
 }

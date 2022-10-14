@@ -10,8 +10,8 @@ const (
 )
 
 type ImapSettings struct {
-	AutoExpunge     *bool                            `json:"autoExpunge"`
-	Enabled         *bool                            `json:"enabled"`
-	ExpungeBehavior *ImapSettingsExpungeBehaviorEnum `json:"expungeBehavior"`
-	MaxFolderSize   *int32                           `json:"maxFolderSize"`
+	AutoExpunge     *bool                            `json:"autoExpunge,omitempty"`
+	Enabled         *bool                            `json:"enabled,omitempty"`
+	ExpungeBehavior *ImapSettingsExpungeBehaviorEnum `json:"expungeBehavior,omitempty"`
+	MaxFolderSize   *int32                           `json:"maxFolderSize,omitempty"`
 }

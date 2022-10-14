@@ -1,7 +1,7 @@
 package shared
 
 type FeaturizationConfig struct {
-	Featurizations     []Featurization `json:"Featurizations"`
-	ForecastDimensions []string        `json:"ForecastDimensions"`
+	Featurizations     []Featurization `json:"Featurizations,omitempty"`
+	ForecastDimensions []string        `json:"ForecastDimensions,omitempty"`
 	ForecastFrequency  string          `json:"ForecastFrequency"`
 }

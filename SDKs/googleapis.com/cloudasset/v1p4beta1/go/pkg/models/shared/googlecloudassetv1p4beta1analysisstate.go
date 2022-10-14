@@ -23,6 +23,6 @@ const (
 )
 
 type GoogleCloudAssetV1p4beta1AnalysisState struct {
-	Cause *string                                         `json:"cause"`
-	Code  *GoogleCloudAssetV1p4beta1AnalysisStateCodeEnum `json:"code"`
+	Cause *string                                         `json:"cause,omitempty"`
+	Code  *GoogleCloudAssetV1p4beta1AnalysisStateCodeEnum `json:"code,omitempty"`
 }

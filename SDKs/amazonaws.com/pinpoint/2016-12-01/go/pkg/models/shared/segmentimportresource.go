@@ -1,7 +1,7 @@
 package shared
 
 type SegmentImportResource struct {
-	ChannelCounts map[string]int64 `json:"ChannelCounts"`
+	ChannelCounts map[string]int64 `json:"ChannelCounts,omitempty"`
 	ExternalID    string           `json:"ExternalId"`
 	Format        FormatEnum       `json:"Format"`
 	RoleArn       string           `json:"RoleArn"`

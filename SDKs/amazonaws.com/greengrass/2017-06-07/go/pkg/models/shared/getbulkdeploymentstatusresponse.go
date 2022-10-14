@@ -1,10 +1,10 @@
 package shared
 
 type GetBulkDeploymentStatusResponse struct {
-	BulkDeploymentMetrics *BulkDeploymentMetrics    `json:"BulkDeploymentMetrics"`
-	BulkDeploymentStatus  *BulkDeploymentStatusEnum `json:"BulkDeploymentStatus"`
-	CreatedAt             *string                   `json:"CreatedAt"`
-	ErrorDetails          []ErrorDetail             `json:"ErrorDetails"`
-	ErrorMessage          *string                   `json:"ErrorMessage"`
-	Tags                  map[string]string         `json:"tags"`
+	BulkDeploymentMetrics *BulkDeploymentMetrics    `json:"BulkDeploymentMetrics,omitempty"`
+	BulkDeploymentStatus  *BulkDeploymentStatusEnum `json:"BulkDeploymentStatus,omitempty"`
+	CreatedAt             *string                   `json:"CreatedAt,omitempty"`
+	ErrorDetails          []ErrorDetail             `json:"ErrorDetails,omitempty"`
+	ErrorMessage          *string                   `json:"ErrorMessage,omitempty"`
+	Tags                  map[string]string         `json:"tags,omitempty"`
 }

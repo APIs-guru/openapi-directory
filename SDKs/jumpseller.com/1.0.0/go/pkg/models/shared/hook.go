@@ -1,5 +1,5 @@
 package shared
 
 type Hook struct {
-	Hook *HookFields `json:"hook"`
+	Hook *HookFields `json:"hook,omitempty"`
 }

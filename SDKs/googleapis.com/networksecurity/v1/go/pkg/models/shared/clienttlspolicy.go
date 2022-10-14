@@ -1,12 +1,12 @@
 package shared
 
 type ClientTLSPolicy struct {
-	ClientCertificate  *GoogleCloudNetworksecurityV1CertificateProvider `json:"clientCertificate"`
-	CreateTime         *string                                          `json:"createTime"`
-	Description        *string                                          `json:"description"`
-	Labels             map[string]string                                `json:"labels"`
-	Name               *string                                          `json:"name"`
-	ServerValidationCa []ValidationCa                                   `json:"serverValidationCa"`
-	Sni                *string                                          `json:"sni"`
-	UpdateTime         *string                                          `json:"updateTime"`
+	ClientCertificate  *GoogleCloudNetworksecurityV1CertificateProvider `json:"clientCertificate,omitempty"`
+	CreateTime         *string                                          `json:"createTime,omitempty"`
+	Description        *string                                          `json:"description,omitempty"`
+	Labels             map[string]string                                `json:"labels,omitempty"`
+	Name               *string                                          `json:"name,omitempty"`
+	ServerValidationCa []ValidationCa                                   `json:"serverValidationCa,omitempty"`
+	Sni                *string                                          `json:"sni,omitempty"`
+	UpdateTime         *string                                          `json:"updateTime,omitempty"`
 }

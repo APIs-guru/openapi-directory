@@ -17,6 +17,6 @@ const (
 )
 
 type JSONFileFormat struct {
-	Compression      *JSONFileFormatCompressionEnum      `json:"compression"`
-	SchemaFileFormat *JSONFileFormatSchemaFileFormatEnum `json:"schemaFileFormat"`
+	Compression      *JSONFileFormatCompressionEnum      `json:"compression,omitempty"`
+	SchemaFileFormat *JSONFileFormatSchemaFileFormatEnum `json:"schemaFileFormat,omitempty"`
 }

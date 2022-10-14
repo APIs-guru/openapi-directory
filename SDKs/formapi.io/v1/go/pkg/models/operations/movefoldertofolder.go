@@ -9,7 +9,7 @@ type MoveFolderToFolderPathParams struct {
 }
 
 type MoveFolderToFolderRequestBodyMoveFolderData struct {
-	ParentFolderID *string `json:"parent_folder_id"`
+	ParentFolderID *string `json:"parent_folder_id,omitempty"`
 }
 
 type MoveFolderToFolderSecurity struct {
@@ -23,10 +23,10 @@ type MoveFolderToFolderRequest struct {
 }
 
 type MoveFolderToFolder200ApplicationJSONFolder struct {
-	ID             *string `json:"id"`
-	Name           *string `json:"name"`
-	ParentFolderID *string `json:"parent_folder_id"`
-	Path           *string `json:"path"`
+	ID             *string `json:"id,omitempty"`
+	Name           *string `json:"name,omitempty"`
+	ParentFolderID *string `json:"parent_folder_id,omitempty"`
+	Path           *string `json:"path,omitempty"`
 }
 
 type MoveFolderToFolderResponse struct {

@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest struct {
-	Content    *string                                                                      `json:"content"`
-	FileFormat *GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum `json:"fileFormat"`
+	Content    *string                                                                      `json:"content,omitempty"`
+	FileFormat *GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum `json:"fileFormat,omitempty"`
 }

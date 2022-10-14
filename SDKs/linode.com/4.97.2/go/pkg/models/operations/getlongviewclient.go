@@ -27,7 +27,7 @@ type GetLongviewClientRequest struct {
 }
 
 type GetLongviewClientDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLongviewClientResponse struct {

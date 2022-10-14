@@ -1,6 +1,6 @@
 package shared
 
 type ExpectedAttributeValue struct {
-	Exists *bool           `json:"Exists"`
-	Value  *AttributeValue `json:"Value"`
+	Exists *bool           `json:"Exists,omitempty"`
+	Value  *AttributeValue `json:"Value,omitempty"`
 }

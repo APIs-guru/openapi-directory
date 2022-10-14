@@ -1,8 +1,8 @@
 package shared
 
 type RetainedMessageSummary struct {
-	LastModifiedTime *int64  `json:"lastModifiedTime"`
-	PayloadSize      *int64  `json:"payloadSize"`
-	Qos              *int64  `json:"qos"`
-	Topic            *string `json:"topic"`
+	LastModifiedTime *int64  `json:"lastModifiedTime,omitempty"`
+	PayloadSize      *int64  `json:"payloadSize,omitempty"`
+	Qos              *int64  `json:"qos,omitempty"`
+	Topic            *string `json:"topic,omitempty"`
 }

@@ -5,13 +5,13 @@ type CreateAPIQueryParams struct {
 }
 
 type CreateAPIRequestBodyAPI struct {
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
-	Summary     *string `json:"summary"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Summary     *string `json:"summary,omitempty"`
 }
 
 type CreateAPIRequestBody struct {
-	API *CreateAPIRequestBodyAPI `json:"api"`
+	API *CreateAPIRequestBodyAPI `json:"api,omitempty"`
 }
 
 type CreateAPIRequest struct {
@@ -20,17 +20,17 @@ type CreateAPIRequest struct {
 }
 
 type CreateAPI200ApplicationJSONAPI struct {
-	CreatedAt   *string `json:"createdAt"`
-	CreatedBy   *string `json:"createdBy"`
-	Description *string `json:"description"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
-	Summary     *string `json:"summary"`
-	UpdatedAt   *string `json:"updatedAt"`
+	CreatedAt   *string `json:"createdAt,omitempty"`
+	CreatedBy   *string `json:"createdBy,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Summary     *string `json:"summary,omitempty"`
+	UpdatedAt   *string `json:"updatedAt,omitempty"`
 }
 
 type CreateAPI200ApplicationJSON struct {
-	API *CreateAPI200ApplicationJSONAPI `json:"api"`
+	API *CreateAPI200ApplicationJSONAPI `json:"api,omitempty"`
 }
 
 type CreateAPIResponse struct {

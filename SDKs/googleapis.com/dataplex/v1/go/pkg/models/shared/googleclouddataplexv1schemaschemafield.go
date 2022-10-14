@@ -31,9 +31,9 @@ const (
 )
 
 type GoogleCloudDataplexV1SchemaSchemaField struct {
-	Description *string                                         `json:"description"`
-	Fields      []GoogleCloudDataplexV1SchemaSchemaField        `json:"fields"`
-	Mode        *GoogleCloudDataplexV1SchemaSchemaFieldModeEnum `json:"mode"`
-	Name        *string                                         `json:"name"`
-	Type        *GoogleCloudDataplexV1SchemaSchemaFieldTypeEnum `json:"type"`
+	Description *string                                         `json:"description,omitempty"`
+	Fields      []GoogleCloudDataplexV1SchemaSchemaField        `json:"fields,omitempty"`
+	Mode        *GoogleCloudDataplexV1SchemaSchemaFieldModeEnum `json:"mode,omitempty"`
+	Name        *string                                         `json:"name,omitempty"`
+	Type        *GoogleCloudDataplexV1SchemaSchemaFieldTypeEnum `json:"type,omitempty"`
 }

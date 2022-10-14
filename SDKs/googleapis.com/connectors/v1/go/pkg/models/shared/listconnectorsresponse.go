@@ -1,7 +1,7 @@
 package shared
 
 type ListConnectorsResponse struct {
-	Connectors    []Connector `json:"connectors"`
-	NextPageToken *string     `json:"nextPageToken"`
-	Unreachable   []string    `json:"unreachable"`
+	Connectors    []Connector `json:"connectors,omitempty"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
+	Unreachable   []string    `json:"unreachable,omitempty"`
 }

@@ -5,7 +5,7 @@ type PostNetworksIDActionsChangeProtectionPathParams struct {
 }
 
 type PostNetworksIDActionsChangeProtectionRequestBodyChangeProtectionRequest struct {
-	Delete *bool `json:"delete"`
+	Delete *bool `json:"delete,omitempty"`
 }
 
 type PostNetworksIDActionsChangeProtectionRequest struct {

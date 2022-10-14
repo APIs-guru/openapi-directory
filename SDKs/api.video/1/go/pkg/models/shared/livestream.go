@@ -1,12 +1,12 @@
 package shared
 
 type LiveStream struct {
-	Assets       *LiveStreamAssets `json:"assets"`
-	Broadcasting *bool             `json:"broadcasting"`
-	LiveStreamID *string           `json:"liveStreamId"`
-	Name         *string           `json:"name"`
-	PlayerID     *string           `json:"playerId"`
-	Public       *bool             `json:"public"`
-	Record       *bool             `json:"record"`
-	StreamKey    *string           `json:"streamKey"`
+	Assets       *LiveStreamAssets `json:"assets,omitempty"`
+	Broadcasting *bool             `json:"broadcasting,omitempty"`
+	LiveStreamID *string           `json:"liveStreamId,omitempty"`
+	Name         *string           `json:"name,omitempty"`
+	PlayerID     *string           `json:"playerId,omitempty"`
+	Public       *bool             `json:"public,omitempty"`
+	Record       *bool             `json:"record,omitempty"`
+	StreamKey    *string           `json:"streamKey,omitempty"`
 }

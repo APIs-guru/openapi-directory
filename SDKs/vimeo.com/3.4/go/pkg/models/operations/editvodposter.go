@@ -10,7 +10,7 @@ type EditVodPosterPathParams struct {
 }
 
 type EditVodPosterRequestBody struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type EditVodPosterSecurity struct {

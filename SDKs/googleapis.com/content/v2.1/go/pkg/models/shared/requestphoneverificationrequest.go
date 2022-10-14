@@ -9,8 +9,8 @@ const (
 )
 
 type RequestPhoneVerificationRequest struct {
-	LanguageCode            *string                                                     `json:"languageCode"`
-	PhoneNumber             *string                                                     `json:"phoneNumber"`
-	PhoneRegionCode         *string                                                     `json:"phoneRegionCode"`
-	PhoneVerificationMethod *RequestPhoneVerificationRequestPhoneVerificationMethodEnum `json:"phoneVerificationMethod"`
+	LanguageCode            *string                                                     `json:"languageCode,omitempty"`
+	PhoneNumber             *string                                                     `json:"phoneNumber,omitempty"`
+	PhoneRegionCode         *string                                                     `json:"phoneRegionCode,omitempty"`
+	PhoneVerificationMethod *RequestPhoneVerificationRequestPhoneVerificationMethodEnum `json:"phoneVerificationMethod,omitempty"`
 }

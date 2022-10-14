@@ -11,7 +11,7 @@ const (
 )
 
 type CustomEventError struct {
-	Code    *CustomEventErrorCodeEnum `json:"code"`
-	Kind    *string                   `json:"kind"`
-	Message *string                   `json:"message"`
+	Code    *CustomEventErrorCodeEnum `json:"code,omitempty"`
+	Kind    *string                   `json:"kind,omitempty"`
+	Message *string                   `json:"message,omitempty"`
 }

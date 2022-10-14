@@ -61,18 +61,18 @@ const (
 )
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImage struct {
-	CreatedAt     *time.Time                                                                                                              `json:"created_at"`
-	Description   *string                                                                                                                 `json:"description"`
-	Distribution  *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageDistributionEnum `json:"distribution"`
-	ErrorMessage  *string                                                                                                                 `json:"error_message"`
-	ID            *int64                                                                                                                  `json:"id"`
-	MinDiskSize   *int64                                                                                                                  `json:"min_disk_size"`
-	Name          *string                                                                                                                 `json:"name"`
-	Public        *bool                                                                                                                   `json:"public"`
-	Regions       []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageRegionsEnum     `json:"regions"`
-	SizeGigabytes *float32                                                                                                                `json:"size_gigabytes"`
-	Slug          *string                                                                                                                 `json:"slug"`
-	Status        *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageStatusEnum       `json:"status"`
-	Tags          []string                                                                                                                `json:"tags"`
-	Type          *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageTypeEnum         `json:"type"`
+	CreatedAt     *time.Time                                                                                                              `json:"created_at,omitempty"`
+	Description   *string                                                                                                                 `json:"description,omitempty"`
+	Distribution  *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageDistributionEnum `json:"distribution,omitempty"`
+	ErrorMessage  *string                                                                                                                 `json:"error_message,omitempty"`
+	ID            *int64                                                                                                                  `json:"id,omitempty"`
+	MinDiskSize   *int64                                                                                                                  `json:"min_disk_size,omitempty"`
+	Name          *string                                                                                                                 `json:"name,omitempty"`
+	Public        *bool                                                                                                                   `json:"public,omitempty"`
+	Regions       []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageRegionsEnum     `json:"regions,omitempty"`
+	SizeGigabytes *float32                                                                                                                `json:"size_gigabytes,omitempty"`
+	Slug          *string                                                                                                                 `json:"slug,omitempty"`
+	Status        *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageStatusEnum       `json:"status,omitempty"`
+	Tags          []string                                                                                                                `json:"tags,omitempty"`
+	Type          *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImageTypeEnum         `json:"type,omitempty"`
 }

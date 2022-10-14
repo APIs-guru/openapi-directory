@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudApigeeV1QueryMetric struct {
-	Alias    *string `json:"alias"`
-	Function *string `json:"function"`
-	Name     *string `json:"name"`
-	Operator *string `json:"operator"`
-	Value    *string `json:"value"`
+	Alias    *string `json:"alias,omitempty"`
+	Function *string `json:"function,omitempty"`
+	Name     *string `json:"name,omitempty"`
+	Operator *string `json:"operator,omitempty"`
+	Value    *string `json:"value,omitempty"`
 }

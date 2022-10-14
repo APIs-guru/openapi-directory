@@ -1,9 +1,9 @@
 package shared
 
 type UpdateCloudEnvironmentBody struct {
-	AutoShutdownDelayMinutes *int32  `json:"autoShutdownDelayMinutes"`
-	FriendlyName             *string `json:"friendlyName"`
-	PlanAccessToken          *string `json:"planAccessToken"`
-	PlanID                   *string `json:"planId"`
-	SkuName                  *string `json:"skuName"`
+	AutoShutdownDelayMinutes *int32  `json:"autoShutdownDelayMinutes,omitempty"`
+	FriendlyName             *string `json:"friendlyName,omitempty"`
+	PlanAccessToken          *string `json:"planAccessToken,omitempty"`
+	PlanID                   *string `json:"planId,omitempty"`
+	SkuName                  *string `json:"skuName,omitempty"`
 }

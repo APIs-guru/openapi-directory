@@ -1,6 +1,6 @@
 package shared
 
 type ListStreamsOutput struct {
-	NextToken      *string      `json:"NextToken"`
-	StreamInfoList []StreamInfo `json:"StreamInfoList"`
+	NextToken      *string      `json:"NextToken,omitempty"`
+	StreamInfoList []StreamInfo `json:"StreamInfoList,omitempty"`
 }

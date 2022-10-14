@@ -1,5 +1,5 @@
 package shared
 
 type PreviousItemRequestDto struct {
-	PlaylistItemID *string `json:"PlaylistItemId"`
+	PlaylistItemID *string `json:"PlaylistItemId,omitempty"`
 }

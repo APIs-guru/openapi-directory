@@ -1,10 +1,10 @@
 package shared
 
 type Property struct {
-	Etag       *string `json:"etag"`
-	Key        *string `json:"key"`
-	Kind       *string `json:"kind"`
-	SelfLink   *string `json:"selfLink"`
-	Value      *string `json:"value"`
-	Visibility *string `json:"visibility"`
+	Etag       *string `json:"etag,omitempty"`
+	Key        *string `json:"key,omitempty"`
+	Kind       *string `json:"kind,omitempty"`
+	SelfLink   *string `json:"selfLink,omitempty"`
+	Value      *string `json:"value,omitempty"`
+	Visibility *string `json:"visibility,omitempty"`
 }

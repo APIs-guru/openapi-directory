@@ -1,18 +1,18 @@
 package shared
 
 type MongoDbSettings struct {
-	AuthMechanism               *AuthMechanismValueEnum `json:"AuthMechanism"`
-	AuthSource                  *string                 `json:"AuthSource"`
-	AuthType                    *AuthTypeValueEnum      `json:"AuthType"`
-	DatabaseName                *string                 `json:"DatabaseName"`
-	DocsToInvestigate           *string                 `json:"DocsToInvestigate"`
-	ExtractDocID                *string                 `json:"ExtractDocId"`
-	KmsKeyID                    *string                 `json:"KmsKeyId"`
-	NestingLevel                *NestingLevelValueEnum  `json:"NestingLevel"`
-	Password                    *string                 `json:"Password"`
-	Port                        *int64                  `json:"Port"`
-	SecretsManagerAccessRoleArn *string                 `json:"SecretsManagerAccessRoleArn"`
-	SecretsManagerSecretID      *string                 `json:"SecretsManagerSecretId"`
-	ServerName                  *string                 `json:"ServerName"`
-	Username                    *string                 `json:"Username"`
+	AuthMechanism               *AuthMechanismValueEnum `json:"AuthMechanism,omitempty"`
+	AuthSource                  *string                 `json:"AuthSource,omitempty"`
+	AuthType                    *AuthTypeValueEnum      `json:"AuthType,omitempty"`
+	DatabaseName                *string                 `json:"DatabaseName,omitempty"`
+	DocsToInvestigate           *string                 `json:"DocsToInvestigate,omitempty"`
+	ExtractDocID                *string                 `json:"ExtractDocId,omitempty"`
+	KmsKeyID                    *string                 `json:"KmsKeyId,omitempty"`
+	NestingLevel                *NestingLevelValueEnum  `json:"NestingLevel,omitempty"`
+	Password                    *string                 `json:"Password,omitempty"`
+	Port                        *int64                  `json:"Port,omitempty"`
+	SecretsManagerAccessRoleArn *string                 `json:"SecretsManagerAccessRoleArn,omitempty"`
+	SecretsManagerSecretID      *string                 `json:"SecretsManagerSecretId,omitempty"`
+	ServerName                  *string                 `json:"ServerName,omitempty"`
+	Username                    *string                 `json:"Username,omitempty"`
 }

@@ -1,7 +1,7 @@
 package operations
 
 type PutNotificationsMarkReadJSONRequestBody struct {
-	ID *int64 `json:"id"`
+	ID *int64 `json:"id,omitempty"`
 }
 
 type PutNotificationsMarkReadJSONRequest struct {
@@ -9,7 +9,7 @@ type PutNotificationsMarkReadJSONRequest struct {
 }
 
 type PutNotificationsMarkReadJSON200ApplicationJSON struct {
-	Success *string `json:"success"`
+	Success *string `json:"success,omitempty"`
 }
 
 type PutNotificationsMarkReadJSONResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type DeleteFirewallDomainListResponse struct {
-	FirewallDomainList *FirewallDomainList `json:"FirewallDomainList"`
+	FirewallDomainList *FirewallDomainList `json:"FirewallDomainList,omitempty"`
 }

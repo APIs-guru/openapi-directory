@@ -1,13 +1,13 @@
 package shared
 
 type Rule struct {
-	Arn                *string        `json:"Arn"`
-	Description        *string        `json:"Description"`
-	EventBusName       *string        `json:"EventBusName"`
-	EventPattern       *string        `json:"EventPattern"`
-	ManagedBy          *string        `json:"ManagedBy"`
-	Name               *string        `json:"Name"`
-	RoleArn            *string        `json:"RoleArn"`
-	ScheduleExpression *string        `json:"ScheduleExpression"`
-	State              *RuleStateEnum `json:"State"`
+	Arn                *string        `json:"Arn,omitempty"`
+	Description        *string        `json:"Description,omitempty"`
+	EventBusName       *string        `json:"EventBusName,omitempty"`
+	EventPattern       *string        `json:"EventPattern,omitempty"`
+	ManagedBy          *string        `json:"ManagedBy,omitempty"`
+	Name               *string        `json:"Name,omitempty"`
+	RoleArn            *string        `json:"RoleArn,omitempty"`
+	ScheduleExpression *string        `json:"ScheduleExpression,omitempty"`
+	State              *RuleStateEnum `json:"State,omitempty"`
 }

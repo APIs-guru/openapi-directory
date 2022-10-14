@@ -19,9 +19,9 @@ type UpdateBaiduChannelHeaders struct {
 }
 
 type UpdateBaiduChannelRequestBodyBaiduChannelRequest struct {
-	APIKey    *string `json:"ApiKey"`
-	Enabled   *bool   `json:"Enabled"`
-	SecretKey *string `json:"SecretKey"`
+	APIKey    *string `json:"ApiKey,omitempty"`
+	Enabled   *bool   `json:"Enabled,omitempty"`
+	SecretKey *string `json:"SecretKey,omitempty"`
 }
 
 type UpdateBaiduChannelRequestBody struct {

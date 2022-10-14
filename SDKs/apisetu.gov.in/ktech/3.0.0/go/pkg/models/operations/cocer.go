@@ -18,8 +18,8 @@ const (
 )
 
 type CocerRequestBody struct {
-	CertificateParameters *CocerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *CocerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                CocerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Cocer400ApplicationJSON struct {
-	Error            *Cocer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cocer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cocer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cocer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cocer401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Cocer401ApplicationJSON struct {
-	Error            *Cocer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cocer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cocer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cocer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cocer404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Cocer404ApplicationJSON struct {
-	Error            *Cocer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cocer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cocer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cocer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cocer500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Cocer500ApplicationJSON struct {
-	Error            *Cocer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cocer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cocer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cocer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cocer502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Cocer502ApplicationJSON struct {
-	Error            *Cocer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cocer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cocer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cocer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cocer503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Cocer503ApplicationJSON struct {
-	Error            *Cocer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cocer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cocer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cocer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cocer504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Cocer504ApplicationJSON struct {
-	Error            *Cocer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cocer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cocer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cocer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type CocerResponse struct {

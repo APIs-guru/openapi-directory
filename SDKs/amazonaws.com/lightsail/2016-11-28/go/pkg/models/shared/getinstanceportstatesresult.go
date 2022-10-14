@@ -1,5 +1,5 @@
 package shared
 
 type GetInstancePortStatesResult struct {
-	PortStates []InstancePortState `json:"portStates"`
+	PortStates []InstancePortState `json:"portStates,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeTableOutput struct {
-	Table *TableDescription `json:"Table"`
+	Table *TableDescription `json:"Table,omitempty"`
 }

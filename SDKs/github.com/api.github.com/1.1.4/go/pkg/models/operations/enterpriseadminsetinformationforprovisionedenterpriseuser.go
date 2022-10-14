@@ -16,7 +16,7 @@ type EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyEmails 
 }
 
 type EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyGroups struct {
-	Value *string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }
 
 type EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyName struct {
@@ -26,7 +26,7 @@ type EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyName st
 
 type EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBody struct {
 	Emails   []EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyEmails `json:"emails"`
-	Groups   []EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyGroups `json:"groups"`
+	Groups   []EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyGroups `json:"groups,omitempty"`
 	Name     EnterpriseAdminSetInformationForProvisionedEnterpriseUserRequestBodyName     `json:"name"`
 	Schemas  []string                                                                     `json:"schemas"`
 	UserName string                                                                       `json:"userName"`

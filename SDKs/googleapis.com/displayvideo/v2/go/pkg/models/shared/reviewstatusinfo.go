@@ -29,9 +29,9 @@ const (
 )
 
 type ReviewStatusInfo struct {
-	ApprovalStatus                     *ReviewStatusInfoApprovalStatusEnum                     `json:"approvalStatus"`
-	ContentAndPolicyReviewStatus       *ReviewStatusInfoContentAndPolicyReviewStatusEnum       `json:"contentAndPolicyReviewStatus"`
-	CreativeAndLandingPageReviewStatus *ReviewStatusInfoCreativeAndLandingPageReviewStatusEnum `json:"creativeAndLandingPageReviewStatus"`
-	ExchangeReviewStatuses             []ExchangeReviewStatus                                  `json:"exchangeReviewStatuses"`
-	PublisherReviewStatuses            []PublisherReviewStatus                                 `json:"publisherReviewStatuses"`
+	ApprovalStatus                     *ReviewStatusInfoApprovalStatusEnum                     `json:"approvalStatus,omitempty"`
+	ContentAndPolicyReviewStatus       *ReviewStatusInfoContentAndPolicyReviewStatusEnum       `json:"contentAndPolicyReviewStatus,omitempty"`
+	CreativeAndLandingPageReviewStatus *ReviewStatusInfoCreativeAndLandingPageReviewStatusEnum `json:"creativeAndLandingPageReviewStatus,omitempty"`
+	ExchangeReviewStatuses             []ExchangeReviewStatus                                  `json:"exchangeReviewStatuses,omitempty"`
+	PublisherReviewStatuses            []PublisherReviewStatus                                 `json:"publisherReviewStatuses,omitempty"`
 }

@@ -19,10 +19,10 @@ type UpdateAccessPolicyHeaders struct {
 }
 
 type UpdateAccessPolicyRequestBodyAccessPolicyIdentity struct {
-	Group   *shared.GroupIdentity   `json:"group"`
-	IamRole *shared.IamRoleIdentity `json:"iamRole"`
-	IamUser *shared.IamUserIdentity `json:"iamUser"`
-	User    *shared.UserIdentity    `json:"user"`
+	Group   *shared.GroupIdentity   `json:"group,omitempty"`
+	IamRole *shared.IamRoleIdentity `json:"iamRole,omitempty"`
+	IamUser *shared.IamUserIdentity `json:"iamUser,omitempty"`
+	User    *shared.UserIdentity    `json:"user,omitempty"`
 }
 
 type UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum string
@@ -33,15 +33,15 @@ const (
 )
 
 type UpdateAccessPolicyRequestBodyAccessPolicyResource struct {
-	Portal  *shared.PortalResource  `json:"portal"`
-	Project *shared.ProjectResource `json:"project"`
+	Portal  *shared.PortalResource  `json:"portal,omitempty"`
+	Project *shared.ProjectResource `json:"project,omitempty"`
 }
 
 type UpdateAccessPolicyRequestBody struct {
 	AccessPolicyIdentity   UpdateAccessPolicyRequestBodyAccessPolicyIdentity       `json:"accessPolicyIdentity"`
 	AccessPolicyPermission UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum `json:"accessPolicyPermission"`
 	AccessPolicyResource   UpdateAccessPolicyRequestBodyAccessPolicyResource       `json:"accessPolicyResource"`
-	ClientToken            *string                                                 `json:"clientToken"`
+	ClientToken            *string                                                 `json:"clientToken,omitempty"`
 }
 
 type UpdateAccessPolicyRequest struct {

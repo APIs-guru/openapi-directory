@@ -43,19 +43,19 @@ const (
 )
 
 type School struct {
-	Created      *string              `json:"created"`
-	District     *string              `json:"district"`
-	HighGrade    *SchoolHighGradeEnum `json:"high_grade"`
-	ID           *string              `json:"id"`
-	LastModified *string              `json:"last_modified"`
-	Location     *Location            `json:"location"`
-	LowGrade     *SchoolLowGradeEnum  `json:"low_grade"`
-	MdrNumber    *string              `json:"mdr_number"`
-	Name         *string              `json:"name"`
-	NcesID       *string              `json:"nces_id"`
-	Phone        *string              `json:"phone"`
-	Principal    *Principal           `json:"principal"`
-	SchoolNumber *string              `json:"school_number"`
-	SisID        *string              `json:"sis_id"`
-	StateID      *string              `json:"state_id"`
+	Created      *string              `json:"created,omitempty"`
+	District     *string              `json:"district,omitempty"`
+	HighGrade    *SchoolHighGradeEnum `json:"high_grade,omitempty"`
+	ID           *string              `json:"id,omitempty"`
+	LastModified *string              `json:"last_modified,omitempty"`
+	Location     *Location            `json:"location,omitempty"`
+	LowGrade     *SchoolLowGradeEnum  `json:"low_grade,omitempty"`
+	MdrNumber    *string              `json:"mdr_number,omitempty"`
+	Name         *string              `json:"name,omitempty"`
+	NcesID       *string              `json:"nces_id,omitempty"`
+	Phone        *string              `json:"phone,omitempty"`
+	Principal    *Principal           `json:"principal,omitempty"`
+	SchoolNumber *string              `json:"school_number,omitempty"`
+	SisID        *string              `json:"sis_id,omitempty"`
+	StateID      *string              `json:"state_id,omitempty"`
 }

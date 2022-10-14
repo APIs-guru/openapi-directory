@@ -5,10 +5,10 @@ import (
 )
 
 type QuickConnectResult struct {
-	Authenticated  *bool      `json:"Authenticated"`
-	Authentication *string    `json:"Authentication"`
-	Code           *string    `json:"Code"`
-	DateAdded      *time.Time `json:"DateAdded"`
-	Error          *string    `json:"Error"`
-	Secret         *string    `json:"Secret"`
+	Authenticated  *bool      `json:"Authenticated,omitempty"`
+	Authentication *string    `json:"Authentication,omitempty"`
+	Code           *string    `json:"Code,omitempty"`
+	DateAdded      *time.Time `json:"DateAdded,omitempty"`
+	Error          *string    `json:"Error,omitempty"`
+	Secret         *string    `json:"Secret,omitempty"`
 }

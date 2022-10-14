@@ -1,5 +1,5 @@
 package shared
 
 type SearchConfig struct {
-	SearchParameters []SearchParameter `json:"searchParameters"`
+	SearchParameters []SearchParameter `json:"searchParameters,omitempty"`
 }

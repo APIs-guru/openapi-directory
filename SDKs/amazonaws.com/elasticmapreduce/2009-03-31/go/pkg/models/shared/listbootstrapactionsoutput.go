@@ -1,6 +1,6 @@
 package shared
 
 type ListBootstrapActionsOutput struct {
-	BootstrapActions []Command `json:"BootstrapActions"`
-	Marker           *string   `json:"Marker"`
+	BootstrapActions []Command `json:"BootstrapActions,omitempty"`
+	Marker           *string   `json:"Marker,omitempty"`
 }

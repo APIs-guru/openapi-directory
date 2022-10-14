@@ -1,8 +1,8 @@
 package shared
 
 type MacSecKey struct {
-	Ckn       *string `json:"ckn"`
-	SecretArn *string `json:"secretARN"`
-	StartOn   *string `json:"startOn"`
-	State     *string `json:"state"`
+	Ckn       *string `json:"ckn,omitempty"`
+	SecretArn *string `json:"secretARN,omitempty"`
+	StartOn   *string `json:"startOn,omitempty"`
+	State     *string `json:"state,omitempty"`
 }

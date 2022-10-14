@@ -8,11 +8,11 @@ const (
 )
 
 type Graph struct {
-	ID               *int64                                     `json:"id"`
-	Link             *string                                    `json:"link"`
+	ID               *int64                                     `json:"id,omitempty"`
+	Link             *string                                    `json:"link,omitempty"`
 	Name             string                                     `json:"name"`
 	Source           string                                     `json:"source"`
-	TemplateLanguage *GraphTemplateLanguageTemplateLanguageEnum `json:"template_language"`
+	TemplateLanguage *GraphTemplateLanguageTemplateLanguageEnum `json:"template_language,omitempty"`
 	Type             string                                     `json:"type"`
-	Weight           *int64                                     `json:"weight"`
+	Weight           *int64                                     `json:"weight,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type BigOvenModelApi2RecipeSearchResult struct {
-	ResultCount  *int32                        `json:"ResultCount"`
-	Results      []BigOvenModelApi2RecipeInfox `json:"Results"`
-	SpellSuggest *string                       `json:"SpellSuggest"`
+	ResultCount  *int32                        `json:"ResultCount,omitempty"`
+	Results      []BigOvenModelApi2RecipeInfox `json:"Results,omitempty"`
+	SpellSuggest *string                       `json:"SpellSuggest,omitempty"`
 }

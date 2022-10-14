@@ -9,9 +9,9 @@ type MigrationsStartForOrgPathParams struct {
 }
 
 type MigrationsStartForOrgRequestBody struct {
-	Exclude            []string `json:"exclude"`
-	ExcludeAttachments *bool    `json:"exclude_attachments"`
-	LockRepositories   *bool    `json:"lock_repositories"`
+	Exclude            []string `json:"exclude,omitempty"`
+	ExcludeAttachments *bool    `json:"exclude_attachments,omitempty"`
+	LockRepositories   *bool    `json:"lock_repositories,omitempty"`
 	Repositories       []string `json:"repositories"`
 }
 

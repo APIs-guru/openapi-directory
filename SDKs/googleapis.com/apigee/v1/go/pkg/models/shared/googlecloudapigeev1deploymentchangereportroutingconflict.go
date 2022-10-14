@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudApigeeV1DeploymentChangeReportRoutingConflict struct {
-	ConflictingDeployment *GoogleCloudApigeeV1DeploymentChangeReportRoutingDeployment `json:"conflictingDeployment"`
-	Description           *string                                                     `json:"description"`
-	EnvironmentGroup      *string                                                     `json:"environmentGroup"`
+	ConflictingDeployment *GoogleCloudApigeeV1DeploymentChangeReportRoutingDeployment `json:"conflictingDeployment,omitempty"`
+	Description           *string                                                     `json:"description,omitempty"`
+	EnvironmentGroup      *string                                                     `json:"environmentGroup,omitempty"`
 }

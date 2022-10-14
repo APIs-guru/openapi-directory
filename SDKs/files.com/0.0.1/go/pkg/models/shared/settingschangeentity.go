@@ -5,7 +5,7 @@ import (
 )
 
 type SettingsChangeEntity struct {
-	ChangeDetails map[string]interface{} `json:"change_details"`
-	CreatedAt     *time.Time             `json:"created_at"`
-	UserID        *int32                 `json:"user_id"`
+	ChangeDetails map[string]interface{} `json:"change_details,omitempty"`
+	CreatedAt     *time.Time             `json:"created_at,omitempty"`
+	UserID        *int32                 `json:"user_id,omitempty"`
 }

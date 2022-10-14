@@ -9,7 +9,7 @@ const (
 )
 
 type PubsubConfig struct {
-	MessageFormat       *PubsubConfigMessageFormatEnum `json:"messageFormat"`
-	ServiceAccountEmail *string                        `json:"serviceAccountEmail"`
-	Topic               *string                        `json:"topic"`
+	MessageFormat       *PubsubConfigMessageFormatEnum `json:"messageFormat,omitempty"`
+	ServiceAccountEmail *string                        `json:"serviceAccountEmail,omitempty"`
+	Topic               *string                        `json:"topic,omitempty"`
 }

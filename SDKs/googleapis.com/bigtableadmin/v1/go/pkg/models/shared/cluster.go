@@ -19,10 +19,10 @@ const (
 )
 
 type Cluster struct {
-	DefaultStorageType *ClusterDefaultStorageTypeEnum `json:"defaultStorageType"`
-	EncryptionConfig   *EncryptionConfig              `json:"encryptionConfig"`
-	Location           *string                        `json:"location"`
-	Name               *string                        `json:"name"`
-	ServeNodes         *int32                         `json:"serveNodes"`
-	State              *ClusterStateEnum              `json:"state"`
+	DefaultStorageType *ClusterDefaultStorageTypeEnum `json:"defaultStorageType,omitempty"`
+	EncryptionConfig   *EncryptionConfig              `json:"encryptionConfig,omitempty"`
+	Location           *string                        `json:"location,omitempty"`
+	Name               *string                        `json:"name,omitempty"`
+	ServeNodes         *int32                         `json:"serveNodes,omitempty"`
+	State              *ClusterStateEnum              `json:"state,omitempty"`
 }

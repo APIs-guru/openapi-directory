@@ -1,6 +1,6 @@
 package shared
 
 type ClickThroughURLSuffixProperties struct {
-	ClickThroughURLSuffix   *string `json:"clickThroughUrlSuffix"`
-	OverrideInheritedSuffix *bool   `json:"overrideInheritedSuffix"`
+	ClickThroughURLSuffix   *string `json:"clickThroughUrlSuffix,omitempty"`
+	OverrideInheritedSuffix *bool   `json:"overrideInheritedSuffix,omitempty"`
 }

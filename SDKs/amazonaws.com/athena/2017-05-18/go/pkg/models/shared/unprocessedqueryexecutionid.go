@@ -1,7 +1,7 @@
 package shared
 
 type UnprocessedQueryExecutionID struct {
-	ErrorCode        *string `json:"ErrorCode"`
-	ErrorMessage     *string `json:"ErrorMessage"`
-	QueryExecutionID *string `json:"QueryExecutionId"`
+	ErrorCode        *string `json:"ErrorCode,omitempty"`
+	ErrorMessage     *string `json:"ErrorMessage,omitempty"`
+	QueryExecutionID *string `json:"QueryExecutionId,omitempty"`
 }

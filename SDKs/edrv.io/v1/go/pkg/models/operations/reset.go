@@ -1,8 +1,8 @@
 package operations
 
 type ResetRequestBody struct {
-	Chargestation *string `json:"chargestation"`
-	Type          *string `json:"type"`
+	Chargestation *string `json:"chargestation,omitempty"`
+	Type          *string `json:"type,omitempty"`
 }
 
 type ResetRequest struct {
@@ -10,9 +10,9 @@ type ResetRequest struct {
 }
 
 type Reset201ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type ResetResponse struct {

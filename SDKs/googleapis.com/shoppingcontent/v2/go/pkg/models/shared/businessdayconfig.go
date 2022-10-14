@@ -1,5 +1,5 @@
 package shared
 
 type BusinessDayConfig struct {
-	BusinessDays []string `json:"businessDays"`
+	BusinessDays []string `json:"businessDays,omitempty"`
 }

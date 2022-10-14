@@ -1,5 +1,5 @@
 package shared
 
 type ResendConfirmationCodeResponse struct {
-	CodeDeliveryDetails *CodeDeliveryDetailsType `json:"CodeDeliveryDetails"`
+	CodeDeliveryDetails *CodeDeliveryDetailsType `json:"CodeDeliveryDetails,omitempty"`
 }

@@ -175,13 +175,13 @@ const (
 )
 
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress struct {
-	BuildingNumberOrName *string `json:"BuildingNumberOrName"`
+	BuildingNumberOrName *string `json:"BuildingNumberOrName,omitempty"`
 	Country              string  `json:"Country"`
-	CountrySubDivision   *string `json:"CountrySubDivision"`
-	OptionalAddressField *string `json:"OptionalAddressField"`
+	CountrySubDivision   *string `json:"CountrySubDivision,omitempty"`
+	OptionalAddressField *string `json:"OptionalAddressField,omitempty"`
 	PostCode             string  `json:"PostCode"`
 	StreetName           string  `json:"StreetName"`
-	TownName             *string `json:"TownName"`
+	TownName             *string `json:"TownName,omitempty"`
 }
 
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation struct {
@@ -254,8 +254,8 @@ type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParen
 }
 
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation struct {
-	Bic              *string                                                                                                  `json:"BIC"`
-	Lei              *string                                                                                                  `json:"LEI"`
+	Bic              *string                                                                                                  `json:"BIC,omitempty"`
+	Lei              *string                                                                                                  `json:"LEI,omitempty"`
 	OrganisationName GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
@@ -267,17 +267,17 @@ type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation stru
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtm struct {
 	Atmid                 string                                                                               `json:"ATMID"`
 	AtmServices           []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum          `json:"ATMServices"`
-	AccessibilityTypes    []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum   `json:"AccessibilityTypes"`
-	AdditionalAtmServices []string                                                                             `json:"AdditionalATMServices"`
+	AccessibilityTypes    []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum   `json:"AccessibilityTypes,omitempty"`
+	AdditionalAtmServices []string                                                                             `json:"AdditionalATMServices,omitempty"`
 	Address               GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress                    `json:"Address"`
-	BranchIdentification  *string                                                                              `json:"BranchIdentification"`
+	BranchIdentification  *string                                                                              `json:"BranchIdentification,omitempty"`
 	Currency              []string                                                                             `json:"Currency"`
 	GeographicLocation    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation         `json:"GeographicLocation"`
-	LocationCategory      *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum      `json:"LocationCategory"`
-	MinimumValueDispensed *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum `json:"MinimumValueDispensed"`
+	LocationCategory      *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum      `json:"LocationCategory,omitempty"`
+	MinimumValueDispensed *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum `json:"MinimumValueDispensed,omitempty"`
 	Organisation          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation               `json:"Organisation"`
-	SiteID                *string                                                                              `json:"SiteID"`
-	SiteName              *string                                                                              `json:"SiteName"`
+	SiteID                *string                                                                              `json:"SiteID,omitempty"`
+	SiteName              *string                                                                              `json:"SiteName,omitempty"`
 	SupportedLanguages    []string                                                                             `json:"SupportedLanguages"`
 }
 

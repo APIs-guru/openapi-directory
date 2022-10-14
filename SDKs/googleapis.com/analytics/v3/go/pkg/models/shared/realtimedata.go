@@ -1,37 +1,37 @@
 package shared
 
 type RealtimeDataColumnHeaders struct {
-	ColumnType *string `json:"columnType"`
-	DataType   *string `json:"dataType"`
-	Name       *string `json:"name"`
+	ColumnType *string `json:"columnType,omitempty"`
+	DataType   *string `json:"dataType,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }
 
 type RealtimeDataProfileInfo struct {
-	AccountID             *string `json:"accountId"`
-	InternalWebPropertyID *string `json:"internalWebPropertyId"`
-	ProfileID             *string `json:"profileId"`
-	ProfileName           *string `json:"profileName"`
-	TableID               *string `json:"tableId"`
-	WebPropertyID         *string `json:"webPropertyId"`
+	AccountID             *string `json:"accountId,omitempty"`
+	InternalWebPropertyID *string `json:"internalWebPropertyId,omitempty"`
+	ProfileID             *string `json:"profileId,omitempty"`
+	ProfileName           *string `json:"profileName,omitempty"`
+	TableID               *string `json:"tableId,omitempty"`
+	WebPropertyID         *string `json:"webPropertyId,omitempty"`
 }
 
 type RealtimeDataQuery struct {
-	Dimensions *string  `json:"dimensions"`
-	Filters    *string  `json:"filters"`
-	Ids        *string  `json:"ids"`
-	MaxResults *int32   `json:"max-results"`
-	Metrics    []string `json:"metrics"`
-	Sort       []string `json:"sort"`
+	Dimensions *string  `json:"dimensions,omitempty"`
+	Filters    *string  `json:"filters,omitempty"`
+	Ids        *string  `json:"ids,omitempty"`
+	MaxResults *int32   `json:"max-results,omitempty"`
+	Metrics    []string `json:"metrics,omitempty"`
+	Sort       []string `json:"sort,omitempty"`
 }
 
 type RealtimeData struct {
-	ColumnHeaders       []RealtimeDataColumnHeaders `json:"columnHeaders"`
-	ID                  *string                     `json:"id"`
-	Kind                *string                     `json:"kind"`
-	ProfileInfo         *RealtimeDataProfileInfo    `json:"profileInfo"`
-	Query               *RealtimeDataQuery          `json:"query"`
-	Rows                [][]string                  `json:"rows"`
-	SelfLink            *string                     `json:"selfLink"`
-	TotalResults        *int32                      `json:"totalResults"`
-	TotalsForAllResults map[string]string           `json:"totalsForAllResults"`
+	ColumnHeaders       []RealtimeDataColumnHeaders `json:"columnHeaders,omitempty"`
+	ID                  *string                     `json:"id,omitempty"`
+	Kind                *string                     `json:"kind,omitempty"`
+	ProfileInfo         *RealtimeDataProfileInfo    `json:"profileInfo,omitempty"`
+	Query               *RealtimeDataQuery          `json:"query,omitempty"`
+	Rows                [][]string                  `json:"rows,omitempty"`
+	SelfLink            *string                     `json:"selfLink,omitempty"`
+	TotalResults        *int32                      `json:"totalResults,omitempty"`
+	TotalsForAllResults map[string]string           `json:"totalsForAllResults,omitempty"`
 }

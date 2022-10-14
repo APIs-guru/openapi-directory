@@ -10,14 +10,14 @@ type CreateNewTagRequest struct {
 
 type CreateNewTag400ApplicationJSON struct {
 	Error      string   `json:"error"`
-	Messages   []string `json:"messages"`
+	Messages   []string `json:"messages,omitempty"`
 	RootCauses []string `json:"root_causes"`
 }
 
 type CreateNewTag401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateNewTagResponse struct {

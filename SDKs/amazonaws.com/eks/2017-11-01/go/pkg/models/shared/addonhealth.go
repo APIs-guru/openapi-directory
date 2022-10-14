@@ -1,5 +1,5 @@
 package shared
 
 type AddonHealth struct {
-	Issues []AddonIssue `json:"issues"`
+	Issues []AddonIssue `json:"issues,omitempty"`
 }

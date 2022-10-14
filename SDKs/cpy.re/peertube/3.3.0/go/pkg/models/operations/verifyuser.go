@@ -5,7 +5,7 @@ type VerifyUserPathParams struct {
 }
 
 type VerifyUserRequestBody struct {
-	IsPendingEmail     *bool  `json:"isPendingEmail"`
+	IsPendingEmail     *bool  `json:"isPendingEmail,omitempty"`
 	VerificationString string `json:"verificationString"`
 }
 

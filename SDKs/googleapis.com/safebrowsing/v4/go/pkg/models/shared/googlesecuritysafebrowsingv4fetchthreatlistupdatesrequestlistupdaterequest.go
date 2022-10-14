@@ -51,9 +51,9 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest struct {
-	Constraints     *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints         `json:"constraints"`
-	PlatformType    *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformTypeEnum    `json:"platformType"`
-	State           *string                                                                                        `json:"state"`
-	ThreatEntryType *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatEntryTypeEnum `json:"threatEntryType"`
-	ThreatType      *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatTypeEnum      `json:"threatType"`
+	Constraints     *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints         `json:"constraints,omitempty"`
+	PlatformType    *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformTypeEnum    `json:"platformType,omitempty"`
+	State           *string                                                                                        `json:"state,omitempty"`
+	ThreatEntryType *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatEntryTypeEnum `json:"threatEntryType,omitempty"`
+	ThreatType      *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatTypeEnum      `json:"threatType,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type EntityDescription struct {
-	Arn        *string             `json:"arn"`
-	CreatedAt  *time.Time          `json:"createdAt"`
-	Definition *DefinitionDocument `json:"definition"`
-	ID         *string             `json:"id"`
-	Type       *EntityTypeEnum     `json:"type"`
+	Arn        *string             `json:"arn,omitempty"`
+	CreatedAt  *time.Time          `json:"createdAt,omitempty"`
+	Definition *DefinitionDocument `json:"definition,omitempty"`
+	ID         *string             `json:"id,omitempty"`
+	Type       *EntityTypeEnum     `json:"type,omitempty"`
 }

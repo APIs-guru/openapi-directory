@@ -5,12 +5,12 @@ import (
 )
 
 type ServerlessV1ServiceAssetAssetVersion struct {
-	AccountSid  *string                         `json:"account_sid"`
-	AssetSid    *string                         `json:"asset_sid"`
-	DateCreated *time.Time                      `json:"date_created"`
-	Path        *string                         `json:"path"`
-	ServiceSid  *string                         `json:"service_sid"`
-	Sid         *string                         `json:"sid"`
-	URL         *string                         `json:"url"`
-	Visibility  *AssetVersionEnumVisibilityEnum `json:"visibility"`
+	AccountSid  *string                         `json:"account_sid,omitempty"`
+	AssetSid    *string                         `json:"asset_sid,omitempty"`
+	DateCreated *time.Time                      `json:"date_created,omitempty"`
+	Path        *string                         `json:"path,omitempty"`
+	ServiceSid  *string                         `json:"service_sid,omitempty"`
+	Sid         *string                         `json:"sid,omitempty"`
+	URL         *string                         `json:"url,omitempty"`
+	Visibility  *AssetVersionEnumVisibilityEnum `json:"visibility,omitempty"`
 }

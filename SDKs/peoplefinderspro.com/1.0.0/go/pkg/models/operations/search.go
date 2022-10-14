@@ -7,19 +7,19 @@ type SearchHeaders struct {
 }
 
 type SearchRequestBodyAddress struct {
-	AddressLine1 *string `json:"addressLine1"`
-	AddressLine2 *string `json:"addressLine2"`
+	AddressLine1 *string `json:"addressLine1,omitempty"`
+	AddressLine2 *string `json:"addressLine2,omitempty"`
 }
 
 type SearchRequestBody struct {
-	Address     *SearchRequestBodyAddress `json:"Address"`
-	Age         *float64                  `json:"Age"`
-	Dob         *string                   `json:"Dob"`
-	Email       *string                   `json:"Email"`
-	FirstName   *string                   `json:"FirstName"`
-	LastName    *string                   `json:"LastName"`
-	MiddleName  *string                   `json:"MiddleName"`
-	PhoneNumber *string                   `json:"PhoneNumber"`
+	Address     *SearchRequestBodyAddress `json:"Address,omitempty"`
+	Age         *float64                  `json:"Age,omitempty"`
+	Dob         *string                   `json:"Dob,omitempty"`
+	Email       *string                   `json:"Email,omitempty"`
+	FirstName   *string                   `json:"FirstName,omitempty"`
+	LastName    *string                   `json:"LastName,omitempty"`
+	MiddleName  *string                   `json:"MiddleName,omitempty"`
+	PhoneNumber *string                   `json:"PhoneNumber,omitempty"`
 }
 
 type SearchRequest struct {

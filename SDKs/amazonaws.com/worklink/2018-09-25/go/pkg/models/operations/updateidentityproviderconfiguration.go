@@ -18,7 +18,7 @@ const (
 
 type UpdateIdentityProviderConfigurationRequestBody struct {
 	FleetArn                     string                                                                 `json:"FleetArn"`
-	IdentityProviderSamlMetadata *string                                                                `json:"IdentityProviderSamlMetadata"`
+	IdentityProviderSamlMetadata *string                                                                `json:"IdentityProviderSamlMetadata,omitempty"`
 	IdentityProviderType         UpdateIdentityProviderConfigurationRequestBodyIdentityProviderTypeEnum `json:"IdentityProviderType"`
 }
 

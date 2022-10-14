@@ -1,8 +1,8 @@
 package shared
 
 type Artifact struct {
-	Checksum *string  `json:"checksum"`
-	ID       *string  `json:"id"`
-	Name     *string  `json:"name"`
-	Names    []string `json:"names"`
+	Checksum *string  `json:"checksum,omitempty"`
+	ID       *string  `json:"id,omitempty"`
+	Name     *string  `json:"name,omitempty"`
+	Names    []string `json:"names,omitempty"`
 }

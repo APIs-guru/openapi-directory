@@ -1,10 +1,10 @@
 package shared
 
 type UpdateAppRequest struct {
-	AppID        *string       `json:"appId"`
-	Description  *string       `json:"description"`
-	Name         *string       `json:"name"`
-	RoleName     *string       `json:"roleName"`
-	ServerGroups []ServerGroup `json:"serverGroups"`
-	Tags         []Tag         `json:"tags"`
+	AppID        *string       `json:"appId,omitempty"`
+	Description  *string       `json:"description,omitempty"`
+	Name         *string       `json:"name,omitempty"`
+	RoleName     *string       `json:"roleName,omitempty"`
+	ServerGroups []ServerGroup `json:"serverGroups,omitempty"`
+	Tags         []Tag         `json:"tags,omitempty"`
 }

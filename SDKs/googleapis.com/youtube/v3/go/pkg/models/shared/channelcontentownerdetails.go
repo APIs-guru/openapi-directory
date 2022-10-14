@@ -5,6 +5,6 @@ import (
 )
 
 type ChannelContentOwnerDetails struct {
-	ContentOwner *string    `json:"contentOwner"`
-	TimeLinked   *time.Time `json:"timeLinked"`
+	ContentOwner *string    `json:"contentOwner,omitempty"`
+	TimeLinked   *time.Time `json:"timeLinked,omitempty"`
 }

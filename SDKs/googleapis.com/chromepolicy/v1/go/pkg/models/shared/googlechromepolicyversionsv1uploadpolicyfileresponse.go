@@ -1,5 +1,5 @@
 package shared
 
 type GoogleChromePolicyVersionsV1UploadPolicyFileResponse struct {
-	DownloadURI *string `json:"downloadUri"`
+	DownloadURI *string `json:"downloadUri,omitempty"`
 }

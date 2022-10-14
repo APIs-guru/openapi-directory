@@ -15,9 +15,9 @@ const (
 )
 
 type TaxonomyAttractionsRequestBody struct {
-	DestID    *int64                                       `json:"destId"`
-	SortOrder *TaxonomyAttractionsRequestBodySortOrderEnum `json:"sortOrder"`
-	TopX      *string                                      `json:"topX"`
+	DestID    *int64                                       `json:"destId,omitempty"`
+	SortOrder *TaxonomyAttractionsRequestBodySortOrderEnum `json:"sortOrder,omitempty"`
+	TopX      *string                                      `json:"topX,omitempty"`
 }
 
 type TaxonomyAttractionsRequest struct {
@@ -26,42 +26,42 @@ type TaxonomyAttractionsRequest struct {
 }
 
 type TaxonomyAttractions200ApplicationJSONData struct {
-	AttractionCity            *string  `json:"attractionCity"`
-	AttractionLatitude        *float64 `json:"attractionLatitude"`
-	AttractionLongitude       *float64 `json:"attractionLongitude"`
-	AttractionState           *string  `json:"attractionState"`
-	AttractionStreetAddress   *string  `json:"attractionStreetAddress"`
-	DestinationID             *int64   `json:"destinationId"`
-	PageURLName               *string  `json:"pageUrlName"`
-	PhotoCount                *int64   `json:"photoCount"`
-	PrimaryDestinationID      *int64   `json:"primaryDestinationId"`
-	PrimaryDestinationName    *string  `json:"primaryDestinationName"`
-	PrimaryDestinationURLName *string  `json:"primaryDestinationUrlName"`
-	ProductCount              *int64   `json:"productCount"`
-	PublishedDate             *string  `json:"publishedDate"`
-	Rating                    *float64 `json:"rating"`
-	SeoID                     *int64   `json:"seoId"`
-	SortOrder                 *int64   `json:"sortOrder"`
-	ThumbnailHiResURL         *string  `json:"thumbnailHiResURL"`
-	ThumbnailURL              *string  `json:"thumbnailURL"`
-	Title                     *string  `json:"title"`
-	WebURL                    *string  `json:"webURL"`
+	AttractionCity            *string  `json:"attractionCity,omitempty"`
+	AttractionLatitude        *float64 `json:"attractionLatitude,omitempty"`
+	AttractionLongitude       *float64 `json:"attractionLongitude,omitempty"`
+	AttractionState           *string  `json:"attractionState,omitempty"`
+	AttractionStreetAddress   *string  `json:"attractionStreetAddress,omitempty"`
+	DestinationID             *int64   `json:"destinationId,omitempty"`
+	PageURLName               *string  `json:"pageUrlName,omitempty"`
+	PhotoCount                *int64   `json:"photoCount,omitempty"`
+	PrimaryDestinationID      *int64   `json:"primaryDestinationId,omitempty"`
+	PrimaryDestinationName    *string  `json:"primaryDestinationName,omitempty"`
+	PrimaryDestinationURLName *string  `json:"primaryDestinationUrlName,omitempty"`
+	ProductCount              *int64   `json:"productCount,omitempty"`
+	PublishedDate             *string  `json:"publishedDate,omitempty"`
+	Rating                    *float64 `json:"rating,omitempty"`
+	SeoID                     *int64   `json:"seoId,omitempty"`
+	SortOrder                 *int64   `json:"sortOrder,omitempty"`
+	ThumbnailHiResURL         *string  `json:"thumbnailHiResURL,omitempty"`
+	ThumbnailURL              *string  `json:"thumbnailURL,omitempty"`
+	Title                     *string  `json:"title,omitempty"`
+	WebURL                    *string  `json:"webURL,omitempty"`
 }
 
 type TaxonomyAttractions200ApplicationJSON struct {
-	Data             []TaxonomyAttractions200ApplicationJSONData `json:"data"`
-	DateStamp        *string                                     `json:"dateStamp"`
-	ErrorCodes       []string                                    `json:"errorCodes"`
-	ErrorMessage     []interface{}                               `json:"errorMessage"`
-	ErrorMessageText *string                                     `json:"errorMessageText"`
-	ErrorName        *string                                     `json:"errorName"`
-	ErrorReference   *string                                     `json:"errorReference"`
-	ErrorType        *string                                     `json:"errorType"`
-	ExtraInfo        map[string]interface{}                      `json:"extraInfo"`
-	ExtraObject      map[string]interface{}                      `json:"extraObject"`
-	Success          *bool                                       `json:"success"`
-	TotalCount       *int64                                      `json:"totalCount"`
-	Vmid             *string                                     `json:"vmid"`
+	Data             []TaxonomyAttractions200ApplicationJSONData `json:"data,omitempty"`
+	DateStamp        *string                                     `json:"dateStamp,omitempty"`
+	ErrorCodes       []string                                    `json:"errorCodes,omitempty"`
+	ErrorMessage     []interface{}                               `json:"errorMessage,omitempty"`
+	ErrorMessageText *string                                     `json:"errorMessageText,omitempty"`
+	ErrorName        *string                                     `json:"errorName,omitempty"`
+	ErrorReference   *string                                     `json:"errorReference,omitempty"`
+	ErrorType        *string                                     `json:"errorType,omitempty"`
+	ExtraInfo        map[string]interface{}                      `json:"extraInfo,omitempty"`
+	ExtraObject      map[string]interface{}                      `json:"extraObject,omitempty"`
+	Success          *bool                                       `json:"success,omitempty"`
+	TotalCount       *int64                                      `json:"totalCount,omitempty"`
+	Vmid             *string                                     `json:"vmid,omitempty"`
 }
 
 type TaxonomyAttractionsResponse struct {

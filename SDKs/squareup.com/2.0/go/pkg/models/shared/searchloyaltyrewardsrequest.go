@@ -1,7 +1,7 @@
 package shared
 
 type SearchLoyaltyRewardsRequest struct {
-	Cursor *string                                        `json:"cursor"`
-	Limit  *int64                                         `json:"limit"`
-	Query  *SearchLoyaltyRewardsRequestLoyaltyRewardQuery `json:"query"`
+	Cursor *string                                        `json:"cursor,omitempty"`
+	Limit  *int64                                         `json:"limit,omitempty"`
+	Query  *SearchLoyaltyRewardsRequestLoyaltyRewardQuery `json:"query,omitempty"`
 }

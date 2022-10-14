@@ -1,8 +1,8 @@
 package shared
 
 type ListCertificatesRequest struct {
-	CertificateStatuses []CertificateStatusEnum `json:"CertificateStatuses"`
-	Includes            *Filters                `json:"Includes"`
-	MaxItems            *int64                  `json:"MaxItems"`
-	NextToken           *string                 `json:"NextToken"`
+	CertificateStatuses []CertificateStatusEnum `json:"CertificateStatuses,omitempty"`
+	Includes            *Filters                `json:"Includes,omitempty"`
+	MaxItems            *int64                  `json:"MaxItems,omitempty"`
+	NextToken           *string                 `json:"NextToken,omitempty"`
 }

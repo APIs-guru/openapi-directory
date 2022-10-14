@@ -1,16 +1,16 @@
 package shared
 
 type CustomChannelTargetingInfo struct {
-	AdsAppearOn  *string `json:"adsAppearOn"`
-	Description  *string `json:"description"`
-	Location     *string `json:"location"`
-	SiteLanguage *string `json:"siteLanguage"`
+	AdsAppearOn  *string `json:"adsAppearOn,omitempty"`
+	Description  *string `json:"description,omitempty"`
+	Location     *string `json:"location,omitempty"`
+	SiteLanguage *string `json:"siteLanguage,omitempty"`
 }
 
 type CustomChannel struct {
-	Code          *string                     `json:"code"`
-	ID            *string                     `json:"id"`
-	Kind          *string                     `json:"kind"`
-	Name          *string                     `json:"name"`
-	TargetingInfo *CustomChannelTargetingInfo `json:"targetingInfo"`
+	Code          *string                     `json:"code,omitempty"`
+	ID            *string                     `json:"id,omitempty"`
+	Kind          *string                     `json:"kind,omitempty"`
+	Name          *string                     `json:"name,omitempty"`
+	TargetingInfo *CustomChannelTargetingInfo `json:"targetingInfo,omitempty"`
 }

@@ -19,9 +19,9 @@ const (
 
 type CreateVideoVersionRequestBodyUpload struct {
 	Approach    CreateVideoVersionRequestBodyUploadApproachEnum `json:"approach"`
-	Link        *string                                         `json:"link"`
-	RedirectURL *string                                         `json:"redirect_url"`
-	Size        *string                                         `json:"size"`
+	Link        *string                                         `json:"link,omitempty"`
+	RedirectURL *string                                         `json:"redirect_url,omitempty"`
+	Size        *string                                         `json:"size,omitempty"`
 }
 
 type CreateVideoVersionRequestBody struct {

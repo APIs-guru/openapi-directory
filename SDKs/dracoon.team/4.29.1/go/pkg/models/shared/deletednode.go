@@ -12,21 +12,21 @@ const (
 )
 
 type DeletedNode struct {
-	AccessedAt     *time.Time          `json:"accessedAt"`
-	Classification *int32              `json:"classification"`
-	CreatedAt      *time.Time          `json:"createdAt"`
-	CreatedBy      *UserInfo           `json:"createdBy"`
-	DeletedAt      *time.Time          `json:"deletedAt"`
-	DeletedBy      *UserInfo           `json:"deletedBy"`
-	ExpireAt       *time.Time          `json:"expireAt"`
-	ID             *int64              `json:"id"`
-	IsEncrypted    *bool               `json:"isEncrypted"`
+	AccessedAt     *time.Time          `json:"accessedAt,omitempty"`
+	Classification *int32              `json:"classification,omitempty"`
+	CreatedAt      *time.Time          `json:"createdAt,omitempty"`
+	CreatedBy      *UserInfo           `json:"createdBy,omitempty"`
+	DeletedAt      *time.Time          `json:"deletedAt,omitempty"`
+	DeletedBy      *UserInfo           `json:"deletedBy,omitempty"`
+	ExpireAt       *time.Time          `json:"expireAt,omitempty"`
+	ID             *int64              `json:"id,omitempty"`
+	IsEncrypted    *bool               `json:"isEncrypted,omitempty"`
 	Name           string              `json:"name"`
-	Notes          *string             `json:"notes"`
+	Notes          *string             `json:"notes,omitempty"`
 	ParentID       int64               `json:"parentId"`
 	ParentPath     string              `json:"parentPath"`
-	Size           *int64              `json:"size"`
+	Size           *int64              `json:"size,omitempty"`
 	Type           DeletedNodeTypeEnum `json:"type"`
-	UpdatedAt      *time.Time          `json:"updatedAt"`
-	UpdatedBy      *UserInfo           `json:"updatedBy"`
+	UpdatedAt      *time.Time          `json:"updatedAt,omitempty"`
+	UpdatedBy      *UserInfo           `json:"updatedBy,omitempty"`
 }

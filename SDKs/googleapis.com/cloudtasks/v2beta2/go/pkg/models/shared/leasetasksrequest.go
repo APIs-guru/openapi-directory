@@ -9,8 +9,8 @@ const (
 )
 
 type LeaseTasksRequest struct {
-	Filter        *string                            `json:"filter"`
-	LeaseDuration *string                            `json:"leaseDuration"`
-	MaxTasks      *int32                             `json:"maxTasks"`
-	ResponseView  *LeaseTasksRequestResponseViewEnum `json:"responseView"`
+	Filter        *string                            `json:"filter,omitempty"`
+	LeaseDuration *string                            `json:"leaseDuration,omitempty"`
+	MaxTasks      *int32                             `json:"maxTasks,omitempty"`
+	ResponseView  *LeaseTasksRequestResponseViewEnum `json:"responseView,omitempty"`
 }

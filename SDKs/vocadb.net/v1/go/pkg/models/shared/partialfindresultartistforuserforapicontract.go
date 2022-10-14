@@ -1,7 +1,7 @@
 package shared
 
 type PartialFindResultArtistForUserForAPIContract struct {
-	Items      []ArtistForUserForAPIContract `json:"items"`
-	Term       *string                       `json:"term"`
-	TotalCount *int32                        `json:"totalCount"`
+	Items      []ArtistForUserForAPIContract `json:"items,omitempty"`
+	Term       *string                       `json:"term,omitempty"`
+	TotalCount *int32                        `json:"totalCount,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type UpdateDistributionBundleResult struct {
-	Operation *Operation `json:"operation"`
+	Operation *Operation `json:"operation,omitempty"`
 }

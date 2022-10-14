@@ -20,7 +20,7 @@ type UpdateAssetHeaders struct {
 
 type UpdateAssetRequestBody struct {
 	AssetName   string  `json:"assetName"`
-	ClientToken *string `json:"clientToken"`
+	ClientToken *string `json:"clientToken,omitempty"`
 }
 
 type UpdateAssetRequest struct {

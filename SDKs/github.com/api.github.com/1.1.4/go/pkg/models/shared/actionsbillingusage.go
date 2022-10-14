@@ -1,9 +1,9 @@
 package shared
 
 type ActionsBillingUsageMinutesUsedBreakdown struct {
-	Macos   *int64 `json:"MACOS"`
-	Ubuntu  *int64 `json:"UBUNTU"`
-	Windows *int64 `json:"WINDOWS"`
+	Macos   *int64 `json:"MACOS,omitempty"`
+	Ubuntu  *int64 `json:"UBUNTU,omitempty"`
+	Windows *int64 `json:"WINDOWS,omitempty"`
 }
 
 type ActionsBillingUsage struct {

@@ -16,12 +16,12 @@ type CreateSavingsPlanHeaders struct {
 }
 
 type CreateSavingsPlanRequestBody struct {
-	ClientToken           *string           `json:"clientToken"`
+	ClientToken           *string           `json:"clientToken,omitempty"`
 	Commitment            string            `json:"commitment"`
-	PurchaseTime          *time.Time        `json:"purchaseTime"`
+	PurchaseTime          *time.Time        `json:"purchaseTime,omitempty"`
 	SavingsPlanOfferingID string            `json:"savingsPlanOfferingId"`
-	Tags                  map[string]string `json:"tags"`
-	UpfrontPaymentAmount  *string           `json:"upfrontPaymentAmount"`
+	Tags                  map[string]string `json:"tags,omitempty"`
+	UpfrontPaymentAmount  *string           `json:"upfrontPaymentAmount,omitempty"`
 }
 
 type CreateSavingsPlanRequest struct {

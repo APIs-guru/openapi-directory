@@ -10,9 +10,9 @@ type GetcitystandardRequest struct {
 }
 
 type Getcitystandard200ApplicationJSON struct {
-	CityStandard *string `json:"CityStandard"`
-	Code         *string `json:"Code"`
-	Credits      *string `json:"Credits"`
+	CityStandard *string `json:"CityStandard,omitempty"`
+	Code         *string `json:"Code,omitempty"`
+	Credits      *string `json:"Credits,omitempty"`
 }
 
 type GetcitystandardResponse struct {

@@ -9,10 +9,10 @@ const (
 )
 
 type Distribution struct {
-	Architecture  *DistributionArchitectureEnum `json:"architecture"`
-	CpeURI        *string                       `json:"cpeUri"`
-	Description   *string                       `json:"description"`
-	LatestVersion *Version                      `json:"latestVersion"`
-	Maintainer    *string                       `json:"maintainer"`
-	URL           *string                       `json:"url"`
+	Architecture  *DistributionArchitectureEnum `json:"architecture,omitempty"`
+	CpeURI        *string                       `json:"cpeUri,omitempty"`
+	Description   *string                       `json:"description,omitempty"`
+	LatestVersion *Version                      `json:"latestVersion,omitempty"`
+	Maintainer    *string                       `json:"maintainer,omitempty"`
+	URL           *string                       `json:"url,omitempty"`
 }

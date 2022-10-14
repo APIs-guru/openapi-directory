@@ -1,7 +1,7 @@
 package shared
 
 type SuspendedState struct {
-	DynamicScalingInSuspended  *bool `json:"DynamicScalingInSuspended"`
-	DynamicScalingOutSuspended *bool `json:"DynamicScalingOutSuspended"`
-	ScheduledScalingSuspended  *bool `json:"ScheduledScalingSuspended"`
+	DynamicScalingInSuspended  *bool `json:"DynamicScalingInSuspended,omitempty"`
+	DynamicScalingOutSuspended *bool `json:"DynamicScalingOutSuspended,omitempty"`
+	ScheduledScalingSuspended  *bool `json:"ScheduledScalingSuspended,omitempty"`
 }

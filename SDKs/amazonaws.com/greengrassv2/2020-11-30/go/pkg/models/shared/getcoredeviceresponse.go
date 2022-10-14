@@ -5,11 +5,11 @@ import (
 )
 
 type GetCoreDeviceResponse struct {
-	Architecture              *string               `json:"architecture"`
-	CoreDeviceThingName       *string               `json:"coreDeviceThingName"`
-	CoreVersion               *string               `json:"coreVersion"`
-	LastStatusUpdateTimestamp *time.Time            `json:"lastStatusUpdateTimestamp"`
-	Platform                  *string               `json:"platform"`
-	Status                    *CoreDeviceStatusEnum `json:"status"`
-	Tags                      map[string]string     `json:"tags"`
+	Architecture              *string               `json:"architecture,omitempty"`
+	CoreDeviceThingName       *string               `json:"coreDeviceThingName,omitempty"`
+	CoreVersion               *string               `json:"coreVersion,omitempty"`
+	LastStatusUpdateTimestamp *time.Time            `json:"lastStatusUpdateTimestamp,omitempty"`
+	Platform                  *string               `json:"platform,omitempty"`
+	Status                    *CoreDeviceStatusEnum `json:"status,omitempty"`
+	Tags                      map[string]string     `json:"tags,omitempty"`
 }

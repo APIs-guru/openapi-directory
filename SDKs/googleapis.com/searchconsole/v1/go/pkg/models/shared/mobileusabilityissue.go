@@ -21,7 +21,7 @@ const (
 )
 
 type MobileUsabilityIssue struct {
-	IssueType *MobileUsabilityIssueIssueTypeEnum `json:"issueType"`
-	Message   *string                            `json:"message"`
-	Severity  *MobileUsabilityIssueSeverityEnum  `json:"severity"`
+	IssueType *MobileUsabilityIssueIssueTypeEnum `json:"issueType,omitempty"`
+	Message   *string                            `json:"message,omitempty"`
+	Severity  *MobileUsabilityIssueSeverityEnum  `json:"severity,omitempty"`
 }

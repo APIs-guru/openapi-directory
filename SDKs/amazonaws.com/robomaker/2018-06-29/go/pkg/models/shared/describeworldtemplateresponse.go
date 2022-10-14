@@ -5,11 +5,11 @@ import (
 )
 
 type DescribeWorldTemplateResponse struct {
-	Arn                *string           `json:"arn"`
-	ClientRequestToken *string           `json:"clientRequestToken"`
-	CreatedAt          *time.Time        `json:"createdAt"`
-	LastUpdatedAt      *time.Time        `json:"lastUpdatedAt"`
-	Name               *string           `json:"name"`
-	Tags               map[string]string `json:"tags"`
-	Version            *string           `json:"version"`
+	Arn                *string           `json:"arn,omitempty"`
+	ClientRequestToken *string           `json:"clientRequestToken,omitempty"`
+	CreatedAt          *time.Time        `json:"createdAt,omitempty"`
+	LastUpdatedAt      *time.Time        `json:"lastUpdatedAt,omitempty"`
+	Name               *string           `json:"name,omitempty"`
+	Tags               map[string]string `json:"tags,omitempty"`
+	Version            *string           `json:"version,omitempty"`
 }

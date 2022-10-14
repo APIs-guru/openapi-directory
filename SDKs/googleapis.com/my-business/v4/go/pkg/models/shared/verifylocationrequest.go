@@ -12,10 +12,10 @@ const (
 )
 
 type VerifyLocationRequest struct {
-	AddressInput *AddressInput                    `json:"addressInput"`
-	Context      *ServiceBusinessContext          `json:"context"`
-	EmailInput   *EmailInput                      `json:"emailInput"`
-	LanguageCode *string                          `json:"languageCode"`
-	Method       *VerifyLocationRequestMethodEnum `json:"method"`
-	PhoneInput   *PhoneInput                      `json:"phoneInput"`
+	AddressInput *AddressInput                    `json:"addressInput,omitempty"`
+	Context      *ServiceBusinessContext          `json:"context,omitempty"`
+	EmailInput   *EmailInput                      `json:"emailInput,omitempty"`
+	LanguageCode *string                          `json:"languageCode,omitempty"`
+	Method       *VerifyLocationRequestMethodEnum `json:"method,omitempty"`
+	PhoneInput   *PhoneInput                      `json:"phoneInput,omitempty"`
 }

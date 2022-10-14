@@ -1,5 +1,5 @@
 package shared
 
 type CreateDocumentClassifierResponse struct {
-	DocumentClassifierArn *string `json:"DocumentClassifierArn"`
+	DocumentClassifierArn *string `json:"DocumentClassifierArn,omitempty"`
 }

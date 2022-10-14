@@ -1,7 +1,7 @@
 package shared
 
 type ListRuntimesResponse struct {
-	NextPageToken *string   `json:"nextPageToken"`
-	Runtimes      []Runtime `json:"runtimes"`
-	Unreachable   []string  `json:"unreachable"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	Runtimes      []Runtime `json:"runtimes,omitempty"`
+	Unreachable   []string  `json:"unreachable,omitempty"`
 }

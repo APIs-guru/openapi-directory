@@ -14,6 +14,6 @@ const (
 )
 
 type ForwardInfo struct {
-	ResourceURI *string                `json:"resourceUri"`
-	Target      *ForwardInfoTargetEnum `json:"target"`
+	ResourceURI *string                `json:"resourceUri,omitempty"`
+	Target      *ForwardInfoTargetEnum `json:"target,omitempty"`
 }

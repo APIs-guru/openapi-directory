@@ -12,6 +12,6 @@ type DescribeMapResponse struct {
 	MapArn        string            `json:"MapArn"`
 	MapName       string            `json:"MapName"`
 	PricingPlan   PricingPlanEnum   `json:"PricingPlan"`
-	Tags          map[string]string `json:"Tags"`
+	Tags          map[string]string `json:"Tags,omitempty"`
 	UpdateTime    time.Time         `json:"UpdateTime"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type Project struct {
-	Arn                      *string    `json:"arn"`
-	Created                  *time.Time `json:"created"`
-	DefaultJobTimeoutMinutes *int64     `json:"defaultJobTimeoutMinutes"`
-	Name                     *string    `json:"name"`
+	Arn                      *string    `json:"arn,omitempty"`
+	Created                  *time.Time `json:"created,omitempty"`
+	DefaultJobTimeoutMinutes *int64     `json:"defaultJobTimeoutMinutes,omitempty"`
+	Name                     *string    `json:"name,omitempty"`
 }

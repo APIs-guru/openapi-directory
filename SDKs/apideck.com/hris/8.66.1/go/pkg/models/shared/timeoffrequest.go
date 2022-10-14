@@ -5,8 +5,8 @@ import (
 )
 
 type TimeOffRequestNotes struct {
-	Employee *string `json:"employee"`
-	Manager  *string `json:"manager"`
+	Employee *string `json:"employee,omitempty"`
+	Manager  *string `json:"manager,omitempty"`
 }
 
 type TimeOffRequestRequestTypeEnum string
@@ -41,21 +41,21 @@ const (
 )
 
 type TimeOffRequest struct {
-	Amount       *float64                        `json:"amount"`
-	ApprovalDate *string                         `json:"approval_date"`
-	CreatedAt    *time.Time                      `json:"created_at"`
-	CreatedBy    *string                         `json:"created_by"`
-	Description  *string                         `json:"description"`
-	EmployeeID   *string                         `json:"employee_id"`
-	EndDate      *string                         `json:"end_date"`
-	ID           *string                         `json:"id"`
-	Notes        *TimeOffRequestNotes            `json:"notes"`
-	PolicyID     *string                         `json:"policy_id"`
-	RequestDate  *string                         `json:"request_date"`
-	RequestType  *TimeOffRequestRequestTypeEnum  `json:"request_type"`
-	StartDate    *string                         `json:"start_date"`
-	Status       *TimeOffRequestStatusStatusEnum `json:"status"`
-	Units        *TimeOffRequestUnitsEnum        `json:"units"`
-	UpdatedAt    *time.Time                      `json:"updated_at"`
-	UpdatedBy    *string                         `json:"updated_by"`
+	Amount       *float64                        `json:"amount,omitempty"`
+	ApprovalDate *string                         `json:"approval_date,omitempty"`
+	CreatedAt    *time.Time                      `json:"created_at,omitempty"`
+	CreatedBy    *string                         `json:"created_by,omitempty"`
+	Description  *string                         `json:"description,omitempty"`
+	EmployeeID   *string                         `json:"employee_id,omitempty"`
+	EndDate      *string                         `json:"end_date,omitempty"`
+	ID           *string                         `json:"id,omitempty"`
+	Notes        *TimeOffRequestNotes            `json:"notes,omitempty"`
+	PolicyID     *string                         `json:"policy_id,omitempty"`
+	RequestDate  *string                         `json:"request_date,omitempty"`
+	RequestType  *TimeOffRequestRequestTypeEnum  `json:"request_type,omitempty"`
+	StartDate    *string                         `json:"start_date,omitempty"`
+	Status       *TimeOffRequestStatusStatusEnum `json:"status,omitempty"`
+	Units        *TimeOffRequestUnitsEnum        `json:"units,omitempty"`
+	UpdatedAt    *time.Time                      `json:"updated_at,omitempty"`
+	UpdatedBy    *string                         `json:"updated_by,omitempty"`
 }

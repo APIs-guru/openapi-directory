@@ -5,12 +5,12 @@ import (
 )
 
 type Domain struct {
-	Arn           *string           `json:"arn"`
-	CreatedAt     *time.Time        `json:"createdAt"`
-	DomainEntries []DomainEntry     `json:"domainEntries"`
-	Location      *ResourceLocation `json:"location"`
-	Name          *string           `json:"name"`
-	ResourceType  *ResourceTypeEnum `json:"resourceType"`
-	SupportCode   *string           `json:"supportCode"`
-	Tags          []Tag             `json:"tags"`
+	Arn           *string           `json:"arn,omitempty"`
+	CreatedAt     *time.Time        `json:"createdAt,omitempty"`
+	DomainEntries []DomainEntry     `json:"domainEntries,omitempty"`
+	Location      *ResourceLocation `json:"location,omitempty"`
+	Name          *string           `json:"name,omitempty"`
+	ResourceType  *ResourceTypeEnum `json:"resourceType,omitempty"`
+	SupportCode   *string           `json:"supportCode,omitempty"`
+	Tags          []Tag             `json:"tags,omitempty"`
 }

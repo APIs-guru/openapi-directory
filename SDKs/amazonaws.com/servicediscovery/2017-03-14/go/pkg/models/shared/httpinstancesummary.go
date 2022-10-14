@@ -1,9 +1,9 @@
 package shared
 
 type HTTPInstanceSummary struct {
-	Attributes    map[string]string `json:"Attributes"`
-	HealthStatus  *HealthStatusEnum `json:"HealthStatus"`
-	InstanceID    *string           `json:"InstanceId"`
-	NamespaceName *string           `json:"NamespaceName"`
-	ServiceName   *string           `json:"ServiceName"`
+	Attributes    map[string]string `json:"Attributes,omitempty"`
+	HealthStatus  *HealthStatusEnum `json:"HealthStatus,omitempty"`
+	InstanceID    *string           `json:"InstanceId,omitempty"`
+	NamespaceName *string           `json:"NamespaceName,omitempty"`
+	ServiceName   *string           `json:"ServiceName,omitempty"`
 }

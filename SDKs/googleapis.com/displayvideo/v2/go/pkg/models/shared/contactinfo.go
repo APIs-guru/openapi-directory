@@ -1,10 +1,10 @@
 package shared
 
 type ContactInfo struct {
-	CountryCode        *string  `json:"countryCode"`
-	HashedEmails       []string `json:"hashedEmails"`
-	HashedFirstName    *string  `json:"hashedFirstName"`
-	HashedLastName     *string  `json:"hashedLastName"`
-	HashedPhoneNumbers []string `json:"hashedPhoneNumbers"`
-	ZipCodes           []string `json:"zipCodes"`
+	CountryCode        *string  `json:"countryCode,omitempty"`
+	HashedEmails       []string `json:"hashedEmails,omitempty"`
+	HashedFirstName    *string  `json:"hashedFirstName,omitempty"`
+	HashedLastName     *string  `json:"hashedLastName,omitempty"`
+	HashedPhoneNumbers []string `json:"hashedPhoneNumbers,omitempty"`
+	ZipCodes           []string `json:"zipCodes,omitempty"`
 }

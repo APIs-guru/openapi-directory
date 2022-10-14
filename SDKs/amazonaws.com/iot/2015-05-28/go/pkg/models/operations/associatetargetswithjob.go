@@ -23,7 +23,7 @@ type AssociateTargetsWithJobHeaders struct {
 }
 
 type AssociateTargetsWithJobRequestBody struct {
-	Comment *string  `json:"comment"`
+	Comment *string  `json:"comment,omitempty"`
 	Targets []string `json:"targets"`
 }
 

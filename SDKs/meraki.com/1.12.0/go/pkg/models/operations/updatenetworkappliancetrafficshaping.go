@@ -5,12 +5,12 @@ type UpdateNetworkApplianceTrafficShapingPathParams struct {
 }
 
 type UpdateNetworkApplianceTrafficShapingRequestBodyGlobalBandwidthLimits struct {
-	LimitDown *int64 `json:"limitDown"`
-	LimitUp   *int64 `json:"limitUp"`
+	LimitDown *int64 `json:"limitDown,omitempty"`
+	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingRequestBody struct {
-	GlobalBandwidthLimits *UpdateNetworkApplianceTrafficShapingRequestBodyGlobalBandwidthLimits `json:"globalBandwidthLimits"`
+	GlobalBandwidthLimits *UpdateNetworkApplianceTrafficShapingRequestBodyGlobalBandwidthLimits `json:"globalBandwidthLimits,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingRequest struct {

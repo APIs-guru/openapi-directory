@@ -19,7 +19,7 @@ const (
 )
 
 type OsPolicyResourceConfigStep struct {
-	ErrorMessage *string                                `json:"errorMessage"`
-	Outcome      *OsPolicyResourceConfigStepOutcomeEnum `json:"outcome"`
-	Type         *OsPolicyResourceConfigStepTypeEnum    `json:"type"`
+	ErrorMessage *string                                `json:"errorMessage,omitempty"`
+	Outcome      *OsPolicyResourceConfigStepOutcomeEnum `json:"outcome,omitempty"`
+	Type         *OsPolicyResourceConfigStepTypeEnum    `json:"type,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Recommendation struct {
-	Text *string `json:"Text"`
-	URL  *string `json:"Url"`
+	Text *string `json:"Text,omitempty"`
+	URL  *string `json:"Url,omitempty"`
 }

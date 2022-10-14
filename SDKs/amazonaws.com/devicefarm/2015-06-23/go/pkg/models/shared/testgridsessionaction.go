@@ -5,9 +5,9 @@ import (
 )
 
 type TestGridSessionAction struct {
-	Action        *string    `json:"action"`
-	Duration      *int64     `json:"duration"`
-	RequestMethod *string    `json:"requestMethod"`
-	Started       *time.Time `json:"started"`
-	StatusCode    *string    `json:"statusCode"`
+	Action        *string    `json:"action,omitempty"`
+	Duration      *int64     `json:"duration,omitempty"`
+	RequestMethod *string    `json:"requestMethod,omitempty"`
+	Started       *time.Time `json:"started,omitempty"`
+	StatusCode    *string    `json:"statusCode,omitempty"`
 }

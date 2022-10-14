@@ -1,13 +1,13 @@
 package shared
 
 type Probe struct {
-	Exec                *ExecAction      `json:"exec"`
-	FailureThreshold    *int32           `json:"failureThreshold"`
-	Grpc                *GrpcAction      `json:"grpc"`
-	HTTPGet             *HTTPGetAction   `json:"httpGet"`
-	InitialDelaySeconds *int32           `json:"initialDelaySeconds"`
-	PeriodSeconds       *int32           `json:"periodSeconds"`
-	SuccessThreshold    *int32           `json:"successThreshold"`
-	TCPSocket           *TCPSocketAction `json:"tcpSocket"`
-	TimeoutSeconds      *int32           `json:"timeoutSeconds"`
+	Exec                *ExecAction      `json:"exec,omitempty"`
+	FailureThreshold    *int32           `json:"failureThreshold,omitempty"`
+	Grpc                *GrpcAction      `json:"grpc,omitempty"`
+	HTTPGet             *HTTPGetAction   `json:"httpGet,omitempty"`
+	InitialDelaySeconds *int32           `json:"initialDelaySeconds,omitempty"`
+	PeriodSeconds       *int32           `json:"periodSeconds,omitempty"`
+	SuccessThreshold    *int32           `json:"successThreshold,omitempty"`
+	TCPSocket           *TCPSocketAction `json:"tcpSocket,omitempty"`
+	TimeoutSeconds      *int32           `json:"timeoutSeconds,omitempty"`
 }

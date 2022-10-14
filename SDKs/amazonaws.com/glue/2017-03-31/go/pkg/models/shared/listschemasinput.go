@@ -1,7 +1,7 @@
 package shared
 
 type ListSchemasInput struct {
-	MaxResults *int64      `json:"MaxResults"`
-	NextToken  *string     `json:"NextToken"`
-	RegistryID *RegistryID `json:"RegistryId"`
+	MaxResults *int64      `json:"MaxResults,omitempty"`
+	NextToken  *string     `json:"NextToken,omitempty"`
+	RegistryID *RegistryID `json:"RegistryId,omitempty"`
 }

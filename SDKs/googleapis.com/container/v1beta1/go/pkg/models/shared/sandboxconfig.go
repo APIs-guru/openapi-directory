@@ -8,6 +8,6 @@ const (
 )
 
 type SandboxConfig struct {
-	SandboxType *string                `json:"sandboxType"`
-	Type        *SandboxConfigTypeEnum `json:"type"`
+	SandboxType *string                `json:"sandboxType,omitempty"`
+	Type        *SandboxConfigTypeEnum `json:"type,omitempty"`
 }

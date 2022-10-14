@@ -1,9 +1,9 @@
 package shared
 
 type IosTest struct {
-	IosAppInfo  *IosAppInfo            `json:"iosAppInfo"`
-	IosRoboTest map[string]interface{} `json:"iosRoboTest"`
-	IosTestLoop *IosTestLoop           `json:"iosTestLoop"`
-	IosXcTest   *IosXcTest             `json:"iosXcTest"`
-	TestTimeout *Duration              `json:"testTimeout"`
+	IosAppInfo  *IosAppInfo            `json:"iosAppInfo,omitempty"`
+	IosRoboTest map[string]interface{} `json:"iosRoboTest,omitempty"`
+	IosTestLoop *IosTestLoop           `json:"iosTestLoop,omitempty"`
+	IosXcTest   *IosXcTest             `json:"iosXcTest,omitempty"`
+	TestTimeout *Duration              `json:"testTimeout,omitempty"`
 }

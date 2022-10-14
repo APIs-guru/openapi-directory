@@ -1,10 +1,10 @@
 package shared
 
 type PaginatedDeployKeys struct {
-	Next     *string                  `json:"next"`
-	Page     *int64                   `json:"page"`
-	Pagelen  *int64                   `json:"pagelen"`
-	Previous *string                  `json:"previous"`
-	Size     *int64                   `json:"size"`
-	Values   []map[string]interface{} `json:"values"`
+	Next     *string                  `json:"next,omitempty"`
+	Page     *int64                   `json:"page,omitempty"`
+	Pagelen  *int64                   `json:"pagelen,omitempty"`
+	Previous *string                  `json:"previous,omitempty"`
+	Size     *int64                   `json:"size,omitempty"`
+	Values   []map[string]interface{} `json:"values,omitempty"`
 }

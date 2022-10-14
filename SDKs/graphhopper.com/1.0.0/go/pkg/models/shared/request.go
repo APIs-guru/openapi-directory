@@ -1,13 +1,13 @@
 package shared
 
 type Request struct {
-	Algorithm     *Algorithm     `json:"algorithm"`
-	Configuration *Configuration `json:"configuration"`
-	CostMatrices  []CostMatrix   `json:"cost_matrices"`
-	Objectives    []Objective    `json:"objectives"`
-	Relations     []interface{}  `json:"relations"`
-	Services      []Service      `json:"services"`
-	Shipments     []Shipment     `json:"shipments"`
-	VehicleTypes  []VehicleType  `json:"vehicle_types"`
-	Vehicles      []Vehicle      `json:"vehicles"`
+	Algorithm     *Algorithm     `json:"algorithm,omitempty"`
+	Configuration *Configuration `json:"configuration,omitempty"`
+	CostMatrices  []CostMatrix   `json:"cost_matrices,omitempty"`
+	Objectives    []Objective    `json:"objectives,omitempty"`
+	Relations     []interface{}  `json:"relations,omitempty"`
+	Services      []Service      `json:"services,omitempty"`
+	Shipments     []Shipment     `json:"shipments,omitempty"`
+	VehicleTypes  []VehicleType  `json:"vehicle_types,omitempty"`
+	Vehicles      []Vehicle      `json:"vehicles,omitempty"`
 }

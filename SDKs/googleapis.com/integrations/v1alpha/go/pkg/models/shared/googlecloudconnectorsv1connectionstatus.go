@@ -13,7 +13,7 @@ const (
 )
 
 type GoogleCloudConnectorsV1ConnectionStatus struct {
-	Description *string                                           `json:"description"`
-	State       *GoogleCloudConnectorsV1ConnectionStatusStateEnum `json:"state"`
-	Status      *string                                           `json:"status"`
+	Description *string                                           `json:"description,omitempty"`
+	State       *GoogleCloudConnectorsV1ConnectionStatusStateEnum `json:"state,omitempty"`
+	Status      *string                                           `json:"status,omitempty"`
 }

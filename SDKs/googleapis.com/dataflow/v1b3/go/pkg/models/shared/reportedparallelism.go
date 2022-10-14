@@ -1,6 +1,6 @@
 package shared
 
 type ReportedParallelism struct {
-	IsInfinite *bool    `json:"isInfinite"`
-	Value      *float64 `json:"value"`
+	IsInfinite *bool    `json:"isInfinite,omitempty"`
+	Value      *float64 `json:"value,omitempty"`
 }

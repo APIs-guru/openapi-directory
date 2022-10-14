@@ -10,10 +10,10 @@ const (
 )
 
 type GitFileSource struct {
-	BitbucketServerConfig  *string                    `json:"bitbucketServerConfig"`
-	GithubEnterpriseConfig *string                    `json:"githubEnterpriseConfig"`
-	Path                   *string                    `json:"path"`
-	RepoType               *GitFileSourceRepoTypeEnum `json:"repoType"`
-	Revision               *string                    `json:"revision"`
-	URI                    *string                    `json:"uri"`
+	BitbucketServerConfig  *string                    `json:"bitbucketServerConfig,omitempty"`
+	GithubEnterpriseConfig *string                    `json:"githubEnterpriseConfig,omitempty"`
+	Path                   *string                    `json:"path,omitempty"`
+	RepoType               *GitFileSourceRepoTypeEnum `json:"repoType,omitempty"`
+	Revision               *string                    `json:"revision,omitempty"`
+	URI                    *string                    `json:"uri,omitempty"`
 }

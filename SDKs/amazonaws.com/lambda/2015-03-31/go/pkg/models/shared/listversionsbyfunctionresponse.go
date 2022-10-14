@@ -1,6 +1,6 @@
 package shared
 
 type ListVersionsByFunctionResponse struct {
-	NextMarker *string                 `json:"NextMarker"`
-	Versions   []FunctionConfiguration `json:"Versions"`
+	NextMarker *string                 `json:"NextMarker,omitempty"`
+	Versions   []FunctionConfiguration `json:"Versions,omitempty"`
 }

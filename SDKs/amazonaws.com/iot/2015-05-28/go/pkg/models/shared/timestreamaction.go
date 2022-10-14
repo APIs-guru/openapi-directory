@@ -5,5 +5,5 @@ type TimestreamAction struct {
 	Dimensions   []TimestreamDimension `json:"dimensions"`
 	RoleArn      string                `json:"roleArn"`
 	TableName    string                `json:"tableName"`
-	Timestamp    *TimestreamTimestamp  `json:"timestamp"`
+	Timestamp    *TimestreamTimestamp  `json:"timestamp,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type SubjectDescription struct {
-	CommonName      *string          `json:"commonName"`
-	HexSerialNumber *string          `json:"hexSerialNumber"`
-	Lifetime        *string          `json:"lifetime"`
-	NotAfterTime    *string          `json:"notAfterTime"`
-	NotBeforeTime   *string          `json:"notBeforeTime"`
-	Subject         *Subject         `json:"subject"`
-	SubjectAltName  *SubjectAltNames `json:"subjectAltName"`
+	CommonName      *string          `json:"commonName,omitempty"`
+	HexSerialNumber *string          `json:"hexSerialNumber,omitempty"`
+	Lifetime        *string          `json:"lifetime,omitempty"`
+	NotAfterTime    *string          `json:"notAfterTime,omitempty"`
+	NotBeforeTime   *string          `json:"notBeforeTime,omitempty"`
+	Subject         *Subject         `json:"subject,omitempty"`
+	SubjectAltName  *SubjectAltNames `json:"subjectAltName,omitempty"`
 }

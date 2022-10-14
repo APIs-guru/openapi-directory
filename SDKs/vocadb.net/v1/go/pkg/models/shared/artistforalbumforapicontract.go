@@ -60,10 +60,10 @@ const (
 )
 
 type ArtistForAlbumForAPIContract struct {
-	Artist         *ArtistContract                                 `json:"artist"`
-	Categories     *ArtistForAlbumForAPIContractCategoriesEnum     `json:"categories"`
-	EffectiveRoles *ArtistForAlbumForAPIContractEffectiveRolesEnum `json:"effectiveRoles"`
-	IsSupport      *bool                                           `json:"isSupport"`
-	Name           *string                                         `json:"name"`
-	Roles          *ArtistForAlbumForAPIContractRolesEnum          `json:"roles"`
+	Artist         *ArtistContract                                 `json:"artist,omitempty"`
+	Categories     *ArtistForAlbumForAPIContractCategoriesEnum     `json:"categories,omitempty"`
+	EffectiveRoles *ArtistForAlbumForAPIContractEffectiveRolesEnum `json:"effectiveRoles,omitempty"`
+	IsSupport      *bool                                           `json:"isSupport,omitempty"`
+	Name           *string                                         `json:"name,omitempty"`
+	Roles          *ArtistForAlbumForAPIContractRolesEnum          `json:"roles,omitempty"`
 }

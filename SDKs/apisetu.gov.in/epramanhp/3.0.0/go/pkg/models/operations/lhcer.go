@@ -16,8 +16,8 @@ const (
 )
 
 type LhcerRequestBody struct {
-	CertificateParameters *LhcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *LhcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                LhcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Lhcer400ApplicationJSON struct {
-	Error            *Lhcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lhcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lhcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lhcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lhcer401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Lhcer401ApplicationJSON struct {
-	Error            *Lhcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lhcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lhcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lhcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lhcer404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Lhcer404ApplicationJSON struct {
-	Error            *Lhcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lhcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lhcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lhcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lhcer500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Lhcer500ApplicationJSON struct {
-	Error            *Lhcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lhcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lhcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lhcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lhcer502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Lhcer502ApplicationJSON struct {
-	Error            *Lhcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lhcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lhcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lhcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lhcer503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Lhcer503ApplicationJSON struct {
-	Error            *Lhcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lhcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lhcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lhcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lhcer504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Lhcer504ApplicationJSON struct {
-	Error            *Lhcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lhcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lhcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lhcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type LhcerResponse struct {

@@ -11,8 +11,8 @@ const (
 )
 
 type UserInvitation struct {
-	MailsSentCount *string                  `json:"mailsSentCount"`
-	Name           *string                  `json:"name"`
-	State          *UserInvitationStateEnum `json:"state"`
-	UpdateTime     *string                  `json:"updateTime"`
+	MailsSentCount *string                  `json:"mailsSentCount,omitempty"`
+	Name           *string                  `json:"name,omitempty"`
+	State          *UserInvitationStateEnum `json:"state,omitempty"`
+	UpdateTime     *string                  `json:"updateTime,omitempty"`
 }

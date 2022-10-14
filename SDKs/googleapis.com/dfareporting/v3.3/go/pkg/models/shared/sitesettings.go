@@ -10,10 +10,10 @@ const (
 )
 
 type SiteSettings struct {
-	ActiveViewOptOut              *bool                                       `json:"activeViewOptOut"`
-	AdBlockingOptOut              *bool                                       `json:"adBlockingOptOut"`
-	DisableNewCookie              *bool                                       `json:"disableNewCookie"`
-	TagSetting                    *TagSetting                                 `json:"tagSetting"`
-	VideoActiveViewOptOutTemplate *bool                                       `json:"videoActiveViewOptOutTemplate"`
-	VpaidAdapterChoiceTemplate    *SiteSettingsVpaidAdapterChoiceTemplateEnum `json:"vpaidAdapterChoiceTemplate"`
+	ActiveViewOptOut              *bool                                       `json:"activeViewOptOut,omitempty"`
+	AdBlockingOptOut              *bool                                       `json:"adBlockingOptOut,omitempty"`
+	DisableNewCookie              *bool                                       `json:"disableNewCookie,omitempty"`
+	TagSetting                    *TagSetting                                 `json:"tagSetting,omitempty"`
+	VideoActiveViewOptOutTemplate *bool                                       `json:"videoActiveViewOptOutTemplate,omitempty"`
+	VpaidAdapterChoiceTemplate    *SiteSettingsVpaidAdapterChoiceTemplateEnum `json:"vpaidAdapterChoiceTemplate,omitempty"`
 }

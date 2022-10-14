@@ -17,7 +17,7 @@ type UpdateReplicationSetHeaders struct {
 type UpdateReplicationSetRequestBody struct {
 	Actions     []shared.UpdateReplicationSetAction `json:"actions"`
 	Arn         string                              `json:"arn"`
-	ClientToken *string                             `json:"clientToken"`
+	ClientToken *string                             `json:"clientToken,omitempty"`
 }
 
 type UpdateReplicationSetRequest struct {

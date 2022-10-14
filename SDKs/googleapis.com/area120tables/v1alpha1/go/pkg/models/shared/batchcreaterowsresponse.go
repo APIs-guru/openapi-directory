@@ -1,5 +1,5 @@
 package shared
 
 type BatchCreateRowsResponse struct {
-	Rows []Row `json:"rows"`
+	Rows []Row `json:"rows,omitempty"`
 }

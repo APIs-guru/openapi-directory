@@ -1,6 +1,6 @@
 package shared
 
 type BetweenFilter struct {
-	FromValue *NumericValue `json:"fromValue"`
-	ToValue   *NumericValue `json:"toValue"`
+	FromValue *NumericValue `json:"fromValue,omitempty"`
+	ToValue   *NumericValue `json:"toValue,omitempty"`
 }

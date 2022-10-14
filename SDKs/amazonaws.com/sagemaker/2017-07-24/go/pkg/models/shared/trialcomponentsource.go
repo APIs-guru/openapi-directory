@@ -2,5 +2,5 @@ package shared
 
 type TrialComponentSource struct {
 	SourceArn  string  `json:"SourceArn"`
-	SourceType *string `json:"SourceType"`
+	SourceType *string `json:"SourceType,omitempty"`
 }

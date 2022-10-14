@@ -28,15 +28,15 @@ const (
 )
 
 type GitCreateTreeRequestBodyTree struct {
-	Content *string                               `json:"content"`
-	Mode    *GitCreateTreeRequestBodyTreeModeEnum `json:"mode"`
-	Path    *string                               `json:"path"`
-	Sha     *string                               `json:"sha"`
-	Type    *GitCreateTreeRequestBodyTreeTypeEnum `json:"type"`
+	Content *string                               `json:"content,omitempty"`
+	Mode    *GitCreateTreeRequestBodyTreeModeEnum `json:"mode,omitempty"`
+	Path    *string                               `json:"path,omitempty"`
+	Sha     *string                               `json:"sha,omitempty"`
+	Type    *GitCreateTreeRequestBodyTreeTypeEnum `json:"type,omitempty"`
 }
 
 type GitCreateTreeRequestBody struct {
-	BaseTree *string                        `json:"base_tree"`
+	BaseTree *string                        `json:"base_tree,omitempty"`
 	Tree     []GitCreateTreeRequestBodyTree `json:"tree"`
 }
 

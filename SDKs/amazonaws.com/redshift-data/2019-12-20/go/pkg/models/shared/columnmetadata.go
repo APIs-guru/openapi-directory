@@ -1,17 +1,17 @@
 package shared
 
 type ColumnMetadata struct {
-	ColumnDefault   *string `json:"columnDefault"`
-	IsCaseSensitive *bool   `json:"isCaseSensitive"`
-	IsCurrency      *bool   `json:"isCurrency"`
-	IsSigned        *bool   `json:"isSigned"`
-	Label           *string `json:"label"`
-	Length          *int64  `json:"length"`
-	Name            *string `json:"name"`
-	Nullable        *int64  `json:"nullable"`
-	Precision       *int64  `json:"precision"`
-	Scale           *int64  `json:"scale"`
-	SchemaName      *string `json:"schemaName"`
-	TableName       *string `json:"tableName"`
-	TypeName        *string `json:"typeName"`
+	ColumnDefault   *string `json:"columnDefault,omitempty"`
+	IsCaseSensitive *bool   `json:"isCaseSensitive,omitempty"`
+	IsCurrency      *bool   `json:"isCurrency,omitempty"`
+	IsSigned        *bool   `json:"isSigned,omitempty"`
+	Label           *string `json:"label,omitempty"`
+	Length          *int64  `json:"length,omitempty"`
+	Name            *string `json:"name,omitempty"`
+	Nullable        *int64  `json:"nullable,omitempty"`
+	Precision       *int64  `json:"precision,omitempty"`
+	Scale           *int64  `json:"scale,omitempty"`
+	SchemaName      *string `json:"schemaName,omitempty"`
+	TableName       *string `json:"tableName,omitempty"`
+	TypeName        *string `json:"typeName,omitempty"`
 }

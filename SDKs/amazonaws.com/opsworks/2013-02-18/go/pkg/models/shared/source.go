@@ -1,10 +1,10 @@
 package shared
 
 type Source struct {
-	Password *string         `json:"Password"`
-	Revision *string         `json:"Revision"`
-	SSHKey   *string         `json:"SshKey"`
-	Type     *SourceTypeEnum `json:"Type"`
-	URL      *string         `json:"Url"`
-	Username *string         `json:"Username"`
+	Password *string         `json:"Password,omitempty"`
+	Revision *string         `json:"Revision,omitempty"`
+	SSHKey   *string         `json:"SshKey,omitempty"`
+	Type     *SourceTypeEnum `json:"Type,omitempty"`
+	URL      *string         `json:"Url,omitempty"`
+	Username *string         `json:"Username,omitempty"`
 }

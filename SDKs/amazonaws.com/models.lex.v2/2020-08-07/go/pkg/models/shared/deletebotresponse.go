@@ -1,6 +1,6 @@
 package shared
 
 type DeleteBotResponse struct {
-	BotID     *string        `json:"botId"`
-	BotStatus *BotStatusEnum `json:"botStatus"`
+	BotID     *string        `json:"botId,omitempty"`
+	BotStatus *BotStatusEnum `json:"botStatus,omitempty"`
 }

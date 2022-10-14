@@ -1,6 +1,6 @@
 package shared
 
 type Resource struct {
-	ResourceName *string `json:"ResourceName"`
-	ResourceType *string `json:"ResourceType"`
+	ResourceName *string `json:"ResourceName,omitempty"`
+	ResourceType *string `json:"ResourceType,omitempty"`
 }

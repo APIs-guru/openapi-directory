@@ -21,8 +21,8 @@ const (
 )
 
 type PerformanceGoal struct {
-	PerformanceGoalAmountMicros     *string                                 `json:"performanceGoalAmountMicros"`
-	PerformanceGoalPercentageMicros *string                                 `json:"performanceGoalPercentageMicros"`
-	PerformanceGoalString           *string                                 `json:"performanceGoalString"`
-	PerformanceGoalType             *PerformanceGoalPerformanceGoalTypeEnum `json:"performanceGoalType"`
+	PerformanceGoalAmountMicros     *string                                 `json:"performanceGoalAmountMicros,omitempty"`
+	PerformanceGoalPercentageMicros *string                                 `json:"performanceGoalPercentageMicros,omitempty"`
+	PerformanceGoalString           *string                                 `json:"performanceGoalString,omitempty"`
+	PerformanceGoalType             *PerformanceGoalPerformanceGoalTypeEnum `json:"performanceGoalType,omitempty"`
 }

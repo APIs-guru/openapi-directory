@@ -1,7 +1,7 @@
 package shared
 
 type LogSplit struct {
-	Index       *int32  `json:"index"`
-	TotalSplits *int32  `json:"totalSplits"`
-	UID         *string `json:"uid"`
+	Index       *int32  `json:"index,omitempty"`
+	TotalSplits *int32  `json:"totalSplits,omitempty"`
+	UID         *string `json:"uid,omitempty"`
 }

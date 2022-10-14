@@ -17,21 +17,21 @@ const (
 )
 
 type Environment struct {
-	ClusterManagerAPIService   *string                                    `json:"clusterManagerApiService"`
-	Dataset                    *string                                    `json:"dataset"`
-	DebugOptions               *DebugOptions                              `json:"debugOptions"`
-	Experiments                []string                                   `json:"experiments"`
-	FlexResourceSchedulingGoal *EnvironmentFlexResourceSchedulingGoalEnum `json:"flexResourceSchedulingGoal"`
-	InternalExperiments        map[string]interface{}                     `json:"internalExperiments"`
-	SdkPipelineOptions         map[string]interface{}                     `json:"sdkPipelineOptions"`
-	ServiceAccountEmail        *string                                    `json:"serviceAccountEmail"`
-	ServiceKmsKeyName          *string                                    `json:"serviceKmsKeyName"`
-	ServiceOptions             []string                                   `json:"serviceOptions"`
-	ShuffleMode                *EnvironmentShuffleModeEnum                `json:"shuffleMode"`
-	TempStoragePrefix          *string                                    `json:"tempStoragePrefix"`
-	UserAgent                  map[string]interface{}                     `json:"userAgent"`
-	Version                    map[string]interface{}                     `json:"version"`
-	WorkerPools                []WorkerPool                               `json:"workerPools"`
-	WorkerRegion               *string                                    `json:"workerRegion"`
-	WorkerZone                 *string                                    `json:"workerZone"`
+	ClusterManagerAPIService   *string                                    `json:"clusterManagerApiService,omitempty"`
+	Dataset                    *string                                    `json:"dataset,omitempty"`
+	DebugOptions               *DebugOptions                              `json:"debugOptions,omitempty"`
+	Experiments                []string                                   `json:"experiments,omitempty"`
+	FlexResourceSchedulingGoal *EnvironmentFlexResourceSchedulingGoalEnum `json:"flexResourceSchedulingGoal,omitempty"`
+	InternalExperiments        map[string]interface{}                     `json:"internalExperiments,omitempty"`
+	SdkPipelineOptions         map[string]interface{}                     `json:"sdkPipelineOptions,omitempty"`
+	ServiceAccountEmail        *string                                    `json:"serviceAccountEmail,omitempty"`
+	ServiceKmsKeyName          *string                                    `json:"serviceKmsKeyName,omitempty"`
+	ServiceOptions             []string                                   `json:"serviceOptions,omitempty"`
+	ShuffleMode                *EnvironmentShuffleModeEnum                `json:"shuffleMode,omitempty"`
+	TempStoragePrefix          *string                                    `json:"tempStoragePrefix,omitempty"`
+	UserAgent                  map[string]interface{}                     `json:"userAgent,omitempty"`
+	Version                    map[string]interface{}                     `json:"version,omitempty"`
+	WorkerPools                []WorkerPool                               `json:"workerPools,omitempty"`
+	WorkerRegion               *string                                    `json:"workerRegion,omitempty"`
+	WorkerZone                 *string                                    `json:"workerZone,omitempty"`
 }

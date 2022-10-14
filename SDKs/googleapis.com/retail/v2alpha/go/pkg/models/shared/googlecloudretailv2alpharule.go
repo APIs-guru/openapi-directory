@@ -1,13 +1,13 @@
 package shared
 
 type GoogleCloudRetailV2alphaRule struct {
-	BoostAction          *GoogleCloudRetailV2alphaRuleBoostAction          `json:"boostAction"`
-	Condition            *GoogleCloudRetailV2alphaCondition                `json:"condition"`
-	DoNotAssociateAction *GoogleCloudRetailV2alphaRuleDoNotAssociateAction `json:"doNotAssociateAction"`
-	FilterAction         *GoogleCloudRetailV2alphaRuleFilterAction         `json:"filterAction"`
-	IgnoreAction         *GoogleCloudRetailV2alphaRuleIgnoreAction         `json:"ignoreAction"`
-	OnewaySynonymsAction *GoogleCloudRetailV2alphaRuleOnewaySynonymsAction `json:"onewaySynonymsAction"`
-	RedirectAction       *GoogleCloudRetailV2alphaRuleRedirectAction       `json:"redirectAction"`
-	ReplacementAction    *GoogleCloudRetailV2alphaRuleReplacementAction    `json:"replacementAction"`
-	TwowaySynonymsAction *GoogleCloudRetailV2alphaRuleTwowaySynonymsAction `json:"twowaySynonymsAction"`
+	BoostAction          *GoogleCloudRetailV2alphaRuleBoostAction          `json:"boostAction,omitempty"`
+	Condition            *GoogleCloudRetailV2alphaCondition                `json:"condition,omitempty"`
+	DoNotAssociateAction *GoogleCloudRetailV2alphaRuleDoNotAssociateAction `json:"doNotAssociateAction,omitempty"`
+	FilterAction         *GoogleCloudRetailV2alphaRuleFilterAction         `json:"filterAction,omitempty"`
+	IgnoreAction         *GoogleCloudRetailV2alphaRuleIgnoreAction         `json:"ignoreAction,omitempty"`
+	OnewaySynonymsAction *GoogleCloudRetailV2alphaRuleOnewaySynonymsAction `json:"onewaySynonymsAction,omitempty"`
+	RedirectAction       *GoogleCloudRetailV2alphaRuleRedirectAction       `json:"redirectAction,omitempty"`
+	ReplacementAction    *GoogleCloudRetailV2alphaRuleReplacementAction    `json:"replacementAction,omitempty"`
+	TwowaySynonymsAction *GoogleCloudRetailV2alphaRuleTwowaySynonymsAction `json:"twowaySynonymsAction,omitempty"`
 }

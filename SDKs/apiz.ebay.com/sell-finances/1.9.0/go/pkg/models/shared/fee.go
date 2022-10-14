@@ -1,7 +1,7 @@
 package shared
 
 type Fee struct {
-	Amount  *Amount `json:"amount"`
-	FeeMemo *string `json:"feeMemo"`
-	FeeType *string `json:"feeType"`
+	Amount  *Amount `json:"amount,omitempty"`
+	FeeMemo *string `json:"feeMemo,omitempty"`
+	FeeType *string `json:"feeType,omitempty"`
 }

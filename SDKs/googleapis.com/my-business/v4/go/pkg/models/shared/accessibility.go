@@ -37,12 +37,12 @@ const (
 )
 
 type Accessibility struct {
-	MobilityAccessible                  *bool                                                 `json:"mobilityAccessible"`
-	MobilityAccessibleElevator          *bool                                                 `json:"mobilityAccessibleElevator"`
-	MobilityAccessibleElevatorException *AccessibilityMobilityAccessibleElevatorExceptionEnum `json:"mobilityAccessibleElevatorException"`
-	MobilityAccessibleException         *AccessibilityMobilityAccessibleExceptionEnum         `json:"mobilityAccessibleException"`
-	MobilityAccessibleParking           *bool                                                 `json:"mobilityAccessibleParking"`
-	MobilityAccessibleParkingException  *AccessibilityMobilityAccessibleParkingExceptionEnum  `json:"mobilityAccessibleParkingException"`
-	MobilityAccessiblePool              *bool                                                 `json:"mobilityAccessiblePool"`
-	MobilityAccessiblePoolException     *AccessibilityMobilityAccessiblePoolExceptionEnum     `json:"mobilityAccessiblePoolException"`
+	MobilityAccessible                  *bool                                                 `json:"mobilityAccessible,omitempty"`
+	MobilityAccessibleElevator          *bool                                                 `json:"mobilityAccessibleElevator,omitempty"`
+	MobilityAccessibleElevatorException *AccessibilityMobilityAccessibleElevatorExceptionEnum `json:"mobilityAccessibleElevatorException,omitempty"`
+	MobilityAccessibleException         *AccessibilityMobilityAccessibleExceptionEnum         `json:"mobilityAccessibleException,omitempty"`
+	MobilityAccessibleParking           *bool                                                 `json:"mobilityAccessibleParking,omitempty"`
+	MobilityAccessibleParkingException  *AccessibilityMobilityAccessibleParkingExceptionEnum  `json:"mobilityAccessibleParkingException,omitempty"`
+	MobilityAccessiblePool              *bool                                                 `json:"mobilityAccessiblePool,omitempty"`
+	MobilityAccessiblePoolException     *AccessibilityMobilityAccessiblePoolExceptionEnum     `json:"mobilityAccessiblePoolException,omitempty"`
 }

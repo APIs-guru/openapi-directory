@@ -1,8 +1,8 @@
 package shared
 
 type RequestMetadata struct {
-	DeviceInfo *DeviceInfo `json:"deviceInfo"`
-	Domain     *string     `json:"domain"`
-	SessionID  *string     `json:"sessionId"`
-	UserID     *string     `json:"userId"`
+	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	Domain     *string     `json:"domain,omitempty"`
+	SessionID  *string     `json:"sessionId,omitempty"`
+	UserID     *string     `json:"userId,omitempty"`
 }

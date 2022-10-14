@@ -9,10 +9,10 @@ const (
 )
 
 type Leaderboard struct {
-	IconURL          *string               `json:"iconUrl"`
-	ID               *string               `json:"id"`
-	IsIconURLDefault *bool                 `json:"isIconUrlDefault"`
-	Kind             *string               `json:"kind"`
-	Name             *string               `json:"name"`
-	Order            *LeaderboardOrderEnum `json:"order"`
+	IconURL          *string               `json:"iconUrl,omitempty"`
+	ID               *string               `json:"id,omitempty"`
+	IsIconURLDefault *bool                 `json:"isIconUrlDefault,omitempty"`
+	Kind             *string               `json:"kind,omitempty"`
+	Name             *string               `json:"name,omitempty"`
+	Order            *LeaderboardOrderEnum `json:"order,omitempty"`
 }

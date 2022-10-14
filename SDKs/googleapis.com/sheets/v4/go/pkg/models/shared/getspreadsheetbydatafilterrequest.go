@@ -1,6 +1,6 @@
 package shared
 
 type GetSpreadsheetByDataFilterRequest struct {
-	DataFilters     []DataFilter `json:"dataFilters"`
-	IncludeGridData *bool        `json:"includeGridData"`
+	DataFilters     []DataFilter `json:"dataFilters,omitempty"`
+	IncludeGridData *bool        `json:"includeGridData,omitempty"`
 }

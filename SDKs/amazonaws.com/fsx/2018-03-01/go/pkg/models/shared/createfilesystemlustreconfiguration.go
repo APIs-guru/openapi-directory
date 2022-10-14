@@ -1,16 +1,16 @@
 package shared
 
 type CreateFileSystemLustreConfiguration struct {
-	AutoImportPolicy              *AutoImportPolicyTypeEnum `json:"AutoImportPolicy"`
-	AutomaticBackupRetentionDays  *int64                    `json:"AutomaticBackupRetentionDays"`
-	CopyTagsToBackups             *bool                     `json:"CopyTagsToBackups"`
-	DailyAutomaticBackupStartTime *string                   `json:"DailyAutomaticBackupStartTime"`
-	DataCompressionType           *DataCompressionTypeEnum  `json:"DataCompressionType"`
-	DeploymentType                *LustreDeploymentTypeEnum `json:"DeploymentType"`
-	DriveCacheType                *DriveCacheTypeEnum       `json:"DriveCacheType"`
-	ExportPath                    *string                   `json:"ExportPath"`
-	ImportPath                    *string                   `json:"ImportPath"`
-	ImportedFileChunkSize         *int64                    `json:"ImportedFileChunkSize"`
-	PerUnitStorageThroughput      *int64                    `json:"PerUnitStorageThroughput"`
-	WeeklyMaintenanceStartTime    *string                   `json:"WeeklyMaintenanceStartTime"`
+	AutoImportPolicy              *AutoImportPolicyTypeEnum `json:"AutoImportPolicy,omitempty"`
+	AutomaticBackupRetentionDays  *int64                    `json:"AutomaticBackupRetentionDays,omitempty"`
+	CopyTagsToBackups             *bool                     `json:"CopyTagsToBackups,omitempty"`
+	DailyAutomaticBackupStartTime *string                   `json:"DailyAutomaticBackupStartTime,omitempty"`
+	DataCompressionType           *DataCompressionTypeEnum  `json:"DataCompressionType,omitempty"`
+	DeploymentType                *LustreDeploymentTypeEnum `json:"DeploymentType,omitempty"`
+	DriveCacheType                *DriveCacheTypeEnum       `json:"DriveCacheType,omitempty"`
+	ExportPath                    *string                   `json:"ExportPath,omitempty"`
+	ImportPath                    *string                   `json:"ImportPath,omitempty"`
+	ImportedFileChunkSize         *int64                    `json:"ImportedFileChunkSize,omitempty"`
+	PerUnitStorageThroughput      *int64                    `json:"PerUnitStorageThroughput,omitempty"`
+	WeeklyMaintenanceStartTime    *string                   `json:"WeeklyMaintenanceStartTime,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type WorkerBlock struct {
-	Reason   *string `json:"Reason"`
-	WorkerID *string `json:"WorkerId"`
+	Reason   *string `json:"Reason,omitempty"`
+	WorkerID *string `json:"WorkerId,omitempty"`
 }

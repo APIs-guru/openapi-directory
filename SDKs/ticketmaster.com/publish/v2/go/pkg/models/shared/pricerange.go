@@ -7,8 +7,8 @@ const (
 )
 
 type PriceRange struct {
-	Currency *string             `json:"currency"`
-	Max      *float64            `json:"max"`
-	Min      *float64            `json:"min"`
-	Type     *PriceRangeTypeEnum `json:"type"`
+	Currency *string             `json:"currency,omitempty"`
+	Max      *float64            `json:"max,omitempty"`
+	Min      *float64            `json:"min,omitempty"`
+	Type     *PriceRangeTypeEnum `json:"type,omitempty"`
 }

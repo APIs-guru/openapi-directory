@@ -1,12 +1,12 @@
 package shared
 
 type CharityOrg struct {
-	CharityOrgID     *string   `json:"charityOrgId"`
-	Description      *string   `json:"description"`
-	Location         *Location `json:"location"`
-	LogoImage        *Image    `json:"logoImage"`
-	MissionStatement *string   `json:"missionStatement"`
-	Name             *string   `json:"name"`
-	RegistrationID   *string   `json:"registrationId"`
-	Website          *string   `json:"website"`
+	CharityOrgID     *string   `json:"charityOrgId,omitempty"`
+	Description      *string   `json:"description,omitempty"`
+	Location         *Location `json:"location,omitempty"`
+	LogoImage        *Image    `json:"logoImage,omitempty"`
+	MissionStatement *string   `json:"missionStatement,omitempty"`
+	Name             *string   `json:"name,omitempty"`
+	RegistrationID   *string   `json:"registrationId,omitempty"`
+	Website          *string   `json:"website,omitempty"`
 }

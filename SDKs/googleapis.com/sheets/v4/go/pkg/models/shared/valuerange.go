@@ -9,7 +9,7 @@ const (
 )
 
 type ValueRange struct {
-	MajorDimension *ValueRangeMajorDimensionEnum `json:"majorDimension"`
-	Range          *string                       `json:"range"`
-	Values         [][]interface{}               `json:"values"`
+	MajorDimension *ValueRangeMajorDimensionEnum `json:"majorDimension,omitempty"`
+	Range          *string                       `json:"range,omitempty"`
+	Values         [][]interface{}               `json:"values,omitempty"`
 }

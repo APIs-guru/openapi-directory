@@ -15,7 +15,7 @@ type BatchGetCustomDataIdentifiersHeaders struct {
 }
 
 type BatchGetCustomDataIdentifiersRequestBody struct {
-	Ids []string `json:"ids"`
+	Ids []string `json:"ids,omitempty"`
 }
 
 type BatchGetCustomDataIdentifiersRequest struct {

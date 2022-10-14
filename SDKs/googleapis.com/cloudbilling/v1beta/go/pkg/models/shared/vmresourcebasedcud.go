@@ -9,10 +9,10 @@ const (
 )
 
 type VMResourceBasedCud struct {
-	GuestAccelerator *GuestAccelerator           `json:"guestAccelerator"`
-	MachineSeries    *string                     `json:"machineSeries"`
-	MemorySizeGb     *float64                    `json:"memorySizeGb"`
-	Plan             *VMResourceBasedCudPlanEnum `json:"plan"`
-	Region           *string                     `json:"region"`
-	VirtualCPUCount  *string                     `json:"virtualCpuCount"`
+	GuestAccelerator *GuestAccelerator           `json:"guestAccelerator,omitempty"`
+	MachineSeries    *string                     `json:"machineSeries,omitempty"`
+	MemorySizeGb     *float64                    `json:"memorySizeGb,omitempty"`
+	Plan             *VMResourceBasedCudPlanEnum `json:"plan,omitempty"`
+	Region           *string                     `json:"region,omitempty"`
+	VirtualCPUCount  *string                     `json:"virtualCpuCount,omitempty"`
 }

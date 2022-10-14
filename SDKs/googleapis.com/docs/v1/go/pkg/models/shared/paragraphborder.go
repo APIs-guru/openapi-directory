@@ -10,8 +10,8 @@ const (
 )
 
 type ParagraphBorder struct {
-	Color     *OptionalColor                `json:"color"`
-	DashStyle *ParagraphBorderDashStyleEnum `json:"dashStyle"`
-	Padding   *Dimension                    `json:"padding"`
-	Width     *Dimension                    `json:"width"`
+	Color     *OptionalColor                `json:"color,omitempty"`
+	DashStyle *ParagraphBorderDashStyleEnum `json:"dashStyle,omitempty"`
+	Padding   *Dimension                    `json:"padding,omitempty"`
+	Width     *Dimension                    `json:"width,omitempty"`
 }

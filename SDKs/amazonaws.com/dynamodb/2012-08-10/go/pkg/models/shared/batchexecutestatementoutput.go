@@ -1,5 +1,5 @@
 package shared
 
 type BatchExecuteStatementOutput struct {
-	Responses []BatchStatementResponse `json:"Responses"`
+	Responses []BatchStatementResponse `json:"Responses,omitempty"`
 }

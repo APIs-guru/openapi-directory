@@ -1,5 +1,5 @@
 package shared
 
 type GetSchemaVersionsDiffResponse struct {
-	Diff *string `json:"Diff"`
+	Diff *string `json:"Diff,omitempty"`
 }

@@ -5,17 +5,17 @@ import (
 )
 
 type Solution struct {
-	AutoMlResult          *AutoMlResult           `json:"autoMLResult"`
-	CreationDateTime      *time.Time              `json:"creationDateTime"`
-	DatasetGroupArn       *string                 `json:"datasetGroupArn"`
-	EventType             *string                 `json:"eventType"`
-	LastUpdatedDateTime   *time.Time              `json:"lastUpdatedDateTime"`
-	LatestSolutionVersion *SolutionVersionSummary `json:"latestSolutionVersion"`
-	Name                  *string                 `json:"name"`
-	PerformAutoMl         *bool                   `json:"performAutoML"`
-	PerformHpo            *bool                   `json:"performHPO"`
-	RecipeArn             *string                 `json:"recipeArn"`
-	SolutionArn           *string                 `json:"solutionArn"`
-	SolutionConfig        *SolutionConfig         `json:"solutionConfig"`
-	Status                *string                 `json:"status"`
+	AutoMlResult          *AutoMlResult           `json:"autoMLResult,omitempty"`
+	CreationDateTime      *time.Time              `json:"creationDateTime,omitempty"`
+	DatasetGroupArn       *string                 `json:"datasetGroupArn,omitempty"`
+	EventType             *string                 `json:"eventType,omitempty"`
+	LastUpdatedDateTime   *time.Time              `json:"lastUpdatedDateTime,omitempty"`
+	LatestSolutionVersion *SolutionVersionSummary `json:"latestSolutionVersion,omitempty"`
+	Name                  *string                 `json:"name,omitempty"`
+	PerformAutoMl         *bool                   `json:"performAutoML,omitempty"`
+	PerformHpo            *bool                   `json:"performHPO,omitempty"`
+	RecipeArn             *string                 `json:"recipeArn,omitempty"`
+	SolutionArn           *string                 `json:"solutionArn,omitempty"`
+	SolutionConfig        *SolutionConfig         `json:"solutionConfig,omitempty"`
+	Status                *string                 `json:"status,omitempty"`
 }

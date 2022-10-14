@@ -14,7 +14,7 @@ type AddTagForTaskQueryParams struct {
 }
 
 type AddTagForTaskRequestBody struct {
-	Data *shared.TaskAddTagRequest `json:"data"`
+	Data *shared.TaskAddTagRequest `json:"data,omitempty"`
 }
 
 type AddTagForTaskRequest struct {
@@ -24,7 +24,7 @@ type AddTagForTaskRequest struct {
 }
 
 type AddTagForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddTagForTaskResponse struct {

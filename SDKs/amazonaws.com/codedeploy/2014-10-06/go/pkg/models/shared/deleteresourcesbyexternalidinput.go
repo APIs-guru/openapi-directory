@@ -1,5 +1,5 @@
 package shared
 
 type DeleteResourcesByExternalIDInput struct {
-	ExternalID *string `json:"externalId"`
+	ExternalID *string `json:"externalId,omitempty"`
 }

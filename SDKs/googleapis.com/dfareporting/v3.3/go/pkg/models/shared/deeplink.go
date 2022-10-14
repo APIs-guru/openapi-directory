@@ -1,9 +1,9 @@
 package shared
 
 type DeepLink struct {
-	AppURL             *string    `json:"appUrl"`
-	FallbackURL        *string    `json:"fallbackUrl"`
-	Kind               *string    `json:"kind"`
-	MobileApp          *MobileApp `json:"mobileApp"`
-	RemarketingListIds []string   `json:"remarketingListIds"`
+	AppURL             *string    `json:"appUrl,omitempty"`
+	FallbackURL        *string    `json:"fallbackUrl,omitempty"`
+	Kind               *string    `json:"kind,omitempty"`
+	MobileApp          *MobileApp `json:"mobileApp,omitempty"`
+	RemarketingListIds []string   `json:"remarketingListIds,omitempty"`
 }

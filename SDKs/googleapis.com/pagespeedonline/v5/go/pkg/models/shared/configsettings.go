@@ -1,9 +1,9 @@
 package shared
 
 type ConfigSettings struct {
-	Channel            *string      `json:"channel"`
-	EmulatedFormFactor *string      `json:"emulatedFormFactor"`
-	FormFactor         *string      `json:"formFactor"`
-	Locale             *string      `json:"locale"`
-	OnlyCategories     *interface{} `json:"onlyCategories"`
+	Channel            *string      `json:"channel,omitempty"`
+	EmulatedFormFactor *string      `json:"emulatedFormFactor,omitempty"`
+	FormFactor         *string      `json:"formFactor,omitempty"`
+	Locale             *string      `json:"locale,omitempty"`
+	OnlyCategories     *interface{} `json:"onlyCategories,omitempty"`
 }

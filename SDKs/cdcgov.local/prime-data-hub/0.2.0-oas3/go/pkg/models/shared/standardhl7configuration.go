@@ -9,27 +9,27 @@ const (
 )
 
 type StandardHl7Configuration struct {
-	ConvertTimestampToDateTime *string                                            `json:"convertTimestampToDateTime"`
-	DefaultAoeToUnknown        *bool                                              `json:"defaultAoeToUnknown"`
+	ConvertTimestampToDateTime *string                                            `json:"convertTimestampToDateTime,omitempty"`
+	DefaultAoeToUnknown        *bool                                              `json:"defaultAoeToUnknown,omitempty"`
 	IncludeAoe                 bool                                               `json:"includeAOE"`
-	NameFormat                 *string                                            `json:"nameFormat"`
-	PhoneNumberFormatting      *StandardHl7ConfigurationPhoneNumberFormattingEnum `json:"phoneNumberFormatting"`
-	ReceivingApplicationName   *string                                            `json:"receivingApplicationName"`
-	ReceivingApplicationOid    *string                                            `json:"receivingApplicationOID"`
-	ReceivingFacilityName      *string                                            `json:"receivingFacilityName"`
-	ReceivingFacilityOid       *string                                            `json:"receivingFacilityOID"`
-	ReceivingOrganization      *string                                            `json:"receivingOrganization"`
-	ReportingFacilityID        *string                                            `json:"reportingFacilityId"`
-	ReportingFacilityIDType    *string                                            `json:"reportingFacilityIdType"`
-	ReportingFacilityName      *string                                            `json:"reportingFacilityName"`
-	SuppressAoe                *bool                                              `json:"suppressAoe"`
-	SuppressHl7Fields          *string                                            `json:"suppressHl7Fields"`
-	SuppressQstForAoe          *bool                                              `json:"suppressQstForAoe"`
+	NameFormat                 *string                                            `json:"nameFormat,omitempty"`
+	PhoneNumberFormatting      *StandardHl7ConfigurationPhoneNumberFormattingEnum `json:"phoneNumberFormatting,omitempty"`
+	ReceivingApplicationName   *string                                            `json:"receivingApplicationName,omitempty"`
+	ReceivingApplicationOid    *string                                            `json:"receivingApplicationOID,omitempty"`
+	ReceivingFacilityName      *string                                            `json:"receivingFacilityName,omitempty"`
+	ReceivingFacilityOid       *string                                            `json:"receivingFacilityOID,omitempty"`
+	ReceivingOrganization      *string                                            `json:"receivingOrganization,omitempty"`
+	ReportingFacilityID        *string                                            `json:"reportingFacilityId,omitempty"`
+	ReportingFacilityIDType    *string                                            `json:"reportingFacilityIdType,omitempty"`
+	ReportingFacilityName      *string                                            `json:"reportingFacilityName,omitempty"`
+	SuppressAoe                *bool                                              `json:"suppressAoe,omitempty"`
+	SuppressHl7Fields          *string                                            `json:"suppressHl7Fields,omitempty"`
+	SuppressQstForAoe          *bool                                              `json:"suppressQstForAoe,omitempty"`
 	Transport                  interface{}                                        `json:"transport"`
-	TruncateHdNamespaceIds     *bool                                              `json:"truncateHDNamespaceIds"`
+	TruncateHdNamespaceIds     *bool                                              `json:"truncateHDNamespaceIds,omitempty"`
 	Type                       string                                             `json:"type"`
 	UseBatchHeaders            bool                                               `json:"useBatchHeaders"`
-	UseBlankInsteadOfUnknown   *string                                            `json:"useBlankInsteadOfUnknown"`
-	UsePid14ForPatientEmail    *bool                                              `json:"usePid14ForPatientEmail"`
-	UseTestProcessingMode      *bool                                              `json:"useTestProcessingMode"`
+	UseBlankInsteadOfUnknown   *string                                            `json:"useBlankInsteadOfUnknown,omitempty"`
+	UsePid14ForPatientEmail    *bool                                              `json:"usePid14ForPatientEmail,omitempty"`
+	UseTestProcessingMode      *bool                                              `json:"useTestProcessingMode,omitempty"`
 }

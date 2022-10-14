@@ -41,6 +41,6 @@ const (
 )
 
 type CryptoKeyVersionTemplate struct {
-	Algorithm       *CryptoKeyVersionTemplateAlgorithmEnum       `json:"algorithm"`
-	ProtectionLevel *CryptoKeyVersionTemplateProtectionLevelEnum `json:"protectionLevel"`
+	Algorithm       *CryptoKeyVersionTemplateAlgorithmEnum       `json:"algorithm,omitempty"`
+	ProtectionLevel *CryptoKeyVersionTemplateProtectionLevelEnum `json:"protectionLevel,omitempty"`
 }

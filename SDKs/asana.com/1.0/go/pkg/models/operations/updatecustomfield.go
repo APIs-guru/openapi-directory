@@ -14,7 +14,7 @@ type UpdateCustomFieldQueryParams struct {
 }
 
 type UpdateCustomFieldRequestBody struct {
-	Data *shared.CustomFieldRequest `json:"data"`
+	Data *shared.CustomFieldRequest `json:"data,omitempty"`
 }
 
 type UpdateCustomFieldRequest struct {
@@ -24,7 +24,7 @@ type UpdateCustomFieldRequest struct {
 }
 
 type UpdateCustomField200ApplicationJSON struct {
-	Data *shared.CustomFieldResponse `json:"data"`
+	Data *shared.CustomFieldResponse `json:"data,omitempty"`
 }
 
 type UpdateCustomFieldResponse struct {

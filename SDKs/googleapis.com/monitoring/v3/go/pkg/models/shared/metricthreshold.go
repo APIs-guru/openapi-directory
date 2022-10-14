@@ -22,13 +22,13 @@ const (
 )
 
 type MetricThreshold struct {
-	Aggregations            []Aggregation                             `json:"aggregations"`
-	Comparison              *MetricThresholdComparisonEnum            `json:"comparison"`
-	DenominatorAggregations []Aggregation                             `json:"denominatorAggregations"`
-	DenominatorFilter       *string                                   `json:"denominatorFilter"`
-	Duration                *string                                   `json:"duration"`
-	EvaluationMissingData   *MetricThresholdEvaluationMissingDataEnum `json:"evaluationMissingData"`
-	Filter                  *string                                   `json:"filter"`
-	ThresholdValue          *float64                                  `json:"thresholdValue"`
-	Trigger                 *Trigger                                  `json:"trigger"`
+	Aggregations            []Aggregation                             `json:"aggregations,omitempty"`
+	Comparison              *MetricThresholdComparisonEnum            `json:"comparison,omitempty"`
+	DenominatorAggregations []Aggregation                             `json:"denominatorAggregations,omitempty"`
+	DenominatorFilter       *string                                   `json:"denominatorFilter,omitempty"`
+	Duration                *string                                   `json:"duration,omitempty"`
+	EvaluationMissingData   *MetricThresholdEvaluationMissingDataEnum `json:"evaluationMissingData,omitempty"`
+	Filter                  *string                                   `json:"filter,omitempty"`
+	ThresholdValue          *float64                                  `json:"thresholdValue,omitempty"`
+	Trigger                 *Trigger                                  `json:"trigger,omitempty"`
 }

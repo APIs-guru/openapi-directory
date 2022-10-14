@@ -10,13 +10,13 @@ const (
 )
 
 type ProvisioningQuota struct {
-	AssetType        *ProvisioningQuotaAssetTypeEnum `json:"assetType"`
-	AvailableCount   *int32                          `json:"availableCount"`
-	GcpService       *string                         `json:"gcpService"`
-	InstanceQuota    *InstanceQuota                  `json:"instanceQuota"`
-	Location         *string                         `json:"location"`
-	Name             *string                         `json:"name"`
-	NetworkBandwidth *string                         `json:"networkBandwidth"`
-	ServerCount      *string                         `json:"serverCount"`
-	StorageGib       *string                         `json:"storageGib"`
+	AssetType        *ProvisioningQuotaAssetTypeEnum `json:"assetType,omitempty"`
+	AvailableCount   *int32                          `json:"availableCount,omitempty"`
+	GcpService       *string                         `json:"gcpService,omitempty"`
+	InstanceQuota    *InstanceQuota                  `json:"instanceQuota,omitempty"`
+	Location         *string                         `json:"location,omitempty"`
+	Name             *string                         `json:"name,omitempty"`
+	NetworkBandwidth *string                         `json:"networkBandwidth,omitempty"`
+	ServerCount      *string                         `json:"serverCount,omitempty"`
+	StorageGib       *string                         `json:"storageGib,omitempty"`
 }

@@ -1,9 +1,9 @@
 package operations
 
 type PostMakePdfRequestBody struct {
-	HTML *string `json:"html"`
+	HTML *string `json:"html,omitempty"`
 	Key  string  `json:"key"`
-	URL  *string `json:"url"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type PostMakePdfRequest struct {

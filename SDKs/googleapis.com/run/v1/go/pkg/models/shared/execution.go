@@ -1,9 +1,9 @@
 package shared
 
 type Execution struct {
-	APIVersion *string          `json:"apiVersion"`
-	Kind       *string          `json:"kind"`
-	Metadata   *ObjectMeta      `json:"metadata"`
-	Spec       *ExecutionSpec   `json:"spec"`
-	Status     *ExecutionStatus `json:"status"`
+	APIVersion *string          `json:"apiVersion,omitempty"`
+	Kind       *string          `json:"kind,omitempty"`
+	Metadata   *ObjectMeta      `json:"metadata,omitempty"`
+	Spec       *ExecutionSpec   `json:"spec,omitempty"`
+	Status     *ExecutionStatus `json:"status,omitempty"`
 }

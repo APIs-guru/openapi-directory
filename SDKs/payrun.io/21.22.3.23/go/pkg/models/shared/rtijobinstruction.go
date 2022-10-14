@@ -5,9 +5,9 @@ import (
 )
 
 type RtiJobInstructionRtiJobInstructionEmployerEmployer struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type RtiJobInstructionRtiJobInstructionLateReasonLateReasonEnum string
@@ -23,39 +23,39 @@ const (
 )
 
 type RtiJobInstructionRtiJobInstructionPaySchedulePaySchedule struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type RtiJobInstructionRtiJobInstructionRtiTransactionRtiTransaction struct {
-	AtHref  *string `json:"@href"`
-	AtRel   *string `json:"@rel"`
-	AtTitle *string `json:"@title"`
+	AtHref  *string `json:"@href,omitempty"`
+	AtRel   *string `json:"@rel,omitempty"`
+	AtTitle *string `json:"@title,omitempty"`
 }
 
 type RtiJobInstructionRtiJobInstructionRtiJobInstruction struct {
-	EarlierTaxYear         *int32                                                          `json:"EarlierTaxYear"`
-	Employer               *RtiJobInstructionRtiJobInstructionEmployerEmployer             `json:"Employer"`
-	FinalSubmissionForYear *bool                                                           `json:"FinalSubmissionForYear"`
-	Generate               *bool                                                           `json:"Generate"`
-	HoldingDate            *time.Time                                                      `json:"HoldingDate"`
-	LateReason             *RtiJobInstructionRtiJobInstructionLateReasonLateReasonEnum     `json:"LateReason"`
-	NoPaymentForPeriodFrom *time.Time                                                      `json:"NoPaymentForPeriodFrom"`
-	NoPaymentForPeriodTo   *time.Time                                                      `json:"NoPaymentForPeriodTo"`
-	PaySchedule            *RtiJobInstructionRtiJobInstructionPaySchedulePaySchedule       `json:"PaySchedule"`
-	PaymentDate            *time.Time                                                      `json:"PaymentDate"`
-	PeriodOfInactivityFrom *time.Time                                                      `json:"PeriodOfInactivityFrom"`
-	PeriodOfInactivityTo   *time.Time                                                      `json:"PeriodOfInactivityTo"`
-	RtiTransaction         *RtiJobInstructionRtiJobInstructionRtiTransactionRtiTransaction `json:"RtiTransaction"`
-	RtiType                *string                                                         `json:"RtiType"`
-	SchemeCeased           *time.Time                                                      `json:"SchemeCeased"`
-	TaxMonth               *int32                                                          `json:"TaxMonth"`
-	TaxYear                *int32                                                          `json:"TaxYear"`
-	Timestamp              *time.Time                                                      `json:"Timestamp"`
-	Transmit               *bool                                                           `json:"Transmit"`
+	EarlierTaxYear         *int32                                                          `json:"EarlierTaxYear,omitempty"`
+	Employer               *RtiJobInstructionRtiJobInstructionEmployerEmployer             `json:"Employer,omitempty"`
+	FinalSubmissionForYear *bool                                                           `json:"FinalSubmissionForYear,omitempty"`
+	Generate               *bool                                                           `json:"Generate,omitempty"`
+	HoldingDate            *time.Time                                                      `json:"HoldingDate,omitempty"`
+	LateReason             *RtiJobInstructionRtiJobInstructionLateReasonLateReasonEnum     `json:"LateReason,omitempty"`
+	NoPaymentForPeriodFrom *time.Time                                                      `json:"NoPaymentForPeriodFrom,omitempty"`
+	NoPaymentForPeriodTo   *time.Time                                                      `json:"NoPaymentForPeriodTo,omitempty"`
+	PaySchedule            *RtiJobInstructionRtiJobInstructionPaySchedulePaySchedule       `json:"PaySchedule,omitempty"`
+	PaymentDate            *time.Time                                                      `json:"PaymentDate,omitempty"`
+	PeriodOfInactivityFrom *time.Time                                                      `json:"PeriodOfInactivityFrom,omitempty"`
+	PeriodOfInactivityTo   *time.Time                                                      `json:"PeriodOfInactivityTo,omitempty"`
+	RtiTransaction         *RtiJobInstructionRtiJobInstructionRtiTransactionRtiTransaction `json:"RtiTransaction,omitempty"`
+	RtiType                *string                                                         `json:"RtiType,omitempty"`
+	SchemeCeased           *time.Time                                                      `json:"SchemeCeased,omitempty"`
+	TaxMonth               *int32                                                          `json:"TaxMonth,omitempty"`
+	TaxYear                *int32                                                          `json:"TaxYear,omitempty"`
+	Timestamp              *time.Time                                                      `json:"Timestamp,omitempty"`
+	Transmit               *bool                                                           `json:"Transmit,omitempty"`
 }
 
 type RtiJobInstruction struct {
-	RtiJobInstruction *RtiJobInstructionRtiJobInstructionRtiJobInstruction `json:"RtiJobInstruction"`
+	RtiJobInstruction *RtiJobInstructionRtiJobInstructionRtiJobInstruction `json:"RtiJobInstruction,omitempty"`
 }

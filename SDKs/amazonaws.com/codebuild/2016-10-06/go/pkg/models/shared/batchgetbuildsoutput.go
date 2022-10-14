@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetBuildsOutput struct {
-	Builds         []Build  `json:"builds"`
-	BuildsNotFound []string `json:"buildsNotFound"`
+	Builds         []Build  `json:"builds,omitempty"`
+	BuildsNotFound []string `json:"buildsNotFound,omitempty"`
 }

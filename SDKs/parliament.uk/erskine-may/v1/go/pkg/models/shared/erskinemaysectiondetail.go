@@ -1,16 +1,16 @@
 package shared
 
 type ErskineMaySectionDetail struct {
-	ChapterNumber      *int32                      `json:"chapterNumber"`
-	ChapterTitle       *string                     `json:"chapterTitle"`
-	ContentHTML        *string                     `json:"contentHtml"`
-	Footnotes          []ErskineMayFootnote        `json:"footnotes"`
-	ID                 *int32                      `json:"id"`
-	ParentSectionID    *int32                      `json:"parentSectionId"`
-	ParentSectionTitle *string                     `json:"parentSectionTitle"`
-	PartNumber         *int32                      `json:"partNumber"`
-	PartTitle          *string                     `json:"partTitle"`
-	SubSections        []ErskineMaySectionOverview `json:"subSections"`
-	Title              *string                     `json:"title"`
-	TitleChain         *string                     `json:"titleChain"`
+	ChapterNumber      *int32                      `json:"chapterNumber,omitempty"`
+	ChapterTitle       *string                     `json:"chapterTitle,omitempty"`
+	ContentHTML        *string                     `json:"contentHtml,omitempty"`
+	Footnotes          []ErskineMayFootnote        `json:"footnotes,omitempty"`
+	ID                 *int32                      `json:"id,omitempty"`
+	ParentSectionID    *int32                      `json:"parentSectionId,omitempty"`
+	ParentSectionTitle *string                     `json:"parentSectionTitle,omitempty"`
+	PartNumber         *int32                      `json:"partNumber,omitempty"`
+	PartTitle          *string                     `json:"partTitle,omitempty"`
+	SubSections        []ErskineMaySectionOverview `json:"subSections,omitempty"`
+	Title              *string                     `json:"title,omitempty"`
+	TitleChain         *string                     `json:"titleChain,omitempty"`
 }

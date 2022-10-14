@@ -1,6 +1,6 @@
 package shared
 
 type DescribeExportTasksResponse struct {
-	ExportTasks []ExportTask `json:"exportTasks"`
-	NextToken   *string      `json:"nextToken"`
+	ExportTasks []ExportTask `json:"exportTasks,omitempty"`
+	NextToken   *string      `json:"nextToken,omitempty"`
 }

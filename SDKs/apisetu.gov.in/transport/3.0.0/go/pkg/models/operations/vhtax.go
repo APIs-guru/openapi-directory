@@ -19,8 +19,8 @@ const (
 )
 
 type VhtaxRequestBody struct {
-	CertificateParameters *VhtaxRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *VhtaxRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                VhtaxRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -56,8 +56,8 @@ const (
 )
 
 type Vhtax400ApplicationJSON struct {
-	Error            *Vhtax400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhtax400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhtax400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhtax400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhtax401ApplicationJSONErrorEnum string
@@ -75,8 +75,8 @@ const (
 )
 
 type Vhtax401ApplicationJSON struct {
-	Error            *Vhtax401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhtax401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhtax401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhtax401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhtax404ApplicationJSONErrorEnum string
@@ -94,8 +94,8 @@ const (
 )
 
 type Vhtax404ApplicationJSON struct {
-	Error            *Vhtax404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhtax404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhtax404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhtax404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhtax500ApplicationJSONErrorEnum string
@@ -111,8 +111,8 @@ const (
 )
 
 type Vhtax500ApplicationJSON struct {
-	Error            *Vhtax500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhtax500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhtax500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhtax500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhtax502ApplicationJSONErrorEnum string
@@ -128,8 +128,8 @@ const (
 )
 
 type Vhtax502ApplicationJSON struct {
-	Error            *Vhtax502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhtax502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhtax502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhtax502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhtax503ApplicationJSONErrorEnum string
@@ -145,8 +145,8 @@ const (
 )
 
 type Vhtax503ApplicationJSON struct {
-	Error            *Vhtax503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhtax503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhtax503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhtax503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhtax504ApplicationJSONErrorEnum string
@@ -162,8 +162,8 @@ const (
 )
 
 type Vhtax504ApplicationJSON struct {
-	Error            *Vhtax504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhtax504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhtax504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhtax504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type VhtaxResponse struct {

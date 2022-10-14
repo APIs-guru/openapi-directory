@@ -15,8 +15,8 @@ const (
 )
 
 type SicrdRequestBody struct {
-	CertificateParameters *SicrdRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *SicrdRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                SicrdRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Sicrd400ApplicationJSON struct {
-	Error            *Sicrd400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicrd400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicrd400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicrd400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicrd401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Sicrd401ApplicationJSON struct {
-	Error            *Sicrd401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicrd401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicrd401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicrd401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicrd404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Sicrd404ApplicationJSON struct {
-	Error            *Sicrd404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicrd404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicrd404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicrd404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicrd500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Sicrd500ApplicationJSON struct {
-	Error            *Sicrd500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicrd500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicrd500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicrd500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicrd502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Sicrd502ApplicationJSON struct {
-	Error            *Sicrd502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicrd502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicrd502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicrd502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicrd503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Sicrd503ApplicationJSON struct {
-	Error            *Sicrd503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicrd503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicrd503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicrd503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sicrd504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Sicrd504ApplicationJSON struct {
-	Error            *Sicrd504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sicrd504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sicrd504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicrd504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SicrdResponse struct {

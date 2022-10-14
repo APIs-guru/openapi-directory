@@ -1,10 +1,10 @@
 package shared
 
 type Program struct {
-	Airlines     []string `json:"airlines"`
-	Denomination *string  `json:"denomination"`
-	FullName     *string  `json:"fullName"`
-	ID           *string  `json:"id"`
-	ProgramName  *string  `json:"programName"`
-	TierNames    []string `json:"tierNames"`
+	Airlines     []string `json:"airlines,omitempty"`
+	Denomination *string  `json:"denomination,omitempty"`
+	FullName     *string  `json:"fullName,omitempty"`
+	ID           *string  `json:"id,omitempty"`
+	ProgramName  *string  `json:"programName,omitempty"`
+	TierNames    []string `json:"tierNames,omitempty"`
 }

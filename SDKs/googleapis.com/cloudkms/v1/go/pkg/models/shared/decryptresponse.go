@@ -11,8 +11,8 @@ const (
 )
 
 type DecryptResponse struct {
-	Plaintext       *string                             `json:"plaintext"`
-	PlaintextCrc32c *string                             `json:"plaintextCrc32c"`
-	ProtectionLevel *DecryptResponseProtectionLevelEnum `json:"protectionLevel"`
-	UsedPrimary     *bool                               `json:"usedPrimary"`
+	Plaintext       *string                             `json:"plaintext,omitempty"`
+	PlaintextCrc32c *string                             `json:"plaintextCrc32c,omitempty"`
+	ProtectionLevel *DecryptResponseProtectionLevelEnum `json:"protectionLevel,omitempty"`
+	UsedPrimary     *bool                               `json:"usedPrimary,omitempty"`
 }

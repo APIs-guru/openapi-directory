@@ -5,15 +5,15 @@ import (
 )
 
 type AuthorizationCodesSharedModelsAuthorizationCode struct {
-	Code                 *string                                   `json:"Code"`
-	CreatedByUserID      *int32                                    `json:"CreatedByUserID"`
-	CreatedDate          *time.Time                                `json:"CreatedDate"`
-	DataParameters       []AuthorizationCodesSharedModelsParameter `json:"DataParameters"`
-	DefinitionID         *string                                   `json:"DefinitionID"`
-	DeletedByUserID      *int32                                    `json:"DeletedByUserID"`
-	DeletedDate          *time.Time                                `json:"DeletedDate"`
-	EffectiveDate        *time.Time                                `json:"EffectiveDate"`
-	ID                   *int32                                    `json:"ID"`
-	IsDeleted            *bool                                     `json:"IsDeleted"`
-	ValidationParameters []AuthorizationCodesSharedModelsParameter `json:"ValidationParameters"`
+	Code                 *string                                   `json:"Code,omitempty"`
+	CreatedByUserID      *int32                                    `json:"CreatedByUserID,omitempty"`
+	CreatedDate          *time.Time                                `json:"CreatedDate,omitempty"`
+	DataParameters       []AuthorizationCodesSharedModelsParameter `json:"DataParameters,omitempty"`
+	DefinitionID         *string                                   `json:"DefinitionID,omitempty"`
+	DeletedByUserID      *int32                                    `json:"DeletedByUserID,omitempty"`
+	DeletedDate          *time.Time                                `json:"DeletedDate,omitempty"`
+	EffectiveDate        *time.Time                                `json:"EffectiveDate,omitempty"`
+	ID                   *int32                                    `json:"ID,omitempty"`
+	IsDeleted            *bool                                     `json:"IsDeleted,omitempty"`
+	ValidationParameters []AuthorizationCodesSharedModelsParameter `json:"ValidationParameters,omitempty"`
 }

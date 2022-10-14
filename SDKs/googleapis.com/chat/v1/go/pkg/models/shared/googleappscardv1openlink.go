@@ -15,7 +15,7 @@ const (
 )
 
 type GoogleAppsCardV1OpenLink struct {
-	OnClose *GoogleAppsCardV1OpenLinkOnCloseEnum `json:"onClose"`
-	OpenAs  *GoogleAppsCardV1OpenLinkOpenAsEnum  `json:"openAs"`
-	URL     *string                              `json:"url"`
+	OnClose *GoogleAppsCardV1OpenLinkOnCloseEnum `json:"onClose,omitempty"`
+	OpenAs  *GoogleAppsCardV1OpenLinkOpenAsEnum  `json:"openAs,omitempty"`
+	URL     *string                              `json:"url,omitempty"`
 }

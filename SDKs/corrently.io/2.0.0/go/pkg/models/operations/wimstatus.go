@@ -9,8 +9,8 @@ type WimstatusRequest struct {
 }
 
 type Wimstatus200ApplicationJSON struct {
-	WimStarted *int64  `json:"wim_started"`
-	WimStatus  *string `json:"wim_status"`
+	WimStarted *int64  `json:"wim_started,omitempty"`
+	WimStatus  *string `json:"wim_status,omitempty"`
 }
 
 type WimstatusResponse struct {

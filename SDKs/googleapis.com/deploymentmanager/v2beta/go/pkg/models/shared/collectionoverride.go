@@ -1,6 +1,6 @@
 package shared
 
 type CollectionOverride struct {
-	Collection *string  `json:"collection"`
-	Options    *Options `json:"options"`
+	Collection *string  `json:"collection,omitempty"`
+	Options    *Options `json:"options,omitempty"`
 }

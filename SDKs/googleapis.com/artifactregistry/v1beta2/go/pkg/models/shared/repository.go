@@ -13,13 +13,13 @@ const (
 )
 
 type Repository struct {
-	CreateTime  *string                `json:"createTime"`
-	Description *string                `json:"description"`
-	Format      *RepositoryFormatEnum  `json:"format"`
-	KmsKeyName  *string                `json:"kmsKeyName"`
-	Labels      map[string]string      `json:"labels"`
-	MavenConfig *MavenRepositoryConfig `json:"mavenConfig"`
-	Name        *string                `json:"name"`
-	SizeBytes   *string                `json:"sizeBytes"`
-	UpdateTime  *string                `json:"updateTime"`
+	CreateTime  *string                `json:"createTime,omitempty"`
+	Description *string                `json:"description,omitempty"`
+	Format      *RepositoryFormatEnum  `json:"format,omitempty"`
+	KmsKeyName  *string                `json:"kmsKeyName,omitempty"`
+	Labels      map[string]string      `json:"labels,omitempty"`
+	MavenConfig *MavenRepositoryConfig `json:"mavenConfig,omitempty"`
+	Name        *string                `json:"name,omitempty"`
+	SizeBytes   *string                `json:"sizeBytes,omitempty"`
+	UpdateTime  *string                `json:"updateTime,omitempty"`
 }

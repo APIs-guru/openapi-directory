@@ -1,6 +1,6 @@
 package shared
 
 type SuiteRunConfiguration struct {
-	PrimaryDevice    *DeviceUnderTest `json:"primaryDevice"`
-	SelectedTestList []string         `json:"selectedTestList"`
+	PrimaryDevice    *DeviceUnderTest `json:"primaryDevice,omitempty"`
+	SelectedTestList []string         `json:"selectedTestList,omitempty"`
 }

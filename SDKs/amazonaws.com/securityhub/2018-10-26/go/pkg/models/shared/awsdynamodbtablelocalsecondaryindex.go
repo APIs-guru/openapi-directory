@@ -1,8 +1,8 @@
 package shared
 
 type AwsDynamoDbTableLocalSecondaryIndex struct {
-	IndexArn   *string                     `json:"IndexArn"`
-	IndexName  *string                     `json:"IndexName"`
-	KeySchema  []AwsDynamoDbTableKeySchema `json:"KeySchema"`
-	Projection *AwsDynamoDbTableProjection `json:"Projection"`
+	IndexArn   *string                     `json:"IndexArn,omitempty"`
+	IndexName  *string                     `json:"IndexName,omitempty"`
+	KeySchema  []AwsDynamoDbTableKeySchema `json:"KeySchema,omitempty"`
+	Projection *AwsDynamoDbTableProjection `json:"Projection,omitempty"`
 }

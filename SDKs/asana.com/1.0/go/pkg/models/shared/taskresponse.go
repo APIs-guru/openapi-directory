@@ -14,15 +14,15 @@ const (
 )
 
 type TaskResponseAssignee struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type TaskResponseAssigneeSection struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type TaskResponseAssigneeStatusEnum string
@@ -36,19 +36,19 @@ const (
 )
 
 type TaskResponseExternal struct {
-	Data *string `json:"data"`
-	Gid  *string `json:"gid"`
+	Data *string `json:"data,omitempty"`
+	Gid  *string `json:"gid,omitempty"`
 }
 
 type TaskResponseMemberships struct {
-	Project *ProjectCompact `json:"project"`
-	Section *SectionCompact `json:"section"`
+	Project *ProjectCompact `json:"project,omitempty"`
+	Section *SectionCompact `json:"section,omitempty"`
 }
 
 type TaskResponseParent struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type TaskResponseResourceSubtypeEnum string
@@ -61,47 +61,47 @@ const (
 )
 
 type TaskResponseWorkspace struct {
-	Gid          *string `json:"gid"`
-	Name         *string `json:"name"`
-	ResourceType *string `json:"resource_type"`
+	Gid          *string `json:"gid,omitempty"`
+	Name         *string `json:"name,omitempty"`
+	ResourceType *string `json:"resource_type,omitempty"`
 }
 
 type TaskResponse struct {
-	ApprovalStatus        *TaskResponseApprovalStatusEnum  `json:"approval_status"`
-	Assignee              *TaskResponseAssignee            `json:"assignee"`
-	AssigneeSection       *TaskResponseAssigneeSection     `json:"assignee_section"`
-	AssigneeStatus        *TaskResponseAssigneeStatusEnum  `json:"assignee_status"`
-	Completed             *bool                            `json:"completed"`
-	CompletedAt           *time.Time                       `json:"completed_at"`
-	CompletedBy           *UserCompact                     `json:"completed_by"`
-	CreatedAt             *time.Time                       `json:"created_at"`
-	CustomFields          []CustomFieldResponse            `json:"custom_fields"`
-	Dependencies          []AsanaResource                  `json:"dependencies"`
-	Dependents            []AsanaResource                  `json:"dependents"`
-	DueAt                 *time.Time                       `json:"due_at"`
-	DueOn                 *time.Time                       `json:"due_on"`
-	External              *TaskResponseExternal            `json:"external"`
-	Followers             []UserCompact                    `json:"followers"`
-	Gid                   *string                          `json:"gid"`
-	Hearted               *bool                            `json:"hearted"`
-	Hearts                []Like                           `json:"hearts"`
-	HTMLNotes             *string                          `json:"html_notes"`
-	IsRenderedAsSeparator *bool                            `json:"is_rendered_as_separator"`
-	Liked                 *bool                            `json:"liked"`
-	Likes                 []Like                           `json:"likes"`
-	Memberships           []TaskResponseMemberships        `json:"memberships"`
-	ModifiedAt            *time.Time                       `json:"modified_at"`
-	Name                  *string                          `json:"name"`
-	Notes                 *string                          `json:"notes"`
-	NumHearts             *int64                           `json:"num_hearts"`
-	NumLikes              *int64                           `json:"num_likes"`
-	NumSubtasks           *int64                           `json:"num_subtasks"`
-	Parent                *TaskResponseParent              `json:"parent"`
-	PermalinkURL          *string                          `json:"permalink_url"`
-	Projects              []ProjectCompact                 `json:"projects"`
-	ResourceSubtype       *TaskResponseResourceSubtypeEnum `json:"resource_subtype"`
-	ResourceType          *string                          `json:"resource_type"`
-	StartOn               *time.Time                       `json:"start_on"`
-	Tags                  []TagCompact                     `json:"tags"`
-	Workspace             *TaskResponseWorkspace           `json:"workspace"`
+	ApprovalStatus        *TaskResponseApprovalStatusEnum  `json:"approval_status,omitempty"`
+	Assignee              *TaskResponseAssignee            `json:"assignee,omitempty"`
+	AssigneeSection       *TaskResponseAssigneeSection     `json:"assignee_section,omitempty"`
+	AssigneeStatus        *TaskResponseAssigneeStatusEnum  `json:"assignee_status,omitempty"`
+	Completed             *bool                            `json:"completed,omitempty"`
+	CompletedAt           *time.Time                       `json:"completed_at,omitempty"`
+	CompletedBy           *UserCompact                     `json:"completed_by,omitempty"`
+	CreatedAt             *time.Time                       `json:"created_at,omitempty"`
+	CustomFields          []CustomFieldResponse            `json:"custom_fields,omitempty"`
+	Dependencies          []AsanaResource                  `json:"dependencies,omitempty"`
+	Dependents            []AsanaResource                  `json:"dependents,omitempty"`
+	DueAt                 *time.Time                       `json:"due_at,omitempty"`
+	DueOn                 *time.Time                       `json:"due_on,omitempty"`
+	External              *TaskResponseExternal            `json:"external,omitempty"`
+	Followers             []UserCompact                    `json:"followers,omitempty"`
+	Gid                   *string                          `json:"gid,omitempty"`
+	Hearted               *bool                            `json:"hearted,omitempty"`
+	Hearts                []Like                           `json:"hearts,omitempty"`
+	HTMLNotes             *string                          `json:"html_notes,omitempty"`
+	IsRenderedAsSeparator *bool                            `json:"is_rendered_as_separator,omitempty"`
+	Liked                 *bool                            `json:"liked,omitempty"`
+	Likes                 []Like                           `json:"likes,omitempty"`
+	Memberships           []TaskResponseMemberships        `json:"memberships,omitempty"`
+	ModifiedAt            *time.Time                       `json:"modified_at,omitempty"`
+	Name                  *string                          `json:"name,omitempty"`
+	Notes                 *string                          `json:"notes,omitempty"`
+	NumHearts             *int64                           `json:"num_hearts,omitempty"`
+	NumLikes              *int64                           `json:"num_likes,omitempty"`
+	NumSubtasks           *int64                           `json:"num_subtasks,omitempty"`
+	Parent                *TaskResponseParent              `json:"parent,omitempty"`
+	PermalinkURL          *string                          `json:"permalink_url,omitempty"`
+	Projects              []ProjectCompact                 `json:"projects,omitempty"`
+	ResourceSubtype       *TaskResponseResourceSubtypeEnum `json:"resource_subtype,omitempty"`
+	ResourceType          *string                          `json:"resource_type,omitempty"`
+	StartOn               *time.Time                       `json:"start_on,omitempty"`
+	Tags                  []TagCompact                     `json:"tags,omitempty"`
+	Workspace             *TaskResponseWorkspace           `json:"workspace,omitempty"`
 }

@@ -10,11 +10,11 @@ const (
 )
 
 type Account struct {
-	CreateTime   *string           `json:"createTime"`
-	DisplayName  *string           `json:"displayName"`
-	Name         *string           `json:"name"`
-	PendingTasks []string          `json:"pendingTasks"`
-	Premium      *bool             `json:"premium"`
-	State        *AccountStateEnum `json:"state"`
-	TimeZone     *TimeZone         `json:"timeZone"`
+	CreateTime   *string           `json:"createTime,omitempty"`
+	DisplayName  *string           `json:"displayName,omitempty"`
+	Name         *string           `json:"name,omitempty"`
+	PendingTasks []string          `json:"pendingTasks,omitempty"`
+	Premium      *bool             `json:"premium,omitempty"`
+	State        *AccountStateEnum `json:"state,omitempty"`
+	TimeZone     *TimeZone         `json:"timeZone,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type ReplaceImageRequest struct {
-	ImageObjectID      *string                                    `json:"imageObjectId"`
-	ImageReplaceMethod *ReplaceImageRequestImageReplaceMethodEnum `json:"imageReplaceMethod"`
-	URL                *string                                    `json:"url"`
+	ImageObjectID      *string                                    `json:"imageObjectId,omitempty"`
+	ImageReplaceMethod *ReplaceImageRequestImageReplaceMethodEnum `json:"imageReplaceMethod,omitempty"`
+	URL                *string                                    `json:"url,omitempty"`
 }

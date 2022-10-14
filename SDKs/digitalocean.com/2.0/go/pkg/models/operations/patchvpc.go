@@ -9,9 +9,9 @@ type PatchVpcPathParams struct {
 }
 
 type PatchVpcRequestBody struct {
-	Default     *bool   `json:"default"`
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
+	Default     *bool   `json:"default,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 type PatchVpcRequest struct {
@@ -20,13 +20,13 @@ type PatchVpcRequest struct {
 }
 
 type PatchVpc200ApplicationJSON struct {
-	Vpc *shared.Onev21vpcsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesVpcsItems `json:"vpc"`
+	Vpc *shared.Onev21vpcsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesVpcsItems `json:"vpc,omitempty"`
 }
 
 type PatchVpc401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type PatchVpcResponse struct {

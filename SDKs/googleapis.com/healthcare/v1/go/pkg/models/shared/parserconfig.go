@@ -9,8 +9,8 @@ const (
 )
 
 type ParserConfig struct {
-	AllowNullHeader   *bool                    `json:"allowNullHeader"`
-	Schema            *SchemaPackage           `json:"schema"`
-	SegmentTerminator *string                  `json:"segmentTerminator"`
-	Version           *ParserConfigVersionEnum `json:"version"`
+	AllowNullHeader   *bool                    `json:"allowNullHeader,omitempty"`
+	Schema            *SchemaPackage           `json:"schema,omitempty"`
+	SegmentTerminator *string                  `json:"segmentTerminator,omitempty"`
+	Version           *ParserConfigVersionEnum `json:"version,omitempty"`
 }

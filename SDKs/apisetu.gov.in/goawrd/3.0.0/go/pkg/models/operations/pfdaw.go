@@ -16,8 +16,8 @@ const (
 )
 
 type PfdawRequestBody struct {
-	CertificateParameters *PfdawRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *PfdawRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                PfdawRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Pfdaw400ApplicationJSON struct {
-	Error            *Pfdaw400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pfdaw400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pfdaw400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pfdaw400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pfdaw401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Pfdaw401ApplicationJSON struct {
-	Error            *Pfdaw401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pfdaw401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pfdaw401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pfdaw401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pfdaw404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Pfdaw404ApplicationJSON struct {
-	Error            *Pfdaw404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pfdaw404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pfdaw404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pfdaw404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pfdaw500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Pfdaw500ApplicationJSON struct {
-	Error            *Pfdaw500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pfdaw500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pfdaw500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pfdaw500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pfdaw502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Pfdaw502ApplicationJSON struct {
-	Error            *Pfdaw502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pfdaw502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pfdaw502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pfdaw502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pfdaw503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Pfdaw503ApplicationJSON struct {
-	Error            *Pfdaw503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pfdaw503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pfdaw503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pfdaw503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Pfdaw504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Pfdaw504ApplicationJSON struct {
-	Error            *Pfdaw504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Pfdaw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Pfdaw504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Pfdaw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type PfdawResponse struct {

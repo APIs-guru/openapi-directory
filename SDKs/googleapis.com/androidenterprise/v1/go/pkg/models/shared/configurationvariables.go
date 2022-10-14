@@ -1,6 +1,6 @@
 package shared
 
 type ConfigurationVariables struct {
-	McmID       *string       `json:"mcmId"`
-	VariableSet []VariableSet `json:"variableSet"`
+	McmID       *string       `json:"mcmId,omitempty"`
+	VariableSet []VariableSet `json:"variableSet,omitempty"`
 }

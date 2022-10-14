@@ -1,8 +1,8 @@
 package shared
 
 type UpdateSchemaInput struct {
-	Compatibility       *CompatibilityEnum   `json:"Compatibility"`
-	Description         *string              `json:"Description"`
+	Compatibility       *CompatibilityEnum   `json:"Compatibility,omitempty"`
+	Description         *string              `json:"Description,omitempty"`
 	SchemaID            SchemaID             `json:"SchemaId"`
-	SchemaVersionNumber *SchemaVersionNumber `json:"SchemaVersionNumber"`
+	SchemaVersionNumber *SchemaVersionNumber `json:"SchemaVersionNumber,omitempty"`
 }

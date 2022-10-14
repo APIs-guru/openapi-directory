@@ -1,6 +1,6 @@
 package shared
 
 type CreativeAssetSelection struct {
-	DefaultAssetID *string `json:"defaultAssetId"`
-	Rules          []Rule  `json:"rules"`
+	DefaultAssetID *string `json:"defaultAssetId,omitempty"`
+	Rules          []Rule  `json:"rules,omitempty"`
 }

@@ -1,12 +1,12 @@
 package operations
 
 type PostAdminRecordingsSnapshotRequestBodyCaptureHeaders struct {
-	CaseInsensitive *bool `json:"caseInsensitive"`
+	CaseInsensitive *bool `json:"caseInsensitive,omitempty"`
 }
 
 type PostAdminRecordingsSnapshotRequestBodyExtractBodyCriteria struct {
-	BinarySizeThreshold *string `json:"binarySizeThreshold"`
-	TextSizeThreshold   *string `json:"textSizeThreshold"`
+	BinarySizeThreshold *string `json:"binarySizeThreshold,omitempty"`
+	TextSizeThreshold   *string `json:"textSizeThreshold,omitempty"`
 }
 
 type PostAdminRecordingsSnapshotRequestBodyFiltersBasicAuthCredentials struct {
@@ -15,28 +15,28 @@ type PostAdminRecordingsSnapshotRequestBodyFiltersBasicAuthCredentials struct {
 }
 
 type PostAdminRecordingsSnapshotRequestBodyFilters struct {
-	BasicAuthCredentials *PostAdminRecordingsSnapshotRequestBodyFiltersBasicAuthCredentials `json:"basicAuthCredentials"`
-	BodyPatterns         []map[string]interface{}                                           `json:"bodyPatterns"`
-	Cookies              map[string]interface{}                                             `json:"cookies"`
-	Headers              map[string]interface{}                                             `json:"headers"`
-	Ids                  []string                                                           `json:"ids"`
-	Method               *string                                                            `json:"method"`
-	QueryParameters      map[string]interface{}                                             `json:"queryParameters"`
-	URL                  *string                                                            `json:"url"`
-	URLPath              *string                                                            `json:"urlPath"`
-	URLPathPattern       *string                                                            `json:"urlPathPattern"`
-	URLPattern           *string                                                            `json:"urlPattern"`
+	BasicAuthCredentials *PostAdminRecordingsSnapshotRequestBodyFiltersBasicAuthCredentials `json:"basicAuthCredentials,omitempty"`
+	BodyPatterns         []map[string]interface{}                                           `json:"bodyPatterns,omitempty"`
+	Cookies              map[string]interface{}                                             `json:"cookies,omitempty"`
+	Headers              map[string]interface{}                                             `json:"headers,omitempty"`
+	Ids                  []string                                                           `json:"ids,omitempty"`
+	Method               *string                                                            `json:"method,omitempty"`
+	QueryParameters      map[string]interface{}                                             `json:"queryParameters,omitempty"`
+	URL                  *string                                                            `json:"url,omitempty"`
+	URLPath              *string                                                            `json:"urlPath,omitempty"`
+	URLPathPattern       *string                                                            `json:"urlPathPattern,omitempty"`
+	URLPattern           *string                                                            `json:"urlPattern,omitempty"`
 }
 
 type PostAdminRecordingsSnapshotRequestBody struct {
-	CaptureHeaders        map[string]PostAdminRecordingsSnapshotRequestBodyCaptureHeaders `json:"captureHeaders"`
-	ExtractBodyCriteria   *PostAdminRecordingsSnapshotRequestBodyExtractBodyCriteria      `json:"extractBodyCriteria"`
-	Filters               *PostAdminRecordingsSnapshotRequestBodyFilters                  `json:"filters"`
-	Persist               *bool                                                           `json:"persist"`
-	RepeatsAsScenarios    *bool                                                           `json:"repeatsAsScenarios"`
-	RequestBodyPattern    map[string]interface{}                                          `json:"requestBodyPattern"`
-	TransformerParameters map[string]interface{}                                          `json:"transformerParameters"`
-	Transformers          []string                                                        `json:"transformers"`
+	CaptureHeaders        map[string]PostAdminRecordingsSnapshotRequestBodyCaptureHeaders `json:"captureHeaders,omitempty"`
+	ExtractBodyCriteria   *PostAdminRecordingsSnapshotRequestBodyExtractBodyCriteria      `json:"extractBodyCriteria,omitempty"`
+	Filters               *PostAdminRecordingsSnapshotRequestBodyFilters                  `json:"filters,omitempty"`
+	Persist               *bool                                                           `json:"persist,omitempty"`
+	RepeatsAsScenarios    *bool                                                           `json:"repeatsAsScenarios,omitempty"`
+	RequestBodyPattern    map[string]interface{}                                          `json:"requestBodyPattern,omitempty"`
+	TransformerParameters map[string]interface{}                                          `json:"transformerParameters,omitempty"`
+	Transformers          []string                                                        `json:"transformers,omitempty"`
 }
 
 type PostAdminRecordingsSnapshotRequest struct {
@@ -49,16 +49,16 @@ type PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequestBasicAuthCreden
 }
 
 type PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequest struct {
-	BasicAuthCredentials *PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequestBasicAuthCredentials `json:"basicAuthCredentials"`
-	BodyPatterns         []map[string]interface{}                                                          `json:"bodyPatterns"`
-	Cookies              map[string]interface{}                                                            `json:"cookies"`
-	Headers              map[string]interface{}                                                            `json:"headers"`
-	Method               *string                                                                           `json:"method"`
-	QueryParameters      map[string]interface{}                                                            `json:"queryParameters"`
-	URL                  *string                                                                           `json:"url"`
-	URLPath              *string                                                                           `json:"urlPath"`
-	URLPathPattern       *string                                                                           `json:"urlPathPattern"`
-	URLPattern           *string                                                                           `json:"urlPattern"`
+	BasicAuthCredentials *PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequestBasicAuthCredentials `json:"basicAuthCredentials,omitempty"`
+	BodyPatterns         []map[string]interface{}                                                          `json:"bodyPatterns,omitempty"`
+	Cookies              map[string]interface{}                                                            `json:"cookies,omitempty"`
+	Headers              map[string]interface{}                                                            `json:"headers,omitempty"`
+	Method               *string                                                                           `json:"method,omitempty"`
+	QueryParameters      map[string]interface{}                                                            `json:"queryParameters,omitempty"`
+	URL                  *string                                                                           `json:"url,omitempty"`
+	URLPath              *string                                                                           `json:"urlPath,omitempty"`
+	URLPathPattern       *string                                                                           `json:"urlPathPattern,omitempty"`
+	URLPattern           *string                                                                           `json:"urlPattern,omitempty"`
 }
 
 type PostAdminRecordingsSnapshot200ApplicationJSONMappingsResponseFaultEnum string
@@ -71,35 +71,35 @@ const (
 )
 
 type PostAdminRecordingsSnapshot200ApplicationJSONMappingsResponse struct {
-	AdditionalProxyRequestHeaders map[string]interface{}                                                  `json:"additionalProxyRequestHeaders"`
-	Base64Body                    *string                                                                 `json:"base64Body"`
-	Body                          *string                                                                 `json:"body"`
-	BodyFileName                  *string                                                                 `json:"bodyFileName"`
-	Fault                         *PostAdminRecordingsSnapshot200ApplicationJSONMappingsResponseFaultEnum `json:"fault"`
-	FixedDelayMilliseconds        *int64                                                                  `json:"fixedDelayMilliseconds"`
-	FromConfiguredStub            *bool                                                                   `json:"fromConfiguredStub"`
-	Headers                       map[string]interface{}                                                  `json:"headers"`
-	JSONBody                      map[string]interface{}                                                  `json:"jsonBody"`
-	ProxyBaseURL                  *string                                                                 `json:"proxyBaseUrl"`
-	Status                        *int64                                                                  `json:"status"`
-	StatusMessage                 *string                                                                 `json:"statusMessage"`
-	TransformerParameters         map[string]interface{}                                                  `json:"transformerParameters"`
-	Transformers                  []string                                                                `json:"transformers"`
+	AdditionalProxyRequestHeaders map[string]interface{}                                                  `json:"additionalProxyRequestHeaders,omitempty"`
+	Base64Body                    *string                                                                 `json:"base64Body,omitempty"`
+	Body                          *string                                                                 `json:"body,omitempty"`
+	BodyFileName                  *string                                                                 `json:"bodyFileName,omitempty"`
+	Fault                         *PostAdminRecordingsSnapshot200ApplicationJSONMappingsResponseFaultEnum `json:"fault,omitempty"`
+	FixedDelayMilliseconds        *int64                                                                  `json:"fixedDelayMilliseconds,omitempty"`
+	FromConfiguredStub            *bool                                                                   `json:"fromConfiguredStub,omitempty"`
+	Headers                       map[string]interface{}                                                  `json:"headers,omitempty"`
+	JSONBody                      map[string]interface{}                                                  `json:"jsonBody,omitempty"`
+	ProxyBaseURL                  *string                                                                 `json:"proxyBaseUrl,omitempty"`
+	Status                        *int64                                                                  `json:"status,omitempty"`
+	StatusMessage                 *string                                                                 `json:"statusMessage,omitempty"`
+	TransformerParameters         map[string]interface{}                                                  `json:"transformerParameters,omitempty"`
+	Transformers                  []string                                                                `json:"transformers,omitempty"`
 }
 
 type PostAdminRecordingsSnapshot200ApplicationJSONMappings struct {
-	ID                    *string                                                        `json:"id"`
-	Metadata              map[string]interface{}                                         `json:"metadata"`
-	Name                  *string                                                        `json:"name"`
-	NewScenarioState      *string                                                        `json:"newScenarioState"`
-	Persistent            *bool                                                          `json:"persistent"`
-	PostServeActions      map[string]interface{}                                         `json:"postServeActions"`
-	Priority              *int64                                                         `json:"priority"`
-	Request               *PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequest  `json:"request"`
-	RequiredScenarioState *string                                                        `json:"requiredScenarioState"`
-	Response              *PostAdminRecordingsSnapshot200ApplicationJSONMappingsResponse `json:"response"`
-	ScenarioName          *string                                                        `json:"scenarioName"`
-	UUID                  *string                                                        `json:"uuid"`
+	ID                    *string                                                        `json:"id,omitempty"`
+	Metadata              map[string]interface{}                                         `json:"metadata,omitempty"`
+	Name                  *string                                                        `json:"name,omitempty"`
+	NewScenarioState      *string                                                        `json:"newScenarioState,omitempty"`
+	Persistent            *bool                                                          `json:"persistent,omitempty"`
+	PostServeActions      map[string]interface{}                                         `json:"postServeActions,omitempty"`
+	Priority              *int64                                                         `json:"priority,omitempty"`
+	Request               *PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequest  `json:"request,omitempty"`
+	RequiredScenarioState *string                                                        `json:"requiredScenarioState,omitempty"`
+	Response              *PostAdminRecordingsSnapshot200ApplicationJSONMappingsResponse `json:"response,omitempty"`
+	ScenarioName          *string                                                        `json:"scenarioName,omitempty"`
+	UUID                  *string                                                        `json:"uuid,omitempty"`
 }
 
 type PostAdminRecordingsSnapshot200ApplicationJSONMeta struct {
@@ -107,8 +107,8 @@ type PostAdminRecordingsSnapshot200ApplicationJSONMeta struct {
 }
 
 type PostAdminRecordingsSnapshot200ApplicationJSON struct {
-	Mappings []PostAdminRecordingsSnapshot200ApplicationJSONMappings `json:"mappings"`
-	Meta     *PostAdminRecordingsSnapshot200ApplicationJSONMeta      `json:"meta"`
+	Mappings []PostAdminRecordingsSnapshot200ApplicationJSONMappings `json:"mappings,omitempty"`
+	Meta     *PostAdminRecordingsSnapshot200ApplicationJSONMeta      `json:"meta,omitempty"`
 }
 
 type PostAdminRecordingsSnapshotResponse struct {

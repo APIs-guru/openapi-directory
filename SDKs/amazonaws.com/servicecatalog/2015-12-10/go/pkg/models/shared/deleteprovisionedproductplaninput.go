@@ -1,7 +1,7 @@
 package shared
 
 type DeleteProvisionedProductPlanInput struct {
-	AcceptLanguage *string `json:"AcceptLanguage"`
-	IgnoreErrors   *bool   `json:"IgnoreErrors"`
+	AcceptLanguage *string `json:"AcceptLanguage,omitempty"`
+	IgnoreErrors   *bool   `json:"IgnoreErrors,omitempty"`
 	PlanID         string  `json:"PlanId"`
 }

@@ -19,13 +19,13 @@ type GetShowsRequest struct {
 }
 
 type GetShows200ApplicationJSONLinks struct {
-	Self *shared.Link `json:"self"`
+	Self *shared.Link `json:"self,omitempty"`
 }
 
 type GetShows200ApplicationJSON struct {
-	Links *GetShows200ApplicationJSONLinks `json:"_links"`
-	Meta  *shared.Pagination               `json:"_meta"`
-	Items []shared.Show                    `json:"items"`
+	Links *GetShows200ApplicationJSONLinks `json:"_links,omitempty"`
+	Meta  *shared.Pagination               `json:"_meta,omitempty"`
+	Items []shared.Show                    `json:"items,omitempty"`
 }
 
 type GetShowsResponse struct {

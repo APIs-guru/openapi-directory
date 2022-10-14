@@ -32,14 +32,14 @@ const (
 )
 
 type VideoVersionsUpload struct {
-	Approach    *VideoVersionsUploadApproachEnum `json:"approach"`
-	CompleteURI *string                          `json:"complete_uri"`
-	Form        *string                          `json:"form"`
-	Link        *string                          `json:"link"`
-	RedirectURL *string                          `json:"redirect_url"`
-	Size        *float64                         `json:"size"`
+	Approach    *VideoVersionsUploadApproachEnum `json:"approach,omitempty"`
+	CompleteURI *string                          `json:"complete_uri,omitempty"`
+	Form        *string                          `json:"form,omitempty"`
+	Link        *string                          `json:"link,omitempty"`
+	RedirectURL *string                          `json:"redirect_url,omitempty"`
+	Size        *float64                         `json:"size,omitempty"`
 	Status      VideoVersionsUploadStatusEnum    `json:"status"`
-	UploadLink  *string                          `json:"upload_link"`
+	UploadLink  *string                          `json:"upload_link,omitempty"`
 }
 
 type VideoVersionsUserAccountEnum string
@@ -199,8 +199,8 @@ type VideoVersionsUserMetadataConnections struct {
 }
 
 type VideoVersionsUserMetadataInteractionsAddPrivacyUser struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type VideoVersionsUserMetadataInteractionsBlock struct {
@@ -223,7 +223,7 @@ type VideoVersionsUserMetadataInteractionsReport struct {
 }
 
 type VideoVersionsUserMetadataInteractions struct {
-	AddPrivacyUser *VideoVersionsUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user"`
+	AddPrivacyUser *VideoVersionsUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
 	Block          VideoVersionsUserMetadataInteractionsBlock           `json:"block"`
 	Follow         VideoVersionsUserMetadataInteractionsFollow          `json:"follow"`
 	Report         VideoVersionsUserMetadataInteractionsReport          `json:"report"`
@@ -263,19 +263,19 @@ const (
 )
 
 type VideoVersionsUserPreferencesVideosPrivacy struct {
-	Add      *bool                                                  `json:"add"`
-	Comments *VideoVersionsUserPreferencesVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                                  `json:"download"`
-	Embed    *VideoVersionsUserPreferencesVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *VideoVersionsUserPreferencesVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                                  `json:"add,omitempty"`
+	Comments *VideoVersionsUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                                  `json:"download,omitempty"`
+	Embed    *VideoVersionsUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *VideoVersionsUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type VideoVersionsUserPreferencesVideos struct {
-	Privacy *VideoVersionsUserPreferencesVideosPrivacy `json:"privacy"`
+	Privacy *VideoVersionsUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type VideoVersionsUserPreferences struct {
-	Videos *VideoVersionsUserPreferencesVideos `json:"videos"`
+	Videos *VideoVersionsUserPreferencesVideos `json:"videos,omitempty"`
 }
 
 type VideoVersionsUserUploadQuotaLifetime struct {
@@ -320,15 +320,15 @@ type VideoVersionsUserWebsites struct {
 type VideoVersionsUserUser struct {
 	Account       VideoVersionsUserAccountEnum  `json:"account"`
 	Bio           string                        `json:"bio"`
-	ContentFilter []string                      `json:"content_filter"`
+	ContentFilter []string                      `json:"content_filter,omitempty"`
 	CreatedTime   string                        `json:"created_time"`
-	Email         *string                       `json:"email"`
+	Email         *string                       `json:"email,omitempty"`
 	Link          string                        `json:"link"`
 	Location      string                        `json:"location"`
 	Metadata      VideoVersionsUserMetadata     `json:"metadata"`
 	Name          string                        `json:"name"`
 	Pictures      Picture                       `json:"pictures"`
-	Preferences   *VideoVersionsUserPreferences `json:"preferences"`
+	Preferences   *VideoVersionsUserPreferences `json:"preferences,omitempty"`
 	ResourceKey   string                        `json:"resource_key"`
 	UploadQuota   VideoVersionsUserUploadQuota  `json:"upload_quota"`
 	URI           string                        `json:"uri"`

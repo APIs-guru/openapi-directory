@@ -44,8 +44,8 @@ const (
 )
 
 type Aggregation struct {
-	AlignmentPeriod    *string                            `json:"alignmentPeriod"`
-	CrossSeriesReducer *AggregationCrossSeriesReducerEnum `json:"crossSeriesReducer"`
-	GroupByFields      []string                           `json:"groupByFields"`
-	PerSeriesAligner   *AggregationPerSeriesAlignerEnum   `json:"perSeriesAligner"`
+	AlignmentPeriod    *string                            `json:"alignmentPeriod,omitempty"`
+	CrossSeriesReducer *AggregationCrossSeriesReducerEnum `json:"crossSeriesReducer,omitempty"`
+	GroupByFields      []string                           `json:"groupByFields,omitempty"`
+	PerSeriesAligner   *AggregationPerSeriesAlignerEnum   `json:"perSeriesAligner,omitempty"`
 }

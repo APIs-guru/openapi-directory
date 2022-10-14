@@ -1,7 +1,7 @@
 package shared
 
 type CustomAttributeHistogramRequest struct {
-	Key                               *string                 `json:"key"`
-	LongValueHistogramBucketingOption *NumericBucketingOption `json:"longValueHistogramBucketingOption"`
-	StringValueHistogram              *bool                   `json:"stringValueHistogram"`
+	Key                               *string                 `json:"key,omitempty"`
+	LongValueHistogramBucketingOption *NumericBucketingOption `json:"longValueHistogramBucketingOption,omitempty"`
+	StringValueHistogram              *bool                   `json:"stringValueHistogram,omitempty"`
 }

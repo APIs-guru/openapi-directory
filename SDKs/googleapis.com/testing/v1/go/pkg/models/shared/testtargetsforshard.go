@@ -1,5 +1,5 @@
 package shared
 
 type TestTargetsForShard struct {
-	TestTargets []string `json:"testTargets"`
+	TestTargets []string `json:"testTargets,omitempty"`
 }

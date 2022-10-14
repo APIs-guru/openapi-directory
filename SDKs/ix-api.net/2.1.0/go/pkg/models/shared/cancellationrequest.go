@@ -5,5 +5,5 @@ import (
 )
 
 type CancellationRequest struct {
-	DecommissionAt *time.Time `json:"decommission_at"`
+	DecommissionAt *time.Time `json:"decommission_at,omitempty"`
 }

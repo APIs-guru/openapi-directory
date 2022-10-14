@@ -1,6 +1,6 @@
 package shared
 
 type OrganizationResourceDetailedStatusFilters struct {
-	AccountID *string                                 `json:"AccountId"`
-	Status    *OrganizationResourceDetailedStatusEnum `json:"Status"`
+	AccountID *string                                 `json:"AccountId,omitempty"`
+	Status    *OrganizationResourceDetailedStatusEnum `json:"Status,omitempty"`
 }

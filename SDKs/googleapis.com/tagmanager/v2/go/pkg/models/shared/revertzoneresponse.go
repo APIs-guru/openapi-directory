@@ -1,5 +1,5 @@
 package shared
 
 type RevertZoneResponse struct {
-	Zone *Zone `json:"zone"`
+	Zone *Zone `json:"zone,omitempty"`
 }

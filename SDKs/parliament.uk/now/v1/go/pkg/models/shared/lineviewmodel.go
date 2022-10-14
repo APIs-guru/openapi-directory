@@ -51,14 +51,14 @@ const (
 )
 
 type LineViewModel struct {
-	Content               *string                               `json:"content"`
-	ContentAdditionalJSON *string                               `json:"contentAdditionalJson"`
-	ContentType           *LineViewModelContentTypeEnum         `json:"contentType"`
-	ContentURL            *string                               `json:"contentUrl"`
-	DisplayOrder          *int32                                `json:"displayOrder"`
-	ForceCapitalisation   *bool                                 `json:"forceCapitalisation"`
-	HorizontalAlignment   *LineViewModelHorizontalAlignmentEnum `json:"horizontalAlignment"`
-	Member                *MemberViewModel                      `json:"member"`
-	Style                 *LineViewModelStyleEnum               `json:"style"`
-	VerticalAlignment     *LineViewModelVerticalAlignmentEnum   `json:"verticalAlignment"`
+	Content               *string                               `json:"content,omitempty"`
+	ContentAdditionalJSON *string                               `json:"contentAdditionalJson,omitempty"`
+	ContentType           *LineViewModelContentTypeEnum         `json:"contentType,omitempty"`
+	ContentURL            *string                               `json:"contentUrl,omitempty"`
+	DisplayOrder          *int32                                `json:"displayOrder,omitempty"`
+	ForceCapitalisation   *bool                                 `json:"forceCapitalisation,omitempty"`
+	HorizontalAlignment   *LineViewModelHorizontalAlignmentEnum `json:"horizontalAlignment,omitempty"`
+	Member                *MemberViewModel                      `json:"member,omitempty"`
+	Style                 *LineViewModelStyleEnum               `json:"style,omitempty"`
+	VerticalAlignment     *LineViewModelVerticalAlignmentEnum   `json:"verticalAlignment,omitempty"`
 }

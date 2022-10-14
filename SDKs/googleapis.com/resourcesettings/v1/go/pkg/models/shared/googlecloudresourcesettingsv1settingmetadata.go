@@ -13,9 +13,9 @@ const (
 )
 
 type GoogleCloudResourcesettingsV1SettingMetadata struct {
-	DataType     *GoogleCloudResourcesettingsV1SettingMetadataDataTypeEnum `json:"dataType"`
-	DefaultValue *GoogleCloudResourcesettingsV1Value                       `json:"defaultValue"`
-	Description  *string                                                   `json:"description"`
-	DisplayName  *string                                                   `json:"displayName"`
-	ReadOnly     *bool                                                     `json:"readOnly"`
+	DataType     *GoogleCloudResourcesettingsV1SettingMetadataDataTypeEnum `json:"dataType,omitempty"`
+	DefaultValue *GoogleCloudResourcesettingsV1Value                       `json:"defaultValue,omitempty"`
+	Description  *string                                                   `json:"description,omitempty"`
+	DisplayName  *string                                                   `json:"displayName,omitempty"`
+	ReadOnly     *bool                                                     `json:"readOnly,omitempty"`
 }

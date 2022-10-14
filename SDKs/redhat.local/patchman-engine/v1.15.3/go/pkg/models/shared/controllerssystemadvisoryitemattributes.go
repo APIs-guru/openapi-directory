@@ -1,10 +1,10 @@
 package shared
 
 type ControllersSystemAdvisoryItemAttributes struct {
-	AdvisoryType *int64  `json:"advisory_type"`
-	CveCount     *int64  `json:"cve_count"`
-	Description  *string `json:"description"`
-	PublicDate   *string `json:"public_date"`
-	Severity     *int64  `json:"severity"`
-	Synopsis     *string `json:"synopsis"`
+	AdvisoryType *int64  `json:"advisory_type,omitempty"`
+	CveCount     *int64  `json:"cve_count,omitempty"`
+	Description  *string `json:"description,omitempty"`
+	PublicDate   *string `json:"public_date,omitempty"`
+	Severity     *int64  `json:"severity,omitempty"`
+	Synopsis     *string `json:"synopsis,omitempty"`
 }

@@ -16,10 +16,10 @@ type CreateDistributionConfigurationHeaders struct {
 
 type CreateDistributionConfigurationRequestBody struct {
 	ClientToken   string                `json:"clientToken"`
-	Description   *string               `json:"description"`
+	Description   *string               `json:"description,omitempty"`
 	Distributions []shared.Distribution `json:"distributions"`
 	Name          string                `json:"name"`
-	Tags          map[string]string     `json:"tags"`
+	Tags          map[string]string     `json:"tags,omitempty"`
 }
 
 type CreateDistributionConfigurationRequest struct {

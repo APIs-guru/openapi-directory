@@ -29,40 +29,40 @@ const (
 )
 
 type UpdateGraphqlAPIRequestBodyLambdaAuthorizerConfig struct {
-	AuthorizerResultTTLInSeconds *int64  `json:"authorizerResultTtlInSeconds"`
-	AuthorizerURI                *string `json:"authorizerUri"`
-	IdentityValidationExpression *string `json:"identityValidationExpression"`
+	AuthorizerResultTTLInSeconds *int64  `json:"authorizerResultTtlInSeconds,omitempty"`
+	AuthorizerURI                *string `json:"authorizerUri,omitempty"`
+	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty"`
 }
 
 type UpdateGraphqlAPIRequestBodyLogConfig struct {
-	CloudWatchLogsRoleArn *string                   `json:"cloudWatchLogsRoleArn"`
-	ExcludeVerboseContent *bool                     `json:"excludeVerboseContent"`
-	FieldLogLevel         *shared.FieldLogLevelEnum `json:"fieldLogLevel"`
+	CloudWatchLogsRoleArn *string                   `json:"cloudWatchLogsRoleArn,omitempty"`
+	ExcludeVerboseContent *bool                     `json:"excludeVerboseContent,omitempty"`
+	FieldLogLevel         *shared.FieldLogLevelEnum `json:"fieldLogLevel,omitempty"`
 }
 
 type UpdateGraphqlAPIRequestBodyOpenIDConnectConfig struct {
-	AuthTTL  *int64  `json:"authTTL"`
-	ClientID *string `json:"clientId"`
-	IatTTL   *int64  `json:"iatTTL"`
-	Issuer   *string `json:"issuer"`
+	AuthTTL  *int64  `json:"authTTL,omitempty"`
+	ClientID *string `json:"clientId,omitempty"`
+	IatTTL   *int64  `json:"iatTTL,omitempty"`
+	Issuer   *string `json:"issuer,omitempty"`
 }
 
 type UpdateGraphqlAPIRequestBodyUserPoolConfig struct {
-	AppIDClientRegex *string                   `json:"appIdClientRegex"`
-	AwsRegion        *string                   `json:"awsRegion"`
-	DefaultAction    *shared.DefaultActionEnum `json:"defaultAction"`
-	UserPoolID       *string                   `json:"userPoolId"`
+	AppIDClientRegex *string                   `json:"appIdClientRegex,omitempty"`
+	AwsRegion        *string                   `json:"awsRegion,omitempty"`
+	DefaultAction    *shared.DefaultActionEnum `json:"defaultAction,omitempty"`
+	UserPoolID       *string                   `json:"userPoolId,omitempty"`
 }
 
 type UpdateGraphqlAPIRequestBody struct {
-	AdditionalAuthenticationProviders []shared.AdditionalAuthenticationProvider          `json:"additionalAuthenticationProviders"`
-	AuthenticationType                *UpdateGraphqlAPIRequestBodyAuthenticationTypeEnum `json:"authenticationType"`
-	LambdaAuthorizerConfig            *UpdateGraphqlAPIRequestBodyLambdaAuthorizerConfig `json:"lambdaAuthorizerConfig"`
-	LogConfig                         *UpdateGraphqlAPIRequestBodyLogConfig              `json:"logConfig"`
+	AdditionalAuthenticationProviders []shared.AdditionalAuthenticationProvider          `json:"additionalAuthenticationProviders,omitempty"`
+	AuthenticationType                *UpdateGraphqlAPIRequestBodyAuthenticationTypeEnum `json:"authenticationType,omitempty"`
+	LambdaAuthorizerConfig            *UpdateGraphqlAPIRequestBodyLambdaAuthorizerConfig `json:"lambdaAuthorizerConfig,omitempty"`
+	LogConfig                         *UpdateGraphqlAPIRequestBodyLogConfig              `json:"logConfig,omitempty"`
 	Name                              string                                             `json:"name"`
-	OpenIDConnectConfig               *UpdateGraphqlAPIRequestBodyOpenIDConnectConfig    `json:"openIDConnectConfig"`
-	UserPoolConfig                    *UpdateGraphqlAPIRequestBodyUserPoolConfig         `json:"userPoolConfig"`
-	XrayEnabled                       *bool                                              `json:"xrayEnabled"`
+	OpenIDConnectConfig               *UpdateGraphqlAPIRequestBodyOpenIDConnectConfig    `json:"openIDConnectConfig,omitempty"`
+	UserPoolConfig                    *UpdateGraphqlAPIRequestBodyUserPoolConfig         `json:"userPoolConfig,omitempty"`
+	XrayEnabled                       *bool                                              `json:"xrayEnabled,omitempty"`
 }
 
 type UpdateGraphqlAPIRequest struct {

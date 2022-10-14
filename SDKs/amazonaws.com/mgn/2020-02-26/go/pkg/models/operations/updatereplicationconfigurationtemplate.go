@@ -36,20 +36,20 @@ const (
 )
 
 type UpdateReplicationConfigurationTemplateRequestBody struct {
-	Arn                                 *string                                                                           `json:"arn"`
-	AssociateDefaultSecurityGroup       *bool                                                                             `json:"associateDefaultSecurityGroup"`
-	BandwidthThrottling                 *int64                                                                            `json:"bandwidthThrottling"`
-	CreatePublicIP                      *bool                                                                             `json:"createPublicIP"`
-	DataPlaneRouting                    *UpdateReplicationConfigurationTemplateRequestBodyDataPlaneRoutingEnum            `json:"dataPlaneRouting"`
-	DefaultLargeStagingDiskType         *UpdateReplicationConfigurationTemplateRequestBodyDefaultLargeStagingDiskTypeEnum `json:"defaultLargeStagingDiskType"`
-	EbsEncryption                       *UpdateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum               `json:"ebsEncryption"`
-	EbsEncryptionKeyArn                 *string                                                                           `json:"ebsEncryptionKeyArn"`
+	Arn                                 *string                                                                           `json:"arn,omitempty"`
+	AssociateDefaultSecurityGroup       *bool                                                                             `json:"associateDefaultSecurityGroup,omitempty"`
+	BandwidthThrottling                 *int64                                                                            `json:"bandwidthThrottling,omitempty"`
+	CreatePublicIP                      *bool                                                                             `json:"createPublicIP,omitempty"`
+	DataPlaneRouting                    *UpdateReplicationConfigurationTemplateRequestBodyDataPlaneRoutingEnum            `json:"dataPlaneRouting,omitempty"`
+	DefaultLargeStagingDiskType         *UpdateReplicationConfigurationTemplateRequestBodyDefaultLargeStagingDiskTypeEnum `json:"defaultLargeStagingDiskType,omitempty"`
+	EbsEncryption                       *UpdateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum               `json:"ebsEncryption,omitempty"`
+	EbsEncryptionKeyArn                 *string                                                                           `json:"ebsEncryptionKeyArn,omitempty"`
 	ReplicationConfigurationTemplateID  string                                                                            `json:"replicationConfigurationTemplateID"`
-	ReplicationServerInstanceType       *string                                                                           `json:"replicationServerInstanceType"`
-	ReplicationServersSecurityGroupsIDs []string                                                                          `json:"replicationServersSecurityGroupsIDs"`
-	StagingAreaSubnetID                 *string                                                                           `json:"stagingAreaSubnetId"`
-	StagingAreaTags                     map[string]string                                                                 `json:"stagingAreaTags"`
-	UseDedicatedReplicationServer       *bool                                                                             `json:"useDedicatedReplicationServer"`
+	ReplicationServerInstanceType       *string                                                                           `json:"replicationServerInstanceType,omitempty"`
+	ReplicationServersSecurityGroupsIDs []string                                                                          `json:"replicationServersSecurityGroupsIDs,omitempty"`
+	StagingAreaSubnetID                 *string                                                                           `json:"stagingAreaSubnetId,omitempty"`
+	StagingAreaTags                     map[string]string                                                                 `json:"stagingAreaTags,omitempty"`
+	UseDedicatedReplicationServer       *bool                                                                             `json:"useDedicatedReplicationServer,omitempty"`
 }
 
 type UpdateReplicationConfigurationTemplateRequest struct {

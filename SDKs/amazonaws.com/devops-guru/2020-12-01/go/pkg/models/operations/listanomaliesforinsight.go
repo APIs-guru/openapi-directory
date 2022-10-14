@@ -25,14 +25,14 @@ type ListAnomaliesForInsightHeaders struct {
 }
 
 type ListAnomaliesForInsightRequestBodyStartTimeRange struct {
-	FromTime *time.Time `json:"FromTime"`
-	ToTime   *time.Time `json:"ToTime"`
+	FromTime *time.Time `json:"FromTime,omitempty"`
+	ToTime   *time.Time `json:"ToTime,omitempty"`
 }
 
 type ListAnomaliesForInsightRequestBody struct {
-	MaxResults     *int64                                            `json:"MaxResults"`
-	NextToken      *string                                           `json:"NextToken"`
-	StartTimeRange *ListAnomaliesForInsightRequestBodyStartTimeRange `json:"StartTimeRange"`
+	MaxResults     *int64                                            `json:"MaxResults,omitempty"`
+	NextToken      *string                                           `json:"NextToken,omitempty"`
+	StartTimeRange *ListAnomaliesForInsightRequestBodyStartTimeRange `json:"StartTimeRange,omitempty"`
 }
 
 type ListAnomaliesForInsightRequest struct {

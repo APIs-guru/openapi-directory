@@ -1,12 +1,12 @@
 package shared
 
 type CategoryItems struct {
-	BadgeURL   *string `json:"badgeUrl"`
-	CategoryID *string `json:"categoryId"`
-	Name       *string `json:"name"`
+	BadgeURL   *string `json:"badgeUrl,omitempty"`
+	CategoryID *string `json:"categoryId,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }
 
 type Category struct {
-	Items []CategoryItems `json:"items"`
-	Kind  *string         `json:"kind"`
+	Items []CategoryItems `json:"items,omitempty"`
+	Kind  *string         `json:"kind,omitempty"`
 }

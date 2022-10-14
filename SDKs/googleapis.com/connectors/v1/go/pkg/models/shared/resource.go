@@ -11,6 +11,6 @@ const (
 )
 
 type Resource struct {
-	PathTemplate *string           `json:"pathTemplate"`
-	Type         *ResourceTypeEnum `json:"type"`
+	PathTemplate *string           `json:"pathTemplate,omitempty"`
+	Type         *ResourceTypeEnum `json:"type,omitempty"`
 }

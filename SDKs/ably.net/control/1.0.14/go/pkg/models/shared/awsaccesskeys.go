@@ -8,6 +8,6 @@ const (
 
 type AwsAccessKeys struct {
 	AccessKeyID        string                               `json:"accessKeyId"`
-	AuthenticationMode *AwsAccessKeysAuthenticationModeEnum `json:"authenticationMode"`
+	AuthenticationMode *AwsAccessKeysAuthenticationModeEnum `json:"authenticationMode,omitempty"`
 	SecretAccessKey    string                               `json:"secretAccessKey"`
 }

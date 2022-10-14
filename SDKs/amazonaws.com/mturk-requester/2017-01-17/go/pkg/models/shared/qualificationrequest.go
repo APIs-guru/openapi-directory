@@ -5,10 +5,10 @@ import (
 )
 
 type QualificationRequest struct {
-	Answer                 *string    `json:"Answer"`
-	QualificationRequestID *string    `json:"QualificationRequestId"`
-	QualificationTypeID    *string    `json:"QualificationTypeId"`
-	SubmitTime             *time.Time `json:"SubmitTime"`
-	Test                   *string    `json:"Test"`
-	WorkerID               *string    `json:"WorkerId"`
+	Answer                 *string    `json:"Answer,omitempty"`
+	QualificationRequestID *string    `json:"QualificationRequestId,omitempty"`
+	QualificationTypeID    *string    `json:"QualificationTypeId,omitempty"`
+	SubmitTime             *time.Time `json:"SubmitTime,omitempty"`
+	Test                   *string    `json:"Test,omitempty"`
+	WorkerID               *string    `json:"WorkerId,omitempty"`
 }

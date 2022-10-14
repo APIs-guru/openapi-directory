@@ -17,8 +17,8 @@ const (
 )
 
 type GoogleCloudHealthcareV1beta1AnnotationBigQueryDestination struct {
-	Force            *bool                                                                          `json:"force"`
-	SchemaType       *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestinationSchemaTypeEnum       `json:"schemaType"`
-	TableURI         *string                                                                        `json:"tableUri"`
-	WriteDisposition *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestinationWriteDispositionEnum `json:"writeDisposition"`
+	Force            *bool                                                                          `json:"force,omitempty"`
+	SchemaType       *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestinationSchemaTypeEnum       `json:"schemaType,omitempty"`
+	TableURI         *string                                                                        `json:"tableUri,omitempty"`
+	WriteDisposition *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestinationWriteDispositionEnum `json:"writeDisposition,omitempty"`
 }

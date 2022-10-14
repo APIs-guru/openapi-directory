@@ -5,13 +5,13 @@ import (
 )
 
 type ModifyReplicationTaskMessage struct {
-	CdcStartPosition          *string                 `json:"CdcStartPosition"`
-	CdcStartTime              *time.Time              `json:"CdcStartTime"`
-	CdcStopPosition           *string                 `json:"CdcStopPosition"`
-	MigrationType             *MigrationTypeValueEnum `json:"MigrationType"`
+	CdcStartPosition          *string                 `json:"CdcStartPosition,omitempty"`
+	CdcStartTime              *time.Time              `json:"CdcStartTime,omitempty"`
+	CdcStopPosition           *string                 `json:"CdcStopPosition,omitempty"`
+	MigrationType             *MigrationTypeValueEnum `json:"MigrationType,omitempty"`
 	ReplicationTaskArn        string                  `json:"ReplicationTaskArn"`
-	ReplicationTaskIdentifier *string                 `json:"ReplicationTaskIdentifier"`
-	ReplicationTaskSettings   *string                 `json:"ReplicationTaskSettings"`
-	TableMappings             *string                 `json:"TableMappings"`
-	TaskData                  *string                 `json:"TaskData"`
+	ReplicationTaskIdentifier *string                 `json:"ReplicationTaskIdentifier,omitempty"`
+	ReplicationTaskSettings   *string                 `json:"ReplicationTaskSettings,omitempty"`
+	TableMappings             *string                 `json:"TableMappings,omitempty"`
+	TaskData                  *string                 `json:"TaskData,omitempty"`
 }

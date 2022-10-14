@@ -19,12 +19,12 @@ const (
 )
 
 type VideoProcessingDetails struct {
-	EditorSuggestionsAvailability *string                                            `json:"editorSuggestionsAvailability"`
-	FileDetailsAvailability       *string                                            `json:"fileDetailsAvailability"`
-	ProcessingFailureReason       *VideoProcessingDetailsProcessingFailureReasonEnum `json:"processingFailureReason"`
-	ProcessingIssuesAvailability  *string                                            `json:"processingIssuesAvailability"`
-	ProcessingProgress            *VideoProcessingDetailsProcessingProgress          `json:"processingProgress"`
-	ProcessingStatus              *VideoProcessingDetailsProcessingStatusEnum        `json:"processingStatus"`
-	TagSuggestionsAvailability    *string                                            `json:"tagSuggestionsAvailability"`
-	ThumbnailsAvailability        *string                                            `json:"thumbnailsAvailability"`
+	EditorSuggestionsAvailability *string                                            `json:"editorSuggestionsAvailability,omitempty"`
+	FileDetailsAvailability       *string                                            `json:"fileDetailsAvailability,omitempty"`
+	ProcessingFailureReason       *VideoProcessingDetailsProcessingFailureReasonEnum `json:"processingFailureReason,omitempty"`
+	ProcessingIssuesAvailability  *string                                            `json:"processingIssuesAvailability,omitempty"`
+	ProcessingProgress            *VideoProcessingDetailsProcessingProgress          `json:"processingProgress,omitempty"`
+	ProcessingStatus              *VideoProcessingDetailsProcessingStatusEnum        `json:"processingStatus,omitempty"`
+	TagSuggestionsAvailability    *string                                            `json:"tagSuggestionsAvailability,omitempty"`
+	ThumbnailsAvailability        *string                                            `json:"thumbnailsAvailability,omitempty"`
 }

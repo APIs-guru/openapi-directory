@@ -1,6 +1,6 @@
 package shared
 
 type DataDiskAssignment struct {
-	DataDisks  []string `json:"dataDisks"`
-	VMInstance *string  `json:"vmInstance"`
+	DataDisks  []string `json:"dataDisks,omitempty"`
+	VMInstance *string  `json:"vmInstance,omitempty"`
 }

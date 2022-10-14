@@ -8,13 +8,13 @@ const (
 )
 
 type DatasourceRunParametersSchedule struct {
-	Type *DatasourceRunParametersScheduleTypeEnum `json:"type"`
+	Type *DatasourceRunParametersScheduleTypeEnum `json:"type,omitempty"`
 }
 
 type DatasourceRunParameters struct {
-	OnGeneration *bool                            `json:"onGeneration"`
-	OnNewNode    *bool                            `json:"onNewNode"`
-	Schedule     *DatasourceRunParametersSchedule `json:"schedule"`
+	OnGeneration *bool                            `json:"onGeneration,omitempty"`
+	OnNewNode    *bool                            `json:"onNewNode,omitempty"`
+	Schedule     *DatasourceRunParametersSchedule `json:"schedule,omitempty"`
 }
 
 type DatasourceTypeNameEnum string
@@ -24,8 +24,8 @@ const (
 )
 
 type DatasourceTypeParametersHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type DatasourceTypeParametersRequestMethodEnum string
@@ -42,30 +42,30 @@ const (
 )
 
 type DatasourceTypeParametersRequestMode struct {
-	Name *DatasourceTypeParametersRequestModeNameEnum `json:"name"`
+	Name *DatasourceTypeParametersRequestModeNameEnum `json:"name,omitempty"`
 }
 
 type DatasourceTypeParameters struct {
-	CheckSsl       *bool                                      `json:"checkSsl"`
-	Headers        []DatasourceTypeParametersHeaders          `json:"headers"`
-	Path           *string                                    `json:"path"`
-	RequestMethod  *DatasourceTypeParametersRequestMethodEnum `json:"requestMethod"`
-	RequestMode    *DatasourceTypeParametersRequestMode       `json:"requestMode"`
-	RequestTimeout *int64                                     `json:"requestTimeout"`
-	URL            *string                                    `json:"url"`
+	CheckSsl       *bool                                      `json:"checkSsl,omitempty"`
+	Headers        []DatasourceTypeParametersHeaders          `json:"headers,omitempty"`
+	Path           *string                                    `json:"path,omitempty"`
+	RequestMethod  *DatasourceTypeParametersRequestMethodEnum `json:"requestMethod,omitempty"`
+	RequestMode    *DatasourceTypeParametersRequestMode       `json:"requestMode,omitempty"`
+	RequestTimeout *int64                                     `json:"requestTimeout,omitempty"`
+	URL            *string                                    `json:"url,omitempty"`
 }
 
 type DatasourceType struct {
-	Name       *DatasourceTypeNameEnum   `json:"name"`
-	Parameters *DatasourceTypeParameters `json:"parameters"`
+	Name       *DatasourceTypeNameEnum   `json:"name,omitempty"`
+	Parameters *DatasourceTypeParameters `json:"parameters,omitempty"`
 }
 
 type Datasource struct {
-	Description   *string                  `json:"description"`
-	Enabled       *bool                    `json:"enabled"`
-	ID            *string                  `json:"id"`
-	Name          *string                  `json:"name"`
-	RunParameters *DatasourceRunParameters `json:"runParameters"`
-	Type          *DatasourceType          `json:"type"`
-	UpdateTimeout *int64                   `json:"updateTimeout"`
+	Description   *string                  `json:"description,omitempty"`
+	Enabled       *bool                    `json:"enabled,omitempty"`
+	ID            *string                  `json:"id,omitempty"`
+	Name          *string                  `json:"name,omitempty"`
+	RunParameters *DatasourceRunParameters `json:"runParameters,omitempty"`
+	Type          *DatasourceType          `json:"type,omitempty"`
+	UpdateTimeout *int64                   `json:"updateTimeout,omitempty"`
 }

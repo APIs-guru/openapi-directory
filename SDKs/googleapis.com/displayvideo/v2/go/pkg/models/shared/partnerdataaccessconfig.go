@@ -1,5 +1,5 @@
 package shared
 
 type PartnerDataAccessConfig struct {
-	SdfConfig *SdfConfig `json:"sdfConfig"`
+	SdfConfig *SdfConfig `json:"sdfConfig,omitempty"`
 }

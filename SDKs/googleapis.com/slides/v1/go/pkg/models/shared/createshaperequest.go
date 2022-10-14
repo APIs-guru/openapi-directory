@@ -149,7 +149,7 @@ const (
 )
 
 type CreateShapeRequest struct {
-	ElementProperties *PageElementProperties           `json:"elementProperties"`
-	ObjectID          *string                          `json:"objectId"`
-	ShapeType         *CreateShapeRequestShapeTypeEnum `json:"shapeType"`
+	ElementProperties *PageElementProperties           `json:"elementProperties,omitempty"`
+	ObjectID          *string                          `json:"objectId,omitempty"`
+	ShapeType         *CreateShapeRequestShapeTypeEnum `json:"shapeType,omitempty"`
 }

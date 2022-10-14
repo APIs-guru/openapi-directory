@@ -9,9 +9,9 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4ThreatEntrySet struct {
-	CompressionType *GoogleSecuritySafebrowsingV4ThreatEntrySetCompressionTypeEnum `json:"compressionType"`
-	RawHashes       *GoogleSecuritySafebrowsingV4RawHashes                         `json:"rawHashes"`
-	RawIndices      *GoogleSecuritySafebrowsingV4RawIndices                        `json:"rawIndices"`
-	RiceHashes      *GoogleSecuritySafebrowsingV4RiceDeltaEncoding                 `json:"riceHashes"`
-	RiceIndices     *GoogleSecuritySafebrowsingV4RiceDeltaEncoding                 `json:"riceIndices"`
+	CompressionType *GoogleSecuritySafebrowsingV4ThreatEntrySetCompressionTypeEnum `json:"compressionType,omitempty"`
+	RawHashes       *GoogleSecuritySafebrowsingV4RawHashes                         `json:"rawHashes,omitempty"`
+	RawIndices      *GoogleSecuritySafebrowsingV4RawIndices                        `json:"rawIndices,omitempty"`
+	RiceHashes      *GoogleSecuritySafebrowsingV4RiceDeltaEncoding                 `json:"riceHashes,omitempty"`
+	RiceIndices     *GoogleSecuritySafebrowsingV4RiceDeltaEncoding                 `json:"riceIndices,omitempty"`
 }

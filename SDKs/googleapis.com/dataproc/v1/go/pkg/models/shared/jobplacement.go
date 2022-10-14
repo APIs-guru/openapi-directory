@@ -1,7 +1,7 @@
 package shared
 
 type JobPlacement struct {
-	ClusterLabels map[string]string `json:"clusterLabels"`
-	ClusterName   *string           `json:"clusterName"`
-	ClusterUUID   *string           `json:"clusterUuid"`
+	ClusterLabels map[string]string `json:"clusterLabels,omitempty"`
+	ClusterName   *string           `json:"clusterName,omitempty"`
+	ClusterUUID   *string           `json:"clusterUuid,omitempty"`
 }

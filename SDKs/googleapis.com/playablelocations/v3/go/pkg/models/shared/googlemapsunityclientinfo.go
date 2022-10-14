@@ -14,12 +14,12 @@ const (
 )
 
 type GoogleMapsUnityClientInfo struct {
-	APIClient            *string                                `json:"apiClient"`
-	ApplicationID        *string                                `json:"applicationId"`
-	ApplicationVersion   *string                                `json:"applicationVersion"`
-	DeviceModel          *string                                `json:"deviceModel"`
-	LanguageCode         *string                                `json:"languageCode"`
-	OperatingSystem      *string                                `json:"operatingSystem"`
-	OperatingSystemBuild *string                                `json:"operatingSystemBuild"`
-	Platform             *GoogleMapsUnityClientInfoPlatformEnum `json:"platform"`
+	APIClient            *string                                `json:"apiClient,omitempty"`
+	ApplicationID        *string                                `json:"applicationId,omitempty"`
+	ApplicationVersion   *string                                `json:"applicationVersion,omitempty"`
+	DeviceModel          *string                                `json:"deviceModel,omitempty"`
+	LanguageCode         *string                                `json:"languageCode,omitempty"`
+	OperatingSystem      *string                                `json:"operatingSystem,omitempty"`
+	OperatingSystemBuild *string                                `json:"operatingSystemBuild,omitempty"`
+	Platform             *GoogleMapsUnityClientInfoPlatformEnum `json:"platform,omitempty"`
 }

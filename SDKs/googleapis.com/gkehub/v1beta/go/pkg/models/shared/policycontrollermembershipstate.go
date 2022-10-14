@@ -15,7 +15,7 @@ const (
 )
 
 type PolicyControllerMembershipState struct {
-	ClusterName     *string                                   `json:"clusterName"`
-	ComponentStates map[string]PolicyControllerOnClusterState `json:"componentStates"`
-	State           *PolicyControllerMembershipStateStateEnum `json:"state"`
+	ClusterName     *string                                   `json:"clusterName,omitempty"`
+	ComponentStates map[string]PolicyControllerOnClusterState `json:"componentStates,omitempty"`
+	State           *PolicyControllerMembershipStateStateEnum `json:"state,omitempty"`
 }

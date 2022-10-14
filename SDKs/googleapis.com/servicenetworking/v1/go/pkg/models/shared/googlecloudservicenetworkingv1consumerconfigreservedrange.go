@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudServicenetworkingV1ConsumerConfigReservedRange struct {
-	Address        *string `json:"address"`
-	IPPrefixLength *int32  `json:"ipPrefixLength"`
-	Name           *string `json:"name"`
+	Address        *string `json:"address,omitempty"`
+	IPPrefixLength *int32  `json:"ipPrefixLength,omitempty"`
+	Name           *string `json:"name,omitempty"`
 }

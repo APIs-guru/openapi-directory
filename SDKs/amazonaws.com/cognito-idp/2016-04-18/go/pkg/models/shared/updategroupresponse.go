@@ -1,5 +1,5 @@
 package shared
 
 type UpdateGroupResponse struct {
-	Group *GroupType `json:"Group"`
+	Group *GroupType `json:"Group,omitempty"`
 }

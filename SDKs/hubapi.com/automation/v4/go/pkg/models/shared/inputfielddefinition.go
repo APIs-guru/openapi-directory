@@ -10,6 +10,6 @@ const (
 
 type InputFieldDefinition struct {
 	IsRequired          bool                                          `json:"isRequired"`
-	SupportedValueTypes []InputFieldDefinitionSupportedValueTypesEnum `json:"supportedValueTypes"`
+	SupportedValueTypes []InputFieldDefinitionSupportedValueTypesEnum `json:"supportedValueTypes,omitempty"`
 	TypeDefinition      FieldTypeDefinition                           `json:"typeDefinition"`
 }

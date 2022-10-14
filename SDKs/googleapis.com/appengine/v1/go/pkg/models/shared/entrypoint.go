@@ -1,5 +1,5 @@
 package shared
 
 type Entrypoint struct {
-	Shell *string `json:"shell"`
+	Shell *string `json:"shell,omitempty"`
 }

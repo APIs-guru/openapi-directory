@@ -10,22 +10,22 @@ const (
 )
 
 type AccountUcisHealth struct {
-	Message *string `json:"message"`
-	Status  *string `json:"status"`
+	Message *string `json:"message,omitempty"`
+	Status  *string `json:"status,omitempty"`
 }
 
 type AccountUcis struct {
-	Health       *AccountUcisHealth `json:"health"`
-	ID           *int64             `json:"id"`
-	Type         *string            `json:"type"`
-	UcpAccountID *string            `json:"ucpAccountId"`
-	UcpLabel     *string            `json:"ucpLabel"`
+	Health       *AccountUcisHealth `json:"health,omitempty"`
+	ID           *int64             `json:"id,omitempty"`
+	Type         *string            `json:"type,omitempty"`
+	UcpAccountID *string            `json:"ucpAccountId,omitempty"`
+	UcpLabel     *string            `json:"ucpLabel,omitempty"`
 }
 
 type Account struct {
-	ID     *int64             `json:"id"`
-	Name   *string            `json:"name"`
-	Org    *string            `json:"org"`
-	Status *AccountStatusEnum `json:"status"`
-	Ucis   []AccountUcis      `json:"ucis"`
+	ID     *int64             `json:"id,omitempty"`
+	Name   *string            `json:"name,omitempty"`
+	Org    *string            `json:"org,omitempty"`
+	Status *AccountStatusEnum `json:"status,omitempty"`
+	Ucis   []AccountUcis      `json:"ucis,omitempty"`
 }

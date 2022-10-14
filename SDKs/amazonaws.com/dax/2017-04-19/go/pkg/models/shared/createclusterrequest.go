@@ -1,18 +1,18 @@
 package shared
 
 type CreateClusterRequest struct {
-	AvailabilityZones             []string                           `json:"AvailabilityZones"`
-	ClusterEndpointEncryptionType *ClusterEndpointEncryptionTypeEnum `json:"ClusterEndpointEncryptionType"`
+	AvailabilityZones             []string                           `json:"AvailabilityZones,omitempty"`
+	ClusterEndpointEncryptionType *ClusterEndpointEncryptionTypeEnum `json:"ClusterEndpointEncryptionType,omitempty"`
 	ClusterName                   string                             `json:"ClusterName"`
-	Description                   *string                            `json:"Description"`
+	Description                   *string                            `json:"Description,omitempty"`
 	IamRoleArn                    string                             `json:"IamRoleArn"`
 	NodeType                      string                             `json:"NodeType"`
-	NotificationTopicArn          *string                            `json:"NotificationTopicArn"`
-	ParameterGroupName            *string                            `json:"ParameterGroupName"`
-	PreferredMaintenanceWindow    *string                            `json:"PreferredMaintenanceWindow"`
+	NotificationTopicArn          *string                            `json:"NotificationTopicArn,omitempty"`
+	ParameterGroupName            *string                            `json:"ParameterGroupName,omitempty"`
+	PreferredMaintenanceWindow    *string                            `json:"PreferredMaintenanceWindow,omitempty"`
 	ReplicationFactor             int64                              `json:"ReplicationFactor"`
-	SseSpecification              *SseSpecification                  `json:"SSESpecification"`
-	SecurityGroupIds              []string                           `json:"SecurityGroupIds"`
-	SubnetGroupName               *string                            `json:"SubnetGroupName"`
-	Tags                          []Tag                              `json:"Tags"`
+	SseSpecification              *SseSpecification                  `json:"SSESpecification,omitempty"`
+	SecurityGroupIds              []string                           `json:"SecurityGroupIds,omitempty"`
+	SubnetGroupName               *string                            `json:"SubnetGroupName,omitempty"`
+	Tags                          []Tag                              `json:"Tags,omitempty"`
 }

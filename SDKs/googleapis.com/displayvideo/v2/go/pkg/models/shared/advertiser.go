@@ -12,17 +12,17 @@ const (
 )
 
 type Advertiser struct {
-	AdServerConfig     *AdvertiserAdServerConfig   `json:"adServerConfig"`
-	AdvertiserID       *string                     `json:"advertiserId"`
-	CreativeConfig     *AdvertiserCreativeConfig   `json:"creativeConfig"`
-	DataAccessConfig   *AdvertiserDataAccessConfig `json:"dataAccessConfig"`
-	DisplayName        *string                     `json:"displayName"`
-	EntityStatus       *AdvertiserEntityStatusEnum `json:"entityStatus"`
-	GeneralConfig      *AdvertiserGeneralConfig    `json:"generalConfig"`
-	IntegrationDetails *IntegrationDetails         `json:"integrationDetails"`
-	Name               *string                     `json:"name"`
-	PartnerID          *string                     `json:"partnerId"`
-	PrismaEnabled      *bool                       `json:"prismaEnabled"`
-	ServingConfig      *AdvertiserTargetingConfig  `json:"servingConfig"`
-	UpdateTime         *string                     `json:"updateTime"`
+	AdServerConfig     *AdvertiserAdServerConfig   `json:"adServerConfig,omitempty"`
+	AdvertiserID       *string                     `json:"advertiserId,omitempty"`
+	CreativeConfig     *AdvertiserCreativeConfig   `json:"creativeConfig,omitempty"`
+	DataAccessConfig   *AdvertiserDataAccessConfig `json:"dataAccessConfig,omitempty"`
+	DisplayName        *string                     `json:"displayName,omitempty"`
+	EntityStatus       *AdvertiserEntityStatusEnum `json:"entityStatus,omitempty"`
+	GeneralConfig      *AdvertiserGeneralConfig    `json:"generalConfig,omitempty"`
+	IntegrationDetails *IntegrationDetails         `json:"integrationDetails,omitempty"`
+	Name               *string                     `json:"name,omitempty"`
+	PartnerID          *string                     `json:"partnerId,omitempty"`
+	PrismaEnabled      *bool                       `json:"prismaEnabled,omitempty"`
+	ServingConfig      *AdvertiserTargetingConfig  `json:"servingConfig,omitempty"`
+	UpdateTime         *string                     `json:"updateTime,omitempty"`
 }

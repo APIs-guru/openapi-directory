@@ -1,6 +1,6 @@
 package shared
 
 type CreateSQLInjectionMatchSetResponse struct {
-	ChangeToken          *string               `json:"ChangeToken"`
-	SQLInjectionMatchSet *SQLInjectionMatchSet `json:"SqlInjectionMatchSet"`
+	ChangeToken          *string               `json:"ChangeToken,omitempty"`
+	SQLInjectionMatchSet *SQLInjectionMatchSet `json:"SqlInjectionMatchSet,omitempty"`
 }

@@ -27,7 +27,7 @@ type DeleteManagedServiceRequest struct {
 }
 
 type DeleteManagedServiceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteManagedServiceResponse struct {

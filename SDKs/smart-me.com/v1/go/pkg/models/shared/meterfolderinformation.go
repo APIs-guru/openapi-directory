@@ -1,12 +1,12 @@
 package shared
 
 type MeterFolderInformation struct {
-	CommunicationModuleFirmwareVersion *int32              `json:"CommunicationModuleFirmwareVersion"`
-	CommunicationModuleHardwareVersion *int32              `json:"CommunicationModuleHardwareVersion"`
-	FirmwareVersion                    *int32              `json:"FirmwareVersion"`
-	HardwareVersion                    *int32              `json:"HardwareVersion"`
-	InputInformations                  []InputInformation  `json:"InputInformations"`
-	IsFolder                           *bool               `json:"IsFolder"`
-	Name                               *string             `json:"Name"`
-	OutputInformations                 []OutputInformation `json:"OutputInformations"`
+	CommunicationModuleFirmwareVersion *int32              `json:"CommunicationModuleFirmwareVersion,omitempty"`
+	CommunicationModuleHardwareVersion *int32              `json:"CommunicationModuleHardwareVersion,omitempty"`
+	FirmwareVersion                    *int32              `json:"FirmwareVersion,omitempty"`
+	HardwareVersion                    *int32              `json:"HardwareVersion,omitempty"`
+	InputInformations                  []InputInformation  `json:"InputInformations,omitempty"`
+	IsFolder                           *bool               `json:"IsFolder,omitempty"`
+	Name                               *string             `json:"Name,omitempty"`
+	OutputInformations                 []OutputInformation `json:"OutputInformations,omitempty"`
 }

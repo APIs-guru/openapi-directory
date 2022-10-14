@@ -11,5 +11,5 @@ const (
 )
 
 type AuthorizationLoggingOptions struct {
-	PermissionType *AuthorizationLoggingOptionsPermissionTypeEnum `json:"permissionType"`
+	PermissionType *AuthorizationLoggingOptionsPermissionTypeEnum `json:"permissionType,omitempty"`
 }

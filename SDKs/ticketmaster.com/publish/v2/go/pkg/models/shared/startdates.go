@@ -5,11 +5,11 @@ import (
 )
 
 type StartDates struct {
-	DateTba        *bool      `json:"dateTBA"`
-	DateTbd        *bool      `json:"dateTBD"`
-	DateTime       *time.Time `json:"dateTime"`
-	LocalDate      *time.Time `json:"localDate"`
-	LocalTime      *LocalTime `json:"localTime"`
-	NoSpecificTime *bool      `json:"noSpecificTime"`
-	TimeTba        *bool      `json:"timeTBA"`
+	DateTba        *bool      `json:"dateTBA,omitempty"`
+	DateTbd        *bool      `json:"dateTBD,omitempty"`
+	DateTime       *time.Time `json:"dateTime,omitempty"`
+	LocalDate      *time.Time `json:"localDate,omitempty"`
+	LocalTime      *LocalTime `json:"localTime,omitempty"`
+	NoSpecificTime *bool      `json:"noSpecificTime,omitempty"`
+	TimeTba        *bool      `json:"timeTBA,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type UnsubscribeClientsRequest struct {
-	Clients []string `json:"clients"`
+	Clients []string `json:"clients,omitempty"`
 }

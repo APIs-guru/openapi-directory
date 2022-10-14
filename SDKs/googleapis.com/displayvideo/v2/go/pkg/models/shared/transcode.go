@@ -1,13 +1,13 @@
 package shared
 
 type Transcode struct {
-	AudioBitRateKbps  *string     `json:"audioBitRateKbps"`
-	AudioSampleRateHz *string     `json:"audioSampleRateHz"`
-	BitRateKbps       *string     `json:"bitRateKbps"`
-	Dimensions        *Dimensions `json:"dimensions"`
-	FileSizeBytes     *string     `json:"fileSizeBytes"`
-	FrameRate         *float32    `json:"frameRate"`
-	MimeType          *string     `json:"mimeType"`
-	Name              *string     `json:"name"`
-	Transcoded        *bool       `json:"transcoded"`
+	AudioBitRateKbps  *string     `json:"audioBitRateKbps,omitempty"`
+	AudioSampleRateHz *string     `json:"audioSampleRateHz,omitempty"`
+	BitRateKbps       *string     `json:"bitRateKbps,omitempty"`
+	Dimensions        *Dimensions `json:"dimensions,omitempty"`
+	FileSizeBytes     *string     `json:"fileSizeBytes,omitempty"`
+	FrameRate         *float32    `json:"frameRate,omitempty"`
+	MimeType          *string     `json:"mimeType,omitempty"`
+	Name              *string     `json:"name,omitempty"`
+	Transcoded        *bool       `json:"transcoded,omitempty"`
 }

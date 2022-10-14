@@ -11,13 +11,13 @@ const (
 )
 
 type RunRealtimeReportRequest struct {
-	DimensionFilter     *FilterExpression                                `json:"dimensionFilter"`
-	Dimensions          []Dimension                                      `json:"dimensions"`
-	Limit               *string                                          `json:"limit"`
-	MetricAggregations  []RunRealtimeReportRequestMetricAggregationsEnum `json:"metricAggregations"`
-	MetricFilter        *FilterExpression                                `json:"metricFilter"`
-	Metrics             []Metric                                         `json:"metrics"`
-	MinuteRanges        []MinuteRange                                    `json:"minuteRanges"`
-	OrderBys            []OrderBy                                        `json:"orderBys"`
-	ReturnPropertyQuota *bool                                            `json:"returnPropertyQuota"`
+	DimensionFilter     *FilterExpression                                `json:"dimensionFilter,omitempty"`
+	Dimensions          []Dimension                                      `json:"dimensions,omitempty"`
+	Limit               *string                                          `json:"limit,omitempty"`
+	MetricAggregations  []RunRealtimeReportRequestMetricAggregationsEnum `json:"metricAggregations,omitempty"`
+	MetricFilter        *FilterExpression                                `json:"metricFilter,omitempty"`
+	Metrics             []Metric                                         `json:"metrics,omitempty"`
+	MinuteRanges        []MinuteRange                                    `json:"minuteRanges,omitempty"`
+	OrderBys            []OrderBy                                        `json:"orderBys,omitempty"`
+	ReturnPropertyQuota *bool                                            `json:"returnPropertyQuota,omitempty"`
 }

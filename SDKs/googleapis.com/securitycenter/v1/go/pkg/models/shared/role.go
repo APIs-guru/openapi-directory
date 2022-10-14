@@ -9,7 +9,7 @@ const (
 )
 
 type Role struct {
-	Kind *RoleKindEnum `json:"kind"`
-	Name *string       `json:"name"`
-	Ns   *string       `json:"ns"`
+	Kind *RoleKindEnum `json:"kind,omitempty"`
+	Name *string       `json:"name,omitempty"`
+	Ns   *string       `json:"ns,omitempty"`
 }

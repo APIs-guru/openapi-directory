@@ -1,5 +1,5 @@
 package shared
 
 type GetInstanceSnapshotsRequest struct {
-	PageToken *string `json:"pageToken"`
+	PageToken *string `json:"pageToken,omitempty"`
 }

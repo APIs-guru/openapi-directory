@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudDatacatalogV1DatabaseTableSpec struct {
-	DataplexTable *GoogleCloudDatacatalogV1DataplexTableSpec         `json:"dataplexTable"`
-	Type          *GoogleCloudDatacatalogV1DatabaseTableSpecTypeEnum `json:"type"`
+	DataplexTable *GoogleCloudDatacatalogV1DataplexTableSpec         `json:"dataplexTable,omitempty"`
+	Type          *GoogleCloudDatacatalogV1DatabaseTableSpecTypeEnum `json:"type,omitempty"`
 }

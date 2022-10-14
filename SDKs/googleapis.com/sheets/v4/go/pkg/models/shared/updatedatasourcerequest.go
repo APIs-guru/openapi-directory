@@ -1,6 +1,6 @@
 package shared
 
 type UpdateDataSourceRequest struct {
-	DataSource *DataSource `json:"dataSource"`
-	Fields     *string     `json:"fields"`
+	DataSource *DataSource `json:"dataSource,omitempty"`
+	Fields     *string     `json:"fields,omitempty"`
 }

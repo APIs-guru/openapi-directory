@@ -1,6 +1,6 @@
 package shared
 
 type ReportError struct {
-	OperationID *string `json:"operationId"`
-	Status      *Status `json:"status"`
+	OperationID *string `json:"operationId,omitempty"`
+	Status      *Status `json:"status,omitempty"`
 }

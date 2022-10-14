@@ -13,10 +13,10 @@ type NestedPowerPortConnectionStatusConnectionStatus struct {
 }
 
 type NestedPowerPort struct {
-	Cable            *int64                                           `json:"cable"`
-	ConnectionStatus *NestedPowerPortConnectionStatusConnectionStatus `json:"connection_status"`
-	Device           *NestedDevice                                    `json:"device"`
-	ID               *int64                                           `json:"id"`
+	Cable            *int64                                           `json:"cable,omitempty"`
+	ConnectionStatus *NestedPowerPortConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
+	Device           *NestedDevice                                    `json:"device,omitempty"`
+	ID               *int64                                           `json:"id,omitempty"`
 	Name             string                                           `json:"name"`
-	URL              *string                                          `json:"url"`
+	URL              *string                                          `json:"url,omitempty"`
 }

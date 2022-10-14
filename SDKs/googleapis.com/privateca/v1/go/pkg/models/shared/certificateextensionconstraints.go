@@ -12,6 +12,6 @@ const (
 )
 
 type CertificateExtensionConstraints struct {
-	AdditionalExtensions []ObjectID                                           `json:"additionalExtensions"`
-	KnownExtensions      []CertificateExtensionConstraintsKnownExtensionsEnum `json:"knownExtensions"`
+	AdditionalExtensions []ObjectID                                           `json:"additionalExtensions,omitempty"`
+	KnownExtensions      []CertificateExtensionConstraintsKnownExtensionsEnum `json:"knownExtensions,omitempty"`
 }

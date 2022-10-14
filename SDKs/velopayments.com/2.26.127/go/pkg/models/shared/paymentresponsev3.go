@@ -28,40 +28,40 @@ const (
 )
 
 type PaymentResponseV3 struct {
-	AccountName                    *string                            `json:"accountName"`
-	AccountNumber                  *string                            `json:"accountNumber"`
-	CountryCode                    *string                            `json:"countryCode"`
+	AccountName                    *string                            `json:"accountName,omitempty"`
+	AccountNumber                  *string                            `json:"accountNumber,omitempty"`
+	CountryCode                    *string                            `json:"countryCode,omitempty"`
 	Events                         []PaymentEventResponseV3           `json:"events"`
-	FilenameReference              *string                            `json:"filenameReference"`
+	FilenameReference              *string                            `json:"filenameReference,omitempty"`
 	FundingStatus                  PaymentResponseV3FundingStatusEnum `json:"fundingStatus"`
-	Iban                           *string                            `json:"iban"`
-	IndividualIdentificationNumber *string                            `json:"individualIdentificationNumber"`
-	InvertedRate                   *float32                           `json:"invertedRate"`
+	Iban                           *string                            `json:"iban,omitempty"`
+	IndividualIdentificationNumber *string                            `json:"individualIdentificationNumber,omitempty"`
+	InvertedRate                   *float32                           `json:"invertedRate,omitempty"`
 	PayeeID                        string                             `json:"payeeId"`
 	PaymentAmount                  int64                              `json:"paymentAmount"`
-	PaymentChannelID               *string                            `json:"paymentChannelId"`
-	PaymentChannelName             *string                            `json:"paymentChannelName"`
-	PaymentCurrency                *PaymentAuditCurrencyV3Enum        `json:"paymentCurrency"`
+	PaymentChannelID               *string                            `json:"paymentChannelId,omitempty"`
+	PaymentChannelName             *string                            `json:"paymentChannelName,omitempty"`
+	PaymentCurrency                *PaymentAuditCurrencyV3Enum        `json:"paymentCurrency,omitempty"`
 	PaymentID                      string                             `json:"paymentId"`
-	PaymentMemo                    *string                            `json:"paymentMemo"`
+	PaymentMemo                    *string                            `json:"paymentMemo,omitempty"`
 	PayorID                        string                             `json:"payorId"`
-	PayorName                      *string                            `json:"payorName"`
-	PayorPaymentID                 *string                            `json:"payorPaymentId"`
+	PayorName                      *string                            `json:"payorName,omitempty"`
+	PayorPaymentID                 *string                            `json:"payorPaymentId,omitempty"`
 	QuoteID                        string                             `json:"quoteId"`
-	RailsBatchID                   *string                            `json:"railsBatchId"`
+	RailsBatchID                   *string                            `json:"railsBatchId,omitempty"`
 	RailsID                        string                             `json:"railsId"`
-	RailsPaymentID                 *string                            `json:"railsPaymentId"`
-	Rate                           *float32                           `json:"rate"`
-	RejectionReason                *string                            `json:"rejectionReason"`
-	RemoteID                       *string                            `json:"remoteId"`
-	ReturnCost                     *int64                             `json:"returnCost"`
-	ReturnReason                   *string                            `json:"returnReason"`
-	RoutingNumber                  *string                            `json:"routingNumber"`
+	RailsPaymentID                 *string                            `json:"railsPaymentId,omitempty"`
+	Rate                           *float32                           `json:"rate,omitempty"`
+	RejectionReason                *string                            `json:"rejectionReason,omitempty"`
+	RemoteID                       *string                            `json:"remoteId,omitempty"`
+	ReturnCost                     *int64                             `json:"returnCost,omitempty"`
+	ReturnReason                   *string                            `json:"returnReason,omitempty"`
+	RoutingNumber                  *string                            `json:"routingNumber,omitempty"`
 	SourceAccountID                string                             `json:"sourceAccountId"`
-	SourceAccountName              *string                            `json:"sourceAccountName"`
-	SourceAmount                   *int64                             `json:"sourceAmount"`
-	SourceCurrency                 *PaymentAuditCurrencyV3Enum        `json:"sourceCurrency"`
+	SourceAccountName              *string                            `json:"sourceAccountName,omitempty"`
+	SourceAmount                   *int64                             `json:"sourceAmount,omitempty"`
+	SourceCurrency                 *PaymentAuditCurrencyV3Enum        `json:"sourceCurrency,omitempty"`
 	Status                         PaymentResponseV3StatusEnum        `json:"status"`
 	SubmittedDateTime              time.Time                          `json:"submittedDateTime"`
-	TraceNumber                    *string                            `json:"traceNumber"`
+	TraceNumber                    *string                            `json:"traceNumber,omitempty"`
 }

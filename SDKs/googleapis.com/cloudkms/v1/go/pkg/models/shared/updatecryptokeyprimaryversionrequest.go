@@ -1,5 +1,5 @@
 package shared
 
 type UpdateCryptoKeyPrimaryVersionRequest struct {
-	CryptoKeyVersionID *string `json:"cryptoKeyVersionId"`
+	CryptoKeyVersionID *string `json:"cryptoKeyVersionId,omitempty"`
 }

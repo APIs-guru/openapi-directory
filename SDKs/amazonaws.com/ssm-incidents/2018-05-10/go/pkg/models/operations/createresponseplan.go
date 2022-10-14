@@ -15,27 +15,27 @@ type CreateResponsePlanHeaders struct {
 }
 
 type CreateResponsePlanRequestBodyChatChannel struct {
-	ChatbotSns []string               `json:"chatbotSns"`
-	Empty      map[string]interface{} `json:"empty"`
+	ChatbotSns []string               `json:"chatbotSns,omitempty"`
+	Empty      map[string]interface{} `json:"empty,omitempty"`
 }
 
 type CreateResponsePlanRequestBodyIncidentTemplate struct {
-	DedupeString        *string                         `json:"dedupeString"`
-	Impact              *int64                          `json:"impact"`
-	NotificationTargets []shared.NotificationTargetItem `json:"notificationTargets"`
-	Summary             *string                         `json:"summary"`
-	Title               *string                         `json:"title"`
+	DedupeString        *string                         `json:"dedupeString,omitempty"`
+	Impact              *int64                          `json:"impact,omitempty"`
+	NotificationTargets []shared.NotificationTargetItem `json:"notificationTargets,omitempty"`
+	Summary             *string                         `json:"summary,omitempty"`
+	Title               *string                         `json:"title,omitempty"`
 }
 
 type CreateResponsePlanRequestBody struct {
-	Actions          []shared.Action                               `json:"actions"`
-	ChatChannel      *CreateResponsePlanRequestBodyChatChannel     `json:"chatChannel"`
-	ClientToken      *string                                       `json:"clientToken"`
-	DisplayName      *string                                       `json:"displayName"`
-	Engagements      []string                                      `json:"engagements"`
+	Actions          []shared.Action                               `json:"actions,omitempty"`
+	ChatChannel      *CreateResponsePlanRequestBodyChatChannel     `json:"chatChannel,omitempty"`
+	ClientToken      *string                                       `json:"clientToken,omitempty"`
+	DisplayName      *string                                       `json:"displayName,omitempty"`
+	Engagements      []string                                      `json:"engagements,omitempty"`
 	IncidentTemplate CreateResponsePlanRequestBodyIncidentTemplate `json:"incidentTemplate"`
 	Name             string                                        `json:"name"`
-	Tags             map[string]string                             `json:"tags"`
+	Tags             map[string]string                             `json:"tags,omitempty"`
 }
 
 type CreateResponsePlanRequest struct {

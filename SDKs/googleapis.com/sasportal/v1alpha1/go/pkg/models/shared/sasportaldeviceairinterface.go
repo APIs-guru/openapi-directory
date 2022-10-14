@@ -15,6 +15,6 @@ const (
 )
 
 type SasPortalDeviceAirInterface struct {
-	RadioTechnology *SasPortalDeviceAirInterfaceRadioTechnologyEnum `json:"radioTechnology"`
-	SupportedSpec   *string                                         `json:"supportedSpec"`
+	RadioTechnology *SasPortalDeviceAirInterfaceRadioTechnologyEnum `json:"radioTechnology,omitempty"`
+	SupportedSpec   *string                                         `json:"supportedSpec,omitempty"`
 }

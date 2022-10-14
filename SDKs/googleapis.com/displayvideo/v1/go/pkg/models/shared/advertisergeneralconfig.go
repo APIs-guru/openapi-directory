@@ -1,7 +1,7 @@
 package shared
 
 type AdvertiserGeneralConfig struct {
-	CurrencyCode *string `json:"currencyCode"`
-	DomainURL    *string `json:"domainUrl"`
-	TimeZone     *string `json:"timeZone"`
+	CurrencyCode *string `json:"currencyCode,omitempty"`
+	DomainURL    *string `json:"domainUrl,omitempty"`
+	TimeZone     *string `json:"timeZone,omitempty"`
 }

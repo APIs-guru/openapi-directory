@@ -18,9 +18,9 @@ const (
 )
 
 type AlbumForUserForAPIContract struct {
-	Album          *AlbumForAPIContract                          `json:"album"`
-	MediaType      *AlbumForUserForAPIContractMediaTypeEnum      `json:"mediaType"`
-	PurchaseStatus *AlbumForUserForAPIContractPurchaseStatusEnum `json:"purchaseStatus"`
-	Rating         *int32                                        `json:"rating"`
-	User           *UserForAPIContract                           `json:"user"`
+	Album          *AlbumForAPIContract                          `json:"album,omitempty"`
+	MediaType      *AlbumForUserForAPIContractMediaTypeEnum      `json:"mediaType,omitempty"`
+	PurchaseStatus *AlbumForUserForAPIContractPurchaseStatusEnum `json:"purchaseStatus,omitempty"`
+	Rating         *int32                                        `json:"rating,omitempty"`
+	User           *UserForAPIContract                           `json:"user,omitempty"`
 }

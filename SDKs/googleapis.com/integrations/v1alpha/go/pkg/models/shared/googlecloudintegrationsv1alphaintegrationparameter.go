@@ -27,13 +27,13 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaIntegrationParameter struct {
-	DataType        *GoogleCloudIntegrationsV1alphaIntegrationParameterDataTypeEnum        `json:"dataType"`
-	DefaultValue    *GoogleCloudIntegrationsV1alphaValueType                               `json:"defaultValue"`
-	DisplayName     *string                                                                `json:"displayName"`
-	InputOutputType *GoogleCloudIntegrationsV1alphaIntegrationParameterInputOutputTypeEnum `json:"inputOutputType"`
-	IsTransient     *bool                                                                  `json:"isTransient"`
-	JSONSchema      *string                                                                `json:"jsonSchema"`
-	Key             *string                                                                `json:"key"`
-	Producer        *string                                                                `json:"producer"`
-	Searchable      *bool                                                                  `json:"searchable"`
+	DataType        *GoogleCloudIntegrationsV1alphaIntegrationParameterDataTypeEnum        `json:"dataType,omitempty"`
+	DefaultValue    *GoogleCloudIntegrationsV1alphaValueType                               `json:"defaultValue,omitempty"`
+	DisplayName     *string                                                                `json:"displayName,omitempty"`
+	InputOutputType *GoogleCloudIntegrationsV1alphaIntegrationParameterInputOutputTypeEnum `json:"inputOutputType,omitempty"`
+	IsTransient     *bool                                                                  `json:"isTransient,omitempty"`
+	JSONSchema      *string                                                                `json:"jsonSchema,omitempty"`
+	Key             *string                                                                `json:"key,omitempty"`
+	Producer        *string                                                                `json:"producer,omitempty"`
+	Searchable      *bool                                                                  `json:"searchable,omitempty"`
 }

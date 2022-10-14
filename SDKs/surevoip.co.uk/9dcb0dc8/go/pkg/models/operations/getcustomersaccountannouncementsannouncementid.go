@@ -14,7 +14,7 @@ type GetCustomersAccountAnnouncementsAnnouncementIDRequest struct {
 }
 
 type GetCustomersAccountAnnouncementsAnnouncementID404ApplicationJSON struct {
-	Error *string `json:"error"`
+	Error *string `json:"error,omitempty"`
 }
 
 type GetCustomersAccountAnnouncementsAnnouncementIDResponse struct {

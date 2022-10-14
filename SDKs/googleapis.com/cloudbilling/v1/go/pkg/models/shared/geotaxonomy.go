@@ -10,6 +10,6 @@ const (
 )
 
 type GeoTaxonomy struct {
-	Regions []string             `json:"regions"`
-	Type    *GeoTaxonomyTypeEnum `json:"type"`
+	Regions []string             `json:"regions,omitempty"`
+	Type    *GeoTaxonomyTypeEnum `json:"type,omitempty"`
 }

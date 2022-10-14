@@ -1,5 +1,5 @@
 package shared
 
 type Authority struct {
-	Hint *Hint `json:"hint"`
+	Hint *Hint `json:"hint,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type CreateDirectConnectGatewayAssociationRequest struct {
-	AddAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `json:"addAllowedPrefixesToDirectConnectGateway"`
+	AddAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `json:"addAllowedPrefixesToDirectConnectGateway,omitempty"`
 	DirectConnectGatewayID                   string              `json:"directConnectGatewayId"`
-	GatewayID                                *string             `json:"gatewayId"`
-	VirtualGatewayID                         *string             `json:"virtualGatewayId"`
+	GatewayID                                *string             `json:"gatewayId,omitempty"`
+	VirtualGatewayID                         *string             `json:"virtualGatewayId,omitempty"`
 }

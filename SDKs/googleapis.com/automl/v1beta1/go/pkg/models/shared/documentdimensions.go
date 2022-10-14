@@ -10,7 +10,7 @@ const (
 )
 
 type DocumentDimensions struct {
-	Height *float32                    `json:"height"`
-	Unit   *DocumentDimensionsUnitEnum `json:"unit"`
-	Width  *float32                    `json:"width"`
+	Height *float32                    `json:"height,omitempty"`
+	Unit   *DocumentDimensionsUnitEnum `json:"unit,omitempty"`
+	Width  *float32                    `json:"width,omitempty"`
 }

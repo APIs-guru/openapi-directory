@@ -1,13 +1,13 @@
 package shared
 
 type DiskRequest struct {
-	AuthorizedKeys  []string               `json:"authorized_keys"`
-	AuthorizedUsers []string               `json:"authorized_users"`
-	Filesystem      *FilesystemEnum        `json:"filesystem"`
-	Image           *string                `json:"image"`
+	AuthorizedKeys  []string               `json:"authorized_keys,omitempty"`
+	AuthorizedUsers []string               `json:"authorized_users,omitempty"`
+	Filesystem      *FilesystemEnum        `json:"filesystem,omitempty"`
+	Image           *string                `json:"image,omitempty"`
 	Label           string                 `json:"label"`
-	RootPass        *string                `json:"root_pass"`
+	RootPass        *string                `json:"root_pass,omitempty"`
 	Size            int64                  `json:"size"`
-	StackscriptData map[string]interface{} `json:"stackscript_data"`
-	StackscriptID   *int64                 `json:"stackscript_id"`
+	StackscriptData map[string]interface{} `json:"stackscript_data,omitempty"`
+	StackscriptID   *int64                 `json:"stackscript_id,omitempty"`
 }

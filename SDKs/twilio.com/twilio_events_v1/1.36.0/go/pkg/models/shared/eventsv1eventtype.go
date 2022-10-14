@@ -5,11 +5,11 @@ import (
 )
 
 type EventsV1EventType struct {
-	DateCreated *time.Time             `json:"date_created"`
-	DateUpdated *time.Time             `json:"date_updated"`
-	Description *string                `json:"description"`
-	Links       map[string]interface{} `json:"links"`
-	SchemaID    *string                `json:"schema_id"`
-	Type        *string                `json:"type"`
-	URL         *string                `json:"url"`
+	DateCreated *time.Time             `json:"date_created,omitempty"`
+	DateUpdated *time.Time             `json:"date_updated,omitempty"`
+	Description *string                `json:"description,omitempty"`
+	Links       map[string]interface{} `json:"links,omitempty"`
+	SchemaID    *string                `json:"schema_id,omitempty"`
+	Type        *string                `json:"type,omitempty"`
+	URL         *string                `json:"url,omitempty"`
 }

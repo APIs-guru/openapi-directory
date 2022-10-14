@@ -1,7 +1,7 @@
 package shared
 
 type GoogleSearchIdeahubV1betaTopicState struct {
-	Dismissed *bool   `json:"dismissed"`
-	Name      *string `json:"name"`
-	Saved     *bool   `json:"saved"`
+	Dismissed *bool   `json:"dismissed,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	Saved     *bool   `json:"saved,omitempty"`
 }

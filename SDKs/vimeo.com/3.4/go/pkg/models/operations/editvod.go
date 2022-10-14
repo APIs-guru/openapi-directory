@@ -9,19 +9,19 @@ type EditVodPathParams struct {
 }
 
 type EditVodRequestBodyPreorder struct {
-	Active      *bool   `json:"active"`
-	PublishTime *string `json:"publish_time"`
+	Active      *bool   `json:"active,omitempty"`
+	PublishTime *string `json:"publish_time,omitempty"`
 }
 
 type EditVodRequestBodyPublish struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type EditVodRequestBody struct {
-	Link             *string                     `json:"link"`
-	Preorder         *EditVodRequestBodyPreorder `json:"preorder"`
-	Publish          *EditVodRequestBodyPublish  `json:"publish"`
-	PublishWhenReady *bool                       `json:"publish_when_ready"`
+	Link             *string                     `json:"link,omitempty"`
+	Preorder         *EditVodRequestBodyPreorder `json:"preorder,omitempty"`
+	Publish          *EditVodRequestBodyPublish  `json:"publish,omitempty"`
+	PublishWhenReady *bool                       `json:"publish_when_ready,omitempty"`
 }
 
 type EditVodSecurity struct {

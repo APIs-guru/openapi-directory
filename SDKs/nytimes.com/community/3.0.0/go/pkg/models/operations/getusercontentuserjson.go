@@ -18,98 +18,98 @@ type GetUserContentUserJSONRequest struct {
 }
 
 type GetUserContentUserJSON200ApplicationJSONDebug struct {
-	Version *float64 `json:"version"`
+	Version *float64 `json:"version,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetAllProperties struct {
-	Description *string                  `json:"description"`
-	Name        *string                  `json:"name"`
-	Properties  []map[string]interface{} `json:"properties"`
+	Description *string                  `json:"description,omitempty"`
+	Name        *string                  `json:"name,omitempty"`
+	Properties  []map[string]interface{} `json:"properties,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetLabels struct {
-	LabelID   *int64  `json:"labelID"`
-	LabelName *string `json:"labelName"`
+	LabelID   *int64  `json:"labelID,omitempty"`
+	LabelName *string `json:"labelName,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesAutomoderationOff struct {
-	GroupID    *int64 `json:"groupID"`
-	TaxonomyID *int64 `json:"taxonomyID"`
+	GroupID    *int64 `json:"groupID,omitempty"`
+	TaxonomyID *int64 `json:"taxonomyID,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesCommentListSortApprovedateDesc struct {
-	GroupID    *int64 `json:"groupID"`
-	TaxonomyID *int64 `json:"taxonomyID"`
+	GroupID    *int64 `json:"groupID,omitempty"`
+	TaxonomyID *int64 `json:"taxonomyID,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesReachedMaxComOn struct {
-	GroupID    *int64 `json:"groupID"`
-	TaxonomyID *int64 `json:"taxonomyID"`
+	GroupID    *int64 `json:"groupID,omitempty"`
+	TaxonomyID *int64 `json:"taxonomyID,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetProperties struct {
-	AutomoderationOff              *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesAutomoderationOff              `json:"automoderation-off"`
-	CommentListSortApprovedateDesc *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesCommentListSortApprovedateDesc `json:"comment-list-sort-approvedate-desc"`
-	ReachedMaxComOn                *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesReachedMaxComOn                `json:"reached-max-com-on"`
+	AutomoderationOff              *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesAutomoderationOff              `json:"automoderation-off,omitempty"`
+	CommentListSortApprovedateDesc *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesCommentListSortApprovedateDesc `json:"comment-list-sort-approvedate-desc,omitempty"`
+	ReachedMaxComOn                *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetPropertiesReachedMaxComOn                `json:"reached-max-com-on,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsCommentsAsset struct {
-	AllProperties []GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetAllProperties `json:"all-properties"`
-	AssetID       *int64                                                                      `json:"assetID"`
-	AssetTitle    *string                                                                     `json:"assetTitle"`
-	AssetURL      *string                                                                     `json:"assetURL"`
-	CreateDate    *string                                                                     `json:"createDate"`
-	Labels        []GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetLabels        `json:"labels"`
-	Properties    *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetProperties     `json:"properties"`
-	Source        *string                                                                     `json:"source"`
-	Taxonomy      *string                                                                     `json:"taxonomy"`
-	Text          []map[string]interface{}                                                    `json:"text"`
-	UpdateDate    *string                                                                     `json:"updateDate"`
-	VendorID      *string                                                                     `json:"vendorID"`
+	AllProperties []GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetAllProperties `json:"all-properties,omitempty"`
+	AssetID       *int64                                                                      `json:"assetID,omitempty"`
+	AssetTitle    *string                                                                     `json:"assetTitle,omitempty"`
+	AssetURL      *string                                                                     `json:"assetURL,omitempty"`
+	CreateDate    *string                                                                     `json:"createDate,omitempty"`
+	Labels        []GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetLabels        `json:"labels,omitempty"`
+	Properties    *GetUserContentUserJSON200ApplicationJSONResultsCommentsAssetProperties     `json:"properties,omitempty"`
+	Source        *string                                                                     `json:"source,omitempty"`
+	Taxonomy      *string                                                                     `json:"taxonomy,omitempty"`
+	Text          []map[string]interface{}                                                    `json:"text,omitempty"`
+	UpdateDate    *string                                                                     `json:"updateDate,omitempty"`
+	VendorID      *string                                                                     `json:"vendorID,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResultsComments struct {
-	ApproveDate              *string                                                       `json:"approveDate"`
-	Asset                    *GetUserContentUserJSON200ApplicationJSONResultsCommentsAsset `json:"asset"`
-	CommentBody              *string                                                       `json:"commentBody"`
-	CommentID                *int64                                                        `json:"commentID"`
-	CommentSequence          *int64                                                        `json:"commentSequence"`
-	CommentTitle             *string                                                       `json:"commentTitle"`
-	CommentType              *string                                                       `json:"commentType"`
-	CreateDate               *string                                                       `json:"createDate"`
-	EditorsSelection         *bool                                                         `json:"editorsSelection"`
-	Labels                   []map[string]interface{}                                      `json:"labels"`
-	ParentID                 *interface{}                                                  `json:"parentID"`
-	Permid                   *int64                                                        `json:"permid"`
-	PicURL                   *string                                                       `json:"picURL"`
-	Recommendations          *int64                                                        `json:"recommendations"`
-	Replies                  []map[string]interface{}                                      `json:"replies"`
-	ReplyCount               *int64                                                        `json:"replyCount"`
-	Status                   *string                                                       `json:"status"`
-	UpdateDate               *string                                                       `json:"updateDate"`
-	UserDisplayName          *interface{}                                                  `json:"userDisplayName"`
-	UserID                   *int64                                                        `json:"userID"`
-	UserLocation             *interface{}                                                  `json:"userLocation"`
-	UserSubmittedDisplayName *string                                                       `json:"userSubmittedDisplayName"`
-	UserSubmittedLocation    *string                                                       `json:"userSubmittedLocation"`
-	UserSubmittedTitle       *interface{}                                                  `json:"userSubmittedTitle"`
-	UserSubmittedURL         *interface{}                                                  `json:"userSubmittedURL"`
-	UserTitle                *interface{}                                                  `json:"userTitle"`
-	UserURL                  *interface{}                                                  `json:"userURL"`
+	ApproveDate              *string                                                       `json:"approveDate,omitempty"`
+	Asset                    *GetUserContentUserJSON200ApplicationJSONResultsCommentsAsset `json:"asset,omitempty"`
+	CommentBody              *string                                                       `json:"commentBody,omitempty"`
+	CommentID                *int64                                                        `json:"commentID,omitempty"`
+	CommentSequence          *int64                                                        `json:"commentSequence,omitempty"`
+	CommentTitle             *string                                                       `json:"commentTitle,omitempty"`
+	CommentType              *string                                                       `json:"commentType,omitempty"`
+	CreateDate               *string                                                       `json:"createDate,omitempty"`
+	EditorsSelection         *bool                                                         `json:"editorsSelection,omitempty"`
+	Labels                   []map[string]interface{}                                      `json:"labels,omitempty"`
+	ParentID                 *interface{}                                                  `json:"parentID,omitempty"`
+	Permid                   *int64                                                        `json:"permid,omitempty"`
+	PicURL                   *string                                                       `json:"picURL,omitempty"`
+	Recommendations          *int64                                                        `json:"recommendations,omitempty"`
+	Replies                  []map[string]interface{}                                      `json:"replies,omitempty"`
+	ReplyCount               *int64                                                        `json:"replyCount,omitempty"`
+	Status                   *string                                                       `json:"status,omitempty"`
+	UpdateDate               *string                                                       `json:"updateDate,omitempty"`
+	UserDisplayName          *interface{}                                                  `json:"userDisplayName,omitempty"`
+	UserID                   *int64                                                        `json:"userID,omitempty"`
+	UserLocation             *interface{}                                                  `json:"userLocation,omitempty"`
+	UserSubmittedDisplayName *string                                                       `json:"userSubmittedDisplayName,omitempty"`
+	UserSubmittedLocation    *string                                                       `json:"userSubmittedLocation,omitempty"`
+	UserSubmittedTitle       *interface{}                                                  `json:"userSubmittedTitle,omitempty"`
+	UserSubmittedURL         *interface{}                                                  `json:"userSubmittedURL,omitempty"`
+	UserTitle                *interface{}                                                  `json:"userTitle,omitempty"`
+	UserURL                  *interface{}                                                  `json:"userURL,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSONResults struct {
-	APITimestamp          *string                                                   `json:"api_timestamp"`
-	Comments              []GetUserContentUserJSON200ApplicationJSONResultsComments `json:"comments"`
-	TotalCommentsFound    *int64                                                    `json:"totalCommentsFound"`
-	TotalCommentsReturned *int64                                                    `json:"totalCommentsReturned"`
+	APITimestamp          *string                                                   `json:"api_timestamp,omitempty"`
+	Comments              []GetUserContentUserJSON200ApplicationJSONResultsComments `json:"comments,omitempty"`
+	TotalCommentsFound    *int64                                                    `json:"totalCommentsFound,omitempty"`
+	TotalCommentsReturned *int64                                                    `json:"totalCommentsReturned,omitempty"`
 }
 
 type GetUserContentUserJSON200ApplicationJSON struct {
-	Copyright *string                                          `json:"copyright"`
-	Debug     *GetUserContentUserJSON200ApplicationJSONDebug   `json:"debug"`
-	Results   *GetUserContentUserJSON200ApplicationJSONResults `json:"results"`
-	Status    *string                                          `json:"status"`
+	Copyright *string                                          `json:"copyright,omitempty"`
+	Debug     *GetUserContentUserJSON200ApplicationJSONDebug   `json:"debug,omitempty"`
+	Results   *GetUserContentUserJSON200ApplicationJSONResults `json:"results,omitempty"`
+	Status    *string                                          `json:"status,omitempty"`
 }
 
 type GetUserContentUserJSONResponse struct {

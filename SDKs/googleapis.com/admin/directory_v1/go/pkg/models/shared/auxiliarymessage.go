@@ -10,7 +10,7 @@ const (
 )
 
 type AuxiliaryMessage struct {
-	AuxiliaryMessage *string                       `json:"auxiliaryMessage"`
-	FieldMask        *string                       `json:"fieldMask"`
-	Severity         *AuxiliaryMessageSeverityEnum `json:"severity"`
+	AuxiliaryMessage *string                       `json:"auxiliaryMessage,omitempty"`
+	FieldMask        *string                       `json:"fieldMask,omitempty"`
+	Severity         *AuxiliaryMessageSeverityEnum `json:"severity,omitempty"`
 }

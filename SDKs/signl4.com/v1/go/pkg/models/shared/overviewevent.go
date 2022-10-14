@@ -5,17 +5,17 @@ import (
 )
 
 type OverviewEvent struct {
-	AcknowledgedAlerts []string   `json:"acknowledgedAlerts"`
-	AlertID            *string    `json:"alertId"`
-	CategoryID         *string    `json:"categoryId"`
-	ClosedAlerts       []string   `json:"closedAlerts"`
-	CreationTime       *time.Time `json:"creationTime"`
-	EventSourceType    *int32     `json:"eventSourceType"`
-	EventStatus        *int32     `json:"eventStatus"`
-	ID                 *string    `json:"id"`
-	LastModified       *time.Time `json:"lastModified"`
-	Severity           *int32     `json:"severity"`
-	TeamID             *string    `json:"teamId"`
-	Text               *string    `json:"text"`
-	Title              *string    `json:"title"`
+	AcknowledgedAlerts []string   `json:"acknowledgedAlerts,omitempty"`
+	AlertID            *string    `json:"alertId,omitempty"`
+	CategoryID         *string    `json:"categoryId,omitempty"`
+	ClosedAlerts       []string   `json:"closedAlerts,omitempty"`
+	CreationTime       *time.Time `json:"creationTime,omitempty"`
+	EventSourceType    *int32     `json:"eventSourceType,omitempty"`
+	EventStatus        *int32     `json:"eventStatus,omitempty"`
+	ID                 *string    `json:"id,omitempty"`
+	LastModified       *time.Time `json:"lastModified,omitempty"`
+	Severity           *int32     `json:"severity,omitempty"`
+	TeamID             *string    `json:"teamId,omitempty"`
+	Text               *string    `json:"text,omitempty"`
+	Title              *string    `json:"title,omitempty"`
 }

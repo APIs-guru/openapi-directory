@@ -16,9 +16,9 @@ const (
 
 type Entitlement struct {
 	Data                map[string]interface{}           `json:"data"`
-	RelatedEntityID     *string                          `json:"relatedEntityId"`
-	RelatedEntitySource *Source                          `json:"relatedEntitySource"`
+	RelatedEntityID     *string                          `json:"relatedEntityId,omitempty"`
+	RelatedEntitySource *Source                          `json:"relatedEntitySource,omitempty"`
 	RelatedEntityType   EntitlementRelatedEntityTypeEnum `json:"relatedEntityType"`
 	Source              EntitlementSourceEnum            `json:"source"`
-	VersionNumber       *int64                           `json:"versionNumber"`
+	VersionNumber       *int64                           `json:"versionNumber,omitempty"`
 }

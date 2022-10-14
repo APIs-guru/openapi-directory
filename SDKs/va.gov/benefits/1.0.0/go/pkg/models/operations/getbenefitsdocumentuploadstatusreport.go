@@ -18,11 +18,11 @@ type GetBenefitsDocumentUploadStatusReport200ApplicationJSON struct {
 }
 
 type GetBenefitsDocumentUploadStatusReport401ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatusReport403ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatusReport422ApplicationJSON struct {
@@ -30,14 +30,14 @@ type GetBenefitsDocumentUploadStatusReport422ApplicationJSON struct {
 }
 
 type GetBenefitsDocumentUploadStatusReport429ApplicationJSON struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatusReport500ApplicationJSON struct {
-	Code   *string `json:"code"`
-	Detail *string `json:"detail"`
-	Status *string `json:"status"`
-	Title  *string `json:"title"`
+	Code   *string `json:"code,omitempty"`
+	Detail *string `json:"detail,omitempty"`
+	Status *string `json:"status,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }
 
 type GetBenefitsDocumentUploadStatusReportResponse struct {

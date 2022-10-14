@@ -1,7 +1,7 @@
 package shared
 
 type MetricFilterMatchRecord struct {
-	EventMessage    *string           `json:"eventMessage"`
-	EventNumber     *int64            `json:"eventNumber"`
-	ExtractedValues map[string]string `json:"extractedValues"`
+	EventMessage    *string           `json:"eventMessage,omitempty"`
+	EventNumber     *int64            `json:"eventNumber,omitempty"`
+	ExtractedValues map[string]string `json:"extractedValues,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type AddApplicationOutputResponse struct {
-	ApplicationArn       *string             `json:"ApplicationARN"`
-	ApplicationVersionID *int64              `json:"ApplicationVersionId"`
-	OutputDescriptions   []OutputDescription `json:"OutputDescriptions"`
+	ApplicationArn       *string             `json:"ApplicationARN,omitempty"`
+	ApplicationVersionID *int64              `json:"ApplicationVersionId,omitempty"`
+	OutputDescriptions   []OutputDescription `json:"OutputDescriptions,omitempty"`
 }

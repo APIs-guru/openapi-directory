@@ -1,6 +1,6 @@
 package shared
 
 type TruncateLogContext struct {
-	Kind    *string `json:"kind"`
-	LogType *string `json:"logType"`
+	Kind    *string `json:"kind,omitempty"`
+	LogType *string `json:"logType,omitempty"`
 }

@@ -15,6 +15,6 @@ const (
 )
 
 type DeliverInfo struct {
-	ResourceURI *string                `json:"resourceUri"`
-	Target      *DeliverInfoTargetEnum `json:"target"`
+	ResourceURI *string                `json:"resourceUri,omitempty"`
+	Target      *DeliverInfoTargetEnum `json:"target,omitempty"`
 }

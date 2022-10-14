@@ -2,5 +2,5 @@ package shared
 
 type DiscoveredResource struct {
 	ConfigurationID string  `json:"ConfigurationId"`
-	Description     *string `json:"Description"`
+	Description     *string `json:"Description,omitempty"`
 }

@@ -14,7 +14,7 @@ const (
 )
 
 type GooglePrivacyDlpV2Condition struct {
-	Field    *GooglePrivacyDlpV2FieldID               `json:"field"`
-	Operator *GooglePrivacyDlpV2ConditionOperatorEnum `json:"operator"`
-	Value    *GooglePrivacyDlpV2Value                 `json:"value"`
+	Field    *GooglePrivacyDlpV2FieldID               `json:"field,omitempty"`
+	Operator *GooglePrivacyDlpV2ConditionOperatorEnum `json:"operator,omitempty"`
+	Value    *GooglePrivacyDlpV2Value                 `json:"value,omitempty"`
 }

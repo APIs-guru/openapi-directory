@@ -5,14 +5,14 @@ import (
 )
 
 type WritableAggregate struct {
-	Created      *time.Time             `json:"created"`
-	CustomFields map[string]interface{} `json:"custom_fields"`
-	DateAdded    *time.Time             `json:"date_added"`
-	Description  *string                `json:"description"`
-	Family       *string                `json:"family"`
-	ID           *int64                 `json:"id"`
-	LastUpdated  *time.Time             `json:"last_updated"`
+	Created      *time.Time             `json:"created,omitempty"`
+	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
+	DateAdded    *time.Time             `json:"date_added,omitempty"`
+	Description  *string                `json:"description,omitempty"`
+	Family       *string                `json:"family,omitempty"`
+	ID           *int64                 `json:"id,omitempty"`
+	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Prefix       string                 `json:"prefix"`
 	Rir          int64                  `json:"rir"`
-	Tags         []string               `json:"tags"`
+	Tags         []string               `json:"tags,omitempty"`
 }

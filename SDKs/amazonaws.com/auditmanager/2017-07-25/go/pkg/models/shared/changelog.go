@@ -5,9 +5,9 @@ import (
 )
 
 type ChangeLog struct {
-	Action     *ActionEnumEnum     `json:"action"`
-	CreatedAt  *time.Time          `json:"createdAt"`
-	CreatedBy  *string             `json:"createdBy"`
-	ObjectName *string             `json:"objectName"`
-	ObjectType *ObjectTypeEnumEnum `json:"objectType"`
+	Action     *ActionEnumEnum     `json:"action,omitempty"`
+	CreatedAt  *time.Time          `json:"createdAt,omitempty"`
+	CreatedBy  *string             `json:"createdBy,omitempty"`
+	ObjectName *string             `json:"objectName,omitempty"`
+	ObjectType *ObjectTypeEnumEnum `json:"objectType,omitempty"`
 }

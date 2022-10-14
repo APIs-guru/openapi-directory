@@ -18,12 +18,12 @@ const (
 )
 
 type CheckoutCustomFieldFields struct {
-	Area                     *CheckoutCustomFieldFieldsAreaEnum `json:"area"`
-	CustomFieldSelectOptions []string                           `json:"custom_field_select_options"`
-	Deletable                *bool                              `json:"deletable"`
-	ID                       *int32                             `json:"id"`
-	Label                    *string                            `json:"label"`
-	Position                 *int32                             `json:"position"`
-	Required                 *bool                              `json:"required"`
-	Type                     *CheckoutCustomFieldFieldsTypeEnum `json:"type"`
+	Area                     *CheckoutCustomFieldFieldsAreaEnum `json:"area,omitempty"`
+	CustomFieldSelectOptions []string                           `json:"custom_field_select_options,omitempty"`
+	Deletable                *bool                              `json:"deletable,omitempty"`
+	ID                       *int32                             `json:"id,omitempty"`
+	Label                    *string                            `json:"label,omitempty"`
+	Position                 *int32                             `json:"position,omitempty"`
+	Required                 *bool                              `json:"required,omitempty"`
+	Type                     *CheckoutCustomFieldFieldsTypeEnum `json:"type,omitempty"`
 }

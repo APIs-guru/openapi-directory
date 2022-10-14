@@ -8,7 +8,7 @@ const (
 
 type SandboxItemFireWebhookRequest struct {
 	AccessToken string                                       `json:"access_token"`
-	ClientID    *string                                      `json:"client_id"`
-	Secret      *string                                      `json:"secret"`
+	ClientID    *string                                      `json:"client_id,omitempty"`
+	Secret      *string                                      `json:"secret,omitempty"`
 	WebhookCode SandboxItemFireWebhookRequestWebhookCodeEnum `json:"webhook_code"`
 }

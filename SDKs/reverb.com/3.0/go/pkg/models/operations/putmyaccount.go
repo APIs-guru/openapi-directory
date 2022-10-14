@@ -5,12 +5,12 @@ import (
 )
 
 type PutMyAccountRequestBody struct {
-	Currency                *string `json:"currency"`
-	FirstName               *string `json:"first_name"`
-	LastName                *string `json:"last_name"`
-	LocaleCode              *string `json:"locale_code"`
-	ShippingRegionCode      *string `json:"shipping_region_code"`
-	ThirdPartyAdDataConsent *bool   `json:"third_party_ad_data_consent"`
+	Currency                *string `json:"currency,omitempty"`
+	FirstName               *string `json:"first_name,omitempty"`
+	LastName                *string `json:"last_name,omitempty"`
+	LocaleCode              *string `json:"locale_code,omitempty"`
+	ShippingRegionCode      *string `json:"shipping_region_code,omitempty"`
+	ThirdPartyAdDataConsent *bool   `json:"third_party_ad_data_consent,omitempty"`
 }
 
 type PutMyAccountSecurity struct {

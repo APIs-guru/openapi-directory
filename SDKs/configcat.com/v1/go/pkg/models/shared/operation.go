@@ -1,8 +1,8 @@
 package shared
 
 type Operation struct {
-	From  *string                `json:"from"`
-	Op    *string                `json:"op"`
-	Path  *string                `json:"path"`
-	Value map[string]interface{} `json:"value"`
+	From  *string                `json:"from,omitempty"`
+	Op    *string                `json:"op,omitempty"`
+	Path  *string                `json:"path,omitempty"`
+	Value map[string]interface{} `json:"value,omitempty"`
 }

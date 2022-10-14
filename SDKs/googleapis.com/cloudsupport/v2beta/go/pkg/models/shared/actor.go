@@ -1,7 +1,7 @@
 package shared
 
 type Actor struct {
-	DisplayName   *string `json:"displayName"`
-	Email         *string `json:"email"`
-	GoogleSupport *bool   `json:"googleSupport"`
+	DisplayName   *string `json:"displayName,omitempty"`
+	Email         *string `json:"email,omitempty"`
+	GoogleSupport *bool   `json:"googleSupport,omitempty"`
 }

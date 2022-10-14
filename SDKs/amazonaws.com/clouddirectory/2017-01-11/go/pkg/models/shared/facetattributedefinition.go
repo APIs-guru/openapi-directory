@@ -1,8 +1,8 @@
 package shared
 
 type FacetAttributeDefinition struct {
-	DefaultValue *TypedAttributeValue   `json:"DefaultValue"`
-	IsImmutable  *bool                  `json:"IsImmutable"`
-	Rules        map[string]Rule        `json:"Rules"`
+	DefaultValue *TypedAttributeValue   `json:"DefaultValue,omitempty"`
+	IsImmutable  *bool                  `json:"IsImmutable,omitempty"`
+	Rules        map[string]Rule        `json:"Rules,omitempty"`
 	Type         FacetAttributeTypeEnum `json:"Type"`
 }

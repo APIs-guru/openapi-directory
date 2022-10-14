@@ -1,5 +1,5 @@
 package shared
 
 type Alarm struct {
-	AlarmName *string `json:"AlarmName"`
+	AlarmName *string `json:"AlarmName,omitempty"`
 }

@@ -11,8 +11,8 @@ type HiuConsentRequestStatusConsentRequest struct {
 }
 
 type HiuConsentRequestStatus struct {
-	ConsentRequest *HiuConsentRequestStatusConsentRequest `json:"consentRequest"`
-	Error          *Error                                 `json:"error"`
+	ConsentRequest *HiuConsentRequestStatusConsentRequest `json:"consentRequest,omitempty"`
+	Error          *Error                                 `json:"error,omitempty"`
 	RequestID      string                                 `json:"requestId"`
 	Resp           RequestReference                       `json:"resp"`
 	Timestamp      time.Time                              `json:"timestamp"`

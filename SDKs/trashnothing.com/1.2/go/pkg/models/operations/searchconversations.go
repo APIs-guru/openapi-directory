@@ -16,10 +16,10 @@ type SearchConversationsRequest struct {
 }
 
 type SearchConversations200ApplicationJSON struct {
-	Conversations []shared.Conversation `json:"conversations"`
-	Page          *int64                `json:"page"`
-	PerPage       *int64                `json:"per_page"`
-	Search        *string               `json:"search"`
+	Conversations []shared.Conversation `json:"conversations,omitempty"`
+	Page          *int64                `json:"page,omitempty"`
+	PerPage       *int64                `json:"per_page,omitempty"`
+	Search        *string               `json:"search,omitempty"`
 }
 
 type SearchConversationsResponse struct {

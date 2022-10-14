@@ -1,7 +1,7 @@
 package shared
 
 type CustomList struct {
-	CustomListID *string `json:"customListId"`
-	DisplayName  *string `json:"displayName"`
-	Name         *string `json:"name"`
+	CustomListID *string `json:"customListId,omitempty"`
+	DisplayName  *string `json:"displayName,omitempty"`
+	Name         *string `json:"name,omitempty"`
 }

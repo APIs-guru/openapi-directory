@@ -1,6 +1,6 @@
 package shared
 
 type ErskineMayFootnote struct {
-	Content *string `json:"content"`
-	Number  *int32  `json:"number"`
+	Content *string `json:"content,omitempty"`
+	Number  *int32  `json:"number,omitempty"`
 }

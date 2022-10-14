@@ -1,6 +1,6 @@
 package shared
 
 type TimeBasedAutoScalingConfiguration struct {
-	AutoScalingSchedule *WeeklyAutoScalingSchedule `json:"AutoScalingSchedule"`
-	InstanceID          *string                    `json:"InstanceId"`
+	AutoScalingSchedule *WeeklyAutoScalingSchedule `json:"AutoScalingSchedule,omitempty"`
+	InstanceID          *string                    `json:"InstanceId,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudAssetV1Resource struct {
-	AnalysisState    *IamPolicyAnalysisState `json:"analysisState"`
-	FullResourceName *string                 `json:"fullResourceName"`
+	AnalysisState    *IamPolicyAnalysisState `json:"analysisState,omitempty"`
+	FullResourceName *string                 `json:"fullResourceName,omitempty"`
 }

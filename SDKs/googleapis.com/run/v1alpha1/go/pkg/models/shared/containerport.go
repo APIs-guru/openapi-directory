@@ -1,7 +1,7 @@
 package shared
 
 type ContainerPort struct {
-	ContainerPort *int32  `json:"containerPort"`
-	Name          *string `json:"name"`
-	Protocol      *string `json:"protocol"`
+	ContainerPort *int32  `json:"containerPort,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	Protocol      *string `json:"protocol,omitempty"`
 }

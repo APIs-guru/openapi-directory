@@ -20,20 +20,20 @@ type ListClassificationJobsHeaders struct {
 }
 
 type ListClassificationJobsRequestBodyFilterCriteria struct {
-	Excludes []shared.ListJobsFilterTerm `json:"excludes"`
-	Includes []shared.ListJobsFilterTerm `json:"includes"`
+	Excludes []shared.ListJobsFilterTerm `json:"excludes,omitempty"`
+	Includes []shared.ListJobsFilterTerm `json:"includes,omitempty"`
 }
 
 type ListClassificationJobsRequestBodySortCriteria struct {
-	AttributeName *shared.ListJobsSortAttributeNameEnum `json:"attributeName"`
-	OrderBy       *shared.OrderByEnum                   `json:"orderBy"`
+	AttributeName *shared.ListJobsSortAttributeNameEnum `json:"attributeName,omitempty"`
+	OrderBy       *shared.OrderByEnum                   `json:"orderBy,omitempty"`
 }
 
 type ListClassificationJobsRequestBody struct {
-	FilterCriteria *ListClassificationJobsRequestBodyFilterCriteria `json:"filterCriteria"`
-	MaxResults     *int64                                           `json:"maxResults"`
-	NextToken      *string                                          `json:"nextToken"`
-	SortCriteria   *ListClassificationJobsRequestBodySortCriteria   `json:"sortCriteria"`
+	FilterCriteria *ListClassificationJobsRequestBodyFilterCriteria `json:"filterCriteria,omitempty"`
+	MaxResults     *int64                                           `json:"maxResults,omitempty"`
+	NextToken      *string                                          `json:"nextToken,omitempty"`
+	SortCriteria   *ListClassificationJobsRequestBodySortCriteria   `json:"sortCriteria,omitempty"`
 }
 
 type ListClassificationJobsRequest struct {

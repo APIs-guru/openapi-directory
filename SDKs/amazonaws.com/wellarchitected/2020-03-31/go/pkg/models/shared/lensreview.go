@@ -5,13 +5,13 @@ import (
 )
 
 type LensReview struct {
-	LensAlias             *string               `json:"LensAlias"`
-	LensName              *string               `json:"LensName"`
-	LensStatus            *LensStatusEnum       `json:"LensStatus"`
-	LensVersion           *string               `json:"LensVersion"`
-	NextToken             *string               `json:"NextToken"`
-	Notes                 *string               `json:"Notes"`
-	PillarReviewSummaries []PillarReviewSummary `json:"PillarReviewSummaries"`
-	RiskCounts            map[string]int64      `json:"RiskCounts"`
-	UpdatedAt             *time.Time            `json:"UpdatedAt"`
+	LensAlias             *string               `json:"LensAlias,omitempty"`
+	LensName              *string               `json:"LensName,omitempty"`
+	LensStatus            *LensStatusEnum       `json:"LensStatus,omitempty"`
+	LensVersion           *string               `json:"LensVersion,omitempty"`
+	NextToken             *string               `json:"NextToken,omitempty"`
+	Notes                 *string               `json:"Notes,omitempty"`
+	PillarReviewSummaries []PillarReviewSummary `json:"PillarReviewSummaries,omitempty"`
+	RiskCounts            map[string]int64      `json:"RiskCounts,omitempty"`
+	UpdatedAt             *time.Time            `json:"UpdatedAt,omitempty"`
 }

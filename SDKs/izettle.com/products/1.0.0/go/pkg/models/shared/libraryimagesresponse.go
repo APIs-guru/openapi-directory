@@ -1,5 +1,5 @@
 package shared
 
 type LibraryImagesResponse struct {
-	ImageUrls []string `json:"imageUrls"`
+	ImageUrls []string `json:"imageUrls,omitempty"`
 }

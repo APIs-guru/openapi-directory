@@ -1,5 +1,5 @@
 package shared
 
 type RateLimitsResponse struct {
-	RateLimits []RateLimit `json:"rateLimits"`
+	RateLimits []RateLimit `json:"rateLimits,omitempty"`
 }

@@ -19,14 +19,14 @@ const (
 )
 
 type WritableConsoleServerPort struct {
-	Cable                 *NestedCable                           `json:"cable"`
-	ConnectedEndpoint     map[string]string                      `json:"connected_endpoint"`
-	ConnectedEndpointType *string                                `json:"connected_endpoint_type"`
-	ConnectionStatus      *bool                                  `json:"connection_status"`
-	Description           *string                                `json:"description"`
+	Cable                 *NestedCable                           `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                      `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                                `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *bool                                  `json:"connection_status,omitempty"`
+	Description           *string                                `json:"description,omitempty"`
 	Device                int64                                  `json:"device"`
-	ID                    *int64                                 `json:"id"`
+	ID                    *int64                                 `json:"id,omitempty"`
 	Name                  string                                 `json:"name"`
-	Tags                  []string                               `json:"tags"`
-	Type                  *WritableConsoleServerPortTypeTypeEnum `json:"type"`
+	Tags                  []string                               `json:"tags,omitempty"`
+	Type                  *WritableConsoleServerPortTypeTypeEnum `json:"type,omitempty"`
 }

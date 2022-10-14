@@ -1,6 +1,6 @@
 package shared
 
 type AttachmentDetails struct {
-	AttachmentID *string `json:"attachmentId"`
-	FileName     *string `json:"fileName"`
+	AttachmentID *string `json:"attachmentId,omitempty"`
+	FileName     *string `json:"fileName,omitempty"`
 }

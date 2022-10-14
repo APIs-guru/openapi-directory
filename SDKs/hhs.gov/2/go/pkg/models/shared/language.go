@@ -1,8 +1,8 @@
 package shared
 
 type Language struct {
-	ID       *int64  `json:"id"`
-	IsActive *bool   `json:"isActive"`
-	IsoCode  *string `json:"isoCode"`
-	Name     *string `json:"name"`
+	ID       *int64  `json:"id,omitempty"`
+	IsActive *bool   `json:"isActive,omitempty"`
+	IsoCode  *string `json:"isoCode,omitempty"`
+	Name     *string `json:"name,omitempty"`
 }

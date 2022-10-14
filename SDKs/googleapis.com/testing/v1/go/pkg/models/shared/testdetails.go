@@ -1,6 +1,6 @@
 package shared
 
 type TestDetails struct {
-	ErrorMessage     *string  `json:"errorMessage"`
-	ProgressMessages []string `json:"progressMessages"`
+	ErrorMessage     *string  `json:"errorMessage,omitempty"`
+	ProgressMessages []string `json:"progressMessages,omitempty"`
 }

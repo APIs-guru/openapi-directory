@@ -5,21 +5,21 @@ import (
 )
 
 type Stage struct {
-	AccessLogSettings    *AccessLogSettings       `json:"accessLogSettings"`
-	CacheClusterEnabled  *bool                    `json:"cacheClusterEnabled"`
-	CacheClusterSize     *CacheClusterSizeEnum    `json:"cacheClusterSize"`
-	CacheClusterStatus   *CacheClusterStatusEnum  `json:"cacheClusterStatus"`
-	CanarySettings       *CanarySettings          `json:"canarySettings"`
-	ClientCertificateID  *string                  `json:"clientCertificateId"`
-	CreatedDate          *time.Time               `json:"createdDate"`
-	DeploymentID         *string                  `json:"deploymentId"`
-	Description          *string                  `json:"description"`
-	DocumentationVersion *string                  `json:"documentationVersion"`
-	LastUpdatedDate      *time.Time               `json:"lastUpdatedDate"`
-	MethodSettings       map[string]MethodSetting `json:"methodSettings"`
-	StageName            *string                  `json:"stageName"`
-	Tags                 map[string]string        `json:"tags"`
-	TracingEnabled       *bool                    `json:"tracingEnabled"`
-	Variables            map[string]string        `json:"variables"`
-	WebACLArn            *string                  `json:"webAclArn"`
+	AccessLogSettings    *AccessLogSettings       `json:"accessLogSettings,omitempty"`
+	CacheClusterEnabled  *bool                    `json:"cacheClusterEnabled,omitempty"`
+	CacheClusterSize     *CacheClusterSizeEnum    `json:"cacheClusterSize,omitempty"`
+	CacheClusterStatus   *CacheClusterStatusEnum  `json:"cacheClusterStatus,omitempty"`
+	CanarySettings       *CanarySettings          `json:"canarySettings,omitempty"`
+	ClientCertificateID  *string                  `json:"clientCertificateId,omitempty"`
+	CreatedDate          *time.Time               `json:"createdDate,omitempty"`
+	DeploymentID         *string                  `json:"deploymentId,omitempty"`
+	Description          *string                  `json:"description,omitempty"`
+	DocumentationVersion *string                  `json:"documentationVersion,omitempty"`
+	LastUpdatedDate      *time.Time               `json:"lastUpdatedDate,omitempty"`
+	MethodSettings       map[string]MethodSetting `json:"methodSettings,omitempty"`
+	StageName            *string                  `json:"stageName,omitempty"`
+	Tags                 map[string]string        `json:"tags,omitempty"`
+	TracingEnabled       *bool                    `json:"tracingEnabled,omitempty"`
+	Variables            map[string]string        `json:"variables,omitempty"`
+	WebACLArn            *string                  `json:"webAclArn,omitempty"`
 }

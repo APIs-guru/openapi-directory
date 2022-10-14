@@ -23,13 +23,13 @@ type CreateVirtualServiceHeaders struct {
 }
 
 type CreateVirtualServiceRequestBodySpec struct {
-	Provider *shared.VirtualServiceProvider `json:"provider"`
+	Provider *shared.VirtualServiceProvider `json:"provider,omitempty"`
 }
 
 type CreateVirtualServiceRequestBody struct {
-	ClientToken        *string                             `json:"clientToken"`
+	ClientToken        *string                             `json:"clientToken,omitempty"`
 	Spec               CreateVirtualServiceRequestBodySpec `json:"spec"`
-	Tags               []shared.TagRef                     `json:"tags"`
+	Tags               []shared.TagRef                     `json:"tags,omitempty"`
 	VirtualServiceName string                              `json:"virtualServiceName"`
 }
 

@@ -10,10 +10,10 @@ const (
 )
 
 type SetMasterAuthRequest struct {
-	Action    *SetMasterAuthRequestActionEnum `json:"action"`
-	ClusterID *string                         `json:"clusterId"`
-	Name      *string                         `json:"name"`
-	ProjectID *string                         `json:"projectId"`
-	Update    *MasterAuth                     `json:"update"`
-	Zone      *string                         `json:"zone"`
+	Action    *SetMasterAuthRequestActionEnum `json:"action,omitempty"`
+	ClusterID *string                         `json:"clusterId,omitempty"`
+	Name      *string                         `json:"name,omitempty"`
+	ProjectID *string                         `json:"projectId,omitempty"`
+	Update    *MasterAuth                     `json:"update,omitempty"`
+	Zone      *string                         `json:"zone,omitempty"`
 }

@@ -9,12 +9,12 @@ const (
 )
 
 type AllowedClient struct {
-	AllowDev           *bool                              `json:"allowDev"`
-	AllowSuid          *bool                              `json:"allowSuid"`
-	AllowedClientsCidr *string                            `json:"allowedClientsCidr"`
-	MountPermissions   *AllowedClientMountPermissionsEnum `json:"mountPermissions"`
-	Network            *string                            `json:"network"`
-	NfsPath            *string                            `json:"nfsPath"`
-	NoRootSquash       *bool                              `json:"noRootSquash"`
-	ShareIP            *string                            `json:"shareIp"`
+	AllowDev           *bool                              `json:"allowDev,omitempty"`
+	AllowSuid          *bool                              `json:"allowSuid,omitempty"`
+	AllowedClientsCidr *string                            `json:"allowedClientsCidr,omitempty"`
+	MountPermissions   *AllowedClientMountPermissionsEnum `json:"mountPermissions,omitempty"`
+	Network            *string                            `json:"network,omitempty"`
+	NfsPath            *string                            `json:"nfsPath,omitempty"`
+	NoRootSquash       *bool                              `json:"noRootSquash,omitempty"`
+	ShareIP            *string                            `json:"shareIp,omitempty"`
 }

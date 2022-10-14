@@ -1,7 +1,7 @@
 package shared
 
 type OrderLineItem struct {
-	FeeBasisAmount  *Amount `json:"feeBasisAmount"`
-	LineItemID      *string `json:"lineItemId"`
-	MarketplaceFees []Fee   `json:"marketplaceFees"`
+	FeeBasisAmount  *Amount `json:"feeBasisAmount,omitempty"`
+	LineItemID      *string `json:"lineItemId,omitempty"`
+	MarketplaceFees []Fee   `json:"marketplaceFees,omitempty"`
 }

@@ -16,11 +16,11 @@ const (
 )
 
 type ParameterMetadata struct {
-	CustomMetadata map[string]string               `json:"customMetadata"`
-	HelpText       *string                         `json:"helpText"`
-	IsOptional     *bool                           `json:"isOptional"`
-	Label          *string                         `json:"label"`
-	Name           *string                         `json:"name"`
-	ParamType      *ParameterMetadataParamTypeEnum `json:"paramType"`
-	Regexes        []string                        `json:"regexes"`
+	CustomMetadata map[string]string               `json:"customMetadata,omitempty"`
+	HelpText       *string                         `json:"helpText,omitempty"`
+	IsOptional     *bool                           `json:"isOptional,omitempty"`
+	Label          *string                         `json:"label,omitempty"`
+	Name           *string                         `json:"name,omitempty"`
+	ParamType      *ParameterMetadataParamTypeEnum `json:"paramType,omitempty"`
+	Regexes        []string                        `json:"regexes,omitempty"`
 }

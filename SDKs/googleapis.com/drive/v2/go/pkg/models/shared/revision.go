@@ -5,22 +5,22 @@ import (
 )
 
 type Revision struct {
-	DownloadURL            *string           `json:"downloadUrl"`
-	Etag                   *string           `json:"etag"`
-	ExportLinks            map[string]string `json:"exportLinks"`
-	FileSize               *string           `json:"fileSize"`
-	ID                     *string           `json:"id"`
-	Kind                   *string           `json:"kind"`
-	LastModifyingUser      *User             `json:"lastModifyingUser"`
-	LastModifyingUserName  *string           `json:"lastModifyingUserName"`
-	Md5Checksum            *string           `json:"md5Checksum"`
-	MimeType               *string           `json:"mimeType"`
-	ModifiedDate           *time.Time        `json:"modifiedDate"`
-	OriginalFilename       *string           `json:"originalFilename"`
-	Pinned                 *bool             `json:"pinned"`
-	PublishAuto            *bool             `json:"publishAuto"`
-	Published              *bool             `json:"published"`
-	PublishedLink          *string           `json:"publishedLink"`
-	PublishedOutsideDomain *bool             `json:"publishedOutsideDomain"`
-	SelfLink               *string           `json:"selfLink"`
+	DownloadURL            *string           `json:"downloadUrl,omitempty"`
+	Etag                   *string           `json:"etag,omitempty"`
+	ExportLinks            map[string]string `json:"exportLinks,omitempty"`
+	FileSize               *string           `json:"fileSize,omitempty"`
+	ID                     *string           `json:"id,omitempty"`
+	Kind                   *string           `json:"kind,omitempty"`
+	LastModifyingUser      *User             `json:"lastModifyingUser,omitempty"`
+	LastModifyingUserName  *string           `json:"lastModifyingUserName,omitempty"`
+	Md5Checksum            *string           `json:"md5Checksum,omitempty"`
+	MimeType               *string           `json:"mimeType,omitempty"`
+	ModifiedDate           *time.Time        `json:"modifiedDate,omitempty"`
+	OriginalFilename       *string           `json:"originalFilename,omitempty"`
+	Pinned                 *bool             `json:"pinned,omitempty"`
+	PublishAuto            *bool             `json:"publishAuto,omitempty"`
+	Published              *bool             `json:"published,omitempty"`
+	PublishedLink          *string           `json:"publishedLink,omitempty"`
+	PublishedOutsideDomain *bool             `json:"publishedOutsideDomain,omitempty"`
+	SelfLink               *string           `json:"selfLink,omitempty"`
 }

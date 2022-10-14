@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleCloudDialogflowV2ValidationError struct {
-	Entries      []string                                            `json:"entries"`
-	ErrorMessage *string                                             `json:"errorMessage"`
-	Severity     *GoogleCloudDialogflowV2ValidationErrorSeverityEnum `json:"severity"`
+	Entries      []string                                            `json:"entries,omitempty"`
+	ErrorMessage *string                                             `json:"errorMessage,omitempty"`
+	Severity     *GoogleCloudDialogflowV2ValidationErrorSeverityEnum `json:"severity,omitempty"`
 }

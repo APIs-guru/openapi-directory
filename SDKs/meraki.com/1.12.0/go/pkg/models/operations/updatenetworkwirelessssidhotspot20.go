@@ -6,8 +6,8 @@ type UpdateNetworkWirelessSsidHotspot20PathParams struct {
 }
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyMccMncs struct {
-	Mcc *string `json:"mcc"`
-	Mnc *string `json:"mnc"`
+	Mcc *string `json:"mcc,omitempty"`
+	Mnc *string `json:"mnc,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealmsFormatEnum string
@@ -18,14 +18,14 @@ const (
 )
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealmsMethods struct {
-	AuthenticationTypes map[string]interface{} `json:"authenticationTypes"`
-	ID                  *string                `json:"id"`
+	AuthenticationTypes map[string]interface{} `json:"authenticationTypes,omitempty"`
+	ID                  *string                `json:"id,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealms struct {
-	Format  *UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealmsFormatEnum `json:"format"`
-	Methods []UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealmsMethods   `json:"methods"`
-	Realm   *string                                                           `json:"realm"`
+	Format  *UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealmsFormatEnum `json:"format,omitempty"`
+	Methods []UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealmsMethods   `json:"methods,omitempty"`
+	Realm   *string                                                           `json:"realm,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyNetworkAccessTypeEnum string
@@ -42,7 +42,7 @@ const (
 )
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyOperator struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyVenueTypeEnum string
@@ -117,19 +117,19 @@ const (
 )
 
 type UpdateNetworkWirelessSsidHotspot20RequestBodyVenue struct {
-	Name *string                                                     `json:"name"`
-	Type *UpdateNetworkWirelessSsidHotspot20RequestBodyVenueTypeEnum `json:"type"`
+	Name *string                                                     `json:"name,omitempty"`
+	Type *UpdateNetworkWirelessSsidHotspot20RequestBodyVenueTypeEnum `json:"type,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidHotspot20RequestBody struct {
-	Domains           []string                                                            `json:"domains"`
-	Enabled           *bool                                                               `json:"enabled"`
-	MccMncs           []UpdateNetworkWirelessSsidHotspot20RequestBodyMccMncs              `json:"mccMncs"`
-	NaiRealms         []UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealms            `json:"naiRealms"`
-	NetworkAccessType *UpdateNetworkWirelessSsidHotspot20RequestBodyNetworkAccessTypeEnum `json:"networkAccessType"`
-	Operator          *UpdateNetworkWirelessSsidHotspot20RequestBodyOperator              `json:"operator"`
-	RoamConsortOis    []string                                                            `json:"roamConsortOis"`
-	Venue             *UpdateNetworkWirelessSsidHotspot20RequestBodyVenue                 `json:"venue"`
+	Domains           []string                                                            `json:"domains,omitempty"`
+	Enabled           *bool                                                               `json:"enabled,omitempty"`
+	MccMncs           []UpdateNetworkWirelessSsidHotspot20RequestBodyMccMncs              `json:"mccMncs,omitempty"`
+	NaiRealms         []UpdateNetworkWirelessSsidHotspot20RequestBodyNaiRealms            `json:"naiRealms,omitempty"`
+	NetworkAccessType *UpdateNetworkWirelessSsidHotspot20RequestBodyNetworkAccessTypeEnum `json:"networkAccessType,omitempty"`
+	Operator          *UpdateNetworkWirelessSsidHotspot20RequestBodyOperator              `json:"operator,omitempty"`
+	RoamConsortOis    []string                                                            `json:"roamConsortOis,omitempty"`
+	Venue             *UpdateNetworkWirelessSsidHotspot20RequestBodyVenue                 `json:"venue,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidHotspot20Request struct {

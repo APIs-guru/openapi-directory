@@ -1,7 +1,7 @@
 package shared
 
 type SecretEnvSource struct {
-	LocalObjectReference *LocalObjectReference `json:"localObjectReference"`
-	Name                 *string               `json:"name"`
-	Optional             *bool                 `json:"optional"`
+	LocalObjectReference *LocalObjectReference `json:"localObjectReference,omitempty"`
+	Name                 *string               `json:"name,omitempty"`
+	Optional             *bool                 `json:"optional,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ListPrivateConnectionsResponse struct {
-	NextPageToken      *string             `json:"nextPageToken"`
-	PrivateConnections []PrivateConnection `json:"privateConnections"`
-	Unreachable        []string            `json:"unreachable"`
+	NextPageToken      *string             `json:"nextPageToken,omitempty"`
+	PrivateConnections []PrivateConnection `json:"privateConnections,omitempty"`
+	Unreachable        []string            `json:"unreachable,omitempty"`
 }

@@ -13,9 +13,9 @@ const (
 )
 
 type Parameter struct {
-	Key   *string            `json:"key"`
-	List  []Parameter        `json:"list"`
-	Map   []Parameter        `json:"map"`
-	Type  *ParameterTypeEnum `json:"type"`
-	Value *string            `json:"value"`
+	Key   *string            `json:"key,omitempty"`
+	List  []Parameter        `json:"list,omitempty"`
+	Map   []Parameter        `json:"map,omitempty"`
+	Type  *ParameterTypeEnum `json:"type,omitempty"`
+	Value *string            `json:"value,omitempty"`
 }

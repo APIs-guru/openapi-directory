@@ -1,6 +1,6 @@
 package shared
 
 type ListAuctionPackagesResponse struct {
-	AuctionPackages []AuctionPackage `json:"auctionPackages"`
-	NextPageToken   *string          `json:"nextPageToken"`
+	AuctionPackages []AuctionPackage `json:"auctionPackages,omitempty"`
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
 }

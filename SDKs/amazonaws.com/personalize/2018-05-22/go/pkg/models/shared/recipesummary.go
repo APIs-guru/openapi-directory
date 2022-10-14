@@ -5,9 +5,9 @@ import (
 )
 
 type RecipeSummary struct {
-	CreationDateTime    *time.Time `json:"creationDateTime"`
-	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime"`
-	Name                *string    `json:"name"`
-	RecipeArn           *string    `json:"recipeArn"`
-	Status              *string    `json:"status"`
+	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
+	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	Name                *string    `json:"name,omitempty"`
+	RecipeArn           *string    `json:"recipeArn,omitempty"`
+	Status              *string    `json:"status,omitempty"`
 }

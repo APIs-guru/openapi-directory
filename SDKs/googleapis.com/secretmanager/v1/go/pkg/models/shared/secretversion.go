@@ -10,11 +10,11 @@ const (
 )
 
 type SecretVersion struct {
-	ClientSpecifiedPayloadChecksum *bool                   `json:"clientSpecifiedPayloadChecksum"`
-	CreateTime                     *string                 `json:"createTime"`
-	DestroyTime                    *string                 `json:"destroyTime"`
-	Etag                           *string                 `json:"etag"`
-	Name                           *string                 `json:"name"`
-	ReplicationStatus              *ReplicationStatus      `json:"replicationStatus"`
-	State                          *SecretVersionStateEnum `json:"state"`
+	ClientSpecifiedPayloadChecksum *bool                   `json:"clientSpecifiedPayloadChecksum,omitempty"`
+	CreateTime                     *string                 `json:"createTime,omitempty"`
+	DestroyTime                    *string                 `json:"destroyTime,omitempty"`
+	Etag                           *string                 `json:"etag,omitempty"`
+	Name                           *string                 `json:"name,omitempty"`
+	ReplicationStatus              *ReplicationStatus      `json:"replicationStatus,omitempty"`
+	State                          *SecretVersionStateEnum `json:"state,omitempty"`
 }

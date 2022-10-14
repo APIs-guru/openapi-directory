@@ -1,8 +1,8 @@
 package shared
 
 type CreateDelegationRequest struct {
-	Comment      *string       `json:"comment"`
-	ControlSetID *string       `json:"controlSetId"`
-	RoleArn      *string       `json:"roleArn"`
-	RoleType     *RoleTypeEnum `json:"roleType"`
+	Comment      *string       `json:"comment,omitempty"`
+	ControlSetID *string       `json:"controlSetId,omitempty"`
+	RoleArn      *string       `json:"roleArn,omitempty"`
+	RoleType     *RoleTypeEnum `json:"roleType,omitempty"`
 }

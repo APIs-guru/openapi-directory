@@ -1,10 +1,10 @@
 package shared
 
 type PaymentInitiationRecipientCreateRequest struct {
-	Address  map[string]interface{} `json:"address"`
-	Bacs     map[string]interface{} `json:"bacs"`
-	ClientID *string                `json:"client_id"`
-	Iban     *string                `json:"iban"`
+	Address  map[string]interface{} `json:"address,omitempty"`
+	Bacs     map[string]interface{} `json:"bacs,omitempty"`
+	ClientID *string                `json:"client_id,omitempty"`
+	Iban     *string                `json:"iban,omitempty"`
 	Name     string                 `json:"name"`
-	Secret   *string                `json:"secret"`
+	Secret   *string                `json:"secret,omitempty"`
 }

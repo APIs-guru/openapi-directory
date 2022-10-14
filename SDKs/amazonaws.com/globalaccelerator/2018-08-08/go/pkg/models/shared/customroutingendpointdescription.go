@@ -1,5 +1,5 @@
 package shared
 
 type CustomRoutingEndpointDescription struct {
-	EndpointID *string `json:"EndpointId"`
+	EndpointID *string `json:"EndpointId,omitempty"`
 }

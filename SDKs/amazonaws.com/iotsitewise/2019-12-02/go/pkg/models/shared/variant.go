@@ -1,8 +1,8 @@
 package shared
 
 type Variant struct {
-	BooleanValue *bool    `json:"booleanValue"`
-	DoubleValue  *float64 `json:"doubleValue"`
-	IntegerValue *int64   `json:"integerValue"`
-	StringValue  *string  `json:"stringValue"`
+	BooleanValue *bool    `json:"booleanValue,omitempty"`
+	DoubleValue  *float64 `json:"doubleValue,omitempty"`
+	IntegerValue *int64   `json:"integerValue,omitempty"`
+	StringValue  *string  `json:"stringValue,omitempty"`
 }

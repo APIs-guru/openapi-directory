@@ -1,6 +1,6 @@
 package shared
 
 type DatafeedsCustomBatchResponse struct {
-	Entries []DatafeedsCustomBatchResponseEntry `json:"entries"`
-	Kind    *string                             `json:"kind"`
+	Entries []DatafeedsCustomBatchResponseEntry `json:"entries,omitempty"`
+	Kind    *string                             `json:"kind,omitempty"`
 }

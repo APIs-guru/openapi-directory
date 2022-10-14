@@ -18,8 +18,8 @@ const (
 )
 
 type GovidRequestBody struct {
-	CertificateParameters *GovidRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *GovidRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                GovidRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Govid400ApplicationJSON struct {
-	Error            *Govid400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Govid400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Govid400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Govid400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Govid401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Govid401ApplicationJSON struct {
-	Error            *Govid401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Govid401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Govid401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Govid401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Govid404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Govid404ApplicationJSON struct {
-	Error            *Govid404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Govid404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Govid404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Govid404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Govid500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Govid500ApplicationJSON struct {
-	Error            *Govid500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Govid500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Govid500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Govid500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Govid502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Govid502ApplicationJSON struct {
-	Error            *Govid502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Govid502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Govid502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Govid502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Govid503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Govid503ApplicationJSON struct {
-	Error            *Govid503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Govid503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Govid503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Govid503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Govid504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Govid504ApplicationJSON struct {
-	Error            *Govid504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Govid504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Govid504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Govid504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type GovidResponse struct {

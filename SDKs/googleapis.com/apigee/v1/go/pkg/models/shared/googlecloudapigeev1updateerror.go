@@ -23,8 +23,8 @@ const (
 )
 
 type GoogleCloudApigeeV1UpdateError struct {
-	Code     *GoogleCloudApigeeV1UpdateErrorCodeEnum `json:"code"`
-	Message  *string                                 `json:"message"`
-	Resource *string                                 `json:"resource"`
-	Type     *string                                 `json:"type"`
+	Code     *GoogleCloudApigeeV1UpdateErrorCodeEnum `json:"code,omitempty"`
+	Message  *string                                 `json:"message,omitempty"`
+	Resource *string                                 `json:"resource,omitempty"`
+	Type     *string                                 `json:"type,omitempty"`
 }

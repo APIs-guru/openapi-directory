@@ -1,9 +1,9 @@
 package shared
 
 type IncludeConditions struct {
-	DaysToLookBack         *int32  `json:"daysToLookBack"`
-	IsSmartList            *bool   `json:"isSmartList"`
-	Kind                   *string `json:"kind"`
-	MembershipDurationDays *int32  `json:"membershipDurationDays"`
-	Segment                *string `json:"segment"`
+	DaysToLookBack         *int32  `json:"daysToLookBack,omitempty"`
+	IsSmartList            *bool   `json:"isSmartList,omitempty"`
+	Kind                   *string `json:"kind,omitempty"`
+	MembershipDurationDays *int32  `json:"membershipDurationDays,omitempty"`
+	Segment                *string `json:"segment,omitempty"`
 }

@@ -77,31 +77,31 @@ type PostOrdersRequestBodyItems struct {
 
 type PostOrdersRequestBodyRecipientConsigneeNewV2 struct {
 	Address1        string  `json:"address1"`
-	Address2        *string `json:"address2"`
+	Address2        *string `json:"address2,omitempty"`
 	AddressLocality string  `json:"addressLocality"`
 	AddressRegion   string  `json:"addressRegion"`
-	CompanyName     *string `json:"companyName"`
+	CompanyName     *string `json:"companyName,omitempty"`
 	Country         string  `json:"country"`
 	Email           string  `json:"email"`
 	FirstName       string  `json:"firstName"`
 	LastName        string  `json:"lastName"`
 	Phone           string  `json:"phone"`
-	PostalCode      *string `json:"postalCode"`
+	PostalCode      *string `json:"postalCode,omitempty"`
 }
 
 type PostOrdersRequestBodyWarehouse struct {
-	ID *int64 `json:"id"`
+	ID *int64 `json:"id,omitempty"`
 }
 
 type PostOrdersRequestBodyOrderRequestV2 struct {
-	Integrator      *PostOrdersRequestBodyIntegratorEnum         `json:"integrator"`
+	Integrator      *PostOrdersRequestBodyIntegratorEnum         `json:"integrator,omitempty"`
 	Items           []PostOrdersRequestBodyItems                 `json:"items"`
-	MerchantID      *int64                                       `json:"merchantId"`
+	MerchantID      *int64                                       `json:"merchantId,omitempty"`
 	MerchantOrderID string                                       `json:"merchantOrderId"`
-	Notes           *string                                      `json:"notes"`
+	Notes           *string                                      `json:"notes,omitempty"`
 	Recipient       PostOrdersRequestBodyRecipientConsigneeNewV2 `json:"recipient"`
 	ShippingMethod  string                                       `json:"shippingMethod"`
-	Warehouse       *PostOrdersRequestBodyWarehouse              `json:"warehouse"`
+	Warehouse       *PostOrdersRequestBodyWarehouse              `json:"warehouse,omitempty"`
 }
 
 type PostOrdersSecurity struct {
@@ -114,44 +114,44 @@ type PostOrdersRequest struct {
 }
 
 type PostOrders409ApplicationJSONErrorStandardWithContextV2 struct {
-	Context []map[string]interface{} `json:"context"`
-	Message *string                  `json:"message"`
+	Context []map[string]interface{} `json:"context,omitempty"`
+	Message *string                  `json:"message,omitempty"`
 }
 
 type PostOrders201ApplicationJSONCurrentStatusStatusActionRequiredBy struct {
-	ID   *int64  `json:"id"`
-	Name *string `json:"name"`
+	ID   *int64  `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type PostOrders201ApplicationJSONCurrentStatusStatusStage struct {
-	Code *string `json:"code"`
-	Name *string `json:"name"`
+	Code *string `json:"code,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type PostOrders201ApplicationJSONCurrentStatusStatusState struct {
-	Code *string `json:"code"`
-	Name *string `json:"name"`
+	Code *string `json:"code,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type PostOrders201ApplicationJSONCurrentStatusStatusStatusTypeV2 struct {
-	ActionRequiredBy *PostOrders201ApplicationJSONCurrentStatusStatusActionRequiredBy `json:"actionRequiredBy"`
+	ActionRequiredBy *PostOrders201ApplicationJSONCurrentStatusStatusActionRequiredBy `json:"actionRequiredBy,omitempty"`
 	Code             string                                                           `json:"code"`
-	Detail           *string                                                          `json:"detail"`
+	Detail           *string                                                          `json:"detail,omitempty"`
 	DetailCode       string                                                           `json:"detailCode"`
-	ID               *int64                                                           `json:"id"`
-	IsClosed         *bool                                                            `json:"isClosed"`
-	Name             *string                                                          `json:"name"`
-	Reason           *string                                                          `json:"reason"`
+	ID               *int64                                                           `json:"id,omitempty"`
+	IsClosed         *bool                                                            `json:"isClosed,omitempty"`
+	Name             *string                                                          `json:"name,omitempty"`
+	Reason           *string                                                          `json:"reason,omitempty"`
 	Stage            PostOrders201ApplicationJSONCurrentStatusStatusStage             `json:"stage"`
 	State            PostOrders201ApplicationJSONCurrentStatusStatusState             `json:"state"`
 }
 
 type PostOrders201ApplicationJSONCurrentStatusStatusEventV2 struct {
-	CreatedBy *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"createdBy"`
-	Date      *time.Time                                                                                           `json:"date"`
+	CreatedBy *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"createdBy,omitempty"`
+	Date      *time.Time                                                                                           `json:"date,omitempty"`
 	ID        int64                                                                                                `json:"id"`
-	Reason    *string                                                                                              `json:"reason"`
-	Status    *PostOrders201ApplicationJSONCurrentStatusStatusStatusTypeV2                                         `json:"status"`
+	Reason    *string                                                                                              `json:"reason,omitempty"`
+	Status    *PostOrders201ApplicationJSONCurrentStatusStatusStatusTypeV2                                         `json:"status,omitempty"`
 }
 
 type PostOrders201ApplicationJSONMerchantMerchantV2 struct {
@@ -160,31 +160,31 @@ type PostOrders201ApplicationJSONMerchantMerchantV2 struct {
 }
 
 type PostOrders201ApplicationJSONOriginalConsigneeIsoIsoCountryV2 struct {
-	ID   *int64  `json:"id"`
-	Iso2 *string `json:"iso2"`
-	Name *string `json:"name"`
+	ID   *int64  `json:"id,omitempty"`
+	Iso2 *string `json:"iso2,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type PostOrders201ApplicationJSONOriginalConsigneeConsigneeV2 struct {
 	Address1        string                                                                                               `json:"address1"`
-	Address2        *string                                                                                              `json:"address2"`
+	Address2        *string                                                                                              `json:"address2,omitempty"`
 	AddressLocality string                                                                                               `json:"addressLocality"`
 	AddressRegion   string                                                                                               `json:"addressRegion"`
-	CompanyName     *string                                                                                              `json:"companyName"`
+	CompanyName     *string                                                                                              `json:"companyName,omitempty"`
 	Country         string                                                                                               `json:"country"`
-	Email           *string                                                                                              `json:"email"`
+	Email           *string                                                                                              `json:"email,omitempty"`
 	FirstName       string                                                                                               `json:"firstName"`
 	ID              int64                                                                                                `json:"id"`
-	Iso             *PostOrders201ApplicationJSONOriginalConsigneeIsoIsoCountryV2                                        `json:"iso"`
+	Iso             *PostOrders201ApplicationJSONOriginalConsigneeIsoIsoCountryV2                                        `json:"iso,omitempty"`
 	LastName        string                                                                                               `json:"lastName"`
-	Phone           *string                                                                                              `json:"phone"`
+	Phone           *string                                                                                              `json:"phone,omitempty"`
 	PostalCode      string                                                                                               `json:"postalCode"`
-	UpdatedAt       *time.Time                                                                                           `json:"updatedAt"`
-	UpdatedBy       *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"updatedBy"`
+	UpdatedAt       *time.Time                                                                                           `json:"updatedAt,omitempty"`
+	UpdatedBy       *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"updatedBy,omitempty"`
 }
 
 type PostOrders201ApplicationJSONParentOrder struct {
-	ID *int64 `json:"id"`
+	ID *int64 `json:"id,omitempty"`
 }
 
 type PostOrders201ApplicationJSONTrackingNumbersCarrierCarrierSimpleV2 struct {
@@ -192,9 +192,9 @@ type PostOrders201ApplicationJSONTrackingNumbersCarrierCarrierSimpleV2 struct {
 }
 
 type PostOrders201ApplicationJSONTrackingNumbersTrackingNumberV2 struct {
-	BarcodeScanValue *string                                                            `json:"barcodeScanValue"`
-	Carrier          *PostOrders201ApplicationJSONTrackingNumbersCarrierCarrierSimpleV2 `json:"carrier"`
-	Value            *string                                                            `json:"value"`
+	BarcodeScanValue *string                                                            `json:"barcodeScanValue,omitempty"`
+	Carrier          *PostOrders201ApplicationJSONTrackingNumbersCarrierCarrierSimpleV2 `json:"carrier,omitempty"`
+	Value            *string                                                            `json:"value,omitempty"`
 }
 
 type PostOrders201ApplicationJSONWarehouseWarehouseV2 struct {
@@ -203,19 +203,19 @@ type PostOrders201ApplicationJSONWarehouseWarehouseV2 struct {
 
 type PostOrders201ApplicationJSONOrderResponseV2 struct {
 	CurrentStatus          PostOrders201ApplicationJSONCurrentStatusStatusEventV2                                   `json:"currentStatus"`
-	DepartDate             *time.Time                                                                               `json:"departDate"`
-	DispatchDate           *time.Time                                                                               `json:"dispatchDate"`
+	DepartDate             *time.Time                                                                               `json:"departDate,omitempty"`
+	DispatchDate           *time.Time                                                                               `json:"dispatchDate,omitempty"`
 	ID                     int64                                                                                    `json:"id"`
 	Merchant               PostOrders201ApplicationJSONMerchantMerchantV2                                           `json:"merchant"`
 	MerchantOrderID        string                                                                                   `json:"merchantOrderId"`
 	MerchantShippingMethod string                                                                                   `json:"merchantShippingMethod"`
 	OriginalConsignee      PostOrders201ApplicationJSONOriginalConsigneeConsigneeV2                                 `json:"originalConsignee"`
-	ParentOrder            *PostOrders201ApplicationJSONParentOrder                                                 `json:"parentOrder"`
-	PurchaseOrderNum       *string                                                                                  `json:"purchaseOrderNum"`
+	ParentOrder            *PostOrders201ApplicationJSONParentOrder                                                 `json:"parentOrder,omitempty"`
+	PurchaseOrderNum       *string                                                                                  `json:"purchaseOrderNum,omitempty"`
 	RecordedOn             time.Time                                                                                `json:"recordedOn"`
-	TrackingNumbers        []PostOrders201ApplicationJSONTrackingNumbersTrackingNumberV2                            `json:"trackingNumbers"`
+	TrackingNumbers        []PostOrders201ApplicationJSONTrackingNumbersTrackingNumberV2                            `json:"trackingNumbers,omitempty"`
 	ValidatedConsignee     shared.OneordersPostResponses201ContentApplication1jsonSchemaPropertiesOriginalConsignee `json:"validatedConsignee"`
-	Warehouse              *PostOrders201ApplicationJSONWarehouseWarehouseV2                                        `json:"warehouse"`
+	Warehouse              *PostOrders201ApplicationJSONWarehouseWarehouseV2                                        `json:"warehouse,omitempty"`
 }
 
 type PostOrdersResponse struct {

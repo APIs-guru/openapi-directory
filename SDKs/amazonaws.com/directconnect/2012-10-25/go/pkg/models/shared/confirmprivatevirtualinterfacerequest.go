@@ -1,7 +1,7 @@
 package shared
 
 type ConfirmPrivateVirtualInterfaceRequest struct {
-	DirectConnectGatewayID *string `json:"directConnectGatewayId"`
-	VirtualGatewayID       *string `json:"virtualGatewayId"`
+	DirectConnectGatewayID *string `json:"directConnectGatewayId,omitempty"`
+	VirtualGatewayID       *string `json:"virtualGatewayId,omitempty"`
 	VirtualInterfaceID     string  `json:"virtualInterfaceId"`
 }

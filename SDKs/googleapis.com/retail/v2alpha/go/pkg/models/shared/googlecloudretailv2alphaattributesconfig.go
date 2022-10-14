@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudRetailV2alphaAttributesConfig struct {
-	AttributeConfigLevel *GoogleCloudRetailV2alphaAttributesConfigAttributeConfigLevelEnum `json:"attributeConfigLevel"`
-	CatalogAttributes    map[string]GoogleCloudRetailV2alphaCatalogAttribute               `json:"catalogAttributes"`
-	Name                 *string                                                           `json:"name"`
+	AttributeConfigLevel *GoogleCloudRetailV2alphaAttributesConfigAttributeConfigLevelEnum `json:"attributeConfigLevel,omitempty"`
+	CatalogAttributes    map[string]GoogleCloudRetailV2alphaCatalogAttribute               `json:"catalogAttributes,omitempty"`
+	Name                 *string                                                           `json:"name,omitempty"`
 }

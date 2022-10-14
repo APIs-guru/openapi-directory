@@ -5,6 +5,6 @@ import (
 )
 
 type ConnectionState struct {
-	LastUpdatedAt *time.Time            `json:"lastUpdatedAt"`
-	Status        *ConnectionStatusEnum `json:"status"`
+	LastUpdatedAt *time.Time            `json:"lastUpdatedAt,omitempty"`
+	Status        *ConnectionStatusEnum `json:"status,omitempty"`
 }

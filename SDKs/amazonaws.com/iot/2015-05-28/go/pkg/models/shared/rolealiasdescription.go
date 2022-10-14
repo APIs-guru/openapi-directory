@@ -5,11 +5,11 @@ import (
 )
 
 type RoleAliasDescription struct {
-	CreationDate              *time.Time `json:"creationDate"`
-	CredentialDurationSeconds *int64     `json:"credentialDurationSeconds"`
-	LastModifiedDate          *time.Time `json:"lastModifiedDate"`
-	Owner                     *string    `json:"owner"`
-	RoleAlias                 *string    `json:"roleAlias"`
-	RoleAliasArn              *string    `json:"roleAliasArn"`
-	RoleArn                   *string    `json:"roleArn"`
+	CreationDate              *time.Time `json:"creationDate,omitempty"`
+	CredentialDurationSeconds *int64     `json:"credentialDurationSeconds,omitempty"`
+	LastModifiedDate          *time.Time `json:"lastModifiedDate,omitempty"`
+	Owner                     *string    `json:"owner,omitempty"`
+	RoleAlias                 *string    `json:"roleAlias,omitempty"`
+	RoleAliasArn              *string    `json:"roleAliasArn,omitempty"`
+	RoleArn                   *string    `json:"roleArn,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DealerDbModelsLicenseActivation struct {
-	Key         *string `json:"Key"`
-	LicenseData *string `json:"LicenseData"`
+	Key         *string `json:"Key,omitempty"`
+	LicenseData *string `json:"LicenseData,omitempty"`
 }

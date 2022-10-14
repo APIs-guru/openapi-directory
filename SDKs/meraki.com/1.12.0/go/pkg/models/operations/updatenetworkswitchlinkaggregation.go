@@ -16,8 +16,8 @@ type UpdateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts struct {
 }
 
 type UpdateNetworkSwitchLinkAggregationRequestBody struct {
-	SwitchPorts        []UpdateNetworkSwitchLinkAggregationRequestBodySwitchPorts        `json:"switchPorts"`
-	SwitchProfilePorts []UpdateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts `json:"switchProfilePorts"`
+	SwitchPorts        []UpdateNetworkSwitchLinkAggregationRequestBodySwitchPorts        `json:"switchPorts,omitempty"`
+	SwitchProfilePorts []UpdateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts `json:"switchProfilePorts,omitempty"`
 }
 
 type UpdateNetworkSwitchLinkAggregationRequest struct {

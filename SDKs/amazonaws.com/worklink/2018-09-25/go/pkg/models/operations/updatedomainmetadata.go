@@ -11,7 +11,7 @@ type UpdateDomainMetadataHeaders struct {
 }
 
 type UpdateDomainMetadataRequestBody struct {
-	DisplayName *string `json:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitempty"`
 	DomainName  string  `json:"DomainName"`
 	FleetArn    string  `json:"FleetArn"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type EnterpriseCrmEventbusProtoEventExecutionDetailsEventAttemptStats struct {
-	EndTime   *string `json:"endTime"`
-	StartTime *string `json:"startTime"`
+	EndTime   *string `json:"endTime,omitempty"`
+	StartTime *string `json:"startTime,omitempty"`
 }

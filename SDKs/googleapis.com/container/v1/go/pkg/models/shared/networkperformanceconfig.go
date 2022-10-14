@@ -8,5 +8,5 @@ const (
 )
 
 type NetworkPerformanceConfig struct {
-	TotalEgressBandwidthTier *NetworkPerformanceConfigTotalEgressBandwidthTierEnum `json:"totalEgressBandwidthTier"`
+	TotalEgressBandwidthTier *NetworkPerformanceConfigTotalEgressBandwidthTierEnum `json:"totalEgressBandwidthTier,omitempty"`
 }

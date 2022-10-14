@@ -1,11 +1,11 @@
 package shared
 
 type BucketCriteriaAdditionalProperties struct {
-	Eq     []string `json:"eq"`
-	Gt     *int64   `json:"gt"`
-	Gte    *int64   `json:"gte"`
-	Lt     *int64   `json:"lt"`
-	Lte    *int64   `json:"lte"`
-	Neq    []string `json:"neq"`
-	Prefix *string  `json:"prefix"`
+	Eq     []string `json:"eq,omitempty"`
+	Gt     *int64   `json:"gt,omitempty"`
+	Gte    *int64   `json:"gte,omitempty"`
+	Lt     *int64   `json:"lt,omitempty"`
+	Lte    *int64   `json:"lte,omitempty"`
+	Neq    []string `json:"neq,omitempty"`
+	Prefix *string  `json:"prefix,omitempty"`
 }

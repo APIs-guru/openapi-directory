@@ -1,5 +1,5 @@
 package shared
 
 type GetStatisticsResponse struct {
-	Statistics *Statistics `json:"statistics"`
+	Statistics *Statistics `json:"statistics,omitempty"`
 }

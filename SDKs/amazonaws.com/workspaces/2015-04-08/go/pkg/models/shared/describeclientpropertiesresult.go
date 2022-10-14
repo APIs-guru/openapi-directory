@@ -1,5 +1,5 @@
 package shared
 
 type DescribeClientPropertiesResult struct {
-	ClientPropertiesList []ClientPropertiesResult `json:"ClientPropertiesList"`
+	ClientPropertiesList []ClientPropertiesResult `json:"ClientPropertiesList,omitempty"`
 }

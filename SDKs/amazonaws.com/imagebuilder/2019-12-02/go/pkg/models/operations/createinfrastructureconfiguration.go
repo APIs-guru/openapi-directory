@@ -15,23 +15,23 @@ type CreateInfrastructureConfigurationHeaders struct {
 }
 
 type CreateInfrastructureConfigurationRequestBodyLogging struct {
-	S3Logs *shared.S3Logs `json:"s3Logs"`
+	S3Logs *shared.S3Logs `json:"s3Logs,omitempty"`
 }
 
 type CreateInfrastructureConfigurationRequestBody struct {
 	ClientToken                string                                               `json:"clientToken"`
-	Description                *string                                              `json:"description"`
+	Description                *string                                              `json:"description,omitempty"`
 	InstanceProfileName        string                                               `json:"instanceProfileName"`
-	InstanceTypes              []string                                             `json:"instanceTypes"`
-	KeyPair                    *string                                              `json:"keyPair"`
-	Logging                    *CreateInfrastructureConfigurationRequestBodyLogging `json:"logging"`
+	InstanceTypes              []string                                             `json:"instanceTypes,omitempty"`
+	KeyPair                    *string                                              `json:"keyPair,omitempty"`
+	Logging                    *CreateInfrastructureConfigurationRequestBodyLogging `json:"logging,omitempty"`
 	Name                       string                                               `json:"name"`
-	ResourceTags               map[string]string                                    `json:"resourceTags"`
-	SecurityGroupIds           []string                                             `json:"securityGroupIds"`
-	SnsTopicArn                *string                                              `json:"snsTopicArn"`
-	SubnetID                   *string                                              `json:"subnetId"`
-	Tags                       map[string]string                                    `json:"tags"`
-	TerminateInstanceOnFailure *bool                                                `json:"terminateInstanceOnFailure"`
+	ResourceTags               map[string]string                                    `json:"resourceTags,omitempty"`
+	SecurityGroupIds           []string                                             `json:"securityGroupIds,omitempty"`
+	SnsTopicArn                *string                                              `json:"snsTopicArn,omitempty"`
+	SubnetID                   *string                                              `json:"subnetId,omitempty"`
+	Tags                       map[string]string                                    `json:"tags,omitempty"`
+	TerminateInstanceOnFailure *bool                                                `json:"terminateInstanceOnFailure,omitempty"`
 }
 
 type CreateInfrastructureConfigurationRequest struct {

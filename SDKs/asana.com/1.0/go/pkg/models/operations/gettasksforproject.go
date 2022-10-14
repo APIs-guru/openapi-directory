@@ -21,7 +21,7 @@ type GetTasksForProjectRequest struct {
 }
 
 type GetTasksForProject200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data"`
+	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type GetTasksForProjectResponse struct {

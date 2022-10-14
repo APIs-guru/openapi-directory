@@ -1,7 +1,7 @@
 package shared
 
 type DescribeStreamConsumerInput struct {
-	ConsumerArn  *string `json:"ConsumerARN"`
-	ConsumerName *string `json:"ConsumerName"`
-	StreamArn    *string `json:"StreamARN"`
+	ConsumerArn  *string `json:"ConsumerARN,omitempty"`
+	ConsumerName *string `json:"ConsumerName,omitempty"`
+	StreamArn    *string `json:"StreamARN,omitempty"`
 }

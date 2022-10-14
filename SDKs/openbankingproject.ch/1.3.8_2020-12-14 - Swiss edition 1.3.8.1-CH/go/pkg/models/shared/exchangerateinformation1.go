@@ -9,7 +9,7 @@ const (
 )
 
 type ExchangeRateInformation1 struct {
-	ContractIdentification *string                               `json:"contractIdentification"`
-	ExchangeRate           *string                               `json:"exchangeRate"`
-	RateType               *ExchangeRateInformation1RateTypeEnum `json:"rateType"`
+	ContractIdentification *string                               `json:"contractIdentification,omitempty"`
+	ExchangeRate           *string                               `json:"exchangeRate,omitempty"`
+	RateType               *ExchangeRateInformation1RateTypeEnum `json:"rateType,omitempty"`
 }

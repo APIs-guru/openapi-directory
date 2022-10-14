@@ -10,9 +10,9 @@ const (
 )
 
 type GoogleCloudVideointelligenceV1beta2LabelDetectionConfig struct {
-	FrameConfidenceThreshold *float32                                                                       `json:"frameConfidenceThreshold"`
-	LabelDetectionMode       *GoogleCloudVideointelligenceV1beta2LabelDetectionConfigLabelDetectionModeEnum `json:"labelDetectionMode"`
-	Model                    *string                                                                        `json:"model"`
-	StationaryCamera         *bool                                                                          `json:"stationaryCamera"`
-	VideoConfidenceThreshold *float32                                                                       `json:"videoConfidenceThreshold"`
+	FrameConfidenceThreshold *float32                                                                       `json:"frameConfidenceThreshold,omitempty"`
+	LabelDetectionMode       *GoogleCloudVideointelligenceV1beta2LabelDetectionConfigLabelDetectionModeEnum `json:"labelDetectionMode,omitempty"`
+	Model                    *string                                                                        `json:"model,omitempty"`
+	StationaryCamera         *bool                                                                          `json:"stationaryCamera,omitempty"`
+	VideoConfidenceThreshold *float32                                                                       `json:"videoConfidenceThreshold,omitempty"`
 }

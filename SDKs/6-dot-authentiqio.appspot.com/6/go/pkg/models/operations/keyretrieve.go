@@ -13,9 +13,9 @@ type KeyRetrieveRequest struct {
 }
 
 type KeyRetrieve200ApplicationJSONJwt struct {
-	Since  *time.Time `json:"since"`
-	Status *string    `json:"status"`
-	Sub    *string    `json:"sub"`
+	Since  *time.Time `json:"since,omitempty"`
+	Status *string    `json:"status,omitempty"`
+	Sub    *string    `json:"sub,omitempty"`
 }
 
 type KeyRetrieveResponse struct {

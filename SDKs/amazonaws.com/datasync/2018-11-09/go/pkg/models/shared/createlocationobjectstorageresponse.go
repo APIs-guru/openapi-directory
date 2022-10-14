@@ -1,5 +1,5 @@
 package shared
 
 type CreateLocationObjectStorageResponse struct {
-	LocationArn *string `json:"LocationArn"`
+	LocationArn *string `json:"LocationArn,omitempty"`
 }

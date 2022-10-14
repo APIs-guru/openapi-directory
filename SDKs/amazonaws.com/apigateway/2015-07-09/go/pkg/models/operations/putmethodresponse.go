@@ -22,8 +22,8 @@ type PutMethodResponseHeaders struct {
 }
 
 type PutMethodResponseRequestBody struct {
-	ResponseModels     map[string]string `json:"responseModels"`
-	ResponseParameters map[string]bool   `json:"responseParameters"`
+	ResponseModels     map[string]string `json:"responseModels,omitempty"`
+	ResponseParameters map[string]bool   `json:"responseParameters,omitempty"`
 }
 
 type PutMethodResponseRequest struct {

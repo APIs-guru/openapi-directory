@@ -1,6 +1,6 @@
 package shared
 
 type ListBillingGroupsResponse struct {
-	BillingGroups []GroupNameAndArn `json:"billingGroups"`
-	NextToken     *string           `json:"nextToken"`
+	BillingGroups []GroupNameAndArn `json:"billingGroups,omitempty"`
+	NextToken     *string           `json:"nextToken,omitempty"`
 }

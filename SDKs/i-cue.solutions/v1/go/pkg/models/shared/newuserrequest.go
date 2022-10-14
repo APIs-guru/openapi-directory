@@ -1,10 +1,10 @@
 package shared
 
 type NewUserRequest struct {
-	Email       *string `json:"email"`
-	EntityToken *string `json:"entityToken"`
-	Firstname   *string `json:"firstname"`
-	IsActive    *bool   `json:"isActive"`
-	Lastname    *string `json:"lastname"`
-	Phone       *string `json:"phone"`
+	Email       *string `json:"email,omitempty"`
+	EntityToken *string `json:"entityToken,omitempty"`
+	Firstname   *string `json:"firstname,omitempty"`
+	IsActive    *bool   `json:"isActive,omitempty"`
+	Lastname    *string `json:"lastname,omitempty"`
+	Phone       *string `json:"phone,omitempty"`
 }

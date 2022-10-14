@@ -5,17 +5,17 @@ import (
 )
 
 type PiiEntitiesDetectionJobProperties struct {
-	DataAccessRoleArn *string                       `json:"DataAccessRoleArn"`
-	EndTime           *time.Time                    `json:"EndTime"`
-	InputDataConfig   *InputDataConfig              `json:"InputDataConfig"`
-	JobArn            *string                       `json:"JobArn"`
-	JobID             *string                       `json:"JobId"`
-	JobName           *string                       `json:"JobName"`
-	JobStatus         *JobStatusEnum                `json:"JobStatus"`
-	LanguageCode      *LanguageCodeEnum             `json:"LanguageCode"`
-	Message           *string                       `json:"Message"`
-	Mode              *PiiEntitiesDetectionModeEnum `json:"Mode"`
-	OutputDataConfig  *PiiOutputDataConfig          `json:"OutputDataConfig"`
-	RedactionConfig   *RedactionConfig              `json:"RedactionConfig"`
-	SubmitTime        *time.Time                    `json:"SubmitTime"`
+	DataAccessRoleArn *string                       `json:"DataAccessRoleArn,omitempty"`
+	EndTime           *time.Time                    `json:"EndTime,omitempty"`
+	InputDataConfig   *InputDataConfig              `json:"InputDataConfig,omitempty"`
+	JobArn            *string                       `json:"JobArn,omitempty"`
+	JobID             *string                       `json:"JobId,omitempty"`
+	JobName           *string                       `json:"JobName,omitempty"`
+	JobStatus         *JobStatusEnum                `json:"JobStatus,omitempty"`
+	LanguageCode      *LanguageCodeEnum             `json:"LanguageCode,omitempty"`
+	Message           *string                       `json:"Message,omitempty"`
+	Mode              *PiiEntitiesDetectionModeEnum `json:"Mode,omitempty"`
+	OutputDataConfig  *PiiOutputDataConfig          `json:"OutputDataConfig,omitempty"`
+	RedactionConfig   *RedactionConfig              `json:"RedactionConfig,omitempty"`
+	SubmitTime        *time.Time                    `json:"SubmitTime,omitempty"`
 }

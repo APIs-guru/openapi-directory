@@ -1,12 +1,12 @@
 package shared
 
 type FolderData struct {
-	ElectricityCounterValue *float64 `json:"ElectricityCounterValue"`
-	ElectricityPower        *float64 `json:"ElectricityPower"`
-	GasCounterValue         *float64 `json:"GasCounterValue"`
-	GasFlowRate             *float64 `json:"GasFlowRate"`
-	HeatCounterValue        *float64 `json:"HeatCounterValue"`
-	HeatPower               *float64 `json:"HeatPower"`
-	WaterCounterValue       *float64 `json:"WaterCounterValue"`
-	WaterFlowRate           *float64 `json:"WaterFlowRate"`
+	ElectricityCounterValue *float64 `json:"ElectricityCounterValue,omitempty"`
+	ElectricityPower        *float64 `json:"ElectricityPower,omitempty"`
+	GasCounterValue         *float64 `json:"GasCounterValue,omitempty"`
+	GasFlowRate             *float64 `json:"GasFlowRate,omitempty"`
+	HeatCounterValue        *float64 `json:"HeatCounterValue,omitempty"`
+	HeatPower               *float64 `json:"HeatPower,omitempty"`
+	WaterCounterValue       *float64 `json:"WaterCounterValue,omitempty"`
+	WaterFlowRate           *float64 `json:"WaterFlowRate,omitempty"`
 }

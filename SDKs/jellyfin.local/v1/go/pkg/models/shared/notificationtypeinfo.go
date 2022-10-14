@@ -1,9 +1,9 @@
 package shared
 
 type NotificationTypeInfo struct {
-	Category           *string `json:"Category"`
-	Enabled            *bool   `json:"Enabled"`
-	IsBasedOnUserEvent *bool   `json:"IsBasedOnUserEvent"`
-	Name               *string `json:"Name"`
-	Type               *string `json:"Type"`
+	Category           *string `json:"Category,omitempty"`
+	Enabled            *bool   `json:"Enabled,omitempty"`
+	IsBasedOnUserEvent *bool   `json:"IsBasedOnUserEvent,omitempty"`
+	Name               *string `json:"Name,omitempty"`
+	Type               *string `json:"Type,omitempty"`
 }

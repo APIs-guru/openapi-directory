@@ -1,15 +1,15 @@
 package shared
 
 type MySQLReplicaConfiguration struct {
-	CaCertificate           *string `json:"caCertificate"`
-	ClientCertificate       *string `json:"clientCertificate"`
-	ClientKey               *string `json:"clientKey"`
-	ConnectRetryInterval    *int32  `json:"connectRetryInterval"`
-	DumpFilePath            *string `json:"dumpFilePath"`
-	Kind                    *string `json:"kind"`
-	MasterHeartbeatPeriod   *string `json:"masterHeartbeatPeriod"`
-	Password                *string `json:"password"`
-	SslCipher               *string `json:"sslCipher"`
-	Username                *string `json:"username"`
-	VerifyServerCertificate *bool   `json:"verifyServerCertificate"`
+	CaCertificate           *string `json:"caCertificate,omitempty"`
+	ClientCertificate       *string `json:"clientCertificate,omitempty"`
+	ClientKey               *string `json:"clientKey,omitempty"`
+	ConnectRetryInterval    *int32  `json:"connectRetryInterval,omitempty"`
+	DumpFilePath            *string `json:"dumpFilePath,omitempty"`
+	Kind                    *string `json:"kind,omitempty"`
+	MasterHeartbeatPeriod   *string `json:"masterHeartbeatPeriod,omitempty"`
+	Password                *string `json:"password,omitempty"`
+	SslCipher               *string `json:"sslCipher,omitempty"`
+	Username                *string `json:"username,omitempty"`
+	VerifyServerCertificate *bool   `json:"verifyServerCertificate,omitempty"`
 }

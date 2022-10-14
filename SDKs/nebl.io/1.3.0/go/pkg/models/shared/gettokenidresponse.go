@@ -1,6 +1,6 @@
 package shared
 
 type GetTokenIDResponse struct {
-	TokenID   *string `json:"tokenId"`
-	TokenName *string `json:"tokenName"`
+	TokenID   *string `json:"tokenId,omitempty"`
+	TokenName *string `json:"tokenName,omitempty"`
 }

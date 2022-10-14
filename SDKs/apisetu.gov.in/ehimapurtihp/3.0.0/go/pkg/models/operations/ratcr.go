@@ -15,8 +15,8 @@ const (
 )
 
 type RatcrRequestBody struct {
-	CertificateParameters *RatcrRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *RatcrRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                RatcrRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Ratcr400ApplicationJSON struct {
-	Error            *Ratcr400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ratcr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ratcr400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ratcr400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ratcr401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Ratcr401ApplicationJSON struct {
-	Error            *Ratcr401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ratcr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ratcr401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ratcr401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ratcr404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Ratcr404ApplicationJSON struct {
-	Error            *Ratcr404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ratcr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ratcr404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ratcr404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ratcr500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Ratcr500ApplicationJSON struct {
-	Error            *Ratcr500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ratcr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ratcr500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ratcr500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ratcr502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Ratcr502ApplicationJSON struct {
-	Error            *Ratcr502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ratcr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ratcr502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ratcr502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ratcr503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Ratcr503ApplicationJSON struct {
-	Error            *Ratcr503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ratcr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ratcr503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ratcr503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ratcr504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Ratcr504ApplicationJSON struct {
-	Error            *Ratcr504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ratcr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ratcr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ratcr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type RatcrResponse struct {

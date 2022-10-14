@@ -15,22 +15,22 @@ type UpdateResponsePlanHeaders struct {
 }
 
 type UpdateResponsePlanRequestBodyChatChannel struct {
-	ChatbotSns []string               `json:"chatbotSns"`
-	Empty      map[string]interface{} `json:"empty"`
+	ChatbotSns []string               `json:"chatbotSns,omitempty"`
+	Empty      map[string]interface{} `json:"empty,omitempty"`
 }
 
 type UpdateResponsePlanRequestBody struct {
-	Actions                             []shared.Action                           `json:"actions"`
+	Actions                             []shared.Action                           `json:"actions,omitempty"`
 	Arn                                 string                                    `json:"arn"`
-	ChatChannel                         *UpdateResponsePlanRequestBodyChatChannel `json:"chatChannel"`
-	ClientToken                         *string                                   `json:"clientToken"`
-	DisplayName                         *string                                   `json:"displayName"`
-	Engagements                         []string                                  `json:"engagements"`
-	IncidentTemplateDedupeString        *string                                   `json:"incidentTemplateDedupeString"`
-	IncidentTemplateImpact              *int64                                    `json:"incidentTemplateImpact"`
-	IncidentTemplateNotificationTargets []shared.NotificationTargetItem           `json:"incidentTemplateNotificationTargets"`
-	IncidentTemplateSummary             *string                                   `json:"incidentTemplateSummary"`
-	IncidentTemplateTitle               *string                                   `json:"incidentTemplateTitle"`
+	ChatChannel                         *UpdateResponsePlanRequestBodyChatChannel `json:"chatChannel,omitempty"`
+	ClientToken                         *string                                   `json:"clientToken,omitempty"`
+	DisplayName                         *string                                   `json:"displayName,omitempty"`
+	Engagements                         []string                                  `json:"engagements,omitempty"`
+	IncidentTemplateDedupeString        *string                                   `json:"incidentTemplateDedupeString,omitempty"`
+	IncidentTemplateImpact              *int64                                    `json:"incidentTemplateImpact,omitempty"`
+	IncidentTemplateNotificationTargets []shared.NotificationTargetItem           `json:"incidentTemplateNotificationTargets,omitempty"`
+	IncidentTemplateSummary             *string                                   `json:"incidentTemplateSummary,omitempty"`
+	IncidentTemplateTitle               *string                                   `json:"incidentTemplateTitle,omitempty"`
 }
 
 type UpdateResponsePlanRequest struct {

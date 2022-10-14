@@ -38,24 +38,24 @@ const (
 )
 
 type Service struct {
-	ArtifactGcsURI             *string                     `json:"artifactGcsUri"`
-	CreateTime                 *string                     `json:"createTime"`
-	DatabaseType               *ServiceDatabaseTypeEnum    `json:"databaseType"`
-	EncryptionConfig           *EncryptionConfig           `json:"encryptionConfig"`
-	EndpointURI                *string                     `json:"endpointUri"`
-	HiveMetastoreConfig        *HiveMetastoreConfig        `json:"hiveMetastoreConfig"`
-	Labels                     map[string]string           `json:"labels"`
-	MaintenanceWindow          *MaintenanceWindow          `json:"maintenanceWindow"`
-	MetadataIntegration        *MetadataIntegration        `json:"metadataIntegration"`
-	MetadataManagementActivity *MetadataManagementActivity `json:"metadataManagementActivity"`
-	Name                       *string                     `json:"name"`
-	Network                    *string                     `json:"network"`
-	NetworkConfig              *NetworkConfig              `json:"networkConfig"`
-	Port                       *int32                      `json:"port"`
-	ReleaseChannel             *ServiceReleaseChannelEnum  `json:"releaseChannel"`
-	State                      *ServiceStateEnum           `json:"state"`
-	StateMessage               *string                     `json:"stateMessage"`
-	Tier                       *ServiceTierEnum            `json:"tier"`
-	UID                        *string                     `json:"uid"`
-	UpdateTime                 *string                     `json:"updateTime"`
+	ArtifactGcsURI             *string                     `json:"artifactGcsUri,omitempty"`
+	CreateTime                 *string                     `json:"createTime,omitempty"`
+	DatabaseType               *ServiceDatabaseTypeEnum    `json:"databaseType,omitempty"`
+	EncryptionConfig           *EncryptionConfig           `json:"encryptionConfig,omitempty"`
+	EndpointURI                *string                     `json:"endpointUri,omitempty"`
+	HiveMetastoreConfig        *HiveMetastoreConfig        `json:"hiveMetastoreConfig,omitempty"`
+	Labels                     map[string]string           `json:"labels,omitempty"`
+	MaintenanceWindow          *MaintenanceWindow          `json:"maintenanceWindow,omitempty"`
+	MetadataIntegration        *MetadataIntegration        `json:"metadataIntegration,omitempty"`
+	MetadataManagementActivity *MetadataManagementActivity `json:"metadataManagementActivity,omitempty"`
+	Name                       *string                     `json:"name,omitempty"`
+	Network                    *string                     `json:"network,omitempty"`
+	NetworkConfig              *NetworkConfig              `json:"networkConfig,omitempty"`
+	Port                       *int32                      `json:"port,omitempty"`
+	ReleaseChannel             *ServiceReleaseChannelEnum  `json:"releaseChannel,omitempty"`
+	State                      *ServiceStateEnum           `json:"state,omitempty"`
+	StateMessage               *string                     `json:"stateMessage,omitempty"`
+	Tier                       *ServiceTierEnum            `json:"tier,omitempty"`
+	UID                        *string                     `json:"uid,omitempty"`
+	UpdateTime                 *string                     `json:"updateTime,omitempty"`
 }

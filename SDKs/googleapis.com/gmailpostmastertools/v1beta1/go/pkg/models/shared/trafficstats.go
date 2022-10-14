@@ -11,15 +11,15 @@ const (
 )
 
 type TrafficStats struct {
-	DeliveryErrors          []DeliveryError                   `json:"deliveryErrors"`
-	DkimSuccessRatio        *float64                          `json:"dkimSuccessRatio"`
-	DmarcSuccessRatio       *float64                          `json:"dmarcSuccessRatio"`
-	DomainReputation        *TrafficStatsDomainReputationEnum `json:"domainReputation"`
-	InboundEncryptionRatio  *float64                          `json:"inboundEncryptionRatio"`
-	IPReputations           []IPReputation                    `json:"ipReputations"`
-	Name                    *string                           `json:"name"`
-	OutboundEncryptionRatio *float64                          `json:"outboundEncryptionRatio"`
-	SpammyFeedbackLoops     []FeedbackLoop                    `json:"spammyFeedbackLoops"`
-	SpfSuccessRatio         *float64                          `json:"spfSuccessRatio"`
-	UserReportedSpamRatio   *float64                          `json:"userReportedSpamRatio"`
+	DeliveryErrors          []DeliveryError                   `json:"deliveryErrors,omitempty"`
+	DkimSuccessRatio        *float64                          `json:"dkimSuccessRatio,omitempty"`
+	DmarcSuccessRatio       *float64                          `json:"dmarcSuccessRatio,omitempty"`
+	DomainReputation        *TrafficStatsDomainReputationEnum `json:"domainReputation,omitempty"`
+	InboundEncryptionRatio  *float64                          `json:"inboundEncryptionRatio,omitempty"`
+	IPReputations           []IPReputation                    `json:"ipReputations,omitempty"`
+	Name                    *string                           `json:"name,omitempty"`
+	OutboundEncryptionRatio *float64                          `json:"outboundEncryptionRatio,omitempty"`
+	SpammyFeedbackLoops     []FeedbackLoop                    `json:"spammyFeedbackLoops,omitempty"`
+	SpfSuccessRatio         *float64                          `json:"spfSuccessRatio,omitempty"`
+	UserReportedSpamRatio   *float64                          `json:"userReportedSpamRatio,omitempty"`
 }

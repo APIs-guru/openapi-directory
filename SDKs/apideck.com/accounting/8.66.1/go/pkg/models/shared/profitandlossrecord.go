@@ -1,8 +1,8 @@
 package shared
 
 type ProfitAndLossRecord struct {
-	ID    *string  `json:"id"`
-	Title *string  `json:"title"`
+	ID    *string  `json:"id,omitempty"`
+	Title *string  `json:"title,omitempty"`
 	Type  string   `json:"type"`
-	Value *float64 `json:"value"`
+	Value *float64 `json:"value,omitempty"`
 }

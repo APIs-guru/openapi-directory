@@ -1,6 +1,6 @@
 package shared
 
 type DeleteExportResponse struct {
-	ExportID     *string           `json:"exportId"`
-	ExportStatus *ExportStatusEnum `json:"exportStatus"`
+	ExportID     *string           `json:"exportId,omitempty"`
+	ExportStatus *ExportStatusEnum `json:"exportStatus,omitempty"`
 }

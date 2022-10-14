@@ -18,11 +18,11 @@ const (
 )
 
 type FirebaseAppInfo struct {
-	APIKeyID    *string                      `json:"apiKeyId"`
-	AppID       *string                      `json:"appId"`
-	DisplayName *string                      `json:"displayName"`
-	Name        *string                      `json:"name"`
-	Namespace   *string                      `json:"namespace"`
-	Platform    *FirebaseAppInfoPlatformEnum `json:"platform"`
-	State       *FirebaseAppInfoStateEnum    `json:"state"`
+	APIKeyID    *string                      `json:"apiKeyId,omitempty"`
+	AppID       *string                      `json:"appId,omitempty"`
+	DisplayName *string                      `json:"displayName,omitempty"`
+	Name        *string                      `json:"name,omitempty"`
+	Namespace   *string                      `json:"namespace,omitempty"`
+	Platform    *FirebaseAppInfoPlatformEnum `json:"platform,omitempty"`
+	State       *FirebaseAppInfoStateEnum    `json:"state,omitempty"`
 }

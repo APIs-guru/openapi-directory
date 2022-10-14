@@ -18,7 +18,7 @@ const (
 )
 
 type CreativeRestrictions struct {
-	CreativeFormat         *CreativeRestrictionsCreativeFormatEnum  `json:"creativeFormat"`
-	CreativeSpecifications []CreativeSpecification                  `json:"creativeSpecifications"`
-	SkippableAdType        *CreativeRestrictionsSkippableAdTypeEnum `json:"skippableAdType"`
+	CreativeFormat         *CreativeRestrictionsCreativeFormatEnum  `json:"creativeFormat,omitempty"`
+	CreativeSpecifications []CreativeSpecification                  `json:"creativeSpecifications,omitempty"`
+	SkippableAdType        *CreativeRestrictionsSkippableAdTypeEnum `json:"skippableAdType,omitempty"`
 }

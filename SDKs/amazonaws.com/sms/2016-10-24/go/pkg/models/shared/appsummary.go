@@ -5,23 +5,23 @@ import (
 )
 
 type AppSummary struct {
-	AppID                          *string                                `json:"appId"`
-	CreationTime                   *time.Time                             `json:"creationTime"`
-	Description                    *string                                `json:"description"`
-	ImportedAppID                  *string                                `json:"importedAppId"`
-	LastModified                   *time.Time                             `json:"lastModified"`
-	LatestReplicationTime          *time.Time                             `json:"latestReplicationTime"`
-	LaunchConfigurationStatus      *AppLaunchConfigurationStatusEnum      `json:"launchConfigurationStatus"`
-	LaunchDetails                  *LaunchDetails                         `json:"launchDetails"`
-	LaunchStatus                   *AppLaunchStatusEnum                   `json:"launchStatus"`
-	LaunchStatusMessage            *string                                `json:"launchStatusMessage"`
-	Name                           *string                                `json:"name"`
-	ReplicationConfigurationStatus *AppReplicationConfigurationStatusEnum `json:"replicationConfigurationStatus"`
-	ReplicationStatus              *AppReplicationStatusEnum              `json:"replicationStatus"`
-	ReplicationStatusMessage       *string                                `json:"replicationStatusMessage"`
-	RoleName                       *string                                `json:"roleName"`
-	Status                         *AppStatusEnum                         `json:"status"`
-	StatusMessage                  *string                                `json:"statusMessage"`
-	TotalServerGroups              *int64                                 `json:"totalServerGroups"`
-	TotalServers                   *int64                                 `json:"totalServers"`
+	AppID                          *string                                `json:"appId,omitempty"`
+	CreationTime                   *time.Time                             `json:"creationTime,omitempty"`
+	Description                    *string                                `json:"description,omitempty"`
+	ImportedAppID                  *string                                `json:"importedAppId,omitempty"`
+	LastModified                   *time.Time                             `json:"lastModified,omitempty"`
+	LatestReplicationTime          *time.Time                             `json:"latestReplicationTime,omitempty"`
+	LaunchConfigurationStatus      *AppLaunchConfigurationStatusEnum      `json:"launchConfigurationStatus,omitempty"`
+	LaunchDetails                  *LaunchDetails                         `json:"launchDetails,omitempty"`
+	LaunchStatus                   *AppLaunchStatusEnum                   `json:"launchStatus,omitempty"`
+	LaunchStatusMessage            *string                                `json:"launchStatusMessage,omitempty"`
+	Name                           *string                                `json:"name,omitempty"`
+	ReplicationConfigurationStatus *AppReplicationConfigurationStatusEnum `json:"replicationConfigurationStatus,omitempty"`
+	ReplicationStatus              *AppReplicationStatusEnum              `json:"replicationStatus,omitempty"`
+	ReplicationStatusMessage       *string                                `json:"replicationStatusMessage,omitempty"`
+	RoleName                       *string                                `json:"roleName,omitempty"`
+	Status                         *AppStatusEnum                         `json:"status,omitempty"`
+	StatusMessage                  *string                                `json:"statusMessage,omitempty"`
+	TotalServerGroups              *int64                                 `json:"totalServerGroups,omitempty"`
+	TotalServers                   *int64                                 `json:"totalServers,omitempty"`
 }

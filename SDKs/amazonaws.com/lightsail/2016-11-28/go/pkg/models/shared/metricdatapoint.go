@@ -5,11 +5,11 @@ import (
 )
 
 type MetricDatapoint struct {
-	Average     *float64        `json:"average"`
-	Maximum     *float64        `json:"maximum"`
-	Minimum     *float64        `json:"minimum"`
-	SampleCount *float64        `json:"sampleCount"`
-	Sum         *float64        `json:"sum"`
-	Timestamp   *time.Time      `json:"timestamp"`
-	Unit        *MetricUnitEnum `json:"unit"`
+	Average     *float64        `json:"average,omitempty"`
+	Maximum     *float64        `json:"maximum,omitempty"`
+	Minimum     *float64        `json:"minimum,omitempty"`
+	SampleCount *float64        `json:"sampleCount,omitempty"`
+	Sum         *float64        `json:"sum,omitempty"`
+	Timestamp   *time.Time      `json:"timestamp,omitempty"`
+	Unit        *MetricUnitEnum `json:"unit,omitempty"`
 }

@@ -21,26 +21,26 @@ const (
 )
 
 type CloudflareWorkerRuleResponseTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type CloudflareWorkerRuleResponseTarget struct {
-	Headers      []CloudflareWorkerRuleResponseTargetHeaders `json:"headers"`
-	SigningKeyID *string                                     `json:"signingKeyId"`
+	Headers      []CloudflareWorkerRuleResponseTargetHeaders `json:"headers,omitempty"`
+	SigningKeyID *string                                     `json:"signingKeyId,omitempty"`
 	URL          string                                      `json:"url"`
 }
 
 type CloudflareWorkerRuleResponse struct {
-	Links       map[string]interface{}                      `json:"_links"`
-	AppID       *string                                     `json:"appId"`
-	Created     *float64                                    `json:"created"`
-	ID          *string                                     `json:"id"`
-	Modified    *float64                                    `json:"modified"`
+	Links       map[string]interface{}                      `json:"_links,omitempty"`
+	AppID       *string                                     `json:"appId,omitempty"`
+	Created     *float64                                    `json:"created,omitempty"`
+	ID          *string                                     `json:"id,omitempty"`
+	Modified    *float64                                    `json:"modified,omitempty"`
 	RequestMode CloudflareWorkerRuleResponseRequestModeEnum `json:"requestMode"`
 	RuleType    CloudflareWorkerRuleResponseRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                                  `json:"source"`
-	Status      *CloudflareWorkerRuleResponseStatusEnum     `json:"status"`
+	Status      *CloudflareWorkerRuleResponseStatusEnum     `json:"status,omitempty"`
 	Target      CloudflareWorkerRuleResponseTarget          `json:"target"`
-	Version     *string                                     `json:"version"`
+	Version     *string                                     `json:"version,omitempty"`
 }

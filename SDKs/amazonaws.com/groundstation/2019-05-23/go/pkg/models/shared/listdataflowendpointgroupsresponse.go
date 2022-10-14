@@ -1,6 +1,6 @@
 package shared
 
 type ListDataflowEndpointGroupsResponse struct {
-	DataflowEndpointGroupList []DataflowEndpointListItem `json:"dataflowEndpointGroupList"`
-	NextToken                 *string                    `json:"nextToken"`
+	DataflowEndpointGroupList []DataflowEndpointListItem `json:"dataflowEndpointGroupList,omitempty"`
+	NextToken                 *string                    `json:"nextToken,omitempty"`
 }

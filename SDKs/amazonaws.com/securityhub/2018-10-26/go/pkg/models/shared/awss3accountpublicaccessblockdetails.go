@@ -1,8 +1,8 @@
 package shared
 
 type AwsS3AccountPublicAccessBlockDetails struct {
-	BlockPublicAcls       *bool `json:"BlockPublicAcls"`
-	BlockPublicPolicy     *bool `json:"BlockPublicPolicy"`
-	IgnorePublicAcls      *bool `json:"IgnorePublicAcls"`
-	RestrictPublicBuckets *bool `json:"RestrictPublicBuckets"`
+	BlockPublicAcls       *bool `json:"BlockPublicAcls,omitempty"`
+	BlockPublicPolicy     *bool `json:"BlockPublicPolicy,omitempty"`
+	IgnorePublicAcls      *bool `json:"IgnorePublicAcls,omitempty"`
+	RestrictPublicBuckets *bool `json:"RestrictPublicBuckets,omitempty"`
 }

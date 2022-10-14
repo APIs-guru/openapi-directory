@@ -1,6 +1,6 @@
 package shared
 
 type ListSimulationJobBatchesResponse struct {
-	NextToken                   *string                     `json:"nextToken"`
-	SimulationJobBatchSummaries []SimulationJobBatchSummary `json:"simulationJobBatchSummaries"`
+	NextToken                   *string                     `json:"nextToken,omitempty"`
+	SimulationJobBatchSummaries []SimulationJobBatchSummary `json:"simulationJobBatchSummaries,omitempty"`
 }

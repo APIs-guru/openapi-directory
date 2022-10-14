@@ -27,9 +27,9 @@ const (
 )
 
 type RegisterParameters struct {
-	Availability     *RegisterParametersAvailabilityEnum      `json:"availability"`
-	DomainName       *string                                  `json:"domainName"`
-	DomainNotices    []RegisterParametersDomainNoticesEnum    `json:"domainNotices"`
-	SupportedPrivacy []RegisterParametersSupportedPrivacyEnum `json:"supportedPrivacy"`
-	YearlyPrice      *Money                                   `json:"yearlyPrice"`
+	Availability     *RegisterParametersAvailabilityEnum      `json:"availability,omitempty"`
+	DomainName       *string                                  `json:"domainName,omitempty"`
+	DomainNotices    []RegisterParametersDomainNoticesEnum    `json:"domainNotices,omitempty"`
+	SupportedPrivacy []RegisterParametersSupportedPrivacyEnum `json:"supportedPrivacy,omitempty"`
+	YearlyPrice      *Money                                   `json:"yearlyPrice,omitempty"`
 }

@@ -90,24 +90,24 @@ const (
 )
 
 type GuestUnitFeatures struct {
-	BungalowOrVilla                  *bool                                                  `json:"bungalowOrVilla"`
-	BungalowOrVillaException         *GuestUnitFeaturesBungalowOrVillaExceptionEnum         `json:"bungalowOrVillaException"`
-	ConnectingUnitAvailable          *bool                                                  `json:"connectingUnitAvailable"`
-	ConnectingUnitAvailableException *GuestUnitFeaturesConnectingUnitAvailableExceptionEnum `json:"connectingUnitAvailableException"`
-	ExecutiveFloor                   *bool                                                  `json:"executiveFloor"`
-	ExecutiveFloorException          *GuestUnitFeaturesExecutiveFloorExceptionEnum          `json:"executiveFloorException"`
-	MaxAdultOccupantsCount           *int32                                                 `json:"maxAdultOccupantsCount"`
-	MaxAdultOccupantsCountException  *GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum  `json:"maxAdultOccupantsCountException"`
-	MaxChildOccupantsCount           *int32                                                 `json:"maxChildOccupantsCount"`
-	MaxChildOccupantsCountException  *GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum  `json:"maxChildOccupantsCountException"`
-	MaxOccupantsCount                *int32                                                 `json:"maxOccupantsCount"`
-	MaxOccupantsCountException       *GuestUnitFeaturesMaxOccupantsCountExceptionEnum       `json:"maxOccupantsCountException"`
-	PrivateHome                      *bool                                                  `json:"privateHome"`
-	PrivateHomeException             *GuestUnitFeaturesPrivateHomeExceptionEnum             `json:"privateHomeException"`
-	Suite                            *bool                                                  `json:"suite"`
-	SuiteException                   *GuestUnitFeaturesSuiteExceptionEnum                   `json:"suiteException"`
-	Tier                             *GuestUnitFeaturesTierEnum                             `json:"tier"`
-	TierException                    *GuestUnitFeaturesTierExceptionEnum                    `json:"tierException"`
-	TotalLivingAreas                 *LivingArea                                            `json:"totalLivingAreas"`
-	Views                            *ViewsFromUnit                                         `json:"views"`
+	BungalowOrVilla                  *bool                                                  `json:"bungalowOrVilla,omitempty"`
+	BungalowOrVillaException         *GuestUnitFeaturesBungalowOrVillaExceptionEnum         `json:"bungalowOrVillaException,omitempty"`
+	ConnectingUnitAvailable          *bool                                                  `json:"connectingUnitAvailable,omitempty"`
+	ConnectingUnitAvailableException *GuestUnitFeaturesConnectingUnitAvailableExceptionEnum `json:"connectingUnitAvailableException,omitempty"`
+	ExecutiveFloor                   *bool                                                  `json:"executiveFloor,omitempty"`
+	ExecutiveFloorException          *GuestUnitFeaturesExecutiveFloorExceptionEnum          `json:"executiveFloorException,omitempty"`
+	MaxAdultOccupantsCount           *int32                                                 `json:"maxAdultOccupantsCount,omitempty"`
+	MaxAdultOccupantsCountException  *GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum  `json:"maxAdultOccupantsCountException,omitempty"`
+	MaxChildOccupantsCount           *int32                                                 `json:"maxChildOccupantsCount,omitempty"`
+	MaxChildOccupantsCountException  *GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum  `json:"maxChildOccupantsCountException,omitempty"`
+	MaxOccupantsCount                *int32                                                 `json:"maxOccupantsCount,omitempty"`
+	MaxOccupantsCountException       *GuestUnitFeaturesMaxOccupantsCountExceptionEnum       `json:"maxOccupantsCountException,omitempty"`
+	PrivateHome                      *bool                                                  `json:"privateHome,omitempty"`
+	PrivateHomeException             *GuestUnitFeaturesPrivateHomeExceptionEnum             `json:"privateHomeException,omitempty"`
+	Suite                            *bool                                                  `json:"suite,omitempty"`
+	SuiteException                   *GuestUnitFeaturesSuiteExceptionEnum                   `json:"suiteException,omitempty"`
+	Tier                             *GuestUnitFeaturesTierEnum                             `json:"tier,omitempty"`
+	TierException                    *GuestUnitFeaturesTierExceptionEnum                    `json:"tierException,omitempty"`
+	TotalLivingAreas                 *LivingArea                                            `json:"totalLivingAreas,omitempty"`
+	Views                            *ViewsFromUnit                                         `json:"views,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type Scope struct {
-	ComplianceResourceID    *string  `json:"ComplianceResourceId"`
-	ComplianceResourceTypes []string `json:"ComplianceResourceTypes"`
-	TagKey                  *string  `json:"TagKey"`
-	TagValue                *string  `json:"TagValue"`
+	ComplianceResourceID    *string  `json:"ComplianceResourceId,omitempty"`
+	ComplianceResourceTypes []string `json:"ComplianceResourceTypes,omitempty"`
+	TagKey                  *string  `json:"TagKey,omitempty"`
+	TagValue                *string  `json:"TagValue,omitempty"`
 }

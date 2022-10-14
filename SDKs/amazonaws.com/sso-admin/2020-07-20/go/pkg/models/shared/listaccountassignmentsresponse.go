@@ -1,6 +1,6 @@
 package shared
 
 type ListAccountAssignmentsResponse struct {
-	AccountAssignments []AccountAssignment `json:"AccountAssignments"`
-	NextToken          *string             `json:"NextToken"`
+	AccountAssignments []AccountAssignment `json:"AccountAssignments,omitempty"`
+	NextToken          *string             `json:"NextToken,omitempty"`
 }

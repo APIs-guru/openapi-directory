@@ -9,6 +9,6 @@ const (
 )
 
 type UserRewardedContentAssignedTargetingOptionDetails struct {
-	TargetingOptionID   *string                                                                   `json:"targetingOptionId"`
-	UserRewardedContent *UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum `json:"userRewardedContent"`
+	TargetingOptionID   *string                                                                   `json:"targetingOptionId,omitempty"`
+	UserRewardedContent *UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum `json:"userRewardedContent,omitempty"`
 }

@@ -11,15 +11,15 @@ type ReposUpdatePullRequestReviewProtectionPathParams struct {
 }
 
 type ReposUpdatePullRequestReviewProtectionRequestBodyDismissalRestrictions struct {
-	Teams []string `json:"teams"`
-	Users []string `json:"users"`
+	Teams []string `json:"teams,omitempty"`
+	Users []string `json:"users,omitempty"`
 }
 
 type ReposUpdatePullRequestReviewProtectionRequestBody struct {
-	DismissStaleReviews          *bool                                                                   `json:"dismiss_stale_reviews"`
-	DismissalRestrictions        *ReposUpdatePullRequestReviewProtectionRequestBodyDismissalRestrictions `json:"dismissal_restrictions"`
-	RequireCodeOwnerReviews      *bool                                                                   `json:"require_code_owner_reviews"`
-	RequiredApprovingReviewCount *int64                                                                  `json:"required_approving_review_count"`
+	DismissStaleReviews          *bool                                                                   `json:"dismiss_stale_reviews,omitempty"`
+	DismissalRestrictions        *ReposUpdatePullRequestReviewProtectionRequestBodyDismissalRestrictions `json:"dismissal_restrictions,omitempty"`
+	RequireCodeOwnerReviews      *bool                                                                   `json:"require_code_owner_reviews,omitempty"`
+	RequiredApprovingReviewCount *int64                                                                  `json:"required_approving_review_count,omitempty"`
 }
 
 type ReposUpdatePullRequestReviewProtectionRequest struct {

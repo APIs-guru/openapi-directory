@@ -1,6 +1,6 @@
 package shared
 
 type PersonBasic struct {
-	Name       *string `json:"name"`
-	PersonGUID *string `json:"person_guid"`
+	Name       *string `json:"name,omitempty"`
+	PersonGUID *string `json:"person_guid,omitempty"`
 }

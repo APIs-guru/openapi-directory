@@ -10,7 +10,7 @@ const (
 )
 
 type ConfigManagementOperatorState struct {
-	DeploymentState *ConfigManagementOperatorStateDeploymentStateEnum `json:"deploymentState"`
-	Errors          []ConfigManagementInstallError                    `json:"errors"`
-	Version         *string                                           `json:"version"`
+	DeploymentState *ConfigManagementOperatorStateDeploymentStateEnum `json:"deploymentState,omitempty"`
+	Errors          []ConfigManagementInstallError                    `json:"errors,omitempty"`
+	Version         *string                                           `json:"version,omitempty"`
 }

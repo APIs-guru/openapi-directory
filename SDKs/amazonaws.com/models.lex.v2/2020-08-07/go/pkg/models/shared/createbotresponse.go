@@ -5,14 +5,14 @@ import (
 )
 
 type CreateBotResponse struct {
-	BotID                   *string           `json:"botId"`
-	BotName                 *string           `json:"botName"`
-	BotStatus               *BotStatusEnum    `json:"botStatus"`
-	BotTags                 map[string]string `json:"botTags"`
-	CreationDateTime        *time.Time        `json:"creationDateTime"`
-	DataPrivacy             *DataPrivacy      `json:"dataPrivacy"`
-	Description             *string           `json:"description"`
-	IdleSessionTTLInSeconds *int64            `json:"idleSessionTTLInSeconds"`
-	RoleArn                 *string           `json:"roleArn"`
-	TestBotAliasTags        map[string]string `json:"testBotAliasTags"`
+	BotID                   *string           `json:"botId,omitempty"`
+	BotName                 *string           `json:"botName,omitempty"`
+	BotStatus               *BotStatusEnum    `json:"botStatus,omitempty"`
+	BotTags                 map[string]string `json:"botTags,omitempty"`
+	CreationDateTime        *time.Time        `json:"creationDateTime,omitempty"`
+	DataPrivacy             *DataPrivacy      `json:"dataPrivacy,omitempty"`
+	Description             *string           `json:"description,omitempty"`
+	IdleSessionTTLInSeconds *int64            `json:"idleSessionTTLInSeconds,omitempty"`
+	RoleArn                 *string           `json:"roleArn,omitempty"`
+	TestBotAliasTags        map[string]string `json:"testBotAliasTags,omitempty"`
 }

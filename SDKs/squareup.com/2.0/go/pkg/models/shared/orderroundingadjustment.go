@@ -1,7 +1,7 @@
 package shared
 
 type OrderRoundingAdjustment struct {
-	AmountMoney *Money  `json:"amount_money"`
-	Name        *string `json:"name"`
-	UID         *string `json:"uid"`
+	AmountMoney *Money  `json:"amount_money,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	UID         *string `json:"uid,omitempty"`
 }

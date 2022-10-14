@@ -1,19 +1,19 @@
 package shared
 
 type BatchWriteOperationResponse struct {
-	AddFacetToObject       map[string]interface{}               `json:"AddFacetToObject"`
-	AttachObject           *BatchAttachObjectResponse           `json:"AttachObject"`
-	AttachPolicy           map[string]interface{}               `json:"AttachPolicy"`
-	AttachToIndex          *BatchAttachToIndexResponse          `json:"AttachToIndex"`
-	AttachTypedLink        *BatchAttachTypedLinkResponse        `json:"AttachTypedLink"`
-	CreateIndex            *BatchCreateIndexResponse            `json:"CreateIndex"`
-	CreateObject           *BatchCreateObjectResponse           `json:"CreateObject"`
-	DeleteObject           map[string]interface{}               `json:"DeleteObject"`
-	DetachFromIndex        *BatchDetachFromIndexResponse        `json:"DetachFromIndex"`
-	DetachObject           *BatchDetachObjectResponse           `json:"DetachObject"`
-	DetachPolicy           map[string]interface{}               `json:"DetachPolicy"`
-	DetachTypedLink        map[string]interface{}               `json:"DetachTypedLink"`
-	RemoveFacetFromObject  map[string]interface{}               `json:"RemoveFacetFromObject"`
-	UpdateLinkAttributes   map[string]interface{}               `json:"UpdateLinkAttributes"`
-	UpdateObjectAttributes *BatchUpdateObjectAttributesResponse `json:"UpdateObjectAttributes"`
+	AddFacetToObject       map[string]interface{}               `json:"AddFacetToObject,omitempty"`
+	AttachObject           *BatchAttachObjectResponse           `json:"AttachObject,omitempty"`
+	AttachPolicy           map[string]interface{}               `json:"AttachPolicy,omitempty"`
+	AttachToIndex          *BatchAttachToIndexResponse          `json:"AttachToIndex,omitempty"`
+	AttachTypedLink        *BatchAttachTypedLinkResponse        `json:"AttachTypedLink,omitempty"`
+	CreateIndex            *BatchCreateIndexResponse            `json:"CreateIndex,omitempty"`
+	CreateObject           *BatchCreateObjectResponse           `json:"CreateObject,omitempty"`
+	DeleteObject           map[string]interface{}               `json:"DeleteObject,omitempty"`
+	DetachFromIndex        *BatchDetachFromIndexResponse        `json:"DetachFromIndex,omitempty"`
+	DetachObject           *BatchDetachObjectResponse           `json:"DetachObject,omitempty"`
+	DetachPolicy           map[string]interface{}               `json:"DetachPolicy,omitempty"`
+	DetachTypedLink        map[string]interface{}               `json:"DetachTypedLink,omitempty"`
+	RemoveFacetFromObject  map[string]interface{}               `json:"RemoveFacetFromObject,omitempty"`
+	UpdateLinkAttributes   map[string]interface{}               `json:"UpdateLinkAttributes,omitempty"`
+	UpdateObjectAttributes *BatchUpdateObjectAttributesResponse `json:"UpdateObjectAttributes,omitempty"`
 }

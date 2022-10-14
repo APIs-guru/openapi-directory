@@ -1,5 +1,5 @@
 package shared
 
 type CloudWatchEventsExecutionDataDetails struct {
-	Included *bool `json:"included"`
+	Included *bool `json:"included,omitempty"`
 }

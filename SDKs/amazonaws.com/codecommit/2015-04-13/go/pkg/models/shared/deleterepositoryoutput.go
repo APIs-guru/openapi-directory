@@ -1,5 +1,5 @@
 package shared
 
 type DeleteRepositoryOutput struct {
-	RepositoryID *string `json:"repositoryId"`
+	RepositoryID *string `json:"repositoryId,omitempty"`
 }

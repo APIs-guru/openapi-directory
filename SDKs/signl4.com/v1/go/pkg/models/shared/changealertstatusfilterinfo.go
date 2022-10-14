@@ -5,9 +5,9 @@ import (
 )
 
 type ChangeAlertStatusFilterInfo struct {
-	CategoryIds []string   `json:"categoryIds"`
-	MaxDate     *time.Time `json:"maxDate"`
-	MinDate     *time.Time `json:"minDate"`
-	Scope       *int32     `json:"scope"`
-	TeamIds     []string   `json:"teamIds"`
+	CategoryIds []string   `json:"categoryIds,omitempty"`
+	MaxDate     *time.Time `json:"maxDate,omitempty"`
+	MinDate     *time.Time `json:"minDate,omitempty"`
+	Scope       *int32     `json:"scope,omitempty"`
+	TeamIds     []string   `json:"teamIds,omitempty"`
 }

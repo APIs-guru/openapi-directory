@@ -20,21 +20,21 @@ const (
 )
 
 type Instance struct {
-	AppEngineRelease *string                   `json:"appEngineRelease"`
-	Availability     *InstanceAvailabilityEnum `json:"availability"`
-	AverageLatency   *int32                    `json:"averageLatency"`
-	Errors           *int32                    `json:"errors"`
-	ID               *string                   `json:"id"`
-	MemoryUsage      *string                   `json:"memoryUsage"`
-	Name             *string                   `json:"name"`
-	QPS              *float32                  `json:"qps"`
-	Requests         *int32                    `json:"requests"`
-	StartTime        *string                   `json:"startTime"`
-	VMDebugEnabled   *bool                     `json:"vmDebugEnabled"`
-	VMID             *string                   `json:"vmId"`
-	VMIP             *string                   `json:"vmIp"`
-	VMLiveness       *InstanceVMLivenessEnum   `json:"vmLiveness"`
-	VMName           *string                   `json:"vmName"`
-	VMStatus         *string                   `json:"vmStatus"`
-	VMZoneName       *string                   `json:"vmZoneName"`
+	AppEngineRelease *string                   `json:"appEngineRelease,omitempty"`
+	Availability     *InstanceAvailabilityEnum `json:"availability,omitempty"`
+	AverageLatency   *int32                    `json:"averageLatency,omitempty"`
+	Errors           *int32                    `json:"errors,omitempty"`
+	ID               *string                   `json:"id,omitempty"`
+	MemoryUsage      *string                   `json:"memoryUsage,omitempty"`
+	Name             *string                   `json:"name,omitempty"`
+	QPS              *float32                  `json:"qps,omitempty"`
+	Requests         *int32                    `json:"requests,omitempty"`
+	StartTime        *string                   `json:"startTime,omitempty"`
+	VMDebugEnabled   *bool                     `json:"vmDebugEnabled,omitempty"`
+	VMID             *string                   `json:"vmId,omitempty"`
+	VMIP             *string                   `json:"vmIp,omitempty"`
+	VMLiveness       *InstanceVMLivenessEnum   `json:"vmLiveness,omitempty"`
+	VMName           *string                   `json:"vmName,omitempty"`
+	VMStatus         *string                   `json:"vmStatus,omitempty"`
+	VMZoneName       *string                   `json:"vmZoneName,omitempty"`
 }

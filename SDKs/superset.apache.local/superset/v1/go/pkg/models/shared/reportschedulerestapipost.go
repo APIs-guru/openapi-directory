@@ -23,24 +23,24 @@ const (
 )
 
 type ReportScheduleRestAPIPost struct {
-	Active              *bool                                       `json:"active"`
-	Chart               *int32                                      `json:"chart"`
-	ContextMarkdown     *string                                     `json:"context_markdown"`
-	CreationMethod      *interface{}                                `json:"creation_method"`
+	Active              *bool                                       `json:"active,omitempty"`
+	Chart               *int32                                      `json:"chart,omitempty"`
+	ContextMarkdown     *string                                     `json:"context_markdown,omitempty"`
+	CreationMethod      *interface{}                                `json:"creation_method,omitempty"`
 	Crontab             string                                      `json:"crontab"`
-	Dashboard           *int32                                      `json:"dashboard"`
-	Database            *int32                                      `json:"database"`
-	Description         *string                                     `json:"description"`
-	GracePeriod         *int32                                      `json:"grace_period"`
-	LogRetention        *int32                                      `json:"log_retention"`
+	Dashboard           *int32                                      `json:"dashboard,omitempty"`
+	Database            *int32                                      `json:"database,omitempty"`
+	Description         *string                                     `json:"description,omitempty"`
+	GracePeriod         *int32                                      `json:"grace_period,omitempty"`
+	LogRetention        *int32                                      `json:"log_retention,omitempty"`
 	Name                string                                      `json:"name"`
-	Owners              []int32                                     `json:"owners"`
-	Recipients          []ReportRecipient                           `json:"recipients"`
-	ReportFormat        *ReportScheduleRestAPIPostReportFormatEnum  `json:"report_format"`
-	SQL                 *string                                     `json:"sql"`
-	Timezone            *string                                     `json:"timezone"`
+	Owners              []int32                                     `json:"owners,omitempty"`
+	Recipients          []ReportRecipient                           `json:"recipients,omitempty"`
+	ReportFormat        *ReportScheduleRestAPIPostReportFormatEnum  `json:"report_format,omitempty"`
+	SQL                 *string                                     `json:"sql,omitempty"`
+	Timezone            *string                                     `json:"timezone,omitempty"`
 	Type                ReportScheduleRestAPIPostTypeEnum           `json:"type"`
-	ValidatorConfigJSON *ValidatorConfigJSON                        `json:"validator_config_json"`
-	ValidatorType       *ReportScheduleRestAPIPostValidatorTypeEnum `json:"validator_type"`
-	WorkingTimeout      *int32                                      `json:"working_timeout"`
+	ValidatorConfigJSON *ValidatorConfigJSON                        `json:"validator_config_json,omitempty"`
+	ValidatorType       *ReportScheduleRestAPIPostValidatorTypeEnum `json:"validator_type,omitempty"`
+	WorkingTimeout      *int32                                      `json:"working_timeout,omitempty"`
 }

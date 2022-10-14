@@ -44,12 +44,12 @@ const (
 )
 
 type UpdateObjectStorageBucketACL200ApplicationJSON struct {
-	ACL    *UpdateObjectStorageBucketACL200ApplicationJSONACLEnum `json:"acl"`
-	ACLXML *string                                                `json:"acl_xml"`
+	ACL    *UpdateObjectStorageBucketACL200ApplicationJSONACLEnum `json:"acl,omitempty"`
+	ACLXML *string                                                `json:"acl_xml,omitempty"`
 }
 
 type UpdateObjectStorageBucketACLDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateObjectStorageBucketACLResponse struct {

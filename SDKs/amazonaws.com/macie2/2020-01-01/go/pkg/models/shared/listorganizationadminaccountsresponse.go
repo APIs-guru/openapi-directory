@@ -1,6 +1,6 @@
 package shared
 
 type ListOrganizationAdminAccountsResponse struct {
-	AdminAccounts []AdminAccount `json:"adminAccounts"`
-	NextToken     *string        `json:"nextToken"`
+	AdminAccounts []AdminAccount `json:"adminAccounts,omitempty"`
+	NextToken     *string        `json:"nextToken,omitempty"`
 }

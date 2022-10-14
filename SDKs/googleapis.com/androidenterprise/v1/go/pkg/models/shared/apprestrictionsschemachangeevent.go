@@ -1,5 +1,5 @@
 package shared
 
 type AppRestrictionsSchemaChangeEvent struct {
-	ProductID *string `json:"productId"`
+	ProductID *string `json:"productId,omitempty"`
 }

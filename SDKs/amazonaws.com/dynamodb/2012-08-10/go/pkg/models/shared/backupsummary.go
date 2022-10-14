@@ -5,14 +5,14 @@ import (
 )
 
 type BackupSummary struct {
-	BackupArn              *string           `json:"BackupArn"`
-	BackupCreationDateTime *time.Time        `json:"BackupCreationDateTime"`
-	BackupExpiryDateTime   *time.Time        `json:"BackupExpiryDateTime"`
-	BackupName             *string           `json:"BackupName"`
-	BackupSizeBytes        *int64            `json:"BackupSizeBytes"`
-	BackupStatus           *BackupStatusEnum `json:"BackupStatus"`
-	BackupType             *BackupTypeEnum   `json:"BackupType"`
-	TableArn               *string           `json:"TableArn"`
-	TableID                *string           `json:"TableId"`
-	TableName              *string           `json:"TableName"`
+	BackupArn              *string           `json:"BackupArn,omitempty"`
+	BackupCreationDateTime *time.Time        `json:"BackupCreationDateTime,omitempty"`
+	BackupExpiryDateTime   *time.Time        `json:"BackupExpiryDateTime,omitempty"`
+	BackupName             *string           `json:"BackupName,omitempty"`
+	BackupSizeBytes        *int64            `json:"BackupSizeBytes,omitempty"`
+	BackupStatus           *BackupStatusEnum `json:"BackupStatus,omitempty"`
+	BackupType             *BackupTypeEnum   `json:"BackupType,omitempty"`
+	TableArn               *string           `json:"TableArn,omitempty"`
+	TableID                *string           `json:"TableId,omitempty"`
+	TableName              *string           `json:"TableName,omitempty"`
 }

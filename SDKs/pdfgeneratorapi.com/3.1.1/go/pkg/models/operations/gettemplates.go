@@ -5,7 +5,7 @@ import (
 )
 
 type GetTemplates200ApplicationJSON struct {
-	Response []shared.Template `json:"response"`
+	Response []shared.Template `json:"response,omitempty"`
 }
 
 type GetTemplates401ApplicationJSONErrorEnum string
@@ -24,8 +24,8 @@ const (
 )
 
 type GetTemplates401ApplicationJSON struct {
-	Error  *GetTemplates401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetTemplates401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetTemplates403ApplicationJSONErrorEnum string
@@ -35,8 +35,8 @@ const (
 )
 
 type GetTemplates403ApplicationJSON struct {
-	Error  *GetTemplates403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetTemplates403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetTemplates404ApplicationJSONErrorEnum string
@@ -48,8 +48,8 @@ const (
 )
 
 type GetTemplates404ApplicationJSON struct {
-	Error  *GetTemplates404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetTemplates404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetTemplates422ApplicationJSONErrorEnum string
@@ -62,13 +62,13 @@ const (
 )
 
 type GetTemplates422ApplicationJSON struct {
-	Error  *GetTemplates422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *GetTemplates422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type GetTemplates500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type GetTemplatesResponse struct {

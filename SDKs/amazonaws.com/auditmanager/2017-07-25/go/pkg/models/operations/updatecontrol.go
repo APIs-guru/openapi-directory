@@ -19,12 +19,12 @@ type UpdateControlHeaders struct {
 }
 
 type UpdateControlRequestBody struct {
-	ActionPlanInstructions *string                       `json:"actionPlanInstructions"`
-	ActionPlanTitle        *string                       `json:"actionPlanTitle"`
+	ActionPlanInstructions *string                       `json:"actionPlanInstructions,omitempty"`
+	ActionPlanTitle        *string                       `json:"actionPlanTitle,omitempty"`
 	ControlMappingSources  []shared.ControlMappingSource `json:"controlMappingSources"`
-	Description            *string                       `json:"description"`
+	Description            *string                       `json:"description,omitempty"`
 	Name                   string                        `json:"name"`
-	TestingInformation     *string                       `json:"testingInformation"`
+	TestingInformation     *string                       `json:"testingInformation,omitempty"`
 }
 
 type UpdateControlRequest struct {

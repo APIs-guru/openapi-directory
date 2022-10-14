@@ -17,8 +17,8 @@ const (
 )
 
 type ReportStatus struct {
-	Failure      *ReportFailure          `json:"failure"`
-	FinishTimeMs *string                 `json:"finishTimeMs"`
-	Format       *ReportStatusFormatEnum `json:"format"`
-	State        *ReportStatusStateEnum  `json:"state"`
+	Failure      *ReportFailure          `json:"failure,omitempty"`
+	FinishTimeMs *string                 `json:"finishTimeMs,omitempty"`
+	Format       *ReportStatusFormatEnum `json:"format,omitempty"`
+	State        *ReportStatusStateEnum  `json:"state,omitempty"`
 }

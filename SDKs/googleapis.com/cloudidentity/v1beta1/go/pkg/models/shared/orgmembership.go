@@ -8,8 +8,8 @@ const (
 )
 
 type OrgMembership struct {
-	Member    *string                `json:"member"`
-	MemberURI *string                `json:"memberUri"`
-	Name      *string                `json:"name"`
-	Type      *OrgMembershipTypeEnum `json:"type"`
+	Member    *string                `json:"member,omitempty"`
+	MemberURI *string                `json:"memberUri,omitempty"`
+	Name      *string                `json:"name,omitempty"`
+	Type      *OrgMembershipTypeEnum `json:"type,omitempty"`
 }

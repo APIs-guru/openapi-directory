@@ -19,6 +19,6 @@ const (
 )
 
 type VideoTargeting struct {
-	ExcludedPositionTypes []VideoTargetingExcludedPositionTypesEnum `json:"excludedPositionTypes"`
-	TargetedPositionTypes []VideoTargetingTargetedPositionTypesEnum `json:"targetedPositionTypes"`
+	ExcludedPositionTypes []VideoTargetingExcludedPositionTypesEnum `json:"excludedPositionTypes,omitempty"`
+	TargetedPositionTypes []VideoTargetingTargetedPositionTypesEnum `json:"targetedPositionTypes,omitempty"`
 }

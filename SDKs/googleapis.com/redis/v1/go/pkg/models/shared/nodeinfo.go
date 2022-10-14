@@ -1,6 +1,6 @@
 package shared
 
 type NodeInfo struct {
-	ID   *string `json:"id"`
-	Zone *string `json:"zone"`
+	ID   *string `json:"id,omitempty"`
+	Zone *string `json:"zone,omitempty"`
 }

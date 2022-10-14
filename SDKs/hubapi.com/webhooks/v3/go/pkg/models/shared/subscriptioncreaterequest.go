@@ -30,7 +30,7 @@ const (
 )
 
 type SubscriptionCreateRequest struct {
-	Active       *bool                                  `json:"active"`
+	Active       *bool                                  `json:"active,omitempty"`
 	EventType    SubscriptionCreateRequestEventTypeEnum `json:"eventType"`
-	PropertyName *string                                `json:"propertyName"`
+	PropertyName *string                                `json:"propertyName,omitempty"`
 }

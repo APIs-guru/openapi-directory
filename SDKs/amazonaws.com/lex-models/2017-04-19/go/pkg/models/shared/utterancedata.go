@@ -5,9 +5,9 @@ import (
 )
 
 type UtteranceData struct {
-	Count            *int64     `json:"count"`
-	DistinctUsers    *int64     `json:"distinctUsers"`
-	FirstUtteredDate *time.Time `json:"firstUtteredDate"`
-	LastUtteredDate  *time.Time `json:"lastUtteredDate"`
-	UtteranceString  *string    `json:"utteranceString"`
+	Count            *int64     `json:"count,omitempty"`
+	DistinctUsers    *int64     `json:"distinctUsers,omitempty"`
+	FirstUtteredDate *time.Time `json:"firstUtteredDate,omitempty"`
+	LastUtteredDate  *time.Time `json:"lastUtteredDate,omitempty"`
+	UtteranceString  *string    `json:"utteranceString,omitempty"`
 }

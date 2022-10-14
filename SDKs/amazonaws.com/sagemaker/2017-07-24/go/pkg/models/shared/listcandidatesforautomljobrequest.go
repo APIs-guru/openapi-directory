@@ -2,10 +2,10 @@ package shared
 
 type ListCandidatesForAutoMlJobRequest struct {
 	AutoMlJobName       string               `json:"AutoMLJobName"`
-	CandidateNameEquals *string              `json:"CandidateNameEquals"`
-	MaxResults          *int64               `json:"MaxResults"`
-	NextToken           *string              `json:"NextToken"`
-	SortBy              *CandidateSortByEnum `json:"SortBy"`
-	SortOrder           *AutoMlSortOrderEnum `json:"SortOrder"`
-	StatusEquals        *CandidateStatusEnum `json:"StatusEquals"`
+	CandidateNameEquals *string              `json:"CandidateNameEquals,omitempty"`
+	MaxResults          *int64               `json:"MaxResults,omitempty"`
+	NextToken           *string              `json:"NextToken,omitempty"`
+	SortBy              *CandidateSortByEnum `json:"SortBy,omitempty"`
+	SortOrder           *AutoMlSortOrderEnum `json:"SortOrder,omitempty"`
+	StatusEquals        *CandidateStatusEnum `json:"StatusEquals,omitempty"`
 }

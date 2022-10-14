@@ -11,10 +11,10 @@ const (
 )
 
 type FinalizedDeal struct {
-	Deal              *Deal                               `json:"deal"`
-	DealPausingInfo   *DealPausingInfo                    `json:"dealPausingInfo"`
-	DealServingStatus *FinalizedDealDealServingStatusEnum `json:"dealServingStatus"`
-	Name              *string                             `json:"name"`
-	ReadyToServe      *bool                               `json:"readyToServe"`
-	RtbMetrics        *RtbMetrics                         `json:"rtbMetrics"`
+	Deal              *Deal                               `json:"deal,omitempty"`
+	DealPausingInfo   *DealPausingInfo                    `json:"dealPausingInfo,omitempty"`
+	DealServingStatus *FinalizedDealDealServingStatusEnum `json:"dealServingStatus,omitempty"`
+	Name              *string                             `json:"name,omitempty"`
+	ReadyToServe      *bool                               `json:"readyToServe,omitempty"`
+	RtbMetrics        *RtbMetrics                         `json:"rtbMetrics,omitempty"`
 }

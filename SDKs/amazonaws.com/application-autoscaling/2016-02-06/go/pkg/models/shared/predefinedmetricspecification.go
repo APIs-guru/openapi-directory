@@ -2,5 +2,5 @@ package shared
 
 type PredefinedMetricSpecification struct {
 	PredefinedMetricType MetricTypeEnum `json:"PredefinedMetricType"`
-	ResourceLabel        *string        `json:"ResourceLabel"`
+	ResourceLabel        *string        `json:"ResourceLabel,omitempty"`
 }

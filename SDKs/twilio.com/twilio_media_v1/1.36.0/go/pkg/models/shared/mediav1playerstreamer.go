@@ -16,16 +16,16 @@ const (
 )
 
 type MediaV1PlayerStreamer struct {
-	AccountSid           *string                                        `json:"account_sid"`
-	DateCreated          *time.Time                                     `json:"date_created"`
-	DateUpdated          *time.Time                                     `json:"date_updated"`
-	EndedReason          *PlayerStreamerEnumEndedReasonEnum             `json:"ended_reason"`
-	Links                map[string]interface{}                         `json:"links"`
-	MaxDuration          *int64                                         `json:"max_duration"`
-	Sid                  *string                                        `json:"sid"`
-	Status               *PlayerStreamerEnumStatusEnum                  `json:"status"`
-	StatusCallback       *string                                        `json:"status_callback"`
-	StatusCallbackMethod *MediaV1PlayerStreamerStatusCallbackMethodEnum `json:"status_callback_method"`
-	URL                  *string                                        `json:"url"`
-	Video                *bool                                          `json:"video"`
+	AccountSid           *string                                        `json:"account_sid,omitempty"`
+	DateCreated          *time.Time                                     `json:"date_created,omitempty"`
+	DateUpdated          *time.Time                                     `json:"date_updated,omitempty"`
+	EndedReason          *PlayerStreamerEnumEndedReasonEnum             `json:"ended_reason,omitempty"`
+	Links                map[string]interface{}                         `json:"links,omitempty"`
+	MaxDuration          *int64                                         `json:"max_duration,omitempty"`
+	Sid                  *string                                        `json:"sid,omitempty"`
+	Status               *PlayerStreamerEnumStatusEnum                  `json:"status,omitempty"`
+	StatusCallback       *string                                        `json:"status_callback,omitempty"`
+	StatusCallbackMethod *MediaV1PlayerStreamerStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	URL                  *string                                        `json:"url,omitempty"`
+	Video                *bool                                          `json:"video,omitempty"`
 }

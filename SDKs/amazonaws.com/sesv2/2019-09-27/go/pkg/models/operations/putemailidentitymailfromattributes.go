@@ -22,8 +22,8 @@ const (
 )
 
 type PutEmailIdentityMailFromAttributesRequestBody struct {
-	BehaviorOnMxFailure *PutEmailIdentityMailFromAttributesRequestBodyBehaviorOnMxFailureEnum `json:"BehaviorOnMxFailure"`
-	MailFromDomain      *string                                                               `json:"MailFromDomain"`
+	BehaviorOnMxFailure *PutEmailIdentityMailFromAttributesRequestBodyBehaviorOnMxFailureEnum `json:"BehaviorOnMxFailure,omitempty"`
+	MailFromDomain      *string                                                               `json:"MailFromDomain,omitempty"`
 }
 
 type PutEmailIdentityMailFromAttributesRequest struct {

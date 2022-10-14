@@ -18,6 +18,6 @@ const (
 )
 
 type FindingTypeStats struct {
-	FindingCount *int32                           `json:"findingCount"`
-	FindingType  *FindingTypeStatsFindingTypeEnum `json:"findingType"`
+	FindingCount *int32                           `json:"findingCount,omitempty"`
+	FindingType  *FindingTypeStatsFindingTypeEnum `json:"findingType,omitempty"`
 }

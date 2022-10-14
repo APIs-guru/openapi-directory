@@ -5,16 +5,16 @@ import (
 )
 
 type DescribeActionResponse struct {
-	ActionArn          *string             `json:"ActionArn"`
-	ActionName         *string             `json:"ActionName"`
-	ActionType         *string             `json:"ActionType"`
-	CreatedBy          *UserContext        `json:"CreatedBy"`
-	CreationTime       *time.Time          `json:"CreationTime"`
-	Description        *string             `json:"Description"`
-	LastModifiedBy     *UserContext        `json:"LastModifiedBy"`
-	LastModifiedTime   *time.Time          `json:"LastModifiedTime"`
-	MetadataProperties *MetadataProperties `json:"MetadataProperties"`
-	Properties         map[string]string   `json:"Properties"`
-	Source             *ActionSource       `json:"Source"`
-	Status             *ActionStatusEnum   `json:"Status"`
+	ActionArn          *string             `json:"ActionArn,omitempty"`
+	ActionName         *string             `json:"ActionName,omitempty"`
+	ActionType         *string             `json:"ActionType,omitempty"`
+	CreatedBy          *UserContext        `json:"CreatedBy,omitempty"`
+	CreationTime       *time.Time          `json:"CreationTime,omitempty"`
+	Description        *string             `json:"Description,omitempty"`
+	LastModifiedBy     *UserContext        `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime   *time.Time          `json:"LastModifiedTime,omitempty"`
+	MetadataProperties *MetadataProperties `json:"MetadataProperties,omitempty"`
+	Properties         map[string]string   `json:"Properties,omitempty"`
+	Source             *ActionSource       `json:"Source,omitempty"`
+	Status             *ActionStatusEnum   `json:"Status,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type AdvertiserGroup struct {
-	AccountID *string `json:"accountId"`
-	ID        *string `json:"id"`
-	Kind      *string `json:"kind"`
-	Name      *string `json:"name"`
+	AccountID *string `json:"accountId,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Kind      *string `json:"kind,omitempty"`
+	Name      *string `json:"name,omitempty"`
 }

@@ -10,9 +10,9 @@ const (
 )
 
 type ProductOptionFields struct {
-	ID         *int32                             `json:"id"`
-	Name       *string                            `json:"name"`
-	OptionType *ProductOptionFieldsOptionTypeEnum `json:"option_type"`
-	Position   *int32                             `json:"position"`
-	Values     []ProductOptionValueFields         `json:"values"`
+	ID         *int32                             `json:"id,omitempty"`
+	Name       *string                            `json:"name,omitempty"`
+	OptionType *ProductOptionFieldsOptionTypeEnum `json:"option_type,omitempty"`
+	Position   *int32                             `json:"position,omitempty"`
+	Values     []ProductOptionValueFields         `json:"values,omitempty"`
 }

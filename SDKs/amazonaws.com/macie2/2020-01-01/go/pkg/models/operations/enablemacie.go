@@ -26,9 +26,9 @@ const (
 )
 
 type EnableMacieRequestBody struct {
-	ClientToken                *string                                               `json:"clientToken"`
-	FindingPublishingFrequency *EnableMacieRequestBodyFindingPublishingFrequencyEnum `json:"findingPublishingFrequency"`
-	Status                     *EnableMacieRequestBodyStatusEnum                     `json:"status"`
+	ClientToken                *string                                               `json:"clientToken,omitempty"`
+	FindingPublishingFrequency *EnableMacieRequestBodyFindingPublishingFrequencyEnum `json:"findingPublishingFrequency,omitempty"`
+	Status                     *EnableMacieRequestBodyStatusEnum                     `json:"status,omitempty"`
 }
 
 type EnableMacieRequest struct {

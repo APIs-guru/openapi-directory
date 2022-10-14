@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaAccessToken struct {
-	AccessToken            *string `json:"accessToken"`
-	AccessTokenExpireTime  *string `json:"accessTokenExpireTime"`
-	RefreshToken           *string `json:"refreshToken"`
-	RefreshTokenExpireTime *string `json:"refreshTokenExpireTime"`
-	TokenType              *string `json:"tokenType"`
+	AccessToken            *string `json:"accessToken,omitempty"`
+	AccessTokenExpireTime  *string `json:"accessTokenExpireTime,omitempty"`
+	RefreshToken           *string `json:"refreshToken,omitempty"`
+	RefreshTokenExpireTime *string `json:"refreshTokenExpireTime,omitempty"`
+	TokenType              *string `json:"tokenType,omitempty"`
 }

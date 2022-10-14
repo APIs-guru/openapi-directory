@@ -1,6 +1,6 @@
 package shared
 
 type ListEnvironmentsResult struct {
-	EnvironmentIds []string `json:"environmentIds"`
-	NextToken      *string  `json:"nextToken"`
+	EnvironmentIds []string `json:"environmentIds,omitempty"`
+	NextToken      *string  `json:"nextToken,omitempty"`
 }

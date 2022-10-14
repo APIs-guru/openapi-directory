@@ -11,13 +11,13 @@ type PutFindingsPublicationConfigurationHeaders struct {
 }
 
 type PutFindingsPublicationConfigurationRequestBodySecurityHubConfiguration struct {
-	PublishClassificationFindings *bool `json:"publishClassificationFindings"`
-	PublishPolicyFindings         *bool `json:"publishPolicyFindings"`
+	PublishClassificationFindings *bool `json:"publishClassificationFindings,omitempty"`
+	PublishPolicyFindings         *bool `json:"publishPolicyFindings,omitempty"`
 }
 
 type PutFindingsPublicationConfigurationRequestBody struct {
-	ClientToken              *string                                                                 `json:"clientToken"`
-	SecurityHubConfiguration *PutFindingsPublicationConfigurationRequestBodySecurityHubConfiguration `json:"securityHubConfiguration"`
+	ClientToken              *string                                                                 `json:"clientToken,omitempty"`
+	SecurityHubConfiguration *PutFindingsPublicationConfigurationRequestBodySecurityHubConfiguration `json:"securityHubConfiguration,omitempty"`
 }
 
 type PutFindingsPublicationConfigurationRequest struct {

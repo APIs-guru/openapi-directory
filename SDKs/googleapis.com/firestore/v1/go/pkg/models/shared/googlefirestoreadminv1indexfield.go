@@ -16,7 +16,7 @@ const (
 )
 
 type GoogleFirestoreAdminV1IndexField struct {
-	ArrayConfig *GoogleFirestoreAdminV1IndexFieldArrayConfigEnum `json:"arrayConfig"`
-	FieldPath   *string                                          `json:"fieldPath"`
-	Order       *GoogleFirestoreAdminV1IndexFieldOrderEnum       `json:"order"`
+	ArrayConfig *GoogleFirestoreAdminV1IndexFieldArrayConfigEnum `json:"arrayConfig,omitempty"`
+	FieldPath   *string                                          `json:"fieldPath,omitempty"`
+	Order       *GoogleFirestoreAdminV1IndexFieldOrderEnum       `json:"order,omitempty"`
 }

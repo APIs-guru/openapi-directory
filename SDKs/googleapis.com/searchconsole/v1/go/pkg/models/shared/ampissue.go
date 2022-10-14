@@ -9,6 +9,6 @@ const (
 )
 
 type AmpIssue struct {
-	IssueMessage *string               `json:"issueMessage"`
-	Severity     *AmpIssueSeverityEnum `json:"severity"`
+	IssueMessage *string               `json:"issueMessage,omitempty"`
+	Severity     *AmpIssueSeverityEnum `json:"severity,omitempty"`
 }

@@ -27,8 +27,8 @@ const (
 )
 
 type TimePeriod struct {
-	CloseDay  *TimePeriodCloseDayEnum `json:"closeDay"`
-	CloseTime *TimeOfDay              `json:"closeTime"`
-	OpenDay   *TimePeriodOpenDayEnum  `json:"openDay"`
-	OpenTime  *TimeOfDay              `json:"openTime"`
+	CloseDay  *TimePeriodCloseDayEnum `json:"closeDay,omitempty"`
+	CloseTime *TimeOfDay              `json:"closeTime,omitempty"`
+	OpenDay   *TimePeriodOpenDayEnum  `json:"openDay,omitempty"`
+	OpenTime  *TimeOfDay              `json:"openTime,omitempty"`
 }

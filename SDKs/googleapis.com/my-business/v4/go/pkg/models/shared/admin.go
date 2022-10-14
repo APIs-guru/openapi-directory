@@ -11,8 +11,8 @@ const (
 )
 
 type Admin struct {
-	AdminName         *string        `json:"adminName"`
-	Name              *string        `json:"name"`
-	PendingInvitation *bool          `json:"pendingInvitation"`
-	Role              *AdminRoleEnum `json:"role"`
+	AdminName         *string        `json:"adminName,omitempty"`
+	Name              *string        `json:"name,omitempty"`
+	PendingInvitation *bool          `json:"pendingInvitation,omitempty"`
+	Role              *AdminRoleEnum `json:"role,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ImageIdentifier struct {
-	ImageDigest *string `json:"imageDigest"`
-	ImageTag    *string `json:"imageTag"`
+	ImageDigest *string `json:"imageDigest,omitempty"`
+	ImageTag    *string `json:"imageTag,omitempty"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type EntryPoint struct {
-	AddOn          *GoogleAppsScriptTypeAddOnEntryPoint        `json:"addOn"`
-	EntryPointType *EntryPointEntryPointTypeEnum               `json:"entryPointType"`
-	ExecutionAPI   *GoogleAppsScriptTypeExecutionAPIEntryPoint `json:"executionApi"`
-	WebApp         *GoogleAppsScriptTypeWebAppEntryPoint       `json:"webApp"`
+	AddOn          *GoogleAppsScriptTypeAddOnEntryPoint        `json:"addOn,omitempty"`
+	EntryPointType *EntryPointEntryPointTypeEnum               `json:"entryPointType,omitempty"`
+	ExecutionAPI   *GoogleAppsScriptTypeExecutionAPIEntryPoint `json:"executionApi,omitempty"`
+	WebApp         *GoogleAppsScriptTypeWebAppEntryPoint       `json:"webApp,omitempty"`
 }

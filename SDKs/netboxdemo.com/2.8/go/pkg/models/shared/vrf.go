@@ -5,17 +5,17 @@ import (
 )
 
 type Vrf struct {
-	Created        *time.Time             `json:"created"`
-	CustomFields   map[string]interface{} `json:"custom_fields"`
-	Description    *string                `json:"description"`
-	DisplayName    *string                `json:"display_name"`
-	EnforceUnique  *bool                  `json:"enforce_unique"`
-	ID             *int64                 `json:"id"`
-	IpaddressCount *int64                 `json:"ipaddress_count"`
-	LastUpdated    *time.Time             `json:"last_updated"`
+	Created        *time.Time             `json:"created,omitempty"`
+	CustomFields   map[string]interface{} `json:"custom_fields,omitempty"`
+	Description    *string                `json:"description,omitempty"`
+	DisplayName    *string                `json:"display_name,omitempty"`
+	EnforceUnique  *bool                  `json:"enforce_unique,omitempty"`
+	ID             *int64                 `json:"id,omitempty"`
+	IpaddressCount *int64                 `json:"ipaddress_count,omitempty"`
+	LastUpdated    *time.Time             `json:"last_updated,omitempty"`
 	Name           string                 `json:"name"`
-	PrefixCount    *int64                 `json:"prefix_count"`
-	Rd             *string                `json:"rd"`
-	Tags           []string               `json:"tags"`
-	Tenant         *NestedTenant          `json:"tenant"`
+	PrefixCount    *int64                 `json:"prefix_count,omitempty"`
+	Rd             *string                `json:"rd,omitempty"`
+	Tags           []string               `json:"tags,omitempty"`
+	Tenant         *NestedTenant          `json:"tenant,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type UpdateListenerRequest struct {
-	ClientAffinity *ClientAffinityEnum `json:"ClientAffinity"`
+	ClientAffinity *ClientAffinityEnum `json:"ClientAffinity,omitempty"`
 	ListenerArn    string              `json:"ListenerArn"`
-	PortRanges     []PortRange         `json:"PortRanges"`
-	Protocol       *ProtocolEnum       `json:"Protocol"`
+	PortRanges     []PortRange         `json:"PortRanges,omitempty"`
+	Protocol       *ProtocolEnum       `json:"Protocol,omitempty"`
 }

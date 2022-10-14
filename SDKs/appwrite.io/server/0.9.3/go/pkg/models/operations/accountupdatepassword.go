@@ -5,7 +5,7 @@ import (
 )
 
 type AccountUpdatePasswordRequestBody struct {
-	OldPassword *string `json:"oldPassword"`
+	OldPassword *string `json:"oldPassword,omitempty"`
 	Password    string  `json:"password"`
 }
 

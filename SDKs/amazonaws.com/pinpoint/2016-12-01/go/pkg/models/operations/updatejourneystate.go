@@ -20,7 +20,7 @@ type UpdateJourneyStateHeaders struct {
 }
 
 type UpdateJourneyStateRequestBodyJourneyStateRequest struct {
-	State *shared.StateEnum `json:"State"`
+	State *shared.StateEnum `json:"State,omitempty"`
 }
 
 type UpdateJourneyStateRequestBody struct {

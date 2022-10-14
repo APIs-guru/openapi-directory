@@ -1,5 +1,5 @@
 package shared
 
 type TableBorderFill struct {
-	SolidFill *SolidFill `json:"solidFill"`
+	SolidFill *SolidFill `json:"solidFill,omitempty"`
 }

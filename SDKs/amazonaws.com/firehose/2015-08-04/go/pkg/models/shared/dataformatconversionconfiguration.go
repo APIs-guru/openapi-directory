@@ -1,8 +1,8 @@
 package shared
 
 type DataFormatConversionConfiguration struct {
-	Enabled                   *bool                      `json:"Enabled"`
-	InputFormatConfiguration  *InputFormatConfiguration  `json:"InputFormatConfiguration"`
-	OutputFormatConfiguration *OutputFormatConfiguration `json:"OutputFormatConfiguration"`
-	SchemaConfiguration       *SchemaConfiguration       `json:"SchemaConfiguration"`
+	Enabled                   *bool                      `json:"Enabled,omitempty"`
+	InputFormatConfiguration  *InputFormatConfiguration  `json:"InputFormatConfiguration,omitempty"`
+	OutputFormatConfiguration *OutputFormatConfiguration `json:"OutputFormatConfiguration,omitempty"`
+	SchemaConfiguration       *SchemaConfiguration       `json:"SchemaConfiguration,omitempty"`
 }

@@ -16,7 +16,7 @@ type UpgradePublishedSchemaHeaders struct {
 
 type UpgradePublishedSchemaRequestBody struct {
 	DevelopmentSchemaArn string `json:"DevelopmentSchemaArn"`
-	DryRun               *bool  `json:"DryRun"`
+	DryRun               *bool  `json:"DryRun,omitempty"`
 	MinorVersion         string `json:"MinorVersion"`
 	PublishedSchemaArn   string `json:"PublishedSchemaArn"`
 }

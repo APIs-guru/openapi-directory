@@ -1,8 +1,8 @@
 package shared
 
 type MobileDevices struct {
-	Etag          *string        `json:"etag"`
-	Kind          *string        `json:"kind"`
-	Mobiledevices []MobileDevice `json:"mobiledevices"`
-	NextPageToken *string        `json:"nextPageToken"`
+	Etag          *string        `json:"etag,omitempty"`
+	Kind          *string        `json:"kind,omitempty"`
+	Mobiledevices []MobileDevice `json:"mobiledevices,omitempty"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
 }

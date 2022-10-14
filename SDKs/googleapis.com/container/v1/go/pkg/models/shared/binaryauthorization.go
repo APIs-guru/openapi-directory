@@ -9,6 +9,6 @@ const (
 )
 
 type BinaryAuthorization struct {
-	Enabled        *bool                                  `json:"enabled"`
-	EvaluationMode *BinaryAuthorizationEvaluationModeEnum `json:"evaluationMode"`
+	Enabled        *bool                                  `json:"enabled,omitempty"`
+	EvaluationMode *BinaryAuthorizationEvaluationModeEnum `json:"evaluationMode,omitempty"`
 }

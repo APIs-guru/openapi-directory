@@ -1,8 +1,8 @@
 package shared
 
 type InappproductsListResponse struct {
-	Inappproduct    []InAppProduct   `json:"inappproduct"`
-	Kind            *string          `json:"kind"`
-	PageInfo        *PageInfo        `json:"pageInfo"`
-	TokenPagination *TokenPagination `json:"tokenPagination"`
+	Inappproduct    []InAppProduct   `json:"inappproduct,omitempty"`
+	Kind            *string          `json:"kind,omitempty"`
+	PageInfo        *PageInfo        `json:"pageInfo,omitempty"`
+	TokenPagination *TokenPagination `json:"tokenPagination,omitempty"`
 }

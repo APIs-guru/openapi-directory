@@ -1,10 +1,10 @@
 package shared
 
 type AwsCodeBuildProjectDetails struct {
-	EncryptionKey *string                         `json:"EncryptionKey"`
-	Environment   *AwsCodeBuildProjectEnvironment `json:"Environment"`
-	Name          *string                         `json:"Name"`
-	ServiceRole   *string                         `json:"ServiceRole"`
-	Source        *AwsCodeBuildProjectSource      `json:"Source"`
-	VpcConfig     *AwsCodeBuildProjectVpcConfig   `json:"VpcConfig"`
+	EncryptionKey *string                         `json:"EncryptionKey,omitempty"`
+	Environment   *AwsCodeBuildProjectEnvironment `json:"Environment,omitempty"`
+	Name          *string                         `json:"Name,omitempty"`
+	ServiceRole   *string                         `json:"ServiceRole,omitempty"`
+	Source        *AwsCodeBuildProjectSource      `json:"Source,omitempty"`
+	VpcConfig     *AwsCodeBuildProjectVpcConfig   `json:"VpcConfig,omitempty"`
 }

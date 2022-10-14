@@ -5,9 +5,9 @@ import (
 )
 
 type AlertAnnotationInfo struct {
-	AnnotationType *int32     `json:"annotationType"`
-	ID             *string    `json:"id"`
-	Text           *string    `json:"text"`
-	Timestamp      *time.Time `json:"timestamp"`
-	UserID         *string    `json:"userId"`
+	AnnotationType *int32     `json:"annotationType,omitempty"`
+	ID             *string    `json:"id,omitempty"`
+	Text           *string    `json:"text,omitempty"`
+	Timestamp      *time.Time `json:"timestamp,omitempty"`
+	UserID         *string    `json:"userId,omitempty"`
 }

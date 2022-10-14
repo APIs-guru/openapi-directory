@@ -1,8 +1,8 @@
 package shared
 
 type Message struct {
-	CustomPayload     *CustomPayload     `json:"customPayload"`
-	ImageResponseCard *ImageResponseCard `json:"imageResponseCard"`
-	PlainTextMessage  *PlainTextMessage  `json:"plainTextMessage"`
-	SsmlMessage       *SsmlMessage       `json:"ssmlMessage"`
+	CustomPayload     *CustomPayload     `json:"customPayload,omitempty"`
+	ImageResponseCard *ImageResponseCard `json:"imageResponseCard,omitempty"`
+	PlainTextMessage  *PlainTextMessage  `json:"plainTextMessage,omitempty"`
+	SsmlMessage       *SsmlMessage       `json:"ssmlMessage,omitempty"`
 }

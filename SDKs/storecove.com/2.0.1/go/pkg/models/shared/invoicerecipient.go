@@ -1,6 +1,6 @@
 package shared
 
 type InvoiceRecipient struct {
-	Emails            []string           `json:"emails"`
-	PublicIdentifiers []PublicIdentifier `json:"publicIdentifiers"`
+	Emails            []string           `json:"emails,omitempty"`
+	PublicIdentifiers []PublicIdentifier `json:"publicIdentifiers,omitempty"`
 }

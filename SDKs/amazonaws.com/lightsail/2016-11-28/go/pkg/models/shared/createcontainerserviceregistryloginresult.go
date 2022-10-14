@@ -1,5 +1,5 @@
 package shared
 
 type CreateContainerServiceRegistryLoginResult struct {
-	RegistryLogin *ContainerServiceRegistryLogin `json:"registryLogin"`
+	RegistryLogin *ContainerServiceRegistryLogin `json:"registryLogin,omitempty"`
 }

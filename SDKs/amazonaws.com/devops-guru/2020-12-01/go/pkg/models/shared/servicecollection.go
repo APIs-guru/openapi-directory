@@ -1,5 +1,5 @@
 package shared
 
 type ServiceCollection struct {
-	ServiceNames []ServiceNameEnum `json:"ServiceNames"`
+	ServiceNames []ServiceNameEnum `json:"ServiceNames,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type NetworkConfig struct {
-	CanIPForward      *bool   `json:"canIpForward"`
-	EnableExternalIps *bool   `json:"enableExternalIps"`
-	Network           *string `json:"network"`
-	Subnetwork        *string `json:"subnetwork"`
+	CanIPForward      *bool   `json:"canIpForward,omitempty"`
+	EnableExternalIps *bool   `json:"enableExternalIps,omitempty"`
+	Network           *string `json:"network,omitempty"`
+	Subnetwork        *string `json:"subnetwork,omitempty"`
 }

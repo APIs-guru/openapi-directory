@@ -1,12 +1,12 @@
 package shared
 
 type GoogleCloudDocumentaiV1DocumentStyle struct {
-	BackgroundColor *GoogleTypeColor                              `json:"backgroundColor"`
-	Color           *GoogleTypeColor                              `json:"color"`
-	FontFamily      *string                                       `json:"fontFamily"`
-	FontSize        *GoogleCloudDocumentaiV1DocumentStyleFontSize `json:"fontSize"`
-	FontWeight      *string                                       `json:"fontWeight"`
-	TextAnchor      *GoogleCloudDocumentaiV1DocumentTextAnchor    `json:"textAnchor"`
-	TextDecoration  *string                                       `json:"textDecoration"`
-	TextStyle       *string                                       `json:"textStyle"`
+	BackgroundColor *GoogleTypeColor                              `json:"backgroundColor,omitempty"`
+	Color           *GoogleTypeColor                              `json:"color,omitempty"`
+	FontFamily      *string                                       `json:"fontFamily,omitempty"`
+	FontSize        *GoogleCloudDocumentaiV1DocumentStyleFontSize `json:"fontSize,omitempty"`
+	FontWeight      *string                                       `json:"fontWeight,omitempty"`
+	TextAnchor      *GoogleCloudDocumentaiV1DocumentTextAnchor    `json:"textAnchor,omitempty"`
+	TextDecoration  *string                                       `json:"textDecoration,omitempty"`
+	TextStyle       *string                                       `json:"textStyle,omitempty"`
 }

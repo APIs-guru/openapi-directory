@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpec struct {
-	Mode *GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum `json:"mode"`
+	Mode *GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum `json:"mode,omitempty"`
 }

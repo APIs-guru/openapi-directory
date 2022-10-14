@@ -1,5 +1,5 @@
 package shared
 
 type CatalogCustomAttributeDefinitionStringConfig struct {
-	EnforceUniqueness *bool `json:"enforce_uniqueness"`
+	EnforceUniqueness *bool `json:"enforce_uniqueness,omitempty"`
 }

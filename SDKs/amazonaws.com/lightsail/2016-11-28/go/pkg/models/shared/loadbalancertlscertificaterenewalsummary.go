@@ -1,6 +1,6 @@
 package shared
 
 type LoadBalancerTLSCertificateRenewalSummary struct {
-	DomainValidationOptions []LoadBalancerTLSCertificateDomainValidationOption `json:"domainValidationOptions"`
-	RenewalStatus           *LoadBalancerTLSCertificateRenewalStatusEnum       `json:"renewalStatus"`
+	DomainValidationOptions []LoadBalancerTLSCertificateDomainValidationOption `json:"domainValidationOptions,omitempty"`
+	RenewalStatus           *LoadBalancerTLSCertificateRenewalStatusEnum       `json:"renewalStatus,omitempty"`
 }

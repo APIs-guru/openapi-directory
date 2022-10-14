@@ -5,16 +5,16 @@ import (
 )
 
 type TaskrouterV1WorkspaceWorkerWorkersCumulativeStatistics struct {
-	AccountSid            *string       `json:"account_sid"`
-	ActivityDurations     []interface{} `json:"activity_durations"`
-	EndTime               *time.Time    `json:"end_time"`
-	ReservationsAccepted  *int64        `json:"reservations_accepted"`
-	ReservationsCanceled  *int64        `json:"reservations_canceled"`
-	ReservationsCreated   *int64        `json:"reservations_created"`
-	ReservationsRejected  *int64        `json:"reservations_rejected"`
-	ReservationsRescinded *int64        `json:"reservations_rescinded"`
-	ReservationsTimedOut  *int64        `json:"reservations_timed_out"`
-	StartTime             *time.Time    `json:"start_time"`
-	URL                   *string       `json:"url"`
-	WorkspaceSid          *string       `json:"workspace_sid"`
+	AccountSid            *string       `json:"account_sid,omitempty"`
+	ActivityDurations     []interface{} `json:"activity_durations,omitempty"`
+	EndTime               *time.Time    `json:"end_time,omitempty"`
+	ReservationsAccepted  *int64        `json:"reservations_accepted,omitempty"`
+	ReservationsCanceled  *int64        `json:"reservations_canceled,omitempty"`
+	ReservationsCreated   *int64        `json:"reservations_created,omitempty"`
+	ReservationsRejected  *int64        `json:"reservations_rejected,omitempty"`
+	ReservationsRescinded *int64        `json:"reservations_rescinded,omitempty"`
+	ReservationsTimedOut  *int64        `json:"reservations_timed_out,omitempty"`
+	StartTime             *time.Time    `json:"start_time,omitempty"`
+	URL                   *string       `json:"url,omitempty"`
+	WorkspaceSid          *string       `json:"workspace_sid,omitempty"`
 }

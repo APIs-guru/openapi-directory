@@ -5,12 +5,12 @@ import (
 )
 
 type User struct {
-	DisabledDate *time.Time       `json:"DisabledDate"`
-	DisplayName  *string          `json:"DisplayName"`
-	Email        *string          `json:"Email"`
-	EnabledDate  *time.Time       `json:"EnabledDate"`
-	ID           *string          `json:"Id"`
-	Name         *string          `json:"Name"`
-	State        *EntityStateEnum `json:"State"`
-	UserRole     *UserRoleEnum    `json:"UserRole"`
+	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
+	DisplayName  *string          `json:"DisplayName,omitempty"`
+	Email        *string          `json:"Email,omitempty"`
+	EnabledDate  *time.Time       `json:"EnabledDate,omitempty"`
+	ID           *string          `json:"Id,omitempty"`
+	Name         *string          `json:"Name,omitempty"`
+	State        *EntityStateEnum `json:"State,omitempty"`
+	UserRole     *UserRoleEnum    `json:"UserRole,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type Reschedule struct {
-	RescheduleType *RescheduleRescheduleTypeEnum `json:"rescheduleType"`
-	ScheduleTime   *string                       `json:"scheduleTime"`
+	RescheduleType *RescheduleRescheduleTypeEnum `json:"rescheduleType,omitempty"`
+	ScheduleTime   *string                       `json:"scheduleTime,omitempty"`
 }

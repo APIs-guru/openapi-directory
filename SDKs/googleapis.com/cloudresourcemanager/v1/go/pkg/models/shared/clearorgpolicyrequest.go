@@ -1,6 +1,6 @@
 package shared
 
 type ClearOrgPolicyRequest struct {
-	Constraint *string `json:"constraint"`
-	Etag       *string `json:"etag"`
+	Constraint *string `json:"constraint,omitempty"`
+	Etag       *string `json:"etag,omitempty"`
 }

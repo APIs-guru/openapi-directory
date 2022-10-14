@@ -16,16 +16,16 @@ type PostSearchVersionNumberSearchAlongRouteQueryExtQueryParams struct {
 }
 
 type PostSearchVersionNumberSearchAlongRouteQueryExtRequestBodyRoutePoints struct {
-	Lat *float32 `json:"lat"`
-	Lon *float32 `json:"lon"`
+	Lat *float32 `json:"lat,omitempty"`
+	Lon *float32 `json:"lon,omitempty"`
 }
 
 type PostSearchVersionNumberSearchAlongRouteQueryExtRequestBodyRoute struct {
-	Points []PostSearchVersionNumberSearchAlongRouteQueryExtRequestBodyRoutePoints `json:"points"`
+	Points []PostSearchVersionNumberSearchAlongRouteQueryExtRequestBodyRoutePoints `json:"points,omitempty"`
 }
 
 type PostSearchVersionNumberSearchAlongRouteQueryExtRequestBody struct {
-	Route *PostSearchVersionNumberSearchAlongRouteQueryExtRequestBodyRoute `json:"route"`
+	Route *PostSearchVersionNumberSearchAlongRouteQueryExtRequestBodyRoute `json:"route,omitempty"`
 }
 
 type PostSearchVersionNumberSearchAlongRouteQueryExtRequest struct {

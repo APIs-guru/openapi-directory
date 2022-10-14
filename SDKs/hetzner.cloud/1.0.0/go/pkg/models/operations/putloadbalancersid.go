@@ -5,8 +5,8 @@ type PutLoadBalancersIDPathParams struct {
 }
 
 type PutLoadBalancersIDRequestBody struct {
-	Labels map[string]interface{} `json:"labels"`
-	Name   *string                `json:"name"`
+	Labels map[string]interface{} `json:"labels,omitempty"`
+	Name   *string                `json:"name,omitempty"`
 }
 
 type PutLoadBalancersIDRequest struct {
@@ -65,8 +65,8 @@ type PutLoadBalancersID200ApplicationJSONLoadBalancerLocation struct {
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerPrivateNet struct {
-	IP      *string `json:"ip"`
-	Network *int64  `json:"network"`
+	IP      *string `json:"ip,omitempty"`
+	Network *int64  `json:"network,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerProtection struct {
@@ -74,13 +74,13 @@ type PutLoadBalancersID200ApplicationJSONLoadBalancerProtection struct {
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerPublicNetIpv4 struct {
-	DNSPtr *string `json:"dns_ptr"`
-	IP     *string `json:"ip"`
+	DNSPtr *string `json:"dns_ptr,omitempty"`
+	IP     *string `json:"ip,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerPublicNetIpv6 struct {
-	DNSPtr *string `json:"dns_ptr"`
-	IP     *string `json:"ip"`
+	DNSPtr *string `json:"dns_ptr,omitempty"`
+	IP     *string `json:"ip,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerPublicNet struct {
@@ -92,9 +92,9 @@ type PutLoadBalancersID200ApplicationJSONLoadBalancerPublicNet struct {
 type PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
-	Response    *string  `json:"response"`
-	StatusCodes []string `json:"status_codes"`
-	TLS         *bool    `json:"tls"`
+	Response    *string  `json:"response,omitempty"`
+	StatusCodes []string `json:"status_codes,omitempty"`
+	TLS         *bool    `json:"tls,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckProtocolEnum string
@@ -105,7 +105,7 @@ const (
 )
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckLoadBalancerServiceHealthCheck struct {
-	HTTP     *PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckHTTP        `json:"http"`
+	HTTP     *PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckHTTP        `json:"http,omitempty"`
 	Interval int64                                                                           `json:"interval"`
 	Port     int64                                                                           `json:"port"`
 	Protocol PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckProtocolEnum `json:"protocol"`
@@ -114,11 +114,11 @@ type PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckLoadBala
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHTTP struct {
-	Certificates   []int64 `json:"certificates"`
+	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
 	CookieName     string  `json:"cookie_name"`
-	RedirectHTTP   *bool   `json:"redirect_http"`
-	StickySessions *bool   `json:"sticky_sessions"`
+	RedirectHTTP   *bool   `json:"redirect_http,omitempty"`
+	StickySessions *bool   `json:"sticky_sessions,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerServicesProtocolEnum string
@@ -132,15 +132,15 @@ const (
 type PutLoadBalancersID200ApplicationJSONLoadBalancerServicesLoadBalancerService struct {
 	DestinationPort int64                                                                                             `json:"destination_port"`
 	HealthCheck     PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHealthCheckLoadBalancerServiceHealthCheck `json:"health_check"`
-	HTTP            *PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHTTP                                     `json:"http"`
+	HTTP            *PutLoadBalancersID200ApplicationJSONLoadBalancerServicesHTTP                                     `json:"http,omitempty"`
 	ListenPort      int64                                                                                             `json:"listen_port"`
 	Protocol        PutLoadBalancersID200ApplicationJSONLoadBalancerServicesProtocolEnum                              `json:"protocol"`
 	Proxyprotocol   bool                                                                                              `json:"proxyprotocol"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsHealthStatus struct {
-	ListenPort *int64  `json:"listen_port"`
-	Status     *string `json:"status"`
+	ListenPort *int64  `json:"listen_port,omitempty"`
+	Status     *string `json:"status,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsIP struct {
@@ -156,8 +156,8 @@ type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsServerLoadBalancerTa
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargetsHealthStatus struct {
-	ListenPort *int64  `json:"listen_port"`
-	Status     *string `json:"status"`
+	ListenPort *int64  `json:"listen_port,omitempty"`
+	Status     *string `json:"status,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargetsServer struct {
@@ -165,10 +165,10 @@ type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargetsServer struct
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargets struct {
-	HealthStatus []PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargetsHealthStatus `json:"health_status"`
-	Server       *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargetsServer        `json:"server"`
-	Type         *string                                                                      `json:"type"`
-	UsePrivateIP *bool                                                                        `json:"use_private_ip"`
+	HealthStatus []PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargetsHealthStatus `json:"health_status,omitempty"`
+	Server       *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargetsServer        `json:"server,omitempty"`
+	Type         *string                                                                      `json:"type,omitempty"`
+	UsePrivateIP *bool                                                                        `json:"use_private_ip,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTypeEnum string
@@ -180,13 +180,13 @@ const (
 )
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsLoadBalancerTarget struct {
-	HealthStatus  []PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsHealthStatus                  `json:"health_status"`
-	IP            *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsIP                             `json:"ip"`
-	LabelSelector *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsLabelSelector                  `json:"label_selector"`
-	Server        *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsServerLoadBalancerTargetServer `json:"server"`
-	Targets       []PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargets                       `json:"targets"`
+	HealthStatus  []PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsHealthStatus                  `json:"health_status,omitempty"`
+	IP            *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsIP                             `json:"ip,omitempty"`
+	LabelSelector *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsLabelSelector                  `json:"label_selector,omitempty"`
+	Server        *PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsServerLoadBalancerTargetServer `json:"server,omitempty"`
+	Targets       []PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTargets                       `json:"targets,omitempty"`
 	Type          PutLoadBalancersID200ApplicationJSONLoadBalancerTargetsTypeEnum                        `json:"type"`
-	UsePrivateIP  *bool                                                                                  `json:"use_private_ip"`
+	UsePrivateIP  *bool                                                                                  `json:"use_private_ip,omitempty"`
 }
 
 type PutLoadBalancersID200ApplicationJSONLoadBalancer struct {

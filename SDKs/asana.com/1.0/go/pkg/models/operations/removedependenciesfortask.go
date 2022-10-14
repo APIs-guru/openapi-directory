@@ -14,7 +14,7 @@ type RemoveDependenciesForTaskQueryParams struct {
 }
 
 type RemoveDependenciesForTaskRequestBody struct {
-	Data *shared.ModifyDependenciesRequest `json:"data"`
+	Data *shared.ModifyDependenciesRequest `json:"data,omitempty"`
 }
 
 type RemoveDependenciesForTaskRequest struct {
@@ -24,7 +24,7 @@ type RemoveDependenciesForTaskRequest struct {
 }
 
 type RemoveDependenciesForTask200ApplicationJSON struct {
-	Data []map[string]interface{} `json:"data"`
+	Data []map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveDependenciesForTaskResponse struct {

@@ -103,10 +103,10 @@ const (
 )
 
 type FieldTypeDefinition struct {
-	FieldType            *FieldTypeDefinitionFieldTypeEnum            `json:"fieldType"`
+	FieldType            *FieldTypeDefinitionFieldTypeEnum            `json:"fieldType,omitempty"`
 	Name                 string                                       `json:"name"`
 	Options              []Option                                     `json:"options"`
-	OptionsURL           *string                                      `json:"optionsUrl"`
-	ReferencedObjectType *FieldTypeDefinitionReferencedObjectTypeEnum `json:"referencedObjectType"`
+	OptionsURL           *string                                      `json:"optionsUrl,omitempty"`
+	ReferencedObjectType *FieldTypeDefinitionReferencedObjectTypeEnum `json:"referencedObjectType,omitempty"`
 	Type                 FieldTypeDefinitionTypeEnum                  `json:"type"`
 }

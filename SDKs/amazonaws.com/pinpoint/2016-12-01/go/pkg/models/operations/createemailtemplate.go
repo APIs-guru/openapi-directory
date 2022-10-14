@@ -19,13 +19,13 @@ type CreateEmailTemplateHeaders struct {
 }
 
 type CreateEmailTemplateRequestBodyEmailTemplateRequest struct {
-	DefaultSubstitutions *string           `json:"DefaultSubstitutions"`
-	HTMLPart             *string           `json:"HtmlPart"`
-	RecommenderID        *string           `json:"RecommenderId"`
-	Subject              *string           `json:"Subject"`
-	TemplateDescription  *string           `json:"TemplateDescription"`
-	TextPart             *string           `json:"TextPart"`
-	Tags                 map[string]string `json:"tags"`
+	DefaultSubstitutions *string           `json:"DefaultSubstitutions,omitempty"`
+	HTMLPart             *string           `json:"HtmlPart,omitempty"`
+	RecommenderID        *string           `json:"RecommenderId,omitempty"`
+	Subject              *string           `json:"Subject,omitempty"`
+	TemplateDescription  *string           `json:"TemplateDescription,omitempty"`
+	TextPart             *string           `json:"TextPart,omitempty"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }
 
 type CreateEmailTemplateRequestBody struct {

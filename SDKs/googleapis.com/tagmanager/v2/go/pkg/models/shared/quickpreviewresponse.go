@@ -1,7 +1,7 @@
 package shared
 
 type QuickPreviewResponse struct {
-	CompilerError    *bool             `json:"compilerError"`
-	ContainerVersion *ContainerVersion `json:"containerVersion"`
-	SyncStatus       *SyncStatus       `json:"syncStatus"`
+	CompilerError    *bool             `json:"compilerError,omitempty"`
+	ContainerVersion *ContainerVersion `json:"containerVersion,omitempty"`
+	SyncStatus       *SyncStatus       `json:"syncStatus,omitempty"`
 }

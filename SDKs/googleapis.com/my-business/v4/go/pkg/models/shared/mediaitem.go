@@ -9,16 +9,16 @@ const (
 )
 
 type MediaItem struct {
-	Attribution         *Attribution              `json:"attribution"`
-	CreateTime          *string                   `json:"createTime"`
-	DataRef             *MediaItemDataRef         `json:"dataRef"`
-	Description         *string                   `json:"description"`
-	Dimensions          *Dimensions               `json:"dimensions"`
-	GoogleURL           *string                   `json:"googleUrl"`
-	Insights            *MediaInsights            `json:"insights"`
-	LocationAssociation *LocationAssociation      `json:"locationAssociation"`
-	MediaFormat         *MediaItemMediaFormatEnum `json:"mediaFormat"`
-	Name                *string                   `json:"name"`
-	SourceURL           *string                   `json:"sourceUrl"`
-	ThumbnailURL        *string                   `json:"thumbnailUrl"`
+	Attribution         *Attribution              `json:"attribution,omitempty"`
+	CreateTime          *string                   `json:"createTime,omitempty"`
+	DataRef             *MediaItemDataRef         `json:"dataRef,omitempty"`
+	Description         *string                   `json:"description,omitempty"`
+	Dimensions          *Dimensions               `json:"dimensions,omitempty"`
+	GoogleURL           *string                   `json:"googleUrl,omitempty"`
+	Insights            *MediaInsights            `json:"insights,omitempty"`
+	LocationAssociation *LocationAssociation      `json:"locationAssociation,omitempty"`
+	MediaFormat         *MediaItemMediaFormatEnum `json:"mediaFormat,omitempty"`
+	Name                *string                   `json:"name,omitempty"`
+	SourceURL           *string                   `json:"sourceUrl,omitempty"`
+	ThumbnailURL        *string                   `json:"thumbnailUrl,omitempty"`
 }

@@ -18,20 +18,20 @@ const (
 )
 
 type AccountUserProfile struct {
-	AccountID        *string                               `json:"accountId"`
-	Active           *bool                                 `json:"active"`
-	AdvertiserFilter *ObjectFilter                         `json:"advertiserFilter"`
-	CampaignFilter   *ObjectFilter                         `json:"campaignFilter"`
-	Comments         *string                               `json:"comments"`
-	Email            *string                               `json:"email"`
-	ID               *string                               `json:"id"`
-	Kind             *string                               `json:"kind"`
-	Locale           *string                               `json:"locale"`
-	Name             *string                               `json:"name"`
-	SiteFilter       *ObjectFilter                         `json:"siteFilter"`
-	SubaccountID     *string                               `json:"subaccountId"`
-	TraffickerType   *AccountUserProfileTraffickerTypeEnum `json:"traffickerType"`
-	UserAccessType   *AccountUserProfileUserAccessTypeEnum `json:"userAccessType"`
-	UserRoleFilter   *ObjectFilter                         `json:"userRoleFilter"`
-	UserRoleID       *string                               `json:"userRoleId"`
+	AccountID        *string                               `json:"accountId,omitempty"`
+	Active           *bool                                 `json:"active,omitempty"`
+	AdvertiserFilter *ObjectFilter                         `json:"advertiserFilter,omitempty"`
+	CampaignFilter   *ObjectFilter                         `json:"campaignFilter,omitempty"`
+	Comments         *string                               `json:"comments,omitempty"`
+	Email            *string                               `json:"email,omitempty"`
+	ID               *string                               `json:"id,omitempty"`
+	Kind             *string                               `json:"kind,omitempty"`
+	Locale           *string                               `json:"locale,omitempty"`
+	Name             *string                               `json:"name,omitempty"`
+	SiteFilter       *ObjectFilter                         `json:"siteFilter,omitempty"`
+	SubaccountID     *string                               `json:"subaccountId,omitempty"`
+	TraffickerType   *AccountUserProfileTraffickerTypeEnum `json:"traffickerType,omitempty"`
+	UserAccessType   *AccountUserProfileUserAccessTypeEnum `json:"userAccessType,omitempty"`
+	UserRoleFilter   *ObjectFilter                         `json:"userRoleFilter,omitempty"`
+	UserRoleID       *string                               `json:"userRoleId,omitempty"`
 }

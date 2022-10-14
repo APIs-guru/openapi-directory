@@ -1,18 +1,18 @@
 package shared
 
 type UpdateDownloadShareRequest struct {
-	DefaultCountry        *string           `json:"defaultCountry"`
-	Expiration            *ObjectExpiration `json:"expiration"`
-	InternalNotes         *string           `json:"internalNotes"`
-	MaxDownloads          *int32            `json:"maxDownloads"`
-	Name                  *string           `json:"name"`
-	Notes                 *string           `json:"notes"`
-	NotifyCreator         *bool             `json:"notifyCreator"`
-	Password              *string           `json:"password"`
-	ReceiverLanguage      *string           `json:"receiverLanguage"`
-	ResetMaxDownloads     *bool             `json:"resetMaxDownloads"`
-	ResetPassword         *bool             `json:"resetPassword"`
-	ShowCreatorName       *bool             `json:"showCreatorName"`
-	ShowCreatorUsername   *bool             `json:"showCreatorUsername"`
-	TextMessageRecipients []string          `json:"textMessageRecipients"`
+	DefaultCountry        *string           `json:"defaultCountry,omitempty"`
+	Expiration            *ObjectExpiration `json:"expiration,omitempty"`
+	InternalNotes         *string           `json:"internalNotes,omitempty"`
+	MaxDownloads          *int32            `json:"maxDownloads,omitempty"`
+	Name                  *string           `json:"name,omitempty"`
+	Notes                 *string           `json:"notes,omitempty"`
+	NotifyCreator         *bool             `json:"notifyCreator,omitempty"`
+	Password              *string           `json:"password,omitempty"`
+	ReceiverLanguage      *string           `json:"receiverLanguage,omitempty"`
+	ResetMaxDownloads     *bool             `json:"resetMaxDownloads,omitempty"`
+	ResetPassword         *bool             `json:"resetPassword,omitempty"`
+	ShowCreatorName       *bool             `json:"showCreatorName,omitempty"`
+	ShowCreatorUsername   *bool             `json:"showCreatorUsername,omitempty"`
+	TextMessageRecipients []string          `json:"textMessageRecipients,omitempty"`
 }

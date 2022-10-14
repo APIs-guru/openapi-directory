@@ -1,5 +1,5 @@
 package shared
 
 type QueryList struct {
-	Queries []string `json:"queries"`
+	Queries []string `json:"queries,omitempty"`
 }

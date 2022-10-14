@@ -15,8 +15,8 @@ const (
 )
 
 type TapcnRequestBody struct {
-	CertificateParameters *TapcnRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *TapcnRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                TapcnRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Tapcn400ApplicationJSON struct {
-	Error            *Tapcn400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tapcn400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tapcn400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tapcn400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tapcn401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Tapcn401ApplicationJSON struct {
-	Error            *Tapcn401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tapcn401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tapcn401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tapcn401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tapcn404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Tapcn404ApplicationJSON struct {
-	Error            *Tapcn404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tapcn404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tapcn404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tapcn404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tapcn500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Tapcn500ApplicationJSON struct {
-	Error            *Tapcn500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tapcn500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tapcn500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tapcn500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tapcn502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Tapcn502ApplicationJSON struct {
-	Error            *Tapcn502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tapcn502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tapcn502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tapcn502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tapcn503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Tapcn503ApplicationJSON struct {
-	Error            *Tapcn503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tapcn503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tapcn503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tapcn503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Tapcn504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Tapcn504ApplicationJSON struct {
-	Error            *Tapcn504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Tapcn504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Tapcn504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Tapcn504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type TapcnResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type Attribute struct {
-	DefaultValue *string `json:"defaultValue"`
+	DefaultValue *string `json:"defaultValue,omitempty"`
 }

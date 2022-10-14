@@ -19,7 +19,7 @@ type CategoryResourceRelationshipsChildrenLinks struct {
 
 type CategoryResourceRelationshipsChildren struct {
 	Data  []CategoryResourceRelationshipsChildrenData `json:"data"`
-	Links *CategoryResourceRelationshipsChildrenLinks `json:"links"`
+	Links *CategoryResourceRelationshipsChildrenLinks `json:"links,omitempty"`
 }
 
 type CategoryResourceRelationshipsParentData struct {
@@ -33,7 +33,7 @@ type CategoryResourceRelationshipsParentLinks struct {
 
 type CategoryResourceRelationshipsParent struct {
 	Data  CategoryResourceRelationshipsParentData   `json:"data"`
-	Links *CategoryResourceRelationshipsParentLinks `json:"links"`
+	Links *CategoryResourceRelationshipsParentLinks `json:"links,omitempty"`
 }
 
 type CategoryResourceRelationships struct {
@@ -44,7 +44,7 @@ type CategoryResourceRelationships struct {
 type CategoryResource struct {
 	Attributes    CategoryResourceAttributes    `json:"attributes"`
 	ID            string                        `json:"id"`
-	Links         *CategoryResourceLinks        `json:"links"`
+	Links         *CategoryResourceLinks        `json:"links,omitempty"`
 	Relationships CategoryResourceRelationships `json:"relationships"`
 	Type          string                        `json:"type"`
 }

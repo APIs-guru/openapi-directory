@@ -19,21 +19,21 @@ type UpdateClusterConfigHeaders struct {
 }
 
 type UpdateClusterConfigRequestBodyLogging struct {
-	ClusterLogging []shared.LogSetup `json:"clusterLogging"`
+	ClusterLogging []shared.LogSetup `json:"clusterLogging,omitempty"`
 }
 
 type UpdateClusterConfigRequestBodyResourcesVpcConfig struct {
-	EndpointPrivateAccess *bool    `json:"endpointPrivateAccess"`
-	EndpointPublicAccess  *bool    `json:"endpointPublicAccess"`
-	PublicAccessCidrs     []string `json:"publicAccessCidrs"`
-	SecurityGroupIds      []string `json:"securityGroupIds"`
-	SubnetIds             []string `json:"subnetIds"`
+	EndpointPrivateAccess *bool    `json:"endpointPrivateAccess,omitempty"`
+	EndpointPublicAccess  *bool    `json:"endpointPublicAccess,omitempty"`
+	PublicAccessCidrs     []string `json:"publicAccessCidrs,omitempty"`
+	SecurityGroupIds      []string `json:"securityGroupIds,omitempty"`
+	SubnetIds             []string `json:"subnetIds,omitempty"`
 }
 
 type UpdateClusterConfigRequestBody struct {
-	ClientRequestToken *string                                           `json:"clientRequestToken"`
-	Logging            *UpdateClusterConfigRequestBodyLogging            `json:"logging"`
-	ResourcesVpcConfig *UpdateClusterConfigRequestBodyResourcesVpcConfig `json:"resourcesVpcConfig"`
+	ClientRequestToken *string                                           `json:"clientRequestToken,omitempty"`
+	Logging            *UpdateClusterConfigRequestBodyLogging            `json:"logging,omitempty"`
+	ResourcesVpcConfig *UpdateClusterConfigRequestBodyResourcesVpcConfig `json:"resourcesVpcConfig,omitempty"`
 }
 
 type UpdateClusterConfigRequest struct {

@@ -1,7 +1,7 @@
 package shared
 
 type ListBankAccountsResponse struct {
-	BankAccounts []BankAccount `json:"bank_accounts"`
-	Cursor       *string       `json:"cursor"`
-	Errors       []Error       `json:"errors"`
+	BankAccounts []BankAccount `json:"bank_accounts,omitempty"`
+	Cursor       *string       `json:"cursor,omitempty"`
+	Errors       []Error       `json:"errors,omitempty"`
 }

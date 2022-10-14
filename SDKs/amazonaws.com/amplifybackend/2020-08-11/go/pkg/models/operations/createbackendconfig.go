@@ -19,7 +19,7 @@ type CreateBackendConfigHeaders struct {
 }
 
 type CreateBackendConfigRequestBody struct {
-	BackendManagerAppID *string `json:"backendManagerAppId"`
+	BackendManagerAppID *string `json:"backendManagerAppId,omitempty"`
 }
 
 type CreateBackendConfigRequest struct {

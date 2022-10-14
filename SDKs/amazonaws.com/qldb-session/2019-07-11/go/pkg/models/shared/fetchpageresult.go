@@ -1,7 +1,7 @@
 package shared
 
 type FetchPageResult struct {
-	ConsumedIOs       *IoUsage           `json:"ConsumedIOs"`
-	Page              *Page              `json:"Page"`
-	TimingInformation *TimingInformation `json:"TimingInformation"`
+	ConsumedIOs       *IoUsage           `json:"ConsumedIOs,omitempty"`
+	Page              *Page              `json:"Page,omitempty"`
+	TimingInformation *TimingInformation `json:"TimingInformation,omitempty"`
 }

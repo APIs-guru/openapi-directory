@@ -1,7 +1,7 @@
 package shared
 
 type Range struct {
-	End         *int64 `json:"end"`
-	Start       *int64 `json:"start"`
-	StartColumn *int64 `json:"startColumn"`
+	End         *int64 `json:"end,omitempty"`
+	Start       *int64 `json:"start,omitempty"`
+	StartColumn *int64 `json:"startColumn,omitempty"`
 }

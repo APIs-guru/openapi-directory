@@ -5,12 +5,12 @@ import (
 )
 
 type NumbersV2RegulatoryComplianceBundleEvaluation struct {
-	AccountSid    *string                   `json:"account_sid"`
-	BundleSid     *string                   `json:"bundle_sid"`
-	DateCreated   *time.Time                `json:"date_created"`
-	RegulationSid *string                   `json:"regulation_sid"`
-	Results       []interface{}             `json:"results"`
-	Sid           *string                   `json:"sid"`
-	Status        *EvaluationEnumStatusEnum `json:"status"`
-	URL           *string                   `json:"url"`
+	AccountSid    *string                   `json:"account_sid,omitempty"`
+	BundleSid     *string                   `json:"bundle_sid,omitempty"`
+	DateCreated   *time.Time                `json:"date_created,omitempty"`
+	RegulationSid *string                   `json:"regulation_sid,omitempty"`
+	Results       []interface{}             `json:"results,omitempty"`
+	Sid           *string                   `json:"sid,omitempty"`
+	Status        *EvaluationEnumStatusEnum `json:"status,omitempty"`
+	URL           *string                   `json:"url,omitempty"`
 }

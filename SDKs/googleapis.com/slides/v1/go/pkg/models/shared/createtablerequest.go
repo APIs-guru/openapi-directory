@@ -1,8 +1,8 @@
 package shared
 
 type CreateTableRequest struct {
-	Columns           *int32                 `json:"columns"`
-	ElementProperties *PageElementProperties `json:"elementProperties"`
-	ObjectID          *string                `json:"objectId"`
-	Rows              *int32                 `json:"rows"`
+	Columns           *int32                 `json:"columns,omitempty"`
+	ElementProperties *PageElementProperties `json:"elementProperties,omitempty"`
+	ObjectID          *string                `json:"objectId,omitempty"`
+	Rows              *int32                 `json:"rows,omitempty"`
 }

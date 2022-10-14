@@ -1,6 +1,6 @@
 package shared
 
 type RemoveDNSZoneRequest struct {
-	ConsumerNetwork *string `json:"consumerNetwork"`
-	Name            *string `json:"name"`
+	ConsumerNetwork *string `json:"consumerNetwork,omitempty"`
+	Name            *string `json:"name,omitempty"`
 }

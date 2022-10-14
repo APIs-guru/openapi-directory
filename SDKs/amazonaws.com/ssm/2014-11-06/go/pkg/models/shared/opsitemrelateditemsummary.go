@@ -5,13 +5,13 @@ import (
 )
 
 type OpsItemRelatedItemSummary struct {
-	AssociationID    *string          `json:"AssociationId"`
-	AssociationType  *string          `json:"AssociationType"`
-	CreatedBy        *OpsItemIdentity `json:"CreatedBy"`
-	CreatedTime      *time.Time       `json:"CreatedTime"`
-	LastModifiedBy   *OpsItemIdentity `json:"LastModifiedBy"`
-	LastModifiedTime *time.Time       `json:"LastModifiedTime"`
-	OpsItemID        *string          `json:"OpsItemId"`
-	ResourceType     *string          `json:"ResourceType"`
-	ResourceURI      *string          `json:"ResourceUri"`
+	AssociationID    *string          `json:"AssociationId,omitempty"`
+	AssociationType  *string          `json:"AssociationType,omitempty"`
+	CreatedBy        *OpsItemIdentity `json:"CreatedBy,omitempty"`
+	CreatedTime      *time.Time       `json:"CreatedTime,omitempty"`
+	LastModifiedBy   *OpsItemIdentity `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime *time.Time       `json:"LastModifiedTime,omitempty"`
+	OpsItemID        *string          `json:"OpsItemId,omitempty"`
+	ResourceType     *string          `json:"ResourceType,omitempty"`
+	ResourceURI      *string          `json:"ResourceUri,omitempty"`
 }

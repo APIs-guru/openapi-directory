@@ -21,9 +21,9 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3ExperimentResultMetric struct {
-	ConfidenceInterval *GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval  `json:"confidenceInterval"`
-	Count              *float64                                                      `json:"count"`
-	CountType          *GoogleCloudDialogflowCxV3ExperimentResultMetricCountTypeEnum `json:"countType"`
-	Ratio              *float64                                                      `json:"ratio"`
-	Type               *GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum      `json:"type"`
+	ConfidenceInterval *GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval  `json:"confidenceInterval,omitempty"`
+	Count              *float64                                                      `json:"count,omitempty"`
+	CountType          *GoogleCloudDialogflowCxV3ExperimentResultMetricCountTypeEnum `json:"countType,omitempty"`
+	Ratio              *float64                                                      `json:"ratio,omitempty"`
+	Type               *GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum      `json:"type,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ZipInfo struct {
-	FilesCount *int32  `json:"filesCount"`
-	SourceURL  *string `json:"sourceUrl"`
+	FilesCount *int32  `json:"filesCount,omitempty"`
+	SourceURL  *string `json:"sourceUrl,omitempty"`
 }

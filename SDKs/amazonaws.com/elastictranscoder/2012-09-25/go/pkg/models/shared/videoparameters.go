@@ -1,19 +1,19 @@
 package shared
 
 type VideoParameters struct {
-	AspectRatio        *string           `json:"AspectRatio"`
-	BitRate            *string           `json:"BitRate"`
-	Codec              *string           `json:"Codec"`
-	CodecOptions       map[string]string `json:"CodecOptions"`
-	DisplayAspectRatio *string           `json:"DisplayAspectRatio"`
-	FixedGop           *string           `json:"FixedGOP"`
-	FrameRate          *string           `json:"FrameRate"`
-	KeyframesMaxDist   *string           `json:"KeyframesMaxDist"`
-	MaxFrameRate       *string           `json:"MaxFrameRate"`
-	MaxHeight          *string           `json:"MaxHeight"`
-	MaxWidth           *string           `json:"MaxWidth"`
-	PaddingPolicy      *string           `json:"PaddingPolicy"`
-	Resolution         *string           `json:"Resolution"`
-	SizingPolicy       *string           `json:"SizingPolicy"`
-	Watermarks         []PresetWatermark `json:"Watermarks"`
+	AspectRatio        *string           `json:"AspectRatio,omitempty"`
+	BitRate            *string           `json:"BitRate,omitempty"`
+	Codec              *string           `json:"Codec,omitempty"`
+	CodecOptions       map[string]string `json:"CodecOptions,omitempty"`
+	DisplayAspectRatio *string           `json:"DisplayAspectRatio,omitempty"`
+	FixedGop           *string           `json:"FixedGOP,omitempty"`
+	FrameRate          *string           `json:"FrameRate,omitempty"`
+	KeyframesMaxDist   *string           `json:"KeyframesMaxDist,omitempty"`
+	MaxFrameRate       *string           `json:"MaxFrameRate,omitempty"`
+	MaxHeight          *string           `json:"MaxHeight,omitempty"`
+	MaxWidth           *string           `json:"MaxWidth,omitempty"`
+	PaddingPolicy      *string           `json:"PaddingPolicy,omitempty"`
+	Resolution         *string           `json:"Resolution,omitempty"`
+	SizingPolicy       *string           `json:"SizingPolicy,omitempty"`
+	Watermarks         []PresetWatermark `json:"Watermarks,omitempty"`
 }

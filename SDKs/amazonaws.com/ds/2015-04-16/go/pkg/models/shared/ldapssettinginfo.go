@@ -5,7 +5,7 @@ import (
 )
 
 type LdapsSettingInfo struct {
-	LdapsStatus         *LdapsStatusEnum `json:"LDAPSStatus"`
-	LdapsStatusReason   *string          `json:"LDAPSStatusReason"`
-	LastUpdatedDateTime *time.Time       `json:"LastUpdatedDateTime"`
+	LdapsStatus         *LdapsStatusEnum `json:"LDAPSStatus,omitempty"`
+	LdapsStatusReason   *string          `json:"LDAPSStatusReason,omitempty"`
+	LastUpdatedDateTime *time.Time       `json:"LastUpdatedDateTime,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type PatientAuthConfirmRequestCredential struct {
-	AuthCode    *string             `json:"authCode"`
-	Demographic *PatientDemographic `json:"demographic"`
+	AuthCode    *string             `json:"authCode,omitempty"`
+	Demographic *PatientDemographic `json:"demographic,omitempty"`
 }
 
 type PatientAuthConfirmRequest struct {

@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleAppsScriptTypeAddOnEntryPoint struct {
-	AddOnType         *GoogleAppsScriptTypeAddOnEntryPointAddOnTypeEnum `json:"addOnType"`
-	Description       *string                                           `json:"description"`
-	HelpURL           *string                                           `json:"helpUrl"`
-	PostInstallTipURL *string                                           `json:"postInstallTipUrl"`
-	ReportIssueURL    *string                                           `json:"reportIssueUrl"`
-	Title             *string                                           `json:"title"`
+	AddOnType         *GoogleAppsScriptTypeAddOnEntryPointAddOnTypeEnum `json:"addOnType,omitempty"`
+	Description       *string                                           `json:"description,omitempty"`
+	HelpURL           *string                                           `json:"helpUrl,omitempty"`
+	PostInstallTipURL *string                                           `json:"postInstallTipUrl,omitempty"`
+	ReportIssueURL    *string                                           `json:"reportIssueUrl,omitempty"`
+	Title             *string                                           `json:"title,omitempty"`
 }

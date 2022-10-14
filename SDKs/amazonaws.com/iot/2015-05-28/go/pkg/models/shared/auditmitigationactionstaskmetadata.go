@@ -5,7 +5,7 @@ import (
 )
 
 type AuditMitigationActionsTaskMetadata struct {
-	StartTime  *time.Time                            `json:"startTime"`
-	TaskID     *string                               `json:"taskId"`
-	TaskStatus *AuditMitigationActionsTaskStatusEnum `json:"taskStatus"`
+	StartTime  *time.Time                            `json:"startTime,omitempty"`
+	TaskID     *string                               `json:"taskId,omitempty"`
+	TaskStatus *AuditMitigationActionsTaskStatusEnum `json:"taskStatus,omitempty"`
 }

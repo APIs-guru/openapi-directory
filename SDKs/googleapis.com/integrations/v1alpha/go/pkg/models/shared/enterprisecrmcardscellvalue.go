@@ -1,9 +1,9 @@
 package shared
 
 type EnterpriseCrmCardsCellValue struct {
-	BooleanValue *bool                  `json:"booleanValue"`
-	DoubleValue  *float64               `json:"doubleValue"`
-	Empty        map[string]interface{} `json:"empty"`
-	LongValue    *string                `json:"longValue"`
-	StringValue  *string                `json:"stringValue"`
+	BooleanValue *bool                  `json:"booleanValue,omitempty"`
+	DoubleValue  *float64               `json:"doubleValue,omitempty"`
+	Empty        map[string]interface{} `json:"empty,omitempty"`
+	LongValue    *string                `json:"longValue,omitempty"`
+	StringValue  *string                `json:"stringValue,omitempty"`
 }

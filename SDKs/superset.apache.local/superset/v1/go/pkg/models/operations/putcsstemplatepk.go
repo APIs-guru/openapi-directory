@@ -19,27 +19,27 @@ type PutCSSTemplatePkRequest struct {
 }
 
 type PutCSSTemplatePk200ApplicationJSON struct {
-	Result *shared.CSSTemplateRestAPIPut `json:"result"`
+	Result *shared.CSSTemplateRestAPIPut `json:"result,omitempty"`
 }
 
 type PutCSSTemplatePk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutCSSTemplatePk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutCSSTemplatePk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutCSSTemplatePk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutCSSTemplatePk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PutCSSTemplatePkResponse struct {

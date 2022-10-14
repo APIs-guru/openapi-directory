@@ -1,8 +1,8 @@
 package shared
 
 type IPOwner struct {
-	Asn    *string `json:"asn"`
-	AsnOrg *string `json:"asnOrg"`
-	Isp    *string `json:"isp"`
-	Org    *string `json:"org"`
+	Asn    *string `json:"asn,omitempty"`
+	AsnOrg *string `json:"asnOrg,omitempty"`
+	Isp    *string `json:"isp,omitempty"`
+	Org    *string `json:"org,omitempty"`
 }

@@ -10,10 +10,10 @@ const (
 )
 
 type Version struct {
-	Epoch     *int32           `json:"epoch"`
-	FullName  *string          `json:"fullName"`
-	Inclusive *bool            `json:"inclusive"`
-	Kind      *VersionKindEnum `json:"kind"`
-	Name      *string          `json:"name"`
-	Revision  *string          `json:"revision"`
+	Epoch     *int32           `json:"epoch,omitempty"`
+	FullName  *string          `json:"fullName,omitempty"`
+	Inclusive *bool            `json:"inclusive,omitempty"`
+	Kind      *VersionKindEnum `json:"kind,omitempty"`
+	Name      *string          `json:"name,omitempty"`
+	Revision  *string          `json:"revision,omitempty"`
 }

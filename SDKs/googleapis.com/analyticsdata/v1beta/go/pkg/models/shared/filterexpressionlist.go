@@ -1,5 +1,5 @@
 package shared
 
 type FilterExpressionList struct {
-	Expressions []FilterExpression `json:"expressions"`
+	Expressions []FilterExpression `json:"expressions,omitempty"`
 }

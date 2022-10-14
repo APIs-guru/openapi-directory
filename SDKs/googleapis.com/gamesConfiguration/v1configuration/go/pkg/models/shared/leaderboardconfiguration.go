@@ -9,12 +9,12 @@ const (
 )
 
 type LeaderboardConfiguration struct {
-	Draft      *LeaderboardConfigurationDetail         `json:"draft"`
-	ID         *string                                 `json:"id"`
-	Kind       *string                                 `json:"kind"`
-	Published  *LeaderboardConfigurationDetail         `json:"published"`
-	ScoreMax   *string                                 `json:"scoreMax"`
-	ScoreMin   *string                                 `json:"scoreMin"`
-	ScoreOrder *LeaderboardConfigurationScoreOrderEnum `json:"scoreOrder"`
-	Token      *string                                 `json:"token"`
+	Draft      *LeaderboardConfigurationDetail         `json:"draft,omitempty"`
+	ID         *string                                 `json:"id,omitempty"`
+	Kind       *string                                 `json:"kind,omitempty"`
+	Published  *LeaderboardConfigurationDetail         `json:"published,omitempty"`
+	ScoreMax   *string                                 `json:"scoreMax,omitempty"`
+	ScoreMin   *string                                 `json:"scoreMin,omitempty"`
+	ScoreOrder *LeaderboardConfigurationScoreOrderEnum `json:"scoreOrder,omitempty"`
+	Token      *string                                 `json:"token,omitempty"`
 }

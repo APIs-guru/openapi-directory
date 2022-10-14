@@ -5,19 +5,19 @@ import (
 )
 
 type TaskrouterV1WorkspaceTaskQueue struct {
-	AccountSid              *string                     `json:"account_sid"`
-	AssignmentActivityName  *string                     `json:"assignment_activity_name"`
-	AssignmentActivitySid   *string                     `json:"assignment_activity_sid"`
-	DateCreated             *time.Time                  `json:"date_created"`
-	DateUpdated             *time.Time                  `json:"date_updated"`
-	FriendlyName            *string                     `json:"friendly_name"`
-	Links                   map[string]interface{}      `json:"links"`
-	MaxReservedWorkers      *int64                      `json:"max_reserved_workers"`
-	ReservationActivityName *string                     `json:"reservation_activity_name"`
-	ReservationActivitySid  *string                     `json:"reservation_activity_sid"`
-	Sid                     *string                     `json:"sid"`
-	TargetWorkers           *string                     `json:"target_workers"`
-	TaskOrder               *TaskQueueEnumTaskOrderEnum `json:"task_order"`
-	URL                     *string                     `json:"url"`
-	WorkspaceSid            *string                     `json:"workspace_sid"`
+	AccountSid              *string                     `json:"account_sid,omitempty"`
+	AssignmentActivityName  *string                     `json:"assignment_activity_name,omitempty"`
+	AssignmentActivitySid   *string                     `json:"assignment_activity_sid,omitempty"`
+	DateCreated             *time.Time                  `json:"date_created,omitempty"`
+	DateUpdated             *time.Time                  `json:"date_updated,omitempty"`
+	FriendlyName            *string                     `json:"friendly_name,omitempty"`
+	Links                   map[string]interface{}      `json:"links,omitempty"`
+	MaxReservedWorkers      *int64                      `json:"max_reserved_workers,omitempty"`
+	ReservationActivityName *string                     `json:"reservation_activity_name,omitempty"`
+	ReservationActivitySid  *string                     `json:"reservation_activity_sid,omitempty"`
+	Sid                     *string                     `json:"sid,omitempty"`
+	TargetWorkers           *string                     `json:"target_workers,omitempty"`
+	TaskOrder               *TaskQueueEnumTaskOrderEnum `json:"task_order,omitempty"`
+	URL                     *string                     `json:"url,omitempty"`
+	WorkspaceSid            *string                     `json:"workspace_sid,omitempty"`
 }

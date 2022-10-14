@@ -1,7 +1,7 @@
 package shared
 
 type EeCreateTokenResponse struct {
-	AccessToken *string  `json:"accessToken"`
-	ExpiresIn   *float64 `json:"expiresIn"`
-	TokenType   *string  `json:"tokenType"`
+	AccessToken *string  `json:"accessToken,omitempty"`
+	ExpiresIn   *float64 `json:"expiresIn,omitempty"`
+	TokenType   *string  `json:"tokenType,omitempty"`
 }

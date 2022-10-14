@@ -6,20 +6,20 @@ type UpdateNetworkWirelessSsidEapOverridePathParams struct {
 }
 
 type UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey struct {
-	Retries     *int64 `json:"retries"`
-	TimeoutInMs *int64 `json:"timeoutInMs"`
+	Retries     *int64 `json:"retries,omitempty"`
+	TimeoutInMs *int64 `json:"timeoutInMs,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidEapOverrideRequestBodyIdentity struct {
-	Retries *int64 `json:"retries"`
-	Timeout *int64 `json:"timeout"`
+	Retries *int64 `json:"retries,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidEapOverrideRequestBody struct {
-	EapolKey   *UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey `json:"eapolKey"`
-	Identity   *UpdateNetworkWirelessSsidEapOverrideRequestBodyIdentity `json:"identity"`
-	MaxRetries *int64                                                   `json:"maxRetries"`
-	Timeout    *int64                                                   `json:"timeout"`
+	EapolKey   *UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey `json:"eapolKey,omitempty"`
+	Identity   *UpdateNetworkWirelessSsidEapOverrideRequestBodyIdentity `json:"identity,omitempty"`
+	MaxRetries *int64                                                   `json:"maxRetries,omitempty"`
+	Timeout    *int64                                                   `json:"timeout,omitempty"`
 }
 
 type UpdateNetworkWirelessSsidEapOverrideRequest struct {

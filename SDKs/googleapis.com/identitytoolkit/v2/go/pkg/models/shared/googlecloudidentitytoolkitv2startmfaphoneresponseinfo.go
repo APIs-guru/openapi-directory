@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo struct {
-	SessionInfo *string `json:"sessionInfo"`
+	SessionInfo *string `json:"sessionInfo,omitempty"`
 }

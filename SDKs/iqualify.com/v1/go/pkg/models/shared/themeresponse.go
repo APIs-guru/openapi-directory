@@ -1,6 +1,6 @@
 package shared
 
 type ThemeResponse struct {
-	Filter            *string `json:"filter"`
-	NumberOfQuestions *string `json:"numberOfQuestions"`
+	Filter            *string `json:"filter,omitempty"`
+	NumberOfQuestions *string `json:"numberOfQuestions,omitempty"`
 }

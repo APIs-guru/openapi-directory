@@ -1,6 +1,6 @@
 package shared
 
 type ListDomainConfigurationsResponse struct {
-	DomainConfigurations []DomainConfigurationSummary `json:"domainConfigurations"`
-	NextMarker           *string                      `json:"nextMarker"`
+	DomainConfigurations []DomainConfigurationSummary `json:"domainConfigurations,omitempty"`
+	NextMarker           *string                      `json:"nextMarker,omitempty"`
 }

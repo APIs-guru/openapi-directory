@@ -18,13 +18,13 @@ const (
 )
 
 type UpdateOAuthClientRequest struct {
-	AccessTokenValidity  *int32                                   `json:"accessTokenValidity"`
-	ApprovalValidity     *int32                                   `json:"approvalValidity"`
-	ClientName           *string                                  `json:"clientName"`
-	ClientSecret         *string                                  `json:"clientSecret"`
-	ClientType           *UpdateOAuthClientRequestClientTypeEnum  `json:"clientType"`
+	AccessTokenValidity  *int32                                   `json:"accessTokenValidity,omitempty"`
+	ApprovalValidity     *int32                                   `json:"approvalValidity,omitempty"`
+	ClientName           *string                                  `json:"clientName,omitempty"`
+	ClientSecret         *string                                  `json:"clientSecret,omitempty"`
+	ClientType           *UpdateOAuthClientRequestClientTypeEnum  `json:"clientType,omitempty"`
 	GrantTypes           []UpdateOAuthClientRequestGrantTypesEnum `json:"grantTypes"`
-	IsEnabled            *bool                                    `json:"isEnabled"`
-	RedirectUris         []string                                 `json:"redirectUris"`
-	RefreshTokenValidity *int32                                   `json:"refreshTokenValidity"`
+	IsEnabled            *bool                                    `json:"isEnabled,omitempty"`
+	RedirectUris         []string                                 `json:"redirectUris,omitempty"`
+	RefreshTokenValidity *int32                                   `json:"refreshTokenValidity,omitempty"`
 }

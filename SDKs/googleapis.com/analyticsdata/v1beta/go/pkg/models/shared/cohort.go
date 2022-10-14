@@ -1,7 +1,7 @@
 package shared
 
 type Cohort struct {
-	DateRange *DateRange `json:"dateRange"`
-	Dimension *string    `json:"dimension"`
-	Name      *string    `json:"name"`
+	DateRange *DateRange `json:"dateRange,omitempty"`
+	Dimension *string    `json:"dimension,omitempty"`
+	Name      *string    `json:"name,omitempty"`
 }

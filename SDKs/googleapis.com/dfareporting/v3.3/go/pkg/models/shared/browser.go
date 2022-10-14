@@ -1,10 +1,10 @@
 package shared
 
 type Browser struct {
-	BrowserVersionID *string `json:"browserVersionId"`
-	DartID           *string `json:"dartId"`
-	Kind             *string `json:"kind"`
-	MajorVersion     *string `json:"majorVersion"`
-	MinorVersion     *string `json:"minorVersion"`
-	Name             *string `json:"name"`
+	BrowserVersionID *string `json:"browserVersionId,omitempty"`
+	DartID           *string `json:"dartId,omitempty"`
+	Kind             *string `json:"kind,omitempty"`
+	MajorVersion     *string `json:"majorVersion,omitempty"`
+	MinorVersion     *string `json:"minorVersion,omitempty"`
+	Name             *string `json:"name,omitempty"`
 }

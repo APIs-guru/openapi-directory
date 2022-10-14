@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleCloudWebriskV1Submission struct {
-	ThreatTypes []GoogleCloudWebriskV1SubmissionThreatTypesEnum `json:"threatTypes"`
-	URI         *string                                         `json:"uri"`
+	ThreatTypes []GoogleCloudWebriskV1SubmissionThreatTypesEnum `json:"threatTypes,omitempty"`
+	URI         *string                                         `json:"uri,omitempty"`
 }

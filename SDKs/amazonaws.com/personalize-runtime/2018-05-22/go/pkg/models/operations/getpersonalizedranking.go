@@ -16,9 +16,9 @@ type GetPersonalizedRankingHeaders struct {
 
 type GetPersonalizedRankingRequestBody struct {
 	CampaignArn  string            `json:"campaignArn"`
-	Context      map[string]string `json:"context"`
-	FilterArn    *string           `json:"filterArn"`
-	FilterValues map[string]string `json:"filterValues"`
+	Context      map[string]string `json:"context,omitempty"`
+	FilterArn    *string           `json:"filterArn,omitempty"`
+	FilterValues map[string]string `json:"filterValues,omitempty"`
 	InputList    []string          `json:"inputList"`
 	UserID       string            `json:"userId"`
 }

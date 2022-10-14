@@ -1,5 +1,5 @@
 package shared
 
 type TranscriptOutputConfig struct {
-	GcsURI *string `json:"gcsUri"`
+	GcsURI *string `json:"gcsUri,omitempty"`
 }

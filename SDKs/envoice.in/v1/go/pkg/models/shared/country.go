@@ -1,7 +1,7 @@
 package shared
 
 type Country struct {
-	ID    *int32  `json:"Id"`
-	Name  *string `json:"Name"`
-	Value *string `json:"Value"`
+	ID    *int32  `json:"Id,omitempty"`
+	Name  *string `json:"Name,omitempty"`
+	Value *string `json:"Value,omitempty"`
 }

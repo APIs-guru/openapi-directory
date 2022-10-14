@@ -23,15 +23,15 @@ const (
 )
 
 type ReleaseEventSeriesContract struct {
-	AdditionalNames *string                                 `json:"additionalNames"`
-	Category        *ReleaseEventSeriesContractCategoryEnum `json:"category"`
-	Deleted         *bool                                   `json:"deleted"`
-	Description     *string                                 `json:"description"`
-	ID              *int32                                  `json:"id"`
-	Name            *string                                 `json:"name"`
-	PictureMime     *string                                 `json:"pictureMime"`
-	Status          *ReleaseEventSeriesContractStatusEnum   `json:"status"`
-	URLSlug         *string                                 `json:"urlSlug"`
-	Version         *int32                                  `json:"version"`
-	WebLinks        []WebLinkContract                       `json:"webLinks"`
+	AdditionalNames *string                                 `json:"additionalNames,omitempty"`
+	Category        *ReleaseEventSeriesContractCategoryEnum `json:"category,omitempty"`
+	Deleted         *bool                                   `json:"deleted,omitempty"`
+	Description     *string                                 `json:"description,omitempty"`
+	ID              *int32                                  `json:"id,omitempty"`
+	Name            *string                                 `json:"name,omitempty"`
+	PictureMime     *string                                 `json:"pictureMime,omitempty"`
+	Status          *ReleaseEventSeriesContractStatusEnum   `json:"status,omitempty"`
+	URLSlug         *string                                 `json:"urlSlug,omitempty"`
+	Version         *int32                                  `json:"version,omitempty"`
+	WebLinks        []WebLinkContract                       `json:"webLinks,omitempty"`
 }

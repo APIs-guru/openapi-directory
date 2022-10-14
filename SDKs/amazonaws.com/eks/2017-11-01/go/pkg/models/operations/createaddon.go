@@ -27,11 +27,11 @@ const (
 
 type CreateAddonRequestBody struct {
 	AddonName             string                                      `json:"addonName"`
-	AddonVersion          *string                                     `json:"addonVersion"`
-	ClientRequestToken    *string                                     `json:"clientRequestToken"`
-	ResolveConflicts      *CreateAddonRequestBodyResolveConflictsEnum `json:"resolveConflicts"`
-	ServiceAccountRoleArn *string                                     `json:"serviceAccountRoleArn"`
-	Tags                  map[string]string                           `json:"tags"`
+	AddonVersion          *string                                     `json:"addonVersion,omitempty"`
+	ClientRequestToken    *string                                     `json:"clientRequestToken,omitempty"`
+	ResolveConflicts      *CreateAddonRequestBodyResolveConflictsEnum `json:"resolveConflicts,omitempty"`
+	ServiceAccountRoleArn *string                                     `json:"serviceAccountRoleArn,omitempty"`
+	Tags                  map[string]string                           `json:"tags,omitempty"`
 }
 
 type CreateAddonRequest struct {

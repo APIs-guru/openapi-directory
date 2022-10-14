@@ -12,13 +12,13 @@ const (
 )
 
 type GoogleCloudBeyondcorpAppconnectorsV1AppConnector struct {
-	CreateTime    *string                                                        `json:"createTime"`
-	DisplayName   *string                                                        `json:"displayName"`
-	Labels        map[string]string                                              `json:"labels"`
-	Name          *string                                                        `json:"name"`
-	PrincipalInfo *GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfo `json:"principalInfo"`
-	ResourceInfo  *GoogleCloudBeyondcorpAppconnectorsV1ResourceInfo              `json:"resourceInfo"`
-	State         *GoogleCloudBeyondcorpAppconnectorsV1AppConnectorStateEnum     `json:"state"`
-	UID           *string                                                        `json:"uid"`
-	UpdateTime    *string                                                        `json:"updateTime"`
+	CreateTime    *string                                                        `json:"createTime,omitempty"`
+	DisplayName   *string                                                        `json:"displayName,omitempty"`
+	Labels        map[string]string                                              `json:"labels,omitempty"`
+	Name          *string                                                        `json:"name,omitempty"`
+	PrincipalInfo *GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfo `json:"principalInfo,omitempty"`
+	ResourceInfo  *GoogleCloudBeyondcorpAppconnectorsV1ResourceInfo              `json:"resourceInfo,omitempty"`
+	State         *GoogleCloudBeyondcorpAppconnectorsV1AppConnectorStateEnum     `json:"state,omitempty"`
+	UID           *string                                                        `json:"uid,omitempty"`
+	UpdateTime    *string                                                        `json:"updateTime,omitempty"`
 }

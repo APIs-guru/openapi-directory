@@ -1,13 +1,13 @@
 package shared
 
 type GetInfoSchemaAddColumns struct {
-	Page     *int64 `json:"page"`
-	PageSize *int64 `json:"page_size"`
+	Page     *int64 `json:"page,omitempty"`
+	PageSize *int64 `json:"page_size,omitempty"`
 }
 
 type GetInfoSchemaEditColumns struct {
-	Page     *int64 `json:"page"`
-	PageSize *int64 `json:"page_size"`
+	Page     *int64 `json:"page,omitempty"`
+	PageSize *int64 `json:"page_size,omitempty"`
 }
 
 type GetInfoSchemaKeysEnum string
@@ -23,7 +23,7 @@ const (
 )
 
 type GetInfoSchema struct {
-	AddColumns  map[string]GetInfoSchemaAddColumns  `json:"add_columns"`
-	EditColumns map[string]GetInfoSchemaEditColumns `json:"edit_columns"`
-	Keys        []GetInfoSchemaKeysEnum             `json:"keys"`
+	AddColumns  map[string]GetInfoSchemaAddColumns  `json:"add_columns,omitempty"`
+	EditColumns map[string]GetInfoSchemaEditColumns `json:"edit_columns,omitempty"`
+	Keys        []GetInfoSchemaKeysEnum             `json:"keys,omitempty"`
 }

@@ -25,8 +25,8 @@ type CreateJobQueueRequestBody struct {
 	ComputeEnvironmentOrder []shared.ComputeEnvironmentOrder    `json:"computeEnvironmentOrder"`
 	JobQueueName            string                              `json:"jobQueueName"`
 	Priority                int64                               `json:"priority"`
-	State                   *CreateJobQueueRequestBodyStateEnum `json:"state"`
-	Tags                    map[string]string                   `json:"tags"`
+	State                   *CreateJobQueueRequestBodyStateEnum `json:"state,omitempty"`
+	Tags                    map[string]string                   `json:"tags,omitempty"`
 }
 
 type CreateJobQueueRequest struct {

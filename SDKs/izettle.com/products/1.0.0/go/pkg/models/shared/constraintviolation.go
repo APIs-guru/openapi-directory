@@ -23,9 +23,9 @@ const (
 )
 
 type ConstraintViolation struct {
-	ConstraintType   *ConstraintViolationConstraintTypeEnum `json:"constraintType"`
-	DeveloperMessage *string                                `json:"developerMessage"`
-	Expected         *string                                `json:"expected"`
-	PropertyName     *string                                `json:"propertyName"`
-	Value            *string                                `json:"value"`
+	ConstraintType   *ConstraintViolationConstraintTypeEnum `json:"constraintType,omitempty"`
+	DeveloperMessage *string                                `json:"developerMessage,omitempty"`
+	Expected         *string                                `json:"expected,omitempty"`
+	PropertyName     *string                                `json:"propertyName,omitempty"`
+	Value            *string                                `json:"value,omitempty"`
 }

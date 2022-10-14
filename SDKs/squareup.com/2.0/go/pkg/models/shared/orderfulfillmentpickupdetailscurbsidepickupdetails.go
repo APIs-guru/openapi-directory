@@ -1,6 +1,6 @@
 package shared
 
 type OrderFulfillmentPickupDetailsCurbsidePickupDetails struct {
-	BuyerArrivedAt  *string `json:"buyer_arrived_at"`
-	CurbsideDetails *string `json:"curbside_details"`
+	BuyerArrivedAt  *string `json:"buyer_arrived_at,omitempty"`
+	CurbsideDetails *string `json:"curbside_details,omitempty"`
 }

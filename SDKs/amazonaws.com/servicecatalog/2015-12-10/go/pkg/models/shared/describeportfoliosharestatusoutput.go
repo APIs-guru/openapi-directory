@@ -1,9 +1,9 @@
 package shared
 
 type DescribePortfolioShareStatusOutput struct {
-	OrganizationNodeValue *string          `json:"OrganizationNodeValue"`
-	PortfolioID           *string          `json:"PortfolioId"`
-	PortfolioShareToken   *string          `json:"PortfolioShareToken"`
-	ShareDetails          *ShareDetails    `json:"ShareDetails"`
-	Status                *ShareStatusEnum `json:"Status"`
+	OrganizationNodeValue *string          `json:"OrganizationNodeValue,omitempty"`
+	PortfolioID           *string          `json:"PortfolioId,omitempty"`
+	PortfolioShareToken   *string          `json:"PortfolioShareToken,omitempty"`
+	ShareDetails          *ShareDetails    `json:"ShareDetails,omitempty"`
+	Status                *ShareStatusEnum `json:"Status,omitempty"`
 }

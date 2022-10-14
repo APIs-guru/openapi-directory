@@ -5,6 +5,6 @@ type AllocateHostedConnectionRequest struct {
 	ConnectionID   string `json:"connectionId"`
 	ConnectionName string `json:"connectionName"`
 	OwnerAccount   string `json:"ownerAccount"`
-	Tags           []Tag  `json:"tags"`
+	Tags           []Tag  `json:"tags,omitempty"`
 	Vlan           int64  `json:"vlan"`
 }

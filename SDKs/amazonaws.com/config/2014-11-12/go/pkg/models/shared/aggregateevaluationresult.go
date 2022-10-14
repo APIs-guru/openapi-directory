@@ -5,11 +5,11 @@ import (
 )
 
 type AggregateEvaluationResult struct {
-	AccountID                  *string                     `json:"AccountId"`
-	Annotation                 *string                     `json:"Annotation"`
-	AwsRegion                  *string                     `json:"AwsRegion"`
-	ComplianceType             *ComplianceTypeEnum         `json:"ComplianceType"`
-	ConfigRuleInvokedTime      *time.Time                  `json:"ConfigRuleInvokedTime"`
-	EvaluationResultIdentifier *EvaluationResultIdentifier `json:"EvaluationResultIdentifier"`
-	ResultRecordedTime         *time.Time                  `json:"ResultRecordedTime"`
+	AccountID                  *string                     `json:"AccountId,omitempty"`
+	Annotation                 *string                     `json:"Annotation,omitempty"`
+	AwsRegion                  *string                     `json:"AwsRegion,omitempty"`
+	ComplianceType             *ComplianceTypeEnum         `json:"ComplianceType,omitempty"`
+	ConfigRuleInvokedTime      *time.Time                  `json:"ConfigRuleInvokedTime,omitempty"`
+	EvaluationResultIdentifier *EvaluationResultIdentifier `json:"EvaluationResultIdentifier,omitempty"`
+	ResultRecordedTime         *time.Time                  `json:"ResultRecordedTime,omitempty"`
 }

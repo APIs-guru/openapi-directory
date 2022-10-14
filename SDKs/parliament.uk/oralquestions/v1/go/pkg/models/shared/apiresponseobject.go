@@ -53,9 +53,9 @@ const (
 )
 
 type APIResponseObject struct {
-	Errors     []string                         `json:"Errors"`
-	PagingInfo *PagingInfo                      `json:"PagingInfo"`
-	Response   map[string]interface{}           `json:"Response"`
-	StatusCode *APIResponseObjectStatusCodeEnum `json:"StatusCode"`
-	Success    *bool                            `json:"Success"`
+	Errors     []string                         `json:"Errors,omitempty"`
+	PagingInfo *PagingInfo                      `json:"PagingInfo,omitempty"`
+	Response   map[string]interface{}           `json:"Response,omitempty"`
+	StatusCode *APIResponseObjectStatusCodeEnum `json:"StatusCode,omitempty"`
+	Success    *bool                            `json:"Success,omitempty"`
 }

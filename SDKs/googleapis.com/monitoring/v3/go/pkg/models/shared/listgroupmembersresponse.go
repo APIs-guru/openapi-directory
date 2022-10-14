@@ -1,7 +1,7 @@
 package shared
 
 type ListGroupMembersResponse struct {
-	Members       []MonitoredResource `json:"members"`
-	NextPageToken *string             `json:"nextPageToken"`
-	TotalSize     *int32              `json:"totalSize"`
+	Members       []MonitoredResource `json:"members,omitempty"`
+	NextPageToken *string             `json:"nextPageToken,omitempty"`
+	TotalSize     *int32              `json:"totalSize,omitempty"`
 }

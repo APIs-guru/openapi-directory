@@ -9,9 +9,9 @@ const (
 )
 
 type WorkloadIdentityPool struct {
-	Description *string                        `json:"description"`
-	Disabled    *bool                          `json:"disabled"`
-	DisplayName *string                        `json:"displayName"`
-	Name        *string                        `json:"name"`
-	State       *WorkloadIdentityPoolStateEnum `json:"state"`
+	Description *string                        `json:"description,omitempty"`
+	Disabled    *bool                          `json:"disabled,omitempty"`
+	DisplayName *string                        `json:"displayName,omitempty"`
+	Name        *string                        `json:"name,omitempty"`
+	State       *WorkloadIdentityPoolStateEnum `json:"state,omitempty"`
 }

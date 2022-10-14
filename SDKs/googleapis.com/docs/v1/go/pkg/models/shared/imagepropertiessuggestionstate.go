@@ -1,11 +1,11 @@
 package shared
 
 type ImagePropertiesSuggestionState struct {
-	AngleSuggested                *bool                          `json:"angleSuggested"`
-	BrightnessSuggested           *bool                          `json:"brightnessSuggested"`
-	ContentURISuggested           *bool                          `json:"contentUriSuggested"`
-	ContrastSuggested             *bool                          `json:"contrastSuggested"`
-	CropPropertiesSuggestionState *CropPropertiesSuggestionState `json:"cropPropertiesSuggestionState"`
-	SourceURISuggested            *bool                          `json:"sourceUriSuggested"`
-	TransparencySuggested         *bool                          `json:"transparencySuggested"`
+	AngleSuggested                *bool                          `json:"angleSuggested,omitempty"`
+	BrightnessSuggested           *bool                          `json:"brightnessSuggested,omitempty"`
+	ContentURISuggested           *bool                          `json:"contentUriSuggested,omitempty"`
+	ContrastSuggested             *bool                          `json:"contrastSuggested,omitempty"`
+	CropPropertiesSuggestionState *CropPropertiesSuggestionState `json:"cropPropertiesSuggestionState,omitempty"`
+	SourceURISuggested            *bool                          `json:"sourceUriSuggested,omitempty"`
+	TransparencySuggested         *bool                          `json:"transparencySuggested,omitempty"`
 }

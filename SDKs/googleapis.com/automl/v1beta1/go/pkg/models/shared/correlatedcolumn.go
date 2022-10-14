@@ -1,6 +1,6 @@
 package shared
 
 type CorrelatedColumn struct {
-	ColumnSpecID     *string           `json:"columnSpecId"`
-	CorrelationStats *CorrelationStats `json:"correlationStats"`
+	ColumnSpecID     *string           `json:"columnSpecId,omitempty"`
+	CorrelationStats *CorrelationStats `json:"correlationStats,omitempty"`
 }

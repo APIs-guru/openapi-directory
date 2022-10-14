@@ -1,7 +1,7 @@
 package shared
 
 type CropHint struct {
-	BoundingPoly       *BoundingPoly `json:"boundingPoly"`
-	Confidence         *float32      `json:"confidence"`
-	ImportanceFraction *float32      `json:"importanceFraction"`
+	BoundingPoly       *BoundingPoly `json:"boundingPoly,omitempty"`
+	Confidence         *float32      `json:"confidence,omitempty"`
+	ImportanceFraction *float32      `json:"importanceFraction,omitempty"`
 }

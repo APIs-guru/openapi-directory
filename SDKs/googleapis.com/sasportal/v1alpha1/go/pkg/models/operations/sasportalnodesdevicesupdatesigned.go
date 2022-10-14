@@ -22,19 +22,9 @@ type SasportalNodesDevicesUpdateSignedQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
-type SasportalNodesDevicesUpdateSignedSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-}
-
-type SasportalNodesDevicesUpdateSignedSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-}
-
 type SasportalNodesDevicesUpdateSignedSecurity struct {
-	Option1 *SasportalNodesDevicesUpdateSignedSecurityOption1 `security:"option"`
-	Option2 *SasportalNodesDevicesUpdateSignedSecurityOption2 `security:"option"`
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type SasportalNodesDevicesUpdateSignedRequest struct {

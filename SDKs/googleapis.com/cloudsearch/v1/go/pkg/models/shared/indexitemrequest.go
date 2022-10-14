@@ -9,9 +9,9 @@ const (
 )
 
 type IndexItemRequest struct {
-	ConnectorName    *string                   `json:"connectorName"`
-	DebugOptions     *DebugOptions             `json:"debugOptions"`
-	IndexItemOptions *IndexItemOptions         `json:"indexItemOptions"`
-	Item             *Item                     `json:"item"`
-	Mode             *IndexItemRequestModeEnum `json:"mode"`
+	ConnectorName    *string                   `json:"connectorName,omitempty"`
+	DebugOptions     *DebugOptions             `json:"debugOptions,omitempty"`
+	IndexItemOptions *IndexItemOptions         `json:"indexItemOptions,omitempty"`
+	Item             *Item                     `json:"item,omitempty"`
+	Mode             *IndexItemRequestModeEnum `json:"mode,omitempty"`
 }

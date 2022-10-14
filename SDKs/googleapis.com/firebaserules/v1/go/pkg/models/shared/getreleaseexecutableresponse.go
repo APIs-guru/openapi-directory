@@ -17,10 +17,10 @@ const (
 )
 
 type GetReleaseExecutableResponse struct {
-	Executable        *string                                            `json:"executable"`
-	ExecutableVersion *GetReleaseExecutableResponseExecutableVersionEnum `json:"executableVersion"`
-	Language          *GetReleaseExecutableResponseLanguageEnum          `json:"language"`
-	RulesetName       *string                                            `json:"rulesetName"`
-	SyncTime          *string                                            `json:"syncTime"`
-	UpdateTime        *string                                            `json:"updateTime"`
+	Executable        *string                                            `json:"executable,omitempty"`
+	ExecutableVersion *GetReleaseExecutableResponseExecutableVersionEnum `json:"executableVersion,omitempty"`
+	Language          *GetReleaseExecutableResponseLanguageEnum          `json:"language,omitempty"`
+	RulesetName       *string                                            `json:"rulesetName,omitempty"`
+	SyncTime          *string                                            `json:"syncTime,omitempty"`
+	UpdateTime        *string                                            `json:"updateTime,omitempty"`
 }

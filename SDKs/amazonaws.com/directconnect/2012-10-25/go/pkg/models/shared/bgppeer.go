@@ -1,14 +1,14 @@
 package shared
 
 type BgpPeer struct {
-	AddressFamily      *AddressFamilyEnum `json:"addressFamily"`
-	AmazonAddress      *string            `json:"amazonAddress"`
-	Asn                *int64             `json:"asn"`
-	AuthKey            *string            `json:"authKey"`
-	AwsDeviceV2        *string            `json:"awsDeviceV2"`
-	AwsLogicalDeviceID *string            `json:"awsLogicalDeviceId"`
-	BgpPeerID          *string            `json:"bgpPeerId"`
-	BgpPeerState       *BgpPeerStateEnum  `json:"bgpPeerState"`
-	BgpStatus          *BgpStatusEnum     `json:"bgpStatus"`
-	CustomerAddress    *string            `json:"customerAddress"`
+	AddressFamily      *AddressFamilyEnum `json:"addressFamily,omitempty"`
+	AmazonAddress      *string            `json:"amazonAddress,omitempty"`
+	Asn                *int64             `json:"asn,omitempty"`
+	AuthKey            *string            `json:"authKey,omitempty"`
+	AwsDeviceV2        *string            `json:"awsDeviceV2,omitempty"`
+	AwsLogicalDeviceID *string            `json:"awsLogicalDeviceId,omitempty"`
+	BgpPeerID          *string            `json:"bgpPeerId,omitempty"`
+	BgpPeerState       *BgpPeerStateEnum  `json:"bgpPeerState,omitempty"`
+	BgpStatus          *BgpStatusEnum     `json:"bgpStatus,omitempty"`
+	CustomerAddress    *string            `json:"customerAddress,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListDiscoveredResourcesResult struct {
-	DiscoveredResourceList []DiscoveredResource `json:"DiscoveredResourceList"`
-	NextToken              *string              `json:"NextToken"`
+	DiscoveredResourceList []DiscoveredResource `json:"DiscoveredResourceList,omitempty"`
+	NextToken              *string              `json:"NextToken,omitempty"`
 }

@@ -22,14 +22,14 @@ const (
 )
 
 type VideoContentDetails struct {
-	Caption            *VideoContentDetailsCaptionEnum       `json:"caption"`
-	ContentRating      *ContentRating                        `json:"contentRating"`
-	CountryRestriction *AccessPolicy                         `json:"countryRestriction"`
-	Definition         *VideoContentDetailsDefinitionEnum    `json:"definition"`
-	Dimension          *string                               `json:"dimension"`
-	Duration           *string                               `json:"duration"`
-	HasCustomThumbnail *bool                                 `json:"hasCustomThumbnail"`
-	LicensedContent    *bool                                 `json:"licensedContent"`
-	Projection         *VideoContentDetailsProjectionEnum    `json:"projection"`
-	RegionRestriction  *VideoContentDetailsRegionRestriction `json:"regionRestriction"`
+	Caption            *VideoContentDetailsCaptionEnum       `json:"caption,omitempty"`
+	ContentRating      *ContentRating                        `json:"contentRating,omitempty"`
+	CountryRestriction *AccessPolicy                         `json:"countryRestriction,omitempty"`
+	Definition         *VideoContentDetailsDefinitionEnum    `json:"definition,omitempty"`
+	Dimension          *string                               `json:"dimension,omitempty"`
+	Duration           *string                               `json:"duration,omitempty"`
+	HasCustomThumbnail *bool                                 `json:"hasCustomThumbnail,omitempty"`
+	LicensedContent    *bool                                 `json:"licensedContent,omitempty"`
+	Projection         *VideoContentDetailsProjectionEnum    `json:"projection,omitempty"`
+	RegionRestriction  *VideoContentDetailsRegionRestriction `json:"regionRestriction,omitempty"`
 }

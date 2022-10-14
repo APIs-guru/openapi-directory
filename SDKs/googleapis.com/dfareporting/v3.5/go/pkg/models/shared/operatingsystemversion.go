@@ -1,10 +1,10 @@
 package shared
 
 type OperatingSystemVersion struct {
-	ID              *string          `json:"id"`
-	Kind            *string          `json:"kind"`
-	MajorVersion    *string          `json:"majorVersion"`
-	MinorVersion    *string          `json:"minorVersion"`
-	Name            *string          `json:"name"`
-	OperatingSystem *OperatingSystem `json:"operatingSystem"`
+	ID              *string          `json:"id,omitempty"`
+	Kind            *string          `json:"kind,omitempty"`
+	MajorVersion    *string          `json:"majorVersion,omitempty"`
+	MinorVersion    *string          `json:"minorVersion,omitempty"`
+	Name            *string          `json:"name,omitempty"`
+	OperatingSystem *OperatingSystem `json:"operatingSystem,omitempty"`
 }

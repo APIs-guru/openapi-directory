@@ -19,10 +19,10 @@ const (
 )
 
 type MetroAreasList400ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     MetroAreasList400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -34,10 +34,10 @@ const (
 )
 
 type MetroAreasList401ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     MetroAreasList401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -48,10 +48,10 @@ const (
 )
 
 type MetroAreasList403ApplicationJSON struct {
-	Detail   *string                                  `json:"detail"`
-	Instance *string                                  `json:"instance"`
-	Status   *interface{}                             `json:"status"`
-	Title    *interface{}                             `json:"title"`
+	Detail   *string                                  `json:"detail,omitempty"`
+	Instance *string                                  `json:"instance,omitempty"`
+	Status   *interface{}                             `json:"status,omitempty"`
+	Title    *interface{}                             `json:"title,omitempty"`
 	Type     MetroAreasList403ApplicationJSONTypeEnum `json:"type"`
 }
 

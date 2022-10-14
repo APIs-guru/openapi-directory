@@ -33,25 +33,25 @@ const (
 )
 
 type EditUserAlt1RequestBodyVideosPrivacy struct {
-	Add      *bool                                             `json:"add"`
-	Comments *EditUserAlt1RequestBodyVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                             `json:"download"`
-	Embed    *EditUserAlt1RequestBodyVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *EditUserAlt1RequestBodyVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                             `json:"add,omitempty"`
+	Comments *EditUserAlt1RequestBodyVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                             `json:"download,omitempty"`
+	Embed    *EditUserAlt1RequestBodyVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *EditUserAlt1RequestBodyVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type EditUserAlt1RequestBodyVideos struct {
-	Privacy *EditUserAlt1RequestBodyVideosPrivacy `json:"privacy"`
+	Privacy *EditUserAlt1RequestBodyVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type EditUserAlt1RequestBody struct {
-	Bio           *string                        `json:"bio"`
-	ContentFilter []string                       `json:"content_filter"`
-	Link          *string                        `json:"link"`
-	Location      *string                        `json:"location"`
-	Name          *string                        `json:"name"`
-	Password      *string                        `json:"password"`
-	Videos        *EditUserAlt1RequestBodyVideos `json:"videos"`
+	Bio           *string                        `json:"bio,omitempty"`
+	ContentFilter []string                       `json:"content_filter,omitempty"`
+	Link          *string                        `json:"link,omitempty"`
+	Location      *string                        `json:"location,omitempty"`
+	Name          *string                        `json:"name,omitempty"`
+	Password      *string                        `json:"password,omitempty"`
+	Videos        *EditUserAlt1RequestBodyVideos `json:"videos,omitempty"`
 }
 
 type EditUserAlt1Request struct {

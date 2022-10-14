@@ -13,13 +13,13 @@ type DeleteAppRequest struct {
 }
 
 type DeleteApp200ApplicationJSON struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type DeleteApp401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type DeleteAppResponse struct {

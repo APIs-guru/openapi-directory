@@ -1,11 +1,11 @@
 package shared
 
 type VideoMetadata struct {
-	Codec          *string              `json:"Codec"`
-	ColorRange     *VideoColorRangeEnum `json:"ColorRange"`
-	DurationMillis *int64               `json:"DurationMillis"`
-	Format         *string              `json:"Format"`
-	FrameHeight    *int64               `json:"FrameHeight"`
-	FrameRate      *float32             `json:"FrameRate"`
-	FrameWidth     *int64               `json:"FrameWidth"`
+	Codec          *string              `json:"Codec,omitempty"`
+	ColorRange     *VideoColorRangeEnum `json:"ColorRange,omitempty"`
+	DurationMillis *int64               `json:"DurationMillis,omitempty"`
+	Format         *string              `json:"Format,omitempty"`
+	FrameHeight    *int64               `json:"FrameHeight,omitempty"`
+	FrameRate      *float32             `json:"FrameRate,omitempty"`
+	FrameWidth     *int64               `json:"FrameWidth,omitempty"`
 }

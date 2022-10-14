@@ -1,6 +1,6 @@
 package shared
 
 type TransferDomainToAnotherAwsAccountResponse struct {
-	OperationID *string `json:"OperationId"`
-	Password    *string `json:"Password"`
+	OperationID *string `json:"OperationId,omitempty"`
+	Password    *string `json:"Password,omitempty"`
 }

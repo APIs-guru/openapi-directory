@@ -8,6 +8,6 @@ const (
 )
 
 type ImportRead struct {
-	Reason *string              `json:"reason"`
+	Reason *string              `json:"reason,omitempty"`
 	Status ImportReadStatusEnum `json:"status"`
 }

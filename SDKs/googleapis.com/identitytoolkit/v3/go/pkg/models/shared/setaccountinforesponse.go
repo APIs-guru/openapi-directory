@@ -1,23 +1,23 @@
 package shared
 
 type SetAccountInfoResponseProviderUserInfo struct {
-	DisplayName *string `json:"displayName"`
-	FederatedID *string `json:"federatedId"`
-	PhotoURL    *string `json:"photoUrl"`
-	ProviderID  *string `json:"providerId"`
+	DisplayName *string `json:"displayName,omitempty"`
+	FederatedID *string `json:"federatedId,omitempty"`
+	PhotoURL    *string `json:"photoUrl,omitempty"`
+	ProviderID  *string `json:"providerId,omitempty"`
 }
 
 type SetAccountInfoResponse struct {
-	DisplayName      *string                                  `json:"displayName"`
-	Email            *string                                  `json:"email"`
-	EmailVerified    *bool                                    `json:"emailVerified"`
-	ExpiresIn        *string                                  `json:"expiresIn"`
-	IDToken          *string                                  `json:"idToken"`
-	Kind             *string                                  `json:"kind"`
-	LocalID          *string                                  `json:"localId"`
-	NewEmail         *string                                  `json:"newEmail"`
-	PasswordHash     *string                                  `json:"passwordHash"`
-	PhotoURL         *string                                  `json:"photoUrl"`
-	ProviderUserInfo []SetAccountInfoResponseProviderUserInfo `json:"providerUserInfo"`
-	RefreshToken     *string                                  `json:"refreshToken"`
+	DisplayName      *string                                  `json:"displayName,omitempty"`
+	Email            *string                                  `json:"email,omitempty"`
+	EmailVerified    *bool                                    `json:"emailVerified,omitempty"`
+	ExpiresIn        *string                                  `json:"expiresIn,omitempty"`
+	IDToken          *string                                  `json:"idToken,omitempty"`
+	Kind             *string                                  `json:"kind,omitempty"`
+	LocalID          *string                                  `json:"localId,omitempty"`
+	NewEmail         *string                                  `json:"newEmail,omitempty"`
+	PasswordHash     *string                                  `json:"passwordHash,omitempty"`
+	PhotoURL         *string                                  `json:"photoUrl,omitempty"`
+	ProviderUserInfo []SetAccountInfoResponseProviderUserInfo `json:"providerUserInfo,omitempty"`
+	RefreshToken     *string                                  `json:"refreshToken,omitempty"`
 }

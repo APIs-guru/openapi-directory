@@ -1,6 +1,6 @@
 package shared
 
 type AddConditionalFormatRuleRequest struct {
-	Index *int32                 `json:"index"`
-	Rule  *ConditionalFormatRule `json:"rule"`
+	Index *int32                 `json:"index,omitempty"`
+	Rule  *ConditionalFormatRule `json:"rule,omitempty"`
 }

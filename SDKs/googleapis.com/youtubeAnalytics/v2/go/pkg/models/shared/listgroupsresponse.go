@@ -1,9 +1,9 @@
 package shared
 
 type ListGroupsResponse struct {
-	Errors        *Errors `json:"errors"`
-	Etag          *string `json:"etag"`
-	Items         []Group `json:"items"`
-	Kind          *string `json:"kind"`
-	NextPageToken *string `json:"nextPageToken"`
+	Errors        *Errors `json:"errors,omitempty"`
+	Etag          *string `json:"etag,omitempty"`
+	Items         []Group `json:"items,omitempty"`
+	Kind          *string `json:"kind,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 }

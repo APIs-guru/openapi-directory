@@ -28,7 +28,7 @@ type CreateNodeBalancerConfigRequest struct {
 }
 
 type CreateNodeBalancerConfigDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateNodeBalancerConfigResponse struct {

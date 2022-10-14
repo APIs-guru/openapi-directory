@@ -1,12 +1,12 @@
 package shared
 
 type GetEmailIdentityResponse struct {
-	ConfigurationSetName     *string             `json:"ConfigurationSetName"`
-	DkimAttributes           *DkimAttributes     `json:"DkimAttributes"`
-	FeedbackForwardingStatus *bool               `json:"FeedbackForwardingStatus"`
-	IdentityType             *IdentityTypeEnum   `json:"IdentityType"`
-	MailFromAttributes       *MailFromAttributes `json:"MailFromAttributes"`
-	Policies                 map[string]string   `json:"Policies"`
-	Tags                     []Tag               `json:"Tags"`
-	VerifiedForSendingStatus *bool               `json:"VerifiedForSendingStatus"`
+	ConfigurationSetName     *string             `json:"ConfigurationSetName,omitempty"`
+	DkimAttributes           *DkimAttributes     `json:"DkimAttributes,omitempty"`
+	FeedbackForwardingStatus *bool               `json:"FeedbackForwardingStatus,omitempty"`
+	IdentityType             *IdentityTypeEnum   `json:"IdentityType,omitempty"`
+	MailFromAttributes       *MailFromAttributes `json:"MailFromAttributes,omitempty"`
+	Policies                 map[string]string   `json:"Policies,omitempty"`
+	Tags                     []Tag               `json:"Tags,omitempty"`
+	VerifiedForSendingStatus *bool               `json:"VerifiedForSendingStatus,omitempty"`
 }

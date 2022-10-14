@@ -19,8 +19,8 @@ type DescribeIdentityProviderConfigHeaders struct {
 }
 
 type DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig struct {
-	Name *string `json:"name"`
-	Type *string `json:"type"`
+	Name *string `json:"name,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type DescribeIdentityProviderConfigRequestBody struct {

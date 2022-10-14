@@ -13,19 +13,19 @@ type GetMenuRequest struct {
 }
 
 type GetMenu200ApplicationJSONResult struct {
-	Childs []map[string]interface{} `json:"childs"`
-	Icon   *string                  `json:"icon"`
-	Label  *string                  `json:"label"`
-	Name   *string                  `json:"name"`
-	URL    *string                  `json:"url"`
+	Childs []map[string]interface{} `json:"childs,omitempty"`
+	Icon   *string                  `json:"icon,omitempty"`
+	Label  *string                  `json:"label,omitempty"`
+	Name   *string                  `json:"name,omitempty"`
+	URL    *string                  `json:"url,omitempty"`
 }
 
 type GetMenu200ApplicationJSON struct {
-	Result []GetMenu200ApplicationJSONResult `json:"result"`
+	Result []GetMenu200ApplicationJSONResult `json:"result,omitempty"`
 }
 
 type GetMenu401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetMenuResponse struct {

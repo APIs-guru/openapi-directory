@@ -1,5 +1,5 @@
 package shared
 
 type DoubleCandidates struct {
-	Candidates []float64 `json:"candidates"`
+	Candidates []float64 `json:"candidates,omitempty"`
 }

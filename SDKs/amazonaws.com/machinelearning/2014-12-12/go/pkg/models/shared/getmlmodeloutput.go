@@ -5,25 +5,25 @@ import (
 )
 
 type GetMlModelOutput struct {
-	ComputeTime                 *int64                `json:"ComputeTime"`
-	CreatedAt                   *time.Time            `json:"CreatedAt"`
-	CreatedByIamUser            *string               `json:"CreatedByIamUser"`
-	EndpointInfo                *RealtimeEndpointInfo `json:"EndpointInfo"`
-	FinishedAt                  *time.Time            `json:"FinishedAt"`
-	InputDataLocationS3         *string               `json:"InputDataLocationS3"`
-	LastUpdatedAt               *time.Time            `json:"LastUpdatedAt"`
-	LogURI                      *string               `json:"LogUri"`
-	MlModelID                   *string               `json:"MLModelId"`
-	MlModelType                 *MlModelTypeEnum      `json:"MLModelType"`
-	Message                     *string               `json:"Message"`
-	Name                        *string               `json:"Name"`
-	Recipe                      *string               `json:"Recipe"`
-	Schema                      *string               `json:"Schema"`
-	ScoreThreshold              *float32              `json:"ScoreThreshold"`
-	ScoreThresholdLastUpdatedAt *time.Time            `json:"ScoreThresholdLastUpdatedAt"`
-	SizeInBytes                 *int64                `json:"SizeInBytes"`
-	StartedAt                   *time.Time            `json:"StartedAt"`
-	Status                      *EntityStatusEnum     `json:"Status"`
-	TrainingDataSourceID        *string               `json:"TrainingDataSourceId"`
-	TrainingParameters          map[string]string     `json:"TrainingParameters"`
+	ComputeTime                 *int64                `json:"ComputeTime,omitempty"`
+	CreatedAt                   *time.Time            `json:"CreatedAt,omitempty"`
+	CreatedByIamUser            *string               `json:"CreatedByIamUser,omitempty"`
+	EndpointInfo                *RealtimeEndpointInfo `json:"EndpointInfo,omitempty"`
+	FinishedAt                  *time.Time            `json:"FinishedAt,omitempty"`
+	InputDataLocationS3         *string               `json:"InputDataLocationS3,omitempty"`
+	LastUpdatedAt               *time.Time            `json:"LastUpdatedAt,omitempty"`
+	LogURI                      *string               `json:"LogUri,omitempty"`
+	MlModelID                   *string               `json:"MLModelId,omitempty"`
+	MlModelType                 *MlModelTypeEnum      `json:"MLModelType,omitempty"`
+	Message                     *string               `json:"Message,omitempty"`
+	Name                        *string               `json:"Name,omitempty"`
+	Recipe                      *string               `json:"Recipe,omitempty"`
+	Schema                      *string               `json:"Schema,omitempty"`
+	ScoreThreshold              *float32              `json:"ScoreThreshold,omitempty"`
+	ScoreThresholdLastUpdatedAt *time.Time            `json:"ScoreThresholdLastUpdatedAt,omitempty"`
+	SizeInBytes                 *int64                `json:"SizeInBytes,omitempty"`
+	StartedAt                   *time.Time            `json:"StartedAt,omitempty"`
+	Status                      *EntityStatusEnum     `json:"Status,omitempty"`
+	TrainingDataSourceID        *string               `json:"TrainingDataSourceId,omitempty"`
+	TrainingParameters          map[string]string     `json:"TrainingParameters,omitempty"`
 }

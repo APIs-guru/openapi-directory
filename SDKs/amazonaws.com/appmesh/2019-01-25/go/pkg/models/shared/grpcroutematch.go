@@ -1,7 +1,7 @@
 package shared
 
 type GrpcRouteMatch struct {
-	Metadata    []GrpcRouteMetadata `json:"metadata"`
-	MethodName  *string             `json:"methodName"`
-	ServiceName *string             `json:"serviceName"`
+	Metadata    []GrpcRouteMetadata `json:"metadata,omitempty"`
+	MethodName  *string             `json:"methodName,omitempty"`
+	ServiceName *string             `json:"serviceName,omitempty"`
 }

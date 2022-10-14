@@ -15,15 +15,15 @@ type StartSimulationJobBatchHeaders struct {
 }
 
 type StartSimulationJobBatchRequestBodyBatchPolicy struct {
-	MaxConcurrency   *int64 `json:"maxConcurrency"`
-	TimeoutInSeconds *int64 `json:"timeoutInSeconds"`
+	MaxConcurrency   *int64 `json:"maxConcurrency,omitempty"`
+	TimeoutInSeconds *int64 `json:"timeoutInSeconds,omitempty"`
 }
 
 type StartSimulationJobBatchRequestBody struct {
-	BatchPolicy                 *StartSimulationJobBatchRequestBodyBatchPolicy `json:"batchPolicy"`
-	ClientRequestToken          *string                                        `json:"clientRequestToken"`
+	BatchPolicy                 *StartSimulationJobBatchRequestBodyBatchPolicy `json:"batchPolicy,omitempty"`
+	ClientRequestToken          *string                                        `json:"clientRequestToken,omitempty"`
 	CreateSimulationJobRequests []shared.SimulationJobRequest                  `json:"createSimulationJobRequests"`
-	Tags                        map[string]string                              `json:"tags"`
+	Tags                        map[string]string                              `json:"tags,omitempty"`
 }
 
 type StartSimulationJobBatchRequest struct {

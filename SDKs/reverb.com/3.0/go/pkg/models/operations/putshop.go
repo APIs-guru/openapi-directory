@@ -5,14 +5,14 @@ import (
 )
 
 type PutShopRequestBodyAddress struct {
-	CountryCode     *string `json:"country_code"`
-	ExtendedAddress *string `json:"extended_address"`
-	Locality        *string `json:"locality"`
-	Name            *string `json:"name"`
-	Phone           *string `json:"phone"`
-	PostalCode      *string `json:"postal_code"`
-	Region          *string `json:"region"`
-	StreetAddress   *string `json:"street_address"`
+	CountryCode     *string `json:"country_code,omitempty"`
+	ExtendedAddress *string `json:"extended_address,omitempty"`
+	Locality        *string `json:"locality,omitempty"`
+	Name            *string `json:"name,omitempty"`
+	Phone           *string `json:"phone,omitempty"`
+	PostalCode      *string `json:"postal_code,omitempty"`
+	Region          *string `json:"region,omitempty"`
+	StreetAddress   *string `json:"street_address,omitempty"`
 }
 
 type PutShopRequestBodyCurrencyEnum string
@@ -283,17 +283,17 @@ const (
 )
 
 type PutShopRequestBody struct {
-	Address                   *PutShopRequestBodyAddress              `json:"address"`
-	Currency                  *PutShopRequestBodyCurrencyEnum         `json:"currency"`
-	Description               *string                                 `json:"description"`
-	LegalCountryCode          *PutShopRequestBodyLegalCountryCodeEnum `json:"legal_country_code"`
-	LegalCountryCodeConfirmed *bool                                   `json:"legal_country_code_confirmed"`
-	Name                      *string                                 `json:"name"`
-	PaymentPolicy             *string                                 `json:"payment_policy"`
-	ReturnPolicy              *string                                 `json:"return_policy"`
-	ShippingPolicy            *string                                 `json:"shipping_policy"`
-	ShopType                  *PutShopRequestBodyShopTypeEnum         `json:"shop_type"`
-	Website                   *string                                 `json:"website"`
+	Address                   *PutShopRequestBodyAddress              `json:"address,omitempty"`
+	Currency                  *PutShopRequestBodyCurrencyEnum         `json:"currency,omitempty"`
+	Description               *string                                 `json:"description,omitempty"`
+	LegalCountryCode          *PutShopRequestBodyLegalCountryCodeEnum `json:"legal_country_code,omitempty"`
+	LegalCountryCodeConfirmed *bool                                   `json:"legal_country_code_confirmed,omitempty"`
+	Name                      *string                                 `json:"name,omitempty"`
+	PaymentPolicy             *string                                 `json:"payment_policy,omitempty"`
+	ReturnPolicy              *string                                 `json:"return_policy,omitempty"`
+	ShippingPolicy            *string                                 `json:"shipping_policy,omitempty"`
+	ShopType                  *PutShopRequestBodyShopTypeEnum         `json:"shop_type,omitempty"`
+	Website                   *string                                 `json:"website,omitempty"`
 }
 
 type PutShopSecurity struct {

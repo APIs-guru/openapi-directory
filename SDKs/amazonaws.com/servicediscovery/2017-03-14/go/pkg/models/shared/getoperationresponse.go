@@ -1,5 +1,5 @@
 package shared
 
 type GetOperationResponse struct {
-	Operation *Operation `json:"Operation"`
+	Operation *Operation `json:"Operation,omitempty"`
 }

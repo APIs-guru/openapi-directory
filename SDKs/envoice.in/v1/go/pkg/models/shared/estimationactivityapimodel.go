@@ -54,9 +54,9 @@ const (
 )
 
 type EstimationActivityAPIModel struct {
-	EstimationNumber *string                             `json:"EstimationNumber"`
-	ID               *int32                              `json:"Id"`
-	Link             *string                             `json:"Link"`
-	Message          *string                             `json:"Message"`
-	Type             *EstimationActivityAPIModelTypeEnum `json:"Type"`
+	EstimationNumber *string                             `json:"EstimationNumber,omitempty"`
+	ID               *int32                              `json:"Id,omitempty"`
+	Link             *string                             `json:"Link,omitempty"`
+	Message          *string                             `json:"Message,omitempty"`
+	Type             *EstimationActivityAPIModelTypeEnum `json:"Type,omitempty"`
 }

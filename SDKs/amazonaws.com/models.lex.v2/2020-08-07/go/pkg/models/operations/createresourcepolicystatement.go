@@ -31,7 +31,7 @@ const (
 
 type CreateResourcePolicyStatementRequestBody struct {
 	Action      []string                                           `json:"action"`
-	Condition   map[string]map[string]string                       `json:"condition"`
+	Condition   map[string]map[string]string                       `json:"condition,omitempty"`
 	Effect      CreateResourcePolicyStatementRequestBodyEffectEnum `json:"effect"`
 	Principal   []shared.Principal                                 `json:"principal"`
 	StatementID string                                             `json:"statementId"`

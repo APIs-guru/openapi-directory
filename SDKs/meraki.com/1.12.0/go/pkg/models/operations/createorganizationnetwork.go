@@ -18,12 +18,12 @@ const (
 )
 
 type CreateOrganizationNetworkRequestBody struct {
-	CopyFromNetworkID *string                                                `json:"copyFromNetworkId"`
+	CopyFromNetworkID *string                                                `json:"copyFromNetworkId,omitempty"`
 	Name              string                                                 `json:"name"`
-	Notes             *string                                                `json:"notes"`
+	Notes             *string                                                `json:"notes,omitempty"`
 	ProductTypes      []CreateOrganizationNetworkRequestBodyProductTypesEnum `json:"productTypes"`
-	Tags              []string                                               `json:"tags"`
-	TimeZone          *string                                                `json:"timeZone"`
+	Tags              []string                                               `json:"tags,omitempty"`
+	TimeZone          *string                                                `json:"timeZone,omitempty"`
 }
 
 type CreateOrganizationNetworkRequest struct {

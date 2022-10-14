@@ -8,6 +8,6 @@ const (
 )
 
 type DatasetAccessEntry struct {
-	Dataset     *DatasetReference                   `json:"dataset"`
-	TargetTypes []DatasetAccessEntryTargetTypesEnum `json:"targetTypes"`
+	Dataset     *DatasetReference                   `json:"dataset,omitempty"`
+	TargetTypes []DatasetAccessEntryTargetTypesEnum `json:"targetTypes,omitempty"`
 }

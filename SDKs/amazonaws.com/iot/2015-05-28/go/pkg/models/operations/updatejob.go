@@ -23,29 +23,29 @@ type UpdateJobHeaders struct {
 }
 
 type UpdateJobRequestBodyAbortConfig struct {
-	CriteriaList []shared.AbortCriteria `json:"criteriaList"`
+	CriteriaList []shared.AbortCriteria `json:"criteriaList,omitempty"`
 }
 
 type UpdateJobRequestBodyJobExecutionsRolloutConfig struct {
-	ExponentialRate  *shared.ExponentialRolloutRate `json:"exponentialRate"`
-	MaximumPerMinute *int64                         `json:"maximumPerMinute"`
+	ExponentialRate  *shared.ExponentialRolloutRate `json:"exponentialRate,omitempty"`
+	MaximumPerMinute *int64                         `json:"maximumPerMinute,omitempty"`
 }
 
 type UpdateJobRequestBodyPresignedURLConfig struct {
-	ExpiresInSec *int64  `json:"expiresInSec"`
-	RoleArn      *string `json:"roleArn"`
+	ExpiresInSec *int64  `json:"expiresInSec,omitempty"`
+	RoleArn      *string `json:"roleArn,omitempty"`
 }
 
 type UpdateJobRequestBodyTimeoutConfig struct {
-	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes"`
+	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes,omitempty"`
 }
 
 type UpdateJobRequestBody struct {
-	AbortConfig                *UpdateJobRequestBodyAbortConfig                `json:"abortConfig"`
-	Description                *string                                         `json:"description"`
-	JobExecutionsRolloutConfig *UpdateJobRequestBodyJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig"`
-	PresignedURLConfig         *UpdateJobRequestBodyPresignedURLConfig         `json:"presignedUrlConfig"`
-	TimeoutConfig              *UpdateJobRequestBodyTimeoutConfig              `json:"timeoutConfig"`
+	AbortConfig                *UpdateJobRequestBodyAbortConfig                `json:"abortConfig,omitempty"`
+	Description                *string                                         `json:"description,omitempty"`
+	JobExecutionsRolloutConfig *UpdateJobRequestBodyJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig,omitempty"`
+	PresignedURLConfig         *UpdateJobRequestBodyPresignedURLConfig         `json:"presignedUrlConfig,omitempty"`
+	TimeoutConfig              *UpdateJobRequestBodyTimeoutConfig              `json:"timeoutConfig,omitempty"`
 }
 
 type UpdateJobRequest struct {

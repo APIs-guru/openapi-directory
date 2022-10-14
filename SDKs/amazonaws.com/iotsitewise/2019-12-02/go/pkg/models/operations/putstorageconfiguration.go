@@ -15,7 +15,7 @@ type PutStorageConfigurationHeaders struct {
 }
 
 type PutStorageConfigurationRequestBodyMultiLayerStorage struct {
-	CustomerManagedS3Storage *shared.CustomerManagedS3Storage `json:"customerManagedS3Storage"`
+	CustomerManagedS3Storage *shared.CustomerManagedS3Storage `json:"customerManagedS3Storage,omitempty"`
 }
 
 type PutStorageConfigurationRequestBodyStorageTypeEnum string
@@ -26,7 +26,7 @@ const (
 )
 
 type PutStorageConfigurationRequestBody struct {
-	MultiLayerStorage *PutStorageConfigurationRequestBodyMultiLayerStorage `json:"multiLayerStorage"`
+	MultiLayerStorage *PutStorageConfigurationRequestBodyMultiLayerStorage `json:"multiLayerStorage,omitempty"`
 	StorageType       PutStorageConfigurationRequestBodyStorageTypeEnum    `json:"storageType"`
 }
 

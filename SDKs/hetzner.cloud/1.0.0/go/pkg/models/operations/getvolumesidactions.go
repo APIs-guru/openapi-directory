@@ -89,7 +89,7 @@ type GetVolumesIDActions200ApplicationJSONMeta struct {
 
 type GetVolumesIDActions200ApplicationJSONActionsResponse struct {
 	Actions []GetVolumesIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetVolumesIDActions200ApplicationJSONMeta           `json:"meta"`
+	Meta    *GetVolumesIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
 }
 
 type GetVolumesIDActionsResponse struct {

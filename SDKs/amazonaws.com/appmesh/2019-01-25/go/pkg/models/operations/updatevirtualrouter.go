@@ -24,11 +24,11 @@ type UpdateVirtualRouterHeaders struct {
 }
 
 type UpdateVirtualRouterRequestBodySpec struct {
-	Listeners []shared.VirtualRouterListener `json:"listeners"`
+	Listeners []shared.VirtualRouterListener `json:"listeners,omitempty"`
 }
 
 type UpdateVirtualRouterRequestBody struct {
-	ClientToken *string                            `json:"clientToken"`
+	ClientToken *string                            `json:"clientToken,omitempty"`
 	Spec        UpdateVirtualRouterRequestBodySpec `json:"spec"`
 }
 

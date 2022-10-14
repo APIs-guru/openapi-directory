@@ -1,6 +1,6 @@
 package shared
 
 type LaunchPath struct {
-	ID   *string `json:"Id"`
-	Name *string `json:"Name"`
+	ID   *string `json:"Id,omitempty"`
+	Name *string `json:"Name,omitempty"`
 }

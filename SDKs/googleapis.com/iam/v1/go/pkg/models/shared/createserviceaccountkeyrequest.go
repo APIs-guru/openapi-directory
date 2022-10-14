@@ -17,6 +17,6 @@ const (
 )
 
 type CreateServiceAccountKeyRequest struct {
-	KeyAlgorithm   *CreateServiceAccountKeyRequestKeyAlgorithmEnum   `json:"keyAlgorithm"`
-	PrivateKeyType *CreateServiceAccountKeyRequestPrivateKeyTypeEnum `json:"privateKeyType"`
+	KeyAlgorithm   *CreateServiceAccountKeyRequestKeyAlgorithmEnum   `json:"keyAlgorithm,omitempty"`
+	PrivateKeyType *CreateServiceAccountKeyRequestPrivateKeyTypeEnum `json:"privateKeyType,omitempty"`
 }

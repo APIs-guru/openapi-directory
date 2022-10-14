@@ -12,6 +12,6 @@ const (
 )
 
 type GooglePrivacyDlpV2CharsToIgnore struct {
-	CharactersToSkip         *string                                                      `json:"charactersToSkip"`
-	CommonCharactersToIgnore *GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnoreEnum `json:"commonCharactersToIgnore"`
+	CharactersToSkip         *string                                                      `json:"charactersToSkip,omitempty"`
+	CommonCharactersToIgnore *GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnoreEnum `json:"commonCharactersToIgnore,omitempty"`
 }

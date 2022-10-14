@@ -1,6 +1,6 @@
 package shared
 
 type KeyPair struct {
-	PrimaryKey   *string `json:"PrimaryKey"`
-	SecondaryKey *string `json:"SecondaryKey"`
+	PrimaryKey   *string `json:"PrimaryKey,omitempty"`
+	SecondaryKey *string `json:"SecondaryKey,omitempty"`
 }

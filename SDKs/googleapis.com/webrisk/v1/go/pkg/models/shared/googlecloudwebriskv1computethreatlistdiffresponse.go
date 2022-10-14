@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleCloudWebriskV1ComputeThreatListDiffResponse struct {
-	Additions           *GoogleCloudWebriskV1ThreatEntryAdditions                          `json:"additions"`
-	Checksum            *GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum         `json:"checksum"`
-	NewVersionToken     *string                                                            `json:"newVersionToken"`
-	RecommendedNextDiff *string                                                            `json:"recommendedNextDiff"`
-	Removals            *GoogleCloudWebriskV1ThreatEntryRemovals                           `json:"removals"`
-	ResponseType        *GoogleCloudWebriskV1ComputeThreatListDiffResponseResponseTypeEnum `json:"responseType"`
+	Additions           *GoogleCloudWebriskV1ThreatEntryAdditions                          `json:"additions,omitempty"`
+	Checksum            *GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum         `json:"checksum,omitempty"`
+	NewVersionToken     *string                                                            `json:"newVersionToken,omitempty"`
+	RecommendedNextDiff *string                                                            `json:"recommendedNextDiff,omitempty"`
+	Removals            *GoogleCloudWebriskV1ThreatEntryRemovals                           `json:"removals,omitempty"`
+	ResponseType        *GoogleCloudWebriskV1ComputeThreatListDiffResponseResponseTypeEnum `json:"responseType,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type PaginationLink struct {
-	Rel *string `json:"rel"`
-	URI *string `json:"uri"`
+	Rel *string `json:"rel,omitempty"`
+	URI *string `json:"uri,omitempty"`
 }

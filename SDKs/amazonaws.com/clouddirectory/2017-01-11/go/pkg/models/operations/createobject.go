@@ -16,13 +16,13 @@ type CreateObjectHeaders struct {
 }
 
 type CreateObjectRequestBodyParentReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type CreateObjectRequestBody struct {
-	LinkName            *string                                 `json:"LinkName"`
-	ObjectAttributeList []shared.AttributeKeyAndValue           `json:"ObjectAttributeList"`
-	ParentReference     *CreateObjectRequestBodyParentReference `json:"ParentReference"`
+	LinkName            *string                                 `json:"LinkName,omitempty"`
+	ObjectAttributeList []shared.AttributeKeyAndValue           `json:"ObjectAttributeList,omitempty"`
+	ParentReference     *CreateObjectRequestBodyParentReference `json:"ParentReference,omitempty"`
 	SchemaFacets        []shared.SchemaFacet                    `json:"SchemaFacets"`
 }
 

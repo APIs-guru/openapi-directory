@@ -22,8 +22,8 @@ const (
 )
 
 type Verification struct {
-	CreateTime *string                 `json:"createTime"`
-	Method     *VerificationMethodEnum `json:"method"`
-	Name       *string                 `json:"name"`
-	State      *VerificationStateEnum  `json:"state"`
+	CreateTime *string                 `json:"createTime,omitempty"`
+	Method     *VerificationMethodEnum `json:"method,omitempty"`
+	Name       *string                 `json:"name,omitempty"`
+	State      *VerificationStateEnum  `json:"state,omitempty"`
 }

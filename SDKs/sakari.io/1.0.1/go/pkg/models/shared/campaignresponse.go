@@ -1,6 +1,6 @@
 package shared
 
 type CampaignResponse struct {
-	Data    *Campaign `json:"data"`
-	Success *bool     `json:"success"`
+	Data    *Campaign `json:"data,omitempty"`
+	Success *bool     `json:"success,omitempty"`
 }

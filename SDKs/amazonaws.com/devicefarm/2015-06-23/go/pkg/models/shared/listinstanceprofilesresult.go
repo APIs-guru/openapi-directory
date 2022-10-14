@@ -1,6 +1,6 @@
 package shared
 
 type ListInstanceProfilesResult struct {
-	InstanceProfiles []InstanceProfile `json:"instanceProfiles"`
-	NextToken        *string           `json:"nextToken"`
+	InstanceProfiles []InstanceProfile `json:"instanceProfiles,omitempty"`
+	NextToken        *string           `json:"nextToken,omitempty"`
 }

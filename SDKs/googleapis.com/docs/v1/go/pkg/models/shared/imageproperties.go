@@ -1,11 +1,11 @@
 package shared
 
 type ImageProperties struct {
-	Angle          *float32        `json:"angle"`
-	Brightness     *float32        `json:"brightness"`
-	ContentURI     *string         `json:"contentUri"`
-	Contrast       *float32        `json:"contrast"`
-	CropProperties *CropProperties `json:"cropProperties"`
-	SourceURI      *string         `json:"sourceUri"`
-	Transparency   *float32        `json:"transparency"`
+	Angle          *float32        `json:"angle,omitempty"`
+	Brightness     *float32        `json:"brightness,omitempty"`
+	ContentURI     *string         `json:"contentUri,omitempty"`
+	Contrast       *float32        `json:"contrast,omitempty"`
+	CropProperties *CropProperties `json:"cropProperties,omitempty"`
+	SourceURI      *string         `json:"sourceUri,omitempty"`
+	Transparency   *float32        `json:"transparency,omitempty"`
 }

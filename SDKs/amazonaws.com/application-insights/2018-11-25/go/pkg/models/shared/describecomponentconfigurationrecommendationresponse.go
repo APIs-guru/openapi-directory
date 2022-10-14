@@ -1,5 +1,5 @@
 package shared
 
 type DescribeComponentConfigurationRecommendationResponse struct {
-	ComponentConfiguration *string `json:"ComponentConfiguration"`
+	ComponentConfiguration *string `json:"ComponentConfiguration,omitempty"`
 }

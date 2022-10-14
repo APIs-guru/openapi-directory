@@ -18,7 +18,7 @@ type Collaborator struct {
 	Login             string                   `json:"login"`
 	NodeID            string                   `json:"node_id"`
 	OrganizationsURL  string                   `json:"organizations_url"`
-	Permissions       *CollaboratorPermissions `json:"permissions"`
+	Permissions       *CollaboratorPermissions `json:"permissions,omitempty"`
 	ReceivedEventsURL string                   `json:"received_events_url"`
 	ReposURL          string                   `json:"repos_url"`
 	SiteAdmin         bool                     `json:"site_admin"`

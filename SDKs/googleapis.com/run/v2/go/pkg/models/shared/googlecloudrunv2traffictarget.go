@@ -9,8 +9,8 @@ const (
 )
 
 type GoogleCloudRunV2TrafficTarget struct {
-	Percent  *int32                                 `json:"percent"`
-	Revision *string                                `json:"revision"`
-	Tag      *string                                `json:"tag"`
-	Type     *GoogleCloudRunV2TrafficTargetTypeEnum `json:"type"`
+	Percent  *int32                                 `json:"percent,omitempty"`
+	Revision *string                                `json:"revision,omitempty"`
+	Tag      *string                                `json:"tag,omitempty"`
+	Type     *GoogleCloudRunV2TrafficTargetTypeEnum `json:"type,omitempty"`
 }

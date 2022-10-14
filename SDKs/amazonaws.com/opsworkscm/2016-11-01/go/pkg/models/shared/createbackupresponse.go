@@ -1,5 +1,5 @@
 package shared
 
 type CreateBackupResponse struct {
-	Backup *Backup `json:"Backup"`
+	Backup *Backup `json:"Backup,omitempty"`
 }

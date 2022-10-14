@@ -1,7 +1,7 @@
 package shared
 
 type UpgradeTargetingRule struct {
-	BillingPeriodDuration *string             `json:"billingPeriodDuration"`
-	OncePerUser           *bool               `json:"oncePerUser"`
-	Scope                 *TargetingRuleScope `json:"scope"`
+	BillingPeriodDuration *string             `json:"billingPeriodDuration,omitempty"`
+	OncePerUser           *bool               `json:"oncePerUser,omitempty"`
+	Scope                 *TargetingRuleScope `json:"scope,omitempty"`
 }

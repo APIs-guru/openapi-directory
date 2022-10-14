@@ -5,11 +5,11 @@ import (
 )
 
 type SchemaExtensionInfo struct {
-	Description                 *string                    `json:"Description"`
-	DirectoryID                 *string                    `json:"DirectoryId"`
-	EndDateTime                 *time.Time                 `json:"EndDateTime"`
-	SchemaExtensionID           *string                    `json:"SchemaExtensionId"`
-	SchemaExtensionStatus       *SchemaExtensionStatusEnum `json:"SchemaExtensionStatus"`
-	SchemaExtensionStatusReason *string                    `json:"SchemaExtensionStatusReason"`
-	StartDateTime               *time.Time                 `json:"StartDateTime"`
+	Description                 *string                    `json:"Description,omitempty"`
+	DirectoryID                 *string                    `json:"DirectoryId,omitempty"`
+	EndDateTime                 *time.Time                 `json:"EndDateTime,omitempty"`
+	SchemaExtensionID           *string                    `json:"SchemaExtensionId,omitempty"`
+	SchemaExtensionStatus       *SchemaExtensionStatusEnum `json:"SchemaExtensionStatus,omitempty"`
+	SchemaExtensionStatusReason *string                    `json:"SchemaExtensionStatusReason,omitempty"`
+	StartDateTime               *time.Time                 `json:"StartDateTime,omitempty"`
 }

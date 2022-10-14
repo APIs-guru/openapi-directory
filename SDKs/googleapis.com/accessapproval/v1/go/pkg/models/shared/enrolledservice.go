@@ -8,6 +8,6 @@ const (
 )
 
 type EnrolledService struct {
-	CloudProduct    *string                             `json:"cloudProduct"`
-	EnrollmentLevel *EnrolledServiceEnrollmentLevelEnum `json:"enrollmentLevel"`
+	CloudProduct    *string                             `json:"cloudProduct,omitempty"`
+	EnrollmentLevel *EnrolledServiceEnrollmentLevelEnum `json:"enrollmentLevel,omitempty"`
 }

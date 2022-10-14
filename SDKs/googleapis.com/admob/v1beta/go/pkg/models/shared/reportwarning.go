@@ -11,6 +11,6 @@ const (
 )
 
 type ReportWarning struct {
-	Description *string                `json:"description"`
-	Type        *ReportWarningTypeEnum `json:"type"`
+	Description *string                `json:"description,omitempty"`
+	Type        *ReportWarningTypeEnum `json:"type,omitempty"`
 }

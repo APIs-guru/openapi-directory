@@ -1,12 +1,12 @@
 package shared
 
 type TaskStatus struct {
-	CompletionTime     *string                     `json:"completionTime"`
-	Conditions         []GoogleCloudRunV1Condition `json:"conditions"`
-	Index              *int32                      `json:"index"`
-	LastAttemptResult  *TaskAttemptResult          `json:"lastAttemptResult"`
-	LogURI             *string                     `json:"logUri"`
-	ObservedGeneration *int32                      `json:"observedGeneration"`
-	Retried            *int32                      `json:"retried"`
-	StartTime          *string                     `json:"startTime"`
+	CompletionTime     *string                     `json:"completionTime,omitempty"`
+	Conditions         []GoogleCloudRunV1Condition `json:"conditions,omitempty"`
+	Index              *int32                      `json:"index,omitempty"`
+	LastAttemptResult  *TaskAttemptResult          `json:"lastAttemptResult,omitempty"`
+	LogURI             *string                     `json:"logUri,omitempty"`
+	ObservedGeneration *int32                      `json:"observedGeneration,omitempty"`
+	Retried            *int32                      `json:"retried,omitempty"`
+	StartTime          *string                     `json:"startTime,omitempty"`
 }

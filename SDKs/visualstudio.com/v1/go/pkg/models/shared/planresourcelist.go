@@ -1,5 +1,5 @@
 package shared
 
 type PlanResourceList struct {
-	Value []PlanResource `json:"value"`
+	Value []PlanResource `json:"value,omitempty"`
 }

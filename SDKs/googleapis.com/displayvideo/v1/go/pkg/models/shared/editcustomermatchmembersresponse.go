@@ -1,5 +1,5 @@
 package shared
 
 type EditCustomerMatchMembersResponse struct {
-	FirstAndThirdPartyAudienceID *string `json:"firstAndThirdPartyAudienceId"`
+	FirstAndThirdPartyAudienceID *string `json:"firstAndThirdPartyAudienceId,omitempty"`
 }

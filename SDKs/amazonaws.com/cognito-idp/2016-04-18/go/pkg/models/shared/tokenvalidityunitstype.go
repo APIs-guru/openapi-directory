@@ -1,7 +1,7 @@
 package shared
 
 type TokenValidityUnitsType struct {
-	AccessToken  *TimeUnitsTypeEnum `json:"AccessToken"`
-	IDToken      *TimeUnitsTypeEnum `json:"IdToken"`
-	RefreshToken *TimeUnitsTypeEnum `json:"RefreshToken"`
+	AccessToken  *TimeUnitsTypeEnum `json:"AccessToken,omitempty"`
+	IDToken      *TimeUnitsTypeEnum `json:"IdToken,omitempty"`
+	RefreshToken *TimeUnitsTypeEnum `json:"RefreshToken,omitempty"`
 }

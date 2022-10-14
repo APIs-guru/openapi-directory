@@ -1,6 +1,6 @@
 package shared
 
 type ListDeploymentInstancesOutput struct {
-	InstancesList []string `json:"instancesList"`
-	NextToken     *string  `json:"nextToken"`
+	InstancesList []string `json:"instancesList,omitempty"`
+	NextToken     *string  `json:"nextToken,omitempty"`
 }

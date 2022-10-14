@@ -1,16 +1,16 @@
 package shared
 
 type ParagraphElement struct {
-	AutoText            *AutoText            `json:"autoText"`
-	ColumnBreak         *ColumnBreak         `json:"columnBreak"`
-	EndIndex            *int32               `json:"endIndex"`
-	Equation            *Equation            `json:"equation"`
-	FootnoteReference   *FootnoteReference   `json:"footnoteReference"`
-	HorizontalRule      *HorizontalRule      `json:"horizontalRule"`
-	InlineObjectElement *InlineObjectElement `json:"inlineObjectElement"`
-	PageBreak           *PageBreak           `json:"pageBreak"`
-	Person              *Person              `json:"person"`
-	RichLink            *RichLink            `json:"richLink"`
-	StartIndex          *int32               `json:"startIndex"`
-	TextRun             *TextRun             `json:"textRun"`
+	AutoText            *AutoText            `json:"autoText,omitempty"`
+	ColumnBreak         *ColumnBreak         `json:"columnBreak,omitempty"`
+	EndIndex            *int32               `json:"endIndex,omitempty"`
+	Equation            *Equation            `json:"equation,omitempty"`
+	FootnoteReference   *FootnoteReference   `json:"footnoteReference,omitempty"`
+	HorizontalRule      *HorizontalRule      `json:"horizontalRule,omitempty"`
+	InlineObjectElement *InlineObjectElement `json:"inlineObjectElement,omitempty"`
+	PageBreak           *PageBreak           `json:"pageBreak,omitempty"`
+	Person              *Person              `json:"person,omitempty"`
+	RichLink            *RichLink            `json:"richLink,omitempty"`
+	StartIndex          *int32               `json:"startIndex,omitempty"`
+	TextRun             *TextRun             `json:"textRun,omitempty"`
 }

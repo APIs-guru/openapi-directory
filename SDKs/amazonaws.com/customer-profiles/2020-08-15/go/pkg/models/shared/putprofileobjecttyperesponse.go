@@ -5,15 +5,15 @@ import (
 )
 
 type PutProfileObjectTypeResponse struct {
-	AllowProfileCreation *bool                      `json:"AllowProfileCreation"`
-	CreatedAt            *time.Time                 `json:"CreatedAt"`
+	AllowProfileCreation *bool                      `json:"AllowProfileCreation,omitempty"`
+	CreatedAt            *time.Time                 `json:"CreatedAt,omitempty"`
 	Description          string                     `json:"Description"`
-	EncryptionKey        *string                    `json:"EncryptionKey"`
-	ExpirationDays       *int64                     `json:"ExpirationDays"`
-	Fields               map[string]ObjectTypeField `json:"Fields"`
-	Keys                 map[string][]ObjectTypeKey `json:"Keys"`
-	LastUpdatedAt        *time.Time                 `json:"LastUpdatedAt"`
+	EncryptionKey        *string                    `json:"EncryptionKey,omitempty"`
+	ExpirationDays       *int64                     `json:"ExpirationDays,omitempty"`
+	Fields               map[string]ObjectTypeField `json:"Fields,omitempty"`
+	Keys                 map[string][]ObjectTypeKey `json:"Keys,omitempty"`
+	LastUpdatedAt        *time.Time                 `json:"LastUpdatedAt,omitempty"`
 	ObjectTypeName       string                     `json:"ObjectTypeName"`
-	Tags                 map[string]string          `json:"Tags"`
-	TemplateID           *string                    `json:"TemplateId"`
+	Tags                 map[string]string          `json:"Tags,omitempty"`
+	TemplateID           *string                    `json:"TemplateId,omitempty"`
 }

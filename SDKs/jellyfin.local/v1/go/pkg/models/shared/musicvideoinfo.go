@@ -5,15 +5,15 @@ import (
 )
 
 type MusicVideoInfo struct {
-	Artists             []string          `json:"Artists"`
-	IndexNumber         *int32            `json:"IndexNumber"`
-	IsAutomated         *bool             `json:"IsAutomated"`
-	MetadataCountryCode *string           `json:"MetadataCountryCode"`
-	MetadataLanguage    *string           `json:"MetadataLanguage"`
-	Name                *string           `json:"Name"`
-	ParentIndexNumber   *int32            `json:"ParentIndexNumber"`
-	Path                *string           `json:"Path"`
-	PremiereDate        *time.Time        `json:"PremiereDate"`
-	ProviderIds         map[string]string `json:"ProviderIds"`
-	Year                *int32            `json:"Year"`
+	Artists             []string          `json:"Artists,omitempty"`
+	IndexNumber         *int32            `json:"IndexNumber,omitempty"`
+	IsAutomated         *bool             `json:"IsAutomated,omitempty"`
+	MetadataCountryCode *string           `json:"MetadataCountryCode,omitempty"`
+	MetadataLanguage    *string           `json:"MetadataLanguage,omitempty"`
+	Name                *string           `json:"Name,omitempty"`
+	ParentIndexNumber   *int32            `json:"ParentIndexNumber,omitempty"`
+	Path                *string           `json:"Path,omitempty"`
+	PremiereDate        *time.Time        `json:"PremiereDate,omitempty"`
+	ProviderIds         map[string]string `json:"ProviderIds,omitempty"`
+	Year                *int32            `json:"Year,omitempty"`
 }

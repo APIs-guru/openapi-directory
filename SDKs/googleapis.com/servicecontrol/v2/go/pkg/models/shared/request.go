@@ -1,16 +1,16 @@
 package shared
 
 type Request struct {
-	Auth     *Auth             `json:"auth"`
-	Headers  map[string]string `json:"headers"`
-	Host     *string           `json:"host"`
-	ID       *string           `json:"id"`
-	Method   *string           `json:"method"`
-	Path     *string           `json:"path"`
-	Protocol *string           `json:"protocol"`
-	Query    *string           `json:"query"`
-	Reason   *string           `json:"reason"`
-	Scheme   *string           `json:"scheme"`
-	Size     *string           `json:"size"`
-	Time     *string           `json:"time"`
+	Auth     *Auth             `json:"auth,omitempty"`
+	Headers  map[string]string `json:"headers,omitempty"`
+	Host     *string           `json:"host,omitempty"`
+	ID       *string           `json:"id,omitempty"`
+	Method   *string           `json:"method,omitempty"`
+	Path     *string           `json:"path,omitempty"`
+	Protocol *string           `json:"protocol,omitempty"`
+	Query    *string           `json:"query,omitempty"`
+	Reason   *string           `json:"reason,omitempty"`
+	Scheme   *string           `json:"scheme,omitempty"`
+	Size     *string           `json:"size,omitempty"`
+	Time     *string           `json:"time,omitempty"`
 }

@@ -9,8 +9,8 @@ type PutAbusesAbuseIDPathParams struct {
 }
 
 type PutAbusesAbuseIDRequestBody struct {
-	ModerationComment *string `json:"moderationComment"`
-	State             *int64  `json:"state"`
+	ModerationComment *string `json:"moderationComment,omitempty"`
+	State             *int64  `json:"state,omitempty"`
 }
 
 type PutAbusesAbuseIDSecurity struct {

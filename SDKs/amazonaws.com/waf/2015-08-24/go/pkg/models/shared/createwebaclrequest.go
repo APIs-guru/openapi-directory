@@ -5,5 +5,5 @@ type CreateWebACLRequest struct {
 	DefaultAction WafAction `json:"DefaultAction"`
 	MetricName    string    `json:"MetricName"`
 	Name          string    `json:"Name"`
-	Tags          []Tag     `json:"Tags"`
+	Tags          []Tag     `json:"Tags,omitempty"`
 }

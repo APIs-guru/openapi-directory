@@ -12,6 +12,6 @@ const (
 )
 
 type CancelSurveyResult struct {
-	Reason          *CancelSurveyResultReasonEnum `json:"reason"`
-	ReasonUserInput *string                       `json:"reasonUserInput"`
+	Reason          *CancelSurveyResultReasonEnum `json:"reason,omitempty"`
+	ReasonUserInput *string                       `json:"reasonUserInput,omitempty"`
 }

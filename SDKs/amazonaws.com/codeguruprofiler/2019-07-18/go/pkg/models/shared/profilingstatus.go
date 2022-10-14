@@ -5,7 +5,7 @@ import (
 )
 
 type ProfilingStatus struct {
-	LatestAgentOrchestratedAt    *time.Time             `json:"latestAgentOrchestratedAt"`
-	LatestAgentProfileReportedAt *time.Time             `json:"latestAgentProfileReportedAt"`
-	LatestAggregatedProfile      *AggregatedProfileTime `json:"latestAggregatedProfile"`
+	LatestAgentOrchestratedAt    *time.Time             `json:"latestAgentOrchestratedAt,omitempty"`
+	LatestAgentProfileReportedAt *time.Time             `json:"latestAgentProfileReportedAt,omitempty"`
+	LatestAggregatedProfile      *AggregatedProfileTime `json:"latestAggregatedProfile,omitempty"`
 }

@@ -17,7 +17,7 @@ type MeUser struct {
 }
 
 type Me struct {
-	Account *MeAccount `json:"account"`
-	Token   *MeToken   `json:"token"`
-	User    *MeUser    `json:"user"`
+	Account *MeAccount `json:"account,omitempty"`
+	Token   *MeToken   `json:"token,omitempty"`
+	User    *MeUser    `json:"user,omitempty"`
 }

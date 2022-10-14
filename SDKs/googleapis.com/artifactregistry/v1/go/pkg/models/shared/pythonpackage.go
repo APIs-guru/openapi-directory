@@ -1,10 +1,10 @@
 package shared
 
 type PythonPackage struct {
-	CreateTime  *string `json:"createTime"`
-	Name        *string `json:"name"`
-	PackageName *string `json:"packageName"`
-	UpdateTime  *string `json:"updateTime"`
-	URI         *string `json:"uri"`
-	Version     *string `json:"version"`
+	CreateTime  *string `json:"createTime,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	PackageName *string `json:"packageName,omitempty"`
+	UpdateTime  *string `json:"updateTime,omitempty"`
+	URI         *string `json:"uri,omitempty"`
+	Version     *string `json:"version,omitempty"`
 }

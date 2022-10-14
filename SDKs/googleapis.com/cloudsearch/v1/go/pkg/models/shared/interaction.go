@@ -9,7 +9,7 @@ const (
 )
 
 type Interaction struct {
-	InteractionTime *string              `json:"interactionTime"`
-	Principal       *Principal           `json:"principal"`
-	Type            *InteractionTypeEnum `json:"type"`
+	InteractionTime *string              `json:"interactionTime,omitempty"`
+	Principal       *Principal           `json:"principal,omitempty"`
+	Type            *InteractionTypeEnum `json:"type,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Snippet struct {
-	MatchRanges []MatchRange `json:"matchRanges"`
-	Snippet     *string      `json:"snippet"`
+	MatchRanges []MatchRange `json:"matchRanges,omitempty"`
+	Snippet     *string      `json:"snippet,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type Group struct {
-	Children []PageElement `json:"children"`
+	Children []PageElement `json:"children,omitempty"`
 }

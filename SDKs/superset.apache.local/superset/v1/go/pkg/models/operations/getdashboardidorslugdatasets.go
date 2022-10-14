@@ -18,19 +18,19 @@ type GetDashboardIDOrSlugDatasetsRequest struct {
 }
 
 type GetDashboardIDOrSlugDatasets200ApplicationJSON struct {
-	Result []shared.DashboardDatasetSchema `json:"result"`
+	Result []shared.DashboardDatasetSchema `json:"result,omitempty"`
 }
 
 type GetDashboardIDOrSlugDatasets400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardIDOrSlugDatasets401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardIDOrSlugDatasets404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDashboardIDOrSlugDatasetsResponse struct {

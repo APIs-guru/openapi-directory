@@ -1,9 +1,9 @@
 package shared
 
 type EventData struct {
-	EventAction   *string `json:"eventAction"`
-	EventCategory *string `json:"eventCategory"`
-	EventCount    *string `json:"eventCount"`
-	EventLabel    *string `json:"eventLabel"`
-	EventValue    *string `json:"eventValue"`
+	EventAction   *string `json:"eventAction,omitempty"`
+	EventCategory *string `json:"eventCategory,omitempty"`
+	EventCount    *string `json:"eventCount,omitempty"`
+	EventLabel    *string `json:"eventLabel,omitempty"`
+	EventValue    *string `json:"eventValue,omitempty"`
 }

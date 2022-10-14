@@ -19,19 +19,19 @@ type PutIntegrationHeaders struct {
 }
 
 type PutIntegrationRequestBodyFlowDefinition struct {
-	Description      *string                  `json:"Description"`
-	FlowName         *string                  `json:"FlowName"`
-	KmsArn           *string                  `json:"KmsArn"`
-	SourceFlowConfig *shared.SourceFlowConfig `json:"SourceFlowConfig"`
-	Tasks            []shared.Task            `json:"Tasks"`
-	TriggerConfig    *shared.TriggerConfig    `json:"TriggerConfig"`
+	Description      *string                  `json:"Description,omitempty"`
+	FlowName         *string                  `json:"FlowName,omitempty"`
+	KmsArn           *string                  `json:"KmsArn,omitempty"`
+	SourceFlowConfig *shared.SourceFlowConfig `json:"SourceFlowConfig,omitempty"`
+	Tasks            []shared.Task            `json:"Tasks,omitempty"`
+	TriggerConfig    *shared.TriggerConfig    `json:"TriggerConfig,omitempty"`
 }
 
 type PutIntegrationRequestBody struct {
-	FlowDefinition *PutIntegrationRequestBodyFlowDefinition `json:"FlowDefinition"`
+	FlowDefinition *PutIntegrationRequestBodyFlowDefinition `json:"FlowDefinition,omitempty"`
 	ObjectTypeName string                                   `json:"ObjectTypeName"`
-	Tags           map[string]string                        `json:"Tags"`
-	URI            *string                                  `json:"Uri"`
+	Tags           map[string]string                        `json:"Tags,omitempty"`
+	URI            *string                                  `json:"Uri,omitempty"`
 }
 
 type PutIntegrationRequest struct {

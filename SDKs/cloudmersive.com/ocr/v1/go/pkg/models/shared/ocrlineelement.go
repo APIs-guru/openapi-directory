@@ -1,6 +1,6 @@
 package shared
 
 type OcrLineElement struct {
-	LineText *string          `json:"LineText"`
-	Words    []OcrWordElement `json:"Words"`
+	LineText *string          `json:"LineText,omitempty"`
+	Words    []OcrWordElement `json:"Words,omitempty"`
 }

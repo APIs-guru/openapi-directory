@@ -1,7 +1,7 @@
 package shared
 
 type DevicePoolCompatibilityResult struct {
-	Compatible              *bool                    `json:"compatible"`
-	Device                  *Device                  `json:"device"`
-	IncompatibilityMessages []IncompatibilityMessage `json:"incompatibilityMessages"`
+	Compatible              *bool                    `json:"compatible,omitempty"`
+	Device                  *Device                  `json:"device,omitempty"`
+	IncompatibilityMessages []IncompatibilityMessage `json:"incompatibilityMessages,omitempty"`
 }

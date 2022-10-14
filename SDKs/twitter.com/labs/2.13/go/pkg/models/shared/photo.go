@@ -7,9 +7,9 @@ const (
 )
 
 type Photo struct {
-	Height   *int64         `json:"height"`
-	MediaKey *string        `json:"media_key"`
-	Type     *PhotoTypeEnum `json:"type"`
-	URL      *string        `json:"url"`
-	Width    *int64         `json:"width"`
+	Height   *int64         `json:"height,omitempty"`
+	MediaKey *string        `json:"media_key,omitempty"`
+	Type     *PhotoTypeEnum `json:"type,omitempty"`
+	URL      *string        `json:"url,omitempty"`
+	Width    *int64         `json:"width,omitempty"`
 }

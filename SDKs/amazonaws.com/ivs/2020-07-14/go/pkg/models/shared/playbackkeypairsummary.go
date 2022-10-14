@@ -1,7 +1,7 @@
 package shared
 
 type PlaybackKeyPairSummary struct {
-	Arn  *string           `json:"arn"`
-	Name *string           `json:"name"`
-	Tags map[string]string `json:"tags"`
+	Arn  *string           `json:"arn,omitempty"`
+	Name *string           `json:"name,omitempty"`
+	Tags map[string]string `json:"tags,omitempty"`
 }

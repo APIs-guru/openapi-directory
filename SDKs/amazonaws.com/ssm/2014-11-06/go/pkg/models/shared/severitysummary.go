@@ -1,10 +1,10 @@
 package shared
 
 type SeveritySummary struct {
-	CriticalCount      *int64 `json:"CriticalCount"`
-	HighCount          *int64 `json:"HighCount"`
-	InformationalCount *int64 `json:"InformationalCount"`
-	LowCount           *int64 `json:"LowCount"`
-	MediumCount        *int64 `json:"MediumCount"`
-	UnspecifiedCount   *int64 `json:"UnspecifiedCount"`
+	CriticalCount      *int64 `json:"CriticalCount,omitempty"`
+	HighCount          *int64 `json:"HighCount,omitempty"`
+	InformationalCount *int64 `json:"InformationalCount,omitempty"`
+	LowCount           *int64 `json:"LowCount,omitempty"`
+	MediumCount        *int64 `json:"MediumCount,omitempty"`
+	UnspecifiedCount   *int64 `json:"UnspecifiedCount,omitempty"`
 }

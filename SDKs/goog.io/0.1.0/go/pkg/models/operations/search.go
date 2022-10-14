@@ -13,15 +13,15 @@ type SearchRequest struct {
 }
 
 type Search200ApplicationJSONResults struct {
-	Description *string `json:"description"`
-	Link        *string `json:"link"`
-	Title       *string `json:"title"`
+	Description *string `json:"description,omitempty"`
+	Link        *string `json:"link,omitempty"`
+	Title       *string `json:"title,omitempty"`
 }
 
 type Search200ApplicationJSON struct {
-	Answer  *string                           `json:"answer"`
-	Results []Search200ApplicationJSONResults `json:"results"`
-	Total   *string                           `json:"total"`
+	Answer  *string                           `json:"answer,omitempty"`
+	Results []Search200ApplicationJSONResults `json:"results,omitempty"`
+	Total   *string                           `json:"total,omitempty"`
 }
 
 type SearchResponse struct {

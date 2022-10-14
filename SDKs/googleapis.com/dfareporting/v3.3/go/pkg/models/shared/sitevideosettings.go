@@ -9,9 +9,9 @@ const (
 )
 
 type SiteVideoSettings struct {
-	CompanionSettings *SiteCompanionSetting             `json:"companionSettings"`
-	Kind              *string                           `json:"kind"`
-	Orientation       *SiteVideoSettingsOrientationEnum `json:"orientation"`
-	SkippableSettings *SiteSkippableSetting             `json:"skippableSettings"`
-	TranscodeSettings *SiteTranscodeSetting             `json:"transcodeSettings"`
+	CompanionSettings *SiteCompanionSetting             `json:"companionSettings,omitempty"`
+	Kind              *string                           `json:"kind,omitempty"`
+	Orientation       *SiteVideoSettingsOrientationEnum `json:"orientation,omitempty"`
+	SkippableSettings *SiteSkippableSetting             `json:"skippableSettings,omitempty"`
+	TranscodeSettings *SiteTranscodeSetting             `json:"transcodeSettings,omitempty"`
 }

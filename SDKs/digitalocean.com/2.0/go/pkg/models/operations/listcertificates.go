@@ -30,28 +30,28 @@ const (
 )
 
 type ListCertificates200ApplicationJSONCertificates struct {
-	CreatedAt       *time.Time                                               `json:"created_at"`
-	DNSNames        []string                                                 `json:"dns_names"`
-	ID              *string                                                  `json:"id"`
-	Name            *string                                                  `json:"name"`
-	NotAfter        *time.Time                                               `json:"not_after"`
-	Sha1Fingerprint *string                                                  `json:"sha1_fingerprint"`
-	State           *ListCertificates200ApplicationJSONCertificatesStateEnum `json:"state"`
-	Type            *ListCertificates200ApplicationJSONCertificatesTypeEnum  `json:"type"`
+	CreatedAt       *time.Time                                               `json:"created_at,omitempty"`
+	DNSNames        []string                                                 `json:"dns_names,omitempty"`
+	ID              *string                                                  `json:"id,omitempty"`
+	Name            *string                                                  `json:"name,omitempty"`
+	NotAfter        *time.Time                                               `json:"not_after,omitempty"`
+	Sha1Fingerprint *string                                                  `json:"sha1_fingerprint,omitempty"`
+	State           *ListCertificates200ApplicationJSONCertificatesStateEnum `json:"state,omitempty"`
+	Type            *ListCertificates200ApplicationJSONCertificatesTypeEnum  `json:"type,omitempty"`
 }
 
 type ListCertificates200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListCertificates200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListCertificates200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListCertificates200ApplicationJSONMeta struct {
@@ -59,15 +59,15 @@ type ListCertificates200ApplicationJSONMeta struct {
 }
 
 type ListCertificates200ApplicationJSON struct {
-	Certificates []ListCertificates200ApplicationJSONCertificates `json:"certificates"`
-	Links        *ListCertificates200ApplicationJSONLinks         `json:"links"`
+	Certificates []ListCertificates200ApplicationJSONCertificates `json:"certificates,omitempty"`
+	Links        *ListCertificates200ApplicationJSONLinks         `json:"links,omitempty"`
 	Meta         ListCertificates200ApplicationJSONMeta           `json:"meta"`
 }
 
 type ListCertificates401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListCertificatesResponse struct {

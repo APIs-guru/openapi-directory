@@ -27,9 +27,9 @@ const (
 )
 
 type UpdateGeofenceCollectionRequestBody struct {
-	Description           *string                                             `json:"Description"`
-	PricingPlan           *UpdateGeofenceCollectionRequestBodyPricingPlanEnum `json:"PricingPlan"`
-	PricingPlanDataSource *string                                             `json:"PricingPlanDataSource"`
+	Description           *string                                             `json:"Description,omitempty"`
+	PricingPlan           *UpdateGeofenceCollectionRequestBodyPricingPlanEnum `json:"PricingPlan,omitempty"`
+	PricingPlanDataSource *string                                             `json:"PricingPlanDataSource,omitempty"`
 }
 
 type UpdateGeofenceCollectionRequest struct {

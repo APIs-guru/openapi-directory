@@ -14,7 +14,7 @@ type CreateProjectForWorkspaceQueryParams struct {
 }
 
 type CreateProjectForWorkspaceRequestBody struct {
-	Data *shared.ProjectRequest `json:"data"`
+	Data *shared.ProjectRequest `json:"data,omitempty"`
 }
 
 type CreateProjectForWorkspaceRequest struct {
@@ -24,7 +24,7 @@ type CreateProjectForWorkspaceRequest struct {
 }
 
 type CreateProjectForWorkspace201ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data"`
+	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type CreateProjectForWorkspaceResponse struct {

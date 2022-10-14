@@ -1,7 +1,7 @@
 package shared
 
 type PutEventSelectorsResponse struct {
-	AdvancedEventSelectors []AdvancedEventSelector `json:"AdvancedEventSelectors"`
-	EventSelectors         []EventSelector         `json:"EventSelectors"`
-	TrailArn               *string                 `json:"TrailARN"`
+	AdvancedEventSelectors []AdvancedEventSelector `json:"AdvancedEventSelectors,omitempty"`
+	EventSelectors         []EventSelector         `json:"EventSelectors,omitempty"`
+	TrailArn               *string                 `json:"TrailARN,omitempty"`
 }

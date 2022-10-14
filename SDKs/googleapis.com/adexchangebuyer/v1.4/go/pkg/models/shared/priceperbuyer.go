@@ -1,8 +1,8 @@
 package shared
 
 type PricePerBuyer struct {
-	AuctionTier *string `json:"auctionTier"`
-	BilledBuyer *Buyer  `json:"billedBuyer"`
-	Buyer       *Buyer  `json:"buyer"`
-	Price       *Price  `json:"price"`
+	AuctionTier *string `json:"auctionTier,omitempty"`
+	BilledBuyer *Buyer  `json:"billedBuyer,omitempty"`
+	Buyer       *Buyer  `json:"buyer,omitempty"`
+	Price       *Price  `json:"price,omitempty"`
 }

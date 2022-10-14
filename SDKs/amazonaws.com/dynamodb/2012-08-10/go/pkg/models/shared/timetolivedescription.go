@@ -1,6 +1,6 @@
 package shared
 
 type TimeToLiveDescription struct {
-	AttributeName    *string               `json:"AttributeName"`
-	TimeToLiveStatus *TimeToLiveStatusEnum `json:"TimeToLiveStatus"`
+	AttributeName    *string               `json:"AttributeName,omitempty"`
+	TimeToLiveStatus *TimeToLiveStatusEnum `json:"TimeToLiveStatus,omitempty"`
 }

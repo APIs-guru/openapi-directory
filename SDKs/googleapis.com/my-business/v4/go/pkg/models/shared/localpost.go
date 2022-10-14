@@ -27,17 +27,17 @@ const (
 )
 
 type LocalPost struct {
-	AlertType    *LocalPostAlertTypeEnum `json:"alertType"`
-	CallToAction *CallToAction           `json:"callToAction"`
-	CreateTime   *string                 `json:"createTime"`
-	Event        *LocalPostEvent         `json:"event"`
-	LanguageCode *string                 `json:"languageCode"`
-	Media        []MediaItem             `json:"media"`
-	Name         *string                 `json:"name"`
-	Offer        *LocalPostOffer         `json:"offer"`
-	SearchURL    *string                 `json:"searchUrl"`
-	State        *LocalPostStateEnum     `json:"state"`
-	Summary      *string                 `json:"summary"`
-	TopicType    *LocalPostTopicTypeEnum `json:"topicType"`
-	UpdateTime   *string                 `json:"updateTime"`
+	AlertType    *LocalPostAlertTypeEnum `json:"alertType,omitempty"`
+	CallToAction *CallToAction           `json:"callToAction,omitempty"`
+	CreateTime   *string                 `json:"createTime,omitempty"`
+	Event        *LocalPostEvent         `json:"event,omitempty"`
+	LanguageCode *string                 `json:"languageCode,omitempty"`
+	Media        []MediaItem             `json:"media,omitempty"`
+	Name         *string                 `json:"name,omitempty"`
+	Offer        *LocalPostOffer         `json:"offer,omitempty"`
+	SearchURL    *string                 `json:"searchUrl,omitempty"`
+	State        *LocalPostStateEnum     `json:"state,omitempty"`
+	Summary      *string                 `json:"summary,omitempty"`
+	TopicType    *LocalPostTopicTypeEnum `json:"topicType,omitempty"`
+	UpdateTime   *string                 `json:"updateTime,omitempty"`
 }

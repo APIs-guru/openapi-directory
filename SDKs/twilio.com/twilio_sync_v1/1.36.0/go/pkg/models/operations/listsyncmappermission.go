@@ -29,18 +29,18 @@ type ListSyncMapPermissionRequest struct {
 }
 
 type ListSyncMapPermission200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListSyncMapPermission200ApplicationJSONListSyncMapPermissionResponse struct {
-	Meta        *ListSyncMapPermission200ApplicationJSONMeta   `json:"meta"`
-	Permissions []shared.SyncV1ServiceSyncMapSyncMapPermission `json:"permissions"`
+	Meta        *ListSyncMapPermission200ApplicationJSONMeta   `json:"meta,omitempty"`
+	Permissions []shared.SyncV1ServiceSyncMapSyncMapPermission `json:"permissions,omitempty"`
 }
 
 type ListSyncMapPermissionResponse struct {

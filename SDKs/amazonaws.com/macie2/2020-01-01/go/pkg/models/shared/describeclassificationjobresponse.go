@@ -5,24 +5,24 @@ import (
 )
 
 type DescribeClassificationJobResponse struct {
-	ClientToken                   *string                            `json:"clientToken"`
-	CreatedAt                     *time.Time                         `json:"createdAt"`
-	CustomDataIdentifierIds       []string                           `json:"customDataIdentifierIds"`
-	Description                   *string                            `json:"description"`
-	InitialRun                    *bool                              `json:"initialRun"`
-	JobArn                        *string                            `json:"jobArn"`
-	JobID                         *string                            `json:"jobId"`
-	JobStatus                     *JobStatusEnum                     `json:"jobStatus"`
-	JobType                       *JobTypeEnum                       `json:"jobType"`
-	LastRunErrorStatus            *LastRunErrorStatus                `json:"lastRunErrorStatus"`
-	LastRunTime                   *time.Time                         `json:"lastRunTime"`
-	ManagedDataIdentifierIds      []string                           `json:"managedDataIdentifierIds"`
-	ManagedDataIdentifierSelector *ManagedDataIdentifierSelectorEnum `json:"managedDataIdentifierSelector"`
-	Name                          *string                            `json:"name"`
-	S3JobDefinition               *S3JobDefinition                   `json:"s3JobDefinition"`
-	SamplingPercentage            *int64                             `json:"samplingPercentage"`
-	ScheduleFrequency             *JobScheduleFrequency              `json:"scheduleFrequency"`
-	Statistics                    *Statistics                        `json:"statistics"`
-	Tags                          map[string]string                  `json:"tags"`
-	UserPausedDetails             *UserPausedDetails                 `json:"userPausedDetails"`
+	ClientToken                   *string                            `json:"clientToken,omitempty"`
+	CreatedAt                     *time.Time                         `json:"createdAt,omitempty"`
+	CustomDataIdentifierIds       []string                           `json:"customDataIdentifierIds,omitempty"`
+	Description                   *string                            `json:"description,omitempty"`
+	InitialRun                    *bool                              `json:"initialRun,omitempty"`
+	JobArn                        *string                            `json:"jobArn,omitempty"`
+	JobID                         *string                            `json:"jobId,omitempty"`
+	JobStatus                     *JobStatusEnum                     `json:"jobStatus,omitempty"`
+	JobType                       *JobTypeEnum                       `json:"jobType,omitempty"`
+	LastRunErrorStatus            *LastRunErrorStatus                `json:"lastRunErrorStatus,omitempty"`
+	LastRunTime                   *time.Time                         `json:"lastRunTime,omitempty"`
+	ManagedDataIdentifierIds      []string                           `json:"managedDataIdentifierIds,omitempty"`
+	ManagedDataIdentifierSelector *ManagedDataIdentifierSelectorEnum `json:"managedDataIdentifierSelector,omitempty"`
+	Name                          *string                            `json:"name,omitempty"`
+	S3JobDefinition               *S3JobDefinition                   `json:"s3JobDefinition,omitempty"`
+	SamplingPercentage            *int64                             `json:"samplingPercentage,omitempty"`
+	ScheduleFrequency             *JobScheduleFrequency              `json:"scheduleFrequency,omitempty"`
+	Statistics                    *Statistics                        `json:"statistics,omitempty"`
+	Tags                          map[string]string                  `json:"tags,omitempty"`
+	UserPausedDetails             *UserPausedDetails                 `json:"userPausedDetails,omitempty"`
 }

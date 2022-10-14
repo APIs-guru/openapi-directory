@@ -1,7 +1,7 @@
 package shared
 
 type AccountingCustomerParty struct {
-	AccountID         *string            `json:"accountId"`
+	AccountID         *string            `json:"accountId,omitempty"`
 	Party             Party              `json:"party"`
-	PublicIdentifiers []PublicIdentifier `json:"publicIdentifiers"`
+	PublicIdentifiers []PublicIdentifier `json:"publicIdentifiers,omitempty"`
 }

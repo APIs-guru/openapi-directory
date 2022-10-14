@@ -5,11 +5,11 @@ import (
 )
 
 type ChannelInfo struct {
-	ChannelArn                *string                    `json:"ChannelARN"`
-	ChannelName               *string                    `json:"ChannelName"`
-	ChannelStatus             *StatusEnum                `json:"ChannelStatus"`
-	ChannelType               *ChannelTypeEnum           `json:"ChannelType"`
-	CreationTime              *time.Time                 `json:"CreationTime"`
-	SingleMasterConfiguration *SingleMasterConfiguration `json:"SingleMasterConfiguration"`
-	Version                   *string                    `json:"Version"`
+	ChannelArn                *string                    `json:"ChannelARN,omitempty"`
+	ChannelName               *string                    `json:"ChannelName,omitempty"`
+	ChannelStatus             *StatusEnum                `json:"ChannelStatus,omitempty"`
+	ChannelType               *ChannelTypeEnum           `json:"ChannelType,omitempty"`
+	CreationTime              *time.Time                 `json:"CreationTime,omitempty"`
+	SingleMasterConfiguration *SingleMasterConfiguration `json:"SingleMasterConfiguration,omitempty"`
+	Version                   *string                    `json:"Version,omitempty"`
 }

@@ -45,25 +45,25 @@ const (
 )
 
 type Volume struct {
-	AutoGrownSizeGib           *string                               `json:"autoGrownSizeGib"`
-	BootVolume                 *bool                                 `json:"bootVolume"`
-	CurrentSizeGib             *string                               `json:"currentSizeGib"`
-	EmergencySizeGib           *string                               `json:"emergencySizeGib"`
-	ID                         *string                               `json:"id"`
-	Labels                     map[string]string                     `json:"labels"`
-	MaxSizeGib                 *string                               `json:"maxSizeGib"`
-	Name                       *string                               `json:"name"`
-	Notes                      *string                               `json:"notes"`
-	OriginallyRequestedSizeGib *string                               `json:"originallyRequestedSizeGib"`
-	PerformanceTier            *VolumePerformanceTierEnum            `json:"performanceTier"`
-	Pod                        *string                               `json:"pod"`
-	Protocol                   *VolumeProtocolEnum                   `json:"protocol"`
-	RemainingSpaceGib          *string                               `json:"remainingSpaceGib"`
-	RequestedSizeGib           *string                               `json:"requestedSizeGib"`
-	SnapshotAutoDeleteBehavior *VolumeSnapshotAutoDeleteBehaviorEnum `json:"snapshotAutoDeleteBehavior"`
-	SnapshotEnabled            *bool                                 `json:"snapshotEnabled"`
-	SnapshotReservationDetail  *SnapshotReservationDetail            `json:"snapshotReservationDetail"`
-	SnapshotSchedulePolicy     *string                               `json:"snapshotSchedulePolicy"`
-	State                      *VolumeStateEnum                      `json:"state"`
-	StorageType                *VolumeStorageTypeEnum                `json:"storageType"`
+	AutoGrownSizeGib           *string                               `json:"autoGrownSizeGib,omitempty"`
+	BootVolume                 *bool                                 `json:"bootVolume,omitempty"`
+	CurrentSizeGib             *string                               `json:"currentSizeGib,omitempty"`
+	EmergencySizeGib           *string                               `json:"emergencySizeGib,omitempty"`
+	ID                         *string                               `json:"id,omitempty"`
+	Labels                     map[string]string                     `json:"labels,omitempty"`
+	MaxSizeGib                 *string                               `json:"maxSizeGib,omitempty"`
+	Name                       *string                               `json:"name,omitempty"`
+	Notes                      *string                               `json:"notes,omitempty"`
+	OriginallyRequestedSizeGib *string                               `json:"originallyRequestedSizeGib,omitempty"`
+	PerformanceTier            *VolumePerformanceTierEnum            `json:"performanceTier,omitempty"`
+	Pod                        *string                               `json:"pod,omitempty"`
+	Protocol                   *VolumeProtocolEnum                   `json:"protocol,omitempty"`
+	RemainingSpaceGib          *string                               `json:"remainingSpaceGib,omitempty"`
+	RequestedSizeGib           *string                               `json:"requestedSizeGib,omitempty"`
+	SnapshotAutoDeleteBehavior *VolumeSnapshotAutoDeleteBehaviorEnum `json:"snapshotAutoDeleteBehavior,omitempty"`
+	SnapshotEnabled            *bool                                 `json:"snapshotEnabled,omitempty"`
+	SnapshotReservationDetail  *SnapshotReservationDetail            `json:"snapshotReservationDetail,omitempty"`
+	SnapshotSchedulePolicy     *string                               `json:"snapshotSchedulePolicy,omitempty"`
+	State                      *VolumeStateEnum                      `json:"state,omitempty"`
+	StorageType                *VolumeStorageTypeEnum                `json:"storageType,omitempty"`
 }

@@ -6,16 +6,16 @@ type UpdateDeviceCellularGatewayPortForwardingRulesPathParams struct {
 
 type UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules struct {
 	Access     string   `json:"access"`
-	AllowedIps []string `json:"allowedIps"`
+	AllowedIps []string `json:"allowedIps,omitempty"`
 	LanIP      string   `json:"lanIp"`
 	LocalPort  string   `json:"localPort"`
-	Name       *string  `json:"name"`
+	Name       *string  `json:"name,omitempty"`
 	Protocol   string   `json:"protocol"`
 	PublicPort string   `json:"publicPort"`
 }
 
 type UpdateDeviceCellularGatewayPortForwardingRulesRequestBody struct {
-	Rules []UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules `json:"rules"`
+	Rules []UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules `json:"rules,omitempty"`
 }
 
 type UpdateDeviceCellularGatewayPortForwardingRulesRequest struct {

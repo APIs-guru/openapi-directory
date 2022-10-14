@@ -170,9 +170,9 @@ type PowerOutletTemplateTypeType struct {
 
 type PowerOutletTemplate struct {
 	DeviceType NestedDeviceType                   `json:"device_type"`
-	FeedLeg    *PowerOutletTemplateFeedLegFeedLeg `json:"feed_leg"`
-	ID         *int64                             `json:"id"`
+	FeedLeg    *PowerOutletTemplateFeedLegFeedLeg `json:"feed_leg,omitempty"`
+	ID         *int64                             `json:"id,omitempty"`
 	Name       string                             `json:"name"`
-	PowerPort  *NestedPowerPortTemplate           `json:"power_port"`
-	Type       *PowerOutletTemplateTypeType       `json:"type"`
+	PowerPort  *NestedPowerPortTemplate           `json:"power_port,omitempty"`
+	Type       *PowerOutletTemplateTypeType       `json:"type,omitempty"`
 }

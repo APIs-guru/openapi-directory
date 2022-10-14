@@ -2,8 +2,8 @@ package shared
 
 type CountOpenWorkflowExecutionsInput struct {
 	Domain          string                   `json:"domain"`
-	ExecutionFilter *WorkflowExecutionFilter `json:"executionFilter"`
+	ExecutionFilter *WorkflowExecutionFilter `json:"executionFilter,omitempty"`
 	StartTimeFilter ExecutionTimeFilter      `json:"startTimeFilter"`
-	TagFilter       *TagFilter               `json:"tagFilter"`
-	TypeFilter      *WorkflowTypeFilter      `json:"typeFilter"`
+	TagFilter       *TagFilter               `json:"tagFilter,omitempty"`
+	TypeFilter      *WorkflowTypeFilter      `json:"typeFilter,omitempty"`
 }

@@ -11,9 +11,9 @@ const (
 )
 
 type Attribute struct {
-	Name              *string                     `json:"name"`
-	RepeatedEnumValue *RepeatedEnumAttributeValue `json:"repeatedEnumValue"`
-	URIValues         []URIAttributeValue         `json:"uriValues"`
-	ValueType         *AttributeValueTypeEnum     `json:"valueType"`
-	Values            []interface{}               `json:"values"`
+	Name              *string                     `json:"name,omitempty"`
+	RepeatedEnumValue *RepeatedEnumAttributeValue `json:"repeatedEnumValue,omitempty"`
+	URIValues         []URIAttributeValue         `json:"uriValues,omitempty"`
+	ValueType         *AttributeValueTypeEnum     `json:"valueType,omitempty"`
+	Values            []interface{}               `json:"values,omitempty"`
 }

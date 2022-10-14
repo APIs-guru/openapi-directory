@@ -18,7 +18,7 @@ type GetSentencesFromBookRequest struct {
 }
 
 type GetSentencesFromBook200ApplicationJSON struct {
-	Data []shared.Sentence `json:"data"`
+	Data []shared.Sentence `json:"data,omitempty"`
 }
 
 type GetSentencesFromBookResponse struct {

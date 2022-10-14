@@ -14,7 +14,7 @@ type RemoveUserForWorkspaceQueryParams struct {
 }
 
 type RemoveUserForWorkspaceRequestBody struct {
-	Data *shared.WorkspaceRemoveUserRequest `json:"data"`
+	Data *shared.WorkspaceRemoveUserRequest `json:"data,omitempty"`
 }
 
 type RemoveUserForWorkspaceRequest struct {
@@ -24,7 +24,7 @@ type RemoveUserForWorkspaceRequest struct {
 }
 
 type RemoveUserForWorkspace204ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveUserForWorkspaceResponse struct {

@@ -5,11 +5,11 @@ import (
 )
 
 type CampaignUpdateSummary struct {
-	CampaignConfig      *CampaignConfig `json:"campaignConfig"`
-	CreationDateTime    *time.Time      `json:"creationDateTime"`
-	FailureReason       *string         `json:"failureReason"`
-	LastUpdatedDateTime *time.Time      `json:"lastUpdatedDateTime"`
-	MinProvisionedTps   *int64          `json:"minProvisionedTPS"`
-	SolutionVersionArn  *string         `json:"solutionVersionArn"`
-	Status              *string         `json:"status"`
+	CampaignConfig      *CampaignConfig `json:"campaignConfig,omitempty"`
+	CreationDateTime    *time.Time      `json:"creationDateTime,omitempty"`
+	FailureReason       *string         `json:"failureReason,omitempty"`
+	LastUpdatedDateTime *time.Time      `json:"lastUpdatedDateTime,omitempty"`
+	MinProvisionedTps   *int64          `json:"minProvisionedTPS,omitempty"`
+	SolutionVersionArn  *string         `json:"solutionVersionArn,omitempty"`
+	Status              *string         `json:"status,omitempty"`
 }

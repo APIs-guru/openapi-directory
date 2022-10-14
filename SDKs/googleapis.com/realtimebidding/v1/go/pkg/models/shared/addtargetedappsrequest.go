@@ -9,6 +9,6 @@ const (
 )
 
 type AddTargetedAppsRequest struct {
-	AppIds        []string                                 `json:"appIds"`
-	TargetingMode *AddTargetedAppsRequestTargetingModeEnum `json:"targetingMode"`
+	AppIds        []string                                 `json:"appIds,omitempty"`
+	TargetingMode *AddTargetedAppsRequestTargetingModeEnum `json:"targetingMode,omitempty"`
 }

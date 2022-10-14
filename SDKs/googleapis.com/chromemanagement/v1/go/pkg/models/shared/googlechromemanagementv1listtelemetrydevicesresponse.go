@@ -1,6 +1,6 @@
 package shared
 
 type GoogleChromeManagementV1ListTelemetryDevicesResponse struct {
-	Devices       []GoogleChromeManagementV1TelemetryDevice `json:"devices"`
-	NextPageToken *string                                   `json:"nextPageToken"`
+	Devices       []GoogleChromeManagementV1TelemetryDevice `json:"devices,omitempty"`
+	NextPageToken *string                                   `json:"nextPageToken,omitempty"`
 }

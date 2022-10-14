@@ -1,14 +1,14 @@
 package shared
 
 type Schedule struct {
-	CopyTags             *bool                 `json:"CopyTags"`
-	CreateRule           *CreateRule           `json:"CreateRule"`
-	CrossRegionCopyRules []CrossRegionCopyRule `json:"CrossRegionCopyRules"`
-	DeprecateRule        *DeprecateRule        `json:"DeprecateRule"`
-	FastRestoreRule      *FastRestoreRule      `json:"FastRestoreRule"`
-	Name                 *string               `json:"Name"`
-	RetainRule           *RetainRule           `json:"RetainRule"`
-	ShareRules           []ShareRule           `json:"ShareRules"`
-	TagsToAdd            []Tag                 `json:"TagsToAdd"`
-	VariableTags         []Tag                 `json:"VariableTags"`
+	CopyTags             *bool                 `json:"CopyTags,omitempty"`
+	CreateRule           *CreateRule           `json:"CreateRule,omitempty"`
+	CrossRegionCopyRules []CrossRegionCopyRule `json:"CrossRegionCopyRules,omitempty"`
+	DeprecateRule        *DeprecateRule        `json:"DeprecateRule,omitempty"`
+	FastRestoreRule      *FastRestoreRule      `json:"FastRestoreRule,omitempty"`
+	Name                 *string               `json:"Name,omitempty"`
+	RetainRule           *RetainRule           `json:"RetainRule,omitempty"`
+	ShareRules           []ShareRule           `json:"ShareRules,omitempty"`
+	TagsToAdd            []Tag                 `json:"TagsToAdd,omitempty"`
+	VariableTags         []Tag                 `json:"VariableTags,omitempty"`
 }

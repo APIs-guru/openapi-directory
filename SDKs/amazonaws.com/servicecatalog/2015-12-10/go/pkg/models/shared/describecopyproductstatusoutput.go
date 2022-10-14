@@ -1,7 +1,7 @@
 package shared
 
 type DescribeCopyProductStatusOutput struct {
-	CopyProductStatus *CopyProductStatusEnum `json:"CopyProductStatus"`
-	StatusDetail      *string                `json:"StatusDetail"`
-	TargetProductID   *string                `json:"TargetProductId"`
+	CopyProductStatus *CopyProductStatusEnum `json:"CopyProductStatus,omitempty"`
+	StatusDetail      *string                `json:"StatusDetail,omitempty"`
+	TargetProductID   *string                `json:"TargetProductId,omitempty"`
 }

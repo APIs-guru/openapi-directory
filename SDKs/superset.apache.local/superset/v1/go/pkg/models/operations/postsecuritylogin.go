@@ -8,10 +8,10 @@ const (
 )
 
 type PostSecurityLoginRequestBody struct {
-	Password *string                                   `json:"password"`
-	Provider *PostSecurityLoginRequestBodyProviderEnum `json:"provider"`
-	Refresh  *bool                                     `json:"refresh"`
-	Username *string                                   `json:"username"`
+	Password *string                                   `json:"password,omitempty"`
+	Provider *PostSecurityLoginRequestBodyProviderEnum `json:"provider,omitempty"`
+	Refresh  *bool                                     `json:"refresh,omitempty"`
+	Username *string                                   `json:"username,omitempty"`
 }
 
 type PostSecurityLoginRequest struct {
@@ -19,20 +19,20 @@ type PostSecurityLoginRequest struct {
 }
 
 type PostSecurityLogin200ApplicationJSON struct {
-	AccessToken  *string `json:"access_token"`
-	RefreshToken *string `json:"refresh_token"`
+	AccessToken  *string `json:"access_token,omitempty"`
+	RefreshToken *string `json:"refresh_token,omitempty"`
 }
 
 type PostSecurityLogin400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSecurityLogin401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSecurityLogin500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostSecurityLoginResponse struct {

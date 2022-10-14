@@ -1,6 +1,6 @@
 package shared
 
 type Contact struct {
-	Type  *string `json:"type"`
-	Value *string `json:"value"`
+	Type  *string `json:"type,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

@@ -10,10 +10,10 @@ const (
 )
 
 type GoogleCloudDialogflowCxV3beta1Deployment struct {
-	EndTime     *string                                            `json:"endTime"`
-	FlowVersion *string                                            `json:"flowVersion"`
-	Name        *string                                            `json:"name"`
-	Result      *GoogleCloudDialogflowCxV3beta1DeploymentResult    `json:"result"`
-	StartTime   *string                                            `json:"startTime"`
-	State       *GoogleCloudDialogflowCxV3beta1DeploymentStateEnum `json:"state"`
+	EndTime     *string                                            `json:"endTime,omitempty"`
+	FlowVersion *string                                            `json:"flowVersion,omitempty"`
+	Name        *string                                            `json:"name,omitempty"`
+	Result      *GoogleCloudDialogflowCxV3beta1DeploymentResult    `json:"result,omitempty"`
+	StartTime   *string                                            `json:"startTime,omitempty"`
+	State       *GoogleCloudDialogflowCxV3beta1DeploymentStateEnum `json:"state,omitempty"`
 }

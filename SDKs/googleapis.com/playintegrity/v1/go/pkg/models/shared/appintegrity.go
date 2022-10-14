@@ -10,8 +10,8 @@ const (
 )
 
 type AppIntegrity struct {
-	AppRecognitionVerdict   *AppIntegrityAppRecognitionVerdictEnum `json:"appRecognitionVerdict"`
-	CertificateSha256Digest []string                               `json:"certificateSha256Digest"`
-	PackageName             *string                                `json:"packageName"`
-	VersionCode             *string                                `json:"versionCode"`
+	AppRecognitionVerdict   *AppIntegrityAppRecognitionVerdictEnum `json:"appRecognitionVerdict,omitempty"`
+	CertificateSha256Digest []string                               `json:"certificateSha256Digest,omitempty"`
+	PackageName             *string                                `json:"packageName,omitempty"`
+	VersionCode             *string                                `json:"versionCode,omitempty"`
 }

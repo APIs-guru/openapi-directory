@@ -9,9 +9,9 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1ExportInsightsDataRequest struct {
-	BigQueryDestination *GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestBigQueryDestination  `json:"bigQueryDestination"`
-	Filter              *string                                                                          `json:"filter"`
-	KmsKey              *string                                                                          `json:"kmsKey"`
-	Parent              *string                                                                          `json:"parent"`
-	WriteDisposition    *GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestWriteDispositionEnum `json:"writeDisposition"`
+	BigQueryDestination *GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestBigQueryDestination  `json:"bigQueryDestination,omitempty"`
+	Filter              *string                                                                          `json:"filter,omitempty"`
+	KmsKey              *string                                                                          `json:"kmsKey,omitempty"`
+	Parent              *string                                                                          `json:"parent,omitempty"`
+	WriteDisposition    *GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestWriteDispositionEnum `json:"writeDisposition,omitempty"`
 }

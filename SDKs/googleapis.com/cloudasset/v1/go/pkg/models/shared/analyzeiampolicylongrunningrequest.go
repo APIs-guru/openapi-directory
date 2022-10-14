@@ -1,7 +1,7 @@
 package shared
 
 type AnalyzeIamPolicyLongrunningRequest struct {
-	AnalysisQuery      *IamPolicyAnalysisQuery        `json:"analysisQuery"`
-	OutputConfig       *IamPolicyAnalysisOutputConfig `json:"outputConfig"`
-	SavedAnalysisQuery *string                        `json:"savedAnalysisQuery"`
+	AnalysisQuery      *IamPolicyAnalysisQuery        `json:"analysisQuery,omitempty"`
+	OutputConfig       *IamPolicyAnalysisOutputConfig `json:"outputConfig,omitempty"`
+	SavedAnalysisQuery *string                        `json:"savedAnalysisQuery,omitempty"`
 }

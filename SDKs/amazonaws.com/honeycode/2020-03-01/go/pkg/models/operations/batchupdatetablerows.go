@@ -20,7 +20,7 @@ type BatchUpdateTableRowsHeaders struct {
 }
 
 type BatchUpdateTableRowsRequestBody struct {
-	ClientRequestToken *string                `json:"clientRequestToken"`
+	ClientRequestToken *string                `json:"clientRequestToken,omitempty"`
 	RowsToUpdate       []shared.UpdateRowData `json:"rowsToUpdate"`
 }
 

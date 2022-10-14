@@ -1,6 +1,6 @@
 package shared
 
 type ApplySchemaResponse struct {
-	AppliedSchemaArn *string `json:"AppliedSchemaArn"`
-	DirectoryArn     *string `json:"DirectoryArn"`
+	AppliedSchemaArn *string `json:"AppliedSchemaArn,omitempty"`
+	DirectoryArn     *string `json:"DirectoryArn,omitempty"`
 }

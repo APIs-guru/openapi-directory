@@ -9,8 +9,8 @@ const (
 )
 
 type SchemaSettings struct {
-	Encoding        *SchemaSettingsEncodingEnum `json:"encoding"`
-	FirstRevisionID *string                     `json:"firstRevisionId"`
-	LastRevisionID  *string                     `json:"lastRevisionId"`
-	Schema          *string                     `json:"schema"`
+	Encoding        *SchemaSettingsEncodingEnum `json:"encoding,omitempty"`
+	FirstRevisionID *string                     `json:"firstRevisionId,omitempty"`
+	LastRevisionID  *string                     `json:"lastRevisionId,omitempty"`
+	Schema          *string                     `json:"schema,omitempty"`
 }

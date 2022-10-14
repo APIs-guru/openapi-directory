@@ -1,7 +1,7 @@
 package shared
 
 type GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret struct {
-	DisplayName *string `json:"displayName"`
-	Name        *string `json:"name"`
-	SecretValue *string `json:"secretValue"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	SecretValue *string `json:"secretValue,omitempty"`
 }

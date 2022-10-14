@@ -5,13 +5,13 @@ import (
 )
 
 type Vote struct {
-	ActedAsTeller      *bool      `json:"actedAsTeller"`
-	Date               *time.Time `json:"date"`
-	DivisionNumber     *int32     `json:"divisionNumber"`
-	House              *int32     `json:"house"`
-	ID                 *int32     `json:"id"`
-	InAffirmativeLobby *bool      `json:"inAffirmativeLobby"`
-	NumberAgainst      *int32     `json:"numberAgainst"`
-	NumberInFavour     *int32     `json:"numberInFavour"`
-	Title              *string    `json:"title"`
+	ActedAsTeller      *bool      `json:"actedAsTeller,omitempty"`
+	Date               *time.Time `json:"date,omitempty"`
+	DivisionNumber     *int32     `json:"divisionNumber,omitempty"`
+	House              *int32     `json:"house,omitempty"`
+	ID                 *int32     `json:"id,omitempty"`
+	InAffirmativeLobby *bool      `json:"inAffirmativeLobby,omitempty"`
+	NumberAgainst      *int32     `json:"numberAgainst,omitempty"`
+	NumberInFavour     *int32     `json:"numberInFavour,omitempty"`
+	Title              *string    `json:"title,omitempty"`
 }

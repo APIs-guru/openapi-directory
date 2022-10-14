@@ -1,5 +1,5 @@
 package shared
 
 type UpdateUserAttributesResponse struct {
-	CodeDeliveryDetailsList []CodeDeliveryDetailsType `json:"CodeDeliveryDetailsList"`
+	CodeDeliveryDetailsList []CodeDeliveryDetailsType `json:"CodeDeliveryDetailsList,omitempty"`
 }

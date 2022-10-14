@@ -5,10 +5,10 @@ import (
 )
 
 type UpdateDimensionResponse struct {
-	Arn              *string            `json:"arn"`
-	CreationDate     *time.Time         `json:"creationDate"`
-	LastModifiedDate *time.Time         `json:"lastModifiedDate"`
-	Name             *string            `json:"name"`
-	StringValues     []string           `json:"stringValues"`
-	Type             *DimensionTypeEnum `json:"type"`
+	Arn              *string            `json:"arn,omitempty"`
+	CreationDate     *time.Time         `json:"creationDate,omitempty"`
+	LastModifiedDate *time.Time         `json:"lastModifiedDate,omitempty"`
+	Name             *string            `json:"name,omitempty"`
+	StringValues     []string           `json:"stringValues,omitempty"`
+	Type             *DimensionTypeEnum `json:"type,omitempty"`
 }

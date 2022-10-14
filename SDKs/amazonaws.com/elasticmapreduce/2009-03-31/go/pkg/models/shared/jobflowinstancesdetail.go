@@ -1,17 +1,17 @@
 package shared
 
 type JobFlowInstancesDetail struct {
-	Ec2KeyName                  *string               `json:"Ec2KeyName"`
-	Ec2SubnetID                 *string               `json:"Ec2SubnetId"`
-	HadoopVersion               *string               `json:"HadoopVersion"`
+	Ec2KeyName                  *string               `json:"Ec2KeyName,omitempty"`
+	Ec2SubnetID                 *string               `json:"Ec2SubnetId,omitempty"`
+	HadoopVersion               *string               `json:"HadoopVersion,omitempty"`
 	InstanceCount               int64                 `json:"InstanceCount"`
-	InstanceGroups              []InstanceGroupDetail `json:"InstanceGroups"`
-	KeepJobFlowAliveWhenNoSteps *bool                 `json:"KeepJobFlowAliveWhenNoSteps"`
-	MasterInstanceID            *string               `json:"MasterInstanceId"`
+	InstanceGroups              []InstanceGroupDetail `json:"InstanceGroups,omitempty"`
+	KeepJobFlowAliveWhenNoSteps *bool                 `json:"KeepJobFlowAliveWhenNoSteps,omitempty"`
+	MasterInstanceID            *string               `json:"MasterInstanceId,omitempty"`
 	MasterInstanceType          string                `json:"MasterInstanceType"`
-	MasterPublicDNSName         *string               `json:"MasterPublicDnsName"`
-	NormalizedInstanceHours     *int64                `json:"NormalizedInstanceHours"`
-	Placement                   *PlacementType        `json:"Placement"`
+	MasterPublicDNSName         *string               `json:"MasterPublicDnsName,omitempty"`
+	NormalizedInstanceHours     *int64                `json:"NormalizedInstanceHours,omitempty"`
+	Placement                   *PlacementType        `json:"Placement,omitempty"`
 	SlaveInstanceType           string                `json:"SlaveInstanceType"`
-	TerminationProtected        *bool                 `json:"TerminationProtected"`
+	TerminationProtected        *bool                 `json:"TerminationProtected,omitempty"`
 }

@@ -17,15 +17,15 @@ const (
 )
 
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy struct {
-	ContainerImageSources            *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"containerImageSources"`
-	DockerAddCapabilities            *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerAddCapabilities"`
-	DockerChrootPath                 *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerChrootPath"`
-	DockerNetwork                    *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerNetwork"`
-	DockerPrivileged                 *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerPrivileged"`
-	DockerRunAsContainerProvidedUser *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerRunAsContainerProvidedUser"`
-	DockerRunAsRoot                  *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerRunAsRoot"`
-	DockerRuntime                    *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerRuntime"`
-	DockerSiblingContainers          *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerSiblingContainers"`
-	LinuxIsolation                   *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyLinuxIsolationEnum `json:"linuxIsolation"`
-	VMVerification                   *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyVMVerificationEnum `json:"vmVerification"`
+	ContainerImageSources            *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"containerImageSources,omitempty"`
+	DockerAddCapabilities            *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerAddCapabilities,omitempty"`
+	DockerChrootPath                 *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerChrootPath,omitempty"`
+	DockerNetwork                    *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerNetwork,omitempty"`
+	DockerPrivileged                 *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerPrivileged,omitempty"`
+	DockerRunAsContainerProvidedUser *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerRunAsContainerProvidedUser,omitempty"`
+	DockerRunAsRoot                  *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerRunAsRoot,omitempty"`
+	DockerRuntime                    *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerRuntime,omitempty"`
+	DockerSiblingContainers          *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerSiblingContainers,omitempty"`
+	LinuxIsolation                   *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyLinuxIsolationEnum `json:"linuxIsolation,omitempty"`
+	VMVerification                   *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyVMVerificationEnum `json:"vmVerification,omitempty"`
 }

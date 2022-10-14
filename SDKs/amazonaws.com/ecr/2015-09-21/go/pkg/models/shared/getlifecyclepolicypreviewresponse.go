@@ -1,11 +1,11 @@
 package shared
 
 type GetLifecyclePolicyPreviewResponse struct {
-	LifecyclePolicyText *string                           `json:"lifecyclePolicyText"`
-	NextToken           *string                           `json:"nextToken"`
-	PreviewResults      []LifecyclePolicyPreviewResult    `json:"previewResults"`
-	RegistryID          *string                           `json:"registryId"`
-	RepositoryName      *string                           `json:"repositoryName"`
-	Status              *LifecyclePolicyPreviewStatusEnum `json:"status"`
-	Summary             *LifecyclePolicyPreviewSummary    `json:"summary"`
+	LifecyclePolicyText *string                           `json:"lifecyclePolicyText,omitempty"`
+	NextToken           *string                           `json:"nextToken,omitempty"`
+	PreviewResults      []LifecyclePolicyPreviewResult    `json:"previewResults,omitempty"`
+	RegistryID          *string                           `json:"registryId,omitempty"`
+	RepositoryName      *string                           `json:"repositoryName,omitempty"`
+	Status              *LifecyclePolicyPreviewStatusEnum `json:"status,omitempty"`
+	Summary             *LifecyclePolicyPreviewSummary    `json:"summary,omitempty"`
 }

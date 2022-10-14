@@ -1,6 +1,6 @@
 package shared
 
 type TransactionOptions struct {
-	ReadOnly  *ReadOnly  `json:"readOnly"`
-	ReadWrite *ReadWrite `json:"readWrite"`
+	ReadOnly  *ReadOnly  `json:"readOnly,omitempty"`
+	ReadWrite *ReadWrite `json:"readWrite,omitempty"`
 }

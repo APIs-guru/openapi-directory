@@ -18,48 +18,48 @@ type GetUserContentByDateJSONRequest struct {
 }
 
 type GetUserContentByDateJSON200ApplicationJSONDebug struct {
-	Version *float64 `json:"version"`
+	Version *float64 `json:"version,omitempty"`
 }
 
 type GetUserContentByDateJSON200ApplicationJSONResultsComments struct {
-	ApproveDate         *string                  `json:"approveDate"`
-	AssetID             *int64                   `json:"assetID"`
-	AssetURL            *string                  `json:"assetURL"`
-	CommentBody         *string                  `json:"commentBody"`
-	CommentID           *int64                   `json:"commentID"`
-	CommentSequence     *int64                   `json:"commentSequence"`
-	CommentTitle        *string                  `json:"commentTitle"`
-	CommentType         *string                  `json:"commentType"`
-	CreateDate          *string                  `json:"createDate"`
-	EditorsSelection    *int64                   `json:"editorsSelection"`
-	Lft                 *int64                   `json:"lft"`
-	ParentID            *interface{}             `json:"parentID"`
-	RecommendationCount *int64                   `json:"recommendationCount"`
-	Replies             []map[string]interface{} `json:"replies"`
-	ReplyCount          *int64                   `json:"replyCount"`
-	Rgt                 *int64                   `json:"rgt"`
-	Status              *string                  `json:"status"`
-	StatusID            *int64                   `json:"statusID"`
-	UpdateDate          *string                  `json:"updateDate"`
-	UserDisplayName     *string                  `json:"userDisplayName"`
-	UserID              *int64                   `json:"userID"`
-	UserLocation        *string                  `json:"userLocation"`
-	UserTitle           *string                  `json:"userTitle"`
-	UserURL             *int64                   `json:"userURL"`
+	ApproveDate         *string                  `json:"approveDate,omitempty"`
+	AssetID             *int64                   `json:"assetID,omitempty"`
+	AssetURL            *string                  `json:"assetURL,omitempty"`
+	CommentBody         *string                  `json:"commentBody,omitempty"`
+	CommentID           *int64                   `json:"commentID,omitempty"`
+	CommentSequence     *int64                   `json:"commentSequence,omitempty"`
+	CommentTitle        *string                  `json:"commentTitle,omitempty"`
+	CommentType         *string                  `json:"commentType,omitempty"`
+	CreateDate          *string                  `json:"createDate,omitempty"`
+	EditorsSelection    *int64                   `json:"editorsSelection,omitempty"`
+	Lft                 *int64                   `json:"lft,omitempty"`
+	ParentID            *interface{}             `json:"parentID,omitempty"`
+	RecommendationCount *int64                   `json:"recommendationCount,omitempty"`
+	Replies             []map[string]interface{} `json:"replies,omitempty"`
+	ReplyCount          *int64                   `json:"replyCount,omitempty"`
+	Rgt                 *int64                   `json:"rgt,omitempty"`
+	Status              *string                  `json:"status,omitempty"`
+	StatusID            *int64                   `json:"statusID,omitempty"`
+	UpdateDate          *string                  `json:"updateDate,omitempty"`
+	UserDisplayName     *string                  `json:"userDisplayName,omitempty"`
+	UserID              *int64                   `json:"userID,omitempty"`
+	UserLocation        *string                  `json:"userLocation,omitempty"`
+	UserTitle           *string                  `json:"userTitle,omitempty"`
+	UserURL             *int64                   `json:"userURL,omitempty"`
 }
 
 type GetUserContentByDateJSON200ApplicationJSONResults struct {
-	APITimestamp          *string                                                     `json:"api_timestamp"`
-	Comments              []GetUserContentByDateJSON200ApplicationJSONResultsComments `json:"comments"`
-	TotalCommentsFound    *int64                                                      `json:"totalCommentsFound"`
-	TotalCommentsReturned *int64                                                      `json:"totalCommentsReturned"`
+	APITimestamp          *string                                                     `json:"api_timestamp,omitempty"`
+	Comments              []GetUserContentByDateJSON200ApplicationJSONResultsComments `json:"comments,omitempty"`
+	TotalCommentsFound    *int64                                                      `json:"totalCommentsFound,omitempty"`
+	TotalCommentsReturned *int64                                                      `json:"totalCommentsReturned,omitempty"`
 }
 
 type GetUserContentByDateJSON200ApplicationJSON struct {
-	Copyright *string                                            `json:"copyright"`
-	Debug     *GetUserContentByDateJSON200ApplicationJSONDebug   `json:"debug"`
-	Results   *GetUserContentByDateJSON200ApplicationJSONResults `json:"results"`
-	Status    *string                                            `json:"status"`
+	Copyright *string                                            `json:"copyright,omitempty"`
+	Debug     *GetUserContentByDateJSON200ApplicationJSONDebug   `json:"debug,omitempty"`
+	Results   *GetUserContentByDateJSON200ApplicationJSONResults `json:"results,omitempty"`
+	Status    *string                                            `json:"status,omitempty"`
 }
 
 type GetUserContentByDateJSONResponse struct {

@@ -1,15 +1,15 @@
 package shared
 
 type CloudWatchLogsLogStream struct {
-	BatchCount            *int64                             `json:"BatchCount"`
-	BatchSize             *int64                             `json:"BatchSize"`
-	BufferDuration        *int64                             `json:"BufferDuration"`
-	DatetimeFormat        *string                            `json:"DatetimeFormat"`
-	Encoding              *CloudWatchLogsEncodingEnum        `json:"Encoding"`
-	File                  *string                            `json:"File"`
-	FileFingerprintLines  *string                            `json:"FileFingerprintLines"`
-	InitialPosition       *CloudWatchLogsInitialPositionEnum `json:"InitialPosition"`
-	LogGroupName          *string                            `json:"LogGroupName"`
-	MultiLineStartPattern *string                            `json:"MultiLineStartPattern"`
-	TimeZone              *CloudWatchLogsTimeZoneEnum        `json:"TimeZone"`
+	BatchCount            *int64                             `json:"BatchCount,omitempty"`
+	BatchSize             *int64                             `json:"BatchSize,omitempty"`
+	BufferDuration        *int64                             `json:"BufferDuration,omitempty"`
+	DatetimeFormat        *string                            `json:"DatetimeFormat,omitempty"`
+	Encoding              *CloudWatchLogsEncodingEnum        `json:"Encoding,omitempty"`
+	File                  *string                            `json:"File,omitempty"`
+	FileFingerprintLines  *string                            `json:"FileFingerprintLines,omitempty"`
+	InitialPosition       *CloudWatchLogsInitialPositionEnum `json:"InitialPosition,omitempty"`
+	LogGroupName          *string                            `json:"LogGroupName,omitempty"`
+	MultiLineStartPattern *string                            `json:"MultiLineStartPattern,omitempty"`
+	TimeZone              *CloudWatchLogsTimeZoneEnum        `json:"TimeZone,omitempty"`
 }

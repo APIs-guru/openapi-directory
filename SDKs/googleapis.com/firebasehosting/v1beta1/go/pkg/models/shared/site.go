@@ -9,9 +9,9 @@ const (
 )
 
 type Site struct {
-	AppID      *string           `json:"appId"`
-	DefaultURL *string           `json:"defaultUrl"`
-	Labels     map[string]string `json:"labels"`
-	Name       *string           `json:"name"`
-	Type       *SiteTypeEnum     `json:"type"`
+	AppID      *string           `json:"appId,omitempty"`
+	DefaultURL *string           `json:"defaultUrl,omitempty"`
+	Labels     map[string]string `json:"labels,omitempty"`
+	Name       *string           `json:"name,omitempty"`
+	Type       *SiteTypeEnum     `json:"type,omitempty"`
 }

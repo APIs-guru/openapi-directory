@@ -1,7 +1,7 @@
 package shared
 
 type ExecuteStatementResult struct {
-	ConsumedIOs       *IoUsage           `json:"ConsumedIOs"`
-	FirstPage         *Page              `json:"FirstPage"`
-	TimingInformation *TimingInformation `json:"TimingInformation"`
+	ConsumedIOs       *IoUsage           `json:"ConsumedIOs,omitempty"`
+	FirstPage         *Page              `json:"FirstPage,omitempty"`
+	TimingInformation *TimingInformation `json:"TimingInformation,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type IdentitytoolkitRelyingpartyGetAccountInfoRequest struct {
-	DelegatedProjectNumber *string  `json:"delegatedProjectNumber"`
-	Email                  []string `json:"email"`
-	IDToken                *string  `json:"idToken"`
-	LocalID                []string `json:"localId"`
-	PhoneNumber            []string `json:"phoneNumber"`
+	DelegatedProjectNumber *string  `json:"delegatedProjectNumber,omitempty"`
+	Email                  []string `json:"email,omitempty"`
+	IDToken                *string  `json:"idToken,omitempty"`
+	LocalID                []string `json:"localId,omitempty"`
+	PhoneNumber            []string `json:"phoneNumber,omitempty"`
 }

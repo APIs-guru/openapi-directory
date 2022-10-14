@@ -1,6 +1,6 @@
 package shared
 
 type AssociateSoftwareTokenResponse struct {
-	SecretCode *string `json:"SecretCode"`
-	Session    *string `json:"Session"`
+	SecretCode *string `json:"SecretCode,omitempty"`
+	Session    *string `json:"Session,omitempty"`
 }

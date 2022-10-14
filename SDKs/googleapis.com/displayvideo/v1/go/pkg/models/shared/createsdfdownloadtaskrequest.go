@@ -17,10 +17,10 @@ const (
 )
 
 type CreateSdfDownloadTaskRequest struct {
-	AdvertiserID          *string                                  `json:"advertiserId"`
-	IDFilter              *IDFilter                                `json:"idFilter"`
-	InventorySourceFilter *InventorySourceFilter                   `json:"inventorySourceFilter"`
-	ParentEntityFilter    *ParentEntityFilter                      `json:"parentEntityFilter"`
-	PartnerID             *string                                  `json:"partnerId"`
-	Version               *CreateSdfDownloadTaskRequestVersionEnum `json:"version"`
+	AdvertiserID          *string                                  `json:"advertiserId,omitempty"`
+	IDFilter              *IDFilter                                `json:"idFilter,omitempty"`
+	InventorySourceFilter *InventorySourceFilter                   `json:"inventorySourceFilter,omitempty"`
+	ParentEntityFilter    *ParentEntityFilter                      `json:"parentEntityFilter,omitempty"`
+	PartnerID             *string                                  `json:"partnerId,omitempty"`
+	Version               *CreateSdfDownloadTaskRequestVersionEnum `json:"version,omitempty"`
 }

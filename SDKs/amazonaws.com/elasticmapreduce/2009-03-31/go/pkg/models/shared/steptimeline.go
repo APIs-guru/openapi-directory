@@ -5,7 +5,7 @@ import (
 )
 
 type StepTimeline struct {
-	CreationDateTime *time.Time `json:"CreationDateTime"`
-	EndDateTime      *time.Time `json:"EndDateTime"`
-	StartDateTime    *time.Time `json:"StartDateTime"`
+	CreationDateTime *time.Time `json:"CreationDateTime,omitempty"`
+	EndDateTime      *time.Time `json:"EndDateTime,omitempty"`
+	StartDateTime    *time.Time `json:"StartDateTime,omitempty"`
 }

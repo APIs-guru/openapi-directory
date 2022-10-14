@@ -1,6 +1,6 @@
 package shared
 
 type TflAPIPresentationEntitiesLineServiceType struct {
-	LineName                 *string                                             `json:"lineName"`
-	LineSpecificServiceTypes []TflAPIPresentationEntitiesLineSpecificServiceType `json:"lineSpecificServiceTypes"`
+	LineName                 *string                                             `json:"lineName,omitempty"`
+	LineSpecificServiceTypes []TflAPIPresentationEntitiesLineSpecificServiceType `json:"lineSpecificServiceTypes,omitempty"`
 }

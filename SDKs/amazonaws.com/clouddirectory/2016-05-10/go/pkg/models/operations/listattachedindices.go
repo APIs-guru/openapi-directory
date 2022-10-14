@@ -29,12 +29,12 @@ type ListAttachedIndicesHeaders struct {
 }
 
 type ListAttachedIndicesRequestBodyTargetReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type ListAttachedIndicesRequestBody struct {
-	MaxResults      *int64                                        `json:"MaxResults"`
-	NextToken       *string                                       `json:"NextToken"`
+	MaxResults      *int64                                        `json:"MaxResults,omitempty"`
+	NextToken       *string                                       `json:"NextToken,omitempty"`
 	TargetReference ListAttachedIndicesRequestBodyTargetReference `json:"TargetReference"`
 }
 

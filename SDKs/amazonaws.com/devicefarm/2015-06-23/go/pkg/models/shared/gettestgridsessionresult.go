@@ -1,5 +1,5 @@
 package shared
 
 type GetTestGridSessionResult struct {
-	TestGridSession *TestGridSession `json:"testGridSession"`
+	TestGridSession *TestGridSession `json:"testGridSession,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type EventSelector struct {
-	DataResources                 []DataResource     `json:"DataResources"`
-	ExcludeManagementEventSources []string           `json:"ExcludeManagementEventSources"`
-	IncludeManagementEvents       *bool              `json:"IncludeManagementEvents"`
-	ReadWriteType                 *ReadWriteTypeEnum `json:"ReadWriteType"`
+	DataResources                 []DataResource     `json:"DataResources,omitempty"`
+	ExcludeManagementEventSources []string           `json:"ExcludeManagementEventSources,omitempty"`
+	IncludeManagementEvents       *bool              `json:"IncludeManagementEvents,omitempty"`
+	ReadWriteType                 *ReadWriteTypeEnum `json:"ReadWriteType,omitempty"`
 }

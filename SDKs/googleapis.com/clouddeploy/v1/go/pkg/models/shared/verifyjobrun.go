@@ -11,9 +11,9 @@ const (
 )
 
 type VerifyJobRun struct {
-	ArtifactURI    *string                       `json:"artifactUri"`
-	Build          *string                       `json:"build"`
-	EventLogPath   *string                       `json:"eventLogPath"`
-	FailureCause   *VerifyJobRunFailureCauseEnum `json:"failureCause"`
-	FailureMessage *string                       `json:"failureMessage"`
+	ArtifactURI    *string                       `json:"artifactUri,omitempty"`
+	Build          *string                       `json:"build,omitempty"`
+	EventLogPath   *string                       `json:"eventLogPath,omitempty"`
+	FailureCause   *VerifyJobRunFailureCauseEnum `json:"failureCause,omitempty"`
+	FailureMessage *string                       `json:"failureMessage,omitempty"`
 }

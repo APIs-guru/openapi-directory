@@ -29,18 +29,18 @@ type ListUserChannelRequest struct {
 }
 
 type ListUserChannel200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListUserChannel200ApplicationJSONListUserChannelResponse struct {
-	Channels []shared.IPMessagingV2ServiceUserUserChannel `json:"channels"`
-	Meta     *ListUserChannel200ApplicationJSONMeta       `json:"meta"`
+	Channels []shared.IPMessagingV2ServiceUserUserChannel `json:"channels,omitempty"`
+	Meta     *ListUserChannel200ApplicationJSONMeta       `json:"meta,omitempty"`
 }
 
 type ListUserChannelResponse struct {

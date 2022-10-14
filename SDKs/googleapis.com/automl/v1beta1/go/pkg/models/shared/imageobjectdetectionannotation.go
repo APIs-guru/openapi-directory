@@ -1,6 +1,6 @@
 package shared
 
 type ImageObjectDetectionAnnotation struct {
-	BoundingBox *BoundingPoly `json:"boundingBox"`
-	Score       *float32      `json:"score"`
+	BoundingBox *BoundingPoly `json:"boundingBox,omitempty"`
+	Score       *float32      `json:"score,omitempty"`
 }

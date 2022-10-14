@@ -1,19 +1,19 @@
 package shared
 
 type UserConfiguration struct {
-	AudioLanguagePreference    *string                   `json:"AudioLanguagePreference"`
-	DisplayCollectionsView     *bool                     `json:"DisplayCollectionsView"`
-	DisplayMissingEpisodes     *bool                     `json:"DisplayMissingEpisodes"`
-	EnableLocalPassword        *bool                     `json:"EnableLocalPassword"`
-	EnableNextEpisodeAutoPlay  *bool                     `json:"EnableNextEpisodeAutoPlay"`
-	GroupedFolders             []string                  `json:"GroupedFolders"`
-	HidePlayedInLatest         *bool                     `json:"HidePlayedInLatest"`
-	LatestItemsExcludes        []string                  `json:"LatestItemsExcludes"`
-	MyMediaExcludes            []string                  `json:"MyMediaExcludes"`
-	OrderedViews               []string                  `json:"OrderedViews"`
-	PlayDefaultAudioTrack      *bool                     `json:"PlayDefaultAudioTrack"`
-	RememberAudioSelections    *bool                     `json:"RememberAudioSelections"`
-	RememberSubtitleSelections *bool                     `json:"RememberSubtitleSelections"`
-	SubtitleLanguagePreference *string                   `json:"SubtitleLanguagePreference"`
-	SubtitleMode               *SubtitlePlaybackModeEnum `json:"SubtitleMode"`
+	AudioLanguagePreference    *string                   `json:"AudioLanguagePreference,omitempty"`
+	DisplayCollectionsView     *bool                     `json:"DisplayCollectionsView,omitempty"`
+	DisplayMissingEpisodes     *bool                     `json:"DisplayMissingEpisodes,omitempty"`
+	EnableLocalPassword        *bool                     `json:"EnableLocalPassword,omitempty"`
+	EnableNextEpisodeAutoPlay  *bool                     `json:"EnableNextEpisodeAutoPlay,omitempty"`
+	GroupedFolders             []string                  `json:"GroupedFolders,omitempty"`
+	HidePlayedInLatest         *bool                     `json:"HidePlayedInLatest,omitempty"`
+	LatestItemsExcludes        []string                  `json:"LatestItemsExcludes,omitempty"`
+	MyMediaExcludes            []string                  `json:"MyMediaExcludes,omitempty"`
+	OrderedViews               []string                  `json:"OrderedViews,omitempty"`
+	PlayDefaultAudioTrack      *bool                     `json:"PlayDefaultAudioTrack,omitempty"`
+	RememberAudioSelections    *bool                     `json:"RememberAudioSelections,omitempty"`
+	RememberSubtitleSelections *bool                     `json:"RememberSubtitleSelections,omitempty"`
+	SubtitleLanguagePreference *string                   `json:"SubtitleLanguagePreference,omitempty"`
+	SubtitleMode               *SubtitlePlaybackModeEnum `json:"SubtitleMode,omitempty"`
 }

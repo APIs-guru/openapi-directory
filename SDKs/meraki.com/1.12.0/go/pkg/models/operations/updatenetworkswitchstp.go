@@ -5,15 +5,15 @@ type UpdateNetworkSwitchStpPathParams struct {
 }
 
 type UpdateNetworkSwitchStpRequestBodyStpBridgePriority struct {
-	Stacks         []string `json:"stacks"`
+	Stacks         []string `json:"stacks,omitempty"`
 	StpPriority    int64    `json:"stpPriority"`
-	SwitchProfiles []string `json:"switchProfiles"`
-	Switches       []string `json:"switches"`
+	SwitchProfiles []string `json:"switchProfiles,omitempty"`
+	Switches       []string `json:"switches,omitempty"`
 }
 
 type UpdateNetworkSwitchStpRequestBody struct {
-	RstpEnabled       *bool                                                `json:"rstpEnabled"`
-	StpBridgePriority []UpdateNetworkSwitchStpRequestBodyStpBridgePriority `json:"stpBridgePriority"`
+	RstpEnabled       *bool                                                `json:"rstpEnabled,omitempty"`
+	StpBridgePriority []UpdateNetworkSwitchStpRequestBodyStpBridgePriority `json:"stpBridgePriority,omitempty"`
 }
 
 type UpdateNetworkSwitchStpRequest struct {

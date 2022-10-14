@@ -17,13 +17,13 @@ const (
 )
 
 type GoogleCloudMlV1HyperparameterSpec struct {
-	Algorithm                *GoogleCloudMlV1HyperparameterSpecAlgorithmEnum `json:"algorithm"`
-	EnableTrialEarlyStopping *bool                                           `json:"enableTrialEarlyStopping"`
-	Goal                     *GoogleCloudMlV1HyperparameterSpecGoalEnum      `json:"goal"`
-	HyperparameterMetricTag  *string                                         `json:"hyperparameterMetricTag"`
-	MaxFailedTrials          *int32                                          `json:"maxFailedTrials"`
-	MaxParallelTrials        *int32                                          `json:"maxParallelTrials"`
-	MaxTrials                *int32                                          `json:"maxTrials"`
-	Params                   []GoogleCloudMlV1ParameterSpec                  `json:"params"`
-	ResumePreviousJobID      *string                                         `json:"resumePreviousJobId"`
+	Algorithm                *GoogleCloudMlV1HyperparameterSpecAlgorithmEnum `json:"algorithm,omitempty"`
+	EnableTrialEarlyStopping *bool                                           `json:"enableTrialEarlyStopping,omitempty"`
+	Goal                     *GoogleCloudMlV1HyperparameterSpecGoalEnum      `json:"goal,omitempty"`
+	HyperparameterMetricTag  *string                                         `json:"hyperparameterMetricTag,omitempty"`
+	MaxFailedTrials          *int32                                          `json:"maxFailedTrials,omitempty"`
+	MaxParallelTrials        *int32                                          `json:"maxParallelTrials,omitempty"`
+	MaxTrials                *int32                                          `json:"maxTrials,omitempty"`
+	Params                   []GoogleCloudMlV1ParameterSpec                  `json:"params,omitempty"`
+	ResumePreviousJobID      *string                                         `json:"resumePreviousJobId,omitempty"`
 }

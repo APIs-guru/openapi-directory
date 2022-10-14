@@ -1,8 +1,8 @@
 package shared
 
 type RelatedAsset struct {
-	Ancestors        []string `json:"ancestors"`
-	Asset            *string  `json:"asset"`
-	AssetType        *string  `json:"assetType"`
-	RelationshipType *string  `json:"relationshipType"`
+	Ancestors        []string `json:"ancestors,omitempty"`
+	Asset            *string  `json:"asset,omitempty"`
+	AssetType        *string  `json:"assetType,omitempty"`
+	RelationshipType *string  `json:"relationshipType,omitempty"`
 }

@@ -20,15 +20,15 @@ type DescribeBucketsHeaders struct {
 }
 
 type DescribeBucketsRequestBodySortCriteria struct {
-	AttributeName *string             `json:"attributeName"`
-	OrderBy       *shared.OrderByEnum `json:"orderBy"`
+	AttributeName *string             `json:"attributeName,omitempty"`
+	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`
 }
 
 type DescribeBucketsRequestBody struct {
-	Criteria     map[string]shared.BucketCriteriaAdditionalProperties `json:"criteria"`
-	MaxResults   *int64                                               `json:"maxResults"`
-	NextToken    *string                                              `json:"nextToken"`
-	SortCriteria *DescribeBucketsRequestBodySortCriteria              `json:"sortCriteria"`
+	Criteria     map[string]shared.BucketCriteriaAdditionalProperties `json:"criteria,omitempty"`
+	MaxResults   *int64                                               `json:"maxResults,omitempty"`
+	NextToken    *string                                              `json:"nextToken,omitempty"`
+	SortCriteria *DescribeBucketsRequestBodySortCriteria              `json:"sortCriteria,omitempty"`
 }
 
 type DescribeBucketsRequest struct {

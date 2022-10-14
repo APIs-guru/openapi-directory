@@ -1,16 +1,16 @@
 package operations
 
 type GetAdminRequestsUnmatchedNearMisses200ApplicationJSONNearMisses struct {
-	AbsoluteURL *string                `json:"absoluteUrl"`
-	Body        *string                `json:"body"`
-	Cookies     map[string]interface{} `json:"cookies"`
-	Headers     map[string]interface{} `json:"headers"`
-	Method      *string                `json:"method"`
-	URL         *string                `json:"url"`
+	AbsoluteURL *string                `json:"absoluteUrl,omitempty"`
+	Body        *string                `json:"body,omitempty"`
+	Cookies     map[string]interface{} `json:"cookies,omitempty"`
+	Headers     map[string]interface{} `json:"headers,omitempty"`
+	Method      *string                `json:"method,omitempty"`
+	URL         *string                `json:"url,omitempty"`
 }
 
 type GetAdminRequestsUnmatchedNearMisses200ApplicationJSON struct {
-	NearMisses []GetAdminRequestsUnmatchedNearMisses200ApplicationJSONNearMisses `json:"nearMisses"`
+	NearMisses []GetAdminRequestsUnmatchedNearMisses200ApplicationJSONNearMisses `json:"nearMisses,omitempty"`
 }
 
 type GetAdminRequestsUnmatchedNearMissesResponse struct {

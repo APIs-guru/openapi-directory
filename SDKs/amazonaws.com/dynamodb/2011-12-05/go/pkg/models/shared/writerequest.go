@@ -1,6 +1,6 @@
 package shared
 
 type WriteRequest struct {
-	DeleteRequest *DeleteRequest `json:"DeleteRequest"`
-	PutRequest    *PutRequest    `json:"PutRequest"`
+	DeleteRequest *DeleteRequest `json:"DeleteRequest,omitempty"`
+	PutRequest    *PutRequest    `json:"PutRequest,omitempty"`
 }

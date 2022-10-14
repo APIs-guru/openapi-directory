@@ -1,7 +1,7 @@
 package shared
 
 type PersonalNameGeoIn struct {
-	CountryIso2 *string `json:"countryIso2"`
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
+	CountryIso2 *string `json:"countryIso2,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }

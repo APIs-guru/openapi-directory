@@ -15,7 +15,7 @@ type UpdateDeviceDefinitionHeaders struct {
 }
 
 type UpdateDeviceDefinitionRequestBody struct {
-	Name *string `json:"Name"`
+	Name *string `json:"Name,omitempty"`
 }
 
 type UpdateDeviceDefinitionRequest struct {

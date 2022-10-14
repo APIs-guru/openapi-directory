@@ -1,5 +1,5 @@
 package shared
 
 type PrivateData struct {
-	ReferenceID *string `json:"referenceId"`
+	ReferenceID *string `json:"referenceId,omitempty"`
 }

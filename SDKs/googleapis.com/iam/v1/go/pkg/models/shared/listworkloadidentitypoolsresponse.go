@@ -1,6 +1,6 @@
 package shared
 
 type ListWorkloadIdentityPoolsResponse struct {
-	NextPageToken         *string                `json:"nextPageToken"`
-	WorkloadIdentityPools []WorkloadIdentityPool `json:"workloadIdentityPools"`
+	NextPageToken         *string                `json:"nextPageToken,omitempty"`
+	WorkloadIdentityPools []WorkloadIdentityPool `json:"workloadIdentityPools,omitempty"`
 }

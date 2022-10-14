@@ -1,7 +1,7 @@
 package shared
 
 type GcpUserAccessBinding struct {
-	AccessLevels []string `json:"accessLevels"`
-	GroupKey     *string  `json:"groupKey"`
-	Name         *string  `json:"name"`
+	AccessLevels []string `json:"accessLevels,omitempty"`
+	GroupKey     *string  `json:"groupKey,omitempty"`
+	Name         *string  `json:"name,omitempty"`
 }

@@ -68,17 +68,17 @@ const (
 )
 
 type TestMatrix struct {
-	ClientInfo           *ClientInfo                         `json:"clientInfo"`
-	EnvironmentMatrix    *EnvironmentMatrix                  `json:"environmentMatrix"`
-	FailFast             *bool                               `json:"failFast"`
-	FlakyTestAttempts    *int32                              `json:"flakyTestAttempts"`
-	InvalidMatrixDetails *TestMatrixInvalidMatrixDetailsEnum `json:"invalidMatrixDetails"`
-	OutcomeSummary       *TestMatrixOutcomeSummaryEnum       `json:"outcomeSummary"`
-	ProjectID            *string                             `json:"projectId"`
-	ResultStorage        *ResultStorage                      `json:"resultStorage"`
-	State                *TestMatrixStateEnum                `json:"state"`
-	TestExecutions       []TestExecution                     `json:"testExecutions"`
-	TestMatrixID         *string                             `json:"testMatrixId"`
-	TestSpecification    *TestSpecification                  `json:"testSpecification"`
-	Timestamp            *string                             `json:"timestamp"`
+	ClientInfo           *ClientInfo                         `json:"clientInfo,omitempty"`
+	EnvironmentMatrix    *EnvironmentMatrix                  `json:"environmentMatrix,omitempty"`
+	FailFast             *bool                               `json:"failFast,omitempty"`
+	FlakyTestAttempts    *int32                              `json:"flakyTestAttempts,omitempty"`
+	InvalidMatrixDetails *TestMatrixInvalidMatrixDetailsEnum `json:"invalidMatrixDetails,omitempty"`
+	OutcomeSummary       *TestMatrixOutcomeSummaryEnum       `json:"outcomeSummary,omitempty"`
+	ProjectID            *string                             `json:"projectId,omitempty"`
+	ResultStorage        *ResultStorage                      `json:"resultStorage,omitempty"`
+	State                *TestMatrixStateEnum                `json:"state,omitempty"`
+	TestExecutions       []TestExecution                     `json:"testExecutions,omitempty"`
+	TestMatrixID         *string                             `json:"testMatrixId,omitempty"`
+	TestSpecification    *TestSpecification                  `json:"testSpecification,omitempty"`
+	Timestamp            *string                             `json:"timestamp,omitempty"`
 }

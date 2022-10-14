@@ -5,18 +5,18 @@ import (
 )
 
 type FindingsMetaRisk struct {
-	CvssBaseScore        []string `json:"cvss_base_score"`
-	CvssVector           []string `json:"cvss_vector"`
-	ExploitAvailable     []string `json:"exploit_available"`
-	ExploitabilityEase   []string `json:"exploitability_ease"`
-	PatchPublicationDate []string `json:"patch_publication_date"`
+	CvssBaseScore        []string `json:"cvss_base_score,omitempty"`
+	CvssVector           []string `json:"cvss_vector,omitempty"`
+	ExploitAvailable     []string `json:"exploit_available,omitempty"`
+	ExploitabilityEase   []string `json:"exploitability_ease,omitempty"`
+	PatchPublicationDate []string `json:"patch_publication_date,omitempty"`
 }
 
 type FindingsMetaVulnRefs struct {
-	Bid []string `json:"bid"`
-	Cpe []string `json:"cpe"`
-	Cve []string `json:"cve"`
-	Cwe []string `json:"cwe"`
+	Bid []string `json:"bid,omitempty"`
+	Cpe []string `json:"cpe,omitempty"`
+	Cve []string `json:"cve,omitempty"`
+	Cwe []string `json:"cwe,omitempty"`
 }
 
 type FindingsSeverityEnum string
@@ -29,19 +29,19 @@ const (
 )
 
 type Findings struct {
-	Confidence   *string               `json:"confidence"`
-	Description  *string               `json:"description"`
-	IssueID      *int64                `json:"issue_id"`
-	MetaLinks    []string              `json:"meta_links"`
-	MetaRisk     *FindingsMetaRisk     `json:"meta_risk"`
-	MetaTags     []string              `json:"meta_tags"`
-	MetaVulnRefs *FindingsMetaVulnRefs `json:"meta_vuln_refs"`
-	Raw          *string               `json:"raw"`
-	Severity     *FindingsSeverityEnum `json:"severity"`
-	Solution     *string               `json:"solution"`
-	TargetAddrs  []string              `json:"target_addrs"`
-	TargetProto  []string              `json:"target_proto"`
-	Timestamp    *time.Time            `json:"timestamp"`
-	Title        *string               `json:"title"`
-	Type         *string               `json:"type"`
+	Confidence   *string               `json:"confidence,omitempty"`
+	Description  *string               `json:"description,omitempty"`
+	IssueID      *int64                `json:"issue_id,omitempty"`
+	MetaLinks    []string              `json:"meta_links,omitempty"`
+	MetaRisk     *FindingsMetaRisk     `json:"meta_risk,omitempty"`
+	MetaTags     []string              `json:"meta_tags,omitempty"`
+	MetaVulnRefs *FindingsMetaVulnRefs `json:"meta_vuln_refs,omitempty"`
+	Raw          *string               `json:"raw,omitempty"`
+	Severity     *FindingsSeverityEnum `json:"severity,omitempty"`
+	Solution     *string               `json:"solution,omitempty"`
+	TargetAddrs  []string              `json:"target_addrs,omitempty"`
+	TargetProto  []string              `json:"target_proto,omitempty"`
+	Timestamp    *time.Time            `json:"timestamp,omitempty"`
+	Title        *string               `json:"title,omitempty"`
+	Type         *string               `json:"type,omitempty"`
 }

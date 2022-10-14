@@ -9,7 +9,7 @@ const (
 )
 
 type EnumPropertyOptions struct {
-	OperatorOptions *EnumOperatorOptions                   `json:"operatorOptions"`
-	OrderedRanking  *EnumPropertyOptionsOrderedRankingEnum `json:"orderedRanking"`
-	PossibleValues  []EnumValuePair                        `json:"possibleValues"`
+	OperatorOptions *EnumOperatorOptions                   `json:"operatorOptions,omitempty"`
+	OrderedRanking  *EnumPropertyOptionsOrderedRankingEnum `json:"orderedRanking,omitempty"`
+	PossibleValues  []EnumValuePair                        `json:"possibleValues,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type DescribeDirectoriesRequest struct {
-	DirectoryIds []string `json:"DirectoryIds"`
-	Limit        *int64   `json:"Limit"`
-	NextToken    *string  `json:"NextToken"`
+	DirectoryIds []string `json:"DirectoryIds,omitempty"`
+	Limit        *int64   `json:"Limit,omitempty"`
+	NextToken    *string  `json:"NextToken,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type LambdaContainerParams struct {
-	Devices        []LambdaDeviceMount `json:"devices"`
-	MemorySizeInKb *int64              `json:"memorySizeInKB"`
-	MountRoSysfs   *bool               `json:"mountROSysfs"`
-	Volumes        []LambdaVolumeMount `json:"volumes"`
+	Devices        []LambdaDeviceMount `json:"devices,omitempty"`
+	MemorySizeInKb *int64              `json:"memorySizeInKB,omitempty"`
+	MountRoSysfs   *bool               `json:"mountROSysfs,omitempty"`
+	Volumes        []LambdaVolumeMount `json:"volumes,omitempty"`
 }

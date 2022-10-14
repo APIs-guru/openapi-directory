@@ -1,5 +1,5 @@
 package shared
 
 type StragglerDebuggingInfo struct {
-	HotKey *HotKeyDebuggingInfo `json:"hotKey"`
+	HotKey *HotKeyDebuggingInfo `json:"hotKey,omitempty"`
 }

@@ -2,9 +2,9 @@ package shared
 
 type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	Cause                        RequestCancelExternalWorkflowExecutionFailedCauseEnum `json:"cause"`
-	Control                      *string                                               `json:"control"`
+	Control                      *string                                               `json:"control,omitempty"`
 	DecisionTaskCompletedEventID int64                                                 `json:"decisionTaskCompletedEventId"`
 	InitiatedEventID             int64                                                 `json:"initiatedEventId"`
-	RunID                        *string                                               `json:"runId"`
+	RunID                        *string                                               `json:"runId,omitempty"`
 	WorkflowID                   string                                                `json:"workflowId"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeScalableTargetsResponse struct {
-	NextToken       *string          `json:"NextToken"`
-	ScalableTargets []ScalableTarget `json:"ScalableTargets"`
+	NextToken       *string          `json:"NextToken,omitempty"`
+	ScalableTargets []ScalableTarget `json:"ScalableTargets,omitempty"`
 }

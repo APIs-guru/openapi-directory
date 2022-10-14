@@ -1,5 +1,5 @@
 package shared
 
 type GooglePrivacyDlpV2RecordCondition struct {
-	Expressions *GooglePrivacyDlpV2Expressions `json:"expressions"`
+	Expressions *GooglePrivacyDlpV2Expressions `json:"expressions,omitempty"`
 }

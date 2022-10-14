@@ -9,6 +9,6 @@ const (
 )
 
 type ModifyAnnouncementAssigneesRequest struct {
-	AssigneeMode                    *ModifyAnnouncementAssigneesRequestAssigneeModeEnum `json:"assigneeMode"`
-	ModifyIndividualStudentsOptions *ModifyIndividualStudentsOptions                    `json:"modifyIndividualStudentsOptions"`
+	AssigneeMode                    *ModifyAnnouncementAssigneesRequestAssigneeModeEnum `json:"assigneeMode,omitempty"`
+	ModifyIndividualStudentsOptions *ModifyIndividualStudentsOptions                    `json:"modifyIndividualStudentsOptions,omitempty"`
 }

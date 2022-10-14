@@ -1,6 +1,6 @@
 package shared
 
 type DescribeServicesRequest struct {
-	Language        *string  `json:"language"`
-	ServiceCodeList []string `json:"serviceCodeList"`
+	Language        *string  `json:"language,omitempty"`
+	ServiceCodeList []string `json:"serviceCodeList,omitempty"`
 }

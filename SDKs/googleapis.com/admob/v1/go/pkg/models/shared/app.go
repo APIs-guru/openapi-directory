@@ -1,9 +1,9 @@
 package shared
 
 type App struct {
-	AppID         *string           `json:"appId"`
-	LinkedAppInfo *AppLinkedAppInfo `json:"linkedAppInfo"`
-	ManualAppInfo *AppManualAppInfo `json:"manualAppInfo"`
-	Name          *string           `json:"name"`
-	Platform      *string           `json:"platform"`
+	AppID         *string           `json:"appId,omitempty"`
+	LinkedAppInfo *AppLinkedAppInfo `json:"linkedAppInfo,omitempty"`
+	ManualAppInfo *AppManualAppInfo `json:"manualAppInfo,omitempty"`
+	Name          *string           `json:"name,omitempty"`
+	Platform      *string           `json:"platform,omitempty"`
 }

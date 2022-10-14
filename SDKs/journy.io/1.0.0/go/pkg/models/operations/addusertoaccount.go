@@ -24,14 +24,14 @@ type AddUserToAccount201ApplicationJSON struct {
 }
 
 type AddUserToAccount400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header"`
-	Path   map[string]string `json:"path"`
-	Query  map[string]string `json:"query"`
+	Header map[string]string `json:"header,omitempty"`
+	Path   map[string]string `json:"path,omitempty"`
+	Query  map[string]string `json:"query,omitempty"`
 }
 
 type AddUserToAccount400ApplicationJSONErrors struct {
-	Fields     map[string]string                                   `json:"fields"`
-	Parameters *AddUserToAccount400ApplicationJSONErrorsParameters `json:"parameters"`
+	Fields     map[string]string                                   `json:"fields,omitempty"`
+	Parameters *AddUserToAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
 }
 
 type AddUserToAccount400ApplicationJSONMeta struct {

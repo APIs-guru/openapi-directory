@@ -1,5 +1,5 @@
 package shared
 
 type UpdateNetworkProfileResult struct {
-	NetworkProfile *NetworkProfile `json:"networkProfile"`
+	NetworkProfile *NetworkProfile `json:"networkProfile,omitempty"`
 }

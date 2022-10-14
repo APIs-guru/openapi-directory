@@ -15,15 +15,15 @@ type CreateTaskHeaders struct {
 }
 
 type CreateTaskRequestBodyCommand struct {
-	Reboot map[string]interface{} `json:"reboot"`
-	Unlock map[string]interface{} `json:"unlock"`
+	Reboot map[string]interface{} `json:"reboot,omitempty"`
+	Unlock map[string]interface{} `json:"unlock,omitempty"`
 }
 
 type CreateTaskRequestBody struct {
-	ClientToken *string                      `json:"clientToken"`
+	ClientToken *string                      `json:"clientToken,omitempty"`
 	Command     CreateTaskRequestBodyCommand `json:"command"`
-	Description *string                      `json:"description"`
-	Tags        map[string]string            `json:"tags"`
+	Description *string                      `json:"description,omitempty"`
+	Tags        map[string]string            `json:"tags,omitempty"`
 	Targets     []string                     `json:"targets"`
 }
 

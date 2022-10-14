@@ -5,17 +5,17 @@ import (
 )
 
 type ImportTask struct {
-	ApplicationImportFailure  *int64            `json:"applicationImportFailure"`
-	ApplicationImportSuccess  *int64            `json:"applicationImportSuccess"`
-	ClientRequestToken        *string           `json:"clientRequestToken"`
-	ErrorsAndFailedEntriesZip *string           `json:"errorsAndFailedEntriesZip"`
-	ImportCompletionTime      *time.Time        `json:"importCompletionTime"`
-	ImportDeletedTime         *time.Time        `json:"importDeletedTime"`
-	ImportRequestTime         *time.Time        `json:"importRequestTime"`
-	ImportTaskID              *string           `json:"importTaskId"`
-	ImportURL                 *string           `json:"importUrl"`
-	Name                      *string           `json:"name"`
-	ServerImportFailure       *int64            `json:"serverImportFailure"`
-	ServerImportSuccess       *int64            `json:"serverImportSuccess"`
-	Status                    *ImportStatusEnum `json:"status"`
+	ApplicationImportFailure  *int64            `json:"applicationImportFailure,omitempty"`
+	ApplicationImportSuccess  *int64            `json:"applicationImportSuccess,omitempty"`
+	ClientRequestToken        *string           `json:"clientRequestToken,omitempty"`
+	ErrorsAndFailedEntriesZip *string           `json:"errorsAndFailedEntriesZip,omitempty"`
+	ImportCompletionTime      *time.Time        `json:"importCompletionTime,omitempty"`
+	ImportDeletedTime         *time.Time        `json:"importDeletedTime,omitempty"`
+	ImportRequestTime         *time.Time        `json:"importRequestTime,omitempty"`
+	ImportTaskID              *string           `json:"importTaskId,omitempty"`
+	ImportURL                 *string           `json:"importUrl,omitempty"`
+	Name                      *string           `json:"name,omitempty"`
+	ServerImportFailure       *int64            `json:"serverImportFailure,omitempty"`
+	ServerImportSuccess       *int64            `json:"serverImportSuccess,omitempty"`
+	Status                    *ImportStatusEnum `json:"status,omitempty"`
 }

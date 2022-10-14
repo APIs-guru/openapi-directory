@@ -1,8 +1,8 @@
 package shared
 
 type Groups struct {
-	Etag          *string `json:"etag"`
-	Groups        []Group `json:"groups"`
-	Kind          *string `json:"kind"`
-	NextPageToken *string `json:"nextPageToken"`
+	Etag          *string `json:"etag,omitempty"`
+	Groups        []Group `json:"groups,omitempty"`
+	Kind          *string `json:"kind,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 }

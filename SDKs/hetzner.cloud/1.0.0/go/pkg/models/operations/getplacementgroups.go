@@ -60,7 +60,7 @@ type GetPlacementGroups200ApplicationJSONPlacementGroupsPlacementGroup struct {
 }
 
 type GetPlacementGroups200ApplicationJSONPlacementGroupsResponse struct {
-	Meta            *GetPlacementGroups200ApplicationJSONMeta                           `json:"meta"`
+	Meta            *GetPlacementGroups200ApplicationJSONMeta                           `json:"meta,omitempty"`
 	PlacementGroups []GetPlacementGroups200ApplicationJSONPlacementGroupsPlacementGroup `json:"placement_groups"`
 }
 

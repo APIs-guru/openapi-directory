@@ -13,8 +13,8 @@ type GetUsersMeVideoQuotaUsedRequest struct {
 }
 
 type GetUsersMeVideoQuotaUsed200ApplicationJSON struct {
-	VideoQuotaUsed      *float64 `json:"videoQuotaUsed"`
-	VideoQuotaUsedDaily *float64 `json:"videoQuotaUsedDaily"`
+	VideoQuotaUsed      *float64 `json:"videoQuotaUsed,omitempty"`
+	VideoQuotaUsedDaily *float64 `json:"videoQuotaUsedDaily,omitempty"`
 }
 
 type GetUsersMeVideoQuotaUsedResponse struct {

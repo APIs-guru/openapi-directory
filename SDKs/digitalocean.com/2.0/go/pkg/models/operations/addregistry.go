@@ -5,7 +5,7 @@ import (
 )
 
 type AddRegistryRequestBody struct {
-	ClusterUuids []string `json:"cluster_uuids"`
+	ClusterUuids []string `json:"cluster_uuids,omitempty"`
 }
 
 type AddRegistryRequest struct {
@@ -15,7 +15,7 @@ type AddRegistryRequest struct {
 type AddRegistry401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type AddRegistryResponse struct {

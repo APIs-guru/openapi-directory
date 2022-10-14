@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudApigeeV1Session struct {
-	ID          *string `json:"id"`
-	TimestampMs *string `json:"timestampMs"`
+	ID          *string `json:"id,omitempty"`
+	TimestampMs *string `json:"timestampMs,omitempty"`
 }

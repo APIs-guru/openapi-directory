@@ -9,6 +9,6 @@ const (
 )
 
 type SeekSubscriptionRequest struct {
-	NamedTarget *SeekSubscriptionRequestNamedTargetEnum `json:"namedTarget"`
-	TimeTarget  *TimeTarget                             `json:"timeTarget"`
+	NamedTarget *SeekSubscriptionRequestNamedTargetEnum `json:"namedTarget,omitempty"`
+	TimeTarget  *TimeTarget                             `json:"timeTarget,omitempty"`
 }

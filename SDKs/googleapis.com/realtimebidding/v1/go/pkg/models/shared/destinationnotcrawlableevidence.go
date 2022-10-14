@@ -11,7 +11,7 @@ const (
 )
 
 type DestinationNotCrawlableEvidence struct {
-	CrawlTime  *string                                    `json:"crawlTime"`
-	CrawledURL *string                                    `json:"crawledUrl"`
-	Reason     *DestinationNotCrawlableEvidenceReasonEnum `json:"reason"`
+	CrawlTime  *string                                    `json:"crawlTime,omitempty"`
+	CrawledURL *string                                    `json:"crawledUrl,omitempty"`
+	Reason     *DestinationNotCrawlableEvidenceReasonEnum `json:"reason,omitempty"`
 }

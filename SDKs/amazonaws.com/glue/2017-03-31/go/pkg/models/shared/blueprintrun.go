@@ -5,14 +5,14 @@ import (
 )
 
 type BlueprintRun struct {
-	BlueprintName        *string                `json:"BlueprintName"`
-	CompletedOn          *time.Time             `json:"CompletedOn"`
-	ErrorMessage         *string                `json:"ErrorMessage"`
-	Parameters           *string                `json:"Parameters"`
-	RoleArn              *string                `json:"RoleArn"`
-	RollbackErrorMessage *string                `json:"RollbackErrorMessage"`
-	RunID                *string                `json:"RunId"`
-	StartedOn            *time.Time             `json:"StartedOn"`
-	State                *BlueprintRunStateEnum `json:"State"`
-	WorkflowName         *string                `json:"WorkflowName"`
+	BlueprintName        *string                `json:"BlueprintName,omitempty"`
+	CompletedOn          *time.Time             `json:"CompletedOn,omitempty"`
+	ErrorMessage         *string                `json:"ErrorMessage,omitempty"`
+	Parameters           *string                `json:"Parameters,omitempty"`
+	RoleArn              *string                `json:"RoleArn,omitempty"`
+	RollbackErrorMessage *string                `json:"RollbackErrorMessage,omitempty"`
+	RunID                *string                `json:"RunId,omitempty"`
+	StartedOn            *time.Time             `json:"StartedOn,omitempty"`
+	State                *BlueprintRunStateEnum `json:"State,omitempty"`
+	WorkflowName         *string                `json:"WorkflowName,omitempty"`
 }

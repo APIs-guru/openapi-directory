@@ -23,9 +23,9 @@ const (
 )
 
 type UpdateAssetPropertyRequestBody struct {
-	ClientToken               *string                                                      `json:"clientToken"`
-	PropertyAlias             *string                                                      `json:"propertyAlias"`
-	PropertyNotificationState *UpdateAssetPropertyRequestBodyPropertyNotificationStateEnum `json:"propertyNotificationState"`
+	ClientToken               *string                                                      `json:"clientToken,omitempty"`
+	PropertyAlias             *string                                                      `json:"propertyAlias,omitempty"`
+	PropertyNotificationState *UpdateAssetPropertyRequestBodyPropertyNotificationStateEnum `json:"propertyNotificationState,omitempty"`
 }
 
 type UpdateAssetPropertyRequest struct {

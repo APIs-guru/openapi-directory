@@ -15,24 +15,24 @@ type CreateDatasetHeaders struct {
 }
 
 type CreateDatasetRequestBodyRetentionPeriod struct {
-	NumberOfDays *int64 `json:"numberOfDays"`
-	Unlimited    *bool  `json:"unlimited"`
+	NumberOfDays *int64 `json:"numberOfDays,omitempty"`
+	Unlimited    *bool  `json:"unlimited,omitempty"`
 }
 
 type CreateDatasetRequestBodyVersioningConfiguration struct {
-	MaxVersions *int64 `json:"maxVersions"`
-	Unlimited   *bool  `json:"unlimited"`
+	MaxVersions *int64 `json:"maxVersions,omitempty"`
+	Unlimited   *bool  `json:"unlimited,omitempty"`
 }
 
 type CreateDatasetRequestBody struct {
 	Actions                 []shared.DatasetAction                           `json:"actions"`
-	ContentDeliveryRules    []shared.DatasetContentDeliveryRule              `json:"contentDeliveryRules"`
+	ContentDeliveryRules    []shared.DatasetContentDeliveryRule              `json:"contentDeliveryRules,omitempty"`
 	DatasetName             string                                           `json:"datasetName"`
-	LateDataRules           []shared.LateDataRule                            `json:"lateDataRules"`
-	RetentionPeriod         *CreateDatasetRequestBodyRetentionPeriod         `json:"retentionPeriod"`
-	Tags                    []shared.Tag                                     `json:"tags"`
-	Triggers                []shared.DatasetTrigger                          `json:"triggers"`
-	VersioningConfiguration *CreateDatasetRequestBodyVersioningConfiguration `json:"versioningConfiguration"`
+	LateDataRules           []shared.LateDataRule                            `json:"lateDataRules,omitempty"`
+	RetentionPeriod         *CreateDatasetRequestBodyRetentionPeriod         `json:"retentionPeriod,omitempty"`
+	Tags                    []shared.Tag                                     `json:"tags,omitempty"`
+	Triggers                []shared.DatasetTrigger                          `json:"triggers,omitempty"`
+	VersioningConfiguration *CreateDatasetRequestBodyVersioningConfiguration `json:"versioningConfiguration,omitempty"`
 }
 
 type CreateDatasetRequest struct {

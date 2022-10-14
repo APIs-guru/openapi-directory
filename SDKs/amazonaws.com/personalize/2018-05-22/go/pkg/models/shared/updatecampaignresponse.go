@@ -1,5 +1,5 @@
 package shared
 
 type UpdateCampaignResponse struct {
-	CampaignArn *string `json:"campaignArn"`
+	CampaignArn *string `json:"campaignArn,omitempty"`
 }

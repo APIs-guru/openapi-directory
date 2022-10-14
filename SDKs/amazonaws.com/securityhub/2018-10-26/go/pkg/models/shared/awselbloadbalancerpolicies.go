@@ -1,7 +1,7 @@
 package shared
 
 type AwsElbLoadBalancerPolicies struct {
-	AppCookieStickinessPolicies []AwsElbAppCookieStickinessPolicy `json:"AppCookieStickinessPolicies"`
-	LbCookieStickinessPolicies  []AwsElbLbCookieStickinessPolicy  `json:"LbCookieStickinessPolicies"`
-	OtherPolicies               []string                          `json:"OtherPolicies"`
+	AppCookieStickinessPolicies []AwsElbAppCookieStickinessPolicy `json:"AppCookieStickinessPolicies,omitempty"`
+	LbCookieStickinessPolicies  []AwsElbLbCookieStickinessPolicy  `json:"LbCookieStickinessPolicies,omitempty"`
+	OtherPolicies               []string                          `json:"OtherPolicies,omitempty"`
 }

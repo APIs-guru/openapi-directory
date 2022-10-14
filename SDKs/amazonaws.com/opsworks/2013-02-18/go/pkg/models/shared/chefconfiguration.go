@@ -1,6 +1,6 @@
 package shared
 
 type ChefConfiguration struct {
-	BerkshelfVersion *string `json:"BerkshelfVersion"`
-	ManageBerkshelf  *bool   `json:"ManageBerkshelf"`
+	BerkshelfVersion *string `json:"BerkshelfVersion,omitempty"`
+	ManageBerkshelf  *bool   `json:"ManageBerkshelf,omitempty"`
 }

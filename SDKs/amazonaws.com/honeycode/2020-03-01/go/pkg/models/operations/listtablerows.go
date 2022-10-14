@@ -25,9 +25,9 @@ type ListTableRowsHeaders struct {
 }
 
 type ListTableRowsRequestBody struct {
-	MaxResults *int64   `json:"maxResults"`
-	NextToken  *string  `json:"nextToken"`
-	RowIds     []string `json:"rowIds"`
+	MaxResults *int64   `json:"maxResults,omitempty"`
+	NextToken  *string  `json:"nextToken,omitempty"`
+	RowIds     []string `json:"rowIds,omitempty"`
 }
 
 type ListTableRowsRequest struct {

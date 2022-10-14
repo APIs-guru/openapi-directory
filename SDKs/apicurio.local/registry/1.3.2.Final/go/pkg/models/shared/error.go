@@ -1,7 +1,7 @@
 package shared
 
 type Error struct {
-	Detail    *string `json:"detail"`
-	ErrorCode *int32  `json:"error_code"`
-	Message   *string `json:"message"`
+	Detail    *string `json:"detail,omitempty"`
+	ErrorCode *int32  `json:"error_code,omitempty"`
+	Message   *string `json:"message,omitempty"`
 }

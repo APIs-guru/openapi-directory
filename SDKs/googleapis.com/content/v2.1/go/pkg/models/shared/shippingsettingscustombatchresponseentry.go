@@ -1,8 +1,8 @@
 package shared
 
 type ShippingsettingsCustomBatchResponseEntry struct {
-	BatchID          *int64            `json:"batchId"`
-	Errors           *Errors           `json:"errors"`
-	Kind             *string           `json:"kind"`
-	ShippingSettings *ShippingSettings `json:"shippingSettings"`
+	BatchID          *int64            `json:"batchId,omitempty"`
+	Errors           *Errors           `json:"errors,omitempty"`
+	Kind             *string           `json:"kind,omitempty"`
+	ShippingSettings *ShippingSettings `json:"shippingSettings,omitempty"`
 }

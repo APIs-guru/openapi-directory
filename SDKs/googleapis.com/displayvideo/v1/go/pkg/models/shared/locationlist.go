@@ -9,9 +9,9 @@ const (
 )
 
 type LocationList struct {
-	AdvertiserID   *string                       `json:"advertiserId"`
-	DisplayName    *string                       `json:"displayName"`
-	LocationListID *string                       `json:"locationListId"`
-	LocationType   *LocationListLocationTypeEnum `json:"locationType"`
-	Name           *string                       `json:"name"`
+	AdvertiserID   *string                       `json:"advertiserId,omitempty"`
+	DisplayName    *string                       `json:"displayName,omitempty"`
+	LocationListID *string                       `json:"locationListId,omitempty"`
+	LocationType   *LocationListLocationTypeEnum `json:"locationType,omitempty"`
+	Name           *string                       `json:"name,omitempty"`
 }

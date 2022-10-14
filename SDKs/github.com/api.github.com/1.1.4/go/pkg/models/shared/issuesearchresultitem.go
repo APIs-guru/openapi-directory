@@ -19,7 +19,7 @@ type IssueSearchResultItemAssigneeSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -27,13 +27,13 @@ type IssueSearchResultItemAssigneeSimpleUser struct {
 }
 
 type IssueSearchResultItemLabels struct {
-	Color       *string `json:"color"`
-	Default     *bool   `json:"default"`
-	Description *string `json:"description"`
-	ID          *int64  `json:"id"`
-	Name        *string `json:"name"`
-	NodeID      *string `json:"node_id"`
-	URL         *string `json:"url"`
+	Color       *string `json:"color,omitempty"`
+	Default     *bool   `json:"default,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	NodeID      *string `json:"node_id,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }
 
 type IssueSearchResultItemMilestoneCreatorSimpleUser struct {
@@ -51,7 +51,7 @@ type IssueSearchResultItemMilestoneCreatorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -87,7 +87,7 @@ type IssueSearchResultItemMilestoneMilestone struct {
 type IssueSearchResultItemPullRequest struct {
 	DiffURL  string     `json:"diff_url"`
 	HTMLURL  string     `json:"html_url"`
-	MergedAt *time.Time `json:"merged_at"`
+	MergedAt *time.Time `json:"merged_at,omitempty"`
 	PatchURL string     `json:"patch_url"`
 	URL      string     `json:"url"`
 }
@@ -107,7 +107,7 @@ type IssueSearchResultItemUserSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -115,18 +115,18 @@ type IssueSearchResultItemUserSimpleUser struct {
 }
 
 type IssueSearchResultItem struct {
-	ActiveLockReason      *string                                 `json:"active_lock_reason"`
+	ActiveLockReason      *string                                 `json:"active_lock_reason,omitempty"`
 	Assignee              IssueSearchResultItemAssigneeSimpleUser `json:"assignee"`
-	Assignees             []SimpleUser                            `json:"assignees"`
+	Assignees             []SimpleUser                            `json:"assignees,omitempty"`
 	AuthorAssociation     AuthorAssociationEnum                   `json:"author_association"`
-	Body                  *string                                 `json:"body"`
-	BodyHTML              *string                                 `json:"body_html"`
-	BodyText              *string                                 `json:"body_text"`
+	Body                  *string                                 `json:"body,omitempty"`
+	BodyHTML              *string                                 `json:"body_html,omitempty"`
+	BodyText              *string                                 `json:"body_text,omitempty"`
 	ClosedAt              time.Time                               `json:"closed_at"`
 	Comments              int64                                   `json:"comments"`
 	CommentsURL           string                                  `json:"comments_url"`
 	CreatedAt             time.Time                               `json:"created_at"`
-	Draft                 *bool                                   `json:"draft"`
+	Draft                 *bool                                   `json:"draft,omitempty"`
 	EventsURL             string                                  `json:"events_url"`
 	HTMLURL               string                                  `json:"html_url"`
 	ID                    int64                                   `json:"id"`
@@ -136,14 +136,14 @@ type IssueSearchResultItem struct {
 	Milestone             IssueSearchResultItemMilestoneMilestone `json:"milestone"`
 	NodeID                string                                  `json:"node_id"`
 	Number                int64                                   `json:"number"`
-	PerformedViaGithubApp map[string]interface{}                  `json:"performed_via_github_app"`
-	PullRequest           *IssueSearchResultItemPullRequest       `json:"pull_request"`
-	Repository            *Repository                             `json:"repository"`
+	PerformedViaGithubApp map[string]interface{}                  `json:"performed_via_github_app,omitempty"`
+	PullRequest           *IssueSearchResultItemPullRequest       `json:"pull_request,omitempty"`
+	Repository            *Repository                             `json:"repository,omitempty"`
 	RepositoryURL         string                                  `json:"repository_url"`
 	Score                 int64                                   `json:"score"`
 	State                 string                                  `json:"state"`
-	TextMatches           []SearchResultTextMatches               `json:"text_matches"`
-	TimelineURL           *string                                 `json:"timeline_url"`
+	TextMatches           []SearchResultTextMatches               `json:"text_matches,omitempty"`
+	TimelineURL           *string                                 `json:"timeline_url,omitempty"`
 	Title                 string                                  `json:"title"`
 	UpdatedAt             time.Time                               `json:"updated_at"`
 	URL                   string                                  `json:"url"`

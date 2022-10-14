@@ -1,9 +1,9 @@
 package shared
 
 type GoogleFirebaseAppcheckV1betaDeviceCheckConfig struct {
-	KeyID         *string `json:"keyId"`
-	Name          *string `json:"name"`
-	PrivateKey    *string `json:"privateKey"`
-	PrivateKeySet *bool   `json:"privateKeySet"`
-	TokenTTL      *string `json:"tokenTtl"`
+	KeyID         *string `json:"keyId,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	PrivateKey    *string `json:"privateKey,omitempty"`
+	PrivateKeySet *bool   `json:"privateKeySet,omitempty"`
+	TokenTTL      *string `json:"tokenTtl,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ActiveDirectoryConfiguration struct {
-	ComputerAttributes                  []ActiveDirectoryComputerAttribute `json:"computerAttributes"`
-	DirectoryID                         *string                            `json:"directoryId"`
-	OrganizationalUnitDistinguishedName *string                            `json:"organizationalUnitDistinguishedName"`
+	ComputerAttributes                  []ActiveDirectoryComputerAttribute `json:"computerAttributes,omitempty"`
+	DirectoryID                         *string                            `json:"directoryId,omitempty"`
+	OrganizationalUnitDistinguishedName *string                            `json:"organizationalUnitDistinguishedName,omitempty"`
 }

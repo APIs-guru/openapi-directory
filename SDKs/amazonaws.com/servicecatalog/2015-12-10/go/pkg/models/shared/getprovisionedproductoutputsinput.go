@@ -1,10 +1,10 @@
 package shared
 
 type GetProvisionedProductOutputsInput struct {
-	AcceptLanguage         *string  `json:"AcceptLanguage"`
-	OutputKeys             []string `json:"OutputKeys"`
-	PageSize               *int64   `json:"PageSize"`
-	PageToken              *string  `json:"PageToken"`
-	ProvisionedProductID   *string  `json:"ProvisionedProductId"`
-	ProvisionedProductName *string  `json:"ProvisionedProductName"`
+	AcceptLanguage         *string  `json:"AcceptLanguage,omitempty"`
+	OutputKeys             []string `json:"OutputKeys,omitempty"`
+	PageSize               *int64   `json:"PageSize,omitempty"`
+	PageToken              *string  `json:"PageToken,omitempty"`
+	ProvisionedProductID   *string  `json:"ProvisionedProductId,omitempty"`
+	ProvisionedProductName *string  `json:"ProvisionedProductName,omitempty"`
 }

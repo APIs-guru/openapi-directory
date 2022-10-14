@@ -5,8 +5,8 @@ import (
 )
 
 type PublicKey struct {
-	Fingerprint       *string    `json:"Fingerprint"`
-	ValidityEndTime   *time.Time `json:"ValidityEndTime"`
-	ValidityStartTime *time.Time `json:"ValidityStartTime"`
-	Value             *string    `json:"Value"`
+	Fingerprint       *string    `json:"Fingerprint,omitempty"`
+	ValidityEndTime   *time.Time `json:"ValidityEndTime,omitempty"`
+	ValidityStartTime *time.Time `json:"ValidityStartTime,omitempty"`
+	Value             *string    `json:"Value,omitempty"`
 }

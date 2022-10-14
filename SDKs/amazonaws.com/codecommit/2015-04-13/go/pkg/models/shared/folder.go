@@ -1,7 +1,7 @@
 package shared
 
 type Folder struct {
-	AbsolutePath *string `json:"absolutePath"`
-	RelativePath *string `json:"relativePath"`
-	TreeID       *string `json:"treeId"`
+	AbsolutePath *string `json:"absolutePath,omitempty"`
+	RelativePath *string `json:"relativePath,omitempty"`
+	TreeID       *string `json:"treeId,omitempty"`
 }

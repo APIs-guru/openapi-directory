@@ -21,7 +21,7 @@ type GetSectionsForProjectRequest struct {
 }
 
 type GetSectionsForProject200ApplicationJSON struct {
-	Data []shared.SectionCompact `json:"data"`
+	Data []shared.SectionCompact `json:"data,omitempty"`
 }
 
 type GetSectionsForProjectResponse struct {

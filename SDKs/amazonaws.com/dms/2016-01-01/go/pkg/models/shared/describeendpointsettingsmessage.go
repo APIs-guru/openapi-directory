@@ -2,6 +2,6 @@ package shared
 
 type DescribeEndpointSettingsMessage struct {
 	EngineName string  `json:"EngineName"`
-	Marker     *string `json:"Marker"`
-	MaxRecords *int64  `json:"MaxRecords"`
+	Marker     *string `json:"Marker,omitempty"`
+	MaxRecords *int64  `json:"MaxRecords,omitempty"`
 }

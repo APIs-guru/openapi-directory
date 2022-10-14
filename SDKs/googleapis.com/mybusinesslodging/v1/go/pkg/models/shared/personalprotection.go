@@ -37,12 +37,12 @@ const (
 )
 
 type PersonalProtection struct {
-	CommonAreasOfferSanitizingItems          *bool                                                           `json:"commonAreasOfferSanitizingItems"`
-	CommonAreasOfferSanitizingItemsException *PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum `json:"commonAreasOfferSanitizingItemsException"`
-	FaceMaskRequired                         *bool                                                           `json:"faceMaskRequired"`
-	FaceMaskRequiredException                *PersonalProtectionFaceMaskRequiredExceptionEnum                `json:"faceMaskRequiredException"`
-	GuestRoomHygieneKitsAvailable            *bool                                                           `json:"guestRoomHygieneKitsAvailable"`
-	GuestRoomHygieneKitsAvailableException   *PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum   `json:"guestRoomHygieneKitsAvailableException"`
-	ProtectiveEquipmentAvailable             *bool                                                           `json:"protectiveEquipmentAvailable"`
-	ProtectiveEquipmentAvailableException    *PersonalProtectionProtectiveEquipmentAvailableExceptionEnum    `json:"protectiveEquipmentAvailableException"`
+	CommonAreasOfferSanitizingItems          *bool                                                           `json:"commonAreasOfferSanitizingItems,omitempty"`
+	CommonAreasOfferSanitizingItemsException *PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum `json:"commonAreasOfferSanitizingItemsException,omitempty"`
+	FaceMaskRequired                         *bool                                                           `json:"faceMaskRequired,omitempty"`
+	FaceMaskRequiredException                *PersonalProtectionFaceMaskRequiredExceptionEnum                `json:"faceMaskRequiredException,omitempty"`
+	GuestRoomHygieneKitsAvailable            *bool                                                           `json:"guestRoomHygieneKitsAvailable,omitempty"`
+	GuestRoomHygieneKitsAvailableException   *PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum   `json:"guestRoomHygieneKitsAvailableException,omitempty"`
+	ProtectiveEquipmentAvailable             *bool                                                           `json:"protectiveEquipmentAvailable,omitempty"`
+	ProtectiveEquipmentAvailableException    *PersonalProtectionProtectiveEquipmentAvailableExceptionEnum    `json:"protectiveEquipmentAvailableException,omitempty"`
 }

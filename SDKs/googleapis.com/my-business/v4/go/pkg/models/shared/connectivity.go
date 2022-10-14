@@ -37,12 +37,12 @@ const (
 )
 
 type Connectivity struct {
-	FreeWifi                         *bool                                             `json:"freeWifi"`
-	FreeWifiException                *ConnectivityFreeWifiExceptionEnum                `json:"freeWifiException"`
-	PublicAreaWifiAvailable          *bool                                             `json:"publicAreaWifiAvailable"`
-	PublicAreaWifiAvailableException *ConnectivityPublicAreaWifiAvailableExceptionEnum `json:"publicAreaWifiAvailableException"`
-	PublicInternetTerminal           *bool                                             `json:"publicInternetTerminal"`
-	PublicInternetTerminalException  *ConnectivityPublicInternetTerminalExceptionEnum  `json:"publicInternetTerminalException"`
-	WifiAvailable                    *bool                                             `json:"wifiAvailable"`
-	WifiAvailableException           *ConnectivityWifiAvailableExceptionEnum           `json:"wifiAvailableException"`
+	FreeWifi                         *bool                                             `json:"freeWifi,omitempty"`
+	FreeWifiException                *ConnectivityFreeWifiExceptionEnum                `json:"freeWifiException,omitempty"`
+	PublicAreaWifiAvailable          *bool                                             `json:"publicAreaWifiAvailable,omitempty"`
+	PublicAreaWifiAvailableException *ConnectivityPublicAreaWifiAvailableExceptionEnum `json:"publicAreaWifiAvailableException,omitempty"`
+	PublicInternetTerminal           *bool                                             `json:"publicInternetTerminal,omitempty"`
+	PublicInternetTerminalException  *ConnectivityPublicInternetTerminalExceptionEnum  `json:"publicInternetTerminalException,omitempty"`
+	WifiAvailable                    *bool                                             `json:"wifiAvailable,omitempty"`
+	WifiAvailableException           *ConnectivityWifiAvailableExceptionEnum           `json:"wifiAvailableException,omitempty"`
 }

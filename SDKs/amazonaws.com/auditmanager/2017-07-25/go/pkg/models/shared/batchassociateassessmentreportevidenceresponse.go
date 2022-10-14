@@ -1,6 +1,6 @@
 package shared
 
 type BatchAssociateAssessmentReportEvidenceResponse struct {
-	Errors      []AssessmentReportEvidenceError `json:"errors"`
-	EvidenceIds []string                        `json:"evidenceIds"`
+	Errors      []AssessmentReportEvidenceError `json:"errors,omitempty"`
+	EvidenceIds []string                        `json:"evidenceIds,omitempty"`
 }

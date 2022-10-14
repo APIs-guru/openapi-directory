@@ -1,7 +1,7 @@
 package shared
 
 type SearchFacesResponse struct {
-	FaceMatches      []FaceMatch `json:"FaceMatches"`
-	FaceModelVersion *string     `json:"FaceModelVersion"`
-	SearchedFaceID   *string     `json:"SearchedFaceId"`
+	FaceMatches      []FaceMatch `json:"FaceMatches,omitempty"`
+	FaceModelVersion *string     `json:"FaceModelVersion,omitempty"`
+	SearchedFaceID   *string     `json:"SearchedFaceId,omitempty"`
 }

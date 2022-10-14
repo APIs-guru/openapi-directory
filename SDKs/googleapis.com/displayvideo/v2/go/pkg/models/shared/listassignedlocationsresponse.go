@@ -1,6 +1,6 @@
 package shared
 
 type ListAssignedLocationsResponse struct {
-	AssignedLocations []AssignedLocation `json:"assignedLocations"`
-	NextPageToken     *string            `json:"nextPageToken"`
+	AssignedLocations []AssignedLocation `json:"assignedLocations,omitempty"`
+	NextPageToken     *string            `json:"nextPageToken,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ScheduleBByPurposePage struct {
-	Pagination *OffsetInfo          `json:"pagination"`
-	Results    []ScheduleBByPurpose `json:"results"`
+	Pagination *OffsetInfo          `json:"pagination,omitempty"`
+	Results    []ScheduleBByPurpose `json:"results,omitempty"`
 }

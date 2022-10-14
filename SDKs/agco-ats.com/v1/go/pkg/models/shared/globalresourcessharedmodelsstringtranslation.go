@@ -14,10 +14,10 @@ const (
 )
 
 type GlobalResourcesSharedModelsStringTranslation struct {
-	AuthorID    *int32                                                 `json:"AuthorId" form:"name=AuthorId"`
-	LanguageID  *int32                                                 `json:"LanguageId" form:"name=LanguageId"`
-	State       *GlobalResourcesSharedModelsStringTranslationStateEnum `json:"State" form:"name=State"`
-	StringID    *string                                                `json:"StringId" form:"name=StringId"`
+	AuthorID    *int32                                                 `json:"AuthorId,omitempty" form:"name=AuthorId"`
+	LanguageID  *int32                                                 `json:"LanguageId,omitempty" form:"name=LanguageId"`
+	State       *GlobalResourcesSharedModelsStringTranslationStateEnum `json:"State,omitempty" form:"name=State"`
+	StringID    *string                                                `json:"StringId,omitempty" form:"name=StringId"`
 	StringValue string                                                 `json:"StringValue" form:"name=StringValue"`
-	Timestamp   *string                                                `json:"Timestamp" form:"name=Timestamp"`
+	Timestamp   *string                                                `json:"Timestamp,omitempty" form:"name=Timestamp"`
 }

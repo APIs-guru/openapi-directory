@@ -1,7 +1,7 @@
 package shared
 
 type ListWorkflowsResponse struct {
-	NextPageToken *string    `json:"nextPageToken"`
-	Unreachable   []string   `json:"unreachable"`
-	Workflows     []Workflow `json:"workflows"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	Unreachable   []string   `json:"unreachable,omitempty"`
+	Workflows     []Workflow `json:"workflows,omitempty"`
 }

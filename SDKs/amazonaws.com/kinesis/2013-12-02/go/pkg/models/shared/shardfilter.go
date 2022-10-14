@@ -5,7 +5,7 @@ import (
 )
 
 type ShardFilter struct {
-	ShardID   *string             `json:"ShardId"`
-	Timestamp *time.Time          `json:"Timestamp"`
+	ShardID   *string             `json:"ShardId,omitempty"`
+	Timestamp *time.Time          `json:"Timestamp,omitempty"`
 	Type      ShardFilterTypeEnum `json:"Type"`
 }

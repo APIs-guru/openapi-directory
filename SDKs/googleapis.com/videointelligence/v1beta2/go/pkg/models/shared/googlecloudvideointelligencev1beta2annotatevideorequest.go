@@ -16,10 +16,10 @@ const (
 )
 
 type GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest struct {
-	Features     []GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum `json:"features"`
-	InputContent *string                                                               `json:"inputContent"`
-	InputURI     *string                                                               `json:"inputUri"`
-	LocationID   *string                                                               `json:"locationId"`
-	OutputURI    *string                                                               `json:"outputUri"`
-	VideoContext *GoogleCloudVideointelligenceV1beta2VideoContext                      `json:"videoContext"`
+	Features     []GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum `json:"features,omitempty"`
+	InputContent *string                                                               `json:"inputContent,omitempty"`
+	InputURI     *string                                                               `json:"inputUri,omitempty"`
+	LocationID   *string                                                               `json:"locationId,omitempty"`
+	OutputURI    *string                                                               `json:"outputUri,omitempty"`
+	VideoContext *GoogleCloudVideointelligenceV1beta2VideoContext                      `json:"videoContext,omitempty"`
 }

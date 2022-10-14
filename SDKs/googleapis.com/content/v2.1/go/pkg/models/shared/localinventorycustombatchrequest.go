@@ -1,5 +1,5 @@
 package shared
 
 type LocalinventoryCustomBatchRequest struct {
-	Entries []LocalinventoryCustomBatchRequestEntry `json:"entries"`
+	Entries []LocalinventoryCustomBatchRequestEntry `json:"entries,omitempty"`
 }

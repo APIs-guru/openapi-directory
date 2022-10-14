@@ -1,5 +1,5 @@
 package shared
 
 type AddVirtualFolderDto struct {
-	LibraryOptions *LibraryOptions `json:"LibraryOptions"`
+	LibraryOptions *LibraryOptions `json:"LibraryOptions,omitempty"`
 }

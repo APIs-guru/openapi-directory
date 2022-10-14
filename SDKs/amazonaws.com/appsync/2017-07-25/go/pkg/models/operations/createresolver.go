@@ -20,8 +20,8 @@ type CreateResolverHeaders struct {
 }
 
 type CreateResolverRequestBodyCachingConfig struct {
-	CachingKeys []string `json:"cachingKeys"`
-	TTL         *int64   `json:"ttl"`
+	CachingKeys []string `json:"cachingKeys,omitempty"`
+	TTL         *int64   `json:"ttl,omitempty"`
 }
 
 type CreateResolverRequestBodyKindEnum string
@@ -32,24 +32,24 @@ const (
 )
 
 type CreateResolverRequestBodyPipelineConfig struct {
-	Functions []string `json:"functions"`
+	Functions []string `json:"functions,omitempty"`
 }
 
 type CreateResolverRequestBodySyncConfig struct {
-	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection"`
-	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler"`
-	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig"`
+	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection,omitempty"`
+	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler,omitempty"`
+	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig,omitempty"`
 }
 
 type CreateResolverRequestBody struct {
-	CachingConfig           *CreateResolverRequestBodyCachingConfig  `json:"cachingConfig"`
-	DataSourceName          *string                                  `json:"dataSourceName"`
+	CachingConfig           *CreateResolverRequestBodyCachingConfig  `json:"cachingConfig,omitempty"`
+	DataSourceName          *string                                  `json:"dataSourceName,omitempty"`
 	FieldName               string                                   `json:"fieldName"`
-	Kind                    *CreateResolverRequestBodyKindEnum       `json:"kind"`
-	PipelineConfig          *CreateResolverRequestBodyPipelineConfig `json:"pipelineConfig"`
-	RequestMappingTemplate  *string                                  `json:"requestMappingTemplate"`
-	ResponseMappingTemplate *string                                  `json:"responseMappingTemplate"`
-	SyncConfig              *CreateResolverRequestBodySyncConfig     `json:"syncConfig"`
+	Kind                    *CreateResolverRequestBodyKindEnum       `json:"kind,omitempty"`
+	PipelineConfig          *CreateResolverRequestBodyPipelineConfig `json:"pipelineConfig,omitempty"`
+	RequestMappingTemplate  *string                                  `json:"requestMappingTemplate,omitempty"`
+	ResponseMappingTemplate *string                                  `json:"responseMappingTemplate,omitempty"`
+	SyncConfig              *CreateResolverRequestBodySyncConfig     `json:"syncConfig,omitempty"`
 }
 
 type CreateResolverRequest struct {

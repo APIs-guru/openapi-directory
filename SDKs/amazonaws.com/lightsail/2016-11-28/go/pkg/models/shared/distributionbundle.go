@@ -1,9 +1,9 @@
 package shared
 
 type DistributionBundle struct {
-	BundleID             *string  `json:"bundleId"`
-	IsActive             *bool    `json:"isActive"`
-	Name                 *string  `json:"name"`
-	Price                *float32 `json:"price"`
-	TransferPerMonthInGb *int64   `json:"transferPerMonthInGb"`
+	BundleID             *string  `json:"bundleId,omitempty"`
+	IsActive             *bool    `json:"isActive,omitempty"`
+	Name                 *string  `json:"name,omitempty"`
+	Price                *float32 `json:"price,omitempty"`
+	TransferPerMonthInGb *int64   `json:"transferPerMonthInGb,omitempty"`
 }

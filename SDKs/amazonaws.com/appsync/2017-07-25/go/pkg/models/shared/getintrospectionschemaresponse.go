@@ -1,5 +1,5 @@
 package shared
 
 type GetIntrospectionSchemaResponse struct {
-	Schema *string `json:"schema"`
+	Schema *string `json:"schema,omitempty"`
 }

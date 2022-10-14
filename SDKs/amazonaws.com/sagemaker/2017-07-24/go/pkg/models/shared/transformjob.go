@@ -5,25 +5,25 @@ import (
 )
 
 type TransformJob struct {
-	AutoMlJobArn            *string                 `json:"AutoMLJobArn"`
-	BatchStrategy           *BatchStrategyEnum      `json:"BatchStrategy"`
-	CreationTime            *time.Time              `json:"CreationTime"`
-	DataProcessing          *DataProcessing         `json:"DataProcessing"`
-	Environment             map[string]string       `json:"Environment"`
-	ExperimentConfig        *ExperimentConfig       `json:"ExperimentConfig"`
-	FailureReason           *string                 `json:"FailureReason"`
-	LabelingJobArn          *string                 `json:"LabelingJobArn"`
-	MaxConcurrentTransforms *int64                  `json:"MaxConcurrentTransforms"`
-	MaxPayloadInMb          *int64                  `json:"MaxPayloadInMB"`
-	ModelClientConfig       *ModelClientConfig      `json:"ModelClientConfig"`
-	ModelName               *string                 `json:"ModelName"`
-	Tags                    []Tag                   `json:"Tags"`
-	TransformEndTime        *time.Time              `json:"TransformEndTime"`
-	TransformInput          *TransformInput         `json:"TransformInput"`
-	TransformJobArn         *string                 `json:"TransformJobArn"`
-	TransformJobName        *string                 `json:"TransformJobName"`
-	TransformJobStatus      *TransformJobStatusEnum `json:"TransformJobStatus"`
-	TransformOutput         *TransformOutput        `json:"TransformOutput"`
-	TransformResources      *TransformResources     `json:"TransformResources"`
-	TransformStartTime      *time.Time              `json:"TransformStartTime"`
+	AutoMlJobArn            *string                 `json:"AutoMLJobArn,omitempty"`
+	BatchStrategy           *BatchStrategyEnum      `json:"BatchStrategy,omitempty"`
+	CreationTime            *time.Time              `json:"CreationTime,omitempty"`
+	DataProcessing          *DataProcessing         `json:"DataProcessing,omitempty"`
+	Environment             map[string]string       `json:"Environment,omitempty"`
+	ExperimentConfig        *ExperimentConfig       `json:"ExperimentConfig,omitempty"`
+	FailureReason           *string                 `json:"FailureReason,omitempty"`
+	LabelingJobArn          *string                 `json:"LabelingJobArn,omitempty"`
+	MaxConcurrentTransforms *int64                  `json:"MaxConcurrentTransforms,omitempty"`
+	MaxPayloadInMb          *int64                  `json:"MaxPayloadInMB,omitempty"`
+	ModelClientConfig       *ModelClientConfig      `json:"ModelClientConfig,omitempty"`
+	ModelName               *string                 `json:"ModelName,omitempty"`
+	Tags                    []Tag                   `json:"Tags,omitempty"`
+	TransformEndTime        *time.Time              `json:"TransformEndTime,omitempty"`
+	TransformInput          *TransformInput         `json:"TransformInput,omitempty"`
+	TransformJobArn         *string                 `json:"TransformJobArn,omitempty"`
+	TransformJobName        *string                 `json:"TransformJobName,omitempty"`
+	TransformJobStatus      *TransformJobStatusEnum `json:"TransformJobStatus,omitempty"`
+	TransformOutput         *TransformOutput        `json:"TransformOutput,omitempty"`
+	TransformResources      *TransformResources     `json:"TransformResources,omitempty"`
+	TransformStartTime      *time.Time              `json:"TransformStartTime,omitempty"`
 }

@@ -22,21 +22,21 @@ const (
 
 type CloudNetworkService struct {
 	BillingAccount          string                       `json:"billing_account"`
-	Capacity                *int64                       `json:"capacity"`
-	ChargedUntil            *time.Time                   `json:"charged_until"`
+	Capacity                *int64                       `json:"capacity,omitempty"`
+	ChargedUntil            *time.Time                   `json:"charged_until,omitempty"`
 	CloudKey                string                       `json:"cloud_key"`
 	ConsumingAccount        string                       `json:"consuming_account"`
-	ContractRef             *string                      `json:"contract_ref"`
-	DecommissionAt          *time.Time                   `json:"decommission_at"`
+	ContractRef             *string                      `json:"contract_ref,omitempty"`
+	DecommissionAt          *time.Time                   `json:"decommission_at,omitempty"`
 	Diversity               int64                        `json:"diversity"`
-	ExternalRef             *string                      `json:"external_ref"`
+	ExternalRef             *string                      `json:"external_ref,omitempty"`
 	ID                      string                       `json:"id"`
 	ManagingAccount         string                       `json:"managing_account"`
-	NscRequiredContactRoles []string                     `json:"nsc_required_contact_roles"`
+	NscRequiredContactRoles []string                     `json:"nsc_required_contact_roles,omitempty"`
 	ProductOffering         string                       `json:"product_offering"`
 	ProviderRef             string                       `json:"provider_ref"`
-	PurchaseOrder           *string                      `json:"purchase_order"`
+	PurchaseOrder           *string                      `json:"purchase_order,omitempty"`
 	State                   CloudNetworkServiceStateEnum `json:"state"`
-	Status                  []Status                     `json:"status"`
+	Status                  []Status                     `json:"status,omitempty"`
 	Type                    string                       `json:"type"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DisassociateResolverQueryLogConfigResponse struct {
-	ResolverQueryLogConfigAssociation *ResolverQueryLogConfigAssociation `json:"ResolverQueryLogConfigAssociation"`
+	ResolverQueryLogConfigAssociation *ResolverQueryLogConfigAssociation `json:"ResolverQueryLogConfigAssociation,omitempty"`
 }

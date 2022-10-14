@@ -5,17 +5,17 @@ import (
 )
 
 type StorageVirtualMachine struct {
-	ActiveDirectoryConfiguration *SvmActiveDirectoryConfiguration                  `json:"ActiveDirectoryConfiguration"`
-	CreationTime                 *time.Time                                        `json:"CreationTime"`
-	Endpoints                    *SvmEndpoints                                     `json:"Endpoints"`
-	FileSystemID                 *string                                           `json:"FileSystemId"`
-	Lifecycle                    *StorageVirtualMachineLifecycleEnum               `json:"Lifecycle"`
-	LifecycleTransitionReason    *LifecycleTransitionReason                        `json:"LifecycleTransitionReason"`
-	Name                         *string                                           `json:"Name"`
-	ResourceArn                  *string                                           `json:"ResourceARN"`
-	RootVolumeSecurityStyle      *StorageVirtualMachineRootVolumeSecurityStyleEnum `json:"RootVolumeSecurityStyle"`
-	StorageVirtualMachineID      *string                                           `json:"StorageVirtualMachineId"`
-	Subtype                      *StorageVirtualMachineSubtypeEnum                 `json:"Subtype"`
-	Tags                         []Tag                                             `json:"Tags"`
-	UUID                         *string                                           `json:"UUID"`
+	ActiveDirectoryConfiguration *SvmActiveDirectoryConfiguration                  `json:"ActiveDirectoryConfiguration,omitempty"`
+	CreationTime                 *time.Time                                        `json:"CreationTime,omitempty"`
+	Endpoints                    *SvmEndpoints                                     `json:"Endpoints,omitempty"`
+	FileSystemID                 *string                                           `json:"FileSystemId,omitempty"`
+	Lifecycle                    *StorageVirtualMachineLifecycleEnum               `json:"Lifecycle,omitempty"`
+	LifecycleTransitionReason    *LifecycleTransitionReason                        `json:"LifecycleTransitionReason,omitempty"`
+	Name                         *string                                           `json:"Name,omitempty"`
+	ResourceArn                  *string                                           `json:"ResourceARN,omitempty"`
+	RootVolumeSecurityStyle      *StorageVirtualMachineRootVolumeSecurityStyleEnum `json:"RootVolumeSecurityStyle,omitempty"`
+	StorageVirtualMachineID      *string                                           `json:"StorageVirtualMachineId,omitempty"`
+	Subtype                      *StorageVirtualMachineSubtypeEnum                 `json:"Subtype,omitempty"`
+	Tags                         []Tag                                             `json:"Tags,omitempty"`
+	UUID                         *string                                           `json:"UUID,omitempty"`
 }

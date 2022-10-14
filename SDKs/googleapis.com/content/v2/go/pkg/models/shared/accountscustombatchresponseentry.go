@@ -1,9 +1,9 @@
 package shared
 
 type AccountsCustomBatchResponseEntry struct {
-	Account    *Account `json:"account"`
-	BatchID    *int64   `json:"batchId"`
-	Errors     *Errors  `json:"errors"`
-	Kind       *string  `json:"kind"`
-	LinkStatus *string  `json:"linkStatus"`
+	Account    *Account `json:"account,omitempty"`
+	BatchID    *int64   `json:"batchId,omitempty"`
+	Errors     *Errors  `json:"errors,omitempty"`
+	Kind       *string  `json:"kind,omitempty"`
+	LinkStatus *string  `json:"linkStatus,omitempty"`
 }

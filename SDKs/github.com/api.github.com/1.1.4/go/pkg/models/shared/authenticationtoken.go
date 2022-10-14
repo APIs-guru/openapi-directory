@@ -13,9 +13,9 @@ const (
 
 type AuthenticationToken struct {
 	ExpiresAt           time.Time                                   `json:"expires_at"`
-	Permissions         map[string]interface{}                      `json:"permissions"`
-	Repositories        []Repository                                `json:"repositories"`
-	RepositorySelection *AuthenticationTokenRepositorySelectionEnum `json:"repository_selection"`
-	SingleFile          *string                                     `json:"single_file"`
+	Permissions         map[string]interface{}                      `json:"permissions,omitempty"`
+	Repositories        []Repository                                `json:"repositories,omitempty"`
+	RepositorySelection *AuthenticationTokenRepositorySelectionEnum `json:"repository_selection,omitempty"`
+	SingleFile          *string                                     `json:"single_file,omitempty"`
 	Token               string                                      `json:"token"`
 }

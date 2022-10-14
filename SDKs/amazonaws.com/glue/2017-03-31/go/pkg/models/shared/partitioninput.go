@@ -5,9 +5,9 @@ import (
 )
 
 type PartitionInput struct {
-	LastAccessTime    *time.Time         `json:"LastAccessTime"`
-	LastAnalyzedTime  *time.Time         `json:"LastAnalyzedTime"`
-	Parameters        map[string]string  `json:"Parameters"`
-	StorageDescriptor *StorageDescriptor `json:"StorageDescriptor"`
-	Values            []string           `json:"Values"`
+	LastAccessTime    *time.Time         `json:"LastAccessTime,omitempty"`
+	LastAnalyzedTime  *time.Time         `json:"LastAnalyzedTime,omitempty"`
+	Parameters        map[string]string  `json:"Parameters,omitempty"`
+	StorageDescriptor *StorageDescriptor `json:"StorageDescriptor,omitempty"`
+	Values            []string           `json:"Values,omitempty"`
 }

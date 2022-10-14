@@ -1,5 +1,5 @@
 package shared
 
 type CreateSavingsPlanResponse struct {
-	SavingsPlanID *string `json:"savingsPlanId"`
+	SavingsPlanID *string `json:"savingsPlanId,omitempty"`
 }

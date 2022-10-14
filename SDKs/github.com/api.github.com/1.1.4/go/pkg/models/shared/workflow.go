@@ -14,7 +14,7 @@ const (
 type Workflow struct {
 	BadgeURL  string            `json:"badge_url"`
 	CreatedAt time.Time         `json:"created_at"`
-	DeletedAt *time.Time        `json:"deleted_at"`
+	DeletedAt *time.Time        `json:"deleted_at,omitempty"`
 	HTMLURL   string            `json:"html_url"`
 	ID        int64             `json:"id"`
 	Name      string            `json:"name"`

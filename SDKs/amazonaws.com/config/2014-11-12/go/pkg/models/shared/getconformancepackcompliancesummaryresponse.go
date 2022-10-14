@@ -1,6 +1,6 @@
 package shared
 
 type GetConformancePackComplianceSummaryResponse struct {
-	ConformancePackComplianceSummaryList []ConformancePackComplianceSummary `json:"ConformancePackComplianceSummaryList"`
-	NextToken                            *string                            `json:"NextToken"`
+	ConformancePackComplianceSummaryList []ConformancePackComplianceSummary `json:"ConformancePackComplianceSummaryList,omitempty"`
+	NextToken                            *string                            `json:"NextToken,omitempty"`
 }

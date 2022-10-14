@@ -10,5 +10,5 @@ const (
 )
 
 type ThirdPartyLinkStatus struct {
-	LinkStatus *ThirdPartyLinkStatusLinkStatusEnum `json:"linkStatus"`
+	LinkStatus *ThirdPartyLinkStatusLinkStatusEnum `json:"linkStatus,omitempty"`
 }

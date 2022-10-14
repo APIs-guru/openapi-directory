@@ -1,5 +1,5 @@
 package shared
 
 type DeleteMeshOutput struct {
-	Mesh *MeshData `json:"mesh"`
+	Mesh *MeshData `json:"mesh,omitempty"`
 }

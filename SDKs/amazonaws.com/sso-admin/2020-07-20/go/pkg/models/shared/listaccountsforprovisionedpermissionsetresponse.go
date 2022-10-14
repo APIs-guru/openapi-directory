@@ -1,6 +1,6 @@
 package shared
 
 type ListAccountsForProvisionedPermissionSetResponse struct {
-	AccountIds []string `json:"AccountIds"`
-	NextToken  *string  `json:"NextToken"`
+	AccountIds []string `json:"AccountIds,omitempty"`
+	NextToken  *string  `json:"NextToken,omitempty"`
 }

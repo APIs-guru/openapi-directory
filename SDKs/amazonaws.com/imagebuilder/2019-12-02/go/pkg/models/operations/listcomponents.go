@@ -28,11 +28,11 @@ const (
 )
 
 type ListComponentsRequestBody struct {
-	ByName     *bool                               `json:"byName"`
-	Filters    []shared.Filter                     `json:"filters"`
-	MaxResults *int64                              `json:"maxResults"`
-	NextToken  *string                             `json:"nextToken"`
-	Owner      *ListComponentsRequestBodyOwnerEnum `json:"owner"`
+	ByName     *bool                               `json:"byName,omitempty"`
+	Filters    []shared.Filter                     `json:"filters,omitempty"`
+	MaxResults *int64                              `json:"maxResults,omitempty"`
+	NextToken  *string                             `json:"nextToken,omitempty"`
+	Owner      *ListComponentsRequestBodyOwnerEnum `json:"owner,omitempty"`
 }
 
 type ListComponentsRequest struct {

@@ -19,9 +19,9 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1Entity struct {
-	DisplayName *string                                           `json:"displayName"`
-	Metadata    map[string]string                                 `json:"metadata"`
-	Salience    *float32                                          `json:"salience"`
-	Sentiment   *GoogleCloudContactcenterinsightsV1SentimentData  `json:"sentiment"`
-	Type        *GoogleCloudContactcenterinsightsV1EntityTypeEnum `json:"type"`
+	DisplayName *string                                           `json:"displayName,omitempty"`
+	Metadata    map[string]string                                 `json:"metadata,omitempty"`
+	Salience    *float32                                          `json:"salience,omitempty"`
+	Sentiment   *GoogleCloudContactcenterinsightsV1SentimentData  `json:"sentiment,omitempty"`
+	Type        *GoogleCloudContactcenterinsightsV1EntityTypeEnum `json:"type,omitempty"`
 }

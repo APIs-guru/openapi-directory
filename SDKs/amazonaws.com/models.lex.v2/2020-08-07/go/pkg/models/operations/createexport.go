@@ -21,13 +21,13 @@ const (
 )
 
 type CreateExportRequestBodyResourceSpecification struct {
-	BotExportSpecification       *shared.BotExportSpecification       `json:"botExportSpecification"`
-	BotLocaleExportSpecification *shared.BotLocaleExportSpecification `json:"botLocaleExportSpecification"`
+	BotExportSpecification       *shared.BotExportSpecification       `json:"botExportSpecification,omitempty"`
+	BotLocaleExportSpecification *shared.BotLocaleExportSpecification `json:"botLocaleExportSpecification,omitempty"`
 }
 
 type CreateExportRequestBody struct {
 	FileFormat            CreateExportRequestBodyFileFormatEnum        `json:"fileFormat"`
-	FilePassword          *string                                      `json:"filePassword"`
+	FilePassword          *string                                      `json:"filePassword,omitempty"`
 	ResourceSpecification CreateExportRequestBodyResourceSpecification `json:"resourceSpecification"`
 }
 

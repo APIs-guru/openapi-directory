@@ -1,7 +1,7 @@
 package shared
 
 type ListInstancesResponse struct {
-	NextPageToken *string    `json:"nextPageToken"`
-	Resources     []Instance `json:"resources"`
-	Unreachable   []string   `json:"unreachable"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	Resources     []Instance `json:"resources,omitempty"`
+	Unreachable   []string   `json:"unreachable,omitempty"`
 }

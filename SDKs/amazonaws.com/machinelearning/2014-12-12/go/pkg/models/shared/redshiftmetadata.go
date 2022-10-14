@@ -1,7 +1,7 @@
 package shared
 
 type RedshiftMetadata struct {
-	DatabaseUserName *string           `json:"DatabaseUserName"`
-	RedshiftDatabase *RedshiftDatabase `json:"RedshiftDatabase"`
-	SelectSQLQuery   *string           `json:"SelectSqlQuery"`
+	DatabaseUserName *string           `json:"DatabaseUserName,omitempty"`
+	RedshiftDatabase *RedshiftDatabase `json:"RedshiftDatabase,omitempty"`
+	SelectSQLQuery   *string           `json:"SelectSqlQuery,omitempty"`
 }

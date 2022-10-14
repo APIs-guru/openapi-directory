@@ -5,13 +5,13 @@ import (
 )
 
 type DescribeImageResponse struct {
-	CreationTime     *time.Time       `json:"CreationTime"`
-	Description      *string          `json:"Description"`
-	DisplayName      *string          `json:"DisplayName"`
-	FailureReason    *string          `json:"FailureReason"`
-	ImageArn         *string          `json:"ImageArn"`
-	ImageName        *string          `json:"ImageName"`
-	ImageStatus      *ImageStatusEnum `json:"ImageStatus"`
-	LastModifiedTime *time.Time       `json:"LastModifiedTime"`
-	RoleArn          *string          `json:"RoleArn"`
+	CreationTime     *time.Time       `json:"CreationTime,omitempty"`
+	Description      *string          `json:"Description,omitempty"`
+	DisplayName      *string          `json:"DisplayName,omitempty"`
+	FailureReason    *string          `json:"FailureReason,omitempty"`
+	ImageArn         *string          `json:"ImageArn,omitempty"`
+	ImageName        *string          `json:"ImageName,omitempty"`
+	ImageStatus      *ImageStatusEnum `json:"ImageStatus,omitempty"`
+	LastModifiedTime *time.Time       `json:"LastModifiedTime,omitempty"`
+	RoleArn          *string          `json:"RoleArn,omitempty"`
 }

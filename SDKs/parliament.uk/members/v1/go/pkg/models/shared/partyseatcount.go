@@ -1,9 +1,9 @@
 package shared
 
 type PartySeatCount struct {
-	Female    *int32 `json:"female"`
-	Male      *int32 `json:"male"`
-	NonBinary *int32 `json:"nonBinary"`
-	Party     *Party `json:"party"`
-	Total     *int32 `json:"total"`
+	Female    *int32 `json:"female,omitempty"`
+	Male      *int32 `json:"male,omitempty"`
+	NonBinary *int32 `json:"nonBinary,omitempty"`
+	Party     *Party `json:"party,omitempty"`
+	Total     *int32 `json:"total,omitempty"`
 }

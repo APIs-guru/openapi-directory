@@ -1,6 +1,6 @@
 package shared
 
 type DescribeScalingPoliciesResponse struct {
-	NextToken       *string         `json:"NextToken"`
-	ScalingPolicies []ScalingPolicy `json:"ScalingPolicies"`
+	NextToken       *string         `json:"NextToken,omitempty"`
+	ScalingPolicies []ScalingPolicy `json:"ScalingPolicies,omitempty"`
 }

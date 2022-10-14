@@ -1,5 +1,5 @@
 package shared
 
 type GetAggregateResourceConfigResponse struct {
-	ConfigurationItem *ConfigurationItem `json:"ConfigurationItem"`
+	ConfigurationItem *ConfigurationItem `json:"ConfigurationItem,omitempty"`
 }

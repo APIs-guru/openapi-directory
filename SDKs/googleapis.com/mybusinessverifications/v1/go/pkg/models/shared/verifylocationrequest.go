@@ -13,11 +13,11 @@ const (
 )
 
 type VerifyLocationRequest struct {
-	Context       *ServiceBusinessContext          `json:"context"`
-	EmailAddress  *string                          `json:"emailAddress"`
-	LanguageCode  *string                          `json:"languageCode"`
-	MailerContact *string                          `json:"mailerContact"`
-	Method        *VerifyLocationRequestMethodEnum `json:"method"`
-	PhoneNumber   *string                          `json:"phoneNumber"`
-	Token         *VerificationToken               `json:"token"`
+	Context       *ServiceBusinessContext          `json:"context,omitempty"`
+	EmailAddress  *string                          `json:"emailAddress,omitempty"`
+	LanguageCode  *string                          `json:"languageCode,omitempty"`
+	MailerContact *string                          `json:"mailerContact,omitempty"`
+	Method        *VerifyLocationRequestMethodEnum `json:"method,omitempty"`
+	PhoneNumber   *string                          `json:"phoneNumber,omitempty"`
+	Token         *VerificationToken               `json:"token,omitempty"`
 }

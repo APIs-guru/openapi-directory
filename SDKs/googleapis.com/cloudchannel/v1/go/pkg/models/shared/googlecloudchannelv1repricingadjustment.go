@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudChannelV1RepricingAdjustment struct {
-	PercentageAdjustment *GoogleCloudChannelV1PercentageAdjustment `json:"percentageAdjustment"`
+	PercentageAdjustment *GoogleCloudChannelV1PercentageAdjustment `json:"percentageAdjustment,omitempty"`
 }

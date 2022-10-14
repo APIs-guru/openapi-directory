@@ -1,6 +1,6 @@
 package shared
 
 type AwsElasticsearchDomainLogPublishingOptionsLogConfig struct {
-	CloudWatchLogsLogGroupArn *string `json:"CloudWatchLogsLogGroupArn"`
-	Enabled                   *bool   `json:"Enabled"`
+	CloudWatchLogsLogGroupArn *string `json:"CloudWatchLogsLogGroupArn,omitempty"`
+	Enabled                   *bool   `json:"Enabled,omitempty"`
 }

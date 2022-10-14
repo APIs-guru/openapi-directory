@@ -1,8 +1,8 @@
 package shared
 
 type Service struct {
-	BusinessEntityName *string `json:"businessEntityName"`
-	DisplayName        *string `json:"displayName"`
-	Name               *string `json:"name"`
-	ServiceID          *string `json:"serviceId"`
+	BusinessEntityName *string `json:"businessEntityName,omitempty"`
+	DisplayName        *string `json:"displayName,omitempty"`
+	Name               *string `json:"name,omitempty"`
+	ServiceID          *string `json:"serviceId,omitempty"`
 }

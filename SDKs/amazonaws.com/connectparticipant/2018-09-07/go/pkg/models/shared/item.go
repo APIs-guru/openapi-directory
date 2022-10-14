@@ -1,13 +1,13 @@
 package shared
 
 type Item struct {
-	AbsoluteTime    *string              `json:"AbsoluteTime"`
-	Attachments     []AttachmentItem     `json:"Attachments"`
-	Content         *string              `json:"Content"`
-	ContentType     *string              `json:"ContentType"`
-	DisplayName     *string              `json:"DisplayName"`
-	ID              *string              `json:"Id"`
-	ParticipantID   *string              `json:"ParticipantId"`
-	ParticipantRole *ParticipantRoleEnum `json:"ParticipantRole"`
-	Type            *ChatItemTypeEnum    `json:"Type"`
+	AbsoluteTime    *string              `json:"AbsoluteTime,omitempty"`
+	Attachments     []AttachmentItem     `json:"Attachments,omitempty"`
+	Content         *string              `json:"Content,omitempty"`
+	ContentType     *string              `json:"ContentType,omitempty"`
+	DisplayName     *string              `json:"DisplayName,omitempty"`
+	ID              *string              `json:"Id,omitempty"`
+	ParticipantID   *string              `json:"ParticipantId,omitempty"`
+	ParticipantRole *ParticipantRoleEnum `json:"ParticipantRole,omitempty"`
+	Type            *ChatItemTypeEnum    `json:"Type,omitempty"`
 }

@@ -10,6 +10,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1VoiceSelectionParams struct {
-	Name       *string                                                         `json:"name"`
-	SsmlGender *GoogleCloudDialogflowV2beta1VoiceSelectionParamsSsmlGenderEnum `json:"ssmlGender"`
+	Name       *string                                                         `json:"name,omitempty"`
+	SsmlGender *GoogleCloudDialogflowV2beta1VoiceSelectionParamsSsmlGenderEnum `json:"ssmlGender,omitempty"`
 }

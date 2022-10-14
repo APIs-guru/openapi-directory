@@ -9,8 +9,8 @@ const (
 )
 
 type Section struct {
-	Items       []Item                  `json:"items"`
-	Labels      []Label                 `json:"labels"`
-	SectionID   *string                 `json:"sectionId"`
-	SectionType *SectionSectionTypeEnum `json:"sectionType"`
+	Items       []Item                  `json:"items,omitempty"`
+	Labels      []Label                 `json:"labels,omitempty"`
+	SectionID   *string                 `json:"sectionId,omitempty"`
+	SectionType *SectionSectionTypeEnum `json:"sectionType,omitempty"`
 }

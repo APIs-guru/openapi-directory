@@ -1,5 +1,5 @@
 package shared
 
 type BooleanPropertyOptions struct {
-	OperatorOptions *BooleanOperatorOptions `json:"operatorOptions"`
+	OperatorOptions *BooleanOperatorOptions `json:"operatorOptions,omitempty"`
 }

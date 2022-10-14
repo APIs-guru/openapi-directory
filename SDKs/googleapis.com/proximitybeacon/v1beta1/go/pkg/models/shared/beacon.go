@@ -20,15 +20,15 @@ const (
 )
 
 type Beacon struct {
-	AdvertisedID            *AdvertisedID                `json:"advertisedId"`
-	BeaconName              *string                      `json:"beaconName"`
-	Description             *string                      `json:"description"`
-	EphemeralIDRegistration *EphemeralIDRegistration     `json:"ephemeralIdRegistration"`
-	ExpectedStability       *BeaconExpectedStabilityEnum `json:"expectedStability"`
-	IndoorLevel             *IndoorLevel                 `json:"indoorLevel"`
-	LatLng                  *LatLng                      `json:"latLng"`
-	PlaceID                 *string                      `json:"placeId"`
-	Properties              map[string]string            `json:"properties"`
-	ProvisioningKey         *string                      `json:"provisioningKey"`
-	Status                  *BeaconStatusEnum            `json:"status"`
+	AdvertisedID            *AdvertisedID                `json:"advertisedId,omitempty"`
+	BeaconName              *string                      `json:"beaconName,omitempty"`
+	Description             *string                      `json:"description,omitempty"`
+	EphemeralIDRegistration *EphemeralIDRegistration     `json:"ephemeralIdRegistration,omitempty"`
+	ExpectedStability       *BeaconExpectedStabilityEnum `json:"expectedStability,omitempty"`
+	IndoorLevel             *IndoorLevel                 `json:"indoorLevel,omitempty"`
+	LatLng                  *LatLng                      `json:"latLng,omitempty"`
+	PlaceID                 *string                      `json:"placeId,omitempty"`
+	Properties              map[string]string            `json:"properties,omitempty"`
+	ProvisioningKey         *string                      `json:"provisioningKey,omitempty"`
+	Status                  *BeaconStatusEnum            `json:"status,omitempty"`
 }

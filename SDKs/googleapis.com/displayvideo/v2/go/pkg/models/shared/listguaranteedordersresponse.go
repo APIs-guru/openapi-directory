@@ -1,6 +1,6 @@
 package shared
 
 type ListGuaranteedOrdersResponse struct {
-	GuaranteedOrders []GuaranteedOrder `json:"guaranteedOrders"`
-	NextPageToken    *string           `json:"nextPageToken"`
+	GuaranteedOrders []GuaranteedOrder `json:"guaranteedOrders,omitempty"`
+	NextPageToken    *string           `json:"nextPageToken,omitempty"`
 }

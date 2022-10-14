@@ -8,9 +8,9 @@ const (
 )
 
 type FsCommand struct {
-	Left           *int32                       `json:"left"`
-	PositionOption *FsCommandPositionOptionEnum `json:"positionOption"`
-	Top            *int32                       `json:"top"`
-	WindowHeight   *int32                       `json:"windowHeight"`
-	WindowWidth    *int32                       `json:"windowWidth"`
+	Left           *int32                       `json:"left,omitempty"`
+	PositionOption *FsCommandPositionOptionEnum `json:"positionOption,omitempty"`
+	Top            *int32                       `json:"top,omitempty"`
+	WindowHeight   *int32                       `json:"windowHeight,omitempty"`
+	WindowWidth    *int32                       `json:"windowWidth,omitempty"`
 }

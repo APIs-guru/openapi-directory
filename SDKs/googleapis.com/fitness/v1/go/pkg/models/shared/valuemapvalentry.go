@@ -1,6 +1,6 @@
 package shared
 
 type ValueMapValEntry struct {
-	Key   *string   `json:"key"`
-	Value *MapValue `json:"value"`
+	Key   *string   `json:"key,omitempty"`
+	Value *MapValue `json:"value,omitempty"`
 }

@@ -10,9 +10,9 @@ const (
 )
 
 type UpgradeStatus struct {
-	Error           *Status                 `json:"error"`
-	PreviousVersion *string                 `json:"previousVersion"`
-	StartTime       *string                 `json:"startTime"`
-	State           *UpgradeStatusStateEnum `json:"state"`
-	Version         *string                 `json:"version"`
+	Error           *Status                 `json:"error,omitempty"`
+	PreviousVersion *string                 `json:"previousVersion,omitempty"`
+	StartTime       *string                 `json:"startTime,omitempty"`
+	State           *UpgradeStatusStateEnum `json:"state,omitempty"`
+	Version         *string                 `json:"version,omitempty"`
 }

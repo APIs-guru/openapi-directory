@@ -1,6 +1,6 @@
 package shared
 
 type RegionalPriceMigrationConfig struct {
-	OldestAllowedPriceVersionTime *string `json:"oldestAllowedPriceVersionTime"`
-	RegionCode                    *string `json:"regionCode"`
+	OldestAllowedPriceVersionTime *string `json:"oldestAllowedPriceVersionTime,omitempty"`
+	RegionCode                    *string `json:"regionCode,omitempty"`
 }

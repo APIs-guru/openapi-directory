@@ -5,10 +5,10 @@ import (
 )
 
 type ConfigurationEvent struct {
-	EventDetail          *string                             `json:"EventDetail"`
-	EventResourceName    *string                             `json:"EventResourceName"`
-	EventResourceType    *ConfigurationEventResourceTypeEnum `json:"EventResourceType"`
-	EventStatus          *ConfigurationEventStatusEnum       `json:"EventStatus"`
-	EventTime            *time.Time                          `json:"EventTime"`
-	MonitoredResourceArn *string                             `json:"MonitoredResourceARN"`
+	EventDetail          *string                             `json:"EventDetail,omitempty"`
+	EventResourceName    *string                             `json:"EventResourceName,omitempty"`
+	EventResourceType    *ConfigurationEventResourceTypeEnum `json:"EventResourceType,omitempty"`
+	EventStatus          *ConfigurationEventStatusEnum       `json:"EventStatus,omitempty"`
+	EventTime            *time.Time                          `json:"EventTime,omitempty"`
+	MonitoredResourceArn *string                             `json:"MonitoredResourceARN,omitempty"`
 }

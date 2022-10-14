@@ -1,5 +1,5 @@
 package shared
 
 type TestAuthorizationResponse struct {
-	AuthResults []AuthResult `json:"authResults"`
+	AuthResults []AuthResult `json:"authResults,omitempty"`
 }

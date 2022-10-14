@@ -14,5 +14,5 @@ type Rabatt struct {
 	BetragBrutto int64           `json:"Betrag-Brutto"`
 	BetragNetto  int64           `json:"Betrag-Netto"`
 	Bezeichnung  string          `json:"Bezeichnung"`
-	Satz         *RabattSatzEnum `json:"Satz"`
+	Satz         *RabattSatzEnum `json:"Satz,omitempty"`
 }

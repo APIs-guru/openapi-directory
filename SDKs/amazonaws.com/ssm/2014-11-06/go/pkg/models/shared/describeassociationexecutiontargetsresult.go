@@ -1,6 +1,6 @@
 package shared
 
 type DescribeAssociationExecutionTargetsResult struct {
-	AssociationExecutionTargets []AssociationExecutionTarget `json:"AssociationExecutionTargets"`
-	NextToken                   *string                      `json:"NextToken"`
+	AssociationExecutionTargets []AssociationExecutionTarget `json:"AssociationExecutionTargets,omitempty"`
+	NextToken                   *string                      `json:"NextToken,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type APICoreDtoDatapointsTrackingPixelSpecifics struct {
-	ParameterNote *string `json:"parameterNote"`
+	ParameterNote *string `json:"parameterNote,omitempty"`
 }

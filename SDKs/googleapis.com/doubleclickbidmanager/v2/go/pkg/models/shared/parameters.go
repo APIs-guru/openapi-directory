@@ -18,9 +18,9 @@ const (
 )
 
 type Parameters struct {
-	Filters  []FilterPair        `json:"filters"`
-	GroupBys []string            `json:"groupBys"`
-	Metrics  []string            `json:"metrics"`
-	Options  *Options            `json:"options"`
-	Type     *ParametersTypeEnum `json:"type"`
+	Filters  []FilterPair        `json:"filters,omitempty"`
+	GroupBys []string            `json:"groupBys,omitempty"`
+	Metrics  []string            `json:"metrics,omitempty"`
+	Options  *Options            `json:"options,omitempty"`
+	Type     *ParametersTypeEnum `json:"type,omitempty"`
 }

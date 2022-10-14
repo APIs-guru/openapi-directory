@@ -1,6 +1,6 @@
 package shared
 
 type ListEventBusesResponse struct {
-	EventBuses []EventBus `json:"EventBuses"`
-	NextToken  *string    `json:"NextToken"`
+	EventBuses []EventBus `json:"EventBuses,omitempty"`
+	NextToken  *string    `json:"NextToken,omitempty"`
 }

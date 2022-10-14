@@ -19,7 +19,7 @@ type TemplatesRemoveRequest struct {
 }
 
 type TemplatesRemove200ApplicationJSON struct {
-	Success *bool `json:"success"`
+	Success *bool `json:"success,omitempty"`
 }
 
 type TemplatesRemoveResponse struct {

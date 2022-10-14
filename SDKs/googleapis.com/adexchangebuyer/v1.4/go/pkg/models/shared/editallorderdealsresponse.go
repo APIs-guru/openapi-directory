@@ -1,6 +1,6 @@
 package shared
 
 type EditAllOrderDealsResponse struct {
-	Deals               []MarketplaceDeal `json:"deals"`
-	OrderRevisionNumber *string           `json:"orderRevisionNumber"`
+	Deals               []MarketplaceDeal `json:"deals,omitempty"`
+	OrderRevisionNumber *string           `json:"orderRevisionNumber,omitempty"`
 }

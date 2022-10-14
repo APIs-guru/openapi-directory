@@ -72,20 +72,20 @@ const (
 )
 
 type AppEntity struct {
-	AppType             *AppEntityAppTypeEnum            `json:"app_type"`
-	DocumentationLinks  *string                          `json:"documentation_links"`
-	ExtendedDescription *string                          `json:"extended_description"`
-	ExternalHomepageURL *string                          `json:"external_homepage_url"`
-	Featured            *bool                            `json:"featured"`
-	FolderBehaviorType  *AppEntityFolderBehaviorTypeEnum `json:"folder_behavior_type"`
-	IconURL             *string                          `json:"icon_url"`
-	LogoThumbnailURL    *string                          `json:"logo_thumbnail_url"`
-	LogoURL             *string                          `json:"logo_url"`
-	MarketingYoutubeURL *string                          `json:"marketing_youtube_url"`
-	Name                *string                          `json:"name"`
-	RemoteServerType    *AppEntityRemoteServerTypeEnum   `json:"remote_server_type"`
-	ScreenshotListUrls  *string                          `json:"screenshot_list_urls"`
-	ShortDescription    *string                          `json:"short_description"`
-	SsoStrategyType     *AppEntitySsoStrategyTypeEnum    `json:"sso_strategy_type"`
-	TutorialYoutubeURL  *string                          `json:"tutorial_youtube_url"`
+	AppType             *AppEntityAppTypeEnum            `json:"app_type,omitempty"`
+	DocumentationLinks  *string                          `json:"documentation_links,omitempty"`
+	ExtendedDescription *string                          `json:"extended_description,omitempty"`
+	ExternalHomepageURL *string                          `json:"external_homepage_url,omitempty"`
+	Featured            *bool                            `json:"featured,omitempty"`
+	FolderBehaviorType  *AppEntityFolderBehaviorTypeEnum `json:"folder_behavior_type,omitempty"`
+	IconURL             *string                          `json:"icon_url,omitempty"`
+	LogoThumbnailURL    *string                          `json:"logo_thumbnail_url,omitempty"`
+	LogoURL             *string                          `json:"logo_url,omitempty"`
+	MarketingYoutubeURL *string                          `json:"marketing_youtube_url,omitempty"`
+	Name                *string                          `json:"name,omitempty"`
+	RemoteServerType    *AppEntityRemoteServerTypeEnum   `json:"remote_server_type,omitempty"`
+	ScreenshotListUrls  *string                          `json:"screenshot_list_urls,omitempty"`
+	ShortDescription    *string                          `json:"short_description,omitempty"`
+	SsoStrategyType     *AppEntitySsoStrategyTypeEnum    `json:"sso_strategy_type,omitempty"`
+	TutorialYoutubeURL  *string                          `json:"tutorial_youtube_url,omitempty"`
 }

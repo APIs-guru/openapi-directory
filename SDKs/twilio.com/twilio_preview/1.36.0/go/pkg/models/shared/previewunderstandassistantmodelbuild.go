@@ -5,14 +5,14 @@ import (
 )
 
 type PreviewUnderstandAssistantModelBuild struct {
-	AccountSid    *string                   `json:"account_sid"`
-	AssistantSid  *string                   `json:"assistant_sid"`
-	BuildDuration *int64                    `json:"build_duration"`
-	DateCreated   *time.Time                `json:"date_created"`
-	DateUpdated   *time.Time                `json:"date_updated"`
-	ErrorCode     *int64                    `json:"error_code"`
-	Sid           *string                   `json:"sid"`
-	Status        *ModelBuildEnumStatusEnum `json:"status"`
-	UniqueName    *string                   `json:"unique_name"`
-	URL           *string                   `json:"url"`
+	AccountSid    *string                   `json:"account_sid,omitempty"`
+	AssistantSid  *string                   `json:"assistant_sid,omitempty"`
+	BuildDuration *int64                    `json:"build_duration,omitempty"`
+	DateCreated   *time.Time                `json:"date_created,omitempty"`
+	DateUpdated   *time.Time                `json:"date_updated,omitempty"`
+	ErrorCode     *int64                    `json:"error_code,omitempty"`
+	Sid           *string                   `json:"sid,omitempty"`
+	Status        *ModelBuildEnumStatusEnum `json:"status,omitempty"`
+	UniqueName    *string                   `json:"unique_name,omitempty"`
+	URL           *string                   `json:"url,omitempty"`
 }

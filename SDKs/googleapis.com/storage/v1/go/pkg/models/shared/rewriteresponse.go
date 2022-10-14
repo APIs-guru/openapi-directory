@@ -1,10 +1,10 @@
 package shared
 
 type RewriteResponse struct {
-	Done                *bool   `json:"done"`
-	Kind                *string `json:"kind"`
-	ObjectSize          *string `json:"objectSize"`
-	Resource            *Object `json:"resource"`
-	RewriteToken        *string `json:"rewriteToken"`
-	TotalBytesRewritten *string `json:"totalBytesRewritten"`
+	Done                *bool   `json:"done,omitempty"`
+	Kind                *string `json:"kind,omitempty"`
+	ObjectSize          *string `json:"objectSize,omitempty"`
+	Resource            *Object `json:"resource,omitempty"`
+	RewriteToken        *string `json:"rewriteToken,omitempty"`
+	TotalBytesRewritten *string `json:"totalBytesRewritten,omitempty"`
 }

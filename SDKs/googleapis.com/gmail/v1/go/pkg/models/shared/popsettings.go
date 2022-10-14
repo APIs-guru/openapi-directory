@@ -20,6 +20,6 @@ const (
 )
 
 type PopSettings struct {
-	AccessWindow *PopSettingsAccessWindowEnum `json:"accessWindow"`
-	Disposition  *PopSettingsDispositionEnum  `json:"disposition"`
+	AccessWindow *PopSettingsAccessWindowEnum `json:"accessWindow,omitempty"`
+	Disposition  *PopSettingsDispositionEnum  `json:"disposition,omitempty"`
 }

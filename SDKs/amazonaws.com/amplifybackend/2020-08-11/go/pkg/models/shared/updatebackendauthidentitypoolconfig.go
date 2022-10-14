@@ -1,5 +1,5 @@
 package shared
 
 type UpdateBackendAuthIdentityPoolConfig struct {
-	UnauthenticatedLogin *bool `json:"UnauthenticatedLogin"`
+	UnauthenticatedLogin *bool `json:"UnauthenticatedLogin,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DeployModelRequest struct {
-	ImageClassificationModelDeploymentMetadata  *ImageClassificationModelDeploymentMetadata  `json:"imageClassificationModelDeploymentMetadata"`
-	ImageObjectDetectionModelDeploymentMetadata *ImageObjectDetectionModelDeploymentMetadata `json:"imageObjectDetectionModelDeploymentMetadata"`
+	ImageClassificationModelDeploymentMetadata  *ImageClassificationModelDeploymentMetadata  `json:"imageClassificationModelDeploymentMetadata,omitempty"`
+	ImageObjectDetectionModelDeploymentMetadata *ImageObjectDetectionModelDeploymentMetadata `json:"imageObjectDetectionModelDeploymentMetadata,omitempty"`
 }

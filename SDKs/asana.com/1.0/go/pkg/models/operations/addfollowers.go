@@ -14,7 +14,7 @@ type AddFollowersQueryParams struct {
 }
 
 type AddFollowersRequestBody struct {
-	Data *shared.TaskAddFollowersRequest `json:"data"`
+	Data *shared.TaskAddFollowersRequest `json:"data,omitempty"`
 }
 
 type AddFollowersRequest struct {
@@ -24,7 +24,7 @@ type AddFollowersRequest struct {
 }
 
 type AddFollowers201ApplicationJSON struct {
-	Data *shared.GoalResponse `json:"data"`
+	Data *shared.GoalResponse `json:"data,omitempty"`
 }
 
 type AddFollowersResponse struct {

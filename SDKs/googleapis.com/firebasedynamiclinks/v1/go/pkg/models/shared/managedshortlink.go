@@ -17,10 +17,10 @@ const (
 )
 
 type ManagedShortLink struct {
-	CreationTime     *string                                `json:"creationTime"`
-	FlaggedAttribute []ManagedShortLinkFlaggedAttributeEnum `json:"flaggedAttribute"`
-	Info             *DynamicLinkInfo                       `json:"info"`
-	Link             *string                                `json:"link"`
-	LinkName         *string                                `json:"linkName"`
-	Visibility       *ManagedShortLinkVisibilityEnum        `json:"visibility"`
+	CreationTime     *string                                `json:"creationTime,omitempty"`
+	FlaggedAttribute []ManagedShortLinkFlaggedAttributeEnum `json:"flaggedAttribute,omitempty"`
+	Info             *DynamicLinkInfo                       `json:"info,omitempty"`
+	Link             *string                                `json:"link,omitempty"`
+	LinkName         *string                                `json:"linkName,omitempty"`
+	Visibility       *ManagedShortLinkVisibilityEnum        `json:"visibility,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudRetailV2SearchResponseFacetFacetValue struct {
-	Count    *string                      `json:"count"`
-	Interval *GoogleCloudRetailV2Interval `json:"interval"`
-	MaxValue *float64                     `json:"maxValue"`
-	MinValue *float64                     `json:"minValue"`
-	Value    *string                      `json:"value"`
+	Count    *string                      `json:"count,omitempty"`
+	Interval *GoogleCloudRetailV2Interval `json:"interval,omitempty"`
+	MaxValue *float64                     `json:"maxValue,omitempty"`
+	MinValue *float64                     `json:"minValue,omitempty"`
+	Value    *string                      `json:"value,omitempty"`
 }

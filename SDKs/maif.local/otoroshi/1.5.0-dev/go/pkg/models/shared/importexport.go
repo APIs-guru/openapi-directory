@@ -17,11 +17,11 @@ type ImportExportAPIKeys struct {
 	ClientID           string            `json:"clientId"`
 	ClientName         string            `json:"clientName"`
 	ClientSecret       string            `json:"clientSecret"`
-	DailyQuota         *int64            `json:"dailyQuota"`
+	DailyQuota         *int64            `json:"dailyQuota,omitempty"`
 	Enabled            bool              `json:"enabled"`
-	Metadata           map[string]string `json:"metadata"`
-	MonthlyQuota       *int64            `json:"monthlyQuota"`
-	ThrottlingQuota    *int64            `json:"throttlingQuota"`
+	Metadata           map[string]string `json:"metadata,omitempty"`
+	MonthlyQuota       *int64            `json:"monthlyQuota,omitempty"`
+	ThrottlingQuota    *int64            `json:"throttlingQuota,omitempty"`
 }
 
 type ImportExportErrorTemplates struct {
@@ -34,54 +34,54 @@ type ImportExportErrorTemplates struct {
 }
 
 type ImportExportServiceDescriptors struct {
-	Canary                     *Canary              `json:"Canary"`
-	AdditionalHeaders          map[string]string    `json:"additionalHeaders"`
-	API                        *ExposedAPI          `json:"api"`
-	AuthConfigRef              *string              `json:"authConfigRef"`
+	Canary                     *Canary              `json:"Canary,omitempty"`
+	AdditionalHeaders          map[string]string    `json:"additionalHeaders,omitempty"`
+	API                        *ExposedAPI          `json:"api,omitempty"`
+	AuthConfigRef              *string              `json:"authConfigRef,omitempty"`
 	BuildMode                  bool                 `json:"buildMode"`
-	ChaosConfig                *ChaosConfig         `json:"chaosConfig"`
-	ClientConfig               *ClientConfig        `json:"clientConfig"`
-	ClientValidatorRef         *string              `json:"clientValidatorRef"`
-	Cors                       *CorsSettings        `json:"cors"`
+	ChaosConfig                *ChaosConfig         `json:"chaosConfig,omitempty"`
+	ClientConfig               *ClientConfig        `json:"clientConfig,omitempty"`
+	ClientValidatorRef         *string              `json:"clientValidatorRef,omitempty"`
+	Cors                       *CorsSettings        `json:"cors,omitempty"`
 	Domain                     string               `json:"domain"`
 	Enabled                    bool                 `json:"enabled"`
 	EnforceSecureCommunication bool                 `json:"enforceSecureCommunication"`
 	Env                        string               `json:"env"`
 	ForceHTTPS                 bool                 `json:"forceHttps"`
 	Groups                     []string             `json:"groups"`
-	Gzip                       *Gzip                `json:"gzip"`
-	HeadersVerification        map[string]string    `json:"headersVerification"`
-	HealthCheck                *HealthCheck         `json:"healthCheck"`
+	Gzip                       *Gzip                `json:"gzip,omitempty"`
+	HeadersVerification        map[string]string    `json:"headersVerification,omitempty"`
+	HealthCheck                *HealthCheck         `json:"healthCheck,omitempty"`
 	ID                         string               `json:"id"`
-	IPFiltering                *IPFiltering         `json:"ipFiltering"`
-	JwtVerifier                *interface{}         `json:"jwtVerifier"`
-	LocalHost                  *string              `json:"localHost"`
-	LocalScheme                *string              `json:"localScheme"`
+	IPFiltering                *IPFiltering         `json:"ipFiltering,omitempty"`
+	JwtVerifier                *interface{}         `json:"jwtVerifier,omitempty"`
+	LocalHost                  *string              `json:"localHost,omitempty"`
+	LocalScheme                *string              `json:"localScheme,omitempty"`
 	MaintenanceMode            bool                 `json:"maintenanceMode"`
-	MatchingHeaders            map[string]string    `json:"matchingHeaders"`
-	MatchingRoot               *string              `json:"matchingRoot"`
-	Metadata                   map[string]string    `json:"metadata"`
+	MatchingHeaders            map[string]string    `json:"matchingHeaders,omitempty"`
+	MatchingRoot               *string              `json:"matchingRoot,omitempty"`
+	Metadata                   map[string]string    `json:"metadata,omitempty"`
 	Name                       string               `json:"name"`
-	OverrideHost               *bool                `json:"overrideHost"`
+	OverrideHost               *bool                `json:"overrideHost,omitempty"`
 	PrivateApp                 bool                 `json:"privateApp"`
-	PrivatePatterns            []string             `json:"privatePatterns"`
-	PublicPatterns             []string             `json:"publicPatterns"`
-	RedirectToLocal            *bool                `json:"redirectToLocal"`
-	Redirection                *RedirectionSettings `json:"redirection"`
+	PrivatePatterns            []string             `json:"privatePatterns,omitempty"`
+	PublicPatterns             []string             `json:"publicPatterns,omitempty"`
+	RedirectToLocal            *bool                `json:"redirectToLocal,omitempty"`
+	Redirection                *RedirectionSettings `json:"redirection,omitempty"`
 	Root                       string               `json:"root"`
-	SecComExcludedPatterns     []string             `json:"secComExcludedPatterns"`
-	SecComSettings             *interface{}         `json:"secComSettings"`
-	SendOtoroshiHeadersBack    *bool                `json:"sendOtoroshiHeadersBack"`
-	StatsdConfig               *StatsdConfig        `json:"statsdConfig"`
+	SecComExcludedPatterns     []string             `json:"secComExcludedPatterns,omitempty"`
+	SecComSettings             *interface{}         `json:"secComSettings,omitempty"`
+	SendOtoroshiHeadersBack    *bool                `json:"sendOtoroshiHeadersBack,omitempty"`
+	StatsdConfig               *StatsdConfig        `json:"statsdConfig,omitempty"`
 	Subdomain                  string               `json:"subdomain"`
 	Targets                    []Target             `json:"targets"`
-	TransformerRef             *string              `json:"transformerRef"`
-	UserFacing                 *bool                `json:"userFacing"`
-	XForwardedHeaders          *bool                `json:"xForwardedHeaders"`
+	TransformerRef             *string              `json:"transformerRef,omitempty"`
+	UserFacing                 *bool                `json:"userFacing,omitempty"`
+	XForwardedHeaders          *bool                `json:"xForwardedHeaders,omitempty"`
 }
 
 type ImportExportServiceGroups struct {
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	ID          string  `json:"id"`
 	Name        string  `json:"name"`
 }
@@ -96,7 +96,7 @@ type ImportExportSimpleAdmins struct {
 type ImportExport struct {
 	Admins             []ImportExportAdmins             `json:"admins"`
 	APIKeys            []ImportExportAPIKeys            `json:"apiKeys"`
-	AppConfig          map[string]string                `json:"appConfig"`
+	AppConfig          map[string]string                `json:"appConfig,omitempty"`
 	Config             GlobalConfig                     `json:"config"`
 	Date               time.Time                        `json:"date"`
 	DateRaw            int64                            `json:"dateRaw"`

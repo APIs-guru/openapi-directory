@@ -43,9 +43,9 @@ const (
 )
 
 type KioskCustomization struct {
-	DeviceSettings      *KioskCustomizationDeviceSettingsEnum      `json:"deviceSettings"`
-	PowerButtonActions  *KioskCustomizationPowerButtonActionsEnum  `json:"powerButtonActions"`
-	StatusBar           *KioskCustomizationStatusBarEnum           `json:"statusBar"`
-	SystemErrorWarnings *KioskCustomizationSystemErrorWarningsEnum `json:"systemErrorWarnings"`
-	SystemNavigation    *KioskCustomizationSystemNavigationEnum    `json:"systemNavigation"`
+	DeviceSettings      *KioskCustomizationDeviceSettingsEnum      `json:"deviceSettings,omitempty"`
+	PowerButtonActions  *KioskCustomizationPowerButtonActionsEnum  `json:"powerButtonActions,omitempty"`
+	StatusBar           *KioskCustomizationStatusBarEnum           `json:"statusBar,omitempty"`
+	SystemErrorWarnings *KioskCustomizationSystemErrorWarningsEnum `json:"systemErrorWarnings,omitempty"`
+	SystemNavigation    *KioskCustomizationSystemNavigationEnum    `json:"systemNavigation,omitempty"`
 }

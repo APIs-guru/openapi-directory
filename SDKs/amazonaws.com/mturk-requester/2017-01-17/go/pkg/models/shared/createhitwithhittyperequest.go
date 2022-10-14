@@ -1,14 +1,14 @@
 package shared
 
 type CreateHitWithHitTypeRequest struct {
-	AssignmentReviewPolicy *ReviewPolicy        `json:"AssignmentReviewPolicy"`
-	HitLayoutID            *string              `json:"HITLayoutId"`
-	HitLayoutParameters    []HitLayoutParameter `json:"HITLayoutParameters"`
-	HitReviewPolicy        *ReviewPolicy        `json:"HITReviewPolicy"`
+	AssignmentReviewPolicy *ReviewPolicy        `json:"AssignmentReviewPolicy,omitempty"`
+	HitLayoutID            *string              `json:"HITLayoutId,omitempty"`
+	HitLayoutParameters    []HitLayoutParameter `json:"HITLayoutParameters,omitempty"`
+	HitReviewPolicy        *ReviewPolicy        `json:"HITReviewPolicy,omitempty"`
 	HitTypeID              string               `json:"HITTypeId"`
 	LifetimeInSeconds      int64                `json:"LifetimeInSeconds"`
-	MaxAssignments         *int64               `json:"MaxAssignments"`
-	Question               *string              `json:"Question"`
-	RequesterAnnotation    *string              `json:"RequesterAnnotation"`
-	UniqueRequestToken     *string              `json:"UniqueRequestToken"`
+	MaxAssignments         *int64               `json:"MaxAssignments,omitempty"`
+	Question               *string              `json:"Question,omitempty"`
+	RequesterAnnotation    *string              `json:"RequesterAnnotation,omitempty"`
+	UniqueRequestToken     *string              `json:"UniqueRequestToken,omitempty"`
 }

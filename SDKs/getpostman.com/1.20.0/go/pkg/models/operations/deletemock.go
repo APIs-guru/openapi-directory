@@ -9,12 +9,12 @@ type DeleteMockRequest struct {
 }
 
 type DeleteMock200ApplicationJSONMock struct {
-	ID  *string `json:"id"`
-	UID *string `json:"uid"`
+	ID  *string `json:"id,omitempty"`
+	UID *string `json:"uid,omitempty"`
 }
 
 type DeleteMock200ApplicationJSON struct {
-	Mock *DeleteMock200ApplicationJSONMock `json:"mock"`
+	Mock *DeleteMock200ApplicationJSONMock `json:"mock,omitempty"`
 }
 
 type DeleteMockResponse struct {

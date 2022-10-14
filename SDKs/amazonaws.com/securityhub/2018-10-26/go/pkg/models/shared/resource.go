@@ -1,12 +1,12 @@
 package shared
 
 type Resource struct {
-	DataClassification *DataClassificationDetails `json:"DataClassification"`
-	Details            *ResourceDetails           `json:"Details"`
+	DataClassification *DataClassificationDetails `json:"DataClassification,omitempty"`
+	Details            *ResourceDetails           `json:"Details,omitempty"`
 	ID                 string                     `json:"Id"`
-	Partition          *PartitionEnum             `json:"Partition"`
-	Region             *string                    `json:"Region"`
-	ResourceRole       *string                    `json:"ResourceRole"`
-	Tags               map[string]string          `json:"Tags"`
+	Partition          *PartitionEnum             `json:"Partition,omitempty"`
+	Region             *string                    `json:"Region,omitempty"`
+	ResourceRole       *string                    `json:"ResourceRole,omitempty"`
+	Tags               map[string]string          `json:"Tags,omitempty"`
 	Type               string                     `json:"Type"`
 }

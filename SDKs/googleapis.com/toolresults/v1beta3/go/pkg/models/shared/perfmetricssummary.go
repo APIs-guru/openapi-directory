@@ -11,12 +11,12 @@ const (
 )
 
 type PerfMetricsSummary struct {
-	AppStartTime    *AppStartTime                       `json:"appStartTime"`
-	ExecutionID     *string                             `json:"executionId"`
-	GraphicsStats   *GraphicsStats                      `json:"graphicsStats"`
-	HistoryID       *string                             `json:"historyId"`
-	PerfEnvironment *PerfEnvironment                    `json:"perfEnvironment"`
-	PerfMetrics     []PerfMetricsSummaryPerfMetricsEnum `json:"perfMetrics"`
-	ProjectID       *string                             `json:"projectId"`
-	StepID          *string                             `json:"stepId"`
+	AppStartTime    *AppStartTime                       `json:"appStartTime,omitempty"`
+	ExecutionID     *string                             `json:"executionId,omitempty"`
+	GraphicsStats   *GraphicsStats                      `json:"graphicsStats,omitempty"`
+	HistoryID       *string                             `json:"historyId,omitempty"`
+	PerfEnvironment *PerfEnvironment                    `json:"perfEnvironment,omitempty"`
+	PerfMetrics     []PerfMetricsSummaryPerfMetricsEnum `json:"perfMetrics,omitempty"`
+	ProjectID       *string                             `json:"projectId,omitempty"`
+	StepID          *string                             `json:"stepId,omitempty"`
 }

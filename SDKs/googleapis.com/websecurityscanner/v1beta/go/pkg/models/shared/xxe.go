@@ -8,6 +8,6 @@ const (
 )
 
 type Xxe struct {
-	PayloadLocation *XxePayloadLocationEnum `json:"payloadLocation"`
-	PayloadValue    *string                 `json:"payloadValue"`
+	PayloadLocation *XxePayloadLocationEnum `json:"payloadLocation,omitempty"`
+	PayloadValue    *string                 `json:"payloadValue,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DetachObjectResponse struct {
-	DetachedObjectIdentifier *string `json:"DetachedObjectIdentifier"`
+	DetachedObjectIdentifier *string `json:"DetachedObjectIdentifier,omitempty"`
 }

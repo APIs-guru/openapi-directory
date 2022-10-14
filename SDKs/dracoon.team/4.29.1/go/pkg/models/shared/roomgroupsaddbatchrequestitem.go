@@ -9,6 +9,6 @@ const (
 
 type RoomGroupsAddBatchRequestItem struct {
 	ID                       int64                                                      `json:"id"`
-	NewGroupMemberAcceptance *RoomGroupsAddBatchRequestItemNewGroupMemberAcceptanceEnum `json:"newGroupMemberAcceptance"`
+	NewGroupMemberAcceptance *RoomGroupsAddBatchRequestItemNewGroupMemberAcceptanceEnum `json:"newGroupMemberAcceptance,omitempty"`
 	Permissions              NodePermissions                                            `json:"permissions"`
 }

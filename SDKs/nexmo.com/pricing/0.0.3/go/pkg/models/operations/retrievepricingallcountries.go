@@ -15,8 +15,8 @@ type RetrievePricingAllCountriesRequest struct {
 }
 
 type RetrievePricingAllCountries400ApplicationJSONInvalidParameters struct {
-	Message   *string `json:"message"`
-	Parameter *string `json:"parameter"`
+	Message   *string `json:"message,omitempty"`
+	Parameter *string `json:"parameter,omitempty"`
 }
 
 type RetrievePricingAllCountries400ApplicationJSON struct {

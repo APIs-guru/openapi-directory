@@ -75,8 +75,8 @@ const (
 )
 
 type ExchangeConfigEnabledExchange struct {
-	Exchange                      *ExchangeConfigEnabledExchangeExchangeEnum `json:"exchange"`
-	GoogleAdManagerAgencyID       *string                                    `json:"googleAdManagerAgencyId"`
-	GoogleAdManagerBuyerNetworkID *string                                    `json:"googleAdManagerBuyerNetworkId"`
-	SeatID                        *string                                    `json:"seatId"`
+	Exchange                      *ExchangeConfigEnabledExchangeExchangeEnum `json:"exchange,omitempty"`
+	GoogleAdManagerAgencyID       *string                                    `json:"googleAdManagerAgencyId,omitempty"`
+	GoogleAdManagerBuyerNetworkID *string                                    `json:"googleAdManagerBuyerNetworkId,omitempty"`
+	SeatID                        *string                                    `json:"seatId,omitempty"`
 }

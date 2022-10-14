@@ -1,13 +1,13 @@
 package shared
 
 type JobStatus struct {
-	Active             *int32           `json:"active"`
-	CompletionTime     *string          `json:"completionTime"`
-	Conditions         []JobCondition   `json:"conditions"`
-	Failed             *int32           `json:"failed"`
-	ImageDigest        *string          `json:"imageDigest"`
-	Instances          []InstanceStatus `json:"instances"`
-	ObservedGeneration *int32           `json:"observedGeneration"`
-	StartTime          *string          `json:"startTime"`
-	Succeeded          *int32           `json:"succeeded"`
+	Active             *int32           `json:"active,omitempty"`
+	CompletionTime     *string          `json:"completionTime,omitempty"`
+	Conditions         []JobCondition   `json:"conditions,omitempty"`
+	Failed             *int32           `json:"failed,omitempty"`
+	ImageDigest        *string          `json:"imageDigest,omitempty"`
+	Instances          []InstanceStatus `json:"instances,omitempty"`
+	ObservedGeneration *int32           `json:"observedGeneration,omitempty"`
+	StartTime          *string          `json:"startTime,omitempty"`
+	Succeeded          *int32           `json:"succeeded,omitempty"`
 }

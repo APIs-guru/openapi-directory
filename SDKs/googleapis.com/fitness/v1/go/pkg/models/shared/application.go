@@ -1,8 +1,8 @@
 package shared
 
 type Application struct {
-	DetailsURL  *string `json:"detailsUrl"`
-	Name        *string `json:"name"`
-	PackageName *string `json:"packageName"`
-	Version     *string `json:"version"`
+	DetailsURL  *string `json:"detailsUrl,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	PackageName *string `json:"packageName,omitempty"`
+	Version     *string `json:"version,omitempty"`
 }

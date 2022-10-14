@@ -14,7 +14,7 @@ const (
 )
 
 type GoogleCloudChannelV1PriceByResource struct {
-	Price        *GoogleCloudChannelV1Price                           `json:"price"`
-	PricePhases  []GoogleCloudChannelV1PricePhase                     `json:"pricePhases"`
-	ResourceType *GoogleCloudChannelV1PriceByResourceResourceTypeEnum `json:"resourceType"`
+	Price        *GoogleCloudChannelV1Price                           `json:"price,omitempty"`
+	PricePhases  []GoogleCloudChannelV1PricePhase                     `json:"pricePhases,omitempty"`
+	ResourceType *GoogleCloudChannelV1PriceByResourceResourceTypeEnum `json:"resourceType,omitempty"`
 }

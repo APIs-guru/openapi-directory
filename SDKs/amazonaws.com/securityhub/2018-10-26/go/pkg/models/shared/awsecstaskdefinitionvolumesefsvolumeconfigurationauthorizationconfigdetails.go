@@ -1,6 +1,6 @@
 package shared
 
 type AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails struct {
-	AccessPointID *string `json:"AccessPointId"`
-	Iam           *string `json:"Iam"`
+	AccessPointID *string `json:"AccessPointId,omitempty"`
+	Iam           *string `json:"Iam,omitempty"`
 }

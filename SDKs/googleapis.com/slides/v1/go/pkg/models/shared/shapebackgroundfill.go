@@ -9,6 +9,6 @@ const (
 )
 
 type ShapeBackgroundFill struct {
-	PropertyState *ShapeBackgroundFillPropertyStateEnum `json:"propertyState"`
-	SolidFill     *SolidFill                            `json:"solidFill"`
+	PropertyState *ShapeBackgroundFillPropertyStateEnum `json:"propertyState,omitempty"`
+	SolidFill     *SolidFill                            `json:"solidFill,omitempty"`
 }

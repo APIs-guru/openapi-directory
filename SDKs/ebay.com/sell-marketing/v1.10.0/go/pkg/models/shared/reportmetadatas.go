@@ -1,5 +1,5 @@
 package shared
 
 type ReportMetadatas struct {
-	ReportMetadata []ReportMetadata `json:"reportMetadata"`
+	ReportMetadata []ReportMetadata `json:"reportMetadata,omitempty"`
 }

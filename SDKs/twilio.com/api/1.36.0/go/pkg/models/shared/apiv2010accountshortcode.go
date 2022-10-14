@@ -23,16 +23,16 @@ const (
 )
 
 type APIV2010AccountShortCode struct {
-	AccountSid        *string                                        `json:"account_sid"`
-	APIVersion        *string                                        `json:"api_version"`
-	DateCreated       *string                                        `json:"date_created"`
-	DateUpdated       *string                                        `json:"date_updated"`
-	FriendlyName      *string                                        `json:"friendly_name"`
-	ShortCode         *string                                        `json:"short_code"`
-	Sid               *string                                        `json:"sid"`
-	SmsFallbackMethod *APIV2010AccountShortCodeSmsFallbackMethodEnum `json:"sms_fallback_method"`
-	SmsFallbackURL    *string                                        `json:"sms_fallback_url"`
-	SmsMethod         *APIV2010AccountShortCodeSmsMethodEnum         `json:"sms_method"`
-	SmsURL            *string                                        `json:"sms_url"`
-	URI               *string                                        `json:"uri"`
+	AccountSid        *string                                        `json:"account_sid,omitempty"`
+	APIVersion        *string                                        `json:"api_version,omitempty"`
+	DateCreated       *string                                        `json:"date_created,omitempty"`
+	DateUpdated       *string                                        `json:"date_updated,omitempty"`
+	FriendlyName      *string                                        `json:"friendly_name,omitempty"`
+	ShortCode         *string                                        `json:"short_code,omitempty"`
+	Sid               *string                                        `json:"sid,omitempty"`
+	SmsFallbackMethod *APIV2010AccountShortCodeSmsFallbackMethodEnum `json:"sms_fallback_method,omitempty"`
+	SmsFallbackURL    *string                                        `json:"sms_fallback_url,omitempty"`
+	SmsMethod         *APIV2010AccountShortCodeSmsMethodEnum         `json:"sms_method,omitempty"`
+	SmsURL            *string                                        `json:"sms_url,omitempty"`
+	URI               *string                                        `json:"uri,omitempty"`
 }

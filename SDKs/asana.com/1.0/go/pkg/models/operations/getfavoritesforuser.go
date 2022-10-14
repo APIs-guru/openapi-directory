@@ -31,7 +31,7 @@ type GetFavoritesForUserRequest struct {
 }
 
 type GetFavoritesForUser200ApplicationJSON struct {
-	Data []shared.AsanaNamedResource `json:"data"`
+	Data []shared.AsanaNamedResource `json:"data,omitempty"`
 }
 
 type GetFavoritesForUserResponse struct {

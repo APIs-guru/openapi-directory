@@ -1,9 +1,9 @@
 package shared
 
 type CreateTrialRequest struct {
-	DisplayName        *string             `json:"DisplayName"`
+	DisplayName        *string             `json:"DisplayName,omitempty"`
 	ExperimentName     string              `json:"ExperimentName"`
-	MetadataProperties *MetadataProperties `json:"MetadataProperties"`
-	Tags               []Tag               `json:"Tags"`
+	MetadataProperties *MetadataProperties `json:"MetadataProperties,omitempty"`
+	Tags               []Tag               `json:"Tags,omitempty"`
 	TrialName          string              `json:"TrialName"`
 }

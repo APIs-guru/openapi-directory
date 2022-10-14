@@ -1,12 +1,12 @@
 package shared
 
 type MemberListResponse struct {
-	Etag            *string                `json:"etag"`
-	EventID         *string                `json:"eventId"`
-	Items           []Member               `json:"items"`
-	Kind            *string                `json:"kind"`
-	NextPageToken   *string                `json:"nextPageToken"`
-	PageInfo        *PageInfo              `json:"pageInfo"`
-	TokenPagination map[string]interface{} `json:"tokenPagination"`
-	VisitorID       *string                `json:"visitorId"`
+	Etag            *string                `json:"etag,omitempty"`
+	EventID         *string                `json:"eventId,omitempty"`
+	Items           []Member               `json:"items,omitempty"`
+	Kind            *string                `json:"kind,omitempty"`
+	NextPageToken   *string                `json:"nextPageToken,omitempty"`
+	PageInfo        *PageInfo              `json:"pageInfo,omitempty"`
+	TokenPagination map[string]interface{} `json:"tokenPagination,omitempty"`
+	VisitorID       *string                `json:"visitorId,omitempty"`
 }

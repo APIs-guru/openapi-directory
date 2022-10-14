@@ -18,9 +18,9 @@ const (
 )
 
 type ReposUpdateInformationAboutPagesSiteRequestBody struct {
-	HTTPSEnforced *bool                                                      `json:"https_enforced"`
-	Public        *bool                                                      `json:"public"`
-	Source        *ReposUpdateInformationAboutPagesSiteRequestBodySourceEnum `json:"source"`
+	HTTPSEnforced *bool                                                      `json:"https_enforced,omitempty"`
+	Public        *bool                                                      `json:"public,omitempty"`
+	Source        *ReposUpdateInformationAboutPagesSiteRequestBodySourceEnum `json:"source,omitempty"`
 }
 
 type ReposUpdateInformationAboutPagesSiteRequest struct {

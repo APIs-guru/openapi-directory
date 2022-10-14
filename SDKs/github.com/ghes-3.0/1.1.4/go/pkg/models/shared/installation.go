@@ -5,14 +5,14 @@ import (
 )
 
 type InstallationPermissions struct {
-	Checks                     *string `json:"checks"`
-	Contents                   *string `json:"contents"`
-	Deployments                *string `json:"deployments"`
-	Issues                     *string `json:"issues"`
-	Metadata                   *string `json:"metadata"`
-	OrganizationAdministration *string `json:"organization_administration"`
-	PullRequests               *string `json:"pull_requests"`
-	Statuses                   *string `json:"statuses"`
+	Checks                     *string `json:"checks,omitempty"`
+	Contents                   *string `json:"contents,omitempty"`
+	Deployments                *string `json:"deployments,omitempty"`
+	Issues                     *string `json:"issues,omitempty"`
+	Metadata                   *string `json:"metadata,omitempty"`
+	OrganizationAdministration *string `json:"organization_administration,omitempty"`
+	PullRequests               *string `json:"pull_requests,omitempty"`
+	Statuses                   *string `json:"statuses,omitempty"`
 }
 
 type InstallationRepositorySelectionEnum string
@@ -37,7 +37,7 @@ type InstallationSuspendedBySimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -49,17 +49,17 @@ type Installation struct {
 	Account                interface{}                         `json:"account"`
 	AppID                  int64                               `json:"app_id"`
 	AppSlug                string                              `json:"app_slug"`
-	ContactEmail           *string                             `json:"contact_email"`
+	ContactEmail           *string                             `json:"contact_email,omitempty"`
 	CreatedAt              time.Time                           `json:"created_at"`
 	Events                 []string                            `json:"events"`
-	HasMultipleSingleFiles *bool                               `json:"has_multiple_single_files"`
+	HasMultipleSingleFiles *bool                               `json:"has_multiple_single_files,omitempty"`
 	HTMLURL                string                              `json:"html_url"`
 	ID                     int64                               `json:"id"`
 	Permissions            InstallationPermissions             `json:"permissions"`
 	RepositoriesURL        string                              `json:"repositories_url"`
 	RepositorySelection    InstallationRepositorySelectionEnum `json:"repository_selection"`
 	SingleFileName         string                              `json:"single_file_name"`
-	SingleFilePaths        []string                            `json:"single_file_paths"`
+	SingleFilePaths        []string                            `json:"single_file_paths,omitempty"`
 	SuspendedAt            time.Time                           `json:"suspended_at"`
 	SuspendedBy            InstallationSuspendedBySimpleUser   `json:"suspended_by"`
 	TargetID               int64                               `json:"target_id"`

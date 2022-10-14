@@ -1,5 +1,5 @@
 package shared
 
 type BatchUpdatePartitionResponse struct {
-	Errors []BatchUpdatePartitionFailureEntry `json:"Errors"`
+	Errors []BatchUpdatePartitionFailureEntry `json:"Errors,omitempty"`
 }

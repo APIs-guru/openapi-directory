@@ -1,6 +1,6 @@
 package shared
 
 type DescribeParametersResult struct {
-	NextToken  *string             `json:"NextToken"`
-	Parameters []ParameterMetadata `json:"Parameters"`
+	NextToken  *string             `json:"NextToken,omitempty"`
+	Parameters []ParameterMetadata `json:"Parameters,omitempty"`
 }

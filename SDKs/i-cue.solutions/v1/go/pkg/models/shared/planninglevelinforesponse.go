@@ -14,13 +14,13 @@ const (
 )
 
 type PlanningLevelInfoResponse struct {
-	Action          *string                              `json:"action"`
-	DateCreated     *time.Time                           `json:"dateCreated"`
-	ExternalID      *string                              `json:"externalId"`
-	Filename        *string                              `json:"filename"`
-	Hyperparameters *PlanningLevelHyperparameterResponse `json:"hyperparameters"`
-	ID              *int32                               `json:"id"`
-	Method          *string                              `json:"method"`
-	NoTimeseries    *int32                               `json:"noTimeseries"`
-	Status          *PlanningLevelInfoResponseStatusEnum `json:"status"`
+	Action          *string                              `json:"action,omitempty"`
+	DateCreated     *time.Time                           `json:"dateCreated,omitempty"`
+	ExternalID      *string                              `json:"externalId,omitempty"`
+	Filename        *string                              `json:"filename,omitempty"`
+	Hyperparameters *PlanningLevelHyperparameterResponse `json:"hyperparameters,omitempty"`
+	ID              *int32                               `json:"id,omitempty"`
+	Method          *string                              `json:"method,omitempty"`
+	NoTimeseries    *int32                               `json:"noTimeseries,omitempty"`
+	Status          *PlanningLevelInfoResponseStatusEnum `json:"status,omitempty"`
 }

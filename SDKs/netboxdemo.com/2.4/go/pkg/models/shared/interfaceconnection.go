@@ -6,8 +6,8 @@ type InterfaceConnectionConnectionStatusConnectionStatus struct {
 }
 
 type InterfaceConnection struct {
-	ConnectionStatus *InterfaceConnectionConnectionStatusConnectionStatus `json:"connection_status"`
-	ID               *int64                                               `json:"id"`
+	ConnectionStatus *InterfaceConnectionConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
+	ID               *int64                                               `json:"id,omitempty"`
 	InterfaceA       NestedInterface                                      `json:"interface_a"`
 	InterfaceB       NestedInterface                                      `json:"interface_b"`
 }

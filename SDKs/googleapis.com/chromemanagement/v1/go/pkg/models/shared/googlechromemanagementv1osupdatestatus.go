@@ -10,10 +10,10 @@ const (
 )
 
 type GoogleChromeManagementV1OsUpdateStatus struct {
-	LastRebootTime              *string                                                `json:"lastRebootTime"`
-	LastUpdateCheckTime         *string                                                `json:"lastUpdateCheckTime"`
-	LastUpdateTime              *string                                                `json:"lastUpdateTime"`
-	NewPlatformVersion          *string                                                `json:"newPlatformVersion"`
-	NewRequestedPlatformVersion *string                                                `json:"newRequestedPlatformVersion"`
-	UpdateState                 *GoogleChromeManagementV1OsUpdateStatusUpdateStateEnum `json:"updateState"`
+	LastRebootTime              *string                                                `json:"lastRebootTime,omitempty"`
+	LastUpdateCheckTime         *string                                                `json:"lastUpdateCheckTime,omitempty"`
+	LastUpdateTime              *string                                                `json:"lastUpdateTime,omitempty"`
+	NewPlatformVersion          *string                                                `json:"newPlatformVersion,omitempty"`
+	NewRequestedPlatformVersion *string                                                `json:"newRequestedPlatformVersion,omitempty"`
+	UpdateState                 *GoogleChromeManagementV1OsUpdateStatusUpdateStateEnum `json:"updateState,omitempty"`
 }

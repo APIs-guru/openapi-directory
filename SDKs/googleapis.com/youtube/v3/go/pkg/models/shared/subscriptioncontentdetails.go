@@ -9,7 +9,7 @@ const (
 )
 
 type SubscriptionContentDetails struct {
-	ActivityType   *SubscriptionContentDetailsActivityTypeEnum `json:"activityType"`
-	NewItemCount   *int64                                      `json:"newItemCount"`
-	TotalItemCount *int64                                      `json:"totalItemCount"`
+	ActivityType   *SubscriptionContentDetailsActivityTypeEnum `json:"activityType,omitempty"`
+	NewItemCount   *int64                                      `json:"newItemCount,omitempty"`
+	TotalItemCount *int64                                      `json:"totalItemCount,omitempty"`
 }

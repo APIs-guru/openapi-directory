@@ -1,6 +1,6 @@
 package shared
 
 type S3Location struct {
-	BucketKey  *string `json:"bucketKey"`
-	BucketName *string `json:"bucketName"`
+	BucketKey  *string `json:"bucketKey,omitempty"`
+	BucketName *string `json:"bucketName,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ShipmentInvoice struct {
-	InvoiceSummary   *InvoiceSummary                  `json:"invoiceSummary"`
-	LineItemInvoices []ShipmentInvoiceLineItemInvoice `json:"lineItemInvoices"`
-	ShipmentGroupID  *string                          `json:"shipmentGroupId"`
+	InvoiceSummary   *InvoiceSummary                  `json:"invoiceSummary,omitempty"`
+	LineItemInvoices []ShipmentInvoiceLineItemInvoice `json:"lineItemInvoices,omitempty"`
+	ShipmentGroupID  *string                          `json:"shipmentGroupId,omitempty"`
 }

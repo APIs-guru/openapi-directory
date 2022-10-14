@@ -19,8 +19,8 @@ type CreateDomainConfigurationHeaders struct {
 }
 
 type CreateDomainConfigurationRequestBodyAuthorizerConfig struct {
-	AllowAuthorizerOverride *bool   `json:"allowAuthorizerOverride"`
-	DefaultAuthorizerName   *string `json:"defaultAuthorizerName"`
+	AllowAuthorizerOverride *bool   `json:"allowAuthorizerOverride,omitempty"`
+	DefaultAuthorizerName   *string `json:"defaultAuthorizerName,omitempty"`
 }
 
 type CreateDomainConfigurationRequestBodyServiceTypeEnum string
@@ -32,12 +32,12 @@ const (
 )
 
 type CreateDomainConfigurationRequestBody struct {
-	AuthorizerConfig         *CreateDomainConfigurationRequestBodyAuthorizerConfig `json:"authorizerConfig"`
-	DomainName               *string                                               `json:"domainName"`
-	ServerCertificateArns    []string                                              `json:"serverCertificateArns"`
-	ServiceType              *CreateDomainConfigurationRequestBodyServiceTypeEnum  `json:"serviceType"`
-	Tags                     []shared.Tag                                          `json:"tags"`
-	ValidationCertificateArn *string                                               `json:"validationCertificateArn"`
+	AuthorizerConfig         *CreateDomainConfigurationRequestBodyAuthorizerConfig `json:"authorizerConfig,omitempty"`
+	DomainName               *string                                               `json:"domainName,omitempty"`
+	ServerCertificateArns    []string                                              `json:"serverCertificateArns,omitempty"`
+	ServiceType              *CreateDomainConfigurationRequestBodyServiceTypeEnum  `json:"serviceType,omitempty"`
+	Tags                     []shared.Tag                                          `json:"tags,omitempty"`
+	ValidationCertificateArn *string                                               `json:"validationCertificateArn,omitempty"`
 }
 
 type CreateDomainConfigurationRequest struct {

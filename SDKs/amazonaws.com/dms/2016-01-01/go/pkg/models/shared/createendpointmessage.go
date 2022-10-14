@@ -1,37 +1,37 @@
 package shared
 
 type CreateEndpointMessage struct {
-	CertificateArn             *string                          `json:"CertificateArn"`
-	DatabaseName               *string                          `json:"DatabaseName"`
-	DmsTransferSettings        *DmsTransferSettings             `json:"DmsTransferSettings"`
-	DocDbSettings              *DocDbSettings                   `json:"DocDbSettings"`
-	DynamoDbSettings           *DynamoDbSettings                `json:"DynamoDbSettings"`
-	ElasticsearchSettings      *ElasticsearchSettings           `json:"ElasticsearchSettings"`
+	CertificateArn             *string                          `json:"CertificateArn,omitempty"`
+	DatabaseName               *string                          `json:"DatabaseName,omitempty"`
+	DmsTransferSettings        *DmsTransferSettings             `json:"DmsTransferSettings,omitempty"`
+	DocDbSettings              *DocDbSettings                   `json:"DocDbSettings,omitempty"`
+	DynamoDbSettings           *DynamoDbSettings                `json:"DynamoDbSettings,omitempty"`
+	ElasticsearchSettings      *ElasticsearchSettings           `json:"ElasticsearchSettings,omitempty"`
 	EndpointIdentifier         string                           `json:"EndpointIdentifier"`
 	EndpointType               ReplicationEndpointTypeValueEnum `json:"EndpointType"`
 	EngineName                 string                           `json:"EngineName"`
-	ExternalTableDefinition    *string                          `json:"ExternalTableDefinition"`
-	ExtraConnectionAttributes  *string                          `json:"ExtraConnectionAttributes"`
-	IbmDb2Settings             *IbmDb2Settings                  `json:"IBMDb2Settings"`
-	KafkaSettings              *KafkaSettings                   `json:"KafkaSettings"`
-	KinesisSettings            *KinesisSettings                 `json:"KinesisSettings"`
-	KmsKeyID                   *string                          `json:"KmsKeyId"`
-	MicrosoftSQLServerSettings *MicrosoftSQLServerSettings      `json:"MicrosoftSQLServerSettings"`
-	MongoDbSettings            *MongoDbSettings                 `json:"MongoDbSettings"`
-	MySQLSettings              *MySQLSettings                   `json:"MySQLSettings"`
-	NeptuneSettings            *NeptuneSettings                 `json:"NeptuneSettings"`
-	OracleSettings             *OracleSettings                  `json:"OracleSettings"`
-	Password                   *string                          `json:"Password"`
-	Port                       *int64                           `json:"Port"`
-	PostgreSQLSettings         *PostgreSQLSettings              `json:"PostgreSQLSettings"`
-	RedisSettings              *RedisSettings                   `json:"RedisSettings"`
-	RedshiftSettings           *RedshiftSettings                `json:"RedshiftSettings"`
-	ResourceIdentifier         *string                          `json:"ResourceIdentifier"`
-	S3Settings                 *S3Settings                      `json:"S3Settings"`
-	ServerName                 *string                          `json:"ServerName"`
-	ServiceAccessRoleArn       *string                          `json:"ServiceAccessRoleArn"`
-	SslMode                    *DmsSslModeValueEnum             `json:"SslMode"`
-	SybaseSettings             *SybaseSettings                  `json:"SybaseSettings"`
-	Tags                       []Tag                            `json:"Tags"`
-	Username                   *string                          `json:"Username"`
+	ExternalTableDefinition    *string                          `json:"ExternalTableDefinition,omitempty"`
+	ExtraConnectionAttributes  *string                          `json:"ExtraConnectionAttributes,omitempty"`
+	IbmDb2Settings             *IbmDb2Settings                  `json:"IBMDb2Settings,omitempty"`
+	KafkaSettings              *KafkaSettings                   `json:"KafkaSettings,omitempty"`
+	KinesisSettings            *KinesisSettings                 `json:"KinesisSettings,omitempty"`
+	KmsKeyID                   *string                          `json:"KmsKeyId,omitempty"`
+	MicrosoftSQLServerSettings *MicrosoftSQLServerSettings      `json:"MicrosoftSQLServerSettings,omitempty"`
+	MongoDbSettings            *MongoDbSettings                 `json:"MongoDbSettings,omitempty"`
+	MySQLSettings              *MySQLSettings                   `json:"MySQLSettings,omitempty"`
+	NeptuneSettings            *NeptuneSettings                 `json:"NeptuneSettings,omitempty"`
+	OracleSettings             *OracleSettings                  `json:"OracleSettings,omitempty"`
+	Password                   *string                          `json:"Password,omitempty"`
+	Port                       *int64                           `json:"Port,omitempty"`
+	PostgreSQLSettings         *PostgreSQLSettings              `json:"PostgreSQLSettings,omitempty"`
+	RedisSettings              *RedisSettings                   `json:"RedisSettings,omitempty"`
+	RedshiftSettings           *RedshiftSettings                `json:"RedshiftSettings,omitempty"`
+	ResourceIdentifier         *string                          `json:"ResourceIdentifier,omitempty"`
+	S3Settings                 *S3Settings                      `json:"S3Settings,omitempty"`
+	ServerName                 *string                          `json:"ServerName,omitempty"`
+	ServiceAccessRoleArn       *string                          `json:"ServiceAccessRoleArn,omitempty"`
+	SslMode                    *DmsSslModeValueEnum             `json:"SslMode,omitempty"`
+	SybaseSettings             *SybaseSettings                  `json:"SybaseSettings,omitempty"`
+	Tags                       []Tag                            `json:"Tags,omitempty"`
+	Username                   *string                          `json:"Username,omitempty"`
 }

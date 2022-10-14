@@ -18,11 +18,11 @@ const (
 )
 
 type TransferParameters struct {
-	CurrentRegistrar    *string                                  `json:"currentRegistrar"`
-	CurrentRegistrarURI *string                                  `json:"currentRegistrarUri"`
-	DomainName          *string                                  `json:"domainName"`
-	NameServers         []string                                 `json:"nameServers"`
-	SupportedPrivacy    []TransferParametersSupportedPrivacyEnum `json:"supportedPrivacy"`
-	TransferLockState   *TransferParametersTransferLockStateEnum `json:"transferLockState"`
-	YearlyPrice         *Money                                   `json:"yearlyPrice"`
+	CurrentRegistrar    *string                                  `json:"currentRegistrar,omitempty"`
+	CurrentRegistrarURI *string                                  `json:"currentRegistrarUri,omitempty"`
+	DomainName          *string                                  `json:"domainName,omitempty"`
+	NameServers         []string                                 `json:"nameServers,omitempty"`
+	SupportedPrivacy    []TransferParametersSupportedPrivacyEnum `json:"supportedPrivacy,omitempty"`
+	TransferLockState   *TransferParametersTransferLockStateEnum `json:"transferLockState,omitempty"`
+	YearlyPrice         *Money                                   `json:"yearlyPrice,omitempty"`
 }

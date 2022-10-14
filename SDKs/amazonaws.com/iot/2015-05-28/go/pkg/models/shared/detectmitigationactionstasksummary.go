@@ -5,14 +5,14 @@ import (
 )
 
 type DetectMitigationActionsTaskSummary struct {
-	ActionsDefinition             []MitigationAction                     `json:"actionsDefinition"`
-	OnlyActiveViolationsIncluded  *bool                                  `json:"onlyActiveViolationsIncluded"`
-	SuppressedAlertsIncluded      *bool                                  `json:"suppressedAlertsIncluded"`
-	Target                        *DetectMitigationActionsTaskTarget     `json:"target"`
-	TaskEndTime                   *time.Time                             `json:"taskEndTime"`
-	TaskID                        *string                                `json:"taskId"`
-	TaskStartTime                 *time.Time                             `json:"taskStartTime"`
-	TaskStatistics                *DetectMitigationActionsTaskStatistics `json:"taskStatistics"`
-	TaskStatus                    *DetectMitigationActionsTaskStatusEnum `json:"taskStatus"`
-	ViolationEventOccurrenceRange *ViolationEventOccurrenceRange         `json:"violationEventOccurrenceRange"`
+	ActionsDefinition             []MitigationAction                     `json:"actionsDefinition,omitempty"`
+	OnlyActiveViolationsIncluded  *bool                                  `json:"onlyActiveViolationsIncluded,omitempty"`
+	SuppressedAlertsIncluded      *bool                                  `json:"suppressedAlertsIncluded,omitempty"`
+	Target                        *DetectMitigationActionsTaskTarget     `json:"target,omitempty"`
+	TaskEndTime                   *time.Time                             `json:"taskEndTime,omitempty"`
+	TaskID                        *string                                `json:"taskId,omitempty"`
+	TaskStartTime                 *time.Time                             `json:"taskStartTime,omitempty"`
+	TaskStatistics                *DetectMitigationActionsTaskStatistics `json:"taskStatistics,omitempty"`
+	TaskStatus                    *DetectMitigationActionsTaskStatusEnum `json:"taskStatus,omitempty"`
+	ViolationEventOccurrenceRange *ViolationEventOccurrenceRange         `json:"violationEventOccurrenceRange,omitempty"`
 }

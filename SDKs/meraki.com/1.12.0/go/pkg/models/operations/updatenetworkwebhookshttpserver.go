@@ -6,9 +6,9 @@ type UpdateNetworkWebhooksHTTPServerPathParams struct {
 }
 
 type UpdateNetworkWebhooksHTTPServerRequestBody struct {
-	Name         *string `json:"name"`
-	SharedSecret *string `json:"sharedSecret"`
-	URL          *string `json:"url"`
+	Name         *string `json:"name,omitempty"`
+	SharedSecret *string `json:"sharedSecret,omitempty"`
+	URL          *string `json:"url,omitempty"`
 }
 
 type UpdateNetworkWebhooksHTTPServerRequest struct {

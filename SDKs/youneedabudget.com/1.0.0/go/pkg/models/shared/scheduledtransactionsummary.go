@@ -36,14 +36,14 @@ const (
 type ScheduledTransactionSummary struct {
 	AccountID         string                                    `json:"account_id"`
 	Amount            int64                                     `json:"amount"`
-	CategoryID        *string                                   `json:"category_id"`
+	CategoryID        *string                                   `json:"category_id,omitempty"`
 	DateFirst         time.Time                                 `json:"date_first"`
 	DateNext          time.Time                                 `json:"date_next"`
 	Deleted           bool                                      `json:"deleted"`
-	FlagColor         *ScheduledTransactionSummaryFlagColorEnum `json:"flag_color"`
+	FlagColor         *ScheduledTransactionSummaryFlagColorEnum `json:"flag_color,omitempty"`
 	Frequency         ScheduledTransactionSummaryFrequencyEnum  `json:"frequency"`
 	ID                string                                    `json:"id"`
-	Memo              *string                                   `json:"memo"`
-	PayeeID           *string                                   `json:"payee_id"`
-	TransferAccountID *string                                   `json:"transfer_account_id"`
+	Memo              *string                                   `json:"memo,omitempty"`
+	PayeeID           *string                                   `json:"payee_id,omitempty"`
+	TransferAccountID *string                                   `json:"transfer_account_id,omitempty"`
 }

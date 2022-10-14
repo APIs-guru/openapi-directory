@@ -5,10 +5,10 @@ import (
 )
 
 type LastCrawlInfo struct {
-	ErrorMessage  *string              `json:"ErrorMessage"`
-	LogGroup      *string              `json:"LogGroup"`
-	LogStream     *string              `json:"LogStream"`
-	MessagePrefix *string              `json:"MessagePrefix"`
-	StartTime     *time.Time           `json:"StartTime"`
-	Status        *LastCrawlStatusEnum `json:"Status"`
+	ErrorMessage  *string              `json:"ErrorMessage,omitempty"`
+	LogGroup      *string              `json:"LogGroup,omitempty"`
+	LogStream     *string              `json:"LogStream,omitempty"`
+	MessagePrefix *string              `json:"MessagePrefix,omitempty"`
+	StartTime     *time.Time           `json:"StartTime,omitempty"`
+	Status        *LastCrawlStatusEnum `json:"Status,omitempty"`
 }

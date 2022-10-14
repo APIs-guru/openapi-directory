@@ -1,8 +1,8 @@
 package shared
 
 type PersonResponse struct {
-	HTTPStatusCode        *int32  `json:"httpStatusCode"`
-	Person                *Person `json:"person"`
-	RequestedResourceName *string `json:"requestedResourceName"`
-	Status                *Status `json:"status"`
+	HTTPStatusCode        *int32  `json:"httpStatusCode,omitempty"`
+	Person                *Person `json:"person,omitempty"`
+	RequestedResourceName *string `json:"requestedResourceName,omitempty"`
+	Status                *Status `json:"status,omitempty"`
 }

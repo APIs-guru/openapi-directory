@@ -73,20 +73,20 @@ const (
 )
 
 type SustainableSourcing struct {
-	EcoFriendlyToiletries                   *bool                                                           `json:"ecoFriendlyToiletries"`
-	EcoFriendlyToiletriesException          *SustainableSourcingEcoFriendlyToiletriesExceptionEnum          `json:"ecoFriendlyToiletriesException"`
-	LocallySourcedFoodAndBeverages          *bool                                                           `json:"locallySourcedFoodAndBeverages"`
-	LocallySourcedFoodAndBeveragesException *SustainableSourcingLocallySourcedFoodAndBeveragesExceptionEnum `json:"locallySourcedFoodAndBeveragesException"`
-	OrganicCageFreeEggs                     *bool                                                           `json:"organicCageFreeEggs"`
-	OrganicCageFreeEggsException            *SustainableSourcingOrganicCageFreeEggsExceptionEnum            `json:"organicCageFreeEggsException"`
-	OrganicFoodAndBeverages                 *bool                                                           `json:"organicFoodAndBeverages"`
-	OrganicFoodAndBeveragesException        *SustainableSourcingOrganicFoodAndBeveragesExceptionEnum        `json:"organicFoodAndBeveragesException"`
-	ResponsiblePurchasingPolicy             *bool                                                           `json:"responsiblePurchasingPolicy"`
-	ResponsiblePurchasingPolicyException    *SustainableSourcingResponsiblePurchasingPolicyExceptionEnum    `json:"responsiblePurchasingPolicyException"`
-	ResponsiblySourcesSeafood               *bool                                                           `json:"responsiblySourcesSeafood"`
-	ResponsiblySourcesSeafoodException      *SustainableSourcingResponsiblySourcesSeafoodExceptionEnum      `json:"responsiblySourcesSeafoodException"`
-	VeganMeals                              *bool                                                           `json:"veganMeals"`
-	VeganMealsException                     *SustainableSourcingVeganMealsExceptionEnum                     `json:"veganMealsException"`
-	VegetarianMeals                         *bool                                                           `json:"vegetarianMeals"`
-	VegetarianMealsException                *SustainableSourcingVegetarianMealsExceptionEnum                `json:"vegetarianMealsException"`
+	EcoFriendlyToiletries                   *bool                                                           `json:"ecoFriendlyToiletries,omitempty"`
+	EcoFriendlyToiletriesException          *SustainableSourcingEcoFriendlyToiletriesExceptionEnum          `json:"ecoFriendlyToiletriesException,omitempty"`
+	LocallySourcedFoodAndBeverages          *bool                                                           `json:"locallySourcedFoodAndBeverages,omitempty"`
+	LocallySourcedFoodAndBeveragesException *SustainableSourcingLocallySourcedFoodAndBeveragesExceptionEnum `json:"locallySourcedFoodAndBeveragesException,omitempty"`
+	OrganicCageFreeEggs                     *bool                                                           `json:"organicCageFreeEggs,omitempty"`
+	OrganicCageFreeEggsException            *SustainableSourcingOrganicCageFreeEggsExceptionEnum            `json:"organicCageFreeEggsException,omitempty"`
+	OrganicFoodAndBeverages                 *bool                                                           `json:"organicFoodAndBeverages,omitempty"`
+	OrganicFoodAndBeveragesException        *SustainableSourcingOrganicFoodAndBeveragesExceptionEnum        `json:"organicFoodAndBeveragesException,omitempty"`
+	ResponsiblePurchasingPolicy             *bool                                                           `json:"responsiblePurchasingPolicy,omitempty"`
+	ResponsiblePurchasingPolicyException    *SustainableSourcingResponsiblePurchasingPolicyExceptionEnum    `json:"responsiblePurchasingPolicyException,omitempty"`
+	ResponsiblySourcesSeafood               *bool                                                           `json:"responsiblySourcesSeafood,omitempty"`
+	ResponsiblySourcesSeafoodException      *SustainableSourcingResponsiblySourcesSeafoodExceptionEnum      `json:"responsiblySourcesSeafoodException,omitempty"`
+	VeganMeals                              *bool                                                           `json:"veganMeals,omitempty"`
+	VeganMealsException                     *SustainableSourcingVeganMealsExceptionEnum                     `json:"veganMealsException,omitempty"`
+	VegetarianMeals                         *bool                                                           `json:"vegetarianMeals,omitempty"`
+	VegetarianMealsException                *SustainableSourcingVegetarianMealsExceptionEnum                `json:"vegetarianMealsException,omitempty"`
 }

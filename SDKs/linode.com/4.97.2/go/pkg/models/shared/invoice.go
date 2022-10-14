@@ -5,10 +5,10 @@ import (
 )
 
 type Invoice struct {
-	Date     *time.Time `json:"date"`
-	ID       *int64     `json:"id"`
-	Label    *string    `json:"label"`
-	Subtotal *float64   `json:"subtotal"`
-	Tax      *float64   `json:"tax"`
-	Total    *float64   `json:"total"`
+	Date     *time.Time `json:"date,omitempty"`
+	ID       *int64     `json:"id,omitempty"`
+	Label    *string    `json:"label,omitempty"`
+	Subtotal *float64   `json:"subtotal,omitempty"`
+	Tax      *float64   `json:"tax,omitempty"`
+	Total    *float64   `json:"total,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowV2beta1EventInput struct {
-	LanguageCode *string                `json:"languageCode"`
-	Name         *string                `json:"name"`
-	Parameters   map[string]interface{} `json:"parameters"`
+	LanguageCode *string                `json:"languageCode,omitempty"`
+	Name         *string                `json:"name,omitempty"`
+	Parameters   map[string]interface{} `json:"parameters,omitempty"`
 }

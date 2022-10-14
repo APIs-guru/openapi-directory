@@ -5,8 +5,8 @@ import (
 )
 
 type AutoSnapshotDetails struct {
-	CreatedAt         *time.Time              `json:"createdAt"`
-	Date              *string                 `json:"date"`
-	FromAttachedDisks []AttachedDisk          `json:"fromAttachedDisks"`
-	Status            *AutoSnapshotStatusEnum `json:"status"`
+	CreatedAt         *time.Time              `json:"createdAt,omitempty"`
+	Date              *string                 `json:"date,omitempty"`
+	FromAttachedDisks []AttachedDisk          `json:"fromAttachedDisks,omitempty"`
+	Status            *AutoSnapshotStatusEnum `json:"status,omitempty"`
 }

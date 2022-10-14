@@ -8,12 +8,12 @@ const (
 )
 
 type SiteContact struct {
-	Address     *string                     `json:"address"`
-	ContactType *SiteContactContactTypeEnum `json:"contactType"`
-	Email       *string                     `json:"email"`
-	FirstName   *string                     `json:"firstName"`
-	ID          *string                     `json:"id"`
-	LastName    *string                     `json:"lastName"`
-	Phone       *string                     `json:"phone"`
-	Title       *string                     `json:"title"`
+	Address     *string                     `json:"address,omitempty"`
+	ContactType *SiteContactContactTypeEnum `json:"contactType,omitempty"`
+	Email       *string                     `json:"email,omitempty"`
+	FirstName   *string                     `json:"firstName,omitempty"`
+	ID          *string                     `json:"id,omitempty"`
+	LastName    *string                     `json:"lastName,omitempty"`
+	Phone       *string                     `json:"phone,omitempty"`
+	Title       *string                     `json:"title,omitempty"`
 }

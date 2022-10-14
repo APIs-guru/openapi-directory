@@ -1,8 +1,8 @@
 package shared
 
 type GenerateDataKeyPairWithoutPlaintextResponse struct {
-	KeyID                    *string              `json:"KeyId"`
-	KeyPairSpec              *DataKeyPairSpecEnum `json:"KeyPairSpec"`
-	PrivateKeyCiphertextBlob *string              `json:"PrivateKeyCiphertextBlob"`
-	PublicKey                *string              `json:"PublicKey"`
+	KeyID                    *string              `json:"KeyId,omitempty"`
+	KeyPairSpec              *DataKeyPairSpecEnum `json:"KeyPairSpec,omitempty"`
+	PrivateKeyCiphertextBlob *string              `json:"PrivateKeyCiphertextBlob,omitempty"`
+	PublicKey                *string              `json:"PublicKey,omitempty"`
 }

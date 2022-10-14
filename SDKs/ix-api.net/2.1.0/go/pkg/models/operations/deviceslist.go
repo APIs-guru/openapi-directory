@@ -29,10 +29,10 @@ const (
 )
 
 type DevicesList400ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     DevicesList400ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -44,10 +44,10 @@ const (
 )
 
 type DevicesList401ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     DevicesList401ApplicationJSONTypeEnum `json:"type"`
 }
 
@@ -58,10 +58,10 @@ const (
 )
 
 type DevicesList403ApplicationJSON struct {
-	Detail   *string                               `json:"detail"`
-	Instance *string                               `json:"instance"`
-	Status   *interface{}                          `json:"status"`
-	Title    *interface{}                          `json:"title"`
+	Detail   *string                               `json:"detail,omitempty"`
+	Instance *string                               `json:"instance,omitempty"`
+	Status   *interface{}                          `json:"status,omitempty"`
+	Title    *interface{}                          `json:"title,omitempty"`
 	Type     DevicesList403ApplicationJSONTypeEnum `json:"type"`
 }
 

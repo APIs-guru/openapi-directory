@@ -17,8 +17,8 @@ const (
 )
 
 type APIModelsCredentials struct {
-	BearerAction *APIModelsCredentialsBearerActionEnum `json:"BearerAction" form:"name=BearerAction"`
-	MacAction    *APIModelsCredentialsMacActionEnum    `json:"MACAction" form:"name=MACAction"`
+	BearerAction *APIModelsCredentialsBearerActionEnum `json:"BearerAction,omitempty" form:"name=BearerAction"`
+	MacAction    *APIModelsCredentialsMacActionEnum    `json:"MACAction,omitempty" form:"name=MACAction"`
 	Password     string                                `json:"password" form:"name=password"`
 	Username     string                                `json:"username" form:"name=username"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type Feature struct {
-	Created     *time.Time `json:"created"`
-	Description *string    `json:"description"`
-	ID          *int64     `json:"id"`
-	LastUpdate  *time.Time `json:"lastUpdate"`
-	Name        *string    `json:"name"`
+	Created     *time.Time `json:"created,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	ID          *int64     `json:"id,omitempty"`
+	LastUpdate  *time.Time `json:"lastUpdate,omitempty"`
+	Name        *string    `json:"name,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SearchAnalyticsQueryResponse struct {
-	ResponseAggregationType *string      `json:"responseAggregationType"`
-	Rows                    []APIDataRow `json:"rows"`
+	ResponseAggregationType *string      `json:"responseAggregationType,omitempty"`
+	Rows                    []APIDataRow `json:"rows,omitempty"`
 }

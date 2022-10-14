@@ -10,5 +10,5 @@ const (
 )
 
 type ImageConfig struct {
-	TextRedactionMode *ImageConfigTextRedactionModeEnum `json:"textRedactionMode"`
+	TextRedactionMode *ImageConfigTextRedactionModeEnum `json:"textRedactionMode,omitempty"`
 }

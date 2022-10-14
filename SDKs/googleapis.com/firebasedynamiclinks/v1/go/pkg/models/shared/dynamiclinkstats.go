@@ -1,5 +1,5 @@
 package shared
 
 type DynamicLinkStats struct {
-	LinkEventStats []DynamicLinkEventStat `json:"linkEventStats"`
+	LinkEventStats []DynamicLinkEventStat `json:"linkEventStats,omitempty"`
 }

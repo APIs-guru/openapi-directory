@@ -1,10 +1,10 @@
 package shared
 
 type CloudWatchMetricsDetail struct {
-	Dimensions []CloudWatchMetricsDimension `json:"Dimensions"`
-	MetricName *string                      `json:"MetricName"`
-	Namespace  *string                      `json:"Namespace"`
-	Period     *int64                       `json:"Period"`
-	Stat       *CloudWatchMetricsStatEnum   `json:"Stat"`
-	Unit       *string                      `json:"Unit"`
+	Dimensions []CloudWatchMetricsDimension `json:"Dimensions,omitempty"`
+	MetricName *string                      `json:"MetricName,omitempty"`
+	Namespace  *string                      `json:"Namespace,omitempty"`
+	Period     *int64                       `json:"Period,omitempty"`
+	Stat       *CloudWatchMetricsStatEnum   `json:"Stat,omitempty"`
+	Unit       *string                      `json:"Unit,omitempty"`
 }

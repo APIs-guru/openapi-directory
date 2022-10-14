@@ -16,9 +16,9 @@ const (
 )
 
 type GistsCreateRequestBody struct {
-	Description *string                                `json:"description"`
+	Description *string                                `json:"description,omitempty"`
 	Files       map[string]GistsCreateRequestBodyFiles `json:"files"`
-	Public      *interface{}                           `json:"public"`
+	Public      *interface{}                           `json:"public,omitempty"`
 }
 
 type GistsCreateRequest struct {

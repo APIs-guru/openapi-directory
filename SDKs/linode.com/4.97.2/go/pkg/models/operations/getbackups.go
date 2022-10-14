@@ -28,9 +28,9 @@ type GetBackupsRequest struct {
 }
 
 type GetBackups200ApplicationJSONAutomaticDisks struct {
-	Filesystem *shared.FilesystemEnum `json:"filesystem"`
-	Label      *string                `json:"label"`
-	Size       *int64                 `json:"size"`
+	Filesystem *shared.FilesystemEnum `json:"filesystem,omitempty"`
+	Label      *string                `json:"label,omitempty"`
+	Size       *int64                 `json:"size,omitempty"`
 }
 
 type GetBackups200ApplicationJSONAutomaticStatusEnum string
@@ -46,29 +46,29 @@ const (
 )
 
 type GetBackups200ApplicationJSONAutomatic struct {
-	Configs  []string                                         `json:"configs"`
-	Created  *time.Time                                       `json:"created"`
-	Disks    []GetBackups200ApplicationJSONAutomaticDisks     `json:"disks"`
-	Finished *time.Time                                       `json:"finished"`
-	ID       *int64                                           `json:"id"`
-	Label    *string                                          `json:"label"`
-	Status   *GetBackups200ApplicationJSONAutomaticStatusEnum `json:"status"`
-	Type     *string                                          `json:"type"`
-	Updated  *time.Time                                       `json:"updated"`
+	Configs  []string                                         `json:"configs,omitempty"`
+	Created  *time.Time                                       `json:"created,omitempty"`
+	Disks    []GetBackups200ApplicationJSONAutomaticDisks     `json:"disks,omitempty"`
+	Finished *time.Time                                       `json:"finished,omitempty"`
+	ID       *int64                                           `json:"id,omitempty"`
+	Label    *string                                          `json:"label,omitempty"`
+	Status   *GetBackups200ApplicationJSONAutomaticStatusEnum `json:"status,omitempty"`
+	Type     *string                                          `json:"type,omitempty"`
+	Updated  *time.Time                                       `json:"updated,omitempty"`
 }
 
 type GetBackups200ApplicationJSONSnapshot struct {
-	Current    *shared.Backup `json:"current"`
-	InProgress *shared.Backup `json:"in_progress"`
+	Current    *shared.Backup `json:"current,omitempty"`
+	InProgress *shared.Backup `json:"in_progress,omitempty"`
 }
 
 type GetBackups200ApplicationJSON struct {
-	Automatic []GetBackups200ApplicationJSONAutomatic `json:"automatic"`
-	Snapshot  *GetBackups200ApplicationJSONSnapshot   `json:"snapshot"`
+	Automatic []GetBackups200ApplicationJSONAutomatic `json:"automatic,omitempty"`
+	Snapshot  *GetBackups200ApplicationJSONSnapshot   `json:"snapshot,omitempty"`
 }
 
 type GetBackupsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetBackupsResponse struct {

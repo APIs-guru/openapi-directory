@@ -1,8 +1,8 @@
 package shared
 
 type RelationshipAttributes struct {
-	Action             *string `json:"action"`
-	SourceResourceType *string `json:"sourceResourceType"`
-	TargetResourceType *string `json:"targetResourceType"`
-	Type               *string `json:"type"`
+	Action             *string `json:"action,omitempty"`
+	SourceResourceType *string `json:"sourceResourceType,omitempty"`
+	TargetResourceType *string `json:"targetResourceType,omitempty"`
+	Type               *string `json:"type,omitempty"`
 }

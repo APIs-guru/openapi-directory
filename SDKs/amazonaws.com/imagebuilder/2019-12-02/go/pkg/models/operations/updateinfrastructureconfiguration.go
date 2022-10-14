@@ -15,22 +15,22 @@ type UpdateInfrastructureConfigurationHeaders struct {
 }
 
 type UpdateInfrastructureConfigurationRequestBodyLogging struct {
-	S3Logs *shared.S3Logs `json:"s3Logs"`
+	S3Logs *shared.S3Logs `json:"s3Logs,omitempty"`
 }
 
 type UpdateInfrastructureConfigurationRequestBody struct {
 	ClientToken                    string                                               `json:"clientToken"`
-	Description                    *string                                              `json:"description"`
+	Description                    *string                                              `json:"description,omitempty"`
 	InfrastructureConfigurationArn string                                               `json:"infrastructureConfigurationArn"`
 	InstanceProfileName            string                                               `json:"instanceProfileName"`
-	InstanceTypes                  []string                                             `json:"instanceTypes"`
-	KeyPair                        *string                                              `json:"keyPair"`
-	Logging                        *UpdateInfrastructureConfigurationRequestBodyLogging `json:"logging"`
-	ResourceTags                   map[string]string                                    `json:"resourceTags"`
-	SecurityGroupIds               []string                                             `json:"securityGroupIds"`
-	SnsTopicArn                    *string                                              `json:"snsTopicArn"`
-	SubnetID                       *string                                              `json:"subnetId"`
-	TerminateInstanceOnFailure     *bool                                                `json:"terminateInstanceOnFailure"`
+	InstanceTypes                  []string                                             `json:"instanceTypes,omitempty"`
+	KeyPair                        *string                                              `json:"keyPair,omitempty"`
+	Logging                        *UpdateInfrastructureConfigurationRequestBodyLogging `json:"logging,omitempty"`
+	ResourceTags                   map[string]string                                    `json:"resourceTags,omitempty"`
+	SecurityGroupIds               []string                                             `json:"securityGroupIds,omitempty"`
+	SnsTopicArn                    *string                                              `json:"snsTopicArn,omitempty"`
+	SubnetID                       *string                                              `json:"subnetId,omitempty"`
+	TerminateInstanceOnFailure     *bool                                                `json:"terminateInstanceOnFailure,omitempty"`
 }
 
 type UpdateInfrastructureConfigurationRequest struct {

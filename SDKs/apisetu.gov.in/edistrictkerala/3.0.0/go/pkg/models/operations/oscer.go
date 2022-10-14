@@ -17,8 +17,8 @@ const (
 )
 
 type OscerRequestBody struct {
-	CertificateParameters *OscerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *OscerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                OscerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -54,8 +54,8 @@ const (
 )
 
 type Oscer400ApplicationJSON struct {
-	Error            *Oscer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Oscer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Oscer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Oscer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Oscer401ApplicationJSONErrorEnum string
@@ -73,8 +73,8 @@ const (
 )
 
 type Oscer401ApplicationJSON struct {
-	Error            *Oscer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Oscer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Oscer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Oscer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Oscer404ApplicationJSONErrorEnum string
@@ -92,8 +92,8 @@ const (
 )
 
 type Oscer404ApplicationJSON struct {
-	Error            *Oscer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Oscer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Oscer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Oscer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Oscer500ApplicationJSONErrorEnum string
@@ -109,8 +109,8 @@ const (
 )
 
 type Oscer500ApplicationJSON struct {
-	Error            *Oscer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Oscer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Oscer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Oscer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Oscer502ApplicationJSONErrorEnum string
@@ -126,8 +126,8 @@ const (
 )
 
 type Oscer502ApplicationJSON struct {
-	Error            *Oscer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Oscer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Oscer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Oscer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Oscer503ApplicationJSONErrorEnum string
@@ -143,8 +143,8 @@ const (
 )
 
 type Oscer503ApplicationJSON struct {
-	Error            *Oscer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Oscer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Oscer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Oscer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Oscer504ApplicationJSONErrorEnum string
@@ -160,8 +160,8 @@ const (
 )
 
 type Oscer504ApplicationJSON struct {
-	Error            *Oscer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Oscer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Oscer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Oscer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type OscerResponse struct {

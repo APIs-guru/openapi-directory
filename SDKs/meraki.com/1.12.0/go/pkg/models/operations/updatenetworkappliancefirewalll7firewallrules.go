@@ -21,13 +21,13 @@ const (
 )
 
 type UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRules struct {
-	Policy *UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesPolicyEnum `json:"policy"`
-	Type   *UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesTypeEnum   `json:"type"`
-	Value  *string                                                                  `json:"value"`
+	Policy *UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesPolicyEnum `json:"policy,omitempty"`
+	Type   *UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesTypeEnum   `json:"type,omitempty"`
+	Value  *string                                                                  `json:"value,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallL7FirewallRulesRequestBody struct {
-	Rules []UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRules `json:"rules"`
+	Rules []UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRules `json:"rules,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallL7FirewallRulesRequest struct {

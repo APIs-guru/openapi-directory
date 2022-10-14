@@ -23,7 +23,7 @@ type ExecutePayPalPaymentRequest struct {
 }
 
 type ExecutePayPalPaymentDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ExecutePayPalPaymentResponse struct {

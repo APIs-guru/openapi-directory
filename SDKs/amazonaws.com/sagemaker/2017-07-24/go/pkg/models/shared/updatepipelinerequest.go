@@ -1,9 +1,9 @@
 package shared
 
 type UpdatePipelineRequest struct {
-	PipelineDefinition  *string `json:"PipelineDefinition"`
-	PipelineDescription *string `json:"PipelineDescription"`
-	PipelineDisplayName *string `json:"PipelineDisplayName"`
+	PipelineDefinition  *string `json:"PipelineDefinition,omitempty"`
+	PipelineDescription *string `json:"PipelineDescription,omitempty"`
+	PipelineDisplayName *string `json:"PipelineDisplayName,omitempty"`
 	PipelineName        string  `json:"PipelineName"`
-	RoleArn             *string `json:"RoleArn"`
+	RoleArn             *string `json:"RoleArn,omitempty"`
 }

@@ -5,15 +5,15 @@ import (
 )
 
 type CalendarBlockViewModel struct {
-	CalendarID *string          `json:"calendarId"`
-	EndDate    *time.Time       `json:"endDate"`
-	EndTime    *int32           `json:"endTime"`
-	ID         *string          `json:"id"`
-	LocationID *string          `json:"locationId"`
-	ObjectName *string          `json:"objectName"`
-	Reason     *string          `json:"reason"`
-	Repeat     *RepeatViewModel `json:"repeat"`
-	Repeats    *bool            `json:"repeats"`
-	StartDate  *time.Time       `json:"startDate"`
-	StartTime  *int32           `json:"startTime"`
+	CalendarID *string          `json:"calendarId,omitempty"`
+	EndDate    *time.Time       `json:"endDate,omitempty"`
+	EndTime    *int32           `json:"endTime,omitempty"`
+	ID         *string          `json:"id,omitempty"`
+	LocationID *string          `json:"locationId,omitempty"`
+	ObjectName *string          `json:"objectName,omitempty"`
+	Reason     *string          `json:"reason,omitempty"`
+	Repeat     *RepeatViewModel `json:"repeat,omitempty"`
+	Repeats    *bool            `json:"repeats,omitempty"`
+	StartDate  *time.Time       `json:"startDate,omitempty"`
+	StartTime  *int32           `json:"startTime,omitempty"`
 }

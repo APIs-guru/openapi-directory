@@ -1,13 +1,13 @@
 package operations
 
 type UpsertAccountRequestBodyIdentification struct {
-	AccountID *string `json:"accountId"`
-	Domain    *string `json:"domain"`
+	AccountID *string `json:"accountId,omitempty"`
+	Domain    *string `json:"domain,omitempty"`
 }
 
 type UpsertAccountRequestBodyMembersIdentification struct {
-	Email  *string `json:"email"`
-	UserID *string `json:"userId"`
+	Email  *string `json:"email,omitempty"`
+	UserID *string `json:"userId,omitempty"`
 }
 
 type UpsertAccountRequestBodyMembers struct {
@@ -16,8 +16,8 @@ type UpsertAccountRequestBodyMembers struct {
 
 type UpsertAccountRequestBody struct {
 	Identification UpsertAccountRequestBodyIdentification `json:"identification"`
-	Members        []UpsertAccountRequestBodyMembers      `json:"members"`
-	Properties     map[string]interface{}                 `json:"properties"`
+	Members        []UpsertAccountRequestBodyMembers      `json:"members,omitempty"`
+	Properties     map[string]interface{}                 `json:"properties,omitempty"`
 }
 
 type UpsertAccountRequest struct {
@@ -35,14 +35,14 @@ type UpsertAccount201ApplicationJSON struct {
 }
 
 type UpsertAccount400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header"`
-	Path   map[string]string `json:"path"`
-	Query  map[string]string `json:"query"`
+	Header map[string]string `json:"header,omitempty"`
+	Path   map[string]string `json:"path,omitempty"`
+	Query  map[string]string `json:"query,omitempty"`
 }
 
 type UpsertAccount400ApplicationJSONErrors struct {
-	Fields     map[string]string                                `json:"fields"`
-	Parameters *UpsertAccount400ApplicationJSONErrorsParameters `json:"parameters"`
+	Fields     map[string]string                                `json:"fields,omitempty"`
+	Parameters *UpsertAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
 }
 
 type UpsertAccount400ApplicationJSONMeta struct {

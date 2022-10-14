@@ -5,7 +5,7 @@ import (
 )
 
 type FacetEvent struct {
-	Date *time.Time `json:"date"`
-	ID   *int32     `json:"id"`
-	Name *string    `json:"name"`
+	Date *time.Time `json:"date,omitempty"`
+	ID   *int32     `json:"id,omitempty"`
+	Name *string    `json:"name,omitempty"`
 }

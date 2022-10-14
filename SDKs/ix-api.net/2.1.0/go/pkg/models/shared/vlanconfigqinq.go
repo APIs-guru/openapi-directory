@@ -11,6 +11,6 @@ const (
 type VLanConfigQinQ struct {
 	InnerVlan          int32                                 `json:"inner_vlan"`
 	OuterVlan          int32                                 `json:"outer_vlan"`
-	OuterVlanEthertype *VLanConfigQinQOuterVlanEthertypeEnum `json:"outer_vlan_ethertype"`
+	OuterVlanEthertype *VLanConfigQinQOuterVlanEthertypeEnum `json:"outer_vlan_ethertype,omitempty"`
 	VlanType           string                                `json:"vlan_type"`
 }

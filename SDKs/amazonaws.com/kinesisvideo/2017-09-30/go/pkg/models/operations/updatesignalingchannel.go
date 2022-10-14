@@ -11,13 +11,13 @@ type UpdateSignalingChannelHeaders struct {
 }
 
 type UpdateSignalingChannelRequestBodySingleMasterConfiguration struct {
-	MessageTTLSeconds *int64 `json:"MessageTtlSeconds"`
+	MessageTTLSeconds *int64 `json:"MessageTtlSeconds,omitempty"`
 }
 
 type UpdateSignalingChannelRequestBody struct {
 	ChannelArn                string                                                      `json:"ChannelARN"`
 	CurrentVersion            string                                                      `json:"CurrentVersion"`
-	SingleMasterConfiguration *UpdateSignalingChannelRequestBodySingleMasterConfiguration `json:"SingleMasterConfiguration"`
+	SingleMasterConfiguration *UpdateSignalingChannelRequestBodySingleMasterConfiguration `json:"SingleMasterConfiguration,omitempty"`
 }
 
 type UpdateSignalingChannelRequest struct {

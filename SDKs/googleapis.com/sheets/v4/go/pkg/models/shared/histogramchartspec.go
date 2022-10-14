@@ -13,9 +13,9 @@ const (
 )
 
 type HistogramChartSpec struct {
-	BucketSize        *float64                              `json:"bucketSize"`
-	LegendPosition    *HistogramChartSpecLegendPositionEnum `json:"legendPosition"`
-	OutlierPercentile *float64                              `json:"outlierPercentile"`
-	Series            []HistogramSeries                     `json:"series"`
-	ShowItemDividers  *bool                                 `json:"showItemDividers"`
+	BucketSize        *float64                              `json:"bucketSize,omitempty"`
+	LegendPosition    *HistogramChartSpecLegendPositionEnum `json:"legendPosition,omitempty"`
+	OutlierPercentile *float64                              `json:"outlierPercentile,omitempty"`
+	Series            []HistogramSeries                     `json:"series,omitempty"`
+	ShowItemDividers  *bool                                 `json:"showItemDividers,omitempty"`
 }

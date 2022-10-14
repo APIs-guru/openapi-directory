@@ -1,6 +1,6 @@
 package shared
 
 type RoutePoint struct {
-	Coordinates []map[string]interface{} `json:"coordinates"`
-	Type        *string                  `json:"type"`
+	Coordinates []map[string]interface{} `json:"coordinates,omitempty"`
+	Type        *string                  `json:"type,omitempty"`
 }

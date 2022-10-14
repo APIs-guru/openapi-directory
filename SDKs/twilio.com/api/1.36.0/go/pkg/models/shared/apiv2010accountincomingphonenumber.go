@@ -1,10 +1,10 @@
 package shared
 
 type APIV2010AccountIncomingPhoneNumberCapabilities struct {
-	Fax   *bool `json:"fax"`
-	Mms   *bool `json:"mms"`
-	Sms   *bool `json:"sms"`
-	Voice *bool `json:"voice"`
+	Fax   *bool `json:"fax,omitempty"`
+	Mms   *bool `json:"mms,omitempty"`
+	Sms   *bool `json:"sms,omitempty"`
+	Voice *bool `json:"voice,omitempty"`
 }
 
 type APIV2010AccountIncomingPhoneNumberSmsFallbackMethodEnum string
@@ -63,38 +63,38 @@ const (
 )
 
 type APIV2010AccountIncomingPhoneNumber struct {
-	AccountSid             *string                                                     `json:"account_sid"`
-	AddressRequirements    *IncomingPhoneNumberEnumAddressRequirementEnum              `json:"address_requirements"`
-	AddressSid             *string                                                     `json:"address_sid"`
-	APIVersion             *string                                                     `json:"api_version"`
-	Beta                   *bool                                                       `json:"beta"`
-	BundleSid              *string                                                     `json:"bundle_sid"`
-	Capabilities           *APIV2010AccountIncomingPhoneNumberCapabilities             `json:"capabilities"`
-	DateCreated            *string                                                     `json:"date_created"`
-	DateUpdated            *string                                                     `json:"date_updated"`
-	EmergencyAddressSid    *string                                                     `json:"emergency_address_sid"`
-	EmergencyAddressStatus *IncomingPhoneNumberEnumEmergencyAddressStatusEnum          `json:"emergency_address_status"`
-	EmergencyStatus        *IncomingPhoneNumberEnumEmergencyStatusEnum                 `json:"emergency_status"`
-	FriendlyName           *string                                                     `json:"friendly_name"`
-	IdentitySid            *string                                                     `json:"identity_sid"`
-	Origin                 *string                                                     `json:"origin"`
-	PhoneNumber            *string                                                     `json:"phone_number"`
-	Sid                    *string                                                     `json:"sid"`
-	SmsApplicationSid      *string                                                     `json:"sms_application_sid"`
-	SmsFallbackMethod      *APIV2010AccountIncomingPhoneNumberSmsFallbackMethodEnum    `json:"sms_fallback_method"`
-	SmsFallbackURL         *string                                                     `json:"sms_fallback_url"`
-	SmsMethod              *APIV2010AccountIncomingPhoneNumberSmsMethodEnum            `json:"sms_method"`
-	SmsURL                 *string                                                     `json:"sms_url"`
-	Status                 *string                                                     `json:"status"`
-	StatusCallback         *string                                                     `json:"status_callback"`
-	StatusCallbackMethod   *APIV2010AccountIncomingPhoneNumberStatusCallbackMethodEnum `json:"status_callback_method"`
-	TrunkSid               *string                                                     `json:"trunk_sid"`
-	URI                    *string                                                     `json:"uri"`
-	VoiceApplicationSid    *string                                                     `json:"voice_application_sid"`
-	VoiceCallerIDLookup    *bool                                                       `json:"voice_caller_id_lookup"`
-	VoiceFallbackMethod    *APIV2010AccountIncomingPhoneNumberVoiceFallbackMethodEnum  `json:"voice_fallback_method"`
-	VoiceFallbackURL       *string                                                     `json:"voice_fallback_url"`
-	VoiceMethod            *APIV2010AccountIncomingPhoneNumberVoiceMethodEnum          `json:"voice_method"`
-	VoiceReceiveMode       *IncomingPhoneNumberEnumVoiceReceiveModeEnum                `json:"voice_receive_mode"`
-	VoiceURL               *string                                                     `json:"voice_url"`
+	AccountSid             *string                                                     `json:"account_sid,omitempty"`
+	AddressRequirements    *IncomingPhoneNumberEnumAddressRequirementEnum              `json:"address_requirements,omitempty"`
+	AddressSid             *string                                                     `json:"address_sid,omitempty"`
+	APIVersion             *string                                                     `json:"api_version,omitempty"`
+	Beta                   *bool                                                       `json:"beta,omitempty"`
+	BundleSid              *string                                                     `json:"bundle_sid,omitempty"`
+	Capabilities           *APIV2010AccountIncomingPhoneNumberCapabilities             `json:"capabilities,omitempty"`
+	DateCreated            *string                                                     `json:"date_created,omitempty"`
+	DateUpdated            *string                                                     `json:"date_updated,omitempty"`
+	EmergencyAddressSid    *string                                                     `json:"emergency_address_sid,omitempty"`
+	EmergencyAddressStatus *IncomingPhoneNumberEnumEmergencyAddressStatusEnum          `json:"emergency_address_status,omitempty"`
+	EmergencyStatus        *IncomingPhoneNumberEnumEmergencyStatusEnum                 `json:"emergency_status,omitempty"`
+	FriendlyName           *string                                                     `json:"friendly_name,omitempty"`
+	IdentitySid            *string                                                     `json:"identity_sid,omitempty"`
+	Origin                 *string                                                     `json:"origin,omitempty"`
+	PhoneNumber            *string                                                     `json:"phone_number,omitempty"`
+	Sid                    *string                                                     `json:"sid,omitempty"`
+	SmsApplicationSid      *string                                                     `json:"sms_application_sid,omitempty"`
+	SmsFallbackMethod      *APIV2010AccountIncomingPhoneNumberSmsFallbackMethodEnum    `json:"sms_fallback_method,omitempty"`
+	SmsFallbackURL         *string                                                     `json:"sms_fallback_url,omitempty"`
+	SmsMethod              *APIV2010AccountIncomingPhoneNumberSmsMethodEnum            `json:"sms_method,omitempty"`
+	SmsURL                 *string                                                     `json:"sms_url,omitempty"`
+	Status                 *string                                                     `json:"status,omitempty"`
+	StatusCallback         *string                                                     `json:"status_callback,omitempty"`
+	StatusCallbackMethod   *APIV2010AccountIncomingPhoneNumberStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	TrunkSid               *string                                                     `json:"trunk_sid,omitempty"`
+	URI                    *string                                                     `json:"uri,omitempty"`
+	VoiceApplicationSid    *string                                                     `json:"voice_application_sid,omitempty"`
+	VoiceCallerIDLookup    *bool                                                       `json:"voice_caller_id_lookup,omitempty"`
+	VoiceFallbackMethod    *APIV2010AccountIncomingPhoneNumberVoiceFallbackMethodEnum  `json:"voice_fallback_method,omitempty"`
+	VoiceFallbackURL       *string                                                     `json:"voice_fallback_url,omitempty"`
+	VoiceMethod            *APIV2010AccountIncomingPhoneNumberVoiceMethodEnum          `json:"voice_method,omitempty"`
+	VoiceReceiveMode       *IncomingPhoneNumberEnumVoiceReceiveModeEnum                `json:"voice_receive_mode,omitempty"`
+	VoiceURL               *string                                                     `json:"voice_url,omitempty"`
 }

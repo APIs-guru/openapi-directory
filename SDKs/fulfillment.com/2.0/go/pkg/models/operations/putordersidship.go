@@ -10,7 +10,7 @@ type PutOrdersIDShipPathParams struct {
 
 type PutOrdersIDShipRequestBodyOrderShipV2 struct {
 	TrackingNumber string   `json:"trackingNumber"`
-	WeightOverride *float32 `json:"weightOverride"`
+	WeightOverride *float32 `json:"weightOverride,omitempty"`
 }
 
 type PutOrdersIDShipSecurity struct {

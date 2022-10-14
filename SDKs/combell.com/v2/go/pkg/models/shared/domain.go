@@ -5,7 +5,7 @@ import (
 )
 
 type Domain struct {
-	DomainName     *string    `json:"domain_name"`
-	ExpirationDate *time.Time `json:"expiration_date"`
-	WillRenew      *bool      `json:"will_renew"`
+	DomainName     *string    `json:"domain_name,omitempty"`
+	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
+	WillRenew      *bool      `json:"will_renew,omitempty"`
 }

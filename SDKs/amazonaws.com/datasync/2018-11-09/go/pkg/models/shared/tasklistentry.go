@@ -1,7 +1,7 @@
 package shared
 
 type TaskListEntry struct {
-	Name    *string         `json:"Name"`
-	Status  *TaskStatusEnum `json:"Status"`
-	TaskArn *string         `json:"TaskArn"`
+	Name    *string         `json:"Name,omitempty"`
+	Status  *TaskStatusEnum `json:"Status,omitempty"`
+	TaskArn *string         `json:"TaskArn,omitempty"`
 }

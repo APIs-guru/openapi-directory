@@ -15,8 +15,8 @@ const (
 )
 
 type AlimwRequestBody struct {
-	CertificateParameters *AlimwRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *AlimwRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                AlimwRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Alimw400ApplicationJSON struct {
-	Error            *Alimw400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alimw400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alimw400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alimw400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alimw401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Alimw401ApplicationJSON struct {
-	Error            *Alimw401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alimw401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alimw401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alimw401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alimw404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Alimw404ApplicationJSON struct {
-	Error            *Alimw404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alimw404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alimw404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alimw404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alimw500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Alimw500ApplicationJSON struct {
-	Error            *Alimw500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alimw500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alimw500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alimw500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alimw502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Alimw502ApplicationJSON struct {
-	Error            *Alimw502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alimw502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alimw502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alimw502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alimw503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Alimw503ApplicationJSON struct {
-	Error            *Alimw503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alimw503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alimw503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alimw503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Alimw504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Alimw504ApplicationJSON struct {
-	Error            *Alimw504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Alimw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Alimw504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Alimw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type AlimwResponse struct {

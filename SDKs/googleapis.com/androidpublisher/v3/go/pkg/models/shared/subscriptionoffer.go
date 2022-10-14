@@ -10,14 +10,14 @@ const (
 )
 
 type SubscriptionOffer struct {
-	BasePlanID         *string                              `json:"basePlanId"`
-	OfferID            *string                              `json:"offerId"`
-	OfferTags          []OfferTag                           `json:"offerTags"`
-	OtherRegionsConfig *OtherRegionsSubscriptionOfferConfig `json:"otherRegionsConfig"`
-	PackageName        *string                              `json:"packageName"`
-	Phases             []SubscriptionOfferPhase             `json:"phases"`
-	ProductID          *string                              `json:"productId"`
-	RegionalConfigs    []RegionalSubscriptionOfferConfig    `json:"regionalConfigs"`
-	State              *SubscriptionOfferStateEnum          `json:"state"`
-	Targeting          *SubscriptionOfferTargeting          `json:"targeting"`
+	BasePlanID         *string                              `json:"basePlanId,omitempty"`
+	OfferID            *string                              `json:"offerId,omitempty"`
+	OfferTags          []OfferTag                           `json:"offerTags,omitempty"`
+	OtherRegionsConfig *OtherRegionsSubscriptionOfferConfig `json:"otherRegionsConfig,omitempty"`
+	PackageName        *string                              `json:"packageName,omitempty"`
+	Phases             []SubscriptionOfferPhase             `json:"phases,omitempty"`
+	ProductID          *string                              `json:"productId,omitempty"`
+	RegionalConfigs    []RegionalSubscriptionOfferConfig    `json:"regionalConfigs,omitempty"`
+	State              *SubscriptionOfferStateEnum          `json:"state,omitempty"`
+	Targeting          *SubscriptionOfferTargeting          `json:"targeting,omitempty"`
 }

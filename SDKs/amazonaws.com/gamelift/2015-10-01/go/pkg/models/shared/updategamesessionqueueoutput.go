@@ -1,5 +1,5 @@
 package shared
 
 type UpdateGameSessionQueueOutput struct {
-	GameSessionQueue *GameSessionQueue `json:"GameSessionQueue"`
+	GameSessionQueue *GameSessionQueue `json:"GameSessionQueue,omitempty"`
 }

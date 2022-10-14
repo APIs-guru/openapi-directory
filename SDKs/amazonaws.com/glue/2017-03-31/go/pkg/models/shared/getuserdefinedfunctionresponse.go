@@ -1,5 +1,5 @@
 package shared
 
 type GetUserDefinedFunctionResponse struct {
-	UserDefinedFunction *UserDefinedFunction `json:"UserDefinedFunction"`
+	UserDefinedFunction *UserDefinedFunction `json:"UserDefinedFunction,omitempty"`
 }

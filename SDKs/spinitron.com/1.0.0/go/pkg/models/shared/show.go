@@ -5,24 +5,24 @@ import (
 )
 
 type ShowLinks struct {
-	Personas  []Link `json:"personas"`
-	Playlists *Link  `json:"playlists"`
-	Self      *Link  `json:"self"`
+	Personas  []Link `json:"personas,omitempty"`
+	Playlists *Link  `json:"playlists,omitempty"`
+	Self      *Link  `json:"self,omitempty"`
 }
 
 type Show struct {
-	Links       *ShowLinks `json:"_links"`
-	Category    *string    `json:"category"`
-	Description *string    `json:"description"`
-	Duration    *int64     `json:"duration"`
-	End         *time.Time `json:"end"`
-	HideDj      *bool      `json:"hide_dj"`
-	ID          *int64     `json:"id"`
-	Image       *string    `json:"image"`
-	OneOff      *bool      `json:"one_off"`
-	Since       *int64     `json:"since"`
-	Start       *time.Time `json:"start"`
-	Timezone    *string    `json:"timezone"`
-	Title       *string    `json:"title"`
-	URL         *string    `json:"url"`
+	Links       *ShowLinks `json:"_links,omitempty"`
+	Category    *string    `json:"category,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	Duration    *int64     `json:"duration,omitempty"`
+	End         *time.Time `json:"end,omitempty"`
+	HideDj      *bool      `json:"hide_dj,omitempty"`
+	ID          *int64     `json:"id,omitempty"`
+	Image       *string    `json:"image,omitempty"`
+	OneOff      *bool      `json:"one_off,omitempty"`
+	Since       *int64     `json:"since,omitempty"`
+	Start       *time.Time `json:"start,omitempty"`
+	Timezone    *string    `json:"timezone,omitempty"`
+	Title       *string    `json:"title,omitempty"`
+	URL         *string    `json:"url,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type DomainAliases struct {
-	DomainAliases []DomainAlias `json:"domainAliases"`
-	Etag          *string       `json:"etag"`
-	Kind          *string       `json:"kind"`
+	DomainAliases []DomainAlias `json:"domainAliases,omitempty"`
+	Etag          *string       `json:"etag,omitempty"`
+	Kind          *string       `json:"kind,omitempty"`
 }

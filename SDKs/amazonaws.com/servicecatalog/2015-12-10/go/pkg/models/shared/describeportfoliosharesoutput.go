@@ -1,6 +1,6 @@
 package shared
 
 type DescribePortfolioSharesOutput struct {
-	NextPageToken         *string                `json:"NextPageToken"`
-	PortfolioShareDetails []PortfolioShareDetail `json:"PortfolioShareDetails"`
+	NextPageToken         *string                `json:"NextPageToken,omitempty"`
+	PortfolioShareDetails []PortfolioShareDetail `json:"PortfolioShareDetails,omitempty"`
 }

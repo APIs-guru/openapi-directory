@@ -1,5 +1,5 @@
 package shared
 
 type MultiClusterRoutingUseAny struct {
-	ClusterIds []string `json:"clusterIds"`
+	ClusterIds []string `json:"clusterIds,omitempty"`
 }

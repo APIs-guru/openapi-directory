@@ -11,14 +11,14 @@ const (
 )
 
 type ReplicationCycle struct {
-	CycleNumber        *int32                     `json:"cycleNumber"`
-	EndTime            *string                    `json:"endTime"`
-	Error              *Status                    `json:"error"`
-	Name               *string                    `json:"name"`
-	Progress           *int32                     `json:"progress"`
-	ProgressPercent    *int32                     `json:"progressPercent"`
-	StartTime          *string                    `json:"startTime"`
-	State              *ReplicationCycleStateEnum `json:"state"`
-	Steps              []CycleStep                `json:"steps"`
-	TotalPauseDuration *string                    `json:"totalPauseDuration"`
+	CycleNumber        *int32                     `json:"cycleNumber,omitempty"`
+	EndTime            *string                    `json:"endTime,omitempty"`
+	Error              *Status                    `json:"error,omitempty"`
+	Name               *string                    `json:"name,omitempty"`
+	Progress           *int32                     `json:"progress,omitempty"`
+	ProgressPercent    *int32                     `json:"progressPercent,omitempty"`
+	StartTime          *string                    `json:"startTime,omitempty"`
+	State              *ReplicationCycleStateEnum `json:"state,omitempty"`
+	Steps              []CycleStep                `json:"steps,omitempty"`
+	TotalPauseDuration *string                    `json:"totalPauseDuration,omitempty"`
 }

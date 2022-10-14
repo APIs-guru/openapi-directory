@@ -1,9 +1,9 @@
 package shared
 
 type Comment struct {
-	Body          *string `json:"body"`
-	CreateTime    *string `json:"createTime"`
-	Creator       *Actor  `json:"creator"`
-	Name          *string `json:"name"`
-	PlainTextBody *string `json:"plainTextBody"`
+	Body          *string `json:"body,omitempty"`
+	CreateTime    *string `json:"createTime,omitempty"`
+	Creator       *Actor  `json:"creator,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	PlainTextBody *string `json:"plainTextBody,omitempty"`
 }

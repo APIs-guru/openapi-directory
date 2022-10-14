@@ -1,6 +1,6 @@
 package shared
 
 type ListCampaignsResponse struct {
-	Campaigns []CampaignSummary `json:"campaigns"`
-	NextToken *string           `json:"nextToken"`
+	Campaigns []CampaignSummary `json:"campaigns,omitempty"`
+	NextToken *string           `json:"nextToken,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type Resource struct {
-	Arn             *string               `json:"arn"`
-	AssociationTime *time.Time            `json:"associationTime"`
-	Integrations    *ResourceIntegrations `json:"integrations"`
-	Name            *string               `json:"name"`
+	Arn             *string               `json:"arn,omitempty"`
+	AssociationTime *time.Time            `json:"associationTime,omitempty"`
+	Integrations    *ResourceIntegrations `json:"integrations,omitempty"`
+	Name            *string               `json:"name,omitempty"`
 }

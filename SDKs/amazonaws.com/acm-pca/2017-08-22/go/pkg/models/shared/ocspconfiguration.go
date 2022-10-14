@@ -2,5 +2,5 @@ package shared
 
 type OcspConfiguration struct {
 	Enabled         bool    `json:"Enabled"`
-	OcspCustomCname *string `json:"OcspCustomCname"`
+	OcspCustomCname *string `json:"OcspCustomCname,omitempty"`
 }

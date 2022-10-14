@@ -1,6 +1,6 @@
 package shared
 
 type ClaimDevicesByClaimCodeResponse struct {
-	ClaimCode *string `json:"ClaimCode"`
-	Total     *int64  `json:"Total"`
+	ClaimCode *string `json:"ClaimCode,omitempty"`
+	Total     *int64  `json:"Total,omitempty"`
 }

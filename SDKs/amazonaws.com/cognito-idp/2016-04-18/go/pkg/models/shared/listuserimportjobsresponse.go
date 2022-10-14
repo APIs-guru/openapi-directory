@@ -1,6 +1,6 @@
 package shared
 
 type ListUserImportJobsResponse struct {
-	PaginationToken *string             `json:"PaginationToken"`
-	UserImportJobs  []UserImportJobType `json:"UserImportJobs"`
+	PaginationToken *string             `json:"PaginationToken,omitempty"`
+	UserImportJobs  []UserImportJobType `json:"UserImportJobs,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeEcsClustersResult struct {
-	EcsClusters []EcsCluster `json:"EcsClusters"`
-	NextToken   *string      `json:"NextToken"`
+	EcsClusters []EcsCluster `json:"EcsClusters,omitempty"`
+	NextToken   *string      `json:"NextToken,omitempty"`
 }

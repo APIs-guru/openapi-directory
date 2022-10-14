@@ -20,7 +20,7 @@ type PutGeofenceHeaders struct {
 }
 
 type PutGeofenceRequestBodyGeometry struct {
-	Polygon [][][]float64 `json:"Polygon"`
+	Polygon [][][]float64 `json:"Polygon,omitempty"`
 }
 
 type PutGeofenceRequestBody struct {

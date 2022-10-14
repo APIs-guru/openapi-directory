@@ -19,7 +19,7 @@ const (
 )
 
 type GcsDestination struct {
-	ContentStructure *GcsDestinationContentStructureEnum `json:"contentStructure"`
-	MessageView      *GcsDestinationMessageViewEnum      `json:"messageView"`
-	URIPrefix        *string                             `json:"uriPrefix"`
+	ContentStructure *GcsDestinationContentStructureEnum `json:"contentStructure,omitempty"`
+	MessageView      *GcsDestinationMessageViewEnum      `json:"messageView,omitempty"`
+	URIPrefix        *string                             `json:"uriPrefix,omitempty"`
 }

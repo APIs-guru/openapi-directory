@@ -5,11 +5,11 @@ import (
 )
 
 type DescribeLocationObjectStorageResponse struct {
-	AccessKey      *string                          `json:"AccessKey"`
-	AgentArns      []string                         `json:"AgentArns"`
-	CreationTime   *time.Time                       `json:"CreationTime"`
-	LocationArn    *string                          `json:"LocationArn"`
-	LocationURI    *string                          `json:"LocationUri"`
-	ServerPort     *int64                           `json:"ServerPort"`
-	ServerProtocol *ObjectStorageServerProtocolEnum `json:"ServerProtocol"`
+	AccessKey      *string                          `json:"AccessKey,omitempty"`
+	AgentArns      []string                         `json:"AgentArns,omitempty"`
+	CreationTime   *time.Time                       `json:"CreationTime,omitempty"`
+	LocationArn    *string                          `json:"LocationArn,omitempty"`
+	LocationURI    *string                          `json:"LocationUri,omitempty"`
+	ServerPort     *int64                           `json:"ServerPort,omitempty"`
+	ServerProtocol *ObjectStorageServerProtocolEnum `json:"ServerProtocol,omitempty"`
 }

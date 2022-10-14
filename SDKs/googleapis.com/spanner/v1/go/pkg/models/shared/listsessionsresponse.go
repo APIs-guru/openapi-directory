@@ -1,6 +1,6 @@
 package shared
 
 type ListSessionsResponse struct {
-	NextPageToken *string   `json:"nextPageToken"`
-	Sessions      []Session `json:"sessions"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
+	Sessions      []Session `json:"sessions,omitempty"`
 }

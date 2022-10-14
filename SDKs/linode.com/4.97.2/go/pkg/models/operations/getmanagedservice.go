@@ -27,7 +27,7 @@ type GetManagedServiceRequest struct {
 }
 
 type GetManagedServiceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetManagedServiceResponse struct {

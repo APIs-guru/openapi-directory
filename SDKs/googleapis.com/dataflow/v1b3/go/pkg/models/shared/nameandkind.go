@@ -16,6 +16,6 @@ const (
 )
 
 type NameAndKind struct {
-	Kind *NameAndKindKindEnum `json:"kind"`
-	Name *string              `json:"name"`
+	Kind *NameAndKindKindEnum `json:"kind,omitempty"`
+	Name *string              `json:"name,omitempty"`
 }

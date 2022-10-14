@@ -1,9 +1,9 @@
 package shared
 
 type PatchRule struct {
-	ApproveAfterDays  *int64                    `json:"ApproveAfterDays"`
-	ApproveUntilDate  *string                   `json:"ApproveUntilDate"`
-	ComplianceLevel   *PatchComplianceLevelEnum `json:"ComplianceLevel"`
-	EnableNonSecurity *bool                     `json:"EnableNonSecurity"`
+	ApproveAfterDays  *int64                    `json:"ApproveAfterDays,omitempty"`
+	ApproveUntilDate  *string                   `json:"ApproveUntilDate,omitempty"`
+	ComplianceLevel   *PatchComplianceLevelEnum `json:"ComplianceLevel,omitempty"`
+	EnableNonSecurity *bool                     `json:"EnableNonSecurity,omitempty"`
 	PatchFilterGroup  PatchFilterGroup          `json:"PatchFilterGroup"`
 }

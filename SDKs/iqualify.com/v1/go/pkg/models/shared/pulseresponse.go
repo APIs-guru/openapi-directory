@@ -5,15 +5,15 @@ import (
 )
 
 type PulseResponse struct {
-	LearnerFirstName        *string      `json:"learnerFirstName"`
-	LearnerID               *string      `json:"learnerId"`
-	LearnerLastName         *string      `json:"learnerLastName"`
-	PulseBaseID             *string      `json:"pulseBaseId"`
-	PulseInstanceID         *string      `json:"pulseInstanceId"`
-	PulseQuestion           *string      `json:"pulseQuestion"`
-	PulseRunDurationMinutes *int64       `json:"pulseRunDurationMinutes"`
-	PulseRunStart           *time.Time   `json:"pulseRunStart"`
-	PulseType               *string      `json:"pulseType"`
-	Response                *PulseAnswer `json:"response"`
-	ResponseTime            *time.Time   `json:"responseTime"`
+	LearnerFirstName        *string      `json:"learnerFirstName,omitempty"`
+	LearnerID               *string      `json:"learnerId,omitempty"`
+	LearnerLastName         *string      `json:"learnerLastName,omitempty"`
+	PulseBaseID             *string      `json:"pulseBaseId,omitempty"`
+	PulseInstanceID         *string      `json:"pulseInstanceId,omitempty"`
+	PulseQuestion           *string      `json:"pulseQuestion,omitempty"`
+	PulseRunDurationMinutes *int64       `json:"pulseRunDurationMinutes,omitempty"`
+	PulseRunStart           *time.Time   `json:"pulseRunStart,omitempty"`
+	PulseType               *string      `json:"pulseType,omitempty"`
+	Response                *PulseAnswer `json:"response,omitempty"`
+	ResponseTime            *time.Time   `json:"responseTime,omitempty"`
 }

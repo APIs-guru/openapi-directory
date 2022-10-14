@@ -8,16 +8,16 @@ const (
 )
 
 type FloodlightActivityGroup struct {
-	AccountID                               *string                          `json:"accountId"`
-	AdvertiserID                            *string                          `json:"advertiserId"`
-	AdvertiserIDDimensionValue              *DimensionValue                  `json:"advertiserIdDimensionValue"`
-	FloodlightConfigurationID               *string                          `json:"floodlightConfigurationId"`
-	FloodlightConfigurationIDDimensionValue *DimensionValue                  `json:"floodlightConfigurationIdDimensionValue"`
-	ID                                      *string                          `json:"id"`
-	IDDimensionValue                        *DimensionValue                  `json:"idDimensionValue"`
-	Kind                                    *string                          `json:"kind"`
-	Name                                    *string                          `json:"name"`
-	SubaccountID                            *string                          `json:"subaccountId"`
-	TagString                               *string                          `json:"tagString"`
-	Type                                    *FloodlightActivityGroupTypeEnum `json:"type"`
+	AccountID                               *string                          `json:"accountId,omitempty"`
+	AdvertiserID                            *string                          `json:"advertiserId,omitempty"`
+	AdvertiserIDDimensionValue              *DimensionValue                  `json:"advertiserIdDimensionValue,omitempty"`
+	FloodlightConfigurationID               *string                          `json:"floodlightConfigurationId,omitempty"`
+	FloodlightConfigurationIDDimensionValue *DimensionValue                  `json:"floodlightConfigurationIdDimensionValue,omitempty"`
+	ID                                      *string                          `json:"id,omitempty"`
+	IDDimensionValue                        *DimensionValue                  `json:"idDimensionValue,omitempty"`
+	Kind                                    *string                          `json:"kind,omitempty"`
+	Name                                    *string                          `json:"name,omitempty"`
+	SubaccountID                            *string                          `json:"subaccountId,omitempty"`
+	TagString                               *string                          `json:"tagString,omitempty"`
+	Type                                    *FloodlightActivityGroupTypeEnum `json:"type,omitempty"`
 }

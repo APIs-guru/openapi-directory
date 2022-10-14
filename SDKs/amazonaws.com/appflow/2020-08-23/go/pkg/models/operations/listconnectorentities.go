@@ -42,9 +42,9 @@ const (
 )
 
 type ListConnectorEntitiesRequestBody struct {
-	ConnectorProfileName *string                                            `json:"connectorProfileName"`
-	ConnectorType        *ListConnectorEntitiesRequestBodyConnectorTypeEnum `json:"connectorType"`
-	EntitiesPath         *string                                            `json:"entitiesPath"`
+	ConnectorProfileName *string                                            `json:"connectorProfileName,omitempty"`
+	ConnectorType        *ListConnectorEntitiesRequestBodyConnectorTypeEnum `json:"connectorType,omitempty"`
+	EntitiesPath         *string                                            `json:"entitiesPath,omitempty"`
 }
 
 type ListConnectorEntitiesRequest struct {

@@ -53,7 +53,7 @@ const (
 )
 
 type PostDropletActionRequestBody2 struct {
-	Image *int64                                `json:"image"`
+	Image *int64                                `json:"image,omitempty"`
 	Type  PostDropletActionRequestBody2TypeEnum `json:"type"`
 }
 
@@ -78,8 +78,8 @@ const (
 )
 
 type PostDropletActionRequestBody3 struct {
-	Disk *bool                                 `json:"disk"`
-	Size *string                               `json:"size"`
+	Disk *bool                                 `json:"disk,omitempty"`
+	Size *string                               `json:"size,omitempty"`
 	Type PostDropletActionRequestBody3TypeEnum `json:"type"`
 }
 
@@ -104,7 +104,7 @@ const (
 )
 
 type PostDropletActionRequestBody4 struct {
-	Image *interface{}                          `json:"image"`
+	Image *interface{}                          `json:"image,omitempty"`
 	Type  PostDropletActionRequestBody4TypeEnum `json:"type"`
 }
 
@@ -129,7 +129,7 @@ const (
 )
 
 type PostDropletActionRequestBody5 struct {
-	Name *string                               `json:"name"`
+	Name *string                               `json:"name,omitempty"`
 	Type PostDropletActionRequestBody5TypeEnum `json:"type"`
 }
 
@@ -154,7 +154,7 @@ const (
 )
 
 type PostDropletActionRequestBody6 struct {
-	Kernel *int64                                `json:"kernel"`
+	Kernel *int64                                `json:"kernel,omitempty"`
 	Type   PostDropletActionRequestBody6TypeEnum `json:"type"`
 }
 
@@ -179,7 +179,7 @@ const (
 )
 
 type PostDropletActionRequestBody7 struct {
-	Name *string                               `json:"name"`
+	Name *string                               `json:"name,omitempty"`
 	Type PostDropletActionRequestBody7TypeEnum `json:"type"`
 }
 
@@ -191,7 +191,7 @@ type PostDropletActionRequest struct {
 type PostDropletAction401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type PostDropletActionResponse struct {

@@ -29,8 +29,8 @@ const (
 )
 
 type UpdateAssessmentControlRequestBody struct {
-	CommentBody   *string                                              `json:"commentBody"`
-	ControlStatus *UpdateAssessmentControlRequestBodyControlStatusEnum `json:"controlStatus"`
+	CommentBody   *string                                              `json:"commentBody,omitempty"`
+	ControlStatus *UpdateAssessmentControlRequestBodyControlStatusEnum `json:"controlStatus,omitempty"`
 }
 
 type UpdateAssessmentControlRequest struct {

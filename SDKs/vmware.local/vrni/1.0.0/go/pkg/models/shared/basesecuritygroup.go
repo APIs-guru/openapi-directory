@@ -1,17 +1,17 @@
 package shared
 
 type BaseSecurityGroup struct {
-	DirectDestinationRules   []RuleSet       `json:"direct_destination_rules"`
-	DirectMembers            []Reference     `json:"direct_members"`
-	DirectSourceRules        []RuleSet       `json:"direct_source_rules"`
-	EntityID                 *string         `json:"entity_id"`
-	EntityType               *EntityTypeEnum `json:"entity_type"`
-	ExcludedMembers          []Reference     `json:"excluded_members"`
-	IndirectDestinationRules []RuleSet       `json:"indirect_destination_rules"`
-	IndirectSourceRules      []RuleSet       `json:"indirect_source_rules"`
-	Members                  []Reference     `json:"members"`
-	Name                     *string         `json:"name"`
-	Parents                  []Reference     `json:"parents"`
-	TranslatedVMCount        *int64          `json:"translated_vm_count"`
-	VendorID                 *string         `json:"vendor_id"`
+	DirectDestinationRules   []RuleSet       `json:"direct_destination_rules,omitempty"`
+	DirectMembers            []Reference     `json:"direct_members,omitempty"`
+	DirectSourceRules        []RuleSet       `json:"direct_source_rules,omitempty"`
+	EntityID                 *string         `json:"entity_id,omitempty"`
+	EntityType               *EntityTypeEnum `json:"entity_type,omitempty"`
+	ExcludedMembers          []Reference     `json:"excluded_members,omitempty"`
+	IndirectDestinationRules []RuleSet       `json:"indirect_destination_rules,omitempty"`
+	IndirectSourceRules      []RuleSet       `json:"indirect_source_rules,omitempty"`
+	Members                  []Reference     `json:"members,omitempty"`
+	Name                     *string         `json:"name,omitempty"`
+	Parents                  []Reference     `json:"parents,omitempty"`
+	TranslatedVMCount        *int64          `json:"translated_vm_count,omitempty"`
+	VendorID                 *string         `json:"vendor_id,omitempty"`
 }

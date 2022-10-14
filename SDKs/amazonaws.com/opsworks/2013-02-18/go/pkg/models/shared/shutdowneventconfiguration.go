@@ -1,6 +1,6 @@
 package shared
 
 type ShutdownEventConfiguration struct {
-	DelayUntilElbConnectionsDrained *bool  `json:"DelayUntilElbConnectionsDrained"`
-	ExecutionTimeout                *int64 `json:"ExecutionTimeout"`
+	DelayUntilElbConnectionsDrained *bool  `json:"DelayUntilElbConnectionsDrained,omitempty"`
+	ExecutionTimeout                *int64 `json:"ExecutionTimeout,omitempty"`
 }

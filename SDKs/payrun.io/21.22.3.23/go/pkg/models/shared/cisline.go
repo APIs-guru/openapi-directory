@@ -34,23 +34,23 @@ const (
 )
 
 type CisLineCisLineCisLine struct {
-	CisDeduction   *float64                                    `json:"CisDeduction"`
-	CisLineType    *string                                     `json:"CisLineType"`
-	Description    *string                                     `json:"Description"`
-	Generated      *time.Time                                  `json:"Generated"`
-	GrossPay       *float64                                    `json:"GrossPay"`
-	NominalCodeKey *string                                     `json:"NominalCodeKey"`
-	PayFrequency   *CisLineCisLinePayFrequencyPayFrequencyEnum `json:"PayFrequency"`
-	TaxMonth       *int32                                      `json:"TaxMonth"`
-	TaxPeriod      *int32                                      `json:"TaxPeriod"`
-	TaxTreatment   *CisLineCisLineTaxTreatmentTaxTreatmentEnum `json:"TaxTreatment"`
-	TaxYear        *int32                                      `json:"TaxYear"`
-	Uom            *CisLineCisLineUomUomEnum                   `json:"UOM"`
-	UnitRate       *float64                                    `json:"UnitRate"`
-	Units          *float64                                    `json:"Units"`
-	Vat            *float64                                    `json:"VAT"`
+	CisDeduction   *float64                                    `json:"CisDeduction,omitempty"`
+	CisLineType    *string                                     `json:"CisLineType,omitempty"`
+	Description    *string                                     `json:"Description,omitempty"`
+	Generated      *time.Time                                  `json:"Generated,omitempty"`
+	GrossPay       *float64                                    `json:"GrossPay,omitempty"`
+	NominalCodeKey *string                                     `json:"NominalCodeKey,omitempty"`
+	PayFrequency   *CisLineCisLinePayFrequencyPayFrequencyEnum `json:"PayFrequency,omitempty"`
+	TaxMonth       *int32                                      `json:"TaxMonth,omitempty"`
+	TaxPeriod      *int32                                      `json:"TaxPeriod,omitempty"`
+	TaxTreatment   *CisLineCisLineTaxTreatmentTaxTreatmentEnum `json:"TaxTreatment,omitempty"`
+	TaxYear        *int32                                      `json:"TaxYear,omitempty"`
+	Uom            *CisLineCisLineUomUomEnum                   `json:"UOM,omitempty"`
+	UnitRate       *float64                                    `json:"UnitRate,omitempty"`
+	Units          *float64                                    `json:"Units,omitempty"`
+	Vat            *float64                                    `json:"VAT,omitempty"`
 }
 
 type CisLine struct {
-	CisLine *CisLineCisLineCisLine `json:"CisLine"`
+	CisLine *CisLineCisLineCisLine `json:"CisLine,omitempty"`
 }

@@ -5,15 +5,15 @@ import (
 )
 
 type BatchJobInstructionBatchJobInstructionInstructionsDelete struct {
-	Delete []interface{} `json:"DELETE"`
+	Delete []interface{} `json:"DELETE,omitempty"`
 }
 
 type BatchJobInstructionBatchJobInstructionBatchJobInstruction struct {
-	HoldingDate  *time.Time                                                `json:"HoldingDate"`
-	Instructions *BatchJobInstructionBatchJobInstructionInstructionsDelete `json:"Instructions"`
-	ValidateOnly *bool                                                     `json:"ValidateOnly"`
+	HoldingDate  *time.Time                                                `json:"HoldingDate,omitempty"`
+	Instructions *BatchJobInstructionBatchJobInstructionInstructionsDelete `json:"Instructions,omitempty"`
+	ValidateOnly *bool                                                     `json:"ValidateOnly,omitempty"`
 }
 
 type BatchJobInstruction struct {
-	BatchJobInstruction *BatchJobInstructionBatchJobInstructionBatchJobInstruction `json:"BatchJobInstruction"`
+	BatchJobInstruction *BatchJobInstructionBatchJobInstructionBatchJobInstruction `json:"BatchJobInstruction,omitempty"`
 }

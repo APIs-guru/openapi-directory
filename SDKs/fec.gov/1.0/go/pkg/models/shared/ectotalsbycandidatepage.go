@@ -1,6 +1,6 @@
 package shared
 
 type EcTotalsByCandidatePage struct {
-	Pagination *OffsetInfo           `json:"pagination"`
-	Results    []EcTotalsByCandidate `json:"results"`
+	Pagination *OffsetInfo           `json:"pagination,omitempty"`
+	Results    []EcTotalsByCandidate `json:"results,omitempty"`
 }

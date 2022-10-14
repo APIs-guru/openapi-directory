@@ -1,7 +1,7 @@
 package shared
 
 type Resource struct {
-	ContentHash *Hash   `json:"contentHash"`
-	Name        *string `json:"name"`
-	URI         *string `json:"uri"`
+	ContentHash *Hash   `json:"contentHash,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	URI         *string `json:"uri,omitempty"`
 }

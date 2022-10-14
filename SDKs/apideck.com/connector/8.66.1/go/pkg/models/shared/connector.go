@@ -25,61 +25,61 @@ const (
 )
 
 type ConnectorOauthScopes struct {
-	DefaultApis []string `json:"default_apis"`
-	ID          *string  `json:"id"`
-	Label       *string  `json:"label"`
+	DefaultApis []string `json:"default_apis,omitempty"`
+	ID          *string  `json:"id,omitempty"`
+	Label       *string  `json:"label,omitempty"`
 }
 
 type ConnectorSupportedEvents struct {
-	DownstreamEventType *string `json:"downstream_event_type"`
-	EventType           *string `json:"event_type"`
-	ResourceID          *string `json:"resource_id"`
+	DownstreamEventType *string `json:"downstream_event_type,omitempty"`
+	EventType           *string `json:"event_type,omitempty"`
+	ResourceID          *string `json:"resource_id,omitempty"`
 }
 
 type ConnectorSupportedResources struct {
-	DownstreamID   *string             `json:"downstream_id"`
-	DownstreamName *string             `json:"downstream_name"`
-	ID             *string             `json:"id"`
-	Name           *string             `json:"name"`
-	Status         *ResourceStatusEnum `json:"status"`
+	DownstreamID   *string             `json:"downstream_id,omitempty"`
+	DownstreamName *string             `json:"downstream_name,omitempty"`
+	ID             *string             `json:"id,omitempty"`
+	Name           *string             `json:"name,omitempty"`
+	Status         *ResourceStatusEnum `json:"status,omitempty"`
 }
 
 type ConnectorTLSSupport struct {
-	Description *string `json:"description"`
-	Type        *string `json:"type"`
+	Description *string `json:"description,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }
 
 type ConnectorUnifiedApisOauthScopes struct {
-	ID    *string `json:"id"`
-	Label *string `json:"label"`
+	ID    *string `json:"id,omitempty"`
+	Label *string `json:"label,omitempty"`
 }
 
 type ConnectorUnifiedApis struct {
-	ID          *UnifiedAPIIDEnum                 `json:"id"`
-	OauthScopes []ConnectorUnifiedApisOauthScopes `json:"oauth_scopes"`
+	ID          *UnifiedAPIIDEnum                 `json:"id,omitempty"`
+	OauthScopes []ConnectorUnifiedApisOauthScopes `json:"oauth_scopes,omitempty"`
 }
 
 type Connector struct {
-	AuthOnly               *bool                                `json:"auth_only"`
-	AuthType               *ConnectorAuthTypeEnum               `json:"auth_type"`
-	BlindMapped            *bool                                `json:"blind_mapped"`
-	ConfigurableResources  []string                             `json:"configurable_resources"`
-	Description            *string                              `json:"description"`
-	Docs                   []ConnectorDoc                       `json:"docs"`
-	HasSandboxCredentials  *bool                                `json:"has_sandbox_credentials"`
-	IconURL                *string                              `json:"icon_url"`
-	ID                     *string                              `json:"id"`
-	LogoURL                *string                              `json:"logo_url"`
-	Name                   *string                              `json:"name"`
-	OauthCredentialsSource *ConnectorOauthCredentialsSourceEnum `json:"oauth_credentials_source"`
-	OauthGrantType         *ConnectorOauthGrantTypeEnum         `json:"oauth_grant_type"`
-	OauthScopes            []ConnectorOauthScopes               `json:"oauth_scopes"`
-	ServiceID              *string                              `json:"service_id"`
-	Settings               []ConnectorSetting                   `json:"settings"`
-	Status                 *ConnectorStatusEnum                 `json:"status"`
-	SupportedEvents        []ConnectorSupportedEvents           `json:"supported_events"`
-	SupportedResources     []ConnectorSupportedResources        `json:"supported_resources"`
-	TLSSupport             *ConnectorTLSSupport                 `json:"tls_support"`
-	UnifiedApis            []ConnectorUnifiedApis               `json:"unified_apis"`
-	WebsiteURL             *string                              `json:"website_url"`
+	AuthOnly               *bool                                `json:"auth_only,omitempty"`
+	AuthType               *ConnectorAuthTypeEnum               `json:"auth_type,omitempty"`
+	BlindMapped            *bool                                `json:"blind_mapped,omitempty"`
+	ConfigurableResources  []string                             `json:"configurable_resources,omitempty"`
+	Description            *string                              `json:"description,omitempty"`
+	Docs                   []ConnectorDoc                       `json:"docs,omitempty"`
+	HasSandboxCredentials  *bool                                `json:"has_sandbox_credentials,omitempty"`
+	IconURL                *string                              `json:"icon_url,omitempty"`
+	ID                     *string                              `json:"id,omitempty"`
+	LogoURL                *string                              `json:"logo_url,omitempty"`
+	Name                   *string                              `json:"name,omitempty"`
+	OauthCredentialsSource *ConnectorOauthCredentialsSourceEnum `json:"oauth_credentials_source,omitempty"`
+	OauthGrantType         *ConnectorOauthGrantTypeEnum         `json:"oauth_grant_type,omitempty"`
+	OauthScopes            []ConnectorOauthScopes               `json:"oauth_scopes,omitempty"`
+	ServiceID              *string                              `json:"service_id,omitempty"`
+	Settings               []ConnectorSetting                   `json:"settings,omitempty"`
+	Status                 *ConnectorStatusEnum                 `json:"status,omitempty"`
+	SupportedEvents        []ConnectorSupportedEvents           `json:"supported_events,omitempty"`
+	SupportedResources     []ConnectorSupportedResources        `json:"supported_resources,omitempty"`
+	TLSSupport             *ConnectorTLSSupport                 `json:"tls_support,omitempty"`
+	UnifiedApis            []ConnectorUnifiedApis               `json:"unified_apis,omitempty"`
+	WebsiteURL             *string                              `json:"website_url,omitempty"`
 }

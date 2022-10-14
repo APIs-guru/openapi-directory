@@ -1,10 +1,10 @@
 package shared
 
 type ModelPackageContainerDefinition struct {
-	ContainerHostname *string           `json:"ContainerHostname"`
-	Environment       map[string]string `json:"Environment"`
+	ContainerHostname *string           `json:"ContainerHostname,omitempty"`
+	Environment       map[string]string `json:"Environment,omitempty"`
 	Image             string            `json:"Image"`
-	ImageDigest       *string           `json:"ImageDigest"`
-	ModelDataURL      *string           `json:"ModelDataUrl"`
-	ProductID         *string           `json:"ProductId"`
+	ImageDigest       *string           `json:"ImageDigest,omitempty"`
+	ModelDataURL      *string           `json:"ModelDataUrl,omitempty"`
+	ProductID         *string           `json:"ProductId,omitempty"`
 }

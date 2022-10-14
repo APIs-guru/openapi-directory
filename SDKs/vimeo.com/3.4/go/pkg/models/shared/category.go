@@ -59,7 +59,7 @@ type CategorySubcategories struct {
 }
 
 type Category struct {
-	Icon                  *Picture                `json:"icon"`
+	Icon                  *Picture                `json:"icon,omitempty"`
 	LastVideoFeaturedTime string                  `json:"last_video_featured_time"`
 	Link                  string                  `json:"link"`
 	Metadata              CategoryMetadata        `json:"metadata"`
@@ -67,7 +67,7 @@ type Category struct {
 	Parent                CategoryParent          `json:"parent"`
 	Pictures              Picture                 `json:"pictures"`
 	ResourceKey           string                  `json:"resource_key"`
-	Subcategories         []CategorySubcategories `json:"subcategories"`
+	Subcategories         []CategorySubcategories `json:"subcategories,omitempty"`
 	TopLevel              bool                    `json:"top_level"`
 	URI                   string                  `json:"uri"`
 }

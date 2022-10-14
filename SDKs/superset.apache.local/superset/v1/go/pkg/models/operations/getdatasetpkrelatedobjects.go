@@ -18,15 +18,15 @@ type GetDatasetPkRelatedObjectsRequest struct {
 }
 
 type GetDatasetPkRelatedObjects401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPkRelatedObjects404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPkRelatedObjects500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPkRelatedObjectsResponse struct {

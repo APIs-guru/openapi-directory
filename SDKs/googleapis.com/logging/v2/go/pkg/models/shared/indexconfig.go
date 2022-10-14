@@ -9,7 +9,7 @@ const (
 )
 
 type IndexConfig struct {
-	CreateTime *string              `json:"createTime"`
-	FieldPath  *string              `json:"fieldPath"`
-	Type       *IndexConfigTypeEnum `json:"type"`
+	CreateTime *string              `json:"createTime,omitempty"`
+	FieldPath  *string              `json:"fieldPath,omitempty"`
+	Type       *IndexConfigTypeEnum `json:"type,omitempty"`
 }

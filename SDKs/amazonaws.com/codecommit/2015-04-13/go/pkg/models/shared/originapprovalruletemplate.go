@@ -1,6 +1,6 @@
 package shared
 
 type OriginApprovalRuleTemplate struct {
-	ApprovalRuleTemplateID   *string `json:"approvalRuleTemplateId"`
-	ApprovalRuleTemplateName *string `json:"approvalRuleTemplateName"`
+	ApprovalRuleTemplateID   *string `json:"approvalRuleTemplateId,omitempty"`
+	ApprovalRuleTemplateName *string `json:"approvalRuleTemplateName,omitempty"`
 }

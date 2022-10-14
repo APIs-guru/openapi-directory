@@ -5,8 +5,8 @@ import (
 )
 
 type EnterpriseAdminCreatePreReceiveHookRequestBody struct {
-	AllowDownstreamConfiguration *bool                  `json:"allow_downstream_configuration"`
-	Enforcement                  *string                `json:"enforcement"`
+	AllowDownstreamConfiguration *bool                  `json:"allow_downstream_configuration,omitempty"`
+	Enforcement                  *string                `json:"enforcement,omitempty"`
 	Environment                  map[string]interface{} `json:"environment"`
 	Name                         string                 `json:"name"`
 	Script                       string                 `json:"script"`

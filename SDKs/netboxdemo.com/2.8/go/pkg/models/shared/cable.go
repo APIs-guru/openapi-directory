@@ -70,17 +70,17 @@ const (
 )
 
 type Cable struct {
-	Color            *string                    `json:"color"`
-	ID               *int64                     `json:"id"`
-	Label            *string                    `json:"label"`
-	Length           *int64                     `json:"length"`
-	LengthUnit       *CableLengthUnitLengthUnit `json:"length_unit"`
-	Status           *CableStatusStatus         `json:"status"`
-	TerminationA     map[string]string          `json:"termination_a"`
+	Color            *string                    `json:"color,omitempty"`
+	ID               *int64                     `json:"id,omitempty"`
+	Label            *string                    `json:"label,omitempty"`
+	Length           *int64                     `json:"length,omitempty"`
+	LengthUnit       *CableLengthUnitLengthUnit `json:"length_unit,omitempty"`
+	Status           *CableStatusStatus         `json:"status,omitempty"`
+	TerminationA     map[string]string          `json:"termination_a,omitempty"`
 	TerminationAID   int64                      `json:"termination_a_id"`
 	TerminationAType string                     `json:"termination_a_type"`
-	TerminationB     map[string]string          `json:"termination_b"`
+	TerminationB     map[string]string          `json:"termination_b,omitempty"`
 	TerminationBID   int64                      `json:"termination_b_id"`
 	TerminationBType string                     `json:"termination_b_type"`
-	Type             *CableTypeTypeEnum         `json:"type"`
+	Type             *CableTypeTypeEnum         `json:"type,omitempty"`
 }

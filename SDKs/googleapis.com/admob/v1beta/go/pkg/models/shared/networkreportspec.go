@@ -35,12 +35,12 @@ const (
 )
 
 type NetworkReportSpec struct {
-	DateRange            *DateRange                         `json:"dateRange"`
-	DimensionFilters     []NetworkReportSpecDimensionFilter `json:"dimensionFilters"`
-	Dimensions           []NetworkReportSpecDimensionsEnum  `json:"dimensions"`
-	LocalizationSettings *LocalizationSettings              `json:"localizationSettings"`
-	MaxReportRows        *int32                             `json:"maxReportRows"`
-	Metrics              []NetworkReportSpecMetricsEnum     `json:"metrics"`
-	SortConditions       []NetworkReportSpecSortCondition   `json:"sortConditions"`
-	TimeZone             *string                            `json:"timeZone"`
+	DateRange            *DateRange                         `json:"dateRange,omitempty"`
+	DimensionFilters     []NetworkReportSpecDimensionFilter `json:"dimensionFilters,omitempty"`
+	Dimensions           []NetworkReportSpecDimensionsEnum  `json:"dimensions,omitempty"`
+	LocalizationSettings *LocalizationSettings              `json:"localizationSettings,omitempty"`
+	MaxReportRows        *int32                             `json:"maxReportRows,omitempty"`
+	Metrics              []NetworkReportSpecMetricsEnum     `json:"metrics,omitempty"`
+	SortConditions       []NetworkReportSpecSortCondition   `json:"sortConditions,omitempty"`
+	TimeZone             *string                            `json:"timeZone,omitempty"`
 }

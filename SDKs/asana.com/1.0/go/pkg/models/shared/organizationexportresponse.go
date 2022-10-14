@@ -14,10 +14,10 @@ const (
 )
 
 type OrganizationExportResponse struct {
-	CreatedAt    *time.Time                           `json:"created_at"`
-	DownloadURL  *string                              `json:"download_url"`
-	Gid          *string                              `json:"gid"`
-	Organization *WorkspaceCompact                    `json:"organization"`
-	ResourceType *string                              `json:"resource_type"`
-	State        *OrganizationExportResponseStateEnum `json:"state"`
+	CreatedAt    *time.Time                           `json:"created_at,omitempty"`
+	DownloadURL  *string                              `json:"download_url,omitempty"`
+	Gid          *string                              `json:"gid,omitempty"`
+	Organization *WorkspaceCompact                    `json:"organization,omitempty"`
+	ResourceType *string                              `json:"resource_type,omitempty"`
+	State        *OrganizationExportResponseStateEnum `json:"state,omitempty"`
 }

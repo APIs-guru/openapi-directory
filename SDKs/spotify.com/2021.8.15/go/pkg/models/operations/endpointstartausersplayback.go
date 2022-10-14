@@ -13,10 +13,10 @@ type EndpointStartAUsersPlaybackHeaders struct {
 }
 
 type EndpointStartAUsersPlaybackRequestBody struct {
-	ContextURI *string                `json:"context_uri"`
-	Offset     map[string]interface{} `json:"offset"`
-	PositionMs *int32                 `json:"position_ms"`
-	Uris       []string               `json:"uris"`
+	ContextURI *string                `json:"context_uri,omitempty"`
+	Offset     map[string]interface{} `json:"offset,omitempty"`
+	PositionMs *int32                 `json:"position_ms,omitempty"`
+	Uris       []string               `json:"uris,omitempty"`
 }
 
 type EndpointStartAUsersPlaybackSecurity struct {

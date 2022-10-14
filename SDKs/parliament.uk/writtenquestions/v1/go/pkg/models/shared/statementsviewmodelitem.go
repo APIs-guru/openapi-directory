@@ -1,6 +1,6 @@
 package shared
 
 type StatementsViewModelItem struct {
-	Links []Link               `json:"links"`
-	Value *StatementsViewModel `json:"value"`
+	Links []Link               `json:"links,omitempty"`
+	Value *StatementsViewModel `json:"value,omitempty"`
 }

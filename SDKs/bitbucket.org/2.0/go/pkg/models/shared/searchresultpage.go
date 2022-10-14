@@ -1,11 +1,11 @@
 package shared
 
 type SearchResultPage struct {
-	Next             *string                  `json:"next"`
-	Page             *int32                   `json:"page"`
-	Pagelen          *int32                   `json:"pagelen"`
-	Previous         *string                  `json:"previous"`
-	QuerySubstituted *bool                    `json:"query_substituted"`
-	Size             *int64                   `json:"size"`
-	Values           []SearchCodeSearchResult `json:"values"`
+	Next             *string                  `json:"next,omitempty"`
+	Page             *int32                   `json:"page,omitempty"`
+	Pagelen          *int32                   `json:"pagelen,omitempty"`
+	Previous         *string                  `json:"previous,omitempty"`
+	QuerySubstituted *bool                    `json:"query_substituted,omitempty"`
+	Size             *int64                   `json:"size,omitempty"`
+	Values           []SearchCodeSearchResult `json:"values,omitempty"`
 }

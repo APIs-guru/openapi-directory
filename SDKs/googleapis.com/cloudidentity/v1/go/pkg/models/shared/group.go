@@ -1,13 +1,13 @@
 package shared
 
 type Group struct {
-	CreateTime           *string               `json:"createTime"`
-	Description          *string               `json:"description"`
-	DisplayName          *string               `json:"displayName"`
-	DynamicGroupMetadata *DynamicGroupMetadata `json:"dynamicGroupMetadata"`
-	GroupKey             *EntityKey            `json:"groupKey"`
-	Labels               map[string]string     `json:"labels"`
-	Name                 *string               `json:"name"`
-	Parent               *string               `json:"parent"`
-	UpdateTime           *string               `json:"updateTime"`
+	CreateTime           *string               `json:"createTime,omitempty"`
+	Description          *string               `json:"description,omitempty"`
+	DisplayName          *string               `json:"displayName,omitempty"`
+	DynamicGroupMetadata *DynamicGroupMetadata `json:"dynamicGroupMetadata,omitempty"`
+	GroupKey             *EntityKey            `json:"groupKey,omitempty"`
+	Labels               map[string]string     `json:"labels,omitempty"`
+	Name                 *string               `json:"name,omitempty"`
+	Parent               *string               `json:"parent,omitempty"`
+	UpdateTime           *string               `json:"updateTime,omitempty"`
 }

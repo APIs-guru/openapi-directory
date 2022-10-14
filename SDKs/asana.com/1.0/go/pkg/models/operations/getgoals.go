@@ -22,7 +22,7 @@ type GetGoalsRequest struct {
 }
 
 type GetGoals200ApplicationJSON struct {
-	Data []shared.GoalCompact `json:"data"`
+	Data []shared.GoalCompact `json:"data,omitempty"`
 }
 
 type GetGoalsResponse struct {

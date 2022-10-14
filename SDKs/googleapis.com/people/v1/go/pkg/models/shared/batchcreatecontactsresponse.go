@@ -1,5 +1,5 @@
 package shared
 
 type BatchCreateContactsResponse struct {
-	CreatedPeople []PersonResponse `json:"createdPeople"`
+	CreatedPeople []PersonResponse `json:"createdPeople,omitempty"`
 }

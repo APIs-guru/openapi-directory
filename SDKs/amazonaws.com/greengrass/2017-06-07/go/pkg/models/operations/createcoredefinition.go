@@ -16,13 +16,13 @@ type CreateCoreDefinitionHeaders struct {
 }
 
 type CreateCoreDefinitionRequestBodyInitialVersion struct {
-	Cores []shared.Core `json:"Cores"`
+	Cores []shared.Core `json:"Cores,omitempty"`
 }
 
 type CreateCoreDefinitionRequestBody struct {
-	InitialVersion *CreateCoreDefinitionRequestBodyInitialVersion `json:"InitialVersion"`
-	Name           *string                                        `json:"Name"`
-	Tags           map[string]string                              `json:"tags"`
+	InitialVersion *CreateCoreDefinitionRequestBodyInitialVersion `json:"InitialVersion,omitempty"`
+	Name           *string                                        `json:"Name,omitempty"`
+	Tags           map[string]string                              `json:"tags,omitempty"`
 }
 
 type CreateCoreDefinitionRequest struct {

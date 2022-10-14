@@ -16,21 +16,21 @@ const (
 )
 
 type BuildStep struct {
-	AllowExitCodes []int32              `json:"allowExitCodes"`
-	AllowFailure   *bool                `json:"allowFailure"`
-	Args           []string             `json:"args"`
-	Dir            *string              `json:"dir"`
-	Entrypoint     *string              `json:"entrypoint"`
-	Env            []string             `json:"env"`
-	ExitCode       *int32               `json:"exitCode"`
-	ID             *string              `json:"id"`
-	Name           *string              `json:"name"`
-	PullTiming     *TimeSpan            `json:"pullTiming"`
-	Script         *string              `json:"script"`
-	SecretEnv      []string             `json:"secretEnv"`
-	Status         *BuildStepStatusEnum `json:"status"`
-	Timeout        *string              `json:"timeout"`
-	Timing         *TimeSpan            `json:"timing"`
-	Volumes        []Volume             `json:"volumes"`
-	WaitFor        []string             `json:"waitFor"`
+	AllowExitCodes []int32              `json:"allowExitCodes,omitempty"`
+	AllowFailure   *bool                `json:"allowFailure,omitempty"`
+	Args           []string             `json:"args,omitempty"`
+	Dir            *string              `json:"dir,omitempty"`
+	Entrypoint     *string              `json:"entrypoint,omitempty"`
+	Env            []string             `json:"env,omitempty"`
+	ExitCode       *int32               `json:"exitCode,omitempty"`
+	ID             *string              `json:"id,omitempty"`
+	Name           *string              `json:"name,omitempty"`
+	PullTiming     *TimeSpan            `json:"pullTiming,omitempty"`
+	Script         *string              `json:"script,omitempty"`
+	SecretEnv      []string             `json:"secretEnv,omitempty"`
+	Status         *BuildStepStatusEnum `json:"status,omitempty"`
+	Timeout        *string              `json:"timeout,omitempty"`
+	Timing         *TimeSpan            `json:"timing,omitempty"`
+	Volumes        []Volume             `json:"volumes,omitempty"`
+	WaitFor        []string             `json:"waitFor,omitempty"`
 }

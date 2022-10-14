@@ -20,9 +20,9 @@ type GetInsightsHeaders struct {
 }
 
 type GetInsightsRequestBody struct {
-	InsightArns []string `json:"InsightArns"`
-	MaxResults  *int64   `json:"MaxResults"`
-	NextToken   *string  `json:"NextToken"`
+	InsightArns []string `json:"InsightArns,omitempty"`
+	MaxResults  *int64   `json:"MaxResults,omitempty"`
+	NextToken   *string  `json:"NextToken,omitempty"`
 }
 
 type GetInsightsRequest struct {

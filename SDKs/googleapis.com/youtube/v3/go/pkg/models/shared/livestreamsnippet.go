@@ -5,9 +5,9 @@ import (
 )
 
 type LiveStreamSnippet struct {
-	ChannelID       *string    `json:"channelId"`
-	Description     *string    `json:"description"`
-	IsDefaultStream *bool      `json:"isDefaultStream"`
-	PublishedAt     *time.Time `json:"publishedAt"`
-	Title           *string    `json:"title"`
+	ChannelID       *string    `json:"channelId,omitempty"`
+	Description     *string    `json:"description,omitempty"`
+	IsDefaultStream *bool      `json:"isDefaultStream,omitempty"`
+	PublishedAt     *time.Time `json:"publishedAt,omitempty"`
+	Title           *string    `json:"title,omitempty"`
 }

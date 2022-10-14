@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaScheduleIntegrationsResponse struct {
-	ExecutionInfoIds []string `json:"executionInfoIds"`
+	ExecutionInfoIds []string `json:"executionInfoIds,omitempty"`
 }

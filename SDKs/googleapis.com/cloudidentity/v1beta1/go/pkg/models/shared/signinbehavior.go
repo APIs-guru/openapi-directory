@@ -8,5 +8,5 @@ const (
 )
 
 type SignInBehavior struct {
-	RedirectCondition *SignInBehaviorRedirectConditionEnum `json:"redirectCondition"`
+	RedirectCondition *SignInBehaviorRedirectConditionEnum `json:"redirectCondition,omitempty"`
 }

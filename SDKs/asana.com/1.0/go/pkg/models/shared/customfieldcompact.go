@@ -19,14 +19,14 @@ const (
 )
 
 type CustomFieldCompact struct {
-	DisplayValue    *string                                `json:"display_value"`
-	Enabled         *bool                                  `json:"enabled"`
-	EnumOptions     []EnumOption                           `json:"enum_options"`
-	Gid             *string                                `json:"gid"`
-	Name            *string                                `json:"name"`
-	NumberValue     *float64                               `json:"number_value"`
-	ResourceSubtype *CustomFieldCompactResourceSubtypeEnum `json:"resource_subtype"`
-	ResourceType    *string                                `json:"resource_type"`
-	TextValue       *string                                `json:"text_value"`
-	Type            *CustomFieldCompactTypeEnum            `json:"type"`
+	DisplayValue    *string                                `json:"display_value,omitempty"`
+	Enabled         *bool                                  `json:"enabled,omitempty"`
+	EnumOptions     []EnumOption                           `json:"enum_options,omitempty"`
+	Gid             *string                                `json:"gid,omitempty"`
+	Name            *string                                `json:"name,omitempty"`
+	NumberValue     *float64                               `json:"number_value,omitempty"`
+	ResourceSubtype *CustomFieldCompactResourceSubtypeEnum `json:"resource_subtype,omitempty"`
+	ResourceType    *string                                `json:"resource_type,omitempty"`
+	TextValue       *string                                `json:"text_value,omitempty"`
+	Type            *CustomFieldCompactTypeEnum            `json:"type,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ListDeviceConfigVersionsResponse struct {
-	DeviceConfigs []DeviceConfig `json:"deviceConfigs"`
+	DeviceConfigs []DeviceConfig `json:"deviceConfigs,omitempty"`
 }

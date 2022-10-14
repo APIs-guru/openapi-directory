@@ -2,5 +2,5 @@ package shared
 
 type ListAppsResult struct {
 	Apps      []App   `json:"apps"`
-	NextToken *string `json:"nextToken"`
+	NextToken *string `json:"nextToken,omitempty"`
 }

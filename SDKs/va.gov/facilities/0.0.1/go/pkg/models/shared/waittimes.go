@@ -5,6 +5,6 @@ import (
 )
 
 type WaitTimes struct {
-	EffectiveDate *time.Time        `json:"effective_date"`
-	Health        []PatientWaitTime `json:"health"`
+	EffectiveDate *time.Time        `json:"effective_date,omitempty"`
+	Health        []PatientWaitTime `json:"health,omitempty"`
 }

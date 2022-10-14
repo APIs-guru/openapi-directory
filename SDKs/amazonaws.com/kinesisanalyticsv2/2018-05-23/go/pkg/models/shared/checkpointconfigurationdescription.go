@@ -1,8 +1,8 @@
 package shared
 
 type CheckpointConfigurationDescription struct {
-	CheckpointInterval         *int64                 `json:"CheckpointInterval"`
-	CheckpointingEnabled       *bool                  `json:"CheckpointingEnabled"`
-	ConfigurationType          *ConfigurationTypeEnum `json:"ConfigurationType"`
-	MinPauseBetweenCheckpoints *int64                 `json:"MinPauseBetweenCheckpoints"`
+	CheckpointInterval         *int64                 `json:"CheckpointInterval,omitempty"`
+	CheckpointingEnabled       *bool                  `json:"CheckpointingEnabled,omitempty"`
+	ConfigurationType          *ConfigurationTypeEnum `json:"ConfigurationType,omitempty"`
+	MinPauseBetweenCheckpoints *int64                 `json:"MinPauseBetweenCheckpoints,omitempty"`
 }

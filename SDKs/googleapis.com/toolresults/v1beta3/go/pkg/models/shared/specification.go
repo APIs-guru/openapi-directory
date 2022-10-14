@@ -1,6 +1,6 @@
 package shared
 
 type Specification struct {
-	AndroidTest *AndroidTest `json:"androidTest"`
-	IosTest     *IosTest     `json:"iosTest"`
+	AndroidTest *AndroidTest `json:"androidTest,omitempty"`
+	IosTest     *IosTest     `json:"iosTest,omitempty"`
 }

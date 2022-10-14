@@ -1,6 +1,6 @@
 package shared
 
 type SecuritySettings struct {
-	MemberRestriction *MemberRestriction `json:"memberRestriction"`
-	Name              *string            `json:"name"`
+	MemberRestriction *MemberRestriction `json:"memberRestriction,omitempty"`
+	Name              *string            `json:"name,omitempty"`
 }

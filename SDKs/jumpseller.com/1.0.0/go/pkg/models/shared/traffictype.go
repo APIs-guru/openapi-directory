@@ -1,6 +1,6 @@
 package shared
 
 type TrafficType struct {
-	Count *int64  `json:"count"`
-	Name  *string `json:"name"`
+	Count *int64  `json:"count,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }

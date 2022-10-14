@@ -12,7 +12,7 @@ type PatchOfferingsOfferingIDAssessmentsAssessmentIDUserEmailPathParams struct {
 }
 
 type PatchOfferingsOfferingIDAssessmentsAssessmentIDUserEmailRequestBody struct {
-	DueDate *time.Time `json:"dueDate"`
+	DueDate *time.Time `json:"dueDate,omitempty"`
 }
 
 type PatchOfferingsOfferingIDAssessmentsAssessmentIDUserEmailRequest struct {

@@ -1,9 +1,9 @@
 package shared
 
 type ResourceInfo struct {
-	Container  *string `json:"container"`
-	Location   *string `json:"location"`
-	Name       *string `json:"name"`
-	Permission *string `json:"permission"`
-	Type       *string `json:"type"`
+	Container  *string `json:"container,omitempty"`
+	Location   *string `json:"location,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	Permission *string `json:"permission,omitempty"`
+	Type       *string `json:"type,omitempty"`
 }

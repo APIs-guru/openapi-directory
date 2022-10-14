@@ -16,6 +16,6 @@ const (
 )
 
 type TaskDuplicateRequest struct {
-	Include *TaskDuplicateRequestIncludeEnum `json:"include"`
-	Name    *string                          `json:"name"`
+	Include *TaskDuplicateRequestIncludeEnum `json:"include,omitempty"`
+	Name    *string                          `json:"name,omitempty"`
 }

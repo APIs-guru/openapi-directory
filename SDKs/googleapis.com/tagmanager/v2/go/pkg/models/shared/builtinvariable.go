@@ -119,10 +119,10 @@ const (
 )
 
 type BuiltInVariable struct {
-	AccountID   *string                  `json:"accountId"`
-	ContainerID *string                  `json:"containerId"`
-	Name        *string                  `json:"name"`
-	Path        *string                  `json:"path"`
-	Type        *BuiltInVariableTypeEnum `json:"type"`
-	WorkspaceID *string                  `json:"workspaceId"`
+	AccountID   *string                  `json:"accountId,omitempty"`
+	ContainerID *string                  `json:"containerId,omitempty"`
+	Name        *string                  `json:"name,omitempty"`
+	Path        *string                  `json:"path,omitempty"`
+	Type        *BuiltInVariableTypeEnum `json:"type,omitempty"`
+	WorkspaceID *string                  `json:"workspaceId,omitempty"`
 }

@@ -9,21 +9,21 @@ type DeleteMonitorRequest struct {
 }
 
 type DeleteMonitor200ApplicationJSONMonitor struct {
-	ID  *string `json:"id"`
-	UID *string `json:"uid"`
+	ID  *string `json:"id,omitempty"`
+	UID *string `json:"uid,omitempty"`
 }
 
 type DeleteMonitor200ApplicationJSON struct {
-	Monitor *DeleteMonitor200ApplicationJSONMonitor `json:"monitor"`
+	Monitor *DeleteMonitor200ApplicationJSONMonitor `json:"monitor,omitempty"`
 }
 
 type DeleteMonitor404ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type DeleteMonitor404ApplicationJSON struct {
-	Error *DeleteMonitor404ApplicationJSONError `json:"error"`
+	Error *DeleteMonitor404ApplicationJSONError `json:"error,omitempty"`
 }
 
 type DeleteMonitorResponse struct {

@@ -18,14 +18,14 @@ const (
 )
 
 type ReturnPolicyOnline struct {
-	Countries                []string                                     `json:"countries"`
-	ItemConditions           []ReturnPolicyOnlineItemConditionsEnum       `json:"itemConditions"`
-	Label                    *string                                      `json:"label"`
-	Name                     *string                                      `json:"name"`
-	Policy                   *ReturnPolicyOnlinePolicy                    `json:"policy"`
-	RestockingFee            *ReturnPolicyOnlineRestockingFee             `json:"restockingFee"`
-	ReturnMethods            []ReturnPolicyOnlineReturnMethodsEnum        `json:"returnMethods"`
-	ReturnPolicyID           *string                                      `json:"returnPolicyId"`
-	ReturnPolicyURI          *string                                      `json:"returnPolicyUri"`
-	ReturnReasonCategoryInfo []ReturnPolicyOnlineReturnReasonCategoryInfo `json:"returnReasonCategoryInfo"`
+	Countries                []string                                     `json:"countries,omitempty"`
+	ItemConditions           []ReturnPolicyOnlineItemConditionsEnum       `json:"itemConditions,omitempty"`
+	Label                    *string                                      `json:"label,omitempty"`
+	Name                     *string                                      `json:"name,omitempty"`
+	Policy                   *ReturnPolicyOnlinePolicy                    `json:"policy,omitempty"`
+	RestockingFee            *ReturnPolicyOnlineRestockingFee             `json:"restockingFee,omitempty"`
+	ReturnMethods            []ReturnPolicyOnlineReturnMethodsEnum        `json:"returnMethods,omitempty"`
+	ReturnPolicyID           *string                                      `json:"returnPolicyId,omitempty"`
+	ReturnPolicyURI          *string                                      `json:"returnPolicyUri,omitempty"`
+	ReturnReasonCategoryInfo []ReturnPolicyOnlineReturnReasonCategoryInfo `json:"returnReasonCategoryInfo,omitempty"`
 }

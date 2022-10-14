@@ -5,10 +5,10 @@ import (
 )
 
 type TelemetryRecord struct {
-	BackendConnectionErrors *BackendConnectionErrors `json:"BackendConnectionErrors"`
-	SegmentsReceivedCount   *int64                   `json:"SegmentsReceivedCount"`
-	SegmentsRejectedCount   *int64                   `json:"SegmentsRejectedCount"`
-	SegmentsSentCount       *int64                   `json:"SegmentsSentCount"`
-	SegmentsSpilloverCount  *int64                   `json:"SegmentsSpilloverCount"`
+	BackendConnectionErrors *BackendConnectionErrors `json:"BackendConnectionErrors,omitempty"`
+	SegmentsReceivedCount   *int64                   `json:"SegmentsReceivedCount,omitempty"`
+	SegmentsRejectedCount   *int64                   `json:"SegmentsRejectedCount,omitempty"`
+	SegmentsSentCount       *int64                   `json:"SegmentsSentCount,omitempty"`
+	SegmentsSpilloverCount  *int64                   `json:"SegmentsSpilloverCount,omitempty"`
 	Timestamp               time.Time                `json:"Timestamp"`
 }

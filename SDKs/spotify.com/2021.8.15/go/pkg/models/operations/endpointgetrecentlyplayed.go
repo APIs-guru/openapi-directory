@@ -25,12 +25,12 @@ type EndpointGetRecentlyPlayedRequest struct {
 }
 
 type EndpointGetRecentlyPlayed200ApplicationJSON struct {
-	Cursors *shared.CursorObject       `json:"cursors"`
-	Href    *string                    `json:"href"`
-	Items   []shared.PlayHistoryObject `json:"items"`
-	Limit   *int32                     `json:"limit"`
-	Next    *string                    `json:"next"`
-	Total   *int32                     `json:"total"`
+	Cursors *shared.CursorObject       `json:"cursors,omitempty"`
+	Href    *string                    `json:"href,omitempty"`
+	Items   []shared.PlayHistoryObject `json:"items,omitempty"`
+	Limit   *int32                     `json:"limit,omitempty"`
+	Next    *string                    `json:"next,omitempty"`
+	Total   *int32                     `json:"total,omitempty"`
 }
 
 type EndpointGetRecentlyPlayedResponse struct {

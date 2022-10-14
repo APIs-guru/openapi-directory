@@ -1,12 +1,12 @@
 package shared
 
 type Playlist struct {
-	ContentDetails *PlaylistContentDetails         `json:"contentDetails"`
-	Etag           *string                         `json:"etag"`
-	ID             *string                         `json:"id"`
-	Kind           *string                         `json:"kind"`
-	Localizations  map[string]PlaylistLocalization `json:"localizations"`
-	Player         *PlaylistPlayer                 `json:"player"`
-	Snippet        *PlaylistSnippet                `json:"snippet"`
-	Status         *PlaylistStatus                 `json:"status"`
+	ContentDetails *PlaylistContentDetails         `json:"contentDetails,omitempty"`
+	Etag           *string                         `json:"etag,omitempty"`
+	ID             *string                         `json:"id,omitempty"`
+	Kind           *string                         `json:"kind,omitempty"`
+	Localizations  map[string]PlaylistLocalization `json:"localizations,omitempty"`
+	Player         *PlaylistPlayer                 `json:"player,omitempty"`
+	Snippet        *PlaylistSnippet                `json:"snippet,omitempty"`
+	Status         *PlaylistStatus                 `json:"status,omitempty"`
 }

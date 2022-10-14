@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudDialogflowV2ConversationModelEvaluation struct {
-	CreateTime        *string                                   `json:"createTime"`
-	DisplayName       *string                                   `json:"displayName"`
-	EvaluationConfig  *GoogleCloudDialogflowV2EvaluationConfig  `json:"evaluationConfig"`
-	Name              *string                                   `json:"name"`
-	SmartReplyMetrics *GoogleCloudDialogflowV2SmartReplyMetrics `json:"smartReplyMetrics"`
+	CreateTime        *string                                   `json:"createTime,omitempty"`
+	DisplayName       *string                                   `json:"displayName,omitempty"`
+	EvaluationConfig  *GoogleCloudDialogflowV2EvaluationConfig  `json:"evaluationConfig,omitempty"`
+	Name              *string                                   `json:"name,omitempty"`
+	SmartReplyMetrics *GoogleCloudDialogflowV2SmartReplyMetrics `json:"smartReplyMetrics,omitempty"`
 }

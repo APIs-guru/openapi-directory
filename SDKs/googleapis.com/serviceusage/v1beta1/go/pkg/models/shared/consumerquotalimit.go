@@ -1,11 +1,11 @@
 package shared
 
 type ConsumerQuotaLimit struct {
-	AllowsAdminOverrides *bool         `json:"allowsAdminOverrides"`
-	IsPrecise            *bool         `json:"isPrecise"`
-	Metric               *string       `json:"metric"`
-	Name                 *string       `json:"name"`
-	QuotaBuckets         []QuotaBucket `json:"quotaBuckets"`
-	SupportedLocations   []string      `json:"supportedLocations"`
-	Unit                 *string       `json:"unit"`
+	AllowsAdminOverrides *bool         `json:"allowsAdminOverrides,omitempty"`
+	IsPrecise            *bool         `json:"isPrecise,omitempty"`
+	Metric               *string       `json:"metric,omitempty"`
+	Name                 *string       `json:"name,omitempty"`
+	QuotaBuckets         []QuotaBucket `json:"quotaBuckets,omitempty"`
+	SupportedLocations   []string      `json:"supportedLocations,omitempty"`
+	Unit                 *string       `json:"unit,omitempty"`
 }

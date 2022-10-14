@@ -1,5 +1,5 @@
 package shared
 
 type StartUserImportJobResponse struct {
-	UserImportJob *UserImportJobType `json:"UserImportJob"`
+	UserImportJob *UserImportJobType `json:"UserImportJob,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type PersistentDisk struct {
-	DiskSize        *Usage                   `json:"diskSize"`
-	DiskType        *string                  `json:"diskType"`
-	ProvisionedIops *Usage                   `json:"provisionedIops"`
-	Scope           *PersistentDiskScopeEnum `json:"scope"`
+	DiskSize        *Usage                   `json:"diskSize,omitempty"`
+	DiskType        *string                  `json:"diskType,omitempty"`
+	ProvisionedIops *Usage                   `json:"provisionedIops,omitempty"`
+	Scope           *PersistentDiskScopeEnum `json:"scope,omitempty"`
 }

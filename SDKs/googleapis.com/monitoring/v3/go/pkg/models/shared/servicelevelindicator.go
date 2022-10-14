@@ -1,7 +1,7 @@
 package shared
 
 type ServiceLevelIndicator struct {
-	BasicSli     *BasicSli        `json:"basicSli"`
-	RequestBased *RequestBasedSli `json:"requestBased"`
-	WindowsBased *WindowsBasedSli `json:"windowsBased"`
+	BasicSli     *BasicSli        `json:"basicSli,omitempty"`
+	RequestBased *RequestBasedSli `json:"requestBased,omitempty"`
+	WindowsBased *WindowsBasedSli `json:"windowsBased,omitempty"`
 }

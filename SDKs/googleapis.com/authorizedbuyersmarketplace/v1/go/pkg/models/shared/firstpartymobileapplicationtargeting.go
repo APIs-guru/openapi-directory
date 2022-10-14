@@ -1,6 +1,6 @@
 package shared
 
 type FirstPartyMobileApplicationTargeting struct {
-	ExcludedAppIds []string `json:"excludedAppIds"`
-	TargetedAppIds []string `json:"targetedAppIds"`
+	ExcludedAppIds []string `json:"excludedAppIds,omitempty"`
+	TargetedAppIds []string `json:"targetedAppIds,omitempty"`
 }

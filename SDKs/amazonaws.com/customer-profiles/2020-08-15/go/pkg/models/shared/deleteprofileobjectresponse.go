@@ -1,5 +1,5 @@
 package shared
 
 type DeleteProfileObjectResponse struct {
-	Message *string `json:"Message"`
+	Message *string `json:"Message,omitempty"`
 }

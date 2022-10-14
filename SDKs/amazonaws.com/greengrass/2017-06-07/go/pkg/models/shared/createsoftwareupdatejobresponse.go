@@ -1,7 +1,7 @@
 package shared
 
 type CreateSoftwareUpdateJobResponse struct {
-	IotJobArn               *string `json:"IotJobArn"`
-	IotJobID                *string `json:"IotJobId"`
-	PlatformSoftwareVersion *string `json:"PlatformSoftwareVersion"`
+	IotJobArn               *string `json:"IotJobArn,omitempty"`
+	IotJobID                *string `json:"IotJobId,omitempty"`
+	PlatformSoftwareVersion *string `json:"PlatformSoftwareVersion,omitempty"`
 }

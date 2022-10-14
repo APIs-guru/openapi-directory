@@ -1,8 +1,8 @@
 package shared
 
 type AccountBusinessInformation struct {
-	Address                          *AccountAddress         `json:"address"`
-	CustomerService                  *AccountCustomerService `json:"customerService"`
-	KoreanBusinessRegistrationNumber *string                 `json:"koreanBusinessRegistrationNumber"`
-	PhoneNumber                      *string                 `json:"phoneNumber"`
+	Address                          *AccountAddress         `json:"address,omitempty"`
+	CustomerService                  *AccountCustomerService `json:"customerService,omitempty"`
+	KoreanBusinessRegistrationNumber *string                 `json:"koreanBusinessRegistrationNumber,omitempty"`
+	PhoneNumber                      *string                 `json:"phoneNumber,omitempty"`
 }

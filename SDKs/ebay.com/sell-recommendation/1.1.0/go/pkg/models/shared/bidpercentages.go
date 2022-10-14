@@ -1,6 +1,6 @@
 package shared
 
 type BidPercentages struct {
-	Basis *string `json:"basis"`
-	Value *string `json:"value"`
+	Basis *string `json:"basis,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

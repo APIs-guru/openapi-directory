@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudRetailV2betaSearchRequestDynamicFacetSpec struct {
-	Mode *GoogleCloudRetailV2betaSearchRequestDynamicFacetSpecModeEnum `json:"mode"`
+	Mode *GoogleCloudRetailV2betaSearchRequestDynamicFacetSpecModeEnum `json:"mode,omitempty"`
 }

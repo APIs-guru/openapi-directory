@@ -9,11 +9,11 @@ const (
 )
 
 type AuthorizationPolicy struct {
-	Action      *AuthorizationPolicyActionEnum `json:"action"`
-	CreateTime  *string                        `json:"createTime"`
-	Description *string                        `json:"description"`
-	Labels      map[string]string              `json:"labels"`
-	Name        *string                        `json:"name"`
-	Rules       []Rule                         `json:"rules"`
-	UpdateTime  *string                        `json:"updateTime"`
+	Action      *AuthorizationPolicyActionEnum `json:"action,omitempty"`
+	CreateTime  *string                        `json:"createTime,omitempty"`
+	Description *string                        `json:"description,omitempty"`
+	Labels      map[string]string              `json:"labels,omitempty"`
+	Name        *string                        `json:"name,omitempty"`
+	Rules       []Rule                         `json:"rules,omitempty"`
+	UpdateTime  *string                        `json:"updateTime,omitempty"`
 }

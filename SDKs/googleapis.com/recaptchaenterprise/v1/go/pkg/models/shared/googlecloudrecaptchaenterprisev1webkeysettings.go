@@ -19,9 +19,9 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1WebKeySettings struct {
-	AllowAllDomains             *bool                                                                          `json:"allowAllDomains"`
-	AllowAmpTraffic             *bool                                                                          `json:"allowAmpTraffic"`
-	AllowedDomains              []string                                                                       `json:"allowedDomains"`
-	ChallengeSecurityPreference *GoogleCloudRecaptchaenterpriseV1WebKeySettingsChallengeSecurityPreferenceEnum `json:"challengeSecurityPreference"`
-	IntegrationType             *GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum             `json:"integrationType"`
+	AllowAllDomains             *bool                                                                          `json:"allowAllDomains,omitempty"`
+	AllowAmpTraffic             *bool                                                                          `json:"allowAmpTraffic,omitempty"`
+	AllowedDomains              []string                                                                       `json:"allowedDomains,omitempty"`
+	ChallengeSecurityPreference *GoogleCloudRecaptchaenterpriseV1WebKeySettingsChallengeSecurityPreferenceEnum `json:"challengeSecurityPreference,omitempty"`
+	IntegrationType             *GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum             `json:"integrationType,omitempty"`
 }

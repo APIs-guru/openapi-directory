@@ -1,7 +1,7 @@
 package shared
 
 type UpdateSectionStyleRequest struct {
-	Fields       *string       `json:"fields"`
-	Range        *Range        `json:"range"`
-	SectionStyle *SectionStyle `json:"sectionStyle"`
+	Fields       *string       `json:"fields,omitempty"`
+	Range        *Range        `json:"range,omitempty"`
+	SectionStyle *SectionStyle `json:"sectionStyle,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type DeploymentJob struct {
-	Arn                          *string                       `json:"arn"`
-	CreatedAt                    *time.Time                    `json:"createdAt"`
-	DeploymentApplicationConfigs []DeploymentApplicationConfig `json:"deploymentApplicationConfigs"`
-	DeploymentConfig             *DeploymentConfig             `json:"deploymentConfig"`
-	FailureCode                  *DeploymentJobErrorCodeEnum   `json:"failureCode"`
-	FailureReason                *string                       `json:"failureReason"`
-	Fleet                        *string                       `json:"fleet"`
-	Status                       *DeploymentStatusEnum         `json:"status"`
+	Arn                          *string                       `json:"arn,omitempty"`
+	CreatedAt                    *time.Time                    `json:"createdAt,omitempty"`
+	DeploymentApplicationConfigs []DeploymentApplicationConfig `json:"deploymentApplicationConfigs,omitempty"`
+	DeploymentConfig             *DeploymentConfig             `json:"deploymentConfig,omitempty"`
+	FailureCode                  *DeploymentJobErrorCodeEnum   `json:"failureCode,omitempty"`
+	FailureReason                *string                       `json:"failureReason,omitempty"`
+	Fleet                        *string                       `json:"fleet,omitempty"`
+	Status                       *DeploymentStatusEnum         `json:"status,omitempty"`
 }

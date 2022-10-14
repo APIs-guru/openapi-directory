@@ -79,8 +79,8 @@ const (
 
 type WritableInterfaceTemplate struct {
 	DeviceType int64                                 `json:"device_type"`
-	ID         *int64                                `json:"id"`
-	MgmtOnly   *bool                                 `json:"mgmt_only"`
+	ID         *int64                                `json:"id,omitempty"`
+	MgmtOnly   *bool                                 `json:"mgmt_only,omitempty"`
 	Name       string                                `json:"name"`
 	Type       WritableInterfaceTemplateTypeTypeEnum `json:"type"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type APIV2010AccountCallPayments struct {
-	AccountSid  *string `json:"account_sid"`
-	CallSid     *string `json:"call_sid"`
-	DateCreated *string `json:"date_created"`
-	DateUpdated *string `json:"date_updated"`
-	Sid         *string `json:"sid"`
-	URI         *string `json:"uri"`
+	AccountSid  *string `json:"account_sid,omitempty"`
+	CallSid     *string `json:"call_sid,omitempty"`
+	DateCreated *string `json:"date_created,omitempty"`
+	DateUpdated *string `json:"date_updated,omitempty"`
+	Sid         *string `json:"sid,omitempty"`
+	URI         *string `json:"uri,omitempty"`
 }

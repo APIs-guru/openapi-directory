@@ -1,5 +1,5 @@
 package shared
 
 type CreateServerResponse struct {
-	Server *Server `json:"Server"`
+	Server *Server `json:"Server,omitempty"`
 }

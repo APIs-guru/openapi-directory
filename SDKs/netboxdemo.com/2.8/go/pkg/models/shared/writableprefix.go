@@ -14,19 +14,19 @@ const (
 )
 
 type WritablePrefix struct {
-	Created      *time.Time                      `json:"created"`
-	CustomFields map[string]interface{}          `json:"custom_fields"`
-	Description  *string                         `json:"description"`
-	Family       *string                         `json:"family"`
-	ID           *int64                          `json:"id"`
-	IsPool       *bool                           `json:"is_pool"`
-	LastUpdated  *time.Time                      `json:"last_updated"`
+	Created      *time.Time                      `json:"created,omitempty"`
+	CustomFields map[string]interface{}          `json:"custom_fields,omitempty"`
+	Description  *string                         `json:"description,omitempty"`
+	Family       *string                         `json:"family,omitempty"`
+	ID           *int64                          `json:"id,omitempty"`
+	IsPool       *bool                           `json:"is_pool,omitempty"`
+	LastUpdated  *time.Time                      `json:"last_updated,omitempty"`
 	Prefix       string                          `json:"prefix"`
-	Role         *int64                          `json:"role"`
-	Site         *int64                          `json:"site"`
-	Status       *WritablePrefixStatusStatusEnum `json:"status"`
-	Tags         []string                        `json:"tags"`
-	Tenant       *int64                          `json:"tenant"`
-	Vlan         *int64                          `json:"vlan"`
-	Vrf          *int64                          `json:"vrf"`
+	Role         *int64                          `json:"role,omitempty"`
+	Site         *int64                          `json:"site,omitempty"`
+	Status       *WritablePrefixStatusStatusEnum `json:"status,omitempty"`
+	Tags         []string                        `json:"tags,omitempty"`
+	Tenant       *int64                          `json:"tenant,omitempty"`
+	Vlan         *int64                          `json:"vlan,omitempty"`
+	Vrf          *int64                          `json:"vrf,omitempty"`
 }

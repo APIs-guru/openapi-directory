@@ -1,10 +1,10 @@
 package shared
 
 type VolumeConfiguration struct {
-	VolumeBaselineIops       *int64  `json:"volumeBaselineIOPS"`
-	VolumeBaselineThroughput *int64  `json:"volumeBaselineThroughput"`
-	VolumeBurstIops          *int64  `json:"volumeBurstIOPS"`
-	VolumeBurstThroughput    *int64  `json:"volumeBurstThroughput"`
-	VolumeSize               *int64  `json:"volumeSize"`
-	VolumeType               *string `json:"volumeType"`
+	VolumeBaselineIops       *int64  `json:"volumeBaselineIOPS,omitempty"`
+	VolumeBaselineThroughput *int64  `json:"volumeBaselineThroughput,omitempty"`
+	VolumeBurstIops          *int64  `json:"volumeBurstIOPS,omitempty"`
+	VolumeBurstThroughput    *int64  `json:"volumeBurstThroughput,omitempty"`
+	VolumeSize               *int64  `json:"volumeSize,omitempty"`
+	VolumeType               *string `json:"volumeType,omitempty"`
 }

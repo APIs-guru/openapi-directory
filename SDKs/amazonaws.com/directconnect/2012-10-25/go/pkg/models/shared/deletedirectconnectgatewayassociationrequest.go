@@ -1,7 +1,7 @@
 package shared
 
 type DeleteDirectConnectGatewayAssociationRequest struct {
-	AssociationID          *string `json:"associationId"`
-	DirectConnectGatewayID *string `json:"directConnectGatewayId"`
-	VirtualGatewayID       *string `json:"virtualGatewayId"`
+	AssociationID          *string `json:"associationId,omitempty"`
+	DirectConnectGatewayID *string `json:"directConnectGatewayId,omitempty"`
+	VirtualGatewayID       *string `json:"virtualGatewayId,omitempty"`
 }

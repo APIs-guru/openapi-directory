@@ -5,10 +5,10 @@ import (
 )
 
 type CampaignSummary struct {
-	CampaignArn         *string    `json:"campaignArn"`
-	CreationDateTime    *time.Time `json:"creationDateTime"`
-	FailureReason       *string    `json:"failureReason"`
-	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime"`
-	Name                *string    `json:"name"`
-	Status              *string    `json:"status"`
+	CampaignArn         *string    `json:"campaignArn,omitempty"`
+	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
+	FailureReason       *string    `json:"failureReason,omitempty"`
+	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	Name                *string    `json:"name,omitempty"`
+	Status              *string    `json:"status,omitempty"`
 }

@@ -30,8 +30,8 @@ type ReposUpdateInformationAboutPagesSiteRequestBodySource2 struct {
 }
 
 type ReposUpdateInformationAboutPagesSiteRequestBody struct {
-	Cname  *string     `json:"cname"`
-	Public *bool       `json:"public"`
+	Cname  *string     `json:"cname,omitempty"`
+	Public *bool       `json:"public,omitempty"`
 	Source interface{} `json:"source"`
 }
 

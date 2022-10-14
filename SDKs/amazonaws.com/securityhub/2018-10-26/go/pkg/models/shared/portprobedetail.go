@@ -1,7 +1,7 @@
 package shared
 
 type PortProbeDetail struct {
-	LocalIPDetails   *ActionLocalIPDetails   `json:"LocalIpDetails"`
-	LocalPortDetails *ActionLocalPortDetails `json:"LocalPortDetails"`
-	RemoteIPDetails  *ActionRemoteIPDetails  `json:"RemoteIpDetails"`
+	LocalIPDetails   *ActionLocalIPDetails   `json:"LocalIpDetails,omitempty"`
+	LocalPortDetails *ActionLocalPortDetails `json:"LocalPortDetails,omitempty"`
+	RemoteIPDetails  *ActionRemoteIPDetails  `json:"RemoteIpDetails,omitempty"`
 }

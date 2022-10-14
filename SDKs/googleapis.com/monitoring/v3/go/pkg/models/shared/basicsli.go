@@ -1,9 +1,9 @@
 package shared
 
 type BasicSli struct {
-	Availability map[string]interface{} `json:"availability"`
-	Latency      *LatencyCriteria       `json:"latency"`
-	Location     []string               `json:"location"`
-	Method       []string               `json:"method"`
-	Version      []string               `json:"version"`
+	Availability map[string]interface{} `json:"availability,omitempty"`
+	Latency      *LatencyCriteria       `json:"latency,omitempty"`
+	Location     []string               `json:"location,omitempty"`
+	Method       []string               `json:"method,omitempty"`
+	Version      []string               `json:"version,omitempty"`
 }

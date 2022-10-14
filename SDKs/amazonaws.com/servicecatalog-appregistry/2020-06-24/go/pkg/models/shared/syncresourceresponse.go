@@ -1,7 +1,7 @@
 package shared
 
 type SyncResourceResponse struct {
-	ActionTaken    *SyncActionEnum `json:"actionTaken"`
-	ApplicationArn *string         `json:"applicationArn"`
-	ResourceArn    *string         `json:"resourceArn"`
+	ActionTaken    *SyncActionEnum `json:"actionTaken,omitempty"`
+	ApplicationArn *string         `json:"applicationArn,omitempty"`
+	ResourceArn    *string         `json:"resourceArn,omitempty"`
 }

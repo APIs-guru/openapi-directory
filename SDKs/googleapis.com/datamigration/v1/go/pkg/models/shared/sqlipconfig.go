@@ -1,8 +1,8 @@
 package shared
 
 type SQLIPConfig struct {
-	AuthorizedNetworks []SQLACLEntry `json:"authorizedNetworks"`
-	EnableIpv4         *bool         `json:"enableIpv4"`
-	PrivateNetwork     *string       `json:"privateNetwork"`
-	RequireSsl         *bool         `json:"requireSsl"`
+	AuthorizedNetworks []SQLACLEntry `json:"authorizedNetworks,omitempty"`
+	EnableIpv4         *bool         `json:"enableIpv4,omitempty"`
+	PrivateNetwork     *string       `json:"privateNetwork,omitempty"`
+	RequireSsl         *bool         `json:"requireSsl,omitempty"`
 }

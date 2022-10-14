@@ -1,6 +1,6 @@
 package shared
 
 type GroupObjectsRequest struct {
-	ChildrenObjectIds []string `json:"childrenObjectIds"`
-	GroupObjectID     *string  `json:"groupObjectId"`
+	ChildrenObjectIds []string `json:"childrenObjectIds,omitempty"`
+	GroupObjectID     *string  `json:"groupObjectId,omitempty"`
 }

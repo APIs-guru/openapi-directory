@@ -20,8 +20,8 @@ type StartDeploymentHeaders struct {
 }
 
 type StartDeploymentRequestBody struct {
-	JobID     *string `json:"jobId"`
-	SourceURL *string `json:"sourceUrl"`
+	JobID     *string `json:"jobId,omitempty"`
+	SourceURL *string `json:"sourceUrl,omitempty"`
 }
 
 type StartDeploymentRequest struct {

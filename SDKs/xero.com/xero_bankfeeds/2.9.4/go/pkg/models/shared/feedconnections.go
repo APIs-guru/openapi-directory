@@ -1,6 +1,6 @@
 package shared
 
 type FeedConnections struct {
-	Items      []FeedConnection `json:"items"`
-	Pagination *Pagination      `json:"pagination"`
+	Items      []FeedConnection `json:"items,omitempty"`
+	Pagination *Pagination      `json:"pagination,omitempty"`
 }

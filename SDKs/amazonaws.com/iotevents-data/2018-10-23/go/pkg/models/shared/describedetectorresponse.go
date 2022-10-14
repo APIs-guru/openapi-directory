@@ -1,5 +1,5 @@
 package shared
 
 type DescribeDetectorResponse struct {
-	Detector *Detector `json:"detector"`
+	Detector *Detector `json:"detector,omitempty"`
 }

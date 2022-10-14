@@ -1,5 +1,5 @@
 package shared
 
 type DescribeNotebookExecutionOutput struct {
-	NotebookExecution *NotebookExecution `json:"NotebookExecution"`
+	NotebookExecution *NotebookExecution `json:"NotebookExecution,omitempty"`
 }

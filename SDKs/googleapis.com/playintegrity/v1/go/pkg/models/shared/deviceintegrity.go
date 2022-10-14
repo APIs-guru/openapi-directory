@@ -11,5 +11,5 @@ const (
 )
 
 type DeviceIntegrity struct {
-	DeviceRecognitionVerdict []DeviceIntegrityDeviceRecognitionVerdictEnum `json:"deviceRecognitionVerdict"`
+	DeviceRecognitionVerdict []DeviceIntegrityDeviceRecognitionVerdictEnum `json:"deviceRecognitionVerdict,omitempty"`
 }

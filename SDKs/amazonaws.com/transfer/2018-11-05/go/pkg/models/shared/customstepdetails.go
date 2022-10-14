@@ -1,7 +1,7 @@
 package shared
 
 type CustomStepDetails struct {
-	Name           *string `json:"Name"`
-	Target         *string `json:"Target"`
-	TimeoutSeconds *int64  `json:"TimeoutSeconds"`
+	Name           *string `json:"Name,omitempty"`
+	Target         *string `json:"Target,omitempty"`
+	TimeoutSeconds *int64  `json:"TimeoutSeconds,omitempty"`
 }

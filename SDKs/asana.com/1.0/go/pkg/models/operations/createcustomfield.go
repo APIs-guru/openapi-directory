@@ -12,7 +12,7 @@ type CreateCustomFieldQueryParams struct {
 }
 
 type CreateCustomFieldRequestBody struct {
-	Data *shared.CustomFieldRequest `json:"data"`
+	Data *shared.CustomFieldRequest `json:"data,omitempty"`
 }
 
 type CreateCustomFieldRequest struct {
@@ -21,7 +21,7 @@ type CreateCustomFieldRequest struct {
 }
 
 type CreateCustomField201ApplicationJSON struct {
-	Data *shared.CustomFieldResponse `json:"data"`
+	Data *shared.CustomFieldResponse `json:"data,omitempty"`
 }
 
 type CreateCustomFieldResponse struct {

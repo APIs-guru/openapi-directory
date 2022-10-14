@@ -11,5 +11,5 @@ const (
 )
 
 type EventStatus struct {
-	Code *EventStatusCodeEnum `json:"code"`
+	Code *EventStatusCodeEnum `json:"code,omitempty"`
 }

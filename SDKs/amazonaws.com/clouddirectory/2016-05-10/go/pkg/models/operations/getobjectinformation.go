@@ -24,7 +24,7 @@ type GetObjectInformationHeaders struct {
 }
 
 type GetObjectInformationRequestBodyObjectReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type GetObjectInformationRequestBody struct {

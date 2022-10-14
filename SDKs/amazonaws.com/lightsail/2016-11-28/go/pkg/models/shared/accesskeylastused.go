@@ -5,7 +5,7 @@ import (
 )
 
 type AccessKeyLastUsed struct {
-	LastUsedDate *time.Time `json:"lastUsedDate"`
-	Region       *string    `json:"region"`
-	ServiceName  *string    `json:"serviceName"`
+	LastUsedDate *time.Time `json:"lastUsedDate,omitempty"`
+	Region       *string    `json:"region,omitempty"`
+	ServiceName  *string    `json:"serviceName,omitempty"`
 }

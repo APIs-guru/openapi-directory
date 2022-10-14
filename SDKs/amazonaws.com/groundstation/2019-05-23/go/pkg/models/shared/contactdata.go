@@ -5,17 +5,17 @@ import (
 )
 
 type ContactData struct {
-	ContactID         *string            `json:"contactId"`
-	ContactStatus     *ContactStatusEnum `json:"contactStatus"`
-	EndTime           *time.Time         `json:"endTime"`
-	ErrorMessage      *string            `json:"errorMessage"`
-	GroundStation     *string            `json:"groundStation"`
-	MaximumElevation  *Elevation         `json:"maximumElevation"`
-	MissionProfileArn *string            `json:"missionProfileArn"`
-	PostPassEndTime   *time.Time         `json:"postPassEndTime"`
-	PrePassStartTime  *time.Time         `json:"prePassStartTime"`
-	Region            *string            `json:"region"`
-	SatelliteArn      *string            `json:"satelliteArn"`
-	StartTime         *time.Time         `json:"startTime"`
-	Tags              map[string]string  `json:"tags"`
+	ContactID         *string            `json:"contactId,omitempty"`
+	ContactStatus     *ContactStatusEnum `json:"contactStatus,omitempty"`
+	EndTime           *time.Time         `json:"endTime,omitempty"`
+	ErrorMessage      *string            `json:"errorMessage,omitempty"`
+	GroundStation     *string            `json:"groundStation,omitempty"`
+	MaximumElevation  *Elevation         `json:"maximumElevation,omitempty"`
+	MissionProfileArn *string            `json:"missionProfileArn,omitempty"`
+	PostPassEndTime   *time.Time         `json:"postPassEndTime,omitempty"`
+	PrePassStartTime  *time.Time         `json:"prePassStartTime,omitempty"`
+	Region            *string            `json:"region,omitempty"`
+	SatelliteArn      *string            `json:"satelliteArn,omitempty"`
+	StartTime         *time.Time         `json:"startTime,omitempty"`
+	Tags              map[string]string  `json:"tags,omitempty"`
 }

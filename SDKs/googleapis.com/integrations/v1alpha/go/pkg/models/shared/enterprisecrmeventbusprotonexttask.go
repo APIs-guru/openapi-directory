@@ -1,10 +1,10 @@
 package shared
 
 type EnterpriseCrmEventbusProtoNextTask struct {
-	CombinedConditions []EnterpriseCrmEventbusProtoCombinedCondition `json:"combinedConditions"`
-	Condition          *string                                       `json:"condition"`
-	Description        *string                                       `json:"description"`
-	Label              *string                                       `json:"label"`
-	TaskConfigID       *string                                       `json:"taskConfigId"`
-	TaskNumber         *string                                       `json:"taskNumber"`
+	CombinedConditions []EnterpriseCrmEventbusProtoCombinedCondition `json:"combinedConditions,omitempty"`
+	Condition          *string                                       `json:"condition,omitempty"`
+	Description        *string                                       `json:"description,omitempty"`
+	Label              *string                                       `json:"label,omitempty"`
+	TaskConfigID       *string                                       `json:"taskConfigId,omitempty"`
+	TaskNumber         *string                                       `json:"taskNumber,omitempty"`
 }

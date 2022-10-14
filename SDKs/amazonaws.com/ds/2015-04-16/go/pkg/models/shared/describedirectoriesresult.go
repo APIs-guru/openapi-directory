@@ -1,6 +1,6 @@
 package shared
 
 type DescribeDirectoriesResult struct {
-	DirectoryDescriptions []DirectoryDescription `json:"DirectoryDescriptions"`
-	NextToken             *string                `json:"NextToken"`
+	DirectoryDescriptions []DirectoryDescription `json:"DirectoryDescriptions,omitempty"`
+	NextToken             *string                `json:"NextToken,omitempty"`
 }

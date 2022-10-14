@@ -12,12 +12,12 @@ const (
 )
 
 type UpdateNetworkWirelessBluetoothSettingsRequestBody struct {
-	AdvertisingEnabled       *bool                                                                          `json:"advertisingEnabled"`
-	Major                    *int64                                                                         `json:"major"`
-	MajorMinorAssignmentMode *UpdateNetworkWirelessBluetoothSettingsRequestBodyMajorMinorAssignmentModeEnum `json:"majorMinorAssignmentMode"`
-	Minor                    *int64                                                                         `json:"minor"`
-	ScanningEnabled          *bool                                                                          `json:"scanningEnabled"`
-	UUID                     *string                                                                        `json:"uuid"`
+	AdvertisingEnabled       *bool                                                                          `json:"advertisingEnabled,omitempty"`
+	Major                    *int64                                                                         `json:"major,omitempty"`
+	MajorMinorAssignmentMode *UpdateNetworkWirelessBluetoothSettingsRequestBodyMajorMinorAssignmentModeEnum `json:"majorMinorAssignmentMode,omitempty"`
+	Minor                    *int64                                                                         `json:"minor,omitempty"`
+	ScanningEnabled          *bool                                                                          `json:"scanningEnabled,omitempty"`
+	UUID                     *string                                                                        `json:"uuid,omitempty"`
 }
 
 type UpdateNetworkWirelessBluetoothSettingsRequest struct {

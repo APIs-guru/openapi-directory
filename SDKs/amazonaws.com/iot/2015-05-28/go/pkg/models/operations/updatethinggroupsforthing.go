@@ -11,10 +11,10 @@ type UpdateThingGroupsForThingHeaders struct {
 }
 
 type UpdateThingGroupsForThingRequestBody struct {
-	OverrideDynamicGroups *bool    `json:"overrideDynamicGroups"`
-	ThingGroupsToAdd      []string `json:"thingGroupsToAdd"`
-	ThingGroupsToRemove   []string `json:"thingGroupsToRemove"`
-	ThingName             *string  `json:"thingName"`
+	OverrideDynamicGroups *bool    `json:"overrideDynamicGroups,omitempty"`
+	ThingGroupsToAdd      []string `json:"thingGroupsToAdd,omitempty"`
+	ThingGroupsToRemove   []string `json:"thingGroupsToRemove,omitempty"`
+	ThingName             *string  `json:"thingName,omitempty"`
 }
 
 type UpdateThingGroupsForThingRequest struct {

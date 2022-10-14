@@ -34,15 +34,15 @@ const (
 )
 
 type QueryMetadata struct {
-	DataRange                             *QueryMetadataDataRangeEnum `json:"dataRange"`
-	Format                                *QueryMetadataFormatEnum    `json:"format"`
-	GoogleCloudStoragePathForLatestReport *string                     `json:"googleCloudStoragePathForLatestReport"`
-	GoogleDrivePathForLatestReport        *string                     `json:"googleDrivePathForLatestReport"`
-	LatestReportRunTimeMs                 *string                     `json:"latestReportRunTimeMs"`
-	Locale                                *string                     `json:"locale"`
-	ReportCount                           *int32                      `json:"reportCount"`
-	Running                               *bool                       `json:"running"`
-	SendNotification                      *bool                       `json:"sendNotification"`
-	ShareEmailAddress                     []string                    `json:"shareEmailAddress"`
-	Title                                 *string                     `json:"title"`
+	DataRange                             *QueryMetadataDataRangeEnum `json:"dataRange,omitempty"`
+	Format                                *QueryMetadataFormatEnum    `json:"format,omitempty"`
+	GoogleCloudStoragePathForLatestReport *string                     `json:"googleCloudStoragePathForLatestReport,omitempty"`
+	GoogleDrivePathForLatestReport        *string                     `json:"googleDrivePathForLatestReport,omitempty"`
+	LatestReportRunTimeMs                 *string                     `json:"latestReportRunTimeMs,omitempty"`
+	Locale                                *string                     `json:"locale,omitempty"`
+	ReportCount                           *int32                      `json:"reportCount,omitempty"`
+	Running                               *bool                       `json:"running,omitempty"`
+	SendNotification                      *bool                       `json:"sendNotification,omitempty"`
+	ShareEmailAddress                     []string                    `json:"shareEmailAddress,omitempty"`
+	Title                                 *string                     `json:"title,omitempty"`
 }

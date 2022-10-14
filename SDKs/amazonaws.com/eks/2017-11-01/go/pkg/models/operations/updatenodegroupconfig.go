@@ -20,32 +20,32 @@ type UpdateNodegroupConfigHeaders struct {
 }
 
 type UpdateNodegroupConfigRequestBodyLabels struct {
-	AddOrUpdateLabels map[string]string `json:"addOrUpdateLabels"`
-	RemoveLabels      []string          `json:"removeLabels"`
+	AddOrUpdateLabels map[string]string `json:"addOrUpdateLabels,omitempty"`
+	RemoveLabels      []string          `json:"removeLabels,omitempty"`
 }
 
 type UpdateNodegroupConfigRequestBodyScalingConfig struct {
-	DesiredSize *int64 `json:"desiredSize"`
-	MaxSize     *int64 `json:"maxSize"`
-	MinSize     *int64 `json:"minSize"`
+	DesiredSize *int64 `json:"desiredSize,omitempty"`
+	MaxSize     *int64 `json:"maxSize,omitempty"`
+	MinSize     *int64 `json:"minSize,omitempty"`
 }
 
 type UpdateNodegroupConfigRequestBodyTaints struct {
-	AddOrUpdateTaints []shared.Taint `json:"addOrUpdateTaints"`
-	RemoveTaints      []shared.Taint `json:"removeTaints"`
+	AddOrUpdateTaints []shared.Taint `json:"addOrUpdateTaints,omitempty"`
+	RemoveTaints      []shared.Taint `json:"removeTaints,omitempty"`
 }
 
 type UpdateNodegroupConfigRequestBodyUpdateConfig struct {
-	MaxUnavailable           *int64 `json:"maxUnavailable"`
-	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage"`
+	MaxUnavailable           *int64 `json:"maxUnavailable,omitempty"`
+	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage,omitempty"`
 }
 
 type UpdateNodegroupConfigRequestBody struct {
-	ClientRequestToken *string                                        `json:"clientRequestToken"`
-	Labels             *UpdateNodegroupConfigRequestBodyLabels        `json:"labels"`
-	ScalingConfig      *UpdateNodegroupConfigRequestBodyScalingConfig `json:"scalingConfig"`
-	Taints             *UpdateNodegroupConfigRequestBodyTaints        `json:"taints"`
-	UpdateConfig       *UpdateNodegroupConfigRequestBodyUpdateConfig  `json:"updateConfig"`
+	ClientRequestToken *string                                        `json:"clientRequestToken,omitempty"`
+	Labels             *UpdateNodegroupConfigRequestBodyLabels        `json:"labels,omitempty"`
+	ScalingConfig      *UpdateNodegroupConfigRequestBodyScalingConfig `json:"scalingConfig,omitempty"`
+	Taints             *UpdateNodegroupConfigRequestBodyTaints        `json:"taints,omitempty"`
+	UpdateConfig       *UpdateNodegroupConfigRequestBodyUpdateConfig  `json:"updateConfig,omitempty"`
 }
 
 type UpdateNodegroupConfigRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeUpdateResponse struct {
-	Update *Update `json:"update"`
+	Update *Update `json:"update,omitempty"`
 }

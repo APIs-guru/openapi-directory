@@ -1,5 +1,5 @@
 package shared
 
 type CreateEntityRecognizerResponse struct {
-	EntityRecognizerArn *string `json:"EntityRecognizerArn"`
+	EntityRecognizerArn *string `json:"EntityRecognizerArn,omitempty"`
 }

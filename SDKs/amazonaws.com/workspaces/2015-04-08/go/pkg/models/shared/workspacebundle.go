@@ -5,14 +5,14 @@ import (
 )
 
 type WorkspaceBundle struct {
-	BundleID        *string      `json:"BundleId"`
-	ComputeType     *ComputeType `json:"ComputeType"`
-	CreationTime    *time.Time   `json:"CreationTime"`
-	Description     *string      `json:"Description"`
-	ImageID         *string      `json:"ImageId"`
-	LastUpdatedTime *time.Time   `json:"LastUpdatedTime"`
-	Name            *string      `json:"Name"`
-	Owner           *string      `json:"Owner"`
-	RootStorage     *RootStorage `json:"RootStorage"`
-	UserStorage     *UserStorage `json:"UserStorage"`
+	BundleID        *string      `json:"BundleId,omitempty"`
+	ComputeType     *ComputeType `json:"ComputeType,omitempty"`
+	CreationTime    *time.Time   `json:"CreationTime,omitempty"`
+	Description     *string      `json:"Description,omitempty"`
+	ImageID         *string      `json:"ImageId,omitempty"`
+	LastUpdatedTime *time.Time   `json:"LastUpdatedTime,omitempty"`
+	Name            *string      `json:"Name,omitempty"`
+	Owner           *string      `json:"Owner,omitempty"`
+	RootStorage     *RootStorage `json:"RootStorage,omitempty"`
+	UserStorage     *UserStorage `json:"UserStorage,omitempty"`
 }

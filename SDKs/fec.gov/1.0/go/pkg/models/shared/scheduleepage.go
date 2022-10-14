@@ -1,6 +1,6 @@
 package shared
 
 type ScheduleEPage struct {
-	Pagination *SeekInfo   `json:"pagination"`
-	Results    []ScheduleE `json:"results"`
+	Pagination *SeekInfo   `json:"pagination,omitempty"`
+	Results    []ScheduleE `json:"results,omitempty"`
 }

@@ -17,17 +17,17 @@ const (
 )
 
 type InAppProduct struct {
-	DefaultLanguage                          *string                                 `json:"defaultLanguage"`
-	DefaultPrice                             *Price                                  `json:"defaultPrice"`
-	GracePeriod                              *string                                 `json:"gracePeriod"`
-	Listings                                 map[string]InAppProductListing          `json:"listings"`
-	ManagedProductTaxesAndComplianceSettings *ManagedProductTaxAndComplianceSettings `json:"managedProductTaxesAndComplianceSettings"`
-	PackageName                              *string                                 `json:"packageName"`
-	Prices                                   map[string]Price                        `json:"prices"`
-	PurchaseType                             *InAppProductPurchaseTypeEnum           `json:"purchaseType"`
-	Sku                                      *string                                 `json:"sku"`
-	Status                                   *InAppProductStatusEnum                 `json:"status"`
-	SubscriptionPeriod                       *string                                 `json:"subscriptionPeriod"`
-	SubscriptionTaxesAndComplianceSettings   *SubscriptionTaxAndComplianceSettings   `json:"subscriptionTaxesAndComplianceSettings"`
-	TrialPeriod                              *string                                 `json:"trialPeriod"`
+	DefaultLanguage                          *string                                 `json:"defaultLanguage,omitempty"`
+	DefaultPrice                             *Price                                  `json:"defaultPrice,omitempty"`
+	GracePeriod                              *string                                 `json:"gracePeriod,omitempty"`
+	Listings                                 map[string]InAppProductListing          `json:"listings,omitempty"`
+	ManagedProductTaxesAndComplianceSettings *ManagedProductTaxAndComplianceSettings `json:"managedProductTaxesAndComplianceSettings,omitempty"`
+	PackageName                              *string                                 `json:"packageName,omitempty"`
+	Prices                                   map[string]Price                        `json:"prices,omitempty"`
+	PurchaseType                             *InAppProductPurchaseTypeEnum           `json:"purchaseType,omitempty"`
+	Sku                                      *string                                 `json:"sku,omitempty"`
+	Status                                   *InAppProductStatusEnum                 `json:"status,omitempty"`
+	SubscriptionPeriod                       *string                                 `json:"subscriptionPeriod,omitempty"`
+	SubscriptionTaxesAndComplianceSettings   *SubscriptionTaxAndComplianceSettings   `json:"subscriptionTaxesAndComplianceSettings,omitempty"`
+	TrialPeriod                              *string                                 `json:"trialPeriod,omitempty"`
 }

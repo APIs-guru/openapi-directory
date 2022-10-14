@@ -13,40 +13,40 @@ type NewsRequest struct {
 }
 
 type News200ApplicationJSONEntries struct {
-	Guidislink      *string `json:"guidislink"`
-	ID              *string `json:"id"`
-	Link            *string `json:"link"`
-	Links           *string `json:"links"`
-	Published       *string `json:"published"`
-	PublishedParsed *string `json:"published_parsed"`
-	Source          *string `json:"source"`
-	SubArticles     *string `json:"sub_articles"`
-	Summary         *string `json:"summary"`
-	SummaryDetail   *string `json:"summary_detail"`
-	Title           *string `json:"title"`
-	TitleDetail     *string `json:"title_detail"`
+	Guidislink      *string `json:"guidislink,omitempty"`
+	ID              *string `json:"id,omitempty"`
+	Link            *string `json:"link,omitempty"`
+	Links           *string `json:"links,omitempty"`
+	Published       *string `json:"published,omitempty"`
+	PublishedParsed *string `json:"published_parsed,omitempty"`
+	Source          *string `json:"source,omitempty"`
+	SubArticles     *string `json:"sub_articles,omitempty"`
+	Summary         *string `json:"summary,omitempty"`
+	SummaryDetail   *string `json:"summary_detail,omitempty"`
+	Title           *string `json:"title,omitempty"`
+	TitleDetail     *string `json:"title_detail,omitempty"`
 }
 
 type News200ApplicationJSONFeed struct {
-	Generator       *string `json:"generator"`
-	GeneratorDetail *string `json:"generator_detail"`
-	Language        *string `json:"language"`
-	Link            *string `json:"link"`
-	Links           *string `json:"links"`
-	Publisher       *string `json:"publisher"`
-	PublisherDetail *string `json:"publisher_detail"`
-	Rights          *string `json:"rights"`
-	RightsDetail    *string `json:"rights_detail"`
-	Subtitle        *string `json:"subtitle"`
-	SubtitleDetail  *string `json:"subtitle_detail"`
-	Title           *string `json:"title"`
-	Updated         *string `json:"updated"`
-	UpdatedParsed   *string `json:"updated_parsed"`
+	Generator       *string `json:"generator,omitempty"`
+	GeneratorDetail *string `json:"generator_detail,omitempty"`
+	Language        *string `json:"language,omitempty"`
+	Link            *string `json:"link,omitempty"`
+	Links           *string `json:"links,omitempty"`
+	Publisher       *string `json:"publisher,omitempty"`
+	PublisherDetail *string `json:"publisher_detail,omitempty"`
+	Rights          *string `json:"rights,omitempty"`
+	RightsDetail    *string `json:"rights_detail,omitempty"`
+	Subtitle        *string `json:"subtitle,omitempty"`
+	SubtitleDetail  *string `json:"subtitle_detail,omitempty"`
+	Title           *string `json:"title,omitempty"`
+	Updated         *string `json:"updated,omitempty"`
+	UpdatedParsed   *string `json:"updated_parsed,omitempty"`
 }
 
 type News200ApplicationJSON struct {
-	Entries []News200ApplicationJSONEntries `json:"entries"`
-	Feed    *News200ApplicationJSONFeed     `json:"feed"`
+	Entries []News200ApplicationJSONEntries `json:"entries,omitempty"`
+	Feed    *News200ApplicationJSONFeed     `json:"feed,omitempty"`
 }
 
 type NewsResponse struct {

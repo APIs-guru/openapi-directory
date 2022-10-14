@@ -1,5 +1,5 @@
 package shared
 
 type CreateGroupResponse struct {
-	Group *GroupType `json:"Group"`
+	Group *GroupType `json:"Group,omitempty"`
 }

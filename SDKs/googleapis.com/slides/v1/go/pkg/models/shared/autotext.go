@@ -8,7 +8,7 @@ const (
 )
 
 type AutoText struct {
-	Content *string           `json:"content"`
-	Style   *TextStyle        `json:"style"`
-	Type    *AutoTextTypeEnum `json:"type"`
+	Content *string           `json:"content,omitempty"`
+	Style   *TextStyle        `json:"style,omitempty"`
+	Type    *AutoTextTypeEnum `json:"type,omitempty"`
 }

@@ -14,7 +14,7 @@ type KeyRevokeRequest struct {
 }
 
 type KeyRevoke200ApplicationJSON struct {
-	Status *string `json:"status"`
+	Status *string `json:"status,omitempty"`
 }
 
 type KeyRevokeResponse struct {

@@ -1,7 +1,7 @@
 package operations
 
 type GetTheStatusOfTheAPIService200ApplicationJSON struct {
-	Status *bool `json:"status"`
+	Status *bool `json:"status,omitempty"`
 }
 
 type GetTheStatusOfTheAPIServiceResponse struct {

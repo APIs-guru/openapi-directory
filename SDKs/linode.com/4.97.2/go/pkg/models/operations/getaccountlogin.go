@@ -27,7 +27,7 @@ type GetAccountLoginRequest struct {
 }
 
 type GetAccountLoginDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetAccountLoginResponse struct {

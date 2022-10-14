@@ -1,5 +1,5 @@
 package shared
 
 type CourseWorkChangesInfo struct {
-	CourseID *string `json:"courseId"`
+	CourseID *string `json:"courseId,omitempty"`
 }

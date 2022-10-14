@@ -1,8 +1,8 @@
 package shared
 
 type CampaignInAppMessage struct {
-	Body         *string               `json:"Body"`
-	Content      []InAppMessageContent `json:"Content"`
-	CustomConfig map[string]string     `json:"CustomConfig"`
-	Layout       *LayoutEnum           `json:"Layout"`
+	Body         *string               `json:"Body,omitempty"`
+	Content      []InAppMessageContent `json:"Content,omitempty"`
+	CustomConfig map[string]string     `json:"CustomConfig,omitempty"`
+	Layout       *LayoutEnum           `json:"Layout,omitempty"`
 }

@@ -5,5 +5,5 @@ type UpdateSystemModelsUpdateGroupSubscription struct {
 	Include                   bool   `json:"Include" form:"name=Include"`
 	PackageTypeID             string `json:"PackageTypeID" form:"name=PackageTypeID"`
 	UpdateGroupID             string `json:"UpdateGroupID" form:"name=UpdateGroupID"`
-	UpdateGroupSubscriptionID *int32 `json:"UpdateGroupSubscriptionID" form:"name=UpdateGroupSubscriptionID"`
+	UpdateGroupSubscriptionID *int32 `json:"UpdateGroupSubscriptionID,omitempty" form:"name=UpdateGroupSubscriptionID"`
 }

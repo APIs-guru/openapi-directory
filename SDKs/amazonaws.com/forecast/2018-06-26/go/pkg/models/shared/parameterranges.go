@@ -1,7 +1,7 @@
 package shared
 
 type ParameterRanges struct {
-	CategoricalParameterRanges []CategoricalParameterRange `json:"CategoricalParameterRanges"`
-	ContinuousParameterRanges  []ContinuousParameterRange  `json:"ContinuousParameterRanges"`
-	IntegerParameterRanges     []IntegerParameterRange     `json:"IntegerParameterRanges"`
+	CategoricalParameterRanges []CategoricalParameterRange `json:"CategoricalParameterRanges,omitempty"`
+	ContinuousParameterRanges  []ContinuousParameterRange  `json:"ContinuousParameterRanges,omitempty"`
+	IntegerParameterRanges     []IntegerParameterRange     `json:"IntegerParameterRanges,omitempty"`
 }

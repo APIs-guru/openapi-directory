@@ -1,5 +1,5 @@
 package shared
 
 type CreateTrialComponentResponse struct {
-	TrialComponentArn *string `json:"TrialComponentArn"`
+	TrialComponentArn *string `json:"TrialComponentArn,omitempty"`
 }

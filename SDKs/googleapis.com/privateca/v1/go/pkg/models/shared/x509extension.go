@@ -1,7 +1,7 @@
 package shared
 
 type X509Extension struct {
-	Critical *bool     `json:"critical"`
-	ObjectID *ObjectID `json:"objectId"`
-	Value    *string   `json:"value"`
+	Critical *bool     `json:"critical,omitempty"`
+	ObjectID *ObjectID `json:"objectId,omitempty"`
+	Value    *string   `json:"value,omitempty"`
 }

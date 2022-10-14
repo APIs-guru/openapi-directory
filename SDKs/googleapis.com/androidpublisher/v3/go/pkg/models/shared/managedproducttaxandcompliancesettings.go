@@ -9,6 +9,6 @@ const (
 )
 
 type ManagedProductTaxAndComplianceSettings struct {
-	EeaWithdrawalRightType  *ManagedProductTaxAndComplianceSettingsEeaWithdrawalRightTypeEnum `json:"eeaWithdrawalRightType"`
-	TaxRateInfoByRegionCode map[string]RegionalTaxRateInfo                                    `json:"taxRateInfoByRegionCode"`
+	EeaWithdrawalRightType  *ManagedProductTaxAndComplianceSettingsEeaWithdrawalRightTypeEnum `json:"eeaWithdrawalRightType,omitempty"`
+	TaxRateInfoByRegionCode map[string]RegionalTaxRateInfo                                    `json:"taxRateInfoByRegionCode,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ArimaOrder struct {
-	D *string `json:"d"`
-	P *string `json:"p"`
-	Q *string `json:"q"`
+	D *string `json:"d,omitempty"`
+	P *string `json:"p,omitempty"`
+	Q *string `json:"q,omitempty"`
 }

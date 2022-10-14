@@ -1,9 +1,9 @@
 package shared
 
 type UserPasswordValidationPolicy struct {
-	AllowedFailedAttempts      *int32          `json:"allowedFailedAttempts"`
-	EnableFailedAttemptsCheck  *bool           `json:"enableFailedAttemptsCheck"`
-	EnablePasswordVerification *bool           `json:"enablePasswordVerification"`
-	PasswordExpirationDuration *string         `json:"passwordExpirationDuration"`
-	Status                     *PasswordStatus `json:"status"`
+	AllowedFailedAttempts      *int32          `json:"allowedFailedAttempts,omitempty"`
+	EnableFailedAttemptsCheck  *bool           `json:"enableFailedAttemptsCheck,omitempty"`
+	EnablePasswordVerification *bool           `json:"enablePasswordVerification,omitempty"`
+	PasswordExpirationDuration *string         `json:"passwordExpirationDuration,omitempty"`
+	Status                     *PasswordStatus `json:"status,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type ParentAchievement struct {
-	Description *string `json:"description"`
-	ID          *int64  `json:"id"`
-	Image       *string `json:"image"`
-	Name        *string `json:"name"`
-	Percent     *string `json:"percent"`
+	Description *string `json:"description,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
+	Image       *string `json:"image,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Percent     *string `json:"percent,omitempty"`
 }

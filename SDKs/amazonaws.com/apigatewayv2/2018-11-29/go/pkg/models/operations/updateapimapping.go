@@ -21,8 +21,8 @@ type UpdateAPIMappingHeaders struct {
 
 type UpdateAPIMappingRequestBody struct {
 	APIID         string  `json:"apiId"`
-	APIMappingKey *string `json:"apiMappingKey"`
-	Stage         *string `json:"stage"`
+	APIMappingKey *string `json:"apiMappingKey,omitempty"`
+	Stage         *string `json:"stage,omitempty"`
 }
 
 type UpdateAPIMappingRequest struct {

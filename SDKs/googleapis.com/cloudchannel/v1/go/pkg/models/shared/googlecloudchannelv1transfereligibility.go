@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudChannelV1TransferEligibility struct {
-	Description         *string                                                         `json:"description"`
-	IneligibilityReason *GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum `json:"ineligibilityReason"`
-	IsEligible          *bool                                                           `json:"isEligible"`
+	Description         *string                                                         `json:"description,omitempty"`
+	IneligibilityReason *GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum `json:"ineligibilityReason,omitempty"`
+	IsEligible          *bool                                                           `json:"isEligible,omitempty"`
 }

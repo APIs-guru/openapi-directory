@@ -11,10 +11,10 @@ const (
 )
 
 type ShapeProperties struct {
-	Autofit             *Autofit                             `json:"autofit"`
-	ContentAlignment    *ShapePropertiesContentAlignmentEnum `json:"contentAlignment"`
-	Link                *Link                                `json:"link"`
-	Outline             *Outline                             `json:"outline"`
-	Shadow              *Shadow                              `json:"shadow"`
-	ShapeBackgroundFill *ShapeBackgroundFill                 `json:"shapeBackgroundFill"`
+	Autofit             *Autofit                             `json:"autofit,omitempty"`
+	ContentAlignment    *ShapePropertiesContentAlignmentEnum `json:"contentAlignment,omitempty"`
+	Link                *Link                                `json:"link,omitempty"`
+	Outline             *Outline                             `json:"outline,omitempty"`
+	Shadow              *Shadow                              `json:"shadow,omitempty"`
+	ShapeBackgroundFill *ShapeBackgroundFill                 `json:"shapeBackgroundFill,omitempty"`
 }

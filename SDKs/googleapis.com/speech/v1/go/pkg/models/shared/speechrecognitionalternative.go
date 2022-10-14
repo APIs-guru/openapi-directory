@@ -1,7 +1,7 @@
 package shared
 
 type SpeechRecognitionAlternative struct {
-	Confidence *float32   `json:"confidence"`
-	Transcript *string    `json:"transcript"`
-	Words      []WordInfo `json:"words"`
+	Confidence *float32   `json:"confidence,omitempty"`
+	Transcript *string    `json:"transcript,omitempty"`
+	Words      []WordInfo `json:"words,omitempty"`
 }

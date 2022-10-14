@@ -20,6 +20,6 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequest struct {
-	ParticipantRole       *GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestParticipantRoleEnum       `json:"participantRole"`
-	SuggestionFeatureType *GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnum `json:"suggestionFeatureType"`
+	ParticipantRole       *GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestParticipantRoleEnum       `json:"participantRole,omitempty"`
+	SuggestionFeatureType *GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnum `json:"suggestionFeatureType,omitempty"`
 }

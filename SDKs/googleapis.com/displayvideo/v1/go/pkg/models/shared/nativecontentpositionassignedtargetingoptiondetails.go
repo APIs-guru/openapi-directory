@@ -12,6 +12,6 @@ const (
 )
 
 type NativeContentPositionAssignedTargetingOptionDetails struct {
-	ContentPosition   *NativeContentPositionAssignedTargetingOptionDetailsContentPositionEnum `json:"contentPosition"`
-	TargetingOptionID *string                                                                 `json:"targetingOptionId"`
+	ContentPosition   *NativeContentPositionAssignedTargetingOptionDetailsContentPositionEnum `json:"contentPosition,omitempty"`
+	TargetingOptionID *string                                                                 `json:"targetingOptionId,omitempty"`
 }

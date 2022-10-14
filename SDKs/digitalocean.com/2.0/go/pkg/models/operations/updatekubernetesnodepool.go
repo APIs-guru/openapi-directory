@@ -20,16 +20,16 @@ const (
 )
 
 type UpdateKubernetesNodePoolRequestBodyNodesStatus struct {
-	State *UpdateKubernetesNodePoolRequestBodyNodesStatusStateEnum `json:"state"`
+	State *UpdateKubernetesNodePoolRequestBodyNodesStatusStateEnum `json:"state,omitempty"`
 }
 
 type UpdateKubernetesNodePoolRequestBodyNodes struct {
-	CreatedAt *time.Time                                      `json:"created_at"`
-	DropletID *string                                         `json:"droplet_id"`
-	ID        *string                                         `json:"id"`
-	Name      *string                                         `json:"name"`
-	Status    *UpdateKubernetesNodePoolRequestBodyNodesStatus `json:"status"`
-	UpdatedAt *time.Time                                      `json:"updated_at"`
+	CreatedAt *time.Time                                      `json:"created_at,omitempty"`
+	DropletID *string                                         `json:"droplet_id,omitempty"`
+	ID        *string                                         `json:"id,omitempty"`
+	Name      *string                                         `json:"name,omitempty"`
+	Status    *UpdateKubernetesNodePoolRequestBodyNodesStatus `json:"status,omitempty"`
+	UpdatedAt *time.Time                                      `json:"updated_at,omitempty"`
 }
 
 type UpdateKubernetesNodePoolRequestBodyTaintsEffectEnum string
@@ -41,22 +41,22 @@ const (
 )
 
 type UpdateKubernetesNodePoolRequestBodyTaints struct {
-	Effect *UpdateKubernetesNodePoolRequestBodyTaintsEffectEnum `json:"effect"`
-	Key    *string                                              `json:"key"`
-	Value  *string                                              `json:"value"`
+	Effect *UpdateKubernetesNodePoolRequestBodyTaintsEffectEnum `json:"effect,omitempty"`
+	Key    *string                                              `json:"key,omitempty"`
+	Value  *string                                              `json:"value,omitempty"`
 }
 
 type UpdateKubernetesNodePoolRequestBody struct {
-	AutoScale *bool                                       `json:"auto_scale"`
+	AutoScale *bool                                       `json:"auto_scale,omitempty"`
 	Count     int64                                       `json:"count"`
-	ID        *string                                     `json:"id"`
-	Labels    map[string]interface{}                      `json:"labels"`
-	MaxNodes  *int64                                      `json:"max_nodes"`
-	MinNodes  *int64                                      `json:"min_nodes"`
+	ID        *string                                     `json:"id,omitempty"`
+	Labels    map[string]interface{}                      `json:"labels,omitempty"`
+	MaxNodes  *int64                                      `json:"max_nodes,omitempty"`
+	MinNodes  *int64                                      `json:"min_nodes,omitempty"`
 	Name      string                                      `json:"name"`
-	Nodes     []UpdateKubernetesNodePoolRequestBodyNodes  `json:"nodes"`
-	Tags      []string                                    `json:"tags"`
-	Taints    []UpdateKubernetesNodePoolRequestBodyTaints `json:"taints"`
+	Nodes     []UpdateKubernetesNodePoolRequestBodyNodes  `json:"nodes,omitempty"`
+	Tags      []string                                    `json:"tags,omitempty"`
+	Taints    []UpdateKubernetesNodePoolRequestBodyTaints `json:"taints,omitempty"`
 }
 
 type UpdateKubernetesNodePoolRequest struct {
@@ -67,7 +67,7 @@ type UpdateKubernetesNodePoolRequest struct {
 type UpdateKubernetesNodePool401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateKubernetesNodePoolResponse struct {

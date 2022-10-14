@@ -1,5 +1,5 @@
 package shared
 
 type DealTermsNonGuaranteedFixedPriceTerms struct {
-	FixedPrices []PricePerBuyer `json:"fixedPrices"`
+	FixedPrices []PricePerBuyer `json:"fixedPrices,omitempty"`
 }

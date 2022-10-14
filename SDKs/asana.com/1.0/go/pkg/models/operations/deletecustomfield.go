@@ -19,7 +19,7 @@ type DeleteCustomFieldRequest struct {
 }
 
 type DeleteCustomField200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteCustomFieldResponse struct {

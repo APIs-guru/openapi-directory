@@ -27,7 +27,7 @@ const (
 
 type AwsKinesisRuleResponseTarget struct {
 	Authentication interface{}                            `json:"authentication"`
-	Enveloped      *bool                                  `json:"enveloped"`
+	Enveloped      *bool                                  `json:"enveloped,omitempty"`
 	Format         AwsKinesisRuleResponseTargetFormatEnum `json:"format"`
 	PartitionKey   string                                 `json:"partitionKey"`
 	Region         string                                 `json:"region"`
@@ -35,15 +35,15 @@ type AwsKinesisRuleResponseTarget struct {
 }
 
 type AwsKinesisRuleResponse struct {
-	Links       map[string]interface{}                `json:"_links"`
-	AppID       *string                               `json:"appId"`
-	Created     *float64                              `json:"created"`
-	ID          *string                               `json:"id"`
-	Modified    *float64                              `json:"modified"`
+	Links       map[string]interface{}                `json:"_links,omitempty"`
+	AppID       *string                               `json:"appId,omitempty"`
+	Created     *float64                              `json:"created,omitempty"`
+	ID          *string                               `json:"id,omitempty"`
+	Modified    *float64                              `json:"modified,omitempty"`
 	RequestMode AwsKinesisRuleResponseRequestModeEnum `json:"requestMode"`
 	RuleType    AwsKinesisRuleResponseRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                            `json:"source"`
-	Status      *AwsKinesisRuleResponseStatusEnum     `json:"status"`
+	Status      *AwsKinesisRuleResponseStatusEnum     `json:"status,omitempty"`
 	Target      AwsKinesisRuleResponseTarget          `json:"target"`
-	Version     *string                               `json:"version"`
+	Version     *string                               `json:"version,omitempty"`
 }

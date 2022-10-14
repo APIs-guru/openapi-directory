@@ -1,7 +1,7 @@
 package shared
 
 type BadRequest struct {
-	Hints   []ErrorMessage `json:"hints"`
-	Message *string        `json:"message"`
-	Status  *string        `json:"status"`
+	Hints   []ErrorMessage `json:"hints,omitempty"`
+	Message *string        `json:"message,omitempty"`
+	Status  *string        `json:"status,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudRecommendationengineV1beta1UserInfo struct {
-	DirectUserRequest *bool   `json:"directUserRequest"`
-	IPAddress         *string `json:"ipAddress"`
-	UserAgent         *string `json:"userAgent"`
-	UserID            *string `json:"userId"`
-	VisitorID         *string `json:"visitorId"`
+	DirectUserRequest *bool   `json:"directUserRequest,omitempty"`
+	IPAddress         *string `json:"ipAddress,omitempty"`
+	UserAgent         *string `json:"userAgent,omitempty"`
+	UserID            *string `json:"userId,omitempty"`
+	VisitorID         *string `json:"visitorId,omitempty"`
 }

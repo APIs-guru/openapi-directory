@@ -5,9 +5,9 @@ import (
 )
 
 type Assignments struct {
-	Files       []Document    `json:"files"`
-	Marks       []interface{} `json:"marks"`
-	Status      *string       `json:"status"`
-	SubmittedAt *time.Time    `json:"submittedAt"`
-	UpdatedAt   *time.Time    `json:"updatedAt"`
+	Files       []Document    `json:"files,omitempty"`
+	Marks       []interface{} `json:"marks,omitempty"`
+	Status      *string       `json:"status,omitempty"`
+	SubmittedAt *time.Time    `json:"submittedAt,omitempty"`
+	UpdatedAt   *time.Time    `json:"updatedAt,omitempty"`
 }

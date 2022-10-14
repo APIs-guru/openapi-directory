@@ -1,8 +1,8 @@
 package shared
 
 type ExecuteBatchDmlRequest struct {
-	RequestOptions *RequestOptions      `json:"requestOptions"`
-	Seqno          *string              `json:"seqno"`
-	Statements     []Statement          `json:"statements"`
-	Transaction    *TransactionSelector `json:"transaction"`
+	RequestOptions *RequestOptions      `json:"requestOptions,omitempty"`
+	Seqno          *string              `json:"seqno,omitempty"`
+	Statements     []Statement          `json:"statements,omitempty"`
+	Transaction    *TransactionSelector `json:"transaction,omitempty"`
 }

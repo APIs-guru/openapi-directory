@@ -1,5 +1,5 @@
 package shared
 
 type NewGroupRequestDto struct {
-	GroupName *string `json:"GroupName"`
+	GroupName *string `json:"GroupName,omitempty"`
 }

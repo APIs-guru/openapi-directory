@@ -1,6 +1,6 @@
 package shared
 
 type ItemizedMetricStats struct {
-	MetricName      *string `json:"MetricName"`
-	OccurrenceCount *int64  `json:"OccurrenceCount"`
+	MetricName      *string `json:"MetricName,omitempty"`
+	OccurrenceCount *int64  `json:"OccurrenceCount,omitempty"`
 }

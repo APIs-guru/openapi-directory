@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudRetailV2Promotion struct {
-	PromotionID *string `json:"promotionId"`
+	PromotionID *string `json:"promotionId,omitempty"`
 }

@@ -1,12 +1,12 @@
 package shared
 
 type FindingFilter struct {
-	AgentIds          []string        `json:"agentIds"`
-	Attributes        []Attribute     `json:"attributes"`
-	AutoScalingGroups []string        `json:"autoScalingGroups"`
-	CreationTimeRange *TimestampRange `json:"creationTimeRange"`
-	RuleNames         []string        `json:"ruleNames"`
-	RulesPackageArns  []string        `json:"rulesPackageArns"`
-	Severities        []SeverityEnum  `json:"severities"`
-	UserAttributes    []Attribute     `json:"userAttributes"`
+	AgentIds          []string        `json:"agentIds,omitempty"`
+	Attributes        []Attribute     `json:"attributes,omitempty"`
+	AutoScalingGroups []string        `json:"autoScalingGroups,omitempty"`
+	CreationTimeRange *TimestampRange `json:"creationTimeRange,omitempty"`
+	RuleNames         []string        `json:"ruleNames,omitempty"`
+	RulesPackageArns  []string        `json:"rulesPackageArns,omitempty"`
+	Severities        []SeverityEnum  `json:"severities,omitempty"`
+	UserAttributes    []Attribute     `json:"userAttributes,omitempty"`
 }

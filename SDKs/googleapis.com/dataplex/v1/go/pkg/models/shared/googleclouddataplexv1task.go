@@ -11,17 +11,17 @@ const (
 )
 
 type GoogleCloudDataplexV1Task struct {
-	CreateTime      *string                                      `json:"createTime"`
-	Description     *string                                      `json:"description"`
-	DisplayName     *string                                      `json:"displayName"`
-	ExecutionSpec   *GoogleCloudDataplexV1TaskExecutionSpec      `json:"executionSpec"`
-	ExecutionStatus *GoogleCloudDataplexV1TaskExecutionStatus    `json:"executionStatus"`
-	Labels          map[string]string                            `json:"labels"`
-	Name            *string                                      `json:"name"`
-	Notebook        *GoogleCloudDataplexV1TaskNotebookTaskConfig `json:"notebook"`
-	Spark           *GoogleCloudDataplexV1TaskSparkTaskConfig    `json:"spark"`
-	State           *GoogleCloudDataplexV1TaskStateEnum          `json:"state"`
-	TriggerSpec     *GoogleCloudDataplexV1TaskTriggerSpec        `json:"triggerSpec"`
-	UID             *string                                      `json:"uid"`
-	UpdateTime      *string                                      `json:"updateTime"`
+	CreateTime      *string                                      `json:"createTime,omitempty"`
+	Description     *string                                      `json:"description,omitempty"`
+	DisplayName     *string                                      `json:"displayName,omitempty"`
+	ExecutionSpec   *GoogleCloudDataplexV1TaskExecutionSpec      `json:"executionSpec,omitempty"`
+	ExecutionStatus *GoogleCloudDataplexV1TaskExecutionStatus    `json:"executionStatus,omitempty"`
+	Labels          map[string]string                            `json:"labels,omitempty"`
+	Name            *string                                      `json:"name,omitempty"`
+	Notebook        *GoogleCloudDataplexV1TaskNotebookTaskConfig `json:"notebook,omitempty"`
+	Spark           *GoogleCloudDataplexV1TaskSparkTaskConfig    `json:"spark,omitempty"`
+	State           *GoogleCloudDataplexV1TaskStateEnum          `json:"state,omitempty"`
+	TriggerSpec     *GoogleCloudDataplexV1TaskTriggerSpec        `json:"triggerSpec,omitempty"`
+	UID             *string                                      `json:"uid,omitempty"`
+	UpdateTime      *string                                      `json:"updateTime,omitempty"`
 }

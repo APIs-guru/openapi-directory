@@ -15,7 +15,7 @@ type CreateSimulationJobHeaders struct {
 }
 
 type CreateSimulationJobRequestBodyCompute struct {
-	SimulationUnitLimit *int64 `json:"simulationUnitLimit"`
+	SimulationUnitLimit *int64 `json:"simulationUnitLimit,omitempty"`
 }
 
 type CreateSimulationJobRequestBodyFailureBehaviorEnum string
@@ -26,33 +26,33 @@ const (
 )
 
 type CreateSimulationJobRequestBodyLoggingConfig struct {
-	RecordAllRosTopics *bool `json:"recordAllRosTopics"`
+	RecordAllRosTopics *bool `json:"recordAllRosTopics,omitempty"`
 }
 
 type CreateSimulationJobRequestBodyOutputLocation struct {
-	S3Bucket *string `json:"s3Bucket"`
-	S3Prefix *string `json:"s3Prefix"`
+	S3Bucket *string `json:"s3Bucket,omitempty"`
+	S3Prefix *string `json:"s3Prefix,omitempty"`
 }
 
 type CreateSimulationJobRequestBodyVpcConfig struct {
-	AssignPublicIP *bool    `json:"assignPublicIp"`
-	SecurityGroups []string `json:"securityGroups"`
-	Subnets        []string `json:"subnets"`
+	AssignPublicIP *bool    `json:"assignPublicIp,omitempty"`
+	SecurityGroups []string `json:"securityGroups,omitempty"`
+	Subnets        []string `json:"subnets,omitempty"`
 }
 
 type CreateSimulationJobRequestBody struct {
-	ClientRequestToken      *string                                            `json:"clientRequestToken"`
-	Compute                 *CreateSimulationJobRequestBodyCompute             `json:"compute"`
-	DataSources             []shared.DataSourceConfig                          `json:"dataSources"`
-	FailureBehavior         *CreateSimulationJobRequestBodyFailureBehaviorEnum `json:"failureBehavior"`
+	ClientRequestToken      *string                                            `json:"clientRequestToken,omitempty"`
+	Compute                 *CreateSimulationJobRequestBodyCompute             `json:"compute,omitempty"`
+	DataSources             []shared.DataSourceConfig                          `json:"dataSources,omitempty"`
+	FailureBehavior         *CreateSimulationJobRequestBodyFailureBehaviorEnum `json:"failureBehavior,omitempty"`
 	IamRole                 string                                             `json:"iamRole"`
-	LoggingConfig           *CreateSimulationJobRequestBodyLoggingConfig       `json:"loggingConfig"`
+	LoggingConfig           *CreateSimulationJobRequestBodyLoggingConfig       `json:"loggingConfig,omitempty"`
 	MaxJobDurationInSeconds int64                                              `json:"maxJobDurationInSeconds"`
-	OutputLocation          *CreateSimulationJobRequestBodyOutputLocation      `json:"outputLocation"`
-	RobotApplications       []shared.RobotApplicationConfig                    `json:"robotApplications"`
-	SimulationApplications  []shared.SimulationApplicationConfig               `json:"simulationApplications"`
-	Tags                    map[string]string                                  `json:"tags"`
-	VpcConfig               *CreateSimulationJobRequestBodyVpcConfig           `json:"vpcConfig"`
+	OutputLocation          *CreateSimulationJobRequestBodyOutputLocation      `json:"outputLocation,omitempty"`
+	RobotApplications       []shared.RobotApplicationConfig                    `json:"robotApplications,omitempty"`
+	SimulationApplications  []shared.SimulationApplicationConfig               `json:"simulationApplications,omitempty"`
+	Tags                    map[string]string                                  `json:"tags,omitempty"`
+	VpcConfig               *CreateSimulationJobRequestBodyVpcConfig           `json:"vpcConfig,omitempty"`
 }
 
 type CreateSimulationJobRequest struct {

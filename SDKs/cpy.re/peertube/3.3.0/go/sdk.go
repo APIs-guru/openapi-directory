@@ -3339,6 +3339,53 @@ func (s *SDK) GetOAuthClient(ctx context.Context) (*operations.GetOAuthClientRes
 	return res, nil
 }
 
+func (s *SDK) GetOAuthToken(ctx context.Context, request operations.GetOAuthTokenRequest) (*operations.GetOAuthTokenResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/users/token"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := s.defaultClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetOAuthTokenResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.GetOAuthToken200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.GetOAuthToken200ApplicationJSONObject = out
+		}
+	case httpRes.StatusCode == 400:
+	case httpRes.StatusCode == 401:
+	}
+
+	return res, nil
+}
+
 func (s *SDK) GetPlaylistPrivacyPolicies(ctx context.Context) (*operations.GetPlaylistPrivacyPoliciesResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/video-playlists/privacies"

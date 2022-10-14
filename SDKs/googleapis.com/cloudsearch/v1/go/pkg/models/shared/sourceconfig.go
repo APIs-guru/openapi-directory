@@ -1,7 +1,7 @@
 package shared
 
 type SourceConfig struct {
-	CrowdingConfig *SourceCrowdingConfig `json:"crowdingConfig"`
-	ScoringConfig  *SourceScoringConfig  `json:"scoringConfig"`
-	Source         *Source               `json:"source"`
+	CrowdingConfig *SourceCrowdingConfig `json:"crowdingConfig,omitempty"`
+	ScoringConfig  *SourceScoringConfig  `json:"scoringConfig,omitempty"`
+	Source         *Source               `json:"source,omitempty"`
 }

@@ -15,15 +15,15 @@ type CreateEmailIdentityHeaders struct {
 }
 
 type CreateEmailIdentityRequestBodyDkimSigningAttributes struct {
-	DomainSigningPrivateKey *string `json:"DomainSigningPrivateKey"`
-	DomainSigningSelector   *string `json:"DomainSigningSelector"`
+	DomainSigningPrivateKey *string `json:"DomainSigningPrivateKey,omitempty"`
+	DomainSigningSelector   *string `json:"DomainSigningSelector,omitempty"`
 }
 
 type CreateEmailIdentityRequestBody struct {
-	ConfigurationSetName  *string                                              `json:"ConfigurationSetName"`
-	DkimSigningAttributes *CreateEmailIdentityRequestBodyDkimSigningAttributes `json:"DkimSigningAttributes"`
+	ConfigurationSetName  *string                                              `json:"ConfigurationSetName,omitempty"`
+	DkimSigningAttributes *CreateEmailIdentityRequestBodyDkimSigningAttributes `json:"DkimSigningAttributes,omitempty"`
 	EmailIdentity         string                                               `json:"EmailIdentity"`
-	Tags                  []shared.Tag                                         `json:"Tags"`
+	Tags                  []shared.Tag                                         `json:"Tags,omitempty"`
 }
 
 type CreateEmailIdentityRequest struct {

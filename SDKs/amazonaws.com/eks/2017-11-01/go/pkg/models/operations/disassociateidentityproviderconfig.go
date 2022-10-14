@@ -19,12 +19,12 @@ type DisassociateIdentityProviderConfigHeaders struct {
 }
 
 type DisassociateIdentityProviderConfigRequestBodyIdentityProviderConfig struct {
-	Name *string `json:"name"`
-	Type *string `json:"type"`
+	Name *string `json:"name,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type DisassociateIdentityProviderConfigRequestBody struct {
-	ClientRequestToken     *string                                                             `json:"clientRequestToken"`
+	ClientRequestToken     *string                                                             `json:"clientRequestToken,omitempty"`
 	IdentityProviderConfig DisassociateIdentityProviderConfigRequestBodyIdentityProviderConfig `json:"identityProviderConfig"`
 }
 

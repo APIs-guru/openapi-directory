@@ -37,15 +37,15 @@ type UnliWithoutApplicationnkApplicationRequest struct {
 }
 
 type UnliWithoutApplicationnkApplication403ApplicationJSON struct {
-	Detail *string `json:"detail"`
-	Title  *string `json:"title"`
-	Type   *string `json:"type"`
+	Detail *string `json:"detail,omitempty"`
+	Title  *string `json:"title,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }
 
 type UnliWithoutApplicationnkApplication409ApplicationJSON struct {
-	Detail *string `json:"detail"`
-	Title  *string `json:"title"`
-	Type   *string `json:"type"`
+	Detail *string `json:"detail,omitempty"`
+	Title  *string `json:"title,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }
 
 type UnliWithoutApplicationnkApplicationResponse struct {

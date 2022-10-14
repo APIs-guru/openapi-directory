@@ -19,7 +19,7 @@ type UpdateClientCertificateHeaders struct {
 }
 
 type UpdateClientCertificateRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateClientCertificateRequest struct {

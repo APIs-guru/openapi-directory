@@ -14,6 +14,6 @@ const (
 )
 
 type ManagedCertificate struct {
-	LastRenewalTime *string                       `json:"lastRenewalTime"`
-	Status          *ManagedCertificateStatusEnum `json:"status"`
+	LastRenewalTime *string                       `json:"lastRenewalTime,omitempty"`
+	Status          *ManagedCertificateStatusEnum `json:"status,omitempty"`
 }

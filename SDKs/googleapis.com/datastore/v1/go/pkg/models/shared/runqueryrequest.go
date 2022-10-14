@@ -1,9 +1,9 @@
 package shared
 
 type RunQueryRequest struct {
-	DatabaseID  *string      `json:"databaseId"`
-	GqlQuery    *GqlQuery    `json:"gqlQuery"`
-	PartitionID *PartitionID `json:"partitionId"`
-	Query       *Query       `json:"query"`
-	ReadOptions *ReadOptions `json:"readOptions"`
+	DatabaseID  *string      `json:"databaseId,omitempty"`
+	GqlQuery    *GqlQuery    `json:"gqlQuery,omitempty"`
+	PartitionID *PartitionID `json:"partitionId,omitempty"`
+	Query       *Query       `json:"query,omitempty"`
+	ReadOptions *ReadOptions `json:"readOptions,omitempty"`
 }

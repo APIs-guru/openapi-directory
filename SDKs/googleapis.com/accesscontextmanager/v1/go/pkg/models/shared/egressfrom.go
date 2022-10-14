@@ -10,6 +10,6 @@ const (
 )
 
 type EgressFrom struct {
-	Identities   []string                    `json:"identities"`
-	IdentityType *EgressFromIdentityTypeEnum `json:"identityType"`
+	Identities   []string                    `json:"identities,omitempty"`
+	IdentityType *EgressFromIdentityTypeEnum `json:"identityType,omitempty"`
 }

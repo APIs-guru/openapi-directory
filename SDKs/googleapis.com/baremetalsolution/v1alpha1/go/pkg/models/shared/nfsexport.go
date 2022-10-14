@@ -9,11 +9,11 @@ const (
 )
 
 type NfsExport struct {
-	AllowDev     *bool                     `json:"allowDev"`
-	AllowSuid    *bool                     `json:"allowSuid"`
-	Cidr         *string                   `json:"cidr"`
-	MachineID    *string                   `json:"machineId"`
-	NetworkID    *string                   `json:"networkId"`
-	NoRootSquash *bool                     `json:"noRootSquash"`
-	Permissions  *NfsExportPermissionsEnum `json:"permissions"`
+	AllowDev     *bool                     `json:"allowDev,omitempty"`
+	AllowSuid    *bool                     `json:"allowSuid,omitempty"`
+	Cidr         *string                   `json:"cidr,omitempty"`
+	MachineID    *string                   `json:"machineId,omitempty"`
+	NetworkID    *string                   `json:"networkId,omitempty"`
+	NoRootSquash *bool                     `json:"noRootSquash,omitempty"`
+	Permissions  *NfsExportPermissionsEnum `json:"permissions,omitempty"`
 }

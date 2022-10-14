@@ -5,12 +5,12 @@ import (
 )
 
 type DescribeResourceResponse struct {
-	BookingOptions *BookingOptions   `json:"BookingOptions"`
-	DisabledDate   *time.Time        `json:"DisabledDate"`
-	Email          *string           `json:"Email"`
-	EnabledDate    *time.Time        `json:"EnabledDate"`
-	Name           *string           `json:"Name"`
-	ResourceID     *string           `json:"ResourceId"`
-	State          *EntityStateEnum  `json:"State"`
-	Type           *ResourceTypeEnum `json:"Type"`
+	BookingOptions *BookingOptions   `json:"BookingOptions,omitempty"`
+	DisabledDate   *time.Time        `json:"DisabledDate,omitempty"`
+	Email          *string           `json:"Email,omitempty"`
+	EnabledDate    *time.Time        `json:"EnabledDate,omitempty"`
+	Name           *string           `json:"Name,omitempty"`
+	ResourceID     *string           `json:"ResourceId,omitempty"`
+	State          *EntityStateEnum  `json:"State,omitempty"`
+	Type           *ResourceTypeEnum `json:"Type,omitempty"`
 }

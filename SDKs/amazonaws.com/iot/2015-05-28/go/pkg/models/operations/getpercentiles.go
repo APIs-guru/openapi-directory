@@ -15,11 +15,11 @@ type GetPercentilesHeaders struct {
 }
 
 type GetPercentilesRequestBody struct {
-	AggregationField *string   `json:"aggregationField"`
-	IndexName        *string   `json:"indexName"`
-	Percents         []float64 `json:"percents"`
+	AggregationField *string   `json:"aggregationField,omitempty"`
+	IndexName        *string   `json:"indexName,omitempty"`
+	Percents         []float64 `json:"percents,omitempty"`
 	QueryString      string    `json:"queryString"`
-	QueryVersion     *string   `json:"queryVersion"`
+	QueryVersion     *string   `json:"queryVersion,omitempty"`
 }
 
 type GetPercentilesRequest struct {

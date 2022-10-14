@@ -75,5 +75,5 @@ const (
 )
 
 type ExchangeAssignedTargetingOptionDetails struct {
-	Exchange *ExchangeAssignedTargetingOptionDetailsExchangeEnum `json:"exchange"`
+	Exchange *ExchangeAssignedTargetingOptionDetailsExchangeEnum `json:"exchange,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type UpdateAliasOutput struct {
-	Alias *Alias `json:"Alias"`
+	Alias *Alias `json:"Alias,omitempty"`
 }

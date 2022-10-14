@@ -1,5 +1,5 @@
 package shared
 
 type UpdateColumnStatisticsForPartitionResponse struct {
-	Errors []ColumnStatisticsError `json:"Errors"`
+	Errors []ColumnStatisticsError `json:"Errors,omitempty"`
 }

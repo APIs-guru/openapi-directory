@@ -2,14 +2,14 @@ package shared
 
 type OfferingUser struct {
 	Email                 string              `json:"email"`
-	FirstName             *string             `json:"firstName"`
-	IsFacilitator         *bool               `json:"isFacilitator"`
-	IsMarker              *bool               `json:"isMarker"`
-	IsReadonly            *bool               `json:"isReadonly"`
-	LastName              *string             `json:"lastName"`
-	Metadata              *UserMetadata       `json:"metadata"`
-	PersonID              *string             `json:"personId"`
-	Profile               *UserProfileRequest `json:"profile"`
-	SendInvite            *bool               `json:"sendInvite"`
-	SendNotificationEmail *bool               `json:"sendNotificationEmail"`
+	FirstName             *string             `json:"firstName,omitempty"`
+	IsFacilitator         *bool               `json:"isFacilitator,omitempty"`
+	IsMarker              *bool               `json:"isMarker,omitempty"`
+	IsReadonly            *bool               `json:"isReadonly,omitempty"`
+	LastName              *string             `json:"lastName,omitempty"`
+	Metadata              *UserMetadata       `json:"metadata,omitempty"`
+	PersonID              *string             `json:"personId,omitempty"`
+	Profile               *UserProfileRequest `json:"profile,omitempty"`
+	SendInvite            *bool               `json:"sendInvite,omitempty"`
+	SendNotificationEmail *bool               `json:"sendNotificationEmail,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DescribeConnectionsRequest struct {
-	ConnectionID *string `json:"connectionId"`
+	ConnectionID *string `json:"connectionId,omitempty"`
 }

@@ -1,16 +1,16 @@
 package shared
 
 type ModelEvaluation struct {
-	AnnotationSpecID                      *string                                `json:"annotationSpecId"`
-	ClassificationEvaluationMetrics       *ClassificationEvaluationMetrics       `json:"classificationEvaluationMetrics"`
-	CreateTime                            *string                                `json:"createTime"`
-	DisplayName                           *string                                `json:"displayName"`
-	EvaluatedExampleCount                 *int32                                 `json:"evaluatedExampleCount"`
-	ImageObjectDetectionEvaluationMetrics *ImageObjectDetectionEvaluationMetrics `json:"imageObjectDetectionEvaluationMetrics"`
-	Name                                  *string                                `json:"name"`
-	RegressionEvaluationMetrics           *RegressionEvaluationMetrics           `json:"regressionEvaluationMetrics"`
-	TextExtractionEvaluationMetrics       *TextExtractionEvaluationMetrics       `json:"textExtractionEvaluationMetrics"`
-	TextSentimentEvaluationMetrics        *TextSentimentEvaluationMetrics        `json:"textSentimentEvaluationMetrics"`
-	TranslationEvaluationMetrics          *TranslationEvaluationMetrics          `json:"translationEvaluationMetrics"`
-	VideoObjectTrackingEvaluationMetrics  *VideoObjectTrackingEvaluationMetrics  `json:"videoObjectTrackingEvaluationMetrics"`
+	AnnotationSpecID                      *string                                `json:"annotationSpecId,omitempty"`
+	ClassificationEvaluationMetrics       *ClassificationEvaluationMetrics       `json:"classificationEvaluationMetrics,omitempty"`
+	CreateTime                            *string                                `json:"createTime,omitempty"`
+	DisplayName                           *string                                `json:"displayName,omitempty"`
+	EvaluatedExampleCount                 *int32                                 `json:"evaluatedExampleCount,omitempty"`
+	ImageObjectDetectionEvaluationMetrics *ImageObjectDetectionEvaluationMetrics `json:"imageObjectDetectionEvaluationMetrics,omitempty"`
+	Name                                  *string                                `json:"name,omitempty"`
+	RegressionEvaluationMetrics           *RegressionEvaluationMetrics           `json:"regressionEvaluationMetrics,omitempty"`
+	TextExtractionEvaluationMetrics       *TextExtractionEvaluationMetrics       `json:"textExtractionEvaluationMetrics,omitempty"`
+	TextSentimentEvaluationMetrics        *TextSentimentEvaluationMetrics        `json:"textSentimentEvaluationMetrics,omitempty"`
+	TranslationEvaluationMetrics          *TranslationEvaluationMetrics          `json:"translationEvaluationMetrics,omitempty"`
+	VideoObjectTrackingEvaluationMetrics  *VideoObjectTrackingEvaluationMetrics  `json:"videoObjectTrackingEvaluationMetrics,omitempty"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep struct {
-	ConstraintDuration *string                                                                         `json:"constraintDuration"`
-	FilterExpression   *GoogleAnalyticsAdminV1alphaAudienceFilterExpression                            `json:"filterExpression"`
-	ImmediatelyFollows *bool                                                                           `json:"immediatelyFollows"`
-	Scope              *GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum `json:"scope"`
+	ConstraintDuration *string                                                                         `json:"constraintDuration,omitempty"`
+	FilterExpression   *GoogleAnalyticsAdminV1alphaAudienceFilterExpression                            `json:"filterExpression,omitempty"`
+	ImmediatelyFollows *bool                                                                           `json:"immediatelyFollows,omitempty"`
+	Scope              *GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum `json:"scope,omitempty"`
 }

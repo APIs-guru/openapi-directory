@@ -1,6 +1,6 @@
 package shared
 
 type ListRuleNamesByTargetResponse struct {
-	NextToken *string  `json:"NextToken"`
-	RuleNames []string `json:"RuleNames"`
+	NextToken *string  `json:"NextToken,omitempty"`
+	RuleNames []string `json:"RuleNames,omitempty"`
 }

@@ -15,8 +15,8 @@ type RegisterAccountHeaders struct {
 }
 
 type RegisterAccountRequestBody struct {
-	DelegatedAdminAccount *string `json:"delegatedAdminAccount"`
-	KmsKey                *string `json:"kmsKey"`
+	DelegatedAdminAccount *string `json:"delegatedAdminAccount,omitempty"`
+	KmsKey                *string `json:"kmsKey,omitempty"`
 }
 
 type RegisterAccountRequest struct {

@@ -20,20 +20,20 @@ type CreateLaunchProfileHeaders struct {
 }
 
 type CreateLaunchProfileRequestBodyStreamConfiguration struct {
-	ClipboardMode             *shared.StreamingClipboardModeEnum `json:"clipboardMode"`
-	Ec2InstanceTypes          []shared.StreamingInstanceTypeEnum `json:"ec2InstanceTypes"`
-	MaxSessionLengthInMinutes *int64                             `json:"maxSessionLengthInMinutes"`
-	StreamingImageIds         []string                           `json:"streamingImageIds"`
+	ClipboardMode             *shared.StreamingClipboardModeEnum `json:"clipboardMode,omitempty"`
+	Ec2InstanceTypes          []shared.StreamingInstanceTypeEnum `json:"ec2InstanceTypes,omitempty"`
+	MaxSessionLengthInMinutes *int64                             `json:"maxSessionLengthInMinutes,omitempty"`
+	StreamingImageIds         []string                           `json:"streamingImageIds,omitempty"`
 }
 
 type CreateLaunchProfileRequestBody struct {
-	Description                   *string                                           `json:"description"`
+	Description                   *string                                           `json:"description,omitempty"`
 	Ec2SubnetIds                  []string                                          `json:"ec2SubnetIds"`
 	LaunchProfileProtocolVersions []string                                          `json:"launchProfileProtocolVersions"`
 	Name                          string                                            `json:"name"`
 	StreamConfiguration           CreateLaunchProfileRequestBodyStreamConfiguration `json:"streamConfiguration"`
 	StudioComponentIds            []string                                          `json:"studioComponentIds"`
-	Tags                          map[string]string                                 `json:"tags"`
+	Tags                          map[string]string                                 `json:"tags,omitempty"`
 }
 
 type CreateLaunchProfileRequest struct {

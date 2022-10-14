@@ -11,6 +11,6 @@ const (
 )
 
 type UpgradeInstanceInternalRequest struct {
-	Type *UpgradeInstanceInternalRequestTypeEnum `json:"type"`
-	VMID *string                                 `json:"vmId"`
+	Type *UpgradeInstanceInternalRequestTypeEnum `json:"type,omitempty"`
+	VMID *string                                 `json:"vmId,omitempty"`
 }

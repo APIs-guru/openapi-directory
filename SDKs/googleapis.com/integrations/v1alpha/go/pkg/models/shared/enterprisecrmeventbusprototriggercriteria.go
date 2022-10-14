@@ -1,7 +1,7 @@
 package shared
 
 type EnterpriseCrmEventbusProtoTriggerCriteria struct {
-	Condition                                  *string                                    `json:"condition"`
-	Parameters                                 *EnterpriseCrmEventbusProtoEventParameters `json:"parameters"`
-	TriggerCriteriaTaskImplementationClassName *string                                    `json:"triggerCriteriaTaskImplementationClassName"`
+	Condition                                  *string                                    `json:"condition,omitempty"`
+	Parameters                                 *EnterpriseCrmEventbusProtoEventParameters `json:"parameters,omitempty"`
+	TriggerCriteriaTaskImplementationClassName *string                                    `json:"triggerCriteriaTaskImplementationClassName,omitempty"`
 }

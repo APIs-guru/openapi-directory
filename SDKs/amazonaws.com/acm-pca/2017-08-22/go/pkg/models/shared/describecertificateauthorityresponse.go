@@ -1,5 +1,5 @@
 package shared
 
 type DescribeCertificateAuthorityResponse struct {
-	CertificateAuthority *CertificateAuthority `json:"CertificateAuthority"`
+	CertificateAuthority *CertificateAuthority `json:"CertificateAuthority,omitempty"`
 }

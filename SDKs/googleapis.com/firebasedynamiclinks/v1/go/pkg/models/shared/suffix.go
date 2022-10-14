@@ -10,6 +10,6 @@ const (
 )
 
 type Suffix struct {
-	CustomSuffix *string           `json:"customSuffix"`
-	Option       *SuffixOptionEnum `json:"option"`
+	CustomSuffix *string           `json:"customSuffix,omitempty"`
+	Option       *SuffixOptionEnum `json:"option,omitempty"`
 }

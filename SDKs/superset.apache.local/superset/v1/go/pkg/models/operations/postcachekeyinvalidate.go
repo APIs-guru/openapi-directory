@@ -14,11 +14,11 @@ type PostCachekeyInvalidateRequest struct {
 }
 
 type PostCachekeyInvalidate400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostCachekeyInvalidate500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostCachekeyInvalidateResponse struct {

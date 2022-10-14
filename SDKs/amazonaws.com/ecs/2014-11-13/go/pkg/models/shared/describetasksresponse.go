@@ -1,6 +1,6 @@
 package shared
 
 type DescribeTasksResponse struct {
-	Failures []Failure `json:"failures"`
-	Tasks    []Task    `json:"tasks"`
+	Failures []Failure `json:"failures,omitempty"`
+	Tasks    []Task    `json:"tasks,omitempty"`
 }

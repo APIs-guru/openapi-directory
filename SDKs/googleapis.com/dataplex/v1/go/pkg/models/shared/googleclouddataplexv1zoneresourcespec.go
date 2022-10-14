@@ -9,5 +9,5 @@ const (
 )
 
 type GoogleCloudDataplexV1ZoneResourceSpec struct {
-	LocationType *GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum `json:"locationType"`
+	LocationType *GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum `json:"locationType,omitempty"`
 }

@@ -20,7 +20,7 @@ type BatchDeleteTableRowsHeaders struct {
 }
 
 type BatchDeleteTableRowsRequestBody struct {
-	ClientRequestToken *string  `json:"clientRequestToken"`
+	ClientRequestToken *string  `json:"clientRequestToken,omitempty"`
 	RowIds             []string `json:"rowIds"`
 }
 

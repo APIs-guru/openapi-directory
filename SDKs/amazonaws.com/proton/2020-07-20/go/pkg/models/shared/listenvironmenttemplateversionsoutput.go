@@ -1,6 +1,6 @@
 package shared
 
 type ListEnvironmentTemplateVersionsOutput struct {
-	NextToken        *string                             `json:"nextToken"`
+	NextToken        *string                             `json:"nextToken,omitempty"`
 	TemplateVersions []EnvironmentTemplateVersionSummary `json:"templateVersions"`
 }

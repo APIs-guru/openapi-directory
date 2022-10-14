@@ -1,7 +1,7 @@
 package shared
 
 type OrgUnits struct {
-	Etag              *string   `json:"etag"`
-	Kind              *string   `json:"kind"`
-	OrganizationUnits []OrgUnit `json:"organizationUnits"`
+	Etag              *string   `json:"etag,omitempty"`
+	Kind              *string   `json:"kind,omitempty"`
+	OrganizationUnits []OrgUnit `json:"organizationUnits,omitempty"`
 }

@@ -16,13 +16,13 @@ const (
 )
 
 type CreateBatchRequestBodyOptions struct {
-	Format *CreateBatchRequestBodyOptionsFormatEnum `json:"format"`
+	Format *CreateBatchRequestBodyOptionsFormatEnum `json:"format,omitempty"`
 }
 
 type CreateBatchRequestBody struct {
 	Domains   []string                            `json:"domains"`
 	Operation CreateBatchRequestBodyOperationEnum `json:"operation"`
-	Options   *CreateBatchRequestBodyOptions      `json:"options"`
+	Options   *CreateBatchRequestBodyOptions      `json:"options,omitempty"`
 }
 
 type CreateBatchRequest struct {

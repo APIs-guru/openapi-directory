@@ -18,16 +18,16 @@ const (
 )
 
 type UpdateProjectRequestBody struct {
-	CreatedAt   *time.Time                              `json:"created_at"`
+	CreatedAt   *time.Time                              `json:"created_at,omitempty"`
 	Description string                                  `json:"description"`
 	Environment UpdateProjectRequestBodyEnvironmentEnum `json:"environment"`
-	ID          *string                                 `json:"id"`
+	ID          *string                                 `json:"id,omitempty"`
 	IsDefault   bool                                    `json:"is_default"`
 	Name        string                                  `json:"name"`
-	OwnerID     *int64                                  `json:"owner_id"`
-	OwnerUUID   *string                                 `json:"owner_uuid"`
+	OwnerID     *int64                                  `json:"owner_id,omitempty"`
+	OwnerUUID   *string                                 `json:"owner_uuid,omitempty"`
 	Purpose     string                                  `json:"purpose"`
-	UpdatedAt   *time.Time                              `json:"updated_at"`
+	UpdatedAt   *time.Time                              `json:"updated_at,omitempty"`
 }
 
 type UpdateProjectRequest struct {
@@ -38,7 +38,7 @@ type UpdateProjectRequest struct {
 type UpdateProject401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateProjectResponse struct {

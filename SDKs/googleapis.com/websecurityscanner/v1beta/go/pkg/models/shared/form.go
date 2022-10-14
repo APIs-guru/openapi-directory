@@ -1,6 +1,6 @@
 package shared
 
 type Form struct {
-	ActionURI *string  `json:"actionUri"`
-	Fields    []string `json:"fields"`
+	ActionURI *string  `json:"actionUri,omitempty"`
+	Fields    []string `json:"fields,omitempty"`
 }

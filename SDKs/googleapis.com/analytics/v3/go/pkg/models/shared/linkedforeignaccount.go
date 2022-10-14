@@ -1,14 +1,14 @@
 package shared
 
 type LinkedForeignAccount struct {
-	AccountID             *string `json:"accountId"`
-	EligibleForSearch     *bool   `json:"eligibleForSearch"`
-	ID                    *string `json:"id"`
-	InternalWebPropertyID *string `json:"internalWebPropertyId"`
-	Kind                  *string `json:"kind"`
-	LinkedAccountID       *string `json:"linkedAccountId"`
-	RemarketingAudienceID *string `json:"remarketingAudienceId"`
-	Status                *string `json:"status"`
-	Type                  *string `json:"type"`
-	WebPropertyID         *string `json:"webPropertyId"`
+	AccountID             *string `json:"accountId,omitempty"`
+	EligibleForSearch     *bool   `json:"eligibleForSearch,omitempty"`
+	ID                    *string `json:"id,omitempty"`
+	InternalWebPropertyID *string `json:"internalWebPropertyId,omitempty"`
+	Kind                  *string `json:"kind,omitempty"`
+	LinkedAccountID       *string `json:"linkedAccountId,omitempty"`
+	RemarketingAudienceID *string `json:"remarketingAudienceId,omitempty"`
+	Status                *string `json:"status,omitempty"`
+	Type                  *string `json:"type,omitempty"`
+	WebPropertyID         *string `json:"webPropertyId,omitempty"`
 }

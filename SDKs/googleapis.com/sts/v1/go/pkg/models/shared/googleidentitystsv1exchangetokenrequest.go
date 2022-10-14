@@ -1,11 +1,11 @@
 package shared
 
 type GoogleIdentityStsV1ExchangeTokenRequest struct {
-	Audience           *string `json:"audience"`
-	GrantType          *string `json:"grantType"`
-	Options            *string `json:"options"`
-	RequestedTokenType *string `json:"requestedTokenType"`
-	Scope              *string `json:"scope"`
-	SubjectToken       *string `json:"subjectToken"`
-	SubjectTokenType   *string `json:"subjectTokenType"`
+	Audience           *string `json:"audience,omitempty"`
+	GrantType          *string `json:"grantType,omitempty"`
+	Options            *string `json:"options,omitempty"`
+	RequestedTokenType *string `json:"requestedTokenType,omitempty"`
+	Scope              *string `json:"scope,omitempty"`
+	SubjectToken       *string `json:"subjectToken,omitempty"`
+	SubjectTokenType   *string `json:"subjectTokenType,omitempty"`
 }

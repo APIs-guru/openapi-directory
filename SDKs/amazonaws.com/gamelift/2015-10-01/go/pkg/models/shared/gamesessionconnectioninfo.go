@@ -1,9 +1,9 @@
 package shared
 
 type GameSessionConnectionInfo struct {
-	DNSName               *string                `json:"DnsName"`
-	GameSessionArn        *string                `json:"GameSessionArn"`
-	IPAddress             *string                `json:"IpAddress"`
-	MatchedPlayerSessions []MatchedPlayerSession `json:"MatchedPlayerSessions"`
-	Port                  *int64                 `json:"Port"`
+	DNSName               *string                `json:"DnsName,omitempty"`
+	GameSessionArn        *string                `json:"GameSessionArn,omitempty"`
+	IPAddress             *string                `json:"IpAddress,omitempty"`
+	MatchedPlayerSessions []MatchedPlayerSession `json:"MatchedPlayerSessions,omitempty"`
+	Port                  *int64                 `json:"Port,omitempty"`
 }

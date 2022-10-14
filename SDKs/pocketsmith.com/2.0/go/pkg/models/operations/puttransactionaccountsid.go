@@ -9,7 +9,7 @@ type PutTransactionAccountsIDPathParams struct {
 }
 
 type PutTransactionAccountsIDRequestBody struct {
-	InstitutionID *int64 `json:"institution_id"`
+	InstitutionID *int64 `json:"institution_id,omitempty"`
 }
 
 type PutTransactionAccountsIDRequest struct {

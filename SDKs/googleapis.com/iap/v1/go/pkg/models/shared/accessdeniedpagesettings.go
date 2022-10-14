@@ -1,7 +1,7 @@
 package shared
 
 type AccessDeniedPageSettings struct {
-	AccessDeniedPageURI               *string `json:"accessDeniedPageUri"`
-	GenerateTroubleshootingURI        *bool   `json:"generateTroubleshootingUri"`
-	RemediationTokenGenerationEnabled *bool   `json:"remediationTokenGenerationEnabled"`
+	AccessDeniedPageURI               *string `json:"accessDeniedPageUri,omitempty"`
+	GenerateTroubleshootingURI        *bool   `json:"generateTroubleshootingUri,omitempty"`
+	RemediationTokenGenerationEnabled *bool   `json:"remediationTokenGenerationEnabled,omitempty"`
 }

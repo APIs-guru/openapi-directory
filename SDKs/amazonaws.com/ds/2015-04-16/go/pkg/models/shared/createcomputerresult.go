@@ -1,5 +1,5 @@
 package shared
 
 type CreateComputerResult struct {
-	Computer *Computer `json:"Computer"`
+	Computer *Computer `json:"Computer,omitempty"`
 }

@@ -12,14 +12,14 @@ const (
 )
 
 type PackageIssue struct {
-	AffectedCpeURI    *string                            `json:"affectedCpeUri"`
-	AffectedPackage   *string                            `json:"affectedPackage"`
-	AffectedVersion   *Version                           `json:"affectedVersion"`
-	EffectiveSeverity *PackageIssueEffectiveSeverityEnum `json:"effectiveSeverity"`
-	FileLocation      []GrafeasV1FileLocation            `json:"fileLocation"`
-	FixAvailable      *bool                              `json:"fixAvailable"`
-	FixedCpeURI       *string                            `json:"fixedCpeUri"`
-	FixedPackage      *string                            `json:"fixedPackage"`
-	FixedVersion      *Version                           `json:"fixedVersion"`
-	PackageType       *string                            `json:"packageType"`
+	AffectedCpeURI    *string                            `json:"affectedCpeUri,omitempty"`
+	AffectedPackage   *string                            `json:"affectedPackage,omitempty"`
+	AffectedVersion   *Version                           `json:"affectedVersion,omitempty"`
+	EffectiveSeverity *PackageIssueEffectiveSeverityEnum `json:"effectiveSeverity,omitempty"`
+	FileLocation      []GrafeasV1FileLocation            `json:"fileLocation,omitempty"`
+	FixAvailable      *bool                              `json:"fixAvailable,omitempty"`
+	FixedCpeURI       *string                            `json:"fixedCpeUri,omitempty"`
+	FixedPackage      *string                            `json:"fixedPackage,omitempty"`
+	FixedVersion      *Version                           `json:"fixedVersion,omitempty"`
+	PackageType       *string                            `json:"packageType,omitempty"`
 }

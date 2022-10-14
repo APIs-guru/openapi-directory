@@ -14,14 +14,14 @@ type ObWriteDomesticScheduledResponse5DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticScheduledResponse5DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
-	Name                    *string `json:"Name"`
+	Name                    *string `json:"Name,omitempty"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticScheduledResponse5DataInitiationInstructedAmount struct {
@@ -30,21 +30,21 @@ type ObWriteDomesticScheduledResponse5DataInitiationInstructedAmount struct {
 }
 
 type ObWriteDomesticScheduledResponse5DataInitiationRemittanceInformation struct {
-	Reference    *string `json:"Reference"`
-	Unstructured *string `json:"Unstructured"`
+	Reference    *string `json:"Reference,omitempty"`
+	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
 type ObWriteDomesticScheduledResponse5DataInitiation struct {
 	CreditorAccount            ObWriteDomesticScheduledResponse5DataInitiationCreditorAccount        `json:"CreditorAccount"`
-	CreditorPostalAddress      *ObPostalAddress6                                                     `json:"CreditorPostalAddress"`
-	DebtorAccount              *ObWriteDomesticScheduledResponse5DataInitiationDebtorAccount         `json:"DebtorAccount"`
-	EndToEndIdentification     *string                                                               `json:"EndToEndIdentification"`
+	CreditorPostalAddress      *ObPostalAddress6                                                     `json:"CreditorPostalAddress,omitempty"`
+	DebtorAccount              *ObWriteDomesticScheduledResponse5DataInitiationDebtorAccount         `json:"DebtorAccount,omitempty"`
+	EndToEndIdentification     *string                                                               `json:"EndToEndIdentification,omitempty"`
 	InstructedAmount           ObWriteDomesticScheduledResponse5DataInitiationInstructedAmount       `json:"InstructedAmount"`
 	InstructionIdentification  string                                                                `json:"InstructionIdentification"`
-	LocalInstrument            *string                                                               `json:"LocalInstrument"`
-	RemittanceInformation      *ObWriteDomesticScheduledResponse5DataInitiationRemittanceInformation `json:"RemittanceInformation"`
+	LocalInstrument            *string                                                               `json:"LocalInstrument,omitempty"`
+	RemittanceInformation      *ObWriteDomesticScheduledResponse5DataInitiationRemittanceInformation `json:"RemittanceInformation,omitempty"`
 	RequestedExecutionDateTime time.Time                                                             `json:"RequestedExecutionDateTime"`
-	SupplementaryData          map[string]interface{}                                                `json:"SupplementaryData"`
+	SupplementaryData          map[string]interface{}                                                `json:"SupplementaryData,omitempty"`
 }
 
 type ObWriteDomesticScheduledResponse5DataMultiAuthorisationStatusEnum string
@@ -56,10 +56,10 @@ const (
 )
 
 type ObWriteDomesticScheduledResponse5DataMultiAuthorisation struct {
-	ExpirationDateTime *time.Time                                                        `json:"ExpirationDateTime"`
-	LastUpdateDateTime *time.Time                                                        `json:"LastUpdateDateTime"`
-	NumberReceived     *int64                                                            `json:"NumberReceived"`
-	NumberRequired     *int64                                                            `json:"NumberRequired"`
+	ExpirationDateTime *time.Time                                                        `json:"ExpirationDateTime,omitempty"`
+	LastUpdateDateTime *time.Time                                                        `json:"LastUpdateDateTime,omitempty"`
+	NumberReceived     *int64                                                            `json:"NumberReceived,omitempty"`
+	NumberRequired     *int64                                                            `json:"NumberRequired,omitempty"`
 	Status             ObWriteDomesticScheduledResponse5DataMultiAuthorisationStatusEnum `json:"Status"`
 }
 
@@ -67,7 +67,7 @@ type ObWriteDomesticScheduledResponse5DataRefundAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
 	SchemeName              string  `json:"SchemeName"`
-	SecondaryIdentification *string `json:"SecondaryIdentification"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteDomesticScheduledResponse5DataRefund struct {
@@ -84,22 +84,22 @@ const (
 )
 
 type ObWriteDomesticScheduledResponse5Data struct {
-	Charges                    []ObWriteDomesticScheduledResponse5DataCharges           `json:"Charges"`
+	Charges                    []ObWriteDomesticScheduledResponse5DataCharges           `json:"Charges,omitempty"`
 	ConsentID                  string                                                   `json:"ConsentId"`
 	CreationDateTime           time.Time                                                `json:"CreationDateTime"`
-	Debtor                     *ObCashAccountDebtor4                                    `json:"Debtor"`
+	Debtor                     *ObCashAccountDebtor4                                    `json:"Debtor,omitempty"`
 	DomesticScheduledPaymentID string                                                   `json:"DomesticScheduledPaymentId"`
-	ExpectedExecutionDateTime  *time.Time                                               `json:"ExpectedExecutionDateTime"`
-	ExpectedSettlementDateTime *time.Time                                               `json:"ExpectedSettlementDateTime"`
+	ExpectedExecutionDateTime  *time.Time                                               `json:"ExpectedExecutionDateTime,omitempty"`
+	ExpectedSettlementDateTime *time.Time                                               `json:"ExpectedSettlementDateTime,omitempty"`
 	Initiation                 ObWriteDomesticScheduledResponse5DataInitiation          `json:"Initiation"`
-	MultiAuthorisation         *ObWriteDomesticScheduledResponse5DataMultiAuthorisation `json:"MultiAuthorisation"`
-	Refund                     *ObWriteDomesticScheduledResponse5DataRefund             `json:"Refund"`
+	MultiAuthorisation         *ObWriteDomesticScheduledResponse5DataMultiAuthorisation `json:"MultiAuthorisation,omitempty"`
+	Refund                     *ObWriteDomesticScheduledResponse5DataRefund             `json:"Refund,omitempty"`
 	Status                     ObWriteDomesticScheduledResponse5DataStatusEnum          `json:"Status"`
 	StatusUpdateDateTime       time.Time                                                `json:"StatusUpdateDateTime"`
 }
 
 type ObWriteDomesticScheduledResponse5 struct {
 	Data  ObWriteDomesticScheduledResponse5Data `json:"Data"`
-	Links *Links                                `json:"Links"`
-	Meta  *Meta                                 `json:"Meta"`
+	Links *Links                                `json:"Links,omitempty"`
+	Meta  *Meta                                 `json:"Meta,omitempty"`
 }

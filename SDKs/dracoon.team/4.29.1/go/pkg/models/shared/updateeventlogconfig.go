@@ -1,7 +1,7 @@
 package shared
 
 type UpdateEventlogConfig struct {
-	Enabled         *bool  `json:"enabled"`
-	LogIPEnabled    *bool  `json:"logIpEnabled"`
-	RetentionPeriod *int32 `json:"retentionPeriod"`
+	Enabled         *bool  `json:"enabled,omitempty"`
+	LogIPEnabled    *bool  `json:"logIpEnabled,omitempty"`
+	RetentionPeriod *int32 `json:"retentionPeriod,omitempty"`
 }

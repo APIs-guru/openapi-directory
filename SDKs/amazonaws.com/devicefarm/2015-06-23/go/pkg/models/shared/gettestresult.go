@@ -1,5 +1,5 @@
 package shared
 
 type GetTestResult struct {
-	Test *Test `json:"test"`
+	Test *Test `json:"test,omitempty"`
 }

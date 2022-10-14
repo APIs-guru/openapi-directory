@@ -1,6 +1,6 @@
 package shared
 
 type CertificateRawData struct {
-	PrivateKey        *string `json:"privateKey"`
-	PublicCertificate *string `json:"publicCertificate"`
+	PrivateKey        *string `json:"privateKey,omitempty"`
+	PublicCertificate *string `json:"publicCertificate,omitempty"`
 }

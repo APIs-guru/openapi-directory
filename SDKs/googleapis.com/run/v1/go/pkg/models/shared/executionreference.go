@@ -1,7 +1,7 @@
 package shared
 
 type ExecutionReference struct {
-	CompletionTimestamp *string `json:"completionTimestamp"`
-	CreationTimestamp   *string `json:"creationTimestamp"`
-	Name                *string `json:"name"`
+	CompletionTimestamp *string `json:"completionTimestamp,omitempty"`
+	CreationTimestamp   *string `json:"creationTimestamp,omitempty"`
+	Name                *string `json:"name,omitempty"`
 }

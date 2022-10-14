@@ -1,5 +1,5 @@
 package shared
 
 type LinkedContentReferenceSuggestionState struct {
-	SheetsChartReferenceSuggestionState *SheetsChartReferenceSuggestionState `json:"sheetsChartReferenceSuggestionState"`
+	SheetsChartReferenceSuggestionState *SheetsChartReferenceSuggestionState `json:"sheetsChartReferenceSuggestionState,omitempty"`
 }

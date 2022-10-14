@@ -5,10 +5,10 @@ import (
 )
 
 type NotebookExecutionSummary struct {
-	EditorID              *string                      `json:"EditorId"`
-	EndTime               *time.Time                   `json:"EndTime"`
-	NotebookExecutionID   *string                      `json:"NotebookExecutionId"`
-	NotebookExecutionName *string                      `json:"NotebookExecutionName"`
-	StartTime             *time.Time                   `json:"StartTime"`
-	Status                *NotebookExecutionStatusEnum `json:"Status"`
+	EditorID              *string                      `json:"EditorId,omitempty"`
+	EndTime               *time.Time                   `json:"EndTime,omitempty"`
+	NotebookExecutionID   *string                      `json:"NotebookExecutionId,omitempty"`
+	NotebookExecutionName *string                      `json:"NotebookExecutionName,omitempty"`
+	StartTime             *time.Time                   `json:"StartTime,omitempty"`
+	Status                *NotebookExecutionStatusEnum `json:"Status,omitempty"`
 }

@@ -15,10 +15,10 @@ type AssociateResourceSharePermissionHeaders struct {
 }
 
 type AssociateResourceSharePermissionRequestBody struct {
-	ClientToken       *string `json:"clientToken"`
+	ClientToken       *string `json:"clientToken,omitempty"`
 	PermissionArn     string  `json:"permissionArn"`
-	PermissionVersion *int64  `json:"permissionVersion"`
-	Replace           *bool   `json:"replace"`
+	PermissionVersion *int64  `json:"permissionVersion,omitempty"`
+	Replace           *bool   `json:"replace,omitempty"`
 	ResourceShareArn  string  `json:"resourceShareArn"`
 }
 

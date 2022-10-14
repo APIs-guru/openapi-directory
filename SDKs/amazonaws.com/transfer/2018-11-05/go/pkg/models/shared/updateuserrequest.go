@@ -1,12 +1,12 @@
 package shared
 
 type UpdateUserRequest struct {
-	HomeDirectory         *string                 `json:"HomeDirectory"`
-	HomeDirectoryMappings []HomeDirectoryMapEntry `json:"HomeDirectoryMappings"`
-	HomeDirectoryType     *HomeDirectoryTypeEnum  `json:"HomeDirectoryType"`
-	Policy                *string                 `json:"Policy"`
-	PosixProfile          *PosixProfile           `json:"PosixProfile"`
-	Role                  *string                 `json:"Role"`
+	HomeDirectory         *string                 `json:"HomeDirectory,omitempty"`
+	HomeDirectoryMappings []HomeDirectoryMapEntry `json:"HomeDirectoryMappings,omitempty"`
+	HomeDirectoryType     *HomeDirectoryTypeEnum  `json:"HomeDirectoryType,omitempty"`
+	Policy                *string                 `json:"Policy,omitempty"`
+	PosixProfile          *PosixProfile           `json:"PosixProfile,omitempty"`
+	Role                  *string                 `json:"Role,omitempty"`
 	ServerID              string                  `json:"ServerId"`
 	UserName              string                  `json:"UserName"`
 }

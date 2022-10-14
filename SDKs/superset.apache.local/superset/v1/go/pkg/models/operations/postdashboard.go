@@ -14,24 +14,24 @@ type PostDashboardRequest struct {
 }
 
 type PostDashboard201ApplicationJSON struct {
-	ID     *float64                     `json:"id"`
-	Result *shared.DashboardRestAPIPost `json:"result"`
+	ID     *float64                     `json:"id,omitempty"`
+	Result *shared.DashboardRestAPIPost `json:"result,omitempty"`
 }
 
 type PostDashboard400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDashboard401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDashboard404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDashboard500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostDashboardResponse struct {

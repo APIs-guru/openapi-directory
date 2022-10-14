@@ -5,10 +5,10 @@ import (
 )
 
 type Container struct {
-	Arn                  *string              `json:"ARN"`
-	AccessLoggingEnabled *bool                `json:"AccessLoggingEnabled"`
-	CreationTime         *time.Time           `json:"CreationTime"`
-	Endpoint             *string              `json:"Endpoint"`
-	Name                 *string              `json:"Name"`
-	Status               *ContainerStatusEnum `json:"Status"`
+	Arn                  *string              `json:"ARN,omitempty"`
+	AccessLoggingEnabled *bool                `json:"AccessLoggingEnabled,omitempty"`
+	CreationTime         *time.Time           `json:"CreationTime,omitempty"`
+	Endpoint             *string              `json:"Endpoint,omitempty"`
+	Name                 *string              `json:"Name,omitempty"`
+	Status               *ContainerStatusEnum `json:"Status,omitempty"`
 }

@@ -19,14 +19,14 @@ type CreateThingGroupHeaders struct {
 }
 
 type CreateThingGroupRequestBodyThingGroupProperties struct {
-	AttributePayload      *shared.AttributePayload `json:"attributePayload"`
-	ThingGroupDescription *string                  `json:"thingGroupDescription"`
+	AttributePayload      *shared.AttributePayload `json:"attributePayload,omitempty"`
+	ThingGroupDescription *string                  `json:"thingGroupDescription,omitempty"`
 }
 
 type CreateThingGroupRequestBody struct {
-	ParentGroupName      *string                                          `json:"parentGroupName"`
-	Tags                 []shared.Tag                                     `json:"tags"`
-	ThingGroupProperties *CreateThingGroupRequestBodyThingGroupProperties `json:"thingGroupProperties"`
+	ParentGroupName      *string                                          `json:"parentGroupName,omitempty"`
+	Tags                 []shared.Tag                                     `json:"tags,omitempty"`
+	ThingGroupProperties *CreateThingGroupRequestBodyThingGroupProperties `json:"thingGroupProperties,omitempty"`
 }
 
 type CreateThingGroupRequest struct {

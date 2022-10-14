@@ -5,20 +5,20 @@ import (
 )
 
 type LaunchProfile struct {
-	Arn                           *string                      `json:"arn"`
-	CreatedAt                     *time.Time                   `json:"createdAt"`
-	CreatedBy                     *string                      `json:"createdBy"`
-	Description                   *string                      `json:"description"`
-	Ec2SubnetIds                  []string                     `json:"ec2SubnetIds"`
-	LaunchProfileID               *string                      `json:"launchProfileId"`
-	LaunchProfileProtocolVersions []string                     `json:"launchProfileProtocolVersions"`
-	Name                          *string                      `json:"name"`
-	State                         *LaunchProfileStateEnum      `json:"state"`
-	StatusCode                    *LaunchProfileStatusCodeEnum `json:"statusCode"`
-	StatusMessage                 *string                      `json:"statusMessage"`
-	StreamConfiguration           *StreamConfiguration         `json:"streamConfiguration"`
-	StudioComponentIds            []string                     `json:"studioComponentIds"`
-	Tags                          map[string]string            `json:"tags"`
-	UpdatedAt                     *time.Time                   `json:"updatedAt"`
-	UpdatedBy                     *string                      `json:"updatedBy"`
+	Arn                           *string                      `json:"arn,omitempty"`
+	CreatedAt                     *time.Time                   `json:"createdAt,omitempty"`
+	CreatedBy                     *string                      `json:"createdBy,omitempty"`
+	Description                   *string                      `json:"description,omitempty"`
+	Ec2SubnetIds                  []string                     `json:"ec2SubnetIds,omitempty"`
+	LaunchProfileID               *string                      `json:"launchProfileId,omitempty"`
+	LaunchProfileProtocolVersions []string                     `json:"launchProfileProtocolVersions,omitempty"`
+	Name                          *string                      `json:"name,omitempty"`
+	State                         *LaunchProfileStateEnum      `json:"state,omitempty"`
+	StatusCode                    *LaunchProfileStatusCodeEnum `json:"statusCode,omitempty"`
+	StatusMessage                 *string                      `json:"statusMessage,omitempty"`
+	StreamConfiguration           *StreamConfiguration         `json:"streamConfiguration,omitempty"`
+	StudioComponentIds            []string                     `json:"studioComponentIds,omitempty"`
+	Tags                          map[string]string            `json:"tags,omitempty"`
+	UpdatedAt                     *time.Time                   `json:"updatedAt,omitempty"`
+	UpdatedBy                     *string                      `json:"updatedBy,omitempty"`
 }

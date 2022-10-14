@@ -10,12 +10,12 @@ type GetcurrencyrateRequest struct {
 }
 
 type Getcurrencyrate200ApplicationJSON struct {
-	Code    *string `json:"Code"`
-	Country *string `json:"Country"`
-	Credits *string `json:"Credits"`
-	Name    *string `json:"Name"`
-	Rate    *string `json:"Rate"`
-	Symbol  *string `json:"Symbol"`
+	Code    *string `json:"Code,omitempty"`
+	Country *string `json:"Country,omitempty"`
+	Credits *string `json:"Credits,omitempty"`
+	Name    *string `json:"Name,omitempty"`
+	Rate    *string `json:"Rate,omitempty"`
+	Symbol  *string `json:"Symbol,omitempty"`
 }
 
 type GetcurrencyrateResponse struct {

@@ -20,8 +20,8 @@ const (
 )
 
 type CopyPasteRequest struct {
-	Destination      *GridRange                            `json:"destination"`
-	PasteOrientation *CopyPasteRequestPasteOrientationEnum `json:"pasteOrientation"`
-	PasteType        *CopyPasteRequestPasteTypeEnum        `json:"pasteType"`
-	Source           *GridRange                            `json:"source"`
+	Destination      *GridRange                            `json:"destination,omitempty"`
+	PasteOrientation *CopyPasteRequestPasteOrientationEnum `json:"pasteOrientation,omitempty"`
+	PasteType        *CopyPasteRequestPasteTypeEnum        `json:"pasteType,omitempty"`
+	Source           *GridRange                            `json:"source,omitempty"`
 }

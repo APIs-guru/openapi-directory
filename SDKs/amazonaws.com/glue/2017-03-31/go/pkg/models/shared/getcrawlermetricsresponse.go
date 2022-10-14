@@ -1,6 +1,6 @@
 package shared
 
 type GetCrawlerMetricsResponse struct {
-	CrawlerMetricsList []CrawlerMetrics `json:"CrawlerMetricsList"`
-	NextToken          *string          `json:"NextToken"`
+	CrawlerMetricsList []CrawlerMetrics `json:"CrawlerMetricsList,omitempty"`
+	NextToken          *string          `json:"NextToken,omitempty"`
 }

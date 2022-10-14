@@ -1,9 +1,9 @@
 package shared
 
 type EventContextDataType struct {
-	City       *string `json:"City"`
-	Country    *string `json:"Country"`
-	DeviceName *string `json:"DeviceName"`
-	IPAddress  *string `json:"IpAddress"`
-	Timezone   *string `json:"Timezone"`
+	City       *string `json:"City,omitempty"`
+	Country    *string `json:"Country,omitempty"`
+	DeviceName *string `json:"DeviceName,omitempty"`
+	IPAddress  *string `json:"IpAddress,omitempty"`
+	Timezone   *string `json:"Timezone,omitempty"`
 }

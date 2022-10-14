@@ -1,5 +1,5 @@
 package shared
 
 type RegisterDeviceResponse struct {
-	DeviceID *string `json:"DeviceId"`
+	DeviceID *string `json:"DeviceId,omitempty"`
 }

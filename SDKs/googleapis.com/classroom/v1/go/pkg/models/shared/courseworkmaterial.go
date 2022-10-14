@@ -18,18 +18,18 @@ const (
 )
 
 type CourseWorkMaterial struct {
-	AlternateLink             *string                             `json:"alternateLink"`
-	AssigneeMode              *CourseWorkMaterialAssigneeModeEnum `json:"assigneeMode"`
-	CourseID                  *string                             `json:"courseId"`
-	CreationTime              *string                             `json:"creationTime"`
-	CreatorUserID             *string                             `json:"creatorUserId"`
-	Description               *string                             `json:"description"`
-	ID                        *string                             `json:"id"`
-	IndividualStudentsOptions *IndividualStudentsOptions          `json:"individualStudentsOptions"`
-	Materials                 []Material                          `json:"materials"`
-	ScheduledTime             *string                             `json:"scheduledTime"`
-	State                     *CourseWorkMaterialStateEnum        `json:"state"`
-	Title                     *string                             `json:"title"`
-	TopicID                   *string                             `json:"topicId"`
-	UpdateTime                *string                             `json:"updateTime"`
+	AlternateLink             *string                             `json:"alternateLink,omitempty"`
+	AssigneeMode              *CourseWorkMaterialAssigneeModeEnum `json:"assigneeMode,omitempty"`
+	CourseID                  *string                             `json:"courseId,omitempty"`
+	CreationTime              *string                             `json:"creationTime,omitempty"`
+	CreatorUserID             *string                             `json:"creatorUserId,omitempty"`
+	Description               *string                             `json:"description,omitempty"`
+	ID                        *string                             `json:"id,omitempty"`
+	IndividualStudentsOptions *IndividualStudentsOptions          `json:"individualStudentsOptions,omitempty"`
+	Materials                 []Material                          `json:"materials,omitempty"`
+	ScheduledTime             *string                             `json:"scheduledTime,omitempty"`
+	State                     *CourseWorkMaterialStateEnum        `json:"state,omitempty"`
+	Title                     *string                             `json:"title,omitempty"`
+	TopicID                   *string                             `json:"topicId,omitempty"`
+	UpdateTime                *string                             `json:"updateTime,omitempty"`
 }

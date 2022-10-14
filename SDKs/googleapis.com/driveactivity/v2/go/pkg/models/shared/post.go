@@ -13,5 +13,5 @@ const (
 )
 
 type Post struct {
-	Subtype *PostSubtypeEnum `json:"subtype"`
+	Subtype *PostSubtypeEnum `json:"subtype,omitempty"`
 }

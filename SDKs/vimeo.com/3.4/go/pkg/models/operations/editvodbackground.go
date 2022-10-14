@@ -10,7 +10,7 @@ type EditVodBackgroundPathParams struct {
 }
 
 type EditVodBackgroundRequestBody struct {
-	Active *bool `json:"active"`
+	Active *bool `json:"active,omitempty"`
 }
 
 type EditVodBackgroundSecurity struct {

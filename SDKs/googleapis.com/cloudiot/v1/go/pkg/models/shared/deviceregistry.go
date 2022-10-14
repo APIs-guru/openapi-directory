@@ -11,12 +11,12 @@ const (
 )
 
 type DeviceRegistry struct {
-	Credentials              []RegistryCredential        `json:"credentials"`
-	EventNotificationConfigs []EventNotificationConfig   `json:"eventNotificationConfigs"`
-	HTTPConfig               *HTTPConfig                 `json:"httpConfig"`
-	ID                       *string                     `json:"id"`
-	LogLevel                 *DeviceRegistryLogLevelEnum `json:"logLevel"`
-	MqttConfig               *MqttConfig                 `json:"mqttConfig"`
-	Name                     *string                     `json:"name"`
-	StateNotificationConfig  *StateNotificationConfig    `json:"stateNotificationConfig"`
+	Credentials              []RegistryCredential        `json:"credentials,omitempty"`
+	EventNotificationConfigs []EventNotificationConfig   `json:"eventNotificationConfigs,omitempty"`
+	HTTPConfig               *HTTPConfig                 `json:"httpConfig,omitempty"`
+	ID                       *string                     `json:"id,omitempty"`
+	LogLevel                 *DeviceRegistryLogLevelEnum `json:"logLevel,omitempty"`
+	MqttConfig               *MqttConfig                 `json:"mqttConfig,omitempty"`
+	Name                     *string                     `json:"name,omitempty"`
+	StateNotificationConfig  *StateNotificationConfig    `json:"stateNotificationConfig,omitempty"`
 }

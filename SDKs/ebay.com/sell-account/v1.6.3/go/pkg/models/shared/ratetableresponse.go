@@ -1,5 +1,5 @@
 package shared
 
 type RateTableResponse struct {
-	RateTables []RateTable `json:"rateTables"`
+	RateTables []RateTable `json:"rateTables,omitempty"`
 }

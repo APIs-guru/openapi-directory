@@ -1,5 +1,5 @@
 package shared
 
 type ReopenMatterResponse struct {
-	Matter *Matter `json:"matter"`
+	Matter *Matter `json:"matter,omitempty"`
 }

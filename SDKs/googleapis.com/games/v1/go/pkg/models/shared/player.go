@@ -9,22 +9,22 @@ const (
 )
 
 type PlayerName struct {
-	FamilyName *string `json:"familyName"`
-	GivenName  *string `json:"givenName"`
+	FamilyName *string `json:"familyName,omitempty"`
+	GivenName  *string `json:"givenName,omitempty"`
 }
 
 type Player struct {
-	AvatarImageURL     *string                 `json:"avatarImageUrl"`
-	BannerURLLandscape *string                 `json:"bannerUrlLandscape"`
-	BannerURLPortrait  *string                 `json:"bannerUrlPortrait"`
-	DisplayName        *string                 `json:"displayName"`
-	ExperienceInfo     *PlayerExperienceInfo   `json:"experienceInfo"`
-	FriendStatus       *PlayerFriendStatusEnum `json:"friendStatus"`
-	GamePlayerID       *string                 `json:"gamePlayerId"`
-	Kind               *string                 `json:"kind"`
-	Name               *PlayerName             `json:"name"`
-	OriginalPlayerID   *string                 `json:"originalPlayerId"`
-	PlayerID           *string                 `json:"playerId"`
-	ProfileSettings    *ProfileSettings        `json:"profileSettings"`
-	Title              *string                 `json:"title"`
+	AvatarImageURL     *string                 `json:"avatarImageUrl,omitempty"`
+	BannerURLLandscape *string                 `json:"bannerUrlLandscape,omitempty"`
+	BannerURLPortrait  *string                 `json:"bannerUrlPortrait,omitempty"`
+	DisplayName        *string                 `json:"displayName,omitempty"`
+	ExperienceInfo     *PlayerExperienceInfo   `json:"experienceInfo,omitempty"`
+	FriendStatus       *PlayerFriendStatusEnum `json:"friendStatus,omitempty"`
+	GamePlayerID       *string                 `json:"gamePlayerId,omitempty"`
+	Kind               *string                 `json:"kind,omitempty"`
+	Name               *PlayerName             `json:"name,omitempty"`
+	OriginalPlayerID   *string                 `json:"originalPlayerId,omitempty"`
+	PlayerID           *string                 `json:"playerId,omitempty"`
+	ProfileSettings    *ProfileSettings        `json:"profileSettings,omitempty"`
+	Title              *string                 `json:"title,omitempty"`
 }

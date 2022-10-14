@@ -9,6 +9,6 @@ const (
 )
 
 type DrivingDirectionMetricsRequest struct {
-	LanguageCode *string                                    `json:"languageCode"`
-	NumDays      *DrivingDirectionMetricsRequestNumDaysEnum `json:"numDays"`
+	LanguageCode *string                                    `json:"languageCode,omitempty"`
+	NumDays      *DrivingDirectionMetricsRequestNumDaysEnum `json:"numDays,omitempty"`
 }

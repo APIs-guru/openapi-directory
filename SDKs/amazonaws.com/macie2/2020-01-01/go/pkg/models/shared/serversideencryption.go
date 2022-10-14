@@ -1,6 +1,6 @@
 package shared
 
 type ServerSideEncryption struct {
-	EncryptionType *EncryptionTypeEnum `json:"encryptionType"`
-	KmsMasterKeyID *string             `json:"kmsMasterKeyId"`
+	EncryptionType *EncryptionTypeEnum `json:"encryptionType,omitempty"`
+	KmsMasterKeyID *string             `json:"kmsMasterKeyId,omitempty"`
 }

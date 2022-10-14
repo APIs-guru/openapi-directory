@@ -1,6 +1,6 @@
 package shared
 
 type PaymentServiceProviderLinkInfo struct {
-	ExternalAccountBusinessCountry *string `json:"externalAccountBusinessCountry"`
-	ExternalAccountID              *string `json:"externalAccountId"`
+	ExternalAccountBusinessCountry *string `json:"externalAccountBusinessCountry,omitempty"`
+	ExternalAccountID              *string `json:"externalAccountId,omitempty"`
 }

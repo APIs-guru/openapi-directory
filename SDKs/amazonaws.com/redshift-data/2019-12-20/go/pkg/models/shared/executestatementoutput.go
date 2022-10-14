@@ -5,10 +5,10 @@ import (
 )
 
 type ExecuteStatementOutput struct {
-	ClusterIdentifier *string    `json:"ClusterIdentifier"`
-	CreatedAt         *time.Time `json:"CreatedAt"`
-	Database          *string    `json:"Database"`
-	DbUser            *string    `json:"DbUser"`
-	ID                *string    `json:"Id"`
-	SecretArn         *string    `json:"SecretArn"`
+	ClusterIdentifier *string    `json:"ClusterIdentifier,omitempty"`
+	CreatedAt         *time.Time `json:"CreatedAt,omitempty"`
+	Database          *string    `json:"Database,omitempty"`
+	DbUser            *string    `json:"DbUser,omitempty"`
+	ID                *string    `json:"Id,omitempty"`
+	SecretArn         *string    `json:"SecretArn,omitempty"`
 }

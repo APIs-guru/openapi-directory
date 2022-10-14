@@ -1,6 +1,6 @@
 package shared
 
 type UpdateFormInfoRequest struct {
-	Info       *Info   `json:"info"`
-	UpdateMask *string `json:"updateMask"`
+	Info       *Info   `json:"info,omitempty"`
+	UpdateMask *string `json:"updateMask,omitempty"`
 }

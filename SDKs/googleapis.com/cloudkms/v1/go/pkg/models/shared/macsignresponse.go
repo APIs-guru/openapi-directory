@@ -11,9 +11,9 @@ const (
 )
 
 type MacSignResponse struct {
-	Mac                *string                             `json:"mac"`
-	MacCrc32c          *string                             `json:"macCrc32c"`
-	Name               *string                             `json:"name"`
-	ProtectionLevel    *MacSignResponseProtectionLevelEnum `json:"protectionLevel"`
-	VerifiedDataCrc32c *bool                               `json:"verifiedDataCrc32c"`
+	Mac                *string                             `json:"mac,omitempty"`
+	MacCrc32c          *string                             `json:"macCrc32c,omitempty"`
+	Name               *string                             `json:"name,omitempty"`
+	ProtectionLevel    *MacSignResponseProtectionLevelEnum `json:"protectionLevel,omitempty"`
+	VerifiedDataCrc32c *bool                               `json:"verifiedDataCrc32c,omitempty"`
 }

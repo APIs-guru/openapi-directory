@@ -1,8 +1,8 @@
 package shared
 
 type InternationalReturnOverrideType struct {
-	ReturnMethod            *string       `json:"returnMethod"`
-	ReturnPeriod            *TimeDuration `json:"returnPeriod"`
-	ReturnShippingCostPayer *string       `json:"returnShippingCostPayer"`
-	ReturnsAccepted         *bool         `json:"returnsAccepted"`
+	ReturnMethod            *string       `json:"returnMethod,omitempty"`
+	ReturnPeriod            *TimeDuration `json:"returnPeriod,omitempty"`
+	ReturnShippingCostPayer *string       `json:"returnShippingCostPayer,omitempty"`
+	ReturnsAccepted         *bool         `json:"returnsAccepted,omitempty"`
 }

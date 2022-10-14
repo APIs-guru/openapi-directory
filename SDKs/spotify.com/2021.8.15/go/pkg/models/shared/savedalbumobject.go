@@ -5,6 +5,6 @@ import (
 )
 
 type SavedAlbumObject struct {
-	AddedAt *time.Time   `json:"added_at"`
-	Album   *AlbumObject `json:"album"`
+	AddedAt *time.Time   `json:"added_at,omitempty"`
+	Album   *AlbumObject `json:"album,omitempty"`
 }

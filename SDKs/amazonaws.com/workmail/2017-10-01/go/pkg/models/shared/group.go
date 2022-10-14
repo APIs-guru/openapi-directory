@@ -5,10 +5,10 @@ import (
 )
 
 type Group struct {
-	DisabledDate *time.Time       `json:"DisabledDate"`
-	Email        *string          `json:"Email"`
-	EnabledDate  *time.Time       `json:"EnabledDate"`
-	ID           *string          `json:"Id"`
-	Name         *string          `json:"Name"`
-	State        *EntityStateEnum `json:"State"`
+	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
+	Email        *string          `json:"Email,omitempty"`
+	EnabledDate  *time.Time       `json:"EnabledDate,omitempty"`
+	ID           *string          `json:"Id,omitempty"`
+	Name         *string          `json:"Name,omitempty"`
+	State        *EntityStateEnum `json:"State,omitempty"`
 }

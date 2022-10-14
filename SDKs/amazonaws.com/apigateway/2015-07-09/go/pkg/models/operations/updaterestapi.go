@@ -19,7 +19,7 @@ type UpdateRestAPIHeaders struct {
 }
 
 type UpdateRestAPIRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateRestAPIRequest struct {

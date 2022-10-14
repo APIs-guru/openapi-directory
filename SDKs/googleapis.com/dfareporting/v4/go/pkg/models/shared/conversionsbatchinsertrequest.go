@@ -1,7 +1,7 @@
 package shared
 
 type ConversionsBatchInsertRequest struct {
-	Conversions    []Conversion    `json:"conversions"`
-	EncryptionInfo *EncryptionInfo `json:"encryptionInfo"`
-	Kind           *string         `json:"kind"`
+	Conversions    []Conversion    `json:"conversions,omitempty"`
+	EncryptionInfo *EncryptionInfo `json:"encryptionInfo,omitempty"`
+	Kind           *string         `json:"kind,omitempty"`
 }

@@ -42,16 +42,16 @@ const (
 )
 
 type BasicChartSpec struct {
-	Axis             []BasicChartAxis                  `json:"axis"`
-	ChartType        *BasicChartSpecChartTypeEnum      `json:"chartType"`
-	CompareMode      *BasicChartSpecCompareModeEnum    `json:"compareMode"`
-	Domains          []BasicChartDomain                `json:"domains"`
-	HeaderCount      *int32                            `json:"headerCount"`
-	InterpolateNulls *bool                             `json:"interpolateNulls"`
-	LegendPosition   *BasicChartSpecLegendPositionEnum `json:"legendPosition"`
-	LineSmoothing    *bool                             `json:"lineSmoothing"`
-	Series           []BasicChartSeries                `json:"series"`
-	StackedType      *BasicChartSpecStackedTypeEnum    `json:"stackedType"`
-	ThreeDimensional *bool                             `json:"threeDimensional"`
-	TotalDataLabel   *DataLabel                        `json:"totalDataLabel"`
+	Axis             []BasicChartAxis                  `json:"axis,omitempty"`
+	ChartType        *BasicChartSpecChartTypeEnum      `json:"chartType,omitempty"`
+	CompareMode      *BasicChartSpecCompareModeEnum    `json:"compareMode,omitempty"`
+	Domains          []BasicChartDomain                `json:"domains,omitempty"`
+	HeaderCount      *int32                            `json:"headerCount,omitempty"`
+	InterpolateNulls *bool                             `json:"interpolateNulls,omitempty"`
+	LegendPosition   *BasicChartSpecLegendPositionEnum `json:"legendPosition,omitempty"`
+	LineSmoothing    *bool                             `json:"lineSmoothing,omitempty"`
+	Series           []BasicChartSeries                `json:"series,omitempty"`
+	StackedType      *BasicChartSpecStackedTypeEnum    `json:"stackedType,omitempty"`
+	ThreeDimensional *bool                             `json:"threeDimensional,omitempty"`
+	TotalDataLabel   *DataLabel                        `json:"totalDataLabel,omitempty"`
 }

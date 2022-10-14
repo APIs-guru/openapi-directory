@@ -1,5 +1,5 @@
 package shared
 
 type OrderreturnsAcknowledgeRequest struct {
-	OperationID *string `json:"operationId"`
+	OperationID *string `json:"operationId,omitempty"`
 }

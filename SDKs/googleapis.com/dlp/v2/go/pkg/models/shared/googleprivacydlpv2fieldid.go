@@ -1,5 +1,5 @@
 package shared
 
 type GooglePrivacyDlpV2FieldID struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }

@@ -23,40 +23,40 @@ type GetReportPkRequest struct {
 }
 
 type GetReportPk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetReportPk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetReportPk200ApplicationJSON struct {
-	DescriptionColumns *GetReportPk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                          `json:"id"`
-	LabelColumns       *GetReportPk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.ReportScheduleRestAPIGet                 `json:"result"`
-	ShowColumns        []string                                         `json:"show_columns"`
-	ShowTitle          *string                                          `json:"show_title"`
+	DescriptionColumns *GetReportPk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                          `json:"id,omitempty"`
+	LabelColumns       *GetReportPk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.ReportScheduleRestAPIGet                 `json:"result,omitempty"`
+	ShowColumns        []string                                         `json:"show_columns,omitempty"`
+	ShowTitle          *string                                          `json:"show_title,omitempty"`
 }
 
 type GetReportPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportPkResponse struct {

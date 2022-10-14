@@ -1,6 +1,6 @@
 package shared
 
 type ListVocabularyFiltersResponse struct {
-	NextToken         *string                `json:"NextToken"`
-	VocabularyFilters []VocabularyFilterInfo `json:"VocabularyFilters"`
+	NextToken         *string                `json:"NextToken,omitempty"`
+	VocabularyFilters []VocabularyFilterInfo `json:"VocabularyFilters,omitempty"`
 }

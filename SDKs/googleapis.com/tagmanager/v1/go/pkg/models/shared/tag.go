@@ -9,25 +9,25 @@ const (
 )
 
 type Tag struct {
-	AccountID         *string                 `json:"accountId"`
-	BlockingRuleID    []string                `json:"blockingRuleId"`
-	BlockingTriggerID []string                `json:"blockingTriggerId"`
-	ContainerID       *string                 `json:"containerId"`
-	Fingerprint       *string                 `json:"fingerprint"`
-	FiringRuleID      []string                `json:"firingRuleId"`
-	FiringTriggerID   []string                `json:"firingTriggerId"`
-	LiveOnly          *bool                   `json:"liveOnly"`
-	Name              *string                 `json:"name"`
-	Notes             *string                 `json:"notes"`
-	Parameter         []Parameter             `json:"parameter"`
-	ParentFolderID    *string                 `json:"parentFolderId"`
-	Paused            *bool                   `json:"paused"`
-	Priority          *Parameter              `json:"priority"`
-	ScheduleEndMs     *string                 `json:"scheduleEndMs"`
-	ScheduleStartMs   *string                 `json:"scheduleStartMs"`
-	SetupTag          []SetupTag              `json:"setupTag"`
-	TagFiringOption   *TagTagFiringOptionEnum `json:"tagFiringOption"`
-	TagID             *string                 `json:"tagId"`
-	TeardownTag       []TeardownTag           `json:"teardownTag"`
-	Type              *string                 `json:"type"`
+	AccountID         *string                 `json:"accountId,omitempty"`
+	BlockingRuleID    []string                `json:"blockingRuleId,omitempty"`
+	BlockingTriggerID []string                `json:"blockingTriggerId,omitempty"`
+	ContainerID       *string                 `json:"containerId,omitempty"`
+	Fingerprint       *string                 `json:"fingerprint,omitempty"`
+	FiringRuleID      []string                `json:"firingRuleId,omitempty"`
+	FiringTriggerID   []string                `json:"firingTriggerId,omitempty"`
+	LiveOnly          *bool                   `json:"liveOnly,omitempty"`
+	Name              *string                 `json:"name,omitempty"`
+	Notes             *string                 `json:"notes,omitempty"`
+	Parameter         []Parameter             `json:"parameter,omitempty"`
+	ParentFolderID    *string                 `json:"parentFolderId,omitempty"`
+	Paused            *bool                   `json:"paused,omitempty"`
+	Priority          *Parameter              `json:"priority,omitempty"`
+	ScheduleEndMs     *string                 `json:"scheduleEndMs,omitempty"`
+	ScheduleStartMs   *string                 `json:"scheduleStartMs,omitempty"`
+	SetupTag          []SetupTag              `json:"setupTag,omitempty"`
+	TagFiringOption   *TagTagFiringOptionEnum `json:"tagFiringOption,omitempty"`
+	TagID             *string                 `json:"tagId,omitempty"`
+	TeardownTag       []TeardownTag           `json:"teardownTag,omitempty"`
+	Type              *string                 `json:"type,omitempty"`
 }

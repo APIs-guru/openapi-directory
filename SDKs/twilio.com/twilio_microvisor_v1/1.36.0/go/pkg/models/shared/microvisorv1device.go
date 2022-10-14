@@ -5,12 +5,12 @@ import (
 )
 
 type MicrovisorV1Device struct {
-	AccountSid  *string      `json:"account_sid"`
-	App         *interface{} `json:"app"`
-	DateCreated *time.Time   `json:"date_created"`
-	DateUpdated *time.Time   `json:"date_updated"`
-	Logging     *interface{} `json:"logging"`
-	Sid         *string      `json:"sid"`
-	UniqueName  *string      `json:"unique_name"`
-	URL         *string      `json:"url"`
+	AccountSid  *string      `json:"account_sid,omitempty"`
+	App         *interface{} `json:"app,omitempty"`
+	DateCreated *time.Time   `json:"date_created,omitempty"`
+	DateUpdated *time.Time   `json:"date_updated,omitempty"`
+	Logging     *interface{} `json:"logging,omitempty"`
+	Sid         *string      `json:"sid,omitempty"`
+	UniqueName  *string      `json:"unique_name,omitempty"`
+	URL         *string      `json:"url,omitempty"`
 }

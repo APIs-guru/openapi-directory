@@ -1,5 +1,5 @@
 package shared
 
 type AssociateTeamMemberResult struct {
-	ClientRequestToken *string `json:"clientRequestToken"`
+	ClientRequestToken *string `json:"clientRequestToken,omitempty"`
 }

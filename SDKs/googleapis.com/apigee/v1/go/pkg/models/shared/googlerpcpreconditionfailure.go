@@ -1,5 +1,5 @@
 package shared
 
 type GoogleRPCPreconditionFailure struct {
-	Violations []GoogleRPCPreconditionFailureViolation `json:"violations"`
+	Violations []GoogleRPCPreconditionFailureViolation `json:"violations,omitempty"`
 }

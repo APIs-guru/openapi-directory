@@ -7,5 +7,5 @@ type ErrorError struct {
 }
 
 type Error struct {
-	Error *ErrorError `json:"error"`
+	Error *ErrorError `json:"error,omitempty"`
 }

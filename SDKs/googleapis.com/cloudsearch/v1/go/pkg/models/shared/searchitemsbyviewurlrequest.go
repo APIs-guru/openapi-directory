@@ -1,7 +1,7 @@
 package shared
 
 type SearchItemsByViewURLRequest struct {
-	DebugOptions *DebugOptions `json:"debugOptions"`
-	PageToken    *string       `json:"pageToken"`
-	ViewURL      *string       `json:"viewUrl"`
+	DebugOptions *DebugOptions `json:"debugOptions,omitempty"`
+	PageToken    *string       `json:"pageToken,omitempty"`
+	ViewURL      *string       `json:"viewUrl,omitempty"`
 }

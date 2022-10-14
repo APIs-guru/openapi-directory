@@ -5,14 +5,14 @@ import (
 )
 
 type Certificate struct {
-	CertificateArn          *string    `json:"CertificateArn"`
-	CertificateCreationDate *time.Time `json:"CertificateCreationDate"`
-	CertificateIdentifier   *string    `json:"CertificateIdentifier"`
-	CertificateOwner        *string    `json:"CertificateOwner"`
-	CertificatePem          *string    `json:"CertificatePem"`
-	CertificateWallet       *string    `json:"CertificateWallet"`
-	KeyLength               *int64     `json:"KeyLength"`
-	SigningAlgorithm        *string    `json:"SigningAlgorithm"`
-	ValidFromDate           *time.Time `json:"ValidFromDate"`
-	ValidToDate             *time.Time `json:"ValidToDate"`
+	CertificateArn          *string    `json:"CertificateArn,omitempty"`
+	CertificateCreationDate *time.Time `json:"CertificateCreationDate,omitempty"`
+	CertificateIdentifier   *string    `json:"CertificateIdentifier,omitempty"`
+	CertificateOwner        *string    `json:"CertificateOwner,omitempty"`
+	CertificatePem          *string    `json:"CertificatePem,omitempty"`
+	CertificateWallet       *string    `json:"CertificateWallet,omitempty"`
+	KeyLength               *int64     `json:"KeyLength,omitempty"`
+	SigningAlgorithm        *string    `json:"SigningAlgorithm,omitempty"`
+	ValidFromDate           *time.Time `json:"ValidFromDate,omitempty"`
+	ValidToDate             *time.Time `json:"ValidToDate,omitempty"`
 }

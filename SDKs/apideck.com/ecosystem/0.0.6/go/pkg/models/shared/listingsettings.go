@@ -27,16 +27,16 @@ const (
 )
 
 type ListingSettings struct {
-	DescriptionTextTemplate *string                             `json:"description_text_template"`
-	DescriptionTitle        *string                             `json:"description_title"`
-	FeaturesTextTemplate    *string                             `json:"features_text_template"`
-	FeaturesTitle           *string                             `json:"features_title"`
-	InstallButtonLabel      *string                             `json:"install_button_label"`
-	NamePostfix             *string                             `json:"name_postfix"`
-	Naming                  *ListingSettingsNamingEnum          `json:"naming"`
-	NativeIntegrationLink   *string                             `json:"native_integration_link"`
-	PricingDisabled         *bool                               `json:"pricing_disabled"`
-	PricingTextTemplate     *string                             `json:"pricing_text_template"`
-	PricingTitle            *string                             `json:"pricing_title"`
-	SidebarPosition         *ListingSettingsSidebarPositionEnum `json:"sidebar_position"`
+	DescriptionTextTemplate *string                             `json:"description_text_template,omitempty"`
+	DescriptionTitle        *string                             `json:"description_title,omitempty"`
+	FeaturesTextTemplate    *string                             `json:"features_text_template,omitempty"`
+	FeaturesTitle           *string                             `json:"features_title,omitempty"`
+	InstallButtonLabel      *string                             `json:"install_button_label,omitempty"`
+	NamePostfix             *string                             `json:"name_postfix,omitempty"`
+	Naming                  *ListingSettingsNamingEnum          `json:"naming,omitempty"`
+	NativeIntegrationLink   *string                             `json:"native_integration_link,omitempty"`
+	PricingDisabled         *bool                               `json:"pricing_disabled,omitempty"`
+	PricingTextTemplate     *string                             `json:"pricing_text_template,omitempty"`
+	PricingTitle            *string                             `json:"pricing_title,omitempty"`
+	SidebarPosition         *ListingSettingsSidebarPositionEnum `json:"sidebar_position,omitempty"`
 }

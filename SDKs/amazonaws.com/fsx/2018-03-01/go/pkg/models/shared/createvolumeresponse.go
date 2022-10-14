@@ -1,5 +1,5 @@
 package shared
 
 type CreateVolumeResponse struct {
-	Volume *Volume `json:"Volume"`
+	Volume *Volume `json:"Volume,omitempty"`
 }

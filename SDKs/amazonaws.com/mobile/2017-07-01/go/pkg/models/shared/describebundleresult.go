@@ -1,5 +1,5 @@
 package shared
 
 type DescribeBundleResult struct {
-	Details *BundleDetails `json:"details"`
+	Details *BundleDetails `json:"details,omitempty"`
 }

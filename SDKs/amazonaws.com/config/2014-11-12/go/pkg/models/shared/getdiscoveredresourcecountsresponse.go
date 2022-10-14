@@ -1,7 +1,7 @@
 package shared
 
 type GetDiscoveredResourceCountsResponse struct {
-	NextToken                *string         `json:"nextToken"`
-	ResourceCounts           []ResourceCount `json:"resourceCounts"`
-	TotalDiscoveredResources *int64          `json:"totalDiscoveredResources"`
+	NextToken                *string         `json:"nextToken,omitempty"`
+	ResourceCounts           []ResourceCount `json:"resourceCounts,omitempty"`
+	TotalDiscoveredResources *int64          `json:"totalDiscoveredResources,omitempty"`
 }

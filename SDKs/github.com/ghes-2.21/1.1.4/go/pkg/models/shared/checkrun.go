@@ -41,7 +41,7 @@ type CheckRun struct {
 	CheckSuite   CheckRunCheckSuite     `json:"check_suite"`
 	CompletedAt  time.Time              `json:"completed_at"`
 	Conclusion   CheckRunConclusionEnum `json:"conclusion"`
-	Deployment   *DeploymentSimple      `json:"deployment"`
+	Deployment   *DeploymentSimple      `json:"deployment,omitempty"`
 	DetailsURL   string                 `json:"details_url"`
 	ExternalID   string                 `json:"external_id"`
 	HeadSha      string                 `json:"head_sha"`

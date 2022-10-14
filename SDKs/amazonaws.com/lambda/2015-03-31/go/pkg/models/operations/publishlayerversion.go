@@ -19,17 +19,17 @@ type PublishLayerVersionHeaders struct {
 }
 
 type PublishLayerVersionRequestBodyContent struct {
-	S3Bucket        *string `json:"S3Bucket"`
-	S3Key           *string `json:"S3Key"`
-	S3ObjectVersion *string `json:"S3ObjectVersion"`
-	ZipFile         *string `json:"ZipFile"`
+	S3Bucket        *string `json:"S3Bucket,omitempty"`
+	S3Key           *string `json:"S3Key,omitempty"`
+	S3ObjectVersion *string `json:"S3ObjectVersion,omitempty"`
+	ZipFile         *string `json:"ZipFile,omitempty"`
 }
 
 type PublishLayerVersionRequestBody struct {
-	CompatibleRuntimes []shared.RuntimeEnum                  `json:"CompatibleRuntimes"`
+	CompatibleRuntimes []shared.RuntimeEnum                  `json:"CompatibleRuntimes,omitempty"`
 	Content            PublishLayerVersionRequestBodyContent `json:"Content"`
-	Description        *string                               `json:"Description"`
-	LicenseInfo        *string                               `json:"LicenseInfo"`
+	Description        *string                               `json:"Description,omitempty"`
+	LicenseInfo        *string                               `json:"LicenseInfo,omitempty"`
 }
 
 type PublishLayerVersionRequest struct {

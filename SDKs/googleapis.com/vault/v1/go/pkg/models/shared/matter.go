@@ -10,9 +10,9 @@ const (
 )
 
 type Matter struct {
-	Description       *string            `json:"description"`
-	MatterID          *string            `json:"matterId"`
-	MatterPermissions []MatterPermission `json:"matterPermissions"`
-	Name              *string            `json:"name"`
-	State             *MatterStateEnum   `json:"state"`
+	Description       *string            `json:"description,omitempty"`
+	MatterID          *string            `json:"matterId,omitempty"`
+	MatterPermissions []MatterPermission `json:"matterPermissions,omitempty"`
+	Name              *string            `json:"name,omitempty"`
+	State             *MatterStateEnum   `json:"state,omitempty"`
 }

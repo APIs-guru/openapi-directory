@@ -1,10 +1,10 @@
 package shared
 
 type GoogleCloudApigeeV1QueryTabularStatsRequest struct {
-	Dimensions []string                               `json:"dimensions"`
-	Filter     *string                                `json:"filter"`
-	Metrics    []GoogleCloudApigeeV1MetricAggregation `json:"metrics"`
-	PageSize   *int32                                 `json:"pageSize"`
-	PageToken  *string                                `json:"pageToken"`
-	TimeRange  *GoogleTypeInterval                    `json:"timeRange"`
+	Dimensions []string                               `json:"dimensions,omitempty"`
+	Filter     *string                                `json:"filter,omitempty"`
+	Metrics    []GoogleCloudApigeeV1MetricAggregation `json:"metrics,omitempty"`
+	PageSize   *int32                                 `json:"pageSize,omitempty"`
+	PageToken  *string                                `json:"pageToken,omitempty"`
+	TimeRange  *GoogleTypeInterval                    `json:"timeRange,omitempty"`
 }

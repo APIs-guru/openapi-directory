@@ -12,29 +12,29 @@ const (
 )
 
 type GetRegistryOptions200ApplicationJSONOptionsSubscriptionTiers struct {
-	AllowStorageOverage    *bool                                                                                `json:"allow_storage_overage"`
-	EligibilityReasons     []GetRegistryOptions200ApplicationJSONOptionsSubscriptionTiersEligibilityReasonsEnum `json:"eligibility_reasons"`
-	Eligible               *bool                                                                                `json:"eligible"`
-	IncludedBandwidthBytes *int64                                                                               `json:"included_bandwidth_bytes"`
-	IncludedRepositories   *int64                                                                               `json:"included_repositories"`
-	IncludedStorageBytes   *int64                                                                               `json:"included_storage_bytes"`
-	MonthlyPriceInCents    *int64                                                                               `json:"monthly_price_in_cents"`
-	Name                   *string                                                                              `json:"name"`
-	Slug                   *string                                                                              `json:"slug"`
+	AllowStorageOverage    *bool                                                                                `json:"allow_storage_overage,omitempty"`
+	EligibilityReasons     []GetRegistryOptions200ApplicationJSONOptionsSubscriptionTiersEligibilityReasonsEnum `json:"eligibility_reasons,omitempty"`
+	Eligible               *bool                                                                                `json:"eligible,omitempty"`
+	IncludedBandwidthBytes *int64                                                                               `json:"included_bandwidth_bytes,omitempty"`
+	IncludedRepositories   *int64                                                                               `json:"included_repositories,omitempty"`
+	IncludedStorageBytes   *int64                                                                               `json:"included_storage_bytes,omitempty"`
+	MonthlyPriceInCents    *int64                                                                               `json:"monthly_price_in_cents,omitempty"`
+	Name                   *string                                                                              `json:"name,omitempty"`
+	Slug                   *string                                                                              `json:"slug,omitempty"`
 }
 
 type GetRegistryOptions200ApplicationJSONOptions struct {
-	SubscriptionTiers []GetRegistryOptions200ApplicationJSONOptionsSubscriptionTiers `json:"subscription_tiers"`
+	SubscriptionTiers []GetRegistryOptions200ApplicationJSONOptionsSubscriptionTiers `json:"subscription_tiers,omitempty"`
 }
 
 type GetRegistryOptions200ApplicationJSON struct {
-	Options *GetRegistryOptions200ApplicationJSONOptions `json:"options"`
+	Options *GetRegistryOptions200ApplicationJSONOptions `json:"options,omitempty"`
 }
 
 type GetRegistryOptions401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetRegistryOptionsResponse struct {

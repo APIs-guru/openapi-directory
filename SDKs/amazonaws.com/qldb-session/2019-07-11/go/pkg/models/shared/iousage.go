@@ -1,6 +1,6 @@
 package shared
 
 type IoUsage struct {
-	ReadIOs  *int64 `json:"ReadIOs"`
-	WriteIOs *int64 `json:"WriteIOs"`
+	ReadIOs  *int64 `json:"ReadIOs,omitempty"`
+	WriteIOs *int64 `json:"WriteIOs,omitempty"`
 }

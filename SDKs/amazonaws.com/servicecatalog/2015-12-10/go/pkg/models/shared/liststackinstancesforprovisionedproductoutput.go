@@ -1,6 +1,6 @@
 package shared
 
 type ListStackInstancesForProvisionedProductOutput struct {
-	NextPageToken  *string         `json:"NextPageToken"`
-	StackInstances []StackInstance `json:"StackInstances"`
+	NextPageToken  *string         `json:"NextPageToken,omitempty"`
+	StackInstances []StackInstance `json:"StackInstances,omitempty"`
 }

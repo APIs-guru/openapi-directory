@@ -5,15 +5,15 @@ import (
 )
 
 type Experiment struct {
-	Actions              map[string]ExperimentAction `json:"actions"`
-	CreationTime         *time.Time                  `json:"creationTime"`
-	EndTime              *time.Time                  `json:"endTime"`
-	ExperimentTemplateID *string                     `json:"experimentTemplateId"`
-	ID                   *string                     `json:"id"`
-	RoleArn              *string                     `json:"roleArn"`
-	StartTime            *time.Time                  `json:"startTime"`
-	State                *ExperimentState            `json:"state"`
-	StopConditions       []ExperimentStopCondition   `json:"stopConditions"`
-	Tags                 map[string]string           `json:"tags"`
-	Targets              map[string]ExperimentTarget `json:"targets"`
+	Actions              map[string]ExperimentAction `json:"actions,omitempty"`
+	CreationTime         *time.Time                  `json:"creationTime,omitempty"`
+	EndTime              *time.Time                  `json:"endTime,omitempty"`
+	ExperimentTemplateID *string                     `json:"experimentTemplateId,omitempty"`
+	ID                   *string                     `json:"id,omitempty"`
+	RoleArn              *string                     `json:"roleArn,omitempty"`
+	StartTime            *time.Time                  `json:"startTime,omitempty"`
+	State                *ExperimentState            `json:"state,omitempty"`
+	StopConditions       []ExperimentStopCondition   `json:"stopConditions,omitempty"`
+	Tags                 map[string]string           `json:"tags,omitempty"`
+	Targets              map[string]ExperimentTarget `json:"targets,omitempty"`
 }

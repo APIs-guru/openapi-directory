@@ -19,10 +19,10 @@ type CreateExportJobHeaders struct {
 }
 
 type CreateExportJobRequestBodyExportJobRequest struct {
-	RoleArn        *string `json:"RoleArn"`
-	S3URLPrefix    *string `json:"S3UrlPrefix"`
-	SegmentID      *string `json:"SegmentId"`
-	SegmentVersion *int64  `json:"SegmentVersion"`
+	RoleArn        *string `json:"RoleArn,omitempty"`
+	S3URLPrefix    *string `json:"S3UrlPrefix,omitempty"`
+	SegmentID      *string `json:"SegmentId,omitempty"`
+	SegmentVersion *int64  `json:"SegmentVersion,omitempty"`
 }
 
 type CreateExportJobRequestBody struct {

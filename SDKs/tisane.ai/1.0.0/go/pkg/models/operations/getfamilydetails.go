@@ -9,13 +9,13 @@ type GetFamilyDetailsRequest struct {
 }
 
 type GetFamilyDetails200ApplicationJSON struct {
-	Definition  *string     `json:"definition"`
-	Description *string     `json:"description"`
-	Hypernyms   [][]float64 `json:"hypernyms"`
-	PermID      *string     `json:"permId"`
-	RequestID   *string     `json:"requestId"`
-	Wikidata    *string     `json:"wikidata"`
-	Wordnet30   *string     `json:"wordnet30"`
+	Definition  *string     `json:"definition,omitempty"`
+	Description *string     `json:"description,omitempty"`
+	Hypernyms   [][]float64 `json:"hypernyms,omitempty"`
+	PermID      *string     `json:"permId,omitempty"`
+	RequestID   *string     `json:"requestId,omitempty"`
+	Wikidata    *string     `json:"wikidata,omitempty"`
+	Wordnet30   *string     `json:"wordnet30,omitempty"`
 }
 
 type GetFamilyDetailsResponse struct {

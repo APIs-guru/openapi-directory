@@ -1,6 +1,6 @@
 package shared
 
 type XcodeVersion struct {
-	Tags    []string `json:"tags"`
-	Version *string  `json:"version"`
+	Tags    []string `json:"tags,omitempty"`
+	Version *string  `json:"version,omitempty"`
 }

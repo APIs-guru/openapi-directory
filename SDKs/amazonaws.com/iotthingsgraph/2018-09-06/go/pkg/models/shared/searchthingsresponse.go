@@ -1,6 +1,6 @@
 package shared
 
 type SearchThingsResponse struct {
-	NextToken *string `json:"nextToken"`
-	Things    []Thing `json:"things"`
+	NextToken *string `json:"nextToken,omitempty"`
+	Things    []Thing `json:"things,omitempty"`
 }

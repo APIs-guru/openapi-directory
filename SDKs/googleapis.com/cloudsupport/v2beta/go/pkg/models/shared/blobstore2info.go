@@ -1,9 +1,9 @@
 package shared
 
 type Blobstore2Info struct {
-	BlobGeneration          *string `json:"blobGeneration"`
-	BlobID                  *string `json:"blobId"`
-	DownloadReadHandle      *string `json:"downloadReadHandle"`
-	ReadToken               *string `json:"readToken"`
-	UploadMetadataContainer *string `json:"uploadMetadataContainer"`
+	BlobGeneration          *string `json:"blobGeneration,omitempty"`
+	BlobID                  *string `json:"blobId,omitempty"`
+	DownloadReadHandle      *string `json:"downloadReadHandle,omitempty"`
+	ReadToken               *string `json:"readToken,omitempty"`
+	UploadMetadataContainer *string `json:"uploadMetadataContainer,omitempty"`
 }

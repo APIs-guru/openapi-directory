@@ -10,13 +10,13 @@ const (
 )
 
 type LeaderboardEntry struct {
-	FormattedScore       *string                       `json:"formattedScore"`
-	FormattedScoreRank   *string                       `json:"formattedScoreRank"`
-	Kind                 *string                       `json:"kind"`
-	Player               *Player                       `json:"player"`
-	ScoreRank            *string                       `json:"scoreRank"`
-	ScoreTag             *string                       `json:"scoreTag"`
-	ScoreValue           *string                       `json:"scoreValue"`
-	TimeSpan             *LeaderboardEntryTimeSpanEnum `json:"timeSpan"`
-	WriteTimestampMillis *string                       `json:"writeTimestampMillis"`
+	FormattedScore       *string                       `json:"formattedScore,omitempty"`
+	FormattedScoreRank   *string                       `json:"formattedScoreRank,omitempty"`
+	Kind                 *string                       `json:"kind,omitempty"`
+	Player               *Player                       `json:"player,omitempty"`
+	ScoreRank            *string                       `json:"scoreRank,omitempty"`
+	ScoreTag             *string                       `json:"scoreTag,omitempty"`
+	ScoreValue           *string                       `json:"scoreValue,omitempty"`
+	TimeSpan             *LeaderboardEntryTimeSpanEnum `json:"timeSpan,omitempty"`
+	WriteTimestampMillis *string                       `json:"writeTimestampMillis,omitempty"`
 }

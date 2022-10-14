@@ -9,11 +9,11 @@ type DeleteAnAPIRequest struct {
 }
 
 type DeleteAnAPI200ApplicationJSONAPI struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type DeleteAnAPI200ApplicationJSON struct {
-	API *DeleteAnAPI200ApplicationJSONAPI `json:"api"`
+	API *DeleteAnAPI200ApplicationJSONAPI `json:"api,omitempty"`
 }
 
 type DeleteAnAPIResponse struct {

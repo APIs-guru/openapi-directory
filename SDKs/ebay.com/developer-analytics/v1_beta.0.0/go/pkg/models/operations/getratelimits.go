@@ -19,7 +19,7 @@ type GetRateLimitsRequest struct {
 }
 
 type GetRateLimits500ApplicationJSON struct {
-	Errors []shared.Error `json:"errors"`
+	Errors []shared.Error `json:"errors,omitempty"`
 }
 
 type GetRateLimitsResponse struct {

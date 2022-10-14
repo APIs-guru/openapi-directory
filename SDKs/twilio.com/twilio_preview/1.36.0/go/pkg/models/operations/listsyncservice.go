@@ -23,18 +23,18 @@ type ListSyncServiceRequest struct {
 }
 
 type ListSyncService200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListSyncService200ApplicationJSONListSyncServiceResponse struct {
-	Meta     *ListSyncService200ApplicationJSONMeta `json:"meta"`
-	Services []shared.PreviewSyncService            `json:"services"`
+	Meta     *ListSyncService200ApplicationJSONMeta `json:"meta,omitempty"`
+	Services []shared.PreviewSyncService            `json:"services,omitempty"`
 }
 
 type ListSyncServiceResponse struct {

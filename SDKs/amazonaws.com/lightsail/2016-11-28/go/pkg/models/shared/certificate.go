@@ -5,25 +5,25 @@ import (
 )
 
 type Certificate struct {
-	Arn                     *string                  `json:"arn"`
-	CreatedAt               *time.Time               `json:"createdAt"`
-	DomainName              *string                  `json:"domainName"`
-	DomainValidationRecords []DomainValidationRecord `json:"domainValidationRecords"`
-	EligibleToRenew         *string                  `json:"eligibleToRenew"`
-	InUseResourceCount      *int64                   `json:"inUseResourceCount"`
-	IssuedAt                *time.Time               `json:"issuedAt"`
-	IssuerCa                *string                  `json:"issuerCA"`
-	KeyAlgorithm            *string                  `json:"keyAlgorithm"`
-	Name                    *string                  `json:"name"`
-	NotAfter                *time.Time               `json:"notAfter"`
-	NotBefore               *time.Time               `json:"notBefore"`
-	RenewalSummary          *RenewalSummary          `json:"renewalSummary"`
-	RequestFailureReason    *string                  `json:"requestFailureReason"`
-	RevocationReason        *string                  `json:"revocationReason"`
-	RevokedAt               *time.Time               `json:"revokedAt"`
-	SerialNumber            *string                  `json:"serialNumber"`
-	Status                  *CertificateStatusEnum   `json:"status"`
-	SubjectAlternativeNames []string                 `json:"subjectAlternativeNames"`
-	SupportCode             *string                  `json:"supportCode"`
-	Tags                    []Tag                    `json:"tags"`
+	Arn                     *string                  `json:"arn,omitempty"`
+	CreatedAt               *time.Time               `json:"createdAt,omitempty"`
+	DomainName              *string                  `json:"domainName,omitempty"`
+	DomainValidationRecords []DomainValidationRecord `json:"domainValidationRecords,omitempty"`
+	EligibleToRenew         *string                  `json:"eligibleToRenew,omitempty"`
+	InUseResourceCount      *int64                   `json:"inUseResourceCount,omitempty"`
+	IssuedAt                *time.Time               `json:"issuedAt,omitempty"`
+	IssuerCa                *string                  `json:"issuerCA,omitempty"`
+	KeyAlgorithm            *string                  `json:"keyAlgorithm,omitempty"`
+	Name                    *string                  `json:"name,omitempty"`
+	NotAfter                *time.Time               `json:"notAfter,omitempty"`
+	NotBefore               *time.Time               `json:"notBefore,omitempty"`
+	RenewalSummary          *RenewalSummary          `json:"renewalSummary,omitempty"`
+	RequestFailureReason    *string                  `json:"requestFailureReason,omitempty"`
+	RevocationReason        *string                  `json:"revocationReason,omitempty"`
+	RevokedAt               *time.Time               `json:"revokedAt,omitempty"`
+	SerialNumber            *string                  `json:"serialNumber,omitempty"`
+	Status                  *CertificateStatusEnum   `json:"status,omitempty"`
+	SubjectAlternativeNames []string                 `json:"subjectAlternativeNames,omitempty"`
+	SupportCode             *string                  `json:"supportCode,omitempty"`
+	Tags                    []Tag                    `json:"tags,omitempty"`
 }

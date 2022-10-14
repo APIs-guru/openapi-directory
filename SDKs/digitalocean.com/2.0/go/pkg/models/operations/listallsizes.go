@@ -14,17 +14,17 @@ type ListAllSizesRequest struct {
 }
 
 type ListAllSizes200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllSizes200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllSizes200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllSizes200ApplicationJSONMeta struct {
@@ -32,7 +32,7 @@ type ListAllSizes200ApplicationJSONMeta struct {
 }
 
 type ListAllSizes200ApplicationJSON struct {
-	Links *ListAllSizes200ApplicationJSONLinks                                                                           `json:"links"`
+	Links *ListAllSizes200ApplicationJSONLinks                                                                           `json:"links,omitempty"`
 	Meta  ListAllSizes200ApplicationJSONMeta                                                                             `json:"meta"`
 	Sizes []shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesSize `json:"sizes"`
 }
@@ -40,7 +40,7 @@ type ListAllSizes200ApplicationJSON struct {
 type ListAllSizes401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllSizesResponse struct {

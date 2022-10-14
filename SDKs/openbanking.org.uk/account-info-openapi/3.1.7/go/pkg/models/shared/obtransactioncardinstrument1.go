@@ -20,8 +20,8 @@ const (
 )
 
 type ObTransactionCardInstrument1 struct {
-	AuthorisationType *ObTransactionCardInstrument1AuthorisationTypeEnum `json:"AuthorisationType"`
+	AuthorisationType *ObTransactionCardInstrument1AuthorisationTypeEnum `json:"AuthorisationType,omitempty"`
 	CardSchemeName    ObTransactionCardInstrument1CardSchemeNameEnum     `json:"CardSchemeName"`
-	Identification    *string                                            `json:"Identification"`
-	Name              *string                                            `json:"Name"`
+	Identification    *string                                            `json:"Identification,omitempty"`
+	Name              *string                                            `json:"Name,omitempty"`
 }

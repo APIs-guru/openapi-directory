@@ -24,19 +24,19 @@ const (
 )
 
 type DescribeSavingsPlansOfferingsRequestBody struct {
-	Currencies     []shared.CurrencyCodeEnum                                `json:"currencies"`
-	Descriptions   []string                                                 `json:"descriptions"`
-	Durations      []int64                                                  `json:"durations"`
-	Filters        []shared.SavingsPlanOfferingFilterElement                `json:"filters"`
-	MaxResults     *int64                                                   `json:"maxResults"`
-	NextToken      *string                                                  `json:"nextToken"`
-	OfferingIds    []string                                                 `json:"offeringIds"`
-	Operations     []string                                                 `json:"operations"`
-	PaymentOptions []shared.SavingsPlanPaymentOptionEnum                    `json:"paymentOptions"`
-	PlanTypes      []shared.SavingsPlanTypeEnum                             `json:"planTypes"`
-	ProductType    *DescribeSavingsPlansOfferingsRequestBodyProductTypeEnum `json:"productType"`
-	ServiceCodes   []string                                                 `json:"serviceCodes"`
-	UsageTypes     []string                                                 `json:"usageTypes"`
+	Currencies     []shared.CurrencyCodeEnum                                `json:"currencies,omitempty"`
+	Descriptions   []string                                                 `json:"descriptions,omitempty"`
+	Durations      []int64                                                  `json:"durations,omitempty"`
+	Filters        []shared.SavingsPlanOfferingFilterElement                `json:"filters,omitempty"`
+	MaxResults     *int64                                                   `json:"maxResults,omitempty"`
+	NextToken      *string                                                  `json:"nextToken,omitempty"`
+	OfferingIds    []string                                                 `json:"offeringIds,omitempty"`
+	Operations     []string                                                 `json:"operations,omitempty"`
+	PaymentOptions []shared.SavingsPlanPaymentOptionEnum                    `json:"paymentOptions,omitempty"`
+	PlanTypes      []shared.SavingsPlanTypeEnum                             `json:"planTypes,omitempty"`
+	ProductType    *DescribeSavingsPlansOfferingsRequestBodyProductTypeEnum `json:"productType,omitempty"`
+	ServiceCodes   []string                                                 `json:"serviceCodes,omitempty"`
+	UsageTypes     []string                                                 `json:"usageTypes,omitempty"`
 }
 
 type DescribeSavingsPlansOfferingsRequest struct {

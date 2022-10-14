@@ -15,15 +15,15 @@ type UpdateSettingsHeaders struct {
 }
 
 type UpdateSettingsRequestBodyDefaultAssessmentReportsDestination struct {
-	Destination     *string                                     `json:"destination"`
-	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType"`
+	Destination     *string                                     `json:"destination,omitempty"`
+	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType,omitempty"`
 }
 
 type UpdateSettingsRequestBody struct {
-	DefaultAssessmentReportsDestination *UpdateSettingsRequestBodyDefaultAssessmentReportsDestination `json:"defaultAssessmentReportsDestination"`
-	DefaultProcessOwners                []shared.Role                                                 `json:"defaultProcessOwners"`
-	KmsKey                              *string                                                       `json:"kmsKey"`
-	SnsTopic                            *string                                                       `json:"snsTopic"`
+	DefaultAssessmentReportsDestination *UpdateSettingsRequestBodyDefaultAssessmentReportsDestination `json:"defaultAssessmentReportsDestination,omitempty"`
+	DefaultProcessOwners                []shared.Role                                                 `json:"defaultProcessOwners,omitempty"`
+	KmsKey                              *string                                                       `json:"kmsKey,omitempty"`
+	SnsTopic                            *string                                                       `json:"snsTopic,omitempty"`
 }
 
 type UpdateSettingsRequest struct {

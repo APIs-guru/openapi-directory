@@ -1,7 +1,7 @@
 package shared
 
 type PageResultCategoryTypeDto struct {
-	Count        *int64            `json:"Count"`
-	Items        []CategoryTypeDto `json:"Items"`
-	NextPageLink *string           `json:"NextPageLink"`
+	Count        *int64            `json:"Count,omitempty"`
+	Items        []CategoryTypeDto `json:"Items,omitempty"`
+	NextPageLink *string           `json:"NextPageLink,omitempty"`
 }

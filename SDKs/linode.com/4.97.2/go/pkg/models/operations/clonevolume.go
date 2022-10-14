@@ -32,7 +32,7 @@ type CloneVolumeRequest struct {
 }
 
 type CloneVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CloneVolumeResponse struct {

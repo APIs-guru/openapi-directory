@@ -9,16 +9,16 @@ const (
 )
 
 type GetAuthinfo200ApplicationJSONPermissions struct {
-	Mutate *bool `json:"mutate"`
+	Mutate *bool `json:"mutate,omitempty"`
 }
 
 type GetAuthinfo200ApplicationJSON struct {
-	APIKeyID      *string                                      `json:"api_key_id"`
-	AuthMethod    *GetAuthinfo200ApplicationJSONAuthMethodEnum `json:"auth_method"`
-	Authenticated *bool                                        `json:"authenticated"`
-	Permissions   *GetAuthinfo200ApplicationJSONPermissions    `json:"permissions"`
-	URL           *string                                      `json:"url"`
-	UserID        *string                                      `json:"user_id"`
+	APIKeyID      *string                                      `json:"api_key_id,omitempty"`
+	AuthMethod    *GetAuthinfo200ApplicationJSONAuthMethodEnum `json:"auth_method,omitempty"`
+	Authenticated *bool                                        `json:"authenticated,omitempty"`
+	Permissions   *GetAuthinfo200ApplicationJSONPermissions    `json:"permissions,omitempty"`
+	URL           *string                                      `json:"url,omitempty"`
+	UserID        *string                                      `json:"user_id,omitempty"`
 }
 
 type GetAuthinfoResponse struct {

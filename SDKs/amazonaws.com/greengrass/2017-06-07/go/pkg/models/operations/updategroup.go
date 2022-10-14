@@ -15,7 +15,7 @@ type UpdateGroupHeaders struct {
 }
 
 type UpdateGroupRequestBody struct {
-	Name *string `json:"Name"`
+	Name *string `json:"Name,omitempty"`
 }
 
 type UpdateGroupRequest struct {

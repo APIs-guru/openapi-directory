@@ -34,25 +34,25 @@ const (
 )
 
 type APIV2010AccountSipSipDomain struct {
-	AccountSid                *string                                                   `json:"account_sid"`
-	APIVersion                *string                                                   `json:"api_version"`
-	AuthType                  *string                                                   `json:"auth_type"`
-	ByocTrunkSid              *string                                                   `json:"byoc_trunk_sid"`
-	DateCreated               *string                                                   `json:"date_created"`
-	DateUpdated               *string                                                   `json:"date_updated"`
-	DomainName                *string                                                   `json:"domain_name"`
-	EmergencyCallerSid        *string                                                   `json:"emergency_caller_sid"`
-	EmergencyCallingEnabled   *bool                                                     `json:"emergency_calling_enabled"`
-	FriendlyName              *string                                                   `json:"friendly_name"`
-	Secure                    *bool                                                     `json:"secure"`
-	Sid                       *string                                                   `json:"sid"`
-	SipRegistration           *bool                                                     `json:"sip_registration"`
-	SubresourceUris           map[string]interface{}                                    `json:"subresource_uris"`
-	URI                       *string                                                   `json:"uri"`
-	VoiceFallbackMethod       *APIV2010AccountSipSipDomainVoiceFallbackMethodEnum       `json:"voice_fallback_method"`
-	VoiceFallbackURL          *string                                                   `json:"voice_fallback_url"`
-	VoiceMethod               *APIV2010AccountSipSipDomainVoiceMethodEnum               `json:"voice_method"`
-	VoiceStatusCallbackMethod *APIV2010AccountSipSipDomainVoiceStatusCallbackMethodEnum `json:"voice_status_callback_method"`
-	VoiceStatusCallbackURL    *string                                                   `json:"voice_status_callback_url"`
-	VoiceURL                  *string                                                   `json:"voice_url"`
+	AccountSid                *string                                                   `json:"account_sid,omitempty"`
+	APIVersion                *string                                                   `json:"api_version,omitempty"`
+	AuthType                  *string                                                   `json:"auth_type,omitempty"`
+	ByocTrunkSid              *string                                                   `json:"byoc_trunk_sid,omitempty"`
+	DateCreated               *string                                                   `json:"date_created,omitempty"`
+	DateUpdated               *string                                                   `json:"date_updated,omitempty"`
+	DomainName                *string                                                   `json:"domain_name,omitempty"`
+	EmergencyCallerSid        *string                                                   `json:"emergency_caller_sid,omitempty"`
+	EmergencyCallingEnabled   *bool                                                     `json:"emergency_calling_enabled,omitempty"`
+	FriendlyName              *string                                                   `json:"friendly_name,omitempty"`
+	Secure                    *bool                                                     `json:"secure,omitempty"`
+	Sid                       *string                                                   `json:"sid,omitempty"`
+	SipRegistration           *bool                                                     `json:"sip_registration,omitempty"`
+	SubresourceUris           map[string]interface{}                                    `json:"subresource_uris,omitempty"`
+	URI                       *string                                                   `json:"uri,omitempty"`
+	VoiceFallbackMethod       *APIV2010AccountSipSipDomainVoiceFallbackMethodEnum       `json:"voice_fallback_method,omitempty"`
+	VoiceFallbackURL          *string                                                   `json:"voice_fallback_url,omitempty"`
+	VoiceMethod               *APIV2010AccountSipSipDomainVoiceMethodEnum               `json:"voice_method,omitempty"`
+	VoiceStatusCallbackMethod *APIV2010AccountSipSipDomainVoiceStatusCallbackMethodEnum `json:"voice_status_callback_method,omitempty"`
+	VoiceStatusCallbackURL    *string                                                   `json:"voice_status_callback_url,omitempty"`
+	VoiceURL                  *string                                                   `json:"voice_url,omitempty"`
 }

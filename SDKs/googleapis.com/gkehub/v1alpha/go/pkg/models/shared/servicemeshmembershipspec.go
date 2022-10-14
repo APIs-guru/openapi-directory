@@ -26,7 +26,7 @@ const (
 )
 
 type ServiceMeshMembershipSpec struct {
-	ControlPlane   *ServiceMeshMembershipSpecControlPlaneEnum   `json:"controlPlane"`
-	DefaultChannel *ServiceMeshMembershipSpecDefaultChannelEnum `json:"defaultChannel"`
-	Management     *ServiceMeshMembershipSpecManagementEnum     `json:"management"`
+	ControlPlane   *ServiceMeshMembershipSpecControlPlaneEnum   `json:"controlPlane,omitempty"`
+	DefaultChannel *ServiceMeshMembershipSpecDefaultChannelEnum `json:"defaultChannel,omitempty"`
+	Management     *ServiceMeshMembershipSpecManagementEnum     `json:"management,omitempty"`
 }

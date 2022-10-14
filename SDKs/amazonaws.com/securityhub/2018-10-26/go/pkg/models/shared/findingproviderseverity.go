@@ -1,6 +1,6 @@
 package shared
 
 type FindingProviderSeverity struct {
-	Label    *SeverityLabelEnum `json:"Label"`
-	Original *string            `json:"Original"`
+	Label    *SeverityLabelEnum `json:"Label,omitempty"`
+	Original *string            `json:"Original,omitempty"`
 }

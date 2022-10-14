@@ -5,22 +5,22 @@ import (
 )
 
 type Finding struct {
-	AccountID             *string                `json:"accountId"`
-	Archived              *bool                  `json:"archived"`
-	Category              *FindingCategoryEnum   `json:"category"`
-	ClassificationDetails *ClassificationDetails `json:"classificationDetails"`
-	Count                 *int64                 `json:"count"`
-	CreatedAt             *time.Time             `json:"createdAt"`
-	Description           *string                `json:"description"`
-	ID                    *string                `json:"id"`
-	Partition             *string                `json:"partition"`
-	PolicyDetails         *PolicyDetails         `json:"policyDetails"`
-	Region                *string                `json:"region"`
-	ResourcesAffected     *ResourcesAffected     `json:"resourcesAffected"`
-	Sample                *bool                  `json:"sample"`
-	SchemaVersion         *string                `json:"schemaVersion"`
-	Severity              *Severity              `json:"severity"`
-	Title                 *string                `json:"title"`
-	Type                  *FindingTypeEnum       `json:"type"`
-	UpdatedAt             *time.Time             `json:"updatedAt"`
+	AccountID             *string                `json:"accountId,omitempty"`
+	Archived              *bool                  `json:"archived,omitempty"`
+	Category              *FindingCategoryEnum   `json:"category,omitempty"`
+	ClassificationDetails *ClassificationDetails `json:"classificationDetails,omitempty"`
+	Count                 *int64                 `json:"count,omitempty"`
+	CreatedAt             *time.Time             `json:"createdAt,omitempty"`
+	Description           *string                `json:"description,omitempty"`
+	ID                    *string                `json:"id,omitempty"`
+	Partition             *string                `json:"partition,omitempty"`
+	PolicyDetails         *PolicyDetails         `json:"policyDetails,omitempty"`
+	Region                *string                `json:"region,omitempty"`
+	ResourcesAffected     *ResourcesAffected     `json:"resourcesAffected,omitempty"`
+	Sample                *bool                  `json:"sample,omitempty"`
+	SchemaVersion         *string                `json:"schemaVersion,omitempty"`
+	Severity              *Severity              `json:"severity,omitempty"`
+	Title                 *string                `json:"title,omitempty"`
+	Type                  *FindingTypeEnum       `json:"type,omitempty"`
+	UpdatedAt             *time.Time             `json:"updatedAt,omitempty"`
 }

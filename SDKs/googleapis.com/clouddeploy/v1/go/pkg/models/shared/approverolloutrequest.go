@@ -1,5 +1,5 @@
 package shared
 
 type ApproveRolloutRequest struct {
-	Approved *bool `json:"approved"`
+	Approved *bool `json:"approved,omitempty"`
 }

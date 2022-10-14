@@ -1,12 +1,12 @@
 package shared
 
 type MembershipFeatureState struct {
-	Anthosvm         *AnthosVMMembershipState         `json:"anthosvm"`
-	Appdevexperience *AppDevExperienceFeatureState    `json:"appdevexperience"`
-	Configmanagement *ConfigManagementMembershipState `json:"configmanagement"`
-	Identityservice  *IdentityServiceMembershipState  `json:"identityservice"`
-	Metering         *MeteringMembershipState         `json:"metering"`
-	Policycontroller *PolicyControllerMembershipState `json:"policycontroller"`
-	Servicemesh      *ServiceMeshMembershipState      `json:"servicemesh"`
-	State            *FeatureState                    `json:"state"`
+	Anthosvm         *AnthosVMMembershipState         `json:"anthosvm,omitempty"`
+	Appdevexperience *AppDevExperienceFeatureState    `json:"appdevexperience,omitempty"`
+	Configmanagement *ConfigManagementMembershipState `json:"configmanagement,omitempty"`
+	Identityservice  *IdentityServiceMembershipState  `json:"identityservice,omitempty"`
+	Metering         *MeteringMembershipState         `json:"metering,omitempty"`
+	Policycontroller *PolicyControllerMembershipState `json:"policycontroller,omitempty"`
+	Servicemesh      *ServiceMeshMembershipState      `json:"servicemesh,omitempty"`
+	State            *FeatureState                    `json:"state,omitempty"`
 }

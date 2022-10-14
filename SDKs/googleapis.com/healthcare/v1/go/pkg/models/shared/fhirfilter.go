@@ -1,5 +1,5 @@
 package shared
 
 type FhirFilter struct {
-	Resources *Resources `json:"resources"`
+	Resources *Resources `json:"resources,omitempty"`
 }

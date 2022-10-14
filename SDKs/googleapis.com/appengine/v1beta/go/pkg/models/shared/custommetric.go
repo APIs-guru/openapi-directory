@@ -1,9 +1,9 @@
 package shared
 
 type CustomMetric struct {
-	Filter                   *string  `json:"filter"`
-	MetricName               *string  `json:"metricName"`
-	SingleInstanceAssignment *float64 `json:"singleInstanceAssignment"`
-	TargetType               *string  `json:"targetType"`
-	TargetUtilization        *float64 `json:"targetUtilization"`
+	Filter                   *string  `json:"filter,omitempty"`
+	MetricName               *string  `json:"metricName,omitempty"`
+	SingleInstanceAssignment *float64 `json:"singleInstanceAssignment,omitempty"`
+	TargetType               *string  `json:"targetType,omitempty"`
+	TargetUtilization        *float64 `json:"targetUtilization,omitempty"`
 }

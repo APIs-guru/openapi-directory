@@ -1,17 +1,17 @@
 package shared
 
 type Channel struct {
-	AuditDetails        *ChannelAuditDetails           `json:"auditDetails"`
-	BrandingSettings    *ChannelBrandingSettings       `json:"brandingSettings"`
-	ContentDetails      *ChannelContentDetails         `json:"contentDetails"`
-	ContentOwnerDetails *ChannelContentOwnerDetails    `json:"contentOwnerDetails"`
-	ConversionPings     *ChannelConversionPings        `json:"conversionPings"`
-	Etag                *string                        `json:"etag"`
-	ID                  *string                        `json:"id"`
-	Kind                *string                        `json:"kind"`
-	Localizations       map[string]ChannelLocalization `json:"localizations"`
-	Snippet             *ChannelSnippet                `json:"snippet"`
-	Statistics          *ChannelStatistics             `json:"statistics"`
-	Status              *ChannelStatus                 `json:"status"`
-	TopicDetails        *ChannelTopicDetails           `json:"topicDetails"`
+	AuditDetails        *ChannelAuditDetails           `json:"auditDetails,omitempty"`
+	BrandingSettings    *ChannelBrandingSettings       `json:"brandingSettings,omitempty"`
+	ContentDetails      *ChannelContentDetails         `json:"contentDetails,omitempty"`
+	ContentOwnerDetails *ChannelContentOwnerDetails    `json:"contentOwnerDetails,omitempty"`
+	ConversionPings     *ChannelConversionPings        `json:"conversionPings,omitempty"`
+	Etag                *string                        `json:"etag,omitempty"`
+	ID                  *string                        `json:"id,omitempty"`
+	Kind                *string                        `json:"kind,omitempty"`
+	Localizations       map[string]ChannelLocalization `json:"localizations,omitempty"`
+	Snippet             *ChannelSnippet                `json:"snippet,omitempty"`
+	Statistics          *ChannelStatistics             `json:"statistics,omitempty"`
+	Status              *ChannelStatus                 `json:"status,omitempty"`
+	TopicDetails        *ChannelTopicDetails           `json:"topicDetails,omitempty"`
 }

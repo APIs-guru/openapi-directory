@@ -25,6 +25,6 @@ const (
 )
 
 type ThirdPartyTrackingURL struct {
-	ThirdPartyURLType *ThirdPartyTrackingURLThirdPartyURLTypeEnum `json:"thirdPartyUrlType"`
-	URL               *string                                     `json:"url"`
+	ThirdPartyURLType *ThirdPartyTrackingURLThirdPartyURLTypeEnum `json:"thirdPartyUrlType,omitempty"`
+	URL               *string                                     `json:"url,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type ExecutionConfig struct {
-	IdleTTL        *string  `json:"idleTtl"`
-	KmsKey         *string  `json:"kmsKey"`
-	NetworkTags    []string `json:"networkTags"`
-	NetworkURI     *string  `json:"networkUri"`
-	ServiceAccount *string  `json:"serviceAccount"`
-	SubnetworkURI  *string  `json:"subnetworkUri"`
+	IdleTTL        *string  `json:"idleTtl,omitempty"`
+	KmsKey         *string  `json:"kmsKey,omitempty"`
+	NetworkTags    []string `json:"networkTags,omitempty"`
+	NetworkURI     *string  `json:"networkUri,omitempty"`
+	ServiceAccount *string  `json:"serviceAccount,omitempty"`
+	SubnetworkURI  *string  `json:"subnetworkUri,omitempty"`
 }

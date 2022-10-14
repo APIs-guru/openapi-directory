@@ -1,7 +1,7 @@
 package shared
 
 type GamesAchievementIncrement struct {
-	Kind      *string `json:"kind"`
-	RequestID *string `json:"requestId"`
-	Steps     *int32  `json:"steps"`
+	Kind      *string `json:"kind,omitempty"`
+	RequestID *string `json:"requestId,omitempty"`
+	Steps     *int32  `json:"steps,omitempty"`
 }

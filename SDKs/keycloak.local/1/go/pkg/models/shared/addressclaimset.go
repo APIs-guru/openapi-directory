@@ -1,10 +1,10 @@
 package shared
 
 type AddressClaimSet struct {
-	Country       *string `json:"country"`
-	Formatted     *string `json:"formatted"`
-	Locality      *string `json:"locality"`
-	PostalCode    *string `json:"postal_code"`
-	Region        *string `json:"region"`
-	StreetAddress *string `json:"street_address"`
+	Country       *string `json:"country,omitempty"`
+	Formatted     *string `json:"formatted,omitempty"`
+	Locality      *string `json:"locality,omitempty"`
+	PostalCode    *string `json:"postal_code,omitempty"`
+	Region        *string `json:"region,omitempty"`
+	StreetAddress *string `json:"street_address,omitempty"`
 }

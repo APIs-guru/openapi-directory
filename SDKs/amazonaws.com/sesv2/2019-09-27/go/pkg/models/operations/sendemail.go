@@ -15,33 +15,33 @@ type SendEmailHeaders struct {
 }
 
 type SendEmailRequestBodyContent struct {
-	Raw      *shared.RawMessage `json:"Raw"`
-	Simple   *shared.Message    `json:"Simple"`
-	Template *shared.Template   `json:"Template"`
+	Raw      *shared.RawMessage `json:"Raw,omitempty"`
+	Simple   *shared.Message    `json:"Simple,omitempty"`
+	Template *shared.Template   `json:"Template,omitempty"`
 }
 
 type SendEmailRequestBodyDestination struct {
-	BccAddresses []string `json:"BccAddresses"`
-	CcAddresses  []string `json:"CcAddresses"`
-	ToAddresses  []string `json:"ToAddresses"`
+	BccAddresses []string `json:"BccAddresses,omitempty"`
+	CcAddresses  []string `json:"CcAddresses,omitempty"`
+	ToAddresses  []string `json:"ToAddresses,omitempty"`
 }
 
 type SendEmailRequestBodyListManagementOptions struct {
-	ContactListName *string `json:"ContactListName"`
-	TopicName       *string `json:"TopicName"`
+	ContactListName *string `json:"ContactListName,omitempty"`
+	TopicName       *string `json:"TopicName,omitempty"`
 }
 
 type SendEmailRequestBody struct {
-	ConfigurationSetName                      *string                                    `json:"ConfigurationSetName"`
+	ConfigurationSetName                      *string                                    `json:"ConfigurationSetName,omitempty"`
 	Content                                   SendEmailRequestBodyContent                `json:"Content"`
-	Destination                               *SendEmailRequestBodyDestination           `json:"Destination"`
-	EmailTags                                 []shared.MessageTag                        `json:"EmailTags"`
-	FeedbackForwardingEmailAddress            *string                                    `json:"FeedbackForwardingEmailAddress"`
-	FeedbackForwardingEmailAddressIdentityArn *string                                    `json:"FeedbackForwardingEmailAddressIdentityArn"`
-	FromEmailAddress                          *string                                    `json:"FromEmailAddress"`
-	FromEmailAddressIdentityArn               *string                                    `json:"FromEmailAddressIdentityArn"`
-	ListManagementOptions                     *SendEmailRequestBodyListManagementOptions `json:"ListManagementOptions"`
-	ReplyToAddresses                          []string                                   `json:"ReplyToAddresses"`
+	Destination                               *SendEmailRequestBodyDestination           `json:"Destination,omitempty"`
+	EmailTags                                 []shared.MessageTag                        `json:"EmailTags,omitempty"`
+	FeedbackForwardingEmailAddress            *string                                    `json:"FeedbackForwardingEmailAddress,omitempty"`
+	FeedbackForwardingEmailAddressIdentityArn *string                                    `json:"FeedbackForwardingEmailAddressIdentityArn,omitempty"`
+	FromEmailAddress                          *string                                    `json:"FromEmailAddress,omitempty"`
+	FromEmailAddressIdentityArn               *string                                    `json:"FromEmailAddressIdentityArn,omitempty"`
+	ListManagementOptions                     *SendEmailRequestBodyListManagementOptions `json:"ListManagementOptions,omitempty"`
+	ReplyToAddresses                          []string                                   `json:"ReplyToAddresses,omitempty"`
 }
 
 type SendEmailRequest struct {

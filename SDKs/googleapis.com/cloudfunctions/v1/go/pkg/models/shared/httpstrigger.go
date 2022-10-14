@@ -9,6 +9,6 @@ const (
 )
 
 type HTTPSTrigger struct {
-	SecurityLevel *HTTPSTriggerSecurityLevelEnum `json:"securityLevel"`
-	URL           *string                        `json:"url"`
+	SecurityLevel *HTTPSTriggerSecurityLevelEnum `json:"securityLevel,omitempty"`
+	URL           *string                        `json:"url,omitempty"`
 }

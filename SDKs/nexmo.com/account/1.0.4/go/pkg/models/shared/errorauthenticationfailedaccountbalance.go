@@ -1,6 +1,6 @@
 package shared
 
 type ErrorAuthenticationFailedAccountBalance struct {
-	ErrorCode      *interface{} `json:"error-code"`
-	ErrorCodeLabel *interface{} `json:"error-code-label"`
+	ErrorCode      *interface{} `json:"error-code,omitempty"`
+	ErrorCodeLabel *interface{} `json:"error-code-label,omitempty"`
 }

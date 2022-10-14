@@ -1,6 +1,6 @@
 package shared
 
 type DescribeBudgetPerformanceHistoryResponse struct {
-	BudgetPerformanceHistory *BudgetPerformanceHistory `json:"BudgetPerformanceHistory"`
-	NextToken                *string                   `json:"NextToken"`
+	BudgetPerformanceHistory *BudgetPerformanceHistory `json:"BudgetPerformanceHistory,omitempty"`
+	NextToken                *string                   `json:"NextToken,omitempty"`
 }

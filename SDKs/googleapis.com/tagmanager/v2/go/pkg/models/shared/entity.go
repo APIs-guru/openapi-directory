@@ -11,10 +11,10 @@ const (
 )
 
 type Entity struct {
-	ChangeStatus *EntityChangeStatusEnum `json:"changeStatus"`
-	Client       *Client                 `json:"client"`
-	Folder       *Folder                 `json:"folder"`
-	Tag          *Tag                    `json:"tag"`
-	Trigger      *Trigger                `json:"trigger"`
-	Variable     *Variable               `json:"variable"`
+	ChangeStatus *EntityChangeStatusEnum `json:"changeStatus,omitempty"`
+	Client       *Client                 `json:"client,omitempty"`
+	Folder       *Folder                 `json:"folder,omitempty"`
+	Tag          *Tag                    `json:"tag,omitempty"`
+	Trigger      *Trigger                `json:"trigger,omitempty"`
+	Variable     *Variable               `json:"variable,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type BaseType struct {
-	CollectionOverrides []CollectionOverride `json:"collectionOverrides"`
-	Credential          *Credential          `json:"credential"`
-	DescriptorURL       *string              `json:"descriptorUrl"`
-	Options             *Options             `json:"options"`
+	CollectionOverrides []CollectionOverride `json:"collectionOverrides,omitempty"`
+	Credential          *Credential          `json:"credential,omitempty"`
+	DescriptorURL       *string              `json:"descriptorUrl,omitempty"`
+	Options             *Options             `json:"options,omitempty"`
 }

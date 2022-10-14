@@ -1,7 +1,7 @@
 package shared
 
 type SendTokenResponse struct {
-	MultisigOutputs   []float64 `json:"multisigOutputs"`
-	Ntp1OutputIndexes []float64 `json:"ntp1OutputIndexes"`
-	TxHex             *string   `json:"txHex"`
+	MultisigOutputs   []float64 `json:"multisigOutputs,omitempty"`
+	Ntp1OutputIndexes []float64 `json:"ntp1OutputIndexes,omitempty"`
+	TxHex             *string   `json:"txHex,omitempty"`
 }

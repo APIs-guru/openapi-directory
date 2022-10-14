@@ -1,7 +1,7 @@
 package shared
 
 type ModerationLabel struct {
-	Confidence *float32 `json:"Confidence"`
-	Name       *string  `json:"Name"`
-	ParentName *string  `json:"ParentName"`
+	Confidence *float32 `json:"Confidence,omitempty"`
+	Name       *string  `json:"Name,omitempty"`
+	ParentName *string  `json:"ParentName,omitempty"`
 }

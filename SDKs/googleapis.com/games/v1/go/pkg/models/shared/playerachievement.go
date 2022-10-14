@@ -10,11 +10,11 @@ const (
 )
 
 type PlayerAchievement struct {
-	AchievementState            *PlayerAchievementAchievementStateEnum `json:"achievementState"`
-	CurrentSteps                *int32                                 `json:"currentSteps"`
-	ExperiencePoints            *string                                `json:"experiencePoints"`
-	FormattedCurrentStepsString *string                                `json:"formattedCurrentStepsString"`
-	ID                          *string                                `json:"id"`
-	Kind                        *string                                `json:"kind"`
-	LastUpdatedTimestamp        *string                                `json:"lastUpdatedTimestamp"`
+	AchievementState            *PlayerAchievementAchievementStateEnum `json:"achievementState,omitempty"`
+	CurrentSteps                *int32                                 `json:"currentSteps,omitempty"`
+	ExperiencePoints            *string                                `json:"experiencePoints,omitempty"`
+	FormattedCurrentStepsString *string                                `json:"formattedCurrentStepsString,omitempty"`
+	ID                          *string                                `json:"id,omitempty"`
+	Kind                        *string                                `json:"kind,omitempty"`
+	LastUpdatedTimestamp        *string                                `json:"lastUpdatedTimestamp,omitempty"`
 }

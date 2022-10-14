@@ -1,5 +1,5 @@
 package shared
 
 type PutRemediationExceptionsResponse struct {
-	FailedBatches []FailedRemediationExceptionBatch `json:"FailedBatches"`
+	FailedBatches []FailedRemediationExceptionBatch `json:"FailedBatches,omitempty"`
 }

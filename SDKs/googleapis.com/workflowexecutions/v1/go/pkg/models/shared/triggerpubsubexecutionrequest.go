@@ -1,7 +1,7 @@
 package shared
 
 type TriggerPubsubExecutionRequest struct {
-	GcpCloudEventsMode *string        `json:"GCPCloudEventsMode"`
-	Message            *PubsubMessage `json:"message"`
-	Subscription       *string        `json:"subscription"`
+	GcpCloudEventsMode *string        `json:"GCPCloudEventsMode,omitempty"`
+	Message            *PubsubMessage `json:"message,omitempty"`
+	Subscription       *string        `json:"subscription,omitempty"`
 }

@@ -43,8 +43,8 @@ type PostServersIDActionsRebuild201ApplicationJSONActionAction struct {
 }
 
 type PostServersIDActionsRebuild201ApplicationJSON struct {
-	Action       *PostServersIDActionsRebuild201ApplicationJSONActionAction `json:"action"`
-	RootPassword *string                                                    `json:"root_password"`
+	Action       *PostServersIDActionsRebuild201ApplicationJSONActionAction `json:"action,omitempty"`
+	RootPassword *string                                                    `json:"root_password,omitempty"`
 }
 
 type PostServersIDActionsRebuildResponse struct {

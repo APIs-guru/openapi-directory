@@ -15,7 +15,7 @@ type DestroyClusterRequest struct {
 type DestroyCluster401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type DestroyClusterResponse struct {

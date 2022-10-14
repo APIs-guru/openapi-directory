@@ -5,7 +5,7 @@ import (
 )
 
 type ComplianceExecutionSummary struct {
-	ExecutionID   *string   `json:"ExecutionId"`
+	ExecutionID   *string   `json:"ExecutionId,omitempty"`
 	ExecutionTime time.Time `json:"ExecutionTime"`
-	ExecutionType *string   `json:"ExecutionType"`
+	ExecutionType *string   `json:"ExecutionType,omitempty"`
 }

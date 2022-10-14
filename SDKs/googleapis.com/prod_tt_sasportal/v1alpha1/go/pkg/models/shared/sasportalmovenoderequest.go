@@ -1,5 +1,5 @@
 package shared
 
 type SasPortalMoveNodeRequest struct {
-	Destination *string `json:"destination"`
+	Destination *string `json:"destination,omitempty"`
 }

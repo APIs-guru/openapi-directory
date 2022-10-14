@@ -12,8 +12,8 @@ const (
 )
 
 type GoogleMapsPlayablelocationsV3PlayerReport struct {
-	LanguageCode  *string                                                `json:"languageCode"`
-	LocationName  *string                                                `json:"locationName"`
-	ReasonDetails *string                                                `json:"reasonDetails"`
-	Reasons       []GoogleMapsPlayablelocationsV3PlayerReportReasonsEnum `json:"reasons"`
+	LanguageCode  *string                                                `json:"languageCode,omitempty"`
+	LocationName  *string                                                `json:"locationName,omitempty"`
+	ReasonDetails *string                                                `json:"reasonDetails,omitempty"`
+	Reasons       []GoogleMapsPlayablelocationsV3PlayerReportReasonsEnum `json:"reasons,omitempty"`
 }

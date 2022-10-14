@@ -1,15 +1,15 @@
 package shared
 
 type AwsCloudFrontDistributionDetails struct {
-	CacheBehaviors       *AwsCloudFrontDistributionCacheBehaviors       `json:"CacheBehaviors"`
-	DefaultCacheBehavior *AwsCloudFrontDistributionDefaultCacheBehavior `json:"DefaultCacheBehavior"`
-	DefaultRootObject    *string                                        `json:"DefaultRootObject"`
-	DomainName           *string                                        `json:"DomainName"`
-	ETag                 *string                                        `json:"ETag"`
-	LastModifiedTime     *string                                        `json:"LastModifiedTime"`
-	Logging              *AwsCloudFrontDistributionLogging              `json:"Logging"`
-	OriginGroups         *AwsCloudFrontDistributionOriginGroups         `json:"OriginGroups"`
-	Origins              *AwsCloudFrontDistributionOrigins              `json:"Origins"`
-	Status               *string                                        `json:"Status"`
-	WebACLID             *string                                        `json:"WebAclId"`
+	CacheBehaviors       *AwsCloudFrontDistributionCacheBehaviors       `json:"CacheBehaviors,omitempty"`
+	DefaultCacheBehavior *AwsCloudFrontDistributionDefaultCacheBehavior `json:"DefaultCacheBehavior,omitempty"`
+	DefaultRootObject    *string                                        `json:"DefaultRootObject,omitempty"`
+	DomainName           *string                                        `json:"DomainName,omitempty"`
+	ETag                 *string                                        `json:"ETag,omitempty"`
+	LastModifiedTime     *string                                        `json:"LastModifiedTime,omitempty"`
+	Logging              *AwsCloudFrontDistributionLogging              `json:"Logging,omitempty"`
+	OriginGroups         *AwsCloudFrontDistributionOriginGroups         `json:"OriginGroups,omitempty"`
+	Origins              *AwsCloudFrontDistributionOrigins              `json:"Origins,omitempty"`
+	Status               *string                                        `json:"Status,omitempty"`
+	WebACLID             *string                                        `json:"WebAclId,omitempty"`
 }

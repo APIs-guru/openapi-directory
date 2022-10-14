@@ -1,10 +1,10 @@
 package shared
 
 type Table struct {
-	Columns              *int32                  `json:"columns"`
-	HorizontalBorderRows []TableBorderRow        `json:"horizontalBorderRows"`
-	Rows                 *int32                  `json:"rows"`
-	TableColumns         []TableColumnProperties `json:"tableColumns"`
-	TableRows            []TableRow              `json:"tableRows"`
-	VerticalBorderRows   []TableBorderRow        `json:"verticalBorderRows"`
+	Columns              *int32                  `json:"columns,omitempty"`
+	HorizontalBorderRows []TableBorderRow        `json:"horizontalBorderRows,omitempty"`
+	Rows                 *int32                  `json:"rows,omitempty"`
+	TableColumns         []TableColumnProperties `json:"tableColumns,omitempty"`
+	TableRows            []TableRow              `json:"tableRows,omitempty"`
+	VerticalBorderRows   []TableBorderRow        `json:"verticalBorderRows,omitempty"`
 }

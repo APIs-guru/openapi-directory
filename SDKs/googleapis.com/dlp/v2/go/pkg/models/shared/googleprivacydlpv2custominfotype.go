@@ -19,12 +19,12 @@ const (
 )
 
 type GooglePrivacyDlpV2CustomInfoType struct {
-	DetectionRules []GooglePrivacyDlpV2DetectionRule                  `json:"detectionRules"`
-	Dictionary     *GooglePrivacyDlpV2Dictionary                      `json:"dictionary"`
-	ExclusionType  *GooglePrivacyDlpV2CustomInfoTypeExclusionTypeEnum `json:"exclusionType"`
-	InfoType       *GooglePrivacyDlpV2InfoType                        `json:"infoType"`
-	Likelihood     *GooglePrivacyDlpV2CustomInfoTypeLikelihoodEnum    `json:"likelihood"`
-	Regex          *GooglePrivacyDlpV2Regex                           `json:"regex"`
-	StoredType     *GooglePrivacyDlpV2StoredType                      `json:"storedType"`
-	SurrogateType  map[string]interface{}                             `json:"surrogateType"`
+	DetectionRules []GooglePrivacyDlpV2DetectionRule                  `json:"detectionRules,omitempty"`
+	Dictionary     *GooglePrivacyDlpV2Dictionary                      `json:"dictionary,omitempty"`
+	ExclusionType  *GooglePrivacyDlpV2CustomInfoTypeExclusionTypeEnum `json:"exclusionType,omitempty"`
+	InfoType       *GooglePrivacyDlpV2InfoType                        `json:"infoType,omitempty"`
+	Likelihood     *GooglePrivacyDlpV2CustomInfoTypeLikelihoodEnum    `json:"likelihood,omitempty"`
+	Regex          *GooglePrivacyDlpV2Regex                           `json:"regex,omitempty"`
+	StoredType     *GooglePrivacyDlpV2StoredType                      `json:"storedType,omitempty"`
+	SurrogateType  map[string]interface{}                             `json:"surrogateType,omitempty"`
 }

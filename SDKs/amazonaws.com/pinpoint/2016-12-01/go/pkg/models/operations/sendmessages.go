@@ -19,12 +19,12 @@ type SendMessagesHeaders struct {
 }
 
 type SendMessagesRequestBodyMessageRequest struct {
-	Addresses             map[string]shared.AddressConfiguration      `json:"Addresses"`
-	Context               map[string]string                           `json:"Context"`
-	Endpoints             map[string]shared.EndpointSendConfiguration `json:"Endpoints"`
-	MessageConfiguration  *shared.DirectMessageConfiguration          `json:"MessageConfiguration"`
-	TemplateConfiguration *shared.TemplateConfiguration               `json:"TemplateConfiguration"`
-	TraceID               *string                                     `json:"TraceId"`
+	Addresses             map[string]shared.AddressConfiguration      `json:"Addresses,omitempty"`
+	Context               map[string]string                           `json:"Context,omitempty"`
+	Endpoints             map[string]shared.EndpointSendConfiguration `json:"Endpoints,omitempty"`
+	MessageConfiguration  *shared.DirectMessageConfiguration          `json:"MessageConfiguration,omitempty"`
+	TemplateConfiguration *shared.TemplateConfiguration               `json:"TemplateConfiguration,omitempty"`
+	TraceID               *string                                     `json:"TraceId,omitempty"`
 }
 
 type SendMessagesRequestBody struct {

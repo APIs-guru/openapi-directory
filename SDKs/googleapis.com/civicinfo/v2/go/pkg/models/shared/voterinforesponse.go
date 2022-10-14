@@ -1,16 +1,16 @@
 package shared
 
 type VoterInfoResponse struct {
-	Contests         []Contest              `json:"contests"`
-	DropOffLocations []PollingLocation      `json:"dropOffLocations"`
-	EarlyVoteSites   []PollingLocation      `json:"earlyVoteSites"`
-	Election         *Election              `json:"election"`
-	Kind             *string                `json:"kind"`
-	MailOnly         *bool                  `json:"mailOnly"`
-	NormalizedInput  *SimpleAddressType     `json:"normalizedInput"`
-	OtherElections   []Election             `json:"otherElections"`
-	PollingLocations []PollingLocation      `json:"pollingLocations"`
-	PrecinctID       *string                `json:"precinctId"`
-	Precincts        []Precinct             `json:"precincts"`
-	State            []AdministrationRegion `json:"state"`
+	Contests         []Contest              `json:"contests,omitempty"`
+	DropOffLocations []PollingLocation      `json:"dropOffLocations,omitempty"`
+	EarlyVoteSites   []PollingLocation      `json:"earlyVoteSites,omitempty"`
+	Election         *Election              `json:"election,omitempty"`
+	Kind             *string                `json:"kind,omitempty"`
+	MailOnly         *bool                  `json:"mailOnly,omitempty"`
+	NormalizedInput  *SimpleAddressType     `json:"normalizedInput,omitempty"`
+	OtherElections   []Election             `json:"otherElections,omitempty"`
+	PollingLocations []PollingLocation      `json:"pollingLocations,omitempty"`
+	PrecinctID       *string                `json:"precinctId,omitempty"`
+	Precincts        []Precinct             `json:"precincts,omitempty"`
+	State            []AdministrationRegion `json:"state,omitempty"`
 }

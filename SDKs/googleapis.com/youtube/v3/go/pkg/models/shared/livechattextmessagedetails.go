@@ -1,5 +1,5 @@
 package shared
 
 type LiveChatTextMessageDetails struct {
-	MessageText *string `json:"messageText"`
+	MessageText *string `json:"messageText,omitempty"`
 }

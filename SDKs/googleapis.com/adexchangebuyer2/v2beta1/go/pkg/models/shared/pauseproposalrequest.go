@@ -1,5 +1,5 @@
 package shared
 
 type PauseProposalRequest struct {
-	Reason *string `json:"reason"`
+	Reason *string `json:"reason,omitempty"`
 }

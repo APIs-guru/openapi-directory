@@ -9,6 +9,6 @@ const (
 )
 
 type StoreLayout struct {
-	HomepageID      *string                         `json:"homepageId"`
-	StoreLayoutType *StoreLayoutStoreLayoutTypeEnum `json:"storeLayoutType"`
+	HomepageID      *string                         `json:"homepageId,omitempty"`
+	StoreLayoutType *StoreLayoutStoreLayoutTypeEnum `json:"storeLayoutType,omitempty"`
 }

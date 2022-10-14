@@ -10,8 +10,8 @@ const (
 )
 
 type VoiceSelectionParams struct {
-	CustomVoice  *CustomVoiceParams                  `json:"customVoice"`
-	LanguageCode *string                             `json:"languageCode"`
-	Name         *string                             `json:"name"`
-	SsmlGender   *VoiceSelectionParamsSsmlGenderEnum `json:"ssmlGender"`
+	CustomVoice  *CustomVoiceParams                  `json:"customVoice,omitempty"`
+	LanguageCode *string                             `json:"languageCode,omitempty"`
+	Name         *string                             `json:"name,omitempty"`
+	SsmlGender   *VoiceSelectionParamsSsmlGenderEnum `json:"ssmlGender,omitempty"`
 }

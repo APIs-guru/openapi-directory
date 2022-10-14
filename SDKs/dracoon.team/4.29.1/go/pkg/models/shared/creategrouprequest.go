@@ -1,6 +1,6 @@
 package shared
 
 type CreateGroupRequest struct {
-	Expiration *ObjectExpiration `json:"expiration"`
+	Expiration *ObjectExpiration `json:"expiration,omitempty"`
 	Name       string            `json:"name"`
 }

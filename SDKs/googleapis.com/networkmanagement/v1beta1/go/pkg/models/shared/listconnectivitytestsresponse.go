@@ -1,7 +1,7 @@
 package shared
 
 type ListConnectivityTestsResponse struct {
-	NextPageToken *string            `json:"nextPageToken"`
-	Resources     []ConnectivityTest `json:"resources"`
-	Unreachable   []string           `json:"unreachable"`
+	NextPageToken *string            `json:"nextPageToken,omitempty"`
+	Resources     []ConnectivityTest `json:"resources,omitempty"`
+	Unreachable   []string           `json:"unreachable,omitempty"`
 }

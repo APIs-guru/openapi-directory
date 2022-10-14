@@ -5,7 +5,7 @@ import (
 )
 
 type RpSubscriptionNotification struct {
-	Properties       *RpSubscriptionProperties `json:"properties"`
-	RegistrationDate *time.Time                `json:"registrationDate"`
-	State            *string                   `json:"state"`
+	Properties       *RpSubscriptionProperties `json:"properties,omitempty"`
+	RegistrationDate *time.Time                `json:"registrationDate,omitempty"`
+	State            *string                   `json:"state,omitempty"`
 }

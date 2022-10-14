@@ -16,7 +16,7 @@ const (
 )
 
 type EditEmbedPresetRequestBody struct {
-	Outro *EditEmbedPresetRequestBodyOutroEnum `json:"outro"`
+	Outro *EditEmbedPresetRequestBodyOutroEnum `json:"outro,omitempty"`
 }
 
 type EditEmbedPresetRequest struct {

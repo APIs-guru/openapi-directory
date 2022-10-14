@@ -5,8 +5,8 @@ import (
 )
 
 type ManagedAgent struct {
-	LastStartedAt *time.Time            `json:"lastStartedAt"`
-	LastStatus    *string               `json:"lastStatus"`
-	Name          *ManagedAgentNameEnum `json:"name"`
-	Reason        *string               `json:"reason"`
+	LastStartedAt *time.Time            `json:"lastStartedAt,omitempty"`
+	LastStatus    *string               `json:"lastStatus,omitempty"`
+	Name          *ManagedAgentNameEnum `json:"name,omitempty"`
+	Reason        *string               `json:"reason,omitempty"`
 }

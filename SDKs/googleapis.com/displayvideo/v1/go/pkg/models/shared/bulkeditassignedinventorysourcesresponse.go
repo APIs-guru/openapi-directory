@@ -1,5 +1,5 @@
 package shared
 
 type BulkEditAssignedInventorySourcesResponse struct {
-	AssignedInventorySources []AssignedInventorySource `json:"assignedInventorySources"`
+	AssignedInventorySources []AssignedInventorySource `json:"assignedInventorySources,omitempty"`
 }

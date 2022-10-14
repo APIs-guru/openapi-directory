@@ -1,13 +1,13 @@
 package shared
 
 type BasePopular struct {
-	City          *string     `json:"city"`
-	Counts        *string     `json:"counts"`
-	DomStats      *SalesStats `json:"dom_stats"`
-	InventoryType *string     `json:"inventoryType"`
-	Make          *string     `json:"make"`
-	MilesStats    *SalesStats `json:"miles_stats"`
-	Model         *string     `json:"model"`
-	PriceStats    *SalesStats `json:"price_stats"`
-	State         *string     `json:"state"`
+	City          *string     `json:"city,omitempty"`
+	Counts        *string     `json:"counts,omitempty"`
+	DomStats      *SalesStats `json:"dom_stats,omitempty"`
+	InventoryType *string     `json:"inventoryType,omitempty"`
+	Make          *string     `json:"make,omitempty"`
+	MilesStats    *SalesStats `json:"miles_stats,omitempty"`
+	Model         *string     `json:"model,omitempty"`
+	PriceStats    *SalesStats `json:"price_stats,omitempty"`
+	State         *string     `json:"state,omitempty"`
 }

@@ -23,13 +23,13 @@ type CreateVirtualRouterHeaders struct {
 }
 
 type CreateVirtualRouterRequestBodySpec struct {
-	Listeners []shared.VirtualRouterListener `json:"listeners"`
+	Listeners []shared.VirtualRouterListener `json:"listeners,omitempty"`
 }
 
 type CreateVirtualRouterRequestBody struct {
-	ClientToken       *string                            `json:"clientToken"`
+	ClientToken       *string                            `json:"clientToken,omitempty"`
 	Spec              CreateVirtualRouterRequestBodySpec `json:"spec"`
-	Tags              []shared.TagRef                    `json:"tags"`
+	Tags              []shared.TagRef                    `json:"tags,omitempty"`
 	VirtualRouterName string                             `json:"virtualRouterName"`
 }
 

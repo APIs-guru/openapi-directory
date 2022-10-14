@@ -9,7 +9,7 @@ const (
 )
 
 type GoogleCloudContactcenterinsightsV1IssueModelInputDataConfig struct {
-	Filter                     *string                                                                `json:"filter"`
-	Medium                     *GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigMediumEnum `json:"medium"`
-	TrainingConversationsCount *string                                                                `json:"trainingConversationsCount"`
+	Filter                     *string                                                                `json:"filter,omitempty"`
+	Medium                     *GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigMediumEnum `json:"medium,omitempty"`
+	TrainingConversationsCount *string                                                                `json:"trainingConversationsCount,omitempty"`
 }

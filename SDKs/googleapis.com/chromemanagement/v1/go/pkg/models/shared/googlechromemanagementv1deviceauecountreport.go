@@ -19,9 +19,9 @@ const (
 )
 
 type GoogleChromeManagementV1DeviceAueCountReport struct {
-	AueMonth *GoogleChromeManagementV1DeviceAueCountReportAueMonthEnum `json:"aueMonth"`
-	AueYear  *string                                                   `json:"aueYear"`
-	Count    *string                                                   `json:"count"`
-	Expired  *bool                                                     `json:"expired"`
-	Model    *string                                                   `json:"model"`
+	AueMonth *GoogleChromeManagementV1DeviceAueCountReportAueMonthEnum `json:"aueMonth,omitempty"`
+	AueYear  *string                                                   `json:"aueYear,omitempty"`
+	Count    *string                                                   `json:"count,omitempty"`
+	Expired  *bool                                                     `json:"expired,omitempty"`
+	Model    *string                                                   `json:"model,omitempty"`
 }

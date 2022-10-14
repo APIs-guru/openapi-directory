@@ -13,14 +13,14 @@ type EnterpriseAdminStartPreReceiveEnvironmentDownloadRequest struct {
 }
 
 type EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSONErrors struct {
-	Code     *string `json:"code"`
-	Message  *string `json:"message"`
-	Resource *string `json:"resource"`
+	Code     *string `json:"code,omitempty"`
+	Message  *string `json:"message,omitempty"`
+	Resource *string `json:"resource,omitempty"`
 }
 
 type EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSON struct {
-	Errors  []EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSONErrors `json:"errors"`
-	Message *string                                                                     `json:"message"`
+	Errors  []EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSONErrors `json:"errors,omitempty"`
+	Message *string                                                                     `json:"message,omitempty"`
 }
 
 type EnterpriseAdminStartPreReceiveEnvironmentDownloadResponse struct {

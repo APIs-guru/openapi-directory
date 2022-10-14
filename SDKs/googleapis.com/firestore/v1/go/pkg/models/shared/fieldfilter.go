@@ -17,7 +17,7 @@ const (
 )
 
 type FieldFilter struct {
-	Field *FieldReference    `json:"field"`
-	Op    *FieldFilterOpEnum `json:"op"`
-	Value *Value             `json:"value"`
+	Field *FieldReference    `json:"field,omitempty"`
+	Op    *FieldFilterOpEnum `json:"op,omitempty"`
+	Value *Value             `json:"value,omitempty"`
 }

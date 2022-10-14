@@ -1,6 +1,6 @@
 package shared
 
 type DescribeMaintenanceWindowsResult struct {
-	NextToken        *string                     `json:"NextToken"`
-	WindowIdentities []MaintenanceWindowIdentity `json:"WindowIdentities"`
+	NextToken        *string                     `json:"NextToken,omitempty"`
+	WindowIdentities []MaintenanceWindowIdentity `json:"WindowIdentities,omitempty"`
 }

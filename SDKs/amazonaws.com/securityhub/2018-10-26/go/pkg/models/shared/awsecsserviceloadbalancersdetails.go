@@ -1,8 +1,8 @@
 package shared
 
 type AwsEcsServiceLoadBalancersDetails struct {
-	ContainerName    *string `json:"ContainerName"`
-	ContainerPort    *int64  `json:"ContainerPort"`
-	LoadBalancerName *string `json:"LoadBalancerName"`
-	TargetGroupArn   *string `json:"TargetGroupArn"`
+	ContainerName    *string `json:"ContainerName,omitempty"`
+	ContainerPort    *int64  `json:"ContainerPort,omitempty"`
+	LoadBalancerName *string `json:"LoadBalancerName,omitempty"`
+	TargetGroupArn   *string `json:"TargetGroupArn,omitempty"`
 }

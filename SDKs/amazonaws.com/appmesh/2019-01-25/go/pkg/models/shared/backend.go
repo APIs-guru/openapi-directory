@@ -1,5 +1,5 @@
 package shared
 
 type Backend struct {
-	VirtualService *VirtualServiceBackend `json:"virtualService"`
+	VirtualService *VirtualServiceBackend `json:"virtualService,omitempty"`
 }

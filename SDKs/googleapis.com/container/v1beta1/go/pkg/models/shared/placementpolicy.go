@@ -8,5 +8,5 @@ const (
 )
 
 type PlacementPolicy struct {
-	Type *PlacementPolicyTypeEnum `json:"type"`
+	Type *PlacementPolicyTypeEnum `json:"type,omitempty"`
 }

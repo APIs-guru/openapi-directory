@@ -1,6 +1,6 @@
 package shared
 
 type AwsRdsDbOptionGroupMembership struct {
-	OptionGroupName *string `json:"OptionGroupName"`
-	Status          *string `json:"Status"`
+	OptionGroupName *string `json:"OptionGroupName,omitempty"`
+	Status          *string `json:"Status,omitempty"`
 }

@@ -20,16 +20,16 @@ type PutBotAliasHeaders struct {
 }
 
 type PutBotAliasRequestBodyConversationLogs struct {
-	IamRoleArn  *string                     `json:"iamRoleArn"`
-	LogSettings []shared.LogSettingsRequest `json:"logSettings"`
+	IamRoleArn  *string                     `json:"iamRoleArn,omitempty"`
+	LogSettings []shared.LogSettingsRequest `json:"logSettings,omitempty"`
 }
 
 type PutBotAliasRequestBody struct {
 	BotVersion       string                                  `json:"botVersion"`
-	Checksum         *string                                 `json:"checksum"`
-	ConversationLogs *PutBotAliasRequestBodyConversationLogs `json:"conversationLogs"`
-	Description      *string                                 `json:"description"`
-	Tags             []shared.Tag                            `json:"tags"`
+	Checksum         *string                                 `json:"checksum,omitempty"`
+	ConversationLogs *PutBotAliasRequestBodyConversationLogs `json:"conversationLogs,omitempty"`
+	Description      *string                                 `json:"description,omitempty"`
+	Tags             []shared.Tag                            `json:"tags,omitempty"`
 }
 
 type PutBotAliasRequest struct {

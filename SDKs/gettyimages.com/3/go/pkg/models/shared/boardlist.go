@@ -1,6 +1,6 @@
 package shared
 
 type BoardList struct {
-	BoardCount *int32           `json:"board_count"`
-	Boards     []BoardListBoard `json:"boards"`
+	BoardCount *int32           `json:"board_count,omitempty"`
+	Boards     []BoardListBoard `json:"boards,omitempty"`
 }

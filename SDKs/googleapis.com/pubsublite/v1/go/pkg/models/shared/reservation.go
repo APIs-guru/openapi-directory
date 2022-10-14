@@ -1,6 +1,6 @@
 package shared
 
 type Reservation struct {
-	Name               *string `json:"name"`
-	ThroughputCapacity *string `json:"throughputCapacity"`
+	Name               *string `json:"name,omitempty"`
+	ThroughputCapacity *string `json:"throughputCapacity,omitempty"`
 }

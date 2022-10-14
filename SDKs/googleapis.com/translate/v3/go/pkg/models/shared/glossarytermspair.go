@@ -1,6 +1,6 @@
 package shared
 
 type GlossaryTermsPair struct {
-	SourceTerm *GlossaryTerm `json:"sourceTerm"`
-	TargetTerm *GlossaryTerm `json:"targetTerm"`
+	SourceTerm *GlossaryTerm `json:"sourceTerm,omitempty"`
+	TargetTerm *GlossaryTerm `json:"targetTerm,omitempty"`
 }

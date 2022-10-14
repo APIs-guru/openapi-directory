@@ -10,7 +10,7 @@ const (
 )
 
 type UpdateContactPhotoRequest struct {
-	PersonFields *string                                `json:"personFields"`
-	PhotoBytes   *string                                `json:"photoBytes"`
-	Sources      []UpdateContactPhotoRequestSourcesEnum `json:"sources"`
+	PersonFields *string                                `json:"personFields,omitempty"`
+	PhotoBytes   *string                                `json:"photoBytes,omitempty"`
+	Sources      []UpdateContactPhotoRequestSourcesEnum `json:"sources,omitempty"`
 }

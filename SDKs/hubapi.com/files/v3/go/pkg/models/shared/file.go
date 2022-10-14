@@ -18,20 +18,20 @@ const (
 type File struct {
 	Access            FileAccessEnum `json:"access"`
 	Archived          bool           `json:"archived"`
-	ArchivedAt        *time.Time     `json:"archivedAt"`
+	ArchivedAt        *time.Time     `json:"archivedAt,omitempty"`
 	CreatedAt         time.Time      `json:"createdAt"`
-	DefaultHostingURL *string        `json:"defaultHostingUrl"`
-	Encoding          *string        `json:"encoding"`
-	Extension         *string        `json:"extension"`
-	Height            *int32         `json:"height"`
+	DefaultHostingURL *string        `json:"defaultHostingUrl,omitempty"`
+	Encoding          *string        `json:"encoding,omitempty"`
+	Extension         *string        `json:"extension,omitempty"`
+	Height            *int32         `json:"height,omitempty"`
 	ID                string         `json:"id"`
-	IsUsableInContent *bool          `json:"isUsableInContent"`
-	Name              *string        `json:"name"`
-	ParentFolderID    *string        `json:"parentFolderId"`
-	Path              *string        `json:"path"`
-	Size              *int64         `json:"size"`
-	Type              *string        `json:"type"`
+	IsUsableInContent *bool          `json:"isUsableInContent,omitempty"`
+	Name              *string        `json:"name,omitempty"`
+	ParentFolderID    *string        `json:"parentFolderId,omitempty"`
+	Path              *string        `json:"path,omitempty"`
+	Size              *int64         `json:"size,omitempty"`
+	Type              *string        `json:"type,omitempty"`
 	UpdatedAt         time.Time      `json:"updatedAt"`
-	URL               *string        `json:"url"`
-	Width             *int32         `json:"width"`
+	URL               *string        `json:"url,omitempty"`
+	Width             *int32         `json:"width,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type AwsService struct {
-	InvokedBy *string `json:"invokedBy"`
+	InvokedBy *string `json:"invokedBy,omitempty"`
 }

@@ -10,10 +10,10 @@ const (
 )
 
 type OsUpdateStatus struct {
-	RebootTime            *string                  `json:"rebootTime"`
-	State                 *OsUpdateStatusStateEnum `json:"state"`
-	TargetKioskAppVersion *string                  `json:"targetKioskAppVersion"`
-	TargetOsVersion       *string                  `json:"targetOsVersion"`
-	UpdateCheckTime       *string                  `json:"updateCheckTime"`
-	UpdateTime            *string                  `json:"updateTime"`
+	RebootTime            *string                  `json:"rebootTime,omitempty"`
+	State                 *OsUpdateStatusStateEnum `json:"state,omitempty"`
+	TargetKioskAppVersion *string                  `json:"targetKioskAppVersion,omitempty"`
+	TargetOsVersion       *string                  `json:"targetOsVersion,omitempty"`
+	UpdateCheckTime       *string                  `json:"updateCheckTime,omitempty"`
+	UpdateTime            *string                  `json:"updateTime,omitempty"`
 }

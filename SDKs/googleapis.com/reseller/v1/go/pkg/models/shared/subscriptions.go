@@ -1,7 +1,7 @@
 package shared
 
 type Subscriptions struct {
-	Kind          *string        `json:"kind"`
-	NextPageToken *string        `json:"nextPageToken"`
-	Subscriptions []Subscription `json:"subscriptions"`
+	Kind          *string        `json:"kind,omitempty"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
+	Subscriptions []Subscription `json:"subscriptions,omitempty"`
 }

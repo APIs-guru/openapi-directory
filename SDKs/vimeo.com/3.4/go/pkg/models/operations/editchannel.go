@@ -17,10 +17,10 @@ const (
 )
 
 type EditChannelRequestBody struct {
-	Description *string                            `json:"description"`
-	Link        *string                            `json:"link"`
-	Name        *string                            `json:"name"`
-	Privacy     *EditChannelRequestBodyPrivacyEnum `json:"privacy"`
+	Description *string                            `json:"description,omitempty"`
+	Link        *string                            `json:"link,omitempty"`
+	Name        *string                            `json:"name,omitempty"`
+	Privacy     *EditChannelRequestBodyPrivacyEnum `json:"privacy,omitempty"`
 }
 
 type EditChannelSecurity struct {

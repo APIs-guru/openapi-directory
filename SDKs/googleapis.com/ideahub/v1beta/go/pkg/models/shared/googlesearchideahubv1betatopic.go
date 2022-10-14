@@ -1,7 +1,7 @@
 package shared
 
 type GoogleSearchIdeahubV1betaTopic struct {
-	DisplayName *string `json:"displayName"`
-	Mid         *string `json:"mid"`
-	Name        *string `json:"name"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Mid         *string `json:"mid,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }

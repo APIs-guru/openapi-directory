@@ -1,10 +1,10 @@
 package shared
 
 type BusinessUserInputModel struct {
-	Email                  *string `json:"email"`
-	LocationID             *string `json:"locationId"`
-	Name                   *string `json:"name"`
-	ResourceID             *string `json:"resourceId"`
-	Role                   *string `json:"role"`
-	SendRegistrationInvite *bool   `json:"sendRegistrationInvite"`
+	Email                  *string `json:"email,omitempty"`
+	LocationID             *string `json:"locationId,omitempty"`
+	Name                   *string `json:"name,omitempty"`
+	ResourceID             *string `json:"resourceId,omitempty"`
+	Role                   *string `json:"role,omitempty"`
+	SendRegistrationInvite *bool   `json:"sendRegistrationInvite,omitempty"`
 }

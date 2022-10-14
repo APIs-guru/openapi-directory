@@ -17,5 +17,5 @@ const (
 )
 
 type CancelTestMatrixResponse struct {
-	TestState *CancelTestMatrixResponseTestStateEnum `json:"testState"`
+	TestState *CancelTestMatrixResponseTestStateEnum `json:"testState,omitempty"`
 }

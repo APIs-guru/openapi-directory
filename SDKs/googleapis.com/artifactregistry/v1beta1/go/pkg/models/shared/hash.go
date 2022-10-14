@@ -9,6 +9,6 @@ const (
 )
 
 type Hash struct {
-	Type  *HashTypeEnum `json:"type"`
-	Value *string       `json:"value"`
+	Type  *HashTypeEnum `json:"type,omitempty"`
+	Value *string       `json:"value,omitempty"`
 }

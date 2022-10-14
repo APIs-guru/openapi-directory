@@ -1,6 +1,6 @@
 package shared
 
 type SalesTaxBase struct {
-	SalesTaxPercentage       *string `json:"salesTaxPercentage"`
-	ShippingAndHandlingTaxed *bool   `json:"shippingAndHandlingTaxed"`
+	SalesTaxPercentage       *string `json:"salesTaxPercentage,omitempty"`
+	ShippingAndHandlingTaxed *bool   `json:"shippingAndHandlingTaxed,omitempty"`
 }

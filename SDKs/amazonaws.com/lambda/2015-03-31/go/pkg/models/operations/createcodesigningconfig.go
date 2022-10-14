@@ -15,17 +15,17 @@ type CreateCodeSigningConfigHeaders struct {
 }
 
 type CreateCodeSigningConfigRequestBodyAllowedPublishers struct {
-	SigningProfileVersionArns []string `json:"SigningProfileVersionArns"`
+	SigningProfileVersionArns []string `json:"SigningProfileVersionArns,omitempty"`
 }
 
 type CreateCodeSigningConfigRequestBodyCodeSigningPolicies struct {
-	UntrustedArtifactOnDeployment *shared.CodeSigningPolicyEnum `json:"UntrustedArtifactOnDeployment"`
+	UntrustedArtifactOnDeployment *shared.CodeSigningPolicyEnum `json:"UntrustedArtifactOnDeployment,omitempty"`
 }
 
 type CreateCodeSigningConfigRequestBody struct {
 	AllowedPublishers   CreateCodeSigningConfigRequestBodyAllowedPublishers    `json:"AllowedPublishers"`
-	CodeSigningPolicies *CreateCodeSigningConfigRequestBodyCodeSigningPolicies `json:"CodeSigningPolicies"`
-	Description         *string                                                `json:"Description"`
+	CodeSigningPolicies *CreateCodeSigningConfigRequestBodyCodeSigningPolicies `json:"CodeSigningPolicies,omitempty"`
+	Description         *string                                                `json:"Description,omitempty"`
 }
 
 type CreateCodeSigningConfigRequest struct {

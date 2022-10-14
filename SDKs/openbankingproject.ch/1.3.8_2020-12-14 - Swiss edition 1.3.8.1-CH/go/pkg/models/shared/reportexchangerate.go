@@ -5,7 +5,7 @@ import (
 )
 
 type ReportExchangeRate struct {
-	ContractIdentification *string   `json:"contractIdentification"`
+	ContractIdentification *string   `json:"contractIdentification,omitempty"`
 	ExchangeRate           string    `json:"exchangeRate"`
 	QuotationDate          time.Time `json:"quotationDate"`
 	SourceCurrency         string    `json:"sourceCurrency"`

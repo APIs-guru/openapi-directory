@@ -19,31 +19,31 @@ type MergeProfilesHeaders struct {
 }
 
 type MergeProfilesRequestBodyFieldSourceProfileIds struct {
-	AccountNumber         *string           `json:"AccountNumber"`
-	AdditionalInformation *string           `json:"AdditionalInformation"`
-	Address               *string           `json:"Address"`
-	Attributes            map[string]string `json:"Attributes"`
-	BillingAddress        *string           `json:"BillingAddress"`
-	BirthDate             *string           `json:"BirthDate"`
-	BusinessEmailAddress  *string           `json:"BusinessEmailAddress"`
-	BusinessName          *string           `json:"BusinessName"`
-	BusinessPhoneNumber   *string           `json:"BusinessPhoneNumber"`
-	EmailAddress          *string           `json:"EmailAddress"`
-	FirstName             *string           `json:"FirstName"`
-	Gender                *string           `json:"Gender"`
-	HomePhoneNumber       *string           `json:"HomePhoneNumber"`
-	LastName              *string           `json:"LastName"`
-	MailingAddress        *string           `json:"MailingAddress"`
-	MiddleName            *string           `json:"MiddleName"`
-	MobilePhoneNumber     *string           `json:"MobilePhoneNumber"`
-	PartyType             *string           `json:"PartyType"`
-	PersonalEmailAddress  *string           `json:"PersonalEmailAddress"`
-	PhoneNumber           *string           `json:"PhoneNumber"`
-	ShippingAddress       *string           `json:"ShippingAddress"`
+	AccountNumber         *string           `json:"AccountNumber,omitempty"`
+	AdditionalInformation *string           `json:"AdditionalInformation,omitempty"`
+	Address               *string           `json:"Address,omitempty"`
+	Attributes            map[string]string `json:"Attributes,omitempty"`
+	BillingAddress        *string           `json:"BillingAddress,omitempty"`
+	BirthDate             *string           `json:"BirthDate,omitempty"`
+	BusinessEmailAddress  *string           `json:"BusinessEmailAddress,omitempty"`
+	BusinessName          *string           `json:"BusinessName,omitempty"`
+	BusinessPhoneNumber   *string           `json:"BusinessPhoneNumber,omitempty"`
+	EmailAddress          *string           `json:"EmailAddress,omitempty"`
+	FirstName             *string           `json:"FirstName,omitempty"`
+	Gender                *string           `json:"Gender,omitempty"`
+	HomePhoneNumber       *string           `json:"HomePhoneNumber,omitempty"`
+	LastName              *string           `json:"LastName,omitempty"`
+	MailingAddress        *string           `json:"MailingAddress,omitempty"`
+	MiddleName            *string           `json:"MiddleName,omitempty"`
+	MobilePhoneNumber     *string           `json:"MobilePhoneNumber,omitempty"`
+	PartyType             *string           `json:"PartyType,omitempty"`
+	PersonalEmailAddress  *string           `json:"PersonalEmailAddress,omitempty"`
+	PhoneNumber           *string           `json:"PhoneNumber,omitempty"`
+	ShippingAddress       *string           `json:"ShippingAddress,omitempty"`
 }
 
 type MergeProfilesRequestBody struct {
-	FieldSourceProfileIds *MergeProfilesRequestBodyFieldSourceProfileIds `json:"FieldSourceProfileIds"`
+	FieldSourceProfileIds *MergeProfilesRequestBodyFieldSourceProfileIds `json:"FieldSourceProfileIds,omitempty"`
 	MainProfileID         string                                         `json:"MainProfileId"`
 	ProfileIdsToBeMerged  []string                                       `json:"ProfileIdsToBeMerged"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type WebSecurityScannerSettings struct {
-	Modules                map[string]Config                                     `json:"modules"`
-	Name                   *string                                               `json:"name"`
-	ServiceEnablementState *WebSecurityScannerSettingsServiceEnablementStateEnum `json:"serviceEnablementState"`
-	UpdateTime             *string                                               `json:"updateTime"`
+	Modules                map[string]Config                                     `json:"modules,omitempty"`
+	Name                   *string                                               `json:"name,omitempty"`
+	ServiceEnablementState *WebSecurityScannerSettingsServiceEnablementStateEnum `json:"serviceEnablementState,omitempty"`
+	UpdateTime             *string                                               `json:"updateTime,omitempty"`
 }

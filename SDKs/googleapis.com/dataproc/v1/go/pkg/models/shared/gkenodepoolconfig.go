@@ -1,7 +1,7 @@
 package shared
 
 type GkeNodePoolConfig struct {
-	Autoscaling *GkeNodePoolAutoscalingConfig `json:"autoscaling"`
-	Config      *GkeNodeConfig                `json:"config"`
-	Locations   []string                      `json:"locations"`
+	Autoscaling *GkeNodePoolAutoscalingConfig `json:"autoscaling,omitempty"`
+	Config      *GkeNodeConfig                `json:"config,omitempty"`
+	Locations   []string                      `json:"locations,omitempty"`
 }

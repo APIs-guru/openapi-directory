@@ -13,24 +13,24 @@ type ListFloatingIps200ApplicationJSONFloatingIpsRegion struct {
 }
 
 type ListFloatingIps200ApplicationJSONFloatingIps struct {
-	Droplet *interface{}                                        `json:"droplet"`
-	IP      *string                                             `json:"ip"`
-	Locked  *bool                                               `json:"locked"`
-	Region  *ListFloatingIps200ApplicationJSONFloatingIpsRegion `json:"region"`
+	Droplet *interface{}                                        `json:"droplet,omitempty"`
+	IP      *string                                             `json:"ip,omitempty"`
+	Locked  *bool                                               `json:"locked,omitempty"`
+	Region  *ListFloatingIps200ApplicationJSONFloatingIpsRegion `json:"region,omitempty"`
 }
 
 type ListFloatingIps200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListFloatingIps200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListFloatingIps200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListFloatingIps200ApplicationJSONMeta struct {
@@ -38,15 +38,15 @@ type ListFloatingIps200ApplicationJSONMeta struct {
 }
 
 type ListFloatingIps200ApplicationJSON struct {
-	FloatingIps []ListFloatingIps200ApplicationJSONFloatingIps `json:"floating_ips"`
-	Links       *ListFloatingIps200ApplicationJSONLinks        `json:"links"`
+	FloatingIps []ListFloatingIps200ApplicationJSONFloatingIps `json:"floating_ips,omitempty"`
+	Links       *ListFloatingIps200ApplicationJSONLinks        `json:"links,omitempty"`
 	Meta        ListFloatingIps200ApplicationJSONMeta          `json:"meta"`
 }
 
 type ListFloatingIps401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListFloatingIpsResponse struct {

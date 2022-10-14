@@ -11,6 +11,6 @@ const (
 )
 
 type GoogleCloudDatacatalogV1beta1FieldType struct {
-	EnumType      *GoogleCloudDatacatalogV1beta1FieldTypeEnumType          `json:"enumType"`
-	PrimitiveType *GoogleCloudDatacatalogV1beta1FieldTypePrimitiveTypeEnum `json:"primitiveType"`
+	EnumType      *GoogleCloudDatacatalogV1beta1FieldTypeEnumType          `json:"enumType,omitempty"`
+	PrimitiveType *GoogleCloudDatacatalogV1beta1FieldTypePrimitiveTypeEnum `json:"primitiveType,omitempty"`
 }

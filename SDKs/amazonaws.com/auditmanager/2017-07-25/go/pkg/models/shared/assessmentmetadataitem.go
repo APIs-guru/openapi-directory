@@ -5,12 +5,12 @@ import (
 )
 
 type AssessmentMetadataItem struct {
-	ComplianceType *string               `json:"complianceType"`
-	CreationTime   *time.Time            `json:"creationTime"`
-	Delegations    []Delegation          `json:"delegations"`
-	ID             *string               `json:"id"`
-	LastUpdated    *time.Time            `json:"lastUpdated"`
-	Name           *string               `json:"name"`
-	Roles          []Role                `json:"roles"`
-	Status         *AssessmentStatusEnum `json:"status"`
+	ComplianceType *string               `json:"complianceType,omitempty"`
+	CreationTime   *time.Time            `json:"creationTime,omitempty"`
+	Delegations    []Delegation          `json:"delegations,omitempty"`
+	ID             *string               `json:"id,omitempty"`
+	LastUpdated    *time.Time            `json:"lastUpdated,omitempty"`
+	Name           *string               `json:"name,omitempty"`
+	Roles          []Role                `json:"roles,omitempty"`
+	Status         *AssessmentStatusEnum `json:"status,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type AutoMlJobArtifacts struct {
-	CandidateDefinitionNotebookLocation *string `json:"CandidateDefinitionNotebookLocation"`
-	DataExplorationNotebookLocation     *string `json:"DataExplorationNotebookLocation"`
+	CandidateDefinitionNotebookLocation *string `json:"CandidateDefinitionNotebookLocation,omitempty"`
+	DataExplorationNotebookLocation     *string `json:"DataExplorationNotebookLocation,omitempty"`
 }

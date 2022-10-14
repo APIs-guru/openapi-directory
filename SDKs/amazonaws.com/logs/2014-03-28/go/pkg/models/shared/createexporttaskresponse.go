@@ -1,5 +1,5 @@
 package shared
 
 type CreateExportTaskResponse struct {
-	TaskID *string `json:"taskId"`
+	TaskID *string `json:"taskId,omitempty"`
 }

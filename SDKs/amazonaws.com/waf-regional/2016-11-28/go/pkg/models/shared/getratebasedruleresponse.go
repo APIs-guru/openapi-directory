@@ -1,5 +1,5 @@
 package shared
 
 type GetRateBasedRuleResponse struct {
-	Rule *RateBasedRule `json:"Rule"`
+	Rule *RateBasedRule `json:"Rule,omitempty"`
 }

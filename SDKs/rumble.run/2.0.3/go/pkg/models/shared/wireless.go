@@ -1,25 +1,25 @@
 package shared
 
 type Wireless struct {
-	AgentName      *string           `json:"agent_name"`
-	Authentication *string           `json:"authentication"`
-	Bssid          *string           `json:"bssid"`
-	Channels       *string           `json:"channels"`
-	CreatedAt      *int64            `json:"created_at"`
-	Data           map[string]string `json:"data"`
-	Encryption     *string           `json:"encryption"`
-	Essid          *string           `json:"essid"`
-	Family         *string           `json:"family"`
+	AgentName      *string           `json:"agent_name,omitempty"`
+	Authentication *string           `json:"authentication,omitempty"`
+	Bssid          *string           `json:"bssid,omitempty"`
+	Channels       *string           `json:"channels,omitempty"`
+	CreatedAt      *int64            `json:"created_at,omitempty"`
+	Data           map[string]string `json:"data,omitempty"`
+	Encryption     *string           `json:"encryption,omitempty"`
+	Essid          *string           `json:"essid,omitempty"`
+	Family         *string           `json:"family,omitempty"`
 	ID             string            `json:"id"`
-	Interface      *string           `json:"interface"`
-	LastAgentID    *string           `json:"last_agent_id"`
-	LastSeen       *int64            `json:"last_seen"`
-	LastTaskID     *string           `json:"last_task_id"`
-	OrgName        *string           `json:"org_name"`
-	OrganizationID *string           `json:"organization_id"`
-	Signal         *int64            `json:"signal"`
-	SiteID         *string           `json:"site_id"`
-	SiteName       *string           `json:"site_name"`
-	Type           *string           `json:"type"`
-	Vendor         *string           `json:"vendor"`
+	Interface      *string           `json:"interface,omitempty"`
+	LastAgentID    *string           `json:"last_agent_id,omitempty"`
+	LastSeen       *int64            `json:"last_seen,omitempty"`
+	LastTaskID     *string           `json:"last_task_id,omitempty"`
+	OrgName        *string           `json:"org_name,omitempty"`
+	OrganizationID *string           `json:"organization_id,omitempty"`
+	Signal         *int64            `json:"signal,omitempty"`
+	SiteID         *string           `json:"site_id,omitempty"`
+	SiteName       *string           `json:"site_name,omitempty"`
+	Type           *string           `json:"type,omitempty"`
+	Vendor         *string           `json:"vendor,omitempty"`
 }

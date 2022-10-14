@@ -1,18 +1,18 @@
 package shared
 
 type UpdateClusterRequest struct {
-	ACLName                *string                      `json:"ACLName"`
+	ACLName                *string                      `json:"ACLName,omitempty"`
 	ClusterName            string                       `json:"ClusterName"`
-	Description            *string                      `json:"Description"`
-	EngineVersion          *string                      `json:"EngineVersion"`
-	MaintenanceWindow      *string                      `json:"MaintenanceWindow"`
-	NodeType               *string                      `json:"NodeType"`
-	ParameterGroupName     *string                      `json:"ParameterGroupName"`
-	ReplicaConfiguration   *ReplicaConfigurationRequest `json:"ReplicaConfiguration"`
-	SecurityGroupIds       []string                     `json:"SecurityGroupIds"`
-	ShardConfiguration     *ShardConfigurationRequest   `json:"ShardConfiguration"`
-	SnapshotRetentionLimit *int64                       `json:"SnapshotRetentionLimit"`
-	SnapshotWindow         *string                      `json:"SnapshotWindow"`
-	SnsTopicArn            *string                      `json:"SnsTopicArn"`
-	SnsTopicStatus         *string                      `json:"SnsTopicStatus"`
+	Description            *string                      `json:"Description,omitempty"`
+	EngineVersion          *string                      `json:"EngineVersion,omitempty"`
+	MaintenanceWindow      *string                      `json:"MaintenanceWindow,omitempty"`
+	NodeType               *string                      `json:"NodeType,omitempty"`
+	ParameterGroupName     *string                      `json:"ParameterGroupName,omitempty"`
+	ReplicaConfiguration   *ReplicaConfigurationRequest `json:"ReplicaConfiguration,omitempty"`
+	SecurityGroupIds       []string                     `json:"SecurityGroupIds,omitempty"`
+	ShardConfiguration     *ShardConfigurationRequest   `json:"ShardConfiguration,omitempty"`
+	SnapshotRetentionLimit *int64                       `json:"SnapshotRetentionLimit,omitempty"`
+	SnapshotWindow         *string                      `json:"SnapshotWindow,omitempty"`
+	SnsTopicArn            *string                      `json:"SnsTopicArn,omitempty"`
+	SnsTopicStatus         *string                      `json:"SnsTopicStatus,omitempty"`
 }

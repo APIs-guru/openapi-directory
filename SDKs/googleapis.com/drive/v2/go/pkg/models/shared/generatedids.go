@@ -1,7 +1,7 @@
 package shared
 
 type GeneratedIds struct {
-	Ids   []string `json:"ids"`
-	Kind  *string  `json:"kind"`
-	Space *string  `json:"space"`
+	Ids   []string `json:"ids,omitempty"`
+	Kind  *string  `json:"kind,omitempty"`
+	Space *string  `json:"space,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ProductAmount struct {
-	PriceAmount       *Price `json:"priceAmount"`
-	RemittedTaxAmount *Price `json:"remittedTaxAmount"`
-	TaxAmount         *Price `json:"taxAmount"`
+	PriceAmount       *Price `json:"priceAmount,omitempty"`
+	RemittedTaxAmount *Price `json:"remittedTaxAmount,omitempty"`
+	TaxAmount         *Price `json:"taxAmount,omitempty"`
 }

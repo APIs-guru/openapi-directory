@@ -1,14 +1,14 @@
 package shared
 
 type GoogleCloudDialogflowCxV3beta1QueryParameters struct {
-	AnalyzeQueryTextSentiment *bool                                             `json:"analyzeQueryTextSentiment"`
-	CurrentPage               *string                                           `json:"currentPage"`
-	DisableWebhook            *bool                                             `json:"disableWebhook"`
-	FlowVersions              []string                                          `json:"flowVersions"`
-	GeoLocation               *GoogleTypeLatLng                                 `json:"geoLocation"`
-	Parameters                map[string]interface{}                            `json:"parameters"`
-	Payload                   map[string]interface{}                            `json:"payload"`
-	SessionEntityTypes        []GoogleCloudDialogflowCxV3beta1SessionEntityType `json:"sessionEntityTypes"`
-	TimeZone                  *string                                           `json:"timeZone"`
-	WebhookHeaders            map[string]string                                 `json:"webhookHeaders"`
+	AnalyzeQueryTextSentiment *bool                                             `json:"analyzeQueryTextSentiment,omitempty"`
+	CurrentPage               *string                                           `json:"currentPage,omitempty"`
+	DisableWebhook            *bool                                             `json:"disableWebhook,omitempty"`
+	FlowVersions              []string                                          `json:"flowVersions,omitempty"`
+	GeoLocation               *GoogleTypeLatLng                                 `json:"geoLocation,omitempty"`
+	Parameters                map[string]interface{}                            `json:"parameters,omitempty"`
+	Payload                   map[string]interface{}                            `json:"payload,omitempty"`
+	SessionEntityTypes        []GoogleCloudDialogflowCxV3beta1SessionEntityType `json:"sessionEntityTypes,omitempty"`
+	TimeZone                  *string                                           `json:"timeZone,omitempty"`
+	WebhookHeaders            map[string]string                                 `json:"webhookHeaders,omitempty"`
 }

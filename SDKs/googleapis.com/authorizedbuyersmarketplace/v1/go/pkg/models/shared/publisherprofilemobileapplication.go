@@ -19,7 +19,7 @@ const (
 )
 
 type PublisherProfileMobileApplication struct {
-	AppStore      *PublisherProfileMobileApplicationAppStoreEnum `json:"appStore"`
-	ExternalAppID *string                                        `json:"externalAppId"`
-	Name          *string                                        `json:"name"`
+	AppStore      *PublisherProfileMobileApplicationAppStoreEnum `json:"appStore,omitempty"`
+	ExternalAppID *string                                        `json:"externalAppId,omitempty"`
+	Name          *string                                        `json:"name,omitempty"`
 }

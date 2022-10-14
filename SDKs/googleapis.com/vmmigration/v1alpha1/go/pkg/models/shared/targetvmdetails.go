@@ -26,25 +26,25 @@ const (
 )
 
 type TargetVMDetails struct {
-	AppliedLicense    *AppliedLicense                 `json:"appliedLicense"`
-	BootOption        *TargetVMDetailsBootOptionEnum  `json:"bootOption"`
-	ComputeScheduling *ComputeScheduling              `json:"computeScheduling"`
-	DiskType          *TargetVMDetailsDiskTypeEnum    `json:"diskType"`
-	ExternalIP        *string                         `json:"externalIp"`
-	InternalIP        *string                         `json:"internalIp"`
-	Labels            map[string]string               `json:"labels"`
-	LicenseType       *TargetVMDetailsLicenseTypeEnum `json:"licenseType"`
-	MachineType       *string                         `json:"machineType"`
-	MachineTypeSeries *string                         `json:"machineTypeSeries"`
-	Metadata          map[string]string               `json:"metadata"`
-	Name              *string                         `json:"name"`
-	Network           *string                         `json:"network"`
-	NetworkInterfaces []NetworkInterface              `json:"networkInterfaces"`
-	NetworkTags       []string                        `json:"networkTags"`
-	Project           *string                         `json:"project"`
-	SecureBoot        *bool                           `json:"secureBoot"`
-	ServiceAccount    *string                         `json:"serviceAccount"`
-	Subnetwork        *string                         `json:"subnetwork"`
-	TargetProject     *string                         `json:"targetProject"`
-	Zone              *string                         `json:"zone"`
+	AppliedLicense    *AppliedLicense                 `json:"appliedLicense,omitempty"`
+	BootOption        *TargetVMDetailsBootOptionEnum  `json:"bootOption,omitempty"`
+	ComputeScheduling *ComputeScheduling              `json:"computeScheduling,omitempty"`
+	DiskType          *TargetVMDetailsDiskTypeEnum    `json:"diskType,omitempty"`
+	ExternalIP        *string                         `json:"externalIp,omitempty"`
+	InternalIP        *string                         `json:"internalIp,omitempty"`
+	Labels            map[string]string               `json:"labels,omitempty"`
+	LicenseType       *TargetVMDetailsLicenseTypeEnum `json:"licenseType,omitempty"`
+	MachineType       *string                         `json:"machineType,omitempty"`
+	MachineTypeSeries *string                         `json:"machineTypeSeries,omitempty"`
+	Metadata          map[string]string               `json:"metadata,omitempty"`
+	Name              *string                         `json:"name,omitempty"`
+	Network           *string                         `json:"network,omitempty"`
+	NetworkInterfaces []NetworkInterface              `json:"networkInterfaces,omitempty"`
+	NetworkTags       []string                        `json:"networkTags,omitempty"`
+	Project           *string                         `json:"project,omitempty"`
+	SecureBoot        *bool                           `json:"secureBoot,omitempty"`
+	ServiceAccount    *string                         `json:"serviceAccount,omitempty"`
+	Subnetwork        *string                         `json:"subnetwork,omitempty"`
+	TargetProject     *string                         `json:"targetProject,omitempty"`
+	Zone              *string                         `json:"zone,omitempty"`
 }

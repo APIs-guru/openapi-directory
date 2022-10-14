@@ -5,13 +5,13 @@ import (
 )
 
 type DescribeAnomalyDetectorResponse struct {
-	AnomalyDetectorArn         *string                       `json:"AnomalyDetectorArn"`
-	AnomalyDetectorConfig      *AnomalyDetectorConfigSummary `json:"AnomalyDetectorConfig"`
-	AnomalyDetectorDescription *string                       `json:"AnomalyDetectorDescription"`
-	AnomalyDetectorName        *string                       `json:"AnomalyDetectorName"`
-	CreationTime               *time.Time                    `json:"CreationTime"`
-	FailureReason              *string                       `json:"FailureReason"`
-	KmsKeyArn                  *string                       `json:"KmsKeyArn"`
-	LastModificationTime       *time.Time                    `json:"LastModificationTime"`
-	Status                     *AnomalyDetectorStatusEnum    `json:"Status"`
+	AnomalyDetectorArn         *string                       `json:"AnomalyDetectorArn,omitempty"`
+	AnomalyDetectorConfig      *AnomalyDetectorConfigSummary `json:"AnomalyDetectorConfig,omitempty"`
+	AnomalyDetectorDescription *string                       `json:"AnomalyDetectorDescription,omitempty"`
+	AnomalyDetectorName        *string                       `json:"AnomalyDetectorName,omitempty"`
+	CreationTime               *time.Time                    `json:"CreationTime,omitempty"`
+	FailureReason              *string                       `json:"FailureReason,omitempty"`
+	KmsKeyArn                  *string                       `json:"KmsKeyArn,omitempty"`
+	LastModificationTime       *time.Time                    `json:"LastModificationTime,omitempty"`
+	Status                     *AnomalyDetectorStatusEnum    `json:"Status,omitempty"`
 }

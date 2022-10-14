@@ -16,6 +16,6 @@ const (
 )
 
 type ErrorValue struct {
-	Message *string             `json:"message"`
-	Type    *ErrorValueTypeEnum `json:"type"`
+	Message *string             `json:"message,omitempty"`
+	Type    *ErrorValueTypeEnum `json:"type,omitempty"`
 }

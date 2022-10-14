@@ -1,7 +1,7 @@
 package shared
 
 type ListEventSourcesRequest struct {
-	Limit      *int64  `json:"Limit"`
-	NamePrefix *string `json:"NamePrefix"`
-	NextToken  *string `json:"NextToken"`
+	Limit      *int64  `json:"Limit,omitempty"`
+	NamePrefix *string `json:"NamePrefix,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
 }

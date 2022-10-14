@@ -9,9 +9,9 @@ const (
 )
 
 type GoogleAppsCardV1SwitchControl struct {
-	ControlType    *GoogleAppsCardV1SwitchControlControlTypeEnum `json:"controlType"`
-	Name           *string                                       `json:"name"`
-	OnChangeAction *GoogleAppsCardV1Action                       `json:"onChangeAction"`
-	Selected       *bool                                         `json:"selected"`
-	Value          *string                                       `json:"value"`
+	ControlType    *GoogleAppsCardV1SwitchControlControlTypeEnum `json:"controlType,omitempty"`
+	Name           *string                                       `json:"name,omitempty"`
+	OnChangeAction *GoogleAppsCardV1Action                       `json:"onChangeAction,omitempty"`
+	Selected       *bool                                         `json:"selected,omitempty"`
+	Value          *string                                       `json:"value,omitempty"`
 }

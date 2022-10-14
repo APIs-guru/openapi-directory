@@ -1,11 +1,11 @@
 package shared
 
 type UserSessionRepresentation struct {
-	Clients    map[string]interface{} `json:"clients"`
-	ID         *string                `json:"id"`
-	IPAddress  *string                `json:"ipAddress"`
-	LastAccess *int64                 `json:"lastAccess"`
-	Start      *int64                 `json:"start"`
-	UserID     *string                `json:"userId"`
-	Username   *string                `json:"username"`
+	Clients    map[string]interface{} `json:"clients,omitempty"`
+	ID         *string                `json:"id,omitempty"`
+	IPAddress  *string                `json:"ipAddress,omitempty"`
+	LastAccess *int64                 `json:"lastAccess,omitempty"`
+	Start      *int64                 `json:"start,omitempty"`
+	UserID     *string                `json:"userId,omitempty"`
+	Username   *string                `json:"username,omitempty"`
 }

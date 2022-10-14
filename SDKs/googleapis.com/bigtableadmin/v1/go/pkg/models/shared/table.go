@@ -8,9 +8,9 @@ const (
 )
 
 type Table struct {
-	ClusterStates  map[string]ClusterState `json:"clusterStates"`
-	ColumnFamilies map[string]ColumnFamily `json:"columnFamilies"`
-	Granularity    *TableGranularityEnum   `json:"granularity"`
-	Name           *string                 `json:"name"`
-	RestoreInfo    *RestoreInfo            `json:"restoreInfo"`
+	ClusterStates  map[string]ClusterState `json:"clusterStates,omitempty"`
+	ColumnFamilies map[string]ColumnFamily `json:"columnFamilies,omitempty"`
+	Granularity    *TableGranularityEnum   `json:"granularity,omitempty"`
+	Name           *string                 `json:"name,omitempty"`
+	RestoreInfo    *RestoreInfo            `json:"restoreInfo,omitempty"`
 }

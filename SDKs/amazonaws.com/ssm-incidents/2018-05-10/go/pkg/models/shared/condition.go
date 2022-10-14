@@ -5,7 +5,7 @@ import (
 )
 
 type Condition struct {
-	After  *time.Time          `json:"after"`
-	Before *time.Time          `json:"before"`
-	Equals *AttributeValueList `json:"equals"`
+	After  *time.Time          `json:"after,omitempty"`
+	Before *time.Time          `json:"before,omitempty"`
+	Equals *AttributeValueList `json:"equals,omitempty"`
 }

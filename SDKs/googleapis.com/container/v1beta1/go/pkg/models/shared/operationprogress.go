@@ -11,8 +11,8 @@ const (
 )
 
 type OperationProgress struct {
-	Metrics []Metric                     `json:"metrics"`
-	Name    *string                      `json:"name"`
-	Stages  []OperationProgress          `json:"stages"`
-	Status  *OperationProgressStatusEnum `json:"status"`
+	Metrics []Metric                     `json:"metrics,omitempty"`
+	Name    *string                      `json:"name,omitempty"`
+	Stages  []OperationProgress          `json:"stages,omitempty"`
+	Status  *OperationProgressStatusEnum `json:"status,omitempty"`
 }

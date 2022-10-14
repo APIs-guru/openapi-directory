@@ -1,7 +1,7 @@
 package shared
 
 type QueryRequest struct {
-	AgentUserID *string             `json:"agentUserId"`
-	Inputs      []QueryRequestInput `json:"inputs"`
-	RequestID   *string             `json:"requestId"`
+	AgentUserID *string             `json:"agentUserId,omitempty"`
+	Inputs      []QueryRequestInput `json:"inputs,omitempty"`
+	RequestID   *string             `json:"requestId,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type TrimWhitespaceResponse struct {
-	CellsChangedCount *int32 `json:"cellsChangedCount"`
+	CellsChangedCount *int32 `json:"cellsChangedCount,omitempty"`
 }

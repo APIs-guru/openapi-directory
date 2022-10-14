@@ -15,19 +15,19 @@ type CreateImageHeaders struct {
 }
 
 type CreateImageRequestBodyImageTestsConfiguration struct {
-	ImageTestsEnabled *bool  `json:"imageTestsEnabled"`
-	TimeoutMinutes    *int64 `json:"timeoutMinutes"`
+	ImageTestsEnabled *bool  `json:"imageTestsEnabled,omitempty"`
+	TimeoutMinutes    *int64 `json:"timeoutMinutes,omitempty"`
 }
 
 type CreateImageRequestBody struct {
 	ClientToken                    string                                         `json:"clientToken"`
-	ContainerRecipeArn             *string                                        `json:"containerRecipeArn"`
-	DistributionConfigurationArn   *string                                        `json:"distributionConfigurationArn"`
-	EnhancedImageMetadataEnabled   *bool                                          `json:"enhancedImageMetadataEnabled"`
-	ImageRecipeArn                 *string                                        `json:"imageRecipeArn"`
-	ImageTestsConfiguration        *CreateImageRequestBodyImageTestsConfiguration `json:"imageTestsConfiguration"`
+	ContainerRecipeArn             *string                                        `json:"containerRecipeArn,omitempty"`
+	DistributionConfigurationArn   *string                                        `json:"distributionConfigurationArn,omitempty"`
+	EnhancedImageMetadataEnabled   *bool                                          `json:"enhancedImageMetadataEnabled,omitempty"`
+	ImageRecipeArn                 *string                                        `json:"imageRecipeArn,omitempty"`
+	ImageTestsConfiguration        *CreateImageRequestBodyImageTestsConfiguration `json:"imageTestsConfiguration,omitempty"`
 	InfrastructureConfigurationArn string                                         `json:"infrastructureConfigurationArn"`
-	Tags                           map[string]string                              `json:"tags"`
+	Tags                           map[string]string                              `json:"tags,omitempty"`
 }
 
 type CreateImageRequest struct {

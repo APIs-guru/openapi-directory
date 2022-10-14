@@ -1,5 +1,5 @@
 package shared
 
 type InstancesFailoverRequest struct {
-	FailoverContext *FailoverContext `json:"failoverContext"`
+	FailoverContext *FailoverContext `json:"failoverContext,omitempty"`
 }

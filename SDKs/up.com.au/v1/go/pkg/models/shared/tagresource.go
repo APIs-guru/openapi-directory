@@ -5,7 +5,7 @@ type TagResourceRelationshipsTransactionsLinks struct {
 }
 
 type TagResourceRelationshipsTransactions struct {
-	Links *TagResourceRelationshipsTransactionsLinks `json:"links"`
+	Links *TagResourceRelationshipsTransactionsLinks `json:"links,omitempty"`
 }
 
 type TagResourceRelationships struct {

@@ -1,6 +1,6 @@
 package shared
 
 type DiskEncryptionStatus struct {
-	Kind              *string `json:"kind"`
-	KmsKeyVersionName *string `json:"kmsKeyVersionName"`
+	Kind              *string `json:"kind,omitempty"`
+	KmsKeyVersionName *string `json:"kmsKeyVersionName,omitempty"`
 }

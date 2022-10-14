@@ -19,10 +19,10 @@ const (
 )
 
 type DevicePolicy struct {
-	AllowedDeviceManagementLevels []DevicePolicyAllowedDeviceManagementLevelsEnum `json:"allowedDeviceManagementLevels"`
-	AllowedEncryptionStatuses     []DevicePolicyAllowedEncryptionStatusesEnum     `json:"allowedEncryptionStatuses"`
-	OsConstraints                 []OsConstraint                                  `json:"osConstraints"`
-	RequireAdminApproval          *bool                                           `json:"requireAdminApproval"`
-	RequireCorpOwned              *bool                                           `json:"requireCorpOwned"`
-	RequireScreenlock             *bool                                           `json:"requireScreenlock"`
+	AllowedDeviceManagementLevels []DevicePolicyAllowedDeviceManagementLevelsEnum `json:"allowedDeviceManagementLevels,omitempty"`
+	AllowedEncryptionStatuses     []DevicePolicyAllowedEncryptionStatusesEnum     `json:"allowedEncryptionStatuses,omitempty"`
+	OsConstraints                 []OsConstraint                                  `json:"osConstraints,omitempty"`
+	RequireAdminApproval          *bool                                           `json:"requireAdminApproval,omitempty"`
+	RequireCorpOwned              *bool                                           `json:"requireCorpOwned,omitempty"`
+	RequireScreenlock             *bool                                           `json:"requireScreenlock,omitempty"`
 }

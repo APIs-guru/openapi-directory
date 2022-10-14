@@ -20,17 +20,17 @@ type ListRegistryRepositoriesRequest struct {
 }
 
 type ListRegistryRepositories200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListRegistryRepositories200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListRegistryRepositories200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListRegistryRepositories200ApplicationJSONMeta struct {
@@ -38,32 +38,32 @@ type ListRegistryRepositories200ApplicationJSONMeta struct {
 }
 
 type ListRegistryRepositories200ApplicationJSONRepositoriesLatestTag struct {
-	CompressedSizeBytes *int64     `json:"compressed_size_bytes"`
-	ManifestDigest      *string    `json:"manifest_digest"`
-	RegistryName        *string    `json:"registry_name"`
-	RepositoryName      *string    `json:"repository_name"`
-	SizeBytes           *int64     `json:"size_bytes"`
-	Tag                 *string    `json:"tag"`
-	UpdatedAt           *time.Time `json:"updated_at"`
+	CompressedSizeBytes *int64     `json:"compressed_size_bytes,omitempty"`
+	ManifestDigest      *string    `json:"manifest_digest,omitempty"`
+	RegistryName        *string    `json:"registry_name,omitempty"`
+	RepositoryName      *string    `json:"repository_name,omitempty"`
+	SizeBytes           *int64     `json:"size_bytes,omitempty"`
+	Tag                 *string    `json:"tag,omitempty"`
+	UpdatedAt           *time.Time `json:"updated_at,omitempty"`
 }
 
 type ListRegistryRepositories200ApplicationJSONRepositories struct {
-	LatestTag    *ListRegistryRepositories200ApplicationJSONRepositoriesLatestTag `json:"latest_tag"`
-	Name         *string                                                          `json:"name"`
-	RegistryName *string                                                          `json:"registry_name"`
-	TagCount     *int64                                                           `json:"tag_count"`
+	LatestTag    *ListRegistryRepositories200ApplicationJSONRepositoriesLatestTag `json:"latest_tag,omitempty"`
+	Name         *string                                                          `json:"name,omitempty"`
+	RegistryName *string                                                          `json:"registry_name,omitempty"`
+	TagCount     *int64                                                           `json:"tag_count,omitempty"`
 }
 
 type ListRegistryRepositories200ApplicationJSON struct {
-	Links        *ListRegistryRepositories200ApplicationJSONLinks         `json:"links"`
+	Links        *ListRegistryRepositories200ApplicationJSONLinks         `json:"links,omitempty"`
 	Meta         ListRegistryRepositories200ApplicationJSONMeta           `json:"meta"`
-	Repositories []ListRegistryRepositories200ApplicationJSONRepositories `json:"repositories"`
+	Repositories []ListRegistryRepositories200ApplicationJSONRepositories `json:"repositories,omitempty"`
 }
 
 type ListRegistryRepositories401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListRegistryRepositoriesResponse struct {

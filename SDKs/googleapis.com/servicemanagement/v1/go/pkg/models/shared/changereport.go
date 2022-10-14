@@ -1,5 +1,5 @@
 package shared
 
 type ChangeReport struct {
-	ConfigChanges []ConfigChange `json:"configChanges"`
+	ConfigChanges []ConfigChange `json:"configChanges,omitempty"`
 }

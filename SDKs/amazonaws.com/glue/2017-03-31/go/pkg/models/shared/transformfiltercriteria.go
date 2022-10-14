@@ -5,13 +5,13 @@ import (
 )
 
 type TransformFilterCriteria struct {
-	CreatedAfter       *time.Time               `json:"CreatedAfter"`
-	CreatedBefore      *time.Time               `json:"CreatedBefore"`
-	GlueVersion        *string                  `json:"GlueVersion"`
-	LastModifiedAfter  *time.Time               `json:"LastModifiedAfter"`
-	LastModifiedBefore *time.Time               `json:"LastModifiedBefore"`
-	Name               *string                  `json:"Name"`
-	Schema             []SchemaColumn           `json:"Schema"`
-	Status             *TransformStatusTypeEnum `json:"Status"`
-	TransformType      *TransformTypeEnum       `json:"TransformType"`
+	CreatedAfter       *time.Time               `json:"CreatedAfter,omitempty"`
+	CreatedBefore      *time.Time               `json:"CreatedBefore,omitempty"`
+	GlueVersion        *string                  `json:"GlueVersion,omitempty"`
+	LastModifiedAfter  *time.Time               `json:"LastModifiedAfter,omitempty"`
+	LastModifiedBefore *time.Time               `json:"LastModifiedBefore,omitempty"`
+	Name               *string                  `json:"Name,omitempty"`
+	Schema             []SchemaColumn           `json:"Schema,omitempty"`
+	Status             *TransformStatusTypeEnum `json:"Status,omitempty"`
+	TransformType      *TransformTypeEnum       `json:"TransformType,omitempty"`
 }

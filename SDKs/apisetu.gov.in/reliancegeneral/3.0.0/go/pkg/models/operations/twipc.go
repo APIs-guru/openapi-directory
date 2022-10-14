@@ -19,8 +19,8 @@ const (
 )
 
 type TwipcRequestBody struct {
-	CertificateParameters *TwipcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *TwipcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                TwipcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -56,8 +56,8 @@ const (
 )
 
 type Twipc400ApplicationJSON struct {
-	Error            *Twipc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Twipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Twipc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Twipc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Twipc401ApplicationJSONErrorEnum string
@@ -75,8 +75,8 @@ const (
 )
 
 type Twipc401ApplicationJSON struct {
-	Error            *Twipc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Twipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Twipc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Twipc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Twipc404ApplicationJSONErrorEnum string
@@ -94,8 +94,8 @@ const (
 )
 
 type Twipc404ApplicationJSON struct {
-	Error            *Twipc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Twipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Twipc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Twipc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Twipc500ApplicationJSONErrorEnum string
@@ -111,8 +111,8 @@ const (
 )
 
 type Twipc500ApplicationJSON struct {
-	Error            *Twipc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Twipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Twipc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Twipc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Twipc502ApplicationJSONErrorEnum string
@@ -128,8 +128,8 @@ const (
 )
 
 type Twipc502ApplicationJSON struct {
-	Error            *Twipc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Twipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Twipc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Twipc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Twipc503ApplicationJSONErrorEnum string
@@ -145,8 +145,8 @@ const (
 )
 
 type Twipc503ApplicationJSON struct {
-	Error            *Twipc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Twipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Twipc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Twipc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Twipc504ApplicationJSONErrorEnum string
@@ -162,8 +162,8 @@ const (
 )
 
 type Twipc504ApplicationJSON struct {
-	Error            *Twipc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Twipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Twipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Twipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type TwipcResponse struct {

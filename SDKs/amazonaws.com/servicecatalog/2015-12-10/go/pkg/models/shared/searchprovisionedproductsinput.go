@@ -1,11 +1,11 @@
 package shared
 
 type SearchProvisionedProductsInput struct {
-	AcceptLanguage    *string             `json:"AcceptLanguage"`
-	AccessLevelFilter *AccessLevelFilter  `json:"AccessLevelFilter"`
-	Filters           map[string][]string `json:"Filters"`
-	PageSize          *int64              `json:"PageSize"`
-	PageToken         *string             `json:"PageToken"`
-	SortBy            *string             `json:"SortBy"`
-	SortOrder         *SortOrderEnum      `json:"SortOrder"`
+	AcceptLanguage    *string             `json:"AcceptLanguage,omitempty"`
+	AccessLevelFilter *AccessLevelFilter  `json:"AccessLevelFilter,omitempty"`
+	Filters           map[string][]string `json:"Filters,omitempty"`
+	PageSize          *int64              `json:"PageSize,omitempty"`
+	PageToken         *string             `json:"PageToken,omitempty"`
+	SortBy            *string             `json:"SortBy,omitempty"`
+	SortOrder         *SortOrderEnum      `json:"SortOrder,omitempty"`
 }

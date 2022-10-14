@@ -1,7 +1,7 @@
 package shared
 
 type PillarDifference struct {
-	DifferenceStatus    *DifferenceStatusEnum `json:"DifferenceStatus"`
-	PillarID            *string               `json:"PillarId"`
-	QuestionDifferences []QuestionDifference  `json:"QuestionDifferences"`
+	DifferenceStatus    *DifferenceStatusEnum `json:"DifferenceStatus,omitempty"`
+	PillarID            *string               `json:"PillarId,omitempty"`
+	QuestionDifferences []QuestionDifference  `json:"QuestionDifferences,omitempty"`
 }

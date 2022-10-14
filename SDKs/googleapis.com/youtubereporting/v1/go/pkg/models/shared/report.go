@@ -1,11 +1,11 @@
 package shared
 
 type Report struct {
-	CreateTime    *string `json:"createTime"`
-	DownloadURL   *string `json:"downloadUrl"`
-	EndTime       *string `json:"endTime"`
-	ID            *string `json:"id"`
-	JobExpireTime *string `json:"jobExpireTime"`
-	JobID         *string `json:"jobId"`
-	StartTime     *string `json:"startTime"`
+	CreateTime    *string `json:"createTime,omitempty"`
+	DownloadURL   *string `json:"downloadUrl,omitempty"`
+	EndTime       *string `json:"endTime,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	JobExpireTime *string `json:"jobExpireTime,omitempty"`
+	JobID         *string `json:"jobId,omitempty"`
+	StartTime     *string `json:"startTime,omitempty"`
 }

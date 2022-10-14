@@ -10,14 +10,14 @@ const (
 )
 
 type SheetProperties struct {
-	DataSourceSheetProperties *DataSourceSheetProperties    `json:"dataSourceSheetProperties"`
-	GridProperties            *GridProperties               `json:"gridProperties"`
-	Hidden                    *bool                         `json:"hidden"`
-	Index                     *int32                        `json:"index"`
-	RightToLeft               *bool                         `json:"rightToLeft"`
-	SheetID                   *int32                        `json:"sheetId"`
-	SheetType                 *SheetPropertiesSheetTypeEnum `json:"sheetType"`
-	TabColor                  *Color                        `json:"tabColor"`
-	TabColorStyle             *ColorStyle                   `json:"tabColorStyle"`
-	Title                     *string                       `json:"title"`
+	DataSourceSheetProperties *DataSourceSheetProperties    `json:"dataSourceSheetProperties,omitempty"`
+	GridProperties            *GridProperties               `json:"gridProperties,omitempty"`
+	Hidden                    *bool                         `json:"hidden,omitempty"`
+	Index                     *int32                        `json:"index,omitempty"`
+	RightToLeft               *bool                         `json:"rightToLeft,omitempty"`
+	SheetID                   *int32                        `json:"sheetId,omitempty"`
+	SheetType                 *SheetPropertiesSheetTypeEnum `json:"sheetType,omitempty"`
+	TabColor                  *Color                        `json:"tabColor,omitempty"`
+	TabColorStyle             *ColorStyle                   `json:"tabColorStyle,omitempty"`
+	Title                     *string                       `json:"title,omitempty"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type CreateTagRequestBody struct {
-	Domains       []int64 `json:"domains"`
+	Domains       []int64 `json:"domains,omitempty"`
 	Label         string  `json:"label"`
-	Linodes       []int64 `json:"linodes"`
-	Nodebalancers []int64 `json:"nodebalancers"`
-	Volumes       []int64 `json:"volumes"`
+	Linodes       []int64 `json:"linodes,omitempty"`
+	Nodebalancers []int64 `json:"nodebalancers,omitempty"`
+	Volumes       []int64 `json:"volumes,omitempty"`
 }
 
 type CreateTagSecurityOption1 struct {
@@ -31,7 +31,7 @@ type CreateTagRequest struct {
 }
 
 type CreateTagDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateTagResponse struct {

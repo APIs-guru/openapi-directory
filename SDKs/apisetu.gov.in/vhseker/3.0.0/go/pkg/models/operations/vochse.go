@@ -19,8 +19,8 @@ const (
 )
 
 type VochseRequestBody struct {
-	CertificateParameters *VochseRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                            `json:"consentArtifact"`
+	CertificateParameters *VochseRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                            `json:"consentArtifact,omitempty"`
 	Format                VochseRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                  `json:"txnId"`
 }
@@ -56,8 +56,8 @@ const (
 )
 
 type Vochse400ApplicationJSON struct {
-	Error            *Vochse400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vochse400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vochse400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vochse400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vochse401ApplicationJSONErrorEnum string
@@ -75,8 +75,8 @@ const (
 )
 
 type Vochse401ApplicationJSON struct {
-	Error            *Vochse401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vochse401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vochse401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vochse401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vochse404ApplicationJSONErrorEnum string
@@ -94,8 +94,8 @@ const (
 )
 
 type Vochse404ApplicationJSON struct {
-	Error            *Vochse404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vochse404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vochse404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vochse404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vochse500ApplicationJSONErrorEnum string
@@ -111,8 +111,8 @@ const (
 )
 
 type Vochse500ApplicationJSON struct {
-	Error            *Vochse500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vochse500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vochse500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vochse500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vochse502ApplicationJSONErrorEnum string
@@ -128,8 +128,8 @@ const (
 )
 
 type Vochse502ApplicationJSON struct {
-	Error            *Vochse502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vochse502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vochse502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vochse502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vochse503ApplicationJSONErrorEnum string
@@ -145,8 +145,8 @@ const (
 )
 
 type Vochse503ApplicationJSON struct {
-	Error            *Vochse503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vochse503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vochse503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vochse503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vochse504ApplicationJSONErrorEnum string
@@ -162,8 +162,8 @@ const (
 )
 
 type Vochse504ApplicationJSON struct {
-	Error            *Vochse504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vochse504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vochse504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vochse504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type VochseResponse struct {

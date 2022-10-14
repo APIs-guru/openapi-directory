@@ -9,7 +9,7 @@ const (
 )
 
 type SchedulingNodeAffinity struct {
-	Key      *string                             `json:"key"`
-	Operator *SchedulingNodeAffinityOperatorEnum `json:"operator"`
-	Values   []string                            `json:"values"`
+	Key      *string                             `json:"key,omitempty"`
+	Operator *SchedulingNodeAffinityOperatorEnum `json:"operator,omitempty"`
+	Values   []string                            `json:"values,omitempty"`
 }

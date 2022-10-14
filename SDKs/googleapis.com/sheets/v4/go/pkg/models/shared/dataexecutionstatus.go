@@ -35,8 +35,8 @@ const (
 )
 
 type DataExecutionStatus struct {
-	ErrorCode       *DataExecutionStatusErrorCodeEnum `json:"errorCode"`
-	ErrorMessage    *string                           `json:"errorMessage"`
-	LastRefreshTime *string                           `json:"lastRefreshTime"`
-	State           *DataExecutionStatusStateEnum     `json:"state"`
+	ErrorCode       *DataExecutionStatusErrorCodeEnum `json:"errorCode,omitempty"`
+	ErrorMessage    *string                           `json:"errorMessage,omitempty"`
+	LastRefreshTime *string                           `json:"lastRefreshTime,omitempty"`
+	State           *DataExecutionStatusStateEnum     `json:"state,omitempty"`
 }

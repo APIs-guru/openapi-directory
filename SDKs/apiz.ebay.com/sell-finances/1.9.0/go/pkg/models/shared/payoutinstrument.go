@@ -1,7 +1,7 @@
 package shared
 
 type PayoutInstrument struct {
-	AccountLastFourDigits *string `json:"accountLastFourDigits"`
-	InstrumentType        *string `json:"instrumentType"`
-	Nickname              *string `json:"nickname"`
+	AccountLastFourDigits *string `json:"accountLastFourDigits,omitempty"`
+	InstrumentType        *string `json:"instrumentType,omitempty"`
+	Nickname              *string `json:"nickname,omitempty"`
 }

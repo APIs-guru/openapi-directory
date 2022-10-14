@@ -23,17 +23,17 @@ type ListAllSnapshotsRequest struct {
 }
 
 type ListAllSnapshots200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllSnapshots200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllSnapshots200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllSnapshots200ApplicationJSONMeta struct {
@@ -60,15 +60,15 @@ type ListAllSnapshots200ApplicationJSONSnapshots struct {
 }
 
 type ListAllSnapshots200ApplicationJSON struct {
-	Links     *ListAllSnapshots200ApplicationJSONLinks      `json:"links"`
+	Links     *ListAllSnapshots200ApplicationJSONLinks      `json:"links,omitempty"`
 	Meta      ListAllSnapshots200ApplicationJSONMeta        `json:"meta"`
-	Snapshots []ListAllSnapshots200ApplicationJSONSnapshots `json:"snapshots"`
+	Snapshots []ListAllSnapshots200ApplicationJSONSnapshots `json:"snapshots,omitempty"`
 }
 
 type ListAllSnapshots401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllSnapshotsResponse struct {

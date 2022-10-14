@@ -1,7 +1,7 @@
 package shared
 
 type BytesRange struct {
-	From  *int64 `json:"from"`
-	To    *int64 `json:"to"`
-	Total *int64 `json:"total"`
+	From  *int64 `json:"from,omitempty"`
+	To    *int64 `json:"to,omitempty"`
+	Total *int64 `json:"total,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ManagedZoneForwardingConfig struct {
-	Kind              *string                                       `json:"kind"`
-	TargetNameServers []ManagedZoneForwardingConfigNameServerTarget `json:"targetNameServers"`
+	Kind              *string                                       `json:"kind,omitempty"`
+	TargetNameServers []ManagedZoneForwardingConfigNameServerTarget `json:"targetNameServers,omitempty"`
 }

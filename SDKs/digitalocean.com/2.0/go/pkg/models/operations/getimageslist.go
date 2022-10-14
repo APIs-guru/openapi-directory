@@ -24,17 +24,17 @@ type GetImagesListRequest struct {
 }
 
 type GetImagesList200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type GetImagesList200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type GetImagesList200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type GetImagesList200ApplicationJSONMeta struct {
@@ -43,14 +43,14 @@ type GetImagesList200ApplicationJSONMeta struct {
 
 type GetImagesList200ApplicationJSON struct {
 	Images []shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImage `json:"images"`
-	Links  *GetImagesList200ApplicationJSONLinks                                                                           `json:"links"`
+	Links  *GetImagesList200ApplicationJSONLinks                                                                           `json:"links,omitempty"`
 	Meta   GetImagesList200ApplicationJSONMeta                                                                             `json:"meta"`
 }
 
 type GetImagesList401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type GetImagesListResponse struct {

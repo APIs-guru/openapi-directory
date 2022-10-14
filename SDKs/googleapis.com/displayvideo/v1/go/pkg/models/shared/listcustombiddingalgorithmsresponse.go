@@ -1,6 +1,6 @@
 package shared
 
 type ListCustomBiddingAlgorithmsResponse struct {
-	CustomBiddingAlgorithms []CustomBiddingAlgorithm `json:"customBiddingAlgorithms"`
-	NextPageToken           *string                  `json:"nextPageToken"`
+	CustomBiddingAlgorithms []CustomBiddingAlgorithm `json:"customBiddingAlgorithms,omitempty"`
+	NextPageToken           *string                  `json:"nextPageToken,omitempty"`
 }

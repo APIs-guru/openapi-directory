@@ -1,6 +1,6 @@
 package shared
 
 type StartTransactionResult struct {
-	TimingInformation *TimingInformation `json:"TimingInformation"`
-	TransactionID     *string            `json:"TransactionId"`
+	TimingInformation *TimingInformation `json:"TimingInformation,omitempty"`
+	TransactionID     *string            `json:"TransactionId,omitempty"`
 }

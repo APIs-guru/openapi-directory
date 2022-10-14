@@ -1,5 +1,5 @@
 package shared
 
 type GetLogRecordResponse struct {
-	LogRecord map[string]string `json:"logRecord"`
+	LogRecord map[string]string `json:"logRecord,omitempty"`
 }

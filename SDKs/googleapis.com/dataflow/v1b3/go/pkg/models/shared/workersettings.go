@@ -1,10 +1,10 @@
 package shared
 
 type WorkerSettings struct {
-	BaseURL            *string `json:"baseUrl"`
-	ReportingEnabled   *bool   `json:"reportingEnabled"`
-	ServicePath        *string `json:"servicePath"`
-	ShuffleServicePath *string `json:"shuffleServicePath"`
-	TempStoragePrefix  *string `json:"tempStoragePrefix"`
-	WorkerID           *string `json:"workerId"`
+	BaseURL            *string `json:"baseUrl,omitempty"`
+	ReportingEnabled   *bool   `json:"reportingEnabled,omitempty"`
+	ServicePath        *string `json:"servicePath,omitempty"`
+	ShuffleServicePath *string `json:"shuffleServicePath,omitempty"`
+	TempStoragePrefix  *string `json:"tempStoragePrefix,omitempty"`
+	WorkerID           *string `json:"workerId,omitempty"`
 }

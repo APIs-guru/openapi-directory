@@ -8,5 +8,5 @@ const (
 )
 
 type GoogleCloudDataplexV1ContentSQLScript struct {
-	Engine *GoogleCloudDataplexV1ContentSQLScriptEngineEnum `json:"engine"`
+	Engine *GoogleCloudDataplexV1ContentSQLScriptEngineEnum `json:"engine,omitempty"`
 }

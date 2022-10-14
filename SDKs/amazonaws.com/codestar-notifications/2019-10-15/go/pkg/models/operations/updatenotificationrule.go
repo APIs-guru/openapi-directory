@@ -30,11 +30,11 @@ const (
 
 type UpdateNotificationRuleRequestBody struct {
 	Arn          string                                           `json:"Arn"`
-	DetailType   *UpdateNotificationRuleRequestBodyDetailTypeEnum `json:"DetailType"`
-	EventTypeIds []string                                         `json:"EventTypeIds"`
-	Name         *string                                          `json:"Name"`
-	Status       *UpdateNotificationRuleRequestBodyStatusEnum     `json:"Status"`
-	Targets      []shared.Target                                  `json:"Targets"`
+	DetailType   *UpdateNotificationRuleRequestBodyDetailTypeEnum `json:"DetailType,omitempty"`
+	EventTypeIds []string                                         `json:"EventTypeIds,omitempty"`
+	Name         *string                                          `json:"Name,omitempty"`
+	Status       *UpdateNotificationRuleRequestBodyStatusEnum     `json:"Status,omitempty"`
+	Targets      []shared.Target                                  `json:"Targets,omitempty"`
 }
 
 type UpdateNotificationRuleRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type VersionDifferences struct {
-	PillarDifferences []PillarDifference `json:"PillarDifferences"`
+	PillarDifferences []PillarDifference `json:"PillarDifferences,omitempty"`
 }

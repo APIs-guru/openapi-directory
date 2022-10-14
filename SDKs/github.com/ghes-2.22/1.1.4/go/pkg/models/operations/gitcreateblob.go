@@ -11,7 +11,7 @@ type GitCreateBlobPathParams struct {
 
 type GitCreateBlobRequestBody struct {
 	Content  string  `json:"content"`
-	Encoding *string `json:"encoding"`
+	Encoding *string `json:"encoding,omitempty"`
 }
 
 type GitCreateBlobRequest struct {

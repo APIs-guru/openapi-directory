@@ -22,9 +22,9 @@ const (
 )
 
 type PatchJobInstanceDetails struct {
-	AttemptCount     *string                           `json:"attemptCount"`
-	FailureReason    *string                           `json:"failureReason"`
-	InstanceSystemID *string                           `json:"instanceSystemId"`
-	Name             *string                           `json:"name"`
-	State            *PatchJobInstanceDetailsStateEnum `json:"state"`
+	AttemptCount     *string                           `json:"attemptCount,omitempty"`
+	FailureReason    *string                           `json:"failureReason,omitempty"`
+	InstanceSystemID *string                           `json:"instanceSystemId,omitempty"`
+	Name             *string                           `json:"name,omitempty"`
+	State            *PatchJobInstanceDetailsStateEnum `json:"state,omitempty"`
 }

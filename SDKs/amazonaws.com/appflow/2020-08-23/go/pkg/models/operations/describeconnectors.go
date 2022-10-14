@@ -19,8 +19,8 @@ type DescribeConnectorsHeaders struct {
 }
 
 type DescribeConnectorsRequestBody struct {
-	ConnectorTypes []shared.ConnectorTypeEnum `json:"connectorTypes"`
-	NextToken      *string                    `json:"nextToken"`
+	ConnectorTypes []shared.ConnectorTypeEnum `json:"connectorTypes,omitempty"`
+	NextToken      *string                    `json:"nextToken,omitempty"`
 }
 
 type DescribeConnectorsRequest struct {

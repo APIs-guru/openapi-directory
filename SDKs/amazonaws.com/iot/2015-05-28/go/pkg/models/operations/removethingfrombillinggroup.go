@@ -11,10 +11,10 @@ type RemoveThingFromBillingGroupHeaders struct {
 }
 
 type RemoveThingFromBillingGroupRequestBody struct {
-	BillingGroupArn  *string `json:"billingGroupArn"`
-	BillingGroupName *string `json:"billingGroupName"`
-	ThingArn         *string `json:"thingArn"`
-	ThingName        *string `json:"thingName"`
+	BillingGroupArn  *string `json:"billingGroupArn,omitempty"`
+	BillingGroupName *string `json:"billingGroupName,omitempty"`
+	ThingArn         *string `json:"thingArn,omitempty"`
+	ThingName        *string `json:"thingName,omitempty"`
 }
 
 type RemoveThingFromBillingGroupRequest struct {

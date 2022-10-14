@@ -5,7 +5,7 @@ import (
 )
 
 type LandlordMaintenanceJobNoteModel struct {
-	CreatedAt    *time.Time `json:"CreatedAt"`
-	NoteContents *string    `json:"NoteContents"`
-	Oid          *string    `json:"OID"`
+	CreatedAt    *time.Time `json:"CreatedAt,omitempty"`
+	NoteContents *string    `json:"NoteContents,omitempty"`
+	Oid          *string    `json:"OID,omitempty"`
 }

@@ -13,5 +13,5 @@ const (
 type Patch struct {
 	Op    PatchOpEnum  `json:"op"`
 	Path  string       `json:"path"`
-	Value *interface{} `json:"value"`
+	Value *interface{} `json:"value,omitempty"`
 }

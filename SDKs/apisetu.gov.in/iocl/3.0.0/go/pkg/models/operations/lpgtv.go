@@ -15,8 +15,8 @@ const (
 )
 
 type LpgtvRequestBody struct {
-	CertificateParameters *LpgtvRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *LpgtvRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                LpgtvRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Lpgtv400ApplicationJSON struct {
-	Error            *Lpgtv400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgtv400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgtv400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgtv400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgtv401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Lpgtv401ApplicationJSON struct {
-	Error            *Lpgtv401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgtv401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgtv401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgtv401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgtv404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Lpgtv404ApplicationJSON struct {
-	Error            *Lpgtv404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgtv404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgtv404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgtv404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgtv500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Lpgtv500ApplicationJSON struct {
-	Error            *Lpgtv500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgtv500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgtv500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgtv500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgtv502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Lpgtv502ApplicationJSON struct {
-	Error            *Lpgtv502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgtv502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgtv502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgtv502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgtv503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Lpgtv503ApplicationJSON struct {
-	Error            *Lpgtv503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgtv503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgtv503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgtv503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Lpgtv504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Lpgtv504ApplicationJSON struct {
-	Error            *Lpgtv504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Lpgtv504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Lpgtv504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Lpgtv504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type LpgtvResponse struct {

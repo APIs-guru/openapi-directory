@@ -1,8 +1,8 @@
 package shared
 
 type DealTermsGuaranteedFixedPriceTermsBillingInfo struct {
-	CurrencyConversionTimeMs   *string `json:"currencyConversionTimeMs"`
-	DfpLineItemID              *string `json:"dfpLineItemId"`
-	OriginalContractedQuantity *string `json:"originalContractedQuantity"`
-	Price                      *Price  `json:"price"`
+	CurrencyConversionTimeMs   *string `json:"currencyConversionTimeMs,omitempty"`
+	DfpLineItemID              *string `json:"dfpLineItemId,omitempty"`
+	OriginalContractedQuantity *string `json:"originalContractedQuantity,omitempty"`
+	Price                      *Price  `json:"price,omitempty"`
 }

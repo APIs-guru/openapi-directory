@@ -20,14 +20,14 @@ const (
 )
 
 type GoogleCloudDatacatalogV1SearchCatalogResult struct {
-	Description          *string                                                          `json:"description"`
-	DisplayName          *string                                                          `json:"displayName"`
-	FullyQualifiedName   *string                                                          `json:"fullyQualifiedName"`
-	IntegratedSystem     *GoogleCloudDatacatalogV1SearchCatalogResultIntegratedSystemEnum `json:"integratedSystem"`
-	LinkedResource       *string                                                          `json:"linkedResource"`
-	ModifyTime           *string                                                          `json:"modifyTime"`
-	RelativeResourceName *string                                                          `json:"relativeResourceName"`
-	SearchResultSubtype  *string                                                          `json:"searchResultSubtype"`
-	SearchResultType     *GoogleCloudDatacatalogV1SearchCatalogResultSearchResultTypeEnum `json:"searchResultType"`
-	UserSpecifiedSystem  *string                                                          `json:"userSpecifiedSystem"`
+	Description          *string                                                          `json:"description,omitempty"`
+	DisplayName          *string                                                          `json:"displayName,omitempty"`
+	FullyQualifiedName   *string                                                          `json:"fullyQualifiedName,omitempty"`
+	IntegratedSystem     *GoogleCloudDatacatalogV1SearchCatalogResultIntegratedSystemEnum `json:"integratedSystem,omitempty"`
+	LinkedResource       *string                                                          `json:"linkedResource,omitempty"`
+	ModifyTime           *string                                                          `json:"modifyTime,omitempty"`
+	RelativeResourceName *string                                                          `json:"relativeResourceName,omitempty"`
+	SearchResultSubtype  *string                                                          `json:"searchResultSubtype,omitempty"`
+	SearchResultType     *GoogleCloudDatacatalogV1SearchCatalogResultSearchResultTypeEnum `json:"searchResultType,omitempty"`
+	UserSpecifiedSystem  *string                                                          `json:"userSpecifiedSystem,omitempty"`
 }

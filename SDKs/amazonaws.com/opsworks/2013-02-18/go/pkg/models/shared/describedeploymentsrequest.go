@@ -1,7 +1,7 @@
 package shared
 
 type DescribeDeploymentsRequest struct {
-	AppID         *string  `json:"AppId"`
-	DeploymentIds []string `json:"DeploymentIds"`
-	StackID       *string  `json:"StackId"`
+	AppID         *string  `json:"AppId,omitempty"`
+	DeploymentIds []string `json:"DeploymentIds,omitempty"`
+	StackID       *string  `json:"StackId,omitempty"`
 }

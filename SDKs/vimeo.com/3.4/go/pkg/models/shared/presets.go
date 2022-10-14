@@ -30,8 +30,8 @@ type PresetsSettingsLogos struct {
 }
 
 type PresetsSettingsOutroLink struct {
-	Name *string `json:"name"`
-	URL  *string `json:"url"`
+	Name *string `json:"name,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 type PresetsSettingsOutroTypeEnum string
@@ -45,11 +45,11 @@ const (
 )
 
 type PresetsSettingsOutro struct {
-	Clips  *string                      `json:"clips"`
-	Link   *PresetsSettingsOutroLink    `json:"link"`
-	Text   *string                      `json:"text"`
+	Clips  *string                      `json:"clips,omitempty"`
+	Link   *PresetsSettingsOutroLink    `json:"link,omitempty"`
+	Text   *string                      `json:"text,omitempty"`
 	Type   PresetsSettingsOutroTypeEnum `json:"type"`
-	Videos *string                      `json:"videos"`
+	Videos *string                      `json:"videos,omitempty"`
 }
 
 type PresetsSettings struct {
@@ -215,8 +215,8 @@ type PresetsUserMetadataConnections struct {
 }
 
 type PresetsUserMetadataInteractionsAddPrivacyUser struct {
-	Options []string `json:"options"`
-	URI     *string  `json:"uri"`
+	Options []string `json:"options,omitempty"`
+	URI     *string  `json:"uri,omitempty"`
 }
 
 type PresetsUserMetadataInteractionsBlock struct {
@@ -239,7 +239,7 @@ type PresetsUserMetadataInteractionsReport struct {
 }
 
 type PresetsUserMetadataInteractions struct {
-	AddPrivacyUser *PresetsUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user"`
+	AddPrivacyUser *PresetsUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
 	Block          PresetsUserMetadataInteractionsBlock           `json:"block"`
 	Follow         PresetsUserMetadataInteractionsFollow          `json:"follow"`
 	Report         PresetsUserMetadataInteractionsReport          `json:"report"`
@@ -279,19 +279,19 @@ const (
 )
 
 type PresetsUserPreferencesVideosPrivacy struct {
-	Add      *bool                                            `json:"add"`
-	Comments *PresetsUserPreferencesVideosPrivacyCommentsEnum `json:"comments"`
-	Download *bool                                            `json:"download"`
-	Embed    *PresetsUserPreferencesVideosPrivacyEmbedEnum    `json:"embed"`
-	View     *PresetsUserPreferencesVideosPrivacyViewEnum     `json:"view"`
+	Add      *bool                                            `json:"add,omitempty"`
+	Comments *PresetsUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                            `json:"download,omitempty"`
+	Embed    *PresetsUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *PresetsUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
 type PresetsUserPreferencesVideos struct {
-	Privacy *PresetsUserPreferencesVideosPrivacy `json:"privacy"`
+	Privacy *PresetsUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
 type PresetsUserPreferences struct {
-	Videos *PresetsUserPreferencesVideos `json:"videos"`
+	Videos *PresetsUserPreferencesVideos `json:"videos,omitempty"`
 }
 
 type PresetsUserUploadQuotaLifetime struct {
@@ -336,15 +336,15 @@ type PresetsUserWebsites struct {
 type PresetsUserUser struct {
 	Account       PresetsUserAccountEnum  `json:"account"`
 	Bio           string                  `json:"bio"`
-	ContentFilter []string                `json:"content_filter"`
+	ContentFilter []string                `json:"content_filter,omitempty"`
 	CreatedTime   string                  `json:"created_time"`
-	Email         *string                 `json:"email"`
+	Email         *string                 `json:"email,omitempty"`
 	Link          string                  `json:"link"`
 	Location      string                  `json:"location"`
 	Metadata      PresetsUserMetadata     `json:"metadata"`
 	Name          string                  `json:"name"`
 	Pictures      Picture                 `json:"pictures"`
-	Preferences   *PresetsUserPreferences `json:"preferences"`
+	Preferences   *PresetsUserPreferences `json:"preferences,omitempty"`
 	ResourceKey   string                  `json:"resource_key"`
 	UploadQuota   PresetsUserUploadQuota  `json:"upload_quota"`
 	URI           string                  `json:"uri"`

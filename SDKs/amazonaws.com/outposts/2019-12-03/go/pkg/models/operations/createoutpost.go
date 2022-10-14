@@ -15,12 +15,12 @@ type CreateOutpostHeaders struct {
 }
 
 type CreateOutpostRequestBody struct {
-	AvailabilityZone   *string           `json:"AvailabilityZone"`
-	AvailabilityZoneID *string           `json:"AvailabilityZoneId"`
-	Description        *string           `json:"Description"`
+	AvailabilityZone   *string           `json:"AvailabilityZone,omitempty"`
+	AvailabilityZoneID *string           `json:"AvailabilityZoneId,omitempty"`
+	Description        *string           `json:"Description,omitempty"`
 	Name               string            `json:"Name"`
 	SiteID             string            `json:"SiteId"`
-	Tags               map[string]string `json:"Tags"`
+	Tags               map[string]string `json:"Tags,omitempty"`
 }
 
 type CreateOutpostRequest struct {

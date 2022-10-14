@@ -8,8 +8,8 @@ const (
 )
 
 type ServiceAccountKey struct {
-	Data       *string                    `json:"data"`
-	ID         *string                    `json:"id"`
-	PublicData *string                    `json:"publicData"`
-	Type       *ServiceAccountKeyTypeEnum `json:"type"`
+	Data       *string                    `json:"data,omitempty"`
+	ID         *string                    `json:"id,omitempty"`
+	PublicData *string                    `json:"publicData,omitempty"`
+	Type       *ServiceAccountKeyTypeEnum `json:"type,omitempty"`
 }

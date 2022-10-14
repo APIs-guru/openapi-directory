@@ -26,15 +26,15 @@ const (
 )
 
 type AppGateway struct {
-	AllocatedConnections []AllocatedConnection   `json:"allocatedConnections"`
-	CreateTime           *string                 `json:"createTime"`
-	DisplayName          *string                 `json:"displayName"`
-	HostType             *AppGatewayHostTypeEnum `json:"hostType"`
-	Labels               map[string]string       `json:"labels"`
-	Name                 *string                 `json:"name"`
-	State                *AppGatewayStateEnum    `json:"state"`
-	Type                 *AppGatewayTypeEnum     `json:"type"`
-	UID                  *string                 `json:"uid"`
-	UpdateTime           *string                 `json:"updateTime"`
-	URI                  *string                 `json:"uri"`
+	AllocatedConnections []AllocatedConnection   `json:"allocatedConnections,omitempty"`
+	CreateTime           *string                 `json:"createTime,omitempty"`
+	DisplayName          *string                 `json:"displayName,omitempty"`
+	HostType             *AppGatewayHostTypeEnum `json:"hostType,omitempty"`
+	Labels               map[string]string       `json:"labels,omitempty"`
+	Name                 *string                 `json:"name,omitempty"`
+	State                *AppGatewayStateEnum    `json:"state,omitempty"`
+	Type                 *AppGatewayTypeEnum     `json:"type,omitempty"`
+	UID                  *string                 `json:"uid,omitempty"`
+	UpdateTime           *string                 `json:"updateTime,omitempty"`
+	URI                  *string                 `json:"uri,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ListAdUnitsResponse struct {
-	AdUnits       []AdUnit `json:"adUnits"`
-	NextPageToken *string  `json:"nextPageToken"`
+	AdUnits       []AdUnit `json:"adUnits,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
 }

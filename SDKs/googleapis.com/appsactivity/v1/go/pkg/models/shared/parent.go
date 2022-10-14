@@ -1,7 +1,7 @@
 package shared
 
 type Parent struct {
-	ID     *string `json:"id"`
-	IsRoot *bool   `json:"isRoot"`
-	Title  *string `json:"title"`
+	ID     *string `json:"id,omitempty"`
+	IsRoot *bool   `json:"isRoot,omitempty"`
+	Title  *string `json:"title,omitempty"`
 }

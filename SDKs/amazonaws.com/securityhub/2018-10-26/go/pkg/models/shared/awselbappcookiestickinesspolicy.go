@@ -1,6 +1,6 @@
 package shared
 
 type AwsElbAppCookieStickinessPolicy struct {
-	CookieName *string `json:"CookieName"`
-	PolicyName *string `json:"PolicyName"`
+	CookieName *string `json:"CookieName,omitempty"`
+	PolicyName *string `json:"PolicyName,omitempty"`
 }

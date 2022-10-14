@@ -15,12 +15,12 @@ type CreateStreamHeaders struct {
 }
 
 type CreateStreamRequestBody struct {
-	DataRetentionInHours *int64            `json:"DataRetentionInHours"`
-	DeviceName           *string           `json:"DeviceName"`
-	KmsKeyID             *string           `json:"KmsKeyId"`
-	MediaType            *string           `json:"MediaType"`
+	DataRetentionInHours *int64            `json:"DataRetentionInHours,omitempty"`
+	DeviceName           *string           `json:"DeviceName,omitempty"`
+	KmsKeyID             *string           `json:"KmsKeyId,omitempty"`
+	MediaType            *string           `json:"MediaType,omitempty"`
 	StreamName           string            `json:"StreamName"`
-	Tags                 map[string]string `json:"Tags"`
+	Tags                 map[string]string `json:"Tags,omitempty"`
 }
 
 type CreateStreamRequest struct {

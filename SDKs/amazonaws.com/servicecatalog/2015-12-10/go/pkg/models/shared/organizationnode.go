@@ -1,6 +1,6 @@
 package shared
 
 type OrganizationNode struct {
-	Type  *OrganizationNodeTypeEnum `json:"Type"`
-	Value *string                   `json:"Value"`
+	Type  *OrganizationNodeTypeEnum `json:"Type,omitempty"`
+	Value *string                   `json:"Value,omitempty"`
 }

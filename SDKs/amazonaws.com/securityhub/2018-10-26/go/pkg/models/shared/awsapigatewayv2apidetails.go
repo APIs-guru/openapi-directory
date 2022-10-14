@@ -1,14 +1,14 @@
 package shared
 
 type AwsAPIGatewayV2APIDetails struct {
-	APIEndpoint               *string               `json:"ApiEndpoint"`
-	APIID                     *string               `json:"ApiId"`
-	APIKeySelectionExpression *string               `json:"ApiKeySelectionExpression"`
-	CorsConfiguration         *AwsCorsConfiguration `json:"CorsConfiguration"`
-	CreatedDate               *string               `json:"CreatedDate"`
-	Description               *string               `json:"Description"`
-	Name                      *string               `json:"Name"`
-	ProtocolType              *string               `json:"ProtocolType"`
-	RouteSelectionExpression  *string               `json:"RouteSelectionExpression"`
-	Version                   *string               `json:"Version"`
+	APIEndpoint               *string               `json:"ApiEndpoint,omitempty"`
+	APIID                     *string               `json:"ApiId,omitempty"`
+	APIKeySelectionExpression *string               `json:"ApiKeySelectionExpression,omitempty"`
+	CorsConfiguration         *AwsCorsConfiguration `json:"CorsConfiguration,omitempty"`
+	CreatedDate               *string               `json:"CreatedDate,omitempty"`
+	Description               *string               `json:"Description,omitempty"`
+	Name                      *string               `json:"Name,omitempty"`
+	ProtocolType              *string               `json:"ProtocolType,omitempty"`
+	RouteSelectionExpression  *string               `json:"RouteSelectionExpression,omitempty"`
+	Version                   *string               `json:"Version,omitempty"`
 }

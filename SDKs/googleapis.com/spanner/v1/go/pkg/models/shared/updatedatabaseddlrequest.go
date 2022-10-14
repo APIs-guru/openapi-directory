@@ -1,6 +1,6 @@
 package shared
 
 type UpdateDatabaseDdlRequest struct {
-	OperationID *string  `json:"operationId"`
-	Statements  []string `json:"statements"`
+	OperationID *string  `json:"operationId,omitempty"`
+	Statements  []string `json:"statements,omitempty"`
 }

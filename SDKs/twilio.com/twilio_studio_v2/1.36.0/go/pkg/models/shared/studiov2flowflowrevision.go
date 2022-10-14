@@ -5,16 +5,16 @@ import (
 )
 
 type StudioV2FlowFlowRevision struct {
-	AccountSid    *string                     `json:"account_sid"`
-	CommitMessage *string                     `json:"commit_message"`
-	DateCreated   *time.Time                  `json:"date_created"`
-	DateUpdated   *time.Time                  `json:"date_updated"`
-	Definition    *interface{}                `json:"definition"`
-	Errors        []interface{}               `json:"errors"`
-	FriendlyName  *string                     `json:"friendly_name"`
-	Revision      *int64                      `json:"revision"`
-	Sid           *string                     `json:"sid"`
-	Status        *FlowRevisionEnumStatusEnum `json:"status"`
-	URL           *string                     `json:"url"`
-	Valid         *bool                       `json:"valid"`
+	AccountSid    *string                     `json:"account_sid,omitempty"`
+	CommitMessage *string                     `json:"commit_message,omitempty"`
+	DateCreated   *time.Time                  `json:"date_created,omitempty"`
+	DateUpdated   *time.Time                  `json:"date_updated,omitempty"`
+	Definition    *interface{}                `json:"definition,omitempty"`
+	Errors        []interface{}               `json:"errors,omitempty"`
+	FriendlyName  *string                     `json:"friendly_name,omitempty"`
+	Revision      *int64                      `json:"revision,omitempty"`
+	Sid           *string                     `json:"sid,omitempty"`
+	Status        *FlowRevisionEnumStatusEnum `json:"status,omitempty"`
+	URL           *string                     `json:"url,omitempty"`
+	Valid         *bool                       `json:"valid,omitempty"`
 }

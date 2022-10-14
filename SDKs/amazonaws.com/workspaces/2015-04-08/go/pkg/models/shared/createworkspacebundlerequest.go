@@ -5,7 +5,7 @@ type CreateWorkspaceBundleRequest struct {
 	BundleName        string       `json:"BundleName"`
 	ComputeType       ComputeType  `json:"ComputeType"`
 	ImageID           string       `json:"ImageId"`
-	RootStorage       *RootStorage `json:"RootStorage"`
-	Tags              []Tag        `json:"Tags"`
+	RootStorage       *RootStorage `json:"RootStorage,omitempty"`
+	Tags              []Tag        `json:"Tags,omitempty"`
 	UserStorage       UserStorage  `json:"UserStorage"`
 }

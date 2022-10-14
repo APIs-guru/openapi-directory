@@ -1,6 +1,6 @@
 package shared
 
 type ListFleetsOutput struct {
-	FleetIds  []string `json:"FleetIds"`
-	NextToken *string  `json:"NextToken"`
+	FleetIds  []string `json:"FleetIds,omitempty"`
+	NextToken *string  `json:"NextToken,omitempty"`
 }

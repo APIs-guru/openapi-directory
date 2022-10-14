@@ -5,10 +5,10 @@ import (
 )
 
 type CustomPluginRevisionSummary struct {
-	ContentType     *CustomPluginContentTypeEnum     `json:"contentType"`
-	CreationTime    *time.Time                       `json:"creationTime"`
-	Description     *string                          `json:"description"`
-	FileDescription *CustomPluginFileDescription     `json:"fileDescription"`
-	Location        *CustomPluginLocationDescription `json:"location"`
-	Revision        *int64                           `json:"revision"`
+	ContentType     *CustomPluginContentTypeEnum     `json:"contentType,omitempty"`
+	CreationTime    *time.Time                       `json:"creationTime,omitempty"`
+	Description     *string                          `json:"description,omitempty"`
+	FileDescription *CustomPluginFileDescription     `json:"fileDescription,omitempty"`
+	Location        *CustomPluginLocationDescription `json:"location,omitempty"`
+	Revision        *int64                           `json:"revision,omitempty"`
 }

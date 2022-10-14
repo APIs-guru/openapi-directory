@@ -1,6 +1,6 @@
 package shared
 
 type GetContactPolicyResult struct {
-	ContactArn *string `json:"ContactArn"`
-	Policy     *string `json:"Policy"`
+	ContactArn *string `json:"ContactArn,omitempty"`
+	Policy     *string `json:"Policy,omitempty"`
 }

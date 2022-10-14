@@ -16,8 +16,8 @@ const (
 )
 
 type SslcsRequestBody struct {
-	CertificateParameters *SslcsRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *SslcsRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                SslcsRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Sslcs400ApplicationJSON struct {
-	Error            *Sslcs400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sslcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sslcs400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sslcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sslcs401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Sslcs401ApplicationJSON struct {
-	Error            *Sslcs401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sslcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sslcs401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sslcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sslcs404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Sslcs404ApplicationJSON struct {
-	Error            *Sslcs404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sslcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sslcs404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sslcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sslcs500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Sslcs500ApplicationJSON struct {
-	Error            *Sslcs500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sslcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sslcs500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sslcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sslcs502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Sslcs502ApplicationJSON struct {
-	Error            *Sslcs502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sslcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sslcs502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sslcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sslcs503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Sslcs503ApplicationJSON struct {
-	Error            *Sslcs503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sslcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sslcs503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sslcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Sslcs504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Sslcs504ApplicationJSON struct {
-	Error            *Sslcs504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Sslcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Sslcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sslcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SslcsResponse struct {

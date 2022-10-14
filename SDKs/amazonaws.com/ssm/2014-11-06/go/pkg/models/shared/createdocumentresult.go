@@ -1,5 +1,5 @@
 package shared
 
 type CreateDocumentResult struct {
-	DocumentDescription *DocumentDescription `json:"DocumentDescription"`
+	DocumentDescription *DocumentDescription `json:"DocumentDescription,omitempty"`
 }

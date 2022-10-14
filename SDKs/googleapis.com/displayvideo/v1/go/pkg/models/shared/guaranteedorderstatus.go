@@ -20,7 +20,7 @@ const (
 )
 
 type GuaranteedOrderStatus struct {
-	ConfigStatus      *GuaranteedOrderStatusConfigStatusEnum `json:"configStatus"`
-	EntityPauseReason *string                                `json:"entityPauseReason"`
-	EntityStatus      *GuaranteedOrderStatusEntityStatusEnum `json:"entityStatus"`
+	ConfigStatus      *GuaranteedOrderStatusConfigStatusEnum `json:"configStatus,omitempty"`
+	EntityPauseReason *string                                `json:"entityPauseReason,omitempty"`
+	EntityStatus      *GuaranteedOrderStatusEntityStatusEnum `json:"entityStatus,omitempty"`
 }

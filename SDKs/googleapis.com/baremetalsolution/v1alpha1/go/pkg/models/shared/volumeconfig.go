@@ -17,14 +17,14 @@ const (
 )
 
 type VolumeConfig struct {
-	ID               *string                   `json:"id"`
-	Location         *string                   `json:"location"`
-	LunRanges        []LunRange                `json:"lunRanges"`
-	MachineIds       []string                  `json:"machineIds"`
-	NfsExports       []NfsExport               `json:"nfsExports"`
-	Protocol         *VolumeConfigProtocolEnum `json:"protocol"`
-	SizeGb           *int32                    `json:"sizeGb"`
-	SnapshotsEnabled *bool                     `json:"snapshotsEnabled"`
-	Type             *VolumeConfigTypeEnum     `json:"type"`
-	UserNote         *string                   `json:"userNote"`
+	ID               *string                   `json:"id,omitempty"`
+	Location         *string                   `json:"location,omitempty"`
+	LunRanges        []LunRange                `json:"lunRanges,omitempty"`
+	MachineIds       []string                  `json:"machineIds,omitempty"`
+	NfsExports       []NfsExport               `json:"nfsExports,omitempty"`
+	Protocol         *VolumeConfigProtocolEnum `json:"protocol,omitempty"`
+	SizeGb           *int32                    `json:"sizeGb,omitempty"`
+	SnapshotsEnabled *bool                     `json:"snapshotsEnabled,omitempty"`
+	Type             *VolumeConfigTypeEnum     `json:"type,omitempty"`
+	UserNote         *string                   `json:"userNote,omitempty"`
 }

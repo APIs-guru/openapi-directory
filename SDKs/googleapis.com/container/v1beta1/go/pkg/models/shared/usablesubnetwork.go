@@ -1,9 +1,9 @@
 package shared
 
 type UsableSubnetwork struct {
-	IPCidrRange       *string                          `json:"ipCidrRange"`
-	Network           *string                          `json:"network"`
-	SecondaryIPRanges []UsableSubnetworkSecondaryRange `json:"secondaryIpRanges"`
-	StatusMessage     *string                          `json:"statusMessage"`
-	Subnetwork        *string                          `json:"subnetwork"`
+	IPCidrRange       *string                          `json:"ipCidrRange,omitempty"`
+	Network           *string                          `json:"network,omitempty"`
+	SecondaryIPRanges []UsableSubnetworkSecondaryRange `json:"secondaryIpRanges,omitempty"`
+	StatusMessage     *string                          `json:"statusMessage,omitempty"`
+	Subnetwork        *string                          `json:"subnetwork,omitempty"`
 }

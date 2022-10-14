@@ -5,9 +5,9 @@ import (
 )
 
 type ReplicationStatusType struct {
-	KmsKeyID         *string         `json:"KmsKeyId"`
-	LastAccessedDate *time.Time      `json:"LastAccessedDate"`
-	Region           *string         `json:"Region"`
-	Status           *StatusTypeEnum `json:"Status"`
-	StatusMessage    *string         `json:"StatusMessage"`
+	KmsKeyID         *string         `json:"KmsKeyId,omitempty"`
+	LastAccessedDate *time.Time      `json:"LastAccessedDate,omitempty"`
+	Region           *string         `json:"Region,omitempty"`
+	Status           *StatusTypeEnum `json:"Status,omitempty"`
+	StatusMessage    *string         `json:"StatusMessage,omitempty"`
 }

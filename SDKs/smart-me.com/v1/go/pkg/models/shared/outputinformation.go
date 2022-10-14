@@ -8,8 +8,8 @@ const (
 )
 
 type OutputInformation struct {
-	ActionType *OutputInformationActionTypeEnum `json:"ActionType"`
-	Name       *string                          `json:"Name"`
-	Number     *int32                           `json:"Number"`
-	ObisCode   *string                          `json:"ObisCode"`
+	ActionType *OutputInformationActionTypeEnum `json:"ActionType,omitempty"`
+	Name       *string                          `json:"Name,omitempty"`
+	Number     *int32                           `json:"Number,omitempty"`
+	ObisCode   *string                          `json:"ObisCode,omitempty"`
 }

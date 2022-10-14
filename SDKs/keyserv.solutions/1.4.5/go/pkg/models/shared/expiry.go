@@ -5,6 +5,6 @@ import (
 )
 
 type Expiry struct {
-	Expires *time.Time `json:"expires"`
-	Time    *string    `json:"time"`
+	Expires *time.Time `json:"expires,omitempty"`
+	Time    *string    `json:"time,omitempty"`
 }

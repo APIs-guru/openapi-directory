@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudDialogflowV2beta1ResponseMessageMixedAudioSegment struct {
-	AllowPlaybackInterruption *bool   `json:"allowPlaybackInterruption"`
-	Audio                     *string `json:"audio"`
-	URI                       *string `json:"uri"`
+	AllowPlaybackInterruption *bool   `json:"allowPlaybackInterruption,omitempty"`
+	Audio                     *string `json:"audio,omitempty"`
+	URI                       *string `json:"uri,omitempty"`
 }

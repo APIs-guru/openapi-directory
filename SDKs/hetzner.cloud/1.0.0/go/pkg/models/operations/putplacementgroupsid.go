@@ -5,8 +5,8 @@ type PutPlacementGroupsIDPathParams struct {
 }
 
 type PutPlacementGroupsIDRequestBodyUpdatePlacementGroupRequest struct {
-	Labels map[string]interface{} `json:"labels"`
-	Name   *string                `json:"name"`
+	Labels map[string]interface{} `json:"labels,omitempty"`
+	Name   *string                `json:"name,omitempty"`
 }
 
 type PutPlacementGroupsIDRequest struct {

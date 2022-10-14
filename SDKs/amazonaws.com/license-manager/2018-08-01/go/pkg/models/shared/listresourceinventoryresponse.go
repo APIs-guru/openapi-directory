@@ -1,6 +1,6 @@
 package shared
 
 type ListResourceInventoryResponse struct {
-	NextToken             *string             `json:"NextToken"`
-	ResourceInventoryList []ResourceInventory `json:"ResourceInventoryList"`
+	NextToken             *string             `json:"NextToken,omitempty"`
+	ResourceInventoryList []ResourceInventory `json:"ResourceInventoryList,omitempty"`
 }

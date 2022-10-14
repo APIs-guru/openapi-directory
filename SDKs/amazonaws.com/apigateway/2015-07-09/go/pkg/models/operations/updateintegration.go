@@ -21,7 +21,7 @@ type UpdateIntegrationHeaders struct {
 }
 
 type UpdateIntegrationRequestBody struct {
-	PatchOperations []shared.PatchOperation `json:"patchOperations"`
+	PatchOperations []shared.PatchOperation `json:"patchOperations,omitempty"`
 }
 
 type UpdateIntegrationRequest struct {

@@ -1,9 +1,9 @@
 package shared
 
 type SubtitleProfile struct {
-	Container *string                     `json:"Container"`
-	DidlMode  *string                     `json:"DidlMode"`
-	Format    *string                     `json:"Format"`
-	Language  *string                     `json:"Language"`
-	Method    *SubtitleDeliveryMethodEnum `json:"Method"`
+	Container *string                     `json:"Container,omitempty"`
+	DidlMode  *string                     `json:"DidlMode,omitempty"`
+	Format    *string                     `json:"Format,omitempty"`
+	Language  *string                     `json:"Language,omitempty"`
+	Method    *SubtitleDeliveryMethodEnum `json:"Method,omitempty"`
 }

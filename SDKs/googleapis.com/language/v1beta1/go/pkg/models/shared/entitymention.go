@@ -9,6 +9,6 @@ const (
 )
 
 type EntityMention struct {
-	Text *TextSpan              `json:"text"`
-	Type *EntityMentionTypeEnum `json:"type"`
+	Text *TextSpan              `json:"text,omitempty"`
+	Type *EntityMentionTypeEnum `json:"type,omitempty"`
 }

@@ -36,14 +36,14 @@ type CreatePdfTemplate201ApplicationJSONPendingTemplate struct {
 	AllowAdditionalProperties bool                                                       `json:"allow_additional_properties"`
 	Description               string                                                     `json:"description"`
 	EditableSubmissions       bool                                                       `json:"editable_submissions"`
-	ExpirationInterval        *CreatePdfTemplate201ApplicationJSONExpirationIntervalEnum `json:"expiration_interval"`
-	ExpireAfter               *float64                                                   `json:"expire_after"`
+	ExpirationInterval        *CreatePdfTemplate201ApplicationJSONExpirationIntervalEnum `json:"expiration_interval,omitempty"`
+	ExpireAfter               *float64                                                   `json:"expire_after,omitempty"`
 	ExpireSubmissions         bool                                                       `json:"expire_submissions"`
 	ID                        string                                                     `json:"id"`
 	Locked                    bool                                                       `json:"locked"`
 	Name                      string                                                     `json:"name"`
-	ParentFolderID            *string                                                    `json:"parent_folder_id"`
-	Path                      *string                                                    `json:"path"`
+	ParentFolderID            *string                                                    `json:"parent_folder_id,omitempty"`
+	Path                      *string                                                    `json:"path,omitempty"`
 	PublicSubmissions         bool                                                       `json:"public_submissions"`
 	PublicWebForm             bool                                                       `json:"public_web_form"`
 	RedirectURL               string                                                     `json:"redirect_url"`

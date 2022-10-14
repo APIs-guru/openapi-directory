@@ -9,7 +9,7 @@ type PostMyOrdersSellingIDMarkPickedUpPathParams struct {
 }
 
 type PostMyOrdersSellingIDMarkPickedUpRequestBody struct {
-	Date *string `json:"date"`
+	Date *string `json:"date,omitempty"`
 }
 
 type PostMyOrdersSellingIDMarkPickedUpSecurity struct {

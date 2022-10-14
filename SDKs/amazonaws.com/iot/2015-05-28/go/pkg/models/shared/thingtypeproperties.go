@@ -1,6 +1,6 @@
 package shared
 
 type ThingTypeProperties struct {
-	SearchableAttributes []string `json:"searchableAttributes"`
-	ThingTypeDescription *string  `json:"thingTypeDescription"`
+	SearchableAttributes []string `json:"searchableAttributes,omitempty"`
+	ThingTypeDescription *string  `json:"thingTypeDescription,omitempty"`
 }

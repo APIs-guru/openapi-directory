@@ -1,6 +1,6 @@
 package shared
 
 type DescribeUsageReportSubscriptionsResult struct {
-	NextToken                *string                   `json:"NextToken"`
-	UsageReportSubscriptions []UsageReportSubscription `json:"UsageReportSubscriptions"`
+	NextToken                *string                   `json:"NextToken,omitempty"`
+	UsageReportSubscriptions []UsageReportSubscription `json:"UsageReportSubscriptions,omitempty"`
 }

@@ -23,16 +23,16 @@ const (
 )
 
 type GoogleCloudMlV1PredictionInput struct {
-	BatchSize        *string                                             `json:"batchSize"`
-	DataFormat       *GoogleCloudMlV1PredictionInputDataFormatEnum       `json:"dataFormat"`
-	InputPaths       []string                                            `json:"inputPaths"`
-	MaxWorkerCount   *string                                             `json:"maxWorkerCount"`
-	ModelName        *string                                             `json:"modelName"`
-	OutputDataFormat *GoogleCloudMlV1PredictionInputOutputDataFormatEnum `json:"outputDataFormat"`
-	OutputPath       *string                                             `json:"outputPath"`
-	Region           *string                                             `json:"region"`
-	RuntimeVersion   *string                                             `json:"runtimeVersion"`
-	SignatureName    *string                                             `json:"signatureName"`
-	URI              *string                                             `json:"uri"`
-	VersionName      *string                                             `json:"versionName"`
+	BatchSize        *string                                             `json:"batchSize,omitempty"`
+	DataFormat       *GoogleCloudMlV1PredictionInputDataFormatEnum       `json:"dataFormat,omitempty"`
+	InputPaths       []string                                            `json:"inputPaths,omitempty"`
+	MaxWorkerCount   *string                                             `json:"maxWorkerCount,omitempty"`
+	ModelName        *string                                             `json:"modelName,omitempty"`
+	OutputDataFormat *GoogleCloudMlV1PredictionInputOutputDataFormatEnum `json:"outputDataFormat,omitempty"`
+	OutputPath       *string                                             `json:"outputPath,omitempty"`
+	Region           *string                                             `json:"region,omitempty"`
+	RuntimeVersion   *string                                             `json:"runtimeVersion,omitempty"`
+	SignatureName    *string                                             `json:"signatureName,omitempty"`
+	URI              *string                                             `json:"uri,omitempty"`
+	VersionName      *string                                             `json:"versionName,omitempty"`
 }

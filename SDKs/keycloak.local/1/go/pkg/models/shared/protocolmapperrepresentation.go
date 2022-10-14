@@ -1,9 +1,9 @@
 package shared
 
 type ProtocolMapperRepresentation struct {
-	Config         map[string]interface{} `json:"config"`
-	ID             *string                `json:"id"`
-	Name           *string                `json:"name"`
-	Protocol       *string                `json:"protocol"`
-	ProtocolMapper *string                `json:"protocolMapper"`
+	Config         map[string]interface{} `json:"config,omitempty"`
+	ID             *string                `json:"id,omitempty"`
+	Name           *string                `json:"name,omitempty"`
+	Protocol       *string                `json:"protocol,omitempty"`
+	ProtocolMapper *string                `json:"protocolMapper,omitempty"`
 }

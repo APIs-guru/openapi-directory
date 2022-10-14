@@ -1,6 +1,6 @@
 package shared
 
 type AwsS3BucketServerSideEncryptionByDefault struct {
-	KmsMasterKeyID *string `json:"KMSMasterKeyID"`
-	SseAlgorithm   *string `json:"SSEAlgorithm"`
+	KmsMasterKeyID *string `json:"KMSMasterKeyID,omitempty"`
+	SseAlgorithm   *string `json:"SSEAlgorithm,omitempty"`
 }

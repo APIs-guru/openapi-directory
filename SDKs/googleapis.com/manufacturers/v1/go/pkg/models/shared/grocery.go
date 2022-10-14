@@ -1,13 +1,13 @@
 package shared
 
 type Grocery struct {
-	ActiveIngredients     *string  `json:"activeIngredients"`
-	AlcoholByVolume       *float64 `json:"alcoholByVolume"`
-	Allergens             *string  `json:"allergens"`
-	DerivedNutritionClaim []string `json:"derivedNutritionClaim"`
-	Directions            *string  `json:"directions"`
-	Indications           *string  `json:"indications"`
-	Ingredients           *string  `json:"ingredients"`
-	NutritionClaim        []string `json:"nutritionClaim"`
-	StorageInstructions   *string  `json:"storageInstructions"`
+	ActiveIngredients     *string  `json:"activeIngredients,omitempty"`
+	AlcoholByVolume       *float64 `json:"alcoholByVolume,omitempty"`
+	Allergens             *string  `json:"allergens,omitempty"`
+	DerivedNutritionClaim []string `json:"derivedNutritionClaim,omitempty"`
+	Directions            *string  `json:"directions,omitempty"`
+	Indications           *string  `json:"indications,omitempty"`
+	Ingredients           *string  `json:"ingredients,omitempty"`
+	NutritionClaim        []string `json:"nutritionClaim,omitempty"`
+	StorageInstructions   *string  `json:"storageInstructions,omitempty"`
 }

@@ -15,11 +15,11 @@ const (
 )
 
 type BuildSystemSharedDtoJobRun struct {
-	ActivityRuns []BuildSystemSharedDtoActivityRun     `json:"ActivityRuns"`
-	EndDate      *time.Time                            `json:"EndDate"`
-	JobID        *int32                                `json:"JobID"`
-	JobRunID     *int32                                `json:"JobRunID"`
-	Parameters   []BuildSystemSharedDtoParameterValue  `json:"Parameters"`
-	StartDate    *time.Time                            `json:"StartDate"`
-	Status       *BuildSystemSharedDtoJobRunStatusEnum `json:"Status"`
+	ActivityRuns []BuildSystemSharedDtoActivityRun     `json:"ActivityRuns,omitempty"`
+	EndDate      *time.Time                            `json:"EndDate,omitempty"`
+	JobID        *int32                                `json:"JobID,omitempty"`
+	JobRunID     *int32                                `json:"JobRunID,omitempty"`
+	Parameters   []BuildSystemSharedDtoParameterValue  `json:"Parameters,omitempty"`
+	StartDate    *time.Time                            `json:"StartDate,omitempty"`
+	Status       *BuildSystemSharedDtoJobRunStatusEnum `json:"Status,omitempty"`
 }

@@ -32,15 +32,15 @@ const (
 )
 
 type GoogleChromeManagementV1InstalledApp struct {
-	AppID              *string                                                 `json:"appId"`
-	AppInstallType     *GoogleChromeManagementV1InstalledAppAppInstallTypeEnum `json:"appInstallType"`
-	AppSource          *GoogleChromeManagementV1InstalledAppAppSourceEnum      `json:"appSource"`
-	AppType            *GoogleChromeManagementV1InstalledAppAppTypeEnum        `json:"appType"`
-	BrowserDeviceCount *string                                                 `json:"browserDeviceCount"`
-	Description        *string                                                 `json:"description"`
-	Disabled           *bool                                                   `json:"disabled"`
-	DisplayName        *string                                                 `json:"displayName"`
-	HomepageURI        *string                                                 `json:"homepageUri"`
-	OsUserCount        *string                                                 `json:"osUserCount"`
-	Permissions        []string                                                `json:"permissions"`
+	AppID              *string                                                 `json:"appId,omitempty"`
+	AppInstallType     *GoogleChromeManagementV1InstalledAppAppInstallTypeEnum `json:"appInstallType,omitempty"`
+	AppSource          *GoogleChromeManagementV1InstalledAppAppSourceEnum      `json:"appSource,omitempty"`
+	AppType            *GoogleChromeManagementV1InstalledAppAppTypeEnum        `json:"appType,omitempty"`
+	BrowserDeviceCount *string                                                 `json:"browserDeviceCount,omitempty"`
+	Description        *string                                                 `json:"description,omitempty"`
+	Disabled           *bool                                                   `json:"disabled,omitempty"`
+	DisplayName        *string                                                 `json:"displayName,omitempty"`
+	HomepageURI        *string                                                 `json:"homepageUri,omitempty"`
+	OsUserCount        *string                                                 `json:"osUserCount,omitempty"`
+	Permissions        []string                                                `json:"permissions,omitempty"`
 }

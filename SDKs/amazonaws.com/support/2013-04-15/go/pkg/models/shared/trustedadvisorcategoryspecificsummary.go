@@ -1,5 +1,5 @@
 package shared
 
 type TrustedAdvisorCategorySpecificSummary struct {
-	CostOptimizing *TrustedAdvisorCostOptimizingSummary `json:"costOptimizing"`
+	CostOptimizing *TrustedAdvisorCostOptimizingSummary `json:"costOptimizing,omitempty"`
 }

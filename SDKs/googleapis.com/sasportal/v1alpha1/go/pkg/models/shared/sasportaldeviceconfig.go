@@ -25,14 +25,14 @@ const (
 )
 
 type SasPortalDeviceConfig struct {
-	AirInterface            *SasPortalDeviceAirInterface                       `json:"airInterface"`
-	CallSign                *string                                            `json:"callSign"`
-	Category                *SasPortalDeviceConfigCategoryEnum                 `json:"category"`
-	InstallationParams      *SasPortalInstallationParams                       `json:"installationParams"`
-	IsSigned                *bool                                              `json:"isSigned"`
-	MeasurementCapabilities []SasPortalDeviceConfigMeasurementCapabilitiesEnum `json:"measurementCapabilities"`
-	Model                   *SasPortalDeviceModel                              `json:"model"`
-	State                   *SasPortalDeviceConfigStateEnum                    `json:"state"`
-	UpdateTime              *string                                            `json:"updateTime"`
-	UserID                  *string                                            `json:"userId"`
+	AirInterface            *SasPortalDeviceAirInterface                       `json:"airInterface,omitempty"`
+	CallSign                *string                                            `json:"callSign,omitempty"`
+	Category                *SasPortalDeviceConfigCategoryEnum                 `json:"category,omitempty"`
+	InstallationParams      *SasPortalInstallationParams                       `json:"installationParams,omitempty"`
+	IsSigned                *bool                                              `json:"isSigned,omitempty"`
+	MeasurementCapabilities []SasPortalDeviceConfigMeasurementCapabilitiesEnum `json:"measurementCapabilities,omitempty"`
+	Model                   *SasPortalDeviceModel                              `json:"model,omitempty"`
+	State                   *SasPortalDeviceConfigStateEnum                    `json:"state,omitempty"`
+	UpdateTime              *string                                            `json:"updateTime,omitempty"`
+	UserID                  *string                                            `json:"userId,omitempty"`
 }

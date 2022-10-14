@@ -36,13 +36,13 @@ type GetAllPostsChangesRequest struct {
 }
 
 type GetAllPostsChanges200ApplicationJSONChanges struct {
-	Date   *time.Time `json:"date"`
-	PostID *string    `json:"post_id"`
-	Type   *string    `json:"type"`
+	Date   *time.Time `json:"date,omitempty"`
+	PostID *string    `json:"post_id,omitempty"`
+	Type   *string    `json:"type,omitempty"`
 }
 
 type GetAllPostsChanges200ApplicationJSON struct {
-	Changes []GetAllPostsChanges200ApplicationJSONChanges `json:"changes"`
+	Changes []GetAllPostsChanges200ApplicationJSONChanges `json:"changes,omitempty"`
 }
 
 type GetAllPostsChangesResponse struct {

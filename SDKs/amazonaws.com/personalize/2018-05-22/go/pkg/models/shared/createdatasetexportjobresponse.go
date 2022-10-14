@@ -1,5 +1,5 @@
 package shared
 
 type CreateDatasetExportJobResponse struct {
-	DatasetExportJobArn *string `json:"datasetExportJobArn"`
+	DatasetExportJobArn *string `json:"datasetExportJobArn,omitempty"`
 }

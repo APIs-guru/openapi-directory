@@ -1,6 +1,6 @@
 package shared
 
 type CancelDataRepositoryTaskResponse struct {
-	Lifecycle *DataRepositoryTaskLifecycleEnum `json:"Lifecycle"`
-	TaskID    *string                          `json:"TaskId"`
+	Lifecycle *DataRepositoryTaskLifecycleEnum `json:"Lifecycle,omitempty"`
+	TaskID    *string                          `json:"TaskId,omitempty"`
 }

@@ -9,11 +9,11 @@ type GetAPIV2PredictionsIDRequest struct {
 }
 
 type GetAPIV2PredictionsID200ApplicationJSON struct {
-	Data []map[string]interface{} `json:"data"`
+	Data []map[string]interface{} `json:"data,omitempty"`
 }
 
 type GetAPIV2PredictionsID404ApplicationJSON struct {
-	Errors map[string]interface{} `json:"errors"`
+	Errors map[string]interface{} `json:"errors,omitempty"`
 }
 
 type GetAPIV2PredictionsIDResponse struct {

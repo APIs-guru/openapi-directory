@@ -19,6 +19,6 @@ const (
 )
 
 type GoogleAppsScriptTypeWebAppConfig struct {
-	Access    *GoogleAppsScriptTypeWebAppConfigAccessEnum    `json:"access"`
-	ExecuteAs *GoogleAppsScriptTypeWebAppConfigExecuteAsEnum `json:"executeAs"`
+	Access    *GoogleAppsScriptTypeWebAppConfigAccessEnum    `json:"access,omitempty"`
+	ExecuteAs *GoogleAppsScriptTypeWebAppConfigExecuteAsEnum `json:"executeAs,omitempty"`
 }

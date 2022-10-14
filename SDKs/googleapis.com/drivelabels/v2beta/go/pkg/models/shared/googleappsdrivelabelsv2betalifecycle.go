@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleAppsDriveLabelsV2betaLifecycle struct {
-	DisabledPolicy        *GoogleAppsDriveLabelsV2betaLifecycleDisabledPolicy `json:"disabledPolicy"`
-	HasUnpublishedChanges *bool                                               `json:"hasUnpublishedChanges"`
-	State                 *GoogleAppsDriveLabelsV2betaLifecycleStateEnum      `json:"state"`
+	DisabledPolicy        *GoogleAppsDriveLabelsV2betaLifecycleDisabledPolicy `json:"disabledPolicy,omitempty"`
+	HasUnpublishedChanges *bool                                               `json:"hasUnpublishedChanges,omitempty"`
+	State                 *GoogleAppsDriveLabelsV2betaLifecycleStateEnum      `json:"state,omitempty"`
 }

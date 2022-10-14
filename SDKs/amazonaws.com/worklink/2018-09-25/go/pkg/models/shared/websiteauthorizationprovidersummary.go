@@ -5,8 +5,8 @@ import (
 )
 
 type WebsiteAuthorizationProviderSummary struct {
-	AuthorizationProviderID   *string                       `json:"AuthorizationProviderId"`
+	AuthorizationProviderID   *string                       `json:"AuthorizationProviderId,omitempty"`
 	AuthorizationProviderType AuthorizationProviderTypeEnum `json:"AuthorizationProviderType"`
-	CreatedTime               *time.Time                    `json:"CreatedTime"`
-	DomainName                *string                       `json:"DomainName"`
+	CreatedTime               *time.Time                    `json:"CreatedTime,omitempty"`
+	DomainName                *string                       `json:"DomainName,omitempty"`
 }

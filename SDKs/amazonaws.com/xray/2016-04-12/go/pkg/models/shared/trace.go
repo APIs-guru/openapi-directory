@@ -1,8 +1,8 @@
 package shared
 
 type Trace struct {
-	Duration      *float64  `json:"Duration"`
-	ID            *string   `json:"Id"`
-	LimitExceeded *bool     `json:"LimitExceeded"`
-	Segments      []Segment `json:"Segments"`
+	Duration      *float64  `json:"Duration,omitempty"`
+	ID            *string   `json:"Id,omitempty"`
+	LimitExceeded *bool     `json:"LimitExceeded,omitempty"`
+	Segments      []Segment `json:"Segments,omitempty"`
 }

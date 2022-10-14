@@ -1,8 +1,8 @@
 package operations
 
 type LinkRequestBodyIdentification struct {
-	Email  *string `json:"email"`
-	UserID *string `json:"userId"`
+	Email  *string `json:"email,omitempty"`
+	UserID *string `json:"userId,omitempty"`
 }
 
 type LinkRequestBody struct {
@@ -25,14 +25,14 @@ type Link201ApplicationJSON struct {
 }
 
 type Link400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header"`
-	Path   map[string]string `json:"path"`
-	Query  map[string]string `json:"query"`
+	Header map[string]string `json:"header,omitempty"`
+	Path   map[string]string `json:"path,omitempty"`
+	Query  map[string]string `json:"query,omitempty"`
 }
 
 type Link400ApplicationJSONErrors struct {
-	Fields     map[string]string                       `json:"fields"`
-	Parameters *Link400ApplicationJSONErrorsParameters `json:"parameters"`
+	Fields     map[string]string                       `json:"fields,omitempty"`
+	Parameters *Link400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
 }
 
 type Link400ApplicationJSONMeta struct {

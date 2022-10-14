@@ -1,5 +1,5 @@
 package shared
 
 type RemoveTargetedAppsRequest struct {
-	AppIds []string `json:"appIds"`
+	AppIds []string `json:"appIds,omitempty"`
 }

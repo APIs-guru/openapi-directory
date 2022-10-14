@@ -20,8 +20,8 @@ type ListFleetsHeaders struct {
 }
 
 type ListFleetsRequestBody struct {
-	MaxResults *int64  `json:"MaxResults"`
-	NextToken  *string `json:"NextToken"`
+	MaxResults *int64  `json:"MaxResults,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
 }
 
 type ListFleetsRequest struct {

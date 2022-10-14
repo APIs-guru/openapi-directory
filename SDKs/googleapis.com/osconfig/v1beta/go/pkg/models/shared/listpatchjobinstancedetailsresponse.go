@@ -1,6 +1,6 @@
 package shared
 
 type ListPatchJobInstanceDetailsResponse struct {
-	NextPageToken           *string                   `json:"nextPageToken"`
-	PatchJobInstanceDetails []PatchJobInstanceDetails `json:"patchJobInstanceDetails"`
+	NextPageToken           *string                   `json:"nextPageToken,omitempty"`
+	PatchJobInstanceDetails []PatchJobInstanceDetails `json:"patchJobInstanceDetails,omitempty"`
 }

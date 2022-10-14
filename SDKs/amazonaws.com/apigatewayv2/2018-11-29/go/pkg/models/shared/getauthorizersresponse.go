@@ -1,6 +1,6 @@
 package shared
 
 type GetAuthorizersResponse struct {
-	Items     []Authorizer `json:"Items"`
-	NextToken *string      `json:"NextToken"`
+	Items     []Authorizer `json:"Items,omitempty"`
+	NextToken *string      `json:"NextToken,omitempty"`
 }

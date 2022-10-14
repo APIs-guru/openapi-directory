@@ -15,7 +15,7 @@ type PutEmailIdentityDkimAttributesHeaders struct {
 }
 
 type PutEmailIdentityDkimAttributesRequestBody struct {
-	SigningEnabled *bool `json:"SigningEnabled"`
+	SigningEnabled *bool `json:"SigningEnabled,omitempty"`
 }
 
 type PutEmailIdentityDkimAttributesRequest struct {

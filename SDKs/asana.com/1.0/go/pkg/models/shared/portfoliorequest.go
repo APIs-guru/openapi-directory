@@ -24,10 +24,10 @@ const (
 )
 
 type PortfolioRequest struct {
-	Color        *PortfolioRequestColorEnum `json:"color"`
-	Gid          *string                    `json:"gid"`
-	Members      []string                   `json:"members"`
-	Name         *string                    `json:"name"`
-	ResourceType *string                    `json:"resource_type"`
-	Workspace    *string                    `json:"workspace"`
+	Color        *PortfolioRequestColorEnum `json:"color,omitempty"`
+	Gid          *string                    `json:"gid,omitempty"`
+	Members      []string                   `json:"members,omitempty"`
+	Name         *string                    `json:"name,omitempty"`
+	ResourceType *string                    `json:"resource_type,omitempty"`
+	Workspace    *string                    `json:"workspace,omitempty"`
 }

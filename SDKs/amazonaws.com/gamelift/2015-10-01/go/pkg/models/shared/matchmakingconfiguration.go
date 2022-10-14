@@ -5,21 +5,21 @@ import (
 )
 
 type MatchmakingConfiguration struct {
-	AcceptanceRequired       *bool              `json:"AcceptanceRequired"`
-	AcceptanceTimeoutSeconds *int64             `json:"AcceptanceTimeoutSeconds"`
-	AdditionalPlayerCount    *int64             `json:"AdditionalPlayerCount"`
-	BackfillMode             *BackfillModeEnum  `json:"BackfillMode"`
-	ConfigurationArn         *string            `json:"ConfigurationArn"`
-	CreationTime             *time.Time         `json:"CreationTime"`
-	CustomEventData          *string            `json:"CustomEventData"`
-	Description              *string            `json:"Description"`
-	FlexMatchMode            *FlexMatchModeEnum `json:"FlexMatchMode"`
-	GameProperties           []GameProperty     `json:"GameProperties"`
-	GameSessionData          *string            `json:"GameSessionData"`
-	GameSessionQueueArns     []string           `json:"GameSessionQueueArns"`
-	Name                     *string            `json:"Name"`
-	NotificationTarget       *string            `json:"NotificationTarget"`
-	RequestTimeoutSeconds    *int64             `json:"RequestTimeoutSeconds"`
-	RuleSetArn               *string            `json:"RuleSetArn"`
-	RuleSetName              *string            `json:"RuleSetName"`
+	AcceptanceRequired       *bool              `json:"AcceptanceRequired,omitempty"`
+	AcceptanceTimeoutSeconds *int64             `json:"AcceptanceTimeoutSeconds,omitempty"`
+	AdditionalPlayerCount    *int64             `json:"AdditionalPlayerCount,omitempty"`
+	BackfillMode             *BackfillModeEnum  `json:"BackfillMode,omitempty"`
+	ConfigurationArn         *string            `json:"ConfigurationArn,omitempty"`
+	CreationTime             *time.Time         `json:"CreationTime,omitempty"`
+	CustomEventData          *string            `json:"CustomEventData,omitempty"`
+	Description              *string            `json:"Description,omitempty"`
+	FlexMatchMode            *FlexMatchModeEnum `json:"FlexMatchMode,omitempty"`
+	GameProperties           []GameProperty     `json:"GameProperties,omitempty"`
+	GameSessionData          *string            `json:"GameSessionData,omitempty"`
+	GameSessionQueueArns     []string           `json:"GameSessionQueueArns,omitempty"`
+	Name                     *string            `json:"Name,omitempty"`
+	NotificationTarget       *string            `json:"NotificationTarget,omitempty"`
+	RequestTimeoutSeconds    *int64             `json:"RequestTimeoutSeconds,omitempty"`
+	RuleSetArn               *string            `json:"RuleSetArn,omitempty"`
+	RuleSetName              *string            `json:"RuleSetName,omitempty"`
 }

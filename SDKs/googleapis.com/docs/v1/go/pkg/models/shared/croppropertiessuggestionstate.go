@@ -1,9 +1,9 @@
 package shared
 
 type CropPropertiesSuggestionState struct {
-	AngleSuggested        *bool `json:"angleSuggested"`
-	OffsetBottomSuggested *bool `json:"offsetBottomSuggested"`
-	OffsetLeftSuggested   *bool `json:"offsetLeftSuggested"`
-	OffsetRightSuggested  *bool `json:"offsetRightSuggested"`
-	OffsetTopSuggested    *bool `json:"offsetTopSuggested"`
+	AngleSuggested        *bool `json:"angleSuggested,omitempty"`
+	OffsetBottomSuggested *bool `json:"offsetBottomSuggested,omitempty"`
+	OffsetLeftSuggested   *bool `json:"offsetLeftSuggested,omitempty"`
+	OffsetRightSuggested  *bool `json:"offsetRightSuggested,omitempty"`
+	OffsetTopSuggested    *bool `json:"offsetTopSuggested,omitempty"`
 }

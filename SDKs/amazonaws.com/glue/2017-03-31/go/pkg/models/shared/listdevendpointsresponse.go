@@ -1,6 +1,6 @@
 package shared
 
 type ListDevEndpointsResponse struct {
-	DevEndpointNames []string `json:"DevEndpointNames"`
-	NextToken        *string  `json:"NextToken"`
+	DevEndpointNames []string `json:"DevEndpointNames,omitempty"`
+	NextToken        *string  `json:"NextToken,omitempty"`
 }

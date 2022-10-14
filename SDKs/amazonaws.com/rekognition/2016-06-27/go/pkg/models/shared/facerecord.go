@@ -1,6 +1,6 @@
 package shared
 
 type FaceRecord struct {
-	Face       *Face       `json:"Face"`
-	FaceDetail *FaceDetail `json:"FaceDetail"`
+	Face       *Face       `json:"Face,omitempty"`
+	FaceDetail *FaceDetail `json:"FaceDetail,omitempty"`
 }

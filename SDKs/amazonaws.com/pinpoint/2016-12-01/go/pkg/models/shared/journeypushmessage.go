@@ -1,5 +1,5 @@
 package shared
 
 type JourneyPushMessage struct {
-	TimeToLive *string `json:"TimeToLive"`
+	TimeToLive *string `json:"TimeToLive,omitempty"`
 }

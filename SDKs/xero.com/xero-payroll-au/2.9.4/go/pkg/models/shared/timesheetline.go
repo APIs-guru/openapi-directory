@@ -1,8 +1,8 @@
 package shared
 
 type TimesheetLine struct {
-	EarningsRateID *string   `json:"EarningsRateID"`
-	NumberOfUnits  []float64 `json:"NumberOfUnits"`
-	TrackingItemID *string   `json:"TrackingItemID"`
-	UpdatedDateUtc *string   `json:"UpdatedDateUTC"`
+	EarningsRateID *string   `json:"EarningsRateID,omitempty"`
+	NumberOfUnits  []float64 `json:"NumberOfUnits,omitempty"`
+	TrackingItemID *string   `json:"TrackingItemID,omitempty"`
+	UpdatedDateUtc *string   `json:"UpdatedDateUTC,omitempty"`
 }

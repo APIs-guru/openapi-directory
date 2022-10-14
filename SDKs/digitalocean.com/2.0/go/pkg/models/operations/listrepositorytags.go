@@ -20,17 +20,17 @@ type ListRepositoryTagsRequest struct {
 }
 
 type ListRepositoryTags200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListRepositoryTags200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListRepositoryTags200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListRepositoryTags200ApplicationJSONMeta struct {
@@ -38,15 +38,15 @@ type ListRepositoryTags200ApplicationJSONMeta struct {
 }
 
 type ListRepositoryTags200ApplicationJSON struct {
-	Links *ListRepositoryTags200ApplicationJSONLinks                                                                                                             `json:"links"`
+	Links *ListRepositoryTags200ApplicationJSONLinks                                                                                                             `json:"links,omitempty"`
 	Meta  ListRepositoryTags200ApplicationJSONMeta                                                                                                               `json:"meta"`
-	Tags  []shared.Onev21registry1Percent7BregistryNamePercent7DGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesRepositoriesItemsPropertiesLatestTag `json:"tags"`
+	Tags  []shared.Onev21registry1Percent7BregistryNamePercent7DGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesRepositoriesItemsPropertiesLatestTag `json:"tags,omitempty"`
 }
 
 type ListRepositoryTags401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListRepositoryTagsResponse struct {

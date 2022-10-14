@@ -1,6 +1,6 @@
 package shared
 
 type DescribeVoicesOutput struct {
-	NextToken *string `json:"NextToken"`
-	Voices    []Voice `json:"Voices"`
+	NextToken *string `json:"NextToken,omitempty"`
+	Voices    []Voice `json:"Voices,omitempty"`
 }

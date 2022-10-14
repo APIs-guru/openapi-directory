@@ -1,9 +1,9 @@
 package shared
 
 type FilterRef struct {
-	AccountID *string `json:"accountId"`
-	Href      *string `json:"href"`
-	ID        *string `json:"id"`
-	Kind      *string `json:"kind"`
-	Name      *string `json:"name"`
+	AccountID *string `json:"accountId,omitempty"`
+	Href      *string `json:"href,omitempty"`
+	ID        *string `json:"id,omitempty"`
+	Kind      *string `json:"kind,omitempty"`
+	Name      *string `json:"name,omitempty"`
 }

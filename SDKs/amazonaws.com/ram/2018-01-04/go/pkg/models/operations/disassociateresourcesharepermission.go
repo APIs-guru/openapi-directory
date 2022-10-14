@@ -15,7 +15,7 @@ type DisassociateResourceSharePermissionHeaders struct {
 }
 
 type DisassociateResourceSharePermissionRequestBody struct {
-	ClientToken      *string `json:"clientToken"`
+	ClientToken      *string `json:"clientToken,omitempty"`
 	PermissionArn    string  `json:"permissionArn"`
 	ResourceShareArn string  `json:"resourceShareArn"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ReplicaStatus struct {
-	CustomerManagedEncryption *CustomerManagedEncryptionStatus `json:"customerManagedEncryption"`
-	Location                  *string                          `json:"location"`
+	CustomerManagedEncryption *CustomerManagedEncryptionStatus `json:"customerManagedEncryption,omitempty"`
+	Location                  *string                          `json:"location,omitempty"`
 }

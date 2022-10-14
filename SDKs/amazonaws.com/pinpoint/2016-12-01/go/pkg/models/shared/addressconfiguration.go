@@ -1,10 +1,10 @@
 package shared
 
 type AddressConfiguration struct {
-	BodyOverride  *string             `json:"BodyOverride"`
-	ChannelType   *ChannelTypeEnum    `json:"ChannelType"`
-	Context       map[string]string   `json:"Context"`
-	RawContent    *string             `json:"RawContent"`
-	Substitutions map[string][]string `json:"Substitutions"`
-	TitleOverride *string             `json:"TitleOverride"`
+	BodyOverride  *string             `json:"BodyOverride,omitempty"`
+	ChannelType   *ChannelTypeEnum    `json:"ChannelType,omitempty"`
+	Context       map[string]string   `json:"Context,omitempty"`
+	RawContent    *string             `json:"RawContent,omitempty"`
+	Substitutions map[string][]string `json:"Substitutions,omitempty"`
+	TitleOverride *string             `json:"TitleOverride,omitempty"`
 }

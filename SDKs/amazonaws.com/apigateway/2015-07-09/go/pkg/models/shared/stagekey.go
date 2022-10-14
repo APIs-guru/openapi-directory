@@ -1,6 +1,6 @@
 package shared
 
 type StageKey struct {
-	RestAPIID *string `json:"restApiId"`
-	StageName *string `json:"stageName"`
+	RestAPIID *string `json:"restApiId,omitempty"`
+	StageName *string `json:"stageName,omitempty"`
 }

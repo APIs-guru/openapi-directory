@@ -10,10 +10,10 @@ const (
 )
 
 type DimensionValue struct {
-	DimensionName *string                      `json:"dimensionName"`
-	Etag          *string                      `json:"etag"`
-	ID            *string                      `json:"id"`
-	Kind          *string                      `json:"kind"`
-	MatchType     *DimensionValueMatchTypeEnum `json:"matchType"`
-	Value         *string                      `json:"value"`
+	DimensionName *string                      `json:"dimensionName,omitempty"`
+	Etag          *string                      `json:"etag,omitempty"`
+	ID            *string                      `json:"id,omitempty"`
+	Kind          *string                      `json:"kind,omitempty"`
+	MatchType     *DimensionValueMatchTypeEnum `json:"matchType,omitempty"`
+	Value         *string                      `json:"value,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type StartReplayRequest struct {
-	Description    *string           `json:"Description"`
+	Description    *string           `json:"Description,omitempty"`
 	Destination    ReplayDestination `json:"Destination"`
 	EventEndTime   time.Time         `json:"EventEndTime"`
 	EventSourceArn string            `json:"EventSourceArn"`

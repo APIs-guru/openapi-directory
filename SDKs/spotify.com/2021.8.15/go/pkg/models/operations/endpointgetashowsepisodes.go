@@ -30,13 +30,13 @@ type EndpointGetAShowsEpisodesRequest struct {
 }
 
 type EndpointGetAShowsEpisodes200ApplicationJSON struct {
-	Href     *string                          `json:"href"`
-	Items    []shared.SimplifiedEpisodeObject `json:"items"`
-	Limit    *int32                           `json:"limit"`
-	Next     *string                          `json:"next"`
-	Offset   *int32                           `json:"offset"`
-	Previous *string                          `json:"previous"`
-	Total    *int32                           `json:"total"`
+	Href     *string                          `json:"href,omitempty"`
+	Items    []shared.SimplifiedEpisodeObject `json:"items,omitempty"`
+	Limit    *int32                           `json:"limit,omitempty"`
+	Next     *string                          `json:"next,omitempty"`
+	Offset   *int32                           `json:"offset,omitempty"`
+	Previous *string                          `json:"previous,omitempty"`
+	Total    *int32                           `json:"total,omitempty"`
 }
 
 type EndpointGetAShowsEpisodesResponse struct {

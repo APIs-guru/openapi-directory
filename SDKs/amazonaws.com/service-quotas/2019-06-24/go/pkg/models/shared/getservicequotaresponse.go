@@ -1,5 +1,5 @@
 package shared
 
 type GetServiceQuotaResponse struct {
-	Quota *ServiceQuota `json:"Quota"`
+	Quota *ServiceQuota `json:"Quota,omitempty"`
 }

@@ -14,6 +14,6 @@ const (
 )
 
 type CallToAction struct {
-	ActionType *CallToActionActionTypeEnum `json:"actionType"`
-	URL        *string                     `json:"url"`
+	ActionType *CallToActionActionTypeEnum `json:"actionType,omitempty"`
+	URL        *string                     `json:"url,omitempty"`
 }

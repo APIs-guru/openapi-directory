@@ -11,9 +11,9 @@ const (
 )
 
 type GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfo struct {
-	ID       *string                                                          `json:"id"`
-	Resource map[string]interface{}                                           `json:"resource"`
-	Status   *GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfoStatusEnum `json:"status"`
-	Sub      []GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfo          `json:"sub"`
-	Time     *string                                                          `json:"time"`
+	ID       *string                                                          `json:"id,omitempty"`
+	Resource map[string]interface{}                                           `json:"resource,omitempty"`
+	Status   *GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfoStatusEnum `json:"status,omitempty"`
+	Sub      []GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfo          `json:"sub,omitempty"`
+	Time     *string                                                          `json:"time,omitempty"`
 }

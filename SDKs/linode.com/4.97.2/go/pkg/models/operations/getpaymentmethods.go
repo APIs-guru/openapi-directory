@@ -34,14 +34,14 @@ type GetPaymentMethodsRequest struct {
 }
 
 type GetPaymentMethods200ApplicationJSON struct {
-	Data    []shared.PaymentMethod `json:"data"`
-	Page    *int64                 `json:"page"`
-	Pages   *int64                 `json:"pages"`
-	Results *int64                 `json:"results"`
+	Data    []shared.PaymentMethod `json:"data,omitempty"`
+	Page    *int64                 `json:"page,omitempty"`
+	Pages   *int64                 `json:"pages,omitempty"`
+	Results *int64                 `json:"results,omitempty"`
 }
 
 type GetPaymentMethodsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetPaymentMethodsResponse struct {

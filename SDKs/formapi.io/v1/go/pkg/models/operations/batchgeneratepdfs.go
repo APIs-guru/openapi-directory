@@ -5,19 +5,19 @@ import (
 )
 
 type BatchGeneratePdfsRequestBodySubmissionsSubmissionDataBatchRequest struct {
-	CSS        *string                `json:"css"`
+	CSS        *string                `json:"css,omitempty"`
 	Data       map[string]interface{} `json:"data"`
-	HTML       *string                `json:"html"`
-	Metadata   map[string]interface{} `json:"metadata"`
+	HTML       *string                `json:"html,omitempty"`
+	Metadata   map[string]interface{} `json:"metadata,omitempty"`
 	TemplateID string                 `json:"template_id"`
-	Test       *bool                  `json:"test"`
+	Test       *bool                  `json:"test,omitempty"`
 }
 
 type BatchGeneratePdfsRequestBodySubmissionBatchData struct {
-	Metadata    map[string]interface{}                                              `json:"metadata"`
+	Metadata    map[string]interface{}                                              `json:"metadata,omitempty"`
 	Submissions []BatchGeneratePdfsRequestBodySubmissionsSubmissionDataBatchRequest `json:"submissions"`
-	TemplateID  *string                                                             `json:"template_id"`
-	Test        *bool                                                               `json:"test"`
+	TemplateID  *string                                                             `json:"template_id,omitempty"`
+	Test        *bool                                                               `json:"test,omitempty"`
 }
 
 type BatchGeneratePdfsSecurity struct {
@@ -52,7 +52,7 @@ type BatchGeneratePdfs200ApplicationJSONSubmissionBatchSubmissionBatch struct {
 	PendingCount         int64                                                       `json:"pending_count"`
 	ProcessedAt          string                                                      `json:"processed_at"`
 	State                BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnum `json:"state"`
-	Submissions          []shared.Submission                                         `json:"submissions"`
+	Submissions          []shared.Submission                                         `json:"submissions,omitempty"`
 	TotalCount           int64                                                       `json:"total_count"`
 }
 
@@ -65,14 +65,14 @@ const (
 )
 
 type BatchGeneratePdfs200ApplicationJSONSubmissionsCreateSubmissionBatchSubmissionsResponse struct {
-	Errors     []string                                                 `json:"errors"`
+	Errors     []string                                                 `json:"errors,omitempty"`
 	Status     BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnum `json:"status"`
-	Submission *shared.Submission                                       `json:"submission"`
+	Submission *shared.Submission                                       `json:"submission,omitempty"`
 }
 
 type BatchGeneratePdfs200ApplicationJSONCreateSubmissionBatchResponse struct {
-	Error           *string                                                                                  `json:"error"`
-	Errors          []string                                                                                 `json:"errors"`
+	Error           *string                                                                                  `json:"error,omitempty"`
+	Errors          []string                                                                                 `json:"errors,omitempty"`
 	Status          BatchGeneratePdfs200ApplicationJSONStatusEnum                                            `json:"status"`
 	SubmissionBatch BatchGeneratePdfs200ApplicationJSONSubmissionBatchSubmissionBatch                        `json:"submission_batch"`
 	Submissions     []BatchGeneratePdfs200ApplicationJSONSubmissionsCreateSubmissionBatchSubmissionsResponse `json:"submissions"`

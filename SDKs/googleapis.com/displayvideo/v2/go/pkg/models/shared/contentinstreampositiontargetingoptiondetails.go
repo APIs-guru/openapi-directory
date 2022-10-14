@@ -11,5 +11,5 @@ const (
 )
 
 type ContentInstreamPositionTargetingOptionDetails struct {
-	ContentInstreamPosition *ContentInstreamPositionTargetingOptionDetailsContentInstreamPositionEnum `json:"contentInstreamPosition"`
+	ContentInstreamPosition *ContentInstreamPositionTargetingOptionDetailsContentInstreamPositionEnum `json:"contentInstreamPosition,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Contact struct {
-	DisplayName *string `json:"displayName"`
-	Email       *string `json:"email"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Email       *string `json:"email,omitempty"`
 }

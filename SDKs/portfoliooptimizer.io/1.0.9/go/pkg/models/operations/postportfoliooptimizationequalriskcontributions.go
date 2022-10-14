@@ -1,14 +1,14 @@
 package operations
 
 type PostPortfolioOptimizationEqualRiskContributionsRequestBodyConstraints struct {
-	MaximumAssetsWeights []float64 `json:"maximumAssetsWeights"`
-	MinimumAssetsWeights []float64 `json:"minimumAssetsWeights"`
+	MaximumAssetsWeights []float64 `json:"maximumAssetsWeights,omitempty"`
+	MinimumAssetsWeights []float64 `json:"minimumAssetsWeights,omitempty"`
 }
 
 type PostPortfolioOptimizationEqualRiskContributionsRequestBody struct {
 	Assets                 int64                                                                  `json:"assets"`
 	AssetsCovarianceMatrix [][]float64                                                            `json:"assetsCovarianceMatrix"`
-	Constraints            *PostPortfolioOptimizationEqualRiskContributionsRequestBodyConstraints `json:"constraints"`
+	Constraints            *PostPortfolioOptimizationEqualRiskContributionsRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
 type PostPortfolioOptimizationEqualRiskContributionsRequest struct {

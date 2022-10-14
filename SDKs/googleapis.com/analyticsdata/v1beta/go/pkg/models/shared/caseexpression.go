@@ -1,5 +1,5 @@
 package shared
 
 type CaseExpression struct {
-	DimensionName *string `json:"dimensionName"`
+	DimensionName *string `json:"dimensionName,omitempty"`
 }

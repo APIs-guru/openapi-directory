@@ -10,11 +10,11 @@ type DatabaseCreateDocumentPathParams struct {
 
 type DatabaseCreateDocumentRequestBody struct {
 	Data               map[string]interface{} `json:"data"`
-	ParentDocument     *string                `json:"parentDocument"`
-	ParentProperty     *string                `json:"parentProperty"`
-	ParentPropertyType *string                `json:"parentPropertyType"`
-	Read               []string               `json:"read"`
-	Write              []string               `json:"write"`
+	ParentDocument     *string                `json:"parentDocument,omitempty"`
+	ParentProperty     *string                `json:"parentProperty,omitempty"`
+	ParentPropertyType *string                `json:"parentPropertyType,omitempty"`
+	Read               []string               `json:"read,omitempty"`
+	Write              []string               `json:"write,omitempty"`
 }
 
 type DatabaseCreateDocumentSecurity struct {

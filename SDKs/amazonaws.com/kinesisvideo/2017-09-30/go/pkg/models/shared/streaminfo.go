@@ -5,13 +5,13 @@ import (
 )
 
 type StreamInfo struct {
-	CreationTime         *time.Time  `json:"CreationTime"`
-	DataRetentionInHours *int64      `json:"DataRetentionInHours"`
-	DeviceName           *string     `json:"DeviceName"`
-	KmsKeyID             *string     `json:"KmsKeyId"`
-	MediaType            *string     `json:"MediaType"`
-	Status               *StatusEnum `json:"Status"`
-	StreamArn            *string     `json:"StreamARN"`
-	StreamName           *string     `json:"StreamName"`
-	Version              *string     `json:"Version"`
+	CreationTime         *time.Time  `json:"CreationTime,omitempty"`
+	DataRetentionInHours *int64      `json:"DataRetentionInHours,omitempty"`
+	DeviceName           *string     `json:"DeviceName,omitempty"`
+	KmsKeyID             *string     `json:"KmsKeyId,omitempty"`
+	MediaType            *string     `json:"MediaType,omitempty"`
+	Status               *StatusEnum `json:"Status,omitempty"`
+	StreamArn            *string     `json:"StreamARN,omitempty"`
+	StreamName           *string     `json:"StreamName,omitempty"`
+	Version              *string     `json:"Version,omitempty"`
 }

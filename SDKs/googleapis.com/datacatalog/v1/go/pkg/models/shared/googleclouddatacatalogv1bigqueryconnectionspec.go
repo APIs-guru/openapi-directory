@@ -8,7 +8,7 @@ const (
 )
 
 type GoogleCloudDatacatalogV1BigQueryConnectionSpec struct {
-	CloudSQL       *GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpec           `json:"cloudSql"`
-	ConnectionType *GoogleCloudDatacatalogV1BigQueryConnectionSpecConnectionTypeEnum `json:"connectionType"`
-	HasCredential  *bool                                                             `json:"hasCredential"`
+	CloudSQL       *GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpec           `json:"cloudSql,omitempty"`
+	ConnectionType *GoogleCloudDatacatalogV1BigQueryConnectionSpecConnectionTypeEnum `json:"connectionType,omitempty"`
+	HasCredential  *bool                                                             `json:"hasCredential,omitempty"`
 }

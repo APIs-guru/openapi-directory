@@ -5,13 +5,13 @@ import (
 )
 
 type APIDestination struct {
-	APIDestinationArn            *string                       `json:"ApiDestinationArn"`
-	APIDestinationState          *APIDestinationStateEnum      `json:"ApiDestinationState"`
-	ConnectionArn                *string                       `json:"ConnectionArn"`
-	CreationTime                 *time.Time                    `json:"CreationTime"`
-	HTTPMethod                   *APIDestinationHTTPMethodEnum `json:"HttpMethod"`
-	InvocationEndpoint           *string                       `json:"InvocationEndpoint"`
-	InvocationRateLimitPerSecond *int64                        `json:"InvocationRateLimitPerSecond"`
-	LastModifiedTime             *time.Time                    `json:"LastModifiedTime"`
-	Name                         *string                       `json:"Name"`
+	APIDestinationArn            *string                       `json:"ApiDestinationArn,omitempty"`
+	APIDestinationState          *APIDestinationStateEnum      `json:"ApiDestinationState,omitempty"`
+	ConnectionArn                *string                       `json:"ConnectionArn,omitempty"`
+	CreationTime                 *time.Time                    `json:"CreationTime,omitempty"`
+	HTTPMethod                   *APIDestinationHTTPMethodEnum `json:"HttpMethod,omitempty"`
+	InvocationEndpoint           *string                       `json:"InvocationEndpoint,omitempty"`
+	InvocationRateLimitPerSecond *int64                        `json:"InvocationRateLimitPerSecond,omitempty"`
+	LastModifiedTime             *time.Time                    `json:"LastModifiedTime,omitempty"`
+	Name                         *string                       `json:"Name,omitempty"`
 }

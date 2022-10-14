@@ -20,7 +20,7 @@ const (
 )
 
 type GoogleCloudApigeeV1MetricAggregation struct {
-	Aggregation *GoogleCloudApigeeV1MetricAggregationAggregationEnum `json:"aggregation"`
-	Name        *string                                              `json:"name"`
-	Order       *GoogleCloudApigeeV1MetricAggregationOrderEnum       `json:"order"`
+	Aggregation *GoogleCloudApigeeV1MetricAggregationAggregationEnum `json:"aggregation,omitempty"`
+	Name        *string                                              `json:"name,omitempty"`
+	Order       *GoogleCloudApigeeV1MetricAggregationOrderEnum       `json:"order,omitempty"`
 }

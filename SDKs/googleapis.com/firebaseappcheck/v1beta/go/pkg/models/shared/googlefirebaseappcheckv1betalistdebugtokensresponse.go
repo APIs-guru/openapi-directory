@@ -1,6 +1,6 @@
 package shared
 
 type GoogleFirebaseAppcheckV1betaListDebugTokensResponse struct {
-	DebugTokens   []GoogleFirebaseAppcheckV1betaDebugToken `json:"debugTokens"`
-	NextPageToken *string                                  `json:"nextPageToken"`
+	DebugTokens   []GoogleFirebaseAppcheckV1betaDebugToken `json:"debugTokens,omitempty"`
+	NextPageToken *string                                  `json:"nextPageToken,omitempty"`
 }

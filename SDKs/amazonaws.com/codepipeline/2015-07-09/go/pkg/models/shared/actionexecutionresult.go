@@ -1,7 +1,7 @@
 package shared
 
 type ActionExecutionResult struct {
-	ExternalExecutionID      *string `json:"externalExecutionId"`
-	ExternalExecutionSummary *string `json:"externalExecutionSummary"`
-	ExternalExecutionURL     *string `json:"externalExecutionUrl"`
+	ExternalExecutionID      *string `json:"externalExecutionId,omitempty"`
+	ExternalExecutionSummary *string `json:"externalExecutionSummary,omitempty"`
+	ExternalExecutionURL     *string `json:"externalExecutionUrl,omitempty"`
 }

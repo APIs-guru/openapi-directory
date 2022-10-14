@@ -23,7 +23,7 @@ type GetAPIV1HolidaysRequest struct {
 }
 
 type GetAPIV1Holidays200ApplicationJSON struct {
-	Holidays []shared.Holiday `json:"holidays"`
+	Holidays []shared.Holiday `json:"holidays,omitempty"`
 }
 
 type GetAPIV1HolidaysResponse struct {

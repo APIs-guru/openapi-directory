@@ -5,25 +5,25 @@ import (
 )
 
 type TableDescription struct {
-	ArchivalSummary        *ArchivalSummary                  `json:"ArchivalSummary"`
-	AttributeDefinitions   []AttributeDefinition             `json:"AttributeDefinitions"`
-	BillingModeSummary     *BillingModeSummary               `json:"BillingModeSummary"`
-	CreationDateTime       *time.Time                        `json:"CreationDateTime"`
-	GlobalSecondaryIndexes []GlobalSecondaryIndexDescription `json:"GlobalSecondaryIndexes"`
-	GlobalTableVersion     *string                           `json:"GlobalTableVersion"`
-	ItemCount              *int64                            `json:"ItemCount"`
-	KeySchema              []KeySchemaElement                `json:"KeySchema"`
-	LatestStreamArn        *string                           `json:"LatestStreamArn"`
-	LatestStreamLabel      *string                           `json:"LatestStreamLabel"`
-	LocalSecondaryIndexes  []LocalSecondaryIndexDescription  `json:"LocalSecondaryIndexes"`
-	ProvisionedThroughput  *ProvisionedThroughputDescription `json:"ProvisionedThroughput"`
-	Replicas               []ReplicaDescription              `json:"Replicas"`
-	RestoreSummary         *RestoreSummary                   `json:"RestoreSummary"`
-	SseDescription         *SseDescription                   `json:"SSEDescription"`
-	StreamSpecification    *StreamSpecification              `json:"StreamSpecification"`
-	TableArn               *string                           `json:"TableArn"`
-	TableID                *string                           `json:"TableId"`
-	TableName              *string                           `json:"TableName"`
-	TableSizeBytes         *int64                            `json:"TableSizeBytes"`
-	TableStatus            *TableStatusEnum                  `json:"TableStatus"`
+	ArchivalSummary        *ArchivalSummary                  `json:"ArchivalSummary,omitempty"`
+	AttributeDefinitions   []AttributeDefinition             `json:"AttributeDefinitions,omitempty"`
+	BillingModeSummary     *BillingModeSummary               `json:"BillingModeSummary,omitempty"`
+	CreationDateTime       *time.Time                        `json:"CreationDateTime,omitempty"`
+	GlobalSecondaryIndexes []GlobalSecondaryIndexDescription `json:"GlobalSecondaryIndexes,omitempty"`
+	GlobalTableVersion     *string                           `json:"GlobalTableVersion,omitempty"`
+	ItemCount              *int64                            `json:"ItemCount,omitempty"`
+	KeySchema              []KeySchemaElement                `json:"KeySchema,omitempty"`
+	LatestStreamArn        *string                           `json:"LatestStreamArn,omitempty"`
+	LatestStreamLabel      *string                           `json:"LatestStreamLabel,omitempty"`
+	LocalSecondaryIndexes  []LocalSecondaryIndexDescription  `json:"LocalSecondaryIndexes,omitempty"`
+	ProvisionedThroughput  *ProvisionedThroughputDescription `json:"ProvisionedThroughput,omitempty"`
+	Replicas               []ReplicaDescription              `json:"Replicas,omitempty"`
+	RestoreSummary         *RestoreSummary                   `json:"RestoreSummary,omitempty"`
+	SseDescription         *SseDescription                   `json:"SSEDescription,omitempty"`
+	StreamSpecification    *StreamSpecification              `json:"StreamSpecification,omitempty"`
+	TableArn               *string                           `json:"TableArn,omitempty"`
+	TableID                *string                           `json:"TableId,omitempty"`
+	TableName              *string                           `json:"TableName,omitempty"`
+	TableSizeBytes         *int64                            `json:"TableSizeBytes,omitempty"`
+	TableStatus            *TableStatusEnum                  `json:"TableStatus,omitempty"`
 }

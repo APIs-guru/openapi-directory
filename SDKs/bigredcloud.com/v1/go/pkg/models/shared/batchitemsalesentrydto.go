@@ -1,6 +1,6 @@
 package shared
 
 type BatchItemSalesEntryDto struct {
-	Item   *SalesEntryDto `json:"item"`
-	OpCode *int32         `json:"opCode"`
+	Item   *SalesEntryDto `json:"item,omitempty"`
+	OpCode *int32         `json:"opCode,omitempty"`
 }

@@ -19,17 +19,17 @@ type GetMostemailedSectionTimePeriodJSONRequest struct {
 }
 
 type GetMostemailedSectionTimePeriodJSON200ApplicationJSON struct {
-	Copyright  *string                       `json:"copyright"`
-	NumResults *int64                        `json:"num_results"`
-	Results    []shared.ArticleWithCountType `json:"results"`
-	Status     *string                       `json:"status"`
+	Copyright  *string                       `json:"copyright,omitempty"`
+	NumResults *int64                        `json:"num_results,omitempty"`
+	Results    []shared.ArticleWithCountType `json:"results,omitempty"`
+	Status     *string                       `json:"status,omitempty"`
 }
 
 type GetMostemailedSectionTimePeriodJSON400ApplicationJSON struct {
-	Copyright *string       `json:"copyright"`
-	Errors    []string      `json:"errors"`
-	Results   []interface{} `json:"results"`
-	Status    *string       `json:"status"`
+	Copyright *string       `json:"copyright,omitempty"`
+	Errors    []string      `json:"errors,omitempty"`
+	Results   []interface{} `json:"results,omitempty"`
+	Status    *string       `json:"status,omitempty"`
 }
 
 type GetMostemailedSectionTimePeriodJSONResponse struct {

@@ -1,5 +1,5 @@
 package shared
 
 type SuspendGameServerGroupOutput struct {
-	GameServerGroup *GameServerGroup `json:"GameServerGroup"`
+	GameServerGroup *GameServerGroup `json:"GameServerGroup,omitempty"`
 }

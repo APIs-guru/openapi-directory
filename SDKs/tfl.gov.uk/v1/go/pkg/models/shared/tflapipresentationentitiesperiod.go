@@ -10,8 +10,8 @@ const (
 )
 
 type TflAPIPresentationEntitiesPeriod struct {
-	Frequency *TflAPIPresentationEntitiesServiceFrequency        `json:"frequency"`
-	FromTime  *TflAPIPresentationEntitiesTwentyFourHourClockTime `json:"fromTime"`
-	ToTime    *TflAPIPresentationEntitiesTwentyFourHourClockTime `json:"toTime"`
-	Type      *TflAPIPresentationEntitiesPeriodTypeEnum          `json:"type"`
+	Frequency *TflAPIPresentationEntitiesServiceFrequency        `json:"frequency,omitempty"`
+	FromTime  *TflAPIPresentationEntitiesTwentyFourHourClockTime `json:"fromTime,omitempty"`
+	ToTime    *TflAPIPresentationEntitiesTwentyFourHourClockTime `json:"toTime,omitempty"`
+	Type      *TflAPIPresentationEntitiesPeriodTypeEnum          `json:"type,omitempty"`
 }

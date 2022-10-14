@@ -1,6 +1,6 @@
 package shared
 
 type ListImageVersionsResponse struct {
-	ImageVersions []ImageVersion `json:"ImageVersions"`
-	NextToken     *string        `json:"NextToken"`
+	ImageVersions []ImageVersion `json:"ImageVersions,omitempty"`
+	NextToken     *string        `json:"NextToken,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type ClientInfo struct {
-	ClientInfoDetails []ClientInfoDetail `json:"clientInfoDetails"`
-	Name              *string            `json:"name"`
+	ClientInfoDetails []ClientInfoDetail `json:"clientInfoDetails,omitempty"`
+	Name              *string            `json:"name,omitempty"`
 }

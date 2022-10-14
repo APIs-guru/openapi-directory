@@ -5,12 +5,12 @@ import (
 )
 
 type MessagingV1ServiceAlphaSender struct {
-	AccountSid   *string    `json:"account_sid"`
-	AlphaSender  *string    `json:"alpha_sender"`
-	Capabilities []string   `json:"capabilities"`
-	DateCreated  *time.Time `json:"date_created"`
-	DateUpdated  *time.Time `json:"date_updated"`
-	ServiceSid   *string    `json:"service_sid"`
-	Sid          *string    `json:"sid"`
-	URL          *string    `json:"url"`
+	AccountSid   *string    `json:"account_sid,omitempty"`
+	AlphaSender  *string    `json:"alpha_sender,omitempty"`
+	Capabilities []string   `json:"capabilities,omitempty"`
+	DateCreated  *time.Time `json:"date_created,omitempty"`
+	DateUpdated  *time.Time `json:"date_updated,omitempty"`
+	ServiceSid   *string    `json:"service_sid,omitempty"`
+	Sid          *string    `json:"sid,omitempty"`
+	URL          *string    `json:"url,omitempty"`
 }

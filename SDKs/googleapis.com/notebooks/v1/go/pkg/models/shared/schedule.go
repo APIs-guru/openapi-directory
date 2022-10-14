@@ -13,14 +13,14 @@ const (
 )
 
 type Schedule struct {
-	CreateTime        *string            `json:"createTime"`
-	CronSchedule      *string            `json:"cronSchedule"`
-	Description       *string            `json:"description"`
-	DisplayName       *string            `json:"displayName"`
-	ExecutionTemplate *ExecutionTemplate `json:"executionTemplate"`
-	Name              *string            `json:"name"`
-	RecentExecutions  []Execution        `json:"recentExecutions"`
-	State             *ScheduleStateEnum `json:"state"`
-	TimeZone          *string            `json:"timeZone"`
-	UpdateTime        *string            `json:"updateTime"`
+	CreateTime        *string            `json:"createTime,omitempty"`
+	CronSchedule      *string            `json:"cronSchedule,omitempty"`
+	Description       *string            `json:"description,omitempty"`
+	DisplayName       *string            `json:"displayName,omitempty"`
+	ExecutionTemplate *ExecutionTemplate `json:"executionTemplate,omitempty"`
+	Name              *string            `json:"name,omitempty"`
+	RecentExecutions  []Execution        `json:"recentExecutions,omitempty"`
+	State             *ScheduleStateEnum `json:"state,omitempty"`
+	TimeZone          *string            `json:"timeZone,omitempty"`
+	UpdateTime        *string            `json:"updateTime,omitempty"`
 }

@@ -9,6 +9,6 @@ const (
 )
 
 type DatabaseEncryption struct {
-	KeyName *string                      `json:"keyName"`
-	State   *DatabaseEncryptionStateEnum `json:"state"`
+	KeyName *string                      `json:"keyName,omitempty"`
+	State   *DatabaseEncryptionStateEnum `json:"state,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type NodeConfigDefaults struct {
-	GcfsConfig    *GcfsConfig            `json:"gcfsConfig"`
-	LoggingConfig *NodePoolLoggingConfig `json:"loggingConfig"`
+	GcfsConfig    *GcfsConfig            `json:"gcfsConfig,omitempty"`
+	LoggingConfig *NodePoolLoggingConfig `json:"loggingConfig,omitempty"`
 }

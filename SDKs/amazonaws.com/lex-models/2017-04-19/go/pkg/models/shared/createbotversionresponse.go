@@ -5,21 +5,21 @@ import (
 )
 
 type CreateBotVersionResponse struct {
-	AbortStatement          *Statement  `json:"abortStatement"`
-	Checksum                *string     `json:"checksum"`
-	ChildDirected           *bool       `json:"childDirected"`
-	ClarificationPrompt     *Prompt     `json:"clarificationPrompt"`
-	CreatedDate             *time.Time  `json:"createdDate"`
-	Description             *string     `json:"description"`
-	DetectSentiment         *bool       `json:"detectSentiment"`
-	EnableModelImprovements *bool       `json:"enableModelImprovements"`
-	FailureReason           *string     `json:"failureReason"`
-	IdleSessionTTLInSeconds *int64      `json:"idleSessionTTLInSeconds"`
-	Intents                 []Intent    `json:"intents"`
-	LastUpdatedDate         *time.Time  `json:"lastUpdatedDate"`
-	Locale                  *LocaleEnum `json:"locale"`
-	Name                    *string     `json:"name"`
-	Status                  *StatusEnum `json:"status"`
-	Version                 *string     `json:"version"`
-	VoiceID                 *string     `json:"voiceId"`
+	AbortStatement          *Statement  `json:"abortStatement,omitempty"`
+	Checksum                *string     `json:"checksum,omitempty"`
+	ChildDirected           *bool       `json:"childDirected,omitempty"`
+	ClarificationPrompt     *Prompt     `json:"clarificationPrompt,omitempty"`
+	CreatedDate             *time.Time  `json:"createdDate,omitempty"`
+	Description             *string     `json:"description,omitempty"`
+	DetectSentiment         *bool       `json:"detectSentiment,omitempty"`
+	EnableModelImprovements *bool       `json:"enableModelImprovements,omitempty"`
+	FailureReason           *string     `json:"failureReason,omitempty"`
+	IdleSessionTTLInSeconds *int64      `json:"idleSessionTTLInSeconds,omitempty"`
+	Intents                 []Intent    `json:"intents,omitempty"`
+	LastUpdatedDate         *time.Time  `json:"lastUpdatedDate,omitempty"`
+	Locale                  *LocaleEnum `json:"locale,omitempty"`
+	Name                    *string     `json:"name,omitempty"`
+	Status                  *StatusEnum `json:"status,omitempty"`
+	Version                 *string     `json:"version,omitempty"`
+	VoiceID                 *string     `json:"voiceId,omitempty"`
 }

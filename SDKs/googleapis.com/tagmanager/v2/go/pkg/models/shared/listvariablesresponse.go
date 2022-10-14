@@ -1,6 +1,6 @@
 package shared
 
 type ListVariablesResponse struct {
-	NextPageToken *string    `json:"nextPageToken"`
-	Variable      []Variable `json:"variable"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	Variable      []Variable `json:"variable,omitempty"`
 }

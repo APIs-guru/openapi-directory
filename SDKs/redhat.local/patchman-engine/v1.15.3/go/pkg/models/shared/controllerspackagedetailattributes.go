@@ -1,9 +1,9 @@
 package shared
 
 type ControllersPackageDetailAttributes struct {
-	AdvisoryID  *string `json:"advisory_id"`
-	Description *string `json:"description"`
-	Name        *string `json:"name"`
-	Summary     *string `json:"summary"`
-	Version     *string `json:"version"`
+	AdvisoryID  *string `json:"advisory_id,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Summary     *string `json:"summary,omitempty"`
+	Version     *string `json:"version,omitempty"`
 }

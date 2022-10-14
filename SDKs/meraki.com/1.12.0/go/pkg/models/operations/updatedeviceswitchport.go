@@ -38,27 +38,27 @@ const (
 )
 
 type UpdateDeviceSwitchPortRequestBody struct {
-	AccessPolicyNumber      *int64                                                 `json:"accessPolicyNumber"`
-	AccessPolicyType        *UpdateDeviceSwitchPortRequestBodyAccessPolicyTypeEnum `json:"accessPolicyType"`
-	AllowedVlans            *string                                                `json:"allowedVlans"`
-	Enabled                 *bool                                                  `json:"enabled"`
-	FlexibleStackingEnabled *bool                                                  `json:"flexibleStackingEnabled"`
-	IsolationEnabled        *bool                                                  `json:"isolationEnabled"`
-	LinkNegotiation         *string                                                `json:"linkNegotiation"`
-	MacAllowList            []string                                               `json:"macAllowList"`
-	Name                    *string                                                `json:"name"`
-	PoeEnabled              *bool                                                  `json:"poeEnabled"`
-	PortScheduleID          *string                                                `json:"portScheduleId"`
-	RstpEnabled             *bool                                                  `json:"rstpEnabled"`
-	StickyMacAllowList      []string                                               `json:"stickyMacAllowList"`
-	StickyMacAllowListLimit *int64                                                 `json:"stickyMacAllowListLimit"`
-	StormControlEnabled     *bool                                                  `json:"stormControlEnabled"`
-	StpGuard                *UpdateDeviceSwitchPortRequestBodyStpGuardEnum         `json:"stpGuard"`
-	Tags                    []string                                               `json:"tags"`
-	Type                    *UpdateDeviceSwitchPortRequestBodyTypeEnum             `json:"type"`
-	Udld                    *UpdateDeviceSwitchPortRequestBodyUdldEnum             `json:"udld"`
-	Vlan                    *int64                                                 `json:"vlan"`
-	VoiceVlan               *int64                                                 `json:"voiceVlan"`
+	AccessPolicyNumber      *int64                                                 `json:"accessPolicyNumber,omitempty"`
+	AccessPolicyType        *UpdateDeviceSwitchPortRequestBodyAccessPolicyTypeEnum `json:"accessPolicyType,omitempty"`
+	AllowedVlans            *string                                                `json:"allowedVlans,omitempty"`
+	Enabled                 *bool                                                  `json:"enabled,omitempty"`
+	FlexibleStackingEnabled *bool                                                  `json:"flexibleStackingEnabled,omitempty"`
+	IsolationEnabled        *bool                                                  `json:"isolationEnabled,omitempty"`
+	LinkNegotiation         *string                                                `json:"linkNegotiation,omitempty"`
+	MacAllowList            []string                                               `json:"macAllowList,omitempty"`
+	Name                    *string                                                `json:"name,omitempty"`
+	PoeEnabled              *bool                                                  `json:"poeEnabled,omitempty"`
+	PortScheduleID          *string                                                `json:"portScheduleId,omitempty"`
+	RstpEnabled             *bool                                                  `json:"rstpEnabled,omitempty"`
+	StickyMacAllowList      []string                                               `json:"stickyMacAllowList,omitempty"`
+	StickyMacAllowListLimit *int64                                                 `json:"stickyMacAllowListLimit,omitempty"`
+	StormControlEnabled     *bool                                                  `json:"stormControlEnabled,omitempty"`
+	StpGuard                *UpdateDeviceSwitchPortRequestBodyStpGuardEnum         `json:"stpGuard,omitempty"`
+	Tags                    []string                                               `json:"tags,omitempty"`
+	Type                    *UpdateDeviceSwitchPortRequestBodyTypeEnum             `json:"type,omitempty"`
+	Udld                    *UpdateDeviceSwitchPortRequestBodyUdldEnum             `json:"udld,omitempty"`
+	Vlan                    *int64                                                 `json:"vlan,omitempty"`
+	VoiceVlan               *int64                                                 `json:"voiceVlan,omitempty"`
 }
 
 type UpdateDeviceSwitchPortRequest struct {

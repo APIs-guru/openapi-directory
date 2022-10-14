@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudVisionV1p1beta1Page struct {
-	Blocks     []GoogleCloudVisionV1p1beta1Block                     `json:"blocks"`
-	Confidence *float32                                              `json:"confidence"`
-	Height     *int32                                                `json:"height"`
-	Property   *GoogleCloudVisionV1p1beta1TextAnnotationTextProperty `json:"property"`
-	Width      *int32                                                `json:"width"`
+	Blocks     []GoogleCloudVisionV1p1beta1Block                     `json:"blocks,omitempty"`
+	Confidence *float32                                              `json:"confidence,omitempty"`
+	Height     *int32                                                `json:"height,omitempty"`
+	Property   *GoogleCloudVisionV1p1beta1TextAnnotationTextProperty `json:"property,omitempty"`
+	Width      *int32                                                `json:"width,omitempty"`
 }

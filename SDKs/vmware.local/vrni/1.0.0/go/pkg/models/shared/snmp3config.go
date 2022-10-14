@@ -21,10 +21,10 @@ const (
 )
 
 type Snmp3Config struct {
-	AuthenticationPassword *string                            `json:"authentication_password"`
-	AuthenticationType     *Snmp3ConfigAuthenticationTypeEnum `json:"authentication_type"`
-	ContextName            *string                            `json:"context_name"`
-	PrivacyPassword        *string                            `json:"privacy_password"`
-	PrivacyType            *Snmp3ConfigPrivacyTypeEnum        `json:"privacy_type"`
-	Username               *string                            `json:"username"`
+	AuthenticationPassword *string                            `json:"authentication_password,omitempty"`
+	AuthenticationType     *Snmp3ConfigAuthenticationTypeEnum `json:"authentication_type,omitempty"`
+	ContextName            *string                            `json:"context_name,omitempty"`
+	PrivacyPassword        *string                            `json:"privacy_password,omitempty"`
+	PrivacyType            *Snmp3ConfigPrivacyTypeEnum        `json:"privacy_type,omitempty"`
+	Username               *string                            `json:"username,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SasPortalFrequencyRange struct {
-	HighFrequencyMhz *float64 `json:"highFrequencyMhz"`
-	LowFrequencyMhz  *float64 `json:"lowFrequencyMhz"`
+	HighFrequencyMhz *float64 `json:"highFrequencyMhz,omitempty"`
+	LowFrequencyMhz  *float64 `json:"lowFrequencyMhz,omitempty"`
 }

@@ -13,17 +13,17 @@ type ListImageActionsRequest struct {
 }
 
 type ListImageActions200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListImageActions200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListImageActions200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListImageActions200ApplicationJSONMeta struct {
@@ -31,15 +31,15 @@ type ListImageActions200ApplicationJSONMeta struct {
 }
 
 type ListImageActions200ApplicationJSON struct {
-	Actions []shared.Onev21actionsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesActionsItems `json:"actions"`
-	Links   *ListImageActions200ApplicationJSONLinks                                                       `json:"links"`
+	Actions []shared.Onev21actionsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesActionsItems `json:"actions,omitempty"`
+	Links   *ListImageActions200ApplicationJSONLinks                                                       `json:"links,omitempty"`
 	Meta    ListImageActions200ApplicationJSONMeta                                                         `json:"meta"`
 }
 
 type ListImageActions401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListImageActionsResponse struct {

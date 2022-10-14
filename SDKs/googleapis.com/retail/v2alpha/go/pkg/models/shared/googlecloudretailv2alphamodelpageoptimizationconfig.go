@@ -11,7 +11,7 @@ const (
 )
 
 type GoogleCloudRetailV2alphaModelPageOptimizationConfig struct {
-	PageOptimizationEventType *string                                                             `json:"pageOptimizationEventType"`
-	Panels                    []GoogleCloudRetailV2alphaModelPageOptimizationConfigPanel          `json:"panels"`
-	Restriction               *GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnum `json:"restriction"`
+	PageOptimizationEventType *string                                                             `json:"pageOptimizationEventType,omitempty"`
+	Panels                    []GoogleCloudRetailV2alphaModelPageOptimizationConfigPanel          `json:"panels,omitempty"`
+	Restriction               *GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnum `json:"restriction,omitempty"`
 }

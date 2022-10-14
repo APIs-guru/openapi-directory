@@ -9,7 +9,7 @@ const (
 )
 
 type Detail struct {
-	Detail *string          `json:"detail"`
-	ID     *string          `json:"id"`
-	Scope  *DetailScopeEnum `json:"scope"`
+	Detail *string          `json:"detail,omitempty"`
+	ID     *string          `json:"id,omitempty"`
+	Scope  *DetailScopeEnum `json:"scope,omitempty"`
 }

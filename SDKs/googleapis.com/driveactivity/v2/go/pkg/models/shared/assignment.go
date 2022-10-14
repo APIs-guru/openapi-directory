@@ -14,6 +14,6 @@ const (
 )
 
 type Assignment struct {
-	AssignedUser *User                  `json:"assignedUser"`
-	Subtype      *AssignmentSubtypeEnum `json:"subtype"`
+	AssignedUser *User                  `json:"assignedUser,omitempty"`
+	Subtype      *AssignmentSubtypeEnum `json:"subtype,omitempty"`
 }

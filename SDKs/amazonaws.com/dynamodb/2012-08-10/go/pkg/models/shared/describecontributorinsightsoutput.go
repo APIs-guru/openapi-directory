@@ -5,10 +5,10 @@ import (
 )
 
 type DescribeContributorInsightsOutput struct {
-	ContributorInsightsRuleList []string                       `json:"ContributorInsightsRuleList"`
-	ContributorInsightsStatus   *ContributorInsightsStatusEnum `json:"ContributorInsightsStatus"`
-	FailureException            *FailureException              `json:"FailureException"`
-	IndexName                   *string                        `json:"IndexName"`
-	LastUpdateDateTime          *time.Time                     `json:"LastUpdateDateTime"`
-	TableName                   *string                        `json:"TableName"`
+	ContributorInsightsRuleList []string                       `json:"ContributorInsightsRuleList,omitempty"`
+	ContributorInsightsStatus   *ContributorInsightsStatusEnum `json:"ContributorInsightsStatus,omitempty"`
+	FailureException            *FailureException              `json:"FailureException,omitempty"`
+	IndexName                   *string                        `json:"IndexName,omitempty"`
+	LastUpdateDateTime          *time.Time                     `json:"LastUpdateDateTime,omitempty"`
+	TableName                   *string                        `json:"TableName,omitempty"`
 }

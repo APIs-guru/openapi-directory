@@ -1,5 +1,5 @@
 package shared
 
 type MissionProfileIDResponse struct {
-	MissionProfileID *string `json:"missionProfileId"`
+	MissionProfileID *string `json:"missionProfileId,omitempty"`
 }

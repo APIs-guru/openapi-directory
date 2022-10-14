@@ -14,8 +14,8 @@ const (
 )
 
 type QuerySchedule struct {
-	EndDate             *Date                       `json:"endDate"`
-	Frequency           *QueryScheduleFrequencyEnum `json:"frequency"`
-	NextRunTimezoneCode *string                     `json:"nextRunTimezoneCode"`
-	StartDate           *Date                       `json:"startDate"`
+	EndDate             *Date                       `json:"endDate,omitempty"`
+	Frequency           *QueryScheduleFrequencyEnum `json:"frequency,omitempty"`
+	NextRunTimezoneCode *string                     `json:"nextRunTimezoneCode,omitempty"`
+	StartDate           *Date                       `json:"startDate,omitempty"`
 }

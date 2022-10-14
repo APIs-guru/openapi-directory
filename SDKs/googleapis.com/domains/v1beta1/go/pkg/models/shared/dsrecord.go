@@ -34,8 +34,8 @@ const (
 )
 
 type DsRecord struct {
-	Algorithm  *DsRecordAlgorithmEnum  `json:"algorithm"`
-	Digest     *string                 `json:"digest"`
-	DigestType *DsRecordDigestTypeEnum `json:"digestType"`
-	KeyTag     *int32                  `json:"keyTag"`
+	Algorithm  *DsRecordAlgorithmEnum  `json:"algorithm,omitempty"`
+	Digest     *string                 `json:"digest,omitempty"`
+	DigestType *DsRecordDigestTypeEnum `json:"digestType,omitempty"`
+	KeyTag     *int32                  `json:"keyTag,omitempty"`
 }

@@ -13,9 +13,9 @@ type AppsCreateInstallationAccessTokenHeaders struct {
 }
 
 type AppsCreateInstallationAccessTokenRequestBody struct {
-	Permissions   *shared.AppPermissions `json:"permissions"`
-	Repositories  []string               `json:"repositories"`
-	RepositoryIds []int64                `json:"repository_ids"`
+	Permissions   *shared.AppPermissions `json:"permissions,omitempty"`
+	Repositories  []string               `json:"repositories,omitempty"`
+	RepositoryIds []int64                `json:"repository_ids,omitempty"`
 }
 
 type AppsCreateInstallationAccessTokenRequest struct {

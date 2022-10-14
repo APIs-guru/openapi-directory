@@ -15,15 +15,15 @@ type StartHumanLoopHeaders struct {
 }
 
 type StartHumanLoopRequestBodyDataAttributes struct {
-	ContentClassifiers []shared.ContentClassifierEnum `json:"ContentClassifiers"`
+	ContentClassifiers []shared.ContentClassifierEnum `json:"ContentClassifiers,omitempty"`
 }
 
 type StartHumanLoopRequestBodyHumanLoopInput struct {
-	InputContent *string `json:"InputContent"`
+	InputContent *string `json:"InputContent,omitempty"`
 }
 
 type StartHumanLoopRequestBody struct {
-	DataAttributes    *StartHumanLoopRequestBodyDataAttributes `json:"DataAttributes"`
+	DataAttributes    *StartHumanLoopRequestBodyDataAttributes `json:"DataAttributes,omitempty"`
 	FlowDefinitionArn string                                   `json:"FlowDefinitionArn"`
 	HumanLoopInput    StartHumanLoopRequestBodyHumanLoopInput  `json:"HumanLoopInput"`
 	HumanLoopName     string                                   `json:"HumanLoopName"`

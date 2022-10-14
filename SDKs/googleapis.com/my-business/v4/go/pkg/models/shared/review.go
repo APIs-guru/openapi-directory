@@ -12,12 +12,12 @@ const (
 )
 
 type Review struct {
-	Comment     *string               `json:"comment"`
-	CreateTime  *string               `json:"createTime"`
-	Name        *string               `json:"name"`
-	ReviewID    *string               `json:"reviewId"`
-	ReviewReply *ReviewReply          `json:"reviewReply"`
-	Reviewer    *Reviewer             `json:"reviewer"`
-	StarRating  *ReviewStarRatingEnum `json:"starRating"`
-	UpdateTime  *string               `json:"updateTime"`
+	Comment     *string               `json:"comment,omitempty"`
+	CreateTime  *string               `json:"createTime,omitempty"`
+	Name        *string               `json:"name,omitempty"`
+	ReviewID    *string               `json:"reviewId,omitempty"`
+	ReviewReply *ReviewReply          `json:"reviewReply,omitempty"`
+	Reviewer    *Reviewer             `json:"reviewer,omitempty"`
+	StarRating  *ReviewStarRatingEnum `json:"starRating,omitempty"`
+	UpdateTime  *string               `json:"updateTime,omitempty"`
 }

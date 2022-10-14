@@ -15,7 +15,7 @@ const (
 )
 
 type TeamsAddOrUpdateRepoPermissionsRequestBody struct {
-	Permission *TeamsAddOrUpdateRepoPermissionsRequestBodyPermissionEnum `json:"permission"`
+	Permission *TeamsAddOrUpdateRepoPermissionsRequestBodyPermissionEnum `json:"permission,omitempty"`
 }
 
 type TeamsAddOrUpdateRepoPermissionsRequest struct {

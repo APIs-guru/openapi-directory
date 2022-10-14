@@ -1,7 +1,7 @@
 package shared
 
 type HTTPParameters struct {
-	HeaderParameters      map[string]string `json:"HeaderParameters"`
-	PathParameterValues   []string          `json:"PathParameterValues"`
-	QueryStringParameters map[string]string `json:"QueryStringParameters"`
+	HeaderParameters      map[string]string `json:"HeaderParameters,omitempty"`
+	PathParameterValues   []string          `json:"PathParameterValues,omitempty"`
+	QueryStringParameters map[string]string `json:"QueryStringParameters,omitempty"`
 }

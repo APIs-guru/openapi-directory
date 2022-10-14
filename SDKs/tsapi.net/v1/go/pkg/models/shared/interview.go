@@ -1,7 +1,7 @@
 package shared
 
 type Interview struct {
-	DataItems              []DataItem              `json:"dataItems"`
-	HierarchicalInterviews []HierarchicalInterview `json:"hierarchicalInterviews"`
-	Ident                  *string                 `json:"ident"`
+	DataItems              []DataItem              `json:"dataItems,omitempty"`
+	HierarchicalInterviews []HierarchicalInterview `json:"hierarchicalInterviews,omitempty"`
+	Ident                  *string                 `json:"ident,omitempty"`
 }

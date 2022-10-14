@@ -20,17 +20,17 @@ type UpdateEndpointHeaders struct {
 }
 
 type UpdateEndpointRequestBodyEndpointRequest struct {
-	Address        *string                     `json:"Address"`
-	Attributes     map[string][]string         `json:"Attributes"`
-	ChannelType    *shared.ChannelTypeEnum     `json:"ChannelType"`
-	Demographic    *shared.EndpointDemographic `json:"Demographic"`
-	EffectiveDate  *string                     `json:"EffectiveDate"`
-	EndpointStatus *string                     `json:"EndpointStatus"`
-	Location       *shared.EndpointLocation    `json:"Location"`
-	Metrics        map[string]float64          `json:"Metrics"`
-	OptOut         *string                     `json:"OptOut"`
-	RequestID      *string                     `json:"RequestId"`
-	User           *shared.EndpointUser        `json:"User"`
+	Address        *string                     `json:"Address,omitempty"`
+	Attributes     map[string][]string         `json:"Attributes,omitempty"`
+	ChannelType    *shared.ChannelTypeEnum     `json:"ChannelType,omitempty"`
+	Demographic    *shared.EndpointDemographic `json:"Demographic,omitempty"`
+	EffectiveDate  *string                     `json:"EffectiveDate,omitempty"`
+	EndpointStatus *string                     `json:"EndpointStatus,omitempty"`
+	Location       *shared.EndpointLocation    `json:"Location,omitempty"`
+	Metrics        map[string]float64          `json:"Metrics,omitempty"`
+	OptOut         *string                     `json:"OptOut,omitempty"`
+	RequestID      *string                     `json:"RequestId,omitempty"`
+	User           *shared.EndpointUser        `json:"User,omitempty"`
 }
 
 type UpdateEndpointRequestBody struct {

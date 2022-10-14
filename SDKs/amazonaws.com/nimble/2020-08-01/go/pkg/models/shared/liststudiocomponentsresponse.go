@@ -1,6 +1,6 @@
 package shared
 
 type ListStudioComponentsResponse struct {
-	NextToken        *string           `json:"nextToken"`
-	StudioComponents []StudioComponent `json:"studioComponents"`
+	NextToken        *string           `json:"nextToken,omitempty"`
+	StudioComponents []StudioComponent `json:"studioComponents,omitempty"`
 }

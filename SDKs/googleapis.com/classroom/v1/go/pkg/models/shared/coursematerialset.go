@@ -1,6 +1,6 @@
 package shared
 
 type CourseMaterialSet struct {
-	Materials []CourseMaterial `json:"materials"`
-	Title     *string          `json:"title"`
+	Materials []CourseMaterial `json:"materials,omitempty"`
+	Title     *string          `json:"title,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type AwsElbLoadBalancerCrossZoneLoadBalancing struct {
-	Enabled *bool `json:"Enabled"`
+	Enabled *bool `json:"Enabled,omitempty"`
 }

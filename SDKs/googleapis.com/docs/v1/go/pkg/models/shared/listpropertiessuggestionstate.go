@@ -1,5 +1,5 @@
 package shared
 
 type ListPropertiesSuggestionState struct {
-	NestingLevelsSuggestionStates []NestingLevelSuggestionState `json:"nestingLevelsSuggestionStates"`
+	NestingLevelsSuggestionStates []NestingLevelSuggestionState `json:"nestingLevelsSuggestionStates,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type AllocateQuotaResponse struct {
-	AllocateErrors  []QuotaError     `json:"allocateErrors"`
-	AllocateInfo    *AllocateInfo    `json:"allocateInfo"`
-	OperationID     *string          `json:"operationId"`
-	QuotaMetrics    []MetricValueSet `json:"quotaMetrics"`
-	ServiceConfigID *string          `json:"serviceConfigId"`
+	AllocateErrors  []QuotaError     `json:"allocateErrors,omitempty"`
+	AllocateInfo    *AllocateInfo    `json:"allocateInfo,omitempty"`
+	OperationID     *string          `json:"operationId,omitempty"`
+	QuotaMetrics    []MetricValueSet `json:"quotaMetrics,omitempty"`
+	ServiceConfigID *string          `json:"serviceConfigId,omitempty"`
 }

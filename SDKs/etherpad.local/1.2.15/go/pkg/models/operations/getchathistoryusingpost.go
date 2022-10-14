@@ -11,38 +11,38 @@ type GetChatHistoryUsingPostRequest struct {
 }
 
 type GetChatHistoryUsingPost200ApplicationJSONDataMessages struct {
-	Text     *string `json:"text"`
-	Time     *int64  `json:"time"`
-	UserID   *string `json:"userId"`
-	UserName *string `json:"userName"`
+	Text     *string `json:"text,omitempty"`
+	Time     *int64  `json:"time,omitempty"`
+	UserID   *string `json:"userId,omitempty"`
+	UserName *string `json:"userName,omitempty"`
 }
 
 type GetChatHistoryUsingPost200ApplicationJSONData struct {
-	Messages []GetChatHistoryUsingPost200ApplicationJSONDataMessages `json:"messages"`
+	Messages []GetChatHistoryUsingPost200ApplicationJSONDataMessages `json:"messages,omitempty"`
 }
 
 type GetChatHistoryUsingPost200ApplicationJSON struct {
-	Code    *int64                                         `json:"code"`
-	Data    *GetChatHistoryUsingPost200ApplicationJSONData `json:"data"`
-	Message *string                                        `json:"message"`
+	Code    *int64                                         `json:"code,omitempty"`
+	Data    *GetChatHistoryUsingPost200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                        `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type GetChatHistoryUsingPostResponse struct {

@@ -10,6 +10,6 @@ const (
 )
 
 type UpdateLineCategoryRequest struct {
-	LineCategory *UpdateLineCategoryRequestLineCategoryEnum `json:"lineCategory"`
-	ObjectID     *string                                    `json:"objectId"`
+	LineCategory *UpdateLineCategoryRequestLineCategoryEnum `json:"lineCategory,omitempty"`
+	ObjectID     *string                                    `json:"objectId,omitempty"`
 }

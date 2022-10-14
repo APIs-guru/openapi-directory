@@ -1,18 +1,18 @@
 package shared
 
 type Metadata struct {
-	CanDelete             *bool   `json:"canDelete"`
-	CanHaveBusinessCalls  *bool   `json:"canHaveBusinessCalls"`
-	CanHaveFoodMenus      *bool   `json:"canHaveFoodMenus"`
-	CanModifyServiceList  *bool   `json:"canModifyServiceList"`
-	CanOperateHealthData  *bool   `json:"canOperateHealthData"`
-	CanOperateLocalPost   *bool   `json:"canOperateLocalPost"`
-	CanOperateLodgingData *bool   `json:"canOperateLodgingData"`
-	DuplicateLocation     *string `json:"duplicateLocation"`
-	HasGoogleUpdated      *bool   `json:"hasGoogleUpdated"`
-	HasPendingEdits       *bool   `json:"hasPendingEdits"`
-	HasVoiceOfMerchant    *bool   `json:"hasVoiceOfMerchant"`
-	MapsURI               *string `json:"mapsUri"`
-	NewReviewURI          *string `json:"newReviewUri"`
-	PlaceID               *string `json:"placeId"`
+	CanDelete             *bool   `json:"canDelete,omitempty"`
+	CanHaveBusinessCalls  *bool   `json:"canHaveBusinessCalls,omitempty"`
+	CanHaveFoodMenus      *bool   `json:"canHaveFoodMenus,omitempty"`
+	CanModifyServiceList  *bool   `json:"canModifyServiceList,omitempty"`
+	CanOperateHealthData  *bool   `json:"canOperateHealthData,omitempty"`
+	CanOperateLocalPost   *bool   `json:"canOperateLocalPost,omitempty"`
+	CanOperateLodgingData *bool   `json:"canOperateLodgingData,omitempty"`
+	DuplicateLocation     *string `json:"duplicateLocation,omitempty"`
+	HasGoogleUpdated      *bool   `json:"hasGoogleUpdated,omitempty"`
+	HasPendingEdits       *bool   `json:"hasPendingEdits,omitempty"`
+	HasVoiceOfMerchant    *bool   `json:"hasVoiceOfMerchant,omitempty"`
+	MapsURI               *string `json:"mapsUri,omitempty"`
+	NewReviewURI          *string `json:"newReviewUri,omitempty"`
+	PlaceID               *string `json:"placeId,omitempty"`
 }

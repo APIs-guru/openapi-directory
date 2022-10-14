@@ -8,11 +8,11 @@ const (
 )
 
 type PostFloatingIpsRequestBodyCreateFloatingIPRequest struct {
-	Description  *string                            `json:"description"`
-	HomeLocation *string                            `json:"home_location"`
-	Labels       map[string]interface{}             `json:"labels"`
-	Name         *string                            `json:"name"`
-	Server       *int64                             `json:"server"`
+	Description  *string                            `json:"description,omitempty"`
+	HomeLocation *string                            `json:"home_location,omitempty"`
+	Labels       map[string]interface{}             `json:"labels,omitempty"`
+	Name         *string                            `json:"name,omitempty"`
+	Server       *int64                             `json:"server,omitempty"`
 	Type         PostFloatingIpsRequestBodyTypeEnum `json:"type"`
 }
 
@@ -92,7 +92,7 @@ type PostFloatingIps201ApplicationJSONFloatingIP struct {
 }
 
 type PostFloatingIps201ApplicationJSON struct {
-	Action     *PostFloatingIps201ApplicationJSONActionAction `json:"action"`
+	Action     *PostFloatingIps201ApplicationJSONActionAction `json:"action,omitempty"`
 	FloatingIP PostFloatingIps201ApplicationJSONFloatingIP    `json:"floating_ip"`
 }
 

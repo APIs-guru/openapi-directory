@@ -9,7 +9,7 @@ type CheckDomainRequest struct {
 }
 
 type CheckDomain200ApplicationJSON struct {
-	IsAvailable *bool `json:"isAvailable"`
+	IsAvailable *bool `json:"isAvailable,omitempty"`
 }
 
 type CheckDomainResponse struct {

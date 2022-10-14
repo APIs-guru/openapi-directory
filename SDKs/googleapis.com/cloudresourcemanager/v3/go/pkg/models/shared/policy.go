@@ -1,8 +1,8 @@
 package shared
 
 type Policy struct {
-	AuditConfigs []AuditConfig `json:"auditConfigs"`
-	Bindings     []Binding     `json:"bindings"`
-	Etag         *string       `json:"etag"`
-	Version      *int32        `json:"version"`
+	AuditConfigs []AuditConfig `json:"auditConfigs,omitempty"`
+	Bindings     []Binding     `json:"bindings,omitempty"`
+	Etag         *string       `json:"etag,omitempty"`
+	Version      *int32        `json:"version,omitempty"`
 }

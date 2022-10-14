@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudBillingBudgetsV1beta1AllUpdatesRule struct {
-	DisableDefaultIamRecipients    *bool    `json:"disableDefaultIamRecipients"`
-	MonitoringNotificationChannels []string `json:"monitoringNotificationChannels"`
-	PubsubTopic                    *string  `json:"pubsubTopic"`
-	SchemaVersion                  *string  `json:"schemaVersion"`
+	DisableDefaultIamRecipients    *bool    `json:"disableDefaultIamRecipients,omitempty"`
+	MonitoringNotificationChannels []string `json:"monitoringNotificationChannels,omitempty"`
+	PubsubTopic                    *string  `json:"pubsubTopic,omitempty"`
+	SchemaVersion                  *string  `json:"schemaVersion,omitempty"`
 }

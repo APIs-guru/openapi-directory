@@ -1,7 +1,7 @@
 package shared
 
 type ProductsListResponse struct {
-	PageInfo        *PageInfo        `json:"pageInfo"`
-	Product         []Product        `json:"product"`
-	TokenPagination *TokenPagination `json:"tokenPagination"`
+	PageInfo        *PageInfo        `json:"pageInfo,omitempty"`
+	Product         []Product        `json:"product,omitempty"`
+	TokenPagination *TokenPagination `json:"tokenPagination,omitempty"`
 }

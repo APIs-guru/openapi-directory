@@ -5,8 +5,8 @@ import (
 )
 
 type EdgeMetric struct {
-	Dimension  *string    `json:"Dimension"`
-	MetricName *string    `json:"MetricName"`
-	Timestamp  *time.Time `json:"Timestamp"`
-	Value      *float64   `json:"Value"`
+	Dimension  *string    `json:"Dimension,omitempty"`
+	MetricName *string    `json:"MetricName,omitempty"`
+	Timestamp  *time.Time `json:"Timestamp,omitempty"`
+	Value      *float64   `json:"Value,omitempty"`
 }

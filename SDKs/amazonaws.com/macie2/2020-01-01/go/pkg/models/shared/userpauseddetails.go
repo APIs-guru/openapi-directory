@@ -5,7 +5,7 @@ import (
 )
 
 type UserPausedDetails struct {
-	JobExpiresAt                        *time.Time `json:"jobExpiresAt"`
-	JobImminentExpirationHealthEventArn *string    `json:"jobImminentExpirationHealthEventArn"`
-	JobPausedAt                         *time.Time `json:"jobPausedAt"`
+	JobExpiresAt                        *time.Time `json:"jobExpiresAt,omitempty"`
+	JobImminentExpirationHealthEventArn *string    `json:"jobImminentExpirationHealthEventArn,omitempty"`
+	JobPausedAt                         *time.Time `json:"jobPausedAt,omitempty"`
 }

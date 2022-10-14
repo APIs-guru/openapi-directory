@@ -14,7 +14,7 @@ type UpdateStoryQueryParams struct {
 }
 
 type UpdateStoryRequestBody struct {
-	Data *shared.StoryRequest `json:"data"`
+	Data *shared.StoryRequest `json:"data,omitempty"`
 }
 
 type UpdateStoryRequest struct {
@@ -24,7 +24,7 @@ type UpdateStoryRequest struct {
 }
 
 type UpdateStory200ApplicationJSON struct {
-	Data *shared.StoryResponse `json:"data"`
+	Data *shared.StoryResponse `json:"data,omitempty"`
 }
 
 type UpdateStoryResponse struct {

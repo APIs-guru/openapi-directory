@@ -1,6 +1,6 @@
 package shared
 
 type ListTunnelDestGroupsResponse struct {
-	NextPageToken    *string           `json:"nextPageToken"`
-	TunnelDestGroups []TunnelDestGroup `json:"tunnelDestGroups"`
+	NextPageToken    *string           `json:"nextPageToken,omitempty"`
+	TunnelDestGroups []TunnelDestGroup `json:"tunnelDestGroups,omitempty"`
 }

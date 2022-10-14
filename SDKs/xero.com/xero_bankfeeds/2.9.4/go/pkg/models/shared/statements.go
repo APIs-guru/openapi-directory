@@ -1,6 +1,6 @@
 package shared
 
 type Statements struct {
-	Items      []Statement `json:"items"`
-	Pagination *Pagination `json:"pagination"`
+	Items      []Statement `json:"items,omitempty"`
+	Pagination *Pagination `json:"pagination,omitempty"`
 }

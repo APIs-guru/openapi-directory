@@ -16,8 +16,8 @@ const (
 
 type UsageCapExceededProblem struct {
 	Detail string                             `json:"detail"`
-	Period *UsageCapExceededProblemPeriodEnum `json:"period"`
-	Scope  *UsageCapExceededProblemScopeEnum  `json:"scope"`
+	Period *UsageCapExceededProblemPeriodEnum `json:"period,omitempty"`
+	Scope  *UsageCapExceededProblemScopeEnum  `json:"scope,omitempty"`
 	Title  string                             `json:"title"`
 	Type   string                             `json:"type"`
 }

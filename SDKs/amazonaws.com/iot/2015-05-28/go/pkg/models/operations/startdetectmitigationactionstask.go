@@ -20,23 +20,23 @@ type StartDetectMitigationActionsTaskHeaders struct {
 }
 
 type StartDetectMitigationActionsTaskRequestBodyTarget struct {
-	BehaviorName        *string  `json:"behaviorName"`
-	SecurityProfileName *string  `json:"securityProfileName"`
-	ViolationIds        []string `json:"violationIds"`
+	BehaviorName        *string  `json:"behaviorName,omitempty"`
+	SecurityProfileName *string  `json:"securityProfileName,omitempty"`
+	ViolationIds        []string `json:"violationIds,omitempty"`
 }
 
 type StartDetectMitigationActionsTaskRequestBodyViolationEventOccurrenceRange struct {
-	EndTime   *time.Time `json:"endTime"`
-	StartTime *time.Time `json:"startTime"`
+	EndTime   *time.Time `json:"endTime,omitempty"`
+	StartTime *time.Time `json:"startTime,omitempty"`
 }
 
 type StartDetectMitigationActionsTaskRequestBody struct {
 	Actions                       []string                                                                  `json:"actions"`
 	ClientRequestToken            string                                                                    `json:"clientRequestToken"`
-	IncludeOnlyActiveViolations   *bool                                                                     `json:"includeOnlyActiveViolations"`
-	IncludeSuppressedAlerts       *bool                                                                     `json:"includeSuppressedAlerts"`
+	IncludeOnlyActiveViolations   *bool                                                                     `json:"includeOnlyActiveViolations,omitempty"`
+	IncludeSuppressedAlerts       *bool                                                                     `json:"includeSuppressedAlerts,omitempty"`
 	Target                        StartDetectMitigationActionsTaskRequestBodyTarget                         `json:"target"`
-	ViolationEventOccurrenceRange *StartDetectMitigationActionsTaskRequestBodyViolationEventOccurrenceRange `json:"violationEventOccurrenceRange"`
+	ViolationEventOccurrenceRange *StartDetectMitigationActionsTaskRequestBodyViolationEventOccurrenceRange `json:"violationEventOccurrenceRange,omitempty"`
 }
 
 type StartDetectMitigationActionsTaskRequest struct {

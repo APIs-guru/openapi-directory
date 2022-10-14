@@ -23,13 +23,13 @@ const (
 )
 
 type UpdateInlineScriptTagRequestBodyInlineScriptTag struct {
-	DisplayScope *UpdateInlineScriptTagRequestBodyInlineScriptTagDisplayScopeEnum `json:"display_scope"`
-	Script       *string                                                          `json:"script"`
-	TriggerEvent *UpdateInlineScriptTagRequestBodyInlineScriptTagTriggerEventEnum `json:"trigger_event"`
+	DisplayScope *UpdateInlineScriptTagRequestBodyInlineScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	Script       *string                                                          `json:"script,omitempty"`
+	TriggerEvent *UpdateInlineScriptTagRequestBodyInlineScriptTagTriggerEventEnum `json:"trigger_event,omitempty"`
 }
 
 type UpdateInlineScriptTagRequestBody struct {
-	InlineScriptTag *UpdateInlineScriptTagRequestBodyInlineScriptTag `json:"inline_script_tag"`
+	InlineScriptTag *UpdateInlineScriptTagRequestBodyInlineScriptTag `json:"inline_script_tag,omitempty"`
 }
 
 type UpdateInlineScriptTagSecurity struct {
@@ -57,18 +57,18 @@ const (
 )
 
 type UpdateInlineScriptTag200ApplicationJSONInlineScriptTag struct {
-	AccountID          *string                                                                 `json:"account_id"`
-	DisplayScope       *UpdateInlineScriptTag200ApplicationJSONInlineScriptTagDisplayScopeEnum `json:"display_scope"`
-	ID                 *int64                                                                  `json:"id"`
-	MakeDate           *int64                                                                  `json:"make_date"`
-	OauthApplicationID *int64                                                                  `json:"oauth_application_id"`
-	Script             *string                                                                 `json:"script"`
-	TriggerEvent       *UpdateInlineScriptTag200ApplicationJSONInlineScriptTagTriggerEventEnum `json:"trigger_event"`
-	UpdateDate         *int64                                                                  `json:"update_date"`
+	AccountID          *string                                                                 `json:"account_id,omitempty"`
+	DisplayScope       *UpdateInlineScriptTag200ApplicationJSONInlineScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID                 *int64                                                                  `json:"id,omitempty"`
+	MakeDate           *int64                                                                  `json:"make_date,omitempty"`
+	OauthApplicationID *int64                                                                  `json:"oauth_application_id,omitempty"`
+	Script             *string                                                                 `json:"script,omitempty"`
+	TriggerEvent       *UpdateInlineScriptTag200ApplicationJSONInlineScriptTagTriggerEventEnum `json:"trigger_event,omitempty"`
+	UpdateDate         *int64                                                                  `json:"update_date,omitempty"`
 }
 
 type UpdateInlineScriptTag200ApplicationJSON struct {
-	InlineScriptTag *UpdateInlineScriptTag200ApplicationJSONInlineScriptTag `json:"inline_script_tag"`
+	InlineScriptTag *UpdateInlineScriptTag200ApplicationJSONInlineScriptTag `json:"inline_script_tag,omitempty"`
 }
 
 type UpdateInlineScriptTagResponse struct {

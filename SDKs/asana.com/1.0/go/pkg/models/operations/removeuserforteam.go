@@ -14,7 +14,7 @@ type RemoveUserForTeamQueryParams struct {
 }
 
 type RemoveUserForTeamRequestBody struct {
-	Data *shared.TeamRemoveUserRequest `json:"data"`
+	Data *shared.TeamRemoveUserRequest `json:"data,omitempty"`
 }
 
 type RemoveUserForTeamRequest struct {
@@ -24,7 +24,7 @@ type RemoveUserForTeamRequest struct {
 }
 
 type RemoveUserForTeam204ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveUserForTeamResponse struct {

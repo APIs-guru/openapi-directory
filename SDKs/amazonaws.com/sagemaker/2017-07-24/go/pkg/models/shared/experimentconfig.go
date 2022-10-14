@@ -1,7 +1,7 @@
 package shared
 
 type ExperimentConfig struct {
-	ExperimentName            *string `json:"ExperimentName"`
-	TrialComponentDisplayName *string `json:"TrialComponentDisplayName"`
-	TrialName                 *string `json:"TrialName"`
+	ExperimentName            *string `json:"ExperimentName,omitempty"`
+	TrialComponentDisplayName *string `json:"TrialComponentDisplayName,omitempty"`
+	TrialName                 *string `json:"TrialName,omitempty"`
 }

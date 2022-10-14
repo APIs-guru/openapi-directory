@@ -1,7 +1,7 @@
 package shared
 
 type FhirIdentifier struct {
-	ID    *int64  `json:"id"`
-	Label *string `json:"label"`
-	Value *string `json:"value"`
+	ID    *int64  `json:"id,omitempty"`
+	Label *string `json:"label,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

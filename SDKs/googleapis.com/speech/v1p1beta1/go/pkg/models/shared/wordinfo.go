@@ -1,9 +1,9 @@
 package shared
 
 type WordInfo struct {
-	Confidence *float32 `json:"confidence"`
-	EndTime    *string  `json:"endTime"`
-	SpeakerTag *int32   `json:"speakerTag"`
-	StartTime  *string  `json:"startTime"`
-	Word       *string  `json:"word"`
+	Confidence *float32 `json:"confidence,omitempty"`
+	EndTime    *string  `json:"endTime,omitempty"`
+	SpeakerTag *int32   `json:"speakerTag,omitempty"`
+	StartTime  *string  `json:"startTime,omitempty"`
+	Word       *string  `json:"word,omitempty"`
 }

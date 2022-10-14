@@ -1,5 +1,5 @@
 package shared
 
 type Page struct {
-	Page *PageFields `json:"page"`
+	Page *PageFields `json:"page,omitempty"`
 }

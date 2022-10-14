@@ -1,5 +1,5 @@
 package shared
 
 type CreateDeploymentResult struct {
-	DeploymentID *string `json:"DeploymentId"`
+	DeploymentID *string `json:"DeploymentId,omitempty"`
 }

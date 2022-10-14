@@ -5,9 +5,9 @@ import (
 )
 
 type FunctionEventInvokeConfig struct {
-	DestinationConfig        *DestinationConfig `json:"DestinationConfig"`
-	FunctionArn              *string            `json:"FunctionArn"`
-	LastModified             *time.Time         `json:"LastModified"`
-	MaximumEventAgeInSeconds *int64             `json:"MaximumEventAgeInSeconds"`
-	MaximumRetryAttempts     *int64             `json:"MaximumRetryAttempts"`
+	DestinationConfig        *DestinationConfig `json:"DestinationConfig,omitempty"`
+	FunctionArn              *string            `json:"FunctionArn,omitempty"`
+	LastModified             *time.Time         `json:"LastModified,omitempty"`
+	MaximumEventAgeInSeconds *int64             `json:"MaximumEventAgeInSeconds,omitempty"`
+	MaximumRetryAttempts     *int64             `json:"MaximumRetryAttempts,omitempty"`
 }

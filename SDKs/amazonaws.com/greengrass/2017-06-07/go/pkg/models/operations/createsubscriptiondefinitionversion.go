@@ -20,7 +20,7 @@ type CreateSubscriptionDefinitionVersionHeaders struct {
 }
 
 type CreateSubscriptionDefinitionVersionRequestBody struct {
-	Subscriptions []shared.Subscription `json:"Subscriptions"`
+	Subscriptions []shared.Subscription `json:"Subscriptions,omitempty"`
 }
 
 type CreateSubscriptionDefinitionVersionRequest struct {

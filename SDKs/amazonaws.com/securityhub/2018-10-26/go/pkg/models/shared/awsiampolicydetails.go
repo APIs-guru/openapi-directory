@@ -1,15 +1,15 @@
 package shared
 
 type AwsIamPolicyDetails struct {
-	AttachmentCount               *int64                `json:"AttachmentCount"`
-	CreateDate                    *string               `json:"CreateDate"`
-	DefaultVersionID              *string               `json:"DefaultVersionId"`
-	Description                   *string               `json:"Description"`
-	IsAttachable                  *bool                 `json:"IsAttachable"`
-	Path                          *string               `json:"Path"`
-	PermissionsBoundaryUsageCount *int64                `json:"PermissionsBoundaryUsageCount"`
-	PolicyID                      *string               `json:"PolicyId"`
-	PolicyName                    *string               `json:"PolicyName"`
-	PolicyVersionList             []AwsIamPolicyVersion `json:"PolicyVersionList"`
-	UpdateDate                    *string               `json:"UpdateDate"`
+	AttachmentCount               *int64                `json:"AttachmentCount,omitempty"`
+	CreateDate                    *string               `json:"CreateDate,omitempty"`
+	DefaultVersionID              *string               `json:"DefaultVersionId,omitempty"`
+	Description                   *string               `json:"Description,omitempty"`
+	IsAttachable                  *bool                 `json:"IsAttachable,omitempty"`
+	Path                          *string               `json:"Path,omitempty"`
+	PermissionsBoundaryUsageCount *int64                `json:"PermissionsBoundaryUsageCount,omitempty"`
+	PolicyID                      *string               `json:"PolicyId,omitempty"`
+	PolicyName                    *string               `json:"PolicyName,omitempty"`
+	PolicyVersionList             []AwsIamPolicyVersion `json:"PolicyVersionList,omitempty"`
+	UpdateDate                    *string               `json:"UpdateDate,omitempty"`
 }

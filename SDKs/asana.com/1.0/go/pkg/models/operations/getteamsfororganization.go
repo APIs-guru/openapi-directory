@@ -21,7 +21,7 @@ type GetTeamsForOrganizationRequest struct {
 }
 
 type GetTeamsForOrganization200ApplicationJSON struct {
-	Data []shared.TeamCompact `json:"data"`
+	Data []shared.TeamCompact `json:"data,omitempty"`
 }
 
 type GetTeamsForOrganizationResponse struct {

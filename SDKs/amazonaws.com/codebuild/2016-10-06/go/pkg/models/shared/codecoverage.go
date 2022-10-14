@@ -5,14 +5,14 @@ import (
 )
 
 type CodeCoverage struct {
-	BranchCoveragePercentage *float64   `json:"branchCoveragePercentage"`
-	BranchesCovered          *int64     `json:"branchesCovered"`
-	BranchesMissed           *int64     `json:"branchesMissed"`
-	Expired                  *time.Time `json:"expired"`
-	FilePath                 *string    `json:"filePath"`
-	ID                       *string    `json:"id"`
-	LineCoveragePercentage   *float64   `json:"lineCoveragePercentage"`
-	LinesCovered             *int64     `json:"linesCovered"`
-	LinesMissed              *int64     `json:"linesMissed"`
-	ReportArn                *string    `json:"reportARN"`
+	BranchCoveragePercentage *float64   `json:"branchCoveragePercentage,omitempty"`
+	BranchesCovered          *int64     `json:"branchesCovered,omitempty"`
+	BranchesMissed           *int64     `json:"branchesMissed,omitempty"`
+	Expired                  *time.Time `json:"expired,omitempty"`
+	FilePath                 *string    `json:"filePath,omitempty"`
+	ID                       *string    `json:"id,omitempty"`
+	LineCoveragePercentage   *float64   `json:"lineCoveragePercentage,omitempty"`
+	LinesCovered             *int64     `json:"linesCovered,omitempty"`
+	LinesMissed              *int64     `json:"linesMissed,omitempty"`
+	ReportArn                *string    `json:"reportARN,omitempty"`
 }

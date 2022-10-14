@@ -28,10 +28,10 @@ const (
 )
 
 type Families struct {
-	Babysitting             *bool                                `json:"babysitting"`
-	BabysittingException    *FamiliesBabysittingExceptionEnum    `json:"babysittingException"`
-	KidsActivities          *bool                                `json:"kidsActivities"`
-	KidsActivitiesException *FamiliesKidsActivitiesExceptionEnum `json:"kidsActivitiesException"`
-	KidsClub                *bool                                `json:"kidsClub"`
-	KidsClubException       *FamiliesKidsClubExceptionEnum       `json:"kidsClubException"`
+	Babysitting             *bool                                `json:"babysitting,omitempty"`
+	BabysittingException    *FamiliesBabysittingExceptionEnum    `json:"babysittingException,omitempty"`
+	KidsActivities          *bool                                `json:"kidsActivities,omitempty"`
+	KidsActivitiesException *FamiliesKidsActivitiesExceptionEnum `json:"kidsActivitiesException,omitempty"`
+	KidsClub                *bool                                `json:"kidsClub,omitempty"`
+	KidsClubException       *FamiliesKidsClubExceptionEnum       `json:"kidsClubException,omitempty"`
 }

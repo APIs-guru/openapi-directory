@@ -6,12 +6,12 @@ import (
 
 type ObScheduledPayment3 struct {
 	AccountID                string                                           `json:"AccountId"`
-	CreditorAccount          *ObCashAccount51                                 `json:"CreditorAccount"`
-	CreditorAgent            *ObBranchAndFinancialInstitutionIdentification51 `json:"CreditorAgent"`
-	DebtorReference          *string                                          `json:"DebtorReference"`
+	CreditorAccount          *ObCashAccount51                                 `json:"CreditorAccount,omitempty"`
+	CreditorAgent            *ObBranchAndFinancialInstitutionIdentification51 `json:"CreditorAgent,omitempty"`
+	DebtorReference          *string                                          `json:"DebtorReference,omitempty"`
 	InstructedAmount         ObActiveOrHistoricCurrencyAndAmount1             `json:"InstructedAmount"`
-	Reference                *string                                          `json:"Reference"`
+	Reference                *string                                          `json:"Reference,omitempty"`
 	ScheduledPaymentDateTime time.Time                                        `json:"ScheduledPaymentDateTime"`
-	ScheduledPaymentID       *string                                          `json:"ScheduledPaymentId"`
+	ScheduledPaymentID       *string                                          `json:"ScheduledPaymentId,omitempty"`
 	ScheduledType            ObExternalScheduleType1CodeEnum                  `json:"ScheduledType"`
 }

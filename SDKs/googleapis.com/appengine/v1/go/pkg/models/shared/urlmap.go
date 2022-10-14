@@ -38,12 +38,12 @@ const (
 )
 
 type URLMap struct {
-	APIEndpoint              *APIEndpointHandler                 `json:"apiEndpoint"`
-	AuthFailAction           *URLMapAuthFailActionEnum           `json:"authFailAction"`
-	Login                    *URLMapLoginEnum                    `json:"login"`
-	RedirectHTTPResponseCode *URLMapRedirectHTTPResponseCodeEnum `json:"redirectHttpResponseCode"`
-	Script                   *ScriptHandler                      `json:"script"`
-	SecurityLevel            *URLMapSecurityLevelEnum            `json:"securityLevel"`
-	StaticFiles              *StaticFilesHandler                 `json:"staticFiles"`
-	URLRegex                 *string                             `json:"urlRegex"`
+	APIEndpoint              *APIEndpointHandler                 `json:"apiEndpoint,omitempty"`
+	AuthFailAction           *URLMapAuthFailActionEnum           `json:"authFailAction,omitempty"`
+	Login                    *URLMapLoginEnum                    `json:"login,omitempty"`
+	RedirectHTTPResponseCode *URLMapRedirectHTTPResponseCodeEnum `json:"redirectHttpResponseCode,omitempty"`
+	Script                   *ScriptHandler                      `json:"script,omitempty"`
+	SecurityLevel            *URLMapSecurityLevelEnum            `json:"securityLevel,omitempty"`
+	StaticFiles              *StaticFilesHandler                 `json:"staticFiles,omitempty"`
+	URLRegex                 *string                             `json:"urlRegex,omitempty"`
 }

@@ -14,9 +14,9 @@ const (
 )
 
 type ActivityEntryForAPIContract struct {
-	ArchivedVersion *ArchivedObjectVersionForAPIContract      `json:"archivedVersion"`
-	Author          *UserForAPIContract                       `json:"author"`
-	CreateDate      *time.Time                                `json:"createDate"`
-	EditEvent       *ActivityEntryForAPIContractEditEventEnum `json:"editEvent"`
-	Entry           *EntryForAPIContract                      `json:"entry"`
+	ArchivedVersion *ArchivedObjectVersionForAPIContract      `json:"archivedVersion,omitempty"`
+	Author          *UserForAPIContract                       `json:"author,omitempty"`
+	CreateDate      *time.Time                                `json:"createDate,omitempty"`
+	EditEvent       *ActivityEntryForAPIContractEditEventEnum `json:"editEvent,omitempty"`
+	Entry           *EntryForAPIContract                      `json:"entry,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type Expr struct {
-	Description *string `json:"description"`
-	Expression  *string `json:"expression"`
-	Location    *string `json:"location"`
-	Title       *string `json:"title"`
+	Description *string `json:"description,omitempty"`
+	Expression  *string `json:"expression,omitempty"`
+	Location    *string `json:"location,omitempty"`
+	Title       *string `json:"title,omitempty"`
 }

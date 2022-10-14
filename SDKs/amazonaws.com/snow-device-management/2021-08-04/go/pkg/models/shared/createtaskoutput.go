@@ -1,6 +1,6 @@
 package shared
 
 type CreateTaskOutput struct {
-	TaskArn *string `json:"taskArn"`
-	TaskID  *string `json:"taskId"`
+	TaskArn *string `json:"taskArn,omitempty"`
+	TaskID  *string `json:"taskId,omitempty"`
 }

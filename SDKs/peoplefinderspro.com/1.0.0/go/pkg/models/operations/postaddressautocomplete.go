@@ -7,7 +7,7 @@ type PostAddressAutocompleteHeaders struct {
 }
 
 type PostAddressAutocompleteRequestBody struct {
-	Input *string `json:"Input"`
+	Input *string `json:"Input,omitempty"`
 }
 
 type PostAddressAutocompleteRequest struct {

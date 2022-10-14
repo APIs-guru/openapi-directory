@@ -1,5 +1,5 @@
 package shared
 
 type GetAdministratorAccountResponse struct {
-	Administrator *Invitation `json:"administrator"`
+	Administrator *Invitation `json:"administrator,omitempty"`
 }

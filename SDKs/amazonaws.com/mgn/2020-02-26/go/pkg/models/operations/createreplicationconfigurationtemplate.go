@@ -42,12 +42,12 @@ type CreateReplicationConfigurationTemplateRequestBody struct {
 	DataPlaneRouting                    CreateReplicationConfigurationTemplateRequestBodyDataPlaneRoutingEnum            `json:"dataPlaneRouting"`
 	DefaultLargeStagingDiskType         CreateReplicationConfigurationTemplateRequestBodyDefaultLargeStagingDiskTypeEnum `json:"defaultLargeStagingDiskType"`
 	EbsEncryption                       CreateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum               `json:"ebsEncryption"`
-	EbsEncryptionKeyArn                 *string                                                                          `json:"ebsEncryptionKeyArn"`
+	EbsEncryptionKeyArn                 *string                                                                          `json:"ebsEncryptionKeyArn,omitempty"`
 	ReplicationServerInstanceType       string                                                                           `json:"replicationServerInstanceType"`
 	ReplicationServersSecurityGroupsIDs []string                                                                         `json:"replicationServersSecurityGroupsIDs"`
 	StagingAreaSubnetID                 string                                                                           `json:"stagingAreaSubnetId"`
 	StagingAreaTags                     map[string]string                                                                `json:"stagingAreaTags"`
-	Tags                                map[string]string                                                                `json:"tags"`
+	Tags                                map[string]string                                                                `json:"tags,omitempty"`
 	UseDedicatedReplicationServer       bool                                                                             `json:"useDedicatedReplicationServer"`
 }
 

@@ -10,13 +10,13 @@ const (
 )
 
 type DistrictStatus struct {
-	Error        *string                  `json:"error"`
-	ID           *string                  `json:"id"`
-	InstantLogin *bool                    `json:"instant_login"`
-	LastSync     *string                  `json:"last_sync"`
-	LaunchDate   *string                  `json:"launch_date"`
-	PauseEnd     *string                  `json:"pause_end"`
-	PauseStart   *string                  `json:"pause_start"`
-	SisType      *string                  `json:"sis_type"`
-	State        *DistrictStatusStateEnum `json:"state"`
+	Error        *string                  `json:"error,omitempty"`
+	ID           *string                  `json:"id,omitempty"`
+	InstantLogin *bool                    `json:"instant_login,omitempty"`
+	LastSync     *string                  `json:"last_sync,omitempty"`
+	LaunchDate   *string                  `json:"launch_date,omitempty"`
+	PauseEnd     *string                  `json:"pause_end,omitempty"`
+	PauseStart   *string                  `json:"pause_start,omitempty"`
+	SisType      *string                  `json:"sis_type,omitempty"`
+	State        *DistrictStatusStateEnum `json:"state,omitempty"`
 }

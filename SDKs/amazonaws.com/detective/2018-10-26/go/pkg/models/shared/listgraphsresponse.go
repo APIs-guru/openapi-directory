@@ -1,6 +1,6 @@
 package shared
 
 type ListGraphsResponse struct {
-	GraphList []Graph `json:"GraphList"`
-	NextToken *string `json:"NextToken"`
+	GraphList []Graph `json:"GraphList,omitempty"`
+	NextToken *string `json:"NextToken,omitempty"`
 }

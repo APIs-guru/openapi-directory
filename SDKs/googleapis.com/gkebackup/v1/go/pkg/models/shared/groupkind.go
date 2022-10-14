@@ -1,6 +1,6 @@
 package shared
 
 type GroupKind struct {
-	ResourceGroup *string `json:"resourceGroup"`
-	ResourceKind  *string `json:"resourceKind"`
+	ResourceGroup *string `json:"resourceGroup,omitempty"`
+	ResourceKind  *string `json:"resourceKind,omitempty"`
 }

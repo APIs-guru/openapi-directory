@@ -11,9 +11,9 @@ const (
 )
 
 type BigQueryConfig struct {
-	DropUnknownFields *bool                    `json:"dropUnknownFields"`
-	State             *BigQueryConfigStateEnum `json:"state"`
-	Table             *string                  `json:"table"`
-	UseTopicSchema    *bool                    `json:"useTopicSchema"`
-	WriteMetadata     *bool                    `json:"writeMetadata"`
+	DropUnknownFields *bool                    `json:"dropUnknownFields,omitempty"`
+	State             *BigQueryConfigStateEnum `json:"state,omitempty"`
+	Table             *string                  `json:"table,omitempty"`
+	UseTopicSchema    *bool                    `json:"useTopicSchema,omitempty"`
+	WriteMetadata     *bool                    `json:"writeMetadata,omitempty"`
 }

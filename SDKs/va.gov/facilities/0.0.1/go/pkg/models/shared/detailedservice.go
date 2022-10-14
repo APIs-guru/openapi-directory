@@ -1,13 +1,13 @@
 package shared
 
 type DetailedService struct {
-	AppointmentLeadin         *string                   `json:"appointment_leadin"`
-	AppointmentPhones         []AppointmentPhoneNumber  `json:"appointment_phones"`
-	DescriptionFacility       *string                   `json:"description_facility"`
-	Name                      *string                   `json:"name"`
-	OnlineSchedulingAvailable *string                   `json:"online_scheduling_available"`
-	Path                      *string                   `json:"path"`
-	ReferralRequired          *string                   `json:"referral_required"`
-	ServiceLocations          []DetailedServiceLocation `json:"service_locations"`
-	WalkInsAccepted           *string                   `json:"walk_ins_accepted"`
+	AppointmentLeadin         *string                   `json:"appointment_leadin,omitempty"`
+	AppointmentPhones         []AppointmentPhoneNumber  `json:"appointment_phones,omitempty"`
+	DescriptionFacility       *string                   `json:"description_facility,omitempty"`
+	Name                      *string                   `json:"name,omitempty"`
+	OnlineSchedulingAvailable *string                   `json:"online_scheduling_available,omitempty"`
+	Path                      *string                   `json:"path,omitempty"`
+	ReferralRequired          *string                   `json:"referral_required,omitempty"`
+	ServiceLocations          []DetailedServiceLocation `json:"service_locations,omitempty"`
+	WalkInsAccepted           *string                   `json:"walk_ins_accepted,omitempty"`
 }

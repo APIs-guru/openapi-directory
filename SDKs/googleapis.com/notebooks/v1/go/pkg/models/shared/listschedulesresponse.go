@@ -1,7 +1,7 @@
 package shared
 
 type ListSchedulesResponse struct {
-	NextPageToken *string    `json:"nextPageToken"`
-	Schedules     []Schedule `json:"schedules"`
-	Unreachable   []string   `json:"unreachable"`
+	NextPageToken *string    `json:"nextPageToken,omitempty"`
+	Schedules     []Schedule `json:"schedules,omitempty"`
+	Unreachable   []string   `json:"unreachable,omitempty"`
 }

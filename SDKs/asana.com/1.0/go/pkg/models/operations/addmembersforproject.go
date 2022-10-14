@@ -14,7 +14,7 @@ type AddMembersForProjectQueryParams struct {
 }
 
 type AddMembersForProjectRequestBody struct {
-	Data *shared.AddMembersRequest `json:"data"`
+	Data *shared.AddMembersRequest `json:"data,omitempty"`
 }
 
 type AddMembersForProjectRequest struct {
@@ -24,7 +24,7 @@ type AddMembersForProjectRequest struct {
 }
 
 type AddMembersForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddMembersForProjectResponse struct {

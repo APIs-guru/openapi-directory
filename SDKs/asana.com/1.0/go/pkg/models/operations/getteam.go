@@ -21,7 +21,7 @@ type GetTeamRequest struct {
 }
 
 type GetTeam200ApplicationJSON struct {
-	Data *shared.TeamResponse `json:"data"`
+	Data *shared.TeamResponse `json:"data,omitempty"`
 }
 
 type GetTeamResponse struct {

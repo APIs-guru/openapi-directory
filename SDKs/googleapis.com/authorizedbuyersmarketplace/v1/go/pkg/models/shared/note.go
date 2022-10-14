@@ -9,7 +9,7 @@ const (
 )
 
 type Note struct {
-	CreateTime  *string              `json:"createTime"`
-	CreatorRole *NoteCreatorRoleEnum `json:"creatorRole"`
-	Note        *string              `json:"note"`
+	CreateTime  *string              `json:"createTime,omitempty"`
+	CreatorRole *NoteCreatorRoleEnum `json:"creatorRole,omitempty"`
+	Note        *string              `json:"note,omitempty"`
 }

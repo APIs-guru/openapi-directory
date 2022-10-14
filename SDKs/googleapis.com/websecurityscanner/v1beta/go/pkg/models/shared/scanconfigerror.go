@@ -48,6 +48,6 @@ const (
 )
 
 type ScanConfigError struct {
-	Code      *ScanConfigErrorCodeEnum `json:"code"`
-	FieldName *string                  `json:"fieldName"`
+	Code      *ScanConfigErrorCodeEnum `json:"code,omitempty"`
+	FieldName *string                  `json:"fieldName,omitempty"`
 }

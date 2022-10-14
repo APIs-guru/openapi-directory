@@ -1,6 +1,6 @@
 package shared
 
 type TflAPIPresentationEntitiesTimetableRoute struct {
-	Schedules        []TflAPIPresentationEntitiesSchedule        `json:"schedules"`
-	StationIntervals []TflAPIPresentationEntitiesStationInterval `json:"stationIntervals"`
+	Schedules        []TflAPIPresentationEntitiesSchedule        `json:"schedules,omitempty"`
+	StationIntervals []TflAPIPresentationEntitiesStationInterval `json:"stationIntervals,omitempty"`
 }

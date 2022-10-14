@@ -10,7 +10,7 @@ const (
 )
 
 type ResourceRecord struct {
-	Name   *string                 `json:"name"`
-	Rrdata *string                 `json:"rrdata"`
-	Type   *ResourceRecordTypeEnum `json:"type"`
+	Name   *string                 `json:"name,omitempty"`
+	Rrdata *string                 `json:"rrdata,omitempty"`
+	Type   *ResourceRecordTypeEnum `json:"type,omitempty"`
 }

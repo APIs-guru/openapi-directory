@@ -1,5 +1,5 @@
 package shared
 
 type SnsChannelConfig struct {
-	TopicArn *string `json:"TopicArn"`
+	TopicArn *string `json:"TopicArn,omitempty"`
 }

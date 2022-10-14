@@ -5,10 +5,10 @@ import (
 )
 
 type ApplicationInfo struct {
-	ApplicationID     *string              `json:"applicationId"`
-	ApplicationName   *string              `json:"applicationName"`
-	ComputePlatform   *ComputePlatformEnum `json:"computePlatform"`
-	CreateTime        *time.Time           `json:"createTime"`
-	GitHubAccountName *string              `json:"gitHubAccountName"`
-	LinkedToGitHub    *bool                `json:"linkedToGitHub"`
+	ApplicationID     *string              `json:"applicationId,omitempty"`
+	ApplicationName   *string              `json:"applicationName,omitempty"`
+	ComputePlatform   *ComputePlatformEnum `json:"computePlatform,omitempty"`
+	CreateTime        *time.Time           `json:"createTime,omitempty"`
+	GitHubAccountName *string              `json:"gitHubAccountName,omitempty"`
+	LinkedToGitHub    *bool                `json:"linkedToGitHub,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type FindSellerStandardsProfilesResponse struct {
-	StandardsProfiles []StandardsProfile `json:"standardsProfiles"`
+	StandardsProfiles []StandardsProfile `json:"standardsProfiles,omitempty"`
 }

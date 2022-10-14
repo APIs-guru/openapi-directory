@@ -5,25 +5,25 @@ import (
 )
 
 type OpsItem struct {
-	ActualEndTime    *time.Time                  `json:"ActualEndTime"`
-	ActualStartTime  *time.Time                  `json:"ActualStartTime"`
-	Category         *string                     `json:"Category"`
-	CreatedBy        *string                     `json:"CreatedBy"`
-	CreatedTime      *time.Time                  `json:"CreatedTime"`
-	Description      *string                     `json:"Description"`
-	LastModifiedBy   *string                     `json:"LastModifiedBy"`
-	LastModifiedTime *time.Time                  `json:"LastModifiedTime"`
-	Notifications    []OpsItemNotification       `json:"Notifications"`
-	OperationalData  map[string]OpsItemDataValue `json:"OperationalData"`
-	OpsItemID        *string                     `json:"OpsItemId"`
-	OpsItemType      *string                     `json:"OpsItemType"`
-	PlannedEndTime   *time.Time                  `json:"PlannedEndTime"`
-	PlannedStartTime *time.Time                  `json:"PlannedStartTime"`
-	Priority         *int64                      `json:"Priority"`
-	RelatedOpsItems  []RelatedOpsItem            `json:"RelatedOpsItems"`
-	Severity         *string                     `json:"Severity"`
-	Source           *string                     `json:"Source"`
-	Status           *OpsItemStatusEnum          `json:"Status"`
-	Title            *string                     `json:"Title"`
-	Version          *string                     `json:"Version"`
+	ActualEndTime    *time.Time                  `json:"ActualEndTime,omitempty"`
+	ActualStartTime  *time.Time                  `json:"ActualStartTime,omitempty"`
+	Category         *string                     `json:"Category,omitempty"`
+	CreatedBy        *string                     `json:"CreatedBy,omitempty"`
+	CreatedTime      *time.Time                  `json:"CreatedTime,omitempty"`
+	Description      *string                     `json:"Description,omitempty"`
+	LastModifiedBy   *string                     `json:"LastModifiedBy,omitempty"`
+	LastModifiedTime *time.Time                  `json:"LastModifiedTime,omitempty"`
+	Notifications    []OpsItemNotification       `json:"Notifications,omitempty"`
+	OperationalData  map[string]OpsItemDataValue `json:"OperationalData,omitempty"`
+	OpsItemID        *string                     `json:"OpsItemId,omitempty"`
+	OpsItemType      *string                     `json:"OpsItemType,omitempty"`
+	PlannedEndTime   *time.Time                  `json:"PlannedEndTime,omitempty"`
+	PlannedStartTime *time.Time                  `json:"PlannedStartTime,omitempty"`
+	Priority         *int64                      `json:"Priority,omitempty"`
+	RelatedOpsItems  []RelatedOpsItem            `json:"RelatedOpsItems,omitempty"`
+	Severity         *string                     `json:"Severity,omitempty"`
+	Source           *string                     `json:"Source,omitempty"`
+	Status           *OpsItemStatusEnum          `json:"Status,omitempty"`
+	Title            *string                     `json:"Title,omitempty"`
+	Version          *string                     `json:"Version,omitempty"`
 }

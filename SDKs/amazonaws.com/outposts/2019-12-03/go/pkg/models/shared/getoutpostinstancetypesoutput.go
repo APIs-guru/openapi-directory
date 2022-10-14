@@ -1,8 +1,8 @@
 package shared
 
 type GetOutpostInstanceTypesOutput struct {
-	InstanceTypes []InstanceTypeItem `json:"InstanceTypes"`
-	NextToken     *string            `json:"NextToken"`
-	OutpostArn    *string            `json:"OutpostArn"`
-	OutpostID     *string            `json:"OutpostId"`
+	InstanceTypes []InstanceTypeItem `json:"InstanceTypes,omitempty"`
+	NextToken     *string            `json:"NextToken,omitempty"`
+	OutpostArn    *string            `json:"OutpostArn,omitempty"`
+	OutpostID     *string            `json:"OutpostId,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type GetAdminRecordingsStatus200ApplicationJSON struct {
-	Status *GetAdminRecordingsStatus200ApplicationJSONStatusEnum `json:"status"`
+	Status *GetAdminRecordingsStatus200ApplicationJSONStatusEnum `json:"status,omitempty"`
 }
 
 type GetAdminRecordingsStatusResponse struct {

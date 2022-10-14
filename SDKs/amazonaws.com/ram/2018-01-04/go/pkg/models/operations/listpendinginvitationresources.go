@@ -20,8 +20,8 @@ type ListPendingInvitationResourcesHeaders struct {
 }
 
 type ListPendingInvitationResourcesRequestBody struct {
-	MaxResults                 *int64  `json:"maxResults"`
-	NextToken                  *string `json:"nextToken"`
+	MaxResults                 *int64  `json:"maxResults,omitempty"`
+	NextToken                  *string `json:"nextToken,omitempty"`
 	ResourceShareInvitationArn string  `json:"resourceShareInvitationArn"`
 }
 

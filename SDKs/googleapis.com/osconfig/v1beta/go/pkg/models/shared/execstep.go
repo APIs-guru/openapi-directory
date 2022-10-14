@@ -1,6 +1,6 @@
 package shared
 
 type ExecStep struct {
-	LinuxExecStepConfig   *ExecStepConfig `json:"linuxExecStepConfig"`
-	WindowsExecStepConfig *ExecStepConfig `json:"windowsExecStepConfig"`
+	LinuxExecStepConfig   *ExecStepConfig `json:"linuxExecStepConfig,omitempty"`
+	WindowsExecStepConfig *ExecStepConfig `json:"windowsExecStepConfig,omitempty"`
 }

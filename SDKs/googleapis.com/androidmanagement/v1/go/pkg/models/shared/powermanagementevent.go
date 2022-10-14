@@ -14,7 +14,7 @@ const (
 )
 
 type PowerManagementEvent struct {
-	BatteryLevel *float32                           `json:"batteryLevel"`
-	CreateTime   *string                            `json:"createTime"`
-	EventType    *PowerManagementEventEventTypeEnum `json:"eventType"`
+	BatteryLevel *float32                           `json:"batteryLevel,omitempty"`
+	CreateTime   *string                            `json:"createTime,omitempty"`
+	EventType    *PowerManagementEventEventTypeEnum `json:"eventType,omitempty"`
 }

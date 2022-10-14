@@ -8,5 +8,5 @@ const (
 )
 
 type AppContext struct {
-	AppTypes []AppContextAppTypesEnum `json:"appTypes"`
+	AppTypes []AppContextAppTypesEnum `json:"appTypes,omitempty"`
 }

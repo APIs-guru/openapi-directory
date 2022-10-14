@@ -23,7 +23,7 @@ type AttendancePeriodsResponseData struct {
 
 type AttendancePeriodsResponse struct {
 	Data    []AttendancePeriodsResponseData `json:"data"`
-	Limit   *int64                          `json:"limit"`
-	Offset  *int64                          `json:"offset"`
+	Limit   *int64                          `json:"limit,omitempty"`
+	Offset  *int64                          `json:"offset,omitempty"`
 	Success bool                            `json:"success"`
 }

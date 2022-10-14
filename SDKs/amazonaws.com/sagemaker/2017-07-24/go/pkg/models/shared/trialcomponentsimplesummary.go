@@ -5,9 +5,9 @@ import (
 )
 
 type TrialComponentSimpleSummary struct {
-	CreatedBy            *UserContext          `json:"CreatedBy"`
-	CreationTime         *time.Time            `json:"CreationTime"`
-	TrialComponentArn    *string               `json:"TrialComponentArn"`
-	TrialComponentName   *string               `json:"TrialComponentName"`
-	TrialComponentSource *TrialComponentSource `json:"TrialComponentSource"`
+	CreatedBy            *UserContext          `json:"CreatedBy,omitempty"`
+	CreationTime         *time.Time            `json:"CreationTime,omitempty"`
+	TrialComponentArn    *string               `json:"TrialComponentArn,omitempty"`
+	TrialComponentName   *string               `json:"TrialComponentName,omitempty"`
+	TrialComponentSource *TrialComponentSource `json:"TrialComponentSource,omitempty"`
 }

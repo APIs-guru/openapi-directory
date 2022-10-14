@@ -28,7 +28,7 @@ type PostLkeClusterNodeRecycleRequest struct {
 }
 
 type PostLkeClusterNodeRecycleDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type PostLkeClusterNodeRecycleResponse struct {

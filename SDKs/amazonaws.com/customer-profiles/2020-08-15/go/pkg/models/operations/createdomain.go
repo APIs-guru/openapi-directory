@@ -19,15 +19,15 @@ type CreateDomainHeaders struct {
 }
 
 type CreateDomainRequestBodyMatching struct {
-	Enabled *bool `json:"Enabled"`
+	Enabled *bool `json:"Enabled,omitempty"`
 }
 
 type CreateDomainRequestBody struct {
-	DeadLetterQueueURL    *string                          `json:"DeadLetterQueueUrl"`
-	DefaultEncryptionKey  *string                          `json:"DefaultEncryptionKey"`
+	DeadLetterQueueURL    *string                          `json:"DeadLetterQueueUrl,omitempty"`
+	DefaultEncryptionKey  *string                          `json:"DefaultEncryptionKey,omitempty"`
 	DefaultExpirationDays int64                            `json:"DefaultExpirationDays"`
-	Matching              *CreateDomainRequestBodyMatching `json:"Matching"`
-	Tags                  map[string]string                `json:"Tags"`
+	Matching              *CreateDomainRequestBodyMatching `json:"Matching,omitempty"`
+	Tags                  map[string]string                `json:"Tags,omitempty"`
 }
 
 type CreateDomainRequest struct {

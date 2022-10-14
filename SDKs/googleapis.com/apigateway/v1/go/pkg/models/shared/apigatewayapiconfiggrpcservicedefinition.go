@@ -1,6 +1,6 @@
 package shared
 
 type ApigatewayAPIConfigGrpcServiceDefinition struct {
-	FileDescriptorSet *ApigatewayAPIConfigFile  `json:"fileDescriptorSet"`
-	Source            []ApigatewayAPIConfigFile `json:"source"`
+	FileDescriptorSet *ApigatewayAPIConfigFile  `json:"fileDescriptorSet,omitempty"`
+	Source            []ApigatewayAPIConfigFile `json:"source,omitempty"`
 }

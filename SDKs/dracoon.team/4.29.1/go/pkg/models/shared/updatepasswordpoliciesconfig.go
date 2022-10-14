@@ -1,7 +1,7 @@
 package shared
 
 type UpdatePasswordPoliciesConfig struct {
-	EncryptionPasswordPolicies *UpdateEncryptionPasswordPolicies `json:"encryptionPasswordPolicies"`
-	LoginPasswordPolicies      *UpdateLoginPasswordPolicies      `json:"loginPasswordPolicies"`
-	SharesPasswordPolicies     *UpdateSharesPasswordPolicies     `json:"sharesPasswordPolicies"`
+	EncryptionPasswordPolicies *UpdateEncryptionPasswordPolicies `json:"encryptionPasswordPolicies,omitempty"`
+	LoginPasswordPolicies      *UpdateLoginPasswordPolicies      `json:"loginPasswordPolicies,omitempty"`
+	SharesPasswordPolicies     *UpdateSharesPasswordPolicies     `json:"sharesPasswordPolicies,omitempty"`
 }

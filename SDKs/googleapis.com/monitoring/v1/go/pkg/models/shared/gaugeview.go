@@ -1,6 +1,6 @@
 package shared
 
 type GaugeView struct {
-	LowerBound *float64 `json:"lowerBound"`
-	UpperBound *float64 `json:"upperBound"`
+	LowerBound *float64 `json:"lowerBound,omitempty"`
+	UpperBound *float64 `json:"upperBound,omitempty"`
 }

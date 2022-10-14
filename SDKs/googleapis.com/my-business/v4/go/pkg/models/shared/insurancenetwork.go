@@ -11,8 +11,8 @@ const (
 )
 
 type InsuranceNetwork struct {
-	NetworkID    *string                    `json:"networkId"`
-	NetworkNames map[string]string          `json:"networkNames"`
-	PayerNames   map[string]string          `json:"payerNames"`
-	State        *InsuranceNetworkStateEnum `json:"state"`
+	NetworkID    *string                    `json:"networkId,omitempty"`
+	NetworkNames map[string]string          `json:"networkNames,omitempty"`
+	PayerNames   map[string]string          `json:"payerNames,omitempty"`
+	State        *InsuranceNetworkStateEnum `json:"state,omitempty"`
 }

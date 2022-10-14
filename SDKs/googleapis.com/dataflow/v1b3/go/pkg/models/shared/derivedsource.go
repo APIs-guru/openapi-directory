@@ -10,6 +10,6 @@ const (
 )
 
 type DerivedSource struct {
-	DerivationMode *DerivedSourceDerivationModeEnum `json:"derivationMode"`
-	Source         *Source                          `json:"source"`
+	DerivationMode *DerivedSourceDerivationModeEnum `json:"derivationMode,omitempty"`
+	Source         *Source                          `json:"source,omitempty"`
 }

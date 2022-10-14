@@ -1,6 +1,6 @@
 package shared
 
 type GetJobOutputOutput struct {
-	Body   *string `json:"body"`
-	Status *int64  `json:"status"`
+	Body   *string `json:"body,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }

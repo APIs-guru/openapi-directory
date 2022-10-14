@@ -1,7 +1,7 @@
 package shared
 
 type PaymentSummary struct {
-	Payments       []Payment     `json:"payments"`
-	Refunds        []OrderRefund `json:"refunds"`
-	TotalDueSeller *Amount       `json:"totalDueSeller"`
+	Payments       []Payment     `json:"payments,omitempty"`
+	Refunds        []OrderRefund `json:"refunds,omitempty"`
+	TotalDueSeller *Amount       `json:"totalDueSeller,omitempty"`
 }

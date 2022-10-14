@@ -5,14 +5,14 @@ import (
 )
 
 type StartChangeRequestExecutionRequest struct {
-	ChangeDetails     *string             `json:"ChangeDetails"`
-	ChangeRequestName *string             `json:"ChangeRequestName"`
-	ClientToken       *string             `json:"ClientToken"`
+	ChangeDetails     *string             `json:"ChangeDetails,omitempty"`
+	ChangeRequestName *string             `json:"ChangeRequestName,omitempty"`
+	ClientToken       *string             `json:"ClientToken,omitempty"`
 	DocumentName      string              `json:"DocumentName"`
-	DocumentVersion   *string             `json:"DocumentVersion"`
-	Parameters        map[string][]string `json:"Parameters"`
+	DocumentVersion   *string             `json:"DocumentVersion,omitempty"`
+	Parameters        map[string][]string `json:"Parameters,omitempty"`
 	Runbooks          []Runbook           `json:"Runbooks"`
-	ScheduledEndTime  *time.Time          `json:"ScheduledEndTime"`
-	ScheduledTime     *time.Time          `json:"ScheduledTime"`
-	Tags              []Tag               `json:"Tags"`
+	ScheduledEndTime  *time.Time          `json:"ScheduledEndTime,omitempty"`
+	ScheduledTime     *time.Time          `json:"ScheduledTime,omitempty"`
+	Tags              []Tag               `json:"Tags,omitempty"`
 }

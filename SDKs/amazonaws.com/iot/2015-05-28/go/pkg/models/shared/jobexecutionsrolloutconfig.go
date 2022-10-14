@@ -1,6 +1,6 @@
 package shared
 
 type JobExecutionsRolloutConfig struct {
-	ExponentialRate  *ExponentialRolloutRate `json:"exponentialRate"`
-	MaximumPerMinute *int64                  `json:"maximumPerMinute"`
+	ExponentialRate  *ExponentialRolloutRate `json:"exponentialRate,omitempty"`
+	MaximumPerMinute *int64                  `json:"maximumPerMinute,omitempty"`
 }

@@ -1,7 +1,7 @@
 package operations
 
 type QuittungPrepareRequestBody struct {
-	Account *string `json:"account"`
+	Account *string `json:"account,omitempty"`
 }
 
 type QuittungPrepareRequest struct {

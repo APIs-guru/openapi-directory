@@ -1,7 +1,7 @@
 package shared
 
 type GooglePrivacyDlpV2FixedSizeBucketingConfig struct {
-	BucketSize *float64                 `json:"bucketSize"`
-	LowerBound *GooglePrivacyDlpV2Value `json:"lowerBound"`
-	UpperBound *GooglePrivacyDlpV2Value `json:"upperBound"`
+	BucketSize *float64                 `json:"bucketSize,omitempty"`
+	LowerBound *GooglePrivacyDlpV2Value `json:"lowerBound,omitempty"`
+	UpperBound *GooglePrivacyDlpV2Value `json:"upperBound,omitempty"`
 }

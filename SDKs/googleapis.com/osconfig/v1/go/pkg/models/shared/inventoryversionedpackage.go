@@ -1,7 +1,7 @@
 package shared
 
 type InventoryVersionedPackage struct {
-	Architecture *string `json:"architecture"`
-	PackageName  *string `json:"packageName"`
-	Version      *string `json:"version"`
+	Architecture *string `json:"architecture,omitempty"`
+	PackageName  *string `json:"packageName,omitempty"`
+	Version      *string `json:"version,omitempty"`
 }

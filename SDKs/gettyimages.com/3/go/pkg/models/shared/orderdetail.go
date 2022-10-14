@@ -5,10 +5,10 @@ import (
 )
 
 type OrderDetail struct {
-	Assets        []AssetIDFromOrder `json:"assets"`
-	EndClient     *string            `json:"end_client"`
-	ID            *string            `json:"id"`
-	InvoiceNumber *string            `json:"invoice_number"`
-	Notes         *OrderNotes        `json:"notes"`
-	OrderDate     *time.Time         `json:"order_date"`
+	Assets        []AssetIDFromOrder `json:"assets,omitempty"`
+	EndClient     *string            `json:"end_client,omitempty"`
+	ID            *string            `json:"id,omitempty"`
+	InvoiceNumber *string            `json:"invoice_number,omitempty"`
+	Notes         *OrderNotes        `json:"notes,omitempty"`
+	OrderDate     *time.Time         `json:"order_date,omitempty"`
 }

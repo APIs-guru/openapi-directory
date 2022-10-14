@@ -1,15 +1,15 @@
 package shared
 
 type ModifyReplicationInstanceMessage struct {
-	AllocatedStorage              *int64   `json:"AllocatedStorage"`
-	AllowMajorVersionUpgrade      *bool    `json:"AllowMajorVersionUpgrade"`
-	ApplyImmediately              *bool    `json:"ApplyImmediately"`
-	AutoMinorVersionUpgrade       *bool    `json:"AutoMinorVersionUpgrade"`
-	EngineVersion                 *string  `json:"EngineVersion"`
-	MultiAz                       *bool    `json:"MultiAZ"`
-	PreferredMaintenanceWindow    *string  `json:"PreferredMaintenanceWindow"`
+	AllocatedStorage              *int64   `json:"AllocatedStorage,omitempty"`
+	AllowMajorVersionUpgrade      *bool    `json:"AllowMajorVersionUpgrade,omitempty"`
+	ApplyImmediately              *bool    `json:"ApplyImmediately,omitempty"`
+	AutoMinorVersionUpgrade       *bool    `json:"AutoMinorVersionUpgrade,omitempty"`
+	EngineVersion                 *string  `json:"EngineVersion,omitempty"`
+	MultiAz                       *bool    `json:"MultiAZ,omitempty"`
+	PreferredMaintenanceWindow    *string  `json:"PreferredMaintenanceWindow,omitempty"`
 	ReplicationInstanceArn        string   `json:"ReplicationInstanceArn"`
-	ReplicationInstanceClass      *string  `json:"ReplicationInstanceClass"`
-	ReplicationInstanceIdentifier *string  `json:"ReplicationInstanceIdentifier"`
-	VpcSecurityGroupIds           []string `json:"VpcSecurityGroupIds"`
+	ReplicationInstanceClass      *string  `json:"ReplicationInstanceClass,omitempty"`
+	ReplicationInstanceIdentifier *string  `json:"ReplicationInstanceIdentifier,omitempty"`
+	VpcSecurityGroupIds           []string `json:"VpcSecurityGroupIds,omitempty"`
 }

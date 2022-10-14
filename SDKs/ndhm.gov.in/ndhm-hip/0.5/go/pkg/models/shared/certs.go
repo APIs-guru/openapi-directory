@@ -1,5 +1,5 @@
 package shared
 
 type Certs struct {
-	Keys []CertificateOrKeyGetSchema `json:"keys"`
+	Keys []CertificateOrKeyGetSchema `json:"keys,omitempty"`
 }

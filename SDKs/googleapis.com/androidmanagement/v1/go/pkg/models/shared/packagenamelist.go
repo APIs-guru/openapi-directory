@@ -1,5 +1,5 @@
 package shared
 
 type PackageNameList struct {
-	PackageNames []string `json:"packageNames"`
+	PackageNames []string `json:"packageNames,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type SetBasicFilterRequest struct {
-	Filter *BasicFilter `json:"filter"`
+	Filter *BasicFilter `json:"filter,omitempty"`
 }

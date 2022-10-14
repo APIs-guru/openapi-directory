@@ -1,9 +1,9 @@
 package shared
 
 type DescribeUserStackAssociationsRequest struct {
-	AuthenticationType *AuthenticationTypeEnum `json:"AuthenticationType"`
-	MaxResults         *int64                  `json:"MaxResults"`
-	NextToken          *string                 `json:"NextToken"`
-	StackName          *string                 `json:"StackName"`
-	UserName           *string                 `json:"UserName"`
+	AuthenticationType *AuthenticationTypeEnum `json:"AuthenticationType,omitempty"`
+	MaxResults         *int64                  `json:"MaxResults,omitempty"`
+	NextToken          *string                 `json:"NextToken,omitempty"`
+	StackName          *string                 `json:"StackName,omitempty"`
+	UserName           *string                 `json:"UserName,omitempty"`
 }

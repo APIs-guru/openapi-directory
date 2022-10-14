@@ -1,5 +1,5 @@
 package shared
 
 type EnterpriseAuthenticationAppLinkConfig struct {
-	URI *string `json:"uri"`
+	URI *string `json:"uri,omitempty"`
 }

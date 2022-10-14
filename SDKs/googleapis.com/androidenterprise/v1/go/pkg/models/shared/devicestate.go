@@ -8,5 +8,5 @@ const (
 )
 
 type DeviceState struct {
-	AccountState *DeviceStateAccountStateEnum `json:"accountState"`
+	AccountState *DeviceStateAccountStateEnum `json:"accountState,omitempty"`
 }

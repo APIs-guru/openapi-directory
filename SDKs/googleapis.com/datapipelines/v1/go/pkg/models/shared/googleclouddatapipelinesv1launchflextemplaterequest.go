@@ -1,8 +1,8 @@
 package shared
 
 type GoogleCloudDatapipelinesV1LaunchFlexTemplateRequest struct {
-	LaunchParameter *GoogleCloudDatapipelinesV1LaunchFlexTemplateParameter `json:"launchParameter"`
-	Location        *string                                                `json:"location"`
-	ProjectID       *string                                                `json:"projectId"`
-	ValidateOnly    *bool                                                  `json:"validateOnly"`
+	LaunchParameter *GoogleCloudDatapipelinesV1LaunchFlexTemplateParameter `json:"launchParameter,omitempty"`
+	Location        *string                                                `json:"location,omitempty"`
+	ProjectID       *string                                                `json:"projectId,omitempty"`
+	ValidateOnly    *bool                                                  `json:"validateOnly,omitempty"`
 }

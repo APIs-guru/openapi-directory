@@ -1,7 +1,7 @@
 package shared
 
 type ListCardsResponse struct {
-	Cards  []Card  `json:"cards"`
-	Cursor *string `json:"cursor"`
-	Errors []Error `json:"errors"`
+	Cards  []Card  `json:"cards,omitempty"`
+	Cursor *string `json:"cursor,omitempty"`
+	Errors []Error `json:"errors,omitempty"`
 }

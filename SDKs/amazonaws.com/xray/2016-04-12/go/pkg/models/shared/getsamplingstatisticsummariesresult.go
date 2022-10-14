@@ -1,6 +1,6 @@
 package shared
 
 type GetSamplingStatisticSummariesResult struct {
-	NextToken                  *string                    `json:"NextToken"`
-	SamplingStatisticSummaries []SamplingStatisticSummary `json:"SamplingStatisticSummaries"`
+	NextToken                  *string                    `json:"NextToken,omitempty"`
+	SamplingStatisticSummaries []SamplingStatisticSummary `json:"SamplingStatisticSummaries,omitempty"`
 }

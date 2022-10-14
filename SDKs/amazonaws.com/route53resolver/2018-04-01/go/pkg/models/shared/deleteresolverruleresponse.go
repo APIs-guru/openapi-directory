@@ -1,5 +1,5 @@
 package shared
 
 type DeleteResolverRuleResponse struct {
-	ResolverRule *ResolverRule `json:"ResolverRule"`
+	ResolverRule *ResolverRule `json:"ResolverRule,omitempty"`
 }

@@ -7,5 +7,5 @@ import (
 type OAuthApproval struct {
 	ClientID   string     `json:"clientId"`
 	ClientName string     `json:"clientName"`
-	ExpiresAt  *time.Time `json:"expiresAt"`
+	ExpiresAt  *time.Time `json:"expiresAt,omitempty"`
 }

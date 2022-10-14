@@ -11,6 +11,6 @@ const (
 )
 
 type GetInstanceHealthResponse struct {
-	HealthInfo  map[string]string                         `json:"healthInfo"`
-	HealthState *GetInstanceHealthResponseHealthStateEnum `json:"healthState"`
+	HealthInfo  map[string]string                         `json:"healthInfo,omitempty"`
+	HealthState *GetInstanceHealthResponseHealthStateEnum `json:"healthState,omitempty"`
 }

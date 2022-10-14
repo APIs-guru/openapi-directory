@@ -20,13 +20,13 @@ const (
 )
 
 type BookingStatusItinerary struct {
-	Amended   *bool                            `json:"amended"`
-	Cancelled *bool                            `json:"cancelled"`
-	Confirmed *bool                            `json:"confirmed"`
-	Failed    *bool                            `json:"failed"`
-	Level     *BookingStatusItineraryLevelEnum `json:"level"`
-	Pending   *bool                            `json:"pending"`
-	Status    *int64                           `json:"status"`
-	Text      *string                          `json:"text"`
-	Type      *BookingStatusItineraryTypeEnum  `json:"type"`
+	Amended   *bool                            `json:"amended,omitempty"`
+	Cancelled *bool                            `json:"cancelled,omitempty"`
+	Confirmed *bool                            `json:"confirmed,omitempty"`
+	Failed    *bool                            `json:"failed,omitempty"`
+	Level     *BookingStatusItineraryLevelEnum `json:"level,omitempty"`
+	Pending   *bool                            `json:"pending,omitempty"`
+	Status    *int64                           `json:"status,omitempty"`
+	Text      *string                          `json:"text,omitempty"`
+	Type      *BookingStatusItineraryTypeEnum  `json:"type,omitempty"`
 }

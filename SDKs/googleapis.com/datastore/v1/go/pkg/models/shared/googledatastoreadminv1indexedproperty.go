@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleDatastoreAdminV1IndexedProperty struct {
-	Direction *GoogleDatastoreAdminV1IndexedPropertyDirectionEnum `json:"direction"`
-	Name      *string                                             `json:"name"`
+	Direction *GoogleDatastoreAdminV1IndexedPropertyDirectionEnum `json:"direction,omitempty"`
+	Name      *string                                             `json:"name,omitempty"`
 }

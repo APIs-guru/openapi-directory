@@ -1,6 +1,6 @@
 package shared
 
 type OrdersUpdateMerchantOrderIDRequest struct {
-	MerchantOrderID *string `json:"merchantOrderId"`
-	OperationID     *string `json:"operationId"`
+	MerchantOrderID *string `json:"merchantOrderId,omitempty"`
+	OperationID     *string `json:"operationId,omitempty"`
 }

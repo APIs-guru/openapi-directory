@@ -9,14 +9,14 @@ const (
 )
 
 type NotificationChannel struct {
-	CreationRecord     *MutationRecord                            `json:"creationRecord"`
-	Description        *string                                    `json:"description"`
-	DisplayName        *string                                    `json:"displayName"`
-	Enabled            *bool                                      `json:"enabled"`
-	Labels             map[string]string                          `json:"labels"`
-	MutationRecords    []MutationRecord                           `json:"mutationRecords"`
-	Name               *string                                    `json:"name"`
-	Type               *string                                    `json:"type"`
-	UserLabels         map[string]string                          `json:"userLabels"`
-	VerificationStatus *NotificationChannelVerificationStatusEnum `json:"verificationStatus"`
+	CreationRecord     *MutationRecord                            `json:"creationRecord,omitempty"`
+	Description        *string                                    `json:"description,omitempty"`
+	DisplayName        *string                                    `json:"displayName,omitempty"`
+	Enabled            *bool                                      `json:"enabled,omitempty"`
+	Labels             map[string]string                          `json:"labels,omitempty"`
+	MutationRecords    []MutationRecord                           `json:"mutationRecords,omitempty"`
+	Name               *string                                    `json:"name,omitempty"`
+	Type               *string                                    `json:"type,omitempty"`
+	UserLabels         map[string]string                          `json:"userLabels,omitempty"`
+	VerificationStatus *NotificationChannelVerificationStatusEnum `json:"verificationStatus,omitempty"`
 }

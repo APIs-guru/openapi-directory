@@ -23,22 +23,22 @@ const (
 )
 
 type EventTag struct {
-	AccountID                  *string                     `json:"accountId"`
-	AdvertiserID               *string                     `json:"advertiserId"`
-	AdvertiserIDDimensionValue *DimensionValue             `json:"advertiserIdDimensionValue"`
-	CampaignID                 *string                     `json:"campaignId"`
-	CampaignIDDimensionValue   *DimensionValue             `json:"campaignIdDimensionValue"`
-	EnabledByDefault           *bool                       `json:"enabledByDefault"`
-	ExcludeFromAdxRequests     *bool                       `json:"excludeFromAdxRequests"`
-	ID                         *string                     `json:"id"`
-	Kind                       *string                     `json:"kind"`
-	Name                       *string                     `json:"name"`
-	SiteFilterType             *EventTagSiteFilterTypeEnum `json:"siteFilterType"`
-	SiteIds                    []string                    `json:"siteIds"`
-	SslCompliant               *bool                       `json:"sslCompliant"`
-	Status                     *EventTagStatusEnum         `json:"status"`
-	SubaccountID               *string                     `json:"subaccountId"`
-	Type                       *EventTagTypeEnum           `json:"type"`
-	URL                        *string                     `json:"url"`
-	URLEscapeLevels            *int32                      `json:"urlEscapeLevels"`
+	AccountID                  *string                     `json:"accountId,omitempty"`
+	AdvertiserID               *string                     `json:"advertiserId,omitempty"`
+	AdvertiserIDDimensionValue *DimensionValue             `json:"advertiserIdDimensionValue,omitempty"`
+	CampaignID                 *string                     `json:"campaignId,omitempty"`
+	CampaignIDDimensionValue   *DimensionValue             `json:"campaignIdDimensionValue,omitempty"`
+	EnabledByDefault           *bool                       `json:"enabledByDefault,omitempty"`
+	ExcludeFromAdxRequests     *bool                       `json:"excludeFromAdxRequests,omitempty"`
+	ID                         *string                     `json:"id,omitempty"`
+	Kind                       *string                     `json:"kind,omitempty"`
+	Name                       *string                     `json:"name,omitempty"`
+	SiteFilterType             *EventTagSiteFilterTypeEnum `json:"siteFilterType,omitempty"`
+	SiteIds                    []string                    `json:"siteIds,omitempty"`
+	SslCompliant               *bool                       `json:"sslCompliant,omitempty"`
+	Status                     *EventTagStatusEnum         `json:"status,omitempty"`
+	SubaccountID               *string                     `json:"subaccountId,omitempty"`
+	Type                       *EventTagTypeEnum           `json:"type,omitempty"`
+	URL                        *string                     `json:"url,omitempty"`
+	URLEscapeLevels            *int32                      `json:"urlEscapeLevels,omitempty"`
 }

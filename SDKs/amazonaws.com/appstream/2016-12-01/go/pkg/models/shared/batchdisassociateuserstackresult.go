@@ -1,5 +1,5 @@
 package shared
 
 type BatchDisassociateUserStackResult struct {
-	Errors []UserStackAssociationError `json:"errors"`
+	Errors []UserStackAssociationError `json:"errors,omitempty"`
 }

@@ -1,34 +1,34 @@
 package shared
 
 type PlayerSeasonPpaAveragePpa struct {
-	All           *float64 `json:"all"`
-	FirstDown     *float64 `json:"firstDown"`
-	Pass          *float64 `json:"pass"`
-	PassingDowns  *float64 `json:"passingDowns"`
-	Rush          *float64 `json:"rush"`
-	SecondDown    *float64 `json:"secondDown"`
-	StandardDowns *float64 `json:"standardDowns"`
-	ThirdDown     *float64 `json:"thirdDown"`
+	All           *float64 `json:"all,omitempty"`
+	FirstDown     *float64 `json:"firstDown,omitempty"`
+	Pass          *float64 `json:"pass,omitempty"`
+	PassingDowns  *float64 `json:"passingDowns,omitempty"`
+	Rush          *float64 `json:"rush,omitempty"`
+	SecondDown    *float64 `json:"secondDown,omitempty"`
+	StandardDowns *float64 `json:"standardDowns,omitempty"`
+	ThirdDown     *float64 `json:"thirdDown,omitempty"`
 }
 
 type PlayerSeasonPpaTotalPpa struct {
-	All           *float64 `json:"all"`
-	FirstDown     *float64 `json:"firstDown"`
-	Pass          *float64 `json:"pass"`
-	PassingDowns  *float64 `json:"passingDowns"`
-	Rush          *float64 `json:"rush"`
-	SecondDown    *float64 `json:"secondDown"`
-	StandardDowns *float64 `json:"standardDowns"`
-	ThirdDown     *float64 `json:"thirdDown"`
+	All           *float64 `json:"all,omitempty"`
+	FirstDown     *float64 `json:"firstDown,omitempty"`
+	Pass          *float64 `json:"pass,omitempty"`
+	PassingDowns  *float64 `json:"passingDowns,omitempty"`
+	Rush          *float64 `json:"rush,omitempty"`
+	SecondDown    *float64 `json:"secondDown,omitempty"`
+	StandardDowns *float64 `json:"standardDowns,omitempty"`
+	ThirdDown     *float64 `json:"thirdDown,omitempty"`
 }
 
 type PlayerSeasonPpa struct {
-	AveragePpa *PlayerSeasonPpaAveragePpa `json:"averagePPA"`
-	Conference *string                    `json:"conference"`
-	ID         *int64                     `json:"id"`
-	Name       *string                    `json:"name"`
-	Position   *string                    `json:"position"`
-	Season     *int64                     `json:"season"`
-	Team       *string                    `json:"team"`
-	TotalPpa   *PlayerSeasonPpaTotalPpa   `json:"totalPPA"`
+	AveragePpa *PlayerSeasonPpaAveragePpa `json:"averagePPA,omitempty"`
+	Conference *string                    `json:"conference,omitempty"`
+	ID         *int64                     `json:"id,omitempty"`
+	Name       *string                    `json:"name,omitempty"`
+	Position   *string                    `json:"position,omitempty"`
+	Season     *int64                     `json:"season,omitempty"`
+	Team       *string                    `json:"team,omitempty"`
+	TotalPpa   *PlayerSeasonPpaTotalPpa   `json:"totalPPA,omitempty"`
 }

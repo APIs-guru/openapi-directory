@@ -5,21 +5,21 @@ import (
 )
 
 type Studio struct {
-	AuthMode                   *AuthModeEnum `json:"AuthMode"`
-	CreationTime               *time.Time    `json:"CreationTime"`
-	DefaultS3Location          *string       `json:"DefaultS3Location"`
-	Description                *string       `json:"Description"`
-	EngineSecurityGroupID      *string       `json:"EngineSecurityGroupId"`
-	IdpAuthURL                 *string       `json:"IdpAuthUrl"`
-	IdpRelayStateParameterName *string       `json:"IdpRelayStateParameterName"`
-	Name                       *string       `json:"Name"`
-	ServiceRole                *string       `json:"ServiceRole"`
-	StudioArn                  *string       `json:"StudioArn"`
-	StudioID                   *string       `json:"StudioId"`
-	SubnetIds                  []string      `json:"SubnetIds"`
-	Tags                       []Tag         `json:"Tags"`
-	URL                        *string       `json:"Url"`
-	UserRole                   *string       `json:"UserRole"`
-	VpcID                      *string       `json:"VpcId"`
-	WorkspaceSecurityGroupID   *string       `json:"WorkspaceSecurityGroupId"`
+	AuthMode                   *AuthModeEnum `json:"AuthMode,omitempty"`
+	CreationTime               *time.Time    `json:"CreationTime,omitempty"`
+	DefaultS3Location          *string       `json:"DefaultS3Location,omitempty"`
+	Description                *string       `json:"Description,omitempty"`
+	EngineSecurityGroupID      *string       `json:"EngineSecurityGroupId,omitempty"`
+	IdpAuthURL                 *string       `json:"IdpAuthUrl,omitempty"`
+	IdpRelayStateParameterName *string       `json:"IdpRelayStateParameterName,omitempty"`
+	Name                       *string       `json:"Name,omitempty"`
+	ServiceRole                *string       `json:"ServiceRole,omitempty"`
+	StudioArn                  *string       `json:"StudioArn,omitempty"`
+	StudioID                   *string       `json:"StudioId,omitempty"`
+	SubnetIds                  []string      `json:"SubnetIds,omitempty"`
+	Tags                       []Tag         `json:"Tags,omitempty"`
+	URL                        *string       `json:"Url,omitempty"`
+	UserRole                   *string       `json:"UserRole,omitempty"`
+	VpcID                      *string       `json:"VpcId,omitempty"`
+	WorkspaceSecurityGroupID   *string       `json:"WorkspaceSecurityGroupId,omitempty"`
 }

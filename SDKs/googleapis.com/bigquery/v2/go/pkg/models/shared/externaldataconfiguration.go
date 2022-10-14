@@ -1,20 +1,20 @@
 package shared
 
 type ExternalDataConfiguration struct {
-	Autodetect              *bool                    `json:"autodetect"`
-	AvroOptions             *AvroOptions             `json:"avroOptions"`
-	BigtableOptions         *BigtableOptions         `json:"bigtableOptions"`
-	Compression             *string                  `json:"compression"`
-	ConnectionID            *string                  `json:"connectionId"`
-	CsvOptions              *CsvOptions              `json:"csvOptions"`
-	DecimalTargetTypes      []string                 `json:"decimalTargetTypes"`
-	GoogleSheetsOptions     *GoogleSheetsOptions     `json:"googleSheetsOptions"`
-	HivePartitioningOptions *HivePartitioningOptions `json:"hivePartitioningOptions"`
-	IgnoreUnknownValues     *bool                    `json:"ignoreUnknownValues"`
-	MaxBadRecords           *int32                   `json:"maxBadRecords"`
-	ParquetOptions          *ParquetOptions          `json:"parquetOptions"`
-	ReferenceFileSchemaURI  *string                  `json:"referenceFileSchemaUri"`
-	Schema                  *TableSchema             `json:"schema"`
-	SourceFormat            *string                  `json:"sourceFormat"`
-	SourceUris              []string                 `json:"sourceUris"`
+	Autodetect              *bool                    `json:"autodetect,omitempty"`
+	AvroOptions             *AvroOptions             `json:"avroOptions,omitempty"`
+	BigtableOptions         *BigtableOptions         `json:"bigtableOptions,omitempty"`
+	Compression             *string                  `json:"compression,omitempty"`
+	ConnectionID            *string                  `json:"connectionId,omitempty"`
+	CsvOptions              *CsvOptions              `json:"csvOptions,omitempty"`
+	DecimalTargetTypes      []string                 `json:"decimalTargetTypes,omitempty"`
+	GoogleSheetsOptions     *GoogleSheetsOptions     `json:"googleSheetsOptions,omitempty"`
+	HivePartitioningOptions *HivePartitioningOptions `json:"hivePartitioningOptions,omitempty"`
+	IgnoreUnknownValues     *bool                    `json:"ignoreUnknownValues,omitempty"`
+	MaxBadRecords           *int32                   `json:"maxBadRecords,omitempty"`
+	ParquetOptions          *ParquetOptions          `json:"parquetOptions,omitempty"`
+	ReferenceFileSchemaURI  *string                  `json:"referenceFileSchemaUri,omitempty"`
+	Schema                  *TableSchema             `json:"schema,omitempty"`
+	SourceFormat            *string                  `json:"sourceFormat,omitempty"`
+	SourceUris              []string                 `json:"sourceUris,omitempty"`
 }

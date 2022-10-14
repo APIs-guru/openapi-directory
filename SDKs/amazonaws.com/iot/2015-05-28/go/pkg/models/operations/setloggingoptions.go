@@ -15,8 +15,8 @@ type SetLoggingOptionsHeaders struct {
 }
 
 type SetLoggingOptionsRequestBodyLoggingOptionsPayload struct {
-	LogLevel *shared.LogLevelEnum `json:"logLevel"`
-	RoleArn  *string              `json:"roleArn"`
+	LogLevel *shared.LogLevelEnum `json:"logLevel,omitempty"`
+	RoleArn  *string              `json:"roleArn,omitempty"`
 }
 
 type SetLoggingOptionsRequestBody struct {

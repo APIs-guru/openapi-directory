@@ -1,7 +1,7 @@
 package shared
 
 type ReplicaConfiguration struct {
-	FailoverTarget            *bool                      `json:"failoverTarget"`
-	Kind                      *string                    `json:"kind"`
-	MysqlReplicaConfiguration *MySQLReplicaConfiguration `json:"mysqlReplicaConfiguration"`
+	FailoverTarget            *bool                      `json:"failoverTarget,omitempty"`
+	Kind                      *string                    `json:"kind,omitempty"`
+	MysqlReplicaConfiguration *MySQLReplicaConfiguration `json:"mysqlReplicaConfiguration,omitempty"`
 }

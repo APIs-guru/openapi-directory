@@ -1,5 +1,5 @@
 package shared
 
 type TaxRatesResponse struct {
-	TaxRates []TaxRate `json:"taxRates"`
+	TaxRates []TaxRate `json:"taxRates,omitempty"`
 }

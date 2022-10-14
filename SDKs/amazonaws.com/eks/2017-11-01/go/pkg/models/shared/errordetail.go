@@ -1,7 +1,7 @@
 package shared
 
 type ErrorDetail struct {
-	ErrorCode    *ErrorCodeEnum `json:"errorCode"`
-	ErrorMessage *string        `json:"errorMessage"`
-	ResourceIds  []string       `json:"resourceIds"`
+	ErrorCode    *ErrorCodeEnum `json:"errorCode,omitempty"`
+	ErrorMessage *string        `json:"errorMessage,omitempty"`
+	ResourceIds  []string       `json:"resourceIds,omitempty"`
 }

@@ -5,18 +5,18 @@ import (
 )
 
 type GetStageResponse struct {
-	AccessLogSettings           *AccessLogSettings       `json:"AccessLogSettings"`
-	APIGatewayManaged           *bool                    `json:"ApiGatewayManaged"`
-	AutoDeploy                  *bool                    `json:"AutoDeploy"`
-	ClientCertificateID         *string                  `json:"ClientCertificateId"`
-	CreatedDate                 *time.Time               `json:"CreatedDate"`
-	DefaultRouteSettings        *RouteSettings           `json:"DefaultRouteSettings"`
-	DeploymentID                *string                  `json:"DeploymentId"`
-	Description                 *string                  `json:"Description"`
-	LastDeploymentStatusMessage *string                  `json:"LastDeploymentStatusMessage"`
-	LastUpdatedDate             *time.Time               `json:"LastUpdatedDate"`
-	RouteSettings               map[string]RouteSettings `json:"RouteSettings"`
-	StageName                   *string                  `json:"StageName"`
-	StageVariables              map[string]string        `json:"StageVariables"`
-	Tags                        map[string]string        `json:"Tags"`
+	AccessLogSettings           *AccessLogSettings       `json:"AccessLogSettings,omitempty"`
+	APIGatewayManaged           *bool                    `json:"ApiGatewayManaged,omitempty"`
+	AutoDeploy                  *bool                    `json:"AutoDeploy,omitempty"`
+	ClientCertificateID         *string                  `json:"ClientCertificateId,omitempty"`
+	CreatedDate                 *time.Time               `json:"CreatedDate,omitempty"`
+	DefaultRouteSettings        *RouteSettings           `json:"DefaultRouteSettings,omitempty"`
+	DeploymentID                *string                  `json:"DeploymentId,omitempty"`
+	Description                 *string                  `json:"Description,omitempty"`
+	LastDeploymentStatusMessage *string                  `json:"LastDeploymentStatusMessage,omitempty"`
+	LastUpdatedDate             *time.Time               `json:"LastUpdatedDate,omitempty"`
+	RouteSettings               map[string]RouteSettings `json:"RouteSettings,omitempty"`
+	StageName                   *string                  `json:"StageName,omitempty"`
+	StageVariables              map[string]string        `json:"StageVariables,omitempty"`
+	Tags                        map[string]string        `json:"Tags,omitempty"`
 }

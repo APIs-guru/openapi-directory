@@ -1,9 +1,9 @@
 package shared
 
 type CrawlerTargets struct {
-	CatalogTargets  []CatalogTarget  `json:"CatalogTargets"`
-	DynamoDbTargets []DynamoDbTarget `json:"DynamoDBTargets"`
-	JdbcTargets     []JdbcTarget     `json:"JdbcTargets"`
-	MongoDbTargets  []MongoDbTarget  `json:"MongoDBTargets"`
-	S3Targets       []S3Target       `json:"S3Targets"`
+	CatalogTargets  []CatalogTarget  `json:"CatalogTargets,omitempty"`
+	DynamoDbTargets []DynamoDbTarget `json:"DynamoDBTargets,omitempty"`
+	JdbcTargets     []JdbcTarget     `json:"JdbcTargets,omitempty"`
+	MongoDbTargets  []MongoDbTarget  `json:"MongoDBTargets,omitempty"`
+	S3Targets       []S3Target       `json:"S3Targets,omitempty"`
 }

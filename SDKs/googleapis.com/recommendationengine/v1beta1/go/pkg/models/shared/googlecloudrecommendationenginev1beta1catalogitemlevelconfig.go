@@ -17,6 +17,6 @@ const (
 )
 
 type GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfig struct {
-	EventItemLevel   *GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigEventItemLevelEnum   `json:"eventItemLevel"`
-	PredictItemLevel *GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigPredictItemLevelEnum `json:"predictItemLevel"`
+	EventItemLevel   *GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigEventItemLevelEnum   `json:"eventItemLevel,omitempty"`
+	PredictItemLevel *GoogleCloudRecommendationengineV1beta1CatalogItemLevelConfigPredictItemLevelEnum `json:"predictItemLevel,omitempty"`
 }

@@ -8,8 +8,8 @@ const (
 )
 
 type GoogleCloudDataplexV1Schema struct {
-	Fields          []GoogleCloudDataplexV1SchemaSchemaField       `json:"fields"`
-	PartitionFields []GoogleCloudDataplexV1SchemaPartitionField    `json:"partitionFields"`
-	PartitionStyle  *GoogleCloudDataplexV1SchemaPartitionStyleEnum `json:"partitionStyle"`
-	UserManaged     *bool                                          `json:"userManaged"`
+	Fields          []GoogleCloudDataplexV1SchemaSchemaField       `json:"fields,omitempty"`
+	PartitionFields []GoogleCloudDataplexV1SchemaPartitionField    `json:"partitionFields,omitempty"`
+	PartitionStyle  *GoogleCloudDataplexV1SchemaPartitionStyleEnum `json:"partitionStyle,omitempty"`
+	UserManaged     *bool                                          `json:"userManaged,omitempty"`
 }

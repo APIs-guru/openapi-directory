@@ -10,14 +10,14 @@ const (
 )
 
 type GooglePrivacyDlpV2JobTrigger struct {
-	CreateTime  *string                                 `json:"createTime"`
-	Description *string                                 `json:"description"`
-	DisplayName *string                                 `json:"displayName"`
-	Errors      []GooglePrivacyDlpV2Error               `json:"errors"`
-	InspectJob  *GooglePrivacyDlpV2InspectJobConfig     `json:"inspectJob"`
-	LastRunTime *string                                 `json:"lastRunTime"`
-	Name        *string                                 `json:"name"`
-	Status      *GooglePrivacyDlpV2JobTriggerStatusEnum `json:"status"`
-	Triggers    []GooglePrivacyDlpV2Trigger             `json:"triggers"`
-	UpdateTime  *string                                 `json:"updateTime"`
+	CreateTime  *string                                 `json:"createTime,omitempty"`
+	Description *string                                 `json:"description,omitempty"`
+	DisplayName *string                                 `json:"displayName,omitempty"`
+	Errors      []GooglePrivacyDlpV2Error               `json:"errors,omitempty"`
+	InspectJob  *GooglePrivacyDlpV2InspectJobConfig     `json:"inspectJob,omitempty"`
+	LastRunTime *string                                 `json:"lastRunTime,omitempty"`
+	Name        *string                                 `json:"name,omitempty"`
+	Status      *GooglePrivacyDlpV2JobTriggerStatusEnum `json:"status,omitempty"`
+	Triggers    []GooglePrivacyDlpV2Trigger             `json:"triggers,omitempty"`
+	UpdateTime  *string                                 `json:"updateTime,omitempty"`
 }

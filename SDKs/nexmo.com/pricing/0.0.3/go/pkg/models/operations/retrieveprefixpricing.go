@@ -16,8 +16,8 @@ type RetrievePrefixPricingRequest struct {
 }
 
 type RetrievePrefixPricing400ApplicationJSONInvalidParameters struct {
-	Message   *string `json:"message"`
-	Parameter *string `json:"parameter"`
+	Message   *string `json:"message,omitempty"`
+	Parameter *string `json:"parameter,omitempty"`
 }
 
 type RetrievePrefixPricing400ApplicationJSON struct {
